@@ -1,46 +1,46 @@
 # Dev Containers & GitHub Codespaces para sa azd
 
 **Pag-navigate sa Kabanata:**
-- **📚 Tahanan ng Kurso**: [AZD Para sa mga Baguhan](../../README.md)
+- **📚 Bahay ng Kurso**: [AZD Para sa mga Nagsisimula](../../README.md)
 - **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilis na Pagsisimula
-- **⬅️ Nakaraang Kabanata**: [Magdala ng Sariling App](bring-your-own-app.md)
+- **⬅️ Nakaraan**: [Magdala ng Sariling App](bring-your-own-app.md)
 - **🚀 Susunod na Kabanata**: [Kabanata 2: AI-First Development](../chapter-02-ai-development/README.md)
 
-> Napatunayan gamit ang `azd 1.27.1` noong Hulyo 2026.
+> Layunin sa pagsusuri ng utos at konfigurasiyon: `azd 1.37.2` (Nobyembre 2026). Hindi isinagawa ang mga container build at Azure deployment bilang bahagi ng pagsusuring ito.
 
 ## Panimula
 
-Ang pag-install ng azd, tamang language runtime, Docker, at Azure CLI sa bawat makina ay isang abala—at ito ang pangunahing dahilan kung bakit nagkakamali ang tutorial na "gumagana sa aking makina" para sa iba. Ang isang **dev container** ay naglutas nito sa pamamagitan ng paglarawan ng iyong buong toolchain sa isang file. Sinumang magbukas ng proyekto sa VS Code o GitHub Codespaces ay makakakuha ng eksaktong parehong kapaligiran, na may azd na naka-install na. Ipinapakita ng araling ito kung paano magdagdag ng isa.
+Ang pag-install ng azd, tamang runtime ng wika, Docker, at Azure CLI sa bawat makina ay isang pasanin—at ito ang pangunahing dahilan kung bakit ang isang tutorial na "gumagana sa aking makina" ay nabibigo sa iba. Isang **dev container** ang nagsosolusyon dito sa pamamagitan ng paglalarawan sa buong toolchain sa isang file. Sinumang magbubukas ng proyekto sa VS Code o GitHub Codespaces ay magkakaroon ng eksaktong parehong kapaligiran, na may naka-install nang azd. Itinuturo sa araling ito kung paano magdagdag nito.
 
 ## Mga Layunin ng Pagkatuto
 
-Sa pagtatapos ng araling ito, makakagawa ka ng:
-- Maunawaan kung ano ang dev container at bakit ito nakakatulong sa azd
-- Magdagdag ng isang minimal na `.devcontainer/devcontainer.json` sa isang proyekto
-- Isama ang azd, Azure CLI, at Docker gamit ang mga Dev Container *features*
-- Buksan ang proyekto sa GitHub Codespaces o VS Code
+Sa pagtatapos ng araling ito, ikaw ay:
+- Maiintindihan kung ano ang dev container at bakit ito nakakatulong sa azd
+- Makakapagdagdag ng minimal na `.devcontainer/devcontainer.json` sa isang proyekto
+- Maisasama ang azd, Azure CLI, at Docker sa pamamagitan ng Dev Container *features*
+- Mabubuksan ang proyekto sa GitHub Codespaces o VS Code
 
 ## Mga Kinalabasan ng Pagkatuto
 
-Matapos matapos ang araling ito, magagawa mo nang:
-- Gumawa ng isang `devcontainer.json` para sa proyekto ng azd
-- Magdagdag ng azd at mga tooling ng Azure nang walang manu-manong pag-install
+Matapos makumpleto ang araling ito, magagawa mo nang:
+- Magsulat ng `devcontainer.json` para sa isang azd na proyekto
+- Makapagdagdag ng azd at Azure tools nang hindi mano-mano ang pag-install
 - Patakbuhin ang `azd up` mula sa loob ng container o Codespace
 
 ---
 
 ## Ano ang Dev Container?
 
-Ang dev container ay isang Docker-based na kapaligiran ng pag-develop na tinukoy ng `.devcontainer/devcontainer.json` na file sa iyong repositoryo. Kapag binuksan mo ang proyekto:
+Ang dev container ay isang Docker-based na environment sa pag-develop na tinutukoy ng isang `.devcontainer/devcontainer.json` na file sa iyong repository. Kapag binuksan mo ang proyekto:
 
-- **VS Code** (kasama ang Dev Containers extension) ay gagawa ng container at iko-connect dito.
-- **GitHub Codespaces** ay gagawa ng parehong container sa cloud at bibigyan ka ng editor na naka-browser.
+- **VS Code** (kasama ang Dev Containers extension) ay nagtayo ng container at kumokonekta dito.
+- **GitHub Codespaces** ay nagtatayo ng parehong container sa ulap at nagbibigay ng editor na browser-based.
 
-Sa alinmang paraan, bawat kontribyutor ay magkakaroon ng magkaparehong mga tool—wala nang "na-install mo ba ang azd?" na troubleshooting.
+Sa alinmang paraan, bawat contributor ay makakatanggap ng magkaparehong mga tool—walang tanong na "na-install mo na ba ang azd?" sa pag-troubleshoot.
 
 ```mermaid
 graph LR
-    Repo[Ang Iyong Repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Mga Dev Container]
+    Repo[Your Repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Dev Containers]
     Repo --> Codespaces[GitHub<br/>Codespaces]
     VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
@@ -50,7 +50,7 @@ graph LR
 
 ## Hakbang 1: Gumawa ng devcontainer File
 
-Gumawa ng `.devcontainer/devcontainer.json` sa root ng iyong proyekto:
+Gumawa ng `.devcontainer/devcontainer.json` sa ugat ng iyong proyekto:
 
 ```json
 {
@@ -58,7 +58,7 @@ Gumawa ng `.devcontainer/devcontainer.json` sa root ng iyong proyekto:
   "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {},
-    "ghcr.io/azure/azure-dev/azd:latest": {},
+    "ghcr.io/azure/azure-dev/azd:0": { "version": "1.37.2" },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/node:1": {}
   },
@@ -75,23 +75,23 @@ Gumawa ng `.devcontainer/devcontainer.json` sa root ng iyong proyekto:
 }
 ```
 
-Ang ginagawa ng bawat bahagi:
+Ano ang ginagawa ng bawat bahagi:
 
 | Susi | Layunin |
 |-----|---------|
 | `image` | Ang base OS para sa container |
-| `features` | Prebuilt installers—dito: Azure CLI, **azd**, Docker, at Node.js |
-| `customizations.vscode.extensions` | Awtomatikong nag-i-install ng azd at Bicep VS Code extensions |
-| `forwardPorts` | Inilalantad ang port ng iyong app sa browser |
-| `postCreateCommand` | Isinasagawa matapos mabuo ang container (dito, sanity check) |
+| `features` | Mga prebuilt na installer—dito: Azure CLI, **azd**, Docker, at Node.js |
+| `customizations.vscode.extensions` | Auto-install ng azd at Bicep VS Code extensions |
+| `forwardPorts` | Inu-expose ang port ng iyong app sa browser |
+| `postCreateCommand` | Nagpapatakbo ng isang beses matapos mabuo ang container (dito, isang sanity check) |
 
-> Ang `ghcr.io/azure/azure-dev/azd:latest` feature ay ang opisyal na paraan para makuha ang azd sa loob ng container. I-pin ang isang partikular na bersyon (hal. `azd:1.27.1`) kung kailangan ang reproducibility.
+> Iba ang feature version (`azd:0`) at ang naka-installed na CLI version. Itakda ang `version` option ng feature sa `"1.37.2"` upang i-pin ang CLI; huwag gamitin ang CLI version bilang feature tag.
 
 ---
 
 ## Hakbang 2: Itugma ang Feature sa Wika ng Iyong App
 
-Palitan ang `node` feature ng anumang wika ang iyong app ay gamit:
+Palitan ang `node` feature para sa anumang gamit ng iyong app:
 
 ```jsonc
 // Python project
@@ -107,16 +107,16 @@ Palitan ang `node` feature ng anumang wika ang iyong app ay gamit:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Panatilihin ang `docker-in-docker` kung ang `host` mo ay `containerapp`, `aks`, o anumang gumagawa ng container image—kailangan ng azd ang Docker para gumawa at mag-push ng mga imahe.
+Panatilihin ang `docker-in-docker` kapag gumagawa ng mga imahe nang lokal. Ang isang naka-configure na remote ACR build (`docker.remoteBuild: true`) ay alternatibo; ang uri ng host lamang ay hindi laging nangangailangan ng lokal na Docker.
 
 ---
 
 ## Hakbang 3: Buksan Ito
 
 **Sa VS Code:**
-1. I-install ang **Dev Containers** na extension.
+1. I-install ang **Dev Containers** extension.
 2. Buksan ang folder ng proyekto.
-3. I-click ang **Reopen in Container** kapag lumabas (o patakbuhin ang *Dev Containers: Reopen in Container*).
+3. I-click ang **Reopen in Container** kapag may prompt (o patakbuhin ang *Dev Containers: Reopen in Container*).
 
 **Sa GitHub Codespaces:**
 1. I-push ang repo sa GitHub.
@@ -127,43 +127,43 @@ Panatilihin ang `docker-in-docker` kung ang `host` mo ay `containerapp`, `aks`, 
 
 ## Hakbang 4: Mag-deploy Mula sa Loob ng Container
 
-May naka-preinstall na azd ang container, kaya ang normal na workflow ay gumagana lang:
+Ang container ay may preinstalled na azd, kaya ang normal na workflow ay gumagana na:
 
 ```bash
-azd auth login --use-device-code   # Ang device code ay kapaki-pakinabang sa loob ng Codespaces
+azd auth login --use-device-code   # device code is handy inside Codespaces
 azd up
 ```
 
-> **Bakit `--use-device-code`?** Sa remote container o Codespace wala kang lokal na browser para i-redirect, kaya ang device-code login ang maaasahang paraan. Ikaw ay magpa-paste ng code sa tab ng browser upang matapos ang pag-sign in.
+> **Bakit `--use-device-code`?** Sa remote container o Codespace walang lokal na browser na pwedeng i-redirect, kaya ang device-code login ang mapagkakatiwalaang paraan. Magp-paste ka ng code sa tab ng browser para makumpleto ang pag-sign in.
 
 ---
 
-## Mga Karaniwang Pakikibaka
+## Karaniwang mga Problema
 
-| Pakikibaka | Solusyon |
-|---------|-----|
-| `azd up` ay hindi makakagawa ng imahe | Magdagdag ng `docker-in-docker` feature |
-| Naghihintay ang browser login sa Codespaces | Gamitin ang `azd auth login --use-device-code` |
-| Iba ang mga tools sa pagitan ng mga teammates | Mag-pin ng mga bersyon ng feature (hal. `azd:1.27.1`) |
-| Hindi maabot ang app sa browser | Idagdag ang port sa `forwardPorts` |
+| Problema | Solusyon |
+|---------|----------|
+| Hindi makabuo ng imahe si `azd up` | Magdagdag ng `docker-in-docker` feature |
+| Nagtitigil ang browser login sa Codespaces | Gamitin ang `azd auth login --use-device-code` |
+| Magkaiba ang mga tool sa pagitan ng mga kasamahan | I-pin ang CLI sa pamamagitan ng `version` option ng azd feature at i-pin ang mga runtime ng wika |
+| Hindi ma-access ang app sa browser | Idagdag ang port sa `forwardPorts` |
 
 ---
 
 ## Buod
 
-- Ang dev container ay gumagawa ng iyong azd toolchain na reproducible para sa lahat.
-- Magdagdag ng azd, Azure CLI, at Docker sa pamamagitan ng Dev Container *features*.
-- Itugma ang language feature sa iyong app at panatilihin ang `docker-in-docker` para sa mga container host.
-- Gamitin ang device-code login kapag tumatakbo sa loob ng Codespaces.
+- Ginagawa ng dev container na reproducible ang iyong azd toolchain para sa lahat.
+- Magdagdag ng azd, Azure CLI, at Docker gamit ang Dev Container *features*.
+- Itugma ang feature ng wika sa iyong app at panatilihin ang `docker-in-docker` para sa mga container host.
+- Gumamit ng device-code login kapag nasa loob ng Codespaces.
 
 ---
 
 ## 🔗 Pag-navigate
 
-| Direksyon | Mapagkukunan |
+| Direksyon | Resource |
 |-----------|----------|
 | **Nakaraan** | [Magdala ng Sariling App](bring-your-own-app.md) |
-| **Tahanan ng Kabanata** | [Kabanata 1: Pundasyon at Mabilis na Pagsisimula](README.md) |
+| **Bahay ng Kabanata** | [Kabanata 1: Pundasyon at Mabilis na Pagsisimula](README.md) |
 | **Susunod na Kabanata** | [Kabanata 2: AI-First Development](../chapter-02-ai-development/README.md) |
 
 ## 📖 Mga Kaugnay na Mapagkukunan

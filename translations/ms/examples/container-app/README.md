@@ -1,849 +1,134 @@
-# Contoh Penyebaran Aplikasi Bekas dengan AZD
+# Contoh Penggunaan App Kontena dengan AZD
 
-Direktori ini mengandungi contoh lengkap untuk menyebarkan aplikasi berbekas ke Azure Container Apps menggunakan Azure Developer CLI (AZD). Contoh-contoh ini menunjukkan corak dunia sebenar, amalan terbaik, dan konfigurasi siap produksi.
+Direktori ini mengandungi dua contoh pembelajaran dengan kod sumber, Dockerfiles,
+infrastruktur Bicep, dan `azure.yaml`. Kedua-duanya tidak disediakan untuk pengeluaran.
 
-## 📚 Jadual Kandungan
+## Pilih satu contoh
 
-- [Gambaran Keseluruhan](#gambaran-keseluruhan)
-- [Prasyarat](#prasyarat)
-- [Contoh Mula Pantas](#contoh-mula-pantas)
-- [Contoh Produksi](#contoh-produksi)
-- [Corak Lanjutan](#corak-lanjutan)
-- [Amalan Terbaik](#amalan-terbaik)
+| Sampel | Apa yang dilaksanakan | Prasyarat |
+|---|---|---|
+| [Simple Flask API](../../../../examples/container-app/simple-flask-api) | API CRUD Python tunggal, item dalam memori, pemeriksaan kesihatan, penskalaan HTTP | Pengetahuan asas CLI dan HTTP |
+| [Mikroservis dua perkhidmatan](../../../../examples/container-app/microservices) | Gateway Node.js, perkhidmatan produk baca sahaja Python dalaman, telemetri dan penskalaan | Selesaikan sampel perkhidmatan tunggal dulu |
 
-## Gambaran Keseluruhan
-
-Azure Container Apps adalah platform kontena tanpa pelayan yang diurus sepenuhnya yang membolehkan anda menjalankan mikroservis dan aplikasi berbekas tanpa mengurus infrastruktur. Apabila digabungkan dengan AZD, anda akan mendapat:
-
-- **Penyebaran Dipermudahkan**: Arahan tunggal untuk menyebarkan bekas dengan infrastruktur
-- **Penskalaan Automatik**: Penskalaan ke sifar dan keluar berdasarkan trafik HTTP atau acara
-- **Rangkaian Terintegrasi**: Penemuan perkhidmatan terbina dalam dan pembahagian trafik
-- **Identiti Terurus**: Pengesahan selamat untuk sumber Azure
-- **Pengoptimuman Kos**: Bayar hanya untuk sumber yang digunakan
+Benarkan 30–60 minit termasuk penyediaan dan pengesahan. Masa penyediaan Azure berbeza-beza.
 
 ## Prasyarat
 
-Sebelum bermula, pastikan anda mempunyai:
+- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) untuk arahan pengesahan
+- Docker dengan daemon berjalan untuk membina imej kontena ini
+- Langganan Azure dengan keizinan penciptaan sumber dan kuota wilayah yang mencukupi
+- Bash untuk contoh shell, atau arahan PowerShell setara
 
 ```bash
-# Semak pemasangan AZD
 azd version
-
-# Semak Azure CLI
 az version
-
-# Semak Docker (untuk membina imej tersuai)
-docker --version
-
-# Autentikasi untuk pelancaran AZD
+docker info
 azd auth login
-
-# Pilihan: log masuk ke Azure CLI jika anda bercadang untuk menjalankan arahan az secara langsung
 az login
 ```
 
-**Sumber Azure Diperlukan:**
-- Langganan Azure aktif
-- Kebenaran mencipta kumpulan sumber
-- Akses ke persekitaran Container Apps
+Dua alat ini mempunyai sesi log masuk berasingan. Gunakan azd yang stabil dan terkini; versi
+semasa yang diterbitkan pada masa semakan adalah 1.37.2. Tuntutan versi minimum lama bukan
+jaminan keserasian.
 
-## Contoh Mula Pantas
+## Mula dengan cepat
 
-### 1. API Web Mudah (Python Flask)
-
-Menyebarkan API REST asas dengan Azure Container Apps.
-
-**Contoh: API Python Flask**
-
-```yaml
-# azure.yaml
-name: flask-api-demo
-metadata:
-  template: flask-api-demo@0.0.1-beta
-services:
-  api:
-    project: ./src/api
-    language: python
-    host: containerapp
-```
-
-**Langkah Penyebaran:**
+Dari akar repositori:
 
 ```bash
-# Inisialisasi dari templat
-azd init --template todo-python-mongo
-
-# Sediakan infrastruktur dan laksanakan
+cd examples/container-app/simple-flask-api
+azd env new flask-demo
 azd up
-
-# Uji pelaksanaan
-azd show
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
+API_URL=$(azd env get-value API_ENDPOINT)
+curl --fail-with-body "${API_URL}/health"
 ```
 
-**Ciri Utama:**
-- Penskalaan automatik dari 0 ke 10 replika
-- Pemeriksaan kesihatan dan liveness
-- Suntikan pembolehubah persekitaran
-- Integrasi Application Insights
+Dijangka: HTTP 200 dengan `"status": "healthy"`. Ikuti README sampel untuk mencipta,
+membaca, mengemas kini, dan memadam item, serta untuk memeriksa log.
 
-### 2. Node.js Express API
+```mermaid
+flowchart LR
+    Code[Source + Dockerfile] --> Build[azd builds and publishes image]
+    Bicep[Bicep infrastructure] --> Azure[Registry + Container Apps environment]
+    Build --> Deploy[Service Bicep deploys image, ingress and probes]
+    Azure --> Deploy
+    Deploy --> Verify[Test endpoint + inspect logs]
+```
 
-Menyebarkan backend Node.js dengan integrasi MongoDB.
+Penyediaan awal menggunakan imej hello-world awam pada port 80. Fail parameter Bicep
+khusus perkhidmatan membolehkan `azd deploy` menggantikannya dengan imej aplikasi yang dibina
+dan port/probe apl yang betul (8000 untuk Flask/produk, 8080 untuk gateway).
+Simpan fail ini dengan tetapan `azure.yaml` `module` mereka.
+
+## Konfigurasi: apa yang mengubah apa
+
+`azure.yaml` memilih direktori sumber, bahasa, hos, dan modul penyebaran.
+CPU/memori kontena, ingress, probe, bilangan replika, dan peraturan skala ditentukan
+dalam **Bicep**, bukan sifat perkhidmatan `resources`, `scale`, atau `regions` yang sewenang-wenangnya.
+
+`azd env set SOME_VALUE ...` menyimpan nilai secara tempatan. Ia hanya mengubah sumber yang telah disebarkan
+apabila parameter, pemetaan persekitaran, atau hook secara eksplisit menggunakan nilai itu.
+Contoh ini tidak menggunakan `MAX_REPLICAS`, `SCALE_TO_ZERO_TIMEOUT`,
+`CONTAINER_APP_REPLICA_TYPE`, atau tetapan canary tersuai daripada nilai persekitaran azd.
+Sunting Bicep yang berkaitan dan jalankan `azd up` untuk penyediaan semula dan penyebaran.
+
+Jangan letakkan sumber aplikasi di bawah `infra/`. `project` mesti menunjuk ke direktori sumber
+yang mengandungi Dockerfile dan manifest pergantungan.
+
+## Pemantauan dan kos
+
+- `azd monitor --logs` membuka pandangan portal; ia bukan aliran log terminal.
+  Gunakan `az containerapp logs show --follow` dengan nama sumber sebenar.
+- API mudah menulis log stdout yang dikumpulkan melalui Container Apps/Log Analytics.
+  Sumber Application Insights yang disediakan tidak secara automatik diinstrumentasi.
+- Gateway mikroservis menggunakan SDK Node.js Application Insights; perkhidmatan Python
+  mengeksport jejak log aplikasi. Penjejakan penuh permintaan/pergantungan Python
+  tidak dikonfigurasikan.
+- Skala-hingga-nol boleh mengurangkan caj pengkomputeran, tetapi pendaftaran dan penyimpanan log
+  masih boleh menelan kos. Tetapan mikroservis lalai mengekalkan replika berjalan.
+  Anggarkan kawasan dan penggunaan anda dalam
+  [pengira harga Azure](https://azure.microsoft.com/pricing/calculator/).
+
+## Corak lanjutan — pelaksanaan tidak termasuk
+
+Ini adalah garis panduan reka bentuk, bukan projek tempatan tambahan atau potongan salin-dan-jalankan:
+
+- **Data berterusan dan pengesahan:** gantikan stor memori dan tambah
+  pengesahan/pengesahan Microsoft Entra ID sebelum pengeluaran.
+- **Blue-green/canary:** gunakan mod revisi-berganda Container Apps, label revisi,
+  berat trafik, pengesahan kesihatan, dan prosedur rollback.
+  Tiada konfigurasi `deploymentStrategy: canary` azd dalam sampel ini.
+  Lihat [pengurusan revisi](https://learn.microsoft.com/azure/container-apps/revisions).
+- **Multi-wilayah:** bina persekitaran dan aplikasi berasingan dalam Bicep dan reka bentuk
+  penentuan laluan global dan konsistensi data. Senarai `regions` perkhidmatan
+  bukan mekanisme penyebaran azd.
+- **Pekerja barisan:** tambah sumber pekerja, pergantungan, sumber barisan, pengurusan
+  identiti dengan peranan pesawat data, dan peraturan skala yang diautentasikan. Jangan salin
+  laluan `src/worker` kosong dan jangkakan projek yang boleh dijalankan.
+- **Dapr:** sediakan komponen, konfigurasikan sidecar, pasang SDK yang sepadan,
+  dan laksanakan pengendalian ralat state/pub-sub.
+- **Rahsia:** gunakan identiti terurus dan peranan yang diperuntukkan jika boleh. Hanya
+  mencipta Key Vault tidak memberi akses kepada aplikasi atau memuat rahsia.
+
+## Pembersihan
+
+Dari direktori contoh:
 
 ```bash
-# Inisialisasi templat API Node.js
-azd init --template todo-nodejs-mongo
-
-# Konfigurasi pembolehubah persekitaran
-azd env set DATABASE_NAME todosdb
-azd env set COLLECTION_NAME todos
-
-# Laksanakan
-azd up
-
-# Lihat log melalui Azure Monitor
-azd monitor --logs
+azd down
 ```
 
-**Sorotan Infrastruktur:**
-```bicep
-// Bicep snippet from infra/main.bicep
-resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
-  name: 'api-${resourceToken}'
-  location: location
-  properties: {
-    managedEnvironmentId: containerEnv.id
-    configuration: {
-      ingress: {
-        external: true
-        targetPort: 3000
-        transport: 'auto'
-      }
-      secrets: [
-        {
-          name: 'mongodb-connection'
-          value: mongoConnection
-        }
-      ]
-    }
-    template: {
-      containers: [
-        {
-          name: 'api'
-          image: containerImage
-          env: [
-            {
-              name: 'DATABASE_URL'
-              secretRef: 'mongodb-connection'
-            }
-          ]
-        }
-      ]
-      scale: {
-        minReplicas: 0
-        maxReplicas: 10
-      }
-    }
-  }
-}
-```
-
-### 3. Frontend Statik + API Backend
-
-Menyebarkan aplikasi full-stack dengan frontend React dan backend API.
-
-```bash
-# Mulakan templat penuh-tumpukan
-azd init --template todo-csharp-sql-swa-func
-
-# Semak konfigurasi
-cat azure.yaml
-
-# Lancarkan kedua-dua perkhidmatan
-azd up
-
-# Buka aplikasi
-azd show --output json | jq -r '.services.web.endpoint' | xargs start
-```
-
-## Contoh Produksi
-
-### Contoh 1: Seni Bina Mikroservis
-
-**Senario**: Aplikasi e-dagang dengan pelbagai mikroservis
-
-**Struktur Direktori:**
-```
-microservices-demo/
-├── azure.yaml
-├── infra/
-│   ├── main.bicep
-│   ├── app/
-│   │   ├── container-env.bicep
-│   │   ├── product-service.bicep
-│   │   ├── order-service.bicep
-│   │   └── payment-service.bicep
-│   └── core/
-│       ├── storage.bicep
-│       └── database.bicep
-└── src/
-    ├── product-service/
-    ├── order-service/
-    └── payment-service/
-```
-
-**Konfigurasi azure.yaml:**
-```yaml
-name: microservices-ecommerce
-services:
-  product-service:
-    project: ./src/product-service
-    language: python
-    host: containerapp
-    
-  order-service:
-    project: ./src/order-service
-    language: csharp
-    host: containerapp
-    
-  payment-service:
-    project: ./src/payment-service
-    language: nodejs
-    host: containerapp
-```
-
-**Penyebaran:**
-```bash
-# Mulakan projek
-azd init
-
-# Tetapkan persekitaran pengeluaran
-azd env new production
-
-# Konfigurasikan tetapan pengeluaran
-azd env set ENVIRONMENT production
-azd env set MIN_REPLICAS 2
-azd env set MAX_REPLICAS 50
-
-# Sebarkan semua perkhidmatan
-azd up
-
-# Pantau penyebaran
-azd monitor --overview
-```
-
-### Contoh 2: Aplikasi Bekas Berkuasa AI
-
-**Senario**: Aplikasi chat AI dengan integrasi Microsoft Foundry Models
-
-**Fail: src/ai-chat/app.py**
-```python
-from flask import Flask, request, jsonify
-from azure.identity import DefaultAzureCredential
-from azure.keyvault.secrets import SecretClient
-import openai
-
-app = Flask(__name__)
-
-# Gunakan Identiti Terurus untuk akses yang selamat
-credential = DefaultAzureCredential()
-vault_url = "https://{vault-name}.vault.azure.net"
-client = SecretClient(vault_url=vault_url, credential=credential)
-
-@app.route('/api/chat', methods=['POST'])
-def chat():
-    user_message = request.json.get('message')
-    
-    # Dapatkan kunci OpenAI dari Key Vault
-    openai_key = client.get_secret("openai-api-key").value
-    openai.api_key = openai_key
-    
-    response = openai.ChatCompletion.create(
-        model="gpt-4.1",
-        messages=[{"role": "user", "content": user_message}]
-    )
-    
-    return jsonify({"response": response.choices[0].message.content})
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
-```
-
-**Fail: azure.yaml**
-```yaml
-name: ai-chat-app
-services:
-  api:
-    project: ./src/ai-chat
-    language: python
-    host: containerapp
-```
-
-**Fail: infra/main.bicep**
-```bicep
-param location string = resourceGroup().location
-param environmentName string
-
-var resourceToken = uniqueString(subscription().id, environmentName, location)
-
-// Container Apps Environment
-module containerEnv './app/container-env.bicep' = {
-  name: 'container-env-${resourceToken}'
-  params: {
-    location: location
-    environmentName: environmentName
-  }
-}
-
-// Key Vault for secrets
-resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
-  name: 'kv-${resourceToken}'
-  location: location
-  properties: {
-    sku: {
-      family: 'A'
-      name: 'standard'
-    }
-    tenantId: subscription().tenantId
-    enableRbacAuthorization: true
-  }
-}
-
-// Container App with Managed Identity
-module aiChatApp './app/container-app.bicep' = {
-  name: 'ai-chat-app-${resourceToken}'
-  params: {
-    location: location
-    environmentId: containerEnv.outputs.environmentId
-    containerImage: 'your-registry.azurecr.io/ai-chat:latest'
-    keyVaultName: keyVault.name
-  }
-}
-```
-
-**Arahan Penyebaran:**
-```bash
-# Sediakan persekitaran
-azd init --template ai-chat-app
-azd env new dev
-
-# Konfigurasikan OpenAI
-azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
-
-# Lancarkan
-azd up
-
-# Uji API
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Hello, how are you?"}'
-```
-
-### Contoh 3: Pekerja Latar Belakang dengan Pemprosesan Barisan
-
-**Senario**: Sistem pemprosesan pesanan dengan barisan mesej
-
-**Struktur Direktori:**
-```
-queue-worker/
-├── azure.yaml
-├── infra/
-│   ├── main.bicep
-│   ├── app/
-│   │   ├── api.bicep
-│   │   └── worker.bicep
-│   └── core/
-│       ├── storage-queue.bicep
-│       └── servicebus.bicep
-└── src/
-    ├── api/
-    └── worker/
-```
-
-**Fail: src/worker/processor.py**
-```python
-import os
-from azure.storage.queue import QueueClient
-from azure.identity import DefaultAzureCredential
-
-def process_orders():
-    credential = DefaultAzureCredential()
-    queue_url = os.getenv('AZURE_QUEUE_URL')
-    
-    queue_client = QueueClient.from_queue_url(
-        queue_url=queue_url,
-        credential=credential
-    )
-    
-    while True:
-        messages = queue_client.receive_messages(max_messages=10)
-        for message in messages:
-            # Proses pesanan
-            print(f"Processing order: {message.content}")
-            
-            # Mesej lengkap
-            queue_client.delete_message(message)
-
-if __name__ == '__main__':
-    process_orders()
-```
-
-**Fail: azure.yaml**
-```yaml
-name: order-processing
-services:
-  api:
-    project: ./src/api
-    language: python
-    host: containerapp
-    
-  worker:
-    project: ./src/worker
-    language: python
-    host: containerapp
-```
-
-**Penyebaran:**
-```bash
-# Mula
-azd init
-
-# Laksanakan dengan konfigurasi barisan
-azd up
-
-# Skala pekerja berdasarkan panjang barisan
-az containerapp update \
-  --name worker \
-  --resource-group rg-order-processing \
-  --scale-rule-name queue-scaling \
-  --scale-rule-type azure-queue \
-  --scale-rule-metadata queueName=orders accountName=storageaccount
-```
-
-## Corak Lanjutan
-
-### Corak 1: Penyebaran Blue-Green
-
-```bash
-# Cipta semakan baru tanpa trafik
-azd deploy api --revision-suffix blue --no-traffic
-
-# Uji semakan baru
-curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
-
-# Bahagikan trafik (20% ke biru, 80% ke semasa)
-az containerapp ingress traffic set \
-  --name api \
-  --resource-group rg-myapp \
-  --revision-weight latest=80 blue=20
-
-# Pindah sepenuhnya ke biru
-az containerapp ingress traffic set \
-  --name api \
-  --resource-group rg-myapp \
-  --revision-weight blue=100
-```
-
-### Corak 2: Penyebaran Canary dengan AZD
-
-**Fail: .azure/dev/config.json**
-```json
-{
-  "deploymentStrategy": "canary",
-  "canary": {
-    "initialTrafficPercentage": 10,
-    "incrementPercentage": 10,
-    "intervalMinutes": 5
-  }
-}
-```
-
-**Skrip Penyebaran:**
-```bash
-#!/bin/bash
-# deploy-canary.sh
-
-# Deploy semakan baru dengan 10% trafik
-azd deploy api --revision-mode multiple
-
-# Pantau metrik
-azd monitor --service api --duration 5m
-
-# Tingkatkan trafik secara beransur-ansur
-for i in {20..100..10}; do
-  echo "Increasing traffic to $i%"
-  az containerapp revision set-traffic \
-    --name api \
-    --resource-group rg-myapp \
-    --revision-weight latest=$i
-  
-  sleep 300  # Tunggu 5 minit
-done
-```
-
-### Corak 3: Penyebaran Pelbagai Wilayah
-
-**Fail: azure.yaml**
-```yaml
-name: global-app
-services:
-  api:
-    project: ./src/api
-    language: python
-    host: containerapp
-    regions:
-      - eastus
-      - westeurope
-      - southeastasia
-```
-
-**Fail: infra/multi-region.bicep**
-```bicep
-param regions array = ['eastus', 'westeurope', 'southeastasia']
-
-module containerApps './app/container-app.bicep' = [for region in regions: {
-  name: 'app-${region}'
-  params: {
-    location: region
-    environmentName: environmentName
-  }
-}]
-
-// Traffic Manager for global load balancing
-resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = {
-  name: 'tm-global-app'
-  location: 'global'
-  properties: {
-    trafficRoutingMethod: 'Performance'
-    endpoints: [for i in range(0, length(regions)): {
-      name: 'endpoint-${regions[i]}'
-      type: 'Microsoft.Network/trafficManagerProfiles/externalEndpoints'
-      properties: {
-        target: containerApps[i].outputs.fqdn
-        endpointStatus: 'Enabled'
-      }
-    }]
-  }
-}
-```
-
-**Penyebaran:**
-```bash
-# Lancarkan ke semua rantau
-azd up
-
-# Sahkan titik akhir
-azd show --output json | jq '.services.api.endpoints'
-```
-
-### Corak 4: Integrasi Dapr
-
-**Fail: infra/app/dapr-enabled.bicep**
-```bicep
-resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
-  name: 'dapr-app'
-  properties: {
-    configuration: {
-      dapr: {
-        enabled: true
-        appId: 'order-service'
-        appPort: 8000
-        appProtocol: 'http'
-      }
-    }
-    template: {
-      containers: [
-        {
-          name: 'app'
-          image: containerImage
-        }
-      ]
-    }
-  }
-}
-```
-
-**Kod Aplikasi dengan Dapr:**
-```python
-from flask import Flask
-from dapr.clients import DaprClient
-
-app = Flask(__name__)
-
-@app.route('/orders', methods=['POST'])
-def create_order():
-    with DaprClient() as client:
-        # Simpan status
-        client.save_state(
-            store_name='statestore',
-            key='order-123',
-            value={'status': 'pending'}
-        )
-        
-        # Terbitkan acara
-        client.publish_event(
-            pubsub_name='pubsub',
-            topic_name='orders',
-            data={'orderId': '123'}
-        )
-    
-    return {'status': 'created'}
-```
-
-## Amalan Terbaik
-
-### 1. Pengurusan Sumber
-
-```bash
-# Gunakan konvensyen penamaan yang konsisten
-azd env set AZURE_ENV_NAME "myapp-prod"
-azd env set AZURE_LOCATION "eastus"
-
-# Tag sumber untuk penjejakan kos
-azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
-```
-
-### 2. Amalan Keselamatan Terbaik
-
-```bicep
-// Always use managed identity
-resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
-  identity: {
-    type: 'SystemAssigned'
-  }
-}
-
-// Store secrets in Key Vault
-resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
-  properties: {
-    enableRbacAuthorization: true
-    networkAcls: {
-      defaultAction: 'Deny'
-      bypass: 'AzureServices'
-    }
-  }
-}
-
-// Use private endpoints
-resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
-  properties: {
-    subnet: {
-      id: subnetId
-    }
-    privateLinkServiceConnections: [
-      {
-        name: 'containerapp-connection'
-        properties: {
-          privateLinkServiceId: containerApp.id
-        }
-      }
-    ]
-  }
-}
-```
-
-### 3. Pengoptimuman Prestasi
-
-```yaml
-# azure.yaml with performance settings
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    resources:
-      cpu: 1.0
-      memory: 2Gi
-    scale:
-      minReplicas: 2
-      maxReplicas: 20
-      rules:
-        - name: http-rule
-          http:
-            concurrent: 100
-```
-
-### 4. Pemantauan dan Kebolehlihatan
-
-```bash
-# Hidupkan Application Insights
-azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
-
-# Lihat log secara masa nyata
-azd monitor --logs
-# Atau gunakan Azure CLI untuk Container Apps:
-az containerapp logs show --name api --resource-group rg-myapp --follow
-
-# Pantau metrik
-azd monitor --live
-
-# Buat amaran
-az monitor metrics alert create \
-  --name high-cpu-alert \
-  --resource-group rg-myapp \
-  --scopes $(azd show --output json | jq -r '.services.api.resourceId') \
-  --condition "avg CPU > 80" \
-  --description "Alert when CPU exceeds 80%"
-```
-
-### 5. Pengoptimuman Kos
-
-```bash
-# Skala ke sifar apabila tidak digunakan
-az containerapp update \
-  --name api \
-  --resource-group rg-myapp \
-  --min-replicas 0
-
-# Gunakan instans spot untuk persekitaran pembangunan
-azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
-
-# Tetapkan amaran bajet
-az consumption budget create \
-  --budget-name myapp-budget \
-  --amount 100 \
-  --time-grain Monthly \
-  --threshold 80
-```
-
-### 6. Integrasi CI/CD
-
-**Contoh GitHub Actions:**
-```yaml
-name: Deploy to Azure Container Apps
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v1
-      
-      - name: Login to Azure
-        run: |
-          azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
-            --client-secret ${{ secrets.AZURE_CLIENT_SECRET }} \
-            --tenant-id ${{ secrets.AZURE_TENANT_ID }}
-      
-      - name: Deploy
-        run: azd up --no-prompt
-        env:
-          AZURE_ENV_NAME: ${{ secrets.AZURE_ENV_NAME }}
-          AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
-```
-
-## Rujukan Arahan Biasa
-
-```bash
-# Inisialisasi projek aplikasi kontena baru
-azd init --template <template-name>
-
-# Terbitkan infrastruktur dan aplikasi
-azd up
-
-# Terbitkan hanya kod aplikasi (langkau infrastruktur)
-azd deploy
-
-# Sediakan hanya infrastruktur
-azd provision
-
-# Lihat sumber yang telah diterbitkan
-azd show
-
-# Alirkan log menggunakan azd monitor atau Azure CLI
-azd monitor --logs
-# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
-
-# Pantau aplikasi
-azd monitor --overview
-
-# Bersihkan sumber
-azd down --force --purge
-```
-
-## Penyelesaian Masalah
-
-### Masalah: Bekas gagal bermula
-
-```bash
-# Semak log menggunakan Azure CLI
-az containerapp logs show --name api --resource-group rg-myapp --tail 100
-
-# Lihat acara bekas
-az containerapp revision show \
-  --name api \
-  --resource-group rg-myapp \
-  --revision latest
-
-# Uji secara tempatan
-docker build -t api:local ./src/api
-docker run -p 8000:8000 api:local
-```
-
-### Masalah: Tidak dapat mengakses endpoint aplikasi bekas
-
-```bash
-# Sahkan konfigurasi kemasukan
-az containerapp show \
-  --name api \
-  --resource-group rg-myapp \
-  --query properties.configuration.ingress
-
-# Semak jika kemasukan dalaman diaktifkan
-az containerapp ingress update \
-  --name api \
-  --resource-group rg-myapp \
-  --external true
-```
-
-### Masalah: Masalah prestasi
-
-```bash
-# Semak penggunaan sumber
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# Skala sumber naik
-az containerapp update \
-  --name api \
-  --resource-group rg-myapp \
-  --cpu 2.0 \
-  --memory 4Gi
-```
-
-## Sumber Tambahan dan Contoh
-- [Contoh Mikroservis](./microservices/README.md)
-- [Contoh API Flash Mudah](./simple-flask-api/README.md)
-- [Dokumentasi Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Galeri Templat AZD](https://azure.github.io/awesome-azd/)
-- [Contoh Container Apps](https://github.com/Azure-Samples/container-apps-samples)
-- [Templat Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
-
-## Menyumbang
-
-Untuk menyumbang contoh aplikasi bekas baru:
-
-1. Cipta subdirektori baru dengan contoh anda
-2. Sertakan fail lengkap `azure.yaml`, `infra/`, dan `src/`
-3. Tambah README lengkap dengan arahan penyebaran
-4. Uji penyebaran dengan `azd up`
-5. Hantar permintaan tarik
-
----
-
-**Perlukan Bantuan?** Sertai komuniti [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) untuk sokongan dan pertanyaan.
+Semak arahan penghapusan dan sahkan bahawa kumpulan sumber khusus telah dikeluarkan.
+Jangan gunakan contoh ini sebagai asas pengeluaran tanpa reka bentuk dan ujian tambahan.
+
+[Indeks contoh](../README.md) · [Halaman kursus](../../README.md) ·
+[Dokumentasi Container Apps](https://learn.microsoft.com/azure/container-apps/) ·
+[Laporkan isu](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat yang kritikal, disyorkan terjemahan profesional oleh manusia. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

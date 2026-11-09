@@ -1,111 +1,113 @@
 # Mga Pattern ng Koordinasyon ng Maramihang Ahente
 
-⏱️ **Tinatayang Oras**: 60-75 minuto | 💰 **Tinatayang Gastos**: ~$100-300/buwan | ⭐ **Kumplikado**: Mataas
+⏱️ **Tinatayang Oras**: 60-75 minuto ng pagbabasa; ilang oras para magpatupad | 💰 **Tinatayang Gastos**: nakadepende sa gawain | ⭐ **Kahusayan**: Advanced
 
-**📚 Landas ng Pag-aaral:**
-- ← Nakaraan: [Pagpaplano ng Kapasidad](capacity-planning.md) - Mga estratehiya sa pagsukat ng resources at pag-scale
+**📚 Landas ng Pagkatuto:**
+- ← Nakaraan: [Capacity Planning](capacity-planning.md) - Mga estratehiya sa pagsukat at pagpapalawak ng resources
 - 🎯 **Nandito Ka**: Mga Pattern ng Koordinasyon ng Maramihang Ahente (Orkestrasyon, komunikasyon, pamamahala ng estado)
-- → Susunod: [Pagpili ng SKU](sku-selection.md) - Pagpili ng tamang mga serbisyo ng Azure
-- 🏠 [Tahanan ng Kurso](../../README.md)
+- → Susunod: [SKU Selection](sku-selection.md) - Pagpili ng tamang mga serbisyo ng Azure
+- 🏠 [Course Home](../../README.md)
 
 ---
 
-## Ano ang Matututuhan Mo
+## Ano ang iyong Matututuhan
 
-Sa pagtatapos ng leksyong ito, magagawa mo:
-- Maunawaan ang mga pattern ng **arkitektura ng maramihang ahente** at kailan gagamitin ang mga ito
-- Ipatupad ang mga **pattern ng orkestrasyon** (sentralisado, desentralisado, hierarkikal)
-- Disenyuhin ang mga estratehiya ng **komunikasyon ng ahente** (synchronous/sabay-sabay, asynchronous/hindi sabay, event-driven/nakabatay sa mga kaganapan)
-- Pamahalaan ang **pinagsasaluhang estado** sa mga distributed na ahente
-- I-deploy ang mga **sistemang maramihang ahente** sa Azure gamit ang AZD
-- I-apply ang mga **pattern ng koordinasyon** para sa mga totoong senaryo ng AI
-- I-monitor at i-debug ang mga distributed na sistemang ahente
+Sa pagtatapos ng lektyon na ito, ikaw ay:
+- Mauunawaan ang **arkitektura ng maramihang ahente** at kung kailan ito gagamitin
+- Maipatupad ang **mga pattern ng orkestrasyon** (centralized, decentralized, hierarchical)
+- Makakapagdisenyo ng **estratehiya ng komunikasyon ng ahente** (synchronous, asynchronous, event-driven)
+- Mapamamahalaan ang **ibinahaging estado** ng mga distributed na ahente
+- Maipapakalat ang **mga sistema ng maramihang ahente** sa Azure gamit ang AZD
+- Maiaangkop ang **mga pattern ng koordinasyon** para sa totoong mga senaryo sa AI
+- Mamomonitor at madedebug ang mga distributed na sistema ng ahente
 
 ## Bakit Mahalaga ang Koordinasyon ng Maramihang Ahente
 
-### Ang Ebolusyon: Mula sa Isang Ahente Patungo sa Maramihang Ahente
+### Ang Ebolusyon: Mula Single Agent hanggang Maramihang Ahente
 
 **Isang Ahente (Simple):**
 ```
 User → Agent → Response
 ```
-- ✅ Madaling maintindihan at ipatupad
-- ✅ Mabilis para sa simpleng gawain
-- ❌ Limitado ng kakayahan ng iisang modelo
-- ❌ Hindi makapag-parallelize ng mga kumplikadong gawain
+- ✅ Madaling intindihin at ipatupad
+- ✅ Mabilis para sa simpleng mga gawain
+- ❌ Limitado ang kakayahan ng iisang modelo
+- ❌ Hindi kayang gawing parallel ang mga komplikadong gawain
 - ❌ Walang espesyalisasyon
 
-**Sistemang Maramihang Ahente (Mas Advanced):**
+**Sistema ng Maramihang Ahente (Advanced):**
 ```mermaid
 graph TD
-    Orchestrator[Orkestrador] --> Agent1[Ahente1<br/>Plano]
-    Orchestrator --> Agent2[Ahente2<br/>Kodigo]
-    Orchestrator --> Agent3[Ahente3<br/>Pagsusuri]
-```- ✅ Mga ahenteng may espesyalisasyon para sa tiyak na mga gawain
-- ✅ Paralel na pagpapatupad para sa bilis
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```
+- ✅ Mga espesyalisadong ahente para sa partikular na gawain
+- ✅ Sabay-sabay na pagpapatupad para sa bilis
 - ✅ Modular at madaling panatilihin
-- ✅ Mas mahusay sa kumplikadong mga workflow
-- ⚠️ Nangangailangan ng lohika ng koordinasyon
+- ✅ Mas mahusay sa mga kumplikadong workflow
+- ⚠️ Nangangailangan ng lohika sa koordinasyon
 
-**Analohiya**: Ang isang ahente ay parang isang tao na gumagawa ng lahat ng gawain. Ang maramihang ahente ay parang isang koponan kung saan ang bawat miyembro ay may espesyalisadong kasanayan (mananaliksik, taga-code, tagasuri, manunulat) na nagtutulungan.
+**Pagtutulad**: Ang isang ahente ay parang isang tao na gumagawa ng lahat ng gawain. Ang maramihang ahente ay parang isang koponan kung saan bawat kasapi ay may espesyalisadong kakayahan (mananaliksik, tagakodigo, tagasuri, manunulat) na nagtutulungan.
 
 ---
 
 ## Pangunahing Mga Pattern ng Koordinasyon
 
-### Pattern 1: Sunud-sunod na Koordinasyon (Chain of Responsibility)
+### Pattern 1: Sunod-sunod na Koordinasyon (Kadena ng Pananagutan)
 
-**Kailan gagamitin**: Dapat matapos ang mga gawain sa tiyak na pagkakasunud-sunod, bawat ahente ay bumubuo batay sa output ng nauna.
+**Kailan gagamitin**: Kailangan matapos ang mga gawain sa partikular na pagkakasunod-sunod, bawat ahente ay nagtatayo sa output ng naunang ahente.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as Ahente ng Pananaliksik
-    participant Agent2 as Ahente ng Manunulat
-    participant Agent3 as Ahente ng Patnugot
+    participant Agent1 as Research Agent
+    participant Agent2 as Writer Agent
+    participant Agent3 as Editor Agent
     
-    User->>Orchestrator: "Magsulat ng artikulo tungkol sa AI"
-    Orchestrator->>Agent1: Magsaliksik ng paksa
-    Agent1-->>Orchestrator: Mga resulta ng pananaliksik
-    Orchestrator->>Agent2: Isulat ang burador (gamit ang pananaliksik)
-    Agent2-->>Orchestrator: Burador ng artikulo
-    Orchestrator->>Agent3: I-edit at pagandahin
-    Agent3-->>Orchestrator: Pinal na artikulo
-    Orchestrator-->>User: Pinakinis na artikulo
+    User->>Orchestrator: "Write article about AI"
+    Orchestrator->>Agent1: Research topic
+    Agent1-->>Orchestrator: Research results
+    Orchestrator->>Agent2: Write draft (using research)
+    Agent2-->>Orchestrator: Draft article
+    Orchestrator->>Agent3: Edit and improve
+    Agent3-->>Orchestrator: Final article
+    Orchestrator-->>User: Polished article
     
-    Note over User,Agent3: Sunod-sunod: Bawat hakbang ay naghihintay sa nauna
-```}
+    Note over User,Agent3: Sequential: Each step waits for previous
+```
+
 **Mga Benepisyo:**
 - ✅ Malinaw na daloy ng datos
 - ✅ Madaling i-debug
-- ✅ Nakahuhulaang pagkakasunod-sunod ng pagpapatupad
+- ✅ Maayos at predictable ang pagkakasunod ng pagpapatupad
 
 **Mga Limitasyon:**
-- ❌ Mas mabagal (walang paralelismo)
-- ❌ Ang isang pagkabigo ay humaharang sa buong chain
-- ❌ Hindi makakahawak ng magkakaugnay na mga gawain
+- ❌ Mabagal (walang parallelism)
+- ❌ Isang pagkabigo ay humahadlang sa buong kadena
+- ❌ Hindi kaya ang interdependent na mga gawain
 
 **Mga Halimbawa ng Paggamit:**
-- Pipeline ng paggawa ng nilalaman (pananaliksik → pagsulat → pag-edit → paglalathala)
-- Pagbuo ng code (planuhin → ipatupad → subukan → i-deploy)
-- Pagbuo ng ulat (pagkolekta ng datos → pagsusuri → biswal na paglalarawan → buod)
+- Pipeline ng paggawa ng nilalaman (pananaliksik → pagsusulat → pag-edit → pag-publish)
+- Paggawa ng code (plano → implementasyon → pagsubok → deployment)
+- Paggawa ng ulat (pagkolekta ng datos → pagsusuri → biswal na presentasyon → buod)
 
 ---
 
-### Pattern 2: Paralel na Koordinasyon (Fan-Out/Fan-In)
+### Pattern 2: Sabay-sabay na Koordinasyon (Fan-Out/Fan-In)
 
-**Kailan gagamitin**: Ang mga independenteng gawain ay maaaring tumakbo nang sabay, at pinagsasama ang mga resulta sa dulo.
+**Kailan gagamitin**: Ang mga independiyenteng gawain ay maaaring isagawa nang sabay-sabay, ang mga resulta ay pinagsama sa huli.
 
 ```mermaid
 graph TB
-    User[Kahilingan ng Gumagamit]
-    Orchestrator[Tagapag-ugnay]
-    Agent1[Ahente ng Analisis]
-    Agent2[Ahente ng Pananaliksik]
-    Agent3[Ahente ng Datos]
-    Aggregator[Tagapagtipon ng Resulta]
-    Response[Pinagsamang Tugon]
+    User[User Request]
+    Orchestrator[Orchestrator]
+    Agent1[Analysis Agent]
+    Agent2[Research Agent]
+    Agent3[Data Agent]
+    Aggregator[Result Aggregator]
+    Response[Combined Response]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -119,36 +121,37 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Mga Benepisyo:**
-- ✅ Mabilis (paralel na pagpapatupad)
-- ✅ Tolerante sa pagkakamali (katanggap-tanggap ang bahagyang resulta)
-- ✅ Makaka-scale nang pahalang
+- ✅ Mabilis (parallel execution)
+- ✅ Matatag kahit may bahagyang pagkabigo (partial results ay tinatanggap)
+- ✅ Kayang mag-scale nang pahalang
 
 **Mga Limitasyon:**
-- ⚠️ Maaaring dumating ang mga resulta nang hindi nakaayos
-- ⚠️ Nangangailangan ng lohika ng pag-aggregate
-- ⚠️ Komplikadong pamamahala ng estado
+- ⚠️ Maaaring dumating ang mga resulta sa hindi inaasahang pagkakasunod-sunod
+- ⚠️ Kailangan ng lohika para sa pagsasama-sama
+- ⚠️ Kumplikadong pamamahala ng estado
 
 **Mga Halimbawa ng Paggamit:**
-- Pagkuha ng datos mula sa maraming pinagkukunan (APIs + mga database + web scraping)
-- Pagsusuring kompetitibo (maraming modelo ang bumubuo ng mga solusyon, pinipili ang pinakamahusay)
-- Mga serbisyo ng pagsasalin (isinasalin sa maraming wika nang sabay-sabay)
+- Pagkuha ng datos mula sa maraming pinagmulan (APIs + databases + web scraping)
+- Pagsusuri ng kompetisyon (maraming modelo ang gumagawa ng solusyon, pinipili ang pinakamahusay)
+- Serbisyo ng pagsasalin (sabayan ang pagsasalin sa maraming wika)
 
 ---
 
-### Pattern 3: Hierarkikal na Koordinasyon (Manager-Worker)
+### Pattern 3: Hierarchical Coordination (Manager-Worker)
 
-**Kailan gagamitin**: Kumplikadong mga workflow na may mga sub-task, nangangailangan ng delegasyon.
+**Kailan gagamitin**: Mga kumplikadong workflow na may mga sub-gawain, kailangan ng delegasyon.
 
 ```mermaid
 graph TB
-    Master[Punong Orkestrador]
-    Manager1[Tagapamahala ng Pananaliksik]
-    Manager2[Tagapamahala ng Nilalaman]
-    W1[Tagapag-scrape ng Web]
-    W2[Tagasuri ng Papel]
-    W3[Manunulat]
-    W4[Tagapag-edit]
+    Master[Master Orchestrator]
+    Manager1[Research Manager]
+    Manager2[Content Manager]
+    W1[Web Scraper]
+    W2[Paper Analyzer]
+    W3[Writer]
+    W4[Editor]
     
     Master --> Manager1
     Master --> Manager2
@@ -161,10 +164,11 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
+
 **Mga Benepisyo:**
-- ✅ Humahawak ng kumplikadong mga workflow
+- ✅ Kayang hawakan ang kumplikadong workflow
 - ✅ Modular at madaling panatilihin
-- ✅ Malinaw na hangganan ng responsibilidad
+- ✅ Malinaw ang pagkakabahagi ng responsibilidad
 
 **Mga Limitasyon:**
 - ⚠️ Mas kumplikadong arkitektura
@@ -172,64 +176,65 @@ graph TB
 - ⚠️ Nangangailangan ng sopistikadong orkestrasyon
 
 **Mga Halimbawa ng Paggamit:**
-- Pagpoproseso ng dokumento sa enterprise (i-classify → i-route → iproseso → i-archive)
-- Multi-stage na data pipelines (tanggapin → linisin → i-transform → suriin → mag-ulat)
-- Kumplikadong automation workflow (pagpaplano → alokasyon ng resources → pagpapatupad → pagmo-monitor)
+- Proseso ng dokumento sa enterprise (classify → ruta → proseso → archive)
+- Multi-stage na pipeline ng datos (ingest → linisin → baguhin → suriin → ulat)
+- Kumplikadong automation workflow (plano → alokasyon ng resources → pagpapatupad → pagmamanman)
 
 ---
 
-### Pattern 4: Koordinasyong Pinapatakbo ng Mga Kaganapan (Publish-Subscribe)
+### Pattern 4: Event-Driven Coordination (Publish-Subscribe)
 
-**Kailan gagamitin**: Kailangang tumugon ang mga ahente sa mga kaganapan, at nais ang maluwag na coupling.
+**Kailan gagamitin**: Kailangan tumugon ang mga ahente sa mga kaganapan, nais ang maluwag na pagkakabit.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as Tagapagkolekta ng Datos
+    participant Agent1 as Data Collector
     participant EventBus as Azure Service Bus
-    participant Agent2 as Tagasuri
-    participant Agent3 as Tagapag-abiso
-    participant Agent4 as Tagapag-arkibo
+    participant Agent2 as Analyzer
+    participant Agent3 as Notifier
+    participant Agent4 as Archiver
     
-    Agent1->>EventBus: I-publish ang kaganapan "Datos Natanggap"
-    EventBus->>Agent2: Mag-subscribe: Suriin ang datos
-    EventBus->>Agent3: Mag-subscribe: Magpadala ng abiso
-    EventBus->>Agent4: Mag-subscribe: I-archive ang datos
+    Agent1->>EventBus: Publish "DataReceived" event
+    EventBus->>Agent2: Subscribe: Analyze data
+    EventBus->>Agent3: Subscribe: Send notification
+    EventBus->>Agent4: Subscribe: Archive data
     
-    Note over Agent1,Agent4: Lahat ng mga subscriber ay nagpoproseso nang magkakahiwalay
+    Note over Agent1,Agent4: All subscribers process independently
     
-    Agent2->>EventBus: I-publish ang kaganapan "Pagsusuri Natapos"
-    EventBus->>Agent3: Mag-subscribe: Magpadala ng ulat ng pagsusuri
+    Agent2->>EventBus: Publish "AnalysisComplete" event
+    EventBus->>Agent3: Subscribe: Send analysis report
 ```
+
 **Mga Benepisyo:**
-- ✅ Maluwag na coupling sa pagitan ng mga ahente
-- ✅ Madaling magdagdag ng bagong mga ahente (mag-subscribe lang)
-- ✅ Hindi sabay-sabay na pagproseso
-- ✅ Matatag (pagpapanatili ng mensahe)
+- ✅ Maluwag ang pagkakabit sa pagitan ng mga ahente
+- ✅ Madaling magdagdag ng bagong ahente (subscribe lang)
+- ✅ Asynchronous na pagpoproseso
+- ✅ Matatag (persistensya ng mensahe)
 
 **Mga Limitasyon:**
-- ⚠️ Eventual consistency (pagkakatugma sa kalaunan)
-- ⚠️ Komplikadong pag-debug
-- ⚠️ Mga hamon sa pag-aayos ng pagkakasunud-sunod ng mga mensahe
+- ⚠️ Pagsunod sa huli na konsistensi
+- ⚠️ Kumplikadong pag-debug
+- ⚠️ Hamon sa pag-aayos ng pagkakasunod ng mensahe
 
 **Mga Halimbawa ng Paggamit:**
-- Mga real-time na sistema ng pagmo-monitor (mga alerto, dashboards, logs)
-- Multi-channel na mga abiso (email, SMS, push, Slack)
-- Mga pipeline ng pagpoproseso ng datos (maraming consumer ng parehong datos)
+- Sistema ng realtime na pagmamanman (alerts, dashboard, logs)
+- Multi-channel na notipikasyon (email, SMS, push, Slack)
+- Pipeline ng pagproseso ng datos (maraming consumers ng parehong datos)
 
 ---
 
-### Pattern 5: Koordinasyong Nakabase sa Konsenso (Voting/Quorum)
+### Pattern 5: Consensus-Based Coordination (Voting/Quorum)
 
-**Kailan gagamitin**: Kailangan ng pagkakasundo mula sa maraming ahente bago magpatuloy.
+**Kailan gagamitin**: Kailangan ang kasunduan mula sa maraming ahente bago magpatuloy.
 
 ```mermaid
 graph TB
-    Input[Gawain ng Input]
-    Agent1[Ahente 1: gpt-4.1]
-    Agent2[Ahente 2: Claude]
-    Agent3[Ahente 3: Gemini]
-    Voter[Tagaboto ng Konsensus]
-    Output[Pinagkasunduang Kinalabasan]
+    Input[Input Task]
+    Agent1[Agent 1: gpt-4.1]
+    Agent2[Agent 2: Claude]
+    Agent3[Agent 3: Gemini]
+    Voter[Consensus Voter]
+    Output[Agreed Output]
     
     Input --> Agent1
     Input --> Agent2
@@ -241,42 +246,43 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
+
 **Mga Benepisyo:**
 - ✅ Mas mataas na katumpakan (maraming opinyon)
-- ✅ Tolerante sa pagkakamali (katanggap-tanggap ang pagkabigo ng iilang mga ahente)
-- ✅ May built-in na pagtiyak ng kalidad
+- ✅ Matatag kahit may minor na pagkabigo
+- ✅ May nakapaloob na quality assurance
 
 **Mga Limitasyon:**
-- ❌ Mahal (maraming tawag sa modelo)
-- ❌ Mas mabagal (naghihintay sa lahat ng ahente)
-- ⚠️ Kailangan ng resolusyon ng konflikto
+- ❌ Magastos (maraming tawag sa modelo)
+- ❌ Mabagal (naghihintay sa lahat ng ahente)
+- ⚠️ Kailangan ng resolusyon sa konflikto
 
 **Mga Halimbawa ng Paggamit:**
-- Moderasyon ng nilalaman (maraming modelo ang sumasuri ng nilalaman)
-- Pagsusuri ng code (maraming linter/analayzer)
-- Medikal na diagnosis (maraming AI model, beripikasyon ng eksperto)
+- Moderasyon ng nilalaman (maraming modelo ang nagsusuri ng nilalaman)
+- Pagsusuri ng code (maraming linters/analyzers)
+- Medikal na diagnosis (maraming AI model, pagsuri ng eksperto)
 
 ---
 
-## Pangkalahatang Balangkas ng Arkitektura
+## Pangkalahatang Arkitektura
 
-### Kumpletong Sistemang Maramihang Ahente sa Azure
+### Kumpletong Sistema ng Maramihang Ahente sa Azure
 
 ```mermaid
 graph TB
-    User[Gumagamit/Kliyente ng API]
-    APIM[Pamamahala ng Azure API]
-    Orchestrator[Serbisyo ng Orkestrador<br/>App ng Container]
-    ServiceBus[Azure Service Bus<br/>Hub ng Kaganapan]
+    User[User/API Client]
+    APIM[Azure API Management]
+    Orchestrator[Orchestrator Service<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Queues / Topics]
     
-    Agent1[Ahente ng Pananaliksik<br/>App ng Container]
-    Agent2[Ahente na Manunulat<br/>App ng Container]
-    Agent3[Ahente ng Analista<br/>App ng Container]
-    Agent4[Ahente na Tagasuri<br/>App ng Container]
+    Agent1[Research Agent<br/>Container App]
+    Agent2[Writer Agent<br/>Container App]
+    Agent3[Analyst Agent<br/>Container App]
+    Agent4[Reviewer Agent<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>Pinagsamang Estado)]
-    Storage[Azure Storage<br/>Mga Artipakto]
-    AppInsights[Application Insights<br/>Pagmamanman]
+    CosmosDB[(Cosmos DB<br/>Shared State)]
+    Storage[Azure Storage<br/>Artifacts]
+    AppInsights[Application Insights<br/>Monitoring]
     
     User --> APIM
     APIM --> Orchestrator
@@ -307,60 +313,69 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**Pangunahing Mga Komponent:**
+
+**Pangunahing mga Komponent:**
 
 | Komponent | Layunin | Serbisyo ng Azure |
-|-----------|---------|-------------------|
-| **API Gateway** | Punto ng pagpasok, rate limiting, awtentikasyon | API Management |
-| **Orchestrator** | Nagko-coordinate ng mga workflow ng ahente | Container Apps |
-| **Message Queue** | Hindi sabay-sabay na komunikasyon | Service Bus / Event Hubs |
-| **Agents** | Espesyalisadong AI workers | Container Apps / Functions |
-| **State Store** | Pinagsasaluhang estado, pagsubaybay ng gawain | Cosmos DB |
+|-----------|---------|--------------------|
+| **API Gateway** | Pasukan, paglimita ng rate, awtentikasyon | API Management |
+| **Orchestrator** | Nagkokoordina ng workflow ng ahente | Container Apps |
+| **Message Queue** | Asynchronous na komunikasyon | Service Bus / Event Hubs |
+| **Mga Ahente** | Espesyal na mga tagatrabaho ng AI | Container Apps / Functions |
+| **State Store** | Ibinahaging estado, pagsubaybay ng gawain | Cosmos DB |
 | **Artifact Storage** | Mga dokumento, resulta, log | Blob Storage |
-| **Monitoring** | Distributed tracing, mga log | Application Insights |
+| **Monitoring** | Distributed na pagsubaybay, log | Application Insights |
+
+Ang Service Bus queues/topics at Event Hubs ay magkaibang serbisyo na may magkaibang delivery/consumption models; ang Event Hubs ay hindi palitang pang-direct sa Service Bus worker code sa ibaba. Ang parallelism, persist na mga mensahe, at voting ng modelo ay hindi mismo nangangahulugan ng fault tolerance o mas mataas na katumpakan.
 
 ---
 
-## Mga Kinakailangan
+## Mga Kinakailangang Kagamitan
 
-### Kinakailangang Mga Tool
+### Mga Kinakailangang Tool
 
 ```bash
-# Suriin ang Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Inaasahan: azd bersyon 1.0.0 o mas mataas
+# Command reference baseline: azd 1.37.2
 
-# Suriin ang Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Inaasahan: azure-cli 2.50.0 o mas mataas
+# ✅ Expected: azure-cli 2.50.0 or higher
 
-# Suriin ang Docker (para sa lokal na pagsubok)
+# Verify Docker (for local testing)
 docker --version
-# ✅ Inaasahan: Docker bersyon 20.10 o mas mataas
+# ✅ Expected: Docker version 20.10 or higher
 ```
 
 ### Mga Kinakailangan sa Azure
 
-- Aktibong subscription sa Azure
-- Mga pahintulot upang lumikha ng:
+- Aktibong Azure subscription
+- Mga permiso para gumawa ng:
   - Container Apps
   - Service Bus namespaces
   - Cosmos DB accounts
   - Storage accounts
   - Application Insights
 
-### Mga Kaalamang Kinakailangan
+### Mga Kinakailangang Kaalaman
 
-Dapat natapos mo na ang mga sumusunod:
-- [Pamamahala ng Konfigurasyon](../chapter-03-configuration/configuration.md)
-- [Pagpapatunay at Seguridad](../chapter-03-configuration/authsecurity.md)
-- [Halimbawa ng Microservices](../../../../examples/microservices)
+Dapat ay natapos mo na:
+- [Configuration Management](../chapter-03-configuration/configuration.md)
+- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
+- [Microservices Example](../../../../examples/microservices)
 
 ---
 
-## Gabay sa Implementasyon
+## Gabay sa Pagpapatupad
 
-### Estruktura ng Proyekto
+> **Mga disenyo ng bahagi, hindi isang deployable na lab:** Ang project tree at `File:` na mga label sa ibaba ay naglalarawan ng mga files na lilikha sa iyong sariling proyekto; ang repositoryong ito ay walang kumpletong aplikasyon ng `multi-agent-system`. Kulang pa ang mga pangunahing bahagi tulad ng main/parameter templates, Container Apps environment/registry, Dockerfiles at dependency locks, Cosmos database/container setup, deployment ng mga modelo, identity/role configuration, scaling rules, at parallel workers/queues. Huwag asahan na ang `azd init` ay bubuo ng mga files na ito o ang `azd up` ay mag-de-deploy ng mga snippets nang hindi binabago. Para sa isang maipapatupad na panimulang punto, kumpletuhin ang [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
+
+**Mga palagay sa runtime:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, at (para sa monitoring) `azure-monitor-opentelemetry`; ilagay ang `shared` sa Python import path sa bawat service image. Ang Cosmos `agent-state/tasks` na container ay dapat na umiiral na may partition key `/id`. Ang mga pagkonekta gamit ang key ay nagpapadali sa mga fragment na ito, hindi ito gabay sa produksyon: mas mainam ang managed identities na may scope sa Service Bus/Cosmos/OpenAI data-plane roles. Huwag ipakilala ang mga key sa outputs o logs.
+
+Ang paghahatid ng Service Bus ay **at least once**. Panatilihin ang idempotency para sa bawat gawain **at hakbang**, gumamit ng optimistic concurrency (ETags) para sa pagbabasa/pagbabago/pagsusulat ng estado, at i-renew ang mga lock ng mensahe sa panahon ng mahabang proseso. Ang simpleng state manager sa ibaba ay sunod-sunod lamang at hindi ipinatutupad ang mga garantiyang ito ng produksyon.
+
+### Istraktura ng Proyekto
 
 ```
 multi-agent-system/
@@ -392,13 +407,13 @@ multi-agent-system/
 
 ---
 
-## Aralin 1: Pattern ng Sunud-sunod na Koordinasyon
+## Leksyon 1: Pattern ng Sunod-sunod na Koordinasyon
 
-### Implementasyon: Pipeline ng Paglikha ng Nilalaman
+### Pagpapatupad: Pipeline ng Paggawa ng Nilalaman
 
-Gumawa tayo ng sunud-sunod na pipeline: Pananaliksik → Pagsulat → Pag-edit → Paglalathala
+Disenyuhin natin ang isang sunod-sunod na pipeline: Pananaliksik → Pagsusulat → Pag-edit. Ang pag-publish ay wala sa halimbawang ito.
 
-### 1. AZD Configuration
+### 1. Konfigurasyon ng AZD
 
 **File: `azure.yaml`**
 
@@ -429,7 +444,7 @@ services:
     host: containerapp
 ```
 
-### 2. Imprastruktura: Service Bus para sa Koordinasyon
+### 2. Impraestruktura: Service Bus para sa Koordinasyon
 
 **File: `infra/core/servicebus.bicep`**
 
@@ -483,16 +498,17 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 }
 
 output namespace string = serviceBusNamespace.name
-output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+// Do not output RootManageSharedAccessKey. Resolve scoped credentials
+// securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Tagapamahala ng Pinagsasaluhang Estado
+### 3. Manager ng Ibinahaging Estado
 
 **File: `src/shared/state_manager.py`**
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 class StateManager:
@@ -513,7 +529,7 @@ class StateManager:
             'type': task_type,
             'status': 'pending',
             'input': input_data,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'steps': []
         }
         self.container.create_item(task)
@@ -525,7 +541,7 @@ class StateManager:
         
         task['steps'].append({
             'name': step_name,
-            'completed_at': datetime.utcnow().isoformat(),
+            'completed_at': datetime.now(timezone.utc).isoformat(),
             'result': result
         })
         
@@ -537,7 +553,7 @@ class StateManager:
         task = self.container.read_item(task_id, partition_key=task_id)
         task['status'] = 'completed'
         task['result'] = final_result
-        task['completed_at'] = datetime.utcnow().isoformat()
+        task['completed_at'] = datetime.now(timezone.utc).isoformat()
         self.container.replace_item(task_id, task)
         return task
     
@@ -546,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Serbisyo ng Orkestrador
+### 4. Serbisyo ng Orchestrator
 
 **File: `src/orchestrator/app.py`**
 
@@ -561,7 +577,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Koneksyon sa Service Bus
+# Service Bus connection
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -572,15 +588,15 @@ def health():
 @app.route('/create-content', methods=['POST'])
 def create_content():
     """
-    Sequential workflow: Research → Write → Edit → Publish
+    Sequential workflow: Research → Write → Edit (returns a draft; no publishing)
     """
-    data = request.json
+    data = request.get_json(silent=True) or {}
     topic = data.get('topic')
     
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Lumikha ng gawain sa state store
+    # Create task in state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -588,13 +604,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # Magpadala ng mensahe sa ahente ng pananaliksik (unang hakbang)
+    # Send message to research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Saan ipadadala ang mga resulta
+            'next_queue': 'writer-tasks'  # Where to send results
         }),
         content_type='application/json'
     )
@@ -606,7 +622,7 @@ def create_content():
         'task_id': task_id,
         'status': 'started',
         'workflow': 'sequential',
-        'steps': ['research', 'write', 'edit', 'publish'],
+        'steps': ['research', 'write', 'edit'],
         'message': 'Content creation pipeline initiated'
     }), 202
 
@@ -635,7 +651,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# I-initialize ang mga kliyente
+# Initialize clients
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -643,7 +659,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -655,9 +671,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Tawagan ang mga modelo ng Microsoft Foundry para sa pananaliksik
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -667,14 +683,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # I-update ang estado
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # Ipadala sa susunod na ahente (manunulat)
+    # Send to next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -731,7 +747,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -744,9 +760,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Tumawag sa Microsoft Foundry Models para sumulat ng artikulo
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -756,14 +772,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # I-update ang estado
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # Ipadala sa editor
+    # Send to editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -819,7 +835,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -831,9 +847,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Tawagin ang Microsoft Foundry Models para i-edit
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -843,7 +859,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Markahan ang gawain bilang kumpleto
+    # Mark task as complete
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -879,24 +895,25 @@ if __name__ == '__main__':
 
 ### 8. I-deploy at Subukan
 
+Ang mga utos na ito ay ilalapat **pagkatapos mong maisakatuparan ang mga kulang na file ng proyekto**. Ang interactive na Foundry agent initialization ay hiwalay na workflow; hindi nito binubuo ang disenyo ng Service Bus na ito.
+
 ```bash
-# Opsyon A: Pag-deploy na batay sa template
-azd init
+# In your completed custom project
 azd up
 
-# Opsyon B: Pag-deploy ng manifest ng agent (nangangailangan ng extension)
+# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> Tingnan [Mga Utos ng AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para sa lahat ng `azd ai` flags at opsyon.
+> Tingnan ang [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para sa lahat ng `azd ai` flag at opsyon.
 
 ```bash
-# Kunin ang URL ng orchestrator
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# Lumikha ng nilalaman
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
@@ -908,18 +925,18 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "status": "started",
   "workflow": "sequential",
-  "steps": ["research", "write", "edit", "publish"],
+  "steps": ["research", "write", "edit"],
   "message": "Content creation pipeline initiated"
 }
 ```
 
-**Suriin ang progreso ng gawain:**
+**Tingnan ang progreso ng gawain:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Inaasahang output (kumpleto):**
+**✅ Inaasahang output (kumpleto na):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -947,13 +964,13 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Aralin 2: Pattern ng Paralel na Koordinasyon
+## Leksyon 2: Pattern ng Sabay-sabay na Koordinasyon
 
-### Implementasyon: Aggregator ng Pananaliksik mula sa Maramihang Pinagmulan
+### Pagpapatupad: Multi-Source Research Aggregator
 
-Gumawa tayo ng paralel na sistema na kumukuha ng impormasyon mula sa maraming pinagkukunan nang sabay-sabay.
+Gumawa tayo ng parallel na sistema na kumukuha ng impormasyon mula sa maraming pinagmulan nang sabay-sabay.
 
-### Paralel na Orkestrador
+### Parallel Orchestrator
 
 **File: `src/orchestrator/parallel_workflow.py`**
 
@@ -990,7 +1007,7 @@ def research_parallel():
         }
     )
     
-    # Fan-out: Ipadala sa lahat ng mga ahente nang sabay-sabay
+    # Fan-out: publish sequentially; workers may process concurrently.
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1025,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Lohika ng Pag-aggregate
+### Lohika ng Pag-aggrup
 
 **File: `src/agents/aggregator/app.py`**
 
@@ -1041,9 +1058,10 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# Subaybayan ang mga resulta para sa bawat gawain
-task_results = defaultdict(list)
-expected_agents = 4  # web, pang-akademiko, balita, panlipunan
+# Single-process demo only: not durable or shared across replicas.
+# Production: use durable unique (task_id, agent_type) result records.
+task_results = defaultdict(dict)
+expected_agents = 4  # web, academic, news, social
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1051,29 +1069,29 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # I-imbak ang resulta
-    task_results[task_id].append({
+    # Store result
+    task_results[task_id][agent_type] = {
         'agent': agent_type,
         'data': result
-    })
+    }
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Suriin kung natapos na ang lahat ng mga ahente (fan-in)
+    # Check if all agents completed (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # Pagsamahin ang mga resulta
+        # Combine results
         aggregated = {
             'query': message_data['query'],
-            'sources': task_results[task_id],
-            'summary': generate_summary(task_results[task_id])
+            'sources': list(task_results[task_id].values()),
+            'summary': generate_summary(list(task_results[task_id].values()))
         }
         
-        # Markahan bilang kumpleto
+        # Mark complete
         state_manager.complete_task(task_id, aggregated)
         
-        # Linisin
+        # Clean up
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1105,126 +1123,91 @@ if __name__ == '__main__':
     main()
 ```
 
-**Mga Benepisyo ng Pattern na Paralel:**
-- ⚡ **4x na mas mabilis** (ang mga ahente ay tumatakbo nang sabay-sabay)
-- 🔄 **Tolerante sa pagkakamali** (katanggap-tanggap ang bahagyang resulta)
-- 📈 **Makaka-scale** (madaling magdagdag ng mas maraming ahente)
+**Mga Benepisyo ng Parallel Pattern:**
+- ⚡ **Maaaring mas mababang latency** (nababatasan ng pinakabagal na worker kasama ang overhead ng koordinasyon)
+- 🔄 **Puwedeng suportahan ang bahagyang resulta** na may malinaw na deadline at patakaran sa pagkabigo (hindi ipinatupad sa basic aggregator)
+- 📈 **Scalable** (madaling magdagdag ng mga ahente)
 
 ---
 
-## Praktikal na Mga Ehersisyo
+## Mga Praktikal na Ehersisyo
 
-### Ehersisyo 1: Magdagdag ng Pag-handle ng Timeout ⭐⭐ (Katamtaman)
+### Ehersisyo 1: Magdagdag ng Timeout Handling ⭐⭐ (Katamtaman)
 
-**Layunin**: Ipatupad ang lohika ng timeout upang hindi maghintay nang walang katapusan ang aggregator para sa mabagal na mga ahente.
+**Layunin**: Ipatupad ang timeout logic upang hindi maghintay magpakailanman ang aggregator para sa mabagal na mga ahente.
+
+**Panimulang punto:** Patakbuhin ang lokal na simulation ng deadline na ito bago isama sa queue worker. Ang timeout na sinusuri lamang kapag may ibang mensahe na dumating ay hindi tatakbo kung walang mensaheng ipinadala ang nawawalang worker.
 
 **Mga Hakbang**:
 
-1. **Magdagdag ng pagsubaybay ng timeout sa aggregator:**
+1. **Magdagdag ng pagsunod sa timeout sa aggregator:**
 
 ```python
-from datetime import datetime, timedelta
+import asyncio
 
-task_timeouts = {}  # task_id -> expiration_time
+async def simulated_agent(name, delay):
+    await asyncio.sleep(delay)
+    return {'agent': name, 'result': 'done'}
 
-def process_result(message_data):
-    task_id = message_data['task_id']
-    
-    # Itakda ang timeout sa unang resulta
-    if task_id not in task_timeouts:
-        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
-    
-    task_results[task_id].append({
-        'agent': message_data['agent_type'],
-        'data': message_data['result']
-    })
-    
-    # Suriin kung kumpleto o nag-timeout
-    if len(task_results[task_id]) == expected_agents or \
-       datetime.utcnow() > task_timeouts[task_id]:
-        
-        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
-        
-        aggregated = {
-            'query': message_data['query'],
-            'sources': task_results[task_id],
-            'completed_agents': len(task_results[task_id]),
-            'timed_out': len(task_results[task_id]) < expected_agents
-        }
-        
-        state_manager.complete_task(task_id, aggregated)
-        
-        # Linisin
-        del task_results[task_id]
-        del task_timeouts[task_id]
+async def main():
+    tasks = [asyncio.create_task(simulated_agent(name, delay))
+             for name, delay in [('web', 0.1), ('academic', 0.2),
+                                 ('news', 0.3), ('social', 3)]]
+    done, pending = await asyncio.wait(tasks, timeout=1)
+    results = [task.result() for task in done]
+    for task in pending:
+        task.cancel()
+    await asyncio.gather(*pending, return_exceptions=True)
+    print({'completed_agents': len(results), 'timed_out': bool(pending)})
+    assert len(results) == 3 and pending
+
+asyncio.run(main())
 ```
 
-2. **Subukan gamit ang artipisyal na pagkaantala:**
+2. **Inaasahang output:**
 
-```python
-# Sa isang ahente, magdagdag ng pagkaantala upang gayahin ang mabagal na pagproseso
-import time
-time.sleep(35)  # Lumalampas sa 30-sigundong timeout
+```text
+{'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **I-deploy at i-verify:**
+3. **Integrasyon sa sistema ng queue (design task):** Panatilihin ang deadline ng dispatch at inaasahang mga ahente sa oras ng paglikha ng gawain, patakbuhin ang pana-panahong pag-sweep ng deadline na independyente sa mga papasok na resulta, atomikong tapusin ang mga bahagyang resulta, at huwag pansinin ang mga huli/duplikadong mensahe para sa mga natapos na gawain. Ang lokal na timeout ay hindi kinakansela ang mga remote na worker.
+
+Para lamang sa iyong ipinatupad na proyekto:
 
 ```bash
 azd deploy aggregator
 
-# Isumite ang gawain
+# Submit task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# Suriin ang mga resulta pagkatapos ng 30 segundo
+# Check results after 30 seconds
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Mga Pamantayan ng Tagumpay:**
-- ✅ Natatapos ang gawain pagkatapos ng 30 segundo kahit hindi kumpleto ang mga ahente
-- ✅ Ipinapakita ng tugon ang bahagyang mga resulta (`"timed_out": true`)
-- ✅ Ibinabalik ang magagamit na mga resulta (3 sa 4 na ahente)
+**✅ Mga Pamantayan sa Tagumpay:**
+- ✅ Bumabalik ang lokal na pagsubok pagkatapos ng isang segundong deadline kahit incomplete ang isang ahente
+- ✅ Nagpapakita ng bahagyang resulta ang tugon (`"timed_out": true`)
+- ✅ Ibinabalik ang mga available na resulta (3 sa 4 na ahente)
 
 **Oras**: 20-25 minuto
 
 ---
 
-### Ehersisyo 2: Ipatupad ang Lohika ng Retry ⭐⭐⭐ (Mataas)
+### Ehersisyo 2: Ipatupad ang Retry Logic ⭐⭐⭐ (Advanced)
 
 **Layunin**: Awtomatikong i-retry ang mga nabigong gawain ng ahente bago sumuko.
 
 **Mga Hakbang**:
 
-1. **Magdagdag ng pagsubaybay ng retry sa orchestrator:**
+1. **Gamitin ang Service Bus delivery counts sa halip na muling pag-enqueue ng custom retry counters:**
 
 ```python
-from dataclasses import dataclass
-from typing import Dict
-
-@dataclass
-class RetryConfig:
-    max_retries: int = 3
-    backoff_seconds: int = 5
-
-retry_counts: Dict[str, int] = {}  # message_id -> bilang ng muling pagtatangka
-
-def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
-    """Send message with retry metadata"""
-    message_id = message_data.get('message_id', str(uuid.uuid4()))
-    message_data['message_id'] = message_id
-    message_data['retry_count'] = retry_counts.get(message_id, 0)
-    message_data['max_retries'] = retry_config.max_retries
-    
-    sender = servicebus_client.get_queue_sender(queue_name)
-    message = ServiceBusMessage(
-        body=json.dumps(message_data),
-        content_type='application/json',
-        message_id=message_id
-    )
-    
-    with sender:
-        sender.send_messages(message)
+import json
+import time
+# Integration fragment: use a live peek-lock ServiceBusReceiver.
+# Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
 2. **Magdagdag ng retry handler sa mga ahente:**
@@ -1235,31 +1218,21 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # Iproseso ang mensahe
+        # Process the message
         process_func(message_data)
         
-        # Matagumpay - kumpleto
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
-        message_id = message.message_id
-        retry_count = message_data.get('retry_count', 0)
-        max_retries = message_data.get('max_retries', 3)
-        
-        if retry_count < max_retries:
-            # Subukan muli: iwanan at ilagay muli sa pila na may nadagdagang bilang
-            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
-            
-            message_data['retry_count'] = retry_count + 1
-            
-            # Ibalik sa parehong pila na may pagkaantala
-            time.sleep(5 * (retry_count + 1))  # Eksponensiyal na paghihintay
-            send_with_retry(queue_name, message_data, RetryConfig())
-            
-            receiver.complete_message(message)  # Alisin ang orihinal
+        if message.delivery_count < 4:
+            # Bounded exponential delay: 5s, 10s, 20s.
+            # Renew the lock if processing + waiting can exceed its duration.
+            time.sleep(5 * 2 ** (message.delivery_count - 1))
+            receiver.abandon_message(message)
         else:
-            # Lumampas ang maximum na pagtatangka - ilipat sa dead letter queue
-            print(f"❌ Max retries exceeded for message {message_id}")
+            # Max retries exceeded - move to dead letter queue
+            print(f"❌ Max attempts exceeded for message {message.message_id}")
             receiver.dead_letter_message(
                 message,
                 reason="MaxRetriesExceeded",
@@ -1273,7 +1246,7 @@ def process_with_retry(message, receiver, process_func):
 def monitor_dead_letters():
     """Check dead letter queue for failed messages"""
     receiver = servicebus_client.get_queue_receiver(
-        'research-queue',
+        'research-tasks',
         sub_queue='deadletter'
     )
     
@@ -1285,19 +1258,19 @@ def monitor_dead_letters():
             print(f"Description: {message.dead_letter_error_description}")
 ```
 
-**✅ Mga Pamantayan ng Tagumpay:**
-- ✅ Awtomatikong ni-re-retry ang mga nabigong gawain (hanggang 3 beses)
-- ✅ Exponential backoff sa pagitan ng mga retry (5s, 10s, 15s)
-- ✅ Pagkatapos ng max retries, ang mga mensahe ay napupunta sa dead letter queue
-- ✅ Maaaring i-monitor at i-replay ang dead letter queue
+**✅ Mga Pamantayan sa Tagumpay:**
+- ✅ Awtomatikong nirere-try ang mga nabigong gawain (hanggang 3 beses)
+- ✅ Exponential backoff sa pagitan ng mga retry (5s, 10s, 20s), kasama ang pag-renew ng message-lock kung kinakailangan
+- ✅ Pagkatapos ng max retries, pumupunta ang mga mensahe sa dead letter queue
+- ✅ Maaari masuri ang mga dead letter message; ang replay ay nangangailangan ng hiwalay na idempotent na workflow sa recovery
 
 **Oras**: 30-40 minuto
 
 ---
 
-### Ehersisyo 3: Ipatupad ang Circuit Breaker ⭐⭐⭐ (Mataas)
+### Ehersisyo 3: Ipatupad ang Circuit Breaker ⭐⭐⭐ (Advanced)
 
-**Layunin**: Pigilan ang cascading failures sa pamamagitan ng paghinto ng mga request sa mga ahenteng pumapalya.
+**Layunin**: Pigilan ang pagkalat ng pagkabigo sa pamamagitan ng paghinto ng mga kahilingan sa mga nabigong ahente.
 
 **Mga Hakbang**:
 
@@ -1305,12 +1278,12 @@ def monitor_dead_letters():
 
 ```python
 from enum import Enum
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # Normal na operasyon
-    OPEN = "open"          # Nabibigo, tanggihan ang mga kahilingan
-    HALF_OPEN = "half_open"  # Sinusubukan kung nakabawi
+    CLOSED = "closed"      # Normal operation
+    OPEN = "open"          # Failing, reject requests
+    HALF_OPEN = "half_open"  # Testing if recovered
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1323,8 +1296,8 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Suriin kung nag-expire na ang timeout
-            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+            # Check if timeout expired
+            if datetime.now(timezone.utc) - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
             else:
@@ -1333,7 +1306,8 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # Tagumpay
+            # Success
+            self.failure_count = 0 # Count consecutive failures only
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1343,19 +1317,19 @@ class CircuitBreaker:
             
         except Exception as e:
             self.failure_count += 1
-            self.last_failure_time = datetime.utcnow()
+            self.last_failure_time = datetime.now(timezone.utc)
             
             if self.failure_count >= self.failure_threshold:
                 self.state = CircuitState.OPEN
                 print(f"🔴 Circuit breaker: OPEN (too many failures)")
             
-            raise e
+            raise
 ```
 
-2. **I-apply sa mga tawag sa ahente:**
+2. **I-apply ito sa mga tawag ng ahente:**
 
 ```python
-# Sa tagapag-ayos
+# In orchestrator
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,33 +1345,34 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Magpatuloy sa iba pang mga ahente
+        # Continue with other agents
 ```
 
-3. **Subukan ang circuit breaker:**
+Pinoprotektahan ng circuit na ito ang **send operation**, hindi ang pagkumpleto ng remote na worker: ang matagumpay na pag-enqueue ng isang mensahe ay hindi nagsasabi kung buhay pa ang isang agent. `send_message` ang sender function ng iyong aplikasyon. Para sa execution circuits, ilabas ang naobserbahang task failures/timeouts sa isang matibay na coordinator. Ang in-memory class na ito ay isang demonstration ng single-thread, hindi isang distributed circuit breaker.
 
-```bash
-# Gayahin ang paulit-ulit na pagkabigo (ihinto ang isang ahente)
-az containerapp stop --name web-research-agent --resource-group rg-agents
+3. **Subukan ang circuit breaker nang lokal:**
 
-# Magpadala ng maraming kahilingan
-for i in {1..10}; do
-  curl -X POST $ORCHESTRATOR_URL/research-parallel \
-    -H "Content-Type: application/json" \
-    -d '{"query": "test query '$i'"}'
-  sleep 2
-done
-
-# Suriin ang mga log - dapat makita na bukas ang circuit pagkatapos ng 5 pagkabigo
-# Gamitin ang Azure CLI para sa mga log ng Container App:
-az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```python
+# Run after the class definition; no Azure changes required.
+circuit = CircuitBreaker(failure_threshold=5, timeout_seconds=0)
+def fail():
+    raise RuntimeError("simulated failure")
+for _ in range(5):
+    try:
+        circuit.call(fail)
+    except RuntimeError:
+        pass
+assert circuit.state == CircuitState.OPEN
+assert circuit.call(lambda: "recovered") == "recovered"
+assert circuit.state == CircuitState.CLOSED
+print("Circuit breaker recovery verified")
 ```
 
-**✅ Mga Pamantayan ng Tagumpay:**
-- ✅ Pagkatapos ng 5 pagkabigo, bumubukas ang circuit (tinatiwalag ang mga request)
-- ✅ Pagkatapos ng 60 segundo, nagiging half-open ang circuit (sinusubukan ang recovery)
-- ✅ Nagpapatuloy na normal ang ibang mga ahente
-- ✅ Awtomatikong nagsasarado ang circuit kapag gumaling ang ahente
+**✅ Mga Success Criteria:**
+- ✅ Pagkatapos ng 5 pagkabigo, bumubukas ang circuit (tinanggihan ang mga kahilingan)
+- ✅ Pagkatapos ng 60 segundo, nagiging half-open ang circuit (sinusubok ang pagbawi)
+- ✅ Patuloy na gumagana ang ibang mga agent nang normal
+- ✅ Kusang nagsasara ang circuit kapag bumawi ang agent
 
 **Oras**: 40-50 minuto
 
@@ -1410,50 +1385,49 @@ az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 5
 **File: `src/shared/tracing.py`**
 
 ```python
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.samplers import AlwaysOnSampler
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
-# I-configure ang pagsubaybay
-config_integration.trace_integrations(['requests', 'logging'])
-
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# Lumikha ng tagasubaybay
-tracer = Tracer(
-    exporter=AzureExporter(connection_string=connection_string),
-    sampler=AlwaysOnSampler()
-)
+# Configure once per process. Message send/receive trace-context propagation
+# and agent attributes on exceptions need explicit instrumentation.
+if connection_string:
+    configure_azure_monitor(connection_string=connection_string, logger_name=__name__)
+tracer = trace.get_tracer(__name__)
 
-# I-configure ang pag-log
+# Configure logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
 
-def trace_agent_call(agent_name, task_id, operation):
+def trace_agent_call(agent_name, task_id, operation_name, operation):
     """Trace agent operations"""
-    with tracer.span(name=f'{agent_name}.{operation}') as span:
-        span.add_attribute('agent', agent_name)
-        span.add_attribute('task_id', task_id)
-        span.add_attribute('operation', operation)
+    with tracer.start_as_current_span(f'agent.{agent_name}.{operation_name}', kind=SpanKind.CLIENT) as span:
+        span.set_attribute('agent', agent_name)
+        span.set_attribute('task_id', task_id)
+        span.set_attribute('operation', operation_name)
         
         try:
             result = operation()
-            span.add_attribute('status', 'success')
+            span.set_attribute('status', 'success')
+            logger.info('Agent operation completed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             return result
         except Exception as e:
-            span.add_attribute('status', 'error')
-            span.add_attribute('error', str(e))
+            span.set_attribute('status', 'error')
+            logger.exception('Agent operation failed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             raise
 ```
 
-### Mga Query para sa Application Insights
+### Mga Query sa Application Insights
 
-**Subaybayan ang mga workflow ng maramihang ahente:**
+**Subaybayan ang mga multi-agent workflow:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1463,7 +1437,7 @@ traces
 | order by timestamp asc
 ```
 
-**Paghahambing ng pagganap ng ahente:**
+**Paghahambing ng performance ng agent:**
 
 ```kusto
 // Compare agent execution times
@@ -1494,10 +1468,12 @@ exceptions
 
 ## Pagsusuri ng Gastos
 
-### Mga Gastos ng Sistemang Maramihang Ahente (Tinatayang Buwanang Gastos)
+### Mga Gastos ng Multi-Agent System (Tantyang Buwanang)
 
-| Komponent | Konfigurasyon | Gastos |
-|-----------|---------------|--------|
+Mga ilustratibong numero lang sa pagpaplano, hindi mga quote: ang kabuuan sa ibaba ay **$240-565/buwan**. Suriin ang kasalukuyang mga regional rates, aktibo/hindi ginagamit na oras ng replicas, halo ng input/output token, storage, at telemetry. Walang minimum na provisioned-throughput ang serverless pero naniningil pa rin para sa mga kahilingan at storage.
+
+| Component | Configuration | Cost |
+|-----------|--------------|------|
 | **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
 | **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB bawat isa) | $60-120 |
 | **Service Bus** | Standard tier, 10M messages | $10-20 |
@@ -1509,7 +1485,7 @@ exceptions
 
 ### Mga Estratehiya sa Pag-optimize ng Gastos
 
-1. **Gumamit ng serverless kung maaari:**
+1. **Gamitin ang serverless kung maaari:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1518,41 +1494,38 @@ exceptions
    }
    ```
 
-2. **I-scale ang mga ahente sa zero kapag idle:**
+2. **I-scale sa zero ang mga agent kapag idle:**
    ```bicep
    scale: {
-     minReplicas: 0  // Scale to zero when no messages
+     minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
      maxReplicas: 10
    }
    ```
 
-3. **Gumamit ng batching para sa Service Bus:**
+3. **Gamitin ang batching para sa Service Bus:**
    ```python
-   # Magpadala ng mga mensahe nang sabay-sabay (mas mura)
+   # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **I-cache ang madalas ginagamit na mga resulta:**
+4. **Mag-cache ng mga madalas gamitin na resulta:**
    ```python
-   # Gamitin ang Azure Cache para sa Redis
+   # Use Azure Cache for Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
 
 ---
 
-## Mga Pinakamahusay na Kasanayan
+## Pinakamahusay na Praktis
 
 ### ✅ GAWIN:
 
-1. **Gumamit ng mga idempotent na operasyon**
+1. **Gamitin ang mga idempotent na operasyon**
    ```python
-   # Maaaring iproseso ng ahente nang ligtas ang parehong mensahe nang maraming beses
+   # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
-       if state_manager.task_exists(task_id):
-           print(f"Task {task_id} already processed, skipping")
-           return
-       # Pinoproseso ang gawain...
+       raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
 2. **Magpatupad ng komprehensibong logging**
@@ -1560,85 +1533,87 @@ exceptions
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Gumamit ng correlation IDs**
+3. **Gamitin ang correlation IDs**
    ```python
-   # Ipasa ang task_id sa buong workflow
+   # Pass task_id through entire workflow
    message_data = {
-       'task_id': task_id,  # ID ng korelasyon
+       'task_id': task_id,  # Correlation ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **Itakda ang TTL ng mensahe (time-to-live)**
+4. **Itakda ang TTL (time-to-live) ng mensahe**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **I-monitor ang dead letter queues**
+5. **I-monitor ang mga dead letter queue**
    ```python
-   # Regular na pagsubaybay sa mga nabigong mensahe.
+   # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
-### ❌ HUWAG:
+### ❌ HUWAG GAWIN:
 
 1. **Huwag gumawa ng circular dependencies**
    ```python
-   # ❌ MASAMA: Ahente A → Ahente B → Ahente A (walang katapusang loop)
-   # ✅ MABUTI: Tukuyin nang malinaw ang directed acyclic graph (DAG)
+   # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
+   # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Huwag i-block ang mga thread ng ahente**
+2. **Huwag i-block ang mga thread ng agent**
    ```python
-   # ❌ MASAMA: Sinkronong paghihintay
+   # ❌ BAD: Synchronous wait
    while not task_complete:
        time.sleep(1)
    
-   # ✅ MAGANDA: Gumamit ng mga callback ng pila ng mensahe
+   # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **Huwag balewalain ang bahagyang pagkabigo**
+3. **Huwag balewalain ang mga partial failure**
    ```python
-   # ❌ MALI: Ihinto ang buong workflow kung mabigo ang isang ahente
-   # ✅ MABUTI: Ibalik ang mga bahagyang resulta na may mga tagapagpahiwatig ng error
+   # ❌ BAD: Fail entire workflow if one agent fails
+   # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Huwag gumamit ng walang katapusang pag-ulit**
+4. **Huwag gumamit ng walang katapusang retries**
    ```python
-   # ❌ MASAMA: ulitin magpakailanman
-   # ✅ MABUTI: max_retries = 3, pagkatapos ay ilagay sa dead letter
+   # ❌ BAD: retry forever
+   # ✅ GOOD: max_retries = 3, then dead letter
    ```
 
 ---
 
 ## Gabay sa Pag-troubleshoot
 
-### Problema: Mga mensahe na naiipit sa pila
+### Problema: Mga mensaheng naipit sa queue
 
 **Sintomas:**
-- Mga mensahe na naiipon sa pila
-- Mga agent hindi nagpo-proseso
-- Ang status ng task ay naiipit sa "pending"
+- Dumadami ang mga mensahe sa queue
+- Hindi nagpoproseso ang mga agent
+- Naka-pending ang status ng task
 
-**Pagsusuri:**
+**Diagnostiko:**
 ```bash
-# Suriin ang lalim ng pila
+# Check queue depth
 az servicebus queue show \
+  --resource-group "$RG_NAME" \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Suriin ang mga log ng agent gamit ang Azure CLI
+# Check agent logs using Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Mga Solusyon:**
 
-1. **Dagdagan ang bilang ng mga replica ng agent:**
+1. **Dagdagan ang mga replica ng agent:**
    ```bash
    az containerapp update \
+     --resource-group "$RG_NAME" \
      --name research-agent \
      --min-replicas 3 \
      --max-replicas 10
@@ -1647,6 +1622,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 2. **Suriin ang dead letter queue:**
    ```bash
    az servicebus queue show \
+     --resource-group "$RG_NAME" \
      --namespace-name mybus \
      --name research-tasks \
      --query "countDetails.deadLetterMessageCount"
@@ -1654,36 +1630,36 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problema: Timeout ng task/hindi natatapos
+### Problema: Pag-timeout/ngunit hindi natatapos ang task
 
 **Sintomas:**
-- Ang status ng task ay nananatili sa "in_progress"
-- Ang ilang agent ay nakukumpleto, ang iba ay hindi
-- Walang mensahe ng error
+- Nananatili ang status ng task sa "in_progress"
+- May ilang agent na nakukumpleto, ang iba hindi
+- Walang error messages
 
-**Pagsusuri:**
+**Diagnostiko:**
 ```bash
-# Suriin ang estado ng gawain
+# Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# Suriin ang Application Insights
-# Patakbuhin ang query: traces | where customDimensions.task_id == "..."
+# Check Application Insights
+# Run query: traces | where customDimensions.task_id == "..."
 ```
 
 **Mga Solusyon:**
 
-1. **Ipapatupad ang timeout sa aggregator (Ehersisyo 1)**
+1. **Magpatupad ng timeout sa aggregator (Exercise 1)**
 
 2. **Suriin ang mga pagkabigo ng agent gamit ang Azure Monitor:**
    ```bash
-   # Tingnan ang mga log gamit ang azd monitor
+   # View logs via azd monitor
    azd monitor --logs
    
-   # O gumamit ng Azure CLI para suriin ang mga log ng partikular na container app
+   # Or use Azure CLI to check specific container app logs
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Tiyakin na tumatakbo ang lahat ng agent:**
+3. **Siguraduhin na tumatakbo ang lahat ng agent:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1698,44 +1674,44 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Mga Pattern ng Disenyo ng Multi-Agent](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
 ### Mga Susunod na Hakbang sa Kursong Ito
-- ← Nakaraan: [Pagpaplano ng Kapasidad](capacity-planning.md)
-- → Susunod: [Pagpili ng SKU](sku-selection.md)
-- 🏠 [Tahanan ng Kurso](../../README.md)
+- ← Nakaraan: [Capacity Planning](capacity-planning.md)
+- → Susunod: [SKU Selection](sku-selection.md)
+- 🏠 [Course Home](../../README.md)
 
 ### Mga Kaugnay na Halimbawa
-- [Halimbawa ng Microservices](../../../../examples/microservices) - Mga pattern ng komunikasyon ng serbisyo
-- [Halimbawa ng Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Integrasyon ng AI
+- [Microservices Example](../../../../examples/microservices) - Mga pattern ng komunikasyon ng serbisyo
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI integration
 
 ---
 
 ## Buod
 
-**Ang iyong natutunan:**
-- ✅ Limang pattern ng koordinasyon (sunud-sunod, sabay-sabay, hirarkikal, hinihimok ng kaganapan, pagkakasundo)
-- ✅ Arkitektura ng multi-agent sa Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Pamamahala ng estado sa mga pinamamahaging agent
-- ✅ Pag-handle ng timeout, mga pag-ulit, at mga circuit breaker
-- ✅ Pagmo-monitor at pag-debug ng mga distributed na sistema
-- ✅ Mga estratehiya para sa pag-optimize ng gastos
+**Natutunan mo:**
+- ✅ Limang coordination pattern (sequential, parallel, hierarchical, event-driven, consensus)
+- ✅ Multi-agent architecture sa Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Pamamahala ng estado sa mga distributed na agent
+- ✅ Pag-handle ng timeout, retries, at circuit breakers
+- ✅ Pagmo-monitor at pag-debug ng mga distributed system
+- ✅ Mga estratehiya sa pag-optimize ng gastos
 
-**Mga Pangunahing Punto:**
-1. **Piliin ang tamang pattern** - Sunud-sunod para sa mga nakaayos na workflow, sabay-sabay para sa bilis, hinihimok ng kaganapan para sa kakayahang umangkop
-2. **Pamahalaan nang maingat ang estado** - Gamitin ang Cosmos DB o katulad para sa pinagbabahaging estado
-3. **Hawakan ang mga pagkabigo nang maayos** - Timeouts, mga pag-ulit, mga circuit breaker, dead letter queues
+**Mga Pangunahing Aral:**
+1. **Pumili ng tamang pattern** - Sequential para sa mga nakaayos na workflow, parallel para sa bilis, event-driven para sa kakayahang umangkop
+2. **Maingat na pamahalaan ang estado** - Gamitin ang Cosmos DB o katulad para sa shared state
+3. **Harapin ang mga pagkabigo nang maayos** - Timeout, retries, circuit breakers, dead letter queue
 4. **I-monitor ang lahat** - Mahalaga ang distributed tracing para sa pag-debug
-5. **I-optimize ang gastos** - I-scale hanggang zero, gumamit ng serverless, magpatupad ng caching
+5. **I-optimize ang gastos** - I-scale sa zero, gamitin ang serverless, magpatupad ng caching
 
 **Mga Susunod na Hakbang:**
-1. Kumpletuhin ang mga praktikal na ehersisyo
-2. Bumuo ng multi-agent na sistema para sa iyong kaso ng paggamit
-3. Pag-aralan ang [Pagpili ng SKU](sku-selection.md) para i-optimize ang pagganap at gastos
+1. Kumpletuhin ang mga praktikal na pagsasanay
+2. Bumuo ng isang multi-agent system para sa iyong kaso ng paggamit
+3. Pag-aralan ang [SKU Selection](sku-selection.md) para i-optimize ang performance at gastos
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Ang dokumentong ito ay isinalin gamit ang serbisyong pagsasalin ng AI na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman pinagsisikapan naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa kanyang orihinal na wika ang dapat ituring na pinagmumulan ng awtoridad. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

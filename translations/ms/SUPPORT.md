@@ -1,27 +1,26 @@
-# TODO: Pemilik repositori ini belum mengedit fail ini
-
-**PEMILIK REPO**: Adakah anda mahukan sokongan Perkhidmatan Pelanggan & Sokongan (CSS) untuk produk/projek ini?
-
-- **Tiada sokongan CSS:** Lengkapkan templat ini dengan maklumat tentang cara melaporkan isu dan mendapatkan bantuan.
-- **Ada sokongan CSS:** Lengkapkan borang di [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS akan bekerjasama/membantu anda menentukan langkah seterusnya.
-- **Tidak pasti?** Lengkapkan borang seolah-olah jawapannya adalah "Ya". CSS akan membantu anda membuat keputusan.
-
-*Kemudian, keluarkan tajuk pertama ini daripada fail SUPPORT.MD sebelum menerbitkan repositori anda.*
-
 # Sokongan
 
-## Cara melaporkan isu dan mendapatkan bantuan  
+## Isu dan soalan kursus
 
-Projek ini menggunakan GitHub Issues untuk menjejaki pepijat dan permintaan ciri. Sila cari isu yang sedia ada sebelum melaporkan isu baru untuk mengelakkan pendua. Untuk isu baru, laporkan pepijat atau permintaan ciri anda sebagai Isu baru.
+Cari [isu kursus](https://github.com/microsoft/AZD-for-beginners/issues) sebelum melaporkan masalah. Sertakan pelajaran Bahasa Inggeris yang terjejas, arahan yang anda jalankan, versi AZD/sambungan anda, dan mesej ralat. Buang kelayakan, token, butiran langganan, dan data peribadi daripada log dan tangkapan skrin.
 
-Untuk bantuan dan soalan tentang penggunaan projek ini, sila **PENYELENGGARA REPO: MASUKKAN ARAHAN DI SINI 
-TENTANG CARA BERHUBUNG DENGAN PEMILIK REPO ATAU KOMUNITI UNTUK BANTUAN. BOLEH MENJADI TAG STACK OVERFLOW ATAU SALURAN LAIN. DI MANA ANDA AKAN MEMBANTU ORANG?**.
+Untuk soalan pembelajaran umum, gunakan [komuniti pembangun Azure](https://discord.gg/microsoft-azure). Respons komuniti bukan perkhidmatan sokongan yang dijamin.
 
-## Polisi Sokongan Microsoft  
+## Isu alat dan perkhidmatan
 
-Sokongan untuk **PROJEK atau PRODUK** ini adalah terhad kepada sumber yang disenaraikan di atas.
+Laporkan pepijat CLI AZD yang boleh dihasilkan semula dalam [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). Untuk insiden perkhidmatan Azure atau bantuan khusus langganan, gunakan pilihan sokongan yang tersedia dalam [portal Azure](https://portal.azure.com/).
+
+## Laporan keselamatan
+
+Ikut [SECURITY.md](SECURITY.md) untuk melaporkan kelemahan secara peribadi. Jangan siarkan rahsia atau butiran eksploitasi dalam isu kursus awam.
+
+## Polisi sokongan Microsoft
+
+Sokongan untuk projek pendidikan ini terhad kepada sumber yang disenaraikan di atas. Contoh kursus tidak termasuk komitmen sokongan pengeluaran.
 
 ---
 
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

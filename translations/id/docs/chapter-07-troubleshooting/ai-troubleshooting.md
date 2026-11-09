@@ -1,24 +1,26 @@
 # Panduan Pemecahan Masalah Khusus AI
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD For Beginners](../../README.md)
-- **📖 Bab Saat Ini**: Chapter 7 - Troubleshooting & Debugging
-- **⬅️ Sebelumnya**: [Debugging Guide](debugging.md)
-- **➡️ Bab Berikutnya**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
-- **🤖 Terkait**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 7 - Pemecahan Masalah & Debugging
+- **⬅️ Sebelumnya**: [Panduan Debugging](debugging.md)
+- **➡️ Bab Selanjutnya**: [Bab 8: Pola Produksi & Enterprise](../chapter-08-production/production-ai-practices.md)
+- **🤖 Terkait**: [Bab 2: Pengembangan AI-Pertama](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Panduan pemecahan masalah komprehensif ini membahas masalah umum saat menerapkan solusi AI dengan AZD, memberikan solusi dan teknik debugging yang spesifik untuk layanan Azure AI.
+Panduan pemecahan masalah yang komprehensif ini membahas masalah umum saat menerapkan solusi AI dengan AZD, menyediakan solusi dan teknik debugging khusus untuk layanan Azure AI.
+
+> **Ruang Lingkup:** Perintah menggunakan contoh nama sumber daya; gantilah dan pilih langganan yang benar. Blok Bicep adalah potongan untuk digabungkan ke dalam template yang ada, bukan deployment mandiri. Potongan Python memerlukan SDK yang disebutkan dan konfigurasi aplikasi. Tidak ada deployment Azure live yang dijalankan untuk tinjauan ini.
 
 ## Daftar Isi
 
-- [Masalah Layanan Microsoft Foundry Models](#azure-openai-service-issues)
-- [Masalah Azure AI Search](#masalah-azure-ai-search)
-- [Masalah Penerapan Container Apps](#masalah-penerapan-container-apps)
-- [Kesalahan Otentikasi dan Izin](#kesalahan-otentikasi-dan-izin)
-- [Kegagalan Penerapan Model](#kegagalan-penerapan-model)
-- [Masalah Kinerja dan Penskalaan](#masalah-kinerja-dan-penskalaan)
-- [Manajemen Biaya dan Kuota](#manajemen-biaya-dan-kuota)
-- [Alat dan Teknik Debugging](#alat-dan-teknik-debugging)
+- [Masalah Layanan Microsoft Foundry Models](#microsoft-foundry-models-service-issues)
+- [Masalah Azure AI Search](#azure-ai-search-problems)
+- [Masalah Deployment Container Apps](#container-apps-deployment-issues)
+- [Kesalahan Otentikasi dan Izin](#authentication-and-permission-errors)
+- [Kegagalan Deployment Model](#model-deployment-failures)
+- [Masalah Performa dan Skalabilitas](#performance-and-scaling-issues)
+- [Manajemen Biaya dan Kuota](#cost-and-quota-management)
+- [Alat dan Teknik Debugging](#debugging-tools-and-techniques)
 
 ## Masalah Layanan Microsoft Foundry Models
 
@@ -31,34 +33,29 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Penyebab:**
 - Microsoft Foundry Models tidak tersedia di wilayah yang dipilih
-- Kuota habis di wilayah yang dipilih
+- Kuota habis di wilayah pilihan
 - Keterbatasan kapasitas regional
 
 **Solusi:**
 
 1. **Periksa Ketersediaan Wilayah:**
 ```bash
-# Daftar wilayah yang tersedia untuk OpenAI
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --query "[].locations[]" \
-  --output table
+# Inspect model/deployment-type offerings in a candidate region
+az cognitiveservices model list --location eastus2 --output json
+# Availability in the catalog does not guarantee quota or physical capacity.
 ```
 
 2. **Perbarui Konfigurasi AZD:**
-```yaml
-# azure.yaml - Force specific region
-infra:
-  provider: bicep
-  path: infra
-  module: main
-parameters:
-  location: "eastus2"  # Known working region
+```bash
+# For a new environment: choose a supported region with available quota
+azd env set AZURE_LOCATION eastus2
+# Templates with a separate model-location parameter must wire that value
+# through infra/main.parameters.json as documented by the template.
 ```
 
 3. **Gunakan Wilayah Alternatif:**
 ```bicep
-// infra/main.bicep - Multi-region fallback
+// infra/main.bicep - Explicit location selection, NOT automatic fallback
 @allowed([
   'eastus2'
   'francecentral'
@@ -68,7 +65,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Masalah: Kuota Penerapan Model Terlampaui
+### Masalah: Kuota Deployment Model Terlampaui
 
 **Gejala:**
 ```
@@ -79,36 +76,30 @@ Error: Deployment failed due to insufficient quota
 
 1. **Periksa Kuota Saat Ini:**
 ```bash
-# Periksa penggunaan kuota
+# Check quota usage
 az cognitiveservices usage list \
-  --name YOUR_OPENAI_RESOURCE \
-  --resource-group YOUR_RG
+  --location eastus2 --output table
 ```
 
-2. **Minta Peningkatan Kuota:**
-```bash
-# Ajukan permintaan peningkatan kuota
-az support tickets create \
-  --ticket-name "OpenAI Quota Increase" \
-  --description "Need increased quota for production deployment" \
-  --severity "minimal" \
-  --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
-```
+2. **Minta Penambahan Kuota:**
+Gunakan alur manajemen kuota portal Foundry untuk langganan, wilayah, model, dan tipe deployment yang terdampak. Lihat [panduan kuota resmi](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Permintaan kuota VM tidak menambah kuota model.
 
 3. **Optimalkan Kapasitas Model:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi // Existing account resource declared in your template
+  name: 'chat-model'
   properties: {
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
-    name: 'Standard'
-    capacity: 1  // Start with minimal capacity
+    name: 'GlobalStandard' // Verify this model/version/type in the target region
+    capacity: 1  // Capacity units are model/deployment-type specific
   }
 }
 ```
@@ -124,21 +115,16 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **Gunakan Versi API yang Didukung:**
 ```python
-# Gunakan versi terbaru yang didukung
-AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
+# Stable dated Azure OpenAI data-plane API, where supported by your feature
+AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
 2. **Periksa Kompatibilitas Versi API:**
-```bash
-# Daftar versi API yang didukung
-az rest --method get \
-  --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
-  --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
-```
+Periksa [referensi siklus hidup API Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). Versi API penyedia sumber daya ARM **tidak** mencantumkan versi API inference/data-plane. Klien v1 baru menggunakan `/openai/v1/` tanpa tanggal `api-version`; jangan campur dua konfigurasi klien tersebut.
 
 ## Masalah Azure AI Search
 
-### Masalah: Tingkat Harga Layanan Pencarian Tidak Cukup
+### Masalah: Tingkat Harga Layanan Search Tidak Memadai
 
 **Gejala:**
 ```
@@ -147,11 +133,14 @@ Error: Semantic search requires Basic tier or higher
 
 **Solusi:**
 
-1. **Naikkan Tingkat Harga:**
+1. **Gunakan Tingkat Harga yang Didukung:**
+
+Semantic ranker memerlukan Basic atau lebih tinggi. Berpindah dari Free/Basic ke tingkat lain mungkin memerlukan pembuatan layanan pencarian baru dan membangun ulang indeks; mengedit SKU tidak menjamin peningkatan di tempat.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
   name: searchServiceName
+  location: location
   location: location
   sku: {
     name: 'basic'  // Minimum for semantic search
@@ -165,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Nonaktifkan Pencarian Semantik (Pengembangan):**
+2. **Nonaktifkan Semantic Search (Pengembangan):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -179,7 +168,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Masalah: Gagal Pembuatan Indeks
+### Masalah: Gagal Membuat Indeks
 
 **Gejala:**
 ```
@@ -188,9 +177,9 @@ Error: Cannot create index, insufficient permissions
 
 **Solusi:**
 
-1. **Verifikasi Kunci Layanan Pencarian:**
+1. **Verifikasi Kunci Layanan Search:**
 ```bash
-# Dapatkan kunci admin layanan pencarian
+# Get search service admin key
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -198,12 +187,13 @@ az search admin-key show \
 
 2. **Periksa Skema Indeks:**
 ```python
-# Validasi skema indeks
+# Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
 def validate_index_schema(index_definition):
     """Validate index schema before creation."""
+    # These are this application's requirements, not universal Search fields.
     required_fields = ['id', 'content']
     field_names = [field.name for field in index_definition.fields]
     
@@ -214,21 +204,22 @@ def validate_index_schema(index_definition):
 
 3. **Gunakan Managed Identity:**
 ```bicep
-// Grant search permissions to managed identity
+// Grant index-definition management permissions to the managed identity.
+// Search Index Data Contributor manages documents, not index definitions.
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: searchService
-  name: guid(searchService.id, containerApp.id, searchIndexDataContributorRole)
+  name: guid(searchService.id, containerApp.id, 'Search Service Contributor')
   properties: {
     principalId: containerApp.identity.principalId
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8ebe5a00-799e-43f5-93ac-243d3dce84a7')
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7ca78c08-252a-4471-8644-bb5ff32d4ba0')
     principalType: 'ServicePrincipal'
   }
 }
 ```
 
-## Masalah Penerapan Container Apps
+## Masalah Deployment Container Apps
 
-### Masalah: Kegagalan Pembuatan Kontainer
+### Masalah: Gagal Build Container
 
 **Gejala:**
 ```
@@ -261,19 +252,20 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 2. **Validasi Dependensi:**
 ```txt
-# requirements.txt - Pin versions for stability
-fastapi==0.104.1
-uvicorn==0.24.0
-openai==1.3.7
-azure-identity==1.14.1
-azure-keyvault-secrets==4.7.0
-azure-search-documents==11.4.0
-azure-cosmos==4.5.1
+# Dependency names for these snippets. Resolve supported versions in your
+# project's environment, test together, then commit a lock/pinned requirements file.
+fastapi
+uvicorn
+openai
+azure-identity
+azure-keyvault-secrets
+azure-search-documents
+azure-cosmos
 ```
 
-3. **Tambahkan Health Check:**
+3. **Tambahkan Pemeriksaan Kesehatan:**
 ```python
-# main.py - Tambahkan endpoint pemeriksaan kesehatan
+# main.py - Add health check endpoint
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -283,7 +275,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Masalah: Kegagalan Startup Container App
+### Masalah: Gagal Startup Container App
 
 **Gejala:**
 ```
@@ -307,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
           }
           probes: [
             {
-              type: 'startup'
+              type: 'Startup'
               httpGet: {
                 path: '/health'
                 port: 8000
@@ -325,11 +317,14 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimalkan Pemuatan Model:**
+2. **Optimalkan Pemanggilan Model:**
 ```python
-# Memuat model secara tertunda untuk mengurangi waktu startup
+# Lazy load models to reduce startup time
+# Illustrative skeleton: implement _initialize_client and synchronize concurrent
+# initialization before using this pattern in an application.
 import asyncio
 from contextlib import asynccontextmanager
+from fastapi import FastAPI
 
 class ModelManager:
     def __init__(self):
@@ -341,15 +336,15 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Inisialisasi klien AI di sini
+        # Initialize AI client here
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Inisialisasi
+    # Startup
     app.state.model_manager = ModelManager()
     yield
-    # Penutupan
+    # Shutdown
     pass
 
 app = FastAPI(lifespan=lifespan)
@@ -357,7 +352,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Kesalahan Otentikasi dan Izin
 
-### Masalah: Izin Managed Identity Ditolak
+### Masalah: Managed Identity Ditolak Izin
 
 **Gejala:**
 ```
@@ -368,7 +363,7 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 1. **Verifikasi Penugasan Peran:**
 ```bash
-# Periksa penugasan peran saat ini
+# Check current role assignments
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -393,18 +388,22 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **Uji Otentikasi:**
 ```python
-# Uji autentikasi identitas terkelola
+# Test managed identity authentication
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
-async def test_authentication():
+def test_authentication():
     try:
-        credential = DefaultAzureCredential()
-        token = await credential.get_token("https://cognitiveservices.azure.com/.default")
-        print(f"Authentication successful: {token.token[:10]}...")
+        with DefaultAzureCredential() as credential:
+            token = credential.get_token("https://cognitiveservices.azure.com/.default")
+            print(f"Token acquired; expires at Unix time {token.expires_on}")
     except ClientAuthenticationError as e:
         print(f"Authentication failed: {e}")
+
+test_authentication()
 ```
+
+Perolehan token membuktikan otentikasi, bukan izin untuk memanggil model. Uji operasi yang dimaksud secara terpisah. Secara lokal, `DefaultAzureCredential` mungkin menggunakan kredensial pengembang; di Azure, verifikasi managed identity yang dipilih sesuai.
 
 ### Masalah: Akses Key Vault Ditolak
 
@@ -416,6 +415,8 @@ Error: The user, group or application does not have secrets get permission
 **Solusi:**
 
 1. **Berikan Izin Key Vault:**
+
+Gunakan fragmen kebijakan akses berikut hanya untuk vault dengan `enableRbacAuthorization: false`. Untuk vault dengan RBAC diaktifkan, gunakan opsi 2; menambahkan kebijakan akses tidak memberikan akses data-plane dalam mode RBAC.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Gunakan RBAC daripada Kebijakan Akses:**
+2. **Gunakan RBAC Bukannya Kebijakan Akses:**
+
+Vault harus mempunyai `enableRbacAuthorization: true`; mengubah model izin memerlukan migrasi yang direncanakan dari akses yang ada.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -447,7 +450,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Kegagalan Penerapan Model
+## Kegagalan Deployment Model
 
 ### Masalah: Versi Model Tidak Tersedia
 
@@ -460,71 +463,55 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **Periksa Model yang Tersedia:**
 ```bash
-# Daftar model yang tersedia
+# List available models
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
-  --query "[].{name:model.name, version:model.version}" \
+  --query "[].{name:name, version:version}" \
   --output table
 ```
 
-2. **Gunakan Model Cadangan:**
+2. **Pilih Model yang Tersedia Secara Eksplisit:**
 ```bicep
-// Model deployment with fallback
+// Example model selection; verify version and deployment type in the catalog.
 @description('Primary model configuration')
 param primaryModel object = {
   name: 'gpt-4.1-mini'
-  version: '2024-07-18'
+  version: '2025-04-14'
 }
 
-@description('Fallback model configuration')
-param fallbackModel object = {
-  name: 'gpt-4.1'
-  version: '2024-08-06'
-}
-
-// Try primary model first, fallback if unavailable
+// Bicep does not catch provisioning failures and retry a fallback model.
 resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
   name: 'chat-model'
   properties: {
-    model: primaryModel
+    model: {
+      format: 'OpenAI'
+      name: primaryModel.name
+      version: primaryModel.version
+    }
   }
   sku: {
-    name: 'Standard'
+    name: 'GlobalStandard'
     capacity: 10
   }
 }
 ```
 
-3. **Validasi Model Sebelum Penerapan:**
-```python
-# Validasi model sebelum penerapan
-import httpx
-
-async def validate_model_availability(model_name: str, version: str) -> bool:
-    """Check if model is available before deployment."""
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/models",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
-            )
-            models = response.json()
-            return any(
-                model["id"] == f"{model_name}-{version}"
-                for model in models.get("data", [])
-            )
-    except Exception:
-        return False
+3. **Validasi Model Sebelum Deployment:**
+```bash
+# Management-plane catalog for the actual account
+az cognitiveservices account list-models \
+  --name YOUR_OPENAI_RESOURCE --resource-group YOUR_RG --output json
+# Inspect model/version and supported SKUs; check regional quota separately.
 ```
 
-## Masalah Kinerja dan Penskalaan
+## Masalah Performa dan Skalabilitas
 
-### Masalah: Respons Latensi Tinggi
+### Masalah: Respon Latensi Tinggi
 
 **Gejala:**
-- Waktu respons > 30 detik
+- Waktu respon > 30 detik
 - Kesalahan timeout
 - Pengalaman pengguna buruk
 
@@ -532,7 +519,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 1. **Terapkan Timeout Permintaan:**
 ```python
-# Konfigurasikan timeout yang sesuai
+# Configure proper timeouts
 import httpx
 
 client = httpx.AsyncClient(
@@ -545,9 +532,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Tambahkan Caching Respons:**
+2. **Tambahkan Caching Respon:**
 ```python
-# Cache Redis untuk respons
+# Redis cache for responses
 import redis.asyncio as redis
 import json
 
@@ -599,7 +586,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Masalah: Kesalahan Kehabisan Memori
+### Masalah: Kesalahan Memori Habis
 
 **Gejala:**
 ```
@@ -629,7 +616,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimalkan Penggunaan Memori:**
 ```python
-# Penanganan model yang hemat memori
+# Memory-efficient model handling
 import gc
 import psutil
 
@@ -637,34 +624,37 @@ class MemoryOptimizedAI:
     def __init__(self):
         self.max_memory_percent = 80
         
+    async def _process_ai_request(self, request):
+        raise NotImplementedError("Supply the application's AI operation")
+
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Periksa penggunaan memori sebelum memproses
+        # Check memory usage before processing
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Paksa pengumpulan sampah
+            gc.collect()  # Force garbage collection
             
         result = await self._process_ai_request(request)
         
-        # Bersihkan setelah pemrosesan
+        # Clean up after processing
         gc.collect()
         return result
 ```
 
 ## Manajemen Biaya dan Kuota
 
-### Masalah: Biaya Tinggi yang Tidak Terduga
+### Masalah: Biaya Tinggi Tak Terduga
 
 **Gejala:**
 - Tagihan Azure lebih tinggi dari perkiraan
-- Penggunaan token melebihi perkiraan
-- Peringatan anggaran terpicu
+- Penggunaan token melebihi estimasi
+- Peringatan anggaran tercapai
 
 **Solusi:**
 
-1. **Terapkan Pengendalian Biaya:**
+1. **Terapkan Kontrol Biaya:**
 ```python
-# Pelacakan penggunaan token
+# Token usage tracking
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -681,23 +671,26 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **Siapkan Peringatan Biaya:**
+Counter dalam memori ini hanya ilustrasi, bukan kontrol pengeluaran bulanan: akan reset saat restart, tidak dibagi antar replika, dan hanya memeriksa penggunaan setelah panggilan. Batas nyata harus mengandalkan akuntansi tahan lama, reservasi aman konkuren sebelum permintaan, dan kebijakan reset bulanan. Metrik memori container juga harus memperhitungkan batas cgroup; `psutil.virtual_memory()` bukan pengukuran batas container yang andal, dan garbage collection tidak menegakkan batas memori.
+
+2. **Atur Peringatan Biaya:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate // Parameter: first day of a supported budget period
+      endDate: budgetEndDate     // Parameter: a future date
     }
     timeGrain: 'Monthly'
-    amount: 500  // $500 monthly limit
+    amount: 500  // Notification threshold in the subscription's billing currency
     category: 'Cost'
     notifications: {
       Actual_GreaterThan_80_Percent: {
         enabled: true
         operator: 'GreaterThan'
         threshold: 80
+        thresholdType: 'Actual'
         contactEmails: ['admin@company.com']
         contactRoles: ['Owner']
       }
@@ -706,9 +699,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
+Deklarasikan `budgetStartDate` dan `budgetEndDate` di template Anda. Anggaran memberitahu; tidak menghentikan sumber daya atau menerapkan batas pengeluaran keras.
+
 3. **Optimalkan Pemilihan Model:**
 ```python
-# Pemilihan model yang memperhitungkan biaya
+# Cost-aware model selection
 MODEL_COST_TIERS = {
   'gpt-4.1-mini': 'low',
   'gpt-4.1': 'high'
@@ -727,50 +722,57 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 ### Perintah Debugging AZD
 
 ```bash
-# Aktifkan pencatatan terperinci
+# Enable verbose logging
 azd up --debug
 
-# Periksa status penyebaran
+# Check deployment status
 azd show
 
-# Lihat log aplikasi (membuka dasbor pemantauan)
+# View application logs (opens monitoring dashboard)
 azd monitor --logs
 
-# Lihat metrik langsung
+# View live metrics
 azd monitor --live
 
-# Periksa variabel lingkungan
+# Check environment variables
 azd env get-values
 ```
 
-### Perintah Ekstensi AZD AI untuk Diagnostik
+### Perintah Ekstensi AI AZD untuk Diagnostik
 
 Jika Anda menerapkan agen menggunakan `azd ai agent init`, alat tambahan ini tersedia:
 
 ```bash
-# Pastikan ekstensi agen terpasang
+# Ensure the agents extension is installed
 azd extension install azure.ai.agents
 
-# Inisialisasi ulang atau perbarui agen dari manifes
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Check project storage permissions and agent configuration
+azd ai agent doctor
 
-# Gunakan server MCP agar alat AI dapat menanyakan status proyek
+# Inspect the deployed endpoint
+azd ai agent endpoint show
+
+# Use the MCP server to let AI tools query project state
 azd mcp start
 
-# Hasilkan berkas infrastruktur untuk ditinjau dan diaudit
+# Generate infrastructure files for review and audit
 azd infra generate
 ```
 
-> **Tips:** Gunakan `azd infra generate` untuk menulis IaC ke disk sehingga Anda dapat memeriksa persis sumber daya apa yang disediakan. Ini sangat berharga saat debugging masalah konfigurasi sumber daya. Lihat [Referensi AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk detail lengkap.
+> **Tip:** Gunakan `azd infra generate` untuk menulis IaC ke disk sehingga Anda dapat memeriksa secara tepat sumber daya apa yang diprovisikan. Ini sangat berharga saat memecahkan masalah konfigurasi sumber daya. Lihat [referensi AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk detail lengkap.
+
+**Diagnostik sadar rilis (2026-11-04):** Agen `1.0.0-beta.23` memerlukan `azd >= 1.37.0`; tingkatkan core CLI sebelum ekstensi yang tidak kompatibel. Rilis agen ini mempertahankan peringatan RBAC pengembang dalam output deployment akhir dan mengidentifikasi versi yang terlibat dalam kegagalan aktivasi/timeout. Timeout tidak membuktikan kegagalan deployment: periksa versi yang dicoba sebelum mencoba lagi. Ini juga memperbaiki pemanggilan A2A 0.3 yang menampilkan pesan siklus hidup bukannya jawaban selesai. Core `azd 1.37.1` memperbaiki propagasi pembatalan antar ekstensi; `1.37.2` meningkatkan konfirmasi penyediaan kritis dan penanganan pembatalan.
+
+Jika perintah evaluasi tutorial lama hanya mencetak panduan migrasi, instal `azure.ai.evaluations` (`1.0.0-beta.2` memerlukan `azd >= 1.33.0`) dan gunakan `azd ai eval init`, `generate`, dan `run start`. Optimasi `--config` tidak lagi menerima file evaluasi warisan. Lihat [migrasi evaluasi](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) dan [migrasi optimasi](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
 ### Debugging Aplikasi
 
-1. **Pencatatan Terstruktur:**
+1. **Logging Terstruktur:**
 ```python
 import logging
 import json
 
-# Konfigurasikan pencatatan terstruktur untuk aplikasi AI
+# Configure structured logging for AI applications
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -791,34 +793,38 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
 
 2. **Endpoint Pemeriksaan Kesehatan:**
 ```python
+# Integration fragment: add to an existing FastAPI app, protect this diagnostic
+# endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
+# authorization, not Azure OpenAI inference.
+import os
+from azure.identity.aio import DefaultAzureCredential
+from azure.search.documents.indexes.aio import SearchIndexClient
+from fastapi import Response
+
 @app.get("/debug/health")
-async def detailed_health_check():
+async def detailed_health_check(response: Response):
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Periksa konektivitas OpenAI
+    # Check Search service
     try:
-        client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
-        await client.models.list()
-        checks['openai'] = {'status': 'healthy'}
-    except Exception as e:
-        checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
-    
-    # Periksa layanan pencarian
-    try:
-        search_client = SearchIndexClient(
-            endpoint=AZURE_SEARCH_ENDPOINT,
-            credential=DefaultAzureCredential()
-        )
-        indexes = await search_client.list_index_names()
-        checks['search'] = {'status': 'healthy', 'indexes': list(indexes)}
-    except Exception as e:
-        checks['search'] = {'status': 'unhealthy', 'error': str(e)}
+        async with DefaultAzureCredential() as credential:
+            async with SearchIndexClient(
+                endpoint=os.environ['AZURE_SEARCH_ENDPOINT'],
+                credential=credential
+            ) as search_client:
+                # AsyncItemPaged is iterated asynchronously, not awaited as a list.
+                async for _ in search_client.list_index_names():
+                    break
+        checks['search'] = {'status': 'healthy'}
+    except Exception:
+        response.status_code = 503
+        checks['search'] = {'status': 'unhealthy'}
     
     return checks
 ```
 
-3. **Pemantauan Kinerja:**
+3. **Pemantauan Performa:**
 ```python
 import time
 from functools import wraps
@@ -849,43 +855,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Kode Error Umum dan Solusi
+## Kode Kesalahan Umum dan Solusinya
 
-| Kode Error | Deskripsi | Solusi |
+| Kode Kesalahan | Deskripsi | Solusi |
 |------------|-------------|----------|
-| 401 | Tidak Berotorisasi | Periksa kunci API dan konfigurasi managed identity |
+| 401 | Tidak Sah | Periksa kunci API dan konfigurasi managed identity |
 | 403 | Terlarang | Verifikasi penugasan peran RBAC |
-| 429 | Terbatas | Terapkan logika pengulangan dengan penundaan eksponensial |
-| 500 | Kesalahan Server Internal | Periksa status penerapan model dan log |
+| 429 | Terbatas Tingkat | Terapkan logika coba ulang dengan backoff eksponensial |
+| 500 | Kesalahan Server Internal | Periksa status deployment model dan log |
 | 503 | Layanan Tidak Tersedia | Verifikasi kesehatan layanan dan ketersediaan regional |
 
-## Langkah Selanjutnya
+## Langkah Berikutnya
 
-1. **Tinjau [Panduan Penerapan Model AI](../chapter-02-ai-development/ai-model-deployment.md)** untuk praktik terbaik penerapan
-2. **Selesaikan [Praktik AI Produksi](../chapter-08-production/production-ai-practices.md)** untuk solusi siap untuk perusahaan
-3. **Bergabung dengan [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** untuk dukungan komunitas
-4. **Kirim isu** ke [repositori GitHub AZD](https://github.com/Azure/azure-dev) untuk masalah spesifik AZD
+1. **Tinjau [Panduan Deployment Model AI](../chapter-02-ai-development/ai-model-deployment.md)** untuk praktik terbaik deployment
+2. **Selesaikan [Praktik AI Produksi](../chapter-08-production/production-ai-practices.md)** untuk solusi siap enterprise
+3. **Bergabunglah dengan [Discord Microsoft Foundry](https://aka.ms/foundry/discord)** untuk dukungan komunitas
+4. **Kirim isu** ke [repositori AZD GitHub](https://github.com/Azure/azure-dev) untuk masalah spesifik AZD
 
 ## Sumber Daya
 
-- [Pemecahan Masalah Layanan Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Pemecahan Masalah Kuota dan Throttling Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
 - [Pemecahan Masalah Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Pemecahan Masalah Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Skill Agen Diagnostik Azure**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Instal skill pemecahan masalah Azure di editor Anda: `npx skills add microsoft/github-copilot-for-azure`
+- [**Keterampilan Agen Diagnostik Azure**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Pasang keterampilan pemecahan masalah Azure di editor Anda: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD For Beginners](../../README.md)
-- **📖 Bab Saat Ini**: Chapter 7 - Troubleshooting & Debugging
-- **⬅️ Sebelumnya**: [Debugging Guide](debugging.md)
-- **➡️ Bab Berikutnya**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
-- **🤖 Terkait**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 7 - Pemecahan Masalah & Debugging
+- **⬅️ Sebelumnya**: [Panduan Debugging](debugging.md)
+- **➡️ Bab Selanjutnya**: [Bab 8: Pola Produksi & Enterprise](../chapter-08-production/production-ai-practices.md)
+- **🤖 Terkait**: [Bab 2: Pengembangan AI-Pertama](../chapter-02-ai-development/microsoft-foundry-integration.md)
 - **📖 Referensi**: [Pemecahan Masalah Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang salah yang timbul dari penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

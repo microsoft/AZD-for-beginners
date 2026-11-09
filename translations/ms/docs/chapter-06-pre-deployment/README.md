@@ -1,23 +1,23 @@
-# Bab 6: Perancangan & Pengesahan Pra-Penerapan
+# Bab 6: Perancangan & Pengesahan Pra-Penyebaran
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1 jam | **⭐ Kerumitan**: Pertengahan
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 2-4 jam bacaan; masa tambahan untuk makmal yang disesuaikan | **⭐ Kerumitan**: Pertengahan–Lanjutan
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi langkah-langkah penting perancangan dan pengesahan sebelum menerapkan aplikasi anda. Pelajari cara mengelakkan kesilapan mahal dengan perancangan kapasiti yang betul, pemilihan SKU, dan pemeriksaan pra-penerbangan.
+Bab ini merangkumi langkah penting perancangan dan pengesahan sebelum menyebarkan aplikasi anda. Pelajari cara mengelakkan kesilapan mahal dengan perancangan kapasiti yang betul, pemilihan SKU, dan pemeriksaan prapenerbangan.
 
-> Disahkan dengan `azd 1.27.1` pada Julai 2026.
+> Panduan arahan disemak berbanding rujukan `azd 1.37.2` yang dikeluarkan. Penyebaran awan tidak dijalankan. Pelajaran yang lebih panjang mengandungi serpihan ilustratif, bukan projek penyebaran tempatan lengkap.
 
 ## Objektif Pembelajaran
 
-Dengan menamatkan bab ini, anda akan:
-- Menjalankan pemeriksaan pra-penerbangan sebelum penerapan
-- Merancang kapasiti dan menganggarkan keperluan sumber
+Dengan menyelesaikan bab ini, anda akan:
+- Jalankan pemeriksaan prapenerbangan sebelum penyebaran
+- Merancang kapasiti dan menganggar keperluan sumber
 - Memilih SKU yang sesuai untuk pengoptimuman kos
-- Menyediakan Application Insights untuk pemantauan
-- Memahami corak koordinasi pasukan
+- Konfigurasikan Application Insights untuk pemantauan
+- Fahami corak koordinasi berbilang ejen dan keperluan penyebaran mereka
 
 ---
 
@@ -25,48 +25,48 @@ Dengan menamatkan bab ini, anda akan:
 
 | # | Pelajaran | Penerangan | Masa |
 |---|--------|-------------|------|
-| 1 | [Pemeriksaan Pra-Penerbangan](preflight-checks.md) | Sahkan konfigurasi sebelum penerapan | 15 min |
-| 2 | [Perancangan Kapasiti](capacity-planning.md) | Anggarkan keperluan sumber | 20 min |
-| 3 | [Pemilihan SKU](sku-selection.md) | Pilih tahap harga yang sesuai | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfigurasi pemantauan | 20 min |
-| 5 | [Corak Koordinasi](coordination-patterns.md) | Aliran kerja penerapan pasukan | 15 min |
+| 1 | [Pemeriksaan Pra-Penerbangan](preflight-checks.md) | Sahihkan konfigurasi sebelum penyebaran | 15 min |
+| 2 | [Perancangan Kapasiti](capacity-planning.md) | Anggar keperluan sumber | 20 min |
+| 3 | [Pemilihan SKU](sku-selection.md) | Pilih tier harga yang sesuai | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigurasikan pemantauan | 20 min |
+| 5 | [Corak Koordinasi](coordination-patterns.md) | Reka bentuk orkestrasinya ejen berbilang yang maju | 60-75 min |
 
 ---
 
-## 🚀 Mula Cepat
+## 🚀 Mula Pantas
 
 ```bash
-# Semak kuota langganan
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Pratonton penyebaran (tiada sumber dibuat)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Sahkan sintaks Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Semak konfigurasi persekitaran
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Senarai Semak Pra-Penerapan
+## ☑️ Senarai Semak Pra-Penyebaran
 
 ### Sebelum `azd provision`
 
 - [ ] Kuota disahkan untuk rantau
-- [ ] SKU dipilih dengan betul
+- [ ] SKUs dipilih dengan sesuai
 - [ ] Anggaran kos disemak
 - [ ] Konvensyen penamaan konsisten
-- [ ] Keselamatan/RBAC dikonfigurasi
+- [ ] Keselamatan/RBAC dikonfigurasikan
 
 ### Sebelum `azd deploy`
 
-- [ ] Pembolehubah persekitaran ditetapkan
+- [ ] Pemboleh ubah persekitaran ditetapkan
 - [ ] Rahsia dalam Key Vault
 - [ ] Rentetan sambungan disahkan
-- [ ] Pemeriksaan kesihatan dikonfigurasi
+- [ ] Pemeriksaan kesihatan dikonfigurasikan
 
 ---
 
@@ -74,10 +74,10 @@ azd env get-values
 
 | Beban Kerja | Pembangunan | Pengeluaran |
 |----------|-------------|------------|
-| Aplikasi Kontena | Penggunaan | Dedikasi D4 |
-| Servis Aplikasi | B1/B2 | P1v3+ |
-| Model Microsoft Foundry | Standard | Standard + PTU |
-| AI Search | Asas | Standard S2+ |
+| Container Apps | Penggunaan | Penggunaan atau profil beban khusus, berdasarkan beban yang diukur |
+| App Service | B1/B2 | P1v3+ |
+| model Azure OpenAI | Jenis penyebaran bayar-semasa yang disokong | Bayar-semasa atau jalur lebar terprovisian; bergantung model/rantau |
+| AI Search | Percuma/Asas dalam had | Tier Asas atau Standard saiz untuk indeks, replikasi, dan beban pertanyaan |
 
 ---
 
@@ -85,7 +85,7 @@ azd env get-values
 
 | Arah | Bab |
 |-----------|---------|
-| **Sebelumnya** | [Bab 5: Multi-Ejen](../chapter-05-multi-agent/README.md) |
+| **Sebelumnya** | [Bab 5: Ejen Berbilang](../chapter-05-multi-agent/README.md) |
 | **Seterusnya** | [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/README.md) |
 
 ---
@@ -93,7 +93,7 @@ azd env get-values
 ## 📖 Sumber Berkaitan
 
 - [Panduan Konfigurasi](../chapter-03-configuration/configuration.md)
-- [Panduan Penerapan](../chapter-04-infrastructure/deployment-guide.md)
+- [Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md)
 - [Isu Biasa](../chapter-07-troubleshooting/common-issues.md)
 
 ---

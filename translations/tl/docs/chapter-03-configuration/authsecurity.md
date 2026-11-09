@@ -1,116 +1,118 @@
-# Mga Pattern ng Pagpapatotoo at Managed Identity
+# Mga Pattern sa Pagpapatunay at Managed Identity
 
-⏱️ **Tinatayang Oras**: 45-60 minuto | 💰 **Epekto sa Gastos**: Libre (walang karagdagang singil) | ⭐ **Kumplikasyon**: Katamtaman
+⏱️ **Tinatayang Oras**: 45-60 minuto ng pagbabasa; maglaan ng dagdag na oras para sa pagsasama ng mga gawain | 💰 **Epekto sa Gastos**: Libre ang Identity/RBAC; binabayaran ang na-deploy na compute, storage, at Key Vault | ⭐ **Kumplikasyon**: Intermediate
+
+> Sinuri laban sa `azd 1.37.2` (Nobyembre 2026). Ang leksyon na ito ay naglalaman ng **mga ilustratibong fragment ng pagsasama, hindi isang kumpletong downloadable na `secure-app` template**. Gumawa ng mga sangguniang file, magbigay ng tugmang imprastraktura, at palitan ang mga placeholder bago i-deploy. Walang Azure na mga resources ang na-provision sa panahon ng pagsusuri.
 
 **📚 Landas ng Pagkatuto:**
 - ← Nakaraan: [Configuration Management](configuration.md) - Pamamahala ng mga environment variable at mga lihim
-- 🎯 **Nasa Dito Ka**: Pagpapatotoo & Seguridad (Managed Identity, Key Vault, mga ligtas na pattern)
-- → Susunod: [First Project](first-project.md) - Buuhin ang iyong unang AZD application
-- 🏠 [Tahanan ng Kurso](../../README.md)
+- 🎯 **Nandito Ka**: Authentication & Security (Managed Identity, Key Vault, ligtas na pattern)
+- → Susunod: [Infrastructure as Code](../chapter-04-infrastructure/README.md) - Mag-provision at mag-deploy ng mga resources
+- 🏠 [Course Home](../../README.md)
 
 ---
 
-## Ano ang Matututunan Mo
+## Ano ang Iyong Matututunan
 
-Sa pagsasagawa ng araling ito, ikaw ay:
-- Mauunawaan ang mga pattern ng authentication sa Azure (mga key, connection string, managed identity)
-- Magpapatupad ng **Managed Identity** para sa passwordless na pagpapatotoo
-- Sisiiguraduhin ang mga lihim gamit ang integrasyon ng **Azure Key Vault**
-- I-configure ang **role-based access control (RBAC)** para sa mga deployment ng AZD
-- Ilalapat ang mga pinakamahusay na kasanayan sa seguridad sa Container Apps at mga serbisyo ng Azure
-- Magmamigrate mula sa key-based papuntang identity-based na pagpapatotoo
+Sa pagtatapos ng leksyon na ito, malalaman mo:
+- Mauunawaan ang Azure authentication patterns (keys, connection strings, managed identity)
+- Magpatupad ng **Managed Identity** para sa passwordless authentication
+- Siguraduhin ang mga lihim gamit ang integrasyon ng **Azure Key Vault**
+- I-configure ang **role-based access control (RBAC)** para sa AZD deployments
+- Mag-aplay ng mga pinakamahusay na paraan sa seguridad sa Container Apps at mga Azure service
+- Mag-migrate mula sa key-based patungo sa identity-based authentication
 
 ## Bakit Mahalaga ang Managed Identity
 
-### Ang Problema: Tradisyunal na Pagpapatotoo
+### Ang Problema: Tradisyonal na Pagpapatunay
 
 **Bago ang Managed Identity:**
 ```javascript
-// ❌ PANGANIB SA SEGURIDAD: Mga lihim na naka-hardcode sa code
+// ❌ SECURITY RISK: Hardcoded secrets in code
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Mga Problema:**
-- 🔴 **Nakalantad na mga lihim** sa code, mga config file, mga environment variable
-- 🔴 **Pag-ikot ng kredensyal** nangangailangan ng pagbabago ng code at muling pag-deploy
-- 🔴 **Suliranin sa audit** - sino ang nag-access ng ano, kailan?
-- 🔴 **Kalat** - mga lihim na nakakalat sa maraming sistema
-- 🔴 **Panganib sa pagsunod** - bumabagsak sa mga security audit
+- 🔴 **Nalalantad na mga lihim** sa code, config files, environment variables
+- 🔴 **Pag-ikot ng kredensyal** nangangailangan ng pagbabago sa code at muling pag-deploy
+- 🔴 **Mga bangungot sa audit** - sino ang naka-access, kailan?
+- 🔴 **Sprawl** - mga lihim na nakakalat sa maraming sistema
+- 🔴 **Panganib sa pagsunod** - pumapalya sa mga security audit
 
 ### Ang Solusyon: Managed Identity
 
 **Pagkatapos ng Managed Identity:**
 ```javascript
-// ✅ LIGTAS: Walang mga lihim sa code
+// ✅ SECURE: No secrets in code
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Awtomatikong pinangangasiwaan ng Azure ang pagpapatunay ng pagkakakilanlan
+  credential  // Azure automatically handles authentication
 );
 ```
 
 **Mga Benepisyo:**
 - ✅ **Walang lihim** sa code o configuration
-- ✅ **Awtomatikong pag-ikot** - inaalagaan ng Azure
-- ✅ **Buong audit trail** sa mga log ng Microsoft Entra ID
-- ✅ **Sentralisadong seguridad** - pamahalaan sa Azure Portal
-- ✅ **Handa sa pagsunod** - tumutugon sa mga pamantayang pangseguridad
+- ✅ **Awtomatikong pag-ikot** - Azure ang humahawak nito
+- ✅ **Buong audit trail** sa Microsoft Entra ID logs
+- ✅ **Pinagsama-samang seguridad** - pamahalaan sa Azure Portal
+- ✅ **Handa para sa pagsunod** - sumusunod sa mga pamantayan ng seguridad
 
-**Analohiya**: Ang tradisyunal na pagpapatotoo ay parang pagbibitbit ng maraming pisikal na susi para sa iba't ibang pinto. Ang Managed Identity ay parang may security badge na awtomatikong nagbibigay ng access batay sa kung sino ka—walang susi na mawawala, madodoble, o kailangang i-rotate.
+**Analohiya**: Ang tradisyonal na pagpapatunay ay parang pagdadala ng maraming pisikal na susi para sa iba't ibang pinto. Ang Managed Identity ay parang may security badge na awtomatikong nagbibigay ng access base sa kung sino ka—walang susi na mawawala, makokopya, o kailangang paikutan.
 
 ---
 
 ## Pangkalahatang Arkitektura
 
-### Daloy ng Pagpapatotoo gamit ang Managed Identity
+### Daloy ng Pagpapatunay gamit ang Managed Identity
 
 ```mermaid
 sequenceDiagram
-    participant App as Iyong Aplikasyon<br/>(App ng Container)
-    participant MI as Pinamahalaang Pagkakakilanlan<br/>(Microsoft Entra ID)
-    participant KV as Taguan ng Susi
-    participant Storage as Imbakan ng Azure
+    participant App as Your Application<br/>(Container App)
+    participant MI as Managed Identity<br/>(Microsoft Entra ID)
+    participant KV as Key Vault
+    participant Storage as Azure Storage
     participant DB as Azure SQL
     
-    App->>MI: Humiling ng access token<br/>(awtomatiko)
-    MI->>MI: Suriin ang pagkakakilanlan<br/>(hindi kailangan ng password)
-    MI-->>App: Ibalik ang token<br/>(may bisa ng 1 oras)
+    App->>MI: Request access token<br/>(automatic)
+    MI->>MI: Verify identity<br/>(no password needed)
+    MI-->>App: Return token for requested audience<br/>(lifetime varies)
     
-    App->>KV: Kunin ang lihim<br/>(gamit ang token)
-    KV->>KV: Suriin ang mga permiso ng RBAC
-    KV-->>App: Ibalik ang halaga ng lihim
+    App->>KV: Get secret<br/>(using token)
+    KV->>KV: Check RBAC permissions
+    KV-->>App: Return secret value
     
-    App->>Storage: Mag-upload ng blob<br/>(gamit ang token)
-    Storage->>Storage: Suriin ang mga permiso ng RBAC
-    Storage-->>App: Matagumpay
+    App->>Storage: Upload blob<br/>(using token)
+    Storage->>Storage: Check RBAC permissions
+    Storage-->>App: Success
     
-    App->>DB: Mag-query ng data<br/>(gamit ang token)
-    DB->>DB: Suriin ang mga permiso ng SQL
-    DB-->>App: Ibalik ang mga resulta
+    App->>DB: Query data<br/>(using token)
+    DB->>DB: Check SQL permissions
+    DB-->>App: Return results
     
-    Note over App,DB: Lahat ng awtentikasyon ay walang password!
+    Note over App,DB: Request a separate token for each service audience;<br/>SDK credentials handle caching and renewal
 ```
 
 ### Mga Uri ng Managed Identities
 
 ```mermaid
 graph TB
-    MI[Pinamamahalaang Pagkakakilanlan]
-    SystemAssigned[Itinalagang Pagkakakilanlan ng Sistema]
-    UserAssigned[Itinalagang Pagkakakilanlan ng Gumagamit]
+    MI[Managed Identity]
+    SystemAssigned[System-Assigned Identity]
+    UserAssigned[User-Assigned Identity]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Siklo ng buhay na naka-ugnay sa resource]
-    SystemAssigned --> SA2[Awtomatikong paglikha/pagtanggal]
-    SystemAssigned --> SA3[Pinakamainam para sa isang resource]
+    SystemAssigned --> SA1[Lifecycle tied to resource]
+    SystemAssigned --> SA2[Automatic creation/deletion]
+    SystemAssigned --> SA3[Best for single resource]
     
-    UserAssigned --> UA1[Independiyenteng siklo ng buhay]
-    UserAssigned --> UA2[Manwal na paglikha/pagtanggal]
-    UserAssigned --> UA3[Ibinabahagi sa mga resource]
+    UserAssigned --> UA1[Independent lifecycle]
+    UserAssigned --> UA2[Manual creation/deletion]
+    UserAssigned --> UA3[Shared across resources]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
@@ -118,74 +120,76 @@ graph TB
 
 | Tampok | System-Assigned | User-Assigned |
 |---------|----------------|---------------|
-| **Siklo ng buhay** | Nakakabit sa resource | Independyente |
-| **Paglikha** | Awtomatikong kasama ang resource | Manwal na paglikha |
-| **Pag-delete** | Nabubura kasama ang resource | Nanatili pagkatapos mabura ang resource |
-| **Pagbabahagi** | Isang resource lamang | Maramihang resource |
-| **Kaso ng Paggamit** | Simpleng mga senaryo | Kumplikadong multi-resource na mga senaryo |
-| **AZD Default** | ✅ Inirerekomenda | Opsyonal |
+| **Lifecycle** | Nakakabit sa resource | Independent |
+| **Paglikha** | Awtomatik sa resource | Manual na paglikha |
+| **Pag-delete** | Nai-delete kasabay ng resource | Nanatili pagkatapos ng pag-delete ng resource |
+| **Pagbabahagi** | Isa lang na resource | Maraming mga resource |
+| **Paggamit** | Mga simpleng senaryo | Mga komplikadong multi-resource na senaryo |
+| **Pagpipilian sa Template** | Tinukoy sa imprastraktura | Tinukoy sa imprastraktura |
 
 ---
 
-## Mga Kinakailangan
+## Mga Kinakailangang Bago Magsimula
 
-### Mga Kinakailangang Tool
+### Mga Kinakailangang Kasanayan
 
-Dapat mayroon ka nang mga ito na na-install mula sa mga nakaraang aralin:
+Dapat ay na-install mo na ito mula sa mga naunang leksyon:
 
 ```bash
-# Suriin ang Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Inaasahan: azd bersyon 1.0.0 o mas mataas
+# ✅ Expected: azd version 1.0.0 or higher
 
-# Suriin ang Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Inaasahan: azure-cli 2.50.0 o mas mataas
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Mga Kinakailangan sa Azure
 
 - Aktibong Azure subscription
-- Mga permiso para sa:
-  - Paglikha ng managed identities
-  - Pag-assign ng mga RBAC role
-  - Paglikha ng mga Key Vault na resource
-  - Pag-deploy ng Container Apps
+- Mga permiso para:
+  - Gumawa ng managed identities
+  - Magtalaga ng mga RBAC roles
+  - Gumawa ng mga Key Vault resources
+  - Mag-deploy ng Container Apps
 
 ### Mga Kinakailangang Kaalaman
 
-Dapat mo nang natapos:
-- [Installation Guide](installation.md) - AZD setup
-- [AZD Basics](azd-basics.md) - Mga pangunahing konsepto
+Dapat ay natapos mo:
+- [Installation Guide](../chapter-01-foundation/installation.md) - Pag-setup ng AZD
+- [AZD Basics](../chapter-01-foundation/azd-basics.md) - Pangunahing mga konsepto
 - [Configuration Management](configuration.md) - Mga environment variable
 
 ---
 
-## Aralin 1: Pag-unawa sa Mga Pattern ng Pagpapatotoo
+## Leksyon 1: Pag-unawa sa Mga Pattern ng Pagpapatunay
 
 ### Pattern 1: Connection Strings (Legacy - Iwasan)
 
 **Paano ito gumagana:**
 ```bash
-# Naglalaman ang connection string ng mga kredensyal
+# Connection string contains credentials
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
 **Mga Problema:**
-- ❌ Mga lihim na nakikita sa environment variables
-- ❌ Na-log sa mga deployment system
-- ❌ Mahirap i-rotate
+- ❌ Nakikita ang mga lihim sa environment variables
+- ❌ Naka-log sa deployment systems
+- ❌ Mahirap iikot
 - ❌ Walang audit trail ng access
 
-**Kailan gagamitin:** Para lamang sa lokal na pag-develop, hindi kailanman sa production.
+**Kailan gagamitin:** Kapag ang target na serbisyo ay nangangailangan ng key-based authentication. Mas gusto ang identity kapag sinusuportahan; kung hindi, itago nang ligtas ang mga susi at iikot, pati na rin sa produksyon.
 
 ---
 
-### Pattern 2: Key Vault References (Mas Mabuti)
+### Pattern 2: Mga Sanggunian sa Key Vault (Mas Mabuti)
 
 **Paano ito gumagana:**
+**Bahaging Bicep fragments:** kinakailangang vault fields, identity ng Container App, at ang `configuration.secrets` entry nito ay hindi isinama. Ang `secretRef` ay pangalan ng isang lihim ng Container App; **hindi ito** isang Key Vault URI. Para magamit ang Key Vault, tukuyin ang tinukoy na lihim gamit ang `keyVaultUrl` at isang awtorisadong `identity`.
+
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -205,21 +209,23 @@ env: [
 ```
 
 **Mga Benepisyo:**
-- ✅ Mga lihim na nakaimbak nang ligtas sa Key Vault
+- ✅ Mga lihim na itinatago nang ligtas sa Key Vault
 - ✅ Sentralisadong pamamahala ng lihim
 - ✅ Pag-ikot nang walang pagbabago sa code
 
 **Mga Limitasyon:**
-- ⚠️ Patuloy pa ring gumagamit ng mga key/password
-- ⚠️ Kailangan pamahalaan ang access sa Key Vault
+- ⚠️ Ginagamit pa rin ang mga susi/passwords
+- ⚠️ Kailangang pamahalaan ang access sa Key Vault
 
-**Kailan gagamitin:** Hakbang sa paglipat mula sa connection strings papuntang managed identity.
+**Kailan gagamitin:** Hakbang ng paglipat mula connection strings papuntang managed identity.
 
 ---
 
-### Pattern 3: Managed Identity (Pinakamahusay na Praktis)
+### Pattern 3: Managed Identity (Pinakamahusay na Prakisis)
 
 **Paano ito gumagana:**
+**Bahaging Bicep:** pag-merge ng identity block sa isang kumpletong Container App at ibigay ang `storageAccount` at ang role definition. Nangangailangan din ang role assignment ng isang deterministic na `name`.
+
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -231,17 +237,19 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 // Grant permissions
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(storageAccount.id, containerApp.id, storageBlobDataContributorRole)
   scope: storageAccount
   properties: {
     roleDefinitionId: storageBlobDataContributorRole
     principalId: containerApp.identity.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 ```
 
 **Application code:**
 ```javascript
-// Hindi kailangan ng mga lihim!
+// No secrets needed!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -254,31 +262,31 @@ const blobServiceClient = new BlobServiceClient(
 
 **Mga Benepisyo:**
 - ✅ Walang lihim sa code/config
-- ✅ Awtomatikong pag-ikot ng kredensyal
+- ✅ Automatic credential rotation
 - ✅ Buong audit trail
 - ✅ Mga permiso batay sa RBAC
-- ✅ Handang sumunod sa mga pangangailangan sa seguridad
+- ✅ Handa para sa pagsunod
 
-**Kailan gagamitin:** Palagi, para sa mga production na aplikasyon.
+**Kailan gagamitin:** Mas gusto para sa mga Azure-hosted application na kumukuha ng access sa mga serbisyong sumusuporta sa Microsoft Entra authentication.
 
 ---
 
-### Pattern 4: Service Principals (CI/CD & Automation)
+### Pattern 4: Service Principals (CI/CD at Automation)
 
-Ang managed identity ang gold standard para sa mga resource na tumatakbo sa loob ng Azure. Pero paano naman ang mga tumatakbo **labas** ng Azure—tulad ng CI/CD pipeline sa isang build agent, o isang script sa iyong laptop na hindi makakagamit ng interactive login? Dito pumapasok ang **service principal**: isang non-human na identity na may sariling kredensyal na maaaring gamitin ng automated na proseso para mag-sign in.
+Ang managed identity ang pamantayang ginto *para sa mga resources na tumatakbo sa loob ng Azure*. Pero paano naman ang mga bagay na tumatakbo **labas** ng Azure—tulad ng isang CI/CD pipeline sa build agent, o isang script sa iyong laptop na hindi pwedeng gumamit ng interactive login? Dito pumapasok ang **service principal**: isang di-taong identity na may sariling kredensyal na maaaring gamitin ng isang automated process para mag-sign in.
 
 **Paano ito gumagana:**
 
-Create a service principal scoped to a resource group (least privilege):
+Gumawa ng service principal na naka-scope sa isang resource group (least privilege):
 
 ```bash
 az ad sp create-for-rbac \
   --name "myapp-cicd" \
   --role contributor \
-  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+  --scopes "/subscriptions/<sub-id>/resourceGroups/<rg-name>"
 ```
 
-This prints a client ID, client secret, and tenant ID. azd can sign in with them non-interactively:
+Ito ay magpi-print ng client ID, client secret, at tenant ID. Ang azd ay maaaring mag-sign in gamit ito nang hindi interactive:
 
 ```bash
 azd auth login \
@@ -287,7 +295,7 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-**Mas piliin ang federated credentials (OIDC) kaysa sa mga secret.** Sa halip na isang long-lived client secret, i-configure ang isang federated credential para ipagpalit ng pipeline ang isang short-lived token—walang secret na ma-l leak o kailangang i-rotate:
+**Mas gusto ang federated credentials (OIDC) kaysa sa mga lihim.** Sa halip na pangmatagalang client secret, i-configure ang federated credential para magpalitan ang pipeline ng maikling-buhay na token—walang lihim na maipapasa o kailangang iikot:
 
 ```bash
 azd auth login \
@@ -296,31 +304,31 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-> `azd pipeline config` sets this up for you automatically. Tingnan ang mga CI/CD walkthrough sa [Chapter 8](../chapter-08-production/production-ai-practices.md).
+> `azd pipeline config` ay awtomatikong nagse-setup nito para sa iyo. Tingnan ang mga walkthrough ng CI/CD sa [Kabanata 8](../chapter-08-production/production-ai-practices.md).
 
 **Mga Benepisyo:**
-- ✅ Gumagana sa labas ng Azure (mga build agent, on-prem, ibang cloud)
-- ✅ Maaaring i-scope sa isang resource group lamang na may isang role
-- ✅ Ang federated (OIDC) variant ay hindi gumagamit ng naka-store na secret
+- ✅ Gumagana sa labas ng Azure (build agents, on-prem, ibang ulap)
+- ✅ Maaaring i-scope sa isang resource group na may isang role lamang
+- ✅ Ang bersyon na federated (OIDC) ay walang nakatagalang lihim na nakaimbak
 
-**Mga Trade-off:**
-- ⚠️ Ang secret-based na variant ay nangangailangan ng maingat na pag-iimbak at pag-ikot
-- ⚠️ Ang na-leak na secret ay nagbibigay ng anumang kaya ng SP—panatilihing makitid ang scope
+**Mga trade-offs:**
+- ⚠️ Ang bersyon na batay sa lihim ay nangangailangan ng maingat na pag-iimbak at pag-ikot
+- ⚠️ Ang isang nadurog na lihim ay nagbibigay ng anuman na magagawa ng SP—panatilihing masikip ang mga scope
 
-**Kailan gagamitin:** Para sa CI/CD pipelines at automation na hindi makakagamit ng managed identity. Laging piliin ang **federated/OIDC** variant kaysa sa client secret, at piliin ang managed identity kapag tumatakbo ang workload sa loob ng Azure.
+**Kailan gagamitin:** Para sa mga CI/CD pipeline at automation na hindi pwedeng gumamit ng managed identity. Palaging mas gusto ang **federated/OIDC** na bersyon kaysa sa client secret, at mas gusto ang managed identity kung ang workload ay tumatakbo sa loob ng Azure.
 
 **Ligtas na pag-iimbak ng kredensyal:**
-- Huwag kailanman i-commit ang mga secret—gamitin ang secret store ng iyong pipeline (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
-- I-scope ang SP sa pinakamaliit na role at resource group na kailangan nito.
-- Magtakda ng expiry at i-rotate, o alisin ang secret nang tuluyan gamit ang OIDC.
+- Huwag kailanman mag-commit ng lihim—gamitin ang secret store ng iyong pipeline (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
+- Isaayos ang SP sa pinakamaliit na role at resource group na kailangan nito.
+- Magtakda ng expiration at mag-ikot, o alisin ang lihim nang buo gamit ang OIDC.
 
 ---
 
-## Aralin 2: Pagpapatupad ng Managed Identity gamit ang AZD
+## Leksyon 2: Pagpapatupad ng Managed Identity gamit ang AZD
 
-### Hakbang-hakbang na Implementasyon
+### Hakbang-hakbang na Pagpapatupad
 
-Bumuo tayo ng secure na Container App na gumagamit ng managed identity para i-access ang Azure Storage at Key Vault.
+Ipinapakita ng mga sumusunod na fragment kung paano isasama ang managed identity sa isang proyekto ng Container App. Hindi ito isang copy-and-run starter: ang Storage module, kumpletong managed environment/registry infrastructure, Dockerfile, at parameter file ay hindi lahat kasama dito. Magsimula mula sa isang gumaganang Container Apps template at pagsamahin ang mga pattern na ito habang pinapanatili ang kanyang registry configuration at mga service tags.
 
 ### Estruktura ng Proyekto
 
@@ -354,10 +362,10 @@ services:
     language: js
     host: containerapp
 
-# Enable managed identity (AZD handles this automatically)
+# Managed identity must be enabled in the infrastructure, not by this YAML.
 ```
 
-### 2. Imprastruktura: Paganahin ang Managed Identity
+### 2. Imprastraktura: I-enable ang Managed Identity
 
 **File: `infra/main.bicep`**
 
@@ -366,6 +374,8 @@ targetScope = 'subscription'
 
 param environmentName string
 param location string = 'eastus'
+param containerAppsEnvironmentId string
+param containerImage string
 
 var tags = { 'azd-env-name': environmentName }
 
@@ -408,6 +418,8 @@ module containerApp './app/container-app.bicep' = {
     tags: tags
     storageAccountName: storage.outputs.name
     keyVaultName: keyVault.outputs.name
+    containerAppsEnvironmentId: containerAppsEnvironmentId
+    containerImage: containerImage
   }
 }
 
@@ -418,7 +430,8 @@ module storageRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'  // Storage Blob Data Contributor
-    targetResourceId: storage.outputs.id
+    targetResourceType: 'storage'
+    targetResourceName: storage.outputs.name
   }
 }
 
@@ -429,7 +442,8 @@ module kvRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: '4633458b-17de-408a-b874-0445c86b69e6'  // Key Vault Secrets User
-    targetResourceId: keyVault.outputs.id
+    targetResourceType: 'keyvault'
+    targetResourceName: keyVault.outputs.name
   }
 }
 
@@ -449,15 +463,18 @@ param location string
 param tags object = {}
 param storageAccountName string
 param keyVaultName string
+param containerAppsEnvironmentId string
+param containerImage string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: name
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'api' })
   identity: {
     type: 'SystemAssigned'  // 🔑 Enable managed identity
   }
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -468,7 +485,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Must exist; configure registry credentials for private images
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -496,18 +513,28 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. RBAC Role Assignment Module
+### 4. Module sa RBAC Role Assignment
 
 **File: `infra/core/role-assignment.bicep`**
 
 ```bicep
 param principalId string
 param roleDefinitionId string  // Azure built-in role ID
-param targetResourceId string
+@allowed(['storage', 'keyvault'])
+param targetResourceType string
+param targetResourceName string
 
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(principalId, roleDefinitionId, targetResourceId)
-  scope: resourceId('Microsoft.Resources/resourceGroups', resourceGroup().name)
+// Typed existing resources give Bicep a valid resource scope, not a string ID.
+resource storageTarget 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
+  name: targetResourceName
+}
+resource vaultTarget 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: targetResourceName
+}
+
+resource storageAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'storage') {
+  name: guid(storageTarget.id, principalId, roleDefinitionId)
+  scope: storageTarget
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
     principalId: principalId
@@ -515,7 +542,17 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
-output id string = roleAssignment.id
+resource vaultAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'keyvault') {
+  name: guid(vaultTarget.id, principalId, roleDefinitionId)
+  scope: vaultTarget
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
+    principalId: principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+// This module assigns at the target resource scope, not the whole resource group.
 ```
 
 ### 5. Application Code na may Managed Identity
@@ -531,29 +568,29 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 I-initialize ang kredensyal (awtomatikong gumagana gamit ang managed identity)
+// 🔑 Initialize credential (works automatically with managed identity)
 const credential = new DefaultAzureCredential();
 
-// Pag-setup ng Azure Storage
+// Azure Storage setup
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
-  credential  // Hindi kailangan ng mga susi!
+  credential  // No keys needed!
 );
 
-// Pag-setup ng Key Vault
+// Key Vault setup
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
-  credential  // Hindi kailangan ng mga susi!
+  credential  // No keys needed!
 );
 
-// Pagsusuri ng kalusugan
+// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// I-upload ang file sa Blob Storage
+// Upload file to blob storage
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -562,7 +599,8 @@ app.post('/upload', async (req, res) => {
     const blobName = `file-${Date.now()}.txt`;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     
-    await blockBlobClient.upload('Hello from managed identity!', 30);
+    const content = 'Hello from managed identity!';
+    await blockBlobClient.upload(content, Buffer.byteLength(content));
     
     res.json({
       success: true,
@@ -575,7 +613,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// Kunin ang lihim mula sa Key Vault
+// Get secret from Key Vault
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -583,7 +621,7 @@ app.get('/secret/:name', async (req, res) => {
     
     res.json({
       name: secretName,
-      value: secret.value,
+      retrieved: secret.value !== undefined, // Never return the secret value to callers
       message: 'Secret retrieved using managed identity!'
     });
   } catch (error) {
@@ -592,7 +630,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Ilista ang mga blob container (nagpapakita ng karapatang magbasa)
+// List blob containers (demonstrates read access)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -635,19 +673,21 @@ app.listen(PORT, () => {
 }
 ```
 
-### 6. I-deploy at Subukan
+### 6. Mag-deploy at Subukan
+
+Patakbuhin lamang ang mga command na ito **pagkatapos** makumpleto ang nawawalang imprastraktura, Dockerfile, at tugmang `main.parameters.json` sa iyong sariling proyekto. Mag-authenticate ang azd gamit ang `azd auth login`; mag-sign in din nang hiwalay gamit ang `az login` para sa mga Azure CLI na pagsusuri mamaya. Ang mga ipinakitang endpoint ay mga demonstrasyon at nangangailangan ng angkop na mga kontrol sa access bago gamitin nang publiko.
 
 ```bash
-# I-initialize ang kapaligiran ng AZD
+# Initialize AZD environment
 azd init
 
-# I-deploy ang imprastruktura at aplikasyon
+# Deploy infrastructure and application
 azd up
 
-# Kunin ang URL ng app
-APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
+# Get the app URL
+APP_URL=$(azd env get-value APP_URL)
 
-# Subukan ang health check
+# Test health check
 curl $APP_URL/health
 ```
 
@@ -659,7 +699,7 @@ curl $APP_URL/health
 }
 ```
 
-**Subukan ang blob upload:**
+**Subok sa pag-upload ng blob:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
@@ -673,7 +713,7 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Subukan ang pag-lista ng container:**
+**Subok sa paglista ng container:**
 ```bash
 curl $APP_URL/containers
 ```
@@ -689,32 +729,34 @@ curl $APP_URL/containers
 
 ---
 
-## Karaniwang Azure RBAC na Mga Papel
+## Karaniwang Azure RBAC Roles
 
 ### Mga Built-in Role ID para sa Managed Identity
 
-| Serbisyo | Pangalan ng Role | Role ID | Mga Pahintulot |
-|---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Magbasa ng blobs at mga container |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Magbasa, magsulat, mag-delete ng blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Magbasa, magsulat, mag-delete ng mga queue message |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Magbasa ng mga secret |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Magbasa, magsulat, mag-delete ng mga secret |
-| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Magbasa ng data sa Cosmos DB |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Magbasa, magsulat ng data sa Cosmos DB |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Pamahalaan ang mga SQL database |
+| Serbisyo | Pangalan ng Role | ID ng Role | Mga Pahintulot |
+|---------|------------------|------------|---------------|
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6ea1-4ae2-8e65-a410df84e7d1` | Basahin ang blobs at containers |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Basahin, isulat, tanggalin ang mga blobs |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Basahin, isulat, tanggalin ang mga queue/mensahe |
+| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Basahin ang mga lihim |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Basahin, isulat, tanggalin ang mga lihim |
+| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Basahin ang data sa Cosmos DB |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Basahin, isulat ang data sa Cosmos DB |
+| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Pamahalaan ang mga database resources; hindi nagbibigay ng access sa data ng SQL |
 | **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Magpadala, tumanggap, pamahalaan ang mga mensahe |
 
 ### Paano Hanapin ang Role IDs
 
+Ang dalawang ID sa itaas para sa Cosmos DB for NoSQL ay **native na mga Cosmos data-plane role definition**, hindi Azure RBAC subscription role IDs. Itakda ito gamit ang `az cosmosdb sql role assignment create` (o `Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments`), hindi `az role assignment create`. Nangangailangan ang SQL data access ng Entra database user at SQL mga pahintulot.
+
 ```bash
-# Ilista ang lahat ng mga built-in na tungkulin
+# List all built-in roles
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# Maghanap ng partikular na tungkulin
+# Search for specific role
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# Kunin ang mga detalye ng tungkulin
+# Get role details
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
@@ -722,13 +764,15 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## Mga Praktikal na Ehersisyo
 
-### Ehersisyo 1: Paganahin ang Managed Identity para sa Umiiral na App ⭐⭐ (Katamtaman)
+**Kinakailangang sangkap ng pagsasama para sa tatlong ehersisyo:** isang gumaganang Container App template sa iyong sariling proyekto, tugmang Bicep resources, Azure CLI/azd sign-in, at awtoridad na magtalaga ng kinakailangang mga role. Ito ay mga ginabayang adaptasyon, hindi standalone na panimulang hakbang sa lokal; palitan ang mga sample na pangalan ng resource sa mga na-deploy mong pangalan.
 
-**Layunin**: Idagdag ang managed identity sa umiiral na Container App deployment
+### Ehersisyo 1: I-enable ang Managed Identity para sa Umiiral na App ⭐⭐ (Katamtaman)
 
-**Senaryo**: May Container App ka gamit ang connection strings. I-convert ito papuntang managed identity.
+**Layunin**: Magdagdag ng managed identity sa umiiral na Container App deployment
 
-**Panimulang Punto**: Container App na may ganitong configuration:
+**Senaryo**: Mayroon kang Container App na gumagamit ng connection strings. I-convert ito sa managed identity.
+
+**Panimulang Punto**: Container App na may konfigurasyong ito:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -742,7 +786,7 @@ env: [
 
 **Mga Hakbang**:
 
-1. **Paganahin ang managed identity sa Bicep:**
+1. **I-enable ang managed identity sa Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -809,37 +853,38 @@ env: [
 ]
 ```
 
-5. **I-deploy at subukan:**
+5. **Mag-deploy at magsubok:**
 
 ```bash
-# I-deploy muli
+# Redeploy
 azd up
 
-# Subukan kung gumagana pa rin ito
-curl https://myapp.azurecontainerapps.io/upload
+# Test that it still works
+APP_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail -X POST "$APP_URL/upload"
 ```
 
-**✅ Kriterya ng Tagumpay:**
-- ✅ Nai-deploy ang application nang walang error
-- ✅ Gumagana ang mga operasyon sa Storage (upload, list, download)
-- ✅ Walang connection string sa environment variables
-- ✅ Makikita ang identity sa Azure Portal sa ilalim ng "Identity" blade
+**✅ Tagumpay na Pamantayan:**
+- ✅ Nagde-deploy ang application nang walang error
+- ✅ Gumagana ang mga operasyon ng storage (upload, list, download)
+- ✅ Walang connection strings sa environment variables
+- ✅ Nakikita ang identity sa Azure Portal sa ilalim ng "Identity" blade
 
-**Pag-beripika:**
+**Pagpapatunay:**
 
 ```bash
-# Suriin kung naka-enable ang managed identity
+# Check managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Inaasahan: "SystemAssigned"
+# ✅ Expected: "SystemAssigned"
 
-# Suriin ang pagtatalaga ng role
+# Check role assignment
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ Inaasahan: Ipinapakita ang role na "Storage Blob Data Contributor"
+# ✅ Expected: Shows "Storage Blob Data Contributor" role
 ```
 
 **Oras**: 20-30 minuto
@@ -848,13 +893,13 @@ az role assignment list \
 
 ### Ehersisyo 2: Multi-Service Access gamit ang User-Assigned Identity ⭐⭐⭐ (Advanced)
 
-**Layunin**: Lumikha ng user-assigned identity na ibabahagi sa maraming Container App
+**Layunin**: Gumawa ng user-assigned identity na pinagsasaluhan ng maraming Container Apps
 
-**Senaryo**: May 3 microservice ka na lahat ay nangangailangan ng access sa parehong Storage account at Key Vault.
+**Senaryo**: Mayroon kang 3 microservices na lahat ay kailangang mag-access sa parehong Storage account at Key Vault.
 
 **Mga Hakbang**:
 
-1. **Lumikha ng user-assigned identity:**
+1. **Gumawa ng user-assigned identity:**
 
 **File: `infra/core/identity.bicep`**
 
@@ -874,7 +919,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **I-assign ang mga role sa user-assigned identity:**
+2. **Italaga ang mga role sa user-assigned identity:**
 
 ```bicep
 // In main.bicep
@@ -890,7 +935,7 @@ module userIdentity './core/identity.bicep' = {
 
 // Grant Storage access
 resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'storage-contributor')
+  name: guid(storageAccount.id, environmentName, 'storage-contributor')
   scope: storageAccount
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
@@ -901,7 +946,7 @@ resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
 
 // Grant Key Vault access
 resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'kv-secrets-user')
+  name: guid(keyVault.id, environmentName, 'kv-secrets-user')
   scope: keyVault
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
@@ -911,7 +956,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **I-assign ang identity sa maraming Container Apps:**
+3. **Mag-assign ng identity sa maraming Container Apps:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -948,18 +993,22 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **Application code (lahat ng services ay gumagamit ng parehong pattern):**
+4. **Application code (lahat ng serbisyo ay gumagamit ng parehong pattern):**
 
 ```javascript
-const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
+const { ManagedIdentityCredential } = require('@azure/identity');
+const { BlobServiceClient } = require('@azure/storage-blob');
 
-// Para sa identity na itinalaga ng user, tukuyin ang client ID
+// For user-assigned identity, specify the client ID
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // Client ID ng identity na itinalaga ng user
+  process.env.AZURE_CLIENT_ID  // User-assigned identity client ID
 );
 
-// O gamitin ang DefaultAzureCredential (awtomatikong natutukoy)
-const credential = new DefaultAzureCredential();
+// Alternative (choose ONE credential declaration):
+// const { DefaultAzureCredential } = require('@azure/identity');
+// const credential = new DefaultAzureCredential({
+//   managedIdentityClientId: process.env.AZURE_CLIENT_ID
+// });
 
 const blobServiceClient = new BlobServiceClient(
   `https://${process.env.STORAGE_ACCOUNT_NAME}.blob.core.windows.net`,
@@ -967,42 +1016,45 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
+Itakda ang bawat Container App's runtime `AZURE_CLIENT_ID` sa `userIdentity.outputs.clientId` at `STORAGE_ACCOUNT_NAME` sa iyong pangalan ng storage sa Bicep. Ang simpleng pag-assign ng identity o pagtakbo ng `azd env set` ay hindi nagsasaayos ng mga runtime values na ito.
+
 5. **I-deploy at i-verify:**
 
 ```bash
 azd up
 
-# Subukan kung lahat ng serbisyo ay makaka-access sa imbakan
-curl https://api-gateway.azurecontainerapps.io/upload
-curl https://product-service.azurecontainerapps.io/upload
-curl https://order-service.azurecontainerapps.io/upload
+# Test all services can access storage
+# Replace with the actual ingress URLs reported for your three services
+curl --fail -X POST "$API_GATEWAY_URL/upload"
+curl --fail -X POST "$PRODUCT_SERVICE_URL/upload"
+curl --fail -X POST "$ORDER_SERVICE_URL/upload"
 ```
 
-**✅ Kriterya ng Tagumpay:**
-- ✅ Isang identity na ibinahagi sa 3 serbisyo
-- ✅ Lahat ng serbisyo ay may access sa Storage at Key Vault
-- ✅ Nanatili ang identity kung i-delete mo ang isang serbisyo
+**✅ Mga Pamantayan ng Tagumpay:**
+- ✅ Isang identity na shared sa 3 serbisyo
+- ✅ Lahat ng serbisyo ay maaaring ma-access ang Storage at Key Vault
+- ✅ Ang identity ay nananatili kahit burahin ang isang serbisyo
 - ✅ Sentralisadong pamamahala ng permiso
 
 **Mga Benepisyo ng User-Assigned Identity:**
-- Isang identity na pamahalaan
-- Pare-parehong mga permiso sa lahat ng serbisyo
-- Nananatili kahit i-delete ang isang serbisyo
-- Mas mainam para sa komplikadong arkitektura
+- Isang identity lang ang pamahalaan
+- Konsistenteng mga permiso sa mga serbisyo
+- Nakakaligtas sa pagtanggal ng serbisyo
+- Mas mainam para sa kumplikadong mga arkitektura
 
 **Oras**: 30-40 minuto
 
 ---
 
-### Ehersisyo 3: Ipatupad ang Pag-ikot ng Secret sa Key Vault ⭐⭐⭐ (Advanced)
+### Ehersisyo 3: Ipatupad ang Key Vault Secret Rotation ⭐⭐⭐ (Advanced)
 
-**Layunin**: Mag-imbak ng third-party API keys sa Key Vault at i-access ang mga ito gamit ang managed identity
+**Layunin**: Itago ang third-party API keys sa Key Vault at i-access gamit ang managed identity
 
-**Senaryo**: Kailangan ng iyong app na tumawag sa isang external API (OpenAI, Stripe, SendGrid) na nangangailangan ng API keys.
+**Senaryo**: Kailangan ng iyong app na tumawag sa external na API (OpenAI, Stripe, SendGrid) na nangangailangan ng API keys.
 
 **Mga Hakbang**:
 
-1. **Lumikha ng Key Vault na may RBAC:**
+1. **Gumawa ng Key Vault na may RBAC:**
 
 **File: `infra/core/keyvault.bicep`**
 
@@ -1033,13 +1085,13 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **Mag-imbak ng mga secret sa Key Vault:**
+2. **Itago ang mga sikreto sa Key Vault:**
 
 ```bash
-# Kunin ang pangalan ng Key Vault
-KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
+# Get Key Vault name
+KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
-# I-imbak ang mga API key ng third-party
+# Store third-party API keys
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1056,7 +1108,7 @@ az keyvault secret set \
   --value "SG.xxxxxxxxxxxxx"
 ```
 
-3. **Application code para kunin ang mga secret:**
+3. **Application code para kunin ang mga sikreto:**
 
 **File: `src/config.js`**
 
@@ -1075,7 +1127,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // Suriin muna ang cache
+    // Check cache first
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1107,9 +1159,11 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **Gamitin ang mga secret sa application:**
+4. **Gamitin ang mga sikreto sa application:**
 
 **File: `src/app.js`**
+
+Ang **replacement application fragment** na ito ay nangangailangan ng `npm install openai`, isang tunay na third-party key, isang accessible na modelo, at ang imprastraktura mula sa iyong umiiral na proyekto. Direktang tumatawag ito sa OpenAI, hindi sa isang Azure OpenAI deployment. Ang mga placeholder na susi sa ibaba ay hindi nagbibigay ng awtorisasyon sa request.
 
 ```javascript
 const express = require('express');
@@ -1118,7 +1172,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// I-initialize ang OpenAI gamit ang susi mula sa Key Vault
+// Initialize OpenAI with key from Key Vault
 let openaiClient;
 
 async function initializeServices() {
@@ -1126,9 +1180,6 @@ async function initializeServices() {
   openaiClient = new OpenAI({ apiKey: openaiKey });
   console.log('✅ Services initialized with secrets from Key Vault');
 }
-
-// Tawagin sa pagsisimula
-initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
   try {
@@ -1146,8 +1197,12 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Secure API with Key Vault integration running');
+// Start listening only after initialization succeeds.
+initializeServices().then(() => {
+  app.listen(3000, () => console.log('Key Vault demo running'));
+}).catch(error => {
+  console.error('Initialization failed:', error.message);
+  process.exitCode = 1;
 });
 ```
 
@@ -1156,147 +1211,153 @@ app.listen(3000, () => {
 ```bash
 azd up
 
-# Subukan kung gumagana ang mga API key
+# Test that API keys work
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
-**✅ Kriterya ng Tagumpay:**
-
+**✅ Mga Pamantayan ng Tagumpay:**
 - ✅ Walang API keys sa code o environment variables
-- ✅ Kumukuha ang aplikasyon ng mga key mula sa Key Vault
-- ✅ Gumagana nang tama ang third-party APIs
-- ✅ Maaaring i-rotate ang mga key nang walang pagbabago sa code
+- ✅ Nakukuha ng application ang mga susi mula sa Key Vault
+- ✅ Gumagana nang maayos ang third-party APIs
+- ✅ Kayang i-rotate ang mga key nang walang pagbabago sa code
 
-**I-rotate ang isang sekreto:**
+**I-rotate ang sikreto:**
 
 ```bash
-# I-update ang lihim sa Key Vault
+# Update secret in Key Vault
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# I-restart ang app para magamit ang bagong susi
+# Find the active revision name, then restart it to clear the in-process cache
+az containerapp revision list --name myapp --resource-group rg-myapp --output table
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
 **Oras**: 25-35 minuto
 
 ---
 
-## Checkpoint ng Kaalaman
+## Knowledge Checkpoint
 
-### 1. Authentication Patterns ✓
+### 1. Mga Pattern ng Authentication ✓
 
-Subukan ang iyong pagkaunawa:
+Subukan ang iyong pang-unawa:
 
-- [ ] **Q1**: Ano ang tatlong pangunahing authentication pattern? 
-  - **A**: Connection strings (legacy), Key Vault references (transition), Managed Identity (best)
+- [ ] **Q1**: Ano ang tatlong pangunahing authentication patterns? 
+  - **Sagot**: Connection strings (legacy), Key Vault references (transition), Managed Identity (pinakamainam)
 
-- [ ] **Q2**: Bakit mas mabuti ang managed identity kaysa sa connection strings?
-  - **A**: Walang secrets sa code, awtomatikong rotation, kumpletong audit trail, RBAC permissions
+- [ ] **Q2**: Bakit mas mainam ang managed identity kaysa connection strings?
+  - **Sagot**: Walang sikreto sa code, awtomatikong pag-rotate, kumpletong audit trail, RBAC na mga permiso
 
-- [ ] **Q3**: Kailan gagamit ka ng user-assigned identity sa halip na system-assigned?
-  - **A**: Kapag nagbabahagi ng identity sa maraming resources o kapag ang lifecycle ng identity ay hiwalay sa lifecycle ng resource
+- [ ] **Q3**: Kailan ka gagamit ng user-assigned identity imbes na system-assigned?
+  - **Sagot**: Kapag nagbabahagi ng identity sa maraming resources o kapag ang lifecycle ng identity ay hiwalay sa lifecycle ng resource
 
 **Hands-On Verification:**
 ```bash
-# Suriin kung anong uri ng identidad ang ginagamit ng iyong app
+# Check what type of identity your app uses
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Ilista ang lahat ng mga pagtatalaga ng role para sa identidad
+# List all role assignments for the identity
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
 
 ---
 
-### 2. RBAC and Permissions ✓
+### 2. RBAC at Mga Permiso ✓
 
-Subukan ang iyong pagkaunawa:
+Subukan ang iyong pang-unawa:
 
 - [ ] **Q1**: Ano ang role ID para sa "Storage Blob Data Contributor"?
-  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+  - **Sagot**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
 - [ ] **Q2**: Anong mga permiso ang ibinibigay ng "Key Vault Secrets User"?
-  - **A**: Read-only access sa secrets (hindi makakalikha, mag-aupdate, o magde-delete)
+  - **Sagot**: Read-only na access sa mga sikreto (hindi makakagawa, makakabago, o makakabura)
 
 - [ ] **Q3**: Paano mo bibigyan ng access ang isang Container App sa Azure SQL?
-  - **A**: I-assign ang "SQL DB Contributor" role o i-configure ang Microsoft Entra ID authentication para sa SQL
+  - **Sagot**: I-configure ang Microsoft Entra authentication, gawin ang identity bilang database user, at bigyan ang kinakailangang mga permiso sa SQL. Ang "SQL DB Contributor" ay para lang sa pamamahala ng Azure resources; hindi ito nagbibigay ng awtorisasyon sa queries.
 
 **Hands-On Verification:**
 ```bash
-# Hanapin ang tiyak na tungkulin
+# Find specific role
 az role definition list --name "Storage Blob Data Contributor"
 
-# Suriin kung anong mga tungkulin ang nakatalaga sa iyong pagkakakilanlan
+# Check what roles are assigned to your identity
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
 
 ---
 
-### 3. Key Vault Integration ✓
+### 3. Integrasyon ng Key Vault ✓
 
-Subukan ang iyong pagkaunawa:
+Subukan ang iyong pang-unawa:
 
-- [ ] **Q1**: Paano mo i-e-enable ang RBAC para sa Key Vault sa halip na access policies?
-  - **A**: I-set ang `enableRbacAuthorization: true` sa Bicep
+- [ ] **Q1**: Paano mo i-enable ang RBAC para sa Key Vault imbes na access policies?
+  - **Sagot**: Itakda ang `enableRbacAuthorization: true` sa Bicep
 
-- [ ] **Q2**: Anong Azure SDK library ang humahandle ng managed identity authentication?
-  - **A**: `@azure/identity` with `DefaultAzureCredential` class
+- [ ] **Q2**: Anong Azure SDK library ang humahawak sa managed identity authentication?
+  - **Sagot**: `@azure/identity` gamit ang klase na `DefaultAzureCredential`
 
-- [ ] **Q3**: Gaano katagal nananatili ang Key Vault secrets sa cache?
-  - **A**: Depende sa aplikasyon; mag-implementa ng sarili mong caching strategy
+- [ ] **Q3**: Gaano katagal nananatili ang mga sikreto ng Key Vault sa cache?
+  - **Sagot**: Depende sa application; ipatupad ang sarili mong caching strategy
 
 **Hands-On Verification:**
 ```bash
-# Subukan ang pag-access sa Key Vault
+# Test Key Vault access
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
-  --query "value"
+  --query "{name:name,enabled:attributes.enabled}"
 
-# Suriin kung naka-enable ang RBAC
+# Check RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Inaasahan: true
+# ✅ Expected: true
 ```
 
 ---
 
-## Security Best Practices
+## Pinakamahusay na Praktis sa Seguridad
 
 ### ✅ GAWIN:
 
-1. **Palaging gumamit ng managed identity sa production**
+1. **Palaging gamitin ang managed identity sa production**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Gumamit ng least-privilege RBAC roles**
-   - Gumamit ng "Reader" roles kapag posible
-   - Iwasan ang "Owner" o "Contributor" maliban kung kinakailangan
+2. **Gamitin ang least-privilege na mga RBAC role**
+   - Gumamit ng "Reader" roles kapag maaari
+   - Iwasan ang "Owner" o "Contributor" maliban kung kailangang-kailangan
 
-3. **Itago ang third-party keys sa Key Vault**
+3. **Itago ang mga third-party key sa Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **I-enable ang audit logging**
+4. **I-enable ang audit logging** (partial resource fragment; i-merge sa iyong vault at workspace declarations)
    ```bicep
-   diagnosticSettings: {
-     logs: [{ category: 'AuditEvent', enabled: true }]
+   resource vaultDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+     name: 'vault-audit'
+     scope: keyVault
+     properties: {
+       workspaceId: logAnalytics.id
+       logs: [{ category: 'AuditEvent', enabled: true }]
+     }
    }
    ```
 
@@ -1307,43 +1368,43 @@ az keyvault show \
    azd env new prod
    ```
 
-6. **I-rotate ang mga sekreto nang regular**
-   - Mag-set ng expiration dates sa Key Vault secrets
+6. **Regular na i-rotate ang mga sikreto**
+   - Magtakda ng expiration dates sa mga sikreto ng Key Vault
    - I-automate ang rotation gamit ang Azure Functions
 
 ### ❌ HUWAG GAWIN:
 
-1. **Huwag i-hardcode ang mga sekreto**
+1. **Huwag kailanman mag-hardcode ng mga sikreto**
    ```javascript
-   // ❌ MASAMA
+   // ❌ BAD
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
 2. **Huwag gumamit ng connection strings sa production**
    ```javascript
-   // ❌ MASAMA
+   // ❌ BAD
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **Huwag magbigay ng labis na permissions**
+3. **Huwag magbigay ng labis na mga permiso**
    ```bicep
    // ❌ BAD - too much access
-   roleDefinitionId: 'Owner'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')
    
    // ✅ GOOD - least privilege
-   roleDefinitionId: 'Storage Blob Data Reader'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1')
    ```
 
-4. **Huwag i-log ang mga sekreto**
+4. **Huwag mag-log ng mga sikreto**
    ```javascript
-   // ❌ MASAMA
+   // ❌ BAD
    console.log('API Key:', apiKey);
    
-   // ✅ MABUTI
+   // ✅ GOOD
    console.log('API Key retrieved successfully');
    ```
 
-5. **Huwag pag-usapan/pagbuhatin ang production identities sa iba pang environments**
+5. **Huwag magbahagi ng production identities sa iba't ibang environment**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1351,11 +1412,11 @@ az keyvault show \
 
 ---
 
-## Troubleshooting Guide
+## Gabay sa Pagsasaayos ng Problema
 
-### Problema: "Unauthorized" kapag ina-access ang Azure Storage
+### Problema: "Unauthorized" kapag nag-aaccess sa Azure Storage
 
-**Sintomas:**
+**Mga Sintomas:**
 ```
 Error: Unauthorized (403)
 AuthorizationPermissionMismatch: This request is not authorized to perform this operation
@@ -1364,23 +1425,23 @@ AuthorizationPermissionMismatch: This request is not authorized to perform this 
 **Diagnosis:**
 
 ```bash
-# Suriin kung naka-enable ang managed identity
+# Check if managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Inaasahan: "SystemAssigned" o "UserAssigned"
+# ✅ Expected: "SystemAssigned" or "UserAssigned"
 
-# Suriin ang mga role assignment
+# Check role assignments
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Inaasahan: Dapat makita ang "Storage Blob Data Contributor" o katulad na role
+# Expected: Should see "Storage Blob Data Contributor" or similar role
 ```
 
 **Mga Solusyon:**
 
-1. **Bigyan ng tamang RBAC role:**
+1. **Ibigay ang tamang RBAC role:**
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1391,21 +1452,21 @@ az role assignment create \
 
 2. **Maghintay para sa propagation (maaaring tumagal ng 5-10 minuto):**
 ```bash
-# Suriin ang katayuan ng pagtatalaga ng tungkulin.
+# Check role assignment status
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Beripikahin na ang application code ay gumagamit ng tamang credential:**
+3. **I-verify na ang application code ay gumagamit ng tamang credentials:**
 ```javascript
-// Siguraduhing ginagamit mo ang DefaultAzureCredential.
+// Make sure you're using DefaultAzureCredential
 const credential = new DefaultAzureCredential();
 ```
 
 ---
 
-### Problema: Tinanggihan ang access sa Key Vault
+### Problema: Access Denied sa Key Vault
 
-**Sintomas:**
+**Mga Sintomas:**
 ```
 Error: Forbidden (403)
 The user, group or application does not have secrets get permission
@@ -1414,13 +1475,13 @@ The user, group or application does not have secrets get permission
 **Diagnosis:**
 
 ```bash
-# Suriin kung naka-enable ang Key Vault RBAC
+# Check Key Vault RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Inaasahan: true
+# ✅ Expected: true
 
-# Suriin ang mga pagtatalaga ng tungkulin
+# Check role assignments
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1446,9 +1507,9 @@ az role assignment create \
 
 ---
 
-### Problema: Nabibigo ang DefaultAzureCredential nang lokal
+### Problema: Nag-fail ang DefaultAzureCredential locally
 
-**Sintomas:**
+**Mga Sintomas:**
 ```
 Error: DefaultAzureCredential failed to retrieve a token
 CredentialUnavailableError: No credential available
@@ -1457,10 +1518,10 @@ CredentialUnavailableError: No credential available
 **Diagnosis:**
 
 ```bash
-# Suriin kung naka-login ka
+# Check if you're logged in
 az account show
 
-# Suriin ang pagpapatunay ng Azure CLI
+# Check Azure CLI authentication
 az ad signed-in-user show
 ```
 
@@ -1471,23 +1532,23 @@ az ad signed-in-user show
 az login
 ```
 
-2. **I-set ang Azure subscription:**
+2. **Itakda ang Azure subscription:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
 
-3. **Para sa lokal na development, gumamit ng environment variables:**
+3. **Para sa local development, gamitin ang environment variables:**
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **O gumamit ng ibang credential lokal:**
+4. **O gumamit ng ibang credential locally:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// Gumamit ng AzureCliCredential para sa lokal na pag-develop
+// Use AzureCliCredential for local dev
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
@@ -1495,106 +1556,101 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Problema: Ang role assignment ay masyadong matagal mag-propagate
+### Problema: Matagal ang propagation ng role assignment
 
-**Sintomas:**
-- Matagumpay ang na-assign na role
-- Patuloy na nakakakuha ng 403 errors
-- Paminsan-minsang access (minsan gumagana, minsan hindi)
+**Mga Sintomas:**
+- Role na na-assign nang maayos
+- Patuloy na nakakatanggap ng 403 errors
+- Paminsang gumagana, paminsang hindi
 
 **Paliwanag:**
-Maaaring tumagal ng 5-10 minuto ang propagation ng mga Azure RBAC changes sa buong mundo.
+Ang mga pagbabago sa Azure RBAC ay maaaring tumagal ng 5-10 minuto para ma-propagate sa buong mundo.
 
 **Solusyon:**
 
 ```bash
-# Maghintay at subukan muli
+# Wait and retry
 echo "Waiting for RBAC propagation..."
-sleep 300  # Maghintay ng 5 minuto
+sleep 300  # Wait 5 minutes
 
-# Subukan ang pag-access
-curl https://myapp.azurecontainerapps.io/upload
+# Test access
+curl --fail -X POST "$APP_URL/upload"
 
-# Kung patuloy na pumapalya, i-restart ang app
+# If still failing, restart the app
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
 ---
 
 ## Mga Pagsasaalang-alang sa Gastos
 
-### Gastos ng Managed Identity
+### Mga Gastos ng Managed Identity
 
-| Mapagkukunan | Gastos |
-|----------|------|
-| **Managed Identity** | 🆓 **LIBRE** - Walang singil |
-| **RBAC Role Assignments** | 🆓 **LIBRE** - Walang singil |
-| **Microsoft Entra ID Token Requests** | 🆓 **LIBRE** - Kasama |
-| **Key Vault Operations** | $0.03 per 10,000 operations |
-| **Key Vault Storage** | $0.024 per secret per month |
+| Resource | Gastos |
+|----------|--------|
+| **Managed Identity** | 🆓 **LIBRE** - Walang bayad |
+| **RBAC Role Assignments** | 🆓 **LIBRE** - Walang bayad |
+| **Microsoft Entra ID Token Requests** | 🆓 **LIBRE** - Kasama na |
+| **Key Vault Operations** | $0.03 kada 10,000 operasyon |
+| **Key Vault secret storage** | Tingnan ang kasalukuyang presyo; huwag ipalagay na may buwanang bayad kada sikreto |
 
-**Nakakatipid ang managed identity sa pamamagitan ng:**
-- ✅ Pag-aalis ng Key Vault operations para sa service-to-service auth
+**Nakakatipid ang managed identity ng pera sa pamamagitan ng:**
+- ✅ Pagtanggal ng Key Vault operations para sa service-to-service na authentication
 - ✅ Pagbawas ng security incidents (walang na-leak na credentials)
-- ✅ Pagbawas ng operational overhead (walang manual rotation)
+- ✅ Pagbawas ng operational overhead (walang manual na pag-rotate)
 
-**Halimbawa ng Paghahambing ng Gastos (buwanang):**
-
-| Senaryo | Connection Strings | Managed Identity | Tipid |
-|----------|-------------------|-----------------|---------|
-| Maliit na app (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/buwan |
-| Katamtamang app (10M requests) | ~$200 | ~$0 | $200/buwan |
-| Malaking app (100M requests) | ~$1,500 | ~$0 | $1,500/buwan |
+Ang bilang ng request ng application ay hindi katumbas ng bilang ng operasyon sa Key Vault: ang caching at rotation patterns ang nagtatakda ng gastos sa secret-read. Hindi tinatanggal ng identity ang compute/storage charges. Tingnan ang [Key Vault pricing](https://azure.microsoft.com/pricing/details/key-vault/) at ang Azure Pricing Calculator para sa iyong rehiyon sa halip na manghula ng buwanang pagtitipid gamit lamang ang bilang ng request.
 
 ---
 
 ## Matuto Pa
 
-### Official Documentation
+### Opisyal na Dokumentasyon
 - [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
 
-### SDK Documentation
+### SDK Dokumentasyon
 - [@azure/identity (Node.js)](https://www.npmjs.com/package/@azure/identity)
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### Susunod na Mga Hakbang sa Kursong Ito
-- ← Nakaraan: [Configuration Management](configuration.md)
-- → Susunod: [First Project](first-project.md)
+### Mga Susunod na Hakbang sa Kursong Ito
+- ← Nakaraang: [Configuration Management](configuration.md)
+- → Susunod: [Infrastructure as Code](../chapter-04-infrastructure/README.md)
 - 🏠 [Course Home](../../README.md)
 
 ### Mga Kaugnay na Halimbawa
 - [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Gumagamit ng managed identity para sa Microsoft Foundry Models
-- [Microservices Example](../../../../examples/microservices) - Multi-service authentication patterns
+- [Microservices Example](../../../../examples/microservices) - Mga pattern ng authentication sa multi-service
 
 ---
 
 ## Buod
 
-**Natutunan mo:**
+**Natutuhan mo:**
 - ✅ Tatlong authentication patterns (connection strings, Key Vault, managed identity)
 - ✅ Paano i-enable at i-configure ang managed identity sa AZD
 - ✅ RBAC role assignments para sa mga Azure services
-- ✅ Key Vault integration para sa third-party secrets
-- ✅ User-assigned vs system-assigned identities
-- ✅ Mga security best practices at troubleshooting
+- ✅ Integrasyon ng Key Vault para sa mga third-party na sikreto
+- ✅ User-assigned kumpara sa system-assigned identities
+- ✅ Pinakamahusay na praktis sa seguridad at troubleshooting
 
-**Pangunahing Mga Punto:**
-1. **Palaging gumamit ng managed identity sa production** - Walang secrets, awtomatikong rotation
-2. **Gumamit ng least-privilege RBAC roles** - Magbigay lamang ng kinakailangang permiso
-3. **Itago ang third-party keys sa Key Vault** - Sentralisadong pamamahala ng sekreto
-4. **Ihiwalay ang mga identidad ayon sa environment** - Dev, staging, prod isolation
+**Mga Pangunahing Konklusyon:**
+1. **Palaging gamitin ang managed identity sa production** - Walang sikreto, awtomatikong pag-rotate
+2. **Gamitin ang least-privilege na mga RBAC role** - Bigyan lamang ng kinakailangang permiso
+3. **Itago ang third-party key sa Key Vault** - Sentralisadong pamamahala ng sikreto
+4. **Ihiwalay ang mga identity bawat environment** - Isolation para sa dev, staging, prod
 5. **I-enable ang audit logging** - Subaybayan kung sino ang nag-access ng ano
 
-**Susunod na Mga Hakbang:**
-1. Kumpletuhin ang mga practical exercises sa itaas
-2. I-migrate ang umiiral na app mula sa connection strings papuntang managed identity
-3. I-build ang iyong unang AZD project na may security mula sa unang araw: [First Project](first-project.md)
+**Mga Susunod na Hakbang:**
+1. Tapusin ang mga praktikal na ehersisyo sa itaas
+2. Ilipat ang umiiral na app mula sa connection strings papuntang managed identity
+3. Balikan ang beginner deployment flow: [First Project](../chapter-01-foundation/first-project.md)
 
 ---
 

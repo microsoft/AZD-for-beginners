@@ -1,73 +1,75 @@
-# Mga Pre-Flight Check para sa Pag-deploy gamit ang AZD
+# Mga Pagsusuri Bago Lumipad para sa Mga AZD Deployments
 
-**Chapter Navigation:**
-- **📚 Tahanan ng Kurso**: [AZD For Beginners](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Chapter 6 - Pre-Deployment Validation & Planning
-- **⬅️ Nakaraang**: [SKU Selection](sku-selection.md)
-- **➡️ Susunod na Kabanata**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Kaugnay**: [Chapter 4: Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Tahanan ng Kurso**: [AZD Para sa mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 6 - Pagpapatunay at Pagpaplano Bago Mag-deploy
+- **⬅️ Nakaraan**: [Pagpili ng SKU](sku-selection.md)
+- **➡️ Susunod na Kabanata**: [Kabanata 7: Pag-troubleshoot](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Kaugnay**: [Kabanata 4: Gabay sa Deployment](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Panimula
 
-Ang komprehensibong gabay na ito ay nagbibigay ng mga pre-deployment validation script at mga pamamaraan upang matiyak ang matagumpay na Azure Developer CLI deployments bago ang pagsisimula. Matutunan kung paano magpatupad ng awtomatikong mga tseke para sa authentication, availability ng resource, mga quota, pagsunod sa seguridad, at mga pangangailangan sa performance upang maiwasan ang pagkabigo ng deployment at mapabuti ang rate ng tagumpay ng deployment.
+Ang komprehensibong gabay na ito ay naglalaman ng mga script at pamamaraan para sa pagpapatunay bago mag-deploy upang matiyak ang matagumpay na Azure Developer CLI deployments bago magsimula. Matutunan kung paano magpatupad ng awtomatikong pagsusuri para sa authentication, pagkakaroon ng mga resources, quota, pagsunod sa seguridad, at mga kinakailangan sa performance upang maiwasan ang mga pagkabigo sa deployment at mapahusay ang tagumpay ng deployment.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng gabay na ito, ikaw ay:
-- Magmamay-ari ng mga awtomatikong teknik at script para sa pre-deployment validation
-- Mauunawaan ang komprehensibong estratehiya sa pag-check para sa authentication, mga pahintulot, at mga quota
-- Makakapagpatupad ng mga pamamaraan para sa pagpapatunay ng availability at kapasidad ng resource
-- Makakapag-configure ng mga tseke sa seguridad at pagsunod para sa mga polisiya ng organisasyon
-- Makakapagdisenyo ng mga workflow para sa pagtataya ng gastos at pag-validate ng badyet
-- Makalilikha ng custom na pre-flight check automation para sa mga CI/CD pipeline
+Sa pagtatapos ng gabay na ito, magagawa mong:
+- Maging bihasa sa mga awtomatikong teknik at script para sa pagpapatunay bago mag-deploy
+- Maunawaan ang mga komprehensibong estratehiya sa pagsusuri para sa authentication, permiso, at quota
+- Magpatupad ng mga pamamaraan sa pagpapatunay sa pagkakaroon at kapasidad ng mga resources
+- I-configure ang mga pagsusuri sa seguridad at pagsunod sa mga patakaran ng organisasyon
+- Disenyo ng mga daloy ng trabaho para sa pagtataya ng gastos at pagpapatunay ng badyet
+- Gumawa ng pasadyang awtomatiko ng pre-flight check para sa mga CI/CD pipeline
 
-## Mga Kinalabasan ng Pagkatuto
+## Mga Kinalalabasan sa Pagkatuto
 
-Pagkatapos makumpleto, magagawa mo:
-- Lumikha at magpatupad ng komprehensibong mga pre-flight validation script
-- Magdisenyo ng mga awtomatikong workflow ng tseke para sa iba't ibang senaryo ng deployment
-- Magpatupad ng mga pamamaraan at polisiya na tiyak sa isang environment para sa pagpapatunay
-- Mag-configure ng proactive na monitoring at alerting para sa kahandaan ng deployment
-- Mag-troubleshoot ng mga isyu bago ang deployment at magpatupad ng mga corrective action
-- I-integrate ang pre-flight checks sa DevOps pipeline at mga automation workflow
+Sa pagtatapos, magagawa mong:
+- Gumawa at magsagawa ng komprehensibong mga script ng pre-flight validation
+- Magdisenyo ng mga awtomatikong daloy ng trabaho sa pagsusuri para sa iba't ibang senaryo ng deployment
+- Magpatupad ng mga pamamaraan at patakaran sa pagpapatunay na tiyak sa kapaligiran
+- I-configure ang proaktibong pagsubaybay at pag-alerto para sa kahandaan sa deployment
+- Mag-troubleshoot ng mga isyu bago mag-deploy at magpatupad ng mga kaukulang remedyo
+- Isama ang pre-flight checks sa DevOps pipeline at mga daloy ng awtomatiko
 
 ## Talaan ng Nilalaman
 
-- [Pangkalahatang-ideya](#pangkalahatang-ideya)
-- [Automatikong Pre-flight na Script](#automatikong-pre-flight-na-script)
-- [Manwal na Checklist ng Pagpapatunay](#codeblock1)
-- [Pagpapatunay ng Kapaligiran](#✅-backup-at-pag-recover)
-- [Pagpapatunay ng Resource](#pagpapatunay-ng-production-environment)
-- [Mga Pag-check sa Seguridad at Pagsunod](#security--compliance-checks)
-- [Pagpaplano ng Performance at Kapasidad](#performance--capacity-planning)
-- [Pag-troubleshoot ng Mga Karaniwang Isyu](#troubleshooting-common-issues)
+- [Pangkalahatang-ideya](#overview)
+- [Awtomatikong Pre-flight Script](#automated-pre-flight-script)
+- [Manwal na Checklist para sa Pagpapatunay](#manual-validation-checklist)
+- [Pagpapatunay ng Kapaligiran](#environment-validation)
+- [Pagpapatunay ng Resource](#resource-validation)
+- [Mga Pagsusuri sa Seguridad at Pagsunod](#security--compliance-checks)
+- [Pagpaplano ng Performance at Kapasidad](capacity-planning.md)
+- [Pag-troubleshoot ng Karaniwang Mga Isyu](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 ## Pangkalahatang-ideya
 
-Ang mga pre-flight check ay mahahalagang pagpapatunay na isinagawa bago mag-deploy upang matiyak ang:
+Ang mga pre-flight check ay mahalagang mga pagpapatunay na isinasagawa bago mag-deploy upang matiyak ang:
 
-- **Availability ng resource** at mga quota sa target na mga rehiyon
-- **Authentication at mga pahintulot** na wastong naka-configure
-- **Bisa ng template** at pagiging tama ng mga parameter
-- **Network connectivity** at mga dependency
-- **Pagsunod sa seguridad** sa mga polisiya ng organisasyon
-- **Pagtataya ng gastos** na nasa loob ng mga limitasyon ng badyet
+- **Pagkakaroon ng resource** at quota sa mga target na rehiyon
+- **Authentication at mga permiso** ay tama ang pagkaka-configure
+- **Bisa ng template** at tamang mga parameter
+- **Konektibidad sa network** at mga dependency
+- **Pagsunod sa seguridad** ayon sa mga patakaran ng organisasyon
+- **Pagtataya ng gastos** na naaayon sa mga limitasyon ng badyet
 
-### Kailan Patakbuhin ang Pre-flight Checks
+### Kailan Dapat Isagawa ang Pre-flight Checks
 
-- **Bago ang unang pag-deploy** sa isang bagong kapaligiran
-- **Pagkatapos ng malalaking pagbabago sa template**
-- **Bago ang mga production deployments**
-- **Kapag nagpapalit ng Azure region**
-- **Bilang bahagi ng CI/CD pipelines**
+- **Bago ang unang deployment** sa bagong kapaligiran
+- **Pagkatapos ng mahahalagang pagbabago sa template**
+- **Bago ang mga deployment sa produksyon**
+- **Kapag nagbabago ng mga Azure region**
+- **Bilang bahagi ng mga CI/CD pipeline**
 
 ---
 
-## Automatikong Pre-flight na Script
+## Awtomatikong Pre-flight Script
 
-### PowerShell Pre-flight Tagasuri
+> **Saklaw at mga kinakailangan:** Ito ay panimulang mga script na dapat isave sa sarili mong proyekto, hindi mga lokal na file na ibinibigay sa kabanatang ito. Ang bersyon ng PowerShell ay nangangailangan ng PowerShell **7.3+** (para sa pag-propagate ng error ng native command) at ang module na `powershell-yaml` para sa `ConvertFrom-Yaml`. Ang bersyon ng Bash ay nangangailangan ng Bash, `jq`, Python 3.10+, at PyYAML. Pareho nitong kinakailangan ang Azure CLI, azd, at isang gumaganang proyekto ng Bicep. Mga diagnostic ito, hindi patunay ng kahandaan sa deployment, kapasidad, o pagsunod. Suriin ang mga hook ng template bago mag-`azd provision --preview`; ang mga hook ay maaaring magsagawa ng kahit anong mga utos sa proyekto.
+
+### PowerShell Pre-flight Checker
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +102,14 @@ param(
     [switch]$Detailed
 )
 
-# Pagkakulay ng output
+# Fail native commands into catch blocks instead of reporting false successes.
+$ErrorActionPreference = 'Stop'
+if ($PSVersionTable.PSVersion -lt [version]'7.3') {
+    throw 'PowerShell 7.3+ is required for this script.'
+}
+$PSNativeCommandUseErrorActionPreference = $true
+
+# Color coding for output
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +137,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # Suriin ang pag-install ng AZD
+    # Check AZD installation
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +147,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Suriin ang pag-install ng Azure CLI
+    # Check Azure CLI installation
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +157,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Suriin ang bersyon ng PowerShell
+    # Check PowerShell version
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,23 +172,23 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # Suriin ang awtentikasyon ng AZD
+        # Check AZD authentication
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
-        if ($azdAuth.status -eq "Logged-in") {
-            Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
+        if ($azdAuth.status -eq "success") {
+            Write-Status "AZD authentication" "Success" "Token available; expires $($azdAuth.expiresOn)"
         }
         else {
             Write-Status "AZD authentication" "Error" "Run 'azd auth login'"
             return $false
         }
         
-        # Suriin ang awtentikasyon ng Azure CLI
+        # Check Azure CLI authentication
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Patunayan ang pag-access sa subscription
+        # Validate subscription access
         $subscriptionId = $azAccount.id
-        $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
+        $subscription = az account show --subscription $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
         
         return $true
@@ -194,39 +203,29 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Kunin ang mga role assignment ng kasalukuyang gumagamit
+        # Get current user's role assignments
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
             $_.roleDefinitionName -eq "Contributor" -or 
-            $_.roleDefinitionName -eq "Owner" -or
-            $_.roleDefinitionName -eq "User Access Administrator"
+            $_.roleDefinitionName -eq "Owner"
         }
         
         if ($hasContributor) {
-            Write-Status "Required permissions" "Success" "Contributor or higher role found"
+            Write-Status "Role assignment inventory" "Info" "Contributor/Owner found; verify effective scope, policy and any role-assignment permissions separately"
         }
         else {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Subukan ang paglikha ng resource group (kung tinukoy)
+        # Test resource group creation (if specified)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Subukan ang kakayahang lumikha ng resource group
-                try {
-                    az group create --name "preflight-test-rg" --location $Location --output none
-                    az group delete --name "preflight-test-rg" --yes --output none
-                    Write-Status "Resource group creation" "Success" "Can create resource groups"
-                }
-                catch {
-                    Write-Status "Resource group creation" "Error" "Cannot create resource groups"
-                    return $false
-                }
+                Write-Status "Resource group creation" "Warning" "Group does not exist. Review subscription-scope permissions; this diagnostic does not create/delete test groups."
             }
         }
         
@@ -242,25 +241,28 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Suriin ang mga quota ng compute
+        # Check compute quotas
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # Suriin ang mga tiyak na quota
+        # Check specific quotas
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
-        if ($coreQuota) {
+        if ($coreQuota -and $coreQuota.limit -gt 0) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
             if ($usagePercent -lt 80) {
                 Write-Status "Compute cores quota" "Success" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
+            } else {
+                Write-Status "Compute cores quota" "Warning" "Missing or zero quota; verify service requirements"
             }
             else {
                 Write-Status "Compute cores quota" "Warning" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
             }
         }
         
-        # Suriin ang mga limitasyon ng App Service
+        # Check App Service limits
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
-            if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
+            $displayLocation = az account list-locations --query "[?name=='$Location'].displayName | [0]" -o tsv
+            if ($appServiceUsage | Where-Object { $_.name -eq $Location -or $_.name -eq $displayLocation }) {
                 Write-Status "App Service availability" "Success" "Available in $Location"
             }
             else {
@@ -271,28 +273,27 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Suriin ang mga limitasyon ng storage account
-        $storageAccounts = az storage account list --output json | ConvertFrom-Json
-        $accountCount = ($storageAccounts | Measure-Object).Count
-        if ($accountCount -lt 200) {
-            Write-Status "Storage account limit" "Success" "$accountCount/250 storage accounts"
+        # Check storage account limits
+        $storageUsage = @(az storage account show-usage --location $Location --output json | ConvertFrom-Json)[0]
+        if ($storageUsage -and $storageUsage.limit -gt 0 -and $storageUsage.currentValue -lt $storageUsage.limit) {
+            Write-Status "Storage account quota" "Info" "$($storageUsage.currentValue)/$($storageUsage.limit) in $Location"
         }
         else {
-            Write-Status "Storage account limit" "Warning" "$accountCount/250 storage accounts"
+            Write-Status "Storage account quota" "Warning" "No headroom or missing quota data"
         }
         
         return $true
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # Hindi humahadlang
+        return $true # Non-blocking
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Subukan ang mga endpoint ng Azure
+    # Test Azure endpoints
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -306,13 +307,19 @@ function Test-NetworkConnectivity {
             Write-Status "Connectivity to $endpoint" "Success" "Status: $($response.StatusCode)"
         }
         catch {
-            Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+            # A 401/403/404 response may still prove HTTP reachability.
+            if ($_.Exception.Response) {
+                Write-Status "Connectivity to $endpoint" "Info" "HTTP response received; this is not an authorization test"
+            } else {
+                Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+                return $false
+            }
         }
     }
     
-    # Subukan ang paglutas ng DNS
+    # Test DNS resolution
     try {
-        $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
+        $dnsResult = [System.Net.Dns]::GetHostAddresses("management.azure.com")
         Write-Status "DNS resolution" "Success" "Resolved successfully"
     }
     catch {
@@ -326,18 +333,21 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Suriin kung umiiral ang azure.yaml
+    # Check if azure.yaml exists
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # I-parse ang azure.yaml
+        # Parse azure.yaml
         try {
+            if (-not (Get-Command ConvertFrom-Yaml -ErrorAction SilentlyContinue)) {
+                throw 'ConvertFrom-Yaml requires the powershell-yaml module.'
+            }
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Patunayan ang mga serbisyo
+            # Validate services
             if ($azureYaml.services) {
-                $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
+                $serviceCount = $azureYaml.services.Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
             }
             else {
@@ -345,7 +355,7 @@ function Test-TemplateValidation {
             }
         }
         catch {
-            Write-Status "azure.yaml parsing" "Error" "Invalid YAML format"
+            Write-Status "azure.yaml parsing" "Error" $_.Exception.Message
             return $false
         }
     }
@@ -354,13 +364,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Suriin ang mga file ng infrastructure
+    # Check for infrastructure files
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Patunayan ang main.bicep kung umiiral ito
+            # Validate main.bicep if it exists
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,12 +391,12 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 BAGO: Subukan ang preview ng infrastructure (ligtas na dry-run)
+    # Preview ARM changes only after reviewing the project's hooks.
     try {
-        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        Write-Status "Infrastructure preview test" "Info" "Previewing proposed changes (not a capacity or deployment guarantee)..."
         $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
-            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+            Write-Status "Infrastructure preview" "Success" "Preview completed; review changes and remaining diagnostics"
         }
         else {
             Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
@@ -403,7 +413,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # Suriin kung wasto ang lokasyon
+        # Check if location is valid
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,13 +425,13 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Suriin kung available ang serbisyo sa rehiyon
+        # Check service availability in region
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
             try {
                 $providers = az provider show --namespace $service --output json | ConvertFrom-Json
-                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $Location }
+                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $validLocation.displayName }
                 
                 if ($resourceTypes) {
                     Write-Status "$service availability" "Success" "Available in $Location"
@@ -446,11 +456,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Pangunahing pagtatantya ng gastos (kakailanganin ang Azure Pricing API para sa tumpak na pagtatantya)
+    # Basic cost estimation (would need Azure Pricing API for accurate estimates)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Suriin kung umiiral ang badyet
+    # Check if budget exists
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +480,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Suriin ang mga karaniwang kasanayan sa seguridad
+    # Text-search heuristics only: presence of keywords is not compliance proof.
     try {
-        # Suriin kung naka-configure ang Key Vault
+        # Check if Key Vault is configured
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +490,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Suriin ang paggamit ng managed identity
+        # Check for managed identity usage
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +498,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Suriin ang pagpapatupad ng HTTPS
+        # Check for HTTPS enforcement
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +514,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# Pangunahing pagpapatupad
+# Main execution
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +526,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # Patakbuhin ang lahat ng pagsusuri
+    # Run all checks
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -527,7 +537,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # Buod
+    # Summary
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -547,7 +557,7 @@ function Invoke-PreflightCheck {
     Write-Host ""
     if ($allPassed) {
         Write-Host "${Green}✓ All pre-flight checks passed ($passedCount/$totalCount)${Reset}"
-        Write-Host "${Green}✓ Ready for deployment!${Reset}"
+        Write-Host "${Green}✓ Implemented checks passed; review warnings and untested requirements.${Reset}"
         exit 0
     }
     else {
@@ -557,26 +567,27 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Patakbuhin ang paunang pagsusuri
+# Run the pre-flight check
+azd env select $EnvironmentName
 Invoke-PreflightCheck
 ```
 
-### Bash Pre-flight Tagasuri
+### Bash Pre-flight Checker
 
 ```bash
 #!/bin/bash
-# Bersyon ng Bash ng mga paunang tseke para sa mga sistema ng Unix/Linux
+# Bash version of pre-flight checks for Unix/Linux systems
 
 set -euo pipefail
 
-# Mga code ng kulay
+# Color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # Walang kulay
+NC='\033[0m' # No Color
 
-# Mga global na variable
+# Global variables
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -606,7 +617,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # Suriin ang pag-install ng AZD
+    # Check AZD installation
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +626,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Suriin ang pag-install ng Azure CLI
+    # Check Azure CLI installation
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,12 +635,16 @@ check_prerequisites() {
         return 1
     fi
     
-    # Suriin ang pag-install ng jq
+    # Check jq installation
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
-        print_status "jq not found" "warning" "Install jq for better JSON parsing"
+        print_status "jq not found" "error" "jq is required"
+        return 1
     fi
+    python3 -c "import yaml" >/dev/null 2>&1 || {
+        print_status "Python/PyYAML not found" "error" "Python 3 and PyYAML are required"; return 1;
+    }
     
     return 0
 }
@@ -637,16 +652,16 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Suriin ang pag-awtentikasyon ng AZD
-    if azd auth login --check-status >/dev/null 2>&1; then
-        local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
-        print_status "AZD authentication" "success" "User: $principal_name"
+    # Check AZD authentication
+    # --check-status returns exit code 0 even when unauthenticated; inspect JSON.
+    if azd auth login --check-status --output json | jq -e '.status == "success"' >/dev/null; then
+        print_status "AZD authentication" "success" "Token available"
     else
         print_status "AZD authentication" "error" "Run 'azd auth login'"
         return 1
     fi
     
-    # Suriin ang pag-awtentikasyon ng Azure CLI
+    # Check Azure CLI authentication
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,11 +676,11 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # Suriin ang azure.yaml
+    # Check azure.yaml
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # Pangunahing pag-validate ng YAML
+        # Basic YAML validation
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -677,13 +692,13 @@ check_template_validation() {
         return 1
     fi
     
-    # Suriin ang mga file ng imprastruktura
+    # Check infrastructure files
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # I-validate ang main.bicep kung umiiral
+            # Validate main.bicep if exists
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +721,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Suriin kung balido ang lokasyon
+    # Check if location is valid
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,11 +729,13 @@ check_regional_availability() {
         return 1
     fi
     
-    # Suriin kung available ang serbisyo
+    # Check service availability
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
+    local display_location
+    display_location=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
     for service in "${services[@]}"; do
-        if az provider show --namespace "$service" --query "resourceTypes[?locations[?contains(@, '$LOCATION')]]" --output tsv | grep -q .; then
+        if az provider show --namespace "$service" --query "resourceTypes[?contains(locations, '$display_location')]" --output tsv | grep -q .; then
             print_status "$service availability" "success" "Available in $LOCATION"
         else
             print_status "$service availability" "warning" "May not be available in $LOCATION"
@@ -729,7 +746,7 @@ check_regional_availability() {
 }
 
 main() {
-    # I-parse ang mga argumento mula sa command line
+    # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +772,7 @@ main() {
         esac
     done
     
-    # I-validate ang mga kinakailangang parameter
+    # Validate required parameters
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,20 +785,22 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Isagawa ang mga tseke
+    # Run checks
     local all_passed=true
     
     check_prerequisites || all_passed=false
+    if ! $all_passed; then exit 1; fi
+    azd env select "$ENVIRONMENT_NAME" || exit 1
     check_authentication || all_passed=false
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # Buod
+    # Summary
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
         echo -e "${GREEN}✓ All pre-flight checks passed${NC}"
-        echo -e "${GREEN}✓ Ready for deployment!${NC}"
+        echo -e "${GREEN}✓ Implemented checks passed; review warnings and untested requirements.${NC}"
         exit 0
     else
         echo -e "${RED}✗ Some pre-flight checks failed${NC}"
@@ -790,100 +809,103 @@ main() {
     fi
 }
 
-# Patakbuhin ang pangunahing function
+# Run main function
 main "$@"
 ```
 
 ---
 
-## Manwal na Checklist ng Pagpapatunay
+## Manwal na Checklist para sa Pagpapatunay
 
-### Checklist Bago ang Pag-deploy
+### Checklist Bago Mag-deploy
 
-I-print ang checklist na ito at beripikahin ang bawat item bago mag-deploy:
+I-print ang checklist na ito at suriin ang bawat item bago mag-deploy:
 
 #### ✅ Pagsasaayos ng Kapaligiran
-- [ ] AZD CLI installed and updated to latest version
-- [ ] Azure CLI installed and authenticated
-- [ ] Correct Azure subscription selected
-- [ ] Environment name is unique and follows naming conventions
-- [ ] Target resource group identified or can be created
+- [ ] Na-install at na-update ang AZD CLI sa pinakabagong bersyon
+- [ ] Na-install at na-authenticate ang Azure CLI
+- [ ] Napili ang tamang Azure subscription
+- [ ] Ang pangalan ng kapaligiran ay natatangi at sumusunod sa mga panuntunan sa pag-label
+- [ ] Natukoy o maaaring malikha ang target resource group
 
-#### ✅ Pag-authenticate at Mga Pahintulot
-- [ ] Matagumpay na naka-authenticate gamit ang `azd auth login`
-- [ ] Ang user ay may Contributor role sa target subscription/resource group
-- [ ] Naka-configure ang service principal para sa CI/CD (kung naaangkop)
-- [ ] Walang nag-expire na certificate o credentials
+#### ✅ Authentication at Mga Permiso
+- [ ] Matagumpay na na-authenticate gamit ang `azd auth login`
+- [ ] Ang user ay may Contributor na papel sa target subscription/resource group
+- [ ] Kung ang mga template ay lumilikha ng role assignments, ang identitad na nagde-deploy ay may scoped role-assignment permissions rin (Contributor lang ay hindi sapat)
+- [ ] Nakakonfig na service principal para sa CI/CD (kung naaangkop)
+- [ ] Walang expired na mga sertipiko o kredensyal
 
 #### ✅ Pagpapatunay ng Template
-- [ ] `azure.yaml` exists and is valid YAML
-- [ ] All services defined in azure.yaml have corresponding source code
-- [ ] Bicep templates in `infra/` directory are present
-- [ ] `main.bicep` compiles without errors (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastructure preview runs successfully (`azd provision --preview`)
-- [ ] All required parameters have default values or will be provided
-- [ ] No hardcoded secrets in templates
+- [ ] Umiiral at valid YAML ang `azure.yaml`
+- [ ] Lahat ng serbisyo na tinukoy sa azure.yaml ay may kaukulang source code
+- [ ] Naroon ang mga Bicep template sa direktoryo ng `infra/`
+- [ ] Naka-compile ang `main.bicep` nang walang error (`az bicep build --file infra/main.bicep`)
+- [ ] Matagumpay na tumatakbo ang preview ng imprastruktura (`azd provision --preview`)
+- [ ] Lahat ng kinakailangang parameter ay may default na halaga o ibibigay
+- [ ] Walang hardcoded na mga lihim sa mga template
 
 #### ✅ Pagpaplano ng Resource
-- [ ] Target Azure region selected and validated
-- [ ] Required Azure services available in target region
-- [ ] Sufficient quotas available for planned resources
-- [ ] Resource naming conflicts checked
-- [ ] Dependencies between resources understood
+- [ ] Napili at na-validate ang target Azure region
+- [ ] Available ang mga kinakailangang Azure service sa target region
+- [ ] May sapat na quota para sa mga nakaplanong resources
+- [ ] Nasuri ang mga conflict sa pagbigay ng pangalan ng resource
+- [ ] Naintindihan ang mga dependency sa pagitan ng mga resource
 
 #### ✅ Network at Seguridad
-- [ ] Network connectivity to Azure endpoints verified
-- [ ] Firewall/proxy settings configured if needed
-- [ ] Key Vault configured for secrets management
-- [ ] Managed identities used where possible
-- [ ] HTTPS enforcement enabled for web applications
+- [ ] Napatunayan ang network connectivity sa mga Azure endpoint
+- [ ] Na-configure ang mga setting ng firewall/proxy kung kinakailangan
+- [ ] Nakakonfig ang Key Vault para sa pamamahala ng lihim
+- [ ] Ginamit ang managed identities kung saan posible
+- [ ] Pinagana ang HTTPS enforcement para sa mga web application
 
 #### ✅ Pamamahala ng Gastos
-- [ ] Cost estimates calculated using Azure Pricing Calculator
-- [ ] Budget alerts configured if required
-- [ ] Appropriate SKUs selected for environment type
-- [ ] Reserved capacity considered for production workloads
+- [ ] Tinantiya ang mga gastos gamit ang Azure Pricing Calculator
+- [ ] Na-configure ang mga alerto sa badyet kung kinakailangan
+- [ ] Napili ang angkop na mga SKU para sa uri ng kapaligiran
+- [ ] Isinasaalang-alang ang reserved capacity para sa production workloads
 
-#### ✅ Monitoring at Observability
-- [ ] Application Insights configured in templates
-- [ ] Log Analytics workspace planned
-- [ ] Alert rules defined for critical metrics
-- [ ] Health check endpoints implemented in applications
+#### ✅ Pagsubaybay at Obsersasyon
+- [ ] Nakakonfig ang Application Insights sa mga template
+- [ ] Naplanong Log Analytics workspace
+- [ ] Na-define ang mga alert rule para sa kritikal na metrics
+- [ ] Naipatupad ang mga health check endpoint sa mga application
 
-#### ✅ Backup at Pag-recover
-- [ ] Backup strategy defined for data resources
-- [ ] Recovery time objectives (RTO) documented
-- [ ] Recovery point objectives (RPO) documented
-- [ ] Disaster recovery plan in place for production
+#### ✅ Backup at Pagbawi
+- [ ] Na-define ang backup strategy para sa mga data resource
+- [ ] Nakatala ang recovery time objectives (RTO)
+- [ ] Nakatala ang recovery point objectives (RPO)
+- [ ] May disaster recovery plan para sa produksyon
 
 ---
 
 ## Pagpapatunay ng Kapaligiran
 
+Ang mga sumusunod na `grep` na pagsusuri ay mga paalala lamang bilang halimbawa. Ang pagkakaroon ng katugmang salita ay hindi nagpapatunay na ang isang feature ay na-configure para sa tamang resource, at ang pagkawala ng salita ay hindi patunay na wala ito (maaaring ibigay ng mga module/defaults). Huwag gamitin ito bilang mga gate sa pagsunod sa produksyon.
+
 ### Pagpapatunay ng Development Environment
 
 ```bash
 #!/bin/bash
-# Mga partikular na validasyon para sa kapaligiran ng pag-develop
+# Development environment specific validations
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Suriin ang mga configuration na angkop para sa pag-develop
+    # Check for development-friendly configurations
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Suriin ang mga configuration para sa awtomatikong pag-shutdown
+    # Check for auto-shutdown configurations
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # I-validate ang mga configuration ng database para sa pag-develop
+    # Validate development database configurations
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -896,33 +918,33 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# Mga partikular na pagpapatunay para sa production environment
+# Production environment specific validations
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Suriin ang mga pagsasaayos para sa mataas na availability
+    # Check for high availability configurations
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Suriin ang mga pagsasaayos ng backup
+    # Check for backup configurations
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Patunayan ang pagsasaayos ng monitoring
+    # Validate monitoring setup
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Suriin ang mga pagsasaayos ng seguridad
+    # Check for security configurations
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -935,7 +957,7 @@ validate_prod_environment() {
 
 ## Pagpapatunay ng Resource
 
-### Script para sa Pag-validate ng Quota
+### Script para sa Pagpapatunay ng Quota
 
 ```python
 #!/usr/bin/env python3
@@ -948,17 +970,17 @@ import subprocess
 import sys
 from typing import Dict, List, Tuple
 
-def run_command(command: List[str]) -> Dict:
+def run_command(command: List[str]) -> dict | list | None:
     """Run Azure CLI command and return JSON result"""
     try:
         result = subprocess.run(command, capture_output=True, text=True, check=True)
         return json.loads(result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error running command {' '.join(command)}: {e}")
-        return {}
+        return None
     except json.JSONDecodeError as e:
         print(f"Error parsing JSON: {e}")
-        return {}
+        return None
 
 def check_compute_quotas(location: str) -> bool:
     """Check compute quotas in specified location"""
@@ -976,7 +998,10 @@ def check_compute_quotas(location: str) -> bool:
         if quota_item['name']['value'] in critical_quotas:
             current = quota_item['currentValue']
             limit = quota_item['limit']
-            usage_percent = (current / limit) * 100 if limit > 0 else 0
+            if limit <= 0:
+                print(f"❌ No quota for {quota_item['name']['value']}")
+                return False
+            usage_percent = (current / limit) * 100
             
             status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
             print(f"{status} {quota_item['name']['localizedValue']}: {current}/{limit} ({usage_percent:.1f}%)")
@@ -990,15 +1015,17 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Kunin ang mga storage account sa subscription
-    accounts = run_command(['az', 'storage', 'account', 'list'])
+    # Retrieve regional quota rather than assuming a subscription-wide constant.
+    usages = run_command(['az', 'storage', 'account', 'show-usage', '--location', location])
     
-    if accounts is None:
+    if not usages:
         print("❌ Could not retrieve storage account information")
         return False
     
-    account_count = len(accounts)
-    max_accounts = 250  # Default na limit ng Azure
+    account_count = usages['currentValue']
+    max_accounts = usages['limit']
+    if max_accounts <= 0:
+        return False
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,18 +1038,14 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # Suriin ang mga virtual network
-    vnets = run_command(['az', 'network', 'vnet', 'list'])
-    if vnets is not None:
-        vnet_count = len(vnets)
-        print(f"✅ Virtual Networks: {vnet_count}/1000")
-    
-    # Suriin ang mga pampublikong IP address
-    public_ips = run_command(['az', 'network', 'public-ip', 'list'])
-    if public_ips is not None:
-        ip_count = len(public_ips)
-        print(f"✅ Public IP Addresses: {ip_count}/1000")
-    
+    usages = run_command(['az', 'network', 'list-usages', '--location', location])
+    if not usages:
+        return False
+    for item in usages:
+        current, limit = item['currentValue'], item['limit']
+        print(f"{item['name']['value']}: {current}/{limit}")
+        if limit <= 0 or current >= limit:
+            return False
     return True
 
 def main():
@@ -1034,19 +1057,20 @@ def main():
     
     print("🔍 Azure Quota and Limits Validation")
     print(f"📍 Location: {location}")
-    print(f"⏰ Time: {subprocess.run(['date'], capture_output=True, text=True).stdout.strip()}")
+    from datetime import datetime, timezone
+    print(f"⏰ Time: {datetime.now(timezone.utc).isoformat()}")
     
     all_passed = True
     
-    # Patakbuhin ang mga pagsusuri
+    # Run checks
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # Buod
+    # Summary
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
-        print("✅ All quota checks passed - sufficient capacity available")
+        print("✅ Implemented quota thresholds passed; not a capacity reservation")
         sys.exit(0)
     else:
         print("❌ Some quota limits are near capacity - consider requesting increases")
@@ -1058,20 +1082,20 @@ if __name__ == "__main__":
 
 ---
 
-## Mga Pag-check sa Seguridad at Pagsunod
+## Mga Pagsusuri sa Seguridad at Pagsunod
 
-### Script para sa Pag-validate ng Seguridad
+### Script sa Pagpapatunay ng Seguridad
 
 ```bash
 #!/bin/bash
-# Pagpapatunay ng seguridad at pagsunod para sa mga deployment ng AZD
+# Security and compliance validation for AZD deployments
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Suriin ang paggamit ng Key Vault
+    # Check for Key Vault usage
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Suriin ang paggamit ng managed identity
+    # Check for managed identity usage
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Suriin ang pagpapatupad ng HTTPS
+    # Check for HTTPS enforcement
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1119,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Suriin ang minimum na bersyon ng TLS
+    # Check for minimum TLS version
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1127,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Suriin ang mga paghihigpit sa pampublikong pag-access
+    # Check for public access restrictions
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1135,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Suriin ang mga grupo ng seguridad sa network
+    # Check for network security groups
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1148,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Suriin ang pag-encrypt ng data
+    # Check for data encryption
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Suriin ang pag-log para sa pag-audit
+    # Check for audit logging
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Suriin ang mga polisiya sa backup at pagpapanatili
+    # Check for backup and retention policies
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1170,7 @@ check_compliance_requirements() {
     fi
 }
 
-# Pangunahing pagpapatupad
+# Main execution
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1157,13 +1181,13 @@ main() {
         exit 1
     fi
     
-    local security_issues
-    security_issues=$(check_security_practices)
+    local security_issues=0
+    check_security_practices || security_issues=$?
     check_compliance_requirements
     
     echo -e "\n=== Security Check Summary ==="
     if [[ $security_issues -eq 0 ]]; then
-        echo "✅ All security checks passed"
+        echo "✅ Text-search reminders passed; this is not a security/compliance assessment"
         exit 0
     else
         echo "⚠️  $security_issues security recommendations found"
@@ -1179,7 +1203,7 @@ main "$@"
 
 ## Integrasyon sa CI/CD
 
-### Integrasyon ng GitHub Actions
+### Integrasyon sa GitHub Actions
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1203,20 +1227,36 @@ on:
 
 jobs:
   preflight:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
     - name: Install AZD
       uses: Azure/setup-azd@v0.1.0
+      with:
+        version: 1.37.2
     
-    - name: Install Azure CLI
-      uses: azure/setup-azure@v3
+    - name: Verify prerequisites
+      run: |
+        az version
+        jq --version
+        python3 -c "import yaml"
     
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+    - name: AZD Login
+      run: |
+        azd auth login --client-id "${{ vars.AZURE_CLIENT_ID }}" \
+          --tenant-id "${{ vars.AZURE_TENANT_ID }}" \
+          --federated-credential-provider github
     
     - name: Run Pre-flight Checks
       run: |
@@ -1230,15 +1270,11 @@ jobs:
         chmod +x ./scripts/security-check.sh
         ./scripts/security-check.sh
     
-    - name: Upload Results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: preflight-results
-        path: preflight-results.json
 ```
 
-### Integrasyon ng Azure DevOps
+I-configure ang federated credentials para sa workflow na ito at gumawa/ibalik ang napiling azd environment bago patakbuhin ang mga na-save na script. Ang mga halimbawang ito ay nagsusulat lamang ng output sa console; walang nilikhang `preflight-results.json` o JUnit file.
+
+### Integrasyon sa Azure DevOps
 
 ```yaml
 trigger: none
@@ -1272,76 +1308,80 @@ steps:
       curl -fsSL https://aka.ms/install-azd.sh | bash
       export PATH=$PATH:~/.azd/bin
 
-- task: Bash@3
+- task: AzureCLI@2
   displayName: 'Run Pre-flight Checks'
   inputs:
-    targetType: filePath
-    filePath: './scripts/preflight-check.sh'
-    arguments: '--environment-name ${{ parameters.environment }} --location ${{ parameters.location }}'
-
-- task: PublishTestResults@2
-  displayName: 'Publish Pre-flight Results'
-  condition: always()
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: 'preflight-results.xml'
-    testRunTitle: 'Pre-flight Validation'
+    azureSubscription: $(serviceConnection)
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      set -e
+      # Requires a workload-identity-federated service connection.
+      # AzureCLI@2 supplies AZURESUBSCRIPTION_* for the azd provider.
+      azd auth login --federated-credential-provider azure-pipelines
+      bash ./scripts/preflight-check.sh \
+        --environment-name "${{ parameters.environment }}" \
+        --location "${{ parameters.location }}"
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 ```
 
+Dapat ibalik/gumawa ng pipeline ang sarili nitong azd environment at isave ang mga script na ipinakita sa araling ito bago ang task na ito. I-configure ang federated service connection at bigyan ang pipeline ng kinakailangang mga permiso sa token. Huwag asahan na ang naunang `AzureCLI@2` task na Azure CLI login ay magpapatunay sa isang susunod na simpleng Bash task.
+
 ---
 
-## Buod ng Mga Pinakamahusay na Kasanayan
+## Buod ng Mga Pinakamahusay na Praktis
 
-### ✅ Mga Pinakamahusay na Kasanayan sa Pre-flight Check
+### ✅ Mga Pinakamahusay na Praktis sa Pre-flight Check
 
-1. **I-automate kung maaari**
-   - Isama ang mga check sa CI/CD pipelines
-   - Gumamit ng scripts para sa paulit-ulit na mga pagpapatunay
-   - Itala ang mga resulta para sa audit trails
+1. **Awtomatikong Isagawa Kung Posible**
+   - Isama ang mga pagsusuri sa CI/CD pipelines
+   - Gumamit ng mga script para sa paulit-ulit na pagpapatunay
+   - I-save ang mga resulta para sa audit trails
 
-2. **Pagpapatunay na Espesipiko sa Kapaligiran**
-   - Iba't ibang checks para sa dev/staging/prod
-   - Angkop na mga pangangailangan sa seguridad para sa bawat kapaligiran
-   - Pag-optimize ng gastos para sa non-production na mga kapaligiran
+2. **Pagpapatunay na tiyak sa Kapaligiran**
+   - Iba't ibang pagsusuri para sa dev/staging/prod
+   - Angkop na mga kinakailangan sa seguridad para sa bawat kapaligiran
+   - Optimal na gastos para sa hindi produksyon na mga kapaligiran
 
 3. **Komprehensibong Saklaw**
-   - Pag-authenticate at mga pahintulot
-   - Mga quota ng resource at availability
-   - Pagpapatunay ng template at syntax
+   - Authentication at mga permission
+   - Mga quota at pagkakaroon ng resource
+   - Pagpapatunay ng template at sintaks
    - Mga kinakailangan sa seguridad at pagsunod
 
-4. **Malinaw na Pag-uulat**
-   - Color-coded na status indicators
-   - Detalyadong mga mensahe ng error na may mga hakbang sa pagwawasto
-   - Buod ng mga ulat para sa mabilisang pagsuri
+4. **Malinaw na Ulat**
+   - Mga color-coded na indicator ng status
+   - Detalyadong mensahe ng error na may mga hakbang sa remedyo
+   - Mga ulat na buod para sa mabilis na pagsusuri
 
-5. **Agad na huminto kapag may pagkabigong kritikal**
-   - Itigil ang deployment kung may nabigong kritikal na check
-   - Magbigay ng malinaw na gabay para sa paglutas
-   - Paganahin ang madaling pag-re-run ng mga check
+5. **Mabilis na Pagkabigo**
+   - Itigil ang deployment kung may mga kritikal na pagsusuri na pumalya
+   - Magbigay ng malinaw na gabay para sa resolusyon
+   - Magbigay-daan sa madaling pagpapatakbo muli ng mga pagsusuri
 
-### Mga Karaniwang Pagkakamali sa Pre-flight Check
+### Mga Karaniwang Pagkakamali sa Pre-flight
 
-1. **Paglaktaw sa pagpapatunay** para sa "mabilis" na deployments
-2. **Kulang na pagsuri ng mga pahintulot** bago ang deployment
-3. **Pagwawalang-bahala sa mga limit ng quota** hanggang sa mag-fail ang deployment
-4. **Hindi pag-validate ng mga template** sa CI/CD pipelines
-5. **Kakulangan sa security validation** para sa production na kapaligiran
-6. **Hindi sapat na pagtataya ng gastos** na nagdudulot ng mga hindi inaasahang gastos sa badyet
+1. **Pagtalipato sa pagpapatunay** para sa "mabilis" na mga deployment
+2. **Kulang sa pagsusuri ng mga permiso** bago mag-deploy
+3. **Pagwawalang-bahala sa mga limitasyon ng quota** hanggang sa pumalya ang deployment
+4. **Hindi pagpapatunay ng mga template** sa CI/CD pipelines
+5. **Kakulangan ng pagsusuri sa seguridad** para sa mga production na kapaligiran
+6. **Maling pagtataya ng gastos** na nagdudulot ng mga sorpresa sa badyet
 
 ---
 
-**Pro Tip**: Patakbuhin ang mga pre-flight check bilang hiwalay na job sa iyong CI/CD pipeline bago ang aktwal na deployment job. Pinapahintulutan ka nitong mahuli ang mga isyu nang maaga at nagbibigay ng mas mabilis na feedback sa mga developer.
+**Pro Tip**: Isagawa ang mga pre-flight check bilang isang hiwalay na job sa iyong CI/CD pipeline bago ang aktwal na job ng deployment. Pinapayagan ka nitong maagapan ang mga problema nang maaga at nagbibigay ng mas mabilis na feedback sa mga developer.
 
 ---
 
 **Pag-navigate**
-- **Nakaraang Aralin**: [SKU Selection](sku-selection.md)
+- **Nakaraang Aralin**: [Pagpili ng SKU](sku-selection.md)
 - **Susunod na Aralin**: [Cheat Sheet](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:
-Ang dokumentong ito ay isinalin gamit ang serbisyong AI na pagsasalin [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pinagkakatiwalaang sanggunian. Para sa kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

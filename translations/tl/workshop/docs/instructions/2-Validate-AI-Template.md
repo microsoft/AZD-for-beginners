@@ -1,295 +1,152 @@
 # 2. I-validate ang isang Template
 
-> Na-validate laban sa `azd 1.27.1` noong Hulyo 2026.
+> Pinag-aralang gabay sa pinanggalingan laban sa AZD 1.37.2 at ang kasalukuyang halimbawa noong Nobyembre 4, 2026. Ang mga screenshot ay pampaliwanag lamang; maaaring magbago ang pag-navigate sa portal, mga default ng template, at pagkakaroon ng serbisyo. Hindi isinagawa ng pagsusuring ito ang isang live na deployment sa Azure.
 
-!!! tip "SA PAGWAWAKAS NG MODULONG ITO, MAGAGAWA MO NA NG"
+!!! tip "PAGKATAPOS NG MODULONG ITO, MAGAGAWA MO NA"
 
-    - [ ] Suriin ang AI Solution Architecture
-    - [ ] Unawain ang AZD Deployment Workflow
-    - [ ] Gamitin ang GitHub Copilot upang makatulong sa paggamit ng AZD
-    - [ ] **Lab 2:** I-deploy at I-validate ang AI Agents template
-
----
-
-
-## 1. Panimula
-
-Ang [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) o `azd` ay isang open-source na commandline tool na nagpapadali sa workflow ng developer sa pagbuo at pag-deploy ng mga aplikasyon sa Azure.
-
-Ang [AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) ay mga standardized na repositoryo na naglalaman ng sample application code, mga _infrastructure-as-code_ na assets, at mga `azd` configuration files para sa isang magkakaugnay na solution architecture. Ang pag-provision ng imprastruktura ay kasing dali ng isang `azd provision` na utos - habang ang paggamit ng `azd up` ay nagpapahintulot sa iyo na  mag-provision ng imprastruktura **at** mag-deploy ng application nang sabay!
-
-Bilang resulta, ang pagsisimula ng iyong proseso ng pag-develop ng aplikasyon ay maaaring maging kasing dali ng paghahanap ng tamang _AZD Starter template_ na pinakamalapit sa iyong pangangailangan sa aplikasyon at imprastruktura - pagkatapos ay i-customize ang repositoryo upang umangkop sa iyong mga pangangailangan.
-
-Bago tayo magsimula, tiyakin muna natin na naka-install ang Azure Developer CLI.
-
-1. Buksan ang terminal ng VS Code at i-type ang utos na ito:
-
-      ```bash title="" linenums="0"
-      azd version
-      ```
-
-1. Dapat kang makakita ng ganito!
-
-      ```bash title="" linenums="0"
-      azd version 1.27.1 (commit <current-build>)
-      ```
-
-**Handa ka na ngayon na pumili at mag-deploy ng template gamit ang azd**
+    - [ ] Identify the sample's prerequisites and intended resources
+    - [ ] Deploy the selected template into an intentional environment
+    - [ ] Verify the application and agent behavior separately from deployment success
+    - [ ] **Lab 2:** Record evidence of a working baseline, or an actionable deployment blocker
 
 ---
 
-## 2. Pagpili ng Template
+## 1. Suriin ang mga kinakailangan
 
-Ang Microsoft Foundry platform ay may kasamang [hanay ng mga inirerekomendang AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) na sumasaklaw sa mga sikat na senaryo ng solusyon tulad ng _multi-agent workflow automation_ at _multi-modal content processing_. Maaari mo ring tuklasin ang mga template na ito sa pamamagitan ng pagbisita sa Microsoft Foundry portal.
+Pinamamahalaan ng [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) ang deployment ng aplikasiyon gamit ang konfigurasyon, imprastruktura, at kodigo ng template. Suriin ang naka-install mong bersyon:
 
-1. Bisitahin ang [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Mag-log in sa Microsoft Foundry portal kapag na-prompt - makikita mo ang ganito.
+```bash
+azd version
+```
 
-![Pick](../../../../../translated_images/tl/01-pick-template.60d2d5fff5ebc374.webp)
+Gamitin ang [kasalukuyang mga tagubilin sa pag-install/pag-update](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) kung kinakailangan. Ipinapahayag ng pinag-aralang halimbawa ang AZD `>=1.14.0`, ngunit inirerekomenda ang isang kasalukuyang suportadong release. Ang mga opsyonal na AI extensions ay may hiwalay na mga kinakailangan sa bersyon; ang karaniwang `azd up` workflow ng halimbawang ito ay hindi kinakailangan ang agents extension.
 
+Bago mag-provision, basahin ang [Azure account setup](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/azure_account_setup.md) at [deployment guide](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) ng halimbawa. Tiyakin ang iyong subscription, mga permiso, pagkakaroon ng modelo, quota sa rehiyon, at inaasahang singil. Hindi ginagarantiya ng Azure free account ang access o libreng paggamit para sa bawat kinakailangang serbisyo.
 
-Ang mga **Basic** na opsyon ay iyong mga pang-simulang template:
+## 2. Buksan ang napiling halimbawa
 
-1. [ ] [Magsimula sa AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) na nagde-deploy ng basic chat application _kasama ang iyong data_ sa Azure Container Apps. Gamitin ito upang tuklasin ang basic na senaryo ng AI chatbot.
-1. [X] [Magsimula sa AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) na nagde-deploy din ng karaniwang AI Agent (kasama ang Foundry Agents). Gamitin ito upang maging pamilyar sa mga agentic AI solutions na may kasamang tools at models.
+Gamitin ang repositoryo ng [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) na inisyalisado sa Module 1. Kung hindi mo pa ito na-inisyalis, piliin ang isa sa mga alternatibong ito:
 
-Bisitahin ang pangalawang link sa bagong browser tab (o i-click ang `Open in GitHub` para sa kaugnay na card). Dapat mong makita ang repositoryo para sa AZD Template na ito. Maglaan ng sandali upang tuklasin ang README. Ganito ang hitsura ng application architecture:
+- Buksan ang isang [Codespace para sa halimbawa](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents).
+- I-clone ang halimbawa at sundin ang lokal/dev-container na setup nito.
+- Sa isang **walang laman na direktoryo**, patakbuhin:
 
-![Arch](../../../../../translated_images/tl/architecture.8cec470ec15c65c7.webp)
+```bash
+azd init --template Azure-Samples/get-started-with-ai-agents .
+```
 
----
+Huwag mag-inisyalisa ng pangalawang template sa ibabaw ng umiiral na proyekto. Patakbuhin ang mga susunod na command mula sa root ng halimbawa na naglalaman ng `azure.yaml`, hindi mula sa root ng repository ng kurso.
 
-## 3. Pag-activate ng Template
+Pinangungunahan ng halimbawa ang isang chat application na suportado ng agent sa Container Apps at nagpo-provision ng mga sumusuportang Foundry resources. Suriin ang kasalukuyang arkitektura at opsyonal na mga serbisyo sa halip na ituring ang isang lumang screenshot bilang eksaktong imbentaryo ng resource.
 
-Subukan nating i-deploy ang template na ito at tiyaking valid ito. Susundin natin ang mga gabay sa seksyong [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
+![Pampaliwanag na arkitektura](../../../../../translated_images/tl/architecture.8cec470ec15c65c7.webp)
 
-1. Pumili ng working environment para sa template repository:
+## 3. Mag-deploy nang may intensyon
 
-      - **GitHub Codespaces**: I-click ang [link na ito](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) at kumpirmahin ang `Create codespace`
-      - **Local clone o dev container**: I-clone ang `Azure-Samples/get-started-with-ai-agents` at buksan ito sa VS Code
+```bash
+azd auth login
+azd up
+```
 
-1. Maghintay hanggang maging handa ang terminal ng VS Code, pagkatapos ay i-type ang sumusunod na utos:
+Suriin ang mga prompt:
 
-   ```bash title="" linenums="0"
-   azd up
-   ```
+1. Pumili ng natatanging pangalan para sa AZD environment.
+2. Piliin ang nilalayong subscription, hindi lang ang unang lalabas na subscription.
+3. Piliin ang rehiyon na suportado ng kinakailangang modelo/bersyon/SKU at ang iyong quota.
+4. Basahin ang output ng provisioning, deployment, at post-deployment hook.
 
-Kumpletuhin ang mga hakbang sa workflow na ito ay magtitrigger:
+Kasama sa nasuring default ang `gpt-5-mini`, bersyon `2025-08-07`, at `GlobalStandard`. Suriin ang iyong inisyal na template at ang [supported model/region combinations](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support). Walang rehiyon na garantisadong laging gagana para sa lahat.
 
-1. Hihilingin kang mag-log in sa Azure - sundin ang mga tagubilin para sa pag-authenticate
-1. Maglagay ng natatanging pangalan ng environment para sa iyo - hal., ginamit ko ang `nitya-mshack-azd`
-1. Lilikha ito ng `.azure/` na folder - makikita mo ang subfolder na may pangalan ng environment
-1. Hihilingin kang pumili ng pangalan ng subscription - piliin ang default
-1. Hihilingin kang pumili ng lokasyon - gamitin ang `East US 2`
+Nag-iiba ang tagal ng deployment. Kung mabigo ang provisioning, itago ang error at ayusin ang sanhi nito bago subukang muli. Huwag tanggalin ang deployment o tuluyang burahin ang mga resources bilang pangkalahatang hakbang sa pag-troubleshoot.
 
-Ngayon, maghintay hanggang matapos ang provisioning. **Ito ay tumatagal ng 10-15 minuto**
+## 4. I-validate ang aplikasiyon
 
-1. Kapag tapos na, makikita mo sa console ang mensaheng SUCCESS na ganito:
-      ```bash title="" linenums="0"
-      SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
-      ```
-1. Ngayon, mayroon nang provisioned resource group sa iyong Azure Portal na may pangalang iyon:
+```bash
+azd show
+```
 
-      ![Infra](../../../../../translated_images/tl/02-provisioned-infra.46c706b14f56e0bf.webp)
+Buksan ang endpoint para sa `api_and_frontend`, o hanapin ang Container App sa resource group ng deployment sa [Azure portal](https://portal.azure.com/). Sundin ang access/authentication na mga tagubilin ng halimbawa kung kinakailangan ang pag-sign in; huwag i-disable ang authentication upang mapasa ang isang smoke test.
 
-1. **Handa ka na ngayon upang i-validate ang na-deploy na infrastraktura at aplikasyon**.
+![Pampaliwanag na screen ng aplikasiyon](../../../../../translated_images/tl/03-test-application.471910da12c3038e.webp)
 
----
+Subukan ang ilang [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md):
 
-## 4. Pag-validate ng Template
+- Isang pangkalahatang tanong na patusok sa katotohanan.
+- Isang tanong na ang sagot ay dapat naroroon sa mga na-upload na dokumento ng halimbawa.
+- Isang tanong na hindi masagot mula sa mga dokumentong iyon.
 
-1. Bisitahin ang Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - mag-log in kapag na-prompt
-1. I-click ang RG para sa pangalan ng inyong environment - makikita mo ang pahina sa itaas
+Tiyaking naglo-load ang UI, tumutugon ang API, gumagamit ang retrieval ng inaasahang data, tumutugma ang mga citations sa pinanggalingang nilalaman, at ang mga hindi suportadong tanong ay hinahawakan nang naaangkop. Ang matagumpay na `azd up` na mensahe lamang ay hindi nagpapatunay ng mga kinalabasang ito.
 
-      - i-click ang Azure Container Apps resource
-      - i-click ang Application Url sa _Essentials_ na seksyon (kanang itaas)
+## 5. Suriin ang na-deploy na agent
 
-1. Dapat kang makakita ng naka-host na application front-end UI na ganito:
+Buksan ang iyong proyekto sa [Foundry portal](https://ai.azure.com/). Sa napag-aralang daloy ng portal, piliin ang **Build**, pagkatapos ay **Agents**, at hanapin ang agent na nilikha ng halimbawa. Maaaring magbago ang mga label ng pag-navigate.
 
-   ![App](../../../../../translated_images/tl/03-test-application.471910da12c3038e.webp)
+Irekord ang mga sumusunod:
 
-1. Subukang magtanong ng ilang [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+- Pangalan at bersyon ng agent.
+- Nakapag-configure nitong model deployment.
+- Ang aktwal na mga instruksiyon at mga pinapaganang tools.
+- Aling mga file o search index ang konektado, at kung matagumpay na natapos ang setup.
 
-      1. Magsabi ng: ```Ano ang kabisera ng France?``` 
-      1. Magsabi ng: ```Ano ang pinakamagandang tent sa ilalim ng $200 para sa dalawang tao, at anu-ano ang mga tampok nito?```
+Ginagamit ng halimbawa ang agent identifier sa anyo ng `agent_name:agent_version` para sa mga pagsusuring pang-evaluate. Huwag kopyahin ang classic agent/thread identifier mula sa lumang screenshot papunta sa mas bagong API workflow.
 
-1. Dapat kang makakuha ng mga sagot na katulad ng ipinakita sa ibaba. _Pero paano ito gumagana?_
+Ihambing ang mga na-upload na dokumento sa `src/files/` sa iyong inisyal na bersyon. Ipinakita ng mga naunang screenshot ang 32 file; hindi ito garantisadong kasalukuyang default. Suriin ang anumang sagot tungkol sa mga customer/produkto ng halimbawa laban sa aktwal na synthetic source data, at huwag mag-upload ng totoong data ng customer para sa pagsasanay na ito.
 
-      ![App](../../../../../translated_images/tl/03-test-question.521c1e863cbaddb6.webp)
+## 6. Ihambing sa playground
 
----
+Buksan ang playground ng napiling agent sa Foundry at itanong ang parehong tanong sa retrieval. Ihambing ang configured na bersyon ng agent, mga tools, citations, at kalidad ng sagot sa na-deploy na aplikasiyon.
 
-## 5. Pag-validate ng Agent
+Ang mga tugon ay probabilistic; hindi batayan ang eksaktong pagkakatugma ng salita-sa-salita. Kung malaki ang pagkakaiba ng mga resulta, suriin na ang app at playground ay tumutukoy sa parehong proyekto, agent/bersyon, at pinagkukunan ng kaalaman.
 
-Ang Azure Container App ay nagde-deploy ng endpoint na kumokonekta sa AI Agent na na-provision sa proyekto ng Microsoft Foundry para sa template na ito. Tingnan natin kung ano ang ibig sabihin nito.
+## 7. Suriin ang mga kinakailangan sa observability
 
-1. Bumalik sa Azure Portal _Overview_ page para sa iyong resource group
+Ang [observability guide](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md) ng halimbawa ay ang pinanggagalingan ng katotohanan para sa pagsubaybay, pagsusuri, at set-up ng red-teaming.
 
-1. I-click ang `Microsoft Foundry` resource sa listahan
+Sa napag-aralang mga default ng imprastruktura, naka-enable ang Application Insights ngunit **hindi pinagana ang client tracing** (`ENABLE_AZURE_MONITOR_TRACING=false`). Ang paglikha ng monitoring resource ay hindi nagpapatunay na nag-e-export ang aplikasiyon ng mga traces. Tinatalakay sa Module 5 ang pag-enable ng tracing at paggawa ng test request.
 
-1. Dapat mong makita ito. I-click ang `Go to Microsoft Foundry Portal` button. 
-   ![Foundry](../../../../../translated_images/tl/04-view-foundry-project.fb94ca41803f28f3.webp)
+Gamitin ang application logs ng Container App para siyasatin ang mga startup/API errors. Sa Foundry, suriin ang tracing at monitoring views ng agent. Nangangailangan ang mga evaluation entries ng kaukulang konfigurasyon, suportadong evaluators/rehiyon, at aktwal na mga request; hindi garantisadong lalabas ang mga ito nang awtomatiko sa bawat pagpapatakbo.
 
-1. Makikita mo ang Foundry Project page para sa iyong AI application
-   ![Project](../../../../../translated_images/tl/05-visit-foundry-portal.d734e98135892d7e.webp)
+Panatilihing naka-disable ang prompt/response content capture maliban kung nasuri ang privacy, retention, access, at redaction na mga kinakailangan nito.
 
-1. I-click ang `Agents` - makikita mo ang default Agent na na-provision sa iyong proyekto
-   ![Agents](../../../../../translated_images/tl/06-visit-agents.bccb263f77b00a09.webp)
+## 8. Unawain ang mga halaga ng environment
 
-1. Piliin ito - at makikita mo ang mga detalye ng Agent. Pansinin ang mga sumusunod:
+Tinatago ng AZD ang napiling environment sa ilalim ng `.azure/<environment-name>/`. Maaaring basahin ang mga persistent input at deployment output gamit ang:
 
-      - Ang agent ay laging gumagamit ng File Search bilang default
-      - Ang agent `Knowledge` ay nagpapakita na mayroong 32 file na na-upload (para sa file search)
-      ![Agents](../../../../../translated_images/tl/07-view-agent-details.0e049f37f61eae62.webp)
+```bash
+azd env list
+azd env get-value AZURE_ENV_NAME
+azd env get-value AZURE_LOCATION
+```
 
-1. Hanapin ang opsyon na `Data+indexes` sa kaliwang menu at i-click para sa mga detalye. 
+Ipinapakita ng `azd env get-values` ang lahat ng halaga, na maaaring magsama ng sensitibong konfigurasyon. Huwag ipaskil ang output na iyon sa mga pampublikong isyu o logs.
 
-      - Makikita mo ang 32 data files na na-upload para sa knowledge.
-      - Ito ay tumutugma sa 12 customer files at 20 product files sa ilalim ng `src/files` 
-      ![Data](../../../../../translated_images/tl/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+Ginagamit ng AZD ang napiling environment kapag nagpapagana ng mga command/hooks nito, habang maaaring makaimpluwensya rin ang mga process environment variables sa mga command at template. Hindi nito **iin-export** ang mga halaga sa iyong parent shell o sa bawat independently na pinaandar na Python process. Sundin ang mga [local development instructions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/local_development.md) ng halimbawa.
 
-**Na-validate mo ang operasyon ng Agent!**
+Maaari ring i-apply ang mga default ng template sa `infra/main.parameters.json` nang hindi lumalabas bilang tahasang mga lokal na halaga. Ang pagtatakda ng arbitraryong variable ay hindi nagbabago ng imprastruktura maliban kung kinakain ito ng template.
 
-1. Ang mga sagot ng agent ay naka-base sa knowledge ng mga files na iyon. 
-1. Maaari ka nang magtanong ng mga katanungan na may kaugnayan sa data na iyon, at makakuha ng mga grounded na sagot.
-1. Halimbawa: ang `customer_info_10.json` ay naglalarawan ng 3 bumili ni "Amanda Perez"
+Halimbawa, upang tahasang piliin ang nasuring model defaults:
 
-Bumalik sa browser tab na may endpoint ng Container App at itanong: `Anu-ano ang mga produkto na pag-aari ni Amanda Perez?`. Dapat kang makakita ng ganito:
+```bash
+azd env set AZURE_AI_AGENT_MODEL_NAME gpt-5-mini
+azd env set AZURE_AI_AGENT_MODEL_VERSION 2025-08-07
+azd env set AZURE_AI_AGENT_DEPLOYMENT_SKU GlobalStandard
+azd provision --preview
+azd up
+```
 
-![Data](../../../../../translated_images/tl/09-ask-in-aca.4102297fc465a4d5.webp)
+Suriin muna ang compatibility, kapasidad, availability, at ang mga planadong pagbabago. Nangangailangan ang mga update sa imprastruktura ng provisioning; hindi sapat ang `azd deploy` lamang. Karaniwan, hindi kinakailangang gibain ang buong aplikasiyon para sa mga suportadong pagbabago ng modelo.
 
----
+Kinukuha ng `azd env refresh` ang deployment outputs para sa isang accessible na environment; hindi nito nire-reconstruct ang lahat ng custom input, nagsi-synchronize ng mga secrets, o pumapalit sa configuration management.
 
-## 6. Agent Playground
+## 9. Itala ang iyong baseline
 
-Palalalimin natin ang intuwisyon para sa mga kakayahan ng Microsoft Foundry, sa pamamagitan ng pagsubok sa Agent sa Agents Playground.
+- [ ] Na-verify ang tamang environment, subscription, rehiyon, at modelo.
+- Natapos nang walang unresolved errors ang provisioning, deployment, at mga kinakailangang setup hooks.
+- Nasuri ang access sa aplikasiyon, chat, retrieval, at citations.
+- Natukoy ang agent/bersyon at pinagkukunan ng kaalaman.
+- Naitala ang mga kinakailangan sa observability at anumang natitirang blockers.
 
-1. Bumalik sa `Agents` page sa Microsoft Foundry - piliin ang default agent
-1. I-click ang `Try in Playground` option - makikita mo ang Playground UI na ganito
-1. Itanong ang parehong tanong: `Anu-ano ang mga produkto na pag-aari ni Amanda Perez?`
-
-    ![Data](../../../../../translated_images/tl/09-ask-in-playground.a1b93794f78fa676.webp)
-
-Makukuha mo ang parehong (o katulad) na sagot - ngunit makikita mo rin ang karagdagang impormasyon na makakatulong upang maunawaan ang kalidad, gastos, at performance ng iyong agentic app. Halimbawa:
-
-1. Pansinin na ang sagot ay naglalaman ng data files na ginamit upang "i-ground" ang sagot
-1. I-hover ang cursor sa alinman sa mga label ng file na ito - tumutugma ba ang data sa iyong query at ipinakitang sagot?
-
-Makikita mo rin ang isang _stats_ na hilera sa ilalim ng sagot.
-
-1. I-hover ang cursor sa anumang metric - hal., Safety. Makikita mo ang ganito
-1. Tugma ba ang nasabing rating sa iyong intuwisyon para sa antas ng kaligtasan ng sagot?
-
-      ![Data](../../../../../translated_images/tl/10-view-run-info-meter.6cdb89a0eea5531f.webp)
-
----
-
-## 7. Built-in Observability
-
-Ang observability ay tungkol sa pag-instrument ng iyong aplikasyon upang lumikha ng data na maaaring gamitin upang maunawaan, i-debug, at i-optimize ang mga operasyon nito. Para magkaroon ng ideya:
-
-1. I-click ang `View Run Info` button - makikita mo ang ganitong view. Ito ay halimbawa ng [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) na ginagamit. _Makukuha mo rin ang view na ito sa pamamagitan ng pag-click ng Thread Logs sa top-level menu_.
-
-   - Magkaroon ng pang-unawa sa mga hakbang at tools na ginagamit ng agent
-   - Unawain ang kabuuang bilang ng Tokens (kumpara sa output tokens usage) para sa sagot
-   - Unawain ang latency at saan ginugugol ang oras sa pagpapatupad
-
-      ![Agent](../../../../../translated_images/tl/10-view-run-info.b20ebd75fef6a1cc.webp)
-
-1. I-click ang `Metadata` tab upang makita ang karagdagang attributes para sa run, na maaaring magbigay ng kapaki-pakinabang na konteksto para sa pag-debug sa hinaharap.   
-
-      ![Agent](../../../../../translated_images/tl/11-view-run-info-metadata.7966986122c7c2df.webp)
-
-
-1. I-click ang `Evaluations` tab upang makita ang auto-assessments na ginawa sa sagot ng agent. Kasama dito ang safety evaluations (hal., Self-harm) at mga agent-specific evaluations (hal., Intent resolution, Task adherence).
-
-      ![Agent](../../../../../translated_images/tl/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
-
-1. At panghuli, i-click ang `Monitoring` tab sa sidebar menu.
-
-      - Piliin ang `Resource usage` tab sa ipinakitang pahina - at tingnan ang mga metrics.
-      - Subaybayan ang paggamit ng aplikasyon ayon sa gastos (tokens) at load (requests).
-      - Subaybayan ang latency ng aplikasyon mula sa first byte (input processing) hanggang last byte (output).
-
-      ![Agent](../../../../../translated_images/tl/13-monitoring-resources.5148015f7311807f.webp)
-
----
-
-## 8. Mga Environment Variables
-
-Hanggang ngayon, dumaan tayo sa deployment sa browser - at na-validate na ang ating infrastraktura ay na-provision at ang aplikasyon ay gumagana. Pero para magtrabaho gamit ang aplikasyon nang _code-first_, kailangan nating i-configure ang ating lokal na development environment gamit ang mga kaugnay na variables na kailangan para gamitin ang mga resources na ito. Ginagawang madali ito ng `azd`.
-
-1. Ang Azure Developer CLI [gumagamit ng environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) para mag-imbak at mag-manage ng configuration settings para sa application deployments.
-
-1. Ang mga environment variables ay naka-imbak sa `.azure/<env-name>/.env` - ito ay para lamang sa environment na `env-name` na ginamit sa deployment at tumutulong sa iyo upang mai-separate ang mga environments sa pagitan ng iba't ibang deployment targets sa parehong repo.
-
-1. Ang mga environment variables ay awtomatikong niloload ng `azd` command tuwing mag-eexecute ito ng isang partikular na command (hal., `azd up`). Tandaan na ang `azd` ay hindi awtomatikong binabasa ang _OS-level_ environment variables (hal., na-set sa shell) - imbes, gamitin ang `azd set env` at `azd get env` para ilipat ang impormasyon sa loob ng mga script.
-
-
-Subukan natin ang ilang utos:
-
-1. Kuhanin lahat ng environment variables na naka-set para sa `azd` sa environment na ito:
-
-      ```bash title="" linenums="0"
-      azd env get-values
-      ```
-      
-      Makakakita ka ng ganito:
-
-      ```bash title="" linenums="0"
-      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
-      AZURE_AI_AGENT_NAME="agent-template-assistant"
-      AZURE_AI_EMBED_DEPLOYMENT_NAME="text-embedding-3-small"
-      AZURE_AI_EMBED_DIMENSIONS=100
-      ...
-      ```
-
-1. Kuhanin ang isang partikular na halaga - hal., gusto kong malaman kung na-set ba ang `AZURE_AI_AGENT_MODEL_NAME`
-
-      ```bash title="" linenums="0"
-      azd env get-value AZURE_AI_AGENT_MODEL_NAME 
-      ```
-      
-      Makikita mo ang ganito - hindi ito na-set bilang default!
-
-      ```bash title="" linenums="0"
-      ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
-      ```
-
-1. Mag-set ng bagong environment variable para sa `azd`. Dito, ina-update natin ang pangalan ng agent model. _Tandaan: ang anumang pagbabagong ginawa ay agad na makikita sa `.azure/<env-name>/.env` file.
-
-      ```bash title="" linenums="0"
-      azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
-      azd env set AZURE_AI_AGENT_MODEL_VERSION 2025-04-14
-      azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
-      ```
-
-      Ngayon, dapat makita natin na na-set na ang value:
-
-      ```bash title="" linenums="0"
-      azd env get-value AZURE_AI_AGENT_MODEL_NAME 
-      ```
-
-1. Tandaan na ang ilang mga resources ay persistent (hal., model deployments) at mangangailangan ng higit pa sa `azd up` para pilitin ang muling pag-deploy. Subukan nating i-tear down ang orihinal na deployment at muling i-deploy gamit ang binagong environment variables.
-
-1. **I-refresh** Kung dati ka nang nag-deploy ng infrastructure gamit ang isang azd template - maaari mong i-_refresh_ ang estado ng iyong lokal na environment variables batay sa kasalukuyang estado ng iyong Azure deployment gamit ang utos na ito:
-
-      ```bash title="" linenums="0"
-      azd env refresh
-      ```
-
-
-      Isang makapangyarihang paraan ito upang _i-sync_ ang mga environment variable sa dalawa o higit pang lokal na mga development environment (hal., koponan na may maraming developer) - na nagpapahintulot sa na-deploy na imprastraktura na magsilbing ground truth para sa estado ng env variable. Kinakailangang _i-refresh_ lang ng mga miyembro ng koponan ang mga variable upang maitama ang pagkaka-sync.
-
----
-
-## 9. Congratulations 🏆
-
-Kakakatapos mo lang ng isang end-to-end na workflow kung saan:
-
-- [X] Pinili ang AZD Template na Gusto Mong Gamitin
-- [X] Binuksan ang template sa isang suportadong development environment
-- [X] Na-deploy ang Template at napatunayan na gumagana ito
+Magpatuloy sa [Deconstruct a Template](3-Deconstruct-AI-Template.md).
 
 ---
 

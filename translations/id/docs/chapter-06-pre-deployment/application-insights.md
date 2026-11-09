@@ -1,30 +1,30 @@
-# Application Insights Integration with AZD
+# Integrasi Application Insights dengan AZD
 
-⏱️ **Perkiraan Waktu**: 40-50 menit | 💰 **Dampak Biaya**: ~$5-15/bulan | ⭐ **Kompleksitas**: Menengah
+⏱️ **Perkiraan Waktu**: 40-50 menit | 💰 **Dampak Biaya**: ~$5-15/bulan | ⭐ **Tingkat Kesulitan**: Menengah
 
 **📚 Jalur Pembelajaran:**
-- ← Sebelumnya: [Preflight Checks](preflight-checks.md) - Validasi sebelum penyebaran
-- 🎯 **Anda Berada di Sini**: Application Insights Integration (Monitoring, telemetry, debugging)
-- → Berikutnya: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Deploy ke Azure
-- 🏠 [Course Home](../../README.md)
+- ← Sebelumnya: [Pemeriksaan Pra-penerbangan](preflight-checks.md) - Validasi pra-penyebaran
+- 🎯 **Anda di sini**: Integrasi Application Insights (Pemantauan, telemetri, debugging)
+- → Berikutnya: [Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md) - Menyebarkan ke Azure
+- 🏠 [Beranda Kursus](../../README.md)
 
 ---
 
-## Yang Akan Anda Pelajari
+## Apa yang Akan Anda Pelajari
 
 Dengan menyelesaikan pelajaran ini, Anda akan:
-- Mengintegrasikan **Application Insights** ke dalam proyek AZD secara otomatis
+- Mendeklarasikan **Application Insights** dalam infrastruktur AZD dan mengonfigurasi instrumentasi SDK
 - Mengonfigurasi **distributed tracing** untuk microservices
-- Mengimplementasikan **telemetri kustom** (metrik, event, dependency)
-- Menyiapkan **live metrics** untuk pemantauan waktu-nyata
-- Membuat **alert dan dashboard** dari penyebaran AZD
+- Menerapkan **telemetri kustom** (metrik, event, dependensi)
+- Mengatur **live metrics** untuk pemantauan real-time
+- Membuat **alert dan dasbor** dari penyebaran AZD
 - Debug masalah produksi dengan **kueri telemetri**
 - Mengoptimalkan **biaya dan strategi sampling**
 - Memantau **aplikasi AI/LLM** (token, latensi, biaya)
 
 ## Mengapa Application Insights dengan AZD Penting
 
-### Tantangan: Observability di Produksi
+### Tantangan: Observabilitas Produksi
 
 **Tanpa Application Insights:**
 ```
@@ -44,10 +44,10 @@ Dengan menyelesaikan pelajaran ini, Anda akan:
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**Analogi**: Application Insights seperti memiliki perekam penerbangan "black box" + dasbor kokpit untuk aplikasi Anda. Anda melihat segala sesuatu yang terjadi secara waktu-nyata dan dapat memutar ulang insiden apa pun.
+**Analogi**: Application Insights seperti memiliki “kotak hitam” pencatat penerbangan + dasbor kokpit untuk aplikasi Anda. Anda dapat melihat segala sesuatu yang terjadi secara real-time dan memutar ulang insiden apa pun.
 
 ---
 
@@ -57,24 +57,24 @@ Dengan menyelesaikan pelajaran ini, Anda akan:
 
 ```mermaid
 graph TB
-    User[Pengguna/Klien]
-    App1[Aplikasi Kontainer 1<br/>Gerbang API]
-    App2[Aplikasi Kontainer 2<br/>Layanan Produk]
-    App3[Aplikasi Kontainer 3<br/>Layanan Pesanan]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[Application Insights<br/>Pusat Telemetri]
-    LogAnalytics[(Log Analytics<br/>Ruang Kerja)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Azure Portal<br/>Dasbor & Peringatan]
-    Query[Kueri Kusto<br/>Analisis Kustom]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Auto-instrumentasi| AppInsights
-    App2 -.->|Auto-instrumentasi| AppInsights
-    App3 -.->|Auto-instrumentasi| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,57 +83,62 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-### Yang Dimonitor Secara Otomatis
 
-| Telemetry Type | What It Captures | Use Case |
+### Apa yang Dipantau Secara Otomatis
+
+Auto-instrumentasi yang didukung menangkap permintaan/dependensi untuk pustaka yang diinstrumentasi. Event dan metrik kustom memerlukan kode aplikasi; tes ketersediaan harus dikonfigurasi secara terpisah. Ini tidak mengumpulkan setiap baris di bawah hanya karena sumber daya ada.
+
+| Jenis Telemetri | Apa yang Ditangkap | Kasus Penggunaan |
 |----------------|------------------|----------|
-| **Requests** | HTTP requests, status codes, duration | API performance monitoring |
-| **Dependencies** | External calls (DB, APIs, storage) | Identify bottlenecks |
-| **Exceptions** | Unhandled errors with stack traces | Debugging failures |
-| **Custom Events** | Business events (signup, purchase) | Analytics and funnels |
-| **Metrics** | Performance counters, custom metrics | Capacity planning |
-| **Traces** | Log messages with severity | Debugging and auditing |
-| **Availability** | Uptime and response time tests | SLA monitoring |
+| **Requests** | Permintaan HTTP, kode status, durasi | Pemantauan kinerja API |
+| **Dependencies** | Panggilan eksternal (DB, API, penyimpanan) | Identifikasi kemacetan |
+| **Exceptions** | Error yang tidak tertangani dengan jejak tumpukan | Debugging kegagalan |
+| **Custom Events** | Event bisnis (pendaftaran, pembelian) | Analitik dan funnel |
+| **Metrics** | Counter performa, metrik kustom | Perencanaan kapasitas |
+| **Traces** | Pesan log dengan tingkat keparahan | Debugging dan audit |
+| **Availability** | Tes waktu aktif dan respons | Pemantauan SLA |
 
 ---
 
 ## Prasyarat
 
-### Alat yang Diperlukan
+### Alat yang Dibutuhkan
 
 ```bash
-# Verifikasi Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Diharapkan: azd versi 1.0.0 atau lebih tinggi
+# Command reference baseline: azd 1.37.2
 
-# Verifikasi Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Diharapkan: azure-cli 2.50.0 atau lebih tinggi
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Persyaratan Azure
 
 - Langganan Azure aktif
 - Izin untuk membuat:
-  - Application Insights resources
-  - Log Analytics workspaces
+  - Sumber daya Application Insights
+  - Workspace Log Analytics
   - Container Apps
-  - Resource groups
+  - Grup sumber daya
 
 ### Prasyarat Pengetahuan
 
-Anda sebaiknya telah menyelesaikan:
-- [AZD Basics](../chapter-01-foundation/azd-basics.md) - Konsep inti AZD
-- [Configuration](../chapter-03-configuration/configuration.md) - Pengaturan lingkungan
-- [First Project](../chapter-01-foundation/first-project.md) - Penyebaran dasar
+Anda harus sudah menyelesaikan:
+- [Dasar-dasar AZD](../chapter-01-foundation/azd-basics.md) - Konsep inti AZD
+- [Konfigurasi](../chapter-03-configuration/configuration.md) - Pengaturan lingkungan
+- [Proyek Pertama](../chapter-01-foundation/first-project.md) - Penyebaran dasar
 
 ---
 
 ## Pelajaran 1: Application Insights Otomatis dengan AZD
 
-### Cara AZD Menyediakan Application Insights
+### Bagaimana AZD Menyediakan Application Insights
 
-AZD secara otomatis membuat dan mengonfigurasi Application Insights saat Anda melakukan deploy. Mari lihat bagaimana cara kerjanya.
+AZD hanya menyediakan Application Insights **ketika infrastruktur proyek mendeklarasikannya**. `azure.yaml` sendiri tidak membuat pemantauan atau menginstrumentasi kode aplikasi.
+
+> **Contoh cakupan:** Pelajaran ini berisi fragmen integrasi, bukan proyek seluruhnya `monitored-app` dalam repositori ini. Berikan template utama dan pemetaan parameter, lingkungan Container Apps, konfigurasi registry/image dan identitas, Dockerfile, dan tag layanan sebelum menerapkan. Pelajaran selanjutnya menunjukkan fragmen alternatif/perluasan, bukan file yang bisa langsung digabung tanpa perubahan. Mulailah dengan [contoh microservices](../../../../examples/microservices) jika Anda membutuhkan baseline yang dapat dijalankan.
 
 ### Struktur Proyek
 
@@ -169,14 +174,14 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**Selesai!** AZD akan membuat Application Insights secara default. Tidak diperlukan konfigurasi tambahan untuk pemantauan dasar.
+Ini mendeklarasikan layanan yang dapat diterapkan. Konfigurasi Bicep dan SDK berikut menyediakan pemantauan; azd tidak menambahkannya secara implisit.
 
 ---
 
-### Langkah 2: Infrastruktur Monitoring (Bicep)
+### Langkah 2: Infrastruktur Pemantauan (Bicep)
 
 **File: `infra/core/monitoring.bicep`**
 
@@ -223,11 +228,12 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
 
-### Langkah 3: Menghubungkan Container App ke Application Insights
+### Langkah 3: Hubungkan Container App ke Application Insights
 
 **File: `infra/app/api.bicep`**
 
@@ -235,7 +241,8 @@ output applicationInsightsName string = applicationInsights.name
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -291,29 +299,23 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Dapatkan string koneksi Application Insights
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Konfigurasikan pelacakan terdistribusi
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # Sampling 100% untuk pengembangan
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # Konfigurasikan pencatatan
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # Simulasikan panggilan basis data (secara otomatis dilacak sebagai dependensi)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Simulasikan operasi lambat
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -367,34 +369,34 @@ if __name__ == '__main__':
 **File: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+Selesaikan dependensi ini dalam proyek Anda, uji bersama, dan kunci versi hasilnya. Proyek baru harus menggunakan Azure Monitor OpenTelemetry, bukan eksportir OpenCensus Python yang sudah dihentikan.
 
 ---
 
 ### Langkah 5: Deploy dan Verifikasi
 
 ```bash
-# Inisialisasi AZD
-azd init
-
-# Terapkan (secara otomatis menyediakan Application Insights)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# Dapatkan URL aplikasi
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# Hasilkan telemetri
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
 curl $APP_URL/api/slow
 ```
 
-**✅ Output yang diharapkan:**
+**✅ Output yang Diharapkan:**
 ```json
 {
   "status": "healthy",
@@ -404,22 +406,22 @@ curl $APP_URL/api/slow
 
 ---
 
-### Langkah 6: Lihat Telemetri di Azure Portal
+### Langkah 6: Lihat Telemetri di Portal Azure
 
 ```bash
-# Dapatkan detail Application Insights
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Buka di Portal Azure
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Arahkan ke Azure Portal → Application Insights → Transaction Search**
+**Navigasi ke Portal Azure → Application Insights → Pencarian Transaksi**
 
-Anda seharusnya melihat:
+Anda harus melihat:
 - ✅ Permintaan HTTP dengan kode status
 - ✅ Durasi permintaan (3+ detik untuk `/api/slow`)
 - ✅ Detail exception dari `/api/error-test`
@@ -431,20 +433,15 @@ Anda seharusnya melihat:
 
 ### Melacak Event Bisnis
 
-Mari tambahkan telemetri kustom untuk event bisnis yang kritis.
+Mari tambahkan telemetri kustom untuk event bisnis kritis.
 
 **File: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # Siapkan logger
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # Siapkan exporter metrik
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # Siapkan tracer
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# Klien telemetri global
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
 ### Perbarui Aplikasi dengan Event Kustom
 
-**File: `src/app.py` (ditingkatkan)**
+**File: `src/app.py` (versi ditingkatkan)**
+
+Tambahkan rute ini ke aplikasi Flask yang ada; pertahankan rute kesehatan/test sebelumnya. Blok singkat di bawah menunjukkan aplikasi terpisah untuk kejelasan. Inisialisasi telemetri kini ada di `telemetry.py`—jangan inisialisasi eksportir dua kali.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # Lacak peristiwa bisnis
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Lacak metrik pendapatan
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # Simulasikan pencarian (seharusnya kueri basis data nyata)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Konversi ke ms
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # Lacak peristiwa pencarian
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Lacak metrik kinerja pencarian
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # Simulasikan panggilan API eksternal
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # Lacak dependensi
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -619,22 +589,22 @@ if __name__ == '__main__':
 ### Uji Telemetri Kustom
 
 ```bash
-# Lacak peristiwa pembelian
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# Lacak peristiwa pencarian
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# Lacak dependensi eksternal
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
-**Lihat di Azure Portal:**
+**Lihat di Portal Azure:**
 
-Arahkan ke Application Insights → Logs, lalu jalankan:
+Navigasi ke Application Insights → Logs, lalu jalankan:
 
 ```kusto
 // View purchase events
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -669,7 +639,7 @@ traces
 
 ### Aktifkan Cross-Service Tracing
 
-Untuk microservices, Application Insights secara otomatis mengkorelasikan permintaan antar layanan.
+Dengan instrumentasi yang kompatibel dan propagasi konteks trace W3C, Application Insights mengkorelasikan permintaan antar layanan. Membagikan string koneksi saja tidak membangun parent-child span. Fragmen arsitektur berikut merujuk modul yang harus Anda implementasikan.
 
 **File: `infra/main.bicep`**
 
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### Lihat Transaksi Ujung-ke-Ujung
+### Lihat Transaksi End-to-End
 
 ```mermaid
 sequenceDiagram
-    participant User as Pengguna
-    participant Gateway as API Gateway<br/>(ID Pelacakan: abc123)
-    participant Product as Layanan Produk<br/>(ID Induk: abc123)
-    participant Order as Layanan Pesanan<br/>(ID Induk: abc123)
+    participant User
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
     participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Mulai pelacakan: abc123
-    Gateway->>AppInsights: Catat permintaan (ID Pelacakan: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: ID Induk: abc123
-    Product->>AppInsights: Catat panggilan dependensi
-    Product-->>Gateway: Detail produk
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: ID Induk: abc123
-    Order->>AppInsights: Catat panggilan dependensi
-    Order-->>Gateway: Pesanan dibuat
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: Checkout selesai
-    Gateway->>AppInsights: Catat respon (Durasi: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: Korelasi berdasarkan ID Pelacakan
+    Note over AppInsights: Correlation by Trace ID
 ```
-**Kueri jejak ujung-ke-ujung:**
+
+**Kueri trace end-to-end:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,65 +759,65 @@ dependencies
 
 ---
 
-## Pelajaran 4: Live Metrics dan Pemantauan Waktu-Nyata
+## Pelajaran 4: Live Metrics dan Pemantauan Real-Time
 
 ### Aktifkan Live Metrics Stream
 
-Live Metrics menyediakan telemetri waktu-nyata dengan <1 detik latensi.
+Live Metrics menyediakan telemetri hampir real-time saat didukung dan diaktifkan oleh SDK. Ini bukan SLA latensi. Setup OpenTelemetry Python di atas mengaktifkannya dengan `enable_live_metrics=True`.
 
 **Akses Live Metrics:**
 
 ```bash
-# Dapatkan sumber daya Application Insights
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Dapatkan grup sumber daya
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**Apa yang Anda lihat secara waktu-nyata:**
-- ✅ Laju permintaan masuk (requests/sec)
-- ✅ Panggilan dependency keluar
+**Yang Anda lihat secara real-time:**
+- ✅ Laju permintaan masuk (permintaan/detik)
+- ✅ Panggilan dependensi keluar
 - ✅ Jumlah exception
 - ✅ Penggunaan CPU dan memori
 - ✅ Jumlah server aktif
-- ✅ Contoh telemetri
+- ✅ Telemetri sampel
 
 ### Hasilkan Beban untuk Pengujian
 
 ```bash
-# Hasilkan beban untuk melihat metrik waktu nyata
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Pantau metrik waktu nyata di Azure Portal
-# Anda seharusnya melihat lonjakan laju permintaan
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
 
 ## Latihan Praktis
 
-### Latihan 1: Menyiapkan Alerts ⭐⭐ (Menengah)
+### Latihan 1: Atur Alerts ⭐⭐ (Menengah)
 
-**Tujuan**: Buat alert untuk tingkat error tinggi dan respons lambat.
+**Tujuan**: Membuat alert untuk tingkat error tinggi dan respons lambat.
 
 **Langkah-langkah:**
 
 1. **Buat alert untuk tingkat error:**
 
 ```bash
-# Dapatkan ID sumber daya Application Insights
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Buat peringatan metrik untuk permintaan yang gagal
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,7 +825,7 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
 2. **Buat alert untuk respons lambat:**
@@ -870,7 +841,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Buat alert melalui Bicep (disarankan untuk AZD):**
+3. **Buat alert lewat Bicep (disarankan untuk AZD):**
 
 **File: `infra/core/alerts.bicep`**
 
@@ -947,52 +918,52 @@ output slowResponseAlertId string = slowResponseAlert.id
 4. **Uji alert:**
 
 ```bash
-# Menghasilkan kesalahan
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Menghasilkan respons lambat
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Periksa status peringatan (tunggu 5-10 menit)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
-**✅ Kriteria Sukses:**
-- ✅ Alerts berhasil dibuat
-- ✅ Alerts memicu saat ambang terlampaui
-- ✅ Dapat melihat riwayat alert di Azure Portal
+**✅ Kriteria Keberhasilan:**
+- ✅ Alert berhasil dibuat
+- ✅ Alert aktif saat ambang batas terlampaui
+- ✅ Dapat melihat riwayat alert di Portal Azure
 - ✅ Terintegrasi dengan penyebaran AZD
 
 **Waktu**: 20-25 menit
 
 ---
 
-### Latihan 2: Buat Dashboard Kustom ⭐⭐ (Menengah)
+### Latihan 2: Buat Dasbor Kustom ⭐⭐ (Menengah)
 
-**Tujuan**: Bangun dashboard yang menampilkan metrik kunci aplikasi.
+**Tujuan**: Bangun dasbor yang menunjukkan metrik kunci aplikasi.
 
 **Langkah-langkah:**
 
-1. **Buat dashboard via Azure Portal:**
+1. **Buat dasbor lewat Portal Azure:**
 
-Arahkan ke: Azure Portal → Dashboards → New Dashboard
+Navigasi ke: Portal Azure → Dasbor → Dasbor Baru
 
 2. **Tambahkan tile untuk metrik kunci:**
 
 - Jumlah permintaan (24 jam terakhir)
 - Rata-rata waktu respons
 - Tingkat error
-- 5 operasi paling lambat
+- 5 operasi terlambat terbanyak
 - Distribusi geografis pengguna
 
-3. **Buat dashboard via Bicep:**
+3. **Buat dasbor lewat Bicep:**
 
 **File: `infra/core/dashboard.bicep`**
 
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1063,10 +1044,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **Deploy dashboard:**
+4. **Deploy dasbor:**
 
-```bash
-# Tambahkan ke main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,28 +1057,30 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# Terapkan
+```bash
+# Deploy
 azd up
 ```
 
-**✅ Kriteria Sukses:**
-- ✅ Dashboard menampilkan metrik kunci
-- ✅ Dapat dipin ke beranda Azure Portal
-- ✅ Memperbarui secara waktu-nyata
-- ✅ Dapat dideploy melalui AZD
+**✅ Kriteria Keberhasilan:**
+- ✅ Dasbor menampilkan metrik kunci
+- ✅ Dapat dipin ke beranda Portal Azure
+- ✅ Memperbarui secara real-time
+- ✅ Dapat diterapkan lewat AZD
 
 **Waktu**: 25-30 menit
 
 ---
 
-### Latihan 3: Pantau Aplikasi AI/LLM ⭐⭐⭐ (Lanjutan)
+### Latihan 3: Monitor Aplikasi AI/LLM ⭐⭐⭐ (Lanjutan)
 
-**Tujuan**: Lacak penggunaan Microsoft Foundry Models (token, biaya, latensi).
+**Tujuan**: Melacak penggunaan Microsoft Foundry Models (token, biaya, latensi).
 
 **Langkah-langkah:**
 
-1. **Buat pembungkus pemantauan AI:**
+1. **Buat pembungkus monitoring AI:**
 
 **File: `src/ai_telemetry.py`**
 
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # Panggil Microsoft Foundry Models
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # Ekstrak penggunaan
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Hitung biaya (harga gpt-4.1)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 per 1K token
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 per 1K token
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # Lacak acara kustom
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # Lacak metrik
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1182,7 +1169,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **Gunakan client yang dimonitor:**
+2. **Gunakan klien yang dimonitor:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# Inisialisasi klien OpenAI yang dipantau
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Panggilan dengan pemantauan otomatis
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1222,7 +1211,7 @@ def chat():
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1250,11 +1239,11 @@ traces
     AvgCostPerRequest = avg(Cost)
 ```
 
-**✅ Kriteria Sukses:**
+**✅ Kriteria Keberhasilan:**
 - ✅ Setiap panggilan OpenAI terlacak secara otomatis
 - ✅ Penggunaan token dan biaya terlihat
 - ✅ Latensi dimonitor
-- ✅ Dapat menetapkan alert anggaran
+- ✅ Dapat mengatur alert anggaran
 
 **Waktu**: 35-45 menit
 
@@ -1267,29 +1256,16 @@ traces
 Kontrol biaya dengan sampling telemetri:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# Pengembangan: pengambilan sampel 100%
-sampler = ProbabilitySampler(rate=1.0)
-
-# Produksi: pengambilan sampel 10% (mengurangi biaya sebesar 90%)
-sampler = ProbabilitySampler(rate=0.1)
-
-# Pengambilan sampel adaptif (menyesuaikan secara otomatis)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**Di Bicep:**
+Sampling trace tidak mengurangi setiap kategori telemetri sebesar 90%. Metrik dan log yang diterbitkan secara independen perlu kontrol volume sendiri. Pilih tingkat sampling menggunakan kebutuhan observabilitas, bukan larangan produksi menyeluruh.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+Tetapkan sampling SDK secara eksplisit; properti `SamplingPercentage` komponen bukan pengganti pengaturan sampler OpenTelemetry Python.
 
 ### Retensi Data
 
@@ -1305,38 +1281,38 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 ### Perkiraan Biaya Bulanan
 
-| Data Volume | Retention | Monthly Cost |
+| Volume Data | Retensi | Biaya Bulanan |
 |-------------|-----------|--------------|
-| 1 GB/month | 30 days | ~$2-5 |
-| 5 GB/month | 30 days | ~$10-15 |
-| 10 GB/month | 90 days | ~$25-40 |
-| 50 GB/month | 90 days | ~$100-150 |
+| 1 GB/bulan | 30 hari | ~$2-5 |
+| 5 GB/bulan | 30 hari | ~$10-15 |
+| 10 GB/bulan | 90 hari | ~$25-40 |
+| 50 GB/bulan | 90 hari | ~$100-150 |
 
-**Tingkat gratis**: 5 GB/bulan termasuk
+Angka ini hanya ilustrasi, bukan penawaran harga. Verifikasi harga ingest, retensi, alert, dan pengujian di wilayah dan perjanjian Anda; kuota gratis dibagi/diskop sesuai harga Azure Monitor, bukan SKU gratis terjamin per sumber daya Application Insights.
 
 ---
 
-## Titik Pemeriksaan Pengetahuan
+## Checkpoint Pengetahuan
 
 ### 1. Integrasi Dasar ✓
 
 Uji pemahaman Anda:
 
-- [ ] **Q1**: How does AZD provision Application Insights?
-  - **A**: Secara otomatis melalui template Bicep di `infra/core/monitoring.bicep`
+- [ ] **Q1**: Bagaimana AZD menyediakan Application Insights?
+  - **A**: Ia menerapkan sumber daya monitoring yang secara eksplisit dideklarasikan oleh template Bicep/Terraform proyek.
 
-- [ ] **Q2**: What environment variable enables Application Insights?
+- [ ] **Q2**: Variabel lingkungan apa yang mengaktifkan Application Insights?
   - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: What are the three main telemetry types?
-  - **A**: Requests (HTTP calls), Dependencies (external calls), Exceptions (errors)
+- [ ] **Q3**: Apa tiga jenis telemetri utama?
+  - **A**: Requests (panggilan HTTP), Dependencies (panggilan eksternal), Exceptions (error)
 
 **Verifikasi Praktis:**
 ```bash
-# Periksa apakah Application Insights dikonfigurasi
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Verifikasi telemetri mengalir
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1349,14 +1325,14 @@ az monitor app-insights metrics show \
 
 Uji pemahaman Anda:
 
-- [ ] **Q1**: How do you track custom business events?
-  - **A**: Gunakan logger dengan `custom_dimensions` atau `TelemetryClient.track_event()`
+- [ ] **Q1**: Bagaimana cara melacak event bisnis kustom?
+  - **A**: Pembungkus pelajaran ini menulis log OTel terstruktur dengan atribut `event_name`, dapat dikueri di `traces`; ini tidak otomatis `customEvents`.
 
-- [ ] **Q2**: What's the difference between events and metrics?
-  - **A**: Events adalah kejadian diskrit, metrics adalah pengukuran numerik
+- [ ] **Q2**: Apa bedanya event dan metrik?
+  - **A**: Event adalah kejadian diskrit, metrik adalah pengukuran numerik
 
-- [ ] **Q3**: How do you correlate telemetry across services?
-  - **A**: Application Insights secara otomatis menggunakan `operation_Id` untuk korelasi
+- [ ] **Q3**: Bagaimana cara mengkorelasikan telemetri antar layanan?
+  - **A**: Application Insights otomatis menggunakan `operation_Id` untuk korelasi
 
 **Verifikasi Praktis:**
 ```kusto
@@ -1372,22 +1348,20 @@ traces
 
 Uji pemahaman Anda:
 
-- [ ] **Q1**: What is sampling and why use it?
+- [ ] **Q1**: Apa itu sampling dan mengapa digunakan?
   - **A**: Sampling mengurangi volume data (dan biaya) dengan hanya menangkap persentase telemetri
 
-- [ ] **Q2**: How do you set up alerts?
-  - **A**: Gunakan metric alerts di Bicep atau Azure Portal berdasarkan metrik Application Insights
+- [ ] **Q2**: Bagaimana cara mengatur alert?
+  - **A**: Gunakan metric alert di Bicep atau Portal Azure berdasarkan metrik Application Insights
 
-- [ ] **Q3**: What's the difference between Log Analytics and Application Insights?
-  - **A**: Application Insights menyimpan data di Log Analytics workspace; App Insights memberikan tampilan spesifik aplikasi
+- [ ] **Q3**: Apa perbedaan Log Analytics dan Application Insights?
+  - **A**: Application Insights menyimpan data di workspace Log Analytics; App Insights menyediakan tampilan spesifik aplikasi
 
 **Verifikasi Praktis:**
 ```bash
-# Periksa konfigurasi pengambilan sampel
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
@@ -1396,82 +1370,80 @@ az monitor app-insights component show \
 
 ### ✅ LAKUKAN:
 
-1. **Gunakan correlation IDs**
+1. **Gunakan ID korelasi**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. **Siapkan alert untuk metrik kritis**
+2. **Atur alert untuk metrik kritis**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **Gunakan structured logging**
+3. **Gunakan logging terstruktur**
    ```python
-   # ✅ BAIK: Terstruktur
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ BURUK: Tidak terstruktur
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
-4. **Pantau dependencies**
+4. **Pantau dependensi**
    ```python
-   # Lacak secara otomatis panggilan basis data, permintaan HTTP, dll.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
-5. **Gunakan Live Metrics selama deployment**
+5. **Gunakan Live Metrics selama penyebaran**
 
 ### ❌ JANGAN:
 
-1. **Jangan log data sensitif**
+1. **Jangan mencatat data sensitif**
    ```python
-   # ❌ BURUK
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ BAIK
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **Jangan gunakan 100% sampling di produksi**
+2. **Jangan memilih sampling tanpa mengukur volume dan kebutuhan diagnostik**
    ```python
-   # ❌ Mahal
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ Hemat biaya
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **Jangan abaikan dead letter queues**
+3. **Jangan mengabaikan antrean surat mati**
 
-4. **Jangan lupa menetapkan batas retensi data**
+4. **Jangan lupa untuk menetapkan batas retensi data**
 
 ---
 
 ## Pemecahan Masalah
 
-### Masalah: Tidak ada telemetri yang muncul
+### Masalah: Tidak ada telemetry yang muncul
 
 **Diagnosa:**
 ```bash
-# Periksa apakah string koneksi telah diatur
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Periksa log aplikasi melalui Azure Monitor
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# Atau gunakan Azure CLI untuk Container Apps:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Solusi:**
 ```bash
-# Periksa string koneksi di Aplikasi Kontainer
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1485,67 +1457,66 @@ az containerapp show \
 
 **Diagnosa:**
 ```bash
-# Periksa pengambilan data
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **Solusi:**
 - Kurangi tingkat sampling
-- Perpendek periode retensi
-- Hapus logging yang berlebihan
+- Kurangi periode retensi
+- Hapus pencatatan verbose
 
 ---
 
 ## Pelajari Lebih Lanjut
 
 ### Dokumentasi Resmi
-- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [Ikhtisar Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Pengaturan Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
+- [Bahasa Kueri Kusto](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [Pemantauan AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
 ### Langkah Berikutnya dalam Kursus Ini
-- ← Sebelumnya: [Preflight Checks](preflight-checks.md)
-- → Berikutnya: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Course Home](../../README.md)
+- ← Sebelumnya: [Pemeriksaan Pra-penerbangan](preflight-checks.md)
+- → Berikutnya: [Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md)
+- 🏠 [Beranda Kursus](../../README.md)
 
 ### Contoh Terkait
-- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - Telemetri AI
-- [Microservices Example](../../../../examples/microservices) - Distributed tracing
+- [Contoh Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Telemetri AI
+- [Contoh Microservices](../../../../examples/microservices) - Pelacakan terdistribusi
 
 ---
 
 ## Ringkasan
 
 **Anda telah mempelajari:**
-- ✅ Provisioning Application Insights otomatis dengan AZD
-- ✅ Telemetri kustom (events, metrics, dependencies)
-- ✅ Distributed tracing antar microservices
-- ✅ Live metrics dan pemantauan waktu-nyata
-- ✅ Alerts dan dashboard
+- ✅ Penyediaan otomatis Application Insights dengan AZD
+- ✅ Telemetri khusus (event, metrik, dependensi)
+- ✅ Pelacakan terdistribusi di seluruh microservices
+- ✅ Metrik langsung dan pemantauan waktu nyata
+- ✅ Alarm dan dashboard
 - ✅ Pemantauan aplikasi AI/LLM
 - ✅ Strategi optimasi biaya
 
-**Pokok-Pokok yang Perlu Diingat:**
-1. **AZD menyediakan pemantauan secara otomatis** - Tidak perlu pengaturan manual
-2. **Gunakan pencatatan terstruktur** - Memudahkan kueri
-3. **Lacak peristiwa bisnis** - Bukan hanya metrik teknis
+**Poin Penting:**
+1. **Deklarasikan pemantauan secara eksplisit** - AZD menerapkan template Anda; instrumentasi SDK mengirimkan telemetri
+2. **Gunakan pencatatan terstruktur** - Mempermudah kueri
+3. **Lacak acara bisnis** - Bukan hanya metrik teknis
 4. **Pantau biaya AI** - Lacak token dan pengeluaran
-5. **Siapkan peringatan** - Bersikap proaktif, bukan reaktif
-6. **Optimalkan biaya** - Gunakan pengambilan sampel dan batas retensi
+5. **Atur peringatan** - Bersikap proaktif, bukan reaktif
+6. **Optimalkan biaya** - Gunakan sampling dan batas retensi
 
-**Langkah Selanjutnya:**
+**Langkah Berikutnya:**
 1. Selesaikan latihan praktis
 2. Tambahkan Application Insights ke proyek AZD Anda
-3. Buat dasbor kustom untuk tim Anda
-4. Pelajari [Panduan Penerapan](../chapter-04-infrastructure/deployment-guide.md)
+3. Buat dashboard khusus untuk tim Anda
+4. Pelajari [Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya menjaga ketepatan, harap disadari bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidaktepatan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas segala kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

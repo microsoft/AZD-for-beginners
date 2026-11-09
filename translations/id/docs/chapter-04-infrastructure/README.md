@@ -1,22 +1,22 @@
-# Bab 4: Infrastruktur sebagai Kode & Deployment
+# Bab 4: Infrastruktur sebagai Kode & Penyebaran
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 1-1,5 jam | **⭐ Kompleksitas**: Menengah
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 2-3 jam membaca; berikan waktu ekstra untuk latihan penyebaran | **⭐ Kompleksitas**: Menengah
 
 ---
 
 ## Ikhtisar
 
-Bab ini membahas pola Infrastruktur sebagai Kode (IaC) dengan template Bicep, penyediaan sumber daya, dan strategi deployment menggunakan Azure Developer CLI.
+Bab ini membahas pola Infrastruktur sebagai Kode (IaC) dengan template Bicep, penyediaan sumber daya, dan strategi penyebaran menggunakan Azure Developer CLI.
 
-> Divalidasi dengan `azd 1.27.1` pada Juli 2026.
+> Tinjauan perintah dan konfigurasi target: `azd 1.37.2` (November 2026). Penyediaan Azure langsung tidak dijalankan selama tinjauan.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
 - Memahami struktur dan sintaks template Bicep
-- Menyediakan sumber daya Azure dengan `azd provision`
-- Mendeploy aplikasi dengan `azd deploy`
-- Menerapkan strategi deployment blue-green dan rolling
+- Menyediakan sumber daya Azure menggunakan `azd provision`
+- Menyebarkan aplikasi dengan `azd deploy`
+- Menerapkan strategi penyebaran blue-green dan rolling
 
 ---
 
@@ -24,28 +24,31 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|----------|-----------|-------|
-| 1 | [Provisioning Resources](provisioning.md) | Manajemen sumber daya Azure dengan AZD | 45 menit |
-| 2 | [Deployment Guide](deployment-guide.md) | Strategi deployment aplikasi | 45 menit |
-| 3 | [Authoring Your Own Template](custom-templates.md) | Membangun dan menerbitkan template azd yang dapat digunakan ulang | 30 menit |
+| 1 | [Penyediaan Sumber Daya](provisioning.md) | Manajemen sumber daya Azure dengan AZD | 45 menit |
+| 2 | [Panduan Penyebaran](deployment-guide.md) | Strategi penyebaran aplikasi | 45 menit |
+| 3 | [Membuat Template Anda Sendiri](custom-templates.md) | Membangun dan menerbitkan template azd yang dapat digunakan kembali | 30 menit |
 
 ---
 
 ## 🚀 Mulai Cepat
 
 ```bash
-# Inisialisasi dari template
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Pratinjau apa yang akan dibuat
+# Preview what will be created
 azd provision --preview
 
-# Menyediakan infrastruktur saja
+# Provision infrastructure only
 azd provision
 
-# Menyebarkan kode saja
+# Deploy code only
 azd deploy
 
-# Atau keduanya bersama-sama
+# Or both together
 azd up
 ```
 
@@ -68,14 +71,14 @@ my-project/
 
 ---
 
-## 🔧 Perintah Dasar
+## 🔧 Perintah Penting
 
 | Perintah | Deskripsi |
 |---------|-----------|
 | `azd init` | Inisialisasi proyek |
 | `azd provision` | Membuat sumber daya Azure |
-| `azd deploy` | Mendeploy kode aplikasi |
-| `azd up` | provision + deploy |
+| `azd deploy` | Menyebarkan kode aplikasi |
+| `azd up` | penyediaan + penyebaran |
 | `azd down` | Menghapus semua sumber daya |
 
 ---
@@ -89,11 +92,11 @@ my-project/
 
 ---
 
-## 📖 Sumber Terkait
+## 📖 Sumber Daya Terkait
 
-- [Pemeriksaan Pra-Deployment](../chapter-06-pre-deployment/README.md)
-- [Contoh Aplikasi Container](../../examples/container-app/README.md)
-- [Contoh Aplikasi Database](../../examples/database-app/README.md)
+- [Pemeriksaan Pra-Penerapan](../chapter-06-pre-deployment/README.md)
+- [Contoh Aplikasi Kontainer](../../examples/container-app/README.md)
+- [Contoh Aplikasi Basis Data](../../examples/database-app/README.md)
 
 ---
 

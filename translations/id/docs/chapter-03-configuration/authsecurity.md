@@ -1,11 +1,13 @@
-# Pola Otentikasi dan Managed Identity
+# Pola Otentikasi dan Identitas Terkelola
 
-⏱️ **Perkiraan Waktu**: 45-60 menit | 💰 **Dampak Biaya**: Gratis (tanpa biaya tambahan) | ⭐ **Kompleksitas**: Menengah
+⏱️ **Perkiraan Waktu**: 45-60 menit membaca; beri waktu ekstra untuk integrasi latihan | 💰 **Dampak Biaya**: Identity/RBAC gratis; komputasi, penyimpanan, dan Key Vault yang diterapkan dikenakan biaya | ⭐ **Kompleksitas**: Menengah
+
+> Ditinjau terhadap `azd 1.37.2` (November 2026). Pelajaran ini berisi **fragmen integrasi ilustratif, bukan template `secure-app` lengkap yang dapat diunduh**. Buat file-file yang dirujuk, sediakan infrastruktur yang sesuai, dan ganti placeholder sebelum penerapan. Tidak ada sumber daya Azure yang diprovisikan selama peninjauan.
 
 **📚 Jalur Pembelajaran:**
 - ← Sebelumnya: [Manajemen Konfigurasi](configuration.md) - Mengelola variabel lingkungan dan rahasia
-- 🎯 **Anda berada di sini**: Otentikasi & Keamanan (Managed Identity, Key Vault, pola aman)
-- → Berikutnya: [Proyek Pertama](first-project.md) - Bangun aplikasi AZD pertama Anda
+- 🎯 **Anda Di Sini**: Otentikasi & Keamanan (Identitas Terkelola, Key Vault, pola aman)
+- → Berikutnya: [Infrastruktur sebagai Kode](../chapter-04-infrastructure/README.md) - Menyediakan dan menerapkan sumber daya
 - 🏠 [Beranda Kursus](../../README.md)
 
 ---
@@ -13,104 +15,104 @@
 ## Apa yang Akan Anda Pelajari
 
 Dengan menyelesaikan pelajaran ini, Anda akan:
-- Memahami pola otentikasi Azure (kunci, connection string, managed identity)
-- Mengimplementasikan **Managed Identity** untuk otentikasi tanpa kata sandi
-- Mengamankan rahasia dengan integrasi **Azure Key Vault**
-- Mengonfigurasi **role-based access control (RBAC)** untuk penyebaran AZD
-- Menerapkan praktik keamanan terbaik di Container Apps dan layanan Azure
-- Memigrasikan dari otentikasi berbasis kunci ke berbasis identitas
+- Memahami pola otentikasi Azure (kunci, string koneksi, identitas terkelola)
+- Menerapkan **Identitas Terkelola** untuk otentikasi tanpa kata sandi
+- Melindungi rahasia dengan integrasi **Azure Key Vault**
+- Mengonfigurasi **kontrol akses berbasis peran (RBAC)** untuk penerapan AZD
+- Menerapkan praktik terbaik keamanan di Container Apps dan layanan Azure
+- Migrasi dari otentikasi berbasis kunci ke berbasis identitas
 
-## Mengapa Managed Identity Penting
+## Mengapa Identitas Terkelola Penting
 
 ### Masalah: Otentikasi Tradisional
 
-**Sebelum Managed Identity:**
+**Sebelum Identitas Terkelola:**
 ```javascript
-// ❌ RISIKO KEAMANAN: Rahasia yang di-hardcode dalam kode
+// ❌ SECURITY RISK: Hardcoded secrets in code
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Masalah:**
-- 🔴 **Rahasia terekspos** di kode, file konfigurasi, variabel lingkungan
-- 🔴 **Rotasi kredensial** memerlukan perubahan kode dan penyebaran ulang
+- 🔴 **Rahasia terekspos** dalam kode, file konfigurasi, variabel lingkungan
+- 🔴 **Rotasi kredensial** memerlukan perubahan kode dan penerapan ulang
 - 🔴 **Mimpi buruk audit** - siapa mengakses apa, kapan?
 - 🔴 **Penyebaran** - rahasia tersebar di banyak sistem
-- 🔴 **Risiko kepatuhan** - gagal dalam audit keamanan
+- 🔴 **Risiko kepatuhan** - gagal audit keamanan
 
-### Solusi: Managed Identity
+### Solusi: Identitas Terkelola
 
-**Setelah Managed Identity:**
+**Setelah Identitas Terkelola:**
 ```javascript
-// ✅ AMAN: Tidak ada rahasia dalam kode
+// ✅ SECURE: No secrets in code
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Azure secara otomatis menangani autentikasi
+  credential  // Azure automatically handles authentication
 );
 ```
 
 **Manfaat:**
-- ✅ **Tidak ada rahasia** dalam kode atau konfigurasi
-- ✅ **Rotasi otomatis** - ditangani oleh Azure
-- ✅ **Jejak audit penuh** di log Microsoft Entra ID
+- ✅ **Nol rahasia** dalam kode atau konfigurasi
+- ✅ **Rotasi otomatis** - diatur oleh Azure
+- ✅ **Jejak audit lengkap** di log Microsoft Entra ID
 - ✅ **Keamanan terpusat** - kelola di Azure Portal
 - ✅ **Siap kepatuhan** - memenuhi standar keamanan
 
-**Analogi**: Otentikasi tradisional seperti membawa banyak kunci fisik untuk berbagai pintu. Managed Identity seperti memiliki kartu keamanan yang secara otomatis memberikan akses berdasarkan siapa Anda—tidak ada kunci yang bisa hilang, disalin, atau dirotasi.
+**Analogi**: Otentikasi tradisional seperti membawa banyak kunci fisik untuk berbagai pintu. Identitas Terkelola seperti memiliki kartu keamanan yang secara otomatis memberikan akses berdasarkan siapa Anda—tidak ada kunci yang hilang, disalin, atau harus diputar.
 
 ---
 
 ## Ikhtisar Arsitektur
 
-### Alur Otentikasi dengan Managed Identity
+### Alur Otentikasi dengan Identitas Terkelola
 
 ```mermaid
 sequenceDiagram
-    participant App as Aplikasi Anda<br/>(Aplikasi Kontainer)
-    participant MI as Identitas Terkelola<br/>(Microsoft Entra ID)
+    participant App as Your Application<br/>(Container App)
+    participant MI as Managed Identity<br/>(Microsoft Entra ID)
     participant KV as Key Vault
-    participant Storage as Penyimpanan Azure
+    participant Storage as Azure Storage
     participant DB as Azure SQL
     
-    App->>MI: Minta token akses<br/>(otomatis)
-    MI->>MI: Verifikasi identitas<br/>(tidak perlu kata sandi)
-    MI-->>App: Kembalikan token<br/>(berlaku 1 jam)
+    App->>MI: Request access token<br/>(automatic)
+    MI->>MI: Verify identity<br/>(no password needed)
+    MI-->>App: Return token for requested audience<br/>(lifetime varies)
     
-    App->>KV: Dapatkan rahasia<br/>(menggunakan token)
-    KV->>KV: Periksa izin RBAC
-    KV-->>App: Kembalikan nilai rahasia
+    App->>KV: Get secret<br/>(using token)
+    KV->>KV: Check RBAC permissions
+    KV-->>App: Return secret value
     
-    App->>Storage: Unggah blob<br/>(menggunakan token)
-    Storage->>Storage: Periksa izin RBAC
-    Storage-->>App: Berhasil
+    App->>Storage: Upload blob<br/>(using token)
+    Storage->>Storage: Check RBAC permissions
+    Storage-->>App: Success
     
-    App->>DB: Kueri data<br/>(menggunakan token)
-    DB->>DB: Periksa izin SQL
-    DB-->>App: Kembalikan hasil
+    App->>DB: Query data<br/>(using token)
+    DB->>DB: Check SQL permissions
+    DB-->>App: Return results
     
-    Note over App,DB: Semua autentikasi tanpa kata sandi!
+    Note over App,DB: Request a separate token for each service audience;<br/>SDK credentials handle caching and renewal
 ```
 
-### Jenis-Jenis Managed Identities
+### Jenis Identitas Terkelola
 
 ```mermaid
 graph TB
-    MI[Identitas Terkelola]
-    SystemAssigned[Identitas Ditugaskan Sistem]
-    UserAssigned[Identitas Ditugaskan Pengguna]
+    MI[Managed Identity]
+    SystemAssigned[System-Assigned Identity]
+    UserAssigned[User-Assigned Identity]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Siklus hidup terikat pada sumber daya]
-    SystemAssigned --> SA2[Pembuatan/penghapusan otomatis]
-    SystemAssigned --> SA3[Terbaik untuk satu sumber daya]
+    SystemAssigned --> SA1[Lifecycle tied to resource]
+    SystemAssigned --> SA2[Automatic creation/deletion]
+    SystemAssigned --> SA3[Best for single resource]
     
-    UserAssigned --> UA1[Siklus hidup independen]
-    UserAssigned --> UA2[Pembuatan/penghapusan manual]
-    UserAssigned --> UA3[Dibagikan di antara sumber daya]
+    UserAssigned --> UA1[Independent lifecycle]
+    UserAssigned --> UA2[Manual creation/deletion]
+    UserAssigned --> UA3[Shared across resources]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
@@ -118,56 +120,56 @@ graph TB
 
 | Fitur | System-Assigned | User-Assigned |
 |---------|----------------|---------------|
-| **Siklus Hidup** | Terikat ke sumber daya | Mandiri |
+| **Siklus Hidup** | Terikat pada sumber daya | Independen |
 | **Pembuatan** | Otomatis dengan sumber daya | Pembuatan manual |
 | **Penghapusan** | Dihapus bersama sumber daya | Bertahan setelah penghapusan sumber daya |
-| **Berbagi** | Hanya satu sumber daya | Banyak sumber daya |
+| **Berbagi** | Satu sumber daya saja | Banyak sumber daya |
 | **Kasus Penggunaan** | Skenario sederhana | Skenario multi-sumber daya kompleks |
-| **AZD Default** | ✅ Direkomendasikan | Opsional |
+| **Pilihan template** | Didefinisikan dalam infrastruktur | Didefinisikan dalam infrastruktur |
 
 ---
 
 ## Prasyarat
 
-### Alat yang Diperlukan
+### Alat yang Dibutuhkan
 
-Anda seharusnya sudah menginstal ini dari pelajaran sebelumnya:
+Anda seharusnya sudah memiliki ini dari pelajaran sebelumnya:
 
 ```bash
-# Verifikasi Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Diharapkan: azd versi 1.0.0 atau lebih tinggi
+# ✅ Expected: azd version 1.0.0 or higher
 
-# Verifikasi Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Diharapkan: azure-cli 2.50.0 atau lebih tinggi
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Persyaratan Azure
 
 - Langganan Azure aktif
 - Izin untuk:
-  - Membuat managed identities
+  - Membuat identitas terkelola
   - Menetapkan peran RBAC
   - Membuat sumber daya Key Vault
   - Menerapkan Container Apps
 
 ### Prasyarat Pengetahuan
 
-Anda seharusnya telah menyelesaikan:
-- [Panduan Instalasi](installation.md) - penyiapan AZD
-- [Dasar-dasar AZD](azd-basics.md) - konsep inti
-- [Manajemen Konfigurasi](configuration.md) - variabel lingkungan
+Anda harus sudah menyelesaikan:
+- [Panduan Instalasi](../chapter-01-foundation/installation.md) - Pengaturan AZD
+- [Dasar-Dasar AZD](../chapter-01-foundation/azd-basics.md) - Konsep inti
+- [Manajemen Konfigurasi](configuration.md) - Variabel lingkungan
 
 ---
 
 ## Pelajaran 1: Memahami Pola Otentikasi
 
-### Pola 1: Connection Strings (Warisan - Hindari)
+### Pola 1: String Koneksi (Warisan - Hindari)
 
 **Cara kerjanya:**
 ```bash
-# String koneksi berisi kredensial
+# Connection string contains credentials
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
@@ -175,17 +177,19 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 
 **Masalah:**
 - ❌ Rahasia terlihat di variabel lingkungan
-- ❌ Tercatat di sistem penyebaran
-- ❌ Sulit untuk dirotasi
+- ❌ Tercatat dalam sistem penerapan
+- ❌ Sulit diputar ulang
 - ❌ Tidak ada jejak audit akses
 
-**Kapan digunakan:** Hanya untuk pengembangan lokal, jangan digunakan di lingkungan produksi.
+**Kapan digunakan:** Saat layanan target membutuhkan otentikasi berbasis kunci. Utamakan identitas jika didukung; jika tidak, simpan kunci dengan aman dan putar, termasuk di produksi.
 
 ---
 
 ### Pola 2: Referensi Key Vault (Lebih Baik)
 
 **Cara kerjanya:**
+**Fragmen Bicep Parsial:** bidang vault yang diperlukan, identitas Container App, dan entri `configuration.secrets`-nya dihilangkan. `secretRef` memberi nama rahasia Container App; itu **bukan sendiri** URI Key Vault. Untuk menggunakan Key Vault, definisikan rahasia bernama tersebut dengan `keyVaultUrl` dan `identity` yang berwenang.
+
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -210,16 +214,18 @@ env: [
 - ✅ Rotasi tanpa perubahan kode
 
 **Keterbatasan:**
-- ⚠️ Masih menggunakan kunci/sandi
+- ⚠️ Masih menggunakan kunci/kata sandi
 - ⚠️ Perlu mengelola akses Key Vault
 
-**Kapan digunakan:** Langkah transisi dari connection strings ke managed identity.
+**Kapan digunakan:** Langkah transisi dari string koneksi ke identitas terkelola.
 
 ---
 
-### Pola 3: Managed Identity (Praktik Terbaik)
+### Pola 3: Identitas Terkelola (Praktik Terbaik)
 
 **Cara kerjanya:**
+**Bicep Parsial:** gabungkan blok identitas ke dalam Container App lengkap dan sediakan `storageAccount` serta definisi peran. Penugasan peran juga memerlukan `name` yang deterministik.
+
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -231,17 +237,19 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 // Grant permissions
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(storageAccount.id, containerApp.id, storageBlobDataContributorRole)
   scope: storageAccount
   properties: {
     roleDefinitionId: storageBlobDataContributorRole
     principalId: containerApp.identity.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 ```
 
 **Kode aplikasi:**
 ```javascript
-// Tidak perlu rahasia!
+// No secrets needed!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -253,29 +261,29 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **Manfaat:**
-- ✅ Tidak ada rahasia dalam kode/konfigurasi
+- ✅ Nol rahasia dalam kode/konfigurasi
 - ✅ Rotasi kredensial otomatis
-- ✅ Jejak audit penuh
+- ✅ Jejak audit lengkap
 - ✅ Izin berbasis RBAC
-- ✅ Siap untuk kepatuhan
+- ✅ Siap kepatuhan
 
-**Kapan digunakan:** Selalu, untuk aplikasi produksi.
+**Kapan digunakan:** Utamakan untuk aplikasi yang dihosting di Azure yang mengakses layanan yang mendukung otentikasi Microsoft Entra.
 
 ---
 
-### Pola 4: Service Principals (CI/CD & Otomatisasi)
+### Pola 4: Service Principal (CI/CD & Otomasi)
 
-Managed identity adalah standar emas *untuk sumber daya yang berjalan di dalam Azure*. Tapi bagaimana dengan hal-hal yang berjalan **di luar** Azure—seperti pipeline CI/CD pada agen build, atau skrip di laptop Anda yang tidak bisa menggunakan login interaktif? Di sinilah **service principal** masuk: identitas non-manusia dengan kredensial sendiri yang dapat digunakan proses otomatis untuk masuk.
+Identitas terkelola adalah standar emas *untuk sumber daya yang berjalan di dalam Azure*. Tetapi bagaimana dengan hal yang berjalan **di luar** Azure—seperti pipeline CI/CD di agen build, atau skrip di laptop Anda yang tidak dapat menggunakan login interaktif? Di sinilah **service principal** berperan: identitas non-manusia dengan kredensialnya sendiri yang dapat digunakan proses otomatis untuk masuk.
 
 **Cara kerjanya:**
 
-Buat service principal yang dibatasi ke resource group (prinsip least privilege):
+Buat service principal yang ditetapkan ke grup sumber daya (hak istimewa paling rendah):
 
 ```bash
 az ad sp create-for-rbac \
   --name "myapp-cicd" \
   --role contributor \
-  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+  --scopes "/subscriptions/<sub-id>/resourceGroups/<rg-name>"
 ```
 
 Ini mencetak client ID, client secret, dan tenant ID. azd dapat masuk dengan mereka secara non-interaktif:
@@ -287,7 +295,7 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-**Utamakan kredensial federasi (OIDC) daripada rahasia.** Alih-alih client secret yang berlaku lama, konfigurasikan kredensial federasi sehingga pipeline menukar token jangka pendek—tidak ada rahasia yang bocor atau perlu dirotasi:
+**Utamakan kredensial federasi (OIDC) daripada rahasia.** Alih-alih client secret yang berlaku lama, konfigurasikan kredensial federasi agar pipeline menukar token jangka pendek—tidak ada rahasia yang bocor atau perlu diputar:
 
 ```bash
 azd auth login \
@@ -296,31 +304,31 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-> `azd pipeline config` mengatur ini untuk Anda secara otomatis. Lihat panduan CI/CD di [Bab 8](../chapter-08-production/production-ai-practices.md).
+> `azd pipeline config` mengatur ini secara otomatis untuk Anda. Lihat panduan CI/CD di [Bab 8](../chapter-08-production/production-ai-practices.md).
 
 **Manfaat:**
-- ✅ Bekerja di luar Azure (agen build, on-prem, cloud lain)
-- ✅ Dapat dibatasi pada satu resource group dengan satu peran
-- ✅ Varian federasi (OIDC) tidak menggunakan rahasia tersimpan
+- ✅ Berfungsi di luar Azure (agen build, on-prem, cloud lain)
+- ✅ Bisa ditetapkan ke satu grup sumber daya dengan satu peran
+- ✅ Varian federasi (OIDC) tidak menggunakan rahasia yang disimpan
 
-**Kompromi:**
-- ⚠️ Varian berbasis rahasia membutuhkan penyimpanan dan rotasi yang hati-hati
-- ⚠️ Rahasia yang bocor memberi akses sesuai kemampuan SP—jaga cakupan tetap sempit
+**Pertukaran:**
+- ⚠️ Varian berbasis rahasia memerlukan penyimpanan dan rotasi hati-hati
+- ⚠️ Rahasia yang bocor memberi akses sesuai kemampuan SP—jaga cakupan tetap ketat
 
-**Kapan digunakan:** Pipeline CI/CD dan otomatisasi yang tidak dapat menggunakan managed identity. Selalu utamakan varian federasi/OIDC daripada client secret, dan utamakan managed identity kapan pun beban kerja berjalan di dalam Azure.
+**Kapan digunakan:** Pipeline CI/CD dan otomasi yang tidak bisa menggunakan identitas terkelola. Selalu utamakan varian **federasi/OIDC** daripada client secret, dan utamakan identitas terkelola jika beban kerja berjalan di dalam Azure.
 
 **Menyimpan kredensial dengan aman:**
-- Jangan pernah commit rahasia—gunakan tempat penyimpanan rahasia pipeline Anda (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
-- Batasi SP ke peran dan resource group terkecil yang dibutuhkan.
-- Tetapkan kadaluwarsa dan rotasi, atau hilangkan rahasia sepenuhnya dengan OIDC.
+- Jangan pernah meng-commit rahasia—gunakan penyimpanan rahasia pipeline Anda (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
+- Tetapkan SP ke peran dan grup sumber daya terkecil yang diperlukan.
+- Tetapkan tanggal kedaluwarsa dan putar, atau hilangkan rahasia sepenuhnya dengan OIDC.
 
 ---
 
-## Pelajaran 2: Mengimplementasikan Managed Identity dengan AZD
+## Pelajaran 2: Menerapkan Identitas Terkelola dengan AZD
 
 ### Implementasi Langkah-demi-Langkah
 
-Mari bangun Container App yang aman yang menggunakan managed identity untuk mengakses Azure Storage dan Key Vault.
+Fragmen berikut menunjukkan cara mengintegrasikan identitas terkelola ke dalam proyek Container App. Mereka **bukan starter salin-dan-jalankan**: modul Storage, infrastruktur lingkungan/registry lengkap, Dockerfile, dan file parameter tidak semua disediakan di sini. Mulailah dari template Container Apps yang berfungsi dan gabungkan pola ini, pertahankan konfigurasi registry dan tag layanan.
 
 ### Struktur Proyek
 
@@ -341,7 +349,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. Konfigurasikan AZD (azure.yaml)
+### 1. Konfigurasi AZD (azure.yaml)
 
 ```yaml
 name: secure-app
@@ -354,18 +362,20 @@ services:
     language: js
     host: containerapp
 
-# Enable managed identity (AZD handles this automatically)
+# Managed identity must be enabled in the infrastructure, not by this YAML.
 ```
 
-### 2. Infrastruktur: Aktifkan Managed Identity
+### 2. Infrastruktur: Aktifkan Identitas Terkelola
 
-**Berkas: `infra/main.bicep`**
+**File: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
 
 param environmentName string
 param location string = 'eastus'
+param containerAppsEnvironmentId string
+param containerImage string
 
 var tags = { 'azd-env-name': environmentName }
 
@@ -408,6 +418,8 @@ module containerApp './app/container-app.bicep' = {
     tags: tags
     storageAccountName: storage.outputs.name
     keyVaultName: keyVault.outputs.name
+    containerAppsEnvironmentId: containerAppsEnvironmentId
+    containerImage: containerImage
   }
 }
 
@@ -418,7 +430,8 @@ module storageRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'  // Storage Blob Data Contributor
-    targetResourceId: storage.outputs.id
+    targetResourceType: 'storage'
+    targetResourceName: storage.outputs.name
   }
 }
 
@@ -429,7 +442,8 @@ module kvRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: '4633458b-17de-408a-b874-0445c86b69e6'  // Key Vault Secrets User
-    targetResourceId: keyVault.outputs.id
+    targetResourceType: 'keyvault'
+    targetResourceName: keyVault.outputs.name
   }
 }
 
@@ -439,9 +453,9 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App dengan System-Assigned Identity
+### 3. Container App dengan Identitas System-Assigned
 
-**Berkas: `infra/app/container-app.bicep`**
+**File: `infra/app/container-app.bicep`**
 
 ```bicep
 param name string
@@ -449,15 +463,18 @@ param location string
 param tags object = {}
 param storageAccountName string
 param keyVaultName string
+param containerAppsEnvironmentId string
+param containerImage string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: name
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'api' })
   identity: {
     type: 'SystemAssigned'  // 🔑 Enable managed identity
   }
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -468,7 +485,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Must exist; configure registry credentials for private images
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -496,18 +513,28 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. Modul Penetapan Peran RBAC
+### 4. Modul Penugasan Peran RBAC
 
-**Berkas: `infra/core/role-assignment.bicep`**
+**File: `infra/core/role-assignment.bicep`**
 
 ```bicep
 param principalId string
 param roleDefinitionId string  // Azure built-in role ID
-param targetResourceId string
+@allowed(['storage', 'keyvault'])
+param targetResourceType string
+param targetResourceName string
 
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(principalId, roleDefinitionId, targetResourceId)
-  scope: resourceId('Microsoft.Resources/resourceGroups', resourceGroup().name)
+// Typed existing resources give Bicep a valid resource scope, not a string ID.
+resource storageTarget 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
+  name: targetResourceName
+}
+resource vaultTarget 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: targetResourceName
+}
+
+resource storageAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'storage') {
+  name: guid(storageTarget.id, principalId, roleDefinitionId)
+  scope: storageTarget
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
     principalId: principalId
@@ -515,12 +542,22 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
-output id string = roleAssignment.id
+resource vaultAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'keyvault') {
+  name: guid(vaultTarget.id, principalId, roleDefinitionId)
+  scope: vaultTarget
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
+    principalId: principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+// This module assigns at the target resource scope, not the whole resource group.
 ```
 
-### 5. Kode Aplikasi dengan Managed Identity
+### 5. Kode Aplikasi dengan Identitas Terkelola
 
-**Berkas: `src/app.js`**
+**File: `src/app.js`**
 
 ```javascript
 const express = require('express');
@@ -531,29 +568,29 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Inisialisasi kredensial (berfungsi otomatis dengan identitas terkelola)
+// 🔑 Initialize credential (works automatically with managed identity)
 const credential = new DefaultAzureCredential();
 
-// Pengaturan Azure Storage
+// Azure Storage setup
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
-  credential  // Tidak perlu kunci!
+  credential  // No keys needed!
 );
 
-// Pengaturan Key Vault
+// Key Vault setup
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
-  credential  // Tidak perlu kunci!
+  credential  // No keys needed!
 );
 
-// Pemeriksaan kesehatan
+// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Unggah file ke blob storage
+// Upload file to blob storage
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -562,7 +599,8 @@ app.post('/upload', async (req, res) => {
     const blobName = `file-${Date.now()}.txt`;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     
-    await blockBlobClient.upload('Hello from managed identity!', 30);
+    const content = 'Hello from managed identity!';
+    await blockBlobClient.upload(content, Buffer.byteLength(content));
     
     res.json({
       success: true,
@@ -575,7 +613,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// Ambil rahasia dari Key Vault
+// Get secret from Key Vault
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -583,7 +621,7 @@ app.get('/secret/:name', async (req, res) => {
     
     res.json({
       name: secretName,
-      value: secret.value,
+      retrieved: secret.value !== undefined, // Never return the secret value to callers
       message: 'Secret retrieved using managed identity!'
     });
   } catch (error) {
@@ -592,7 +630,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Daftar kontainer blob (menunjukkan akses baca)
+// List blob containers (demonstrates read access)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -617,7 +655,7 @@ app.listen(PORT, () => {
 });
 ```
 
-**Berkas: `src/package.json`**
+**File: `src/package.json`**
 
 ```json
 {
@@ -637,21 +675,23 @@ app.listen(PORT, () => {
 
 ### 6. Terapkan dan Uji
 
+Jalankan perintah ini **setelah** menyelesaikan infrastruktur yang hilang, Dockerfile, dan `main.parameters.json` yang sesuai di proyek Anda sendiri. Autentikasi azd dengan `azd auth login`; masuk secara terpisah dengan `az login` untuk pemeriksaan Azure CLI nanti. Endpoint yang ditampilkan adalah demonstrasi dan memerlukan kontrol akses yang sesuai sebelum digunakan secara publik.
+
 ```bash
-# Inisialisasi lingkungan AZD
+# Initialize AZD environment
 azd init
 
-# Menerapkan infrastruktur dan aplikasi
+# Deploy infrastructure and application
 azd up
 
-# Dapatkan URL aplikasi
-APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
+# Get the app URL
+APP_URL=$(azd env get-value APP_URL)
 
-# Uji pemeriksaan kesehatan
+# Test health check
 curl $APP_URL/health
 ```
 
-**✅ Output yang diharapkan:**
+**✅ Keluaran yang Diharapkan:**
 ```json
 {
   "status": "healthy",
@@ -659,12 +699,12 @@ curl $APP_URL/health
 }
 ```
 
-**Uji pengunggahan blob:**
+**Uji unggah blob:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
 
-**✅ Output yang diharapkan:**
+**✅ Keluaran yang Diharapkan:**
 ```json
 {
   "success": true,
@@ -673,12 +713,12 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Uji daftar container:**
+**Uji daftar kontainer:**
 ```bash
 curl $APP_URL/containers
 ```
 
-**✅ Output yang diharapkan:**
+**✅ Keluaran yang Diharapkan:**
 ```json
 {
   "containers": ["uploads"],
@@ -691,30 +731,32 @@ curl $APP_URL/containers
 
 ## Peran RBAC Azure Umum
 
-### ID Peran Bawaan untuk Managed Identity
+### ID Peran Bawaan untuk Identitas Terkelola
 
-| Layanan | Nama Peran | Role ID | Izin |
+| Layanan | Nama Peran | ID Peran | Izin |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Membaca blob dan container |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6ea1-4ae2-8e65-a410df84e7d1` | Membaca blob dan kontainer |
 | **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Membaca, menulis, menghapus blob |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Membaca, menulis, menghapus pesan queue |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Membaca, menulis, menghapus antrean/pesan |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Membaca rahasia |
 | **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Membaca, menulis, menghapus rahasia |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Membaca data Cosmos DB |
 | **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Membaca, menulis data Cosmos DB |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Mengelola database SQL |
+| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Mengelola sumber daya database; tidak memberikan akses data SQL |
 | **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Mengirim, menerima, mengelola pesan |
 
 ### Cara Menemukan ID Peran
 
+Dua ID Cosmos DB untuk NoSQL di atas adalah **definisi peran data-plan asli Cosmos**, bukan ID peran langganan Azure RBAC. Tetapkan dengan `az cosmosdb sql role assignment create` (atau `Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments`), bukan `az role assignment create`. Akses data SQL memerlukan pengguna database Entra dan izin SQL.
+
 ```bash
-# Daftar semua peran bawaan
+# List all built-in roles
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# Cari peran tertentu
+# Search for specific role
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# Dapatkan detail peran
+# Get role details
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
@@ -722,11 +764,13 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## Latihan Praktis
 
-### Latihan 1: Aktifkan Managed Identity untuk Aplikasi yang Ada ⭐⭐ (Menengah)
+**Prasyarat integrasi untuk ketiga latihan:** template Container App yang berfungsi di proyek Anda sendiri, sumber daya Bicep yang sesuai, masuk Azure CLI/azd, dan otoritas untuk menetapkan peran yang diperlukan. Ini adalah adaptasi panduan, bukan starter lokal mandiri; ganti nama sumber daya contoh dengan nama yang Anda terapkan.
 
-**Tujuan**: Tambahkan managed identity ke penyebaran Container App yang sudah ada
+### Latihan 1: Aktifkan Identitas Terkelola untuk Aplikasi yang Ada ⭐⭐ (Menengah)
 
-**Skenario**: Anda memiliki Container App yang menggunakan connection strings. Ubah menjadi managed identity.
+**Tujuan**: Menambahkan identitas terkelola ke penerapan Container App yang sudah ada
+
+**Skenario**: Anda memiliki Container App yang menggunakan string koneksi. Ubah menjadi identitas terkelola.
 
 **Titik Awal**: Container App dengan konfigurasi ini:
 
@@ -742,7 +786,7 @@ env: [
 
 **Langkah-langkah**:
 
-1. **Aktifkan managed identity di Bicep:**
+1. **Aktifkan identitas terkelola di Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -754,7 +798,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Berikan akses Storage:**
+2. **Beri akses Storage:**
 
 ```bicep
 // Get storage account reference
@@ -776,7 +820,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 3. **Perbarui kode aplikasi:**
 
-**Sebelum (connection string):**
+**Sebelum (string koneksi):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -785,7 +829,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**Sesudah (managed identity):**
+**Sesudah (identitas terkelola):**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -812,51 +856,52 @@ env: [
 5. **Terapkan dan uji:**
 
 ```bash
-# Sebarkan ulang
+# Redeploy
 azd up
 
-# Uji apakah masih berfungsi
-curl https://myapp.azurecontainerapps.io/upload
+# Test that it still works
+APP_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail -X POST "$APP_URL/upload"
 ```
 
-**✅ Kriteria Sukses:**
-- ✅ Aplikasi berhasil diterapkan tanpa kesalahan
+**✅ Kriteria Keberhasilan:**
+- ✅ Aplikasi diterapkan tanpa kesalahan
 - ✅ Operasi Storage berfungsi (unggah, daftar, unduh)
-- ✅ Tidak ada connection strings di variabel lingkungan
-- ✅ Identity terlihat di Azure Portal pada blade "Identity"
+- ✅ Tidak ada string koneksi di variabel lingkungan
+- ✅ Identitas terlihat di Azure Portal di bawah blade "Identity"
 
 **Verifikasi:**
 
 ```bash
-# Periksa apakah identitas yang dikelola diaktifkan
+# Check managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Diharapkan: "SystemAssigned"
+# ✅ Expected: "SystemAssigned"
 
-# Periksa penugasan peran
+# Check role assignment
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ Diharapkan: Menampilkan peran "Storage Blob Data Contributor"
+# ✅ Expected: Shows "Storage Blob Data Contributor" role
 ```
 
 **Waktu**: 20-30 menit
 
 ---
 
-### Latihan 2: Akses Multi-Layanan dengan User-Assigned Identity ⭐⭐⭐ (Lanjutan)
+### Latihan 2: Akses Multi-Layanan dengan Identitas User-Assigned ⭐⭐⭐ (Mahir)
 
-**Tujuan**: Buat user-assigned identity yang dibagikan di beberapa Container App
+**Tujuan**: Membuat identitas user-assigned yang dibagikan ke beberapa Container Apps
 
-**Skenario**: Anda memiliki 3 microservice yang semuanya perlu mengakses akun Storage dan Key Vault yang sama.
+**Skenario**: Anda memiliki 3 mikroservis yang semuanya membutuhkan akses ke akun Storage dan Key Vault yang sama.
 
 **Langkah-langkah**:
 
-1. **Buat user-assigned identity:**
+1. **Buat identitas user-assigned:**
 
-**Berkas: `infra/core/identity.bicep`**
+**File: `infra/core/identity.bicep`**
 
 ```bicep
 param name string
@@ -874,7 +919,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Tetapkan peran ke user-assigned identity:**
+2. **Tetapkan peran ke identitas user-assigned:**
 
 ```bicep
 // In main.bicep
@@ -890,7 +935,7 @@ module userIdentity './core/identity.bicep' = {
 
 // Grant Storage access
 resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'storage-contributor')
+  name: guid(storageAccount.id, environmentName, 'storage-contributor')
   scope: storageAccount
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
@@ -901,7 +946,7 @@ resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
 
 // Grant Key Vault access
 resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'kv-secrets-user')
+  name: guid(keyVault.id, environmentName, 'kv-secrets-user')
   scope: keyVault
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
@@ -911,7 +956,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Tetapkan identity ke beberapa Container App:**
+3. **Tugaskan identitas ke beberapa Container Apps:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -951,15 +996,19 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 4. **Kode aplikasi (semua layanan menggunakan pola yang sama):**
 
 ```javascript
-const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
+const { ManagedIdentityCredential } = require('@azure/identity');
+const { BlobServiceClient } = require('@azure/storage-blob');
 
-// Untuk identitas yang ditetapkan pengguna, tentukan ID klien
+// For user-assigned identity, specify the client ID
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // ID klien identitas yang ditetapkan pengguna
+  process.env.AZURE_CLIENT_ID  // User-assigned identity client ID
 );
 
-// Atau gunakan DefaultAzureCredential (mendeteksi secara otomatis)
-const credential = new DefaultAzureCredential();
+// Alternative (choose ONE credential declaration):
+// const { DefaultAzureCredential } = require('@azure/identity');
+// const credential = new DefaultAzureCredential({
+//   managedIdentityClientId: process.env.AZURE_CLIENT_ID
+// });
 
 const blobServiceClient = new BlobServiceClient(
   `https://${process.env.STORAGE_ACCOUNT_NAME}.blob.core.windows.net`,
@@ -967,34 +1016,37 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **Terapkan dan verifikasi:**
+Atur setiap runtime Container App `AZURE_CLIENT_ID` ke `userIdentity.outputs.clientId` dan `STORAGE_ACCOUNT_NAME` ke nama penyimpanan Anda di Bicep. Hanya dengan memberikan identitas atau menjalankan `azd env set` tidak mengkonfigurasi nilai runtime ini.
+
+5. **Deploy dan verifikasi:**
 
 ```bash
 azd up
 
-# Uji semua layanan dapat mengakses penyimpanan
-curl https://api-gateway.azurecontainerapps.io/upload
-curl https://product-service.azurecontainerapps.io/upload
-curl https://order-service.azurecontainerapps.io/upload
+# Test all services can access storage
+# Replace with the actual ingress URLs reported for your three services
+curl --fail -X POST "$API_GATEWAY_URL/upload"
+curl --fail -X POST "$PRODUCT_SERVICE_URL/upload"
+curl --fail -X POST "$ORDER_SERVICE_URL/upload"
 ```
 
 **✅ Kriteria Sukses:**
-- ✅ Satu identity dibagikan ke 3 layanan
+- ✅ Satu identitas dibagikan di 3 layanan
 - ✅ Semua layanan dapat mengakses Storage dan Key Vault
-- ✅ Identity bertahan jika Anda menghapus satu layanan
+- ✅ Identitas bertahan jika Anda menghapus satu layanan
 - ✅ Manajemen izin terpusat
 
-**Manfaat User-Assigned Identity:**
-- Satu identity untuk diatur
-- Izin konsisten di semua layanan
-- Bertahan setelah penghapusan layanan
+**Manfaat Identitas yang Ditugaskan Pengguna:**
+- Identitas tunggal untuk dikelola
+- Izin konsisten di seluruh layanan
+- Bertahan dari penghapusan layanan
 - Lebih baik untuk arsitektur kompleks
 
 **Waktu**: 30-40 menit
 
 ---
 
-### Latihan 3: Terapkan Rotasi Rahasia Key Vault ⭐⭐⭐ (Lanjutan)
+### Latihan 3: Implementasi Rotasi Rahasia Key Vault ⭐⭐⭐ (Lanjutan)
 
 **Tujuan**: Simpan kunci API pihak ketiga di Key Vault dan akses menggunakan managed identity
 
@@ -1004,7 +1056,7 @@ curl https://order-service.azurecontainerapps.io/upload
 
 1. **Buat Key Vault dengan RBAC:**
 
-**Berkas: `infra/core/keyvault.bicep`**
+**File: `infra/core/keyvault.bicep`**
 
 ```bicep
 param name string
@@ -1036,10 +1088,10 @@ output uri string = keyVault.properties.vaultUri
 2. **Simpan rahasia di Key Vault:**
 
 ```bash
-# Dapatkan nama Key Vault
-KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
+# Get Key Vault name
+KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
-# Simpan kunci API pihak ketiga
+# Store third-party API keys
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1058,7 +1110,7 @@ az keyvault secret set \
 
 3. **Kode aplikasi untuk mengambil rahasia:**
 
-**Berkas: `src/config.js`**
+**File: `src/config.js`**
 
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
@@ -1075,7 +1127,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // Periksa cache terlebih dahulu
+    // Check cache first
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1107,9 +1159,11 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **Gunakan rahasia di aplikasi:**
+4. **Gunakan rahasia dalam aplikasi:**
 
-**Berkas: `src/app.js`**
+**File: `src/app.js`**
+
+Fragmen aplikasi **pengganti** ini membutuhkan `npm install openai`, kunci pihak ketiga yang sebenarnya, model yang dapat diakses, dan infrastruktur dari proyek kerja Anda. Ini memanggil OpenAI langsung, bukan deployment Azure OpenAI. Kunci placeholder di bawah tidak mengotorisasi permintaan.
 
 ```javascript
 const express = require('express');
@@ -1118,7 +1172,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Inisialisasi OpenAI dengan kunci dari Key Vault
+// Initialize OpenAI with key from Key Vault
 let openaiClient;
 
 async function initializeServices() {
@@ -1126,9 +1180,6 @@ async function initializeServices() {
   openaiClient = new OpenAI({ apiKey: openaiKey });
   console.log('✅ Services initialized with secrets from Key Vault');
 }
-
-// Panggil saat aplikasi dimulai
-initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
   try {
@@ -1146,17 +1197,21 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Secure API with Key Vault integration running');
+// Start listening only after initialization succeeds.
+initializeServices().then(() => {
+  app.listen(3000, () => console.log('Key Vault demo running'));
+}).catch(error => {
+  console.error('Initialization failed:', error.message);
+  process.exitCode = 1;
 });
 ```
 
-5. **Terapkan dan uji:**
+5. **Deploy dan uji:**
 
 ```bash
 azd up
 
-# Uji apakah kunci API berfungsi
+# Test that API keys work
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
@@ -1166,108 +1221,110 @@ curl -X POST https://myapp.azurecontainerapps.io/chat \
 - ✅ Tidak ada kunci API di kode atau variabel lingkungan
 - ✅ Aplikasi mengambil kunci dari Key Vault
 - ✅ API pihak ketiga berfungsi dengan benar
-- ✅ Dapat merotasi kunci tanpa perubahan kode
+- ✅ Bisa merotasi kunci tanpa perubahan kode
 
-**Rotate a secret:**
+**Rotasi rahasia:**
 
 ```bash
-# Perbarui rahasia di Key Vault
+# Update secret in Key Vault
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Mulai ulang aplikasi agar menggunakan kunci baru
+# Find the active revision name, then restart it to clear the in-process cache
+az containerapp revision list --name myapp --resource-group rg-myapp --output table
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
 **Waktu**: 25-35 menit
 
 ---
 
-## Titik Pemeriksaan Pengetahuan
+## Pengecekan Pengetahuan
 
-### 1. Authentication Patterns ✓
+### 1. Pola Autentikasi ✓
 
 Uji pemahaman Anda:
 
 - [ ] **Q1**: Apa tiga pola autentikasi utama? 
-  - **A**: Connection strings (legacy), Key Vault references (transition), Managed Identity (best)
+  - **A**: Connection strings (warisan), referensi Key Vault (transisi), Managed Identity (terbaik)
 
 - [ ] **Q2**: Mengapa managed identity lebih baik daripada connection strings?
-  - **A**: Tidak ada rahasia di kode, rotasi otomatis, jejak audit penuh, izin RBAC
+  - **A**: Tidak ada rahasia di kode, rotasi otomatis, jejak audit lengkap, izin RBAC
 
-- [ ] **Q3**: Kapan Anda akan menggunakan user-assigned identity daripada system-assigned?
-  - **A**: Saat berbagi identitas di beberapa sumber daya atau ketika siklus hidup identitas independen dari siklus hidup sumber daya
+- [ ] **Q3**: Kapan Anda menggunakan user-assigned identity dibanding system-assigned?
+  - **A**: Saat berbagi identitas di beberapa sumber daya atau ketika siklus hidup identitas terpisah dari siklus hidup sumber daya
 
-**Verifikasi Praktis:**
+**Verifikasi Praktik:**
 ```bash
-# Periksa tipe identitas yang digunakan aplikasi Anda
+# Check what type of identity your app uses
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Daftar semua penugasan peran untuk identitas tersebut
+# List all role assignments for the identity
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
 
 ---
 
-### 2. RBAC and Permissions ✓
+### 2. RBAC dan Izin ✓
 
 Uji pemahaman Anda:
 
 - [ ] **Q1**: Apa role ID untuk "Storage Blob Data Contributor"?
   - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2**: Izin apa yang disediakan "Key Vault Secrets User"?
-  - **A**: Akses baca saja ke secrets (tidak dapat membuat, memperbarui, atau menghapus)
+- [ ] **Q2**: Izin apa yang diberikan "Key Vault Secrets User"?
+  - **A**: Akses baca saja ke rahasia (tidak dapat membuat, memperbarui, atau menghapus)
 
-- [ ] **Q3**: Bagaimana Anda memberikan akses Container App ke Azure SQL?
-  - **A**: Tetapkan peran "SQL DB Contributor" atau konfigurasikan autentikasi Microsoft Entra ID untuk SQL
+- [ ] **Q3**: Bagaimana memberikan akses Container App ke Azure SQL?
+  - **A**: Konfigurasikan autentikasi Microsoft Entra, buat identitas sebagai pengguna database, dan berikan izin SQL yang diperlukan. "SQL DB Contributor" hanya mengelola sumber daya Azure; tidak mengotorisasi query.
 
-**Verifikasi Praktis:**
+**Verifikasi Praktik:**
 ```bash
-# Temukan peran tertentu
+# Find specific role
 az role definition list --name "Storage Blob Data Contributor"
 
-# Periksa peran apa yang ditetapkan untuk identitas Anda
+# Check what roles are assigned to your identity
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
 
 ---
 
-### 3. Key Vault Integration ✓
+### 3. Integrasi Key Vault ✓
 
 Uji pemahaman Anda:
 
-- [ ] **Q1**: Bagaimana cara mengaktifkan RBAC untuk Key Vault alih-alih access policies?
-  - **A**: Tetapkan `enableRbacAuthorization: true` di Bicep
+- [ ] **Q1**: Bagaimana mengaktifkan RBAC untuk Key Vault daripada kebijakan akses?
+  - **A**: Atur `enableRbacAuthorization: true` di Bicep
 
-- [ ] **Q2**: Library Azure SDK mana yang menangani autentikasi managed identity?
+- [ ] **Q2**: Perpustakaan SDK Azure apa yang menangani autentikasi managed identity?
   - **A**: `@azure/identity` dengan kelas `DefaultAzureCredential`
 
-- [ ] **Q3**: Berapa lama secrets Key Vault tetap dalam cache?
-  - **A**: Bergantung pada aplikasi; terapkan strategi caching Anda sendiri
+- [ ] **Q3**: Berapa lama rahasia Key Vault tetap di cache?
+  - **A**: Tergantung aplikasi; terapkan strategi caching Anda sendiri
 
-**Verifikasi Praktis:**
+**Verifikasi Praktik:**
 ```bash
-# Uji akses Key Vault
+# Test Key Vault access
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
-  --query "value"
+  --query "{name:name,enabled:attributes.enabled}"
 
-# Periksa apakah RBAC diaktifkan
+# Check RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Diharapkan: true
+# ✅ Expected: true
 ```
 
 ---
@@ -1283,66 +1340,71 @@ az keyvault show \
    }
    ```
 
-2. **Gunakan peran RBAC dengan hak istimewa paling sedikit**
+2. **Gunakan peran RBAC dengan hak paling sedikit**
    - Gunakan peran "Reader" bila memungkinkan
-   - Hindari "Owner" atau "Contributor" kecuali diperlukan
+   - Hindari "Owner" atau "Contributor" kecuali perlu
 
 3. **Simpan kunci pihak ketiga di Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Aktifkan audit logging**
+4. **Aktifkan pencatatan audit** (fragmen sumber daya parsial; gabungkan dengan deklarasi vault dan workspace Anda)
    ```bicep
-   diagnosticSettings: {
-     logs: [{ category: 'AuditEvent', enabled: true }]
+   resource vaultDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+     name: 'vault-audit'
+     scope: keyVault
+     properties: {
+       workspaceId: logAnalytics.id
+       logs: [{ category: 'AuditEvent', enabled: true }]
+     }
    }
    ```
 
-5. **Gunakan identitas berbeda untuk dev/staging/prod**
+5. **Gunakan identitas berbeda untuk dev/staging/production**
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
 
-6. **Rotasi secrets secara berkala**
-   - Tetapkan tanggal kedaluwarsa pada secrets Key Vault
+6. **Rotasi rahasia secara teratur**
+   - Atur tanggal kadaluarsa pada rahasia Key Vault
    - Otomatiskan rotasi dengan Azure Functions
 
 ### ❌ JANGAN:
 
-1. **Jangan pernah menanamkan rahasia di kode**
+1. **Jangan pernah menyisipkan rahasia secara keras di kode**
    ```javascript
-   // ❌ BURUK
+   // ❌ BAD
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
 2. **Jangan gunakan connection strings di produksi**
    ```javascript
-   // ❌ BURUK
+   // ❌ BAD
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
 3. **Jangan berikan izin berlebihan**
    ```bicep
    // ❌ BAD - too much access
-   roleDefinitionId: 'Owner'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')
    
    // ✅ GOOD - least privilege
-   roleDefinitionId: 'Storage Blob Data Reader'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1')
    ```
 
 4. **Jangan mencatat rahasia**
    ```javascript
-   // ❌ BURUK
+   // ❌ BAD
    console.log('API Key:', apiKey);
    
-   // ✅ BAIK
+   // ✅ GOOD
    console.log('API Key retrieved successfully');
    ```
 
-5. **Jangan membagikan identitas produksi antar lingkungan**
+5. **Jangan bagikan identitas produksi di berbagai lingkungan**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1360,21 +1422,21 @@ Error: Unauthorized (403)
 AuthorizationPermissionMismatch: This request is not authorized to perform this operation
 ```
 
-**Diagnosa:**
+**Diagnosis:**
 
 ```bash
-# Periksa apakah identitas terkelola diaktifkan
+# Check if managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Diharapkan: "SystemAssigned" atau "UserAssigned"
+# ✅ Expected: "SystemAssigned" or "UserAssigned"
 
-# Periksa penetapan peran
+# Check role assignments
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Diharapkan: Harus melihat "Storage Blob Data Contributor" atau peran serupa
+# Expected: Should see "Storage Blob Data Contributor" or similar role
 ```
 
 **Solusi:**
@@ -1388,15 +1450,15 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Tunggu propagasi (dapat memakan waktu 5-10 menit):**
+2. **Tunggu propagasi (bisa 5-10 menit):**
 ```bash
-# Periksa status penugasan peran
+# Check role assignment status
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Verifikasi kode aplikasi menggunakan credential yang benar:**
+3. **Verifikasi kode aplikasi menggunakan kredensial yang benar:**
 ```javascript
-// Pastikan Anda menggunakan DefaultAzureCredential
+// Make sure you're using DefaultAzureCredential
 const credential = new DefaultAzureCredential();
 ```
 
@@ -1410,16 +1472,16 @@ Error: Forbidden (403)
 The user, group or application does not have secrets get permission
 ```
 
-**Diagnosa:**
+**Diagnosis:**
 
 ```bash
-# Periksa apakah RBAC Key Vault diaktifkan
+# Check Key Vault RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Diharapkan: benar
+# ✅ Expected: true
 
-# Periksa penugasan peran
+# Check role assignments
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1427,7 +1489,7 @@ az role assignment list \
 
 **Solusi:**
 
-1. **Aktifkan RBAC pada Key Vault:**
+1. **Aktifkan RBAC di Key Vault:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
@@ -1453,13 +1515,13 @@ Error: DefaultAzureCredential failed to retrieve a token
 CredentialUnavailableError: No credential available
 ```
 
-**Diagnosa:**
+**Diagnosis:**
 
 ```bash
-# Periksa apakah Anda sudah masuk
+# Check if you're logged in
 az account show
 
-# Periksa autentikasi Azure CLI
+# Check Azure CLI authentication
 az ad signed-in-user show
 ```
 
@@ -1470,7 +1532,7 @@ az ad signed-in-user show
 az login
 ```
 
-2. **Atur subscription Azure:**
+2. **Atur langganan Azure:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
@@ -1482,11 +1544,11 @@ export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Atau gunakan credential berbeda secara lokal:**
+4. **Atau gunakan kredensial berbeda secara lokal:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// Gunakan AzureCliCredential untuk pengembangan lokal
+// Use AzureCliCredential for local dev
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
@@ -1494,30 +1556,31 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Masalah: Penetapan peran membutuhkan waktu lama untuk dipropagasi
+### Masalah: Penugasan peran memakan waktu lama untuk propagasi
 
 **Gejala:**
-- Peran berhasil ditetapkan
-- Masih mendapatkan error 403
+- Peran berhasil diberikan
+- Masih mendapat error 403
 - Akses tidak konsisten (kadang berhasil, kadang tidak)
 
 **Penjelasan:**
-Perubahan RBAC Azure dapat memakan waktu 5-10 menit untuk dipropagasi secara global.
+Perubahan RBAC Azure bisa memerlukan 5-10 menit untuk propagasi secara global.
 
 **Solusi:**
 
 ```bash
-# Tunggu dan coba lagi
+# Wait and retry
 echo "Waiting for RBAC propagation..."
-sleep 300  # Tunggu 5 menit
+sleep 300  # Wait 5 minutes
 
-# Uji akses
-curl https://myapp.azurecontainerapps.io/upload
+# Test access
+curl --fail -X POST "$APP_URL/upload"
 
-# Jika masih gagal, mulai ulang aplikasi
+# If still failing, restart the app
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
 ---
@@ -1526,34 +1589,28 @@ az containerapp revision restart \
 
 ### Biaya Managed Identity
 
-| Resource | Cost |
+| Sumber Daya | Biaya |
 |----------|------|
-| **Managed Identity** | 🆓 **FREE** - No charge |
-| **RBAC Role Assignments** | 🆓 **FREE** - No charge |
-| **Microsoft Entra ID Token Requests** | 🆓 **FREE** - Included |
-| **Key Vault Operations** | $0.03 per 10,000 operations |
-| **Key Vault Storage** | $0.024 per secret per month |
+| **Managed Identity** | 🆓 **GRATIS** - Tidak dikenakan biaya |
+| **Penugasan Peran RBAC** | 🆓 **GRATIS** - Tidak dikenakan biaya |
+| **Permintaan Token Microsoft Entra ID** | 🆓 **GRATIS** - Termasuk |
+| **Operasi Key Vault** | $0.03 per 10.000 operasi |
+| **Penyimpanan rahasia Key Vault** | Periksa harga saat ini; jangan asumsikan biaya penyimpanan per rahasia per bulan |
 
 **Managed identity menghemat biaya dengan:**
-- ✅ Mengeliminasi operasi Key Vault untuk autentikasi layanan-ke-layanan
-- ✅ Mengurangi insiden keamanan (tidak ada kredensial yang bocor)
+- ✅ Mengeliminasi operasi Key Vault untuk autentikasi layanan ke layanan
+- ✅ Mengurangi insiden keamanan (tidak ada kredensial bocor)
 - ✅ Mengurangi beban operasional (tidak perlu rotasi manual)
 
-**Perbandingan Biaya Contoh (bulanan):**
-
-| Scenario | Connection Strings | Managed Identity | Savings |
-|----------|-------------------|-----------------|---------|
-| Small app (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/month |
-| Medium app (10M requests) | ~$200 | ~$0 | $200/month |
-| Large app (100M requests) | ~$1,500 | ~$0 | $1,500/month |
+Jumlah permintaan aplikasi tidak sama dengan jumlah operasi Key Vault: pola caching dan rotasi menentukan biaya baca rahasia. Identitas tidak menghapus biaya komputasi/penyimpanan. Periksa [harga Key Vault](https://azure.microsoft.com/pricing/details/key-vault/) dan Kalkulator Harga Azure untuk wilayah Anda daripada mengira penghematan bulanan dari jumlah permintaan saja.
 
 ---
 
 ## Pelajari Lebih Lanjut
 
 ### Dokumentasi Resmi
-- [Managed Identity di Azure](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
-- [RBAC Azure](https://learn.microsoft.com/azure/role-based-access-control/overview)
+- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
 
@@ -1562,14 +1619,14 @@ az containerapp revision restart \
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### Langkah Selanjutnya dalam Kursus Ini
+### Langkah Berikutnya di Kursus Ini
 - ← Sebelumnya: [Manajemen Konfigurasi](configuration.md)
-- → Berikutnya: [Proyek Pertama](first-project.md)
+- → Berikutnya: [Infrastructure as Code](../chapter-04-infrastructure/README.md)
 - 🏠 [Beranda Kursus](../../README.md)
 
 ### Contoh Terkait
-- [Contoh Obrolan Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Menggunakan managed identity untuk Microsoft Foundry Models
-- [Contoh Mikroservis](../../../../examples/microservices) - Pola autentikasi multi-layanan
+- [Contoh Chat Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Menggunakan managed identity untuk Microsoft Foundry Models
+- [Contoh Microservices](../../../../examples/microservices) - Pola autentikasi multi-layanan
 
 ---
 
@@ -1578,22 +1635,22 @@ az containerapp revision restart \
 **Anda telah mempelajari:**
 - ✅ Tiga pola autentikasi (connection strings, Key Vault, managed identity)
 - ✅ Cara mengaktifkan dan mengonfigurasi managed identity di AZD
-- ✅ Penetapan peran RBAC untuk layanan Azure
+- ✅ Penugasan peran RBAC untuk layanan Azure
 - ✅ Integrasi Key Vault untuk rahasia pihak ketiga
-- ✅ User-assigned vs system-assigned identities
+- ✅ Identitas yang ditugaskan pengguna vs sistem
 - ✅ Praktik terbaik keamanan dan pemecahan masalah
 
-**Kesimpulan Utama:**
-1. **Selalu gunakan managed identity di produksi** - Nol rahasia, rotasi otomatis
-2. **Gunakan peran RBAC dengan hak istimewa paling sedikit** - Berikan hanya izin yang diperlukan
+**Poin Penting:**
+1. **Selalu gunakan managed identity di produksi** - Tanpa rahasia, rotasi otomatis
+2. **Gunakan peran RBAC dengan hak paling sedikit** - Berikan hanya izin yang diperlukan
 3. **Simpan kunci pihak ketiga di Key Vault** - Manajemen rahasia terpusat
-4. **Pisahkan identitas per lingkungan** - Isolasi dev, staging, prod
-5. **Aktifkan audit logging** - Lacak siapa mengakses apa
+4. **Pisahkan identitas per lingkungan** - Isolasi dev, staging, produksi
+5. **Aktifkan pencatatan audit** - Lacak siapa mengakses apa
 
 **Langkah Selanjutnya:**
 1. Selesaikan latihan praktis di atas
 2. Migrasikan aplikasi yang ada dari connection strings ke managed identity
-3. Bangun proyek AZD pertama Anda dengan keamanan sejak hari pertama: [Proyek Pertama](first-project.md)
+3. Tinjau ulang alur deployment pemula: [Proyek Pertama](../chapter-01-foundation/first-project.md)
 
 ---
 

@@ -1,238 +1,244 @@
-# Daftar Perintah Pintasan - Perintah AZD Penting
+# Lembaran Pantau Perintah - Perintah Azd Penting
 
 **Rujukan Pantas untuk Semua Bab**
-- **📚 Laman Kursus**: [AZD Untuk Pemula](../README.md)
-- **📖 Mula Cepat**: [Bab 1: Asas & Mula Cepat](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Perintah AI**: [Bab 2: Pembangunan Utama AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **📚 Rumah Kursus**: [AZD Untuk Pemula](../README.md)
+- **📖 Mulakan Cepat**: [Bab 1: Asas & Mula Cepat](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Perintah AI**: [Bab 2: Pembangunan AI-Utama](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Lanjutan**: [Bab 4: Infrastruktur sebagai Kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Pengenalan
 
-Daftar pintasan menyeluruh ini menyediakan rujukan pantas untuk perintah Azure Developer CLI yang paling banyak digunakan, disusun mengikut kategori dengan contoh praktikal. Sesuai untuk rujukan pantas semasa pembangunan, penyelesaian masalah, dan operasi harian dengan projek azd.
+Lembaran pantau menyeluruh ini menyediakan rujukan pantas untuk perintah Azure Developer CLI yang paling sering digunakan, disusun mengikut kategori dengan contoh praktikal. Sesuai untuk rujukan pantas semasa pembangunan, penyelesaian masalah, dan operasi harian dengan projek azd.
 
 ## Matlamat Pembelajaran
 
-Dengan menggunakan daftar pintasan ini, anda akan:
-- Mendapat akses segera kepada perintah dan sintaks Azure Developer CLI yang penting
-- Memahami organisasi perintah mengikut kategori fungsi dan kes penggunaan
-- Merujuk contoh praktikal untuk senario pembangunan dan penyebaran biasa
-- Mengakses perintah penyelesaian masalah untuk penyelesaian isu pantas
-- Menemukan pilihan konfigurasi dan penyesuaian lanjutan dengan cekap
-- Mengakses perintah pengurusan persekitaran dan aliran kerja berbilang persekitaran
+Dengan menggunakan lembaran pantau ini, anda akan:
+- Mendapatkan akses segera kepada perintah dan sintaks Azure Developer CLI penting
+- Memahami organisasi perintah mengikut kategori fungsional dan kes penggunaan
+- Merujuk contoh praktikal untuk scenario pembangunan dan penyebaran biasa
+- Mengakses perintah penyelesaian masalah untuk penyelesaian isu cepat
+- Mencari pilihan konfigurasi lanjutan dan penyesuaian dengan cekap
+- Menemukan perintah pengurusan persekitaran dan aliran kerja pelbagai persekitaran
 
 ## Hasil Pembelajaran
 
-Dengan rujukan yang kerap kepada daftar pintasan ini, anda akan dapat:
+Dengan rujukan kerap kepada lembaran pantau ini, anda akan dapat:
 - Melaksanakan perintah azd dengan yakin tanpa merujuk dokumentasi penuh
 - Menyelesaikan isu biasa dengan cepat menggunakan perintah diagnostik yang sesuai
-- Mengurus pelbagai persekitaran dan senario penyebaran dengan efisien
-- Menerapkan ciri lanjutan azd dan pilihan konfigurasi apabila diperlukan
-- Menyelesaikan masalah penyebaran menggunakan urutan perintah sistematik
-- Mengoptimumkan aliran kerja melalui penggunaan pintasan dan pilihan azd secara berkesan
+- Mengurus pelbagai persekitaran dan scenario penyebaran dengan cekap
+- Menerapkan ciri dan pilihan konfigurasi azd lanjutan bila perlu
+- Menyelesaikan isu penyebaran menggunakan urutan perintah yang sistematik
+- Mengoptimumkan aliran kerja melalui penggunaan pintasan dan pilihan azd yang berkesan
 
 ## Perintah Mula
 
 ### Pengesahan
 ```bash
-# Log masuk ke Azure melalui AZD
+# Login to Azure via AZD
 azd auth login
 
-# Log masuk ke Azure CLI (AZD menggunakan ini secara dalaman)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# Semak akaun semasa
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# Tetapkan langganan lalai
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# Log keluar dari AZD
+# Logout from AZD
 azd auth logout
 
-# Log keluar dari Azure CLI
+# Logout from Azure CLI
 az logout
 ```
 
 ### Inisialisasi Projek
 ```bash
-# Layari templat yang tersedia
+# Browse available templates
 azd template list
 
-# Mulakan dari templat
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# Mulakan dalam direktori semasa
+# Initialize in current directory
 azd init .
 
-# Mulakan dengan nama tersuai
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
 ## Perintah Penyebaran Teras
 
 ### Aliran Kerja Penyebaran Lengkap
 ```bash
-# Sebarkan semua (sediakan + sebarkan)
+# Deploy everything (provision + deploy)
 azd up
 
-# Sebarkan tanpa pengesahan pengesahan dilumpuhkan
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# Sebarkan ke persekitaran tertentu
+# Deploy to specific environment
 azd up --environment production
 
-# Sebarkan dengan parameter tersuai
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
 ### Infrastruktur Sahaja
 ```bash
-# Menyediakan sumber Azure
+# Provision Azure resources
 azd provision
 
-# 🧪 Pratonton perubahan infrastruktur
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# Menunjukkan pandangan dry-run tentang sumber yang akan dibuat/diubah/dihapus
-# Serupa dengan 'terraform plan' atau 'bicep what-if' - selamat dijalankan, tiada perubahan diterapkan
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
 ### Aplikasi Sahaja
 ```bash
-# Menggunakan kod aplikasi
+# Deploy application code
 azd deploy
 
-# Menggunakan perkhidmatan tertentu
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Menggunakan semua perkhidmatan
+# Deploy all services
 azd deploy --all
 ```
 
 ### Bina dan Pek
 ```bash
-# Pulihkan (muat turun) pergantungan aplikasi
+# Restore (download) application dependencies
 azd restore
 
-# Pulihkan perkhidmatan tertentu
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# Bina artifak yang boleh diterapkan tanpa menerapkannya
+# Build a deployable artifact without deploying
 azd package
 
-# Bina perkhidmatan tertentu
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** memuat turun kebergantungan aplikasi anda (npm, pip, NuGet, Maven, dll.). Ia dijalankan secara automatik semasa `azd package` dan `azd deploy`, jadi anda jarang memanggilnya secara langsung—jalankan secara manual untuk pra-muat kebergantungan (contohnya, untuk memanaskan cache CI atau bekerja secara luar talian selepas itu).
+> **`azd restore`** memuat turun kebergantungan aplikasi anda (npm, pip, NuGet, Maven, dll.). Ia berjalan secara automatik semasa `azd package` dan `azd deploy`, jadi anda jarang memanggilnya secara langsung—jalankan secara manual untuk memuat awal kebergantungan (contohnya, untuk menghangatkan cache CI atau bekerja luar talian kemudian).
 
-> **`azd package`** membina artifak yang boleh disebarkan (imej kontena atau zip) **tanpa** menolaknya ke Azure. Gunakannya secara berdiri sendiri untuk mengesahkan binaan berjaya, memeriksa output, atau menghasilkan artifak yang proses berasingan akan sebarkan kemudian. `azd deploy` membungkus secara automatik, jadi anda hanya perlukan `azd package` apabila anda mahu artifak tanpa penyebaran.
+> **`azd package`** menyediakan artifak yang boleh disebarkan tanpa menyebarkan servis aplikasi. Tingkah laku bergantung pada bahasa dan hos: pembungkusan kontena boleh menggunakan binaan jarak jauh Azure dan menerbitkan imej ke registri, jadi ia tidak semestinya luar talian atau bebas daripada penulisan Azure. `azd deploy` boleh membungkus secara automatik; gunakan langkah pek berasingan apabila anda memerlukan artifak atau pemeriksaan bina.
 
 
 ## 🌍 Pengurusan Persekitaran
 
 ### Operasi Persekitaran
 ```bash
-# Senaraikan semua persekitaran
+# List all environments
 azd env list
 
-# Cipta persekitaran baru
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# Pilih persekitaran
+# Select environment
 azd env select production
 
-# Tunjukkan persekitaran yang tersedia
+# Show available environments
 azd env list
 
-# Segarkan keadaan persekitaran
+# Refresh environment state
 azd env refresh
 ```
 
 ### Pembolehubah Persekitaran
 ```bash
-# Tetapkan pembolehubah persekitaran
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# Dapatkan pembolehubah persekitaran
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# Senaraikan semua pembolehubah persekitaran
+# List all environment variables
 azd env get-values
 
-# Buang pembolehubah persekitaran
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
+
+Fail persekitaran adalah teks biasa. Jangan anggap `azd env set` sebagai storan rahsia; gunakan rujukan Key Vault atau identiti terurus mengikut kesesuaian.
 
 ## ⚙️ Perintah Konfigurasi
 
 ### Konfigurasi Global
 ```bash
-# Senaraikan semua konfigurasi
+# List all configuration
 azd config show
 
-# Tetapkan default global
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Buang konfigurasi
+# Remove configuration
 azd config unset defaults.location
 
-# Tetapkan semula semua konfigurasi
+# Reset all configuration
 azd config reset
 ```
 
 ### Konfigurasi Projek
 ```bash
-# Sahkan azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# Tunjukkan maklumat projek
+# Show project information
 azd show
 
-# Dapatkan titik akhir perkhidmatan
+# Get service endpoints
 azd show --output json
 ```
 
 ## 📊 Pemantauan dan Diagnostik
 
-### Papan Pemuka Pemantauan
+### Papan Pemantauan
 ```bash
-# Buka papan pemuka pemantauan portal Azure
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# Buka metrik langsung Application Insights
+# Open Application Insights live metrics
 azd monitor --live
 
-# Buka bilah log Application Insights
+# Open Application Insights logs blade
 azd monitor --logs
 
-# Buka tinjauan Application Insights
+# Open Application Insights overview
 azd monitor --overview
 ```
 
+Application Insights mesti dikonfigurasikan oleh templat. Pilihan Metrik Langsung AZD tidak disokong buat masa ini untuk aplikasi Python; gunakan gambaran keseluruhan, log, atau aliran kerja pelacakan yang didokumentasikan dalam sampel sebaliknya.
+
 ### Melihat Log Kontena
 ```bash
-# Lihat log melalui Azure CLI (untuk Aplikasi Kontena)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Ikuti log secara masa nyata
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Lihat log dari Azure Portal
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
-### Pertanyaan Analitik Log
+### Pertanyaan Log Analytics
 ```bash
-# Akses Log Analytics melalui Azure Portal
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# Pertanyaan log menggunakan Azure CLI
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -242,28 +248,28 @@ az monitor log-analytics query \
 
 ### Pembersihan
 ```bash
-# Alih keluar semua sumber Azure
+# Remove all Azure resources
 azd down
 
-# Paksa hapus tanpa pengesahan
+# Force delete without confirmation
 azd down --force
 
-# Bersihkan sumber yang dipadam lembut
+# Purge soft-deleted resources
 azd down --purge
 
-# Pembersihan lengkap
+# Complete cleanup
 azd down --force --purge
 ```
 
 ### Kemas Kini
 ```bash
-# Periksa kemas kini azd
+# Check for azd updates
 azd version
 
-# Dapatkan versi semasa
+# Get current version
 azd version
 
-# Lihat konfigurasi semasa
+# View current configuration
 azd config show
 ```
 
@@ -271,119 +277,144 @@ azd config show
 
 ### Saluran dan CI/CD
 ```bash
-# Konfigurasikan GitHub Actions
+# Configure GitHub Actions
 azd pipeline config
 
-# Konfigurasikan Azure DevOps
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# Paparkan konfigurasi pipeline
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
 ### Pengurusan Infrastruktur
 ```bash
-# Hasilkan templat infrastruktur
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 Pratonton & Perancangan Infrastruktur
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# Mensimulasikan penyediaan infrastruktur tanpa melaksanakan
-# Menganalisis templat Bicep/Terraform dan menunjukkan:
-# - Sumber yang akan ditambah (hijau +)
-# - Sumber yang akan diubah (kuning ~)
-# - Sumber yang akan dipadam (merah -)
-# Selamat untuk dijalankan - tiada perubahan sebenar dibuat pada persekitaran Azure
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# Sintesis infrastruktur dari azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ### Maklumat Projek
 ```bash
-# Paparkan status projek dan titik hujung
+# Show project status and endpoints
 azd show
 
-# Paparkan maklumat projek terperinci sebagai JSON
+# Show detailed project info as JSON
 azd show --output json
 
-# Dapatkan titik hujung perkhidmatan
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
 ## 🤖 Perintah AI & Sambungan
 
 ### Sambungan AZD
+
+Rujukan AI CLI dikaji semula 2026-11-04: `azd 1.37.2`, ejen `1.0.0-beta.23`, penilaian `1.0.0-beta.2`. Gunakan `azd >= 1.37.0` untuk aliran kerja gabungan; naik taraf CLI teras sebelum sambungan tidak serasi.
+
 ```bash
-# Senaraikan semua sambungan yang tersedia (termasuk AI)
+# List all available extensions (including AI)
 azd extension list
 
-# Pasang sambungan ejen Foundry
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Pasang sambungan kemahiran ejen (pratonton)
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the agent skills extension (preview)
 azd extension install azure.ai.skills
 
-# Pasang sambungan sambungan Foundry (pratonton)
+# Install the Foundry connections extension (preview)
 azd extension install azure.ai.connections
 
-# Pasang sambungan penalaan halus
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Pasang sambungan model tersuai
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Tingkatkan semua sambungan yang dipasang
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
 ### Perintah Ejen AI
 ```bash
-# Inisialisasi projek ejen dari manifest
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# Sasarkan projek Foundry tertentu
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# Tentukan direktori sumber ejen
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# Pilih sasaran hos
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# Uji ejen yang telah dikerahkan (mencetak latensi + masa-ke-bait-pertama)
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# Tunjukkan konfigurasi titik akhir secara langsung
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# Jana set data penilaian, kemudian optimakan ejen
-azd ai agent eval generate
-azd ai agent optimize
-
-# Muat turun sumber yang dikerahkan bagi ejen yang dihoskan berasaskan kod
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# Padamkan ejen yang dihoskan dan semua versinya (--force tamatkan sesi aktif)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
+`--template`/`-t` menggantikan ejaan lama `--manifest`/`-m`; manifes legacy perlu migrasi. Tiada pilihan ejen-init `--host containerapp` sekarang. Pratonton managed-harness, suara, dan jangka panjang memerlukan pilihan persekitaran shell/CI bebas; lihat [rujukan AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+### Penilaian dan Pengoptimuman AI
+```bash
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+Ejen beta.22 menggantikan arahan penilaian warisan dengan `azd ai eval` dari `azure.ai.evaluations`. Konfigurasi penilaian baru menggunakan kekunci camelCase. Pengoptimuman `--config` mengambil permintaan API pengoptimuman berdiri sendiri, **bukan** warisan `eval.yaml` atau `azure.eval.yaml` baru; gunakan `--eval`/`--eval-config` untuk penggunaan semula penilaian. Lihat [penyediaan penilaian](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) dan [pemindahan pengoptimuman](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
 ### Pelayan MCP (Alpha)
 ```bash
-# Mulakan pelayan MCP untuk projek anda
+# Start the MCP server for your project
 azd mcp start
 
-# Urus persetujuan alat untuk operasi MCP
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
-### Penghasilan Infrastruktur
+### Penjanaan Infrastruktur
 ```bash
-# Hasilkan fail IaC daripada definisi projek anda
+# Generate IaC files from your project definition
 azd infra generate
 
-# Sintesis infrastruktur daripada azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
@@ -392,133 +423,129 @@ azd infra synth
 
 ### Aliran Kerja Pembangunan
 ```bash
-# Mula projek baru
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# Lancarkan ke pembangunan
+# Deploy to development
 azd env new dev
 azd up
 
-# Buat perubahan dan lancarkan semula
+# Make changes and redeploy
 azd deploy
 
-# Buka papan pemuka pemantauan
+# Open monitoring dashboard
 azd monitor --live
 ```
 
-### Aliran Kerja Berbilang Persekitaran
+### Aliran Kerja Multi-Persekitaran
 ```bash
-# Sediakan persekitaran
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Lancarkan ke dev
+# Deploy to dev
 azd env select dev
 azd up
 
-# Uji dan promosikan ke staging
+# Test and promote to staging
 azd env select staging
 azd up
 
-# Lancarkan ke pengeluaran
+# Deploy to production
 azd env select production
 azd up
 ```
 
 ### Aliran Kerja Penyelesaian Masalah
 ```bash
-# Aktifkan mod debug
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# Semak status penyebaran
-azd show
-
-# Sahkan konfigurasi
+# Validate configuration
 azd config show
 
-# Buka papan pemuka pemantauan untuk log
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# Semak status sumber daya
+# Check resource status
 azd show --output json
 ```
 
-## 🔍 Perintah Pengesanan Ralat
+## 🔍 Arahan Penyahpepijatan
 
-### Maklumat Pengesanan Ralat
+### Maklumat Penyahpepijatan
 ```bash
-# Hidupkan output debug
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# Nyahaktifkan telemetri untuk output yang lebih bersih
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# Semak konfigurasi semasa
+# Check current configuration
 azd config show
 
-# Semak status pengesahan
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
-### Pengesanan Ralat Templat
+### Penyahpepijatan Templat
 ```bash
-# Senaraikan templat yang tersedia dengan butiran
+# List available templates with details
 azd template list --output json
 
-# Tunjukkan maklumat templat
+# Show template information
 azd template show <template-name>
 
-# Sahkan templat sebelum inisialisasi
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
-## 📁 Perintah Fail dan Direktori
+## 📁 Arahan Fail dan Direktori
 
 ### Struktur Projek
 ```bash
-# Paparkan struktur direktori semasa
+# Show current directory structure
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigasi ke akar projek azd
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# Paparkan direktori konfigurasi azd
-echo $AZD_CONFIG_DIR  # Biasanya ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Format Output
+## 🎨 Pemformatan Output
 
 ### Output JSON
 ```bash
-# Dapatkan output JSON untuk skrip
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# Parse dengan jq
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### Output Jadual
 ```bash
-# Format sebagai jadual
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# Lihat perkhidmatan yang telah disebarkan
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Gabungan Perintah Lazim
+## 🔧 Gabungan Arahan Biasa
 
 ### Skrip Pemeriksaan Kesihatan
 ```bash
 #!/bin/bash
-# Semakan kesihatan pantas
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
@@ -527,108 +554,102 @@ azd monitor --logs
 ### Pengesahan Penyebaran
 ```bash
 #!/bin/bash
-# Pengesahan sebelum pelaksanaan
+# Pre-deployment validation
 azd show
-azd provision --preview  # Pratonton perubahan sebelum melaksanakan
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
 ### Perbandingan Persekitaran
 ```bash
 #!/bin/bash
-# Bandingkan persekitaran
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
 ### Skrip Pembersihan Sumber
 ```bash
 #!/bin/bash
-# Bersihkan persekitaran lama
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
 ## 📝 Pembolehubah Persekitaran
 
 ### Pembolehubah Persekitaran Biasa
 ```bash
-# Konfigurasi Azure
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# Konfigurasi AZD
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# Konfigurasi aplikasi
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Perintah Kecemasan
+## 🚨 Arahan Kecemasan
 
-### Pembetulan Pantas
+### Pembaikan Pantas
 ```bash
-# Tetapkan semula pengesahan
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# Paksa segar semula persekitaran
+# Force refresh environment
 azd env refresh
 
-# Pasang semula semua perkhidmatan
+# Redeploy all services
 azd deploy
 
-# Semak status pemasangan
+# Check deployment status
 azd show --output json
 ```
 
-### Perintah Pemulihan
+### Arahan Pemulihan
 ```bash
-# Pulihkan dari penyebaran yang gagal - bersihkan dan sebarkan semula
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# Sediakan semula infrastruktur sahaja
+# Reprovision infrastructure only
 azd provision
 
-# Sebarkan semula aplikasi sahaja
+# Redeploy application only
 azd deploy
 ```
 
-## 💡 Petua Pro
+## 💡 Petua Profesional
 
-### Alias untuk Aliran Kerja Lebih Pantas
+### Alias untuk Aliran Kerja Lebih Cepat
 ```bash
-# Tambah ke .bashrc atau .zshrc anda
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Pintasan Fungsi
+### Pautan Pintasan Fungsi
 ```bash
-# Pertukaran persekitaran pantas
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# Penempatan pantas dengan pemantauan
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# Status persekitaran
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -641,37 +662,37 @@ azd-status() {
 
 ### Mendapatkan Bantuan
 ```bash
-# Bantuan umum
+# General help
 azd --help
 azd help
 
-# Bantuan khusus arahan
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# Papar versi dan maklumat binaan
+# Show version and build info
 azd version
 azd version --output json
 ```
 
 ### Pautan Dokumentasi
 ```bash
-# Buka dokumentasi dalam pelayar
+# Open documentation in browser
 azd docs
 
-# Tunjukkan dokumentasi templat
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Petua**: Tandakan senarai pintasan ini dan gunakan `Ctrl+F` untuk mencari perintah yang anda perlukan dengan cepat!
+**Petua**: Tandakan helaian cheat ini dan gunakan `Ctrl+F` untuk mencari arahan yang anda perlukan dengan cepat!
 
 ---
 
 **Navigasi**
-- **Pelajaran Sebelum**: [Semakan Preflight](../docs/pre-deployment/preflight-checks.md)
+- **Pelajaran Sebelumnya**: [Pemeriksaan Preflight](../docs/chapter-06-pre-deployment/preflight-checks.md)
 - **Pelajaran Seterusnya**: [Glosari](glossary.md)
 
 ---
