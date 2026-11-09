@@ -1,51 +1,54 @@
-# 第 4 章：基礎建設即代碼與部署
+# 第4章：基礎設施即代碼與部署
 
-**📚 課程**: [AZD 新手指南](../../README.md) | **⏱️ 時長**: 1-1.5 小時 | **⭐ 複雜度**: 中階
+**📚 課程**: [AZD 入門](../../README.md) | **⏱️ 時長**: 2-3 小時閱讀；部署練習需要額外時間 | **⭐ 複雜度**: 中級
 
 ---
 
 ## 概覽
 
-本章涵蓋使用 Bicep 範本的基礎建設即代碼 (IaC) 範例、資源配置，以及使用 Azure Developer CLI 的部署策略。
+本章涵蓋使用 Bicep 範本的基礎設施即代碼 (IaC) 範例、資源配置，以及使用 Azure Developer CLI 的部署策略。
 
-> 已於 2026 年 7 月使用 `azd 1.27.1` 版本驗證。
+> 命令及設定審查目標: `azd 1.37.2` (2026年11月)。審查期間未進行實時 Azure 配置。
 
 ## 學習目標
 
-完成本章後，您將能夠：
-- 了解 Bicep 範本的結構與語法
+完成本章後，你將能夠：
+- 理解 Bicep 範本的結構與語法
 - 使用 `azd provision` 配置 Azure 資源
 - 使用 `azd deploy` 部署應用程式
 - 實作藍綠部署與滾動部署策略
 
 ---
 
-## 📚 課程清單
+## 📚 課程單元
 
-| # | 課程 | 說明 | 時間 |
+| # | 單元 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [配置資源](provisioning.md) | 使用 AZD 管理 Azure 資源 | 45 分鐘 |
-| 2 | [部署指南](deployment-guide.md) | 應用部署策略 | 45 分鐘 |
-| 3 | [自行撰寫範本](custom-templates.md) | 建立並發佈可重用的 azd 範本 | 30 分鐘 |
+| 1 | [資源配置](provisioning.md) | 使用 AZD 管理 Azure 資源 | 45 分鐘 |
+| 2 | [部署指南](deployment-guide.md) | 應用程式部署策略 | 45 分鐘 |
+| 3 | [撰寫自訂範本](custom-templates.md) | 建立並發佈可重複使用的 azd 範本 | 30 分鐘 |
 
 ---
 
 ## 🚀 快速開始
 
 ```bash
-# 從範本初始化
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# 預覽將會建立的內容
+# Preview what will be created
 azd provision --preview
 
-# 只配置基礎設施
+# Provision infrastructure only
 azd provision
 
-# 只部署代碼
+# Deploy code only
 azd deploy
 
-# 或者兩者同時進行
+# Or both together
 azd up
 ```
 
@@ -68,7 +71,7 @@ my-project/
 
 ---
 
-## 🔧 重要指令
+## 🔧 常用指令
 
 | 指令 | 說明 |
 |---------|-------------|
@@ -84,16 +87,16 @@ my-project/
 
 | 方向 | 章節 |
 |-----------|---------|
-| <strong>前一章</strong> | [第 3 章：組態](../chapter-03-configuration/README.md) |
-| <strong>下一章</strong> | [第 5 章：多代理解決方案](../chapter-05-multi-agent/README.md) |
+| <strong>上一章</strong> | [第3章：設定](../chapter-03-configuration/README.md) |
+| <strong>下一章</strong> | [第5章：多代理解決方案](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 相關資源
+## 📖 關聯資源
 
 - [部署前檢查](../chapter-06-pre-deployment/README.md)
-- [容器應用示例](../../examples/container-app/README.md)
-- [資料庫應用示例](../../examples/database-app/README.md)
+- [容器應用範例](../../examples/container-app/README.md)
+- [資料庫應用範例](../../examples/database-app/README.md)
 
 ---
 

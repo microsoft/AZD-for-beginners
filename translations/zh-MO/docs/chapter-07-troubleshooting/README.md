@@ -1,49 +1,49 @@
-# 第7章：疑難排解與除錯
+# 第7章：故障排除與除錯
 
-**📚 課程**: [AZD 初學者指南](../../README.md) | **⏱️ 時長**: 1-1.5 小時 | **⭐ 複雜度**: 中階
+**📚 課程**：[初學者的 AZD](../../README.md) | **⏱️ 時長**：1-1.5 小時 | **⭐ 複雜度**：中階
 
 ---
 
-## 概覽
+## 概述
 
-本章節協助您診斷及解決在使用 Azure Developer CLI 時常見的問題。從部署失敗到 AI 專屬問題。
+本章節協助您診斷及解決使用 Azure Developer CLI 時常見的問題。從部署失敗到 AI 特有的問題。
 
-> 已於 2026 年 7 月透過 `azd 1.27.1` 驗證。
+> 指令說明依據已發布的 `azd 1.37.2` 參考檔檢視。未執行雲端部署。使用指令前請替換範例資源名稱及 ID。
 
 ## 學習目標
 
-完成本章節後，您將能夠：
-- 診斷常見的 AZD 部署失敗問題
-- 除錯驗證與權限相關問題
+完成本章後，您將能：
+- 診斷常見的 AZD 部署失敗
+- 除錯身份驗證與權限問題
 - 解決 AI 服務連線問題
-- 使用 Azure 入口網站與 CLI 進行疑難排解
+- 使用 Azure 入口網站及 CLI 進行故障排除
 
 ---
 
 ## 📚 課程單元
 
-| # | 課程 | 說明 | 時間 |
+| # | 課程單元 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [常見問題](common-issues.md) | 經常遇到的問題 | 30 分鐘 |
+| 1 | [常見問題](common-issues.md) | 頻繁遇到的問題 | 30 分鐘 |
 | 2 | [除錯指南](debugging.md) | 逐步除錯策略 | 45 分鐘 |
-| 3 | [AI 疑難排解](ai-troubleshooting.md) | AI 專屬問題 | 30 分鐘 |
+| 3 | [AI 故障排除](ai-troubleshooting.md) | AI 特定問題 | 30 分鐘 |
 
 ---
 
-## 🚨 速效解決方案
+## 🚨 快速解決方案
 
-### 驗證問題
+### 身份驗證問題
 ```bash
-# AZD 工作流程所需
+# Required for AZD workflows
 azd auth login
 
-# 如果您也直接使用 Azure CLI 命令，則為可選
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### 部署失敗
+### 配置失敗
 ```bash
 azd show
 azd monitor --logs
@@ -51,30 +51,33 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### 資源衝突
+請先檢查現有資源與部署錯誤。切勿刪除共享或生產環境以解決命名衝突。針對<strong>新的一次性環境</strong>，請使用唯一名稱：
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### 配額超限
+### 配額超額
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+變更 `AZURE_LOCATION` 不會移動現有資源，可能導致重新部署時位置衝突。
 
 ---
 
 ## 📋 錯誤代碼參考
 
-| 錯誤 | 原因 | 解決方法 |
+| 錯誤 | 原因 | 解決方案 |
 |-------|-------|----------|
-| `AuthenticationError` | 尚未登入 | `azd auth login` |
+| `AuthenticationError` | 未登入 | `azd auth login` |
 | `ResourceNotFound` | 資源缺失 | 檢查資源名稱 |
-| `QuotaExceeded` | 訂閱配額限制 | 申請增加配額 |
+| `QuotaExceeded` | 訂閱限制 | 申請提高配額 |
 | `InvalidTemplate` | Bicep 語法錯誤 | `az bicep build` |
-| `Conflict` | 資源已存在 | 使用新名稱或刪除現有資源 |
+| `Conflict` | 資源已存在 | 使用新名稱或刪除 |
 | `Forbidden` | 權限不足 | 檢查 RBAC 角色 |
 
 ---
@@ -82,17 +85,19 @@ azd up
 ## 🔄 重置與復原
 
 ```bash
-# 軟重設（保留資源，重新部署代碼）
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# 硬重設（刪除所有內容，重新開始）
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
 
+硬重置將刪除資料，可能改變端點。請先備份並審查互動式刪除提示。`--force --purge` 僅適用於一次性環境，且當意圖永久刪除時。
+
 ---
 
-## 🔗 導覽
+## 🔗 導航
 
 | 方向 | 章節 |
 |-----------|---------|
@@ -104,8 +109,8 @@ azd up
 ## 📖 相關資源
 
 - [部署前檢查](../chapter-06-pre-deployment/preflight-checks.md)
-- [設定指南](../chapter-03-configuration/configuration.md)
-- [AZD GitHub 問題回報](https://github.com/Azure/azure-dev/issues)
+- [配置指南](../chapter-03-configuration/configuration.md)
+- [AZD GitHub 問題](https://github.com/Azure/azure-dev/issues)
 
 ---
 

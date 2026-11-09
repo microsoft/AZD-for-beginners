@@ -1,82 +1,82 @@
-# 第 3 章：設定與驗證
+# 第3章：設定與驗證
 
-**📚 課程**: [AZD 初學者入門](../../README.md) | **⏱️ 時長**: 45-60 分鐘 | **⭐ 複雜度**: 中階
+**📚 課程**：[AZD 初學者指南](../../README.md) | **⏱️ 時長**：90-150分鐘，包含整合實作 | **⭐ 複雜度**：中階
 
 ---
 
-## 概述
+## 概覽
 
-本章涵蓋 Azure Developer CLI 部署的環境配置、驗證模式與安全最佳實踐。
+本章涵蓋 Azure Developer CLI 部署的環境設定、驗證模式與安全最佳實踐。
 
-> 於 2026 年 7 月，針對 `azd 1.27.1` 驗證。
+> 命令與配置審查目標: `azd 1.37.2` (2026年11月)。審查期間未執行實時 Azure 配置。
 
 ## 學習目標
 
 完成本章後，您將能夠：
-- 精通 AZD 配置層級
-- 管理多個環境 (開發、測試、正式)
-- 實作受管理的身份驗證
-- 配置環境特定設置
+- 精通 AZD 配置層級結構
+- 管理多個環境（開發、測試、正式）
+- 使用受管身份實現安全身份驗證
+- 配置特定環境的設定
 
 ---
 
-## 📚 課程列表
+## 📚 課程
 
 | # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [配置指南](configuration.md) | 環境設置與管理 | 30 分鐘 |
-| 2 | [驗證與安全](authsecurity.md) | 受管理身份與 RBAC 模式 | 30 分鐘 |
+| 1 | [設定指南](configuration.md) | 環境設定與管理 | 30 分鐘 |
+| 2 | [身份驗證與安全](authsecurity.md) | 管理身份與 RBAC 模式 | 30 分鐘 |
 
 ---
 
 ## 🚀 快速開始
 
+從 **已初始化的 azd 應用程式** 根目錄執行，而不是課程儲存庫。如果這些環境名稱已存在，請使用未使用的環境名稱。
+
 ```bash
-# 建立多個環境
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# 切換環境
+# Switch environments
 azd env select prod
 
-# 設定環境變數
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# 檢視配置
+# View configuration
 azd env get-values
 ```
 
+`SKU_NAME` 只是說明：僅當您的範本明確使用它時，才會影響基礎結構。一般的 `azd env set` 值會以純文字形式保存在本機；它們並不是安全的秘密儲存。
+
 ---
 
-## 🔧 配置層級
+## 🔧 設定階層結構
 
-AZD 按以下順序套用設定（後者覆蓋前者）：
-
-1. <strong>預設值</strong>（內建於範本中）
-2. **azure.yaml**（專案配置）
-3. <strong>環境變數</strong>（`azd env set`）
-4. <strong>命令列參數</strong>（`--location eastus`）
+將三種不同的配置層分開：全域偏好設定 (`azd config`)、專案結構 (`azure.yaml`)，以及每個環境的值 (`azd env`)。標誌只會覆寫它們實際支援的設定；不會有任意環境變數對 `azure.yaml` 或 Bicep 的通用覆寫。
 
 ---
 
 ## 🔐 安全最佳實踐
 
 ```bash
-# 使用管理身份（建議）
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# 檢查 AZD 認證狀態
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# 可選：如果您計劃執行 az 命令，請驗證 Azure CLI 內容
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# 如有需要，重新認證
+# Re-authenticate if needed
 azd auth login
 
-# 可選：為 az 命令刷新 Azure CLI 認證
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -94,7 +94,7 @@ az login
 ## 📖 相關資源
 
 - [部署前檢查](../chapter-06-pre-deployment/README.md)
-- [故障排除](../chapter-07-troubleshooting/common-issues.md)
+- [疑難排解](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
