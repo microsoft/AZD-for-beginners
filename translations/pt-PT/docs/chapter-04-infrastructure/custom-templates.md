@@ -2,66 +2,66 @@
 
 **Navegação do Capítulo:**
 - **📚 Início do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 4 - Infraestrutura como Código & Implantação
+- **📖 Capítulo Atual**: Capítulo 4 - Infraestrutura como Código e Implantação
 - **⬅️ Anterior**: [Guia de Implantação](deployment-guide.md)
 - **🚀 Próximo Capítulo**: [Capítulo 5: Soluções Multi-Agente](../chapter-05-multi-agent/README.md)
 
-> Validado com `azd 1.27.1` em julho de 2026.
+> Revisado contra `azd 1.37.2` (Novembro 2026). Esta é uma **demonstração de criação com ficheiros parciais**, não um template completo: deve fornecer o código da aplicação e `modules/web.bicep` com o seu ambiente, registo, Aplicação de Contentor e saídas antes da implantação. O provisionamento do Azure não foi executado nesta revisão.
 
 ## Introdução
 
-Até agora você *consumiu* templates com `azd init --template <nome>`. Mas uma vez que tem um layout de projeto que a sua equipa gosta — digamos, uma Container App com um Cosmos DB e a monitorização adequada — você vai querer transformá-lo num template reutilizável seu. Um template é apenas um repositório Git com uma estrutura previsível que o azd sabe como ler. Esta lição mostra-lhe como construir um do zero, testá-lo e (opcionalmente) publicá-lo na galeria comunitária.
+Até agora, você *consumiu* templates com `azd init --template <name>`. Mas, uma vez que tenha um layout de projeto que a sua equipa goste—por exemplo, uma Aplicação de Contentor com um Cosmos DB e a monitorização adequada—vai querer transformá-lo num template reutilizável seu. Um template é apenas um repositório Git com uma estrutura previsível que o azd sabe como ler. Esta lição mostra como criar um do zero, testá-lo e (opcionalmente) publicá-lo na galeria da comunidade.
 
 ## Objetivos de Aprendizagem
 
 No final desta lição, você irá:
-- Compreender o que faz uma pasta ser um "template azd"
-- Conhecer os ficheiros e a estrutura de pastas obrigatórios
+- Compreender o que torna uma pasta um "template azd"
+- Conhecer os ficheiros e o layout de pasta necessários
 - Adicionar um `azure.yaml` e `infra/` que outras pessoas possam reutilizar
-- Testar o seu template localmente antes de partilhá-lo
-- Publicar e (opcionalmente) submeter à galeria Awesome AZD
+- Testar o seu template localmente antes de o partilhar
+- Publicá-lo e (opcionalmente) submetê-lo ao Awesome AZD
 
-## Resultados de Aprendizagem
+## Resultados Esperados
 
-Depois de completar esta lição, será capaz de:
-- Estruturar um novo repositório de template
-- Parametrizar a infraestrutura para funcionar em qualquer subscrição
+Após concluir esta lição, será capaz de:
+- Criar o esqueleto de um novo repositório de template
+- Parametrizar a infraestrutura para que funcione em qualquer subscrição
 - Validar um template com `azd init` e `azd up`
-- Adicionar os metadados exigidos pela galeria comunitária
+- Adicionar os metadados que a galeria da comunidade requer
 
 ---
 
-## O Que É um Template, Mesmo?
+## O que é um Template, na Realidade?
 
 Um template azd é **um repositório Git** que contém, no mínimo:
 
 | Ficheiro / pasta | Propósito | Obrigatório? |
 |---------------|---------|-----------|
 | `azure.yaml` | Descreve serviços, hosts e fornecedor de infra | ✅ Sim |
-| `infra/` | Bicep, Terraform, ou Pulumi que provisiona recursos | ✅ Sim |
-| `src/` (ou o seu código) | O código da aplicação que o azd implanta | ✅ Sim |
+| `infra/` | Definições de provisionamento Bicep ou Terraform | Obrigatório para este exemplo explícito de IaC; projetos com infraestrutura gerada podem omitir |
+| `src/` (ou o seu código) | O código da aplicação que o azd implanta | Obrigatório para serviços baseados em código-fonte; nem todos os templates contêm código de aplicação |
 | `README.md` | Como usar o template | ✅ Fortemente recomendado |
 | `.azdo/` ou `.github/` | Definições da pipeline CI/CD | Opcional |
 | `.devcontainer/` | Ambiente de desenvolvimento reproduzível | Opcional |
-| `azure.yaml` `metadata` | Informação da galeria + telemetria | Opcional (obrigatório para publicar) |
+| `azure.yaml` `metadata` | Informação de identidade/telemetria do template | Recomendado; publicar um repositório Git não o requer |
 
-Não há nada de mágico aqui: quando executa `azd init --template you/your-repo`, o azd clona o repositório e lê o `azure.yaml`.
+Não há magia aqui: quando executa `azd init --template you/your-repo`, o azd clona o repositório e lê `azure.yaml`.
 
 ---
 
-## Passo 1: Estruture o Repositório
+## Passo 1: Criar o Esqueleto do Repositório
 
-Crie a estrutura de pastas manualmente ou comece a partir de um template mínimo e edite:
+Crie a estrutura de pastas manualmente ou comece com um template minimalista e edite-o:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Criar o layout padrão
+# Create the standard layout
 mkdir -p src infra
 ```
 
-Um layout acabado típico parece assim:
+Um layout típico finalizado é este:
 
 ```
 my-azd-template/
@@ -81,7 +81,7 @@ my-azd-template/
 
 ---
 
-## Passo 2: Escreva o `azure.yaml`
+## Passo 2: Escrever `azure.yaml`
 
 Este é o coração do template. Diz ao azd o que implantar e como:
 
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -101,21 +101,21 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> O campo `metadata.template` é usado pela telemetria da galeria para contar uso. Use a convenção `name@version`.
+> O campo `metadata.template` é o que a telemetria da galeria usa para contar o uso. Use a convenção `name@version`.
 
 ---
 
-## Passo 3: Parametrize a Infraestrutura
+## Passo 3: Parametrizar a Infraestrutura
 
-A regra mais importante para um template *reutilizável*: **nunca codifique nomes, regiões ou valores específicos da subscrição.** Use parâmetros e o padrão de token de recurso para que o mesmo template funcione em qualquer subscrição.
+A regra mais importante para um template *reutilizável*: **nunca codifique nomes, regiões ou valores específicos de subscrição.** Use parâmetros e o padrão de token de recurso para que o mesmo template funcione na subscrição de qualquer pessoa.
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -140,13 +147,16 @@ output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 
 Duas coisas tornam este template amigável:
 
-1. **Etiqueta `azd-env-name`** — o azd usa para rastrear e limpar recursos por ambiente.
-2. **Token de recurso `uniqueString(...)`** — produz um sufixo estável e globalmente único para que os nomes não colidam.
+1. **Etiqueta `azd-env-name`** — o azd usa-a para rastrear e limpar recursos por ambiente.
+2. **Token de recurso `uniqueString(...)`** — produz um sufixo hash estável para reduzir colisões; não garante unicidade global.
 
-Forneça um ficheiro de parâmetros correspondente que lê valores que o azd injeta pelo ambiente:
+O `modules/web.bicep` que falta deve aceitar `name`, `location` e `tags`, provisionar o ambiente/registo e app da Aplicação de Contentor, etiquetar a app com `azd-service-name: web`, e exportar `uri`. Deve também expor valores do registo necessários ao fluxo de construção/implantação escolhido (por exemplo `AZURE_CONTAINER_REGISTRY_ENDPOINT` do módulo raiz). Apenas uma saída endpoint não configura descoberta de serviço, definições de aplicação ou autenticação no registo.
+
+Forneça um ficheiro de parâmetros correspondente que leia valores que o azd injeta do ambiente:
+
+Guarde o seguinte como `infra/main.parameters.json`:
 
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -165,53 +175,57 @@ O azd substitui `${AZURE_ENV_NAME}` e `${AZURE_LOCATION}` do ambiente atual auto
 
 Antes de partilhar, prove que o template funciona a partir de um estado limpo.
 
-**Teste a partir da pasta local** (não é necessário push para o Git):
+**Teste a partir da pasta local** (não é necessário fazer push para Git):
 
 ```bash
-# A partir de um diretório vazio, inicialize usando o caminho do seu modelo local
+# From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
-# Provisionar + implantar de ponta a ponta
+# Provision + deploy end to end
 azd auth login
 azd up
 ```
 
-**Depois teste o teardown** — um bom template limpa completamente:
+**Depois teste a desmontagem**—um bom template limpa completamente:
 
 ```bash
 azd down --force --purge
 ```
 
-Se `azd down` deixar recursos para trás, provavelmente faltou a etiqueta `azd-env-name` num recurso.
+Se `azd down` deixar recursos para trás, verifique a descoberta do ambiente/grupo de recursos, recursos externos/partilhados, permissões, bloqueios e proteção contra eliminação. `--purge` não apaga o estado local `.azure/`.
 
-> **Dica:** execute primeiro `azd provision --preview`. Este comando faz um what-if e mostra erros do template antes de criar qualquer recurso.
+> **Dica:** depois de fornecer todos os ficheiros em falta, execute `azd provision --preview` primeiro. Inspecione os hooks antes da pré-visualização porque podem executar comandos com efeitos colaterais. A pré-visualização não é uma estimativa de preço nem garantia de que o provisionamento terá sucesso.
 
 ---
 
 ## Passo 5: Publique o Template
 
-Faça push do repositório para o GitHub (público se quiser que outros o usem):
+Faça push do repositório para o GitHub (público se quiser que outros o utilizem):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Agora qualquer pessoa pode usá-lo:
+Qualquer pessoa pode agora usá-lo:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
 
-## Passo 6 (Opcional): Submeta ao Awesome AZD
+## Passo 6 (Opcional): Submeter ao Awesome AZD
 
-A [galeria Awesome AZD](https://azure.github.io/awesome-azd/) lista templates comunitários. Para ser listado, o seu repositório deve incluir:
+A [galeria Awesome AZD](https://azure.github.io/awesome-azd/) lista templates da comunidade. Para ser listado, o seu repositório deve incluir:
 
-- ✅ Um `README.md` claro com pré-requisitos, um diagrama de arquitetura, e notas de custo
+- ✅ Um `README.md` claro com pré-requisitos, um diagrama de arquitetura e notas de custo
 - ✅ Um `azure.yaml` funcional com `metadata.template`
-- ✅ Infraestrutura que provisiona corretamente numa subscrição nova
+- ✅ Infraestrutura que provisiona limpo numa subscrição nova
 - ✅ Um ficheiro `LICENSE`
 - ✅ (Recomendado) Um `.devcontainer/` para Codespaces com um clique
 
@@ -222,20 +236,20 @@ Submeta abrindo um pull request que adiciona o seu template ao ficheiro de dados
 ## Armadilhas Comuns
 
 | Armadilha | Correção |
-|---------|----------|
+|---------|-----|
 | Nomes de recursos codificados | Use o token de recurso `uniqueString()` |
 | `azd down` deixa recursos | Etiquete todos os recursos (ou o grupo de recursos) com `azd-env-name` |
-| Template funciona para si, falha para outros | Remova IDs de subscrição, IDs de tenant e suposições de região |
-| Outputs não ligados à app | Exporte `SERVICE_<NAME>_ENDPOINT_URL` e outros outputs `AZURE_*` |
-| Submissão para galeria rejeitada | Adicione `README.md`, `LICENSE`, e `metadata.template` |
+| Template funciona para si, falha para outros | Remova IDs de subscrição, IDs de inquilino e suposições de região |
+| Saídas não ligadas à aplicação | Combine `azd-service-name`/`resourceName` para implantação e mapeie explicitamente as saídas para as definições da aplicação |
+| Submissão à galeria rejeitada | Adicione `README.md`, `LICENSE`, e `metadata.template` |
 
 ---
 
 ## Resumo
 
-- Um template é apenas um repositório Git com `azure.yaml`, `infra/`, e o seu código.
-- Parametrize tudo — nomes, regiões, e IDs — para correr em qualquer lugar.
-- Etiquete sempre recursos com `azd-env-name` para que `azd down` funcione.
+- Um template é apenas um repositório Git com `azure.yaml`, `infra/` e o seu código.
+- Parametrize tudo—nomes, regiões e IDs—para que funcione em qualquer lugar.
+- Sempre etiquete os recursos com `azd-env-name` para que `azd down` funcione.
 - Teste localmente com `azd init --template <local-path>` antes de publicar.
 - Adicione metadados e um README para submeter ao Awesome AZD.
 
@@ -251,7 +265,7 @@ Submeta abrindo um pull request que adiciona o seu template ao ficheiro de dados
 
 ## 📖 Recursos Relacionados
 
-- [Provisionar Recursos](provisioning.md)
+- [Provisionamento de Recursos](provisioning.md)
 - [Galeria Awesome AZD](https://azure.github.io/awesome-azd/)
 - [Documentação oficial do template azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 

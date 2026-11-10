@@ -1,51 +1,51 @@
 # Capítulo 6: Planeamento e Validação Pré-Implementação
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1 hora | **⭐ Complexidade**: Intermédio
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-4 horas de leitura; tempo adicional para laboratórios adaptados | **⭐ Complexidade**: Intermédio–Avançado
 
 ---
 
 ## Visão Geral
 
-Este capítulo aborda passos essenciais de planeamento e validação antes da implementação da sua aplicação. Aprenda a evitar erros dispendiosos com um planeamento adequado da capacidade, seleção de SKU e verificações pré-implementação.
+Este capítulo cobre passos essenciais de planeamento e validação antes de implementar a sua aplicação. Aprenda a evitar erros dispendiosos com planeamento adequado de capacidade, seleção de SKU e verificações prévias.
 
-> Validado contra `azd 1.27.1` em julho de 2026.
+> Orientação de comandos revista em relação à referência `azd 1.37.2` publicada. Não foram executadas implementações na cloud. As lições mais longas incluem fragmentos ilustrativos, não projetos completos de implementação local.
 
 ## Objetivos de Aprendizagem
 
-Ao concluir este capítulo, irá:
-- Realizar verificações pré-implementação
+Ao completar este capítulo, você irá:
+- Executar verificações prévias antes da implementação
 - Planear a capacidade e estimar os requisitos de recursos
 - Selecionar SKUs apropriados para otimização de custos
-- Configurar o Application Insights para monitorização
-- Compreender padrões de coordenação de equipas
+- Configurar Application Insights para monitorização
+- Compreender padrões de coordenação multi-agente e os seus requisitos de implementação
 
 ---
 
 ## 📚 Lições
 
-| # | Lição | Descrição | Tempo |
+| # | Lição | Descrição | Duração |
 |---|--------|-------------|------|
-| 1 | [Verificações Pré-Implementação](preflight-checks.md) | Validar configuração antes da implementação | 15 min |
+| 1 | [Verificações Prévias](preflight-checks.md) | Validar configuração antes da implementação | 15 min |
 | 2 | [Planeamento de Capacidade](capacity-planning.md) | Estimar requisitos de recursos | 20 min |
-| 3 | [Seleção de SKU](sku-selection.md) | Escolher níveis de preços apropriados | 15 min |
+| 3 | [Seleção de SKU](sku-selection.md) | Escolher níveis de preço adequados | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configurar monitorização | 20 min |
-| 5 | [Padrões de Coordenação](coordination-patterns.md) | Fluxos de trabalho de implementação de equipas | 15 min |
+| 5 | [Padrões de Coordenação](coordination-patterns.md) | Design avançado de orquestração multi-agente | 60-75 min |
 
 ---
 
 ## 🚀 Início Rápido
 
 ```bash
-# Verificar quotas da subscrição
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Pré-visualizar implantação (nenhum recurso criado)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Validar sintaxe Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Verificar configuração do ambiente
+# Check environment configuration
 azd env get-values
 ```
 
@@ -65,19 +65,19 @@ azd env get-values
 
 - [ ] Variáveis de ambiente definidas
 - [ ] Segredos no Key Vault
-- [ ] Strings de ligação verificadas
-- [ ] Verificações de saúde configuradas
+- [ ] Cadeias de conexão verificadas
+- [ ] Verificações de integridade configuradas
 
 ---
 
 ## 💰 Guia de Seleção de SKU
 
-| Carga de Trabalho | Desenvolvimento | Produção |
+| Carga de trabalho | Desenvolvimento | Produção |
 |----------|-------------|------------|
-| Container Apps | Consumo | Dedicado D4 |
+| Container Apps | Consumo | Consumo ou perfil de carga dedicado, baseado na carga medida |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Básico | Standard S2+ |
+| Modelos Azure OpenAI | Tipo de implementação pay-as-you-go suportado | Pay-as-you-go ou throughput provisionado; depende do modelo/região |
+| AI Search | Gratuito/Básico dentro dos limites | Nível Básico ou Standard dimensionado para índice, réplicas e carga de consulta |
 
 ---
 
@@ -86,7 +86,7 @@ azd env get-values
 | Direção | Capítulo |
 |-----------|---------|
 | **Anterior** | [Capítulo 5: Multi-Agente](../chapter-05-multi-agent/README.md) |
-| **Seguinte** | [Capítulo 7: Diagnóstico](../chapter-07-troubleshooting/README.md) |
+| **Seguinte** | [Capítulo 7: Resolução de Problemas](../chapter-07-troubleshooting/README.md) |
 
 ---
 

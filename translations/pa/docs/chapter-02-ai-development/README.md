@@ -1,22 +1,22 @@
-# ਚੈਪਟਰ 2: ਏਆਈ-ਪਹਿਲਾ ਵਿਕਾਸ
+# ਅਧਿਆਇ 2: AI-ਪਹਿਲਾ ਵਿਕਾਸ
 
-**📚 ਕੋਰਸ**: [AZD ਫਾਰ ਬਿਗਿਨਰਜ਼](../../README.md) | **⏱️ ਸਮਾਂ**: 1-2 ਘੰਟੇ | **⭐ ਜਟਿਲਤਾ**: ਦਰਮਿਆਨਾ
+**📚 ਕੋਰਸ**: [AZD ਸ਼ੁਰੂਆਤੀ ਲਈ](../../README.md) | **⏱️ ਸਮਾਂ**: ਵਰਕਸ਼ਾਪ ਸਮੇਤ 4-5 ਘੰਟੇ | **⭐ ਜਟਿਲਤਾ**: ਦਰਮਿਆਨਾ
 
 ---
 
-## ਝਲਕ
+## ਸਾਰ
 
-ਇਹ ਚੈਪਟਰ ਏਜ਼ੂਰ ਡਿਵੈਲਪਰ CLI ਅਤੇ ਮਾਇਕ੍ਰੋਸਾਫਟ ਫਾਉਂਡਰੀ ਸਰਵਿਸਿਜ਼ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏਆਈ-ਚਾਲਤ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਤਾਇਨਾਤ ਕਰਨ 'ਤੇ ਧਿਆਨ ਕੇਂਦ੍ਰਿਤ ਕਰਦਾ ਹੈ। ਸਧਾਰਣ ਏਆਈ ਚੈਟ ਐਪਸ ਤੋਂ ਲੈ ਕੇ ਸੰਦਾਂ ਵਾਲੇ ਬੁੱਧੀਮਾਨ ਏਜੰਟਾਂ ਤੱਕ।
+ਇਹ ਅਧਿਆਇ Azure Developer CLI ਅਤੇ Microsoft Foundry ਸੇਵਾਵਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ AI-ਸੰਚਾਲਿਤ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੀ ਤੈਨਾਤੀ 'ਤੇ ਕੇਂਦਰਤ ਹੈ। ਸਧਾਰਣ AI ਚੈਟ ਐਪਸ ਤੋਂ ਲੈ ਕੇ ਸੰਦਾਂ ਵਾਲੇ ਬੁੱਧੀਮਾਨ ਏਜੰਟਾਂ ਤੱਕ।
 
-> **ਪ੍ਰਮਾਣੀਕਰਨ ਨੋਟ (2026-07-13):** ਇਸ ਚੈਪਟਰ ਵਿੱਚ ਕਮਾਂਡ ਫ਼ਲੋ ਅਤੇ ਵਿਸਥਾਰ ਨਿਰਦੇਸ਼ਾਂ ਦਾ ਸਮੀਖਿਆ `azd` ਦੇ `1.27.1` ਅਤੇ ਮੌਜੂਦਾ ਪ੍ਰੀਵਿਊ ਏਆਈ ਏਜੰਟ ਇਕਸਟੇਂਸ਼ਨ ਰਿਲੀਜ਼ `azure.ai.agents` `1.0.0-beta.5` ਦੇ ਖਿਲਾਫ ਕੀਤਾ ਗਿਆ। ਜੇ ਤੁਸੀਂ ਪੁਰਾਣੀ AZD ਬਿਲਡ 'ਤੇ ਹੋ, ਪਹਿਲਾਂ ਅੱਪਡੇਟ ਕਰੋ ਅਤੇ ਫਿਰ ਅਭਿਆਸ ਜਾਰੀ ਰੱਖੋ।
+> **ਰਿਲੀਜ਼ ਸਮੀਖਿਆ (2026-11-04):** AI CLI ਗਾਈਡ ਨੂੰ ਪ੍ਰਕਾਸ਼ਿਤ `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, ਅਤੇ `azure.ai.evaluations` `1.0.0-beta.2` ਦਸਤਾਵੇਜ਼/ਸਰੋਤ ਖਿਲਾਫ ਚੈੱਕ ਕੀਤਾ ਗਿਆ ਸੀ। ਮਿਲੀ-ਜੁਲੀ ਵਰਕਫਲੋ ਲਈ `azd >= 1.37.0` ਦੀ ਵਰਤੋਂ ਕਰੋ। ਮੁਲਾਂਕਣ ਅਜੇ ਵੱਖ-ਵੱਖ `azd ai eval` ਨਾਮ-ਸਥਾਨ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹਨ; ਵੇਖੋ [ਰਿਲੀਜ਼ ਬਦਲਾਅ ਅਤੇ ਮਾਈਗ੍ਰੇਸ਼ਨ ਗਾਈਡ](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes)। ਇਹ ਲਾਈਵ ਤੈਨਾਤੀ ਮਾਨਤਾ ਨਹੀਂ ਹੈ।
 
 ## ਸਿੱਖਣ ਦੇ ਉਦੇਸ਼
 
-ਇਸ ਚੈਪਟਰ ਨੂੰ ਪੂਰਾ ਕਰਨ 'ਤੇ, ਤੁਸੀਂ:
-- ਪੂਰਵ-ਬਣਾਏ AZD ਟੈਂਪਲੇਟ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏਆਈ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਤਾਇਨਾਤ ਕਰੋ
-- AZD ਨਾਲ ਮਾਇਕ੍ਰੋਸਾਫਟ ਫਾਉਂਡਰੀ ਦੇ ਇੰਟਿਗ੍ਰੇਸ਼ਨ ਨੂੰ ਸਮਝੋ
-- ਸੰਦਾਂ ਨਾਲ ਏਆਈ ਏਜੰਟਾਂ ਨੂੰ ਸੰਰਚਿਤ ਅਤੇ ਕਸਟਮਾਈਜ਼ ਕਰੋ
-- RAG (ਰੀਟਰੀਵਲ-ਅਗਮੇਂਟਡ ਜਨਰੇਸ਼ਨ) ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਤਾਇਨਾਤ ਕਰੋ
+ਇਸ ਅਧਿਆਇ ਨੂੰ ਪੂਰਾ ਕਰਕੇ, ਤੁਸੀਂ:
+- ਪਹਿਲਾਂ ਤਿਆਰ ਕੀਤੇ AZD ਟੈਂਪਲੇਟਾਂ ਨਾਲ AI ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਤੈਨਾਤ ਕਰੋ
+- AZD ਨਾਲ Microsoft Foundry ਇੰਟਿਗ੍ਰੇਸ਼ਨ ਨੂੰ ਸਮਝੋ
+- ਸੰਦਾਂ ਨਾਲ AI ਏਜੰਟਾਂ ਨੂੰ ਸੰਰਚਿਤ ਅਤੇ ਕਸਟਮਾਈਜ਼ ਕਰੋ
+- RAG (Retrieval-Augmented Generation) ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਤੈਨਾਤ ਕਰੋ
 
 ---
 
@@ -24,67 +24,71 @@
 
 | # | ਪਾਠ | ਵੇਰਵਾ | ਸਮਾਂ |
 |---|--------|-------------|------|
-| 1 | [ਮਾਇਕ੍ਰੋਸਾਫਟ ਫਾਉਂਡਰੀ ਇੰਟਿਗ੍ਰੇਸ਼ਨ](microsoft-foundry-integration.md) | AZD ਨੂੰ ਫਾਉਂਡਰੀ ਸਰਵਿਸਿਜ਼ ਨਾਲ ਜੋੜੋ | 30 ਮਿੰਟ |
-| 2 | [ਏਆਈ ਏਜੰਟ ਸਿੱਖਿਆ](agents.md) | ਸੰਦਾਂ ਨਾਲ ਬੁੱਧੀਮਾਨ ਏਜੰਟ ਤਾਇਨਾਤ ਕਰੋ | 45 ਮਿੰਟ |
-| 3 | [ਏਆਈ ਮਾਡਲ ਤਾਇਨਾਤੀ](ai-model-deployment.md) | ਏਆਈ ਮਾਡਲ ਤਾਇਨਾਤ ਅਤੇ ਸੰਰਚਿਤ ਕਰੋ | 30 ਮਿੰਟ |
-| 4 | [ਏਆਈ ਵਰਕਸ਼ਾਪ ਲੈਬ](ai-workshop-lab.md) | ਹੱਥਾਂ-ਨਾਲ: ਆਪਣੀ ਏਆਈ ਹੱਲ ਨੂੰ AZD-ਤਿਆਰ ਬਣਾਓ | 60 ਮਿੰਟ |
+| 1 | [Microsoft Foundry ਇੰਟਿਗ੍ਰੇਸ਼ਨ](microsoft-foundry-integration.md) | AZD ਨੂੰ Foundry ਸੇਵਾਵਾਂ ਨਾਲ ਸੰਬੰਧਿਤ ਕਰੋ | 30 ਮਿੰਟ |
+| 2 | [AI ਏਜੰਟ ਮਾਰਗਦਰਸ਼ਨ](agents.md) | ਸੰਦਾਂ ਨਾਲ ਬੁੱਧੀਮਾਨ ਏਜੰਟਾਂ ਨੂੰ ਤੈਨਾਤ ਕਰੋ | 45 ਮਿੰਟ |
+| 3 | [AI ਮਾਡਲ ਤੈਨਾਤੀ](ai-model-deployment.md) | AI ਮਾਡਲਾਂ ਨੂੰ ਤੈਨਾਤ ਅਤੇ ਸੰਰਚਿਤ ਕਰੋ | 30 ਮਿੰਟ |
+| 4 | [AI ਵਰਕਸ਼ਾਪ ਲੈੱਬ](ai-workshop-lab.md) | ਹੱਥ-ਵਰਕ: ਇੱਕ ਟੈਂਪਲੇਟ ਨੂੰ ਖੋਜੋ ਅਤੇ ਆਪਣੇ ਕੇਂਦਰਨੀਤੀ ਦੀ ਯੋਜਨਾ ਬਣਾਓ | 2-3 ਘੰਟੇ |
 
 ---
 
 ## 🚀 ਤੇਜ਼ ਸ਼ੁਰੂਆਤ
 
+ਨਵੀਂ ਖਾਲੀ ਡਾਇਰੈਕਟਰੀ ਵਿੱਚ ਇਕ ਵਿਕਲਪ ਚੁਣੋ। ਅੰਤ ਵਿੱਚ ਦਿੱਤਾ ਗਿਆ `.` ਮੌਜੂਦਾ ਡਾਇਰੈਕਟਰੀ ਨੂੰ ਸ਼ੁਰੂ ਕਰਦਾ ਹੈ; ਨਹੀਂ ਤਾਂ AZD ਤੁਹਾਡੇ ਸ਼ੈੱਲ ਦੀ ਵਰਕਿੰਗ ਡਾਇਰੈਕਟਰੀ ਬਦਲੇ ਬਿਨਾਂ ਇੱਕ ਸਬਡਾਇਰੈਕਟਰੀ ਬਣਾ ਸਕਦਾ ਹੈ।
+
 ```bash
-# ਵਿਕਲਪ 1: RAG ਚੈਟ ਐਪਲੀਕੇਸ਼ਨ
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# ਵਿਕਲਪ 2: AI ਏਜੰਟ
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# ਵਿਕਲਪ 3: ਤੇਜ਼ ਚੈਟ ਐਪ
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
 ---
 
-## 🤖 ਚੁਣੇ ਹੋਏ ਏਆਈ ਟੈਂਪਲੇਟ
+## 🤖 ਚੋਣੀਦਾ AI ਟੈਂਪਲੇਟ
 
-| ਟੈਂਪਲੇਟ | ਵੇਰਵਾ | ਸਰਵਿਸਿਜ਼ |
+| ਟੈਂਪਲੇਟ | ਵੇਰਵਾ | ਸੇਵਾਵਾਂ |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ਹਵਾਲਿਆਂ ਨਾਲ RAG ਚੈਟ | OpenAI + ਏਆਈ ਸર્ચ |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ਸੰਦਾਂ ਨਾਲ ਏਆਈ ਏਜੰਟ | ਏਆਈ ਏਜੰਟ ਸਰਵਿਸ |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | ਬੁਨਿਆਦੀ ਏਆਈ ਚੈਟ | OpenAI + ਕੰਟੇਨਰ ਐਪਸ |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ਉਦਾਹਰਣਾਂ ਨਾਲ RAG ਚੈਟ | OpenAI + AI ਖੋਜ |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ਸੰਦਾਂ ਵਾਲਾ AI ਏਜੰਟ | AI ਏਜੰਟ ਸੇਵਾ |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | ਬੁਨਿਆਦੀ AI ਚੈਟ | OpenAI + ਕੰਟੇਨਰ ਐਪਸ |
 
 ---
 
-## 💰 ਲਾਗਤ ਬਾਰੇ ਜਾਣੂ
+## 💰 ਲਾਗਤ ਦਾ ਗਿਆਨ
 
-| ਵਾਤਾਵਰਣ | ਅੰਦਾਜ਼ਾ ਮਹੀਨਾਵਾਰ ਲਾਗਤ |
+ਇਹ ਦਰਸਾਏ ਗਏ ਪੱਧਰ ਹਨ, ਨਾਂ ਕਿ ਕੀਮਤਾਂ ਜਾਂ ਸੀਮਾਵਾਂ; ਮਾਡਲ ਟਰੈਫਿਕ, ਖੋਜ/ਕੰਪਿਊਟ SKUs, ਖੇਤਰ ਅਤੇ ਵਿਕਲਪਿਕ ਫੀਚਰ ਇਨ੍ਹਾਂ ਤੋਂ ਵੱਧ ਹੋ ਸਕਦੇ ਹਨ। ਪ੍ਰੋਵਿਜ਼ਨਿੰਗ ਤੋਂ ਪਹਿਲਾਂ ਆਪਣੇ ਚੁਣੇ ਨਮੂਨੇ ਦੀ ਮੌਜੂਦਾ ਕੀਮਤਾਂ ਦੀ ਰਾਹ-ਦਿੱਖ ਚੈੱਕ ਕਰੋ।
+
+| ਵਾਤਾਵਰਣ | ਅੰਦਾਜ਼ਾ ਮਾਸਿਕ ਲਾਗਤ |
 |-------------|----------------------|
 | ਵਿਕਾਸ | $80-150 |
 | ਸਟੇਜਿੰਗ | $150-300 |
 | ਉਤਪਾਦਨ | $300-3,500+ |
 
-**ਸਿੱਧਾ ਸੁਝਾਅ:** ਜਾਂਚ ਕਰਨ ਤੋਂ ਬਾਦ ਚਾਰਜਜ਼ ਤੋਂ ਬਚਣ ਲਈ `azd down` ਚਲਾਓ।
+**ਸਲਾਹ:** ਚਾਰਜਾਂ ਤੋਂ ਬਚਣ ਲਈ ਟੈਸਟ ਕਰਨ ਤੋਂ ਬਾਅਦ `azd down` ਚਲਾਓ।
 
 ---
 
 ## 🔗 ਨੈਵੀਗੇਸ਼ਨ
 
-| ਦਿਸ਼ਾ | ਚੈਪਟਰ |
+| ਦਿਸ਼ਾ | ਅਧਿਆਇ |
 |-----------|---------|
-| **ਪਿਛਲਾ** | [ਚੈਪਟਰ 1: ਬੁਨਿਆਦ](../chapter-01-foundation/README.md) |
-| **ਅਗਲਾ** | [ਚੈਪਟਰ 3: ਸੰਰਚਨਾ](../chapter-03-configuration/README.md) |
-| **ਛੱਡ ਕੇ ਜਾਓ** | [ਚੈਪਟਰ 8: ਉਤਪਾਦਨ ਪੈਟਰਨ](../chapter-08-production/README.md) |
+| **ਪਿਛਲਾ** | [ਅਧਿਆਇ 1: ਬੁਨਿਆਦ](../chapter-01-foundation/README.md) |
+| **ਅਗਲਾ** | [ਅਧਿਆਇ 3: ਸੰਰਚਨਾ](../chapter-03-configuration/README.md) |
+| **ਛੱਡੋ** | [ਅਧਿਆਇ 8: ਉਤਪਾਦਨ ਪੈਟਰਨ](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 ਸੰਬੰਧਤ ਸਰੋਤ
+## 📖 ਸੰਬੰਧਿਤ ਸਰੋਤ
 
-- [ਏਆਈ ਸਮੱਸਿਆ ਹੱਲ](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [ਉਤਪਾਦਨ ਏਆਈ ਅਮਲ](../chapter-08-production/production-ai-practices.md)
+- [AI ਟ੍ਰਬਲਸ਼ੂਟਿੰਗ](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [ਉਤਪਾਦਨ AI ਅਭਿਆਸ](../chapter-08-production/production-ai-practices.md)
 - [ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ](../chapter-06-pre-deployment/application-insights.md)
 
 ---

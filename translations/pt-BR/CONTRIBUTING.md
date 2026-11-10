@@ -1,6 +1,6 @@
-# Contribuindo para AZD For Beginners
+# Contribuindo para AZD Para Iniciantes
 
-Obrigado pelo seu interesse em contribuir para o curso AZD For Beginners! Este documento fornece diretrizes e informações para contribuidores.
+Obrigado pelo seu interesse em contribuir para o curso AZD Para Iniciantes! Este documento fornece diretrizes e informações para colaboradores.
 
 ## Como Contribuir
 
@@ -8,34 +8,34 @@ Obrigado pelo seu interesse em contribuir para o curso AZD For Beginners! Este d
 
 Se você encontrar bugs, erros ou tiver sugestões de melhorias:
 
-1. **Verificar Problemas Existentes**: Pesquise [problemas existentes](https://github.com/microsoft/azd-for-beginners/issues) para evitar duplicatas
-2. **Criar uma Nova Issue**: Use o template de issue apropriado
-3. **Fornecer Detalhes**: Inclua passos para reproduzir, comportamento esperado e capturas de tela, se aplicável
+1. **Verifique Problemas Existentes**: Pesquise [problemas existentes](https://github.com/microsoft/azd-for-beginners/issues) para evitar duplicatas
+2. **Crie um Novo Problema**: Use o template de problema apropriado
+3. **Forneça Detalhes**: Inclua passos para reproduzir, comportamento esperado e capturas de tela, se aplicável
 
 ### Propondo Alterações
 
-1. **Fazer um Fork do Repositório**: Crie seu próprio fork do projeto
-2. **Criar uma Branch**: Crie uma branch de funcionalidade para suas alterações
-3. **Fazer Alterações**: Siga nossos padrões de codificação e documentação
+1. **Faça um Fork do Repositório**: Crie seu próprio fork do projeto
+2. **Crie uma Branch**: Crie uma branch de funcionalidade para suas alterações
+3. **Faça as Alterações**: Siga nossos padrões de codificação e documentação
 4. **Teste suas Alterações**: Verifique se todos os links funcionam e o conteúdo é renderizado corretamente
-5. **Enviar um Pull Request**: Forneça uma descrição clara de suas alterações
+5. **Envie um Pull Request**: Forneça uma descrição clara das suas alterações
 
 ### Tipos de Contribuições
 
-Acolhemos os seguintes tipos de contribuições:
+Recebemos os seguintes tipos de contribuições:
 
 #### Melhorias de Conteúdo
 - Corrigir erros de digitação, gramática e formatação
 - Melhorar a clareza da documentação existente
 - Atualizar informações desatualizadas
-- Adicionar explicações ou contexto faltantes
+- Adicionar explicações ou contextos faltantes
 
 #### Novos Exemplos
-- Adicionar cenários de implantação do mundo real
+- Adicionar cenários reais de implantação
 - Criar novos templates AZD para casos de uso comuns
-- Fornecer exemplos de código adicionais e exercícios
+- Fornecer exemplos de código e exercícios adicionais
 
-#### Suporte a Tradução
+#### Suporte à Tradução
 - Ajudar a manter traduções existentes
 - Melhorar a qualidade das traduções
 - Adicionar traduções para novos conteúdos
@@ -49,18 +49,31 @@ Acolhemos os seguintes tipos de contribuições:
 
 ### Padrões de Documentação
 
-- Use linguagem clara e acessível para iniciantes
-- Inclua objetivos de aprendizagem e resultados
+- Use linguagem clara e amigável para iniciantes
+- Inclua objetivos e resultados de aprendizado
 - Forneça instruções passo a passo com resultados esperados
 - Adicione links de navegação para conteúdos relacionados
-- Use formatação consistente e estilo Markdown
+- Use formatação e estilo markdown consistentes
 
 ### Exemplos de Código
 
-- Garanta que todos os exemplos de código sejam testados e funcionem
-- Inclua comentários explicando conceitos-chave
+- Garanta que todos os exemplos de código sejam testados e funcionais
+- Inclua comentários explicando conceitos principais
 - Siga as melhores práticas do Azure e do AZD
-- Forneça a saída esperada quando aplicável
+- Forneça o resultado esperado quando aplicável
+
+### Validar Documentação em Inglês
+
+A partir da raiz do repositório, instale os requisitos de desenvolvimento existentes e execute:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s .github/scripts -p "test_*.py"
+python .github/scripts/check_links.py
+python -m mkdocs build --strict --config-file workshop/mkdocs.yml
+```
+
+O verificador offline de links checa caminhos Markdown/HTML em inglês, títulos, âncoras explícitas e espaços vazios de links. Ele exclui arquivos gerados `translations/` e `translated_images/`, incluindo links para esses diretórios. Ele não acessa sites externos nem valida implantações Azure. Use `--json <report-path>` para exportar erros e o inventário de URLs externas para uma verificação separada de rede. Verifique comandos a montante atuais e pré-requisitos de exemplo ao modificar instruções técnicas; diferencie aplicações testadas de protótipos de design.
 
 ### Mensagens de Commit
 
@@ -73,23 +86,23 @@ Use mensagens de commit claras e descritivas:
 
 Por favor, leia e siga nosso [Código de Conduta](CODE_OF_CONDUCT.md) para manter uma comunidade acolhedora e inclusiva.
 
-## Obter Ajuda
+## Obtendo Ajuda
 
-- **Perguntas**: Abra uma [Discussão no GitHub](https://github.com/microsoft/azd-for-beginners/discussions)
-- **Comunidade**: Junte-se ao [Discord do Azure](https://discord.gg/microsoft-azure)
-- **Documentação**: Consulte a [documentação do Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- **Perguntas**: Pesquise ou abra um [issue no GitHub](https://github.com/microsoft/AZD-for-beginners/issues)
+- **Comunidade**: Participe do [Azure Discord](https://discord.gg/microsoft-azure)
+- **Documentação**: Revise os [docs do Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ## Licença
 
-Ao contribuir com este repositório, você concorda que suas contribuições serão licenciadas sob a [Licença MIT](../../LICENSE).
+Ao contribuir para este repositório, você concorda que suas contribuições serão licenciadas sob a [Licença MIT](../../LICENSE).
 
 ---
 
-Obrigado por ajudar a tornar AZD For Beginners um recurso de aprendizado melhor para a comunidade!
+Obrigado por ajudar a tornar AZD Para Iniciantes um recurso de aprendizado melhor para a comunidade!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Isenção de responsabilidade:
-Este documento foi traduzido usando o serviço de tradução por IA Co-op Translator (https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se a tradução profissional realizada por um tradutor humano. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
