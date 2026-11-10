@@ -1,47 +1,47 @@
-# Prispievanie do AZD For Beginners
+# Príspevky do AZD For Beginners
 
-Ďakujeme za váš záujem prispieť do kurzu AZD For Beginners! Tento dokument poskytuje pokyny a informácie pre prispievateľov.
+Ďakujeme za váš záujem prispievať do kurzu AZD For Beginners! Tento dokument poskytuje usmernenia a informácie pre prispievateľov.
 
 ## Ako prispieť
 
-### Nahlásenie problémov
+### Nahlasovanie problémov
 
-Ak nájdete chyby, omyly alebo máte návrhy na zlepšenie:
+Ak nájdete chyby, omyly alebo máte návrhy na vylepšenia:
 
-1. **Skontrolujte existujúce problémy**: Vyhľadajte [existujúce problémy](https://github.com/microsoft/azd-for-beginners/issues) aby ste sa vyhli duplicitám
-2. **Vytvorte nový problém**: Použite vhodnú šablónu pre issue
-3. **Uveďte podrobnosti**: Zahrňte kroky na reprodukciu, očakávané správanie a snímky obrazovky, ak sú relevantné
+1. **Skontrolujte existujúce problémy**: Vyhľadajte v [existujúcich problémoch](https://github.com/microsoft/azd-for-beginners/issues), aby ste sa vyhli duplicitám
+2. **Vytvorte nový problém**: Použite príslušnú šablónu problému
+3. **Poskytnite podrobnosti**: Uveďte kroky na reprodukciu, očakávané správanie a snímky obrazovky, ak sú vhodné
 
 ### Navrhovanie zmien
 
-1. **Vytvorte fork repozitára**: Vytvorte vlastný fork projektu
-2. **Vytvorte vetvu**: Vytvorte feature vetvu pre vaše zmeny
-3. **Urobte zmeny**: Dodržujte naše štandardy pre kódovanie a dokumentáciu
-4. **Otestujte svoje zmeny**: Overte, že všetky odkazy fungujú a obsah sa správne zobrazuje
-5. **Odošlite pull request**: Uveďte jasný popis vašich zmien
+1. **Vytvorte fork repozitára**: Vytvorte si vlastný fork projektu
+2. **Vytvorte vetvu**: Vytvorte vetvu pre svoje zmeny
+3. **Urobte zmeny**: Dodržujte naše normy pre kódovanie a dokumentáciu
+4. **Otestujte svoje zmeny**: Overte, či všetky odkazy fungujú a obsah sa správne zobrazuje
+5. **Odošlite pull request**: Poskytnite jasný popis svojich zmien
 
 ### Typy príspevkov
 
-Vítame nasledujúce typy príspevkov:
+Vitame nasledujúce typy príspevkov:
 
-#### Vylepšenie obsahu
-- Opravte preklepy, gramatiku a problémy s formátovaním
+#### Vylepšenia obsahu
+- Opravte preklepy, gramatické a formátovacie chyby
 - Zlepšite zrozumiteľnosť existujúcej dokumentácie
 - Aktualizujte zastarané informácie
 - Pridajte chýbajúce vysvetlenia alebo kontext
 
 #### Nové príklady
 - Pridajte scenáre nasadenia zo skutočného sveta
-- Vytvorte nové AZD šablóny pre bežné prípady použitia
+- Vytvorte nové AZD šablóny pre bežné použitia
 - Poskytnite ďalšie ukážky kódu a cvičenia
 
 #### Podpora prekladov
-- Pomôžte udržiavať existujúce preklady
+- Pomáhajte udržiavať existujúce preklady
 - Zlepšite kvalitu prekladov
-- Pridajte preklady nového obsahu
+- Pridajte preklady pre nový obsah
 
 #### Hlásenia chýb
-- Nahláste nefunkčné odkazy alebo nesprávne príklady kódu
+- Nahláste zlomené odkazy alebo nesprávne príklady kódu
 - Identifikujte nezrovnalosti v dokumentácii
 - Označte problémy s prístupnosťou
 
@@ -49,47 +49,60 @@ Vítame nasledujúce typy príspevkov:
 
 ### Štandardy dokumentácie
 
-- Používajte jasný jazyk priateľský pre začiatočníkov
+- Používajte jasný, začiatočníkom priateľský jazyk
 - Zahrňte ciele učenia a očakávané výsledky
-- Poskytnite krok za krokom inštrukcie s očakávanými výstupmi
+- Poskytujte podrobné pokyny s očakávaným výstupom
 - Pridajte navigačné odkazy na súvisiaci obsah
-- Používajte konzistentné formátovanie a štýl markdownu
+- Používajte konzistentné formátovanie a štýl markdown
 
 ### Príklady kódu
 
-- Uistite sa, že všetky príklady kódu sú otestované a fungujú
+- Zabezpečte, aby všetky príklady kódu boli otestované a funkčné
 - Zahrňte komentáre vysvetľujúce kľúčové koncepty
-- Dodržujte osvedčené postupy Azure a AZD
-- Poskytnite očakávaný výstup tam, kde je to vhodné
+- Dodržiavajte najlepšie praktiky Azure a AZD
+- Poskytnite očakávaný výstup, kde je to možné
+
+### Overenie anglickej dokumentácie
+
+Zo základného adresára repozitára nainštalujte existujúce vývojové požiadavky a spustite:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s .github/scripts -p "test_*.py"
+python .github/scripts/check_links.py
+python -m mkdocs build --strict --config-file workshop/mkdocs.yml
+```
+
+Offline kontrolór odkazov kontroluje anglické Markdown/HTML cesty, nadpisy, explicitné kotvy a prázdne zástupné odkazy. Vylučuje generované `translations/` a `translated_images/` vrátane odkazov do týchto adresárov. Nezískava externé webstránky ani neoveruje Azure nasadenia. Použite `--json <report-path>` na export chýb a externý inventár URL pre samostatnú sieťovú kontrolu. Overte aktuálne upstream príkazy a prípravy vzoriek pri zmene technických inštrukcií; odlíšte testované aplikácie od návrhových schém.
 
 ### Správy commitov
 
-Používajte jasné, opisné správy commitov:
+Používajte jasné, popisné správy commitov:
 - `docs: fix typo in installation guide`
 - `feat: add new container app example`
 - `fix: correct broken link in chapter 2`
 
 ## Kód správania
 
-Prečítajte si a dodržiavajte náš [Kód správania](CODE_OF_CONDUCT.md) aby ste udržiavali priateľskú a inkluzívnu komunitu.
+Prečítajte si a dodržujte náš [Kód správania](CODE_OF_CONDUCT.md) pre udržanie príjemnej a inkluzívnej komunity.
 
-## Získanie pomoci
+## Hľadanie pomoci
 
-- **Otázky**: Otvorte [diskusiu na GitHube](https://github.com/microsoft/azd-for-beginners/discussions)
-- **Komunita**: Pridajte sa na [Azure Discord](https://discord.gg/microsoft-azure)
-- **Dokumentácia**: Preštudujte si [dokumentáciu Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- **Otázky**: Vyhľadajte alebo otvorte [GitHub issue](https://github.com/microsoft/AZD-for-beginners/issues)
+- **Komunita**: Pripojte sa k [Azure Discord](https://discord.gg/microsoft-azure)
+- **Dokumentácia**: Prezrite si [dokumentáciu Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ## Licencia
 
-Tým, že prispejete do tohto repozitára, súhlasíte, že vaše príspevky budú licencované pod [licenciou MIT](../../LICENSE).
+Prispievaním do tohto repozitára súhlasíte, že vaše príspevky budú licencované pod [MIT licenciou](../../LICENSE).
 
 ---
 
-Ďakujeme, že pomáhate spraviť AZD For Beginners lepším vzdelávacím zdrojom pre komunitu!
+Ďakujeme, že pomáhate urobiť AZD For Beginners lepším zdrojom učenia pre komunitu!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vylúčenie zodpovednosti**:
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, berte prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho pôvodnom jazyku by sa mal považovať za rozhodujúci zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne výklady vyplývajúce z použitia tohto prekladu.
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

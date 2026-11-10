@@ -1,60 +1,58 @@
-# 6. Odstránenie infraštruktúry
+# 6. Odstraňovanie infraštruktúry
 
-!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
+!!! tip "NA KONCI TOHTO MODULU BUDETE SCHOPNÍ"
 
-    - [ ] Pochopiť dôležitosť vyčistenia prostriedkov a riadenia nákladov
-    - [ ] Použiť `azd down` na bezpečné odstránenie infraštruktúry
-    - [ ] Obnoviť soft-deleteované Azure AI Services v prípade potreby
-    - [ ] **Laboratórium 6:** Vyčistiť Azure zdroje a overiť odstránenie
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Bonusové cvičenia
 
-Predtým, než projekt odstránime, venujte niekoľko minút otvorenému preskúmaniu.
+Predtým, než projekt odstránime, venujte niekoľko minút voľnému skúmaniu.
 
-!!! info "Try These Exploration Prompts"
+!!! info "Vyskúšajte tieto námety na skúmanie"
 
-    **Experimentujte s GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. Opýtajte sa: `Aké ďalšie AZD šablóny by som mohol vyskúšať pre scenáre s viacerými agentmi?`
-    2. Opýtajte sa: `Ako môžem prispôsobiť inštrukcie agenta pre prípad použitia v zdravotnej starostlivosti?`
-    3. Opýtajte sa: `Ktoré premenné prostredia riadia optimalizáciu nákladov?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Preskúmajte Azure Portal:**
+    **Explore the Azure Portal:**
     
-    1. Preskúmajte metriky Application Insights pre vaše nasadenie
-    2. Skontrolujte analýzu nákladov pre nasadené zdroje
-    3. Preskúmajte portál Microsoft Foundry a jeho agent playground ešte raz
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Odstránenie infraštruktúry
+## Odprovízia infraštruktúry
 
-1. Odstránenie infraštruktúry je také jednoduché ako:
+1. Odstraňovanie infraštruktúry je také jednoduché ako:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. Prepínač `--purge` zabezpečí, že vymaže aj soft-deleteované zdroje Cognitive Service, čím uvoľní kvótu, ktorú tieto zdroje zaberajú. Po dokončení uvidíte niečo takéto:
+1. Potvrďte vybrané prostredie a skontrolujte zdroje, ktoré budú vymazané. Toto odstráni Azure zdroje a môže zničiť dáta. Pre tento učebný proces si ponechajte výzvu na potvrdenie. Po dokončení uvidíte podobný výstup:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Voliteľné) Ak teraz znovu spustíte `azd up`, všimnete si, že sa nasadí model gpt-4.1, pretože sa zmenila (a uložila) premenná prostredia v lokálnom `.azure` priečinku. 
+1. Overte zmazanie na portáli a skontrolujte zdroje mimo rozsah nasadenia. Hlásenie nákladov a aktualizácie kvót môžu meškať. Lokálna konfigurácia `.azure` zostáva, pokiaľ ju výslovne neodstránite.
 
-      Tu sú nasadenia modelu **pred**:
+1. `azd down --purge` navyše žiada o trvalé vymazanie podporovaných soft-delete zdrojov. Používajte ho len keď nie je potrebné zotavenie a rozumiete pravidlám uchovávania/ochrany pred vymazaním. Nezaručuje okamžité uvoľnenie kvót.
 
-      ![Pôvodné](../../../../../translated_images/sk/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      A tu je **po**:
-      ![Nové](../../../../../translated_images/sk/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Neznovu nasadzujte len na overenie vyčistenia. Neskoršie zámerné `azd up` môže znova vytvoriť zdroje s použitím zostávajúcich lokálnych vstupov a opäť vzniknú poplatky. Aktualizácie modelu bežne používajú podporované zmeny provisioning, nie odstraňovanie.
 
 ---
 

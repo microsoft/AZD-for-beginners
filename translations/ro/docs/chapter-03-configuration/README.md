@@ -1,21 +1,21 @@
-# Capitolul 3: Configurare & Autentificare
+# Capitolul 3: Configurare și Autentificare
 
-**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 45-60 minute | **⭐ Complexitate**: Intermediar
+**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 90-150 minute inclusiv practică de integrare | **⭐ Complexitate**: Intermediar
 
 ---
 
 ## Prezentare generală
 
-Acest capitol acoperă configurarea mediului, modelele de autentificare și cele mai bune practici de securitate pentru implementările Azure Developer CLI.
+Acest capitol acoperă configurarea mediului, tiparele de autentificare și cele mai bune practici de securitate pentru implementările Azure Developer CLI.
 
-> Validat pe `azd 1.27.1` în iulie 2026.
+> Ținta revizuirii comenzilor și configurării: `azd 1.37.2` (noiembrie 2026). Provisionarea live Azure nu a fost realizată în timpul revizuirii.
 
 ## Obiective de învățare
 
-Prin parcurgerea acestui capitol, vei:
+Finalizând acest capitol, vei putea:
 - Stăpâni ierarhia de configurare AZD
-- Gestiona mai multe medii (dev, staging, prod)
-- Implementa autentificare sigură cu identități gestionate
+- Gestiona mai multe medii (dezvoltare, pre-producție, producție)
+- Implementa autentificare securizată cu identități gestionate
 - Configura setări specifice mediului
 
 ---
@@ -24,59 +24,59 @@ Prin parcurgerea acestui capitol, vei:
 
 | # | Lecție | Descriere | Timp |
 |---|--------|-------------|------|
-| 1 | [Ghid de configurare](configuration.md) | Configurarea și gestionarea mediului | 30 min |
-| 2 | [Autentificare & Securitate](authsecurity.md) | Modele de identitate gestionată și RBAC | 30 min |
+| 1 | [Ghid de Configurare](configuration.md) | Configurarea și gestionarea mediului | 30 min |
+| 2 | [Autentificare și Securitate](authsecurity.md) | Tipare pentru identitate gestionată și RBAC | 30 min |
 
 ---
 
-## 🚀 Pornire rapidă
+## 🚀 Pornire Rapidă
+
+Rulează din rădăcina unei **aplicații azd deja inițializate**, nu din depozitul cursului. Folosește nume de medii neutilizate dacă acestea există deja.
 
 ```bash
-# Creați medii multiple
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Schimbă mediile
+# Switch environments
 azd env select prod
 
-# Setează variabilele de mediu
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Vizualizează configurația
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` este ilustrativ: afectează infrastructura doar dacă șablonul tău îl consumă explicit. Valorile obișnuite `azd env set` sunt salvate local în clar; ele nu reprezintă stocare sigură a secretelor.
 
 ---
 
 ## 🔧 Ierarhia Configurării
 
-AZD aplică setările în această ordine (cele ulterioare suprascriu pe cele anterioare):
-
-1. **Valori implicite** (încorporate în șabloane)
-2. **azure.yaml** (configurația proiectului)
-3. **Variabile de mediu** (`azd env set`)
-4. **Steaguri din linia de comandă** (`--location eastus`)
+Păstrează separate trei suprafețe diferite de configurare: preferințe globale (`azd config`), structura proiectului (`azure.yaml`) și valorile pe mediu (`azd env`). Flagurile suprascriu doar setările pe care le suportă efectiv; nu există o suprapunere universală a variabilelor de mediu arbitrare peste `azure.yaml` sau Bicep.
 
 ---
 
 ## 🔐 Cele mai bune practici de securitate
 
 ```bash
-# Folosește identitatea gestionată (recomandat)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Verifică starea autentificării AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Opțional: verifică contextul Azure CLI dacă intenționezi să rulezi comenzi az
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Reautentifică-te dacă este nevoie
+# Re-authenticate if needed
 azd auth login
 
-# Opțional: reîmprospătează autentificarea Azure CLI pentru comenzile az
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -91,7 +91,7 @@ az login
 
 ---
 
-## 📖 Resurse relevante
+## 📖 Resurse Relaționate
 
 - [Verificări Pre-Implementare](../chapter-06-pre-deployment/README.md)
 - [Depanare](../chapter-07-troubleshooting/common-issues.md)

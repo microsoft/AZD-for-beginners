@@ -1,28 +1,28 @@
 # Integrarea Application Insights cu AZD
 
-⏱️ **Timp estimat**: 40-50 minute | 💰 **Impact costuri**: ~5-15$/lună | ⭐ **Complexitate**: Intermediar
+⏱️ **Timp estimat**: 40-50 minute | 💰 **Impact costuri**: ~5-15 USD/lună | ⭐ **Complexitate**: Intermediar
 
-**📚 Curs de învățare:**
-- ← Anterior: [Preflight Checks](preflight-checks.md) - Validarea pre-deployment
+**📚 Parcurs de învățare:**
+- ← Anterior: [Verificări preliminare](preflight-checks.md) - Validare pre-deploy
 - 🎯 **Ești aici**: Integrarea Application Insights (Monitorizare, telemetrie, depanare)
-- → Următor: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Deploy pe Azure
-- 🏠 [Acasă curs](../../README.md)
+- → Următor: [Ghid de implementare](../chapter-04-infrastructure/deployment-guide.md) - Implementare în Azure
+- 🏠 [Pagina cursului](../../README.md)
 
 ---
 
 ## Ce vei învăța
 
-Prin parcurgerea acestei lecții, vei:
-- Integra automat **Application Insights** în proiectele AZD
-- Configura **tracing distribuit** pentru microservicii
-- Implementa **telemetrie personalizată** (metrici, evenimente, dependențe)
-- Configura **live metrics** pentru monitorizare în timp real
-- Crea **alerte și dashboard-uri** din deploy-urile AZD
-- Depana probleme de producție cu **interogări de telemetrie**
-- Optimiza **costuri și strategii de sampling**
-- Monitoriza **aplicații AI/LLM** (tokeni, latență, costuri)
+Parcurgând această lecție, vei:
+- Declara **Application Insights** în infrastructura AZD și să configurezi instrumentarea SDK
+- Configurezi **tracing distribuit** pentru microservicii
+- Implementezi **telemetrie personalizată** (metrice, evenimente, dependențe)
+- Configurezi **metrice live** pentru monitorizare în timp real
+- Creezi **alerte și dashboard-uri** din implementările AZD
+- Depanezi problemele din producție cu **interogări de telemetrie**
+- Optimizezi **costurile și strategiile de eșantionare**
+- Monitorizezi **aplicații AI/LLM** (tokenuri, latență, costuri)
 
-## De ce este important Application Insights cu AZD
+## De ce contează Application Insights cu AZD
 
 ### Provocarea: Observabilitatea în producție
 
@@ -44,37 +44,37 @@ Prin parcurgerea acestei lecții, vei:
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**Analogie**: Application Insights este ca o cutie neagră + bordul de pilotaj al aplicației tale. Vezi tot ce se întâmplă în timp real și poți revedea orice incident.
+**Analogie**: Application Insights este ca un înregistrator de zbor „black box” + bordul din cockpit pentru aplicația ta. Vezi tot ce se întâmplă în timp real și poți revedea orice incident.
 
 ---
 
-## Prezentare arhitectură
+## Privire de ansamblu asupra arhitecturii
 
 ### Application Insights în arhitectura AZD
 
 ```mermaid
 graph TB
-    User[Utilizator/Client]
-    App1[Aplicație Container 1<br/>Gateway API]
-    App2[Aplicație Container 2<br/>Serviciu Produs]
-    App3[Aplicație Container 3<br/>Serviciu Comandă]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[Insights Aplicație<br/>Centru Telemetrie]
-    LogAnalytics[(Analiză Jurnale<br/>Spațiu de lucru)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Portal Azure<br/>Tablouri de bord & Alarme]
-    Query[Interogări Kusto<br/>Analiză personalizată]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Auto-instrumentare| AppInsights
-    App2 -.->|Auto-instrumentare| AppInsights
-    App3 -.->|Auto-instrumentare| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,17 +83,20 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 ### Ce se monitorizează automat
 
-| Tip telemetrie | Ce capturează | Utilizare |
-|----------------|---------------|-----------|
-| **Requests** | Cereri HTTP, coduri status, durată | Monitorizare performanță API |
-| **Dependencies** | Apeluri externe (BD, API-uri, stocare) | Identificare blocaje |
-| **Exceptions** | Erori necontrolate cu stack trace | Depanare defecte |
-| **Custom Events** | Evenimente business (înregistrare, cumpărare) | Analize și conversii |
-| **Metrics** | Contoare performanță, metrici personalizate | Planificare capacitate |
-| **Traces** | Mesaje log cu severitate | Depanare și audit |
-| **Availability** | Teste uptime și timp răspuns | Monitorizare SLA |
+Instrumentarea automată suportată capturează cereri/dependențe pentru bibliotecile instrumentate. Evenimentele și metricele personalizate necesită cod aplicație; testele de disponibilitate trebuie configurate separat. Nu colectează toate rândurile de mai jos doar pentru că resursa există.
+
+| Tip Telemetrie | Ce Capturează | Caz de Utilizare |
+|----------------|------------------|----------|
+| **Cereri** | Cereri HTTP, coduri de stare, durată | Monitorizarea performanței API-ului |
+| **Dependențe** | Apeluri externe (BD, API-uri, stocare) | Identificarea blocajelor |
+| **Excepții** | Erori negestionate cu trace-uri de stivă | Depanarea eșecurilor |
+| **Evenimente personalizate** | Evenimente de afaceri (înregistrare, cumpărare) | Analize și funnel-uri |
+| **Metrice** | Contoare de performanță, metrice personalizate | Planificare capacitate |
+| **Trace-uri** | Mesaje de log cu severitate | Depanare și auditare |
+| **Disponibilitate** | Teste uptime și timp răspuns | Monitorizarea SLA |
 
 ---
 
@@ -102,13 +105,13 @@ graph TB
 ### Unelte necesare
 
 ```bash
-# Verifică Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Așteptat: azd versiunea 1.0.0 sau mai mare
+# Command reference baseline: azd 1.37.2
 
-# Verifică Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Așteptat: azure-cli 2.50.0 sau mai mare
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Cerințe Azure
@@ -120,20 +123,22 @@ az --version
   - Container Apps
   - Grupuri de resurse
 
-### Cunoștințe necesare
+### Cunoștințe preliminare
 
-Trebuie să fi parcurs:
-- [Bazele AZD](../chapter-01-foundation/azd-basics.md) - Concept AZD fundamentale
+Ar trebui să fi parcurs:
+- [Bazele AZD](../chapter-01-foundation/azd-basics.md) - Concepte de bază AZD
 - [Configurare](../chapter-03-configuration/configuration.md) - Setare mediu
-- [Primul proiect](../chapter-01-foundation/first-project.md) - Deploy de bază
+- [Primul proiect](../chapter-01-foundation/first-project.md) - Implementare de bază
 
 ---
 
 ## Lecția 1: Application Insights automat cu AZD
 
-### Cum alocă AZD Application Insights
+### Cum AZD furnizează Application Insights
 
-AZD creează și configurează automat Application Insights când faci deploy. Hai să vedem cum.
+AZD va furniza Application Insights **numai dacă infrastructura proiectului îl declară**. `azure.yaml` singur nu creează monitorizarea sau instrumentează codul aplicației.
+
+> **Exemplu de scop:** Această lecție conține fragmente de integrare, nu un `monitored-app` complet în acest depozit. Trebuie să furnizați un șablon principal și maparea parametrilor, un mediu Container Apps, configurarea registrului/imaginei și identitate, Dockerfile și etichete serviciu înainte de implementare. Lecțiile viitoare vor arăta fragmente alternative/extensii, nu fișiere care pot fi lipite toate împreună nemodificate. Începeți cu un [exemplu microservicii funcțional](../../../../examples/microservices) dacă aveți nevoie de o bază rulabilă.
 
 ### Structura proiectului
 
@@ -154,7 +159,7 @@ monitored-app/
 
 ---
 
-### Pasul 1: Configurare AZD (azure.yaml)
+### Pasul 1: Configurarea AZD (azure.yaml)
 
 **Fișier: `azure.yaml`**
 
@@ -169,14 +174,14 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**Asta e tot!** AZD va crea implicit Application Insights. Nu ai nevoie de configurări suplimentare pentru monitorizare de bază.
+Aceasta declară serviciul care poate fi implementat. Configurările Bicep și SDK de mai jos furnizează monitorizarea; azd nu le adaugă implicit.
 
 ---
 
-### Pasul 2: Infrastructura monitorizare (Bicep)
+### Pasul 2: Infrastructura de monitorizare (Bicep)
 
 **Fișier: `infra/core/monitoring.bicep`**
 
@@ -223,6 +228,7 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
@@ -235,7 +241,8 @@ output applicationInsightsName string = applicationInsights.name
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -291,29 +299,23 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Obțineți șirul de conexiune Application Insights
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Configurați trasarea distribuită
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # Eșantionare 100% pentru dezvoltare
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # Configurați jurnalizarea
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # Simulați apelul bazei de date (urmărit automat ca dependență)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Simulați o operațiune lentă
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -367,34 +369,34 @@ if __name__ == '__main__':
 **Fișier: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+Rezolvă aceste dependențe în proiectul tău, testează-le împreună și blochează versiunile rezultate. Proiectele noi ar trebui să folosească Azure Monitor OpenTelemetry, nu exportatoare OpenCensus Python retrase.
 
 ---
 
-### Pasul 5: Deploy și verificare
+### Pasul 5: Implementare și verificare
 
 ```bash
-# Inițializează AZD
-azd init
-
-# Implementare (provoacă configurarea automată a Application Insights)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# Obține URL-ul aplicației
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# Generează telemetria
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
 curl $APP_URL/api/slow
 ```
 
-**✅ Ieșire așteptată:**
+**✅ Rezultat așteptat:**
 ```json
 {
   "status": "healthy",
@@ -404,47 +406,42 @@ curl $APP_URL/api/slow
 
 ---
 
-### Pasul 6: Vezi telemetria în Azure Portal
+### Pasul 6: Vizualizează telemetria în Azure Portal
 
 ```bash
-# Obține detalii despre Application Insights
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Deschide în Azure Portal
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Navighează la Azure Portal → Application Insights → Transaction Search**
+**Navighează în Azure Portal → Application Insights → Transaction Search**
 
 Ar trebui să vezi:
-- ✅ Cereri HTTP cu coduri status
-- ✅ Durată cereri (3+ secunde pentru `/api/slow`)
-- ✅ Detalii excepții de la `/api/error-test`
-- ✅ Mesaje log personalizate
+- ✅ Cereri HTTP cu coduri de stare
+- ✅ Durată cerere (3+ secunde pentru `/api/slow`)
+- ✅ Detalii excepții din `/api/error-test`
+- ✅ Mesaje de log personalizate
 
 ---
 
 ## Lecția 2: Telemetrie și evenimente personalizate
 
-### Urmărește evenimente business
+### Urmărește evenimente de business
 
-Adaugă telemetrie personalizată pentru evenimente critice business.
+Hai să adăugăm telemetrie personalizată pentru evenimente critice business.
 
 **Fișier: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # Configurare jurnalizare
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # Configurare exportator de metrici
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # Configurare trasator
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# Client global de telemetrie
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
 ### Actualizează aplicația cu evenimente personalizate
 
-**Fișier: `src/app.py` (extins)**
+**Fișier: `src/app.py` (enhanced)**
+
+Adaugă aceste rute aplicației Flask existente; păstrează rutele anterioare de sănătate/test. Blocul prescurtat de mai jos arată o aplicație separată pentru claritate. Inițializarea telemetriei trăiește acum în `telemetry.py`—nu inițializa exportatoare de două ori.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # Urmărește evenimentul de afaceri
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Urmărește metrica veniturilor
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # Simulează căutarea (ar fi o interogare reală în bază de date)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Convertește în ms
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # Urmărește evenimentul de căutare
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Urmărește metrica performanței căutării
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # Simulează un apel API extern
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # Urmărește dependența
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -619,22 +589,22 @@ if __name__ == '__main__':
 ### Testează telemetria personalizată
 
 ```bash
-# Urmăriți evenimentul de cumpărare
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# Urmăriți evenimentul de căutare
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# Urmăriți dependența externă
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
-**Vezi în Azure Portal:**
+**Vizualizează în Azure Portal:**
 
-Mergi la Application Insights → Logs și rulează:
+Navighează la Application Insights → Logs, apoi execută:
 
 ```kusto
 // View purchase events
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -669,7 +639,7 @@ traces
 
 ### Activează tracing cross-service
 
-Pentru microservicii, Application Insights corelează automat cererile între servicii.
+Cu instrumentație compatibilă și propagarea contextului trace W3C, Application Insights corelează cererile între servicii. Simplul sharing al unui connection string nu stabilește span-uri părinte-copil. Fragmentul de arhitectură următor face referire la module pe care trebuie să le implementezi.
 
 **Fișier: `infra/main.bicep`**
 
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### Vezi tranzacția end-to-end
+### Vizualizează tranzacția end-to-end
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as Poartă API<br/>(ID Trasabilitate: abc123)
-    participant Product as Serviciu Produs<br/>(ID Părinte: abc123)
-    participant Order as Serviciu Comandă<br/>(ID Părinte: abc123)
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
     participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Începe Trasabilitatea: abc123
-    Gateway->>AppInsights: Înregistrează cerere (ID Trasabilitate: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: ID Părinte: abc123
-    Product->>AppInsights: Înregistrează apel dependență
-    Product-->>Gateway: Detalii produs
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: ID Părinte: abc123
-    Order->>AppInsights: Înregistrează apel dependență
-    Order-->>Gateway: Comandă creată
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: Finalizare checkout
-    Gateway->>AppInsights: Înregistrează răspuns (Durată: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: Corelare după ID Trasabilitate
+    Note over AppInsights: Correlation by Trace ID
 ```
-**Interogare trace end-to-end:**
+
+**Interoghează tracing-ul end-to-end:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,43 +759,43 @@ dependencies
 
 ---
 
-## Lecția 4: Live Metrics și monitorizare în timp real
+## Lecția 4: Metrice live și monitorizare în timp real
 
-### Activează stream-ul Live Metrics
+### Activează Live Metrics Stream
 
-Live Metrics oferă telemetrie în timp real cu latență <1 secundă.
+Live Metrics oferă telemetrie aproape în timp real atunci când este suportat și activat de SDK. Nu este un SLA de latență. Configurarea OpenTelemetry Python de mai sus activează opțiunea cu `enable_live_metrics=True`.
 
-**Acces Live Metrics:**
+**Accesează Live Metrics:**
 
 ```bash
-# Obține resursa Application Insights
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Obține grupul de resurse
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
 **Ce vezi în timp real:**
-- ✅ Rata de cereri primite (cereri/sec)
-- ✅ Apeluri dependency iesite
+- ✅ Rata cererilor primite (cereri/sec)
+- ✅ Apeluri dependențe externe
 - ✅ Număr excepții
 - ✅ Utilizare CPU și memorie
 - ✅ Număr servere active
-- ✅ Telemetrie eșantionată
+- ✅ Telemetrie exemplu
 
-### Generează trafic pentru teste
+### Generează încărcare pentru testare
 
 ```bash
-# Generează încărcare pentru a vedea metrici în timp real
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Urmărește metricile în timp real în Azure Portal
-# Ar trebui să vezi o creștere bruscă a ratei cererilor
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
@@ -833,20 +804,20 @@ done
 
 ### Exercițiul 1: Configurează alerte ⭐⭐ (Mediu)
 
-**Obiectiv**: Creează alerte pentru rata mare de erori și răspunsuri lente.
+**Scop**: Creează alerte pentru rate mari de erori și răspunsuri lente.
 
 **Pași:**
 
-1. **Creează alertă pentru rata erorilor:**
+1. **Creează alertă pentru rata de erori:**
 
 ```bash
-# Obțineți ID-ul resursei Application Insights
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Creați o alertă metrica pentru cereri eșuate
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,7 +825,7 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
 2. **Creează alertă pentru răspunsuri lente:**
@@ -947,50 +918,50 @@ output slowResponseAlertId string = slowResponseAlert.id
 4. **Testează alertele:**
 
 ```bash
-# Generează erori
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Generează răspunsuri lente
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Verifică starea alertei (așteaptă 5-10 minute)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
 **✅ Criterii de succes:**
 - ✅ Alertele create cu succes
-- ✅ Alertele se declanșează la depășirea pragurilor
-- ✅ Istoric alerte vizibil în Azure Portal
-- ✅ Integrate în procesul de deploy AZD
+- ✅ Alertele se declanșează când pragurile sunt depășite
+- ✅ Istoricul alertelor poate fi vizualizat în Azure Portal
+- ✅ Integrat cu implementarea AZD
 
 **Timp**: 20-25 minute
 
 ---
 
-### Exercițiul 2: Creează un dashboard personalizat ⭐⭐ (Mediu)
+### Exercițiul 2: Creează dashboard personalizat ⭐⭐ (Mediu)
 
-**Obiectiv**: Construieste un dashboard cu metrici cheie aplicației.
+**Scop**: Construiește un dashboard care să afișeze metricele cheie ale aplicației.
 
 **Pași:**
 
 1. **Creează dashboard prin Azure Portal:**
 
-Mergi la: Azure Portal → Dashboards → New Dashboard
+Navighează la: Azure Portal → Dashboards → New Dashboard
 
-2. **Adaugă widget-uri pentru metrici cheie:**
+2. **Adaugă widgeturi pentru metrice cheie:**
 
-- Număr cereri (ultimele 24h)
-- Timp mediu de răspuns
-- Rata de erori
-- Top 5 operații lente
-- Distribuție geografică utilizatori
+- Numărul cererilor (ultimele 24 ore)
+- Timp mediu răspuns
+- Rata erorilor
+- Primele 5 operațiuni cele mai lente
+- Distribuția geografică a utilizatorilor
 
 3. **Creează dashboard prin Bicep:**
 
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1063,10 +1044,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **Deploy dashboard:**
+4. **Implementare dashboard:**
 
-```bash
-# Adaugă la main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,13 +1057,15 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# Implementare
+```bash
+# Deploy
 azd up
 ```
 
 **✅ Criterii de succes:**
-- ✅ Dashboard afișează metrici cheie
+- ✅ Dashboard afișează metrice cheie
 - ✅ Poate fi fixat pe pagina principală Azure Portal
 - ✅ Se actualizează în timp real
 - ✅ Deployabil prin AZD
@@ -1091,13 +1074,13 @@ azd up
 
 ---
 
-### Exercițiul 3: Monitorizează aplicație AI/LLM ⭐⭐⭐ (Avansat)
+### Exercițiul 3: Monitorizează aplicația AI/LLM ⭐⭐⭐ (Avansat)
 
-**Obiectiv**: Monitorizează utilizarea Microsoft Foundry Models (tokeni, costuri, latență).
+**Scop**: Urmărește utilizarea modelelor Microsoft Foundry (tokenuri, costuri, latență).
 
 **Pași:**
 
-1. **Creează wrapper pentru monitorizare AI:**
+1. **Creează un wrapper pentru monitorizarea AI:**
 
 **Fișier: `src/ai_telemetry.py`**
 
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # Apelează modele Microsoft Foundry
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # Extrage utilizarea
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Calculează costul (prețuri gpt-4.1)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # 0,03 USD per 1K token-uri
-            completion_cost = (completion_tokens / 1000) * 0.06  # 0,06 USD per 1K token-uri
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # Urmărește eveniment personalizat
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # Urmărește metrici
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1182,7 +1169,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **Folosește client monitorizat:**
+2. **Folosește clientul monitorizat:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# Inițializează clientul OpenAI monitorizat
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Apel cu monitorizare automată
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,13 +1205,13 @@ def chat():
     })
 ```
 
-3. **Interoghează metrici AI:**
+3. **Interoghează metricele AI:**
 
 ```kusto
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1251,10 +1240,10 @@ traces
 ```
 
 **✅ Criterii de succes:**
-- ✅ Fiecare apel OpenAI este urmărit automat
-- ✅ Utilizarea tokenilor și costurile sunt vizibile
-- ✅ Latența este monitorizată
-- ✅ Se pot seta alerte buget
+- ✅ Fiecare apel OpenAI urmărit automat
+- ✅ Utilizarea și costurile tokenurilor vizibile
+- ✅ Latența monitorizată
+- ✅ Pot fi setate alerte bugetare
 
 **Timp**: 35-45 minute
 
@@ -1262,36 +1251,23 @@ traces
 
 ## Optimizarea costurilor
 
-### Strategii de sampling
+### Strategii de eșantionare
 
-Controlează costurile prin samplingul telemetriei:
+Controlează costurile prin eșantionarea telemetriei:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# Dezvoltare: eşantionare 100%
-sampler = ProbabilitySampler(rate=1.0)
-
-# Producţie: eşantionare 10% (reduce costurile cu 90%)
-sampler = ProbabilitySampler(rate=0.1)
-
-# Eşantionare adaptivă (se ajustează automat)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**În Bicep:**
+Eșantionarea trace-urilor nu reduce toate categoriile de telemetrie cu 90%. Metricele și logurile emise independent au propriile controluri volumetrice. Alege rata folosind nevoile de observabilitate, nu o interdicție generală de producție.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+Setează eșantionarea explicit în SDK; proprietatea `SamplingPercentage` a componentului nu este un substitut pentru configurarea eșantionatorului OpenTelemetry Python.
 
-### Retenția datelor
+### Păstrarea datelor
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1303,16 +1279,16 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### Estimări costuri lunare
+### Estimări ale costurilor lunare
 
-| Volum date | Retenție | Cost lunar |
-|------------|----------|------------|
-| 1 GB/lună | 30 zile | ~2-5$ |
-| 5 GB/lună | 30 zile | ~10-15$ |
-| 10 GB/lună | 90 zile | ~25-40$ |
-| 50 GB/lună | 90 zile | ~100-150$ |
+| Volum date | Păstrare | Cost lunar |
+|-------------|-----------|--------------|
+| 1 GB/lună | 30 zile | ~2-5 USD |
+| 5 GB/lună | 30 zile | ~10-15 USD |
+| 10 GB/lună | 90 zile | ~25-40 USD |
+| 50 GB/lună | 90 zile | ~100-150 USD |
 
-**Nivel gratuit**: inclus 5 GB/lună
+Aceste cifre sunt ilustrative, nu oferte finale. Verifică prețurile pentru ingestie, păstrare, alerte și teste în regiunea ta și conform acordului; alocațiile gratuite sunt partajate/limită conform prețurilor Azure Monitor, nu un SKU gratuit garantat pe resursa Application Insights.
 
 ---
 
@@ -1322,21 +1298,21 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 Testează-ți înțelegerea:
 
-- [ ] **Întrebarea 1**: Cum alocă AZD Application Insights?
-  - **R**: Automat prin template-uri Bicep din `infra/core/monitoring.bicep`
+- [ ] **Î1**: Cum furnizează AZD Application Insights?
+  - **R**: Implementează resursele de monitorizare declarate explicit de șabloanele Bicep/Terraform ale proiectului.
 
-- [ ] **Întrebarea 2**: Care variabilă de mediu activează Application Insights?
+- [ ] **Î2**: Ce variabilă de mediu activează Application Insights?
   - **R**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Întrebarea 3**: Care sunt cele trei tipuri principale de telemetrie?
-  - **R**: Cereri (HTTP), Dependențe (apeluri externe), Excepții (erori)
+- [ ] **Î3**: Care sunt cele trei tipuri principale de telemetrie?
+  - **R**: Cereri (apeluri HTTP), Dependențe (apeluri externe), Excepții (erori)
 
 **Verificare practică:**
 ```bash
-# Verificați dacă Application Insights este configurat
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Verificați dacă telemetria este transmisă
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1349,13 +1325,13 @@ az monitor app-insights metrics show \
 
 Testează-ți înțelegerea:
 
-- [ ] **Întrebarea 1**: Cum urmărești evenimente business personalizate?
-  - **R**: Folosind logger cu `custom_dimensions` sau `TelemetryClient.track_event()`
+- [ ] **Î1**: Cum urmărești evenimentele personalizate de business?
+  - **R**: Wrapper-ul acestei lecții scrie loguri OTel structurate cu atribute `event_name`, interogabile în `traces`; acestea nu sunt `customEvents` automat.
 
-- [ ] **Întrebarea 2**: Care este diferența dintre evenimente și metrici?
-  - **R**: Evenimente = apariții discrete, metrici = măsurători numerice
+- [ ] **Î2**: Care este diferența dintre evenimente și metrice?
+  - **R**: Evenimentele sunt apariții discrete, metricele sunt măsurători numerice
 
-- [ ] **Întrebarea 3**: Cum corelezi telemetria între servicii?
+- [ ] **Î3**: Cum corelezi telemetria între servicii?
   - **R**: Application Insights folosește automat `operation_Id` pentru corelare
 
 **Verificare practică:**
@@ -1368,110 +1344,106 @@ traces
 
 ---
 
-### 3. Monitorizare producție ✓
+### 3. Monitorizare în producție ✓
 
 Testează-ți înțelegerea:
 
-- [ ] **Întrebarea 1**: Ce este sampling și de ce îl folosești?
-  - **R**: Sampling reduce volumul de date (și costul) prin capturarea doar a unui procent din telemetrie
+- [ ] **Î1**: Ce este eșantionarea și de ce se folosește?
+  - **R**: Eșantionarea reduce volumul datelor (și costul) prin capturarea doar a unui procentaj din telemetrie
 
-- [ ] **Întrebarea 2**: Cum setezi alerte?
-  - **R**: Folosești metric alerts în Bicep sau Azure Portal pe baza metricilor Application Insights
+- [ ] **Î2**: Cum configurezi alerte?
+  - **R**: Folosește alerte pe metrice în Bicep sau Azure Portal bazate pe metricele Application Insights
 
-- [ ] **Întrebarea 3**: Care e diferența dintre Log Analytics și Application Insights?
-  - **R**: Application Insights stochează date în Log Analytics; App Insights oferă vizualizări specifice aplicației
+- [ ] **Î3**: Care este diferența dintre Log Analytics și Application Insights?
+  - **R**: Application Insights stochează date în workspace-ul Log Analytics; Application Insights oferă vederi specifice aplicației
 
 **Verificare practică:**
 ```bash
-# Verifică configurația de eșantionare
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
 
-## Best Practices
+## Cele mai bune practici
 
-### ✅ FA
+### ✅ FA:
 
-1. **Folosește correlation IDs**
+1. **Folosește ID-uri de corelare**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. **Configurează alerte pentru metrici critice**
+2. **Configurează alerte pentru metrice critice**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **Folosește logging structurat**
+3. **Folosește logare structurată**
    ```python
-   # ✅ BUN: Structurat
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ RĂU: Nestrcturat
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
 4. **Monitorizează dependențele**
    ```python
-   # Urmărește automat apelurile bazei de date, cererile HTTP, etc.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
-5. **Folosește Live Metrics în timpul deploy-urilor**
+5. **Folosește Live Metrics în timpul implementărilor**
 
-### ❌ NU FACE
+### ❌ NU FACE:
 
-1. **Nu loga date sensibile**
+1. **Nu înregistra date sensibile**
    ```python
-   # ❌ RĂU
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ BUN
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **Nu folosi 100% sampling în producție**
+2. **Nu alege eșantionarea fără a măsura volumul și nevoile de diagnosticare**
    ```python
-   # ❌ Scump
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ Rentabil
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **Nu ignora cozi de tip dead letter**
+3. **Nu ignora cozile pentru mesaje nereușite**
 
-4. **Nu uita să setezi limite de retenție a datelor**
+4. **Nu uita să setezi limitele de păstrare a datelor**
 
 ---
 
-## Depanare
+## Remedierea problemelor
 
-### Problemă: Nu apare telemetrie
+### Problemă: Nu apare nicio telemetrie
 
 **Diagnostic:**
 ```bash
-# Verifică dacă șirul de conexiune este setat
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Verifică jurnalele aplicației prin Azure Monitor
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# Sau folosește Azure CLI pentru Container Apps:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Soluție:**
 ```bash
-# Verificați șirul de conexiune în aplicația Container
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1485,67 +1457,66 @@ az containerapp show \
 
 **Diagnostic:**
 ```bash
-# Verifică ingestia datelor
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **Soluție:**
-- Redu rata de sampling
-- Scade perioada de retenție
-- Elimină logging verbose
+- Reduce rata de eșantionare
+- Micșorează perioada de retenție
+- Elimină înregistrarea verbose
 
 ---
 
-## Afla mai multe
+## Aflați mai multe
 
 ### Documentație oficială
-- [Prezentare Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights pentru Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [Prezentare generală Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Configurare Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
+- [Limbajul de interogare Kusto](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
 - [Monitorizare AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
 ### Pașii următori în acest curs
-- ← Anterior: [Preflight Checks](preflight-checks.md)
-- → Următor: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Acasă curs](../../README.md)
+- ← Anterior: [Verificări pre-zbor](preflight-checks.md)
+- → Următor: [Ghid de implementare](../chapter-04-infrastructure/deployment-guide.md)
+- 🏠 [Pagina principală a cursului](../../README.md)
 
 ### Exemple conexe
-- [Exemplu Microsoft Foundry Models](../../../../examples/azure-openai-chat) - telemetrie AI
-- [Exemplu Microservicii](../../../../examples/microservices) - tracing distribuit
+- [Exemplu Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Telemetrie AI
+- [Exemplu Microservicii](../../../../examples/microservices) - Tracing distribuit
 
 ---
 
 ## Rezumat
 
 **Ai învățat:**
-- ✅ Alocarea automatizată Application Insights cu AZD
+- ✅ Provisionarea automată Application Insights cu AZD
 - ✅ Telemetrie personalizată (evenimente, metrici, dependențe)
 - ✅ Tracing distribuit între microservicii
-- ✅ Live metrics și monitorizare în timp real
-- ✅ Alerte și dashboard-uri
-- ✅ Monitorizare aplicații AI/LLM
+- ✅ Metrici live și monitorizare în timp real
+- ✅ Alerte și tablouri de bord
+- ✅ Monitorizarea aplicațiilor AI/LLM
 - ✅ Strategii de optimizare a costurilor
 
 **Concluzii cheie:**
-1. **Monitorizarea prevederilor AZD automat** - Fără configurare manuală  
-2. **Folosește logare structurată** - Facilitează interogarea  
-3. **Urmărește evenimentele de business** - Nu doar metrici tehnici  
-4. **Monitorizează costurile AI** - Urmărește tokenii și cheltuielile  
-5. **Configurează alerte** - Fii proactiv, nu reactiv  
-6. **Optimizează costurile** - Folosește eșantionarea și limitele de retenție  
+1. **Declară monitorizarea explicit** - AZD implementează șabloanele; instrumentarea SDK trimite telemetrie
+2. **Folosește logare structurată** - Face interogarea mai ușoară
+3. **Urmărește evenimentele de afaceri** - Nu doar metrici tehnici
+4. **Monitorizează costurile AI** - Urmărește tokenii și cheltuielile
+5. **Configurează alerte** - Fii proactiv, nu reactiv
+6. **Optimizează costurile** - Folosește eșantionarea și limitele de retenție
 
-**Pașii următori:**  
-1. Finalizează exercițiile practice  
-2. Adaugă Application Insights proiectelor tale AZD  
-3. Creează panouri de control personalizate pentru echipa ta  
-4. Învață [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+**Pașii următori:**
+1. Finalizează exercițiile practice
+2. Adaugă Application Insights în proiectele tale AZD
+3. Creează tablouri de bord personalizate pentru echipa ta
+4. Învață [Ghidul de implementare](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu suntem responsabili pentru eventualele neînțelegeri sau interpretări greșite provenite din utilizarea acestei traduceri.
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

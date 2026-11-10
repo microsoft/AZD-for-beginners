@@ -1,43 +1,43 @@
-# 1. Selectați un Șablon
+# 1. Selectați un șablon
 
-!!! tip "PÂNĂ LA SFÂRȘITUL ACESTUI MODUL VEȚI FI CAPABIL SĂ"
+!!! tip "LA SFÂRȘITUL ACESTUI MODUL VEȚI PUTEA"
 
-    - [ ] Descrieți ce sunt șabloanele AZD
-    - [ ] Descoperiți și utilizați șabloanele AZD pentru AI
-    - [ ] Începeți cu șablonul AI Agents
-    - [ ] **Laborator 1:** AZD Quickstart în Codespaces sau un container de dezvoltare
+    - [ ] Describe what AZD templates are
+    - [ ] Discover and use AZD templates for AI
+    - [ ] Get started with the AI Agents template
+    - [ ] **Lab 1:** AZD Quickstart in Codespaces or a dev container
 
 ---
 
-## 1. O analogie a constructorului
+## 1. O analogie cu un constructor
 
-Construirea unei aplicații AI moderne, pregătită pentru mediul enterprise, _de la zero_ poate fi descurajantă. Este puțin ca a-ți construi singur o nouă casă, cărămidă cu cărămidă. Da, se poate face! Dar nu este cea mai eficientă cale de a obține rezultatul dorit!
+Construirea unei aplicații AI moderne, pregătită pentru companii, _de la zero_ poate fi intimidantă. Este puțin ca și cum ți-ai construi singur o casă nouă, cărămidă cu cărămidă. Da, se poate face! Dar nu este cea mai eficientă modalitate de a obține rezultatul dorit!
 
-În schimb, adesea începem cu un _plan de design_ existent și lucrăm cu un arhitect pentru a-l personaliza conform cerințelor personale. Și acesta este exact abordarea de urmat când construim aplicații inteligente. Mai întâi, găsiți o arhitectură de design bună care se potrivește domeniului vostru de problemă. Apoi lucrați cu un arhitect de soluții pentru a personaliza și dezvolta soluția pentru scenariul vostru specific.
+În schimb, de multe ori începem cu un _plan de proiectare_ existent și lucrăm cu un arhitect pentru a-l personaliza conform cerințelor noastre. Și exact aceasta este abordarea pe care trebuie să o adoptăm când construim aplicații inteligente. Mai întâi, găsește o arhitectură de design bună care se potrivește problemei tale. Apoi colaborează cu un arhitect de soluții pentru a personaliza și dezvolta soluția pentru scenariul tău specific.
 
-Dar unde putem găsi aceste planuri de design? Și cum găsim un arhitect dispus să ne învețe cum să personalizăm și să implementăm aceste planuri pe cont propriu? În acest workshop, răspundem la aceste întrebări prin prezentarea a trei tehnologii:
+Dar unde putem găsi acele planuri de proiectare? Și cum găsim un arhitect dispus să ne învețe cum să personalizăm și să implementăm aceste planuri pe cont propriu? În acest atelier, răspundem la aceste întrebări prezentându-vă trei tehnologii:
 
-1. [Azure Developer CLI](https://aka.ms/azd) - un instrument open-source care accelerează calea dezvoltatorului de la dezvoltare locală (build) la implementare în cloud (ship).
-1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - depozite open-source standardizate care conțin cod de exemplu, infrastructură și fișiere de configurare pentru implementarea unei arhitecturi de soluție AI.
-1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - un agent de programare ancorat în cunoștințele Azure, care ne poate ghida în navigarea codului și în efectuarea modificărilor - folosind limbaj natural.
+1. [Azure Developer CLI](https://aka.ms/azd) - un instrument open-source care accelerează traseul dezvoltatorului de la dezvoltarea locală (build) la implementarea în cloud (ship).
+1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - depozite open-source standardizate care conțin cod exemplu, fișiere de infrastructură și configurare pentru implementarea unei arhitecturi de soluții AI.
+1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - un agent de codare bazat pe cunoștințe Azure, care ne poate ghida în navigarea bazei de cod și în efectuarea modificărilor – folosind limbaj natural.
 
-Cu aceste instrumente la îndemână, putem acum să _descoperim_ șablonul potrivit, să îl _implementăm_ pentru a valida că funcționează și să îl _personalizăm_ pentru a se potrivi scenariilor noastre specifice. Să ne scufundăm și să învățăm cum funcționează acestea.
+Cu aceste instrumente în mână, putem acum să _descoperim_ șablonul potrivit, să îl _implementăm_ pentru a valida că funcționează și să îl _personalizăm_ pentru a se potrivi scenariilor noastre specifice. Haideți să învățăm cum funcționează acestea.
 
 
 ---
 
 ## 2. Azure Developer CLI
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (or `azd`) is an open-source commandline tool that can speed up your code-to-cloud journey with a set of developer-friendly commands that work consistently across your IDE (development) and CI/CD (devops) environments.
+Instrumentul de linie de comandă [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (sau `azd`) este un instrument open-source care poate accelera parcursul tău de la cod la cloud cu un set de comenzi prietenoase pentru dezvoltatori care funcționează în mod consecvent atât în mediul IDE (dezvoltare), cât și în mediul CI/CD (devops).
 
-With `azd`, your deployment journey can be as simple as:
+Cu `azd`, călătoria ta de implementare poate fi la fel de simplă ca:
 
-- `azd init` - Initializes a new AI project from an existing AZD template.
-- `azd up` - Provisions infrastructure and deploy your application in one step.
-- `azd monitor` - Get real-time monitoring and diagnostics for your deployed application.
-- `azd pipeline config` - Setup CI/CD pipelines to automate deployment to Azure.
+- `azd init` - Inițializează un nou proiect AI pornind de la un șablon AZD existent.
+- `azd up` - Provoacă infrastructura și implementează aplicația ta într-un singur pas.
+- `azd monitor` - Obține monitorizare și diagnostic în timp real pentru aplicația ta implementată.
+- `azd pipeline config` - Configurează pipeline-uri CI/CD pentru a automatiza implementarea în Azure.
 
-**🎯 | EXERCIȚIU**: <br/> Explorați acum instrumentul de linie de comandă `azd` în mediul workshop-ului curent. Acesta poate fi GitHub Codespaces, un container de dezvoltare sau un clone local cu prerechizitele instalate. Începeți tastând această comandă pentru a vedea ce poate face instrumentul:
+**🎯 | EXERCIȚIU**: <br/> Explorează acum instrumentul de linie de comandă `azd` în mediul curent de workshop. Acesta poate fi GitHub Codespaces, un container de dezvoltare sau un clone local cu prerechizitele instalate. Începe prin a tasta această comandă pentru a vedea ce poate face instrumentul:
 
 ```bash title="" linenums="0"
 azd help
@@ -47,72 +47,69 @@ azd help
 
 ---
 
-## 3. The AZD Template
+## 3. Șablonul AZD
 
-For `azd` to achieve this, it needs to know the infrastructure to provision, the configuration settings to enforce, and the application to deploy. This is where [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp) come in. 
+Pentru ca `azd` să realizeze acest lucru, trebuie să cunoască infrastructura de provisionat, setările de configurare de aplicat și aplicația de implementat. Aici intervin [șabloanele AZD](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp).
 
-AZD templates are open-source repositories that combine sample code with infrastructure and configuraton files required for deploying the solution architecture.
-By using an _Infrastructure-as-Code_ (IaC) approach, they allow template resource definitions and configuration settings to be version-controller (just like the app source code) - creating reusable and consistent workflows across users of that project.
+Șabloanele AZD sunt depozite open-source care combină codul de exemplu cu fișierele de infrastructură și configurare necesare pentru implementarea arhitecturii soluției.
+Prin utilizarea unei abordări _Infrastructure-as-Code_ (IaC), acestea permit ca definițiile resurselor din șabloane și setările de configurare să fie controlate prin versiuni (la fel ca și codul sursă al aplicației) - creând fluxuri de lucru reutilizabile și consistente între utilizatorii acelui proiect.
 
-When creating or reusing an AZD template for _your_ scenario, consider these questions:
+Atunci când creezi sau reutilizezi un șablon AZD pentru scenariul _tău_, ia în considerare următoarele întrebări:
 
-1. What are you building? → Is there a template that has starter code for that scenario?
-1. How is your solution architected? → Is there a template that has the necessary resources?
-1. How is your solution deployed? → Think `azd deploy` with pre/post-processing hooks!
-1. How can you optimize it further? → Think built-in monitoring and automation pipelines!
+1. Ce construiești? → Există un șablon care are cod de pornire pentru acel scenariu?
+1. Cum este arhitecturată soluția ta? → Există un șablon care conține resursele necesare?
+1. Cum este implementată soluția ta? → Gândește-te la `azd deploy` cu hook-uri de pre/post-procesare!
+1. Cum poți optimiza și mai mult? → Gândește-te la monitorizare încorporată și la pipeline-uri de automatizare!
 
 **🎯 | EXERCIȚIU**: <br/> 
-Vizitați galeria [Awesome AZD](https://azure.github.io/awesome-azd/) și folosiți filtrele pentru a explora cele 250+ șabloane disponibile în prezent. Vedeți dacă puteți găsi unul care se aliniază cerințelor _voastre_ de scenariu.
+Vizitează galeria [Awesome AZD](https://azure.github.io/awesome-azd/) și folosește filtrele pentru a explora cele peste 250 de șabloane disponibile în prezent. Vezi dacă poți găsi unul care se aliniază cerințelor scenariului _tău_.
 
 ![Cod](../../../../../translated_images/ro/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 
-## 4. AI App Templates
+## 4. Șabloane pentru Aplicații AI
 
-For AI-powered applications, Microsoft provides specialized templates featuring **Microsoft Foundry** and **Foundry Agents**. These templates accelerate your path to building intelligent, production-ready applications.
+Pentru aplicațiile bazate pe AI, Microsoft oferă șabloane specializate care includ **Microsoft Foundry** și **Foundry Agents**. Aceste șabloane accelerează drumul tău către construirea aplicațiilor inteligente, gata pentru producție.
 
-### Microsoft Foundry & Foundry Agents Templates
+### Șabloane Microsoft Foundry & Foundry Agents
 
-Select a template below to deploy. Each template is available on [Awesome AZD](https://azure.github.io/awesome-azd/) and can be initialized with a single command.
+Selectează un șablon de mai jos pentru a-l implementa. Fiecare șablon este disponibil pe [Awesome AZD](https://azure.github.io/awesome-azd/) și poate fi inițializat cu o singură comandă.
 
 | Șablon | Descriere | Comandă de implementare |
 |----------|-------------|----------------|
-| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Aplicație de chat cu Retrieval Augmented Generation folosind Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
-| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Construiți agenți AI cu Foundry Agents pentru execuția autonomă a sarcinilor | `azd init -t azure-samples/foundry-agent-service-starter` |
-| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Coordonați mai mulți Foundry Agents pentru fluxuri de lucru complexe | `azd init -t azure-samples/multi-agent-orchestration` |
-| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Extrageți și analizați documente cu modele Microsoft Foundry | `azd init -t azure-samples/ai-document-processing` |
-| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Construiți chatboți inteligenți cu integrare Microsoft Foundry | `azd init -t azure-samples/ai-chat-protocol` |
-| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Generați imagini folosind DALL-E prin Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
-| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | Agenți AI folosind Semantic Kernel împreună cu Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
-| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Sisteme multi-agent folosind framework-ul AutoGen | `azd init -t azure-samples/autogen-multi-agent` |
+| **[Chat AI cu RAG](https://github.com/Azure-Samples/azure-search-openai-demo)** | Aplicație de chat bazată pe căutare | `azd init -t Azure-Samples/azure-search-openai-demo .` |
+| **[Începe cu Agenți AI](https://github.com/Azure-Samples/get-started-with-ai-agents)** | Aplicație de chat susținută de agenți; utilizată pe parcursul acestui atelier | `azd init -t Azure-Samples/get-started-with-ai-agents .` |
+| **[Începe cu Chat AI](https://github.com/Azure-Samples/get-started-with-ai-chat)** | Aplicație de chat AI de început | `azd init -t Azure-Samples/get-started-with-ai-chat .` |
 
-### Pornire rapidă
+Acestea sunt alternativele: inițializează **un** șablon într-un director gol propriu. Sufixul `.` selectează acel director; omiterea acestuia în versiunile curente AZD creează un subdirector cu numele șablonului. Inițializarea descarcă un proiect; `azd up` realizează implementarea facturabilă după ce revizuiești cerințele prealabile, resursele, suportul pentru regiuni și cota.
 
-1. **Răsfoiți șabloanele**: Vizitați [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) și filtrați după `AI`, `Agents` sau `Microsoft Foundry`
-2. **Selectați șablonul**: Alegeți unul care se potrivește cazului vostru de utilizare
-3. **Inițializați**: Rulați comanda `azd init` pentru șablonul ales
-4. **Implementați**: Rulați `azd up` pentru a provisiona și implementa
+### Început rapid
+
+1. **Răsfoiește șabloanele**: Vizitează [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) și filtrează după `AI`, `Agents`, sau `Microsoft Foundry`
+2. **Selectează șablonul tău**: Alege unul care corespunde scenariului tău de utilizare
+3. **Inițializează**: Rulează comanda `azd init` pentru șablonul ales
+4. **Implementează**: Rulează `azd up` pentru a provisiona și implementa
 
 **🎯 | EXERCIȚIU**: <br/>
-Selectați unul dintre șabloanele de mai sus în funcție de scenariul vostru:
+Selectează unul dintre șabloanele de mai sus pe baza scenariului tău:
 
-- **Construiți un chatbot?** → Începeți cu **AI Chat with RAG** sau **Conversational AI Bot**
-- **Aveți nevoie de agenți autonomi?** → Încercați **Foundry Agent Service Starter** sau **Multi-Agent Orchestration**
-- **Procesați documente?** → Folosiți **AI Document Intelligence**
-- **Doriți asistență AI pentru programare?** → Explorați **Semantic Kernel Agent** sau **AutoGen Multi-Agent**
+- **Continuarea acestui atelier?** → Alege **Începe cu Agenți AI**
+- **Construiești un chat susținut de căutare?** → Explorează separat **Chat AI cu RAG**
+- **Ai nevoie de o altă arhitectură?** → Caută în galerie și verifică repository-ul real, statusul implementării și cerințele prealabile
 
-```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
-azd init -t azure-samples/azure-search-openai-demo
+```bash title="Initialize the workshop template in an empty directory" linenums="0"
+azd init -t Azure-Samples/get-started-with-ai-agents .
+azd auth login
 azd up
 ```
 
-!!! info "Explorați mai multe șabloane"
-    Galeria [Awesome AZD](https://azure.github.io/awesome-azd/) conține peste 250 de șabloane. Folosiți filtrele pentru a găsi șabloane care se potrivesc cerințelor dvs. specifice pentru limbaj, framework și servicii Azure.
+!!! info "Explorează mai multe șabloane"
+    Galeria [Awesome AZD](https://azure.github.io/awesome-azd/) conține peste 250 de șabloane. Folosește filtrele pentru a găsi șabloane care se potrivesc cerințelor tale specifice privind limbajul, cadrul de dezvoltare și serviciile Azure.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare de responsabilitate**:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător. Nu ne asumăm răspunderea pentru eventuale neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -6,46 +6,48 @@
 
 ## Prezentare generală
 
-Acest capitol acoperă modele avansate de arhitectură multi-agent, orchestrarea agenților și implementări AI gata pentru producție pentru scenarii complexe.
+Acest capitol acoperă modele avansate de arhitectură multi-agent, orchestrarea agenților și implementări AI pregătite pentru producție în scenarii complexe.
 
-> Validat cu `azd 1.27.1` în iulie 2026.
+> Ghidul de comandă revizuit conform referinței `azd 1.37.2` publicate. Implementările în cloud nu au fost executate.
 
-## Obiective de învățare
+## Obiectivele de învățare
 
 Parcurgând acest capitol, vei:
 - Înțelege modele de arhitectură multi-agent
-- Implementa sisteme AI coordonate de agenți
+- Implementa sisteme coordonate de agenți AI
 - Implementa comunicarea agent-la-agent
-- Construi soluții multi-agent gata pentru producție
+- Construi soluții multi-agent pregătite pentru producție
 
 ---
 
 ## 📚 Lecții
 
-| # | Lecția | Descriere | Durată |
+| # | Lecție | Descriere | Durată |
 |---|--------|-------------|------|
 | 1 | [Bazele Multi-Agent](multi-agent-basics.md) | Practic: implementează o aplicație multi-agent funcțională cu `azd up` | 45 min |
 | 2 | [Modele de coordonare](../chapter-06-pre-deployment/coordination-patterns.md) | Strategii de orchestrare a agenților (continuă în Capitolul 6) | 30 min |
-| 3 | [Implementare ARM Template](../../examples/retail-multiagent-arm-template/README.md) | Exemplu de implementare cu un singur clic | 30 min |
+| 3 | [Implementarea modelului ARM](../../examples/retail-multiagent-arm-template/README.md) | Exemplu de implementare cu un singur clic | 30 min |
 
-> **Începe cu Lecția 1.** Este singura lecție complet practică și implementabilă din acest capitol. Lecția 2 se află în Capitolul 6 (este împărtășită cu planificarea pre-implementării), iar [Soluția Multi-Agent Retail](../../examples/retail-scenario.md) este un plan arhitectural—o referință de design, nu un șablon cu o comandă unică.
+> **Începe cu Lecția 1.** Este singura lecție complet practică și implementabilă din acest capitol. Lecția 2 este în Capitolul 6 (este împărțită cu planificarea pre-implementare), iar [Soluția Multi-Agent pentru Retail](../../examples/retail-scenario.md) este un plan de arhitectură — o referință de design, nu un șablon cu o singură comandă.
 
 ---
 
 ## 🚀 Pornire rapidă
 
 ```bash
-# Opțiunea 1: Implementați dintr-un șablon
-azd init --template agent-openai-python-prompty
+# Option 1: Deploy the multi-agent template used in Lesson 1
+azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Opțiunea 2: Implementați dintr-un manifest de agent (necesită extensia azure.ai.agents)
+# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> **Ce abordare?** Folosește `azd init --template` pentru a porni de la un exemplu funcțional. Folosește `azd ai agent init` când ai propriul manifest de agent. Vezi [referința AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pentru detalii complete.
+> **Ce abordare?** Folosește `azd init --template` pentru a începe de la un exemplu funcțional. Folosește `azd ai agent init` interactiv sau `azd ai agent init --template <path-to-azure.yaml>` pentru a adopta un proiect actual de agent. Vezi [referința AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pentru cerințe de versiune și migrarea evaluării.
+
+Rulează aceste alternative în dosare separate și goale. Extensia agenților `1.0.0-beta.23` necesită `azd >= 1.37.0`; fluxul său interactiv nu generează pipeline-ul personalizat Service Bus în lecția de coordonare.
 
 ---
 
@@ -53,28 +55,28 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Agent Orchestrator<br/>Redirecționează solicitările, gestionează fluxul de lucru] --> Customer[Agent Client<br/>Interogări utilizator, preferințe]
-    Orchestrator --> Inventory[Agent Inventar<br/>Niveluri stoc, comenzi]
+    Orchestrator[Orchestrator Agent<br/>Routes requests, manages workflow] --> Customer[Customer Agent<br/>User queries, preferences]
+    Orchestrator --> Inventory[Inventory Agent<br/>Stock levels, orders]
 ```
 
 ---
 
-## 🎯 Soluția evidențiată: Retail Multi-Agent
+## 🎯 Soluția prezentată: Retail Multi-Agent
 
-[Soluția Multi-Agent Retail](../../examples/retail-scenario.md) demonstrează:
+Soluția [Retail Multi-Agent](../../examples/retail-scenario.md) demonstrează:
 
-- **Agent Clienți**: Gestionează interacțiunile și preferințele utilizatorilor
-- **Agent Inventar**: Controlează stocurile și procesarea comenzilor
-- **Orchestrator**: Coordonează între agenți
-- **Memorie partajată**: Gestionarea contextului între agenți
+- **Agentul Client**: Gestionează interacțiunile și preferințele utilizatorului
+- **Agentul Inventar**: Administrează stocul și procesarea comenzilor
+- **Orchestratorul**: Coordonează între agenți
+- **Memorie Comună**: Gestionarea contextului între agenți
 
-### Servicii utilizate
+### Servicii Utilizate
 
 | Serviciu | Scop |
 |---------|---------|
 | Microsoft Foundry Models | Înțelegerea limbajului |
 | Azure AI Search | Catalog de produse |
-| Cosmos DB | Starea și memoria agenților |
+| Cosmos DB | Starea și memoria agentului |
 | Container Apps | Găzduirea agenților |
 | Application Insights | Monitorizare |
 
@@ -89,11 +91,11 @@ graph TD
 
 ---
 
-## 📖 Resurse conexe
+## 📖 Resurse Aflate în Legătură
 
-- [Ghid agenți AI](../chapter-02-ai-development/agents.md)
+- [Ghidul Agenților AI](../chapter-02-ai-development/agents.md)
 - [Practici AI pentru Producție](../chapter-08-production/production-ai-practices.md)
-- [Depanare AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Depanarea AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

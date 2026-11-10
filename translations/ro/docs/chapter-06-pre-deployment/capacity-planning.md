@@ -1,69 +1,71 @@
-# Planificarea capacității - Disponibilitate și limite ale resurselor Azure
+# Planificarea Capacității - Disponibilitatea și Limitările Resurselor Azure
 
-**Navigare capitole:**
-- **📚 Pagina cursului**: [AZD For Beginners](../../README.md)
-- **📖 Capitolul curent**: Capitolul 6 - Validare și planificare înainte de implementare
-- **⬅️ Capitolul anterior**: [Capitolul 5: Soluții AI cu agenți multipli](../../examples/retail-scenario.md)
-- **➡️ Următor**: [Selecția SKU](sku-selection.md)
-- **🚀 Capitolul următor**: [Capitolul 7: Depanare](../chapter-07-troubleshooting/common-issues.md)
+**Navigare capitol:**
+- **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitolul curent**: Capitolul 6 - Validare și Planificare Pre-Implementare
+- **⬅️ Capitol anterior**: [Capitolul 5: Soluții Multi-Agent AI](../../examples/retail-scenario.md)
+- **➡️ Următor**: [Selectarea SKU](sku-selection.md)
+- **🚀 Capitol următor**: [Capitolul 7: Depanare](../chapter-07-troubleshooting/common-issues.md)
 
 ## Introducere
 
-Acest ghid cuprinzător vă ajută să planificați și să validați capacitatea resurselor Azure înainte de a implementa cu Azure Developer CLI. Învață să evaluați cotele, disponibilitatea și limitările regionale pentru a asigura implementări reușite, optimizând în același timp costurile și performanța. Stăpâniți tehnici de planificare a capacității pentru diferite arhitecturi de aplicații și scenarii de scalare.
+Acest ghid cuprinzător te ajută să planifici și să validezi capacitatea resurselor Azure înainte de implementare folosind Azure Developer CLI. Învață să evaluezi cotele, disponibilitatea și limitările regionale pentru a asigura implementări de succes, optimizând în același timp costurile și performanța. Stăpânește tehnici de planificare a capacității pentru diferite arhitecturi aplicaționale și scenarii de scalare.
 
 ## Obiective de învățare
 
-Parcurgând acest ghid, veți:
-- Înțelege cotele Azure, limitele și constrângerile de disponibilitate regională
-- Stăpâni tehnici pentru verificarea disponibilității resurselor și a capacității înainte de implementare
+După finalizarea acestui ghid, vei putea:
+- Înțelege cotele, limitele și constrângerile regionale ale Azure
+- Stăpâni tehnicile de verificare a disponibilității și capacității resurselor înainte de implementare
 - Implementa strategii automate de validare și monitorizare a capacității
-- Proiecta aplicații cu dimensionare și considerente de scalare adecvate
-- Aplica strategii de optimizare a costurilor prin planificarea inteligentă a capacității
+- Proiecta aplicații cu dimensiuni și considerente corespunzătoare pentru scalare
+- Aplica strategii de optimizare a costurilor prin planificare inteligentă a capacității
 - Configura alerte și monitorizare pentru utilizarea cotelor și disponibilitatea resurselor
 
-## Rezultate ale învățării
+## Rezultate învățate
 
-După finalizare, veți putea:
+La final, vei putea:
 - Evalua și valida cerințele de capacitate ale resurselor Azure înainte de implementare
 - Crea scripturi automate pentru verificarea capacității și monitorizarea cotelor
-- Proiecta arhitecturi scalabile care țin cont de limite regionale și la nivel de abonament
+- Proiecta arhitecturi scalabile care țin cont de limitele regionale și ale abonamentului
 - Implementa strategii de dimensionare eficiente din punct de vedere al costurilor pentru diferite tipuri de sarcini de lucru
-- Configura monitorizare și alertare proactivă pentru probleme legate de capacitate
-- Planifica implementări multi-regiune cu distribuție adecvată a capacității
+- Configura monitorizare proactivă și alertare pentru probleme legate de capacitate
+- Planifica implementări multi-regiune cu o distribuție corectă a capacității
 
 ## De ce contează planificarea capacității
 
-Înainte de a implementa aplicații, trebuie să vă asigurați:
+> **Domeniu:** Aceste exemple Bash necesită Azure CLI, `jq` și un abonament selectat. Ele inspectează ofertele și cotele publicate; niciuna nu garantează capacitatea fizică sau rezervă resurse. Salvează/adaptează fragmentele în proiectul tău — numele scripturilor/configurațiilor de mai jos sunt exemple, nu livrabile verificate. Cotele VM nu acoperă Container Apps, App Service sau cotele Azure OpenAI.
+
+Înainte de a implementa aplicații, trebuie să te asiguri de:
 - **Cote suficiente** pentru resursele necesare
 - **Disponibilitatea resurselor** în regiunea țintă
-- **Disponibilitatea nivelului de serviciu** pentru tipul dvs. de abonament
-- **Capacitate de rețea** pentru traficul estimat
-- **Optimizare a costurilor** prin dimensionare adecvată
+- **Disponibilitatea nivelului de serviciu** pentru tipul tău de abonament
+- **Capacitatea rețelei** pentru traficul estimat
+- **Optimizarea costurilor** prin dimensionare corectă
 
 ## 📊 Înțelegerea cotelor și limitelor Azure
 
 ### Tipuri de limite
-1. **Cote la nivel de abonament** - Numărul maxim de resurse per abonament
-2. **Cote regionale** - Numărul maxim de resurse per regiune
+1. **Cote la nivel de abonament** - Resurse maxime per abonament
+2. **Cote regionale** - Resurse maxime per regiune
 3. **Limite specifice resurselor** - Limite pentru tipuri individuale de resurse
-4. **Limite ale nivelului de serviciu** - Limite bazate pe planul dvs. de serviciu
+4. **Limite ale nivelului de serviciu** - Limite bazate pe planul tău de serviciu
 
-### Cote comune pentru resurse
+### Cote comune de resurse
 ```bash
-# Verificați utilizarea curentă a cotei
+# Check current quota usage
 az vm list-usage --location eastus2 --output table
 
-# Verificați cotele pentru resurse specifice
+# Check specific resource quotas
 az network list-usages --location eastus2 --output table
-az storage account show-usage --output table
+az storage account show-usage --location eastus2 --output table
 ```
 
-## Verificări ale capacității înainte de implementare
+## Verificări de capacitate înainte de implementare
 
-### Script de validare automată a capacității
+### Script automat de validare a capacității
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validează capacitatea Azure înainte de implementare
+# capacity-check.sh - Validate Azure capacity before deployment
 
 set -e
 
@@ -74,7 +76,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Funcție pentru verificarea utilizării cotelor
+# Function to check quota usage
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -83,22 +85,26 @@ check_quota() {
     
     case $resource_type in
         "compute")
-            usage=$(az vm list-usage --location "$LOCATION" --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az vm list-usage --location "$LOCATION" --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
         "storage")
-            usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+            usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.current')
             limit=$(echo "$usage" | jq -r '.limit')
             ;;
         "network")
-            usage=$(az network list-usages --location "$LOCATION" --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az network list-usages --location "$LOCATION" --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
     esac
     
+    if ! [[ "$current" =~ ^[0-9]+$ && "$limit" =~ ^[0-9]+$ ]]; then
+        echo "❌ Quota data missing or unrecognized for $resource_type"
+        return 1
+    fi
     available=$((limit - current))
     
     if [ "$available" -ge "$required" ]; then
@@ -109,98 +115,95 @@ check_quota() {
     fi
 }
 
-# Verifică diverse cote de resurse
-check_quota "compute" 4      # Necesită 4 vCPU-uri
-check_quota "storage" 2      # Necesită 2 conturi de stocare
-check_quota "network" 1      # Necesită 1 rețea virtuală
+# Check various resource quotas
+check_quota "compute" 4      # Need 4 vCPUs
+check_quota "storage" 2      # Need 2 storage accounts
+check_quota "network" 1      # Need 1 virtual network
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Verificări ale capacității specifice serviciilor
+### Verificări de capacitate specifice serviciilor
 
 #### Capacitate App Service
 ```bash
-# Verifică disponibilitatea planului App Service
+# Check App Service Plan availability
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Verifică SKU-urile disponibile în regiune
-    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
+    # Check available SKUs in region
+    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location' || name=='$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)']" -o tsv)
     
     if [ -n "$available_skus" ]; then
-        echo "✅ $sku is available in $location"
+        echo "✅ $sku is listed for $location (not a capacity guarantee)"
     else
         echo "❌ $sku is not available in $location"
         
-        # Sugerează regiuni alternative
+        # Suggest alternative regions
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Verifică utilizarea curentă
+    # Check current usage
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Utilizare
+# Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### Capacitate baze de date
+#### Capacitate bază de date
 ```bash
-# Verifică capacitatea PostgreSQL
+# Check PostgreSQL capacity
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Verifică dacă SKU este disponibil
+    # Inspect the nested regional capability catalog; do not assume top-level
+    # entries are VM SKU names. Select supported tier/version/SKU combinations.
     available=$(az postgres flexible-server list-skus --location "$location" \
-        --query "contains([].name, '$sku')" -o tsv)
+        --output json)
     
-    if [ "$available" = "true" ]; then
-        echo "✅ PostgreSQL $sku is available in $location"
+    if [ -n "$available" ] && [ "$available" != "[]" ]; then
+        echo "$available" | jq .
+        echo "Inspect the catalog for $sku; this does not verify physical capacity."
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Afișează SKU-urile disponibile
+        # Show available SKUs
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
-            --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
+            --output json
         return 1
     fi
 }
 
-# Verifică capacitatea Cosmos DB
+# Check Cosmos DB capacity
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Verifică disponibilitatea regiunii
-    available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
+    # Check region availability
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    available_regions=$(az cosmosdb locations list --query "[?name=='$display_location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Verifică dacă serverless este suportat (dacă este necesar)
+        # Check if serverless is supported (if needed)
         if [ "$tier" = "serverless" ]; then
-            serverless_regions=$(az cosmosdb locations list \
-                --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
-            
-            if [ -n "$serverless_regions" ]; then
-                echo "✅ Cosmos DB Serverless is supported in $location"
-            else
-                echo "⚠️  Cosmos DB Serverless may not be supported in $location"
-            fi
+            echo "Verify serverless support and limits separately in Cosmos DB documentation."
+            echo "Availability-zone support is NOT a serverless-support signal."
         fi
     else
         echo "❌ Cosmos DB is not available in $location"
@@ -211,36 +214,31 @@ check_cosmos_capacity() {
 
 #### Capacitate Container Apps
 ```bash
-# Verifică capacitatea Container Apps
+# Check Container Apps capacity
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Verifică dacă Container Apps este disponibil în regiune
-    az provider show --namespace Microsoft.App \
-        --query "resourceTypes[?resourceType=='containerApps'].locations" \
-        --output table | grep -q "$location"
-    
-    if [ $? -eq 0 ]; then
+    # Check if Container Apps is available in region
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    if az provider show --namespace Microsoft.App \
+        --query "resourceTypes[?resourceType=='containerApps'].locations[]" \
+        --output tsv | grep -Fxq "$display_location"; then
         echo "✅ Container Apps is available in $location"
         
-        # Verifică numărul curent de medii
+        # Check current environment count
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps este limitat la 15 medii pe regiune
-        if [ "$current_envs" -lt 15 ]; then
-            echo "✅ Can create more Container App environments"
-        else
-            echo "⚠️  Near Container App environment limit in $location"
-        fi
+        echo "Check Microsoft.App quotas for this subscription/region in Azure Quotas."
+        echo "An environment count alone does not establish available quota."
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Afișează regiunile disponibile
+        # Show available regions
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -252,9 +250,9 @@ check_container_apps_capacity() {
 
 ## 📍 Validarea disponibilității regionale
 
-### Disponibilitatea serviciilor pe regiune
+### Disponibilitatea serviciilor pe regiuni
 ```bash
-# Verifică disponibilitatea serviciilor în diferite regiuni
+# Check service availability across regions
 check_service_availability() {
     local service=$1
     
@@ -269,9 +267,8 @@ check_service_availability() {
                 --query "resourceTypes[?resourceType=='containerApps'].locations" -o table
             ;;
         "postgres")
-            az postgres flexible-server list-skus --location eastus2 >/dev/null 2>&1 && \
-            echo "PostgreSQL Flexible Server regions:" && \
-            az account list-locations --query "[?metadata.regionType=='Physical'].{name:name,displayName:displayName}" -o table
+            echo "PostgreSQL offerings for candidate region eastus2:"
+            az postgres flexible-server list-skus --location eastus2 --output json
             ;;
         "cosmosdb")
             az cosmosdb locations list --query "[].{name:name,documentationUrl:documentationUrl}" -o table
@@ -279,18 +276,20 @@ check_service_availability() {
     esac
 }
 
-# Verifică toate serviciile
+# Check all services
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-### Recomandări pentru selectarea regiunii
+### Discuție despre selecția regiunii (ilustrativă)
+
+Următoarele etichete sunt sugestii pentru investigare, nu prețuri verificate, hardware sau clasificări de conformitate. Compară prețurile regionale actuale și latența măsurată. GDPR nu impune neapărat o regiune în Germania; rezidența, caracteristicile serviciilor și cerințele organizaționale/juridice trebuie evaluate împreună.
 ```bash
-# Recomandă regiuni optime în funcție de cerințe
+# Recommend optimal regions based on requirements
 recommend_region() {
-    local requirements=$1  # "cost redus" | "performanță" | "conformitate"
+    local requirements=$1  # "lowcost" | "performance" | "compliance"
     
     echo "Region recommendations for: $requirements"
     
@@ -303,14 +302,14 @@ recommend_region() {
             ;;
         "performance")
             echo "⚡ Performance-optimized regions:"
-            echo "  - East US 2 (Virginia) - Latest hardware"
-            echo "  - West US 2 (Washington) - Latest hardware"
+            echo "  - East US 2 (Virginia) - Measure latency to your users"
+            echo "  - West US 2 (Washington) - Verify required SKUs"
             echo "  - North Europe (Ireland) - For EU users"
             ;;
         "compliance")
             echo "🔒 Compliance-focused regions:"
             echo "  - US Gov regions - For government workloads"
-            echo "  - Germany regions - For GDPR compliance"
+            echo "  - EU regions - Assess residency and contractual requirements"
             echo "  - Australia regions - For data sovereignty"
             ;;
     esac
@@ -319,29 +318,19 @@ recommend_region() {
 
 ## 💰 Planificarea și estimarea costurilor
 
-### Estimarea costului resurselor
+### Estimarea costurilor resurselor
 ```bash
-# Estimează costurile de implementare
+# Estimate deployment costs
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Creează un grup temporar de resurse pentru estimare
-    temp_rg="temp-estimation-$(date +%s)"
-    az group create --name "$temp_rg" --location "$location" >/dev/null
-    
-    # Implementează infrastructura în modul de validare
-    az deployment group validate \
-        --resource-group "$temp_rg" \
-        --template-file infra/main.bicep \
-        --parameters @infra/main.parameters.json \
-        --parameters location="$location" \
-        --query "properties.validatedResources[].{type:type,name:name}" -o table
-    
-    # Șterge grupul temporar de resurse
-    az group delete --name "$temp_rg" --yes --no-wait
+    # Review declared resources locally. ARM validate/what-if do NOT price them.
+    # Do not create/delete a resource group just to estimate cost.
+    az bicep build --file infra/main.bicep --stdout |
+      jq -r '.resources[] | [.type, (.sku.name // "see module/parameters")] | @tsv'
     
     echo ""
     echo "💡 Use Azure Pricing Calculator for detailed cost estimates:"
@@ -354,10 +343,10 @@ estimate_costs() {
 
 ### Recomandări pentru optimizarea SKU-urilor
 ```bash
-# Recomandă SKU-uri optime pe baza cerințelor
+# Recommend optimal SKUs based on requirements
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "dezvoltare" | "pre-producție" | "producție"
+    local workload_type=$2  # "dev" | "staging" | "production"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -419,30 +408,31 @@ recommend_sku() {
 
 ## 🚀 Verificări automate pre-implementare
 
-### Script pre-implementare cuprinzător
+### Script complet pre-implementare
 ```bash
 #!/bin/bash
-# preflight-check.sh - Validare completă înainte de implementare
+# preflight-check.sh - Complete pre-deployment validation
+# Starting-point example: adapt service checks and supply project-specific costs.
 
 set -e
 
-# Configurație
+# Configuration
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Culori pentru ieșire
+# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # Fără culoare
+NC='\033[0m' # No Color
 
-# Funcții de jurnalizare
+# Logging functions
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Încarcă configurația
+# Load configuration
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -462,9 +452,10 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Verificarea 1: Autentificare
+# Check 1: Authentication
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
+    SUBSCRIPTION_ID=$(az account show --query id -o tsv)
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
     log_info "Authenticated with subscription: $SUBSCRIPTION_NAME"
 else
@@ -472,7 +463,7 @@ else
     exit 1
 fi
 
-# Verificarea 2: Disponibilitate regională
+# Check 2: Regional availability
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -481,14 +472,15 @@ else
     exit 1
 fi
 
-# Verificarea 3: Validarea cotelor
+# Check 3: Quota validation
 log_info "Checking quota availability..."
 
-# Cotă vCPU
+# vCPU quota
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
-    --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
 vcpu_limit=$(echo "$vcpu_usage" | jq -r '.[0].limit')
+[[ "$vcpu_current" =~ ^[0-9]+$ && "$vcpu_limit" =~ ^[0-9]+$ ]] || { log_error "Missing VM quota data"; exit 1; }
 vcpu_available=$((vcpu_limit - vcpu_current))
 
 if [ "$vcpu_available" -ge "$REQUIRED_VCPUS" ]; then
@@ -498,10 +490,11 @@ else
     exit 1
 fi
 
-# Cotă pentru contul de stocare
-storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+# Storage account quota
+storage_usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
+[[ "$storage_current" =~ ^[0-9]+$ && "$storage_limit" =~ ^[0-9]+$ ]] || { log_error "Missing storage quota data"; exit 1; }
 storage_available=$((storage_limit - storage_current))
 
 if [ "$storage_available" -ge "$REQUIRED_STORAGE" ]; then
@@ -511,13 +504,14 @@ else
     exit 1
 fi
 
-# Verificarea 4: Disponibilitatea serviciilor
+# Check 4: Service availability
 log_info "Checking service availability..."
+DISPLAY_LOCATION=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
 
 for service in "${REQUIRED_SERVICES[@]}"; do
     case $service in
         "appservice")
-            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION' || name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "App Service is available in $LOCATION"
             else
                 log_error "App Service is not available in $LOCATION"
@@ -535,7 +529,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
         "containerapp")
             if az provider show --namespace Microsoft.App \
                 --query "resourceTypes[?resourceType=='containerApps'].locations" \
-                --output tsv | grep -q "$LOCATION"; then
+                --output tsv | grep -Fxq "$DISPLAY_LOCATION"; then
                 log_info "Container Apps is available in $LOCATION"
             else
                 log_error "Container Apps is not available in $LOCATION"
@@ -543,22 +537,29 @@ for service in "${REQUIRED_SERVICES[@]}"; do
             fi
             ;;
         "cosmosdb")
-            if az cosmosdb locations list --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az cosmosdb locations list --query "[?name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "Cosmos DB is available in $LOCATION"
             else
                 log_error "Cosmos DB is not available in $LOCATION"
                 exit 1
             fi
             ;;
+        "storage")
+            log_info "Storage account quota checked above; validate the selected SKU separately."
+            ;;
+        *)
+            log_error "No check implemented for service: $service"; exit 1
+            ;;
     esac
 done
 
-# Verificarea 5: Capacitatea rețelei
+# Check 5: Network capacity
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
-    --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
 vnet_current=$(echo "$vnet_usage" | jq -r '.[0].current')
 vnet_limit=$(echo "$vnet_usage" | jq -r '.[0].limit')
+[[ "$vnet_current" =~ ^[0-9]+$ && "$vnet_limit" =~ ^[0-9]+$ ]] || { log_error "Missing network quota data"; exit 1; }
 vnet_available=$((vnet_limit - vnet_current))
 
 if [ "$vnet_available" -gt 0 ]; then
@@ -567,7 +568,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Verificarea 6: Validarea denumirii resurselor
+# Check 6: Resource naming validation
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -579,9 +580,12 @@ else
     exit 1
 fi
 
-# Verificarea 7: Estimarea costurilor
+# Check 7: Cost estimation
 log_info "Performing cost estimation..."
-ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
+# Set this from a reviewed Pricing Calculator estimate; no built-in pricing API
+# is implemented by this example.
+: "${ESTIMATED_MONTHLY_COST:?Set ESTIMATED_MONTHLY_COST to your reviewed estimate}"
+[[ "$ESTIMATED_MONTHLY_COST" =~ ^[0-9]+$ ]] || { log_error "Use an integer cost estimate"; exit 1; }
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
 
 if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; then
@@ -594,7 +598,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Verificarea 8: Validarea șablonului
+# Check 8: Template validation
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -608,17 +612,17 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Rezumat final
+# Final summary
 echo "=================================="
-log_info "✅ All pre-flight checks passed!"
-log_info "Ready for deployment to $LOCATION"
+log_info "✅ Implemented checks passed; review remaining service-specific limits."
+log_info "Quota is not a reservation or guarantee of capacity in $LOCATION."
 echo "Next steps:"
 echo "  1. Run 'azd up' to deploy"
 echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-### Șablon fișier de configurare
+### Șablon pentru fișierul de configurare
 ```json
 {
   "requirements": {
@@ -656,27 +660,27 @@ echo "  3. Verify application health post-deployment"
 
 ### Monitorizare în timp real a capacității
 ```bash
-# Monitorizează capacitatea în timpul implementării
+# Monitor capacity during deployment
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Verifică starea implementării
+        # Check deployment status
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
-            --query "[0].properties.provisioningState" -o tsv)
+            --query "sort_by(@, &properties.timestamp)[-1].properties.provisioningState" -o tsv)
         
         if [ "$deployment_status" = "Succeeded" ]; then
             log_info "Deployment completed successfully"
             break
-        elif [ "$deployment_status" = "Failed" ]; then
+        elif [ "$deployment_status" = "Failed" ] || [ "$deployment_status" = "Canceled" ]; then
             log_error "Deployment failed"
             break
         fi
         
-        # Verifică utilizarea curentă a resurselor
+        # Check current resource usage
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -696,8 +700,9 @@ hooks:
   preprovision:
     shell: sh
     run: |
+      set -e
       echo "Running pre-flight capacity checks..."
-      ./scripts/preflight-check.sh ${AZURE_LOCATION} ${AZURE_ENV_NAME}
+      bash ./scripts/preflight-check.sh "${AZURE_LOCATION}" "${AZURE_ENV_NAME}"
       
       if [ $? -ne 0 ]; then
         echo "Pre-flight checks failed"
@@ -707,40 +712,40 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## Practici recomandate
+## Cele mai bune practici
 
-1. **Rulați întotdeauna verificări ale capacității** înainte de a implementa în regiuni noi
-2. **Monitorizați utilizarea cotelor în mod regulat** pentru a evita surprizele
-3. **Planificați pentru creștere** verificând necesitățile viitoare de capacitate
-4. **Utilizați instrumente de estimare a costurilor** pentru a evita facturi neașteptate
-5. **Documentați cerințele de capacitate** pentru echipa dvs.
-6. **Automatizați validarea capacității** în pipeline-urile CI/CD
-7. **Luați în considerare necesitățile de capacitate pentru failover regional**
+1. **Execută întotdeauna verificări de capacitate** înainte de a implementa în regiuni noi
+2. **Monitorizează regulat utilizarea cotelor** pentru a evita surprizele
+3. **Planifică pentru creștere** verificând nevoile viitoare de capacitate
+4. **Folosește unelte de estimare a costurilor** pentru a evita șocul facturii
+5. **Documentează cerințele de capacitate** pentru echipa ta
+6. **Automatizează validarea capacității** în pipeline-urile CI/CD
+7. **Ia în considerare cerințele de capacitate pentru failover regional**
 
-## Pași următori
+## Pașii următori
 
-- [Ghid de selecție SKU](sku-selection.md) - Alegeți niveluri de servicii optime
-- [Verificări pre-implementare](preflight-checks.md) - Scripturi de validare automate
-- [Fișă de referință](../../resources/cheat-sheet.md) - Comenzi pentru referință rapidă
+- [Ghidul de selecție SKU](sku-selection.md) - Alege nivelele optime de servicii
+- [Verificări pre-implementare](preflight-checks.md) - Scripturi automate de validare
+- [Fișă de ajutor](../../resources/cheat-sheet.md) - Comenzi de referință rapidă
 - [Glosar](../../resources/glossary.md) - Termeni și definiții
 
 ## Resurse suplimentare
 
-- [Limite pentru abonamente Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Limitele abonamentului Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Calculatorul de prețuri Azure](https://azure.microsoft.com/pricing/calculator/)
-- [Gestionarea costurilor Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Managementul costurilor Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
 - [Disponibilitatea regională Azure](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigare**
-- **Lecția anterioară**: [Ghid de depanare](../chapter-07-troubleshooting/debugging.md)
+- **Lecția precedentă**: [Ghid de depanare](../chapter-07-troubleshooting/debugging.md)
 
-- **Lecția următoare**: [Selecția SKU](sku-selection.md)
+- **Lecția următoare**: [Selectarea SKU](sku-selection.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Declinare de responsabilitate:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

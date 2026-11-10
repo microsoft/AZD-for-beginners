@@ -1,238 +1,244 @@
-# Fișă de referință cu comenzi - Comenzi esențiale AZD
+# Fișă de Comenzi - Comenzi esențiale AZD
 
 **Referință rapidă pentru toate capitolele**
-- **📚 Pagina cursului**: [AZD Pentru începători](../README.md)
-- **📖 Pornire rapidă**: [Capitolul 1: Bază & Pornire rapidă](../README.md#-chapter-1-foundation--quick-start)
+- **📚 Acasă curs**: [AZD Pentru Începători](../README.md)
+- **📖 Început rapid**: [Capitolul 1: Fundamente și Început rapid](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 Comenzi AI**: [Capitolul 2: Dezvoltare AI-First](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Avansat**: [Capitolul 4: Infrastructură ca și cod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🔧 Avansat**: [Capitolul 4: Infrastructură ca Cod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introducere
 
-Această fișă cu comenzi cuprinzătoare oferă o referință rapidă pentru cele mai frecvent utilizate comenzi Azure Developer CLI, organizate pe categorii cu exemple practice. Perfectă pentru consultări rapide în timpul dezvoltării, depanării și operațiunilor zilnice cu proiecte azd.
+Această fișă completă oferă o referință rapidă pentru cele mai utilizate comenzi Azure Developer CLI, organizate pe categorii cu exemple practice. Perfectă pentru căutări rapide în timpul dezvoltării, depanării și operațiunilor zilnice cu proiectele azd.
 
 ## Obiective de învățare
 
-Folosind această fișă cu comenzi, veți:
-- Avea acces instantaneu la comenzile și sintaxa esențiale Azure Developer CLI
-- Înțelege organizarea comenzilor după categorii funcționale și cazuri de utilizare
-- Consulta exemple practice pentru scenarii comune de dezvoltare și implementare
-- Accesa comenzi de depanare pentru rezolvarea rapidă a problemelor
-- Găsi opțiuni avansate de configurare și personalizare eficient
-- Localiza comenzi pentru gestionarea mediilor și fluxuri de lucru multi-mediu
+Folosind această fișă:
+- Vei avea acces instantaneu la comenzi esențiale Azure Developer CLI și sintaxă
+- Vei înțelege organizarea comenzilor pe categorii funcționale și cazuri de utilizare
+- Vei consulta exemple practice pentru scenarii comune de dezvoltare și implementare
+- Vei accesa comenzi de depanare pentru rezolvarea rapidă a problemelor
+- Vei găsi eficient opțiuni avansate de configurare și personalizare
+- Vei localiza comenzi de gestionare a mediilor și fluxuri de lucru multi-mediu
 
 ## Rezultate de învățare
 
-Cu referință regulată la această fișă cu comenzi, veți putea:
-- Executa comenzi azd cu încredere fără a consulta documentația completă
-- Rezolva rapid probleme comune folosind comenzile diagnostice potrivite
-- Gestione eficient mai multe medii și scenarii de implementare
-- Aplica funcționalități avansate azd și opțiuni de configurare după nevoie
-- Depana probleme de implementare folosind secvențe sistematice de comenzi
-- Optimiza fluxurile de lucru prin utilizarea eficientă a scurtăturilor și opțiunilor azd
+Consultând regulat această fișă, vei putea să:
+- Execuți comenzile azd cu încredere fără a consulta documentația completă
+- Rezolvi rapid probleme comune folosind comenzile de diagnostic potrivite
+- Gestionezi eficient medii multiple și scenarii de implementare
+- Aplici funcționalități și opțiuni avansate azd după necesitate
+- Depanezi problemele de implementare folosind secvențe sistematice de comenzi
+- Optimizezi fluxurile de lucru prin utilizarea eficientă a scurtăturilor și opțiunilor azd
 
-## Comenzi pentru început
+## Comenzi pentru începători
 
 ### Autentificare
 ```bash
-# Autentificare în Azure prin AZD
+# Login to Azure via AZD
 azd auth login
 
-# Autentificare în Azure CLI (AZD folosește acest lucru în fundal)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# Verifică contul curent
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# Setează abonamentul implicit
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# Deconectare din AZD
+# Logout from AZD
 azd auth logout
 
-# Deconectare din Azure CLI
+# Logout from Azure CLI
 az logout
 ```
 
-### Inițializarea proiectului
+### Inițializare proiect
 ```bash
-# Răsfoiește șabloanele disponibile
+# Browse available templates
 azd template list
 
-# Inițializează din șablon
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# Inițializează în directorul curent
+# Initialize in current directory
 azd init .
 
-# Inițializează cu nume personalizat
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
 ## Comenzi principale de implementare
 
 ### Flux complet de implementare
 ```bash
-# Desfășurați totul (provisionare + distribuire)
+# Deploy everything (provision + deploy)
 azd up
 
-# Desfășurați cu prompturi de confirmare dezactivate
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# Desfășurați într-un mediu specific
+# Deploy to specific environment
 azd up --environment production
 
-# Desfășurați cu parametri personalizați
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
 ### Doar infrastructură
 ```bash
-# Provizionați resurse Azure
+# Provision Azure resources
 azd provision
 
-# 🧪 Previzualizați modificările infrastructurii
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# Afișează o vizualizare de simulare a resurselor care ar fi create/modificate/șterse
-# Similar cu 'terraform plan' sau 'bicep what-if' - sigur de executat, fără modificări aplicate
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
 ### Doar aplicație
 ```bash
-# Dezvoltă codul aplicației
+# Deploy application code
 azd deploy
 
-# Dezvoltă un serviciu specific
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Dezvoltă toate serviciile
+# Deploy all services
 azd deploy --all
 ```
 
 ### Construire și împachetare
 ```bash
-# Restaurare (descărcare) a dependențelor aplicației
+# Restore (download) application dependencies
 azd restore
 
-# Restaurare a unui serviciu specific
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# Construiește un artefact de implementare fără a implementa
+# Build a deployable artifact without deploying
 azd package
 
-# Construiește un serviciu specific
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** descarcă dependențele aplicației tale (npm, pip, NuGet, Maven, etc.). Se execută automat în timpul `azd package` și `azd deploy`, așadar rareori apelezi direct acestă comandă — ruleaz-o manual pentru a prelua dependențele în avans (de exemplu, pentru a încălzi o cache CI sau a lucra offline ulterior).
+> **`azd restore`** descarcă dependențele aplicației tale (npm, pip, NuGet, Maven etc.). Se execută automat în timpul `azd package` și `azd deploy`, așa că rar este apelat direct — rulează-l manual pentru a preîncărca dependențele (de exemplu, pentru a încălzi o cache CI sau a lucra offline ulterior).
 
-> **`azd package`** construiește artefactul ce poate fi implementat (o imagine container sau zip) **fără** a-l împinge către Azure. Folosește-l singur pentru a verifica dacă o construire reușește, inspecta rezultatul sau produce un artefact pe care un proces separat îl va implementa mai târziu. `azd deploy` împachetează automat, deci ai nevoie de `azd package` doar când dorești artefactul fără implementare.
+> **`azd package`** pregătește un artefact deployabil fără a implementa serviciul aplicației. Comportamentul depinde de limbaj și gazdă: împachetarea containerului poate folosi build-uri remote Azure și poate publica imagini într-un registru, deci nu este neapărat offline sau fără scrieri Azure. `azd deploy` poate împacheta automat; folosește un pas separat de împachetare când ai nevoie de un artefact sau o verificare de build.
 
 
 ## 🌍 Gestionarea mediului
 
-### Operațiuni de mediu
+### Operațiuni mediu
 ```bash
-# Listează toate mediile
+# List all environments
 azd env list
 
-# Creează un mediu nou
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# Selectează mediul
+# Select environment
 azd env select production
 
-# Afișează mediile disponibile
+# Show available environments
 azd env list
 
-# Reîmprospătează starea mediului
+# Refresh environment state
 azd env refresh
 ```
 
 ### Variabile de mediu
 ```bash
-# Setează variabila de mediu
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# Obține variabila de mediu
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# Listează toate variabilele de mediu
+# List all environment variables
 azd env get-values
 
-# Elimină variabila de mediu
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
+
+Fișierele de mediu sunt text simplu. Nu trata `azd env set` ca stocare secretă; folosește referințe Key Vault sau identitate gestionată după caz.
 
 ## ⚙️ Comenzi de configurare
 
 ### Configurare globală
 ```bash
-# Listează toată configurația
+# List all configuration
 azd config show
 
-# Setează valorile implicite globale
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Elimină configurația
+# Remove configuration
 azd config unset defaults.location
 
-# Resetează toată configurația
+# Reset all configuration
 azd config reset
 ```
 
 ### Configurare proiect
 ```bash
-# Validează azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# Afișează informațiile proiectului
+# Show project information
 azd show
 
-# Obține punctele finale ale serviciilor
+# Get service endpoints
 azd show --output json
 ```
 
 ## 📊 Monitorizare și diagnostic
 
-### Tablou de monitorizare
+### Panou de monitorizare
 ```bash
-# Deschideți panoul de monitorizare Azure portal
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# Deschideți metricile live din Application Insights
+# Open Application Insights live metrics
 azd monitor --live
 
-# Deschideți panoul de jurnale din Application Insights
+# Open Application Insights logs blade
 azd monitor --logs
 
-# Deschideți prezentarea generală din Application Insights
+# Open Application Insights overview
 azd monitor --overview
 ```
 
+Application Insights trebuie configurat de șablon. Opțiunea Live Metrics AZD nu este în prezent suportată pentru aplicațiile Python; folosește în schimb prezentarea generală, jurnalele sau fluxul de urmarire documentat al exemplului.
+
 ### Vizualizare jurnale container
 ```bash
-# Vizualizați jurnalele prin Azure CLI (pentru Container Apps)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Urmăriți jurnalele în timp real
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Vizualizați jurnalele din Portalul Azure
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
 ### Interogări Log Analytics
 ```bash
-# Accesează Log Analytics prin portalul Azure
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# Interoghează jurnalele folosind Azure CLI
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -242,28 +248,28 @@ az monitor log-analytics query \
 
 ### Curățare
 ```bash
-# Elimină toate resursele Azure
+# Remove all Azure resources
 azd down
 
-# Ștergere forțată fără confirmare
+# Force delete without confirmation
 azd down --force
 
-# Curăță resursele șterse temporar
+# Purge soft-deleted resources
 azd down --purge
 
-# Curățare completă
+# Complete cleanup
 azd down --force --purge
 ```
 
 ### Actualizări
 ```bash
-# Verifică pentru actualizări azd
+# Check for azd updates
 azd version
 
-# Obține versiunea curentă
+# Get current version
 azd version
 
-# Vizualizează configurația curentă
+# View current configuration
 azd config show
 ```
 
@@ -271,254 +277,275 @@ azd config show
 
 ### Pipeline și CI/CD
 ```bash
-# Configurează GitHub Actions
+# Configure GitHub Actions
 azd pipeline config
 
-# Configurează Azure DevOps
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# Afișează configurația pipeline-ului
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
-### Gestionare infrastructură
+### Gestionarea infrastructurii
 ```bash
-# Generează șabloane de infrastructură
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 Previzualizare și planificare infrastructură
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# Simulează aprovizionarea infrastructurii fără a implementa
-# Analizează șabloanele Bicep/Terraform și afișează:
-# - Resurse care urmează să fie adăugate (verde +)
-# - Resurse care urmează să fie modificate (galben ~)
-# - Resurse care urmează să fie șterse (roșu -)
-# Sigur de rulat - nu se fac modificări efective în mediul Azure
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# Sintetizează infrastructura din azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ### Informații proiect
 ```bash
-# Afișați starea proiectului și punctele finale
+# Show project status and endpoints
 azd show
 
-# Afișați informații detaliate despre proiect în format JSON
+# Show detailed project info as JSON
 azd show --output json
 
-# Obțineți punctele finale ale serviciului
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
 ## 🤖 Comenzi AI & Extensii
 
 ### Extensii AZD
+
+Referința AI CLI revizuită 2026-11-04: `azd 1.37.2`, agenți `1.0.0-beta.23`, evaluări `1.0.0-beta.2`. Folosește `azd >= 1.37.0` pentru fluxul de lucru combinat; actualizează CLI-ul de bază înainte de extensiile incompatibile.
+
 ```bash
-# Listează toate extensiile disponibile (inclusiv AI)
+# List all available extensions (including AI)
 azd extension list
 
-# Instalează extensia agenților Foundry
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Instalează extensia abilităților agenților (previzualizare)
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the agent skills extension (preview)
 azd extension install azure.ai.skills
 
-# Instalează extensia conexiunilor Foundry (previzualizare)
+# Install the Foundry connections extension (preview)
 azd extension install azure.ai.connections
 
-# Instalează extensia pentru ajustare fină
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Instalează extensia pentru modele personalizate
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Actualizează toate extensiile instalate
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
 ### Comenzi agent AI
 ```bash
-# Inițializează un proiect agent dintr-un manifest
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# Țintește un proiect Foundry specific
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# Specifică directorul sursă al agentului
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# Alege o țintă de găzduire
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# Testează un agent implementat (afișează latența + timpul până la primul octet)
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# Arată configurația endpoint-ului activ
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# Generează un set de date pentru evaluare, apoi optimizează agentul
-azd ai agent eval generate
-azd ai agent optimize
-
-# Descarcă sursa implementată a unui agent găzduit bazat pe cod
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# Șterge un agent găzduit și toate versiunile sale (--force încheie sesiunile active)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
+`--template`/`-t` înlocuiește ortografia învechită `--manifest`/`-m`; manifestele vechi necesită migrare. Nu există opțiune agent-init `--host containerapp` curentă. Harness gestionat, voce și previzualizări pe termen lung necesită opt-in independent pentru shell/mediu CI; vezi [referința AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+### Evaluări și optimizare AI
+```bash
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+Agenți beta.22 a înlocuit comenzile de evaluare vechi cu `azd ai eval` din `azure.ai.evaluations`. Configurarea evaluării noi folosește chei camelCase. Optimizarea `--config` tratează o cerere API de optimizare independentă, **nu** pe vechiul `eval.yaml` sau noul `azure.eval.yaml`; folosește `--eval`/`--eval-config` pentru reutilizarea evaluării. Vezi [configurare evaluare](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) și [migrarea optimizării](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
 ### Server MCP (Alpha)
 ```bash
-# Porniți serverul MCP pentru proiectul dvs.
+# Start the MCP server for your project
 azd mcp start
 
-# Gestionați consimțământul pentru unelte pentru operațiunile MCP
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
 ### Generare infrastructură
 ```bash
-# Generează fișiere IaC din definiția proiectului tău
+# Generate IaC files from your project definition
 azd infra generate
 
-# Sintezează infrastructura din azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
 
-## 🎯 Fluxuri rapide de lucru
+## 🎯 Fluxuri rapide
 
-### Flux de dezvoltare
+### Flux dezvoltare
 ```bash
-# Pornește proiect nou
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# Publică în dezvoltare
+# Deploy to development
 azd env new dev
 azd up
 
-# Fă modificări și republică
+# Make changes and redeploy
 azd deploy
 
-# Deschide panoul de monitorizare
+# Open monitoring dashboard
 azd monitor --live
 ```
 
 ### Flux multi-mediu
 ```bash
-# Configurați mediile
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Implementați în dev
+# Deploy to dev
 azd env select dev
 azd up
 
-# Testați și promovați în staging
+# Test and promote to staging
 azd env select staging
 azd up
 
-# Implementați în producție
+# Deploy to production
 azd env select production
 azd up
 ```
 
-### Flux de depanare
+### Flux depanare
 ```bash
-# Activează modul de depanare
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# Verifică starea implementării
-azd show
-
-# Validează configurația
+# Validate configuration
 azd config show
 
-# Deschide panoul de monitorizare pentru jurnale
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# Verifică starea resurselor
+# Check resource status
 azd show --output json
 ```
 
 ## 🔍 Comenzi de depanare
 
-### Informații debug
+### Informații depanare
 ```bash
-# Activează ieșirea de depanare
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# Dezactivează telemetria pentru o ieșire mai curată
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# Verifică configurația curentă
+# Check current configuration
 azd config show
 
-# Verifică starea autentificării
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
-### Debug șabloane
+### Depanare șablon
 ```bash
-# Listează șabloanele disponibile cu detalii
+# List available templates with details
 azd template list --output json
 
-# Afișează informații despre șablon
+# Show template information
 azd template show <template-name>
 
-# Efectuează validarea șablonului înainte de inițializare
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
-## 📁 Comenzi pentru fișiere și directoare
+## 📁 Comenzi fișiere și directoare
 
 ### Structura proiectului
 ```bash
-# Afișați structura directorului curent
+# Show current directory structure
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigați la rădăcina proiectului azd
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# Afișați directorul de configurare azd
-echo $AZD_CONFIG_DIR  # De obicei ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Formatare output
+## 🎨 Formatare ieșire
 
-### Output JSON
+### Ieșire JSON
 ```bash
-# Obțineți ieșire JSON pentru scripting
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# Parcurgeți cu jq
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Output tabel
+### Ieșire tabel
 ```bash
-# Formatează ca tabel
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# Vizualizează serviciile implementate
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
 ## 🔧 Combinații comune de comenzi
 
-### Script verificare stare
+### Script verificare sănătate
 ```bash
 #!/bin/bash
-# Verificare rapidă a stării de sănătate
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
@@ -527,49 +554,44 @@ azd monitor --logs
 ### Validare implementare
 ```bash
 #!/bin/bash
-# Validarea înainte de implementare
+# Pre-deployment validation
 azd show
-azd provision --preview  # Previzualizați modificările înainte de implementare
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
 ### Comparare medii
 ```bash
 #!/bin/bash
-# Compară medii
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
 ### Script curățare resurse
 ```bash
 #!/bin/bash
-# Curăță mediile vechi
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
 ## 📝 Variabile de mediu
 
-### Variabile comune de mediu
+### Variabile de mediu comune
 ```bash
-# Configurare Azure
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# Configurare AZD
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# Configurare aplicație
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -578,57 +600,56 @@ export LOG_LEVEL="info"
 
 ### Remedieri rapide
 ```bash
-# Resetează autentificarea
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# Forțează reîmprospătarea mediului
+# Force refresh environment
 azd env refresh
 
-# Redeplasează toate serviciile
+# Redeploy all services
 azd deploy
 
-# Verifică starea implementării
+# Check deployment status
 azd show --output json
 ```
 
-### Comenzi de recuperare
+### Comenzi recuperare
 ```bash
-# Recuperează dintr-o implementare eșuată - curăță și reimplementează
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# Reprovisionare doar infrastructura
+# Reprovision infrastructure only
 azd provision
 
-# Reimplementează doar aplicația
+# Redeploy application only
 azd deploy
 ```
 
-## 💡 Sfaturi profesioniste
+## 💡 Sfaturi profesionale
 
-### Aliasuri pentru flux mai rapid
+### Aliasuri pentru flux de lucru mai rapid
 ```bash
-# Adaugă în fișierul tău .bashrc sau .zshrc
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Scurtături funcții
+### Scurtături pentru funcții
 ```bash
-# Comutare rapidă a mediului
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# Implementare rapidă cu monitorizare
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# Starea mediului
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -641,42 +662,42 @@ azd-status() {
 
 ### Obținere ajutor
 ```bash
-# Ajutor general
+# General help
 azd --help
 azd help
 
-# Ajutor specific pentru comandă
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# Afișează versiunea și informații despre build
+# Show version and build info
 azd version
 azd version --output json
 ```
 
 ### Linkuri documentație
 ```bash
-# Deschide documentația în browser
+# Open documentation in browser
 azd docs
 
-# Arată documentația șablonului
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Sfat**: Marchează această fișă cu comenzi și folosește `Ctrl+F` pentru a găsi rapid comenzile de care ai nevoie!
+**Sfat**: Salvează această fișă și folosește `Ctrl+F` pentru a găsi rapid comenzile de care ai nevoie!
 
 ---
 
 **Navigare**
-- **Lecția precedentă**: [Verificări prealabile](../docs/pre-deployment/preflight-checks.md)
-- **Lecția următoare**: [Glosar](glossary.md)
+- **Lecția anterioară**: [Verificări pre zbor](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Următoarea lecție**: [Glosar](glossary.md)
 
 ---
 
-> **💡 Vrei ajutor pentru comenzile Azure în editorul tău?** Instalează [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) cu `npx skills add microsoft/github-copilot-for-azure` — 37 de aptitudini pentru AI, Foundry, implementare, diagnostic și altele.
+> **💡 Vrei ajutor pentru comenzile Azure în editorul tău?** Instalează [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) cu `npx skills add microsoft/github-copilot-for-azure` — 37 de skill-uri pentru AI, Foundry, implementare, diagnosticare și altele.
 
 ---
 

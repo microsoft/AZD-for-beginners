@@ -1,51 +1,54 @@
-# Capitolul 4: Infrastructura ca Cod & Implementare
+# Capitolul 4: Infrastructură ca și Cod & Implementare
 
-**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 1-1.5 ore | **⭐ Complexitate**: Intermediar
+**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 2-3 ore lectură; alocă timp suplimentar pentru exercițiile de implementare | **⭐ Complexitate**: Intermediar
 
 ---
 
 ## Prezentare generală
 
-Acest capitol acoperă tiparele Infrastructure as Code (IaC) cu șabloane Bicep, aprovizionarea resurselor și strategiile de implementare folosind Azure Developer CLI.
+Acest capitol acoperă modele de Infrastructură ca și Cod (IaC) cu șabloane Bicep, aprovizionarea resurselor și strategii de implementare folosind Azure Developer CLI.
 
-> Validat cu `azd 1.27.1` în iulie 2026.
+> Țintă pentru revizuirea comenzilor și configurațiilor: `azd 1.37.2` (noiembrie 2026). Producția live de aprovizionare Azure nu a fost realizată în timpul revizuirii.
 
 ## Obiective de învățare
 
-Prin parcurgerea acestui capitol, vei:
+Prin completarea acestui capitol, vei:
 - Înțelege structura și sintaxa șabloanelor Bicep
 - Aproviziona resurse Azure cu `azd provision`
 - Implementa aplicații cu `azd deploy`
-- Implementa strategii de implementare blue-green și rolling
+- Aplica strategii de implementare blue-green și rolling
 
 ---
 
 ## 📚 Lecții
 
 | # | Lecție | Descriere | Durată |
-|---|--------|-------------|--------|
-| 1 | [Aprovizionarea resurselor](provisioning.md) | Administrarea resurselor Azure cu AZD | 45 min |
+|---|--------|-------------|------|
+| 1 | [Aprovizionarea resurselor](provisioning.md) | Gestionarea resurselor Azure cu AZD | 45 min |
 | 2 | [Ghid de implementare](deployment-guide.md) | Strategii de implementare a aplicațiilor | 45 min |
-| 3 | [Crearea propriului șablon](custom-templates.md) | Construirea și publicarea șabloanelor azd reutilizabile | 30 min |
+| 3 | [Crearea propriului șablon](custom-templates.md) | Construiește și publică șabloane azd reutilizabile | 30 min |
 
 ---
 
 ## 🚀 Început rapid
 
 ```bash
-# Inițializează din șablon
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Previzualizează ce va fi creat
+# Preview what will be created
 azd provision --preview
 
-# Provoacă doar infrastructura
+# Provision infrastructure only
 azd provision
 
-# Deploiază doar codul
+# Deploy code only
 azd deploy
 
-# Sau ambele împreună
+# Or both together
 azd up
 ```
 
@@ -71,7 +74,7 @@ my-project/
 ## 🔧 Comenzi esențiale
 
 | Comandă | Descriere |
-|---------|------------|
+|---------|-------------|
 | `azd init` | Inițializează proiectul |
 | `azd provision` | Creează resurse Azure |
 | `azd deploy` | Implementează codul aplicației |
@@ -83,7 +86,7 @@ my-project/
 ## 🔗 Navigare
 
 | Direcție | Capitol |
-|----------|---------|
+|-----------|---------|
 | **Anterior** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
 | **Următor** | [Capitolul 5: Soluții Multi-Agent](../chapter-05-multi-agent/README.md) |
 
@@ -91,9 +94,9 @@ my-project/
 
 ## 📖 Resurse conexe
 
-- [Verificări pre-implementare](../chapter-06-pre-deployment/README.md)
-- [Exemple Container App](../../examples/container-app/README.md)
-- [Exemplu aplicație bază de date](../../examples/database-app/README.md)
+- [Verificări înainte de implementare](../chapter-06-pre-deployment/README.md)
+- [Exemple de aplicații containerizate](../../examples/container-app/README.md)
+- [Exemplu de aplicație bază de date](../../examples/database-app/README.md)
 
 ---
 

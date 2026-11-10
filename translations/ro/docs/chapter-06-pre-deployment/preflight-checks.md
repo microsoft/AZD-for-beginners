@@ -1,73 +1,75 @@
-# Verificări pre-flight pentru implementările AZD
+# Verificări Preliminare pentru Implementările AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Capitolul 6 - Validare și planificare înainte de implementare
-- **⬅️ Previous**: [SKU Selection](sku-selection.md)
-- **➡️ Next Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Related**: [Chapter 4: Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+**Navigare în Capitol:**
+- **📚 Pagina Principală a Cursului**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitolul Curent**: Capitolul 6 - Validare și Planificare Pre-Implementare
+- **⬅️ Capitolul Anterior**: [Selecția SKU](sku-selection.md)
+- **➡️ Capitolul Următor**: [Capitolul 7: Depanare](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Legat**: [Capitolul 4: Ghid de Implementare](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introduction
+## Introducere
 
-Acest ghid cuprinzător oferă scripturi și proceduri de validare pre-implementare pentru a asigura succesul implementărilor cu Azure Developer CLI înainte de a începe. Învață să implementezi verificări automate pentru autentificare, disponibilitatea resurselor, cote, conformitate de securitate și cerințe de performanță pentru a preveni eșecurile la implementare și a optimiza ratele de succes ale implementărilor.
+Acest ghid cuprinzător oferă scripturi și proceduri de validare pre-implementare pentru a asigura implementări reușite cu Azure Developer CLI înainte de a începe. Învață să implementezi verificări automate pentru autentificare, disponibilitatea resurselor, cote, conformitatea de securitate și cerințele de performanță pentru a preveni eșecurile implementării și a optimiza ratele de succes ale implementărilor.
 
-## Learning Goals
+## Obiective de Învățare
 
-Prin finalizarea acestui ghid, vei:
+La finalizarea acestui ghid, vei:
 - Stăpâni tehnici și scripturi automate de validare pre-implementare
-- Înțelege strategii complete de verificare pentru autentificare, permisiuni și cote
+- Înțelege strategii cuprinzătoare de verificare pentru autentificare, permisiuni și cote
 - Implementa proceduri de validare a disponibilității și capacității resurselor
-- Configura verificări de securitate și conformitate pentru politicile organizației
+- Configura verificări de securitate și conformitate pentru politicile organizaționale
 - Proiecta fluxuri de lucru pentru estimarea costurilor și validarea bugetului
-- Crea automatizări personalizate de verificare pre-flight pentru pipeline-urile CI/CD
+- Crea automatizări personalizate pentru verificări pre-zbor în pipeline-urile CI/CD
 
-## Learning Outcomes
+## Rezultate așteptate
 
 La finalizare, vei putea:
-- Crea și executa scripturi cuprinzătoare de validare pre-flight
+- Crea și executa scripturi cuprinzătoare de validare pre-zbor
 - Proiecta fluxuri automate de verificare pentru diferite scenarii de implementare
 - Implementa proceduri și politici de validare specifice mediului
-- Configura monitorizare proactivă și alertare pentru starea de pregătire a implementării
-- Depana problemele pre-implementare și să implementezi acțiuni corective
-- Integra verificările pre-flight în pipeline-urile DevOps și fluxurile de automatizare
+- Configura monitorizare proactivă și alertare pentru pregătirea implementării
+- Depana problemele de pre-implementare și implementa acțiuni corective
+- Integra verificările pre-zbor în pipeline-urile DevOps și fluxurile de automatizare
 
-## Table of Contents
+## Cuprins
 
-- [Overview](#overview)
-- [Automated Pre-flight Script](#automated-pre-flight-script)
-- [Manual Validation Checklist](#codeblock1)
-- [Environment Validation](#✅-backup-recovery)
-- [Resource Validation](#production-environment-validation)
-- [Security & Compliance Checks](#security--compliance-checks)
-- [Performance & Capacity Planning](#performance--capacity-planning)
-- [Troubleshooting Common Issues](#troubleshooting-common-issues)
+- [Prezentare Generală](#overview)
+- [Script Automat Pre-zbor](#automated-pre-flight-script)
+- [Listă Manuală de Validare](#manual-validation-checklist)
+- [Validarea Mediului](#environment-validation)
+- [Validarea Resurselor](#resource-validation)
+- [Verificări de Securitate și Conformitate](#security--compliance-checks)
+- [Planificarea Performanței și Capacității](capacity-planning.md)
+- [Depanarea Problemelor Comune](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-## Overview
+## Prezentare Generală
 
-Verificările pre-flight sunt validări esențiale efectuate înainte de implementare pentru a asigura:
+Verificările pre-zbor sunt validări esențiale efectuate înainte de implementare pentru a asigura:
 
 - **Disponibilitatea resurselor** și cote în regiunile țintă
-- **Autentificarea și permisiunile** sunt configurate corect
-- **Valabilitatea șabloanelor** și corectitudinea parametrilor
+- **Autentificarea și permisiunile** configurate corect
+- **Validitatea șablonului** și corectitudinea parametrilor
 - **Conectivitatea rețelei** și dependențele
 - **Conformitatea de securitate** cu politicile organizației
-- **Estimarea costurilor** în limitele bugetului
+- **Estimarea costurilor** în limitele bugetare
 
-### When to Run Pre-flight Checks
+### Când să Rulezi Verificările Pre-zbor
 
-- **Before first deployment** to a new environment
-- **After significant template changes**
-- **Before production deployments**
-- **When changing Azure regions**
-- **As part of CI/CD pipelines**
+- **Înainte de prima implementare** într-un mediu nou
+- **După modificări semnificative ale șabloanelor**
+- **Înainte de implementările în producție**
+- **La schimbarea regiunilor Azure**
+- **Ca parte a pipeline-urilor CI/CD**
 
 ---
 
-## Automated Pre-flight Script
+## Script Automat Pre-zbor
 
-### PowerShell Pre-flight Checker
+> **Domeniu și precondiții:** Acestea sunt scripturi de pornire de salvat în propriul tău proiect, nu fișiere locale furnizate de acest capitol. Versiunea PowerShell necesită PowerShell **7.3+** (propagarea erorii la comenzi native) și modulul `powershell-yaml` pentru `ConvertFrom-Yaml`. Versiunea Bash necesită Bash, `jq`, Python 3.10+, și PyYAML. Ambele necesită Azure CLI, azd, și un proiect Bicep funcțional. Sunt diagnoze, nu dovezi ale pregătirii pentru implementare, capacității sau conformității. Inspectează cârligele șabloanelor înainte de `azd provision --preview`; cârligele pot executa comenzi arbitrare ale proiectului.
+
+### Verificator PowerShell Pre-zbor
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +102,14 @@ param(
     [switch]$Detailed
 )
 
-# Colorare pentru ieșire
+# Fail native commands into catch blocks instead of reporting false successes.
+$ErrorActionPreference = 'Stop'
+if ($PSVersionTable.PSVersion -lt [version]'7.3') {
+    throw 'PowerShell 7.3+ is required for this script.'
+}
+$PSNativeCommandUseErrorActionPreference = $true
+
+# Color coding for output
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +137,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # Verifică instalarea AZD
+    # Check AZD installation
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +147,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Verifică instalarea Azure CLI
+    # Check Azure CLI installation
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +157,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Verifică versiunea PowerShell
+    # Check PowerShell version
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,23 +172,23 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # Verifică autentificarea AZD
+        # Check AZD authentication
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
-        if ($azdAuth.status -eq "Logged-in") {
-            Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
+        if ($azdAuth.status -eq "success") {
+            Write-Status "AZD authentication" "Success" "Token available; expires $($azdAuth.expiresOn)"
         }
         else {
             Write-Status "AZD authentication" "Error" "Run 'azd auth login'"
             return $false
         }
         
-        # Verifică autentificarea Azure CLI
+        # Check Azure CLI authentication
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Validează accesul la abonament
+        # Validate subscription access
         $subscriptionId = $azAccount.id
-        $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
+        $subscription = az account show --subscription $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
         
         return $true
@@ -194,39 +203,29 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Obține atribuțiile de rol ale utilizatorului curent
+        # Get current user's role assignments
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
             $_.roleDefinitionName -eq "Contributor" -or 
-            $_.roleDefinitionName -eq "Owner" -or
-            $_.roleDefinitionName -eq "User Access Administrator"
+            $_.roleDefinitionName -eq "Owner"
         }
         
         if ($hasContributor) {
-            Write-Status "Required permissions" "Success" "Contributor or higher role found"
+            Write-Status "Role assignment inventory" "Info" "Contributor/Owner found; verify effective scope, policy and any role-assignment permissions separately"
         }
         else {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Testează crearea grupului de resurse (dacă este specificat)
+        # Test resource group creation (if specified)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Testează posibilitatea de a crea un grup de resurse
-                try {
-                    az group create --name "preflight-test-rg" --location $Location --output none
-                    az group delete --name "preflight-test-rg" --yes --output none
-                    Write-Status "Resource group creation" "Success" "Can create resource groups"
-                }
-                catch {
-                    Write-Status "Resource group creation" "Error" "Cannot create resource groups"
-                    return $false
-                }
+                Write-Status "Resource group creation" "Warning" "Group does not exist. Review subscription-scope permissions; this diagnostic does not create/delete test groups."
             }
         }
         
@@ -242,25 +241,28 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Verifică cotele de calcul
+        # Check compute quotas
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # Verifică cotele specifice
+        # Check specific quotas
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
-        if ($coreQuota) {
+        if ($coreQuota -and $coreQuota.limit -gt 0) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
             if ($usagePercent -lt 80) {
                 Write-Status "Compute cores quota" "Success" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
+            } else {
+                Write-Status "Compute cores quota" "Warning" "Missing or zero quota; verify service requirements"
             }
             else {
                 Write-Status "Compute cores quota" "Warning" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
             }
         }
         
-        # Verifică limitele App Service
+        # Check App Service limits
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
-            if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
+            $displayLocation = az account list-locations --query "[?name=='$Location'].displayName | [0]" -o tsv
+            if ($appServiceUsage | Where-Object { $_.name -eq $Location -or $_.name -eq $displayLocation }) {
                 Write-Status "App Service availability" "Success" "Available in $Location"
             }
             else {
@@ -271,28 +273,27 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Verifică limitele contului de stocare
-        $storageAccounts = az storage account list --output json | ConvertFrom-Json
-        $accountCount = ($storageAccounts | Measure-Object).Count
-        if ($accountCount -lt 200) {
-            Write-Status "Storage account limit" "Success" "$accountCount/250 storage accounts"
+        # Check storage account limits
+        $storageUsage = @(az storage account show-usage --location $Location --output json | ConvertFrom-Json)[0]
+        if ($storageUsage -and $storageUsage.limit -gt 0 -and $storageUsage.currentValue -lt $storageUsage.limit) {
+            Write-Status "Storage account quota" "Info" "$($storageUsage.currentValue)/$($storageUsage.limit) in $Location"
         }
         else {
-            Write-Status "Storage account limit" "Warning" "$accountCount/250 storage accounts"
+            Write-Status "Storage account quota" "Warning" "No headroom or missing quota data"
         }
         
         return $true
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # Neblocant
+        return $true # Non-blocking
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Testează endpoint-urile Azure
+    # Test Azure endpoints
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -306,13 +307,19 @@ function Test-NetworkConnectivity {
             Write-Status "Connectivity to $endpoint" "Success" "Status: $($response.StatusCode)"
         }
         catch {
-            Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+            # A 401/403/404 response may still prove HTTP reachability.
+            if ($_.Exception.Response) {
+                Write-Status "Connectivity to $endpoint" "Info" "HTTP response received; this is not an authorization test"
+            } else {
+                Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+                return $false
+            }
         }
     }
     
-    # Testează rezolvarea DNS
+    # Test DNS resolution
     try {
-        $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
+        $dnsResult = [System.Net.Dns]::GetHostAddresses("management.azure.com")
         Write-Status "DNS resolution" "Success" "Resolved successfully"
     }
     catch {
@@ -326,18 +333,21 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Verifică dacă azure.yaml există
+    # Check if azure.yaml exists
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # Parsează azure.yaml
+        # Parse azure.yaml
         try {
+            if (-not (Get-Command ConvertFrom-Yaml -ErrorAction SilentlyContinue)) {
+                throw 'ConvertFrom-Yaml requires the powershell-yaml module.'
+            }
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Validează serviciile
+            # Validate services
             if ($azureYaml.services) {
-                $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
+                $serviceCount = $azureYaml.services.Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
             }
             else {
@@ -345,7 +355,7 @@ function Test-TemplateValidation {
             }
         }
         catch {
-            Write-Status "azure.yaml parsing" "Error" "Invalid YAML format"
+            Write-Status "azure.yaml parsing" "Error" $_.Exception.Message
             return $false
         }
     }
@@ -354,13 +364,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Verifică fișierele de infrastructură
+    # Check for infrastructure files
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Validează main.bicep dacă există
+            # Validate main.bicep if it exists
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,12 +391,12 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 NOU: Testează previzualizarea infrastructurii (execuție simulată sigură)
+    # Preview ARM changes only after reviewing the project's hooks.
     try {
-        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        Write-Status "Infrastructure preview test" "Info" "Previewing proposed changes (not a capacity or deployment guarantee)..."
         $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
-            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+            Write-Status "Infrastructure preview" "Success" "Preview completed; review changes and remaining diagnostics"
         }
         else {
             Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
@@ -403,7 +413,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # Verifică dacă locația este validă
+        # Check if location is valid
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,13 +425,13 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Verifică disponibilitatea serviciului în regiune
+        # Check service availability in region
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
             try {
                 $providers = az provider show --namespace $service --output json | ConvertFrom-Json
-                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $Location }
+                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $validLocation.displayName }
                 
                 if ($resourceTypes) {
                     Write-Status "$service availability" "Success" "Available in $Location"
@@ -446,11 +456,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Estimare de cost de bază (ar necesita Azure Pricing API pentru estimări exacte)
+    # Basic cost estimation (would need Azure Pricing API for accurate estimates)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Verifică dacă există un buget
+    # Check if budget exists
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +480,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Verifică practicile comune de securitate
+    # Text-search heuristics only: presence of keywords is not compliance proof.
     try {
-        # Verifică dacă Key Vault este configurat
+        # Check if Key Vault is configured
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +490,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Verifică utilizarea identității gestionate
+        # Check for managed identity usage
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +498,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Verifică impunerea HTTPS
+        # Check for HTTPS enforcement
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +514,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# Execuție principală
+# Main execution
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +526,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # Rulează toate verificările
+    # Run all checks
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -527,7 +537,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # Rezumat
+    # Summary
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -547,7 +557,7 @@ function Invoke-PreflightCheck {
     Write-Host ""
     if ($allPassed) {
         Write-Host "${Green}✓ All pre-flight checks passed ($passedCount/$totalCount)${Reset}"
-        Write-Host "${Green}✓ Ready for deployment!${Reset}"
+        Write-Host "${Green}✓ Implemented checks passed; review warnings and untested requirements.${Reset}"
         exit 0
     }
     else {
@@ -557,26 +567,27 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Rulează verificarea prealabilă
+# Run the pre-flight check
+azd env select $EnvironmentName
 Invoke-PreflightCheck
 ```
 
-### Bash Pre-flight Checker
+### Verificator Bash Pre-zbor
 
 ```bash
 #!/bin/bash
-# Versiune Bash a verificărilor preliminare pentru sisteme Unix/Linux
+# Bash version of pre-flight checks for Unix/Linux systems
 
 set -euo pipefail
 
-# Coduri de culoare
+# Color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # Fără culoare
+NC='\033[0m' # No Color
 
-# Variabile globale
+# Global variables
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -606,7 +617,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # Verifică instalarea AZD
+    # Check AZD installation
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +626,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Verifică instalarea Azure CLI
+    # Check Azure CLI installation
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,12 +635,16 @@ check_prerequisites() {
         return 1
     fi
     
-    # Verifică instalarea jq
+    # Check jq installation
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
-        print_status "jq not found" "warning" "Install jq for better JSON parsing"
+        print_status "jq not found" "error" "jq is required"
+        return 1
     fi
+    python3 -c "import yaml" >/dev/null 2>&1 || {
+        print_status "Python/PyYAML not found" "error" "Python 3 and PyYAML are required"; return 1;
+    }
     
     return 0
 }
@@ -637,16 +652,16 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Verifică autentificarea AZD
-    if azd auth login --check-status >/dev/null 2>&1; then
-        local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
-        print_status "AZD authentication" "success" "User: $principal_name"
+    # Check AZD authentication
+    # --check-status returns exit code 0 even when unauthenticated; inspect JSON.
+    if azd auth login --check-status --output json | jq -e '.status == "success"' >/dev/null; then
+        print_status "AZD authentication" "success" "Token available"
     else
         print_status "AZD authentication" "error" "Run 'azd auth login'"
         return 1
     fi
     
-    # Verifică autentificarea Azure CLI
+    # Check Azure CLI authentication
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,11 +676,11 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # Verifică azure.yaml
+    # Check azure.yaml
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # Validare YAML de bază
+        # Basic YAML validation
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -677,13 +692,13 @@ check_template_validation() {
         return 1
     fi
     
-    # Verifică fișierele de infrastructură
+    # Check infrastructure files
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # Validează main.bicep dacă există
+            # Validate main.bicep if exists
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +721,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Verifică dacă locația este validă
+    # Check if location is valid
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,11 +729,13 @@ check_regional_availability() {
         return 1
     fi
     
-    # Verifică disponibilitatea serviciului
+    # Check service availability
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
+    local display_location
+    display_location=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
     for service in "${services[@]}"; do
-        if az provider show --namespace "$service" --query "resourceTypes[?locations[?contains(@, '$LOCATION')]]" --output tsv | grep -q .; then
+        if az provider show --namespace "$service" --query "resourceTypes[?contains(locations, '$display_location')]" --output tsv | grep -q .; then
             print_status "$service availability" "success" "Available in $LOCATION"
         else
             print_status "$service availability" "warning" "May not be available in $LOCATION"
@@ -729,7 +746,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Analizează argumentele liniei de comandă
+    # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +772,7 @@ main() {
         esac
     done
     
-    # Validează parametrii necesari
+    # Validate required parameters
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,20 +785,22 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Rulează verificările
+    # Run checks
     local all_passed=true
     
     check_prerequisites || all_passed=false
+    if ! $all_passed; then exit 1; fi
+    azd env select "$ENVIRONMENT_NAME" || exit 1
     check_authentication || all_passed=false
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # Rezumat
+    # Summary
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
         echo -e "${GREEN}✓ All pre-flight checks passed${NC}"
-        echo -e "${GREEN}✓ Ready for deployment!${NC}"
+        echo -e "${GREEN}✓ Implemented checks passed; review warnings and untested requirements.${NC}"
         exit 0
     else
         echo -e "${RED}✗ Some pre-flight checks failed${NC}"
@@ -790,100 +809,103 @@ main() {
     fi
 }
 
-# Rulează funcția principală
+# Run main function
 main "$@"
 ```
 
 ---
 
-## Manual Validation Checklist
+## Listă Manuală de Validare
 
-### Pre-Deployment Checklist
+### Listă de Verificare Pre-Implementare
 
-Print this checklist and verify each item before deployment:
+Tipărește această listă și verifică fiecare element înainte de implementare:
 
-#### ✅ Environment Setup
-- [ ] AZD CLI installed and updated to latest version
-- [ ] Azure CLI installed and authenticated
-- [ ] Correct Azure subscription selected
-- [ ] Environment name is unique and follows naming conventions
-- [ ] Target resource group identified or can be created
+#### ✅ Configurarea Mediului
+- [ ] AZD CLI instalat și actualizat la cea mai recentă versiune
+- [ ] Azure CLI instalat și autentificat
+- [ ] Subscriptia Azure corectă selectată
+- [ ] Numele mediului este unic și respectă convențiile de denumire
+- [ ] Grupul țintă de resurse identificat sau poate fi creat
 
-#### ✅ Authentication & Permissions
-- [ ] Successfully authenticated with `azd auth login`
-- [ ] User has Contributor role on target subscription/resource group
-- [ ] Service principal configured for CI/CD (if applicable)
-- [ ] No expired certificates or credentials
+#### ✅ Autentificare & Permisiuni
+- [ ] Autentificare reușită cu `azd auth login`
+- [ ] Utilizatorul are rol de Contributor pe subscripția/grupul de resurse țintă
+- [ ] Dacă șabloanele creează atribuiri de rol, identitatea care face implementarea are și permisiuni de atribuire a rolurilor (doar Contributor nu acordă acestea)
+- [ ] Principal serviciu configurat pentru CI/CD (dacă este cazul)
+- [ ] Nu există certificate sau credențiale expirate
 
-#### ✅ Template Validation
-- [ ] `azure.yaml` exists and is valid YAML
-- [ ] All services defined in azure.yaml have corresponding source code
-- [ ] Bicep templates in `infra/` directory are present
-- [ ] `main.bicep` compiles without errors (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastructure preview runs successfully (`azd provision --preview`)
-- [ ] All required parameters have default values or will be provided
-- [ ] No hardcoded secrets in templates
+#### ✅ Validarea Șabloanelor
+- [ ] `azure.yaml` există și este un YAML valid
+- [ ] Toate serviciile definite în azure.yaml au cod sursă corespunzător
+- [ ] Șabloanele Bicep din directorul `infra/` sunt prezente
+- [ ] `main.bicep` compilează fără erori (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Previzualizarea infrastructurii rulează cu succes (`azd provision --preview`)
+- [ ] Toți parametrii necesari au valori implicite sau vor fi furnizați
+- [ ] Nu există secrete hardcodate în șabloane
 
-#### ✅ Resource Planning
-- [ ] Target Azure region selected and validated
-- [ ] Required Azure services available in target region
-- [ ] Sufficient quotas available for planned resources
-- [ ] Resource naming conflicts checked
-- [ ] Dependencies between resources understood
+#### ✅ Planificarea Resurselor
+- [ ] Regiunea Azure țintă selectată și validată
+- [ ] Servicii Azure necesare disponibile în regiunea țintă
+- [ ] Cote suficiente disponibile pentru resursele planificate
+- [ ] Conflictele de denumire a resurselor verificate
+- [ ] Dependențele între resurse înțelese
 
-#### ✅ Network & Security
-- [ ] Network connectivity to Azure endpoints verified
-- [ ] Firewall/proxy settings configured if needed
-- [ ] Key Vault configured for secrets management
-- [ ] Managed identities used where possible
-- [ ] HTTPS enforcement enabled for web applications
+#### ✅ Rețea & Securitate
+- [ ] Conectivitatea rețelei la endpoint-urile Azure verificată
+- [ ] Setările firewall/proxy configurate dacă este necesar
+- [ ] Key Vault configurat pentru gestionarea secretelor
+- [ ] Identități administrate utilizate acolo unde este posibil
+- [ ] Aplicarea HTTPS activată pentru aplicațiile web
 
-#### ✅ Cost Management
-- [ ] Cost estimates calculated using Azure Pricing Calculator
-- [ ] Budget alerts configured if required
-- [ ] Appropriate SKUs selected for environment type
-- [ ] Reserved capacity considered for production workloads
+#### ✅ Managementul Costurilor
+- [ ] Estimările costurilor calculate folosind Azure Pricing Calculator
+- [ ] Alertele de buget configurate dacă este necesar
+- [ ] SKU-urile potrivite selectate pentru tipul mediului
+- [ ] Capacitatea rezervată luată în considerare pentru sarcinile de producție
 
-#### ✅ Monitoring & Observability
-- [ ] Application Insights configured in templates
-- [ ] Log Analytics workspace planned
-- [ ] Alert rules defined for critical metrics
-- [ ] Health check endpoints implemented in applications
+#### ✅ Monitorizare & Observabilitate
+- [ ] Application Insights configurat în șabloane
+- [ ] Workspace Log Analytics planificat
+- [ ] Reguli de alertă definite pentru metrici critici
+- [ ] Endpoint-uri de verificare a sănătății implementate în aplicații
 
-#### ✅ Backup & Recovery
-- [ ] Backup strategy defined for data resources
-- [ ] Recovery time objectives (RTO) documented
-- [ ] Recovery point objectives (RPO) documented
-- [ ] Disaster recovery plan in place for production
+#### ✅ Backup & Recuperare
+- [ ] Strategia de backup definită pentru resursele de date
+- [ ] Obiectivele de timp de recuperare (RTO) documentate
+- [ ] Obiectivele de punct de recuperare (RPO) documentate
+- [ ] Plan de recuperare în caz de dezastre existent pentru producție
 
 ---
 
-## Environment Validation
+## Validarea Mediului
 
-### Development Environment Validation
+Următoarele verificări `grep` sunt numai reamintiri ilustrative. Un cuvânt corespondent nu dovedește că o caracteristică este configurată pentru resursa corectă, iar lipsa unui cuvânt nu dovedește absența sa (modulele/valorile implicite pot să o furnizeze). Nu utiliza aceste verificări ca porți de conformitate în producție.
+
+### Validarea Mediului de Dezvoltare
 
 ```bash
 #!/bin/bash
-# Validări specifice mediului de dezvoltare
+# Development environment specific validations
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Verifică configurațiile potrivite pentru dezvoltare
+    # Check for development-friendly configurations
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Verifică configurațiile de oprire automată
+    # Check for auto-shutdown configurations
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Validează configurațiile bazei de date pentru dezvoltare
+    # Validate development database configurations
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,37 +914,37 @@ validate_dev_environment() {
 }
 ```
 
-### Production Environment Validation
+### Validarea Mediului de Producție
 
 ```bash
 #!/bin/bash
-# Validări specifice mediului de producție
+# Production environment specific validations
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Verifică configurațiile de înaltă disponibilitate
+    # Check for high availability configurations
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Verifică configurațiile de backup
+    # Check for backup configurations
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Validează configurația de monitorizare
+    # Validate monitoring setup
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Verifică configurațiile de securitate
+    # Check for security configurations
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -933,9 +955,9 @@ validate_prod_environment() {
 
 ---
 
-## Resource Validation
+## Validarea Resurselor
 
-### Quota Validation Script
+### Script pentru Validarea Cotelor
 
 ```python
 #!/usr/bin/env python3
@@ -948,17 +970,17 @@ import subprocess
 import sys
 from typing import Dict, List, Tuple
 
-def run_command(command: List[str]) -> Dict:
+def run_command(command: List[str]) -> dict | list | None:
     """Run Azure CLI command and return JSON result"""
     try:
         result = subprocess.run(command, capture_output=True, text=True, check=True)
         return json.loads(result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error running command {' '.join(command)}: {e}")
-        return {}
+        return None
     except json.JSONDecodeError as e:
         print(f"Error parsing JSON: {e}")
-        return {}
+        return None
 
 def check_compute_quotas(location: str) -> bool:
     """Check compute quotas in specified location"""
@@ -976,7 +998,10 @@ def check_compute_quotas(location: str) -> bool:
         if quota_item['name']['value'] in critical_quotas:
             current = quota_item['currentValue']
             limit = quota_item['limit']
-            usage_percent = (current / limit) * 100 if limit > 0 else 0
+            if limit <= 0:
+                print(f"❌ No quota for {quota_item['name']['value']}")
+                return False
+            usage_percent = (current / limit) * 100
             
             status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
             print(f"{status} {quota_item['name']['localizedValue']}: {current}/{limit} ({usage_percent:.1f}%)")
@@ -990,15 +1015,17 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Obține conturile de stocare din abonament
-    accounts = run_command(['az', 'storage', 'account', 'list'])
+    # Retrieve regional quota rather than assuming a subscription-wide constant.
+    usages = run_command(['az', 'storage', 'account', 'show-usage', '--location', location])
     
-    if accounts is None:
+    if not usages:
         print("❌ Could not retrieve storage account information")
         return False
     
-    account_count = len(accounts)
-    max_accounts = 250  # Limită implicită pentru Azure
+    account_count = usages['currentValue']
+    max_accounts = usages['limit']
+    if max_accounts <= 0:
+        return False
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,18 +1038,14 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # Verifică rețelele virtuale
-    vnets = run_command(['az', 'network', 'vnet', 'list'])
-    if vnets is not None:
-        vnet_count = len(vnets)
-        print(f"✅ Virtual Networks: {vnet_count}/1000")
-    
-    # Verifică adresele IP publice
-    public_ips = run_command(['az', 'network', 'public-ip', 'list'])
-    if public_ips is not None:
-        ip_count = len(public_ips)
-        print(f"✅ Public IP Addresses: {ip_count}/1000")
-    
+    usages = run_command(['az', 'network', 'list-usages', '--location', location])
+    if not usages:
+        return False
+    for item in usages:
+        current, limit = item['currentValue'], item['limit']
+        print(f"{item['name']['value']}: {current}/{limit}")
+        if limit <= 0 or current >= limit:
+            return False
     return True
 
 def main():
@@ -1034,19 +1057,20 @@ def main():
     
     print("🔍 Azure Quota and Limits Validation")
     print(f"📍 Location: {location}")
-    print(f"⏰ Time: {subprocess.run(['date'], capture_output=True, text=True).stdout.strip()}")
+    from datetime import datetime, timezone
+    print(f"⏰ Time: {datetime.now(timezone.utc).isoformat()}")
     
     all_passed = True
     
-    # Rulează verificările
+    # Run checks
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # Rezumat
+    # Summary
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
-        print("✅ All quota checks passed - sufficient capacity available")
+        print("✅ Implemented quota thresholds passed; not a capacity reservation")
         sys.exit(0)
     else:
         print("❌ Some quota limits are near capacity - consider requesting increases")
@@ -1058,20 +1082,20 @@ if __name__ == "__main__":
 
 ---
 
-## Security & Compliance Checks
+## Verificări de Securitate și Conformitate
 
-### Security Validation Script
+### Script pentru Validarea Securității
 
 ```bash
 #!/bin/bash
-# Validare a securității și conformității pentru implementările AZD
+# Security and compliance validation for AZD deployments
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Verificare pentru utilizarea Key Vault
+    # Check for Key Vault usage
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificare pentru utilizarea identității gestionate
+    # Check for managed identity usage
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificare pentru forțarea HTTPS
+    # Check for HTTPS enforcement
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1119,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificare pentru versiunea minimă TLS
+    # Check for minimum TLS version
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1127,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificare pentru restricțiile de acces public
+    # Check for public access restrictions
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1135,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificare pentru grupuri de securitate a rețelei
+    # Check for network security groups
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1148,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Verificare pentru criptarea datelor
+    # Check for data encryption
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Verificare pentru jurnalizarea auditului
+    # Check for audit logging
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Verificare pentru politicile de backup și retenție
+    # Check for backup and retention policies
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1170,7 @@ check_compliance_requirements() {
     fi
 }
 
-# Executare principală
+# Main execution
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1157,13 +1181,13 @@ main() {
         exit 1
     fi
     
-    local security_issues
-    security_issues=$(check_security_practices)
+    local security_issues=0
+    check_security_practices || security_issues=$?
     check_compliance_requirements
     
     echo -e "\n=== Security Check Summary ==="
     if [[ $security_issues -eq 0 ]]; then
-        echo "✅ All security checks passed"
+        echo "✅ Text-search reminders passed; this is not a security/compliance assessment"
         exit 0
     else
         echo "⚠️  $security_issues security recommendations found"
@@ -1177,9 +1201,9 @@ main "$@"
 
 ---
 
-## Integration with CI/CD
+## Integrarea cu CI/CD
 
-### GitHub Actions Integration
+### Integrare cu GitHub Actions
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1203,20 +1227,36 @@ on:
 
 jobs:
   preflight:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
     - name: Install AZD
       uses: Azure/setup-azd@v0.1.0
+      with:
+        version: 1.37.2
     
-    - name: Install Azure CLI
-      uses: azure/setup-azure@v3
+    - name: Verify prerequisites
+      run: |
+        az version
+        jq --version
+        python3 -c "import yaml"
     
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+    - name: AZD Login
+      run: |
+        azd auth login --client-id "${{ vars.AZURE_CLIENT_ID }}" \
+          --tenant-id "${{ vars.AZURE_TENANT_ID }}" \
+          --federated-credential-provider github
     
     - name: Run Pre-flight Checks
       run: |
@@ -1230,15 +1270,11 @@ jobs:
         chmod +x ./scripts/security-check.sh
         ./scripts/security-check.sh
     
-    - name: Upload Results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: preflight-results
-        path: preflight-results.json
 ```
 
-### Azure DevOps Integration
+Configurează acreditările federate pentru acest flux de lucru și creează/restaurează mediul azd selectat înainte de a rula scripturile salvate. Aceste exemple scriu doar ieșire pe consolă; nu este produs niciun fișier `preflight-results.json` sau JUnit.
+
+### Integrare cu Azure DevOps
 
 ```yaml
 trigger: none
@@ -1272,76 +1308,80 @@ steps:
       curl -fsSL https://aka.ms/install-azd.sh | bash
       export PATH=$PATH:~/.azd/bin
 
-- task: Bash@3
+- task: AzureCLI@2
   displayName: 'Run Pre-flight Checks'
   inputs:
-    targetType: filePath
-    filePath: './scripts/preflight-check.sh'
-    arguments: '--environment-name ${{ parameters.environment }} --location ${{ parameters.location }}'
-
-- task: PublishTestResults@2
-  displayName: 'Publish Pre-flight Results'
-  condition: always()
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: 'preflight-results.xml'
-    testRunTitle: 'Pre-flight Validation'
+    azureSubscription: $(serviceConnection)
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      set -e
+      # Requires a workload-identity-federated service connection.
+      # AzureCLI@2 supplies AZURESUBSCRIPTION_* for the azd provider.
+      azd auth login --federated-credential-provider azure-pipelines
+      bash ./scripts/preflight-check.sh \
+        --environment-name "${{ parameters.environment }}" \
+        --location "${{ parameters.location }}"
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 ```
 
----
-
-## Best Practices Summary
-
-### ✅ Pre-flight Check Best Practices
-
-1. **Automate Where Possible**
-   - Integrate checks into CI/CD pipelines
-   - Use scripts for repeatable validations
-   - Store results for audit trails
-
-2. **Environment-Specific Validation**
-   - Different checks for dev/staging/prod
-   - Appropriate security requirements per environment
-   - Cost optimization for non-production environments
-
-3. **Comprehensive Coverage**
-   - Authentication and permissions
-   - Resource quotas and availability
-   - Template validation and syntax
-   - Security and compliance requirements
-
-4. **Clear Reporting**
-   - Color-coded status indicators
-   - Detailed error messages with remediation steps
-   - Summary reports for quick assessment
-
-5. **Fail Fast**
-   - Stop deployment if critical checks fail
-   - Provide clear guidance for resolution
-   - Enable easy re-running of checks
-
-### Common Pre-flight Pitfalls
-
-1. **Skipping validation** for "quick" deployments
-2. **Insufficient permissions** checking before deployment
-3. **Ignoring quota limits** until deployment fails
-4. **Not validating templates** in CI/CD pipelines
-5. **Missing security validation** for production environments
-6. **Inadequate cost estimation** leading to budget surprises
+Pipeline-ul trebuie să restaureze/creeze mediul său azd și să salveze scripturile prezentate în această lecție înainte de această sarcină. Configurează conexiunea de serviciu federată și acordă pipeline-ului permisiunile token necesare. Nu te baza pe autentificarea Azure CLI dintr-o sarcină `AzureCLI@2` anterioară pentru a autentifica o sarcină Bash simplă ulterioară.
 
 ---
 
-**Pro Tip**: Run pre-flight checks as a separate job in your CI/CD pipeline before the actual deployment job. This allows you to catch issues early and provides faster feedback to developers.
+## Rezumatul Bunelor Practici
+
+### ✅ Cele mai bune practici pentru verificările Pre-zbor
+
+1. **Automatizează Cât Poate Fi**
+   - Integrează verificările în pipeline-urile CI/CD
+   - Folosește scripturi pentru validări repetabile
+   - Stochează rezultatele pentru audit
+
+2. **Validare Specifică Mediului**
+   - Verificări diferite pentru dev/staging/producție
+   - Cerințe adecvate de securitate pentru fiecare mediu
+   - Optimizare a costurilor pentru mediile non-producție
+
+3. **Acoperire Cuprinzătoare**
+   - Autentificare și permisiuni
+   - Cote și disponibilitate resurse
+   - Validarea șabloanelor și sintaxa
+   - Cerințe de securitate și conformitate
+
+4. **Raportare Clară**
+   - Indicatori de stare colorați
+   - Mesaje detaliate de eroare cu pași de remediere
+   - Rapoarte sumare pentru evaluare rapidă
+
+5. **Eșuarea Rapidă**
+   - Oprește implementarea dacă verificările critice eșuează
+   - Oferă îndrumare clară pentru rezolvare
+   - Permite re-executarea ușoară a verificărilor
+
+### Capcane Comune la Pre-zbor
+
+1. **Săritul peste validare** pentru implementări „rapide”
+2. **Verificare insuficientă a permisiunilor** înainte de implementare
+3. **Ignorarea limitelor cotelor** până când implementarea eșuează
+4. **Neadministrarea validării șabloanelor** în pipeline-urile CI/CD
+5. **Lipsa validării de securitate** pentru mediile de producție
+6. **Estimare neadecvată a costurilor** care duce la surprize bugetare
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [SKU Selection](sku-selection.md)
-- **Next Lesson**: [Fișă de referință](../../resources/cheat-sheet.md)
+**Sfat Profesional**: Rulează verificările pre-zbor ca un job separat în pipeline-ul tău CI/CD înainte de job-ul efectiv de implementare. Acest lucru îți permite să depistezi problemele devreme și oferă feedback mai rapid dezvoltatorilor.
+
+---
+
+**Navigare**
+- **Lecția Anterioară**: [Selecția SKU](sku-selection.md)
+- **Lecția Următoare**: [Fișă de Referință](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare de responsabilitate**:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări eronate care decurg din utilizarea acestei traduceri.
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
