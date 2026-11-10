@@ -1,82 +1,82 @@
 # 第3章: 設定と認証
 
-**📚 コース**: [初心者向けAZD](../../README.md) | **⏱️ 所要時間**: 45-60分 | **⭐ 難易度**: 中級
+**📚 コース**: [AZD初心者向け](../../README.md) | **⏱️ 所要時間**: 統合演習含め90-150分 | **⭐ 難易度**: 中級者向け
 
 ---
 
 ## 概要
 
-本章では Azure Developer CLI の展開における環境設定、認証パターン、セキュリティのベストプラクティスを解説します。
+この章では、Azure Developer CLIのデプロイにおける環境設定、認証パターン、およびセキュリティのベストプラクティスを取り上げます。
 
-> 2026年7月の `azd 1.27.1` で検証済み。
+> コマンドおよび設定レビュー対象: `azd 1.37.2` (2026年11月)。レビュー時に実際のAzureプロビジョニングは実行していません。
 
 ## 学習目標
 
-本章を修了すると以下を習得できます:
-- AZD設定の階層構造を理解する
+この章を完了すると、以下ができるようになります:
+- AZD設定階層をマスターする
 - 複数環境（開発、ステージング、本番）を管理する
-- マネージドアイデンティティを用いた安全な認証を実装する
+- マネージドIDによる安全な認証を実装する
 - 環境固有の設定を構成する
 
 ---
 
 ## 📚 レッスン
 
-| # | レッスン | 説明 | 所要時間 |
+| # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
 | 1 | [設定ガイド](configuration.md) | 環境セットアップと管理 | 30分 |
-| 2 | [認証とセキュリティ](authsecurity.md) | マネージドアイデンティティとRBACパターン | 30分 |
+| 2 | [認証とセキュリティ](authsecurity.md) | マネージドIDとRBACパターン | 30分 |
 
 ---
 
 ## 🚀 クイックスタート
 
+<strong>すでに初期化済みのazdアプリケーション</strong>のルートから実行してください。コースリポジトリからではありません。既に存在する場合は未使用の環境名を使用してください。
+
 ```bash
-# 複数の環境を作成する
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# 環境を切り替える
+# Switch environments
 azd env select prod
 
-# 環境変数を設定する
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# 設定を表示する
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` は例示的なものであり、テンプレートが明示的にそれを使う場合にのみインフラに影響します。通常の `azd env set` 値はローカルに平文で保存され、セキュアな秘密ストレージではありません。
 
 ---
 
 ## 🔧 設定階層
 
-AZD は次の順に設定を適用します（後者が前者を上書き）:
-
-1. <strong>デフォルト値</strong>（テンプレート内蔵）
-2. **azure.yaml**（プロジェクト設定）
-3. <strong>環境変数</strong>（`azd env set`）
-4. <strong>コマンドラインフラグ</strong>（`--location eastus`）
+3つの異なる設定領域を分離して保持してください：グローバル設定 (`azd config`)、プロジェクト構造 (`azure.yaml`)、および環境ごとの値 (`azd env`)。フラグは実際に対応する設定だけを上書きし、任意の環境変数を`azure.yaml`やBicepに一律で適用するオーバーレイはありません。
 
 ---
 
 ## 🔐 セキュリティのベストプラクティス
 
 ```bash
-# マネージドIDを使用する（推奨）
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# AZDの認証状態を確認する
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# オプション：azコマンドを実行する予定がある場合はAzure CLIのコンテキストを確認する
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# 必要に応じて再認証する
+# Re-authenticate if needed
 azd auth login
 
-# オプション：azコマンド用にAzure CLIの認証を更新する
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -84,16 +84,16 @@ az login
 
 ## 🔗 ナビゲーション
 
-| 方向 | チャプター |
+| 方向 | 章 |
 |-----------|---------|
-| <strong>前へ</strong> | [第2章：AI開発](../chapter-02-ai-development/README.md) |
-| <strong>次へ</strong> | [第4章：インフラ](../chapter-04-infrastructure/README.md) |
+| <strong>前へ</strong> | [第2章: AI開発](../chapter-02-ai-development/README.md) |
+| <strong>次へ</strong> | [第4章: インフラストラクチャ](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 関連資料
 
-- [デプロイ前の確認事項](../chapter-06-pre-deployment/README.md)
+- [事前デプロイチェック](../chapter-06-pre-deployment/README.md)
 - [トラブルシューティング](../chapter-07-troubleshooting/common-issues.md)
 
 ---

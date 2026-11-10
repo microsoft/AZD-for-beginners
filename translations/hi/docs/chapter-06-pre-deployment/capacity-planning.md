@@ -1,69 +1,71 @@
-# क्षमता योजना - Azure संसाधन उपलब्धता और सीमाएं
+# क्षमता योजना - Azure संसाधन उपलब्धता और सीमा
 
-**चैप्टर नेविगेशन:**
+**अध्याय नेविगेशन:**
 - **📚 कोर्स होम**: [AZD शुरुआती के लिए](../../README.md)
-- **📖 वर्तमान अध्याय**: अध्याय 6 - प्री-डिप्लॉयमेंट सत्यापन और योजना
-- **⬅️ पिछला अध्याय**: [अध्याय 5: मल्टी-एजेंट AI समाधान](../../examples/retail-scenario.md)
+- **📖 वर्तमान अध्याय**: अध्याय 6 - पूर्व-परिनियोजन सत्यापन और योजना
+- **⬅️ पूर्व अध्याय**: [अध्याय 5: मल्टी-एजेंट AI समाधान](../../examples/retail-scenario.md)
 - **➡️ अगला**: [SKU चयन](sku-selection.md)
 - **🚀 अगला अध्याय**: [अध्याय 7: समस्या निवारण](../chapter-07-troubleshooting/common-issues.md)
 
 ## परिचय
 
-यह व्यापक मार्गदर्शिका Azure Developer CLI के साथ डिप्लॉय करने से पहले Azure संसाधन क्षमता की योजना बनाने और सत्यापित करने में आपकी मदद करती है। सफल डिप्लॉयमेंट सुनिश्चित करने के लिए कोटा, उपलब्धता और क्षेत्रीय सीमाओं का आकलन करना सीखें और लागत व प्रदर्शन का अनुकूलन करें। विभिन्न एप्लिकेशन आर्किटेक्चर और स्केलिंग परिदृश्यों के लिए क्षमता योजना तकनीकों में पारंगत बनें।
+यह व्यापक मार्गदर्शिका आपको Azure Developer CLI के साथ परिनियोजन से पहले Azure संसाधन क्षमता की योजना और सत्यापन में मदद करती है। कोटा, उपलब्धता, और क्षेत्रीय सीमाओं का आकलन करना सीखें ताकि सफल परिनियोजन सुनिश्चित किया जा सके और लागत व प्रदर्शन का अनुकूलन किया जा सके। विभिन्न आवेदन वास्तुकल्पना और स्केलिंग परिदृश्यों के लिए क्षमता योजना तकनीकों में निपुण बनें।
 
 ## सीखने के लक्ष्य
 
 इस मार्गदर्शिका को पूरा करने पर आप:
-- Azure कोटा, सीमाओं और क्षेत्रीय उपलब्धता प्रतिबंधों को समझेंगे
-- डिप्लॉयमेंट से पहले संसाधन उपलब्धता और क्षमता जांचने की तकनीकों में पारंगत होंगे
-- स्वचालित क्षमता सत्यापन और मॉनिटरिंग रणनीतियों को लागू करेंगे
-- उचित संसाधन साइजिंग और स्केलिंग विचारों के साथ अनुप्रयोग डिज़ाइन करेंगे
-- बुद्धिमान क्षमता योजना के माध्यम से लागत अनुकूलन रणनीतियाँ लागू करेंगे
+- Azure कोटा, सीमाओं, और क्षेत्रीय उपलब्धता प्रतिबंधों को समझेंगे
+- परिनियोजन से पहले संसाधन उपलब्धता और क्षमता जांचने की तकनीकें सीखेंगे
+- स्वचालित क्षमता सत्यापन और निगरानी रणनीतियों को लागू करेंगे
+- उचित संसाधन आकार निर्धारण और स्केलिंग विचारों के साथ आवेदन डिज़ाइन करेंगे
+- बुद्धिमान क्षमता योजना के माध्यम से लागत अनुकूलन रणनीतियां लागू करेंगे
 - कोटा उपयोग और संसाधन उपलब्धता के लिए अलर्ट और निगरानी कॉन्फ़िगर करेंगे
 
 ## सीखने के परिणाम
 
 पूरा करने पर आप सक्षम होंगे:
-- डिप्लॉयमेंट से पहले Azure संसाधन क्षमता आवश्यकताओं का आकलन और सत्यापन करना
-- क्षमता जाँच और कोटा मॉनिटरिंग के लिए स्वचालित स्क्रिप्ट बनाना
-- क्षेत्रीय और सब्सक्रिप्शन सीमाओं को ध्यान में रखते हुए स्केलेबल आर्किटेक्चर डिजाइन करना
-- विभिन्न वर्कलोड प्रकारों के लिए लागत-प्रभावी संसाधन साइजिंग रणनीतियाँ लागू करना
-- क्षमता-संबंधी समस्याओं के लिए सक्रिय निगरानी और अलर्टिंग कॉन्फ़िगर करना
-- उचित क्षमता वितरण के साथ बहु-क्षेत्र डिप्लॉयमेंट की योजना बनाना
+- परिनियोजन से पहले Azure संसाधन क्षमता आवश्यकताओं का आकलन और सत्यापन करना
+- क्षमता जांच और कोटा निगरानी के लिए स्वचालित स्क्रिप्ट बनाना
+- क्षेत्रीय और सदस्यता सीमाओं को ध्यान में रखते हुए स्केलेबल आर्किटेक्चर डिजाइन करना
+- विभिन्न कार्यभार प्रकारों के लिए लागत-कुशल संसाधन आकार निर्धारण रणनीतियाँ लागू करना
+- क्षमता संबंधित समस्याओं के लिए सक्रिय निगरानी और अलर्टिंग कॉन्फ़िगर करना
+- उचित क्षमता वितरण के साथ बहु-क्षेत्रीय परिनियोजन की योजना बनाना
 
 ## क्षमता योजना क्यों महत्वपूर्ण है
 
-एप्लिकेशन डिप्लॉय करने से पहले, आपको सुनिश्चित करना होगा:
+> **दार:** ये Bash उदाहरण Azure CLI, `jq`, और एक चयनित सदस्यता की आवश्यकता होती है। ये प्रकाशित ऑफ़रिंग और कोटा की जांच करते हैं; कोई भी भौतिक क्षमता साबित नहीं करता या संसाधनों का आरक्षण नहीं करता। स्वंय के प्रोजेक्ट में स्निपेट सहेजें/अनुकूलित करें — नीचे स्क्रिप्ट/कॉन्फ़िगरेशन फ़ाइल नाम उदाहरण हैं, चेक-इन किए गए डिलीवरी नहीं। VM कोटा कंटेनर ऐप्स, ऐप सेवा, या Azure OpenAI कोटा को कवर नहीं करते।
+
+आवेदन तैनात करने से पहले, आपको सुनिश्चित करना होगा:
 - **आवश्यक संसाधनों के लिए पर्याप्त कोटा**
-- **लक्ष्य क्षेत्र में संसाधन उपलब्धता**
-- **आपके सब्सक्रिप्शन प्रकार के लिए सेवा स्तर उपलब्धता**
-- **अपेक्षित ट्रैफिक के लिए नेटवर्क क्षमता**
-- **उचित साइजिंग के माध्यम से लागत अनुकूलन**
+- **लक्षित क्षेत्र में संसाधन उपलब्धता**
+- **आपकी सदस्यता प्रकार के लिए सेवा टियर उपलब्धता**
+- **अपेक्षित ट्रैफ़िक के लिए नेटवर्क क्षमता**
+- **ठीक प्रकार के आकार निर्धारित करके लागत अनुकूलन**
 
 ## 📊 Azure कोटा और सीमाओं को समझना
 
 ### सीमाओं के प्रकार
-1. **सब्सक्रिप्शन-स्तर कोटा** - सब्सक्रिप्शन प्रति अधिकतम संसाधन
-2. **क्षेत्रीय कोटा** - प्रति क्षेत्र अधिकतम संसाधन
-3. **संसाधन-विशिष्ट सीमाएँ** - व्यक्तिगत संसाधन प्रकारों के लिए सीमाएँ
-4. **सेवा स्तर सीमाएँ** - आपकी सेवा योजना के आधार पर सीमाएँ
+1. **सदस्यता-स्तर कोटा** - एक सदस्यता पर अधिकतम संसाधन
+2. **क्षेत्रीय कोटा** - प्रत्येक क्षेत्र पर अधिकतम संसाधन
+3. **संसाधन-विशिष्ट सीमाएं** - व्यक्तिगत संसाधन प्रकारों के लिए सीमाएं
+4. **सेवा टियर सीमाएं** - आपकी सेवा योजना के आधार पर सीमाएं
 
 ### सामान्य संसाधन कोटा
 ```bash
-# वर्तमान कोटा उपयोग की जाँच करें
+# Check current quota usage
 az vm list-usage --location eastus2 --output table
 
-# विशिष्ट संसाधन कोटा की जाँच करें
+# Check specific resource quotas
 az network list-usages --location eastus2 --output table
-az storage account show-usage --output table
+az storage account show-usage --location eastus2 --output table
 ```
 
-## प्री-डिप्लॉयमेंट क्षमता जाँच
+## पूर्व-परिनियोजन क्षमता जाँच
 
 ### स्वचालित क्षमता सत्यापन स्क्रिप्ट
 ```bash
 #!/bin/bash
-# capacity-check.sh - तैनाती से पहले Azure क्षमता सत्यापित करें
+# capacity-check.sh - Validate Azure capacity before deployment
 
 set -e
 
@@ -74,7 +76,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# कोटा उपयोग की जाँच करने का फ़ंक्शन
+# Function to check quota usage
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -83,22 +85,26 @@ check_quota() {
     
     case $resource_type in
         "compute")
-            usage=$(az vm list-usage --location "$LOCATION" --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az vm list-usage --location "$LOCATION" --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
         "storage")
-            usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+            usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.current')
             limit=$(echo "$usage" | jq -r '.limit')
             ;;
         "network")
-            usage=$(az network list-usages --location "$LOCATION" --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az network list-usages --location "$LOCATION" --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
     esac
     
+    if ! [[ "$current" =~ ^[0-9]+$ && "$limit" =~ ^[0-9]+$ ]]; then
+        echo "❌ Quota data missing or unrecognized for $resource_type"
+        return 1
+    fi
     available=$((limit - current))
     
     if [ "$available" -ge "$required" ]; then
@@ -109,98 +115,95 @@ check_quota() {
     fi
 }
 
-# विभिन्न संसाधन कोटाओं की जाँच करें
-check_quota "compute" 4      # 4 vCPU की आवश्यकता है
-check_quota "storage" 2      # 2 स्टोरेज खाते आवश्यक हैं
-check_quota "network" 1      # 1 वर्चुअल नेटवर्क की आवश्यकता है
+# Check various resource quotas
+check_quota "compute" 4      # Need 4 vCPUs
+check_quota "storage" 2      # Need 2 storage accounts
+check_quota "network" 1      # Need 1 virtual network
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### सेवा-विशिष्ट क्षमता जाँच
+### सेवा-विशिष्ट क्षमता जांच
 
-#### App Service क्षमता
+#### ऐप सेवा क्षमता
 ```bash
-# ऐप सर्विस प्लान की उपलब्धता जांचें
+# Check App Service Plan availability
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # क्षेत्र में उपलब्ध SKU की जांचें
-    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
+    # Check available SKUs in region
+    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location' || name=='$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)']" -o tsv)
     
     if [ -n "$available_skus" ]; then
-        echo "✅ $sku is available in $location"
+        echo "✅ $sku is listed for $location (not a capacity guarantee)"
     else
         echo "❌ $sku is not available in $location"
         
-        # वैकल्पिक क्षेत्रों का सुझाव दें
+        # Suggest alternative regions
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # वर्तमान उपयोग की जांचें
+    # Check current usage
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# उपयोग
+# Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### डेटाबेस क्षमता
 ```bash
-# PostgreSQL की क्षमता जांचें
+# Check PostgreSQL capacity
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # जांचें कि SKU उपलब्ध है या नहीं
+    # Inspect the nested regional capability catalog; do not assume top-level
+    # entries are VM SKU names. Select supported tier/version/SKU combinations.
     available=$(az postgres flexible-server list-skus --location "$location" \
-        --query "contains([].name, '$sku')" -o tsv)
+        --output json)
     
-    if [ "$available" = "true" ]; then
-        echo "✅ PostgreSQL $sku is available in $location"
+    if [ -n "$available" ] && [ "$available" != "[]" ]; then
+        echo "$available" | jq .
+        echo "Inspect the catalog for $sku; this does not verify physical capacity."
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # उपलब्ध SKUs दिखाएँ
+        # Show available SKUs
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
-            --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
+            --output json
         return 1
     fi
 }
 
-# Cosmos DB की क्षमता जांचें
+# Check Cosmos DB capacity
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # क्षेत्र की उपलब्धता जांचें
-    available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
+    # Check region availability
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    available_regions=$(az cosmosdb locations list --query "[?name=='$display_location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # जांचें कि सर्वरलेस समर्थित है या नहीं (यदि आवश्यक हो)
+        # Check if serverless is supported (if needed)
         if [ "$tier" = "serverless" ]; then
-            serverless_regions=$(az cosmosdb locations list \
-                --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
-            
-            if [ -n "$serverless_regions" ]; then
-                echo "✅ Cosmos DB Serverless is supported in $location"
-            else
-                echo "⚠️  Cosmos DB Serverless may not be supported in $location"
-            fi
+            echo "Verify serverless support and limits separately in Cosmos DB documentation."
+            echo "Availability-zone support is NOT a serverless-support signal."
         fi
     else
         echo "❌ Cosmos DB is not available in $location"
@@ -209,38 +212,33 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Container Apps क्षमता
+#### कंटेनर ऐप्स क्षमता
 ```bash
-# Container Apps की क्षमता जाँचें
+# Check Container Apps capacity
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # जाँचें कि Container Apps उस क्षेत्र में उपलब्ध है या नहीं
-    az provider show --namespace Microsoft.App \
-        --query "resourceTypes[?resourceType=='containerApps'].locations" \
-        --output table | grep -q "$location"
-    
-    if [ $? -eq 0 ]; then
+    # Check if Container Apps is available in region
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    if az provider show --namespace Microsoft.App \
+        --query "resourceTypes[?resourceType=='containerApps'].locations[]" \
+        --output tsv | grep -Fxq "$display_location"; then
         echo "✅ Container Apps is available in $location"
         
-        # वर्तमान वातावरणों की संख्या जाँचें
+        # Check current environment count
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps में प्रति क्षेत्र 15 वातावरणों की सीमा है
-        if [ "$current_envs" -lt 15 ]; then
-            echo "✅ Can create more Container App environments"
-        else
-            echo "⚠️  Near Container App environment limit in $location"
-        fi
+        echo "Check Microsoft.App quotas for this subscription/region in Azure Quotas."
+        echo "An environment count alone does not establish available quota."
     else
         echo "❌ Container Apps is not available in $location"
         
-        # उपलब्ध क्षेत्रों को दिखाएँ
+        # Show available regions
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -254,7 +252,7 @@ check_container_apps_capacity() {
 
 ### क्षेत्र के अनुसार सेवा उपलब्धता
 ```bash
-# क्षेत्रों में सेवा उपलब्धता की जाँच करें
+# Check service availability across regions
 check_service_availability() {
     local service=$1
     
@@ -269,9 +267,8 @@ check_service_availability() {
                 --query "resourceTypes[?resourceType=='containerApps'].locations" -o table
             ;;
         "postgres")
-            az postgres flexible-server list-skus --location eastus2 >/dev/null 2>&1 && \
-            echo "PostgreSQL Flexible Server regions:" && \
-            az account list-locations --query "[?metadata.regionType=='Physical'].{name:name,displayName:displayName}" -o table
+            echo "PostgreSQL offerings for candidate region eastus2:"
+            az postgres flexible-server list-skus --location eastus2 --output json
             ;;
         "cosmosdb")
             az cosmosdb locations list --query "[].{name:name,documentationUrl:documentationUrl}" -o table
@@ -279,18 +276,20 @@ check_service_availability() {
     esac
 }
 
-# सभी सेवाओं की जाँच करें
+# Check all services
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-### क्षेत्र चयन सिफारिशें
+### क्षेत्र चयन चर्चा (उदाहरणात्मक)
+
+निम्न लेबल जांच के संकेत हैं, सत्यापित मूल्य, हार्डवेयर, या अनुपालन रैंकिंग नहीं। वर्तमान क्षेत्रीय कीमतें और मापी गई विलंबता तुलना करें। GDPR विशेष रूप से जर्मनी क्षेत्र नहीं मांगता; निवासिता, सेवा सुविधाएं, और संगठनात्मक/कानूनी आवश्यकताओं का संयुक्त आकलन करना चाहिए।
 ```bash
-# आवश्यकताओं के आधार पर अनुकूल क्षेत्रों की सिफारिश करें
+# Recommend optimal regions based on requirements
 recommend_region() {
-    local requirements=$1  # "कम लागत" | "प्रदर्शन" | "अनुपालन"
+    local requirements=$1  # "lowcost" | "performance" | "compliance"
     
     echo "Region recommendations for: $requirements"
     
@@ -303,14 +302,14 @@ recommend_region() {
             ;;
         "performance")
             echo "⚡ Performance-optimized regions:"
-            echo "  - East US 2 (Virginia) - Latest hardware"
-            echo "  - West US 2 (Washington) - Latest hardware"
+            echo "  - East US 2 (Virginia) - Measure latency to your users"
+            echo "  - West US 2 (Washington) - Verify required SKUs"
             echo "  - North Europe (Ireland) - For EU users"
             ;;
         "compliance")
             echo "🔒 Compliance-focused regions:"
             echo "  - US Gov regions - For government workloads"
-            echo "  - Germany regions - For GDPR compliance"
+            echo "  - EU regions - Assess residency and contractual requirements"
             echo "  - Australia regions - For data sovereignty"
             ;;
     esac
@@ -321,27 +320,17 @@ recommend_region() {
 
 ### संसाधन लागत अनुमान
 ```bash
-# तैनाती की लागत का अनुमान लगाएँ
+# Estimate deployment costs
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # अनुमान के लिए एक अस्थायी संसाधन समूह बनाएँ
-    temp_rg="temp-estimation-$(date +%s)"
-    az group create --name "$temp_rg" --location "$location" >/dev/null
-    
-    # इन्फ्रास्ट्रक्चर को सत्यापन मोड में तैनात करें
-    az deployment group validate \
-        --resource-group "$temp_rg" \
-        --template-file infra/main.bicep \
-        --parameters @infra/main.parameters.json \
-        --parameters location="$location" \
-        --query "properties.validatedResources[].{type:type,name:name}" -o table
-    
-    # अस्थायी संसाधन समूह को साफ़ करें
-    az group delete --name "$temp_rg" --yes --no-wait
+    # Review declared resources locally. ARM validate/what-if do NOT price them.
+    # Do not create/delete a resource group just to estimate cost.
+    az bicep build --file infra/main.bicep --stdout |
+      jq -r '.resources[] | [.type, (.sku.name // "see module/parameters")] | @tsv'
     
     echo ""
     echo "💡 Use Azure Pricing Calculator for detailed cost estimates:"
@@ -354,10 +343,10 @@ estimate_costs() {
 
 ### SKU अनुकूलन सिफारिशें
 ```bash
-# आवश्यकताओं के आधार पर इष्टतम SKUs की सिफारिश करें
+# Recommend optimal SKUs based on requirements
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "विकास" | "स्टेजिंग" | "उत्पादन"
+    local workload_type=$2  # "dev" | "staging" | "production"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -417,32 +406,33 @@ recommend_sku() {
 }
 ```
 
-## 🚀 स्वचालित प्री-फ्लाइट जांचें
+## 🚀 स्वचालित पूर्व-उड़ान जांच
 
-### व्यापक प्री-फ्लाइट स्क्रिप्ट
+### व्यापक पूर्व-उड़ान स्क्रिप्ट
 ```bash
 #!/bin/bash
-# preflight-check.sh - तैनाती से पहले पूर्ण सत्यापन
+# preflight-check.sh - Complete pre-deployment validation
+# Starting-point example: adapt service checks and supply project-specific costs.
 
 set -e
 
-# कॉन्फ़िगरेशन
+# Configuration
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# आउटपुट के लिए रंग
+# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # कोई रंग नहीं
+NC='\033[0m' # No Color
 
-# लॉगिंग फ़ंक्शन्स
+# Logging functions
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# कॉन्फ़िगरेशन लोड करें
+# Load configuration
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -462,9 +452,10 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# जांच 1: प्रमाणीकरण
+# Check 1: Authentication
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
+    SUBSCRIPTION_ID=$(az account show --query id -o tsv)
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
     log_info "Authenticated with subscription: $SUBSCRIPTION_NAME"
 else
@@ -472,7 +463,7 @@ else
     exit 1
 fi
 
-# जांच 2: क्षेत्रीय उपलब्धता
+# Check 2: Regional availability
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -481,14 +472,15 @@ else
     exit 1
 fi
 
-# जांच 3: कोटा सत्यापन
+# Check 3: Quota validation
 log_info "Checking quota availability..."
 
-# vCPU कोटा
+# vCPU quota
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
-    --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
 vcpu_limit=$(echo "$vcpu_usage" | jq -r '.[0].limit')
+[[ "$vcpu_current" =~ ^[0-9]+$ && "$vcpu_limit" =~ ^[0-9]+$ ]] || { log_error "Missing VM quota data"; exit 1; }
 vcpu_available=$((vcpu_limit - vcpu_current))
 
 if [ "$vcpu_available" -ge "$REQUIRED_VCPUS" ]; then
@@ -498,10 +490,11 @@ else
     exit 1
 fi
 
-# स्टोरेज अकाउंट कोटा
-storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+# Storage account quota
+storage_usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
+[[ "$storage_current" =~ ^[0-9]+$ && "$storage_limit" =~ ^[0-9]+$ ]] || { log_error "Missing storage quota data"; exit 1; }
 storage_available=$((storage_limit - storage_current))
 
 if [ "$storage_available" -ge "$REQUIRED_STORAGE" ]; then
@@ -511,13 +504,14 @@ else
     exit 1
 fi
 
-# जांच 4: सेवा उपलब्धता
+# Check 4: Service availability
 log_info "Checking service availability..."
+DISPLAY_LOCATION=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
 
 for service in "${REQUIRED_SERVICES[@]}"; do
     case $service in
         "appservice")
-            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION' || name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "App Service is available in $LOCATION"
             else
                 log_error "App Service is not available in $LOCATION"
@@ -535,7 +529,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
         "containerapp")
             if az provider show --namespace Microsoft.App \
                 --query "resourceTypes[?resourceType=='containerApps'].locations" \
-                --output tsv | grep -q "$LOCATION"; then
+                --output tsv | grep -Fxq "$DISPLAY_LOCATION"; then
                 log_info "Container Apps is available in $LOCATION"
             else
                 log_error "Container Apps is not available in $LOCATION"
@@ -543,22 +537,29 @@ for service in "${REQUIRED_SERVICES[@]}"; do
             fi
             ;;
         "cosmosdb")
-            if az cosmosdb locations list --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az cosmosdb locations list --query "[?name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "Cosmos DB is available in $LOCATION"
             else
                 log_error "Cosmos DB is not available in $LOCATION"
                 exit 1
             fi
             ;;
+        "storage")
+            log_info "Storage account quota checked above; validate the selected SKU separately."
+            ;;
+        *)
+            log_error "No check implemented for service: $service"; exit 1
+            ;;
     esac
 done
 
-# जांच 5: नेटवर्क क्षमता
+# Check 5: Network capacity
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
-    --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
 vnet_current=$(echo "$vnet_usage" | jq -r '.[0].current')
 vnet_limit=$(echo "$vnet_usage" | jq -r '.[0].limit')
+[[ "$vnet_current" =~ ^[0-9]+$ && "$vnet_limit" =~ ^[0-9]+$ ]] || { log_error "Missing network quota data"; exit 1; }
 vnet_available=$((vnet_limit - vnet_current))
 
 if [ "$vnet_available" -gt 0 ]; then
@@ -567,7 +568,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# जांच 6: संसाधन नामकरण सत्यापन
+# Check 6: Resource naming validation
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -579,9 +580,12 @@ else
     exit 1
 fi
 
-# जांच 7: लागत अनुमान
+# Check 7: Cost estimation
 log_info "Performing cost estimation..."
-ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
+# Set this from a reviewed Pricing Calculator estimate; no built-in pricing API
+# is implemented by this example.
+: "${ESTIMATED_MONTHLY_COST:?Set ESTIMATED_MONTHLY_COST to your reviewed estimate}"
+[[ "$ESTIMATED_MONTHLY_COST" =~ ^[0-9]+$ ]] || { log_error "Use an integer cost estimate"; exit 1; }
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
 
 if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; then
@@ -594,7 +598,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# जांच 8: टेम्पलेट सत्यापन
+# Check 8: Template validation
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -608,10 +612,10 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# अंतिम सारांश
+# Final summary
 echo "=================================="
-log_info "✅ All pre-flight checks passed!"
-log_info "Ready for deployment to $LOCATION"
+log_info "✅ Implemented checks passed; review remaining service-specific limits."
+log_info "Quota is not a reservation or guarantee of capacity in $LOCATION."
 echo "Next steps:"
 echo "  1. Run 'azd up' to deploy"
 echo "  2. Monitor deployment progress"
@@ -652,31 +656,31 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 डिप्लॉयमेंट के दौरान क्षमता की निगरानी
+## 📈 परिनियोजन के दौरान क्षमता निगरानी
 
-### वास्तविक समय क्षमता मॉनिटरिंग
+### वास्तविक समय क्षमता निगरानी
 ```bash
-# डिप्लॉयमेंट के दौरान क्षमता की निगरानी करें
+# Monitor capacity during deployment
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # डिप्लॉयमेंट की स्थिति की जाँच करें
+        # Check deployment status
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
-            --query "[0].properties.provisioningState" -o tsv)
+            --query "sort_by(@, &properties.timestamp)[-1].properties.provisioningState" -o tsv)
         
         if [ "$deployment_status" = "Succeeded" ]; then
             log_info "Deployment completed successfully"
             break
-        elif [ "$deployment_status" = "Failed" ]; then
+        elif [ "$deployment_status" = "Failed" ] || [ "$deployment_status" = "Canceled" ]; then
             log_error "Deployment failed"
             break
         fi
         
-        # वर्तमान संसाधन उपयोग की जाँच करें
+        # Check current resource usage
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -689,15 +693,16 @@ monitor_deployment_capacity() {
 
 ## 🔗 AZD के साथ एकीकरण
 
-### azure.yaml में प्री-फ्लाइट हुक जोड़ें
+### azure.yaml में पूर्व-उड़ान हुक जोड़ें
 ```yaml
 # azure.yaml
 hooks:
   preprovision:
     shell: sh
     run: |
+      set -e
       echo "Running pre-flight capacity checks..."
-      ./scripts/preflight-check.sh ${AZURE_LOCATION} ${AZURE_ENV_NAME}
+      bash ./scripts/preflight-check.sh "${AZURE_LOCATION}" "${AZURE_ENV_NAME}"
       
       if [ $? -ne 0 ]; then
         echo "Pre-flight checks failed"
@@ -707,40 +712,40 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## सर्वोत्तम अभ्यास
+## सर्वोत्तम प्रथाएं
 
-1. **नई क्षेत्रों में डिप्लॉय करने से पहले हमेशा क्षमता जाँच चलाएँ**
-2. **आश्चर्य से बचने के लिए कोटा उपयोग नियमित रूप से मॉनिटर करें**
-3. **भविष्य के वृद्धि की योजना बनाएं** के लिए भविष्य की क्षमता आवश्यकताओं की जाँच करें
+1. **नए क्षेत्रों में परिनियोजन से पहले हमेशा क्षमता जाँच चलाएं**
+2. **चक्रीय रूप से कोटा उपयोग की निगरानी करें ताकि आश्चर्य से बचा जा सके**
+3. **वृद्धि के लिए योजना बनाएं और भविष्य की क्षमता आवश्यकताओं की जांच करें**
 4. **बिल शॉक से बचने के लिए लागत अनुमान उपकरणों का उपयोग करें**
-5. **अपनी टीम के लिए क्षमता आवश्यकताओं का दस्तावेज़ीकरण करें**
-6. **CI/CD पाइपलाइनों में क्षमता सत्यापन को स्वचालित करें**
+5. **अपनी टीम के लिए क्षमता आवश्यकताओं का दस्तावेजीकरण करें**
+6. **CI/CD पाइपलाइन में क्षमता सत्यापन को स्वचालित करें**
 7. **क्षेत्रीय फेलओवर क्षमता आवश्यकताओं पर विचार करें**
 
 ## अगले कदम
 
-- [SKU चयन गाइड](sku-selection.md) - इष्टतम सेवा स्तर चुनें
-- [प्री-फ्लाइट जाँचें](preflight-checks.md) - स्वचालित सत्यापन स्क्रिप्ट
+- [SKU चयन मार्गदर्शिका](sku-selection.md) - आदर्श सेवा टियर चुनें
+- [पूर्व-उड़ान जांच](preflight-checks.md) - स्वचालित सत्यापन स्क्रिप्ट
 - [चीट शीट](../../resources/cheat-sheet.md) - त्वरित संदर्भ कमांड
-- [शब्दकोश](../../resources/glossary.md) - शब्द और परिभाषाएँ
+- [शब्दावली](../../resources/glossary.md) - शब्द और परिभाषाएं
 
 ## अतिरिक्त संसाधन
 
-- [Azure Subscription Limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
-- [Azure Cost Management](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure Regional Availability](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure सदस्यता सीमाएं](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Azure मूल्य निर्धारण कैलकुलेटर](https://azure.microsoft.com/pricing/calculator/)
+- [Azure लागत प्रबंधन](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Azure क्षेत्रीय उपलब्धता](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **नेविगेशन**
-- **पिछला पाठ**: [डिबगिंग गाइड](../chapter-07-troubleshooting/debugging.md)
+- **पूर्व पाठ**: [डीबगिंग गाइड](../chapter-07-troubleshooting/debugging.md)
 
 - **अगला पाठ**: [SKU चयन](sku-selection.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-इस दस्तावेज़ का अनुवाद AI अनुवाद सेवा Co-op Translator (https://github.com/Azure/co-op-translator) का उपयोग करके किया गया है। हालाँकि हम सटीकता के लिए प्रयास करते हैं, कृपया ध्यान दें कि स्वचालित अनुवादों में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। मूल दस्तावेज़ को उसकी मूल भाषा में अधिकृत स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए पेशेवर मानव अनुवाद की सलाह दी जाती है। इस अनुवाद के उपयोग से उत्पन्न किसी भी प्रकार की गलतफहमी या गलत व्याख्या के लिये हम उत्तरदायी नहीं हैं।
+**अस्वीकरण**:
+इस दस्तावेज़ का अनुवाद AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) का उपयोग करके किया गया है। जबकि हम सटीकता के लिए प्रयास करते हैं, कृपया ध्यान दें कि स्वचालित अनुवादों में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। मूल दस्तावेज़ अपनी मूल भाषा में ही प्रामाणिक स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए, पेशेवर मानव अनुवाद की सिफारिश की जाती है। इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए हम उत्तरदायी नहीं हैं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

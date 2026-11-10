@@ -1,433 +1,227 @@
-# 간단한 Flask API - 컨테이너 앱 예제
+# 간단한 Flask API — Azure 컨테이너 앱
 
-**학습 경로:** 초급 ⭐ | **소요 시간:** 25-35분 | **비용:** $0-15/월
+**레벨:** 초급 · **소요 시간:** 설정 포함 30–45분
 
-Azure Developer CLI(azd)를 사용하여 Azure Container Apps에 배포된 완전한 작동 Python Flask REST API입니다. 이 예제는 컨테이너 배포, 자동 확장 및 모니터링 기본 사항을 보여줍니다.
+Azure Developer CLI(azd)를 사용하여 Python Flask CRUD API를 배포합니다. 소스, Dockerfile,
+Bicep, 및 배포 매개 변수가 포함되어 있습니다. 이것은 <strong>학습 샘플</strong>이며,
+상용 API가 아닙니다.
 
-## 🎯 학습 목표
+## 배우게 될 내용
 
-- 컨테이너화된 Python 애플리케이션을 Azure에 배포하는 방법
-- Scale-to-zero를 사용하는 자동 확장 구성
-- 헬스 프로브 및 준비 상태 검사 구현
-- 애플리케이션 로그 및 메트릭 모니터링
-- 빠른 배포를 위한 Azure Developer CLI 사용법
-
-## 📦 포함 사항
-
-✅ **Flask 애플리케이션** - CRUD 작업이 포함된 완전한 REST API (`src/app.py`)  
-✅ **Dockerfile** - 프로덕션 준비 컨테이너 구성  
-✅ **Bicep 인프라** - 컨테이너 앱 환경 및 API 배포  
-✅ **AZD 구성** - 원클릭 배포 설정  
-✅ **헬스 프로브** - 라이브니스 및 준비 상태 검사 구성  
-✅ **자동 확장** - HTTP 부하에 따른 0-10 복제본  
-
-## 아키텍처
+- azd를 통해 컨테이너를 빌드하고 게시합니다.
+- 인그레스와 liveness/readiness 프로브를 구성합니다.
+- CRUD 응답을 확인하고 애플리케이션 로그를 검사합니다.
+- 인메모리 데이터가 내구성 있는 애플리케이션에 부적합한 이유를 이해합니다.
 
 ```mermaid
-graph TD
-    subgraph ACA[Azure 컨테이너 앱 환경]
-        Flask[Flask API 컨테이너<br/>헬스 엔드포인트<br/>REST API<br/>자동 스케일링 0-10 복제본]
-        AppInsights[애플리케이션 인사이트]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
 
-## 사전 요구 사항
+**중요:** 항목은 하나의 프로세스에 저장됩니다. 기본값은 **하나의 Gunicorn 워커,
+0–1개의 복제본**이며, 워커/복제본 간 데이터 불일치를 의도적으로 방지합니다.
+항목은 재시작, 버전 변경, 또는 0으로 축소될 때 손실됩니다. 복제본 수를 늘리려면
+공유 영속 스토리지가 필요합니다. 이 API에는 인증이나 권한 부여가 없습니다.
 
-### 필수
-- **Azure Developer CLI (azd)** - [설치 가이드](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure 구독** - [무료 계정](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Docker 설치](https://www.docker.com/products/docker-desktop/) (로컬 테스트용)
+## 선행 조건
 
-### 사전 조건 확인
+- [현재 안정 버전 azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (검토 시점에 게시된 릴리스: 1.37.2).
+- 확인용 [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- Docker 및 데몬 실행 중; 기본 로컬 이미지 빌드에 필요합니다.
+- Azure 구독, 리소스 생성 권한 및 컨테이너 앱 지역 쿼터.
+- 아래 명령어용 Bash (또는 동등한 PowerShell).
+- 옵션인 로컬 개발용 Python 3.11.
 
 ```bash
-# azd 버전 확인 (1.5.0 이상 필요)
 azd version
-
-# Azure 로그인 확인
+az version
+docker info
 azd auth login
-
-# Docker 확인 (선택 사항, 로컬 테스트용)
-docker --version
+az login
 ```
 
-## ⏱️ 배포 일정
-
-| 단계 | 소요 시간 | 작업 내용 |
-|-------|----------|--------------||
-| 환경 설정 | 30초 | azd 환경 생성 |
-| 컨테이너 빌드 | 2-3분 | Flask 앱 Docker 빌드 |
-| 인프라 프로비저닝 | 3-5분 | Container Apps, 레지스트리, 모니터링 생성 |
-| 애플리케이션 배포 | 2-3분 | 이미지 푸시 및 Container Apps에 배포 |
-| <strong>총합</strong> | **8-12분** | 배포 완료 준비 |
+CLI 도구들은 별도의 로그인 세션을 가집니다. 두 도구 모두에서 동일한 구독을 사용하세요.
 
 ## 빠른 시작
 
+저장소 루트에서:
+
 ```bash
-# 예제로 이동하세요
 cd examples/container-app/simple-flask-api
-
-# 환경 초기화 (고유 이름 선택)
-azd env new myflaskapi
-
-# 모든 것 배포하기 (인프라 + 애플리케이션)
+azd env new flask-demo
 azd up
-# 다음을 안내받게 됩니다:
-# 1. Azure 구독 선택
-# 2. 위치 선택 (예: eastus2)
-# 3. 배포를 위해 8-12분 기다리기
-
-# API 엔드포인트 받기
-azd env get-values
-
-# API 테스트하기
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**예상 출력:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ 배포 확인
-
-### 1단계: 배포 상태 확인
-
-```bash
-# 배포된 서비스 보기
-azd show
-
-# 예상 출력은 다음을 보여줍니다:
-# - 서비스: api
-# - 엔드포인트: https://ca-api-[env].xxx.azurecontainerapps.io
-# - 상태: 실행 중
-```
-
-### 2단계: API 엔드포인트 테스트
-
-```bash
-# API 엔드포인트 가져오기
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# 상태 확인 테스트
-curl $API_URL/health
+예상: HTTP 200 및 `"status":"healthy"`, 
+`"service":"simple-flask-api"`, 그리고 현재 UTC 타임스탬프가 포함된 JSON.
+프로비저닝과 이미지 빌드는 보통 몇 분이 걸리며; 시간은 다를 수 있습니다.
 
-# 루트 엔드포인트 테스트
-curl $API_URL/
+초기 프로비저닝은 포트 80에서 수신하는 공개 hello-world 이미지를 사용합니다.
+`azure.yaml` 는 서비스 배포를 위해 `infra/app/api.bicep`와 해당 매칭 파라미터 파일을 선택하는데, 
+이는 이미지, 인그레스, 프로브를 포트 8000으로 전환합니다.
+해당 배포 파라미터들은 삭제하지 마십시오.
 
-# 항목 생성
-curl -X POST $API_URL/api/items \
+## CRUD 검증
+
+동일 복제본이 활성 상태인 동안 다음 명령들을 순차적으로 실행하세요:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# 모든 항목 가져오기
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**성공 기준:**
-- ✅ 헬스 엔드포인트가 HTTP 200 반환
-- ✅ 루트 엔드포인트가 API 정보 표시
-- ✅ POST가 항목 생성 및 HTTP 201 반환
-- ✅ GET이 생성된 항목 반환
+성공: POST 201, 읽기/PUT 200, DELETE 204 (본문 없음) 이후 누락된 항목 404.
+형식 오류 또는 비객체 JSON, 또는 빈 이름은 400을 반환합니다.
+요청 간 항목이 사라지면 재시작 또는 0 스케일링을 확인하세요;
+이것은 영속성이 아닌 의도된 메모리 내 제한입니다.
 
-### 3단계: 로그 확인
+| 엔드포인트 | 메서드 |
+|---|---|
+| `/` | GET — 서비스 정보 |
+| `/health` | GET — 라이브니스/레디니스 |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## 로그 및 구성
 
 ```bash
-# azd monitor를 사용하여 실시간 로그 스트리밍
-azd monitor --logs
-
-# 또는 Azure CLI를 사용하세요:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# 다음을 확인할 수 있습니다:
-# - Gunicorn 시작 메시지
-# - HTTP 요청 로그
-# - 애플리케이션 정보 로그
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## 프로젝트 구조
+예상: Gunicorn 시작, 요청 액세스 로그, 그리고 애플리케이션 메시지.
+`azd monitor --logs` 는 포털 뷰를 열며; 터미널로 스트리밍하지 않습니다.
+Application Insights는 프로비저닝 되었지만 **이 Flask 코드에 의해 계측되지 않았습니다**;
+stdout 로그는 Container Apps/Log Analytics를 사용하세요.
 
+CPU/메모리, 복제본 한도, 또는 스케일 규칙을 위해 `infra/app/api.bicep` 를 편집한 후,
+`azd up` 를 실행하세요. 기본값은 0.5 vCPU, 1 GiB, 최소 0 / 최대 1 복제본, 
+HTTP 임계값은 50 동시 요청입니다. 스케일 투 제로는 콜드 스타트 지연을 추가할 수 있습니다.
+
+임의의 `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL`, 또는 
+`SCALE_TO_ZERO_TIMEOUT` 값들은 **이 템플릿이나 앱에 연결되어 있지 않습니다**.
+값을 설정해도 자동으로 런타임 환경 변수로 만들지는 않습니다.
+이미지는 포트 8000에 명시적으로 바인딩합니다; 포트를 변경할 경우 Dockerfile,
+Bicep 인그레스, 프로브를 함께 업데이트하세요.
+
+## 파일
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API 엔드포인트
+## 로컬 개발
 
-| 엔드포인트 | 메서드 | 설명 |
-|----------|--------|-------------|
-| `/health` | GET | 헬스 체크 |
-| `/api/items` | GET | 모든 항목 목록 조회 |
-| `/api/items` | POST | 새 항목 생성 |
-| `/api/items/{id}` | GET | 특정 항목 조회 |
-| `/api/items/{id}` | PUT | 항목 업데이트 |
-| `/api/items/{id}` | DELETE | 항목 삭제 |
-
-## 구성
-
-### 환경 변수
+이 예제 디렉터리에서:
 
 ```bash
-# 사용자 지정 구성 설정
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### 스케일링 구성
-
-API는 HTTP 트래픽에 따라 자동으로 확장됩니다:
-- **최소 복제본**: 0 (유휴 시 scale-to-zero)
-- **최대 복제본**: 10
-- **복제본당 동시 요청 수**: 50
-
-## 개발
-
-### 로컬 실행
+다른 터미널에서 `http://localhost:8000/health` 와 CRUD 엔드포인트를 테스트하세요.
+또는 실제 이미지를 빌드하고 실행하세요:
 
 ```bash
-# 종속성 설치
-cd src
-pip install -r requirements.txt
-
-# 앱 실행
-python app.py
-
-# 로컬에서 테스트
-curl http://localhost:8000/health
-```
-
-### 컨테이너 빌드 및 테스트
-
-```bash
-# 도커 이미지 빌드
 docker build -t flask-api:local ./src
-
-# 로컬에서 컨테이너 실행
-docker run -p 8000:8000 flask-api:local
-
-# 컨테이너 테스트
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## 배포
+최초 배포 후 코드 변경은 `azd deploy api` 를 실행하세요.
+Bicep 변경은 프로비저닝 및 배포를 위해 `azd up` 를 실행하세요.
 
-### 전체 배포
+## 실습 연습
+
+### 1. 입력 거부 확인
+
+**출발점:** 위 `API_URL` 에서 배포된 API.
+**목표:** API가 잘못된 JSON 구조 및 누락된 이름을 거부하는지 확인.
 
 ```bash
-# 인프라 및 애플리케이션 배포
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### 코드만 배포
+**성공 기준 / 해결책:** 둘 다 500이 아닌 JSON 오류와 함께 400을 반환.
+**일반 문제:** JSON 콘텐츠 유형 헤더 누락.
+
+### 2. 읽기 전용 버전 엔드포인트 추가
+
+**출발점:** `src/app.py`. **목표:** API 확장 및 재배포.
+`if __name__ == '__main__':` 블록 앞에 이것을 추가하세요:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+`azd deploy api` 실행 후 `curl --fail-with-body "${API_URL}/version"` 실행.
+**성공 기준:** HTTP 200 및 `{"version":"1.0.0"}`.
+**일반적인 문제:** 블로킹 `app.run()` 호출 이후에 라우트를 배치할 때
+`python src/app.py`로 테스트하기.
+
+### 지식 점검
+
+내구성 있는 데이터에 왜 한 명의 작업자가 충분하지 않은가? 그 이유는 단 하나의 프로세스라도 재시작 시
+사전을 잃어버리기 때문이다. 실사용 버전은 영속적 공유 저장소,
+인증, 권한 부여, 마이그레이션, 테스트, 운영 모니터링이 필요하다.
+
+## 비용 및 문제 해결
+
+이것은 보장된 $0 배포가 아닙니다: 기본 레지스트리 및 로그 저장/수집
+은 앱 컴퓨트가 0일 때에도 비용이 발생할 수 있습니다. 지역별
+[가격 계산기](https://azure.microsoft.com/pricing/calculator/)를 사용하세요.
+
+- **Docker 빌드 실패:** `docker info`, 네트워크 접근 및 종속성을 확인하세요.
+- **비정상 앱:** 콘솔/시스템 로그를 검사하고 이미지 포트, 인그레스,
+  및 프로브가 일치하는지 확인하세요. 플레이스홀더는 Flask 포트에서 프로브를 받아서는 안 됩니다.
+- **403/권한 오류:** 구독 및 리소스 생성 권한을 확인하세요.
+- **항목이 사라짐:** 메모리 내 상태는 재시작/스케일-투-제로 시 초기화됩니다; 내구성을 위해 데이터베이스를 추가하세요.
+
+
+## 정리 및 다음 단계
 
 ```bash
-# 응용 프로그램 코드만 배포 (인프라 변경 없음)
-azd deploy api
+azd down
 ```
 
-### 구성 업데이트
+삭제 메시지를 검토하고 전용 리소스 그룹이 제거되었는지 확인하세요.
+관련 없는 데이터가 포함된 리소스 그룹에 대해 파괴적인 정리를 사용하지 마세요.
 
-```bash
-# 환경 변수를 업데이트합니다
-azd env set API_KEY "new-api-key"
-
-# 새 구성으로 다시 배포합니다
-azd deploy api
-```
-
-## 모니터링
-
-### 로그 확인
-
-```bash
-# azd monitor를 사용하여 실시간 로그 스트리밍
-azd monitor --logs
-
-# 또는 Azure CLI를 사용하여 컨테이너 앱:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# 마지막 100줄 보기
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### 메트릭 모니터링
-
-```bash
-# Azure Monitor 대시보드 열기
-azd monitor --overview
-
-# 특정 지표 보기
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## 테스트
-
-### 헬스 체크
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-예상 응답:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### 항목 생성
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### 모든 항목 조회
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## 비용 최적화
-
-이 배포는 scale-to-zero를 사용하므로 API가 요청을 처리할 때만 비용이 발생합니다:
-
-- **유휴 비용**: ~$0/월 (scale-to-zero 상태)
-- **활성 비용**: 레플리카당 초당 ~$0.000024
-- **예상 월 비용** (가벼운 사용량): $5-15
-
-### 비용 절감 방법
-
-```bash
-# 개발을 위해 최대 복제본 수 축소
-azd env set MAX_REPLICAS 3
-
-# 더 짧은 유휴 시간 초과 사용
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5분
-```
-
-## 문제 해결
-
-### 컨테이너가 시작되지 않을 때
-
-```bash
-# Azure CLI를 사용하여 컨테이너 로그 확인
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# 로컬에서 Docker 이미지 빌드 확인
-docker build -t test ./src
-```
-
-### API에 접근할 수 없을 때
-
-```bash
-# 인그레스가 외부인지 확인하십시오
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### 응답 시간 지연 문제
-
-```bash
-# CPU/메모리 사용량 확인
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# 필요 시 리소스 확장
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## 정리
-
-```bash
-# 모든 리소스를 삭제하세요
-azd down --force --purge
-```
-
-## 다음 단계
-
-### 이 예제 확장하기
-
-1. **데이터베이스 추가** - Azure Cosmos DB 또는 SQL Database 통합
-   ```bash
-   # infra/main.bicep에 Cosmos DB 모듈 추가
-   # 데이터베이스 연결로 app.py 업데이트
-   ```
-
-2. **인증 추가** - Microsoft Entra ID 또는 API 키 구현
-   ```python
-   # app.py에 인증 미들웨어 추가
-   from functools import wraps
-   ```
-
-3. **CI/CD 설정** - GitHub Actions 워크플로우
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **관리되는 ID 추가** - Azure 서비스에 대한 보안 액세스
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### 관련 예제
-
-- **[Database App](../../../../../examples/database-app)** - SQL Database 포함 완전한 예제
-- **[Microservices](../../../../../examples/container-app/microservices)** - 다중 서비스 아키텍처
-- **[Container Apps Master Guide](../README.md)** - 모든 컨테이너 패턴 모음
-
-### 학습 자료
-
-- 📚 [AZD 초급 과정](../../../README.md) - 메인 강의 홈
-- 📚 [Container Apps 패턴](../README.md) - 추가 배포 패턴
-- 📚 [AZD 템플릿 갤러리](https://azure.github.io/awesome-azd/) - 커뮤니티 템플릿
-
-## 추가 자료
-
-### 문서
-- **[Flask 문서](https://flask.palletsprojects.com/)** - Flask 프레임워크 가이드
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - 공식 Azure 문서
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd 명령 참조
-
-### 튜토리얼
-- **[Container Apps 빠른 시작](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - 첫 앱 배포 방법
-- **[Azure에서 Python](https://learn.microsoft.com/azure/developer/python/)** - Python 개발 가이드
-- **[Bicep 언어](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - 코드형 인프라
-
-### 도구
-- **[Azure 포털](https://portal.azure.com)** - 시각적 리소스 관리
-- **[VS Code Azure 확장](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE 통합
-
----
-
-**🎉 축하합니다!** 자동 확장 및 모니터링이 포함된 프로덕션 준비 Flask API를 Azure Container Apps에 성공적으로 배포했습니다.
-
-**질문이 있나요?** [이슈 열기](https://github.com/microsoft/AZD-for-beginners/issues) 또는 [FAQ](../../../resources/faq.md)를 확인하세요.
+[다음: 데이터베이스 앱](../../../../../examples/database-app) · [마이크로서비스](../../../../../examples/container-app/microservices) ·
+[컨테이너 개요](../README.md) · [코스 홈](../../../README.md) ·
+[문제 신고](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

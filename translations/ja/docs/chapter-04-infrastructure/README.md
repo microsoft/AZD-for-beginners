@@ -1,57 +1,60 @@
-# 第4章: インフラストラクチャをコード化＆デプロイ
+# 第4章: インフラストラクチャー・アズ・コードとデプロイメント
 
-**📚 コース**: [初心者向けAZD](../../README.md) | **⏱️ 所要時間**: 1～1.5時間 | **⭐ 難易度**: 中級
+**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: 読了2～3時間；デプロイ練習に追加時間を確保してください | **⭐ 難易度**: 中級
 
 ---
 
 ## 概要
 
-本章では、Bicep テンプレートを用いたインフラストラクチャコード（IaC）パターン、リソースのプロビジョニング、および Azure Developer CLI を使ったデプロイ戦略を扱います。
+本章では、Bicepテンプレートを用いたインフラストラクチャー・アズ・コード（IaC）パターン、リソースプロビジョニング、およびAzure Developer CLIを使ったデプロイ戦略について解説します。
 
-> 2026年7月の `azd 1.27.1` で検証済みです。
+> コマンドと設定のレビュー対象: `azd 1.37.2` (2026年11月)。レビュー時にはライブのAzureプロビジョニングは実行されていません。
 
 ## 学習目標
 
-本章を修了すると、以下が理解できます:
-- Bicep テンプレートの構造と構文
-- `azd provision` による Azure リソースのプロビジョニング
-- `azd deploy` によるアプリケーションのデプロイ
-- ブルーグリーンおよびローリングデプロイ戦略の実装
+本章を修了すると、以下が習得できます：
+- Bicepテンプレートの構造と構文を理解する
+- `azd provision` を用いたAzureリソースのプロビジョニング
+- `azd deploy` を用いたアプリケーションのデプロイ
+- ブルーグリーンとローリングデプロイメント戦略の実装
 
 ---
 
 ## 📚 レッスン
 
 | # | レッスン | 説明 | 時間 |
-|---|--------|-------------|------|
-| 1 | [リソースのプロビジョニング](provisioning.md) | AZDによるAzureリソース管理 | 45分 |
-| 2 | [デプロイガイド](deployment-guide.md) | アプリケーションのデプロイ戦略 | 45分 |
-| 3 | [独自のテンプレートの作成](custom-templates.md) | 再利用可能な azd テンプレートの作成と公開 | 30分 |
+|---|--------|-------|------|
+| 1 | [リソースのプロビジョニング](provisioning.md) | AZDを使ったAzureリソース管理 | 45分 |
+| 2 | [デプロイメントガイド](deployment-guide.md) | アプリケーションデプロイ戦略 | 45分 |
+| 3 | [独自テンプレートの作成](custom-templates.md) | 再利用可能なazdテンプレートの作成と公開 | 30分 |
 
 ---
 
 ## 🚀 クイックスタート
 
 ```bash
-# テンプレートから初期化
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# 作成されるものをプレビュー
+# Preview what will be created
 azd provision --preview
 
-# インフラのみをプロビジョニング
+# Provision infrastructure only
 azd provision
 
-# コードのみをデプロイ
+# Deploy code only
 azd deploy
 
-# または両方一緒に
+# Or both together
 azd up
 ```
 
 ---
 
-## 📁 AZD プロジェクト構造
+## 📁 AZDプロジェクト構造
 
 ```
 my-project/
@@ -68,31 +71,31 @@ my-project/
 
 ---
 
-## 🔧 基本コマンド
+## 🔧 重要コマンド
 
 | コマンド | 説明 |
-|---------|-------------|
+|---------|-------|
 | `azd init` | プロジェクトの初期化 |
-| `azd provision` | Azure リソースの作成 |
+| `azd provision` | Azureリソースの作成 |
 | `azd deploy` | アプリケーションコードのデプロイ |
 | `azd up` | プロビジョニング + デプロイ |
-| `azd down` | すべてのリソースを削除 |
+| `azd down` | すべてのリソース削除 |
 
 ---
 
 ## 🔗 ナビゲーション
 
-| 方向 | チャプター |
-|-----------|---------|
+| 方向 | 章 |
+|---------|---------|
 | <strong>前へ</strong> | [第3章: 設定](../chapter-03-configuration/README.md) |
 | <strong>次へ</strong> | [第5章: マルチエージェントソリューション](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 関連リソース
+## 📖 関連資料
 
-- [事前デプロイチェック](../chapter-06-pre-deployment/README.md)
-- [コンテナーアプリの例](../../examples/container-app/README.md)
+- [事前デプロイメントチェック](../chapter-06-pre-deployment/README.md)
+- [コンテナアプリの例](../../examples/container-app/README.md)
 - [データベースアプリの例](../../examples/database-app/README.md)
 
 ---

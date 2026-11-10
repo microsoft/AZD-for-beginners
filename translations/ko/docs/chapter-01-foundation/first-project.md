@@ -1,57 +1,59 @@
 # 첫 번째 프로젝트 - 실습 튜토리얼
 
 **챕터 네비게이션:**
-- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📚 강좌 홈**: [AZD For Beginners](../../README.md)
 - **📖 현재 챕터**: 챕터 1 - 기초 및 빠른 시작
 - **⬅️ 이전**: [설치 및 설정](installation.md)
-- **➡️ 다음**: [구성](configuration.md)
-- **🚀 다음 챕터**: [챕터 2: AI-우선 개발](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ 다음**: [자신만의 앱 가져오기](bring-your-own-app.md)
+- **🚀 다음 챕터**: [챕터 2: AI-First 개발](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## 소개
 
-첫 번째 Azure Developer CLI 프로젝트에 오신 것을 환영합니다! 이 포괄적인 실습 튜토리얼은 azd를 사용하여 Azure에서 풀스택 애플리케이션을 생성, 배포 및 관리하는 전체 과정을 안내합니다. React 프런트엔드, Node.js API 백엔드, MongoDB 데이터베이스가 포함된 실제 할 일(todo) 애플리케이션을 다루게 됩니다.
+첫 번째 Azure Developer CLI 프로젝트에 오신 것을 환영합니다! React 프런트엔드, Node.js API, Azure Cosmos DB를 사용한 todo 애플리케이션을 배포합니다. 템플릿은 예전 명칭 `todo-nodejs-mongo`을 유지하지만 현재 인프라는 NoSQL용 Cosmos DB를 사용하므로 다운로드한 README와 `infra/`를 확인하고 이름에서 데이터베이스 API를 추론하지 마세요.
+
+> 2026년 11월 `azd 1.37.2`와 공개 템플릿을 기준으로 검토됨. 아래 예제는 Bash를 사용하며 JSON 추출에는 `jq`도 필요합니다. Azure 배포는 비용이 발생하며 이번 검토에서는 실행하지 않았습니다.
 
 ## 학습 목표
 
-이 튜토리얼을 완료하면 다음을 수행할 수 있습니다:
-- 템플릿을 사용한 azd 프로젝트 초기화 워크플로 숙달
-- Azure Developer CLI 프로젝트 구조 및 구성 파일 이해
-- 인프라 프로비저닝과 함께 Azure로 애플리케이션 완전 배포 실행
+이 튜토리얼을 완료하면 다음을 할 수 있습니다:
+- azd 템플릿을 사용한 프로젝트 초기화 워크플로우 숙달
+- Azure Developer CLI 프로젝트 구조와 구성 파일 이해
+- 인프라 프로비저닝과 함께 완전한 애플리케이션을 Azure에 배포
 - 애플리케이션 업데이트 및 재배포 전략 구현
-- 개발 및 스테이징용 다중 환경 관리
-- 리소스 정리 및 비용 관리 적용
+- 개발 및 스테이징을 위한 다중 환경 관리
+- 리소스 정리 및 비용 관리 실습 적용
 
 ## 학습 성과
 
-완료 후, 다음을 할 수 있습니다:
-- 템플릿에서 독립적으로 azd 프로젝트를 초기화 및 구성
-- azd 프로젝트 구조 효과적으로 탐색 및 수정
+완료 후 다음을 할 수 있습니다:
+- 템플릿에서 azd 프로젝트 독립적 초기화 및 구성
+- azd 프로젝트 구조를 효과적으로 탐색 및 수정
 - 단일 명령으로 Azure에 풀스택 애플리케이션 배포
-- 일반적인 배포 문제와 인증 문제 해결
-- 다양한 배포 단계에 맞는 다중 Azure 환경 관리
-- 애플리케이션 업데이트를 위한 지속적 배포 워크플로 구현
+- 일반적인 배포 및 인증 문제 해결
+- 다양한 배포 단계를 위한 다중 Azure 환경 관리
+- 애플리케이션 업데이트용 지속적 배포 워크플로우 구현
 
 ## 시작하기
 
-### 필수 조건 체크리스트
+### 전제 조건 체크리스트
 - ✅ Azure Developer CLI 설치됨 ([설치 가이드](installation.md))
-- ✅ `azd auth login`으로 AZD 인증 완료
-- ✅ 시스템에 Git 설치됨
-- ✅ Node.js 16 이상 (이 튜토리얼용)
+- ✅ `azd auth login`로 AZD 인증 완료
+- ✅ Git이 시스템에 설치됨
+- ✅ Node.js 22 LTS (또는 다운로드한 템플릿이 요구하는 지원 버전)
 - ✅ Visual Studio Code (권장)
 
-계속하기 전에 저장소 루트에서 설정 검증기를 실행하세요:
+계속하기 전에 저장소 루트에서 설정 검사 프로그램을 실행하세요:
 
 **Windows:** `./validate-setup.ps1`
 
 **macOS / Linux:** `bash ./validate-setup.sh`
 
-### 설정 검증
+### 설치 확인
 ```bash
-# azd 설치 확인
+# Check azd installation
 azd version
 
-# AZD 인증 확인
+# Check AZD authentication
 azd auth login --check-status
 ```
 
@@ -68,46 +70,45 @@ node --version
 
 ## 1단계: 템플릿 선택 및 초기화
 
-React 프런트엔드와 Node.js API 백엔드를 포함한 인기 있는 할 일(todo) 애플리케이션 템플릿으로 시작합니다.
+React 프런트엔드와 Node.js API 백엔드가 포함된 인기있는 todo 애플리케이션 템플릿으로 시작해 봅시다.
 
 ```bash
-# 사용 가능한 템플릿 보기
+# Browse available templates
 azd template list
 
-# 할 일 앱 템플릿 초기화
+# Initialize the todo app template
 mkdir my-first-azd-app
 cd my-first-azd-app
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
-# 안내에 따르세요:
-# - 환경 이름 입력: "dev"
-# - 구독 선택 (여러 개 있는 경우)
-# - 지역 선택: "동부 미국 2" (또는 선호하는 지역)
+# Follow the prompts:
+# - Enter an environment name: "dev"
+# - Choose a subscription (if you have multiple)
+# - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### 무슨 일이 있었나요?
-- 템플릿 코드를 로컬 디렉터리에 다운로드함
-- 서비스 정의가 포함된 `azure.yaml` 파일 생성
-- `infra/` 디렉터리에 인프라 코드 설정
-- 환경 구성을 생성함
+### 방금 무슨 일이 있었나요?
+- 템플릿 코드가 로컬 디렉터리에 다운로드됨
+- 서비스 정의를 담은 `azure.yaml` 파일 생성됨
+- `infra/` 디렉터리에 인프라 코드 설정됨
+- 환경 구성이 생성됨
 
-## 2단계: 프로젝트 구조 탐색
+## 2단계: 프로젝트 구조 살펴보기
 
 azd가 생성한 내용을 살펴봅시다:
 
 ```bash
-# 프로젝트 구조 보기
-tree /f   # 윈도우즈
-# 또는
-find . -type f | head -20   # 맥OS/리눅스
+# View the project structure
+tree /f   # Windows
+# or
+find . -type f | head -20   # macOS/Linux
 ```
 
-다음 내용을 확인할 수 있습니다:
+다음이 보여야 합니다:
 ```
 my-first-azd-app/
-├── .azd/
-│   └── config.json              # Project configuration
 ├── .azure/
+│   ├── config.json              # Selected local environment
 │   └── dev/                     # Environment-specific files
 ├── .devcontainer/               # Development container config
 ├── .github/workflows/           # GitHub Actions CI/CD
@@ -115,16 +116,14 @@ my-first-azd-app/
 ├── infra/                       # Infrastructure as code (Bicep)
 │   ├── main.bicep              # Main infrastructure template
 │   ├── main.parameters.json     # Parameters for deployment
-│   └── modules/                # Reusable infrastructure modules
+│   └── app/                    # Application infrastructure modules
 ├── src/
 │   ├── api/                    # Node.js backend API
 │   │   ├── src/               # API source code
-│   │   ├── package.json       # Node.js dependencies
-│   │   └── Dockerfile         # Container configuration
+│   │   └── package.json       # Node.js dependencies
 │   └── web/                   # React frontend
 │       ├── src/               # React source code
-│       ├── package.json       # React dependencies
-│       └── Dockerfile         # Container configuration
+│       └── package.json       # React dependencies
 ├── azure.yaml                  # azd project configuration
 └── README.md                   # Project documentation
 ```
@@ -133,62 +132,61 @@ my-first-azd-app/
 
 **azure.yaml** - azd 프로젝트의 핵심:
 ```bash
-# 프로젝트 구성을 확인하세요
+# View the project configuration
 cat azure.yaml
 ```
 
 **infra/main.bicep** - 인프라 정의:
 ```bash
-# 인프라 코드 보기
+# View the infrastructure code
 head -30 infra/main.bicep
 ```
 
-## 3단계: 프로젝트 맞춤 설정 (선택 사항)
+## 3단계: 프로젝트 맞춤화 (선택 사항)
 
-배포 전에 애플리케이션을 사용자화할 수 있습니다:
+배포 전에 애플리케이션을 맞춤화할 수 있습니다:
 
 ### 프런트엔드 수정
 ```bash
-# 리액트 앱 컴포넌트를 엽니다
-code src/web/src/App.tsx
+# Open the React app component
+code src/web/src/layout/header.tsx
 ```
 
-간단한 변경을 적용하세요:
-```typescript
-// 제목을 찾아서 변경하세요
-<h1>My Awesome Todo App</h1>
+간단한 변경을 적용해 봅시다:
+```tsx
+// Replace the existing <Text variant="xLarge">ToDo</Text> element
+<Text variant="xLarge">My Awesome Todo App</Text>
 ```
 
 ### 환경 변수 구성
 ```bash
-# 사용자 정의 환경 변수를 설정합니다
+# Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# 모든 환경 변수를 봅니다
+# View all environment variables
 azd env get-values
 ```
 
+이 두 사용자 지정 값은 로컬 저장소만 예시합니다. 기본 템플릿은 `WEBSITE_TITLE`나 `API_VERSION`를 사용하지 않아 앱을 변경하지 않습니다. 위의 명시적 소스 수정은 표시되는 제목을 변경합니다.
+
 ## 4단계: Azure에 배포
 
-이제 흥미진진한 배포 단계입니다 - 모든 것을 Azure에 배포하세요!
+이제 흥미로운 부분 - 모든 것을 Azure에 배포합시다!
 
 ```bash
-# 인프라 및 애플리케이션 배포
+# Deploy infrastructure and application
 azd up
 
-# 이 명령은 다음을 수행합니다:
-# 1. Azure 리소스 프로비저닝 (앱 서비스, Cosmos DB 등)
-# 2. 애플리케이션 빌드
-# 3. 프로비저닝된 리소스에 배포
-# 4. 애플리케이션 URL 표시
+# This command will:
+# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
+# 2. Build your application
+# 3. Deploy to the provisioned resources
+# 4. Display the application URL
 ```
 
-### 배포 중에 무슨 일이 일어나나요?
+### 배포 중에 어떤 일이 일어나나요?
 
-`azd up` 명령은 다음 단계를 수행합니다:
-1. <strong>프로비저닝</strong> (`azd provision`) - Azure 리소스 생성
-2. <strong>패키지</strong> - 애플리케이션 코드 빌드
-3. <strong>배포</strong> (`azd deploy`) - Azure 리소스에 코드 배포
+워크플로우는 인프라를 프로비저닝하고 코드를 패키징/배포합니다. 정확한 순서는 `workflows.up`을 `azure.yaml`에서 조정할 수 있으며, 이 템플릿은 프로비저닝 후 배포를 지정합니다. 모든 템플릿에 하나의 보편적 단계 순서에 의존하지 마십시오.
 
 ### 예상 출력
 ```
@@ -206,253 +204,253 @@ https://app-web-abc123def.azurewebsites.net
 ## 5단계: 애플리케이션 테스트
 
 ### 애플리케이션 접속
-배포 출력에 제공된 URL을 클릭하거나 언제든지 가져올 수 있습니다:
+배포 출력에 제공된 URL을 클릭하거나 언제든지 확인:
 ```bash
-# 애플리케이션 엔드포인트 가져오기
+# Get application endpoints
 azd show
 
-# 브라우저에서 애플리케이션 열기
-azd show --output json | jq -r '.services.web.endpoint'
+# Open the application in your browser
+azd show --output json | jq -er '.services.web.ingressUrl'
 ```
 
-### 할 일 앱 테스트
+### Todo 앱 테스트
 1. **할 일 추가** - "Add Todo" 클릭 후 작업 입력
-2. **완료 표시** - 완료한 항목 체크
-3. **항목 삭제** - 더 이상 필요 없는 할 일 삭제
+2. **완료 표시** - 완료 항목 체크
+3. **항목 삭제** - 더 이상 필요 없는 할 일 제거
 
 ### 애플리케이션 모니터링
 ```bash
-# 리소스를 위해 Azure 포털 열기
+# Open Azure portal for your resources
 azd monitor
 
-# 애플리케이션 로그 보기
+# View application logs
 azd monitor --logs
 
-# 실시간 메트릭 보기
+# View live metrics
 azd monitor --live
 ```
 
-### ✅ 배포 검증
+### ✅ 배포 확인
 
-다음 간단한 체크리스트를 실행하여 실제로 모든 것이 작동하는지 확인하세요 — “배포 성공”이 “앱 작동”을 의미하지는 않습니다:
+계속하기 전에 이 빠른 체크리스트로 실제 작동 여부를 확인하세요 — "배포 성공"이 곧 "앱 정상 작동"을 의미하지 않습니다:
 
 ```bash
-# 1. 엔드포인트가 존재하고 접근 가능한지 확인하세요
+# 1. Confirm the endpoint exists and is reachable
 azd show
 
-# 2. 엔드포인트에 대해 스모크 테스트를 수행하세요 (HTTP 200 응답 기대)
-curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+# 2. Smoke-test the endpoint (expects HTTP 200)
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error --location "$WEB_URL"
 
-# 3. 애플리케이션이 헬스 체크 엔드포인트를 제공하는 경우 확인하세요
-curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+# 3. Test the API's actual list route (the template has no /health route)
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail --show-error "$API_URL/lists"
 ```
 
-**배포가 확인된 경우:**
-- ✅ `azd show`가 접속 가능한 엔드포인트 URL을 나열함
-- ✅ URL을 브라우저에서 오류 없이 열림
-- ✅ 핵심 기능 (할 일 추가/완료/삭제)이 작동함
-- ✅ `azd monitor --logs`가 요청 도착과 예상치 못한 오류 없음 표시
+**배포가 확인되려면:**
+- ✅ `azd show`에서 접근 가능한 엔드포인트 URL 나열
+- ✅ 브라우저에서 URL이 오류 없이 열림
+- ✅ 핵심 기능 작동 (할 일 추가/완료/삭제)
+- ✅ `azd monitor --logs`가 요청 도착을 예상치 못한 오류 없이 표시
 
-어느 것도 실패하면 [챕터 7: 문제 해결](../chapter-07-troubleshooting/README.md)로 이동하세요.
+체크에 실패하면 [챕터 7: 문제 해결](../chapter-07-troubleshooting/README.md)로 이동하세요.
 
 ## 6단계: 변경 사항 적용 및 재배포
 
-변경 사항을 적용하고 얼마나 쉽게 업데이트할 수 있는지 살펴봅시다:
+변경 사항을 적용하고 업데이트가 얼마나 쉬운지 확인해 봅시다:
 
 ### API 수정
 ```bash
-# API 코드를 편집하세요
-code src/api/src/routes/lists.js
+# Edit the API code
+code src/api/src/routes/lists.ts
 ```
 
-사용자 정의 응답 헤더 추가:
+사용자 지정 응답 헤더 추가:
 ```javascript
-// 경로 핸들러를 찾아서 다음을 추가하세요:
+// Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### 코드 변경 사항만 배포
+### 코드 변경만 배포
 ```bash
-# 애플리케이션 코드만 배포하기 (인프라는 건너뛰기)
+# Deploy only the application code (skip infrastructure)
 azd deploy
 
-# 인프라가 이미 존재하므로 'azd up'보다 훨씬 빠릅니다
+# This is much faster than 'azd up' since infrastructure already exists
 ```
 
 ## 7단계: 다중 환경 관리
 
-프로덕션 전에 변경 사항을 테스트할 스테이징 환경 생성:
+프로덕션 전 변경 사항을 테스트할 스테이징 환경을 만드세요:
 
 ```bash
-# 새로운 스테이징 환경 생성
+# Create a new staging environment
 azd env new staging
 
-# 스테이징에 배포
+# Deploy to staging
 azd up
 
-# 개발 환경으로 다시 전환
+# Switch back to dev environment
 azd env select dev
 
-# 모든 환경 목록 표시
+# List all environments
 azd env list
 ```
 
 ### 환경 비교
 ```bash
-# 개발 환경 보기
+# View dev environment
 azd env select dev
 azd show
 
-# 스테이징 환경 보기
+# View staging environment  
 azd env select staging
 azd show
 ```
 
 ## 8단계: 리소스 정리
 
-실험을 마치면 지속 비용을 피하기 위해 정리하세요:
+실험을 마쳤으면 비용 발생을 막기 위해 정리하세요:
 
 ```bash
-# 현재 환경의 모든 Azure 리소스를 삭제합니다
-azd down
+# Review and delete BOTH environments created in this tutorial
+azd down --environment dev
+azd down --environment staging
 
-# 확인 없이 강제 삭제하고 소프트 삭제된 리소스를 영구 삭제합니다
-azd down --force --purge
-
-# 특정 환경을 삭제합니다
-azd env select staging
-azd down --force --purge
+# Automation alternative for a selected disposable environment:
+# azd down --environment dev --force --purge
+# --purge affects supported soft-deleted Azure resources, not local .azure files.
 ```
 
-## 클래식 앱 vs. AI 지원 앱: 동일한 워크플로우
+## 고전 앱 vs AI 기반 앱: 동일한 워크플로우
 
-방금 전통적인 웹 애플리케이션을 배포했습니다. 하지만 AI 지원, 예를 들어 Microsoft Foundry Models 기반의 채팅 앱을 배포한다면 어떻게 될까요?
+전통적인 웹 애플리케이션을 방금 배포했습니다. 그렇다면 Microsoft Foundry Models로 지원되는 채팅 애플리케이션 같은 AI 기반 앱을 배포하고 싶다면 어떨까요?
 
-좋은 소식은: **워크플로우가 동일합니다.**
+좋은 소식: **워크플로우는 동일합니다.**
 
-| 단계 | 클래식 할 일 앱 | AI 채팅 앱 |
+| 단계 | 고전 할 일 앱 | AI 채팅 앱 |
 |------|-----------------|-------------|
-| 초기화 | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| 초기화 (빈 디렉터리) | `azd init --template todo-nodejs-mongo .` | `azd init --template azure-search-openai-demo .` |
 | 인증 | `azd auth login` | `azd auth login` |
 | 배포 | `azd up` | `azd up` |
 | 모니터링 | `azd monitor` | `azd monitor` |
 | 정리 | `azd down --force --purge` | `azd down --force --purge` |
 
-유일한 차이는 시작하는 <strong>템플릿</strong>입니다. AI 템플릿에는 Microsoft Foundry Models 리소스나 AI 검색 인덱스 같은 추가 인프라가 포함되지만, azd가 모두 처리합니다. 새로운 명령을 배우거나, 다른 도구를 채택하거나, 배포 방식을 바꿀 필요가 없습니다.
+라이프사이클 명령은 같으나 전제 조건은 다릅니다. AI 템플릿은 모델 접근, 지역 제한, 데이터 수집, 추가 구성 등이 필요할 수 있습니다. 배포 전 README를 읽으세요; `azd up`는 누락된 권한이나 제한을 제공할 수 없습니다.
 
-이것이 azd의 핵심 원칙입니다: **하나의 워크플로우, 모든 작업 부하.** 이 튜토리얼에서 익힌 초기화, 배포, 모니터링, 재배포, 정리 기술은 AI 애플리케이션과 에이전트에도 똑같이 적용됩니다.
+이것이 azd의 핵심 원칙입니다: **하나의 워크플로우, 모든 워크로드.** 이 튜토리얼에서 연습한 초기화, 배포, 모니터링, 재배포, 정리 스킬은 AI 애플리케이션 및 에이전트에도 동일하게 적용됩니다.
 
 ---
 
-## 배운 내용 요약
+## 학습한 내용
 
-축하합니다! 성공적으로:
+축하합니다! 다음을 성공적으로 수행했습니다:
 - ✅ 템플릿에서 azd 프로젝트 초기화
-- ✅ 프로젝트 구조와 주요 파일 탐색
-- ✅ 풀스택 애플리케이션을 Azure에 배포
-- ✅ 코드 변경 후 재배포
+- ✅ 프로젝트 구조 및 주요 파일 탐색
+- ✅ Azure에 풀스택 애플리케이션 배포
+- ✅ 코드 변경 적용 및 재배포
 - ✅ 다중 환경 관리
 - ✅ 리소스 정리
 
-## 🎯 스킬 검증 실습
+## 🎯 스킬 검증 연습
 
-### 실습 1: 다른 템플릿 배포 (15분)
-<strong>목표</strong>: azd init 및 배포 워크플로 숙달 증명
+### 연습 1: 다른 템플릿 배포 (15분)
+<strong>목표</strong>: azd init 및 배포 워크플로우 숙달 증명
 
 ```bash
-# Python + MongoDB 스택 사용해 보기
+# Try Python + MongoDB stack
 mkdir todo-python && cd todo-python
-azd init --template todo-python-mongo
+azd init --template todo-python-mongo .
 azd up
 
-# 배포 확인
+# Verify deployment
 azd show
-curl $(azd show --output json | jq -r '.services.web.endpoint')
+curl --fail "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# 정리하기
+# Clean up
 azd down --force --purge
 ```
 
 **성공 기준:**
-- [ ] 애플리케이션이 오류 없이 배포됨
-- [ ] 브라우저에서 애플리케이션 URL 접속 가능
-- [ ] 애플리케이션 기능 정상 (할 일 추가/삭제)
-- [ ] 모든 리소스를 성공적으로 정리함
+- [ ] 오류 없이 애플리케이션 배포 완료
+- [ ] 브라우저에서 애플리케이션 URL 접근 가능
+- [ ] 애플리케이션이 정상 작동 (할 일 추가/삭제)
+- [ ] 모든 리소스 정리 성공
 
-### 실습 2: 구성 맞춤 설정 (20분)
-<strong>목표</strong>: 환경 변수 구성 연습
+### 연습 2: 구성 맞춤화 (20분)
+<strong>목표</strong>: 런타임 구성과 착각하지 않고 로컬 환경 값 저장 연습
 
 ```bash
-cd my-first-azd-app
+# Return to your original my-first-azd-app directory first
 
-# 사용자 정의 환경 생성
+# Create custom environment
 azd env new custom-config
 
-# 사용자 정의 변수 설정
+# Set custom variables
 azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
 
-# 변수 확인
+# Verify variables
 azd env get-values | grep APP_TITLE
 
-# 사용자 정의 구성으로 배포
-azd up
+# Check one value exactly; expected: My Custom Todo App
+azd env get-value APP_TITLE
 ```
 
 **성공 기준:**
-- [ ] 맞춤 환경 성공적으로 생성
+- [ ] 사용자 지정 환경 성공적으로 생성
 - [ ] 환경 변수 설정 및 조회 가능
-- [ ] 맞춤 구성으로 애플리케이션 배포
-- [ ] 배포된 앱에서 맞춤 설정 검증 가능
+- [ ] `azd env get-value APP_TITLE`가 `My Custom Todo App` 출력
+- [ ] 코드/인프라에서 소비하지 않는 한 이 값들이 기본 앱을 변경하지 않는 이유 설명 가능
 
-### 실습 3: 다중 환경 워크플로우 (25분)
-<strong>목표</strong>: 환경 관리 및 배포 전략 숙달
+### 연습 3: 다중 환경 워크플로우 (25분)
+<strong>목표</strong>: 환경 관리 및 배포 전략 마스터
 
 ```bash
-# 개발 환경 생성
+# Create dev environment
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# 개발 URL 기록
-DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Dev: $DEV_URL"
 
-# 스테이징 환경 생성
+# Create staging environment
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# 스테이징 URL 기록
-STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Staging: $STAGING_URL"
 
-# 환경 비교
+# Compare environments
 azd env list
 
-# 두 환경 모두 테스트
-curl "$DEV_URL/health"
-curl "$STAGING_URL/health"
+# Test both environments
+curl --fail "$DEV_URL"
+curl --fail "$STAGING_URL"
 
-# 두 환경 모두 정리
+# Clean up both
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
 **성공 기준:**
-- [ ] 서로 다른 구성을 가진 두 환경 생성
+- [ ] 서로 다른 구성의 두 환경 생성
 - [ ] 두 환경 모두 성공적으로 배포됨
-- [ ] `azd env select`로 환경 간 전환 가능
-- [ ] 환경 변수들이 환경별로 다름
-- [ ] 두 환경 모두 성공적으로 정리함
+- [ ] `azd env select`를 사용해 환경 간 전환 가능
+- [ ] 환경별로 환경 변수가 다름
+- [ ] 두 환경 모두 성공적으로 정리됨
 
 ## 📊 진행 상황
 
-**소요 시간**: 약 60-90분  
-**습득한 기술**:
+**투자 시간**: 약 60-90분  
+**습득 스킬**:
 - ✅ 템플릿 기반 프로젝트 초기화
 - ✅ Azure 리소스 프로비저닝
 - ✅ 애플리케이션 배포 워크플로우
@@ -460,71 +458,71 @@ azd env select staging-$(whoami) && azd down --force --purge
 - ✅ 구성 관리
 - ✅ 리소스 정리 및 비용 관리
 
-**다음 단계**: 고급 구성 패턴 학습을 위해 [구성 가이드](configuration.md)를 확인하세요!
+**다음 단계**: 고급 구성 패턴을 배우려면 [구성 가이드](../chapter-03-configuration/configuration.md)로 가세요!
 
 ## 일반적인 문제 해결
 
 ### 인증 오류
 ```bash
-# Azure에 다시 인증
-az login
+# Re-authenticate with azd (az login does not refresh azd's default credentials)
+azd auth login
 
-# 구독 액세스 확인
-az account show
+# Verify the selected environment's subscription
+azd env get-value AZURE_SUBSCRIPTION_ID
 ```
 
 ### 배포 실패
 ```bash
-# 디버그 로깅 활성화
-export AZD_DEBUG=true
+# Enable debug logging
 azd up --debug
 
-# Azure에서 애플리케이션 로그 조회
+# View application logs in Azure
 azd monitor --logs
 
-# 컨테이너 앱의 경우 Azure CLI 사용:
+# For Container Apps, use Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
 ### 리소스 이름 충돌
 ```bash
-# 고유한 환경 이름을 사용하세요
+# Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### 포트/네트워크 문제
 ```bash
-# 포트가 사용 가능한지 확인하세요
+# Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
 ## 다음 단계
 
-첫 프로젝트를 완료했으니, 다음 고급 주제를 탐색하세요:
+첫 번째 프로젝트를 완료했으니 다음 고급 주제들을 살펴보세요:
 
-### 1. 인프라 맞춤 설정
-- [인프라 코드화](../chapter-04-infrastructure/provisioning.md)
-- [데이터베이스, 스토리지 및 기타 서비스 추가](../chapter-04-infrastructure/provisioning.md#adding-services)
+### 1. 인프라 맞춤화
+- [인프라 코드](../chapter-04-infrastructure/provisioning.md)
+- [데이터베이스 인프라 추가](../chapter-04-infrastructure/provisioning.md#%EF%B8%8F-database-provisioning)
 
 ### 2. CI/CD 설정
 - [배포 가이드](../chapter-04-infrastructure/deployment-guide.md) - 완전한 CI/CD 워크플로우
 - [Azure Developer CLI 문서](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - 파이프라인 구성
 
-### 3. 프로덕션 모범 사례
-- [배포 가이드](../chapter-04-infrastructure/deployment-guide.md) - 보안, 성능 및 모니터링
+### 3. 운영 모범 사례
+- [배포 가이드](../chapter-04-infrastructure/deployment-guide.md) - 보안, 성능, 모니터링
 
 ### 4. 더 많은 템플릿 탐색
 ```bash
-# 카테고리별 템플릿을 둘러보세요
+# Browse templates by category
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# 다양한 기술 스택을 시도해보세요
-azd init --template todo-python-mongo
-azd init --template todo-csharp-sql
-azd init --template todo-java-mongo
+# Try different technology stacks
+# Choose ONE in a new empty directory, not all three in the same project
+azd init --template todo-python-mongo .
+# azd init --template todo-csharp-sql .
+# azd init --template todo-java-mongo .
 ```
 
 ## 추가 자료
@@ -532,30 +530,30 @@ azd init --template todo-java-mongo
 ### 학습 자료
 - [Azure Developer CLI 문서](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure 아키텍처 센터](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure 웰 아키텍티드 프레임워크](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### 커뮤니티 및 지원
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure 개발자 커뮤니티](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer 커뮤니티](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### 템플릿 및 예제
 - [공식 템플릿 갤러리](https://azure.github.io/awesome-azd/)
-- [커뮤니티 템플릿](https://github.com/Azure-Samples/azd-templates)
-- [엔터프라이즈 패턴](https://github.com/Azure/azure-dev/tree/main/templates)
+- [커뮤니티 템플릿 기여](https://github.com/Azure/awesome-azd)
+- [Todo 템플릿 소스](https://github.com/Azure-Samples/todo-nodejs-mongo)
 
 ---
 
-**첫 번째 azd 프로젝트 완료를 축하합니다!** 이제 Azure에서 뛰어난 애플리케이션을 자신 있게 빌드하고 배포할 준비가 되었습니다.
+**첫 번째 azd 프로젝트 완료를 축하합니다!** 이제 자신 있게 Azure에서 훌륭한 애플리케이션을 빌드하고 배포할 준비가 되었습니다.
 
 ---
 
 **챕터 네비게이션:**
-- **📚 코스 홈**: [AZD 초보자용](../../README.md)
+- **📚 강좌 홈**: [AZD For Beginners](../../README.md)
 - **📖 현재 챕터**: 챕터 1 - 기초 및 빠른 시작
 - **⬅️ 이전**: [설치 및 설정](installation.md)
-- **➡️ 다음**: [내 앱 가져오기](bring-your-own-app.md)
-- **🚀 다음 챕터**: [챕터 2: AI-우선 개발](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ 다음**: [자신만의 앱 가져오기](bring-your-own-app.md)
+- **🚀 다음 챕터**: [챕터 2: AI-First 개발](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 

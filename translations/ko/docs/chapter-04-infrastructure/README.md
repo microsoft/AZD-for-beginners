@@ -1,51 +1,54 @@
-# 4장: 코드로서의 인프라 및 배포
+# 4장: 코드형 인프라 및 배포
 
-**📚 코스**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 1-1.5 시간 | **⭐ 난이도**: 중급
+**📚 과정**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 2-3시간 읽기; 배포 실습에 추가 시간 허용 | **⭐ 난이도**: 중급
 
 ---
 
 ## 개요
 
-이 장에서는 Bicep 템플릿을 활용한 코드로서의 인프라(IaC) 패턴, 리소스 프로비저닝, Azure Developer CLI를 활용한 배포 전략을 다룹니다.
+이 장에서는 Bicep 템플릿을 사용한 코드형 인프라(IaC) 패턴, 리소스 프로비저닝 및 Azure 개발자 CLI를 이용한 배포 전략을 다룹니다.
 
-> 2026년 7월 `azd 1.27.1` 버전에서 검증됨.
+> 명령 및 구성 검토 대상: `azd 1.37.2` (2026년 11월). 검토 중에 라이브 Azure 프로비저닝은 실행되지 않았습니다.
 
 ## 학습 목표
 
-이 장을 완료하면 다음을 할 수 있게 됩니다:
-- Bicep 템플릿의 구조와 구문 이해
+이 장을 완료하면 다음을 할 수 있습니다:
+- Bicep 템플릿 구조 및 문법 이해
 - `azd provision`으로 Azure 리소스 프로비저닝
-- `azd deploy`를 통한 애플리케이션 배포
+- `azd deploy`으로 애플리케이션 배포
 - 블루-그린 및 롤링 배포 전략 구현
 
 ---
 
 ## 📚 강의
 
-| # | 강의 | 설명 | 시간 |
+| # | 강의 | 설명 | 소요 시간 |
 |---|--------|-------------|------|
 | 1 | [리소스 프로비저닝](provisioning.md) | AZD를 이용한 Azure 리소스 관리 | 45분 |
-| 2 | [배포 가이드](deployment-guide.md) | 애플리케이션 배포 전략 | 45분 |
-| 3 | [자신만의 템플릿 작성](custom-templates.md) | 재사용 가능한 azd 템플릿 빌드 및 배포 | 30분 |
+| 2 | [배포 안내](deployment-guide.md) | 애플리케이션 배포 전략 | 45분 |
+| 3 | [나만의 템플릿 작성하기](custom-templates.md) | 재사용 가능한 azd 템플릿 만들기 및 게시 | 30분 |
 
 ---
 
 ## 🚀 빠른 시작
 
 ```bash
-# 템플릿에서 초기화
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# 생성될 내용을 미리보기
+# Preview what will be created
 azd provision --preview
 
-# 인프라만 프로비저닝
+# Provision infrastructure only
 azd provision
 
-# 코드만 배포
+# Deploy code only
 azd deploy
 
-# 또는 둘 다 함께
+# Or both together
 azd up
 ```
 
@@ -80,7 +83,7 @@ my-project/
 
 ---
 
-## 🔗 내비게이션
+## 🔗 탐색
 
 | 방향 | 장 |
 |-----------|---------|

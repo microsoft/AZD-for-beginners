@@ -1,88 +1,90 @@
-# SKU 選定ガイド - 適切な Azure サービス階層の選び方
+# SKU 選択ガイド - 適切な Azure サービス階層の選び方
 
-**Chapter Navigation:**
-- **📚 コース ホーム**: [AZD 入門](../../README.md)
-- **📖 現在のチャプター**: 第6章 - 展開前の検証と計画
-- **⬅️ 前へ**: [容量計画](capacity-planning.md)
+**章ナビゲーション:**
+- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📖 現在の章**: 第6章 - 事前展開の検証と計画
+- **⬅️ 前へ**: [キャパシティプランニング](capacity-planning.md)
 - **➡️ 次へ**: [事前チェック](preflight-checks.md)
 - **🚀 次の章**: [第7章: トラブルシューティング](../chapter-07-troubleshooting/common-issues.md)
 
 ## はじめに
 
-この包括的なガイドは、異なる環境、ワークロード、および要件に対して最適な Azure サービス SKU（Stock Keeping Units）を選択するのに役立ちます。パフォーマンス要件、コストの考慮事項、スケーラビリティ要件を分析して、Azure Developer CLI のデプロイメントに最も適したサービス階層を選択する方法を学びます。
+この包括的なガイドは、さまざまな環境、ワークロード、および要件に対して最適な Azure サービス SKU（ストックキーピングユニット）を選択するのに役立ちます。パフォーマンスのニーズ、コストの考慮事項、スケーラビリティの要件を分析して、Azure Developer CLI の展開に最も適したサービス階層を選ぶ方法を学びます。
 
 ## 学習目標
 
-このガイドを完了すると、以下を習得できます:
-- Azure SKU の概念、価格モデル、および機能の違いを理解する
-- 開発、ステージング、本番向けに環境別の SKU 選定戦略を習得する
-- ワークロード要件を分析し、適切なサービス階層と一致させる
-- 賢明な SKU 選択を通じてコスト最適化戦略を実装する
-- SKU 選択のためのパフォーマンステストおよび検証手法を適用する
-- 自動化された SKU 推奨と監視を構成する
+このガイドを修了することで、以下を習得できます:
+- Azure SKU の概念、料金モデル、および機能の違いを理解する
+- 開発、ステージング、本番の環境固有の SKU 選択戦略を習得する
+- ワークロードの要件を分析し、適切なサービス階層にマッチさせる
+- インテリジェントな SKU 選択によるコスト最適化戦略を実施する
+- SKU 選択のためのパフォーマンステストと検証技術を適用する
+- 自動 SKU 推奨とモニタリングの設定を行う
 
 ## 学習成果
 
-完了後、以下ができるようになります:
-- ワークロード要件と制約に基づいて適切な Azure サービス SKU を選択する
-- 適切な階層選択によりコスト効率の高いマルチ環境アーキテクチャを設計する
-- SKU 選択に対するパフォーマンスベンチマークと検証を実装する
-- SKU 推奨とコスト最適化のための自動化ツールを作成する
-- 要件の変化に対応した SKU の移行およびスケーリング戦略を計画する
-- サービス階層の選択に Azure Well-Architected Framework の原則を適用する
+修了時には、次のことが可能になります:
+- ワークロード要件と制約に基づき適切な Azure サービス SKU を選択する
+- 適切な階層選択によるコスト効果の高い複数環境アーキテクチャを設計する
+- SKU 選択に対するパフォーマンスベンチマーキングと検証を実施する
+- SKU 推奨とコスト最適化の自動化ツールを作成する
+- 要件変化に対応した SKU マイグレーションとスケーリング戦略を計画する
+- Azure Well-Architected Framework の原則をサービス階層選択に適用する
 
 ## 目次
 
-- [SKU の理解](../../../../docs/chapter-06-pre-deployment)
-- [環境別の選定](../../../../docs/chapter-06-pre-deployment)
-- [サービス別ガイドライン](../../../../docs/chapter-06-pre-deployment)
-- [コスト最適化戦略](../../../../docs/chapter-06-pre-deployment)
-- [パフォーマンスに関する考慮事項](../../../../docs/chapter-06-pre-deployment)
-- [クイック参照表](../../../../docs/chapter-06-pre-deployment)
-- [検証ツール](../../../../docs/chapter-06-pre-deployment)
+- [SKU の理解](#understanding-skus)
+- [環境ベースの選択](#environment-based-selection)
+- [サービス固有のガイドライン](#service-specific-guidelines)
+- [コスト最適化戦略](#cost-optimization-strategies)
+- [パフォーマンスの考慮事項](#performance-considerations)
+- [クイックリファレンステーブル](#quick-reference-tables)
+- [検証ツール](#validation-tools)
 
 ---
 
 ## SKU の理解
 
+> **例の範囲:** 以下の YAML SKU マップやパフォーマンス設定は設計ノートであり、`azure.yaml` スキーマやロードツールの設定ではありません。Bicep ブロックは代替案・断片であり、パラメーターと親リソースを宣言し、組み合わせる際には固有のシンボリック名を使い、モジュールを動作するプロジェクトに接続します。価格、制限、地域/SKU の可用性は展開前にサブスクリプションで確認が必要です。
+
 ### SKU とは何か？
 
-SKU（Stock Keeping Units）は、Azure リソースの異なるサービス階層とパフォーマンスレベルを表します。各 SKU は次の点で異なります:
+SKU（ストックキーピングユニット）は、Azure リソースの異なるサービス階層とパフォーマンスレベルを表します。SKUごとに以下が異なります:
 
-- **パフォーマンス特性** (CPU、メモリ、スループット)
-- **機能の可用性** (スケーリングオプション、SLA レベル)
-- **料金モデル** (従量課金、予約容量)
-- **リージョンでの可用性** (すべての SKU がすべてのリージョンで利用できるわけではありません)
+- <strong>パフォーマンス特性</strong>（CPU、メモリ、スループット）
+- <strong>機能の可用性</strong>（スケーリングオプション、SLA レベル）
+- <strong>料金モデル</strong>（消費ベース、予約容量など）
+- <strong>地域の可用性</strong>（すべての SKU が全地域で利用可能とは限らない）
 
-### SKU 選定の主要要因
+### SKU 選択の重要な要素
 
-1. **ワークロード要件**
-   - 想定されるトラフィック/負荷パターン
+1. <strong>ワークロード要件</strong>
+   - 予想されるトラフィック/負荷パターン
    - パフォーマンス要件（CPU、メモリ、I/O）
-   - ストレージの要件とアクセスパターン
+   - ストレージの必要性とアクセスパターン
 
-2. **環境タイプ**
-   - 開発/テストと本番
+2. <strong>環境タイプ</strong>
+   - 開発/テスト環境と本番環境の違い
    - 可用性要件
-   - セキュリティおよびコンプライアンスの要件
+   - セキュリティとコンプライアンスニーズ
 
-3. **予算の制約**
-   - 初期費用と運用コストの比較
-   - 予約容量の割引
-   - 自動スケーリングのコスト影響
+3. <strong>予算制約</strong>
+   - 初期コスト対運用コスト
+   - 予約容量割引
+   - オートスケーリングのコスト影響
 
-4. **成長予測**
+4. <strong>成長予測</strong>
    - スケーラビリティ要件
-   - 将来的な機能の必要性
-   - 移行の複雑さ
+   - 将来の機能ニーズ
+   - マイグレーションの複雑さ
 
 ---
 
-## 環境別の選定
+## 環境ベースの選択
 
 ### 開発環境
 
-**優先事項**: コスト最適化、基本機能、容易なプロビジョニング/デプロビジョニング
+<strong>優先事項</strong>: コスト最適化、基本機能、簡単なプロビジョニング/デプロビジョニング
 
 #### 推奨 SKU
 ```yaml
@@ -92,21 +94,21 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
-#### 特性
-- **App Service**: 簡単なテストには F1 (Free) または B1 (Basic)
-- **Databases**: 最小限のリソースを持つ Basic ティア
-- **Storage**: ローカル冗長のみの Standard
-- **Compute**: 共有リソースで可
-- **Networking**: 基本的な構成
+#### 特徴
+- **App Service**: 単純なテスト用に F1 (無料) または B1 (ベーシック)
+- <strong>データベース</strong>: 最小限のリソースを持つベーシック階層
+- <strong>ストレージ</strong>: ローカル冗長のみの標準
+- <strong>コンピュート</strong>: 共有リソースで許容可能
+- <strong>ネットワーキング</strong>: ベーシック構成
 
 ### ステージング/テスト環境
 
-**優先事項**: 本番に近い構成、コストのバランス、パフォーマンステスト機能
+<strong>優先事項</strong>: 本番に近い構成、コストバランス、パフォーマンステスト機能
 
 #### 推奨 SKU
 ```yaml
@@ -120,16 +122,16 @@ skus:
   container_apps: "Consumption" # Pay-per-use
 ```
 
-#### 特性
-- **パフォーマンス**: 本番容量の70～80%
-- **機能**: ほとんどの本番機能を有効化
-- **冗長性**: ある程度の地理的冗長性
-- **スケーリング**: テスト用に限定的な自動スケーリング
-- **監視**: フルの監視スタック
+#### 特徴
+- <strong>パフォーマンス</strong>: 本番容量の70-80%
+- <strong>機能</strong>: ほとんどの本番機能が有効
+- <strong>冗長性</strong>: 地理的冗長性の一部
+- <strong>スケーリング</strong>: テスト用の限定的なオートスケーリング
+- <strong>モニタリング</strong>: フルモニタリングスタック
 
 ### 本番環境
 
-**優先事項**: パフォーマンス、可用性、セキュリティ、コンプライアンス、スケーラビリティ
+<strong>優先事項</strong>: パフォーマンス、可用性、セキュリティ、コンプライアンス、スケーラビリティ
 
 #### 推奨 SKU
 ```yaml
@@ -138,38 +140,38 @@ environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
-#### 特性
-- **高可用性**: 99.9% 以上の SLA 要件
-- **パフォーマンス**: 専用リソース、高スループット
-- **セキュリティ**: プレミアムなセキュリティ機能
-- **スケーリング**: フルの自動スケーリング機能
-- **監視**: 包括的なオブザーバビリティ
+#### 特徴
+- <strong>高可用性</strong>: 99.9%以上の SLA 要件
+- <strong>パフォーマンス</strong>: 専用リソース、高スループット
+- <strong>セキュリティ</strong>: プレミアムセキュリティ機能
+- <strong>スケーリング</strong>: フルオートスケーリング能力
+- <strong>モニタリング</strong>: 包括的な可観測性
 
 ---
 
-## サービス別ガイドライン
+## サービス固有のガイドライン
 
 ### Azure App Service
 
-#### SKU 決定マトリクス
+#### SKU 決定マトリックス
 
 | ユースケース | 推奨 SKU | 理由 |
 |----------|----------------|-----------|
-| 開発/テスト | F1 (Free) or B1 (Basic) | コスト効率が高く、テストに十分 |
-| 小規模本番アプリ | S1 (Standard) | カスタムドメイン、SSL、自動スケーリング |
-| 中規模本番アプリ | P1V3 (Premium V3) | より高いパフォーマンス、より多くの機能 |
-| 高トラフィックアプリ | P2V3 or P3V3 | 専用リソース、高いパフォーマンス |
-| ミッションクリティカルアプリ | I1V2 (Isolated V2) | ネットワーク分離、専用ハードウェア |
+| 開発/テスト | F1 (無料) または B1 (ベーシック) | コスト効果が高く、テストに十分 |
+| 小規模本番アプリ | S1 (標準) | カスタムドメイン、SSL、自動スケール |
+| 中規模本番アプリ | P1V3 (プレミアム V3) | より良いパフォーマンス、機能拡張 |
+| 高トラフィックアプリ | P2V3 または P3V3 | 専用リソース、高パフォーマンス |
+| ミッションクリティカルアプリ | I1V2 (アイソレーテッド V2) | ネットワーク隔離、専用ハードウェア |
 
 #### 構成例
 
-**開発**
+<strong>開発</strong>
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-dev'
@@ -185,7 +187,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-**本番**
+<strong>本番</strong>
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-prod'
@@ -203,19 +205,19 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### SKU 選定フレームワーク
+#### SKU 選択フレームワーク
 
-1. **DTU ベース (Database Transaction Units)**
-   - **Basic**: 5 DTU - 開発/テスト
-   - **Standard**: S0-S12 (10-3000 DTU) - 一般用途
-   - **Premium**: P1-P15 (125-4000 DTU) - パフォーマンス重視
+1. **DTU ベース（Database Transaction Units）**
+   - **Basic**: 5 DTU - 開発/テスト用
+   - **Standard**: S0-S12 (10-3000 DTU) - 汎用
+   - **Premium**: P1-P15 (125-4000 DTU) - パフォーマンス重要
 
-2. **vCore ベース** (本番に推奨)
-   - **General Purpose**: 計算とストレージのバランス
-   - **Business Critical**: 低レイテンシ、高い IOPS
-   - **Hyperscale**: 高度にスケーラブルなストレージ（最大 100TB）
+2. **vCore ベース**（本番推奨）
+   - **General Purpose**: バランスの取れたコンピュートとストレージ
+   - **Business Critical**: 低レイテンシ、高 IOPS
+   - **Hyperscale**: 高スケーラビリティストレージ；現在のサイズ制限と地域サポートを確認
 
-#### 例の構成
+#### 構成例
 
 ```bicep
 // Development
@@ -254,19 +256,19 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 #### 環境タイプ
 
-1. **従量課金ベース**
-   - 使用量に応じた課金
-   - 開発や変動するワークロードに適している
-   - 共有インフラ
+1. <strong>消費ベース</strong>
+   - 従量課金
+   - 開発および変動ワークロードに適合
+   - 共有インフラストラクチャ
 
-2. **専用 (ワークロードプロファイル)**
-   - 専用の計算リソース
+2. **専用（ワークロードプロファイル）**
+   - 専用計算リソース
    - 予測可能なパフォーマンス
-   - 本番ワークロード向けに適している
+   - 本番ワークロードに最適
 
 #### 構成例
 
-**開発（従量課金）**
+**開発（消費）**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -307,7 +309,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 
 **本番（専用）**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,33 +317,35 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+ゾーン冗長性には対応地域のインフラおよび適切な VNet/サブネット構成も必要であり、ここでは省略しています。この例では 3 つの専用ノードを予算に計上し、アプリのクロスゾーン配布のため少なくとも 2 つのレプリカを設定し、レプリカとノード共にゾーン障害に備えてサイズを調整します。詳細は [Container Apps の信頼性ガイダンス](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps)を参照ください。このプロファイルにアプリを配置するには、アプリの `workloadProfileName: 'production-profile'` を設定する必要があり、プロファイル作成だけではアプリは移動しません。
+
 ### Azure Cosmos DB
 
 #### スループットモデル
 
-1. **手動プロビジョニングされたスループット**
+1. <strong>手動プロビジョニングスループット</strong>
    - 予測可能なパフォーマンス
-   - 予約容量の割引
+   - 予約容量割引
    - 安定したワークロードに最適
 
-2. **オートスケールのプロビジョニングスループット**
-   - 使用量に基づく自動スケーリング
-   - 使用分だけ支払う（最小値あり）
-   - 変動するワークロードに適している
+2. <strong>オートスケールプロビジョニングスループット</strong>
+   - 使用量に基づく自動スケール
+   - 使用分のみ支払い（最低限あり）
+   - 変動ワークロードに適合
 
-3. **サーバーレス**
-   - リクエストごとの課金
+3. <strong>サーバーレス</strong>
+   - リクエストごと課金
    - プロビジョニングされたスループットなし
-   - 開発や断続的なワークロードに最適
+   - 開発および断続的なワークロードに理想的
 
-#### SKU の例
+#### SKU 例
 
 ```bicep
 // Development - Serverless
@@ -396,19 +400,19 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 }
 ```
 
-### Azure Storage Account
+### Azure Storage アカウント
 
 #### ストレージアカウントの種類
 
-1. **Standard_LRS** - 開発、重要でないデータ
-2. **Standard_GRS** - 本番、地理的冗長性が必要
-3. **Premium_LRS** - 高パフォーマンスアプリケーション
-4. **Premium_ZRS** - ゾーン冗長性による高可用性
+1. **Standard_LRS** - 開発用、重要でないデータ
+2. **Standard_GRS** - 本番用、地理的冗長性を要する場合
+3. **Premium_LRS** - 高性能アプリケーション用
+4. **Premium_ZRS** - ゾーン冗長性付き高可用性
 
-#### パフォーマンス層
+#### パフォーマンス階層
 
-- **Standard**: 汎用、コスト効率が良い
-- **Premium**: 高性能、低レイテンシ向け
+- **Standard**: 汎用、コスト効果が高い
+- **Premium**: 高性能、低レイテンシシナリオ
 
 ```bicep
 // Development
@@ -453,17 +457,20 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 1. 予約容量
 
-1〜3年のリソース予約で大幅な割引を獲得できます:
+1〜3年分のリソースを予約して大幅割引を得る:
 
 ```bash
-# 予約オプションを確認する
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. 適切なサイズ設定
+予約オファリングと対象リソースタイプは異なるため、すべてのサービス/SKU が予約をサポートしていると仮定せず、カタログや購入条件を確認してください。
 
-小さい SKU から開始し、実際の使用状況に基づいてスケールアップする:
+### 2. 適切なサイズ選定
+
+小さい SKU から開始し、実際の使用に基づいてスケールアップ:
 
 ```yaml
 # Progressive scaling approach
@@ -477,9 +484,9 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. 自動スケーリングの構成
+### 3. オートスケーリング設定
 
-コスト最適化のために賢いスケーリングを実装する:
+コスト最適化のためにインテリジェントなスケーリングを実装:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -536,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. スケジュールされたスケーリング
+### 4. スケジュールスケーリング
 
-営業時間外にスケールダウンする:
+オフピーク時間に縮小:
 
 ```json
 {
@@ -583,11 +592,11 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ---
 
-## パフォーマンスに関する考慮事項
+## パフォーマンスの考慮事項
 
-### 基本的なパフォーマンス要件
+### 基本パフォーマンス要件
 
-SKU 選定前に明確なパフォーマンス要件を定義する:
+SKU 選択前に明確なパフォーマンス要件を定義:
 
 ```yaml
 performance_requirements:
@@ -605,19 +614,21 @@ performance_requirements:
 
 ### 負荷テスト
 
-さまざまな SKU をテストしてパフォーマンスを検証する:
+異なる SKU をテストしてパフォーマンスを検証:
 
 ```bash
-# Azure Load Testing サービス
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
-### 監視と最適化
+### モニタリングと最適化
 
-包括的な監視を設定する:
+包括的なモニタリングを設定:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -644,35 +656,35 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## クイック参照表
+## クイックリファレンステーブル
 
-### App Service SKU クイック参照
+### App Service SKU クイックリファレンス
 
-| SKU | ティア | vCPU | RAM | ストレージ | 価格帯 | ユースケース |
+| SKU | 階層 | vCPU | RAM | ストレージ | 価格帯 | ユースケース |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | Free | 共有 | 1GB | 1GB | Free | 開発 |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | 小規模アプリ |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | 本番 |
-| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | 高パフォーマンス |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | エンタープライズ |
+| F1 | 無料 | 共有 | 1GB | 1GB | 無料 | 開発 |
+| B1 | ベーシック | 1 | 1.75GB | 10GB | $ | 小規模アプリ |
+| S1 | 標準 | 1 | 1.75GB | 50GB | $$ | 本番 |
+| P1V3 | プレミアム V3 | 2 | 8GB | 250GB | $$$ | 高性能 |
+| I1V2 | アイソレーテッド V2 | 2 | 8GB | 1TB | $$$$ | エンタープライズ |
 
-### SQL データベース SKU クイック参照
+### SQL Database SKU クイックリファレンス
 
-| SKU | ティア | DTU/vCore | ストレージ | 価格帯 | ユースケース |
+| SKU | 階層 | DTU/vCore | ストレージ | 価格帯 | ユースケース |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | 開発 |
-| S2 | Standard | 50 DTU | 250GB | $$ | 小規模本番 |
-| P2 | Premium | 250 DTU | 1TB | $$$ | 高パフォーマンス |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | バランス型 |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | ミッションクリティカル |
+| Basic | ベーシック | 5 DTU | 2GB | $ | 開発 |
+| S2 | 標準 | 50 DTU | 250GB | $$ | 小規模本番 |
+| P2 | プレミアム | 250 DTU | 1TB | $$$ | 高性能 |
+| GP_Gen5_4 | 汎用 | 4 vCore | 4TB | $$$ | バランス型 |
+| BC_Gen5_8 | ビジネスクリティカル | 8 vCore | 4TB | $$$$ | ミッションクリティカル |
 
-### Container Apps SKU クイック参照
+### Container Apps SKU クイックリファレンス
 
-| モデル | 価格 | CPU/メモリ | ユースケース |
+| モデル | 料金体系 | CPU/メモリ | ユースケース |
 |-------|---------|------------|----------|
-| Consumption | 従量課金 | 0.25-2 vCPU | 開発、変動負荷 |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | 本番 |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | 高パフォーマンス |
+| 消費ベース | 従量課金 | 環境/プロファイルによりサポートされる CPU/メモリ組み合わせ | 開発または本番、変動負荷 |
+| 専用 D4 | 専用ノード課金 | ノードあたり 4 vCPU、16GiB | 持続的負荷/分離ニーズ |
+| 専用 D8 | 専用ノード課金 | ノードあたり 8 vCPU、32GiB | より高い持続負荷 |
 
 ---
 
@@ -682,7 +694,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ```bash
 #!/bin/bash
-# ターゲットリージョンで SKU の可用性を確認する
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# 使用方法
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### コスト見積りスクリプト
+### コスト見積もりスクリプト
+
+**擬似コードのみ:** 下記の `Get-ResourceCost` は、現在の地域別/契約料金および使用想定を用いて実装すべきプロジェクト固有関数であり、PowerShell や Azure コマンドレットではありません。
 
 ```powershell
-# 費用見積もり用の PowerShell スクリプト
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Azure の Pricing API または料金計算機を使用する
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# 使用方法
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -749,6 +764,8 @@ Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
 ### パフォーマンス検証
+
+以下の YAML は要件スケッチであり、**Azure Load Testing、JMeter、Locust、k6 の入力スキーマではありません**。ロードテストコマンドを使う前に、選択したツールの実際の設定に翻訳してください。
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,43 +800,43 @@ test_configuration:
 
 ---
 
-## ベストプラクティスのまとめ
+## ベストプラクティスまとめ
 
-### 実行すべきこと
+### やることリスト
 
-1. **小さい構成から始めてスケールアップする** 実際の使用量に基づいて
-2. **環境ごとに異なる SKU を使用する**
-3. **パフォーマンスとコストを継続的に監視する**
-4. **本番ワークロードには予約容量を活用する**
-5. **適切な箇所で自動スケーリングを実装する**
-6. **実運用に近いワークロードでパフォーマンスをテストする**
-7. **成長を見越して計画するが、過剰プロビジョニングは避ける**
-8. **可能な場合は開発に無料ティアを使用する**
+1. **小さく始め、使用に応じてスケールアップする**
+2. **環境ごとに異なる SKU を使う**
+3. <strong>パフォーマンスとコストを継続的にモニタリングする</strong>
+4. <strong>本番ワークロードには予約容量を活用する</strong>
+5. <strong>適切な場所でオートスケーリングを実装する</strong>
+6. <strong>現実的なワークロードでパフォーマンステストを行う</strong>
+7. <strong>成長を見込んだ計画を立てるが過剰プロビジョニングは避ける</strong>
+8. <strong>可能な限り開発には無料階層を使う</strong>
 
-### やってはいけないこと
+### やってはいけないことリスト
 
-1. **開発に本番用 SKU を使用しない**
-2. **リージョンごとの SKU 可用性を無視しない**
-3. **データ転送コストを忘れない**
-4. **正当な理由なしに過剰プロビジョニングを行わない**
-5. **依存関係の影響を無視しない**
-6. **自動スケーリングの上限を高く設定しすぎない**
-7. **コンプライアンス要件を忘れない**
-8. **価格だけで判断しない**
-
----
-
-**プロのヒント**: 実際の使用パターンに基づいて SKU 選択の最適化に関する個別推奨を得るには、Azure Cost Management と Advisor を使用してください。
+1. **開発に本番用 SKU を使わない**
+2. **地域の SKU 可用性を無視しない**
+3. <strong>データ転送コストを忘れない</strong>
+4. <strong>正当な理由なしに過剰プロビジョニングしない</strong>
+5. <strong>依存関係の影響を無視しない</strong>
+6. <strong>オートスケーリングの上限を高く設定しすぎない</strong>
+7. <strong>コンプライアンス要件を忘れない</strong>
+8. <strong>価格だけで判断しない</strong>
 
 ---
 
-**ナビゲーション**
-- **前のレッスン**: [容量計画](capacity-planning.md)
-- **次のレッスン**: [事前チェック](preflight-checks.md)
+<strong>プロのヒント</strong>: Azure Cost Management と Advisor を活用して、実際の使用パターンに基づく SKU 選択の最適化のためのパーソナライズされた推奨を受け取ってください。
+
+---
+
+<strong>ナビゲーション</strong>
+- <strong>前のレッスン</strong>: [キャパシティプランニング](capacity-planning.md)
+- <strong>次のレッスン</strong>: [事前チェック](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**:
-本書はAI翻訳サービス「Co-op Translator」(https://github.com/Azure/co-op-translator)を使用して翻訳されました。正確性の確保に努めていますが、自動翻訳には誤りや不正確な点が含まれる場合があることにご注意ください。原文（原言語）の文書を正本としてご参照ください。重要な情報については、専門の翻訳者による翻訳を推奨します。本翻訳の利用により生じた誤解や解釈の相違について、当社は一切責任を負いません。
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

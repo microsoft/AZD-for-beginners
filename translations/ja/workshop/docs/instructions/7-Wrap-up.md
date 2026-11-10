@@ -1,103 +1,103 @@
-# 7. 総括と次のステップ
+# 7. まとめと次のステップ
 
-!!! tip "主な要点"
+!!! tip "重要なポイントは次のとおりです"
 
-    - [ ] AZD のテンプレートは AI アプリケーション開発を数日から数時間に短縮する
-    - [ ] Discovery → Deployment → Customization の方法論は構造化された学習の道筋を提供する
-    - [ ] MCP サーバーと連携した GitHub Copilot により、自然言語で複雑なコードベースを探査できる
-    - [ ] Microsoft Foundry は組み込みの可観測性、評価、セキュリティテストを提供する
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. あなたが達成したこと
+## 1. 達成したこと
 
-おめでとうございます！このワークショップで、あなたは以下を達成しました：
+おめでとうございます！このワークショップでは、以下を成功裏に達成しました：
 
-| Module | Accomplishment |
+| モジュール | 達成内容 |
 |:---|:---|
-| **Module 1** | Azure Developer CLI を発見し、AI テンプレートを選択した |
-| **Module 2** | 完全な AI エージェント ソリューションをデプロイし、検証した |
-| **Module 3** | テンプレートを分解してアーキテクチャを理解した |
-| **Module 4** | `azure.yaml` の設定とライフサイクルフックを調査した |
-| **Module 5** | テンプレートを自分のシナリオ向けにカスタマイズした |
-| **Module 6** | インフラを安全に解体し、リソースを管理した |
+| **モジュール 1** | Azure Developer CLI を発見し、AIテンプレートを選択 |
+| **モジュール 2** | 完全なAIエージェントソリューションを展開し、検証 |
+| **モジュール 3** | テンプレートを分解してアーキテクチャを理解 |
+| **モジュール 4** | `azure.yaml` の設定とライフサイクルフックを探求 |
+| **モジュール 5** | 独自のシナリオに合わせてテンプレートをカスタマイズ |
+| **モジュール 6** | インフラを安全に解体し、リソースを管理 |
 
 ---
 
-## 2. 習得した重要な概念
+## 2. 習得した主要なコンセプト
 
 ### Azure Developer CLI (azd)
-- `azd init` - テンプレートからプロジェクトを初期化する
-- `azd up` - 1つのコマンドでプロビジョニングとデプロイを実行する
-- `azd env` - 環境変数を管理する
-- `azd down` - リソースを安全にクリーンアップする
+- `azd init` - テンプレートからプロジェクトを初期化
+- `azd up` - 1コマンドでプロビジョニングとデプロイ
+- `azd env` - 環境変数の管理
+- `azd down` - リソースの安全なクリーンアップ
 
-### AZD テンプレート構成
-- `azure.yaml` - 設定とデプロイのフック
-- `infra/` - Bicep によるインフラストラクチャー定義 (IaC)
-- `src/` - アプリケーションのソースコード
-- `scripts/` - 自動化およびセットアップ用スクリプト
+### AZD テンプレート構造
+- `azure.yaml` - 設定とデプロイフック
+- `infra/` - Bicep インフラストラクチャコード
+- `src/` - アプリケーションソースコード
+- `scripts/` - 自動化およびセットアップスクリプト
 
 ### Microsoft Foundry の機能
-- インテリジェントアシスタント向けの AI Agent Service
-- ナレッジ検索のための File Search と Azure AI Search
-- 組み込みのトレーシング、モニタリング、評価
-- AI 安全性検証のためのレッドチーミング
+- インテリジェントアシスタント向け AI エージェントサービス
+- 知識検索のためのファイル検索と Azure AI 検索
+- 組み込みのトレース、監視、評価
+- AIセーフティ検証のためのレッドチーミング
 
 ---
 
-## 3. 学習の旅を続ける
+## 3. 学習の旅を続けましょう
 
-### 推奨される次のステップ
+### おすすめの次のステップ
 
-| Path | Resource | Time |
+| パス | リソース | 所要時間 |
 |:---|:---|:---|
-| **Complete Course** | [AZD for Beginners Curriculum](../../README.md) | 8〜12時間 |
-| **Try Another Template** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1〜2時間 |
-| **Deep Dive** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | 継続的 |
-| **Community** | [Azure Discord](https://aka.ms/foundry/discord) | 今すぐ参加！ |
+| <strong>コース完了</strong> | [AZD for Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | 自習式 |
+| <strong>他のテンプレートを試す</strong> | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1〜2時間 |
+| <strong>深堀り</strong> | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | 継続的 |
+| <strong>コミュニティ参加</strong> | [Azure Discord](https://aka.ms/foundry/discord) | 今すぐ参加！ |
 
-### 次に試すことをお勧めするテンプレート
+### 次に試すおすすめテンプレート
 
-1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - 基本的なデータを使ったチャット
-2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - 高度な RAG パターン
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - 企業向け小売シナリオ
+1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - データで始める基本チャット
+2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - 高度なRAGパターン
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - エンタープライズ向け小売シナリオ
 
 ---
 
 ## 4. ワークショップチャレンジ
 
-スキルを試す準備はできていますか？ 以下のチャレンジに挑戦してみましょう：
+スキルを試す準備はできましたか？以下のチャレンジに挑戦しましょう：
 
-| Challenge | Description | Difficulty |
+| チャレンジ | 説明 | 難易度 |
 |:---|:---|:---|
-| **1. Multi-Agent Scenario** | 別の業界（例：ヘルスケア、金融）向けにデプロイしてカスタマイズする | ⭐⭐ |
-| **2. Custom Knowledge Base** | 独自のデータファイルを追加し、カスタム検索インデックスを作成する | ⭐⭐⭐ |
-| **3. Production Deployment** | `azd pipeline config` を使用して GitHub Actions で CI/CD を構築する | ⭐⭐⭐⭐ |
+| **1. マルチエージェントシナリオ** | 異なる業界（例：医療、金融）向けに展開とカスタマイズ | ⭐⭐ |
+| **2. カスタムナレッジベース** | 独自のデータファイルを追加しカスタム検索インデックスを作成 | ⭐⭐⭐ |
+| **3. 本番展開** | `azd pipeline config` を使った GitHub Actions の CI/CD 設定 | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. フィードバックを共有する
+## 5. フィードバックを共有してください
 
-皆さんのフィードバックはこのワークショップの改善に役立ちます！
+あなたのフィードバックがこのワークショップの改善に役立ちます！
 
-- **GitHub Issues**: [フィードバックを投稿](https://github.com/microsoft/azd-for-beginners/issues) - `Workshop` タグを付けて投稿してください
-- **Discord**: Join [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - `#get-help` に投稿してください
-- **貢献**: プルリクエストを送ってワークショップの改善に協力してください！
+- **GitHub Issues**: [フィードバックを投稿する](https://github.com/microsoft/azd-for-beginners/issues) - タグは `Workshop`
+- **Discord**: [Microsoft Foundry Discord](https://aka.ms/foundry/discord) に参加 - 投稿先は `#get-help`
+- <strong>コントリビューション</strong>: プルリクエストを送信してワークショップの改善に協力しましょう！
 
 ---
 
-## ありがとうございます！ 🎉
+## ありがとうございました！🎉
 
-AZD for AI Developers ワークショップの修了、おめでとうございます。今回の経験が Azure 上で AI アプリケーションを構築・デプロイするためのスキルと自信を与えられたことを願っています。
+AZD for AI Developers Workshop を修了していただきありがとうございます。この体験が、Azure 上でAIアプリケーションを構築・展開するためのスキルと自信を身につける助けとなれば幸いです。
 
-**これからも構築を続け、学び続け、Azure AI デベロッパーコミュニティへようこそ！**
+**開発を続け、学び続け、Azure AI 開発者コミュニティへようこそ！**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 コースホーム** | [AZD For Beginners](../../README.md) |
+| **📚 コースホーム** | [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
 | **📖 ドキュメント** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
 | **🛠️ AI テンプレート** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
 | **💬 コミュニティ** | [Azure Discord](https://aka.ms/foundry/discord) |
@@ -105,6 +105,6 @@ AZD for AI Developers ワークショップの修了、おめでとうござい�
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項：
-本書はAI翻訳サービス「Co‑op Translator」（https://github.com/Azure/co-op-translator）を用いて翻訳されました。正確性の確保に努めておりますが、自動翻訳には誤りや不正確な表現が含まれる可能性があることをご留意ください。重要な情報については原文（原言語）の文書を正式な出典とし、専門の人による翻訳を受けることを推奨します。本翻訳の利用により生じた誤解や解釈の相違については責任を負いかねます。
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

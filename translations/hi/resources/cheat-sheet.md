@@ -1,633 +1,655 @@
-# Command Cheat Sheet - Essential AZD Commands
+# कमांड चीट शीट - आवश्यक AZD कमांड्स
 
-**Quick Reference for All Chapters**
-- **📚 Course Home**: [AZD शुरुआती के लिए](../README.md)
-- **📖 Quick Start**: [अध्याय 1: आधार और त्वरित शुरुआत](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI Commands**: [अध्याय 2: AI-प्रथम विकास](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Advanced**: [अध्याय 4: इन्फ्रास्ट्रक्चर कोड के रूप में](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**सभी अध्यायों के लिए त्वरित संदर्भ**
+- **📚 कोर्स होम**: [शुरुआती के लिए AZD](../README.md)
+- **📖 त्वरित प्रारंभ**: [अध्याय 1: आधार और त्वरित प्रारंभ](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI कमांड्स**: [अध्याय 2: AI-प्रथम विकास](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 उन्नत**: [अध्याय 4: इन्फ्रास्ट्रक्चर एस कोड](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
-## Introduction
+## परिचय
 
-यह विस्तृत चीट शीट सबसे अधिक उपयोग किए जाने वाले Azure Developer CLI कमांड्स के लिए त्वरित संदर्भ प्रदान करती है, जिन्हें श्रेणीवार व्यावहारिक उदाहरणों के साथ व्यवस्थित किया गया है। यह azd प्रोजेक्ट्स के साथ विकास, समस्या निवारण और दैनिक संचालन के दौरान त्वरित संदर्भ के लिए उपयोगी है।
+यह व्यापक चीट शीट सबसे अधिक उपयोग किए जाने वाले Azure Developer CLI कमांड्स का त्वरित संदर्भ प्रदान करता है, जिन्हें श्रेणी के अनुसार और व्यावहारिक उदाहरणों के साथ व्यवस्थित किया गया है। यह azd प्रोजेक्ट्स के साथ विकास, समस्या निवारण, और दैनिक कार्यों के दौरान त्वरित खोजों के लिए उत्तम है।
 
-## Learning Goals
+## सीखने के लक्ष्य
 
 इस चीट शीट का उपयोग करके, आप:
-- आवश्यक Azure Developer CLI कमांड्स और सिंटैक्स तक तुरंत पहुँच प्राप्त करेंगे
-- कार्यात्मक श्रेणियों और उपयोग मामलों के अनुसार कमांड संगठन को समझेंगे
-- सामान्य विकास और परिनियोजन परिदृश्यों के लिए व्यावहारिक उदाहरण संदर्भित करेंगे
-- त्वरित समस्या समाधान के लिए निदान कमांड्स का उपयोग कर सकेंगे
-- उन्नत कॉन्फ़िगरेशन और अनुकूलन विकल्पों को कुशलता से खोज पाएँगे
-- वातावरण प्रबंधन और मल्टी-एनवायरनमेंट वर्कफ़्लो कमांड्स पाएँगे
+- आवश्यक Azure Developer CLI कमांड्स और सिंटैक्स तक त्वरित पहुंच पाएंगे
+- कमांड को कार्यात्मक श्रेणियों और उपयोग मामलों के आधार पर समझेंगे
+- सामान्य विकास और तैनाती परिदृश्यों के लिए व्यावहारिक उदाहरण संदर्भित करेंगे
+- त्वरित समस्या समाधान के लिए समस्या निवारण कमांड्स तक पहुँचेंगे
+- उन्नत कॉन्फ़िगरेशन और अनुकूलन विकल्पों को कुशलता से पाएंगे
+- पर्यावरण प्रबंधन और बहु-पर्यावरण कार्यप्रवाह कमांड्स खोजेंगे
 
-## Learning Outcomes
+## सीखने के परिणाम
 
-नियमित संदर्भ के साथ, आप सक्षम होंगे:
-- बिना पूर्ण दस्तावेज़ संदर्भ के azd कमांड्स को आत्मविश्वास के साथ निष्पादित करना
-- उपयुक्त डायग्नोस्टिक कमांड्स का उपयोग करके सामान्य समस्याओं का शीघ्र समाधान करना
-- कई वातावरणों और परिनियोजन परिदृश्यों का कुशलतापूर्वक प्रबंधन करना
-- आवश्यकतानुसार उन्नत azd सुविधाओं और कॉन्फ़िगरेशन विकल्पों को लागू करना
-- व्यवस्थित कमांड अनुक्रमों का उपयोग करके परिनियोजन मुद्दों का निदान करना
-- azd शॉर्टकट्स और विकल्पों के प्रभावी उपयोग के माध्यम से वर्कफ़्लो का अनुकूलन करना
+इस चीट शीट को नियमित रूप से संदर्भित करके, आप सक्षम होंगे:
+- पूर्ण दस्तावेज़ीकरण के संदर्भ के बिना AZD कमांड्स का आत्मविश्वास से निष्पादन करें
+- उपयुक्त डायग्नोस्टिक कमांड्स का उपयोग करते हुए आम समस्याओं को त्वरित रूप से हल करें
+- कई पर्यावरण और तैनाती परिदृश्यों का कुशल प्रबंधन करें
+- जब आवश्यक हो, तो उन्नत azd सुविधाओं और कॉन्फ़िगरेशन विकल्पों को लागू करें
+- तैनाती समस्याओं का व्यवस्थित कमांड अनुक्रमों के माध्यम से निवारण करें
+- azd शॉर्टकट्स और विकल्पों के प्रभावी उपयोग के माध्यम से कार्यप्रवाहों को अनुकूलित करें
 
-## Getting Started Commands
+## आरंभ करने वाले कमांड्स
 
-### Authentication
+### प्रमाणीकरण
 ```bash
-# AZD के माध्यम से Azure में लॉगिन करें
+# Login to Azure via AZD
 azd auth login
 
-# Azure CLI में लॉगिन करें (AZD इसे पृष्ठभूमि में उपयोग करता है)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# वर्तमान खाता जांचें
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# डिफ़ॉल्ट सब्सक्रिप्शन सेट करें
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# AZD से लॉगआउट करें
+# Logout from AZD
 azd auth logout
 
-# Azure CLI से लॉगआउट करें
+# Logout from Azure CLI
 az logout
 ```
 
-### Project Initialization
+### प्रोजेक्ट प्रारंभिकीकरण
 ```bash
-# उपलब्ध टेम्पलेट्स ब्राउज़ करें
+# Browse available templates
 azd template list
 
-# टेम्पलेट से प्रारंभ करें
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# वर्तमान निर्देशिका में प्रारंभ करें
+# Initialize in current directory
 azd init .
 
-# कस्टम नाम के साथ प्रारंभ करें
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
-## Core Deployment Commands
+## मुख्य तैनाती कमांड्स
 
-### Complete Deployment Workflow
+### पूर्ण तैनाती कार्यप्रवाह
 ```bash
-# सब कुछ तैनात करें (प्राविजन + तैनाती)
+# Deploy everything (provision + deploy)
 azd up
 
-# पुष्टिकरण संकेतों को अक्षम करके तैनात करें
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# विशिष्ट पर्यावरण में तैनात करें
+# Deploy to specific environment
 azd up --environment production
 
-# कस्टम पैरामीटर के साथ तैनात करें
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
-### Infrastructure Only
+### केवल इन्फ्रास्ट्रक्चर
 ```bash
-# Azure संसाधनों का प्रावधान करें
+# Provision Azure resources
 azd provision
 
-# 🧪 बुनियादी ढांचे में होने वाले परिवर्तनों का पूर्वावलोकन
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# यह ड्राय-रन दिखाता है कि कौन से संसाधन बनाए/संशोधित/हटाए जाएंगे
-# यह 'terraform plan' या 'bicep what-if' के समान है - चलाने के लिए सुरक्षित है, कोई बदलाव लागू नहीं होते
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
-### Application Only
+### केवल एप्लिकेशन
 ```bash
-# एप्लिकेशन कोड तैनात करें
+# Deploy application code
 azd deploy
 
-# विशिष्ट सेवा तैनात करें
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# सभी सेवाएँ तैनात करें
+# Deploy all services
 azd deploy --all
 ```
 
-### Build and Package
+### बिल्ड और पैकेज
 ```bash
-# एप्लिकेशन की निर्भरताओं को पुनर्स्थापित (डाउनलोड) करें
+# Restore (download) application dependencies
 azd restore
 
-# किसी विशिष्ट सेवा को पुनर्स्थापित करें
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# तैनात किए बिना एक तैनात करने योग्य आर्टिफैक्ट बनाएं
+# Build a deployable artifact without deploying
 azd package
 
-# विशिष्ट सेवा बनाएं
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** आपके ऐप की निर्भरताओं (npm, pip, NuGet, Maven, आदि) को डाउनलोड करता है। यह `azd package` और `azd deploy` के दौरान स्वचालित रूप से चलता है, इसलिए आप मुश्किल से ही इसे सीधे कॉल करेंगे—इसे मैन्युअल रूप से चलाएँ जब आप निर्भरताओं को पहले से फ़ेच करना चाहें (उदा., CI कैश को गर्म करने के लिए या बाद में ऑफ़लाइन काम करने के लिए)।
-> 
-> **`azd package`** परिनियोज्य आर्टिफैक्ट (एक कंटेनर इमेज या ज़िप) बनाता है **बिना** इसे Azure पर पुश किए। इसे अकेले उपयोग करें ताकि यह सत्यापित कर सकें कि बिल्ड सफल है, आउटपुट का निरीक्षण करें, या ऐसा आर्टिफैक्ट बनाएँ जिसे कोई अलग प्रक्रिया बाद में परिनियोजित करेगी। `azd deploy` स्वचालित रूप से पैकेज करता है, इसलिए केवल तब ही `azd package` की आवश्यकता होती है जब आप आर्टिफैक्ट को परिनियोजित किए बिना ही चाहते हों।
+> **`azd restore`** आपके ऐप की निर्भरताओं (npm, pip, NuGet, Maven, आदि) को डाउनलोड करता है। यह स्वचालित रूप से `azd package` और `azd deploy` के दौरान चलता है, इसलिए आप इसे सीधे चलाते नहीं हैं—इसे मैन्युअली चलाएँ यदि आप निर्भरताएँ पहले से प्राप्त करना चाहते हैं (उदाहरण के तौर पर, CI कैश को गर्म करने या बाद में ऑफ़लाइन काम करने के लिए)।
 
-## 🌍 Environment Management
+> **`azd package`** तैनाती से पहले एक डिप्लॉयबल आर्टिफैक्ट तैयार करता है बिना एप्लिकेशन सेवा को डिप्लॉय किए। व्यवहार भाषा और होस्ट पर निर्भर करता है: कंटेनर पैकेजिंग Azure रिमोट बिल्ड्स का उपयोग कर सकती है और इमेजेस को रजिस्ट्री में प्रकाशित कर सकती है, इसलिए यह जरूरी नहीं कि ऑफ़लाइन या Azure लेखन से मुक्त हो। `azd deploy` स्वतः पैकेज कर सकता है; जब आप एक आर्टिफैक्ट या बिल्ड जांच की जरूरत हो तब अलग पैकेज चरण का उपयोग करें।
 
-### Environment Operations
+
+## 🌍 पर्यावरण प्रबंधन
+
+### पर्यावरण संचालन
 ```bash
-# सभी एनवायरनमेंट्स सूचीबद्ध करें
+# List all environments
 azd env list
 
-# नया एनवायरनमेंट बनाएँ
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# एनवायरनमेंट चुनें
+# Select environment
 azd env select production
 
-# उपलब्ध एनवायरनमेंट्स दिखाएँ
+# Show available environments
 azd env list
 
-# एनवायरनमेंट की स्थिति ताज़ा करें
+# Refresh environment state
 azd env refresh
 ```
 
-### Environment Variables
+### पर्यावरण चर
 ```bash
-# पर्यावरण चर सेट करें
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# पर्यावरण चर प्राप्त करें
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# सभी पर्यावरण चर सूचीबद्ध करें
+# List all environment variables
 azd env get-values
 
-# पर्यावरण चर हटाएँ
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
 
-## ⚙️ Configuration Commands
+पर्यावरण फ़ाइलें पठन-साधारण होती हैं। `azd env set` को गुप्त संग्रहण के रूप में न लें; उपयुक्तता के अनुसार Key Vault संदर्भ या प्रबंधित पहचान का उपयोग करें।
 
-### Global Configuration
+## ⚙️ कॉन्फ़िगरेशन कमांड्स
+
+### वैश्विक कॉन्फ़िगरेशन
 ```bash
-# सभी कॉन्फ़िगरेशन सूचीबद्ध करें
+# List all configuration
 azd config show
 
-# वैश्विक डिफ़ॉल्ट सेट करें
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# कॉन्फ़िगरेशन हटाएँ
+# Remove configuration
 azd config unset defaults.location
 
-# सभी कॉन्फ़िगरेशन रीसेट करें
+# Reset all configuration
 azd config reset
 ```
 
-### Project Configuration
+### प्रोजेक्ट कॉन्फ़िगरेशन
 ```bash
-# azure.yaml को मान्य करें
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# परियोजना जानकारी दिखाएँ
+# Show project information
 azd show
 
-# सेवा एंडपॉइंट प्राप्त करें
+# Get service endpoints
 azd show --output json
 ```
 
-## 📊 Monitoring and Diagnostics
+## 📊 निगरानी और निदान
 
-### Monitoring Dashboard
+### मॉनिटरिंग डैशबोर्ड
 ```bash
-# Azure पोर्टल में मॉनिटरिंग डैशबोर्ड खोलें
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# Application Insights के लाइव मेट्रिक्स खोलें
+# Open Application Insights live metrics
 azd monitor --live
 
-# Application Insights के लॉग्स ब्लेड खोलें
+# Open Application Insights logs blade
 azd monitor --logs
 
-# Application Insights का अवलोकन खोलें
+# Open Application Insights overview
 azd monitor --overview
 ```
 
-### Viewing Container Logs
+एप्लिकेशन इनसाइट्स टेम्पलेट द्वारा कॉन्फ़िगर किया जाना चाहिए। AZD के लाइव मेट्रिक्स विकल्प वर्तमान में Python एप्लिकेशन के लिए समर्थित नहीं हैं; इसके बजाय अवलोकन, लॉग्स या सैंपल की दस्तावेजीकृत ट्रेसिंग वर्कफ़्लो का उपयोग करें।
+
+### कंटेनर लॉग्स देखना
 ```bash
-# Azure CLI के माध्यम से लॉग देखें (Container Apps के लिए)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# लॉग्स को वास्तविक समय में फॉलो करें
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Azure Portal से लॉग देखें
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
-### Log Analytics Queries
+### लॉग एनालिटिक्स क्वेरीज
 ```bash
-# Azure पोर्टल के माध्यम से लॉग एनालिटिक्स तक पहुँच
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# Azure CLI का उपयोग करके लॉग्स क्वेरी करें
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ Maintenance Commands
+## 🛠️ रखरखाव कमांड्स
 
-### Cleanup
+### सफाई
 ```bash
-# सभी Azure संसाधनों को हटाएँ
+# Remove all Azure resources
 azd down
 
-# पुष्टि के बिना बलपूर्वक हटाएँ
+# Force delete without confirmation
 azd down --force
 
-# सॉफ्ट-डिलीट किए गए संसाधनों को स्थायी रूप से हटाएँ
+# Purge soft-deleted resources
 azd down --purge
 
-# पूर्ण सफाई
+# Complete cleanup
 azd down --force --purge
 ```
 
-### Updates
+### अपडेट्स
 ```bash
-# azd अपडेट्स की जाँच करें
+# Check for azd updates
 azd version
 
-# वर्तमान संस्करण प्राप्त करें
+# Get current version
 azd version
 
-# वर्तमान कॉन्फ़िगरेशन देखें
+# View current configuration
 azd config show
 ```
 
-## 🔧 Advanced Commands
+## 🔧 उन्नत कमांड्स
 
-### Pipeline and CI/CD
+### पाइपलाइन और CI/CD
 ```bash
-# GitHub Actions को कॉन्फ़िगर करें
+# Configure GitHub Actions
 azd pipeline config
 
-# Azure DevOps को कॉन्फ़िगर करें
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# पाइपलाइन कॉन्फ़िगरेशन दिखाएं
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
-### Infrastructure Management
+### इन्फ्रास्ट्रक्चर प्रबंधन
 ```bash
-# इन्फ्रास्ट्रक्चर टेम्पलेट बनाएं
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 इन्फ्रास्ट्रक्चर पूर्वावलोकन और योजना
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# डिप्लॉय किए बिना इन्फ्रास्ट्रक्चर प्रोविज़निंग का अनुकरण करता है
-# Bicep/Terraform टेम्पलेट्स का विश्लेषण करता है और दिखाता है:
-# - जो संसाधन जोड़े जाएंगे (हरा +)
-# - जो संसाधन संशोधित किए जाएंगे (पीला ~)
-# - जो संसाधन हटाए जाएंगे (लाल -)
-# चलाने के लिए सुरक्षित - Azure वातावरण में कोई वास्तविक परिवर्तन नहीं किए जाते
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# azure.yaml से इन्फ्रास्ट्रक्चर संश्लेषित करें
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
-### Project Information
+### प्रोजेक्ट जानकारी
 ```bash
-# प्रोजेक्ट की स्थिति और एंडपॉइंट दिखाएँ
+# Show project status and endpoints
 azd show
 
-# विस्तृत प्रोजेक्ट जानकारी JSON के रूप में दिखाएँ
+# Show detailed project info as JSON
 azd show --output json
 
-# सेवा के एंडपॉइंट प्राप्त करें
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI & Extensions Commands
+## 🤖 AI और एक्सटेंशंस कमांड्स
 
-### AZD Extensions
+### AZD एक्सटेंशंस
+
+AI CLI संदर्भ समीक्षा 2026-11-04: `azd 1.37.2`, एजेंट्स `1.0.0-beta.23`, मूल्यांकन `1.0.0-beta.2`। संयुक्त कार्यप्रवाह के लिए `azd >= 1.37.0` का उपयोग करें; असंगत एक्सटेंशंस से पहले कोर CLI को अपग्रेड करें।
+
 ```bash
-# सभी उपलब्ध एक्सटेंशनों को सूचीबद्ध करें (AI सहित)
+# List all available extensions (including AI)
 azd extension list
 
-# Foundry एजेंट्स एक्सटेंशन इंस्टॉल करें
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# एजेंट स्किल्स एक्सटेंशन (पूर्वावलोकन) इंस्टॉल करें
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the agent skills extension (preview)
 azd extension install azure.ai.skills
 
-# Foundry कनेक्शन्स एक्सटेंशन (पूर्वावलोकन) इंस्टॉल करें
+# Install the Foundry connections extension (preview)
 azd extension install azure.ai.connections
 
-# फाइन-ट्यूनिंग एक्सटेंशन इंस्टॉल करें
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# कस्टम मॉडल्स एक्सटेंशन इंस्टॉल करें
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# सभी इंस्टॉल किए गए एक्सटेंशनों को अपग्रेड करें
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
-### AI Agent Commands
+### AI एजेंट कमांड्स
 ```bash
-# मैनिफेस्ट से एक एजेंट प्रोजेक्ट आरंभ करें
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# एक विशिष्ट Foundry प्रोजेक्ट को लक्षित करें
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# एजेंट स्रोत निर्देशिका निर्दिष्ट करें
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# होस्टिंग लक्ष्य चुनें
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# डिप्लॉय किए गए एजेंट का परीक्षण करें (लेटेंसी और प्रथम-बाइट तक का समय प्रदर्शित करेगा)
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# लाइव एंडपॉइंट कॉन्फ़िगरेशन दिखाएँ
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# एक मूल्यांकन डेटासेट उत्पन्न करें, फिर एजेंट का अनुकूलन करें
-azd ai agent eval generate
-azd ai agent optimize
-
-# कोड-आधारित होस्ट किए गए एजेंट का डिप्लॉय किया गया स्रोत डाउनलोड करें
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# एक होस्ट किए गए एजेंट और इसके सभी संस्करण हटाएँ (--force सक्रिय सत्र समाप्त कर देता है)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
-### MCP Server (Alpha)
+`--template`/`-t` पुरानी `--manifest`/`-m` स्पेलिंग को प्रतिस्थापित करता है; पुराने मैनिफेस्ट्स को माइग्रेट करना आवश्यक है। वर्तमान में कोई एजेंट-इनिट `--host containerapp` विकल्प नहीं है। मैनेज्ड-हार्नेस, वॉइस, और लंबी अवधि के पूर्वावलोकन में स्वतंत्र शेल/CI पर्यावरण ऑप्ट-इन की आवश्यकता होती है; देखें [AI CLI संदर्भ](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features)।
+
+### AI मूल्यांकन और अनुकूलन
 ```bash
-# अपने प्रोजेक्ट के लिए MCP सर्वर शुरू करें
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+एजेंट्स beta.22 ने पुराने मूल्यांकन कमांड्स को `azd ai eval` से बदल दिया जो `azure.ai.evaluations` से आते हैं। नया मूल्यांकन कॉन्फ़िगरेशन camelCase कुंजियां उपयोग करता है। अनुकूलन `--config` एक स्वतंत्र अनुकूलन API अनुरोध लेता है, **न कि** पुराना `eval.yaml` या नया `azure.eval.yaml`; पुन: उपयोग के लिए `--eval`/`--eval-config` का उपयोग करें। देखें [मूल्यांकन सेटअप](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) और [अनुकूलन माइग्रेशन](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration)।
+
+### MCP सर्वर (अल्फा)
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# MCP संचालन के लिए टूल की सहमति प्रबंधित करें
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
-### Infrastructure Generation
+### इन्फ्रास्ट्रक्चर जेनरेशन
 ```bash
-# अपने प्रोजेक्ट की परिभाषा से IaC फ़ाइलें उत्पन्न करें
+# Generate IaC files from your project definition
 azd infra generate
 
-# azure.yaml से बुनियादी ढाँचा तैयार करें
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
 
-## 🎯 Quick Workflows
+## 🎯 त्वरित कार्यप्रवाह
 
-### Development Workflow
+### विकास कार्यप्रवाह
 ```bash
-# नया प्रोजेक्ट शुरू करें
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# डेवलपमेंट में तैनात करें
+# Deploy to development
 azd env new dev
 azd up
 
-# परिवर्तन करें और पुनः तैनात करें
+# Make changes and redeploy
 azd deploy
 
-# मॉनिटरिंग डैशबोर्ड खोलें
+# Open monitoring dashboard
 azd monitor --live
 ```
 
-### Multi-Environment Workflow
+### बहु-पर्यावरण कार्यप्रवाह
 ```bash
-# पर्यावरण तैयार करें
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# विकास में तैनात करें
+# Deploy to dev
 azd env select dev
 azd up
 
-# परीक्षण करें और स्टेजिंग में प्रमोट करें
+# Test and promote to staging
 azd env select staging
 azd up
 
-# उत्पादन में तैनात करें
+# Deploy to production
 azd env select production
 azd up
 ```
 
-### Troubleshooting Workflow
+### समस्या निवारण कार्यप्रवाह
 ```bash
-# डिबग मोड सक्षम करें
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# डिप्लॉयमेंट की स्थिति जाँचें
-azd show
-
-# कॉन्फ़िगरेशन सत्यापित करें
+# Validate configuration
 azd config show
 
-# लॉग्स के लिए मॉनिटरिंग डैशबोर्ड खोलें
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# संसाधन की स्थिति जाँचें
+# Check resource status
 azd show --output json
 ```
 
-## 🔍 Debugging Commands
+## 🔍 डिबगिंग कमांड्स
 
-### Debug Information
+### डिबग जानकारी
 ```bash
-# डिबग आउटपुट सक्षम करें
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# साफ़ आउटपुट के लिए टेलीमेट्री अक्षम करें
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# वर्तमान कॉन्फ़िगरेशन जाँचें
+# Check current configuration
 azd config show
 
-# प्रमाणीकरण की स्थिति जाँचें
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
-### Template Debugging
+### टेम्पलेट डिबगिंग
 ```bash
-# उपलब्ध टेम्पलेट्स को विवरण सहित सूचीबद्ध करें
+# List available templates with details
 azd template list --output json
 
-# टेम्पलेट की जानकारी दिखाएँ
+# Show template information
 azd template show <template-name>
 
-# init से पहले टेम्पलेट को मान्य करें
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
-## 📁 File and Directory Commands
+## 📁 फ़ाइल और निर्देशिका कमांड्स
 
-### Project Structure
+### प्रोजेक्ट संरचना
 ```bash
-# वर्तमान निर्देशिका संरचना दिखाएँ
-tree /f  # विंडोज़
-find . -type f  # लिनक्स/मैकओएस
+# Show current directory structure
+tree /f  # Windows
+find . -type f  # Linux/macOS
 
-# azd प्रोजेक्ट रूट पर जाएँ
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# azd कॉन्फ़िगरेशन निर्देशिका दिखाएँ
-echo $AZD_CONFIG_DIR  # आम तौर पर ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Output Formatting
+## 🎨 आउटपुट फॉर्मेटिंग
 
-### JSON Output
+### JSON आउटपुट
 ```bash
-# स्क्रिप्टिंग के लिए JSON आउटपुट प्राप्त करें
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# jq के साथ पार्स करें
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Table Output
+### तालिका आउटपुट
 ```bash
-# तालिका के रूप में प्रारूपित करें
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# परिनियोजित सेवाओं को देखें
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Common Command Combinations
+## 🔧 सामान्य कमांड संयोजन
 
-### Health Check Script
+### स्वास्थ्य जांच स्क्रिप्ट
 ```bash
 #!/bin/bash
-# त्वरित स्वास्थ्य जांच
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
 ```
 
-### Deployment Validation
+### तैनाती सत्यापन
 ```bash
 #!/bin/bash
-# तैनाती से पहले सत्यापन
+# Pre-deployment validation
 azd show
-azd provision --preview  # तैनाती से पहले परिवर्तनों का पूर्वावलोकन करें
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
-### Environment Comparison
+### पर्यावरण तुलना
 ```bash
 #!/bin/bash
-# पर्यावरणों की तुलना करें
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
-### Resource Cleanup Script
+### संसाधन सफाई स्क्रिप्ट
 ```bash
 #!/bin/bash
-# पुराने परिवेशों को साफ़ करें
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
-## 📝 Environment Variables
+## 📝 पर्यावरण चर
 
-### Common Environment Variables
+### सामान्य पर्यावरण चर
 ```bash
-# Azure कॉन्फ़िगरेशन
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD कॉन्फ़िगरेशन
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# एप्लिकेशन कॉन्फ़िगरेशन
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Emergency Commands
+## 🚨 आपातकालीन कमांड्स
 
-### Quick Fixes
+### त्वरित समाधान
 ```bash
-# प्रमाणीकरण रीसेट करें
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# पर्यावरण को जबरदस्ती ताज़ा करें
+# Force refresh environment
 azd env refresh
 
-# सभी सेवाओं को पुनः तैनात करें
+# Redeploy all services
 azd deploy
 
-# तैनाती की स्थिति जांचें
+# Check deployment status
 azd show --output json
 ```
 
-### Recovery Commands
+### पुनर्प्राप्ति कमांड्स
 ```bash
-# विफल तैनाती से उबरें - साफ़ करें और पुनःतैनात करें
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# केवल अवसंरचना का पुनःप्रावधान
+# Reprovision infrastructure only
 azd provision
 
-# केवल एप्लिकेशन की पुनःतैनाती
+# Redeploy application only
 azd deploy
 ```
 
-## 💡 Pro Tips
+## 💡 प्रो टिप्स
 
-### Aliases for Faster Workflow
+### तेज़ कार्यप्रवाह के लिए उपनाम
 ```bash
-# अपने .bashrc या .zshrc में जोड़ें
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Function Shortcuts
+### फ़ंक्शन शॉर्टकट्स
 ```bash
-# त्वरित पर्यावरण परिवर्तन
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# निगरानी के साथ त्वरित तैनाती
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# पर्यावरण की स्थिति
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -636,46 +658,46 @@ azd-status() {
 }
 ```
 
-## 📖 Help and Documentation
+## 📖 सहायता और दस्तावेज़ीकरण
 
-### Getting Help
+### सहायता प्राप्त करना
 ```bash
-# सामान्य सहायता
+# General help
 azd --help
 azd help
 
-# कमांड-विशिष्ट सहायता
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# संस्करण और बिल्ड जानकारी दिखाएँ
+# Show version and build info
 azd version
 azd version --output json
 ```
 
-### Documentation Links
+### दस्तावेज़ीकरण लिंक
 ```bash
-# ब्राउज़र में प्रलेखन खोलें
+# Open documentation in browser
 azd docs
 
-# टेम्पलेट प्रलेखन दिखाएँ
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**टिप**: इस चीट शीट को बुकमार्क करें और आवश्यक कमांड जल्दी ढूंढने के लिए `Ctrl+F` का उपयोग करें!
+**संकेत**: इस चीट शीट को बुकमार्क करें और आवश्यक कमांड्स को जल्दी खोजने के लिए `Ctrl+F` का उपयोग करें!
 
 ---
 
 **नेविगेशन**
-- **Previous Lesson**: [पूर्व-नियोजन जांच](../docs/pre-deployment/preflight-checks.md)
-- **Next Lesson**: [शब्दावली](glossary.md)
+- **पिछला पाठ**: [प्रिफ़्लाइट चेक्स](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **अगला पाठ**: [शब्दावली](glossary.md)
 
 ---
 
-> **💡 क्या आप अपने एडिटर में Azure कमांड सहायता चाहते हैं?** [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) को `npx skills add microsoft/github-copilot-for-azure` के साथ इंस्टॉल करें — AI, Foundry, तैनाती, डायग्नोस्टिक्स, और अधिक के लिए 37 स्किल्स।
+> **💡 अपने संपादक में Azure कमांड सहायता चाहते हैं?** 37 AI, Foundry, तैनाती, निदान, और अधिक कौशलों के साथ [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) को `npx skills add microsoft/github-copilot-for-azure` के साथ स्थापित करें।
 
 ---
 

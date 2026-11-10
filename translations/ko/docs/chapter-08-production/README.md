@@ -1,41 +1,43 @@
 # 8장: 프로덕션 및 엔터프라이즈 패턴
 
-**📚 과정**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 2-3 시간 | **⭐ 난이도**: 고급
+**📚 강의**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 2-3시간 | **⭐ 난이도**: 고급
 
 ---
 
 ## 개요
 
-이 장에서는 엔터프라이즈 대응 배포 패턴, 보안 강화, 모니터링, 프로덕션 AI 워크로드의 비용 최적화를 다룹니다.
+이 장에서는 엔터프라이즈 준비가 된 배포 패턴, 보안 강화, 모니터링 및 프로덕션 AI 작업 부하의 비용 최적화를 다룹니다.
 
-> 2026년 7월 `azd 1.27.1` 버전으로 검증됨.
+이 문서는 아키텍처 참조용이며 완전한 배포 가능한 프로덕션 템플릿이 아닙니다. 예제들은 귀하의 애플리케이션에서 제공하고 테스트해야 할 통합 세부 사항을 생략합니다; 체크리스트를 읽었다고 해서 프로덕션 준비가 인증되는 것은 아닙니다.
+
+> **릴리스 검토(2026-11-04):** AI CLI 안내는 `azd 1.37.2`, 에이전트 `1.0.0-beta.23` 및 평가 `1.0.0-beta.2` 문서/소스를 기준으로 검토되었습니다. 호환성 요구 사항 및 마이그레이션 세부 정보는 [릴리스 변경사항 및 수정사항](production-ai-practices.md#recent-release-changes-and-fixes)을 참조하십시오; 이것은 실시간 배포 검증이 아닙니다.
 
 ## 학습 목표
 
-이 장을 완료하면 다음을 수행할 수 있습니다:
-- 다중 지역 복원력 애플리케이션 배포
+이 장을 완료하면 다음을 할 수 있습니다:
+- 다중 지역 탄력적인 애플리케이션 배포
 - 엔터프라이즈 보안 패턴 구현
-- 포괄적인 모니터링 구성
-- 대규모 비용 최적화
+- 종합 모니터링 구성
+- 규모에 따른 비용 최적화
 - AZD로 CI/CD 파이프라인 설정
 
 ---
 
-## 📚 강의
+## 📚 강의 목록
 
 | # | 강의 | 설명 | 시간 |
 |---|--------|-------------|------|
-| 1 | [프로덕션 AI 실무](production-ai-practices.md) | 엔터프라이즈 배포 패턴 | 90 분 |
+| 1 | [프로덕션 AI 실습](production-ai-practices.md) | 엔터프라이즈 배포 패턴 | 90분 |
 
 ---
 
 ## 🚀 프로덕션 체크리스트
 
-- [ ] 복원력을 위한 다중 지역 배포
-- [ ] 관리되는 아이덴티티로 인증 (키 없음)
-- [ ] 모니터링용 Application Insights
-- [ ] 비용 예산 및 경고 구성
-- [ ] 보안 스캔 활성화
+- [ ] 탄력성을 위한 다중 지역 배포
+- [ ] 인증용 관리형 아이덴티티 (키 없음)
+- [ ] 모니터링용 애플리케이션 인사이트
+- [ ] 비용 예산 및 경고 설정
+- [ ] 보안 스캐닝 활성화
 - [ ] CI/CD 파이프라인 통합
 - [ ] 재해 복구 계획
 
@@ -47,29 +49,30 @@
 
 ```mermaid
 graph LR
-    Gateway[API 게이트웨이] --> AI[AI 서비스] --> Models[Microsoft Foundry 모델]
-    Gateway --> Auth[인증 서비스]
-    AI --> Data[데이터 저장소]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
 ### 패턴 2: 이벤트 기반 AI
 
 ```mermaid
 graph LR
-    EventGrid[이벤트 그리드] --> Functions[함수] --> Pipeline[AI 파이프라인]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
 
-## 🔐 보안 권장 사항
+## 🔐 보안 모범 사례
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,54 +85,47 @@ properties: {
 
 ## 💰 비용 최적화
 
-| 전략 | 절감율 |
+| 전략 | 주요 제약 조건 |
 |----------|---------|
-| 0에 스케일 다운 (컨테이너 앱) | 60-80% |
-| 개발용 소비 계층 사용 | 50-70% |
-| 예약된 스케일링 | 30-50% |
-| 예약 용량 | 20-40% |
+| 제로 스케일링 (컨테이너 앱) | 적합한 트리거 필요; 다른 서비스는 여전히 비용 발생 |
+| 개발용 소비 등급 사용 | 선택한 서비스 가격 및 작업 부하 비교 |
+| 예약된 스케일링 | 지원되는 인프라/자동화를 통한 스케일링 |
+| 예약/프로비저닝 용량 | 지원 시에만; 약정은 유휴 비용 증가 가능성 |
 
-```bash
-# 예산 알림 설정
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+유효한 시작 날짜, 청구 범위, 수신자 및 권한과 함께 [완전한 예산 리소스 패턴](production-ai-practices.md#2-cost-monitoring-and-budgets)을 사용하세요. 예산은 경고를 보내지만 지출 한도는 아닙니다. 절감액은 측정된 사용량에 따라 달라지며 보장된 비율이 아닙니다.
 
 ---
 
 ## 📊 모니터링 설정
 
 ```bash
-# 로그 스트리밍
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# 애플리케이션 인사이트 확인
+# Check Application Insights
 azd monitor --overview
 
-# 메트릭 보기
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
 ---
 
-## 🔗 내비게이션
+## 🔗 탐색
 
-| 방향 | 챕터 |
+| 방향 | 장 |
 |-----------|---------|
-| <strong>이전</strong> | [7장: 문제 해결](../chapter-07-troubleshooting/README.md) |
-| **과정 완료** | [과정 홈](../../README.md) |
+| <strong>이전</strong> | [7장: 문제해결](../chapter-07-troubleshooting/README.md) |
+| **강의 완료** | [강의 홈](../../README.md) |
 
 ---
 
 ## 📖 관련 자료
 
 - [AI 에이전트 가이드](../chapter-02-ai-development/agents.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [멀티 에이전트 솔루션](../chapter-05-multi-agent/README.md)
-- [마이크로서비스 예시](../../examples/microservices/README.md)
+- [애플리케이션 인사이트](../chapter-06-pre-deployment/application-insights.md)
+- [다중 에이전트 솔루션](../chapter-05-multi-agent/README.md)
+- [마이크로서비스 예제](../../examples/microservices/README.md)
 
 ---
 

@@ -1,21 +1,21 @@
 # अध्याय 3: कॉन्फ़िगरेशन और प्रमाणीकरण
 
-**📚 पाठ्यक्रम**: [AZD For Beginners](../../README.md) | **⏱️ अवधि**: 45-60 मिनट | **⭐ जटिलता**: मध्यम
+**📚 कोर्स**: [AZD For Beginners](../../README.md) | **⏱️ अवधि**: 90-150 मिनट जिसमें इंटीग्रेशन अभ्यास शामिल है | **⭐ जटिलता**: मध्यम
 
 ---
 
 ## अवलोकन
 
-यह अध्याय Azure Developer CLI परिनियोजनों के लिए पर्यावरण कॉन्फ़िगरेशन, प्रमाणीकरण पैटर्न, और सुरक्षा सर्वोत्तम प्रथाओं को कवर करता है।
+यह अध्याय Azure Developer CLI डिप्लॉयमेंट के लिए पर्यावरण कॉन्फ़िगरेशन, प्रमाणीकरण पैटर्न और सुरक्षा सर्वोत्तम अभ्यास को कवर करता है।
 
-> जुलाई 2026 में `azd 1.27.1` के खिलाफ मान्य किया गया।
+> कमांड और कॉन्फ़िगरेशन समीक्षा लक्ष्य: `azd 1.37.2` (नवंबर 2026)। समीक्षा के दौरान लाइव Azure प्रावधान नहीं चलाया गया था।
 
 ## सीखने के उद्देश्य
 
-इस अध्याय को पूरा करने पर, आप:
-- AZD कॉन्फ़िगरेशन पदानुक्रम में महारत हासिल करेंगे
+इस अध्याय को पूरा करने के बाद, आप:
+- AZD कॉन्फ़िगरेशन पदानुक्रम में महारत हासिल कर लेंगे
 - कई पर्यावरणों (डेव, स्टेजिंग, प्रोड) का प्रबंधन करेंगे
-- प्रबंधित पहचान के साथ सुरक्षित प्रमाणीकरण लागू करेंगे
+- प्रबंधित पहचान के साथ सुरक्षित प्रमाणीकरण को लागू करेंगे
 - पर्यावरण-विशिष्ट सेटिंग्स कॉन्फ़िगर करेंगे
 
 ---
@@ -31,52 +31,52 @@
 
 ## 🚀 त्वरित प्रारंभ
 
+**पहले से इनिशियलाइज़्ड azd एप्लिकेशन** की रूट से चलाएँ, कोर्स रिपॉजिटरी से नहीं। यदि ये पहले से मौजूद हैं तो बिना उपयोग किए गए पर्यावरण नामों का उपयोग करें।
+
 ```bash
-# कई पर्यावरण बनाएँ
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# पर्यावरण बदलें
+# Switch environments
 azd env select prod
 
-# पर्यावरण चर सेट करें
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# कॉन्फ़िगरेशन देखें
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` उदाहरण स्वरूप है: यह केवल तभी इन्फ्रास्ट्रक्चर को प्रभावित करता है यदि आपकी टेम्पलेट इसे स्पष्ट रूप से उपयोग करती है। सामान्य `azd env set` मान स्थानीय तौर पर प्लेनटेक्स्ट में सहेजे जाते हैं; ये सुरक्षित गुप्त संग्रह नहीं हैं।
 
 ---
 
 ## 🔧 कॉन्फ़िगरेशन पदानुक्रम
 
-AZD इन आदेशों में सेटिंग्स लागू करता है (बाद वाला पहले को ओवरराइड करता है):
-
-1. **डिफ़ॉल्ट मान** (टेम्पलेट्स में निर्मित)
-2. **azure.yaml** (परियोजना कॉन्फ़िगरेशन)
-3. **पर्यावरण चर** (`azd env set`)
-4. **कमांड-लाइन फ्लैग्स** (`--location eastus`)
+तीन अलग-अलग कॉन्फ़िगरेशन सतहों को अलग रखें: वैश्विक प्राथमिकताएँ (`azd config`), प्रोजेक्ट संरचना (`azure.yaml`), और प्रति-पर्यावरण मान (`azd env`)। फ्लैग केवल उन्हीं सेटिंग्स को ओवरराइड करते हैं जिन्हें वे वास्तव में समर्थन करते हैं; कोई सार्वभौमिक ओवरले नहीं है जो मनमाने पर्यावरण चर को `azure.yaml` या बाइसप पर लागू करता हो।
 
 ---
 
-## 🔐 सुरक्षा सर्वोत्तम प्रथाएं
+## 🔐 सुरक्षा सर्वोत्तम अभ्यास
 
 ```bash
-# प्रबंधित पहचान का उपयोग करें (अनुशंसित)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# AZD प्रमाणीकरण स्थिति जांचें
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# वैकल्पिक: यदि आप az कमांड चलाने की योजना बनाते हैं तो Azure CLI संदर्भ सत्यापित करें
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# आवश्यक होने पर पुनः प्रमाणीकरण करें
+# Re-authenticate if needed
 azd auth login
 
-# वैकल्पिक: az कमांड के लिए Azure CLI प्रमाणीकरण ताज़ा करें
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -87,14 +87,14 @@ az login
 | दिशा | अध्याय |
 |-----------|---------|
 | **पिछला** | [अध्याय 2: AI विकास](../chapter-02-ai-development/README.md) |
-| **अगला** | [अध्याय 4: आधार संरचना](../chapter-04-infrastructure/README.md) |
+| **अगला** | [अध्याय 4: इन्फ्रास्ट्रक्चर](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 संबंधित संसाधन
 
-- [प्री-डिप्लॉयमेंट जांच](../chapter-06-pre-deployment/README.md)
-- [ट्रबलशूटिंग](../chapter-07-troubleshooting/common-issues.md)
+- [पूर्व-डिप्लॉयमेंट जांच](../chapter-06-pre-deployment/README.md)
+- [समस्या निवारण](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

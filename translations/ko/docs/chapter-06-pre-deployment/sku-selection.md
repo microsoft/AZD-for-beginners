@@ -1,79 +1,81 @@
-# SKU 선택 가이드 - 적합한 Azure 서비스 계층 선택하기
+# SKU 선택 가이드 - 적합한 Azure 서비스 티어 선택하기
 
-**Chapter Navigation:**
-- **📚 Course Home**: [초보자를 위한 AZD](../../README.md)
-- **📖 Current Chapter**: 챕터 6 - 배포 전 검증 및 계획
-- **⬅️ Previous**: [용량 계획](capacity-planning.md)
-- **➡️ Next**: [사전 점검](preflight-checks.md)
-- **🚀 Next Chapter**: [7장: 문제 해결](../chapter-07-troubleshooting/common-issues.md)
+**챕터 내비게이션:**
+- **📚 과정 홈**: [초보자를 위한 AZD](../../README.md)
+- **📖 현재 챕터**: 6장 - 배포 전 검증 및 계획
+- **⬅️ 이전**: [용량 계획](capacity-planning.md)
+- **➡️ 다음**: [사전 점검](preflight-checks.md)
+- **🚀 다음 챕터**: [7장: 문제 해결](../chapter-07-troubleshooting/common-issues.md)
 
 ## 소개
 
-이 포괄적인 가이드는 다양한 환경, 워크로드 및 요구 사항에 적합한 Azure 서비스 SKU(Stock Keeping Units)를 선택하는 데 도움을 줍니다. 성능 요구사항, 비용 고려사항 및 확장성 요구를 분석하여 Azure Developer CLI 배포에 가장 적합한 서비스 계층을 선택하는 방법을 배우십시오.
+이 종합 가이드는 다양한 환경, 워크로드 및 요구 사항에 적합한 Azure 서비스 SKU(재고 관리 단위)를 선택하는 데 도움을 줍니다. 성능 요구 사항, 비용 고려 사항 및 확장성 요구 사항을 분석하여 Azure Developer CLI 배포에 가장 적합한 서비스 티어를 선택하는 방법을 배웁니다.
 
 ## 학습 목표
 
-이 가이드를 완료하면 다음을 할 수 있습니다:
-- Azure SKU 개념, 가격 모델 및 기능 차이를 이해합니다
-- 개발, 스테이징 및 운영 환경별 SKU 선택 전략을 숙달합니다
-- 워크로드 요구사항을 분석하고 적절한 서비스 계층과 매칭합니다
-- 지능적인 SKU 선택을 통해 비용 최적화 전략을 구현합니다
-- SKU 선택을 위한 성능 테스트 및 검증 기법을 적용합니다
-- 자동화된 SKU 권장 사항 및 모니터링을 구성합니다
+이 가이드를 완료하면 다음을 수행할 수 있습니다:
+- Azure SKU 개념, 가격 모델 및 기능 차이 이해
+- 개발, 스테이징, 프로덕션별 환경 전용 SKU 선택 전략 숙달
+- 워크로드 요구 사항 분석 및 적절한 서비스 티어와 매칭
+- 지능적인 SKU 선택을 통한 비용 최적화 전략 구현
+- SKU 선택에 대한 성능 테스트 및 검증 기법 적용
+- 자동 SKU 추천 및 모니터링 구성
 
-## 학습 성과
+## 학습 결과
 
-완료 후 다음을 수행할 수 있습니다:
-- 워크로드 요구사항 및 제약을 기반으로 적절한 Azure 서비스 SKU를 선택합니다
-- 적절한 계층 선택으로 비용 효율적인 멀티 환경 아키텍처를 설계합니다
-- SKU 선택에 대한 성능 벤치마크 및 검증을 구현합니다
-- SKU 권장 및 비용 최적화를 위한 자동화 도구를 만듭니다
-- 변화하는 요구사항에 대한 SKU 마이그레이션 및 확장 전략을 계획합니다
-- 서비스 계층 선택에 Azure Well-Architected Framework 원칙을 적용합니다
+완료 후에는 다음을 수행할 수 있습니다:
+- 워크로드 요구 사항 및 제약 조건에 기반한 적합한 Azure 서비스 SKU 선택
+- 적절한 티어 선택으로 비용 효율적인 다중 환경 아키텍처 설계
+- SKU 선택에 대한 성능 벤치마킹 및 검증 수행
+- SKU 추천 및 비용 최적화를 위한 자동화 도구 생성
+- 변경되는 요구 사항에 따른 SKU 마이그레이션 및 확장 전략 계획
+- 서비스 티어 선택에 Azure Well-Architected Framework 원칙 적용
 
 ## 목차
 
-- [SKU 이해](../../../../docs/chapter-06-pre-deployment)
-- [환경 기반 선택](../../../../docs/chapter-06-pre-deployment)
-- [서비스별 가이드라인](../../../../docs/chapter-06-pre-deployment)
-- [비용 최적화 전략](../../../../docs/chapter-06-pre-deployment)
-- [성능 고려사항](../../../../docs/chapter-06-pre-deployment)
-- [빠른 참조 표](../../../../docs/chapter-06-pre-deployment)
-- [검증 도구](../../../../docs/chapter-06-pre-deployment)
+- [SKU 이해하기](#understanding-skus)
+- [환경 기반 선택](#environment-based-selection)
+- [서비스별 가이드라인](#service-specific-guidelines)
+- [비용 최적화 전략](#cost-optimization-strategies)
+- [성능 고려 사항](#performance-considerations)
+- [빠른 참조 테이블](#quick-reference-tables)
+- [검증 도구](#validation-tools)
 
 ---
 
-## SKU 이해
+## SKU 이해하기
 
-### SKU란?
+> **예시 범위:** 아래 YAML SKU 맵 및 성능 구성은 설계 노트이며, `azure.yaml` 스키마 또는 부하 도구 구성이 아닙니다. Bicep 블록은 대안/조각으로서, 매개변수와 상위 리소스를 선언하고 결합 시 고유 심볼릭 명칭을 사용하며, 모듈을 실제 작동 프로젝트에 연결합니다. 가격, 제한, 그리고 지역/sku 사용 가능성은 배포 전에 구독상태에서 반드시 확인해야 합니다.
 
-SKU(Stock Keeping Units)는 Azure 리소스의 서로 다른 서비스 계층 및 성능 수준을 나타냅니다. 각 SKU는 다음과 같은 차이를 제공합니다:
+### SKU란 무엇인가?
+
+SKU(재고 관리 단위)는 Azure 리소스의 서로 다른 서비스 티어와 성능 수준을 나타냅니다. 각 SKU는 다음과 같이 다릅니다:
 
 - **성능 특성** (CPU, 메모리, 처리량)
-- **기능 가용성** (스케일링 옵션, SLA 수준)
+- **기능 가용성** (확장 옵션, SLA 수준)
 - **가격 모델** (사용량 기반, 예약 용량)
-- **지역 가용성** (모든 SKU가 모든 지역에서 제공되는 것은 아님)
+- **지역별 가용성** (모든 지역에서 모든 SKU 사용 가능하지 않음)
 
-### SKU 선택의 핵심 요소
+### SKU 선택의 주요 요소
 
-1. **워크로드 요구사항**
+1. **워크로드 요구 사항**
    - 예상 트래픽/부하 패턴
-   - 성능 요구사항 (CPU, 메모리, I/O)
-   - 스토리지 필요량 및 접근 패턴
+   - 성능 요구 사항 (CPU, 메모리, I/O)
+   - 저장소 요구 및 접근 패턴
 
 2. **환경 유형**
-   - 개발/테스트 대 운영
-   - 가용성 요구사항
-   - 보안 및 규정 준수 필요
+   - 개발/테스트 vs 프로덕션
+   - 가용성 요구 사항
+   - 보안 및 규정 준수 요구 사항
 
 3. **예산 제약**
-   - 초기 비용 대 운영 비용
+   - 초기 비용 vs 운영 비용
    - 예약 용량 할인
-   - 자동 확장 시 비용 영향
+   - 자동 확장 비용 영향
 
-4. **성장 예측**
-   - 확장성 요구사항
-   - 향후 기능 필요
+4. **성장 전망**
+   - 확장성 요구
+   - 미래 기능 필요성
    - 마이그레이션 복잡성
 
 ---
@@ -82,9 +84,9 @@ SKU(Stock Keeping Units)는 Azure 리소스의 서로 다른 서비스 계층 �
 
 ### 개발 환경
 
-**우선순위**: 비용 최적화, 기본 기능, 손쉬운 프로비저닝/해제
+<strong>우선순위</strong>: 비용 최적화, 기본 기능, 쉬운 프로비저닝/프로비저닝 해제
 
-#### 권장 SKU
+#### 추천 SKU
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### 특성
-- **App Service**: 간단한 테스트에는 F1 (무료) 또는 B1 (Basic)
-- **Databases**: 최소 리소스의 Basic 계층
-- **Storage**: 로컬 중복성만 있는 Standard
-- **Compute**: 공유 리소스 허용 가능
-- **Networking**: 기본 구성
+- **앱 서비스**: 단순 테스트용 F1(무료) 또는 B1(기본)
+- <strong>데이터베이스</strong>: 최소 자원의 기본 티어
+- <strong>스토리지</strong>: 로컬 중복성만 있는 스탠다드
+- <strong>컴퓨트</strong>: 공유 자원 허용
+- <strong>네트워킹</strong>: 기본 구성
 
 ### 스테이징/테스트 환경
 
-**우선순위**: 운영 환경과 유사한 구성, 비용 균형, 성능 테스트 기능
+<strong>우선순위</strong>: 프로덕션과 유사한 구성, 비용 균형, 성능 테스트 가능
 
-#### 권장 SKU
+#### 추천 SKU
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -121,35 +123,35 @@ skus:
 ```
 
 #### 특성
-- **성능**: 운영 용량의 70-80%
-- **기능**: 대부분의 운영 기능 활성화
-- **중복성**: 일부 지리적 중복성
-- **스케일링**: 테스트를 위한 제한된 자동 확장
-- **모니터링**: 전체 모니터링 스택
+- <strong>성능</strong>: 프로덕션 용량의 70-80%
+- <strong>기능</strong>: 대부분의 프로덕션 기능 활성화
+- <strong>중복성</strong>: 일부 지리적 중복성
+- <strong>확장</strong>: 테스트를 위한 제한된 자동 확장
+- <strong>모니터링</strong>: 완전한 모니터링 스택
 
-### 운영 환경
+### 프로덕션 환경
 
-**우선순위**: 성능, 가용성, 보안, 규정 준수, 확장성
+<strong>우선순위</strong>: 성능, 가용성, 보안, 규정 준수, 확장성
 
-#### 권장 SKU
+#### 추천 SKU
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
 #### 특성
-- **고가용성**: 99.9%+ SLA 요구사항
-- **성능**: 전용 리소스, 높은 처리량
-- **보안**: 프리미엄 보안 기능
-- **스케일링**: 완전한 자동 확장 기능
-- **모니터링**: 종합적인 관찰 가능성
+- <strong>고가용성</strong>: 99.9% 이상 SLA 요구 사항
+- <strong>성능</strong>: 전용 자원, 높은 처리량
+- <strong>보안</strong>: 프리미엄 보안 기능
+- <strong>확장</strong>: 완전한 자동 확장 기능
+- <strong>모니터링</strong>: 포괄적 관측 가능
 
 ---
 
@@ -159,17 +161,17 @@ skus:
 
 #### SKU 결정 매트릭스
 
-| 사용 사례 | 권장 SKU | 근거 |
+| 사용 사례 | 추천 SKU | 근거 |
 |----------|----------------|-----------|
-| 개발/테스트 | F1 (Free) or B1 (Basic) | 비용 효율적, 테스트에 충분함 |
-| 소규모 운영 앱 | S1 (Standard) | 커스텀 도메인, SSL, 자동 확장 |
-| 중간 규모 운영 앱 | P1V3 (Premium V3) | 더 나은 성능, 추가 기능 |
-| 대규모 트래픽 앱 | P2V3 or P3V3 | 전용 리소스, 고성능 |
-| 미션 크리티컬 앱 | I1V2 (Isolated V2) | 네트워크 격리, 전용 하드웨어 |
+| 개발/테스트 | F1(무료) 또는 B1(기본) | 비용 효율적, 테스트에 충분함 |
+| 소규모 프로덕션 앱 | S1(스탠다드) | 맞춤 도메인, SSL, 자동 확장 |
+| 중간 규모 프로덕션 앱 | P1V3(프리미엄 V3) | 더 나은 성능, 더 많은 기능 |
+| 고트래픽 앱 | P2V3 또는 P3V3 | 전용 자원, 높은 성능 |
+| 미션 크리티컬 앱 | I1V2(격리 V2) | 네트워크 격리, 전용 하드웨어 |
 
 #### 구성 예시
 
-**Development**
+<strong>개발</strong>
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-dev'
@@ -185,7 +187,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-**Production**
+<strong>프로덕션</strong>
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-prod'
@@ -205,15 +207,15 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 #### SKU 선택 프레임워크
 
-1. **DTU 기반 (Database Transaction Units)**
-   - **Basic**: 5 DTU - 개발/테스트
-   - **Standard**: S0-S12 (10-3000 DTU) - 범용
-   - **Premium**: P1-P15 (125-4000 DTU) - 성능 중요
+1. **DTU 기반(Databse Transaction Units)**
+   - <strong>기본</strong>: 5 DTU - 개발/테스트용
+   - <strong>스탠다드</strong>: S0-S12 (10-3000 DTU) - 범용
+   - <strong>프리미엄</strong>: P1-P15 (125-4000 DTU) - 성능 중요
 
-2. **vCore 기반** (운영에 권장)
-   - **General Purpose**: 컴퓨트와 스토리지의 균형
-   - **Business Critical**: 낮은 지연, 높은 IOPS
-   - **Hyperscale**: 매우 확장 가능한 스토리지 (최대 100TB)
+2. **vCore 기반** (프로덕션 권장)
+   - <strong>범용</strong>: 균형 잡힌 컴퓨트 및 스토리지
+   - **비즈니스 크리티컬**: 낮은 대기 시간, 높은 IOPS
+   - <strong>하이퍼스케일</strong>: 매우 확장 가능한 스토리지; 현재 크기 제한 및 지역 지원 확인 필요
 
 #### 구성 예시
 
@@ -254,19 +256,19 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 #### 환경 유형
 
-1. **Consumption 기반**
-   - 사용량별 과금
-   - 개발 및 변동 워크로드에 적합
+1. **사용량 기반**
+   - 사용량에 따른 과금
+   - 개발 및 가변 워크로드에 적합
    - 공유 인프라
 
-2. **Dedicated (워크로드 프로파일)**
-   - 전용 컴퓨트 리소스
+2. **전용 (워크로드 프로필)**
+   - 전용 컴퓨트 자원
    - 예측 가능한 성능
-   - 운영 워크로드에 적합
+   - 프로덕션 워크로드에 더 적합
 
 #### 구성 예시
 
-**Development (Consumption)**
+**개발(사용량 기반)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Production (Dedicated)**
+**프로덕션(전용)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,12 +317,14 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
+
+영역 중복성은 지원 지역 인프라 및 적절한 VNet/서브넷 구성이 필요하며, 여기서는 생략했습니다. 이 예시는 전용 노드 3개를 예산에 반영; 영역 간 분산을 위해 최소 2개 이상의 앱 복제본을 구성하고, 영역 장애 대비 복제본과 노드 모두의 크기를 조정하십시오. 자세한 내용은 [컨테이너 앱 신뢰성 안내](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps)를 참고하세요. 이 프로필에 앱을 배치하려면 `workloadProfileName: 'production-profile'` 속성을 설정해야 하며, 프로필 생성만으로는 앱이 이동하지 않습니다.
 
 ### Azure Cosmos DB
 
@@ -331,12 +335,12 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
    - 예약 용량 할인
    - 안정적인 워크로드에 적합
 
-2. **자동확장 프로비저닝 처리량**
-   - 사용량에 따른 자동 확장
-   - 사용한 만큼 지불(최소값 존재)
-   - 가변 워크로드에 적합
+2. **자동 스케일 프로비저닝 처리량**
+   - 사용량 기반 자동 확장
+   - 발생량만큼 과금 (최소량 존재)
+   - 변동 워크로드에 적합
 
-3. **서버리스**
+3. <strong>서버리스</strong>
    - 요청당 과금
    - 프로비저닝 처리량 없음
    - 개발 및 간헐적 워크로드에 이상적
@@ -400,15 +404,15 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 #### 스토리지 계정 유형
 
-1. **Standard_LRS** - 개발, 비중요 데이터
-2. **Standard_GRS** - 운영, 지리적 중복 필요
+1. **Standard_LRS** - 개발, 중요하지 않은 데이터
+2. **Standard_GRS** - 프로덕션, 지리적 중복 필요
 3. **Premium_LRS** - 고성능 애플리케이션
-4. **Premium_ZRS** - 영역 중복을 통한 고가용성
+4. **Premium_ZRS** - 영역 중복으로 높은 가용성
 
-#### 성능 계층
+#### 성능 티어
 
-- **Standard**: 범용, 비용 효율적
-- **Premium**: 고성능, 저지연 시나리오
+- <strong>스탠다드</strong>: 범용, 비용 효율적
+- <strong>프리미엄</strong>: 고성능, 낮은 지연 시나리오
 
 ```bicep
 // Development
@@ -453,17 +457,20 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 1. 예약 용량
 
-1-3년 단위로 리소스를 예약하여 큰 폭의 할인을 받으세요:
+1~3년 자원 예약 시 큰 폭의 할인:
 
 ```bash
-# 예약 옵션을 확인하세요
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. 적정 사이징
+예약 오퍼링과 적격 리소스 유형은 다양하므로, 모든 서비스/SKU가 예약을 지원한다고 가정하지 말고 카탈로그 및 구매 조건을 반드시 확인하십시오.
 
-작은 SKU로 시작하고 실제 사용량에 따라 확장하세요:
+### 2. 적정 사이즈 선택
+
+작은 SKU로 시작해 실제 사용량에 맞게 확장:
 
 ```yaml
 # Progressive scaling approach
@@ -479,7 +486,7 @@ production:
 
 ### 3. 자동 확장 구성
 
-비용을 최적화하기 위해 지능형 스케일링을 구현하세요:
+지능적인 확장으로 비용 최적화:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -536,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. 예약된 스케일링
+### 4. 예약된 확장
 
-비업무 시간에 축소하세요:
+비사용 시간대에 축소:
 
 ```json
 {
@@ -583,11 +592,11 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ---
 
-## 성능 고려사항
+## 성능 고려 사항
 
-### 기본 성능 요구사항
+### 기본 성능 요구 사항
 
-SKU 선택 전에 명확한 성능 요구사항을 정의하세요:
+SKU 선택 전 명확한 성능 요구 사항 정의:
 
 ```yaml
 performance_requirements:
@@ -605,19 +614,21 @@ performance_requirements:
 
 ### 부하 테스트
 
-다양한 SKU를 테스트하여 성능을 검증하세요:
+다양한 SKU를 테스트하여 성능 확인:
 
 ```bash
-# Azure 부하 테스트 서비스
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
 ### 모니터링 및 최적화
 
-종합적인 모니터링을 설정하세요:
+포괄적 모니터링 설정:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -644,45 +656,45 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## 빠른 참조 표
+## 빠른 참조 테이블
 
-### App Service SKU 빠른 참조
+### 앱 서비스 SKU 빠른 참조
 
-| SKU | 계층 | vCPU | RAM | Storage | 가격대 | 사용 사례 |
+| SKU | 티어 | vCPU | RAM | 스토리지 | 가격대 | 사용 사례 |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | Free | Shared | 1GB | 1GB | Free | 개발 |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | 소규모 앱 |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | 운영 |
-| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | 고성능 |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | 엔터프라이즈 |
+| F1 | 무료 | 공유 | 1GB | 1GB | 무료 | 개발 |
+| B1 | 기본 | 1 | 1.75GB | 10GB | $ | 소규모 앱 |
+| S1 | 스탠다드 | 1 | 1.75GB | 50GB | $$ | 프로덕션 |
+| P1V3 | 프리미엄 V3 | 2 | 8GB | 250GB | $$$ | 고성능 |
+| I1V2 | 격리 V2 | 2 | 8GB | 1TB | $$$$ | 엔터프라이즈 |
 
-### SQL Database SKU 빠른 참조
+### SQL 데이터베이스 SKU 빠른 참조
 
-| SKU | 계층 | DTU/vCore | Storage | 가격대 | 사용 사례 |
+| SKU | 티어 | DTU/vCore | 스토리지 | 가격대 | 사용 사례 |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | 개발 |
-| S2 | Standard | 50 DTU | 250GB | $$ | 소규모 운영 |
-| P2 | Premium | 250 DTU | 1TB | $$$ | 고성능 |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | 균형형 |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | 미션 크리티컬 |
+| 기본 | 기본 | 5 DTU | 2GB | $ | 개발 |
+| S2 | 스탠다드 | 50 DTU | 250GB | $$ | 소규모 프로덕션 |
+| P2 | 프리미엄 | 250 DTU | 1TB | $$$ | 고성능 |
+| GP_Gen5_4 | 범용 | 4 vCore | 4TB | $$$ | 균형 잡힘 |
+| BC_Gen5_8 | 비즈니스 크리티컬 | 8 vCore | 4TB | $$$$ | 미션 크리티컬 |
 
-### Container Apps SKU 빠른 참조
+### 컨테이너 앱 SKU 빠른 참조
 
-| 모델 | 가격 정책 | CPU/메모리 | 사용 사례 |
+| 모델 | 과금 | CPU/메모리 | 사용 사례 |
 |-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | 개발, 변동 부하 |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | 운영 |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | 고성능 |
+| 사용량 기반 | 사용량 과금 | 지원 CPU/메모리 조합은 환경/프로필에 따라 다름 | 개발 또는 프로덕션, 가변 부하 |
+| 전용 D4 | 전용 노드 과금 | 노드당 4 vCPU, 16GiB | 지속 부하/격리 필요 |
+| 전용 D8 | 전용 노드 과금 | 노드당 8 vCPU, 32GiB | 더 높은 지속 부하 |
 
 ---
 
 ## 검증 도구
 
-### SKU 가용성 확인기
+### SKU 가용성 검사기
 
 ```bash
 #!/bin/bash
-# 대상 지역의 SKU 가용성 확인
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# 사용법
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
 ### 비용 추정 스크립트
 
+**의사 코드 예시:** 아래 `Get-ResourceCost`는 프로젝트 특정 함수로, 현재 지역별/계약 가격과 사용 가정을 사용해 구현해야 합니다. PowerShell이나 Azure cmdlet이 아닙니다.
+
 ```powershell
-# 비용 추정을 위한 PowerShell 스크립트
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Azure 가격 책정 API 또는 계산기 사용
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# 사용법
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -749,6 +764,8 @@ Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
 ### 성능 검증
+
+다음 YAML은 요구 사항 스케치이며, **Azure 부하 테스트, JMeter, Locust, 또는 k6 입력 스키마가 아닙니다**. 부하 테스트 명령 전에 원하는 도구 구성으로 변환하십시오.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,43 +800,43 @@ test_configuration:
 
 ---
 
-## 권장 모범 사례 요약
+## 모범 사례 요약
 
 ### 해야 할 일
 
-1. **작게 시작하고 실제 사용량에 따라 확장하기**
+1. **작게 시작해 실제 사용량에 맞춰 확장하기**
 2. **환경별로 다른 SKU 사용하기**
-3. **성능과 비용을 지속적으로 모니터링하기**
-4. **운영 워크로드에는 예약 용량 활용하기**
-5. **적절한 곳에 자동 확장 구현하기**
+3. **성능과 비용을 지속해서 모니터링하기**
+4. **프로덕션 워크로드에는 예약 용량 활용하기**
+5. **적절한 경우 자동 확장 구현하기**
 6. **현실적인 워크로드로 성능 테스트하기**
-7. **성장을 계획하되 과다 프로비저닝을 피하기**
-8. **가능하면 개발에는 무료 계층 사용하기**
+7. **성장을 계획하되 과도한 프로비저닝은 피하기**
+8. **가능하면 개발 시 무료 티어 사용하기**
 
 ### 하지 말아야 할 일
 
-1. **개발에 운영 SKU를 사용하지 않기**
-2. **지역별 SKU 가용성을 무시하지 않기**
-3. **데이터 전송 비용을 잊지 않기**
-4. **정당한 이유 없이 과다 프로비저닝하지 않기**
-5. **종속성의 영향을 무시하지 않기**
+1. **개발에 프로덕션 SKU 사용하지 않기**
+2. **지역별 SKU 가용성 무시하지 않기**
+3. **데이터 전송 비용 잊지 않기**
+4. **근거 없이 과도하게 프로비저닝하지 않기**
+5. **종속성 영향 무시하지 않기**
 6. **자동 확장 한도를 너무 높게 설정하지 않기**
-7. **규정 준수 요구사항을 잊지 않기**
+7. **규정 준수 요구 사항 잊지 않기**
 8. **가격만 보고 결정하지 않기**
 
 ---
 
-**Pro Tip**: Azure Cost Management 및 Advisor를 사용하여 실제 사용 패턴을 기반으로 한 개인화된 SKU 최적화 권장사항을 받으세요.
+**전문가 팁**: Azure 비용 관리 및 Advisor를 사용해 실제 사용 패턴에 기반한 SKU 선택 최적화를 위한 개인화된 권장 사항을 받으세요.
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [용량 계획](capacity-planning.md)
-- **Next Lesson**: [사전 점검](preflight-checks.md)
+<strong>내비게이션</strong>
+- **이전 수업**: [용량 계획](capacity-planning.md)
+- **다음 수업**: [사전 점검](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **면책 조항**:
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나 자동 번역에는 오류나 부정확성이 포함될 수 있음을 유의하시기 바랍니다. 원문(원어로 된 문서)을 권위 있는 출처로 간주하시기 바랍니다. 중요한 정보의 경우 전문적인 인간 번역을 권장합니다. 이 번역의 사용으로 인해 발생하는 오해나 잘못된 해석에 대해서는 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 기하기 위해 노력하고 있으나, 자동 번역은 오류나 부정확한 부분이 있을 수 있음을 유의하시기 바랍니다. 원본 문서의 원어본이 권위 있는 자료로 간주되어야 합니다. 중요한 정보의 경우, 전문가의 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

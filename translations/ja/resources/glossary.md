@@ -1,244 +1,244 @@
-# 用語集 - Azure と AZD の用語
+# 用語集 - Azure と AZD 用語
 
-**参照（全章）**
+<strong>全章の参照用</strong>
 - **📚 コースホーム**: [AZD 初心者向け](../README.md)
-- **📖 基礎を学ぶ**: [第1章: AZD 基本](../docs/getting-started/azd-basics.md)
-- **🤖 AI 用語**: [第2章: AI ファースト開発](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **📖 基礎学習**: [第1章: AZD の基礎](../docs/chapter-01-foundation/azd-basics.md)
+- **🤖 AI 用語**: [第2章: AI ファースト開発](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## はじめに
 
-この包括的な用語集は、Azure Developer CLI と Azure クラウド開発で使用される用語、概念、および頭字語の定義を提供します。技術文書の理解、問題解決、および azd プロジェクトや Azure サービスに関する効果的なコミュニケーションのための必須参照です。
+この包括的な用語集は、Azure Developer CLI および Azure クラウド開発で使用される用語、概念、略語の定義を提供します。技術ドキュメントの理解、トラブルシューティング、azd プロジェクトや Azure サービスについて効果的にコミュニケーションするために必須のリファレンスです。
 
 ## 学習目標
 
 この用語集を使用することで、以下を達成できます:
-- Azure Developer CLI の基本的な用語と概念を理解する
-- Azure クラウド開発の語彙と技術用語を習得する
-- Infrastructure as Code とデプロイに関する用語を効率的に参照する
-- Azure サービス名、頭字語、およびそれらの目的を理解する
+- 重要な Azure Developer CLI の用語や概念を理解する
+- Azure クラウド開発の語彙や技術用語を習得する
+- Infrastructure as Code とデプロイ用語を効果的に参照する
+- Azure サービス名、略語、およびそれらの目的を理解する
 - トラブルシューティングやデバッグ用語の定義にアクセスする
 - 高度な Azure アーキテクチャと開発概念を学ぶ
 
 ## 学習成果
 
-この用語集を定期的に参照することで、以下が可能になります:
-- 適切な Azure Developer CLI 用語を用いて効果的にコミュニケーションする
-- 技術文書やエラーメッセージをより明確に理解する
-- Azure サービスや概念を自信を持ってナビゲートする
-- 適切な技術用語を使って問題をトラブルシュートする
-- 正確な技術用語でチームの議論に貢献する
-- 系統的に Azure クラウド開発の知識を拡張する
+定期的にこの用語集を参照することで、以下が可能になります:
+- 適切な Azure Developer CLI 用語を使った効果的なコミュニケーション
+- 技術ドキュメントやエラーメッセージのより明確な理解
+- 自信を持って Azure サービスと概念をナビゲートする
+- 適切な技術用語を用いた問題のトラブルシューティング
+- 正確な技術用語を用いたチームディスカッションへの貢献
+- 系統的な Azure クラウド開発知識の拡大
 
 ## A
 
-**ARM Template**  
-Azure Resource Manager テンプレート。Azure リソースを宣言的に定義およびデプロイするための JSON ベースの Infrastructure as Code 形式。
+**ARM テンプレート**  
+Azure Resource Manager テンプレート。Azure リソースを宣言的に定義およびデプロイする JSON ベースの Infrastructure as Code 形式。
 
 **App Service**  
-インフラストラクチャを管理せずに Web アプリケーション、REST API、モバイルバックエンドをホストするための Azure のプラットフォームサービス (PaaS)。
+インフラ管理不要で Web アプリケーション、REST API、モバイルバックエンドをホストする Azure のプラットフォーム・アズ・ア・サービス (PaaS)。
 
 **Application Insights**  
-アプリケーションのパフォーマンス、可用性、使用状況に関する深い洞察を提供する Azure のアプリケーションパフォーマンス監視 (APM) サービス。
+アプリケーションのパフォーマンス、可用性、使用状況を深く分析する Azure のアプリケーションパフォーマンスモニタリング (APM) サービス。
 
 **Azure CLI**  
-Azure リソースを管理するためのコマンドラインインターフェイス。azd による認証および一部の操作で使用されます。
+Azure リソースを管理するためのコマンドラインインターフェース。AZD を補完するが、ログインは別途必要。AZD のコア認証は `azd auth login` を使用。
 
 **Azure Developer CLI (azd)**  
-テンプレートと Infrastructure as Code を使用してアプリケーションを Azure に構築・デプロイするプロセスを加速する、開発者向けのコマンドラインツール。
+テンプレートと Infrastructure as Code を利用して Azure へのアプリケーションの構築とデプロイを加速する開発者向けコマンドラインツール。
 
 **azure.yaml**  
-サービス、インフラ、およびデプロイフックを定義する azd プロジェクトの主要な設定ファイル。
+azd プロジェクトのメイン設定ファイルで、サービス、インフラ、デプロイフックを定義。
 
 **Azure Resource Manager (ARM)**  
-リソースの作成、更新、削除のための管理レイヤーを提供する Azure のデプロイおよび管理サービス。
+Azure のデプロイおよび管理サービスで、リソースの作成、更新、削除の管理レイヤーを提供。
 
 ## B
 
 **Bicep**  
-Microsoft によって開発された Azure リソースをデプロイするためのドメイン固有言語 (DSL)。ARM テンプレートよりも簡潔な構文を提供し、ARM にコンパイルされます。
+マイクロソフトが開発した Azure リソースデプロイ用のドメイン固有言語 (DSL)。ARM テンプレートよりシンプルな構文で ARM にコンパイルされる。
 
-**Build**  
-ソースコードのコンパイル、依存関係のインストール、およびデプロイ準備のプロセス。
+<strong>ビルド</strong>  
+ソースコードのコンパイル、依存関係のインストール、アプリケーションのデプロイ準備のプロセス。
 
-**Blue-Green Deployment**  
-ダウンタイムとリスクを最小限にするために、二つの同一の本番環境（ブルーとグリーン）を使用するデプロイ戦略。
+<strong>ブルーグリーンデプロイメント</strong>  
+2つの同一の本番環境（青と緑）を用いることでダウンタイムとリスクを最小化するデプロイ戦略。
 
 ## C
 
 **Container Apps**  
-複雑なインフラを管理せずにコンテナ化されたアプリケーションを実行できる Azure のサーバーレスコンテナサービス。
+複雑なインフラ管理不要でコンテナ化されたアプリを実行できる Azure のサーバーレスコンテナサービス。
 
 **CI/CD**  
-継続的インテグレーション / 継続的デプロイ。コード変更の統合とアプリケーションのデプロイを自動化するプラクティス。
+継続的インテグレーション／継続的デプロイ。コード変更の統合とアプリデプロイの自動化プラクティス。
 
 **Cosmos DB**  
-スループット、レイテンシ、可用性、一貫性に関する包括的な SLA を提供する、グローバル分散型のマルチモデルデータベースサービス。
+Azure のグローバル分散型マルチモデルデータベースサービス。スループット、遅延、可用性、一貫性に対して包括的 SLA を提供。
 
-**Configuration**  
-アプリケーションの動作やデプロイオプションを制御する設定とパラメータ。
+<strong>設定</strong>  
+アプリケーションの動作やデプロイオプションを制御する設定値やパラメータ。
 
 ## D
 
-**Deployment**  
-アプリケーションとその依存関係をターゲットインフラにインストールおよび構成するプロセス。
+<strong>デプロイメント</strong>  
+ターゲットインフラ上にアプリケーションおよび依存関係をインストール・設定するプロセス。
 
 **Docker**  
-コンテナ化技術を用いてアプリケーションを開発、出荷、実行するためのプラットフォーム。
+コンテナ技術を用いたアプリの開発、発送、実行プラットフォーム。
 
 **Dockerfile**  
-Docker コンテナイメージをビルドするための命令を含むテキストファイル。
+Docker コンテナイメージビルド用の命令を記載したテキストファイル。
 
 ## E
 
-**Environment**  
-アプリケーションの特定のインスタンスを表すデプロイ対象（例: 開発、ステージング、本番）。
+<strong>環境</strong>  
+アプリケーションの特定インスタンスを表すデプロイターゲット（例: 開発、ステージング、本番）。
 
-**Environment Variables**  
-アプリケーションが実行時にアクセスできるキーと値のペアとして格納される設定値。
+<strong>環境変数</strong>  
+実行時にアプリケーションがアクセスできるキーと値の形で保存される設定値。
 
-**Endpoint**  
-アプリケーションまたはサービスにアクセスできる URL またはネットワークアドレス。
+<strong>エンドポイント</strong>  
+アプリケーションやサービスにアクセス可能な URL またはネットワークアドレス。
 
 ## F
 
 **Function App**  
-インフラを管理することなくイベント駆動型コードを実行できる Azure のサーバーレスコンピューティングサービス。
+イベント駆動コードをインフラ管理不要で実行可能にする Azure のサーバーレスコンピューティングサービス。
 
 ## G
 
 **GitHub Actions**  
-ワークフロー自動化のために GitHub リポジトリと統合された CI/CD プラットフォーム。
+GitHub リポジトリと統合された CI/CD プラットフォームでワークフローの自動化が可能。
 
 **Git**  
-ソースコードの変更を追跡するために使用される分散型バージョン管理システム。
+ソースコード変更を追跡する分散型バージョン管理システム。
 
 ## H
 
-**Hooks**  
-デプロイライフサイクルの特定のポイント（preprovision、postprovision、predeploy、postdeploy）で実行されるカスタムスクリプトやコマンド。
+<strong>フック</strong>  
+デプロイライフサイクルの特定段階（preprovision、postprovision、predeploy、postdeploy）で実行されるカスタムスクリプトまたはコマンド。
 
-**Host**  
-アプリケーションがデプロイされる Azure のサービスタイプ（例: appservice、containerapp、function）。
+<strong>ホスト</strong>  
+アプリケーションがデプロイされる Azure サービスの種類（例: appservice、containerapp、function）。
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-手動プロセスではなくコードを通じてインフラを定義および管理するプラクティス。
+コードによってインフラを定義・管理するプラクティス。手動操作を減らす。
 
 **Init**  
-通常はテンプレートから新しい azd プロジェクトを初期化するプロセス。
+通常テンプレートから新たに azd プロジェクトを初期化するプロセス。
 
 ## J
 
 **JSON**  
-JavaScript Object Notation。設定ファイルや API レスポンスによく使用されるデータ交換フォーマット。
+JavaScript Object Notation。設定ファイルや API レスポンスでよく使われるデータ交換形式。
 
 **JWT**  
-JSON Web Token。情報を安全に当事者間で JSON オブジェクトとして送信するための標準。
+JSON Web Token。情報を安全に JSON オブジェクトとして送信する標準形式。
 
 ## K
 
 **Key Vault**  
-シークレット、キー、証明書を安全に保存および管理するための Azure サービス。
+秘密情報、キー、証明書を安全に保管・管理する Azure サービス。
 
-**Kusto Query Language (KQL)**  
-Azure Monitor、Application Insights、その他の Azure サービスでデータを分析するために使用されるクエリ言語。
+**Kusto クエリ言語 (KQL)**  
+Azure Monitor、Application Insights など Azure サービスのデータ分析に使われるクエリ言語。
 
 ## L
 
-**Load Balancer**  
-複数のサーバーやインスタンスに着信ネットワークトラフィックを分散するサービス。
+<strong>ロードバランサー</strong>  
+複数のサーバーやインスタンス間で受信ネットワークトラフィックを分散するサービス。
 
 **Log Analytics**  
-クラウドおよびオンプレミスの環境からのテレメトリデータを収集、分析、活用するための Azure サービス。
+クラウドおよびオンプレ環境からのテレメトリデータ収集、分析、アクションを提供する Azure サービス。
 
 ## M
 
 **Managed Identity**  
-Azure サービスが他の Azure サービスに対して認証するための自動的に管理される ID を提供する Azure の機能。
+自動的に認証情報を管理し、他の Azure サービスの認証に利用可能な Azure の機能。
 
-**Microservices**  
-アプリケーションを小さく独立したサービスの集合として構築するアーキテクチャアプローチ。
+<strong>マイクロサービス</strong>  
+アプリケーションを小さく独立したサービス群として構築するアーキテクチャ手法。
 
 **Monitor**  
-アプリケーションとインフラ全体にわたるフルスタックの可観測性を提供する Azure の統合監視ソリューション。
+アプリケーションとインフラ全体を可観測にする Azure の統合モニタリングソリューション。
 
 ## N
 
 **Node.js**  
-Chrome の V8 JavaScript エンジン上に構築されたサーバーサイドアプリケーションを構築するための JavaScript ランタイム。
+Chrome の V8 JavaScript エンジン上に構築されたサーバーサイド JavaScript ランタイム。
 
 **npm**  
 Node.js の依存関係とパッケージを管理するパッケージマネージャー。
 
 ## O
 
-**Output**  
-インフラデプロイから返され、アプリケーションや他のリソースで使用できる値。
+<strong>アウトプット</strong>  
+インフラデプロイから返され、アプリや他リソースで利用可能な値。
 
 ## P
 
-**Package**  
-アプリケーションコードと依存関係をデプロイ用に準備するプロセス。
+<strong>パッケージ</strong>  
+アプリコードと依存関係をデプロイ準備するプロセス。
 
-**Parameters**  
-デプロイをカスタマイズするためにインフラテンプレートに渡される入力値。
+<strong>パラメーター</strong>  
+デプロイカスタマイズのためインフラテンプレートに渡す入力値。
 
 **PostgreSQL**  
 Azure でマネージドサービスとしてサポートされるオープンソースのリレーショナルデータベースシステム。
 
-**Provisioning**  
-インフラテンプレートで定義された Azure リソースを作成および構成するプロセス。
+<strong>プロビジョニング</strong>  
+インフラテンプレートで定義された Azure リソースを作成・設定するプロセス。
 
 ## Q
 
-**Quota**  
-Azure サブスクリプションまたはリージョンで作成できるリソースの量に対する制限。
+<strong>クォータ</strong>  
+Azure サブスクリプションまたはリージョンに作成可能なリソース量の制限。
 
 ## R
 
-**Resource Group**  
-同じライフサイクル、権限、およびポリシーを共有する Azure リソースの論理コンテナ。
+<strong>リソースグループ</strong>  
+同じライフサイクル、権限、ポリシーを共有する Azure リソースの論理コンテナ。
 
-**Resource Token**  
-azd によって生成され、デプロイ全体でリソース名の一意性を確保するための一意の文字列。
+<strong>リソーストークン</strong>  
+azd が生成する一意の文字列で、デプロイ間でリソース名の重複を防ぐ。
 
 **REST API**  
-HTTP メソッドを使用してネットワークアプリケーションを設計するためのアーキテクチャスタイル。
+HTTP メソッドを使ったネットワークアプリケーション設計のアーキテクチャスタイル。
 
-**Rollback**  
-アプリケーションまたはインフラ構成を以前のバージョンに戻すプロセス。
+<strong>ロールバック</strong>  
+アプリケーションやインフラ設定を以前のバージョンに戻すプロセス。
 
 ## S
 
-**Service**  
-azure.yaml で定義されたアプリケーションのコンポーネント（例: Web フロントエンド、API バックエンド、データベース）。
+<strong>サービス</strong>  
+azure.yaml で定義されたアプリケーションの構成要素（例: Web フロントエンド、API バックエンド、データベース）。
 
 **SKU**  
-Stock Keeping Unit。Azure リソースの異なるサービス層や性能レベルを表します。
+ストックキーユニット。Azure リソースのサービス階層や性能レベルを表す。
 
 **SQL Database**  
-Microsoft SQL Server をベースにした Azure のマネージドリレーショナルデータベースサービス。
+Microsoft SQL Server ベースの Azure マネージド関係データベースサービス。
 
 **Static Web Apps**  
-ソースコードリポジトリからフルスタック Web アプリケーションを構築およびデプロイするための Azure サービス。
+ソースコードリポジトリからフルスタック Web アプリを構築・デプロイする Azure サービス。
 
 **Storage Account**  
-BLOB、ファイル、キュー、テーブルなどのデータオブジェクト向けのクラウドストレージを提供する Azure サービス。
+BLOB、ファイル、キュー、テーブルなどのデータオブジェクト向けクラウドストレージを提供する Azure サービス。
 
-**Subscription**  
-リソースグループとリソースを保持し、請求およびアクセス管理を関連付ける Azure のアカウントコンテナ。
+<strong>サブスクリプション</strong>  
+リソースグループやリソースを保持し、課金やアクセス管理が紐づく Azure アカウントのコンテナ。
 
 ## T
 
-**Template**  
-アプリケーションコード、インフラ定義、および一般的なシナリオ向けの設定を含む事前構築されたプロジェクト構造。
+<strong>テンプレート</strong>  
+アプリコード、インフラ定義、共通シナリオ向け設定を含む事前構築プロジェクト構造。
 
 **Terraform**  
-Azure を含む複数のクラウドプロバイダーをサポートするオープンソースの Infrastructure as Code ツール。
+Azure を含む複数クラウドプロバイダー対応のオープンソース Infrastructure as Code ツール。
 
 **Traffic Manager**  
-グローバルな Azure リージョン間でトラフィックを分散する DNS ベースのトラフィックロードバランサー。
+グローバルな Azure リージョンにトラフィックを分散する Azure の DNS ベース トラフィックロードバランサー。
 
 ## U
 
@@ -246,121 +246,123 @@ Azure を含む複数のクラウドプロバイダーをサポートするオ�
 Uniform Resource Identifier。特定のリソースを識別する文字列。
 
 **URL**  
-Uniform Resource Locator。リソースの所在と取得方法を指定する URI の一種。
+Uniform Resource Locator。リソースの場所と取得方法を指定する URI の一種。
 
 ## V
 
 **Virtual Network (VNet)**  
-Azure におけるプライベートネットワークの基本構成要素で、分離とセグメンテーションを提供します。
+Azure でプライベートネットワークを作るための基本構成要素で、分離とセグメント化を提供。
 
 **VS Code**  
-Visual Studio Code。優れた Azure および azd 統合を備えた人気のコードエディタ。
+Visual Studio Code。優れた Azure と azd 統合を持つ人気のコードエディタ。
 
 ## W
 
 **Webhook**  
-特定のイベントによってトリガーされる HTTP コールバックで、CI/CD パイプラインで一般的に使用されます。
+特定イベントで発動する HTTP コールバック。CI/CD パイプラインでよく使われる。
 
 **What-if**  
-デプロイを実行せずに、デプロイによってどのような変更が行われるかを示す Azure の機能。
+実際のデプロイを実行せずに、どのような変更が発生するかを示す Azure の機能。
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language。azure.yaml のような設定ファイルで使用される人間が読みやすいデータシリアライズ標準。
+YAML Ain't Markup Language。azure.yaml のような設定ファイルに使われる人間が読みやすいデータシリアライズ標準。
 
 ## Z
 
-**Zone**  
-冗長性と高可用性を提供する Azure リージョン内の物理的に分離されたロケーション。
+<strong>ゾーン</strong>  
+Azure リージョン内の物理的に分離された場所で、冗長性と高可用性を提供。
 
 ---
 
-## よく使われる頭字語
+## 一般的な略語
 
-| Acronym | Full Form | Description |
+| 略語 | 正式名称 | 説明 |
 |---------|-----------|-------------|
-| AAD | Azure Active Directory（現在は Microsoft Entra ID） | アイデンティティおよびアクセス管理サービス |
+| AAD | Azure Active Directory (現在は Microsoft Entra ID) | アイデンティティとアクセス管理サービス |
 | ACR | Azure Container Registry | コンテナイメージのレジストリサービス |
 | AKS | Azure Kubernetes Service | マネージド Kubernetes サービス |
-| API | Application Programming Interface | ソフトウェアを構築するためのプロトコル群 |
+| API | Application Programming Interface | ソフトウェア構築のためのプロトコルセット |
 | ARM | Azure Resource Manager | Azure のデプロイおよび管理サービス |
-| CDN | Content Delivery Network | 分散されたサーバーネットワーク |
-| CI/CD | Continuous Integration/Continuous Deployment | 自動化された開発プラクティス |
-| CLI | Command Line Interface | テキストベースのユーザーインターフェイス |
-| DNS | Domain Name System | ドメイン名を IP アドレスに変換するシステム |
-| HTTPS | Hypertext Transfer Protocol Secure | HTTP のセキュアバージョン |
-| IaC | Infrastructure as Code | コードを通じたインフラ管理 |
+| CDN | Content Delivery Network | 分散型サーバーネットワーク |
+| CI/CD | 継続的インテグレーション／継続的デプロイ | 自動化された開発プラクティス |
+| CLI | コマンドラインインターフェース | テキストベースユーザーインターフェース |
+| DNS | ドメインネームシステム | ドメイン名を IP アドレスに変換するシステム |
+| HTTPS | ハイパーテキスト転送プロトコル セキュア | HTTP の安全なバージョン |
+| IaC | Infrastructure as Code | コードを使ったインフラ管理 |
 | JSON | JavaScript Object Notation | データ交換フォーマット |
 | JWT | JSON Web Token | 安全な情報伝達のためのトークン形式 |
-| KQL | Kusto Query Language | Azure データサービス向けのクエリ言語 |
-| RBAC | Role-Based Access Control | ユーザーの役割に基づくアクセス制御方式 |
+| KQL | Kusto クエリ言語 | Azure データサービス向けクエリ言語 |
+| RBAC | Role-Based Access Control | ユーザー役割に基づくアクセス制御 |
 | REST | Representational State Transfer | Web サービスのアーキテクチャスタイル |
-| SDK | Software Development Kit | 開発ツールのコレクション |
-| SLA | Service Level Agreement | サービスの可用性／性能に関する約束 |
-| SQL | Structured Query Language | リレーショナルデータベースを管理する言語 |
-| SSL/TLS | Secure Sockets Layer/Transport Layer Security | 暗号プロトコル |
-| URI | Uniform Resource Identifier | リソースを識別する文字列 |
-| URL | Uniform Resource Locator | リソースの位置を指定する URI の一種 |
-| VM | Virtual Machine | コンピュータシステムのエミュレーション |
-| VNet | Virtual Network | Azure のプライベートネットワーク |
+| SDK | ソフトウェア開発キット | 開発ツールのコレクション |
+| SLA | サービスレベルアグリーメント | サービス可用性・性能に関する約束 |
+| SQL | Structured Query Language | 関係データベースの管理言語 |
+| SSL/TLS | Secure Sockets Layer/Transport Layer Security | 暗号化プロトコル |
+| URI | Uniform Resource Identifier | リソース識別用文字列 |
+| URL | Uniform Resource Locator | リソース位置指定用 URI のタイプ |
+| VM | 仮想マシン | コンピューターシステムのエミュレーション |
+| VNet | 仮想ネットワーク | Azure 内のプライベートネットワーク |
 | YAML | YAML Ain't Markup Language | データシリアライズ標準 |
 
 ---
 
-## Azure サービス名の対応表
+## Azure サービス名マッピング
 
-| Common Name | Official Azure Service Name | azd Host Type |
+| 一般名 | 正式 Azure サービス名 | azd ホストタイプ |
 |-------------|------------------------------|---------------|
-| Web App | Azure App Service | `appservice` |
-| API App | Azure App Service | `appservice` |
-| Container App | Azure Container Apps | `containerapp` |
-| Function | Azure Functions | `function` |
-| Static Site | Azure Static Web Apps | `staticwebapp` |
-| Database | Azure Database for PostgreSQL | `postgres` |
-| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Storage | Azure Storage Account | `storage` |
-| Cache | Azure Cache for Redis | `redis` |
-| Search | Azure AI Search | `search` |
-| Messaging | Azure Service Bus | `servicebus` |
+| Web アプリ | Azure App Service | `appservice` |
+| API アプリ | Azure App Service | `appservice` |
+| コンテナアプリ | Azure Container Apps | `containerapp` |
+| ファンクション | Azure Functions | `function` |
+| スタティックサイト | Azure Static Web Apps | `staticwebapp` |
+| データベース | Azure Database for PostgreSQL | インフラリソースで、アプリではない `host` |
+| NoSQL データベース | Azure Cosmos DB | インフラリソースで、アプリではない `host` |
+| ストレージ | Azure Storage Account | インフラリソースで、組み込みアプリではない `host` |
+| キャッシュ | Azure Managed Redis | インフラリソースで、アプリではない `host` |
+| 検索 | Azure AI Search | インフラリソースで、アプリではない `host` |
+| メッセージング | Azure Service Bus | インフラリソースで、アプリではない `host` |
+
+`services.<name>.host` はアプリケーションのデプロイターゲットを選択するもので、Azure リソースの省略形ではありません。データベース、キャッシュ、検索サービス、キューは通常インフラプロバイダーによってプロビジョニングされ、アウトプットや設定を通じてアプリに接続されます。
 
 ---
 
-## コンテキスト別用語
+## コンテキスト固有用語
 
 ### 開発用語
-- **Hot Reload**: 開発中にアプリケーションを再起動せずに自動的に更新する機能
-- **Build Pipeline**: コードをビルドおよびテストする自動化プロセス
-- **Deployment Slot**: App Service 内のステージング環境
-- **Environment Parity**: 開発、ステージング、本番環境を類似させて保つこと
+- <strong>ホットリロード</strong>: 再起動せずに開発中にアプリを自動更新
+- <strong>ビルドパイプライン</strong>: コードビルド・テストの自動化プロセス
+- <strong>デプロイスロット</strong>: App Service 内のステージング環境
+- <strong>環境の同等性</strong>: 開発、ステージング、本番環境を類似状態に保つこと
 
 ### セキュリティ用語
-- **Managed Identity**: 自動的な資格情報管理を提供する Azure の機能
-- **Key Vault**: シークレット、キー、証明書の安全な保管
-- **RBAC**: Azure リソースに対するロールベースのアクセス制御
-- **Network Security Group**: ネットワークトラフィックを制御する仮想ファイアウォール
+- **Managed Identity**: 自動認証情報管理を提供する Azure 機能
+- **Key Vault**: 秘密情報、キー、証明書の安全な保管
+- **RBAC**: Azure リソースの役割ベースアクセス制御
+- <strong>ネットワークセキュリティグループ</strong>: ネットワークトラフィック管理用仮想ファイアウォール
 
-### 監視用語
-- **Telemetry**: 計測値やデータの自動収集
-- **Application Performance Monitoring (APM)**: ソフトウェアのパフォーマンス監視
-- **Log Analytics**: ログデータを収集および分析するサービス
-- **Alert Rules**: メトリクスや条件に基づく自動通知
+### モニタリング用語
+- <strong>テレメトリ</strong>: 計測値やデータの自動収集
+- **アプリケーションパフォーマンスモニタリング (APM)**: ソフトウェアパフォーマンス監視
+- **Log Analytics**: ログデータ収集・分析サービス
+- <strong>アラートルール</strong>: メトリックや条件に基づく自動通知
 
 ### デプロイ用語
-- **Blue-Green Deployment**: ゼロダウンタイムのデプロイ戦略
-- **Canary Deployment**: 一部のユーザーに対する段階的なリリース
-- **Rolling Update**: アプリケーションインスタンスを順次置換する更新方法
-- **Rollback**: 以前のアプリケーションバージョンに戻すこと
+- <strong>ブルーグリーンデプロイメント</strong>: ダウンタイムゼロを目指すデプロイ戦略
+- <strong>カナリアデプロイメント</strong>: 一部ユーザーへの段階的ロールアウト
+- <strong>ローリングアップデート</strong>: アプリインスタンスの逐次入れ替え
+- <strong>ロールバック</strong>: 前バージョンへの復帰
 
 ---
 
-<strong>使用のヒント</strong>: `Ctrl+F` を使ってこの用語集内の特定の用語を素早く検索してください。用語は該当する箇所で相互参照されています。
+<strong>使い方のヒント</strong>: 用語集内の特定用語をすばやく検索するには `Ctrl+F` を活用してください。関連用語はクロスリファレンスされています。
 
 ---
 
 <strong>ナビゲーション</strong>
 - <strong>前のレッスン</strong>: [チートシート](cheat-sheet.md)
-- <strong>次のレッスン</strong>: [よくある質問 (FAQ)](faq.md)
+- <strong>次のレッスン</strong>: [FAQ](faq.md)
 
 ---
 

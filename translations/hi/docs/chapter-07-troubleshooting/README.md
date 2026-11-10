@@ -6,17 +6,17 @@
 
 ## अवलोकन
 
-यह अध्याय Azure Developer CLI के साथ काम करते समय आम समस्याओं का निदान और समाधान करने में आपकी मदद करता है। तैनाती में विफलताओं से लेकर AI-विशिष्ट समस्याओं तक।
+यह अध्याय Azure Developer CLI के साथ काम करते समय आम समस्याओं का निदान और समाधान करने में आपकी सहायता करता है। परिनियोजन विफलताओं से लेकर AI-विशिष्ट समस्याओं तक।
 
-> जुलाई 2026 में `azd 1.27.1` के खिलाफ सत्यापित।
+> कमांड मार्गदर्शन जारी किए गए `azd 1.37.2` संदर्भ के खिलाफ समीक्षा की गई है। क्लाउड परिनियोजन निष्पादित नहीं किए गए। कमांड का उपयोग करने से पहले उदाहरण संसाधन नामों और आईडी को बदलें।
 
 ## सीखने के उद्देश्य
 
 इस अध्याय को पूरा करके, आप:
-- सामान्य AZD तैनाती विफलताओं का निदान कर सकेंगे
-- प्रमाणीकरण और अनुमति संबंधी समस्याओं को डीबग कर सकेंगे
-- AI सेवा कनेक्टिविटी समस्याओं को हल कर सकेंगे
-- समस्या निवारण के लिए Azure Portal और CLI का उपयोग कर सकेंगे
+- सामान्य AZD परिनियोजन विफलताओं का निदान करेंगे
+- प्रमाणीकरण और अनुमति समस्याओं को डीबग करेंगे
+- AI सेवा कनेक्टिविटी समस्याओं को हल करेंगे
+- समस्या निवारण के लिए Azure पोर्टल और CLI का उपयोग करेंगे
 
 ---
 
@@ -24,9 +24,9 @@
 
 | # | पाठ | विवरण | समय |
 |---|--------|-------------|------|
-| 1 | [सामान्य समस्याएँ](common-issues.md) | अक्सर आने वाली समस्याएं | 30 मिनट |
+| 1 | [सामान्य समस्याएँ](common-issues.md) | अक्सर आने वाली समस्याएँ | 30 मिनट |
 | 2 | [डीबगिंग गाइड](debugging.md) | चरण-दर-चरण डीबगिंग रणनीतियाँ | 45 मिनट |
-| 3 | [AI समस्या निवारण](ai-troubleshooting.md) | AI-विशिष्ट समस्याएं | 30 मिनट |
+| 3 | [AI समस्या निवारण](ai-troubleshooting.md) | AI-विशिष्ट समस्याएँ | 30 मिनट |
 
 ---
 
@@ -34,35 +34,38 @@
 
 ### प्रमाणीकरण समस्याएँ
 ```bash
-# AZD वर्कफ़्लोज़ के लिए आवश्यक
+# Required for AZD workflows
 azd auth login
 
-# यदि आप सीधे Azure CLI कमांड भी उपयोग कर रहे हैं तो वैकल्पिक है
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### प्रोविजनिंग विफलताएँ
+### प्रोविजनिंग असफलताएँ
 ```bash
 azd show
 azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### संसाधन टकराव
+### संसाधन संघर्ष
+पहले मौजूदा संसाधन और परिनियोजन त्रुटियों का निरीक्षण करें। नामकरण संघर्ष को हल करने के लिए साझा या प्रोडक्शन पर्यावरण को न हटाएं। **नए डिस्पोजेबल पर्यावरण** के लिए एक अनूठा नाम उपयोग करें:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### कोटा पार हो गया
+### कोटा अधिकतम
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+`AZURE_LOCATION` बदलने से मौजूदा संसाधन स्थानांतरित नहीं होते हैं और पुनः परिनियोजन पर स्थान संघर्ष हो सकते हैं।
 
 ---
 
@@ -70,25 +73,27 @@ azd up
 
 | त्रुटि | कारण | समाधान |
 |-------|-------|----------|
-| `AuthenticationError` | लॉग इन नहीं किया गया | `azd auth login` |
+| `AuthenticationError` | लॉग इन नहीं है | `azd auth login` |
 | `ResourceNotFound` | संसाधन गायब | संसाधन नाम जांचें |
-| `QuotaExceeded` | सब्सक्रिप्शन सीमाएँ | कोटा वृद्धि का अनुरोध करें |
-| `InvalidTemplate` | Bicep वाक्य रचना त्रुटि | `az bicep build` |
-| `Conflict` | संसाधन मौजूद है | नया नाम प्रयोग करें या हटा दें |
-| `Forbidden` | अपर्याप्त अनुमतियाँ | RBAC भूमिकाएँ जांचें |
+| `QuotaExceeded` | सदस्यता सीमाएं | कोटा वृद्धि का अनुरोध करें |
+| `InvalidTemplate` | बाइसेप सिंटैक्स त्रुटि | `az bicep build` |
+| `Conflict` | संसाधन मौजूद है | नया नाम उपयोग करें या हटाएं |
+| `Forbidden` | अपर्याप्त अनुमतियाँ | RBAC भूमिकाएं जांचें |
 
 ---
 
 ## 🔄 रीसेट और पुनर्प्राप्ति
 
 ```bash
-# सॉफ्ट रिसेट (संसाधन बनाए रखें, कोड पुनः तैनात करें)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# हार्ड रिसेट (सब कुछ हटाएं, नई शुरुआत करें)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+हार्ड रीसेट डेटा हटा देता है और एंडपॉइंट्स बदल सकता है। पहले बैकअप लें और इंटरैक्टिव हटाने के संकेतों की समीक्षा करें। `--force --purge` केवल जब अपरिवर्तनीय हटाना आवश्यक हो तब डिस्पोजेबल पर्यावरणों के लिए उपयुक्त है।
 
 ---
 
@@ -96,14 +101,14 @@ azd up
 
 | दिशा | अध्याय |
 |-----------|---------|
-| **पूर्व** | [अध्याय 6: प्री-डिप्लॉयमेंट](../chapter-06-pre-deployment/README.md) |
+| **पिछला** | [अध्याय 6: प्री-डिप्लॉयमेंट](../chapter-06-pre-deployment/README.md) |
 | **अगला** | [अध्याय 8: उत्पादन](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 संबंधित संसाधन
 
-- [प्री-डिप्लॉयमेंट जांच](../chapter-06-pre-deployment/preflight-checks.md)
+- [प्री-डिप्लॉयमेंट चेक](../chapter-06-pre-deployment/preflight-checks.md)
 - [कॉन्फ़िगरेशन गाइड](../chapter-03-configuration/configuration.md)
 - [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 

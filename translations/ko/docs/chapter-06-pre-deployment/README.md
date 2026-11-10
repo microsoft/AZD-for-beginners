@@ -1,51 +1,51 @@
 # 6장: 배포 전 계획 및 검증
 
-**📚 강의**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 1시간 | **⭐ 난이도**: 중급
+**📚 코스**: [AZD 초보자용](../../README.md) | **⏱️ 소요 시간**: 2-4시간 읽기; 적응형 실습 추가 시간 | **⭐ 난이도**: 중급–고급
 
 ---
 
 ## 개요
 
-이 장에서는 애플리케이션 배포 전에 필수적인 계획 및 검증 단계를 다룹니다. 적절한 용량 계획, SKU 선택 및 사전 점검을 통해 비용이 많이 드는 실수를 방지하는 방법을 배웁니다.
+이 장에서는 애플리케이션 배포 전에 필수적인 계획 및 검증 단계를 다룹니다. 적절한 용량 계획, SKU 선택 및 사전 검사로 비용이 많이 드는 실수를 방지하는 법을 배우세요.
 
-> 2026년 7월에 `azd 1.27.1`로 검증 완료.
+> 배포된 `azd 1.37.2` 참조를 기준으로 명령어 지침을 검토했습니다. 클라우드 배포는 실행하지 않았습니다. 긴 강의에는 완전한 로컬 배포 프로젝트가 아닌 예시 조각이 포함되어 있습니다.
 
 ## 학습 목표
 
 이 장을 완료하면 다음을 할 수 있습니다:
-- 배포 전 사전 점검 수행
-- 용량 계획 수립 및 자원 요구량 추정
+- 배포 전에 사전 검사를 실행
+- 용량 계획 수립 및 리소스 요구 사항 추정
 - 비용 최적화를 위한 적절한 SKU 선택
 - 모니터링을 위한 Application Insights 구성
-- 팀 협업 패턴 이해
+- 다중 에이전트 조정 패턴 및 배포 요구 사항 이해
 
 ---
 
-## 📚 강의 목록
+## 📚 강의
 
-| # | 강의 | 설명 | 시간 |
+| # | 강의 | 설명 | 소요 시간 |
 |---|--------|-------------|------|
-| 1 | [사전 점검](preflight-checks.md) | 배포 전 구성 검증 | 15분 |
-| 2 | [용량 계획](capacity-planning.md) | 자원 요구사항 추정 | 20분 |
-| 3 | [SKU 선택](sku-selection.md) | 적절한 요금제 선택 | 15분 |
+| 1 | [사전 검사](preflight-checks.md) | 배포 전 구성 검증 | 15분 |
+| 2 | [용량 계획](capacity-planning.md) | 리소스 요구 사항 추정 | 20분 |
+| 3 | [SKU 선택](sku-selection.md) | 적합한 가격 등급 선택 | 15분 |
 | 4 | [Application Insights](application-insights.md) | 모니터링 구성 | 20분 |
-| 5 | [협업 패턴](coordination-patterns.md) | 팀 배포 워크플로우 | 15분 |
+| 5 | [조정 패턴](coordination-patterns.md) | 고급 다중 에이전트 오케스트레이션 설계 | 60-75분 |
 
 ---
 
 ## 🚀 빠른 시작
 
 ```bash
-# 구독 할당량 확인
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# 배포 미리보기 (리소스 생성 없음)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Bicep 구문 검증
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 환경 구성 확인
+# Check environment configuration
 azd env get-values
 ```
 
@@ -53,31 +53,31 @@ azd env get-values
 
 ## ☑️ 배포 전 체크리스트
 
-### `azd provision` 전에
+### `azd provision` 이전
 
-- [ ] 지역별 쿼터 확인 완료
-- [ ] SKU 적절히 선택됨
+- [ ] 리전 쿼터 확인
+- [ ] SKU 적절하게 선택됨
 - [ ] 비용 추정 검토됨
-- [ ] 명명 규칙 일관성 있음
-- [ ] 보안/RBAC 구성됨
+- [ ] 명명 규칙 일관성 유지
+- [ ] 보안/RBAC 구성
 
-### `azd deploy` 전에
+### `azd deploy` 이전
 
-- [ ] 환경 변수 설정됨
-- [ ] Key Vault에 비밀 저장됨
-- [ ] 연결 문자열 확인됨
-- [ ] 상태 점검 구성됨
+- [ ] 환경 변수 설정
+- [ ] Key Vault에 비밀 저장
+- [ ] 연결 문자열 확인
+- [ ] 상태 검진 구성
 
 ---
 
 ## 💰 SKU 선택 가이드
 
-| 작업 부하 | 개발 | 운영 |
+| 워크로드 | 개발 | 운영 |
 |----------|-------------|------------|
-| Container Apps | 소비 기반 | 전용 D4 |
-| App Service | B1/B2 | P1v3 이상 |
-| Microsoft Foundry Models | 스탠다드 | 스탠다드 + PTU |
-| AI 검색 | 기본 | 스탠다드 S2 이상 |
+| 컨테이너 앱 | 소비 기반 | 측정된 부하에 따른 소비 기반 또는 전용 워크로드 프로필 |
+| 앱 서비스 | B1/B2 | P1v3 이상 |
+| Azure OpenAI 모델 | 지원되는 종량제 배포 유형 | 종량제 또는 프로비저닝 처리량; 모델/리전별 다름 |
+| AI 검색 | 제한 내 무료/기본 | 인덱스, 복제본 및 쿼리 부하에 맞춘 기본 또는 표준 등급 |
 
 ---
 
@@ -85,8 +85,8 @@ azd env get-values
 
 | 방향 | 장 |
 |-----------|---------|
-| <strong>이전</strong> | [5장: 멀티 에이전트](../chapter-05-multi-agent/README.md) |
-| <strong>다음</strong> | [7장: 문제 해결](../chapter-07-troubleshooting/README.md) |
+| <strong>이전</strong> | [5장: 다중 에이전트](../chapter-05-multi-agent/README.md) |
+| <strong>다음</strong> | [7장: 문제해결](../chapter-07-troubleshooting/README.md) |
 
 ---
 
