@@ -1,49 +1,51 @@
-# الفصل 2: تطوير الذكاء الاصطناعي أولاً
+# الفصل 2: تطوير يركز على الذكاء الاصطناعي
 
-**📚 الدورة**: [AZD للمبتدئين](../../README.md) | **⏱️ المدة**: 1-2 ساعات | **⭐ التعقيد**: متوسط
+**📚 الدورة**: [AZD للمبتدئين](../../README.md) | **⏱️ المدة**: 4-5 ساعات بما في ذلك ورشة العمل | **⭐ التعقيد**: متوسط
 
 ---
 
 ## نظرة عامة
 
-يركز هذا الفصل على نشر تطبيقات مدعومة بالذكاء الاصطناعي باستخدام Azure Developer CLI وخدمات Microsoft Foundry. من تطبيقات الدردشة الذكية البسيطة إلى الوكلاء الأذكياء المزودين بالأدوات.
+يركز هذا الفصل على نشر تطبيقات مدعومة بالذكاء الاصطناعي باستخدام Azure Developer CLI وخدمات Microsoft Foundry. من تطبيقات الدردشة البسيطة إلى الوكلاء الأذكياء المزودين بالأدوات.
 
-> **ملاحظة التحقق (2026-07-13):** تم مراجعة تدفق الأوامر وإرشادات الإضافة في هذا الفصل مقابل `azd` الإصدار `1.27.1` والإصدار الحالي التجريبي لإضافة الوكلاء الذكية `azure.ai.agents` `1.0.0-beta.5`. إذا كنت تستخدم إصدارًا أقدم من AZD، يرجى التحديث أولاً ثم متابعة التمارين.
+> **مراجعة الإصدار (2026-11-04):** تم التحقق من إرشادات AI CLI مقابل الوثائق/المصدر المنشور `azd` `1.37.2`، `azure.ai.agents` `1.0.0-beta.23`، و `azure.ai.evaluations` `1.0.0-beta.2`. استخدم `azd >= 1.37.0` لسير العمل الموحد. تستخدم التقييمات الآن مساحة اسم `azd ai eval` منفصلة؛ راجع [تغييرات الإصدار وإرشادات الترحيل](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). هذا ليس تحققًا من نشر مباشر.
 
 ## أهداف التعلم
 
-عند إكمال هذا الفصل، ستتمكن من:
+من خلال إكمال هذا الفصل، ستتمكن من:
 - نشر تطبيقات الذكاء الاصطناعي باستخدام قوالب AZD الجاهزة
 - فهم تكامل Microsoft Foundry مع AZD
-- تكوين وتخصيص الوكلاء الذكيين مع الأدوات
-- نشر تطبيقات RAG (التوليد المدعوم بالاستخراج)
+- تكوين وتخصيص وكلاء الذكاء الاصطناعي باستخدام الأدوات
+- نشر تطبيقات RAG (التوليد المعزز بالاستخراج)
 
 ---
 
 ## 📚 الدروس
 
-| # | الدرس | الوصف | الوقت |
+| الرقم | الدرس | الوصف | الوقت |
 |---|--------|-------------|------|
 | 1 | [تكامل Microsoft Foundry](microsoft-foundry-integration.md) | ربط AZD بخدمات Foundry | 30 دقيقة |
-| 2 | [دليل الوكلاء الذكيين](agents.md) | نشر وكلاء ذكيين مزودين بالأدوات | 45 دقيقة |
-| 3 | [نشر نموذج الذكاء الاصطناعي](ai-model-deployment.md) | نشر وتكوين نماذج الذكاء الاصطناعي | 30 دقيقة |
-| 4 | [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md) | عملي: اجعل حلك للذكاء الاصطناعي جاهزًا لـ AZD | 60 دقيقة |
+| 2 | [دليل وكلاء الذكاء الاصطناعي](agents.md) | نشر وكلاء أذكياء مزودين بالأدوات | 45 دقيقة |
+| 3 | [نشر نماذج الذكاء الاصطناعي](ai-model-deployment.md) | نشر وتكوين نماذج الذكاء الاصطناعي | 30 دقيقة |
+| 4 | [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md) | عملي: استكشاف قالب وتخطيط التحويل | 2-3 ساعات |
 
 ---
 
-## 🚀 بدء سريع
+## 🚀 بداية سريعة
+
+اختر خيارًا واحدًا في دليل جديد فارغ. يقوم الأمر `.` اللاحق بتهيئة الدليل الحالي؛ وإلا يمكن لـ AZD إنشاء دليل فرعي دون تغيير دليل العمل في shell الخاص بك.
 
 ```bash
-# الخيار 1: تطبيق دردشة RAG
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# الخيار 2: وكلاء الذكاء الاصطناعي
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# الخيار 3: تطبيق دردشة سريع
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
@@ -53,21 +55,23 @@ azd up
 
 | القالب | الوصف | الخدمات |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | دردشة RAG مع الاقتباسات | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | وكيل ذكاء اصطناعي مزود بالأدوات | خدمة الوكيل الذكي |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | دردشة RAG مع الاستشهادات | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | وكيل ذكي مزود بالأدوات | خدمة وكلاء الذكاء الاصطناعي |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | دردشة ذكاء اصطناعي أساسية | OpenAI + تطبيقات الحاويات |
 
 ---
 
-## 💰 الوعي بالتكاليف
+## 💰 الوعي بالتكلفة
+
+هذه نطاقات توضيحية وليست عروض أسعار أو حدود؛ يمكن أن يتجاوز حركة النماذج، وحزم Search/الحوسبة، والمنطقة، والميزات الاختيارية هذه النطاقات. راجع توجيهات التسعير الحالية للعينة المختارة قبل التزويد.
 
 | البيئة | التكلفة الشهرية المقدرة |
 |-------------|----------------------|
-| التطوير | 80-150 دولار |
-| الاختبار | 150-300 دولار |
-| الإنتاج | 300-3,500+ دولار |
+| التطوير | $80-150 |
+| الاختبار | $150-300 |
+| الإنتاج | $300-3,500+ |
 
-**نصيحة:** شغل الأمر `azd down` بعد الاختبار لتجنب الرسوم.
+**نصيحة:** قم بتشغيل `azd down` بعد الاختبار لتجنب الرسوم.
 
 ---
 
@@ -76,16 +80,16 @@ azd up
 | الاتجاه | الفصل |
 |-----------|---------|
 | **السابق** | [الفصل 1: الأساس](../chapter-01-foundation/README.md) |
-| **التالي** | [الفصل 3: التهيئة](../chapter-03-configuration/README.md) |
+| **التالي** | [الفصل 3: الإعداد](../chapter-03-configuration/README.md) |
 | **تخطي إلى** | [الفصل 8: أنماط الإنتاج](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 الموارد ذات الصلة
 
-- [استكشاف مشكلات الذكاء الاصطناعي](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [ممارسات إنتاج الذكاء الاصطناعي](../chapter-08-production/production-ai-practices.md)
-- [رؤى التطبيق](../chapter-06-pre-deployment/application-insights.md)
+- [استكشاف أخطاء الذكاء الاصطناعي وإصلاحها](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [ممارسات الذكاء الاصطناعي الإنتاجية](../chapter-08-production/production-ai-practices.md)
+- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

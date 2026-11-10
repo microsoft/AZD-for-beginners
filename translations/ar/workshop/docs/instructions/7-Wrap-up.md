@@ -1,95 +1,95 @@
-# 7. الخلاصة والخطوات التالية
+# ٧. خلاصة وخطوات تالية
 
-!!! tip "THE MAIN TAKEAWAY MESSAGES ARE"
+!!! tip "الرسائل الرئيسية المستفادة هي"
 
-    - [ ] قوالب AZD تسرّع تطوير تطبيقات الذكاء الاصطناعي من أيام إلى ساعات
-    - [ ] منهجية الاكتشاف → النشر → التخصيص توفر مسار تعلم منظم
-    - [ ] GitHub Copilot مع خوادم MCP تمكّن من استكشاف قواعد الشفرات المعقدة باستخدام اللغة الطبيعية
-    - [ ] Microsoft Foundry يوفر قدرات مراقبة مدمجة وتقييم واختبار أمني
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. ما الذي حققته
+## ١. ما الذي أنجزته
 
 تهانينا! في هذه الورشة، لقد نجحت في:
 
 | الوحدة | الإنجاز |
 |:---|:---|
-| **الوحدة 1** | اكتشفت Azure Developer CLI واخترت قالبًا للذكاء الاصطناعي |
-| **الوحدة 2** | نشرت وتحققت من حل كامل لوكلاء الذكاء الاصطناعي |
-| **الوحدة 3** | حلّلت القالب لفهم بنيته المعمارية |
-| **الوحدة 4** | استكشفت تهيئة `azure.yaml` وخطافات دورة الحياة |
-| **الوحدة 5** | خصّصت القالب لسيناريو خاص بك |
-| **الوحدة 6** | قمت بتفكيك البنية التحتية بأمان وأدرت الموارد |
+| **الوحدة ١** | التعرف على Azure Developer CLI واختيار قالب الذكاء الاصطناعي |
+| **الوحدة ٢** | نشر والتحقق من حل كامل لوكلاء الذكاء الاصطناعي |
+| **الوحدة ٣** | تفكيك القالب لفهم بنائه المعماري |
+| **الوحدة ٤** | استكشاف تكوين `azure.yaml` وموصلات دورة الحياة |
+| **الوحدة ٥** | تخصيص القالب لسيناريو خاص بك |
+| **الوحدة ٦** | تفكيك البنية التحتية وإدارة الموارد بأمان |
 
 ---
 
-## 2. المفاهيم الرئيسية التي تم إتقانها
+## ٢. المفاهيم الأساسية التي أتقنتها
 
 ### Azure Developer CLI (azd)
-- `azd init` - تهيئة المشاريع من القوالب
-- `azd up` - توفير ونشر بأمر واحد
+- `azd init` - بدء المشاريع من القوالب
+- `azd up` - التهيئة والنشر بأمر واحد
 - `azd env` - إدارة متغيرات البيئة
 - `azd down` - تنظيف الموارد بأمان
 
-### AZD Template Structure
-- `azure.yaml` - تهيئة وخطافات النشر
-- `infra/` - البنية التحتية كرمز باستخدام Bicep
-- `src/` - كود مصدر التطبيق
+### هيكل قالب AZD
+- `azure.yaml` - موصلات التكوين والنشر
+- `infra/` - بنية البنية التحتية ككود باستخدام Bicep
+- `src/` - شفرة المصدر للتطبيق
 - `scripts/` - سكريبتات الأتمتة والإعداد
 
-### Microsoft Foundry Capabilities
-- خدمة وكلاء الذكاء الاصطناعي للمساعدين الأذكياء
-- بحث في الملفات وAzure AI Search لاسترجاع المعرفة
-- تتبّع ومراقبة وتقييم مدمجة
-- اختبارات الفريق الأحمر للتحقق من أمان الذكاء الاصطناعي
+### قدرات Microsoft Foundry
+- خدمة وكيل الذكاء الاصطناعي للمساعدين الأذكياء
+- البحث في الملفات وAzure AI Search لاسترجاع المعرفة
+- تتبع مدمج، ومراقبة، وتقييم
+- فرق اختبار الحماية لضمان سلامة الذكاء الاصطناعي
 
 ---
 
-## 3. واصل رحلة تعلمك
+## ٣. تابع رحلة تعلمك
 
-### الخطوات الموصى بها التالية
+### الخطوات الموصى بها تاليًا
 
-| المسار | المصدر | الوقت |
+| المسار | المورد | الوقت |
 |:---|:---|:---|
-| **الدورة الكاملة** | [مناهج AZD للمبتدئين](../../README.md) | 8-12 ساعة |
-| **جرّب قالبًا آخر** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 ساعة |
-| **التعمّق** | [توثيق Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | مستمر |
-| **المجتمع** | [Azure Discord](https://aka.ms/foundry/discord) | انضم اليوم! |
+| **إنهاء الدورة** | [منهج AZD للمبتدئين](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | التعلم الذاتي |
+| **تجربة قالب آخر** | [قوالب Microsoft Foundry](https://ai.azure.com/templates) | ١-٢ ساعة |
+| **غوص أعمق** | [توثيق Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | مستمر |
+| **المجتمع** | [Discord الخاص بـ Azure](https://aka.ms/foundry/discord) | انضم اليوم! |
 
-### القوالب المقترحة للتجربة التالية
+### قوالب مقترحة لتجربتها لاحقًا
 
-1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - محادثة أساسية مع بياناتك
-2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - أنماط RAG المتقدمة
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - سيناريوهات التجزئة للمؤسسات
+١. **[ابدأ مع الدردشة بالذكاء الاصطناعي](https://github.com/Azure-Samples/get-started-with-ai-chat)** - دردشة أساسية مع بياناتك
+٢. **[عرض Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - أنماط RAG متقدمة
+٣. **[دردشة Contoso](https://github.com/Azure-Samples/contoso-chat)** - سيناريوهات التجزئة المؤسسية
 
 ---
 
-## 4. تحدي الورشة
+## ٤. تحدي الورشة
 
-هل أنت مستعد لاختبار مهاراتك؟ جرّب هذه التحديات:
+هل أنت مستعد لاختبار مهاراتك؟ جرب هذه التحديات:
 
 | التحدي | الوصف | الصعوبة |
 |:---|:---|:---|
-| **1. سيناريو متعدد الوكلاء** | انشر وخصص لقطاع مختلف (مثل: الرعاية الصحية، المالية) | ⭐⭐ |
-| **2. قاعدة معرفة مخصصة** | أضف ملفات بياناتك وأنشئ فهرس بحث مخصص | ⭐⭐⭐ |
-| **3. النشر في بيئة الإنتاج** | إعداد CI/CD باستخدام GitHub Actions عبر `azd pipeline config` | ⭐⭐⭐⭐ |
+| **١. سيناريو متعدد الوكلاء** | نشر وتخصيص لصناعة مختلفة (مثل الرعاية الصحية، المالية) | ⭐⭐ |
+| **٢. قاعدة معرفة مخصصة** | إضافة ملفات بياناتك الخاصة وإنشاء فهرس بحث مخصص | ⭐⭐⭐ |
+| **٣. النشر في الإنتاج** | إعداد CI/CD باستخدام GitHub Actions باستخدام `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. شارك ملاحظاتك
+## ٥. شاركنا ملاحظاتك
 
-ملاحظاتك تساعدنا على تحسين هذه الورشة!
+تساعد ملاحظاتك في تحسين هذه الورشة!
 
-- **GitHub Issues**: [أرسل ملاحظات](https://github.com/microsoft/azd-for-beginners/issues) - وسمها بـ `Workshop`
+- **مشاكل GitHub**: [نشر الملاحظات](https://github.com/microsoft/azd-for-beginners/issues) - وسمها بـ `Workshop`
 - **Discord**: انضم إلى [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - انشر في `#get-help`
-- **Contributions**: ساعد في تحسين الورشة عن طريق تقديم Pull Requests!
+- **المساهمات**: ساعد في تحسين الورشة عن طريق تقديم طلبات سحب!
 
 ---
 
 ## شكرًا لك! 🎉
 
-شكرًا لإكمالك ورشة AZD لمطوري الذكاء الاصطناعي. نأمل أن تكون هذه التجربة قد زوّدتك بالمهارات والثقة لبناء ونشر تطبيقات الذكاء الاصطناعي على Azure.
+شكرًا لك لإتمام ورشة عمل AZD لمطوري الذكاء الاصطناعي. نأمل أن تكون هذه التجربة قد زودتك بالمهارات والثقة لبناء ونشر تطبيقات الذكاء الاصطناعي على Azure.
 
 **استمر في البناء، استمر في التعلم، ومرحبًا بك في مجتمع مطوري Azure AI!**
 
@@ -97,14 +97,14 @@
 
 | | |
 |:---|:---|
-| **📚 الصفحة الرئيسية للدورة** | [AZD للمبتدئين](../../README.md) |
+| **📚 الصفحة الرئيسية للدورة** | [AZD للمبتدئين](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
 | **📖 التوثيق** | [توثيق Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ قوالب AI** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-| **💬 المجتمع** | [Azure Discord](https://aka.ms/foundry/discord) |
+| **🛠️ قوالب الذكاء الاصطناعي** | [قوالب Microsoft Foundry](https://ai.azure.com/templates) |
+| **💬 المجتمع** | [Discord خاص بـ Azure](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-تنبيه/إخلاء مسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية Co‑op Translator (https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يُرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. ينبغي اعتبار الوثيقة الأصلية بلغتها الأصلية المصدر المرجعي والموثوق. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. لا نتحمل أي مسؤولية عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,199 +1,204 @@
-# Справочник команд - Основные команды AZD
+# Сводка команд - Основные команды AZD
 
-**Быстрая справка для всех глав**
-- **📚 Домашняя страница курса**: [AZD для новичков](../README.md)
+**Быстрая справка по всем главам**
+- **📚 Главная страница курса**: [AZD для начинающих](../README.md)
 - **📖 Быстрый старт**: [Глава 1: Основы и быстрый старт](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI команды**: [Глава 2: Разработка с приоритетом на ИИ](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🤖 Команды ИИ**: [Глава 2: Разработка с ИИ в приоритете](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Продвинутые**: [Глава 4: Инфраструктура как код](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Введение
 
-Этот комплексный справочник предоставляет быстрый доступ к наиболее часто используемым командам Azure Developer CLI, организованным по категориям с практическими примерами. Идеально подходит для быстрого поиска во время разработки, устранения неполадок и повседневной работы с проектами azd.
+Этот подробный справочник предоставляет быструю справку по наиболее часто используемым командам Azure Developer CLI, организованным по категориям с практическими примерами. Идеально подходит для быстрого поиска в процессе разработки, устранения неполадок и ежедневных операций с проектами azd.
 
 ## Цели обучения
 
 Используя этот справочник, вы:
-- Получите мгновенный доступ к основным командам и синтаксису Azure Developer CLI
-- Поймёте организацию команд по функциональным категориям и случаям использования
-- Сможете обращаться к практическим примерам для типичных сценариев разработки и развертывания
-- Получите команды для устранения неполадок для быстрого решения проблем
-- Обнаружите эффективные параметры для продвинутой настройки и конфигурации
-- Найдёте команды для управления средами и рабочих процессов с несколькими средами
+- Будете иметь мгновенный доступ к основным командам и синтаксису Azure Developer CLI
+- Поймёте организацию команд по функциональным категориям и сценариям использования
+- Сможете обращаться к практическим примерам для распространённых задач разработки и развертывания
+- Получите доступ к командам для устранения неполадок для быстрого решения проблем
+- Найдёте эффективные варианты расширенной настройки и конфигурации
+- Обнаружите команды управления окружениями и для рабочих процессов с несколькими окружениями
 
 ## Результаты обучения
 
-Регулярно обращаясь к этому справочнику, вы сможете:
-- Уверенно выполнять команды azd без постоянного обращения к полной документации
-- Быстро устранять распространённые проблемы с помощью подходящих диагностических команд
-- Эффективно управлять несколькими средами и сценариями развертывания
-- Применять продвинутые функции и параметры настройки azd по мере необходимости
-- Решать проблемы развертывания, используя систематические последовательности команд
-- Оптимизировать рабочие процессы через эффективное использование сокращений и опций azd
+Регулярно используя этот справочник, вы сможете:
+- Выполнять команды azd с уверенностью без необходимости обращения к полной документации
+- Быстро решать распространённые проблемы с помощью соответствующих диагностических команд
+- Эффективно управлять несколькими окружениями и сценариями развертывания
+- Применять продвинутые функции и параметры конфигурации azd по мере необходимости
+- Устранять неполадки развертывания с помощью систематических последовательностей команд
+- Оптимизировать рабочие процессы с эффективным использованием ярлыков и опций azd
 
 ## Начальные команды
 
 ### Аутентификация
 ```bash
-# Вход в Azure через AZD
+# Login to Azure via AZD
 azd auth login
 
-# Вход в Azure CLI (AZD использует это внутри)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# Проверить текущую учетную запись
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# Установить подписку по умолчанию
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# Выйти из AZD
+# Logout from AZD
 azd auth logout
 
-# Выйти из Azure CLI
+# Logout from Azure CLI
 az logout
 ```
 
 ### Инициализация проекта
 ```bash
-# Просмотреть доступные шаблоны
+# Browse available templates
 azd template list
 
-# Инициализировать из шаблона
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# Инициализировать в текущем каталоге
+# Initialize in current directory
 azd init .
 
-# Инициализировать с пользовательским именем
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
 ## Основные команды развертывания
 
 ### Полный рабочий процесс развертывания
 ```bash
-# Развернуть всё (подготовка + развертывание)
+# Deploy everything (provision + deploy)
 azd up
 
-# Развернуть без запросов подтверждения
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# Развернуть в определённой среде
+# Deploy to specific environment
 azd up --environment production
 
-# Развернуть с пользовательскими параметрами
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
 ### Только инфраструктура
 ```bash
-# Развертывание ресурсов Azure
+# Provision Azure resources
 azd provision
 
-# 🧪 Предварительный просмотр изменений инфраструктуры
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# Показывает предварительный просмотр, какие ресурсы будут созданы/изменены/удалены
-# Аналогично 'terraform plan' или 'bicep what-if' - безопасно запускать, изменения не применяются
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
 ### Только приложение
 ```bash
-# Развернуть код приложения
+# Deploy application code
 azd deploy
 
-# Развернуть конкретный сервис
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Развернуть все сервисы
+# Deploy all services
 azd deploy --all
 ```
 
 ### Сборка и упаковка
 ```bash
-# Восстановить (скачать) зависимости приложения
+# Restore (download) application dependencies
 azd restore
 
-# Восстановить конкретный сервис
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# Построить развертываемый артефакт без развертывания
+# Build a deployable artifact without deploying
 azd package
 
-# Построить конкретный сервис
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** загружает зависимости вашего приложения (npm, pip, NuGet, Maven и др.). Она выполняется автоматически во время `azd package` и `azd deploy`, поэтому вы редко вызываете её напрямую — запуск вручную нужен для предварительной загрузки зависимостей (например, чтобы прогреть кеш CI или работать офлайн позже).
+> **`azd restore`** загружает зависимости вашего приложения (npm, pip, NuGet, Maven и т.д.). Он запускается автоматически во время `azd package` и `azd deploy`, поэтому вы редко вызываете его напрямую — запускать вручную имеет смысл для предварительной загрузки зависимостей (например, для разогрева кэша CI или работы в офлайн-режиме позже).
 
-> **`azd package`** создаёт артефакт для развертывания (контейнерный образ или zip) **без** отправки в Azure. Используйте её отдельно, чтобы убедиться в успешности сборки, проверить результат или получить артефакт для развертывания отдельным процессом позже. `azd deploy` автоматически упаковывает, поэтому `azd package` нужен только если нужен артефакт без развертывания.
+> **`azd package`** подготавливает артефакт для развертывания без развертывания службы приложения. Поведение зависит от языка и хоста: упаковка контейнера может использовать удалённые сборки Azure и публиковать изображения в реестр, поэтому это не обязательно офлайн или без записи в Azure. `azd deploy` может упаковывать автоматически; используйте отдельный этап упаковки, когда нужен артефакт или проверка сборки.
 
-## 🌍 Управление средами
 
-### Операции со средами
+## 🌍 Управление окружениями
+
+### Операции с окружениями
 ```bash
-# Показать все окружения
+# List all environments
 azd env list
 
-# Создать новое окружение
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# Выбрать окружение
+# Select environment
 azd env select production
 
-# Показать доступные окружения
+# Show available environments
 azd env list
 
-# Обновить состояние окружения
+# Refresh environment state
 azd env refresh
 ```
 
-### Переменные среды
+### Переменные окружения
 ```bash
-# Установить переменную окружения
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# Получить переменную окружения
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# Список всех переменных окружения
+# List all environment variables
 azd env get-values
 
-# Удалить переменную окружения
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
 
-## ⚙️ Конфигурационные команды
+Файлы окружения — это обычный текст. Не используйте `azd env set` как хранилище секретов; используйте ссылки на Key Vault или управляемую идентичность по необходимости.
+
+## ⚙️ Команды конфигурации
 
 ### Глобальная конфигурация
 ```bash
-# Вывести все настройки
+# List all configuration
 azd config show
 
-# Установить глобальные параметры по умолчанию
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Удалить настройку
+# Remove configuration
 azd config unset defaults.location
 
-# Сбросить все настройки
+# Reset all configuration
 azd config reset
 ```
 
 ### Конфигурация проекта
 ```bash
-# Проверить azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# Показать информацию о проекте
+# Show project information
 azd show
 
-# Получить конечные точки сервиса
+# Get service endpoints
 azd show --output json
 ```
 
@@ -201,37 +206,39 @@ azd show --output json
 
 ### Панель мониторинга
 ```bash
-# Открыть панель мониторинга портала Azure
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# Открыть живые метрики Application Insights
+# Open Application Insights live metrics
 azd monitor --live
 
-# Открыть панель журналов Application Insights
+# Open Application Insights logs blade
 azd monitor --logs
 
-# Открыть обзор Application Insights
+# Open Application Insights overview
 azd monitor --overview
 ```
 
-### Просмотр логов контейнера
+Application Insights должен быть настроен шаблоном. Функция Live Metrics в AZD в настоящее время не поддерживается для Python-приложений; используйте обзор, логи или документированный в примере рабочий процесс трассировки.
+
+### Просмотр логов контейнеров
 ```bash
-# Просмотр журналов через Azure CLI (для Container Apps)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Просмотр журналов в реальном времени
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Просмотр журналов через портал Azure
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
 ### Запросы Log Analytics
 ```bash
-# Доступ к анализу журналов через портал Azure
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# Запрос журналов с помощью Azure CLI
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -241,28 +248,28 @@ az monitor log-analytics query \
 
 ### Очистка
 ```bash
-# Удалить все ресурсы Azure
+# Remove all Azure resources
 azd down
 
-# Принудительное удаление без подтверждения
+# Force delete without confirmation
 azd down --force
 
-# Очистить мягко удалённые ресурсы
+# Purge soft-deleted resources
 azd down --purge
 
-# Полная очистка
+# Complete cleanup
 azd down --force --purge
 ```
 
 ### Обновления
 ```bash
-# Проверить обновления azd
+# Check for azd updates
 azd version
 
-# Получить текущую версию
+# Get current version
 azd version
 
-# Просмотреть текущую конфигурацию
+# View current configuration
 azd config show
 ```
 
@@ -270,119 +277,144 @@ azd config show
 
 ### Конвейер и CI/CD
 ```bash
-# Настроить GitHub Actions
+# Configure GitHub Actions
 azd pipeline config
 
-# Настроить Azure DevOps
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# Показать конфигурацию пайплайна
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
 ### Управление инфраструктурой
 ```bash
-# Генерировать шаблоны инфраструктуры
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 Предварительный просмотр и планирование инфраструктуры
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# Имитирует развертывание инфраструктуры без фактического развертывания
-# Анализирует шаблоны Bicep/Terraform и показывает:
-# - Ресурсы, которые будут добавлены (зелёный +)
-# - Ресурсы, которые будут изменены (жёлтый ~)
-# - Ресурсы, которые будут удалены (красный -)
-# Безопасно запускать - никаких фактических изменений в среде Azure не происходит
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# Генерировать инфраструктуру из azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ### Информация о проекте
 ```bash
-# Показать статус проекта и конечные точки
+# Show project status and endpoints
 azd show
 
-# Показать подробную информацию о проекте в формате JSON
+# Show detailed project info as JSON
 azd show --output json
 
-# Получить конечные точки сервиса
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI и расширения
+## 🤖 Команды ИИ и расширения
 
 ### Расширения AZD
+
+Справка по AI CLI проверена 2026-11-04: `azd 1.37.2`, агенты `1.0.0-beta.23`, оценки `1.0.0-beta.2`. Используйте `azd >= 1.37.0` для объединённого рабочего процесса; обновите основной CLI перед несовместимыми расширениями.
+
 ```bash
-# Список всех доступных расширений (включая ИИ)
+# List all available extensions (including AI)
 azd extension list
 
-# Установить расширение агентов Foundry
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Установить расширение навыков агентов (предварительный просмотр)
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the agent skills extension (preview)
 azd extension install azure.ai.skills
 
-# Установить расширение подключений Foundry (предварительный просмотр)
+# Install the Foundry connections extension (preview)
 azd extension install azure.ai.connections
 
-# Установить расширение тонкой настройки
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Установить расширение пользовательских моделей
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Обновить все установленные расширения
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
-### AI агент команды
+### Команды агентов ИИ
 ```bash
-# Инициализировать проект агента из манифеста
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# Указать конкретный проект Foundry
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# Указать исходный каталог агента
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# Выбрать цель размещения
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# Протестировать развернутого агента (выводит задержку + время до первого байта)
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# Показать конфигурацию живой конечной точки
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# Сгенерировать набор данных для оценки, затем оптимизировать агента
-azd ai agent eval generate
-azd ai agent optimize
-
-# Скачать развернутый исходный код хостинг-агента на основе кода
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# Удалить хостинг-агента и все его версии (--force завершает активные сессии)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
-### MCP сервер (альфа)
+`--template`/`-t` заменяет устаревшее написание `--manifest`/`-m`; старые манифесты требуют миграции. Текущей опции agent-init `--host containerapp` нет. Предварительные версии с управляемым окружением, голосом и долгой работой требуют отдельного включения в shell/CI; смотрите [справку AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+### Оценки и оптимизация ИИ
 ```bash
-# Запустите сервер MCP для вашего проекта
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+Агенты beta.22 заменили устаревшие команды оценки на `azd ai eval` из `azure.ai.evaluations`. Новая конфигурация оценки использует camelCase ключи. Оптимизация `--config` требует отдельного запроса к API оптимизации, **не** устаревшего `eval.yaml` или нового `azure.eval.yaml`; используйте `--eval`/`--eval-config` для повторного использования оценки. Смотрите [настройку оценки](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) и [миграцию оптимизации](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### MCP Server (Альфа)
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# Управляйте согласием на использование инструментов для операций MCP
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
 ### Генерация инфраструктуры
 ```bash
-# Генерировать файлы IaC из определения вашего проекта
+# Generate IaC files from your project definition
 azd infra generate
 
-# Синтезировать инфраструктуру из azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
@@ -391,124 +423,120 @@ azd infra synth
 
 ### Рабочий процесс разработки
 ```bash
-# Начать новый проект
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# Развернуть в среде разработки
+# Deploy to development
 azd env new dev
 azd up
 
-# Внести изменения и развернуть заново
+# Make changes and redeploy
 azd deploy
 
-# Открыть панель мониторинга
+# Open monitoring dashboard
 azd monitor --live
 ```
 
-### Рабочий процесс с несколькими средами
+### Рабочий процесс с несколькими окружениями
 ```bash
-# Настроить окружения
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Развернуть на dev
+# Deploy to dev
 azd env select dev
 azd up
 
-# Протестировать и продвинуть на staging
+# Test and promote to staging
 azd env select staging
 azd up
 
-# Развернуть в production
+# Deploy to production
 azd env select production
 azd up
 ```
 
 ### Рабочий процесс устранения неполадок
 ```bash
-# Включить режим отладки
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# Проверить состояние развертывания
-azd show
-
-# Проверить конфигурацию
+# Validate configuration
 azd config show
 
-# Открыть панель мониторинга для журналов
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# Проверить состояние ресурсов
+# Check resource status
 azd show --output json
 ```
 
 ## 🔍 Команды отладки
 
-### Информация для отладки
+### Отладочная информация
 ```bash
-# Включить отладочный вывод
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# Отключить телеметрию для более чистого вывода
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# Проверить текущую конфигурацию
+# Check current configuration
 azd config show
 
-# Проверить статус аутентификации
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
 ### Отладка шаблонов
 ```bash
-# Список доступных шаблонов с деталями
+# List available templates with details
 azd template list --output json
 
-# Показать информацию о шаблоне
+# Show template information
 azd template show <template-name>
 
-# Проверить шаблон перед инициализацией
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
-## 📁 Команды работы с файлами и каталогами
+## 📁 Команды для работы с файлами и каталогами
 
 ### Структура проекта
 ```bash
-# Показать текущую структуру каталогов
+# Show current directory structure
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Перейти в корневой каталог проекта azd
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# Показать каталог конфигурации azd
-echo $AZD_CONFIG_DIR  # Обычно ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
 ## 🎨 Форматирование вывода
 
-### Вывод в формате JSON
+### Вывод JSON
 ```bash
-# Получить JSON вывод для скриптов
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# Разобрать с помощью jq
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Вывод в виде таблицы
+### Вывод таблицей
 ```bash
-# Форматировать как таблицу
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# Просмотреть развернутые сервисы
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
@@ -517,7 +545,7 @@ azd show --output json | jq '.services | keys'
 ### Скрипт проверки состояния
 ```bash
 #!/bin/bash
-# Быстрая проверка состояния здоровья
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
@@ -526,81 +554,75 @@ azd monitor --logs
 ### Проверка развертывания
 ```bash
 #!/bin/bash
-# Предварительная проверка перед развертыванием
+# Pre-deployment validation
 azd show
-azd provision --preview  # Просмотр изменений перед развертыванием
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
-### Сравнение сред
+### Сравнение окружений
 ```bash
 #!/bin/bash
-# Сравнить окружения
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
 ### Скрипт очистки ресурсов
 ```bash
 #!/bin/bash
-# Очистить старые окружения
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
-## 📝 Переменные среды
+## 📝 Переменные окружения
 
-### Общие переменные среды
+### Распространённые переменные окружения
 ```bash
-# Конфигурация Azure
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# Конфигурация AZD
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# Конфигурация приложения
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
 ## 🚨 Аварийные команды
 
-### Быстрое исправление
+### Быстрые исправления
 ```bash
-# Сбросить аутентификацию
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# Принудительное обновление окружения
+# Force refresh environment
 azd env refresh
 
-# Перезапустить все сервисы
+# Redeploy all services
 azd deploy
 
-# Проверить статус развертывания
+# Check deployment status
 azd show --output json
 ```
 
 ### Команды восстановления
 ```bash
-# Восстановление после неудачного развертывания — очистка и повторное развертывание
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# Повторное предоставление только инфраструктуры
+# Reprovision infrastructure only
 azd provision
 
-# Повторное развертывание только приложения
+# Redeploy application only
 azd deploy
 ```
 
@@ -608,26 +630,26 @@ azd deploy
 
 ### Алиасы для ускорения работы
 ```bash
-# Добавьте в ваш .bashrc или .zshrc
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Быстрые комбинации функций
+### Ярлыки функций
 ```bash
-# Быстрое переключение окружения
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# Быстрая развертка с мониторингом
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# Статус окружения
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -636,46 +658,46 @@ azd-status() {
 }
 ```
 
-## 📖 Помощь и документация
+## 📖 Справка и документация
 
 ### Получение помощи
 ```bash
-# Общая помощь
+# General help
 azd --help
 azd help
 
-# Помощь по конкретной команде
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# Показать версию и информацию о сборке
+# Show version and build info
 azd version
 azd version --output json
 ```
 
 ### Ссылки на документацию
 ```bash
-# Открыть документацию в браузере
+# Open documentation in browser
 azd docs
 
-# Показать документацию по шаблону
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Совет**: Добавьте этот справочник в закладки и используйте `Ctrl+F`, чтобы быстро находить нужные команды!
+**Совет**: Добавьте эту сводку в закладки и используйте `Ctrl+F` для быстрого поиска нужных команд!
 
 ---
 
 **Навигация**
-- **Предыдущий урок**: [Предварительные проверки](../docs/pre-deployment/preflight-checks.md)
+- **Предыдущий урок**: [Предварительные проверки](../docs/chapter-06-pre-deployment/preflight-checks.md)
 - **Следующий урок**: [Глоссарий](glossary.md)
 
 ---
 
-> **💡 Хотите помощь с командами Azure в вашем редакторе?** Установите [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) с помощью `npx skills add microsoft/github-copilot-for-azure` — 37 скиллов для ИИ, Foundry, развертывания, диагностики и многого другого.
+> **💡 Хотите помощь по командам Azure в вашем редакторе?** Установите [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) с `npx skills add microsoft/github-copilot-for-azure` — 37 навыков для ИИ, Foundry, развертывания, диагностики и другого.
 
 ---
 

@@ -1,105 +1,106 @@
 # Руководство по настройке
 
 **Навигация по главам:**
-- **📚 Домашняя страница курса**: [AZD For Beginners](../../README.md)
-- **📖 Текущая глава**: Глава 3 - Конфигурация и аутентификация
-- **⬅️ Предыдущая**: [Ваш первый проект](first-project.md)
+- **📚 Главная курса**: [AZD для начинающих](../../README.md)
+- **📖 Текущая глава**: Глава 3 - Настройка и аутентификация
+- **⬅️ Предыдущая**: [Ваш первый проект](../chapter-01-foundation/first-project.md)
 - **➡️ Следующая**: [Руководство по развертыванию](../chapter-04-infrastructure/deployment-guide.md)
 - **🚀 Следующая глава**: [Глава 4: Инфраструктура как код](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Введение
 
-Это всестороннее руководство охватывает все аспекты настройки Azure Developer CLI для оптимальных рабочих процессов разработки и развертывания. Вы узнаете о иерархии конфигураций, управлении окружениями, методах аутентификации и продвинутых паттернах конфигурации, которые обеспечивают эффективные и безопасные развертывания в Azure.
+> Проверено на `azd 1.37.2` (ноябрь 2026). Bash-команды предполагают инициализированный проект azd. Если явно не указано, что это полный файл, фрагменты YAML/Bicep — это части для объединения с соответствующими файлами проекта, а не отдельные выполняемые проекты.
+
+Это подробное руководство охватывает все аспекты настройки Azure Developer CLI для оптимизации рабочих процессов разработки и развертывания. Вы узнаете о иерархии настройки, управлении средами, методах аутентификации и передовых шаблонах конфигурации, которые обеспечивают эффективное и безопасное развертывание в Azure.
 
 ## Цели обучения
 
-К концу этого урока вы:
-- Овладеете иерархией конфигурации azd и поймёте, как приоритизируются настройки
-- Эффективно настроите глобальные и проект-специфичные параметры
-- Управляете несколькими окружениями с разными конфигурациями
-- Реализуете безопасные схемы аутентификации и авторизации
-- Поймёте продвинутые паттерны конфигурации для сложных сценариев
+К концу урока вы:
+- Овладеете иерархией настройки azd и поймёте, как приоритизируются настройки
+- Эффективно настроите глобальные и проектно-специфичные параметры
+- Управляете несколькими средами с разными конфигурациями
+- Реализуете безопасные методы аутентификации и авторизации
+- Поймёте передовые шаблоны настройки для сложных сценариев
 
 ## Результаты обучения
 
-После завершения этого урока вы сможете:
+После завершения урока вы сможете:
 - Настроить azd для оптимальных рабочих процессов разработки
-- Создавать и управлять несколькими окружениями для развертывания
-- Внедрять лучшие практики безопасного управления конфигурацией
-- Устранять проблемы, связанные с конфигурацией
-- Кастомизировать поведение azd под конкретные требования организации
+- Настроить и управлять несколькими средами развертывания
+- Реализовать безопасные практики управления конфигурацией
+- Устранять проблемы, связанные с настройками
+- Настраивать поведение azd под конкретные организационные требования
 
-Это всестороннее руководство охватывает все аспекты настройки Azure Developer CLI для оптимальных рабочих процессов разработки и развертывания.
+Это подробное руководство охватывает все аспекты настройки Azure Developer CLI для оптимизации рабочих процессов разработки и развертывания.
 
 ## Понимание AI-агентов в проекте azd
 
-Если вы новичок в AI-агентах, вот простой способ понять их роль в мире azd.
+Если вы новичок в AI-агентах, вот простой способ представить их в рамках azd.
 
 ### Что такое агент?
 
-Агент — это программное обеспечение, которое может принимать запрос, обдумывать его и предпринимать действия — часто вызывая модель AI, запрашивая данные или обращаясь к другим сервисам. В проекте azd агент — это просто ещё один **сервис** наряду с вашим веб-фронтендом или API-бэкендом.
+Агент — это программный компонент, который может принимать запрос, анализировать его и предпринимать действия — часто вызывая AI-модель, запрашивая данные или вызывая другие сервисы. В проекте azd агент — это просто ещё один **сервис** наряду с вашим веб-фронтендом или API-бэкендом.
 
 ### Как агенты вписываются в структуру проекта azd
 
-Проект azd состоит из трёх слоёв: **инфраструктура**, **код** и **конфигурация**. Агенты интегрируются в эти слои так же, как и любой другой сервис:
+Проект azd состоит из трёх слоёв: **инфраструктуры**, **кода** и **настройки**. Агенты подключаются к этим слоям так же, как и любые другие сервисы:
 
-| Слой | Что делает для традиционного приложения | Что делает для агента |
-|-------|-----------------------------------------|----------------------|
-| **Инфраструктура** (`infra/`) | Развёртывает веб-приложение и базу данных | Развёртывает конечную точку модели AI, индекс поиска или хостинг агента |
+| Слой | Что он делает для традиционного приложения | Что он делает для агента |
+|-------|-------------------------------------|---------------------------|
+| **Инфраструктура** (`infra/`) | Разворачивает веб-приложение и базу данных | Разворачивает конечную точку модели AI, индекс поиска или хост агента |
 | **Код** (`src/`) | Содержит исходный код фронтенда и API | Содержит логику агента и определения подсказок |
-| **Конфигурация** (`azure.yaml`) | Перечисляет ваши сервисы и их цели хостинга | Перечисляет агента как сервис, указывая на его код и хост |
+| **Настройка** (`azure.yaml`) | Перечисляет ваши сервисы и их целевые хосты | Перечисляет агента как сервис, указывая на его код и хост |
 
 ### Роль `azure.yaml`
 
-Вам не нужно сейчас запоминать синтаксис. В концепции, `azure.yaml` — это файл, в котором вы говорите azd: *"Вот сервисы, которые составляют мое приложение, и вот где находится их код."*
+Вам не нужно сейчас запоминать синтаксис. Концептуально, `azure.yaml` — это файл, где вы говорите azd: *"Вот сервисы, которые составляют моё приложение, и здесь их код."*
 
-Когда в вашем проекте есть AI-агент, `azure.yaml` просто перечисляет этот агент как один из сервисов. azd затем знает, какую инфраструктуру нужно развёртывать (например, конечную точку Microsoft Foundry Models или Container App для хостинга агента) и развёртывает код агента — так же, как для веб-приложения или API.
+Когда ваш проект включает AI-агента, `azure.yaml` просто перечисляет этого агента как один из сервисов. azd затем знает, какую инфраструктуру нужно развернуть (например, конечную точку Microsoft Foundry Models или контейнерное приложение для хоста агента) и как развернуть код агента — так же, как для веб-приложения или API.
 
-Это значит, что ничего принципиально нового учить не нужно. Если вы понимаете, как azd управляет веб-сервисом, вы уже понимаете, как он управляет агентом.
+Это значит, что здесь нет ничего принципиально нового. Если вы понимаете, как azd управляет веб-сервисом, вы уже понимаете, как он управляет агентом.
 
-## Иерархия конфигурации
+## Иерархия настройки
 
-azd использует иерархическую систему конфигураций:
-1. **Флаги командной строки** (наивысший приоритет)
-2. **Переменные окружения**
-3. **Локальная конфигурация проекта** (`.azd/config.json`)
-4. **Глобальная конфигурация пользователя** (`~/.azd/config.json`)
-5. **Значения по умолчанию** (наинизший приоритет)
+В azd есть отдельные поверхности настройки, а не один универсальный слой:
+- **Глобальные пользовательские предпочтения**: `~/.azd/config.json`, управляемые `azd config`.
+- **Определение проекта**: `azure.yaml` задаёт сервисы, инфраструктуру и хуки.
+- **Выбор локальной среды**: `.azure/config.json`.
+- **Значения для каждой среды**: `.azure/<name>/.env`, управляемые `azd env`; дополнительные настройки находятся в `config.json` этой среды.
+- **Флаги и переменные процесса**: переопределяют только параметры, поддерживаемые конкретной командой/провайдером.
+
+Произвольное значение `azd env set` не становится автоматически параметром инфраструктуры или настройкой развернутого приложения. Его нужно явно указать в параметрическом файле, поддерживаемой конфигурации сервиса или хуке.
 
 ## Глобальная конфигурация
 
 ### Установка глобальных значений по умолчанию
 ```bash
-# Установить подписку по умолчанию
+# Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Установить расположение по умолчанию
+# Set default location
 azd config set defaults.location "eastus2"
 
-# Установить соглашение об именах группы ресурсов по умолчанию
-azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
-
-# Просмотреть всю глобальную конфигурацию
+# View all global configuration
 azd config show
 
-# Удалить конфигурацию
+# Remove a configuration
 azd config unset defaults.location
 ```
 
-### Общие глобальные настройки
+### Часто используемые глобальные настройки
 ```bash
-# Предпочтения разработки
-azd config set alpha.enable true                    # Включить альфа-функции
-azd config set telemetry.enabled false             # Отключить телеметрию
-azd config set output.format json                  # Установить формат вывода
+# Discover supported settings instead of inventing configuration keys
+azd config options
+azd config list-alpha
 
-# Настройки безопасности
-azd config set auth.useAzureCliCredential true     # Использовать Azure CLI для аутентификации
-azd config set tls.insecure false                  # Принудительная проверка TLS
+# Explicit opt-in only: use Azure CLI credentials rather than azd's default login
+azd config set auth.useAzCliAuth true
+# Restore azd's default credential behavior
+azd config unset auth.useAzCliAuth
 
-# Настройка производительности
-azd config set provision.parallelism 5             # Параллельное создание ресурсов
-azd config set deploy.timeout 30m                  # Тайм-аут развертывания
+# Use per-command flags for supported behavior
+azd show --output json
+azd deploy --timeout 1800   # seconds; stops waiting, not the Azure-side deployment
 ```
 
 ## 🏗️ Конфигурация проекта
@@ -112,7 +113,6 @@ azd config set deploy.timeout 30m                  # Тайм-аут разве�
 name: my-awesome-app
 metadata:
   template: my-template@1.0.0
-  templateBranch: main
 
 # Service definitions
 services:
@@ -129,21 +129,13 @@ services:
     language: python
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-    
-  # Database service
-  database:
-    project: ./src/db
-    host: postgres
+      context: .
+      path: Dockerfile
     
 # Infrastructure configuration
 infra:
   provider: bicep                   # Infrastructure provider
   path: ./infra                    # Infrastructure code location
-  parameters:
-    environmentName: ${AZURE_ENV_NAME}
-    location: ${AZURE_LOCATION}
 
 # Deployment hooks
 hooks:
@@ -181,9 +173,11 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
+Это **пример определения проекта**, а не исходный шаблон. Создайте указанные директории с исходным кодом, скрипты хуков, пакетные скрипты и соответствующие `infra/main.bicep`/`main.parameters.json` перед запуском. Базы данных относятся к инфраструктуре; `postgres` не является встроенным хостом сервиса. Параметры инфраструктуры должны идти в параметрический файл провайдера, а не в `infra.parameters`.
+
 ### Опции настройки сервисов
 
-#### Типы хостинга
+#### Типы хостов
 ```yaml
 services:
   web-static:
@@ -202,46 +196,53 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Настройки, специфичные для языков
+#### Языко-специфичные хуки сборки
+
+Следующие фрагменты сервисов показывают хуки; объедините их с настоящими `project` и `host` для каждого сервиса. `buildCommand` и `startCommand` не являются универсальными свойствами azd-сервисов. Настройте запуск в приложении, Dockerfile или хост-инфраструктуре.
+
 ```yaml
 services:
   node-app:
+    project: ./src/node
+    host: appservice
     language: js
-    buildCommand: npm run build
-    startCommand: npm start
+    hooks:
+      prepackage:
+        shell: sh
+        run: npm run build
     
   python-app:
+    project: ./src/python
+    host: appservice
     language: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
     
   dotnet-app:
+    project: ./src/dotnet
+    host: appservice
     language: csharp
-    buildCommand: dotnet build
-    startCommand: dotnet run
     
   java-app:
+    project: ./src/java
+    host: appservice
     language: java
-    buildCommand: mvn clean package
-    startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Управление окружениями
+## 🌟 Управление средами
 
-### Создание окружений
+### Создание сред
 ```bash
-# Создать новую среду
+# Create a new environment
 azd env new development
 
-# Создать с определённым расположением
+# Create with specific location
 azd env new staging --location "westus2"
 
-# Создать из шаблона
+# Create from template
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Конфигурация окружения
-Каждое окружение имеет свою конфигурацию в `.azure/<env-name>/config.json`:
+### Конфигурация среды
+Основные значения среды живут в `.azure/<env-name>/.env`, включая `AZURE_ENV_NAME`, `AZURE_SUBSCRIPTION_ID` и `AZURE_LOCATION`. Используйте `azd env config get/set` для дополнительных настроек JSON среды. Следующий JSON — это **концептуальное состояние приложения**, а не схема конфигурации azd; не копируйте его в файлы azd:
 
 ```json
 {
@@ -263,49 +264,52 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### Переменные окружения
+### Переменные среды
+
+**Только демонстрация в открытом виде.** Обычные значения `azd env set` записываются в `.azure/<name>/.env` и могут быть выведены с помощью команд чтения. Не используйте пример ключа API как реальные данные. Для секретов используйте `azd env set-secret` и явное подключение во время выполнения.
+
 ```bash
-# Установить переменные, специфичные для среды
+# Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# Просмотреть переменные среды
+# View environment variables
 azd env get-values
 
-# Ожидаемый вывод:
+# Expected output:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
-# API_KEY=секретный-api-ключ
+# API_KEY=secret-api-key
 # DEBUG=true
 
-# Удалить переменную среды
+# Remove environment variable
 azd env unset DEBUG
 
-# Проверить удаление
+# Verify removal
 azd env get-values | grep DEBUG
-# (должно ничего не возвращать)
+# (should return nothing)
 ```
 
-### Шаблоны окружений
-Создайте `.azure/env.template` для единообразной настройки окружения:
+### Шаблоны сред
+Создайте **ненарушаемый, вручную поддерживаемый** `.env.example` в корне проекта для согласованной настройки. azd не загружает автоматически файл с названием `env.template`:
 ```bash
-# Требуемые переменные
+# Required variables
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Настройки приложения
+# Application settings
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Необязательные настройки разработки
+# Optional development settings
 DEBUG=false
 LOG_LEVEL=info
 ```
 
-### Совместное использование окружений в команде
+### Совместное использование сред в команде
 
-Когда над проектом работают несколько человек, нужно договориться, **что хранится в репозитории, а что остаётся локальным**. azd хранит каждое окружение в папке `.azure/`, и не всё из неё следует коммитить.
+Когда над проектом работает несколько человек, важно договориться, **какие файлы идут в репозиторий, а какие остаются локальными**. azd хранит каждую среду в папке `.azure/`, и не всё из неё должно попадать в коммит.
 
 **Что содержится в `.azure/`:**
 
@@ -313,77 +317,78 @@ LOG_LEVEL=info
 .azure/
 ├── config.json              # which env is currently selected (local)
 └── <env-name>/
-    ├── config.json          # subscription, location, resource IDs
-    └── .env                 # environment variables (may contain secrets!)
+    ├── config.json          # additional environment settings
+    └── .env                 # subscription, location, outputs; may contain secrets!
 ```
 
-**Что нужно игнорировать в git.** Стандартный `.gitignore` azd уже исключает `.azure/`. Оставляйте так — `.env` файлы могут содержать секреты, а идентификаторы ресурсов специфичны для того, кто их создал. Каждый участник создаёт своё **локальное** окружение:
+**Что игнорировать в git.** Стандартный файл `.gitignore` azd уже исключает `.azure/`. Оставьте это так — файлы `.env` могут содержать секреты, а идентификаторы ресурсов специфичны для того, кто их развернул. Каждый член команды создаёт **свою собственную** локальную среду:
 
 ```bash
-# Каждый разработчик запускает это один раз, чтобы получить свою собственную изолированную среду
+# Every developer runs this once to get their own isolated environment
 azd env new dev-alice
 azd up
 ```
 
-**Переключение между окружениями.** Разработчик, управляющий несколькими окружениями, выбирает активное перед выполнением команд:
+**Переключение между средами.** Разработчик, управляющий несколькими средами, выбирает активную перед запуском команд:
 
 ```bash
-azd env list                 # посмотреть все локальные окружения и какое из них по умолчанию
-azd env select staging       # сделать 'staging' активным окружением
-azd env get-values           # подтвердить, что вы выбрали правильное окружение
+azd env list                 # see all local environments and which is default
+azd env select staging       # make 'staging' the active environment
+azd env get-values           # confirm you're pointed at the right one
 ```
 
-**Предоставление незащищённых значений команде.** Коммитьте шаблон (такой, как `.azure/env.template`, приведённый выше), чтобы все знали, какие переменные нужно задавать — но никогда не коммитьте заполненные значения. Новые участники копируют шаблон и заполняют свои собственные данные.
+**Обеспечение ненарушаемых значений по умолчанию для команды.** Коммитьте `.env.example` вне игнорированной папки `.azure/`. Новые участники копируют его в локальный игнорируемый файл, заполняют значения и явно импортируют через `azd env set --file <local-file>`. Никогда не импортируйте пустые шаблоны поверх рабочей среды.
 
-**Окружения в CI/CD.** Пайплайны не читают локальную папку `.azure/`. Вместо этого задайте значения окружения как переменные/секреты в пайплайне, и azd считает их из системного окружения процесса:
+**Среды в CI/CD.** Пайплайны не читают ваш локальный каталог `.azure/`. Вместо этого передавайте значения среды как переменные/секреты пайплайна, и azd читает их из переменных процесса:
 
 ```bash
-# В CI azd читает эти значения из окружения, а не из .azure/
+# In CI, azd reads these from the environment, not from .azure/
 export AZURE_ENV_NAME=production
 export AZURE_LOCATION=eastus2
-export AZURE_SUBSCRIPTION_ID=<sub-id>
+export AZURE_SUBSCRIPTION_ID="<sub-id>"
 azd provision --no-prompt
 azd deploy --no-prompt
 ```
 
-> **Правило:** код инфраструктуры (`infra/`, `azure.yaml`) хранится в Git; состояние и секреты окружения (`.azure/`) — на каждого разработчика и пайплайн. `azd pipeline config` настраивает переменные пайплайна автоматически.
+> **Общее правило:** код инфраструктуры (`infra/`, `azure.yaml`) хранится в Git; *состояние среды и секреты* (`.azure/`) принадлежат каждому разработчику и каждой конвейеру. `azd pipeline config` автоматически настраивает для вас переменные конвейера.
 
 ## 🔐 Настройка аутентификации
 
 ### Интеграция с Azure CLI
 ```bash
-# Используйте учетные данные Azure CLI (по умолчанию)
-azd config set auth.useAzureCliCredential true
+# Explicit opt-in; NOT the default
+azd config set auth.useAzCliAuth true
 
-# Вход с определенным арендатором
-az login --tenant <tenant-id>
+# Login with specific tenant
+az login --tenant "<tenant-id>"
 
-# Установить подписку по умолчанию
-az account set --subscription <subscription-id>
+# Set default subscription
+az account set --subscription "<subscription-id>"
 ```
 
-### Аутентификация с помощью сервисного принципала
-Для CI/CD пайплайнов:
+### Аутентификация через Service Principal
+Для CI/CD конвейеров:
 ```bash
-# Установить переменные окружения
+# Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Или настроить напрямую
-azd config set auth.clientId "your-client-id"
-azd config set auth.tenantId "your-tenant-id"
+# Authenticate azd explicitly (prefer pipeline federation over a long-lived secret)
+azd auth login --client-id "$AZURE_CLIENT_ID" \
+  --client-secret "$AZURE_CLIENT_SECRET" --tenant-id "$AZURE_TENANT_ID"
 ```
 
-### Управляемая идентичность
-Для окружений, размещённых в Azure:
+### Управляемый идентификатор (Managed Identity)
+Для сред, размещённых в Azure:
 ```bash
-# Включить аутентификацию с использованием управляемой идентичности
-azd config set auth.useMsi true
-azd config set auth.msiClientId "your-managed-identity-client-id"
+# Enable managed identity authentication
+azd auth login --managed-identity
+# Alternative: choose an identity assigned to the host by client ID
+azd auth login --managed-identity --client-id "<managed-identity-client-id>"
 ```
 
-## 🏗️ Конфигурация инфраструктуры
+## 🏗️ Настройка инфраструктуры
 
 ### Параметры Bicep
 Настройте параметры инфраструктуры в `infra/main.parameters.json`:
@@ -409,37 +414,44 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
 ### Конфигурация Terraform
-Для проектов Terraform настройте в `infra/terraform.tfvars`:
-```hcl
-environment_name = "${AZURE_ENV_NAME}"
-location = "${AZURE_LOCATION}"
-app_service_sku = "B1"
-database_sku = "GP_Gen5_2"
+Для проектов Terraform azd подставляет значения в `infra/main.tfvars.json`. Эти имена должны совпадать с объявленными входными переменными Terraform:
+```json
+{
+  "environment_name": "${AZURE_ENV_NAME}",
+  "location": "${AZURE_LOCATION}",
+  "app_service_sku": "B1"
+}
 ```
 
-## 🚀 Конфигурация развертывания
+## 🚀 Настройка развертывания
 
-### Настройки сборки
+### Конфигурация сборки
 ```yaml
 # In azure.yaml
 services:
   web:
     project: ./src/web
+    host: appservice
     language: js
-    buildCommand: npm run build:prod
-    buildEnvironment:
-      NODE_ENV: production
-      REACT_APP_API_URL: ${API_URL}
     dist: build
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          NODE_ENV=production REACT_APP_API_URL="$API_URL" npm run build:prod
     
   api:
     project: ./src/api
+    host: appservice
     language: python
-    buildCommand: |
-      pip install -r requirements.txt
-      python -m pytest tests/
-    buildEnvironment:
-      PYTHONPATH: src
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          python -m pip install -r requirements.txt
+          PYTHONPATH=src python -m pytest tests/
 ```
 
 ### Конфигурация Docker
@@ -449,51 +461,41 @@ services:
     project: ./src/api
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        NODE_ENV: production
-        API_VERSION: v1.0.0
+        - NODE_ENV=production
+        - API_VERSION=v1.0.0
 ```
-Пример `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+ Пути указаны относительно проекта сервиса. Dockerfile должен объявлять любые используемые им `ARG` значения. Для многослойной сборки поместите стадию для развертывания последней или используйте собственный Workflow упаковки; `docker.target` не поддерживается в рассматриваемой схеме.
 
-## 🔧 Продвинутая конфигурация
+## 🔧 Расширенная настройка
 
-### Кастомизация имён ресурсов
-```bash
-# Установить соглашения об именовании
-azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
-azd config set naming.storageAccount "{project}{env}sa"
-azd config set naming.keyVault "kv-{project}-{env}"
-```
-
-### Конфигурация сети
+### Пользовательские имена ресурсов
 ```yaml
-# In azure.yaml
-infra:
-  provider: bicep
-  parameters:
-    vnetAddressPrefix: "10.0.0.0/16"
-    subnetAddressPrefix: "10.0.1.0/24"
-    enablePrivateEndpoints: true
+# azure.yaml fragment: override resource-group discovery where appropriate
+resourceGroup: rg-${AZURE_ENV_NAME}
 ```
+
+Определяйте реальные имена ресурсов в Bicep/Terraform и соблюдайте согласованность создания группы ресурсов с этой настройкой. Не существует универсальных ключей конфигурации `naming.storageAccount` или `naming.keyVault`.
+
+### Настройка сети
+```json
+{
+  "vnetAddressPrefix": { "value": "10.0.0.0/16" },
+  "subnetAddressPrefix": { "value": "10.0.1.0/24" },
+  "enablePrivateEndpoints": { "value": true }
+}
+```
+
+Объедините эти **иллюстративные параметры** в `infra/main.parameters.json` под `parameters`, а затем объявите и используйте соответствующие параметры в Bicep. Они сами по себе ничего не делают.
 
 ### Конфигурация мониторинга
-```yaml
-# In azure.yaml
-monitoring:
-  applicationInsights:
-    enabled: true
-    samplingPercentage: 100
-  logAnalytics:
-    enabled: true
-    retentionDays: 30
-```
+Разверните Application Insights и Log Analytics в Bicep/Terraform и настройте телеметрию приложения в вашем SDK. Нет общего верхнеуровневого блока `monitoring` в `azure.yaml`, который создаёт эти ресурсы. См. [инфраструктура мониторинга](../chapter-04-infrastructure/provisioning.md#-monitoring-and-observability).
 
-## 🎯 Конфигурации для конкретных окружений
+## 🎯 Конфигурации для конкретных сред
 
-### Окружение разработки
+### Среда разработки
 ```bash
 # .azure/development/.env
 DEBUG=true
@@ -502,7 +504,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Тестовое (staging) окружение
+### Среда предрелиза
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -511,7 +513,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Продакшн окружение
+### Производственная среда
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -520,22 +522,23 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Валидация конфигурации
+## 🔍 Проверка конфигурации
 
 ### Проверка конфигурации
 ```bash
-# Проверить синтаксис конфигурации
-azd config validate
+# Inspect supported global settings and current project
+azd config options
+azd show
 
-# Проверить переменные окружения
+# Test environment variables
 azd env get-values
 
-# Проверить инфраструктуру
-azd provision --dry-run
+# Validate infrastructure
+azd provision --preview
 ```
 
 ### Скрипты конфигурации
-Создавайте скрипты в папке `scripts/`:
+Создайте скрипты проверки в `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -543,15 +546,15 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# Проверить необходимые переменные окружения
+# Check required environment variables
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Проверить синтаксис azure.yaml
-if ! azd config validate; then
-  echo "Error: Invalid azure.yaml configuration"
+# Ask azd to load the project (not full schema or infrastructure validation)
+if ! azd show --output json; then
+  echo "Error: Could not load the azd project"
   exit 1
 fi
 
@@ -566,6 +569,11 @@ echo "Configuration validation passed!"
 database:
   connectionString: ${DATABASE_CONNECTION_STRING}
 
+```
+
+Избегайте жёсткого кодирования чувствительных значений (отдельная иллюстративная конфигурация, а не второй `database` ключ в том же файле):
+
+```yaml
 # Avoid: Hardcode sensitive values
 database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
@@ -575,7 +583,6 @@ database:
 ```
 .azure/
 ├── config.json              # Global project config
-├── env.template             # Environment template
 ├── development/
 │   ├── config.json         # Dev environment config
 │   └── .env                # Dev environment variables
@@ -587,16 +594,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Учитывайте контроль версий
+### 3. Вопросы контроля версий
 ```bash
 # .gitignore
-.azure/*/config.json         # Конфигурации окружения (содержат идентификаторы ресурсов)
-.azure/*/.env               # Переменные окружения (могут содержать секреты)
-.env                        # Локальный файл окружения
+.azure/*/config.json         # Environment configs (contain resource IDs)
+.azure/*/.env               # Environment variables (may contain secrets)
+.env                        # Local environment file
 ```
 
-### 4. Документирование конфигураций
-Документируйте настройки в `CONFIG.md`:
+### 4. Документация конфигурации
+Задокументируйте вашу конфигурацию в `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -613,30 +620,30 @@ database:
 
 ## 🎯 Практические упражнения
 
-### Упражнение 1: Конфигурация для нескольких окружений (15 минут)
+### Упражнение 1: Конфигурация для нескольких сред (15 минут)
 
-**Цель**: Создать и настроить три окружения с разными настройками
+**Цель**: Создать и настроить три локальных окружения с различными значениями. Начать в инициализированном проекте; использовать неиспользуемые имена, если эти уже существуют. Эти специфические для приложения значения не изменяют настройки телеметрии/времени выполнения, пока ваш шаблон их не использует.
 
 ```bash
-# Создать среду разработки
+# Create development environment
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Создать промежуточную среду
+# Create staging environment
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# Создать производственную среду
+# Create production environment
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# Проверить каждую среду
+# Verify each environment
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
@@ -645,54 +652,53 @@ azd env select production && azd env get-values
 **Критерии успеха:**
 - [ ] Три окружения успешно созданы
 - [ ] Каждое окружение имеет уникальную конфигурацию
-- [ ] Переключение между окружениями проходит без ошибок
+- [ ] Можно переключаться между окружениями без ошибок
 - [ ] `azd env list` показывает все три окружения
 
-### Упражнение 2: Управление секретами (10 минут)
+### Упражнение 2: Ссылки на секреты Key Vault (10-20 минут)
 
-**Цель**: Практиковаться в безопасном управлении чувствительными данными
+**Цель**: Хранить ссылку на Key Vault вместо открытого текста. **Исходная точка:** инициализированное окружение, вход в Azure и доступ к Key Vault с разрешениями на создание/чтение тестового секрета. Операции с хранилищем могут повлечь взимание платы.
 
 ```bash
-# Установить секреты (не отображаются в выводе)
-azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+# Follow the interactive prompts; use a dummy training value, not a production key
+azd env set-secret TRAINING_API_KEY
 
-# Установить конфигурацию без секретов
+# Set non-secret config
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Просмотр окружения (секреты должны быть скрыты)
-azd env get-values
-
-# Проверить, что секреты сохранены
-azd env get DB_PASSWORD  # Должно отображать реальное значение
+# Inspect .azure/<environment>/.env locally: TRAINING_API_KEY should
+# contain an azd Key Vault reference, not the dummy secret text.
+# Do not print resolved values in CI or shared terminal logs.
 ```
 
 **Критерии успеха:**
-- [ ] Секреты сохранены без отображения в терминале
-- [ ] `azd env get-values` показывает скрытые секреты
-- [ ] Отдельная команда `azd env get <SECRET_NAME>` возвращает реальное значение
+- [ ] Интерактивная команда сообщает выбранное хранилище и ссылку на секрет
+- [ ] Локальный `.env` содержит ссылку, а не тестовый секрет
+- [ ] Может объяснить, что идентичность времени выполнения/RBAC и потребление должны быть настроены
+
+**Распространённые проблемы:** ошибка 403 требует правильной роли на уровне данных хранилища и времени распространения; `azd env set ... --secret` не является допустимой командой. Обычный вывод `get-values`/`get-value` не должен рассматриваться как скрытый. Удалите тренировочную ссылку с помощью `azd env unset TRAINING_API_KEY`; это не удаляет секрет хранилища, который нужно убирать отдельно, если вы его создали.
 
 ## Следующие шаги
 
-- [Ваш первый проект](first-project.md) — примените настройку на практике
-- [Руководство по развертыванию](../chapter-04-infrastructure/deployment-guide.md) — используйте конфигурацию для развертывания
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) — конфигурации для производственной среды
+- [Ваш первый проект](../chapter-01-foundation/first-project.md) - Практическое применение конфигурации
+- [Руководство по развертыванию](../chapter-04-infrastructure/deployment-guide.md) - Использование конфигурации для развертывания
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Конфигурации, готовые к производству
 
 ## Ссылки
 
 - [Справочник по конфигурации azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Схема azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Переменные окружения](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [Схема azure.yaml](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-schema)
+- [Переменные окружения](https://learn.microsoft.com/azure/developer/azure-developer-cli/manage-environment-variables)
 
 ---
 
 **Навигация по главам:**
-- **📚 Домашняя страница курса**: [AZD For Beginners](../../README.md)
+- **📚 Домашняя страница курса**: [AZD для начинающих](../../README.md)
 - **📖 Текущая глава**: Глава 3 - Конфигурация и аутентификация
-- **⬅️ Предыдущая**: [Ваш первый проект](first-project.md)
+- **⬅️ Предыдущая**: [Ваш первый проект](../chapter-01-foundation/first-project.md)
 - **➡️ Следующая глава**: [Глава 4: Инфраструктура как код](../chapter-04-infrastructure/deployment-guide.md)
-- **Следующий урок**: [Ваш первый проект](first-project.md)
+- **Следующий урок**: [Аутентификация и безопасность](authsecurity.md)
 
 ---
 

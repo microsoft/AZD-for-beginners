@@ -1,31 +1,31 @@
 # 6. Infrastruktur abbauen
 
-!!! tip "AM ENDE DIESES MODULS KÖNNEN SIE"
+!!! tip "AM ENDE DIESES MODULS WIRST DU IN DER LAGE SEIN"
 
-    - [ ] Die Bedeutung von Ressourcenbereinigung und Kostenmanagement verstehen
-    - [ ] Mit `azd down` die Infrastruktur sicher deprovisionieren
-    - [ ] Bei Bedarf soft-gelöschte Azure AI Services wiederherstellen
-    - [ ] **Lab 6:** Azure-Ressourcen bereinigen und Entfernung überprüfen
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## Bonus-Übungen
+## Bonusübungen
 
-Bevor wir das Projekt abbauen, nehmen Sie sich ein paar Minuten für offene Erkundungen.
+Bevor wir das Projekt abbauen, nimm dir ein paar Minuten für eine offene Erkundung.
 
-!!! info "Probieren Sie diese Erkundungsanregungen aus"
+!!! info "Probiere diese Erkundungsanregungen aus"
 
-    **Experimentieren mit GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. Fragen Sie: `What other AZD templates could I try for multi-agent scenarios?`
-    2. Fragen Sie: `How can I customize the agent instructions for a healthcare use case?`
-    3. Fragen Sie: `What environment variables control cost optimization?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Erkunden Sie das Azure-Portal:**
+    **Explore the Azure Portal:**
     
-    1. Überprüfen Sie die Application Insights-Metriken für Ihre Bereitstellung
-    2. Überprüfen Sie die Kostenanalyse für bereitgestellte Ressourcen
-    3. Erkunden Sie den Agent-Playground des Microsoft Foundry-Portals noch einmal
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
@@ -34,27 +34,25 @@ Bevor wir das Projekt abbauen, nehmen Sie sich ein paar Minuten für offene Erku
 1. Das Abbauen der Infrastruktur ist ganz einfach:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. Bestätige die ausgewählte Umgebung und überprüfe die zu löschenden Ressourcen. Dies entfernt Azure-Ressourcen und kann Daten zerstören. Behalte die Bestätigungsabfrage für diesen Lernablauf bei. Nach Abschluss siehst du eine Ausgabe ähnlich wie:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optional) Wenn Sie jetzt erneut `azd up` ausführen, werden Sie feststellen, dass das gpt-4.1-Modell bereitgestellt wird, da die Umgebungsvariable im lokalen `.azure`-Ordner geändert (und gespeichert) wurde. 
+1. Überprüfe die Löschung im Portal und prüfe Ressourcen außerhalb des Bereitstellungsbereichs. Kostenberichte und Kontingentaktualisierungen können verzögert sein. Die lokale `.azure` Konfiguration bleibt bestehen, es sei denn, du entfernst sie ausdrücklich.
 
-      Hier sind die Modellbereitstellungen **vorher**:
+1. `azd down --purge` fordert zusätzlich die dauerhafte Löschung unterstützter soft-gelöschter Ressourcen an. Verwende es nur, wenn keine Wiederherstellung erforderlich ist und du die Aufbewahrungs-/Löschschutzrichtlinien verstehst. Es garantiert keine sofortige Freigabe des Kontingents.
 
-      ![Vorher](../../../../../translated_images/de/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      Und hier ist es **nachher**:
-      ![Nachher](../../../../../translated_images/de/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Führe keine erneute Bereitstellung nur zur Überprüfung der Bereinigung durch. Eine spätere gezielte `azd up` kann Ressourcen mit den verbleibenden lokalen Eingaben erneut erstellen und verursacht erneut Kosten. Modellupdates verwenden normalerweise unterstützte Bereitstellungsänderungen, keinen Abbau.
 
 ---
 

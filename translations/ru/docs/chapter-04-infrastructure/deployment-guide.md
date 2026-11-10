@@ -1,135 +1,140 @@
-# Руководство по развертыванию - Мастерство развертываний AZD
+# Руководство по развертыванию - Мастерство AZD Deployments
 
 **Навигация по главам:**
-- **📚 Главная курса**: [AZD для начинающих](../../README.md)
+- **📚 Домашняя страница курса**: [AZD для начинающих](../../README.md)
 - **📖 Текущая глава**: Глава 4 - Инфраструктура как код и развертывание
 - **⬅️ Предыдущая глава**: [Глава 3: Конфигурация](../chapter-03-configuration/configuration.md)
-- **➡️ Следующая**: [Настройка ресурсов](provisioning.md)
+- **➡️ Следующая**: [Provisioning Resources](provisioning.md)
 - **🧩 Также в этой главе**: [Создание собственного шаблона](custom-templates.md)
-- **🚀 Следующая глава**: [Глава 5: Многоагентные AI-решения](../../examples/retail-scenario.md)
+- **🚀 Следующая глава**: [Глава 5: Многоагентные AI решения](../../examples/retail-scenario.md)
 
 ## Введение
 
-Это подробное руководство охватывает всё, что нужно знать о развертывании приложений с использованием Azure Developer CLI — от простых развертываний одной командой до сложных производственных сценариев с пользовательскими хуками, несколькими средами и интеграцией CI/CD. Овладейте полным жизненным циклом развертывания с практическими примерами и лучшими практиками.
+> Проверено с использованием `azd 1.37.2` (ноябрь 2026). Команды используют Bash; примеры JSON требуют `jq`. За исключением явно инициализированного упражнения todo, продвинутые примеры — это **фрагменты интеграции**: предоставьте собственные исходники, инфраструктуру, тесты и скрипты. Во время проверки развертывания в Azure не выполнялись.
+
+Это комплексное руководство охватывает все, что нужно знать о развертывании приложений с помощью Azure Developer CLI: от простых однокомандных развертываний до сложных продакшн-сценариев с пользовательскими хуками, множественными окружениями и интеграцией CI/CD. Освойте полный жизненный цикл развертывания с практическими примерами и лучшими практиками.
 
 ## Цели обучения
 
-Пройдя это руководство, вы сможете:
-- Овладеть всеми командами и сценариями развертывания Azure Developer CLI
-- Понять полный жизненный цикл развертывания — от настройки до мониторинга
+После прохождения руководства вы сможете:
+- Освоить все команды и рабочие процессы развертывания Azure Developer CLI
+- Понять полный жизненный цикл развертывания от provision до мониторинга
 - Реализовать пользовательские хуки для автоматизации до и после развертывания
-- Настроить несколько сред с параметрами, специфичными для каждой среды
-- Настроить продвинутые стратегии развертывания, включая blue-green и canary
-- Интегрировать развертывания azd с CI/CD и DevOps процессами
+- Конфигурировать множественные окружения с параметрами, специфичными для окружения
+- Настроить продвинутые стратегии развертывания, включая blue-green и canary deployment
+- Интегрировать azd развертывания с pipeline CI/CD и DevOps процессами
 
-## Результаты обучения
+## Ожидаемые результаты обучения
 
-По завершении курса вы сможете:
-- Самостоятельно запускать и отлаживать все сценарии развертывания azd
-- Проектировать и реализовывать пользовательскую автоматизацию с хуками
-- Настраивать производственные развертывания с нужной безопасностью и мониторингом
-- Управлять сложными сценариями с несколькими средами
+По завершении вы сможете:
+- Самостоятельно выполнять и устранять неполадки всех рабочих процессов azd развертывания
+- Проектировать и реализовывать пользовательскую автоматизацию развертывания с использованием хуков
+- Конфигурировать production-ready развертывания с надлежащей безопасностью и мониторингом
+- Управлять сложными сценариями развертывания с несколькими окружениями
 - Оптимизировать производительность развертывания и реализовывать стратегии отката
-- Интегрировать развертывания azd в корпоративные DevOps практики
+- Интегрировать azd развертывания в корпоративные DevOps практики
 
 ## Обзор развертывания
 
-Azure Developer CLI предлагает несколько команд для развертывания:
-- `azd up` — полный сценарий (создание ресурсов + развертывание)
-- `azd provision` — только создание/обновление ресурсов Azure
-- `azd deploy` — только развертывание кода приложения
-- `azd package` — сборка и упаковка приложений
+Azure Developer CLI предоставляет несколько команд для развертывания:
+- `azd up` - Полный рабочий процесс (provision + deploy)
+- `azd provision` - Создание/обновление только ресурсов Azure
+- `azd deploy` - Развертывание только кода приложения
+- `azd package` - Сборка и упаковка приложений
 
-## Основные сценарии развертывания
+## Основные рабочие процессы развертывания
 
 ### Полное развертывание (azd up)
-Самый распространенный сценарий для новых проектов:
+Самый распространенный рабочий процесс для новых проектов:
 ```bash
-# Развернуть всё с нуля
+# Deploy everything from scratch
 azd up
 
-# Развернуть с заданной средой
+# Deploy with specific environment
 azd up --environment production
 
-# Развернуть с пользовательскими параметрами
-azd up --parameter location=westus2 --parameter sku=P1v2
+# Configure a location for the selected environment before first provisioning
+azd env set AZURE_LOCATION westus2
+# SKU changes must be wired into your template's parameter file/Bicep.
+azd up
 ```
 
-### Только инфраструктура
+### Развертывание только инфраструктуры
 Когда нужно обновить только ресурсы Azure:
 ```bash
-# Обеспечение/обновление инфраструктуры
+# Provision/update infrastructure
 azd provision
 
-# Обеспечение с имитацией для предварительного просмотра изменений
+# Provision with dry-run to preview changes
 azd provision --preview
 
-# Обеспечить конкретные сервисы
-azd provision --service database
+# Provisioning applies infrastructure, not an azure.yaml service selection.
+# In a configured layered project, use: azd provision <layer-name>
 ```
 
-### Только код
+### Развертывание только кода
 Для быстрого обновления приложения:
 ```bash
-# Развернуть все сервисы
+# Deploy all services
 azd deploy
 
-# Ожидаемый вывод:
-# Развертывание сервисов (azd deploy)
-# - web: Развертывание... Готово
-# - api: Развертывание... Готово
-# УСПЕХ: Ваше развертывание завершено за 2 минуты 15 секунд
+# Expected output:
+# Deploying services (azd deploy)
+# - web: Deploying... Done
+# - api: Deploying... Done
+# SUCCESS: Your deployment completed in 2 minutes 15 seconds
 
-# Развернуть конкретный сервис
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Развернуть с пользовательскими аргументами сборки
-azd deploy --service api --build-arg NODE_ENV=production
+# Docker build arguments belong in azure.yaml: services.api.docker.buildArgs
+# They are not an azd deploy --build-arg flag.
 
-# Проверить развертывание
+# Verify deployment
 azd show --output json | jq '.services'
 ```
 
 ### ✅ Проверка развертывания
 
-После любого развертывания проверьте успех:
+После любого развертывания проверьте успешность:
 
 ```bash
-# Проверьте, что все сервисы запущены
+# Inspect configured service targets and ingress URLs (not a health check)
 azd show
 
-# Тестировать конечные точки состояния
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Test health endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
-curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
-curl -f "$API_URL/health" || echo "❌ API health check failed"
+curl -f "$WEB_URL" || { echo "❌ Web request failed"; exit 1; }
+# For the todo-nodejs-mongo template, /lists exists; /health does not.
+curl -f "$API_URL/lists" || { echo "❌ API request failed"; exit 1; }
 
-# Следить за ошибками (по умолчанию открывается в браузере)
+# Monitor for errors (opens in browser by default)
 azd monitor --logs
 ```
 
-**Критерии успеха:**
-- ✅ Все сервисы имеют статус "Работает"
-- ✅ Конечные точки здоровья возвращают HTTP 200
-- ✅ Нет ошибок в логах за последние 5 минут
+**Критерии успешности:**
+- ✅ `azd show` разрешается к ожидаемым сервисным целям/URL
+- ✅ Запросы к реальным маршрутам приложения возвращают ожидаемый статус и тело
+- ✅ За последние 5 минут нет логов с ошибками
 - ✅ Приложение отвечает на тестовые запросы
 
 ## 🏗️ Понимание процесса развертывания
 
 ### Новичок в хуках? Начните здесь
 
-**Хук** — команда, которую azd автоматически выполняет в определённый момент процесса развертывания — до или после создания ресурсов, до или после развертывания кода. Они позволяют автоматизировать мелкие задачи, сопутствующие развертыванию: заполнение базы данных, миграции, сборка ассетов или тестирование приложения на ходу.
+**Хук** — это команда, которую azd автоматически запускает в определенный момент развертывания — до или после provision, а также до или после деплоя кода. Они позволяют автоматизировать мелкие задачи, которые всегда сопровождают развертывание: инициализацию базы данных, миграции, сборку ассетов или базовое тестирование живого приложения.
 
-| Хук | Выполняется… | Обычное использование |
-|------|-------------|-----------------------|
-| `preprovision` | До создания ресурсов | Проверка препосылок, вход в реестр контейнеров |
-| `postprovision` | После создания ресурсов | Настройка ресурсов, инициализация базы данных |
-| `predeploy` | До развертывания кода | Сборка фронтенд-ассетов, запуск юнит-тестов |
-| `postdeploy` | После развертывания кода | Выполнение миграций, smoke-тестирование конечной точки |
+| Хук | Запускается… | Обычно используется для |
+|------|-------|------------|
+| `preprovision` | Перед созданием ресурсов | Проверка предусловий, вход в реестр |
+| `postprovision` | После создания ресурсов | Конфигурация ресурсов, настройка базы данных |
+| `predeploy` | Перед деплоем кода | Сборка фронтенд ассетов, запуск unit-тестов |
+| `postdeploy` | После запуска кода | Запуск миграций БД, базовое тестирование endpoint |
 
-Хуки находятся в вашем `azure.yaml`. Вот минимальный пример — он просто выводит сообщение после развертывания:
+Хуки живут в вашем `azure.yaml`. Вот самый маленький возможный пример — просто выводит сообщение после развертывания:
 
 ```yaml
 # azure.yaml
@@ -139,15 +144,15 @@ hooks:
     run: echo "Deployment finished! 🎉"
 ```
 
-Вот и всё — при следующем запуске `azd up` сообщение напечатается автоматически. Также можно запускать отдельный хук без полного развертывания для быстрого тестирования:
+Вот и всё — в следующий раз при запуске `azd up` сообщение будет автоматически выводиться. Вы также можете запускать хук отдельно, без полного развертывания, что отлично подходит для тестирования:
 
 ```bash
 azd hooks run postdeploy
 ```
 
-Ниже фазы с реальными хуками (миграции, тесты, валидация) для каждого этапа.
+Ниже показаны реальные хуки (миграции, тесты, валидация) для каждой фазы.
 
-### Фаза 1: Хуки перед созданием ресурсов
+### Фаза 1: Хуки до provision
 ```yaml
 # azure.yaml
 hooks:
@@ -161,13 +166,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Фаза 2: Создание инфраструктуры
-- Считывает шаблоны инфраструктуры (Bicep/Terraform)
-- Создаёт или обновляет ресурсы Azure
-- Настраивает сети и безопасность
-- Организует мониторинг и логирование
+### Фаза 2: Provision инфраструктуры
+- Чтение шаблонов инфраструктуры (Bicep/Terraform)
+- Создание или обновление ресурсов Azure
+- Настройка сетей и безопасности
+- Настройка мониторинга и логирования
 
-### Фаза 3: Хуки после создания ресурсов
+### Фаза 3: Хуки после provision
 ```yaml
 hooks:
   postprovision:
@@ -183,9 +188,9 @@ hooks:
 ### Фаза 4: Упаковка приложения
 - Сборка кода приложения
 - Создание артефактов развертывания
-- Упаковка для целевой платформы (контейнеры, ZIP и др.)
+- Упаковка для целевой платформы (контейнеры, ZIP-файлы и т.д.)
 
-### Фаза 5: Хуки перед развертыванием
+### Фаза 5: Хуки перед деплоем
 ```yaml
 hooks:
   predeploy:
@@ -198,12 +203,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Фаза 6: Развертывание приложения
-- Развёртывание упакованного приложения в сервисы Azure
-- Обновление конфигураций
-- Запуск или перезапуск сервисов
+### Фаза 6: Деплой приложения
+- Развертывание упакованных приложений в сервисы Azure
+- Обновление конфигурационных настроек
+- Запуск/перезапуск сервисов
 
-### Фаза 7: Хуки после развертывания
+### Фаза 7: Хуки после деплоя
 ```yaml
 hooks:
   postdeploy:
@@ -213,14 +218,14 @@ hooks:
       npm run test:integration
       
       echo "Warming up applications..."
-      curl https://${WEB_URL}/health
+      curl --fail "$WEB_URL/health"
 ```
 
 ### Обработка ошибок хуков
 
-По умолчанию **если команда хука завершается с кодом ошибки, azd останавливает всю операцию.** Обычно это то, что вам нужно — неудачная миграция должна приостановить развертывание, а не выкатывать сломанное приложение. Но это значит, что хуки нужно писать аккуратно.
+По умолчанию, **если команда хука завершается с ненулевым кодом, azd прекращает всю операцию.** Это обычно желательное поведение — неудачная миграция должна останавливать развертывание, а не выпускать сломанное приложение. Но это требует аккуратного написания хуков.
 
-**1. Делайте ошибки громкими и осознанными.** Хук считается неудачным, если последняя команда возвращает ненулевой код выхода. В shell-скриптах добавляйте `set -e`, чтобы остановить выполнение при первой ошибке, а не продолжать молча:
+**1. Делайте сбои громкими и намеренными.** Хук считается неуспешным, если его последняя команда возвращает ненулевой код выхода. В shell-скриптах добавьте `set -e`, чтобы хук прекращался при первой ошибке, а не продолжал молча:
 
 ```yaml
 hooks:
@@ -232,24 +237,24 @@ hooks:
       npm run db:migrate
 ```
 
-**2. Разрешите хуку терпеть неудачу без остановки azd.** Для некритичных шагов (например, необязательный прогрев кеша, уведомления по желанию) задайте `continueOnError: true`. azd зафиксирует ошибку в логах, но продолжит работу:
+**2. Позвольте хуку завершиться с ошибкой, не останавливая azd.** Для некритичных шагов (опциональный разогрев кеша, уведомление best-effort) установите `continueOnError: true`. azd залогирует ошибку, но продолжит выполнение:
 
 ```yaml
 hooks:
   postdeploy:
     shell: sh
     continueOnError: true         # a failure here won't fail 'azd up'
-    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+    run: curl -f "$WEB_URL/warmup"
 ```
 
-**3. Тестируйте хуки отдельно перед полноценным запуском.** Не обязательно запускать `azd up` для отладки хука — выполните его отдельно и быстро итеративно исправляйте:
+**3. Тестируйте хуки по отдельности перед полным запуском.** Для отладки не обязательно запускать `azd up` — запустите хук отдельно и быстро вносите изменения:
 
 ```bash
-azd hooks run predeploy          # запускает только предразвертывающий хук
+azd hooks run predeploy          # runs the matching project/service hooks
 azd hooks run postdeploy --service api
 ```
 
-**4. Следите за shell, специфичным для ОС.** Хук с `shell: pwsh` требует установленного PowerShell на машине, где запускается (включая CI-агентов). Для наибольшей переносимости используйте `shell: sh` или предоставьте варианты для `windows` и `posix`:
+**4. Учитывайте особенности shell в ОС.** Хук, использующий `shell: pwsh`, требует установленного PowerShell на машине, запускающей его (включая CI-агентов). Используйте `shell: sh` для максимальной переносимости или предусмотрите обе версии `windows` и `posix`:
 
 ```yaml
 hooks:
@@ -262,54 +267,54 @@ hooks:
       run: ./scripts/setup.ps1
 ```
 
-> **Совет для отладки:** запускайте любую команду azd с `--debug`, чтобы увидеть точную команду хука и полный вывод — незаменимо, если хук работает локально, но падает в CI.
+> **Совет по отладке:** Запускайте любую azd команду с `--debug`, чтобы увидеть точную команду хука и полный вывод — бесценно, когда хук работает локально, но падает в CI.
 
 ## 🎛️ Конфигурация развертывания
 
-### Настройки развертывания по сервисам
+### Настройки развертывания для конкретных сервисов
 ```yaml
 # azure.yaml
 services:
   web:
     project: ./src/web
     host: staticwebapp
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    dist: dist
     
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
     env:
-      - name: NODE_ENV
-        value: production
-      - name: API_VERSION
-        value: "1.0.0"
+      NODE_ENV: production
+      API_VERSION: "1.0.0"
         
   worker:
     project: ./src/worker
     host: function
-    runtime: node
-    buildCommand: npm install --production
+    language: js
 ```
 
-### Настройки по средам
+### Конфигурации, специфичные для окружения
+
+Это локальные значения azd. Явно сопоставьте их с конфигурацией инфраструктуры/рантайма. `NODE_ENV` обычно `production` для развернутого Node приложения, включая staging; используйте отдельную переменную, чтобы различать стадии развертывания.
+
 ```bash
-# Среда разработки
+# Development environment
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Среда подготовки
+# Staging environment
 azd env new staging
-azd env set NODE_ENV staging
+azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Производственная среда
+# Production environment
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
@@ -355,51 +360,52 @@ services:
 ```
 
 ### Blue-Green развертывания
+
+**Иллюстративная схема операции:** вы должны предоставить оба окружения, общий слой маршрутизации трафика и два скрипта ниже. azd не переключает трафик и не проверяет готовность к откату автоматически. Оставляйте зеленое окружение до тех пор, пока синее не пройдет тестирование и откат не понадобится.
+
 ```bash
-# Создать синюю среду
+# Create blue environment
 azd env new production-blue
 azd up --environment production-blue
 
-# Протестировать синюю среду
+# Test blue environment
 ./scripts/test-environment.sh production-blue
 
-# Переключить трафик на синюю (ручное обновление DNS/балансировщика нагрузки)
+# Switch traffic to blue (manual DNS/load balancer update)
 ./scripts/switch-traffic.sh production-blue
 
-# Очистить зелёную среду
+# Clean up green environment
 azd env select production-green
 azd down --force
 ```
 
 ### Canary развертывания
-```yaml
-# azure.yaml - Configure traffic splitting
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    trafficSplit:
-      - revision: stable
-        percentage: 90
-      - revision: canary
-        percentage: 10
+```bash
+# Requires an existing Container App in multiple-revision mode and two
+# ready revisions. Replace placeholders with actual revision names.
+az containerapp ingress traffic set \
+  --name "<app-name>" --resource-group "<rg-name>" \
+  --revision-weight "<stable-revision>=90" "<canary-revision>=10"
 ```
 
-### Этапные развертывания
+Разделение трафика относится к конфигурации Container Apps (Bicep или Azure CLI), а не к свойству `azure.yaml` `trafficSplit`. Превью/Provision и последующие деплои должны сохранять выбранный режим ревизии и правила маршрутизации.
+
+### Пошаговые развертывания
 ```bash
 #!/bin/bash
 # deploy-staged.sh
+set -e
 
 echo "Deploying to development..."
 azd env select dev
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running dev tests..."
 ./scripts/test-environment.sh dev
 
 echo "Deploying to staging..."
 azd env select staging
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running staging tests..."
 ./scripts/test-environment.sh staging
@@ -409,43 +415,38 @@ read -p "Deploy to production? (y/N): " confirm
 if [[ $confirm == [yY] ]]; then
     echo "Deploying to production..."
     azd env select production
-    azd up --confirm-with-no-prompt
+    azd up --no-prompt
     
     echo "Running production smoke tests..."
     ./scripts/test-environment.sh production
 fi
 ```
 
-## 🐳 Развертывание контейнеров
+## 🐳 Развертывания контейнеров
 
-### Развертывание контейнерных приложений
+### Развертывания Container App
 ```yaml
 services:
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        BUILD_VERSION: ${BUILD_VERSION}
-        NODE_ENV: production
+        - BUILD_VERSION=${BUILD_VERSION}
+        - NODE_ENV=production
     env:
-      - name: DATABASE_URL
-        value: ${DATABASE_URL}
-    secrets:
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-    scale:
-      minReplicas: 1
-      maxReplicas: 10
+      NODE_ENV: production
 ```
 
-### Многоступенчатая оптимизация Dockerfile
+Конфигурируйте runtime секреты с помощью `configuration.secrets`/`secretRef` (или ссылок Key Vault) и масштабирование с помощью `template.scale` в инфраструктуре Container App. Не создавайте сервисные свойства `secrets` или `scale` в `azure.yaml`.
+
+### Оптимизация многоэтапного Dockerfile
 ```dockerfile
 # Dockerfile
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 WORKDIR /app
 COPY package*.json ./
 
@@ -455,11 +456,12 @@ COPY . .
 CMD ["npm", "run", "dev"]
 
 FROM base AS build
-RUN npm ci --only=production
+RUN npm ci
 COPY . .
 RUN npm run build
+RUN npm prune --omit=dev
 
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
@@ -470,77 +472,89 @@ CMD ["npm", "start"]
 
 ## ⚡ Оптимизация производительности
 
-### Развертывания по платформам
+### Развертывания для отдельных сервисов
 ```bash
-# Развернуть конкретный сервис для более быстрой итерации
-azd deploy --service web
-azd deploy --service api
+# Deploy a specific service for faster iteration
+azd deploy web
+azd deploy api
 
-# Развернуть все сервисы
+# Deploy all services
 azd deploy
 ```
 
-### Кеширование сборки
+### Кэширование сборки
 ```yaml
-# azure.yaml - Configure build commands
+# azure.yaml fragment - assumes package.json has a build script
 services:
   web:
     project: ./src/web
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    host: appservice
+    dist: dist
 ```
 
-### Эффективное развертывание кода
+Стандартный Node workflow использует скрипты пакетов; service `prepackage` хуки могут добавлять необходимые шаги. Кэширование Docker слоев отдельно от определения команды сборки сервиса.
+
+### Эффективные развертывания кода
 ```bash
-# Используйте azd deploy (не azd up) для изменений только в коде
-# Это пропускает развертывание инфраструктуры и намного быстрее
+# Use azd deploy (not azd up) for code-only changes
+# This skips infrastructure provisioning and is much faster
 azd deploy
 
-# Разверните конкретный сервис для самой быстрой итерации
-azd deploy --service api
+# Deploy specific service for fastest iteration
+azd deploy api
 ```
 
 ## 🔍 Мониторинг развертывания
 
-### Мониторинг в реальном времени
+### Мониторинг развертывания в реальном времени
 ```bash
-# Мониторинг приложения в режиме реального времени
+# Monitor application in real-time
 azd monitor --live
 
-# Просмотр журналов приложения
+# View application logs
 azd monitor --logs
 
-# Проверка состояния развертывания
+# Check deployment status
 azd show
 ```
 
-### Проверки состояния
-```yaml
-# azure.yaml - Configure health checks
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    healthCheck:
-      path: /health
-      interval: 30s
-      timeout: 10s
-      retries: 3
+### Проверки здоровья
+```bicep
+// Partial Container App container definition:
+// merge into properties.template.containers[] in your Bicep resource.
+probes: [
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 3000
+      scheme: 'HTTP'
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+    timeoutSeconds: 10
+    failureThreshold: 3
+  }
+]
 ```
+
+Ваше приложение должно реализовать `/health`; оно не поставляется автоматически с azd. Нет общего сервисного свойства `azure.yaml` `healthCheck`.
 
 ### Валидация после развертывания
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
+set -e
 
 echo "Validating deployment..."
 
-# Проверка состояния приложения
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Check application health
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
 echo "Testing web application..."
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Web application is healthy"
 else
     echo "❌ Web application health check failed"
@@ -548,7 +562,7 @@ else
 fi
 
 echo "Testing API..."
-if curl -f "$API_URL/health"; then
+if curl -f "$API_URL/lists"; then
     echo "✅ API is healthy"
 else
     echo "❌ API health check failed"
@@ -565,81 +579,51 @@ echo "✅ Deployment validation completed successfully"
 
 ### Управление секретами
 ```bash
-# Безопасно храните секреты
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
-azd env set API_KEY "your-api-key" --secret
-
-# Ссылайтесь на секреты в azure.yaml
+# Interactive Key Vault reference setup; requires appropriate vault permissions
+azd env set-secret DATABASE_PASSWORD
+azd env set-secret JWT_SECRET
+azd env set-secret API_KEY
 ```
 
-```yaml
-services:
-  api:
-    secrets:
-      - name: database-password
-        value: ${DATABASE_PASSWORD}
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-```
+`azd env set ... --secret` недействителен. Обычные значения окружения — локальный открытый текст; не рассчитывайте, что команды чтения их скрывают. Команды выше сохраняют ссылки на Key Vault, но инфраструктура/приложение всё равно должны потреблять секреты и предоставлять runtime identity доступ.
 
-### Сетевая безопасность
-```yaml
-# azure.yaml - Configure network security
-infra:
-  parameters:
-    enablePrivateEndpoints: true
-    allowedIPs:
-      - "203.0.113.0/24"  # Office IP range
-      - "198.51.100.0/24" # VPN IP range
-```
+### Безопасность сети
+Объявляйте и используйте сетевые параметры в Bicep и сопоставляйте их в `infra/main.parameters.json`. Нет общего сетевого оверлея `infra.parameters` в `azure.yaml`. Пример документации с диапазонами `203.0.113.0/24` и `198.51.100.0/24` не является настоящими офисными/VPN сетями; замените их на авторизованные адреса.
 
 ### Управление идентификацией и доступом
-```yaml
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    identity:
-      type: systemAssigned
-    keyVault:
-      - name: app-secrets
-        secrets:
-          - database-connection
-          - external-api-key
-```
+Включите `identity` Container App в Bicep и назначьте необходимую роль для доступа к Key Vault на уровне хранилища. Конфигурируйте именованные секреты на основе Key Vault и runtime ссылки в этом ресурсе; `identity` и `keyVault` не являются общими свойствами azd сервиса. См. [Аутентификация и управляемая идентичность](../chapter-03-configuration/authsecurity.md).
 
 ## 🚨 Стратегии отката
 
 ### Быстрый откат
 ```bash
-# В AZD нет встроенного отката. Рекомендуемые подходы:
+# AZD doesn't have built-in rollback. Recommended approaches:
 
-# Вариант 1: Повторное развертывание из Git (рекомендуется)
-git revert HEAD  # Откатить проблемный коммит
+# Option 1: Redeploy from Git (recommended)
+git revert HEAD  # Revert the problematic commit
 git push
 azd deploy
 
-# Вариант 2: Повторное развертывание конкретного коммита
-git checkout <previous-commit-hash>
+# Option 2: Redeploy specific commit
+git checkout "<previous-commit-hash>"
 azd deploy
 git checkout main
 ```
 
 ### Откат инфраструктуры
 ```bash
-# Предварительный просмотр изменений инфраструктуры перед применением
+# Preview infrastructure changes before applying
 azd provision --preview
 
-# Для отката инфраструктуры используйте систему контроля версий:
-git revert HEAD  # Отменить изменения инфраструктуры
-azd provision    # Применить предыдущие состояние инфраструктуры
+# For infrastructure rollback, use version control:
+git revert HEAD  # Revert infrastructure changes
+azd provision    # Apply previous infrastructure state
 ```
 
-### Откат миграций базы данных
+### Откат миграции базы данных
 ```bash
 #!/bin/bash
-# scripts/откат-базы-данных.sh
+# scripts/rollback-database.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -652,15 +636,15 @@ echo "Database rollback completed"
 
 ## 📊 Метрики развертывания
 
-### Отслеживание производительности развертываний
+### Отслеживание производительности развертывания
 ```bash
-# Просмотреть текущий статус развертывания
+# View current deployment status
 azd show
 
-# Отслеживать приложение с помощью Application Insights
+# Monitor application with Application Insights
 azd monitor --overview
 
-# Просмотреть текущие метрики в реальном времени
+# View live metrics
 azd monitor --live
 ```
 
@@ -683,26 +667,26 @@ hooks:
 
 ## 🎯 Лучшие практики
 
-### 1. Согласованность среды
+### 1. Последовательность окружений
 ```bash
-# Используйте последовательное именование
+# Use consistent naming
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Поддерживайте паритет окружения
+# Maintain environment parity
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Валидация инфраструктуры
 ```bash
-# Просмотр изменений инфраструктуры перед развертыванием
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Используйте линтинг ARM/Bicep
+# Use ARM/Bicep linting
 az bicep lint --file infra/main.bicep
 
-# Проверка синтаксиса Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 ```
 
@@ -735,9 +719,9 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Документация и логирование
+### 4. Документирование и логирование
 ```bash
-# Документировать процедуры развертывания
+# Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -745,64 +729,70 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Следующие шаги
 
-- [Настройка ресурсов](provisioning.md) — погружение в управление инфраструктурой
-- [Планирование перед развертыванием](../chapter-06-pre-deployment/capacity-planning.md) — планирование стратегии развертывания
-- [Распространённые проблемы](../chapter-07-troubleshooting/common-issues.md) — решение проблем с развертыванием
-- [Лучшие практики](../chapter-07-troubleshooting/debugging.md) — стратегии для готового к проду развертывания
+- [Provisioning Resources](provisioning.md) - Глубокий обзор управления инфраструктурой
+- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Планирование стратегии развертывания
+- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Решение проблем с развертыванием
+- [Best Practices](../chapter-07-troubleshooting/debugging.md) - Стратегии развертывания, готовые для продакшна
 
 ## 🎯 Практические упражнения по развертыванию
 
-### Упражнение 1: Поэтапное развертывание (20 минут)
-**Цель**: Овладеть отличием полного и поэтапного развертывания
+### Упражнение 1: Инкрементальный рабочий процесс развертывания (20 минут)
+**Цель**: освоить разницу между полным и инкрементальным развертываниями
+
+**Стартовые условия:** Bash, Node.js 22, Git, вход в azd, подписка Azure с правами на развертывание. Запускайте в новой директории; ожидайте платные ресурсы App Service/Cosmos DB. Время работы зависит от региона и шаблона.
 
 ```bash
-# Первоначальное развертывание
+# Initial deployment
 mkdir deployment-practice && cd deployment-practice
-azd init --template todo-nodejs-mongo
-azd up
+azd init --template todo-nodejs-mongo .
+time azd up
 
-# Записать время первоначального развертывания
+# Record initial deployment time
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# Внести изменения в код
-echo "// Updated $(date)" >> src/api/src/server.js
+# Make a code change
+echo "// Updated $(date)" >> src/api/src/index.ts
 
-# Развернуть только код (быстро)
+# Deploy only code (fast)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# Сравнить времена
+# Compare times
 cat deployment-log.txt
 
-# Очистить
+# Clean up
 azd down --force --purge
 ```
 
-**Критерии успеха:**
-- [ ] Полное развертывание занимает 5-15 минут
-- [ ] Развертывание только кода занимает 2-5 минут
-- [ ] Изменения кода отразились в развернутом приложении
+**Критерии успешности:**
+- [ ] Зафиксировать время выполнения обеих команд (гарантированного времени нет)
+- [ ] Обе команды успешно завершаются
+- [ ] API остается рабочим; изменение только комментария — не видимое изменение UI
 - [ ] Инфраструктура не изменяется после `azd deploy`
 
-**Результат:** `azd deploy` на 50-70% быстрее, чем `azd up` для изменений кода
+**Результат обучения:** `azd deploy` пропускает provision инфраструктуры. Сравнивайте замеренное время, а не полагайтесь на фиксированный процент ускорения.
 
 ### Упражнение 2: Пользовательские хуки развертывания (30 минут)
-**Цель**: Реализовать автоматизацию до и после развертывания
+**Цель**: реализовать автоматизацию до и после развертывания
+
+**Стартовые условия:** инициализированный проект `deployment-practice` выше. Если вы его очистили, снова выполните `azd up` перед тестированием развертывания только кода. Валидация ниже использует реальный скрипт сборки API, а не несуществующий корневой `test:unit` скрипт. Тесты API шаблона требуют настроенный доступ к базе данных; это не изолированные юнит-тесты.
 
 ```bash
-# Создать скрипт предварительной проверки перед деплоем
+# Create pre-deploy validation script
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "⚠️ Running pre-deployment checks..."
 
-# Проверить, проходят ли тесты
-if ! npm run test:unit; then
-    echo "❌ Tests failed! Aborting deployment."
+# Install API dependencies and check its actual lint/TypeScript build
+npm --prefix src/api ci
+if ! npm --prefix src/api run build; then
+    echo "❌ Build validation failed! Aborting deployment."
     exit 1
 fi
 
-# Проверить наличие незакоммиченных изменений
+# Check for uncommitted changes
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -812,14 +802,15 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Создать скрипт дымового теста после деплоя
+# Create post-deploy smoke test
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "💨 Running smoke tests..."
 
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Health check passed!"
 else
     echo "❌ Health check failed!"
@@ -831,8 +822,11 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Добавить хуки в azure.yaml
-cat >> azure.yaml << 'EOF'
+# Merge the following into the EXISTING azure.yaml using your editor.
+# If hooks already exists, merge its children; never append a duplicate YAML key.
+```
+
+```yaml
 
 hooks:
   predeploy:
@@ -842,23 +836,26 @@ hooks:
   postdeploy:
     shell: sh
     run: ./scripts/post-deploy-test.sh
-EOF
+```
 
-# Протестировать деплой с хуками
+```bash
+# Test deployment with hooks
 azd deploy
 ```
 
-**Критерии успеха:**
-- [ ] Скрипт pre-deploy выполняется до развертывания
-- [ ] Развертывание прерывается при провале тестов
-- [ ] Post-deploy smoke-тест проверяет работоспособность
+**Критерии успешности:**
+- [ ] Скрипт pre-deploy запускается перед развертыванием
+- [ ] Развертывание прерывается при ошибке валидации сборки
+- [ ] Скрипт post-deploy выполняет базовое тестирование работоспособности
 - [ ] Хуки выполняются в правильном порядке
 
-### Упражнение 3: Стратегия много-средового развертывания (45 минут)
-**Цель**: Реализовать поэтапный сценарий (dev → staging → production)
+### Упражнение 3: Стратегия развертывания с несколькими окружениями (45 минут)
+**Цель**: реализовать пошаговый рабочий процесс развертывания (dev → staging → production)
+
+**Отправная точка:** тот же инициализированный проект todo с `jq`. Создайте приведённые ниже среды с реальными значениями подписки/локации (или установите `AZURE_SUBSCRIPTION_ID`/`AZURE_LOCATION` в каждой) **до** запуска рабочего процесса без запроса. Он намеренно завершится с ошибкой, а не будет придумывать отсутствующие значения. Используйте только временные тренировочные среды, а не реальную производственную подписку.
 
 ```bash
-# Создать скрипт развертывания
+# Create deployment script
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -866,25 +863,25 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Шаг 1: Развернуть на dev
+# Step 1: Deploy to dev
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
 azd up --no-prompt
 
 echo "Running dev tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Шаг 2: Развернуть на staging
+# Step 2: Deploy to staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
 azd up --no-prompt
 
 echo "Running staging tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Шаг 3: Ручное одобрение для production
+# Step 3: Manual approval for production
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -896,7 +893,7 @@ if [[ $confirm == "yes" ]]; then
     azd up --no-prompt
     
     echo "Running production smoke tests..."
-    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
     
     echo "
 ✅ Production deployment completed!"
@@ -907,74 +904,90 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# Создать окружения
-azd env new dev
-azd env new staging
-azd env new production
+# Create environments
+# Reuse existing dev if you completed Exercise 1; create unused environments
+azd env select dev
+azd env new staging --subscription "<subscription-id>" --location eastus2
+azd env new production --subscription "<subscription-id>" --location eastus2
 
-# Запустить поэтапное развертывание
+# Run staged deployment
 ./deploy-staged.sh
+
+# After verification, delete each disposable deployment (review prompts)
+azd down --environment dev
+azd down --environment staging
+azd down --environment production
 ```
 
 **Критерии успеха:**
-- [ ] Среда dev успешно развернута
-- [ ] Среда staging успешно развернута
-- [ ] Для production требуется ручное подтверждение
+- [ ] Среда для разработки развёртывается успешно
+- [ ] Среда для тестирования развёртывается успешно
+- [ ] Для продакшена требуется ручное одобрение
 - [ ] Во всех средах работают проверки состояния
-- [ ] Имеется возможность отката при необходимости
+- [ ] При необходимости можно выполнить откат
 
-### Упражнение 4: Стратегия отката (25 минут)
+### Задание 4: Стратегия отката (25 минут)
 **Цель**: Реализовать и протестировать откат развертывания с помощью Git
 
+**Отправная точка:** изолированная тренировочная копия шаблона todo с зафиксированным исходным кодом, чистым рабочим деревом Git и настроенной временной средой. Никогда не вводите намеренные ошибки в реальном производственном проекте. `APP_VERSION` ниже используется только для бухгалтерии, если вы явно не включите её в приложение.
+
 ```bash
-# Развернуть v1
+# Deploy v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Сохранить хеш коммита v1
+# Save v1 commit hash
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Развернуть v2 с обратимо несовместимым изменением
-echo "throw new Error('Intentional break')" >> src/api/src/server.js
-git add . && git commit -m "v2 with intentional break"
+# Deploy v2 with breaking change
+echo "throw new Error('Intentional break');" >> src/api/src/index.ts
+git add src/api/src/index.ts
+git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
-azd deploy
+DEPLOY_FAILED=false
+azd deploy api || DEPLOY_FAILED=true
 
-# Обнаружить ошибку и выполнить откат
-if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+# Detect failure and rollback
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+if [ "$DEPLOY_FAILED" = true ] || ! curl -f "$API_URL/lists"; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Выполнить откат с помощью git
+    # Rollback using git
     git revert HEAD --no-edit
     
-    # Откат среды
+    # Rollback environment
     azd env set APP_VERSION "1.0.0"
     
-    # Повторно развернуть v1
-    azd deploy
+    # Redeploy v1
+    azd deploy api
+    curl --fail "$API_URL/lists"
     
     echo "✅ Rolled back to v1.0.0"
 fi
+
+# Clean up the disposable deployment when finished
+azd down
 ```
 
 **Критерии успеха:**
-- [ ] Умеет обнаруживать ошибки развертывания
+- [ ] Могут обнаруживать ошибки развертывания
 - [ ] Скрипт отката выполняется автоматически
 - [ ] Приложение возвращается в рабочее состояние
-- [ ] После отката проверки здоровья проходят успешно
+- [ ] После отката проверки состояния проходят успешно
 
 ## 📊 Отслеживание метрик развертывания
 
-### Отслеживайте производительность вашего развертывания
+### Отслеживайте показатели своего развертывания
 
 ```bash
-# Создать сценарий метрик развертывания
+# Create deployment metrics script
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
 
 azd deploy "$@"
+DEPLOY_STATUS=$?
 
 END_TIME=$(date +%s)
 DURATION=$((END_TIME - START_TIME))
@@ -986,28 +999,29 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# Записать в файл
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+# Log to file
+echo "$(date +%Y-%m-%dT%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+exit "$DEPLOY_STATUS"
 EOF
 
 chmod +x track-deployment.sh
 
-# Используйте это
+# Use it
 ./track-deployment.sh
 ```
 
 **Анализируйте свои метрики:**
 ```bash
-# Просмотр истории развертывания
+# View deployment history
 cat deployment-metrics.csv
 
-# Вычислить среднее время развертывания
+# Calculate average deployment time
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
 ## Дополнительные ресурсы
 
-- [Справочник по развертыванию Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Справочник по развертыванию с Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Развертывание Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
 - [Развертывание Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
 - [Развертывание Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
@@ -1016,7 +1030,7 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 **Навигация**
 - **Предыдущий урок**: [Ваш первый проект](../chapter-01-foundation/first-project.md)
-- **Следующий урок**: [Настройка ресурсов](provisioning.md)
+- **Следующий урок**: [Provisioning Resources](provisioning.md)
 
 ---
 

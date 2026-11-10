@@ -1,20 +1,22 @@
-# Kapitel 8: Produktions- und Enterprise-Muster
+# Kapitel 8: Produktions- & Enterprise-Muster
 
 **📚 Kurs**: [AZD für Anfänger](../../README.md) | **⏱️ Dauer**: 2-3 Stunden | **⭐ Komplexität**: Fortgeschritten
 
 ---
 
-## Übersicht
+## Überblick
 
-Dieses Kapitel behandelt unternehmensgerechte Bereitstellungsmuster, Sicherheitshärtung, Überwachung und Kostenoptimierung für KI-Produktions-Workloads.
+Dieses Kapitel behandelt unternehmensgerechte Bereitstellungsmuster, Sicherheitshärtung, Überwachung und Kostenoptimierung für produktive KI-Arbeitslasten.
 
-> Validiert gegen `azd 1.27.1` im Juli 2026.
+Dies ist eine architektonische Referenz, keine vollständig bereitstellbare Produktion-Vorlage. Beispiele lassen Integrationsdetails weg, die in Ihrer eigenen Anwendung bereitgestellt und getestet werden müssen; das Lesen der Checkliste garantiert keine Produktionsreife.
+
+> **Release-Überprüfung (2026-11-04):** Die KI-CLI-Anleitung wurde mit der Dokumentation/Quelle von `azd 1.37.2`, Agents `1.0.0-beta.23` und Bewertungen `1.0.0-beta.2` abgeglichen. Siehe [Release-Änderungen und Fixes](production-ai-practices.md#recent-release-changes-and-fixes) für Kompatibilitätsanforderungen und Migrationsdetails; dies ist keine Live-Bereitstellungsvalidierung.
 
 ## Lernziele
 
 Nach Abschluss dieses Kapitels werden Sie:
-- Mehrregionale resiliente Anwendungen bereitstellen
-- Enterprise-Sicherheitsmuster implementieren
+- Mehrregionale resilientere Anwendungen bereitstellen
+- Unternehmenssicherheitsmuster implementieren
 - Umfassende Überwachung konfigurieren
 - Kosten in großem Maßstab optimieren
 - CI/CD-Pipelines mit AZD einrichten
@@ -25,19 +27,19 @@ Nach Abschluss dieses Kapitels werden Sie:
 
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
-| 1 | [Produktions-KI-Praktiken](production-ai-practices.md) | Bereitstellungsmuster für Unternehmen | 90 Min |
+| 1 | [Produktions-KI-Praktiken](production-ai-practices.md) | Unternehmens-Bereitstellungsmuster | 90 Min |
 
 ---
 
 ## 🚀 Produktions-Checkliste
 
 - [ ] Mehrregionale Bereitstellung für Resilienz
-- [ ] Verwaltene Identität für Authentifizierung (keine Schlüssel)
-- [ ] Application Insights für Überwachung
+- [ ] Verwaltete Identität für Authentifizierung (keine Schlüssel)
+- [ ] Application Insights zur Überwachung
 - [ ] Kostenbudgets und Warnungen konfiguriert
-- [ ] Sicherheitsscans aktiviert
-- [ ] CI/CD-Pipeline integriert
-- [ ] Notfallwiederherstellungsplan
+- [ ] Aktivierte Sicherheitsüberprüfung
+- [ ] CI/CD-Pipeline-Integration
+- [ ] Disaster-Recovery-Plan
 
 ---
 
@@ -47,16 +49,16 @@ Nach Abschluss dieses Kapitels werden Sie:
 
 ```mermaid
 graph LR
-    Gateway[API-Gateway] --> AI[KI-Dienst] --> Models[Microsoft Foundry-Modelle]
-    Gateway --> Auth[Authentifizierungsdienst]
-    AI --> Data[Datenspeicher]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
 ### Muster 2: Ereignisgesteuerte KI
 
 ```mermaid
 graph LR
-    EventGrid[Ereignisraster] --> Functions[Funktionen] --> Pipeline[KI-Pipeline]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
@@ -64,12 +66,13 @@ graph LR
 ## 🔐 Sicherheits-Best Practices
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,34 +85,27 @@ properties: {
 
 ## 💰 Kostenoptimierung
 
-| Strategie | Einsparungen |
-|----------|-------------|
-| Skalierung auf Null (Container Apps) | 60-80% |
-| Verbrauchsstufen für Entwicklung nutzen | 50-70% |
-| Geplante Skalierung | 30-50% |
-| Reservierte Kapazität | 20-40% |
+| Strategie | Haupteinschränkung |
+|----------|---------|
+| Auf null skalieren (Container Apps) | Erfordert passenden Trigger; andere Dienste verursachen weiterhin Kosten |
+| Verbrauchsstufen für Entwicklung nutzen | Vergleiche ausgewählte Servicepreise und Arbeitslast |
+| Geplantes Skalieren | Skalierung über unterstützte Infrastruktur/Automatisierung |
+| Reservierungen/vorgesehene Kapazität | Nur wenn unterstützt; Verpflichtungen können Leerkosten erhöhen |
 
-```bash
-# Budgetwarnungen festlegen
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Verwenden Sie das [vollständige Budget-Ressourcenmuster](production-ai-practices.md#2-cost-monitoring-and-budgets) mit gültigem Startdatum, Abrechnungsscope, Empfängern und Berechtigungen. Ein Budget sendet Warnungen; es begrenzt nicht die Ausgaben. Einsparungen hängen von gemessener Nutzung ab und sind keine garantierten Prozentsätze.
 
 ---
 
-## 📊 Überwachungs-Setup
+## 📊 Überwachungseinrichtung
 
 ```bash
-# Protokolle streamen
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Application Insights überprüfen
+# Check Application Insights
 azd monitor --overview
 
-# Metriken anzeigen
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -119,14 +115,14 @@ az monitor metrics list --resource <resource-id>
 
 | Richtung | Kapitel |
 |-----------|---------|
-| **Vorheriges** | [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md) |
+| **Zurück** | [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md) |
 | **Kurs abgeschlossen** | [Kursübersicht](../../README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
-- [AI-Agenten-Leitfaden](../chapter-02-ai-development/agents.md)
+- [KI Agents Anleitung](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Multi-Agenten-Lösungen](../chapter-05-multi-agent/README.md)
 - [Microservices-Beispiel](../../examples/microservices/README.md)

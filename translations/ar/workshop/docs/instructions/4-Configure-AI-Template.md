@@ -1,221 +1,25 @@
 # 4. تكوين قالب
 
-!!! tip "بنهاية هذه الوحدة ستتمكن من"
+!!! tip "بنهاية هذا الوحدة ستتمكن من"
 
-    - [ ] فهم غرض `azure.yaml`
-    - [ ] فهم بنية `azure.yaml`
-    - [ ] فهم قيمة دورة حياة azd لـ `hooks`
-    - [ ] **المختبر 4:** استكشاف وتعديل متغيرات البيئة
-
----
-
-!!! prompt "ما الذي يفعله ملف `azure.yaml`؟ استخدم كتلة كود وفسرها سطرًا بسطر"
-
-      ملف `azure.yaml` هو **ملف التهيئة لـ Azure Developer CLI (azd)**. يحدد كيفية نشر تطبيقك على Azure، بما في ذلك البنية التحتية، الخدمات، الـ hooks أثناء النشر، ومتغيرات البيئة.
+    - [ ] Explain the purpose and structure of `azure.yaml`
+    - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
+    - [ ] Configure the selected environment using inputs supported by the template
+    - [ ] **Lab 4:** Review a configuration change before provisioning it
 
 ---
 
-## 1. الغرض والوظائف
+## 1. ابدأ بالقالب الفعلي
 
-يعمل ملف `azure.yaml` هذا كـ **مخطط النشر** لتطبيق وكيل ذكاء اصطناعي يقوم بما يلي:
+افتح [`azure.yaml` في بدء العمل مع وكلاء الذكاء الاصطناعي](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/azure.yaml) في المستودع الذي قمت بتهيئته. يمكن أن يتغير القالب الأصلي بشكل مستقل عن هذا الورشة. المقتطف التالي **تم التحقق منه** في 4 نوفمبر 2026؛ وهو ليس بديلاً عن الملف الكامل:
 
-1. **يتحقق من البيئة** قبل النشر
-2. **يوفر خدمات AI في Azure** (AI Hub، AI Project، Search، إلخ)
-3. **ينشر تطبيق Python** في Azure Container Apps
-4. **يُكوّن نماذج AI** لكل من وظائف الدردشة والتضمين
-5. **يقوم بإعداد المراقبة والتتبع** لتطبيق الذكاء الاصطناعي
-6. **يتعامل مع مشاريع Azure AI الجديدة والموجودة**
-
-يُمكّن هذا الملف من **نشر بأمر واحد** (`azd up`) لحل وكيل AI مكتمل مع التحقق الصحيح، والتوفير، وضبط ما بعد النشر.
-
-??? info "انقر للتوسيع لعرض: `azure.yaml`"
-
-      يعرّف ملف `azure.yaml` كيف ينبغي على Azure Developer CLI نشر وإدارة تطبيق وكيل AI هذا في Azure. لنفصّله سطرًا بسطر.
-
-      ```yaml title="" linenums="0"
-
-      # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: do we need hooks? 
-      # TODO: do we need all of the variables?
-
-      name: azd-get-started-with-ai-agents
-      metadata:
-      template: azd-get-started-with-ai-agents@1.0.2
-      requiredVersions:
-      azd: ">=1.14.0"
-
-      hooks:
-      preup:
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-            interactive: true
-            continueOnError: false
-      windows:
-            shell: pwsh
-            run: ./scripts/validate_env_vars.ps1
-            interactive: true
-            continueOnError: false      
-      postprovision:
-      windows:
-            shell: pwsh
-            run: ./scripts/write_env.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-            continueOnError: true
-            interactive: true
-      postdeploy:
-      windows:
-            shell: pwsh
-            run: ./scripts/postdeploy.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-            continueOnError: true
-            interactive: true
-      services:
-      api_and_frontend:
-      project: ./src
-      language: py
-      host: containerapp
-      docker:
-            image: api_and_frontend
-            remoteBuild: true
-      pipeline:
-      variables:
-      - AZURE_RESOURCE_GROUP
-      - AZURE_AIHUB_NAME
-      - AZURE_AIPROJECT_NAME
-      - AZURE_AISERVICES_NAME
-      - AZURE_SEARCH_SERVICE_NAME
-      - AZURE_APPLICATION_INSIGHTS_NAME
-      - AZURE_CONTAINER_REGISTRY_NAME
-      - AZURE_KEYVAULT_NAME
-      - AZURE_STORAGE_ACCOUNT_NAME
-      - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-      - USE_CONTAINER_REGISTRY
-      - USE_APPLICATION_INSIGHTS
-      - USE_AZURE_AI_SEARCH_SERVICE
-      - AZURE_AI_AGENT_NAME
-      - AZURE_AI_AGENT_ID
-      - AZURE_AI_AGENT_DEPLOYMENT_NAME
-      - AZURE_AI_AGENT_DEPLOYMENT_SKU
-      - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-      - AZURE_AI_AGENT_MODEL_NAME
-      - AZURE_AI_AGENT_MODEL_FORMAT
-      - AZURE_AI_AGENT_MODEL_VERSION
-      - AZURE_AI_EMBED_DEPLOYMENT_NAME
-      - AZURE_AI_EMBED_DEPLOYMENT_SKU
-      - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-      - AZURE_AI_EMBED_MODEL_NAME
-      - AZURE_AI_EMBED_MODEL_FORMAT
-      - AZURE_AI_EMBED_MODEL_VERSION
-      - AZURE_AI_EMBED_DIMENSIONS
-      - AZURE_AI_SEARCH_INDEX_NAME
-      - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-      - AZURE_EXISTING_AIPROJECT_ENDPOINT
-      - AZURE_EXISTING_AGENT_ID
-      - ENABLE_AZURE_MONITOR_TRACING
-      - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-      ```
-
----
-
-## 2. تفكيك الملف
-
-لنمر على الملف قسمًا بقسم، لفهم ما يفعله - ولماذا.
-
-### 2.1 **الرأس والمخطط (1-3)**
-
-```yaml title="" linenums="0"
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-```
-
-- **السطر 1**: يوفر التحقق من مخطط لغة YAML لخادم اللغة لدعم بيئة التطوير وIntelliSense
-
-### 2.2 بيانات تعريف المشروع (5-10)
-
-```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@1.0.2
+  template: azd-get-started-with-ai-agents@2.5.0
 requiredVersions:
   azd: ">=1.14.0"
-```
-
-- **السطر 5**: يعرّف اسم المشروع المستخدم بواسطة Azure Developer CLI
-- **الأسطر 6-7**: تحدد أن هذا مبني على قالب بالإصدار 1.0.2
-- **الأسطر 8-9**: يتطلب إصدار Azure Developer CLI 1.14.0 أو أعلى
-
-### 2.3 خطافات النشر (11-40)
-
-```yaml title="" linenums="0"
-hooks:
-  preup:
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-      interactive: true
-      continueOnError: false
-    windows:
-      shell: pwsh
-      run: ./scripts/validate_env_vars.ps1
-      interactive: true
-      continueOnError: false      
-```
-
-- **الأسطر 11-20**: **خطاف قبل النشر** - يعمل قبل `azd up`
-
-      - على Unix/Linux: يجعل سكربت التحقق قابلاً للتنفيذ ويشغله
-      - على Windows: يشغل سكربت التحقق بـ PowerShell
-      - كلاهما تفاعلي وسيتوقف النشر إذا فشلا
-
-```yaml  title="" linenums="0"
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-      continueOnError: true
-      interactive: true
-```
-- **الأسطر 21-30**: **خطاف ما بعد التهيئة** - يعمل بعد إنشاء موارد Azure
-
-  - ينفّذ سكربتات كتابة متغيرات البيئة
-  - يستمر النشر حتى إذا فشلت هذه السكربتات (`continueOnError: true`)
-
-```yaml title="" linenums="0"
-  postdeploy:
-    windows:
-      shell: pwsh
-      run: ./scripts/postdeploy.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-      continueOnError: true
-      interactive: true
-```
-- **الأسطر 31-40**: **خطاف ما بعد النشر** - يعمل بعد نشر التطبيق
-
-  - ينفّذ سكربتات الإعداد النهائي
-  - يستمر حتى إذا فشلت السكربتات
-
-### 2.4 إعداد الخدمة (41-48)
-
-يُكوّن هذا إعداد خدمة التطبيق التي تقوم بنشرها.
-
-```yaml title="" linenums="0"
 services:
   api_and_frontend:
     project: ./src
@@ -226,162 +30,109 @@ services:
       remoteBuild: true
 ```
 
-- **السطر 42**: يعرّف خدمة باسم "api_and_frontend"
-- **السطر 43**: يشير إلى دليل `./src` لمصدر الكود
-- **السطر 44**: يحدد Python كلغة برمجة
-- **السطر 45**: يستخدم Azure Container Apps كمنصة الاستضافة
-- **الأسطر 46-48**: إعدادات Docker
+- `name` يحدد مشروع AZD؛ `metadata.template` يسجل نسخة القالب.
+- `requiredVersions.azd` هو الحد الأدنى للقالب، وليس توصية بالبقاء على واجهة سطر أوامر قديمة. استخدم إصدار AZD الحالي والمدعوم.
+- `services` يحدد أهداف نشر التطبيق. هذا القالب ينشر API بايثون والواجهة الأمامية كخدمة تطبيقات حاويات واحدة.
+- `project` هو نسبي إلى `azure.yaml`.
+- `remoteBuild` يطلب بناء حاوية عن بعد. هويتك لا تزال بحاجة إلى الأذونات المطلوبة من Azure.
 
-      - يستخدم "api_and_frontend" كاسم للصورة
-      - يبني صورة Docker عن بُعد في Azure (وليس محليًا)
+ملفات Bicep الخاصة بالقالب تحت `infra/`، وليس قائمة `services` فقط، تعلن عن الموارد مثل Microsoft Foundry، نشر النماذج، التخزين، وخيار AI Search الاختياري.
 
-### 2.5 متغيرات خط الأنابيب (49-76)
+## 2. فهم الخطافات الحياتية
 
-هذه متغيرات لمساعدتك على تشغيل `azd` في خطوط أنابيب CI/CD لأتمتة العملية
+تفقد قسم `hooks` والبرمجيات النصية المشار إليها قبل تشغيل القالب. النسخة المُراجعة تحتوي على:
 
-```yaml title="" linenums="0"
-pipeline:
-  variables:
-    - AZURE_RESOURCE_GROUP
-    - AZURE_AIHUB_NAME
-    - AZURE_AIPROJECT_NAME
-    - AZURE_AISERVICES_NAME
-    - AZURE_SEARCH_SERVICE_NAME
-    - AZURE_APPLICATION_INSIGHTS_NAME
-    - AZURE_CONTAINER_REGISTRY_NAME
-    - AZURE_KEYVAULT_NAME
-    - AZURE_STORAGE_ACCOUNT_NAME
-    - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-    - USE_CONTAINER_REGISTRY
-    - USE_APPLICATION_INSIGHTS
-    - USE_AZURE_AI_SEARCH_SERVICE
-    - AZURE_AI_AGENT_NAME
-    - AZURE_AI_AGENT_ID
-    - AZURE_AI_AGENT_DEPLOYMENT_NAME
-    - AZURE_AI_AGENT_DEPLOYMENT_SKU
-    - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-    - AZURE_AI_AGENT_MODEL_NAME
-    - AZURE_AI_AGENT_MODEL_FORMAT
-    - AZURE_AI_AGENT_MODEL_VERSION
-    - AZURE_AI_EMBED_DEPLOYMENT_NAME
-    - AZURE_AI_EMBED_DEPLOYMENT_SKU
-    - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-    - AZURE_AI_EMBED_MODEL_NAME
-    - AZURE_AI_EMBED_MODEL_FORMAT
-    - AZURE_AI_EMBED_MODEL_VERSION
-    - AZURE_AI_EMBED_DIMENSIONS
-    - AZURE_AI_SEARCH_INDEX_NAME
-    - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-    - AZURE_EXISTING_AIPROJECT_ENDPOINT
-    - AZURE_EXISTING_AGENT_ID
-    - ENABLE_AZURE_MONITOR_TRACING
-    - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-```
+| الخطاف | الغرض | السلوك المهم |
+|------|---------|--------------------|
+| `preup` | التحقق من مدخلات بيئة القالب قبل سير عمل `up` | يمكن للبرمجيات النصية الخاصة بالمنصة إيقاف سير العمل عند الفشل |
+| `postdeploy` | تشغيل إعدادات خاصة بالقالب بعد نشر التطبيق | تفقد `continueOnError` ومخرجات البرمجيات النصية؛ نجاح النشر لا يثبت نجاح كل مهمة إعداد |
 
-يعرّف هذا القسم متغيرات البيئة المستخدمة **أثناء النشر**، منظمة حسب الفئة:
+هذه النسخة **لا** تحتوي على الخطاف الأقدم `postprovision` / `write_env` الموضح في مواد الورش السابقة. لا تنسخ مراجع الخطاف إلى برمجيات نصية لم تعد موجودة.
 
-- **أسماء موارد Azure (الأسطر 51-60)**:
-      - أسماء موارد خدمات Azure الأساسية مثل: Resource Group، AI Hub، AI Project، إلخ
-- **مفاتيح الميزات (الأسطر 61-63)**:
-      - متغيرات منطقية لتفعيل/تعطيل خدمات Azure محددة
-- **تكوين وكيل AI (الأسطر 64-71)**:
-      - إعدادات الوكيل الرئيسي للذكاء الاصطناعي بما في ذلك الاسم، المعرف، إعدادات النشر، تفاصيل النموذج
-- **تكوين تضمين AI (الأسطر 72-79)**:
-      - إعداد نموذج التضمين المستخدم للبحث المتجهّي
-- **البحث والمراقبة (الأسطر 80-84)**:
-      - اسم فهرس البحث، معرفات الموارد الموجودة، وإعدادات المراقبة/التتبع
+مفاتيح الخطاف تختار أحداث دورة الحياة؛ `posix` و `windows` تختاران تنفيذات المنصة. `shell`، `run`، `interactive`، و `continueOnError` تتحكم في التنفيذ. هذه برمجيات نصية قابلة للتنفيذ بصلاحياتك، لذا راجعها كما تفعل مع كود التطبيق.
 
----
+راجع [توثيق خطافات AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-extensibility) للدورة الكاملة.
 
-## 3. تعرف على متغيرات البيئة
-تتحكم متغيرات البيئة التالية في تكوين سلوك النشر الخاص بك، منظمة حسب الغرض الأساسي لها. معظم المتغيرات لها قيم افتراضية معقولة، لكن يمكنك تخصيصها لتتناسب مع متطلباتك الخاصة أو موارد Azure الحالية.
+## 3. تتبع مدخلات البيئة إلى البنية التحتية
 
-### 3.1 المتغيرات المطلوبة 
+نفذ هذه الأوامر من المستودع النموذجي المُهيأ:
 
-```bash title="" linenums="0"
-# التكوين الأساسي لأزور
-AZURE_ENV_NAME                    # اسم البيئة (يُستخدم في تسمية الموارد)
-AZURE_LOCATION                    # منطقة النشر
-AZURE_SUBSCRIPTION_ID             # الاشتراك المستهدف
-AZURE_RESOURCE_GROUP              # اسم مجموعة الموارد
-AZURE_PRINCIPAL_ID                # المستخدم الرئيسي لـ RBAC
-
-# أسماء الموارد (تُنشأ تلقائيًا إذا لم يتم تحديدها)
-AZURE_AIHUB_NAME                  # اسم محور مايكروسوفت فاوندري
-AZURE_AIPROJECT_NAME              # اسم مشروع الذكاء الاصطناعي
-AZURE_AISERVICES_NAME             # اسم حساب خدمات الذكاء الاصطناعي
-AZURE_STORAGE_ACCOUNT_NAME        # اسم حساب التخزين
-AZURE_CONTAINER_REGISTRY_NAME     # اسم سجل الحاويات
-AZURE_KEYVAULT_NAME               # اسم مخزن المفاتيح (إذا تم استخدامه)
-```
-
-### 3.2 تكوين النموذج 
-```bash title="" linenums="0"
-# تكوين نموذج المحادثة
-AZURE_AI_AGENT_MODEL_NAME         # الافتراضي: gpt-4.1-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # الافتراضي: OpenAI (أو Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # الافتراضي: الأحدث المتاح
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # اسم النشر لنموذج المحادثة
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # الافتراضي: القياسي
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # الافتراضي: 80 (آلاف من TPM)
-
-# تكوين نموذج التضمين
-AZURE_AI_EMBED_MODEL_NAME         # الافتراضي: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # الافتراضي: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # الافتراضي: الأحدث المتاح
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # اسم النشر للتضمينات
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # الافتراضي: القياسي
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # الافتراضي: 50 (آلاف من TPM)
-
-# تكوين الوكيل
-AZURE_AI_AGENT_NAME               # اسم عرض الوكيل
-AZURE_EXISTING_AGENT_ID           # استخدام وكيل موجود (اختياري)
-```
-
-### 3.3 تبديل الميزات
-```bash title="" linenums="0"
-# الخدمات الاختيارية
-USE_APPLICATION_INSIGHTS         # القيمة الافتراضية: نعم
-USE_AZURE_AI_SEARCH_SERVICE      # القيمة الافتراضية: لا
-USE_CONTAINER_REGISTRY           # القيمة الافتراضية: نعم
-
-# المراقبة والتتبع
-ENABLE_AZURE_MONITOR_TRACING     # القيمة الافتراضية: لا
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # القيمة الافتراضية: لا
-
-# تكوين البحث
-AZURE_AI_SEARCH_INDEX_NAME       # اسم فهرس البحث
-AZURE_SEARCH_SERVICE_NAME        # اسم خدمة البحث
-```
-
-### 3.4 تكوين مشروع AI 
-```bash title="" linenums="0"
-# استخدم الموارد الموجودة
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # معرّف المورد الكامل لمشروع الذكاء الاصطناعي الموجود
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # عنوان URL لنقطة النهاية للمشروع الموجود
-```
-
-### 3.5 تحقق من متغيراتك
-
-استخدم Azure Developer CLI لعرض وإدارة متغيرات البيئة الخاصة بك:
-
-```bash title="" linenums="0"
-# عرض جميع متغيرات البيئة للبيئة الحالية
-azd env get-values
-
-# الحصول على متغير بيئة محدد
+```bash
+azd env list
 azd env get-value AZURE_ENV_NAME
-
-# تعيين متغير بيئة
-azd env set AZURE_LOCATION eastus
-
-# تعيين متغيرات متعددة من ملف .env
-azd env set --from-file .env
+azd env get-value AZURE_LOCATION
 ```
+
+تفقد `infra/main.parameters.json` لترى متغيرات البيئة التي يستخدمها القالب فعليًا. تعيين اسم عشوائي عبر `azd env set` لا يغير مورد Azure تلقائيًا.
+
+الإعدادات الافتراضية التي تمت مراجعتها تشمل:
+
+| المدخل | الافتراضي / الغرض |
+|-------|-------------------|
+| `AZURE_AI_AGENT_MODEL_NAME` | `gpt-5-mini` |
+| `AZURE_AI_AGENT_MODEL_VERSION` | `2025-08-07` |
+| `AZURE_AI_AGENT_DEPLOYMENT_SKU` | `GlobalStandard` |
+| `AZURE_AI_AGENT_DEPLOYMENT_CAPACITY` | `80`؛ وحدات الحصة تعتمد على النموذج ونوع النشر |
+| `AZURE_AI_EMBED_MODEL_NAME` | `text-embedding-3-small` |
+| `AZURE_AI_EMBED_DIMENSIONS` | `1536` |
+| `USE_APPLICATION_INSIGHTS` | `true` |
+| `USE_AZURE_AI_SEARCH_SERVICE` | `false` |
+| `ENABLE_AZURE_MONITOR_TRACING` | `false` |
+| `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` | `false`؛ اتركه معطلًا ما لم يتم مراجعة التعامل مع البيانات |
+
+هذه المدخلات خاصة بالنموذج، وليست إعدادات AZD العالمية. تحقق من [توثيق دعم النموذج والمنطقة](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) وحصة اشتراكك قبل اختيار نموذج أو SKU أو سعة أو موقع. لا تفسر كل وحدة سعة على أنها 1000 رمز في الدقيقة.
+
+لاختيار نموذج محادثة مختلف، قم بتحديث **الاسم، النسخة، الصيغة، SKU، والسعة معًا** وفقًا لـ [دليل تخصيص العينة](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md). تغيير الاسم فقط قد يترك نسخة أو نوع نشر غير متوافق.
+
+## 4. المختبر: تمكين البحث الاختياري والتتبع
+
+!!! warning "هذه الإعدادات يمكن أن تضيف موارد قابلة للفوترة"
+
+    Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
+
+```bash
+azd env set USE_AZURE_AI_SEARCH_SERVICE true
+azd env set USE_APPLICATION_INSIGHTS true
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+
+# Inspect the infrastructure changes and any configured preview hooks
+azd provision --preview
+
+# Apply the resource changes and deploy the application
+azd up
+```
+
+تغييرات البنية التحتية تحتاج إلى توفير؛ `azd deploy` وحده ينشر خدمات التطبيق فقط. للحصول على فهرسة البحث وخيارات الاسترجاع المدعومة، اتبع [دليل AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md). للمراقبة، اتبع [دليل القابلية للملاحظة](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md).
+
+لا تمكّن التقاط محتوى المطالبات/الاستجابات على بيانات العملاء الحقيقية بدون الحصول على الموافقة المطلوبة، ضوابط الوصول، سياسة الاحتفاظ، وإخفاء الهوية.
+
+## 5. الموارد الموجودة وCI/CD
+
+لإعادة استخدام مشروع Foundry، اتبع تعليمات [المورد الموجود](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md#use-existing-resources) في العينة. تعيين `AZURE_EXISTING_AIPROJECT_RESOURCE_ID` يغير مسار النشر؛ في هذا السيناريو، القالب لا ينشئ Application Insights أو AI Search لك. تحقق صراحة من التبعيات، تعيينات الدور، ونشر النماذج.
+
+قسم `pipeline.variables` يتحكم في القيم الممررة إلى خط الأنابيب المُنشأ؛ هو ليس مخزن أسرار ولا ينشئ موارد Azure. يفضل هوية مُدارة في التطبيق وOIDC لـ CI/CD. ملفات بيئة AZD هي نصوص عادية ولا يجب الالتزام بها.
+
+يدعم AZD استيراد ملف dotenv موثوق ومُعد محليًا:
+
+```bash
+azd env set --file .env
+```
+
+راجع هذا الملف قبل استيراده، ولا تطبع ملفات البيئة التي تحتوي على أسرار في الطرفيات المشتركة أو سجلات CI.
+
+## 6. تحقق من فهمك
+
+- أي خدمة `azure.yaml` تنشر التطبيق؟
+- أي معلمة بنية تحتية تستهلك كل قيمة قمت بتغييرها؟
+- أي تغييرات تتطلب توفيرًا بدلاً من النشر فقط؟
+- هل دعم الإقليم والاشتراك المختار النموذج والحصة؟
+- هل نجحت كل خطافات الإعداد، وهل يمكنك التحقق من سلوك التطبيق المنشور؟
+
+تابع إلى [تخصيص قالب](5-Customize-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية Co-op Translator (https://github.com/Azure/co-op-translator). نحن نسعى لتحقيق الدقة، لكن يرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المرجعي والموثوق. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. لن نتحمل المسؤولية عن أي سوء فهم أو تفسير ينشأ عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

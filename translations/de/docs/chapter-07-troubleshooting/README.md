@@ -1,22 +1,22 @@
-# Kapitel 7: Fehlersuche & Debugging
+# Kapitel 7: Fehlerbehebung & Debugging
 
-**📚 Kurs**: [AZD Für Einsteiger](../../README.md) | **⏱️ Dauer**: 1-1,5 Stunden | **⭐ Komplexität**: Mittelstufe
+**📚 Kurs**: [AZD für Anfänger](../../README.md) | **⏱️ Dauer**: 1-1,5 Stunden | **⭐ Komplexität**: Mittelstufe
 
 ---
 
-## Überblick
+## Übersicht
 
-Dieses Kapitel hilft Ihnen, häufige Probleme bei der Arbeit mit Azure Developer CLI zu diagnostizieren und zu beheben. Von Bereitstellungsfehlern bis hin zu KI-spezifischen Problemen.
+Dieses Kapitel hilft Ihnen, häufige Probleme bei der Arbeit mit der Azure Developer CLI zu diagnostizieren und zu beheben. Von Bereitstellungsfehlern bis hin zu AI-spezifischen Problemen.
 
-> Validiert mit `azd 1.27.1` im Juli 2026.
+> Befehlsanleitung wurde anhand des veröffentlichten `azd 1.37.2` Referenzdokuments überprüft. Cloud-Bereitstellungen wurden nicht ausgeführt. Ersetzen Sie Beispielressourcennamen und IDs, bevor Sie Befehle verwenden.
 
 ## Lernziele
 
 Nach Abschluss dieses Kapitels werden Sie:
-- Häufige AZD-Bereitstellungsfehler diagnostizieren
-- Authentifizierungs- und Berechtigungsprobleme debuggen
-- Verbindungsprobleme von KI-Diensten lösen
-- Azure Portal und CLI für die Fehlersuche nutzen
+- Häufige AZD-Bereitstellungsfehler diagnostizieren können
+- Authentifizierungs- und Berechtigungsprobleme debuggen können
+- AI-Dienst-Konnektivitätsprobleme lösen können
+- Azure Portal und CLI zur Fehlerbehebung verwenden können
 
 ---
 
@@ -25,8 +25,8 @@ Nach Abschluss dieses Kapitels werden Sie:
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
 | 1 | [Häufige Probleme](common-issues.md) | Häufig auftretende Probleme | 30 Min |
-| 2 | [Debugging-Anleitung](debugging.md) | Schritt-für-Schritt-Debugging-Strategien | 45 Min |
-| 3 | [KI-Fehlersuche](ai-troubleshooting.md) | KI-spezifische Probleme | 30 Min |
+| 2 | [Debugging-Anleitung](debugging.md) | Schritt-für-Schritt Debugging-Strategien | 45 Min |
+| 3 | [AI-Fehlerbehebung](ai-troubleshooting.md) | AI-spezifische Probleme | 30 Min |
 
 ---
 
@@ -34,13 +34,13 @@ Nach Abschluss dieses Kapitels werden Sie:
 
 ### Authentifizierungsprobleme
 ```bash
-# Erforderlich für AZD-Workflows
+# Required for AZD workflows
 azd auth login
 
-# Optional, wenn Sie auch direkt Azure CLI-Befehle verwenden
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
 ### Bereitstellungsfehler
@@ -51,8 +51,9 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Ressourcen-Konflikte
+Überprüfen Sie zuerst die bestehenden Ressourcen- und Bereitstellungsfehler. Löschen Sie nicht eine gemeinsam genutzte oder Produktionsumgebung, um einen Namenskonflikt zu beheben. Für eine **neue, entbehrliche Umgebung** verwenden Sie einen eindeutigen Namen:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
@@ -60,9 +61,11 @@ azd up
 ### Kontingent überschritten
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Das Ändern von `AZURE_LOCATION` verschiebt keine bestehenden Ressourcen und kann bei einer erneuten Bereitstellung zu Standortkonflikten führen.
 
 ---
 
@@ -70,25 +73,27 @@ azd up
 
 | Fehler | Ursache | Lösung |
 |-------|-------|----------|
-| `AuthenticationError` | Nicht eingeloggt | `azd auth login` |
-| `ResourceNotFound` | Ressource fehlt | Ressourcennamen prüfen |
-| `QuotaExceeded` | Abonnement-Limits | Kontingenterhöhung anfragen |
+| `AuthenticationError` | Nicht angemeldet | `azd auth login` |
+| `ResourceNotFound` | Fehlende Ressource | Überprüfen Sie Ressourcennamen |
+| `QuotaExceeded` | Abonnementlimits | Beantragen Sie eine Kontingenterhöhung |
 | `InvalidTemplate` | Bicep-Syntaxfehler | `az bicep build` |
-| `Conflict` | Ressource existiert bereits | Neuen Namen verwenden oder löschen |
-| `Forbidden` | Unzureichende Berechtigungen | RBAC-Rollen prüfen |
+| `Conflict` | Ressource existiert bereits | Verwenden Sie einen neuen Namen oder löschen Sie die Ressource |
+| `Forbidden` | Unzureichende Berechtigungen | Überprüfen Sie RBAC-Rollen |
 
 ---
 
-## 🔄 Zurücksetzen und Wiederherstellung
+## 🔄 Rücksetzen und Wiederherstellung
 
 ```bash
-# Weicher Neustart (Ressourcen behalten, Code neu bereitstellen)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Harter Neustart (alles löschen, neu starten)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Das harte Zurücksetzen löscht Daten und kann Endpunkte ändern. Sichern Sie zuerst die Daten und prüfen Sie die interaktiven Löschabfragen. `--force --purge` ist nur für entbehrliche Umgebungen geeignet, wenn eine irreversible Löschung beabsichtigt ist.
 
 ---
 
@@ -96,15 +101,15 @@ azd up
 
 | Richtung | Kapitel |
 |-----------|---------|
-| **Vorheriges** | [Kapitel 6: Vorbereitende Maßnahmen](../chapter-06-pre-deployment/README.md) |
+| **Vorheriges** | [Kapitel 6: Vorbereitungen vor der Bereitstellung](../chapter-06-pre-deployment/README.md) |
 | **Nächstes** | [Kapitel 8: Produktion](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/preflight-checks.md)
-- [Configuration Guide](../chapter-03-configuration/configuration.md)
+- [Vorbereitungsprüfungen](../chapter-06-pre-deployment/preflight-checks.md)
+- [Konfigurationsanleitung](../chapter-03-configuration/configuration.md)
 - [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 
 ---

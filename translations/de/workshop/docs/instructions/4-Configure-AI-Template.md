@@ -1,221 +1,25 @@
-# 4. Vorlage konfigurieren
+# 4. Eine Vorlage konfigurieren
 
 !!! tip "AM ENDE DIESES MODULS WERDEN SIE IN DER LAGE SEIN"
 
-    - [ ] Verstehen, wozu `azure.yaml` dient
-    - [ ] Die Struktur von `azure.yaml` verstehen
-    - [ ] Den Wert der azd-Lifecycle `hooks` verstehen
-    - [ ] **Lab 4:** Umgebungsvariablen erkunden und ändern
+    - [ ] Explain the purpose and structure of `azure.yaml`
+    - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
+    - [ ] Configure the selected environment using inputs supported by the template
+    - [ ] **Lab 4:** Review a configuration change before provisioning it
 
 ---
 
-!!! prompt "Was macht die Datei `azure.yaml`? Verwenden Sie einen Codeblock und erklären Sie sie Zeile für Zeile"
+## 1. Beginnen Sie mit der tatsächlichen Vorlage
 
-      Die `azure.yaml`-Datei ist die **Konfigurationsdatei für Azure Developer CLI (azd)**. Sie legt fest, wie Ihre Anwendung in Azure bereitgestellt werden soll, einschließlich Infrastruktur, Dienste, Bereitstellungs-Hooks und Umgebungsvariablen.
+Öffnen Sie die [`azure.yaml` in Erste Schritte mit KI-Agenten](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/azure.yaml) im Repository, das Sie initialisiert haben. Die Upstream-Vorlage kann sich unabhängig von diesem Workshop ändern. Der folgende **Auszug** wurde am 4. November 2026 geprüft; er ersetzt nicht die komplette Datei:
 
----
-
-## 1. Zweck und Funktionalität
-
-Diese `azure.yaml`-Datei dient als **Bereitstellungsplan** für eine KI-Agent-Anwendung, die:
-
-1. **Die Umgebung vor der Bereitstellung validiert**
-2. **Azure-AI-Dienste bereitstellt** (AI Hub, AI Project, Search usw.)
-3. **Eine Python-Anwendung** in Azure Container Apps bereitstellt
-4. **KI-Modelle konfiguriert** für sowohl Chat- als auch Embedding-Funktionalität
-5. **Monitoring und Tracing einrichtet** für die KI-Anwendung
-6. **Sowohl neue als auch bestehende** Azure-AI-Projekt-Szenarien unterstützt
-
-Die Datei ermöglicht die **Ein-Kommando-Bereitstellung** (`azd up`) einer vollständigen KI-Agent-Lösung mit geeigneter Validierung, Bereitstellung und Post-Bereitstellungs-Konfiguration.
-
-??? info "Zum Anzeigen erweitern: `azure.yaml`"
-
-      Die `azure.yaml`-Datei definiert, wie Azure Developer CLI diese KI-Agent-Anwendung in Azure bereitstellen und verwalten soll. Lassen Sie uns diese Zeile für Zeile aufschlüsseln.
-
-      ```yaml title="" linenums="0"
-
-      # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: do we need hooks? 
-      # TODO: do we need all of the variables?
-
-      name: azd-get-started-with-ai-agents
-      metadata:
-      template: azd-get-started-with-ai-agents@1.0.2
-      requiredVersions:
-      azd: ">=1.14.0"
-
-      hooks:
-      preup:
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-            interactive: true
-            continueOnError: false
-      windows:
-            shell: pwsh
-            run: ./scripts/validate_env_vars.ps1
-            interactive: true
-            continueOnError: false      
-      postprovision:
-      windows:
-            shell: pwsh
-            run: ./scripts/write_env.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-            continueOnError: true
-            interactive: true
-      postdeploy:
-      windows:
-            shell: pwsh
-            run: ./scripts/postdeploy.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-            continueOnError: true
-            interactive: true
-      services:
-      api_and_frontend:
-      project: ./src
-      language: py
-      host: containerapp
-      docker:
-            image: api_and_frontend
-            remoteBuild: true
-      pipeline:
-      variables:
-      - AZURE_RESOURCE_GROUP
-      - AZURE_AIHUB_NAME
-      - AZURE_AIPROJECT_NAME
-      - AZURE_AISERVICES_NAME
-      - AZURE_SEARCH_SERVICE_NAME
-      - AZURE_APPLICATION_INSIGHTS_NAME
-      - AZURE_CONTAINER_REGISTRY_NAME
-      - AZURE_KEYVAULT_NAME
-      - AZURE_STORAGE_ACCOUNT_NAME
-      - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-      - USE_CONTAINER_REGISTRY
-      - USE_APPLICATION_INSIGHTS
-      - USE_AZURE_AI_SEARCH_SERVICE
-      - AZURE_AI_AGENT_NAME
-      - AZURE_AI_AGENT_ID
-      - AZURE_AI_AGENT_DEPLOYMENT_NAME
-      - AZURE_AI_AGENT_DEPLOYMENT_SKU
-      - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-      - AZURE_AI_AGENT_MODEL_NAME
-      - AZURE_AI_AGENT_MODEL_FORMAT
-      - AZURE_AI_AGENT_MODEL_VERSION
-      - AZURE_AI_EMBED_DEPLOYMENT_NAME
-      - AZURE_AI_EMBED_DEPLOYMENT_SKU
-      - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-      - AZURE_AI_EMBED_MODEL_NAME
-      - AZURE_AI_EMBED_MODEL_FORMAT
-      - AZURE_AI_EMBED_MODEL_VERSION
-      - AZURE_AI_EMBED_DIMENSIONS
-      - AZURE_AI_SEARCH_INDEX_NAME
-      - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-      - AZURE_EXISTING_AIPROJECT_ENDPOINT
-      - AZURE_EXISTING_AGENT_ID
-      - ENABLE_AZURE_MONITOR_TRACING
-      - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-      ```
-
----
-
-## 2. Die Datei zerlegen
-
-Lassen Sie uns die Datei Abschnitt für Abschnitt durchgehen, um zu verstehen, was sie tut - und warum.
-
-### 2.1 **Header und Schema (1-3)**
-
-```yaml title="" linenums="0"
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-```
-
-- **Zeile 1**: Stellt die Schema-Validierung für den YAML Language Server bereit zur IDE-Unterstützung und IntelliSense
-
-### 2.2 Projektmetadaten (5-10)
-
-```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@1.0.2
+  template: azd-get-started-with-ai-agents@2.5.0
 requiredVersions:
   azd: ">=1.14.0"
-```
-
-- **Zeile 5**: Definiert den Projektnamen, der von Azure Developer CLI verwendet wird
-- **Zeilen 6-7**: Gibt an, dass dies auf einer Vorlage in Version 1.0.2 basiert
-- **Zeilen 8-9**: Erfordert Azure Developer CLI Version 1.14.0 oder höher
-
-### 2.3 Bereitstellungs-Hooks (11-40)
-
-```yaml title="" linenums="0"
-hooks:
-  preup:
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-      interactive: true
-      continueOnError: false
-    windows:
-      shell: pwsh
-      run: ./scripts/validate_env_vars.ps1
-      interactive: true
-      continueOnError: false      
-```
-
-- **Zeilen 11–20**: **Pre-Deployment-Hook** - wird vor `azd up` ausgeführt
-
-      - Auf Unix/Linux: Macht das Validierungsskript ausführbar und führt es aus
-      - Auf Windows: Führt das PowerShell-Validierungsskript aus
-      - Beide sind interaktiv und stoppen die Bereitstellung, wenn sie fehlschlagen
-
-```yaml  title="" linenums="0"
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Zeilen 21–30**: **Post-Provision-Hook** - wird ausgeführt, nachdem Azure-Ressourcen erstellt wurden
-
-  - Führt Skripte zum Schreiben von Umgebungsvariablen aus
-  - Setzt die Bereitstellung fort, selbst wenn diese Skripte fehlschlagen (`continueOnError: true`)
-
-```yaml title="" linenums="0"
-  postdeploy:
-    windows:
-      shell: pwsh
-      run: ./scripts/postdeploy.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Zeilen 31–40**: **Post-Deploy-Hook** - wird nach der Anwendungs-Bereitstellung ausgeführt
-
-  - Führt abschließende Einrichtungsskripte aus
-  - Setzt fort, auch wenn Skripte fehlschlagen
-
-### 2.4 Service-Konfiguration (41-48)
-
-Dies konfiguriert den Anwendungsdienst, den Sie bereitstellen.
-
-```yaml title="" linenums="0"
 services:
   api_and_frontend:
     project: ./src
@@ -226,162 +30,109 @@ services:
       remoteBuild: true
 ```
 
-- **Zeile 42**: Definiert einen Dienst namens "api_and_frontend"
-- **Zeile 43**: Zeigt auf das Verzeichnis `./src` für den Quellcode
-- **Zeile 44**: Gibt Python als Programmiersprache an
-- **Zeile 45**: Verwendet Azure Container Apps als Hosting-Plattform
-- **Zeilen 46–48**: Docker-Konfiguration
+- `name` identifiziert das AZD-Projekt; `metadata.template` protokolliert die Vorlagen-Version.
+- `requiredVersions.azd` ist das Minimum der Vorlage, keine Empfehlung, eine alte CLI-Version zu verwenden. Nutzen Sie eine aktuelle unterstützte AZD-Version.
+- `services` definiert die Bereitstellungsziele der Anwendung. Diese Vorlage stellt ihre Python-API und Frontend als einen Container Apps-Dienst bereit.
+- `project` ist relativ zu `azure.yaml`.
+- `remoteBuild` fordert einen Remote-Container-Build an. Ihre Identität benötigt weiterhin die erforderlichen Azure-Berechtigungen.
 
-      - Verwendet "api_and_frontend" als Image-Namen
-      - Baut das Docker-Image remote in Azure (nicht lokal)
+Die Bicep-Dateien der Vorlage unter `infra/`, nicht nur die `services`-Liste, deklarieren Ressourcen wie Microsoft Foundry, Modellbereitstellungen, Speicher und optional AI Search.
 
-### 2.5 Pipeline-Variablen (49-76)
+## 2. Verstehen Sie Lifecycle-Hooks
 
-Dies sind Variablen, die Ihnen helfen, `azd` in CI/CD-Pipelines für die Automatisierung auszuführen
+Untersuchen Sie den `hooks` Abschnitt und seine referenzierten Skripte, bevor Sie die Vorlage ausführen. Die geprüfte Version enthält:
 
-```yaml title="" linenums="0"
-pipeline:
-  variables:
-    - AZURE_RESOURCE_GROUP
-    - AZURE_AIHUB_NAME
-    - AZURE_AIPROJECT_NAME
-    - AZURE_AISERVICES_NAME
-    - AZURE_SEARCH_SERVICE_NAME
-    - AZURE_APPLICATION_INSIGHTS_NAME
-    - AZURE_CONTAINER_REGISTRY_NAME
-    - AZURE_KEYVAULT_NAME
-    - AZURE_STORAGE_ACCOUNT_NAME
-    - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-    - USE_CONTAINER_REGISTRY
-    - USE_APPLICATION_INSIGHTS
-    - USE_AZURE_AI_SEARCH_SERVICE
-    - AZURE_AI_AGENT_NAME
-    - AZURE_AI_AGENT_ID
-    - AZURE_AI_AGENT_DEPLOYMENT_NAME
-    - AZURE_AI_AGENT_DEPLOYMENT_SKU
-    - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-    - AZURE_AI_AGENT_MODEL_NAME
-    - AZURE_AI_AGENT_MODEL_FORMAT
-    - AZURE_AI_AGENT_MODEL_VERSION
-    - AZURE_AI_EMBED_DEPLOYMENT_NAME
-    - AZURE_AI_EMBED_DEPLOYMENT_SKU
-    - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-    - AZURE_AI_EMBED_MODEL_NAME
-    - AZURE_AI_EMBED_MODEL_FORMAT
-    - AZURE_AI_EMBED_MODEL_VERSION
-    - AZURE_AI_EMBED_DIMENSIONS
-    - AZURE_AI_SEARCH_INDEX_NAME
-    - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-    - AZURE_EXISTING_AIPROJECT_ENDPOINT
-    - AZURE_EXISTING_AGENT_ID
-    - ENABLE_AZURE_MONITOR_TRACING
-    - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-```
+| Hook | Zweck | Wichtiges Verhalten |
+|------|---------|--------------------|
+| `preup` | Validiert die Umgebungsvariablen der Vorlage vor dem `up` Arbeitsablauf | Plattform-spezifische Shell-Skripte können den Arbeitsablauf bei Fehler abbrechen |
+| `postdeploy` | Führen Sie vorlagenspezifische Einrichtung nach der Anwendungsbereitstellung aus | Untersuchen Sie `continueOnError` und die Skriptausgabe; eine erfolgreiche Bereitstellung beweist nicht, dass alle Einrichtungsschritte erfolgreich waren |
 
-Dieser Abschnitt definiert Umgebungsvariablen, die **während der Bereitstellung** verwendet werden, und ist nach Kategorien organisiert:
+Diese Version enthält **nicht** den älteren `postprovision` / `write_env` Hook, der in früherem Workshop-Material gezeigt wurde. Kopieren Sie keine Hook-Verweise auf Skripte, die nicht mehr existieren.
 
-- **Azure-Ressourcennamen (Zeilen 51–60)**:
-      - Kern-Azure-Dienstnamen, z. B. Ressourcengruppe, AI Hub, AI Project usw.- 
-- **Feature-Flags (Zeilen 61–63)**:
-      - Boolesche Variablen zum Aktivieren/Deaktivieren bestimmter Azure-Dienste
-- **KI-Agenten-Konfiguration (Zeilen 64–71)**:
-      - Konfiguration für den Haupt-KI-Agenten einschließlich Name, ID, Bereitstellungseinstellungen, Modelldetails- 
-- **KI-Embedding-Konfiguration (Zeilen 72–79)**:
-      - Konfiguration für das Embedding-Modell, das für die Vektor-Suche verwendet wird
-- **Suche und Monitoring (Zeilen 80–84)**:
-      - Name des Suchindex, vorhandene Ressourcen-IDs und Monitoring-/Tracing-Einstellungen
+Hook-Schlüssel wählen Lifecycle-Ereignisse aus; `posix` und `windows` wählen Plattformimplementierungen. `shell`, `run`, `interactive`, und `continueOnError` steuern die Ausführung. Dies sind ausführbare Skripte mit Ihren Berechtigungen, prüfen Sie sie also genauso sorgfältig wie Anwendungs-Code.
 
----
+Siehe die [AZD hooks-Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-extensibility) für den kompletten Lifecycle.
 
-## 3. Umgebungsvariablen
+## 3. Verfolgen Sie Umgebungsvariablen in die Infrastruktur
 
-Die folgenden Umgebungsvariablen steuern die Konfiguration und das Verhalten Ihrer Bereitstellung und sind nach ihrem Hauptzweck organisiert. Die meisten Variablen haben sinnvolle Standardwerte, aber Sie können sie an Ihre spezifischen Anforderungen oder vorhandenen Azure-Ressourcen anpassen.
+Führen Sie diese Befehle aus dem initialisierten Beispiel-Repository aus:
 
-### 3.1 Erforderliche Variablen 
-```bash title="" linenums="0"
-# Kernkonfiguration für Azure
-AZURE_ENV_NAME                    # Umgebungsname (wird bei der Ressourcenbenennung verwendet)
-AZURE_LOCATION                    # Bereitstellungsregion
-AZURE_SUBSCRIPTION_ID             # Zielabonnement
-AZURE_RESOURCE_GROUP              # Name der Ressourcengruppe
-AZURE_PRINCIPAL_ID                # Benutzerprinzipal für RBAC
-
-# Ressourcennamen (automatisch generiert, falls nicht angegeben)
-AZURE_AIHUB_NAME                  # Name des Microsoft Foundry-Hubs
-AZURE_AIPROJECT_NAME              # Name des KI-Projekts
-AZURE_AISERVICES_NAME             # Name des Kontos für KI-Dienste
-AZURE_STORAGE_ACCOUNT_NAME        # Name des Speicherkontos
-AZURE_CONTAINER_REGISTRY_NAME     # Name der Container-Registry
-AZURE_KEYVAULT_NAME               # Name des Key Vaults (falls verwendet)
-```
-
-### 3.2 Modellkonfiguration 
-```bash title="" linenums="0"
-# Konfiguration des Chat-Modells
-AZURE_AI_AGENT_MODEL_NAME         # Standard: gpt-4.1-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Standard: OpenAI (oder Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Standard: aktuell verfügbar
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Bereitstellungsname für das Chat-Modell
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Standard: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Standard: 80 (Tausende TPM)
-
-# Konfiguration des Einbettungsmodells
-AZURE_AI_EMBED_MODEL_NAME         # Standard: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Standard: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Standard: aktuell verfügbar
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Bereitstellungsname für Embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Standard: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Standard: 50 (Tausende TPM)
-
-# Agentenkonfiguration
-AZURE_AI_AGENT_NAME               # Anzeigename des Agenten
-AZURE_EXISTING_AGENT_ID           # Bestehenden Agenten verwenden (optional)
-```
-
-### 3.3 Feature-Toggle
-```bash title="" linenums="0"
-# Optionale Dienste
-USE_APPLICATION_INSIGHTS         # Standard: true
-USE_AZURE_AI_SEARCH_SERVICE      # Standard: false
-USE_CONTAINER_REGISTRY           # Standard: true
-
-# Monitoring und Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Standard: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Standard: false
-
-# Suchkonfiguration
-AZURE_AI_SEARCH_INDEX_NAME       # Name des Suchindexes
-AZURE_SEARCH_SERVICE_NAME        # Name des Suchdienstes
-```
-
-### 3.4 KI-Projektkonfiguration 
-```bash title="" linenums="0"
-# Vorhandene Ressourcen verwenden
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Vollständige Ressourcen-ID des bestehenden KI-Projekts
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpunkt-URL des bestehenden Projekts
-```
-
-### 3.5 Überprüfen Sie Ihre Variablen
-
-Verwenden Sie die Azure Developer CLI, um Ihre Umgebungsvariablen anzuzeigen und zu verwalten:
-
-```bash title="" linenums="0"
-# Alle Umgebungsvariablen der aktuellen Umgebung anzeigen
-azd env get-values
-
-# Eine bestimmte Umgebungsvariable abrufen
+```bash
+azd env list
 azd env get-value AZURE_ENV_NAME
-
-# Eine Umgebungsvariable setzen
-azd env set AZURE_LOCATION eastus
-
-# Mehrere Variablen aus einer .env-Datei setzen
-azd env set --from-file .env
+azd env get-value AZURE_LOCATION
 ```
+
+Untersuchen Sie `infra/main.parameters.json`, um zu sehen, welche Umgebungsvariablen die Vorlage tatsächlich nutzt. Das Setzen eines beliebigen Namens mit `azd env set` ändert nicht automatisch eine Azure-Ressource.
+
+Geprüfte Standardwerte umfassen:
+
+| Eingabe | Standard / Zweck |
+|-------|-------------------|
+| `AZURE_AI_AGENT_MODEL_NAME` | `gpt-5-mini` |
+| `AZURE_AI_AGENT_MODEL_VERSION` | `2025-08-07` |
+| `AZURE_AI_AGENT_DEPLOYMENT_SKU` | `GlobalStandard` |
+| `AZURE_AI_AGENT_DEPLOYMENT_CAPACITY` | `80`; Quoten-Einheiten hängen vom Modell und Bereitstellungstyp ab |
+| `AZURE_AI_EMBED_MODEL_NAME` | `text-embedding-3-small` |
+| `AZURE_AI_EMBED_DIMENSIONS` | `1536` |
+| `USE_APPLICATION_INSIGHTS` | `true` |
+| `USE_AZURE_AI_SEARCH_SERVICE` | `false` |
+| `ENABLE_AZURE_MONITOR_TRACING` | `false` |
+| `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` | `false`; deaktiviert lassen, solange Datenverarbeitung nicht überprüft wurde |
+
+Dies sind beispielspezifische Eingaben, keine globalen AZD-Einstellungen. Prüfen Sie die [Modell- und Regionsunterstützung](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) und das Kontingent Ihres Abonnements, bevor Sie ein Modell, SKU, Kapazität oder Standort auswählen. Interpretieren Sie nicht jede Kapazitätseinheit als 1000 Token pro Minute.
+
+Um ein anderes Chatmodell auszuwählen, aktualisieren Sie dessen kompatible **Name, Version, Format, SKU und Kapazität zusammen**, folgen Sie dem [Anleitung zur Anpassung des Beispiels](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md). Nur den Namen zu ändern, kann eine inkompatible Version oder Bereitstellungsart zurücklassen.
+
+## 4. Labor: optionale Suche und Nachverfolgung aktivieren
+
+!!! warning "Diese Einstellungen können kostenpflichtige Ressourcen hinzufügen"
+
+    Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
+
+```bash
+azd env set USE_AZURE_AI_SEARCH_SERVICE true
+azd env set USE_APPLICATION_INSIGHTS true
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+
+# Inspect the infrastructure changes and any configured preview hooks
+azd provision --preview
+
+# Apply the resource changes and deploy the application
+azd up
+```
+
+Infrastrukturänderungen benötigen eine Provisionierung; `azd deploy` allein stellt nur Anwendungsdienste bereit. Für Indexierung und unterstützte Abrufoptionen folgen Sie dem [AI Search Leitfaden](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md). Für Monitoring folgen Sie dem [Beobachtbarkeits-Leitfaden](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md).
+
+Aktivieren Sie kein Erfassen von Eingabe-/Antwortinhalten bei echten Kundendaten ohne erforderliche Zustimmung, Zugriffskontrollen, Aufbewahrungsrichtlinien und Schwärzung.
+
+## 5. Bestehende Ressourcen und CI/CD
+
+Um ein Foundry-Projekt wiederzuverwenden, befolgen Sie die [Anweisungen für vorhandene Ressourcen](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md#use-existing-resources) des Beispiels. Das Setzen von `AZURE_EXISTING_AIPROJECT_RESOURCE_ID` ändert den Bereitstellungspfad; in diesem Fall erstellt die Vorlage keine Application Insights oder AI Search für Sie. Überprüfen Sie explizit Abhängigkeiten, Rollenzuweisungen und Modellbereitstellungen.
+
+Der `pipeline.variables` Abschnitt steuert Werte, die an eine generierte Pipeline übergeben werden; er ist kein Geheimnisspeicher und erstellt keine Azure-Ressourcen. Bevorzugen Sie Managed Identity in der App und OIDC für CI/CD. AZD-Umgebungsdateien sind Klartext und sollten nicht eingecheckt werden.
+
+AZD unterstützt das Importieren einer vertrauenswürdigen, lokal vorbereiteten dotenv-Datei:
+
+```bash
+azd env set --file .env
+```
+
+Überprüfen Sie diese Datei vor dem Import und geben Sie Umgebungsdateien mit Geheimnissen nicht in gemeinsam genutzten Terminals oder CI-Protokollen aus.
+
+## 6. Überprüfen Sie Ihr Verständnis
+
+- Welcher `azure.yaml` Dienst stellt die Anwendung bereit?
+- Welcher Infrastrukturparameter nutzt jeden Wert, den Sie geändert haben?
+- Welche Änderungen erfordern eine Provisionierung und nicht nur eine Bereitstellung?
+- Unterstützten die ausgewählte Region und das Abonnement das Modell und Kontingent?
+- Haben alle Setup-Hooks erfolgreich funktioniert und können Sie das Verhalten der bereitgestellten Anwendung überprüfen?
+
+Fahren Sie fort mit [Anpassen einer Vorlage](5-Customize-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Haftungsausschluss**:
-Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Originalsprache ist als maßgebliche Quelle zu betrachten. Bei wichtigen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache gilt als maßgebliche Quelle. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

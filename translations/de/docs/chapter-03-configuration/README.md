@@ -1,22 +1,22 @@
 # Kapitel 3: Konfiguration & Authentifizierung
 
-**📚 Kurs**: [AZD für Anfänger](../../README.md) | **⏱️ Dauer**: 45-60 Minuten | **⭐ Komplexität**: Mittelstufe
+**📚 Kurs**: [AZD für Einsteiger](../../README.md) | **⏱️ Dauer**: 90-150 Minuten inklusive Integrationspraxis | **⭐ Komplexität**: Mittelstufe
 
 ---
 
 ## Übersicht
 
-Dieses Kapitel behandelt die Umgebungskonfiguration, Authentifizierungsmodelle und bewährte Sicherheitspraktiken für Azure Developer CLI-Einsätze.
+Dieses Kapitel behandelt Umgebungs-Konfiguration, Authentifizierungsmuster und Sicherheits-Best-Practices für Azure Developer CLI-Deployments.
 
-> Validiert mit `azd 1.27.1` im Juli 2026.
+> Ziel der Befehls- und Konfigurationsüberprüfung: `azd 1.37.2` (November 2026). Live Azure-Bereitstellung wurde während der Überprüfung nicht ausgeführt.
 
 ## Lernziele
 
 Nach Abschluss dieses Kapitels werden Sie:
-- Die AZD-Konfigurations-Hierarchie beherrschen
-- Mehrere Umgebungen (dev, staging, prod) verwalten
+- Die AZD-Konfigurationshierarchie beherrschen
+- Mehrere Umgebungen verwalten (Entwicklung, Staging, Produktion)
 - Sichere Authentifizierung mit verwalteten Identitäten implementieren
-- Umgebungsspezifische Einstellungen konfigurieren
+- Umgebungs-spezifische Einstellungen konfigurieren
 
 ---
 
@@ -24,59 +24,59 @@ Nach Abschluss dieses Kapitels werden Sie:
 
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
-| 1 | [Konfigurationsanleitung](configuration.md) | Einrichtung und Verwaltung der Umgebung | 30 Min |
-| 2 | [Authentifizierung & Sicherheit](authsecurity.md) | Muster für verwaltete Identität und RBAC | 30 Min |
+| 1 | [Konfigurationsanleitung](configuration.md) | Umgebungseinrichtung und -verwaltung | 30 Min |
+| 2 | [Authentifizierung & Sicherheit](authsecurity.md) | Verwaltete Identität und RBAC-Muster | 30 Min |
 
 ---
 
 ## 🚀 Schnellstart
 
+Führen Sie den Befehl vom Stammverzeichnis einer **bereits initialisierten azd-Anwendung** aus, nicht vom Kurs-Repository. Verwenden Sie ungenutzte Umgebungsnamen, falls diese bereits existieren.
+
 ```bash
-# Mehrere Umgebungen erstellen
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Umgebungen wechseln
+# Switch environments
 azd env select prod
 
-# Umgebungsvariablen setzen
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Konfiguration anzeigen
+# View configuration
 azd env get-values
 ```
 
+`SKU_NAME` ist illustrativ: Es beeinflusst die Infrastruktur nur, wenn Ihre Vorlage es explizit verwendet. Gewöhnliche `azd env set`-Werte werden lokal im Klartext gespeichert; sie sind kein sicherer Geheimnisspeicher.
+
 ---
 
-## 🔧 Konfigurations-Hierarchie
+## 🔧 Konfigurationshierarchie
 
-AZD wendet Einstellungen in folgender Reihenfolge an (jüngere überschreiben ältere):
-
-1. **Standardwerte** (in Vorlagen eingebaut)
-2. **azure.yaml** (Projektkonfiguration)
-3. **Umgebungsvariablen** (`azd env set`)
-4. **Kommandozeilenparameter** (`--location eastus`)
+Halten Sie drei verschiedene Konfigurationsbereiche getrennt: globale Präferenzen (`azd config`), Projektstruktur (`azure.yaml`) und umgebungsspezifische Werte (`azd env`). Flags überschreiben nur die Einstellungen, die sie tatsächlich unterstützen; es gibt keine universelle Überlagerung beliebiger Umgebungsvariablen auf `azure.yaml` oder Bicep.
 
 ---
 
 ## 🔐 Sicherheits-Best-Practices
 
 ```bash
-# Verwenden Sie verwaltete Identität (empfohlen)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Überprüfen Sie den AZD-Authentifizierungsstatus
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Optional: Überprüfen Sie den Azure CLI-Kontext, wenn Sie planen, az-Befehle auszuführen
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Bei Bedarf erneut authentifizieren
+# Re-authenticate if needed
 azd auth login
 
-# Optional: Azure CLI-Authentifizierung für az-Befehle aktualisieren
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -93,7 +93,7 @@ az login
 
 ## 📖 Verwandte Ressourcen
 
-- [Vorbereitende Prüfungen](../chapter-06-pre-deployment/README.md)
+- [Pre-Deployment-Prüfungen](../chapter-06-pre-deployment/README.md)
 - [Fehlerbehebung](../chapter-07-troubleshooting/common-issues.md)
 
 ---

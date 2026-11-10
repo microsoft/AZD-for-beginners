@@ -1,21 +1,21 @@
-# الفصل 1: الأساسيات والبدء السريع
+# الفصل 1: الأساسيات والبداية السريعة
 
-**📚 الدورة**: [AZD للمبتدئين](../../README.md) | **⏱️ المدة**: 30-45 دقيقة | **⭐ الصعوبة**: مبتدئ
+**📚 الدورة**: [AZD للمبتدئين](../../README.md) | **⏱️ المدة**: 75-120 دقيقة بما في ذلك النشر الأول؛ تستغرق التمارين الإضافية وقتًا أطول | **⭐ التعقيد**: مبتدئ
 
 ---
 
 ## نظرة عامة
 
-يقدم هذا الفصل أساسيات Azure Developer CLI (azd). ستتعلم المفاهيم الأساسية، تثبيت الأدوات، ونشر أول تطبيق لك على Azure.
+يقدم هذا الفصل أساسيات Azure Developer CLI (azd). ستتعلم المفاهيم الأساسية، تثبيت الأدوات، ونشر تطبيقك الأول على Azure.
 
-> تم التحقق باستخدام `azd 1.27.1` في يوليو 2026.
+> هدف مراجعة الأوامر والتكوين: `azd 1.37.2` (نوفمبر 2026). لم يتم تشغيل تزويد Azure المباشر أثناء المراجعة.
 
 ## أهداف التعلم
 
-بإكمال هذا الفصل، ستتمكن من:
+عند إكمال هذا الفصل، ستكون قادرًا على:
 - فهم ما هو Azure Developer CLI وكيف يختلف عن Azure CLI
 - تثبيت وتكوين AZD على منصتك
-- نشر أول تطبيق لك على Azure باستخدام `azd up`
+- نشر تطبيقك الأول على Azure باستخدام `azd up`
 - تنظيف الموارد باستخدام `azd down`
 
 ---
@@ -25,10 +25,10 @@
 | # | الدرس | الوصف | الوقت |
 |---|--------|-------------|------|
 | 1 | [أساسيات AZD](azd-basics.md) | المفاهيم الأساسية، المصطلحات، وهيكل المشروع | 15 دقيقة |
-| 2 | [التثبيت والإعداد](installation.md) | دلائل التثبيت حسب المنصة | 10 دقائق |
-| 3 | [مشروعك الأول](first-project.md) | عملي: نشر تطبيق ويب على Azure | 20 دقيقة |
-| 4 | [إضافة تطبيقك الخاص](bring-your-own-app.md) | إضافة azd إلى مشروع موجود لديك | 15 دقيقة |
-| 5 | [حاويات التطوير وبيئات الكود](dev-containers.md) | بيئات azd قابلة لإعادة الإنتاج بواسطة حاويات التطوير | 15 دقيقة |
+| 2 | [التثبيت والإعداد](installation.md) | إرشادات التثبيت الخاصة بالمنصة | 10 دقائق |
+| 3 | [مشروعك الأول](first-project.md) | تمرين عملي: نشر تطبيق ويب على Azure | 20 دقيقة |
+| 4 | [إحضار تطبيقك الخاص](bring-your-own-app.md) | إضافة azd إلى مشروع موجود لديك بالفعل | 15 دقيقة |
+| 5 | [حاويات التطوير و Codespaces](dev-containers.md) | بيئات azd قابلة لإعادة الإنتاج باستخدام حاويات التطوير | 15 دقيقة |
 
 ---
 
@@ -41,30 +41,32 @@
 .\validate-setup.ps1
 ```
 
-**ماك / لينكس:**
+**macOS / Linux:**
 ```bash
 bash ./validate-setup.sh
 ```
 
-إذا أبلغ السكربت عن أدوات مفقودة، قم بإصلاحها أولاً ثم تابع الفصل.
+إذا أبلغ البرنامج النصي عن أدوات مفقودة، قم بإصلاحها أولاً ثم تابع مع الفصل.
 
 ---
 
-## 🚀 البدء السريع
+## 🚀 البداية السريعة
 
 ```bash
-# تحقق من التثبيت
+# Check installation
 azd version
 
-# المصادقة لـ AZD
-# اختياري: سجل الدخول باستخدام az إذا كنت تخطط لتشغيل أوامر Azure CLI مباشرةً
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# قم بنشر تطبيقك الأول
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# قم بالتنظيف عند الانتهاء
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -75,11 +77,11 @@ azd down --force --purge
 بعد إكمال هذا الفصل، يجب أن تكون قادرًا على:
 
 ```bash
-azd version              # يعرض النسخة المثبتة
-azd init --template todo-nodejs-mongo  # يهيئ المشروع
-azd up                   # ينشر على Azure
-azd show                 # يعرض رابط التطبيق الجاري تشغيله
-azd down --force --purge # ينظف الموارد
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -88,16 +90,16 @@ azd down --force --purge # ينظف الموارد
 
 | الاتجاه | الفصل |
 |-----------|---------|
-| **التالي** | [الفصل 2: تطوير بالذكاء الاصطناعي أولاً](../chapter-02-ai-development/README.md) |
-| **تخطي إلى** | [الفصل 3: التكوين](../chapter-03-configuration/README.md) |
+| **التالي** | [الفصل 2: التطوير المعتمد على الذكاء الاصطناعي](../chapter-02-ai-development/README.md) |
+| **تجاوز إلى** | [الفصل 3: التكوين](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 موارد ذات صلة
+## 📖 الموارد ذات الصلة
 
 - [ورقة غش الأوامر](../../resources/cheat-sheet.md)
-- [الأسئلة الشائعة](../../resources/faq.md)
-- [المُعرّف](../../resources/glossary.md)
+- [الأسئلة المتكررة](../../resources/faq.md)
+- [مسرد المصطلحات](../../resources/glossary.md)
 
 ---
 

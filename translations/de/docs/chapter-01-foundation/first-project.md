@@ -1,43 +1,45 @@
-# Ihr erstes Projekt - Praxis-Tutorial
+# Ihr Erstes Projekt - Praktische Anleitung
 
-**Kapitel-Navigation:**
-- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
-- **📖 Aktuelles Kapitel**: Kapitel 1 - Grundlagen & Schneller Einstieg
-- **⬅️ Previous**: [Installation & Einrichtung](installation.md)
-- **➡️ Next**: [Konfiguration](configuration.md)
-- **🚀 Next Chapter**: [Kapitel 2: KI-First-Entwicklung](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Kapitel Navigation:**
+- **📚 Kurs Startseite**: [AZD Für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 1 - Grundlagen & Schneller Start
+- **⬅️ Vorheriges**: [Installation & Einrichtung](installation.md)
+- **➡️ Nächstes**: [Bring Your Own App](bring-your-own-app.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 2: AI-First Entwicklung](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Einleitung
+## Einführung
 
-Willkommen zu Ihrem ersten Azure Developer CLI-Projekt! Dieses umfassende Praxis-Tutorial bietet eine vollständige Schritt-für-Schritt-Anleitung zum Erstellen, Bereitstellen und Verwalten einer Full-Stack-Anwendung auf Azure mit azd. Sie arbeiten mit einer echten Todo-Anwendung, die ein React-Frontend, ein Node.js-API-Backend und eine MongoDB-Datenbank umfasst.
+Willkommen zu Ihrem ersten Azure Developer CLI Projekt! Sie werden eine Todo-Anwendung mit einem React-Frontend, Node.js API und Azure Cosmos DB bereitstellen. Die Vorlage behält den historischen Namen `todo-nodejs-mongo`; die aktuelle Infrastruktur verwendet Cosmos DB für NoSQL, also sehen Sie sich das heruntergeladene README und `infra/` an, anstatt die Datenbank-API aus dem Namen abzuleiten.
+
+> Überprüft gegenüber `azd 1.37.2` und der öffentlichen Vorlage im November 2026. Die folgenden Beispiele verwenden Bash; JSON-Extraktion erfordert außerdem `jq`. Azure-Bereitstellungen verursachen Kosten und wurden während dieser Überprüfung nicht ausgeführt.
 
 ## Lernziele
 
-Durch den Abschluss dieses Tutorials werden Sie:
-- Den azd-Projektinitialisierungs-Workflow mithilfe von Templates meistern
-- Die Projektstruktur und Konfigurationsdateien der Azure Developer CLI verstehen
-- Eine komplette Anwendungsbereitstellung auf Azure inklusive Infrastrukturprovisionierung durchführen
-- Anwendungsaktualisierungen und Redeploy-Strategien umsetzen
+Durch das Abschließen dieses Tutorials werden Sie:
+- Den azd Projektinitialisierungs-Workflow mit Vorlagen meistern
+- Die Azure Developer CLI Projektstruktur und Konfigurationsdateien verstehen
+- Eine komplette Anwendungsbereitstellung in Azure mit Infrastrukturbereitstellung ausführen
+- Anwendungsaktualisierungen und Wiederbereitstellungsstrategien implementieren
 - Mehrere Umgebungen für Entwicklung und Staging verwalten
 - Ressourcenbereinigung und Kostenmanagement anwenden
 
 ## Lernergebnisse
 
 Nach Abschluss werden Sie in der Lage sein:
-- azd-Projekte eigenständig aus Vorlagen zu initialisieren und zu konfigurieren
-- azd-Projektstrukturen effektiv zu navigieren und zu ändern
-- Full-Stack-Anwendungen mit einzelnen Befehlen nach Azure bereitzustellen
+- Azd-Projekte von Vorlagen selbständig zu initialisieren und zu konfigurieren
+- Azd-Projektstrukturen effektiv zu navigieren und zu modifizieren
+- Full-Stack-Anwendungen mit einem einzigen Befehl auf Azure bereitzustellen
 - Häufige Bereitstellungsprobleme und Authentifizierungsfehler zu beheben
-- Mehrere Azure-Umgebungen für unterschiedliche Bereitstellungsstufen zu verwalten
-- Continuous-Deployment-Workflows für Anwendungsaktualisierungen zu implementieren
+- Mehrere Azure-Umgebungen für unterschiedliche Bereitstellungsphasen zu verwalten
+- Continuous Deployment-Workflows für Anwendungsupdates zu implementieren
 
-## Loslegen
+## Erste Schritte
 
-### Voraussetzungen
+### Voraussetzungen Checkliste
 - ✅ Azure Developer CLI installiert ([Installationsanleitung](installation.md))
 - ✅ AZD-Authentifizierung mit `azd auth login` abgeschlossen
 - ✅ Git auf Ihrem System installiert
-- ✅ Node.js 16+ (für dieses Tutorial)
+- ✅ Node.js 22 LTS (oder eine von der Vorlage unterstützte Version)
 - ✅ Visual Studio Code (empfohlen)
 
 Bevor Sie fortfahren, führen Sie den Setup-Validator aus dem Repository-Stammverzeichnis aus:
@@ -46,68 +48,67 @@ Bevor Sie fortfahren, führen Sie den Setup-Validator aus dem Repository-Stammve
 
 **macOS / Linux:** `bash ./validate-setup.sh`
 
-### Einrichtung überprüfen
+### Überprüfen Sie Ihre Einrichtung
 ```bash
-# Überprüfe die azd-Installation
+# Check azd installation
 azd version
 
-# Überprüfe die AZD-Authentifizierung
+# Check AZD authentication
 azd auth login --check-status
 ```
 
-### Optionale Azure CLI-Authentifizierung überprüfen
+### Optionale Azure CLI Authentifizierung überprüfen
 
 ```bash
 az account show
 ```
 
-### Node.js-Version prüfen
+### Node.js Version überprüfen
 ```bash
 node --version
 ```
 
 ## Schritt 1: Vorlage auswählen und initialisieren
 
-Beginnen wir mit einer beliebten Todo-Anwendungs-Vorlage, die ein React-Frontend und ein Node.js-API-Backend enthält.
+Beginnen wir mit einer beliebten Todo-Anwendungs-Vorlage, die ein React-Frontend und einen Node.js API-Backend enthält.
 
 ```bash
-# Durchsuchen Sie verfügbare Vorlagen
+# Browse available templates
 azd template list
 
-# Initialisieren Sie die Todo-App-Vorlage
+# Initialize the todo app template
 mkdir my-first-azd-app
 cd my-first-azd-app
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
-# Folgen Sie den Eingabeaufforderungen:
-# - Geben Sie einen Namen für die Umgebung ein: "dev"
-# - Wählen Sie ein Abonnement (falls Sie mehrere haben)
-# - Wählen Sie eine Region: "East US 2" (oder Ihre bevorzugte Region)
+# Follow the prompts:
+# - Enter an environment name: "dev"
+# - Choose a subscription (if you have multiple)
+# - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### Was ist gerade passiert?
-- Den Vorlagen-Code in Ihr lokales Verzeichnis heruntergeladen
-- Eine `azure.yaml`-Datei mit Service-Definitionen erstellt
-- Infrastrukturcode im Verzeichnis `infra/` eingerichtet
-- Eine Umgebungskonfiguration erstellt
+### Was gerade passiert ist?
+- Die Vorlage wurde in Ihr lokales Verzeichnis heruntergeladen
+- Eine `azure.yaml` Datei mit Dienstdefinitionen wurde erstellt
+- Infrastrukturcode wurde im `infra/` Verzeichnis eingerichtet
+- Eine Umgebungskonfiguration wurde erstellt
 
 ## Schritt 2: Projektstruktur erkunden
 
-Schauen wir uns an, was azd für uns erstellt hat:
+Sehen wir uns an, was azd für uns erstellt hat:
 
 ```bash
-# Projektstruktur anzeigen
+# View the project structure
 tree /f   # Windows
-# oder
+# or
 find . -type f | head -20   # macOS/Linux
 ```
 
-Sie sollten sehen:
+Sie sollten Folgendes sehen:
 ```
 my-first-azd-app/
-├── .azd/
-│   └── config.json              # Project configuration
 ├── .azure/
+│   ├── config.json              # Selected local environment
 │   └── dev/                     # Environment-specific files
 ├── .devcontainer/               # Development container config
 ├── .github/workflows/           # GitHub Actions CI/CD
@@ -115,80 +116,77 @@ my-first-azd-app/
 ├── infra/                       # Infrastructure as code (Bicep)
 │   ├── main.bicep              # Main infrastructure template
 │   ├── main.parameters.json     # Parameters for deployment
-│   └── modules/                # Reusable infrastructure modules
+│   └── app/                    # Application infrastructure modules
 ├── src/
 │   ├── api/                    # Node.js backend API
 │   │   ├── src/               # API source code
-│   │   ├── package.json       # Node.js dependencies
-│   │   └── Dockerfile         # Container configuration
+│   │   └── package.json       # Node.js dependencies
 │   └── web/                   # React frontend
 │       ├── src/               # React source code
-│       ├── package.json       # React dependencies
-│       └── Dockerfile         # Container configuration
+│       └── package.json       # React dependencies
 ├── azure.yaml                  # azd project configuration
 └── README.md                   # Project documentation
 ```
 
 ### Wichtige Dateien zum Verstehen
 
-**azure.yaml** - Das Herz Ihres azd-Projekts:
+**azure.yaml** - Das Herzstück Ihres azd Projekts:
 ```bash
-# Projektkonfiguration anzeigen
+# View the project configuration
 cat azure.yaml
 ```
 
-**infra/main.bicep** - Infrastrukturbeschreibung:
+**infra/main.bicep** - Infrastrukturdefinition:
 ```bash
-# Infrastrukturcode anzeigen
+# View the infrastructure code
 head -30 infra/main.bicep
 ```
 
-## Schritt 3: Projekt anpassen (optional)
+## Schritt 3: Projekt anpassen (Optional)
 
-Bevor Sie bereitstellen, können Sie die Anwendung anpassen:
+Vor der Bereitstellung können Sie die Anwendung anpassen:
 
-### Frontend anpassen
+### Frontend modifizieren
 ```bash
-# Öffne die React-App-Komponente
-code src/web/src/App.tsx
+# Open the React app component
+code src/web/src/layout/header.tsx
 ```
 
 Nehmen Sie eine einfache Änderung vor:
-```typescript
-// Finde den Titel und ändere ihn
-<h1>My Awesome Todo App</h1>
+```tsx
+// Replace the existing <Text variant="xLarge">ToDo</Text> element
+<Text variant="xLarge">My Awesome Todo App</Text>
 ```
 
 ### Umgebungsvariablen konfigurieren
 ```bash
-# Benutzerdefinierte Umgebungsvariablen festlegen
+# Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# Alle Umgebungsvariablen anzeigen
+# View all environment variables
 azd env get-values
 ```
 
+Diese zwei benutzerdefinierten Werte demonstrieren nur lokale Speicherung. Die Standardvorlage verwendet weder `WEBSITE_TITLE` noch `API_VERSION`, daher ändern sie die App nicht. Die explizite Quelländerung oben ändert den angezeigten Titel.
+
 ## Schritt 4: Auf Azure bereitstellen
 
-Nun zum aufregenden Teil – alles auf Azure bereitstellen!
+Jetzt zum spannenden Teil – stellen Sie alles auf Azure bereit!
 
 ```bash
-# Infrastruktur und Anwendung bereitstellen
+# Deploy infrastructure and application
 azd up
 
-# Dieser Befehl führt Folgendes aus:
-# 1. Azure-Ressourcen bereitstellen (App Service, Cosmos DB, usw.)
-# 2. Ihre Anwendung erstellen
-# 3. Auf die bereitgestellten Ressourcen bereitstellen
-# 4. Die URL der Anwendung anzeigen
+# This command will:
+# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
+# 2. Build your application
+# 3. Deploy to the provisioned resources
+# 4. Display the application URL
 ```
 
 ### Was passiert während der Bereitstellung?
 
-Der Befehl `azd up` führt diese Schritte aus:
-1. **Provision** (`azd provision`) - Erstellt Azure-Ressourcen
-2. **Package** - Baut Ihren Anwendungscode
-3. **Deploy** (`azd deploy`) - Stellt Code auf Azure-Ressourcen bereit
+Der Workflow stellt Infrastruktur bereit und paketiert/bereitstellt Code. Die genaue Reihenfolge kann durch `workflows.up` in `azure.yaml` angepasst werden; diese Vorlage spezifiziert erst Provisionierung, dann Bereitstellung. Verlassen Sie sich nicht auf eine universelle Phasenreihenfolge für jede Vorlage.
 
 ### Erwartete Ausgabe
 ```
@@ -203,80 +201,82 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Schritt 5: Anwendung testen
+## Schritt 5: Ihre Anwendung testen
 
-### Auf Ihre Anwendung zugreifen
+### Zugang zu Ihrer Anwendung
 Klicken Sie auf die in der Bereitstellungsausgabe angegebene URL oder rufen Sie sie jederzeit ab:
 ```bash
-# Anwendungsendpunkte abrufen
+# Get application endpoints
 azd show
 
-# Öffnen Sie die Anwendung in Ihrem Browser
-azd show --output json | jq -r '.services.web.endpoint'
+# Open the application in your browser
+azd show --output json | jq -er '.services.web.ingressUrl'
 ```
 
-### Die Todo-App testen
+### Todo-App testen
 1. **Todo-Element hinzufügen** - Klicken Sie auf "Add Todo" und geben Sie eine Aufgabe ein
-2. **Als erledigt markieren** - Abgeschlossene Elemente abhaken
-3. **Elemente löschen** - Entfernen Sie Todos, die Sie nicht mehr benötigen
+2. **Als erledigt markieren** - Markieren Sie abgeschlossene Einträge
+3. **Elemente löschen** - Entfernen Sie nicht mehr benötigte Todos
 
 ### Ihre Anwendung überwachen
 ```bash
-# Azure-Portal für Ihre Ressourcen öffnen
+# Open Azure portal for your resources
 azd monitor
 
-# Anwendungsprotokolle anzeigen
+# View application logs
 azd monitor --logs
 
-# Live-Metriken anzeigen
+# View live metrics
 azd monitor --live
 ```
 
 ### ✅ Überprüfen Sie Ihre Bereitstellung
 
-Bevor Sie fortfahren, gehen Sie diese kurze Checkliste durch, um zu bestätigen, dass wirklich alles funktioniert — nehmen Sie nicht an, dass "deploy succeeded" bedeutet, dass "app works":
+Gehen Sie diese kurze Checkliste durch, um sicherzustellen, dass alles tatsächlich funktioniert – gehen Sie nicht davon aus, dass "Bereitstellung erfolgreich" bedeutet "App funktioniert":
 
 ```bash
-# 1. Bestätigen Sie, dass der Endpunkt existiert und erreichbar ist
+# 1. Confirm the endpoint exists and is reachable
 azd show
 
-# 2. Führen Sie einen Smoke-Test des Endpunkts durch (erwartet HTTP 200)
-curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+# 2. Smoke-test the endpoint (expects HTTP 200)
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error --location "$WEB_URL"
 
-# 3. Prüfen Sie den Health-Endpunkt, falls Ihre Anwendung einen bereitstellt
-curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+# 3. Test the API's actual list route (the template has no /health route)
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail --show-error "$API_URL/lists"
 ```
 
-**Die Bereitstellung ist verifiziert, wenn:**
-- ✅ `azd show` listet eine erreichbare Endpunkt-URL auf
-- ✅ Die URL öffnet sich in Ihrem Browser ohne Fehler
-- ✅ Kernfunktionen funktionieren (todo hinzufügen/als erledigt markieren/löschen)
-- ✅ `azd monitor --logs` zeigt ankommende Anfragen ohne unerwartete Fehler
+**Die Bereitstellung ist bestätigt, wenn:**
+- ✅ `azd show` eine erreichbare Endpunkt-URL auflistet
+- ✅ Die URL im Browser ohne Fehler geöffnet wird
+- ✅ Kernfunktionen funktionieren (todo hinzufügen/abscheiden/löschen)
+- ✅ `azd monitor --logs` zeigt eingehende Anfragen ohne unerwartete Fehler
 
-Wenn eine Prüfung fehlschlägt, springen Sie zu [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md).
+Wenn eine Überprüfung fehlschlägt, springen Sie zu [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md).
 
-## Schritt 6: Änderungen vornehmen und neu bereitstellen
+## Schritt 6: Änderungen vornehmen und erneut bereitstellen
 
-Nehmen wir eine Änderung vor und sehen wir, wie einfach ein Update ist:
+Nehmen wir eine Änderung vor und sehen, wie einfach es ist zu aktualisieren:
 
-### API anpassen
+### API modifizieren
 ```bash
-# Bearbeite den API-Code
-code src/api/src/routes/lists.js
+# Edit the API code
+code src/api/src/routes/lists.ts
 ```
 
-Einen benutzerdefinierten Antwort-Header hinzufügen:
+Fügen Sie einen benutzerdefinierten Antwort-Header hinzu:
 ```javascript
-// Finde einen Route-Handler und füge Folgendes hinzu:
+// Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Nur die Code-Änderungen bereitstellen
+### Nur Code-Änderungen bereitstellen
 ```bash
-# Nur den Anwendungscode bereitstellen (Infrastruktur überspringen)
+# Deploy only the application code (skip infrastructure)
 azd deploy
 
-# Das ist viel schneller als 'azd up', da die Infrastruktur bereits vorhanden ist.
+# This is much faster than 'azd up' since infrastructure already exists
 ```
 
 ## Schritt 7: Mehrere Umgebungen verwalten
@@ -284,160 +284,158 @@ azd deploy
 Erstellen Sie eine Staging-Umgebung, um Änderungen vor der Produktion zu testen:
 
 ```bash
-# Erstelle eine neue Staging-Umgebung
+# Create a new staging environment
 azd env new staging
 
-# Auf die Staging-Umgebung bereitstellen
+# Deploy to staging
 azd up
 
-# Zurück zur Entwicklungsumgebung wechseln
+# Switch back to dev environment
 azd env select dev
 
-# Alle Umgebungen auflisten
+# List all environments
 azd env list
 ```
 
 ### Umgebungsvergleich
 ```bash
-# Entwicklungsumgebung anzeigen
+# View dev environment
 azd env select dev
 azd show
 
-# Staging-Umgebung anzeigen
+# View staging environment  
 azd env select staging
 azd show
 ```
 
 ## Schritt 8: Ressourcen bereinigen
 
-Wenn Sie mit dem Experimentieren fertig sind, bereinigen Sie die Ressourcen, um fortlaufende Kosten zu vermeiden:
+Wenn Sie fertig sind, bereinigen Sie, um laufende Kosten zu vermeiden:
 
 ```bash
-# Alle Azure-Ressourcen für die aktuelle Umgebung löschen
-azd down
+# Review and delete BOTH environments created in this tutorial
+azd down --environment dev
+azd down --environment staging
 
-# Löschung ohne Bestätigung erzwingen und softgelöschte Ressourcen bereinigen
-azd down --force --purge
-
-# Spezifische Umgebung löschen
-azd env select staging
-azd down --force --purge
+# Automation alternative for a selected disposable environment:
+# azd down --environment dev --force --purge
+# --purge affects supported soft-deleted Azure resources, not local .azure files.
 ```
 
 ## Klassische App vs. KI-gestützte App: Gleicher Workflow
 
-Sie haben gerade eine traditionelle Webanwendung bereitgestellt. Was aber, wenn Sie stattdessen eine KI-gestützte App bereitstellen möchten – zum Beispiel eine Chat-Anwendung, die von Microsoft Foundry Models unterstützt wird?
+Sie haben gerade eine traditionelle Webanwendung bereitgestellt. Aber was, wenn Sie stattdessen eine KI-gestützte App bereitstellen wollten – etwa eine Chat-Anwendung, die von Microsoft Foundry Models unterstützt wird?
 
 Die gute Nachricht: **der Workflow ist identisch.**
 
-| Schritt | Klassische Todo-App | KI-Chat-App |
+| Schritt | Klassische Todo App | KI Chat App |
 |------|-----------------|-------------|
-| Initialisieren | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Initialisieren (leeres Verzeichnis) | `azd init --template todo-nodejs-mongo .` | `azd init --template azure-search-openai-demo .` |
 | Authentifizieren | `azd auth login` | `azd auth login` |
 | Bereitstellen | `azd up` | `azd up` |
 | Überwachen | `azd monitor` | `azd monitor` |
 | Bereinigen | `azd down --force --purge` | `azd down --force --purge` |
 
-Der einzige Unterschied ist die **Vorlage**, von der Sie ausgehen. Eine KI-Vorlage enthält zusätzliche Infrastruktur (wie eine Microsoft Foundry Models-Ressource oder einen AI Search-Index), aber azd übernimmt all das für Sie. Sie müssen keine neuen Befehle lernen, kein anderes Tool übernehmen oder Ihre Denkweise zur Bereitstellung ändern.
+Die Lebenszyklusbefehle sind gleich, aber die Voraussetzungen unterscheiden sich. Eine KI-Vorlage kann Modellzugang, regionale Kontingente, Datenaufnahme und zusätzliche Konfiguration erfordern. Lesen Sie die README vor der Bereitstellung; `azd up` kann fehlende Berechtigungen oder Kontingente nicht bereitstellen.
 
-Das ist das Kernprinzip von azd: **ein Workflow, jede Arbeitslast.** Die Fähigkeiten, die Sie in diesem Tutorial geübt haben — Initialisierung, Bereitstellung, Überwachung, erneute Bereitstellung und Bereinigung — gelten gleichermaßen für KI-Anwendungen und Agenten.
+Das ist das Kernprinzip von azd: **ein Workflow, jede Arbeitslast.** Die in diesem Tutorial geübten Fähigkeiten — Initialisierung, Bereitstellung, Überwachung, Wiederbereitstellung und Bereinigung — gelten gleichermaßen für KI-Anwendungen und Agenten.
 
 ---
 
 ## Was Sie gelernt haben
 
-Glückwunsch! Sie haben erfolgreich:
-- ✅ Ein azd-Projekt aus einer Vorlage initialisiert
+Herzlichen Glückwunsch! Sie haben erfolgreich:
+- ✅ Ein azd Projekt von einer Vorlage initialisiert
 - ✅ Die Projektstruktur und wichtige Dateien erkundet
-- ✅ Eine Full-Stack-Anwendung auf Azure bereitgestellt
-- ✅ Codeänderungen vorgenommen und neu bereitgestellt
+- ✅ Eine Full-Stack-Anwendung in Azure bereitgestellt
+- ✅ Codeänderungen vorgenommen und erneut bereitgestellt
 - ✅ Mehrere Umgebungen verwaltet
 - ✅ Ressourcen bereinigt
 
-## 🎯 Übungen zur Kompetenzüberprüfung
+## 🎯 Fähigkeits-Validierungs-Übungen
 
 ### Übung 1: Eine andere Vorlage bereitstellen (15 Minuten)
-**Ziel**: Beherrschung von azd init und dem Bereitstellungs-Workflow demonstrieren
+**Ziel**: Beherrschung von azd init und Bereitstellungs-Workflow demonstrieren
 
 ```bash
-# Python + MongoDB-Stack ausprobieren
+# Try Python + MongoDB stack
 mkdir todo-python && cd todo-python
-azd init --template todo-python-mongo
+azd init --template todo-python-mongo .
 azd up
 
-# Bereitstellung überprüfen
+# Verify deployment
 azd show
-curl $(azd show --output json | jq -r '.services.web.endpoint')
+curl --fail "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Aufräumen
+# Clean up
 azd down --force --purge
 ```
 
 **Erfolgskriterien:**
-- [ ] Anwendung wird ohne Fehler bereitgestellt
-- [ ] Kann die Anwendungs-URL im Browser aufrufen
-- [ ] Anwendung funktioniert korrekt (hinzufügen/entfernen von Todos)
-- [ ] Alle Ressourcen wurden erfolgreich bereinigt
+- [ ] Anwendung fehlerfrei bereitstellen
+- [ ] Auf die Anwendungs-URL im Browser zugreifen können
+- [ ] Anwendung funktioniert korrekt (Todos hinzufügen/entfernen)
+- [ ] Alle Ressourcen erfolgreich bereinigt
 
 ### Übung 2: Konfiguration anpassen (20 Minuten)
-**Ziel**: Umgang mit Umgebungsvariablen üben
+**Ziel**: Üben von lokaler Umgebungswertspeicherung ohne Verwechslung mit Laufzeitkonfiguration
 
 ```bash
-cd my-first-azd-app
+# Return to your original my-first-azd-app directory first
 
-# Benutzerdefinierte Umgebung erstellen
+# Create custom environment
 azd env new custom-config
 
-# Benutzerdefinierte Variablen setzen
+# Set custom variables
 azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
 
-# Variablen überprüfen
+# Verify variables
 azd env get-values | grep APP_TITLE
 
-# Mit benutzerdefinierter Konfiguration bereitstellen
-azd up
+# Check one value exactly; expected: My Custom Todo App
+azd env get-value APP_TITLE
 ```
 
 **Erfolgskriterien:**
-- [ ] Benutzerdefinierte Umgebung erfolgreich erstellt
+- [ ] Eigene Umgebung erfolgreich erstellt
 - [ ] Umgebungsvariablen gesetzt und abrufbar
-- [ ] Anwendung wird mit benutzerdefinierter Konfiguration bereitgestellt
-- [ ] Kann benutzerdefinierte Einstellungen in der bereitgestellten Anwendung verifizieren
+- [ ] `azd env get-value APP_TITLE` gibt `My Custom Todo App` aus
+- [ ] Erklären können, warum diese Werte die Standard-App nicht ändern, es sei denn, Code/Infrastruktur konsumieren sie
 
-### Übung 3: Multi-Environment-Workflow (25 Minuten)
-**Ziel**: Umgebungsverwaltung und Bereitstellungsstrategien meistern
+### Übung 3: Multi-Umgebungs-Workflow (25 Minuten)
+**Ziel**: Verwaltung von Umgebungen und Bereitstellungsstrategien meistern
 
 ```bash
-# Entwicklungsumgebung erstellen
+# Create dev environment
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# Dev-URL notieren
-DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Dev: $DEV_URL"
 
-# Staging-Umgebung erstellen
+# Create staging environment
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# Staging-URL notieren
-STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Staging: $STAGING_URL"
 
-# Umgebungen vergleichen
+# Compare environments
 azd env list
 
-# Beide Umgebungen testen
-curl "$DEV_URL/health"
-curl "$STAGING_URL/health"
+# Test both environments
+curl --fail "$DEV_URL"
+curl --fail "$STAGING_URL"
 
-# Beide Umgebungen bereinigen
+# Clean up both
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
@@ -453,109 +451,109 @@ azd env select staging-$(whoami) && azd down --force --purge
 
 **Investierte Zeit**: ~60-90 Minuten  
 **Erworbene Fähigkeiten**:
-- ✅ Template-basierte Projektinitialisierung
-- ✅ Azure-Ressourcenprovisionierung
-- ✅ Anwendungs-Bereitstellungsworkflows
-- ✅ Umgebungsverwaltung
+- ✅ Projektinitialisierung basierend auf Vorlagen
+- ✅ Azure Ressourcenbereitstellung
+- ✅ Anwendungsbereitstellungs-Workflows
+- ✅ Umweltverwaltung
 - ✅ Konfigurationsmanagement
 - ✅ Ressourcenbereinigung und Kostenmanagement
 
-**Nächster Schritt**: Sie sind bereit für den [Konfigurationsleitfaden](configuration.md), um fortgeschrittene Konfigurationsmuster zu lernen!
+**Nächste Stufe**: Sie sind bereit für den [Konfigurationsleitfaden](../chapter-03-configuration/configuration.md), um fortgeschrittene Konfigurationsmuster zu lernen!
 
-## Fehlersuche bei häufigen Problemen
+## Fehlerbehebung bei häufigen Problemen
 
 ### Authentifizierungsfehler
 ```bash
-# Erneut bei Azure authentifizieren
-az login
+# Re-authenticate with azd (az login does not refresh azd's default credentials)
+azd auth login
 
-# Zugriff auf das Abonnement überprüfen
-az account show
+# Verify the selected environment's subscription
+azd env get-value AZURE_SUBSCRIPTION_ID
 ```
 
 ### Bereitstellungsfehler
 ```bash
-# Debug-Protokollierung aktivieren
-export AZD_DEBUG=true
+# Enable debug logging
 azd up --debug
 
-# Anwendungsprotokolle in Azure anzeigen
+# View application logs in Azure
 azd monitor --logs
 
-# Für Container Apps verwenden Sie die Azure CLI:
+# For Container Apps, use Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
-### Konflikte bei Ressourcennamen
+### Namenskonflikte bei Ressourcen
 ```bash
-# Verwenden Sie einen eindeutigen Umgebungsnamen
+# Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### Port-/Netzwerkprobleme
 ```bash
-# Überprüfen, ob Ports verfügbar sind
+# Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
 ## Nächste Schritte
 
-Nachdem Sie Ihr erstes Projekt abgeschlossen haben, erkunden Sie diese fortgeschrittenen Themen:
+Jetzt, da Sie Ihr erstes Projekt abgeschlossen haben, erkunden Sie diese fortgeschrittenen Themen:
 
 ### 1. Infrastruktur anpassen
 - [Infrastruktur als Code](../chapter-04-infrastructure/provisioning.md)
-- [Datenbanken, Speicher und andere Dienste hinzufügen](../chapter-04-infrastructure/provisioning.md#adding-services)
+- [Datenbankinfrastruktur hinzufügen](../chapter-04-infrastructure/provisioning.md#%EF%B8%8F-database-provisioning)
 
 ### 2. CI/CD einrichten
-- [Bereitstellungsleitfaden](../chapter-04-infrastructure/deployment-guide.md) - Vollständige CI/CD-Workflows
-- [Azure Developer CLI-Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Pipeline-Konfiguration
+- [Bereitstellungsleitfaden](../chapter-04-infrastructure/deployment-guide.md) - Vollständige CI/CD Workflows
+- [Azure Developer CLI Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Pipeline-Konfiguration
 
-### 3. Best Practices für die Produktion
-- [Bereitstellungsleitfaden](../chapter-04-infrastructure/deployment-guide.md) - Sicherheit, Leistung und Überwachung
+### 3. Best Practices für Produktion
+- [Bereitstellungsleitfaden](../chapter-04-infrastructure/deployment-guide.md) - Sicherheit, Performance und Überwachung
 
-### 4. Weitere Vorlagen entdecken
+### 4. Weitere Vorlagen erkunden
 ```bash
-# Vorlagen nach Kategorie durchsuchen
+# Browse templates by category
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Verschiedene Technologie-Stacks ausprobieren
-azd init --template todo-python-mongo
-azd init --template todo-csharp-sql
-azd init --template todo-java-mongo
+# Try different technology stacks
+# Choose ONE in a new empty directory, not all three in the same project
+azd init --template todo-python-mongo .
+# azd init --template todo-csharp-sql .
+# azd init --template todo-java-mongo .
 ```
 
 ## Zusätzliche Ressourcen
 
 ### Lernmaterialien
-- [Azure Developer CLI-Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Developer CLI Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Community & Support
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Entwickler-Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Vorlagen & Beispiele
 - [Offizielle Vorlagengalerie](https://azure.github.io/awesome-azd/)
-- [Community-Vorlagen](https://github.com/Azure-Samples/azd-templates)
-- [Unternehmensmuster](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Community-Vorlagenbeiträge](https://github.com/Azure/awesome-azd)
+- [Todo Vorlagenquelle](https://github.com/Azure-Samples/todo-nodejs-mongo)
 
 ---
 
-**Herzlichen Glückwunsch zum Abschluss Ihres ersten azd-Projekts!** Sie sind nun bereit, großartige Anwendungen sicher auf Azure zu entwickeln und bereitzustellen.
+**Gratulation zum Abschluss Ihres ersten azd Projekts!** Sie sind nun bereit, mit Zuversicht großartige Anwendungen auf Azure zu erstellen und bereitzustellen.
 
 ---
 
-**Kapitel-Navigation:**
-- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
-- **📖 Aktuelles Kapitel**: Kapitel 1 - Grundlagen & Schneller Einstieg
-- **⬅️ Previous**: [Installation & Einrichtung](installation.md)
-- **➡️ Next**: [Bring Your Own App](bring-your-own-app.md)
-- **🚀 Next Chapter**: [Kapitel 2: KI-First-Entwicklung](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Kapitel Navigation:**
+- **📚 Kurs Startseite**: [AZD Für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 1 - Grundlagen & Schneller Start
+- **⬅️ Vorheriges**: [Installation & Einrichtung](installation.md)
+- **➡️ Nächstes**: [Bring Your Own App](bring-your-own-app.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 2: AI-First Entwicklung](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 

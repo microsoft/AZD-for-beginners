@@ -1,73 +1,75 @@
-# فحوصات ما قبل الإقلاع لنشر AZD
+# فحوصات ما قبل الطيران لنشر AZD
 
 **تنقل الفصل:**
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
 - **📖 الفصل الحالي**: الفصل 6 - التحقق والتخطيط قبل النشر
 - **⬅️ السابق**: [اختيار SKU](sku-selection.md)
 - **➡️ الفصل التالي**: [الفصل 7: استكشاف الأخطاء وإصلاحها](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 ذات صلة**: [الفصل 4: دليل النشر](../chapter-04-infrastructure/deployment-guide.md)
+- **🔧 ذو صلة**: [الفصل 4: دليل النشر](../chapter-04-infrastructure/deployment-guide.md)
 
-## المقدمة
+## مقدمة
 
-يوفر هذا الدليل الشامل نصوصًا وإجراءات تحقق ما قبل النشر لضمان نجاح نشرات Azure Developer CLI قبل أن تبدأ. تعلّم كيفية تنفيذ فحوصات مؤتمتة للمصادقة، وتوافر الموارد، والحصص، والامتثال الأمني، ومتطلبات الأداء لمنع فشل النشر وتحسين معدلات نجاح النشر.
+يقدم هذا الدليل الشامل نصوص وإجراءات التحقق قبل النشر لضمان نجاح نشر Azure Developer CLI قبل البدء. تعلّم كيفية تنفيذ فحوصات آلية للتحقق من المصادقة، وتوفر الموارد، والحصص، والامتثال الأمني، ومتطلبات الأداء لمنع فشل النشر وتحسين معدلات نجاح النشر.
 
 ## أهداف التعلم
 
-بإكمال هذا الدليل، ستتمكن من:
-- إتقان تقنيات ونصوص التحقق الآلي ما قبل النشر
-- فهم استراتيجيات التحقق الشاملة للمصادقة والأذونات والحصص
-- تنفيذ إجراءات تحقق من توافر الموارد والسعة
-- تكوين فحوصات الأمان والامتثال لسياسات المؤسسة
-- تصميم تدفقات عمل لتقدير التكلفة والتحقق من الميزانية
-- إنشاء أتمتة فحوصات ما قبل الإقلاع مخصصة لخطوط CI/CD
+بعد إكمال هذا الدليل، سوف:
+- تتقن تقنيات ونصوص التحقق الآلي قبل النشر
+- تفهم استراتيجيات الفحص الشاملة للمصادقة والصلاحيات والحصص
+- تنفذ إجراءات التحقق من توفر الموارد والقدرة
+- تضبط فحوصات الأمان والامتثال لسياسات المؤسسة
+- تصمم سير عمل تقدير التكلفة والتحقق من الميزانية
+- تخلق أتمتة فحوصات ما قبل الطيران مخصصة لأنابيب CI/CD
 
 ## مخرجات التعلم
 
 عند الانتهاء، ستكون قادرًا على:
-- إنشاء وتشغيل نصوص تحقق شاملة ما قبل الإقلاع
-- تصميم تدفقات عمل تحقق مؤتمتة لسيناريوهات نشر مختلفة
-- تنفيذ إجراءات سياسات تحقق خاصة بالبيئة
-- تكوين المراقبة والتنبيه الاستباقي لجاهزية النشر
+- إنشاء وتنفيذ نصوص تحقق شاملة ما قبل الطيران
+- تصميم سير عمل الفحص الآلي لسيناريوهات نشر مختلفة
+- تنفيذ إجراءات وسياسات تحقق خاصة بالبيئة
+- ضبط مراقبة استباقية وتنبيهات لاستعداد النشر
 - استكشاف مشكلات ما قبل النشر وتنفيذ إجراءات تصحيحية
-- دمج فحوصات ما قبل الإقلاع في خطوط DevOps وأتمتة العمل
+- دمج فحوصات ما قبل الطيران في أنابيب DevOps وسير عمل الأتمتة
 
 ## جدول المحتويات
 
-- [نظرة عامة](#نظرة-عامة)
-- [البرنامج النصي الآلي لفحوصات ما قبل النشر](#البرنامج-النصي-الآلي-لفحوصات-ما-قبل-النشر)
-- [قائمة التحقق اليدوية](#codeblock1)
-- [التحقق من البيئة](#✅-النسخ-الاحتياطي-والاسترداد)
-- [التحقق من الموارد](#التحقق-من-بيئة-الإنتاج)
-- [فحوصات الأمن والامتثال](#security--compliance-checks)
-- [التخطيط للأداء والسعة](#performance--capacity-planning)
-- [استكشاف المشكلات الشائعة](#troubleshooting-common-issues)
+- [نظرة عامة](#overview)
+- [نص فحص ما قبل الطيران الآلي](#automated-pre-flight-script)
+- [قائمة التحقق اليدوية](#manual-validation-checklist)
+- [التحقق من البيئة](#environment-validation)
+- [التحقق من الموارد](#resource-validation)
+- [فحوصات الأمان والامتثال](#security--compliance-checks)
+- [تخطيط الأداء والقدرة](capacity-planning.md)
+- [استكشاف المشكلات الشائعة](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 ## نظرة عامة
 
-فحوصات ما قبل الإقلاع هي تحقق أساسي يُجرى قبل النشر لضمان:
+فحوصات ما قبل الطيران هي عمليات تحقق أساسية تُجرى قبل النشر لضمان:
 
 - **توفر الموارد** والحصص في المناطق المستهدفة
-- **المصادقة والأذونات** مهيأة بشكل صحيح
+- **تهيئة المصادقة والصلاحيات** بشكل صحيح
 - **صلاحية القوالب** وصحة المعاملات
-- **اتصال الشبكة** والاعتمادات
-- **الامتثال الأمني** لسياسات المؤسسة
-- **تقدير التكلفة** ضمن قيود الميزانية
+- **الاتصال بالشبكة** والاعتمادية
+- **الامتثال الأمني** مع سياسات المؤسسة
+- **تقدير التكلفة** ضمن حدود الميزانية
 
-### متى تشغّل فحوصات ما قبل الإقلاع
+### متى يتم تشغيل فحوصات ما قبل الطيران
 
 - **قبل أول نشر** إلى بيئة جديدة
-- **بعد تغييرات كبيرة في القوالب**
+- **بعد تغييرات كبيرة في القالب**
 - **قبل نشرات الإنتاج**
 - **عند تغيير مناطق Azure**
-- **كجزء من خطوط CI/CD**
+- **كجزء من أنابيب CI/CD**
 
 ---
 
-## البرنامج النصي الآلي لفحوصات ما قبل النشر
+## نص فحص ما قبل الطيران الآلي
 
-### مدقق فحوصات ما قبل النشر لـ PowerShell
+> **النطاق والمتطلبات المسبقة:** هذه نصوص بداية لتخزينها في مشروعك الخاص، وليست ملفات محلية مقدمة بهذا الفصل. يتطلب إصدار PowerShell نسخة PowerShell **7.3+** (لنقل أخطاء الأوامر الأصلية) ووحدة `powershell-yaml` لـ `ConvertFrom-Yaml`. يحتاج إصدار Bash إلى Bash، `jq`، Python 3.10+، و PyYAML. يتطلب كلاهما Azure CLI وazd ومشروع Bicep يعمل. هي للتشخيصات، وليست دليلاً على جاهزية النشر أو القدرة أو الامتثال. فحص خطافات القالب قبل `azd provision --preview`؛ إذ يمكن للخطافات تنفيذ أوامر عشوائية للمشروع.
+
+### مدقق ما قبل الطيران لـ PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +102,14 @@ param(
     [switch]$Detailed
 )
 
-# تلوين الإخراج
+# Fail native commands into catch blocks instead of reporting false successes.
+$ErrorActionPreference = 'Stop'
+if ($PSVersionTable.PSVersion -lt [version]'7.3') {
+    throw 'PowerShell 7.3+ is required for this script.'
+}
+$PSNativeCommandUseErrorActionPreference = $true
+
+# Color coding for output
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +137,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # التحقق من تثبيت AZD
+    # Check AZD installation
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +147,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # التحقق من تثبيت Azure CLI
+    # Check Azure CLI installation
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +157,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # التحقق من إصدار PowerShell
+    # Check PowerShell version
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,23 +172,23 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # التحقق من مصادقة AZD
+        # Check AZD authentication
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
-        if ($azdAuth.status -eq "Logged-in") {
-            Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
+        if ($azdAuth.status -eq "success") {
+            Write-Status "AZD authentication" "Success" "Token available; expires $($azdAuth.expiresOn)"
         }
         else {
             Write-Status "AZD authentication" "Error" "Run 'azd auth login'"
             return $false
         }
         
-        # التحقق من مصادقة Azure CLI
+        # Check Azure CLI authentication
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # التحقق من الوصول إلى الاشتراك
+        # Validate subscription access
         $subscriptionId = $azAccount.id
-        $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
+        $subscription = az account show --subscription $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
         
         return $true
@@ -194,39 +203,29 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # الحصول على تعيينات الأدوار للمستخدم الحالي
+        # Get current user's role assignments
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
             $_.roleDefinitionName -eq "Contributor" -or 
-            $_.roleDefinitionName -eq "Owner" -or
-            $_.roleDefinitionName -eq "User Access Administrator"
+            $_.roleDefinitionName -eq "Owner"
         }
         
         if ($hasContributor) {
-            Write-Status "Required permissions" "Success" "Contributor or higher role found"
+            Write-Status "Role assignment inventory" "Info" "Contributor/Owner found; verify effective scope, policy and any role-assignment permissions separately"
         }
         else {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # اختبار إنشاء مجموعة الموارد (إذا تم تحديدها)
+        # Test resource group creation (if specified)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # اختبار القدرة على إنشاء مجموعة موارد
-                try {
-                    az group create --name "preflight-test-rg" --location $Location --output none
-                    az group delete --name "preflight-test-rg" --yes --output none
-                    Write-Status "Resource group creation" "Success" "Can create resource groups"
-                }
-                catch {
-                    Write-Status "Resource group creation" "Error" "Cannot create resource groups"
-                    return $false
-                }
+                Write-Status "Resource group creation" "Warning" "Group does not exist. Review subscription-scope permissions; this diagnostic does not create/delete test groups."
             }
         }
         
@@ -242,25 +241,28 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # التحقق من حصص الحوسبة
+        # Check compute quotas
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # التحقق من الحصص المحددة
+        # Check specific quotas
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
-        if ($coreQuota) {
+        if ($coreQuota -and $coreQuota.limit -gt 0) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
             if ($usagePercent -lt 80) {
                 Write-Status "Compute cores quota" "Success" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
+            } else {
+                Write-Status "Compute cores quota" "Warning" "Missing or zero quota; verify service requirements"
             }
             else {
                 Write-Status "Compute cores quota" "Warning" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
             }
         }
         
-        # التحقق من حدود App Service
+        # Check App Service limits
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
-            if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
+            $displayLocation = az account list-locations --query "[?name=='$Location'].displayName | [0]" -o tsv
+            if ($appServiceUsage | Where-Object { $_.name -eq $Location -or $_.name -eq $displayLocation }) {
                 Write-Status "App Service availability" "Success" "Available in $Location"
             }
             else {
@@ -271,28 +273,27 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # التحقق من حدود حساب التخزين
-        $storageAccounts = az storage account list --output json | ConvertFrom-Json
-        $accountCount = ($storageAccounts | Measure-Object).Count
-        if ($accountCount -lt 200) {
-            Write-Status "Storage account limit" "Success" "$accountCount/250 storage accounts"
+        # Check storage account limits
+        $storageUsage = @(az storage account show-usage --location $Location --output json | ConvertFrom-Json)[0]
+        if ($storageUsage -and $storageUsage.limit -gt 0 -and $storageUsage.currentValue -lt $storageUsage.limit) {
+            Write-Status "Storage account quota" "Info" "$($storageUsage.currentValue)/$($storageUsage.limit) in $Location"
         }
         else {
-            Write-Status "Storage account limit" "Warning" "$accountCount/250 storage accounts"
+            Write-Status "Storage account quota" "Warning" "No headroom or missing quota data"
         }
         
         return $true
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # غير معيق
+        return $true # Non-blocking
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # اختبار نقاط النهاية في Azure
+    # Test Azure endpoints
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -306,13 +307,19 @@ function Test-NetworkConnectivity {
             Write-Status "Connectivity to $endpoint" "Success" "Status: $($response.StatusCode)"
         }
         catch {
-            Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+            # A 401/403/404 response may still prove HTTP reachability.
+            if ($_.Exception.Response) {
+                Write-Status "Connectivity to $endpoint" "Info" "HTTP response received; this is not an authorization test"
+            } else {
+                Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+                return $false
+            }
         }
     }
     
-    # اختبار حل DNS
+    # Test DNS resolution
     try {
-        $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
+        $dnsResult = [System.Net.Dns]::GetHostAddresses("management.azure.com")
         Write-Status "DNS resolution" "Success" "Resolved successfully"
     }
     catch {
@@ -326,18 +333,21 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # التحقق مما إذا كان الملف azure.yaml موجودًا
+    # Check if azure.yaml exists
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # تحليل azure.yaml
+        # Parse azure.yaml
         try {
+            if (-not (Get-Command ConvertFrom-Yaml -ErrorAction SilentlyContinue)) {
+                throw 'ConvertFrom-Yaml requires the powershell-yaml module.'
+            }
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # التحقق من صحة الخدمات
+            # Validate services
             if ($azureYaml.services) {
-                $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
+                $serviceCount = $azureYaml.services.Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
             }
             else {
@@ -345,7 +355,7 @@ function Test-TemplateValidation {
             }
         }
         catch {
-            Write-Status "azure.yaml parsing" "Error" "Invalid YAML format"
+            Write-Status "azure.yaml parsing" "Error" $_.Exception.Message
             return $false
         }
     }
@@ -354,13 +364,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # التحقق من وجود ملفات البنية التحتية
+    # Check for infrastructure files
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # التحقق من main.bicep إذا كان موجودًا
+            # Validate main.bicep if it exists
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,12 +391,12 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 جديد: اختبار معاينة البنية التحتية (تشغيل تجريبي آمن)
+    # Preview ARM changes only after reviewing the project's hooks.
     try {
-        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        Write-Status "Infrastructure preview test" "Info" "Previewing proposed changes (not a capacity or deployment guarantee)..."
         $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
-            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+            Write-Status "Infrastructure preview" "Success" "Preview completed; review changes and remaining diagnostics"
         }
         else {
             Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
@@ -403,7 +413,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # التحقق مما إذا كان الموقع صالحًا
+        # Check if location is valid
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,13 +425,13 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # التحقق من توفر الخدمة في المنطقة
+        # Check service availability in region
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
             try {
                 $providers = az provider show --namespace $service --output json | ConvertFrom-Json
-                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $Location }
+                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $validLocation.displayName }
                 
                 if ($resourceTypes) {
                     Write-Status "$service availability" "Success" "Available in $Location"
@@ -446,11 +456,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # تقدير تكلفة أساسي (يحتاج إلى Azure Pricing API لتقديرات دقيقة)
+    # Basic cost estimation (would need Azure Pricing API for accurate estimates)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # التحقق من وجود ميزانية
+    # Check if budget exists
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +480,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # التحقق من ممارسات الأمان الشائعة
+    # Text-search heuristics only: presence of keywords is not compliance proof.
     try {
-        # التحقق مما إذا تم تكوين Key Vault
+        # Check if Key Vault is configured
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +490,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # التحقق من استخدام الهوية المُدارة
+        # Check for managed identity usage
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +498,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # التحقق من فرض HTTPS
+        # Check for HTTPS enforcement
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +514,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# التنفيذ الرئيسي
+# Main execution
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +526,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # تشغيل جميع الفحوصات
+    # Run all checks
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -527,7 +537,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # الملخص
+    # Summary
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -547,7 +557,7 @@ function Invoke-PreflightCheck {
     Write-Host ""
     if ($allPassed) {
         Write-Host "${Green}✓ All pre-flight checks passed ($passedCount/$totalCount)${Reset}"
-        Write-Host "${Green}✓ Ready for deployment!${Reset}"
+        Write-Host "${Green}✓ Implemented checks passed; review warnings and untested requirements.${Reset}"
         exit 0
     }
     else {
@@ -557,26 +567,27 @@ function Invoke-PreflightCheck {
     }
 }
 
-# تشغيل فحص ما قبل التشغيل
+# Run the pre-flight check
+azd env select $EnvironmentName
 Invoke-PreflightCheck
 ```
 
-### مدقق فحوصات ما قبل النشر لـ Bash
+### مدقق ما قبل الطيران لـ Bash
 
 ```bash
 #!/bin/bash
-# نسخة Bash من فحوصات ما قبل التشغيل لأنظمة Unix/Linux
+# Bash version of pre-flight checks for Unix/Linux systems
 
 set -euo pipefail
 
-# رموز الألوان
+# Color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # بدون ألوان
+NC='\033[0m' # No Color
 
-# متغيرات عامة
+# Global variables
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -606,7 +617,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # التحقق من تثبيت AZD
+    # Check AZD installation
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +626,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # التحقق من تثبيت Azure CLI
+    # Check Azure CLI installation
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,12 +635,16 @@ check_prerequisites() {
         return 1
     fi
     
-    # التحقق من تثبيت jq
+    # Check jq installation
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
-        print_status "jq not found" "warning" "Install jq for better JSON parsing"
+        print_status "jq not found" "error" "jq is required"
+        return 1
     fi
+    python3 -c "import yaml" >/dev/null 2>&1 || {
+        print_status "Python/PyYAML not found" "error" "Python 3 and PyYAML are required"; return 1;
+    }
     
     return 0
 }
@@ -637,16 +652,16 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # التحقق من مصادقة AZD
-    if azd auth login --check-status >/dev/null 2>&1; then
-        local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
-        print_status "AZD authentication" "success" "User: $principal_name"
+    # Check AZD authentication
+    # --check-status returns exit code 0 even when unauthenticated; inspect JSON.
+    if azd auth login --check-status --output json | jq -e '.status == "success"' >/dev/null; then
+        print_status "AZD authentication" "success" "Token available"
     else
         print_status "AZD authentication" "error" "Run 'azd auth login'"
         return 1
     fi
     
-    # التحقق من مصادقة Azure CLI
+    # Check Azure CLI authentication
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,11 +676,11 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # التحقق من azure.yaml
+    # Check azure.yaml
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # التحقق الأساسي من YAML
+        # Basic YAML validation
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -677,13 +692,13 @@ check_template_validation() {
         return 1
     fi
     
-    # التحقق من ملفات البنية التحتية
+    # Check infrastructure files
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # التحقق من main.bicep إن وجد
+            # Validate main.bicep if exists
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +721,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # التحقق مما إذا كان الموقع صالحًا
+    # Check if location is valid
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,11 +729,13 @@ check_regional_availability() {
         return 1
     fi
     
-    # التحقق من توفر الخدمة
+    # Check service availability
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
+    local display_location
+    display_location=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
     for service in "${services[@]}"; do
-        if az provider show --namespace "$service" --query "resourceTypes[?locations[?contains(@, '$LOCATION')]]" --output tsv | grep -q .; then
+        if az provider show --namespace "$service" --query "resourceTypes[?contains(locations, '$display_location')]" --output tsv | grep -q .; then
             print_status "$service availability" "success" "Available in $LOCATION"
         else
             print_status "$service availability" "warning" "May not be available in $LOCATION"
@@ -729,7 +746,7 @@ check_regional_availability() {
 }
 
 main() {
-    # تحليل معاملات سطر الأوامر
+    # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +772,7 @@ main() {
         esac
     done
     
-    # التحقق من المعلمات المطلوبة
+    # Validate required parameters
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,20 +785,22 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # تشغيل الفحوصات
+    # Run checks
     local all_passed=true
     
     check_prerequisites || all_passed=false
+    if ! $all_passed; then exit 1; fi
+    azd env select "$ENVIRONMENT_NAME" || exit 1
     check_authentication || all_passed=false
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # الملخص
+    # Summary
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
         echo -e "${GREEN}✓ All pre-flight checks passed${NC}"
-        echo -e "${GREEN}✓ Ready for deployment!${NC}"
+        echo -e "${GREEN}✓ Implemented checks passed; review warnings and untested requirements.${NC}"
         exit 0
     else
         echo -e "${RED}✗ Some pre-flight checks failed${NC}"
@@ -790,7 +809,7 @@ main() {
     fi
 }
 
-# تشغيل الدالة الرئيسية
+# Run main function
 main "$@"
 ```
 
@@ -803,87 +822,90 @@ main "$@"
 اطبع هذه القائمة وتحقق من كل بند قبل النشر:
 
 #### ✅ إعداد البيئة
-- [ ] تم تثبيت AZD CLI وتحديثه إلى أحدث إصدار
-- [ ] تم تثبيت Azure CLI وتسجيل الدخول
-- [ ] تم تحديد اشتراك Azure الصحيح
+- [ ] تثبيت AZD CLI وتحديثه إلى الإصدار الأحدث
+- [ ] تثبيت Azure CLI وتوثيق الدخول
+- [ ] اختيار اشتراك Azure الصحيح
 - [ ] اسم البيئة فريد ويتبع قواعد التسمية
-- [ ] مجموعة الموارد المستهدفة محددة أو يمكن إنشاؤها
+- [ ] تحديد أو إنشاء مجموعة الموارد المستهدفة
 
-#### ✅ المصادقة والأذونات
-- [ ] تمت المصادقة بنجاح باستخدام `azd auth login`
-- [ ] المستخدم لديه دور Contributor على الاشتراك/مجموعة الموارد المستهدفة
-- [ ] تم تكوين service principal لـ CI/CD (إذا أمكن)
+#### ✅ المصادقة والصلاحيات
+- [ ] تم المصادقة بنجاح مع `azd auth login`
+- [ ] للمستخدم دور مساهم في الاشتراك/مجموعة الموارد المستهدفة
+- [ ] إذا كانت القوالب تنشئ تعيينات أدوار، فلهوية النشر صلاحيات تعيين أدوار محددة (دور المساهم بمفرده لا يمنح هذه)
+- [ ] تهيئة الخدمة الرئيسية لـ CI/CD (إذا ينطبق)
 - [ ] لا توجد شهادات أو بيانات اعتماد منتهية الصلاحية
 
 #### ✅ التحقق من القالب
-- [ ] يوجد `azure.yaml` وهو YAML صالح
-- [ ] جميع الخدمات المعرفة في azure.yaml لها شفرة مصدرية مقابلة
-- [ ] قوالب Bicep في الدليل `infra/` موجودة
-- [ ] `main.bicep` يترجم بدون أخطاء (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 معاينة البنية التحتية تعمل بنجاح (`azd provision --preview`)
-- [ ] جميع المعاملات المطلوبة لها قيم افتراضية أو سيتم توفيرها
-- [ ] لا توجد أسرار مضمنة في القوالب
+- [ ] وجود `azure.yaml` وصلاحية YAML
+- [ ] كل الخدمات المعرفة في azure.yaml لها كود مصدر مطابق
+- [ ] وجود قوالب Bicep في مجلد `infra/`
+- [ ] `main.bicep` يتم تجميعها بدون أخطاء (`az bicep build --file infra/main.bicep`)
+- [ ] تشغيل المعاينة للبنية التحتية بنجاح (`azd provision --preview`)
+- [ ] كل المعاملات المطلوبة لها قيم افتراضية أو سيتم توفيرها
+- [ ] لا توجد أسرار مبرمجة في القوالب
 
 #### ✅ تخطيط الموارد
-- [ ] تم اختيار والتحقق من المنطقة المستهدفة في Azure
-- [ ] الخدمات المطلوبة في Azure متاحة في المنطقة المستهدفة
-- [ ] الحصص الكافية متاحة للموارد المخططة
-- [ ] تم التحقق من تعارضات أسماء الموارد
-- [ ] تم فهم التبعيات بين الموارد
+- [ ] اختيار والتحقق من منطقة Azure المستهدفة
+- [ ] توفر خدمات Azure المطلوبة في المنطقة المستهدفة
+- [ ] توفر حصص كافية للموارد المخططة
+- [ ] التحقق من تعارضات تسمية الموارد
+- [ ] فهم الاعتماديات بين الموارد
 
-#### ✅ الشبكة والأمن
-- [ ] تم التحقق من اتصال الشبكة بنقاط نهاية Azure
-- [ ] تم تكوين إعدادات الجدار الناري/الوكيل إذا لزم الأمر
-- [ ] تم تكوين Key Vault لإدارة الأسرار
-- [ ] استخدام Managed identities حيثما أمكن
-- [ ] تم تفعيل فرض HTTPS لتطبيقات الويب
+#### ✅ الشبكة والأمان
+- [ ] التحقق من اتصال الشبكة إلى نقاط نهاية Azure
+- [ ] تهيئة إعدادات الجدار الناري/الوكلاء إذا لزم الأمر
+- [ ] تهيئة Key Vault لإدارة الأسرار
+- [ ] استخدام الهويات المدارة حيثما أمكن
+- [ ] تفعيل فرض HTTPS لتطبيقات الويب
 
-#### ✅ إدارة التكلفة
-- [ ] تم حساب تقديرات التكلفة باستخدام Azure Pricing Calculator
-- [ ] تم تكوين تنبيهات الميزانية إذا لزم الأمر
-- [ ] تم اختيار SKUs المناسبة لنوع البيئة
-- [ ] تم أخذ السعة المحجوزة بعين الاعتبار لحمولات الإنتاج
+#### ✅ إدارة التكاليف
+- [ ] حساب تقديرات التكاليف باستخدام حاسبة أسعار Azure
+- [ ] تهيئة تنبيهات الميزانية إذا لزم الأمر
+- [ ] اختيار SKUs المناسبة لنوع البيئة
+- [ ] أخذ السعة المحجوزة في الاعتبار للأحمال الإنتاجية
 
-#### ✅ المراقبة والملاحظة
-- [ ] تم تكوين Application Insights في القوالب
-- [ ] تم تخطيط مساحة عمل Log Analytics
-- [ ] تم تعريف قواعد التنبيه للقياسات الحرجة
-- [ ] تم تنفيذ نقاط نهاية فحص الصحة في التطبيقات
+#### ✅ المراقبة والرصد
+- [ ] تهيئة Application Insights في القوالب
+- [ ] تخطيط مساحة عمل Log Analytics
+- [ ] تعريف قواعد التنبيه للمقاييس الحرجة
+- [ ] تنفيذ نقاط فحص الصحة في التطبيقات
 
 #### ✅ النسخ الاحتياطي والاسترداد
-- [ ] تم تحديد استراتيجية النسخ الاحتياطي لموارد البيانات
-- [ ] تم توثيق أهداف زمن الاسترداد (RTO)
-- [ ] تم توثيق أهداف نقطة الاسترداد (RPO)
+- [ ] تعريف استراتيجية النسخ الاحتياطي لموارد البيانات
+- [ ] توثيق أهداف وقت الاسترداد (RTO)
+- [ ] توثيق أهداف نقطة الاسترداد (RPO)
 - [ ] خطة التعافي من الكوارث موجودة للإنتاج
 
 ---
 
 ## التحقق من البيئة
 
+الفحوصات التالية `grep` هي تذكيرات توضيحية فقط. وجود كلمة مطابقة لا يبرهن على تكوين ميزة للموارد الصحيحة، وغياب كلمة لا يثبت عدم وجودها (قد توفرها الوحدات/الإعدادات الافتراضية). لا تستخدمها كبوابات للامتثال الإنتاجي.
+
 ### التحقق من بيئة التطوير
 
 ```bash
 #!/bin/bash
-# عمليات التحقق الخاصة ببيئة التطوير
+# Development environment specific validations
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # التحقق من التهيئات الملائمة لبيئة التطوير
+    # Check for development-friendly configurations
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # التحقق من إعدادات الإيقاف التلقائي
+    # Check for auto-shutdown configurations
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # التحقق من إعدادات قاعدة بيانات التطوير
+    # Validate development database configurations
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -896,33 +918,33 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# عمليات التحقق الخاصة ببيئة الإنتاج
+# Production environment specific validations
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # التحقق من إعدادات التوافر العالي
+    # Check for high availability configurations
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # التحقق من إعدادات النسخ الاحتياطي
+    # Check for backup configurations
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # التحقق من إعدادات المراقبة
+    # Validate monitoring setup
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # التحقق من إعدادات الأمان
+    # Check for security configurations
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -935,7 +957,7 @@ validate_prod_environment() {
 
 ## التحقق من الموارد
 
-### نص تحقق الحصص
+### نص التحقق من الحصص
 
 ```python
 #!/usr/bin/env python3
@@ -948,17 +970,17 @@ import subprocess
 import sys
 from typing import Dict, List, Tuple
 
-def run_command(command: List[str]) -> Dict:
+def run_command(command: List[str]) -> dict | list | None:
     """Run Azure CLI command and return JSON result"""
     try:
         result = subprocess.run(command, capture_output=True, text=True, check=True)
         return json.loads(result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error running command {' '.join(command)}: {e}")
-        return {}
+        return None
     except json.JSONDecodeError as e:
         print(f"Error parsing JSON: {e}")
-        return {}
+        return None
 
 def check_compute_quotas(location: str) -> bool:
     """Check compute quotas in specified location"""
@@ -976,7 +998,10 @@ def check_compute_quotas(location: str) -> bool:
         if quota_item['name']['value'] in critical_quotas:
             current = quota_item['currentValue']
             limit = quota_item['limit']
-            usage_percent = (current / limit) * 100 if limit > 0 else 0
+            if limit <= 0:
+                print(f"❌ No quota for {quota_item['name']['value']}")
+                return False
+            usage_percent = (current / limit) * 100
             
             status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
             print(f"{status} {quota_item['name']['localizedValue']}: {current}/{limit} ({usage_percent:.1f}%)")
@@ -990,15 +1015,17 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # الحصول على حسابات التخزين في الاشتراك
-    accounts = run_command(['az', 'storage', 'account', 'list'])
+    # Retrieve regional quota rather than assuming a subscription-wide constant.
+    usages = run_command(['az', 'storage', 'account', 'show-usage', '--location', location])
     
-    if accounts is None:
+    if not usages:
         print("❌ Could not retrieve storage account information")
         return False
     
-    account_count = len(accounts)
-    max_accounts = 250  # الحد الافتراضي لـ Azure
+    account_count = usages['currentValue']
+    max_accounts = usages['limit']
+    if max_accounts <= 0:
+        return False
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,18 +1038,14 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # التحقق من الشبكات الافتراضية
-    vnets = run_command(['az', 'network', 'vnet', 'list'])
-    if vnets is not None:
-        vnet_count = len(vnets)
-        print(f"✅ Virtual Networks: {vnet_count}/1000")
-    
-    # التحقق من عناوين IP العامة
-    public_ips = run_command(['az', 'network', 'public-ip', 'list'])
-    if public_ips is not None:
-        ip_count = len(public_ips)
-        print(f"✅ Public IP Addresses: {ip_count}/1000")
-    
+    usages = run_command(['az', 'network', 'list-usages', '--location', location])
+    if not usages:
+        return False
+    for item in usages:
+        current, limit = item['currentValue'], item['limit']
+        print(f"{item['name']['value']}: {current}/{limit}")
+        if limit <= 0 or current >= limit:
+            return False
     return True
 
 def main():
@@ -1034,19 +1057,20 @@ def main():
     
     print("🔍 Azure Quota and Limits Validation")
     print(f"📍 Location: {location}")
-    print(f"⏰ Time: {subprocess.run(['date'], capture_output=True, text=True).stdout.strip()}")
+    from datetime import datetime, timezone
+    print(f"⏰ Time: {datetime.now(timezone.utc).isoformat()}")
     
     all_passed = True
     
-    # تشغيل الفحوصات
+    # Run checks
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # ملخص
+    # Summary
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
-        print("✅ All quota checks passed - sufficient capacity available")
+        print("✅ Implemented quota thresholds passed; not a capacity reservation")
         sys.exit(0)
     else:
         print("❌ Some quota limits are near capacity - consider requesting increases")
@@ -1058,20 +1082,20 @@ if __name__ == "__main__":
 
 ---
 
-## فحوصات الأمن والامتثال
+## فحوصات الأمان والامتثال
 
-### نص تحقق الأمان
+### نص التحقق الأمني
 
 ```bash
 #!/bin/bash
-# التحقق من الأمان والامتثال لنشر AZD
+# Security and compliance validation for AZD deployments
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # التحقق من استخدام مخزن المفاتيح
+    # Check for Key Vault usage
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # التحقق من استخدام الهوية المُدارة
+    # Check for managed identity usage
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # التحقق من فرض HTTPS
+    # Check for HTTPS enforcement
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1119,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # التحقق من الحد الأدنى لإصدار TLS
+    # Check for minimum TLS version
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1127,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # التحقق من قيود الوصول العام
+    # Check for public access restrictions
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1135,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # التحقق من مجموعات أمان الشبكة
+    # Check for network security groups
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1148,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # التحقق من تشفير البيانات
+    # Check for data encryption
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # التحقق من تمكين سجلات التدقيق
+    # Check for audit logging
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # التحقق من سياسات النسخ الاحتياطي والاحتفاظ
+    # Check for backup and retention policies
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1170,7 @@ check_compliance_requirements() {
     fi
 }
 
-# التنفيذ الرئيسي
+# Main execution
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1157,13 +1181,13 @@ main() {
         exit 1
     fi
     
-    local security_issues
-    security_issues=$(check_security_practices)
+    local security_issues=0
+    check_security_practices || security_issues=$?
     check_compliance_requirements
     
     echo -e "\n=== Security Check Summary ==="
     if [[ $security_issues -eq 0 ]]; then
-        echo "✅ All security checks passed"
+        echo "✅ Text-search reminders passed; this is not a security/compliance assessment"
         exit 0
     else
         echo "⚠️  $security_issues security recommendations found"
@@ -1203,20 +1227,36 @@ on:
 
 jobs:
   preflight:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
     - name: Install AZD
       uses: Azure/setup-azd@v0.1.0
+      with:
+        version: 1.37.2
     
-    - name: Install Azure CLI
-      uses: azure/setup-azure@v3
+    - name: Verify prerequisites
+      run: |
+        az version
+        jq --version
+        python3 -c "import yaml"
     
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+    - name: AZD Login
+      run: |
+        azd auth login --client-id "${{ vars.AZURE_CLIENT_ID }}" \
+          --tenant-id "${{ vars.AZURE_TENANT_ID }}" \
+          --federated-credential-provider github
     
     - name: Run Pre-flight Checks
       run: |
@@ -1230,13 +1270,9 @@ jobs:
         chmod +x ./scripts/security-check.sh
         ./scripts/security-check.sh
     
-    - name: Upload Results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: preflight-results
-        path: preflight-results.json
 ```
+
+قم بتهيئة بيانات الاعتماد الموحدة لهذا سير العمل وأنشئ/استعد بيئة azd المختارة قبل تشغيل النصوص المحفوظة. تكتب هذه الأمثلة الإخراج إلى الوحدة الطرفية فقط؛ لا يتم إنتاج ملف `preflight-results.json` أو JUnit.
 
 ### التكامل مع Azure DevOps
 
@@ -1272,66 +1308,70 @@ steps:
       curl -fsSL https://aka.ms/install-azd.sh | bash
       export PATH=$PATH:~/.azd/bin
 
-- task: Bash@3
+- task: AzureCLI@2
   displayName: 'Run Pre-flight Checks'
   inputs:
-    targetType: filePath
-    filePath: './scripts/preflight-check.sh'
-    arguments: '--environment-name ${{ parameters.environment }} --location ${{ parameters.location }}'
-
-- task: PublishTestResults@2
-  displayName: 'Publish Pre-flight Results'
-  condition: always()
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: 'preflight-results.xml'
-    testRunTitle: 'Pre-flight Validation'
+    azureSubscription: $(serviceConnection)
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      set -e
+      # Requires a workload-identity-federated service connection.
+      # AzureCLI@2 supplies AZURESUBSCRIPTION_* for the azd provider.
+      azd auth login --federated-credential-provider azure-pipelines
+      bash ./scripts/preflight-check.sh \
+        --environment-name "${{ parameters.environment }}" \
+        --location "${{ parameters.location }}"
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 ```
+
+يجب على خط الأنابيب استعادة/إنشاء بيئة azd الخاصة به وحفظ النصوص المعروضة في هذا الدرس قبل هذه المهمة. قم بتهيئة اتصال الخدمة الموحد ومنح خط الأنابيب أذونات الرموز المطلوبة. لا تتوقع أن توثيق دخول Azure CLI لمهمة `AzureCLI@2` سابقة أن يصادق مهمة Bash عادية لاحقة.
 
 ---
 
 ## ملخص أفضل الممارسات
 
-### ✅ قم بالأتمتة حيثما أمكن
+### ✅ أفضل ممارسات فحوصات ما قبل الطيران
 
-1. **قم بالأتمتة حيثما أمكن**
-   - ادمج الفحوصات في خطوط أنابيب CI/CD
-   - استخدم نصوصًا برمجية لعمليات تحقق قابلة للتكرار
-   - خزن النتائج لأغراض سجلات التدقيق
+1. **الأتمتة قدر الإمكان**
+   - دمج الفحوصات في أنابيب CI/CD
+   - استخدام نصوص للتحقق المتكرر
+   - تخزين النتائج لأغراض التدقيق
 
-2. **التحقق الخاص بكل بيئة**
-   - فحوصات مختلفة للتطوير/الاختبار/الإنتاج
+2. **التحقق الخاص بالبيئة**
+   - فحوصات مختلفة للبيئات dev/staging/prod
    - متطلبات أمان مناسبة لكل بيئة
-   - تحسين التكلفة للبيئات غير الإنتاجية
+   - تحسين التكاليف للبيئات غير الإنتاجية
 
 3. **تغطية شاملة**
-   - المصادقة والأذونات
+   - المصادقة والصلاحيات
    - حصص الموارد وتوفرها
-   - التحقق من القوالب والصياغة
-   - متطلبات الأمن والامتثال
+   - التحقق من القوالب والقواعد النحوية
+   - متطلبات الأمان والامتثال
 
 4. **تقارير واضحة**
-   - مؤشرات حالة ملونة
-   - رسائل خطأ مفصلة مع خطوات العلاج
+   - مؤشرات الحالة ذات الألوان
+   - رسائل الخطأ التفصيلية مع خطوات الإصلاح
    - تقارير ملخصة للتقييم السريع
 
 5. **الفشل السريع**
-   - أوقف النشر إذا فشلت الفحوصات الحرجة
-   - قدّم إرشادات واضحة للحل
-   - مكّن إعادة تشغيل الفحوصات بسهولة
+   - إيقاف النشر عند فشل فحوصات حرجة
+   - تقديم إرشادات واضحة للحل
+   - تمكين إعادة تشغيل الفحوصات بسهولة
 
-### الأخطاء الشائعة في فحوصات ما قبل الإقلاع
+### الأخطاء الشائعة في فحوصات ما قبل الطيران
 
-1. **تخطي التحقق** لعمليات النشر "السريعة"
-2. **فحص الأذونات غير الكافي** قبل النشر
-3. **تجاهل حدود الحصص** حتى يفشل النشر
-4. **عدم التحقق من القوالب** في خطوط أنابيب CI/CD
-5. **غياب تحقق الأمان** لبيئات الإنتاج
-6. **تقدير تكلفة غير كافٍ** يؤدي لمفاجآت في الميزانية
+1. **تخطي التحقق** من أجل نشرات "سريعة"
+2. **فحوصات صلاحيات غير كافية** قبل النشر
+3. **تجاهل حدود الحصص** حتى يحدث فشل في النشر
+4. **عدم التحقق من القوالب** في أنابيب CI/CD
+5. **غياب التحقق الأمني** لبيئات الإنتاج
+6. **تقدير تكلفة غير كافٍ** يؤدي إلى مفاجآت في الميزانية
 
 ---
 
-**نصيحة احترافية**: شغّل فحوصات ما قبل الإقلاع كوظيفة منفصلة في خط أنابيب CI/CD قبل وظيفة النشر الفعلية. هذا يسمح باكتشاف المشكلات مبكرًا ويقدّم تغذية راجعة أسرع للمطورين.
+**نصيحة مهنية**: شغّل فحوصات ما قبل الطيران كوظيفة منفصلة في أنبوب CI/CD قبل وظيفة النشر الفعلية. هذا يتيح لك اكتشاف المشكلات مبكرًا ويقدم ملاحظات أسرع للمطورين.
 
 ---
 
@@ -1342,6 +1382,6 @@ steps:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**إخلاء المسؤولية**:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يرجى أن تضع في اعتبارك أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المرجعي والموثوق. بالنسبة للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أية سوء تفاهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

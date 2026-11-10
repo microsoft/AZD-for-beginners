@@ -1,10 +1,10 @@
 # أنماط تنسيق الوكلاء المتعددين
 
-⏱️ **الوقت المقدر**: 60-75 دقيقة | 💰 **التكلفة المقدرة**: ~$100-300/شهريًا | ⭐ **التعقيد**: متقدم
+⏱️ **الوقت المقدر**: 60-75 دقيقة قراءة؛ عدة ساعات للتنفيذ | 💰 **التكلفة المقدرة**: تعتمد على عبء العمل | ⭐ **التعقيد**: متقدم
 
 **📚 مسار التعلم:**
-- ← السابق: [تخطيط السعة](capacity-planning.md) - تحديد حجم الموارد واستراتيجيات التوسيع
-- 🎯 **أنت هنا**: أنماط تنسيق الوكلاء المتعددين (التنسيق، الاتصال، إدارة الحالة)
+- ← السابق: [تخطيط السعة](capacity-planning.md) - استراتيجيات تحديد حجم الموارد والتوسع
+- 🎯 **أنت هنا**: أنماط تنسيق الوكلاء المتعددين (التنسيق، التواصل، إدارة الحالة)
 - → التالي: [اختيار SKU](sku-selection.md) - اختيار خدمات Azure المناسبة
 - 🏠 [الصفحة الرئيسية للدورة](../../README.md)
 
@@ -12,16 +12,16 @@
 
 ## ما ستتعلمه
 
-بإكمال هذا الدرس، سوف:
-- فهم أنماط **بنية الوكلاء المتعددين** ومتى تستخدمها
+عند إكمال هذا الدرس، ستتمكن من:
+- فهم أنماط **هيكلية الوكلاء المتعددين** ومتى تستخدمها
 - تنفيذ **أنماط التنسيق** (مركزي، لامركزي، هرمي)
-- تصميم استراتيجيات **اتصال الوكلاء** (متزامن، غير متزامن، مدفوع بالأحداث)
+- تصميم استراتيجيات **تواصل الوكلاء** (متزامن، غير متزامن، قائم على الأحداث)
 - إدارة **الحالة المشتركة** عبر الوكلاء الموزعين
 - نشر **أنظمة الوكلاء المتعددين** على Azure باستخدام AZD
-- تطبيق **أنماط التنسيق** في سيناريوهات الذكاء الاصطناعي الواقعية
-- مراقبة وتصحيح أخطاء أنظمة الوكلاء الموزعة
+- تطبيق **أنماط التنسيق** لسيناريوهات الذكاء الاصطناعي في العالم الحقيقي
+- مراقبة وتصحيح أنظمة الوكلاء الموزعة
 
-## لماذا يهم تنسيق الوكلاء المتعددين
+## لماذا يعتبر تنسيق الوكلاء المتعددين مهمًا
 
 ### التطور: من وكيل واحد إلى وكلاء متعددين
 
@@ -32,80 +32,82 @@ User → Agent → Response
 - ✅ سهل الفهم والتنفيذ
 - ✅ سريع للمهام البسيطة
 - ❌ محدود بقدرات النموذج الواحد
-- ❌ لا يمكنه تنفيذ المهام المعقدة بشكل متوازي
-- ❌ لا تخصص
+- ❌ لا يمكن تنفيذ المهام المعقدة بالتوازي
+- ❌ لا يوجد تخصص
 
 **نظام الوكلاء المتعددين (متقدم):**
 ```mermaid
 graph TD
-    Orchestrator[المنسق] --> Agent1[الوكيل 1<br/>خطة]
-    Orchestrator --> Agent2[الوكيل 2<br/>برمجة]
-    Orchestrator --> Agent3[الوكيل 3<br/>مراجعة]
-```- ✅ وكلاء متخصصون لمهام محددة
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```
+- ✅ وكلاء متخصصون لمهام محددة
 - ✅ تنفيذ متوازي للسرعة
-- ✅ معياري وقابل للصيانة
-- ✅ أفضل في سير العمل المعقد
+- ✅ معياري وسهل الصيانة
+- ✅ أفضل في تدفقات العمل المعقدة
 - ⚠️ يتطلب منطق تنسيق
 
-**تشبيه**: الوكيل الواحد يشبه شخصًا واحدًا يقوم بجميع المهام. النظام متعدد الوكلاء يشبه فريقًا حيث يمتلك كل عضو مهارات متخصصة (باحث، مبرمج، مراجع، كاتب) يعملون معًا.
+**تشبيه**: الوكيل الواحد مثل شخص واحد يقوم بكل المهام. الوكلاء المتعددون مثل فريق كل عضو فيه لديه مهارات متخصصة (باحث، مبرمج، مراجع، كاتب) يعملون معًا.
 
 ---
 
 ## أنماط التنسيق الأساسية
 
-### النمط 1: التنسيق المتسلسل (سلسلة المسؤولية)
+### النمط 1: التنسيق التسلسلي (سلسلة المسؤولية)
 
-**متى تستخدم**: يجب إكمال المهام بترتيب محدد، حيث يبني كل وكيل على مخرجات السابق.
+**متى يستخدم**: يجب إتمام المهام بترتيب محدد، كل وكيل يبني على مخرجات السابق.
 
 ```mermaid
 sequenceDiagram
-    participant User as مستخدم
-    participant Orchestrator as المنسق
-    participant Agent1 as وكيل البحث
-    participant Agent2 as وكيل الكاتب
-    participant Agent3 as وكيل التحرير
+    participant User
+    participant Orchestrator
+    participant Agent1 as Research Agent
+    participant Agent2 as Writer Agent
+    participant Agent3 as Editor Agent
     
-    User->>Orchestrator: "اكتب مقالًا عن الذكاء الاصطناعي"
-    Orchestrator->>Agent1: ابحث عن الموضوع
-    Agent1-->>Orchestrator: نتائج البحث
-    Orchestrator->>Agent2: اكتب مسودة (باستخدام البحث)
-    Agent2-->>Orchestrator: مسودة المقال
-    Orchestrator->>Agent3: حرّر وحسّن
-    Agent3-->>Orchestrator: المقال النهائي
-    Orchestrator-->>User: المقال المنقّح
+    User->>Orchestrator: "Write article about AI"
+    Orchestrator->>Agent1: Research topic
+    Agent1-->>Orchestrator: Research results
+    Orchestrator->>Agent2: Write draft (using research)
+    Agent2-->>Orchestrator: Draft article
+    Orchestrator->>Agent3: Edit and improve
+    Agent3-->>Orchestrator: Final article
+    Orchestrator-->>User: Polished article
     
-    Note over User,Agent3: تسلسلي: كل خطوة تنتظر الخطوة السابقة
+    Note over User,Agent3: Sequential: Each step waits for previous
 ```
+
 **الفوائد:**
 - ✅ تدفق بيانات واضح
 - ✅ سهل التصحيح
-- ✅ ترتيب تنفيذ متوقع
+- ✅ ترتيب تنفيذ قابل للتوقع
 
 **القيود:**
-- ❌ أبطأ (لا يوجد توازي)
-- ❌ فشل واحد يعرقل السلسلة بأكملها
-- ❌ لا يمكنه التعامل مع المهام المترابطة
+- ❌ أبطأ (بدون توازي)
+- ❌ فشل واحد يوقف السلسلة بأكملها
+- ❌ لا يمكن التعامل مع المهام المترابطة
 
-**أمثلة على حالات الاستخدام:**
-- سير إنشاء المحتوى (بحث → كتابة → تحرير → نشر)
-- توليد الشيفرة (تخطيط → تنفيذ → اختبار → نشر)
-- توليد التقارير (جمع البيانات → التحليل → التصوير → الملخص)
+**أمثلة على الاستخدام:**
+- خط إنتاج إنشاء المحتوى (بحث → كتابة → تحرير → نشر)
+- توليد التعليمات البرمجية (تخطيط → تنفيذ → اختبار → نشر)
+- توليد التقارير (جمع البيانات → تحليل → تصور → ملخص)
 
 ---
 
-### النمط 2: التنسيق المتوازي (Fan-Out/Fan-In)
+### النمط 2: التنسيق المتوازي (التفرع/الإلتقاء)
 
-**متى تستخدم**: يمكن تشغيل المهام المستقلة في وقت واحد، وتُجمَع النتائج في النهاية.
+**متى يستخدم**: المهام المستقلة يمكن تنفيذها في وقت واحد، ويتم دمج النتائج في النهاية.
 
 ```mermaid
 graph TB
-    User[طلب المستخدم]
-    Orchestrator[المنسق]
-    Agent1[وكيل التحليل]
-    Agent2[وكيل البحث]
-    Agent3[وكيل البيانات]
-    Aggregator[مجمّع النتائج]
-    Response[الاستجابة المجمعة]
+    User[User Request]
+    Orchestrator[Orchestrator]
+    Agent1[Analysis Agent]
+    Agent2[Research Agent]
+    Agent3[Data Agent]
+    Aggregator[Result Aggregator]
+    Response[Combined Response]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -119,36 +121,37 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **الفوائد:**
 - ✅ سريع (تنفيذ متوازي)
-- ✅ متحمل للأخطاء (النتائج الجزئية مقبولة)
+- ✅ متحمل للأخطاء (نتائج جزئية مقبولة)
 - ✅ قابل للتوسع أفقيًا
 
 **القيود:**
-- ⚠️ قد تصل النتائج بترتيب مختلف
-- ⚠️ تحتاج منطق تجميع
-- ⚠️ إدارة الحالة معقدة
+- ⚠️ قد تصل النتائج بترتيب غير متسلسل
+- ⚠️ يحتاج لمنطق تجميع
+- ⚠️ إدارة حالة معقدة
 
-**أمثلة على حالات الاستخدام:**
-- جمع بيانات من مصادر متعددة (APIs + قواعد بيانات + web scraping)
-- تحليل تنافسي (نماذج متعددة تولد حلولًا، يتم اختيار الأفضل)
-- خدمات الترجمة (الترجمة إلى لغات متعددة في وقت واحد)
+**أمثلة على الاستخدام:**
+- جمع بيانات من مصادر متعددة (APIs + قواعد بيانات + سحب الويب)
+- تحليل تنافسي (عدة نماذج تولد حلول، يتم اختيار الأفضل)
+- خدمات الترجمة (ترجمة إلى لغات متعددة في نفس الوقت)
 
 ---
 
-### النمط 3: التنسيق الهرمي (مدير-عامل)
+### النمط 3: التنسيق الهرمي (المدير-العامل)
 
-**متى تستخدم**: سير عمل معقد يتضمن مهام فرعية ويتطلب تفويضًا.
+**متى يستخدم**: تدفقات عمل معقدة بها مهام فرعية، تتطلب التفويض.
 
 ```mermaid
 graph TB
-    Master[المنسق الرئيسي]
-    Manager1[مدير البحث]
-    Manager2[مدير المحتوى]
-    W1[مستخرج الويب]
-    W2[محلل الأوراق]
-    W3[كاتب]
-    W4[محرر]
+    Master[Master Orchestrator]
+    Manager1[Research Manager]
+    Manager2[Content Manager]
+    W1[Web Scraper]
+    W2[Paper Analyzer]
+    W3[Writer]
+    W4[Editor]
     
     Master --> Manager1
     Master --> Manager2
@@ -161,75 +164,77 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
+
 **الفوائد:**
-- ✅ يتعامل مع سير العمل المعقد
-- ✅ معياري وقابل للصيانة
+- ✅ يتعامل مع تدفقات العمل المعقدة
+- ✅ معياري وسهل الصيانة
 - ✅ حدود مسؤولية واضحة
 
 **القيود:**
 - ⚠️ بنية أكثر تعقيدًا
-- ⚠️ زمن استجابة أعلى (عدة طبقات من التنسيق)
-- ⚠️ يتطلب تنسيقًا متطورًا
+- ⚠️ زمن استجابة أعلى (طبقات تنسيق متعددة)
+- ⚠️ يتطلب تنسيق متقدم
 
-**أمثلة على حالات الاستخدام:**
+**أمثلة على الاستخدام:**
 - معالجة مستندات المؤسسات (تصنيف → توجيه → معالجة → أرشفة)
-- أنابيب بيانات متعددة المراحل (استيعاب → تنظيف → تحويل → تحليل → تقرير)
-- سير عمل أتمتة معقدة (تخطيط → تخصيص موارد → تنفيذ → مراقبة)
+- خطوط أنابيب بيانات متعددة المراحل (استيعاب → تنظيف → تحويل → تحليل → تقرير)
+- تدفقات العمل الآلية المعقدة (تخطيط → تخصيص الموارد → تنفيذ → مراقبة)
 
 ---
 
-### النمط 4: التنسيق المدفوع بالأحداث (نشر-اشتراك)
+### النمط 4: التنسيق القائم على الأحداث (النشر-الاشتراك)
 
-**متى تستخدم**: يحتاج الوكلاء إلى التفاعل مع الأحداث، ويرغب في تقليل الترابط.
+**متى يستخدم**: يحتاج الوكلاء إلى التفاعل مع الأحداث، ويرغب في ربط فضفاض.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as جامع البيانات
-    participant EventBus as حافلة خدمة أزور
-    participant Agent2 as المحلل
-    participant Agent3 as مرسل الإشعارات
-    participant Agent4 as المؤرشف
+    participant Agent1 as Data Collector
+    participant EventBus as Azure Service Bus
+    participant Agent2 as Analyzer
+    participant Agent3 as Notifier
+    participant Agent4 as Archiver
     
-    Agent1->>EventBus: نشر حدث "تم استلام البيانات"
-    EventBus->>Agent2: اشترك: تحليل البيانات
-    EventBus->>Agent3: اشترك: إرسال إشعار
-    EventBus->>Agent4: اشترك: أرشفة البيانات
+    Agent1->>EventBus: Publish "DataReceived" event
+    EventBus->>Agent2: Subscribe: Analyze data
+    EventBus->>Agent3: Subscribe: Send notification
+    EventBus->>Agent4: Subscribe: Archive data
     
-    Note over Agent1,Agent4: جميع المشتركين يعالجون بشكل مستقل
+    Note over Agent1,Agent4: All subscribers process independently
     
-    Agent2->>EventBus: نشر حدث "اكتمال التحليل"
-    EventBus->>Agent3: اشترك: إرسال تقرير التحليل
+    Agent2->>EventBus: Publish "AnalysisComplete" event
+    EventBus->>Agent3: Subscribe: Send analysis report
 ```
+
 **الفوائد:**
-- ✅ قِلّة الترابط بين الوكلاء
-- ✅ سهل إضافة وكلاء جدد (مجرد اشتراك)
+- ✅ ربط فضفاض بين الوكلاء
+- ✅ سهولة إضافة وكلاء جدد (مجرد الاشتراك)
 - ✅ معالجة غير متزامنة
-- ✅ مرن (ديمومة الرسائل)
+- ✅ مرن (ثبات الرسائل)
 
 **القيود:**
-- ⚠️ اتساق نهائي
+- ⚠️ الاتساق النهائي
 - ⚠️ تصحيح أخطاء معقد
 - ⚠️ تحديات ترتيب الرسائل
 
-**أمثلة على حالات الاستخدام:**
-- أنظمة المراقبة في الوقت الحقيقي (تنبيهات، لوحات بيانات، سجلات)
-- إشعارات متعددة القنوات (البريد الإلكتروني، SMS، إشعارات فورية، Slack)
-- أنابيب معالجة البيانات (مستهلكون متعددون لنفس البيانات)
+**أمثلة على الاستخدام:**
+- أنظمة المراقبة في الوقت الحقيقي (التنبيهات، اللوحات، السجلات)
+- إشعارات متعددة القنوات (البريد الإلكتروني، الرسائل النصية، التنبيهات، Slack)
+- خطوط أنابيب معالجة البيانات (عدة مستهلكين لنفس البيانات)
 
 ---
 
-### النمط 5: التنسيق القائم على الإجماع (تصويت/نصاب)
+### النمط 5: التنسيق القائم على الإجماع (التصويت/النصاب)
 
-**متى تستخدم**: تحتاج إلى اتفاق من عدة وكلاء قبل المتابعة.
+**متى يستخدم**: يحتاج إلى اتفاق من عدة وكلاء قبل المتابعة.
 
 ```mermaid
 graph TB
-    Input[مهمة الإدخال]
-    Agent1[الوكيل 1: gpt-4.1]
-    Agent2[الوكيل 2: Claude]
-    Agent3[الوكيل 3: Gemini]
-    Voter[مصوّت الإجماع]
-    Output[الناتج المتفق عليه]
+    Input[Input Task]
+    Agent1[Agent 1: gpt-4.1]
+    Agent2[Agent 2: Claude]
+    Agent3[Agent 3: Gemini]
+    Voter[Consensus Voter]
+    Output[Agreed Output]
     
     Input --> Agent1
     Input --> Agent2
@@ -241,42 +246,43 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
+
 **الفوائد:**
 - ✅ دقة أعلى (آراء متعددة)
 - ✅ متحمل للأخطاء (فشل الأقليات مقبول)
-- ✅ ضمان جودة مدمج
+- ✅ ضمان الجودة مدمج
 
 **القيود:**
-- ❌ مكلف (عدة استدعاءات للنماذج)
-- ❌ أبطأ (الانتظار لجميع الوكلاء)
+- ❌ مكلف (مكالمات لنماذج متعددة)
+- ❌ أبطأ (انتظار كل الوكلاء)
 - ⚠️ الحاجة إلى حل النزاعات
 
-**أمثلة على حالات الاستخدام:**
-- مراقبة المحتوى (مراجعة المحتوى بواسطة نماذج متعددة)
-- مراجعة الشيفرة (عدة linters/محللات)
-- التشخيص الطبي (عدة نماذج ذكاء اصطناعي، تحقق خبير)
+**أمثلة على الاستخدام:**
+- التحكم في المحتوى (مراجعة المحتوى بنماذج متعددة)
+- مراجعة الشفرة (عدة أدوات تحليلات/تدقيق)
+- التشخيص الطبي (عدة نماذج ذكاء اصطناعي، والتحقق من خبير)
 
 ---
 
-## نظرة عامة على البنية المعمارية
+## نظرة عامة على الهيكلية
 
-### نظام الوكلاء المتعددين الكامل على Azure
+### نظام وكلاء متعددين متكامل على Azure
 
 ```mermaid
 graph TB
-    User[المستخدم/عميل واجهة برمجة التطبيقات]
-    APIM[إدارة واجهات برمجة تطبيقات Azure]
-    Orchestrator[خدمة المنسق<br/>تطبيق الحاوية]
-    ServiceBus[خدمة حافلة Azure<br/>محور الأحداث]
+    User[User/API Client]
+    APIM[Azure API Management]
+    Orchestrator[Orchestrator Service<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Queues / Topics]
     
-    Agent1[وكيل البحث<br/>تطبيق الحاوية]
-    Agent2[وكيل الكاتب<br/>تطبيق الحاوية]
-    Agent3[وكيل المحلل<br/>تطبيق الحاوية]
-    Agent4[وكيل المراجع<br/>تطبيق الحاوية]
+    Agent1[Research Agent<br/>Container App]
+    Agent2[Writer Agent<br/>Container App]
+    Agent3[Analyst Agent<br/>Container App]
+    Agent4[Reviewer Agent<br/>Container App]
     
-    CosmosDB[(قاعدة بيانات Cosmos<br/>الحالة المشتركة)]
-    Storage[تخزين Azure<br/>المخرجات]
-    AppInsights[رؤى التطبيق<br/>المراقبة]
+    CosmosDB[(Cosmos DB<br/>Shared State)]
+    Storage[Azure Storage<br/>Artifacts]
+    AppInsights[Application Insights<br/>Monitoring]
     
     User --> APIM
     APIM --> Orchestrator
@@ -307,17 +313,20 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**المكونات الأساسية:**
+
+**المكونات الرئيسية:**
 
 | المكون | الغرض | خدمة Azure |
 |-----------|---------|---------------|
-| **API Gateway** | نقطة الدخول، تحديد المعدل، المصادقة | API Management |
-| **Orchestrator** | ينسق سير عمل الوكلاء | Container Apps |
-| **Message Queue** | اتصال غير متزامن | Service Bus / Event Hubs |
-| **Agents** | عمال ذكاء اصطناعي متخصصون | Container Apps / Functions |
-| **State Store** | الحالة المشتركة، تتبع المهام | Cosmos DB |
-| **Artifact Storage** | مستندات، نتائج، سجلات | Blob Storage |
-| **Monitoring** | تتبع موزع، سجلات | Application Insights |
+| **بوابة API** | نقطة الدخول، تحديد المعدل، التحقق | إدارة API |
+| **المنسق** | ينسق تدفقات عمل الوكلاء | تطبيقات الحاويات |
+| **طابور الرسائل** | التواصل غير المتزامن | خدمة الناقل / مراكز الأحداث |
+| **الوكلاء** | عمال ذكاء اصطناعي متخصصون | تطبيقات الحاويات / الدوال |
+| **متجر الحالة** | الحالة المشتركة، تتبع المهام | قاعدة بيانات كوزموس |
+| **تخزين الأثار** | المستندات، النتائج، السجلات | تخزين الكتل |
+| **المراقبة** | التتبع الموزع، السجلات | رؤى التطبيق |
+
+طوابير/مواضيع خدمة الناقل ومراكز الأحداث خدمات مختلفة مع نماذج تسليم/استهلاك مختلفة؛ مراكز الأحداث ليست بديلاً مباشرًا لشيفرة عامل خدمة الناقل أدناه. التوازي، الرسائل المستمرة، وتصويت النماذج لا يضمن من تلقاء نفسها تحمل الأخطاء أو دقة أعلى.
 
 ---
 
@@ -326,30 +335,30 @@ graph TB
 ### الأدوات المطلوبة
 
 ```bash
-# تحقق من Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ متوقع: إصدار azd 1.0.0 أو أعلى
+# Command reference baseline: azd 1.37.2
 
-# تحقق من Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ متوقع: إصدار azure-cli 2.50.0 أو أعلى
+# ✅ Expected: azure-cli 2.50.0 or higher
 
-# تحقق من Docker (للاختبار المحلي)
+# Verify Docker (for local testing)
 docker --version
-# ✅ متوقع: إصدار Docker 20.10 أو أعلى
+# ✅ Expected: Docker version 20.10 or higher
 ```
 
 ### متطلبات Azure
 
 - اشتراك Azure نشط
 - أذونات لإنشاء:
-  - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
-  - Application Insights
+  - تطبيقات الحاويات
+  - نطاقات خدمة الناقل
+  - حسابات قاعدة بيانات كوزموس
+  - حسابات التخزين
+  - رؤى التطبيق
 
-### المعارف المطلوبة
+### المتطلبات المعرفية المسبقة
 
 يجب أن تكون قد أكملت:
 - [إدارة التكوين](../chapter-03-configuration/configuration.md)
@@ -360,7 +369,13 @@ docker --version
 
 ## دليل التنفيذ
 
-### هيكل المشروع
+> **مقاطع تصميم، وليست مختبرًا قابلًا للنشر:** شجرة المشروع وعلامات `File:` أدناه تصف الملفات التي يجب إنشاؤها في مشروعك الخاص؛ هذا المستودع لا يحتوي على تطبيق `multi-agent-system` كامل. القطع الناقصة تشمل قوالب main/parameter، بيئة/سجل تطبيقات الحاويات، ملفات Docker وقفل التبعيات، إعداد قاعدة بيانات/حاوية كوزموس، نشر النماذج، تكوين الهوية/الأدوار، قواعد التوسع، والعمال/الطوابير المتوازية. لا تتوقع من `azd init` إنشاء هذه الملفات أو من `azd up` نشر المقاطع كما هي. للنقطة الانطلاق القابلة للتنفيذ، أكمل [أساسيات الوكلاء المتعددين](../chapter-05-multi-agent/multi-agent-basics.md).
+
+**افتراضات وقت التشغيل:** Python 3.10+، `azure-servicebus`، `azure-cosmos`، `openai`، Flask، و(للمراقبة) `azure-monitor-opentelemetry`؛ ضع `shared` على مسار استيراد Python في كل صورة خدمة. يجب أن تكون حاوية `agent-state/tasks` في كوزموس موجودة مسبقًا بمفتاح التقسيم `/id`. الاتصالات القائمة على المفاتيح تبسط هذه المقاطع، وليست إرشادات للإنتاج: يفضل الهويات المُدارة ذات الأدوار ذات النطاق المحدود لخدمة الناقل/كوزموس/OpenAI. لا تعرض المفاتيح في المخرجات أو السجلات.
+
+توصيل خدمة الناقل هو **مرة واحدة على الأقل**. حافظ على الإتساق لكل مهمة **ولكل خطوة**، استخدم التزامن التفاؤلي (ETags) لقراءة/تعديل/كتابة الحالة، وجدد أقفال الرسائل أثناء المعالجة الطويلة. مدير الحالة البسيط أدناه هو تسلسلي فقط ولا ينفذ هذه الضمانات الإنتاجية.
+
+### هيكلية المشروع
 
 ```
 multi-agent-system/
@@ -392,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## الدرس 1: نمط التنسيق المتسلسل
+## الدرس 1: نمط التنسيق التسلسلي
 
-### التنفيذ: سير إنشاء المحتوى
+### التنفيذ: خط إنتاج إنشاء المحتوى
 
-لننشئ سيرًا متسلسلًا: بحث → كتابة → تحرير → نشر
+لنصمم خط إنتاج تسلسلي: بحث → كتابة → تحرير. النشر خارج هذا المثال.
 
 ### 1. تكوين AZD
 
@@ -429,7 +444,7 @@ services:
     host: containerapp
 ```
 
-### 2. البنية التحتية: Service Bus للتنسيق
+### 2. البنية التحتية: خدمة الناقل للتنسيق
 
 **الملف: `infra/core/servicebus.bicep`**
 
@@ -483,7 +498,8 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 }
 
 output namespace string = serviceBusNamespace.name
-output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+// Do not output RootManageSharedAccessKey. Resolve scoped credentials
+// securely or use managed identity in the application and scale rules.
 ```
 
 ### 3. مدير الحالة المشتركة
@@ -492,7 +508,7 @@ output connectionString string = listKeys('${serviceBusNamespace.id}/Authorizati
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 class StateManager:
@@ -513,7 +529,7 @@ class StateManager:
             'type': task_type,
             'status': 'pending',
             'input': input_data,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'steps': []
         }
         self.container.create_item(task)
@@ -525,7 +541,7 @@ class StateManager:
         
         task['steps'].append({
             'name': step_name,
-            'completed_at': datetime.utcnow().isoformat(),
+            'completed_at': datetime.now(timezone.utc).isoformat(),
             'result': result
         })
         
@@ -537,7 +553,7 @@ class StateManager:
         task = self.container.read_item(task_id, partition_key=task_id)
         task['status'] = 'completed'
         task['result'] = final_result
-        task['completed_at'] = datetime.utcnow().isoformat()
+        task['completed_at'] = datetime.now(timezone.utc).isoformat()
         self.container.replace_item(task_id, task)
         return task
     
@@ -561,7 +577,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# اتصال Service Bus
+# Service Bus connection
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -572,15 +588,15 @@ def health():
 @app.route('/create-content', methods=['POST'])
 def create_content():
     """
-    Sequential workflow: Research → Write → Edit → Publish
+    Sequential workflow: Research → Write → Edit (returns a draft; no publishing)
     """
-    data = request.json
+    data = request.get_json(silent=True) or {}
     topic = data.get('topic')
     
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # إنشاء مهمة في مخزن الحالة
+    # Create task in state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -588,13 +604,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # إرسال رسالة إلى وكيل الأبحاث (الخطوة الأولى)
+    # Send message to research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # إلى أين نرسل النتائج
+            'next_queue': 'writer-tasks'  # Where to send results
         }),
         content_type='application/json'
     )
@@ -606,7 +622,7 @@ def create_content():
         'task_id': task_id,
         'status': 'started',
         'workflow': 'sequential',
-        'steps': ['research', 'write', 'edit', 'publish'],
+        'steps': ['research', 'write', 'edit'],
         'message': 'Content creation pipeline initiated'
     }), 202
 
@@ -635,7 +651,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# تهيئة العملاء
+# Initialize clients
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -643,7 +659,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -655,9 +671,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # استدعاء نماذج Microsoft Foundry للبحث
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -667,14 +683,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # تحديث الحالة
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # إرسال إلى الوكيل التالي (الكاتب)
+    # Send to next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -713,7 +729,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. وكيل الكاتب
+### 6. وكيل الكتابة
 
 **الملف: `src/agents/writer/app.py`**
 
@@ -731,7 +747,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -744,9 +760,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # استدعاء نماذج Microsoft Foundry لكتابة مقال
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -756,14 +772,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # تحديث الحالة
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # إرسال إلى المحرر
+    # Send to editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -801,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. وكيل المحرر
+### 7. وكيل التحرير
 
 **الملف: `src/agents/editor/app.py`**
 
@@ -819,7 +835,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -831,9 +847,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # استدعاء نماذج Microsoft Foundry للتحرير
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -843,7 +859,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # وضع علامة على المهمة كمكتملة
+    # Mark task as complete
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -879,24 +895,25 @@ if __name__ == '__main__':
 
 ### 8. النشر والاختبار
 
+هذه الأوامر تنطبق **فقط بعد تنفيذ الملفات الناقصة في المشروع**. تهيئة وكيل Foundry التفاعلي هي سير عمل منفصل؛ لا تُنشئ هذا التصميم لخدمة الناقل.
+
 ```bash
-# الخيار أ: النشر القائم على القوالب
-azd init
+# In your completed custom project
 azd up
 
-# الخيار ب: نشر ملف المانيفست للوكيل (يتطلب امتدادًا)
+# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> انظر [أوامر AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) لجميع العلامات والخيارات الخاصة بـ `azd ai`.
+> راجع [أوامر AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) لكل أعلام وخيارات `azd ai`.
 
 ```bash
-# الحصول على عنوان URL للمنسق
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# إنشاء محتوى
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
@@ -908,7 +925,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "status": "started",
   "workflow": "sequential",
-  "steps": ["research", "write", "edit", "publish"],
+  "steps": ["research", "write", "edit"],
   "message": "Content creation pipeline initiated"
 }
 ```
@@ -919,7 +936,7 @@ TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ المخرجات المتوقعة (مكتمل):**
+**✅ المخرجات المتوقعة (مكتملة):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -949,9 +966,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## الدرس 2: نمط التنسيق المتوازي
 
-### التنفيذ: جامع أبحاث متعدد المصادر
+### التنفيذ: جامع أبحاث من مصادر متعددة
 
-لننشئ نظامًا متوازيًا يجمع المعلومات من مصادر متعددة في وقتٍ واحد.
+لننشئ نظامًا متوازيًا يجمع المعلومات من مصادر متعددة في نفس الوقت.
 
 ### المنسق المتوازي
 
@@ -990,7 +1007,7 @@ def research_parallel():
         }
     )
     
-    # التوزيع: الإرسال إلى جميع الوكلاء في نفس الوقت
+    # Fan-out: publish sequentially; workers may process concurrently.
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1041,9 +1058,10 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# تتبع النتائج لكل مهمة
-task_results = defaultdict(list)
-expected_agents = 4  # الويب، أكاديمي، أخبار، اجتماعي
+# Single-process demo only: not durable or shared across replicas.
+# Production: use durable unique (task_id, agent_type) result records.
+task_results = defaultdict(dict)
+expected_agents = 4  # web, academic, news, social
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1051,29 +1069,29 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # تخزين النتيجة
-    task_results[task_id].append({
+    # Store result
+    task_results[task_id][agent_type] = {
         'agent': agent_type,
         'data': result
-    })
+    }
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # التحقق مما إذا كان جميع الوكلاء قد أكملوا (fan-in)
+    # Check if all agents completed (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # دمج النتائج
+        # Combine results
         aggregated = {
             'query': message_data['query'],
-            'sources': task_results[task_id],
-            'summary': generate_summary(task_results[task_id])
+            'sources': list(task_results[task_id].values()),
+            'summary': generate_summary(list(task_results[task_id].values()))
         }
         
-        # وضع علامة كمكتمل
+        # Mark complete
         state_manager.complete_task(task_id, aggregated)
         
-        # تنظيف
+        # Clean up
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1106,125 +1124,90 @@ if __name__ == '__main__':
 ```
 
 **فوائد النمط المتوازي:**
-- ⚡ **أسرع بمقدار 4x** (تشغيل الوكلاء في وقت واحد)
-- 🔄 **متحمل للأخطاء** (النتائج الجزئية مقبولة)
+- ⚡ **زمن استجابة محتمل أقل** (محصور بأبطأ عامل زائد حمل التنسيق)
+- 🔄 **يدعم النتائج الجزئية** مع مواعيد نهائية وسياسة فشل صريحة (غير مفعلة في الجامع الأساسي)
 - 📈 **قابل للتوسع** (إضافة وكلاء بسهولة)
 
 ---
 
 ## تمارين عملية
 
-### التمرين 1: إضافة معالجة المهلة ⭐⭐ (متوسط)
+### التمرين 1: إضافة التعامل مع المهلة ⭐⭐ (متوسط)
 
-**الهدف**: تنفيذ منطق المهلة حتى لا ينتظر المجمع الوكلاء البطيئين إلى الأبد.
+**الهدف**: تنفيذ منطق المهلة حتى لا ينتظر الجامع إلى أجل غير مسمى للوكلاء البطيئين.
+
+**نقطة البداية:** شغّل هذا المحاكاة المحلية للموعد النهائي قبل دمجه في عامل الطابور. المهلة التي تُتحقق فقط عند وصول رسالة أخرى لا تنفّذ إذا لم يرسل العامل المفقود شيئًا.
 
 **الخطوات**:
 
-1. **أضف تتبع المهلة إلى المجمع:**
+1. **أضف تتبع المهلة إلى الجامع:**
 
 ```python
-from datetime import datetime, timedelta
+import asyncio
 
-task_timeouts = {}  # معرّف المهمة -> وقت الانتهاء
+async def simulated_agent(name, delay):
+    await asyncio.sleep(delay)
+    return {'agent': name, 'result': 'done'}
 
-def process_result(message_data):
-    task_id = message_data['task_id']
-    
-    # تعيين مهلة على النتيجة الأولى
-    if task_id not in task_timeouts:
-        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
-    
-    task_results[task_id].append({
-        'agent': message_data['agent_type'],
-        'data': message_data['result']
-    })
-    
-    # تحقّق مما إذا كانت مكتملة أو انتهت مهلة تنفيذها
-    if len(task_results[task_id]) == expected_agents or \
-       datetime.utcnow() > task_timeouts[task_id]:
-        
-        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
-        
-        aggregated = {
-            'query': message_data['query'],
-            'sources': task_results[task_id],
-            'completed_agents': len(task_results[task_id]),
-            'timed_out': len(task_results[task_id]) < expected_agents
-        }
-        
-        state_manager.complete_task(task_id, aggregated)
-        
-        # تنظيف
-        del task_results[task_id]
-        del task_timeouts[task_id]
+async def main():
+    tasks = [asyncio.create_task(simulated_agent(name, delay))
+             for name, delay in [('web', 0.1), ('academic', 0.2),
+                                 ('news', 0.3), ('social', 3)]]
+    done, pending = await asyncio.wait(tasks, timeout=1)
+    results = [task.result() for task in done]
+    for task in pending:
+        task.cancel()
+    await asyncio.gather(*pending, return_exceptions=True)
+    print({'completed_agents': len(results), 'timed_out': bool(pending)})
+    assert len(results) == 3 and pending
+
+asyncio.run(main())
 ```
 
-2. **اختبر بتأخيرات صناعية:**
+2. **المخرجات المتوقعة:**
 
-```python
-# في وكيل واحد، أضف تأخيرًا لمحاكاة المعالجة البطيئة
-import time
-time.sleep(35)  # يتجاوز مهلة 30 ثانية
+```text
+{'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **نشر والتحقق:**
+3. **تكامل نظام الطابور (مهمة تصميم):** احفظ موعد التوزيع النهائي والوكلاء المتوقعين عند إنشاء المهمة، نفذ مسح دورية للمهلة مستقلة عن النتائج الواردة، أكمل النتائج الجزئية بشكل ذري، وتجاهل الرسائل المتأخرة/المكررة للمهام المكتملة. المهلة المحلية لا تلغي العمال البعيدين.
+
+لمشروعك المنفذ فقط:
 
 ```bash
 azd deploy aggregator
 
-# إرسال المهمة
+# Submit task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# تحقق من النتائج بعد 30 ثانية
+# Check results after 30 seconds
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ معايير النجاح:**
-- ✅ تكتمل المهمة بعد 30 ثانية حتى لو كانت الوكلاء غير مكتملة
-- ✅ تشير الاستجابة إلى نتائج جزئية (`"timed_out": true`)
-- ✅ تُعاد النتائج المتاحة (3 من أصل 4 وكلاء)
+- ✅ الاختبار المحلي يعود بعد انتهاء المهلة البالغة ثانية واحدة حتى لو لم يكتمل وكيل
+- ✅ الاستجابة تشير إلى نتائج جزئية (`"timed_out": true`)
+- ✅ تُعاد النتائج المتوفرة (3 من أصل 4 وكلاء)
 
 **الوقت**: 20-25 دقيقة
 
 ---
 
-### التمرين 2: تنفيذ منطق المحاولة مجددًا ⭐⭐⭐ (متقدم)
+### التمرين 2: تنفيذ منطق إعادة المحاولة ⭐⭐⭐ (متقدم)
 
-**الهدف**: إعادة المحاولة تلقائيًا للمهام الفاشلة قبل الاستسلام.
+**الهدف**: إعادة محاولة مهام الوكلاء الفاشلة تلقائيًا قبل الاستسلام.
 
 **الخطوات**:
 
-1. **أضف تتبع المحاولات إلى المنسق:**
+1. **استخدم عدادات التوصيل في خدمة الناقل بدلًا من إعادة إدراج عدادات إعادة المحاولة المخصصة:**
 
 ```python
-from dataclasses import dataclass
-from typing import Dict
-
-@dataclass
-class RetryConfig:
-    max_retries: int = 3
-    backoff_seconds: int = 5
-
-retry_counts: Dict[str, int] = {}  # معرّف الرسالة -> عدد مرات إعادة المحاولة
-
-def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
-    """Send message with retry metadata"""
-    message_id = message_data.get('message_id', str(uuid.uuid4()))
-    message_data['message_id'] = message_id
-    message_data['retry_count'] = retry_counts.get(message_id, 0)
-    message_data['max_retries'] = retry_config.max_retries
-    
-    sender = servicebus_client.get_queue_sender(queue_name)
-    message = ServiceBusMessage(
-        body=json.dumps(message_data),
-        content_type='application/json',
-        message_id=message_id
-    )
-    
-    with sender:
-        sender.send_messages(message)
+import json
+import time
+# Integration fragment: use a live peek-lock ServiceBusReceiver.
+# Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
 2. **أضف معالج إعادة المحاولة إلى الوكلاء:**
@@ -1235,31 +1218,21 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # معالجة الرسالة
+        # Process the message
         process_func(message_data)
         
-        # نجاح - مكتمل
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
-        message_id = message.message_id
-        retry_count = message_data.get('retry_count', 0)
-        max_retries = message_data.get('max_retries', 3)
-        
-        if retry_count < max_retries:
-            # إعادة المحاولة: التخلي وإعادة إدخالها في الطابور مع زيادة العداد
-            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
-            
-            message_data['retry_count'] = retry_count + 1
-            
-            # إرسال مرة أخرى إلى نفس قائمة الانتظار مع تأخير
-            time.sleep(5 * (retry_count + 1))  # تأخير أسي متزايد
-            send_with_retry(queue_name, message_data, RetryConfig())
-            
-            receiver.complete_message(message)  # إزالة الأصل
+        if message.delivery_count < 4:
+            # Bounded exponential delay: 5s, 10s, 20s.
+            # Renew the lock if processing + waiting can exceed its duration.
+            time.sleep(5 * 2 ** (message.delivery_count - 1))
+            receiver.abandon_message(message)
         else:
-            # تجاوز الحد الأقصى لعدد المحاولات - نقل إلى قائمة الرسائل الميتة
-            print(f"❌ Max retries exceeded for message {message_id}")
+            # Max retries exceeded - move to dead letter queue
+            print(f"❌ Max attempts exceeded for message {message.message_id}")
             receiver.dead_letter_message(
                 message,
                 reason="MaxRetriesExceeded",
@@ -1267,13 +1240,13 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **مراقبة قائمة الرسائل الميتة (dead letter queue):**
+3. **راقب طابور الرسائل غير القابلة للتسليم:**
 
 ```python
 def monitor_dead_letters():
     """Check dead letter queue for failed messages"""
     receiver = servicebus_client.get_queue_receiver(
-        'research-queue',
+        'research-tasks',
         sub_queue='deadletter'
     )
     
@@ -1286,31 +1259,31 @@ def monitor_dead_letters():
 ```
 
 **✅ معايير النجاح:**
-- ✅ يتم إعادة محاولة المهام الفاشلة تلقائيًا (حتى 3 مرات)
-- ✅ تراجع أسي بين المحاولات (5s, 10s, 15s)
-- ✅ بعد الحد الأقصى للمحاولات، تذهب الرسائل إلى قائمة الرسائل الميتة
-- ✅ يمكن مراقبة قائمة الرسائل الميتة وإعادة تشغيلها
+- ✅ تعاد المحاولة في المهام الفاشلة تلقائيًا (حتى 3 مرات)
+- ✅ تراجع أسي بين المحاولات (5 ثوانٍ، 10 ثوانٍ، 20 ثانية)، مع تجديد قفل الرسالة عند الحاجة
+- ✅ بعد أقصى عدد محاولات، تذهب الرسائل إلى طابور الرسائل غير القابلة للتسليم
+- ✅ يمكن فحص رسائل الطابور غير القابلة للتسليم؛ إعادة التشغيل تحتاج سير عمل استرداد متسق منفصل
 
 **الوقت**: 30-40 دقيقة
 
 ---
 
-### التمرين 3: تنفيذ قاطع الدائرة (Circuit Breaker) ⭐⭐⭐ (متقدم)
+### التمرين 3: تنفيذ قاطع الدائرة ⭐⭐⭐ (متقدم)
 
 **الهدف**: منع الفشل المتسلسل عن طريق إيقاف الطلبات إلى الوكلاء الفاشلين.
 
 **الخطوات**:
 
-1. **إنشاء فصل قاطع الدائرة:**
+1. **إنشاء فئة قاطع الدائرة:**
 
 ```python
 from enum import Enum
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # تشغيل طبيعي
-    OPEN = "open"          # يفشل، يرفض الطلبات
-    HALF_OPEN = "half_open"  # اختبار ما إذا تعافى
+    CLOSED = "closed"      # Normal operation
+    OPEN = "open"          # Failing, reject requests
+    HALF_OPEN = "half_open"  # Testing if recovered
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1323,8 +1296,8 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # التحقق مما إذا انتهت المهلة
-            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+            # Check if timeout expired
+            if datetime.now(timezone.utc) - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
             else:
@@ -1333,7 +1306,8 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # نجاح
+            # Success
+            self.failure_count = 0 # Count consecutive failures only
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1343,19 +1317,19 @@ class CircuitBreaker:
             
         except Exception as e:
             self.failure_count += 1
-            self.last_failure_time = datetime.utcnow()
+            self.last_failure_time = datetime.now(timezone.utc)
             
             if self.failure_count >= self.failure_threshold:
                 self.state = CircuitState.OPEN
                 print(f"🔴 Circuit breaker: OPEN (too many failures)")
             
-            raise e
+            raise
 ```
 
-2. **تطبيقه على استدعاءات الوكلاء:**
+2. **تطبيقها على استدعاءات الوكلاء:**
 
 ```python
-# في المنسق
+# In orchestrator
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,35 +1345,36 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # استمر مع الوكلاء الآخرين
+        # Continue with other agents
 ```
 
-3. **اختبار قاطع الدائرة:**
+هذه الدائرة تحمي **عملية الإرسال** وليس إكمالها بواسطة العامل البعيد: إدخال رسالة بنجاح لا يدل على ما إذا كان الوكيل لا يزال نشطًا. `send_message` هي دالة الإرسال في تطبيقك. بالنسبة لدارات التنفيذ، قم بإدخال حالات فشل/انتهاء مهام الملاحظة في منسق دائم. هذه الفئة في الذاكرة هي عرض توضيحي ذو خيط واحد، وليست قاطع دائرة موزع.
 
-```bash
-# محاكاة فشل متكرر (إيقاف وكيل واحد)
-az containerapp stop --name web-research-agent --resource-group rg-agents
+3. **اختبر قاطع الدارة محليًا:**
 
-# إرسال طلبات متعددة
-for i in {1..10}; do
-  curl -X POST $ORCHESTRATOR_URL/research-parallel \
-    -H "Content-Type: application/json" \
-    -d '{"query": "test query '$i'"}'
-  sleep 2
-done
-
-# تحقق من السجلات - يجب أن ترى أن الدائرة مفتوحة بعد 5 حالات فشل
-# استخدم Azure CLI لسجلات تطبيق الحاوية:
-az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```python
+# Run after the class definition; no Azure changes required.
+circuit = CircuitBreaker(failure_threshold=5, timeout_seconds=0)
+def fail():
+    raise RuntimeError("simulated failure")
+for _ in range(5):
+    try:
+        circuit.call(fail)
+    except RuntimeError:
+        pass
+assert circuit.state == CircuitState.OPEN
+assert circuit.call(lambda: "recovered") == "recovered"
+assert circuit.state == CircuitState.CLOSED
+print("Circuit breaker recovery verified")
 ```
 
 **✅ معايير النجاح:**
-- ✅ بعد 5 حالات فشل، تنفتح الدائرة (ترفض الطلبات)
-- ✅ بعد 60 ثانية، تنتقل الدائرة إلى حالة نصف مفتوحة (تختبر التعافي)
-- ✅ تستمر الوكلاء الآخرون في العمل بشكل طبيعي
-- ✅ تُغلق الدائرة تلقائيًا عندما يتعافى الوكيل
+- ✅ بعد 5 حالات فشل، تفتح الدائرة (ترفض الطلبات)
+- ✅ بعد 60 ثانية، تصبح الدائرة نصف مفتوحة (تختبر التعافي)
+- ✅ يواصل الوكلاء الآخرون العمل بشكل طبيعي
+- ✅ تغلق الدائرة تلقائيًا عند تعافي الوكيل
 
-**الوقت**: 40-50 دقيقة
+**المدة**: 40-50 دقيقة
 
 ---
 
@@ -1407,53 +1382,52 @@ az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 5
 
 ### التتبع الموزع باستخدام Application Insights
 
-**الملف: `src/shared/tracing.py`**
+**ملف: `src/shared/tracing.py`**
 
 ```python
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.samplers import AlwaysOnSampler
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
-# تكوين التتبع
-config_integration.trace_integrations(['requests', 'logging'])
-
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# إنشاء متتبع
-tracer = Tracer(
-    exporter=AzureExporter(connection_string=connection_string),
-    sampler=AlwaysOnSampler()
-)
+# Configure once per process. Message send/receive trace-context propagation
+# and agent attributes on exceptions need explicit instrumentation.
+if connection_string:
+    configure_azure_monitor(connection_string=connection_string, logger_name=__name__)
+tracer = trace.get_tracer(__name__)
 
-# تكوين السجلات
+# Configure logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
 
-def trace_agent_call(agent_name, task_id, operation):
+def trace_agent_call(agent_name, task_id, operation_name, operation):
     """Trace agent operations"""
-    with tracer.span(name=f'{agent_name}.{operation}') as span:
-        span.add_attribute('agent', agent_name)
-        span.add_attribute('task_id', task_id)
-        span.add_attribute('operation', operation)
+    with tracer.start_as_current_span(f'agent.{agent_name}.{operation_name}', kind=SpanKind.CLIENT) as span:
+        span.set_attribute('agent', agent_name)
+        span.set_attribute('task_id', task_id)
+        span.set_attribute('operation', operation_name)
         
         try:
             result = operation()
-            span.add_attribute('status', 'success')
+            span.set_attribute('status', 'success')
+            logger.info('Agent operation completed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             return result
         except Exception as e:
-            span.add_attribute('status', 'error')
-            span.add_attribute('error', str(e))
+            span.set_attribute('status', 'error')
+            logger.exception('Agent operation failed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             raise
 ```
 
 ### استعلامات Application Insights
 
-تعقب سير عمل الوكلاء المتعددين:
+**تتبع سير عمل متعدد الوكلاء:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1494,22 +1468,24 @@ exceptions
 
 ## تحليل التكلفة
 
-### تكاليف نظام الوكلاء المتعددين (تقديرات شهرية)
+### تكاليف نظام متعدد الوكلاء (تقديرات شهرية)
+
+أرقام تخطيط توضيحية فقط، ليست عروض أسعار: المجموع أدناه هو **240-565 دولارًا شهريًا**. تحقق من الأسعار الإقليمية الحالية، وساعات النسخ النشطة/الخاملة، ومزيج رموز الإدخال/الإخراج، والتخزين، والقياس. الخادم بدون خادم لا يحتوي على حد أدنى لمعدل المرور المحجوز ولكنه لا يزال يحاسب على الطلبات والتخزين.
 
 | المكون | التكوين | التكلفة |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
-| **Service Bus** | Standard tier, 10M messages | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
-| **الإجمالي** | | **$240-565/month** |
+| **المنسق** | تطبيق حاوية واحد (1 vCPU، 2GB) | 30-50 دولارًا |
+| **4 وكلاء** | 4 تطبيقات حاوية (0.5 vCPU، 1GB لكل منها) | 60-120 دولارًا |
+| **Service Bus** | المستوى القياسي، 10 ملايين رسالة | 10-20 دولارًا |
+| **Cosmos DB** | بدون خادم، تخزين 5GB، 1 مليون وحدة طلب | 25-50 دولارًا |
+| **تخزين Blob** | تخزين 10GB، 100 ألف عملية | 5-10 دولارات |
+| **Application Insights** | استيعاب 5GB | 10-15 دولارًا |
+| **نماذج Microsoft Foundry** | gpt-4.1، 10 ملايين رمز | 100-300 دولارًا |
+| **الإجمالي** | | **240-565 دولارًا شهريًا** |
 
 ### استراتيجيات تحسين التكلفة
 
-1. **استخدم الخوادم بدون خادم حيثما أمكن:**
+1. **استخدم الخادم بدون خادم حيثما أمكن:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1518,23 +1494,23 @@ exceptions
    }
    ```
 
-2. **قم بموازنة الوكلاء إلى صفر عندما يكونون خامدين:**
+2. **قلل عدد الوكلاء إلى الصفر عند الخمول:**
    ```bicep
    scale: {
-     minReplicas: 0  // Scale to zero when no messages
+     minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
      maxReplicas: 10
    }
    ```
 
-3. **استخدم التجميع (batching) لـ Service Bus:**
+3. **استخدم التجميع لـ Service Bus:**
    ```python
-   # أرسل الرسائل على دفعات (أرخص)
+   # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **قم بتخزين النتائج المستخدمة بشكل متكرر في ذاكرة تخزين مؤقت:**
+4. **قم بتخزين النتائج المستخدمة بشكل متكرر مؤقتًا:**
    ```python
-   # استخدم Azure Cache for Redis
+   # Use Azure Cache for Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
@@ -1543,42 +1519,39 @@ exceptions
 
 ## أفضل الممارسات
 
-### ✅ افعل:
+### ✅ قم بـ:
 
-1. **استخدم عمليات متكافئة (idempotent)**
+1. **استخدم العمليات المتطابقة idempotent**
    ```python
-   # يمكن للوكيل معالجة نفس الرسالة بأمان عدة مرات
+   # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
-       if state_manager.task_exists(task_id):
-           print(f"Task {task_id} already processed, skipping")
-           return
-       # جاري معالجة المهمة...
+       raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **نفّذ تسجيلًا شاملاً**
+2. **نفذ تسجيلًا شاملًا**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **استخدم معرفات الترابط (correlation IDs)**
+3. **استخدم معرفات الترابط correlation IDs**
    ```python
-   # مرّر task_id عبر كامل سير العمل
+   # Pass task_id through entire workflow
    message_data = {
-       'task_id': task_id,  # معرّف الارتباط
+       'task_id': task_id,  # Correlation ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **حدد TTL للرسائل (time-to-live)**
+4. **قم بتعيين TTL (مدة بقاء) للرسالة**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **راقب قوائم الرسائل الميتة**
+5. **راقب قوائم الحروف الميتة dead letter queues**
    ```python
-   # المراقبة المنتظمة للرسائل الفاشلة
+   # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
@@ -1586,29 +1559,29 @@ exceptions
 
 1. **لا تنشئ تبعيات دائرية**
    ```python
-   # ❌ سيئ: الوكيل A → الوكيل B → الوكيل A (حلقة لا نهائية)
-   # ✅ جيد: حدد رسمًا بيانيًا موجهًا واضحًا وخاليًا من الدورات (DAG)
+   # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
+   # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **لا تحظر خيوط الوكلاء**
+2. **لا تحجب خيوط الوكيل**
    ```python
-   # ❌ سيئ: انتظار متزامن
+   # ❌ BAD: Synchronous wait
    while not task_complete:
        time.sleep(1)
    
-   # ✅ جيد: استخدم ردود الاستدعاء في طابور الرسائل
+   # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **لا تتجاهل الإخفاقات الجزئية**
+3. **لا تتجاهل حالات الفشل الجزئية**
    ```python
-   # ❌ سيئ: فشل سير العمل بأكمله إذا فشل وكيل واحد
-   # ✅ جيد: إرجاع نتائج جزئية مع مؤشرات على الأخطاء
+   # ❌ BAD: Fail entire workflow if one agent fails
+   # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **لا تستخدم محاولات إعادة غير محدودة**
+4. **لا تستخدم المحاولات اللامتناهية**
    ```python
-   # ❌ سيئ: إعادة المحاولة إلى الأبد
-   # ✅ جيد: max_retries = 3، ثم إلى قائمة الرسائل الميتة
+   # ❌ BAD: retry forever
+   # ✅ GOOD: max_retries = 3, then dead letter
    ```
 
 ---
@@ -1618,35 +1591,38 @@ exceptions
 ### المشكلة: الرسائل عالقة في قائمة الانتظار
 
 **الأعراض:**
-- تراكم الرسائل في قائمة الانتظار
+- تراكم الرسائل في القائمة
 - الوكلاء لا يعالجون
-- حالة المهمة عالقة عند "pending"
+- حالة المهمة عالقة عند "قيد الانتظار"
 
 **التشخيص:**
 ```bash
-# تحقق من عمق الطابور
+# Check queue depth
 az servicebus queue show \
+  --resource-group "$RG_NAME" \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# تحقق من سجلات الوكيل باستخدام Azure CLI
+# Check agent logs using Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **الحلول:**
 
-1. **زيادة نسخ الوكلاء:**
+1. **زيادة نسخ الوكيل:**
    ```bash
    az containerapp update \
+     --resource-group "$RG_NAME" \
      --name research-agent \
      --min-replicas 3 \
      --max-replicas 10
    ```
 
-2. **تحقق من قائمة الرسائل الميتة (Dead Letter Queue):**
+2. **تحقق من قائمة الحروف الميتة:**
    ```bash
    az servicebus queue show \
+     --resource-group "$RG_NAME" \
      --namespace-name mybus \
      --name research-tasks \
      --query "countDetails.deadLetterMessageCount"
@@ -1654,36 +1630,36 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### المشكلة: انتهاء مهلة المهمة/لا تكتمل أبدًا
+### المشكلة: انتهاء وقت المهمة / لا تكتمل أبدًا
 
 **الأعراض:**
-- تبقى حالة المهمة "in_progress"
-- بعض الوكلاء يكملون، والبعض الآخر لا
+- حالة المهمة تبقى "قيد التنفيذ"
+- بعض الوكلاء يكملون، بينما لا يكمل الآخرون
 - لا توجد رسائل خطأ
 
 **التشخيص:**
 ```bash
-# تحقق من حالة المهمة
+# Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# تحقق من Application Insights
-# تشغيل الاستعلام: traces | where customDimensions.task_id == "..."
+# Check Application Insights
+# Run query: traces | where customDimensions.task_id == "..."
 ```
 
 **الحلول:**
 
-1. **تنفيذ مهلة في المجمع (التمرين 1)**
+1. **نفذ مهلة في المجمع (التمرين 1)**
 
-2. **التحقق من فشل الوكلاء باستخدام Azure Monitor:**
+2. **تحقق من فشل الوكلاء باستخدام Azure Monitor:**
    ```bash
-   # عرض السجلات عبر azd monitor
+   # View logs via azd monitor
    azd monitor --logs
    
-   # أو استخدم Azure CLI للاطّلاع على سجلات تطبيق الحاوية المحدد
+   # Or use Azure CLI to check specific container app logs
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **التحقق من تشغيل جميع الوكلاء:**
+3. **تحقق من تشغيل جميع الوكلاء:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1692,50 +1668,50 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## تعلّم المزيد
+## تعلم المزيد
 
 ### الوثائق الرسمية
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [نماذج تنظيم وكلاء الذكاء الاصطناعي](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### الخطوات التالية في هذه الدورة
-- ← السابق: [Capacity Planning](capacity-planning.md)
-- → التالي: [SKU Selection](sku-selection.md)
-- 🏠 [الصفحة الرئيسية للدورة](../../README.md)
+### الخطوات التالية في هذا المساق
+- ← السابق: [تخطيط القدرة](capacity-planning.md)
+- → التالي: [اختيار SKU](sku-selection.md)
+- 🏠 [الصفحة الرئيسية للمساق](../../README.md)
 
 ### أمثلة ذات صلة
-- [مثال الخدمات المصغرة](../../../../examples/microservices) - أنماط اتصال الخدمات
+- [مثال خدمات مصغرة](../../../../examples/microservices) - أنماط تواصل الخدمة
 - [مثال نماذج Microsoft Foundry](../../../../examples/azure-openai-chat) - تكامل الذكاء الاصطناعي
 
 ---
 
-## الملخص
+## ملخص
 
-**ما تعلمته:**
-- ✅ خمسة أنماط للتنسيق (التسلسلي، المتوازي، الهرمي، المدفوع بالأحداث، الإجماع)
-- ✅ بنية متعددة الوكلاء على Azure (Service Bus، Cosmos DB، Container Apps)
+**لقد تعلمت:**
+- ✅ خمسة أنماط تنسيق (تسلسلي، متوازي، هرمي، مدفوع بالحدث، توافق)
+- ✅ بنية متعددة الوكلاء على Azure (Service Bus، Cosmos DB، تطبيقات الحاوية)
 - ✅ إدارة الحالة عبر وكلاء موزعين
-- ✅ التعامل مع المهلات، إعادة المحاولات، وقواطع الدائرة
-- ✅ مراقبة وتصحيح أخطاء الأنظمة الموزعة
+- ✅ التعامل مع انتهاء الوقت، المحاولات، وأقطاعات الدائرة
+- ✅ مراقبة وتصحيح أنظمة موزعة
 - ✅ استراتيجيات تحسين التكلفة
 
 **النقاط الرئيسية:**
-1. **اختر النمط المناسب** - التسلسلي لعمليات سير العمل المرتبة، المتوازي للسرعة، المدفوع بالأحداث للمرونة
-2. **ادِر الحالة بحذر** - استخدم Cosmos DB أو ما يشابهها للحالة المشتركة
-3. **تعامل مع الأخطاء بسلاسة** - المهلات، إعادة المحاولات، قواطع الدائرة، قوائم الرسائل الميتة
-4. **راقب كل شيء** - التتبع الموزع أساسي لتصحيح الأخطاء
-5. **حسّن التكاليف** - التوسع حتى الصفر، استخدم الخوادم بدون خادم (serverless)، نفّذ التخزين المؤقت
+1. **اختر النمط الصحيح** - التسلسلي لسير العمل المرتب، المتوازي للسرعة، المدفوع بالحدث للمرونة
+2. **أدر الحالة بحذر** - استخدم Cosmos DB أو ما شابه للحالة المشتركة
+3. **تعامل مع الفشل بلطف** - انتهاء الوقت، المحاولات، أقطاعات الدائرة، قوائم الحروف الميتة
+4. **راقب كل شيء** - التتبع الموزع ضروري لتصحيح الأخطاء
+5. **حسن التكاليف** - قم بالتوسيع للصفر، استخدم الخادم بدون خادم، نفذ التخزين المؤقت
 
 **الخطوات التالية:**
 1. أكمل التمارين العملية
-2. ابنِ نظامًا متعدد الوكلاء لحالة استخدامك
-3. ادرس [SKU Selection](sku-selection.md) لتحسين الأداء والتكلفة
+2. ابني نظامًا متعدد الوكلاء لحالتك الخاصة
+3. ادرس [اختيار SKU](sku-selection.md) لتحسين الأداء والتكلفة
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية Co-op Translator (https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يُرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. ينبغي اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحرجة، يُنصح بالاعتماد على ترجمة بشرية متخصصة. لا نتحمل أي مسؤولية عن أي سوء فهم أو تفسير خاطئ ينشأ عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

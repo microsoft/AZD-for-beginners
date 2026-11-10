@@ -1,24 +1,24 @@
 # AZD для начинающих: структурированное обучение
 
-![AZD-for-beginners](../../translated_images/ru/azdbeginners.5527441dd9f74068.webp) 
+![AZD-для-начинающих](../../translated_images/ru/azdbeginners.5527441dd9f74068.webp) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+[![Наблюдатели GitHub](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://github.com/microsoft/AZD-for-beginners)
+[![Форки GitHub](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![Звезды GitHub](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://github.com/microsoft/AZD-for-beginners)
 
-[![Azure Discord](https://dcbadge.limes.pink/api/server/nkVh3dp)](https://discord.com/invite/nkVh3dp)
-[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+[![Discord Azure](https://dcbadge.limes.pink/api/server/nkVh3dp)](https://discord.com/invite/nkVh3dp)
+[![Discord Microsoft Foundry](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
 ---
 
-### Автоматические переводы (постоянно обновляются)
+### Автоматические переводы (всегда актуальные)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Арабский](../ar/README.md) | [Бенгальский](../bn/README.md) | [Болгарский](../bg/README.md) | [Бирманский (Мьянма)](../my/README.md) | [Китайский (упрощённый)](../zh-CN/README.md) | [Китайский (традиционный, Гонконг)](../zh-HK/README.md) | [Китайский (традиционный, Макао)](../zh-MO/README.md) | [Китайский (традиционный, Тайвань)](../zh-TW/README.md) | [Хорватский](../hr/README.md) | [Чешский](../cs/README.md) | [Датский](../da/README.md) | [Нидерландский](../nl/README.md) | [Эстонский](../et/README.md) | [Финский](../fi/README.md) | [Французский](../fr/README.md) | [Немецкий](../de/README.md) | [Греческий](../el/README.md) | [Иврит](../he/README.md) | [Хинди](../hi/README.md) | [Венгерский](../hu/README.md) | [Индонезийский](../id/README.md) | [Итальянский](../it/README.md) | [Японский](../ja/README.md) | [Каннада](../kn/README.md) | [Кхмерский](../km/README.md) | [Корейский](../ko/README.md) | [Литовский](../lt/README.md) | [Малайский](../ms/README.md) | [Малаялам](../ml/README.md) | [Манипури (Мейтеи Майек)](../mni/README.md) | [Маратхи](../mr/README.md) | [Непальский](../ne/README.md) | [Нигерийский пиджин](../pcm/README.md) | [Норвежский](../no/README.md) | [Персидский (фарси)](../fa/README.md) | [Польский](../pl/README.md) | [Португальский (Бразилия)](../pt-BR/README.md) | [Португальский (Португалия)](../pt-PT/README.md) | [Панджаби (гурмукхи)](../pa/README.md) | [Румынский](../ro/README.md) | [Русский](./README.md) | [Сербский (кириллица)](../sr/README.md) | [Словацкий](../sk/README.md) | [Словенский](../sl/README.md) | [Испанский](../es/README.md) | [Суахили](../sw/README.md) | [Шведский](../sv/README.md) | [Тагальский (филиппинский)](../tl/README.md) | [Тамильский](../ta/README.md) | [Телугу](../te/README.md) | [Тайский](../th/README.md) | [Турецкий](../tr/README.md) | [Украинский](../uk/README.md) | [Урду](../ur/README.md) | [Вьетнамский](../vi/README.md)
+[Арабский](../ar/README.md) | [Бенгальский](../bn/README.md) | [Болгарский](../bg/README.md) | [Бирманский (Мьянма)](../my/README.md) | [Китайский (упрощенный)](../zh-CN/README.md) | [Китайский (традиционный, Гонконг)](../zh-HK/README.md) | [Китайский (традиционный, Макао)](../zh-MO/README.md) | [Китайский (традиционный, Тайвань)](../zh-TW/README.md) | [Хорватский](../hr/README.md) | [Чешский](../cs/README.md) | [Датский](../da/README.md) | [Голландский](../nl/README.md) | [Эстонский](../et/README.md) | [Финский](../fi/README.md) | [Французский](../fr/README.md) | [Немецкий](../de/README.md) | [Греческий](../el/README.md) | [Иврит](../he/README.md) | [Хинди](../hi/README.md) | [Венгерский](../hu/README.md) | [Индонезийский](../id/README.md) | [Итальянский](../it/README.md) | [Японский](../ja/README.md) | [Каннада](../kn/README.md) | [Кхмерский](../km/README.md) | [Корейский](../ko/README.md) | [Литовский](../lt/README.md) | [Малайский](../ms/README.md) | [Малаялам](../ml/README.md) | [Маратхи](../mr/README.md) | [Непальский](../ne/README.md) | [Нигерийский пиджин](../pcm/README.md) | [Норвежский](../no/README.md) | [Персидский (фарси)](../fa/README.md) | [Польский](../pl/README.md) | [Португальский (Бразилия)](../pt-BR/README.md) | [Португальский (Португалия)](../pt-PT/README.md) | [Пенджаби (Гурмукхи)](../pa/README.md) | [Румынский](../ro/README.md) | [Русский](./README.md) | [Сербский (кириллица)](../sr/README.md) | [Словацкий](../sk/README.md) | [Словенский](../sl/README.md) | [Испанский](../es/README.md) | [Свахили](../sw/README.md) | [Шведский](../sv/README.md) | [Тагалог (филиппинский)](../tl/README.md) | [Тамильский](../ta/README.md) | [Телугу](../te/README.md) | [Тайский](../th/README.md) | [Турецкий](../tr/README.md) | [Украинский](../uk/README.md) | [Урду](../ur/README.md) | [Вьетнамский](../vi/README.md)
 
 > **Предпочитаете клонировать локально?**
 >
-> Этот репозиторий включает более 50 переводов, что значительно увеличивает размер загрузки. Чтобы клонировать без переводов, используйте выборочную загрузку:
+> Этот репозиторий включает переводы более чем на 50 языков, что значительно увеличивает размер загрузки. Чтобы клонировать без переводов, используйте sparse checkout:
 >
 > **Bash / macOS / Linux:**
 > ```bash
@@ -34,33 +34,33 @@
 > git sparse-checkout set --no-cone "/*" "!translations" "!translated_images"
 > ```
 >
-> Это даст вам всё, что нужно для прохождения курса, при значительно более быстрой загрузке.
+> Это даст вам всё необходимое для прохождения курса с гораздо более быстрой загрузкой.
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## 🆕 Что нового в azd сегодня
 
-> 📌 Этот курс проверен на версии **`azd 1.27.1`** (июль 2026). Запустите `azd version` для проверки сборки и `azd upgrade` для получения последней версии.
+> 📌 **Обзор релиза AI CLI (2026-11-04):** Рекомендации проверены на основе опубликованной документации/исходников **`azd 1.37.2`**, **агентов `1.0.0-beta.23`** и **оценок `1.0.0-beta.2`**. Используйте `azd >= 1.37.0` для объединённого рабочего процесса. Запустите `azd version` и [обновите основное CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) перед расширениями. Смотрите [изменения и исправления релиза](docs/chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Это не проверка живого развертывания всего курса.
 
-Azure Developer CLI вырос за рамки традиционных веб-приложений и API. Сегодня azd — это универсальный инструмент для развертывания **любых** приложений в Azure — включая приложения с искусственным интеллектом и интеллектуальных агентов.
+Azure Developer CLI поддерживает многие типы приложений, включая веб-приложения, API и AI-агенты, через поддерживаемые хосты, шаблоны и расширения.
 
 Что это значит для вас:
 
-- **Агенты ИИ теперь полноценная нагрузка azd.** Вы можете инициализировать, развертывать и управлять проектами ИИ-агентов с помощью того же рабочего процесса `azd init` → `azd up`, который вы уже знаете.
-- **Полный жизненный цикл агента из CLI.** Расширение `azure.ai.agents` теперь охватывает весь путь — `azd ai agent init` для создания заготовок, `azd ai agent invoke` для тестирования (с выводом времени ответа), `azd ai agent eval generate` и `azd ai agent optimize` для измерения и улучшения качества, и `azd ai agent delete` для очистки.
-- **Больше строительных блоков ИИ.** Новые превью-расширения — `azure.ai.skills` и `azure.ai.connections` — позволяют управлять повторно используемыми навыками агентов и подключениями Foundry напрямую с помощью azd.
-- **Интеграция с Microsoft Foundry** приносит развертывание моделей, хостинг агентов и конфигурацию AI-сервисов прямо в экосистему шаблонов azd.
-- **Упрощённые базовые операции.** Недавние обновления сделали `azd init` идемпотентным (безопасным для повторного запуска), автоматически очищают устаревшие токены в `azd auth login` и добавляют дружественное приглашение настройки при первом запуске `azd tool`.
-- **Основной рабочий процесс не изменился.** Независимо от того, развертываете ли вы приложение todo, микросервис или многоагентное AI-решение, команды остаются теми же.
+- **AI-агенты теперь полноценные рабочие нагрузки azd.** Вы можете инициализировать, развертывать и управлять проектами AI-агентов с помощью того же рабочего процесса `azd init` → `azd up`, который вы уже знаете.
+- **Жизненный цикл агента через два расширения.** Используйте `azure.ai.agents` для инициализации, вызова, оптимизации и списания агентов. Установите **`azure.ai.evaluations`** отдельно для `azd ai eval init`, `generate` и `run start`. Бета-версия агентов beta.22 заменила устаревший рабочий процесс оценки и изменила конфигурацию оптимизации; следуйте [гайду по миграции](docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks).
+- **Больше блоков для AI.** Новые превью-расширения — `azure.ai.skills` и `azure.ai.connections` — позволяют управлять повторно используемыми навыками агентов и соединениями Foundry непосредственно через azd.
+- **Интеграция с Microsoft Foundry** обеспечивает развертывание моделей, хостинг агентов и конфигурацию AI-сервисов прямо в экосистеме шаблонов azd.
+- **Более плавные базовые операции.** Последние релизы сделали `azd init` идемпотентным (безопасным для повторного запуска), `azd auth login` автоматически очищает устаревшие токены и добавили дружественный `azd tool` запрос при первом запуске.
+- **Основной рабочий процесс не изменился.** Независимо от того, развертываете ли вы приложение todo, микросервис или мультиагентное AI-решение, команды остаются прежними.
 
-> **Примечание для пользователей Aspire:** Microsoft теперь называет продукт просто **Aspire** (ранее ".NET Aspire"). Поддержка azd для Aspire не изменилась — только обновилось название.
+> **Примечание для пользователей Aspire:** Microsoft теперь называет продукт просто **Aspire** (ранее ".NET Aspire"). Поддержка Aspire в azd не изменилась — изменилось только имя.
 
-Если вы уже использовали azd, поддержка ИИ — это естественное расширение, а не отдельный инструмент или сложный курс. Если начинаете с нуля, вы освоите один рабочий процесс, подходящий для всего.
+Если вы уже пользовались azd, поддержка AI — естественное расширение, а не отдельный инструмент или продвинутый курс. Если начинаете с нуля, вы изучите один рабочий процесс, который подходит для всего.
 
 ---
 
 ## 🚀 Что такое Azure Developer CLI (azd)?
 
-**Azure Developer CLI (azd)** — дружественный к разработчику инструмент командной строки, который упрощает развертывание приложений в Azure. Вместо того, чтобы вручную создавать и подключать десятки ресурсов Azure, вы можете развернуть целые приложения одной командой.
+**Azure Developer CLI (azd)** — инструмент командной строки, ориентированный на разработчиков, который упрощает развертывание приложений в Azure. Вместо ручного создания и подключения десятков ресурсов Azure, вы можете развернуть целые приложения одной командой.
 
 ### Магия `azd up`
 
@@ -74,40 +74,40 @@ Azure Developer CLI вырос за рамки традиционных веб-�
 azd up
 ```
 
-**Вот и всё!** Без кликов в портале Azure, без изучения сложных ARM-шаблонов, без ручной настройки — просто работающие приложения в Azure.
+Шаблон предоставляет конфигурацию приложения и инфраструктуры. Успешное развертывание требует поддерживаемых сервисов/моделей, достаточных квот и разрешений, корректных входных данных и проверки развернутого приложения. `azd up` не делает шаблон автоматически безопасным, соответствующим стандартам и готовым к продакшену.
 
 ---
 
-## ❓ Azure Developer CLI vs Azure CLI: в чём разница?
+## ❓ Azure Developer CLI и Azure CLI: в чём разница?
 
-Это самый частый вопрос у новичков. Вот простой ответ:
+Это самый распространённый вопрос среди новичков. Вот простой ответ:
 
-| Функция | **Azure CLI (`az`)** | **Azure Developer CLI (`azd`)** |
+| Особенность | **Azure CLI (`az`)** | **Azure Developer CLI (`azd`)** |
 |---------|---------------------|--------------------------------|
-| **Назначение** | Управление отдельными ресурсами Azure | Развертывание полных приложений |
-| **Подход** | Ориентирован на инфраструктуру | Ориентирован на приложение |
+| **Назначение** | Управление отдельными ресурсами Azure | Развертывание целых приложений |
+| **Подход** | Ориентирован на инфраструктуру | Ориентирован на приложения |
 | **Пример** | `az webapp create --name myapp...` | `azd up` |
-| **Сложность изучения** | Нужно знать сервисы Azure | Нужно знать только своё приложение |
-| **Лучше всего подходит** | DevOps, инфраструктура | Разработчикам, прототипированию |
+| **Кривая обучения** | Нужно знать сервисы Azure | Нужно знать только своё приложение |
+| **Лучше подходит для** | DevOps, инфраструктура | Разработчики, прототипирование |
 
 ### Простая аналогия
 
-- **Azure CLI** — это как иметь все инструменты для строительства дома — молотки, пилы, гвозди. Можно построить всё, но нужно знать строительство.
+- **Azure CLI** — это как иметь все инструменты для строительства дома — молотки, пилы, гвозди. Можно построить что угодно, но нужно знать строительство.
 - **Azure Developer CLI** — это как нанять подрядчика — вы описываете, что хотите, а он занимается строительством.
 
-### Когда использовать каждый
+### Когда что использовать
 
-| Сценарий | Используйте это |
+| Ситуация | Используйте это |
 |----------|----------|
-| "Хочу быстро развернуть веб-приложение" | `azd up` |
-| "Нужно создать только учетную запись хранилища" | `az storage account create` |
-| "Создаю полноценное AI-приложение" | `azd init --template azure-search-openai-demo` |
-| "Нужно отладить конкретный ресурс Azure" | `az resource show` |
-| "Хочу готовое к производству развертывание за минуты" | `azd up --environment production` |
+| «Хочу быстро развернуть веб-приложение» | `azd up` |
+| «Мне нужно создать только учетную запись хранилища» | `az storage account create` |
+| «Я строю полноценное AI-приложение» | `azd init --template azure-search-openai-demo` |
+| «Мне нужно отладить конкретный ресурс Azure» | `az resource show` |
+| «Хочу развернуть в своей настроенной продакшен-среде» | Проверьте конфигурацию, доступ, стоимость и операционные требования перед `azd up --environment production` |
 
 ### Они работают вместе!
 
-AZD использует Azure CLI под капотом. Можно использовать оба:
+AZD и Azure CLI имеют отдельную аутентификацию и конфигурацию. Используйте `azd auth login` для AZD и `az login`, когда явно требуется Azure CLI для хуков или команд диагностики. Вы можете использовать оба:
 ```bash
 # Deploy your app with AZD
 azd up
@@ -118,32 +118,34 @@ az webapp config set --name myapp --always-on true
 
 ---
 
-## 🌟 Шаблоны в Awesome AZD
+## 🌟 Найдите шаблоны в Awesome AZD
 
-Не начинайте с нуля! **Awesome AZD** — это собрание шаблонов, готовых к развертыванию:
+Не начинайте с нуля! **Awesome AZD** — сообщество с коллекцией готовых к развертыванию шаблонов:
 
 | Ресурс | Описание |
 |----------|-------------|
-| 🔗 [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) | Просмотр 200+ шаблонов с развертыванием одним кликом |
-| 🔗 [**Отправить шаблон**](https://github.com/Azure/awesome-azd/issues) | Добавьте свой шаблон в сообщество |
-| 🔗 [**GitHub репозиторий**](https://github.com/Azure/awesome-azd) | Оцените и изучите исходный код |
+| 🔗 [**Галерея Awesome AZD**](https://azure.github.io/awesome-azd/) | Просмотр 200+ шаблонов с развертыванием в один клик |
+| 🔗 [**Добавить шаблон**](https://github.com/Azure/awesome-azd/issues) | Внесите свой вклад, добавив шаблон в сообщество |
+| 🔗 [**Репозиторий GitHub**](https://github.com/Azure/awesome-azd) | Поставьте звезду и изучите исходники |
 
 ### Популярные AI-шаблоны из Awesome AZD
 
+Выберите один шаблон в отдельной пустой папке; приведённые ниже команды — альтернативы. Завершающий `.` инициализирует эту папку.
+
 ```bash
 # RAG Chat with Microsoft Foundry Models + AI Search
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 
 # Quick AI Chat Application
-azd init --template openai-chat-app-quickstart
+azd init --template openai-chat-app-quickstart .
 
 # AI Agents with Foundry Agents
-azd init --template get-started-with-ai-agents
+azd init --template get-started-with-ai-agents .
 ```
 
 ---
 
-## 🎯 Начало работы в 3 шага
+## 🎯 Начало работы за 3 шага
 
 Перед началом убедитесь, что ваша машина готова для выбранного шаблона:
 
@@ -157,7 +159,7 @@ azd init --template get-started-with-ai-agents
 bash ./validate-setup.sh
 ```
 
-Если какая-либо проверка не пройдена, исправьте это прежде, чем продолжать.
+Если какое-либо требование не выполняется, исправьте это перед дальнейшими действиями.
 
 ### Шаг 1: Установите AZD (2 минуты)
 
@@ -176,7 +178,7 @@ brew tap azure/azd && brew install azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-### Шаг 2: Аутентификация в AZD
+### Шаг 2: Аутентификация для AZD
 
 ```bash
 # Optional if you plan to use Azure CLI commands directly in this course
@@ -186,13 +188,13 @@ az login
 azd auth login
 ```
 
-Если вы не уверены, что нужно, следуйте полному процессу настройки в [Installation & Setup](docs/chapter-01-foundation/installation.md#authentication-setup).
+Если вы не уверены, что именно нужно, пройдите полный процесс настройки в [Installation & Setup](docs/chapter-01-foundation/installation.md#authentication-setup).
 
-### Шаг 3: Разверните своё первое приложение
+### Шаг 3: Разверните ваше первое приложение
 
 ```bash
 # Initialize from a template
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
 # Deploy to Azure (creates everything!)
 azd up
@@ -211,25 +213,25 @@ azd down --force --purge
 
 ## 📚 Как использовать этот курс
 
-Курс создан для **пошагового обучения** — начните с удобного для вас уровня и продвигайтесь дальше:
+Этот курс предназначен для **пошагового обучения** — начните с того, что вам комфортно, и продвигайтесь дальше:
 
 | Ваш опыт | Начинайте здесь |
 |-----------------|------------|
-| **Новичок в Azure** | [Глава 1: Основы](#-chapter-1-foundation--quick-start) |
-| **Знаю Azure, но новичок в AZD** | [Глава 1: Основы](#-chapter-1-foundation--quick-start) |
-| **Хочу развертывать AI-приложения** | [Глава 2: Разработка с приоритетом ИИ](#-chapter-2-ai-first-development-recommended-for-ai-developers) |
-| **Нужна практика с реальными примерами** | [🎓 Интерактивный мастер-класс](workshop/README.md) - 3-4 часа с руководством |
-| **Нужны производственные шаблоны** | [Глава 8: Производство и корпоративные решения](#-chapter-8-production--enterprise-patterns) |
+| **Совсем новый в Azure** | [Глава 1: Основы](#-chapter-1-foundation--quick-start) |
+| **Знаете Azure, новичок в AZD** | [Глава 1: Основы](#-chapter-1-foundation--quick-start) |
+| **Хотите развернуть AI-приложения** | [Глава 2: Разработка с AI в центре внимания](#-chapter-2-ai-first-development-recommended-for-ai-developers) |
+| **Хотите практические занятия** | [🎓 Интерактивный воркшоп](workshop/README.md) — 3-4 часа с руководством |
+| **Требуются производственные шаблоны** | [Глава 8: Производство и корпоративное использование](#-chapter-8-production--enterprise-patterns) |
 
 ### Быстрая настройка
 
-1. **Форкните этот репозиторий**: [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+1. **Форкните этот репозиторий**: [![Форки GitHub](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Клонируйте его**: `git clone https://github.com/YOUR-USERNAME/azd-for-beginners.git`
 3. **Получите помощь**: [Сообщество Azure Discord](https://discord.com/invite/ByRwuEEgH4)
 
 > **Предпочитаете клонировать локально?**
 
-> Этот репозиторий включает более 50 языковых переводов, что значительно увеличивает размер загрузки. Чтобы клонировать без переводов, используйте выборочную загрузку:
+> Этот репозиторий включает переводы более чем на 50 языков, что значительно увеличивает размер загрузки. Чтобы клонировать без переводов, используйте sparse checkout:
 > ```bash
 > git clone --filter=blob:none --sparse https://github.com/microsoft/AZD-for-beginners.git
 > cd AZD-for-beginners
@@ -240,83 +242,83 @@ azd down --force --purge
 
 ## Обзор курса
 
-Освойте Azure Developer CLI (azd) через структурированные главы, предназначенные для пошагового обучения. **Особое внимание развертыванию AI-приложений с интеграцией Microsoft Foundry.**
+Освойте Azure Developer CLI (azd) с помощью структурированных глав, предназначенных для последовательного обучения. **Особое внимание уделяется развертыванию AI-приложений с интеграцией Microsoft Foundry.**
 
-### Почему этот курс необходим современным разработчикам
+### Почему этот курс важен для современных разработчиков
 
-По данным сообщества Microsoft Foundry Discord, **45% разработчиков хотят использовать AZD для AI-нагрузок**, но сталкиваются с трудностями:
-- Сложные архитектуры AI с множеством сервисов
-- Лучшие практики продуктивного развертывания AI  
-- Интеграция и настройка AI-сервисов Azure
-- Оптимизация затрат для AI-нагрузок
-- Устранение неполадок специфичных для AI-развертывания
+Разработчики, развёртывающие AI-нагрузки, обычно нуждаются в руководстве по:
+- Сложным многосервисным AI-архитектурам
+- Лучшему практическому опыту развертывания AI в производстве
+- Интеграции и конфигурированию Azure AI-сервисов
+- Оптимизации затрат на AI-нагрузки
+- Устранению проблем при развертывании, специфичных для AI
 
 ### Цели обучения
 
-Пройдя этот структурированный курс, вы:
-- **Овладеете основами AZD**: основные концепции, установка и настройка
-- **Научитесь развертывать AI-приложения**: использование AZD с сервисами Microsoft Foundry
-- **Реализация инфраструктуры как кода**: Управление ресурсами Azure с помощью шаблонов Bicep
-- **Поиск и устранение неполадок развертывания**: Решение распространённых проблем и отладка
-- **Оптимизация для промышленной эксплуатации**: Безопасность, масштабирование, мониторинг и управление затратами
-- **Создание решений с несколькими агентами**: Развертывание сложной архитектуры ИИ
+Пройдя этот структурированный курс, вы сможете:
+- **Овладеть основами AZD**: Ключевые понятия, установка и конфигурация
+- **Разворачивать AI-приложения**: Использовать AZD с Microsoft Foundry
+- **Реализовать инфраструктуру как код**: Управлять ресурсами Azure с помощью Bicep-шаблонов
+- **Устранять неполадки развертывания**: Решать распространённые проблемы и отлаживать ошибки
+- **Оптимизировать для производства**: Безопасность, масштабирование, мониторинг и управление затратами
+- **Создавать многоагентные решения**: Разворачивать сложные AI-архитектуры
 
 ## Перед началом: аккаунты, доступ и предположения
 
-Перед началом Главы 1 убедитесь, что у вас есть всё необходимое. Шаги установки в этой инструкции предполагают, что эти основы уже выполнены.
+Прежде чем начать главу 1, убедитесь, что у вас есть все необходимые условия. Шаги установки в дальнейшем руководстве предполагают, что эти базовые моменты уже учтены.
 
-- **Подписка Azure**: Вы можете использовать существующую рабочую или личную подписку либо создать [бесплатный пробный период](https://aka.ms/azurefreetrial) для начала.
-- **Разрешения на создание ресурсов Azure**: Для большинства упражнений вам потребуется доступ как минимум с ролю **Contributor** к целевой подписке или группе ресурсов. В некоторых главах может также предполагаться возможность создавать группы ресурсов, управляемые идентичности и назначения RBAC.
-- [**Аккаунт GitHub**](https://github.com): Полезен для форка репозитория, отслеживания своих изменений и использования GitHub Codespaces для воркшопа.
-- **Необходимые локальные компоненты для шаблонов**: Некоторые шаблоны требуют наличия локальных инструментов, таких как Node.js, Python, Java или Docker. Запустите валидатор установки перед началом, чтобы своевременно выявить отсутствующие компоненты.
-- **Базовые навыки работы с терминалом**: Не нужно быть экспертом, но должно быть комфортно выполнять команды типа `git clone`, `azd auth login` и `azd up`.
+- **Подписка Azure**: Можно использовать существующую подписку на работе или свою собственную, либо создать [бесплатную пробную версию](https://aka.ms/azurefreetrial) для старта.
+- **Разрешения на создание ресурсов Azure**: Для большинства упражнений у вас должен быть уровень доступа **Участник** как минимум на целевой подписке или группе ресурсов. В некоторых главах предполагается возможность создавать группы ресурсов, управляемые идентичности и назначения RBAC.
+- [**Аккаунт GitHub**](https://github.com): Это удобно для форка репозитория, отслеживания своих изменений и использования GitHub Codespaces для мастер-класса.
+- **Предварительные требования для шаблонов**: Некоторые шаблоны требуют локальных инструментов, таких как Node.js, Python, Java или Docker. Запустите проверку установки перед началом, чтобы вовремя обнаружить отсутствующие инструменты.
+- **Базовые навыки работы с терминалом**: Не обязательно быть экспертом, но стоит уверенно выполнять команды вроде `git clone`, `azd auth login` и `azd up`.
 
 > **Работаете в корпоративной подписке?**
-> Если вашей средой Azure управляет администратор, заранее уточните, можете ли вы развертывать ресурсы в выбранной подписке или группе ресурсов. Если нет, запросите песочницу или доступ Contributor перед началом.
+> Если ваше Azure-среда управляется администратором, заранее подтвердите, что вы можете развёртывать ресурсы в подписке или группе ресурсов, которую планируете использовать. Если нет, попросите песочницу или доступ Участника.
 
-> **Новичок в Azure?**
-> Начните со своей пробной или платежной подписки Azure по адресу https://aka.ms/azurefreetrial, чтобы пройти упражнения полностью без ожидания согласований на уровне арендатора.
+> **Новички в Azure?**
+> Начните с собственной пробной или оплатной посуточно подписки Azure на https://aka.ms/azurefreetrial, чтобы пройти упражнения полностью без ожидания одобрения на уровне арендатора.
 
 ## 🗺️ Карта курса: Быстрая навигация по главам
 
-Каждая глава имеет отдельный README с целями обучения, быстрыми стартами и упражнениями:
+Каждая глава содержит отдельный README с целями обучения, быстрым стартом и упражнениями:
 
-| Глава | Темы | Уроки | Длительность | Сложность |
+| Глава | Тема | Уроки | Время | Сложность |
 |---------|-------|---------|----------|------------|
-| **[Гл. 1: Основа](docs/chapter-01-foundation/README.md)** | Начало работы | [Основы AZD](docs/chapter-01-foundation/azd-basics.md) &#124; [Установка](docs/chapter-01-foundation/installation.md) &#124; [Первый проект](docs/chapter-01-foundation/first-project.md) | 30-45 мин | ⭐ |
-| **[Гл. 2: Разработка ИИ](docs/chapter-02-ai-development/README.md)** | Приложения с приоритетом ИИ | [Интеграция Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md) &#124; [ИИ агенты](docs/chapter-02-ai-development/agents.md) &#124; [Развёртывание моделей](docs/chapter-02-ai-development/ai-model-deployment.md) &#124; [Воркшоп](docs/chapter-02-ai-development/ai-workshop-lab.md) | 1-2 часа | ⭐⭐ |
-| **[Гл. 3: Конфигурация](docs/chapter-03-configuration/README.md)** | Аутентификация и безопасность | [Конфигурация](docs/chapter-03-configuration/configuration.md) &#124; [Аутентификация и безопасность](docs/chapter-03-configuration/authsecurity.md) | 45-60 мин | ⭐⭐ |
-| **[Гл. 4: Инфраструктура](docs/chapter-04-infrastructure/README.md)** | IaC и развертывание | [Руководство по развертыванию](docs/chapter-04-infrastructure/deployment-guide.md) &#124; [Провижининг](docs/chapter-04-infrastructure/provisioning.md) | 1-1.5 часа | ⭐⭐⭐ |
-| **[Гл. 5: Множество агентов](docs/chapter-05-multi-agent/README.md)** | Решения с ИИ агентами | [Розничный сценарий](examples/retail-scenario.md) &#124; [Шаблоны координации](docs/chapter-06-pre-deployment/coordination-patterns.md) | 2-3 часа | ⭐⭐⭐⭐ |
-| **[Гл. 6: Предразвёртывание](docs/chapter-06-pre-deployment/README.md)** | Планирование и проверка | [Проверка перед запуском](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [Планирование ёмкости](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [Выбор SKU](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [Insights приложений](docs/chapter-06-pre-deployment/application-insights.md) | 1 час | ⭐⭐ |
-| **[Гл. 7: Устранение неполадок](docs/chapter-07-troubleshooting/README.md)** | Отладка и исправление | [Распространённые проблемы](docs/chapter-07-troubleshooting/common-issues.md) &#124; [Отладка](docs/chapter-07-troubleshooting/debugging.md) &#124; [Проблемы ИИ](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 часа | ⭐⭐ |
-| **[Гл. 8: Промышленная эксплуатация](docs/chapter-08-production/README.md)** | Предприятийные паттерны | [Практики промышленной эксплуатации](docs/chapter-08-production/production-ai-practices.md) | 2-3 часа | ⭐⭐⭐⭐ |
-| **[🎓 Воркшоп](workshop/README.md)** | Практические занятия | [Введение](workshop/docs/instructions/0-Introduction.md) &#124; [Выбор](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [Проверка](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [Декомпозиция](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [Конфигурация](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [Кастомизация](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [Завершение](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [Итоги](workshop/docs/instructions/7-Wrap-up.md) | 3-4 часа | ⭐⭐ |
+| **[Гл 1: Основа](docs/chapter-01-foundation/README.md)** | Начало работы | [Основы AZD](docs/chapter-01-foundation/azd-basics.md) &#124; [Установка](docs/chapter-01-foundation/installation.md) &#124; [Первый проект](docs/chapter-01-foundation/first-project.md) | 30-45 мин | ⭐ |
+| **[Гл 2: Разработка AI](docs/chapter-02-ai-development/README.md)** | AI-первоочередные приложения | [Интеграция Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md) &#124; [AI агенты](docs/chapter-02-ai-development/agents.md) &#124; [Развертывание моделей](docs/chapter-02-ai-development/ai-model-deployment.md) &#124; [Мастер-класс](docs/chapter-02-ai-development/ai-workshop-lab.md) | 1-2 ч | ⭐⭐ |
+| **[Гл 3: Конфигурация](docs/chapter-03-configuration/README.md)** | Аутентификация и безопасность | [Настройка](docs/chapter-03-configuration/configuration.md) &#124; [Аутентификация и безопасность](docs/chapter-03-configuration/authsecurity.md) | 45-60 мин | ⭐⭐ |
+| **[Гл 4: Инфраструктура](docs/chapter-04-infrastructure/README.md)** | IaC и развертывание | [Руководство по развертыванию](docs/chapter-04-infrastructure/deployment-guide.md) &#124; [Provisioning](docs/chapter-04-infrastructure/provisioning.md) | 1-1.5 ч | ⭐⭐⭐ |
+| **[Гл 5: Многоагентные решения](docs/chapter-05-multi-agent/README.md)** | AI-агентные решения | [Сценарий розницы](examples/retail-scenario.md) &#124; [Паттерны координации](docs/chapter-06-pre-deployment/coordination-patterns.md) | 2-3 ч | ⭐⭐⭐⭐ |
+| **[Гл 6: Предварительное развертывание](docs/chapter-06-pre-deployment/README.md)** | Планирование и валидация | [Проверки перед запуском](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [Планирование ёмкости](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [Выбор SKU](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [Application Insights](docs/chapter-06-pre-deployment/application-insights.md) | 1 ч | ⭐⭐ |
+| **[Гл 7: Устранение неполадок](docs/chapter-07-troubleshooting/README.md)** | Отладка и исправление | [Распространённые проблемы](docs/chapter-07-troubleshooting/common-issues.md) &#124; [Отладка](docs/chapter-07-troubleshooting/debugging.md) &#124; [AI-проблемы](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 ч | ⭐⭐ |
+| **[Гл 8: Производство](docs/chapter-08-production/README.md)** | Корпоративные паттерны | [Практики производства](docs/chapter-08-production/production-ai-practices.md) | 2-3 ч | ⭐⭐⭐⭐ |
+| **[🎓 Мастер-класс](workshop/README.md)** | Практический курс | [Введение](workshop/docs/instructions/0-Introduction.md) &#124; [Выбор](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [Валидация](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [Анализ](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [Конфигурация](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [Кастомизация](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [Демонтаж](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [Завершение](workshop/docs/instructions/7-Wrap-up.md) | 3-4 ч | ⭐⭐ |
 
-**Общая длительность курса:** ~10-14 часов | **Навыки:** Начинающий → Готовый к промышленной эксплуатации
+**Общее время курса:** ~10-14 часов | **Прогресс навыков:** Начинающий → Готовый к производству
 
 ---
 
 ## 📚 Учебные главы
 
-*Выберите путь обучения в зависимости от уровня опыта и целей*
+*Выберите свой учебный путь в зависимости от уровня опыта и целей*
 
 ### 🚀 Глава 1: Основы и быстрый старт
 **Требования**: Подписка Azure, базовые знания командной строки  
-**Длительность**: 30-45 минут  
+**Время**: 30-45 минут  
 **Сложность**: ⭐
 
-#### Чему вы научитесь
-- Основы Azure Developer CLI
-- Установка AZD на вашу платформу
+#### Что вы изучите
+- Понимание основ Azure Developer CLI
+- Установку AZD на вашу платформу
 - Ваше первое успешное развертывание
 
-#### Учебные ресурсы
-- **🎯 Начните здесь**: [Что такое Azure Developer CLI?](#what-is-azure-developer-cli)
-- **📖 Теория**: [Основы AZD](docs/chapter-01-foundation/azd-basics.md) - Ключевые концепции и терминология
-- **⚙️ Установка**: [Инструкция по установке и настройке](docs/chapter-01-foundation/installation.md) - Руководства для платформ
+#### Учебные материалы
+- **🎯 Начните здесь**: [Что такое Azure Developer CLI?](#-what-is-azure-developer-cli-azd)
+- **📖 Теория**: [Основы AZD](docs/chapter-01-foundation/azd-basics.md) - Ключевые понятия и терминология
+- **⚙️ Установка**: [Руководство по установке](docs/chapter-01-foundation/installation.md) - Руководство по платформам
 - **🛠️ Практика**: [Ваш первый проект](docs/chapter-01-foundation/first-project.md) - Пошаговое руководство
-- **📋 Быстрая справка**: [Шпаргалка по командам](resources/cheat-sheet.md)
+- **📋 Быстрая справка**: [Справочник команд](resources/cheat-sheet.md)
 
 #### Практические упражнения
 ```bash
@@ -324,11 +326,11 @@ azd down --force --purge
 azd version
 
 # Deploy your first application
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 azd up
 ```
 
-**💡 Результат главы**: Успешное развертывание простого веб-приложения в Azure с помощью AZD
+**💡 Результат главы**: Успешно развернуть простое веб-приложение в Azure с помощью AZD
 
 **✅ Критерии успеха:**
 ```bash
@@ -342,47 +344,46 @@ azd down --force --purge  # Cleans up resources
 ```
 
 **📊 Время на выполнение:** 30-45 минут  
-**📈 Уровень навыков после:** Способен самостоятельно развертывать базовые приложения
-**📈 Уровень навыков после:** Способен самостоятельно развертывать базовые приложения
+**📈 Уровень навыков после:** Способность самостоятельно разворачивать базовые приложения
 
 ---
 
-### 🤖 Глава 2: Разработка с приоритетом ИИ (Рекомендуется для разработчиков ИИ)
-**Требования**: Глава 1 завершена  
-**Длительность**: 1-2 часа  
+### 🤖 Глава 2: Разработка AI-первичных приложений (Рекомендуется разработчикам AI)
+**Требования**: Завершение главы 1  
+**Время**: 1-2 часа  
 **Сложность**: ⭐⭐
 
-#### Чему вы научитесь
-- Интеграция Microsoft Foundry с AZD
-- Развёртывание приложений с ИИ
-- Настройка сервисов ИИ
+#### Что вы изучите
+- Интеграцию Microsoft Foundry с AZD
+- Развертывание AI-приложений
+- Понимание конфигураций AI-сервисов
 
-#### Учебные ресурсы
+#### Учебные материалы
 - **🎯 Начните здесь**: [Интеграция Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
-- **🤖 ИИ агенты**: [Руководство по ИИ агентам](docs/chapter-02-ai-development/agents.md) - Развёртывание интеллектуальных агентов с AZD
-- **📖 Шаблоны**: [Развёртывание моделей ИИ](docs/chapter-02-ai-development/ai-model-deployment.md) - Развёртывание и управление моделями ИИ
-- **🛠️ Воркшоп**: [Лабораторная работа по ИИ](docs/chapter-02-ai-development/ai-workshop-lab.md) - Подготовьте ваши ИИ решения к AZD
-- **🎥 Интерактивное руководство**: [Материалы воркшопа](workshop/README.md) - Обучение в браузере с MkDocs * среда DevContainer
+- **🤖 AI агенты**: [Руководство по AI агентам](docs/chapter-02-ai-development/agents.md) - Развёртывание интеллектуальных агентов с AZD
+- **📖 Паттерны**: [Развертывание AI моделей](docs/chapter-02-ai-development/ai-model-deployment.md) - Развертывание и управление AI-моделями
+- **🛠️ Мастер-класс**: [Лаборатория AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - Подготовка AI-решений для AZD
+- **🎥 Интерактивное руководство**: [Материалы мастер-класса](workshop/README.md) - Обучение через браузер с MkDocs * DevContainer
 - **📋 Шаблоны**: [Шаблоны Microsoft Foundry](#featured-microsoft-foundry-templates)
-- **📝 Примеры**: [Примеры развёртывания AZD](examples/README.md)
+- **📝 Примеры**: [Примеры развертывания AZD](examples/README.md)
 
 #### Практические упражнения
 ```bash
 # Deploy your first AI application
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 azd up
 
 # Try additional AI templates
-azd init --template openai-chat-app-quickstart
-azd init --template agent-openai-python-prompty
+azd init --template openai-chat-app-quickstart .
+azd init --template agent-openai-python-prompty .
 ```
 
-**💡 Результат главы**: Развернуть и настроить чат-приложение с ИИ и возможностями RAG
+**💡 Результат главы**: Развернуть и настроить AI-чат с возможностями RAG
 
 **✅ Критерии успеха:**
 ```bash
 # After Chapter 2, you should be able to:
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 azd up
 # Test the AI chat interface
 # Ask questions and get AI-powered responses with sources
@@ -392,34 +393,34 @@ azd down --force --purge
 ```
 
 **📊 Время на выполнение:** 1-2 часа  
-**📈 Уровень навыков после:** Готов к развёртыванию и настройке производственных ИИ приложений  
-**💰 Знание затрат:** Понимание расходов $80-150/мес на разработку, $300-3500/мес на производство
+**📈 Уровень навыков после:** Умение разворачивать AI-приложения и выявлять дополнительные требования для готовности к производству
+**💰 Осведомлённость о затратах:** Понимание затрат $80-150/месяц в разработке, $300-3500/месяц в производстве
 
-#### 💰 Затраты на развертывание ИИ
+#### 💰 Расходы на AI-развертывания
 
-**Среда разработки (примерно $80-150/мес):**
-- Модели Microsoft Foundry (по оплате использования): $0-50/мес (в зависимости от использования токенов)
-- AI Search (базовый уровень): $75/мес
-- Container Apps (потребление): $0-20/мес
-- Хранилище (стандартное): $1-5/мес
+**Среда разработки (примерно $80-150/месяц):**
+- Модели Microsoft Foundry (оплата по факту): $0-50/месяц (в зависимости от использования токенов)
+- AI Search (базовый уровень): $75/месяц
+- Container Apps (по потреблению): $0-20/месяц
+- Хранение (стандартное): $1-5/месяц
 
-**Производственная среда (примерно $300-3,500+/мес):**
-- Модели Microsoft Foundry (PTU для стабильной производительности): $3,000+/мес ИЛИ по оплате при высоком объёме
-- AI Search (стандартный уровень): $250/мес
-- Container Apps (выделенные): $50-100/мес
-- Application Insights: $5-50/мес
-- Хранилище (премиум): $10-50/мес
+**Производственная среда (примерно $300-3,500+/месяц):**
+- Модели Microsoft Foundry (PTU для стабильной производительности): от $3,000/месяц ИЛИ оплата по факту при большом объёме
+- AI Search (стандартный уровень): $250/месяц
+- Container Apps (выделенные): $50-100/месяц
+- Application Insights: $5-50/месяц
+- Хранение (премиум): $10-50/месяц
 
 **💡 Советы по оптимизации затрат:**
-- Используйте **бесплатный уровень** моделей Microsoft Foundry для обучения (включено 50,000 токенов Azure OpenAI)
-- Выполняйте `azd down` для освобождения ресурсов, когда не занимаетесь разработкой
-- Начинайте с оплаты по потреблению, переходя на PTU только для производства
-- Используйте `azd provision --preview` для оценки затрат перед развёртыванием
+- Проверьте цены на инференс моделей и кредиты, привязанные к аккаунту; в Azure OpenAI нет универсального ежемесячного лимита в 50 000 токенов бесплатно
+- Запускайте `azd down` для удаления ресурсов после использования, предварительно проверив выбранную среду
+- Начинайте с биллинга по потреблению, переходите на PTU только для производства
+- Используйте `azd provision --preview` для просмотра планируемой инфраструктуры, затем оцените ресурсы в Калькуляторе цен Azure
 - Включите авто-масштабирование: платите только за фактическое использование
 
 **Мониторинг затрат:**
 ```bash
-# Check estimated monthly costs
+# Inspect planned resources (this does not calculate prices)
 azd provision --preview
 
 # Monitor actual costs in Azure Portal
@@ -429,186 +430,186 @@ az consumption budget list --resource-group <your-rg>
 ---
 
 ### ⚙️ Глава 3: Конфигурация и аутентификация
-**Требования**: Глава 1 завершена  
-**Длительность**: 45-60 минут  
+**Требования**: Завершение главы 1  
+**Время**: 45-60 минут  
 **Сложность**: ⭐⭐
 
-#### Чему вы научитесь
-- Конфигурация и управление средой
+#### Что вы изучите
+- Конфигурацию и управление средами
 - Лучшие практики аутентификации и безопасности
 - Именование и организация ресурсов
 
-#### Учебные ресурсы
+#### Учебные материалы
 - **📖 Конфигурация**: [Руководство по конфигурации](docs/chapter-03-configuration/configuration.md) - Настройка среды
-- **🔐 Безопасность**: [Шаблоны аутентификации и управляемой идентичности](docs/chapter-03-configuration/authsecurity.md) - Шаблоны аутентификации
-- **📝 Примеры**: [Пример приложения с базой данных](examples/database-app/README.md) - Примеры баз данных AZD
+- **🔐 Безопасность**: [Паттерны аутентификации и управляемая идентичность](docs/chapter-03-configuration/authsecurity.md) - Паттерны аутентификации
+- **📝 Примеры**: [Пример приложения с базой данных](examples/database-app/README.md) - Примеры AZD для баз данных
 
 #### Практические упражнения
-- Конфигурация нескольких сред (разработка, тест, прод)
-- Настройка аутентификации управляемой идентичности
-- Реализация конфигураций, специфичных для среды
+- Настройка нескольких сред (dev, staging, prod)
+- Настройка аутентификации с помощью управляемых идентичностей
+- Реализация среды-специфичных конфигураций
 
-**💡 Результат главы**: Управление несколькими средами с правильной аутентификацией и безопасностью
+**💡 Результат главы**: Управление несколькими средами с надлежащей аутентификацией и безопасностью
 
 ---
 
 ### 🏗️ Глава 4: Инфраструктура как код и развертывание
-**Требования**: Главы 1-3 завершены  
-**Длительность**: 1-1.5 часа  
+**Требования**: Завершение глав 1-3  
+**Время**: 1-1.5 часа  
 **Сложность**: ⭐⭐⭐
 
-#### Чему вы научитесь
-- Расширенные шаблоны развертывания
-- Инфраструктура как код с Bicep
+#### Что вы изучите
+- Продвинутые паттерны развертывания
+- Инфраструктуру как код с Bicep
 - Стратегии провижининга ресурсов
 
-#### Учебные ресурсы
+#### Учебные материалы
 - **📖 Развертывание**: [Руководство по развертыванию](docs/chapter-04-infrastructure/deployment-guide.md) - Полные рабочие процессы
-- **🏗️ Провижининг**: [Управление ресурсами](docs/chapter-04-infrastructure/provisioning.md) - Управление ресурсами Azure
-- **📝 Примеры**: [Пример Container App](../../examples/container-app) - Развёртывание контейнеров
+- **🏗️ Провижининг**: [Provisioning ресурсов](docs/chapter-04-infrastructure/provisioning.md) - Управление ресурсами Azure
+- **📝 Примеры**: [Пример Container App](../../examples/container-app) - Развертывание в контейнерах
 
 #### Практические упражнения
 - Создание пользовательских шаблонов Bicep
-- Развёртывание многосервисных приложений
-- Реализация стратегий «синее-зеленое» развертывание
+- Разворачивание многосервисных приложений
+- Внедрение стратегий blue-green развертывания
 
-**💡 Результат главы**: Развёртывание сложных многосервисных приложений с использованием пользовательских шаблонов инфраструктуры
+**💡 Результат главы**: Разворачивать сложные многосервисные приложения с помощью пользовательских инфраструктурных шаблонов
 
 ---
 
-### 🎯 Глава 5: Решения с ИИ агентами (Продвинутый уровень)
-**Требования**: Главы 1-2 завершены  
-**Длительность**: 2-3 часа  
+### 🎯 Глава 5: Многоагентные AI-решения (Продвинутый уровень)
+**Требования**: Завершение глав 1-2  
+**Время**: 2-3 часа  
 **Сложность**: ⭐⭐⭐⭐
 
-#### Чему вы научитесь
-- Шаблоны архитектуры многозадачных агентов
-- Оркестрация и координация агентов
-- Развёртывание ИИ решений промышленного уровня
+#### Что вы изучите
+- Паттерны многоагентной архитектуры
+- Оркестрацию и координацию агентов
+- Готовые к производству AI-развертывания
 
-#### Учебные ресурсы
-- **🤖 Основной проект**: [Розничное решение с множеством агентов](examples/retail-scenario.md) - Полная реализация
-- **🛠️ ARM шаблоны**: [Пакет ARM шаблонов](../../examples/retail-multiagent-arm-template) - Одноразовое развертывание
-- **📖 Архитектура**: [Шаблоны координации многоагентных систем](docs/chapter-06-pre-deployment/coordination-patterns.md) - Шаблоны
+#### Учебные материалы
+- **🤖 Представленный дизайн**: [Многоагентное решение для розницы](examples/retail-scenario.md) - Архитектурный план, не полное приложение
+- **🛠️ ARM Templates**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - Каркас инфраструктуры; проверьте предварительные условия и отсутствующие компоненты приложения
+- **📖 Architecture**: [Multi-agent coordination patterns](docs/chapter-06-pre-deployment/coordination-patterns.md) - Паттерны
 
 #### Практические упражнения
 ```bash
-# Deploy the complete retail multi-agent solution
+# Inspect the retail infrastructure scaffold before choosing to deploy it
 cd examples/retail-multiagent-arm-template
-./deploy.sh
+cat README.md
 
-# Explore agent configurations
+# After an intentional deployment, inspect infrastructure state
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
 
-**💡 Результат главы**: Развёртывание и управление промышленным многоагентным ИИ решением с агентами клиентов и инвентаря
+**💡 Результат главы**: Понять дизайн мультиагентов и определить работу по реализации, валидации и эксплуатации, необходимую сверх каркаса инфраструктуры
 
 ---
 
-### 🔍 Глава 6: Предварительная проверка и планирование развертывания
-**Требования**: Глава 4 завершена  
-**Длительность**: 1 час  
+### 🔍 Глава 6: Валидация и планирование перед развертыванием
+**Предварительные условия**: Глава 4 завершена  
+**Продолжительность**: 1 час  
 **Сложность**: ⭐⭐
 
 #### Чему вы научитесь
-- Планирование ёмкости и проверка ресурсов
+- Планирование мощности и проверка ресурсов
 - Стратегии выбора SKU
-- Предварительные проверки и автоматизация
+- Проверки перед запуском и автоматизация
 
-#### Учебные ресурсы
-- **📊 Планирование**: [Планирование мощностей](docs/chapter-06-pre-deployment/capacity-planning.md) - Проверка ресурсов
-- **💰 Выбор**: [Выбор SKU](docs/chapter-06-pre-deployment/sku-selection.md) - Экономически эффективные варианты
-- **✅ Валидация**: [Проверки перед запуском](docs/chapter-06-pre-deployment/preflight-checks.md) - Автоматизированные скрипты
+#### Ресурсы для обучения
+- **📊 Планирование**: [Capacity Planning](docs/chapter-06-pre-deployment/capacity-planning.md) - Проверка ресурсов
+- **💰 Выбор**: [SKU Selection](docs/chapter-06-pre-deployment/sku-selection.md) - Оптимальные с точки зрения стоимости варианты
+- **✅ Валидация**: [Pre-flight Checks](docs/chapter-06-pre-deployment/preflight-checks.md) - Автоматизированные скрипты
 
 #### Практические упражнения
-- Запуск скриптов проверки мощностей
-- Оптимизация выбора SKU для снижения затрат
-- Внедрение автоматизированных проверок перед развертыванием
+- Запуск скриптов проверки мощности
+- Оптимизация выбора SKU с точки зрения стоимости
+- Реализация автоматизированных проверок перед развертыванием
 
-**💡 Результат главы**: Проверка и оптимизация развертываний перед выполнением
+**💡 Результат главы**: Проверить и оптимизировать развертывания перед их выполнением
 
 ---
 
-### 🚨 Глава 7: Поиск и устранение неисправностей и отладка
-**Требования**: Завершена любая глава по развертыванию  
+### 🚨 Глава 7: Устранение неполадок и отладка
+**Предварительные условия**: Любая глава по развертыванию завершена  
 **Продолжительность**: 1-1.5 часа  
 **Сложность**: ⭐⭐
 
 #### Чему вы научитесь
-- Систематическим подходам к отладке
-- Распространённым проблемам и способам их решения
-- Особенностям устранения неполадок в ИИ
+- Систематические подходы к отладке
+- Распространённые проблемы и решения
+- Особенности устранения неполадок AI
 
-#### Ресурсы для изучения
-- **🔧 Распространённые проблемы**: [Распространённые проблемы](docs/chapter-07-troubleshooting/common-issues.md) - Часто задаваемые вопросы и решения
-- **🕵️ Отладка**: [Руководство по отладке](docs/chapter-07-troubleshooting/debugging.md) - Пошаговые стратегии
-- **🤖 Проблемы с ИИ**: [Устранение неполадок в ИИ](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Проблемы с сервисами ИИ
+#### Ресурсы для обучения
+- **🔧 Распространённые проблемы**: [Common Issues](docs/chapter-07-troubleshooting/common-issues.md) - FAQ и решения
+- **🕵️ Отладка**: [Debugging Guide](docs/chapter-07-troubleshooting/debugging.md) - Пошаговые стратегии
+- **🤖 Проблемы AI**: [AI-Specific Troubleshooting](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Проблемы сервисов AI
 
 #### Практические упражнения
 - Диагностика сбоев развертывания
 - Решение проблем с аутентификацией
-- Отладка соединения с сервисом ИИ
+- Отладка подключения к AI сервисам
 
-**💡 Результат главы**: Самостоятельная диагностика и устранение распространённых проблем развертывания
+**💡 Результат главы**: Независимо диагностировать и решать распространённые проблемы развертывания
 
 ---
 
-### 🏢 Глава 8: Паттерны для производства и корпоративных решений
-**Требования**: Главы 1-4 завершены  
+### 🏢 Глава 8: Продакшн и корпоративные паттерны
+**Предварительные условия**: Главы 1-4 завершены  
 **Продолжительность**: 2-3 часа  
 **Сложность**: ⭐⭐⭐⭐
 
 #### Чему вы научитесь
-- Стратегиям развертывания в производственной среде
-- Корпоративным паттернам безопасности
-- Мониторингу и оптимизации затрат
+- Стратегии продакшн-развертывания
+- Корпоративные паттерны безопасности
+- Мониторинг и оптимизация затрат
 
-#### Ресурсы для изучения
-- **🏭 Производство**: [Лучшие практики AI для продакшена](docs/chapter-08-production/production-ai-practices.md) - Корпоративные паттерны
-- **📝 Примеры**: [Пример микросервисов](../../examples/microservices) - Сложные архитектуры
-- **📊 Мониторинг**: [Интеграция Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - Мониторинг
+#### Ресурсы для обучения
+- **🏭 Продакшн**: [Production AI Best Practices](docs/chapter-08-production/production-ai-practices.md) - Корпоративные паттерны
+- **📝 Примеры**: [Microservices Example](../../examples/microservices) - Сложные архитектуры
+- **📊 Мониторинг**: [Application Insights integration](docs/chapter-06-pre-deployment/application-insights.md) - Мониторинг
 
 #### Практические упражнения
-- Внедрение корпоративных паттернов безопасности
+- Реализация корпоративных паттернов безопасности
 - Настройка комплексного мониторинга
-- Развертывание в продакшен с соблюдением корпоративного управления
+- Развертывание в продакшн с соблюдением управления
 
-**💡 Результат главы**: Развёртывание корпоративных приложений с полным набором производственных возможностей
+**💡 Результат главы**: Развертывать корпоративные приложения с полным продакшн-функционалом
 
 ---
 
-## 🎓 Обзор мастерской: Практический обучающий опыт
+## 🎓 Обзор воркшопа: Практический учебный опыт
 
-> **⚠️ СТАТУС МАСТЕРСКОЙ: Активная разработка**  
-> Материалы мастерской сейчас разрабатываются и совершенствуются. Основные модули функциональны, но некоторые разделы продвинутого уровня ещё не завершены. Мы активно работаем, чтобы закончить весь контент. [Отслеживать прогресс →](workshop/README.md)
+> **⚠️ СТАТУС ВОРКШОПА: Активная разработка**  
+> Материалы воркшопа в настоящее время разрабатываются и совершенствуются. Основные модули функционируют, но некоторые продвинутые разделы пока не завершены. Мы активно работаем над полным созданием контента. [Отслеживать прогресс →](workshop/README.md)
 
-### Интерактивные материалы мастерской
-**Комплексное практическое обучение с использованием браузерных инструментов и пошаговых упражнений**
+### Интерактивные материалы воркшопа
+**Всестороннее практическое обучение с браузерными инструментами и управляемыми упражнениями**
 
-Наши материалы мастерской предлагают структурированный интерактивный опыт обучения, дополняющий главную учебную программу выше. Мастерская рассчитана как на самостоятельное изучение, так и на занятия под руководством преподавателя.
+Наши материалы воркшопа предлагают структурированный, интерактивный учебный опыт, дополняющий учебный план по главам выше. Воркшоп рассчитан как на самостоятельное обучение, так и на занятия с инструктором.
 
-#### 🛠️ Особенности мастерской
-- **Интерфейс в браузере**: Полная мастерская на базе MkDocs с поиском, копированием и темами
+#### 🛠️ Особенности воркшопа
+- **Браузерный интерфейс**: Полный воркшоп на базе MkDocs с поиском, копированием и функциями темы
 - **Интеграция GitHub Codespaces**: Настройка среды разработки в один клик
-- **Структурированный учебный путь**: 8 модулей с пошаговыми упражнениями (всего 3-4 часа)
-- **Прогрессивная методология**: Введение → Выбор → Валидация → Декомпозиция → Конфигурация → Кастомизация → Завершение → Итоги
-- **Интерактивная среда DevContainer**: Преднастроенные инструменты и зависимости
+- **Структурированный путь обучения**: 8 модулей с управляемыми упражнениями (всего 3-4 часа)
+- **Прогрессивная методология**: Введение → Выбор → Валидация → Деконструкция → Конфигурация → Кастомизация → Завершение → Итоги
+- **Интерактивная среда DevContainer**: Предварительно настроенные инструменты и зависимости
 
-#### 📚 Структура модулей мастерской
-Мастерская следует **прогрессивной методологии из 8 модулей**, которая ведёт вас от знакомства до мастерства в развертывании:
+#### 📚 Структура модулей воркшопа
+Воркшоп следует **8-модульной прогрессивной методологии**, которая ведёт вас от изучения до мастерства развертывания:
 
-| Модуль | Тема | Чем вы займётесь | Продолжительность |
+| Модуль | Тема | Что вы сделаете | Продолжительность |
 |--------|-------|----------------|----------|
-| **0. Введение** | Обзор мастерской | Понимание целей обучения, требований и структуры мастерской | 15 мин |
-| **1. Выбор** | Обзор шаблонов | Изучение шаблонов AZD и выбор подходящего AI шаблона для вашего сценария | 20 мин |
-| **2. Валидация** | Развертывание и проверка | Развертывание шаблона с `azd up` и проверка работоспособности инфраструктуры | 30 мин |
-| **3. Декомпозиция** | Понимание структуры | Использование GitHub Copilot для изучения архитектуры шаблона, файлов Bicep и организации кода | 30 мин |
-| **4. Конфигурация** | Подробный разбор azure.yaml | Освоение `azure.yaml` конфигурации, lifecycle hooks и переменных окружения | 30 мин |
-| **5. Кастомизация** | Сделайте для себя | Включение AI Search, трассировки, оценки и настройка под ваш сценарий | 45 мин |
-| **6. Завершение** | Очистка | Безопасное удаление ресурсов с `azd down --purge` | 15 мин |
-| **7. Итоги** | Следующие шаги | Обзор достижений, ключевых концепций и продолжение обучения | 15 мин |
+| **0. Введение** | Обзор воркшопа | Понять учебные цели, предварительные условия и структуру воркшопа | 15 мин |
+| **1. Выбор** | Поиск шаблонов | Изучить шаблоны AZD и выбрать подходящий шаблон AI для вашего сценария | 20 мин |
+| **2. Валидация** | Развернуть и проверить | Развернуть шаблон с `azd up` и проверить работу инфраструктуры | 30 мин |
+| **3. Деконструкция** | Понять структуру | Использовать GitHub Copilot для изучения архитектуры шаблона, файлов Bicep и организации кода | 30 мин |
+| **4. Конфигурация** | Глубокое изучение azure.yaml | Освоить конфигурацию `azure.yaml`, хуки жизненного цикла и переменные окружения | 30 мин |
+| **5. Кастомизация** | Сделать под себя | Включить AI Search, трассировку, оценку и кастомизировать под ваш сценарий | 45 мин |
+| **6. Завершение** | Очистка | Безопасно деинсталлировать ресурсы с помощью `azd down --purge` | 15 мин |
+| **7. Итоги** | Следующие шаги | Подвести итоги, повторить ключевые концепции и продолжить обучение | 15 мин |
 
-**Поток мастерской:**
+**Схема воркшопа:**
 ```
 Introduction → Selection → Validation → Deconstruction → Configuration → Customization → Teardown → Wrap-up
      ↓            ↓           ↓              ↓               ↓              ↓            ↓           ↓
@@ -617,7 +618,7 @@ Introduction → Selection → Validation → Deconstruction → Configuration �
              template                   structure                     scenario
 ```
 
-#### 🚀 Начало работы с мастерской
+#### 🚀 Начало работы с воркшопом
 ```bash
 # Option 1: GitHub Codespaces (Recommended)
 # Click "Code" → "Create codespace on main" in the repository
@@ -628,155 +629,155 @@ cd azd-for-beginners/workshop
 # Follow the setup instructions in workshop/README.md
 ```
 
-#### 🎯 Результаты обучения на мастерской
-Пройдя мастерскую, участники смогут:
-- **Развертывать AI-приложения для продакшена**: Использовать AZD с сервисами Microsoft Foundry
-- **Освоить мультиагентные архитектуры**: Реализовывать скоординированные решения с AI агентами
+#### 🎯 Учебные результаты воркшопа
+Завершив воркшоп, участники смогут:
+- **Развертывать производственные AI приложения**: Использовать AZD с сервисами Microsoft Foundry
+- **Освоить мультиагентные архитектуры**: Реализовывать координированные решения AI агентов
 - **Внедрять лучшие практики безопасности**: Настраивать аутентификацию и контроль доступа
-- **Оптимизировать масштабирование**: Проектировать экономичные и производительные развертывания
-- **Устранять проблемы развертывания**: Решать распространённые ошибки самостоятельно
+- **Оптимизировать масштабируемость**: Проектировать экономичные и производительные развертывания
+- **Устранение неполадок развертываний**: Самостоятельно решать распространённые проблемы
 
-#### 📖 Ресурсы мастерской
-- **🎥 Интерактивное руководство**: [Материалы мастерской](workshop/README.md) - Обучающая среда в браузере
+#### 📖 Ресурсы воркшопа
+- **🎥 Интерактивный гид**: [Workshop Materials](workshop/README.md) - Обучающая среда в браузере
 - **📋 Инструкции по модулям**:
-  - [0. Введение](workshop/docs/instructions/0-Introduction.md) - Обзор и цели мастерской
+  - [0. Введение](workshop/docs/instructions/0-Introduction.md) - Обзор воркшопа и цели
   - [1. Выбор](workshop/docs/instructions/1-Select-AI-Template.md) - Поиск и выбор AI шаблонов
   - [2. Валидация](workshop/docs/instructions/2-Validate-AI-Template.md) - Развертывание и проверка шаблонов
-  - [3. Декомпозиция](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - Изучение архитектуры шаблонов
+  - [3. Деконструкция](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - Изучение архитектуры шаблона
   - [4. Конфигурация](workshop/docs/instructions/4-Configure-AI-Template.md) - Освоение azure.yaml
-  - [5. Кастомизация](workshop/docs/instructions/5-Customize-AI-Template.md) - Настройка под ваш сценарий
+  - [5. Кастомизация](workshop/docs/instructions/5-Customize-AI-Template.md) - Кастомизация под ваш сценарий
   - [6. Завершение](workshop/docs/instructions/6-Teardown-Infrastructure.md) - Очистка ресурсов
   - [7. Итоги](workshop/docs/instructions/7-Wrap-up.md) - Итоги и дальнейшие шаги
-- **🛠️ Лаборатория AI Мастерской**: [Лаборатория AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - Упражнения с уклоном на ИИ
-- **💡 Быстрый старт**: [Руководство по настройке мастерской](workshop/README.md#quick-start) - Настройка окружения
+- **🛠️ Лаборатория AI воркшопа**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - Упражнения, ориентированные на AI
+- **💡 Быстрый старт**: [Workshop Setup Guide](workshop/README.md#browser-based-guide) - Настройка окружения
 
-**Идеально подходит для**: Корпоративных тренингов, университетских курсов, самостоятельного изучения и программ для разработчиков.
+**Подходит для**: Корпоративного обучения, университетских курсов, самостоятельного обучения и буткемпов для разработчиков.
 
 ---
 
 ## 📖 Глубокое погружение: Возможности AZD
 
-Помимо базового функционала, AZD предоставляет мощные возможности для производственных развертываний:
+Помимо основ, AZD предоставляет мощные функции для продакшн-развертываний:
 
-- **Развертывания на базе шаблонов** – Используйте готовые шаблоны для часто встречающихся сценариев приложений
-- **Инфраструктура как код** – Управляйте ресурсами Azure с помощью Bicep или Terraform  
-- **Интегрированные рабочие процессы** – Беспрепятственное управление, развертывание и мониторинг приложений
-- **Ориентированность на разработчика** – Оптимизирован для продуктивности и удобства разработчиков
+- **Развертывания на основе шаблонов** - Используйте готовые шаблоны для распространённых паттернов приложений
+- **Инфраструктура как код** - Управляйте ресурсами Azure с помощью Bicep или Terraform  
+- **Интегрированные рабочие процессы** - Бесшовное обеспечение, развертывание и мониторинг приложений
+- **Удобство для разработчиков** - Оптимизировано для продуктивности и удобства разработчиков
 
-### **AZD + Microsoft Foundry: Идеально для развертываний ИИ**
+### **AZD + Microsoft Foundry: Идеально для AI-развертываний**
 
-**Почему AZD для AI-решений?** AZD решает главные проблемы, с которыми сталкиваются разработчики ИИ:
+**Почему AZD для AI решений?** AZD решает ключевые проблемы, с которыми сталкиваются разработчики AI:
 
-- **Готовые шаблоны для ИИ** – Преднастроенные шаблоны для моделей Microsoft Foundry, Azure AI сервисов и ML нагрузок
-- **Безопасные развертывания ИИ** – Встроенные паттерны безопасности для сервисов ИИ, API ключей и конечных точек моделей  
-- **Паттерны для продакшен ИИ** – Лучшие практики для масштабируемых и экономичных AI-приложений
-- **Конечные рабочие процессы для ИИ** – От разработки модели до развертывания в продакшен с мониторингом
-- **Оптимизация затрат** – Интеллектуальное распределение ресурсов и стратегии масштабирования для AI нагрузок
-- **Интеграция с Microsoft Foundry** – Бесшовное подключение к каталогу моделей и конечным точкам Microsoft Foundry
+- **AI-готовые шаблоны** - Преднастроенные шаблоны для Microsoft Foundry Models, Azure AI Services и ML нагрузок
+- **Безопасные AI-развертывания** - Встроенные паттерны безопасности для AI служб, API ключей и конечных точек моделей  
+- **Паттерны продакшн AI** - Лучшие практики масштабируемых и экономичных AI приложений
+- **Полные AI рабочие процессы** - От разработки модели до продакшн-развертывания с соответствующим мониторингом
+- **Оптимизация затрат** - Умное распределение ресурсов и стратегии масштабирования AI нагрузок
+- **Интеграция с Microsoft Foundry** - Бесшовное соединение с каталогом моделей и конечными точками Microsoft Foundry
 
 ---
 
 ## 🎯 Библиотека шаблонов и примеров
 
-### Рекомендуемые: Шаблоны Microsoft Foundry
-**Начните здесь, если вы развёртываете AI-приложения!**
+### Особое внимание: шаблоны Microsoft Foundry
+**Начните здесь, если разворачиваете AI приложения!**
 
-> **Примечание:** Эти шаблоны демонстрируют различные AI паттерны. Некоторые из них – внешние примеры Azure Samples, другие – локальные реализации.
+> **Примечание:** Эти шаблоны демонстрируют различные AI паттерны. Некоторые из них — внешние Azure Samples, другие — локальные реализации.
 
 | Шаблон | Глава | Сложность | Сервисы | Тип |
 |----------|---------|------------|----------|------|
 | [**Начало работы с AI чатами**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Глава 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Внешний |
 | [**Начало работы с AI агентами**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Глава 2 | ⭐⭐ | Foundry Agents + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Внешний |
-| [**Демонстрация Azure Search + OpenAI**](https://github.com/Azure-Samples/azure-search-openai-demo) | Глава 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Внешний |
-| [**Быстрый старт OpenAI Chat App**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Глава 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Внешний |
+| [**Демонстрация Azure Search + OpenAI**](https://github.com/Azure-Samples/azure-search-openai-demo) | Глава 2 | ⭐⭐ | Azure OpenAI + Azure AI Search + Container Apps (по умолчанию) + Storage | Внешний |
+| [**Quickstart OpenAI Chat App**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Глава 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Внешний |
 | [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Глава 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Внешний |
 | [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Глава 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Внешний |
-| [**Розничное мультиагентное решение**](examples/retail-scenario.md) | Глава 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Локальный** |
+| [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | Глава 5 | ⭐⭐⭐⭐ | Предложенная архитектура и каркас инфраструктуры; требуется реализация приложения | **Локальный шаблон** |
 
-### Рекомендуемые: Полные учебные сценарии
-**Шаблоны приложений для продакшена, соответствующие учебным главам**
+### Особое внимание: Полные учебные сценарии
+**Шаблоны приложений готовых к продакшну, привязанные к учебным главам**
 
 | Шаблон | Учебная глава | Сложность | Ключевые навыки |
 |----------|------------------|------------|--------------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Глава 2 | ⭐ | Основные паттерны развертывания AI |
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Глава 2 | ⭐ | Базовые паттерны развертывания AI |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Глава 2 | ⭐⭐ | Реализация RAG с Azure AI Search |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Глава 4 | ⭐⭐ | Интеграция Document Intelligence |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Глава 5 | ⭐⭐⭐ | Фреймворк агентов и вызов функций |
+| [**get-started-with-ai-agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Глава 2 | ⭐⭐ | Чат с поддержкой агентов и специфические тесты оценки |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Глава 5 | ⭐⭐⭐ | Фреймворк агента и вызовы функций |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Глава 8 | ⭐⭐⭐ | Корпоративная оркестрация AI |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Глава 5 | ⭐⭐⭐⭐ | Мультиагентная архитектура с агентами по клиентам и запасам |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Глава 5 | ⭐⭐⭐⭐ | Мульти-агентная архитектура с агентами клиентов и инвентаря |
 
 ### Обучение по типу примера
 
-> **📌 Локальные vs. Внешние примеры:**  
-> **Локальные примеры** (в этом репозитории) = Готовы к использованию сразу  
-> **Внешние примеры** (Azure Samples) = Клонировать из связанных репозиториев
+> **📌 Локальные и внешние примеры:**  
+> **Локальные примеры** (в этом репозитории) = Изучайте README примера для статуса реализации и предварительных условий
+> **Внешние примеры** (Azure Samples) = Клонируйте из связанных репозиториев
 
-#### Локальные примеры (Готовы к использованию)
-- [**Розничное мультиагентное решение**](examples/retail-scenario.md) - Полная реализация для продакшена с ARM шаблонами
-  - Мультиагентная архитектура (агенты клиентов и запасов)
-  - Комплексный мониторинг и оценка
-  - Развертывание в один клик с помощью ARM шаблона
+#### Локальные примеры (готовы к использованию)
+- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Архитектурный шаблон с каркасом инфраструктуры ARM
+  - Предложенные роли агентов Клиента и Инвентаря
+  - Мониторинг, оценка и код приложения должны быть реализованы и проверены
+  - Одно лишь обеспечение ресурсов не создаёт работающее ритейл-приложение
 
-#### Локальные примеры - Контейнерные приложения (главы 2-5)
-**Полные примеры развертывания контейнеров в этом репозитории:**
-- [**Примеры контейнерных приложений**](examples/container-app/README.md) - Полное руководство по контейнерному развертыванию
+#### Локальные примеры - Контейнерные приложения (Главы 2-5)
+**Всесторонние примеры развертывания контейнеров в этом репозитории:**
+- [**Примеры контейнерных приложений**](examples/container-app/README.md) - Полное руководство по контейнеризованным развертываниям
   - [Простой Flask API](../../examples/container-app/simple-flask-api) - Базовый REST API с масштабированием до нуля
-  - [Архитектура микросервисов](../../examples/container-app/microservices) - Продакшен-развертывание с несколькими сервисами
-  - Быстрый старт, производственные и продвинутые паттерны развертывания
+  - [Архитектура микросервисов](../../examples/container-app/microservices) - Образец с двумя сервисами; продакшн-заточки — дополнительная работа
+  - Быстрый старт, продакшн и продвинутые паттерны развертывания
   - Руководство по мониторингу, безопасности и оптимизации затрат
 
-#### Внешние примеры - Простые приложения (главы 1-2)
-**Клонируйте эти репозитории Azure Samples для начала:**
+#### Внешние примеры - Простые приложения (Главы 1-2)
+**Клонируйте эти репозитории Azure Samples для начала работы:**
 - [Простое веб-приложение - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Базовые паттерны развертывания
 - [Статический сайт - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Развертывание статического контента
 - [Контейнерное приложение - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - Развертывание REST API
 
-#### Внешние примеры - Интеграция баз данных (главы 3-4)  
-- [Приложение с базой данных - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Паттерны подключения к базе данных
-- [Функции + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Безсерверные данные и рабочие процессы
+#### Внешние примеры - Интеграция с базами данных (Главы 3-4)  
+- [Приложение с базой данных - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Шаблоны подключения к базе данных
+- [Функции + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Безсерверные рабочие процессы с данными
 
-#### Внешние примеры - Продвинутые паттерны (главы 4-8)
-- [Java микросервисы](https://github.com/Azure-Samples/java-microservices-aca-lab) - Архитектуры с несколькими сервисами
-- [Контейнерные приложения и задачи](https://github.com/Azure-Samples/container-apps-jobs) - Фоновая обработка  
-- [Корпоративный ML пайплайн](https://github.com/Azure-Samples/mlops-v2) - Продакшен-ориентированные ML паттерны
+#### Внешние примеры - Расширенные шаблоны (главы 4-8)
+- [Java Микросервисы](https://github.com/Azure-Samples/java-microservices-aca-lab) - Мультисервисные архитектуры
+- [Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) - Фоновая обработка  
+- [Энтерпрайз MLOps Pipeline](https://github.com/Azure/mlops-v2) - Референсные шаблоны MLOps; не является готовым шаблоном AZD
 
-### Коллекции внешних шаблонов
-- [**Официальная галерея шаблонов AZD**](https://azure.github.io/awesome-azd/) - Подборка официальных и сообществных шаблонов
+### Внешние коллекции шаблонов
+- [**Официальная галерея шаблонов AZD**](https://azure.github.io/awesome-azd/) - Курируемая коллекция официальных и пользовательских шаблонов
 - [**Шаблоны Azure Developer CLI**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Документация по шаблонам Microsoft Learn
-- [**Каталог примеров**](examples/README.md) - Локальные учебные примеры с подробными объяснениями
+- [**Каталог примеров**](examples/README.md) - Локальные обучающие примеры с подробными объяснениями
 
 ---
 
 ## 📚 Ресурсы для обучения и ссылки
 
 ### Быстрые ссылки
-- [**Шпаргалка команд**](resources/cheat-sheet.md) - Важнейшие команды azd, организованные по главам
-- [**Глоссарий**](resources/glossary.md) - Термины Azure и azd  
-- [**Часто задаваемые вопросы**](resources/faq.md) - Частые вопросы, организованные по главам обучения
+- [**Шпаргалка по командам**](resources/cheat-sheet.md) - Основные команды azd, организованные по главам
+- [**Глоссарий**](resources/glossary.md) - Терминология Azure и azd  
+- [**Часто задаваемые вопросы**](resources/faq.md) - Распространённые вопросы по главам обучения
 - [**Учебное руководство**](resources/study-guide.md) - Всеобъемлющие практические упражнения
 
 ### Практические мастер-классы
-- [**Лаборатория мастер-класса по ИИ**](docs/chapter-02-ai-development/ai-workshop-lab.md) - Сделайте ваши ИИ-решения готовыми к развертыванию с помощью AZD (2-3 часа)
-- [**Интерактивный мастер-класс**](workshop/README.md) - 8 модулей с пошаговыми упражнениями с MkDocs и GitHub Codespaces
-  - Последовательность: Введение → Выбор → Проверка → Деконструкция → Конфигурация → Настройка → Завершение → Итоги
+- [**Лаборатория AI Workshop**](docs/chapter-02-ai-development/ai-workshop-lab.md) - Сделайте свои AI-решения развертываемыми с AZD (2-3 часа)
+- [**Интерактивный мастер-класс**](workshop/README.md) - 8-модульные пошаговые упражнения с MkDocs и GitHub Codespaces
+  - Последовательность: Введение → Выбор → Проверка → Декомпозиция → Конфигурация → Настройка → Завершение → Итоги
 
-### Внешние обучающие ресурсы
+### Внешние ресурсы для обучения
 - [Документация Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Центр архитектуры Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Калькулятор стоимости Azure](https://azure.microsoft.com/pricing/calculator/)
+- [Калькулятор цен Azure](https://azure.microsoft.com/pricing/calculator/)
 - [Статус Azure](https://status.azure.com/)
 
-### Навыки ИИ-агентов для вашего редактора
-- [**Навыки Microsoft Azure на skills.sh**](https://skills.sh/microsoft/github-copilot-for-azure) - 37 открытых навыков агентов для Azure AI, Foundry, развертывания, диагностики, оптимизации стоимости и др. Устанавливайте их в GitHub Copilot, Cursor, Claude Code или любом поддерживаемом агенте:
+### Навыки AI-агентов для вашего редактора
+- [**Навыки Microsoft Azure на skills.sh**](https://skills.sh/microsoft/github-copilot-for-azure) - 37 открытых навыков агентов для Azure AI, Foundry, развертывания, диагностики, оптимизации затрат и многое другое. Установите их в GitHub Copilot, Cursor, Claude Code или любом поддерживаемом агенте:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-## 🔧 Быстрое руководство по устранению неполадок
+## 🔧 Быстрый гид по устранению проблем
 
-**Распространённые проблемы начинающих и их мгновенные решения:**
+**Распространённые проблемы, с которыми сталкиваются начинающие, и быстрые решения:**
 
 <details>
 <summary><strong>❌ "azd: команда не найдена"</strong></summary>
@@ -816,7 +817,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "InsufficientQuota" или "Превышена квота"</strong></summary>
+<summary><strong>❌ "Недостаточно квоты" или "Превышена квота"</strong></summary>
 
 ```bash
 # Try different Azure region
@@ -832,12 +833,12 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" завершается с ошибкой на середине</strong></summary>
+<summary><strong>❌ "azd up" завершается с ошибкой на полпути</strong></summary>
 
 ```bash
-# Option 1: Clean and retry
-azd down --force --purge
-azd up
+# Option 1: Inspect the error and retry after correcting its cause
+azd show
+azd up --debug
 
 # Option 2: Just fix infrastructure
 azd provision
@@ -851,7 +852,7 @@ azd monitor --logs
 </details>
 
 <details>
-<summary><strong>❌ "Аутентификация не удалась" или "Токен истёк"</strong></summary>
+<summary><strong>❌ "Ошибка аутентификации" или "Токен истёк"</strong></summary>
 
 ```bash
 # Re-authenticate for AZD
@@ -871,10 +872,8 @@ az account show
 <summary><strong>❌ "Ресурс уже существует" или конфликты имён</strong></summary>
 
 ```bash
-# AZD generates unique names, but if conflict:
-azd down --force --purge
-
-# Then retry with fresh environment
+# Inspect the conflicting resource before changing or deleting anything.
+# For an isolated new deployment, create a separate environment:
 azd env new dev-v2
 azd up
 ```
@@ -886,7 +885,7 @@ azd up
 **Нормальное время ожидания:**
 - Простое веб-приложение: 5-10 минут
 - Приложение с базой данных: 10-15 минут
-- ИИ-приложения: 15-25 минут (Provisioning OpenAI идет медленно)
+- AI-приложения: 15-25 минут (Provisioning OpenAI происходит медленно)
 
 ```bash
 # Check progress
@@ -931,7 +930,7 @@ azd env get-values
 ### 📚 Полные ресурсы по устранению неполадок
 
 - **Руководство по общим проблемам:** [Подробные решения](docs/chapter-07-troubleshooting/common-issues.md)
-- **Проблемы, связанные с ИИ:** [Устранение неполадок ИИ](docs/chapter-07-troubleshooting/ai-troubleshooting.md)
+- **Проблемы, связанные с AI:** [Устранение неполадок AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md)
 - **Руководство по отладке:** [Пошаговая отладка](docs/chapter-07-troubleshooting/debugging.md)
 - **Получить помощь:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
@@ -940,72 +939,71 @@ azd env get-values
 ## 🎓 Завершение курса и сертификация
 
 ### Отслеживание прогресса
-Отслеживайте ваш прогресс обучения в каждой главе:
+Следите за своим обучением по каждой главе:
 
 - [ ] **Глава 1**: Основы и быстрый старт ✅
-- [ ] **Глава 2**: Разработка с приоритетом ИИ ✅  
+- [ ] **Глава 2**: AI-первый подход к разработке ✅  
 - [ ] **Глава 3**: Конфигурация и аутентификация ✅
-- [ ] **Глава 4**: Инфраструктура как код и развертывание ✅
-- [ ] **Глава 5**: Многоагентные ИИ-решения ✅
-- [ ] **Глава 6**: Валидация и планирование перед развертыванием ✅
+- [ ] **Глава 4**: Инфраструктура как код и развёртывание ✅
+- [ ] **Глава 5**: Мультиагентные AI-решения ✅
+- [ ] **Глава 6**: Предварительная проверка и планирование развёртывания ✅
 - [ ] **Глава 7**: Устранение неполадок и отладка ✅
-- [ ] **Глава 8**: Продакшн и корпоративные шаблоны ✅
+- [ ] **Глава 8**: Производственные и корпоративные шаблоны ✅
 
-### Проверка усвоения материала
+### Проверка знаний
 После завершения каждой главы подтвердите свои знания, выполнив:
-1. **Практическое упражнение**: Выполните развертывание из главы
-2. **Проверку знаний**: Ознакомьтесь с разделом FAQ по главе
-3. **Обсуждение с сообществом**: Поделитесь опытом в Azure Discord
+1. **Практическое задание**: Выполните практическое развёртывание по главе
+2. **Проверка знаний**: Просмотрите раздел FAQ по вашей главе
+3. **Обсуждение в сообществе**: Поделитесь опытом в Azure Discord
 4. **Следующая глава**: Перейдите к следующему уровню сложности
 
 ### Преимущества завершения курса
-После прохождения всех глав вы получите:
-- **Опыт работы в продакшне**: Развернутые реальные ИИ-приложения в Azure
-- **Профессиональные навыки**: Возможность разворачивать решения для корпоративного уровня  
-- **Признание в сообществе**: Активный участник сообщества Azue-разработчиков
-- **Карьерный рост**: Востребованная экспертиза по AZD и развертыванию ИИ
+После завершения всех глав вы получите:
+- **Опыт в продакшене**: Развернутые реальные AI-приложения в Azure
+- **Профессиональные навыки**: Навыки развёртывания уровня предприятия  
+- **Признание в сообществе**: Активное членство в сообществе разработчиков Azure
+- **Карьера**: Востребованная экспертиза в AZD и AI-развёртывании
 
 ---
 
 ## 🤝 Сообщество и поддержка
 
-### Получение помощи и поддержки
-- **Технические проблемы**: [Сообщить об ошибках и запрашивать функции](https://github.com/microsoft/azd-for-beginners/issues)
+### Получить помощь и поддержку
+- **Технические проблемы**: [Сообщить об ошибках и запросить функции](https://github.com/microsoft/azd-for-beginners/issues)
 - **Вопросы по обучению**: [Сообщество Microsoft Azure Discord](https://discord.gg/microsoft-azure) и [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **Помощь по ИИ**: Присоединяйтесь к [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Помощь по AI**: Присоединяйтесь к [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **Документация**: [Официальная документация Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Мнения сообщества из Microsoft Foundry Discord
+### Мнение сообщества из Microsoft Foundry Discord
 
-**Недавние результаты опроса в канале #Azure:**
-- **45%** разработчиков хотят использовать AZD для ИИ-нагрузок
-- **Основные вызовы**: Много-сервисные развертывания, управление учётными данными, готовность к продакшну  
-- **Наиболее востребованные**: Шаблоны для ИИ, руководства по устранению неполадок, лучшие практики
+**Темы, обсуждаемые сообществом:**
+- Мультисервисные развёртывания, управление учётными данными и готовность к продакшену
+- AI-специфичные шаблоны, руководства по устранению проблем и лучшие практики
 
 **Присоединяйтесь к нашему сообществу, чтобы:**
-- Делиться опытом использования AZD + ИИ и получать помощь
-- Получать ранний доступ к новым шаблонам ИИ
-- Вносить вклад в лучшие практики развертывания ИИ
-- Влиять на разработку будущих функций ИИ + AZD
+- Поделитесь своими опытами с AZD + AI и получите помощь
+- Получите ранний доступ к новым AI-шаблонам
+- Вносите вклад в лучшие практики развёртывания AI
+- Влияйте на развитие будущих функций AI + AZD
 
-### Внесение вклада в курс
-Мы приветствуем вклад! Пожалуйста, прочитайте наше [Руководство по внесению вкладов](CONTRIBUTING.md) для деталей о:
-- **Улучшении контента**: Улучшение существующих глав и примеров
-- **Новых примерах**: Добавление реальных сценариев и шаблонов  
-- **Переводе**: Помощь в поддержании многоязычной поддержки
-- **Сообщениях об ошибках**: Повышение точности и ясности
-- **Стандартах сообщества**: Соблюдение наших инклюзивных правил сообщества
+### Вклад в курс
+Мы приветствуем вклад! Пожалуйста, ознакомьтесь с нашим [Руководством по вкладу](CONTRIBUTING.md) для информации о:
+- **Улучшение контента**: Повышайте качество глав и примеров
+- **Новые примеры**: Добавляйте реальные сценарии и шаблоны  
+- **Перевод**: Помогайте поддерживать многоязычность
+- **Сообщения об ошибках**: Повышайте точность и ясность
+- **Стандарты сообщества**: Следуйте нашим инклюзивным правилам сообщества
 
 ---
 
 ## 📄 Информация о курсе
 
 ### Лицензия
-Этот проект лицензирован под MIT License - см. файл [LICENSE](../../LICENSE) для подробностей.
+Этот проект лицензирован под лицензией MIT - смотрите файл [LICENSE](../../LICENSE) для подробностей.
 
-### Связанные обучающие ресурсы Microsoft
+### Связанные учебные ресурсы Microsoft
 
-Наша команда выпускает и другие всесторонние обучающие курсы:
+Наша команда создаёт и другие комплексные учебные курсы:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
 ### LangChain
@@ -1018,22 +1016,22 @@ azd env get-values
 [![AZD для начинающих](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI для начинающих](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![MCP для начинающих](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![ИИ агенты для начинающих](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Агенты для начинающих](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
-### Серия по генеративному ИИ
-[![Генеративный ИИ для начинающих](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Генеративный ИИ (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-[![Генеративный ИИ (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-[![Генеративный ИИ (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+### Серия по генеративному AI
+[![Генеративный AI для начинающих](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Генеративный AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Генеративный AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Генеративный AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### Основное обучение
 [![Машинное обучение для начинающих](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-[![Наука о данных для начинающих](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
-[![ИИ для начинающих](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science для начинающих](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI для начинающих](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 [![Кибербезопасность для начинающих](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
 [![Веб-разработка для начинающих](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 [![IoT для начинающих](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
@@ -1042,7 +1040,7 @@ azd env get-values
 ---
  
 ### Серия Copilot
-[![Copilot для парного программирования ИИ](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot для парного программирования AI](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
 [![Copilot для C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
 [![Приключения Copilot](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
@@ -1053,11 +1051,11 @@ azd env get-values
 
 **🚀 Готовы начать обучение?**
 
-**Новички**: Начните с [Глава 1: Основы и быстрый старт](#-chapter-1-foundation--quick-start)  
-**Разработчики ИИ**: Перейдите к [Главе 2: Разработка с приоритетом ИИ](#-chapter-2-ai-first-development-recommended-for-ai-developers)  
-**Опытные разработчики**: Начинайте с [Глава 3: Конфигурация и аутентификация](#️-chapter-3-configuration--authentication)
+**Начинающие**: Начните с [Глава 1: Основы и быстрый старт](#-chapter-1-foundation--quick-start)  
+**AI-разработчики**: Перейдите к [Глава 2: AI-первый подход](#-chapter-2-ai-first-development-recommended-for-ai-developers)  
+**Опытные разработчики**: Начните с [Глава 3: Конфигурация и аутентификация](#️-chapter-3-configuration--authentication)
 
-**Следующие шаги**: [Начать главу 1 - Основы AZD](docs/chapter-01-foundation/azd-basics.md) →
+**Следующие шаги**: [Начать главу 1 — Основы AZD](docs/chapter-01-foundation/azd-basics.md) →
 
 ---
 

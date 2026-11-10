@@ -1,73 +1,68 @@
-# دليل التصحيح لنشرات AZD
+# دليل تصحيح الأخطاء لنشر AZD
 
-**تنقّل الفصول:**
-- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
-- **📖 الفصل الحالي**: الفصل 7 - استكشاف الأخطاء وإصلاحها والتصحيح
-- **⬅️ السابق**: [مشكلات شائعة](common-issues.md)
-- **➡️ التالي**: [استكشاف أخطاء الذكاء الاصطناعي](ai-troubleshooting.md)
+**التنقل بين الفصول:**
+- **🏠 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
+- **📖 الفصل الحالي**: الفصل 7 - استكشاف الأخطاء وإصلاحها وتصحيح الأخطاء
+- **⬅️ السابق**: [المشاكل الشائعة](common-issues.md)
+- **➡️ التالي**: [استكشاف الأخطاء وإصلاحها الخاصة بالذكاء الاصطناعي](ai-troubleshooting.md)
 - **🚀 الفصل التالي**: [الفصل 8: أنماط الإنتاج والمؤسسات](../chapter-08-production/production-ai-practices.md)
 
 ## مقدمة
 
-يوفر هذا الدليل الشامل استراتيجيات وأدوات وتقنيات تصحيح متقدمة لتشخيص وحل المشكلات المعقدة في نشرات Azure Developer CLI. تعلّم مناهج منظَّمة لاستكشاف المشكلات، وتقنيات تحليل السجلات، وملف تعريف الأداء، وأدوات التشخيص المتقدمة لحل مشكلات النشر وتشغيل الزمن بكفاءة.
+يقدم هذا الدليل الشامل استراتيجيات وأدوات وتقنيات متقدمة لتصحيح الأخطاء لتشخيص وحل المشاكل المعقدة في نشر Azure Developer CLI. تعلّم منهجيات استكشاف الأخطاء بشكل منهجي، وتقنيات تحليل السجلات، وتحليل الأداء، وأدوات التشخيص المتقدمة لحل مشاكل النشر وتشغيل الوقت بكفاءة.
 
 ## أهداف التعلم
 
-بإكمال هذا الدليل، ستتمكن من:
-- إتقان مناهج التصحيح المنهجي لمشكلات Azure Developer CLI
-- فهم تكوين التسجيل المتقدم وتقنيات تحليل السجلات
-- تنفيذ استراتيجيات ملف تعريف ومراقبة الأداء
-- استخدام أدوات وخدمات تشخيص Azure لحل المشكلات المعقدة
-- تطبيق تقنيات تصحيح الشبكات والأمن
-- تكوين مراقبة وتنبيهات شاملة لاكتشاف المشكلات استباقيًا
+عند إتمام هذا الدليل، ستتمكن من:
+- إتقان منهجيات تصحيح الأخطاء النظامية لقضايا Azure Developer CLI
+- فهم إعدادات السجلات المتقدمة وتقنيات تحليل السجلات
+- تنفيذ استراتيجيات تحليل الأداء والمراقبة
+- استخدام أدوات وخدمات تشخيص Azure لحل المشاكل المعقدة
+- تطبيق تقنيات تصحيح أخطاء الشبكة واستكشاف المشكلات الأمنية
+- تكوين مراقبة وتنبيه شاملة للكشف الاستباقي عن المشاكل
 
-## نواتج التعلم
+## النتائج المتوقعة من التعلم
 
-عند الانتهاء، ستكون قادرًا على:
-- تطبيق منهجية TRIAGE لتصحيح المشكلات المعقدة بشكل منهجي
-- تكوين وتحليل معلومات التسجيل والتتبع الشاملة
-- استخدام Azure Monitor وApplication Insights وأدوات التشخيص بفعالية
-- تصحيح أخطاء الاتصال بالشبكة والمصادقة والأذونات بشكل مستقل
-- تنفيذ مراقبة الأداء واستراتيجيات التحسين
-- إنشاء نصوص تصحيح مخصصة وأتمتة للمشكلات المتكررة
+بعد الانتهاء، ستكون قادرًا على:
+- تطبيق منهجية TRIAGE لتصحيح الأخطاء المنهجي في مشاكل النشر المعقدة
+- تكوين وتحليل معلومات السجلات والتتبع الشاملة
+- استخدام Azure Monitor وApplication Insights والأدوات التشخيصية بشكل فعال
+- تصحيح مشكلات اتصال الشبكة والمصادقة والصلاحيات بشكل مستقل
+- تنفيذ استراتيجيات مراقبة الأداء والتحسين
+- إنشاء نصوص تصحيح الأخطاء المخصصة وأتمتة القضايا المتكررة
 
-## منهجية التصحيح
+## منهجية تصحيح الأخطاء
 
 ### منهجية TRIAGE
 - **T**ime: متى بدأت المشكلة؟
 - **R**eproduce: هل يمكنك إعادة إنتاجها باستمرار؟
 - **I**solate: ما المكون الذي يفشل؟
 - **A**nalyze: ماذا تخبرنا السجلات؟
-- **G**ather: اجمع جميع المعلومات ذات الصلة
-- **E**scalate: متى تطلب مساعدة إضافية؟
+- **G**ather: جمع جميع المعلومات ذات الصلة
+- **E**scalate: متى تطلب مساعدة إضافية
 
 ## تمكين وضع التصحيح
 
+> **النطاق:** هذه أمثلة تشخيصية للتكيف وليس مجموعة نصوص مدعومة. استبدل أسماء/معرفات الموارد؛ استخدم Bash لكتل الشل. مخرجات `--debug` وقيم البيئة قد تحتوي على معلومات حساسة — راجعها/احذفها قبل المشاركة. تتطلب الأمثلة التي تنشر أو تسترجع أو تغير الإعدادات موافقة صريحة من المشغل.
+
 ### متغيرات البيئة
 ```bash
-# تمكين التصحيح الشامل
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# تصحيح Azure CLI
-export AZURE_CLI_DIAGNOSTICS=true
-
-# تعطيل القياس عن بُعد للحصول على مخرجات أنظف
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### تكوين التصحيح
 ```bash
-# اضبط تكوين التصحيح عالميًا
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# تمكين تسجيل التتبع
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
+
+`azd config set` يمكنه تخزين مفاتيح عشوائية؛ هذا لا يجعل `debug.enabled` أو `debug.logLevel` أو `trace.outputPath` إعدادات مدعومة. استخدم علم `--debug` الخاص بالأمر الصادر.
 
 ## 📊 تقنيات تحليل السجلات
 
@@ -83,66 +78,67 @@ FATAL   - Critical errors that cause application termination
 
 ### تحليل السجلات المهيكلة
 ```bash
-# عرض السجلات باستخدام Azure Monitor (عبر azd monitor)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# عرض سجلات التطبيق في الوقت الفعلي
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# لتحليل مفصل للسجلات، استخدم Azure CLI مع App Service أو Container App:
-# سجلات App Service
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# سجلات Container App
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# تصدير سجلات Application Insights للتحليل
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
-### ربط السجلات
+### ترابط السجلات
 ```bash
 #!/bin/bash
-# correlate-logs.sh - ربط السجلات عبر الخدمات باستخدام Azure Monitor
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# البحث في Application Insights عن السجلات المرتبطة
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# البحث في سجلات نشاط Azure
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ أدوات تصحيح متقدمة
+## 🛠️ أدوات تصحيح الأخطاء المتقدمة
 
 ### استعلامات Azure Resource Graph
 ```bash
-# استعلام عن الموارد حسب الوسوم
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# البحث عن عمليات النشر الفاشلة
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# التحقق من حالة المورد
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### تصحيح الشبكة
+### تصحيح أخطاء الشبكة
 ```bash
-# اختبار الاتصال بين الخدمات
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# الاستخدام
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
-### تصحيح الحاويات
+### تصحيح أخطاء الحاويات
 ```bash
-# استكشاف وإصلاح مشكلات تطبيق الحاوية
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -181,12 +178,12 @@ debug_container() {
 }
 ```
 
-### تصحيح اتصال قاعدة البيانات
+### تصحيح أخطاء اتصال قاعدة البيانات
 ```bash
-# تصحيح اتصال قاعدة البيانات
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -200,26 +197,15 @@ debug_database() {
 }
 ```
 
-## 🔬 تصحيح الأداء
+## 🔬 تصحيح أداء التطبيق
 
 ### مراقبة أداء التطبيق
 ```bash
-# تمكين تصحيح الأخطاء في Application Insights
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# مراقبة أداء مخصصة
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -236,25 +224,23 @@ monitor_performance() {
 }
 ```
 
-### تحليل استخدام الموارد
+### تحليل استهلاك الموارد
 ```bash
-# مراقبة استخدام الموارد
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
@@ -262,7 +248,7 @@ monitor_resources() {
 
 ## 🧪 الاختبار والتحقق
 
-### تصحيح اختبارات التكامل
+### تصحيح أخطاء اختبارات التكامل
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# إعداد بيئة التصحيح
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# الحصول على نقاط النهاية للخدمة
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# اختبار نقاط النهاية الصحية
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# تشغيل الاختبارات
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# تشغيل اختبارات التكامل المخصصة
+# Run custom integration tests
 npm run test:integration
 ```
 
 ### اختبار التحميل للتصحيح
 ```bash
-# اختبار تحميل بسيط لتحديد اختناقات الأداء
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # باستخدام Apache Bench (التثبيت: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # استخراج المقاييس الرئيسية
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # التحقق من وجود أخطاء
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 تصحيح البنية التحتية
+## 🔧 تصحيح أخطاء البنية التحتية
 
 ### تصحيح قوالب Bicep
 ```bash
-# التحقق من قوالب Bicep مع إخراج مفصل
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # التحقق من صحة البنية
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # التحقق بواسطة Lint
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # نشر 'ماذا لو'
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# تصحيح نشر القالب
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,52 +361,44 @@ debug_deployment() {
 
 ### تحليل حالة الموارد
 ```bash
-# تحليل حالات الموارد لاكتشاف التناقضات
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # سرد جميع الموارد مع حالاتها
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # التحقق من وجود موارد فاشلة
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
-## 🔒 تصحيح الأمان
+## 🔒 تصحيح أخطاء الأمان
 
 ### تصحيح تدفق المصادقة
 ```bash
-# تصحيح مصادقة أزور
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # فك تشفير رمز JWT (يتطلب jq و base64)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# تصحيح الوصول إلى Key Vault
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,14 +416,14 @@ debug_keyvault() {
 
 ### تصحيح أمان الشبكة
 ```bash
-# تصحيح مجموعات أمان الشبكة
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # تحقق من قواعد الأمان
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 تصحيح الأخطاء الخاص بالتطبيقات
+## 📱 تصحيح أخطاء التطبيق الخاص
 
-### تصحيح تطبيقات Node.js
+### تصحيح أخطاء تطبيق Node.js
 ```javascript
-// debug-middleware.js - وسيط تصحيح أخطاء Express
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // تسجيل تفاصيل الطلب
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // استبدال res.json لتسجيل الاستجابات
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### تصحيح استعلامات قاعدة البيانات
+### تصحيح أخطاء استعلام قاعدة البيانات
 ```javascript
-// database-debug.js - أدوات تصحيح أخطاء قاعدة البيانات
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 إجراءات التصحيح الطارئة
+## 🚨 إجراءات تصحيح الطوارئ
 
-### الاستجابة لمشكلة بالإنتاج
+### استجابة لمشكلة الإنتاج
 ```bash
 #!/bin/bash
-# emergency-debug.sh - تصحيح الطوارئ في بيئة الإنتاج
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# التبديل إلى البيئة الصحيحة
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# جمع المعلومات الحرجة
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# استخدام Azure Monitor لسجلات الأخطاء
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,58 +551,59 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### إجراءات التراجع
+### إجراءات الرجوع
 ```bash
-# نص برمجي للاسترجاع السريع
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # تبديل البيئة
+    # Switch environment
     azd env select "$environment"
     
-    # الاسترجاع باستخدام Git (لا يحتوي AZD على استرجاع مدمج)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # التحقق من الاسترجاع
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # اختبار نقاط النهاية الحرجة
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 لوحات تصحيح الأخطاء
+لا يعيد هذا الرجوع الاحادي البرمجيات البنية التحتية أو هجرات قواعد البيانات أو الأسرار. استخدم شجرة عمل نظيفة، سجل الالتزام الابتدائي، واستعدها لاحقًا؛ يقوم الأمر بفحص الالتزام المحدد في المستودع الحالي.
+
+## 📊 لوحات تتبع تصحيح الأخطاء
 
 ### لوحة مراقبة مخصصة
 ```bash
-# إنشاء استعلامات Application Insights للتصحيح
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # استعلام عن الأخطاء
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # استعلام عن مشكلات الأداء
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # استعلام عن فشل التبعيات
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,15 +612,15 @@ create_debug_queries() {
 
 ### تجميع السجلات
 ```bash
-# تجميع السجلات من مصادر أزور متعددة
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,19 +630,20 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
 }
 ```
 
-## 🔗 موارد متقدمة
+## 🔗 الموارد المتقدمة
 
-### نصوص تصحيح مخصصة
-أنشئ دليلًا `scripts/debug/` يتضمن:
-- `health-check.sh` - فحص حالة شامل
-- `performance-test.sh` - اختبار أداء آلي
-- `log-analyzer.py` - تحليل وسبر سجلات متقدم
+### نصوص تصحيح الأخطاء المخصصة
+أنشئ دليل `scripts/debug/` يحتوي على:
+- `health-check.sh` - فحوصات صحة شاملة
+- `performance-test.sh` - اختبار أداء مؤتمت
+- `log-analyzer.py` - تحليل متقدم للسجلات
 - `resource-validator.sh` - التحقق من البنية التحتية
 
 ### تكامل المراقبة
@@ -676,6 +653,7 @@ hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -688,34 +666,34 @@ hooks:
 
 ## أفضل الممارسات
 
-1. **قم دائمًا بتمكين تسجيل التصحيح** في البيئات غير الإنتاجية
-2. **أنشئ حالات اختبار قابلة لإعادة الإنتاج** للمشكلات
-3. **وثق إجراءات التصحيح** لفريقك
-4. **قم بأتمتة فحوصات الصحة والمراقبة**
+1. **قم دائمًا بتمكين تسجيل الأخطاء** في بيئات غير الإنتاجية
+2. **أنشئ حالات اختبار قابلة للإعادة** للمشاكل
+3. **وثّق إجراءات تصحيح الأخطاء** لفريقك
+4. **أتمت فحوصات الصحة** والمراقبة
 5. **حافظ على تحديث أدوات التصحيح** مع تغييرات تطبيقك
-6. **تدرّب على إجراءات التصحيح** أثناء الأوقات غير الطارئة
+6. **تدرّب على إجراءات التصحيح** في أوقات عدم وقوع الحوادث
 
 ## الخطوات التالية
 
-- [تخطيط السعة](../chapter-06-pre-deployment/capacity-planning.md) - خطط متطلبات الموارد
-- [اختيار SKU](../chapter-06-pre-deployment/sku-selection.md) - اختر مستويات الخدمة المناسبة
-- [فحوصات ما قبل النشر](../chapter-06-pre-deployment/preflight-checks.md) - التحقق قبل النشر
-- [مذكرة مرجعية](../../resources/cheat-sheet.md) - أوامر مرجعية سريعة
+- [تخطيط السعة](../chapter-06-pre-deployment/capacity-planning.md) - تخطيط متطلبات الموارد
+- [اختيار SKU](../chapter-06-pre-deployment/sku-selection.md) - اختيار طبقات الخدمة المناسبة
+- [فحوص ما قبل الطيران](../chapter-06-pre-deployment/preflight-checks.md) - التحقق قبل النشر
+- [ورقة الغش](../../resources/cheat-sheet.md) - أوامر مرجعية سريعة
 
 ---
 
-**تذكّر**: التصحيح الجيد يعتمد على أن تكون منهجيًا ودقيقًا وصبورًا. ستساعدك هذه الأدوات والتقنيات على تشخيص المشكلات بشكل أسرع وأكثر فعالية.
+**تذكير**: تصحيح الأخطاء الجيد هو أن تكون منهجيًا، دقيقًا، وصبورًا. ستساعدك هذه الأدوات والتقنيات على تشخيص المشكلات بشكل أسرع وأكثر فعالية.
 
 ---
 
-**التنقّل**
-- **الدرس السابق**: [مشكلات شائعة](common-issues.md)
+**التنقل**
+- **الدرس السابق**: [المشاكل الشائعة](common-issues.md)
 
 - **الدرس التالي**: [تخطيط السعة](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). وعلى الرغم من سعينا للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المرجعي المعتمد. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. لسنا مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

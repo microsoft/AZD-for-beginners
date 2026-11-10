@@ -1,67 +1,67 @@
-# Erstellen Sie Ihre eigene azd-Vorlage
+# Eigene azd-Vorlage erstellen
 
-**Kapitel-Navigation:**
-- **📚 Kurs-Startseite**: [AZD für Anfänger](../../README.md)
-- **📖 Aktuelles Kapitel**: Kapitel 4 – Infrastruktur als Code & Bereitstellung
-- **⬅️ Vorheriges**: [Bereitstellungsleitfaden](deployment-guide.md)
-- **🚀 Nächstes Kapitel**: [Kapitel 5: Multi-Agenten-Lösungen](../chapter-05-multi-agent/README.md)
+**Kapitelnavigation:**
+- **📚 Kursstartseite**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 4 - Infrastruktur als Code & Bereitstellung
+- **⬅️ Vorheriges**: [Bereitstellungsanleitung](deployment-guide.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 5: Multi-Agent-Lösungen](../chapter-05-multi-agent/README.md)
 
-> Validiert mit `azd 1.27.1` im Juli 2026.
+> Überprüft gegen `azd 1.37.2` (November 2026). Dies ist ein **Erstellungsdurchgang mit Teil-Dateien**, keine vollständige Vorlage: Sie müssen Anwendungscode und `modules/web.bicep` mit seiner Umgebung, Registry, Container App und Ausgaben vor der Bereitstellung bereitstellen. Die Azure-Bereitstellung wurde in dieser Überprüfung nicht ausgeführt.
 
 ## Einführung
 
-Bisher haben Sie Vorlagen mit `azd init --template <name>` *verwendet*. Aber wenn Sie einmal eine Projektstruktur haben, die Ihrem Team gefällt – zum Beispiel eine Container-App mit Cosmos DB und dem richtigen Monitoring – möchten Sie diese in eine eigene wiederverwendbare Vorlage umwandeln. Eine Vorlage ist einfach ein Git-Repository mit einer vorhersehbaren Struktur, die azd lesen kann. Diese Lektion zeigt Ihnen, wie Sie eine von Grund auf neu erstellen, testen und (optional) in der Community-Galerie veröffentlichen.
+Bisher hast du *Vorlagen konsumiert* mit `azd init --template <name>`. Sobald ihr aber ein Projektlayout habt, das deinem Team gefällt – zum Beispiel eine Container App mit einer Cosmos DB und dem richtigen Monitoring – möchtest du daraus wahrscheinlich eine wiederverwendbare eigene Vorlage machen. Eine Vorlage ist einfach ein Git-Repository mit einer vorhersehbaren Struktur, die azd lesen kann. Diese Lektion zeigt dir, wie du eine von Grund auf neu erstellst, testest und (optional) in der Community-Galerie veröffentlichst.
 
 ## Lernziele
 
-Am Ende dieser Lektion werden Sie:
+Am Ende dieser Lektion wirst du:
 - Verstehen, was einen Ordner zu einer „azd-Vorlage“ macht
 - Die erforderlichen Dateien und Ordnerstruktur kennen
-- Eine `azure.yaml` und `infra/` hinzufügen, die andere wiederverwenden können
-- Ihre Vorlage lokal testen, bevor Sie sie teilen
-- Sie veröffentlichen und (optional) bei Awesome AZD einreichen
+- Einen `azure.yaml` und `infra/` hinzufügen, die andere wiederverwenden können
+- Deine Vorlage lokal testen, bevor du sie teilst
+- Sie veröffentlichen und (optional) in Awesome AZD einreichen
 
 ## Lernergebnisse
 
-Nach Abschluss dieser Lektion können Sie:
-- Ein neues Vorlagen-Repository erstellen
-- Infrastruktur parameterisieren, damit sie in jedem Abonnement funktioniert
-- Eine Vorlage mit `azd init` und `azd up` validieren
-- Die Metadaten hinzufügen, die die Community-Galerie benötigt
+Nach Abschluss dieser Lektion wirst du in der Lage sein:
+- Ein neues Vorlagen-Repository zu scaffolden
+- Infrastruktur parametrieren, sodass sie in jedem Abonnement funktioniert
+- Eine Vorlage mit `azd init` und `azd up` zu validieren
+- Die Metadaten hinzuzufügen, die die Community-Galerie benötigt
 
 ---
 
-## Was ist eigentlich eine Vorlage?
+## Was ist eine Vorlage eigentlich?
 
-Eine azd-Vorlage ist **ein Git-Repository**, das mindestens Folgendes enthält:
+Eine azd-Vorlage ist **ein Git-Repository**, das mindestens enthält:
 
 | Datei / Ordner | Zweck | Erforderlich? |
 |---------------|---------|-----------|
 | `azure.yaml` | Beschreibt Dienste, Hosts und Infrastruktur-Anbieter | ✅ Ja |
-| `infra/` | Bicep, Terraform oder Pulumi zur Bereitstellung von Ressourcen | ✅ Ja |
-| `src/` (oder Ihr Code) | Der Anwendungscode, den azd bereitstellt | ✅ Ja |
-| `README.md` | So verwendet man die Vorlage | ✅ Sehr empfohlen |
+| `infra/` | Bicep- oder Terraform-Bereitstellungsdefinitionen | Für dieses explizite IaC-Beispiel erforderlich; generierte Infrastrukturprojekte können es weglassen |
+| `src/` (oder dein Code) | Der Anwendungscode, den azd bereitstellt | Für quellbasierte Dienste erforderlich; nicht alle Vorlagen enthalten Anwendungscode |
+| `README.md` | Wie man die Vorlage benutzt | ✅ Sehr empfohlen |
 | `.azdo/` oder `.github/` | CI/CD-Pipeline-Definitionen | Optional |
-| `.devcontainer/` | Reproduzierbare Entwicklungsumgebung | Optional |
-| `azure.yaml` `metadata` | Galerie- und Telemetriedaten | Optional (zum Veröffentlichen erforderlich) |
+| `.devcontainer/` | Reproduzierbare Entwicklerumgebung | Optional |
+| `azure.yaml` `metadata` | Vorlagen-Identität / Telemetrieinformationen | Empfohlen; Veröffentlichung eines Git-Repository erfordert dies nicht |
 
-Es ist nichts Magisches: Wenn Sie `azd init --template you/your-repo` ausführen, klont azd das Repo und liest die `azure.yaml`.
+Hier ist nichts Magisches: Wenn du `azd init --template you/your-repo` ausführst, klont azd das Repo und liest `azure.yaml`.
 
 ---
 
-## Schritt 1: Das Repository erstellen
+## Schritt 1: Scaffold das Repository
 
-Erstellen Sie die Ordnerstruktur manuell oder starten Sie mit einer Minimalvorlage und bearbeiten diese:
+Erstelle die Ordnerstruktur von Hand oder starte von einer minimalen Vorlage und bearbeite sie:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Erstellen Sie das Standardlayout
+# Create the standard layout
 mkdir -p src infra
 ```
 
-Eine typische fertige Struktur sieht so aus:
+Ein typisches fertiges Layout sieht so aus:
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Schritt 2: Schreiben Sie `azure.yaml`
+## Schritt 2: Schreibe `azure.yaml`
 
-Das ist das Herzstück der Vorlage. Es sagt azd, was bereitgestellt wird und wie:
+Das ist das Herzstück der Vorlage. Es sagt azd, was bereitgestellt werden soll und wie:
 
 ```yaml
 # azure.yaml
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -101,21 +101,21 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Das Feld `metadata.template` wird von der Galerietelements-Telemetrie zur Nutzungszählung verwendet. Verwenden Sie die Konvention `name@version`.
+> Das Feld `metadata.template` wird von der Galerie-Telemetrie genutzt, um die Nutzung zu zählen. Verwende die `name@version`-Konvention.
 
 ---
 
-## Schritt 3: Infrastruktur parametrieren
+## Schritt 3: Parameterisiere die Infrastruktur
 
-Die wichtigste Regel für eine *wiederverwendbare* Vorlage: **Namen, Regionen oder abonnementsspezifische Werte niemals fest codieren.** Verwenden Sie Parameter und das Ressourcentoken-Muster, damit dieselbe Vorlage in jedem Abonnement funktioniert.
+Die wichtigste Regel für eine *wiederverwendbare* Vorlage: **niemals hartkodierte Namen, Regionen oder abonnementsspezifische Werte verwenden.** Benutze Parameter und das Resource-Token-Muster, damit dieselbe Vorlage in jedem Abonnement funktioniert.
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -140,13 +147,16 @@ output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 
 Zwei Dinge machen diese Vorlage vorlagenfreundlich:
 
-1. **`azd-env-name`-Tag** — azd verwendet ihn, um Ressourcen pro Umgebung zu verfolgen und aufzuräumen.
-2. **`uniqueString(...)`-Ressourcentoken** — erzeugt einen stabilen, global eindeutigen Suffix, damit keine Namenskollisionen entstehen.
+1. **`azd-env-name`-Tag** — azd verwendet ihn, um Ressourcen pro Umgebung zu verfolgen und zu bereinigen.
+2. **`uniqueString(...)` Resource-Token** — erzeugt einen stabilen Hash-Suffix zur Reduzierung von Kollisionen; es ist keine Garantie für globale Einzigartigkeit.
 
-Stellen Sie eine passende Parameterdatei bereit, die Werte liest, die azd aus der Umgebung einfügt:
+Der fehlende `modules/web.bicep` muss `name`, `location` und `tags` akzeptieren, die Container Apps-Umgebung / Registry und App bereitstellen, die App mit `azd-service-name: web` kennzeichnen und `uri` exportieren. Er muss auch Registry-Werte bereitstellen, die vom gewählten Build-/Bereitstellungsablauf benötigt werden (zum Beispiel `AZURE_CONTAINER_REGISTRY_ENDPOINT` aus dem Root-Modul). Eine Endpoint-Ausgabe allein verknüpft nicht Service Discovery, Anwendungseinstellungen oder Registry-Authentifizierung.
+
+Stelle eine passende Parameterdatei bereit, die Werte liest, die azd aus der Umgebung einspritzt:
+
+Speichere Folgendes als `infra/main.parameters.json`:
 
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -157,102 +167,106 @@ Stellen Sie eine passende Parameterdatei bereit, die Werte liest, die azd aus de
 }
 ```
 
-azd ersetzt automatisch `${AZURE_ENV_NAME}` und `${AZURE_LOCATION}` aus der aktuellen Umgebung.
+azd ersetzt `${AZURE_ENV_NAME}` und `${AZURE_LOCATION}` automatisch aus der aktuellen Umgebung.
 
 ---
 
-## Schritt 4: Testen Sie Ihre Vorlage lokal
+## Schritt 4: Teste deine Vorlage lokal
 
-Bevor Sie teilen, beweisen Sie, dass die Vorlage von einem sauberen Zustand aus funktioniert.
+Überprüfe vor dem Teilen, dass die Vorlage aus einem sauberen Zustand funktioniert.
 
-**Testen Sie aus dem lokalen Ordner** (kein Git-Push erforderlich):
+**Teste aus dem lokalen Ordner** (kein Git-Push erforderlich):
 
 ```bash
-# Von einem leeren Verzeichnis aus mit Ihrem lokalen Vorlagenpfad initialisieren
+# From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
-# Bereitstellen + Ende-zu-Ende-Deployment
+# Provision + deploy end to end
 azd auth login
 azd up
 ```
 
-**Testen Sie anschließend den Abbau** – eine gute Vorlage räumt vollständig auf:
+**Dann teste das Aufräumen** – eine gute Vorlage räumt vollständig auf:
 
 ```bash
 azd down --force --purge
 ```
 
-Wenn `azd down` Ressourcen zurücklässt, haben Sie wahrscheinlich den `azd-env-name`-Tag auf einer Ressource vergessen.
+Wenn `azd down` Ressourcen zurücklässt, prüfe Umgebungs-/Ressourcengruppenerkennung, externe/geteilte Ressourcen, Berechtigungen, Sperren und Löschschutz. `--purge` löscht keinen lokalen `.azure/`-Status.
 
-> **Tipp:** Führen Sie zuerst `azd provision --preview` aus. Es führt eine Simulation durch und zeigt Fehler in der Vorlage, bevor Ressourcen erstellt werden.
+> **Tipp:** Nachdem du alle fehlenden Dateien hinzugefügt hast, führe zuerst `azd provision --preview` aus. Prüfe Hooks vor der Vorschau, da sie Nebenwirkungen haben können. Vorschau ist keine Preisschätzung oder Garantie, dass die Bereitstellung erfolgreich sein wird.
 
 ---
 
-## Schritt 5: Veröffentlichen Sie die Vorlage
+## Schritt 5: Veröffentliche die Vorlage
 
-Pushen Sie das Repository zu GitHub (öffentlich, wenn andere es verwenden sollen):
+Push das Repository zu GitHub (öffentlich, wenn andere es nutzen sollen):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Jeder kann es jetzt verwenden:
+Jeder kann sie nun nutzen:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
 
-## Schritt 6 (Optional): Einreichen bei Awesome AZD
+## Schritt 6 (optional): Einreichung bei Awesome AZD
 
-Die [Awesome AZD-Galerie](https://azure.github.io/awesome-azd/) listet Community-Vorlagen. Um aufgeführt zu werden, sollte Ihr Repo enthalten:
+Die [Awesome AZD-Galerie](https://azure.github.io/awesome-azd/) listet Community-Vorlagen. Um aufgenommen zu werden, sollte dein Repo enthalten:
 
-- ✅ Ein klares `README.md` mit Voraussetzungen, einem Architekturdiagramm und Kostennoten
+- ✅ Eine klare `README.md` mit Voraussetzungen, Architekturdiagramm und Kostenhinweisen
 - ✅ Eine funktionierende `azure.yaml` mit `metadata.template`
 - ✅ Infrastruktur, die sauber in einem frischen Abonnement bereitgestellt wird
 - ✅ Eine `LICENSE`-Datei
-- ✅ (Empfohlen) Ein `.devcontainer/` für One-Click-Codespaces
+- ✅ (Empfohlen) Eine `.devcontainer/` für Ein-Klick-Codespaces
 
-Reichen Sie ein, indem Sie einen Pull Request öffnen, der Ihre Vorlage zur Datendatei der Galerie hinzufügt, gemäß der Beitragsanleitung im [Awesome AZD-Repository](https://github.com/Azure/awesome-azd).
+Reiche ein, indem du einen Pull Request öffnest, der deine Vorlage zur Galeriedaten-Datei hinzufügt, gemäß der Beitragshinweise im [Awesome AZD-Repository](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Häufige Stolperfallen
+## Häufige Fallen
 
-| Stolperfallen | Lösung |
-|--------------|---------|
-| Fest codierte Ressourcennamen | Verwenden Sie das `uniqueString()`-Ressourcentoken |
-| `azd down` lässt Ressourcen zurück | Markieren Sie jede Ressource (oder die Ressourcengruppe) mit `azd-env-name` |
-| Vorlage funktioniert für Sie, nicht für andere | Entfernen Sie Abonnement-IDs, Mandanten-IDs und Regionsannahmen |
-| Ausgaben sind nicht in die App eingebunden | Exportieren Sie `SERVICE_<NAME>_ENDPOINT_URL` und andere `AZURE_*`-Ausgaben |
-| Einreichung in der Galerie abgelehnt | Fügen Sie `README.md`, `LICENSE` und `metadata.template` hinzu |
+| Falle | Behebung |
+|---------|-----|
+| Hartkodierte Ressourcennamen | Benutze das `uniqueString()` Resource-Token |
+| `azd down` hinterlässt Ressourcen | Markiere jede Ressource (oder die Ressourcengruppe) mit `azd-env-name` |
+| Vorlage funktioniert für dich, schlägt für andere fehl | Entferne Abonnement-IDs, Mandanten-IDs und Regionsannahmen |
+| Ausgaben sind nicht in die App eingebunden | Passe `azd-service-name`/`resourceName` für die Bereitstellung an und weise Ausgaben explizit den App-Einstellungen zu |
+| Galerieneinreichung abgelehnt | Füge `README.md`, `LICENSE`, und `metadata.template` hinzu |
 
 ---
 
 ## Zusammenfassung
 
-- Eine Vorlage ist einfach ein Git-Repo mit `azure.yaml`, `infra/` und Ihrem Code.
-- Parametrieren Sie alles – Namen, Regionen und IDs – damit es überall läuft.
-- Markieren Sie Ressourcen immer mit `azd-env-name`, damit `azd down` funktioniert.
-- Testen Sie lokal mit `azd init --template <local-path>`, bevor Sie veröffentlichen.
-- Fügen Sie Metadaten und ein README hinzu, um bei Awesome AZD einzureichen.
+- Eine Vorlage ist einfach ein Git-Repo mit `azure.yaml`, `infra/` und deinem Code.
+- Parametriere alles – Namen, Regionen und IDs – damit es überall läuft.
+- Markiere Ressourcen immer mit `azd-env-name`, damit `azd down` funktioniert.
+- Teste lokal mit `azd init --template <local-path>` bevor du veröffentlichst.
+- Füge Metadaten und eine README hinzu, um sie in Awesome AZD einzureichen.
 
 ---
 
 ## 🔗 Navigation
 
 | Richtung | Ressource |
-|----------|----------|
-| **Vorheriges** | [Bereitstellungsleitfaden](deployment-guide.md) |
-| **Kapitel-Startseite** | [Kapitel 4: Infrastruktur als Code](README.md) |
-| **Nächstes Kapitel** | [Kapitel 5: Multi-Agenten-Lösungen](../chapter-05-multi-agent/README.md) |
+|-----------|----------|
+| **Vorheriges** | [Bereitstellungsanleitung](deployment-guide.md) |
+| **Kapitelstart** | [Kapitel 4: Infrastruktur als Code](README.md) |
+| **Nächstes Kapitel** | [Kapitel 5: Multi-Agent-Lösungen](../chapter-05-multi-agent/README.md) |
 
 ## 📖 Verwandte Ressourcen
 
 - [Ressourcen bereitstellen](provisioning.md)
-- [Awesome AZD Galerie](https://azure.github.io/awesome-azd/)
+- [Awesome AZD-Galerie](https://azure.github.io/awesome-azd/)
 - [Offizielle azd-Vorlagendokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---

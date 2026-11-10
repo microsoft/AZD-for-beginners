@@ -1,26 +1,26 @@
-# AZD للمبتدئين: رحلة تعلم منظمة
+# AZD للمبتدئين: رحلة تعليمية منظمة
 
 ![AZD-for-beginners](../../translated_images/ar/azdbeginners.5527441dd9f74068.webp) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://github.com/microsoft/AZD-for-beginners)
 [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://github.com/microsoft/AZD-for-beginners)
 
 [![Azure Discord](https://dcbadge.limes.pink/api/server/nkVh3dp)](https://discord.com/invite/nkVh3dp)
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
 ---
 
-### الترجمات التلقائية (دائماً محدثة)
+### الترجمات الآلية (دائمًا مُحدّثة)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[العربية](./README.md) | [البنغالية](../bn/README.md) | [البلغارية](../bg/README.md) | [البورمية (ميانمار)](../my/README.md) | [الصينية (المبسطة)](../zh-CN/README.md) | [الصينية (التقليدية، هونغ كونغ)](../zh-HK/README.md) | [الصينية (التقليدية، ماكاو)](../zh-MO/README.md) | [الصينية (التقليدية، تايوان)](../zh-TW/README.md) | [الكرواتية](../hr/README.md) | [التشيكية](../cs/README.md) | [الدانماركية](../da/README.md) | [الهولندية](../nl/README.md) | [الإستونية](../et/README.md) | [الفنلندية](../fi/README.md) | [الفرنسية](../fr/README.md) | [الألمانية](../de/README.md) | [اليونانية](../el/README.md) | [العبرية](../he/README.md) | [الهندية](../hi/README.md) | [الهنغارية](../hu/README.md) | [الإندونيسية](../id/README.md) | [الإيطالية](../it/README.md) | [اليابانية](../ja/README.md) | [الكانادية](../kn/README.md) | [الخمرية](../km/README.md) | [الكورية](../ko/README.md) | [اللتوانية](../lt/README.md) | [الماليزية](../ms/README.md) | [المالايالامية](../ml/README.md) | [مانيپوري (ميتِي مايك)](../mni/README.md) | [الماراثية](../mr/README.md) | [النيبالية](../ne/README.md) | [البيجين النايجيري](../pcm/README.md) | [النرويجية](../no/README.md) | [الفارسية (الفارسية)](../fa/README.md) | [البولندية](../pl/README.md) | [البرتغالية (البرازيل)](../pt-BR/README.md) | [البرتغالية (البرتغال)](../pt-PT/README.md) | [البنجابية (غيرموخى)](../pa/README.md) | [الرومانية](../ro/README.md) | [الروسية](../ru/README.md) | [الصربية (السيريلية)](../sr/README.md) | [السلوفاكية](../sk/README.md) | [السلوفينية](../sl/README.md) | [الإسبانية](../es/README.md) | [السواحيلية](../sw/README.md) | [السويدية](../sv/README.md) | [التاغالوغية (الفلبينية)](../tl/README.md) | [التاميلية](../ta/README.md) | [التيلجو](../te/README.md) | [التايلاندية](../th/README.md) | [التركية](../tr/README.md) | [الأوكرانية](../uk/README.md) | [الأردية](../ur/README.md) | [الفيتنامية](../vi/README.md)
+[العربية](./README.md) | [البنغالية](../bn/README.md) | [البلغارية](../bg/README.md) | [البورمية (ميانمار)](../my/README.md) | [الصينية (المبسطة)](../zh-CN/README.md) | [الصينية (التقليدية، هونغ كونغ)](../zh-HK/README.md) | [الصينية (التقليدية، ماكاو)](../zh-MO/README.md) | [الصينية (التقليدية، تايوان)](../zh-TW/README.md) | [الكرواتية](../hr/README.md) | [التشيكية](../cs/README.md) | [الدانمركية](../da/README.md) | [الهولندية](../nl/README.md) | [الإستونية](../et/README.md) | [الفنلندية](../fi/README.md) | [الفرنسية](../fr/README.md) | [الألمانية](../de/README.md) | [اليونانية](../el/README.md) | [العبرية](../he/README.md) | [الهندية](../hi/README.md) | [الهنغارية](../hu/README.md) | [الإندونيسية](../id/README.md) | [الإيطالية](../it/README.md) | [اليابانية](../ja/README.md) | [الكنادية](../kn/README.md) | [الخميرية](../km/README.md) | [الكورية](../ko/README.md) | [الليتوانية](../lt/README.md) | [الماليزية](../ms/README.md) | [المالايالامية](../ml/README.md) | [الماراثية](../mr/README.md) | [النيبالية](../ne/README.md) | [النيجرية بيدجين](../pcm/README.md) | [النرويجية](../no/README.md) | [الفارسية (اللغة الفارسية)](../fa/README.md) | [البولندية](../pl/README.md) | [البرتغالية (البرازيل)](../pt-BR/README.md) | [البرتغالية (البرتغال)](../pt-PT/README.md) | [البنجابية (غورموكي)](../pa/README.md) | [الرومانية](../ro/README.md) | [الروسية](../ru/README.md) | [الصربية (السيريلية)](../sr/README.md) | [السلوفاكية](../sk/README.md) | [السلوفينية](../sl/README.md) | [الإسبانية](../es/README.md) | [السواحيلية](../sw/README.md) | [السويدية](../sv/README.md) | [التاغالوغية (الفلبينية)](../tl/README.md) | [التاميلية](../ta/README.md) | [التيلوجو](../te/README.md) | [التايلاندية](../th/README.md) | [التركية](../tr/README.md) | [الأوكرانية](../uk/README.md) | [الأردية](../ur/README.md) | [الفيتنامية](../vi/README.md)
 
 > **تفضل الاستنساخ محليًا؟**
 >
-> تحتوي هذه المستودعات على ترجمات لأكثر من 50 لغة مما يزيد بشكل كبير من حجم التنزيل. للاستنساخ بدون الترجمات، استخدم السحب الانتقائي:
+> يحتوي هذا المستودع على ترجمات لأكثر من 50 لغة مما يزيد بشكل كبير من حجم التنزيل. للاستنساخ بدون الترجمات، استخدم اسماء التحقق الجزئي:
 >
-> **باش / macOS / Linux:**
+> **Bash / macOS / Linux:**
 > ```bash
 > git clone --filter=blob:none --sparse https://github.com/microsoft/AZD-for-beginners.git
 > cd AZD-for-beginners
@@ -34,33 +34,33 @@
 > git sparse-checkout set --no-cone "/*" "!translations" "!translated_images"
 > ```
 >
-> هذا يوفر لك كل ما تحتاجه لإكمال الدورة بتنزيل أسرع بكثير.
+> هذا يمنحك كل ما تحتاجه لإكمال الدورة بسرعة تنزيل أكبر.
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## 🆕 ما الجديد في azd اليوم
 
-> 📌 تم التحقق من صحة هذه الدورة مقابل **`azd 1.27.1`** (يوليو 2026). شغّل `azd version` لفحص البناء الخاص بك، و`azd upgrade` للحصول على الأحدث.
+> 📌 **مراجعة إصدار AI CLI (2026-11-04):** تم فحص الإرشادات وفقًا للوثائق/المصادر المنشورة **`azd 1.37.2`**، **الوكلاء `1.0.0-beta.23`**، و**التقييمات `1.0.0-beta.2`**. استخدم `azd >= 1.37.0` لسير العمل المدمج. قم بتشغيل `azd version` و[تحديث CLI الأساسي](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) قبل الإضافات. راجع [التغييرات والإصلاحات في الإصدار](docs/chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). هذا ليس تحقق نشر مباشر للدورة كاملة.
 
-لقد تجاوز Azure Developer CLI التطبيقات الويب التقليدية وواجهات برمجة التطبيقات. اليوم، azd هو الأداة الوحيدة لنشر **أي** تطبيق على Azure — بما في ذلك التطبيقات المدعومة بالذكاء الاصطناعي والوكلاء الأذكياء.
+يدعم Azure Developer CLI العديد من أنواع التطبيقات، بما في ذلك تطبيقات الويب، واجهات برمجة التطبيقات، ووكلاء الذكاء الاصطناعي، من خلال المضيفين والقوالب والإضافات المدعومة.
 
-إليك ماذا يعني ذلك بالنسبة لك:
+إليك ما يعنيه ذلك بالنسبة لك:
 
-- **الوكلاء الذكيون أصبحوا الآن أحمال عمل معترف بها رسميًا في azd.** يمكنك تهيئة ونشر وإدارة مشاريع الوكلاء الذكيين باستخدام نفس سير العمل `azd init` → `azd up` الذي تعرفه بالفعل.
-- **دورة حياة وكيل كاملة من خلال واجهة الأوامر.** يغطي امتداد `azure.ai.agents` الآن الرحلة كاملة — `azd ai agent init` لإنشاء الهيكل، `azd ai agent invoke` للاختبار (مع إخراج توقيت الاستجابة)، `azd ai agent eval generate` و`azd ai agent optimize` لقياس وتحسين الجودة، و`azd ai agent delete` للتنظيف.
-- **مزيد من لبنات البناء الخاصة بالذكاء الاصطناعي.** تمكنك الامتدادات التجريبية الجديدة — `azure.ai.skills` و`azure.ai.connections` — من إدارة مهارات الوكلاء القابلة لإعادة الاستخدام واتصالات Foundry مباشرةً من خلال azd.
-- **دمج Microsoft Foundry** يجلب نشر النماذج واستضافة الوكلاء وتكوين خدمات الذكاء الاصطناعي مباشرة إلى نظام قوالب azd.
-- **أساسيات يومية أكثر سلاسة.** الإصدارات الأخيرة جعلت `azd init` قابلاً للتكرار بأمان (آمن لإعادة التشغيل)، وجعلت `azd auth login` تُزيل الرموز القديمة تلقائيًا، وأضافت موجه إعداد ودود لأول مرة `azd tool`.
-- **لم يتغير سير العمل الأساسي.** سواء كنت تنشر تطبيق مهام، أو خدمة مصغرة، أو حل ذكاء اصطناعي متعدد الوكلاء، الأوامر هي نفسها.
+- **الوكلاء الذكاء الاصطناعي أصبحوا الآن عبء عمل رئيسي في azd.** يمكنك تهيئة، نشر، وإدارة مشاريع وكلاء الذكاء الاصطناعي باستخدام سير العمل `azd init` → `azd up` الذي تعرفه بالفعل.
+- **دورة حياة الوكيل عبر امتدادين.** استخدم `azure.ai.agents` لتهيئة، استدعاء، تحسين، وإيقاف الوكلاء. ثبّت **`azure.ai.evaluations`** بشكل منفصل لـ `azd ai eval init`، `generate`، و `run start`. استبدل وكلاء beta.22 سير عمل التقييم القديم وغيّر تكوين التحسين؛ اتبع [دليل الترحيل](docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks).
+- **المزيد من لبنات بناء الذكاء الاصطناعي.** إضافات المعاينة الجديدة — `azure.ai.skills` و `azure.ai.connections` — تتيح لك إدارة مهارات الوكلاء القابلة لإعادة الاستخدام واتصالات Foundry مباشرة عبر azd.
+- **تكامل Microsoft Foundry** يجلب نشر النماذج واستضافة الوكلاء وتكوين خدمات الذكاء الاصطناعي مباشرة إلى نظام قوالب azd.
+- **تحسينات يومية سلسة.** أصدرت النسخ الأخيرة جعل `azd init` متكررة (آمنة لإعادة التشغيل)، و `azd auth login` يمسح الرموز القديمة تلقائيًا، وأضاف موجه إعداد ودود لأول تشغيل `azd tool`.
+- **سير العمل الأساسي لم يتغير.** سواء كنت تنشر تطبيق مهام، خدمة مصغرة، أو حل ذكاء اصطناعي متعدد الوكلاء، الأوامر هي نفسها.
 
-> **ملاحظة لمستخدمي Aspire:** تشير مايكروسوفت الآن إلى المنتج ببساطة باسم **Aspire** (سابقًا ".NET Aspire"). دعم azd لـ Aspire لم يتغير — فقط تم تحديث الاسم.
+> **ملاحظة لمستخدمي Aspire:** الآن تشير Microsoft إلى المنتج ببساطة باسم **Aspire** (سابقًا ".NET Aspire"). دعم azd لـ Aspire لم يتغير - تم تحديث الاسم فقط.
 
-إذا كنت قد استخدمت azd من قبل، فإن دعم الذكاء الاصطناعي هو امتداد طبيعي — وليس أداة منفصلة أو مسار متقدم. إذا كنت تبدأ من الصفر، ستتعلم سير عمل واحد يعمل لكل شيء.
+إذا استخدمت azd من قبل، فإن دعم الذكاء الاصطناعي هو امتداد طبيعي - ليس أداة منفصلة أو مسار متقدم. إذا بدأت من جديد، ستتعلم سير عمل واحد يعمل لكل شيء.
 
 ---
 
 ## 🚀 ما هو Azure Developer CLI (azd)؟
 
-**Azure Developer CLI (azd)** هو أداة سطر أوامر موجهة للمطورين تجعل من السهل نشر التطبيقات على Azure. بدلاً من إنشاء وربط عشرات الموارد يدوياً، يمكنك نشر التطبيقات بالكامل بأمر واحد.
+**Azure Developer CLI (azd)** هو أداة سطر أوامر موجهة للمطورين تجعل من السهل نشر التطبيقات على Azure. بدلاً من إنشاء وتوصيل العديد من موارد Azure يدويًا، يمكنك نشر تطبيقات كاملة بأمر واحد.
 
 ### سحر `azd up`
 
@@ -74,40 +74,40 @@
 azd up
 ```
 
-**هذا كل شيء!** لا نقرتك على بوابة Azure، لا قوالب ARM المعقدة لتعلمها أولاً، لا تكوين يدوي — فقط تطبيقات تعمل على Azure.
+القالب يوفر تكوين التطبيق والبنية التحتية. يتطلب النشر الناجح خدمات/نماذج مدعومة، حصة كافية وأذونات، مدخلات صحيحة، والتحقق من التطبيق المنشور. `azd up` لا يجعل القالب آمنًا أو متوافقًا أو جاهزًا للإنتاج تلقائيًا.
 
 ---
 
 ## ❓ Azure Developer CLI مقابل Azure CLI: ما الفرق؟
 
-هذا هو السؤال الأكثر شيوعًا بين المبتدئين. إليك الإجابة البسيطة:
+هذا هو السؤال الأكثر شيوعًا للمبتدئين. إليك الجواب البسيط:
 
 | الميزة | **Azure CLI (`az`)** | **Azure Developer CLI (`azd`)** |
 |---------|---------------------|--------------------------------|
 | **الغرض** | إدارة موارد Azure الفردية | نشر التطبيقات كاملة |
-| **العقلية** | تركيز على البنية التحتية | تركيز على التطبيق |
+| **التوجه** | يركز على البنية التحتية | يركز على التطبيق |
 | **مثال** | `az webapp create --name myapp...` | `azd up` |
-| **منحنى التعلم** | الحاجة لمعرفة خدمات Azure | فقط تعرف تطبيقك |
+| **منحنى التعلم** | يجب معرفة خدمات Azure | فقط اعرف تطبيقك |
 | **الأفضل لـ** | DevOps، البنية التحتية | المطورين، النمذجة الأولية |
 
 ### تشبيه بسيط
 
-- **Azure CLI** يشبه وجود كل الأدوات لبناء منزل - مطارق، مناشير، مسامير. يمكنك بناء أي شيء، لكن عليك أن تعرف البناء.
-- **Azure Developer CLI** يشبه استئجار مقاول - تصف ما تريد، وهم يتولون البناء.
+- **Azure CLI** مثل وجود كل الأدوات لبناء بيت - مطارق، مناشير، مسامير. يمكنك بناء أي شيء، لكن يجب أن تعرف البناء.
+- **Azure Developer CLI** مثل توظيف مقاول - تصف ما تريد، وهم يتولون البناء.
 
-### متى تستخدم كل منهما
+### متى تستخدم كلًا منهما
 
 | السيناريو | استخدم هذا |
 |----------|----------|
-| "أريد نشر تطبيقي بسرعة" | `azd up` |
+| "أريد نشر تطبيقي على الويب بسرعة" | `azd up` |
 | "أحتاج لإنشاء حساب تخزين فقط" | `az storage account create` |
-| "أبني تطبيق ذكاء اصطناعي كامل" | `azd init --template azure-search-openai-demo` |
+| "أقوم ببناء تطبيق ذكاء اصطناعي كامل" | `azd init --template azure-search-openai-demo` |
 | "أحتاج لتصحيح مورد Azure محدد" | `az resource show` |
-| "أريد نشر جاهز للإنتاج خلال دقائق" | `azd up --environment production` |
+| "أريد النشر إلى بيئة الإنتاج المجهزة لدي" | راجع التكوين، الوصول، التكلفة، وأبواب العمليات قبل `azd up --environment production` |
 
-### هما يعملان معًا!
+### يعملان معًا!
 
-يستخدم AZD Azure CLI تحت الغطاء. يمكنك استخدام الاثنين معاً:
+لدى AZD و Azure CLI مصادقة وتكوين منفصلان. استخدم `azd auth login` لـ AZD، و `az login` عند الحاجة صراحةً إلى Azure CLI في أمر تشخيصي أو وصلة. يمكنك استخدامهما معًا:
 ```bash
 # Deploy your app with AZD
 azd up
@@ -118,34 +118,36 @@ az webapp config set --name myapp --always-on true
 
 ---
 
-## 🌟 ابحث عن القوالب في Awesome AZD
+## 🌟 اعثر على القوالب في Awesome AZD
 
-لا تبدأ من الصفر! **Awesome AZD** هو مجموعة المجتمع من القوالب الجاهزة للنشر:
+لا تبدأ من الصفر! **Awesome AZD** هو مجموعة من قوالب جاهزة للنشر من المجتمع:
 
 | المورد | الوصف |
 |----------|-------------|
-| 🔗 [**معرض Awesome AZD**](https://azure.github.io/awesome-azd/) | استعرض أكثر من 200 قالب مع نشر بنقرة واحدة |
-| 🔗 [**أرسل قالب**](https://github.com/Azure/awesome-azd/issues) | ساهم بقالبك الخاص للمجتمع |
-| 🔗 [**مستودع GitHub**](https://github.com/Azure/awesome-azd) | قم بالنجمة واستكشاف المصدر |
+| 🔗 [**معرض Awesome AZD**](https://azure.github.io/awesome-azd/) | استعرض أكثر من 200 قالب ونشر بنقرة واحدة |
+| 🔗 [**قدّم قالبًا**](https://github.com/Azure/awesome-azd/issues) | ساهم بقالبك الخاص للمجتمع |
+| 🔗 [**مستودع GitHub**](https://github.com/Azure/awesome-azd) | نجم واستكشف المصدر |
 
-### قوالب AI شعبية من Awesome AZD
+### قوالب الذكاء الاصطناعي الشائعة من Awesome AZD
+
+اختر قالبًا في دليل فارغ خاص به؛ الأوامر أدناه بدائل. `.` في النهاية يهيئ ذلك الدليل.
 
 ```bash
 # RAG Chat with Microsoft Foundry Models + AI Search
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 
 # Quick AI Chat Application
-azd init --template openai-chat-app-quickstart
+azd init --template openai-chat-app-quickstart .
 
 # AI Agents with Foundry Agents
-azd init --template get-started-with-ai-agents
+azd init --template get-started-with-ai-agents .
 ```
 
 ---
 
-## 🎯 بدء العمل في 3 خطوات
+## 🎯 البدء في 3 خطوات
 
-قبل أن تبدأ، تأكد من أن جهازك جاهز للقالب الذي تريد نشره:
+قبل أن تبدأ، تأكد من جاهزية جهازك للقالب الذي تريد نشره:
 
 **ويندوز:**
 ```powershell
@@ -157,7 +159,7 @@ azd init --template get-started-with-ai-agents
 bash ./validate-setup.sh
 ```
 
-إذا فشل أي فحص مطلوب، أصلحه أولاً ثم تابع البدء السريع.
+إذا فشل أي تحقق مطلوب، أصلح ذلك أولاً ثم تابع البدء السريع.
 
 ### الخطوة 1: تثبيت AZD (دقيقتان)
 
@@ -176,7 +178,7 @@ brew tap azure/azd && brew install azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-### الخطوة 2: المصادقة لـ AZD
+### الخطوة 2: التوثيق لـ AZD
 
 ```bash
 # Optional if you plan to use Azure CLI commands directly in this course
@@ -186,13 +188,13 @@ az login
 azd auth login
 ```
 
-إذا لم تكن متأكدًا مما تحتاجه، اتبع التدفق الكامل للإعداد في [التثبيت والإعداد](docs/chapter-01-foundation/installation.md#authentication-setup).
+إذا لم تكن متأكدًا مما تحتاجه، اتبع تدفق الإعداد الكامل في [التثبيت والإعداد](docs/chapter-01-foundation/installation.md#authentication-setup).
 
 ### الخطوة 3: نشر تطبيقك الأول
 
 ```bash
 # Initialize from a template
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
 # Deploy to Azure (creates everything!)
 azd up
@@ -209,91 +211,91 @@ azd down --force --purge
 
 ---
 
-## 📚 كيفية استخدام هذه الدورة
+## 📚 كيف تستخدم هذه الدورة
 
-صممت هذه الدورة من أجل **التعلم التدريجي** - ابدأ حيث تشعر بالراحة وتقدم تدريجيًا:
+هذه الدورة مصممة لـ **التعلم التدريجي** - ابدأ حيث ترتاح وتحرك للأعلى:
 
 | خبرتك | ابدأ من هنا |
 |-----------------|------------|
-| **جديد كليًا على Azure** | [الفصل 1: الأساس](#-chapter-1-foundation--quick-start) |
-| **تعرف على Azure، جديد في AZD** | [الفصل 1: الأساس](#-chapter-1-foundation--quick-start) |
-| **تريد نشر تطبيقات AI** | [الفصل 2: تطوير AI أولاً](#-chapter-2-ai-first-development-recommended-for-ai-developers) |
-| **تريد تدريب عملي** | [🎓 ورشة تفاعلية](workshop/README.md) - مختبر موجه 3-4 ساعات |
-| **تحتاج إلى أنماط للإنتاج** | [الفصل 8: الإنتاج والمؤسسات](#-chapter-8-production--enterprise-patterns) |
+| **جديد تمامًا على Azure** | [الفصل 1: الأساسيات](#-chapter-1-foundation--quick-start) |
+| **تعرف على Azure، جديد على AZD** | [الفصل 1: الأساسيات](#-chapter-1-foundation--quick-start) |
+| **أريد نشر تطبيقات الذكاء الاصطناعي** | [الفصل 2: تطوير الذكاء الاصطناعي أولًا](#-chapter-2-ai-first-development-recommended-for-ai-developers) |
+| **أريد التطبيق العملي** | [🎓 ورشة عمل تفاعلية](workshop/README.md) - مختبر موجّه ٣-٤ ساعات |
+| **أحتاج لأنماط الإنتاج** | [الفصل 8: الإنتاج والمؤسسات](#-chapter-8-production--enterprise-patterns) |
 
 ### الإعداد السريع
 
-1. **افتح فورك لهذا المستودع**: [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **انسخه**: `git clone https://github.com/YOUR-USERNAME/azd-for-beginners.git`
-3. **الحصول على المساعدة**: [مجتمع Azure على Discord](https://discord.com/invite/ByRwuEEgH4)
+1. **افتح هذا المستودع**: [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **استنسخه**: `git clone https://github.com/YOUR-USERNAME/azd-for-beginners.git`
+3. **احصل على المساعدة**: [مجتمع Azure Discord](https://discord.com/invite/ByRwuEEgH4)
 
 > **تفضل الاستنساخ محليًا؟**
 
-> يحتوي هذا المستودع على أكثر من 50 ترجمة للغات مما يزيد بشكل كبير من حجم التنزيل. لاستنساخ بدون ترجمــات، استخدم sparse checkout:
+> يحتوي هذا المستودع على ترجمات لأكثر من 50 لغة مما يزيد بشكل كبير من حجم التنزيل. للاستنساخ بدون الترجمات، استخدم اسماء التحقق الجزئي:
 > ```bash
 > git clone --filter=blob:none --sparse https://github.com/microsoft/AZD-for-beginners.git
 > cd AZD-for-beginners
 > git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
 > ```
-> هذا يمنحك كل ما تحتاجه لإتمام الدورة بتنزيل أسرع بكثير.
+> هذا يمنحك كل ما تحتاجه لإكمال الدورة بسرعة تنزيل أكبر.
 
 
 ## نظرة عامة على الدورة
 
-اتقن Azure Developer CLI (azd) من خلال فصول منظمة مصممة للتعلم التدريجي. **تركيز خاص على نشر تطبيقات AI مع تكامل Microsoft Foundry.**
+اتقن Azure Developer CLI (azd) من خلال فصول منظمة مصممة للتعلم التدريجي. **تركيز خاص على نشر تطبيقات الذكاء الاصطناعي مع دمج Microsoft Foundry.**
 
-### لماذا هذه الدورة أساسية للمطورين الحديثين
+### لماذا هذه الدورة ضرورية للمطورين المعاصرين
 
-بناءً على رؤى مجتمع Microsoft Foundry على Discord، **45% من المطورين يرغبون باستخدام AZD لأعباء عمل AI** لكنهم يواجهون تحديات مع:
-- بنى ذكاء اصطناعي معقدة متعددة الخدمات
-- أفضل ممارسات نشر AI في الإنتاج  
-- تكامل خدمات Azure AI والتكوين
-- تحسين تكلفة أعباء عمل AI
-- استكشاف أخطاء نشر AI الخاصة
+يحتاج المطورون الذين ينشرون أحمال عمل الذكاء الاصطناعي عادة إلى توجيه حول:
+- معماريات الذكاء الاصطناعي المعقدة متعددة الخدمات
+- أفضل ممارسات نشر الذكاء الاصطناعي للإنتاج  
+- تكامل وخدمات Azure AI وإعدادها
+- تحسين التكاليف لأحمال عمل الذكاء الاصطناعي
+- استكشاف مشاكل النشر الخاصة بالذكاء الاصطناعي وإصلاحها
 
 ### أهداف التعلم
 
-عند إتمام هذه الدورة المنظمة، ستتمكن من:
-- **إتقان أساسيات AZD**: المفاهيم الأساسية، التثبيت، والتكوين
-- **نشر تطبيقات AI**: استخدام AZD مع خدمات Microsoft Foundry
+عند إكمال هذه الدورة المنظمة، ستتمكن من:
+- **إتقان أساسيات AZD**: المفاهيم الأساسية، التثبيت، والإعداد
+- **نشر تطبيقات الذكاء الاصطناعي**: استخدام AZD مع خدمات Microsoft Foundry
 - **تنفيذ البنية التحتية ككود**: إدارة موارد Azure باستخدام قوالب Bicep
-- **استكشاف أخطاء النشر وإصلاحها**: حل المشكلات الشائعة وتصحيح الأخطاء
-- **التحسين للإنتاج**: الأمان، التوسع، المراقبة، وإدارة التكاليف
-- **بناء حلول متعددة الوكلاء**: نشر هياكل الذكاء الاصطناعي المعقدة
+- **استكشاف أخطاء النشر**: حل المشكلات الشائعة وتصحيح الأخطاء
+- **التحسين للإنتاج**: الأمان، التحجيم، المراقبة، وإدارة التكاليف
+- **بناء حلول متعددة الوكلاء**: نشر معماريات الذكاء الاصطناعي المعقدة
 
 ## قبل أن تبدأ: الحسابات، الوصول، والافتراضات
 
-قبل أن تبدأ الفصل الأول، تأكد من أن لديك ما يلي. تفترض خطوات التثبيت في هذا الدليل أن هذه الأساسيات تم التعامل معها مسبقًا.
+قبل أن تبدأ الفصل الأول، تأكد من توفر الأمور التالية. خطوات التثبيت في هذا الدليل تفترض أن هذه الأساسيات تُدار بالفعل.
 
-- **اشتراك Azure**: يمكنك استخدام اشتراك قائم من عملك أو حسابك الخاص، أو إنشاء [نسخة تجريبية مجانية](https://aka.ms/azurefreetrial) للبدء.
-- **إذن إنشاء موارد Azure**: لمعظم التمارين، يجب أن يكون لديك وصول **مشارك** على الأقل على الاشتراك أو مجموعة الموارد المستهدفة. وقد تفترض بعض الفصول أيضًا أنه يمكنك إنشاء مجموعات موارد، والهويات المدارة، وتعيينات RBAC.
-- [**حساب GitHub**](https://github.com): هذا مفيد للتفرع من المستودع، وتتبع تغييراتك الخاصة، واستخدام GitHub Codespaces للورشة.
-- **متطلبات وقت تشغيل القالب**: بعض القوالب تحتاج إلى أدوات محلية مثل Node.js، Python، Java، أو Docker. شغّل محقق الإعداد قبل البدء لتكتشف الأدوات المفقودة مبكرًا.
-- **ألفة أساسية مع الطرفية**: لا تحتاج لأن تكون خبيرًا، ولكن يجب أن تكون مرتاحًا لتشغيل أوامر مثل `git clone`، `azd auth login`، و `azd up`.
+- **اشتراك Azure**: يمكنك استخدام اشتراك موجود من العمل أو حسابك الخاص، أو إنشاء [نسخة تجريبية مجانية](https://aka.ms/azurefreetrial) للبدء.
+- **إذن إنشاء موارد Azure**: لأغلب التمارين، يجب أن يكون لديك على الأقل صلاحية **Contributor** على الاشتراك أو مجموعة الموارد المستهدفة. قد تفترض بعض الفصول أيضًا إمكانية إنشاء مجموعات موارد، هويات مُدارة، وتعيينات RBAC.
+- [**حساب GitHub**](https://github.com): مفيد لتفريع المستودع، تتبع التغييرات الخاصة بك، واستخدام GitHub Codespaces للورشة.
+- **المتطلبات المسبقة لتشغيل القوالب**: بعض القوالب تحتاج لأدوات محلية مثل Node.js، Python، Java، أو Docker. شغّل مدقق الإعداد قبل البدء لتتجنب نقص الأدوات مبكرًا.
+- **معرفة أساسية بواجهة الأوامر الطرفية**: لست بحاجة لأن تكون خبيرًا، لكن يجب أن تكون مرتاحًا لتشغيل أوامر مثل `git clone`، `azd auth login`، و`azd up`.
 
-> **تعمل في اشتراك مؤسسة؟**
-> إذا كان بيئة Azure الخاصة بك تُدار بواسطة مسؤول، تأكد مقدمًا أنك تستطيع نشر الموارد في الاشتراك أو مجموعة الموارد التي تخطط لاستخدامها. وإذا لم يكن الأمر كذلك، اطلب اشتراك صندوق اختبار أو وصول كمشارك قبل أن تبدأ.
+> **تعمل في اشتراك مؤسسي؟**
+> إذا كانت بيئة Azure الخاصة بك تُدار بواسطة مسؤول، تأكد مسبقًا من إمكانية نشر الموارد في الاشتراك أو مجموعة الموارد التي تخطط لاستخدامها. فإذا لم يكن ذلك ممكنًا، اطلب اشتراك صندوق رمل أو صلاحية Contributor قبل البدء.
 
 > **جديد على Azure؟**
-> ابدأ بنسخة تجريبية خاصة بك من Azure أو اشتراك الدفع حسب الاستخدام على https://aka.ms/azurefreetrial حتى تتمكن من إكمال التمارين من البداية للنهاية دون انتظار الموافقات على مستوى المستأجر.
+> ابدأ بنسخة تجريبية في Azure أو اشتراك بنظام الدفع حسب الاستخدام عبر https://aka.ms/azurefreetrial حتى تكمل التمارين بالكامل دون انتظار موافقات على مستوى المُستأجر.
 
 ## 🗺️ خريطة الدورة: التنقل السريع حسب الفصل
 
-يحتوي كل فصل على ملف README مخصص مع أهداف التعلم، بدايات سريعة، وتمارين:
+يحتوي كل فصل على README مخصص مع أهداف التعلم، بدء سريع، وتمارين:
 
 | الفصل | الموضوع | الدروس | المدة | التعقيد |
 |---------|-------|---------|----------|------------|
-| **[الفصل 1: الأساس](docs/chapter-01-foundation/README.md)** | البدء | [أساسيات AZD](docs/chapter-01-foundation/azd-basics.md) &#124; [التثبيت](docs/chapter-01-foundation/installation.md) &#124; [المشروع الأول](docs/chapter-01-foundation/first-project.md) | 30-45 دقيقة | ⭐ |
-| **[الفصل 2: تطوير الذكاء الاصطناعي](docs/chapter-02-ai-development/README.md)** | تطبيقات الذكاء الاصطناعي أولاً | [دمج Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md) &#124; [وكلاء الذكاء الاصطناعي](docs/chapter-02-ai-development/agents.md) &#124; [نشر النماذج](docs/chapter-02-ai-development/ai-model-deployment.md) &#124; [ورشة العمل](docs/chapter-02-ai-development/ai-workshop-lab.md) | 1-2 ساعة | ⭐⭐ |
-| **[الفصل 3: التهيئة](docs/chapter-03-configuration/README.md)** | المصادقة والأمان | [التهيئة](docs/chapter-03-configuration/configuration.md) &#124; [المصادقة والأمان](docs/chapter-03-configuration/authsecurity.md) | 45-60 دقيقة | ⭐⭐ |
-| **[الفصل 4: البنية التحتية](docs/chapter-04-infrastructure/README.md)** | IaC والنشر | [دليل النشر](docs/chapter-04-infrastructure/deployment-guide.md) &#124; [التوفير](docs/chapter-04-infrastructure/provisioning.md) | 1-1.5 ساعة | ⭐⭐⭐ |
-| **[الفصل 5: متعدد الوكلاء](docs/chapter-05-multi-agent/README.md)** | حلول وكلاء الذكاء الاصطناعي | [سيناريو التجزئة](examples/retail-scenario.md) &#124; [أنماط التنسيق](docs/chapter-06-pre-deployment/coordination-patterns.md) | 2-3 ساعات | ⭐⭐⭐⭐ |
-| **[الفصل 6: قبل النشر](docs/chapter-06-pre-deployment/README.md)** | التخطيط والتحقق | [فحوصات ما قبل الإقلاع](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [تخطيط السعة](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [اختيار SKU](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [رؤى التطبيق](docs/chapter-06-pre-deployment/application-insights.md) | 1 ساعة | ⭐⭐ |
-| **[الفصل 7: استكشاف الأخطاء وإصلاحها](docs/chapter-07-troubleshooting/README.md)** | التصحيح والإصلاح | [المشكلات الشائعة](docs/chapter-07-troubleshooting/common-issues.md) &#124; [التصحيح](docs/chapter-07-troubleshooting/debugging.md) &#124; [مشكلات الذكاء الاصطناعي](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 ساعة | ⭐⭐ |
+| **[الفصل 1: الأساس](docs/chapter-01-foundation/README.md)** | البداية | [أساسيات AZD](docs/chapter-01-foundation/azd-basics.md) &#124; [التثبيت](docs/chapter-01-foundation/installation.md) &#124; [المشروع الأول](docs/chapter-01-foundation/first-project.md) | 30-45 دقيقة | ⭐ |
+| **[الفصل 2: تطوير الذكاء الاصطناعي](docs/chapter-02-ai-development/README.md)** | تطبيقات تركز على الذكاء الاصطناعي | [تكامل Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md) &#124; [وكلاء الذكاء الاصطناعي](docs/chapter-02-ai-development/agents.md) &#124; [نشر النماذج](docs/chapter-02-ai-development/ai-model-deployment.md) &#124; [ورشة عمل](docs/chapter-02-ai-development/ai-workshop-lab.md) | 1-2 ساعة | ⭐⭐ |
+| **[الفصل 3: الإعداد](docs/chapter-03-configuration/README.md)** | المصادقة والأمان | [الإعداد](docs/chapter-03-configuration/configuration.md) &#124; [المصادقة والأمان](docs/chapter-03-configuration/authsecurity.md) | 45-60 دقيقة | ⭐⭐ |
+| **[الفصل 4: البنية التحتية](docs/chapter-04-infrastructure/README.md)** | IaC والنشر | [دليل النشر](docs/chapter-04-infrastructure/deployment-guide.md) &#124; [التزويد](docs/chapter-04-infrastructure/provisioning.md) | 1-1.5 ساعة | ⭐⭐⭐ |
+| **[الفصل 5: وكلاء متعددون](docs/chapter-05-multi-agent/README.md)** | حلول وكلاء الذكاء الاصطناعي | [سيناريو البيع بالتجزئة](examples/retail-scenario.md) &#124; [أنماط التنسيق](docs/chapter-06-pre-deployment/coordination-patterns.md) | 2-3 ساعات | ⭐⭐⭐⭐ |
+| **[الفصل 6: قبل النشر](docs/chapter-06-pre-deployment/README.md)** | التخطيط والتحقق | [فحوصات ما قبل الرحلة](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [تخطيط السعة](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [اختيار SKU](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [رؤى التطبيقات](docs/chapter-06-pre-deployment/application-insights.md) | 1 ساعة | ⭐⭐ |
+| **[الفصل 7: استكشاف الأخطاء](docs/chapter-07-troubleshooting/README.md)** | التصحيح والإصلاح | [مشكلات شائعة](docs/chapter-07-troubleshooting/common-issues.md) &#124; [التصحيح](docs/chapter-07-troubleshooting/debugging.md) &#124; [مشكلات الذكاء الاصطناعي](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 ساعة | ⭐⭐ |
 | **[الفصل 8: الإنتاج](docs/chapter-08-production/README.md)** | أنماط المؤسسات | [ممارسات الإنتاج](docs/chapter-08-production/production-ai-practices.md) | 2-3 ساعات | ⭐⭐⭐⭐ |
-| **[🎓 ورشة العمل](workshop/README.md)** | مختبر عملي | [مقدمة](workshop/docs/instructions/0-Introduction.md) &#124; [اختيار](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [التحقق](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [التفكيك](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [التهيئة](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [التخصيص](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [الإزالة](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [الاختتام](workshop/docs/instructions/7-Wrap-up.md) | 3-4 ساعات | ⭐⭐ |
+| **[🎓 ورشة العمل](workshop/README.md)** | مختبر عملي | [مقدمة](workshop/docs/instructions/0-Introduction.md) &#124; [الاختيار](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [التحقق](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [التفكيك](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [الإعداد](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [التخصيص](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [التفكيك النهائي](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [الخاتمة](workshop/docs/instructions/7-Wrap-up.md) | 3-4 ساعات | ⭐⭐ |
 
-**مدة الدورة الإجمالية:** ~10-14 ساعة | **تقدم المهارات:** مبتدئ → جاهز للإنتاج
+**إجمالي مدة الدورة:** ~10-14 ساعة | **تقدم المهارات:** مبتدئ → جاهز للإنتاج
 
 ---
 
@@ -302,33 +304,33 @@ azd down --force --purge
 *اختر مسار تعلمك بناءً على مستوى الخبرة والأهداف*
 
 ### 🚀 الفصل 1: الأساس والبداية السريعة
-**المتطلبات الأساسية**: اشتراك Azure، معرفة أساسية بسطر الأوامر  
-**المدة**: 30-45 دقيقة  
-**التعقيد**: ⭐
+**المتطلبات:** اشتراك Azure، معرفة أساسية بسطر الأوامر  
+**المدة:** 30-45 دقيقة  
+**التعقيد:** ⭐
 
 #### ما ستتعلمه
 - فهم أساسيات Azure Developer CLI
 - تثبيت AZD على منصتك
-- أول نشر ناجح لك
+- أول عملية نشر ناجحة لك
 
-#### الموارد التعليمية
-- **🎯 ابدأ هنا**: [ما هو Azure Developer CLI؟](#what-is-azure-developer-cli)
-- **📖 نظرية**: [أساسيات AZD](docs/chapter-01-foundation/azd-basics.md) - المفاهيم والمصطلحات الأساسية
+#### مصادر التعلم
+- **🎯 ابدأ هنا**: [ما هو Azure Developer CLI؟](#-what-is-azure-developer-cli-azd)
+- **📖 النظريات**: [أساسيات AZD](docs/chapter-01-foundation/azd-basics.md) - المفاهيم الأساسية والمصطلحات
 - **⚙️ الإعداد**: [التثبيت والإعداد](docs/chapter-01-foundation/installation.md) - أدلة خاصة بالمنصة
-- **🛠️ عملي**: [مشروعك الأول](docs/chapter-01-foundation/first-project.md) - دليل خطوة بخطوة
+- **🛠️ التطبيق العملي**: [مشروعك الأول](docs/chapter-01-foundation/first-project.md) - تعليمات خطوة بخطوة
 - **📋 مرجع سريع**: [ورقة غش الأوامر](resources/cheat-sheet.md)
 
-#### التمارين العملية
+#### تمارين عملية
 ```bash
 # Quick installation check
 azd version
 
 # Deploy your first application
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 azd up
 ```
 
-**💡 ناتج الفصل**: نشر تطبيق ويب بسيط بنجاح على Azure باستخدام AZD
+**💡 نتيجة الفصل**: نشر تطبيق ويب بسيط على Azure باستخدام AZD بنجاح
 
 **✅ تحقق النجاح:**
 ```bash
@@ -341,48 +343,47 @@ azd show                # Displays running app URL
 azd down --force --purge  # Cleans up resources
 ```
 
-**📊 الوقت المستغرق:** 30-45 دقيقة  
-**📈 مستوى المهارة بعد:** يمكنه نشر التطبيقات الأساسية بشكل مستقل
-**📈 مستوى المهارة بعد:** يمكنه نشر التطبيقات الأساسية بشكل مستقل
+**📊 استثمار الوقت:** 30-45 دقيقة  
+**📈 مستوى المهارة بعد:** يمكن نشر تطبيقات أساسية بشكل مستقل
 
 ---
 
-### 🤖 الفصل 2: تطوير الذكاء الاصطناعي أولاً (موصى به لمطوري الذكاء الاصطناعي)
-**المتطلبات الأساسية**: إتمام الفصل 1  
-**المدة**: 1-2 ساعة  
-**التعقيد**: ⭐⭐
+### 🤖 الفصل 2: تطوير الذكاء الاصطناعي أولًا (مُوصى به لمطوري الذكاء الاصطناعي)
+**المتطلبات:** إكمال الفصل 1  
+**المدة:** 1-2 ساعة  
+**التعقيد:** ⭐⭐
 
 #### ما ستتعلمه
 - دمج Microsoft Foundry مع AZD
-- نشر التطبيقات المعتمدة على الذكاء الاصطناعي
-- فهم تكوينات خدمات الذكاء الاصطناعي
+- نشر التطبيقات المدعومة بالذكاء الاصطناعي
+- فهم إعدادات خدمات الذكاء الاصطناعي
 
-#### الموارد التعليمية
-- **🎯 ابدأ هنا**: [دمج Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
-- **🤖 وكلاء الذكاء الاصطناعي**: [دليل وكلاء الذكاء الاصطناعي](docs/chapter-02-ai-development/agents.md) - نشر وكلاء ذكيين مع AZD
-- **📖 أنماط**: [نشر نموذج الذكاء الاصطناعي](docs/chapter-02-ai-development/ai-model-deployment.md) - نشر وإدارة نماذج الذكاء الاصطناعي
-- **🛠️ ورشة العمل**: [مختبر ورشة عمل الذكاء الاصطناعي](docs/chapter-02-ai-development/ai-workshop-lab.md) - جعل حلول الذكاء الاصطناعي جاهزة بـ AZD
-- **🎥 دليل تفاعلي**: [مواد ورشة العمل](workshop/README.md) - التعلم عبر المتصفح مع MkDocs * بيئة DevContainer
-- **📋 قوالب**: [قوالب Microsoft Foundry](#featured-microsoft-foundry-templates)
-- **📝 أمثلة**: [أمثلة نشر AZD](examples/README.md)
+#### مصادر التعلم
+- **🎯 ابدأ هنا**: [تكامل Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 وكلاء الذكاء الاصطناعي**: [دليل وكلاء الذكاء الاصطناعي](docs/chapter-02-ai-development/agents.md) - نشر وكلاء أذكياء باستخدام AZD
+- **📖 الأنماط**: [نشر نماذج الذكاء الاصطناعي](docs/chapter-02-ai-development/ai-model-deployment.md) - نشر وإدارة نماذج الذكاء الاصطناعي
+- **🛠️ ورشة عمل**: [مختبر ورشة الذكاء الاصطناعي](docs/chapter-02-ai-development/ai-workshop-lab.md) - جعل حلول الذكاء الاصطناعي جاهزة مع AZD
+- **🎥 دليل تفاعلي**: [مواد الورشة](workshop/README.md) - التعلم عبر المتصفح مع MkDocs * بيئة DevContainer
+- **📋 القوالب**: [قوالب Microsoft Foundry](#featured-microsoft-foundry-templates)
+- **📝 الأمثلة**: [أمثلة نشر AZD](examples/README.md)
 
-#### التمارين العملية
+#### تمارين عملية
 ```bash
 # Deploy your first AI application
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 azd up
 
 # Try additional AI templates
-azd init --template openai-chat-app-quickstart
-azd init --template agent-openai-python-prompty
+azd init --template openai-chat-app-quickstart .
+azd init --template agent-openai-python-prompty .
 ```
 
-**💡 ناتج الفصل**: نشر وتكوين تطبيق دردشة مدعوم بالذكاء الاصطناعي مع قدرات RAG
+**💡 نتيجة الفصل**: نشر وتكوين تطبيق محادثة مدعوم بالذكاء الاصطناعي مع قدرات RAG
 
 **✅ تحقق النجاح:**
 ```bash
 # After Chapter 2, you should be able to:
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 azd up
 # Test the AI chat interface
 # Ask questions and get AI-powered responses with sources
@@ -391,35 +392,35 @@ azd monitor  # Check Application Insights shows telemetry
 azd down --force --purge
 ```
 
-**📊 الوقت المستغرق:** 1-2 ساعة  
-**📈 مستوى المهارة بعد:** يمكنه نشر وتكوين تطبيقات ذكاء اصطناعي جاهزة للإنتاج  
-**💰 الوعي بالتكاليف:** فهم تكاليف التطوير 80-150 دولار شهريًا، تكاليف الإنتاج 300-3500 دولار شهريًا
+**📊 استثمار الوقت:** 1-2 ساعة  
+**📈 مستوى المهارة بعد:** يمكن نشر تطبيقات تعلم الذكاء الاصطناعي وتحديد متطلبات الاستعداد للإنتاج الإضافية
+**💰 الوعي بالتكلفة:** فهم تكاليف التطوير بين $80-150/شهر، وتكاليف الإنتاج بين $300-3500/شهر
 
-#### 💰 اعتبارات التكلفة لنشر الذكاء الاصطناعي
+#### 💰 اعتبارات التكاليف لنشر الذكاء الاصطناعي
 
-**بيئة التطوير (تقديري 80-150 دولار شهريًا):**
-- نماذج Microsoft Foundry (الدفع حسب الاستخدام): 0-50 دولار شهريًا (استنادًا إلى استخدام الرموز)
-- AI Search (الطبقة الأساسية): 75 دولار شهريًا
-- تطبيقات الحاويات (الاستهلاك): 0-20 دولار شهريًا
-- التخزين (القياسي): 1-5 دولار شهريًا
+**بيئة التطوير (تقديري $80-150/شهر):**
+- نماذج Microsoft Foundry (الدفع حسب الاستخدام): $0-50/شهر (بناءً على استخدام الرموز)
+- بحث AI (الطبقة الأساسية): $75/شهر
+- تطبيقات الحاويات (الاستهلاك): $0-20/شهر
+- التخزين (القياسي): $1-5/شهر
 
-**بيئة الإنتاج (تقديري 300-3500+ دولار شهريًا):**
-- نماذج Microsoft Foundry (PTU لأداء متسق): 3,000+ دولار شهريًا أو الدفع حسب الاستخدام مع حجم مرتفع
-- AI Search (الطبقة القياسية): 250 دولار شهريًا
-- تطبيقات الحاويات (مخصصة): 50-100 دولار شهريًا
-- Application Insights: 5-50 دولار شهريًا
-- التخزين (المميز): 10-50 دولار شهريًا
+**بيئة الإنتاج (تقديري $300-3500+/شهر):**
+- نماذج Microsoft Foundry (PTU لأداء ثابت): $3,000+/شهر أو الدفع حسب الاستخدام مع حجم كبير
+- بحث AI (الطبقة القياسية): $250/شهر
+- تطبيقات الحاويات (مخصصة): $50-100/شهر
+- رؤى التطبيق: $5-50/شهر
+- التخزين (المتميز): $10-50/شهر
 
 **💡 نصائح تحسين التكلفة:**
-- استخدم نماذج Microsoft Foundry **الطبقة المجانية** للتعلم (Azure OpenAI يشمل 50,000 رمز شهريًا)
-- شغّل `azd down` لإلغاء تخصيص الموارد عندما لا تكون في طور التطوير الفعلي
-- ابدأ بالفوترة حسب الاستهلاك، وارتقِ لـ PTU فقط للإنتاج
-- استخدم `azd provision --preview` لتقدير التكاليف قبل النشر
-- فعّل التوسعة التلقائية: ادفع فقط مقابل الاستخدام الفعلي
+- تحقق من تسعير استنتاج النموذج والاعتمادات الخاصة بالحساب؛ Azure OpenAI لا يشمل بديلًا شهريًا مجانيًا عالميًا بـ 50,000 رمز
+- شغّل `azd down` لحذف الموارد عندما لا تكون مطلوبة بعد مراجعة البيئة المختارة
+- ابدأ بفوترة حسب الاستهلاك، وقم بالترقية لـ PTU فقط للإنتاج
+- استخدم `azd provision --preview` لفحص البنية التحتية المخططة، ثم سعّر الموارد الناتجة باستخدام حاسبة تسعير Azure
+- فعّل التوسع التلقائي: ادفع فقط مقابل الاستخدام الفعلي
 
 **مراقبة التكاليف:**
 ```bash
-# Check estimated monthly costs
+# Inspect planned resources (this does not calculate prices)
 azd provision --preview
 
 # Monitor actual costs in Azure Portal
@@ -428,187 +429,187 @@ az consumption budget list --resource-group <your-rg>
 
 ---
 
-### ⚙️ الفصل 3: التهيئة والمصادقة
-**المتطلبات الأساسية**: إتمام الفصل 1  
-**المدة**: 45-60 دقيقة  
-**التعقيد**: ⭐⭐
+### ⚙️ الفصل 3: الإعداد والمصادقة
+**المتطلبات:** إكمال الفصل 1  
+**المدة:** 45-60 دقيقة  
+**التعقيد:** ⭐⭐
 
 #### ما ستتعلمه
-- تهيئة وإدارة البيئة
+- إعداد وإدارة البيئة
 - أفضل ممارسات المصادقة والأمان
 - تسمية الموارد وتنظيمها
 
-#### الموارد التعليمية
-- **📖 التهيئة**: [دليل التهيئة](docs/chapter-03-configuration/configuration.md) - إعداد البيئة
-- **🔐 الأمان**: [أنماط المصادقة والهويات المدارة](docs/chapter-03-configuration/authsecurity.md) - أنماط المصادقة
-- **📝 أمثلة**: [مثال تطبيق قاعدة بيانات](examples/database-app/README.md) - أمثلة قاعدة بيانات AZD
+#### مصادر التعلم
+- **📖 الإعداد**: [دليل الإعداد](docs/chapter-03-configuration/configuration.md) - إعداد البيئة
+- **🔐 الأمان**: [أنماط المصادقة والهوية المُدارة](docs/chapter-03-configuration/authsecurity.md) - أنماط المصادقة
+- **📝 الأمثلة**: [مثال تطبيق قاعدة بيانات](examples/database-app/README.md) - أمثلة قواعد بيانات AZD
 
-#### التمارين العملية
-- تهيئة بيئات متعددة (تطوير، اختبار، إنتاج)
-- إعداد مصادقة الهوية المدارة
-- تنفيذ تهيئات خاصة بالبيئة
+#### تمارين عملية
+- إعداد بيئات متعددة (تطوير، اختبار، إنتاج)
+- إعداد مصادقة الهوية المُدارة
+- تنفيذ إعدادات خاصة بالبيئة
 
-**💡 ناتج الفصل**: إدارة بيئات متعددة بمصادقة وأمان مناسبين
+**💡 نتيجة الفصل**: إدارة بيئات متعددة مع مصادقة وأمان مناسبين
 
 ---
 
 ### 🏗️ الفصل 4: البنية التحتية ككود والنشر
-**المتطلبات الأساسية**: إتمام الفصول 1-3  
-**المدة**: 1-1.5 ساعة  
-**التعقيد**: ⭐⭐⭐
+**المتطلبات:** إكمال الفصول 1-3  
+**المدة:** 1-1.5 ساعة  
+**التعقيد:** ⭐⭐⭐
 
 #### ما ستتعلمه
-- أنماط النشر المتقدمة
+- أنماط نشر متقدمة
 - البنية التحتية ككود باستخدام Bicep
 - استراتيجيات توفير الموارد
 
-#### الموارد التعليمية
-- **📖 النشر**: [دليل النشر](docs/chapter-04-infrastructure/deployment-guide.md) - سير عمل متكامل
-- **🏗️ التوفير**: [توفير الموارد](docs/chapter-04-infrastructure/provisioning.md) - إدارة موارد Azure
-- **📝 أمثلة**: [مثال تطبيق الحاويات](../../examples/container-app) - نشر تطبيقات محمولة بالحاويات
+#### مصادر التعلم
+- **📖 النشر**: [دليل النشر](docs/chapter-04-infrastructure/deployment-guide.md) - سير العمل الكامل
+- **🏗️ التزويد**: [تزويد الموارد](docs/chapter-04-infrastructure/provisioning.md) - إدارة موارد Azure
+- **📝 الأمثلة**: [مثال تطبيق حاوية](../../examples/container-app) - عمليات نشر بالحاويات
 
-#### التمارين العملية
+#### تمارين عملية
 - إنشاء قوالب Bicep مخصصة
 - نشر تطبيقات متعددة الخدمات
 - تنفيذ استراتيجيات النشر الأزرق-الأخضر
 
-**💡 ناتج الفصل**: نشر تطبيقات متعددة الخدمات معقدة باستخدام قوالب بنية تحتية مخصصة
+**💡 نتيجة الفصل**: نشر تطبيقات معقدة متعددة الخدمات باستخدام قوالب بنية تحتية مخصصة
 
 ---
 
 ### 🎯 الفصل 5: حلول الذكاء الاصطناعي متعددة الوكلاء (متقدم)
-**المتطلبات الأساسية**: إتمام الفصول 1-2  
-**المدة**: 2-3 ساعات  
-**التعقيد**: ⭐⭐⭐⭐
+**المتطلبات:** إكمال الفصول 1-2  
+**المدة:** 2-3 ساعات  
+**التعقيد:** ⭐⭐⭐⭐
 
 #### ما ستتعلمه
-- أنماط هندسة الوكلاء المتعددين
+- أنماط هندسة متعددة الوكلاء
 - تنسيق وتنسيق الوكلاء
 - نشرات الذكاء الاصطناعي الجاهزة للإنتاج
 
-#### الموارد التعليمية
-- **🤖 المشروع المميز**: [حل الذكاء الاصطناعي متعدد الوكلاء في التجزئة](examples/retail-scenario.md) - التنفيذ الكامل
-- **🛠️ قوالب ARM**: [حزمة قوالب ARM](../../examples/retail-multiagent-arm-template) - نشر بنقرة واحدة
-- **📖 الهندسة**: [أنماط تنسيق الوكلاء المتعددين](docs/chapter-06-pre-deployment/coordination-patterns.md) - الأنماط
+#### مصادر التعلم
+- **🤖 التصميم المميز**: [حل الذكاء الاصطناعي متعدد الوكلاء للبيع بالتجزئة](examples/retail-scenario.md) - مخطط الهندسة، ليس تطبيقًا كاملاً
+- **🛠️ قوالب ARM**: [حزمة قالب ARM](../../examples/retail-multiagent-arm-template) - هيكل البنية التحتية؛ مراجعة المتطلبات المسبقة والمكونات التطبيقية المفقودة  
+- **📖 الهندسة المعمارية**: [أنماط التنسيق متعدد الوكلاء](docs/chapter-06-pre-deployment/coordination-patterns.md) - أنماط  
 
-#### التمارين العملية
+#### تمارين عملية  
 ```bash
-# Deploy the complete retail multi-agent solution
+# Inspect the retail infrastructure scaffold before choosing to deploy it
 cd examples/retail-multiagent-arm-template
-./deploy.sh
+cat README.md
 
-# Explore agent configurations
+# After an intentional deployment, inspect infrastructure state
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
-
-**💡 ناتج الفصل**: نشر وإدارة حل ذكاء اصطناعي متعدد الوكلاء جاهز للإنتاج مع وكلاء العملاء والمخزون
-
----
-
-### 🔍 الفصل 6: التحقق والتخطيط قبل النشر
-**المتطلبات الأساسية**: إتمام الفصل 4  
-**المدة**: 1 ساعة  
-**التعقيد**: ⭐⭐
-
-#### ما ستتعلمه
-- تخطيط السعة والتحقق من الموارد
-- استراتيجيات اختيار SKU
-- فحوصات ما قبل الإقلاع والأتمتة
-
-#### الموارد التعليمية
-- **📊 التخطيط**: [تخطيط السعة](docs/chapter-06-pre-deployment/capacity-planning.md) - تحقق من الموارد
-- **💰 الاختيار**: [اختيار رمز المخزون](docs/chapter-06-pre-deployment/sku-selection.md) - خيارات فعالة من حيث التكلفة
-- **✅ التحقق**: [فحوصات ما قبل الإطلاق](docs/chapter-06-pre-deployment/preflight-checks.md) - سكريبتات مؤتمتة
-
-#### تمارين عملية
-- تشغيل سكريبتات التحقق من السعة
-- تحسين اختيار رموز المخزون من حيث التكلفة
-- تنفيذ فحوصات مؤتمتة قبل النشر
-
-**💡 نتيجة الفصل**: تحقق وقم بتحسين عمليات النشر قبل التنفيذ
+  
+**💡 نتيجة الفصل**: فهم تصميم الوكلاء المتعددين وتحديد العمل المطلوب للتنفيذ، والتحقق، والتشغيل بما يتجاوز هيكل البنية التحتية  
 
 ---
 
-### 🚨 الفصل 7: استكشاف الأخطاء وإصلاحها وتصحيحها
-**المتطلبات السابقة**: إكمال أي فصل من فصول النشر  
-**المدة الزمنية**: 1-1.5 ساعات  
-**التعقيد**: ⭐⭐
+### 🔍 الفصل 6: التحقق والتخطيط قبل النشر  
+**المتطلبات المسبقة**: إكمال الفصل 4  
+**المدة**: ساعة واحدة  
+**التعقيد**: ⭐⭐  
 
-#### ما ستتعلمه
-- أساليب منظمة لتصحيح الأخطاء
-- المشكلات الشائعة وحلولها
-- استكشاف أخطاء خاصة بالذكاء الاصطناعي وإصلاحها
+#### ما ستتعلمه  
+- تخطيط السعة والتحقق من الموارد  
+- استراتيجيات اختيار وحدات SKU  
+- فحوصات ما قبل الطيران والأتمتة  
 
-#### مصادر التعلم
-- **🔧 المشكلات الشائعة**: [المشكلات الشائعة](docs/chapter-07-troubleshooting/common-issues.md) - الأسئلة المتكررة والحلول
-- **🕵️ التصحيح**: [دليل التصحيح](docs/chapter-07-troubleshooting/debugging.md) - استراتيجيات خطوة بخطوة
-- **🤖 مشكلات الذكاء الاصطناعي**: [استكشاف أخطاء الذكاء الاصطناعي](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - مشاكل خدمات الذكاء الاصطناعي
+#### مصادر التعلم  
+- **📊 التخطيط**: [تخطيط السعة](docs/chapter-06-pre-deployment/capacity-planning.md) - التحقق من الموارد  
+- **💰 الاختيار**: [اختيار وحدة SKU](docs/chapter-06-pre-deployment/sku-selection.md) - خيارات فعالة من حيث التكلفة  
+- **✅ التحقق**: [فحوصات ما قبل الطيران](docs/chapter-06-pre-deployment/preflight-checks.md) - سكريبتات آلية  
 
-#### تمارين عملية
-- تشخيص فشل عمليات النشر
-- حل مشاكل المصادقة
-- تصحيح اتصال خدمة الذكاء الاصطناعي
+#### تمارين عملية  
+- تشغيل سكريبتات التحقق من السعة  
+- تحسين اختيار وحدات SKU من حيث التكلفة  
+- تنفيذ فحوصات ما قبل النشر الآلية  
 
-**💡 نتيجة الفصل**: تشخيص مستقل وحل مشاكل النشر الشائعة
-
----
-
-### 🏢 الفصل 8: أنماط الإنتاج والمؤسسات
-**المتطلبات السابقة**: إكمال الفصول 1-4  
-**المدة الزمنية**: 2-3 ساعات  
-**التعقيد**: ⭐⭐⭐⭐
-
-#### ما ستتعلمه
-- استراتيجيات نشر الإنتاج
-- أنماط أمان المؤسسات
-- المراقبة وتحسين التكلفة
-
-#### مصادر التعلم
-- **🏭 الإنتاج**: [أفضل ممارسات الذكاء الاصطناعي للإنتاج](docs/chapter-08-production/production-ai-practices.md) - أنماط المؤسسات
-- **📝 أمثلة**: [مثال على الخدمات المصغرة](../../examples/microservices) - بنى معمارية معقدة
-- **📊 المراقبة**: [تكامل Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - المراقبة
-
-#### تمارين عملية
-- تنفيذ أنماط أمان المؤسسات
-- إعداد مراقبة شاملة
-- النشر للإنتاج مع الحوكمة الصحيحة
-
-**💡 نتيجة الفصل**: نشر تطبيقات جاهزة للمؤسسات مع قدرات إنتاج كاملة
+**💡 نتيجة الفصل**: التحقق من عمليات النشر وتحسينها قبل التنفيذ  
 
 ---
 
-## 🎓 نظرة عامة على ورشة العمل: تجربة تعلم تطبيقية
+### 🚨 الفصل 7: استكشاف الأخطاء وإصلاحها وتصحيحها  
+**المتطلبات المسبقة**: إكمال أي فصل نشر  
+**المدة**: 1-1.5 ساعة  
+**التعقيد**: ⭐⭐  
 
-> **⚠️ حالة الورشة: التطوير جارٍ**  
-> يتم حالياً تطوير وتحسين مواد الورشة. الوحدات الأساسية تعمل، ولكن بعض الأقسام المتقدمة غير مكتملة. نعمل بنشاط لإتمام جميع المحتويات. [تتبع التقدم →](workshop/README.md)
+#### ما ستتعلمه  
+- منهجيات التصحيح المنهجي  
+- المشاكل الشائعة وحلولها  
+- استكشاف أخطاء الذكاء الاصطناعي وإصلاحها  
 
-### مواد الورشة التفاعلية
-**تعلم تطبيقي شامل مع أدوات متصفح وتمارين موجهة**
+#### مصادر التعلم  
+- **🔧 المشاكل الشائعة**: [المشاكل الشائعة](docs/chapter-07-troubleshooting/common-issues.md) - الأسئلة الشائعة والحلول  
+- **🕵️ التصحيح**: [دليل التصحيح](docs/chapter-07-troubleshooting/debugging.md) - استراتيجيات خطوة بخطوة  
+- **🤖 مشكلات الذكاء الاصطناعي**: [استكشاف أخطاء الذكاء الاصطناعي وإصلاحها](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - مشاكل خدمات الذكاء الاصطناعي  
 
-توفر لنا مواد الورشة تجربة تعليمية منظمة وتفاعلية تكمل المنهج القائم على الفصول أعلاه. الورشة مصممة للتعلم الذاتي والجلوس مع مدرب.
+#### تمارين عملية  
+- تشخيص فشل عمليات النشر  
+- حل مشاكل المصادقة  
+- تصحيح اتصال خدمة الذكاء الاصطناعي  
 
-#### 🛠️ ميزات الورشة
-- **واجهة متصفح متكاملة**: ورشة مدعومة بـMkDocs كاملة مع البحث، النسخ، وميزات السمات
-- **تكامل GitHub Codespaces**: إعداد بيئة تطوير بنقرة واحدة
-- **مسار تعلم منظم**: 8 وحدات تمارين موجهة (3-4 ساعات إجمالاً)
-- **منهجية تدريجية**: المقدمة → الاختيار → التحقق → التحليل العكسي → التكوين → التخصيص → الإزالة → الخاتمة
-- **بيئة DevContainer تفاعلية**: أدوات وإعدادات مسبقة التكوين
+**💡 نتيجة الفصل**: تشخيص وحل مشاكل النشر الشائعة بشكل مستقل  
 
-#### 📚 بنية وحدات الورشة
-تتبع الورشة **منهجية تدريجية مكونة من 8 وحدات** تأخذك من الاكتشاف إلى إتقان النشر:
+---
 
-| الوحدة | الموضوع | ما ستفعله | المدة |
-|--------|-------|----------------|----------|
-| **0. المقدمة** | نظرة عامة على الورشة | فهم أهداف التعلم، المتطلبات، وبنية الورشة | 15 دقيقة |
-| **1. الاختيار** | اكتشاف القوالب | استكشاف قوالب AZD واختيار القالب المناسب لسيناريو الذكاء الاصطناعي الخاص بك | 20 دقيقة |
-| **2. التحقق** | النشر والتحقق | نشر القالب باستخدام `azd up` والتحقق من عمل البنية التحتية | 30 دقيقة |
-| **3. التحليل العكسي** | فهم البنية | استخدام GitHub Copilot لاستكشاف بنية القالب وملفات Bicep وتنظيم الكود | 30 دقيقة |
-| **4. التكوين** | تعمق في azure.yaml | إتقان تكوين `azure.yaml`، ربط الحلقات في دورة الحياة، والمتغيرات البيئية | 30 دقيقة |
-| **5. التخصيص** | اجعله خاصاً بك | تفعيل البحث المعتمد على الذكاء الاصطناعي، التتبع، التقييم، والتخصيص لسيناريو خاص بك | 45 دقيقة |
-| **6. الإزالة** | التنظيف | إلغاء تخصيص الموارد بأمان باستخدام `azd down --purge` | 15 دقيقة |
-| **7. الخاتمة** | الخطوات التالية | مراجعة الإنجازات، المفاهيم الرئيسية، ومواصلة رحلتك التعليمية | 15 دقيقة |
+### 🏢 الفصل 8: أنماط الإنتاج والمؤسسات  
+**المتطلبات المسبقة**: إكمال الفصول 1-4  
+**المدة**: 2-3 ساعات  
+**التعقيد**: ⭐⭐⭐⭐  
 
-**تدفق الورشة:**
+#### ما ستتعلمه  
+- استراتيجيات نشر الإنتاج  
+- أنماط أمان المؤسسات  
+- المراقبة وتحسين التكلفة  
+
+#### مصادر التعلم  
+- **🏭 الإنتاج**: [أفضل ممارسات AI للإنتاج](docs/chapter-08-production/production-ai-practices.md) - أنماط المؤسسات  
+- **📝 أمثلة**: [مثال الخدمات المصغرة](../../examples/microservices) - هندسات معقدة  
+- **📊 المراقبة**: [تكامل Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - المراقبة  
+
+#### تمارين عملية  
+- تنفيذ أنماط أمان المؤسسات  
+- إعداد مراقبة شاملة  
+- النشر للإنتاج مع الحوكمة المناسبة  
+
+**💡 نتيجة الفصل**: نشر تطبيقات جاهزة للمؤسسات بقدرات إنتاج كاملة  
+
+---
+
+## 🎓 نظرة عامة على الورشة: تجربة تعلم عملية  
+
+> **⚠️ حالة الورشة: تطوير نشط**  
+> مواد الورشة قيد التطوير والتحسين حالياً. الوحدات الأساسية تعمل، لكن بعض الأقسام المتقدمة غير مكتملة. نعمل بنشاط لإكمال المحتوى بالكامل. [تتبع التقدم →](workshop/README.md)  
+
+### مواد ورشة العمل التفاعلية  
+**تعلم عملي شامل مع أدوات متصفح وتمارين موجهة**  
+
+توفر مواد ورشة العمل تجربة تعلم منظمة وتفاعلية تكمل المنهج القائم على الفصول أعلاه. تم تصميم الورشة لكل من التعلم الذاتي والجلسات التي يقودها المدرب.  
+
+#### 🛠️ ميزات الورشة  
+- **واجهة قائمة على المتصفح**: ورشة عمل كاملة تعمل بـ MkDocs مع ميزات بحث ونسخ وثيمات  
+- **تكامل GitHub Codespaces**: إعداد بيئة تطوير بنقرة واحدة  
+- **مسار تعليمي منظم**: 8 وحدات تمارين موجهة (3-4 ساعات إجمالاً)  
+- **منهجية تدرجية**: مقدمة → اختيار → تحقق → تفكيك → تكوين → تخصيص → تنظيف → خاتمة  
+- **بيئة DevContainer تفاعلية**: أدوات واعتمادات مهيأة مسبقاً  
+
+#### 📚 هيكل وحدة الورشة  
+تتبع الورشة منهجية تقدمية من 8 وحدات تأخذك من الاكتشاف إلى إتقان النشر:  
+
+| الوحدة | الموضوع | ماذا ستفعل | المدة |  
+|--------|-------|----------------|----------|  
+| **0. مقدمة** | نظرة عامة على الورشة | فهم أهداف التعلم، المتطلبات المسبقة، وهيكل الورشة | 15 دقيقة |  
+| **1. الاختيار** | اكتشاف القوالب | استكشاف قوالب AZD واختيار القالب المناسب لحالة الذكاء الاصطناعي الخاصة بك | 20 دقيقة |  
+| **2. التحقق** | نشر والتحقق | نشر القالب باستخدام `azd up` والتحقق من عمل البنية التحتية | 30 دقيقة |  
+| **3. التفكيك** | فهم الهيكل | استخدام GitHub Copilot لاستكشاف هندسة القالب وملفات Bicep وتنظيم الكود | 30 دقيقة |  
+| **4. التكوين** | الغوص العميق في azure.yaml | إتقان تكوين `azure.yaml`، والتوابع الحياتية، ومتغيرات البيئة | 30 دقيقة |  
+| **5. التخصيص** | جعله خاصاً بك | تمكين الذكاء الاصطناعي للبحث، التتبع، التقييم، والتخصيص حسب السيناريو الخاص بك | 45 دقيقة |  
+| **6. التنظيف** | تنظيف الموارد | إلغاء توفير الموارد بأمان باستخدام `azd down --purge` | 15 دقيقة |  
+| **7. الخاتمة** | الخطوات التالية | مراجعة الإنجازات، المفاهيم الرئيسية، ومواصلة رحلة التعلم الخاصة بك | 15 دقيقة |  
+
+**تدفق الورشة:**  
 ```
 Introduction → Selection → Validation → Deconstruction → Configuration → Customization → Teardown → Wrap-up
      ↓            ↓           ↓              ↓               ↓              ↓            ↓           ↓
@@ -616,8 +617,8 @@ Introduction → Selection → Validation → Deconstruction → Configuration �
              right        verify        code &        azure.yaml      for your      resources   next steps
              template                   structure                     scenario
 ```
-
-#### 🚀 بدء الورشة
+  
+#### 🚀 بدء الورشة  
 ```bash
 # Option 1: GitHub Codespaces (Recommended)
 # Click "Code" → "Create codespace on main" in the repository
@@ -627,156 +628,156 @@ git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
 # Follow the setup instructions in workshop/README.md
 ```
+  
+#### 🎯 نتائج تعلم الورشة  
+من خلال إكمال الورشة، سيقوم المشاركون بـ:  
+- **نشر تطبيقات AI للإنتاج**: استخدام AZD مع خدمات Microsoft Foundry  
+- **إتقان هندسة متعددة الوكلاء**: تنفيذ حلول وكلاء AI منسقة  
+- **تطبيق أفضل ممارسات الأمان**: تكوين المصادقة والتحكم في الوصول  
+- **تحسين من أجل الحجم**: تصميم نشرات فعالة من حيث التكلفة والأداء  
+- **استكشاف مشاكل النشر**: حل القضايا الشائعة بشكل مستقل  
 
-#### 🎯 نتائج تعلم الورشة
-عند إكمال الورشة، سيتمكن المشاركون من:
-- **نشر تطبيقات ذكاء اصطناعي للإنتاج**: استخدام AZD مع خدمات Microsoft Foundry
-- **إتقان بنى الوكلاء المتعددين**: تنفيذ حلول وكلاء الذكاء الاصطناعي المنسقة
-- **تنفيذ أفضل ممارسات الأمان**: تكوين المصادقة والتحكم في الوصول
-- **تحسين الأداء للتوسع**: تصميم نشرات فعالة من حيث التكلفة والأداء
-- **استكشاف أخطاء النشر وإصلاحها**: حل المشاكل الشائعة بشكل مستقل
+#### 📖 موارد الورشة  
+- **🎥 دليل تفاعلي**: [مواد الورشة](workshop/README.md) - بيئة تعلم قائمة على المتصفح  
+- **📋 تعليمات وحدة بوحدة**:  
+  - [0. مقدمة](workshop/docs/instructions/0-Introduction.md) - نظرة عامة وأهداف الورشة  
+  - [1. اختيار](workshop/docs/instructions/1-Select-AI-Template.md) - البحث واختيار قوالب الذكاء الاصطناعي  
+  - [2. تحقق](workshop/docs/instructions/2-Validate-AI-Template.md) - نشر والتحقق من القوالب  
+  - [3. تفكيك](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - استكشاف هندسة القوالب  
+  - [4. تكوين](workshop/docs/instructions/4-Configure-AI-Template.md) - إتقان azure.yaml  
+  - [5. تخصيص](workshop/docs/instructions/5-Customize-AI-Template.md) - التخصيص حسب السيناريو الخاص بك  
+  - [6. تنظيف](workshop/docs/instructions/6-Teardown-Infrastructure.md) - تنظيف الموارد  
+  - [7. خاتمة](workshop/docs/instructions/7-Wrap-up.md) - مراجعة والخطوات التالية  
+- **🛠️ مختبر ورشة AI**: [مختبر ورشة AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - تمارين تركز على الذكاء الاصطناعي  
+- **💡 بداية سريعة**: [دليل إعداد الورشة](workshop/README.md#browser-based-guide) - تكوين البيئة  
 
-#### 📖 موارد الورشة
-- **🎥 دليل تفاعلي**: [مواد الورشة](workshop/README.md) - بيئة تعلم عبر المتصفح
-- **📋 إرشادات وحدة بوحدة**:
-  - [0. المقدمة](workshop/docs/instructions/0-Introduction.md) - نظرة عامة على الورشة والأهداف
-  - [1. الاختيار](workshop/docs/instructions/1-Select-AI-Template.md) - إيجاد واختيار قوالب الذكاء الاصطناعي
-  - [2. التحقق](workshop/docs/instructions/2-Validate-AI-Template.md) - نشر والتحقق من القوالب
-  - [3. التحليل العكسي](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - استكشاف بنية القالب
-  - [4. التكوين](workshop/docs/instructions/4-Configure-AI-Template.md) - إتقان azure.yaml
-  - [5. التخصيص](workshop/docs/instructions/5-Customize-AI-Template.md) - التخصيص لسيناريو خاص
-  - [6. الإزالة](workshop/docs/instructions/6-Teardown-Infrastructure.md) - تنظيف الموارد
-  - [7. الخاتمة](workshop/docs/instructions/7-Wrap-up.md) - المراجعة والخطوات التالية
-- **🛠️ مختبر ورشة الذكاء الاصطناعي**: [مختبر ورشة الذكاء الاصطناعي](docs/chapter-02-ai-development/ai-workshop-lab.md) - تمارين مع تركيز على الذكاء الاصطناعي
-- **💡 بدء سريع**: [دليل إعداد الورشة](workshop/README.md#quick-start) - تكوين البيئة
-
-**مناسب لـ**: تدريب الشركات، دورات جامعية، التعلم الذاتي، ومعسكرات تدريب المطورين.
+**مثالي لـ**: التدريب المؤسسي، دورات الجامعة، التعلم الذاتي، ومعسكرات تدريب المطورين.  
 
 ---
 
-## 📖 تعمق: قدرات AZD
+## 📖 الغوص العميق: قدرات AZD  
 
-بالإضافة إلى الأساسيات، يوفر AZD ميزات قوية لعمليات النشر الإنتاجية:
+إلى ما بعد الأساسيات، يقدم AZD ميزات قوية لنشرات الإنتاج:  
 
-- **عمليات نشر معتمدة على القوالب** - استخدام قوالب معدة مسبقاً للأنماط الشائعة للتطبيقات
+- **النشرات القائمة على القوالب** - استخدام قوالب مُعدة مسبقاً لأنماط تطبيق شائعة  
 - **البنية التحتية ككود** - إدارة موارد Azure باستخدام Bicep أو Terraform  
-- **تدفقات عمل متكاملة** - توفير، نشر، ومراقبة التطبيقات بسلاسة
-- **صديق للمطورين** - مصمم لزيادة الإنتاجية وتجربة المطور
+- **تدفقات العمل المتكاملة** - توفير، نشر، ومراقبة التطبيقات بسلاسة  
+- **صديق للمطور** - محسّن لإنتاجية وتجربة المطور  
 
-### **AZD + Microsoft Foundry: مثالي لنشر الذكاء الاصطناعي**
+### **AZD + Microsoft Foundry: مثالي لنشرات الذكاء الاصطناعي**  
 
-**لماذا AZD لحلول الذكاء الاصطناعي؟** يعالج AZD التحديات الرئيسية التي يواجهها مطورو الذكاء الاصطناعي:
+**لماذا AZD لحلول AI؟** AZD تعالج التحديات الرئيسية التي يواجهها مطورو الذكاء الاصطناعي:  
 
-- **قوالب جاهزة للذكاء الاصطناعي** - قوالب معدة مسبقاً لنماذج Microsoft Foundry، خدمات Azure AI، وأعباء عمل ML
-- **نشر آمن للذكاء الاصطناعي** - أنماط أمان مدمجة لخدمات الذكاء الاصطناعي، مفاتيح API، ونقاط نهاية النماذج  
-- **أنماط الذكاء الاصطناعي للإنتاج** - أفضل الممارسات للنشر القابل للتوسع والفعّال من حيث التكلفة
-- **تدفقات عمل الذكاء الاصطناعي الشاملة** - من تطوير النماذج إلى النشر الإنتاجي مع المراقبة الصحيحة
-- **تحسين التكلفة** - تخصيص الموارد الذكي واستراتيجيات التوسع لأعباء العمل الذكاء الاصطناعي
-- **تكامل Microsoft Foundry** - اتصال سلس بدليل نماذج Microsoft Foundry ونقاط النهاية
+- **قوالب جاهزة للذكاء الاصطناعي** - قوالب مهيأة مسبقاً لنماذج Microsoft Foundry، خدمات Azure AI، وأحمال عمل ML  
+- **نشرات AI آمنة** - أنماط أمان مدمجة لخدمات الذكاء الاصطناعي، مفاتيح API، ونقاط نهاية النماذج  
+- **أنماط AI للإنتاج** - أفضل الممارسات للنشرات القابلة للتوسع وفعالة التكلفة لتطبيقات AI  
+- **تدفقات العمل الشاملة للذكاء الاصطناعي** - من تطوير النموذج إلى النشر مع المراقبة المناسبة  
+- **تحسين التكلفة** - تخصيص الموارد الذكي واستراتيجيات التوسع لأحمال عمل AI  
+- **تكامل Microsoft Foundry** - اتصال سلس إلى كتالوج النماذج ونقاط النهاية الخاصة بـ Microsoft Foundry  
 
 ---
 
-## 🎯 مكتبة القوالب والأمثلة
+## 🎯 مكتبة القوالب والأمثلة  
 
-### متميز: قوالب Microsoft Foundry
-**ابدأ هنا إذا كنت تنشر تطبيقات الذكاء الاصطناعي!**
+### مميز: قوالب Microsoft Foundry  
+**ابدأ من هنا إذا كنت تنشر تطبيقات AI!**  
 
-> **ملاحظة:** تعرض هذه القوالب أنماطاً مختلفة للذكاء الاصطناعي. بعضها عينات Azure خارجية، والبعض الآخر تطبيقات محلية.
+> **ملاحظة:** هذه القوالب توضح أنماط AI متنوعة. بعضها عينات Azure خارجية، والبعض الآخر تطبيقات محلية.  
 
-| القالب | الفصل | التعقيد | الخدمات | النوع |
-|----------|---------|------------|----------|------|
-| [**ابدأ بالدردشة بالذكاء الاصطناعي**](https://github.com/Azure-Samples/get-started-with-ai-chat) | الفصل 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | خارجي |
-| [**ابدأ مع وكلاء الذكاء الاصطناعي**](https://github.com/Azure-Samples/get-started-with-ai-agents) | الفصل 2 | ⭐⭐ | Foundry Agents + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| خارجي |
-| [**عرض توضيحي Azure Search + OpenAI**](https://github.com/Azure-Samples/azure-search-openai-demo) | الفصل 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | خارجي |
-| [**بدء سريع لتطبيق دردشة OpenAI**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | الفصل 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | خارجي |
-| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | الفصل 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | خارجي |
-| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | الفصل 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | خارجي |
-| [**حل تجاري متعدد الوكلاء**](examples/retail-scenario.md) | الفصل 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **محلي** |
+| القالب | الفصل | التعقيد | الخدمات | النوع |  
+|----------|---------|------------|----------|------|  
+| [**ابدأ بالدردشة بالذكاء الاصطناعي**](https://github.com/Azure-Samples/get-started-with-ai-chat) | الفصل 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | خارجي |  
+| [**ابدأ مع وكلاء AI**](https://github.com/Azure-Samples/get-started-with-ai-agents) | الفصل 2 | ⭐⭐ | Foundry Agents + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| خارجي |  
+| [**عرض Azure Search + OpenAI**](https://github.com/Azure-Samples/azure-search-openai-demo) | الفصل 2 | ⭐⭐ | Azure OpenAI + Azure AI Search + Container Apps (افتراضي) + التخزين | خارجي |  
+| [**بدء تطبيق دردشة OpenAI سريع**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | الفصل 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | خارجي |  
+| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | الفصل 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | خارجي |  
+| [**دردشة Contoso RAG**](https://github.com/Azure-Samples/contoso-chat) | الفصل 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | خارجي |  
+| [**حل متعدد الوكلاء للبيع بالتجزئة**](examples/retail-scenario.md) | الفصل 5 | ⭐⭐⭐⭐ | الهيكلية المقترحة وهيكل البنية التحتية؛ يتطلب تنفيذ التطبيق | **المخطط المحلي** |  
 
-### متميز: سيناريوهات تعلم كاملة
-**قوالب تطبيق جاهزة للإنتاج مرتبطة بفصول التعلم**
+### مميز: سيناريوهات تعلم كاملة  
+**قوالب تطبيقات جاهزة للإنتاج مرتبطة بفصول التعلم**  
 
-| القالب | فصل التعلم | التعقيد | التعلم الرئيسي |
-|----------|------------------|------------|--------------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | الفصل 2 | ⭐ | أنماط نشر ذكاء اصطناعي أساسية |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | الفصل 2 | ⭐⭐ | تطبيق RAG باستخدام Azure AI Search |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | الفصل 4 | ⭐⭐ | تكامل ذكاء المستندات |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | الفصل 5 | ⭐⭐⭐ | إطار عامل واستدعاء دوال |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | الفصل 8 | ⭐⭐⭐ | تنظيم الذكاء الاصطناعي المؤسسي |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | الفصل 5 | ⭐⭐⭐⭐ | هندسة متعددة الوكلاء مع وكلاء العملاء والمخزون |
+| القالب | فصل التعلم | التعقيد | التعلم الرئيسي |  
+|----------|------------------|------------|--------------|  
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | الفصل 2 | ⭐ | أنماط نشر AI الأساسية |  
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | الفصل 2 | ⭐⭐ | تنفيذ RAG مع Azure AI Search |  
+| [**get-started-with-ai-agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | الفصل 2 | ⭐⭐ | دردشة مدعومة بالوكلاء واختبارات تقييم محددة للعينات |  
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | الفصل 5 | ⭐⭐⭐ | إطار الوكلاء واستدعاء الوظائف |  
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | الفصل 8 | ⭐⭐⭐ | تنسيق AI للمؤسسات |  
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | الفصل 5 | ⭐⭐⭐⭐ | هندسة متعددة الوكلاء مع وكلاء العملاء والمخزون |  
 
-### التعلم حسب نوع المثال
+### التعلم حسب نوع المثال  
 
 > **📌 أمثلة محلية مقابل خارجية:**  
-> **الأمثلة المحلية** (في هذا المستودع) = جاهزة للاستخدام فورًا  
-> **الأمثلة الخارجية** (عينات Azure) = استنساخ من المستودعات المرتبطة
+> **الأمثلة المحلية** (في هذا المستودع) = تحقق من ملف README لكل مثال لحالة التنفيذ والمتطلبات  
+> **الأمثلة الخارجية** (عينات Azure) = انسخ من المستودعات المرتبطة  
 
-#### أمثلة محلية (جاهزة للاستخدام)
-- [**حل تجاري متعدد الوكلاء**](examples/retail-scenario.md) - تطبيق إنتاجي كامل مع قوالب ARM
-  - بنية متعددة الوكلاء (وكلاء العملاء + المخزون)
-  - مراقبة وتقييم شامل
-  - نشر بنقرة واحدة عبر قالب ARM
+#### أمثلة محلية (جاهزة للاستخدام)  
+- [**حل متعدد الوكلاء للبيع بالتجزئة**](examples/retail-scenario.md) - مخطط هندسي مع هيكل بنية تحتية ARM  
+  - أدوار وكلاء العملاء والمخزون المقترحة  
+  - يجب تنفيذ الكود للتتبع والتقييم والتطبيق والتحقق منه  
+  - توفير الموارد وحده لا ينتج تطبيق بيع تجزئة يعمل  
 
-#### أمثلة محلية - تطبيقات الحاوية (الفصول 2-5)
-**أمثلة شاملة على نشر الحاويات في هذا المستودع:**
-- [**أمثلة تطبيقات الحاوية**](examples/container-app/README.md) - دليل كامل للنشر بالحاويات
-  - [API بسيط باستخدام Flask](../../examples/container-app/simple-flask-api) - API REST أساسي مع التوسع للصفر
-  - [بنية الخدمات المصغرة](../../examples/container-app/microservices) - نشر متعدد الخدمات جاهز للإنتاج
-  - أنماط بدء سريع، الإنتاج، والنشر المتقدم
-  - إرشادات المراقبة، الأمان، وتحسين التكلفة
+#### أمثلة محلية – تطبيقات الحاويات (الفصول 2-5)  
+**أمثلة نشر شاملة للحاويات في هذا المستودع:**  
+- [**أمثلة تطبيقات الحاويات**](examples/container-app/README.md) - دليل كامل للنشر بالحاويات  
+  - [واجهة برمجة تطبيقات Flask بسيطة](../../examples/container-app/simple-flask-api) - REST API أساسي مع مقياس حتى الصفر  
+  - [هندسة الخدمات المصغرة](../../examples/container-app/microservices) - عينة تعلم لخدمتين؛ تقوية الإنتاج عمل إضافي  
+  - أنماط نشر البداية السريعة، الإنتاج، والمتقدمة  
+  - إرشادات المراقبة، الأمان، وتحسين التكلفة  
 
-#### أمثلة خارجية - تطبيقات بسيطة (الفصول 1-2)
-**استنساخ هذه المستودعات عينات Azure للبدء:**
-- [تطبيق ويب بسيط - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - أنماط النشر الأساسية
-- [موقع ويب ثابت - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - نشر محتوى ثابت
-- [تطبيق حاوية - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - نشر REST API
+#### أمثلة خارجية – تطبيقات بسيطة (الفصول 1-2)  
+**انسخ هذه المستودعات لعينات Azure للبدء:**  
+- [تطبيق ويب بسيط - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - أنماط نشر أساسية  
+- [موقع ثابت - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - نشر محتوى ثابت  
+- [تطبيق حاوية - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - نشر REST API  
 
-#### أمثلة خارجية - تكامل قواعد البيانات (الفصل 3-4)  
-- [تطبيق قاعدة بيانات - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - أنماط اتصال قاعدة البيانات
-- [الدوال + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - تدفق بيانات بدون خادم
+#### أمثلة خارجية – تكامل قواعد البيانات (الفصول 3-4)  
+- [تطبيق قاعدة البيانات - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - أنماط الاتصال بقاعدة البيانات
+- [الدوال + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - سير عمل البيانات بدون خادم
 
 #### أمثلة خارجية - أنماط متقدمة (الفصول 4-8)
-- [خدمات مصغرة Java](https://github.com/Azure-Samples/java-microservices-aca-lab) - بنى متعددة الخدمات
-- [مهام تطبيقات الحاوية](https://github.com/Azure-Samples/container-apps-jobs) - معالجة خلفية  
-- [خط أنابيب ML مؤسسي](https://github.com/Azure-Samples/mlops-v2) - أنماط ML جاهزة للإنتاج
+- [الخدمات المصغرة جافا](https://github.com/Azure-Samples/java-microservices-aca-lab) - هندسات متعددة الخدمات
+- [مهام تطبيقات الحاويات](https://github.com/Azure-Samples/container-apps-jobs) - المعالجة في الخلفية  
+- [خط أنابيب التعلم الآلي للمؤسسات](https://github.com/Azure/mlops-v2) - أنماط مرجعية لـ MLOps؛ ليست قالب AZD جاهز للاستخدام
 
-### مجموعات قالب خارجية
-- [**معرض قوالب AZD الرسمي**](https://azure.github.io/awesome-azd/) - مجموعة مختارة من القوالب الرسمية والمجتمعية
+### مجموعات القوالب الخارجية
+- [**معرض القوالب الرسمي لـ AZD**](https://azure.github.io/awesome-azd/) - مجموعة منسقة من القوالب الرسمية والمجتمعية
 - [**قوالب Azure Developer CLI**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - توثيق قوالب Microsoft Learn
-- [**دليل الأمثلة**](examples/README.md) - أمثلة تعلم محلية مع شروحات مفصّلة
+- [**دليل الأمثلة**](examples/README.md) - أمثلة تعليمية محلية مع شروحات مفصلة
 
 ---
 
-## 📚 موارد التعلم والمراجع
+## 📚 مصادر تعلم ومرجعيات
 
 ### مراجع سريعة
 - [**ورقة غش الأوامر**](resources/cheat-sheet.md) - أوامر azd الأساسية منظمة حسب الفصل
 - [**مسرد المصطلحات**](resources/glossary.md) - مصطلحات Azure و azd  
-- [**الأسئلة الشائعة**](resources/faq.md) - أسئلة شائعة منظمة حسب فصل التعلم
-- [**دليل الدراسة**](resources/study-guide.md) - تمارين عملية شاملة
+- [**الأسئلة الشائعة**](resources/faq.md) - الأسئلة الشائعة منظمة حسب فصل التعلم
+- [**دليل الدراسة**](resources/study-guide.md) - تمارين شاملة للممارسة
 
-### ورش عمل تطبيقية
-- [**مختبر ورشة عمل الذكاء الاصطناعي**](docs/chapter-02-ai-development/ai-workshop-lab.md) - اجعل حلولك الذكية قابلة للنشر عبر AZD (ساعتان إلى 3 ساعات)
-- [**ورشة عمل تفاعلية**](workshop/README.md) - تمارين إرشادية مؤلفة من 8 وحدات مع MkDocs و GitHub Codespaces
-  - يتبع: المقدمة → الاختيار → التحقق → التفكيك → التكوين → التخصيص → إزالة الإعداد → الختام
+### ورش عمل تفاعلية
+- [**مختبر ورشة عمل الذكاء الاصطناعي**](docs/chapter-02-ai-development/ai-workshop-lab.md) - اجعل حلول الذكاء الاصطناعي قابلة للنشر بـ AZD (ساعتان إلى ثلاث ساعات)
+- [**ورشة تفاعلية**](workshop/README.md) - تمارين موجهة مكونة من 8 وحدات مع MkDocs و GitHub Codespaces
+  - يتبع: المقدمة → الاختيار → التحقق → التفكيك → التكوين → التخصيص → الإغلاق → الخاتمة
 
-### مصادر تعليمية خارجية
+### مصادر تعلم خارجية
 - [توثيق Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [مركز هندسة Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [آلة حاسبة تسعير Azure](https://azure.microsoft.com/pricing/calculator/)
+- [حاسبة تسعير Azure](https://azure.microsoft.com/pricing/calculator/)
 - [حالة Azure](https://status.azure.com/)
 
-### مهارات الوكيل الذكي لمحررك
-- [**مهارات Microsoft Azure على skills.sh**](https://skills.sh/microsoft/github-copilot-for-azure) - 37 مهارة وكيل مفتوحة لـ Azure AI، Foundry، النشر، التشخيص، تحسين التكلفة، وأكثر. قم بتثبيتها في GitHub Copilot، Cursor، Claude Code، أو أي وكيل مدعوم:
+### مهارات وكيل الذكاء الاصطناعي لمحررك
+- [**مهارات Microsoft Azure على skills.sh**](https://skills.sh/microsoft/github-copilot-for-azure) - 37 مهارة وكيل مفتوحة لـ Azure AI، Foundry، النشر، التشخيص، تحسين التكلفة، وأكثر. قم بتثبيتها في GitHub Copilot و Cursor و Claude Code أو أي وكيل مدعوم:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-## 🔧 دليل حل المشكلات السريع
+## 🔧 دليل استكشاف الأخطاء وإصلاحها السريع
 
-**مشاكل شائعة يواجهها المبتدئون وحلول فورية:**
+**المشكلات الشائعة التي يواجهها المبتدئون والحلول الفورية:**
 
 <details>
 <summary><strong>❌ "azd: الأمر غير موجود"</strong></summary>
@@ -798,7 +799,7 @@ azd version
 </details>
 
 <details>
-<summary><strong>❌ "لم يتم العثور على اشتراك" أو "الاشتراك غير مضبوط"</strong></summary>
+<summary><strong>❌ "لم يتم العثور على اشتراك" أو "الاشتراك غير مُعين"</strong></summary>
 
 ```bash
 # List available subscriptions
@@ -816,7 +817,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "InsufficientQuota" أو "الحد الأقصى للحصة تم تجاوزه"</strong></summary>
+<summary><strong>❌ "InsufficientQuota" أو "تم تجاوز الحصة"</strong></summary>
 
 ```bash
 # Try different Azure region
@@ -832,12 +833,12 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "فشل أمر azd up" في منتصف التنفيذ</strong></summary>
+<summary><strong>❌ فشل "azd up" في منتصف العملية</strong></summary>
 
 ```bash
-# Option 1: Clean and retry
-azd down --force --purge
-azd up
+# Option 1: Inspect the error and retry after correcting its cause
+azd show
+azd up --debug
 
 # Option 2: Just fix infrastructure
 azd provision
@@ -851,7 +852,7 @@ azd monitor --logs
 </details>
 
 <details>
-<summary><strong>❌ "فشل المصادقة" أو "انتهت صلاحية الرمز"</strong></summary>
+<summary><strong>❌ "فشل التوثيق" أو "انتهت صلاحية الرمز"</strong></summary>
 
 ```bash
 # Re-authenticate for AZD
@@ -868,22 +869,20 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "المورد موجود بالفعل" أو تعارضات في التسميات</strong></summary>
+<summary><strong>❌ "المورد موجود بالفعل" أو تعارضات التسمية</strong></summary>
 
 ```bash
-# AZD generates unique names, but if conflict:
-azd down --force --purge
-
-# Then retry with fresh environment
+# Inspect the conflicting resource before changing or deleting anything.
+# For an isolated new deployment, create a separate environment:
 azd env new dev-v2
 azd up
 ```
 </details>
 
 <details>
-<summary><strong>❌ استغراق نشر النموذج وقتًا طويلاً</strong></summary>
+<summary><strong>❌ استغراق وقت طويل في نشر القالب</strong></summary>
 
-**أوقات الانتظار الطبيعية:**
+**أوقات الانتظار العادية:**
 - تطبيق ويب بسيط: 5-10 دقائق
 - تطبيق مع قاعدة بيانات: 10-15 دقيقة
 - تطبيقات الذكاء الاصطناعي: 15-25 دقيقة (توفير OpenAI بطيء)
@@ -928,84 +927,83 @@ azd env get-values
 ```
 </details>
 
-### 📚 موارد شاملة لحل المشكلات
+### 📚 موارد كاملة لاستكشاف الأخطاء وإصلاحها
 
-- **دليل المشاكل الشائعة:** [حلول مفصلة](docs/chapter-07-troubleshooting/common-issues.md)
-- **مشاكل متعلقة بالذكاء الاصطناعي:** [استكشاف مشاكل الذكاء الاصطناعي](docs/chapter-07-troubleshooting/ai-troubleshooting.md)
-- **دليل التصحيح:** [تصحيح خطوة بخطوة](docs/chapter-07-troubleshooting/debugging.md)
-- **احصل على المساعدة:** [ديسكورد Azure](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **دليل المشكلات الشائعة:** [حلول مفصلة](docs/chapter-07-troubleshooting/common-issues.md)
+- **مشكلات الذكاء الاصطناعي المحددة:** [استكشاف أخطاء الذكاء الاصطناعي](docs/chapter-07-troubleshooting/ai-troubleshooting.md)
+- **دليل التصحيح:** [التصحيح خطوة بخطوة](docs/chapter-07-troubleshooting/debugging.md)
+- **الحصول على المساعدة:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
 ## 🎓 إتمام الدورة والشهادة
 
 ### تتبع التقدم
-تتبع تقدمك في التعلم عبر كل فصل:
+تتبع تقدم تعلمك عبر كل فصل:
 
-- [ ] **الفصل 1**: الأساسيات والبدء السريع ✅
-- [ ] **الفصل 2**: تطوير الذكاء الاصطناعي أولًا ✅  
-- [ ] **الفصل 3**: التكوين والمصادقة ✅
-- [ ] **الفصل 4**: البنية التحتية كرمز والنشر ✅
+- [ ] **الفصل 1**: الأساسيات والبداية السريعة ✅
+- [ ] **الفصل 2**: التطوير المعتمد على الذكاء الاصطناعي أولاً ✅  
+- [ ] **الفصل 3**: التكوين والتوثيق ✅
+- [ ] **الفصل 4**: البنية التحتية ككود والنشر ✅
 - [ ] **الفصل 5**: حلول الذكاء الاصطناعي متعددة الوكلاء ✅
 - [ ] **الفصل 6**: التحقق والتخطيط قبل النشر ✅
-- [ ] **الفصل 7**: استكشاف الأخطاء وإصلاحها ✅
+- [ ] **الفصل 7**: استكشاف الأخطاء وإصلاحها والتصحيح ✅
 - [ ] **الفصل 8**: أنماط الإنتاج والمؤسسات ✅
 
 ### التحقق من التعلم
-بعد إتمام كل فصل، تحقق من معرفتك عن طريق:
-1. **تمرين عملي**: إكمال النشر العملي للفصل
-2. **اختبار المعرفة**: مراجعة قسم الأسئلة الشائعة لفصلك
-3. **نقاش مجتمعي**: شارك تجربتك في ديسكورد Azure
-4. **الفصل التالي**: انتقل إلى مستوى التعقيد التالي
+بعد إكمال كل فصل، تحقق من معرفتك من خلال:
+1. **تمرين عملي**: إكمال نشر الفصل العملي
+2. **اختبار المعرفة**: مراجعة قسم الأسئلة الشائعة الخاص بفصلك
+3. **نقاش المجتمع**: شارك تجربتك في Azure Discord
+4. **الفصل التالي**: الانتقال إلى مستوى التعقيد التالي
 
 ### فوائد إتمام الدورة
-عند إكمال جميع الفصول، ستحصل على:
-- **خبرة في الإنتاج**: نشر تطبيقات ذكاء اصطناعي حقيقية على Azure
-- **مهارات مهنية**: قدرات نشر جاهزة للمؤسسات  
-- **تعرف المجتمع**: عضو نشط في مجتمع مطوري Azure
-- **تقدم مهني**: خبرة مطلوبة في النشر عبر AZD والذكاء الاصطناعي
+عند إتمام جميع الفصول، ستحصل على:
+- **خبرة الإنتاج**: تطبيقات ذكاء اصطناعي حقيقية منشورة على Azure
+- **المهارات المهنية**: قدرات نشر جاهزة للمؤسسات  
+- **الاعتراف المجتمعي**: عضو نشط في مجتمع مطوري Azure
+- **تقدم مهني**: خبرة مطلوبة في AZD ونشر الذكاء الاصطناعي
 
 ---
 
 ## 🤝 المجتمع والدعم
 
 ### الحصول على المساعدة والدعم
-- **المشاكل التقنية**: [الإبلاغ عن الأخطاء وطلب الميزات](https://github.com/microsoft/azd-for-beginners/issues)
-- **أسئلة التعلم**: [مجتمع Microsoft Azure Discord](https://discord.gg/microsoft-azure) و [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **مساعدة الذكاء الاصطناعي**: انضم إلى [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **التوثيق**: [وثائق Azure Developer CLI الرسمية](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- **المشكلات التقنية**: [الإبلاغ عن الأخطاء وطلب الميزات](https://github.com/microsoft/azd-for-beginners/issues)
+- **أسئلة التعلم**: [مجتمع Microsoft Azure Discord](https://discord.gg/microsoft-azure) و[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **مساعدة خاصة بالذكاء الاصطناعي**: انضم إلى [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **التوثيق**: [توثيق Azure Developer CLI الرسمي](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### رؤى المجتمع من ديسكورد Microsoft Foundry
+### رؤى المجتمع من Microsoft Foundry Discord
 
-**نتائج استطلاع حديث من قناة #Azure:**
-- **45%** من المطورين يريدون استخدام AZD لأعباء عمل الذكاء الاصطناعي
-- **التحديات الكبرى**: نشرات متعددة الخدمات، إدارة بيانات الاعتماد، الجاهزية للإنتاج  
-- **الأكثر طلبًا**: قوالب خاصة بالذكاء الاصطناعي، أدلة حل المشكلات، أفضل الممارسات
+**المواضيع التي نوقشت من قبل المجتمع:**
+- نشرات متعددة الخدمات، إدارة الاعتماد، والاستعداد للإنتاج
+- قوالب الذكاء الاصطناعي، أدلة استكشاف الأخطاء، وأفضل الممارسات
 
 **انضم إلى مجتمعنا لـ:**
-- مشاركة تجاربك في AZD + الذكاء الاصطناعي والحصول على الدعم
+- مشاركة تجاربك مع AZD + AI والحصول على المساعدة
 - الوصول إلى معاينات مبكرة لقوالب الذكاء الاصطناعي الجديدة
-- المساهمة في أفضل ممارسات نشر الذكاء الاصطناعي
-- التأثير على تطوير ميزات الذكاء الاصطناعي و AZD المستقبلية
+- الإسهام في أفضل ممارسات نشر الذكاء الاصطناعي
+- التأثير على تطوير ميزات الذكاء الاصطناعي + AZD المستقبلية
 
 ### المساهمة في الدورة
 نرحب بالمساهمات! يرجى قراءة [دليل المساهمة](CONTRIBUTING.md) للتفاصيل حول:
-- **تحسين المحتوى**: تحسين الفصول والأمثلة الحالية
-- **أمثلة جديدة**: إضافة سيناريوهات وقوالب من الواقع  
-- **الترجمة**: المساعدة في دعم تعدد اللغات
-- **التقارير عن الأخطاء**: تحسين الدقة والوضوح
-- **معايير المجتمع**: اتباع إرشادات مجتمعنا الشاملة
+- **تحسين المحتوى**: تعزيز الفصول والأمثلة الحالية
+- **أمثلة جديدة**: إضافة سيناريوهات وقوالب حقيقية  
+- **الترجمة**: المساعدة في دعم اللغات المتعددة
+- **تقارير الأخطاء**: تحسين الدقة والوضوح
+- **معايير المجتمع**: اتباع إرشادات المجتمع الشاملة
 
 ---
 
 ## 📄 معلومات الدورة
 
-### الترخيص
-هذا المشروع مرخص برخصة MIT - انظر ملف [LICENSE](../../LICENSE) للتفاصيل.
+### الرخصة
+هذا المشروع مرخص بموجب رخصة MIT - راجع ملف [LICENSE](../../LICENSE) للتفاصيل.
 
-### موارد تعليمية مرتبطة من مايكروسوفت
+### مصادر تعلم ذات صلة من Microsoft
 
-ينتج فريقنا دورات تعليمية شاملة أخرى:
+فريقنا ينتج دورات تعلم شاملة أخرى:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
 ### LangChain
@@ -1014,11 +1012,11 @@ azd env get-values
 [![LangChain للمبتدئين](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
 ---
 
-### Azure / Edge / MCP / وكلاء
+### Azure / Edge / MCP / Agents
 [![AZD للمبتدئين](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI للمبتدئين](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![MCP للمبتدئين](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![وكلاء الذكاء الاصطناعي للمبتدئين](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![وكلاء AI للمبتدئين](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
@@ -1031,8 +1029,8 @@ azd env get-values
 ---
  
 ### التعلم الأساسي
-[![تعلم الآلة للمبتدئين](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-[![علوم البيانات للمبتدئين](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![التعلم الآلي للمبتدئين](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![علم البيانات للمبتدئين](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![الذكاء الاصطناعي للمبتدئين](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 [![الأمن السيبراني للمبتدئين](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
 [![تطوير الويب للمبتدئين](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
@@ -1049,13 +1047,13 @@ azd env get-values
 
 ---
 
-## 🗺️ تنقل الدورة
+## 🗺️ التنقل في الدورة
 
 **🚀 جاهز للبدء في التعلم؟**
 
-**المبتدئون**: ابدأ بـ [الفصل 1: الأساسيات والبدء السريع](#-chapter-1-foundation--quick-start)  
-**مطوروا الذكاء الاصطناعي**: انتقل إلى [الفصل 2: تطوير الذكاء الاصطناعي أولًا](#-chapter-2-ai-first-development-recommended-for-ai-developers)  
-**المطورون ذوو الخبرة**: ابدأ بـ [الفصل 3: التكوين والمصادقة](#️-chapter-3-configuration--authentication)
+**المبتدئون**: ابدأ بـ [الفصل 1: الأساسيات والبداية السريعة](#-chapter-1-foundation--quick-start)  
+**مطوروا الذكاء الاصطناعي**: انتقل إلى [الفصل 2: التطوير المعتمد على الذكاء الاصطناعي أولاً](#-chapter-2-ai-first-development-recommended-for-ai-developers)  
+**المطورون ذوو الخبرة**: ابدأ بـ [الفصل 3: التكوين والتوثيق](#️-chapter-3-configuration--authentication)
 
 **الخطوات التالية**: [ابدأ الفصل 1 - أساسيات AZD](docs/chapter-01-foundation/azd-basics.md) →
 

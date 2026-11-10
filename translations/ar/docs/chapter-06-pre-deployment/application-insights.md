@@ -1,30 +1,30 @@
 # تكامل Application Insights مع AZD
 
-⏱️ **الوقت المقدر**: 40-50 دقيقة | 💰 **تأثير التكلفة**: ~$5-15/شهر | ⭐ **التعقيد**: متوسط
+⏱️ **المدة المقدرة**: 40-50 دقيقة | 💰 **تأثير التكلفة**: ~5-15 دولار/شهريًا | ⭐ **التعقيد**: متوسط
 
 **📚 مسار التعلم:**
-- ← السابق: [فحوصات ما قبل النشر](preflight-checks.md) - التحقق قبل النشر
-- 🎯 **أنت هنا**: تكامل Application Insights (المراقبة، القياسات عن بُعد، تصحيح الأخطاء)
+- ← السابق: [فحوصات ما قبل الطيران](preflight-checks.md) - تحقق ما قبل النشر
+- 🎯 **أنت هنا**: تكامل Application Insights (المراقبة، القياس عن بُعد، تصحيح الأخطاء)
 - → التالي: [دليل النشر](../chapter-04-infrastructure/deployment-guide.md) - النشر إلى Azure
 - 🏠 [الصفحة الرئيسية للدورة](../../README.md)
 
 ---
 
-## ما الذي ستتعلمه
+## ما ستتعلمونه
 
-من خلال إكمال هذا الدرس، ستتمكن من:
-- دمج **Application Insights** في مشاريع AZD تلقائيًا
-- تكوين **التتبّع الموزّع** للخدمات المصغّرة
-- تنفيذ **تليمتري مخصص** (مقاييس، أحداث، تبعيات)
-- إعداد **مقاييس حية** للمراقبة في الوقت الفعلي
-- إنشاء **تنبيهات ولوحات معلومات** من نشرات AZD
-- تصحيح مشكلات الإنتاج باستخدام **استعلامات القياسات**
-- تحسين **التكاليف واستراتيجيات أخذ العينات**
-- مراقبة **تطبيقات الذكاء الاصطناعي/نماذج اللغة الكبيرة** (الرموز، الكمون، التكاليف)
+بإكمال هذا الدرس، سوف تقوم بـ:
+- إعلان **Application Insights** في بنية تحتية AZD وتكوين أداة SDK
+- تكوين **التتبع الموزع** للخدمات الدقيقة
+- تنفيذ **القياس المخصص** (مقاييس، أحداث، تبعيات)
+- إعداد **المقاييس الحية** للمراقبة في الوقت الحقيقي
+- إنشاء **تنبيهات ولوحات تحكم** من عمليات النشر عبر AZD
+- تصحيح مشكلات الإنتاج باستخدام **استعلامات القياس عن بُعد**
+- تحسين **تكاليف واستراتيجيات التحليل العيني**
+- مراقبة **تطبيقات AI/LLM** (الرموز، الكمون، التكاليف)
 
-## لماذا يعد Application Insights مع AZD مهمًا
+## لماذا يعتبر Application Insights مع AZD مهمًا
 
-### التحدي: مراقبة الإنتاج
+### التحدي: المراقبة الإنتاجية
 
 **بدون Application Insights:**
 ```
@@ -44,37 +44,37 @@
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**التشبيه**: Application Insights مثل وجود مسجل طيران "الصندوق الأسود" + لوحة قيادة قمرة القيادة لتطبيقك. ترى كل ما يحدث في الوقت الحقيقي ويمكنك إعادة تشغيل أي حادث.
+**التشبيه**: Application Insights مثل وجود مسجل رحلة "الصندوق الأسود" + لوحة قيادة قمرة الطائرة لتطبيقك. ترى كل شيء يحدث في الوقت الحقيقي ويمكنك إعادة تشغيل أي حادث.
 
 ---
 
 ## نظرة عامة على البنية
 
-### Application Insights في معمارية AZD
+### Application Insights في بنية AZD
 
 ```mermaid
 graph TB
-    User[المستخدم/العميل]
-    App1[تطبيق الحاوية 1<br/>بوابة واجهة برمجة التطبيقات]
-    App2[تطبيق الحاوية 2<br/>خدمة المنتج]
-    App3[تطبيق الحاوية 3<br/>خدمة الطلبات]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[رؤى التطبيقات<br/>مركز القياسات]
-    LogAnalytics[(تحليلات السجلات<br/>مساحة عمل)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[بوابة أزور<br/>لوحات المعلومات والتنبيهات]
-    Query[استعلامات كاستو<br/>تحليل مخصص]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|القياس التلقائي| AppInsights
-    App2 -.->|القياس التلقائي| AppInsights
-    App3 -.->|القياس التلقائي| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,44 +83,47 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 ### ما الذي يتم مراقبته تلقائيًا
 
-| نوع التليمتري | ما يتم التقاطه | حالة الاستخدام |
+التقاط الأداة التلقائية المدعومة للطلبات/التبعية للمكتبات المزودة بالأداة. تتطلب الأحداث والمقاييس المخصصة رمز التطبيق؛ يجب تكوين اختبارات التوفر بشكل منفصل. لا يتم جمع كل صف أدناه فقط بسبب وجود المورد.
+
+| نوع القياس عن بُعد | ما يتم التقاطه | حالة الاستخدام |
 |----------------|------------------|----------|
-| **الطلبات** | طلبات HTTP، رموز الحالة، المدة | مراقبة أداء واجهة برمجة التطبيقات |
-| **التبعيات** | استدعاءات خارجية (قاعدة بيانات، واجهات برمجة التطبيقات، التخزين) | تحديد نقاط الاختناق |
-| **الاستثناءات** | أخطاء غير معالجة مع تتبعات المكدس | تصحيح الأعطال |
-| **الأحداث المخصصة** | أحداث الأعمال (تسجيل، شراء) | التحليلات ومسارات التحويل |
+| **الطلبات** | طلبات HTTP، رموز الحالة، المدة | مراقبة أداء API |
+| **التبعيات** | مكالمات خارجية (قاعدة بيانات، APIs، التخزين) | تحديد الاختناقات |
+| **الاستثناءات** | أخطاء غير معالجة مع تراكيب المكدس | تصحيح الأعطال |
+| **الأحداث المخصصة** | أحداث الأعمال (اشتراك، شراء) | تحليلات وقنوات التسويق |
 | **المقاييس** | عدادات الأداء، مقاييس مخصصة | تخطيط السعة |
-| **التتبّعات** | رسائل السجل مع مستوى الشدة | التصحيح والتدقيق |
-| **التوافر** | اختبارات وقت التشغيل ووقت الاستجابة | مراقبة اتفاقية مستوى الخدمة |
+| **التتبع** | رسائل السجل مع الشدة | تصحيح الأخطاء والتدقيق |
+| **التوفر** | اختبارات وقت التشغيل ووقت الاستجابة | مراقبة اتفاقية مستوى الخدمة |
 
 ---
 
-## المتطلبات المسبقة
+## المتطلبات الأساسية
 
 ### الأدوات المطلوبة
 
 ```bash
-# تحقق من Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ المتوقع: azd الإصدار 1.0.0 أو أعلى
+# Command reference baseline: azd 1.37.2
 
-# تحقق من Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ المتوقع: azure-cli الإصدار 2.50.0 أو أعلى
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### متطلبات Azure
 
 - اشتراك Azure نشط
 - أذونات لإنشاء:
-  - Application Insights resources
-  - Log Analytics workspaces
-  - Container Apps
+  - موارد Application Insights
+  - مساحات عمل Log Analytics
+  - تطبيقات الحاويات
   - مجموعات الموارد
 
-### المعارف المطلوبة
+### المتطلبات المعرفية
 
 يجب أن تكون قد أكملت:
 - [أساسيات AZD](../chapter-01-foundation/azd-basics.md) - مفاهيم AZD الأساسية
@@ -129,11 +132,13 @@ az --version
 
 ---
 
-## الدرس 1: توفير Application Insights تلقائيًا مع AZD
+## الدرس 1: Application Insights التلقائي مع AZD
 
-### كيف يقوم AZD بتوفير Application Insights
+### كيفية توفير AZD لـ Application Insights
 
-يقوم AZD تلقائيًا بإنشاء وتكوين Application Insights عند النشر. لنرَ كيف يعمل.
+يوفر AZD Application Insights **فقط عندما تعلن بنية المشروع عن ذلك**. `azure.yaml` لوحده لا ينشئ مراقبة أو يعِد أداة للرصد في رمز التطبيق.
+
+> **نطاق المثال:** يحتوي هذا الدرس على أجزاء تكامل، وليس مشروع `monitored-app` كامل في هذا المستودع. وفر قالبًا رئيسيًا وتخطيط المعلمات، بيئة تطبيقات الحاويات، سجل/صورة وتكوين الهوية، ملف Dockerfile، وعلامات الخدمة قبل النشر. تعرض الدروس لاحقًا أجزاء بديلة/ملحقة، وليست ملفات يمكن لصقها كلها معًا دون تغيير. ابدأ بـ [مثال الخدمات الدقيقة](../../../../examples/microservices) إذا كنت تحتاج إلى خط أساس قابل للتشغيل.
 
 ### هيكل المشروع
 
@@ -169,14 +174,14 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**هذا كل شيء!** سيقوم AZD بإنشاء Application Insights بشكل افتراضي. لا حاجة إلى تكوين إضافي للمراقبة الأساسية.
+هذا يعلن الخدمة القابلة للنشر. توفر تكوينات Bicep و SDK التالي المراقبة؛ لا يضيفها azd ضمنيًا.
 
 ---
 
-### الخطوة 2: بنية المراقبة (Bicep)
+### الخطوة 2: بنية مراقبة (Bicep)
 
 **الملف: `infra/core/monitoring.bicep`**
 
@@ -223,6 +228,7 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
@@ -235,7 +241,8 @@ output applicationInsightsName string = applicationInsights.name
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -285,35 +293,29 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ---
 
-### الخطوة 4: كود التطبيق مع القياسات
+### الخطوة 4: رمز التطبيق مع القياس عن بُعد
 
 **الملف: `src/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# احصل على سلسلة اتصال Application Insights
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # تكوين التتبع الموزع
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # أخذ عينات بنسبة 100% أثناء التطوير
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # تكوين التسجيل
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # محاكاة استدعاء قاعدة بيانات (يتم تتبعه تلقائيًا كاعتماد)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # محاكاة عملية بطيئة
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -367,27 +369,27 @@ if __name__ == '__main__':
 **الملف: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+حل هذه التبعيات في مشروعك، اختبرها معًا، وقفل الإصدرات الناتجة. يجب على المشاريع الجديدة استخدام Azure Monitor OpenTelemetry، وليس مصدري OpenCensus Python المتقاعدين.
 
 ---
 
 ### الخطوة 5: النشر والتحقق
 
 ```bash
-# تهيئة AZD
-azd init
-
-# نشر (يهيئ Application Insights تلقائيًا)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# الحصول على عنوان URL للتطبيق
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# توليد بيانات القياس عن بُعد
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -404,47 +406,42 @@ curl $APP_URL/api/slow
 
 ---
 
-### الخطوة 6: عرض القياسات في بوابة Azure
+### الخطوة 6: عرض القياس عن بُعد في بوابة Azure
 
 ```bash
-# احصل على تفاصيل Application Insights
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# افتح في بوابة Azure
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**انتقل إلى بوابة Azure → Application Insights → بحث المعاملات**
+**توجه إلى بوابة Azure → Application Insights → بحث المعاملات**
 
-ينبغي أن ترى:
+يجب أن ترى:
 - ✅ طلبات HTTP مع رموز الحالة
-- ✅ مدة الطلب (أكثر من 3 ثوانٍ لـ `/api/slow`)
+- ✅ مدة الطلب (3+ ثواني لـ `/api/slow`)
 - ✅ تفاصيل الاستثناء من `/api/error-test`
 - ✅ رسائل السجل المخصصة
 
 ---
 
-## الدرس 2: التليمتري المخصص والأحداث
+## الدرس 2: القياس والأحداث المخصصة
 
 ### تتبع أحداث الأعمال
 
-دعنا نضيف تليمتري مخصص للأحداث الحيوية للأعمال.
+دعنا نضيف القياس المخصص للأحداث الحيوية للأعمال.
 
 **الملف: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # إعداد المسجل
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # إعداد مصدّر المقاييس
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # إعداد المتتبع
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# عميل القياس عن بعد العالمي
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### تحديث التطبيق بالأحداث المخصصة
+### تحديث التطبيق باستخدام الأحداث المخصصة
 
-**الملف: `src/app.py` (المحسّن)**
+**الملف: `src/app.py` (محسن)**
+
+أضف هذه المسارات إلى تطبيق Flask الحالي؛ احتفظ بمسارات الصحة/الاختبار السابقة. يظهر الجزء المختصر أدناه تطبيقًا منفصلاً للوضوح. تعيش تهيئة القياس الآن في `telemetry.py` — لا تهيئ المصدّرين مرتين.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # تتبع حدث تجاري
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # تتبع مقياس الإيرادات
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # محاكاة البحث (سيكون استعلام قاعدة بيانات حقيقي)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # تحويل إلى مللي ثانية
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # تتبع حدث البحث
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # تتبع مقياس أداء البحث
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # محاكاة استدعاء واجهة برمجة تطبيقات خارجية
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # تتبع التبعية
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -616,25 +586,25 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### اختبار التليمتري المخصص
+### اختبار القياس المخصص
 
 ```bash
-# تتبع حدث الشراء
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# تتبع حدث البحث
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# تتبع اعتماد خارجي
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
 **عرض في بوابة Azure:**
 
-انتقل إلى Application Insights → Logs، ثم نفّذ:
+توجه إلى Application Insights → سجلات، ثم شغل:
 
 ```kusto
 // View purchase events
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -665,11 +635,11 @@ traces
 
 ---
 
-## الدرس 3: التتبّع الموزّع للخدمات المصغّرة
+## الدرس 3: التتبع الموزع للخدمات الدقيقة
 
-### تفعيل التتبّع عبر الخدمات
+### تمكين التتبع بين الخدمات
 
-بالنسبة للخدمات المصغّرة، يقوم Application Insights تلقائيًا بالربط بين الطلبات عبر الخدمات.
+مع الأداة المتوافقة ونقل سياق التتبع W3C، يقوم Application Insights بربط الطلبات عبر الخدمات. مشاركة سلسلة الاتصال وحدها لا تنشئ أطوال نسق أصل-ابن. تشير قطعة التصميم التالية إلى الوحدات التي يجب عليك تنفيذها.
 
 **الملف: `infra/main.bicep`**
 
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### عرض المعاملة من البداية إلى النهاية
+### عرض المعاملة من البداية للنهاية
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as بوابة API<br/>(معرّف التتبع: abc123)
-    participant Product as خدمة المنتج<br/>(معرّف الأصل: abc123)
-    participant Order as خدمة الطلب<br/>(معرّف الأصل: abc123)
-    participant AppInsights as رؤى التطبيق
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
+    participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: بدء التتبع: abc123
-    Gateway->>AppInsights: تسجيل الطلب (معرّف التتبع: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: معرّف الأصل: abc123
-    Product->>AppInsights: تسجيل استدعاء التبعية
-    Product-->>Gateway: تفاصيل المنتج
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: معرّف الأصل: abc123
-    Order->>AppInsights: تسجيل استدعاء التبعية
-    Order-->>Gateway: تم إنشاء الطلب
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: اكتملت عملية الشراء
-    Gateway->>AppInsights: تسجيل الاستجابة (الزمن المستغرق: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: الارتباط حسب معرّف التتبع
+    Note over AppInsights: Correlation by Trace ID
 ```
-**استعلام التتبّع من البداية للنهاية:**
+
+**استعلام التتبع من البداية للنهاية:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -790,41 +761,41 @@ dependencies
 
 ## الدرس 4: المقاييس الحية والمراقبة في الوقت الفعلي
 
-### تفعيل بث المقاييس الحية
+### تمكين تدفق المقاييس الحية
 
-توفّر المقاييس الحية تليمتري في الوقت الحقيقي بزمن تأخير أقل من ثانية واحدة.
+توفر المقاييس الحية قياسًا عن بُعد شبه فوري عند دعمه وتمكينه بواسطة SDK. ليس اتفاق مستوى خدمة للكمون. اختار إعداد Python OpenTelemetry أعلاه باستخدام `enable_live_metrics=True`.
 
 **الوصول إلى المقاييس الحية:**
 
 ```bash
-# الحصول على مورد Application Insights
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# الحصول على مجموعة الموارد
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**ما تراه في الوقت الفعلي:**
+**ما تراه في الوقت الحقيقي:**
 - ✅ معدل الطلبات الواردة (طلبات/ثانية)
-- ✅ استدعاءات التبعيات الخارجة
+- ✅ مكالمات التبعية الصادرة
 - ✅ عدد الاستثناءات
-- ✅ استخدام وحدة المعالجة المركزية والذاكرة
+- ✅ استخدام المعالج والذاكرة
 - ✅ عدد الخوادم النشطة
-- ✅ عينات التليمتري
+- ✅ عينة من القياس
 
 ### توليد حمل للاختبار
 
 ```bash
-# توليد حمل لمشاهدة المقاييس المباشرة
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# شاهد المقاييس المباشرة في بوابة Azure
-# يجب أن ترى ارتفاعًا في معدل الطلبات
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
@@ -833,20 +804,20 @@ done
 
 ### التمرين 1: إعداد التنبيهات ⭐⭐ (متوسط)
 
-**الهدف**: إنشاء تنبيهات لمعدلات أخطاء مرتفعة واستجابات بطيئة.
+**الهدف**: إنشاء تنبيهات لمعدلات خطأ مرتفعة وردود بطيئة.
 
 **الخطوات:**
 
 1. **إنشاء تنبيه لمعدل الأخطاء:**
 
 ```bash
-# الحصول على معرّف مورد Application Insights
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# إنشاء تنبيه استنادًا إلى المقاييس للطلبات الفاشلة
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,10 +825,10 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
-2. **إنشاء تنبيه للاستجابات البطيئة:**
+2. **إنشاء تنبيه للردود البطيئة:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,7 +841,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **إنشاء التنبيه عبر Bicep (مفضّل لـ AZD):**
+3. **إنشاء تنبيه عبر Bicep (مفضل لـ AZD):**
 
 **الملف: `infra/core/alerts.bicep`**
 
@@ -947,52 +918,52 @@ output slowResponseAlertId string = slowResponseAlert.id
 4. **اختبار التنبيهات:**
 
 ```bash
-# توليد أخطاء
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# توليد استجابات بطيئة
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# تحقق من حالة التنبيه (انتظر ٥-١٠ دقائق)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
 **✅ معايير النجاح:**
 - ✅ تم إنشاء التنبيهات بنجاح
-- ✅ تُطلق التنبيهات عند تجاوز العتبات
-- ✅ يمكن عرض سجل التنبيهات في بوابة Azure
+- ✅ تفعل التنبيهات عند تجاوز الحدود
+- ✅ يمكنك عرض تاريخ التنبيه في بوابة Azure
 - ✅ مدمجة مع نشر AZD
 
 **الوقت**: 20-25 دقيقة
 
 ---
 
-### التمرين 2: إنشاء لوحة معلومات مخصصة ⭐⭐ (متوسط)
+### التمرين 2: إنشاء لوحة تحكم مخصصة ⭐⭐ (متوسط)
 
-**الهدف**: بناء لوحة تعرض المقاييس الرئيسية للتطبيق.
+**الهدف**: بناء لوحة تحكم تعرض المقاييس الأساسية للتطبيق.
 
 **الخطوات:**
 
-1. **إنشاء لوحة عبر بوابة Azure:**
+1. **إنشاء لوحة تحكم عبر بوابة Azure:**
 
-انتقل إلى: بوابة Azure → لوحات المعلومات → لوحة جديدة
+توجه إلى: بوابة Azure → لوحات التحكم → لوحة جديدة
 
-2. **إضافة عناصر لعرض المقاييس الرئيسية:**
+2. **إضافة مربعات المقاييس الأساسية:**
 
 - عدد الطلبات (آخر 24 ساعة)
-- متوسط زمن الاستجابة
+- متوسط وقت الاستجابة
 - معدل الأخطاء
 - أبطأ 5 عمليات
 - التوزيع الجغرافي للمستخدمين
 
-3. **إنشاء لوحة عبر Bicep:**
+3. **إنشاء لوحة تحكم عبر Bicep:**
 
 **الملف: `infra/core/dashboard.bicep`**
 
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1063,10 +1044,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **نشر اللوحة:**
+4. **نشر لوحة التحكم:**
 
-```bash
-# أضف إلى main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,28 +1057,30 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# نشر
+```bash
+# Deploy
 azd up
 ```
 
 **✅ معايير النجاح:**
-- ✅ تعرض اللوحة المقاييس الرئيسية
-- ✅ يمكن تثبيتها في صفحة بوابة Azure الرئيسية
-- ✅ تتحدّث في الوقت الحقيقي
+- ✅ تعرض لوحة التحكم المقاييس الأساسية
+- ✅ يمكن تثبيتها على الصفحة الرئيسية لبوابة Azure
+- ✅ تتحدث في الوقت الحقيقي
 - ✅ قابلة للنشر عبر AZD
 
 **الوقت**: 25-30 دقيقة
 
 ---
 
-### التمرين 3: مراقبة تطبيقات الذكاء الاصطناعي/نماذج اللغة الكبيرة ⭐⭐⭐ (متقدم)
+### التمرين 3: مراقبة تطبيق AI/LLM ⭐⭐⭐ (متقدم)
 
-**الهدف**: تتبع استخدام نماذج Microsoft Foundry (الرموز tokens، التكاليف، الكمون).
+**الهدف**: تتبع استخدام نماذج Microsoft Foundry (الرموز، التكاليف، الكمون).
 
 **الخطوات:**
 
-1. **إنشاء غلاف لمراقبة الذكاء الاصطناعي:**
+1. **إنشاء غلاف مراقبة AI:**
 
 **الملف: `src/ai_telemetry.py`**
 
@@ -1109,39 +1092,43 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # استدعاء نماذج Microsoft Foundry
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
                 **kwargs
             )
             
-            duration = (time.time() - start_time) * 1000  # مايكروسوفت
+            duration = (time.time() - start_time) * 1000  # ms
             
-            # استخراج الاستخدام
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # حساب التكلفة (تسعير gpt-4.1)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 لكل 1K من الرموز
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 لكل 1K من الرموز
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # تتبع حدث مخصص
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # تتبع المقاييس
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1182,7 +1169,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **استخدام عميل مراقَب:**
+2. **استخدام العميل المراقب:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# تهيئة عميل OpenAI المراقَب
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # استدعاء مع المراقبة التلقائية
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,13 +1205,13 @@ def chat():
     })
 ```
 
-3. **استعلام مقاييس الذكاء الاصطناعي:**
+3. **استعلام مقاييس AI:**
 
 ```kusto
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1251,10 +1240,10 @@ traces
 ```
 
 **✅ معايير النجاح:**
-- ✅ يتم تتبع كل استدعاء لـ OpenAI تلقائيًا
-- ✅ يمكن رؤية استخدام الرموز والتكاليف
-- ✅ يتم مراقبة الكمون
-- ✅ يمكن تعيين تنبيهات الميزانية
+- ✅ تتبع كل استدعاء OpenAI تلقائيًا
+- ✅ رؤية استخدام الرموز والتكاليف
+- ✅ مراقبة الكمون
+- ✅ إمكانية تعيين تنبيهات الميزانية
 
 **الوقت**: 35-45 دقيقة
 
@@ -1262,34 +1251,21 @@ traces
 
 ## تحسين التكلفة
 
-### استراتيجيات أخذ العينات
+### استراتيجيات التحليل العيني
 
-تحكم في التكاليف عبر أخذ عينات من التليمتري:
+تحكم في التكلفة بواسطة تحليل القياس عن بُعد:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# بيئة التطوير: أخذ عينات بنسبة 100٪
-sampler = ProbabilitySampler(rate=1.0)
-
-# بيئة الإنتاج: أخذ عينات بنسبة 10٪ (تقليل التكاليف بنسبة 90٪)
-sampler = ProbabilitySampler(rate=0.1)
-
-# أخذ العينات التكيفية (يتكيف تلقائيًا)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**في Bicep:**
+لا يقلل تحليل التتبع 90% من كل فئة قياس عن بُعد. تحتاج المقاييس والسجلات المنبعثة بشكل مستقل إلى ضوابط حجم خاصة بها. اختر المعدل باستخدام احتياجات الرصد، وليس حظرًا إجماليًا في الإنتاج.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+عيّن التحليل في SDK صراحةً؛ خاصية `SamplingPercentage` للمكون ليست بديلاً لتكوين محلل Python OpenTelemetry.
 
 ### الاحتفاظ بالبيانات
 
@@ -1305,14 +1281,14 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 ### تقديرات التكلفة الشهرية
 
-| حجم البيانات | مدة الاحتفاظ | التكلفة الشهرية |
+| حجم البيانات | فترة الاحتفاظ | التكلفة الشهرية |
 |-------------|-----------|--------------|
-| 1 GB/شهر | 30 يومًا | ~$2-5 |
-| 5 GB/شهر | 30 يومًا | ~$10-15 |
-| 10 GB/شهر | 90 يومًا | ~$25-40 |
-| 50 GB/شهر | 90 يومًا | ~$100-150 |
+| 1 جيجابايت/شهر | 30 يومًا | ~2-5 دولار |
+| 5 جيجابايت/شهر | 30 يومًا | ~10-15 دولار |
+| 10 جيجابايت/شهر | 90 يومًا | ~25-40 دولار |
+| 50 جيجابايت/شهر | 90 يومًا | ~100-150 دولار |
 
-**الفئة المجانية**: 5 GB/شهر مشمولة
+هذه الأرقام توضيحية وليست عروض أسعار. تحقق من التسعير للإدخال والاحتفاظ والتنبيه والاختبار في منطقتك واتفاقيتك؛ البدلات المجانية مشتركة/محددة وفقًا لتسعير Azure Monitor، وليست SKU مجانية مضمونة لكل مورد Application Insights.
 
 ---
 
@@ -1322,21 +1298,21 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 اختبر فهمك:
 
-- [ ] **Q1**: كيف يقوم AZD بتوفير Application Insights؟
-  - **الإجابة**: تلقائيًا عبر قوالب Bicep في `infra/core/monitoring.bicep`
+- [ ] **س1**: كيف يوفر AZD Application Insights؟
+  - **ج**: ينشر موارد المراقبة التي تعلن عنها صراحة قوالب Bicep/Terraform الخاصة بالمشروع.
 
-- [ ] **Q2**: ما متغير البيئة الذي يتيح Application Insights؟
-  - **الإجابة**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [ ] **س2**: ما هو متغير البيئة الذي يمكّن Application Insights؟
+  - **ج**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: ما هي أنواع التليمتري الثلاثة الرئيسية؟
-  - **الإجابة**: الطلبات (استدعاءات HTTP)، التبعيات (استدعاءات خارجية)، الاستثناءات (أخطاء)
+- [ ] **س3**: ما هي ثلاثة أنواع رئيسية للقياس عن بُعد؟
+  - **ج**: الطلبات (مكالمات HTTP)، التبعيات (مكالمات خارجية)، الاستثناءات (أخطاء)
 
 **التحقق العملي:**
 ```bash
-# تحقق مما إذا كان Application Insights مُكوَّنًا
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# تحقق من تدفق بيانات القياس عن بُعد
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1345,18 +1321,18 @@ az monitor app-insights metrics show \
 
 ---
 
-### 2. التليمتري المخصص ✓
+### 2. القياس المخصص ✓
 
 اختبر فهمك:
 
-- [ ] **Q1**: كيف تتعقب أحداث الأعمال المخصصة؟
-  - **الإجابة**: استخدم logger مع `custom_dimensions` أو `TelemetryClient.track_event()`
+- [ ] **س1**: كيف تتعقب أحداث الأعمال المخصصة؟
+  - **ج**: يكتب الغلاف في هذا الدرس سجلات OTel منظمة مع سمات `event_name`، يمكن استعلامها في `traces`؛ هذه ليست `customEvents` تلقائية.
 
-- [ ] **Q2**: ما الفرق بين الأحداث والمقاييس؟
-  - **الإجابة**: الأحداث هي حوادث منفصلة، والمقاييس هي قياسات رقمية
+- [ ] **س2**: ما الفرق بين الأحداث والمقاييس؟
+  - **ج**: الأحداث هي وقائع منفصلة، المقاييس هي قياسات عددية
 
-- [ ] **Q3**: كيف تربط التليمتري عبر الخدمات؟
-  - **الإجابة**: يستخدم Application Insights تلقائيًا `operation_Id` للربط
+- [ ] **س3**: كيف تربط القياس عن بُعد عبر الخدمات؟
+  - **ج**: يستخدم Application Insights تلقائيًا `operation_Id` للربط
 
 **التحقق العملي:**
 ```kusto
@@ -1372,106 +1348,102 @@ traces
 
 اختبر فهمك:
 
-- [ ] **Q1**: ما هي العيننة ولماذا تستخدمها؟
-  - **الإجابة**: أخذ العينات يقلل من حجم البيانات (والتكلفة) عن طريق التقاط نسبة مئوية فقط من التليمتري
+- [ ] **س1**: ما هو التحليل العيني ولماذا يستخدم؟
+  - **ج**: يقلل التحليل من حجم البيانات (والتكلفة) بالتقاط نسبة مئوية فقط من القياس عن بُعد
 
-- [ ] **Q2**: كيف تقوم بإعداد التنبيهات؟
-  - **الإجابة**: استخدم تنبيهات المقاييس في Bicep أو بوابة Azure بناءً على مقاييس Application Insights
+- [ ] **س2**: كيف تنشئ التنبيهات؟
+  - **ج**: استخدم تنبيهات المقاييس في Bicep أو بوابة Azure بناءً على مقاييس Application Insights
 
-- [ ] **Q3**: ما الفرق بين Log Analytics وApplication Insights؟
-  - **الإجابة**: يقوم Application Insights بتخزين البيانات في مساحة عمل Log Analytics؛ يوفر Application Insights عروضًا مخصّصة للتطبيق
+- [ ] **س3**: ما الفرق بين Log Analytics و Application Insights؟
+  - **ج**: يخزن Application Insights البيانات في مساحة عمل Log Analytics؛ يوفر App Insights وجهات نظر خاصة بالتطبيق
 
 **التحقق العملي:**
 ```bash
-# تحقق من إعدادات أخذ العينات
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
 
 ## أفضل الممارسات
 
-### ✅ نفّذ:
+### ✅ يجب:
 
-1. **استخدم معرفات الارتباط**
+1. **استخدام معرفات الارتباط**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. **قم بإعداد تنبيهات للمقاييس الحرجة**
+2. **إعداد التنبيهات للمقاييس الحرجة**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **استخدم السجلات المهيكلة**
+3. **استخدام التسجيل المنظم**
    ```python
-   # ✅ جيد: منظم
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ سيئ: غير منظم
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
-4. **راقب التبعيات**
+4. **مراقبة التبعيات**
    ```python
-   # تتبع تلقائيًا استدعاءات قاعدة البيانات، طلبات HTTP، إلخ.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
-5. **استخدم المقاييس الحية أثناء عمليات النشر**
+5. **استخدام المقاييس الحية أثناء عمليات النشر**
 
 ### ❌ لا تفعل:
 
-1. **لا تسجل بيانات حساسة**
+1. **لا تسجل البيانات الحساسة**
    ```python
-   # ❌ سيئ
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ جيد
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **لا تستخدم أخذ عينات بنسبة 100% في الإنتاج**
+2. **لا تختار العينة بدون قياس الحجم واحتياجات التشخيص**
    ```python
-   # ❌ مكلف
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ فعال من حيث التكلفة
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **لا تتجاهل قوائم الرسائل الميتة (dead letter queues)**
+3. **لا تتجاهل قوائم الرسائل الميتة**
 
-4. **لا تنس تعيين حدود الاحتفاظ بالبيانات**
+4. **لا تنسَ تحديد حدود احتفاظ البيانات**
 
 ---
 
 ## استكشاف الأخطاء وإصلاحها
 
-### المشكلة: عدم ظهور بيانات التليمتري
+### المشكلة: عدم ظهور البيانات المقاسة
 
 **التشخيص:**
 ```bash
-# تحقق من تعيين سلسلة الاتصال
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# تحقق من سجلات التطبيق عبر Azure Monitor
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# أو استخدم واجهة سطر أوامر Azure لتطبيقات الحاويات:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **الحل:**
 ```bash
-# تحقق من سلسلة الاتصال في تطبيق الحاوية
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1481,71 +1453,70 @@ az containerapp show \
 
 ---
 
-### المشكلة: ارتفاع التكاليف
+### المشكلة: تكاليف مرتفعة
 
 **التشخيص:**
 ```bash
-# تحقق من عملية إدخال البيانات
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **الحل:**
-- خفض معدل أخذ العينات
-- تقليل فترة الاحتفاظ
-- إزالة السجلات التفصيلية
+- تقليل معدل العينة
+- تقصير فترة الاحتفاظ
+- إزالة تسجيل الدخول التفصيلي
 
 ---
 
-## تعلّم المزيد
+## معرفة المزيد
 
 ### الوثائق الرسمية
-- [نظرة عامة على Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights لبايثون](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+- [لمحة عامة عن Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [إعداد Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
 - [لغة استعلام Kusto](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [مراقبة AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [المراقبة في AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### الخطوات التالية في هذه الدورة
-- ← السابق: [فحوصات ما قبل النشر](preflight-checks.md)
+### الخطوات التالية في هذا المساق
+- ← السابق: [فحوصات ما قبل التشغيل](preflight-checks.md)
 - → التالي: [دليل النشر](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [الصفحة الرئيسية للدورة](../../README.md)
+- 🏠 [الصفحة الرئيسية للمساق](../../README.md)
 
 ### أمثلة ذات صلة
-- [مثال نماذج Microsoft Foundry](../../../../examples/azure-openai-chat) - تليمتري الذكاء الاصطناعي
-- [مثال الخدمات المصغرة](../../../../examples/microservices) - التتبّع الموزّع
+- [مثال نماذج Microsoft Foundry](../../../../examples/azure-openai-chat) - قياس الذكاء الاصطناعي
+- [مثال الخدمات المصغرة](../../../../examples/microservices) - التتبع الموزع
 
 ---
 
-## الملخص
+## ملخص
 
-**ما تعلمته:**
-- ✅ توفير Application Insights تلقائيًا مع AZD
-- ✅ تليمتري مخصص (أحداث، مقاييس، تبعيات)
-- ✅ التتبّع الموزّع عبر الخدمات المصغرة
-- ✅ المقاييس الحية والمراقبة في الوقت الحقيقي
+**لقد تعلّمت:**
+- ✅ التزويد التلقائي لـ Application Insights باستخدام AZD
+- ✅ القياسات المخصصة (الأحداث، المقاييس، التبعيات)
+- ✅ التتبع الموزع عبر الخدمات المصغرة
+- ✅ المقاييس الحية والمراقبة الفورية
 - ✅ التنبيهات ولوحات المعلومات
 - ✅ مراقبة تطبيقات الذكاء الاصطناعي/نماذج اللغة الكبيرة
 - ✅ استراتيجيات تحسين التكلفة
 
-**النقاط الرئيسية المستخلصة:**
-1. **AZD يوفر المراقبة تلقائيًا** - لا حاجة لإعداد يدوي
-2. **استخدم السجلات المهيكلة** - يجعل الاستعلام أسهل
-3. **تتبع أحداث الأعمال** - ليس مجرد مقاييس تقنية
-4. **راقب تكاليف الذكاء الاصطناعي** - تتبع التوكنات والإنفاق
-5. **قم بإعداد التنبيهات** - كن استباقيًا، لا تفاعليًا
-6. **حسّن التكاليف** - استخدم العينات وحدود الاحتفاظ
+**النقاط الرئيسية:**
+1. **صرح بالمراقبة بوضوح** - AZD ينشر القوالب الخاصة بك؛ أداة SDK ترسل القياسات
+2. **استخدم التسجيل المهيكل** - يسهل الاستعلام
+3. **تتبع الأحداث التجارية** - ليس فقط المقاييس التقنية
+4. **راقب تكاليف الذكاء الاصطناعي** - تتبع الرموز والنفقات
+5. **أعد إعداد التنبيهات** - كن استباقياً وليس تفاعلياً
+6. **حسن التكلفة** - استخدم العينة وحدود الاحتفاظ
 
 **الخطوات التالية:**
 1. أكمل التمارين العملية
 2. أضف Application Insights إلى مشاريع AZD الخاصة بك
-3. قم بإنشاء لوحات معلومات مخصصة لفريقك
-4. تعرف على [دليل النشر](../chapter-04-infrastructure/deployment-guide.md)
+3. أنشئ لوحات معلومات مخصصة لفريقك
+4. تعلم [دليل النشر](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**إخلاء المسؤولية**:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. للمعلومات الحرجة، يُنصَح بالاستعانة بترجمة بشرية احترافية. نحن لا نتحمل أي مسؤولية عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

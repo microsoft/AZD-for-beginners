@@ -1,51 +1,51 @@
-# Kapitel 6: Planung & Validierung vor der Bereitstellung
+# Kapitel 6: Planung und Validierung vor der Bereitstellung
 
-**📚 Kurs**: [AZD für Anfänger](../../README.md) | **⏱️ Dauer**: 1 Stunde | **⭐ Komplexität**: Mittelstufe
+**📚 Kurs**: [AZD für Anfänger](../../README.md) | **⏱️ Dauer**: 2-4 Stunden Lesen; zusätzliche Zeit für angepasste Labs | **⭐ Komplexität**: Mittel–Fortgeschritten
 
 ---
 
-## Übersicht
+## Überblick
 
-Dieses Kapitel behandelt wesentliche Planungs- und Validierungsschritte vor der Bereitstellung Ihrer Anwendung. Lernen Sie, kostspielige Fehler mit ordnungsgemäßer Kapazitätsplanung, SKU-Auswahl und Preflight-Checks zu vermeiden.
+Dieses Kapitel behandelt wesentliche Planungs- und Validierungsschritte vor der Bereitstellung Ihrer Anwendung. Erfahren Sie, wie Sie kostspielige Fehler durch ordnungsgemäße Kapazitätsplanung, SKU-Auswahl und Preflight-Checks vermeiden.
 
-> Validiert mit `azd 1.27.1` im Juli 2026.
+> Befehlsanweisungen wurden anhand der veröffentlichten `azd 1.37.2` Referenz geprüft. Cloud-Bereitstellungen wurden nicht durchgeführt. Die längeren Lektionen enthalten illustrative Fragmente, keine vollständigen lokalen Bereitstellungsprojekte.
 
 ## Lernziele
 
 Nach Abschluss dieses Kapitels werden Sie:
 - Preflight-Checks vor der Bereitstellung durchführen
-- Kapazität planen und Ressourcenbedarf schätzen
+- Kapazität planen und Ressourcenbedarf abschätzen
 - Geeignete SKUs für Kostenoptimierung auswählen
-- Application Insights zur Überwachung konfigurieren
-- Muster der Teamkoordination verstehen
+- Application Insights für das Monitoring konfigurieren
+- Muster zur Koordination mehrerer Agenten und deren Bereitstellungsanforderungen verstehen
 
 ---
 
 ## 📚 Lektionen
 
 | # | Lektion | Beschreibung | Zeit |
-|---|--------|-------------|------|
-| 1 | [Preflight-Checks](preflight-checks.md) | Konfiguration vor der Bereitstellung validieren | 15 min |
-| 2 | [Kapazitätsplanung](capacity-planning.md) | Ressourcenbedarf schätzen | 20 min |
-| 3 | [SKU-Auswahl](sku-selection.md) | Geeignete Preisklassen wählen | 15 min |
-| 4 | [Application Insights](application-insights.md) | Überwachung konfigurieren | 20 min |
-| 5 | [Koordinationsmuster](coordination-patterns.md) | Team-Bereitstellungsworkflows | 15 min |
+|---|---------|--------------|------|
+| 1 | [Preflight-Checks](preflight-checks.md) | Konfiguration vor der Bereitstellung validieren | 15 Min |
+| 2 | [Kapazitätsplanung](capacity-planning.md) | Ressourcenbedarf abschätzen | 20 Min |
+| 3 | [SKU-Auswahl](sku-selection.md) | Geeignete Preisklassen auswählen | 15 Min |
+| 4 | [Application Insights](application-insights.md) | Monitoring konfigurieren | 20 Min |
+| 5 | [Koordinationsmuster](coordination-patterns.md) | Fortgeschrittenes Design für Multi-Agent-Orchestrierung | 60-75 Min |
 
 ---
 
 ## 🚀 Schnellstart
 
 ```bash
-# Überprüfen Sie die Abonnementkontingente
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Bereitstellungsvorschau (keine Ressourcen erstellt)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Bicep-Syntax validieren
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Überprüfen der Umgebungs konfiguratio
+# Check environment configuration
 azd env get-values
 ```
 
@@ -55,7 +55,7 @@ azd env get-values
 
 ### Vor `azd provision`
 
-- [ ] Kontingent für Region geprüft
+- [ ] Kontingent für Region überprüft
 - [ ] SKUs passend ausgewählt
 - [ ] Kostenschätzung überprüft
 - [ ] Namenskonvention konsistent
@@ -65,26 +65,26 @@ azd env get-values
 
 - [ ] Umgebungsvariablen gesetzt
 - [ ] Geheimnisse im Key Vault
-- [ ] Verbindungszeichenfolgen geprüft
-- [ ] Health Checks konfiguriert
+- [ ] Verbindungszeichenfolgen überprüft
+- [ ] Gesundheitsprüfungen konfiguriert
 
 ---
 
-## 💰 SKU-Auswahl-Leitfaden
+## 💰 Anleitung zur SKU-Auswahl
 
 | Arbeitslast | Entwicklung | Produktion |
-|----------|-------------|------------|
-| Container Apps | Verbrauch | Dedizierte D4 |
+|-----------|-------------|------------|
+| Container-Apps | Consumption | Consumption oder dediziertes Arbeitslastprofil, basierend auf gemessener Last |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Modelle | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Azure OpenAI-Modelle | Unterstützter Pay-as-you-go-Bereitstellungstyp | Pay-as-you-go oder bereitgestellte Durchsatzkapazität; modell-/regionsabhängig |
+| AI-Suche | Free/Basic innerhalb der Grenzen | Basic- oder Standard-Stufe, bemessen an Index, Replikaten und Abfragelast |
 
 ---
 
 ## 🔗 Navigation
 
 | Richtung | Kapitel |
-|-----------|---------|
+|----------|---------|
 | **Vorheriges** | [Kapitel 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
 | **Nächstes** | [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md) |
 
@@ -92,8 +92,8 @@ azd env get-values
 
 ## 📖 Verwandte Ressourcen
 
-- [Konfigurationsleitfaden](../chapter-03-configuration/configuration.md)
-- [Bereitstellungsleitfaden](../chapter-04-infrastructure/deployment-guide.md)
+- [Konfigurationsanleitung](../chapter-03-configuration/configuration.md)
+- [Bereitstellungsanleitung](../chapter-04-infrastructure/deployment-guide.md)
 - [Häufige Probleme](../chapter-07-troubleshooting/common-issues.md)
 
 ---

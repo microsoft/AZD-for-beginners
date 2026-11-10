@@ -1,60 +1,58 @@
 # 6. تفكيك البنية التحتية
 
-!!! tip "بحلول نهاية هذه الوحدة ستكون قادرًا على"
+!!! tip "بنهاية هذه الوحدة، ستتمكن من"
 
-    - [ ] فهم أهمية تنظيف الموارد وإدارة التكاليف
-    - [ ] استخدام `azd down` لإلغاء توفير البنية التحتية بأمان
-    - [ ] استعادة خدمات Azure AI المحذوفة مؤقتًا عند الحاجة
-    - [ ] **Lab 6:** تنظيف موارد Azure والتحقق من الإزالة
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## تمارين إضافية
 
-قبل أن نقوم بتفكيك المشروع، خُذ بضع دقائق للقيام ببعض الاستكشاف الحر.
+قبل تفكيك المشروع، خذ بضع دقائق للقيام ببعض الاستكشاف المفتوح.
 
-!!! info "جرب هذه المقترحات للاستكشاف"
+!!! info "جرب هذه المحفزات للاستكشاف"
 
-    **جرّب GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. اسأل: `What other AZD templates could I try for multi-agent scenarios?`
-    2. اسأل: `How can I customize the agent instructions for a healthcare use case?`
-    3. اسأل: `What environment variables control cost optimization?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **استكشاف بوابة Azure:**
+    **Explore the Azure Portal:**
     
-    1. راجع مقاييس Application Insights لنشرك
-    2. تحقق من تحليل التكاليف للموارد الموفرة
-    3. استكشف ملعب الوكيل في بوابة Microsoft Foundry مرة أخرى
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## إلغاء توفير البنية التحتية
+## إزالة تجهيز البنية التحتية
 
 1. تفكيك البنية التحتية سهل كما يلي:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. يضمن الوسيط `--purge` أنه يقوم أيضًا بمسح موارد Cognitive Service المحذوفة مؤقتًا، وبالتالي تحرير الحصة المخصصة التي تحتفظ بها هذه الموارد. عند الانتهاء سترى شيئًا مثل هذا:
+1. تأكد من البيئة المختارة وراجع الموارد المراد حذفها. هذا الإجراء يزيل موارد Azure وقد يدمر البيانات. احتفظ برسالة التأكيد لهذه العملية التعليمية. عند الانتهاء سترى مخرجات مشابهة لـ:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (اختياري) إذا قمت الآن بتشغيل `azd up` مرة أخرى، ستلاحظ أن نموذج gpt-4.1 يتم نشره لأنه تم تغيير متغير البيئة (وحفظه) في المجلد المحلي `.azure`. 
+1. تحقق من الحذف في البوابة الالكترونية وتفقد الموارد خارج نطاق النشر. تقارير التكلفة وتحديثات الحصص قد تتأخر. تبقى إعدادات `.azure` المحلية ما لم تقم بحذفها صراحة.
 
-      هنا عمليات نشر النماذج **قبل**:
+1. يطلب `azd down --purge` أيضاً الحذف الدائم للموارد المحذوفة ناعماً المدعومة. استخدمه فقط عندما لا تحتاج إلى الاسترداد وتفهم سياسات الاحتفاظ/الحماية من الحذف. لا يضمن تحرير الحصة فورياً.
 
-      ![قبل](../../../../../translated_images/ar/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      وهنا هو **بعد**:
-      ![بعد](../../../../../translated_images/ar/14-deploy-new.f7f3c355a3cf7299.webp)
+1. لا تعيد النشر فقط للتحقق من التنظيف. يمكن لإجراء `azd up` مقصود لاحقاً إعادة إنشاء الموارد باستخدام المدخلات المحلية المتبقية، ويرافقه رسوم جديدة. تحديثات النموذج عادة تستخدم تغييرات التجهيز المدعومة، لا التفكيك.
 
 ---
 

@@ -1,93 +1,97 @@
-# دليل النشر - إتقان عمليات نشر AZD
+# دليل النشر - إتقان نشرات AZD
 
-**تنقل الفصل:**
-- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
-- **📖 الفصل الحالي**: الفصل 4 - البنية التحتية كرمز & النشر
+**التنقل بين الفصول:**
+- **🏠 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
+- **📖 الفصل الحالي**: الفصل 4 - البنية التحتية ككود والنشر
 - **⬅️ الفصل السابق**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)
-- **➡️ التالي**: [Provisioning Resources](provisioning.md)
-- **🧩 أيضاً في هذا الفصل**: [كتابة قالبك الخاص](custom-templates.md)
-- **🚀 الفصل التالي**: [الفصل 5: حلول الذكاء الاصطناعي متعددة الوكلاء](../../examples/retail-scenario.md)
+- **➡️ التالي**: [توفير الموارد](provisioning.md)
+- **🧩 أيضًا في هذا الفصل**: [كتابة قالبك الخاص](custom-templates.md)
+- **🚀 الفصل التالي**: [الفصل 5: حلول الذكاء الاصطناعي المتعددة الوكلاء](../../examples/retail-scenario.md)
 
 ## مقدمة
 
-يغطي هذا الدليل الشامل كل ما تحتاج لمعرفته حول نشر التطبيقات باستخدام Azure Developer CLI، من عمليات النشر الأساسية بأمر واحد إلى السيناريوهات الإنتاجية المتقدمة مع خطوط تنفيذ مخصصة، وبيئات متعددة، وتكامل CI/CD. اتقن دورة حياة النشر الكاملة من خلال أمثلة عملية وأفضل الممارسات.
+> تمت المراجعة مقابل `azd 1.37.2` (نوفمبر 2026). تستخدم الأوامر باش؛ تتطلب أمثلة JSON `jq`. باستثناء التمرين المحدد للمهمة، الأمثلة المتقدمة هي **مقتطفات تكامل**: قدم مصدر البنية التحتية والاختبارات والسكربتات الخاصة بك. لم يتم تنفيذ نشرات Azure في هذا الاستعراض.
+
+يغطي هذا الدليل الشامل كل ما تحتاج لمعرفته حول نشر التطبيقات باستخدام Azure Developer CLI، من النشرات البسيطة بأمر واحد إلى السيناريوهات المتقدمة في الإنتاج مع الخطافات المخصصة، والبيئات المتعددة، والتكامل مع CI/CD. إتقان دورة حياة النشر الكاملة من خلال أمثلة عملية وأفضل الممارسات.
 
 ## أهداف التعلم
 
-بإكمال هذا الدليل، ستتمكن من:
-- إتقان جميع أوامر وتدفقات عمل نشر Azure Developer CLI
-- فهم دورة حياة النشر الكاملة من التزويد إلى المراقبة
-- تنفيذ خطوط تنفيذ نشر مخصصة لأتمتة ما قبل وما بعد النشر
-- تهيئة بيئات متعددة بمعلمات خاصة بكل بيئة
-- إعداد استراتيجيات نشر متقدمة بما في ذلك النشر الأزرق-الأخضر ونشر الكناري
-- دمج عمليات نشر azd مع خطوط CI/CD وسير عمل DevOps
+باكمال هذا الدليل، ستتمكن من:
+- إتقان جميع أوامر ونماذج تشغيل نشر Azure Developer CLI
+- فهم دورة حياة النشر من التزويد إلى المراقبة
+- تنفيذ خطافات نشر مخصصة لأتمتة ما قبل وما بعد النشر
+- تكوين بيئات متعددة مع معلمات مخصصة لكل بيئة
+- إعداد استراتيجيات نشر متقدمة بما في ذلك النشر الأزرق-الأخضر والكناري
+- دمج نشرات azd مع خطوط أنابيب CI/CD وتدفقات عمل DevOps
 
 ## نتائج التعلم
 
-عند الإكمال، ستتمكن من:
-- تنفيذ واستكشاف أخطاء جميع تدفقات عمل نشر azd بشكل مستقل
-- تصميم وتنفيذ أتمتة نشر مخصصة باستخدام الخطافات (hooks)
-- تهيئة نشرات جاهزة للإنتاج مع الأمان والمراقبة المناسبين
-- إدارة سيناريوهات نشر متعددة البيئات والمعقدة
+عند الانتهاء، ستتمكن من:
+- تنفيذ واستكشاف جميع نماذج نشر azd بشكل مستقل
+- تصميم وتنفيذ أتمتة نشر مخصصة باستخدام الخطافات
+- تكوين نشرات جاهزة للإنتاج مع الأمان والمراقبة المناسبة
+- إدارة سيناريوهات النشر المعقدة متعددة البيئات
 - تحسين أداء النشر وتنفيذ استراتيجيات التراجع
-- دمج عمليات نشر azd في ممارسات DevOps للمؤسسات
+- دمج نشرات azd في ممارسات DevOps المؤسسية
 
 ## نظرة عامة على النشر
 
-يوفر Azure Developer CLI عدة أوامر نشر:
-- `azd up` - تدفق عمل كامل (تزويد + نشر)
+توفر Azure Developer CLI عدة أوامر للنشر:
+- `azd up` - نموذج تشغيل كامل (التزويد + النشر)
 - `azd provision` - إنشاء/تحديث موارد Azure فقط
 - `azd deploy` - نشر كود التطبيق فقط
 - `azd package` - بناء وتغليف التطبيقات
 
-## سير عمل النشر الأساسي
+## نماذج النشر الأساسية
 
 ### النشر الكامل (azd up)
-سير العمل الأكثر شيوعًا للمشاريع الجديدة:
+النموذج الأكثر شيوعًا للمشاريع الجديدة:
 ```bash
-# نشر كل شيء من الصفر
+# Deploy everything from scratch
 azd up
 
-# نشر ببيئة محددة
+# Deploy with specific environment
 azd up --environment production
 
-# نشر بمعلمات مخصصة
-azd up --parameter location=westus2 --parameter sku=P1v2
+# Configure a location for the selected environment before first provisioning
+azd env set AZURE_LOCATION westus2
+# SKU changes must be wired into your template's parameter file/Bicep.
+azd up
 ```
 
 ### نشر البنية التحتية فقط
 عندما تحتاج فقط إلى تحديث موارد Azure:
 ```bash
-# توفير/تحديث البنية التحتية
+# Provision/update infrastructure
 azd provision
 
-# التوفير مع تشغيل تجريبي لمعاينة التغييرات
+# Provision with dry-run to preview changes
 azd provision --preview
 
-# توفير خدمات محددة
-azd provision --service database
+# Provisioning applies infrastructure, not an azure.yaml service selection.
+# In a configured layered project, use: azd provision <layer-name>
 ```
 
 ### نشر الكود فقط
 لتحديثات التطبيق السريعة:
 ```bash
-# نشر جميع الخدمات
+# Deploy all services
 azd deploy
 
-# المخرجات المتوقعة:
-# جارٍ نشر الخدمات (azd deploy)
-# - web: جارٍ النشر... تم
-# - api: جارٍ النشر... تم
-# نجاح: اكتمل النشر الخاص بك في دقيقتين و15 ثانية
+# Expected output:
+# Deploying services (azd deploy)
+# - web: Deploying... Done
+# - api: Deploying... Done
+# SUCCESS: Your deployment completed in 2 minutes 15 seconds
 
-# نشر خدمة محددة
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# نشر باستخدام معاملات بناء مخصصة
-azd deploy --service api --build-arg NODE_ENV=production
+# Docker build arguments belong in azure.yaml: services.api.docker.buildArgs
+# They are not an azd deploy --build-arg flag.
 
-# التحقق من النشر
+# Verify deployment
 azd show --output json | jq '.services'
 ```
 
@@ -96,40 +100,41 @@ azd show --output json | jq '.services'
 بعد أي نشر، تحقق من النجاح:
 
 ```bash
-# تأكد من أن جميع الخدمات تعمل
+# Inspect configured service targets and ingress URLs (not a health check)
 azd show
 
-# اختبر نقاط نهاية الحالة الصحية
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Test health endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
-curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
-curl -f "$API_URL/health" || echo "❌ API health check failed"
+curl -f "$WEB_URL" || { echo "❌ Web request failed"; exit 1; }
+# For the todo-nodejs-mongo template, /lists exists; /health does not.
+curl -f "$API_URL/lists" || { echo "❌ API request failed"; exit 1; }
 
-# راقب وجود أخطاء (يفتح في المتصفح بشكل افتراضي)
+# Monitor for errors (opens in browser by default)
 azd monitor --logs
 ```
 
 **معايير النجاح:**
-- ✅ جميع الخدمات تظهر حالة "تشغيل"
-- ✅ نقاط النهاية الصحية ترجع HTTP 200
-- ✅ لا توجد سجلات أخطاء في آخر 5 دقائق
+- ✅ يتحقق `azd show` من أهداف الخدمة/عناوين URL المتوقعة
+- ✅ الطلبات إلى مسارات التطبيق الفعلية تعيد الحالة والمحتوى المتوقع
+- ✅ لا توجد سجلات خطأ في آخر 5 دقائق
 - ✅ التطبيق يستجيب لطلبات الاختبار
 
 ## 🏗️ فهم عملية النشر
 
 ### جديد على الخطافات؟ ابدأ هنا
 
-الـ "hook" هو أمر يقوم azd بتشغيله تلقائيًا في لحظة محددة من عملية النشر—قبل أو بعد التزويد، وقبل أو بعد نشر الكود. تتيح لك الخطافات أتمتة المهام الصغيرة التي تحيط دائمًا بعملية النشر: تهيئة قاعدة بيانات، تشغيل الترحيلات، بناء الأصول، أو إجراء اختبارات سريعة للتطبيق الحي.
+**الخطاف** هو أمر ينفذه azd تلقائيًا في لحظة محددة من عملية النشر—قبل أو بعد التزويد، وقبل أو بعد نشر الكود. يسمح لك بأتمتة المهام الصغيرة التي تحيط دائمًا بعملية النشر: تهيئة قاعدة بيانات، تشغيل الترحيلات، بناء الأصول، أو اختبار التطبيق الحي.
 
-| Hook | يعمل… | الاستخدام الشائع |
+| الخطاف | يُشغل… | الاستخدام الشائع |
 |------|-------|------------|
-| `preprovision` | قبل إنشاء الموارد | التحقق من المتطلبات المسبقة، تسجيل الدخول إلى سجل |
+| `preprovision` | قبل إنشاء الموارد | التحقق من المتطلبات الأساسية، تسجيل الدخول إلى سجل |
 | `postprovision` | بعد وجود الموارد | تكوين الموارد، إعداد قاعدة البيانات |
 | `predeploy` | قبل نشر الكود | بناء أصول الواجهة الأمامية، تشغيل اختبارات الوحدة |
-| `postdeploy` | بعد أن يصبح الكود متاحًا | تشغيل ترحيلات قاعدة البيانات، اختبار سريع للنقطة النهائية |
+| `postdeploy` | بعد نشر الكود | تشغيل ترحيلات قاعدة البيانات، اختبار نقاط النهاية |
 
-تُخزن الخطافات في ملفك `azure.yaml`. إليك أصغر مثال ممكن—يطبع رسالة فقط بعد النشر:
+توجد الخطافات في ملف `azure.yaml`. إليك أصغر مثال ممكن—يكتفي بطباعة رسالة بعد النشر:
 
 ```yaml
 # azure.yaml
@@ -139,13 +144,13 @@ hooks:
     run: echo "Deployment finished! 🎉"
 ```
 
-هذا كل شيء—في المرة التالية التي تشغل فيها `azd up`، تُطبع الرسالة تلقائيًا. يمكنك أيضًا تشغيل خطاف بمفرده، بدون نشر كامل، وهو أمر رائع للاختبار:
+هذا كل شيء—في المرة التالية التي تشغل فيها `azd up`، سيتم طباعة الرسالة تلقائيًا. يمكنك أيضًا تشغيل خطاف بمفرده، دون نشر كامل، وهو رائع للاختبار:
 
 ```bash
 azd hooks run postdeploy
 ```
 
-توضح المراحل أدناه خطافات من العالم الحقيقي (ترحيلات، اختبارات، تحقق) لكل مرحلة.
+توضح المراحل أدناه خطافات من العالم الحقيقي (الترحيلات، الاختبارات، التحقق) لكل مرحلة.
 
 ### المرحلة 1: خطافات ما قبل التزويد
 ```yaml
@@ -162,10 +167,10 @@ hooks:
 ```
 
 ### المرحلة 2: تزويد البنية التحتية
-- يقرأ قوالب البنية التحتية (Bicep/Terraform)
-- ينشئ أو يحدث موارد Azure
-- يكوّن الشبكات والأمان
-- يضبط المراقبة والتسجيل
+- قراءة قوالب البنية التحتية (Bicep/Terraform)
+- إنشاء أو تحديث موارد Azure
+- تكوين الشبكات والأمان
+- إعداد المراقبة والسجلات
 
 ### المرحلة 3: خطافات ما بعد التزويد
 ```yaml
@@ -181,9 +186,9 @@ hooks:
 ```
 
 ### المرحلة 4: تغليف التطبيق
-- يبني كود التطبيق
-- ينشئ حزم النشر
-- يجمع حزمًا للمنصة المستهدفة (حاويات، ملفات ZIP، إلخ)
+- بناء كود التطبيق
+- إنشاء عناصر النشر
+- التغليف للمنصة المستهدفة (حاويات، ملفات ZIP، إلخ)
 
 ### المرحلة 5: خطافات ما قبل النشر
 ```yaml
@@ -199,9 +204,9 @@ hooks:
 ```
 
 ### المرحلة 6: نشر التطبيق
-- ينشر التطبيقات المعبأة إلى خدمات Azure
-- يحدث إعدادات التكوين
-- يبدأ/يعيد تشغيل الخدمات
+- نشر التطبيقات المعبأة إلى خدمات Azure
+- تحديث إعدادات التكوين
+- بدء/إعادة تشغيل الخدمات
 
 ### المرحلة 7: خطافات ما بعد النشر
 ```yaml
@@ -213,14 +218,14 @@ hooks:
       npm run test:integration
       
       echo "Warming up applications..."
-      curl https://${WEB_URL}/health
+      curl --fail "$WEB_URL/health"
 ```
 
-### معالجة أخطاء الخطافات
+### التعامل مع أخطاء الخطاف
 
-بشكل افتراضي، **إذا خرج أمر خطاف برمز خروج غير صفري، يتوقف azd عن العملية بأكملها.** هذا عادة ما يكون ما تريده—يجب أن يتوقف النشر إذا فشلت ترحيلة ما، وليس شحن تطبيق معطل. لكن هذا يعني أن الخطافات يجب أن تُكتب بعناية.
+بشكل افتراضي، **إذا خرج أمر الخطاف برمز غير صفري، يتوقف azd عن العملية بأكملها.** هذا غالبًا ما يكون مرغوبًا—فشل ترحيل يجب أن يوقف النشر وليس شحن تطبيق معطل. لكن هذا يعني وجوب كتابة الخطافات بعناية.
 
-**1. اجعل الفشل صارخًا ومتعمدًا.** يفشل الخطاف عندما يعيد آخر أمر فيه رمز خروج غير صفري. في سكربتات الشل، أضف `set -e` حتى يتوقف الخطاف عند أول أمر يفشل بدلًا من الاستمرار بصمت:
+**1. اجعل الأخطاء واضحة ومقصودة.** يفشل الخطاف عندما يرجع الأمر الأخير به رمز خروج غير صفري. في سكربتات الشل، أضف `set -e` حتى يتوقف الخطاف عند أول أمر فاشل بدلاً من الاستمرار بصمت:
 
 ```yaml
 hooks:
@@ -232,24 +237,24 @@ hooks:
       npm run db:migrate
 ```
 
-**2. اسمح لخطاف أن يفشل دون إيقاف azd.** للخطوات غير الحرجة (تدفئة ذاكرة مخبأ اختيارية، إشعار بأفضل جهد)، اضبط `continueOnError: true`. يسجل azd الفشل لكنه يستمر:
+**2. اسمح لفشل الخطاف دون إيقاف azd.** للخطوات غير الحرجة (تسخين كاش اختياري، إشعار بأفضل جهد)، اضبط `continueOnError: true`. azd يسجل الفشل لكنه يستمر:
 
 ```yaml
 hooks:
   postdeploy:
     shell: sh
     continueOnError: true         # a failure here won't fail 'azd up'
-    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+    run: curl -f "$WEB_URL/warmup"
 ```
 
-**3. اختبر الخطافات بشكل معزول قبل التشغيل الكامل.** ليس عليك تشغيل `azd up` لتصحيح خطاف—شغله بمفرده وكرر الاختبار بسرعة:
+**3. اختبر الخطافات بشكل منفصل قبل التشغيل الكامل.** لست مضطرًا لتشغيل `azd up` لتصحيح الخطاف—شغّله بمفرده وكرر بسرعة:
 
 ```bash
-azd hooks run predeploy          # يشغّل فقط هوك ما قبل النشر.
+azd hooks run predeploy          # runs the matching project/service hooks
 azd hooks run postdeploy --service api
 ```
 
-**4. راقب الأصداف الخاصة بنظام التشغيل.** الخطاف الذي يستخدم `shell: pwsh` يحتاج إلى PowerShell مثبتًا على الجهاز الذي يشغله (بما في ذلك وكلاء CI). استخدم `shell: sh` لأوسع قابلية للتشغيل، أو قدم متغيرات لكل من `windows` و`posix`:
+**4. انتبه لأنظمة الشل الخاصة بنظام التشغيل.** خطاف يستخدم `shell: pwsh` يحتاج إلى PowerShell مثبت على الجهاز الذي يشغله (بما في ذلك وكلاء CI). استخدم `shell: sh` لأوسع قابلية للتنقل، أو قدّم متغيرات `windows` و `posix` معًا:
 
 ```yaml
 hooks:
@@ -262,7 +267,7 @@ hooks:
       run: ./scripts/setup.ps1
 ```
 
-> **نصيحة تصحيح:** شغّل أي أمر azd مع `--debug` لرؤية سطر أمر الخطاف الدقيق ومخرجاته الكاملة—مفيد جدًا عندما يعمل الخطاف محليًا لكنه يفشل في CI.
+> **نصيحة تصحيح:** شغل أي أمر azd مع `--debug` لرؤية أمر الخطاف الدقيق ومخرجاته كاملة—هذا لا يقدر بثمن عندما يعمل الخطاف محليًا لكنه يفشل في CI.
 
 ## 🎛️ تكوين النشر
 
@@ -273,50 +278,50 @@ services:
   web:
     project: ./src/web
     host: staticwebapp
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    dist: dist
     
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
     env:
-      - name: NODE_ENV
-        value: production
-      - name: API_VERSION
-        value: "1.0.0"
+      NODE_ENV: production
+      API_VERSION: "1.0.0"
         
   worker:
     project: ./src/worker
     host: function
-    runtime: node
-    buildCommand: npm install --production
+    language: js
 ```
 
 ### تكوينات خاصة بالبيئة
+
+هذه قيم محلية لـ azd فقط. قم بتعيينها صراحة إلى تكوين البنية التحتية/وقت التشغيل. عادةً ما يكون `NODE_ENV` هو `production` لتطبيق Node المنشور، بما في ذلك نشرات الاختبار؛ استخدم متغير خاص بالتطبيق لتحديد مراحل النشر.
+
 ```bash
-# بيئة التطوير
+# Development environment
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# بيئة ما قبل الإنتاج
+# Staging environment
 azd env new staging
-azd env set NODE_ENV staging
+azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# بيئة الإنتاج
+# Production environment
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 سيناريوهات النشر المتقدمة
+## 🔧 سيناريوهات نشر متقدمة
 
 ### تطبيقات متعددة الخدمات
 ```yaml
@@ -354,52 +359,53 @@ services:
     host: function
 ```
 
-### النشر الأزرق-الأخضر
+### نشرات أزرق-أخضر
+
+**مخطط تشغيل توضيحي:** يجب توفير كلتا البيئتين، طبقة مشتركة لتوجيه المرور، والسكريبتين أدناه. لا يقوم azd بتحويل المرور أو التحقق من جاهزية التراجع تلقائيًا. احتفظ بالبيئة الخضراء حتى ينجح البيئة الزرقاء بالاختبار ولا حاجة للتراجع.
+
 ```bash
-# إنشاء بيئة زرقاء
+# Create blue environment
 azd env new production-blue
 azd up --environment production-blue
 
-# اختبار البيئة الزرقاء
+# Test blue environment
 ./scripts/test-environment.sh production-blue
 
-# توجيه حركة المرور إلى البيئة الزرقاء (تحديث يدوي لـ DNS/موازن التحميل)
+# Switch traffic to blue (manual DNS/load balancer update)
 ./scripts/switch-traffic.sh production-blue
 
-# تنظيف البيئة الخضراء
+# Clean up green environment
 azd env select production-green
 azd down --force
 ```
 
-### نشر الكناري
-```yaml
-# azure.yaml - Configure traffic splitting
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    trafficSplit:
-      - revision: stable
-        percentage: 90
-      - revision: canary
-        percentage: 10
+### نشرات الكناري
+```bash
+# Requires an existing Container App in multiple-revision mode and two
+# ready revisions. Replace placeholders with actual revision names.
+az containerapp ingress traffic set \
+  --name "<app-name>" --resource-group "<rg-name>" \
+  --revision-weight "<stable-revision>=90" "<canary-revision>=10"
 ```
 
-### النشر المرحلي
+تقسيم المرور ينتمي إلى تكوين تطبيقات الحاويات (Bicep أو Azure CLI)، وليس خاصية `azure.yaml` `trafficSplit` في azd. يجب أن تحافظ عمليات المعاينة/التزويد والعمليات التالية على وضع المراجعة وقواعد التوجيه التي اخترتها.
+
+### نشرات مرحلية
 ```bash
 #!/bin/bash
 # deploy-staged.sh
+set -e
 
 echo "Deploying to development..."
 azd env select dev
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running dev tests..."
 ./scripts/test-environment.sh dev
 
 echo "Deploying to staging..."
 azd env select staging
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running staging tests..."
 ./scripts/test-environment.sh staging
@@ -409,7 +415,7 @@ read -p "Deploy to production? (y/N): " confirm
 if [[ $confirm == [yY] ]]; then
     echo "Deploying to production..."
     azd env select production
-    azd up --confirm-with-no-prompt
+    azd up --no-prompt
     
     echo "Running production smoke tests..."
     ./scripts/test-environment.sh production
@@ -424,28 +430,23 @@ services:
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        BUILD_VERSION: ${BUILD_VERSION}
-        NODE_ENV: production
+        - BUILD_VERSION=${BUILD_VERSION}
+        - NODE_ENV=production
     env:
-      - name: DATABASE_URL
-        value: ${DATABASE_URL}
-    secrets:
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-    scale:
-      minReplicas: 1
-      maxReplicas: 10
+      NODE_ENV: production
 ```
 
-### تحسين Dockerfile متعدد المراحل
+قم بتكوين الأسرار وقت التشغيل مع `configuration.secrets`/`secretRef` (أو مراجع Key Vault) والتحجيم مع `template.scale` في بنية تطبيق الحاوية. لا تخترع خصائص `secrets` أو `scale` على مستوى الخدمة في `azure.yaml`.
+
+### تحسين Dockerfile متعددة المراحل
 ```dockerfile
 # Dockerfile
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 WORKDIR /app
 COPY package*.json ./
 
@@ -455,11 +456,12 @@ COPY . .
 CMD ["npm", "run", "dev"]
 
 FROM base AS build
-RUN npm ci --only=production
+RUN npm ci
 COPY . .
 RUN npm run build
+RUN npm prune --omit=dev
 
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
@@ -470,77 +472,89 @@ CMD ["npm", "start"]
 
 ## ⚡ تحسين الأداء
 
-### نشرات خاصة بالخدمة
+### نشر خاص بالخدمة
 ```bash
-# نشر خدمة معينة لتسريع عملية التكرار
-azd deploy --service web
-azd deploy --service api
+# Deploy a specific service for faster iteration
+azd deploy web
+azd deploy api
 
-# نشر جميع الخدمات
+# Deploy all services
 azd deploy
 ```
 
-### تخزين مؤقت للبناء
+### تخزين بناء مؤقت
 ```yaml
-# azure.yaml - Configure build commands
+# azure.yaml fragment - assumes package.json has a build script
 services:
   web:
     project: ./src/web
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    host: appservice
+    dist: dist
 ```
 
-### نشرات كود فعّالة
+يستخدم نموذج Node القياسي سكربتات الحزمة؛ يمكن لخطافات خدمة `prepackage` إضافة الخطوات المطلوبة. تخزين طبقة Docker مؤقتًا منفصل عن تحديد أمر بناء الخدمة.
+
+### نشرات كود فعالة
 ```bash
-# استخدم azd deploy (وليس azd up) للتغييرات المتعلقة بالكود فقط
-# هذا يتخطى توفير البنية التحتية ويكون أسرع بكثير
+# Use azd deploy (not azd up) for code-only changes
+# This skips infrastructure provisioning and is much faster
 azd deploy
 
-# انشر خدمة محددة لأسرع تكرار
-azd deploy --service api
+# Deploy specific service for fastest iteration
+azd deploy api
 ```
 
 ## 🔍 مراقبة النشر
 
 ### مراقبة النشر في الوقت الحقيقي
 ```bash
-# راقب التطبيق في الوقت الفعلي
+# Monitor application in real-time
 azd monitor --live
 
-# عرض سجلات التطبيق
+# View application logs
 azd monitor --logs
 
-# تحقق من حالة النشر
+# Check deployment status
 azd show
 ```
 
 ### فحوصات الصحة
-```yaml
-# azure.yaml - Configure health checks
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    healthCheck:
-      path: /health
-      interval: 30s
-      timeout: 10s
-      retries: 3
+```bicep
+// Partial Container App container definition:
+// merge into properties.template.containers[] in your Bicep resource.
+probes: [
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 3000
+      scheme: 'HTTP'
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+    timeoutSeconds: 10
+    failureThreshold: 3
+  }
+]
 ```
+
+يجب أن ينفذ تطبيقك `/health`؛ هذه غير مزودة تلقائيًا من azd. لا توجد خاصية خدمة `azure.yaml` `healthCheck` عامة.
 
 ### التحقق بعد النشر
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
+set -e
 
 echo "Validating deployment..."
 
-# تحقق من صحة التطبيق
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Check application health
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
 echo "Testing web application..."
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Web application is healthy"
 else
     echo "❌ Web application health check failed"
@@ -548,7 +562,7 @@ else
 fi
 
 echo "Testing API..."
-if curl -f "$API_URL/health"; then
+if curl -f "$API_URL/lists"; then
     echo "✅ API is healthy"
 else
     echo "❌ API health check failed"
@@ -565,81 +579,51 @@ echo "✅ Deployment validation completed successfully"
 
 ### إدارة الأسرار
 ```bash
-# خزن الأسرار بأمان
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
-azd env set API_KEY "your-api-key" --secret
-
-# الإشارة إلى الأسرار في azure.yaml
+# Interactive Key Vault reference setup; requires appropriate vault permissions
+azd env set-secret DATABASE_PASSWORD
+azd env set-secret JWT_SECRET
+azd env set-secret API_KEY
 ```
 
-```yaml
-services:
-  api:
-    secrets:
-      - name: database-password
-        value: ${DATABASE_PASSWORD}
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-```
+`azd env set ... --secret` غير صالح. قيم البيئة العادية نص واضح محلي؛ لا تفترض أن أوامر القراءة تخفيها. الأوامر أعلاه تحفظ مراجع Key Vault، لكن بنيتك/تطبيقك لا يزال يجب أن يستهلك الأسرار ويمنح هوية وقت التشغيل الوصول.
 
 ### أمان الشبكة
-```yaml
-# azure.yaml - Configure network security
-infra:
-  parameters:
-    enablePrivateEndpoints: true
-    allowedIPs:
-      - "203.0.113.0/24"  # Office IP range
-      - "198.51.100.0/24" # VPN IP range
-```
+أعلن واستخدم معلمات الشبكة في Bicep، وربطها في `infra/main.parameters.json`. لا يوجد تراكب `infra.parameters` عام في `azure.yaml`. نطاقات التوثيق النموذجية `203.0.113.0/24` و`198.51.100.0/24` ليست شبكات مكتب/VPN حقيقية؛ استبدلها بنطاقات شبكة مرخصة.
 
 ### إدارة الهوية والوصول
-```yaml
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    identity:
-      type: systemAssigned
-    keyVault:
-      - name: app-secrets
-        secrets:
-          - database-connection
-          - external-api-key
-```
+فعّل `identity` لتطبيق الحاوية في Bicep وخصص الدور المناسب على نطاق Key Vault لبيانات الطائرة. قم بتكوين الأسرار المسندة إلى Key Vault والمراجع في وقت التشغيل في ذلك المورد؛ `identity` و`keyVault` ليست خصائص خدمة azd عامة. انظر [المصادقة والهوية المدارية](../chapter-03-configuration/authsecurity.md).
 
 ## 🚨 استراتيجيات التراجع
 
-### التراجع السريع
+### تراجع سريع
 ```bash
-# AZD لا يدعم التراجع مضمّنًا. الأساليب الموصى بها:
+# AZD doesn't have built-in rollback. Recommended approaches:
 
-# الخيار 1: إعادة النشر من Git (مُوصى به)
-git revert HEAD  # التراجع عن الالتزام المُشكِل
+# Option 1: Redeploy from Git (recommended)
+git revert HEAD  # Revert the problematic commit
 git push
 azd deploy
 
-# الخيار 2: إعادة النشر لالتزام محدد
-git checkout <previous-commit-hash>
+# Option 2: Redeploy specific commit
+git checkout "<previous-commit-hash>"
 azd deploy
 git checkout main
 ```
 
-### التراجع للبنية التحتية
+### تراجع البنية التحتية
 ```bash
-# معاينة تغييرات البنية التحتية قبل التطبيق
+# Preview infrastructure changes before applying
 azd provision --preview
 
-# للتراجع عن تغييرات البنية التحتية، استخدم نظام التحكم في الإصدارات:
-git revert HEAD  # التراجع عن تغييرات البنية التحتية
-azd provision    # تطبيق حالة البنية التحتية السابقة
+# For infrastructure rollback, use version control:
+git revert HEAD  # Revert infrastructure changes
+azd provision    # Apply previous infrastructure state
 ```
 
-### التراجع لترحيلات قاعدة البيانات
+### تراجع ترحيل قاعدة البيانات
 ```bash
 #!/bin/bash
-# scripts/التراجع-عن-قاعدة-البيانات.sh
+# scripts/rollback-database.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -654,13 +638,13 @@ echo "Database rollback completed"
 
 ### تتبع أداء النشر
 ```bash
-# عرض حالة النشر الحالية
+# View current deployment status
 azd show
 
-# مراقبة التطبيق باستخدام Application Insights
+# Monitor application with Application Insights
 azd monitor --overview
 
-# عرض المقاييس المباشرة
+# View live metrics
 azd monitor --live
 ```
 
@@ -685,28 +669,28 @@ hooks:
 
 ### 1. اتساق البيئة
 ```bash
-# استخدم أسماء متسقة
+# Use consistent naming
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# حافظ على تطابق البيئات
+# Maintain environment parity
 ./scripts/sync-environments.sh
 ```
 
 ### 2. التحقق من البنية التحتية
 ```bash
-# معاينة تغييرات البنية التحتية قبل النشر
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# استخدم فحص الأسلوب (linting) لـ ARM/Bicep
+# Use ARM/Bicep linting
 az bicep lint --file infra/main.bicep
 
-# تحقّق من صحة بناء جملة Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 ```
 
-### 3. تكامل الاختبارات
+### 3. دمج الاختبارات
 ```yaml
 hooks:
   predeploy:
@@ -735,9 +719,9 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. التوثيق والتسجيل
+### 4. التوثيق والسجلات
 ```bash
-# توثيق إجراءات النشر
+# Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -745,64 +729,70 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## الخطوات التالية
 
-- [Provisioning Resources](provisioning.md) - غوص عميق في إدارة البنية التحتية
+- [توفير الموارد](provisioning.md) - استكشاف عميق لإدارة البنية التحتية
 - [التخطيط ما قبل النشر](../chapter-06-pre-deployment/capacity-planning.md) - خطط استراتيجية النشر الخاصة بك
-- [المشكلات الشائعة](../chapter-07-troubleshooting/common-issues.md) - حل مشكلات النشر
+- [المشاكل الشائعة](../chapter-07-troubleshooting/common-issues.md) - حل مشاكل النشر
 - [أفضل الممارسات](../chapter-07-troubleshooting/debugging.md) - استراتيجيات نشر جاهزة للإنتاج
 
-## 🎯 تمارين عملية على النشر
+## 🎯 تمارين نشر عملية
 
-### التمرين 1: سير عمل النشر التزايدي (20 دقيقة)
-**الهدف**: إتقان الفرق بين النشر الكامل والتزايدي
+### التمرين 1: نموذج نشر تكاملي (20 دقيقة)
+**الهدف**: اتقن الفرق بين النشر الكامل والتكاملي
+
+**نقطة البداية:** Bash، Node.js 22، Git، تسجيل دخول azd، واشتراك Azure مع أذونات النشر. شغّل في دليل جديد؛ توقع موارد App Service/Cosmos DB قابلة للفوترة. التوقيتات تعتمد على المنطقة والقالب.
 
 ```bash
-# النشر الأولي
+# Initial deployment
 mkdir deployment-practice && cd deployment-practice
-azd init --template todo-nodejs-mongo
-azd up
+azd init --template todo-nodejs-mongo .
+time azd up
 
-# تسجيل وقت النشر الأولي
+# Record initial deployment time
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# إجراء تغيير في الشيفرة
-echo "// Updated $(date)" >> src/api/src/server.js
+# Make a code change
+echo "// Updated $(date)" >> src/api/src/index.ts
 
-# نشر الشيفرة فقط (سريع)
+# Deploy only code (fast)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# مقارنة الأوقات
+# Compare times
 cat deployment-log.txt
 
-# تنظيف
+# Clean up
 azd down --force --purge
 ```
 
 **معايير النجاح:**
-- [ ] يستغرق النشر الكامل 5-15 دقيقة
-- [ ] يستغرق نشر الكود فقط 2-5 دقائق
-- [ ] تغييرات الكود تنعكس في التطبيق المنشور
-- [ ] البنية التحتية لم تتغير بعد `azd deploy`
+- [ ] سجل الوقت المنقضي لكلا الأمرين (لا يوجد زمن مضمون)
+- [ ] اكتمال كلا الأمرين بنجاح
+- [ ] تظل واجهة برمجة التطبيقات وظيفية؛ تعديل تعليق فقط ليس تغييرًا ظاهرًا في الواجهة
+- [ ] لم تتغير البنية التحتية بعد `azd deploy`
 
-**نتيجة التعلم**: `azd deploy` أسرع بنسبة 50-70% من `azd up` لتغييرات الكود
+**نتيجة التعلم**: `azd deploy` يتخطى تزويد البنية التحتية. قارن التوقيتات المقاسة بدلًا من افتراض زيادة سرعة بنسبة ثابتة.
 
 ### التمرين 2: خطافات نشر مخصصة (30 دقيقة)
 **الهدف**: تنفيذ أتمتة ما قبل وما بعد النشر
 
+**نقطة البداية:** المشروع `deployment-practice` المُهيأ أعلاه. إذا قمت بتنظيفه، شغّل `azd up` مرة أخرى قبل اختبار نشر الكود فقط. يستخدم التحقق أدناه سكربت بناء API الفعلي، وليس سكربت `test:unit` الجذري غير الموجود. تحتاج اختبارات قالب API إلى وصول قاعدة بيانات مُكون؛ ليست اختبارات وحدة معزولة.
+
 ```bash
-# إنشاء سكربت تحقق قبل النشر
+# Create pre-deploy validation script
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "⚠️ Running pre-deployment checks..."
 
-# التحقق من نجاح الاختبارات
-if ! npm run test:unit; then
-    echo "❌ Tests failed! Aborting deployment."
+# Install API dependencies and check its actual lint/TypeScript build
+npm --prefix src/api ci
+if ! npm --prefix src/api run build; then
+    echo "❌ Build validation failed! Aborting deployment."
     exit 1
 fi
 
-# التحقق من وجود تغييرات غير ملتزمة
+# Check for uncommitted changes
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -812,14 +802,15 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# إنشاء اختبار دخان بعد النشر
+# Create post-deploy smoke test
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "💨 Running smoke tests..."
 
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Health check passed!"
 else
     echo "❌ Health check failed!"
@@ -831,8 +822,11 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# إضافة هوكس إلى azure.yaml
-cat >> azure.yaml << 'EOF'
+# Merge the following into the EXISTING azure.yaml using your editor.
+# If hooks already exists, merge its children; never append a duplicate YAML key.
+```
+
+```yaml
 
 hooks:
   predeploy:
@@ -842,23 +836,26 @@ hooks:
   postdeploy:
     shell: sh
     run: ./scripts/post-deploy-test.sh
-EOF
+```
 
-# اختبار النشر مع الهوكس
+```bash
+# Test deployment with hooks
 azd deploy
 ```
 
 **معايير النجاح:**
-- [ ] سكربت ما قبل النشر يعمل قبل النشر
-- [ ] يتوقف النشر إذا فشلت الاختبارات
-- [ ] اختبار دخان ما بعد النشر يتحقق من الصحة
-- [ ] الخطافات تنفذ بالترتيب الصحيح
+- [ ] تشغيل سكربت ما قبل النشر قبل العملية
+- [ ] إلغاء النشر إذا فشل التحقق من البناء
+- [ ] اختبار ما بعد النشر يتحقق من الصحة
+- [ ] تنفيذ الخطافات بالترتيب الصحيح
 
-### التمرين 3: استراتيجية نشر متعددة البيئات (45 دقيقة)
-**الهدف**: تنفيذ سير عمل نشر مرحلي (dev → staging → production)
+### التمرين 3: استراتيجية النشر متعددة البيئات (45 دقيقة)
+**الهدف**: تنفيذ نموذج نشر مرحلي (تطوير → اختبار → إنتاج)
+
+**نقطة البداية:** نفس مشروع المهام المبدئي مع `jq`. أنشئ البيئات أدناه بقيم اشتراك/موقع فعلية (أو ضبط `AZURE_SUBSCRIPTION_ID`/`AZURE_LOCATION` في كل منها) **قبل** استدعاء سير العمل بدون مطالبات. يفشل عمداً بدلاً من اختلاق القيم المفقودة. استخدم فقط بيئات تدريب يمكن التخلص منها، وليس اشتراك إنتاج فعلي.
 
 ```bash
-# إنشاء برنامج نصي للنشر
+# Create deployment script
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -866,25 +863,25 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# الخطوة 1: النشر إلى بيئة التطوير
+# Step 1: Deploy to dev
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
 azd up --no-prompt
 
 echo "Running dev tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# الخطوة 2: النشر إلى بيئة ما قبل الإنتاج
+# Step 2: Deploy to staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
 azd up --no-prompt
 
 echo "Running staging tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# الخطوة 3: موافقة يدوية للإنتاج
+# Step 3: Manual approval for production
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -896,7 +893,7 @@ if [[ $confirm == "yes" ]]; then
     azd up --no-prompt
     
     echo "Running production smoke tests..."
-    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
     
     echo "
 ✅ Production deployment completed!"
@@ -907,74 +904,90 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# إنشاء بيئات
-azd env new dev
-azd env new staging
-azd env new production
+# Create environments
+# Reuse existing dev if you completed Exercise 1; create unused environments
+azd env select dev
+azd env new staging --subscription "<subscription-id>" --location eastus2
+azd env new production --subscription "<subscription-id>" --location eastus2
 
-# تشغيل نشر مرحلي
+# Run staged deployment
 ./deploy-staged.sh
+
+# After verification, delete each disposable deployment (review prompts)
+azd down --environment dev
+azd down --environment staging
+azd down --environment production
 ```
 
 **معايير النجاح:**
-- [ ] يتم النشر بنجاح في بيئة Dev
-- [ ] يتم النشر بنجاح في بيئة Staging
-- [ ] موافقة يدوية مطلوبة للإنتاج
-- [ ] جميع البيئات لديها فحوصات صحة عاملة
+- [ ] يتم نشر بيئة التطوير بنجاح
+- [ ] يتم نشر بيئة الاختبار بنجاح
+- [ ] يتطلب الموافقة اليدوية للإنتاج
+- [ ] جميع البيئات تحتوي على فحوصات صحة تعمل
 - [ ] يمكن التراجع إذا لزم الأمر
 
 ### التمرين 4: استراتيجية التراجع (25 دقيقة)
-**الهدف**: تنفيذ واختبار تراجع النشر باستخدام Git
+**الهدف**: تنفيذ واختبار التراجع عن النشر باستخدام Git
+
+**نقطة البداية:** نسخة تدريب معزولة من قالب المهام مع جميع المصدر الأساسي ملتزم، شجرة عمل Git نظيفة، وبيئة مضبوطة يمكن التخلص منها. لا تُدخل أخطاء مقصودة في مشروع إنتاج حقيقي. `APP_VERSION` أدناه هو للمتابعة فقط ما لم توصلها صراحة بالتطبيق.
 
 ```bash
-# نشر v1
+# Deploy v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# حفظ هاش الالتزام للإصدار v1
+# Save v1 commit hash
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# نشر v2 مع تغيير يكسر التوافق
-echo "throw new Error('Intentional break')" >> src/api/src/server.js
-git add . && git commit -m "v2 with intentional break"
+# Deploy v2 with breaking change
+echo "throw new Error('Intentional break');" >> src/api/src/index.ts
+git add src/api/src/index.ts
+git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
-azd deploy
+DEPLOY_FAILED=false
+azd deploy api || DEPLOY_FAILED=true
 
-# اكتشاف الفشل والتراجع
-if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+# Detect failure and rollback
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+if [ "$DEPLOY_FAILED" = true ] || ! curl -f "$API_URL/lists"; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # التراجع باستخدام git
+    # Rollback using git
     git revert HEAD --no-edit
     
-    # التراجع عن البيئة
+    # Rollback environment
     azd env set APP_VERSION "1.0.0"
     
-    # إعادة نشر v1
-    azd deploy
+    # Redeploy v1
+    azd deploy api
+    curl --fail "$API_URL/lists"
     
     echo "✅ Rolled back to v1.0.0"
 fi
+
+# Clean up the disposable deployment when finished
+azd down
 ```
 
 **معايير النجاح:**
 - [ ] يمكن اكتشاف فشل النشر
-- [ ] سكربت التراجع ينفذ تلقائيًا
-- [ ] يرجع التطبيق إلى حالة عمل
+- [ ] يتم تنفيذ سكريبت التراجع تلقائياً
+- [ ] يعود التطبيق إلى حالة العمل
 - [ ] تجتاز فحوصات الصحة بعد التراجع
 
 ## 📊 تتبع مقاييس النشر
 
-### تتبع أداء النشر
+### تتبع أداء نشر التطبيق الخاص بك
 
 ```bash
-# إنشاء نص برمجي لمقاييس النشر
+# Create deployment metrics script
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
 
 azd deploy "$@"
+DEPLOY_STATUS=$?
 
 END_TIME=$(date +%s)
 DURATION=$((END_TIME - START_TIME))
@@ -986,22 +999,23 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# سجل في ملف
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+# Log to file
+echo "$(date +%Y-%m-%dT%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+exit "$DEPLOY_STATUS"
 EOF
 
 chmod +x track-deployment.sh
 
-# استخدمه
+# Use it
 ./track-deployment.sh
 ```
 
 **حلل مقاييسك:**
 ```bash
-# عرض سجل النشر
+# View deployment history
 cat deployment-metrics.csv
 
-# حساب متوسط وقت النشر
+# Calculate average deployment time
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
@@ -1016,7 +1030,7 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 **التنقل**
 - **الدرس السابق**: [مشروعك الأول](../chapter-01-foundation/first-project.md)
-- **الدرس التالي**: [Provisioning Resources](provisioning.md)
+- **الدرس التالي**: [توفير الموارد](provisioning.md)
 
 ---
 
