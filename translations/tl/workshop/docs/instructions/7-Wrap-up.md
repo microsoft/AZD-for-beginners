@@ -1,110 +1,110 @@
-# 7. Pagwawakas at Susunod na Mga Hakbang
+# 7. Pagwawakas at Mga Susunod na Hakbang
 
-!!! tip "ANG MGA PANGUNAHING PAALALA AY"
+!!! tip "ANG MGA PANGUNAHING MENSAHE NA DAPAT DALUHIN AY"
 
-    - [ ] Pinapabilis ng mga AZD template ang pagbuo ng mga aplikasyon ng AI mula sa loob ng mga araw hanggang sa mga oras
-    - [ ] Nagbibigay ang metodolohiyang Discovery → Deployment → Customization ng isang estrukturadong landas ng pagkatuto
-    - [ ] Pinapahintulutan ng GitHub Copilot na may MCP servers ang paggalugad ng komplikadong mga codebase gamit ang natural na wika
-    - [ ] Nagbibigay ang Microsoft Foundry ng naka-built-in na obserbasyon, ebalwasyon, at pagsubok sa seguridad
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. Ano ang Iyong Nakamit
+## 1. Ano ang Iyong Natapos
 
 Binabati kita! Sa workshop na ito, matagumpay mong nagawa ang mga sumusunod:
 
-| Modul | Nakamit |
+| Module | Natapos |
 |:---|:---|
-| **Modul 1** | Nadiskubre ang Azure Developer CLI at pumili ng AI template |
-| **Modul 2** | Na-deploy at na-validate ang kumpletong solusyon para sa AI agents |
-| **Modul 3** | Sinuri nang detalyado ang template upang maunawaan ang arkitektura nito |
-| **Modul 4** | Ineksplora ang `azure.yaml` na konfigurasyon at mga lifecycle hook |
-| **Modul 5** | Inangkop ang template para sa iyong sariling senaryo |
-| **Modul 6** | Maingat na tinanggal ang imprastruktura at pinamahalaan ang mga resource |
+| **Module 1** | Natuklasan ang Azure Developer CLI at pumili ng AI template |
+| **Module 2** | Nai-deploy at na-validate ang kumpletong solusyon ng AI agents |
+| **Module 3** | Binuwag ang template upang maunawaan ang arkitektura nito |
+| **Module 4** | Na-explore ang `azure.yaml` configuration at lifecycle hooks |
+| **Module 5** | Na-customize ang template para sa iyong sariling scenario |
+| **Module 6** | Maingat na na-demolish ang infrastructure at na-manage ang mga resources |
 
 ---
 
-## 2. Mga Pangunahing Konseptong Natutunan
+## 2. Mga Pangunahing Konseptong Napag-aralan
 
 ### Azure Developer CLI (azd)
-- `azd init` - I-initialize ang mga proyekto mula sa mga template
-- `azd up` - Mag-provision at mag-deploy sa isang utos
-- `azd env` - Pamahalaan ang mga environment variable
-- `azd down` - Ligtas na linisin ang mga resource
+- `azd init` - Mag-initialize ng mga proyekto mula sa mga template
+- `azd up` - Mag-provision at mag-deploy gamit ang isang utos
+- `azd env` - Mag-manage ng mga environment variables
+- `azd down` - Maglinis ng mga resources nang ligtas
 
-### AZD Template Structure
-- `azure.yaml` - Konfigurasyon at mga deployment hook
+### Strukturang AZD Template
+- `azure.yaml` - Mga configuration at deployment hooks
 - `infra/` - Bicep infrastructure-as-code
-- `src/` - Source code ng aplikasyon
-- `scripts/` - Mga script para sa automation at setup
+- `src/` - Application source code
+- `scripts/` - Mga automation at setup scripts
 
-### Microsoft Foundry Capabilities
-- AI Agent Service para sa mga intelihenteng assistant
+### Mga Kakayahan ng Microsoft Foundry
+- AI Agent Service para sa mga intelligent assistants
 - File Search at Azure AI Search para sa pagkuha ng kaalaman
-- Naka-built-in na tracing, pagsubaybay, at ebalwasyon
-- Red teaming para sa pagpapatunay ng kaligtasan ng AI
+- Built-in tracing, monitoring, at evaluation
+- Red teaming para sa AI safety validation
 
 ---
 
-## 3. Ipagpatuloy ang Iyong Paglalakbay sa Pagkatuto
+## 3. Ipagpatuloy ang Iyong Paglalakbay sa Pag-aaral
 
-### Inirerekomendang Susunod na Mga Hakbang
+### Inirerekomendang Mga Susunod na Hakbang
 
-| Landas | Mapagkukunan | Oras |
+| Landas | Resource | Oras |
 |:---|:---|:---|
-| **Kumpletong Kurso** | [Kurikulum ng AZD para sa mga Nagsisimula](../../README.md) | 8-12 oras |
-| **Subukan ang Ibang Template** | [Mga Template ng Microsoft Foundry](https://ai.azure.com/templates) | 1-2 oras |
-| **Mas Malalim na Pagsisid** | [Dokumentasyon ng Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Patuloy |
+| **Kumpletuhin ang Kurso** | [AZD for Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Self-paced |
+| **Subukan ang Ibang Template** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 oras |
+| **Malalimang Pag-aaral** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Patuloy |
 | **Komunidad** | [Azure Discord](https://aka.ms/foundry/discord) | Sumali ngayon! |
 
-### Mga Inirekomendang Template na Subukan Susunod
+### Mga Template na Inirerekomendang Subukan Kasunod
 
 1. **[Magsimula sa AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Pangunahing chat gamit ang iyong data
-2. **[Demo ng Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Mas advanced na mga pattern ng RAG
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Mga senaryong retail ng enterprise
+2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Advanced na RAG patterns
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Mga enterprise retail na scenario
 
 ---
 
-## 4. Hamon ng Workshop
+## 4. Hamon sa Workshop
 
-Handa na bang subukan ang iyong mga kasanayan? Subukan ang mga hamong ito:
+Handa ka na bang subukan ang iyong mga kasanayan? Subukan ang mga hamon na ito:
 
-| Hamon | Paglalarawan | Antas ng Kahirapan |
+| Hamon | Paglalarawan | Antas ng Hirap |
 |:---|:---|:---|
-| **1. Senaryong Multi-Agent** | I-deploy at i-customize para sa ibang industriya (hal., healthcare, finance) | ⭐⭐ |
-| **2. Pasadyang Knowledge Base** | Magdagdag ng sarili mong data files at gumawa ng pasadyang search index | ⭐⭐⭐ |
-| **3. Deployment sa Produksyon** | I-set up ang CI/CD gamit ang GitHub Actions gamit ang `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. Multi-Agent Scenario** | I-deploy at i-customize para sa ibang industriya (halimbawa, healthcare, finance) | ⭐⭐ |
+| **2. Custom Knowledge Base** | Magdagdag ng sarili mong mga data files at gumawa ng custom search index | ⭐⭐⭐ |
+| **3. Production Deployment** | Mag-setup ng CI/CD gamit ang GitHub Actions gamit ang `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
 ## 5. Ibahagi ang Iyong Feedback
 
-Ang iyong feedback ay tumutulong sa amin na pagbutihin ang workshop na ito!
+Makakatulong ang iyong feedback sa pagpapabuti ng workshop na ito!
 
-- **Mga Isyu sa GitHub**: [Mag-post ng feedback](https://github.com/microsoft/azd-for-beginners/issues) - tag with `Workshop`
+- **GitHub Issues**: [Mag-submit ng feedback](https://github.com/microsoft/azd-for-beginners/issues) - tag gamit ang `Workshop`
 - **Discord**: Sumali sa [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - mag-post sa `#get-help`
-- **Mga Ambag**: Tumulong pagbutihin ang workshop sa pamamagitan ng pagsusumite ng pull requests!
+- **Contributions**: Tumulong sa pagpapabuti ng workshop sa pamamagitan ng pagsusumite ng pull requests!
 
 ---
 
-## Salamat! 🎉
+## Maraming Salamat! 🎉
 
-Salamat sa pagtapos ng AZD for AI Developers Workshop. Inaasahan namin na ang karanasang ito ay nagbigay sa iyo ng mga kasanayan at kumpiyansa upang bumuo at mag-deploy ng mga aplikasyon ng AI sa Azure.
+Salamat sa pagtapos ng AZD for AI Developers Workshop. Sana ay nabigyan ka ng kasanayan at kumpiyansa para gumawa at mag-deploy ng AI applications sa Azure.
 
-**Magpatuloy sa pagbuo, magpatuloy sa pag-aaral, at maligayang pagdating sa komunidad ng mga developer ng Azure AI!**
+**Patuloy na magtayo, patuloy na matuto, at maligayang pagdating sa Azure AI developer community!**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 Tahanan ng Kurso** | [AZD Para sa mga Nagsisimula](../../README.md) |
-| **📖 Dokumentasyon** | [Dokumentasyon ng Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ Mga Template ng AI** | [Mga Template ng Microsoft Foundry](https://ai.azure.com/templates) |
-| **💬 Komunidad** | [Azure Discord](https://aka.ms/foundry/discord) |
+| **📚 Course Home** | [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
+| **📖 Documentation** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
+| **🛠️ AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+| **💬 Community** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:
-Isinalin ang dokumentong ito gamit ang serbisyong pagsasalin ng AI na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o di-tumpak na impormasyon. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na awtoritatibong sanggunian. Para sa kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasalin na ginawa ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

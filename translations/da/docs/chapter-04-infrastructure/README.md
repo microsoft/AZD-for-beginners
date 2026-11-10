@@ -1,57 +1,60 @@
-# Kapitel 4: Infrastruktur som kode & Udrulning  
+# Kapitel 4: Infrastruktur som kode & Udrulning
 
-**📚 Kursus**: [AZD For Begyndere](../../README.md) | **⏱️ Varighed**: 1-1.5 timer | **⭐ Sværhedsgrad**: Mellem  
+**📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Varighed**: 2-3 timers læsning; afsæt ekstra tid til udrulningsøvelser | **⭐ Kompleksitet**: Mellem
 
----  
+---
 
-## Oversigt  
+## Oversigt
 
-Dette kapitel dækker Infrastruktur som kode (IaC) mønstre med Bicep-skabeloner, ressourceforvaltning og udrulningsstrategier ved brug af Azure Developer CLI.  
+Dette kapitel dækker Infrastruktur som kode (IaC) mønstre med Bicep-skabeloner, ressourcetildeling og udrulningsstrategier ved brug af Azure Developer CLI.
 
-> Valideret mod `azd 1.27.1` i juli 2026.  
+> Kommando- og konfigurationsgennemgang mål: `azd 1.37.2` (november 2026). Live Azure-provisionering blev ikke kørt under gennemgang.
 
-## Læringsmål  
+## Læringsmål
 
-Når du har gennemført dette kapitel, vil du:  
-- Forstå Bicep-skabelonens struktur og syntaks  
-- Producere Azure-ressourcer med `azd provision`  
-- Udrulle applikationer med `azd deploy`  
-- Implementere blue-green og rolling udrulningsstrategier  
+Ved at gennemføre dette kapitel vil du:
+- Forstå Bicep-skabelonstruktur og syntaks
+- Provisionere Azure-ressourcer med `azd provision`
+- Udrulle applikationer med `azd deploy`
+- Implementere blue-green og rolling udrulningsstrategier
 
----  
+---
 
-## 📚 Lektioner  
+## 📚 Lektioner
 
-| # | Lektion | Beskrivelse | Tid |  
-|---|--------|-------------|------|  
-| 1 | [Provisionering af ressourcer](provisioning.md) | Azure ressourceforvaltning med AZD | 45 min |  
-| 2 | [Udrulningsguide](deployment-guide.md) | Applikationsudrulningsstrategier | 45 min |  
-| 3 | [Forfatning af din egen skabelon](custom-templates.md) | Byg og publicer genanvendelige azd-skabeloner | 30 min |  
+| # | Lektion | Beskrivelse | Tid |
+|---|--------|-------------|------|
+| 1 | [Provisionering af ressourcer](provisioning.md) | Azure-ressourcestyring med AZD | 45 min |
+| 2 | [Udrulningsvejledning](deployment-guide.md) | Applikationsudrulningsstrategier | 45 min |
+| 3 | [Forfat din egen skabelon](custom-templates.md) | Byg og udgiv genanvendelige azd-skabeloner | 30 min |
 
----  
+---
 
-## 🚀 Hurtig Start  
+## 🚀 Hurtig start
 
 ```bash
-# Initialiser fra skabelon
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Forhåndsvis hvad der vil blive oprettet
+# Preview what will be created
 azd provision --preview
 
-# Udrul kun infrastruktur
+# Provision infrastructure only
 azd provision
 
-# Udrul kun kode
+# Deploy code only
 azd deploy
 
-# Eller begge dele sammen
+# Or both together
 azd up
 ```
-  
----  
 
-## 📁 AZD Projektstruktur  
+---
+
+## 📁 AZD projektstruktur
 
 ```
 my-project/
@@ -65,35 +68,35 @@ my-project/
 └── src/                  # Application code
     └── api/
 ```
-  
----  
 
-## 🔧 Væsentlige Kommandoer  
+---
 
-| Kommando | Beskrivelse |  
-|---------|-------------|  
-| `azd init` | Initialiser projekt |  
-| `azd provision` | Opret Azure-ressourcer |  
-| `azd deploy` | Udrul applikationskode |  
-| `azd up` | provision + udrul |  
-| `azd down` | Slet alle ressourcer |  
+## 🔧 Væsentlige kommandoer
 
----  
+| Kommando | Beskrivelse |
+|---------|-------------|
+| `azd init` | Initialiser projekt |
+| `azd provision` | Opret Azure-ressourcer |
+| `azd deploy` | Udrul applikationskode |
+| `azd up` | provision + udrul |
+| `azd down` | Slet alle ressourcer |
 
-## 🔗 Navigation  
+---
 
-| Retning | Kapitel |  
-|-----------|---------|  
-| **Forrige** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |  
-| **Næste** | [Kapitel 5: Multi-Agent Løsninger](../chapter-05-multi-agent/README.md) |  
+## 🔗 Navigation
 
----  
+| Retning | Kapitel |
+|-----------|---------|
+| **Forrige** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |
+| **Næste** | [Kapitel 5: Multi-Agent løsninger](../chapter-05-multi-agent/README.md) |
 
-## 📖 Relaterede Ressourcer  
+---
 
-- [Forudgående Udrulningskontroller](../chapter-06-pre-deployment/README.md)  
-- [Container App Eksempler](../../examples/container-app/README.md)  
-- [Database App Eksempel](../../examples/database-app/README.md)  
+## 📖 Relaterede ressourcer
+
+- [Pre-Deployment checks](../chapter-06-pre-deployment/README.md)
+- [Container App eksempler](../../examples/container-app/README.md)
+- [Database App eksempel](../../examples/database-app/README.md)
 
 ---
 

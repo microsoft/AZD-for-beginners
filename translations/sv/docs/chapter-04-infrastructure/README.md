@@ -1,22 +1,22 @@
 # Kapitel 4: Infrastruktur som kod & distribution
 
-**📚 Kurs**: [AZD För nybörjare](../../README.md) | **⏱️ Varaktighet**: 1-1.5 timmar | **⭐ Svårighetsgrad**: Medel
+**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar läsning; reservera extra tid för distributionsövningar | **⭐ Svårighetsgrad**: Medel
 
 ---
 
 ## Översikt
 
-Detta kapitel täcker Infrastructure as Code (IaC) mönster med Bicep-mallar, resurstilldelning och distributionsstrategier med Azure Developer CLI.
+Detta kapitel täcker mönster för Infrastruktur som Kod (IaC) med Bicep-mallar, resursprovisionering och distributionsstrategier med Azure Developer CLI.
 
-> Validerat mot `azd 1.27.1` i juli 2026.
+> Kommando- och konfigurationsgranskning mål: `azd 1.37.2` (november 2026). Live Azure-provisionering kördes inte under granskningen.
 
 ## Lärandemål
 
 Genom att slutföra detta kapitel kommer du att:
 - Förstå Bicep-mallens struktur och syntax
-- Tilldela Azure-resurser med `azd provision`
+- Provisionera Azure-resurser med `azd provision`
 - Distribuera applikationer med `azd deploy`
-- Implementera blue-green och rolling deployment-strategier
+- Implementera blågrön- och rullande distributionsstrategier
 
 ---
 
@@ -24,8 +24,8 @@ Genom att slutföra detta kapitel kommer du att:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Tilldelning av resurser](provisioning.md) | Hantering av Azure-resurser med AZD | 45 min |
-| 2 | [Distributionsguide](deployment-guide.md) | Applikationsdistributionsstrategier | 45 min |
+| 1 | [Provisionering av resurser](provisioning.md) | Hantering av Azure-resurser med AZD | 45 min |
+| 2 | [Distributionsguide](deployment-guide.md) | Strategier för applikationsdistribution | 45 min |
 | 3 | [Skapa din egen mall](custom-templates.md) | Bygg och publicera återanvändbara azd-mallar | 30 min |
 
 ---
@@ -33,19 +33,22 @@ Genom att slutföra detta kapitel kommer du att:
 ## 🚀 Snabbstart
 
 ```bash
-# Initiera från mall
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Förhandsgranska vad som kommer att skapas
+# Preview what will be created
 azd provision --preview
 
-# Tillhandahåll endast infrastruktur
+# Provision infrastructure only
 azd provision
 
-# Distribuera endast kod
+# Deploy code only
 azd deploy
 
-# Eller båda tillsammans
+# Or both together
 azd up
 ```
 
@@ -75,7 +78,7 @@ my-project/
 | `azd init` | Initiera projekt |
 | `azd provision` | Skapa Azure-resurser |
 | `azd deploy` | Distribuera applikationskod |
-| `azd up` | tilldela + distribuera |
+| `azd up` | provisionera + distribuera |
 | `azd down` | Ta bort alla resurser |
 
 ---
@@ -85,15 +88,15 @@ my-project/
 | Riktning | Kapitel |
 |-----------|---------|
 | **Föregående** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |
-| **Nästa** | [Kapitel 5: Multi-Agentlösningar](../chapter-05-multi-agent/README.md) |
+| **Nästa** | [Kapitel 5: Multi-Agent Lösningar](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Relaterade resurser
 
 - [Kontroller före distribution](../chapter-06-pre-deployment/README.md)
-- [Exempel på Container App](../../examples/container-app/README.md)
-- [Exempel på Databasapp](../../examples/database-app/README.md)
+- [Exempel på Container-appar](../../examples/container-app/README.md)
+- [Exempel på databasapp](../../examples/database-app/README.md)
 
 ---
 

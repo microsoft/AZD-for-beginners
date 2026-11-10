@@ -1,60 +1,58 @@
-# 6. Nedtagning af infrastruktur
+# 6. Nedrivning af Infrastruktur
 
-!!! tip "I SLUTNINGEN AF DETTE MODUL VIL DU KUNNE"
+!!! tip "SIDST I DETTE MODUL VIL DU VÆRE I STAND TIL AT"
 
-    - [ ] Forstå vigtigheden af oprydning af ressourcer og omkostningsstyring
-    - [ ] Bruge `azd down` til sikkert at afprovisionere infrastruktur
-    - [ ] Gendanne blødt slettede Azure AI-tjenester om nødvendigt
-    - [ ] **Lab 6:** Rydde op i Azure-ressourcer og bekræfte fjernelse
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Bonusøvelser
 
-Før vi nedtager projektet, tag et par minutter til åben udforskning.
+Før vi nedriver projektet, så tag et par minutter til at lave lidt åben udforskning.
 
-!!! info "Prøv disse udforskningsforslag"
+!!! info "Prøv Disse Udforskningsforslag"
 
-    **Eksperimenter med GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. Spørg: `Hvilke andre AZD-skabeloner kunne jeg prøve til multi-agent scenarier?`
-    2. Spørg: `Hvordan kan jeg tilpasse agentinstruktionerne til et sundhedspleje-tilfælde?`
-    3. Spørg: `Hvilke miljøvariabler styrer omkostningsoptimering?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Udforsk Azure-portalen:**
+    **Explore the Azure Portal:**
     
-    1. Gennemgå Application Insights-metrikker for din implementering
-    2. Tjek omkostningsanalysen for de oprettede ressourcer
-    3. Udforsk Microsoft Foundry-portalen agent-legpladsen en gang til
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Nedtagning af infrastruktur
+## Nedluk Infrastruktur
 
-1. At nedtage infrastrukturen er lige så nemt som:
+1. Nedrivning af infrastrukturen er lige så nemt som:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. Bekræft det valgte miljø og gennemgå ressourcerne, der skal slettes. Dette fjerner Azure-ressourcer og kan slette data. Behold bekræftelsesprompten for denne læringsproces. Når det er fuldført, vil du se output svarende til:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Valgfrit) Hvis du nu kører `azd up` igen, vil du bemærke, at gpt-4.1-modellen bliver deployet, da miljøvariablen blev ændret (og gemt) i den lokale `.azure`-mappe. 
+1. Tjek sletningen i portalen og se efter ressourcer uden for implementeringens omfang. Omkostningsrapportering og kvoteopdateringer kan være forsinkede. Lokal `.azure` konfiguration forbliver, medmindre du eksplicit fjerner den.
 
-      Her er modeludrulningerne **før**:
+1. `azd down --purge` anmoder desuden om permanent sletning af understøttede blødt slettede ressourcer. Brug den kun, når genoprettelse ikke er nødvendig, og du forstår politikkerne for opbevaring/rydning. Den garanterer ikke øjeblikkelig frigivelse af kvoter.
 
-      ![Før](../../../../../translated_images/da/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      Og her er den **efter**:
-      ![Efter](../../../../../translated_images/da/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Genudrul ikke bare for at bekræfte oprydning. En senere bevidst `azd up` kan genskabe ressourcer ved hjælp af de resterende lokale input og medfører omkostninger igen. Modelopdateringer bruger normalt understøttede ændringer i provisionering, ikke nedrivning.
 
 ---
 

@@ -1,30 +1,30 @@
-# Tích hợp Application Insights với AZD
+# Tích Hợp Application Insights với AZD
 
-⏱️ **Thời gian ước tính**: 40-50 minutes | 💰 **Tác động chi phí**: ~$5-15/month | ⭐ **Độ phức tạp**: Intermediate
+⏱️ **Thời Gian Ước Tính**: 40-50 phút | 💰 **Tác Động Chi Phí**: ~5-15 USD/tháng | ⭐ **Độ Phức Tạp**: Trung cấp
 
-**📚 Lộ trình học:**
-- ← Previous: [Kiểm tra tiền triển khai](preflight-checks.md) - Pre-deployment validation
-- 🎯 **Bạn đang ở đây**: Application Insights Integration (Monitoring, telemetry, debugging)
-- → Next: [Hướng dẫn triển khai](../chapter-04-infrastructure/deployment-guide.md) - Deploy to Azure
-- 🏠 [Trang chủ khóa học](../../README.md)
+**📚 Lộ Trình Học Tập:**
+- ← Trước: [Kiểm Tra Trước Khi Triển Khai](preflight-checks.md) - Xác thực trước triển khai
+- 🎯 **Bạn Đang Ở Đây**: Tích Hợp Application Insights (Giám sát, thu thập dữ liệu, gỡ lỗi)
+- → Tiếp Theo: [Hướng Dẫn Triển Khai](../chapter-04-infrastructure/deployment-guide.md) - Triển khai lên Azure
+- 🏠 [Trang Chủ Khóa Học](../../README.md)
 
 ---
 
-## Bạn sẽ học được
+## Những Điều Bạn Sẽ Học
 
-Bằng cách hoàn thành bài học này, bạn sẽ:
-- Tích hợp **Application Insights** vào các dự án AZD một cách tự động
-- Cấu hình **distributed tracing** cho microservices
-- Triển khai **telemetry tùy chỉnh** (số liệu, sự kiện, phụ thuộc)
-- Thiết lập **Live Metrics** để giám sát thời gian thực
-- Tạo **cảnh báo và dashboard** từ các triển khai AZD
-- Gỡ lỗi sự cố sản xuất bằng **truy vấn telemetri**
+Sau khi hoàn thành bài học này, bạn sẽ:
+- Khai báo **Application Insights** trong hạ tầng AZD và cấu hình SDK instrumentation
+- Cấu hình **phân tích truy vết phân tán** cho microservices
+- Triển khai **thu thập dữ liệu tùy chỉnh** (đo lường, sự kiện, phụ thuộc)
+- Thiết lập **đo lường trực tiếp** để giám sát theo thời gian thực
+- Tạo **cảnh báo và bảng điều khiển** từ các triển khai AZD
+- Gỡ lỗi sự cố sản xuất với **truy vấn telemetry**
 - Tối ưu **chi phí và chiến lược lấy mẫu**
 - Giám sát **ứng dụng AI/LLM** (token, độ trễ, chi phí)
 
-## Tại sao Application Insights với AZD quan trọng
+## Tại Sao Application Insights với AZD Quan Trọng
 
-### Thách thức: Quan sát trong môi trường sản xuất
+### Thách Thức: Quan Sát Sản Xuất
 
 **Không có Application Insights:**
 ```
@@ -36,7 +36,7 @@ Bằng cách hoàn thành bài học này, bạn sẽ:
 ❌ Unknown failure rates and bottlenecks
 ```
 
-**Với Application Insights + AZD:**
+**Có Application Insights + AZD:**
 ```
 ✅ Automatic telemetry collection
 ✅ Centralized logs from all services
@@ -44,37 +44,37 @@ Bằng cách hoàn thành bài học này, bạn sẽ:
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**Tương tự**: Application Insights giống như có một "hộp đen" ghi chuyến bay + bảng điều khiển buồng lái cho ứng dụng của bạn. Bạn thấy mọi thứ đang diễn ra theo thời gian thực và có thể phát lại bất kỳ sự cố nào.
+**Ẩn dụ**: Application Insights giống như một "hộp đen" ghi dữ liệu chuyến bay + bảng điều khiển buồng lái cho ứng dụng của bạn. Bạn nhìn thấy mọi thứ đang diễn ra theo thời gian thực và có thể phát lại sự cố bất kỳ lúc nào.
 
 ---
 
-## Tổng quan kiến trúc
+## Tổng Quan Kiến Trúc
 
-### Application Insights trong kiến trúc AZD
+### Application Insights trong Kiến Trúc AZD
 
 ```mermaid
 graph TB
-    User[Người dùng/Khách hàng]
-    App1[Ứng dụng Container 1<br/>Cổng API]
-    App2[Ứng dụng Container 2<br/>Dịch vụ Sản phẩm]
-    App3[Ứng dụng Container 3<br/>Dịch vụ Đơn hàng]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[Application Insights<br/>Trung tâm Telemetry]
-    LogAnalytics[(Log Analytics<br/>Không gian làm việc)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Azure Portal<br/>Bảng điều khiển & Cảnh báo]
-    Query[Truy vấn Kusto<br/>Phân tích Tùy chỉnh]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Tự động instrument hóa| AppInsights
-    App2 -.->|Tự động instrument hóa| AppInsights
-    App3 -.->|Tự động instrument hóa| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,59 +83,64 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-### Những gì được giám sát tự động
 
-| Telemetry Type | What It Captures | Use Case |
+### Những Gì Được Giám Sát Tự Động
+
+Tự động instrumentation được hỗ trợ sẽ ghi lại các yêu cầu/phụ thuộc cho các thư viện được instrumentation. Sự kiện và đo lường tùy chỉnh cần có mã ứng dụng; kiểm tra tính khả dụng phải được cấu hình riêng. Nó không thu thập tất cả các hàng dưới đây chỉ vì tài nguyên tồn tại.
+
+| Loại Telemetry | Ghi Lại Gì | Trường Hợp Sử Dụng |
 |----------------|------------------|----------|
-| **Requests** | HTTP requests, status codes, duration | Giám sát hiệu năng API |
-| **Dependencies** | External calls (DB, APIs, storage) | Xác định nút thắt |
-| **Exceptions** | Unhandled errors with stack traces | Gỡ lỗi sự cố |
-| **Custom Events** | Business events (signup, purchase) | Phân tích và phễu |
-| **Metrics** | Performance counters, custom metrics | Lập kế hoạch năng lực |
-| **Traces** | Log messages with severity | Gỡ lỗi và kiểm toán |
-| **Availability** | Uptime and response time tests | Giám sát SLA |
+| **Yêu cầu** | Yêu cầu HTTP, mã trạng thái, thời lượng | Giám sát hiệu suất API |
+| **Phụ thuộc** | Cuộc gọi ngoài (DB, API, lưu trữ) | Xác định điểm nghẽn |
+| **Ngoại lệ** | Lỗi không xử lý có stack trace | Gỡ lỗi sự cố |
+| **Sự kiện tùy chỉnh** | Sự kiện kinh doanh (đăng ký, mua hàng) | Phân tích và kênh |
+| **Đo lường** | Đồng hồ hiệu suất, đo lường tùy chỉnh | Kế hoạch năng lực |
+| **Dấu vết** | Tin nhắn nhật ký với mức độ nghiêm trọng | Gỡ lỗi và kiểm tra |
+| **Tính khả dụng** | Kiểm tra thời gian hoạt động và thời gian phản hồi | Giám sát SLA |
 
 ---
 
-## Yêu cầu
+## Điều Kiện Tiên Quyết
 
-### Công cụ cần thiết
+### Công Cụ Cần Thiết
 
 ```bash
-# Xác minh Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Mong đợi: azd phiên bản 1.0.0 trở lên
+# Command reference baseline: azd 1.37.2
 
-# Xác minh Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Mong đợi: azure-cli phiên bản 2.50.0 trở lên
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
-### Yêu cầu Azure
+### Yêu Cầu Azure
 
-- Active Azure subscription
-- Permissions to create:
-  - Application Insights resources
-  - Log Analytics workspaces
+- Có Azure subscription đang hoạt động
+- Quyền tạo:
+  - Tài nguyên Application Insights
+  - Workspace Log Analytics
   - Container Apps
-  - Resource groups
+  - Nhóm tài nguyên
 
-### Yêu cầu về kiến thức
+### Kiến Thức Tiên Quyết
 
 Bạn nên đã hoàn thành:
-- [AZD Basics](../chapter-01-foundation/azd-basics.md) - Core AZD concepts
-- [Configuration](../chapter-03-configuration/configuration.md) - Environment setup
-- [First Project](../chapter-01-foundation/first-project.md) - Basic deployment
+- [AZD Basics](../chapter-01-foundation/azd-basics.md) - Các khái niệm cơ bản của AZD
+- [Configuration](../chapter-03-configuration/configuration.md) - Cấu hình môi trường
+- [First Project](../chapter-01-foundation/first-project.md) - Triển khai cơ bản
 
 ---
 
-## Bài học 1: Application Insights tự động với AZD
+## Bài Học 1: Application Insights Tự Động với AZD
 
-### Cách AZD cấp phát Application Insights
+### AZD Cung Cấp Application Insights Như Thế Nào
 
-AZD tự động tạo và cấu hình Application Insights khi bạn triển khai. Hãy xem cách nó hoạt động.
+AZD chỉ cấp phát Application Insights **khi hạ tầng của dự án khai báo**. `azure.yaml` đơn thuần không tạo giám sát hoặc instrumentation mã ứng dụng.
 
-### Cấu trúc dự án
+> **Phạm vi ví dụ:** Bài học này chứa đoạn tích hợp, không phải dự án `monitored-app` hoàn chỉnh trong kho lưu trữ này. Cung cấp một mẫu chính và ánh xạ tham số, môi trường Container Apps, cấu hình registry/image và danh tính, Dockerfile, và thẻ dịch vụ trước khi triển khai. Các bài học sau trình bày đoạn mở rộng / thay thế, không phải các file có thể dán nguyên mà không thay đổi. Bắt đầu với [ví dụ microservices](../../../../examples/microservices) nếu cần mẫu chạy cơ bản.
+
+### Cấu Trúc Dự Án
 
 ```
 monitored-app/
@@ -154,7 +159,7 @@ monitored-app/
 
 ---
 
-### Bước 1: Cấu hình AZD (azure.yaml)
+### Bước 1: Cấu Hình AZD (azure.yaml)
 
 **File: `azure.yaml`**
 
@@ -169,14 +174,14 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**Xong!** AZD sẽ tạo Application Insights theo mặc định. Không cần cấu hình thêm cho giám sát cơ bản.
+Đây là khai báo dịch vụ có thể triển khai. Các cấu hình Bicep và SDK sau cung cấp giám sát; azd không thêm chúng một cách ngầm định.
 
 ---
 
-### Bước 2: Hạ tầng giám sát (Bicep)
+### Bước 2: Hạ Tầng Giám Sát (Bicep)
 
 **File: `infra/core/monitoring.bicep`**
 
@@ -223,11 +228,12 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
 
-### Bước 3: Kết nối Container App với Application Insights
+### Bước 3: Kết Nối Container App với Application Insights
 
 **File: `infra/app/api.bicep`**
 
@@ -235,7 +241,8 @@ output applicationInsightsName string = applicationInsights.name
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -285,35 +293,29 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ---
 
-### Bước 4: Mã ứng dụng với Telemetry
+### Bước 4: Mã Ứng Dụng với Telemetry
 
 **File: `src/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Lấy chuỗi kết nối Application Insights
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Cấu hình theo dõi phân tán
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # Lấy mẫu 100% cho môi trường phát triển
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # Cấu hình ghi nhật ký
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # Mô phỏng gọi cơ sở dữ liệu (tự động được theo dõi như một phụ thuộc)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Mô phỏng hoạt động chậm
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -367,27 +369,27 @@ if __name__ == '__main__':
 **File: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+Giải quyết các phụ thuộc này trong dự án của bạn, kiểm thử cùng nhau và khóa các phiên bản kết quả. Dự án mới nên sử dụng Azure Monitor OpenTelemetry, không dùng các exporter OpenCensus Python đã ngừng hoạt động.
 
 ---
 
-### Bước 5: Triển khai và xác minh
+### Bước 5: Triển Khai và Xác Minh
 
 ```bash
-# Khởi tạo AZD
-azd init
-
-# Triển khai (tự động cấu hình Application Insights)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# Lấy URL ứng dụng
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# Tạo dữ liệu telemetri
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -407,44 +409,39 @@ curl $APP_URL/api/slow
 ### Bước 6: Xem Telemetry trong Azure Portal
 
 ```bash
-# Lấy chi tiết Application Insights
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Mở trong Cổng thông tin Azure
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Đi tới Azure Portal → Application Insights → Transaction Search**
+**Đi tới Azure Portal → Application Insights → Tìm Kiếm Giao Dịch**
 
 Bạn sẽ thấy:
-- ✅ HTTP requests với mã trạng thái
-- ✅ Thời lượng yêu cầu (3+ giây cho `/api/slow`)
+- ✅ Yêu cầu HTTP với mã trạng thái
+- ✅ Thời gian yêu cầu (3+ giây cho `/api/slow`)
 - ✅ Chi tiết ngoại lệ từ `/api/error-test`
-- ✅ Thông điệp log tùy chỉnh
+- ✅ Tin nhắn nhật ký tùy chỉnh
 
 ---
 
-## Bài học 2: Telemetri tùy chỉnh và Sự kiện
+## Bài Học 2: Telemetry và Sự Kiện Tùy Chỉnh
 
-### Theo dõi sự kiện nghiệp vụ
+### Theo Dõi Sự Kiện Kinh Doanh
 
-Hãy thêm telemetri tùy chỉnh cho các sự kiện quan trọng nghiệp vụ.
+Hãy thêm telemetry tùy chỉnh cho các sự kiện quan trọng kinh doanh.
 
 **File: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # Thiết lập logger
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # Thiết lập bộ xuất số liệu
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # Thiết lập tracer
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# client thu thập số liệu toàn cục
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### Cập nhật ứng dụng với Sự kiện tùy chỉnh
+### Cập Nhật Ứng Dụng với Sự Kiện Tùy Chỉnh
 
-**File: `src/app.py` (enhanced)**
+**File: `src/app.py` (nâng cao)**
+
+Thêm các route này vào ứng dụng Flask hiện có; giữ các route sức khỏe/kiểm thử trước đó. Khối rút gọn dưới đây cho thấy một app riêng để rõ ràng. Khởi tạo telemetry bây giờ nằm trong `telemetry.py` — không khởi tạo exporter hai lần.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # Theo dõi sự kiện kinh doanh
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Theo dõi chỉ số doanh thu
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # Mô phỏng tìm kiếm (sẽ là truy vấn cơ sở dữ liệu thật)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Chuyển đổi sang ms
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # Theo dõi sự kiện tìm kiếm
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Theo dõi chỉ số hiệu suất tìm kiếm
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # Mô phỏng gọi API bên ngoài
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # Theo dõi phụ thuộc
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -616,25 +586,25 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### Kiểm tra Telemetri tùy chỉnh
+### Kiểm Tra Telemetry Tùy Chỉnh
 
 ```bash
-# Theo dõi sự kiện mua hàng
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# Theo dõi sự kiện tìm kiếm
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# Theo dõi phụ thuộc bên ngoài
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
 **Xem trong Azure Portal:**
 
-Đi tới Application Insights → Logs, rồi chạy:
+Tới Application Insights → Logs, sau đó chạy:
 
 ```kusto
 // View purchase events
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -665,11 +635,11 @@ traces
 
 ---
 
-## Bài học 3: Theo dõi phân tán cho Microservices
+## Bài Học 3: Phân Tích Truy Vết Phân Tán cho Microservices
 
-### Kích hoạt theo dõi xuyên dịch vụ
+### Bật Truy Vết Liên Dịch Vụ
 
-Đối với microservices, Application Insights tự động liên kết các yêu cầu giữa các dịch vụ.
+Với instrumentation tương thích và truyền thông tin trace-context W3C, Application Insights liên kết các yêu cầu giữa các dịch vụ. Chia sẻ chuỗi kết nối chỉ không tạo ra span cha-con. Đoạn kiến trúc dưới đây tham khảo các module bạn phải thực hiện.
 
 **File: `infra/main.bicep`**
 
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### Xem giao dịch đầu-cuối
+### Xem Giao Dịch End-to-End
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as Cổng API<br/>(ID theo dõi: abc123)
-    participant Product as Dịch vụ Sản phẩm<br/>(ID cha: abc123)
-    participant Order as Dịch vụ Đơn hàng<br/>(ID cha: abc123)
-    participant AppInsights as Thông tin Ứng dụng
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
+    participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Bắt đầu theo dõi: abc123
-    Gateway->>AppInsights: Ghi nhật ký yêu cầu (ID theo dõi: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: ID cha: abc123
-    Product->>AppInsights: Ghi nhật ký cuộc gọi phụ thuộc
-    Product-->>Gateway: Chi tiết sản phẩm
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: ID cha: abc123
-    Order->>AppInsights: Ghi nhật ký cuộc gọi phụ thuộc
-    Order-->>Gateway: Đơn hàng đã tạo
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: Hoàn tất thanh toán
-    Gateway->>AppInsights: Ghi nhật ký phản hồi (Thời lượng: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: Tương quan theo ID theo dõi
+    Note over AppInsights: Correlation by Trace ID
 ```
-**Truy vấn trace đầu-cuối:**
+
+**Truy vấn trace end-to-end:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,65 +759,65 @@ dependencies
 
 ---
 
-## Bài học 4: Live Metrics và Giám sát thời gian thực
+## Bài Học 4: Live Metrics và Giám Sát Thời Gian Thực
 
-### Kích hoạt Live Metrics Stream
+### Bật Dòng Live Metrics
 
-Live Metrics cung cấp telemetri thời gian thực với độ trễ <1 second.
+Live Metrics cung cấp telemetry gần thời gian thực khi được SDK hỗ trợ và bật. Nó không phải SLA về độ trễ. Cấu hình OpenTelemetry Python ở trên chọn tham gia với `enable_live_metrics=True`.
 
 **Truy cập Live Metrics:**
 
 ```bash
-# Lấy tài nguyên Application Insights
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Lấy nhóm tài nguyên
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
 **Những gì bạn thấy theo thời gian thực:**
-- ✅ Tỷ lệ yêu cầu đến (requests/sec)
-- ✅ Các cuộc gọi phụ thuộc đi ra
+- ✅ Tỷ lệ yêu cầu đến (yêu cầu/giây)
+- ✅ Cuộc gọi phụ thuộc đi ra ngoài
 - ✅ Số lượng ngoại lệ
 - ✅ Sử dụng CPU và bộ nhớ
-- ✅ Số lượng server đang hoạt động
-- ✅ Mẫu telemetri
+- ✅ Số server hoạt động
+- ✅ Mẫu telemetry
 
-### Tạo tải để kiểm tra
+### Tạo Tải Để Kiểm Tra
 
 ```bash
-# Tạo tải để xem số liệu trực tiếp
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Xem số liệu trực tiếp trong Cổng thông tin Azure
-# Bạn sẽ thấy tần suất yêu cầu tăng đột biến
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
 
-## Bài tập thực hành
+## Bài Tập Thực Hành
 
-### Bài tập 1: Thiết lập cảnh báo ⭐⭐ (Medium)
+### Bài Tập 1: Thiết Lập Cảnh Báo ⭐⭐ (Trung Bình)
 
-**Mục tiêu**: Tạo cảnh báo cho tỷ lệ lỗi cao và phản hồi chậm.
+**Mục Tiêu**: Tạo cảnh báo cho tỷ lệ lỗi cao và phản hồi chậm.
 
-**Các bước:**
+**Các Bước:**
 
-1. **Tạo cảnh báo cho tỷ lệ lỗi:**
+1. **Tạo cảnh báo tỷ lệ lỗi:**
 
 ```bash
-# Lấy ID tài nguyên Application Insights
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Tạo cảnh báo số liệu cho các yêu cầu thất bại
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,7 +825,7 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
 2. **Tạo cảnh báo cho phản hồi chậm:**
@@ -870,7 +841,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Tạo cảnh báo bằng Bicep (ưu tiên cho AZD):**
+3. **Tạo cảnh báo qua Bicep (ưu tiên cho AZD):**
 
 **File: `infra/core/alerts.bicep`**
 
@@ -947,20 +918,20 @@ output slowResponseAlertId string = slowResponseAlert.id
 4. **Kiểm tra cảnh báo:**
 
 ```bash
-# Tạo lỗi
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Tạo phản hồi chậm
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Kiểm tra trạng thái cảnh báo (chờ 5-10 phút)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
@@ -968,31 +939,31 @@ az monitor metrics alert list \
 - ✅ Cảnh báo được tạo thành công
 - ✅ Cảnh báo kích hoạt khi vượt ngưỡng
 - ✅ Có thể xem lịch sử cảnh báo trong Azure Portal
-- ✅ Được tích hợp với triển khai AZD
+- ✅ Tích hợp với triển khai AZD
 
-**Thời gian**: 20-25 minutes
+**Thời Gian**: 20-25 phút
 
 ---
 
-### Bài tập 2: Tạo Dashboard tùy chỉnh ⭐⭐ (Medium)
+### Bài Tập 2: Tạo Bảng Điều Khiển Tùy Chỉnh ⭐⭐ (Trung Bình)
 
-**Mục tiêu**: Xây dựng một dashboard hiển thị các số liệu chính của ứng dụng.
+**Mục Tiêu**: Xây dựng bảng điều khiển hiển thị các chỉ số quan trọng của ứng dụng.
 
-**Các bước:**
+**Các Bước:**
 
-1. **Tạo dashboard qua Azure Portal:**
+1. **Tạo bảng điều khiển qua Azure Portal:**
 
-Đi tới: Azure Portal → Dashboards → New Dashboard
+Vào: Azure Portal → Dashboards → New Dashboard
 
-2. **Thêm các ô cho các số liệu chính:**
+2. **Thêm các ô cho chỉ số chính:**
 
 - Số lượng yêu cầu (24 giờ qua)
 - Thời gian phản hồi trung bình
 - Tỷ lệ lỗi
-- Top 5 thao tác chậm nhất
-- Phân bố địa lý của người dùng
+- 5 thao tác chậm nhất
+- Phân bố địa lý người dùng
 
-3. **Tạo dashboard bằng Bicep:**
+3. **Tạo bảng điều khiển qua Bicep:**
 
 **File: `infra/core/dashboard.bicep`**
 
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1063,10 +1044,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **Triển khai dashboard:**
+4. **Triển khai bảng điều khiển:**
 
-```bash
-# Thêm vào main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,26 +1057,28 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# Triển khai
+```bash
+# Deploy
 azd up
 ```
 
 **✅ Tiêu chí thành công:**
-- ✅ Dashboard hiển thị các số liệu chính
+- ✅ Bảng điều khiển hiển thị các chỉ số chính
 - ✅ Có thể ghim lên trang chủ Azure Portal
 - ✅ Cập nhật theo thời gian thực
 - ✅ Có thể triển khai qua AZD
 
-**Thời gian**: 25-30 minutes
+**Thời Gian**: 25-30 phút
 
 ---
 
-### Bài tập 3: Giám sát ứng dụng AI/LLM ⭐⭐⭐ (Advanced)
+### Bài Tập 3: Giám Sát Ứng Dụng AI/LLM ⭐⭐⭐ (Nâng Cao)
 
-**Mục tiêu**: Theo dõi việc sử dụng Microsoft Foundry Models (token, chi phí, độ trễ).
+**Mục Tiêu**: Theo dõi việc sử dụng Microsoft Foundry Models (tokens, chi phí, độ trễ).
 
-**Các bước:**
+**Các Bước:**
 
 1. **Tạo wrapper giám sát AI:**
 
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # Gọi các mô hình Microsoft Foundry
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # Trích xuất dữ liệu sử dụng
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Tính chi phí (giá gpt-4.1)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 cho mỗi 1K token
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 cho mỗi 1K token
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # Theo dõi sự kiện tùy chỉnh
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # Theo dõi các chỉ số
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1182,7 +1169,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **Sử dụng client được giám sát:**
+2. **Sử dụng client đã giám sát:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# Khởi tạo client OpenAI được giám sát
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Gọi với giám sát tự động
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,13 +1205,13 @@ def chat():
     })
 ```
 
-3. **Truy vấn các số liệu AI:**
+3. **Truy vấn chỉ số AI:**
 
 ```kusto
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1251,47 +1240,34 @@ traces
 ```
 
 **✅ Tiêu chí thành công:**
-- ✅ Mỗi cuộc gọi OpenAI được theo dõi tự động
-- ✅ Sử dụng token và chi phí hiển thị được
+- ✅ Mọi cuộc gọi OpenAI được theo dõi tự động
+- ✅ Sử dụng token và chi phí hiển thị
 - ✅ Độ trễ được giám sát
-- ✅ Có thể đặt cảnh báo ngân sách
+- ✅ Có thể thiết lập cảnh báo ngân sách
 
-**Thời gian**: 35-45 minutes
+**Thời Gian**: 35-45 phút
 
 ---
 
-## Tối ưu chi phí
+## Tối Ưu Chi Phí
 
-### Chiến lược lấy mẫu
+### Chiến Lược Lấy Mẫu
 
-Kiểm soát chi phí bằng cách lấy mẫu telemetri:
+Kiểm soát chi phí bằng cách lấy mẫu telemetry:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# Phát triển: lấy mẫu 100%
-sampler = ProbabilitySampler(rate=1.0)
-
-# Sản xuất: lấy mẫu 10% (giảm chi phí 90%)
-sampler = ProbabilitySampler(rate=0.1)
-
-# Lấy mẫu thích ứng (tự động điều chỉnh)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**Trong Bicep:**
+Lấy mẫu trace không giảm 90% mỗi loại telemetry. Metrics và log phát ra độc lập cần kiểm soát riêng về khối lượng. Chọn tỷ lệ dựa trên nhu cầu khả năng quan sát, không phải cấm hoàn toàn trong sản xuất.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+Thiết lập lấy mẫu SDK rõ ràng; thuộc tính `SamplingPercentage` của component không thay thế cho cấu hình sampler OpenTelemetry Python.
 
-### Lưu trữ dữ liệu
+### Giữ Dữ Liệu
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1303,40 +1279,40 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### Ước tính chi phí hàng tháng
+### Ước Tính Chi Phí Hàng Tháng
 
-| Data Volume | Retention | Monthly Cost |
+| Dung Lượng Dữ Liệu | Giữ Lại | Chi Phí Hàng Tháng |
 |-------------|-----------|--------------|
-| 1 GB/month | 30 days | ~$2-5 |
-| 5 GB/month | 30 days | ~$10-15 |
-| 10 GB/month | 90 days | ~$25-40 |
-| 50 GB/month | 90 days | ~$100-150 |
+| 1 GB/tháng | 30 ngày | ~2-5 USD |
+| 5 GB/tháng | 30 ngày | ~10-15 USD |
+| 10 GB/tháng | 90 ngày | ~25-40 USD |
+| 50 GB/tháng | 90 ngày | ~100-150 USD |
 
-**Free tier**: 5 GB/month included
+Các con số này chỉ mang tính minh họa, không phải báo giá. Kiểm tra giá cả nhập liệu, giữ dữ liệu, cảnh báo, và thử nghiệm trong khu vực và thỏa thuận của bạn; hạn mức miễn phí được chia sẻ và phạm vi theo giá Azure Monitor, không phải SKU miễn phí đảm bảo cho mỗi tài nguyên Application Insights.
 
 ---
 
-## Kiểm tra kiến thức
+## Kiểm Tra Kiến Thức
 
-### 1. Tích hợp cơ bản ✓
+### 1. Tích Hợp Cơ Bản ✓
 
-Kiểm tra hiểu biết của bạn:
+Kiểm tra kiến thức của bạn:
 
-- [ ] **Q1**: AZD tạo Application Insights như thế nào?
-  - **A**: Tự động thông qua mẫu Bicep trong `infra/core/monitoring.bicep`
+- [ ] **Câu Hỏi 1**: AZD cấp phát Application Insights như thế nào?
+  - **Đáp án**: Nó triển khai tài nguyên giám sát được khai báo rõ ràng trong mẫu Bicep/Terraform của dự án.
 
-- [ ] **Q2**: Biến môi trường nào cho phép Application Insights?
-  - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [ ] **Câu Hỏi 2**: Biến môi trường nào bật Application Insights?
+  - **Đáp án**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: Ba loại telemetri chính là gì?
-  - **A**: Requests (gọi HTTP), Dependencies (gọi bên ngoài), Exceptions (lỗi)
+- [ ] **Câu Hỏi 3**: Ba loại telemetry chính là gì?
+  - **Đáp án**: Yêu cầu (HTTP calls), Phụ thuộc (cuộc gọi ngoài), Ngoại lệ (lỗi)
 
-**Hands-On Verification:**
+**Xác Minh Thực Tế:**
 ```bash
-# Kiểm tra xem Application Insights đã được cấu hình hay chưa
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Xác minh dữ liệu telemetry đang được gửi
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1345,20 +1321,20 @@ az monitor app-insights metrics show \
 
 ---
 
-### 2. Telemetri tùy chỉnh ✓
+### 2. Telemetry Tùy Chỉnh ✓
 
-Kiểm tra hiểu biết của bạn:
+Kiểm tra kiến thức của bạn:
 
-- [ ] **Q1**: Làm sao để theo dõi sự kiện nghiệp vụ tùy chỉnh?
-  - **A**: Sử dụng logger với `custom_dimensions` hoặc `TelemetryClient.track_event()`
+- [ ] **Câu Hỏi 1**: Làm thế nào để theo dõi sự kiện kinh doanh tùy chỉnh?
+  - **Đáp án**: Wrapper bài học này ghi log OTel có cấu trúc với các thuộc tính `event_name`, có thể truy vấn trong `traces`; không tự động `customEvents`.
 
-- [ ] **Q2**: Sự khác nhau giữa events và metrics là gì?
-  - **A**: Events là các sự kiện rời rạc, metrics là các đo lường số
+- [ ] **Câu Hỏi 2**: Sự khác biệt giữa sự kiện và đo lường là gì?
+  - **Đáp án**: Sự kiện là các xảy ra riêng biệt, đo lường là các phép đo số.
 
-- [ ] **Q3**: Làm sao để tương quan telemetri giữa các dịch vụ?
-  - **A**: Application Insights tự động sử dụng `operation_Id` để tương quan
+- [ ] **Câu Hỏi 3**: Làm sao để liên kết telemetry giữa các dịch vụ?
+  - **Đáp án**: Application Insights tự động dùng `operation_Id` để liên kết
 
-**Hands-On Verification:**
+**Xác Minh Thực Tế:**
 ```kusto
 // Verify custom events
 traces
@@ -1368,110 +1344,106 @@ traces
 
 ---
 
-### 3. Giám sát sản xuất ✓
+### 3. Giám Sát Sản Xuất ✓
 
-Kiểm tra hiểu biết của bạn:
+Kiểm tra kiến thức của bạn:
 
-- [ ] **Q1**: Sampling là gì và tại sao dùng nó?
-  - **A**: Sampling giảm khối lượng dữ liệu (và chi phí) bằng cách chỉ ghi lại một tỷ lệ phần trăm telemetri
+- [ ] **Câu Hỏi 1**: Sampling là gì và tại sao dùng?
+  - **Đáp án**: Sampling giảm khối lượng dữ liệu (và chi phí) bằng cách chỉ thu thập một phần trăm telemetry.
 
-- [ ] **Q2**: Làm sao để thiết lập cảnh báo?
-  - **A**: Dùng metric alerts trong Bicep hoặc Azure Portal dựa trên số liệu Application Insights
+- [ ] **Câu Hỏi 2**: Làm sao để thiết lập cảnh báo?
+  - **Đáp án**: Dùng cảnh báo chỉ số trong Bicep hoặc Azure Portal dựa trên các chỉ số Application Insights.
 
-- [ ] **Q3**: Sự khác nhau giữa Log Analytics và Application Insights là gì?
-  - **A**: Application Insights lưu dữ liệu trong Log Analytics workspace; App Insights cung cấp các góc nhìn theo ứng dụng
+- [ ] **Câu Hỏi 3**: Sự khác biệt giữa Log Analytics và Application Insights là gì?
+  - **Đáp án**: Application Insights lưu trữ dữ liệu trong workspace Log Analytics; Application Insights cung cấp các góc nhìn riêng cho ứng dụng.
 
-**Hands-On Verification:**
+**Xác Minh Thực Tế:**
 ```bash
-# Kiểm tra cấu hình lấy mẫu
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
 
-## Thực hành tốt nhất
+## Thực Hành Tốt Nhất
 
 ### ✅ NÊN:
 
 1. **Sử dụng correlation IDs**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. **Thiết lập cảnh báo cho các số liệu quan trọng**
+2. **Thiết lập cảnh báo cho các chỉ số quan trọng**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **Sử dụng logging có cấu trúc**
+3. **Sử dụng ghi log có cấu trúc**
    ```python
-   # ✅ TỐT: Có cấu trúc
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ XẤU: Không có cấu trúc
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
-4. **Giám sát các phụ thuộc**
+4. **Giám sát phụ thuộc**
    ```python
-   # Tự động theo dõi các cuộc gọi cơ sở dữ liệu, các yêu cầu HTTP, v.v.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
 5. **Sử dụng Live Metrics trong quá trình triển khai**
 
 ### ❌ KHÔNG NÊN:
 
-1. **Đừng ghi log dữ liệu nhạy cảm**
+1. **Đừng ghi lại dữ liệu nhạy cảm**
    ```python
-   # ❌ KHÔNG TỐT
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ TỐT
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **Đừng sử dụng lấy mẫu 100% trong sản xuất**
+2. **Đừng chọn phương pháp lấy mẫu mà không đo lường khối lượng và nhu cầu chẩn đoán**
    ```python
-   # ❌ Đắt
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ Tiết kiệm chi phí
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **Đừng bỏ qua dead letter queues**
+3. **Đừng bỏ qua hàng đợi thư chết**
 
-4. **Đừng quên thiết lập giới hạn lưu trữ dữ liệu**
+4. **Đừng quên đặt giới hạn giữ dữ liệu**
 
 ---
 
 ## Khắc phục sự cố
 
-### Vấn đề: Không có telemetri hiển thị
+### Vấn đề: Không có dữ liệu telemetry hiển thị
 
-**Chuẩn đoán:**
+**Chẩn đoán:**
 ```bash
-# Kiểm tra chuỗi kết nối đã được thiết lập
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Kiểm tra nhật ký ứng dụng qua Azure Monitor
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# Hoặc sử dụng Azure CLI cho Container Apps:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Giải pháp:**
 ```bash
-# Xác minh chuỗi kết nối trong Container App
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1483,69 +1455,68 @@ az containerapp show \
 
 ### Vấn đề: Chi phí cao
 
-**Chuẩn đoán:**
+**Chẩn đoán:**
 ```bash
-# Kiểm tra việc nhập dữ liệu
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **Giải pháp:**
 - Giảm tỷ lệ lấy mẫu
-- Giảm thời gian lưu trữ
-- Loại bỏ logging quá nhiều chi tiết
+- Giảm thời gian giữ dữ liệu
+- Loại bỏ ghi log chi tiết quá mức
 
 ---
 
 ## Tìm hiểu thêm
 
 ### Tài liệu chính thức
-- [Tổng quan về Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights cho Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+- [Tổng quan Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Cài đặt Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
 - [Ngôn ngữ truy vấn Kusto](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
 - [Giám sát AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### Bước tiếp theo trong khóa học này
-- ← Previous: [Kiểm tra tiền triển khai](preflight-checks.md)
-- → Next: [Hướng dẫn triển khai](../chapter-04-infrastructure/deployment-guide.md)
+### Các bước tiếp theo trong khóa học này
+- ← Trước: [Kiểm tra trước khi khởi động](preflight-checks.md)
+- → Tiếp: [Hướng dẫn triển khai](../chapter-04-infrastructure/deployment-guide.md)
 - 🏠 [Trang chủ khóa học](../../README.md)
 
 ### Ví dụ liên quan
-- [Ví dụ Microsoft Foundry Models](../../../../examples/azure-openai-chat) - AI telemetry
-- [Ví dụ Microservices](../../../../examples/microservices) - Distributed tracing
+- [Ví dụ mô hình Foundry Microsoft](../../../../examples/azure-openai-chat) - Telemetry AI
+- [Ví dụ microservices](../../../../examples/microservices) - Tracing phân tán
 
 ---
 
 ## Tóm tắt
 
 **Bạn đã học được:**
-- ✅ Cấp phát Application Insights tự động với AZD
-- ✅ Telemetri tùy chỉnh (events, metrics, dependencies)
-- ✅ Theo dõi phân tán giữa các microservices
-- ✅ Live Metrics và giám sát thời gian thực
-- ✅ Cảnh báo và dashboard
+- ✅ Tự động cung cấp Application Insights với AZD
+- ✅ Telemetry tùy chỉnh (sự kiện, số liệu, phụ thuộc)
+- ✅ Tracing phân tán qua các microservices
+- ✅ Số liệu trực tiếp và giám sát thời gian thực
+- ✅ Cảnh báo và bảng điều khiển
 - ✅ Giám sát ứng dụng AI/LLM
 - ✅ Chiến lược tối ưu chi phí
 
-**Những điểm chính:**
-1. **AZD tự động thiết lập giám sát** - Không cần cấu hình thủ công
-2. **Sử dụng ghi log có cấu trúc** - Giúp việc truy vấn dễ dàng hơn
-3. **Theo dõi sự kiện kinh doanh** - Không chỉ số liệu kỹ thuật
+**Điểm chính cần nhớ:**
+1. **Khai báo giám sát rõ ràng** - AZD triển khai mẫu của bạn; SDK instrumentation gửi telemetry
+2. **Sử dụng ghi log có cấu trúc** - Giúp truy vấn dễ dàng hơn
+3. **Theo dõi sự kiện kinh doanh** - Không chỉ số kỹ thuật
 4. **Giám sát chi phí AI** - Theo dõi token và chi tiêu
-5. **Thiết lập cảnh báo** - Hãy chủ động, đừng phản ứng
-6. **Tối ưu chi phí** - Sử dụng lấy mẫu và giới hạn thời gian lưu giữ
+5. **Thiết lập cảnh báo** - Chủ động thay vì phản ứng
+6. **Tối ưu hóa chi phí** - Sử dụng lấy mẫu và giới hạn giữ dữ liệu
 
-**Các bước tiếp theo:**
+**Bước tiếp theo:**
 1. Hoàn thành các bài tập thực hành
 2. Thêm Application Insights vào các dự án AZD của bạn
 3. Tạo bảng điều khiển tùy chỉnh cho nhóm của bạn
-4. Tìm hiểu [Hướng dẫn Triển khai](../chapter-04-infrastructure/deployment-guide.md)
+4. Học [Hướng dẫn triển khai](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Miễn trừ trách nhiệm**:
-Văn bản này đã được dịch bởi dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ ban đầu nên được coi là nguồn tham khảo chính thức. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp do người dịch thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

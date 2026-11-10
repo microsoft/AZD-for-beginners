@@ -1,47 +1,49 @@
-# AZD ഉപയോഗിച്ച് Azure റിസോഴ്‌സുകൾ പ്രാവധാനീകരിക്കൽ
+# AZD ഉപയോഗിച്ച് Azure வளങ്ങൾ ഒരുക്കൽ
 
-**അധ്യായം നാവിഗേഷൻ:**
-- **📚 കോഴ്സ് ഹോം**: [AZD For Beginners](../../README.md)
-- **📖 നിലവിലെ അധ്യായം**: അധ്യായം 4 - കോഡ് & ഡിപ്പ്ലോയ്‌മെന്റ് ആയി ഇൻഫ്രാസ്‌ട്രക്ചർ
-- **⬅️ മുൻപ്**: [ഡിപ്പ്ലോയ്‌മെന്റ് ഗൈഡ്](deployment-guide.md)
-- **➡️ അടുത്ത അധ്യായം**: [അദ്ധായം 5: മൾട്ടി-എജൻറ് AI സൊല്യൂഷൻസ്](../../examples/retail-scenario.md)
-- **🔧 ബന്ധപ്പെട്ട**: [അധ്യായം 6: പ്രീ-ഡിപ്പ്ലോയ്‌മെന്റ് പരിശോധന](../chapter-06-pre-deployment/capacity-planning.md)
+**അദ്ധ്യായ നേവിഗേഷൻ:**
+- **📚 കോഴ്‌സ് ഹോം**: [AZD For Beginners](../../README.md)
+- **📖 നിലവിലെ അദ്ധ്യായം**: അദ്ധ്യായം 4 - ഇൻഫ്രാസ്ട്രക്ചർ ആസ്‌കോഡ് & ഡിപ്ലോയ്മെന്റ്
+- **⬅️ മുൻപ്**: [Deployment Guide](deployment-guide.md)
+- **➡️ അടുത്ത അദ്ധ്യായം**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **🔧 ബന്ധപ്പെട്ടത്**: [Chapter 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## പരിചയം
 
-Azure Developer CLI ഉപയോഗിച്ച് Azure റിസോഴ്‌സുകൾ പ്രാവധാനീകരിക്കുകയും നിയന്ത്രിക്കുകയും ചെയ്യുന്നതുമായി ബന്ധപ്പെട്ട എല്ലാം ഉൾക്കൊള്ളുന്ന ഈ സമഗ്ര ഗൈഡ്. പൈസിപിൾ കോഡ് (IaC) മാതൃകകൾ അടിസ്ഥാന റിസോഴ്‌സ് സൃഷ്ടി മുതൽ ഉയർന്ന നിലവാരമുള്ള എന്റർപ്രൈസ് ഗ്രേഡ് ഇൻഫ്രാസ്ട്രക്ചർ ആർക്കിടെക്‌ചറുകൾ വരെയുള്ള Bicep, ARM ടെംപ്ലേറ്റുകൾ, Terraform, Pulumi എന്നിവ ഉപയോഗിച്ച് എങ്ങനെ നടപ്പിലാക്കാമെന്ന് പഠിക്കുക.
+ഈ ഗൈഡ് Azure Developer CLI ഉപയോഗിച്ച് അതിന്റെ ഉൾപ്പെടുത്തിയ Bicep, Terraform പ്രൊവൈഡറുകൾ ഉപയോഗിച്ച് Azure வளങ്ങൾ ഒരുക്കാനും നിയന്ത്രിക്കാനും ആകുന്നു.
+
+> `azd 1.37.2`-നോട് (നവംബർ 2026) താരതമ്യപ്പെടുത്തി പരിശോധന ചെയ്‌തിരിക്കുന്നു. വേറെപിള്ളികൾ പറയാത്തവരെ അപേക്ഷിച്ച്, Bicep, Terraform, സ്‌ക്രിപ്റ്റ് ഉദാഹരണങ്ങൾ **ഉദാഹരണ ഭാഗങ്ങളിൽ** മാത്രമാണ്, പൂർണ്ണ ടെംപ്ലേറ്റ് അല്ല. അവ റഫറൻസ് ചെയ്ത പാരാമീറ്ററുകൾ, മോഡ്യൂളുകൾ, ഐഡൻറിറ്റികൾ, നെറ്റ്വർക്ക്, ആപ്ലിക്കേഷൻ കോഡ് എന്നിവ വിതരണം ചെയ്യുന്ന ഒരു പ്രോജക്റ്റിലേക്ക് സംയോജിപ്പിക്കുക. ഈ പരിശോധനയിൽ Azure പ്രൊവിഷനിംഗ് പ്രവർത്തിക്കും എന്നില്ല.
 
 ## പഠന ലക്ഷ്യങ്ങൾ
 
-ഈ ഗൈഡ് പൂർത്തിയാക്കിയാൽ നിങ്ങൾക്ക്:
-- ഇൻഫ്രാസ്ട്രക്ചർ ആസ് കോഡ് സിദ്ധാന്തങ്ങളും Azure റിസോഴ്‌സ് പ്രാവധാനീകരണവും പ്രാവീണ്യം നേടാം
-- Azure Developer CLI പിന്തുണയ്ക്കുന്ന നിരവധി IaC പ്രൊവൈഡർമാരെ മനസിലാക്കാം
-- സാധാരണ ആപ്ലിക്കേഷൻ ആർക്കിടെക്‌ചറുകൾക്ക് Bicep ടെംപ്ലേറ്റുകൾ രൂപകൽപ്പന ചെയ്ത് നടപ്പിലാക്കാം
-- റിസോഴ്‌സ് പാരാമീറ്ററുകൾ, വേരിയബിൾസ്, പരിസ്ഥിതി-നിർദ്ദിഷ്ട ക്രമീകരണങ്ങൾ ക്രമീകരിക്കുക
-- നെറ്റ്വർകിംഗ്, സുരക്ഷ ഉൾപ്പെടെയുള്ള ഉയർന്ന നിരക്കിലുള്ള ഇൻഫ്രാസ്ട്രക്ചർ മാതൃകകൾ നടപ്പിലാക്കുക
-- റിസോഴ്‌സ് ജീവിത ചക്രം, അപ്‌ഡേറ്റുകൾ, ആശ്രിതത്വ പരിഹാരം നടത്തുക
+ഈ ഗൈഡ് പൂർത്തിയാക്കുന്നതിലൂടെ, നിങ്ങൾ:
+- ഇന്‍ഫ്രാസ്ട്രക്ചർ എസ് കോഡ് സിദ്ധാന്തങ്ങളെ നിപുണരാക്കുകയും Azure റിസോഴ്‌സ് പ്രൊവിഷനിംഗ് നേടുകയും ചെയ്യുക
+- Azure ഡവലപ്പർ CLI പിന്തുണയ്ക്കുന്ന 여러 IaC പ്രൊവൈഡർമാർ മനസ്സിലാക്കുക
+- പൊതുവായ ആപ്ലിക്കേഷൻ ആർക്കിടെക്ചറുകൾക്കായി Bicep ടെംപ്ലേറ്റുകൾ രൂപകല്പന ചെയ്ത് നടപ്പിലാക്കുക
+- റിസോഴ്‌സ് പാരാമീറ്ററുകൾ, ചരങ്ങൾ, പരിസ്ഥിതി-പ്രത്യേക സെറ്റിംഗുകൾ ക്രമീകരിക്കുക
+- നെറ്റ്‌വർകിങ് மற்றும் സുരക്ഷ ഉൾപ്പെടെ മെച്ചപ്പെട്ട ഇൻഫ്രാസ്ട്രക്ചർ മാതൃകകൾ നടപ്പിലാക്കുക
+- റിസോഴ്‌സ് ജീവിതചക്രം, അപ്ഡേറ്റുകൾ, ആശ്രിതത്വ പരിഹാരം കൈകാര്യം ചെയ്യുക
 
-## പഠനഫലങ്ങൾ
+## പഠന ഫലങ്ങൾ
 
-പൂർത്തിയായതിന് ശേഷം നിങ്ങൾക്ക് കഴിയും:
-- Bicep, ARM ടെംപ്ലേറ്റുകൾ ഉപയോഗിച്ച് Azure ഇൻഫ്രാസ്ട്രക്ചർ രൂപകൽപ്പനയും പ്രാവധാനീകരണവും നടത്തുക
-- ശരിയായ റിസോഴ്‌സ് ആശ്രിതത്വത്തോടെ ജടിലമായ മൾട്ടി-സർവീസ് ആർക്കിടെക്‌ചനുകൾ ക്രമീകരിക്കുക
-- പല പരിസ്ഥിതികൾക്കും ക്രമീകരണങ്ങൾക്കുമായി പാരാമീറ്ററുചെയ്യാനാവുന്ന ടെംപ്ലേറ്റുകൾ നടപ്പിലാക്കുക
-- ഇൻഫ്രാസ്ട്രക്ചർ പ്രാവധാനീകരണ പ്രശ്നങ്ങൾ തിരിച്ചറിയുകയും ഡിപ്പ്ലോയ്‌മെന്റ് പരാജയങ്ങൾ പരിഹരിക്കുകയും ചെയ്യുക
-- Azure വെയിൽ-ആർക്കിടെക്റ്റഡ് ഫ്രെയിംവർക്ക് സിദ്ധാന്തങ്ങൾ ഇൻഫ്രാസ്ട്രക്ചർ രൂപകൽപ്പനയിൽ പ്രയോഗിക്കുക
-- ഇൻഫ്രാസ്ട്രക്ചർ അപ്‌ഡേറ്റുകളും വെർഷനിംഗ് തന്ത്രങ്ങളും നിയന്ത്രിക്കുക
+പൂർത്തിയായപ്പോൾ, നിങ്ങൾക്ക് കഴിയും:
+- Bicep ಮತ್ತು ARM ടembeല്‍റ്റുകള്‍ ഉപയോഗിച്ച് Azure ഇൻഫ്രാസ്ട്രകചർ ഡിസൈൻ ചെയ്യുകയും Provision ചെയ്യുകയും ചെയ്യുക
+- ശരിയായ റിസോഴ്സ് ആശ്രിതത്വങ്ങൾ ഉപയോഗിച്ച് സങ്കീർണ്ണമായ മൾട്ടി-സർവീസ് ആർക്കിടെക്ചറുകൾ കോൺഫിഗർ ചെയ്യുക
+- നിരവധി പരിതസ്ഥിതികൾക്കും കോൺഫിഗറേഷനുകൾക്കും പാരാമീറ്ററൈസ്ഡ് ടembeള്‍റ്റുകൾ നടപ്പിലാക്കുക
+- ഇൻഫ്രാസ്ട്രകചർ പ്രൊവിസനിംഗ് പ്രശ്നങ്ങൾ പരിഹരിക്കുകയും ഡിപ്ലോയ്മെന്റ് പരാജയങ്ങൾ പരിഹരിക്കുകയും ചെയ്യുക
+- ഇൻഫ്രാസ്ട്രകചർ ഡിസൈനിന് Azure വേൾ-ആർക്കിടെക്ടഡ് ഫ്രെയിംവർക്കിന്റെ സിദ്ധാന്തങ്ങൾ പ്രയോഗിക്കുക
+- ഇൻഫ്രാസ്ട്രകചർ അപ്‌ഡേറ്റുകൾ മാനേജുചെയ്യുകയും ഇൻഫ്രാസ്ട്രകചർ വേർഷനിംഗ് തന്ത്രങ്ങൾ നടപ്പിലാക്കുകയും ചെയ്യുക
 
-## ഇൻഫ്രാസ്ട്രക്ചർ പ്രാവസ്ഥാന പരാമർശം
+## ഇൻഫ്രാസ്ട്രകചർ പ്രൊവിസനിംഗ് അവലോകനം
 
-Azure Developer CLI അനേകം ഇൻഫ്രാസ്ട്രക്ചർ ആസ് കോഡ് (IaC) പ്രൊവൈഡർമാരെ പിന്തുണയ്ക്കുന്നു:
-- **Bicep** (ശുപാർശ ചെയ്യുന്നു) - Azure യുടെ ഡൊമേൻ-സ്പെസിഫിക് ഭാഷ
-- **ARM Templates** - JSON അടിസ്ഥാനമുള്ള Azure റിസോഴ്‌സ് മാനേജർ ടെംപ്ലേറ്റുകൾ
-- **Terraform** - മൾട്ടി-ക്ലൗഡ് ഇൻഫ്രാസ്ട്രക്ചർ ഉപകരണം
-- **Pulumi** - പ്രോഗ്രാമിംഗ് ഭാഷകളോടെ ആധുനിക ഇൻഫ്രാസ്ട്രക്ചർ ആസ് കോഡ്
+Azure ഡവലപ്പർ CLI ആശുപത്രിയാക്കുന്ന പല ഇൻഫ്രാസ്ട്രകചർ ആസ് കോഡ് (IaC) പ്രൊവൈഡർമാരുണ്ട്:
+- **Bicep** (ശിപാർശചെയ്യപ്പെട്ടത്) - Azureയുടെ ഡൊമെയ്ൻ-സ്പെസിഫിക് ഭാഷ
+- **ARM Templates** - Bicep ARMത്തിലേക്ക് കംപൈൽ ചെയ്യുന്നു; കാക.raw ARM JSON പൂർത്തിയായി ഒരു പ്രത്യേക ഇൻബിൽട്ട് അല്ല `infra.provider`
+- **Terraform** - മൾട്ടി-ക്ലൗഡ് ഇൻഫ്രാസ്ട്രകചർ ഉപകരണം
+- **എക്സ്ടൻഷൻ പ്രൊവൈഡർമാർ** - പ്രത്യേകം ഇൻസ്റ്റാൾ ചെയ്ത പ്രൊവൈഡർ എക്സ്ടൻഷനും അതിന്റെ രേഖപ്പെടുത്തിയ കോൺഫിഗറേഷനും ആവശ്യമാണ്; ഏത് പ്രൊവൈഡർ സ്ട്രിംഗ് പിന്തുണയ്ക്കപ്പെടുന്നു എന്ന് ഒരിക്കലും കരുതരുത്
 
-## Azure റിസോഴ്‌സുകൾ മനസിലാക്കുക
+## Azure റിസോഴ്സ്‌കൾ മനസ്സിലാക്കൽ
 
-### റിസോഴ്‌സ് ഹൈറാർക്കി
+### റിസോഴ്സ് വിശിഷ്ടമാന്യতা
 ```
 Azure Account
 └── Subscriptions
@@ -49,18 +51,19 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### ആപ്ലിക്കേഷനുകൾക്കുള്ള പൊതു Azure സേവനങ്ങൾ
-- **കമ്പ്യൂട്ട്**: ആപ്പ് സർവീസ്, കണ്ടെയ്‌നർ ആപ്പുകൾ, ഫങ്ഷൻസ്, വാച്ച്വൽ മെഷീനുകൾ
-- **സ്റ്റോറേജ്**: സ്റ്റോറേജ് അക്കൗണ്ട്, കോസ്മോസ് DB, SQL ഡാറ്റാബേസ്, പോസ്റ്റ്ഗ്രെഎസ്‌ക്യുൽ
-- **നെറ്റ്വർക്കിംഗ്**: വാച്ച്വൽ നെറ്റ്‌വർക്ക്, ആപ്ലിക്കേഷൻ ഗേറ്റ്വേ, CDN
-- **സുരക്ഷ**: കി വാൾട്ട്, ആപ്ലിക്കേഷൻ ഇൻസൈറ്റ്സ്, ലോഗ് അനലിറ്റിക്‌സ്
-- **AI/ML**: Azure AI സേവനങ്ങൾ, Azure OpenAI, Azure മെഷീൻ ലേണിംഗ്
+### ആപ്പിക്കേഷൻസിനുള്ള പൊതുവായ Azure സേവനങ്ങൾ
+- **കമ്പ്യൂട്ട്**: ആപ്പ് സർവീസ്, കൺടെയ്‌നർ ആപ്പുകൾ, ഫംഗ്ഷനുകൾ, വെർച്ച്വൽ മഷീനുകൾ
+- **സ്റ്റോറേജ്**: സ്റ്റോറേജ് അക്കൗണ്ട്, കോസ്മോസ് DB, SQL ഡാറ്റാബേസ്, പോസ്റ്റ്‌ഗ്രെ SQL
+- **നെറ്റ്വർക്കിംഗ്**: വെർച്ച്വൽ നെറ്റ്‌വർക്ക്, ആപ്ലിക്കേഷൻ ഗേറ്റ്‌വേ, CDN
+- **സുരക്ഷ**: കീ വോൾട്ട്, ആപ്ലിക്കേഷൻ ഇൻസൈറ്റ്സ്, ലോഗ് അനലിറ്റിക്സ്
+- **AI/ML**: ആസ്യൂർ AI സേവനങ്ങൾ, ആസ്യൂർ ഓപ്പൺAI, ആസ്യൂർ മെഷീൻ ലേണിംഗ്
 
-## Bicep ഇൻഫ്രാസ്ട്രക്ചർ ടെംപ്ലേറ്റുകൾ
+## ബിസെപ് ഇൻഫ്രാസ്ട്രക്ചർ ടെംപ്ലേറ്റുകൾ
 
-### അടിസ്ഥാന Bicep ടെംപ്ലേറ്റ് ഘടന
+### അടിസ്ഥാന ബിസെപ് ടെംപ്ലേറ്റ് ഘടന
 ```bicep
-// infra/main.bicep
+// infra/modules/web.bicep - resource-group-scoped module fragment
+targetScope = 'resourceGroup'
 @description('The name of the environment')
 param environmentName string
 
@@ -75,11 +78,6 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var tags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
-}
-
-// Resource Group (created automatically by azd)
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
-  name: '${applicationName}-${environmentName}-rg'
 }
 
 // App Service Plan
@@ -100,11 +98,14 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'web' })
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
@@ -128,9 +129,11 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### പുരോഗമന Bicep മാതൃകകൾ
+ഒരു പൂർണ്ണമായ azd പ്രോജക്ടിനായി, ടാഗ് ചെയ്ത ഒരു റിസോഴ്സ് ഗ്രൂപ്പ് സൃഷ്ടിക്കുകയും അതിന്റെ സ്കോപ്പും പാസ്സു ചെയ്യുകയും ചെയ്യുന്ന സബ്സ്ക്രിപ്ഷൻ സ്കോപ്പിലുള്ള `infra/main.bicep` നിന്ന് ഈ മോഡ്യൂൾ വിളിക്കണം. `main.parameters.json`-ൽ `environmentName`/`location`-നെ പൊരുത്തിപ്പിക്കുക. `azd-service-name: web` ടാഗ് റിസോഴ്സിനെ `services.web`-ഉടനേയ്ക്ക് ബന്ധിപ്പിക്കുന്നു; സ്വതന്ത്ര ഔട്ട്‌പുട്ട് നാമങ്ങൾ മാത്രം സർവീസ് ഡിസ്കവറി ക്രമീകരിക്കുകയില്ല.
 
-#### മോഡുലാർ ഇൻഫ്രാസ്ട്രക്ചർ
+### ഉയർന്ന ബിസെപ് പാറ്റേണുകൾ
+
+#### മോഡ്യൂളർ ഇൻഫ്രാസ്ട്രക്ചർ
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -142,11 +145,14 @@ param appSettings array = []
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: name
   location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: planId
     siteConfig: {
       appSettings: appSettings
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
     }
     httpsOnly: true
@@ -179,7 +185,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### നിബന്ധനാപരമായ റിസോഴ്‌സ് സൃഷ്ടി
+#### വ്യവസ്ഥാപിത റിസോഴ്സ് സൃഷ്ടി
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,13 +206,13 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🌐 azd-യോടെയുള്ള Terraform ഉപയോഗം
+## 🌐 azd-വുമായ Terraform ഉപയോഗിക്കൽ
 
-Bicep ആണ് azd-യുടെ ഡിഫാൾട്ട്, പക്ഷേ azd **Terraform**-ഉം പിന്തുണയ്ക്കുന്നു — നിങ്ങളുടെ ടീം ഇതിനകം ഇതിൽ സ്റ്റാൻഡേർഡ് ആണെങ്കിൽ അല്ലെങ്കിൽ നിങ്ങൾ മൾട്ടി-ക്ലൗഡ് ഇൻഫ്രാസ്ട്രക്ചർ മാനേജുചെയ്യുമ്പോൾ ഇത് പ്രയോജനപ്പെടുത്താം. azd പ്രവൃത്തി പ്രവാഹം (`azd up`, `azd provision`, `azd down`) ഒരുപോലെയാണ്; ഇൻഫ്രാസ്ട്രക്ചർ ഭാഷയും ഫോള്ഡർ ക്രമീകരണവും മാത്രമാണ് മാറ്റം.
+ബിസെപ് azd-യുടെ ഡീഫോൾട്ട് ആണ്, പക്ഷേ azd **Terraform**-ഉം പിന്തുണയ്‌ക്കുന്നു—നിങ്ങളുടെ ടീം ഇതിനകം ഇതിൽ സ്റ്റാൻഡറ്ഡൈസ് ചെയ്‌തിരിക്കുന്നതായി അല്ലെങ്കിൽ നിങ്ങൾ മൾട്ടി-ക്ലൗഡ് ഇൻഫ്രാസ്ട്രക്ചർ കൈകാര്യം ചെയ്യുന്നതായിരിക്കും എങ്കിൽ ഇത് ഉപയോഗപ്രദമാണ്. azd വേർക്ക്ഫ്ലോ ( `azd up`, `azd provision`, `azd down` ) ഏകദേശം സമാനമാണ്;唯ഇൻഫ്രാസ്ട്രക്ചർ ഭാഷയും ഫോൾഡർ ലേയൗട്ടും മാറ്റം വരും.
 
-### azd-യ്ക്ക് Terraform ഉപയോഗിക്കാൻ പറയുക
+### azd-നെ Terraform ഉപയോഗിക്കാൻ പറഞ്ഞു കൊടുക്കുക
 
-`azure.yaml` ലേക്ക് `infra` സെക്ഷൻ ചേർക്കുക അത് Terraform പ്രൊവൈഡറെ സൂചിപ്പിക്കുന്നു:
+Terraform പ്രൊവൈഡറെ സൂചിപ്പിക്കുന്ന `infra` സെക്ഷൻ `azure.yaml`-ലേക്ക് ചേർക്കുക:
 
 ```yaml
 # azure.yaml
@@ -221,9 +227,9 @@ services:
     host: containerapp
 ```
 
-### Terraform ഫോള്ഡർ ക്രമീകരണം
+### ടെറഫോം ഫോൾഡർ ലേayout്
 
-Terraform പ്രൊവൈഡറിനൊപ്പം, നിങ്ങളുടെ `infra/` ഫോള്ഡറിൽ Bicep പകരം `.tf` ഫയലുകൾ ഉപയോഗിക്കുന്നു:
+ടെറഫോം പ്രൊവൈഡറിനൊപ്പം, നിങ്ങളുടെ `infra/` ഫോൾഡർ Bicep ന്റെ പകരം `.tf` ഫയലുകൾ ഉപയോഗിക്കുന്നു:
 
 ```
 infra/
@@ -234,7 +240,9 @@ infra/
 └── main.tfvars.json   # values azd injects per environment
 ```
 
-### ഒരു ലഘുവായ `main.tf`
+### ഒരു `main.tf` ഫ്രാഗ്മെന്റ്
+
+ഇത് ഒരു റെസോഴ്‌സ് ഗ്രൂപ്പും പ്ലാനും മാത്രമാണ് സൃഷ്ടിക്കുന്നത്, ഡിപ്പ്ലോയബ്ൾ സർവീസ് അല്ല. നിങ്ങൾ ഇൻപുട്ട് വേരിയബിളുകളും, അനുയോജ്യമായ `azurerm` പ്രൊവൈഡറും, വെബ്ആപ്പും അതിന്റെ സർവീസ് ടാഗ്/റെസോഴ്‌സ്-നേം മാപ്പിംഗും പ്രഖ്യാപിക്കണം.
 
 ```hcl
 # infra/main.tf
@@ -253,9 +261,9 @@ resource "azurerm_service_plan" "plan" {
 }
 ```
 
-### എങ്ങനെ azd നിങ്ങളുടെ Terraform ഔട്ട്പുട്ടുകളോട് കണക്ട് ചെയ്യുന്നു
+### azd നിങ്ങളുടെ ടെറഫോം ഔട്ട്പുട്ടുകളുമായി എങ്ങനെ കണക്ട് ചെയ്യുന്നു
 
-azd Terraform **ഔട്ട്പുട്ടുകൾ** വായിച്ച് നിങ്ങളുടെ എന്റ്എൻഡ് പോയിന്റുകളും പരിസ്ഥിതി മൂല്യങ്ങളെയും നിങ്ങളുടെ ആപ്പിലേക്ക് തിരികെ ബന്ധിപ്പിക്കുന്നു. ഔട്ട്പുട്ടുകളുടെ പേരുകൾ പ്രധാനമാണ്—azd പ്രത്യേക പേരുകളെ തേടി നോക്കുന്നു:
+azd ടെറഫോം **ഔട്ട്പുട്ടുകൾ** പരിസ്ഥിതി മൂല്യങ്ങളിലേക്ക് വായിക്കുന്നു. ഈ ഫ്രാഗ്മെന്റ് നിങ്ങൾ `azurerm_linux_web_app.web` നിർവചിച്ചിരിക്കുമെന്ന് കരുതുന്നു; സർവീസ് ഡിസ്കവറി ഇപ്പോഴും ഒരു പൊരുത്തമുള്ള റെസോഴ്‌സ് പേര് അല്ലെങ്കിൽ `azd-service-name` ടാഗ് ആവശ്യമാണ്:
 
 ```hcl
 # infra/outputs.tf
@@ -264,111 +272,48 @@ output "AZURE_LOCATION" {
 }
 
 output "SERVICE_WEB_ENDPOINT_URL" {
-  value = azurerm_linux_web_app.web.default_hostname
+  value = "https://${azurerm_linux_web_app.web.default_hostname}"
 }
 ```
 
-> **പ്രധാനമാണ്:** azd ഓരോ പരിസ്ഥിതിക്കും റിസോഴ്‌സുകൾ ട്രാക്ക് ചെയ്യാൻ `azd-env-name` ടാഗും `AZURE_*` ഔട്ട്പുട്ടുകളും ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ റിസോഴ്‌സ് ഗ്രൂപ്പിന് `"azd-env-name" = var.environment_name` എന്ന ടാഗ് എല്ലായ്പ്പോഴും നൽകുക, അതിലൂടെ `azd down` എല്ലാം കണ്ടെത്തി அகറ്റാൻ കഴിയും.
+> **പ്രസക്തം:** azd പരിസ്ഥിതിപ്രകാരം രേസോഴ്‌സുകൾ ട്രാക്ക് ചെയ്യാൻ `azd-env-name` ടാഗും `AZURE_*` ഔട്ട്പുട്ടുകളും ഉപയോഗിക്കുന്നു. സാങ്കേതികമായി, നിങ്ങളുടെ റെസോഴ്‌സ് ഗ്രൂപ്പിന് എല്ലായ്പ്പോഴും `"azd-env-name" = var.environment_name` ടാഗ് നൽകുക, അതിനാൽ `azd down` എല്ലാം കണ്ടെത്തുകയും നീക്കം ചെയ്യുകയും ചെയ്യാൻ കഴിയും.
 
-### Terraform ഉപയുക്തി ഉപയോഗിച്ച് ഡിപ്പ്ലോയ് ചെയ്യുക
+### ടെറഫോം ഉപയോഗിച്ച് ഡിപ്ലോയ്ഡ് ചെയ്യുക
 
-കമാൻഡുകൾ Bicep തുറന്ന് സാദൃശ്യമാണിതു:
-
-```bash
-azd auth login
-azd env new dev
-azd provision --preview   # azd അടിയന്തരമായി 'terraform plan' പ്രവർത്തിപ്പിക്കുന്നു
-azd up                    # പ്രൊവിഷൻ + ഡീപ്ലോയ്
-azd down --force          # Terraform-നായി നിയന്ത്രിക്കുന്ന റിസോഴ്‌സുകൾ നശിപ്പിക്കുന്നു
-```
-
-> **ആവശ്യകത:** Terraform ഇൻസ്റ്റാൾ ചെയ്തു നിങ്ങളുടെ `PATH`-ൽ ഉണ്ടാകണം. azd Terraform *പ്രവൃത്തി പ്രവാഹം* നിയന്ത്രിക്കുന്നു, എന്നാൽ Terraform നിങ്ങൾക്കായി ഇൻസ്റ്റാൾ ചെയ്യുകയില്ല. സ്റ്റേറ്റിനായി, azd ഡിഫോൾട്ട് ആയി ലൊക്കൽ സ്റ്റേറ്റ് ഉപയോഗിക്കുന്നു; ടീമുകൾക്കായി, `provider.tf`-യിൽ റിമോട്ട് ബാക്ക്എൻഡ് (ഉദാഹരണത്തിന് Azure സ്റ്റോറേജ് ബാക്ക്എൻഡ്) കോൺഫിഗർ ചെയ്യുക.
-
-সম্পূর্ণ, പ്രവർത്തനക്ഷമമായ Terraform അടിസ്ഥാനത്തിലായ സ്റ്റാർട്ടേഴ്‌സ് വേണ്ടി, [Awesome AZD ഗാലറി](https://azure.github.io/awesome-azd/) ബ്രൗസ് ചെയ്ത് Terraform ഫിൽറ്റർ ചെയ്യുക, അല്ലെങ്കിൽ ഔദ്യോഗിക [azd Terraform ഡോക്യുമെന്റേഷൻ](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd) കാണുക.
-
-## 🧩 azd-യോടെയുള്ള Pulumi ഉപയോഗം
-
-നിങ്ങളുടെ ടീം പർപ്പസ്-ജനറൽ ഭാഷകളിൽ (TypeScript, Python, Go, അല്ലെങ്കിൽ C#) ഇൻഫ്രാസ്ട്രക്ചർ എഴുതുകയാണെങ്കിൽ, azd **Pulumi**-നും പിന്തുണ നൽകുന്നു. Terraform പോലെ, `azd up` / `azd provision` / `azd down` പ്രവൃത്തി പ്രവാഹം മാറുന്നില്ല — ഇൻഫ്രാസ്ട്രക്ചർ ടൂളിംഗും ഫോള്ഡർ ക്രമീകരണവും മാത്രമാണ് വ്യത്യാസം.
-
-### azd-യ്ക്ക് Pulumi ഉപയോഗിക്കാൻ പറയുക
-
-```yaml
-# azure.yaml
-name: my-pulumi-app
-infra:
-  provider: pulumi      # default is "bicep"
-  path: infra           # folder containing your Pulumi program
-services:
-  web:
-    project: ./src
-    language: js
-    host: containerapp
-```
-
-### Pulumi ഫോള്ഡർ ക്രമീകരണം
-
-```
-infra/
-├── Pulumi.yaml          # project definition
-├── Pulumi.dev.yaml      # stack config (one per environment)
-├── index.ts             # your resource program (or __main__.py, main.go, etc.)
-├── package.json         # dependencies (for TypeScript)
-└── tsconfig.json
-```
-
-### ഒരു ലഘുവായ `index.ts`
-
-```typescript
-import * as azure from "@pulumi/azure-native";
-import * as pulumi from "@pulumi/pulumi";
-
-const environmentName = pulumi.getStack();
-
-// azd ട്രാക്ക് ചെയ്ത് ക്ലീൻ ചെയ്യാൻ എല്ലാ റിസോഴ്സുകളും ടാഗ് ചെയ്യുക
-const tags = { "azd-env-name": environmentName };
-
-const rg = new azure.resources.ResourceGroup("rg", {
-  resourceGroupName: `rg-${environmentName}`,
-  tags,
-});
-
-// azd ഈ ഔട്ട്പുട്ടുകൾ നിങ്ങളുടെ ഇടപാടിൽ വീണ്ടും വായിക്കുന്നു
-export const AZURE_LOCATION = rg.location;
-export const SERVICE_WEB_ENDPOINT_URL = "https://...";
-```
-
-### സ്റ്റാക്കുകൾ azd പരിസ്ഥിതികളുമായി മാപ്പ് ചെയ്യുന്നു
-
-Pulumi ഡിപ്പ്ലോയ്മെൻറുകൾ **സ്റ്റാക്കുകളായി** ഓർഗനൈസ് ചെയ്യുന്നുണ്ട്, azd ഓരോ പരിസ്ഥിതിക്കും സമാനമായ പേരുള്ള Pulumi സ്റ്റാക്ക് നിശ്ചയിക്കുന്നു. നിങ്ങൾ `azd env new staging` പ്രവർത്തിപ്പിക്കുമ്പോൾ, azd `staging` Pulumi സ്റ്റാക്ക് തെരഞ്ഞെടുക്കുകയും(അല്ലെങ്കിൽ സൃഷ്ടിക്കുകയും) ചെയ്യുന്നു. സമാനമായ `azd-env-name` ടാഗിങ്ങും `AZURE_*` ഔട്ട്പുട്ട് നിബന്ധനകളും ബാധകമാണ്, അതുകൊണ്ട് `azd down` എല്ലാം കണ്ടെത്തി அகറ്റാൻ കഴിയും.
-
-### Pulumi ഉപയോഗിച്ച് ഡിപ്പ്ലോയ് ചെയ്യുക
+കമാൻഡുകൾ Bicep പോലെ പൂർണ്ണമായി സമാനമാണ്:
 
 ```bash
 azd auth login
 azd env new dev
-azd provision --preview   # azd മേൽവശത്ത് 'pulumi preview' ഓടിക്കുന്നു
-azd up                    # പ്രോവിഷൻ + ഡിപ്ലോയ്
-azd down --force          # 'pulumi destroy' ഓടിക്കുന്നു
+azd provision --preview   # azd runs 'terraform plan' under the hood
+azd up                    # provision + deploy
+azd down --force          # destroys the Terraform-managed resources
 ```
 
-> **ആവശ്യകത:** Pulumi ഇൻസ്റ്റാൾ ചെയ്ത് നിങ്ങളുടെ `PATH`-ൽ ഉണ്ടാകണം, കൂടാതെ നിങ്ങൾക്ക് സ്റ്റേറ്റ് ബാക്ക്എൻഡ് (Pulumi ക്ലൗഡ് അല്ലെങ്കിൽ വീട്ടിൽ നിയന്ത്രിക്കാവുന്ന ബാക്ക്എൻഡ്, ഉദാഹരണത്തിന് Azure Blob Storage) ആവശ്യമുള്ളതാണ്. azd Pulumi പ്രക്രിയ* നിയന്ത്രിക്കുന്നു, ഇൻസ്റ്റാൾ ചെയ്യുന്നില്ല. ഔദ്യോഗിക [azd Pulumi ഡോക്യുമെന്റേഷൻ](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd) കാണുക.
+> **ആവശ്യമാണ്:** Terraform ഇൻസ്റ്റാൾ ചെയ്ത് നിങ്ങളുടെ `PATH`-ൽ ഉണ്ടായിരിക്കണം. azd Terraform *വർക്ക്ഫ്ലോ* നിയന്ത്രിക്കുന്നു, എന്നാൽ Terraform നിങ്ങൾക്കായി ഇൻസ്റ്റാൾ ചെയ്യാറില്ല. സ്റ്റേറ്റിനായി, azd ഡിഫോൾട്ട്локൽ സ്റ്റേറ്റ് ഉപയോഗിക്കുന്നു; ടീമുകൾക്കായി, ഒരു റിമോട്ട് ബാക്ക്‌എൻഡ് (ഉദാഹരണത്തിന്, Azure Storage ബാക്ക്‌എൻഡ്) `provider.tf`-ൽ കോൺഫിഗർ ചെയ്യുക.
 
-## 🎯 നിങ്ങളുടെ സർവീസിന് ഹോസ്റ്റ് തിരഞ്ഞെടുക്കൽ
+പൂർണ്ണമായും പ്രവർത്തനക്ഷമമായ Terraform അടിസ്ഥാനമാക്കിയ സ്റ്റാർട്ടറുകൾക്കായി, [Awesome AZD ഗ്യാലറിയിൽ](https://azure.github.io/awesome-azd/) നോക്കി Terraform ഫിൽട്ടർ ചെയ്യുക, അല്ലെങ്കിൽ ഔദ്യോഗിക [azd Terraform ഡോക്യുമെന്റേഷൻ](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd) കാണുക.
 
-`azure.yaml`യിലെ `host` ഫീൽഡ് നിങ്ങളുടെ കോഡ് എവിടെ ഓടണം എന്ന് തീരുമാനിക്കും. azd വിവിധ ഹോസ്റ്റുകൾ പിന്തുണയ്ക്കുന്നു—ശരിയായ ഹോസ്റ്റ് തിരഞ്ഞെടുക്കൽ ഇൻഫ്രാസ്ട്രക്ചർ ഭാഷയ്‌ക്കേക്കാളും പ്രധാനമാണ്. ഇതാ ഒരു തുടക്കക്കാർക്ക് സൗഹൃദപരമായ താരതമ്യം:
+## 🧩 മറ്റ് ഇൻഫ്രാസ്ട്രക്ചർ ടൂളുകൾ
 
-| `host` മൂല്യം | മികച്ചതിനായി | കാരണം |
+Pulumi azd 1.37.2-ലെ ഫിറ്റിലാക്കിയ പ്രൊവിഷണിങ് പ്രൊവൈഡർ അല്ല. `infra.provider: pulumi` മാത്രം സെറ്റു ചെയ്‌താൽ പ്രവർത്തനക്ഷമമായ ഇന്റഗ്രേഷൻ ഉറപ്പുവരുത്താറില്ല, കൂടാതെ `azd env new` ഓട്ടോമാറ്റിക് ആയി Pulumi സ്റ്റാക്ക് സൃഷ്ടിക്കുകയോ തിരഞ്ഞെടുക്കുകയോ ചെയ്‌തില്ല. നിങ്ങൾ വേറെ IaC ടൂൾ ഉപയോഗിച്ചാൽ, അംഗീകരിച്ച ഒരു പ്രൊവൈഡർ എക്സ്റ്റൻഷന്റെ ഡോക്യുമെന്റേഷൻ പിന്തുടരുക അല്ലെങ്കിൽ നിങ്ങളുടെ സ്വന്തം വർക്ക്ഫ്ലോയിൽ അതിന്റെ ലൈഫ്‌സൈക്കിൾ വ്യക്തമായി മാനേജ് ചെയ്യുക. ഈ കോഴ്സ് Pulumi പ്രൊവൈഡർ നൽകാറോ പരിശോധിക്കുന്നതോ ചെയ്യില്ല.
+
+## 🎯 നിങ്ങളുടെ സർവീസിനായി ഹോസ്റ്റിംഗ് തിരഞ്ഞെടുക്കൽ
+
+`host` ഫീൽഡ് `azure.yaml`-ൽ നിങ്ങളുടെ കോഡ് എവിടെ പ്രവർത്തിക്കുമെന്ന് നിർണ്ണയിക്കുന്നു. azd പല ഹോസ്റ്റുകളും പിന്തുണയ്ക്കുന്നു—തികച്ചും ശരിയുള്ളത് തെരഞ്ഞെടുക്കുക ഇൻഫ്രാസ്ട്രക്ചർ ഭാഷയെക്കാളും കൂടുതൽ പ്രധാനമാണ്. ഇത് തുടക്കക്കാർക്കായി സൗഹൃദപരമായ തുൾക്കാഴ്ചയാണ്:
+
+| `host` മൂല്യം | യാതിനായി മികച്ചത് | കാരണം |
 |--------------|----------|-----|
-| `appservice` | പരമ്പരാഗത വെബ് ആപ്പുകളും API-കളും | എളുപ്പത്തിൽ ഉള്ള PaaS; കണ്ടെയ്‌നറുകൾ ആവശ്യമില്ല |
-| `staticwebapp` | ഫ്രണ്ട്-എൻഡ് SPA-കൾ (റിയാക്റ്റ്, വ്യു, ആംഗുലർ) | ഗ്ലോബൽ CDN + സൗജന്യ SSL, ബിൽറ്റ് ഇൻ API പിന്തുണ |
-| `function` | ഇവന്റ്-ഡ്രിവൻ, സെർവർലെസ് വർക്ക്ലോഡുകൾ | സ്കെയിൽ-ടു-സീറോ, പെയ്-പെർ-എക്സിക്യൂഷൻ |
-| `containerapp` | കണ്ടെയ്‌നറൈസ്ഡ് മൈക്രോസർവീസുകൾ | സെർവർലെസ് കണ്ടെയ്‌നറുകൾ, സ്കെയിൽ-ടു-സീറോ, ബിൽറ്റ് ഇൻ ഇന്‍ഗ്രസ് |
-| `aks` | സങ്കീർണ്ണ ഓർക്കസ്ട്രേഷൻ ആവശ്യങ്ങൾ | നിങ്ങൾ സത്യത്തിൽ Kubernetes വേണമെന്ന് തോന്നുമ്പോൾ പൂർണ്ണ നിയന്ത്രണം |
-| `springapp` | ജാവ സ്പ്രിംഗ് ബൂട്ട് ആപ്പുകൾ | മാനേജ് ചെയ്ത Azure Spring Apps റൺടൈം, സ്പ്രിംഗ്-ഉദ്ദേശിച്ചുള്ള ട്യൂണിംഗ് |
+| `appservice` | പരമ്പരാഗത വെബ് ആപ്പുകളും API കളും | ഏറ്റവും ലളിതമായ PaaS; കണ്ടൈനറുകൾ不要 |
+| `staticwebapp` | ഫ്‌റണ്ട്-എൻഡ് SPAs (React, Vue, Angular) | ഗ്ലോബൽ CDN + സൗജന്യ SSL, ഇൻറഗ്രേറ്റഡ് API പിന്തുണ |
+| `function` | ഇവന്റ്-ഡ്രിവൻ, സർവറ്ലെസ് വർക്ക്‌ലോഡ് | സ്തുതി-ലിങ്ക് സ്കെയിലിംഗ്, പ്രയോഗംപ്രതി പണം നൽകൽ |
+| `containerapp` | കണ്ടൈനറൈസ്ഡ് മൈക്രോസർവീസുകൾ | സർവറ്ലെസ് കണ്ടൈനറുകൾ, സ്തുതി-ലിങ്ക് സ്കെയിലിംഗ്, ഇൻഗ്രസ് ഇൻറിഗ്രേറ്റഡ് |
+| `aks` | കോംപ്ലക്സ് ഓർക്കസ്ട്രേഷൻ ആവശ്യങ്ങൾ | യഥാർത്ഥത്തിൽ ആവശ്യം ഉള്ളപ്പോൾ പൂർത്തിയായ Kubernetes നിയന്ത്രണം |
+| `springapp` | നിലവിലുള്ള Azure Spring Apps ഡിപ്പ്ലോയ്മെന്റുകൾ | പഴയ ലക്ഷ്യം; സർവീസ് 2028 മാർച്ച് 31-ന് ഓർമ്മപ്പെടുത്തപ്പെടും, പുതുമുഖ ഉപഭോക്താക്കൾക്ക് അടച്ചിടും |
 
-### AKS ഉപയോഗിക്കേണ്ടത് എപ്പോഴാണെന്ന് അറിയുക
+### AKS തിരഞ്ഞെടുക്കേണ്ടത് എപ്പോൾ
 
-**Azure Kubernetes Service (`host: aks`)** നിങ്ങൾക്ക് Kubernetes-ന്റെ പൂർണ്ണ ശക്തി നൽകുന്നു — കസ്റ്റം കണ്ട്രോളർമാർ, സർവീസ് മെഷുകൾ, സങ്കീർണ്ണ നെറ്റ്വർക്കിംഗ്, ഫൈൻ-ഗ്രെയിൻഡ് ഷെഡ്യൂളിംഗ്. ആ ശക്തിക്ക് ഒപ്പം ഓപ്പറേഷണൽ ചരച്ചുണ്ട്: നിങ്ങൾ നോഡ് പൂളുകൾ, അപ്‌ഡേറ്റുകൾ, ക്ലസ്റ്റർ നെറ്റ്വർക്കിംഗ് നിയന്ത്രിക്കണം.
+**Azure Kubernetes Service (`host: aks`)** നിങ്ങൾക്ക് കസ്റ്റം കണ്ട്രോളറുകൾ, സർവീസ് മെഷുകൾ, സങ്കീർണ നെറ്റ്‌വർക്കിംഗ്, സൂക്ഷ്മഗ്രേയ്നഡ് ഷെഡുലിംഗ് എന്നിവയുള്ള കുബർനെറ്റിന്റെ മുഴുവൻ ശക്തിയും നൽകുന്നു. ആ ശക്തിക്ക് ഓപ്പറേഷണൽ ഓവർഹെഡ് വരുന്നു: നിങ്ങൾ നോഡ് പൂളുകൾ, അപ്ഗ്രേഡുകൾ, ക്ലസ്റ്റർ നെറ്റ്‌വർക്കിംഗ് എന്നിവ നിയന്ത്രിക്കുന്നു.
 
 ```yaml
 services:
@@ -378,11 +323,11 @@ services:
     host: aks          # deploys to an existing AKS cluster
 ```
 
-> **തല ശാത്തമായി തുടങ്ങുക.** മിക്ക മൈക്രോസർവീസുകൾക്കായി, **Container Apps** കണ്ടെയ്‌നറുകൾ, ഓട്ടോസ്കെയ്ലിങ്, സ്കെയിൽ-ടു-സീറോ ക്ലസ്റ്റർ മാനേജുമെന്റ് ഒഴികാതെ നൽകുന്നു. Kubernetes പ്രത്യേക ഒരു ഫീച്ചർ ആവശ്യമാണെങ്കിൽ മാത്രമേ AKS തിരഞ്ഞെടുക്കൂ.
+> **മുങ്ങിയതായി തുടങ്ങുക സാധിക്കുകയെങ്കിൽ.** മിക്ക മൈക്രോസെർവിസുകൾക്കും **Container Apps** നിങ്ങൾക്ക് ക്ലസ്റ്റർ നിയന്ത്രിക്കാതെ കണ്ടെയ്‌നറുകൾ, ഓട്ടോസ്കെയിലിംഗ്, സ്കെയിൽ-ടു-സീറോ നൽകുന്നു. കുബർനെറ്റ്സ്-സൂചിപ്പിച്ച ഫീച്ചറുകൾ ആവശ്യമെങ്കിൽ മാത്രമേ AKS തിരഞ്ഞെടുക്കാവു.
 
-### Azure Spring Apps എപ്പോൾ ഉപയോഗിക്കാം
+### Azure Spring Apps 언제 사용할까요
 
-**Azure Spring Apps (`host: springapp`)** സ്പ്രിംഗ് ബൂട്ട് ലക്ഷ്യമാക്കി രൂപകൽപ്പന ചെയ്‌ത ഒരു മാനേജ് ചെയ്ത റൺടൈമാണ്. ഇത് സർവീസ് ഡിസ്കവറി, കോൺഫിഗ് സർവർ, ബ്ലൂ-ഗ്രീൻ ഡിപ്പ്ലോയ്‌മെന്റ് എന്നിവ കൈകാര്യം ചെയ്യുന്നു, അതിനാൽ ജാവ ടീമുകൾക്ക് സ്വയം ഇൻഫ്രാസ്ട്രക്ചർ ഓടിക്കേണ്ടതില്ല.
+**Azure Spring Apps (`host: springapp`)** Spring Boot-ന്റെ ആവശ്യാനുസൃതമായി ഡിസൈൻ ചെയ്ത മാനേജുചെയ്‌ത റൺടൈം ആണ്. അത് സർവീസ് ഡിസ്കവറി, കോൺഫിഗ് സേർവർ, ബ്ലൂ-ഗ്രീൻ ഡിപ്ലോയ്മെന്റിനെ കൈകാര്യം ചെയ്യുന്നു, അതുകൊണ്ട് ജാവ ടീമുകൾ സ്വന്തം ഇൻഫ്രാസ്ട്രക്വറർ നിയന്ത്രിക്കേണ്ടതില്ല.
 
 ```yaml
 services:
@@ -392,9 +337,9 @@ services:
     host: springapp
 ```
 
-> ന σας已有 സ്രിംഗ് ബൂട്ട് ആപ്പുകൾ ഉണ്ടെങ്കിൽ, `springapp` ഉപയോഗിക്കുക. സ്പ്രിംഗ്-സ്പെസിഫിക് ആവശ്യമില്ലാത്ത പുതിയ കണ്ടെയ്‌നറൈസ്ഡ് ജാവ ആപ്പുകൾക്ക്, `containerapp` സാധാരണക്കൂടുതൽ ലളിതമായ തിരഞ്ഞെടുപ്പാണ്.
+> പുതിയ തുടക്കക്കാരന് Azure Spring Apps തിരഞ്ഞെടുക്കരുത്: ഇത് പുതിയ ഉപഭോക്താക്കൾക്കായി അടച്ചിട്ടിരിക്കുന്നു, [2028 മാർച്ച് 31ന് വിരമിക്കുന്നു](https://learn.microsoft.com/azure/spring-apps/basic-standard/retirement-announcement). Container Apps പോലുള്ള പിന്തുണയുള്ള മാറ്റുകൾ പ്രധാനം ചെയ്യുക, നിലവിലുള്ള ഡിപ്ലോയ്മെന്റുകൾക്കായി മാറ്റം പദ്ധതി രൂപീകരിക്കൂ.
 
-## 🗃️ ഡാറ്റാബേസ് പ്രാവധാനീകരണം
+## 🗃️ ഡാറ്റാബേസ് പ്രൊവിഷനിംഗ്
 
 ### Cosmos DB
 ```bicep
@@ -446,6 +391,8 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 ```
 
 ### PostgreSQL
+**ഫ്രാഗ്മെന്റ് മുൻ‌കൈ**: `@secure() param databasePassword string` പ്രഖ്യാപിക്കുകയും ശക്തമായ നൽകപ്പെട്ട മൂല്യം ഉപയോഗിക്കുകയും ചെയ്യുക. പൊതുഅക്സസ് **അഥവാ** ചുമതലപ്പെട്ട സബ്നെറ്റ്/സ്വകാര്യ DNS സംയോജിപ്പിക്കുക; രണ്ട് സ്നിപ്പറ്റുകൾ സ്വയം ബന്ധിപ്പിക്കില്ല.
+
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -492,9 +439,11 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 സുരക്ഷയും രഹസ്യ മാനേജുമെന്റും
+`0.0.0.0` നിയമം നിങ്ങളുടെ സബ്സ്ക്രിപ്ഷനെ പുറത്ത് Azure സേവനങ്ങളിൽ നിന്നുള്ള കണക്ഷനുകൾ അനുവദിക്കുന്നു. ഇത് സ്വകാര്യ നെറ്റ്‌വർക്കിംഗ് അല്ല; യഥാർത്ഥ വർക്ക്‌ലോക്സിന് ആവശ്യമായ നിയന്ത്രിത നെറ്റ്‌വർക്ക് രൂപകല്‌പന പ്രഥമീകരിക്കുക.
 
-### കി വാൾട്ട് ഇന്റഗ്രേഷൻ
+## 🔒 സുരക്ഷയും രഹസ്യ നിർവാഹവും
+
+### കീ വോൾട്ട് എന്റഗ്രേഷൻ
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -536,7 +485,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### മാനേജ്ഡ് ഐഡൻറിറ്റി കോൺഫിഗറേഷൻ
+### മാനേജുചെയ്‌ത ഐഡന്റിറ്റി കോൺഫിഗറേഷൻ
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -553,8 +502,8 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
           value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
         }
         {
-          name: 'AZURE_CLIENT_ID'
-          value: webApp.identity.principalId
+          name: 'NODE_ENV'
+          value: 'production'
         }
       ]
     }
@@ -562,9 +511,11 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 നെറ്റ്വർക്കിംഗ് & കണക്ടിവിറ്റി
+സിസ്റ്റം-നിയുക്തമായ ഐഡന്റിറ്റി සඳහා, അതിന്റെ പ്രിൻസിപ്പൽ ഐഡിയിൽ `AZURE_CLIENT_ID` സജ്ജമാക്കരുത്. ഉപയോക്തൃ-നിയുക്തമായ ഐഡന്റിറ്റി അതിന്റെ **ക്ലയന്റ് ഐഡി** ഉപയോഗിക്കുന്നു, ഒബ്‌ജക്റ്റ്/പ്രിൻസിപ്പൽ ഐഡി 아니. കീ വോൾട്ട് റഫറൻസിനും ആപ്പ് ഐഡന്റിറ്റിയുടെ വോൾട്ട് റോൾ നിയമനവും നെറ്റ്‌വർക്ക് ആക്സസ് ആവശ്യമാണ്.
 
-### വാച്ച്വൽ നെറ്റ്‌വർക്ക് കോൺഫിഗറേഷൻ
+## 🌍 നെറ്റ്‌വർക്കിംഗ് અને കണക്ടിവിറ്റി
+
+### വെർച്വൽ നെറ്റ്‌വർക്ക് കോൺഫിഗറേഷൻ
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -627,7 +578,9 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### SSL ഉൾപ്പെടുത്തിയ ആപ്ലിക്കേഷൻ ഗേറ്റ്വേ
+### SSL-ഉള്ള അപ്ലിക്കേഷൻ ഗേറ്റ്വേ
+**അCOMPLETE ആർക്കിടെക്ചർ ഫ്രാഗ്മെന്റ്, വിന്യസിക്കാവുന്ന ഗേറ്റ്വേ അല്ല:** VNet-ലേക്ക് പ്രത്യേക `gateway-subnet` ചേർക്കുക, പിന്നണിപ്പൂളുകൾ, HTTP സെറ്റിംഗുകൾ, ലിസണറുകൾ, മുൻഗണനയുള്ള റൂട്ടിംഗ് റൂളുകൾ, TLS സर्टിഫിക്കറ്റ് (അഥവാ അംഗീകൃത കീ വോൾട്ട് റഫറൻസ്) എന്നിവ ചേർക്കുക. 443 പോർട്ട് തുറക്കുന്നതിലൂടെ HTTPS ക്രമീകരിക്കില്ല.
+
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -690,9 +643,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 നിരീക്ഷണവും കാണാനേറിയതും
+## 📊 നിഗമനവും അനുബന്ധവുമുള്ള
 
-### ആപ്ലിക്കേഷൻ ഇൻസൈറ്റ്സ്
+### അപ്ലിക്കേഷൻ ഇൻസൈറ്റ്സ്
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: '${applicationName}-logs-${resourceToken}'
@@ -721,7 +674,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### ഇഷ്‌ടാനുസൃത മെട്രിക്‌സ് & അലേർട്ട്‌സ്
+### കസ്റ്റം മീട്രിക്സ് ആൻഡ് അലർട്ടുകൾ
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -731,7 +684,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
     description: 'Alert when CPU usage is high'
     severity: 2
     enabled: true
-    scopes: [webApp.id]
+    scopes: [appServicePlan.id]
     evaluationFrequency: 'PT5M'
     windowSize: 'PT5M'
     criteria: {
@@ -740,6 +693,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
         {
           name: 'CPU Usage'
           metricName: 'CpuPercentage'
+          metricNamespace: 'Microsoft.Web/serverfarms'
           operator: 'GreaterThan'
           threshold: 80
           timeAggregation: 'Average'
@@ -755,11 +709,14 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 പരിസ്ഥിതിഗത 特殊 ക്രമീകരണങ്ങൾ
+## 🔧 പരിസ്ഥിതി-നിർദ്ദിഷ്ട കോൺഫിഗറേഷനുകൾ
 
-### വ്യത്യസ്ത പരിസ്ഥിതികൾക്കുള്ള പാരാമീറ്റർ ഫയലുകൾ
+### വ്യത്യസ്ത പരിസരങ്ങൾക്കായുള്ള പാരാമീറ്റർ ഫയലുകൾ
+താഴെയുള്ള രണ്ട് ഫയലുകൾ **വ്യത്യസ്ത പാരാമീറ്റർ-ഫയൽ ഉദാഹരണങ്ങളാണ്**. azd പരിസര നാമം പ്രകാരം `main.parameters.dev.json` അല്ലെങ്കിൽ `main.parameters.prod.json` സ്വയം തിരഞ്ഞെടുക്കുന്നില്ല. യഥാർത്ഥ `main.parameters.json` പരിസരപ്രവർത്തനങ്ങൾ (ഉദാഹരണം പോലെ `${APP_SERVICE_SKU=B1}`) ഉപയോഗിച്ച് എല്ലാ പാരാമീറ്ററുകളും ബിസെപ്പിൽ പ്രഖ്യാപിക്കുകയും ഉപയോഗിക്കുകയും ചെയ്‌യുക.
+
+`infra/main.parameters.dev.json`-നുള്ള ഉദാഹരണ ഉള്ളടക്കം:
+
 ```json
-// infra/main.parameters.dev.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -783,8 +740,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
+`infra/main.parameters.prod.json`-നുള്ള ഉദാഹരണ ഉള്ളടക്കം:
+
 ```json
-// infra/main.parameters.prod.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -811,7 +769,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### നിബന്ധനാപരമായ റിസോഴ്‌സ് പ്രാവസ്ഥാന
+### നിബന്ധനാപരമായ റിസോഴ്സ് പ്രൊവിഷനിംഗ്
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -819,7 +777,7 @@ param environmentType string = 'dev'
 
 // Development resources
 resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'dev') {
-  name: '${applicationName}devstorage${resourceToken}'
+  name: 'stdev${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -829,7 +787,7 @@ resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environ
 
 // Production resources with geo-redundancy
 resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'prod') {
-  name: '${applicationName}prodstorage${resourceToken}'
+  name: 'stprod${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -843,9 +801,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 നവീന പ്രാവസ്ഥാന മാതൃകകൾ
+## 🚀 സമുഹിത പ്രൊവിഷനിംഗ് പാറ്റേണുകൾ
 
-### മൾട്ടി-റീജിയൻ ഡിപ്പ്ലോയ്‌മെന്റ്
+### ബഹുരാജ്യ വിനിയോഗം
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -913,78 +871,54 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### ഇൻഫ്രാസ്ട്രക്ചർ ടെസ്റ്റിംഗ്
-```bicep
-// infra/test/main.test.bicep
-param location string = resourceGroup().location
+### ഇൻഫ്രാസ്ട്രക്ചർ പരിശോധന
+```bash
+# Local compilation checks syntax/types; this does not provision infrastructure
+az bicep build --file infra/main.bicep --stdout
 
-module mainTemplate '../main.bicep' = {
-  name: 'main-template-test'
-  params: {
-    environmentName: 'test'
-    location: location
-    applicationName: 'testapp'
-  }
-}
-
-// Test assertions
-resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'test-deployment'
-  location: location
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '8.0'
-    scriptContent: '''
-      $webAppName = "${mainTemplate.outputs.WEB_NAME}"
-      $response = Invoke-WebRequest -Uri "https://${mainTemplate.outputs.WEB_URL}/health" -UseBasicParsing
-      if ($response.StatusCode -ne 200) {
-        throw "Health check failed"
-      }
-      Write-Output "All tests passed!"
-    '''
-    timeout: 'PT10M'
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'P1D'
-  }
-}
+# After deploying your own complete app, test an actual application route
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error "$WEB_URL"
 ```
 
-## 🧪 ഇൻഫ്രാസ്ട്രക്ചർ പ്രിവ്യൂ & പരിശോധന (പുതുതായി)
+ഇൻഫ്രാസ്ട്രക്ഷർ പ്രൊവിഷനിംങ് നിങ്ങളുടെ ആപ്ലിക്കേഷൻ കോഡ് ഡിപ്ലോയ്മെന്റ് നടത്തുന്നില്ല. ആപ്ലിക്കേഷൻ ചെക്കുകൾ നടത്തുക മാത്രം `azd deploy`/`azd up` കഴിഞ്ഞതിനു ശേഷം, കൂടാതെ നിങ്ങളുടെ ആപ്പ് അത് നടപ്പിലാക്കിയാൽ മാത്രം `/health` ഉപയോഗിക്കുക. ARM ഡിപ്ലോയ്മെന്റ് സ്ക്രിപ്റ്റുകൾ Azure റിസോഴ്സുകൾ സൃഷ്ടിക്കുകയും അധിക ഐഡന്റിറ്റി, പിന്തുണയുള്ള റൺടൈം പതിപ്പുകൾ, അനുവാദങ്ങൾ ആവശ്യപ്പെടുകയും ചെയ്യുന്നു; അവര്‍ പ്രാദേശിക യൂണിറ്റ് ടെസ്റ്റുകൾ അല്ല.
 
-### ഡിപ്പ്ലോയ്‌മെന്റ് മുമ്പ് ഇൻഫ്രാസ്ട്രക്ചർ മാറ്റങ്ങൾ മുൻകൂട്ടി കാണുക
+## 🧪 ഇൻഫ്രാസ്ട്രക്ഷർ പ്രിവ്യൂ & വാലിഡേഷൻ (പുതിയത്)
 
-`azd provision --preview` ഫീച്ചർ നിങ്ങടെ ഇൻഫ്രാസ്ട്രക്ചർ പ്രാവസ്ഥാനത്തിന് മുമ്പ് **നീതിപരമായ അനുകരണം** നടത്താൻ അനുവദിക്കുന്നു. ഇത് `terraform plan` അല്ലെങ്കിൽ `bicep what-if` പോലെയുള്ളതാണ്, നിങ്ങളുടെ Azure പരിസ്ഥിതിയിൽ എന്ത് മാറ്റങ്ങൾ ഉണ്ടാകും എന്ന് **ഡ്രൈ-റൺ ദൃശ്യമായി** കാണിക്കുന്നു.
+### ഡিপ്ലോയ്മെന്റ് മുന്‍പ് ഇൻഫ്രാസ്ട്രക്ഷർ മാറ്റങ്ങൾ പ്രിവ്യൂ ചെയ്യുക
 
-#### 🛠️ അത് ചെയ്യുന്നതു
-- **നിങ്ങളുടെ IaC ടെംപ്ലേറ്റുകൾ വിശകലനം ചെയ്യുക** (Bicep അല്ലെങ്കിൽ Terraform)
-- **റിസോഴ്‌സ് മാറ്റങ്ങളുടെ മുൻകൂട്ടി ദൃശ്യവൽക്കരണം കാണിക്കുക**: ചേർക്കലുകൾ, നീക്കലുകൾ, അപ്‌ഡേറ്റുകൾ
-- **മാറ്റങ്ങൾ പ്രാബല്യത്തിൽ കൊണ്ടുവരുന്നില്ല** — ഇത് വായന മാത്രം ആണ്, സുരക്ഷിതമാണ്
+`azd provision --preview` ഫീച്ചർ നിങ്ങൾക്ക് **ഇൻഫ്രാസ്ട്രക്ഷർ പ്രൊവിഷനിംഗ് സിമുലേറ്റ് ചെയ്യാൻ** അനുവദിക്കുന്നു, യഥാർത്ഥ റിസോഴ്‌സുകൾ ഡിപ്ലോയ് ചെയ്യുന്നതിനു മുമ്പ്. ഇത് `terraform plan` അല്ലെങ്കിൽ `bicep what-if` പോലെയാണ്, നിങ്ങളുടെ Azure പരിസരത്ത് മാറ്റങ്ങൾ എന്തൊക്കെയെന്ന് ഒരു **ഡ്രൈ-റണ്‍ വീക്ഷണം** നൽകുന്നു.
 
-#### ഉപയോഗ കേസുകൾ
+#### 🛠️ ഇത് ചെയ്യുന്നതെന്താണ്
+- നിങ്ങളുടെ IaC ടെംപ്ലേറ്റുകൾ (Bicep അല്ലെങ്കിൽ Terraform) **വിശകലനം ചെയ്യുന്നു**
+- **റിസോഴ്‌സ് മാറ്റങ്ങളുടെ പ്രിവ്യൂ കാണിക്കുന്നു**: ചേർക്കലുകൾ, നീക്കലുകൾ, അപ്ഡേറ്റുകൾ
+- **പ്രൊവൈഡർ നിർദേശിച്ച ഇൻഫ്രാസ്ട്രക്ഷർ മാറ്റങ്ങൾ പ്രയോഗിക്കാറില്ല** — ആദ്യം പ്രോജക്ട് ഹുക്കുകൾ പരിശോധിക്കുക; സ്ക്രിപ്റ്റുകൾക്ക് സൈഡ് എഫക്റ്റുകൾ ഉണ്ടാകാം, പ്രിവ്യൂക്കും Azure അനുവാദങ്ങൾ ആവശ്യമുണ്ടാകും
+
+#### ഉപയോഗം
 ```bash
-# വിന്യാസം ചെയ്യുന്നതിന് മുമ്പ് അടിസ്ഥാനസൗകര്യ മാറ്റങ്ങൾ മുൻകൂർ കാണുക
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# പ്രത്യേക പരിസ്ഥിതിക്ക് മുൻകൂർ കാണൽ
+# Preview for specific environment
 azd provision --preview -e production
 ```
 
-ഈ കമാൻഡ് സഹായിക്കുന്നു:
-- **റിസോഴ്‌സ് മാറ്റങ്ങൾ പൂർണ്ണിമാക്കുന്നതിന് മുമ്പ് സ്ഥിരീകരിക്കുക**
-- **വികസന ചക്രത്തിൽ പിഴവുകൾ മുമ്പ് കണ്ടെത്തുക**
-- **ടീം പരിസ്ഥിതിയിൽ സുരക്ഷിതമായി സഹകരിക്കുക**
-- **അപരിചിത പ്രയോഗങ്ങളില്ലാതെ കുറഞ്ഞ അവകാശപ്രദാനം ഉറപ്പാക്കുക**
+ഈ കമാൻഡ് നിങ്ങളെ സഹായിക്കുന്നു:
+- റിസോഴ്‌സ് കമ്പിടുന്നതിന് മുമ്പ് **ഇൻഫ്രാസ്ട്രക്ഷർ മാറ്റങ്ങൾ പരിശോധിക്കുക**
+- വികസന ചക്രം തുടങ്ങുമ്പോൾ **തെറ്റായ കോൺഫിഗറേഷനുകൾ നേരിട്ടു പിടിക്കുക**
+- സംഘപരിചരണ പരിസ്ഥിതികളിൽ **സുരക്ഷിതമായി സഹകരിക്കുക**
+- **അല്പം-അനുമതി ഡിപ്ലോയ്മെന്റ് ഉറപ്പാക്കുക** അന്എക്സ്പെക്ടഡുകൾ കൂടാതെ
 
-ഇത് പ്രത്യേകിച്ച് പ്രയോജനകരമാണ്:
-- ജടിലമായ മൾട്ടി-സർവീസ് പരിസ്ഥിതികളിൽ
-- ഉത്പന്ന ഇൻഫ്രാസ്ട്രക്ചറിൽ മാറ്റങ്ങൾ ചെയ്യുമ്പോൾ
-- പുൾ റിക്വസ്റ്റ് അംഗീകാരത്തിന് മുമ്പ് ടെംപ്ലേറ്റുകൾ ഉറപ്പാക്കുമ്പോൾ
-- പുതിയത് ടീമംഗങ്ങളെ ഇൻഫ്രാസ്ട്രക്ചർ മാതൃകകളിൽ പരിശീലിപ്പിക്കുമ്പോൾ
+ഇത് പ്രത്യേകിച്ച് പ്രയോജനപ്പെടുന്നു:
+- സങ്കീർണ്ണമായ മൾട്ടി-സർവീസ് പരിസ്ഥിതികളിൽ ജോലി ചെയ്യുമ്പോൾ
+- ഉത്പാദന ഇൻഫ്രാസ്ട്രക്ഷറിൽ മാറ്റങ്ങൾ വരുത്തുമ്പോൾ
+- PR അംഗീകാരം മുമ്പ് ടെംപ്ലേറ്റ് മാറ്റങ്ങൾ പരിശോധിച്ചിരിക്കുമ്പോൾ
+- പുതിയ സംഘാംഗങ്ങളെ ഇൻഫ്രാസ്ട്രക്ഷർ മാതൃകകളിൽ പരിശീലിപ്പിക്കുമ്പോൾ
 
 ### ഉദാഹരണ പ്രിവ്യൂ ഔട്ട്പുട്ട്
-ഓഫർ ചെയ്ത പ്രിവ്യൂ ഔട്ട്പുട്ട് വ്യത്യസ്ത പ്രൊവൈഡറും പ്രോജക്ട് ഘടനയും ആക്‌സർചെയ്യാം, പക്ഷേ ഫലങ്ങൾ സുതാര്യമായി നിർദേശിക്കുന്ന മാറ്റങ്ങൾ വ്യക്തമാക്കണം.
+പ്രത്യേക പ്രൊവൈഡറും പ്രോജക്ട് ഘടനയും അനുസരിച്ച് പ്രിവ്യൂ ഔട്ട്പുട്ട് വ്യത്യാസപ്പെടും, എന്നാൽ ഫലം ഒന്നും പ്രയോഗിക്കമുന്‍ നിര്‍ദ്ദേശിച്ച ചേരികളെ വ്യക്തമായി തിരിച്ചറിയണം.
 
-```bash
+```text
 $ azd provision --preview
 
 🔍 Previewing infrastructure changes...
@@ -1007,22 +941,26 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## �🔄 റിസോഴ്‌സ് അപ്‌ഡേറ്റുകളും മാറ്റങ്ങളും
+## �🔄 റിസോഴ്‌സ് അപ്ഡേറ്റുകളും മൈഗ്രേഷനുകളും
 
-### സുരക്ഷിത റിസോഴ്‌സ് അപ്‌ഡേറ്റുകൾ
+### സുരക്ഷിത റിസോഴ്‌സ് അപ്ഡേറ്റുകൾ
 ```bash
-# മുൻ‌വായനയ്‌ക്കു ശേഷമുള്ള അടിസ്ഥാന സങ്കേത മാറ്റങ്ങൾ (ശിപാർശ ചെയ്തതാണ്)
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# മുൻ‌വായന സ്ഥിരീകരണത്തിനു ശേഷം മാറ്റങ്ങൾ പ്രയോഗിക്കുക
-azd provision --confirm-with-no-prompt
+# Apply changes after preview confirmation
+azd provision
+# In automation, --no-prompt uses known values and fails on unresolved decisions;
+# it is not an approval bypass.
 
-# റോള്ബാക്കിനായി, അടിസ്ഥാന സങ്കേത മാറ്റങ്ങൾ പിന്‍വലിക്കാൻ Git ഉപയോഗിക്കുക:
-git revert HEAD  # അവസാനത്തെ അടിസ്ഥാന സങ്കേത കമ്മിറ്റ് പിന്‍വലിക്കുക
-azd provision    # മുൻപ് ഉണ്ടായിരുന്ന അടിസ്ഥാന സങ്കേത നില പ്രയോഗിക്കുക
+# For rollback, use Git to revert infrastructure changes:
+git revert HEAD  # Revert last infrastructure commit
+azd provision    # Apply previous infrastructure state
 ```
 
 ### ഡാറ്റാബേസ് മൈഗ്രേഷനുകൾ
+**അസമാപ്തമായ ഡിപ്ലോയ്മെന്റ്-സ്ക്രിപ്റ്റ് മാതൃകം:** ആവശ്യമായിടത്ത് കൺഫിഗർ ചെയ്ത യൂസർ-അസൈൻഡ് ഐഡന്റിറ്റി, പിന്തുണയുള്ള Azure CLI റൺടൈം, ലഭ്യമായ മൈഗ്രേഷൻ ഉപകരണങ്ങൾ, നൽകിയ മൈഗ്രേഷൻ ഡയറക്ടറി/കൺഫിഗറേഷൻ, ഡാറ്റാബേസ് കണക്ഷൻ എന്നിവ ആവശ്യമാണ്. ഈ റിസോഴ്‌സ് ഒരു ടെംപ്ലേറ്റിൽ പേസ്റ്റ് ചെയ്ത് മാത്രം പ്രവർത്തിപ്പിക്കാനാകില്ല.
+
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -1047,25 +985,29 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
     ]
     timeout: 'PT30M'
     cleanupPreference: 'OnSuccess'
+    retentionInterval: 'P1D'
   }
 }
 ```
 
-## 🎯 മികച്ച പാഠങ്ങൾ
+## 🎯 മികച്ച ക്രമങ്ങൾ
 
-### 1. റിസോഴ്‌സ് നാമകരണം സമ്പ്രദായങ്ങൾ
+### 1. റിസോഴ്‌സ് നാമകരണം കൺവെൻഷനുകൾ
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
   appService: '${applicationName}-web-${resourceToken}'
   database: '${applicationName}-db-${resourceToken}'
-  storage: '${take(replace(applicationName, '-', ''), 15)}${environmentName}sa${take(resourceToken, 8)}'
-  keyVault: '${take(applicationName, 15)}-kv-${take(resourceToken, 8)}'
+  storage: 'st${resourceToken}' // lowercase alphanumeric, <=24 characters
+  keyVault: 'kv-${resourceToken}' // <=24 characters
 }
 ```
 
-### 2. ടാഗിങ് തന്ത്രം
+### 2. ടാഗിങ്ങ് തന്ത്രങ്ങൾ
 ```bicep
+// utcNow is only allowed in a parameter default, not directly in a variable.
+param deploymentDate string = utcNow('yyyy-MM-dd')
+
 var commonTags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
@@ -1073,7 +1015,7 @@ var commonTags = {
   'cost-center': 'engineering'
   'owner': 'platform-team'
   'project': applicationName
-  'created-date': utcNow('yyyy-MM-dd')
+  'deployment-date': deploymentDate
 }
 ```
 
@@ -1093,7 +1035,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. ഔട്ട്പുട്ട് സംഘാടനo
+### 4. ഔട്ട്പുട്ട് ക്രമീകരണം
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -1108,25 +1050,25 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## അടുത്ത ചുവടുകൾ
+## അടുത്തപടികൾ
 
-- [പ്രീ-ഡിപ്പ്ലോയ്‌മെന്റ് പ്ലാനിംഗ്](../chapter-06-pre-deployment/capacity-planning.md) - റിസോഴ്‌സ് ലഭ്യത ഉറപ്പാക്കുക
-- [പൊതുവായ പ്രശ്നങ്ങൾ](../chapter-07-troubleshooting/common-issues.md) - ഇൻഫ്രാസ്ട്രക്ചർ പ്രശ്നങ്ങൾ പരിഹരിക്കുക
-- [ഡീബഗ്ഗിംഗ് ഗൈഡ്](../chapter-07-troubleshooting/debugging.md) - പ്രാവധാനീകരണ പ്രശ്നങ്ങൾ പരിശോധിക്കുക
+- [ഡിപ്ലോയ്മെന്റ് മുൻകൂർ പദ്ധതിവൽക്കരണം](../chapter-06-pre-deployment/capacity-planning.md) - റിസോഴ്‌സ് ലഭ്യത പരിശോധിക്കുക
+- [സാമാന്യ പ്രശ്നങ്ങൾ](../chapter-07-troubleshooting/common-issues.md) - ഇൻഫ്രാസ്ട്രക്ഷർ പ്രശ്നങ്ങൾ പരിഹരിക്കുക
+- [ഡിബഗ് ഗൈഡ്](../chapter-07-troubleshooting/debugging.md) - പ്രൊവിഷന്‍ പ്രശ്‌നങ്ങള്‍ ഡിബഗ് ചെയ്യുക
 - [SKU തിരഞ്ഞെടുപ്പ്](../chapter-06-pre-deployment/sku-selection.md) - അനുയോജ്യമായ സർവീസ് ടിയറുകൾ തിരഞ്ഞെടുക്കുക
 
-## അധിക വിഭവങ്ങൾ
+## അധിക സ്രോതസ്സുകൾ
 
-- [Azure Bicep ഡോക്യുമെന്റേഷൻ](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager ടെംപ്ലേറ്റുകൾ](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure ആർക്കിടെക്‌ചർ സെന്റർ](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure വെയിൽ-ആർക്കിടെക്റ്റഡ് ഫ്രെയിംവർക്ക്](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [അഴൂര്‍ ബൈസപ് ഡോക്യുമെന്റേഷൻ](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [അഴൂര്‍ റിസോഴ്‌സ് മാനേജർ ടെംപ്ലേറ്റുകൾ](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [അഴൂര്‍ ആർക്കിടെക്ചർ സെന്റര്‍](https://learn.microsoft.com/en-us/azure/architecture/)
+- [അഴൂര്‍ വെൽ-ആർക്കിടെക്ചർഡ് ഫ്രെയിംവർക്ക്](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **നാവിഗേഷൻ**
-- **മുൻപത്തെ പാഠം**: [ഡിപ്പ്ലോയ്‌മെന്റ് ഗൈഡ്](deployment-guide.md)
-- **അടുത്ത പാഠം**: [ക്ഷമതാ പ്ലാനിംഗ്](../chapter-06-pre-deployment/capacity-planning.md)
+- **മുൻപത്തെ പാഠം**: [നെറ്റ്‌വർക്കിംഗ് ഗൈഡ്](deployment-guide.md)
+- **അടുത്ത പാഠം**: [ക്യാപാസിറ്റി പ്ലാനിംഗ്](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 

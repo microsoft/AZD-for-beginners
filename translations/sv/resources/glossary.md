@@ -1,53 +1,53 @@
-# Ordlista - Azure och AZD-terminologi
+# Ordlista - Azure och AZD Terminologi
 
-**Reference for All Chapters**
-- **📚 Kursstartsida**: [AZD för nybörjare](../README.md)
-- **📖 Lär dig grunderna**: [Kapitel 1: AZD-grunderna](../docs/getting-started/azd-basics.md)
-- **🤖 AI-termer**: [Kapitel 2: AI-först utveckling](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+**Referens för Alla Kapitlen**
+- **📚 Kursstart**: [AZD För Nybörjare](../README.md)
+- **📖 Lär Dig Grunderna**: [Kapitel 1: AZD Grunder](../docs/chapter-01-foundation/azd-basics.md)
+- **🤖 AI Termer**: [Kapitel 2: AI-Först Utveckling](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introduktion
 
-Denna omfattande ordlista ger definitioner för termer, begrepp och akronymer som används i Azure Developer CLI och Azure-molnutveckling. Ett grundläggande uppslagsverk för att förstå teknisk dokumentation, felsöka problem och kommunicera effektivt om azd-projekt och Azure-tjänster.
+Den här omfattande ordlistan ger definitioner för termer, koncept och förkortningar som används i Azure Developer CLI och Azure molnutveckling. Väsentlig referens för att förstå teknisk dokumentation, felsöka problem och kommunicera effektivt om azd-projekt och Azure-tjänster.
 
 ## Lärandemål
 
 Genom att använda denna ordlista kommer du att:
-- Förstå grundläggande terminologi och begrepp för Azure Developer CLI
-- Bemästra vokabulär och tekniska termer för Azure-molnutveckling
-- Snabbt slå upp termer relaterade till Infrastructure as Code och distribution
-- Förstå Azure-tjänsternas namn, akronymer och deras syften
-- Få tillgång till definitioner för felsökning och debugging-termer
+- Förstå grundläggande Azure Developer CLI-terminologi och koncept
+- Bemästra Azure molnutvecklings vokabulär och tekniska termer
+- Hänvisa till Infrastructure as Code och deployment-terminologi effektivt
+- Begripa namn på Azure-tjänster, förkortningar och deras syften
+- Få tillgång till definitioner för felsökning och debugging-terminologi
 - Lära dig avancerade Azure-arkitektur- och utvecklingskoncept
 
 ## Läranderesultat
 
-Med regelbunden användning av denna ordlista kommer du att kunna:
-- Kommunicera effektivt med korrekt terminologi för Azure Developer CLI
+Genom regelbunden användning av denna ordlista kommer du att kunna:
+- Kommunicera effektivt med korrekt Azure Developer CLI-terminologi
 - Förstå teknisk dokumentation och felmeddelanden tydligare
-- Navigera Azure-tjänster och begrepp med förtroende
-- Felsöka problem med lämplig teknisk vokabulär
-- Bidra i teamdiskussioner med korrekt tekniskt språk
-- Utöka din kunskap om Azure-molnutveckling systematiskt
+- Navigera Azure-tjänster och koncept med säkerhet
+- Felsöka problem med lämpligt tekniskt vokabulär
+- Bidra till diskussioner i teamet med korrekt tekniskt språk
+- Utöka din kunskap om Azure molnutveckling systematiskt
 
 ## A
 
-**ARM Template**  
-Azure Resource Manager template. JSON-baserat Infrastructure as Code-format som används för att deklarativt definiera och distribuera Azure-resurser.
+**ARM-mall**  
+Azure Resource Manager-mall. JSON-baserat Infrastructure as Code-format som används för att deklarativt definiera och distribuera Azure-resurser.
 
 **App Service**  
-Azures platform-as-a-service (PaaS)-erbjudande för att hosta webbapplikationer, REST-API:er och mobil-backends utan att hantera underliggande infrastruktur.
+Azures plattform-som-en-tjänst (PaaS) erbjudande för hosting av webbapplikationer, REST API:er och mobila backends utan att hantera infrastruktur.
 
 **Application Insights**  
-Azures tjänst för övervakning av applikationsprestanda (APM) som ger djupa insikter i applikationens prestanda, tillgänglighet och användning.
+Azures applikationsprestandaövervakning (APM) tjänst som ger djupgående insikter i applikationens prestanda, tillgänglighet och användning.
 
 **Azure CLI**  
-Kommando­radsgränssnitt för att hantera Azure-resurser. Används av azd för autentisering och vissa operationer.
+Kommandoradsgränssnitt för hantering av Azure-resurser. Det kompletterar AZD men har separat inloggning; kärn-AZD-autentisering använder `azd auth login`.
 
 **Azure Developer CLI (azd)**  
-Ett utvecklarcentrerat kommandoradsverktyg som påskyndar processen att bygga och distribuera applikationer till Azure med mallar och Infrastructure as Code.
+Utvecklarinriktat kommandoradsverktyg som påskyndar processen att bygga och distribuera applikationer till Azure med hjälp av mallar och Infrastructure as Code.
 
 **azure.yaml**  
-Huvudkonfigurationsfilen för ett azd-projekt som definierar tjänster, infrastruktur och deploy-hooks.
+Huvudkonfigurationsfilen för ett azd-projekt som definierar tjänster, infrastruktur och deploy-hookar.
 
 **Azure Resource Manager (ARM)**  
 Azures tjänst för distribution och hantering som tillhandahåller ett hanteringslager för att skapa, uppdatera och ta bort resurser.
@@ -55,46 +55,46 @@ Azures tjänst för distribution och hantering som tillhandahåller ett hanterin
 ## B
 
 **Bicep**  
-Domain-specific language (DSL) utvecklat av Microsoft för att distribuera Azure-resurser. Ger enklare syntax än ARM-mallar samtidigt som det kompileras till ARM.
+Domänspecifikt språk (DSL) utvecklat av Microsoft för att distribuera Azure-resurser. Har enklare syntax än ARM-mallar men kompilerar till ARM.
 
-**Build**  
-Processen att kompilera källkod, installera beroenden och förbereda applikationer för distribution.
+**Build (Komplettering)**  
+Processen att kompilera källkod, installera beroenden och förbereda applikationer för deployment.
 
 **Blue-Green Deployment**  
-Distribueringsstrategi som använder två identiska produktionsmiljöer (blå och grön) för att minimera driftstopp och risk.
+Distributionsstrategi som använder två identiska produktionsmiljöer (blå och grön) för att minimera driftstopp och risk.
 
 ## C
 
 **Container Apps**  
-Azures serverlösa container­tjänst som möjliggör körning av containeriserade applikationer utan att hantera komplex infrastruktur.
+Azures serverlösa container-tjänst som möjliggör körning av containeriserade applikationer utan att hantera komplex infrastruktur.
 
 **CI/CD**  
-Continuous Integration/Continuous Deployment. Automatiserade metoder för att integrera kodändringar och distribuera applikationer.
+Kontinuerlig Integration/Kontinuerlig Deployment. Automatiserade praxis för att integrera kodändringar och distribuera applikationer.
 
 **Cosmos DB**  
-Azures globalt distribuerade, multimodala databastjänst som erbjuder omfattande SLA:er för genomströmning, latens, tillgänglighet och konsistens.
+Azures globalt distribuerade multimodell-databas som erbjuder omfattande SLA:er för genomströmning, latens, tillgänglighet och konsistens.
 
-**Configuration**  
-Inställningar och parametrar som styr applikationens beteende och distributionsalternativ.
+**Konfiguration**  
+Inställningar och parametrar som styr applikationens beteende och deploy-alternativ.
 
 ## D
 
 **Deployment**  
-Processen att installera och konfigurera applikationer och deras beroenden på målinfrastrukturen.
+Processen att installera och konfigurera applikationer och deras beroenden på mål-infrastruktur.
 
 **Docker**  
-Plattform för att utveckla, leverera och köra applikationer med containerteknologi.
+Plattform för att utveckla, leverera och köra applikationer med container-teknologi.
 
 **Dockerfile**  
-Textfil som innehåller instruktioner för att bygga en Docker-containerbild.
+Textfil som innehåller instruktioner för att bygga en Docker containerbild.
 
 ## E
 
-**Environment**  
-Ett distribueringsmål som representerar en specifik instans av din applikation (t.ex. utveckling, staging, produktion).
+**Miljö**  
+Ett deploymål som representerar en specifik instans av din applikation (t.ex. utveckling, staging, produktion).
 
-**Environment Variables**  
-Konfigurationsvärden lagrade som nyckel-värde-par som applikationer kan nå vid körning.
+**Miljövariabler**  
+Konfigurationsvärden lagrade som nyckel-värde-par som applikationer kan läsa vid körning.
 
 **Endpoint**  
 URL eller nätverksadress där en applikation eller tjänst kan nås.
@@ -110,31 +110,31 @@ Azures serverlösa compute-tjänst som möjliggör körning av händelsestyrd ko
 CI/CD-plattform integrerad med GitHub-repositorier för att automatisera arbetsflöden.
 
 **Git**  
-Distribuerat versionshanteringssystem som används för att spåra ändringar i källkod.
+Distribuerat versionskontrollsystem som används för att spåra förändringar i källkod.
 
 ## H
 
 **Hooks**  
-Anpassade skript eller kommandon som körs vid specifika punkter under distributionslivscykeln (preprovision, postprovision, predeploy, postdeploy).
+Anpassade skript eller kommandon som körs vid specifika punkter under distributionens livscykel (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-Den Azure-tjänsttyp där en applikation kommer att distribueras (t.ex. appservice, containerapp, function).
+Den Azure-tjänsttyp där en applikation ska distribueras (t.ex. appservice, containerapp, function).
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Praxis att definiera och hantera infrastruktur genom kod istället för manuella processer.
+Praxis för att definiera och hantera infrastruktur genom kod istället för manuella processer.
 
 **Init**  
-Processen att initialisera ett nytt azd-projekt, typiskt från en mall.
+Processen att initiera ett nytt azd-projekt, vanligtvis från en mall.
 
 ## J
 
 **JSON**  
-JavaScript Object Notation. Datautbytesformat som ofta används för konfigurationsfiler och API-svar.
+JavaScript Object Notation. Ett dataformat vanligtvis använt för konfigurationsfiler och API-responser.
 
 **JWT**  
-JSON Web Token. Standard för att säkert överföra information mellan parter som ett JSON-objekt.
+JSON Web Token. Standard för säker överföring av information mellan parter i form av ett JSON-objekt.
 
 ## K
 
@@ -147,7 +147,7 @@ Frågespråk som används för att analysera data i Azure Monitor, Application I
 ## L
 
 **Load Balancer**  
-Tjänst som fördelar inkommande nätverkstrafik över flera servrar eller instanser.
+Tjänst som distribuerar inkommande nätverkstrafik över flera servrar eller instanser.
 
 **Log Analytics**  
 Azure-tjänst för att samla in, analysera och agera på telemetridata från moln- och lokala miljöer.
@@ -155,45 +155,45 @@ Azure-tjänst för att samla in, analysera och agera på telemetridata från mol
 ## M
 
 **Managed Identity**  
-Azure-funktion som tillhandahåller Azure-tjänster en automatiskt hanterad identitet för autentisering mot andra Azure-tjänster.
+Azure-funktion som tillhandahåller Azure-tjänster med en automatiskt hanterad identitet för autentisering mot andra Azure-tjänster.
 
-**Microservices**  
-Arkitekturmetod där applikationer byggs som en samling små, oberoende tjänster.
+**Mikrotjänster**  
+Arkitekturellt tillvägagångssätt där applikationer byggs som en samling av små, självständiga tjänster.
 
 **Monitor**  
-Azures enhetliga övervakningslösning som erbjuder fullstack-observability över applikationer och infrastruktur.
+Azures enhetliga övervakningslösning som ger full-stack observabilitet över applikationer och infrastruktur.
 
 ## N
 
 **Node.js**  
-JavaScript-runtime byggd på Chromes V8 JavaScript-motor för att bygga server-side-applikationer.
+JavaScript-runtime byggd på Chromes V8 JavaScript-motor för att bygga server-side applikationer.
 
 **npm**  
-Paket­hanterare för Node.js som hanterar beroenden och paket.
+Paketchef för Node.js som hanterar beroenden och paket.
 
 ## O
 
 **Output**  
-Värden som returneras från infrastrukturdistribution och som kan användas av applikationer eller andra resurser.
+Värden som returneras från infrastruktursdistribuering och som kan användas av applikationer eller andra resurser.
 
 ## P
 
 **Package**  
 Processen att förbereda applikationskod och beroenden för distribution.
 
-**Parameters**  
-Inmatningsvärden som skickas till infrastrukturmallar för att anpassa distributioner.
+**Parametrar**  
+Indatavärden som skickas till infrastruktursmallar för att anpassa distributioner.
 
 **PostgreSQL**  
 Open-source relationsdatabassystem som stöds som en hanterad tjänst i Azure.
 
 **Provisioning**  
-Processen att skapa och konfigurera Azure-resurser definierade i infrastrukturmallar.
+Processen att skapa och konfigurera Azure-resurser som definieras i infrastruktursmallar.
 
 ## Q
 
 **Quota**  
-Begränsningar för hur många resurser som kan skapas i en Azure-prenumeration eller region.
+Begränsningar av mängden resurser som kan skapas i en Azure-prenumeration eller region.
 
 ## R
 
@@ -201,44 +201,44 @@ Begränsningar för hur många resurser som kan skapas i en Azure-prenumeration 
 Logisk behållare för Azure-resurser som delar samma livscykel, behörigheter och policyer.
 
 **Resource Token**  
-Unik sträng genererad av azd för att säkerställa att resursnamn är unika över distributioner.
+Unik sträng som genereras av azd för att säkerställa att resursnamn är unika över distributioner.
 
 **REST API**  
-Arkitekturstil för att designa nätverksapplikationer med hjälp av HTTP-metoder.
+Arkitekturstil för att designa nätverksapplikationer med HTTP-metoder.
 
 **Rollback**  
-Processen att återgå till en tidigare version av en applikation eller infrastrukturkonfiguration.
+Processen att återgå till en tidigare version av en applikation eller infrastrukturskonfiguration.
 
 ## S
 
-**Service**  
-En komponent i din applikation definierad i azure.yaml (t.ex. webbfrontend, API-backend, databas).
+**Tjänst**  
+En komponent av din applikation definierad i azure.yaml (t.ex. webb front-end, API backend, databas).
 
 **SKU**  
-Stock Keeping Unit. Representerar olika tjänstenivåer eller prestandanivåer för Azure-resurser.
+Lagerhållningsenhet. Representerar olika servicelager eller prestandanivåer för Azure-resurser.
 
-**SQL Database**  
+**SQL-databas**  
 Azures hanterade relationsdatabastjänst baserad på Microsoft SQL Server.
 
 **Static Web Apps**  
-Azure-tjänst för att bygga och distribuera fullstack-webbapplikationer från källkodsförråd.
+Azure-tjänst för att bygga och distribuera full-stack webbapplikationer från källkodsförråd.
 
 **Storage Account**  
-Azure-tjänst som erbjuder molnlagring för dataobjekt inklusive blobs, filer, köer och tabeller.
+Azure-tjänst som tillhandahåller molnlagring för dataobjekt inklusive blobs, filer, köer och tabeller.
 
-**Subscription**  
-Azure-kontobehållare som innehåller resursgrupper och resurser, med tillhörande fakturering och åtkomsthantering.
+**Prenumeration**  
+Azure-kontos behållare som rymmer resursgrupper och resurser, med associerad fakturering och åtkomsthantering.
 
 ## T
 
-**Template**  
-Förbyggd projektstruktur som innehåller applikationskod, infrastrukturnotationer och konfiguration för vanliga scenarier.
+**Mall**  
+Förbyggd projektstruktur som innehåller applikationskod, infrastruktursdefinitioner och konfiguration för vanliga scenarier.
 
 **Terraform**  
-Open-source Infrastructure as Code-verktyg som stödjer flera molnleverantörer inklusive Azure.
+Open-source Infrastructure as Code-verktyg som stöder flera molnleverantörer inklusive Azure.
 
 **Traffic Manager**  
-Azures DNS-baserade trafiklasterutjämnare för att fördela trafik över globala Azure-regioner.
+Azures DNS-baserade trafikladdningsbalanserare för att distribuera trafik över globala Azure-regioner.
 
 ## U
 
@@ -246,95 +246,97 @@ Azures DNS-baserade trafiklasterutjämnare för att fördela trafik över global
 Uniform Resource Identifier. Sträng som identifierar en viss resurs.
 
 **URL**  
-Uniform Resource Locator. Typ av URI som specificerar var en resurs finns och hur man hämtar den.
+Uniform Resource Locator. Typ av URI som specificerar var en resurs finns och hur den kan hämtas.
 
 ## V
 
-**Virtual Network (VNet)**  
-Grundläggande byggsten för privata nätverk i Azure, som erbjuder isolering och segmentering.
+**Virtuellt Nätverk (VNet)**  
+Grundläggande byggsten för privata nätverk i Azure, som tillhandahåller isolering och segmentering.
 
 **VS Code**  
-Visual Studio Code. Populär kodredigerare med utmärkt Azure- och azd-integration.
+Visual Studio Code. Populär kodredigerare med utmärkt Azure och azd-integration.
 
 ## W
 
 **Webhook**  
-HTTP-callback som triggas av specifika händelser, vanligt i CI/CD-pipelines.
+HTTP-callback som triggas av specifika händelser, vanligtvis använd i CI/CD-pipelines.
 
 **What-if**  
-Azure-funktion som visar vilka ändringar som skulle göras av en distribution utan att faktiskt utföra den.
+Azure-funktion som visar vilka förändringar en distribution skulle göra utan att faktiskt genomföra den.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Mänskligt läsbart data­serialiseringsformat som används för konfigurationsfiler som azure.yaml.
+YAML Ain't Markup Language. Mänskligt läsbart dataserialiseringsstandard som används för konfigurationsfiler som azure.yaml.
 
 ## Z
 
-**Zone**  
+**Zon**  
 Fysiskt separata platser inom en Azure-region som ger redundans och hög tillgänglighet.
 
 ---
 
-## Vanliga akronymer
+## Vanliga Förkortningar
 
-| Akronym | Full form | Beskrivning |
+| Förkortning | Fullständig Form | Beskrivning |
 |---------|-----------|-------------|
-| AAD | Azure Active Directory (now Microsoft Entra ID) | Tjänst för identitets- och åtkomsthantering |
-| ACR | Azure Container Registry | Containerbildsregistertjänst |
+| AAD | Azure Active Directory (numera Microsoft Entra ID) | Identitets- och åtkomsthanteringstjänst |
+| ACR | Azure Container Registry | Containerbild-registreringstjänst |
 | AKS | Azure Kubernetes Service | Hanterad Kubernetes-tjänst |
-| API | Application Programming Interface | Uppsättning protokoll för att bygga programvara |
+| API | Application Programming Interface | Uppsättning protokoll för att bygga mjukvara |
 | ARM | Azure Resource Manager | Azures distributions- och hanteringstjänst |
 | CDN | Content Delivery Network | Distribuerat nätverk av servrar |
-| CI/CD | Continuous Integration/Continuous Deployment | Automatiserade utvecklingsmetoder |
+| CI/CD | Continuous Integration/Continuous Deployment | Automatiserade utvecklingspraxis |
 | CLI | Command Line Interface | Textbaserat användargränssnitt |
 | DNS | Domain Name System | System för att översätta domännamn till IP-adresser |
 | HTTPS | Hypertext Transfer Protocol Secure | Säker version av HTTP |
 | IaC | Infrastructure as Code | Hantering av infrastruktur genom kod |
 | JSON | JavaScript Object Notation | Datautbytesformat |
 | JWT | JSON Web Token | Tokenformat för säker informationsöverföring |
-| KQL | Kusto Query Language | Frågespråk för Azures datatjänster |
-| RBAC | Role-Based Access Control | Åtkomstkontrollbaserad på användarroller |
+| KQL | Kusto Query Language | Frågespråk för Azure datatjänster |
+| RBAC | Role-Based Access Control | Åtkomstkontroll baserat på användarroller |
 | REST | Representational State Transfer | Arkitekturstil för webbtjänster |
-| SDK | Software Development Kit | Samling utvecklingsverktyg |
-| SLA | Service Level Agreement | Åtagande om tjänstens tillgänglighet/prestanda |
-| SQL | Structured Query Language | Språk för hantering av relationsdatabaser |
+| SDK | Software Development Kit | Samling av utvecklingsverktyg |
+| SLA | Service Level Agreement | Åtagande om tillgänglighet/prestanda för tjänst |
+| SQL | Structured Query Language | Språk för att hantera relationsdatabaser |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Kryptografiska protokoll |
 | URI | Uniform Resource Identifier | Sträng som identifierar en resurs |
 | URL | Uniform Resource Locator | Typ av URI som specificerar resursens plats |
 | VM | Virtual Machine | Emulering av ett datorsystem |
 | VNet | Virtual Network | Privat nätverk i Azure |
-| YAML | YAML Ain't Markup Language | Standard för dataserialisering |
+| YAML | YAML Ain't Markup Language | Dataserialiseringsstandard |
 
 ---
 
-## Azure Service Name Mappings
+## Azure Tjänstenamn Karta
 
-| Common Name | Official Azure Service Name | azd Host Type |
+| Vanligt Namn | Officiellt Azure Tjänstenamn | azd Hosttyp |
 |-------------|------------------------------|---------------|
 | Web App | Azure App Service | `appservice` |
 | API App | Azure App Service | `appservice` |
 | Container App | Azure Container Apps | `containerapp` |
 | Function | Azure Functions | `function` |
 | Static Site | Azure Static Web Apps | `staticwebapp` |
-| Database | Azure Database for PostgreSQL | `postgres` |
-| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Storage | Azure Storage Account | `storage` |
-| Cache | Azure Cache for Redis | `redis` |
-| Search | Azure AI Search | `search` |
-| Messaging | Azure Service Bus | `servicebus` |
+| Databas | Azure Database for PostgreSQL | Infrastrukturresurs, inte en applikation `host` |
+| NoSQL DB | Azure Cosmos DB | Infrastrukturresurs, inte en applikation `host` |
+| Storage | Azure Storage Account | Infrastrukturresurs, inte en inbyggd applikation `host` |
+| Cache | Azure Managed Redis | Infrastrukturresurs, inte en applikation `host` |
+| Sök | Azure AI Search | Infrastrukturresurs, inte en applikation `host` |
+| Meddelanden | Azure Service Bus | Infrastrukturresurs, inte en applikation `host` |
+
+`services.<name>.host` väljer ett applikations-distributionsmål; det är inte en förkortning för någon Azure-resurstyp. Databaser, caches, söktjänster och köer brukar vanligtvis tillhandahållas genom infrastrukturleverantören och kopplas till applikationen via outputs/konfiguration.
 
 ---
 
-## Kontextsberoende termer
+## Kontexts-specifika Termer
 
 ### Utvecklingstermer
-- **Hot Reload**: Uppdatering av applikationer automatiskt under utveckling utan att behöva starta om
+- **Hot Reload**: Uppdaterar automatiskt applikationer under utveckling utan omstart
 - **Build Pipeline**: Automatiserad process för att bygga och testa kod
-- **Deployment Slot**: Stagingmiljö inom en App Service
+- **Deployment Slot**: Staging-miljö inom en App Service
 - **Environment Parity**: Att hålla utvecklings-, staging- och produktionsmiljöer lika
 
-### Säkerthetermer
+### Säkerhetstermer
 - **Managed Identity**: Azure-funktion som tillhandahåller automatisk hantering av autentiseringsuppgifter
 - **Key Vault**: Säker lagring för hemligheter, nycklar och certifikat
 - **RBAC**: Rollbaserad åtkomstkontroll för Azure-resurser
@@ -342,25 +344,25 @@ Fysiskt separata platser inom en Azure-region som ger redundans och hög tillgä
 
 ### Övervakningstermer
 - **Telemetry**: Automatisk insamling av mätningar och data
-- **Application Performance Monitoring (APM)**: Övervakning av programvaruprestanda
+- **Application Performance Monitoring (APM)**: Övervakning av mjukvaruprestanda
 - **Log Analytics**: Tjänst för att samla in och analysera loggdata
-- **Alert Rules**: Automatiska aviseringar baserade på mätvärden eller villkor
+- **Alert Rules**: Automatiska notifieringar baserade på mätvärden eller villkor
 
-### Distribuerings­termer
-- **Blue-Green Deployment**: Distribueringsstrategi med noll driftstopp
-- **Canary Deployment**: Gradvis utrullning till en delmängd av användare
+### Deploy-terminologi
+- **Blue-Green Deployment**: Distribueringsstrategi utan driftstopp
+- **Canary Deployment**: Gradvis utrullning till en delmängd användare
 - **Rolling Update**: Sekventiell ersättning av applikationsinstanser
-- **Rollback**: Återgå till en tidigare applikationsversion
+- **Rollback**: Återgång till tidigare applikationsversion
 
 ---
 
-**Usage Tip**: Use `Ctrl+F` to quickly search for specific terms in this glossary. Terms are cross-referenced where applicable.
+**Användningstips**: Använd `Ctrl+F` för att snabbt söka efter specifika termer i denna ordlista. Termer är korsrefererade där det är tillämpligt.
 
 ---
 
 **Navigering**
-- **Föregående lektion**: [Fusklista](cheat-sheet.md)
-- **Nästa lektion**: [Vanliga frågor (FAQ)](faq.md)
+- **Föregående Lektion**: [Fuskark](cheat-sheet.md)
+- **Nästa Lektion**: [FAQ](faq.md)
 
 ---
 

@@ -1,14 +1,16 @@
 # 第8章：生产与企业模式
 
-**📚 课程**：[AZD 初学者](../../README.md) | **⏱️ 时长**：2-3小时 | **⭐ 复杂度**：高级
+**📚 课程**：[AZD 初学者指南](../../README.md) | **⏱️ 时长**：2-3小时 | **⭐ 难度**：高级
 
 ---
 
-## 概览
+## 概述
 
-本章涵盖企业级部署模式、安全强化、监控及生产AI工作负载的成本优化。
+本章介绍面向企业的生产部署模式、安全加固、监控及生产环境 AI 工作负载的成本优化。
 
-> 已于2026年7月使用 `azd 1.27.1` 版本验证。
+这是一个架构参考，而非完整可部署的生产模板。示例省略了必须由您自己的应用程序补充和测试的集成细节；仅阅读检查列表并不代表具备生产准备状态。
+
+> **发布审查 (2026-11-04)：** AI CLI 指南已根据 `azd 1.37.2`、代理 `1.0.0-beta.23` 及评估 `1.0.0-beta.2` 文档/源码进行了检查。有关兼容性要求和迁移详情，请参见[发布变更和修复](production-ai-practices.md#recent-release-changes-and-fixes)；这不是实时部署验证。
 
 ## 学习目标
 
@@ -16,47 +18,47 @@
 - 部署多区域弹性应用
 - 实施企业安全模式
 - 配置全面监控
-- 大规模优化成本
-- 使用 AZD 搭建 CI/CD 流水线
+- 实现大规模成本优化
+- 使用 AZD 设置 CI/CD 流水线
 
 ---
 
-## 📚 课程内容
+## 📚 课程
 
 | # | 课程 | 描述 | 时间 |
 |---|--------|-------------|------|
-| 1 | [生产 AI 实践](production-ai-practices.md) | 企业部署模式 | 90 分 |
+| 1 | [生产级 AI 实践](production-ai-practices.md) | 企业部署模式 | 90 分钟 |
 
 ---
 
 ## 🚀 生产检查清单
 
-- [ ] 多区域部署提升弹性
-- [ ] 使用托管身份进行认证（无密钥）
-- [ ] 使用 Application Insights 监控
-- [ ] 配置成本预算和报警
+- [ ] 多区域部署以实现弹性
+- [ ] 使用托管身份进行身份验证（无密钥）
+- [ ] 使用 Application Insights 进行监控
+- [ ] 配置成本预算和警报
 - [ ] 启用安全扫描
 - [ ] 集成 CI/CD 流水线
-- [ ] 制定灾难恢复方案
+- [ ] 灾难恢复计划
 
 ---
 
 ## 🏗️ 架构模式
 
-### 模式1：微服务 AI
+### 模式一：微服务 AI
 
 ```mermaid
 graph LR
-    Gateway[API 网关] --> AI[AI 服务] --> Models[Microsoft Foundry 模型]
-    Gateway --> Auth[认证服务]
-    AI --> Data[数据存储]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
-### 模式2：事件驱动 AI
+### 模式二：事件驱动 AI
 
 ```mermaid
 graph LR
-    EventGrid[事件网格] --> Functions[函数] --> Pipeline[人工智能管道]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
@@ -64,12 +66,13 @@ graph LR
 ## 🔐 安全最佳实践
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,34 +85,27 @@ properties: {
 
 ## 💰 成本优化
 
-| 策略 | 节省 |
+| 策略 | 主要限制 |
 |----------|---------|
-| 零规模扩展（容器应用） | 60-80% |
-| 开发使用消费层 | 50-70% |
-| 定时扩展 | 30-50% |
-| 预留容量 | 20-40% |
+| 零规模自动扩展 (容器应用) | 需要合适的触发器；其他服务仍会产生费用 |
+| 开发阶段使用按需计费层 | 比较所选服务价格和工作负载 |
+| 计划性自动伸缩 | 通过支持的基础设施/自动化进行伸缩 |
+| 预留容量/配额 | 仅支持时使用；承诺可能增加闲置成本 |
 
-```bash
-# 设置预算提醒
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+使用[完整预算资源模式](production-ai-practices.md#2-cost-monitoring-and-budgets)并配置有效的起始日期、计费范围、接收者和权限。预算可发送警报，但不会限制开支。节省取决于实际使用量，不能保证百分比。
 
 ---
 
-## 📊 监控配置
+## 📊 监控设置
 
 ```bash
-# 流式传输日志
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# 检查应用洞察
+# Check Application Insights
 azd monitor --overview
 
-# 查看指标
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 

@@ -1,110 +1,110 @@
-# 7. Afronding & Volgende stappen
+# 7. Afronding & Volgende Stappen
 
-!!! tip "DE BELANGRIJKSTE KERNBOODSCHAPPEN ZIJN"
+!!! tip "DE BELANGRIJKSTE BERICHTEN ZIJN"
 
-    - [ ] AZD templates versnellen de ontwikkeling van AI-toepassingen van dagen naar uren
-    - [ ] De Discovery → Deployment → Customization-methodologie biedt een gestructureerd leerpad
-    - [ ] GitHub Copilot met MCP-servers maakt verkenning van complexe codebases in natuurlijke taal mogelijk
-    - [ ] Microsoft Foundry biedt ingebouwde bewaking, evaluatie en beveiligingstests
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. Wat je hebt bereikt
+## 1. Wat Je Bereikt Hebt
 
 Gefeliciteerd! In deze workshop heb je succesvol:
 
-| Module | Prestatie |
+| Module | Prestaties |
 |:---|:---|
 | **Module 1** | Azure Developer CLI ontdekt en een AI-sjabloon geselecteerd |
-| **Module 2** | Een complete AI-agentoplossing uitgerold en gevalideerd |
+| **Module 2** | Een complete AI-agentoplossing gedeployed en gevalideerd |
 | **Module 3** | Het sjabloon ontleed om de architectuur te begrijpen |
-| **Module 4** | `azure.yaml`-configuratie en lifecycle hooks verkend |
-| **Module 5** | Het sjabloon aangepast voor je eigen scenario |
+| **Module 4** | `azure.yaml` configuratie en lifecycle hooks verkend |
+| **Module 5** | Het sjabloon aangepast voor jouw eigen scenario |
 | **Module 6** | Infrastructuur veilig afgebroken en resources beheerd |
 
 ---
 
-## 2. Belangrijke concepten die je beheerst
+## 2. Belangrijke Concepten Beheerst
 
 ### Azure Developer CLI (azd)
-- `azd init` - Initialiseer projecten vanuit sjablonen
-- `azd up` - Voorziening en uitrol met één commando
-- `azd env` - Beheer omgevingsvariabelen
-- `azd down` - Ruim resources veilig op
+- `azd init` - Projecten initialiseren vanuit sjablonen
+- `azd up` - Provisioneren en deployen met één commando
+- `azd env` - Omgevingsvariabelen beheren
+- `azd down` - Resources veilig opruimen
 
-### AZD-sjabloonstructuur
-- `azure.yaml` - Configuratie en deployment-hooks
-- infra/ - Bicep infrastructuur-als-code
-- src/ - Applicatiebroncode
-- scripts/ - Automatiserings- en setup-scripts
+### AZD Sjabloonstructuur
+- `azure.yaml` - Configuratie- en deploymenthooks
+- `infra/` - Bicep infrastructuur-als-code
+- `src/` - Applicatiebroncode
+- `scripts/` - Automatiserings- en installatiescripts
 
-### Microsoft Foundry-mogelijkheden
+### Microsoft Foundry Mogelijkheden
 - AI Agent Service voor intelligente assistenten
-- File Search en Azure AI Search voor kennisopvraging
+- Bestand zoeken en Azure AI Search voor kennisopvraging
 - Ingebouwde tracing, monitoring en evaluatie
-- Red teaming voor AI-veiligheidsvalidatie
+- Red teaming voor AI veiligheidsvalidatie
 
 ---
 
-## 3. Ga verder met je leertraject
+## 3. Ga Verder met Leren
 
-### Aanbevolen volgende stappen
+### Aanbevolen Volgende Stappen
 
-| Path | Resource | Time |
+| Pad | Bron | Tijd |
 |:---|:---|:---|
-| **Voltooi de cursus** | [AZD for Beginners Curriculum](../../README.md) | 8-12 uur |
-| **Probeer een ander sjabloon** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 uur |
-| **Diepgaande verkenning** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Doorlopend |
-| **Community** | [Azure Discord](https://aka.ms/foundry/discord) | Meld je vandaag nog aan! |
+| **Voltooi Cursus** | [AZD voor Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Zelfgestuurd |
+| **Probeer Ander Sjabloon** | [Microsoft Foundry Sjablonen](https://ai.azure.com/templates) | 1-2 uur |
+| **Verdiep Je** | [Azure Developer CLI Documentatie](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Doorlopend |
+| **Community** | [Azure Discord](https://aka.ms/foundry/discord) | Sluit vandaag aan! |
 
-### Voorgestelde sjablonen om daarna te proberen
+### Aangeraden Sjablonen om Hierna te Proberen
 
-1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Basischat met je data
+1. **[Begin met AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Basis chat met je data
 2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Geavanceerde RAG-patronen
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Enterprise retail-scenario's
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Enterprise retail scenario's
 
 ---
 
-## 4. Workshop-uitdaging
+## 4. Workshop Uitdaging
 
 Klaar om je vaardigheden te testen? Probeer deze uitdagingen:
 
-| Challenge | Description | Difficulty |
+| Uitdaging | Beschrijving | Moeilijkheid |
 |:---|:---|:---|
-| **1. Multi-agentscenario** | Implementeer en pas aan voor een andere sector (bijv. gezondheidszorg, financiën) | ⭐⭐ |
-| **2. Custom Knowledge Base** | Voeg je eigen gegevensbestanden toe en maak een aangepaste zoekindex | ⭐⭐⭐ |
-| **3. Production Deployment** | Stel CI/CD in met GitHub Actions met `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. Multi-Agent Scenario** | Deploy en pas aan voor een andere industrie (bijv. zorg, financiën) | ⭐⭐ |
+| **2. Aangepaste Kennisbank** | Voeg je eigen data bestanden toe en maak een aangepaste zoekindex | ⭐⭐⭐ |
+| **3. Productie Deployment** | Stel CI/CD in met GitHub Actions met behulp van `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. Deel je feedback
+## 5. Deel Je Feedback
 
 Je feedback helpt ons deze workshop te verbeteren!
 
 - **GitHub Issues**: [Plaats feedback](https://github.com/microsoft/azd-for-beginners/issues) - tag met `Workshop`
-- **Discord**: Word lid van [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - plaats een bericht in `#get-help`
+- **Discord**: Sluit aan bij [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - plaats in `#get-help`
 - **Bijdragen**: Help de workshop verbeteren door pull requests in te dienen!
 
 ---
 
-## Bedankt! 🎉
+## Dank Je! 🎉
 
-Bedankt voor het voltooien van de AZD for AI Developers Workshop. We hopen dat deze ervaring je de vaardigheden en het vertrouwen heeft gegeven om AI-toepassingen op Azure te bouwen en uit te rollen.
+Bedankt voor het voltooien van de AZD voor AI Developers Workshop. We hopen dat deze ervaring je de vaardigheden en het vertrouwen heeft gegeven om AI-applicaties op Azure te bouwen en te deployen.
 
-Blijf bouwen, blijf leren, en welkom in de Azure AI-developergemeenschap!
+**Blijf bouwen, blijf leren, en welkom in de Azure AI ontwikkelaarscommunity!**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 Cursuspagina** | [AZD For Beginners](../../README.md) |
+| **📚 Cursus Home** | [AZD Voor Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
 | **📖 Documentatie** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ AI-sjablonen** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+| **🛠️ AI Sjablonen** | [Microsoft Foundry Sjablonen](https://ai.azure.com/templates) |
 | **💬 Community** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dit document is vertaald met behulp van de AI-vertalingsdienst Co-op Translator (https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal dient als gezaghebbende bron te worden beschouwd. Voor cruciale informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

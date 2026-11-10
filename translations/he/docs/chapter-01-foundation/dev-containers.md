@@ -1,46 +1,46 @@
-# מיכלי פיתוח ו-GitHub Codespaces עבור azd
+# מכולות פיתוח ו-GitHub Codespaces עבור azd
 
 **ניווט בפרק:**
-- **📚 דף הקורס הראשי**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 1 - יסודות והתחלה מהירה
-- **⬅️ קודם**: [הבא את האפליקציה שלך](bring-your-own-app.md)
-- **🚀 פרק הבא**: [פרק 2: פיתוח מבוסס AI](../chapter-02-ai-development/README.md)
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 הפרק הנוכחי**: פרק 1 - יסודות והתחלה מהירה
+- **⬅️ הקודם**: [הבא את האפליקציה שלך](bring-your-own-app.md)
+- **🚀 הפרק הבא**: [פרק 2: פיתוח AI-ראשון](../chapter-02-ai-development/README.md)
 
-> אומת ב`azd 1.27.1` ביולי 2026.
+> יעד סקירת הפקודות והקונפיגורציה: `azd 1.37.2` (נובמבר 2026). בניית מכולות והפצות Azure לא בוצעו כחלק מסקירה זו.
 
 ## הקדמה
 
-התקנת azd, סביבת הריצה המתאימה, Docker, ו-Azure CLI בכל מכונה היא מטלה – והיא הסיבה העיקרית לכך שהדרכה ש"עובדת אצלי" נכשלת אצל מישהו אחר. **מיכל פיתוח** פותר זאת על ידי תיאור כל ספקיית הכלים שלך בקובץ אחד. כל מי שפותח את הפרויקט ב-VS Code או GitHub Codespaces מקבל את אותו סביבה בדיוק, עם azd מותקן מראש. בשיעור זה תלמד כיצד להוסיף אחד.
+התקנת azd, סביבת הריצה הנכונה, Docker, ו-Azure CLI על כל מכונה היא מטלה - וזה הסיבה הראשונה שמדריך ש"חולף על המחשב שלי" נכשל עבור מישהו אחר. **מכולת פיתוח** פותרת זאת על ידי תיאור כל שרשרת הכלים שלך בקובץ. כל מי שפותח את הפרויקט ב-VS Code או GitHub Codespaces מקבל את אותה סביבה בדיוק, עם azd מותקן כבר. שיעור זה מראה לך כיצד להוסיף אחת.
 
-## מטרות הלמידה
+## יעדי הלמידה
 
-בסיום השיעור, תוכל:
-- להבין מהו מיכל פיתוח ולמה הוא עוזר עם azd
-- להוסיף קובץ `.devcontainer/devcontainer.json` מינימלי לפרויקט
-- לכלול את azd, Azure CLI, ו-Docker דרך *תכונות* של מיכל הפיתוח
+בסיום שיעור זה תוכל:
+- להבין מהי מכולת פיתוח ולמה היא עוזרת עם azd
+- להוסיף `.devcontainer/devcontainer.json` מינימלי לפרויקט
+- לכלול את azd, Azure CLI, ו-Docker באמצעות *תכונות* של מכולת הפיתוח
 - לפתוח את הפרויקט ב-GitHub Codespaces או VS Code
 
 ## תוצאות הלמידה
 
-לאחר סיום השיעור, תוכל:
-- לכתוב `devcontainer.json` עבור פרויקט azd
-- להוסיף את azd וכלי Azure ללא התקנות ידניות
-- להריץ `azd up` מתוך מיכל או Codespace
+לאחר השלמת שיעור זה תוכל:
+- ליצור `devcontainer.json` לפרויקט azd
+- להוסיף את azd וכלי Azure בלי התקנות ידניות
+- להריץ `azd up` מתוך מכולה או Codespace
 
 ---
 
-## מהו מיכל פיתוח?
+## מהי מכולת פיתוח?
 
-מיכל פיתוח הוא סביבת פיתוח מבוססת Docker המוגדרת על ידי קובץ `.devcontainer/devcontainer.json` במאגר שלך. כשאתה פותח את הפרויקט:
+מכולת פיתוח היא סביבת פיתוח מבוססת Docker המוגדרת על ידי קובץ `.devcontainer/devcontainer.json` במאגר הקוד שלך. כשהפרויקט נפתח:
 
-- **VS Code** (עם תוסף Dev Containers) בונה את המיכל ומתחבר אליו.
-- **GitHub Codespaces** בונה את אותו המיכל בענן ומספק עורך מבוסס דפדפן.
+- **VS Code** (עם תוסף Dev Containers) בונה את המכולה ומתחבר אליה.
+- **GitHub Codespaces** בונה את אותה מכולה בענן ומספק עורך מבוסס דפדפן.
 
-כך או כך, כל משתתף מקבל את אותם כלים בדיוק — ללא "התקנת azd?" ותקלות שנובעות מכך.
+כך או כך, כל תורם מקבל את אותם כלים — בלי "התקנת את azd?" לבעיות.
 
 ```mermaid
 graph LR
-    Repo[הריפו שלך<br/>+ devcontainer.json] --> VSCode[VS Code<br/>מיכלי פיתוח]
+    Repo[Your Repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Dev Containers]
     Repo --> Codespaces[GitHub<br/>Codespaces]
     VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
@@ -48,7 +48,7 @@ graph LR
 
 ---
 
-## שלב 1: צור את קובץ המיכל
+## שלב 1: יצירת קובץ devcontainer
 
 צור `.devcontainer/devcontainer.json` בשורש הפרויקט שלך:
 
@@ -58,7 +58,7 @@ graph LR
   "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {},
-    "ghcr.io/azure/azure-dev/azd:latest": {},
+    "ghcr.io/azure/azure-dev/azd:0": { "version": "1.37.2" },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/node:1": {}
   },
@@ -78,20 +78,20 @@ graph LR
 מה כל חלק עושה:
 
 | מפתח | מטרה |
-|-------|--------|
-| `image` | מערכת ההפעלה הבסיסית של המיכל |
-| `features` | מתקינים מראש — כאן: Azure CLI, **azd**, Docker, ו-Node.js |
-| `customizations.vscode.extensions` | מתקין אוטומטית את תוספי VS Code של azd ו-Bicep |
-| `forwardPorts` | מחשף את הפורט של האפליקציה לדפדפן שלך |
-| `postCreateCommand` | רץ פעם אחת אחרי שהמיכל נבנה (כאן, בדיקת תקינות) |
+|-----|---------|
+| `image` | מערכת ההפעלה הבסיסית למכולה |
+| `features` | מתקינים מוכנים מראש — כאן: Azure CLI, **azd**, Docker, ו-Node.js |
+| `customizations.vscode.extensions` | מתקין אוטומטית את תוספי azd ו-Bicep ל-VS Code |
+| `forwardPorts` | חושף את פורט האפליקציה שלך לדפדפן |
+| `postCreateCommand` | מריץ פעם אחת אחרי בניית המכולה (כאן, בדיקת תפקוד בסיסית) |
 
-> תכונת `ghcr.io/azure/azure-dev/azd:latest` היא הדרך הרשמית לקבל את azd במיכל. קבע גרסה ספציפית (למשל `azd:1.27.1`) אם אתה זקוק לנשנות.
+> גרסת התכונה (`azd:0`) וגרסת ה-CLI המותקנת שונות. הגדר את האפשרות `version` של התכונה ל-`"1.37.2"` כדי לקבע את ה-CLI; אל תשתמש בגרסת CLI כתווית התכונה.
 
 ---
 
-## שלב 2: התאם את התכונה לשפת האפליקציה שלך
+## שלב 2: התאמת התכונה לשפת האפליקציה שלך
 
-החלף את תכונת `node` למה שהאפליקציה שלך משתמשת בו:
+החלף את תכונת `node` בכל מה שהאפליקציה שלך משתמשת:
 
 ```jsonc
 // Python project
@@ -107,71 +107,71 @@ graph LR
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-השאר את `docker-in-docker` אם ה`host` שלך הוא `containerapp`, `aks`, או כל דבר שבונה תמונת מיכל — azd צריך את Docker לבנות ולדחוף תמונות.
+שמור על `docker-in-docker` בבניית תמונות מקומית. בנייה מרוחקת ב-ACR (`docker.remoteBuild: true`) היא אלטרנטיבה; סוג ה-host לבדו לא תמיד דורש Docker מקומי.
 
 ---
 
-## שלב 3: פתח את המיכל
+## שלב 3: פתיחה
 
 **ב-VS Code:**
 1. התקן את תוסף **Dev Containers**.
 2. פתח את תיקיית הפרויקט.
-3. לחץ על **Reopen in Container** כשמתבקש (או הרץ *Dev Containers: Reopen in Container*).
+3. לחץ על **Reopen in Container** כשהוא מתבקש (או הפעל את *Dev Containers: Reopen in Container*).
 
 **ב-GitHub Codespaces:**
 1. דחוף את המאגר ל-GitHub.
 2. לחץ על **Code → Codespaces → Create codespace on main**.
-3. המתן לבניית המיכל — azd מוכן במסוף.
+3. המתן לבניית המכולה — azd מוכן בטרמינל.
 
 ---
 
-## שלב 4: פרוס מתוך המיכל
+## שלב 4: פריסה מתוך המכולה
 
-המיכל מגיע עם azd מותקן מראש, לכן זרימת העבודה הרגילה פשוט עובדת:
+המכולה כוללת את azd כבר מותקן, כך שזרימת העבודה הרגילה פשוט עובדת:
 
 ```bash
-azd auth login --use-device-code   # קוד התקן שימושי בתוך Codespaces
+azd auth login --use-device-code   # device code is handy inside Codespaces
 azd up
 ```
 
-> **למה `--use-device-code`?** במיכל מרוחק או Codespace אין דפדפן מקומי להפניה מחדש, לכן התחברות על ידי קוד מכשיר היא הדרך האמינה. תעתיק קוד לכרטיסיית דפדפן כדי להשלים את ההתחברות.
+> **למה `--use-device-code`?** במכולה מרוחקת או Codespace אין דפדפן מקומי להפניה, לכן כניסה באמצעות device-code היא המסלול האמין. תדביק קוד בלשונית בדפדפן כדי להשלים את ההתחברות.
 
 ---
 
-## נפילות נפוצות
+## טעויות נפוצות
 
-| נפילה | תיקון |
-|--------|-------|
-| `azd up` לא מצליח לבנות תמונה | הוסף את תכונת `docker-in-docker` |
-| כניסת דפדפן תלוית בקוד תלויה ב-Codespaces | השתמש ב`azd auth login --use-device-code` |
-| כלים שונים בין עמיתים | קבע גרסאות לתכונות (למשל `azd:1.27.1`) |
-| האפליקציה לא נגישה בדפדפן | הוסף את הפורט ל`forwardPorts` |
+| טעות | תיקון |
+|---------|-----|
+| `azd up` לא מצליח לבנות תמונה | הוסף את התכונה `docker-in-docker` |
+| התחברות בדפדפן תקועה ב-Codespaces | השתמש ב-`azd auth login --use-device-code` |
+| כלים שונים בין חברי צוות | קבע את ה-CLI דרך אופציית `version` בתכונת azd וקבע סביבת ריצה לשפה |
+| האפליקציה לא נגישה בדפדפן | הוסף את הפורט ל-`forwardPorts` |
 
 ---
 
 ## סיכום
 
-- מיכל פיתוח הופך את ספקיית הכלים של azd שלך לנשנית לכולם.
-- הוסף את azd, Azure CLI, ו-Docker דרך *תכונות* של מיכל הפיתוח.
-- תאם את תכונת השפה לאפליקציה שלך ושמור על `docker-in-docker` עבור מארחי מיכלים.
-- השתמש בהתחברות עם קוד מכשיר כשמריצים בתוך Codespaces.
+- מכולת פיתוח עושה את שרשרת הכלים של azd שלך לשחזור לכולם.
+- הוסף את azd, Azure CLI, ו-Docker דרך *תכונות* של מכולת הפיתוח.
+- התאם את תכונת השפה לאפליקציה שלך ושמור על `docker-in-docker` עבור מארחי מכולות.
+- השתמש בכניסת device-code כשאתה מריץ בתוך Codespaces.
 
 ---
 
 ## 🔗 ניווט
 
-| כיוון | משאב |
-|-------|--------|
-| **קודם** | [הבא את האפליקציה שלך](bring-your-own-app.md) |
-| **דף הפרק** | [פרק 1: יסודות והתחלה מהירה](README.md) |
-| **פרק הבא** | [פרק 2: פיתוח מבוסס AI](../chapter-02-ai-development/README.md) |
+| כיוון | מקור |
+|-----------|----------|
+| **הקודם** | [הבא את האפליקציה שלך](bring-your-own-app.md) |
+| **דף הבית של הפרק** | [פרק 1: יסודות והתחלה מהירה](README.md) |
+| **הפרק הבא** | [פרק 2: פיתוח AI-ראשון](../chapter-02-ai-development/README.md) |
 
 ## 📖 משאבים קשורים
 
-- [התקנה והגדרות](installation.md)
-- [עלון פקודות](../../resources/cheat-sheet.md)
-- [מפרט רשמי של מיכלי פיתוח](https://containers.dev/)
-- [תכונת מיכל הפיתוח של azd](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [התקנה והגדרה](installation.md)
+- [דף תרגילי פקודות](../../resources/cheat-sheet.md)
+- [מפרט רשמי של מכולות פיתוח](https://containers.dev/)
+- [תכונת מכולת פיתוח של azd](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

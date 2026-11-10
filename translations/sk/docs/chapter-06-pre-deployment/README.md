@@ -1,23 +1,23 @@
-# Kapitola 6: Plánovanie a overenie pred nasadením
+# Kapitola 6: Plánovanie a validácia pred nasadením
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1 hodina | **⭐ Zložitosť**: Stredne pokročilý
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 2-4 hodiny čítania; ďalší čas na prispôsobené laboratóriá | **⭐ Náročnosť**: Stredne pokročilý–pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola zahŕňa základné kroky plánovania a overenia pred nasadením vašej aplikácie. Naučte sa vyhnúť nákladným chybám správnym plánovaním kapacity, výberom SKU a kontrolami pred letom.
+Táto kapitola pokrýva základné kroky plánovania a validácie pred nasadením vašej aplikácie. Naučte sa vyhnúť nákladným chybám správnym plánovaním kapacity, výberom SKU a preletovými kontrolami.
 
-> Overené na `azd 1.27.1` v júli 2026.
+> Pokyny k príkazom sú overené podľa vydanej referencie `azd 1.37.2`. Nasadenia v cloude neboli vykonané. Dlhšie lekcie obsahujú ilustračné fragmenty, nie kompletné lokálne projekty nasadenia.
 
 ## Ciele učenia
 
-Po dokončení tejto kapitoly budete vedieť:
-- Spustiť kontroly pred nasadením
-- Plánovať kapacitu a odhadnúť požiadavky na zdroje
+Po dokončení tejto kapitoly budete:
+- Vykonávať preletové kontroly pred nasadením
+- Plánovať kapacitu a odhadovať požiadavky na zdroje
 - Vybrať vhodné SKU pre optimalizáciu nákladov
-- Nastaviť Application Insights na monitorovanie
-- Pochopiť vzorce koordinácie tímu
+- Konfigurovať Application Insights pre monitorovanie
+- Pochopiť vzory koordinácie multi-agentov a ich požiadavky na nasadenie
 
 ---
 
@@ -25,27 +25,27 @@ Po dokončení tejto kapitoly budete vedieť:
 
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Kontroly pred nasadením](preflight-checks.md) | Overenie konfigurácie pred nasadením | 15 min |
+| 1 | [Preletové kontroly](preflight-checks.md) | Overenie konfigurácie pred nasadením | 15 min |
 | 2 | [Plánovanie kapacity](capacity-planning.md) | Odhad požiadaviek na zdroje | 20 min |
 | 3 | [Výber SKU](sku-selection.md) | Výber vhodných cenových úrovní | 15 min |
-| 4 | [Application Insights](application-insights.md) | Nastavenie monitorovania | 20 min |
-| 5 | [Vzorce koordinácie](coordination-patterns.md) | Pracovné postupy tímového nasadenia | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigurácia monitorovania | 20 min |
+| 5 | [Vzory koordinácie](coordination-patterns.md) | Pokročilý dizajn orchestrácie multi-agentov | 60-75 min |
 
 ---
 
-## 🚀 Rýchly začiatok
+## 🚀 Rýchly štart
 
 ```bash
-# Skontrolujte kvóty predplatného
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Náhľad nasadenia (nevytvárajú sa žiadne zdroje)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Overte syntax Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Skontrolujte konfiguráciu prostredia
+# Check environment configuration
 azd env get-values
 ```
 
@@ -53,31 +53,31 @@ azd env get-values
 
 ## ☑️ Kontrolný zoznam pred nasadením
 
-### Pred spustením `azd provision`
+### Pred `azd provision`
 
 - [ ] Overená kvóta pre región
-- [ ] Správny výber SKU
-- [ ] Preskúmaný odhad nákladov
-- [ ] Dodržanie konvencie názvov
-- [ ] Nastavené zabezpečenie/RBAC
+- [ ] Vhodne vybraté SKU
+- [ ] Prekontrolovaný odhad nákladov
+- [ ] Konzistentné pomenovanie
+- [ ] Konfigurácia zabezpečenia/RBAC
 
-### Pred spustením `azd deploy`
+### Pred `azd deploy`
 
 - [ ] Nastavené premenné prostredia
 - [ ] Tajomstvá v Key Vault
-- [ ] Overené reťazce pripojení
-- [ ] Nastavené kontroly zdravotného stavu
+- [ ] Overené pripojovacie reťazce
+- [ ] Konfigurované zdravotné kontroly
 
 ---
 
 ## 💰 Sprievodca výberom SKU
 
-| Pracovná záťaž | Vývoj | Produkcia |
+| Zaťaženie | Vývoj | Produkcia |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Spotreba | Spotreba alebo vyhradený profil zaťaženia, podľa nameraného zaťaženia |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Štandardný | Štandardný + PTU |
-| AI Search | Základný | Štandardný S2+ |
+| Modely Azure OpenAI | Podporovaný typ nasadenia pay-as-you-go | Pay-as-you-go alebo provisioned throughput; závisí od modelu/regiónu |
+| AI Search | Bezplatné/Základné v rámci limitov | Základný alebo štandardný stupeň veľkosti podľa indexu, replík a zaťaženia dotazov |
 
 ---
 
@@ -86,7 +86,7 @@ azd env get-values
 | Smer | Kapitola |
 |-----------|---------|
 | **Predchádzajúca** | [Kapitola 5: Multi-agent](../chapter-05-multi-agent/README.md) |
-| **Nasledujúca** | [Kapitola 7: Riešenie problémov](../chapter-07-troubleshooting/README.md) |
+| **Ďalšia** | [Kapitola 7: Riešenie problémov](../chapter-07-troubleshooting/README.md) |
 
 ---
 

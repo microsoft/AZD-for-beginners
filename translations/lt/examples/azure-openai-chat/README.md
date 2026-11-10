@@ -1,583 +1,216 @@
-# Microsoft Foundry Models Pokalbių programa
+# Azure OpenAI Chat — Vietinė CLI ir AZD infrastruktūra
 
-**Mokymosi kelias:** Tarpinis ⭐⭐ | **Laikas:** 35-45 minutes | **Kaina:** $50-200/month
+**Lygis:** Tarpinis · **Laikas:** 35–60 minučių įskaitant diegimą
 
-Pilna Microsoft Foundry Models pokalbių programa, diegiama naudojant Azure Developer CLI (azd). Šis pavyzdys demonstruoja gpt-4.1 diegimą, saugų API prieigos valdymą ir paprastą pokalbių sąsają.
+Šis pavyzdys paruošia **Azure OpenAI resursą ir Key Vault**, tada paleidžia
+interaktyvų Python pokalbių CLI **jūsų mašinoje**. Jis nevaldo jokios žiniatinklio programos
+ar konteinerių programos. Numatytoji modelio versija yra `gpt-4.1`, versija `2025-04-14`, su
+`GlobalStandard` diegimo pajėgumu 20. Patikrinkite dabartinį prieinamumą ir kvotą
+pasirinktoje regione prieš diegiant; modelio gyvavimo laiko datos gali keistis.
 
-## 🎯 Ko išmoksite
+## Mokymosi tikslai
 
-- Įdiegti Microsoft Foundry Models paslaugą su gpt-4.1 modeliu
-- Saugiai saugoti OpenAI API raktus su Key Vault
-- Sukurti paprastą pokalbių sąsają naudojant Python
-- Stebėti žetonų naudojimą ir išlaidas
-- Įgyvendinti užklausų apribojimą ir klaidų tvarkymą
-
-## 📦 Kas įtraukta
-
-✅ **Microsoft Foundry Models paslauga** - gpt-4.1 modelio diegimas  
-✅ **Python pokalbių programa** - paprasta pokalbių sąsaja komandų eilutėje  
-✅ **Key Vault integracija** - saugus API raktų saugojimas  
-✅ **ARM šablonai** - pilna infrastruktūra kaip kodas  
-✅ **Išlaidų stebėjimas** - žetonų naudojimo sekimas  
-✅ **Užklausų apribojimas** - apsauga nuo kvotos išsekimo  
-
-## Architecture
+- Paruošti modelio infrastruktūrą su Bicep ir azd.
+- Gauti API raktą iš Key Vault nenustatant jo diegimo išvestyse.
+- Siųsti pokalbių užbaigimo užklausas ir išlaikyti pokalbio istoriją.
+- Suprasti žetonų skaičių ir kainodaros apribojimų ribas.
 
 ```mermaid
-graph TD
-    App[Python pokalbių programa<br/>Vietinis/Debesis<br/>Komandinės eilutės sąsaja<br/>Pokalbių istorija<br/>Žetonų naudojimo stebėjimas] -- "HTTPS (API raktas)" --> Foundry[Microsoft Foundry modelių paslauga<br/>gpt-4.1 modelis<br/>20K žetonų/min pajėgumas<br/>Atsarginis perjungimas tarp regionų]
-    Foundry --> KV[Azure Key Vault<br/>OpenAI API raktas<br/>Galinio taško URL]
-    Foundry -. Valdoma tapatybė .-> KV
+flowchart LR
+    Deploy[azd provision + Bicep] --> AOAI[Azure OpenAI deployment]
+    Deploy --> KV[Key Vault stores endpoint + API key]
+    Shell[Your authenticated Azure CLI] -->|Read secret into local environment| KV
+    Chat[Local Python chat CLI] -->|HTTPS + API key| AOAI
 ```
 
-## Išankstiniai reikalavimai
+Šiame pavyzdyje nėra valdomos tapatybės vykdymo integracijos, daugiaviečio regiono atsarginio veikimo,
+pasirinktinio dažnio ribotuvo, srautinio režimo ar valdomos skaičiavimo paslaugos. OpenAI SDK
+atlieka iki dviejų pakartotinių bandymų, jei įvyksta pakartotiniai klaidų atvejai; CLI praneša apie likusias klaidas.
 
-### Būtina
+## Prieš sąlygos
 
-- **Azure Developer CLI (azd)** - [Įdiegimo vadovas](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure prenumerata** su OpenAI prieiga - [Prašyti prieigos](https://aka.ms/oai/access)
-- **Python 3.9+** - [Įdiegti Python](https://www.python.org/downloads/)
-
-### Patikrinkite reikalavimus
+- Dabartinė stabili [azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (žiūrėjimo metu išleista versija: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- Python **3.10+** (rekomenduojama 3.11) ir virtuali aplinka.
+- Azure prenumerata su leidimu kurti Cognitive Services ir Key Vault
+  išteklius, diegti modelius ir skaityti raktų saugyklos slaptažodžius.
+- Regioninė prieinamumo ir `GlobalStandard` kvota `gpt-4.1`. Prieigos reikalavimai
+  priklauso nuo prenumeratos ir funkcijos; nėra garantuoto patvirtinimo laiko.
 
 ```bash
-# Patikrinkite azd versiją (reikalinga 1.5.0 arba naujesnė)
 azd version
-
-# Patikrinkite prisijungimą prie Azure
+az version
+python --version
 azd auth login
-
-# Patikrinkite Python versiją
-python --version  # arba python3 --version
-
-# Patikrinkite prieigą prie OpenAI (patikrinkite Azure portale)
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --location eastus
+az login
 ```
 
-> **⚠️ Svarbu:** Microsoft Foundry Models reikalauja paraiškos patvirtinimo. Jei dar nepateikėte paraiškos, apsilankykite [aka.ms/oai/access](https://aka.ms/oai/access). Patvirtinimas paprastai užtrunka 1–2 darbo dienas.
+Tai atskiros autentifikacijos sesijos. Pasirinkite tą pačią prenumeratą abiejuose
+įrankiuose prieš paleidžiant žemiau esančias komandas.
 
-## ⏱️ Diegimo laikas
+## Greitas pradėjimas (Bash)
 
-| Etapas | Trukmė | Kas vyksta |
-|-------|----------|--------------|
-| Reikalavimų patikra | 2-3 minučių | Patikrinti OpenAI kvotos prieinamumą |
-| Diegti infrastruktūrą | 8-12 minučių | Sukurti OpenAI, Key Vault, modelio diegimą |
-| Konfigūruoti programą | 2-3 minučių | Nustatyti aplinką ir priklausomybes |
-| **Iš viso** | **12-18 minučių** | Paruošta pokalbiui su gpt-4.1 |
-
-**Pastaba:** Pirmą kartą diegiant OpenAI gali užtrukti ilgiau dėl modelio paruošimo.
-
-## Greita pradžia
+Paleiskite iš saugyklos šaknies:
 
 ```bash
-# Eikite į pavyzdį
 cd examples/azure-openai-chat
-
-# Inicializuokite aplinką
 azd env new myopenai
-
-# Įdiekite viską (infrastruktūrą ir konfigūraciją)
-azd up
-# Būsite paprašyti:
-# 1. Pasirinkite Azure prenumeratą
-# 2. Pasirinkite vietą, kurioje prieinama OpenAI (pvz., eastus, eastus2, westus)
-# 3. Palaukite 12–18 minučių, kol bus baigtas diegimas
-
-# Įdiekite Python priklausomybes
-pip install -r requirements.txt
-
-# Pradėkite pokalbį!
-python chat.py
+azd provision
 ```
 
-**Tikėtinas išvestis:**
-```
-🤖 Microsoft Foundry Models Chat Application
-Connected to: gpt-4.1 (eastus)
-Type your message (or 'quit' to exit)
+Pasirinkite palaikomą regioną. Diegimas sukuria išteklių grupę, OpenAI paskyrą,
+modelio diegimą, Key Vault ir `openai-endpoint`/`openai-api-key` slaptažodžius.
+Nėra **jokių paslaugų, kurias reikėtų diegti** `azure.yaml`.
 
-You: Hello! Tell me about Microsoft Foundry Models.
-Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's powerful language models including gpt-4.1, GPT-3.5-Turbo, and Embeddings...
-
-[Tokens used: 145 | Estimated cost: $0.0044]
-```
-
-## ✅ Patvirtinti diegimą
-
-### 1 žingsnis: Patikrinkite Azure išteklius
+Įkelkite neslaptažodinius išvedimus ir gaukite slaptažodį į savo dabartinę komandų eilutę:
 
 ```bash
-# Peržiūrėti įdiegtus išteklius
-azd show
-
-# Tikėtinas išvesties rezultatas:
-# - OpenAI paslauga: (resurso pavadinimas)
-# - Raktų saugykla: (resurso pavadinimas)
-# - Diegimas: gpt-4.1
-# - Vieta: eastus (arba jūsų pasirinktas regionas)
-```
-
-### 2 žingsnis: Išbandykite OpenAI API
-
-```bash
-# Gauk OpenAI galinį tašką ir raktą
-OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
-OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
-
-# Išbandyti API užklausą
-curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
-  -H "Content-Type: application/json" \
-  -H "api-key: $OPENAI_KEY" \
-  -d '{
-    "messages": [{"role": "user", "content": "Say hello!"}],
-    "max_tokens": 50
-  }'
-```
-
-**Tikėtinas atsakymas:**
-```json
-{
-  "choices": [
-    {
-      "message": {
-        "role": "assistant",
-        "content": "Hello! How can I assist you today?"
-      }
-    }
-  ],
-  "usage": {
-    "prompt_tokens": 8,
-    "completion_tokens": 9,
-    "total_tokens": 17
-  }
-}
-```
-
-### 3 žingsnis: Patikrinkite Key Vault prieigą
-
-```bash
-# Išvardinti paslaptis Key Vault'e
-KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
-
-az keyvault secret list \
-  --vault-name $KV_NAME \
-  --query "[].name" \
-  --output table
-```
-
-**Tikėtini slaptiniai:**
-- `openai-api-key`
-- `openai-endpoint`
-
-**Sėkmės kriterijai:**
-- ✅ OpenAI paslauga įdiegta su gpt-4.1
-- ✅ API kvietimas grąžina galiojantį atsakymą
-- ✅ Slaptiniai saugomi Key Vault
-- ✅ Žetonų naudojimo sekimas veikia
-
-## Projekto struktūra
-
-```
-azure-openai-chat/
-├── README.md                   ✅ This guide
-├── azure.yaml                  ✅ AZD configuration
-├── infra/                      ✅ Infrastructure as Code
-│   ├── main.bicep             ✅ Main Bicep template
-│   ├── main.parameters.json   ✅ Parameters
-│   └── openai.bicep           ✅ OpenAI resource definition
-├── src/                        ✅ Application code
-│   ├── chat.py                ✅ Chat interface
-│   ├── config.py              ✅ Configuration loader
-│   └── requirements.txt       ✅ Python dependencies
-└── .gitignore                  ✅ Git ignore rules
-```
-
-## Programos funkcijos
-
-### Pokalbių sąsaja (`chat.py`)
-
-Pokalbių programa apima:
-
-- **Pokalbių istorija** - Išlaiko kontekstą tarp pranešimų
-- **Žetonų skaičiavimas** - Stebi naudojimą ir apskaičiuoja išlaidas
-- **Klaidų tvarkymas** - Tinkamas užklausų ribojimų ir API klaidų tvarkymas
-- **Išlaidų įvertinimas** - Realaus laiko išlaidų skaičiavimas už žinutę
-- **Srautinis palaikymas** - Pasirenkami srautiniai atsakymai
-
-### Komandos
-
-Pokalbio metu galite naudoti:
-- `quit` or `exit` - End the session
-- `clear` - Clear conversation history
-- `tokens` - Show total token usage
-- `cost` - Show estimated total cost
-
-### Konfigūracija (`config.py`)
-
-Įkelia konfigūraciją iš aplinkos kintamųjų:
-```python
-AZURE_OPENAI_ENDPOINT  # Iš raktų saugyklos
-AZURE_OPENAI_API_KEY   # Iš raktų saugyklos
-AZURE_OPENAI_MODEL     # Numatytasis: gpt-4.1
-AZURE_OPENAI_MAX_TOKENS # Numatytasis: 800
-```
-
-## Naudojimo pavyzdžiai
-
-### Paprastas pokalbis
-
-```bash
-python chat.py
-```
-
-### Pokalbis su pasirinktu modeliu
-
-```bash
-export AZURE_OPENAI_MODEL=gpt-35-turbo
-python chat.py
-```
-
-### Pokalbis su srautiniu atsaku
-
-```bash
-python chat.py --stream
-```
-
-### Pavyzdinis pokalbis
-
-```
-You: Explain Microsoft Foundry Models Service in 3 sentences.
-Assistant: Microsoft Foundry Models Service is Microsoft Azure's cloud platform offering 
-that provides access to OpenAI's powerful language models. It enables developers 
-to integrate capabilities like gpt-4.1 into their applications with enterprise-grade 
-security and compliance. The service includes features for content filtering, 
-abuse monitoring, and responsible AI practices.
-
-[Tokens used: 89 | Estimated cost: $0.0027]
-
-You: What models are available?
-Assistant: Microsoft Foundry Models Service offers several model families including gpt-4.1 
-(most capable), GPT-3.5-Turbo (faster and cost-effective), and Embeddings models 
-for vector search. Each model has different capabilities, pricing, and token limits.
-
-[Tokens used: 67 | Estimated cost: $0.0020]
-
-Total session: 156 tokens | $0.0047
-```
-
-## Išlaidų valdymas
-
-### Žetonų kainodara (gpt-4.1)
-
-| Modelis | Įvestis (už 1K žetonų) | Išvestis (už 1K žetonų) |
-|-------|----------------------|------------------------|
-| gpt-4.1 | $0.03 | $0.06 |
-| GPT-3.5-Turbo | $0.0015 | $0.002 |
-
-### Apskaičiuotos mėnesinės sąnaudos
-
-Remiantis naudojimo įpročiais:
-
-| Naudojimo lygis | Žinučių / diena | Žetonų / diena | Mėnesinės sąnaudos |
-|-------------|--------------|------------|--------------|
-| **Lengvas** | 20 messages | 3,000 tokens | $3-5 |
-| **Vidutinis** | 100 messages | 15,000 tokens | $15-25 |
-| **Didelis** | 500 messages | 75,000 tokens | $75-125 |
-
-**Pagrindinės infrastruktūros išlaidos:** $1-2/mėn (Key Vault + minimalūs skaičiavimo ištekliai)
-
-### Patarimai išlaidų optimizavimui
-
-```bash
-# 1. Naudokite GPT-3.5-Turbo paprastesnėms užduotims (20 kartų pigiau)
-export AZURE_OPENAI_MODEL=gpt-35-turbo
-
-# 2. Sumažinkite maksimalų žetonų skaičių trumpesniems atsakymams
-export AZURE_OPENAI_MAX_TOKENS=400
-
-# 3. Stebėkite žetonų naudojimą
-python chat.py --show-tokens
-
-# 4. Nustatykite biudžeto įspėjimus
-az consumption budget create \
-  --budget-name "openai-budget" \
-  --amount 50 \
-  --time-grain Monthly
-```
-
-## Stebėsena
-
-### Peržiūrėti žetonų naudojimą
-
-```bash
-# Azure portale:
-# OpenAI išteklius → Metrikos → Pasirinkite "Žetonų transakcija"
-
-# Arba per Azure CLI:
-az monitor metrics list \
-  --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
-  --metric "TokenTransaction" \
-  --start-time $(date -u -d '1 hour ago' '+%Y-%m-%dT%H:%M:%S') \
-  --interval PT1M
-```
-
-### Peržiūrėti API žurnalus
-
-```bash
-# Diagnostikos žurnalų srautas
-az monitor diagnostic-settings create \
-  --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
-  --name openai-logs \
-  --logs '[{"category": "Audit", "enabled": true}]' \
-  --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
-
-# Užklausų žurnalai
-az monitor log-analytics query \
-  --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
-  --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
-```
-
-## Trikčių šalinimas
-
-### Problema: „Access Denied“ klaida
-
-**Simptomai:** 403 Forbidden kviečiant API
-
-**Sprendimai:**
-```bash
-# 1. Patikrinkite, ar OpenAI prieiga patvirtinta
-az cognitiveservices account show \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
-
-# 2. Patikrinkite, ar API raktas teisingas
-azd env get-value AZURE_OPENAI_API_KEY
-
-# 3. Patikrinkite galinio taško URL formato teisingumą
-azd env get-value AZURE_OPENAI_ENDPOINT
-# Turėtų būti: https://[name].openai.azure.com/
-```
-
-### Problema: „Rate Limit Exceeded“
-
-**Simptomai:** 429 Too Many Requests
-
-**Sprendimai:**
-```bash
-# 1. Patikrinkite esamą kvotą
-az cognitiveservices account deployment show \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-4.1
-
-# 2. Prašykite kvotos padidinimo (jei reikia)
-# Eikite į Azure portalą → OpenAI išteklius → Kvotos → Prašyti padidinimo
-
-# 3. Įdiekite pakartotinio bandymo logiką (jau yra chat.py)
-# Programa automatiškai pakartoja bandymus, naudodama eksponentinį atgalinį atsitraukimą
-```
-
-### Problema: „Model Not Found“
-
-**Simptomai:** 404 klaida diegimo metu
-
-**Sprendimai:**
-```bash
-# 1. Išvardyti prieinamus diegimus
-az cognitiveservices account deployment list \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
-
-# 2. Patikrinti modelio pavadinimą aplinkoje
-echo $AZURE_OPENAI_MODEL
-
-# 3. Atnaujinti į teisingą diegimo pavadinimą
-export AZURE_OPENAI_MODEL=gpt-4.1  # arba gpt-35-turbo
-```
-
-### Problema: Ilgas atsako laikas
-
-**Simptomai:** Lėti atsakymo laikai (>5 sekundžių)
-
-**Sprendimai:**
-```bash
-# 1. Patikrinkite regioninį vėlavimą
-# Diegti į vartotojams artimiausią regioną
-
-# 2. Sumažinkite max_tokens greitesniems atsakymams
-export AZURE_OPENAI_MAX_TOKENS=400
-
-# 3. Naudokite srautavimą geresnei naudotojo patirčiai
-python chat.py --stream
-```
-
-## Geriausios saugumo praktikos
-
-### 1. Apsaugokite API raktus
-
-```bash
-# Niekada neįtraukite raktų į versijų valdymą
-# Naudokite Key Vault (jau sukonfigūruota)
-
-# Reguliariai keiskite raktus
-az cognitiveservices account keys regenerate \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --key-name key1
-```
-
-### 2. Įgyvendinkite turinio filtravimą
-
-```python
-# Microsoft Foundry Models turi įmontuotą turinio filtravimą
-# Konfigūruokite Azure portale:
-# OpenAI išteklius → Turinio filtrai → Sukurti pasirinktinį filtrą
-
-# Kategorijos: Neapykanta, Seksualinis turinys, Smurtas, Savęs žalojimas
-# Lygiai: Žemas, Vidutinis, Aukštas filtravimas
-```
-
-### 3. Naudokite valdomą identitetą (produkcija)
-
-```bash
-# Produkcinėms diegimams naudokite valdomą tapatybę
-# vietoj API raktų (reikalauja, kad programa būtų talpinama Azure)
-
-# Atnaujinkite infra/openai.bicep, kad įtrauktų:
-# identity: { type: 'SystemAssigned' }
-```
-
-## Kūrimas
-
-### Paleisti lokaliai
-
-```bash
-# Įdiekite priklausomybes
-pip install -r src/requirements.txt
-
-# Nustatykite aplinkos kintamuosius
-export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
-export AZURE_OPENAI_API_KEY="your-api-key"
-export AZURE_OPENAI_MODEL="gpt-4.1"
-
-# Paleiskite programą
+export AZURE_OPENAI_ENDPOINT="$(azd env get-value AZURE_OPENAI_ENDPOINT)"
+export AZURE_OPENAI_MODEL="$(azd env get-value AZURE_OPENAI_MODEL)"
+KV_NAME="$(azd env get-value AZURE_KEY_VAULT_NAME)"
+export AZURE_OPENAI_API_KEY="$(az keyvault secret show \
+  --vault-name "$KV_NAME" --name openai-api-key --query value --output tsv)"
+
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r src/requirements.txt
 python src/chat.py
 ```
 
-### Vykdyti testus
+PowerShell aktyvuokite su `.\.venv\Scripts\Activate.ps1` ir priskirkite aplinkos
+kintamuosius su `$env:AZURE_OPENAI_ENDPOINT = azd env get-value AZURE_OPENAI_ENDPOINT`
+(ir panašiai su modeliu). Gaukite API raktą naudodami
+`$env:AZURE_OPENAI_API_KEY = az keyvault secret show --vault-name $KV_NAME --name openai-api-key --query value -o tsv`.
+Pirmiausia nustatykite `$KV_NAME = azd env get-value AZURE_KEY_VAULT_NAME`.
 
-```bash
-# Įdiekite testų priklausomybes
-pip install pytest pytest-cov
+Nespausdinkite, neskelbkite ir neklijuokite API rakto į problemų ataskaitas. CLI skaito proceso
+aplinkos kintamuosius; jis **nenuskaitys** Key Vault slaptažodžių ar neįkels `.env` failų.
+`config.py` patikrina galinį tašką, žetonų ribą ir temperatūrą paleidimo metu.
 
-# Paleiskite testus
-pytest tests/ -v
+Tikėtinas išvestis (turinys ir panaudojimas skiriasi):
 
-# Su kodo padengimu
-pytest tests/ --cov=src --cov-report=html
+```text
+Azure OpenAI Chat Application
+Model: gpt-4.1
+...
+You: Say hello in one sentence.
+Assistant: Hello! How can I help you today?
+[Tokens: ... | Cost: $...]
 ```
 
-### Atnaujinti modelio diegimą
+Komandos: `stats` rodo sumas, `clear` išvalo pokalbio istoriją, o
+`quit`/`exit` baigia sesiją. Nėra komandų `--stream`, `--show-tokens`, `tokens`,
+ar `cost`.
+
+## Patikrinkite diegimą
+
+Po aukščiau užkeltų komandų:
 
 ```bash
-# Diegti kitą modelio versiją
-az cognitiveservices account deployment create \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-35-turbo \
-  --model-name gpt-35-turbo \
-  --model-version "0613" \
-  --model-format OpenAI \
-  --sku-capacity 20 \
-  --sku-name "Standard"
+curl --fail-with-body \
+  "${AZURE_OPENAI_ENDPOINT%/}/openai/deployments/${AZURE_OPENAI_MODEL}/chat/completions?api-version=2024-10-21" \
+  -H "Content-Type: application/json" \
+  -H "api-key: $AZURE_OPENAI_API_KEY" \
+  -d '{"messages":[{"role":"user","content":"Say hello!"}],"max_tokens":50}'
+
+az keyvault secret list --vault-name "$KV_NAME" --query "[].name" -o table
 ```
 
-## Išvalymas
+Sėkmė: API grąžina HTTP 200 su `choices[0].message.content` ir `usage`;
+saugykla rodo `openai-api-key` ir `openai-endpoint`. Sėkmingas ARM diegimas
+vienas neužtikrina inferencijos patikrinimo.
+
+## Failai ir konfigūracija
+
+```text
+azure.yaml                         # Infrastructure-only AZD project
+infra/main.bicep                   # Subscription deployment
+infra/main.parameters.json         # Environment, location, principal ID
+infra/resources/openai.bicep       # Account + model
+infra/resources/keyvault.bicep     # Vault + deploying user's secret access policy
+infra/resources/secrets.bicep      # Writes secrets, no key output
+src/chat.py                        # Interactive CLI
+src/config.py                      # Environment validation
+src/requirements.txt               # Python packages
+```
+
+Norėdami pakeisti paruoštą modelį/versiją/pajėgumą, redaguokite numatytuosius nustatymus
+`infra/main.bicep` ir paleiskite `azd provision`. Nustatant `AZURE_OPENAI_MODEL` savo
+komandų eilutėje pasirenkama tik **egzistuojančio diegimo pavadinimas**; modelis nebus diegiamas iš naujo.
+
+| Vykdymo kintamasis | Numatytoji reikšmė / šaltinis |
+|---|---|
+| `AZURE_OPENAI_ENDPOINT` | Privalomas; azd neslaptažodinis išvestis |
+| `AZURE_OPENAI_API_KEY` | Privalomas; gaunamas iš Key Vault |
+| `AZURE_OPENAI_MODEL` | `gpt-4.1`; Azure diegimo pavadinimas |
+| `AZURE_OPENAI_MAX_TOKENS` | 800 (patvirtinimo diapazonas 1–4096) |
+| `AZURE_OPENAI_TEMPERATURE` | 0.7 (diapazonas 0–2) |
+| `AZURE_OPENAI_INPUT_PRICE_PER_1K` | 0.002 USD; iliustracinis necache'inamas įvesties tarifas |
+| `AZURE_OPENAI_OUTPUT_PRICE_PER_1K` | 0.008 USD; iliustracinis išvesties tarifas |
+
+## Išlaidos ir saugumo apribojimai
+
+Kainos rodymas yra **įvertinimas**, ne Azure sąskaita. Jis dauginamas API žetonų
+naudojimą pagal nustatytus tarifus ir neatsižvelgia į cache'inimo nuolaidas,
+regioninius/SKU skirtumus, mokesčius, kainų pokyčius ar nesėkmingus/perkrautus kvietimus.
+Pakeiskite **abu tarifus**, kai naudojate kitą modelį ar SKU, ir patikrinkite dabartines
+[Azure OpenAI kainas](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/).
+
+Iliustracijai, 100 užklausų, naudojant kiekvienos po 500 necache'intų įvesties ir 200 išvesties žetonų,
+pagal numatytus tarifus kainuoja `100 × (500/1000 × .002 + 200/1000 × .008) = $0.26`.
+Key Vault operacijos/laikymas patiria atskirus mokesčius. Ši vietinė CLI neturi fiksuoto $50/mėn
+mokesčio ir šablone nėra valdomos skaičiavimo paslaugos.
+
+Saugykla naudoja prieigos politiką diegimo pagrindui; tai nėra RBAC ar
+valdomos tapatybės programos pavyzdys. Viešieji galiniai taškai ir API raktų autentifikacija
+naudojami mokymuisi. Apribokite leidimus ir pridėkite tinkamus tapatybės/tinklų
+valdiklius prieš adaptuojant jį gamybai.
+
+## Praktinės užduotys
+
+### 1. Patikrinkite kontekstą ir išvalykite jį
+
+**Pradžia:** paleistas CLI. **Tikslas:** stebėti istoriją.
+Pasakykite „Prisimink žodį kedras“, tada paklauskite „Kokį žodį paprašiau prisiminti?“
+Paleiskite `stats`; du sėkmingi pokalbiai turėtų būti laikomi dviem perduotais pranešimais.
+Paleiskite `clear` ir `stats`; perduotų pranešimų turėtų būti nulis (žetonų sumos lieka).
+Modelio tikslios formuluotės nėra deterministinės.
+
+### 2. Pakeiskite atsako ribą
+
+**Pradžia:** išeikite iš CLI, naudodami tą pačią komandų eilutę.
+Paleiskite `export AZURE_OPENAI_MAX_TOKENS=100`, perkraukite `python src/chat.py` ir paprašykite
+trumpą paaiškinimą apie azd. Patikrinkite, ar baneryje rodomas 100.
+Atstatykite su `unset AZURE_OPENAI_MAX_TOKENS`. Mažesnė atsako riba nesumažina jau išsiųstų istorijos žetonų.
+
+
+
+
+  pakartokite eksporto veiksmus. Naujo terminalo reikia vėl nustatyti.
+- **403 klaida skaitant Key Vault:** patikrinkite Azure CLI prenumeratą/prisijungimą ir pagrindą
+  Key Vault prieigos politikoje. Politikos pakeitimams gali užtrukti kol išplis.
+- **404 inferencija:** patikrinkite diegimo pavadinimą, galinį tašką ir būseną.
+- **429 inferencija:** palaukite kol pasikeis dažnio ribos; patikrinkite regioninę modelio kvotą.
+- **429 sprendimas:** palaukite, kol atsistatys greičio ribos; patikrinkite regioninį modelio kvotą.
+  CLI pašalina nepavykusias užklausas iš istorijos, todėl pakartotiniai bandymai jų nedubliuoja.
+- **Konteksto ilgis:** pavyzdys netrumpina ilgų pokalbių; naudokite `clear`.
+- **Modelis nepasiekiamas/panaikintas:** pasitikrinkite dabartinį modelio prieinamumą ir atnaujinkite
+  modelio/versijos/SKU nustatymus kartu; API versija ir modelio versija yra skirtingi nustatymai.
+
+## Valymas ir tolesni veiksmai
 
 ```bash
-# Ištrinti visus Azure išteklius
-azd down --force --purge
-
-# Tai pašalina:
-# - OpenAI paslauga
-# - Key Vault (su 90 dienų minkštuoju ištrynimu)
-# - Išteklių grupė
-# - Visi diegimai ir visos konfigūracijos
+azd down
+unset AZURE_OPENAI_API_KEY
 ```
 
-## Kiti žingsniai
+Key Vault minkštojo ištrynimo laikotarpis yra septynios dienos; naikinimui reikalingos atskiros teisės.
+Nėra įsipareigoto testų rinkinio; nevykdykite neegzistuojančios `pytest tests/` komandos.
+Prieš plečiant kodą pridėkite imituotus API testus.
 
-### Išplėsti šį pavyzdį
-
-1. **Pridėti žiniatinklio sąsają** - Sukurti React/Vue frontend
-   ```bash
-   # Pridėti frontend paslaugą į azure.yaml
-   # Diegti į Azure Static Web Apps
-   ```
-
-2. **Įgyvendinti RAG** - Pridėti dokumentų paiešką su Azure AI Search
-   ```python
-   # Integruoti Azure AI Search
-   # Įkelti dokumentus ir sukurti vektorių indeksą
-   ```
-
-3. **Pridėti funkcijų kvietimą** - Įgalinti įrankių naudojimą
-   ```python
-   # Apibrėžkite funkcijas faile chat.py
-   # Leiskite gpt-4.1 kviesti išorines API
-   ```
-
-4. **Daugiamodelių palaikymas** - Diegti kelis modelius
-   ```bash
-   # Pridėti gpt-35-turbo ir įterpimų modelius
-   # Įgyvendinti modelių maršrutizavimo logiką
-   ```
-
-### Susiję pavyzdžiai
-
-- **[Retail Multi-Agent](../retail-scenario.md)** - Pažangi daugiaagentinė architektūra
-- **[Database App](../../../../examples/database-app)** - Pridėti nuolatinę saugyklą
-- **[Container Apps](../../../../examples/container-app)** - Diegti kaip konteinerizuotą paslaugą
-
-### Mokymosi ištekliai
-
-- 📚 [AZD For Beginners Course](../../README.md) - Pagrindinis kurso puslapis
-- 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Oficialūs dokumentai
-- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - API detalės
-- 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Geriausios praktikos
-
-## Papildomi ištekliai
-
-### Dokumentacija
-- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Išsami instrukcija
-- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Modelio galimybės
-- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Saugumo funkcijos
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd referencija
-
-### Vadovėliai
-- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Pirmasis diegimas
-- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Pokalbių programų kūrimas
-- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Pažangios funkcijos
-
-### Įrankiai
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Internetinė testavimo aplinka
-- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Geresnių užklausų rašymas
-- **[Token Calculator](https://platform.openai.com/tokenizer)** - Apskaičiuoti žetonų naudojimą
-
-### Bendruomenė
-- **[Azure AI Discord](https://discord.gg/azure)** - Gaukite pagalbą iš bendruomenės
-- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Klausimų ir atsakymų forumas
-- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Naujausi atnaujinimai
-
----
-
-**🎉 Sveikiname!** Jūs įdiegėte Microsoft Foundry Models ir sukūrėte veikiantį pokalbių programą. Pradėkite tyrinėti gpt-4.1 galimybes ir eksperimentuokite su skirtingomis užklausomis ir naudojimo atvejais.
-
-**Klausimų?** [Pateikti problemą](https://github.com/microsoft/AZD-for-beginners/issues) arba peržiūrėkite [DUK](../../resources/faq.md)
-
-**Įspėjimas dėl išlaidų:** Prisiminkite paleisti `azd down` baigę testavimą, kad išvengtumėte nuolatinių mokesčių (~$50-100/mėn aktyviai naudojant).
+[Konteinerių pavyzdžiai](../../../../examples/container-app) · [Mažmeninės prekybos architektūros planas](../retail-scenario.md) ·
+[Kurso pradžia](../../README.md) · [Pranešti apie problemą](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

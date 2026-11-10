@@ -1,11 +1,11 @@
 # Taller AZD para Desarrolladores de IA
 
-> Validado con `azd 1.27.1` en julio de 2026.
+> Guía de la fuente revisada según AZD 1.37.2 el 4 de noviembre de 2026. Las capturas de pantalla son ilustrativas; la disponibilidad del servicio, las etiquetas del portal y las plantillas predeterminadas pueden cambiar.
 
 > [!IMPORTANT]  
-> **Este taller está equipado con una guía del taller que puedes previsualizar en tu navegador local. Para comenzar, abre el repositorio en GitHub Codespaces, un contenedor de desarrollo o un clon local con MkDocs instalado — luego espera hasta que veas un terminal activo de VS Code y escribe:**  
-> `mkdocs serve > /dev/null 2>&1 &`  
-> **Deberías ver un diálogo emergente para abrir la página de previsualización en un navegador.**
+> **Este taller está equipado con una guía del taller que puedes previsualizar en tu navegador local. Para comenzar, abre el repositorio en GitHub Codespaces, un contenedor de desarrollo o un clon local con MkDocs instalado—luego espera hasta que veas una terminal activa de VS Code y escribe:**  
+> Desde la raíz del repositorio del curso, instala `requirements-dev.txt`, luego ejecuta `python -m mkdocs serve --config-file workshop/mkdocs.yml` en primer plano.
+> **Deberías ver un cuadro de diálogo emergente para abrir la página de vista previa en un navegador.**
 
 Bienvenido al taller práctico para aprender Azure Developer CLI (AZD) con un enfoque en el despliegue de aplicaciones de IA. Este taller te ayuda a obtener una comprensión aplicada de las plantillas AZD en 3 pasos:
 
@@ -17,10 +17,10 @@ A lo largo de este taller, también se te presentarán herramientas y flujos de 
 
 | | | 
 |:---|:---|
-| **📚 Inicio del Curso**| [AZD para Principiantes](../README.md)|
+| **📚 Inicio del Curso**| [AZD Para Principiantes](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md)|
 | **📖 Documentación** | [Comienza con plantillas de IA](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️ Plantillas de IA** | [Plantillas Microsoft Foundry](https://ai.azure.com/templates) |
-|**🚀 Próximos Pasos** | [Acepta el Desafío](#workshop-challenge) |
+| **🛠️Plantillas de IA** | [Plantillas de Microsoft Foundry](https://ai.azure.com/templates) |
+|**🚀 Próximos Pasos** | [Acepta el Desafío](instructions/7-Wrap-up.md#4-workshop-challenge) |
 | | |
 
 ## Resumen del Taller

@@ -1,78 +1,80 @@
-# SKU pasirinkimo vadovas - Kaip pasirinkti tinkamus Azure paslaugų lygius
+# SKU pasirinkimo vadovas – kaip pasirinkti tinkamas Azure paslaugų lygius
 
-**Skyrių naršymas:**
+**Skyriaus navigacija:**
 - **📚 Kurso pradžia**: [AZD Pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 6 skyrius - Išankstinis diegimo tikrinimas ir planavimas
-- **⬅️ Ankstesnis**: [Capacity Planning](capacity-planning.md)
-- **➡️ Kitas**: [Pre-flight Checks](preflight-checks.md)
-- **🚀 Kitas skyrius**: [7 skyrius: Gedimų šalinimas](../chapter-07-troubleshooting/common-issues.md)
+- **📖 Dabartinis skyrius**: 6 skyrius – Išankstinis patikrinimas ir planavimas prieš diegiant
+- **⬅️ Ankstesnis**: [Talpos planavimas](capacity-planning.md)
+- **➡️ Kitas**: [Išankstiniai patikrinimai](preflight-checks.md)
+- **🚀 Kitas skyrius**: [7 skyrius: Problemų šalinimas](../chapter-07-troubleshooting/common-issues.md)
 
 ## Įvadas
 
-Šis išsamus vadovas padės pasirinkti optimalius Azure paslaugų SKU (Stock Keeping Units) skirtingoms aplinkoms, darbiniams krūviams ir reikalavimams. Išmoksite analizuoti našumo poreikius, kaštų aspektus ir mastelio keitimo reikalavimus, kad pasirinktumėte tinkamiausius paslaugų lygius savo Azure Developer CLI diegimams.
+Šis išsamus vadovas padės jums parinkti optimalias Azure paslaugų SKU (atsargų vienetus) įvairioms aplinkoms, darbo krūviams ir reikalavimams. Išmoksite analizuoti našumo poreikius, kainų aspektus ir keičiamumo reikalavimus, kad pasirinktumėte tinkamiausius paslaugų lygius savo Azure Developer CLI diegimams.
 
 ## Mokymosi tikslai
 
 Baigę šį vadovą jūs:
-- Suprasite SKU koncepcijas, kainodaros modelius ir funkcijų skirtumus
-- Išmoksite aplinkai pritaikytas SKU pasirinkimo strategijas kūrimo, parengimo ir produkcijos etapams
-- Analizuosite darbinių krūvių poreikius ir priderinsite juos prie tinkamų paslaugų lygių
-- Įgyvendinsite kaštų optimizavimo strategijas protingai renkantis SKU
-- Taikysite našumo testavimo ir patvirtinimo technikas SKU pasirinkimams
-- Konfigūruosite automatizuotas SKU rekomendacijas ir stebėjimą
+- Suprasite Azure SKU sąvokas, kainodaros modelius ir funkcijų skirtumus
+- Įvaldysite aplinkai specifines SKU pasirinkimo strategijas kūrimo, bandymo ir gamybos etapams
+- Analizuosite darbo krūvių reikalavimus ir pritaikysite juos tinkamiems paslaugų lygiams
+- Įgyvendinsite sąnaudų optimizavimo strategijas protingai pasirinkdami SKU
+- Taikysite našumo testavimo ir patikrinimo metodus SKU pasirinkimams
+- Konfigūruosite automatines SKU rekomendacijas ir stebėjimą
 
 ## Mokymosi rezultatai
 
-Baigę kursą sugebėsite:
-- Pasirinkti tinkamus Azure paslaugų SKU remiantis darbinių krūvių reikalavimais ir apribojimais
-- Sukurti ekonomiškas kelių aplinkų architektūras su tinkamu lygių pasirinkimu
-- Vykdyti našumo etalonavimą ir patvirtinimą SKU pasirinkimams
-- Kurti automatizuotus įrankius SKU rekomendacijoms ir kaštų optimizavimui
-- Planuoti SKU migracijas ir skalavimo strategijas keičiantis reikalavimams
-- Taikyti Azure Well-Architected Framework principus renkantis paslaugų lygius
+Baigę šį vadovą galėsite:
+- Pasirinkti tinkamus Azure paslaugų SKU pagal darbo krūvio reikalavimus ir apribojimus
+- Sukurti ekonomiškas daugiaaplinkes architektūras su tinkamu lygių parinkimu
+- Įgyvendinti našumo matavimus ir patikrinimus dėl SKU pasirinkimų
+- Kurti automatines priemones SKU rekomendacijoms ir sąnaudų optimizavimui
+- Planavimas SKU migracijas ir keitimo strategijas keičiantis poreikiams
+- Taikyti Azure Gerai suprojektuoto karkaso principus pasirenkant paslaugų lygius
 
 ## Turinys
 
-- [SKU supratimas](../../../../docs/chapter-06-pre-deployment)
-- [Pasirinkimas pagal aplinką](../../../../docs/chapter-06-pre-deployment)
-- [Paslaugų specifinės gairės](../../../../docs/chapter-06-pre-deployment)
-- [Kaštų optimizavimo strategijos](../../../../docs/chapter-06-pre-deployment)
-- [Našumo svarstymai](../../../../docs/chapter-06-pre-deployment)
-- [Greitos nuorodos lentelės](../../../../docs/chapter-06-pre-deployment)
-- [Patvirtinimo įrankiai](../../../../docs/chapter-06-pre-deployment)
+- [SKU supratimas](#understanding-skus)
+- [Pasirinkimas pagal aplinką](#environment-based-selection)
+- [Paslaugų specifinės gairės](#service-specific-guidelines)
+- [Sąnaudų optimizavimo strategijos](#cost-optimization-strategies)
+- [Našumo aspektai](#performance-considerations)
+- [Greitos nuorodos lentelės](#quick-reference-tables)
+- [Patikrinimo įrankiai](#validation-tools)
 
 ---
 
 ## SKU supratimas
 
+> **Pavyzdžio apimtis:** Žemiau pateikti YAML SKU žemėlapiai ir našumo konfigūracijos yra dizaino pastabos, o ne `azure.yaml` schema arba apkrovos įrankio konfigūracija. Bicep blokai yra alternatyvos/frakcijos: deklaruokite jų parametrus ir pagrindinius išteklius, naudokite unikalius simbolinius pavadinimus juos derindami ir sujunkite modulius į veikiančią projektą. Kainos, apribojimai ir regiono/SKU prieinamumas turi būti patikrinti jūsų prenumeratai prieš diegiant.
+
 ### Kas yra SKU?
 
-SKU (Stock Keeping Units) reiškia skirtingus paslaugų lygius ir našumo lygius Azure ištekliams. Kiekvienas SKU siūlo skirtingą:
+SKU (atsargų vienetai) reiškia skirtingus paslaugų lygius ir našumo pakopas Azure ištekliams. Kiekvienas SKU siūlo skirtingus:
 
-- **Našumo charakteristikos** (CPU, atmintis, pralaidumas)
+- **Našumo charakteristikas** (CPU, atmintis, pralaidumas)
 - **Funkcijų prieinamumą** (skalavimo galimybės, SLA lygiai)
-- **Kainodaros modelius** (mokestis už naudojimą, rezervuota talpa)
-- **Regioninę prieinamumą** (ne visi SKU prieinami visuose regionuose)
+- **Kainodaros modelius** (pagal sunaudojimą, rezervuota talpa)
+- **Regiono prieinamumą** (ne visi SKU prieinami visuose regionuose)
 
-### Pagrindiniai veiksniai renkantis SKU
+### Svarbiausi veiksniai pasirenkant SKU
 
-1. **Darbinių krūvių reikalavimai**
-   - Tikėtini srauto/krūvio modeliai
-   - Našumo reikalavimai (CPU, atmintis, I/O)
+1. **Darbo krūvio reikalavimai**
+   - Tikėtinas srautas/apkrova
+   - Našumo reikalavimai (CPU, atmintis, įvestis/išvestis)
    - Saugyklos poreikiai ir prieigos modeliai
 
 2. **Aplinkos tipas**
-   - Kūrimas/testavimas prieš produkciją
+   - Kūrimo/testavimo prieš gamybą
    - Prieinamumo reikalavimai
-   - Saugumo ir atitikties (compliance) poreikiai
+   - Saugumo ir atitikties poreikiai
 
 3. **Biudžeto apribojimai**
-   - Pradinės išlaidos vs. veikimo kaštai
-   - Nuolaidos rezervuotai talpai
-   - Automatinio skalavimo kaštų pasekmės
+   - Pradinės sąnaudos prieš veiklos sąnaudas
+   - Rezervuotos talpos nuolaidos
+   - Automatinio skalavimo sąnaudų poveikis
 
 4. **Augimo prognozės**
-   - Mastelio keitimo reikalavimai
+   - Skalavimo reikalavimai
    - Ateities funkcijų poreikiai
    - Migracijos sudėtingumas
 
@@ -82,7 +84,7 @@ SKU (Stock Keeping Units) reiškia skirtingus paslaugų lygius ir našumo lygius
 
 ### Kūrimo aplinka
 
-**Prioritetai**: Kaštų optimizavimas, pagrindinė funkcionalumas, paprastas teikimas/atšaukimas
+**Prioritetai**: Sąnaudų optimizavimas, pagrindinė funkcija, paprastas išteklių suteikimas/paėmimas
 
 #### Rekomenduojami SKU
 ```yaml
@@ -92,21 +94,21 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### Charakteristikos
-- **App Service**: F1 (Nemokama) arba B1 (Basic) paprastam testavimui
-- **Duomenų bazės**: Basic lygis su minimaliomis resursų reikmėmis
-- **Saugykla**: Standard su vietiniu redundantiškumu
-- **Skaičiavimas**: Galimi bendrinami resursai
+- **App Service**: F1 (Nemokama) arba B1 (Pagrindinė) paprastam testavimui
+- **Duomenų bazės**: Pagrindinis lygis su minimaliomis resursų sąnaudomis
+- **Saugykla**: Standartinė su vietine atsparumu tik
+- **Skaičiavimas**: Leidžiami bendri ištekliai
 - **Tinklai**: Pagrindinės konfigūracijos
 
-### Parengimo/Testavimo aplinka
+### Paruošimo/testavimo aplinka
 
-**Prioritetai**: Produkcijos panaši konfigūracija, kaštų balansas, našumo testavimo galimybė
+**Prioritetai**: Gamybai artima konfigūracija, kainos balansas, našumo testavimo galimybės
 
 #### Rekomenduojami SKU
 ```yaml
@@ -121,15 +123,15 @@ skus:
 ```
 
 #### Charakteristikos
-- **Našumas**: 70–80% produkcijos pajėgumo
-- **Funkcijos**: Dauguma produkcijos funkcijų įjungtos
-- **Atsarginis kopijavimas**: Tam tikras geografinis redundantiškumas
+- **Našumas**: 70-80 % gamybos pajėgumo
+- **Funkcijos**: Dauguma gamybos funkcijų įjungta
+- **Atsparumas**: Dalinis geografinis atsparumas
 - **Skalavimas**: Ribotas automatinis skalavimas testavimui
-- **Stebėjimas**: Pilnas stebėjimo paketas
+- **Stebėsena**: Pilnas stebėjimo paketas
 
-### Produkcijos aplinka
+### Gamybinė aplinka
 
-**Prioritetai**: Našumas, prieinamumas, saugumas, atitiktis, mastelio keitimas
+**Prioritetai**: Našumas, prieinamumas, saugumas, atitiktis, skalavimas
 
 #### Rekomenduojami SKU
 ```yaml
@@ -138,18 +140,18 @@ environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
 #### Charakteristikos
-- **Aukšta prieinamybė**: 99.9%+ SLA reikalavimai
-- **Našumas**: Dedikuoti resursai, didelis pralaidumas
+- **Aukštas prieinamumas**: 99.9%+ SLA reikalavimai
+- **Našumas**: Dedikuoti ištekliai, aukštas pralaidumas
 - **Saugumas**: Premium saugumo funkcijos
-- **Skalavimas**: Pilnas automatinio skalavimo palaikymas
-- **Stebėjimas**: Išsami stebėsena ir stebėjimo įrankiai
+- **Skalavimas**: Pilnas automatinis skalavimas
+- **Stebėsena**: Išsami stebėjimo galimybė
 
 ---
 
@@ -159,13 +161,13 @@ skus:
 
 #### SKU sprendimų matrica
 
-| Use Case | Recommended SKU | Rationale |
+| Panaudojimo atvejis | Rekomenduojamas SKU | Priežastis |
 |----------|----------------|-----------|
-| Development/Testing | F1 (Free) or B1 (Basic) | Cost-effective, sufficient for testing |
-| Small production apps | S1 (Standard) | Custom domains, SSL, auto-scaling |
-| Medium production apps | P1V3 (Premium V3) | Better performance, more features |
-| High-traffic apps | P2V3 or P3V3 | Dedicated resources, high performance |
-| Mission-critical apps | I1V2 (Isolated V2) | Network isolation, dedicated hardware |
+| Kūrimas/testavimas | F1 (Nemokama) arba B1 (Pagrindinė) | Ekonomiškas, tinkamas testavimui |
+| Mažos gamybos programos | S1 (Standartinė) | Pasirinktini domenai, SSL, automatinis skalavimas |
+| Vidutinės gamybos programos | P1V3 (Premium V3) | Geresnis našumas, daugiau funkcijų |
+| Didelio srauto programos | P2V3 arba P3V3 | Dedikuoti ištekliai, aukštas našumas |
+| Misijos kritinės programos | I1V2 (Izoliuota V2) | Tinklo izoliacija, dedikuota techninė įranga |
 
 #### Konfigūracijos pavyzdžiai
 
@@ -185,7 +187,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-**Produkcija**
+**Gamyba**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-prod'
@@ -201,19 +203,19 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-### Azure SQL Database
+### Azure SQL duomenų bazė
 
 #### SKU pasirinkimo sistema
 
-1. **DTU pagrindu (Database Transaction Units)**
-   - **Basic**: 5 DTU - Kūrimas/testavimas
-   - **Standard**: S0-S12 (10-3000 DTU) - Bendrosios paskirties
-   - **Premium**: P1-P15 (125-4000 DTU) - Kritiniam našumui
+1. **Pagal DTU (duomenų bazės tranzakcijų vienetai)**
+   - **Pagrindinis**: 5 DTU – Kūrimui/testavimui
+   - **Standartinis**: S0-S12 (10-3000 DTU) – Bendriems poreikiams
+   - **Premium**: P1-P15 (125-4000 DTU) – Našumo kritinėms programoms
 
-2. **vCore pagrindu** (rekomenduojama produkcijai)
-   - **General Purpose**: Subalansuoti skaičiavimo ir saugyklos resursai
-   - **Business Critical**: Mažas vėlavimas, didelis IOPS
-   - **Hyperscale**: Labai išplečiama saugykla (iki 100TB)
+2. **Pagal vCore** (rekomenduojama gamybai)
+   - **Bendrasis tikslas**: Subalansuotas skaičiavimas ir saugykla
+   - **Verslo kritinis**: Mažas delsos laikas, didelis IOPS
+   - **Hiperskalė**: Labai skaliuojama saugykla; patikrinkite dabartinius ribojimus ir regioninę palaikymą
 
 #### Pavyzdinės konfigūracijos
 
@@ -254,19 +256,19 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 #### Aplinkos tipai
 
-1. **Vartojimo pagrindu**
-   - Mokestis už naudojimą
-   - Tinka kūrimui ir kintamiems darbiniams krūviams
-   - Bendrinė infrastruktūra
+1. **Pagal vartojimą**
+   - Mokėjimas už naudojimą
+   - Tinka kūrimui ir kintamiems darbo krūviams
+   - Bendras infrastruktūros naudojimas
 
-2. **Dedikuota (darbinių krūvių profiliai)**
-   - Dedikuoti skaičiavimo resursai
+2. **Dedikuotas (darbo krūvio profiliai)**
+   - Dedikuoti skaičiavimo ištekliai
    - Prognozuojamas našumas
-   - Geriau tinka produkcijos darbiniams krūviams
+   - Geriau gamybos darbo krūviams
 
 #### Konfigūracijos pavyzdžiai
 
-**Kūrimas (Vartojimas)**
+**Kūrimas (pagal vartojimą)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Produkcija (Dedikuota)**
+**Gamyba (dedikuotas)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,31 +317,33 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+Zoninis atsparumas taip pat reikalauja palaikomų regionų infrastruktūros ir tinkamo VNet/potinklio konfigūracijos, čia neįtraukta. Šiame pavyzdyje numatyti trys dedikuoti mazgai; konfigūruokite bent dvi programų kopijas zonų paskirstymui ir nustatykite kopijų bei mazgų dydį zonų gedimui. Žr. [Container Apps patikimumo gairės](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). Norėdami priskirti programą šiam profiliui, nustatykite jos `workloadProfileName: 'production-profile'`; tik sukūrus profilį programos į jį neperkelia.
+
 ### Azure Cosmos DB
 
 #### Pralaidumo modeliai
 
-1. **Rankiniu būdu nustatytas pralaidumas**
+1. **Rankinis pralaidumo rezervavimas**
    - Prognozuojamas našumas
-   - Nuolaidos rezervuotai talpai
-   - Geriausia stabiliems darbiniams krūviams
+   - Rezervuotos talpos nuolaidos
+   - Geriausia stabiliems darbo krūviams
 
-2. **Automatinis skalavimas su nustatytu pralaidumu**
+2. **Automatinis pralaidumo skalavimas**
    - Automatinis skalavimas pagal naudojimą
-   - Mokama už tai, ką naudojate (su minimalia riba)
-   - Tinka kintamiems darbiniams krūviams
+   - Mokėjimas už panaudotą kiekį (su minimu)
+   - Tinka kintamiems darbo krūviams
 
-3. **Be serverių**
-   - Mokestis už užklausą
-   - Nėra rezervuoto pralaidumo
-   - Idealu kūrimui ir retkarčiais dirbantiems darbiniams krūviams
+3. **Serverless**
+   - Mokėjimas už užklausą
+   - Be rezervuoto pralaidumo
+   - Idealu kūrimui ir retkarčiais naudojamoms užduotims
 
 #### SKU pavyzdžiai
 
@@ -396,19 +400,19 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 }
 ```
 
-### Azure Storage Account
+### Azure saugyklos paskyra
 
 #### Saugyklos paskyros tipai
 
-1. **Standard_LRS** - Kūrimas, ne kritiniai duomenys
-2. **Standard_GRS** - Produkcija, reikalingas geo-redundantiškumas
-3. **Premium_LRS** - Aukšto našumo aplikacijos
-4. **Premium_ZRS** - Aukštas prieinamumas su zoniniu redundantiškumu
+1. **Standard_LRS** – Kūrimas, nesvarbūs duomenys
+2. **Standard_GRS** – Gamyba, reikalinga geografinė atsparumas
+3. **Premium_LRS** – Aukšto našumo programėlės
+4. **Premium_ZRS** – Aukštas prieinamumas su zoniniu atsparumu
 
-#### Veikimo lygiai
+#### Našumo lygiai
 
-- **Standard**: Bendrosios paskirties, ekonomiškas
-- **Premium**: Aukšto našumo, mažo vėlavimo scenarijai
+- **Standartinis**: Bendrasis tikslas, ekonomiškas
+- **Premium**: Aukšto našumo, mažo delsos scenarijai
 
 ```bicep
 // Development
@@ -449,19 +453,22 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ---
 
-## Kaštų optimizavimo strategijos
+## Sąnaudų optimizavimo strategijos
 
-### 1. Rezervuota talpa
+### 1. Rezervuotos talpos pirkimas
 
-Rezervuokite resursus 1–3 metams reikšmingoms nuolaidoms:
+Rezervuokite išteklius 1-3 metams ir gaukite reikšmingas nuolaidas:
 
 ```bash
-# Patikrinkite rezervavimo parinktis
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. Tinkamas dydis (Right-Sizing)
+Rezervavimo pasiūlymai ir tinkamų išteklių tipai gali skirtis; peržiūrėkite katalogą ir pirkimo sąlygas, o nesitikėkite, kad visos paslaugos/SKU palaiko rezervavimą.
+
+### 2. Tinkama apimtis (Right-Sizing)
 
 Pradėkite nuo mažesnių SKU ir didinkite pagal faktinį naudojimą:
 
@@ -479,7 +486,7 @@ production:
 
 ### 3. Automatinio skalavimo konfigūracija
 
-Įdiekite intelektualų skalavimą kaštams optimizuoti:
+Įdiekite protingą skalavimą siekiant sąnaudų optimizavimo:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -536,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. Tvarkaraščio skalavimas
+### 4. Grafikuotas skalavimas
 
-Sumažinkite resursus neaktyviais laikotarpiais:
+Skalavimas žemyn ne darbo valandomis:
 
 ```json
 {
@@ -583,9 +592,9 @@ Sumažinkite resursus neaktyviais laikotarpiais:
 
 ---
 
-## Našumo svarstymai
+## Našumo aspektai
 
-### Baziniai našumo reikalavimai
+### Pagrindiniai našumo reikalavimai
 
 Apibrėžkite aiškius našumo reikalavimus prieš renkantis SKU:
 
@@ -608,16 +617,18 @@ performance_requirements:
 Išbandykite skirtingus SKU, kad patvirtintumėte našumą:
 
 ```bash
-# Azure apkrovos testavimo paslauga
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
-### Stebėjimas ir optimizavimas
+### Stebėsena ir optimizavimas
 
-Nustatykite išsamų stebėjimą:
+Įdiekite išsamią stebėseną:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -646,43 +658,43 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## Greitos nuorodos lentelės
 
-### App Service SKU greita nuoroda
+### App Service SKU greitos nuorodos
 
-| SKU | Lygis | vCPU | RAM | Saugykla | Kainų intervalas | Naudojimo atvejis |
+| SKU | Lygis | vCPU | RAM | Saugykla | Kainos diapazonas | Panaudojimo atvejis |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | Nemokama | Bendrinė | 1GB | 1GB | Nemokama | Kūrimas |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | Mažos aplikacijos |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Produkcija |
+| F1 | Nemokama | Bendras | 1GB | 1GB | Nemokama | Kūrimas |
+| B1 | Pagrindinė | 1 | 1.75GB | 10GB | $ | Mažos programėlės |
+| S1 | Standartinė | 1 | 1.75GB | 50GB | $$ | Gamyba |
 | P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Aukštas našumas |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Įmonės lygio |
+| I1V2 | Izoliuota V2 | 2 | 8GB | 1TB | $$$$ | Įmonių lygis |
 
-### SQL Database SKU greita nuoroda
+### SQL duomenų bazės SKU greitos nuorodos
 
-| SKU | Lygis | DTU/vCore | Saugykla | Kainų intervalas | Naudojimo atvejis |
+| SKU | Lygis | DTU/vCore | Saugykla | Kainos diapazonas | Panaudojimo atvejis |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Kūrimas |
-| S2 | Standard | 50 DTU | 250GB | $$ | Maža produkcija |
+| Basic | Pagrindinis | 5 DTU | 2GB | $ | Kūrimas |
+| S2 | Standartinis | 50 DTU | 250GB | $$ | Maža gamyba |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Aukštas našumas |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Subalansuota |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Kritinė verslui |
+| GP_Gen5_4 | Bendras tikslas | 4 vCore | 4TB | $$$ | Subalansuotas |
+| BC_Gen5_8 | Verslo kritinis | 8 vCore | 4TB | $$$$ | Misijos kritinis |
 
-### Container Apps SKU greita nuoroda
+### Container Apps SKU greitos nuorodos
 
-| Model | Kainodara | CPU/Atmintis | Naudojimo atvejis |
+| Modelis | Kainodara | CPU/Atmintis | Panaudojimo atvejis |
 |-------|---------|------------|----------|
-| Consumption | Mokestis už naudojimą | 0.25-2 vCPU | Kūrimas, kintamas krūvis |
-| Dedicated D4 | Rezervuota | 4 vCPU, 16GB | Produkcija |
-| Dedicated D8 | Rezervuota | 8 vCPU, 32GB | Aukštas našumas |
+| Pagal vartojimą | Mokestis už naudojimą | Palaikomi CPU/atminties deriniai priklauso nuo aplinkos/profilio | Kūrimas arba gamyba, kintamas darbo krūvis |
+| Dedikuotas D4 | Apmokestinimas už dedikuotą mazgą | 4 vCPU, 16GiB vienam mazgui | Nuolatinė apkrova/izoliacijos poreikiai |
+| Dedikuotas D8 | Apmokestinimas už dedikuotą mazgą | 8 vCPU, 32GiB vienam mazgui | Didesnė nuolatinė apkrova |
 
 ---
 
-## Patvirtinimo įrankiai
+## Patikrinimo įrankiai
 
 ### SKU prieinamumo tikrintuvas
 
 ```bash
 #!/bin/bash
-# Patikrinti SKU prieinamumą tiksliniame regione
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# Naudojimas
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### Kaštų skaičiavimo skriptas
+### Sąnaudų vertinimo skriptas
+
+**Tik pseudokodas:** `Get-ResourceCost` žemiau yra projektinė funkcija, kurią turite įgyvendinti naudodami esamas regionines/kainų sutarties sąlygas ir naudojimo prielaidas. Tai nėra PowerShell ar Azure komanda.
 
 ```powershell
-# PowerShell scenarijus sąnaudų įvertinimui
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Naudokite Azure Pricing API arba skaičiuoklę
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# Naudojimas
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -749,6 +764,8 @@ Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
 ### Našumo patvirtinimas
+
+Žemiau pateiktas YAML yra reikalavimų apžvalga, **ne** Azure Load Testing, JMeter, Locust ar k6 įvesties schema. Prieš naudodami aukščiau esančią apkrovos testavimo komandą, konvertuokite ją į pasirinktą įrankio konfigūraciją.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -787,39 +804,39 @@ test_configuration:
 
 ### Ką daryti
 
-1. **Pradėkite nuo mažo ir didinkite** pagal faktinį naudojimą
+1. **Pradėkite nuo mažo ir didinkite pagal faktinį naudojimą**
 2. **Naudokite skirtingus SKU skirtingoms aplinkoms**
-3. **Nuolat stebėkite našumą ir kaštus**
-4. **Pasinaudokite rezervuotos talpos nuolaidomis produkcijoje**
-5. **Įdiekite automatinį skalavimą, kai tai tinkama**
-6. **Testuokite našumą su realistiškais darbais**
-7. **Planuokite augimą, bet venkite perteklinio resursų skyrimo**
-8. **Naudokite nemokamus lygius kūrimui, kai įmanoma**
+3. **Nuolat stebėkite našumą ir sąnaudas**
+4. **Gamybos darbams pasinaudokite rezervuota talpa**
+5. **Vietose, kur tinka, įgyvendinkite automatinį skalavimą**
+6. **Testuokite našumą su realiomis apkrovomis**
+7. **Planuokite augimą, bet venkite per daug išteklių rezervavimo**
+8. **Kai įmanoma, naudokite nemokamus lygius kūrimui**
 
 ### Ko nedaryti
 
-1. **Nenaudokite produkcijos SKU kūrimui**
-2. **Nenumokite ranka į regioninį SKU prieinamumą**
-3. **Neužmirškite apie duomenų perdavimo kaštus**
-4. **Neskirkite perteklinių resursų be pagrindo**
-5. **Neignoruokite priklausomybių poveikio**
-6. **Nenurodykite per didelių automatinio skalavimo ribų**
-7. **Neužmirškite apie atitikties (compliance) reikalavimus**
-8. **Nerinkite sprendimų vien tik pagal kainą**
+1. **Nenaudokite gamybos SKU kūrimui**
+2. **Nenumokite ranka į regiono SKU prieinamumą**
+3. **Nepamirškite duomenų perdavimo sąnaudų**
+4. **Nerezervuokite per daug išteklių be pagrindo**
+5. **Nenumokite ranka į priklausomybių poveikį**
+6. **Nekelkite automatinio skalavimo apribojimų per aukštai**
+7. **Nepamirškite atitikimo reikalavimų**
+8. **Nepasirinkite tik pagal kainą**
 
 ---
 
-**Patarimas**: Naudokite Azure Cost Management ir Advisor, kad gautumėte suasmenintas rekomendacijas, kaip optimizuoti SKU pasirinkimus pagal faktinius naudojimo modelius.
+**Patyręs patarimas**: Naudokitės Azure Cost Management ir Advisor, kad gautumėte suasmenintas rekomendacijas, kaip optimizuoti SKU pasirinkimus pagal faktinius naudojimo modelius.
 
 ---
 
-**Naršymas**
-- **Ankstesnė pamoka**: [Capacity Planning](capacity-planning.md)
-- **Kita pamoka**: [Preflight Checks](preflight-checks.md)
+**Navigacija**
+- **Ankstesnė pamoka**: [Talpos planavimas](capacity-planning.md)
+- **Kita pamoka**: [Išankstiniai patikrinimai](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Atsakomybės apribojimas:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl kritinės informacijos rekomenduojamas profesionalus žmogaus atliktas vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingas interpretacijas, kylančias dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

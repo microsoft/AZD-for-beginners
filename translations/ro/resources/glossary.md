@@ -1,67 +1,67 @@
 # Glosar - Terminologie Azure și AZD
 
-**Referință pentru toate capitolele**  
-- **📚 Pagina cursului**: [AZD Pentru Începători](../README.md)  
-- **📖 Învață elementele de bază**: [Capitolul 1: Bazele AZD](../docs/getting-started/azd-basics.md)  
-- **🤖 Termeni AI**: [Capitolul 2: Dezvoltare AI-First](../docs/microsoft-foundry/microsoft-foundry-integration.md)  
+**Referință pentru toate capitolele**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../README.md)
+- **📖 Învață Bazele**: [Capitolul 1: Bazele AZD](../docs/chapter-01-foundation/azd-basics.md)
+- **🤖 Termeni AI**: [Capitolul 2: Dezvoltare cu Prioritate AI](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introducere
 
-Acest glosar cuprinzător oferă definiții pentru termeni, concepte și acronime utilizate în Azure Developer CLI și dezvoltarea Azure în cloud. Referință esențială pentru înțelegerea documentației tehnice, rezolvarea problemelor și comunicarea eficientă despre proiectele azd și serviciile Azure.
+Acest glosar cuprinzător oferă definiții pentru termeni, concepte și acronime utilizate în Azure Developer CLI și dezvoltarea în cloud Azure. Referință esențială pentru înțelegerea documentației tehnice, depanarea problemelor și comunicarea eficientă despre proiectele azd și serviciile Azure.
 
-## Obiective de învățare
+## Obiective de Învățare
 
-Prin utilizarea acestui glosar, vei:  
-- Înțelege terminologia și conceptele esențiale Azure Developer CLI  
-- Stăpâni vocabularul și termenii tehnici din dezvoltarea Azure în cloud  
-- Consulta eficient terminologia infrastructurii ca cod și a implementării  
-- Înțelege denumirile serviciilor Azure, acronimele și scopurile lor  
-- Accesa definiții pentru terminologia de depanare și debugging  
-- Învață concepte avansate de arhitectură și dezvoltare Azure  
+Folosind acest glosar, vei:
+- Înțelege terminologia și conceptele esențiale Azure Developer CLI
+- Stăpâni vocabularul și termenii tehnici pentru dezvoltarea în cloud Azure
+- Referi eficient terminologia Infrastructurii ca Cod și a desfășurării
+- Înțelege numele serviciilor Azure, acronimele și scopurile lor
+- Accesa definiții pentru terminologia depanării și diagnosticării
+- Învață concepte avansate de arhitectură și dezvoltare Azure
 
-## Rezultate de învățare
+## Rezultate așteptate
 
-Cu referință regulată la acest glosar, vei putea:  
-- Comunica eficient folosind terminologia corectă Azure Developer CLI  
-- Înțelege documentația tehnică și mesajele de eroare mai clar  
-- Naviga în serviciile și conceptele Azure cu încredere  
-- Depana probleme folosind vocabular tehnic adecvat  
-- Contribui la discuții de echipă cu limbaj tehnic corect  
-- Extinde cunoștințele tale despre dezvoltarea Azure în cloud în mod sistematic  
+Cu referință regulată la acest glosar, vei putea:
+- Comunica eficient folosind terminologia corectă Azure Developer CLI
+- Înțelege clar documentația tehnică și mesajele de eroare
+- Naviga cu încredere prin serviciile și conceptele Azure
+- Depana probleme folosind vocabular tehnic adecvat
+- Contribui la discuții de echipă cu limbaj tehnic corect
+- Extinde sistematic cunoștințele despre dezvoltarea în cloud Azure
 
 ## A
 
 **ARM Template**  
-Șablon Azure Resource Manager. Format Infrastructure as Code bazat pe JSON folosit pentru a defini și implementa resurse Azure în mod declarativ.
+Template Azure Resource Manager. Format Infrastructure as Code bazat pe JSON utilizat pentru a defini și desfășura resurse Azure declarativ.
 
 **App Service**  
-Oferta platformă ca serviciu (PaaS) a Azure pentru găzduirea aplicațiilor web, API REST și backend-uri mobile fără administrarea infrastructurii.
+Oferta platformă ca serviciu (PaaS) Azure pentru găzduirea aplicațiilor web, API-urilor REST și backend-urilor mobile fără gestionarea infrastructurii.
 
 **Application Insights**  
 Serviciul Azure de monitorizare a performanței aplicațiilor (APM) care oferă informații detaliate despre performanța, disponibilitatea și utilizarea aplicațiilor.
 
 **Azure CLI**  
-Interfață de linie de comandă pentru gestionarea resurselor Azure. Utilizată de azd pentru autentificare și unele operațiuni.
+Interfață în linie de comandă pentru gestionarea resurselor Azure. Completează AZD, dar are un login separat; autentificarea principală AZD folosește `azd auth login`.
 
 **Azure Developer CLI (azd)**  
-Instrument de linie de comandă orientat către dezvoltatori care accelerează procesul de construire și implementare a aplicațiilor în Azure folosind șabloane și Infrastructure as Code.
+Instrument în linie de comandă pentru dezvoltatori care accelerează procesul de construire și desfășurare a aplicațiilor în Azure folosind template-uri și Infrastructure as Code.
 
 **azure.yaml**  
-Fișierul principal de configurare pentru un proiect azd care definește servicii, infrastructură și hook-uri de implementare.
+Fișierul principal de configurare pentru un proiect azd care definește servicii, infrastructură și hook-uri de desfășurare.
 
 **Azure Resource Manager (ARM)**  
-Serviciul Azure pentru implementare și management care oferă un strat de management pentru crearea, actualizarea și ștergerea resurselor.
+Serviciul Azure de desfășurare și gestionare care oferă un strat de management pentru crearea, actualizarea și ștergerea resurselor.
 
 ## B
 
 **Bicep**  
-Limbaj specific domeniului (DSL) dezvoltat de Microsoft pentru implementarea resurselor Azure. Oferă o sintaxă mai simplă decât șabloanele ARM, compilându-se în ARM.
+Limbaj specific domeniului (DSL) dezvoltat de Microsoft pentru desfășurarea resurselor Azure. Oferă o sintaxă mai simplă decât template-urile ARM, compilând spre ARM.
 
 **Build**  
-Procesul de compilare a codului sursă, instalare a dependențelor și pregătire a aplicațiilor pentru implementare.
+Procesul de compilare a codului sursă, instalare a dependențelor și pregătire a aplicațiilor pentru desfășurare.
 
 **Blue-Green Deployment**  
-Strategie de implementare care folosește două medii de producție identice (albastru și verde) pentru a minimiza timpul de nefuncționare și riscul.
+Strategie de desfășurare care folosește două medii de producție identice (albastru și verde) pentru a minimiza timpul de nefuncționare și riscul.
 
 ## C
 
@@ -69,61 +69,61 @@ Strategie de implementare care folosește două medii de producție identice (al
 Serviciul serverless de containere Azure care permite rularea aplicațiilor containerizate fără gestionarea infrastructurii complexe.
 
 **CI/CD**  
-Integrare Continuă/Implementare Continuă. Practici automate pentru integrarea modificărilor de cod și implementarea aplicațiilor.
+Integrare Continuă/Desfășurare Continuă. Practici automatizate pentru integrarea modificărilor de cod și desfășurarea aplicațiilor.
 
 **Cosmos DB**  
-Serviciul de baze de date multi-model distribuit global al Azure care oferă acorduri SLA cuprinzătoare pentru debit, latență, disponibilitate și consistență.
+Serviciul global distribuit Azure multi-model de baze de date care oferă SLA-uri cuprinzătoare pentru throughput, latență, disponibilitate și consistență.
 
 **Configuration**  
-Setări și parametri care controlează comportamentul aplicației și opțiunile de implementare.
+Setări și parametri care controlează comportamentul aplicației și opțiunile de desfășurare.
 
 ## D
 
 **Deployment**  
-Procesul de instalare și configurare a aplicațiilor și a dependențelor acestora pe infrastructura țintă.
+Procesul de instalare și configurare a aplicațiilor și a dependențelor lor pe infrastructura țintă.
 
 **Docker**  
-Platformă pentru dezvoltarea, livrarea și rularea aplicațiilor folosind tehnologia containerizării.
+Platformă pentru dezvoltarea, distribuirea și rularea aplicațiilor utilizând tehnologia containerizării.
 
 **Dockerfile**  
-Fișier text care conține instrucțiuni pentru construirea unei imagini Docker.
+Fișier text ce conține instrucțiuni pentru construirea unei imagini Docker pentru un container.
 
 ## E
 
 **Environment**  
-Țintă de implementare ce reprezintă o instanță specifică a aplicației tale (ex. dezvoltare, testare, producție).
+Ținta de desfășurare care reprezintă o instanță specifică a aplicației tale (ex: dezvoltare, testare, producție).
 
 **Environment Variables**  
-Valori de configurare stocate ca perechi cheie-valoare pe care aplicațiile le pot accesa în timpul execuției.
+Valori de configurare stocate ca perechi cheie-valoare pe care aplicațiile le pot accesa în timpul rulării.
 
 **Endpoint**  
-URL sau adresă de rețea unde o aplicație sau serviciu poate fi accesat.
+URL sau adresă de rețea unde o aplicație sau un serviciu poate fi accesat.
 
 ## F
 
 **Function App**  
-Serviciul serverless de calcul al Azure care permite rularea codului declanșat de evenimente fără gestionarea infrastructurii.
+Serviciul Azure serverless de calcul care permite rularea de cod declanșat de evenimente fără gestionarea infrastructurii.
 
 ## G
 
 **GitHub Actions**  
-Platformă CI/CD integrată cu depozitele GitHub pentru automatizarea fluxurilor de lucru.
+Platforma CI/CD integrată cu depozitele GitHub pentru automatizarea fluxurilor de lucru.
 
 **Git**  
-Sistem dispersat de control al versiunilor folosit pentru urmărirea modificărilor în codul sursă.
+Sistem distribuit de control al versiunilor folosit pentru urmărirea modificărilor în codul sursă.
 
 ## H
 
 **Hooks**  
-Scripturi sau comenzi personalizate care se execută în puncte specifice ale ciclului de viață al implementării (preprovisionare, postprovisionare, predeploy, postdeploy).
+Scripturi sau comenzi personalizate care rulează în puncte specifice ale ciclului de viață al desfășurării (preprovisionare, postprovisionare, predesfășurare, postdesfășurare).
 
 **Host**  
-Tipul serviciului Azure unde va fi implementată o aplicație (ex. appservice, containerapp, function).
+Tipul serviciului Azure unde o aplicație va fi desfășurată (ex: appservice, containerapp, function).
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Practica de a defini și gestiona infrastructura prin cod, în loc de procese manuale.
+Practica de definire și gestionare a infrastructurii prin cod în loc de procese manuale.
 
 **Init**  
 Procesul de inițializare a unui proiect nou azd, de obicei dintr-un șablon.
@@ -134,39 +134,39 @@ Procesul de inițializare a unui proiect nou azd, de obicei dintr-un șablon.
 JavaScript Object Notation. Format de schimb de date utilizat frecvent pentru fișiere de configurare și răspunsuri API.
 
 **JWT**  
-JSON Web Token. Standard pentru transmiterea în siguranță a informațiilor între părți ca obiect JSON.
+JSON Web Token. Standard pentru transmiterea securizată a informațiilor între părți ca obiect JSON.
 
 ## K
 
 **Key Vault**  
-Serviciul Azure pentru stocarea și gestionarea securizată a secretelor, cheilor și certificatelor.
+Serviciul Azure pentru stocarea și gestionarea sigură a secretelor, cheilor și certificatelor.
 
 **Kusto Query Language (KQL)**  
-Limbaj de interogare folosit pentru analizarea datelor în Azure Monitor, Application Insights și alte servicii Azure.
+Limbaj de interogare folosit pentru analiza datelor în Azure Monitor, Application Insights și alte servicii Azure.
 
 ## L
 
 **Load Balancer**  
-Serviciu care distribuie traficul de rețea primit între mai multe servere sau instanțe.
+Serviciu care distribuie traficul de rețea primit pe mai multe servere sau instanțe.
 
 **Log Analytics**  
-Serviciu Azure pentru colectarea, analizarea și acționarea pe baza datelor de telemetrie din medii cloud și on-premises.
+Serviciu Azure pentru colectarea, analizarea și acționarea asupra datelor de telemetrie din medii cloud și on-premises.
 
 ## M
 
 **Managed Identity**  
-Caracteristică Azure care oferă serviciilor Azure o identitate gestionată automat pentru autentificare la alte servicii Azure.
+Funcție Azure care oferă serviciilor Azure o identitate gestionată automat pentru autentificarea către alte servicii Azure.
 
 **Microservices**  
-Abordare arhitecturală în care aplicațiile sunt construite ca un ansamblu de servicii mici, independente.
+Abordare arhitecturală în care aplicațiile sunt construite ca o colecție de servicii mici, independente.
 
 **Monitor**  
-Soluția unificată de monitorizare Azure care oferă vizibilitate completă a aplicațiilor și infrastructurii.
+Soluția unificată de monitorizare Azure care oferă observabilitate completă la nivel de aplicații și infrastructură.
 
 ## N
 
 **Node.js**  
-Mediu de execuție JavaScript construit pe motorul V8 al Chrome pentru dezvoltarea aplicațiilor server-side.
+Runtime JavaScript construit pe motorul Chrome V8 pentru construirea aplicațiilor server-side.
 
 **npm**  
 Manager de pachete pentru Node.js care gestionează dependențele și pachetele.
@@ -174,18 +174,18 @@ Manager de pachete pentru Node.js care gestionează dependențele și pachetele.
 ## O
 
 **Output**  
-Valori returnate de implementarea infrastructurii ce pot fi folosite de aplicații sau alte resurse.
+Valori returnate de la desfășurarea infrastructurii ce pot fi utilizate de aplicații sau alte resurse.
 
 ## P
 
 **Package**  
-Procesul de pregătire a codului aplicației și a dependențelor pentru implementare.
+Procesul de pregătire a codului aplicației și a dependențelor pentru desfășurare.
 
 **Parameters**  
-Valori de intrare transmise șabloanelor de infrastructură pentru personalizarea implementărilor.
+Valori de intrare transmise șabloanelor de infrastructură pentru personalizarea desfășurărilor.
 
 **PostgreSQL**  
-Sistem open-source de baze de date relaționale suportat ca serviciu gestionat în Azure.
+Sistem open-source de baze de date relaționale, suportat ca serviciu gestionat în Azure.
 
 **Provisioning**  
 Procesul de creare și configurare a resurselor Azure definite în șabloanele de infrastructură.
@@ -193,65 +193,65 @@ Procesul de creare și configurare a resurselor Azure definite în șabloanele d
 ## Q
 
 **Quota**  
-Limite asupra cantității de resurse ce pot fi create într-un abonament sau regiune Azure.
+Limite privind cantitatea de resurse ce pot fi create într-un abonament sau regiune Azure.
 
 ## R
 
 **Resource Group**  
-Container logic pentru resurse Azure care împărtășesc același ciclu de viață, permisiuni și politici.
+Container logic pentru resurse Azure care împart același ciclu de viață, permisiuni și politici.
 
 **Resource Token**  
-Șir unic generat de azd pentru a asigura unicitatea numelor resurselor între implementări.
+Șir unic generat de azd pentru a asigura unicitatea numelor resurselor între desfășurări.
 
 **REST API**  
 Stil arhitectural pentru proiectarea aplicațiilor în rețea folosind metode HTTP.
 
 **Rollback**  
-Procesul de revenire la o versiune anterioară a unei aplicații sau configurații de infrastructură.
+Proces de revenire la o versiune anterioară a aplicației sau configurației infrastructurii.
 
 ## S
 
 **Service**  
-Un component al aplicației tale definit în azure.yaml (ex. frontend web, backend API, bază de date).
+Componentă a aplicației tale definită în azure.yaml (ex: frontend web, backend API, bază de date).
 
 **SKU**  
-Stock Keeping Unit. Reprezintă diferite niveluri de servicii sau performanță pentru resurse Azure.
+Stock Keeping Unit. Reprezintă diferite niveluri de serviciu sau performanță pentru resurse Azure.
 
 **SQL Database**  
-Serviciul gestionat de baze de date relaționale al Azure bazat pe Microsoft SQL Server.
+Serviciul relațional gestionat Azure bazat pe Microsoft SQL Server.
 
 **Static Web Apps**  
-Serviciu Azure pentru construirea și implementarea aplicațiilor web full-stack din depozite de cod sursă.
+Serviciu Azure pentru construire și desfășurare de aplicații web full-stack din depozite de cod sursă.
 
 **Storage Account**  
-Serviciu Azure care oferă stocare în cloud pentru obiecte de date, inclusiv blob-uri, fișiere, cozi și tabele.
+Serviciu Azure care oferă stocare în cloud pentru obiecte de date precum blob-uri, fișiere, cozi și tabele.
 
 **Subscription**  
-Container de cont Azure care conține grupuri de resurse și resurse, cu facturare și gestionare acces asociată.
+Container de cont Azure care conține grupuri de resurse și resurse, cu facturare și gestionare a accesului asociate.
 
 ## T
 
 **Template**  
-Structură de proiect pre-construită care conține codul aplicației, definiții de infrastructură și configurare pentru scenarii comune.
+Structură de proiect preconstruită ce conține codul aplicației, definiții de infrastructură și configurații pentru scenarii comune.
 
 **Terraform**  
-Instrument open-source Infrastructure as Code care suportă mai mulți provideri cloud, inclusiv Azure.
+Unealtă open-source Infrastructure as Code care suportă mai mulți furnizori cloud, inclusiv Azure.
 
 **Traffic Manager**  
-Echilibrator de trafic Azure bazat pe DNS pentru distribuirea traficului între regiuni Azure globale.
+Load balancer DNS Azure pentru distribuirea traficului între regiuni Azure globale.
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. Șir care identifică o resursă specifică.
+Uniform Resource Identifier. Șir care identifică un anumit resource.
 
 **URL**  
-Uniform Resource Locator. Tip de URI care specifică unde este localizată o resursă și cum se poate accesa.
+Uniform Resource Locator. Tip de URI care specifică locația unei resurse și cum poate fi accesată.
 
 ## V
 
 **Virtual Network (VNet)**  
-Element fundamental pentru rețele private în Azure, oferind izolare și segmentare.
+Element de bază pentru rețele private în Azure, oferind izolare și segmentare.
 
 **VS Code**  
 Visual Studio Code. Editor de cod popular cu integrare excelentă Azure și azd.
@@ -259,15 +259,15 @@ Visual Studio Code. Editor de cod popular cu integrare excelentă Azure și azd.
 ## W
 
 **Webhook**  
-Callback HTTP declanșat de evenimente specifice, utilizat frecvent în pipeline-uri CI/CD.
+Callback HTTP declanșat de evenimente specifice, frecvent folosit în pipeline-uri CI/CD.
 
 **What-if**  
-Funcționalitate Azure care arată ce modificări ar fi făcute de o implementare fără a o executa efectiv.
+Funcție Azure care arată ce modificări ar fi făcute de o desfășurare fără a o executa efectiv.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Standard uman-readable de serializare a datelor, folosit pentru fișierele de configurare ca azure.yaml.
+YAML Ain't Markup Language. Standard de serializare a datelor ușor de citit pentru oameni, folosit pentru fișiere de configurare precum azure.yaml.
 
 ## Z
 
@@ -276,28 +276,28 @@ Locații fizic separate într-o regiune Azure care oferă redundanță și dispo
 
 ---
 
-## Acronime comune
+## Acronime Comune
 
-| Acronim | Forma completă | Descriere |
-|---------|----------------|-----------|
-| AAD | Azure Active Directory (acum Microsoft Entra ID) | Serviciu de management al identității și accesului |
-| ACR | Azure Container Registry | Serviciu de registru imagini container |
+| Acronim | Formă Completă | Descriere |
+|---------|-----------|-------------|
+| AAD | Azure Active Directory (acum Microsoft Entra ID) | Serviciu de gestionare identitate și acces |
+| ACR | Azure Container Registry | Serviciu de registru de imagini container |
 | AKS | Azure Kubernetes Service | Serviciu Kubernetes gestionat |
 | API | Application Programming Interface | Set de protocoale pentru construirea software-ului |
-| ARM | Azure Resource Manager | Serviciul Azure pentru implementare și management |
+| ARM | Azure Resource Manager | Serviciu Azure de desfășurare și management |
 | CDN | Content Delivery Network | Rețea distribuită de servere |
-| CI/CD | Continuous Integration/Continuous Deployment | Practici automate de dezvoltare |
-| CLI | Command Line Interface | Interfață utilizator bazată pe text |
-| DNS | Domain Name System | Sistem pentru traducerea numelor de domenii în adrese IP |
-| HTTPS | Hypertext Transfer Protocol Secure | Versiunea securizată a HTTP |
+| CI/CD | Continuous Integration/Continuous Deployment | Practici automatizate de dezvoltare |
+| CLI | Command Line Interface | Interfață text bazată pe comandă |
+| DNS | Domain Name System | Sistem de traducere a numelor de domenii în adrese IP |
+| HTTPS | Hypertext Transfer Protocol Secure | Versiune securizată a HTTP |
 | IaC | Infrastructure as Code | Gestionarea infrastructurii prin cod |
 | JSON | JavaScript Object Notation | Format de schimb de date |
-| JWT | JSON Web Token | Format token pentru transmitere securizată a informațiilor |
-| KQL | Kusto Query Language | Limbaj de interogare pentru serviciile de date Azure |
-| RBAC | Role-Based Access Control | Metodă de control acces bazată pe roluri |
+| JWT | JSON Web Token | Format token pentru transmiterea securizată a informațiilor |
+| KQL | Kusto Query Language | Limbaj de interogare pentru serviciile Azure de date |
+| RBAC | Role-Based Access Control | Metodă de control al accesului pe roluri |
 | REST | Representational State Transfer | Stil arhitectural pentru servicii web |
-| SDK | Software Development Kit | Colecție de instrumente de dezvoltare |
-| SLA | Service Level Agreement | Angajament privind disponibilitatea/perfomanța serviciului |
+| SDK | Software Development Kit | Colecție de unelte de dezvoltare |
+| SLA | Service Level Agreement | Angajament privind disponibilitatea/performance-ul serviciului |
 | SQL | Structured Query Language | Limbaj pentru gestionarea bazelor de date relaționale |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Protocoale criptografice |
 | URI | Uniform Resource Identifier | Șir care identifică o resursă |
@@ -308,59 +308,61 @@ Locații fizic separate într-o regiune Azure care oferă redundanță și dispo
 
 ---
 
-## Mapări denumiri servicii Azure
+## Mapări pentru Numele Serviciilor Azure
 
-| Denumire comună | Denumirea oficială serviciu Azure | Tip gazdă azd |
-|-----------------|-----------------------------------|---------------|
+| Nume Comun | Numele Oficial Al Serviciului Azure | Tip Host azd |
+|-------------|------------------------------|---------------|
 | Web App | Azure App Service | `appservice` |
 | API App | Azure App Service | `appservice` |
 | Container App | Azure Container Apps | `containerapp` |
 | Function | Azure Functions | `function` |
 | Static Site | Azure Static Web Apps | `staticwebapp` |
-| Database | Azure Database for PostgreSQL | `postgres` |
-| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Storage | Azure Storage Account | `storage` |
-| Cache | Azure Cache for Redis | `redis` |
-| Search | Azure AI Search | `search` |
-| Messaging | Azure Service Bus | `servicebus` |
+| Database | Azure Database for PostgreSQL | Resursă infrastructură, nu o aplicație `host` |
+| NoSQL DB | Azure Cosmos DB | Resursă infrastructură, nu o aplicație `host` |
+| Storage | Azure Storage Account | Resursă infrastructură, nu o aplicație integrată `host` |
+| Cache | Azure Managed Redis | Resursă infrastructură, nu o aplicație `host` |
+| Search | Azure AI Search | Resursă infrastructură, nu o aplicație `host` |
+| Messaging | Azure Service Bus | Resursă infrastructură, nu o aplicație `host` |
+
+`services.<name>.host` selectează o țintă de desfășurare a aplicației; nu este o prescurtare pentru niciun tip de resursă Azure. Bazele de date, cache-urile, serviciile de căutare și cozile sunt de obicei provisionate prin furnizorul de infrastructură și conectate la aplicație prin output-uri/configurație.
 
 ---
 
-## Termeni specific contextului
+## Termeni Specifici Contextului
 
-### Termeni dezvoltare  
-- **Hot Reload**: Actualizarea automată a aplicațiilor în timpul dezvoltării fără repornire  
-- **Build Pipeline**: Proces automatizat pentru construire și testare cod  
-- **Deployment Slot**: Mediu de testare într-un App Service  
-- **Environment Parity**: Menținerea similitudinii între mediile de dezvoltare, testare și producție  
+### Termeni de Dezvoltare
+- **Hot Reload**: Actualizarea automată a aplicațiilor în timpul dezvoltării fără repornire
+- **Build Pipeline**: Proces automatizat pentru construirea și testarea codului
+- **Deployment Slot**: Mediu de testare în cadrul unui App Service
+- **Environment Parity**: Menținerea similitudinii între mediile de dezvoltare, testare și producție
 
-### Termeni securitate  
-- **Managed Identity**: Caracteristică Azure care oferă management automat al acreditărilor  
-- **Key Vault**: Stocare sigură pentru secrete, chei și certificate  
-- **RBAC**: Control acces bazat pe roluri pentru resurse Azure  
-- **Network Security Group**: Firewall virtual pentru controlul traficului de rețea  
+### Termeni de Securitate
+- **Managed Identity**: Funcție Azure care oferă gestionarea automată a credentialelor
+- **Key Vault**: Stocare sigură pentru secrete, chei și certificate
+- **RBAC**: Control al accesului bazat pe roluri pentru resursele Azure
+- **Network Security Group**: Firewall virtual pentru controlul traficului de rețea
 
-### Termeni monitorizare  
-- **Telemetry**: Colectare automată de măsurători și date  
-- **Application Performance Monitoring (APM)**: Monitorizarea performanței software  
-- **Log Analytics**: Serviciu pentru colectarea și analiza datelor de log  
-- **Alert Rules**: Notificări automate bazate pe metrici sau condiții  
+### Termeni de Monitorizare
+- **Telemetry**: Colectare automată de măsurători și date
+- **Application Performance Monitoring (APM)**: Monitorizarea performanței software-ului
+- **Log Analytics**: Serviciu pentru colectarea și analizarea datelor de log
+- **Alert Rules**: Notificări automate bazate pe metrici sau condiții
 
-### Termeni implementare  
-- **Blue-Green Deployment**: Strategie de implementare fără timp de nefuncționare  
-- **Canary Deployment**: Lansare graduală către un subset de utilizatori  
-- **Rolling Update**: Înlocuire secvențială a instanțelor aplicației  
-- **Rollback**: Revenirea la o versiune anterioară a aplicației  
-
----
-
-**Sfat de utilizare**: Folosește `Ctrl+F` pentru a căuta rapid termeni specifici în acest glosar. Termenii sunt corelați când este cazul.
+### Termeni de Desfășurare
+- **Blue-Green Deployment**: Strategie de desfășurare fără timp de nefuncționare
+- **Canary Deployment**: Rulare graduală la un subset de utilizatori
+- **Rolling Update**: Înlocuire secvențială a instanțelor aplicației
+- **Rollback**: Revenirea la o versiune anterioară a aplicației
 
 ---
 
-**Navigare**  
-- **Lecția anterioară**: [Fișă de referință](cheat-sheet.md)  
-- **Lecția următoare**: [Întrebări frecvente](faq.md)
+**Sfat de Utilizare**: Folosește `Ctrl+F` pentru a căuta rapid termeni specifici în acest glosar. Termenii sunt inter-referențiați acolo unde este cazul.
+
+---
+
+**Navigație**
+- **Lecția Anterioară**: [Fișă Rapidă](cheat-sheet.md)
+- **Lecția Următoare**: [Întrebări Frecvente](faq.md)
 
 ---
 

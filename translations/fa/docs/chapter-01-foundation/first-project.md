@@ -4,58 +4,60 @@
 - **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
 - **📖 فصل جاری**: فصل 1 - بنیاد و شروع سریع
 - **⬅️ قبلی**: [نصب و راه‌اندازی](installation.md)
-- **➡️ بعدی**: [پیکربندی](configuration.md)
-- **🚀 فصل بعدی**: [فصل 2: توسعه مبتنی بر هوش مصنوعی](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ بعدی**: [برنامه خودت را بیاور](bring-your-own-app.md)
+- **🚀 فصل بعدی**: [فصل 2: توسعه با محوریت هوش مصنوعی](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## مقدمه
 
-به پروژه اول خود با Azure Developer CLI خوش آمدید! این آموزش عملی جامع، راهنمای کامل ساخت، استقرار و مدیریت یک برنامه فول‌استک روی Azure با استفاده از azd را ارائه می‌دهد. شما با یک برنامه واقعی todo کار خواهید کرد که شامل فرانت‌اند React، بک‌اند API با Node.js و پایگاه داده MongoDB است.
+به اولین پروژه Azure Developer CLI خود خوش آمدید! شما یک برنامه todo با فرانت‌اند React، API با Node.js و پایگاه داده Azure Cosmos DB را مستقر خواهید کرد. قالب به نام تاریخی `todo-nodejs-mongo` وفادار مانده است؛ زیرساخت فعلی آن از Cosmos DB برای NoSQL استفاده می‌کند، بنابراین به جای استنباط API پایگاه داده از نام، فایل README دانلود شده و `infra/` را بررسی کنید.
+
+> مرور شده در نوامبر 2026 بر اساس `azd 1.37.2` و قالب عمومی. نمونه‌های زیر از Bash استفاده می‌کنند؛ استخراج JSON نیز به `jq` نیاز دارد. مستقرسازی‌های Azure هزینه‌بر است و در این مرور اجرا نشده‌اند.
 
 ## اهداف یادگیری
 
-با تکمیل این آموزش، شما:
-- بر جریان راه‌اندازی پروژه azd با استفاده از قالب‌ها مسلط خواهید شد
-- ساختار پروژه و فایل‌های پیکربندی Azure Developer CLI را درک خواهید کرد
-- استقرار کامل برنامه به Azure همراه با فراهم‌آوری زیرساخت‌ها را اجرا خواهید کرد
-- استراتژی‌های به‌روزرسانی برنامه و دوباره‌استقرار را پیاده‌سازی خواهید کرد
-- چند محیط برای توسعه و staging را مدیریت خواهید کرد
-- رویه‌های پاک‌سازی منابع و مدیریت هزینه را اعمال خواهید کرد
+با تکمیل این آموزش، شما قادر خواهید بود:
+- تسلط بر جریان کاری مقداردهی اولیه پروژه azd با استفاده از قالب‌ها
+- درک ساختار پروژه Azure Developer CLI و فایل‌های پیکربندی
+- اجرای کامل مستقرسازی برنامه به Azure با تأمین زیرساخت
+- پیاده‌سازی به‌روزرسانی‌ها و استراتژی‌های مستقرسازی مجدد برنامه
+- مدیریت چندین محیط برای توسعه و مراحل آماده‌سازی
+- اعمال روش‌های پاکسازی منابع و مدیریت هزینه‌ها
 
 ## نتایج یادگیری
 
-پس از اتمام، شما قادر خواهید بود:
-- پروژه‌های azd را از قالب‌ها به‌صورت مستقل مقداردهی اولیه و پیکربندی کنید
-- ساختارهای پروژه azd را به‌طور مؤثر پیمایش و تغییر دهید
-- برنامه‌های فول‌استک را با دستورات واحد به Azure مستقر کنید
-- مسائل رایج استقرار و مشکلات احراز هویت را رفع اشکال کنید
+پس از اتمام، شما می‌توانید:
+- پروژه‌های azd را به‌صورت مستقل از قالب‌ها مقداردهی و پیکربندی کنید
+- ساختارهای پروژه azd را به‌طور مؤثر کاوش و اصلاح کنید
+- برنامه‌های کامل را با یک فرمان به Azure مستقر کنید
+- مشکلات رایج مستقرسازی و احراز هویت را رفع کنید
 - چند محیط Azure را برای مراحل مختلف استقرار مدیریت کنید
-- جریان‌های استقرار پیوسته برای به‌روزرسانی‌های برنامه را پیاده‌سازی کنید
+- گردش‌های کاری مستقرسازی مداوم برای به‌روزرسانی برنامه‌ها پیاده‌سازی کنید
 
-## شروع کار
+## شروع به کار
 
 ### فهرست پیش‌نیازها
-- ✅ Azure Developer CLI نصب شده ([راهنمای نصب](installation.md))
+- ✅ نصب Azure Developer CLI ([راهنمای نصب](installation.md))
 - ✅ احراز هویت AZD با `azd auth login` تکمیل شده
-- ✅ Git روی سیستم شما نصب است
-- ✅ Node.js 16+ (برای این آموزش)
+- ✅ نصب Git در سیستم شما
+- ✅ Node.js نسخه 22 LTS (یا نسخه‌ای که قالب دانلود شده پشتیبانی می‌کند)
 - ✅ Visual Studio Code (توصیه‌شده)
 
-قبل از ادامه، از ریشه مخزن اعتبارسنج راه‌اندازی را اجرا کنید:
+قبل از ادامه، اعتبارسنج راه‌اندازی را از ریشه مخزن اجرا کنید:
 
-**Windows:** `./validate-setup.ps1`
+**ویندوز:** `./validate-setup.ps1`
 
 **macOS / Linux:** `bash ./validate-setup.sh`
 
-### تأیید راه‌اندازی شما
+### اعتبارسنجی راه‌اندازی شما
 ```bash
-# نصب azd را بررسی کنید
+# Check azd installation
 azd version
 
-# احراز هویت AZD را بررسی کنید
+# Check AZD authentication
 azd auth login --check-status
 ```
 
-### تأیید اختیاری احراز هویت Azure CLI
+### اعتبارسنجی احراز هویت اختیاری Azure CLI
 
 ```bash
 az account show
@@ -68,46 +70,45 @@ node --version
 
 ## گام 1: انتخاب و مقداردهی اولیه یک قالب
 
-بیایید با یک قالب محبوب برنامه todo شروع کنیم که شامل فرانت‌اند React و بک‌اند API با Node.js است.
+بیایید با یک قالب محبوب برنامه todo شروع کنیم که یک فرانت‌اند React و یک بک‌اند API با Node.js دارد.
 
 ```bash
-# قالب‌های موجود را مرور کنید
+# Browse available templates
 azd template list
 
-# قالب برنامهٔ todo را مقداردهی اولیه کنید
+# Initialize the todo app template
 mkdir my-first-azd-app
 cd my-first-azd-app
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
-# دستورالعمل‌ها را دنبال کنید:
-# - نام محیط را وارد کنید: "dev"
-# - یک اشتراک را انتخاب کنید (اگر بیش از یکی دارید)
-# - یک منطقه را انتخاب کنید: "East US 2" (یا منطقهٔ مورد علاقهٔ شما)
+# Follow the prompts:
+# - Enter an environment name: "dev"
+# - Choose a subscription (if you have multiple)
+# - Choose a region: "East US 2" (or your preferred region)
 ```
 
 ### چه اتفاقی افتاد؟
-- قالب کد به شاخه محلی شما دانلود شد
-- یک فایل `azure.yaml` با تعاریف سرویس ایجاد شد
+- کد قالب به دایرکتوری محلی شما دانلود شد
+- یک فایل `azure.yaml` با تعاریف سرویس‌ها ایجاد شد
 - کد زیرساخت در دایرکتوری `infra/` تنظیم شد
-- یک پیکربندی محیط ایجاد شد
+- یک پیکربندی محیط ساخته شد
 
 ## گام 2: بررسی ساختار پروژه
 
-بیایید ببینیم azd برای ما چه چیزی ساخته است:
+بیایید ببینیم azd چه ساختاری برای ما ایجاد کرده است:
 
 ```bash
-# مشاهده ساختار پروژه
-tree /f   # ویندوز
-# یا
-find . -type f | head -20   # مک‌اواس/لینوکس
+# View the project structure
+tree /f   # Windows
+# or
+find . -type f | head -20   # macOS/Linux
 ```
 
-شما باید ببینید:
+باید موارد زیر را ببینید:
 ```
 my-first-azd-app/
-├── .azd/
-│   └── config.json              # Project configuration
 ├── .azure/
+│   ├── config.json              # Selected local environment
 │   └── dev/                     # Environment-specific files
 ├── .devcontainer/               # Development container config
 ├── .github/workflows/           # GitHub Actions CI/CD
@@ -115,16 +116,14 @@ my-first-azd-app/
 ├── infra/                       # Infrastructure as code (Bicep)
 │   ├── main.bicep              # Main infrastructure template
 │   ├── main.parameters.json     # Parameters for deployment
-│   └── modules/                # Reusable infrastructure modules
+│   └── app/                    # Application infrastructure modules
 ├── src/
 │   ├── api/                    # Node.js backend API
 │   │   ├── src/               # API source code
-│   │   ├── package.json       # Node.js dependencies
-│   │   └── Dockerfile         # Container configuration
+│   │   └── package.json       # Node.js dependencies
 │   └── web/                   # React frontend
 │       ├── src/               # React source code
-│       ├── package.json       # React dependencies
-│       └── Dockerfile         # Container configuration
+│       └── package.json       # React dependencies
 ├── azure.yaml                  # azd project configuration
 └── README.md                   # Project documentation
 ```
@@ -133,13 +132,13 @@ my-first-azd-app/
 
 **azure.yaml** - قلب پروژه azd شما:
 ```bash
-# مشاهده پیکربندی پروژه
+# View the project configuration
 cat azure.yaml
 ```
 
 **infra/main.bicep** - تعریف زیرساخت:
 ```bash
-# کد زیرساخت را مشاهده کنید
+# View the infrastructure code
 head -30 infra/main.bicep
 ```
 
@@ -147,48 +146,47 @@ head -30 infra/main.bicep
 
 قبل از استقرار، می‌توانید برنامه را سفارشی کنید:
 
-### تغییر فرانت‌اند
+### اصلاح فرانت‌اند
 ```bash
-# کامپوننت برنامه React را باز کنید
-code src/web/src/App.tsx
+# Open the React app component
+code src/web/src/layout/header.tsx
 ```
 
 یک تغییر ساده ایجاد کنید:
-```typescript
-// عنوان را پیدا کنید و آن را تغییر دهید
-<h1>My Awesome Todo App</h1>
+```tsx
+// Replace the existing <Text variant="xLarge">ToDo</Text> element
+<Text variant="xLarge">My Awesome Todo App</Text>
 ```
 
 ### پیکربندی متغیرهای محیطی
 ```bash
-# تنظیم متغیرهای محیطی سفارشی
+# Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# مشاهده همه متغیرهای محیطی
+# View all environment variables
 azd env get-values
 ```
 
-## گام 4: استقرار در Azure
+این دو مقدار سفارشی فقط ذخیره محلی را نشان می‌دهند. قالب موجود از `WEBSITE_TITLE` یا `API_VERSION` استفاده نمی‌کند، بنابراین برنامه تغییر نمی‌کند. ویرایش منبع صریح بالا عنوان نمایش داده شده را تغییر می‌دهد.
 
-حالا به بخش هیجان‌انگیز می‌رسیم — همه چیز را به Azure مستقر کنید!
+## گام 4: استقرار به Azure
+
+حالا به قسمت هیجان‌انگیز می‌رسیم - همه چیز را به Azure مستقر کنید!
 
 ```bash
-# استقرار زیرساخت و برنامه
+# Deploy infrastructure and application
 azd up
 
-# این دستور موارد زیر را انجام می‌دهد:
-# 1. تأمین منابع Azure (App Service، Cosmos DB و غیره)
-# 2. ساخت برنامه‌ی شما
-# 3. استقرار روی منابع تأمین‌شده
-# 4. نمایش آدرس URL برنامه
+# This command will:
+# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
+# 2. Build your application
+# 3. Deploy to the provisioned resources
+# 4. Display the application URL
 ```
 
-### در طول استقرار چه اتفاقی می‌افتد؟
+### در حین استقرار چه اتفاقی می‌افتد؟
 
-دستور `azd up` این مراحل را انجام می‌دهد:
-1. **Provision** (`azd provision`) - منابع Azure را ایجاد می‌کند
-2. **Package** - کد برنامه شما را می‌سازد
-3. **Deploy** (`azd deploy`) - کد را به منابع Azure مستقر می‌کند
+جریان کاری زیرساخت را فراهم می‌کند و کد را بسته‌بندی/مستقر می‌کند. ترتیب دقیق از طریق `workflows.up` در `azure.yaml` قابل تنظیم است؛ این قالب «فراهم‌سازی» و سپس «مستقرسازی» را مشخص می‌کند. به ترتیب یکسان برای همه قالب‌ها تکیه نکنید.
 
 ### خروجی مورد انتظار
 ```
@@ -203,144 +201,144 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## گام 5: آزمایش برنامه شما
+## گام 5: آزمایش برنامه خود
 
 ### دسترسی به برنامه شما
-روی URL ارائه‌شده در خروجی استقرار کلیک کنید، یا هر زمان آن را دریافت کنید:
+روی URL ارائه شده در خروجی استقرار کلیک کنید، یا هر زمان آن را دریافت کنید:
 ```bash
-# نقاط پایانی برنامه را دریافت کنید
+# Get application endpoints
 azd show
 
-# برنامه را در مرورگر خود باز کنید
-azd show --output json | jq -r '.services.web.endpoint'
+# Open the application in your browser
+azd show --output json | jq -er '.services.web.ingressUrl'
 ```
 
-### برنامه Todo را آزمایش کنید
-1. **افزودن یک مورد todo** - روی "Add Todo" کلیک کنید و یک کار وارد کنید
-2. **علامت‌گذاری به‌عنوان کامل** - آیتم‌های تکمیل‌شده را علامت بزنید
-3. **حذف آیتم‌ها** - todoهایی که دیگر نیاز ندارید را حذف کنید
+### آزمایش برنامهTodo
+۱. **افزودن یک مورد todo** - روی «افزودن Todo» کلیک کنید و یک کار وارد کنید
+۲. **علامت‌گذاری به‌عنوان انجام شده** - موارد انجام شده را علامت بزنید
+۳. **حذف موارد** - تو‌دوی‌هایی که دیگر لازم ندارید را حذف کنید
 
 ### نظارت بر برنامه شما
 ```bash
-# پورتال Azure را برای منابع خود باز کنید
+# Open Azure portal for your resources
 azd monitor
 
-# مشاهده لاگ‌های برنامه
+# View application logs
 azd monitor --logs
 
-# مشاهده متریک‌های زنده
+# View live metrics
 azd monitor --live
 ```
 
-### ✅ تایید استقرار شما
+### ✅ تأیید استقرار شما
 
-قبل از ادامه، این چک‌لیست سریع را برای اطمینان از عملکرد واقعی همه چیز اجرا کنید — فرض نکنید «استقرار موفق» به‌معنای «برنامه کار می‌کند» است:
+قبل از ادامه، این چک‌لیست سریع را برای تأیید عملکرد واقعاً همه چیز اجرا کنید—فرض نکنید «استقرار موفق بود» یعنی «برنامه کار می‌کند»:
 
 ```bash
-# 1. تأیید کنید که نقطهٔ پایانی وجود دارد و قابل دسترسی است
+# 1. Confirm the endpoint exists and is reachable
 azd show
 
-# 2. تست سریع (smoke-test) نقطهٔ پایانی (انتظار پاسخ HTTP 200)
-curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+# 2. Smoke-test the endpoint (expects HTTP 200)
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error --location "$WEB_URL"
 
-# 3. اگر برنامهٔ شما یک نقطهٔ سلامت (health endpoint) ارائه می‌دهد، آن را بررسی کنید
-curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+# 3. Test the API's actual list route (the template has no /health route)
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail --show-error "$API_URL/lists"
 ```
 
-**استقرار زمانی تأیید می‌شود که:**
-- ✅ `azd show` یک URL نقطه پایان قابل دسترس را فهرست کند
-- ✅ URL بدون خطا در مرورگر شما باز شود
-- ✅ ویژگی‌های اصلی کار کنند (افزودن/تکمیل/حذف یک todo)
-- ✅ `azd monitor --logs` نشان دهد که درخواست‌ها می‌رسند بدون خطاهای غیرمنتظره
+**استقرار وقتی تأیید می‌شود که:**
+- ✅ `azd show` یک URL نقطه دسترسی قابل دسترس فهرست می‌کند
+- ✅ URL در مرورگر بدون خطا باز می‌شود
+- ✅ ویژگی‌های اصلی کار می‌کنند (افزودن/تکمیل/حذف یک todo)
+- ✅ `azd monitor --logs` درخواست‌ها را بدون خطاهای غیرمنتظره نشان می‌دهد
 
-اگر هر بررسی‌ای ناموفق بود، به [فصل 7: رفع اشکال](../chapter-07-troubleshooting/README.md) بروید.
+اگر هر بررسی شکست خورد، به [فصل 7: رفع مشکل](../chapter-07-troubleshooting/README.md) بروید.
 
-## گام 6: ایجاد تغییر و دوباره‌استقرار
+## گام 6: ایجاد تغییرات و استقرار مجدد
 
-بیایید یک تغییر ایجاد کنیم و ببینیم به‌روزرسانی چقدر ساده است:
+بیایید یک تغییر ایجاد کنیم و ببینیم به‌روزرسانی چقدر آسان است:
 
-### تغییر API
+### اصلاح API
 ```bash
-# کد API را ویرایش کنید
-code src/api/src/routes/lists.js
+# Edit the API code
+code src/api/src/routes/lists.ts
 ```
 
-یک هدر پاسخ سفارشی اضافه کنید:
+افزودن هدر پاسخ سفارشی:
 ```javascript
-// یک هندلر مسیر پیدا کنید و اضافه کنید:
+// Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### تنها تغییرات کد را مستقر کنید
+### فقط تغییرات کد را مستقر کنید
 ```bash
-# فقط کد برنامه را مستقر کنید (زیرساخت را نادیده بگیرید)
+# Deploy only the application code (skip infrastructure)
 azd deploy
 
-# این بسیار سریع‌تر از 'azd up' است زیرا زیرساخت از قبل وجود دارد
+# This is much faster than 'azd up' since infrastructure already exists
 ```
 
 ## گام 7: مدیریت چند محیط
 
-یک محیط staging ایجاد کنید تا قبل از تولید تغییرات را آزمایش کنید:
+یک محیط staging ایجاد کنید تا تغییرات قبل از تولید آزمایش شوند:
 
 ```bash
-# ایجاد یک محیط مرحله‌بندی جدید
+# Create a new staging environment
 azd env new staging
 
-# استقرار در محیط مرحله‌بندی
+# Deploy to staging
 azd up
 
-# بازگشت به محیط توسعه
+# Switch back to dev environment
 azd env select dev
 
-# فهرست همهٔ محیط‌ها
+# List all environments
 azd env list
 ```
 
 ### مقایسه محیط‌ها
 ```bash
-# مشاهده محیط توسعه
+# View dev environment
 azd env select dev
 azd show
 
-# مشاهده محیط آزمایشی
+# View staging environment  
 azd env select staging
 azd show
 ```
 
-## گام 8: پاک‌سازی منابع
+## گام 8: پاکسازی منابع
 
-وقتی از آزمایش کردن خسته شدید، برای جلوگیری از هزینه‌های مداوم پاک‌سازی کنید:
+وقتی آزمایشتان تمام شد، برای جلوگیری از شارژهای مکرر پاکسازی کنید:
 
 ```bash
-# حذف تمام منابع Azure برای محیط فعلی
-azd down
+# Review and delete BOTH environments created in this tutorial
+azd down --environment dev
+azd down --environment staging
 
-# حذف اجباری بدون تأیید و پاک‌سازی منابع حذف‌شده به‌صورت نرم
-azd down --force --purge
-
-# حذف محیط مشخص
-azd env select staging
-azd down --force --purge
+# Automation alternative for a selected disposable environment:
+# azd down --environment dev --force --purge
+# --purge affects supported soft-deleted Azure resources, not local .azure files.
 ```
 
-## برنامه کلاسیک در مقابل برنامه مبتنی بر هوش مصنوعی: همان روند کاری
+## برنامه کلاسیک در مقابل برنامه هوش مصنوعی: همان جریان کاری
 
-شما همین الان یک برنامه وب سنتی مستقر کردید. اما اگر می‌خواستید به‌جای آن یک برنامه مبتنی بر هوش مصنوعی مستقر کنید — مثلاً یک برنامه چت پشتیبانی‌شده توسط Microsoft Foundry Models — چه؟
+شما به‌تازگی یک برنامه وب سنتی مستقر کرده‌اید. اما اگر می‌خواستید یک برنامه مبتنی بر هوش مصنوعی، مثلاً یک برنامه چت با پشتیبانی مدل‌های Microsoft Foundry، مستقر کنید چه؟
 
-خبر خوب: **روند کاری یکسان است.**
+خبر خوب: **جریان کاری یکسان است.**
 
-| Step | Classic Todo App | AI Chat App |
+| گام | برنامه کلاسیک Todo | برنامه چت هوش مصنوعی |
 |------|-----------------|-------------|
-| Initialize | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
-| Authenticate | `azd auth login` | `azd auth login` |
-| Deploy | `azd up` | `azd up` |
-| Monitor | `azd monitor` | `azd monitor` |
-| Clean up | `azd down --force --purge` | `azd down --force --purge` |
+| مقداردهی اولیه (دایرکتوری خالی) | `azd init --template todo-nodejs-mongo .` | `azd init --template azure-search-openai-demo .` |
+| احراز هویت | `azd auth login` | `azd auth login` |
+| استقرار | `azd up` | `azd up` |
+| نظارت | `azd monitor` | `azd monitor` |
+| پاکسازی | `azd down --force --purge` | `azd down --force --purge` |
 
-تنها تفاوت، **قالب**ی است که از آن شروع می‌کنید. یک قالب هوش مصنوعی شامل زیرساخت‌های اضافی (مانند یک منبع Microsoft Foundry Models یا یک ایندکس AI Search) است، اما azd همه این‌ها را برای شما مدیریت می‌کند. نیازی به یادگیری دستورات جدید، استفاده از ابزار متفاوت یا تغییر در نحوه تفکر درباره استقرار ندارید.
+دستورات چرخه حیات یکسان است، اما پیش‌نیازها متفاوت‌اند. یک قالب هوش مصنوعی ممکن است به دسترسی مدل، سهمیه منطقه‌ای، ورود داده و پیکربندی اضافی نیاز داشته باشد. قبل از استقرار README آن را بخوانید؛ `azd up` نمی‌تواند مجوزها یا سهمیه‌های از دست رفته را تأمین کند.
 
-این اصل اصلی azd است: **یک روند کاری، هر نوع بار کاری.** مهارت‌هایی که در این آموزش تمرین کردید — مقداردهی اولیه، استقرار، نظارت، دوباره‌استقرار و پاک‌سازی — به‌طور یکسان برای برنامه‌ها و عوامل مبتنی بر هوش مصنوعی کاربرد دارند.
+این اصل اصلی azd است: **یک جریان کاری، هر بار کاری.** مهارت‌هایی که در این آموزش تمرین کردید—مقداردهی اولیه، استقرار، نظارت، استقرار مجدد و پاکسازی—به همان اندازه برای برنامه‌های هوش مصنوعی و عوامل نیز کاربرد دارد.
 
 ---
 
@@ -349,182 +347,182 @@ azd down --force --purge
 تبریک! شما با موفقیت:
 - ✅ یک پروژه azd را از قالب مقداردهی اولیه کردید
 - ✅ ساختار پروژه و فایل‌های کلیدی را بررسی کردید
-- ✅ یک برنامه فول‌استک را در Azure مستقر کردید
-- ✅ تغییرات کد ایجاد کردید و دوباره مستقر کردید
+- ✅ یک برنامه فول-استک را به Azure مستقر کردید
+- ✅ تغییرات کد را ایجاد کرده و مجدداً مستقر کردید
 - ✅ چند محیط را مدیریت کردید
-- ✅ منابع را پاک‌سازی کردید
+- ✅ منابع را پاکسازی کردید
 
 ## 🎯 تمرین‌های اعتبارسنجی مهارت
 
-### تمرین 1: استقرار یک قالب متفاوت (15 دقیقه)
-**هدف**: نمایش تسلط بر azd init و جریان کاری استقرار
+### تمرین 1: استقرار یک قالب متفاوت (۱۵ دقیقه)
+**هدف**: اثبات تسلط بر پرورش azd init و جریان کاری استقرار
 
 ```bash
-# پشتهٔ پایتون و MongoDB را امتحان کنید
+# Try Python + MongoDB stack
 mkdir todo-python && cd todo-python
-azd init --template todo-python-mongo
+azd init --template todo-python-mongo .
 azd up
 
-# استقرار را تأیید کنید
+# Verify deployment
 azd show
-curl $(azd show --output json | jq -r '.services.web.endpoint')
+curl --fail "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# پاک‌سازی کنید
+# Clean up
 azd down --force --purge
 ```
 
 **معیارهای موفقیت:**
-- [ ] برنامه بدون خطا مستقر می‌شود
-- [ ] می‌توان URL برنامه را در مرورگر باز کرد
-- [ ] برنامه به‌درستی کار می‌کند (افزودن/حذف todo)
-- [ ] تمام منابع با موفقیت پاک‌سازی شدند
+- [ ] برنامه بدون خطا مستقر شود
+- [ ] به URL برنامه در مرورگر دسترسی داشته باشد
+- [ ] برنامه به‌درستی کار کند (افزودن/حذف todo)
+- [ ] تمام منابع با موفقیت پاکسازی شوند
 
-### تمرین 2: سفارشی‌سازی پیکربندی (20 دقیقه)
-**هدف**: تمرین پیکربندی متغیرهای محیطی
+### تمرین 2: سفارشی سازی پیکربندی (۲۰ دقیقه)
+**هدف**: تمرین ذخیره مقادیر محیط محلی بدون اشتباه گرفتن آن با پیکربندی زمان اجرا
 
 ```bash
-cd my-first-azd-app
+# Return to your original my-first-azd-app directory first
 
-# ایجاد محیط سفارشی
+# Create custom environment
 azd env new custom-config
 
-# تنظیم متغیرهای سفارشی
+# Set custom variables
 azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
 
-# اعتبارسنجی متغیرها
+# Verify variables
 azd env get-values | grep APP_TITLE
 
-# استقرار با پیکربندی سفارشی
-azd up
+# Check one value exactly; expected: My Custom Todo App
+azd env get-value APP_TITLE
 ```
 
 **معیارهای موفقیت:**
-- [ ] محیط سفارشی با موفقیت ایجاد شد
-- [ ] متغیرهای محیطی تنظیم و قابل بازیابی هستند
-- [ ] برنامه با پیکربندی سفارشی مستقر می‌شود
-- [ ] می‌توان تنظیمات سفارشی را در برنامه مستقر بررسی کرد
+- [ ] محیط سفارشی با موفقیت ایجاد شده باشد
+- [ ] متغیرهای محیطی تنظیم شده و قابل بازیابی باشند
+- [ ] `azd env get-value APP_TITLE` چاپ می‌کند `My Custom Todo App`
+- [ ] می‌تواند توضیح دهد چرا این مقادیر تغییری در برنامه استوک ایجاد نمی‌کنند مگر اینکه کد/زیرساخت از آن‌ها استفاده کند
 
-### تمرین 3: جریان کاری چند محیطی (25 دقیقه)
+### تمرین ۳: جریان کاری چند محیطی (۲۵ دقیقه)
 **هدف**: تسلط بر مدیریت محیط و استراتژی‌های استقرار
 
 ```bash
-# ایجاد محیط توسعه
+# Create dev environment
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# آدرس URL محیط توسعه را یادداشت کنید
-DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Dev: $DEV_URL"
 
-# ایجاد محیط مرحله‌بندی
+# Create staging environment
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# آدرس URL محیط مرحله‌بندی را یادداشت کنید
-STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Staging: $STAGING_URL"
 
-# محیط‌ها را مقایسه کنید
+# Compare environments
 azd env list
 
-# هر دو محیط را آزمایش کنید
-curl "$DEV_URL/health"
-curl "$STAGING_URL/health"
+# Test both environments
+curl --fail "$DEV_URL"
+curl --fail "$STAGING_URL"
 
-# هر دو محیط را پاک‌سازی کنید
+# Clean up both
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
 **معیارهای موفقیت:**
-- [ ] دو محیط با پیکربندی‌های متفاوت ایجاد شدند
-- [ ] هر دو محیط با موفقیت مستقر شدند
-- [ ] می‌توان با `azd env select` بین محیط‌ها جابجا شد
-- [ ] متغیرهای محیطی بین محیط‌ها متفاوت هستند
-- [ ] هر دو محیط با موفقیت پاک‌سازی شدند
+- [ ] دو محیط با پیکربندی‌های مختلف ایجاد شده‌اند
+- [ ] هر دو محیط با موفقیت مستقر شده‌اند
+- [ ] قابلیت تغییر بین محیط‌ها با استفاده از `azd env select`
+- [ ] متغیرهای محیطی در بین محیط‌ها متفاوت است
+- [ ] پاک‌سازی موفق هر دو محیط انجام شد
 
 ## 📊 پیشرفت شما
 
-**زمان صرف‌شده**: ~60-90 دقیقه  
+**زمان صرف‌شده**: حدود ۶۰-۹۰ دقیقه  
 **مهارت‌های کسب‌شده**:
-- ✅ مقداردهی اولیه پروژه مبتنی بر قالب
-- ✅ فراهم‌آوری منابع Azure
-- ✅ جریان‌های کاری استقرار برنامه
-- ✅ مدیریت محیط‌ها
+- ✅ شروع پروژه مبتنی بر قالب
+- ✅ تخصیص منابع Azure
+- ✅ روندهای استقرار برنامه
+- ✅ مدیریت محیط
 - ✅ مدیریت پیکربندی
 - ✅ پاک‌سازی منابع و مدیریت هزینه
 
-**مرحله بعدی**: شما آماده هستید برای [راهنمای پیکربندی](configuration.md) تا الگوهای پیشرفته پیکربندی را بیاموزید!
+**مرحله بعدی**: شما آماده [راهنمای پیکربندی](../chapter-03-configuration/configuration.md) هستید تا الگوهای پیشرفته پیکربندی را بیاموزید!
 
-## رفع اشکال مسائل رایج
+## رفع اشکال مشکلات رایج
 
 ### خطاهای احراز هویت
 ```bash
-# احراز هویت مجدد با Azure
-az login
+# Re-authenticate with azd (az login does not refresh azd's default credentials)
+azd auth login
 
-# دسترسی به اشتراک را بررسی کنید
-az account show
+# Verify the selected environment's subscription
+azd env get-value AZURE_SUBSCRIPTION_ID
 ```
 
 ### شکست‌های استقرار
 ```bash
-# فعال کردن ثبت گزارش‌های اشکال‌زدایی
-export AZD_DEBUG=true
+# Enable debug logging
 azd up --debug
 
-# مشاهده لاگ‌های برنامه در Azure
+# View application logs in Azure
 azd monitor --logs
 
-# برای Container Apps، از Azure CLI استفاده کنید:
+# For Container Apps, use Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
-### تداخل نام منابع
+### تداخل در نام منابع
 ```bash
-# از یک نام محیطی منحصر به فرد استفاده کنید
+# Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### مشکلات پورت/شبکه
 ```bash
-# بررسی کنید آیا پورت‌ها در دسترس هستند
+# Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## مراحل بعدی
+## گام‌های بعدی
 
-حالا که پروژه اول خود را کامل کردید، این موضوعات پیشرفته را کاوش کنید:
+اکنون که پروژه اول خود را کامل کرده‌اید، این موضوعات پیشرفته را بررسی کنید:
 
-### 1. سفارشی‌سازی زیرساخت
-- [زیرساخت به‌عنوان کد](../chapter-04-infrastructure/provisioning.md)
-- [افزودن دیتابیس‌ها، حافظه و خدمات دیگر](../chapter-04-infrastructure/provisioning.md#adding-services)
+### ۱. سفارشی‌سازی زیرساخت
+- [زیرساخت به عنوان کد](../chapter-04-infrastructure/provisioning.md)
+- [افزودن زیرساخت پایگاه داده](../chapter-04-infrastructure/provisioning.md#%EF%B8%8F-database-provisioning)
 
-### 2. راه‌اندازی CI/CD
-- [راهنمای استقرار](../chapter-04-infrastructure/deployment-guide.md) - جریان‌های کامل CI/CD
-- [مستندات Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - پیکربندی pipeline
+### ۲. راه‌اندازی CI/CD
+- [راهنمای استقرار](../chapter-04-infrastructure/deployment-guide.md) - روندهای کامل CI/CD
+- [مستندات Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - پیکربندی خط لوله
 
-### 3. بهترین شیوه‌های تولید
-- [راهنمای استقرار](../chapter-04-infrastructure/deployment-guide.md) - امنیت، عملکرد و نظارت
+### ۳. بهترین روش‌های تولید
+- [راهنمای استقرار](../chapter-04-infrastructure/deployment-guide.md) - امنیت، عملکرد و مانیتورینگ
 
-### 4. کاوش قالب‌های بیشتر
+### ۴. اکتشاف قالب‌های بیشتر
 ```bash
-# قالب‌ها را بر اساس دسته‌بندی مرور کنید
+# Browse templates by category
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# پشته‌های فناوری مختلف را امتحان کنید
-azd init --template todo-python-mongo
-azd init --template todo-csharp-sql
-azd init --template todo-java-mongo
+# Try different technology stacks
+# Choose ONE in a new empty directory, not all three in the same project
+azd init --template todo-python-mongo .
+# azd init --template todo-csharp-sql .
+# azd init --template todo-java-mongo .
 ```
 
 ## منابع اضافی
@@ -532,30 +530,30 @@ azd init --template todo-java-mongo
 ### مطالب آموزشی
 - [مستندات Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [مرکز معماری Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [چارچوب Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [چارچوب خوب-معماری شده Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### جامعه و پشتیبانی
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
+- [گیت‌هاب Azure Developer CLI](https://github.com/Azure/azure-dev)
 - [جامعه توسعه‌دهندگان Azure](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### قالب‌ها و نمونه‌ها
-- [گالری رسمی قالب‌ها](https://azure.github.io/awesome-azd/)
-- [قالب‌های جامعه](https://github.com/Azure-Samples/azd-templates)
-- [الگوهای سازمانی](https://github.com/Azure/azure-dev/tree/main/templates)
+- [گالری قالب رسمی](https://azure.github.io/awesome-azd/)
+- [مشارکت‌های قالب جامعه](https://github.com/Azure/awesome-azd)
+- [منبع قالب Todo](https://github.com/Azure-Samples/todo-nodejs-mongo)
 
 ---
 
-**تبریک برای اتمام اولین پروژه azd شما!** شما اکنون آماده‌اید تا با اطمینان برنامه‌های شگفت‌انگیز را روی Azure بسازید و مستقر کنید.
+**تبریک به خاطر تکمیل اولین پروژه azd خود!** اکنون شما آماده‌اید تا برنامه‌های شگفت‌انگیز را با اطمینان در Azure بسازید و مستقر کنید.
 
 ---
 
-**ناوبری فصل:**
+**راهنمای فصل:**
 - **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل جاری**: فصل 1 - بنیاد و شروع سریع
+- **📖 فصل جاری**: فصل ۱ - بنیاد و شروع سریع
 - **⬅️ قبلی**: [نصب و راه‌اندازی](installation.md)
-- **➡️ بعدی**: [Bring Your Own App](bring-your-own-app.md)
-- **🚀 فصل بعدی**: [فصل 2: توسعه مبتنی بر هوش مصنوعی](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ بعدی**: [آوردن برنامه شخصی](bring-your-own-app.md)
+- **🚀 فصل بعدی**: [فصل ۲: توسعه هوش مصنوعی‌محور](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 

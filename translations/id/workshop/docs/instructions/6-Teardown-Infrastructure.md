@@ -1,60 +1,58 @@
-# 6. Menghapus Infrastruktur
+# 6. Membongkar Infrastruktur
 
-!!! tip "PADA AKHIR MODUL INI ANDA AKAN DAPAT"
+!!! tip "PADA AKHIR MODUL INI ANDA AKAN BISA"
 
-    - [ ] Memahami pentingnya pembersihan sumber daya dan pengelolaan biaya
-    - [ ] Gunakan `azd down` untuk menghapus penyediaan infrastruktur dengan aman
-    - [ ] Memulihkan layanan Azure AI yang dihapus sementara jika diperlukan
-    - [ ] **Lab 6:** Membersihkan sumber daya Azure dan memverifikasi penghapusan
-
----
-
-## Latihan Tambahan
-
-Before we tear down the project, take a few minutes to do some open-ended exploration.
-
-!!! info "Coba Prompt Eksplorasi Ini"
-
-    **Bereksperimen dengan GitHub Copilot:**
-    
-    1. Ask: `Template AZD lain apa yang bisa saya coba untuk skenario multi-agen?`
-    2. Ask: `Bagaimana saya dapat menyesuaikan instruksi agen untuk kasus penggunaan layanan kesehatan?`
-    3. Ask: `Variabel lingkungan apa yang mengontrol optimasi biaya?`
-    
-    **Jelajahi Azure Portal:**
-    
-    1. Tinjau metrik Application Insights untuk penyebaran Anda
-    2. Periksa analisis biaya untuk sumber daya yang disediakan
-    3. Jelajahi ulang playground agen di portal Microsoft Foundry
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## Menghapus Penyediaan Infrastruktur
+## Latihan Bonus
+
+Sebelum kita membongkar proyek, luangkan beberapa menit untuk melakukan eksplorasi terbuka.
+
+!!! info "Cobalah Petunjuk Eksplorasi Ini"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
+
+---
+
+## Menghentikan Infrastruktur
 
 1. Membongkar infrastruktur semudah:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. Konfirmasi lingkungan yang dipilih dan tinjau sumber daya yang akan dihapus. Ini menghapus sumber daya Azure dan dapat menghancurkan data. Pertahankan prompt konfirmasi untuk alur pembelajaran ini. Setelah selesai Anda akan melihat output serupa:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Opsional) Jika Anda sekarang menjalankan `azd up` lagi, Anda akan melihat model gpt-4.1 dideploy karena variabel lingkungan diubah (dan disimpan) di folder lokal `.azure`. 
+1. Verifikasi penghapusan di portal dan periksa sumber daya di luar cakupan penyebaran. Pelaporan biaya dan pembaruan kuota bisa tertunda. Konfigurasi lokal `.azure` tetap ada kecuali Anda secara eksplisit menghapusnya.
 
-      Berikut adalah penempatan model **sebelum**:
+1. `azd down --purge` juga meminta penghapusan permanen sumber daya yang mendukung soft-delete. Gunakan hanya saat pemulihan tidak diperlukan dan Anda memahami kebijakan retensi/penghapusan. Ini tidak menjamin pelepasan kuota segera.
 
-      ![Sebelum](../../../../../translated_images/id/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      Dan ini **setelah**:
-      ![Setelah](../../../../../translated_images/id/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Jangan melakukan penyebaran ulang hanya untuk memverifikasi pembersihan. `azd up` yang disengaja nanti dapat membuat ulang sumber daya menggunakan input lokal yang tersisa, dan akan dikenakan biaya lagi. Pembaruan model biasanya menggunakan perubahan penyediaan yang didukung, bukan pembongkaran.
 
 ---
 

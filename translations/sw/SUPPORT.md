@@ -1,30 +1,26 @@
-# TODO: Msimamizi wa repo hii bado hajahariri faili hili
-
-**MMILIKI WA REPO**: Je, unataka msaada wa Huduma kwa Wateja na Usaidizi (CSS) kwa bidhaa/mradi huu?
-
-- **Hakuna msaada wa CSS:** Jaza kiolezo hiki na maelezo kuhusu jinsi ya kuripoti matatizo na kupata msaada.
-- **Ndiyo msaada wa CSS:** Jaza fomu ya kuingiza kwenye [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS itakusaidia kuamua hatua zinazofuata.
-- **Haujui?** Jaza fomu ya kuingiza kana kwamba jibu ni "Ndiyo". CSS itakusaidia kuamua.
-
-*Kisha ondoa kichwa hiki cha kwanza kutoka kwenye faili hii ya SUPPORT.MD kabla ya kuchapisha repo yako.*
-
 # Msaada
 
-## Jinsi ya kuripoti matatizo na kupata msaada  
+## Masuala na maswali ya kozi
 
-Mradi huu unatumia Masuala ya GitHub kufuatilia hitilafu na maombi ya vipengele. Tafadhali tafuta masuala yaliyopo 
-kabla ya kuripoti masuala mapya ili kuepuka nakala. Kwa masuala mapya, ripoti hitilafu yako au 
-ombi la kipengele kama suala jipya.
+Tafuta katika [masuala ya kozi](https://github.com/microsoft/AZD-for-beginners/issues) kabla ya kuripoti tatizo. Jumuisha somo la Kiingereza lililoharibika, amri uliyotumia, toleo la AZD/kiongezaji chako, na ujumbe wa kosa. Ondoa cheti, tokeni, maelezo ya usajili, na data binafsi kutoka kwa kumbukumbu na skrini.
 
-Kwa msaada na maswali kuhusu kutumia mradi huu, tafadhali **MSIMAMIZI WA REPO: WEKA MAELEKEZO HAPA 
-JINSI YA KUWASILISHA NA WAMILIKI WA REPO AU JAMII KWA MSAADA. INAWEZA KUWA TAG YA STACK OVERFLOW AU NJIA NYINGINE.
-WAPI UTAWASAIDIA WATU?**.
+Kwa maswali ya jumla ya kujifunza, tumia [jumuiya ya waendelezaji wa Azure](https://discord.gg/microsoft-azure). Majibu ya jumuiya hayahakikishi huduma ya msaada.
 
-## Sera ya Msaada ya Microsoft  
+## Masuala ya zana na huduma
 
-Msaada kwa **MRADI au BIDHAA** hii ni mdogo kwa rasilimali zilizoorodheshwa hapo juu.
+Ripoti mende zinazotokea tena za AZD CLI katika [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). Kwa matukio ya huduma za Azure au msaada maalum wa usajili, tumia chaguzi za msaada zinazopatikana katika [portal ya Azure](https://portal.azure.com/).
+
+## Ripoti za usalama
+
+Fuata [SECURITY.md](SECURITY.md) kwa ripoti binafsi za hatari. Usichapishe siri au maelezo ya udukuzi katika suala la kozi la umma.
+
+## Sera ya msaada ya Microsoft
+
+Msaada kwa mradi huu wa kielimu ni mdogo kwa rasilimali zilizoorodheshwa hapo juu. Mifano ya kozi haina dhamira ya msaada wa uzalishaji.
 
 ---
 
-**Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

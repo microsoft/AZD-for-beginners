@@ -1,34 +1,34 @@
 # Capítulo 1: Fundamentos & Início Rápido
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 30-45 minutos | **⭐ Complexidade**: Iniciante
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 75-120 minutos incluindo o primeiro deploy; exercícios adicionais levam mais tempo | **⭐ Complexidade**: Iniciante
 
 ---
 
 ## Visão Geral
 
-Este capítulo apresenta os fundamentos do Azure Developer CLI (azd). Você aprenderá conceitos básicos, instalará as ferramentas e implantará sua primeira aplicação no Azure.
+Este capítulo apresenta os fundamentos do Azure Developer CLI (azd). Você aprenderá conceitos básicos, instalará as ferramentas e fará o deploy do seu primeiro aplicativo no Azure.
 
-> Validado com `azd 1.27.1` em julho de 2026.
+> Revisão de comandos e configuração com alvo: `azd 1.37.2` (novembro de 2026). Provisionamento ao vivo no Azure não foi executado durante a revisão.
 
 ## Objetivos de Aprendizagem
 
 Ao concluir este capítulo, você irá:
 - Entender o que é o Azure Developer CLI e como ele difere do Azure CLI
 - Instalar e configurar o AZD na sua plataforma
-- Implantar sua primeira aplicação no Azure com `azd up`
+- Fazer o deploy do seu primeiro aplicativo no Azure com `azd up`
 - Limpar recursos com `azd down`
 
 ---
 
-## 📚 Lições
+## 📚 Aulas
 
-| # | Lição | Descrição | Tempo |
+| # | Aula | Descrição | Tempo |
 |---|--------|-------------|------|
 | 1 | [Noções Básicas do AZD](azd-basics.md) | Conceitos principais, terminologia e estrutura do projeto | 15 min |
-| 2 | [Instalação & Configuração](installation.md) | Guias de instalação específicos por plataforma | 10 min |
-| 3 | [Seu Primeiro Projeto](first-project.md) | Prática: Implante um app web no Azure | 20 min |
-| 4 | [Traga Seu Próprio App](bring-your-own-app.md) | Adicione o azd a um projeto existente que você já tem | 15 min |
-| 5 | [Contêineres de Desenvolvimento & Codespaces](dev-containers.md) | Ambientes azd reprodutíveis com contêineres de desenvolvimento | 15 min |
+| 2 | [Instalação & Configuração](installation.md) | Guias de instalação para plataformas específicas | 10 min |
+| 3 | [Seu Primeiro Projeto](first-project.md) | Mão na massa: Fazer deploy de um app web no Azure | 20 min |
+| 4 | [Traga Seu Próprio App](bring-your-own-app.md) | Adicione azd a um projeto existente que você já tenha | 15 min |
+| 5 | [Contêineres de Desenvolvimento & Codespaces](dev-containers.md) | Ambientes azd reprodutíveis com dev containers | 15 min |
 
 ---
 
@@ -46,25 +46,27 @@ Antes de começar, confirme que sua máquina local está pronta para o template 
 bash ./validate-setup.sh
 ```
 
-Se o script informar ferramentas ausentes, corrija isso primeiro e depois continue com o capítulo.
+Se o script indicar ferramentas faltando, corrija isso primeiro e depois continue com o capítulo.
 
 ---
 
 ## 🚀 Início Rápido
 
 ```bash
-# Verificar instalação
+# Check installation
 azd version
 
-# Autenticar para AZD
-# Opcional: az login se você planeja executar comandos do Azure CLI diretamente
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Implante seu primeiro aplicativo
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Limpar após terminar
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,14 +74,14 @@ azd down --force --purge
 
 ## ✅ Critérios de Sucesso
 
-Depois de completar este capítulo, você deve ser capaz de:
+Depois de concluir este capítulo, você deverá ser capaz de:
 
 ```bash
-azd version              # Mostra a versão instalada
-azd init --template todo-nodejs-mongo  # Inicializa o projeto
-azd up                   # Implanta no Azure
-azd show                 # Exibe URL do aplicativo em execução
-azd down --force --purge # Limpa os recursos
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -87,7 +89,7 @@ azd down --force --purge # Limpa os recursos
 ## 🔗 Navegação
 
 | Direção | Capítulo |
-|-----------|---------|
+|---------|----------|
 | **Próximo** | [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/README.md) |
 | **Pular para** | [Capítulo 3: Configuração](../chapter-03-configuration/README.md) |
 
@@ -95,7 +97,7 @@ azd down --force --purge # Limpa os recursos
 
 ## 📖 Recursos Relacionados
 
-- [Resumo de Comandos](../../resources/cheat-sheet.md)
+- [Folha de Comandos](../../resources/cheat-sheet.md)
 - [Perguntas Frequentes](../../resources/faq.md)
 - [Glossário](../../resources/glossary.md)
 

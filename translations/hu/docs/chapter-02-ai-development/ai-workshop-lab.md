@@ -1,81 +1,83 @@
-# AI Műhely Lab: AI Megoldásaid AZD-Deployálhatóvá Tétele
+# AI Workshop Lab: AI megoldásaid AZD-ben való telepíthetősége
 
-**Fejezet Navigáció:**
-- **📚 Kurzus Főoldal**: [AZD Kezdőknek](../../README.md)
-- **📖 Aktuális Fejezet**: 2. Fejezet - AI-első Fejlesztés
-- **⬅️ Előző**: [AI Modell Kiadás](ai-model-deployment.md)
-- **➡️ Következő**: [Production AI Legjobb Gyakorlatok](production-ai-practices.md)
-- **🚀 Következő Fejezet**: [3. Fejezet: Konfiguráció](../chapter-03-configuration/configuration.md)
+**Fejezeti navigáció:**
+- **📚 Tanfolyam kezdőlapja**: [AZD Kezdőknek](../../README.md)
+- **📖 Jelenlegi fejezet**: 2. fejezet - AI-első fejlesztés
+- **⬅️ Előző**: [AI modell telepítése](ai-model-deployment.md)
+- **➡️ Következő**: [AI működésbe helyezés legjobb gyakorlatai](../chapter-08-production/production-ai-practices.md)
+- **🚀 Következő fejezet**: [3. fejezet: Konfiguráció](../chapter-03-configuration/configuration.md)
 
-## Műhely Áttekintés
+## Workshop áttekintése
 
-Ez a gyakorlati labor fejlesztőket vezet végig azon a folyamaton, hogy egy meglévő AI sablont vegyenek és telepítsenek az Azure Developer CLI (AZD) használatával. Megismered a Microsoft Foundry szolgáltatásokkal történő termelési AI telepítések alapvető mintáit.
+Ez a gyakorlati labor átvezeti a fejlesztőket egy meglévő AI sablon használatán és az Azure Developer CLI-vel (AZD) történő telepítésen keresztül. Megtanulod a Microsoft Foundry szolgáltatások segítségével végzett termelési AI telepítések alapvető mintáit.
 
-> **Ellenőrzési megjegyzés (2026-07-13):** Ezt a műhelyt az `azd` `1.27.1` verziója alapján ellenőriztük. Ha a helyi telepítésed régebbi, frissítsd az AZD-t a kezdés előtt, hogy az auth, sablon és telepítési munkafolyamat megegyezzen az alábbi lépésekkel.
+> **Kiadás áttekintése (2026-11-04):** Az AZD parancs útmutatásait és a minta konfigurációs neveket ellenőriztük a `azd` `1.37.2` kiadásával és a kapcsolódó minta aktuális konfigurációjával. Ez dokumentációs ellenőrzés, nem élő telepítés validációja. A RAG lab nem igényli az agent bővítményt; agent értékelésekhez külön `azure.ai.evaluations` kiterjesztést és [aktuális értékelési munkafolyamatot](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) használj, ne a hagyományos agent értékelési parancsokat.
 
 **Időtartam:** 2-3 óra  
 **Szint:** Középhaladó  
-**Előfeltételek:** Alap Azure ismeretek, alap AI/ML fogalmak
+**Előfeltételek:** Azure alapok ismerete, AI/ML fogalmakban jártaság
 
-## 🎓 Tanulási Célok
+## 🎓 Tanulási célok
 
-A műhely végére képes leszel:
-- ✅ Egy meglévő AI alkalmazást AZD sablonokra konvertálni
-- ✅ Microsoft Foundry szolgáltatásokat AZD-vel konfigurálni
+A workshop végére képes leszel:
+- ✅ Megvizsgálni egy meglévő AI AZD sablont és megtervezni a saját alkalmazásod átalakítását
+- ✅ Konfigurálni Microsoft Foundry szolgáltatásokat AZD-vel
 - ✅ Biztonságos hitelesítő adatok kezelését megvalósítani AI szolgáltatásokhoz
-- ✅ Termelésre kész AI alkalmazásokat monitorozással telepíteni
-- ✅ Gyakori AI telepítési hibákat hibakeresni
+- ✅ Telepíteni egy AI referenciális alkalmazást monitorozással
+- ✅ Hibakeresni gyakori AI telepítési problémákat
 
 ## Előfeltételek
 
-### Szükséges Eszközök
-- Telepített [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- Telepített [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
-- Telepített [Git](https://git-scm.com/)
+### Szükséges eszközök
+- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) telepítve
+- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) telepítve
+- [Git](https://git-scm.com/) telepítve
 - Kódszerkesztő (VS Code ajánlott)
 
-### Azure Erőforrások
-- Azure előfizetés contributor jogosultsággal
-- Hozzáférés a Microsoft Foundry Models szolgáltatásokhoz (vagy kérelmezési lehetőség)
-- Erőforrás csoport létrehozási jogosultságok
+Ezek a parancsblokkok Bash szintaxist használnak (beleértve a sorfolytatásokat és `grep`). Windowson Git Bash/WSL használata vagy PowerShell-re fordítás javasolt. Telepítsd továbbá a mintában szereplő nyelv, csomagkezelő és konténer eszközöket a [minta helyi környezet beállítása](https://github.com/Azure-Samples/azure-search-openai-demo#local-environment) alapján.
 
-### Tudás Előfeltételek
-- Alapvető Azure szolgáltatások ismerete
+### Azure erőforrások
+- Azure előfizetés, amellyel erőforrás-telepítési és szerepkör-hozzárendelési jogosultságok vannak (önmagában a Contributor nem képes RBAC hozzárendeléseket létrehozni; használj engedélyezett szerepkör adminisztrátort vagy a minta dokumentált megfelelőjét)
+- Hozzáférés a Microsoft Foundry Modellek szolgáltatásokhoz (vagy kérd hozzáférést)
+- Erőforráscsoport létrehozásához jogosultság
+
+### Tudás előfeltételek
+- Azure szolgáltatások alapvető ismerete
 - Parancssoros felületek ismerete
-- Alap AI/ML fogalmak (API-k, modellek, kérdések)
+- AI/ML alapfogalmak (API-k, modellek, promptok)
 
-## Labor Beállítás
+## Labor beállítása
 
-### 1. lépés: Környezet Előkészítése
+### 1. lépés: Környezet előkészítése
 
 1. **Ellenőrizd az eszközök telepítését:**
 ```bash
-# AZD telepítés ellenőrzése
+# Check AZD installation
 azd version
 
-# Azure CLI ellenőrzése
+# Check Azure CLI
 az --version
 
-# Bejelentkezés az Azure-ba az AZD munkafolyamatokhoz
+# Login to Azure for AZD workflows
 azd auth login
 
-# Csak akkor jelentkezzen be az Azure CLI-be, ha tervez az az parancsokat futtatni a diagnosztika során
+# Login to Azure CLI only if you plan to run az commands during diagnostics
 az login
 ```
 
-Ha több bérlőn dolgozol, vagy az előfizetés nem érzékelhető automatikusan, próbáld meg újra az `azd auth login --tenant-id <tenant-id>` parancsot.
+Ha több bérlővel dolgozol, vagy az előfizetésed nem észlelhető automatikusan, próbáld újra `azd auth login --tenant-id <tenant-id>` használatával.
 
-2. **Klónozd a műhely tárolót:**
+2. **Klónozd a workshop tárolóját:**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-## 1. modul: AZD szerkezetének megértése AI alkalmazásokhoz
+## 1. modul: AZD szerkezet megértése AI alkalmazásokhoz
 
-### AI AZD Sablon anatómiája
+### AI AZD sablon anatómiája
 
-Fedezd fel egy AI-kész AZD sablon kulcsfájljait:
+Ismerd meg egy AI-kész AZD sablon kulcsfontosságú fájljait:
 
 ```
 azure-search-openai-demo/
@@ -83,137 +85,139 @@ azure-search-openai-demo/
 ├── infra/                   # Infrastructure as Code
 │   ├── main.bicep          # Main infrastructure template
 │   ├── main.parameters.json # Environment parameters
-│   └── modules/            # Reusable Bicep modules
-│       ├── openai.bicep    # Microsoft Foundry Models configuration
-│       ├── search.bicep    # Azure AI Search setup
-│       └── webapp.bicep    # Web app configuration
-├── app/                    # Application code
+│   ├── core/               # Shared infrastructure modules
+│   └── app/                # Application-specific infrastructure
+├── app/                    # Backend, frontend, and optional ingestion functions
 ├── scripts/               # Deployment scripts
 └── .azure/               # AZD environment files
 ```
 
-### **Labor Gyakorlat 1.1: A Konfiguráció felfedezése**
+A kicsomagolt minta változhat; `.azure/` környezeti inicializáció után jelenik meg, nem feltétlenül friss klónban. Vizsgáld meg a tényleges kicsomagolást a hiányzó könyvtárak létrehozása helyett, hogy megfelelj ennek az ábrának.
 
-1. **Vizsgáld meg az azure.yaml fájlt:**
+### **Labor gyakorlat 1.1: Konfiguráció feltérképezése**
+
+1. **Nézd át az azure.yaml fájlt:**
 ```bash
 cat azure.yaml
 ```
 
-**Amire figyelj:**
-- Az AI komponensek szolgáltatás-definíciói
-- Környezeti változók hozzárendelései
+**Mit keress:**
+- AI komponensek szolgáltatásdefiníciói
+- Környezeti változók leképezése
 - Host konfigurációk
 
-2. **Nézd át a main.bicep infrastruktúrát:**
+2. **Tekintsd át a main.bicep infrastruktúrát:**
 ```bash
 cat infra/main.bicep
 ```
 
-**Kulcs AI minták, amiket azonosítani kell:**
-- Microsoft Foundry Models szolgáltatás létrehozása
+**Fontos AI minták:**
+- Microsoft Foundry Modellek szolgáltatás előkészítése
 - Azure AI Search integráció
 - Biztonságos kulcskezelés
 - Hálózati biztonsági beállítások
 
-### **Beszélgetési pont:** Miért fontosak ezek a minták az AI-nál
+### **Megbeszélési pont:** Miért fontosak ezek a minták az AI számára
 
-- **Szolgáltatás-függőségek**: AI appok gyakran több koordinált szolgáltatást igényelnek
-- **Biztonság**: API kulcsokat és végpontokat biztonságosan kell kezelni
-- **Skálázhatóság**: AI terhelések egyedi skálázási igényekkel rendelkeznek
-- **Költségkezelés**: AI szolgáltatások drágák lehetnek, ha nem megfelelően konfiguráltak
+- **Szolgáltatásfüggőségek**: AI alkalmazások több koordinált szolgáltatást igényelnek
+- **Biztonság**: API kulcsokat és végpontokat védeni kell
+- **Skálázhatóság**: Az AI feladatok egyedi skálázási igényei vannak
+- **Költségkezelés**: AI szolgáltatások drágák lehetnek, ha nem megfelelően vannak beállítva
 
-## 2. modul: Az első AI alkalmazás telepítése
+## 2. modul: Telepítsd első AI alkalmazásodat
 
 ### 2.1 lépés: Környezet inicializálása
 
-1. **Hozz létre egy új AZD környezetet:**
+1. **Hozz létre új AZD környezetet:**
 ```bash
 azd env new myai-workshop
 ```
 
 2. **Állítsd be a szükséges paramétereket:**
 ```bash
-# Állítsa be a kívánt Azure régiót
+# Set your preferred Azure region
 azd env set AZURE_LOCATION eastus
 
-# Opcionális: Állítson be konkrét OpenAI modellt
-azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
+# Optional: select a chat model supported by your region and quota
+azd env set AZURE_OPENAI_CHATGPT_MODEL gpt-4.1-mini
 ```
 
-### 2.2 lépés: Az infrastruktúra és alkalmazás telepítése
+### 2.2 lépés: Infrastruktúra és alkalmazás telepítése
 
-1. **Telepítsd AZD-vel:**
+1. **Telepítés AZD-vel:**
 ```bash
 azd up
 ```
 
 **Mi történik az `azd up` alatt:**
-- ✅ Microsoft Foundry Models szolgáltatás létrehozása
+- ✅ Microsoft Foundry Modellek szolgáltatás előkészítése
 - ✅ Azure AI Search szolgáltatás létrehozása
-- ✅ App Service beállítása a webalkalmazáshoz
+- ✅ Azure Container Apps beállítása backendnek és beépített frontendnek (a minta alapértelmezettje)
 - ✅ Hálózat és biztonság konfigurálása
 - ✅ Alkalmazáskód telepítése
 - ✅ Monitorozás és naplózás beállítása
 
-2. **Figyeld a telepítés előrehaladását** és vedd észre az erőforrások létrehozását.
+2. **Kövesd a telepítés előrehaladását** és jegyezd meg az készült erőforrásokat.
 
-### 2.3 lépés: Telepítés ellenőrzése
+### 2.3 lépés: Ellenőrizd a telepítést
 
-1. **Ellenőrizd a telepített erőforrásokat:**
+1. **Vizsgáld meg a telepített erőforrásokat:**
 ```bash
 azd show
 ```
 
-2. **Nyisd meg a telepített alkalmazást:**
+2. **Nyisd meg az alkalmazást:**
 ```bash
 azd show
 ```
 
-Nyisd meg a webes végpontot, amit az `azd show` kimenet mutat.
+Nyisd meg a webes végpontot a `azd show` kimenetben.
 
 3. **Teszteld az AI funkciókat:**
    - Navigálj a webalkalmazáshoz
    - Próbálj ki mintakérdéseket
-   - Ellenőrizd, hogy az AI válaszok működnek
+   - Ellenőrizd, hogy az AI válaszok működnek-e
 
-### **Labor Gyakorlat 2.1: Hibakeresési gyakorlat**
+### **Labor gyakorlat 2.1: Hibakeresési gyakorlat**
 
-**Forgatókönyv**: A telepítés sikeres volt, de az AI nem válaszol.
+**Eszkaláció:** A telepítés sikeres volt, de az AI nem válaszol.
 
-**Gyakori hibák ellenőrzése:**
-1. **OpenAI API kulcsok**: Ellenőrizd, hogy helyesen vannak beállítva
-2. **Modell elérhetőség**: Ellenőrizd, hogy a régiód támogatja-e a modellt
-3. **Hálózati kapcsolódás**: Biztosítsd, hogy a szolgáltatások kommunikálni tudnak
-4. **RBAC jogosultságok**: Ellenőrizd, hogy az app hozzáfér az OpenAI-hoz
+**Gyakori problémák ellenőrzése:**
+1. **Hitelesítés**: Ellenőrizd az Managed Identity-t és a szerepkör-hozzárendeléseket; API kulcsokat csak akkor ellenőrizz, ha szándékosan engedélyezted kulcs alapú hitelesítést
+2. **Modell elérhetőség**: Nézd meg, támogatja-e a régiód a modellt
+3. **Hálózati kapcsolódás**: Győződj meg róla, hogy a szolgáltatások kommunikálnak
+4. **RBAC jogosultságok**: Ellenőrizd, hogy az alkalmazás hozzáfér az OpenAI-hoz
 
 **Hibakeresési parancsok:**
 ```bash
-# Környezeti változók ellenőrzése
+# Check environment variables
 azd env get-values
 
-# Telepítési naplók megtekintése
-az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
+# Open the selected environment's logging view
+azd monitor --logs
 
-# OpenAI telepítési állapot ellenőrzése
+# Check OpenAI deployment status
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## 3. modul: AI alkalmazások testreszabása az igényeidhez
+## 3. modul: AI alkalmazások testreszabása az igényekhez
 
 ### 3.1 lépés: AI konfiguráció módosítása
 
 1. **Frissítsd az OpenAI modellt:**
 ```bash
-# Válts másik modellre (ha elérhető az Ön régiójában)
-azd env set AZURE_OPENAI_MODEL gpt-4.1
+# Change to a different model (if available in your region)
+azd env set AZURE_OPENAI_CHATGPT_MODEL gpt-4.1
 
-# Telepítse újra az új konfigurációval
-azd deploy
+# Apply the model infrastructure change, then deploy the application
+azd up
 ```
 
 2. **Adj hozzá további AI szolgáltatásokat:**
 
-Szerkeszd az `infra/main.bicep` fájlt Document Intelligence hozzáadásához:
+Szerkeszd az `infra/main.bicep`-t a Document Intelligence hozzáadásához:
+
+A következő csak egy illusztratív részlet, nem teljes sablon. A minta már előkészítheti a dokumentumfeldolgozó szolgáltatásokat: nézd meg a jelenlegi infrastruktúrát, mielőtt duplikált erőforrásokat adnál hozzá. Egyedi bővítésekhez kimenetek, identitások és alkalmazáskonfiguráció összekapcsolása szükséges.
 
 ```bicep
 // Add to main.bicep
@@ -232,62 +236,66 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### 3.2 lépés: Környezet-specifikus konfigurációk
 
-**Legjobb gyakorlat:** Különböző konfigurációk fejlesztéshez és termeléshez.
+**Legjobb gyakorlat**: Különböző konfigurációk fejlesztési és termelési környezetekhez.
 
-1. **Hozd létre a termelési környezetet:**
+1. **Hozz létre termelési környezetet:**
 ```bash
 azd env new myai-production
 ```
 
-2. **Állítsd be a termelési paramétereket:**
+2. **Állítsd be a termelés-specifikus paramétereket:**
 ```bash
-# A gyártás általában magasabb SKU-kat használ
-azd env set AZURE_OPENAI_SKU S0
-azd env set AZURE_SEARCH_SKU standard
+# Use the sample's actual Search SKU parameter
+azd env set AZURE_SEARCH_SERVICE_SKU standard
 
-# További biztonsági funkciók engedélyezése
-azd env set ENABLE_PRIVATE_ENDPOINTS true
+# Enable private endpoints using the sample's parameter
+azd env set AZURE_USE_PRIVATE_ENDPOINT true
 ```
 
-### **Labor Gyakorlat 3.1: Költségoptimalizálás**
+Ezek a nevek a minta [main.parameters.json](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/infra/main.parameters.json) fájljából származnak. Az `azd env set` tárol egy értéket, de nem tesz egy változót automatikusan hatékonnyá: a sablonnak fel kell használnia azt. Nézd át a minta [hálózati izolációs útmutatóját](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/docs/deploy_private.md) a nyilvános hozzáférés letiltása előtt, és használd az `azd up`-et az infrastruktúra módosítások alkalmazásához. Az OpenAI SKU `S0` önmagában nem határozza meg a modell áteresztőképességét; a modell telepítés típusa és kapacitása is számít.
 
-**Feladat:** Konfiguráld a sablont költséghatékony fejlesztésre.
+### **Labor gyakorlat 3.1: Költségoptimalizálás**
+
+**Kihívás:** Konfiguráld a sablont költséghatékony fejlesztéshez.
 
 **Feladatok:**
-1. Azonosítsd, mely SKU-k állíthatók ingyenes/alapszintre
-2. Állítsd be a környezeti változókat minimális költséghez
-3. Telepítsd és hasonlítsd össze a költségeket a termelési konfigurációval
+1. Válaszd ki az eldobható workshop környezetet: `azd env select myai-workshop`.
+2. Jegyezd fel a jelenlegi Search SKU-t és modell kapacitást az `infra/main.parameters.json` és a kiválasztott környezet alapján.
+3. Használd az alábbi támogatott bemeneteket, miután megerősítetted a modell/régió kvótát:
+   ```bash
+   azd env set AZURE_SEARCH_SERVICE_SKU basic
+   azd env set AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY 10
+   azd up
+   ```
+4. Ellenőrizd a Search SKU-t és a telepítési kapacitást a portálon, becsüld meg a különbséget az árkalkulátorral. Ne várd el, hogy a számlázási adatok azonnal frissülnek.
 
-**Megoldási tippek:**
-- Használj F0 (ingyenes) szintet az Azure AI Szolgáltatásoknál, ahol lehet
-- Használj alapszintet a Search Szolgáltatás fejlesztési környezetben
-- Vegyél igénybe Consumption tervet a Functions esetén
+**Siker kritériumok:** A Search Basic-t használ, a chat telepítés a kért támogatott kapacitással rendelkezik, és az app még mindig válaszol egy mintakérdésre. A kapacitás `10` sebességkorlát hozzárendelés, nem token árengedmény. A Search szint változtatások korlátozottak lehetnek vagy újraalkotást igényelnek; ne kísérletezz termelési erőforrásokon. Az F0 egy szolgáltatás-specifikus szint, nem Azure OpenAI modell SKU.
 
-## 4. modul: Biztonság és Termelési Legjobb Gyakorlatok
+## 4. modul: Biztonság és termelési legjobb gyakorlatok
 
-### 4.1 lépés: Biztonságos hitelesítő adat kezelés
+### 4.1 lépés: Biztonságos hitelesítő adat-kezelés
 
-**Jelenlegi kihívás:** Sok AI app keménykódolja az API kulcsokat vagy nem biztonságos tárolást használ.
+**Jelenlegi probléma:** Sok AI alkalmazás keménykódolt API kulcsokat vagy nem biztonságos tárolást használ.
 
-**AZD megoldás:** Kezelt azonosító + Key Vault integráció.
+**AZD megoldás:** Kezelt identitás + Key Vault integráció.
 
-1. **Nézd át a biztonsági konfigurációt a sablonban:**
+1. **Nézd át a biztonsági konfigurációt a sablonodban:**
 ```bash
-# Keresd a Key Vault és a kezelt identitás konfigurációját
+# Look for Key Vault and Managed Identity configuration
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Ellenőrizd, hogy a Kezelt Azonosító működik:**
+2. **Ellenőrizd, hogy a Kezelt Identitás működik-e:**
 ```bash
-# Ellenőrizze, hogy a webalkalmazás rendelkezik-e a helyes azonosító konfigurációval
-az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
+# For the sample's default Container Apps host
+az containerapp identity show --name YOUR_CONTAINER_APP_NAME --resource-group YOUR_RG
 ```
 
-### 4.2 lépés: Hálózati Biztonság
+### 4.2 lépés: Hálózati biztonság
 
-1. **Engedélyezd a privát végpontokat** (ha még nincs konfigurálva):
+1. **Engedélyezd a privát végpontokat** a minta támogatott hálózati konfigurációja szerint (ha még nincs beállítva).
 
-Add hozzá a bicep sablonodhoz:
+Saját sablonod esetén ez az illusztratív részlet az OpenAI végpont csatlakozást mutatja. Ehhez szükséges még egy VNet, privát DNS beállítás és alkalmazás kapcsolódás; ne illeszd be változtatás nélkül a minta kódba, amelynek már vannak privát végpont moduljai:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -310,82 +318,70 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### 4.3 lépés: Monitorozás és Megfigyelhetőség
+### 4.3 lépés: Monitorozás és megfigyelhetőség
 
 1. **Konfiguráld az Application Insights-ot:**
 ```bash
-# Az Application Insights-ot automatikusan kell konfigurálni
-# Ellenőrizze a konfigurációt:
-az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
+# Application Insights should be automatically configured
+# Check the configuration:
+az monitor app-insights component show --app YOUR_APP_INSIGHTS_NAME --resource-group YOUR_RG
 ```
 
-2. **Állíts be AI-specifikus monitorozást:**
-
-Adj hozzá egyéni metrikákat az AI műveletekhez:
-```bicep
-// In your web app configuration
-resource webApp 'Microsoft.Web/sites@2023-01-01' = {
-  properties: {
-    siteConfig: {
-      appSettings: [
-        {
-          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
-          value: applicationInsights.properties.ConnectionString
-        }
-        {
-          name: 'OPENAI_MONITOR_ENABLED'
-          value: 'true'
-        }
-      ]
-    }
-  }
-}
+2. **Kapcsold be a minta Application Insights integrációját:**
+```bash
+azd env set AZURE_USE_APPLICATION_INSIGHTS true
+azd up
+azd monitor --overview
 ```
 
-### **Labor Gyakorlat 4.1: Biztonsági Audit**
+A minta instrumentációja telemetriát küld; egy tetszőleges `OPENAI_MONITOR_ENABLED` beállítás nem engedélyezi az AI metrikákat. Vizsgáld meg a trace-ket modellhívások, késleltetés, hibák és token-felhasználás szerint, és kerüld a érzékeny promptok vagy válaszok naplózását.
+
+### **Labor gyakorlat 4.1: Biztonsági audit**
 
 **Feladat:** Vizsgáld át a telepítésed biztonsági legjobb gyakorlatait.
 
 **Ellenőrző lista:**
 - [ ] Nincsenek keménykódolt titkok kódban vagy konfigurációban
-- [ ] Kezelt Azonosító használata szolgáltatás-szolgáltatás autentikációhoz
-- [ ] Key Vault érzékeny konfigurációt tárol
-- [ ] Hálózati hozzáférés megfelelően korlátozott
+- [ ] Szolgáltatásközi hitelesítéshez Kezelt Identitás használata
+- [ ] Key Vault tárol érzékeny konfigurációkat
+- [ ] Hálózati hozzáférés megfelelően korlátozva
 - [ ] Monitorozás és naplózás engedélyezve
 
 ## 5. modul: Saját AI alkalmazás konvertálása
 
 ### 5.1 lépés: Értékelő munkalap
 
-**Mielőtt átállítod az appot**, válaszold meg ezeket a kérdéseket:
+**Alkalmazásod átalakítása előtt válaszolj ezekre a kérdésekre:**
 
-1. **Alkalmazás architektúra:**
-   - Milyen AI szolgáltatásokat használ az appod?
-   - Milyen számítási erőforrásokra van szüksége?
-   - Szükséges-e adatbázis?
-   - Mik az egymásra utaltságok a szolgáltatások között?
+1. **Alkalmazás architektúrája:**
+   - Milyen AI szolgáltatásokat használ az alkalmazásod?
+   - Milyen számítási erőforrásokat igényel?
+   - Szüksége van-e adatbázisra?
+   - Mik a szolgáltatások közötti függőségek?
 
 2. **Biztonsági követelmények:**
-   - Milyen érzékeny adatokkal dolgozik az app?
+   - Milyen érzékeny adatokat kezel az alkalmazás?
    - Milyen megfelelőségi követelmények vannak?
    - Szükséges privát hálózat?
 
 3. **Skálázási követelmények:**
-   - Mi a várható terhelés?
+   - Mekkora terhelést vársz?
    - Szükséges automatikus skálázás?
-   - Vannak régiós követelmények?
+   - Vannak regionális követelmények?
 
-### 5.2 lépés: Készítsd el az AZD sablonodat
+### 5.2 lépés: Hozd létre AZD sablonod
 
-**Kövesd ezt a mintát az app konvertáláshoz:**
+**Kövesd ezt a mintát az alkalmazás konvertálásához:**
 
-1. **Hozd létre az alap szerkezetet:**
+**Csak keret:** Ez a rész nem tartalmaz API/webalkalmazás forráskódot, host infrastruktúrát, modell telepítéseket, identitás/RBAC-t vagy kész `main.parameters.json`-t. Az erőforráscsoport szintű Bicep modulkompozíciót illusztrál; egy tipikus AZD előfizetés szintű belépési pontnak erőforráscsoportot kell létrehoznia és azt meghívnia azon a szinten. Ne várd, hogy `azd up` teljes alkalmazást telepít, ha csak ezeket a részleteket másoltad. Futó alapnak használd továbbra is az 1. modul RAG sablonját.
+
+1. **Hozd létre az alapstruktúrát:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# AZD sablon inicializálása
-azd init --template minimal
+# Initialize AZD template
+azd init --template minimal .
 ```
 
 2. **Készítsd el az azure.yaml-t:**
@@ -411,7 +407,7 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Készítsd el az infrastruktúra sablonokat:**
+3. **Készíts infrastuktúra sablonokat:**
 
 **infra/main.bicep** - Fő sablon:
 ```bicep
@@ -448,6 +444,7 @@ resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   }
   properties: {
     customSubDomainName: name
+    disableLocalAuth: true
   }
 }
 
@@ -455,58 +452,60 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Labor Gyakorlat 5.1: Sablon Készítő kihívás**
+### **Labor gyakorlat 5.1: Sablon-készítési kihívás**
 
-**Kihívás:** Készíts AZD sablont egy dokumentumfeldolgozó AI apphoz.
+**Kihívás:** Készíts AZD sablont dokumentumfeldolgozó AI alkalmazáshoz.
 
 **Követelmények:**
-- Microsoft Foundry Models tartalomelemzéshez
+- Microsoft Foundry Modellek tartalom elemzéshez
 - Document Intelligence OCR-hez
-- Storage Fiók dokumentum feltöltésekhez
-- Function App feldolgozó logikához
-- Web app felhasználói felülethez
+- Tároló fiók dokumentum feltöltésekhez
+- Funkció alkalmazás feldolgozó logikához
+- Webes alkalmazás felhasználói felülethez
 
 **Bónusz pontok:**
-- Adj jó hibakezelést
-- Tüntesd fel a költségbecslést
-- Állíts be monitorozó dashboardokat
+- Helyes hibakezelés hozzáadása
+- Költségbecslés mellékelése
+- Monitorozási dashboardok kialakítása
 
-## 6. modul: Gyakori hibák elhárítása
+## 6. modul: Gyakori problémák hibakeresése
 
 ### Gyakori telepítési problémák
 
-#### Probléma 1: OpenAI Szolgáltatás Kvóta túllépve
-**Tünetek:** A telepítés kvóta hiba miatt sikertelen
+#### Probléma 1: OpenAI szolgáltatás kvóta túllépve
+**Tünetek:** A telepítés kvóta hibával meghiúsul
 **Megoldások:**
 ```bash
-# Ellenőrizze a jelenlegi kvótákat
+# Check current quotas
 az cognitiveservices usage list --location eastus
 
-# Kérjen kvótaemelést vagy próbáljon meg másik régiót
+# Request quota increase, OR try a new disposable environment in another region.
+# Azure resources cannot be relocated merely by changing AZURE_LOCATION.
+azd env new myai-quota-test
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
 #### Probléma 2: Modell nem elérhető a régióban
-**Tünetek:** AI válaszok sikertelenek vagy modell telepítési hibák
+**Tünetek:** AI válaszok hibák vagy modell telepítés hibák
 **Megoldások:**
 ```bash
-# Ellenőrizze a modell elérhetőségét régiónként
+# Check model availability by region
 az cognitiveservices model list --location eastus
 
-# Frissítés az elérhető modellre
-azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
-azd deploy
+# Update to available model
+azd env set AZURE_OPENAI_CHATGPT_MODEL gpt-4.1-mini
+azd up
 ```
 
 #### Probléma 3: Jogosultsági problémák
-**Tünetek:** 403 Hozzáférés tiltva hibák AI szolgáltatások hívásakor
+**Tünetek:** 403 Forbidden hibák AI szolgáltatás hívásakor
 **Megoldások:**
 ```bash
-# Ellenőrizze a szerepkör hozzárendeléseket
+# Check role assignments
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Adja hozzá a hiányzó szerepköröket
+# Add missing roles
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
@@ -517,167 +516,176 @@ az role assignment create \
 
 #### Probléma 4: Lassú AI válaszok
 **Vizsgálati lépések:**
-1. Nézd meg az Application Insights teljesítmény metrikáit
-2. Nézd át az OpenAI szolgáltatás metrikáit az Azure portálon
-3. Ellenőrizd a hálózati kapcsolódást és késleltetést
+1. Nézd meg az Application Insights teljesítmény mutatóit
+2. Vizsgáld meg az OpenAI szolgáltatás mutatókat az Azure portálon
+3. Ellenőrizd a hálózati kapcsolatot és késleltetést
 
 **Megoldások:**
-- Közös lekérdezésekhez implementálj gyorsítótárazást
-- Használj megfelelő OpenAI modellt az esetedhez
-- Fontold meg read replica használatát nagy terhelésnél
+- Általános lekérdezésekhez cache bevezetése
+- Használj az esetedhez illeszkedő OpenAI modellt
+- Skálázd az alkalmazás példányokat csak a modell RPM/TPM limit ellenőrzése után; az Azure OpenAI telepítések nem tesznek elérhetővé általános adatbázis-stílusú "read replica" beállítást
 
-### **Labor Gyakorlat 6.1: Hibakeresési kihívás**
+### **Labor gyakorlat 6.1: Hibakeresési kihívás**
 
-**Forgatókönyv:** A telepítés sikerült, de az alkalmazás 500-as hibákat ad vissza.
+**Eszkaláció:** A telepítés sikeres volt, de az alkalmazás 500 hibával válaszol.
 
 **Hibakeresési feladatok:**
 1. Ellenőrizd az alkalmazás naplóit
-2. Ellenőrizd a szolgáltatás kapcsolódását
-3. Teszteld az autentikációt
-4. Nézd át a konfigurációt
+2. Nézd meg a szolgáltatás kapcsolatot
+3. Hitelesítés tesztelése
+4. Konfiguráció áttekintése
 
-**Használandó eszközök:**
+**Használható eszközök:**
 - `azd show` a telepítés áttekintéséhez
-- Azure portál a részletes szolgáltatás naplókhoz
+- Azure portál a részletes szolgáltatási naplókhoz
 - Application Insights az alkalmazás telemetriájához
 
-## 7. modul: Monitorozás és optimalizálás
+## 7. modul: Felügyelet és optimalizálás
 
-### 7.1 lépés: Átfogó monitorozás beállítása
+### 7.1 lépés: Átfogó felügyelet beállítása
 
-1. **Hozz létre egyéni dashboardokat:**
+1. **Egyedi műszerfalak létrehozása:**
 
-Navigálj az Azure portálra, és hozz létre egy dashboardot az alábbiakkal:
-- OpenAI kérés számláló és késleltetés
-- Alkalmazás hibaarányok
-- Erőforrás kihasználás
+Lépj az Azure portálra, és hozz létre a következőket tartalmazó műszerfalat:
+- OpenAI kérés szám és késleltetés
+- Alkalmazás hibaarányai
+- Erőforrás kihasználtság
 - Költségkövetés
 
-2. **Állíts be riasztásokat:**
+2. **Riasztások beállítása:**
 ```bash
-# Riasztás magas hibaarány esetén
+# Failed-request count on the Application Insights component (not a percentage)
 az monitor metrics alert create \
-  --name "AI-App-High-Error-Rate" \
+  --name "AI-App-Failed-Requests" \
   --resource-group YOUR_RG \
-  --target-resource-id YOUR_APP_ID \
-  --condition "avg Http5xx greater than 10" \
-  --description "Alert when error rate is high"
+  --scopes YOUR_APPLICATION_INSIGHTS_RESOURCE_ID \
+  --condition "count requests/failed > 10" \
+  --window-size 5m \
+  --evaluation-frequency 1m \
+  --description "More than 10 failed requests in five minutes"
 ```
+
+Ellenőrizd, hogy a komponens kibocsátja-e a kérés telemetriát, és ha szükséges, adj hozzá műveletcsoportot az értesítésekhez. A metrika egy számlálás, nem hibaarány; egy riasztáshoz megfelelő lekérdezés és nevező kell.
 
 ### 7.2 lépés: Költségoptimalizálás
 
-1. **Elemezd a jelenlegi költségeket:**
+1. **Aktuális költségek elemzése:**
 ```bash
-# Használja az Azure CLI-t a költségadatok lekéréséhez
-az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
+# Set a recent reporting window supported by your billing account.
+az consumption usage list --start-date YYYY-MM-DD --end-date YYYY-MM-DD
 ```
 
-2. **Alkalmazz költségkontrollokat:**
-- Állíts be költségkeret riasztásokat
-- Használj automatikus skálázási szabályokat
-- Implementálj kérés-gyorsítótárazást
-- Kövesd nyomon az OpenAI token használatot
+Cseréld ki a dátum helyőrzőket. A fogyasztási API támogatás az elszámolási megállapodástól függ; ha nem elérhető a felhasználási adat, használd a portálon a Költségkezelést. A költségek késve jelennek meg, nem valós idejű tesztadatok.
 
-### **Labor Gyakorlat 7.1: Teljesítmény optimalizálás**
+2. **Költségkontrollok bevezetése:**
+- Költségkeret riasztások beállítása
+- Autoscaling szabályok használata
+- Kérések gyorsítótárazása
+- OpenAI tokenhasználat figyelése
 
-**Feladat:** Optimalizáld AI alkalmazásod mind teljesítmény, mind költség szempontból.
+### **Labor gyakorlat 7.1: Teljesítmény optimalizálás**
 
-**Javítandó metrikák:**
-- Csökkentsd az átlagos válaszidőt 20%-kal
-- Csökkentsd a havi költségeket 15%-kal
-- Tarts fenn 99,9%-os elérhetőséget
+**Feladat**: Optimalizáld az AI alkalmazásodat mind teljesítmény, mind költség szempontjából.
 
-**Kipróbálandó stratégiák:**
-- Valósíts meg válasz gyorsítótárazást
-- Optimalizáld a kérdéseket token hatékonyságra
-- Használj megfelelő számítási SKU-kat
-- Állíts be megfelelő automatikus skálázást
+**Fejlesztendő mutatók:**
+- Átlagos válaszidő 20%-os csökkentése
+- Havi költségek 15%-os csökkentése
+- 99,9%-os rendelkezésre állási SLO és mérési időablak definiálása (egy rövid labor nem képes havi rendelkezésre állást bemutatni)
 
-## Záró Kihívás: Teljes körű megvalósítás
+**Próbálkozási stratégiák:**
+- Válaszok gyorsítótárazásának bevezetése
+- Tokenhatékony promptok optimalizálása
+- Megfelelő számítási SKU-k használata
+- Megfelelő autoscaling beállítása
+
+## Záró kihívás: Teljes körű megvalósítás
 
 ### Kihívás forgatókönyv
 
-Feladatod egy termelésre kész AI-vezérelt ügyfélszolgálati chatbot létrehozása ezekkel a követelményekkel:
+Ez egy **választható architektúra/dizájn kihívás**, nem futtatható feladat vagy termelési minősítés. Javasolj egy AI-val vezérelt ügyfélszolgálati chatbotot, és dokumentáld, mely követelmények igényelnek további megvalósítást és bizonyítékot:
 
 **Funkcionális követelmények:**
-- Webes felület ügyfél interakciókhoz
-- Integráció Microsoft Foundry Models válaszokhoz
+- Webes felület az ügyfél interakciókhoz
+- Integráció a Microsoft Foundry modellekkel válaszadásra
 - Dokumentumkeresési képesség Azure AI Search segítségével
-- Integráció meglévő ügyfél-adatbázissal
+- Integráció meglévő ügyféladatbázissal
 - Többnyelvű támogatás
 
-**Nem funkcionális követelmények:**
+**Nem-funkcionális követelmények:**
 - 1000 egyidejű felhasználó kezelése
-- 99,9%-os elérhetőségi SLA
+- 99,9%-os rendelkezésre állási SLA
 - SOC 2 megfelelőség
-- Költség havonta 500 dollár alatt
-- Több környezetbe telepítés (fejlesztés, staging, termelés)
+- Havonta 500 dollár alatti költség
+- Több környezetben való telepítés (fejlesztő, staging, éles)
 
-### Megvalósítás lépései
+Ezek elméleti érintetti korlátok, nem egyidejűleg garantált eredmények. A költségek becslése előtt definiáld a kérés-sebességet, prompt/kimenet méreteket és munkamenet hosszát; az 1000 egyidejű felhasználó nem tesz bizonyossá egy terhelésről vagy a 500 dolláros költségkeretről. A SOC 2 egy szervezeti audit eredménye, nem csak egy AZD sablon kapcsolója. Azonosítsd a kompromisszumokat, és bizonyítékkal utasítsd el a megvalósíthatatlan követelményeket.
+
+### Megvalósítási lépések
 
 1. **Tervezd meg az architektúrát**
 2. **Hozd létre az AZD sablont**
-3. **Valósíts meg biztonsági intézkedéseket**
-4. **Állítsd be a monitorozást és riasztásokat**
+3. **Valósítsd meg a biztonsági intézkedéseket**
+4. **Állítsd be a felügyeletet és riasztásokat**
 5. **Hozz létre telepítési folyamatokat**
-6. **Dokumentáld a megoldást**
+6. **Dokumentáld megoldást**
 
 ### Értékelési szempontok
 
-- ✅ **Funkcionalitás**: Megfelel-e minden követelménynek?
-- ✅ **Biztonság**: Megvalósultak-e a legjobb gyakorlatok?
-- ✅ **Skálázhatóság**: Kezeli-e a terhelést?
-- ✅ **Karbantarthatóság**: Rendezett-e a kód és infrastruktúra?
-- ✅ **Költség**: Marad a költségvetésen belül?
+- ✅ **Funkcionalitás**: Bemutatottak-e a megvalósított képességek, világosak-e a hiányosságok?
+- ✅ **Biztonság**: Alkalmazzák-e a legjobb gyakorlatokat?
+- ✅ **Skálázhatóság**: Képes kezelni a terhelést?
+- ✅ **Karbantarthatóság**: Rendezett a kód és az infrastruktúra?
+- ✅ **Költség**: Betartja-e a költségkeretet?
 
-## További Források
+## További források
 
-### Microsoft Dokumentációk
-- [Azure Developer CLI Dokumentáció](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Microsoft Foundry Models Szolgáltatás Dokumentáció](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Microsoft Foundry Dokumentáció](https://learn.microsoft.com/azure/ai-studio/)
+### Microsoft dokumentáció
+- [Azure Developer CLI dokumentáció](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Microsoft Foundry Models szolgáltatás dokumentáció](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry dokumentáció](https://learn.microsoft.com/azure/ai-studio/)
 
-### Minta Sablonok
+### Mintasablonok
 - [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [OpenAI Chat App Gyorsindítás](https://github.com/Azure-Samples/openai-chat-app-quickstart)
-
+- [OpenAI Chat App gyorsindítás](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Közösségi források
 - [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
+- [Királ AZD sablonok](https://azure.github.io/awesome-azd/)
 
-## 🎓 Teljesítési bizonyítvány
+## 🎓 Teljesítési mérföldkő
 
-Gratulálunk! Teljesítetted az AI Workshop Labot. Most már képesnek kell lenned arra, hogy:
+Gratulálunk! Befejezted az AI Workshop Labot. Most már képes vagy:
 
-- ✅ Átalakítsd meglévő AI alkalmazásaidat AZD sablonokká
-- ✅ Éles használatra kész AI alkalmazásokat telepíts
-- ✅ Biztonsági bevált gyakorlatokat valósíts meg AI munkaterhelésekhez
-- ✅ Figyeld és optimalizáld az AI alkalmazások teljesítményét
-- ✅ Hibakeresd a gyakori telepítési problémákat
+- ✅ Megmagyarázni, hogyan kell meglévő AI alkalmazást egy AZD sablonhoz igazítani
+- ✅ Telepíteni és tesztelni egy AI referenciaalkalmazást
+- ✅ Biztonsági legjobb gyakorlatokat megvalósítani AI terhelésekhez
+- ✅ Felügyelni és optimalizálni az AI alkalmazás teljesítményét
+- ✅ Hibakeresni a gyakori telepítési problémákat
+
+**Takarítás:** Futtasd a `azd env list` parancsot, válaszd ki a labor során létrehozott minden eldobható környezetet (`myai-workshop`, és ha telepítve van `myai-production`/`myai-quota-test`), majd futtasd a `azd down`-t mindegyiken. Vizsgáld át a törlési tervet; a környezet helyi konfigurációjának törlése önmagában nem törli az Azure erőforrásokat. Kerüld a `--purge` használatát, hacsak nem érted a visszafordíthatatlan puha törléses erőforrástörlést.
 
 ### Következő lépések
-1. Alkalmazd ezeket a mintákat a saját AI projektjeidben
-2. Járulj hozzá sablonokkal a közösség számára
-3. Csatlakozz a Microsoft Foundry Discordhoz folyamatos támogatásért
-4. Fedezz fel haladó témákat, mint például a több régiós telepítések
+1. Alkalmazd ezeket a mintákat saját AI projektjeidben
+2. Járulj hozzá sablonokkal a közösségnek
+3. Csatlakozz a Microsoft Foundry Discord közösséghez folyamatos támogatásért
+4. Fedezd fel a fejlett témákat, például a több régiós telepítéseket
 
 ---
 
-**Workshop visszajelzés**: Segíts minket a workshop fejlesztésében, oszd meg tapasztalataidat a [Microsoft Foundry Discord #Azure csatornán](https://discord.gg/microsoft-azure).
+**Workshop visszajelzés**: Segíts nekünk javítani ezt a workshopot, oszd meg tapasztalataidat a [Microsoft Foundry Discord #Azure csatornában](https://discord.gg/microsoft-azure).
 
 ---
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam kezdőlapja**: [AZD Kezdőknek](../../README.md)
-- **📖 Aktuális fejezet**: 2. fejezet - AI-First fejlesztés
-- **⬅️ Előző**: [AI modell telepítése](ai-model-deployment.md)
-- **➡️ Következő**: [AI éles bevetési bevált gyakorlatok](production-ai-practices.md)
+- **📚 Tanfolyam főoldal**: [AZD kezdőknek](../../README.md)
+- **📖 Jelenlegi fejezet**: 2. fejezet - AI-első fejlesztés
+- **⬅️ Előző**: [AI modell telepítés](ai-model-deployment.md)
+- **➡️ Következő**: [Termelési AI legjobb gyakorlatok](../chapter-08-production/production-ai-practices.md)
 - **🚀 Következő fejezet**: [3. fejezet: Konfiguráció](../chapter-03-configuration/configuration.md)
 
-**Segítségre van szükséged?** Csatlakozz közösségünkhöz támogatásért és beszélgetésekért az AZD és AI telepítésekről.
+**Segítségre van szükséged?** Csatlakozz közösségünkhöz támogatásért és AZD, AI telepítési vitákért.
 
 ---
 

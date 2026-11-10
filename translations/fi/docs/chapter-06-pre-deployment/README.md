@@ -1,64 +1,64 @@
-# Luku 6: Ennen käyttöönottoa suunnittelu ja validointi
+# Luku 6: Ennakkoasennuksen suunnittelu ja varmennus
 
-**📚 Kurssi**: [AZD aloittelijoille](../../README.md) | **⏱️ Kesto**: 1 tunti | **⭐ Vaativuus**: Keskitaso
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 2-4 tuntia lukemista; lisäaikaa mukautetuille harjoituksille | **⭐ Vaativuus**: Keskitaso–Edistynyt
 
 ---
 
 ## Yleiskatsaus
 
-Tässä luvussa käsitellään keskeiset suunnittelu- ja validointivaiheet ennen sovelluksen käyttöönottoa. Opi välttämään kalliita virheitä asianmukaisen kapasiteettisuunnittelun, SKU-valinnan ja lähtötarkastusten avulla.
+Tässä luvussa käsitellään olennaisia suunnittelu- ja varmennusvaiheita sovelluksesi käyttöönottoa varten. Opit välttämään kalliita virheitä oikean kapasiteettisuunnittelun, SKU-valinnan ja ennakkotarkistusten avulla.
 
-> Vahvistettu `azd 1.27.1` -versiolla heinäkuussa 2026.
+> Komentojen ohjeistus tarkistettu julkaistua `azd 1.37.2`-viitetta vasten. Pilvikäyttöönottoja ei suoritettu. Pitkissä oppitunneissa on havainnollistavia katkelmia, ei täydellisiä paikallisia asennusprojekteja.
 
 ## Oppimistavoitteet
 
-Tämän luvun suorittamisen jälkeen osaat:
-- Suorittaa lähtötarkastukset ennen käyttöönottoa
-- Suunnitella kapasiteetti ja arvioida resurssitarpeet
+Tämän luvun suorittamalla osaat:
+- Suorittaa ennakkotarkistukset ennen käyttöönottoa
+- Suunnitella kapasiteettia ja arvioida resurssitarpeita
 - Valita sopivat SKU:t kustannusten optimointiin
 - Määrittää Application Insights -valvonnan
-- Ymmärtää tiimiyhteistyön mallit
+- Ymmärtää moniedustajakoordinaatiomallit ja niiden käyttöönoton vaatimukset
 
 ---
 
 ## 📚 Oppitunnit
 
-| # | Oppitunti | Kuvaus | Kesto |
+| # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
-| 1 | [Lähtötarkastukset](preflight-checks.md) | Varmista kokoonpano ennen käyttöönottoa | 15 min |
-| 2 | [Kapasiteettisuunnittelu](capacity-planning.md) | Arvioi resurssitarpeet | 20 min |
-| 3 | [SKU-valinta](sku-selection.md) | Valitse sopivat hinnoittelutasot | 15 min |
-| 4 | [Application Insights](application-insights.md) | Määritä valvonta | 20 min |
-| 5 | [Yhteistyön mallit](coordination-patterns.md) | Tiimin käyttöönoton työnkulut | 15 min |
+| 1 | [Ennakkotarkistukset](preflight-checks.md) | Määrittelyn varmistaminen ennen käyttöönottoa | 15 min |
+| 2 | [Kapasiteettisuunnittelu](capacity-planning.md) | Resurssitarpeiden arviointi | 20 min |
+| 3 | [SKU-valinta](sku-selection.md) | Sopivien hinnoittelutasojen valinta | 15 min |
+| 4 | [Application Insights](application-insights.md) | Valvonnan määrittäminen | 20 min |
+| 5 | [Koordinaatiomallit](coordination-patterns.md) | Kehittynyt moniedustajaorkestroinnin suunnittelu | 60-75 min |
 
 ---
 
-## 🚀 Pika-aloitus
+## 🚀 Nopeasti alkuun
 
 ```bash
-# Tarkista tilauskuormat
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Esikatsele käyttöönotto (ei luoda resursseja)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Vahvista Bicep-syntaksi
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Tarkista ympäristön kokoonpano
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Ennen käyttöönottoa tarkistuslista
+## ☑️ Ennakkoasennuksen tarkistuslista
 
 ### Ennen `azd provision`
 
 - [ ] Alueen kiintiö tarkistettu
 - [ ] SKU:t valittu asianmukaisesti
 - [ ] Kustannusarvio käyty läpi
-- [ ] Nimeämiskäytäntö yhdenmukainen
+- [ ] Nimikonventio yhdenmukainen
 - [ ] Turvallisuus/RBAC määritetty
 
 ### Ennen `azd deploy`
@@ -74,10 +74,10 @@ azd env get-values
 
 | Kuorma | Kehitys | Tuotanto |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Consumption | Consumption tai omistettu kuormaprofili mitatun kuorman perusteella |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Azure OpenAI -mallit | Tuettu pay-as-you-go -asennustyyppi | Pay-as-you-go tai varattu läpimenonopeus; malli/aluekohtainen |
+| AI Search | Vapaa/Basic rajoissa | Basic tai Standard taso haun indeksin, replikoiden ja kyselykuorman mukaan |
 
 ---
 
@@ -85,14 +85,14 @@ azd env get-values
 
 | Suunta | Luku |
 |-----------|---------|
-| **Edellinen** | [Luku 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Seuraava** | [Luku 7: Vianmääritys](../chapter-07-troubleshooting/README.md) |
+| **Edellinen** | [Luku 5: Moniedustaja](../chapter-05-multi-agent/README.md) |
+| **Seuraava** | [Luku 7: Vianetsintä](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Aiheeseen liittyvät resurssit
+## 📖 Liittyvät resurssit
 
-- [Konfigurointiohje](../chapter-03-configuration/configuration.md)
+- [Määritysohjeet](../chapter-03-configuration/configuration.md)
 - [Käyttöönotto-opas](../chapter-04-infrastructure/deployment-guide.md)
 - [Yleiset ongelmat](../chapter-07-troubleshooting/common-issues.md)
 

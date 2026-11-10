@@ -62,6 +62,19 @@ Agradecemos los siguientes tipos de contribuciones:
 - Sigue las mejores prácticas de Azure y AZD
 - Proporciona la salida esperada cuando sea aplicable
 
+### Validar Documentación en Inglés
+
+Desde la raíz del repositorio, instala los requisitos de desarrollo existentes y ejecuta:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s .github/scripts -p "test_*.py"
+python .github/scripts/check_links.py
+python -m mkdocs build --strict --config-file workshop/mkdocs.yml
+```
+
+El verificador de enlaces sin conexión comprueba rutas en Markdown/HTML en inglés, encabezados, anclas explícitas y marcadores de enlaces vacíos. Excluye `translations/` y `translated_images/` generados, incluidos los enlaces a esos directorios. No accede a sitios web externos ni valida implementaciones de Azure. Use `--json <report-path>` para exportar fallos y el inventario de URL externas para una verificación de red separada. Verifique los comandos ascendentes actuales y los prerrequisitos de ejemplo al cambiar instrucciones técnicas; distinga aplicaciones probadas de planos de diseño.
+
 ### Mensajes de commit
 
 Usa mensajes de commit claros y descriptivos:
@@ -75,8 +88,8 @@ Por favor lee y sigue nuestro [Código de Conducta](CODE_OF_CONDUCT.md) para man
 
 ## Obtener ayuda
 
-- **Preguntas**: Abre una [Discusión de GitHub](https://github.com/microsoft/azd-for-beginners/discussions)
-- **Comunidad**: Únete al [Discord de Azure](https://discord.gg/microsoft-azure)
+- **Preguntas**: Busca o abre un [issue en GitHub](https://github.com/microsoft/AZD-for-beginners/issues)
+- **Comunidad**: Únete al [Azure Discord](https://discord.gg/microsoft-azure)
 - **Documentación**: Revisa la [documentación de Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ## Licencia
@@ -90,6 +103,6 @@ Al contribuir a este repositorio, aceptas que tus contribuciones se licenciarán
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Descargo de responsabilidad:
-Este documento ha sido traducido utilizando el servicio de traducción automática por IA Co-op Translator (https://github.com/Azure/co-op-translator). Si bien nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un traductor humano. No nos hacemos responsables de ningún malentendido o interpretación errónea que pueda surgir del uso de esta traducción.
+**Descargo de responsabilidad**:
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional humana. No somos responsables de cualquier malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

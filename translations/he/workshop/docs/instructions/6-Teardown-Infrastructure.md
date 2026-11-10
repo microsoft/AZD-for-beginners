@@ -2,30 +2,30 @@
 
 !!! tip "בסוף מודול זה תוכל"
 
-    - [ ] להבין את חשיבות ניקוי המשאבים וניהול העלויות
-    - [ ] להשתמש ב-`azd down` כדי לפרק את התשתית בצורה בטוחה
-    - [ ] לשחזר שירותי Azure AI שנמחקו ברכות אם יש צורך
-    - [ ] **מעבדה 6:** לנקות משאבי Azure ולאמת את ההסרה
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## תרגילים בונוס
+## תרגילים נוספים
 
-לפני שנפרק את הפרויקט, הקדש כמה דקות לחקור באופן פתוח.
+לפני שנפרק את הפרויקט, הקדש כמה דקות לביצוע חקירה פתוחה.
 
-!!! info "נסה את שאלות החקר האלו"
+!!! info "נסה את רעיונות החקירה האלה"
 
-    **נסה את GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. שאל: `איזה תבניות AZD נוספות אוכל לנסות לתרחישי סוכנים מרובי-תחומים?`
-    2. שאל: `איך אוכל להתאים את הוראות הסוכן למקרה שימוש בתחום הבריאות?`
-    3. שאל: `אילו משתני סביבה שולטים באופטימיזציית עלויות?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **חקור את פורטל Azure:**
+    **Explore the Azure Portal:**
     
-    1. סקור מדדי Application Insights עבור הפריסה שלך
-    2. בדוק את ניתוח העלויות עבור המשאבים שסופקו
-    3. חקור שוב את מגרש המשחקים של סוכן פורטל Microsoft Foundry
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
@@ -34,27 +34,25 @@
 1. פירוק התשתית הוא פשוט כמו:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. הדגל `--purge` מבטיח שהוא גם מנקה משאבי שירותי קוגניציה שנמחקו ברכות, וכך משחרר מכסת שימוש שהוחזקה על ידי משאבים אלו. בסיום תראה משהו כזה:
+1. אשר את הסביבה שנבחרה ובדוק את המשאבים שיוסרו. פעולה זו מסירה משאבים ב-Azure ועלולה להשמיד נתונים. שמור את הנחיית האישור עבור תהליך למידה זה. לאחר שתסתיים תראה פלט דומה ל:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (אופציונלי) אם עכשיו תפעיל שוב `azd up`, תראה שהדגם gpt-4.1 מתפרס מכיוון שמשתנה הסביבה שונה (ונשמר) בתיקיית `.azure` המקומית. 
+1. אמת את המחיקה בפורטל ובדוק משאבים שמחוץ לטווח הפריסה. דיווחי עלויות ועדכוני מכסות יכולים להתעכב. תצורת `.azure` המקומית נשארת אלא אם הסרת אותה במפורש.
 
-      להלן פריסות המודל **לפני**:
+1. `azd down --purge` מבקשת בנוסף מחיקה סופית של משאבים שנמחקו ברכות ונמצאים בתמיכה. השתמש בו רק כשאין צורך בשחזור ואתה מבין את מדיניות השימור/הגנה מפני מחיקה. הוא אינו מבטיח שחרור מכסה מיידי.
 
-      ![Initial](../../../../../translated_images/he/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      וכאן זה **אחרי**:
-      ![New](../../../../../translated_images/he/14-deploy-new.f7f3c355a3cf7299.webp)
+1. אל תפרוס מחדש רק כדי לבדוק את הניקוי. `azd up` מכוון שיעלה מחדש משאבים באמצעות קלטים מקומיים קיימים, ועלול לגרום לחיובים שוב. עדכוני מודל בדרך כלל משתמשים בשינויים נתמכים בפריסה, לא בפירוק.
 
 ---
 

@@ -1,60 +1,60 @@
 # AZD for AI-udviklere Workshop
 
-> Valideret mod `azd 1.27.1` i juli 2026.
+> Kildevejledning gennemgået i forhold til AZD 1.37.2 den 4. november 2026. Skærmbilleder er vejledende; service tilgængelighed, portalmærker og standardskabeloner kan ændre sig.
 
 > [!IMPORTANT]  
-> **Denne workshop er udstyret med en workshopguide, som du kan forhåndsvise i din lokale browser. For at komme i gang skal du åbne repoet i GitHub Codespaces, en dev container eller en lokal klon med MkDocs installeret—vent derefter, indtil du ser en aktiv VS Code-terminal, og skriv:**  
-> `mkdocs serve > /dev/null 2>&1 &`  
-> **Du burde se en pop-up dialog for at åbne forhåndsvisningssiden i en browser.**
+> **Denne workshop er udstyret med en workshopguide, som du kan forhåndsvise i din lokale browser. For at komme i gang skal du åbne repoet i GitHub Codespaces, en dev-container eller et lokalt klon med MkDocs installeret — og derefter vente, indtil du ser et aktivt VS Code-terminalvindue og skrive:**  
+> Fra kursets repos rodfolder, installer `requirements-dev.txt`, og kør derefter `python -m mkdocs serve --config-file workshop/mkdocs.yml` i forgrunden.
+> **Du bør se en pop-up-dialog, der spørger om at åbne forhåndsvisningssiden i en browser.**
 
-Velkommen til den praktiske workshop for at lære Azure Developer CLI (AZD) med fokus på AI-applikationsudrulning. Denne workshop hjælper dig med at opnå en praktisk forståelse af AZD-skabeloner i 3 trin:
+Velkommen til den praktiske workshop for at lære Azure Developer CLI (AZD) med fokus på AI-applikationsudrulning. Denne workshop hjælper dig med at få en anvendt forståelse af AZD-skabeloner i 3 trin:
 
 1. **Opdagelse** - find den skabelon, der passer til dig.
 1. **Udrulning** - udrul og valider, at det virker
-1. **Tilpasning** - modificer og iterer for at gøre det til dit!
+1. **Tilpasning** - modificer og iterer for at gøre den til din!
 
-I løbet af denne workshop vil du også blive introduceret til kerneudviklerværktøjer og arbejdsprocesser, som hjælper dig med at strømline din end-to-end udviklingsrejse.
+Gennem denne workshop vil du også blive introduceret til kerneudviklerværktøjer og arbejdsflows, som hjælper dig med at strømline din udviklingsrejse fra start til slut.
 
 | | | 
 |:---|:---|
-| **📚 Kursus Hjem**| [AZD For Begyndere](../README.md)|
+| **📚 Kursushjemmeside**| [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md)|
 | **📖 Dokumentation** | [Kom godt i gang med AI-skabeloner](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
 | **🛠️AI Skabeloner** | [Microsoft Foundry Skabeloner](https://ai.azure.com/templates) |
-|**🚀 Næste Skridt** | [Tag Udfordringen](#workshop-challenge) |
+|**🚀 Næste Skridt** | [Tag Udfordringen](instructions/7-Wrap-up.md#4-workshop-challenge) |
 | | |
 
 ## Workshop Oversigt
 
 **Varighed:** 3-4 timer  
-**Niveau:** Begynder til Mellemøvet  
-**Forudsætninger:** Fortrolighed med Azure, AI-koncepter, VS Code & kommandolinjeværktøjer.
+**Niveau:** Begynder til Intermediate  
+**Forudsætninger:** Kendskab til Azure, AI-koncepter, VS Code & kommandolinjeværktøjer.
 
-Dette er en praktisk workshop, hvor du lærer ved at gøre. Når du har gennemført øvelserne, anbefaler vi, at du gennemgår AZD For Begyndere-kurset for at fortsætte din læringsrejse med sikkerhed og produktivitets bedste praksisser.
+Dette er en praktisk workshop, hvor du lærer ved at gøre. Når du har fuldført øvelserne, anbefaler vi at gennemgå AZD For Beginners-kurrikulum for at fortsætte din læringsrejse inden for sikkerhed og produktivitets bedste praksis.
 
 | Tid| Modul  | Mål |
 |:---|:---|:---|
 | 15 min | Introduktion | Sæt scenen, forstå målene |
-| 30 min | Vælg AI Skabelon | Udforsk muligheder og vælg startpakke | 
+| 30 min | Vælg AI Skabelon | Udforsk muligheder og vælg startskabelon | 
 | 30 min | Valider AI Skabelon | Udrul standardløsning til Azure |
-| 30 min | Dekonstruer AI Skabelon | Udforsk struktur og konfiguration |
+| 30 min | Nedbryd AI Skabelon | Udforsk struktur og konfiguration |
 | 30 min | Konfigurer AI Skabelon | Aktivér og prøv tilgængelige funktioner |
-| 30 min | Tilpas AI Skabelon | Tilpas skabelonen til dine behov |
-| 30 min | Nedtag Infrastruktur | Ryd op og frigør ressourcer |
-| 15 min | Afslutning & Næste Skridt | Læringsressourcer, Workshop udfordring |
+| 30 min | Tilpas AI Skabelon | Tilpas skabelonen efter dine behov |
+| 30 min | Nedtag Infrastruktur | Ryd op og frigiv ressourcer |
+| 15 min | Afslutning & Næste Skridt | Læringsressourcer, Workshopudfordring |
 | | |
 
 ## Hvad Du Vil Lære
 
-Tænk på AZD Skabelonen som en lærings-sandbox til at udforske forskellige kapabiliteter og værktøjer til end-to-end udvikling på Microsoft Foundry. Ved slutningen af denne workshop bør du have en intuitiv fornemmelse for forskellige værktøjer og koncepter i denne sammenhæng.
+Tænk på AZD-skabelonen som en læringssandbox til at udforske forskellige muligheder og værktøjer til end-to-end udvikling på Microsoft Foundry. Ved afslutningen af denne workshop bør du have en intuitiv forståelse af forskellige værktøjer og begreber i denne sammenhæng.
 
-| Koncept  | Mål |
+| Begreb  | Mål |
 |:---|:---|
-| **Azure Developer CLI** | Forstå værktøjskommandoer og arbejdsprocesser|
-| **AZD Skabeloner**| Forstå projektstruktur og konfig|
-| **Azure AI Agent**| Udrul & deploy Microsoft Foundry projekt  |
-| **Azure AI Search**| Muliggør kontekst-ingeniørarbejde med agenter |
-| **Observabilitet**| Udforsk tracing, overvågning og evalueringer |
-| **Red Teaming**| Udforsk modstandstest og afbødninger |
+| **Azure Developer CLI** | Forstå værktøjskommandoer og arbejdsflows|
+| **AZD Skabeloner**| Forstå projektstruktur og konfiguration|
+| **Azure AI Agent**| Provisionér & udrul Microsoft Foundry projekt  |
+| **Azure AI Search**| Understøt kontekstteknik med agenter |
+| **Observabilitet**| Udforsk sporing, overvågning og evalueringer |
+| **Red Teaming**| Udforsk modstander-testning og afbødninger |
 | | |
 
 ## Workshop Moduler
@@ -63,7 +63,7 @@ Klar til at komme i gang? Naviger gennem workshopmodulerne:
 
 - [Modul 1: Vælg AI Skabelon](instructions/1-Select-AI-Template.md)
 - [Modul 2: Valider AI Skabelon](instructions/2-Validate-AI-Template.md) 
-- [Modul 3: Dekonstruer AI Skabelon](instructions/3-Deconstruct-AI-Template.md)
+- [Modul 3: Nedbryd AI Skabelon](instructions/3-Deconstruct-AI-Template.md)
 - [Modul 4: Konfigurer AI Skabelon](instructions/4-Configure-AI-Template.md)
 - [Modul 5: Tilpas AI Skabelon](instructions/5-Customize-AI-Template.md)
 - [Modul 6: Nedtag Infrastruktur](instructions/6-Teardown-Infrastructure.md)
@@ -71,7 +71,7 @@ Klar til at komme i gang? Naviger gennem workshopmodulerne:
 
 ## Har du feedback?
 
-Opret en issue på dette repo (mærk den `Workshop`) eller tilslut dig os på [Discord](https://aka.ms/foundry/discord) og post i vores `#get-help` kanal
+Opret en issue på dette repo (tag den med `Workshop`) eller deltag med os på [Discord](https://aka.ms/foundry/discord) og post i vores `#get-help` kanal
 
 ---
 

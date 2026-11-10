@@ -1,26 +1,26 @@
-# YAPILACAK: Bu dosya henüz bu depo sorumlusu tarafından düzenlenmedi
-
-**DEPO SAHİBİ**: Bu ürün/proje için Müşteri Hizmetleri ve Destek (CSS) desteği istiyor musunuz?
-
-- **CSS desteği yok:** Sorunların nasıl bildirileceği ve yardım alınacağı hakkında bilgi içeren bu şablonu doldurun.
-- **Evet, CSS desteği:** [aka.ms/onboardsupport](https://aka.ms/onboardsupport) adresindeki formu doldurun. CSS, sonraki adımları belirlemenize yardımcı olacak.
-- **Emin değil misiniz?** Cevap "Evet"miş gibi bir form doldurun. CSS, karar vermenize yardımcı olur.
-
-*Daha sonra bu ilk başlığı SUPPORT.MD dosyasından kaldırın ve deponuzu yayınlayın.*
-
 # Destek
 
-## Sorunları nasıl bildirebilir ve yardım alabilirsiniz  
+## Kurs sorunları ve soruları
 
-Bu proje, hataları ve özellik taleplerini takip etmek için GitHub Issues kullanır. Yinelenen sorunları önlemek için yeni bir sorun bildirmeden önce mevcut sorunları arayın. Yeni bir sorun için, hatanızı veya özellik talebinizi yeni bir Issue olarak bildirin.
+Bir sorun bildirmeden önce [kurs sorunlarını](https://github.com/microsoft/AZD-for-beginners/issues) arayın. Etkilenen İngilizce dersi, çalıştırdığınız komut, AZD/uzantı sürümleriniz ve hata mesajını ekleyin. Günlüklerden ve ekran görüntülerinden kimlik bilgilerini, belirteçleri, abonelik detaylarını ve kişisel verileri kaldırın.
 
-Bu projeyi kullanma konusunda yardım ve sorular için lütfen **DEPO SORUMLUSU: BURAYA DEPO SAHİPLERİNE VEYA TOPLULUĞA NASIL ULAŞILACAĞINA DAİR TALİMATLAR EKLEYİN. BU BİR STACK OVERFLOW ETİKETİ VEYA BAŞKA BİR KANAL OLABİLİR. İNSANLARA NEREDE YARDIMCI OLACAKSINIZ?**.
+Genel öğrenme soruları için [Azure geliştirici topluluğunu](https://discord.gg/microsoft-azure) kullanın. Topluluk yanıtları garantili bir destek hizmeti değildir.
 
-## Microsoft Destek Politikası  
+## Araç ve hizmet sorunları
 
-Bu **PROJE veya ÜRÜN** için destek, yukarıda listelenen kaynaklarla sınırlıdır.
+Yeniden üretilebilir AZD CLI hatalarını [Azure/azure-dev](https://github.com/Azure/azure-dev/issues) üzerinde bildirin. Azure hizmet olayları veya aboneliğe özel destek için, [Azure portalı](https://portal.azure.com/)nda sunulan destek seçeneklerini kullanın.
+
+## Güvenlik bildirimleri
+
+Özel güvenlik açığı bildirimleri için [SECURITY.md](SECURITY.md) dokümanını izleyin. Gizli bilgiler veya istismar detaylarını halka açık kurs sorunlarında paylaşmayın.
+
+## Microsoft destek politikası
+
+Bu eğitim projesi için destek yukarıda listelenen kaynaklarla sınırlıdır. Kurs örnekleri, üretim desteği taahhüdü içermez.
 
 ---
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

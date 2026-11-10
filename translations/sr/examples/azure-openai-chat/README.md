@@ -1,583 +1,216 @@
-# Microsoft Foundry Models Chat Application
+# Azure OpenAI Chat — Локални CLI и AZD инфраструктура
 
-**Пут учења:** Средњи ⭐⭐ | **Време:** 35-45 минута | **Трошак:** $50-200/month
+**Ниво:** Средњи · **Време:** 35–60 минута укључујући подешавање
 
-Комплетна Microsoft Foundry Models чат апликација деплојована коришћењем Azure Developer CLI (azd). Овај пример демонстрира деплој gpt-4.1, безбедан приступ API-ју и једноставан интерфејс за чет.
+Овај пример обезбеђује **Azure OpenAI ресурс и Key Vault**, затим покреће
+интерактивни Python chat CLI **на вашем уређају**. Не хостује веб апликацију
+или Container App. Подразумевани модел је `gpt-4.1`, верзија `2025-04-14`, са
+`GlobalStandard` капацитетом распореда 20. Проверите тренутну доступност и квоту у
+изабраном региону пре обезбеђивања; датуми животног циклуса модела могу се променити.
 
-## 🎯 Шта ћете научити
+## Циљеви учења
 
-- Деплој Microsoft Foundry Models сервиса са gpt-4.1 моделом
-- Безбедно чување OpenAI API кључева у Key Vault-у
-- Изградња једноставног интерфејса за чет у Python-у
-- Праћење коришћења токена и трошкова
-- Имплементација ограничења брзине и руковања грешкама
-
-## 📦 Шта је укључено
-
-✅ **Microsoft Foundry Models Service** - деплој модела gpt-4.1  
-✅ **Python Chat App** - Једноставан командно-линијски интерфејс за чет  
-✅ **Key Vault Integration** - Безбедно чување API кључева  
-✅ **ARM Templates** - Комплетна инфраструктура као код  
-✅ **Cost Monitoring** - Праћење коришћења токена  
-✅ **Rate Limiting** - Превенција исцрпљивања квота  
-
-## Architecture
+- Обезбедити инфраструктуру модела помоћу Bicep и azd.
+- Приступити API кључу из Key Vault без стављања у излазне резултате распореда.
+- Слање Chat Completions захтева и одржавање историје разговора.
+- Интерпретирати број токена и ограничења процена трошкова.
 
 ```mermaid
-graph TD
-    App[Питхон чет апликација<br/>Локално/Облак<br/>Командни интерфејс<br/>Историја разговора<br/>Праћење употребе токена] -- "HTTPS (API кључ)" --> Foundry[Мајкрософт Фаундри Сервис модела<br/>gpt-4.1 модел<br/>20K токена/мин капацитет<br/>Резервно пребацивање за више региона]
-    Foundry --> KV[Азуре Кеј Волт<br/>ОпенАИ API кључ<br/>УРЛ крајња тачка]
-    Foundry -. Управљани идентитет .-> KV
+flowchart LR
+    Deploy[azd provision + Bicep] --> AOAI[Azure OpenAI deployment]
+    Deploy --> KV[Key Vault stores endpoint + API key]
+    Shell[Your authenticated Azure CLI] -->|Read secret into local environment| KV
+    Chat[Local Python chat CLI] -->|HTTPS + API key| AOAI
 ```
 
-## Претпослови
+У овом примеру нема интеграције управљаног идентитета у време извршавања, мулти-регионалног феиловера,
+прилагођеног ограничивача брзине, стриминг режима или хостираног рачунарства. OpenAI SDK
+изводи до два поновна покушаја за грешке које се могу поновити; CLI пријављује преостале грешке.
 
-### Потребно
+## Захтеви
 
-- **Azure Developer CLI (azd)** - [Водич за инсталацију](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** са приступом OpenAI-у - [Захтев за приступ](https://aka.ms/oai/access)
-- **Python 3.9+** - [Инсталирајте Python](https://www.python.org/downloads/)
-
-### Проверите предуслове
+- Тренутна стабилна верзија [azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (објављена верзија у време прегледа: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- Python **3.10+** (препоручује се 3.11) и виртуелно окружење.
+- Azure претплата са дозволама за креирање Cognitive Services и Key Vault
+  ресурса, распореда модела и читања тајни из складишта.
+- Регионална доступност и `GlobalStandard` квота за `gpt-4.1`. Захтеви за приступ
+  зависе од претплате и функције; не постоји гарантовано време одобрења.
 
 ```bash
-# Проверите верзију azd (потребна је 1.5.0 или новија)
 azd version
-
-# Проверите да ли сте пријављени у Azure
+az version
+python --version
 azd auth login
-
-# Проверите верзију Питона
-python --version  # или python3 --version
-
-# Проверите приступ OpenAI (проверите у Azure порталу)
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --location eastus
+az login
 ```
 
-> **⚠️ Важно:** Microsoft Foundry Models захтева одобрење апликације. Ако нисте поднели захтев, посетите [aka.ms/oai/access](https://aka.ms/oai/access). Одобрење обично траје 1-2 радна дана.
+Ово су посебне аутентификационе сесије. Изаберите исту претплату у оба
+алата пре покретања команди испод.
 
-## ⏱️ Временска линија деплоја
+## Брзи почетак (Bash)
 
-| Фаза | Трајање | Шта се дешава |
-|-------|----------|--------------|
-| Провера предуслова | 2-3 минута | Потврдите доступност OpenAI квоте |
-| Деплој инфраструктуре | 8-12 минута | Креирање OpenAI, Key Vault, деплој модела |
-| Конфигурисање апликације | 2-3 минута | Постављање окружења и зависности |
-| **Укупно** | **12-18 минута** | Спремно за чет са gpt-4.1 |
-
-**Напомена:** Деплој OpenAI-а први пут може трајати дуже због провизије модела.
-
-## Брзо покретање
+Покрените из корена репозиторијума:
 
 ```bash
-# Идите до примера
 cd examples/azure-openai-chat
-
-# Иницијализујте окружење
 azd env new myopenai
-
-# Разместите све (инфраструктуру + конфигурацију)
-azd up
-# Од вас ће бити затражено да:
-# 1. Изаберите Azure претплату
-# 2. Изаберите локацију где је OpenAI доступан (нпр. eastus, eastus2, westus)
-# 3. Сачекајте 12-18 минута за распоређивање
-
-# Инсталирајте Python зависности
-pip install -r requirements.txt
-
-# Почните да ћаскате!
-python chat.py
+azd provision
 ```
 
-**Очекујани излаз:**
-```
-🤖 Microsoft Foundry Models Chat Application
-Connected to: gpt-4.1 (eastus)
-Type your message (or 'quit' to exit)
+Изаберите подржани регион. Обезбеђивање креира ресурсну групу, OpenAI налог,
+распоређивање модела, Key Vault и `openai-endpoint`/`openai-api-key` тајне.
+Нема **услуга за распоређивање** у `azure.yaml`.
 
-You: Hello! Tell me about Microsoft Foundry Models.
-Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's powerful language models including gpt-4.1, GPT-3.5-Turbo, and Embeddings...
-
-[Tokens used: 145 | Estimated cost: $0.0044]
-```
-
-## ✅ Потврдите деплој
-
-### Корак 1: Проверите Azure ресурсе
+Учитајте не-тајне излазе и преузмите тајну у ваш тренутни шел:
 
 ```bash
-# Прикажи распоређене ресурсе
-azd show
-
-# Очекује се да ће излаз приказати:
-# - OpenAI услуга: (име ресурса)
-# - Складиште кључева: (име ресурса)
-# - Распоређивање: gpt-4.1
-# - Локација: eastus (или ваш изабрани регион)
-```
-
-### Корак 2: Тестирајте OpenAI API
-
-```bash
-# Добиј OpenAI ендпоинт и кључ
-OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
-OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
-
-# Тестирај API позив
-curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
-  -H "Content-Type: application/json" \
-  -H "api-key: $OPENAI_KEY" \
-  -d '{
-    "messages": [{"role": "user", "content": "Say hello!"}],
-    "max_tokens": 50
-  }'
-```
-
-**Очекивани одговор:**
-```json
-{
-  "choices": [
-    {
-      "message": {
-        "role": "assistant",
-        "content": "Hello! How can I assist you today?"
-      }
-    }
-  ],
-  "usage": {
-    "prompt_tokens": 8,
-    "completion_tokens": 9,
-    "total_tokens": 17
-  }
-}
-```
-
-### Корак 3: Потврдите приступ Key Vault-у
-
-```bash
-# Наведи тајне у Key Vault-у
-KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
-
-az keyvault secret list \
-  --vault-name $KV_NAME \
-  --query "[].name" \
-  --output table
-```
-
-**Очекујани секрети:**
-- `openai-api-key`
-- `openai-endpoint`
-
-**Критеријуми успеха:**
-- ✅ OpenAI сервис деплојован са gpt-4.1
-- ✅ API позив враћа важећи одговор
-- ✅ Секрети сачувани у Key Vault-у
-- ✅ Праћење коришћења токена функционише
-
-## Структура пројекта
-
-```
-azure-openai-chat/
-├── README.md                   ✅ This guide
-├── azure.yaml                  ✅ AZD configuration
-├── infra/                      ✅ Infrastructure as Code
-│   ├── main.bicep             ✅ Main Bicep template
-│   ├── main.parameters.json   ✅ Parameters
-│   └── openai.bicep           ✅ OpenAI resource definition
-├── src/                        ✅ Application code
-│   ├── chat.py                ✅ Chat interface
-│   ├── config.py              ✅ Configuration loader
-│   └── requirements.txt       ✅ Python dependencies
-└── .gitignore                  ✅ Git ignore rules
-```
-
-## Функције апликације
-
-### Chat Interface (`chat.py`)
-
-Чет апликација укључује:
-
-- **Историја разговора** - Одржава контекст кроз поруке
-- **Бројање токена** - Праћење коришћења и процена трошкова
-- **Руковање грешкама** - Грациозно руковање лимитима и API грешкама
-- **Процењивање трошкова** - Рачунање трошкова по поруци у реалном времену
-- **Подршка за стриминг** - Опционо стримовање одговора
-
-### Команде
-
-Док четујете, можете користити:
-- `quit` или `exit` - Завршите сесију
-- `clear` - Очистите историју разговора
-- `tokens` - Прикажи укупно коришћење токена
-- `cost` - Прикажи процењени укупни трошак
-
-### Конфигурација (`config.py`)
-
-Учитава конфигурацију из променљивих окружења:
-```python
-AZURE_OPENAI_ENDPOINT  # Из Key Vault-а
-AZURE_OPENAI_API_KEY   # Из Key Vault-а
-AZURE_OPENAI_MODEL     # Подразумевано: gpt-4.1
-AZURE_OPENAI_MAX_TOKENS # Подразумевано: 800
-```
-
-## Примери употребе
-
-### Основни чет
-
-```bash
-python chat.py
-```
-
-### Чет са прилагођеним моделом
-
-```bash
-export AZURE_OPENAI_MODEL=gpt-35-turbo
-python chat.py
-```
-
-### Чет са стримингом
-
-```bash
-python chat.py --stream
-```
-
-### Пример разговора
-
-```
-You: Explain Microsoft Foundry Models Service in 3 sentences.
-Assistant: Microsoft Foundry Models Service is Microsoft Azure's cloud platform offering 
-that provides access to OpenAI's powerful language models. It enables developers 
-to integrate capabilities like gpt-4.1 into their applications with enterprise-grade 
-security and compliance. The service includes features for content filtering, 
-abuse monitoring, and responsible AI practices.
-
-[Tokens used: 89 | Estimated cost: $0.0027]
-
-You: What models are available?
-Assistant: Microsoft Foundry Models Service offers several model families including gpt-4.1 
-(most capable), GPT-3.5-Turbo (faster and cost-effective), and Embeddings models 
-for vector search. Each model has different capabilities, pricing, and token limits.
-
-[Tokens used: 67 | Estimated cost: $0.0020]
-
-Total session: 156 tokens | $0.0047
-```
-
-## Управљање трошковима
-
-### Цена по токену (gpt-4.1)
-
-| Модел | Улаз (по 1К токена) | Излаз (по 1К токена) |
-|-------|----------------------|------------------------|
-| gpt-4.1 | $0.03 | $0.06 |
-| GPT-3.5-Turbo | $0.0015 | $0.002 |
-
-### Процењени месечни трошкови
-
-На основу шаблона коришћења:
-
-| Ниво коришћења | Поруке/дан | Токени/дан | Месечни трошак |
-|-------------|--------------|------------|--------------|
-| **Лако** | 20 порука | 3,000 токена | $3-5 |
-| **Умерено** | 100 порука | 15,000 токена | $15-25 |
-| **Интензивно** | 500 порука | 75,000 токена | $75-125 |
-
-**Основни трошак инфраструктуре:** $1-2/month (Key Vault + минимални рачунарски ресурси)
-
-### Савети за оптимизацију трошкова
-
-```bash
-# 1. Користите GPT-3.5-Turbo за једноставније задатке (20 пута јефтиније)
-export AZURE_OPENAI_MODEL=gpt-35-turbo
-
-# 2. Смањите максималан број токена за краће одговоре
-export AZURE_OPENAI_MAX_TOKENS=400
-
-# 3. Пратите употребу токена
-python chat.py --show-tokens
-
-# 4. Подесите упозорења о буџету
-az consumption budget create \
-  --budget-name "openai-budget" \
-  --amount 50 \
-  --time-grain Monthly
-```
-
-## Надгледање
-
-### Погледајте коришћење токена
-
-```bash
-# У Azure порталу:
-# OpenAI ресурс → Метрике → Изаберите "Трансакција токена"
-
-# Или преко Azure CLI:
-az monitor metrics list \
-  --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
-  --metric "TokenTransaction" \
-  --start-time $(date -u -d '1 hour ago' '+%Y-%m-%dT%H:%M:%S') \
-  --interval PT1M
-```
-
-### Погледајте API логове
-
-```bash
-# Стримовање дијагностичких логова
-az monitor diagnostic-settings create \
-  --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
-  --name openai-logs \
-  --logs '[{"category": "Audit", "enabled": true}]' \
-  --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
-
-# Логови упита
-az monitor log-analytics query \
-  --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
-  --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
-```
-
-## Решавање проблема
-
-### Проблем: „Приступ одбијен” грешка
-
-**Симптоми:** 403 Forbidden при позиву API-ја
-
-**Решења:**
-```bash
-# 1. Проверите да ли је приступ OpenAI-у одобрен
-az cognitiveservices account show \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
-
-# 2. Проверите да ли је АПИ кључ исправан
-azd env get-value AZURE_OPENAI_API_KEY
-
-# 3. Проверите формат URL-а крајње тачке
-azd env get-value AZURE_OPENAI_ENDPOINT
-# Треба да буде: https://[name].openai.azure.com/
-```
-
-### Проблем: „Прекорачен лимит захтева”
-
-**Симптоми:** 429 Too Many Requests
-
-**Решења:**
-```bash
-# 1. Проверите тренутну квоту
-az cognitiveservices account deployment show \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-4.1
-
-# 2. Затражите повећање квоте (ако је потребно)
-# Идите на Azure портал → OpenAI ресурс → Квоте → Затражите повећање
-
-# 3. Имплементирајте логику поновних покушаја (већ у chat.py)
-# Апликација аутоматски поново покушава са експоненцијалним повећањем времена чекања између покушаја
-```
-
-### Проблем: „Модел није пронађен”
-
-**Симптоми:** 404 грешка за деплој
-
-**Решења:**
-```bash
-# 1. Прикажите доступна размештања
-az cognitiveservices account deployment list \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
-
-# 2. Проверите име модела у окружењу
-echo $AZURE_OPENAI_MODEL
-
-# 3. Промените у исправно име размештања
-export AZURE_OPENAI_MODEL=gpt-4.1  # или gpt-35-turbo
-```
-
-### Проблем: Висока латенција
-
-**Симптоми:** Споро време одзива (>5 секунди)
-
-**Решења:**
-```bash
-# 1. Проверите регионално кашњење
-# Разместите у регион најближи корисницима
-
-# 2. Смањите max_tokens за брже одговоре
-export AZURE_OPENAI_MAX_TOKENS=400
-
-# 3. Користите стримовање за боље корисничко искуство
-python chat.py --stream
-```
-
-## Најбоље праксе безбедности
-
-### 1. Заштитите API кључеве
-
-```bash
-# Никада не комитујте кључеве у систем за контролу верзија
-# Користите Key Vault (већ конфигурисан)
-
-# Редовно мењајте кључеве
-az cognitiveservices account keys regenerate \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --key-name key1
-```
-
-### 2. Имплементирајте филтрирање садржаја
-
-```python
-# Microsoft Foundry Models укључује уграђено филтрирање садржаја
-# Конфигуришите у Azure порталу:
-# OpenAI ресурс → Филтри садржаја → Креирај прилагођени филтар
-
-# Категорије: Мржња, Сексуални садржај, Насиље, Самоповређивање
-# Нивоа: Ниско, Средње, Високо филтрирање
-```
-
-### 3. Користите Managed Identity (у продукцији)
-
-```bash
-# За продукцијска распоређивања користите управљани идентитет
-# уместо API кључева (захтева хостовање апликације на Azure)
-
-# Ажурирајте infra/openai.bicep да укључи:
-# identity: { type: 'SystemAssigned' }
-```
-
-## Развој
-
-### Покрените локално
-
-```bash
-# Инсталирајте зависности
-pip install -r src/requirements.txt
-
-# Подесите променљиве окружења
-export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
-export AZURE_OPENAI_API_KEY="your-api-key"
-export AZURE_OPENAI_MODEL="gpt-4.1"
-
-# Покрените апликацију
+export AZURE_OPENAI_ENDPOINT="$(azd env get-value AZURE_OPENAI_ENDPOINT)"
+export AZURE_OPENAI_MODEL="$(azd env get-value AZURE_OPENAI_MODEL)"
+KV_NAME="$(azd env get-value AZURE_KEY_VAULT_NAME)"
+export AZURE_OPENAI_API_KEY="$(az keyvault secret show \
+  --vault-name "$KV_NAME" --name openai-api-key --query value --output tsv)"
+
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r src/requirements.txt
 python src/chat.py
 ```
 
-### Покрените тестове
+У PowerShell активирајте са `.\.venv\Scripts\Activate.ps1` и доделите околинске
+променљиве са `$env:AZURE_OPENAI_ENDPOINT = azd env get-value AZURE_OPENAI_ENDPOINT`
+(и слично за модел). Преузмите API кључ користећи
+`$env:AZURE_OPENAI_API_KEY = az keyvault secret show --vault-name $KV_NAME --name openai-api-key --query value -o tsv`.
+Подесите `$KV_NAME = azd env get-value AZURE_KEY_VAULT_NAME` прво.
 
-```bash
-# Инсталирајте зависности за тестирање
-pip install pytest pytest-cov
+Не штампајте, не комитујте и не лепите API кључ у извештаје о проблемима. CLI чита
+променљиве окружења процеса; **не** преузима тајне из Key Vault или учитава `.env` фајлове.
+`config.py` проверава крајњу тачку, лимит токена и температуру приликом покретања.
 
-# Покрените тестове
-pytest tests/ -v
+Очекујани излаз (садржај и коришћење варирају):
 
-# Са покривеношћу
-pytest tests/ --cov=src --cov-report=html
+```text
+Azure OpenAI Chat Application
+Model: gpt-4.1
+...
+You: Say hello in one sentence.
+Assistant: Hello! How can I help you today?
+[Tokens: ... | Cost: $...]
 ```
 
-### Ажурирајте деплој модела
+Команде: `stats` приказује укупно, `clear` чисти историју разговора, и
+`quit`/`exit` завршава сесију. Нема `--stream`, `--show-tokens`, `tokens`,
+или `cost` команда.
+
+## Проверите распоређивање
+
+Након учитавања променљивих окружења:
 
 ```bash
-# Поставити другу верзију модела
-az cognitiveservices account deployment create \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-35-turbo \
-  --model-name gpt-35-turbo \
-  --model-version "0613" \
-  --model-format OpenAI \
-  --sku-capacity 20 \
-  --sku-name "Standard"
+curl --fail-with-body \
+  "${AZURE_OPENAI_ENDPOINT%/}/openai/deployments/${AZURE_OPENAI_MODEL}/chat/completions?api-version=2024-10-21" \
+  -H "Content-Type: application/json" \
+  -H "api-key: $AZURE_OPENAI_API_KEY" \
+  -d '{"messages":[{"role":"user","content":"Say hello!"}],"max_tokens":50}'
+
+az keyvault secret list --vault-name "$KV_NAME" --query "[].name" -o table
 ```
 
-## Чишћење
+Успешно: API враћа HTTP 200 са `choices[0].message.content` и `usage`;
+складиште приказује `openai-api-key` и `openai-endpoint`. Само успешно ARM распоређивање
+не потврђује закључивање.
+
+## Фајлови и конфигурација
+
+```text
+azure.yaml                         # Infrastructure-only AZD project
+infra/main.bicep                   # Subscription deployment
+infra/main.parameters.json         # Environment, location, principal ID
+infra/resources/openai.bicep       # Account + model
+infra/resources/keyvault.bicep     # Vault + deploying user's secret access policy
+infra/resources/secrets.bicep      # Writes secrets, no key output
+src/chat.py                        # Interactive CLI
+src/config.py                      # Environment validation
+src/requirements.txt               # Python packages
+```
+
+Да бисте променили обезбеђени модел/верзију/капацитет, измените подразумеване вредности у
+`infra/main.bicep` и покрените `azd provision`. Подешавање `AZURE_OPENAI_MODEL` у вашем
+шелу само бира **постојећи назив распореда**; не распоређује други модел.
+
+| Рунтиме променљива | Подразумевано / извор |
+|---|---|
+| `AZURE_OPENAI_ENDPOINT` | Обавезно; azd не-тајни излаз |
+| `AZURE_OPENAI_API_KEY` | Обавезно; преузмите из Key Vault |
+| `AZURE_OPENAI_MODEL` | `gpt-4.1`; Azure назив распореда |
+| `AZURE_OPENAI_MAX_TOKENS` | 800 (опсег валидације 1–4096) |
+| `AZURE_OPENAI_TEMPERATURE` | 0.7 (опсег 0–2) |
+| `AZURE_OPENAI_INPUT_PRICE_PER_1K` | 0.002 USD; илустративна стопа за некењирани улаз |
+| `AZURE_OPENAI_OUTPUT_PRICE_PER_1K` | 0.008 USD; илустративна стопа за излаз |
+
+## Трошкови и безбедносна ограничења
+
+Приказ трошкова је **приближан**, а не Azure наплата. Множи коришћење API токена
+са конфигурисаним стопама и не узима у обзир попусте за кеширан улаз,
+регионалне/СКУ разлике, порезе, промене цена или неуспеле/поновљене позиве.
+Пондеришите **обе стопе** када користите други модел или СКУ и проверите тренутне
+[Azure OpenAI цене](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/).
+
+За илустрацију, 100 захтева са по 500 некењираних улазних и 200 излазних токена
+по подразумеваним стопама кошта `100 × (500/1000 × .002 + 200/1000 × .008) = $0.26`.
+Операције и складиштење Key Vault-а имају посебне трошкове. Не постоји фиксна накнада од 50$ месечно
+за овај локални CLI и у предложку нема хостираног рачунарства.
+
+Складиште користи приступну политику за примарног учесника распореда; ово није пример RBAC или
+апликације с управљаним идентитетом. Јавне крајње тачке и аутентификација API кључем
+служе за едукацију. Ограничите дозволе и додајте одговарајуће контроле идентитета/мреже
+пре прилагођавања за производњу.
+
+## Практичне вежбе
+
+### 1. Потврдите контекст и ресетујте га
+
+**Почетак:** покренути CLI. **Циљ:** посматрати историју.
+Реците „Запамти реч cedar,“ затим питајте „Коју реч сам те замолио да запамтиш?“
+Покрените `stats`; два успешна корака треба да рачунају као две размењене поруке.
+Покрените `clear` и `stats`; размењене поруке треба да буду нула (укупни број токена остаје).
+Тачна реченица модела није детерминистичка.
+
+### 2. Промените лимит одговора
+
+**Почетак:** напустите CLI, задржавајући исти шел.
+Покрените `export AZURE_OPENAI_MAX_TOKENS=100`, поново покрените `python src/chat.py`, и затражите
+кратко објашњење azd. Проверите да ли банер показује 100.
+Вратите са `unset AZURE_OPENAI_MAX_TOKENS`. Мањи лимит одговора не
+смањује већ послате токене у историји.
+
+### Чести проблеми
+
+- **Недостајуће променљиве окружења:** обезбеђивање не експортује вредности у шел;
+  поновите кораке за извоз. Нови терминал их поново треба.
+- **403 читање Key Vault-а:** проверите претплату/пријаву Azure CLI-а и примарног
+  учесника у политици приступа складишту. Промене политика могу потрајати.
+- **404 закључивање:** проверите назив распореда, крајњу тачку и статус распореда.
+- **429 закључивање:** сачекајте да се ограничења брзине ресетују; провјерите регионалну квоту за модел.
+  CLI уклања неуспеле кораке из историје тако да поновни покушај не дуплира поруке.
+- **Дужина контекста:** пример не скраћује дуге разговоре; користите `clear`.
+- **Модел није доступан/пензионисан:** консултујте тренутну доступност модела и ажурирајте
+  модел/верзију/СКУ заједно; верзија API-ја и верзија модела су различита подешавања.
+
+## Чишћење и следећи кораци
 
 ```bash
-# Избриши све Azure ресурсе
-azd down --force --purge
-
-# Ово уклања:
-# - OpenAI услуга
-# - Key Vault (са 90-дневним меком брисањем)
-# - Група ресурса
-# - Сва размештања и конфигурације
+azd down
+unset AZURE_OPENAI_API_KEY
 ```
 
-## Следећи кораци
+Чување Key Vault-а после меких брисања је седам дана; чишћење захтева посебне дозволе.
+Нема посвећеног тестног пакета; немојте покретати непостојећу команду `pytest tests/`.
+Додајте имитацију API тестова пре проширења кода.
 
-### Проширите овај пример
-
-1. **Додајте веб интерфејс** - Направите React/Vue фронтенд
-   ```bash
-   # Додај фронтенд сервис у azure.yaml
-   # Распореди на Azure Static Web Apps
-   ```
-
-2. **Имплементирајте RAG** - Додајте претрагу докумената помоћу Azure AI Search
-   ```python
-   # Интегришите Azure AI Search
-   # Отпремите документе и креирајте векторски индекс
-   ```
-
-3. **Додајте позив функција** - Омогућите коришћење алата
-   ```python
-   # Дефинишите функције у chat.py
-   # Дозволите gpt-4.1 да позива спољашње АПИ-је
-   ```
-
-4. **Подршка више модела** - Деплојујте више модела
-   ```bash
-   # Додајте gpt-35-turbo и моделе уграђивања
-   # Имплементирајте логику рутирања модела
-   ```
-
-### Повезани примери
-
-- **[Retail Multi-Agent](../retail-scenario.md)** - Напредна мулти-агент архитектура
-- **[Database App](../../../../examples/database-app)** - Додајте перзистентно складиште
-- **[Container Apps](../../../../examples/container-app)** - Деплој као сервис у контејнерима
-
-### Ресурси за учење
-
-- 📚 [AZD For Beginners Course](../../README.md) - Главна почетна страница курса
-- 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Званична документација
-- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - Детаљи API-ја
-- 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Најбоље праксе
-
-## Додатни ресурси
-
-### Документација
-- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Комплетан водич
-- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Могућности модела
-- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Безбедносне функције
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd референца
-
-### Туторијали
-- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Први деплој
-- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Изградња чет апликација
-- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Напредне функције
-
-### Алатке
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Веб-базирано окружење за тестирање
-- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Побољшавање упита
-- **[Token Calculator](https://platform.openai.com/tokenizer)** - Процените коришћење токена
-
-### Заједница
-- **[Azure AI Discord](https://discord.gg/azure)** - Помоћ од заједнице
-- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Форум за питања и одговоре
-- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Најновија ажурирања
-
----
-
-**🎉 Успешно!** Деплојовали сте Microsoft Foundry Models и изградили радну чет апликацију. Почните да истражујете могућности gpt-4.1 и експериментишете са различитим упитима и случајевима употребе.
-
-**Питања?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) или погледајте [FAQ](../../resources/faq.md)
-
-**Упозорење о трошковима:** Запамтите да покренете `azd down` када завршите тестирање да бисте избегли сталне наплате (~$50-100/month за активно коришћење).
+[Примери контејнера](../../../../examples/container-app) · [Шаблон архитектуре за трговину](../retail-scenario.md) ·
+[Почетна страница курса](../../README.md) · [Пријавите проблем](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

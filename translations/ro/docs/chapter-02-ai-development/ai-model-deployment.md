@@ -1,74 +1,57 @@
-# Implementarea Modelului AI cu Azure Developer CLI
+# Implementarea modelelor AI cu Azure Developer CLI
 
-**Navigare Capitol:**
+**Navigare capitole:**
 - **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
 - **📖 Capitolul curent**: Capitolul 2 - Dezvoltare AI-First
-- **⬅️ Anterior**: [Integrarea Microsoft Foundry](microsoft-foundry-integration.md)
+- **⬅️ Anterior**: [Agenți AI](agents.md)
 - **➡️ Următor**: [Laborator AI Workshop](ai-workshop-lab.md)
 - **🚀 Capitolul următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
 
-Acest ghid oferă instrucțiuni complete pentru implementarea modelelor AI folosind șabloane AZD, acoperind totul de la selecția modelului până la modele de implementare în producție.
+Acest ghid oferă instrucțiuni complete pentru implementarea modelelor AI folosind șabloanele AZD, acoperind totul de la selectarea modelului până la tiparele de implementare în producție.
 
-> **Notă de validare (2026-07-13):** Fluxul de lucru AZD din acest ghid a fost verificat cu `azd` `1.27.1`. Pentru implementările AI care durează mai mult decât fereastra de implementare implicită a serviciului, versiunile curente AZD suportă `azd deploy --timeout <seconds>`.
+> **Revizuire lansare (2026-11-04):** Modificările CLI aferente au fost revizuite față de `azd` `1.37.2`; disponibilitatea modelului, versiunile și cota sunt în continuare dependente de regiune și abonament. `azd deploy --timeout <seconds>` controlează fereastra de implementare a serviciului, nu este o garanție a activării agentului. Consultați [notele de lansare actuale și ghidul de migrare AI](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
 ## Cuprins
 
-- [Strategia de Selecție a Modelului](#strategia-de-selecție-a-modelului)
-- [Configurarea AZD pentru Modele AI](#configurarea-azd-pentru-modele-ai)
-- [Modele de Implementare](#modele-de-implementare)
-- [Managementul Modelului](#managementul-modelului)
-- [Considerații de Producție](#considerații-de-producție)
-- [Monitorizare și Observabilitate](#monitorizare-și-observabilitate)
+- [Strategia de selecție a modelului](#model-selection-strategy)
+- [Configurarea AZD pentru modele AI](#azd-configuration-for-ai-models)
+- [Tipare de implementare](#deployment-patterns)
+- [Managementul modelului](#model-management)
+- [Considerații pentru producție](#production-considerations)
+- [Monitorizare și observabilitate](#monitoring-and-observability)
 
-## Strategia de Selecție a Modelului
+## Strategia de selecție a modelului
 
-### Modele Microsoft Foundry
+### Modele Azure OpenAI în Microsoft Foundry
 
 Alege modelul potrivit pentru cazul tău de utilizare:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+Declară implementările modelelor în Bicep (mai jos), nu în setări arbitrare `services.*.config.AZURE_OPENAI_MODELS`. AZD nu interpretează astfel de setări ca o listă de resurse model. Un `project` al unui serviciu indică sursa aplicației, nu directorul sau `infra/`.
 
-### Planificarea Capacității Modelului
+Exemplele utilizează versiunea publicată `gpt-4.1-mini` **`2025-04-14`** și versiunea embedding **`1`**. Confirmă că versiunea modelului și SKU-ul de implementare sunt acceptate în regiunea/contul tău țintă înainte de aprovizionare.
 
-| Tip Model | Caz de Utilizare | Capacitate Recomandată | Considerații de Cost |
+### Planificarea capacității modelului
+
+| Tip model | Caz de utilizare | Cerere ilustrativă de tokeni | Considerații de cost |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, Întrebări & Răspunsuri | 10-50 TPM | Rentabil pentru majoritatea sarcinilor |
-| gpt-4.1 | Raționamente complexe | 20-100 TPM | Cost mai ridicat, folosit pentru funcții premium |
-| text-embedding-3-large | Căutare, RAG | 30-120 TPM | Alegerea standard puternică pentru căutare și recuperare semantică |
-| Whisper | Transcriere voce-text | 10-50 TPM | Sarcini de procesare audio |
+| gpt-4.1-mini | Chat, Întrebări & Răspunsuri | 10,000-50,000 TPM | Marchează costul și calitatea pentru sarcina ta |
+| gpt-4.1 | Sarcini complexe | 20,000-100,000 TPM | Evaluează câștigurile de calitate față de costul tokenilor |
+| text-embedding-3-large | Căutare, RAG | 30,000-120,000 TPM | Ia în calcul atât ingestia cât și traficul de interogări |
+| Whisper | Transcriere audio-text | Planifică folosind durata audio și limitele de cereri | Nu aplica o formulă TPM pentru modelele text |
 
-## Configurarea AZD pentru Modele AI
+TPM înseamnă tokeni pe minut. Pentru aceste implementări Standard de text, ARM `sku.capacity` este în unități de **1,000-TPM**, nu TPM individuali (capacitatea `10` înseamnă 10,000 TPM). Raporturile RPM-la-TPM variază în funcție de model/tip implementare; verifică ambele limite contra [documentației de cotă](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic). Aceste intervale sunt exemple, nu recomandări de dimensiune.
 
-### Configurarea Șablonului Bicep
+## Configurarea AZD pentru modele AI
+
+### Configurarea șabloanelor Bicep
 
 Creează implementări de modele prin șabloane Bicep:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,21 +108,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### Variabile de Mediu
+Acesta este un exemplu de **infrastructură de dezvoltare** pe grup de resurse, nu un șablon complet de aplicație AZD. Contul permite accesul la rețeaua publică și necesită autentificare Entra ID/RBAC (`Cognitive Services OpenAI User` pentru solicitanti). Producția necesită punctul final privat, DNS și conectivitatea aplicației descrise în Capitolul 8. AZD necesită, de asemenea, un șablon principal/hartă de parametri și resurse de găzduire a aplicației; folosește un exemplu funcțional pentru o implementare completă.
+
+### Variabile de mediu
 
 Configurează mediul aplicației tale:
 
 ```bash
-# Configurare .env
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Modele de Implementare
+Acestea sunt nume definite de aplicație; integrează-le în configurarea gazdei tale. Endpoint-ul Azure OpenAI v1 folosit mai jos pentru verificarea stării nu necesită parametrul de interogare `api-version` depășit; clienții mai vechi `AzureOpenAI` îl cer, deci urmează generarea API folosită de aplicația ta.
 
-### Model 1: Implementare pe o singură regiune
+## Tipare de implementare
+
+### Tipar 1: Implementare într-o singură regiune
 
 ```yaml
 # azure.yaml - Single region
@@ -146,20 +133,21 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Cel mai bun pentru:
+Ideal pentru:
 - Dezvoltare și testare
-- Aplicații pe o singură piață
-- Optimizarea costurilor
+- Aplicații pentru o singură piață
+- Optimizare costuri
 
-### Model 2: Implementare multi-regiune
+### Tipar 2: Implementare multi-regiune
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,14 +157,18 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Cel mai bun pentru:
+Proprietățile contului/SKU omise trebuie furnizate; acest fragment nu este implementabil așa cum este scris. Implementează modelele în fiecare cont și implementează rutare, failover și controale de rezidență a datelor separat.
+
+Ideal pentru:
 - Aplicații globale
 - Cerințe de disponibilitate ridicată
-- Distribuția încărcării
+- Distribuție a încărcăturii
 
-### Model 3: Implementare hibridă
+### Tipar 3: Implementare hibridă
 
-Combină Modele Microsoft Foundry cu alte servicii AI:
+Combină modelele Microsoft Foundry cu alte servicii AI:
+
+Următoarele fragmente presupun că numele și `location` sunt furnizate de șablonul conținător.
 
 ```bicep
 // Hybrid AI services
@@ -205,18 +197,18 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Managementul Modelului
+## Managementul modelului
 
-### Controlul Versiunilor
+### Controlul versiunilor
 
-Urmărește versiunile modelului în configurația ta AZD:
+Urmărește versiunile modelului în configurația aplicației sau IaC. Acest JSON este un **exemplu definit de aplicație**, nu un schema model încorporată AZD; trebuie implementat și implementat un fallback explicit:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -227,27 +219,27 @@ Urmărește versiunile modelului în configurația ta AZD:
 }
 ```
 
-### Actualizări Model
+### Actualizări ale modelului
 
-Folosește hook-uri AZD pentru actualizările modelului:
+Folosește un hook AZD pentru o verificare read-only a disponibilității, apoi actualizează IaC și aprovizionarea:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# Dacă implementarea durează mai mult decât timpul de așteptare implicit
-azd deploy --timeout 1800
 ```
+
+Rulează `azd up` **în afara** hook-ului pentru a aplica infrastructura modificată a modelului și codul de implementare. Niciodată să nu apelezi `azd deploy` dintr-un hook `predeploy`: declanșează recursiv același hook. `azd deploy --timeout 1800` extinde timeout-ul implementării aplicației; nu actualizează resursele Bicep.
 
 ### Testare A/B
 
-Implementarea simultană a mai multor versiuni de model:
+Resursa ilustrativă de mai jos selectează un nume de implementare și capacitate; creează **o singură** implementare, nu un test A/B. Pentru un experiment real, aprovizionează două resurse distincte de implementare, direcționează o fracțiune controlată a cererilor către fiecare și compară calitatea, latența și costul. Presupune `openAi` din exemplul contului:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -269,14 +261,15 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Considerații de Producție
+## Considerații pentru producție
 
-### Planificarea Capacității
+### Planificarea capacității
 
-Calculează capacitatea necesară în funcție de tiparele de utilizare:
+Calculează capacitatea necesară pe baza modelelor de utilizare:
 
 ```python
-# Exemplu de calcul al capacității
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# Exemplu de utilizare
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Configurarea Auto-scalării
+Ieșire așteptată: `Required capacity: 9100 TPM`. Cu unități de capacitate 1,000-TPM, rotunjește în sus la cel puțin `10`, apoi verifică estimările specifice RPM și limitele de rată a serviciului (inclusiv bugetul de ieșire solicitat). Această estimare a cererii de tokeni NU garantează evitarea throttling-ului.
+
+### Configurarea auto-scalării
 
 Configurează auto-scalarea pentru Container Apps:
+
+**Resursă parțială:** combină setările `template.scale` într-o Container App completă cu locație, mediu gestionat, imagine container, resurse și ingress. Scalarea replicilor NU mărește cota modelului.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -336,20 +333,23 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Optimizarea Costurilor
+### Optimizarea costurilor
 
 Implementează controale de cost:
 
+**Resursă ilustrativă de buget:** definește `budgetStartDate` ca prima zi a lunii curente în UTC (de exemplu `2026-11-01T00:00:00Z` pentru această revizuire) și înlocuiește adresa de contact. Începutul trebuie să respecte constrângerile curente de dată ale serviciului. Bugetele alertează asupra întârzierii datelor de facturare; nu opresc cheltuielile.
+
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -368,9 +368,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Monitorizare și Observabilitate
+## Monitorizare și observabilitate
 
-### Integrare Application Insights
+### Integrarea Application Insights
 
 Configurează monitorizarea pentru sarcinile AI:
 
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
 
-### Metrice Personalizate
+Fragmentul de resursa presupune `applicationInsightsName`, `location` și un `logAnalyticsWorkspace` existent. Se provisionează monitorizarea, dar nu se instrumentează aplicația sau nu se creează metrici personalizate.
 
-Urmărește metrici specifice AI:
+### Metrici personalizate
+
+Monitorizează metrici specifice AI:
+
+Folosește distribuția suportată [Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python), nu SDK-ul Python `applicationinsights` vechi. Instalează `azure-monitor-opentelemetry`, configurează `APPLICATIONINSIGHTS_CONNECTION_STRING` și inițializează o dată la pornire:
 
 ```python
-# Telemetrie personalizată pentru modelele AI
-import logging
-from applicationinsights import TelemetryClient
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
 
-### Verificări de Sănătate
+Aceasta ilustrează emiterea atributelor, nu instrumentarea efectivă a apelului modelului. Încapsulează cererea reală într-un span pentru a măsura durata; inspectează `dependencies`/`traces` în Application Insights. Nu trimite prompturi, răspunsuri, chei sau mesaje de excepție brute cu date sensibile.
+
+### Verificări de sănătate
 
 Implementează monitorizarea sănătății serviciului AI:
 
+Instalați `fastapi`, `uvicorn`, `httpx` și `azure-identity`. Configurați variabilele endpoint/deployment de mai sus și acordați apelantului `Cognitive Services OpenAI User`. Această **sondă de pregătire** folosește planul de date Azure OpenAI v1 cu Entra ID; face un apel la model care se taxează. Rulați cu `uvicorn health:app` după salvarea ca `health.py`. Utilizați o verificare separată ușoară de liveness, limitați rata/cache rezultatelor de pregătire și nu expuneți această rută public fără controale de acces.
+
 ```python
-# Puncte finale pentru verificarea stării de sănătate
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,44 +431,50 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Testează conexiunea OpenAI
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
 
-## Pașii Următori
+Așteptat: `GET /health/ai-models` returnează `200 {"status":"healthy"}` când deploymentul chat configurat este utilizabil, sau `503` fără a dezvălui detalii upstream. Listarea deploymenturilor este o operațiune de management-plane și nu este o sondă validă de sănătate data-plane.
 
-1. **Revizuiește [Ghidul de Integrare Microsoft Foundry](microsoft-foundry-integration.md)** pentru modele de integrare a serviciilor
-2. **Completează [Laboratorul AI Workshop](ai-workshop-lab.md)** pentru experiență practică
-3. **Implementează [Practici AI de Producție](production-ai-practices.md)** pentru implementări enterprise
-4. **Explorează [Ghidul de depanare AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** pentru probleme frecvente
+## Pași Următori
+
+1. **Consultați [Ghidul de integrare Microsoft Foundry](microsoft-foundry-integration.md)** pentru tipare de integrare a serviciilor
+2. **Finalizați [Laboratorul AI Workshop](ai-workshop-lab.md)** pentru experiență practică
+3. **Implementați [Practici AI pentru Producție](../chapter-08-production/production-ai-practices.md)** pentru deploymenturi enterprise
+4. **Explorați [Ghidul de depanare AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** pentru probleme comune
 
 ## Resurse
 
-- [Disponibilitatea modelelor Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Disponibilitatea Modelului Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Documentația Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Scalarea Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Optimizarea costurilor modelului AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Optimizarea Costurilor Modelului AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Navigare Capitol:**
-- **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul curent**: Capitolul 2 - Dezvoltare AI-First
-- **⬅️ Anterior**: [Integrarea Microsoft Foundry](microsoft-foundry-integration.md)
+**Navigarea Capitolului:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitolul Curent**: Capitolul 2 - Dezvoltare AI-First
+- **⬅️ Anterior**: [Agenti AI](agents.md)
 - **➡️ Următor**: [Laborator AI Workshop](ai-workshop-lab.md)
-- **🚀 Capitolul următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
+- **🚀 Capitolul Următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
 
 ---
 

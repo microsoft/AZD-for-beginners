@@ -1,60 +1,58 @@
-# 6. Pag-alis ng Imprastruktura
+# 6. Pagtanggal ng Imprastruktura
 
-!!! tip "SA PAGTATAPOS NG MODULONG ITO AY MAGAGAWA MO"
+!!! tip "PAGKATAPOS NG MODULONG ITO IKAW AY MAAARING"
 
-    - [ ] Maunawaan ang kahalagahan ng paglilinis ng mga resource at pamamahala ng gastos
-    - [ ] Gamitin `azd down` upang ligtas na i-deprovision ang imprastruktura
-    - [ ] I-recover ang mga soft-deleted na Azure AI Services kung kinakailangan
-    - [ ] **Lab 6:** Linisin ang mga Azure resource at beripikahin ang pagtanggal
-
----
-
-## Mga Bonus na Ehersisyo
-
-Bago natin ibuwag ang proyekto, maglaan ng ilang minuto para sa bukas na paggalugad.
-
-!!! info "Subukan ang mga Prompt na Ito para sa Paggalugad"
-
-    **Magsagawa ng Eksperimento gamit ang GitHub Copilot:**
-    
-    1. Magtanong: `Anong iba pang mga AZD template ang maaari kong subukan para sa mga multi-agent na senaryo?`
-    2. Magtanong: `Paano ko maiangkop ang mga tagubilin ng ahente para sa kaso ng paggamit sa pangangalagang pangkalusugan?`
-    3. Magtanong: `Aling mga environment variable ang kumokontrol sa pag-optimize ng gastos?`
-    
-    **Galugarin ang Azure Portal:**
-    
-    1. Suriin ang mga metric ng Application Insights para sa iyong deployment
-    2. Suriin ang cost analysis para sa mga na-provision na resource
-    3. Galugarin muli ang Microsoft Foundry portal agent playground
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## I-deprovision ang Infra
+## Mga Bonus na Pagsasanay
 
-1. Ang pagbuwag ng imprastruktura ay kasing dali ng:
+Bago natin gibain ang proyekto, maglaan ng ilang minuto para sa bukas na paggalugad.
+
+!!! info "Subukan ang mga Pahiwatig na ito sa Paggalugad"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
+
+---
+
+## Pagtanggal ng Infra
+
+1. Ang pagbibiyak ng imprastruktura ay kasing dali ng:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. Tinitiyak ng flag na `--purge` na buburahin din nito ang mga soft-deleted na Cognitive Service resource, kaya mailalabas ang quota na hinahawakan ng mga resource na ito. Kapag kumpleto na makikita mo ang ganito:
+1. Kumpirmahin ang napiling kapaligiran at suriin ang mga resource na tatanggalin. Tinatanggal nito ang mga Azure resource at maaaring magwasak ng data. Panatilihin ang kumpirmasyon para sa workflow na ito ng pag-aaral. Kapag tapos na makakakita ka ng output na kahalintulad ng:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Opsyonal) Kung tatakbo mo muli ngayon ang `azd up`, mapapansin mong na-deploy ang modelong gpt-4.1 dahil ang environment variable ay binago (at na-save) sa lokal na `.azure` folder. 
+1. Suriin ang pagtanggal sa portal at tingnan ang mga resource na nasa labas ng saklaw ng deployment. Ang ulat ng gastos at update ng quota ay maaaring mahuli. Mananatili ang lokal na `.azure` na pagsasaayos maliban kung ito ay tahasang tinanggal.
 
-      Narito ang mga deployment ng modelo **bago**:
+1. Humihiling din ang `azd down --purge` ng permanenteng pagtanggal ng mga supportadong soft-deleted na resource. Gamitin lamang ito kapag hindi na kailangan ang pagbawi at naiintindihan mo ang mga patakaran sa pagpapanatili/pagprotekta sa pag-delete. Hindi nito ginagarantiyahan ang agarang pag-release ng quota.
 
-      ![Paunang](../../../../../translated_images/tl/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      At narito ito **pagkatapos**:
-      ![Bago](../../../../../translated_images/tl/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Huwag muling i-deploy para lamang tiyakin ang paglilinis. Ang isang hinaharap na sadyang `azd up` ay maaaring muling lumikha ng mga resource gamit ang natitirang lokal na mga input, at muling magdudulot ng bayarin. Karaniwang ginagamit ang mga update sa modelo sa pamamagitan ng suportadong pagbabago sa provisioning, hindi sa teardown.
 
 ---
 

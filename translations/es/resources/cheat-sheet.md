@@ -1,633 +1,655 @@
-# Hoja de referencia de comandos - Comandos esenciales de AZD
+# Hoja de Comandos - Comandos Esenciales de AZD
 
-**Referencia rápida para todos los capítulos**
-- **📚 Inicio del curso**: [AZD para Principiantes](../README.md)
-- **📖 Inicio rápido**: [Capítulo 1: Fundamentos e Inicio Rápido](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Comandos de IA**: [Capítulo 2: Desarrollo orientado a IA](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+**Referencia Rápida para Todos los Capítulos**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../README.md)
+- **📖 Inicio Rápido**: [Capítulo 1: Fundamentos y Inicio Rápido](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Comandos de IA**: [Capítulo 2: Desarrollo con IA Primero](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Avanzado**: [Capítulo 4: Infraestructura como Código](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introducción
 
-Esta hoja de referencia completa proporciona acceso rápido a los comandos más utilizados de la Azure Developer CLI, organizados por categoría con ejemplos prácticos. Perfecta para consultas rápidas durante el desarrollo, la resolución de problemas y las operaciones diarias con proyectos azd.
+Esta hoja de comandos integral proporciona una referencia rápida para los comandos más comúnmente usados de Azure Developer CLI, organizados por categoría con ejemplos prácticos. Perfecta para consultas rápidas durante el desarrollo, resolución de problemas y operaciones diarias con proyectos azd.
 
-## Objetivos de aprendizaje
+## Objetivos de Aprendizaje
 
-Al usar esta hoja de referencia, usted:
-- Tendrá acceso instantáneo a comandos y sintaxis esenciales de Azure Developer CLI
-- Comprenderá la organización de los comandos por categorías funcionales y casos de uso
+Al usar esta hoja de comandos, usted:
+- Tendrá acceso inmediato a comandos esenciales y sintaxis de Azure Developer CLI
+- Entenderá la organización de comandos por categorías funcionales y casos de uso
 - Consultará ejemplos prácticos para escenarios comunes de desarrollo y despliegue
 - Accederá a comandos de solución de problemas para resolución rápida de incidencias
-- Encontrará opciones avanzadas de configuración y personalización de manera eficiente
-- Localizará comandos de gestión de entornos y flujos de trabajo multi-entorno
+- Encontrará opciones avanzadas de configuración y personalización eficientemente
+- Localizará comandos para gestión de entornos y flujos de trabajo multi-entorno
 
-## Resultados de aprendizaje
+## Resultados del Aprendizaje
 
-Con la referencia habitual a esta hoja, usted podrá:
-- Ejecutar comandos azd con confianza sin tener que consultar la documentación completa
-- Resolver rápidamente problemas comunes usando los comandos de diagnóstico apropiados
+Con referencia regular a esta hoja de comandos, podrá:
+- Ejecutar comandos azd con confianza sin consultar documentación completa
+- Resolver rápidamente problemas comunes usando comandos diagnósticos apropiados
 - Gestionar eficientemente múltiples entornos y escenarios de despliegue
 - Aplicar funciones avanzadas y opciones de configuración de azd según sea necesario
 - Solucionar problemas de despliegue usando secuencias sistemáticas de comandos
-- Optimizar flujos de trabajo mediante el uso eficaz de atajos y opciones de azd
+- Optimizar los flujos de trabajo mediante el uso efectivo de atajos y opciones de azd
 
-## Comandos para empezar
+## Comandos para Comenzar
 
 ### Autenticación
 ```bash
-# Iniciar sesión en Azure mediante AZD
+# Login to Azure via AZD
 azd auth login
 
-# Iniciar sesión en Azure CLI (AZD usa esto internamente)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# Comprobar la cuenta actual
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# Establecer la suscripción predeterminada
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# Cerrar sesión de AZD
+# Logout from AZD
 azd auth logout
 
-# Cerrar sesión de Azure CLI
+# Logout from Azure CLI
 az logout
 ```
 
-### Inicialización del proyecto
+### Inicialización de Proyecto
 ```bash
-# Explorar plantillas disponibles
+# Browse available templates
 azd template list
 
-# Inicializar desde plantilla
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# Inicializar en el directorio actual
+# Initialize in current directory
 azd init .
 
-# Inicializar con nombre personalizado
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
-## Comandos principales de despliegue
+## Comandos Principales de Despliegue
 
-### Flujo completo de despliegue
+### Flujo Completo de Despliegue
 ```bash
-# Desplegar todo (aprovisionamiento + despliegue)
+# Deploy everything (provision + deploy)
 azd up
 
-# Desplegar con los avisos de confirmación deshabilitados
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# Desplegar a un entorno específico
+# Deploy to specific environment
 azd up --environment production
 
-# Desplegar con parámetros personalizados
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
-### Solo infraestructura
+### Solo Infraestructura
 ```bash
-# Provisionar recursos de Azure
+# Provision Azure resources
 azd provision
 
-# 🧪 Vista previa de los cambios en la infraestructura
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# Muestra una vista de simulación (dry-run) de qué recursos se crearían/modificarían/eliminarían
-# Similar a 'terraform plan' o 'bicep what-if' - seguro de ejecutar, no se aplican cambios
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
-### Solo aplicación
+### Solo Aplicación
 ```bash
-# Desplegar el código de la aplicación
+# Deploy application code
 azd deploy
 
-# Desplegar un servicio específico
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Desplegar todos los servicios
+# Deploy all services
 azd deploy --all
 ```
 
-### Compilar y empaquetar
+### Construir y Empaquetar
 ```bash
-# Restaurar (descargar) las dependencias de la aplicación
+# Restore (download) application dependencies
 azd restore
 
-# Restaurar un servicio específico
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# Construir un artefacto desplegable sin desplegar
+# Build a deployable artifact without deploying
 azd package
 
-# Construir un servicio específico
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** descarga las dependencias de tu aplicación (npm, pip, NuGet, Maven, etc.). Se ejecuta automáticamente durante `azd package` y `azd deploy`, por lo que rara vez lo llamas directamente: ejecútalo manualmente para predescargar dependencias (por ejemplo, para precalentar la caché de CI o trabajar sin conexión después).
+> **`azd restore`** descarga las dependencias de su aplicación (npm, pip, NuGet, Maven, etc.). Se ejecuta automáticamente durante `azd package` y `azd deploy`, por lo que rara vez se usa directamente—ejecútelo manualmente para predescargar dependencias (por ejemplo, para calentar una caché de CI o trabajar sin conexión después).
 
-> **`azd package`** construye el artefacto desplegable (una imagen de contenedor o un zip) **sin** subirlo a Azure. Úsalo por separado para verificar que la compilación tenga éxito, inspeccionar la salida o producir un artefacto que un proceso independiente desplegará más tarde. `azd deploy` empaqueta automáticamente, así que solo necesitas `azd package` cuando quieras el artefacto sin desplegarlo.
+> **`azd package`** prepara un artefacto desplegable sin desplegar el servicio de aplicación. El comportamiento depende del lenguaje y host: el empaquetado de contenedores puede usar compilaciones remotas de Azure y publicar imágenes en un registro, por lo que no siempre es sin conexión o libre de escrituras en Azure. `azd deploy` puede empaquetar automáticamente; use un paso de empaquetado separado cuando necesite un artefacto o una comprobación de compilación.
 
-## 🌍 Gestión de entornos
 
-### Operaciones de entorno
+## 🌍 Gestión de Entornos
+
+### Operaciones de Entorno
 ```bash
-# Listar todos los entornos
+# List all environments
 azd env list
 
-# Crear nuevo entorno
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# Seleccionar entorno
+# Select environment
 azd env select production
 
-# Mostrar entornos disponibles
+# Show available environments
 azd env list
 
-# Actualizar estado del entorno
+# Refresh environment state
 azd env refresh
 ```
 
-### Variables de entorno
+### Variables de Entorno
 ```bash
-# Establecer variable de entorno
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# Obtener variable de entorno
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# Listar todas las variables de entorno
+# List all environment variables
 azd env get-values
 
-# Eliminar variable de entorno
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
 
-## ⚙️ Comandos de configuración
+Los archivos de entorno son texto plano. No trate `azd env set` como almacenamiento secreto; use referencias a Key Vault o identidad administrada según corresponda.
 
-### Configuración global
+## ⚙️ Comandos de Configuración
+
+### Configuración Global
 ```bash
-# Listar toda la configuración
+# List all configuration
 azd config show
 
-# Establecer valores predeterminados globales
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Eliminar la configuración
+# Remove configuration
 azd config unset defaults.location
 
-# Restablecer toda la configuración
+# Reset all configuration
 azd config reset
 ```
 
-### Configuración del proyecto
+### Configuración de Proyecto
 ```bash
-# Validar azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# Mostrar información del proyecto
+# Show project information
 azd show
 
-# Obtener puntos de conexión del servicio
+# Get service endpoints
 azd show --output json
 ```
 
-## 📊 Monitorización y diagnósticos
+## 📊 Monitorización y Diagnóstico
 
-### Panel de monitorización
+### Panel de Monitorización
 ```bash
-# Abrir el panel de supervisión del portal de Azure
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# Abrir métricas en vivo de Application Insights
+# Open Application Insights live metrics
 azd monitor --live
 
-# Abrir el panel de registros de Application Insights
+# Open Application Insights logs blade
 azd monitor --logs
 
-# Abrir la descripción general de Application Insights
+# Open Application Insights overview
 azd monitor --overview
 ```
 
-### Visualizar registros de contenedores
+Application Insights debe ser configurado por la plantilla. La opción Live Metrics de AZD no está actualmente soportada para aplicaciones Python; utilice la visión general, registros o el flujo de trabajo de trazado documentado en el ejemplo.
+
+### Visualización de Registros de Contenedores
 ```bash
-# Ver registros mediante Azure CLI (para Container Apps)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Seguir los registros en tiempo real
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Ver registros en el Portal de Azure
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
 ### Consultas de Log Analytics
 ```bash
-# Acceder a Log Analytics a través del Portal de Azure
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# Consultar registros mediante Azure CLI
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ Comandos de mantenimiento
+## 🛠️ Comandos de Mantenimiento
 
 ### Limpieza
 ```bash
-# Eliminar todos los recursos de Azure
+# Remove all Azure resources
 azd down
 
-# Forzar eliminación sin confirmación
+# Force delete without confirmation
 azd down --force
 
-# Purgar recursos eliminados temporalmente
+# Purge soft-deleted resources
 azd down --purge
 
-# Limpieza completa
+# Complete cleanup
 azd down --force --purge
 ```
 
 ### Actualizaciones
 ```bash
-# Buscar actualizaciones de azd
+# Check for azd updates
 azd version
 
-# Obtener la versión actual
+# Get current version
 azd version
 
-# Ver la configuración actual
+# View current configuration
 azd config show
 ```
 
-## 🔧 Comandos avanzados
+## 🔧 Comandos Avanzados
 
-### Canalización e CI/CD
+### Pipeline y CI/CD
 ```bash
-# Configurar GitHub Actions
+# Configure GitHub Actions
 azd pipeline config
 
-# Configurar Azure DevOps
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# Mostrar la configuración de la canalización
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
-### Gestión de infraestructura
+### Gestión de Infraestructura
 ```bash
-# Generar plantillas de infraestructura
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 Vista previa y planificación de infraestructura
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# Simula la provisión de infraestructura sin desplegar
-# Analiza plantillas Bicep/Terraform y muestra:
-# - Recursos que se añadirán (verde +)
-# - Recursos que se modificarán (amarillo ~)
-# - Recursos que se eliminarán (rojo -)
-# Seguro de ejecutar - no se realizan cambios reales en el entorno de Azure
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# Sintetizar infraestructura desde azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
-### Información del proyecto
+### Información del Proyecto
 ```bash
-# Mostrar el estado del proyecto y los puntos finales
+# Show project status and endpoints
 azd show
 
-# Mostrar información detallada del proyecto en formato JSON
+# Show detailed project info as JSON
 azd show --output json
 
-# Obtener los puntos finales del servicio
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
-## 🤖 Comandos de IA y extensiones
+## 🤖 Comandos de IA y Extensiones
 
-### Extensiones de AZD
+### Extensiones AZD
+
+Referencia de CLI de IA revisada 2026-11-04: `azd 1.37.2`, agentes `1.0.0-beta.23`, evaluaciones `1.0.0-beta.2`. Use `azd >= 1.37.0` para el flujo combinado; actualice el CLI principal antes de extensiones incompatibles.
+
 ```bash
-# Listar todas las extensiones disponibles (incluyendo IA)
+# List all available extensions (including AI)
 azd extension list
 
-# Instalar la extensión Foundry Agents
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Instalar la extensión Agent Skills (vista previa)
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the agent skills extension (preview)
 azd extension install azure.ai.skills
 
-# Instalar la extensión Foundry Connections (vista previa)
+# Install the Foundry connections extension (preview)
 azd extension install azure.ai.connections
 
-# Instalar la extensión de ajuste fino
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Instalar la extensión de modelos personalizados
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Actualizar todas las extensiones instaladas
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
-### Comandos de agente IA
+### Comandos de Agente de IA
 ```bash
-# Inicializar un proyecto de agente desde un manifiesto
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# Apuntar a un proyecto específico de Foundry
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# Especificar el directorio de código fuente del agente
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# Elegir un destino de alojamiento
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# Probar un agente desplegado (imprime la latencia y el tiempo hasta el primer byte)
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# Mostrar la configuración del endpoint en vivo
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# Generar un conjunto de datos de evaluación, luego optimizar el agente
-azd ai agent eval generate
-azd ai agent optimize
-
-# Descargar el código fuente desplegado de un agente hospedado basado en código
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# Eliminar un agente hospedado y todas sus versiones (--force finaliza sesiones activas)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
-### MCP Server (Alfa)
+`--template`/`-t` reemplaza la ortografía `--manifest`/`-m` depreciada; los manifiestos heredados necesitan migración. No existe opción agent-init `--host containerapp` actual. Las vistas previas de managed-harness, voz y ejecución prolongada requieren adopciones independientes en shell/entorno CI; vea la [referencia AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+### Evaluaciones y Optimización de IA
 ```bash
-# Inicia el servidor MCP para tu proyecto
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+Agentes beta.22 reemplazó comandos de evaluación heredados con `azd ai eval` de `azure.ai.evaluations`. La nueva configuración de evaluación usa claves camelCase. La optimización `--config` toma una solicitud de API de optimización independiente, **no** los heredados `eval.yaml` o nuevo `azure.eval.yaml`; use `--eval`/`--eval-config` para reutilización de evaluaciones. Vea [configuración de evaluación](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) y [migración de optimización](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Servidor MCP (Alfa)
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# Gestiona el consentimiento de la herramienta para las operaciones de MCP
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
-### Generación de infraestructura
+### Generación de Infraestructura
 ```bash
-# Generar archivos IaC a partir de la definición de su proyecto
+# Generate IaC files from your project definition
 azd infra generate
 
-# Sintetizar infraestructura desde azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
 
-## 🎯 Flujos de trabajo rápidos
+## 🎯 Flujos de Trabajo Rápidos
 
-### Flujo de trabajo de desarrollo
+### Flujo de Desarrollo
 ```bash
-# Iniciar nuevo proyecto
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# Desplegar en desarrollo
+# Deploy to development
 azd env new dev
 azd up
 
-# Realizar cambios y volver a desplegar
+# Make changes and redeploy
 azd deploy
 
-# Abrir panel de monitoreo
+# Open monitoring dashboard
 azd monitor --live
 ```
 
-### Flujo de trabajo multi-entorno
+### Flujo Multi-Entorno
 ```bash
-# Configurar entornos
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Desplegar en desarrollo
+# Deploy to dev
 azd env select dev
 azd up
 
-# Probar y promover a preproducción
+# Test and promote to staging
 azd env select staging
 azd up
 
-# Desplegar en producción
+# Deploy to production
 azd env select production
 azd up
 ```
 
-### Flujo de trabajo de resolución de problemas
+### Flujo de Solución de Problemas
 ```bash
-# Habilitar el modo de depuración
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# Comprobar el estado del despliegue
-azd show
-
-# Validar la configuración
+# Validate configuration
 azd config show
 
-# Abrir el panel de monitorización para ver los registros
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# Comprobar el estado de los recursos
+# Check resource status
 azd show --output json
 ```
 
-## 🔍 Comandos de depuración
+## 🔍 Comandos para Depuración
 
-### Información de depuración
+### Información de Depuración
 ```bash
-# Habilitar salida de depuración
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# Desactivar la telemetría para una salida más limpia
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# Comprobar la configuración actual
+# Check current configuration
 azd config show
 
-# Comprobar el estado de autenticación
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
-### Depuración de plantillas
+### Depuración de Plantillas
 ```bash
-# Listar plantillas disponibles con detalles
+# List available templates with details
 azd template list --output json
 
-# Mostrar información de la plantilla
+# Show template information
 azd template show <template-name>
 
-# Validar la plantilla antes de inicializar
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
-## 📁 Comandos de archivos y directorios
+## 📁 Comandos de Archivos y Directorios
 
-### Estructura del proyecto
+### Estructura del Proyecto
 ```bash
-# Mostrar la estructura del directorio actual
+# Show current directory structure
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navegar a la raíz del proyecto azd
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# Mostrar el directorio de configuración de azd
-echo $AZD_CONFIG_DIR  # Normalmente ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Formato de salida
+## 🎨 Formato de Salida
 
 ### Salida JSON
 ```bash
-# Obtener salida JSON para scripts
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# Analizar con jq
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Salida en tabla
+### Salida en Tabla
 ```bash
-# Formatear como tabla
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# Ver servicios desplegados
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Combinaciones comunes de comandos
+## 🔧 Combinaciones Comunes de Comandos
 
-### Script de verificación de estado
+### Script de Verificación de Salud
 ```bash
 #!/bin/bash
-# Comprobación rápida de estado
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
 ```
 
-### Validación de despliegue
+### Validación de Despliegue
 ```bash
 #!/bin/bash
-# Validación previa al despliegue
+# Pre-deployment validation
 azd show
-azd provision --preview  # Previsualizar los cambios antes de desplegar
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
-### Comparación de entornos
+### Comparación de Entornos
 ```bash
 #!/bin/bash
-# Comparar entornos
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
-### Script de limpieza de recursos
+### Script de Limpieza de Recursos
 ```bash
 #!/bin/bash
-# Limpiar entornos antiguos
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
-## 📝 Variables de entorno
+## 📝 Variables de Entorno
 
-### Variables de entorno comunes
+### Variables de Entorno Comunes
 ```bash
-# Configuración de Azure
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# Configuración de AZD
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# Configuración de la aplicación
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Comandos de emergencia
+## 🚨 Comandos de Emergencia
 
-### Soluciones rápidas
+### Soluciones Rápidas
 ```bash
-# Restablecer la autenticación
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# Forzar actualización del entorno
+# Force refresh environment
 azd env refresh
 
-# Volver a desplegar todos los servicios
+# Redeploy all services
 azd deploy
 
-# Comprobar el estado del despliegue
+# Check deployment status
 azd show --output json
 ```
 
-### Comandos de recuperación
+### Comandos de Recuperación
 ```bash
-# Recuperarse de una implementación fallida - limpiar y volver a desplegar
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# Reprovisionar solo la infraestructura
+# Reprovision infrastructure only
 azd provision
 
-# Volver a desplegar solo la aplicación
+# Redeploy application only
 azd deploy
 ```
 
-## 💡 Consejos profesionales
+## 💡 Consejos Profesionales
 
-### Alias para un flujo de trabajo más rápido
+### Alias para un Flujo de Trabajo Más Rápido
 ```bash
-# Añádelo a tu .bashrc o .zshrc
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Atajos de función
+### Atajos de Funciones
 ```bash
-# Cambio rápido de entorno
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# Despliegue rápido con supervisión
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# Estado del entorno
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -636,46 +658,46 @@ azd-status() {
 }
 ```
 
-## 📖 Ayuda y documentación
+## 📖 Ayuda y Documentación
 
-### Obtener ayuda
+### Obtener Ayuda
 ```bash
-# Ayuda general
+# General help
 azd --help
 azd help
 
-# Ayuda específica del comando
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# Mostrar versión e información de compilación
+# Show version and build info
 azd version
 azd version --output json
 ```
 
-### Enlaces de documentación
+### Enlaces de Documentación
 ```bash
-# Abrir la documentación en el navegador
+# Open documentation in browser
 azd docs
 
-# Mostrar la documentación de la plantilla
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Sugerencia**: Marca esta hoja de referencia y usa `Ctrl+F` para encontrar rápidamente los comandos que necesitas!
+**Consejo**: ¡Agregue esta hoja de comandos a sus favoritos y use `Ctrl+F` para encontrar rápidamente los comandos que necesita!
 
 ---
 
 **Navegación**
-- **Lección anterior**: [Comprobaciones previas al despliegue](../docs/pre-deployment/preflight-checks.md)
-- **Siguiente lección**: [Glosario](glossary.md)
+- **Lección Anterior**: [Verificaciones Previas](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Próxima Lección**: [Glosario](glossary.md)
 
 ---
 
-> **💡 ¿Quieres ayuda con comandos de Azure en tu editor?** Instala [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) con `npx skills add microsoft/github-copilot-for-azure` — 37 skills para IA, Foundry, despliegue, diagnóstico y más.
+> **💡 ¿Quiere ayuda con comandos de Azure en su editor?** Instale [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) con `npx skills add microsoft/github-copilot-for-azure` — 37 habilidades para IA, Foundry, despliegues, diagnósticos y más.
 
 ---
 

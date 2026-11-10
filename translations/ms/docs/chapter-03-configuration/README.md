@@ -1,20 +1,20 @@
 # Bab 3: Konfigurasi & Pengesahan
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 45-60 minit | **⭐ Kerumitan**: Pertengahan
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 90-150 minit termasuk amalan integrasi | **⭐ Kerumitan**: Pertengahan
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi konfigurasi persekitaran, corak pengesahan, dan amalan terbaik keselamatan untuk pengeluaran Azure Developer CLI.
+Bab ini merangkumi konfigurasi persekitaran, corak pengesahan, dan amalan keselamatan terbaik untuk penyebaran Azure Developer CLI.
 
-> Disahkan dengan `azd 1.27.1` pada Julai 2026.
+> Sasaran semakan arahan dan konfigurasi: `azd 1.37.2` (November 2026). Penyediaan Azure langsung tidak dijalankan semasa semakan.
 
 ## Objektif Pembelajaran
 
-Dengan melengkapkan bab ini, anda akan:
+Dengan menyelesaikan bab ini, anda akan:
 - Menguasai hierarki konfigurasi AZD
-- Menguruskan pelbagai persekitaran (dev, staging, prod)
+- Mengurus beberapa persekitaran (dev, staging, prod)
 - Melaksanakan pengesahan selamat dengan identiti terurus
 - Mengkonfigurasi tetapan khusus persekitaran
 
@@ -22,61 +22,61 @@ Dengan melengkapkan bab ini, anda akan:
 
 ## 📚 Pelajaran
 
-| # | Pelajaran | Perihalan | Masa |
-|---|----------|-----------|------|
-| 1 | [Panduan Konfigurasi](configuration.md) | Persediaan dan pengurusan persekitaran | 30 min |
-| 2 | [Pengesahan & Keselamatan](authsecurity.md) | Corak identiti terurus dan RBAC | 30 min |
+| # | Pelajaran | Penerangan | Masa |
+|---|----------|------------|------|
+| 1 | [Panduan Konfigurasi](configuration.md) | Penyediaan dan pengurusan persekitaran | 30 minit |
+| 2 | [Pengesahan & Keselamatan](authsecurity.md) | Corak identiti terurus dan RBAC | 30 minit |
 
 ---
 
-## 🚀 Mula Pantas
+## 🚀 Mula Cepat
+
+Jalankan dari akar aplikasi **azd yang sudah diinisialisasi**, bukan repositori kursus. Gunakan nama persekitaran yang belum digunakan jika ini sudah wujud.
 
 ```bash
-# Cipta pelbagai persekitaran
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Tukar persekitaran
+# Switch environments
 azd env select prod
 
-# Tetapkan pembolehubah persekitaran
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Lihat konfigurasi
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` adalah ilustrasi: ia hanya menjejaskan infrastruktur jika templat anda secara eksplisit menggunakannya. Nilai `azd env set` biasa disimpan secara tempatan dalam teks tulen; ia bukan simpanan rahsia yang selamat.
 
 ---
 
 ## 🔧 Hierarki Konfigurasi
 
-AZD menggunakan tetapan mengikut turutan ini (yang kemudian menimpa yang terdahulu):
-
-1. **Nilai lalai** (terbina dalam templat)
-2. **azure.yaml** (konfigurasi projek)
-3. **Pemboleh ubah persekitaran** (`azd env set`)
-4. **Bendera baris arahan** (`--location eastus`)
+Kekalkan tiga permukaan konfigurasi yang berbeza berasingan: keutamaan global (`azd config`), struktur projek (`azure.yaml`), dan nilai per persekitaran (`azd env`). Bendera hanya menggantikan tetapan yang mereka sokong; tidak ada lapisan sejagat pembolehubah persekitaran sewenang-wenangnya ke atas `azure.yaml` atau Bicep.
 
 ---
 
 ## 🔐 Amalan Terbaik Keselamatan
 
 ```bash
-# Gunakan identiti terurus (disyorkan)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Semak status pengesahan AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Pilihan: sahkan konteks Azure CLI jika anda merancang untuk menjalankan arahan az
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Sahkan semula jika perlu
+# Re-authenticate if needed
 azd auth login
 
-# Pilihan: segarkan pengesahan Azure CLI untuk arahan az
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -85,7 +85,7 @@ az login
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-------|-------|
+|-------|-----|
 | **Sebelumnya** | [Bab 2: Pembangunan AI](../chapter-02-ai-development/README.md) |
 | **Seterusnya** | [Bab 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
 
@@ -93,7 +93,7 @@ az login
 
 ## 📖 Sumber Berkaitan
 
-- [Pemeriksaan Pra-Pengeluaran](../chapter-06-pre-deployment/README.md)
+- [Pemeriksaan Pra-Penyebaran](../chapter-06-pre-deployment/README.md)
 - [Penyelesaian Masalah](../chapter-07-troubleshooting/common-issues.md)
 
 ---

@@ -1,71 +1,73 @@
-# Kapitola 5: Řešení s více agenty v AI
+# Kapitola 5: Multi-agentní AI řešení
 
-**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 2-3 hodiny | **⭐ Složitost**: Pokročilá
+**📚 Kurz**: [AZD Pro začátečníky](../../README.md) | **⏱️ Délka**: 2-3 hodiny | **⭐ Náročnost**: Pokročilá
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá pokročilé vzory architektury více agentů, orchestraci agentů a produkční nasazení AI pro složité scénáře.
+Tato kapitola pokrývá pokročilé vzory multi-agentní architektury, orchestraci agentů a produkčně připravené AI nasazení pro složité scénáře.
 
-> Ověřeno s verzí `azd 1.27.1` v červenci 2026.
+> Příkazy byly ověřeny podle vydaného `azd 1.37.2` referenčního materiálu. Nasazení do cloudu nebylo provedeno.
 
 ## Cíle učení
 
 Dokončením této kapitoly budete:
-- Rozumět vzorům architektury více agentů
+- Rozumět vzorům multi-agentní architektury
 - Nasazovat koordinované systémy AI agentů
 - Implementovat komunikaci agent-agent
-- Vytvářet produkčně připravená řešení více agentů
+- Vytvářet produkčně připravená multi-agentní řešení
 
 ---
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Čas |
+| # | Lekce | Popis | Doba |
 |---|--------|-------------|------|
-| 1 | [Základy více agentů](multi-agent-basics.md) | Praktické: nasazení funkční aplikace s více agenty pomocí `azd up` | 45 min |
-| 2 | [Koordinační vzory](../chapter-06-pre-deployment/coordination-patterns.md) | Strategie orchestrací agentů (pokračování v kapitole 6) | 30 min |
-| 3 | [Nasazení šablony ARM](../../examples/retail-multiagent-arm-template/README.md) | Příklad nasazení jedním kliknutím | 30 min |
+| 1 | [Základy multi-agentů](multi-agent-basics.md) | Praktická lekce: nasazení funkční multi-agentní aplikace s `azd up` | 45 min |
+| 2 | [Vzory koordinace](../chapter-06-pre-deployment/coordination-patterns.md) | Strategie orchestrací agentů (pokračuje v kapitole 6) | 30 min |
+| 3 | [Nasazení ARM šablony](../../examples/retail-multiagent-arm-template/README.md) | Příklad nasazení jedním kliknutím | 30 min |
 
-> **Začněte lekcí 1.** Je to jediná plně praktická a nasaditelná lekce v této kapitole. Lekce 2 je v kapitole 6 (je sdílená s přednasazením) a [Retail Multi-Agent Solution](../../examples/retail-scenario.md) je architektonický vzor – designová reference, ne šablona na jedno příkazové nasazení.
+> **Začněte Lekcí 1.** Je to jediná plně praktická a deployovatelná lekce v této kapitole. Lekce 2 je v kapitole 6 (sdílí se s plánováním před nasazením) a [Retail Multi-Agent Solution](../../examples/retail-scenario.md) je architektonický návrh – designová reference, ne šablona jednoho příkazu.
 
 ---
 
-## 🚀 Rychlý start
+## 🚀 Rychlý začátek
 
 ```bash
-# Možnost 1: Nasadit z šablony
-azd init --template agent-openai-python-prompty
+# Option 1: Deploy the multi-agent template used in Lesson 1
+azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Možnost 2: Nasadit z manifestu agenta (vyžaduje rozšíření azure.ai.agents)
+# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> **Který přístup?** Použijte `azd init --template` pro start z fungujícího vzoru. Použijte `azd ai agent init`, pokud máte vlastní manifest agenta. Kompletní detaily najdete v [referenci AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> **Který přístup?** Použijte `azd init --template` pro start z fungující ukázky. Použijte interaktivně `azd ai agent init`, nebo `azd ai agent init --template <path-to-azure.yaml>` pro převzetí stávajícího agentního projektu. Viz [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pro požadavky na verzi a migraci k evaluaci.
+
+Spusťte tyto alternativy v samostatných prázdných složkách. Rozšíření agentů `1.0.0-beta.23` vyžaduje `azd >= 1.37.0`; jeho interaktivní tok nevytváří vlastní pipeline pro Service Bus v lekci koordinace.
 
 ---
 
-## 🤖 Architektura více agentů
+## 🤖 Multi-agentní architektura
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrace Agenta<br/>Řídí požadavky, spravuje pracovní postup] --> Customer[Agent Zákazníka<br/>Dotazy uživatele, preference]
-    Orchestrator --> Inventory[Agent Inventáře<br/>Stavy zásob, objednávky]
+    Orchestrator[Orchestrator Agent<br/>Routes requests, manages workflow] --> Customer[Customer Agent<br/>User queries, preferences]
+    Orchestrator --> Inventory[Inventory Agent<br/>Stock levels, orders]
 ```
 
 ---
 
 ## 🎯 Vybrané řešení: Retail Multi-Agent
 
-[Retail Multi-Agent Solution](../../examples/retail-scenario.md) předvádí:
+Řešení [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstruje:
 
-- **Agent zákazníka**: Spravuje interakce s uživateli a preference
-- **Agent skladu**: Řídí zásoby a zpracování objednávek
-- **Orchestrátor**: Koordinuje mezi agenty
+- **Zákaznický agent**: Zpracovává uživatelské interakce a preference
+- **Inventární agent**: Spravuje zásoby a zpracování objednávek
+- **Orchestrace**: Koordinuje mezi agenty
 - **Sdílená paměť**: Správa kontextu mezi agenty
 
 ### Použité služby
@@ -85,14 +87,14 @@ graph TD
 | Směr | Kapitola |
 |-----------|---------|
 | **Předchozí** | [Kapitola 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
-| **Další** | [Kapitola 6: Přednasazení](../chapter-06-pre-deployment/README.md) |
+| **Další** | [Kapitola 6: Před nasazením](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Související zdroje
 
 - [Průvodce AI agenty](../chapter-02-ai-development/agents.md)
-- [Produkční AI praktiky](../chapter-08-production/production-ai-practices.md)
+- [Praxe produkční AI](../chapter-08-production/production-ai-practices.md)
 - [Řešení problémů AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

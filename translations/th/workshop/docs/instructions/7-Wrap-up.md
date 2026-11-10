@@ -1,110 +1,110 @@
-# 7. บทสรุป & ขั้นตอนถัดไป
+# 7. สรุปและขั้นตอนถัดไป
 
 !!! tip "ข้อความสำคัญหลักคือ"
 
-    - [ ] เทมเพลต AZD ช่วยเร่งการพัฒนาแอปพลิเคชัน AI จากเป็นวันให้เหลือเป็นชั่วโมง
-    - [ ] วิธีการ Discovery → Deployment → Customization ให้เส้นทางการเรียนรู้ที่เป็นระบบ
-    - [ ] GitHub Copilot กับ MCP servers ช่วยให้สำรวจโค้ดซับซ้อนได้ด้วยภาษาธรรมชาติ
-    - [ ] Microsoft Foundry มีระบบสังเกต การประเมิน และการทดสอบความปลอดภัยในตัว
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
 ## 1. สิ่งที่คุณทำสำเร็จ
 
-ขอแสดงความยินดี! ในเวิร์กช็อปนี้ คุณได้ทำสำเร็จดังนี้:
+ขอแสดงความยินดี! ในเวิร์กช็อปนี้ คุณได้ทำสำเร็จ:
 
-| โมดูล | ความสำเร็จ |
+| โมดูล | สิ่งที่ทำได้ |
 |:---|:---|
 | **โมดูล 1** | ค้นพบ Azure Developer CLI และเลือกเทมเพลต AI |
 | **โมดูล 2** | ติดตั้งและตรวจสอบโซลูชัน AI agents ครบถ้วน |
-| **โมดูล 3** | วิเคราะห์เทมเพลตเพื่อเข้าใจสถาปัตยกรรม |
-| **โมดูล 4** | สำรวจไฟล์ `azure.yaml` และ lifecycle hooks |
+| **โมดูล 3** | แยกโครงสร้างเทมเพลตเพื่อเข้าใจสถาปัตยกรรม |
+| **โมดูล 4** | สำรวจการกำหนดค่า `azure.yaml` และ lifecycle hooks |
 | **โมดูล 5** | ปรับแต่งเทมเพลตให้เหมาะกับสถานการณ์ของคุณ |
-| **โมดูล 6** | ถอนสภาพแวดล้อมอย่างปลอดภัยและจัดการทรัพยากร |
+| **โมดูล 6** | ปิดโครงสร้างพื้นฐานอย่างปลอดภัยและจัดการทรัพยากร |
 
 ---
 
-## 2. แนวคิดสำคัญที่คุณเชี่ยวชาญ
+## 2. แนวคิดหลักที่ทำความเข้าใจ
 
 ### Azure Developer CLI (azd)
-- `azd init` - เริ่มต้นโปรเจกต์จากเทมเพลต
-- `azd up` - เตรียมและติดตั้งในคำสั่งเดียว
-- `azd env` - จัดการตัวแปรสภาพแวดล้อม
-- `azd down` - ล้างทรัพยากรอย่างปลอดภัย
+- `azd init` - เริ่มโปรเจกต์จากเทมเพลต
+- `azd up` - เตรียมและติดตั้งด้วยคำสั่งเดียว
+- `azd env` - จัดการตัวแปรสิ่งแวดล้อม
+- `azd down` - ทำความสะอาดทรัพยากรอย่างปลอดภัย
 
 ### โครงสร้างเทมเพลต AZD
-- `azure.yaml` - การตั้งค่าและ deployment hooks
-- `infra/` - โค้ด infrastructure-as-code ด้วย Bicep
-- `src/` - โค้ดต้นทางของแอปพลิเคชัน
-- `scripts/` - สคริปต์สำหรับอัตโนมัติและตั้งค่า
+- `azure.yaml` - การกำหนดค่าและ deployment hooks
+- `infra/` - โค้ดโครงสร้างพื้นฐาน Bicep
+- `src/` - โค้ดแอปพลิเคชันต้นฉบับ
+- `scripts/` - สคริปต์การทำงานอัตโนมัติและการตั้งค่า
 
 ### ความสามารถของ Microsoft Foundry
 - บริการ AI Agent สำหรับผู้ช่วยอัจฉริยะ
-- File Search และ Azure AI Search สำหรับค้นหาความรู้
+- การค้นหาไฟล์และ Azure AI Search สำหรับการดึงข้อมูลความรู้
 - ระบบติดตาม ตรวจสอบ และประเมินผลในตัว
-- ทีมทดสอบความปลอดภัย AI แบบ Red teaming
+- Red teaming สำหรับการตรวจสอบความปลอดภัย AI
 
 ---
 
-## 3. ต่อเนื่องเส้นทางการเรียนรู้ของคุณ
+## 3. ดำเนินการเรียนรู้ต่อไป
 
 ### ขั้นตอนถัดไปที่แนะนำ
 
-| เส้นทาง | แหล่งข้อมูล | เวลา |
+| เส้นทาง | แหล่งข้อมูล | ระยะเวลา |
 |:---|:---|:---|
-| **คอร์สสมบูรณ์** | [หลักสูตร AZD สำหรับผู้เริ่มต้น](../../README.md) | 8-12 ชั่วโมง |
-| **ลองเทมเพลตอื่น** | [เทมเพลต Microsoft Foundry](https://ai.azure.com/templates) | 1-2 ชั่วโมง |
-| **สำรวจลึก** | [เอกสาร Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | ต่อเนื่อง |
+| **คอร์สครบถ้วน** | [AZD for Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | เรียนตามสะดวก |
+| **ลองเทมเพลตอื่น** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 ชั่วโมง |
+| **ดำน้ำลึก** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | เรียนรู้อย่างต่อเนื่อง |
 | **ชุมชน** | [Azure Discord](https://aka.ms/foundry/discord) | เข้าร่วมวันนี้! |
 
-### เทมเพลตแนะนำให้ลองต่อไป
+### เทมเพลตที่แนะนำให้ลองต่อไป
 
 1. **[เริ่มต้นกับ AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - แชทพื้นฐานกับข้อมูลของคุณ
 2. **[สาธิต Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - รูปแบบ RAG ขั้นสูง
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - สถานการณ์ธุรกิจค้าปลีก
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - สถานการณ์ค้าปลีกในองค์กร
 
 ---
 
-## 4. ความท้าทายในเวิร์กช็อป
+## 4. ท้าทายเวิร์กช็อป
 
-พร้อมทดสอบทักษะของคุณไหม? ลองความท้าทายเหล่านี้:
+พร้อมทดสอบทักษะหรือยัง? ลองทำความท้าทายเหล่านี้:
 
 | ความท้าทาย | คำอธิบาย | ระดับความยาก |
 |:---|:---|:---|
-| **1. สถานการณ์ Multi-Agent** | ติดตั้งและปรับแต่งสำหรับอุตสาหกรรมอื่น (เช่น สาธารณสุข การเงิน) | ⭐⭐ |
-| **2. ฐานความรู้ส่วนตัว** | เพิ่มไฟล์ข้อมูลของคุณเองและสร้างดัชนีค้นหาแบบกำหนดเอง | ⭐⭐⭐ |
-| **3. ติดตั้งในระบบจริง** | ตั้งค่า CI/CD ด้วย GitHub Actions โดยใช้ `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. สถานการณ์หลายเอเจนต์** | ติดตั้งและปรับแต่งสำหรับอุตสาหกรรมต่างๆ (เช่น สาธารณสุข การเงิน) | ⭐⭐ |
+| **2. ฐานความรู้กำหนดเอง** | เพิ่มไฟล์ข้อมูลของคุณเองและสร้างดัชนีค้นหาที่กำหนดเอง | ⭐⭐⭐ |
+| **3. ติดตั้งสำหรับโปรดักชัน** | ตั้งค่า CI/CD ด้วย GitHub Actions โดยใช้ `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. แสดงความคิดเห็นของคุณ
+## 5. แบ่งปันความคิดเห็นของคุณ
 
-ความคิดเห็นของคุณช่วยพัฒนาเวิร์กช็อปนี้!
+ความคิดเห็นของคุณช่วยให้เราปรับปรุงเวิร์กช็อปนี้ได้ดีขึ้น!
 
-- **GitHub Issues**: [ส่งความคิดเห็น](https://github.com/microsoft/azd-for-beginners/issues) - ใส่แท็ก `Workshop`
-- **Discord**: เข้าร่วม [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - โพสต์ในช่อง `#get-help`
+- **GitHub Issues**: [ส่งความคิดเห็น](https://github.com/microsoft/azd-for-beginners/issues) - แท็กด้วย `Workshop`
+- **Discord**: เข้าร่วม [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - โพสต์ใน `#get-help`
 - **การมีส่วนร่วม**: ช่วยปรับปรุงเวิร์กช็อปด้วยการส่ง pull requests!
 
 ---
 
 ## ขอบคุณ! 🎉
 
-ขอบคุณที่เข้าร่วมเวิร์กช็อป AZD สำหรับนักพัฒนา AI หวังว่าประสบการณ์นี้จะช่วยให้คุณมีทักษะและความมั่นใจในการสร้างและติดตั้งแอป AI บน Azure
+ขอบคุณที่เข้าร่วมเวิร์กช็อป AZD for AI Developers หวังว่าประสบการณ์นี้จะช่วยให้คุณมีทักษะและความมั่นใจในการสร้างและติดตั้งแอปพลิเคชัน AI บน Azure
 
-**สร้างต่อเนื่อง เรียนรู้ต่อเนื่อง และยินดีต้อนรับสู่ชุมชนนักพัฒนา AI ของ Azure!**
+**สร้างต่อไป เรียนรู้ต่อไป และยินดีต้อนรับเข้าสู่ชุมชนนักพัฒนา Azure AI!**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 หน้าแรกคอร์ส** | [AZD สำหรับผู้เริ่มต้น](../../README.md) |
-| **📖 เอกสาร** | [เอกสาร Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ เทมเพลต AI** | [เทมเพลต Microsoft Foundry](https://ai.azure.com/templates) |
+| **📚 หน้าแรกคอร์ส** | [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
+| **📖 เอกสาร** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
+| **🛠️ เทมเพลต AI** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
 | **💬 ชุมชน** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิดชอบ**:  
-เอกสารฉบับนี้ได้รับการแปลโดยใช้บริการแปลภาษาอัตโนมัติ [Co-op Translator](https://github.com/Azure/co-op-translator) แม้ว่าเราจะพยายามให้มีความถูกต้อง แต่โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความคลาดเคลื่อนได้ เอกสารต้นฉบับในภาษาต้นทางถือเป็นแหล่งข้อมูลที่น่าเชื่อถือที่สุด สำหรับข้อมูลที่มีความสำคัญ ขอแนะนำให้ใช้บริการแปลโดยผู้เชี่ยวชาญที่เป็นมนุษย์ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดจากการใช้การแปลนี้
+**ปฏิเสธความรับผิดชอบ**:
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) ขณะที่เราพยายามให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดขึ้นจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

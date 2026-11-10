@@ -1,28 +1,26 @@
-# TODO: Selle repo haldaja pole seda faili veel redigeerinud
-
-**REPO OMANIK**: Kas soovite klienditeeninduse ja toe (CSS) abi selle toote/projekti jaoks?
-
-- **Ei CSS tuge:** Täitke see mall teabega, kuidas esitada probleeme ja saada abi.
-- **Jah CSS tugi:** Täitke sissejuhatav vorm aadressil [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS töötab koos teiega, et määrata järgmised sammud.
-- **Pole kindel?** Täitke sissejuhatav vorm, nagu vastus oleks "Jah". CSS aitab teil otsustada.
-
-*Seejärel eemaldage see esimene pealkiri sellest SUPPORT.MD failist enne, kui avaldate oma repo.*
-
 # Tugi
 
-## Kuidas esitada probleeme ja saada abi  
+## Kursuse probleemid ja küsimused
 
-See projekt kasutab GitHub Issues'i vigade ja funktsioonitaotluste jälgimiseks. Palun otsige olemasolevaid 
-probleeme enne uute probleemide esitamist, et vältida duplikaate. Uute probleemide korral esitage oma viga või 
-funktsioonitaotlus uue probleemina.
+Otsi [kursuse probleemide](https://github.com/microsoft/AZD-for-beginners/issues) seast enne probleemi teatamist. Lisa mõjutatud ingliskeelne õppetund, käivitatud käsk, sinu AZD/laienduste versioonid ja veateade. Eemalda logidest ja ekraanipiltidelt mandaadid, tokenid, tellimuse üksikasjad ja isikuandmed.
 
-Abi ja küsimuste korral selle projekti kasutamise kohta palun **REPO HALDAJA: LISAGE SIIN JUHISED, KUIDAS SUHELDA REPO OMANIKE VÕI KOGUKONNAGA ABI SAAMISEKS. VÕIB OLLA STACK OVERFLOW SILT VÕI MUU KANAL. KUS TE INIMESI AITATE?**.
+Üldiste õppimisküsimuste jaoks kasuta [Azure arendajate kogukonda](https://discord.gg/microsoft-azure). Kogukonna vastused ei ole kindel tugiteenus.
 
-## Microsofti tugipoliitika  
+## Tööriista ja teenuse probleemid
 
-Selle **PROJEKTI või TOOTE** tugi on piiratud ülaltoodud ressurssidega.
+Teata korduvatest AZD CLI vigadest [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). Azure teenuse intsidentide või tellimusepõhise toe saamiseks kasuta tuge, mis on saadaval [Azure portaalis](https://portal.azure.com/).
+
+## Turvaraportid
+
+Järgi juhiseid failis [SECURITY.md](SECURITY.md) eraviisiliste haavatavuste teatamiseks. Ära postita saladusi ega ekspluateerimisandmeid avalikus kursuse probleemis.
+
+## Microsofti tugipoliitika
+
+Selle haridusprojekti tugi on piiratud eespool loetletud ressurssidega. Kursuse näited ei sisalda tootmistuge.
 
 ---
 
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,433 +1,227 @@
-# ಸರಳ Flask API - Container Apps ಉದಾಹರಣೆ
+# ಸರಳ ಫ್ಲಾಸ್ಕ್ API — ಅಜೂರ್ ಕಂಟೈನರ್ ಅಪ್ಸ್
 
-**ಅಧ್ಯಯನ ಮಾರ್ಗ:** ಆರಂಭಿಕ ⭐ | **ಸಮಯ:** 25-35 ನಿಮಿಷಗಳು | **ಖರ್ಚು:** $0-15/ಮಾಸ
+**ಮಟ್ಟ:** ಪ್ರಾಥಮಿಕ · **ಸಮಯ:** ಸ್ಥಾಪನೆ ಸೇರಿ 30–45 ನಿಮಿಷಗಳು
 
-Azure Container Apps ಅನ್ನು ಬಳಸಿಕೊಂಡು Azure Developer CLI (azd) ಮೂಲಕ ನಿಯೋಜಿಸಲಾದ ಪೂರ್ಣವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ Python Flask REST API. ಈ ಉದಾಹರಣೆ ಕಂಟೈನರ್ ನಿಯೋಜನೆ, ಸ್ವಯಂ-ಸ್ಕೇಲಿಂಗ್ ಮತ್ತು ಮಾನಿಟರಿಂಗ್ ಮೂಲಭೂತಗಳನ್ನು ತೋರಿಸುತ್ತದೆ.
+ಅಜೂರ್ ಡೆವಲಪರ್ CLI (azd) ಬಳಸಿ ಪೈಥಾನ್ ಫ್ಲಾಸ್ಕ್ CRUD API ಅನ್ನು ನಿಯೋಜಿಸಿ. ಮೂಲ, ಡಾಕರ್ಫೈಲ್,
+ಬಿಸೆಪ್, ಹಾಗೂ ನಿಯೋಜನಾ ಪರಿಮಾಣಗಳು ಸೇರಿವೆ. ಇದು **ಕಲಿಕೆಯ ಮಾದರಿ**, ಉತ್ಪಾದನಾ-ತಯಾರ API ಅಲ್ಲ.
 
-## 🎯 ನೀವು ಏನು ಕಲಿಯುತ್ತೀರಿ
 
-- ಕಂಟೈನರೀಕೃತ Python ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು Azure ಗೆ ನಿಯೋಜಿಸುವುದು
-- scale-to-zero ಸಹಿತ ಸ್ವಯಂ-ಸ್ಕೇಲಿಂಗ್ ಅನ್ನು ಸಂರಚಿಸುವುದು
-- ಹೆಲ್ತ್ ಪ್ರೋಬ್‌ಗಳು ಮತ್ತು ರೆಡಿಯ್ನೆಸ್ ಚೆಕ್‌ಗಳನ್ನು ಜಾರಿಗೆ ತರುವುದು
-- ಅಪ್ಲಿಕೇಶನ್ ಲಾಗ್‌ಗಳು ಮತ್ತು ಮೆಟ್ರಿಕ್ಸ್‌ಗಳನ್ನು ಗಮನಿಸುವುದು
-- ವೇಗದ ನಿಯೋಜನೆಗಾಗಿ Azure Developer CLI ಬಳಸುವುದು
+## ನೀವು ಏನು ಕಲಿಯುತ್ತೀರಿ
 
-## 📦 ಒಳಗೊಂಡಿರುವವು
-
-✅ **Flask Application** - ಪೂರ್ಣ REST API CRUD ಕಾರ್ಯಾಚರಣೆಗಳೊಂದಿಗೆ (`src/app.py`)  
-✅ **Dockerfile** - ಉತ್ಪಾದನಾ-ಸಿದ್ಧ ಕಂಟೈನರ್ ಸಂರಚನೆ  
-✅ **Bicep Infrastructure** - Container Apps ಪರಿಸರ ಮತ್ತು API ನಿಯೋಜನೆ  
-✅ **AZD Configuration** - ಒಂದು ಆಜ್ಞೆಯಿಂದ ನಿಯೋಜನೆ ಸೆಟ್‌ಅಪ್  
-✅ **Health Probes** - ಲೈವ್ನೆಸ್ ಮತ್ತು ರೆಡಿನೆಸ್ ಚೆಕ್‌ಗಳು ಸಂರಚಿಸಲಾಗಿದೆ  
-✅ **Auto-scaling** - HTTP ಲೋಡ್ ಆಧಾರದ ಮೇಲೆ 0-10 ರಿಪ್ಲಿಕಾಗಳು  
-
-## ವಾಸ್ತುಶಿಲ್ಪ
+- azd ಮೂಲಕ ಕಂಟೈನರ್ ಅನ್ನು ನಿರ್ಮಿಸಿ ಮತ್ತು ಪ್ರಕಟಿಸಿ.
+- ಇಂಗ್ರೆಸ್ ಮತ್ತು ಲಿವ್ನೆಸ್/ರೆಡಿನೆಸ್ ಪ್ರೋಬ್ಗಳನ್ನು ಸಂರಚಿಸಿ.
+- CRUD ಪ್ರತಿಕ್ರಿಯೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಲಾಗ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ.
+- ಸ್ಮೃತಿ-ಮಾಡಿಕೊಂಡಿರುವ ಡೇಟಾ ದೀರ್ಘಕಾಲಿಕ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗೆ ಯಾಕೆ uygun ಆಗಿಲ್ಲ ಎಂಬುದನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ.
 
 ```mermaid
-graph TD
-    subgraph ACA[ಏಜರ್ ಕಂಟೈನರ್ ಅಪ್ಸ್ ಪರಿಸರ]
-        Flask[Flask API ಕಂಟೈನರ್<br/>ಆರೋಗ್ಯ ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗಳು<br/>REST API<br/>ಸ್ವಯಂ-ಸ್ಕೇಲಿಂಗ್ 0-10 ಪ್ರತಿಕೃತಿಗಳು]
-        AppInsights[ಅಪ್ಲಿಕೇಶನ್ ಇನ್ಸೈಟ್ಸ್]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
 
-## ಪೂರ್ವಾಪೇಕ್ಷೆಗಳು
+**ಮಹತ್ವದ:** ವಸ್ತುಗಳು ಒಂದು ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿ ಇರುತ್ತವೆ. ಮೂಲಭೂತವಾಗಿ **ಒಂದು ಗುನಿಕಾರ್ನ್ ವರ್ಕರ್,
+0–1 ಪ್ರತಿಗಳು** ಎಂದರೆ, ವರ್ಕರ್‌ಗಳ/ಪ್ರತಿಗಳ ನಡುವಿನ ಅಸಾಂರಭದತ್ತೆಯನ್ನು ಉದ್ದೇಶಪೂರ್ವಕವಾಗಿ ತಪ್ಪಿಸಲಾಗಿದೆ.
+ವಸ್ತುಗಳು ಮರುಪ್ರಾರಂಭ, ಪರಿಷ್ಕರಣೆ ಬದಲಾವಣೆ, ಅಥವಾ ಶೂನ್ಯಕ್ಕೆ ವಿಸ್ತರಣೆಯ ಸಂದರ್ಭದಲ್ಲಿ ಕಳೆದುಹೋಗುತ್ತವೆ. ಪ್ರತಿಗಳು ಹೆಚ್ಚಿಸುವುದು
+ಹಂಚಿಕೆಯ ಶಾಶ್ವತ ಸಂಗ್ರಹಣೆಯನ್ನು ಅಗತ್ಯವಿರುತ್ತದೆ. APIಗೆ ಯಾವುದೇ ಪ್ರಮಾಣೀಕರಣ ಅಥವಾ ಅನುಮೋದನೆ ಇಲ್ಲ.
 
-### ಅಗತ್ಯ
-- **Azure Developer CLI (azd)** - [ಸ್ಥಾಪನಾ ಮಾರ್ಗದರ್ಶಿ](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [ಉಚಿತ ಖಾತೆ](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Docker ಅನ್ನು ಸ್ಥಾಪಿಸಿ](https://www.docker.com/products/docker-desktop/) (ಸ್ಥಳೀಯ ಪರೀಕ್ಷೆಗಾಗಿ)
+## ಅಗತ್ಯತೆಗಳು
 
-### ಪೂರ್ವಾಪೇಕ್ಷೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+- [ನ ಜೊತೆ ಸ್ಥಿರಿತಾಂಶ azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (ಪಾರೋಪಕಾರಿಕ ಬಿಡುಗಡೆ ವಿಮರ್ಶಾ ಸಮಯದಲ್ಲಿ: 1.37.2).
+- ಪರಿಶೀಲನೆಗಾಗಿ [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- ಡಾಕರ್ ಮತ್ತು ಅದರ ಡಿಮನ್ ಚಾಲನೆಯಲ್ಲಿ; ಇದು ಮೂಲಭೂತ ಸ್ಥಳೀಯ ಚಿತ್ರ ನಿರ್ಮಾಣಕ್ಕೆ ಬೇಕಾಗುತ್ತದೆ.
+- Azure ಚಂದಾದಾರಿಕೆ, ಸಂಪನ್ಮೂಲ ರಚನೆ ಅನುಮತಿಗಳನ್ನು ಮತ್ತು ಕಾಂಟೇನರ್ ಅಪ್ಸ್ ಪ್ರಾದೇಶಿಕ ಕೋಟಾ.
+- ಕೆಳಗಿನ ಆಜ್ಞೆಗಳಿಗಾಗಿ ಬಾಷ್ (ಅಥವಾ ಸಮಾನವಾದ PowerShell).
+- ಐಚ್ಛಿಕ ಸ್ಥಳೀಯ ಅಭಿವೃದ್ಧಿಗಾಗಿ Python 3.11.
 
 ```bash
-# azd ಆವೃತ್ತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ (1.5.0 ಅಥವಾ ಅದಕ್ಕಿಂತ ಮೇಲಿನ ಅಗತ್ಯ)
 azd version
-
-# Azure ಲಾಗಿನ್ ಪರಿಶೀಲಿಸಿ
+az version
+docker info
 azd auth login
-
-# Docker ಪರಿಶೀಲಿಸಿ (ಐಚ್ಛಿಕ, ಸ್ಥಳೀಯ ಪರೀಕ್ಷೆಗಾಗಿ)
-docker --version
+az login
 ```
 
-## ⏱️ ನಿಯೋಜನೆ ಸಮಯರೇಖೆ
+CLI ಉಪಕರಣಗಳು ಪ್ರತ್ಯೇಕ ಲಾಗಿನ್ ಸೆಷನ್‌ಗಳಿವೆ. ಎರಡೂ ერთಂತಹ ಚಂದಾದಾರಿಕೆಯನ್ನು ಬಳಸಿ.
 
-| ಹಂತ | ಅವಧಿ | ಏನಾಗುತ್ತದೆ |
-|-------|----------|--------------||
-| ಪರಿಸರ ಸ್ಥಾಪನೆ | 30 ಸೆಕೆಂಡುಗಳು | azd ಪರಿಸರವನ್ನು ರಚಿಸಿ |
-| Build container | 2-3 ನಿಮಿಷಗಳು | Docker ಮೂಲಕ Flask ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿರ್ಮಿಸಿ |
-| Provision infrastructure | 3-5 ನಿಮಿಷಗಳು | Container Apps, ರೆಜಿಸ್ಟ್ರಿ, ಮಾನಿಟರಿಂಗ್ ರಚಿಸಿ |
-| Deploy application | 2-3 ನಿಮಿಷಗಳು | ಇಮೇಜ್ ಪುಶ್ ಮಾಡಿ ಮತ್ತು Container Apps ಗೆ ನಿಯೋಜಿಸಿ |
-| **ಒಟ್ಟು** | **8-12 ನಿಮಿಷಗಳು** | ಪೂರ್ಣ ನಿಯೋಜನೆ ತಯಾರಾಗಿದೆ |
+## ದ್ರುತ ಪ್ರಾರಂಭ
 
-## ತ್ವರಿತ ಪ್ರಾರಂಭ
+ಸಂಗ್ರಹದ ಮೂಲದಿಂದ:
 
 ```bash
-# ಉದಾಹರಣೆಗೆ ನವಿಗೇಟ್ ಮಾಡಿ
 cd examples/container-app/simple-flask-api
-
-# ಪರಿಸರವನ್ನು ಪ್ರಾರಂಭಿಸಿ (ವಿಶಿಷ್ಟ ಹೆಸರನ್ನು ಆಯ್ಕೆಮಾಡಿ)
-azd env new myflaskapi
-
-# ಎಲ್ಲವನ್ನೂ ನಿಯೋಜಿಸಿ (ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ + ಅಪ್ಲಿಕೇಶನ್)
+azd env new flask-demo
 azd up
-# ನಿಮಗೆ ಕೆಳಗಿನಂತೆ ಕೇಳಲಾಗುತ್ತದೆ:
-# 1. Azure ಸಬ್ಸ್ಕ್ರಿಪ್ಶನ್ ಆಯ್ಕೆಮಾಡಿ
-# 2. ಸ್ಥಳ ಆಯ್ಕೆಮಾಡಿ (ಉದಾ., eastus2)
-# 3. ನಿಯೋಜನೆಗಾಗಿ 8-12 ನಿಮಿಷ ಕಾಯಿರಿ
-
-# ನಿಮ್ಮ API ಎಂಡ್‌ಪಾಯಿಂಟ್ ಪಡೆಯಿರಿ
-azd env get-values
-
-# API ಅನ್ನು ಪರೀಕ್ಷಿಸಿ
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**ಅಂದುಕೊಂಡ ಫಲಿತಾಂಶ:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ ನಿಯೋಜನೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
-
-### ಹಂತ 1: ನಿಯೋಜನೆ ಸ್ಥಿತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ
-
-```bash
-# ಅಳವಡಿಸಿರುವ ಸೇವೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ
-azd show
-
-# ನಿರೀಕ್ಷಿತ ಔಟ್‌ಪುಟ್ ತೋರಿಸುತ್ತದೆ:
-# - ಸೇವೆ: api
-# - ಎಂಡ್‌ಪಾಯಿಂಟ್: https://ca-api-[env].xxx.azurecontainerapps.io
-# - ಸ್ಥಿತಿ: ಚಾಲನೆಯಲ್ಲಿದೆ
-```
-
-### ಹಂತ 2: API ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗಳನ್ನು ಪರೀಕ್ಷಿಸಿ
-
-```bash
-# API ಎಂಡ್‌ಪಾಯಿಂಟ್ ಪಡೆಯಿರಿ
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# ಹೆಲ್ತ್ ಪರೀಕ್ಷಿಸಿ
-curl $API_URL/health
+ನಿರೀಕ್ಷಿತ: HTTP 200 ಮತ್ತು JSON ಲಭ್ಯವಿದೆ `"status":"healthy"`,
+`"service":"simple-flask-api"` ಮತ್ತು ಪ್ರಸ್ತುತ UTC ಸಮಯದ ಟೈಮ್‌ಸ್ಟ್ಯಾಂಪ್‌.
+ವಸತಿ ನೀಡುವಿಕೆ ಮತ್ತು ಚಿತ್ರ ನಿರ್ಮಾಣ ಸಾಮಾನ್ಯ ತಾನೋಬೆಯನ್ನು ತೆಗೆದುಕೊಳ್ಳುತ್ತದೆ; ಸಮಯ ಭಿನ್ನವಾಗಬಹುದು.
 
-# ರೂಟ್ ಎಂಡ್‌ಪಾಯಿಂಟ್ ಪರೀಕ್ಷಿಸಿ
-curl $API_URL/
+ಪ್ರಾಥಮಿಕ ವಸತಿ ವಿಶೇಷ ಹೆಲೋ-ವಿಶ್ವ ಚಿತ್ರವನ್ನು ಪೋರ್ಟ್ 80 ಮೇಲೆ ಕಾದು ನೋಡುತ್ತದೆ.
+`azure.yaml` ಆಯ್ಕೆ ಮಾಡುತ್ತದೆ `infra/app/api.bicep` ಮತ್ತು ಅದರ ಹೊಂದಾಣಿಕೆಯ ಪರಿಸರ ಫೈಲ್‌ಗಳನ್ನು
+ಸೇವಾ ನಿಯೋಜನೆಗಾಗಿ, ಇದು ಚಿತ್ರದ, ಇನ್‌ಗ್ರೆಸ್ಸಿನ, ಮತ್ತು ಪರೀಕ್ಷೆಗಳ ಪೋರ್ಟ್ 8000ಗೆ ಬದಲಾಯಿಸುತ್ತದೆ.
+ಆ ನಿಯೋಜನೆ ಪರಿಮಾಣಗಳನ್ನು ಅಳಿಸಬೇಡಿ.
 
-# ಒಂದು ಐಟಂ ರಚಿಸಿ
-curl -X POST $API_URL/api/items \
+## CRUD ಪರಿಶೀಲನೆ
+
+ಒಂದೇ ಪ್ರತಿಯು ಸಕ್ರಿಯವಾಗಿರುವಾಗ ಕೆಳಗಿನ ಕ್ರಮವಾಗಿ ನಡೆಸಿ:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# ಎಲ್ಲಾ ಐಟಂಗಳನ್ನು ಪಡೆಯಿರಿ
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**ಯಶಸ್ಸಿನ ಮಾಪಕಗಳು:**
-- ✅ Health endpoint HTTP 200 ಅನ್ನು ಹಿಂತಿರುಗಿಸುತ್ತದೆ
-- ✅ ರೂಟ್ ಎಂಡ್‌ಪಾಯಿಂಟ್ API ಮಾಹಿತಿಯನ್ನು ತೋರಿಸುತ್ತದೆ
-- ✅ POST ಐಟಂ ಅನ್ನು ರಚಿಸುತ್ತದೆ ಮತ್ತು HTTP 201 ಅನ್ನು ಹಿಂತಿರುಗಿಸುತ್ತದೆ
-- ✅ GET ರಚಿಸಿದ ಐಟಂಗಳನ್ನು ಹಿಂತಿರುಗಿಸುತ್ತದೆ
+ಯಶಸ್ಸು: POST 201, ಓದು/PUT 200, DELETE 204 ಬಾಡಿ ಇಲ್ಲದೆ, ನಂತರ ಕಾಣೆಯಾಗದ ವಸ್ತು 404.
+ಬಂತು/ಅವಸ್ತುಗಳಲ್ಲದ JSON ಅಥವಾ ಖಾಲಿ ಹೆಸರು 400 ಅನ್ನು 반환ಿಸುತ್ತದೆ.
+ವಸ್ತು ವಿನಂತಿಗಳ ನಡುವೆ ಕಾಣೆಯಾಗಿದ್ರೆ, ಮರುಪ್ರಾರಂಭ ಅಥವಾ ಶೂನ್ಯಕ್ಕೆ ವಿಸ್ತರಣೆಯ ನಿರೀಕ್ಷಿಸಿ;
+ಇದು ಉದ್ದೇಶಿತ ಮೌಲ್ಯ ಸಂಗ್ರಹ ಮಿತಿಯಾಗಿದೆ, ಶಾಶ್ವತತೆ ಅಲ್ಲ.
 
-### ಹಂತ 3: ಲಾಗ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ
+| ಅಂತಿಮಾಂಕ | ವಿಧಾನಗಳು |
+|---|---|
+| `/` | GET — ಸೇವಾ ಮಾಹಿತಿ |
+| `/health` | GET — ಜೀವಂತತೆ/ತಯಾರಿ |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## ಲಾಗ್‌ಗಳು ಮತ್ತು ಸಂರಚನೆ
 
 ```bash
-# azd monitor ಬಳಸಿ ಜೀವಂತ ಲಾಗ್‌ಗಳನ್ನು ಸ್ಟ್ರೀಮ್ ಮಾಡಿ
-azd monitor --logs
-
-# ಅಥವಾ Azure CLI ಬಳಸಿ:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# ನೀವು ಕೆಳಗಿನವುಗಳನ್ನು ಕಾಣಬಹುದು:
-# - Gunicorn ಪ್ರಾರಂಭದ ಸಂದೇಶಗಳು
-# - HTTP ವಿನಂತಿ ಲಾಗ್‌ಗಳು
-# - ಅಪ್ಲಿಕೇಶನ್ ಮಾಹಿತಿ ಲಾಗ್‌ಗಳು
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## ಪ್ರಾಜೆಕ್ಟ್ ರಚನೆ
+ನಿರೀಕ್ಷಿತ: ಗುನಿಕಾರ್ನ್ ಆರಂಭ, ವಿನಂತಿ ಪ್ರವೇಶ ಲಾಗ್‌ಗಳು ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಸಂದೇಶಗಳು.
+`azd monitor --logs` ಪೋರ್ಟಲ್ ವೀಕ್ಷಣೆಯನ್ನು ತೆರೆಯುತ್ತದೆ; ಇದು ಟರ್ಮಿನಲ್‌ಗೆ ನೇರ ಸಂಚಲನ ಮಾಡದು.
+ಅಪ್ಲಿಕೇಶನ್ ಇನ್ಸೈಟ್ಸ್ ವಸತಿಗೊಳ್ಳಲಾಗಿದೆ ಆದರೆ **ಈ ಫ್ಲಾಸ್ಕ್ ಕೋಡ್ ಮೂಲಕ ಸಾಧನೀಕೃತವಿಲ್ಲ**;
+stdout ಲಾಗ್‌ಗಳಿಗಾಗಿ Container Apps/ಲಾಗ್ ಅನಾಲಿಟಿಕ್ಸ್ ಬಳಸಿ.
 
+`infra/app/api.bicep`ನ್ನು CPU/ಮೆಮೊರಿ, ಪ್ರತಿಗಳ ಮಿತಿಗಳು ಬದಲಾವಣೆಗೆ, ಅಥವಾ ವಿಸ್ತರಣೆ ನಿಯಮಗಳಿಗೆ ಸಂಪಾದಿಸಿ, ನಂತರ
+`azd up` ಚಲಾಯಿಸಿ. ಮೂಲಭೂತ ಅಂಶಗಳು 0.5 vCPU, 1 GiB, ಕನಿಷ್ಠ 0 / ಗರಿಷ್ಟ 1 ಪ್ರತಿಯು, ಮತ್ತು
+HTTP ಗಡಿಪಾರು 50 ಸಕರಾತ್ಮಕ ವಿನಂತಿಗಳು. ಶೂನ್ಯಕ್ಕೆ ವಿಸ್ತರಣೆ ಶೀತಲ ಆರಂಭಿಕ ಲಾಂಬಿಕೆ ಸೇರಿಸಬಹುದು.
+
+ಮನಮಮಟ್ಟದ `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL`, ಅಥವಾ
+`SCALE_TO_ZERO_TIMEOUT` ಮೌಲ್ಯಗಳು **ಈ ಟೆಂಪ್ಲೇಟ್ ಅಥವಾ ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಜೋಡಿಸಲ್ಪಟ್ಟಿಲ್ಲ**.
+ಮೌಲ್ಯವನ್ನು ಹೊಂದಿಸುವುದರಿಂದ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಇದು ಓಡು ಸಮಯ ಪರಿಸರ ಚರ ಬದಲಾಗುವುದಿಲ್ಲ.
+ಚಿತ್ರವು ಸ್ಪಷ್ಟವಾಗಿ ಪೋರ್ಟ್ 8000 ಅನ್ನು ಬಿಂಧಿಸುತ್ತದೆ; ಪೋರ್ಟ್ ಬದಲಾಯಿಸಿದರೆ ಡಾಕರ್ಫೈಲ್, ಬಿಸೆಪ್ ಇನ್‌ಗ್ರೆಸ್ಸು, ಮತ್ತು ಪರೀಕ್ಷೇಗಳನ್ನು
+ಒಂದೇ ವೇಳೆ ನವೀಕರಿಸಿ.
+
+## ಫೈಲ್‌ಗಳು
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗಳು
+## ಸ್ಥಳೀಯ ಅಭಿವೃದ್ಧಿ
 
-| ಎಂಡ್‌ಪಾಯಿಂಟ್ | ವಿಧಾನ | ವಿವರಣೆ |
-|----------|--------|-------------|
-| `/health` | GET | ಹೆಲ್ತ್ ಚೆಕ್ |
-| `/api/items` | GET | ಎಲ್ಲಾ ಐಟಂಗಳನ್ನು ಪಟ್ಟಿ ಮಾಡಿ |
-| `/api/items` | POST | ಹೊಸ ಐಟಂ ರಚಿಸು |
-| `/api/items/{id}` | GET | ನಿರ್ದಿಷ್ಟ ಐಟಂ ಪಡೆಯಿರಿ |
-| `/api/items/{id}` | PUT | ಐಟಂ ನವೀಕರಿಸಿ |
-| `/api/items/{id}` | DELETE | ಐಟಂ ಅಳಿಸಿ |
-
-## ಸಂರಚನೆ
-
-### ಪರಿಸರ ಚರಗಳು
+ಈ ಉದಾಹರಣೆ ಡೈರೆಕ್ಟರಿಯಿಂದ:
 
 ```bash
-# ಕಸ್ಟಮ್ ಸಂರಚನೆಯನ್ನು ಹೊಂದಿಸಿ
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### ಸ್ಕೇಲಿಂಗ್ ಸಂರಚನೆ
-
-API ಸ್ವಯಂಚಾಲಿತವಾಗಿ HTTP ಟ್ರಾಫಿಕ್ ಆಧಾರದ ಮೇಲೆ ಸ್ಕೇಲ್ ಆಗುತ್ತದೆ:
-- **ಕನಿಷ್ಟ ರಿಪ್ಲಿಕಾಗಳು**: 0 (ನಿಶ್ಚಲ ಸಮಯದಲ್ಲಿ ಶೂನ್ಯಕ್ಕೆ ಸ್ಕೇಲ್ ಆಗುತ್ತದೆ)
-- **ಗರಿಷ್ಠ ರಿಪ್ಲಿಕಾಗಳು**: 10
-- **ಪ್ರತಿ ರಿಪ್ಲಿಕಾಗೆ ಸಮಕಾಲೀನ ವಿನಂತಿಗಳು**: 50
-
-## ಅಭಿವೃದ್ಧಿ
-
-### ಸ್ಥಳೀಯವಾಗಿ ಚಾಲನೆ ಮಾಡಿ
+ಇನ್ನೊಬ್ಬ ಟರ್ಮಿನಲ್‌ನಲ್ಲಿ `http://localhost:8000/health` ಮತ್ತು CRUD ಅಂತಿಮಾಂಕಗಳನ್ನು ಪರೀಕ್ಷಿಸಿ.
+ಅಥವಾ ನಿಜವಾದ ಚಿತ್ರವನ್ನು ನಿರ್ಮಿಸಿ ಮತ್ತು ಚಲಾಯಿಸಿ:
 
 ```bash
-# ಅವಲಂಬನೆಗಳನ್ನು ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ
-cd src
-pip install -r requirements.txt
-
-# ಆಪ್ ಅನ್ನು ಓಡಿಸಿ
-python app.py
-
-# ಸ್ಥಳೀಯವಾಗಿ ಪರೀಕ್ಷಿಸಿ
-curl http://localhost:8000/health
-```
-
-### ಕಂಟೈನರ್ ನಿರ್ಮಿಸಿ ಮತ್ತು ಪರೀಕ್ಷೆ ಮಾಡಿ
-
-```bash
-# Docker ಇಮೇಜ್ ನಿರ್ಮಿಸಿ
 docker build -t flask-api:local ./src
-
-# ಸ್ಥಳೀಯವಾಗಿ ಕಂಟೇನರ್ ಅನ್ನು ಓಡಿಸಿ
-docker run -p 8000:8000 flask-api:local
-
-# ಕಂಟೇನರ್ ಅನ್ನು ಪರೀಕ್ಷಿಸಿ
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## ನಿಯೋಜನೆ
+ಮೊದಲ ನಿಯೋಜನೆಯ ನಂತರ ಕೋಡ್ ಮಾತ್ರ ಬದಲಾವಣೆಗಳಿಗಾಗಿ `azd deploy api` ಅನ್ನು ಚಲಾಯಿಸಿ.
+ಬಿಸೆಪ್ ಬದಲಾವಣೆಗಳಿಗೆ, ಮರು-ವಸತಿ ಮತ್ತು ನಿಯೋಜನೆಗಾಗಿ `azd up` ಅನ್ನು ಚಲಾಯಿಸಿ.
 
-### ಪೂರ್ಣ ನಿಯೋಜನೆ
+## ಪ್ರಾಯೋಗಿಕ ಅಭ್ಯಾಸಗಳು
+
+### 1. ಇನ್‌ಪುಟ್ ನಿರಾಕರಣೆಯನ್ನು ಮಾನ್ಯಗೊಳಿಸಿ
+
+**ಆರಂಭಿಕ ಬಿಂದು:** ನಿಯೋಜಿತ API, ಮೇಲಿನ `API_URL`.
+**ಗುರಿ:** API ಅಮಾನ್ಯ JSON ರೂಪರೇಖೆ ಮತ್ತು ಇಲ್ಲದ ಹೆಸರುಗಳನ್ನು ನಿರಾಕರಿಸುತ್ತದೆ ಎಂದು ಪರಿಶೀಲಿಸಿ.
 
 ```bash
-# ಆಧಾರಸೌಕರ್ಯ ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿಯೋಜಿಸಿ
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### ಕೋಡ್-ಮಾತ್ರ ನಿಯೋಜನೆ
+**ಯಶಸ್ವಿ ಮಾನದಂಡ / ಪರಿಹಾರ:** ಎರಡೂ 400 ಅನ್ನು JSON ದೋಷದೊಂದಿಗೆ ಹಿಂದಿರುಗಿಸುತ್ತವೆ, 500 ಅಲ್ಲ.
+**ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆ:** JSON ವಿಷಯ-ಪ್ರಕಾರ ಹೆಡ್ಡರ್ ಅನ್ನು ಮೊರೆತುವುದು.
+
+### 2. ಓದಲು ಮಾತ್ರವಿರುವ ಆವೃತ್ತಿ ಅಂತಿಮಾಂಕವನ್ನು ಸೇರಿಸು
+
+**ಆರಂಭಿಕ ಬಿಂದು:** `src/app.py`. **ಗುರಿ:** API ವಿಸ್ತರಿಸಿ ಮತ್ತು ಮರುನಿಯೋಜಿಸಿ.
+`if __name__ == '__main__':` ಬ್ಲಾಕ್‌ಗಾಗಿ ಮುಂಚೆ ಇದನ್ನು ಸೇರಿಸಿ:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+`azd deploy api` ಓಡಿಸಿ, ನಂತರ `curl --fail-with-body "${API_URL}/version"`.
+**ಯಶಸ್ವಿ ಮಾನದಂಡ:** HTTP 200 ಮತ್ತು `{"version":"1.0.0"}`.
+**ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆ:** ಬ್ಲಾಕಿಂಗ್ `app.run()` ಕರೆ ನಂತರ ಮಾರ್ಗವನ್ನು ಇಡುವುದು
+`python src/app.py` ಬಳಸಿ ಪರೀಕ್ಷಿಸುವಾಗ.
+
+### ಜ್ಞಾನ ಪರಿಶೀಲನಾ ಬಿಂದು
+
+ದೌರ್ಲಭ್ಯವಿರುವ ಡೇಟಾಗಾಗಿ ಏಕೆ ಒಂದೇ ಕಾರ್ಮಿಕ کافیವಲ್ಲ? ಏಕೆಂದರೆ ಒಂದೇ ಪ್ರಕ್ರಿಯೆಯು ಮರುಪ್ರಾರಂಭದ ಮೇಲೆ
+ಅದರ ನಿಘಂಟು ಕಳೆದುಕೊಳ್ಳುತ್ತದೆ. ಉತ್ಪಾದನಾ ಆವೃತ್ತಿಗೆ ಸ್ಥಿರ ಹಂಚಿಕೆದ ಸ್ಟೋರೇಜ್,
+ದೃಢೀಕರಣ, ಅನುಮತಿ, ಸ್ಥಳಾಂತರಗಳು, ಪರೀಕ್ಷೆಗಳು, ಮತ್ತು ಕಾರ್ಯಾಚರಣೆ мониторिंग್ ಅಗತ್ಯವಿದೆ.
+
+## ವೆಚ್ಚಗಳು ಮತ್ತು ಸಮಸ್ಯೆ ಪರಿಹಾರ
+
+ಇದು $0 ನಿಯೋಜನೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಲು ಸಾಧ್ಯವಿಲ್ಲ: ಮೂಲ הרשימה ಮತ್ತು ಲಾಗ್ ಸಂಗ್ರಹ/ಖಾತರಿ
+ಅಪ್ಲಿಕೇಶನ್ ಗಣನೆ ಶೂನ್ಯದಲ್ಲಿದ್ದರೂ ಬಿಲ್ ಆಗಬಹುದು. ನಿಮ್ಮ ಪ್ರದೇಶಕ್ಕೆ
+[ಬೆಲೆ ಲೆಕ್ಕಕಳಕ](https://azure.microsoft.com/pricing/calculator/) ಅನ್ನು ಬಳಸಿ.
+
+- **ಡೋಕರ್ ನಿರ್ಮಾಣ ವಿಫಲತೆ:** `docker info`, ನೆಟ್‌ವರ್ಕ್ ಪ್ರವೇಶ ಮತ್ತು ಅವಲಂಬನೆಗಳನ್ನು ದೃಢೀಕರಿಸಿ.
+- **ಅಸ್ವಸ್ಥ ಅಪ್:** ಕಾಂಸೋಲ್/ಸಿಸ್ಟಮ್ ಲಾಗ್ಗಳು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಇಮೇಜ್ ಪೋರ್ಟ್, ಇನ್ಗ್ರೆಸ್,
+  ಮತ್ತು ಪ್ರೋಬ್ಗಳು ಒಪ್ಪಿಕೊಡುತ್ತವೆಯೇ ಎಂದು ಖಚಿತಪಡಿಸಿ. ಫ್ಲಾಸ್ಕ್ ಪೋರ್ಟ್ ಮೇಲೆ ಸ್ಥಳಪಾಲಕ ಪ್ರೋಬ್ ಮಾಡಬಾರದು.
+- **403/ಅನುಮತಿ:** ಚಂದಾ ಮತ್ತು ಸಂಪನ್ಮೂಲ ನಿರ್ಮಾಣ ಅನುಮತಿಗಳನ್ನು ದೃಢೀಕರಿಸಿ.
+- **ವಸ್ತುವುಗಳು ಕಾಣಿಸಹೋಗುವುದು:** ಮೆಮೊರಿಗೆಲ್ಲಾ ಸ್ಥಿತಿ ಮರುಾರಂಭ/ಶೂನ್ಯಕ್ಕೆ ಸ್ಕೇಲ್ ಮಾಡುತ್ತಿರುವಾಗ ಪುನಃಹೊಂದಿಸುತ್ತದೆ; ದೌರ್ಲಭ್ಯವಿರುವ ನಡವಳಿಕೆಗಾಗಿ ಡೇಟಾಬೇಸ್ ಸೇರಿಸಿ.
+
+
+## ಸ್ವಚ್ಛತೆ ಮತ್ತು ಮುಂದಿನ ಹಂತಗಳು
 
 ```bash
-# ಅಪ್ಲಿಕೇಶನ್‌ ಕೋಡ್ ಅನ್ನು ಮಾತ್ರ ನಿಯೋಜಿಸಿ (ಮೂಲಸೌಕರ್ಯ ಬದಲಾಗದಿರಲಿ)
-azd deploy api
+azd down
 ```
 
-### ಸಂರಚನೆಯನ್ನು ನವೀಕರಿಸಿ
+ಅಳಿಸುವಿಕೆಯ ಪ್ರಾಂಪ್ಟ್ ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಸಮರ್ಪಿತ ಸಂಪನ್ಮೂಲ ಗುಂಪು ತೆಗೆದುಹಾಕಲ್ಪಟ್ಟಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿ.
+ಸಂಬಂಧವಿಲ್ಲದ ಡೇಟಾವಿರುವ ಸಂಪನ್ಮೂಲ ಗುಂಪಿನ ವಿರುದ್ಧ ಧ್ವಂಸಕಾರಕ ಸ್ವಚ್ಛತೆ ಬಳಸಬೇಡಿ.
 
-```bash
-# ಪರಿಸರ ಚರಗಳನ್ನು ನವೀಕರಿಸಿ
-azd env set API_KEY "new-api-key"
-
-# ಹೊಸ ಸಂರಚನೆಯೊಂದಿಗೆ ಮರುಸ್ಥಾಪನೆ ಮಾಡಿ
-azd deploy api
-```
-
-## ಮಾನಿಟರಿಂಗ್
-
-### ಲಾಗ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ
-
-```bash
-# azd monitor ಬಳಸಿ ನೇರ ಲಾಗ್‌ಗಳನ್ನು ಸ್ಟ್ರೀಮ್ ಮಾಡಿ
-azd monitor --logs
-
-# ಅಥವಾ Container Apps ಗಾಗಿ Azure CLI ಬಳಸಿ:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# ಕೊನೆಯ 100 ಸಾಲುಗಳನ್ನು ವೀಕ್ಷಿಸಿ
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### ಮೆಟ್ರಿಕ್‌ಗಳನ್ನು ಮಾನಿಟರ್ ಮಾಡಿ
-
-```bash
-# Azure Monitor ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ತೆರೆಯಿರಿ
-azd monitor --overview
-
-# ನಿರ್ದಿಷ್ಟ ಮೆಟ್ರಿಕ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## ಪರೀಕ್ಷೆ
-
-### ಆರೋಗ್ಯ ಪರಿಶೀಲನೆ
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-ಎಂದು ನಿರೀಕ್ಷಿತ ಪ್ರತಿಕ್ರಿಯೆ:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### ಐಟಂ ರಚನೆ
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### ಎಲ್ಲಾ ಐಟಂಗಳನ್ನು ಪಡೆಯಿರಿ
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## ವೆಚ್ಚ ಉಳಿತಾಯ
-
-ಈ ನಿಯೋಜನೆ scale-to-zero ಬಳಸುತ್ತದೆ, ಆದ್ದರಿಂದ API ವಿನಂತಿಗಳನ್ನು ಪ್ರಾಸೆಸ್ ಮಾಡುವಾಗ ಮಾತ್ರ ನೀವು ಪಾವತಿಸುತ್ತೀರಿ:
-
-- **ನಿಶ್ಚಲ ವೆಚ್ಚ**: ~$0/ಮಾಸ (ಶೂನ್ಯಕ್ಕೆ ಸ್ಕೇಲ್ ಆಗುತ್ತದೆ)
-- **ಚಟುವಟಿಕೆಯ ವೆಚ್ಚ**: ~$0.000024/ಸೆಕೆಂಡ್ ಪ್ರತಿ ರಿಪ್ಲಿಕಾ
-- **ನಿರೀಕ್ಷಿತ ಮಾಸಿಕ ವೆಚ್ಚ** (ತಗ್ಗಿನ ಬಳಕೆ): $5-15
-
-### ವೆಚ್ಚ ಇನ್ನು ಕಡಿಮೆ ಮಾಡುವುದು
-
-```bash
-# ಡೆವ್‌ಗಾಗಿ ಗರಿಷ್ಠ ರೆಪ್ಲಿಕಾಗಳನ್ನು ಕಡಿಮೆ ಮಾಡಿ
-azd env set MAX_REPLICAS 3
-
-# ಕಡಿಮೆ ನಿಷ್ಕ್ರಿಯ ಸಮಯ ಮಿತಿಯನ್ನು ಬಳಸಿ
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 ನಿಮಿಷ
-```
-
-## ಸಮಸ್ಯೆ ಪರಿಹಾರ
-
-### ಕಂಟೈನರ್ ಪ್ರಾರಂಭವಾಗುವುದಿಲ್ಲ
-
-```bash
-# Azure CLI ಬಳಸಿ ಕಂಟೇನರ್ ಲಾಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Docker ಇಮೇಜ್‌ಗಳ ನಿರ್ಮಾಣವನ್ನು ಸ್ಥಳೀಯವಾಗಿ ಪರಿಶೀಲಿಸಿ
-docker build -t test ./src
-```
-
-### API ಪ್ರವೇಶವಿಲ್ಲ
-
-```bash
-# Ingress ಹೊರಗಿನದಾಗಿದೆ ಎಂದು ಪರಿಶೀಲಿಸಿ
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### ಉತ್ತರ ಸಮಯ ಹೆಚ್ಚಾಗಿದೆ
-
-```bash
-# CPU/ಮೆಮೊರಿ ಬಳಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# ಅಗತ್ಯವಿದ್ದರೆ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಹೆಚ್ಚಿಸಿ
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## ಸ್ವಚ್ಛಗೊಳಿಸು
-
-```bash
-# ಎಲ್ಲಾ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಅಳಿಸಿ
-azd down --force --purge
-```
-
-## ಮುಂದಿನ ಹಂತಗಳು
-
-### ಈ ಉದಾಹರಣೆಯನ್ನು ವಿಸ್ತರಿಸಿ
-
-1. **ಡೇಟಾಬೇಸ್ ಸೇರಿಸಿ** - Azure Cosmos DB ಅಥವಾ SQL Database ಅನ್ನು ಇಂಟಿಗ್ರೇಟ್ ಮಾಡಿ
-   ```bash
-   # infra/main.bicep ಗೆ Cosmos DB ಮಾಡ್ಯೂಲ್ ಸೇರಿಸಿ
-   # app.py ಅನ್ನು ಡೇಟಾಬೇಸ್ ಸಂಪರ್ಕದೊಂದಿಗೆ ನವೀಕರಿಸಿ
-   ```
-
-2. **ಪ್ರಮಾಣೀಕರಣ ಸೇರಿಸಿ** - Microsoft Entra ID ಅಥವಾ API ಕೀಗಳನ್ನು ಜಾರಿಗೆ ತರು
-   ```python
-   # app.py ಗೆ ಪ್ರಾಮಾಣೀಕರಣ ಮಧ್ಯವರ್ತಿಯನ್ನು ಸೇರಿಸಿ
-   from functools import wraps
-   ```
-
-3. **CI/CD ಅನ್ನು ಹೊಂದಿಸಿ** - GitHub Actions ವರ್ಕ್‌ಫ್ಲೋ
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Managed Identity ಸೇರಿಸಿ** - Azure ಸೇವೆಗಳಿಗೆ ಸುರಕ್ಷಿತ ಪ್ರವೇಶ ದೊರಕಿಸಲು
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### ಸಂಬಂಧಿತ ಉದಾಹರಣೆಗಳು
-
-- **[ಡೇಟಾಬೇಸ್ ಅಪ್](../../../../../examples/database-app)** - SQL ಡೇಟಾಬೇಸ್‌ನೊಂದಿಗೆ ಸಂಪೂರ್ಣ ಉದಾಹರಣೆ
-- **[ಮೈಕ್ರೋಸರ್ವಿಸಸ್](../../../../../examples/container-app/microservices)** - ಬಹು-ಸೇವೆಗಳ ವಾಸ್ತುಶಿಲ್ಪ
-- **[Container Apps Master Guide](../README.md)** - ಎಲ್ಲಾ ಕಂಟೈನರ್ ಮಾದರಿಗಳು
-
-### ಅಭ್ಯಾಸ ಸಂಪನ್ಮೂಲಗಳು
-
-- 📚 [AZD For Beginners Course](../../../README.md) - ಮುಖ್ಯ ಕೋರ್ಸ್ ಹೋಮ್
-- 📚 [Container Apps Patterns](../README.md) - ಇನ್ನಷ್ಟು ನಿಯೋಜನೆ ಮಾದರಿಗಳು
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - ಸಮುದಾಯ ಟೆಂಪ್ಲೇಟುಗಳು
-
-## ಹೆಚ್ಚುವರಿ ಸಂಪನ್ಮೂಲಗಳು
-
-### ಡಾಕ್ಯುಮೆಂಟೇಶನ್
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask ಫ್ರೇಮ್ವರ್ಕ್ ಮಾರ್ಗದರ್ಶಿ
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - ಅಧಿಕೃತ Azure ಡಾಕ್ಯುಮೆಂಟ್‌ಗಳು
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd ಆಜ್ಞೆಗಳ ಉಲ್ಲೇಖ
-
-### ಟ್ಯುಟೋರಿಯಲ್ಸ್
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - ನಿಮ್ಮ ಮೊದಲ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿಯೋಜಿಸಿ
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python ಅಭಿವೃದ್ಧಿ ಮಾರ್ಗದರ್ಶಿ
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - ಮೂಲಸೌಕರ್ಯವನ್ನು ಕೋಡ್‌ ಆಗಿ
-
-### ಉಪಕರಣಗಳು
-- **[Azure Portal](https://portal.azure.com)** - ಸಂಪನ್ಮೂಲಗಳನ್ನು ದೃಶ್ಯವಾಗಿ ನಿರ್ವಹಿಸಿ
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE ಇಂಟಿಗ್ರೇಶನ್
-
----
-
-**🎉 ಅಭಿನಂದನೆಗಳು!** ನೀವು auto-scaling ಮತ್ತು ಮಾನಿಟರಿಂಗ್‌ ಜೊತೆಗೆ Azure Container Apps ಗೆ ಉತ್ಪಾದನಾ-ಯೋಗ್ಯ Flask API ಅನ್ನು ನಿಯೋಜಿಸಿದ್ದೀರಿ.
-
-**ಪ್ರಶ್ನೆಗಳು?** [ಇಶ್ಯೂ ತೆರೆಯಿರಿ](https://github.com/microsoft/AZD-for-beginners/issues) ಅಥವಾ [ಸಾಮಾನ್ಯ ಪ್ರಶ್ನೆಗಳು](../../../resources/faq.md) ಪರಿಶೀಲಿಸಿ
+[ಮುಂದೆ: ಡೇಟಾಬೇಸ್ ಅಪ್](../../../../../examples/database-app) · [ಮೈಕ್ರೋಸರ್ವೀಸುಗಳು](../../../../../examples/container-app/microservices) ·
+[ಕಂಟೇನರ್ ಅವಲೋಕನ](../README.md) · [ಕೋರ್ಸ್ ಮನೆ](../../../README.md) ·
+[ಸಮಸ್ಯೆಯನ್ನು ವರದಿ ಮಾಡು](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

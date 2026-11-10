@@ -1,22 +1,22 @@
 # Chapter 3: Configuration & Authentication
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 45-60 minutes | **⭐ Complexity**: Intermediate
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 90-150 minutes wey include integration practice | **⭐ Complexity**: Intermediate
 
 ---
 
 ## Overview
 
-Dis chapter dey cover how to set environment, authentication patten dem, plus security beta way dem for Azure Developer CLI deployment.
+Dis chapter dey cover how to arrange environment configuration, authentication patterns, and security best practices for Azure Developer CLI deployments.
 
-> Validate with `azd 1.27.1` for July 2026.
+> Command and configuration review target: `azd 1.37.2` (November 2026). Live Azure provisioning no run during review.
 
 ## Learning Objectives
 
-If you finish dis chapter, you go fit:
-- Control the AZD configuration order
-- Manage plenti different environment dem (dev, staging, prod)
-- Use secure authentication wit managed identities
-- Setup settings wey base on environment
+If you finish dis chapter, you go:
+- Master di AZD configuration hierarchy
+- Manage plenty environments (dev, staging, prod)
+- Implement secure authentication wit managed identities
+- Configure environment-specific settings
 
 ---
 
@@ -24,56 +24,56 @@ If you finish dis chapter, you go fit:
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Configuration Guide](configuration.md) | How to set up and manage environment | 30 min |
-| 2 | [Authentication & Security](authsecurity.md) | Managed identity plus RBAC patten dem | 30 min |
+| 1 | [Configuration Guide](configuration.md) | How to setup and manage environment | 30 min |
+| 2 | [Authentication & Security](authsecurity.md) | Managed identity and RBAC patterns | 30 min |
 
 ---
 
 ## 🚀 Quick Start
 
+Run am from di root of an **already initialized azd application**, no di course repository. Use environment names wey nobody dey use if these ones don already dey.
+
 ```bash
-# Make plenty environments
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Change environments
+# Switch environments
 azd env select prod
 
-# Put environment variables
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# See configuration
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` na just example: e go affect infrastructure only if your template reason am well. Normal `azd env set` values dey save local local in plain text; no be secret for secure storage.
 
 ---
 
 ## 🔧 Configuration Hierarchy
 
-AZD dey follow dis kain order for settings (wey later one dey override di previous one):
-
-1. **Default values** (dem put am inside templates)
-2. **azure.yaml** (project configuration)
-3. **Environment variables** (`azd env set`)
-4. **Command-line flags** (`--location eastus`)
+Make you keep three different configuration surfaces separate: global preferences (`azd config`), project structure (`azure.yaml`), and per-environment values (`azd env`). Flags go override only the settings wey dem really support; no be say any environment variable go just fit do overlay for `azure.yaml` or Bicep anyhow.
 
 ---
 
 ## 🔐 Security Best Practices
 
 ```bash
-# Use managed identity (dem recommend am)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
 # Check AZD authentication status
-azd auth status
+azd auth login --check-status
 
-# Optional: make sure say Azure CLI context correct if you wan run az commands
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Re-authenticate if e need am
+# Re-authenticate if needed
 azd auth login
 
 # Optional: refresh Azure CLI authentication for az commands

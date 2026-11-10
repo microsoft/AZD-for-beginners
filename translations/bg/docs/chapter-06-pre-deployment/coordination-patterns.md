@@ -1,111 +1,113 @@
-# Модели за координация на многoагентни системи
+# Шаблони за координация на многоагентни системи
 
-⏱️ **Прогнозирано време**: 60-75 minutes | 💰 **Оценена цена**: ~$100-300/month | ⭐ **Сложност**: Напреднала
+⏱️ **Прогнозно времетраене**: 60-75 минути четене; няколко часа за имплементация | 💰 **Прогнозна цена**: зависи от натоварването | ⭐ **Сложност**: Напреднала
 
 **📚 Учебен път:**
-- ← Предишен: [Планиране на капацитет](capacity-planning.md) - Оценка на ресурси и стратегии за скалиране
-- 🎯 **Вие сте тук**: Модели за координация на многоагентни системи (оркестрация, комуникация, управление на състоянието)
-- → Напред: [Избор на SKU](sku-selection.md) - Избор на подходящите Azure услуги
-- 🏠 [Начало на курса](../../README.md)
+- ← Предишен: [Планиране на капацитет](capacity-planning.md) - стратегии за оразмеряване и мащабиране на ресурси
+- 🎯 **Тук сте**: Шаблони за координация на многоагентни системи (Оркестрация, комуникация, управление на състояние)
+- → Следващ: [Избор на SKU](sku-selection.md) - Избор на подходящи услуги в Azure
+- 🏠 [Начална страница на курса](../../README.md)
 
 ---
 
 ## Какво ще научите
 
 След завършване на този урок, ще:
-- Разбирате моделите на **многоагентна архитектура** и кога да ги използвате
-- Реализирате **оркестрационни модели** (централизирани, децентрализирани, йерархични)
-- Проектирате стратегии за **комуникация между агенти** (синхронна, асинхронна, събитийно-ориентирана)
+- Разберете **шаблоните за многоагентна архитектура** и кога да ги използвате
+- Имплементирате **шаблони за оркестрация** (централизирани, децентрализирани, йерархични)
+- Проектирате **стратегии за комуникация между агенти** (синхронни, асинхронни, базирани на събития)
 - Управлявате **споделено състояние** между разпределени агенти
-- Разгръщате **многоагентни системи** в Azure с AZD
-- Прилагате **координационни модели** в реални AI сценарии
-- Наблюдавате и отстранявате грешки в разпределени агентни системи
+- Деплойнете **многоагентни системи** на Azure с AZD
+- Приложите **шаблони за координация** в реални AI сценарии
+- Наблюдавате и отстранявате грешки в разпределени агентски системи
 
 ## Защо координацията на многоагентни системи е важна
 
-### Еволюцията: От единичен агент към многоагентна система
+### Еволюция: От един агент към многоагентна система
 
-**Единичен агент (Прост):**
+**Един агент (Просто):**
 ```
 User → Agent → Response
 ```
-- ✅ Лесен за разбиране и внедряване
+- ✅ Лесен за разбиране и имплементиране
 - ✅ Бърз за прости задачи
-- ❌ Ограничен от възможностите на единичния модел
+- ❌ Ограничен от възможностите на един модел
 - ❌ Не може да паралелизира сложни задачи
-- ❌ Липсва специализация
+- ❌ Без специализация
 
 **Многоагентна система (Напреднала):**
 ```mermaid
 graph TD
-    Orchestrator[Оркестратор] --> Agent1[Агент1<br/>План]
-    Orchestrator --> Agent2[Агент2<br/>Код]
-    Orchestrator --> Agent3[Агент3<br/>Преглед]
-```- ✅ Специализирани агенти за конкретни задачи
-- ✅ Паралелно изпълнение за по-висока скорост
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```
+- ✅ Специализирани агенти за конкретни задачи
+- ✅ Паралелно изпълнение за по-бърза работа
 - ✅ Модулна и лесна за поддръжка
-- ✅ По-добра при сложни работни потоци
-- ⚠️ Изисква логика за координация
+- ✅ По-добър при сложни работни процеси
+- ⚠️ Изисква координационна логика
 
-**Аналогия**: Единичният агент е като един човек, който върши всички задачи. Многоагентната система е като екип, където всеки член има специализирани умения (изследовател, програмист, рецензент, писател), работещи заедно.
+**Аналогия**: Един агент е като един човек, който върши всички задачи. Многоагентната система е като екип, в който всеки член има специализирани умения (изследовател, кодер, рецензент, писател), работещи заедно.
 
 ---
 
-## Основни модели за координация
+## Основни шаблони за координация
 
-### Модел 1: Последователна координация (Верига на отговорност)
+### Шаблон 1: Последователна координация (Низ от отговорности)
 
-**Кога да се използва**: Задачите трябва да се изпълнят в определен ред, всеки агент надгражда върху изхода на предишния.
+**Кога да се използва**: Задачите трябва да се изпълняват в определен ред, всеки агент работи върху предишния резултат.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as Изследователски агент
-    participant Agent2 as Писателски агент
-    participant Agent3 as Редакторски агент
+    participant Agent1 as Research Agent
+    participant Agent2 as Writer Agent
+    participant Agent3 as Editor Agent
     
-    User->>Orchestrator: "Напиши статия за ИИ"
-    Orchestrator->>Agent1: Проучи темата
-    Agent1-->>Orchestrator: Резултати от проучването
-    Orchestrator->>Agent2: Напиши чернова (използвайки проучването)
-    Agent2-->>Orchestrator: Чернова на статията
-    Orchestrator->>Agent3: Редактирай и подобри
-    Agent3-->>Orchestrator: Окончателна статия
-    Orchestrator-->>User: Полирана статия
+    User->>Orchestrator: "Write article about AI"
+    Orchestrator->>Agent1: Research topic
+    Agent1-->>Orchestrator: Research results
+    Orchestrator->>Agent2: Write draft (using research)
+    Agent2-->>Orchestrator: Draft article
+    Orchestrator->>Agent3: Edit and improve
+    Agent3-->>Orchestrator: Final article
+    Orchestrator-->>User: Polished article
     
-    Note over User,Agent3: Последователно: Всеки етап изчаква предишния
+    Note over User,Agent3: Sequential: Each step waits for previous
 ```
-**Ползи:**
+
+**Предимства:**
 - ✅ Ясен поток на данни
-- ✅ Лесно за отстраняване на грешки
+- ✅ Лесно отстраняване на грешки
 - ✅ Предвидим ред на изпълнение
 
 **Ограничения:**
 - ❌ По-бавно (без паралелизъм)
-- ❌ Една грешка блокира цялата верига
-- ❌ Не може да обработва взаимнозависими задачи
+- ❌ Един провал блокира цялата верига
+- ❌ Не може да управлява взаимнозависими задачи
 
 **Примери за употреба:**
-- Поток за създаване на съдържание (изследване → писане → редакция → публикуване)
-- Генериране на код (планиране → имплементация → тест → разгръщане)
-- Генериране на отчети (събиране на данни → анализ → визуализация → резюме)
+- Поток за създаване на съдържание (проучване → писане → редактиране → публикуване)
+- Генериране на код (планиране → имплементация → тест → деплой)
+- Генериране на отчети (събиране на данни → анализ → визуализация → обобщение)
 
 ---
 
-### Модел 2: Паралелна координация (Fan-Out/Fan-In)
+### Шаблон 2: Паралелна координация (Разклоняване/Събиране)
 
 **Кога да се използва**: Независими задачи могат да се изпълняват едновременно, резултатите се комбинират накрая.
 
 ```mermaid
 graph TB
-    User[Заявка от потребителя]
-    Orchestrator[Оркестратор]
-    Agent1[Аналитичен агент]
-    Agent2[Изследователски агент]
-    Agent3[Агент за данни]
-    Aggregator[Агрегатор на резултатите]
-    Response[Комбиниран отговор]
+    User[User Request]
+    Orchestrator[Orchestrator]
+    Agent1[Analysis Agent]
+    Agent2[Research Agent]
+    Agent3[Data Agent]
+    Aggregator[Result Aggregator]
+    Response[Combined Response]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -119,36 +121,37 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**Ползи:**
-- ✅ Бързо (паралелно изпълнение)
-- ✅ Толерантност към грешки (частични резултати са приемливи)
-- ✅ Мащабируемо хоризонтално
+
+**Предимства:**
+- ✅ Бързина (паралелно изпълнение)
+- ✅ Възможност за толериране на грешки (частични резултати приемливи)
+- ✅ Хоризонтално мащабируем
 
 **Ограничения:**
-- ⚠️ Резултатите могат да пристигнат в различен ред
-- ⚠️ Нужна е логика за агрегиране
+- ⚠️ Резултатите може да пристигнат извън реда
+- ⚠️ Необходима е логика за агрегация
 - ⚠️ Сложно управление на състоянието
 
 **Примери за употреба:**
-- Събиране на данни от множество източници (APIs + бази данни + уеб скрейпинг)
+- Събиране на данни от множество източници (API-та + бази данни + уеб скрейпинг)
 - Конкурентен анализ (няколко модела генерират решения, избира се най-доброто)
-- Услуги за превод (превеждане на множество езици едновременно)
+- Услуги за превод (превод на няколко езика едновременно)
 
 ---
 
-### Модел 3: Йерархична координация (Мениджър-Работник)
+### Шаблон 3: Йерархична координация (Мениджър-Служител)
 
-**Кога да се използва**: Сложни работни потоци със подзадачи, нужда от делегиране.
+**Кога да се използва**: Сложни работни процеси с подзадачи, изискващи делегиране.
 
 ```mermaid
 graph TB
-    Master[Главен оркестратор]
-    Manager1[Ръководител на изследванията]
-    Manager2[Мениджър на съдържанието]
-    W1[Уеб скрейпър]
-    W2[Анализатор на статии]
-    W3[Автор]
-    W4[Редактор]
+    Master[Master Orchestrator]
+    Manager1[Research Manager]
+    Manager2[Content Manager]
+    W1[Web Scraper]
+    W2[Paper Analyzer]
+    W3[Writer]
+    W4[Editor]
     
     Master --> Manager1
     Master --> Manager2
@@ -161,75 +164,77 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
-**Ползи:**
-- ✅ Справя се със сложни работни потоци
+
+**Предимства:**
+- ✅ Управлява сложни работни процеси
 - ✅ Модулна и лесна за поддръжка
 - ✅ Ясни граници на отговорност
 
 **Ограничения:**
 - ⚠️ По-сложна архитектура
-- ⚠️ По-голяма латентност (множество координационни слоеве)
-- ⚠️ Изисква по-софистицирана оркестрация
+- ⚠️ По-висока латентност (множество координационни слоеве)
+- ⚠️ Изисква сложна оркестрация
 
 **Примери за употреба:**
-- Обработка на корпоративни документи (класифициране → маршрутизиране → обработка → архивиране)
-- Многостадийни данни потоци (ингест → почистване → трансформация → анализ → отчет)
-- Сложни автоматизационни работни потоци (планиране → разпределение на ресурси → изпълнение → мониторинг)
+- Обработка на документи в предприятия (класфикация → насочване → обработка → архивиране)
+- Многоетапни данни потоци (въвеждане → почистване → трансформация → анализ → отчет)
+- Сложни автоматизационни работни процеси (планиране → разпределяне на ресурси → изпълнение → наблюдение)
 
 ---
 
-### Модел 4: Събитийно-ориентирана координация (Публикуване-Абониране)
+### Шаблон 4: Координация, базирана на събития (Публикуване-Абониране)
 
-**Кога да се използва**: Агентите трябва да реагират на събития, желателно е слабо свързване.
+**Кога да се използва**: Агенти трябва да реагират на събития, желае се слабо свързване.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as Събирач на данни
+    participant Agent1 as Data Collector
     participant EventBus as Azure Service Bus
-    participant Agent2 as Анализатор
-    participant Agent3 as Известител
-    participant Agent4 as Архиватор
+    participant Agent2 as Analyzer
+    participant Agent3 as Notifier
+    participant Agent4 as Archiver
     
-    Agent1->>EventBus: Публикувай събитие "ДанниПолучени"
-    EventBus->>Agent2: Абониране: Анализ на данни
-    EventBus->>Agent3: Абониране: Изпращане на уведомление
-    EventBus->>Agent4: Абониране: Архивиране на данни
+    Agent1->>EventBus: Publish "DataReceived" event
+    EventBus->>Agent2: Subscribe: Analyze data
+    EventBus->>Agent3: Subscribe: Send notification
+    EventBus->>Agent4: Subscribe: Archive data
     
-    Note over Agent1,Agent4: Всички абонати обработват независимо един от друг
+    Note over Agent1,Agent4: All subscribers process independently
     
-    Agent2->>EventBus: Публикувай събитие "АнализЗавършен"
-    EventBus->>Agent3: Абониране: Изпращане на отчет от анализа
+    Agent2->>EventBus: Publish "AnalysisComplete" event
+    EventBus->>Agent3: Subscribe: Send analysis report
 ```
-**Ползи:**
-- ✅ Слабо свързване между агентите
+
+**Предимства:**
+- ✅ Слабо свързване между агенти
 - ✅ Лесно добавяне на нови агенти (просто се абонират)
 - ✅ Асинхронна обработка
-- ✅ Устойчивост (персистентност на съобщения)
+- ✅ Устойчива (съхранение на съобщения)
 
 **Ограничения:**
-- ⚠️ Временна консистентност
-- ⚠️ По-сложно отстраняване на грешки
-- ⚠️ Предизвикателства с подредбата на съобщенията
+- ⚠️ В крайна сметка последователност
+- ⚠️ Сложно отстраняване на грешки
+- ⚠️ Предизвикателства при подредба на съобщения
 
 **Примери за употреба:**
 - Системи за мониторинг в реално време (аларми, табла, логове)
-- Многоканални нотификации (имейл, SMS, push, Slack)
-- Данни потоци за обработка (няколко потребителя на едни и същи данни)
+- Многоканални известия (имейл, SMS, push, Slack)
+- Данни за обработващи потоци (няколко потребителя на една и съща информация)
 
 ---
 
-### Модел 5: Координация, базирана на консенсус (Гласуване/Кворум)
+### Шаблон 5: Координация, базирана на консенсус (Гласуване/Кворум)
 
-**Кога да се използва**: Необходимо е съгласие от множество агенти преди да се продължи.
+**Кога да се използва**: Необходимо е съгласие от няколко агенти преди продължаване.
 
 ```mermaid
 graph TB
-    Input[Входна задача]
-    Agent1[Агент 1: gpt-4.1]
-    Agent2[Агент 2: Claude]
-    Agent3[Агент 3: Gemini]
-    Voter[Гласувач за консенсус]
-    Output[Съгласуван изход]
+    Input[Input Task]
+    Agent1[Agent 1: gpt-4.1]
+    Agent2[Agent 2: Claude]
+    Agent3[Agent 3: Gemini]
+    Voter[Consensus Voter]
+    Output[Agreed Output]
     
     Input --> Agent1
     Input --> Agent2
@@ -241,42 +246,43 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
-**Ползи:**
+
+**Предимства:**
 - ✅ По-висока точност (няколко мнения)
-- ✅ Толерантност към грешки (приемливи са малцинствени провали)
-- ✅ Вградена осигуровка за качество
+- ✅ Толерантност към грешки (приемливи неуспехи на малцинството)
+- ✅ Вградена проверка на качеството
 
 **Ограничения:**
-- ❌ Скъпо (множество извиквания към модели)
-- ❌ По-бавно (чакане за всички агенти)
-- ⚠️ Нужда от разрешаване на конфликти
+- ❌ Скъпо (множество извиквания на модели)
+- ❌ По-бавно (чака се всички агенти)
+- ⚠️ Необходимост от разрешаване на конфликти
 
 **Примери за употреба:**
-- Модерация на съдържание (няколко модела преглеждат съдържание)
-- Преглед на код (няколко линтера/анализатори)
-- Медицинска диагностика (няколко AI модела, експертна валидация)
+- Модериране на съдържание (няколко модела преглеждат съдържанието)
+- Преглед на код (няколко линтера/анализатора)
+- Медицинска диагноза (множествени AI модели, експертна проверка)
 
 ---
 
-## Преглед на архитектурата
+## Обзор на архитектурата
 
-### Пълна многоагентна система в Azure
+### Пълна многоагентна система на Azure
 
 ```mermaid
 graph TB
-    User[Потребител/API клиент]
-    APIM[Управление на API в Azure]
-    Orchestrator[Услуга Orchestrator<br/>Контейнерно приложение]
-    ServiceBus[Шина за съобщения на Azure<br/>Хъб за събития]
+    User[User/API Client]
+    APIM[Azure API Management]
+    Orchestrator[Orchestrator Service<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Queues / Topics]
     
-    Agent1[Агент за проучване<br/>Контейнерно приложение]
-    Agent2[Агент за писане<br/>Контейнерно приложение]
-    Agent3[Аналитичен агент<br/>Контейнерно приложение]
-    Agent4[Агент за преглед<br/>Контейнерно приложение]
+    Agent1[Research Agent<br/>Container App]
+    Agent2[Writer Agent<br/>Container App]
+    Agent3[Analyst Agent<br/>Container App]
+    Agent4[Reviewer Agent<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>Споделено състояние)]
-    Storage[Съхранение в Azure<br/>Артефакти]
-    AppInsights[Application Insights<br/>Мониторинг]
+    CosmosDB[(Cosmos DB<br/>Shared State)]
+    Storage[Azure Storage<br/>Artifacts]
+    AppInsights[Application Insights<br/>Monitoring]
     
     User --> APIM
     APIM --> Orchestrator
@@ -307,58 +313,67 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Ключови компоненти:**
 
-| Компонент | Предназначение | Услуга в Azure |
+| Компонент | Цел | Услуга в Azure |
 |-----------|---------|---------------|
-| **API Gateway** | Входна точка, ограничаване на честотата, удостоверяване | API Management |
-| **Orchestrator** | Координира работните потоци на агентите | Container Apps |
-| **Message Queue** | Асинхронна комуникация | Service Bus / Event Hubs |
-| **Agents** | Специализирани AI работници | Container Apps / Functions |
-| **State Store** | Споделено състояние, проследяване на задачи | Cosmos DB |
-| **Artifact Storage** | Документи, резултати, логове | Blob Storage |
-| **Monitoring** | Разпределено проследяване, логове | Application Insights |
+| **API Gateway** | Входна точка, ограничаване на честотата, автентикация | API Management |
+| **Оркестратор** | Координира работните процеси на агенти | Container Apps |
+| **Сървис Bus опашка** | Асинхронна комуникация | Service Bus / Event Hubs |
+| **Агенти** | Специализирани AI изпълнители | Container Apps / Functions |
+| **Хранилище на състояние** | Споделено състояние, проследяване на задачи | Cosmos DB |
+| **Хранилище на артефакти** | Документи, резултати, логове | Blob Storage |
+| **Мониторинг** | Разпределено проследяване, логове | Application Insights |
+
+Service Bus опашките/топиците и Event Hubs са различни услуги с различен модел за доставяне и потребление; Event Hubs не е директен заместител на Service Bus кода за работници по-долу. Паралелизмът, съхранените съобщения и гласуването на модели сами по себе си не гарантират толерантност към грешки или по-висока точност.
 
 ---
 
-## Предпоставки
+## Изисквания
 
 ### Необходими инструменти
 
 ```bash
-# Проверете Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Очаква се: azd версия 1.0.0 или по-нова
+# Command reference baseline: azd 1.37.2
 
-# Проверете Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Очаква се: azure-cli 2.50.0 или по-нова
+# ✅ Expected: azure-cli 2.50.0 or higher
 
-# Проверете Docker (за локално тестване)
+# Verify Docker (for local testing)
 docker --version
-# ✅ Очаква се: Docker версия 20.10 или по-нова
+# ✅ Expected: Docker version 20.10 or higher
 ```
 
-### Изисквания за Azure
+### Изисквания към Azure
 
 - Активен абонамент в Azure
-- Права за създаване на:
+- Разрешения за създаване на:
   - Container Apps
   - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
+  - Cosmos DB акаунти
+  - Storage акаунти
   - Application Insights
 
-### Необходими познания
+### Познавателни изисквания
 
 Трябва да сте завършили:
-- [Управление на конфигурацията](../chapter-03-configuration/configuration.md)
-- [Аутентикация & Сигурност](../chapter-03-configuration/authsecurity.md)
-- [Пример за микросервизи](../../../../examples/microservices)
+- [Управление на конфигурации](../chapter-03-configuration/configuration.md)
+- [Автентикация и сигурност](../chapter-03-configuration/authsecurity.md)
+- [Пример за микросървиси](../../../../examples/microservices)
 
 ---
 
-## Ръководство за изпълнение
+## Ръководство за имплементация
+
+> **Фрагменти за дизайн, а не директно работеща лаборатория:** Дървото на проекта и етикетите `File:` по-долу описват файлове, които да създадете във вашия проект; това хранилище не съдържа пълно приложение `multi-agent-system`. Липсващи части са основният файл/шаблони за параметри, среда за Container Apps/регистри, Dockerfile-и и блокировки на зависимости, настройка на база данни/контейнери Cosmos, внедряване на модели, конфигурация на идентичност/роли, правила за мащабиране и паралелни работници/опашки. Не очаквайте `azd init` да генерира тези файлове или `azd up` да деплойва фрагменти без промени. За изпълним начален проект, завършете [Основи на многоагентните](../chapter-05-multi-agent/multi-agent-basics.md).
+
+**Предпоставки на работната среда:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, и (за мониторинг) `azure-monitor-opentelemetry`; сложете `shared` в пътя за импортиране на Python във всяко образно изображение на услуга. Контейнерът Cosmos `agent-state/tasks` трябва вече да съществува с ключ за партиция `/id`. Връзките с ключове опростяват тези фрагменти, не са съвет за продукция: предпочитайте управлявани идентичности с обхватени роли за Service Bus/Cosmos/OpenAI на ниво данни. Не излагайте ключове в изходите или логовете.
+
+Доставката на Service Bus е **поне веднъж**. Съхранявайте идемпотентност за всяка задача **и стъпка**, използвайте оптимистична конкуренция (ETags) за четене/модифициране/запис на състояние, и подновявайте заключванията за съобщения по време на дълга обработка. Простият мениджър на състояние по-долу е само за последователна работа и не реализира тези производствени гаранции.
 
 ### Структура на проекта
 
@@ -392,13 +407,13 @@ multi-agent-system/
 
 ---
 
-## Урок 1: Модел на последователна координация
+## Урок 1: Последователен шаблон за координация
 
 ### Имплементация: Поток за създаване на съдържание
 
-Нека изградим последователен поток: Изследване → Писане → Редакция → Публикуване
+Нека проектираме последователен поток: Проучване → Писане → Редактиране. Публикуването е извън този пример.
 
-### 1. Конфигурация на AZD
+### 1. Конфигурация с AZD
 
 **Файл: `azure.yaml`**
 
@@ -483,7 +498,8 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 }
 
 output namespace string = serviceBusNamespace.name
-output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+// Do not output RootManageSharedAccessKey. Resolve scoped credentials
+// securely or use managed identity in the application and scale rules.
 ```
 
 ### 3. Мениджър на споделено състояние
@@ -492,7 +508,7 @@ output connectionString string = listKeys('${serviceBusNamespace.id}/Authorizati
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 class StateManager:
@@ -513,7 +529,7 @@ class StateManager:
             'type': task_type,
             'status': 'pending',
             'input': input_data,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'steps': []
         }
         self.container.create_item(task)
@@ -525,7 +541,7 @@ class StateManager:
         
         task['steps'].append({
             'name': step_name,
-            'completed_at': datetime.utcnow().isoformat(),
+            'completed_at': datetime.now(timezone.utc).isoformat(),
             'result': result
         })
         
@@ -537,7 +553,7 @@ class StateManager:
         task = self.container.read_item(task_id, partition_key=task_id)
         task['status'] = 'completed'
         task['result'] = final_result
-        task['completed_at'] = datetime.utcnow().isoformat()
+        task['completed_at'] = datetime.now(timezone.utc).isoformat()
         self.container.replace_item(task_id, task)
         return task
     
@@ -561,7 +577,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Връзка към Service Bus
+# Service Bus connection
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -572,15 +588,15 @@ def health():
 @app.route('/create-content', methods=['POST'])
 def create_content():
     """
-    Sequential workflow: Research → Write → Edit → Publish
+    Sequential workflow: Research → Write → Edit (returns a draft; no publishing)
     """
-    data = request.json
+    data = request.get_json(silent=True) or {}
     topic = data.get('topic')
     
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Създаване на задача в хранилището за състояния
+    # Create task in state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -588,13 +604,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # Изпращане на съобщение до изследователски агент (първа стъпка)
+    # Send message to research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Къде да се изпращат резултатите
+            'next_queue': 'writer-tasks'  # Where to send results
         }),
         content_type='application/json'
     )
@@ -606,7 +622,7 @@ def create_content():
         'task_id': task_id,
         'status': 'started',
         'workflow': 'sequential',
-        'steps': ['research', 'write', 'edit', 'publish'],
+        'steps': ['research', 'write', 'edit'],
         'message': 'Content creation pipeline initiated'
     }), 202
 
@@ -623,7 +639,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Агент за изследване
+### 5. Агент за проучване
 
 **Файл: `src/agents/research/app.py`**
 
@@ -635,7 +651,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# Инициализиране на клиенти
+# Initialize clients
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -643,7 +659,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -655,9 +671,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Извикване на Microsoft Foundry Models за проучване
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -667,14 +683,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # Актуализиране на състоянието
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # Изпращане към следващия агент (писател)
+    # Send to next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -731,7 +747,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -744,9 +760,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Извикайте Microsoft Foundry Models, за да се напише статия
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -756,14 +772,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # Актуализирайте състоянието
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # Изпратете на редактора
+    # Send to editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -819,7 +835,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -831,9 +847,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Извикайте Microsoft Foundry Models за редактиране
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -843,7 +859,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Маркирайте задачата като завършена
+    # Mark task as complete
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -877,26 +893,27 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Разгръщане и тестване
+### 8. Деплой и тест
+
+Тези команди важат **само след като имплементирате липсващите файлове в проекта**. Инициализацията на интерактивния агент Foundry е отделен работен процес; той не генерира този дизайн с Service Bus.
 
 ```bash
-# Опция A: Разгръщане, базирано на шаблон
-azd init
+# In your completed custom project
 azd up
 
-# Опция B: Разгръщане на агентски манифест (изисква разширение)
+# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
 > Вижте [AZD AI CLI команди](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) за всички флагове и опции на `azd ai`.
 
 ```bash
-# Вземи URL на оркестратора
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# Създай съдържание
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
@@ -908,12 +925,12 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "status": "started",
   "workflow": "sequential",
-  "steps": ["research", "write", "edit", "publish"],
+  "steps": ["research", "write", "edit"],
   "message": "Content creation pipeline initiated"
 }
 ```
 
-**Проверете прогреса на задачата:**
+**Проверка на напредък на задачата:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -947,11 +964,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Урок 2: Модел на паралелна координация
+## Урок 2: Паралелен шаблон за координация
 
-### Имплементация: Агрегатор за мулти-източниково изследване
+### Имплементация: Мулти-източников агрегатор на проучвания
 
-Нека изградим паралелна система, която събира информация от множество източници едновременно.
+Нека изградим паралелна система, която събира информация от няколко източника едновременно.
 
 ### Паралелен оркестратор
 
@@ -990,7 +1007,7 @@ def research_parallel():
         }
     )
     
-    # Разклоняване: Изпратете до всички агенти едновременно
+    # Fan-out: publish sequentially; workers may process concurrently.
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1025,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Логика за агрегиране
+### Логика за агрегация
 
 **Файл: `src/agents/aggregator/app.py`**
 
@@ -1041,9 +1058,10 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# Проследявайте резултатите за всяка задача
-task_results = defaultdict(list)
-expected_agents = 4  # уеб, академичен, новинарски, социален
+# Single-process demo only: not durable or shared across replicas.
+# Production: use durable unique (task_id, agent_type) result records.
+task_results = defaultdict(dict)
+expected_agents = 4  # web, academic, news, social
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1051,29 +1069,29 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # Запиши резултата
-    task_results[task_id].append({
+    # Store result
+    task_results[task_id][agent_type] = {
         'agent': agent_type,
         'data': result
-    })
+    }
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Провери дали всички агенти са завършили (fan-in)
+    # Check if all agents completed (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # Комбинирай резултатите
+        # Combine results
         aggregated = {
             'query': message_data['query'],
-            'sources': task_results[task_id],
-            'summary': generate_summary(task_results[task_id])
+            'sources': list(task_results[task_id].values()),
+            'summary': generate_summary(list(task_results[task_id].values()))
         }
         
-        # Отбележи като завършено
+        # Mark complete
         state_manager.complete_task(task_id, aggregated)
         
-        # Почисти
+        # Clean up
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1105,10 +1123,10 @@ if __name__ == '__main__':
     main()
 ```
 
-**Ползи от паралелния модел:**
-- ⚡ **4x по-бързо** (агентите работят едновременно)
-- 🔄 **Толерантен към грешки** (частични резултати са приемливи)
-- 📈 **Мащабируем** (лесно добавяне на още агенти)
+**Предимства на паралелния шаблон:**
+- ⚡ **Потенциално по-ниска латентност** (ограничена от най-бавния работник плюс координационни режийни разходи)
+- 🔄 **Поддържа частични резултати** с експлицитни крайни срокове и политика за отказ (не е имплементирана в базовия агрегатор)
+- 📈 **Мащабируем** (лесно се добавят повече агенти)
 
 ---
 
@@ -1116,118 +1134,83 @@ if __name__ == '__main__':
 
 ### Упражнение 1: Добавяне на обработка на таймаут ⭐⭐ (Средно)
 
-**Цел**: Реализирайте логика за таймаут, така че агрегаторът да не чака вечно за бавни агенти.
+**Цел**: Имплементирайте логика за таймаут, така че агрегаторът да не чака безкрайно за бавни агенти.
+
+**Начална точка:** Стартирайте тази локална симулация на краен срок преди да я интегрирате в работник на опашка. Таймаут, проверяван само при пристигане на друго съобщение, никога не се задейства, ако липсващият работник не изпрати нищо.
 
 **Стъпки**:
 
-1. **Добавете проследяване на таймаути в агрегатора:**
+1. **Добавете проследяване на таймаут към агрегатора:**
 
 ```python
-from datetime import datetime, timedelta
+import asyncio
 
-task_timeouts = {}  # task_id -> време на изтичане
+async def simulated_agent(name, delay):
+    await asyncio.sleep(delay)
+    return {'agent': name, 'result': 'done'}
 
-def process_result(message_data):
-    task_id = message_data['task_id']
-    
-    # Задаване на таймаут за първия резултат
-    if task_id not in task_timeouts:
-        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
-    
-    task_results[task_id].append({
-        'agent': message_data['agent_type'],
-        'data': message_data['result']
-    })
-    
-    # Проверка дали е завършено ИЛИ е изтекло времето
-    if len(task_results[task_id]) == expected_agents or \
-       datetime.utcnow() > task_timeouts[task_id]:
-        
-        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
-        
-        aggregated = {
-            'query': message_data['query'],
-            'sources': task_results[task_id],
-            'completed_agents': len(task_results[task_id]),
-            'timed_out': len(task_results[task_id]) < expected_agents
-        }
-        
-        state_manager.complete_task(task_id, aggregated)
-        
-        # Почистване
-        del task_results[task_id]
-        del task_timeouts[task_id]
+async def main():
+    tasks = [asyncio.create_task(simulated_agent(name, delay))
+             for name, delay in [('web', 0.1), ('academic', 0.2),
+                                 ('news', 0.3), ('social', 3)]]
+    done, pending = await asyncio.wait(tasks, timeout=1)
+    results = [task.result() for task in done]
+    for task in pending:
+        task.cancel()
+    await asyncio.gather(*pending, return_exceptions=True)
+    print({'completed_agents': len(results), 'timed_out': bool(pending)})
+    assert len(results) == 3 and pending
+
+asyncio.run(main())
 ```
 
-2. **Тествайте с изкуствени забавяния:**
+2. **Очакван изход:**
 
-```python
-# При един агент добавете забавяне, за да симулирате бавно обработване
-import time
-time.sleep(35)  # Превишава 30-секунден таймаут
+```text
+{'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Разгърнете и проверете:**
+3. **Интеграция в системата с опашки (задача за дизайн):** Съхранявайте срока за изпращане и очакваните агенти при създаване на задачата, изпълнявайте периодично почистване на сроковете независимо от пристигащите резултати, атомарно финализирайте частични резултати и игнорирайте закъснели/дублирани съобщения за вече финализирани задачи. Локалният таймаут не отменя отдалечени работници.
+
+Само за вашия имплементиран проект:
 
 ```bash
 azd deploy aggregator
 
-# Подай задачата
+# Submit task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# Провери резултатите след 30 секунди
+# Check results after 30 seconds
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Критерии за успех:**
-- ✅ Задачата завършва след 30 секунди, дори ако агенти са непълни
+- ✅ Локалният тест се връща след едносекунден краен срок, дори ако агентът не е завършен
 - ✅ Отговорът показва частични резултати (`"timed_out": true`)
-- ✅ Наличните резултати се връщат (3 от 4 агента)
+- ✅ Връщат се налични резултати (3 от 4 агента)
 
 **Време**: 20-25 минути
 
 ---
 
-### Упражнение 2: Реализиране на логика за повторни опити ⭐⭐⭐ (Напреднало)
+### Упражнение 2: Имплементиране на логика за повторение ⭐⭐⭐ (Напреднало)
 
-**Цел**: Автоматично повтаряне на неуспешни задачи на агентите преди да се откаже.
+**Цел**: Автоматично повтаряйте неуспешни задачи на агент преди отказ.
 
 **Стъпки**:
 
-1. **Добавете проследяване на повторни опити в оркестратора:**
+1. **Използвайте броя на доставките на Service Bus вместо повторно поставяне на опашката с персонализирани броячи за повторение:**
 
 ```python
-from dataclasses import dataclass
-from typing import Dict
-
-@dataclass
-class RetryConfig:
-    max_retries: int = 3
-    backoff_seconds: int = 5
-
-retry_counts: Dict[str, int] = {}  # идентификатор_на_съобщение -> брой_опити
-
-def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
-    """Send message with retry metadata"""
-    message_id = message_data.get('message_id', str(uuid.uuid4()))
-    message_data['message_id'] = message_id
-    message_data['retry_count'] = retry_counts.get(message_id, 0)
-    message_data['max_retries'] = retry_config.max_retries
-    
-    sender = servicebus_client.get_queue_sender(queue_name)
-    message = ServiceBusMessage(
-        body=json.dumps(message_data),
-        content_type='application/json',
-        message_id=message_id
-    )
-    
-    with sender:
-        sender.send_messages(message)
+import json
+import time
+# Integration fragment: use a live peek-lock ServiceBusReceiver.
+# Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Добавете обработчик за повторни опити в агентите:**
+2. **Добавете обработчик за повторения към агентите:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,31 +1218,21 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # Обработи съобщението
+        # Process the message
         process_func(message_data)
         
-        # Успешно - завършено
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
-        message_id = message.message_id
-        retry_count = message_data.get('retry_count', 0)
-        max_retries = message_data.get('max_retries', 3)
-        
-        if retry_count < max_retries:
-            # Опитай отново: откажи и постави отново в опашката с увеличен брояч
-            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
-            
-            message_data['retry_count'] = retry_count + 1
-            
-            # Изпрати обратно в същата опашка със забавяне
-            time.sleep(5 * (retry_count + 1))  # Експоненциално забавяне
-            send_with_retry(queue_name, message_data, RetryConfig())
-            
-            receiver.complete_message(message)  # Премахни оригинала
+        if message.delivery_count < 4:
+            # Bounded exponential delay: 5s, 10s, 20s.
+            # Renew the lock if processing + waiting can exceed its duration.
+            time.sleep(5 * 2 ** (message.delivery_count - 1))
+            receiver.abandon_message(message)
         else:
-            # Максималният брой опити е превишен - премести в опашката за неуспешни съобщения
-            print(f"❌ Max retries exceeded for message {message_id}")
+            # Max retries exceeded - move to dead letter queue
+            print(f"❌ Max attempts exceeded for message {message.message_id}")
             receiver.dead_letter_message(
                 message,
                 reason="MaxRetriesExceeded",
@@ -1267,13 +1240,13 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Монтирайте dead letter опашката:**
+3. **Мониторинг на опашката с невалидни съобщения:**
 
 ```python
 def monitor_dead_letters():
     """Check dead letter queue for failed messages"""
     receiver = servicebus_client.get_queue_receiver(
-        'research-queue',
+        'research-tasks',
         sub_queue='deadletter'
     )
     
@@ -1286,31 +1259,31 @@ def monitor_dead_letters():
 ```
 
 **✅ Критерии за успех:**
-- ✅ Неуспешните задачи се повтарят автоматично (до 3 пъти)
-- ✅ Експоненциално отлагане между повторните опити (5s, 10s, 15s)
-- ✅ След достигане на максимум повторни опити, съобщенията отиват в dead letter опашка
-- ✅ Dead letter опашката може да се наблюдава и повторно пуска
+- ✅ Неуспешни задачи се повтарят автоматично (до 3 пъти)
+- ✅ Експоненциално забавяне между повторенията (5s, 10s, 20s), с подновяване на заключването на съобщения при нужда
+- ✅ След максимален брой повторения, съобщенията отиват в опашка за невалидни съобщения
+- ✅ Съобщенията в опашката за невалидни могат да бъдат инспектирани; повторението изисква отделен идемпотентен процес за възстановяване
 
 **Време**: 30-40 минути
 
 ---
 
-### Упражнение 3: Реализиране на Circuit Breaker ⭐⭐⭐ (Напреднало)
+### Упражнение 3: Имплементиране на прекъсвач на верига (Circuit Breaker) ⭐⭐⭐ (Напреднало)
 
-**Цел**: Предотвратяване на каскадни повреди чрез спиране на заявките към неуспешни агенти.
+**Цел**: Предотвратяване на каскадни повреди чрез спиране на заявки към неработещи агенти.
 
 **Стъпки**:
 
-1. **Създайте клас за circuit breaker:**
+1. **Създайте клас за прекъсвач на верига:**
 
 ```python
 from enum import Enum
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # Нормална работа
-    OPEN = "open"          # Грешка, отхвърляне на заявки
-    HALF_OPEN = "half_open"  # Тестване дали е възстановен
+    CLOSED = "closed"      # Normal operation
+    OPEN = "open"          # Failing, reject requests
+    HALF_OPEN = "half_open"  # Testing if recovered
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1323,8 +1296,8 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Провери дали таймаутът е изтекъл
-            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+            # Check if timeout expired
+            if datetime.now(timezone.utc) - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
             else:
@@ -1333,7 +1306,8 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # Успех
+            # Success
+            self.failure_count = 0 # Count consecutive failures only
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1343,19 +1317,19 @@ class CircuitBreaker:
             
         except Exception as e:
             self.failure_count += 1
-            self.last_failure_time = datetime.utcnow()
+            self.last_failure_time = datetime.now(timezone.utc)
             
             if self.failure_count >= self.failure_threshold:
                 self.state = CircuitState.OPEN
                 print(f"🔴 Circuit breaker: OPEN (too many failures)")
             
-            raise e
+            raise
 ```
 
-2. **Приложете към извикванията на агентите:**
+2. **Приложете към извикванията на агенти:**
 
 ```python
-# В оркестратора
+# In orchestrator
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,33 +1345,34 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Продължете с другите агенти
+        # Continue with other agents
 ```
 
-3. **Тествайте circuit breaker:**
+Тази верига защитава **операцията за изпращане**, не и завършването от отдалечен работник: успешно поставяне на съобщение в опашката не означава нищо за това дали агентът е активен. `send_message` е функцията за изпращане на вашето приложение. За вериги за изпълнение, подавайте наблюдавани неуспехи/таймаути на задачи към траен координатор. Този клас в паметта е демонстрация с един нишков процес, не разпределен прекъсвач на веригата.
 
-```bash
-# Симулирайте повтарящи се откази (спрете един агент)
-az containerapp stop --name web-research-agent --resource-group rg-agents
+3. **Тествайте прекъсвача локално:**
 
-# Изпратете множество заявки
-for i in {1..10}; do
-  curl -X POST $ORCHESTRATOR_URL/research-parallel \
-    -H "Content-Type: application/json" \
-    -d '{"query": "test query '$i'"}'
-  sleep 2
-done
-
-# Проверете логовете - трябва да видите, че верижният прекъсвач е отворен след 5 отказа
-# Използвайте Azure CLI за логовете на Container App:
-az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```python
+# Run after the class definition; no Azure changes required.
+circuit = CircuitBreaker(failure_threshold=5, timeout_seconds=0)
+def fail():
+    raise RuntimeError("simulated failure")
+for _ in range(5):
+    try:
+        circuit.call(fail)
+    except RuntimeError:
+        pass
+assert circuit.state == CircuitState.OPEN
+assert circuit.call(lambda: "recovered") == "recovered"
+assert circuit.state == CircuitState.CLOSED
+print("Circuit breaker recovery verified")
 ```
 
 **✅ Критерии за успех:**
-- ✅ След 5 неуспеха, прекъсвачът се отваря (отхвърля заявки)
-- ✅ След 60 секунди, прекъсвачът става полуотворен (тества възстановяването)
-- ✅ Останалите агенти продължават да работят нормално
-- ✅ Прекъсвачът се затваря автоматично, когато агентът се възстанови
+- ✅ След 5 неуспеха, веригата се отваря (отхвърля заявки)
+- ✅ След 60 секунди, веригата става полуотворена (тест на възстановяване)
+- ✅ Другите агенти продължават да работят нормално
+- ✅ Верига се затваря автоматично при възстановяване на агента
 
 **Време**: 40-50 минути
 
@@ -1405,55 +1380,54 @@ az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 5
 
 ## Мониторинг и отстраняване на грешки
 
-### Разпределено проследяване с Application Insights
+### Разпределено трасериране с Application Insights
 
 **Файл: `src/shared/tracing.py`**
 
 ```python
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.samplers import AlwaysOnSampler
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
-# Конфигуриране на проследяване
-config_integration.trace_integrations(['requests', 'logging'])
-
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# Създаване на проследител
-tracer = Tracer(
-    exporter=AzureExporter(connection_string=connection_string),
-    sampler=AlwaysOnSampler()
-)
+# Configure once per process. Message send/receive trace-context propagation
+# and agent attributes on exceptions need explicit instrumentation.
+if connection_string:
+    configure_azure_monitor(connection_string=connection_string, logger_name=__name__)
+tracer = trace.get_tracer(__name__)
 
-# Конфигуриране на логиране
+# Configure logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
 
-def trace_agent_call(agent_name, task_id, operation):
+def trace_agent_call(agent_name, task_id, operation_name, operation):
     """Trace agent operations"""
-    with tracer.span(name=f'{agent_name}.{operation}') as span:
-        span.add_attribute('agent', agent_name)
-        span.add_attribute('task_id', task_id)
-        span.add_attribute('operation', operation)
+    with tracer.start_as_current_span(f'agent.{agent_name}.{operation_name}', kind=SpanKind.CLIENT) as span:
+        span.set_attribute('agent', agent_name)
+        span.set_attribute('task_id', task_id)
+        span.set_attribute('operation', operation_name)
         
         try:
             result = operation()
-            span.add_attribute('status', 'success')
+            span.set_attribute('status', 'success')
+            logger.info('Agent operation completed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             return result
         except Exception as e:
-            span.add_attribute('status', 'error')
-            span.add_attribute('error', str(e))
+            span.set_attribute('status', 'error')
+            logger.exception('Agent operation failed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             raise
 ```
 
 ### Запитвания в Application Insights
 
-**Проследяване на работни потоци на многоагентни системи:**
+**Проследявайте многоагентни работни потоци:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1477,7 +1451,7 @@ dependencies
 | order by avg_duration desc
 ```
 
-**Анализ на неизправности:**
+**Анализ на неуспехи:**
 
 ```kusto
 // Find which agents fail most
@@ -1492,20 +1466,22 @@ exceptions
 
 ---
 
-## Анализ на разходи
+## Анализ на разходите
 
 ### Разходи за многоагентна система (месечни оценки)
 
-| Component | Configuration | Cost |
+Илюстративни планови цифри, не оферти: сумата по-долу е **240-565$/месец**. Проверете текущите регионални тарифи, часове на активни/неактивни инстанции, съотношение входящи/изходящи токени, съхранение и телеметрия. Серверлес няма минимален предоставен капацитет, но все пак таксува за заявки и съхранение.
+
+| Компонент | Конфигурация | Цена |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
-| **Service Bus** | Standard tier, 10M messages | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
-| **Total** | | **$240-565/month** |
+| **Оркестратор** | 1 контейнерно приложение (1 vCPU, 2GB) | 30-50$ |
+| **4 агента** | 4 контейнерни приложения (0.5 vCPU, 1GB всеки) | 60-120$ |
+| **Service Bus** | Стандартен слой, 10M съобщения | 10-20$ |
+| **Cosmos DB** | Serverless, 5GB съхранение, 1M RUs | 25-50$ |
+| **Blob Storage** | 10GB съхранение, 100K операции | 5-10$ |
+| **Application Insights** | 5GB поглъщане | 10-15$ |
+| **Microsoft Foundry Models** | gpt-4.1, 10M токена | 100-300$ |
+| **Общо** | | **240-565$/месец** |
 
 ### Стратегии за оптимизация на разходите
 
@@ -1518,135 +1494,135 @@ exceptions
    }
    ```
 
-2. **Мащабирайте агентите до нула, когато са неактивни:**
+2. **Намалявайте агентите до нула при бездействие:**
    ```bicep
    scale: {
-     minReplicas: 0  // Scale to zero when no messages
+     minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
      maxReplicas: 10
    }
    ```
 
-3. **Използвайте пакетна обработка за Service Bus:**
+3. **Използвайте пакетиране за Service Bus:**
    ```python
-   # Изпращайте съобщения в пакети (по-евтино)
+   # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Кеширайте често използваните резултати:**
+4. **Кеширайте често използвани резултати:**
    ```python
-   # Използвайте Azure Cache за Redis
+   # Use Azure Cache for Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
 
 ---
 
-## Най-добри практики
+## Добри практики
 
-### ✅ НАПРАВЕТЕ:
+### ✅ ПРАВЕТЕ:
 
 1. **Използвайте идемпотентни операции**
    ```python
-   # Агентът може безопасно да обработва едно и също съобщение многократно
+   # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
-       if state_manager.task_exists(task_id):
-           print(f"Task {task_id} already processed, skipping")
-           return
-       # Обработва задача...
+       raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Реализирайте изчерпателно логване**
+2. **Прилагайте пълноценно логване**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Използвайте идентификатори за корелация**
+3. **Използвайте корелационни идентификатори**
    ```python
-   # Прехвърлете task_id през целия работен поток
+   # Pass task_id through entire workflow
    message_data = {
-       'task_id': task_id,  # Идентификатор за корелация
+       'task_id': task_id,  # Correlation ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **Задайте TTL (време на живот) на съобщенията**
+4. **Задайте TTL на съобщенията (време на живот)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Наблюдавайте dead letter опашките**
+5. **Следете опашките на неуспешни съобщения**
    ```python
-   # Редовно наблюдение на неуспешни съобщения
+   # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
 ### ❌ НЕ ПРАВЕТЕ:
 
-1. **Не създавайте кръгови зависимости**
+1. **Не създавайте циклични зависимости**
    ```python
-   # ❌ ЛОШО: Агент A → Агент B → Агент A (безкраен цикъл)
-   # ✅ ДОБРО: Дефинирайте ясен насочен ацикличен граф (DAG)
+   # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
+   # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
 2. **Не блокирайте нишките на агентите**
    ```python
-   # ❌ ЛОШО: Синхронно изчакване
+   # ❌ BAD: Synchronous wait
    while not task_complete:
        time.sleep(1)
    
-   # ✅ ДОБРО: Използвайте обратни повиквания от опашката за съобщения
+   # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **Не игнорирайте частичните неуспехи**
+3. **Не пренебрегвайте частични неуспехи**
    ```python
-   # ❌ ЛОШО: Провал на целия работен процес, ако един от агентите се провали
-   # ✅ ДОБРО: Връщане на частични резултати с индикатори за грешки
+   # ❌ BAD: Fail entire workflow if one agent fails
+   # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Не използвайте безкрайни повторни опити**
+4. **Не използвайте безкрайни опити за повторение**
    ```python
-   # ❌ ЛОШО: повтаря се безкрайно
-   # ✅ ДОБРО: max_retries = 3, след това в опашка за мъртви писма
+   # ❌ BAD: retry forever
+   # ✅ GOOD: max_retries = 3, then dead letter
    ```
 
 ---
 
-## Ръководство за отстраняване на неизправности
+## Ръководство за отстраняване на проблеми
 
-### Проблем: Съобщения заседнали в опашката
+### Проблем: Съобщения блокирани в опашката
 
 **Симптоми:**
 - Съобщенията се натрупват в опашката
 - Агентите не обработват
-- Състоянието на задачата е заседнало на "pending"
+- Статусът на задачата останал на „очакваща“
 
 **Диагноза:**
 ```bash
-# Проверете дълбочината на опашката
+# Check queue depth
 az servicebus queue show \
+  --resource-group "$RG_NAME" \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Проверете логовете на агента, използвайки Azure CLI
+# Check agent logs using Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Решения:**
 
-1. **Увеличете броя на репликите на агентите:**
+1. **Увеличете броя на агентите:**
    ```bash
    az containerapp update \
+     --resource-group "$RG_NAME" \
      --name research-agent \
      --min-replicas 3 \
      --max-replicas 10
    ```
 
-2. **Проверете dead-letter опашката:**
+2. **Проверете опашката за неуспешни съобщения:**
    ```bash
    az servicebus queue show \
+     --resource-group "$RG_NAME" \
      --namespace-name mybus \
      --name research-tasks \
      --query "countDetails.deadLetterMessageCount"
@@ -1654,32 +1630,32 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Проблем: Таймаут на задача/никога не се завършва
+### Проблем: Задачата изтича/никога не завършва
 
 **Симптоми:**
-- Състоянието на задачата остава "in_progress"
+- Статусът на задачата остава "в ход"
 - Някои агенти завършват, други не
 - Няма съобщения за грешки
 
 **Диагноза:**
 ```bash
-# Провери състоянието на задачата
+# Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# Провери Application Insights
-# Изпълни заявка: traces | where customDimensions.task_id == "..."
+# Check Application Insights
+# Run query: traces | where customDimensions.task_id == "..."
 ```
 
 **Решения:**
 
-1. **Реализирайте таймаут в агрегатора (Упражнение 1)**
+1. **Прилагайте таймаут в агрегатора (Упражнение 1)**
 
-2. **Проверете за сривове на агентите с помощта на Azure Monitor:**
+2. **Проверете за неуспехи на агентите чрез Azure Monitor:**
    ```bash
-   # Прегледайте логовете чрез azd monitor
+   # View logs via azd monitor
    azd monitor --logs
    
-   # Или използвайте Azure CLI, за да проверите логовете на конкретно контейнерно приложение
+   # Or use Azure CLI to check specific container app logs
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
@@ -1698,44 +1674,44 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Дизайн модели за мулти-агентни системи](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
 ### Следващи стъпки в този курс
-- ← Предишно: [Планиране на капацитета](capacity-planning.md)
-- → Следващо: [Избор на SKU](sku-selection.md)
-- 🏠 [Начална страница на курса](../../README.md)
+- ← Предишна: [Планиране на капацитета](capacity-planning.md)
+- → Следваща: [Избор на SKU](sku-selection.md)
+- 🏠 [Начало на курса](../../README.md)
 
 ### Свързани примери
-- [Пример за микросървиси](../../../../examples/microservices) - Модели за комуникация между услуги
-- [Пример с Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Интеграция на ИИ
+- [Пример за микросървиси](../../../../examples/microservices) - Модели на комуникация между услуги
+- [Пример за Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Интеграция на ИИ
 
 ---
 
-## Обобщение
+## Резюме
 
 **Научихте:**
-- ✅ Пет модела за координация (последователен, паралелен, йерархичен, събитийно-ориентиран, консенсусен)
+- ✅ Пет модела за координация (последователен, паралелен, йерархичен, събитийно-управляем, консенсус)
 - ✅ Многоагентна архитектура в Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Управление на състоянието в разпределени агенти
-- ✅ Обработка на таймаути, повторни опити и механизми като circuit breakers
-- ✅ Наблюдение и отстраняване на грешки в разпределени системи
+- ✅ Управление на състоянието между разпределени агенти
+- ✅ Обработка на таймаути, повторения и прекъсвачи на веригата
+- ✅ Мониторинг и отстраняване на грешки в разпределени системи
 - ✅ Стратегии за оптимизация на разходите
 
 **Основни изводи:**
-1. **Изберете подходящия модел** - последователен за подредени работни потоци, паралелен за бързина, събитийно-ориентиран за гъвкавост
-2. **Управлявайте състоянието внимателно** - използвайте Cosmos DB или подобно за споделено състояние
-3. **Обработвайте грешките елегантно** - таймаути, повторни опити, circuit breakers, dead-letter опашки
-4. **Наблюдавайте всичко** - разпределеното трасиране е от съществено значение за отстраняване на грешки
-5. **Оптимизирайте разходите** - мащабиране до нула, използвайте serverless, внедрете кеширане
+1. **Изберете правилния модел** - Последователен за наредени работни потоци, паралелен за скорост, събитийно управление за гъвкавост
+2. **Управлявайте състоянието внимателно** - Използвайте Cosmos DB или подобно за споделено състояние
+3. **Обработвайте неуспехите елегантно** - Таймаути, повторения, прекъсвачи на веригата, опашки за мъртви писма
+4. **Следете всичко** - Разпределеното трасериране е от съществено значение за отстраняване на грешки
+5. **Оптимизирайте разходите** - Скалиране до нула, използване на serverless, прилагане на кеширане
 
 **Следващи стъпки:**
 1. Завършете практическите упражнения
 2. Създайте многоагентна система за вашия случай на употреба
-3. Проучете [Избор на SKU](sku-selection.md) за оптимизация на производителността и разходите
+3. Изучете [Избор на SKU](sku-selection.md) за оптимизиране на производителността и разходите
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Отказ от отговорност**:
-Този документ е преведен с помощта на AI преводаческа услуга [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че полагаме усилия за точност, имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на оригиналния му език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален превод, извършен от човек. Ние не носим отговорност за каквито и да е недоразумения или неправилни тълкувания, произтичащи от използването на този превод.
+Този документ е преведен с помощта на AI преводачески услуга [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на неговия роден език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Ние не носим отговорност за каквито и да е недоразумения или неправилни тълкувания, произтичащи от използването на този превод.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

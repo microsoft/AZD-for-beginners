@@ -1,90 +1,92 @@
-# راهنمای انتخاب SKU - انتخاب سطح مناسب سرویس‌های Azure
+# راهنمای انتخاب SKU - انتخاب لایه‌های مناسب سرویس Azure
 
 **ناوبری فصل:**
-- **📚 صفحه دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل جاری**: فصل 6 - اعتبارسنجی و برنامه‌ریزی پیش از استقرار
+- **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
+- **📖 فصل فعلی**: فصل 6 - اعتبارسنجی و برنامه‌ریزی پیش از استقرار
 - **⬅️ قبلی**: [برنامه‌ریزی ظرفیت](capacity-planning.md)
 - **➡️ بعدی**: [بررسی‌های پیش‌پرواز](preflight-checks.md)
-- **🚀 فصل بعد**: [فصل 7: رفع اشکال](../chapter-07-troubleshooting/common-issues.md)
+- **🚀 فصل بعدی**: [فصل 7: عیب‌یابی](../chapter-07-troubleshooting/common-issues.md)
 
 ## مقدمه
 
-این راهنمای جامع به شما کمک می‌کند تا SKUهای سرویس Azure مناسب را برای محیط‌ها، بارهای کاری و نیازمندی‌های مختلف انتخاب کنید. یاد بگیرید چگونه نیازهای عملکرد، ملاحظات هزینه و نیازهای مقیاس‌پذیری را تحلیل کرده و مناسب‌ترین سطح سرویس را برای استقرارهای Azure Developer CLI خود انتخاب کنید.
+این راهنمای جامع به شما کمک می‌کند تا بهترین SKUهای سرویس Azure را برای محیط‌ها، بارهای کاری و نیازهای مختلف انتخاب کنید. بیاموزید که چگونه نیازهای عملکرد، ملاحظات هزینه و الزامات مقیاس‌پذیری را تحلیل کنید تا مناسب‌ترین لایه‌های سرویس را برای استقرارهای Azure Developer CLI خود انتخاب نمایید.
 
 ## اهداف یادگیری
 
-با تکمیل این راهنما، شما خواهید:
-- مفاهیم SKU در Azure، مدل‌های قیمت‌گذاری و تفاوت‌های ویژگی‌ها را درک کنید
-- استراتژی‌های انتخاب SKU ویژه محیط‌های توسعه، استیج و تولید را فرا بگیرید
-- نیازمندی‌های بار کاری را تحلیل کرده و آن‌ها را با سطوح سرویس مناسب مطابقت دهید
-- استراتژی‌های بهینه‌سازی هزینه را از طریق انتخاب هوشمندانه SKU پیاده‌سازی کنید
-- تکنیک‌های تست عملکرد و اعتبارسنجی را برای انتخاب SKU اعمال کنید
-- توصیه‌ها و نظارت خودکار برای SKUها را پیکربندی کنید
+با تکمیل این راهنما، شما:
+- مفاهیم SKUهای Azure، مدل‌های قیمت‌گذاری و تفاوت‌های ویژگی‌ها را می‌آموزید
+- استراتژی‌های انتخاب SKU مخصوص محیط‌های توسعه، مرحله‌بندی و تولید را مسلط می‌شوید
+- نیازهای بار کاری را تحلیل کرده و آن‌ها را با لایه‌های مناسب سرویس تطبیق می‌دهید
+- استراتژی‌های بهینه‌سازی هزینه با انتخاب هوشمند SKU را اجرا می‌کنید
+- تکنیک‌های آزمون عملکرد و اعتبارسنجی انتخاب SKU را به‌کار می‌گیرید
+- پیکربندی اتوماسیون توصیه‌ها و نظارت SKU را انجام می‌دهید
 
 ## نتایج یادگیری
 
-با اتمام این راهنما، شما قادر خواهید بود:
-- SKUهای سرویس Azure مناسب را بر اساس نیازها و محدودیت‌های بار کاری انتخاب کنید
-- معماری‌های چند محیطی هزینه-موثر را با انتخاب مناسب سطوح طراحی کنید
-- معیارسنجی عملکرد و اعتبارسنجی را برای انتخاب SKUها پیاده‌سازی کنید
+پس از اتمام، قادر خواهید بود:
+- SKUهای مناسب سرویس Azure را بر اساس نیازهای بار کاری و محدودیت‌ها انتخاب کنید
+- معماری‌های چند محیطی مقرون‌به‌صرفه با انتخاب لایه مناسب طراحی نمایید
+- معیارهای عملکرد و اعتبارسنجی برای انتخاب SKU اجرا کنید
 - ابزارهای خودکار برای توصیه SKU و بهینه‌سازی هزینه ایجاد کنید
-- برنامه‌های مهاجرت و مقیاس‌دهی SKU را برای نیازهای در حال تغییر برنامه‌ریزی کنید
-- اصول چارچوب Well-Architected Azure را در انتخاب سطح سرویس اعمال کنید
+- برنامه‌ریزی مهاجرت و استراتژی‌های مقیاس‌گذاری SKU برای نیازهای متغیر را انجام دهید
+- اصول چارچوب Azure Well-Architected را در انتخاب لایه سرویس به‌کار برید
 
 ## فهرست مطالب
 
-- [درک SKUها](../../../../docs/chapter-06-pre-deployment)
-- [انتخاب بر اساس محیط](../../../../docs/chapter-06-pre-deployment)
-- [راهنمایی‌های مربوط به سرویس‌ها](../../../../docs/chapter-06-pre-deployment)
-- [استراتژی‌های بهینه‌سازی هزینه](../../../../docs/chapter-06-pre-deployment)
-- [ملاحظات عملکرد](../../../../docs/chapter-06-pre-deployment)
-- [جداول مرجع سریع](../../../../docs/chapter-06-pre-deployment)
-- [ابزارهای اعتبارسنجی](../../../../docs/chapter-06-pre-deployment)
+- [درک SKUها](#understanding-skus)
+- [انتخاب مبتنی بر محیط](#environment-based-selection)
+- [راهنمایی‌های خاص سرویس](#service-specific-guidelines)
+- [استراتژی‌های بهینه‌سازی هزینه](#cost-optimization-strategies)
+- [ملاحظات عملکرد](#performance-considerations)
+- [جداول مرجع سریع](#quick-reference-tables)
+- [ابزارهای اعتبارسنجی](#validation-tools)
 
 ---
 
 ## درک SKUها
 
-### SKUها چه هستند؟
+> **دامنه مثال:** نقشه‌های YAML SKU و پیکربندی‌های عملکرد زیر یادداشت‌های طراحی هستند، نه یک `azure.yaml` شمای واقعی یا پیکربندی ابزار بارگذاری. بلوک‌های Bicep جایگزین‌ها/قطعات هستند: پارامترها و منابع والد خود را اعلام کنید، هنگام ترکیب آن‌ها از نام‌های نمادین منحصربه‌فرد استفاده کنید و ماژول‌ها را به پروژه‌ای کاری وصل نمایید. قیمت‌ها، محدودیت‌ها و در دسترس بودن منطقه‌ای/SKU باید پیش از استقرار برای اشتراک شما بررسی شود.
 
-SKUها (Stock Keeping Units) نماینده سطح‌های سرویس و سطوح عملکرد متفاوت برای منابع Azure هستند. هر SKU ویژگی‌های متفاوتی ارائه می‌دهد:
+### SKUها چیستند؟
+
+SKUها (Stock Keeping Units) نشان‌دهنده لایه‌های سرویس و سطوح عملکرد متفاوت برای منابع Azure هستند. هر SKU ویژگی‌های متفاوتی ارائه می‌دهد:
 
 - **ویژگی‌های عملکردی** (CPU، حافظه، توان عملیاتی)
-- **دسترسی به ویژگی‌ها** (گزینه‌های مقیاس‌دهی، سطوح SLA)
-- **مدل‌های قیمت‌گذاری** (پایه مصرفی، ظرفیت رزرو شده)
-- **دسترسی منطقه‌ای** (تمام SKUها در همه مناطق در دسترس نیستند)
+- **دسترس‌پذیری ویژگی‌ها** (گزینه‌های مقیاس‌پذیری، سطوح SLA)
+- **مدل‌های قیمت‌گذاری** (براساس مصرف، ظرفیت رزرو شده)
+- **دسترس‌پذیری منطقه‌ای** (تمام SKUها در همه مناطق در دسترس نیستند)
 
 ### عوامل کلیدی در انتخاب SKU
 
-1. **نیازمندی‌های بار کاری**
+1. **نیازهای بار کاری**
    - الگوهای ترافیک/بار مورد انتظار
-   - نیازمندی‌های عملکرد (CPU، حافظه، I/O)
+   - نیازهای عملکردی (CPU، حافظه، ورودی/خروجی)
    - نیازهای ذخیره‌سازی و الگوهای دسترسی
 
 2. **نوع محیط**
    - توسعه/آزمایش در مقابل تولید
-   - نیازمندی‌های دسترسی
-   - نیازمندی‌های امنیتی و انطباق
+   - نیازهای دسترس‌پذیری
+   - نیازهای امنیتی و تطبیق
 
 3. **محدودیت‌های بودجه**
    - هزینه‌های اولیه در مقابل هزینه‌های عملیاتی
    - تخفیف‌های ظرفیت رزرو شده
-   - پیامدهای هزینه مقیاس‌بندی خودکار
+   - تأثیر هزینه مقیاس‌پذیری خودکار
 
 4. **پیش‌بینی رشد**
-   - نیازمندی‌های مقیاس‌پذیری
-   - نیازهای ویژگی آینده
+   - نیازهای مقیاس‌پذیری
+   - نیازهای ویژگی‌های آینده
    - پیچیدگی مهاجرت
 
 ---
 
-## انتخاب بر اساس محیط
+## انتخاب مبتنی بر محیط
 
 ### محیط توسعه
 
-**اولویت‌ها**: بهینه‌سازی هزینه، قابلیت پایه‌ای، تهیه/لغو تهیه آسان
+**اولویت‌ها**: بهینه‌سازی هزینه، عملکرد پایه، تأمین/لغو آسان
 
-#### Recommended SKUs
+#### SKUهای پیشنهادی
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
-#### مشخصات
-- **App Service**: F1 (Free) یا B1 (Basic) برای تست‌های ساده
-- **دیتابیس‌ها**: سطح Basic با حداقل منابع
-- **ذخیره‌سازی**: Standard با افزونگی محلی فقط
+#### ویژگی‌ها
+- **App Service**: F1 (رایگان) یا B1 (پایه) برای آزمایش ساده
+- **پایگاه‌داده‌ها**: لایه پایه با منابع حداقلی
+- **ذخیره‌سازی**: استاندارد با افزونگی محلی فقط
 - **محاسبات**: منابع مشترک قابل قبول
-- **شبکه**: پیکربندی‌های پایه
+- **شبکه‌بندی**: پیکربندی‌های پایه
 
-### محیط استیج/آزمایش
+### محیط مرحله‌بندی/آزمایش
 
-**اولویت‌ها**: پیکربندی مشابه تولید، تعادل هزینه، قابلیت تست عملکرد
+**اولویت‌ها**: پیکربندی مشابه تولید، تعادل هزینه، قابلیت آزمایش عملکرد
 
-#### Recommended SKUs
+#### SKUهای پیشنهادی
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -120,56 +122,56 @@ skus:
   container_apps: "Consumption" # Pay-per-use
 ```
 
-#### مشخصات
-- **عملکرد**: 70-80% از ظرفیت تولید
-- **ویژگی‌ها**: اکثر ویژگی‌های تولید فعال
-- **افزونگی**: مقداری افزونگی جغرافیایی
-- **مقیاس‌دهی**: مقیاس‌دهی خودکار محدود برای تست
-- **نظارت**: پشته کامل نظارتی
+#### ویژگی‌ها
+- **عملکرد**: ۷۰-۸۰٪ ظرفیت تولید
+- **ویژگی‌ها**: بیشتر ویژگی‌های تولید فعال است
+- **افزونگی**: برخی افزونگی جغرافیایی
+- **مقیاس‌گذاری**: مقیاس‌گذاری خودکار محدود برای آزمایش
+- **نظارت**: مجموعه کامل نظارتی
 
 ### محیط تولید
 
-**اولویت‌ها**: عملکرد، دسترسی، امنیت، انطباق، مقیاس‌پذیری
+**اولویت‌ها**: عملکرد، دسترس‌پذیری، امنیت، تطبیق، مقیاس‌پذیری
 
-#### Recommended SKUs
+#### SKUهای پیشنهادی
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
-#### مشخصات
-- **دسترس‌پذیری بالا**: نیازمندی‌های SLA برابر یا بالاتر از 99.9%+
+#### ویژگی‌ها
+- **دسترس‌پذیری بالا**: الزامات SLA بالای ۹۹.۹٪
 - **عملکرد**: منابع اختصاصی، توان عملیاتی بالا
-- **امنیت**: ویژگی‌های امنیتی پریمیوم
-- **مقیاس‌دهی**: قابلیت‌های مقیاس‌دهی خودکار کامل
-- **نظارت**: قابل مشاهده‌سازی جامع
+- **امنیت**: ویژگی‌های امنیتی پرمیوم
+- **مقیاس‌گذاری**: قابلیت‌های مقیاس‌گذاری خودکار کامل
+- **نظارت**: رصد جامع
 
 ---
 
-## راهنمایی‌های مربوط به سرویس‌ها
+## راهنمایی‌های خاص سرویس
 
-### Azure App Service
+### سرویس Azure App
 
 #### ماتریس تصمیم‌گیری SKU
 
-| Use Case | Recommended SKU | Rationale |
+| مورد استفاده | SKU پیشنهادی | دلیل |
 |----------|----------------|-----------|
-| Development/Testing | F1 (Free) or B1 (Basic) | اقتصادی، کافی برای تست |
-| Small production apps | S1 (Standard) | دامنه‌های سفارشی، SSL، مقیاس‌دهی خودکار |
-| Medium production apps | P1V3 (Premium V3) | عملکرد بهتر، ویژگی‌های بیشتر |
-| High-traffic apps | P2V3 or P3V3 | منابع اختصاصی، عملکرد بالا |
-| Mission-critical apps | I1V2 (Isolated V2) | جداسازی شبکه، سخت‌افزار اختصاصی |
+| توسعه/آزمایش | F1 (رایگان) یا B1 (پایه) | مقرون‌به‌صرفه، مناسب برای آزمایش |
+| برنامه‌های کوچک تولید | S1 (استاندارد) | دامنه‌های سفارشی، SSL، مقیاس‌گذاری خودکار |
+| برنامه‌های متوسط تولید | P1V3 (پریمیوم V3) | عملکرد بهتر، ویژگی‌های بیشتر |
+| برنامه‌های پر ترافیک | P2V3 یا P3V3 | منابع اختصاصی، عملکرد بالا |
+| برنامه‌های حیاتی ماموریت | I1V2 (ایزوله V2) | ایزولاسیون شبکه، سخت‌افزار اختصاصی |
 
-#### نمونه‌های پیکربندی
+#### مثال‌های پیکربندی
 
-**Development**
+**توسعه**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-dev'
@@ -185,7 +187,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-**Production**
+**تولید**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-prod'
@@ -201,21 +203,21 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-### Azure SQL Database
+### پایگاه داده Azure SQL
 
 #### چارچوب انتخاب SKU
 
-1. **بر پایه DTU (Database Transaction Units)**
-   - **Basic**: 5 DTU - توسعه/تست
-   - **Standard**: S0-S12 (10-3000 DTU) - عمومی
-   - **Premium**: P1-P15 (125-4000 DTU) - عملکرد بحرانی
+1. **براساس DTU (واحدهای تراکنش پایگاه داده)**
+   - **پایه**: ۵ DTU - توسعه/آزمایش
+   - **استاندارد**: S0-S12 (۱۰-۳۰۰۰ DTU) - عمومی
+   - **پریمیوم**: P1-P15 (۱۲۵-۴۰۰۰ DTU) - عملکرد حیاتی
 
-2. **بر پایه vCore** (توصیه‌شده برای تولید)
-   - **General Purpose**: تعادل بین محاسبه و ذخیره‌سازی
-   - **Business Critical**: تاخیر کم، IOPS بالا
-   - **Hyperscale**: ذخیره‌سازی بسیار مقیاس‌پذیر (تا 100TB)
+2. **براساس vCore** (توصیه شده برای تولید)
+   - **هدف عمومی**: توازن محاسبه و ذخیره‌سازی
+   - **حیاتی کسب‌وکار**: تأخیر پایین، IOPS بالا
+   - **هایپراسکیل**: ذخیره‌سازی بسیار مقیاس‌پذیر؛ محدودیت‌های فعلی اندازه و پشتیبانی منطقه‌ای را بررسی کنید
 
-#### نمونه‌های پیکربندی
+#### مثال‌های پیکربندی
 
 ```bicep
 // Development
@@ -250,23 +252,23 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 }
 ```
 
-### Azure Container Apps
+### برنامه‌های کانتینری Azure
 
 #### انواع محیط
 
-1. **بر پایه مصرف (Consumption-based)**
-   - قیمت‌گذاری به‌ازای مصرف
-   - مناسب برای توسعه و بارهای کاری متغیر
+1. **براساس مصرف**
+   - قیمت‌گذاری براساس استفاده
+   - مناسب برای توسعه و بارهای متغیر
    - زیرساخت مشترک
 
 2. **اختصاصی (پروفایل‌های بار کاری)**
    - منابع محاسباتی اختصاصی
    - عملکرد قابل پیش‌بینی
-   - مناسب‌تر برای بارهای تولید
+   - بهتر برای بارهای کاری تولید
 
-#### نمونه‌های پیکربندی
+#### مثال‌های پیکربندی
 
-**Development (Consumption)**
+**توسعه (مصرف)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Production (Dedicated)**
+**تولید (اختصاصی)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,33 +317,35 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
-### Azure Cosmos DB
+افزونگی منطقه‌ای همچنین نیازمند زیرساخت منطقه پشتیبانی شده و پیکربندی مناسب VNet/subnet است که در اینجا حذف شده است. این مثال بودجه سه گره اختصاصی را می‌دهد؛ حداقل دو نسخه اپ را برای توزیع میان مناطق پیکربندی کنید و هم نسخه‌ها و هم گره‌ها را برای خرابی منطقه اندازه کنید. راهنمای [قابلیت اطمینان برنامه‌های کانتینری](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps) را ببینید. برای قرار دادن اپ روی این پروفایل، مقداردهی `workloadProfileName: 'production-profile'` آن لازم است؛ فقط ایجاد پروفایل اپ‌ها را انتقال نمی‌دهد.
+
+### پایگاه داده Azure Cosmos
 
 #### مدل‌های توان عملیاتی
 
-1. **توان عملیاتی تامین‌شده دستی**
+1. **توان عملیاتی اختصاصی دستی**
    - عملکرد قابل پیش‌بینی
    - تخفیف‌های ظرفیت رزرو شده
-   - بهترین برای بارهای کاری پایدار
+   - بهترین گزینه برای بارهای کاری پایدار
 
-2. **توان عملیاتی تامین‌شده با مقیاس خودکار**
-   - مقیاس خودکار بر اساس استفاده
-   - پرداخت بر اساس آنچه استفاده می‌کنید (با حداقل)
+2. **توان عملیاتی خودکار مقیاس‌شونده**
+   - مقیاس‌گذاری خودکار براساس استفاده
+   - پرداخت براساس مصرف (با حداقل)
    - مناسب برای بارهای متغیر
 
-3. **سرورلس**
-   - پرداخت به ازای درخواست
-   - بدون توان عملیاتی تامین‌شده
-   - ایده‌آل برای توسعه و بارهای متناوب
+3. **بدون سرور (Serverless)**
+   - پرداخت براساس درخواست
+   - بدون توان عملیاتی اختصاصی
+   - ایده‌آل برای توسعه و بارهای کاری گهگاهی
 
-#### مثال‌های SKU
+#### نمونه‌های SKU
 
 ```bicep
 // Development - Serverless
@@ -396,19 +400,19 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 }
 ```
 
-### Azure Storage Account
+### حساب ذخیره‌سازی Azure
 
 #### انواع حساب ذخیره‌سازی
 
-1. **Standard_LRS** - توسعه، داده‌های غیر بحرانی
+1. **Standard_LRS** - توسعه، داده‌های غیر حیاتی
 2. **Standard_GRS** - تولید، نیاز به افزونگی جغرافیایی
-3. **Premium_LRS** - برنامه‌های با عملکرد بالا
-4. **Premium_ZRS** - دسترس‌پذیری بالا با افزونگی ناحیه‌ای
+3. **Premium_LRS** - برنامه‌های پر عملکرد
+4. **Premium_ZRS** - دسترس‌پذیری بالا با افزونگی منطقه‌ای
 
-#### سطوح عملکرد
+#### لایه‌های عملکردی
 
-- **Standard**: چندمنظوره، اقتصادی
-- **Premium**: عملکرد بالا، سناریوهای با تاخیر کم
+- **استاندارد**: هدف عمومی، مقرون‌به‌صرفه
+- **پریمیوم**: عملکرد بالا، سناریوهای با تأخیر پایین
 
 ```bicep
 // Development
@@ -453,17 +457,20 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 1. ظرفیت رزرو شده
 
-منابع را برای 1-3 سال رزرو کنید برای دریافت تخفیف‌های قابل توجه:
+منابع را برای ۱ تا ۳ سال رزرو کنید تا تخفیف قابل توجهی دریافت کنید:
 
 ```bash
-# گزینه‌های رزرو را بررسی کنید
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. اندازه مناسب (Right-Sizing)
+گزینه‌های رزرو و انواع منابع واجد شرایط متفاوت است؛ کاتالوگ و شرایط خرید را بررسی کنید و فرض نکنید هر سرویس/SKU از رزرو پشتیبانی می‌کند.
 
-با SKUهای کوچک‌تر شروع کنید و بر اساس استفاده واقعی بزرگ‌تر شوید:
+### 2. اندازه‌گیری صحیح
+
+با SKUهای کوچک‌تر شروع کنید و بر اساس استفاده واقعی، مقیاس کنید:
 
 ```yaml
 # Progressive scaling approach
@@ -477,9 +484,9 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. پیکربندی مقیاس‌بندی خودکار
+### 3. پیکربندی مقیاس‌گذاری خودکار
 
-مقیاس‌دهی هوشمند را برای بهینه‌سازی هزینه پیاده‌سازی کنید:
+مقیاس‌گذاری هوشمند را برای بهینه‌سازی هزینه‌ها اجرا کنید:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -536,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. مقیاس‌بندی زمان‌بندی‌شده
+### 4. مقیاس‌گذاری زمان‌بندی شده
 
-در ساعات کم‌کاری، مقیاس را کاهش دهید:
+در ساعات کم‌بار مقیاس را کاهش دهید:
 
 ```json
 {
@@ -583,11 +592,11 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ---
 
-## ملاحظات عملکرد
+## ملاحظات عملکردی
 
-### نیازمندی‌های عملکرد پایه
+### نیازهای عملکرد پایه
 
-قبل از انتخاب SKU، نیازمندی‌های عملکرد را به‌وضوح تعریف کنید:
+پیش از انتخاب SKU نیازهای عملکرد را به‌وضوح تعریف کنید:
 
 ```yaml
 performance_requirements:
@@ -603,21 +612,23 @@ performance_requirements:
     rto: "30 minutes"
 ```
 
-### تست بار
+### آزمایش بار
 
-SKUهای مختلف را برای اعتبارسنجی عملکرد آزمایش کنید:
+SKUهای مختلف را تست کنید تا عملکرد را تأیید کنید:
 
 ```bash
-# سرویس تست بارگذاری آژور
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
 ### نظارت و بهینه‌سازی
 
-نظارت جامع را راه‌اندازی کنید:
+یک نظارت جامع راه‌اندازی کنید:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -646,43 +658,43 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## جداول مرجع سریع
 
-### مرجع سریع SKUهای App Service
+### مرجع سریع SKU سرویس App
 
-| SKU | Tier | vCPU | RAM | Storage | Price Range | Use Case |
+| SKU | لایه | vCPU | RAM | ذخیره‌سازی | بازه قیمت | مورد استفاده |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | Free | Shared | 1GB | 1GB | Free | Development |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | Small apps |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Production |
-| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | High performance |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Enterprise |
+| F1 | رایگان | اشتراکی | 1GB | 1GB | رایگان | توسعه |
+| B1 | پایه | 1 | 1.75GB | 10GB | $ | برنامه‌های کوچک |
+| S1 | استاندارد | 1 | 1.75GB | 50GB | $$ | تولید |
+| P1V3 | پریمیوم V3 | 2 | 8GB | 250GB | $$$ | عملکرد بالا |
+| I1V2 | ایزوله V2 | 2 | 8GB | 1TB | $$$$ | سازمانی |
 
-### مرجع سریع SKUهای SQL Database
+### مرجع سریع SKU پایگاه داده SQL
 
-| SKU | Tier | DTU/vCore | Storage | Price Range | Use Case |
+| SKU | لایه | DTU/vCore | ذخیره‌سازی | بازه قیمت | مورد استفاده |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Development |
-| S2 | Standard | 50 DTU | 250GB | $$ | Small production |
-| P2 | Premium | 250 DTU | 1TB | $$$ | High performance |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Balanced |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Mission critical |
+| پایه | پایه | ۵ DTU | ۲GB | $ | توسعه |
+| S2 | استاندارد | ۵۰ DTU | ۲۵۰GB | $$ | تولید کوچک |
+| P2 | پریمیوم | ۲۵۰ DTU | ۱TB | $$$ | عملکرد بالا |
+| GP_Gen5_4 | هدف عمومی | ۴ vCore | ۴TB | $$$ | متعادل |
+| BC_Gen5_8 | حیاتی کسب‌وکار | ۸ vCore | ۴TB | $$$$ | حیاتی ماموریت |
 
-### مرجع سریع SKUهای Container Apps
+### مرجع سریع SKU برنامه‌های کانتینری
 
-| Model | Pricing | CPU/Memory | Use Case |
+| مدل | قیمت‌گذاری | CPU/حافظه | مورد استفاده |
 |-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | Development, variable load |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | Production |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | High performance |
+| مصرف | پرداخت به ازای استفاده | ترکیب‌های CPU/حافظه پشتیبانی‌شده بسته به محیط/پروفایل | توسعه یا تولید، بار متغیر |
+| اختصاصی D4 | صورت‌حساب گره اختصاصی | ۴ vCPU، ۱۶GiB به ازای هر گره | بار پایدار/نیازهای ایزولاسیون |
+| اختصاصی D8 | صورت‌حساب گره اختصاصی | ۸ vCPU، ۳۲GiB به ازای هر گره | بار پایدار بالا |
 
 ---
 
 ## ابزارهای اعتبارسنجی
 
-### بررسی‌کننده دسترسی SKU
+### بررسی دسترس‌پذیری SKU
 
 ```bash
 #!/bin/bash
-# بررسی در دسترس بودن SKU در منطقه هدف
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# نحوه استفاده
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
 ### اسکریپت برآورد هزینه
 
+**فقط شبه‌کد:** `Get-ResourceCost` زیر تابع پروژه‌محوری است که باید با استفاده از قیمت‌گذاری منطقه‌ای/قراردادی جاری و مفروضات استفاده پیاده‌سازی کنید. این یک PowerShell یا cmdlet Azure نیست.
+
 ```powershell
-# اسکریپت PowerShell برای برآورد هزینه
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # از API قیمت‌گذاری Azure یا ماشین‌حساب آن استفاده کنید
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# نحوه استفاده
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -749,6 +764,8 @@ Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
 ### اعتبارسنجی عملکرد
+
+YAML زیر یک طرح نیازمندی‌هاست، **نه** یک شمای ورودی Azure Load Testing، JMeter، Locust یا k6. قبل از استفاده از دستور load-test بالا، آن را به پیکربندی واقعی ابزار منتخب خود تبدیل کنید.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,33 +800,33 @@ test_configuration:
 
 ---
 
-## خلاصه بهترین شیوه‌ها
+## خلاصه بهترین روش‌ها
 
 ### بایدها
 
-1. **با کوچک شروع کنید و بر اساس استفاده واقعی مقیاس دهید**
-2. **برای محیط‌های مختلف از SKUهای متفاوت استفاده کنید**
-3. **عملکرد و هزینه‌ها را به‌طور مستمر نظارت کنید**
-4. **برای بارهای تولید از ظرفیت رزرو شده استفاده کنید**
-5. **در مواقع مناسب مقیاس‌بندی خودکار را پیاده‌سازی کنید**
-6. **عملکرد را با بارهای کاری واقع‌گرایانه تست کنید**
-7. **برای رشد برنامه‌ریزی کنید ولی از تخصیص بیش از حد اجتناب کنید**
-8. **در توسعه تا حد امکان از سطوح رایگان استفاده کنید**
+1. **از کوچک شروع کنید و بر اساس استفاده واقعی مقیاس دهید**
+2. **از SKUهای مختلف برای محیط‌های مختلف استفاده کنید**
+3. **عملکرد و هزینه‌ها را به صورت مداوم نظارت کنید**
+4. **از ظرفیت رزرو شده برای بارهای کاری تولید بهره ببرید**
+5. **در صورت لزوم مقیاس‌گذاری خودکار را پیاده‌سازی کنید**
+6. **عملکرد را با بارهای کاری واقعی تست کنید**
+7. **برای رشد برنامه‌ریزی کنید اما از تأمین بیش از حد اجتناب کنید**
+8. **تا حد امکان از لایه‌های رایگان برای توسعه استفاده کنید**
 
 ### نبایدها
 
-1. **از SKUهای تولید در محیط توسعه استفاده نکنید**
-2. **در دسترس بودن منطقه‌ای SKUها را نادیده نگیرید**
+1. **از SKUهای تولید برای توسعه استفاده نکنید**
+2. **دسترس‌پذیری منطقه‌ای SKU را نادیده نگیرید**
 3. **هزینه‌های انتقال داده را فراموش نکنید**
-4. **بدون توجیه بیش از حد تخصیص نکنید**
-5. **تاثیر وابستگی‌ها را نادیده نگیرید**
-6. **محدودیت‌های مقیاس‌بندی خودکار را خیلی بالا تنظیم نکنید**
-7. **نیازمندی‌های انطباق را فراموش نکنید**
-8. **فقط بر اساس قیمت تصمیم‌گیری نکنید**
+4. **بدون دلیل موجه تأمین بیش از حد نکنید**
+5. **تأثیر وابستگی‌ها را نادیده نگیرید**
+6. **محدودیت‌های مقیاس‌گذاری خودکار را بیش از حد بالا تنظیم نکنید**
+7. **نیازهای تطبیق را فراموش نکنید**
+8. **تصمیم‌گیری را فقط براساس قیمت انجام ندهید**
 
 ---
 
-**نکته حرفه‌ای**: از Azure Cost Management و Advisor برای دریافت توصیه‌های شخصی‌سازی‌شده برای بهینه‌سازی انتخاب‌های SKU بر اساس الگوهای استفاده واقعی استفاده کنید.
+**نکته تخصصی**: از Azure Cost Management و Advisor برای دریافت توصیه‌های شخصی‌شده در بهینه‌سازی انتخاب SKU بر اساس الگوهای استفاده واقعی بهره بگیرید.
 
 ---
 
@@ -820,6 +837,6 @@ test_configuration:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی Co-op Translator (https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما برای دقت تلاش می‌کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان مبدأ باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس یا حیاتی، ترجمهٔ حرفه‌ای توسط انسان توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مادری خود باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوء تفاهم یا برداشت نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

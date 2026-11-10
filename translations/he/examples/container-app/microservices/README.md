@@ -1,798 +1,269 @@
-# ארכיטקטורת מיקרוסרוויסים - דוגמה ל-Container App
+# מיקרו-שירותים עם שני שירותים — Azure Container Apps
 
-⏱️ **זמן משוער**: 25-35 דקות | 💰 **עלות משוערת**: ~50-100$ לחודש | ⭐ **מורכבות**: מתקדם
+**רמה:** בינונית · **זמן:** 45–60 דקות כולל ההתקנה
 
-ארכיטקטורת מיקרוסרוויסים **מפושטת אך פונקציונלית** שמתפרסת ב-Azure Container Apps באמצעות AZD CLI. דוגמה זו מציגה תקשורת בין שירותים, תזמור קונטיינרים ומעקב עם הגדרה מעשית של שני שירותים.
+דוגמת למידה זו מממשת **שער API ב-Node.js** ו-**שירות מוצר לקריאה בלבד ב-Python**. הקוד המקור, קבצי Docker, Bicep, וקונפיגורציית azd כלולים.
 
-> **📚 גישת הלמידה**: הדוגמה מתחילה בארכיטקטורה מינימלית של שני שירותים (API Gateway + Backend Service) שניתן לפרוס וללמוד ממנה בפועל. לאחר שתשלוט ביסודות, נספק הדרכה להרחבה למערכת מיקרוסרוויסים מלאה.
+זהו אינו מערכת המותאמת לפרודקשן.
 
 ## מה תלמדו
 
-בסיום דוגמה זו, תוכלו:
-- לפרוס מספר קונטיינרים ל-Azure Container Apps
-- לממש תקשורת בין שירותים עם רשת פנימית
-- להגדיר קנה מידה מבוסס סביבה ובדיקות בריאות
-- לנטר יישומים מבוזרים עם Application Insights
-- להבין דפוסי פריסה והטבות בארכיטקטורת מיקרוסרוויסים
-- ללמוד התרחבות הדרגתית מארכיטקטורה פשוטה למורכבת
-
-## ארכיטקטורה
-
-### שלב 1: מה אנו בונים (כלול בדוגמה זו)
+- פריסת שני שירותים באופן עצמאי.
+- שימוש ב-FQDN פנימי על HTTPS.
+- אימות תגובות הצלחה, לא נמצא, ושירות לא זמין.
+- הבנת טלמטריה וגבולות סקיילינג עצמאיים.
 
 ```mermaid
-graph TD
-    Internet[אינטרנט] -- HTTPS --> Gateway[שער API<br/>קונטיינר Node.js<br/>ניתוב בקשות<br/>בדיקות בריאות<br/>רישום בקשות]
-    Gateway -- HTTP internal --> Product[שירות מוצר<br/>קונטיינר Python<br/>CRUD מוצר<br/>מאגר נתונים בזיכרון<br/>REST API]
-    Product --> Insights[תובנות אפליקציה<br/>ניטור ויומנים]
-```
-**למה להתחיל בפשטות?**
-- ✅ פריסה והבנה מהירה (25-35 דקות)
-- ✅ ללמוד דפוסי מיקרוסרוויסים בסיסיים ללא מורכבות
-- ✅ קוד עובד שניתן לשנות ולנסות
-- ✅ עלות נמוכה ללמידה (~50-100$ מול 300-1400$ לחודש)
-- ✅ לבנות ביטחון לפני הוספת מאגרי נתונים ותורים
-
-**אנלוגיה**: חשבו על זה כמו ללמוד לנהוג. מתחילים בחניון ריק (שני שירותים), שולטים ביסודות, ומתקדמים לתנועה עירונית (5+ שירותים עם מאגרי נתונים).
-
-### שלב 2: הרחבה בעתיד (ארכיטקטורה להיקף מלא)
-
-לאחר שתשלוט בארכיטקטורה של שני השירותים, תוכל להרחיב ל:
-
-```
-Full Architecture (Not Included - For Reference)
-├── API Gateway (✅ Included)
-├── Product Service (✅ Included)
-├── Order Service (🔜 Add next)
-├── User Service (🔜 Add next)
-├── Notification Service (🔜 Add last)
-├── Azure Service Bus (🔜 For async communication)
-├── Cosmos DB (🔜 For product persistence)
-├── Azure SQL (🔜 For order management)
-└── Azure Storage (🔜 For file storage)
+flowchart LR
+    Client -->|HTTPS| Gateway[Public Node.js gateway — port 8080]
+    Gateway -->|HTTPS internal FQDN| Product[Internal Python product API — port 8000]
+    Gateway -. request/dependency telemetry .-> Insights[Application Insights]
+    Product -. application log traces .-> Insights
 ```
 
-עיין במדור "מדריך הרחבה" בסוף להוראות שלב-אחר-שלב.
+קטלוג המוצרים מכיל חמישה מוצרים קבועים בזיכרון. אין **מטפלי POST,
+PUT, או DELETE**, בסיס נתונים, Service Bus, שירות הזמנות/משתמש/הודעות,
+קוד C# או Go. אלה רעיונות לפיתוח עתידי, לא תכונות כלולות.
+השער אינו מאמת משתמשים; כניסה פנימית אינה תחליף לאישור אפליקציה.
 
-## תכונות כלולות
-
-✅ **גילוי שירות**: גילוי אוטומטי מבוסס DNS בין הקונטיינרים  
-✅ **איזון עומסים**: איזון עומסים מובנה בין שכפולים  
-✅ **קנה מידה אוטומטי**: קנה מידה עצמאי לכל שירות לפי בקשות HTTP  
-✅ **מעקב בריאות**: בדיקות לייבנס ו-רדייינס לשני השירותים  
-✅ **רישום מבוזר**: רישום מרכזי עם Application Insights  
-✅ **רשת פנימית**: תקשורת מאובטחת בין שירותים  
-✅ **תזמור קונטיינרים**: פריסה וקנה מידה אוטומטיים  
-✅ **עדכונים ללא השבתה**: עדכונים מתגלגלים עם ניהול גרסאות  
 
 ## דרישות מוקדמות
 
-### כלים נדרשים
-
-לפני שמתחילים, ודא שהכלים הבאים מותקנים:
-
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (גרסה 1.0.0 ומעלה)
-   ```bash
-   azd version
-   # פלט צפוי: גרסה 1.0.0 או יותר של azd
-   ```
-
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (גרסה 2.50.0 ומעלה)
-   ```bash
-   az --version
-   # פלט צפוי: azure-cli 2.50.0 או גבוה יותר
-   ```
-
-3. **[Docker](https://www.docker.com/get-started)** (לפיתוח/בדיקה מקומית - אופציונלי)
-   ```bash
-   docker --version
-   # הפלט הצפוי: Docker גרסה 20.10 או גבוהה יותר
-   ```
-
-### דרישות Azure
-
-- מנוי **Azure פעיל** ([צור חשבון חינמי](https://azure.microsoft.com/free/))
-- הרשאות ליצירת משאבים במנוי שלך
-- תפקיד **Contributor** במנוי או בקבוצת משאבים
-
-### דרישות ידע
-
-זו דוגמה ברמת **מתקדמים**. עליך להכיר:
-- השלמת [דוגמת Simple Flask API](../../../../../examples/container-app/simple-flask-api) 
-- הבנה בסיסית של ארכיטקטורת מיקרוסרוויסים
-- היכרות עם REST APIs ו-HTTP
-- הבנה של מושגי קונטיינרים
-
-**חדש ב-Container Apps?** התחל עם [דוגמת Simple Flask API](../../../../../examples/container-app/simple-flask-api) כדי ללמוד את הבסיס.
-
-## התחלה מהירה (שלב אחר שלב)
-
-### שלב 1: שיבוט וניווט
+השלם את ה-[Flask API בודד](../../../../../examples/container-app/simple-flask-api) תחילה.
+התקן גרסת יציבה עדכנית של azd (גרסת שחרור זמינה בזמן הסקירה: 1.37.2), Azure CLI,
+ואת Docker כשהדימון פעיל. דרושה לך מנוי Azure, הרשאות יצירת משאבים,
+וזכאות אזורית ל-Container Apps.
 
 ```bash
-git clone https://github.com/microsoft/AZD-for-beginners.git
-cd AZD-for-beginners/examples/container-app/microservices
-```
-
-**✓ בדיקת הצלחה**: ודא שאתה רואה `azure.yaml`:
-```bash
-ls
-# צפוי: README.md, azure.yaml, infra/, src/
-```
-
-### שלב 2: אימות ב-Azure
-
-```bash
+azd version
+az version
+docker info
 azd auth login
+az login
 ```
 
-דף זה פותח את הדפדפן שלך לאימות ב-Azure. היכנס עם אישורי ה-Azure שלך.
+השתמש באותו מנוי בשני כלי שורת הפקודה. הפקודות להלן משתמשות ב-Bash.
 
-**✓ בדיקת הצלחה**: תראה:
-```
-Logged in to Azure.
-```
+## פריסה ואימות
 
-### שלב 3: אתחול סביבה
+משורש הריפוזיטורי:
 
 ```bash
-azd init
-```
-
-**בקשות שתראה**:
-- **שם סביבה**: הזן שם קצר (לדוגמה, `microservices-dev`)
-- **מנוי Azure**: בחר את המנוי שלך
-- **מיקום Azure**: בחר אזור (לדוגמה, `eastus`, `westeurope`)
-
-**✓ בדיקת הצלחה**: תראה:
-```
-SUCCESS: New project initialized!
-```
-
-### שלב 4: פרוס תשתית ושירותים
-
-```bash
+cd examples/container-app/microservices
+azd env new microservices-demo
 azd up
+GATEWAY_URL=$(azd env get-value API_GATEWAY_URL)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+GATEWAY_NAME=$(azd env get-value API_GATEWAY_NAME)
+PRODUCT_NAME=$(azd env get-value PRODUCT_SERVICE_NAME)
+
+curl --fail-with-body "${GATEWAY_URL}/health"
+curl --fail-with-body "${GATEWAY_URL}/api/products"
+curl --fail-with-body "${GATEWAY_URL}/api/products/1"
+curl -i "${GATEWAY_URL}/api/products/999"
 ```
 
-**מה קורה** (לוקח 8-12 דקות):
-1. יוצר סביבה ל-Container Apps
-2. יוצר Application Insights למעקב
-3. בונה את קונטיינר ה-API Gateway (Node.js)
-4. בונה את קונטיינר שירות המוצר (Python)
-5. מפרסם את שני הקונטיינרים ל-Azure
-6. מגדיר רשת ובדיקות בריאות
-7. מגדיר ניטור ורישום
+**הצלחה:** status 200 לבריאות; status 200 לרשימה עם **חמישה** מוצרים; מוצר 1 הוא מחשב נייד
+במחיר 999.99 עם מלאי 50; מוצר לא ידוע מחזיר 404.
+תיאורים כלולים בתגובות; התאריכים משתנים.
 
-**✓ בדיקת הצלחה**: תראה:
+הפריסה הראשונית משתמשת בתמונות ציבוריות של hello-world על הפורט 80 ולכן אינה מנסה
+למשוך תמונות שאינן קיימות ממאגר ריק. מודולי Bicep ספציפיים לשירות
+וקבצי פרמטרים מחליפים אותם בתמונות שנבנו וביציאות/בדיקות אפליקציה במהלך ה-
+`azd deploy`. הפרמטרים הראשיים משמרים את שמות התמונות שפורסמו לפריסה עתידית.
+
+## שירותים ורשתות
+
+| שירות | נקודות קצה חשופות | משאבים ברירת מחדל |
+|---|---|---|
+| Gateway | GET `/`, `/health`, `/api/products`, `/api/products/:id` | 1 vCPU, 2 GiB, 2–20 שכפולים |
+| Product | GET `/`, `/health`, `/products`, `/products/<id>` | 0.5 vCPU, 1 GiB, 1–10 שכפולים |
+
+ל-Product ingress יש `external: false` ו-`allowInsecure: false`. Bicep מזריק
+`PRODUCT_SERVICE_URL=https://<actual-internal-fqdn>` אל ה-Gateway. HTTP היה
+מפנה מחדש; HTTPS מתאים ל-ingress שהוגדר. שם DNS קצר חייב להתאים
+**לשם האפליקציה Container App בפועל**, לא למפתח השירות הלוגי `product-service`.
+אל תנסה לגשת לכתובת URL פנימית ישירות מהמחשב הנייד שלך.
+
+ל-Gateway יש זמן חיבור של חמישה שניות לקריאות מוצר. מזהי מוצרים חסרים
+מתפשטים כ-404; כשלים בתעבורה/שגיאות ב-backend מחזירים 503. ה-
+`/health` של Gateway בודק רק את ה-Gateway, לא את זמינות ה-backend.
+
+## קבצים וקונפיגורציה
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/abbreviations.json
+infra/core/container-apps-environment.bicep
+infra/core/monitor.bicep
+infra/app/api-gateway.bicep
+infra/app/api-gateway.parameters.json
+infra/app/product-service.bicep
+infra/app/product-service.parameters.json
+src/api-gateway/{app.js,package.json,Dockerfile}
+src/product-service/{main.py,requirements.txt,Dockerfile}
 ```
-SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
-Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
-```
 
-**⏱️ זמן**: 8-12 דקות
+סקיילינג, CPU/זיכרון, יציאות, ובדיקות מוגדרים ב-`infra/app/*.bicep`. שנה קבצים אלה
+והריץ `azd up` כדי להחיל תשתית ולפרוס מחדש. אין כאן פרמטר של
+`GATEWAY_MAX_REPLICAS` כמשתנה סביבה בדוגמה זו.
 
-### שלב 5: בדוק את הפריסה
+עבור שינויים בקוד בלבד:
 
 ```bash
-# קבל את נקודת הקצה של שער ה-API
-GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
-
-# בדוק את בריאות שער ה-API
-curl $GATEWAY_URL/health
-
-# פלט צפוי:
-# {"status":"בריא","service":"שער-api","timestamp":"2025-11-19T10:30:00Z"}
-```
-
-**בדוק את שירות המוצר דרך ה-Gateway**:
-```bash
-# רשימת מוצרים
-curl $GATEWAY_URL/api/products
-
-# פלט צפוי:
-# [
-#   {"id":1,"name":"מחשב נייד","price":999.99,"stock":50},
-#   {"id":2,"name":"עכבר","price":29.99,"stock":200},
-#   {"id":3,"name":"מקלדת","price":79.99,"stock":150}
-# ]
-```
-
-**✓ בדיקת הצלחה**: שתי הנקודות מחזירות נתוני JSON ללא שגיאות.
-
----
-
-**🎉 מזל טוב!** פרסת ארכיטקטורת מיקרוסרוויסים ל-Azure!
-
-## מבנה הפרויקט
-
-כל קבצי המימוש כלולים—זו דוגמה שלמה ועובדת:
-
-```
-microservices/
-│
-├── README.md                         # This file
-├── azure.yaml                        # AZD configuration
-├── .gitignore                        # Git ignore patterns
-│
-├── infra/                           # Infrastructure as Code (Bicep)
-│   ├── main.bicep                   # Main orchestration
-│   ├── abbreviations.json           # Naming conventions
-│   ├── core/                        # Shared infrastructure
-│   │   ├── container-apps-environment.bicep  # Container environment + registry
-│   │   └── monitor.bicep            # Application Insights + Log Analytics
-│   └── app/                         # Service definitions
-│       ├── api-gateway.bicep        # API Gateway container app
-│       └── product-service.bicep    # Product Service container app
-│
-└── src/                             # Application source code
-    ├── api-gateway/                 # Node.js API Gateway
-    │   ├── app.js                   # Express server with routing
-    │   ├── package.json             # Node dependencies
-    │   └── Dockerfile               # Container definition
-    └── product-service/             # Python Product Service
-        ├── main.py                  # Flask API with product data
-        ├── requirements.txt         # Python dependencies
-        └── Dockerfile               # Container definition
-```
-
-**מה כל רכיב עושה:**
-
-**תשתית (infra/)**:
-- `main.bicep`: מארגן את כל משאבי Azure ותלותם
-- `core/container-apps-environment.bicep`: יוצר את סביבה של Container Apps ו-Azure Container Registry
-- `core/monitor.bicep`: מגדיר Application Insights לרישום מבוזר
-- `app/*.bicep`: הגדרות קונטיינר אפ ייחודיות עם קנה מידה ובדיקות בריאות
-
-**API Gateway (src/api-gateway/)**:
-- שירות מול הציבור שמפנה בקשות לשירותי backend
-- מיישם רישום, טיפול שגיאות והעברת בקשות
-- מדגים תקשורת HTTP בין שירותים
-
-**Product Service (src/product-service/)**:
-- שירות פנימי עם קטלוג מוצרים (בזיכרון לפשטות)
-- REST API עם בדיקות בריאות
-- דוגמה לדפוס מיקרוסרוויס backend
-
-## סקירת שירותים
-
-### API Gateway (Node.js/Express)
-
-**פורט**: 8080  
-**גישה**: ציבורית (כניסה חיצונית)  
-**מטרה**: מפנה בקשות נכנסות לשירותי backend מתאימים  
-
-**נקודות קצה**:
-- `GET /` - מידע על השירות
-- `GET /health` - נקודת בדיקת בריאות
-- `GET /api/products` - מפנה לשירות מוצר (רשימת כולם)
-- `GET /api/products/:id` - מפנה לשירות מוצר (קבלת פריט לפי מזהה)
-
-**תכונות מרכזיות**:
-- ניתוב בקשות עם axios
-- רישום מרכזי
-- טיפול שגיאות וניהול timeout
-- גילוי שירותים באמצעות משתני סביבה
-- אינטגרציה עם Application Insights
-
-**הדגשת קוד** (`src/api-gateway/app.js`):
-```javascript
-// תקשורת שירות פנימית
-app.get('/api/products', async (req, res) => {
-  const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-  res.json(response.data);
-});
-```
-
-### Product Service (Python/Flask)
-
-**פורט**: 8000  
-**גישה**: פנימית בלבד (ללא כניסה חיצונית)  
-**מטרה**: מנהל קטלוג מוצרים בזיכרון  
-
-**נקודות קצה**:
-- `GET /` - מידע על השירות
-- `GET /health` - נקודת בדיקת בריאות
-- `GET /products` - רשום את כל המוצרים
-- `GET /products/<id>` - קבל מוצר לפי מזהה
-
-**תכונות מרכזיות**:
-- RESTful API עם Flask
-- מאגר מוצרים בזיכרון (פשוט, ללא צורך בבסיס נתונים)
-- ניטור בריאות עם probes
-- רישום מובנה
-- אינטגרציה עם Application Insights
-
-**תבנית נתונים**:
-```python
-{
-  "id": 1,
-  "name": "Laptop",
-  "description": "High-performance laptop",
-  "price": 999.99,
-  "stock": 50
-}
-```
-
-**למה פנימי בלבד?**
-שירות המוצר אינו נגיש לציבור. כל הבקשות חייבות לעבור דרך API Gateway, שמספק:
-- אבטחה: נקודת גישה מבוקרת
-- גמישות: ניתן לשנות backend מבלי להשפיע על הלקוחות
-- ניטור: רישום מרכזי לבקשות
-
-## הבנת תקשורת השירות
-
-### איך השירותים מתקשרים זה עם זה
-
-בדוגמה זו, ה-API Gateway מתקשר עם שירות המוצר באמצעות **בקשות HTTP פנימיות**:
-
-```javascript
-// שער API (src/api-gateway/app.js)
-const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
-
-// בצע בקשת HTTP פנימית
-const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-```
-
-**נקודות מפתח**:
-
-1. **גילוי מבוסס DNS**: Container Apps מספק אוטומטית DNS לשירותים פנימיים
-   - FQDN של שירות מוצר: `product-service.internal.<environment>.azurecontainerapps.io`
-   - מפושט ל: `http://product-service` (Container Apps פותר את זה)
-
-2. **אין חשיפה ציבורית**: לשירות מוצר יש `external: false` בביספ
-   - נגיש רק בתוך סביבת Container Apps
-   - לא ניתן להגיע אליו מהאינטרנט
-
-3. **משתני סביבה**: URL השירותים מוזרקים בזמן הפריסה
-   - ביספ מעביר את ה-FQDN הפנימי ל-gateway
-   - ללא כתובות קוד-קשות בקוד האפליקציה
-
-**אנלוגיה**: תחשוב על זה כמו חדרי משרד. ה-API Gateway הוא דלפק הקבלה (פומבי), ושירות המוצר הוא חדר משרד (פנימי בלבד). מבקרים חייבים לעבור דרך הקבלה כדי להגיע לכל חדר.
-
-## אפשרויות פריסה
-
-### פריסה מלאה (מומלץ)
-
-```bash
-# פרוס תשתית ואת שני השירותים
-azd up
-```
-
-זה מפרוס:
-1. סביבה ל-Container Apps
-2. Application Insights
-3. רישום קונטיינרים
-4. קונטיינר API Gateway
-5. קונטיינר שירות מוצר
-
-**זמן**: 8-12 דקות
-
-### פרוס שירות בודד
-
-```bash
-# לפרוס רק שירות אחד (לאחר azd up הראשוני)
-azd deploy api-gateway
-
-# או לפרוס שירות מוצר
 azd deploy product-service
+azd deploy api-gateway
 ```
 
-**מקרה שימוש**: כשעדכנת קוד בשירות אחד ורוצה לפרוס רק אותו מחדש.
+תמונת ה-Node משתמשת ב-Node 22; תמונת ה-Python משתמשת ב-Python 3.11. שתיהן קשורות ל-
+`0.0.0.0`. Ingress/בדיקות משתמשים בפורט 8080 (gateway) ו-8000 (product), בהתאמה.
 
-### עדכון הגדרה
+## פיתוח מקומי עם Docker
+
+הרץ מקטלוג הדוגמה הזה. השתמש ברשת שהוגדרה על ידי המשתמש, **לא ב-`localhost`
+כדי שמכלי אחד יוכל להגיע לשני**:
 
 ```bash
-# שנה את פרמטרי הקנה מידה
-azd env set GATEWAY_MAX_REPLICAS 30
-
-# פרוס מחדש עם תצורה חדשה
-azd up
+docker network create azd-microservices-demo
+docker build -t local-product ./src/product-service
+docker build -t local-gateway ./src/api-gateway
+docker run -d --name azd-product --network azd-microservices-demo local-product
+docker run -d --name azd-gateway --network azd-microservices-demo \
+  -p 8080:8080 -e PRODUCT_SERVICE_URL=http://azd-product:8000 local-gateway
+curl --fail-with-body http://localhost:8080/api/products
 ```
 
-## הגדרות
-
-### הגדרות קנה מידה
-
-שני השירותים מוגדרים עם קנה מידה אוטומטי מבוסס HTTP בקבצי הביספ שלהם:
-
-**API Gateway**:
-- שכפולים מינימליים: 2 (תמיד לפחות 2 לזמינות)
-- שכפולים מקסימליים: 20
-- טריגר קנה מידה: 50 בקשות בו זמנית לכל שכפול
-
-**Product Service**:
-- שכפולים מינימליים: 1 (יכול להיות 0 אם צריך)
-- שכפולים מקסימליים: 10
-- טריגר קנה מידה: 100 בקשות בו זמנית לכל שכפול
-
-**התאמת קנה מידה** (ב-`infra/app/*.bicep`):
-```bicep
-scale: {
-  minReplicas: 1
-  maxReplicas: 10
-  rules: [
-    {
-      name: 'http-scale-rule'
-      http: {
-        metadata: {
-          concurrentRequests: '100'  // Adjust this
-        }
-      }
-    }
-  ]
-}
-```
-
-### הקצאת משאבים
-
-**API Gateway**:
-- CPU: 1.0 vCPU
-- זיכרון: 2 גיגה בייט
-- סיבה: מטפל בכל התעבורה החיצונית
-
-**Product Service**:
-- CPU: 0.5 vCPU
-- זיכרון: 1 גיגה בייט
-- סיבה: פעולות זיכרון קלות
-
-### בדיקות בריאות
-
-שני השירותים כוללים בדיקות לייבנס ו-רדייינס:
-
-```bicep
-probes: [
-  {
-    type: 'Liveness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 10
-    periodSeconds: 30
-  }
-  {
-    type: 'Readiness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 5
-    periodSeconds: 10
-  }
-]
-```
-
-**מה זה אומר**:
-- **לייבנס**: אם בדיקת בריאות נכשלת, Container Apps מפעיל מחדש את הקונטיינר
-- **רדייינס**: אם לא מוכן, Container Apps מפסיק לנתב תנועה לשכפול זה
-
-
-
-## ניטור ותצפית
-
-### צפייה ביומני שירות
+הצפוי: חמישה מוצרים. HTTP משמש רק לרשת Docker המקומית הזו.
 
 ```bash
-# הצג יומני רישום באמצעות azd monitor
-azd monitor --logs
-
-# או השתמש ב-Azure CLI עבור אפליקציות מכולה ספציפיות:
-# זרם יומני רישום מ-API Gateway
-az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
-
-# הצג יומני רישום אחרונים של שירות המוצר
-az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
+docker stop azd-product azd-gateway
+docker rm azd-product azd-gateway
+docker network rm azd-microservices-demo
 ```
 
-**פלט צפוי**:
+## ניטור
+
+```bash
+az containerapp logs show --name "$GATEWAY_NAME" --resource-group "$RG_NAME" --follow
+# In a separate terminal:
+az containerapp logs show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" --tail 100
 ```
-[api-gateway] API Gateway listening on port 8080
-[api-gateway] Product Service URL: http://product-service
-[api-gateway] GET /api/products 200 - 45ms
-[product-service] Retrieved 5 products
-```
 
-### שאילתות Application Insights
+`azd monitor --logs` פותח תצוגת פורטל; אינו משדר לוגים מהטרמינל.
+SDK של Node אוסף בקשות/תלויות ל-Gateway. ה-`AzureLogHandler` של Python
+מייצא **עקבות לוג**, לא בקשות Flask אוטומטיות, SQL תלויות, או עקבות מבוזרות מלאות.
+OpenCensus הוא SDK מיושן; העדף את Azure Monitor OpenTelemetry
+כשהדוגמה הזו מורחבת.
 
-גש ל-Application Insights בפורטל Azure ואז הרץ את השאילתות האלו:
+ב-Application Insights Logs, הפק בקשות ובחן:
 
-**מציאת בקשות איטיות**:
 ```kusto
 requests
 | where timestamp > ago(1h)
-| where duration > 1000  // Requests taking >1 second
-| summarize count() by name, cloud_RoleName
-| order by count_ desc
+| where name contains "products"
+| summarize RequestCount=count(), AvgDuration=avg(duration) by bin(timestamp, 5m)
 ```
 
-**מעקב שיחות בין שירותים**:
+עבור הודעות אפליקציית Python:
+
 ```kusto
-dependencies
+traces
 | where timestamp > ago(1h)
-| where type == "Http"
-| project timestamp, name, target, duration, success
-| order by timestamp desc
+| where message contains "products"
+| project timestamp, message, severityLevel
 ```
 
-**שיעור שגיאות לפי שירות**:
-```kusto
-exceptions
-| where timestamp > ago(24h)
-| summarize errorCount = count() by cloud_RoleName, type
-| order by errorCount desc
-```
-
-**נפח בקשות לאורך זמן**:
-```kusto
-requests
-| where timestamp > ago(1h)
-| summarize requestCount = count() by bin(timestamp, 5m), cloud_RoleName
-| render timechart
-```
-
-### גישת לוח בקרה לניטור
-
-```bash
-# קבל פרטי Application Insights
-azd env get-values | grep APPLICATIONINSIGHTS
-
-# פתח ניטור בפורטל Azure
-az monitor app-insights component show \
-  --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
-  --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
-  --query "appId" -o tsv
-```
-
-### מדדים חיים
-
-1. עבור ל-Application Insights בפורטל Azure
-2. לחץ על "Live Metrics"
-3. ראה בקשות בזמן אמת, כישלונות וביצועים
-4. בדוק בשליחת הפקודה: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+אפשר השהיית עיבוד ודגימה; אל תצפה לספירת בקשות מדויקת או לאיחור מובטח.
+אין התראות מותאמות אישית או לוחות מחוונים מוגדרים.
 
 ## תרגילים מעשיים
 
-[הערה: ראה את התרגילים המלאים למעלה במדור "תרגילים מעשיים" להוראות מפורטות שלב-אחר-שלב כולל אימות פריסה, שינוי נתונים, בדיקות קנה מידה אוטומטי, טיפול שגיאות והוספת שירות שלישי.]
+### תרגיל 1: שנה את הקטלוג
 
-## ניתוח עלויות
+**נקודת התחלה:** `src/product-service/main.py`.
+**מטרה:** לאמת פריסה עצמאית של שירות.
+שנה את המלאי של המחשב הנייד מ-50 ל-49 ברשימה הקבועה `products`, הרץ
+`azd deploy product-service`, ואז בקש `${GATEWAY_URL}/api/products/1`.
 
-### עלויות חודשיות משוערות (לדוגמה של שני שירותים זו)
+**קריטריוני הצלחה / פתרון:** HTTP 200 עם `"stock":49`. החזר ל-50 ופרוס מחדש.
+**בעיה נפוצה:** עריכת ה-Gateway במקום השירות שבבעלותו הקטלוג.
+זה משנה נתוני מקור, לא מסד נתונים מתמיד למלאי.
 
-| משאב | תצורה | עלות משוערת |
-|----------|--------------|----------------|
-| API Gateway | 2-20 שכפולים, 1 vCPU, 2GB RAM | 30-150$ |
-| Product Service | 1-10 שכפולים, 0.5 vCPU, 1GB RAM | 15-75$ |
-| רישום קונטיינרים | שכבה בסיסית | 5$ |
-| Application Insights | 1-2 GB/חודש | 5-10$ |
-| Log Analytics | 1 GB/חודש | 3$ |
-| **סה"כ** | | **58-243$ לחודש** |
+### תרגיל 2: אמת את תצורת השכפולים
 
-**פירוט עלויות לפי שימוש**:
-- **תעבורה קלה** (בדיקות/למידה): ~60$/חודש
-- **תעבורה בינונית** (ייצור קטן): ~120$/חודש
-- **תעבורה גבוהה** (תקופות עמוסות): ~240$/חודש
-
-### טיפים לאופטימיזציה של עלויות
-
-1. **קנה מידה לאפס לפיתוח**:
-   ```bicep
-   scale: {
-     minReplicas: 0  // Save $30-40/month when not in use
-     maxReplicas: 10
-   }
-   ```
-
-2. **השתמש בתוכנית צריכה ל-Cosmos DB** (כשמוסיפים):
-   - שלם רק על מה שמשתמשים בו
-   - ללא חיוב מינימלי
-
-3. **הגדר דגימה ב-Application Insights**:
-   ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // דגום 50% מהבקשות
-   ```
-
-4. **נקה משאבים כשלא צריכים**:
-   ```bash
-   azd down
-   ```
-
-### אפשרויות שכבה חינמית
-
-ללמידה ובדיקה, שקול:
-- השתמש בקרדיטים חינמיים של Azure (30 הימים הראשונים)  
-- שמור על מינימום שכפולים  
-- מחק לאחר הבדיקה (אין חיובים מתמשכים)  
-
----
-
-## ניקוי
-
-כדי להימנע מחיובים מתמשכים, מחק את כל המשאבים:
+**נקודת התחלה:** `infra/app/product-service.bicep`.
+**מטרה:** להבחין בשינוי תשתיתי בלי לנחש את סקיילינג האוטומטי.
+שנה את `minReplicas: 1` ל-`minReplicas: 2`, הרץ `azd up`, ואז:
 
 ```bash
-azd down --force --purge
+az containerapp show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" \
+  --query properties.template.scale -o json
 ```
-  
-**הנחיית אישור**:  
-```
-? Total resources to delete: 6, are you sure you want to continue? (y/N)
-```
-  
-הקלד `y` כדי לאשר.  
 
-**מה נמחק**:  
-- סביבה של Container Apps  
-- שני ה-Container Apps (שער & שירות המוצר)  
-- רישום ה-Container  
-- Application Insights  
-- לוג אנליטיקס Workspace  
-- קבוצת משאבים  
+**קריטריוני הצלחה:** המינימום שהוגדר הוא 2 והמקסימום נשאר 10.
+החזר את המינימום ל-1 והרץ `azd up`.
+**בעיה נפוצה:** `azd deploy` לבדו אינו מיישם שינויים בתשתית משותפת לא קשורה.
+אל תכנס `maxReplicas` לאפס כסימולציית כישלון.
+זה מאמת תצורה, לא בדיקת עומס או ספירת שכפולים מובטחת מיידית.
 
-**✓ אמת את הניקוי**:  
+### תרגיל 3: בדוק טיפול בשירות לא זמין מקומית
+
+**נקודת התחלה:** שני מכלי Docker המקומיים למעלה פועלים.
+**מטרה:** להבדיל בין כישלון backend למוצר חסר.
+עצור רק את מכל המוצר:
+
 ```bash
-az group list --query "[?starts_with(name,'rg-microservices')]" --output table
+docker stop azd-product
+curl -i http://localhost:8080/api/products
+docker start azd-product
+curl --fail-with-body http://localhost:8080/api/products
 ```
-  
-צריך להחזיר ריק.  
 
----
+**קריטריוני הצלחה:** בעת עצירה, ה-Gateway מחזיר 503 עם
+`"error":"Product service unavailable"`; לאחר הפעלה מחדש, הרשימה מחזירה 200.
+נסה שוב לאחר השהיית אתחול קצרה אם יש צורך.
+**בעיה נפוצה:** עצירת ה-Gateway בודקת כישלון אחר (אין תגובת HTTP).
 
-## מדריך להרחבה: מ-2 ל-5+ שירותים
+## עלויות ופערים בפרודקשן
 
-לאחר שהבנת את ארכיטקטורת ה-2 שירותים, כך להרחיב:
+שכפולים מינימליים כבר שומרים על הפעלת המחשוב. גם הרישום והניטור גורמים
+לחיובים. אין סיכום חודשי של $50 מאומת: הערך חישוב CPU/זיכרון אזורי,
+שעות שכפול, בקשות, רישום ואחזקת לוגים ב-
+[מחשב המחירים של Azure](https://azure.microsoft.com/pricing/calculator/).
+מחק משאבים ללמידה במהירות.
 
-### שלב 1: הוסף אחסון מסד נתונים (צעד הבא)
+עבודה בפרודקשן כוללת אימות/הרשאה, זהויות מנוהלות בתחום,
+נתונים מתמשכים, אימות קלט/תגובה, כלי ניתוח נתונים נתמכים,
+בדיקות עומס/כשל, CI/CD, התראות ונהלי התאוששות. הוספת שירות הזמנות,
+תור, או מסד נתונים היא משימה נפרדת, לא תרגיל מוגמר או תכונה זמינה כאן.
 
-**הוסף Cosmos DB לשירות המוצר**:
 
-1. צור `infra/core/cosmos.bicep`:  
-   ```bicep
-   resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
-     name: name
-     location: location
-     kind: 'GlobalDocumentDB'
-     properties: {
-       databaseAccountOfferType: 'Standard'
-       locations: [{ locationName: location, failoverPriority: 0 }]
-     }
-   }
-   ```
-  
-2. עדכן את שירות המוצר להשתמש ב-Cosmos DB במקום בזיכרון  
+## פתרון תקלות וניקוי
 
-3. עלות משוערת נוספת: ~25$ לחודש (serverless)  
+- **תמונה לא נמצאה במהלך פריסה ראשונית:** האתחול צריך להשתמש בתמונה הציבורית;
+  אשרר את ערכי ברירת המחדל של פרמטר התמונה הראשי ומיפויי המודול לפריסה.
+- **503 מוצרים:** בדוק לוגים של מוצר, גרסת תמונה, וכתובת HTTPS פנימית שהוזרקה.
+- **404 נתיב בלתי צפוי:** ה-API של מוצר לקריאה בלבד; אשרר את הנתיב, לא מנפיק CRUD לא קיים.
+- **אין טלמטריה:** בדוק מחרוזות חיבור ריצה מבלי לחשוף אותן ו
+  אפשר השהיית עיבוד. טבלאות בקשות Python אינן מלאות על ידי מנהל הלוג שלה.
 
-### שלב 2: הוסף שירות שלישי (ניהול הזמנות)
+מתיקיית הדוגמה הזו:
 
-**צור שירות הזמנות**:
-
-1. תיקייה חדשה: `src/order-service/` (Python/Node.js/C#)  
-2. Bicep חדש: `infra/app/order-service.bicep`  
-3. עדכן API Gateway לנתיב `/api/orders`  
-4. הוסף מסד נתונים Azure SQL לאחסון ההזמנות  
-
-**הארכיטקטורה הופכת ל**:  
-```
-API Gateway → Product Service (Cosmos DB)
-           → Order Service (Azure SQL)
-```
-  
-### שלב 3: הוסף תקשורת אסינכרונית (Service Bus)
-
-**מימוש ארכיטקטורת אירועים**:
-
-1. הוסף Azure Service Bus: `infra/core/servicebus.bicep`  
-2. שירות המוצר מפרסם אירועים מסוג "ProductCreated"  
-3. שירות ההזמנות מנוי לאירועים של המוצר  
-4. הוסף שירות התראות לעיבוד האירועים  
-
-**תבנית**: בקשה/תגובה (HTTP) + מבוסס אירועים (Service Bus)  
-
-### שלב 4: הוסף אימות משתמש
-
-**מימוש שירות משתמש**:
-
-1. צור `src/user-service/` (Go/Node.js)  
-2. הוסף Azure AD B2C או אימות JWT מותאם  
-3. API Gateway מאמת טוקנים  
-4. השירותים בודקים הרשאות משתמש  
-
-### שלב 5: מוכנות לפרודקשן
-
-**הוסף רכיבים אלו**:  
-- Azure Front Door (איזון עומסים גלובלי)  
-- Azure Key Vault (ניהול סודות)  
-- Azure Monitor Workbooks (לוחות מחוונים מותאמים)  
-- צינור CI/CD (GitHub Actions)  
-- פריסות Blue-Green  
-- זהות מנוהלת לכל השירותים  
-
-**עלות הארכיטקטורה המלאה**: ~300-1,400$ לחודש  
-
----
-
-## למידע נוסף
-
-### תיעוד קשור  
-- [תיעוד Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)  
-- [מדריך ארכיטקטורת מיקרו-שירותים](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)  
-- [Application Insights למעקב מבוזר](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)  
-- [תיעוד Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
-
-### הצעדים הבאים בקורס זה  
-- ← קודם: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - דוגמה פשוטה למיכל יחיד למתחילים  
-- → הבא: [מדריך אינטגרציה ל-AI](../../../../../examples/docs/ai-foundry) - הוסף יכולות AI  
-- 🏠 [דף הבית של הקורס](../../README.md)  
-
-### השוואה: מתי להשתמש במה
-
-**אפליקציית מיכל יחיד** (דוגמת Simple Flask API):  
-- ✅ אפליקציות פשוטות  
-- ✅ ארכיטקטורה מונוליטית  
-- ✅ פריסה מהירה  
-- ❌ קנה מידה מוגבל  
-- **עלות**: ~15-50$ לחודש  
-
-**מיקרו-שירותים** (בדוגמה הזו):  
-- ✅ אפליקציות מורכבות  
-- ✅ קנה מידה עצמאי לכל שירות  
-- ✅ עצמאות צוותים (שירותים שונים, צוותים שונים)  
-- ❌ ניהול מורכב יותר  
-- **עלות**: ~60-250$ לחודש  
-
-**Kubernetes (AKS)**:  
-- ✅ שליטה וגמישות מקסימליים  
-- ✅ ניידות בין עננים  
-- ✅ רשת מתקדמת  
-- ❌ דורש מומחיות Kubernetes  
-- **עלות**: מינימום ~150-500$ לחודש  
-
-**המלצה**: התחל עם Container Apps (בדוגמה הזו), עבור ל-AKS רק אם אתה זקוק לפיצ'רים ספציפיים של Kubernetes.  
-
----
-
-## שאלות נפוצות
-
-**ש: למה רק 2 שירותים ולא 5+?**  
-ת: התקדמות חינוכית. שלוט ביסודות (תקשורת שירותים, ניטור, קנה מידה) עם דוגמה פשוטה לפני הוספת מורכבות. התבניות שלומדים כאן חלות על ארכיטקטורות עם מאות שירותים.  
-
-**ש: האם אני יכול להוסיף עוד שירותים בעצמי?**  
-ת: בהחלט! עקוב אחר מדריך ההרחבה למעלה. כל שירות חדש עוקב אחר אותה תבנית: צור תיקיית src, צור קובץ Bicep, עדכן azure.yaml, פרוס.  
-
-**ש: האם זה מוכן לפרודקשן?**  
-ת: זו תשתית יציבה. לפרודקשן, הוסף: זהות מנוהלת, Key Vault, מסדי נתונים מתמשכים, צינור CI/CD, התראות ניטור, ואסטרטגיית גיבוי.  
-
-**ש: למה לא להשתמש ב-Dapr או רשת שירותים אחרת?**  
-ת: שמור על פשטות ללמידה. כשאתה מבין את רשת Container Apps הטבעית, תוכל לשלב Dapr לתרחישים מתקדמים.  
-
-**ש: איך אני מדבג מקומית?**  
-ת: הפעל שירותים מקומית עם Docker:  
 ```bash
-cd src/api-gateway
-docker build -t local-gateway .
-docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
+azd down
 ```
-  
-**ש: האם אני יכול להשתמש בשפות תכנות שונות?**  
-ת: כן! הדוגמה מציגה Node.js (שער) + Python (שירות מוצר). ניתן לשלב כל שפות שרצות במיכלים.  
 
-**ש: מה אם אין לי קרדיטים של Azure?**  
-ת: השתמש בשכבת Azure החינמית (30 הימים הראשונים עם חשבונות חדשים) או פרוס לתקופות בדיקה קצרות ומחק מיד.  
+בדוק הנחיות מחיקה ואשר שהקבוצת משאבים הייעודית הוסרה.
 
----
-
-> **🎓 סיכום מסלול למידה**: למדת לפרוס ארכיטקטורת מיקרו-שירותים עם קנה מידה אוטומטי, רשת פנימית, ניטור מרכזי, ותבניות מוכנות לפרודקשן. בסיס זה מכין אותך למערכות מבוזרות מורכבות וארכיטקטורות מיקרו-שירותים ארגוניות.  
-
-**📚 ניווט בקורס:**  
-- ← קודם: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)  
-- → הבא: [דוגמת אינטגרציית מסד נתונים](../../../../../examples/database-app)  
-- 🏠 [דף הבית של הקורס](../../../README.md)  
-- 📖 [מדריך Best Practices ל-Container Apps](../../../docs/chapter-04-infrastructure/deployment-guide.md)
+[קודם: Flask API](../../../../../examples/container-app/simple-flask-api) · [הבא: אפליקציית מסד נתונים](../../../../../examples/database-app) ·
+[פיתוח AI](../../../docs/chapter-02-ai-development/README.md) ·
+[בית הקורס](../../../README.md) · [דווח על תקלה](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **כתב ויתור**:
-מסמך זה תורגם באמצעות שירות התרגום האוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפתו המקורית צריך להחשב כמקור הסמכותי. למידע קריטי מומלץ להיעזר בתרגום מקצועי על ידי אדם. אנו לא אחראים לכל אי-הבנה או פרשנות לא נכונה שנובעת מהשימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום אוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להחשיב את המסמך המקורי בשפתו הטבעית כמקור הסמכות. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי מתרגם אדם. אנו לא אחראים לכל אי-הבנה או פירוש שגוי הנובע מהשימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

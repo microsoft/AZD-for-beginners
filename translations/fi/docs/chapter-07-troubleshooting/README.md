@@ -1,46 +1,46 @@
-# Luku 7: Vianmääritys ja Debuggaus
+# Luku 7: Vianmääritys ja debuggaus
 
-**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1-1,5 tuntia | **⭐ Vaativuus**: Keskitaso
+**📚 Kurssi**: [AZD aloittelijoille](../../README.md) | **⏱️ Kesto**: 1-1,5 tuntia | **⭐ Vaativuus**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tämä luku auttaa sinua diagnosoimaan ja ratkaisemaan yleisiä ongelmia työskennellessäsi Azure Developer CLI:n kanssa. Julkaisun epäonnistumisista AI-spesifisiin ongelmiin.
+Tämä luku auttaa sinua diagnosoimaan ja ratkaisemaan yleisiä ongelmia Azure Developer CLI:n kanssa työskennellessä. Julkaisujen epäonnistumisista AI-spesifisiin ongelmiin.
 
-> Varmistettu `azd 1.27.1` -versiolla heinäkuussa 2026.
+> Komentojen ohjeistus tarkistettu julkaistuun `azd 1.37.2` viitteeseen. Pilvijulkaisuja ei suoritettu. Vaihda esimerkkiresurssien nimet ja tunnukset ennen komentojen käyttöä.
 
 ## Oppimistavoitteet
 
-Suoritettuasi tämän luvun:
-- Osaat diagnosoida yleiset AZD-julkaisun epäonnistumiset
-- Osaat debugata tunnistautumis- ja käyttöoikeusongelmat
-- Osaat ratkaista AI-palvelujen yhteysongelmat
-- Osaat käyttää Azure-portaalia ja CLI-työkaluja vianmääritykseen
+Tämän luvun suorittamalla sinä:
+- Diagnosoit yleisimmät AZD-julkaisuvirheet
+- Debuggaat todennus- ja käyttöoikeusongelmia
+- Ratkaiset AI-palveluiden yhteysongelmat
+- Käytät Azure Portalia ja CLI:tä vianmääritykseen
 
 ---
 
 ## 📚 Oppitunnit
 
-| # | Oppitunti | Kuvaus | Kesto |
-|---|----------|---------|-------|
-| 1 | [Yleiset Ongelmät](common-issues.md) | Usein vastaan tulevat ongelmat | 30 min |
-| 2 | [Debuggausohjeet](debugging.md) | Askeltavat debuggausstrategiat | 45 min |
-| 3 | [AI Vianmääritys](ai-troubleshooting.md) | AI-spesifiset ongelmat | 30 min |
+| # | Oppitunti | Kuvaus | Aika |
+|---|--------|-------------|------|
+| 1 | [Yleiset ongelmat](common-issues.md) | Usein esiintyvät ongelmat | 30 min |
+| 2 | [Debuggausopas](debugging.md) | Vianmäärityksen vaiheittaiset strategiat | 45 min |
+| 3 | [AI-vianmääritys](ai-troubleshooting.md) | AI-spesifiset ongelmat | 30 min |
 
 ---
 
-## 🚨 Nopeat Ratkaisut
+## 🚨 Nopeita korjauksia
 
-### Tunnistautumisongelmat
+### Toimintatunnistusongelmat
 ```bash
-# Vaaditaan AZD-työnkuluille
+# Required for AZD workflows
 azd auth login
 
-# Valinnainen, jos käytät myös suoraan Azure CLI -komentoja
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
 ### Julkaisun epäonnistumiset
@@ -50,61 +50,66 @@ azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### Resurssikonfliktit
+### Resurssien ristiriidat
+Tarkastele ensin olemassa olevaa resurssia ja julkaisuvirheitä. Älä poista jaettua tai tuotantoympäristöä nimen ristiriidan ratkaisemiseksi. Uudessa **kertakäyttöisessä ympäristössä** käytä ainutlaatuista nimeä:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Käytön ylitys
+### Kiintiön ylittyminen
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Muutokset `AZURE_LOCATION` eivät siirrä olemassa olevia resursseja ja voivat aiheuttaa sijaintiristiriitoja uudelleenjulkaisun yhteydessä.
 
 ---
 
 ## 📋 Virhekoodiviite
 
 | Virhe | Syy | Ratkaisu |
-|-------|------|----------|
+|-------|-------|----------|
 | `AuthenticationError` | Ei kirjautunut sisään | `azd auth login` |
-| `ResourceNotFound` | Puuttuva resurssi | Tarkista resurssin nimet |
-| `QuotaExceeded` | Tilausrajat ylitetty | Pyydä käyttöoikeuden lisäystä |
+| `ResourceNotFound` | Resurssi puuttuu | Tarkista resurssin nimet |
+| `QuotaExceeded` | Tilauksen rajoitukset | Pyydä kiintiön korotusta |
 | `InvalidTemplate` | Bicep-syntaksivirhe | `az bicep build` |
-| `Conflict` | Resurssi on jo olemassa | Käytä uutta nimeä tai poista |
-| `Forbidden` | Puuttuvat oikeudet | Tarkista RBAC-roolit |
+| `Conflict` | Resurssi on olemassa | Käytä uutta nimeä tai poista |
+| `Forbidden` | Puutteelliset käyttöoikeudet | Tarkista RBAC-roolit |
 
 ---
 
-## 🔄 Nollaus ja Palautus
+## 🔄 Nollaus ja palautus
 
 ```bash
-# Pehmeä nollaus (säilytä resurssit, ota koodi uudelleen käyttöön)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Kova nollaus (poista kaikki, aloita alusta)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
 
+Kovalla nollauksella poistetaan data ja voi muuttaa päätepisteitä. Tee varmuuskopio ensin ja tarkista vuorovaikutteiset poiston vahvistukset. `--force --purge` sopii ainoastaan kertakäyttöisiin ympäristöihin silloin, kun peruuttamaton poisto on tarkoitus.
+
 ---
 
-## 🔗 Navigaatio
+## 🔗 Navigointi
 
 | Suunta | Luku |
-|--------|------|
-| **Edellinen** | [Luku 6: Esijulkaisu](../chapter-06-pre-deployment/README.md) |
+|-----------|---------|
+| **Edellinen** | [Luku 6: Ennen julkaisua](../chapter-06-pre-deployment/README.md) |
 | **Seuraava** | [Luku 8: Tuotanto](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Liittyvät resurssit
+## 📖 Aiheeseen liittyviä resursseja
 
-- [Esijulkaisun Tarkistukset](../chapter-06-pre-deployment/preflight-checks.md)
-- [Konfigurointiopas](../chapter-03-configuration/configuration.md)
+- [Julkaisun ennakkotarkistukset](../chapter-06-pre-deployment/preflight-checks.md)
+- [Konfigurointiohje](../chapter-03-configuration/configuration.md)
 - [AZD GitHub-ongelmat](https://github.com/Azure/azure-dev/issues)
 
 ---

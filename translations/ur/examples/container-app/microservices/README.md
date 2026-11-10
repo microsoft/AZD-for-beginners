@@ -1,796 +1,269 @@
-# مائیکروسروسز کا معمار نظام - کنٹینر ایپ کی مثال
+# دو سروسز مائیکرو سروسز — Azure Container Apps
 
-⏱️ **تخمینی وقت**: 25-35 منٹ | 💰 **تخمینی لاگت**: تقریباً $50-100/ماہ | ⭐ **پیچیدگی**: اعلی
+**سطح:** متوسط · **وقت:** 45–60 منٹ سیٹ اپ سمیت
 
-ایک **سادہ مگر فعال** مائیکروسروسز معمار نظام جو Azure Container Apps پر AZD CLI کے ذریعے ڈیپلوئے کیا گیا ہے۔ یہ مثال سروس سے سروس رابطہ، کنٹینر آرکسٹریشن، اور مانیٹرنگ کو ایک عملی 2-سروس سیٹ اپ کے ساتھ ظاہر کرتی ہے۔
-
-> **📚 سیکھنے کا طریقہ**: یہ مثال ایک معمولی 2-سروس معمار نظام (API Gateway + Backend Service) سے شروع ہوتی ہے جسے آپ حقیقت میں ڈیپلوئے کر کے سیکھ سکتے ہیں۔ اس بنیاد پر عبور حاصل کرنے کے بعد ہم مکمل مائیکروسروسز ماحولیاتی نظام کے لیے رہنمائی فراہم کرتے ہیں۔
+یہ لرننگ سیمپل ایک **Node.js API گیٹ وے** اور ایک **صرف پڑھنے والا Python
+پروڈکٹ سروس** کو نافذ کرتا ہے۔ سورس، Dockerfiles، Bicep، اور azd کنفیگریشن شامل ہیں۔
+یہ ایک پروڈکشن ہارڈنڈ سسٹم نہیں ہے۔
 
 ## آپ کیا سیکھیں گے
 
-اس مثال کو مکمل کر کے آپ:
-- Azure Container Apps میں متعدد کنٹینرز کو ڈیپلوئے کریں گے
-- اندرونی نیٹ ورکنگ کے ذریعے سروس سے سروس رابطہ نافظ کریں گے
-- ماحولیاتی اسکیلنگ اور صحت کی جانچ ترتیب دیں گے
-- Application Insights کے ذریعے تقسیم شدہ ایپلیکیشنز کی مانیٹرنگ کریں گے
-- مائیکروسروسز کی ڈیپلائمنٹ پیٹرنز اور بہترین طریقوں کو سمجھیں گے
-- سادہ سے پیچیدہ معمار نظام کی تدریجی ترقی سیکھیں گے
-
-## معمار نظام
-
-### مرحلہ 1: ہم کیا بنا رہے ہیں (اس مثال میں شامل)
+- دو سروسز کو آزادانہ طور پر تعینات کریں۔
+- HTTPS پر ایک داخلی بیک اینڈ FQDN استعمال کریں۔
+- کامیاب، نہ ملنے، اور غیر دستیاب سروس کے جوابات کی تصدیق کریں۔
+- ٹیلی میٹری اور آزادانہ اسکیلنگ کی حدوں کو سمجھیں۔
 
 ```mermaid
-graph TD
-    Internet[انٹرنیٹ] -- HTTPS --> Gateway[API گیٹ وے<br/>Node.js کنٹینر<br/>درخواستیں راستہ دیتا ہے<br/>صحت کی جانچ<br/>درخواست کی لاگنگ]
-    Gateway -- HTTP داخلی --> Product[پروڈکٹ سروس<br/>Python کنٹینر<br/>پروڈکٹ CRUD<br/>میموری میں ڈیٹا اسٹور<br/>REST API]
-    Product --> Insights[ایپلیکیشن انسائیٹس<br/>مانیٹرنگ اور لاگز]
-```
-**سادگی کیوں ابتدائی ہے؟**
-- ✅ جلدی ڈیپلوئے کریں اور سمجھیں (25-35 منٹ)
-- ✅ بغیر پیچیدگی کے مائیکروسروسز کے بنیادی نمونے سیکھیں
-- ✅ کام کرنے والا کوڈ جسے آپ ترمیم اور تجربہ کر سکیں
-- ✅ سیکھنے کے لیے کم لاگت (~$50-100/ماہ بمقابلہ $300-1400/ماہ)
-- ✅ ڈیٹابیسز اور میسج کیوز شامل کرنے سے پہلے اعتماد پیدا کریں
-
-**تمثیل**: اسے ڈرائیونگ سیکھنے کی طرح سمجھیں۔ آپ خالی پارکنگ لاٹ (2 سروسز) سے شروع کرتے ہیں، بنیادیات میں مہارت حاصل کرتے ہیں، پھر شہر کی ٹریفک (5+ سروسز ڈیٹابیسز کے ساتھ) کی طرف بڑھتے ہیں۔
-
-### مرحلہ 2: مستقبل کی توسیع (حوالہ جاتی معمار نظام)
-
-ایک بار جب آپ 2-سروس معمار نظام میں مہارت حاصل کر لیں، تو آپ بڑھا سکتے ہیں:
-
-```
-Full Architecture (Not Included - For Reference)
-├── API Gateway (✅ Included)
-├── Product Service (✅ Included)
-├── Order Service (🔜 Add next)
-├── User Service (🔜 Add next)
-├── Notification Service (🔜 Add last)
-├── Azure Service Bus (🔜 For async communication)
-├── Cosmos DB (🔜 For product persistence)
-├── Azure SQL (🔜 For order management)
-└── Azure Storage (🔜 For file storage)
+flowchart LR
+    Client -->|HTTPS| Gateway[Public Node.js gateway — port 8080]
+    Gateway -->|HTTPS internal FQDN| Product[Internal Python product API — port 8000]
+    Gateway -. request/dependency telemetry .-> Insights[Application Insights]
+    Product -. application log traces .-> Insights
 ```
 
-آخر میں "Expansion Guide" سیکشن میں مرحلہ وار ہدایات ملاحظہ کریں۔
+پروڈکٹ کیٹلاگ میں میموری میں پانچ مقررہ مصنوعات ہیں۔ **کوئی POST،  
+PUT، یا DELETE ہینڈلرز نہیں ہیں**، ڈیٹابیس، سروس بس، آرڈر/یوزر/نوٹیفیکیشن سروس،  
+C#، یا Go کوڈ نہیں ہے۔ یہ مستقبل کی ترقی کے آئیڈیاز ہیں، شامل فیچرز نہیں۔  
+گیٹ وے صارفین کو تصدیق نہیں کرتا؛ داخلی ان گریس درخواست کے اجازت نامے کا نعم البدل نہیں ہے۔  
+ 
 
-## شامل خصوصیات
+## ضروریات  
 
-✅ **سروس دریافت**: کنٹینرز کے درمیان خودکار DNS بنیاد پر دریافت  
-✅ **لوڈ بیلنسنگ**: ریپلیکاز کے درمیان بلٹ ان لوڈ بیلنسنگ  
-✅ **خودکار اسکیلنگ**: HTTP درخواستوں کی بنیاد پر ہر سروس کی آزاد اسکیلنگ  
-✅ **صحت کی مانیٹرنگ**: دونوں سروسز کے لیے لائیونیس اور ریڈینیس پروبس  
-✅ **تقسیم شدہ لاگنگ**: Application Insights کے ساتھ مرکزی لاگنگ  
-✅ **اندرونی نیٹ ورکنگ**: محفوظ سروس سے سروس رابطہ  
-✅ **کنٹینر آرکسٹریشن**: خودکار تعیناتی اور اسکیلنگ  
-✅ **زیرو ڈاؤن ٹائم اپڈیٹس**: ریویژن مینجمنٹ کے ساتھ رولنگ اپڈیٹس  
-
-## ضروریات
-
-### مطلوبہ اوزار
-
-شروع کرنے سے پہلے یہ اوزار انسٹال ہونے کی تصدیق کریں:
-
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (ورژن 1.0.0 یا اس سے زیادہ)
-   ```bash
-   azd version
-   # متوقع نتیجہ: azd ورژن 1.0.0 یا اس سے اعلیٰ
-   ```
-
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (ورژن 2.50.0 یا اس سے زیادہ)
-   ```bash
-   az --version
-   # متوقع نتیجہ: azure-cli 2.50.0 یا اس سے زیادہ
-   ```
-
-3. **[Docker](https://www.docker.com/get-started)** (مقامی ترقی/ٹیسٹنگ کے لیے - اختیاری)
-   ```bash
-   docker --version
-   # متوقع نتیجہ: ڈاکر ورژن 20.10 یا اس سے زیادہ
-   ```
-
-### Azure کی ضروریات
-
-- ایک فعال **Azure سبسکرپشن** ([مفت اکاؤنٹ بنائیں](https://azure.microsoft.com/free/))
-- سبسکرپشن میں وسائل بنانے کی اجازتیں
-- سبسکرپشن یا وسائل گروپ پر **Contributor** کردار
-
-### علم کی ضروریات
-
-یہ ایک **اعلیٰ سطحی** مثال ہے۔ آپ کو ہونا چاہیے:
-- [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) مکمل کیا ہوا
-- مائیکروسروسز معمار نظام کی بنیادی سمجھ
-- REST APIs اور HTTP سے واقفیت
-- کنٹینر کے تصورات کی سمجھ
-
-**Container Apps میں نئے ہیں؟** بنیادی باتیں سیکھنے کے لیے پہلے [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) سے شروع کریں۔
-
-## جلدی آغاز (مرحلہ وار)
-
-### مرحلہ 1: کلون کریں اور نیویگیٹ کریں
+پہلے [سنگل Flask API](../../../../../examples/container-app/simple-flask-api) مکمل کریں۔  
+ایک موجودہ مستحکم azd انسٹال کریں (جائزہ کے وقت شائع شدہ ریلیز: 1.37.2)، Azure CLI،  
+اور Docker جس کا ڈیمن چل رہا ہو۔ آپ کو Azure سبسکرپشن، وسائل بنانے کی اجازتیں،  
+اور Container Apps علاقائی کوٹہ درکار ہے۔  
 
 ```bash
-git clone https://github.com/microsoft/AZD-for-beginners.git
-cd AZD-for-beginners/examples/container-app/microservices
-```
-
-**✓ کامیابی کی تصدیق**: `azure.yaml` دکھائی دے رہا ہو:
-```bash
-ls
-# متوقع: README.md, azure.yaml, infra/, src/
-```
-
-### مرحلہ 2: Azure میں تصدیق کریں
-
-```bash
+azd version
+az version
+docker info
 azd auth login
+az login
 ```
+  
+دونوں CLI ٹولز میں وہی سبسکرپشن استعمال کریں۔ نیچے دیئے گئے کمانڈز Bash استعمال کرتے ہیں۔  
 
-یہ آپ کا براوزر Azure میں تصدیق کے لیے کھولتا ہے۔ Azure کی معلومات کے ساتھ سائن ان کریں۔
+## تعیناتی اور تصدیق  
 
-**✓ کامیابی کی تصدیق**: آپ کو یہ دیکھنا چاہیے:
-```
-Logged in to Azure.
-```
-
-### مرحلہ 3: ماحول کی ابتداء کریں
+ذخیرہ جاتی جڑ سے:  
 
 ```bash
-azd init
-```
-
-**مطلوبہ معلومات جو آپ سے پوچھی جائیں گی**:
-- **ماحول کا نام**: ایک مختصر نام درج کریں (مثلاً `microservices-dev`)
-- **Azure سبسکرپشن**: اپنی سبسکرپشن منتخب کریں
-- **Azure مقام**: ایک علاقہ منتخب کریں (مثلاً `eastus`, `westeurope`)
-
-**✓ کامیابی کی تصدیق**: آپ کو یہ دیکھنا چاہیے:
-```
-SUCCESS: New project initialized!
-```
-
-### مرحلہ 4: انفراسٹرکچر اور سروسز ڈیپلوئے کریں
-
-```bash
+cd examples/container-app/microservices
+azd env new microservices-demo
 azd up
+GATEWAY_URL=$(azd env get-value API_GATEWAY_URL)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+GATEWAY_NAME=$(azd env get-value API_GATEWAY_NAME)
+PRODUCT_NAME=$(azd env get-value PRODUCT_SERVICE_NAME)
+
+curl --fail-with-body "${GATEWAY_URL}/health"
+curl --fail-with-body "${GATEWAY_URL}/api/products"
+curl --fail-with-body "${GATEWAY_URL}/api/products/1"
+curl -i "${GATEWAY_URL}/api/products/999"
+```
+  
+**کامیابی:** health 200؛ فہرست 200 کے ساتھ **پانچ** مصنوعات؛ پروڈکٹ 1 ایک لیپ ٹاپ ہے  
+جس کی قیمت 999.99 ہے اور اسٹاک 50 ہے؛ نامعلوم پروڈکٹ 404 لوٹاتی ہے۔  
+تفصیلات جوابات میں شامل ہیں؛ ٹائم اسٹیمپس مختلف ہوتے ہیں۔  
+
+ابتدائی فراہمی پبلک hello-world تصاویر پورٹ 80 پر استعمال کرتی ہے تاکہ یہ  
+خالی رجسٹری سے غیر موجود تصاویر نہ کھینچے۔ سروس مخصوص بائسک ماڈیولز  
+اور پیرامیٹر فائلیں انہیں بنائی گئی تصاویر اور ایپ پورٹس/پروبز سے تبدیل کرتی ہیں جب  
+`azd deploy`۔ اہم پیرامیٹر بعد میں فراہمی کے لیے شائع شدہ امیج نام محفوظ کرتے ہیں۔  
+
+## خدمات اور نیٹ ورکنگ  
+
+| سروس | ظاہری اختتامی پوائنٹس | ڈیفالٹ وسائل |  
+|---|---|---|  
+| گیٹ وے | GET `/`، `/health`، `/api/products`، `/api/products/:id` | 1 vCPU، 2 GiB، 2–20 نقول |  
+| پروڈکٹ | GET `/`، `/health`، `/products`، `/products/<id>` | 0.5 vCPU، 1 GiB، 1–10 نقول |  
+
+پروڈکٹ انگریس میں `external: false` اور `allowInsecure: false` شامل ہیں۔ بائسک  
+`PRODUCT_SERVICE_URL=https://<actual-internal-fqdn>` کو گیٹ وے میں انجیکٹ کرتا ہے۔ HTTP  
+ری ڈائریکٹ؛ HTTPS ترتیب دیے گئے انگریس سے میل کھاتا ہے۔ ایک مختصر DNS نام کو میل کھانا چاہیے
+**حقیقی کنٹینر ایپ کا نام**, منطقی سروس کی کلید `product-service` نہیں۔
+اپنا لیپ ٹاپ سے براہِ راست داخلی URL کو کال کرنے کی کوشش نہ کریں۔
+
+گیٹ وے کے پاس پروڈکٹ کالز کے لیے پانچ سیکنڈ کی ٹائم آؤٹ ہے۔ گمشدہ پروڈکٹ IDs
+404 کے طور پر پھیلتی ہیں؛ ٹرانسپورٹ کی ناکامیاں/دیگر بیک اینڈ کی ناکامیاں 503 واپس کرتی ہیں۔ گیٹ وے
+`/health` صرف گیٹ وے چیک کرتا ہے، بیک اینڈ کی دستیابی نہیں۔
+
+## فائلیں اور کنفیگریشن
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/abbreviations.json
+infra/core/container-apps-environment.bicep
+infra/core/monitor.bicep
+infra/app/api-gateway.bicep
+infra/app/api-gateway.parameters.json
+infra/app/product-service.bicep
+infra/app/product-service.parameters.json
+src/api-gateway/{app.js,package.json,Dockerfile}
+src/product-service/{main.py,requirements.txt,Dockerfile}
 ```
 
-**کیا ہوتا ہے** (8-12 منٹ لگتے ہیں):
-1. Container Apps ماحول بناتا ہے
-2. مانیٹرنگ کے لیے Application Insights بناتا ہے
-3. API Gateway کنٹینر تیار کرتا ہے (Node.js)
-4. Product Service کنٹینر تیار کرتا ہے (Python)
-5. دونوں کنٹینرز کو Azure پر تعینات کرتا ہے
-6. نیٹ ورکنگ اور صحت کی جانچ ترتیب دیتا ہے
-7. مانیٹرنگ اور لاگنگ سیٹ اپ کرتا ہے
+اسکیلنگ، CPU/میموری، پورٹس، اور پروبز `infra/app/*.bicep` میں سیٹ کیے جاتے ہیں۔ ان
+فائلوں کو بدلیں اور چھوڑیں `azd up` تاکہ انفراسٹرکچر اپلائی اور دوبارہ تعینات ہو۔ اس نمونے میں کوئی
+`GATEWAY_MAX_REPLICAS` ماحول متغیر پیرامیٹر نہیں ہے۔
 
-**✓ کامیابی کی تصدیق**: آپ کو یہ دیکھنا چاہیے:
-```
-SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
-Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
-```
-
-**⏱️ وقت**: 8-12 منٹ
-
-### مرحلہ 5: ڈیپلائمنٹ کی جانچ کریں
+صرف کوڈ میں تبدیلیوں کے لیے:
 
 ```bash
-# گیٹ وے کا اینڈ پوائنٹ حاصل کریں
-GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
-
-# API گیٹ وے کی صحت کا معائنہ کریں
-curl $GATEWAY_URL/health
-
-# متوقع نتیجہ:
-# {"status":"healthy","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
-```
-
-**گیٹ وے کے ذریعے پروڈکٹ سروس کی جانچ کریں**:
-```bash
-# مصنوعات کی فہرست بنائیں
-curl $GATEWAY_URL/api/products
-
-# متوقع نتیجہ:
-# [
-#   {"id":1,"name":"لیپ ٹاپ","price":999.99,"stock":50},
-#   {"id":2,"name":"ماؤس","price":29.99,"stock":200},
-#   {"id":3,"name":"کی بورڈ","price":79.99,"stock":150}
-# ]
-```
-
-**✓ کامیابی کی تصدیق**: دونوں اینڈ پوائنٹس JSON ڈیٹا بغیر غلطی کے واپس بھیجیں۔
-
----
-
-**🎉 مبارک ہو!** آپ نے Azure پر مائیکروسروسز معمار نظام ڈیپلوئے کر لیا ہے!
-
-## پروجیکٹ کا ڈھانچہ
-
-تمام نفاذ کی فائلیں شامل ہیں — یہ ایک مکمل، کام کرنے والی مثال ہے:
-
-```
-microservices/
-│
-├── README.md                         # This file
-├── azure.yaml                        # AZD configuration
-├── .gitignore                        # Git ignore patterns
-│
-├── infra/                           # Infrastructure as Code (Bicep)
-│   ├── main.bicep                   # Main orchestration
-│   ├── abbreviations.json           # Naming conventions
-│   ├── core/                        # Shared infrastructure
-│   │   ├── container-apps-environment.bicep  # Container environment + registry
-│   │   └── monitor.bicep            # Application Insights + Log Analytics
-│   └── app/                         # Service definitions
-│       ├── api-gateway.bicep        # API Gateway container app
-│       └── product-service.bicep    # Product Service container app
-│
-└── src/                             # Application source code
-    ├── api-gateway/                 # Node.js API Gateway
-    │   ├── app.js                   # Express server with routing
-    │   ├── package.json             # Node dependencies
-    │   └── Dockerfile               # Container definition
-    └── product-service/             # Python Product Service
-        ├── main.py                  # Flask API with product data
-        ├── requirements.txt         # Python dependencies
-        └── Dockerfile               # Container definition
-```
-
-**ہر جزو کا کام:**
-
-**انفراسٹرکچر (infra/)**:
-- `main.bicep`: تمام Azure وسائل اور ان کی dependencies کا انتظام
-- `core/container-apps-environment.bicep`: Container Apps ماحول اور Azure Container Registry بناتا ہے
-- `core/monitor.bicep`: Application Insights سیٹ اپ کرتا ہے تقسیم شدہ لاگنگ کے لیے
-- `app/*.bicep`: انفرادی کنٹینر ایپ تعریفیں، اسکیلنگ اور صحت کی جانچ کے ساتھ
-
-**API Gateway (src/api-gateway/)**:
-- عوامی سطح کی سروس جو بیک اینڈ سروسز کو درخواستیں بھیجتی ہے
-- لاگنگ، غلطی کا انتظام، اور درخواست فارورڈنگ نافظ کرتی ہے
-- سروس سے سروس HTTP رابطہ کی مثال پیش کرتی ہے
-
-**Product Service (src/product-service/)**:
-- اندرونی سروس جو پروڈکٹ کیٹلاگ کو سنبھالتی ہے (سادگی کے لیے ان میموری)
-- REST API جس میں صحت کی جانچ شامل ہے
-- بیک اینڈ مائیکروسروس پیٹرن کی مثال
-
-## سروسز کا جائزہ
-
-### API Gateway (Node.js/Express)
-
-**پورٹ**: 8080  
-**رسائی**: عوامی (بیرونی انگریس)  
-**مقصد**: آنے والی درخواستوں کو مناسب بیک اینڈ سروسز کی طرف بھیجنا  
-
-**اینڈ پوائنٹس**:
-- `GET /` - سروس کی معلومات
-- `GET /health` - صحت کی جانچ اینڈ پوائنٹ
-- `GET /api/products` - پروڈکٹ سروس کو فارورڈ کریں (تمام کی فہرست)
-- `GET /api/products/:id` - پروڈکٹ سروس کو فارورڈ کریں (شناخت سے حاصل کریں)
-
-**اہم خصوصیات**:
-- درخواست روٹنگ axios کے ساتھ
-- مرکزی لاگنگ
-- غلطی کا انتظام اور ٹائم آؤٹ مینجمنٹ
-- ماحول کے متغیرات کے ذریعے سروس دریافت
-- Application Insights انٹیگریشن
-
-**کوڈ ہائی لائٹ** (`src/api-gateway/app.js`):
-```javascript
-// داخلی سروس کمیونیکیشن
-app.get('/api/products', async (req, res) => {
-  const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-  res.json(response.data);
-});
-```
-
-### Product Service (Python/Flask)
-
-**پورٹ**: 8000  
-**رسائی**: صرف اندرونی (کوئی بیرونی انگریس نہیں)  
-**مقصد**: پروڈکٹ کیٹلاگ کو ان میموری ڈیٹا کے ساتھ منظم کرتا ہے  
-
-**اینڈ پوائنٹس**:
-- `GET /` - سروس کی معلومات
-- `GET /health` - صحت کی جانچ اینڈ پوائنٹ
-- `GET /products` - تمام پروڈکٹس کی فہرست
-- `GET /products/<id>` - شناختی نمبر سے پروڈکٹ حاصل کریں
-
-**اہم خصوصیات**:
-- Flask کے ساتھ RESTful API
-- ان میموری پروڈکٹ اسٹور (سادہ، کسی ڈیٹابیس کی ضرورت نہیں)
-- صحت کی مانیٹرنگ پروبس کے ساتھ
-- منظم لاگنگ
-- Application Insights انٹیگریشن
-
-**ڈیٹا ماڈل**:
-```python
-{
-  "id": 1,
-  "name": "Laptop",
-  "description": "High-performance laptop",
-  "price": 999.99,
-  "stock": 50
-}
-```
-
-**صرف اندرونی کیوں؟**
-پروڈکٹ سروس عوامی طور پر ظاہر نہیں کی گئی۔ تمام درخواستیں API Gateway سے گزرنا ضروری ہے، جو فراہم کرتا ہے:
-- سیکیورٹی: کنٹرولڈ رسائی نقطہ
-- لچک: بیک اینڈ کو کلائنٹس کو متاثر کیے بغیر تبدیل کیا جا سکتا ہے
-- مانیٹرنگ: مرکزی درخواست لاگنگ
-
-## سروس کمیونیکیشن کو سمجھنا
-
-### سروسز آپس میں کیسے بات کرتی ہیں
-
-اس مثال میں، API Gateway پروڈکٹ سروس سے **اندرونی HTTP کالز** کے ذریعے رابطہ کرتا ہے:
-
-```javascript
-// اے پی آئی گیٹ وے (src/api-gateway/app.js)
-const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
-
-// اندرونی HTTP درخواست بنائیں
-const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-```
-
-**اہم نکات**:
-
-1. **DNS بنیاد پر دریافت**: Container Apps خود بخود اندرونی سروسز کے لیے DNS فراہم کرتا ہے  
-   - پروڈکٹ سروس FQDN: `product-service.internal.<environment>.azurecontainerapps.io`  
-   - سادہ شکل: `http://product-service` (Container Apps اسے resolve کرتا ہے)
-
-2. **کوئی عوامی نمائش نہیں**: پروڈکٹ سروس میں Bicep میں `external: false` ہے  
-   - صرف Container Apps ماحول کے اندر دستیاب  
-   - انٹرنیٹ سے قابل رسائی نہیں
-
-3. **ماحول کے متغیرات**: سروس URLs تعیناتی کے وقت انجیکٹ کیے جاتے ہیں  
-   - Bicep اندرونی FQDN کو گیٹ وے کو دیتا ہے  
-   - ایپلیکیشن کوڈ میں کوئی ہارڈ کوڈ شدہ URLs نہیں
-
-**تمثیل**: اسے دفتر کے کمروں کی طرح سمجھیں۔ API Gateway استقبال ڈیسک (عوامی) ہے، اور پروڈکٹ سروس ایک دفتر کا کمرہ (صرف اندرونی) ہے۔ زائرین کو کسی بھی دفتر تک پہنچنے کے لیے استقبال ڈیسک سے گزرنا ضروری ہے۔
-
-## تعیناتی کے اختیارات
-
-### مکمل تعیناتی (تجویز کردہ)
-
-```bash
-# بنیادی ڈھانچہ اور دونوں خدمات کو انسٹال کریں
-azd up
-```
-
-یہ ڈیپلوئے کرتا ہے:  
-1. Container Apps ماحول  
-2. Application Insights  
-3. Container Registry  
-4. API Gateway کنٹینر  
-5. Product Service کنٹینر  
-
-**وقت**: 8-12 منٹ
-
-### انفرادی سروس ڈیپلوئے کریں
-
-```bash
-# صرف ایک سروس تعینات کریں (ابتدائی azd up کے بعد)
-azd deploy api-gateway
-
-# یا پروڈکٹ سروس تعینات کریں
 azd deploy product-service
+azd deploy api-gateway
 ```
 
-**استعمال کا معاملہ**: جب آپ نے کسی ایک سروس میں کوڈ اپڈیٹ کیا ہو اور صرف اسی سروس کو دوبارہ تعینات کرنا چاہتے ہوں۔
+نوڈ امیج نوڈ 22 استعمال کرتی ہے؛ پائتھن امیج پائتھن 3.11 استعمال کرتی ہے۔ دونوں بائنڈ کرتے ہیں
+`0.0.0.0`۔ انگریس/پروبز بالترتیب پورٹ 8080 (گیٹ وے) اور 8000 (پروڈکٹ) استعمال کرتے ہیں۔
 
-### ترتیب اپڈیٹ کریں
+## Docker کے ساتھ مقامی ترقی
+
+اس مثال کی ڈائریکٹری سے چلائیں۔ صارف کی تعریف کردہ نیٹ ورک استعمال کریں، **نہ کہ `localhost`
+ایک کنٹینر سے دوسرے تک پہنچنے کے لیے**:
 
 ```bash
-# پیمانے کے پیرامیٹرز تبدیل کریں
-azd env set GATEWAY_MAX_REPLICAS 30
-
-# نئی ترتیب کے ساتھ دوبارہ تعینات کریں
-azd up
+docker network create azd-microservices-demo
+docker build -t local-product ./src/product-service
+docker build -t local-gateway ./src/api-gateway
+docker run -d --name azd-product --network azd-microservices-demo local-product
+docker run -d --name azd-gateway --network azd-microservices-demo \
+  -p 8080:8080 -e PRODUCT_SERVICE_URL=http://azd-product:8000 local-gateway
+curl --fail-with-body http://localhost:8080/api/products
 ```
 
-## ترتیب
-
-### اسکیلنگ کی ترتیب
-
-دونوں سروسز کو HTTP بنیاد پر autoscaling کے ساتھ ان کے Bicep فائلز میں ترتیب دیا گیا ہے:
-
-**API Gateway**:
-- کم از کم ریپلیکاز: 2 (ہمیشہ دستیاب کے لیے کم از کم 2)
-- زیادہ سے زیادہ ریپلیکاز: 20
-- اسکیل ٹریگر: ہر ریپلیکا پر 50 متوازی درخواستیں
-
-**Product Service**:
-- کم از کم ریپلیکاز: 1 (ضرورت پڑنے پر صفر تک اسکیل ہو سکتا ہے)
-- زیادہ سے زیادہ ریپلیکاز: 10
-- اسکیل ٹریگر: ہر ریپلیکا پر 100 متوازی درخواستیں
-
-**اسکیلنگ تخصیص کریں** (`infra/app/*.bicep` میں):
-```bicep
-scale: {
-  minReplicas: 1
-  maxReplicas: 10
-  rules: [
-    {
-      name: 'http-scale-rule'
-      http: {
-        metadata: {
-          concurrentRequests: '100'  // Adjust this
-        }
-      }
-    }
-  ]
-}
-```
-
-### وسائل کی تخصیص
-
-**API Gateway**:
-- CPU: 1.0 vCPU  
-- میموری: 2 GiB  
-- وجہ: تمام خارجی ٹریفک سنبھالتا ہے
-
-**Product Service**:
-- CPU: 0.5 vCPU  
-- میموری: 1 GiB  
-- وجہ: ہلکے پھلکے ان میموری آپریشنز
-
-### صحت کی جانچ
-
-دونوں سروسز میں لائیونیس اور ریڈینیس پروبس شامل ہیں:
-
-```bicep
-probes: [
-  {
-    type: 'Liveness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 10
-    periodSeconds: 30
-  }
-  {
-    type: 'Readiness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 5
-    periodSeconds: 10
-  }
-]
-```
-
-**اس کا مطلب**:  
-- **لائیونیس**: اگر صحت کی جانچ ناکام ہو تو Container Apps کنٹینر کو دوبارہ شروع کرتا ہے  
-- **ریڈینیس**: اگر تیار نہ ہو تو Container Apps اس ریپلیکا کو ٹریفک بھیجنا بند کر دیتا ہے  
-
-## مانیٹرنگ اور مشاہدہ
-
-### سروس لاگز دیکھیں
+توقع کی جاتی ہے: پانچ مصنوعات۔ HTTP صرف اس مقامی Docker نیٹ ورک کے لیے استعمال ہوتا ہے۔
 
 ```bash
-# لاگز دیکھیں azd مانیٹر کا استعمال کرتے ہوئے
-azd monitor --logs
-
-# یا مخصوص کنٹینر ایپس کے لیے Azure CLI استعمال کریں:
-# API گیٹ وے سے لاگز کا سلسلہ جاری کریں
-az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
-
-# حالیہ پروڈکٹ سروس کے لاگز دیکھیں
-az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
+docker stop azd-product azd-gateway
+docker rm azd-product azd-gateway
+docker network rm azd-microservices-demo
 ```
 
-**متوقع نتیجہ**:
+## نگرانی
+
+```bash
+az containerapp logs show --name "$GATEWAY_NAME" --resource-group "$RG_NAME" --follow
+# In a separate terminal:
+az containerapp logs show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" --tail 100
 ```
-[api-gateway] API Gateway listening on port 8080
-[api-gateway] Product Service URL: http://product-service
-[api-gateway] GET /api/products 200 - 45ms
-[product-service] Retrieved 5 products
-```
 
-### Application Insights کی چھان بین
+`azd monitor --logs` ایک پورٹل ویو کھولتا ہے؛ یہ ٹرمینل لاگز کو سٹریم نہیں کرتا۔
+Node SDK گیٹ وے کی درخواستیں/انحصار جمع کرتا ہے۔ Python کا `AzureLogHandler`
+**لاگ ٹریسز** برآمد کرتا ہے، خودکار Flask درخواستیں، SQL انحصار، یا مکمل
+تقسیم شدہ ٹریسز نہیں۔ OpenCensus ایک پرانا SDK ہے؛ جب اس نمونے کو بڑھائیں تو Azure Monitor OpenTelemetry کو ترجیح دیں۔
 
-Azure پورٹل میں Application Insights تک رسائی حاصل کریں، پھر یہ سوالات چلائیں:
 
-**آہستہ درخواستیں تلاش کریں**:
+Application Insights Logs میں، درخواستیں بنائیں اور معائنہ کریں:
+
 ```kusto
 requests
 | where timestamp > ago(1h)
-| where duration > 1000  // Requests taking >1 second
-| summarize count() by name, cloud_RoleName
-| order by count_ desc
+| where name contains "products"
+| summarize RequestCount=count(), AvgDuration=avg(duration) by bin(timestamp, 5m)
 ```
 
-**سروس سے سروس کالز ٹریک کریں**:
+Python ایپلیکیشن پیغامات کے لیے:
+
 ```kusto
-dependencies
+traces
 | where timestamp > ago(1h)
-| where type == "Http"
-| project timestamp, name, target, duration, success
-| order by timestamp desc
+| where message contains "products"
+| project timestamp, message, severityLevel
 ```
 
-**سروس کے حساب سے غلطی کی شرح**:
-```kusto
-exceptions
-| where timestamp > ago(24h)
-| summarize errorCount = count() by cloud_RoleName, type
-| order by errorCount desc
-```
-
-**درخواستوں کی مقدار وقت کے ساتھ**:
-```kusto
-requests
-| where timestamp > ago(1h)
-| summarize requestCount = count() by bin(timestamp, 5m), cloud_RoleName
-| render timechart
-```
-
-### مانیٹرنگ ڈیش بورڈ تک رسائی
-
-```bash
-# ایپلیکیشن انسائٹس کی تفصیلات حاصل کریں
-azd env get-values | grep APPLICATIONINSIGHTS
-
-# ایزور پورٹل مانیٹرنگ کھولیں
-az monitor app-insights component show \
-  --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
-  --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
-  --query "appId" -o tsv
-```
-
-### لائیو میٹرکس
-
-1. Azure پورٹل میں Application Insights پر جائیں  
-2. "Live Metrics" پر کلک کریں  
-3. حقیقی وقت کی درخواستیں، ناکامیاں، اور کارکردگی دیکھیں  
-4. آزمائش کے لیے چلائیں: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+انجماد میں تاخیر اور سیمپلنگ کی اجازت دیں؛ ایک عین درخواست کی تعداد یا ایک
+یقینی کردہ تاخیر کی توقع نہ کریں۔ کوئی کسٹم الرٹس یا ڈیش بورڈز ترتیب نہیں دیئے گئے۔
 
 ## عملی مشقیں
 
-[نوٹ: مکمل مشقیں "Practical Exercises" سیکشن میں بالا میں دستیاب ہیں جن میں ڈیپلوئے کی تصدیق، ڈیٹا تبدیلی، آٹوسکیلنگ ٹیسٹ، غلطی کا انتظام، اور تیسری سروس کا اضافہ شامل ہیں۔]
+### مشق 1: کیٹلاگ میں ترمیم کریں
 
-## لاگت کا تجزیہ
+**ابتدائی مقام:** `src/product-service/main.py`.
+**مقصد:** آزاد سروس کی تعیناتی کی تصدیق کریں۔
+Laptop کا اسٹاک 50 سے 49 میں تبدیل کریں مقررہ `products` فہرست میں، چلائیں
+`azd deploy product-service`، پھر درخواست کریں `${GATEWAY_URL}/api/products/1`۔
 
-### اس 2-سروس مثال کے لیے تخمینی ماہانہ لاگت
+**کامیابی کے معیار / حل:** HTTP 200 کے ساتھ `"stock":49`۔ 50 بحال کریں اور دوبارہ تعینات کریں۔
+**عام مسئلہ:** گیٹ وے کی ترمیم کرنا بجائے اس سروس کے جو کیٹلاگ کی مالک ہو۔
+اس سے ماخذ ڈیٹا تبدیل ہوتا ہے، مستقل انوینٹری ڈیٹا بیس نہیں۔
 
-| وسیلہ | ترتیب | تخمینی لاگت |
-|----------|--------------|----------------|
-| API Gateway | 2-20 ریپلیکاز، 1 vCPU، 2GB RAM | $30-150 |
-| Product Service | 1-10 ریپلیکاز، 0.5 vCPU، 1GB RAM | $15-75 |
-| Container Registry | بنیادی سطح | $5 |
-| Application Insights | 1-2 GB/ماہ | $5-10 |
-| Log Analytics | 1 GB/ماہ | $3 |
-| **کل** | | **$58-243/ماہ** |
+### مشق 2: ریپلیکا کنفیگریشن کی تصدیق کریں
 
-**استعمال کی بنیاد پر لاگت**:
-- **ہلکا ٹریفک** (ٹیسٹنگ/سیکھنا): تقریباً $60/ماہ
-- **درمیانہ ٹریفک** (چھوٹے پروڈکشن): تقریباً $120/ماہ
-- **زیادہ ٹریفک** (مصروف اوقات): تقریباً $240/ماہ
-
-### لاگت بہتر بنانے کے نکات
-
-1. **ترقی کے لیے زیرو تک اسکیل کریں**:
-   ```bicep
-   scale: {
-     minReplicas: 0  // Save $30-40/month when not in use
-     maxReplicas: 10
-   }
-   ```
-
-2. **Cosmos DB کے لیے consumption plan کا استعمال کریں** (جیسے ہی آپ اسے شامل کریں):
-   - صرف جتنا استعمال کریں اس کا معاوضہ ادا کریں  
-   - کوئی کم از کم فیس نہیں
-
-3. **Application Insights سیمپلنگ سیٹ کریں**:
-   ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // درخواستوں کے 50٪ کا نمونہ بنائیں
-   ```
-
-4. **ضرورت نہ ہو تو کلین اپ کریں**:
-   ```bash
-   azd down
-   ```
-
-### مفت سطح کے اختیارات
-
-سیکھنے/ٹیسٹنگ کے لیے غور کریں:
-- Azure کے مفت کریڈٹس استعمال کریں (پہلے 30 دن)
-- ریپلیکا کم سے کم رکھیں
-- ٹیسٹنگ کے بعد حذف کریں (کوئی جاری چارجز نہیں)
-
----
-
-## صفائی
-
-جاری چارجز سے بچنے کے لیے، تمام وسائل حذف کریں:
+**ابتدائی مقام:** `infra/app/product-service.bicep`.
+**مقصد:** آٹوسکیلنگ کا اندازہ لگائے بغیر بنیادی ڈھانچے میں تبدیلی دیکھیں۔
+`minReplicas: 1` کو `minReplicas: 2` میں تبدیل کریں، `azd up` چلائیں، پھر:
 
 ```bash
-azd down --force --purge
+az containerapp show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" \
+  --query properties.template.scale -o json
 ```
 
-**تصدیقی پیغام**:
-```
-? Total resources to delete: 6, are you sure you want to continue? (y/N)
-```
+**کامیابی کے معیار:** ترتیب یافتہ کم از کم 2 ہے اور زیادہ سے زیادہ 10 برقرار ہے۔
+کم از کم 1 بحال کریں اور `azd up` چلائیں۔
+**عام مسئلہ:** `azd deploy` اکیلا غیر متعلقہ مشترکہ بنیادی ڈھانچے پر تبدیلیاں لاگو نہیں کرتا۔
+ناکامی کی مشابہت کے طور پر `maxReplicas` کو صفر پر سیٹ نہ کریں۔
+یہ کنفیگریشن کی تصدیق کرتا ہے، لوڈ ٹیسٹ یا یقینی فوری ریپلیکا تعداد نہیں۔
 
-تصدیق کرنے کے لیے `y` ٹائپ کریں۔
+### مشق 3: مقامی طور پر غیر دستیاب سروس کی ہینڈلنگ کا ٹیسٹ کریں
 
-**کیا حذف ہوگا**:
-- کنٹینر ایپس انوائرمنٹ
-- دونوں کنٹینر ایپس (گیٹ وے اور پروڈکٹ سروس)
-- کنٹینر رجسٹری
-- ایپلیکیشن انسائٹس
-- لاگ اینالٹکس ورک اسپیس
-- ریسورس گروپ
+**ابتدائی مقام:** اوپر دونوں مقامی Docker کنٹینر چل رہے ہیں۔
+**مقصد:** بیک اینڈ ناکامی کو گمشدہ پروڈکٹ سے تمیز دیں۔
+صرف پروڈکٹ کنٹینر کو روکیں:
 
-**✓ صفائی کی تصدیق کریں**:
 ```bash
-az group list --query "[?starts_with(name,'rg-microservices')]" --output table
+docker stop azd-product
+curl -i http://localhost:8080/api/products
+docker start azd-product
+curl --fail-with-body http://localhost:8080/api/products
 ```
 
-خالی واپس آنا چاہیے۔
+**کامیابی کے معیار:** جب روکا جائے، گیٹ وے 503 واپس کرے
+`"error":"Product service unavailable"` کے ساتھ؛ دوبارہ شروع کے بعد، فہرست 200 واپس کرتی ہے۔
+اگر ضروری ہو تو مختصر اسٹارٹ اپ تاخیر کے بعد دوبارہ کوشش کریں۔
+**عام مسئلہ:** گیٹ وے کو روکنا ایک مختلف ناکامی کا ٹیسٹ کرتا ہے (کوئی HTTP جواب نہیں)۔
 
----
+## اخراجات اور پیداوار کے خلاء
 
-## توسیعی رہنما: 2 سے 5+ سروسز تک
+ڈیفالٹ کم از کم ریپلیکا کمپیوٹ کو چلتا رکھتا ہے۔ رجسٹری اور نگرانی بھی
+چارجز لیتی ہے۔ کوئی تصدیق شدہ مقررہ $50/ماہ کل نہیں: علاقائی CPU/میموری کا اندازہ لگائیں،
+ریپلیکا گھنٹے، درخواستیں، رجسٹری، اور لاگ برقرار رکھنے کو
+[Azure پرائسنگ کیلکولیٹر](https://azure.microsoft.com/pricing/calculator/) میں۔
+سیکھنے کے وسائل کو فوری طور پر حذف کریں۔
 
-جب آپ اس 2-سروس کے فن تعمیر میں مہارت حاصل کرلیں، تو اسے بڑھانے کا طریقہ یہ ہے:
+پیداواری کاموں میں تصدیق/اجازت، محدود شدہ انتظام شدہ شناختیں،
+مستقل ڈیٹا، ان پٹ/جواب کی تصدیق، معاون مشاہداتی آلات،
+لوڈ/ناکامی کی جانچ، CI/CD، الرٹس، اور بحالی کے طریقہ کار شامل ہیں۔ ایک آرڈر سروس،
+قطار، یا ڈیٹا بیس شامل کرنا ایک الگ نفاذ کا کام ہے، ایک مکمل
+مشق یا یہاں پہلے سے دستیاب فیچر نہیں۔
 
-### مرحلہ 1: ڈیٹا بیس میں مستقل مزاجی شامل کریں (اگلا قدم)
+## مسئلہ حل کرنا اور صفائی
 
-**پروڈکٹ سروس کے لیے Cosmos DB شامل کریں**:
+- **پہلی فراہمی کے دوران تصویر نہیں ملی:** بوٹ اسٹریپ کو عوامی تصویر استعمال کرنی چاہیے؛
+  مرکزی تصویر کے پیرا میٹر کے ڈیفالٹس اور تعیناتی ماڈیول کے نقشے کی تصدیق کریں۔
+- **503 مصنوعات:** پروڈکٹ لاگز، تصویر کی ترمیم، اور شامل کردہ اندرونی HTTPS URL چیک کریں۔
+- **404 غیر متوقع راہ:** پروڈکٹ API صرف پڑھنے کے لیے ہے؛ راستہ کی تصدیق کریں، نہ کہ غیر موجود CRUD ہینڈلر۔
+- **کوئی ٹیلی میٹری نہیں:** رن ٹائم کنکشن سٹرنگز کا معائنہ کریں بغیر ان کو ظاہر کیے اور
+  انجماد میں تاخیر کی اجازت دیں۔ Python کی درخواست کی میزیں اس کے لاگ ہینڈلر کے ذریعے بھر نہیں جاتیں۔
 
-1. `infra/core/cosmos.bicep` بنائیں:
-   ```bicep
-   resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
-     name: name
-     location: location
-     kind: 'GlobalDocumentDB'
-     properties: {
-       databaseAccountOfferType: 'Standard'
-       locations: [{ locationName: location, failoverPriority: 0 }]
-     }
-   }
-   ```
+اس نمونہ کی ڈائریکٹری سے:
 
-2. پروڈکٹ سروس کو ان میموری ڈیٹا کی بجائے Cosmos DB استعمال کرنے کے لیے اپ ڈیٹ کریں
-
-3. اندازاً اضافی قیمت: ~$25/ماہ (سرورلیس)
-
-### مرحلہ 2: تیسری سروس شامل کریں (آرڈر مینجمنٹ)
-
-**آرڈر سروس بنائیں**:
-
-1. نیا فولڈر: `src/order-service/` (Python/Node.js/C#)
-2. نیا بائسپ: `infra/app/order-service.bicep`
-3. API گیٹ وے کو اپڈیٹ کریں تاکہ `/api/orders` کی راہنمائی کرے
-4. آرڈر مستقل مزاجی کے لیے Azure SQL ڈیٹابیس شامل کریں
-
-**فن تعمیر یوں ہوگا**:
-```
-API Gateway → Product Service (Cosmos DB)
-           → Order Service (Azure SQL)
-```
-
-### مرحلہ 3: غیر ہم وقت مواصلات شامل کریں (سروس بس)
-
-**ایونٹ ڈرائیون فن تعمیر نافذ کریں**:
-
-1. Azure سروس بس شامل کریں: `infra/core/servicebus.bicep`
-2. پروڈکٹ سروس "ProductCreated" ایونٹس شائع کرتی ہے
-3. آرڈر سروس پروڈکٹ ایونٹس کی سبسکرائب کرتی ہے
-4. ایونٹس کو پراسیس کرنے کے لیے نوٹیفیکیشن سروس شامل کریں
-
-**پیٹرن**: درخواست/جواب (HTTP) + ایونٹ ڈرائیون (سروس بس)
-
-### مرحلہ 4: صارف تصدیق شامل کریں
-
-**یوزر سروس نافذ کریں**:
-
-1. `src/user-service/` بنائیں (Go/Node.js)
-2. Azure AD B2C یا کسٹم JWT تصدیق شامل کریں
-3. API گیٹ وے ٹوکنز کی تصدیق کرتا ہے
-4. سروسز صارف کے اجازت نامے چیک کرتی ہیں
-
-### مرحلہ 5: پیداوار کی تیاری
-
-**یہ اجزاء شامل کریں**:
-- Azure فرنٹ ڈور (عالمی لوڈ بیلنسنگ)
-- Azure Key Vault (رازوں کا انتظام)
-- Azure مانیٹر ورک بکس (کسٹم ڈیش بورڈز)
-- CI/CD پائپ لائن (GitHub Actions)
-- بلیو-گرین ڈپلائمنٹس
-- تمام سروسز کے لیے مینیجڈ شناخت
-
-**مکمل پیداواری فن تعمیر کی لاگت**: ~$300-1,400/ماہ
-
----
-
-## مزید جانیں
-
-### متعلقہ دستاویزات
-- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
-- [Microservices Architecture Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights for Distributed Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-
-### اس کورس میں اگلے اقدامات
-- ← پچھلا: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - ابتدائی سنگل کنٹینر مثال
-- → اگلا: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - AI صلاحیتیں شامل کریں
-- 🏠 [کورس ہوم](../../README.md)
-
-### موازنہ: کب کیا استعمال کریں
-
-**سنگل کنٹینر ایپ** (Simple Flask API مثال):
-- ✅ آسان ایپلیکیشنز
-- ✅ مونو لیتھک فن تعمیر
-- ✅ تیزی سے تعیناتی
-- ❌ محدود اسکیل ایبلٹی
-- **لاگت**: ~$15-50/ماہ
-
-**مائیکرو سروسز** (یہ مثال):
-- ✅ پیچیدہ ایپلیکیشنز
-- ✅ ہر سروس کے مطابق آزاد اسکیلنگ
-- ✅ ٹیم کی خودمختاری (مختلف سروسز، مختلف ٹیمیں)
-- ❌ انتظام میں زیادہ پیچیدہ
-- **لاگت**: ~$60-250/ماہ
-
-**کوبرنیٹس (AKS)**:
-- ✅ زیادہ سے زیادہ کنٹرول اور لچک
-- ✅ ملٹی کلاؤڈ پورٹیبلیٹی
-- ✅ جدید نیٹ ورکنگ
-- ❌ کوبرنیٹس کی مہارت درکار
-- **لاگت**: ~$150-500/ماہ کم از کم
-
-**سفارش**: کنٹینر ایپس سے شروع کریں (یہ مثال)، صرف کوبرنیٹس خصوصی فیچرز کی ضرورت ہو تو AKS پر جائیں۔
-
----
-
-## اکثر پوچھے گئے سوالات
-
-**س: صرف 2 سروسز کیوں، 5+ کیوں نہیں؟**  
-ج: تعلیمی ترقی۔ بنیادی باتیں سیکھیں (سروس مواصلات، مانیٹرنگ، اسکیلنگ) ایک آسان مثال کے ساتھ، پھر پیچیدگی بڑھائیں۔ یہاں سیکھے گئے پیٹرنز 100 سروس فن تعمیر پر بھی لاگو ہوتے ہیں۔
-
-**س: کیا میں خود مزید سروسز شامل کر سکتا ہوں؟**  
-ج: بلکل! اوپر دی گئی توسیعی رہنما پر عمل کریں۔ ہر نئی سروس کے لیے ایک src فولڈر بنائیں، بائسپ فائل بنائیں، azure.yaml اپڈیٹ کریں، اور تعینات کریں۔
-
-**س: کیا یہ پیداواری استعمال کے قابل ہے؟**  
-ج: یہ ایک مضبوط بنیاد ہے۔ پیداوار کے لیے شامل کریں: مینیجڈ شناخت، کی والٹ، مستقل ڈیٹابیسز، CI/CD پائپ لائن، مانیٹرنگ الرٹس، اور بیک اپ حکمت عملی۔
-
-**س: Dapr یا دوسرے سروس میش کیوں نہیں استعمال کرتے؟**  
-ج: سیکھنے کے لیے آسان رکھیں۔ جب آپ نیٹیو کنٹینر ایپس نیٹ ورکنگ سمجھ لیں، تب Dapr ایڈوانسڈ سیناریوز کے لیے شامل کر سکتے ہیں۔
-
-**س: میں لوکل کیسے ڈیبگ کروں؟**  
-ج: سروسز کو لوکل طور پر Docker کے ساتھ چلائیں:
 ```bash
-cd src/api-gateway
-docker build -t local-gateway .
-docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
+azd down
 ```
 
-**س: کیا میں مختلف پروگرامنگ زبانیں استعمال کر سکتا ہوں؟**  
-ج: ہاں! یہ مثال Node.js (گیٹ وے) + Python (پروڈکٹ سروس) دکھاتی ہے۔ آپ کسی بھی زبان کو جو کنٹینر میں چل سکتی ہو، ملا سکتے ہیں۔
+حذف کرنے کی پرامپٹس کا جائزہ لیں اور مخصوص ریسورس گروپ کے ہٹانے کی تصدیق کریں۔
 
-**س: اگر میرے پاس Azure کریڈٹس نہیں ہیں؟**  
-ج: Azure مفت ٹائر استعمال کریں (نئے اکاؤنٹس کے لیے پہلے 30 دن)، یا مختصر ٹیسٹنگ کے لیے تعینات کریں اور فوراً حذف کردیں۔
-
----
-
-> **🎓 لرننگ پاتھ کا خلاصہ**: آپ نے ایک کثیر سروس فن تعمیر سیکھا ہے جو خودکار اسکیلنگ، داخلی نیٹ ورکنگ، مرکزی مانیٹرنگ، اور پیداواری نمونوں کے ساتھ ہے۔ یہ بنیاد آپ کو پیچیدہ تقسیم شدہ نظاموں اور ادارہ جاتی مائیکرو سروسز فن تعمیرات کے لیے تیار کرتی ہے۔
-
-**📚 کورس نیویگیشن:**
-- ← پچھلا: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
-- → اگلا: [Database Integration Example](../../../../../examples/database-app)
-- 🏠 [کورس ہوم](../../../README.md)
-- 📖 [Container Apps Best Practices](../../../docs/chapter-04-infrastructure/deployment-guide.md)
+[پچھلا: Flask API](../../../../../examples/container-app/simple-flask-api) · [اگلا: ڈیٹا بیس ایپ](../../../../../examples/database-app) ·
+[AI ترقی](../../../docs/chapter-02-ai-development/README.md) ·
+[کورس ہوم](../../../README.md) · [مسئلہ رپورٹ کریں](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ڈسکلیمر**:  
-اس دستاویز کا ترجمہ AI ترجمانی سروس [Co-op Translator](https://github.com/Azure/co-op-translator) استعمال کرتے ہوئے کیا گیا ہے۔ جب کہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم آگاہ رہیں کہ خودکار تراجم میں غلطیاں یا عدم صحت ہو سکتی ہے۔ اصل دستاویز اپنی مادری زبان میں معتبر ماخذ سمجھی جانی چاہیے۔ اہم معلومات کے لیے، پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا شدہ کسی بھی غلط فہمی یا غلط تشریح کی ذمہ داری ہم پر عائد نہیں ہوتی۔
+**ڈس کلیمر**:
+یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے ترجمہ کی گئی ہے۔ جبکہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم اس بات سے آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا عدم درستیاں ہو سکتی ہیں۔ اصل دستاویز اپنے مادری زبان میں مستند ماخذ سمجھی جائے گی۔ حساس معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کی ذمہ داری ہم قبول نہیں کرتے۔
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

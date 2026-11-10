@@ -1,75 +1,78 @@
-# 第8章：生產與企業模式
+# 第八章：生產與企業模式
 
-**📚 課程**：[AZD 初學者指南](../../README.md) | **⏱️ 時長**：2-3 小時 | **⭐ 難度**：進階
+**📚 課程**: [AZD 入門](../../README.md) | **⏱️ 時間長度**: 2-3 小時 | **⭐ 複雜度**: 進階
 
 ---
 
-## 概述
+## 概觀
 
-本章節涵蓋企業級部署模式、安全加固、監控與生產 AI 工作負載的成本優化。
+本章介紹企業級部署模式、安全加固、監控以及生產環境 AI 工作負載的成本優化。
 
-> 於2026年7月，使用 `azd 1.27.1` 版本驗證。
+本章為架構參考範例，非完整可部署的生產範本。範例省略了必須在您應用中實作和測試的整合細節；閱讀檢查清單不代表已達生產準備狀態。
+
+> **發行評審 (2026-11-04)：** AI CLI 指導已依據 `azd 1.37.2`、agents `1.0.0-beta.23` 以及 evaluations `1.0.0-beta.2` 文件/原始碼進行檢查。詳見 [發行變更與修正](production-ai-practices.md#recent-release-changes-and-fixes) 瞭解相容需求與遷移細節；此非即時部署驗證。
 
 ## 學習目標
 
-完成本章後，您將能：
-- 部署多區域高韌性應用
+完成本章後，您將能夠：
+- 部署多區域高可用應用
 - 實作企業安全模式
-- 設定完整監控
-- 大規模成本優化
-- 使用 AZD 建置 CI/CD 管線
+- 配置完整的監控系統
+- 大規模優化成本
+- 利用 AZD 設定 CI/CD 管線
 
 ---
 
-## 📚 課程單元
+## 📚 課程列表
 
-| # | 課程 | 描述 | 時間 |
+| # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [生產 AI 實務](production-ai-practices.md) | 企業部署模式 | 90 分 |
+| 1 | [生產 AI 實務](production-ai-practices.md) | 企業部署模式 | 90 分鐘 |
 
 ---
 
 ## 🚀 生產檢查清單
 
-- [ ] 多區域部署以提升韌性
-- [ ] 使用管理身分進行驗證（無需金鑰）
-- [ ] 應用程式洞察監控
+- [ ] 多區域部署以增強韌性
+- [ ] 使用受控身份驗證（無需金鑰）
+- [ ] 使用 Application Insights 監控
 - [ ] 設定成本預算與警示
 - [ ] 啟用安全掃描
 - [ ] 整合 CI/CD 管線
-- [ ] 災難復原計畫
+- [ ] 制定災難復原計畫
 
 ---
 
 ## 🏗️ 架構模式
 
-### 模式1：微服務 AI
+### 模式一：微服務 AI
 
 ```mermaid
 graph LR
-    Gateway[API 閘道] --> AI[AI 服務] --> Models[微軟 Foundry 模型]
-    Gateway --> Auth[認證服務]
-    AI --> Data[資料存儲]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
-### 模式2：事件驅動 AI
+### 模式二：事件驅動 AI
 
 ```mermaid
 graph LR
-    EventGrid[事件網格] --> Functions[函數] --> Pipeline[AI 管線]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
 
-## 🔐 安全最佳實務
+## 🔐 安全最佳實踐
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,34 +85,27 @@ properties: {
 
 ## 💰 成本優化
 
-| 策略 | 節省比例 |
+| 策略 | 主要限制 |
 |----------|---------|
-| 零擴展 (Container Apps) | 60-80% |
-| 開發用消耗層 | 50-70% |
-| 定時擴展 | 30-50% |
-| 預留容量 | 20-40% |
+| 擴展至零（Container Apps） | 需適合的觸發條件；其他服務仍會產生成本 |
+| 開發使用消費層級 | 比較所選服務價格與工作負載 |
+| 排程擴展 | 透過支援的基礎設施/自動化調度擴展 |
+| 預留/已配置容量 | 僅在支援時使用；承諾可增加閒置成本 |
 
-```bash
-# 設定預算警示
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+使用 [完整預算資源模式](production-ai-practices.md#2-cost-monitoring-and-budgets) 且設置有效開始日期、計費範圍、接收者和權限。預算會發送警示，但不會限制支出。節省取決於實際利用率，且不保證百分比。
 
 ---
 
-## 📊 監控設定
+## 📊 監控設置
 
 ```bash
-# 串流日誌
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# 檢查應用程式洞察
+# Check Application Insights
 azd monitor --overview
 
-# 檢視指標
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -119,16 +115,16 @@ az monitor metrics list --resource <resource-id>
 
 | 方向 | 章節 |
 |-----------|---------|
-| <strong>上一章</strong> | [第7章：疑難排解](../chapter-07-troubleshooting/README.md) |
-| <strong>課程完成</strong> | [課程首頁](../../README.md) |
+| <strong>上一章</strong> | [第七章：故障排除](../chapter-07-troubleshooting/README.md) |
+| <strong>完成課程</strong> | [課程首頁](../../README.md) |
 
 ---
 
 ## 📖 相關資源
 
-- [AI 代理指南](../chapter-02-ai-development/agents.md)
-- [應用程式洞察](../chapter-06-pre-deployment/application-insights.md)
-- [多代理解決方案](../chapter-05-multi-agent/README.md)
+- [AI Agents 指南](../chapter-02-ai-development/agents.md)
+- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [多代理方案](../chapter-05-multi-agent/README.md)
 - [微服務範例](../../examples/microservices/README.md)
 
 ---

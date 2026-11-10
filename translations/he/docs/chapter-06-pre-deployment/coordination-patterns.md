@@ -1,27 +1,27 @@
-# דפוסי תיאום עם סוכנים מרובים
+# תבניות תיאום של סוכנים מרובים
 
-⏱️ **זמן מוערך**: 60-75 דקות | 💰 **עלות מוערכת**: ~100-300$ לחודש | ⭐ **מורכבות**: מתקדם
+⏱️ **זמן משוער**: 60-75 דקות קריאה; מספר שעות לביצוע | 💰 **עלות משוערת**: תלויה בעומס העבודה | ⭐ **מורכבות**: מתקדם
 
-**📚 מסלול למידה:**
-- ← קודם: [Capacity Planning](capacity-planning.md) - אסטרטגיות תכנון ושינוי גודל משאבים
-- 🎯 **אתה כאן**: דפוסי תיאום עם סוכנים מרובים (תזמור, תקשורת, ניהול מצב)
-- → הבא: [SKU Selection](sku-selection.md) - בחירת השירותים הנכונים של Azure
-- 🏠 [דף הבית של הקורס](../../README.md)
+**📚 מסלול לימוד:**
+- ← קודם: [תכנון קיבולת](capacity-planning.md) - אסטרטגיות גודל ומשאבים
+- 🎯 **אתה כאן**: תבניות תיאום סוכנים מרובים (תזמור, תקשורת, ניהול מצב)
+- → הבא: [בחירת SKU](sku-selection.md) - בחירת שירותי Azure נכונים
+- 🏠 [דף הקורס](../../README.md)
 
 ---
 
 ## מה תלמד
 
 בסיום השיעור הזה, תוכל:
-- להבין דפוסי **ארכיטקטורת סוכנים מרובים** ומתי להשתמש בהם
-- ליישם **דפוסי תזמור** (מרוכז, מבוזר, היררכי)
-- לתכנן אסטרטגיות **תקשורת סוכנים** (סינכרוני, אסינכרוני, מונחה אירועים)
+- להבין תבניות **ארכיטקטורת סוכנים מרובים** ומתי להשתמש בהן
+- ליישם **תבניות תזמור** (מרוכז, מבוזר, היררכי)
+- לתכנן אסטרטגיות **תקשורת סוכנים** (סינכרונית, אסינכרונית, מונעת אירועים)
 - לנהל **מצב משותף** בין סוכנים מבוזרים
-- לפרוס **מערכות סוכנים מרובים** על Azure עם AZD
-- ליישם **דפוסי תיאום** בתרחישים אמיתיים של AI
-- לנטר ולתקן תקלות במערכות סוכנים מבוזרות
+- לפרוס **מערכות סוכנים מרובים** ב-Azure באמצעות AZD
+- ליישם **תבניות תיאום** בתרחישי AI מהעולם האמיתי
+- לנטר ולתקן מערכות סוכנים מבוזרות
 
-## למה תיאום עם סוכנים מרובים חשוב
+## מדוע תיאום סוכנים מרובים חשוב
 
 ### ההתפתחות: מסוכן יחיד לסוכנים מרובים
 
@@ -31,81 +31,83 @@ User → Agent → Response
 ```
 - ✅ קל להבנה וליישום
 - ✅ מהיר למשימות פשוטות
-- ❌ מוגבל על ידי יכולות מודל יחיד
+- ❌ מוגבל ביכולות של מודל יחיד
 - ❌ לא יכול לבצע משימות מורכבות במקביל
 - ❌ ללא התמחות
 
 **מערכת סוכנים מרובים (מתקדם):**
 ```mermaid
 graph TD
-    Orchestrator[מתזמן] --> Agent1[סוכן1<br/>תכנון]
-    Orchestrator --> Agent2[סוכן2<br/>קוד]
-    Orchestrator --> Agent3[סוכן3<br/>סקירה]
-```- ✅ סוכנים מתמחים למשימות ספציפיות
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```
+- ✅ סוכנים מתמחים למשימות ספציפיות
 - ✅ ביצוע במקביל למהירות
-- ✅ מודולרי ותחזוקתי
-- ✅ טוב יותר עבור תהליכים מורכבים
+- ✅ מודולרי וניתן לתחזוקה
+- ✅ טוב יותר בתהליכים מורכבים
 - ⚠️ דורש לוגיקת תיאום
 
-**אנלוגיה**: סוכן יחיד הוא כמו אדם אחד שעושה את כל המשימות. סוכנים מרובים הם צוות שכל חבר בו בעל מיומנויות מיוחדות (חוקר, מתכנת, מבקר, סופר) שעובדים יחד.
+**אנלוגיה**: סוכן יחיד הוא כמו אדם אחד שעושה את כל המשימות. סוכנים מרובים הם כמו צוות שכל חבר בו בעל מיומנות מיוחדת (חוקר, מקודד, ביקור, כותב) שעובדים יחד.
 
 ---
 
-## דפוסי תיאום עיקריים
+## תבניות תיאום מרכזיות
 
-### דפוס 1: תיאום רציף (שרשרת אחריות)
+### תבנית 1: תיאום סדרתי (רצף אחריות)
 
-**מתי להשתמש**: משימות חייבות להתבצע בסדר מסוים, כל סוכן בונה על פלט קודם.
+**מתי להשתמש**: משימות חייבות להתבצע בסדר ספציפי, כל סוכן בונה על פלט קודם.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as סוכן מחקר
-    participant Agent2 as סוכן כתיבה
-    participant Agent3 as סוכן עריכה
+    participant Agent1 as Research Agent
+    participant Agent2 as Writer Agent
+    participant Agent3 as Editor Agent
     
-    User->>Orchestrator: "כתוב מאמר על בינה מלאכותית"
-    Orchestrator->>Agent1: חקור נושא
-    Agent1-->>Orchestrator: תוצאות מחקר
-    Orchestrator->>Agent2: כתוב טיוטה (בעזרת המחקר)
-    Agent2-->>Orchestrator: טיוטת מאמר
-    Orchestrator->>Agent3: ערוך ושפר
-    Agent3-->>Orchestrator: מאמר סופי
-    Orchestrator-->>User: מאמר מלוטש
+    User->>Orchestrator: "Write article about AI"
+    Orchestrator->>Agent1: Research topic
+    Agent1-->>Orchestrator: Research results
+    Orchestrator->>Agent2: Write draft (using research)
+    Agent2-->>Orchestrator: Draft article
+    Orchestrator->>Agent3: Edit and improve
+    Agent3-->>Orchestrator: Final article
+    Orchestrator-->>User: Polished article
     
-    Note over User,Agent3: סידורי: כל שלב מחכה לקודם
+    Note over User,Agent3: Sequential: Each step waits for previous
 ```
+
 **יתרונות:**
-- ✅ זרימת נתונים ברורה
-- ✅ קל לניפוי שגיאות
+- ✅ זרימת מידע ברורה
+- ✅ קל לאיתור שגיאות
 - ✅ סדר ביצוע צפוי
 
 **מגבלות:**
-- ❌ איטי יותר (ללא מקביליות)
-- ❌ כישלון אחד חוסם את כל השרשרת
-- ❌ לא יכול להתמודד עם משימות תלויות
+- ❌ איטי יותר (אין מקביליות)
+- ❌ כשל אחד עוצר את כל הרצף
+- ❌ לא מתמודד עם משימות תלוי-אחרות
 
 **דוגמאות שימוש:**
 - צינור יצירת תוכן (מחקר → כתיבה → עריכה → פרסום)
-- יצירת קוד (תכנון → יישום → בדיקות → פריסה)
-- הפקת דוחות (איסוף נתונים → ניתוח → ויזואליזציה → סיכום)
+- יצירת קוד (תכנון → יישום → בדיקה → פריסה)
+- יצירת דוחות (איסוף נתונים → ניתוח → ויזואליזציה → סיכום)
 
 ---
 
-### דפוס 2: תיאום מקבילי (Fan-Out/Fan-In)
+### תבנית 2: תיאום מקבילי (פאן-אאוט/פאן-אין)
 
-**מתי להשתמש**: משימות עצמאיות יכולות לרוץ במקביל, תוצאה משולבת בסוף.
+**מתי להשתמש**: משימות עצמאיות יכולות לפעול במקביל, התוצאות משולבות בסוף.
 
 ```mermaid
 graph TB
-    User[בקשת משתמש]
-    Orchestrator[מנהל תזמונים]
-    Agent1[סוכן ניתוח]
-    Agent2[סוכן מחקר]
-    Agent3[סוכן נתונים]
-    Aggregator[מאגד תוצאות]
-    Response[תגובה משולבת]
+    User[User Request]
+    Orchestrator[Orchestrator]
+    Agent1[Analysis Agent]
+    Agent2[Research Agent]
+    Agent3[Data Agent]
+    Aggregator[Result Aggregator]
+    Response[Combined Response]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -119,36 +121,37 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **יתרונות:**
-- ✅ מהיר (ביצוע מקבילי)
-- ✅ עמיד לתקלות (תוצאות חלקיות מתקבלות)
+- ✅ מהיר (ביצוע במקביל)
+- ✅ עמיד לכשלים (תוצאות חלקיות מתקבלות)
 - ✅ מתרחב אופקית
 
 **מגבלות:**
-- ⚠️ תוצאות עשויות להגיע בסדר לא קבוע
-- ⚠️ צריך לוגיקת שילוב
+- ⚠️ תוצאות עשויות להגיע לא לפי הסדר
+- ⚠️ יש צורך בלוגיקת אגירה
 - ⚠️ ניהול מצב מורכב
 
 **דוגמאות שימוש:**
-- איסוף נתונים ממקורות מרובים (APIs + בסיסי נתונים + גירוד רשת)
-- ניתוח תחרותי (מספר מודלים מייצרים פתרונות, נבחר הטוב ביותר)
-- שירותי תרגום (תרגום בו זמנית למספר שפות)
+- איסוף נתונים ממקורות מרובים (API, מסדי נתונים, סקרייפינג)
+- ניתוח תחרותי (דגמים מרובים מייצרים פתרונות, הבחירה הטובה ביותר)
+- שירותי תרגום (תרגום למספר שפות במקביל)
 
 ---
 
-### דפוס 3: תיאום היררכי (מנהל-עובד)
+### תבנית 3: תיאום היררכי (מנהל-עובד)
 
-**מתי להשתמש**: תהליכים מורכבים עם תת-משימות, נדרש האצלת סמכויות.
+**מתי להשתמש**: תהליכים מורכבים עם תת-משימות, יש צורך בהאצלת סמכויות.
 
 ```mermaid
 graph TB
-    Master[מנצח ראשי]
-    Manager1[מנהל מחקר]
-    Manager2[מנהל תוכן]
-    W1[גנבלר רשת]
-    W2[מנתח מאמרים]
-    W3[כותב]
-    W4[עורך]
+    Master[Master Orchestrator]
+    Manager1[Research Manager]
+    Manager2[Content Manager]
+    W1[Web Scraper]
+    W2[Paper Analyzer]
+    W3[Writer]
+    W4[Editor]
     
     Master --> Manager1
     Master --> Manager2
@@ -161,75 +164,77 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
+
 **יתרונות:**
-- ✅ מטפל בתהליכים מורכבים
-- ✅ מודולרי ותחזוקתי
+- ✅ מתאים לתהליכים מורכבים
+- ✅ מודולרי וניתן לתחזוקה
 - ✅ גבולות אחריות ברורים
 
 **מגבלות:**
 - ⚠️ ארכיטקטורה מורכבת יותר
-- ⚠️ השהייה גבוהה יותר (שכבות תיאום מרובות)
-- ⚠️ דורש תזמור מתקדם
+- ⚠️ השהיה גבוהה יותר (שכבות תיאום מרובות)
+- ⚠️ דורש תזמור מתוחכם
 
 **דוגמאות שימוש:**
-- עיבוד מסמכים ארגוני (מיון → ניתוב → עיבוד → ארכוב)
-- צינורות נתונים מרובי שלבים (קליטה → ניקוי → המרה → ניתוח → דוח)
-- תהליכי אוטומציה מורכבים (תכנון → הקצאת משאבים → ביצוע → ניטור)
+- עיבוד מסמכים ארגוניים (סיווג → ניתוב → עיבוד → ארכיון)
+- צינורות נתונים מרובי שלבים (קלט → ניקוי → המרה → ניתוח → דיווח)
+- תהליכים אוטומטיים מורכבים (תכנון → הקצאת משאבים → ביצוע → ניטור)
 
 ---
 
-### דפוס 4: תיאום מונחה אירועים (פרסום-מנוי)
+### תבנית 4: תיאום מונחה אירועים (פרסם-והרשם)
 
-**מתי להשתמש**: סוכנים צריכים להגיב לאירועים, רמת קישוריות רופפת רצויה.
+**מתי להשתמש**: סוכנים צריכים להגיב לאירועים, רצוי ניתוק רפה.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as אוסף נתונים
+    participant Agent1 as Data Collector
     participant EventBus as Azure Service Bus
-    participant Agent2 as מנתח
-    participant Agent3 as מודיע
-    participant Agent4 as ארכיב
+    participant Agent2 as Analyzer
+    participant Agent3 as Notifier
+    participant Agent4 as Archiver
     
-    Agent1->>EventBus: פרסם אירוע "נתונים התקבלו"
-    EventBus->>Agent2: הירשם: נתח את הנתונים
-    EventBus->>Agent3: הירשם: שלח התראה
-    EventBus->>Agent4: הירשם: ארכב את הנתונים
+    Agent1->>EventBus: Publish "DataReceived" event
+    EventBus->>Agent2: Subscribe: Analyze data
+    EventBus->>Agent3: Subscribe: Send notification
+    EventBus->>Agent4: Subscribe: Archive data
     
-    Note over Agent1,Agent4: כל המנויים מעבדים באופן עצמאי
+    Note over Agent1,Agent4: All subscribers process independently
     
-    Agent2->>EventBus: פרסם אירוע "הניתוח הושלם"
-    EventBus->>Agent3: הירשם: שלח דוח ניתוח
+    Agent2->>EventBus: Publish "AnalysisComplete" event
+    EventBus->>Agent3: Subscribe: Send analysis report
 ```
+
 **יתרונות:**
-- ✅ קישוריות רופפת בין סוכנים
+- ✅ ניתוק רפה בין סוכנים
 - ✅ קל להוסיף סוכנים חדשים (פשוט להירשם)
 - ✅ עיבוד אסינכרוני
-- ✅ חסין (שימור הודעות)
+- ✅ עמיד (שמירת הודעות)
 
 **מגבלות:**
-- ⚠️ עקביות סופית
-- ⚠️ ניפוי שגיאות מורכב
-- ⚠️ אתגרי סידור הודעות
+- ⚠️ עקביות בהדרגה
+- ⚠️ איתור שגיאות מורכב
+- ⚠️ אתגרי סדר הודעות
 
 **דוגמאות שימוש:**
 - מערכות ניטור בזמן אמת (התראות, לוחות בקרה, יומנים)
-- התראות בערוצים מרובים (מייל, SMS, פוש, Slack)
-- צינורות עיבוד מידע (כמה צרכנים של נתונים זהים)
+- התראות רב-ערוציות (אימייל, SMS, פוש, Slack)
+- צינורות עיבוד נתונים (צרכנים מרובים על אותו מידע)
 
 ---
 
-### דפוס 5: תיאום מבוסס קונצנזוס (הצבעה/קוורום)
+### תבנית 5: תיאום מבוסס הסכמה (הצבעה/קוואורום)
 
-**מתי להשתמש**: נדרש הסכמה מרובה סוכנים לפני ההתקדמות.
+**מתי להשתמש**: יש צורך בהסכמה של כמה סוכנים לפני ההתקדמות.
 
 ```mermaid
 graph TB
-    Input[קלט משימה]
-    Agent1[סוכן 1: gpt-4.1]
-    Agent2[סוכן 2: Claude]
-    Agent3[סוכן 3: Gemini]
-    Voter[בוחר קונצנזוס]
-    Output[פלט מוסכם]
+    Input[Input Task]
+    Agent1[Agent 1: gpt-4.1]
+    Agent2[Agent 2: Claude]
+    Agent3[Agent 3: Gemini]
+    Voter[Consensus Voter]
+    Output[Agreed Output]
     
     Input --> Agent1
     Input --> Agent2
@@ -241,42 +246,43 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
+
 **יתרונות:**
 - ✅ דיוק גבוה יותר (דעות מרובות)
-- ✅ עמיד לתקלות (כישלונות מיעוט מתקבלים)
-- ✅ אבטחת איכות מובנית
+- ✅ עמיד לכשלים (כישלונות מיעוט מתקבלים)
+- ✅ איכות מובטחת מובנית
 
 **מגבלות:**
-- ❌ יקר (קריאות מרובות למודלים)
-- ❌ איטי (מחכה לכל הסוכנים)
-- ⚠️ דרוש פתרון סכסוכים
+- ❌ יקר (קולות ממודלים מרובים)
+- ❌ איטי יותר (ממתין לכל הסוכנים)
+- ⚠️ יש צורך בפתרון קונפליקטים
 
 **דוגמאות שימוש:**
-- פיקוח תוכן (סוקרים מרובים בודקים תוכן)
-- ביקורת קוד (מספר כלים לבדיקת קוד)
-- אבחון רפואי (מספר מודלים וודאנים מומחים)
+- הפחתת תוכן (מספר דגמים בודקים תוכן)
+- סקירת קוד (מספר מנתחים/לינטורים)
+- אבחון רפואי (מספר דגמים עם בדיקה מקצועית)
 
 ---
 
-## סקירת הארכיטקטורה
+## סקירת ארכיטקטורה
 
-### מערכת סוכנים מרובים מלאה על Azure
+### מערכת סוכנים מרובים שלמה ב-Azure
 
 ```mermaid
 graph TB
-    User[משתמש/לקוח API]
-    APIM[ניהול API ב-Azure]
-    Orchestrator[שירות אורקסטרציה<br/>אפליקציית קונטיינר]
-    ServiceBus[שרת השירות של Azure<br/>Event Hub]
+    User[User/API Client]
+    APIM[Azure API Management]
+    Orchestrator[Orchestrator Service<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Queues / Topics]
     
-    Agent1[סוכן מחקר<br/>אפליקציית קונטיינר]
-    Agent2[סוכן כותב<br/>אפליקציית קונטיינר]
-    Agent3[סוכן אנליסט<br/>אפליקציית קונטיינר]
-    Agent4[סוכן מבקר<br/>אפליקציית קונטיינר]
+    Agent1[Research Agent<br/>Container App]
+    Agent2[Writer Agent<br/>Container App]
+    Agent3[Analyst Agent<br/>Container App]
+    Agent4[Reviewer Agent<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>מצב משותף)]
-    Storage[אחסון Azure<br/>ממצאים]
-    AppInsights[Application Insights<br/>ניטור]
+    CosmosDB[(Cosmos DB<br/>Shared State)]
+    Storage[Azure Storage<br/>Artifacts]
+    AppInsights[Application Insights<br/>Monitoring]
     
     User --> APIM
     APIM --> Orchestrator
@@ -307,17 +313,20 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**רכיבים עיקריים:**
+
+**רכיבים מרכזיים:**
 
 | רכיב | מטרה | שירות Azure |
 |-----------|---------|---------------|
-| **API Gateway** | נקודת כניסה, הגבלת קצב, אימות | API Management |
-| **Orchestrator** | מתאם תהליכי סוכנים | Container Apps |
-| **Message Queue** | תקשורת אסינכרונית | Service Bus / Event Hubs |
-| **Agents** | סוכני AI מתמחים | Container Apps / Functions |
-| **State Store** | מצב משותף, מעקב משימות | Cosmos DB |
-| **Artifact Storage** | מסמכים, תוצאות, לוגים | Blob Storage |
-| **Monitoring** | מעקב מבוזר, יומנים | Application Insights |
+| **שער API** | נקודת כניסה, הגבלת קצב, אימות | API Management |
+| **מתזמן** | מתאם תזרימי עבודה של סוכנים | Container Apps |
+| **תור הודעות** | תקשורת אסינכרונית | Service Bus / Event Hubs |
+| **סוכנים** | עובדי AI מתמחים | Container Apps / Functions |
+| **מאגר מצבים** | מצב משותף, מעקב משימות | Cosmos DB |
+| **אחסון ארטיפקטים** | מסמכים, תוצאות, לוגים | Blob Storage |
+| **ניטור** | מעקב מבוזר, יומנים | Application Insights |
+
+תורי Service Bus/נושאים ו-Event Hubs הם שירותים שונים עם מודלים שונים למשלוח/צריכה; Event Hubs אינו תחליף ישיר לקוד עובד Service Bus כאן. מקביליות, הודעות מתמשכות והצבעות מודל לא מבטיחים עמידות לכשלים או דיוק גבוה יותר בעצמם.
 
 ---
 
@@ -326,39 +335,45 @@ graph TB
 ### כלים נדרשים
 
 ```bash
-# אמת את Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ צפוי: גרסה 1.0.0 או גבוהה יותר של azd
+# Command reference baseline: azd 1.37.2
 
-# אמת את Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ צפוי: azure-cli גרסה 2.50.0 או גבוהה יותר
+# ✅ Expected: azure-cli 2.50.0 or higher
 
-# אמת את Docker (לבדיקה מקומית)
+# Verify Docker (for local testing)
 docker --version
-# ✅ צפוי: גרסה 20.10 או גבוהה יותר של Docker
+# ✅ Expected: Docker version 20.10 or higher
 ```
 
 ### דרישות Azure
 
 - מנוי Azure פעיל
-- הרשאות ליצירה של:
+- הרשאות ליצירת:
   - Container Apps
   - מרחבי שמות Service Bus
   - חשבונות Cosmos DB
   - חשבונות אחסון
   - Application Insights
 
-### ידע נדרש
+### דרישות ידע מוקדמות
 
 עליך להשלים:
-- [Configuration Management](../chapter-03-configuration/configuration.md)
-- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
-- [Microservices Example](../../../../examples/microservices)
+- [ניהול קונפיגורציה](../chapter-03-configuration/configuration.md)
+- [אימות ואבטחה](../chapter-03-configuration/authsecurity.md)
+- [דוגמת מיקרו-שירותים](../../../../examples/microservices)
 
 ---
 
-## מדריך יישום
+## מדריך ביצוע
+
+> **קטעי עיצוב, לא מעבדה להפעלה:** עץ הפרויקט ותוויות `File:` מטה מתארים קבצים ליצירה בפרויקט שלך; מאגר זה אינו מכיל יישום `multi-agent-system` מלא. חוסרים כלולים בתבניות מפתח/פרמטר, סביבה/רישום Container Apps, Dockerfiles ונעילות תלות, הקמת מאגר/מכולה Cosmos, פריסות מודלים, הגדרות זהות/תפקידים, חוקים לסקיילינג, ועובדים/תורים מקבילים. אל תצפה ש-`azd init` יפיק את הקבצים האלה או ש-`azd up` יפרוס את הקטעים ללא שינוי. לנקודת התחלה ניתנת לביצוע, סיים את [יסודות סוכנים מרובים](../chapter-05-multi-agent/multi-agent-basics.md).
+
+**הנחות ריצה:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, ו-(לצורך ניטור) `azure-monitor-opentelemetry`; הנח את `shared` בנתיב הייבוא של Python בכל תמונת שירות. מכולת Cosmos `agent-state/tasks` חייבת כבר להתקיים עם מפתח חלוקה `/id`. חיבורים מבוססי-מפתחות מפשטים קטעים אלו, לא הנחייה לפרודקשן: העדף זהויות מנוהלות עם תפקידי נתונים מוגדרים ל-Service Bus/Cosmos/OpenAI. אל תחשוף מפתחות ביציאות או ביומנים.
+
+משלוח Service Bus הוא **לפחות פעם אחת**. שמור על איסטומפוטנטיות לכל משימה **ולכל שלב**, השתמש בתחרות אופטימית (ETags) לקריאה/שינוי/כתיבה של מצב, וחידש נעילות הודעות בעיבוד ארוך. מנהל מצב פשוט למטה הוא רק סדרתי ואינו מיישם הבטחות אלו מהפרודקשן.
 
 ### מבנה הפרויקט
 
@@ -392,13 +407,13 @@ multi-agent-system/
 
 ---
 
-## שיעור 1: דפוס תיאום רציף
+## שיעור 1: תבנית תיאום סדרתי
 
 ### יישום: צינור יצירת תוכן
 
-נבנה צינור רציף: מחקר → כתיבה → עריכה → פרסום
+נבנה צינור סדרתי: מחקר → כתיבה → עריכה. פרסום מחוץ לדוגמה זו.
 
-### 1. קונפיגורציית AZD
+### 1. הגדרת AZD
 
 **קובץ: `azure.yaml`**
 
@@ -483,7 +498,8 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 }
 
 output namespace string = serviceBusNamespace.name
-output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+// Do not output RootManageSharedAccessKey. Resolve scoped credentials
+// securely or use managed identity in the application and scale rules.
 ```
 
 ### 3. מנהל מצב משותף
@@ -492,7 +508,7 @@ output connectionString string = listKeys('${serviceBusNamespace.id}/Authorizati
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 class StateManager:
@@ -513,7 +529,7 @@ class StateManager:
             'type': task_type,
             'status': 'pending',
             'input': input_data,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'steps': []
         }
         self.container.create_item(task)
@@ -525,7 +541,7 @@ class StateManager:
         
         task['steps'].append({
             'name': step_name,
-            'completed_at': datetime.utcnow().isoformat(),
+            'completed_at': datetime.now(timezone.utc).isoformat(),
             'result': result
         })
         
@@ -537,7 +553,7 @@ class StateManager:
         task = self.container.read_item(task_id, partition_key=task_id)
         task['status'] = 'completed'
         task['result'] = final_result
-        task['completed_at'] = datetime.utcnow().isoformat()
+        task['completed_at'] = datetime.now(timezone.utc).isoformat()
         self.container.replace_item(task_id, task)
         return task
     
@@ -546,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. שירות תזמור
+### 4. שירות מתזמן
 
 **קובץ: `src/orchestrator/app.py`**
 
@@ -561,7 +577,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# חיבור ל-Service Bus
+# Service Bus connection
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -572,15 +588,15 @@ def health():
 @app.route('/create-content', methods=['POST'])
 def create_content():
     """
-    Sequential workflow: Research → Write → Edit → Publish
+    Sequential workflow: Research → Write → Edit (returns a draft; no publishing)
     """
-    data = request.json
+    data = request.get_json(silent=True) or {}
     topic = data.get('topic')
     
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # יצירת משימה באחסון המצב
+    # Create task in state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -588,13 +604,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # שלח הודעה לסוכן המחקר (השלב הראשון)
+    # Send message to research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # לאן לשלוח את התוצאות
+            'next_queue': 'writer-tasks'  # Where to send results
         }),
         content_type='application/json'
     )
@@ -606,7 +622,7 @@ def create_content():
         'task_id': task_id,
         'status': 'started',
         'workflow': 'sequential',
-        'steps': ['research', 'write', 'edit', 'publish'],
+        'steps': ['research', 'write', 'edit'],
         'message': 'Content creation pipeline initiated'
     }), 202
 
@@ -635,7 +651,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# אתחל לקוחות
+# Initialize clients
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -643,7 +659,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -655,9 +671,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # קריאת דגמי Foundry של מיקרוסופט למחקר
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -667,14 +683,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # עדכן מצב
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # שלח לסוכן הבא (כותב)
+    # Send to next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -713,7 +729,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. סוכן כתיבה
+### 6. סוכן כותב
 
 **קובץ: `src/agents/writer/app.py`**
 
@@ -731,7 +747,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -744,9 +760,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # לקרוא למודלים של Microsoft Foundry לכתיבת מאמר
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -756,14 +772,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # עדכן מצב
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # שלח לעורך
+    # Send to editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -801,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. סוכן עריכה
+### 7. סוכן עורך
 
 **קובץ: `src/agents/editor/app.py`**
 
@@ -819,7 +835,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -831,9 +847,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # קריאה למודלים של Microsoft Foundry לעריכה
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -843,7 +859,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # סמן את המשימה כסיימה
+    # Mark task as complete
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -877,49 +893,50 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. פריסה ובדיקה
+### 8. פריסה ובדיקות
+
+פקודות אלה חלות **רק לאחר יישום קובצי הפרויקט החסרים**. אתחול סוכן Foundry אינטראקטיבי הוא זרימת עבודה נפרדת; הוא אינו מייצר את עיצוב Service Bus זה.
 
 ```bash
-# אפשרות א': פריסה מבוססת תבנית
-azd init
+# In your completed custom project
 azd up
 
-# אפשרות ב': פריסת מפתח סוכן (דורש הרחבה)
+# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> ראה [פקודות AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) לכל האפשרויות והדגלים של `azd ai`.
+> ראה [פקודות AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) לכל הדגלים והאפשרויות של `azd ai`.
 
 ```bash
-# קבל כתובת URL של המוביל
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# צור תוכן
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ פלט מצופה:**
+**✅ פלט צפוי:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "status": "started",
   "workflow": "sequential",
-  "steps": ["research", "write", "edit", "publish"],
+  "steps": ["research", "write", "edit"],
   "message": "Content creation pipeline initiated"
 }
 ```
 
-**בדיקת התקדמות המשימה:**
+**בדוק התקדמות משימה:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ פלט מצופה (הושלם):**
+**✅ פלט צפוי (הושלם):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -947,11 +964,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## שיעור 2: דפוס תיאום מקבילי
+## שיעור 2: תבנית תיאום מקבילי
 
-### יישום: אגרגטור מחקר מרובה מקורות
+### יישום: אגגרגטור מחקר מרובה מקורות
 
-נבנה מערכת מקבילית שמאגדת מידע ממספר מקורות במקביל.
+נבנה מערכת מקבילה שאוספת מידע ממספר מקורות בו-זמנית.
 
 ### מתזמן מקבילי
 
@@ -990,7 +1007,7 @@ def research_parallel():
         }
     )
     
-    # שידור לכל: שלח לכל הסוכנים בו זמנית
+    # Fan-out: publish sequentially; workers may process concurrently.
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1025,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### לוגיקת אגרגציה
+### לוגיקת אגירה
 
 **קובץ: `src/agents/aggregator/app.py`**
 
@@ -1041,9 +1058,10 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# לעקוב אחר תוצאות לפי משימה
-task_results = defaultdict(list)
-expected_agents = 4  # אינטרנט, אקדמי, חדשות, חברתי
+# Single-process demo only: not durable or shared across replicas.
+# Production: use durable unique (task_id, agent_type) result records.
+task_results = defaultdict(dict)
+expected_agents = 4  # web, academic, news, social
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1051,29 +1069,29 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # לאחסן תוצאה
-    task_results[task_id].append({
+    # Store result
+    task_results[task_id][agent_type] = {
         'agent': agent_type,
         'data': result
-    })
+    }
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # לבדוק אם כל הסוכנים סיימו (איסוף)
+    # Check if all agents completed (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # לשלב תוצאות
+        # Combine results
         aggregated = {
             'query': message_data['query'],
-            'sources': task_results[task_id],
-            'summary': generate_summary(task_results[task_id])
+            'sources': list(task_results[task_id].values()),
+            'summary': generate_summary(list(task_results[task_id].values()))
         }
         
-        # לסמן כהושלם
+        # Mark complete
         state_manager.complete_task(task_id, aggregated)
         
-        # לנקות
+        # Clean up
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1105,129 +1123,94 @@ if __name__ == '__main__':
     main()
 ```
 
-**יתרונות הדפוס המקבילי:**
-- ⚡ **4 פעמים מהיר יותר** (סוכנים רצים במקביל)
-- 🔄 **עמיד לתקלות** (תוצאות חלקיות מתקבלות)
-- 📈 **ניתן להרחבה** (הוספת סוכנים בקלות)
+**יתרונות תבנית מקבילית:**
+- ⚡ **פוטנציאלית השהיה נמוכה יותר** (מוגבלת לעובד האיטי ביותר בתוספת עלות תיאום)
+- 🔄 **מתמיכה בתוצאות חלקיות** עם מועדים ונהלי כשל מפורשים (לא מיושם באגגרגטור בסיסי)
+- 📈 **מתרחבת** (הוסף בקלות סוכנים נוספים)
 
 ---
 
 ## תרגילים מעשיים
 
-### תרגיל 1: הוספת טיפול בזמן מתנה ⭐⭐ (בינוני)
+### תרגיל 1: הוסף טיפול בזמן קצוב ⭐⭐ (בינוני)
 
-**מטרה**: ליישם לוגיקת timeout כך שהאגרגטור לא יחכה לנצח לסוכנים איטיים.
+**מטרה**: ליישם לוגיקת זמן קצוב כדי שאגגרגטור לא יחכה לנצח לסוכנים איטיים.
+
+**נקודת התחלה:** הרץ סימולציית מועד סיום מקומית זו לפני שילוב עם עובד תור. בדיקת זמן קצוב שמופעלת רק כשהודעה חדשה מגיעה לעולם לא תופעל אם העובד החסר לא שולח דבר.
 
 **שלבים**:
 
-1. **הוספת מעקב Timeout לאגרגטור:**
+1. **הוסף מעקב זמן קצוב לאגגרגטור:**
 
 ```python
-from datetime import datetime, timedelta
+import asyncio
 
-task_timeouts = {}  # מזהה_משימה -> זמן_פג_תוקף
+async def simulated_agent(name, delay):
+    await asyncio.sleep(delay)
+    return {'agent': name, 'result': 'done'}
 
-def process_result(message_data):
-    task_id = message_data['task_id']
-    
-    # הגדר גבול זמן על התוצאה הראשונה
-    if task_id not in task_timeouts:
-        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
-    
-    task_results[task_id].append({
-        'agent': message_data['agent_type'],
-        'data': message_data['result']
-    })
-    
-    # בדוק אם הושלם או שפג הזמן
-    if len(task_results[task_id]) == expected_agents or \
-       datetime.utcnow() > task_timeouts[task_id]:
-        
-        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
-        
-        aggregated = {
-            'query': message_data['query'],
-            'sources': task_results[task_id],
-            'completed_agents': len(task_results[task_id]),
-            'timed_out': len(task_results[task_id]) < expected_agents
-        }
-        
-        state_manager.complete_task(task_id, aggregated)
-        
-        # ניקוי
-        del task_results[task_id]
-        del task_timeouts[task_id]
+async def main():
+    tasks = [asyncio.create_task(simulated_agent(name, delay))
+             for name, delay in [('web', 0.1), ('academic', 0.2),
+                                 ('news', 0.3), ('social', 3)]]
+    done, pending = await asyncio.wait(tasks, timeout=1)
+    results = [task.result() for task in done]
+    for task in pending:
+        task.cancel()
+    await asyncio.gather(*pending, return_exceptions=True)
+    print({'completed_agents': len(results), 'timed_out': bool(pending)})
+    assert len(results) == 3 and pending
+
+asyncio.run(main())
 ```
 
-2. **בדיקה עם עיכובים מלאכותיים:**
+2. **פלט צפוי:**
 
-```python
-# בסוכן אחד, הוסף השהייה כדי לדמות עיבוד איטי
-import time
-time.sleep(35)  # חרג מזמן ההמתנה של 30 שניות
+```text
+{'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **פריסה ואימות:**
+3. **שילוב במערכת התורים (משימת עיצוב):** שמור את מועד התפוצה והסוכנים הצפויים ביצירת המשימה, הפעל סריקת מועדים תקופתית שאינה תלויה בתוצאות נכנסות, סיים אטומטית תוצאות חלקיות, ותתעלם מהודעות מאוחרות/כפולות למשימות סגורות. זמן קצוב מקומי לא מבטל עובדים מרוחקים.
+
+רק עבור הפרויקט הממומש שלך:
 
 ```bash
 azd deploy aggregator
 
-# הגש משימה
+# Submit task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# בדוק תוצאות לאחר 30 שניות
+# Check results after 30 seconds
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ קריטריוני הצלחה:**
-- ✅ המשימה מסתיימת לאחר 30 שניות גם אם הסוכנים לא הושלמו
-- ✅ תגובה מציינת תוצאות חלקיות (`"timed_out": true`)
-- ✅ תוצאות זמינות מוחזרות (3 מתוך 4 סוכנים)
+- ✅ המבחן המקומי מחזיר תוצאה לאחר זמן הקצוב שלו גם אם סוכן לא הושלם
+- ✅ התגובה מציינת תוצאות חלקיות (`"timed_out": true`)
+- ✅ התוצאות הזמינות מוחזרות (3 מתוך 4 סוכנים)
 
 **זמן**: 20-25 דקות
 
 ---
 
-### תרגיל 2: יישום לוגיקת Retry ⭐⭐⭐ (מתקדם)
+### תרגיל 2: יישום לוגיקת ניסיון חוזר ⭐⭐⭐ (מתקדם)
 
-**מטרה**: לנסות שוב משימות סוכן שנכשלו אוטומטית לפני ויתור.
+**מטרה**: לנסות מחדש אוטומטית משימות סוכנים שנכשלו לפני וויתור.
 
 **שלבים**:
 
-1. **הוספת מעקב Retry למתזמר:**
+1. **השתמש בספירת משלוחים של Service Bus במקום ספירות ניסיון חוזר מותאמות אישית:**
 
 ```python
-from dataclasses import dataclass
-from typing import Dict
-
-@dataclass
-class RetryConfig:
-    max_retries: int = 3
-    backoff_seconds: int = 5
-
-retry_counts: Dict[str, int] = {}  # מזהה_הודעה -> ספירת_ניסיונות
-
-def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
-    """Send message with retry metadata"""
-    message_id = message_data.get('message_id', str(uuid.uuid4()))
-    message_data['message_id'] = message_id
-    message_data['retry_count'] = retry_counts.get(message_id, 0)
-    message_data['max_retries'] = retry_config.max_retries
-    
-    sender = servicebus_client.get_queue_sender(queue_name)
-    message = ServiceBusMessage(
-        body=json.dumps(message_data),
-        content_type='application/json',
-        message_id=message_id
-    )
-    
-    with sender:
-        sender.send_messages(message)
+import json
+import time
+# Integration fragment: use a live peek-lock ServiceBusReceiver.
+# Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **הוספת מטפל Retry לסוכנים:**
+2. **הוסף מטפל ניסיונות חוזרים לסוכנים:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,31 +1218,21 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # עבד את ההודעה
+        # Process the message
         process_func(message_data)
         
-        # הצלחה - הושלם
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
-        message_id = message.message_id
-        retry_count = message_data.get('retry_count', 0)
-        max_retries = message_data.get('max_retries', 3)
-        
-        if retry_count < max_retries:
-            # נסה שוב: ביטול והחזרה לתור עם ספירה מוגדלת
-            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
-            
-            message_data['retry_count'] = retry_count + 1
-            
-            # שלח חזרה לאותו תור עם עיכוב
-            time.sleep(5 * (retry_count + 1))  # הפסקה מוערמת אקספוננציאלית
-            send_with_retry(queue_name, message_data, RetryConfig())
-            
-            receiver.complete_message(message)  # הסר את המקור
+        if message.delivery_count < 4:
+            # Bounded exponential delay: 5s, 10s, 20s.
+            # Renew the lock if processing + waiting can exceed its duration.
+            time.sleep(5 * 2 ** (message.delivery_count - 1))
+            receiver.abandon_message(message)
         else:
-            # מספר ניסיונות מקסימלי עבר - העבר לתור הודעות מתות
-            print(f"❌ Max retries exceeded for message {message_id}")
+            # Max retries exceeded - move to dead letter queue
+            print(f"❌ Max attempts exceeded for message {message.message_id}")
             receiver.dead_letter_message(
                 message,
                 reason="MaxRetriesExceeded",
@@ -1267,13 +1240,13 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **ניטור תיבת מכתבים מדויקת (dead letter queue):**
+3. **נטר את תור המכתבים המתים:**
 
 ```python
 def monitor_dead_letters():
     """Check dead letter queue for failed messages"""
     receiver = servicebus_client.get_queue_receiver(
-        'research-queue',
+        'research-tasks',
         sub_queue='deadletter'
     )
     
@@ -1286,31 +1259,31 @@ def monitor_dead_letters():
 ```
 
 **✅ קריטריוני הצלחה:**
-- ✅ משימות נכשלות מנסות שוב אוטומטית (עד 3 פעמים)
-- ✅ רטרי עם חזרה מעריכית (5ש, 10ש, 15ש)
-- ✅ לאחר מקסימום נסיונות, הודעות נשלחות לתיבת המכתבים המתה
-- ✅ תיבת הדד לטר ניתן לניטור ולשיחזור
+- ✅ משימות שנכשלו מנסות שוב אוטומטית (עד 3 פעמים)
+- ✅ השהייה מעריכית בין הנסיונות (5 שניות, 10 שניות, 20 שניות), עם חידוש נעילת הודעה במידת הצורך
+- ✅ לאחר כישלונות מרביים, הודעות מגיעות לתור מכתבים מתים
+- ✅ הודעות בתור מכתבים מתים ניתנות לבדיקה; נדרשת זרימת עבודה נפרדת ומזהמת לשחזור
 
 **זמן**: 30-40 דקות
 
 ---
 
-### תרגיל 3: יישום Circuit Breaker ⭐⭐⭐ (מתקדם)
+### תרגיל 3: יישום מפסק מעגל ⭐⭐⭐ (מתקדם)
 
-**מטרה**: למנוע כשל מתגלגל על ידי עצירת בקשות לסוכנים שמכשלות.
+**מטרה**: למנוע כשלים כרוניים על ידי עצירת בקשות לסוכנים שנכשלים.
 
 **שלבים**:
 
-1. **יצירת מחלקת Circuit Breaker:**
+1. **צור מחלקת מפסק מעגל:**
 
 ```python
 from enum import Enum
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # פעולה רגילה
-    OPEN = "open"          # נכשל, דחות בקשות
-    HALF_OPEN = "half_open"  # בודק אם התאושש
+    CLOSED = "closed"      # Normal operation
+    OPEN = "open"          # Failing, reject requests
+    HALF_OPEN = "half_open"  # Testing if recovered
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1323,8 +1296,8 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # בדוק אם הזמן פג
-            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+            # Check if timeout expired
+            if datetime.now(timezone.utc) - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
             else:
@@ -1333,7 +1306,8 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # הצלחה
+            # Success
+            self.failure_count = 0 # Count consecutive failures only
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1343,19 +1317,19 @@ class CircuitBreaker:
             
         except Exception as e:
             self.failure_count += 1
-            self.last_failure_time = datetime.utcnow()
+            self.last_failure_time = datetime.now(timezone.utc)
             
             if self.failure_count >= self.failure_threshold:
                 self.state = CircuitState.OPEN
                 print(f"🔴 Circuit breaker: OPEN (too many failures)")
             
-            raise e
+            raise
 ```
 
-2. **יישום על קריאות לסוכן:**
+2. **החל על קריאות לסוכנים:**
 
 ```python
-# באורקסטרטור
+# In orchestrator
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,89 +1345,89 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # המשך עם סוכנים אחרים
+        # Continue with other agents
 ```
 
-3. **בדיקת Circuit Breaker:**
+מעגל זה מגן על **פעולת השליחה**, לא על השלמתה על ידי העובד מרחוק: הכנסת הודעה לתור בהצלחה אינה אומרת דבר לגבי האם הסוכן פעיל. `send_message` היא פונקציית השולח של היישום שלך. עבור מעגלי ביצוע, הזן תקלות/איחורים שנצפו במשימה אל מתאם עמיד. מחלקה בזיכרון זו היא הדגמה חד-תהליכית, לא מתג מעגלים מבוזר.
 
-```bash
-# להדמות כישלונות חוזרים (לסגור סוכן אחד)
-az containerapp stop --name web-research-agent --resource-group rg-agents
+3. **בדוק את מתג המעגל מקומית:**
 
-# לשלוח בקשות מרובות
-for i in {1..10}; do
-  curl -X POST $ORCHESTRATOR_URL/research-parallel \
-    -H "Content-Type: application/json" \
-    -d '{"query": "test query '$i'"}'
-  sleep 2
-done
-
-# לבדוק יומנים - יש לראות שהמעגל נפתח לאחר 5 כישלונות
-# השתמש ב-Azure CLI עבור יומני Container App:
-az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```python
+# Run after the class definition; no Azure changes required.
+circuit = CircuitBreaker(failure_threshold=5, timeout_seconds=0)
+def fail():
+    raise RuntimeError("simulated failure")
+for _ in range(5):
+    try:
+        circuit.call(fail)
+    except RuntimeError:
+        pass
+assert circuit.state == CircuitState.OPEN
+assert circuit.call(lambda: "recovered") == "recovered"
+assert circuit.state == CircuitState.CLOSED
+print("Circuit breaker recovery verified")
 ```
 
 **✅ קריטריוני הצלחה:**
-- ✅ אחרי 5 כישלונות, המעגל נפתח (דוחה בקשות)
-- ✅ אחרי 60 שניות, המעגל עובר למחצית פתוח (מבחן החלמה)
+- ✅ לאחר 5 כשלונות, המעגל נפתח (דוחה בקשות)
+- ✅ לאחר 60 שניות, המעגל חצי פתוח (בודק התאוששות)
 - ✅ סוכנים אחרים ממשיכים לעבוד כרגיל
-- ✅ המעגל נסגר אוטומטית כשהסוכן מתאושש
+- ✅ המעגל נסגר אוטומטית כשסוכן מתאושש
 
 **זמן**: 40-50 דקות
 
 ---
 
-## ניטור ותיקון תקלות
+## ניטור ודיוג
 
-### מעקב מבוזר עם Application Insights
+### עקיבה מבוזרת עם Application Insights
 
 **קובץ: `src/shared/tracing.py`**
 
 ```python
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.samplers import AlwaysOnSampler
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
-# הגדרת מעקב
-config_integration.trace_integrations(['requests', 'logging'])
-
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# צור עוקב
-tracer = Tracer(
-    exporter=AzureExporter(connection_string=connection_string),
-    sampler=AlwaysOnSampler()
-)
+# Configure once per process. Message send/receive trace-context propagation
+# and agent attributes on exceptions need explicit instrumentation.
+if connection_string:
+    configure_azure_monitor(connection_string=connection_string, logger_name=__name__)
+tracer = trace.get_tracer(__name__)
 
-# הגדר יומן רישום
+# Configure logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
 
-def trace_agent_call(agent_name, task_id, operation):
+def trace_agent_call(agent_name, task_id, operation_name, operation):
     """Trace agent operations"""
-    with tracer.span(name=f'{agent_name}.{operation}') as span:
-        span.add_attribute('agent', agent_name)
-        span.add_attribute('task_id', task_id)
-        span.add_attribute('operation', operation)
+    with tracer.start_as_current_span(f'agent.{agent_name}.{operation_name}', kind=SpanKind.CLIENT) as span:
+        span.set_attribute('agent', agent_name)
+        span.set_attribute('task_id', task_id)
+        span.set_attribute('operation', operation_name)
         
         try:
             result = operation()
-            span.add_attribute('status', 'success')
+            span.set_attribute('status', 'success')
+            logger.info('Agent operation completed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             return result
         except Exception as e:
-            span.add_attribute('status', 'error')
-            span.add_attribute('error', str(e))
+            span.set_attribute('status', 'error')
+            logger.exception('Agent operation failed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             raise
 ```
 
 ### שאילתות ב-Application Insights
 
-**מעקב אחר תהליכים מרובי סוכנים:**
+**עקוב אחרי זרימות עבודה מרובות סוכנים:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1477,7 +1451,7 @@ dependencies
 | order by avg_duration desc
 ```
 
-**ניתוח תקלות:**
+**ניתוח כשלונות:**
 
 ```kusto
 // Find which agents fail most
@@ -1494,22 +1468,24 @@ exceptions
 
 ## ניתוח עלויות
 
-### עלויות מערכת סוכנים מרובים (הערכות חודשיות)
+### עלויות מערכת מרובת סוכנים (הערכות חודשיות)
 
-| רכיב | קונפיגורציה | עלות |
+נתוני תכנון מדגימים בלבד, לא הצעות מחיר: הסכום למטה הוא **240-565$ לחודש**. אמת שיעורים אזוריים נוכחיים, שעות רפליקות פעילות/בטל, תמהיל אסימונים לקלט/פלט, אחסון וטלמטריה. Serverless אין לו מינימום תפוקה מושכר אך עדיין מחויב לבקשות ואחסון.
+
+| רכיב | תצורה | עלות |
 |-----------|--------------|------|
-| **מתזמר** | אפליקציית מכולות אחת (1 vCPU, 2GB) | 30-50$ |
-| **4 סוכנים** | 4 אפליקציות מכולות (0.5 vCPU, 1GB כל אחת) | 60-120$ |
-| **Service Bus** | Tier סטנדרטי, 10M הודעות | 10-20$ |
+| **מתאם מרכזי** | 1 אפליקציית מכולה (1 vCPU, 2GB) | 30-50$ |
+| **4 סוכנים** | 4 אפליקציות מכולה (0.5 vCPU, 1GB כל אחת) | 60-120$ |
+| **Service Bus** | רמת סטנדרט, 10M הודעות | 10-20$ |
 | **Cosmos DB** | Serverless, 5GB אחסון, 1M RUs | 25-50$ |
 | **Blob Storage** | 10GB אחסון, 100K פעולות | 5-10$ |
 | **Application Insights** | 5GB קליטה | 10-15$ |
-| **Microsoft Foundry Models** | gpt-4.1, 10M טוקנים | 100-300$ |
+| **דגמים של Microsoft Foundry** | gpt-4.1, 10M אסימונים | 100-300$ |
 | **סה"כ** | | **240-565$ לחודש** |
 
-### אסטרטגיות לחיסכון בעלויות
+### אסטרטגיות אופטימיזציה בעלויות
 
-1. **השתמש בשרתלס כשאפשר:**
+1. **השתמש ב-serverless כאשר אפשרי:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1518,23 +1494,23 @@ exceptions
    }
    ```
 
-2. **כך שהסוכנים יכבים כשהם אינם בשימוש:**
+2. **הקטן סוכנים לאפס כאשר לא פעילים:**
    ```bicep
    scale: {
-     minReplicas: 0  // Scale to zero when no messages
+     minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
      maxReplicas: 10
    }
    ```
 
-3. **השתמש באצווה עבור Service Bus:**
+3. **השתמש באצווה ל-Service Bus:**
    ```python
-   # שלח הודעות באצוות (זול יותר)
+   # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **מטמון תוצאות נפוצות:**
+4. **מטמון תוצאות בשימוש תכוף:**
    ```python
-   # השתמש ב-Azure Cache עבור Redis
+   # Use Azure Cache for Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
@@ -1543,72 +1519,69 @@ exceptions
 
 ## שיטות עבודה מומלצות
 
-### ✅ תעשה:
+### ✅ יש לעשות:
 
-1. **השתמש בפעולות אידמפטיות**
+1. **השתמש בפעולות אידמפוטנטיות**
    ```python
-   # הסוכן יכול לעבד את אותו ההודעה בבטחה מספר פעמים
+   # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
-       if state_manager.task_exists(task_id):
-           print(f"Task {task_id} already processed, skipping")
-           return
-       # מעבד משימה...
+       raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **יישם רישום מפורט**
+2. **ממש רישום מקיף**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **השתמש ב-IDs לקורלציה**
+3. **השתמש במזהי קורלציה**
    ```python
-   # להעביר את task_id דרך כל זרימת העבודה
+   # Pass task_id through entire workflow
    message_data = {
-       'task_id': task_id,  # מזהה קורלציה
+       'task_id': task_id,  # Correlation ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **הגדר TTL להודעות (זמן חיים)**
+4. **קבע TTL (זמן חיים) להודעה**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **נטר תיבות מכתבים מתות**
+5. **עקוב אחרי תורי הודעות מתות**
    ```python
-   # ניטור רגיל של הודעות נכשלות
+   # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
-### ❌ אל תעשה:
+### ❌ אין לעשות:
 
 1. **אל תיצור תלות מעגלית**
    ```python
-   # ❌ רע: סוכן A → סוכן B → סוכן A (לולאה אינסופית)
-   # ✅ טוב: הגדר גרף מכוון מחזורי ברור (DAG)
+   # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
+   # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **אל תחסום את תהליכי הסוכן**
+2. **אל תחסום תהליכי סוכן**
    ```python
-   # ❌ רע: המתנה סינכרונית
+   # ❌ BAD: Synchronous wait
    while not task_complete:
        time.sleep(1)
    
-   # ✅ טוב: השתמש בקולבקים בתור הודעות
+   # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **אל תתעלם מכשלים חלקיים**
+3. **אל תתעלם מכשלונות חלקיים**
    ```python
-   # ❌ רע: להפסיק את כל תהליך העבודה אם סוכן אחד נכשל
-   # ✅ טוב: להחזיר תוצאות חלקיות עם סימוני שגיאה
+   # ❌ BAD: Fail entire workflow if one agent fails
+   # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **אל תשתמשו בניסיונות חוזרים אינסופיים**
+4. **אל תשתמש בניסיונות חוזרים אינסופיים**
    ```python
-   # ❌ רע: נסה שוב לנצח
-   # ✅ טוב: max_retries = 3, ואז מכתב מת
+   # ❌ BAD: retry forever
+   # ✅ GOOD: max_retries = 3, then dead letter
    ```
 
 ---
@@ -1620,33 +1593,36 @@ exceptions
 **תסמינים:**
 - הודעות מצטברות בתור
 - סוכנים לא מעבדים
-- מצב המשימה תקוע ב"בהמתנה"
+- סטטוס משימה תקוע ב"בהמתנה"
 
-**אבחון:**
+**אבחנה:**
 ```bash
-# בדוק עומק תור
+# Check queue depth
 az servicebus queue show \
+  --resource-group "$RG_NAME" \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# בדוק יומנים של סוכן באמצעות Azure CLI
+# Check agent logs using Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **פתרונות:**
 
-1. **הגדל את מספר השכפולים של הסוכן:**
+1. **הגדל את מספר רפליקות הסוכן:**
    ```bash
    az containerapp update \
+     --resource-group "$RG_NAME" \
      --name research-agent \
      --min-replicas 3 \
      --max-replicas 10
    ```
 
-2. **בדוק את תור המכתבים המתים:**
+2. **בדוק את תור הודעות המתות:**
    ```bash
    az servicebus queue show \
+     --resource-group "$RG_NAME" \
      --namespace-name mybus \
      --name research-tasks \
      --query "countDetails.deadLetterMessageCount"
@@ -1654,32 +1630,32 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### בעיה: פקודת משימה זמן עולה/אינה מסתיימת לעולם
+### בעיה: משימה נתקעת/אינה מסתיימת
 
 **תסמינים:**
-- מצב המשימה נשאר "בתהליך"
+- סטטוס משימה נשאר "בתהליך"
 - חלק מהסוכנים משלימים, אחרים לא
 - אין הודעות שגיאה
 
-**אבחון:**
+**אבחנה:**
 ```bash
-# בדוק את מצב המשימה
+# Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# בדוק את Application Insights
-# הפעל שאילתה: traces | איפה customDimensions.task_id == "..."
+# Check Application Insights
+# Run query: traces | where customDimensions.task_id == "..."
 ```
 
 **פתרונות:**
 
-1. **ממש טיימאוט באגרגטור (תרגיל 1)**
+1. **ממש טיימאוט במאגגרגטור (תרגיל 1)**
 
 2. **בדוק תקלות סוכן באמצעות Azure Monitor:**
    ```bash
-   # הצג יומנים דרך azd monitor
+   # View logs via azd monitor
    azd monitor --logs
    
-   # או השתמש ב-Azure CLI כדי לבדוק יומני אפליקציית מכולה ספציפית
+   # Or use Azure CLI to check specific container app logs
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
@@ -1698,44 +1674,44 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [דפוסי עיצוב ריבוי סוכנים](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### הצעדים הבאים בקורס זה
-- ← קודם: [תכנון קיבולת](capacity-planning.md)
+### השלבים הבאים בקורס זה
+- ← הקודם: [תכנון קיבולת](capacity-planning.md)
 - → הבא: [בחירת SKU](sku-selection.md)
-- 🏠 [בית הקורס](../../README.md)
+- 🏠 [דף הבית של הקורס](../../README.md)
 
 ### דוגמאות קשורות
 - [דוגמת מיקרו-שירותים](../../../../examples/microservices) - דפוסי תקשורת שירותים
-- [דוגמת דגמי Microsoft Foundry](../../../../examples/azure-openai-chat) - אינטגרציית AI
+- [דוגמת דגמי Microsoft Foundry](../../../../examples/azure-openai-chat) - אינטגרציית בינה מלאכותית
 
 ---
 
 ## סיכום
 
-**למדתם:**
+**למדת:**
 - ✅ חמישה דפוסי תיאום (רציף, מקביל, היררכי, מונחה אירועים, קונצנזוס)
-- ✅ ארכיטקטורת ריבוי סוכנים על Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ ארכיטקטורת מרובי סוכנים ב-Azure (Service Bus, Cosmos DB, Container Apps)
 - ✅ ניהול מצב בין סוכנים מבוזרים
-- ✅ טיפול בטיימאוטים, ניסיונות חוזרים ומפסקי מעגל
-- ✅ ניטור ופתרון תקלות במערכות מבוזרות
-- ✅ אסטרטגיות אופטימיזציה של עלויות
+- ✅ טיפול בטיימאוטים, ניסיונות חוזרים, ומתאמי מעגל
+- ✅ ניטור ודיוג מערכות מבוזרות
+- ✅ אסטרטגיות אופטימיזציה בעלויות
 
-**נקודות מרכזיות:**
-1. **בחר את הדפוס הנכון** - רציף לעבודה מסודרת, מקביל למהירות, מונחה אירועים לגמישות
-2. **נהל את המצב בזהירות** - השתמש ב-Cosmos DB או דומה למצב משותף
-3. **טפל בכשלים בעדינות** - טיימאוטים, ניסיונות חוזרים, מפסקים, תורי מכתבים מתים
-4. **ניטור شامل** - מעקב מבוזר חיוני לפתרון תקלות
-5. **ייעל עלויות** - סקייל עד אפס, השתמש בשרתלס, מימוש מטמון
+**עיקרי הדברים:**
+1. **בחר את הדפוס המתאים** - רציף לזרימות עבודה ממוסדרות, מקביל למהירות, מונחה אירועים לגמישות
+2. **נהל מצב בזהירות** - השתמש ב-Cosmos DB או דומה למצב משותף
+3. **טפל בכשלונות בחן** - טיימאוטים, ניסיונות חוזרים, מתאמי מעגל, תורים של הודעות מתות
+4. **נטר הכל** - עקיבה מבוזרת חיונית לדיוג
+5. **אופטימיזציה של עלויות** - קנה למספר אפס, השתמש ב-serverless, מימש מטמון
 
-**הצעדים הבאים:**
-1. השלם את התרגילים המעשיים
-2. בנה מערכת ריבוי סוכנים למקרה השימוש שלך
-3. למד את [בחירת SKU](sku-selection.md) לשיפור ביצועים ועלות
+**השלבים הבאים:**
+1. סיים את התרגילים המעשיים
+2. בנה מערכת מרובת סוכנים למקרה השימוש שלך
+3. למד את [בחירת SKU](sku-selection.md) כדי למקסם ביצועים ועלות
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לשים לב כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור הסמכות. עבור מידע קריטי, מומלץ תרגום מקצועי על ידי אדם. אנו לא נושאים באחריות לכל אי-הבנה או פרשנות מוטעית הנובעות מהשימוש בתרגום זה.
+**כתב ויתור**:
+מסמך זה תורגם באמצעות שירות תרגום אוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להחשיב את המסמך המקורי בשפתו הטבעית כמקור הסמכות. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי מתרגם אדם. אנו לא אחראים לכל אי-הבנה או פירוש שגוי הנובע מהשימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

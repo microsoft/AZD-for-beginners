@@ -1,40 +1,40 @@
-# פרק 1: יסודות והתחלה מהירה
+# פרק 1: יסוד והתחלה מהירה
 
-**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך זמן**: 30-45 דקות | **⭐ מורכבות**: מתחיל
+**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך**: 75-120 דקות כולל הפריסה הראשונה; תרגילים נוספים אורכים יותר | **⭐ רמת קושי**: מתחילים
 
 ---
 
 ## סקירה כללית
 
-פרק זה מציג את יסודות Azure Developer CLI (azd). תלמדו מושגי יסוד, תתקינו את הכלים ותפרסמו את היישום הראשון שלכם ב-Azure.
+פרק זה מציג את יסודות Azure Developer CLI (azd). תלמדו את המושגים הבסיסיים, תתקינו את הכלים ותפריסו את היישום הראשון שלכם לענן Azure.
 
-> נבדק מול `azd 1.27.1` ביולי 2026.
+> יעד סקירת פקודות והגדרות: `azd 1.37.2` (נובמבר 2026). פריסת Azure חיה לא התבצעה במהלך הסקירה.
 
-## מטרות הלימוד
+## מטרות הלמידה
 
 בסיום פרק זה, תוכלו:
-- להבין מהו Azure Developer CLI וכיצד הוא שונה מ-Azure CLI
-- להתקין ולתצבר את AZD בפלטפורמה שלכם
+- להבין מהו Azure Developer CLI ואיך הוא שונה מ- Azure CLI
+- להתקין ולהגדיר את AZD בפלטפורמה שלכם
 - לפרוס את היישום הראשון שלכם ל-Azure באמצעות `azd up`
-- לנקות משאבים באמצעות `azd down`
+- לנקות משאבים עם `azd down`
 
 ---
 
 ## 📚 שיעורים
 
-| # | שיעור | תיאור | זמן |
+| מספר | שיעור | תיאור | זמן |
 |---|--------|-------------|------|
-| 1 | [יסודות AZD](azd-basics.md) | מושגי יסוד, מונחים, ומבנה פרויקט | 15 דק |
-| 2 | [התקנה והגדרה](installation.md) | מדריכים להתקנה ספציפית לפלטפורמה | 10 דק |
-| 3 | [הפרויקט הראשון שלך](first-project.md) | מעשי: פרוס אפליקציית ווב ל-Azure | 20 דק |
-| 4 | [הבא את האפליקציה שלך](bring-your-own-app.md) | הוספת azd לפרויקט קיים שיש לכם | 15 דק |
-| 5 | [מכולות פיתוח ו-Codespaces](dev-containers.md) | סביבות azd ניתנות לשחזור עם מכולות פיתוח | 15 דק |
+| 1 | [יסודות AZD](azd-basics.md) | מושגים בסיסיים, מונחים ומבנה הפרויקט | 15 דקות |
+| 2 | [התקנה והגדרה](installation.md) | מדריכים מותאמים לפלטפורמה | 10 דקות |
+| 3 | [הפרויקט הראשון שלך](first-project.md) | מעשי: פריסת אפליקציית ווב ל-Azure | 20 דקות |
+| 4 | [הבא את האפליקציה שלך](bring-your-own-app.md) | הוספת azd לפרויקט קיים שיש לך | 15 דקות |
+| 5 | [מכולות פיתוח וקודספייס](dev-containers.md) | סביבות azd לשחזור באמצעות מכולות פיתוח | 15 דקות |
 
 ---
 
-## ✅ התחל כאן: אימות ההתקנה שלך
+## ✅ התחילו כאן: אמתו את ההגדרה שלכם
 
-לפני שתתחיל, ודא שהמחשב המקומי שלך מוכן לתבנית פרק 1:
+לפני שתתחילו, ודאו שהמחשב המקומי שלכם מוכן לתבנית פרק 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@
 bash ./validate-setup.sh
 ```
 
-אם הסקריפט מדווח על כלים חסרים, תקן את זה תחילה ואז המשך בפרק.
+אם הסקריפט מדווח על כלים חסרים, תקנו אותם תחילה ואז המשיכו בפרק.
 
 ---
 
 ## 🚀 התחלה מהירה
 
 ```bash
-# בדוק התקנה
+# Check installation
 azd version
 
-# אמת עבור AZD
-# אופציונלי: התחבר באמצעות az אם אתה מתכנן להריץ פקודות Azure CLI ישירות
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# פרוס את האפליקציה הראשונה שלך
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# נקה את הכל בסיום
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,14 +74,14 @@ azd down --force --purge
 
 ## ✅ קריטריוני הצלחה
 
-לאחר השלמת פרק זה, תוכל:
+לאחר שתסיימו פרק זה, תוכלו:
 
 ```bash
-azd version              # מציג את הגרסה המותקנת
-azd init --template todo-nodejs-mongo  # מאתחל את הפרויקט
-azd up                   # מפרסם ל-Azure
-azd show                 # מציג את כתובת ה-URL של האפליקציה הפועלת
-azd down --force --purge # מנקה משאבים
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -88,16 +90,16 @@ azd down --force --purge # מנקה משאבים
 
 | כיוון | פרק |
 |-----------|---------|
-| **הבא** | [פרק 2: פיתוח מבוסס AI](../chapter-02-ai-development/README.md) |
-| **דלג ל** | [פרק 3: תצורה](../chapter-03-configuration/README.md) |
+| **הבא** | [פרק 2: פיתוח מונחה AI](../chapter-02-ai-development/README.md) |
+| **דלג אל** | [פרק 3: הגדרות](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 משאבים קשורים
 
-- [דף תווי פקודות](../../resources/cheat-sheet.md)
+- [גליון פקודות](../../resources/cheat-sheet.md)
 - [שאלות נפוצות](../../resources/faq.md)
-- [גלוסקמה](../../resources/glossary.md)
+- [מילון מונחים](../../resources/glossary.md)
 
 ---
 

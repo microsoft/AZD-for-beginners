@@ -1,80 +1,82 @@
-# Guia de Seleção de SKU - Escolher os Níveis de Serviço Azure Adequados
+# Guia de Seleção de SKU - Escolha dos Níveis Certos de Serviço Azure
 
 **Navegação do Capítulo:**
-- **📚 Início do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 6 - Validação e Planeamento Pré-implantação
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 6 - Validação e Planeamento Pré-Desdobramento
 - **⬅️ Anterior**: [Planeamento de Capacidade](capacity-planning.md)
-- **➡️ Seguinte**: [Verificações Pré-implantação](preflight-checks.md)
-- **🚀 Capítulo Seguinte**: [Capítulo 7: Resolução de Problemas](../chapter-07-troubleshooting/common-issues.md)
+- **➡️ Seguinte**: [Verificações Pré-voo](preflight-checks.md)
+- **🚀 Próximo Capítulo**: [Capítulo 7: Resolução de Problemas](../chapter-07-troubleshooting/common-issues.md)
 
 ## Introdução
 
-Este guia abrangente ajuda-o a selecionar SKUs de serviço Azure (Stock Keeping Units) ótimos para diferentes ambientes, cargas de trabalho e requisitos. Aprenda a analisar necessidades de desempenho, considerações de custo e requisitos de escalabilidade para escolher os níveis de serviço mais apropriados para as suas deploys com o Azure Developer CLI.
+Este guia abrangente ajuda-o a selecionar SKUs (Unidades de Manutenção de Stock) ótimos dos serviços Azure para diferentes ambientes, cargas de trabalho e requisitos. Aprenda a analisar necessidades de desempenho, considerações de custo e requisitos de escalabilidade para escolher os níveis de serviço mais adequados para as suas implementações com Azure Developer CLI.
 
 ## Objetivos de Aprendizagem
 
-Ao completar este guia, irá:
-- Compreender os conceitos de SKU da Azure, modelos de preços e diferenças de funcionalidades
-- Dominar estratégias de seleção de SKUs específicas por ambiente para desenvolvimento, staging e produção
-- Analisar requisitos de carga de trabalho e corresponder esses requisitos aos níveis de serviço apropriados
-- Implementar estratégias de otimização de custos através de seleção inteligente de SKUs
-- Aplicar técnicas de teste de desempenho e validação para escolhas de SKU
-- Configurar recomendações automatizadas de SKUs e monitorização
+Ao concluir este guia, irá:
+- Compreender os conceitos de SKU Azure, modelos de preços e diferenças de funcionalidades
+- Dominar estratégias de seleção de SKU específicas para ambientes de desenvolvimento, staging e produção
+- Analisar requisitos de carga de trabalho e correspondê-los aos níveis de serviço apropriados
+- Implementar estratégias de otimização de custos através da seleção inteligente de SKUs
+- Aplicar técnicas de teste e validação de desempenho para escolhas de SKU
+- Configurar recomendações automáticas de SKU e monitorização
 
 ## Resultados de Aprendizagem
 
 Após a conclusão, será capaz de:
-- Selecionar SKUs de serviço Azure apropriados com base em requisitos e constrangimentos da carga de trabalho
-- Projetar arquiteturas multi-ambiente económicas com seleção de níveis adequada
+- Selecionar SKUs de serviço Azure apropriados com base nos requisitos e restrições da carga de trabalho
+- Projetar arquiteturas econômicas para múltiplos ambientes com seleção adequada dos níveis
 - Implementar benchmarking de desempenho e validação para escolhas de SKU
-- Criar ferramentas automatizadas para recomendação de SKUs e otimização de custos
-- Planear migrações de SKUs e estratégias de escalabilidade para requisitos em mudança
-- Aplicar os princípios do Azure Well-Architected Framework à seleção de níveis de serviço
+- Criar ferramentas automáticas para recomendação de SKU e otimização de custos
+- Planear migrações de SKU e estratégias de escalabilidade para requisitos em mudança
+- Aplicar os princípios do Azure Well-Architected Framework à seleção dos níveis de serviço
 
 ## Índice
 
-- [Compreender SKUs](../../../../docs/chapter-06-pre-deployment)
-- [Seleção Baseada no Ambiente](../../../../docs/chapter-06-pre-deployment)
-- [Diretrizes Específicas por Serviço](../../../../docs/chapter-06-pre-deployment)
-- [Estratégias de Otimização de Custos](../../../../docs/chapter-06-pre-deployment)
-- [Considerações de Desempenho](../../../../docs/chapter-06-pre-deployment)
-- [Tabelas de Referência Rápida](../../../../docs/chapter-06-pre-deployment)
-- [Ferramentas de Validação](../../../../docs/chapter-06-pre-deployment)
+- [Compreender SKUs](#understanding-skus)
+- [Seleção Baseada no Ambiente](#environment-based-selection)
+- [Diretrizes Específicas de Serviço](#service-specific-guidelines)
+- [Estratégias de Otimização de Custos](#cost-optimization-strategies)
+- [Considerações de Desempenho](#performance-considerations)
+- [Tabelas de Referência Rápida](#quick-reference-tables)
+- [Ferramentas de Validação](#validation-tools)
 
 ---
 
 ## Compreender SKUs
 
+> **Exemplo de âmbito:** Os mapas de SKU YAML e configurações de desempenho abaixo são notas de design, não um esquema `azure.yaml` ou configuração de ferramenta de carga. Os blocos Bicep são alternativas/fragments: declaram os seus parâmetros e recursos pai, use nomes simbólicos únicos ao combiná-los, e ligue os módulos num projeto a funcionar. Os preços, limites e a disponibilidade da região/SKU devem ser verificados para a sua subscrição antes do desdobramento.
+
 ### O que são SKUs?
 
-SKUs (Stock Keeping Units) representam diferentes níveis de serviço e níveis de desempenho para recursos Azure. Cada SKU oferece diferentes:
+SKUs (Unidades de Manutenção de Stock) representam diferentes níveis de serviço e níveis de desempenho para recursos Azure. Cada SKU oferece diferentes:
 
-- **Características de desempenho** (CPU, memória, throughput)
-- **Disponibilidade de funcionalidades** (opções de escalabilidade, níveis de SLA)
-- **Modelos de preços** (baseado em consumo, capacidade reservada)
-- **Disponibilidade regional** (nem todas as SKUs estão disponíveis em todas as regiões)
+- **Características de desempenho** (CPU, memória, débito)
+- **Disponibilidade de funcionalidades** (opções de escalabilidade, níveis SLA)
+- **Modelos de preço** (baseados no consumo, capacidade reservada)
+- **Disponibilidade regional** (nem todos os SKUs disponíveis em todas as regiões)
 
-### Fatores-chave na Seleção de SKUs
+### Factores chave na seleção de SKU
 
-1. **Requisitos da Carga de Trabalho**
-   - Padrões de tráfego/carga esperados
+1. **Requisitos da carga de trabalho**
+   - Padrões esperados de tráfego/carga
    - Requisitos de desempenho (CPU, memória, I/O)
    - Necessidades de armazenamento e padrões de acesso
 
-2. **Tipo de Ambiente**
-   - Desenvolvimento/testes vs. produção
+2. **Tipo de ambiente**
+   - Desenvolvimento/testes vs produção
    - Requisitos de disponibilidade
    - Necessidades de segurança e conformidade
 
-3. **Restrições Orçamentais**
-   - Custos iniciais vs. custos operacionais
+3. **Restrições orçamentais**
+   - Custos iniciais vs custos operacionais
    - Descontos por capacidade reservada
-   - Implicações de custo do autoescalonamento
+   - Implicações de custo da auto-escalabilidade
 
-4. **Projeções de Crescimento**
+4. **Projeções de crescimento**
    - Requisitos de escalabilidade
    - Necessidades futuras de funcionalidades
-   - Complexidade de migração
+   - Complexidade da migração
 
 ---
 
@@ -82,7 +84,7 @@ SKUs (Stock Keeping Units) representam diferentes níveis de serviço e níveis 
 
 ### Ambiente de Desenvolvimento
 
-**Prioridades**: Otimização de custos, funcionalidade básica, fácil provisão/desprovisionamento
+**Prioridades**: Optimização de custos, funcionalidade básica, fácil aprovisionamento/desaprovisionamento
 
 #### SKUs Recomendados
 ```yaml
@@ -92,21 +94,21 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### Características
-- **App Service**: F1 (Free) or B1 (Basic) para testes simples
-- **Databases**: Camada Basic com recursos mínimos
-- **Storage**: Standard com redundância local apenas
-- **Compute**: Recursos partilhados aceitáveis
-- **Networking**: Configurações básicas
+- **App Service**: F1 (Gratuito) ou B1 (Básico) para testes simples
+- **Bases de dados**: nível Básico com recursos mínimos
+- **Armazenamento**: Standard com redundância local apenas
+- **Computação**: recursos partilhados aceitáveis
+- **Rede**: configurações básicas
 
 ### Ambiente de Staging/Testes
 
-**Prioridades**: Configuração semelhante à produção, equilíbrio de custos, capacidade de teste de desempenho
+**Prioridades**: configuração semelhante à produção, equilíbrio de custos, capacidade de teste de desempenho
 
 #### SKUs Recomendados
 ```yaml
@@ -121,15 +123,15 @@ skus:
 ```
 
 #### Características
-- **Performance**: 70-80% da capacidade de produção
-- **Funcionalidades**: A maioria das funcionalidades de produção ativadas
-- **Redundância**: Alguma redundância geográfica
-- **Escalonamento**: Autoescalamento limitado para testes
-- **Monitorização**: Stack de monitorização completo
+- **Desempenho**: 70-80% da capacidade de produção
+- **Funcionalidades**: a maioria das funcionalidades de produção ativadas
+- **Redundância**: alguma redundância geográfica
+- **Escalabilidade**: auto-escalabilidade limitada para testes
+- **Monitorização**: pilha completa de monitorização
 
 ### Ambiente de Produção
 
-**Prioridades**: Desempenho, disponibilidade, segurança, conformidade, escalabilidade
+**Prioridades**: desempenho, disponibilidade, segurança, conformidade, escalabilidade
 
 #### SKUs Recomendados
 ```yaml
@@ -138,22 +140,22 @@ environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
 #### Características
-- **Alta disponibilidade**: Requisitos de SLA de 99.9%+
-- **Performance**: Recursos dedicados, elevado throughput
-- **Segurança**: Funcionalidades de segurança premium
-- **Escalonamento**: Capacidades completas de autoescalamento
-- **Monitorização**: Observabilidade abrangente
+- **Alta disponibilidade**: requisitos SLA de 99,9%+
+- **Desempenho**: recursos dedicados, alto débito
+- **Segurança**: funcionalidades de segurança premium
+- **Escalabilidade**: capacidades completas de auto-escalabilidade
+- **Monitorização**: observabilidade abrangente
 
 ---
 
-## Diretrizes Específicas por Serviço
+## Diretrizes Específicas de Serviço
 
 ### Azure App Service
 
@@ -161,15 +163,15 @@ skus:
 
 | Caso de Uso | SKU Recomendado | Justificação |
 |----------|----------------|-----------|
-| Desenvolvimento/Testes | F1 (Free) or B1 (Basic) | Económico, suficiente para testes |
-| Pequenas aplicações de produção | S1 (Standard) | Domínios personalizados, SSL, autoescalamento |
-| Aplicações de produção médias | P1V3 (Premium V3) | Melhor desempenho, mais funcionalidades |
-| Aplicações de alto tráfego | P2V3 or P3V3 | Recursos dedicados, alto desempenho |
-| Aplicações críticas | I1V2 (Isolated V2) | Isolamento de rede, hardware dedicado |
+| Desenvolvimento/Testes | F1 (Gratuito) ou B1 (Básico) | Custo-efetivo, suficiente para testes |
+| Aplicações pequenas em produção | S1 (Standard) | Domínios customizados, SSL, auto-escalabilidade |
+| Aplicações médias em produção | P1V3 (Premium V3) | Melhor desempenho, mais funcionalidades |
+| Aplicações de alto tráfego | P2V3 ou P3V3 | Recursos dedicados, alto desempenho |
+| Aplicações críticas | I1V2 (Isolado V2) | Isolamento de rede, hardware dedicado |
 
 #### Exemplos de Configuração
 
-**Development**
+**Desenvolvimento**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-dev'
@@ -185,7 +187,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-**Production**
+**Produção**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-prod'
@@ -205,15 +207,15 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 #### Estrutura de Seleção de SKU
 
-1. **Baseado em DTU (Database Transaction Units)**
-   - **Basic**: 5 DTU - Desenvolvimento/testes
-   - **Standard**: S0-S12 (10-3000 DTU) - Uso geral
-   - **Premium**: P1-P15 (125-4000 DTU) - Crítico em termos de desempenho
+1. **Baseado em DTU (Unidades de Transação de Base de Dados)**
+   - **Básico**: 5 DTU - Desenvolvimento/testes
+   - **Standard**: S0-S12 (10-3000 DTU) - Propósito geral
+   - **Premium**: P1-P15 (125-4000 DTU) - Crítico para desempenho
 
 2. **Baseado em vCore** (Recomendado para produção)
-   - **General Purpose**: Compute e armazenamento equilibrados
-   - **Business Critical**: Baixa latência, IOPS elevados
-   - **Hyperscale**: Armazenamento altamente escalável (até 100TB)
+   - **Propósito Geral**: computação e armazenamento equilibrados
+   - **Crítico para Negócios**: baixa latência, altas IOPS
+   - **Hyperscale**: armazenamento altamente escalável; verifique limites de tamanho atuais e suporte regional
 
 #### Exemplos de Configuração
 
@@ -255,14 +257,14 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 #### Tipos de Ambiente
 
 1. **Baseado em consumo**
-   - Preço pay-per-use
-   - Adequado para desenvolvimento e cargas variáveis
+   - Preço pago por uso
+   - Adequado para desenvolvimento e cargas de trabalho variáveis
    - Infraestrutura partilhada
 
 2. **Dedicado (Perfis de Carga de Trabalho)**
-   - Recursos de compute dedicados
+   - Recursos de computação dedicados
    - Desempenho previsível
-   - Melhor para cargas de produção
+   - Melhor para cargas de trabalho em produção
 
 #### Exemplos de Configuração
 
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -307,7 +309,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 
 **Produção (Dedicado)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,30 +317,32 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+A redundância de zona também requer infraestrutura em região suportada e configuração adequada de VNet/sub-rede, omitida aqui. Este exemplo prevê três nós dedicados; configure pelo menos duas réplicas de aplicação para distribuição cross-zone e dimensione tanto réplicas como nós para falhas de zona. Veja [orientação de fiabilidade dos Container Apps](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). Para colocar uma aplicação neste perfil, defina o seu `workloadProfileName: 'production-profile'`; criar apenas o perfil não move as apps para ele.
+
 ### Azure Cosmos DB
 
-#### Modelos de Throughput
+#### Modelos de Débito
 
-1. **Provisionamento Manual de Throughput**
+1. **Débito Previamente Provisonado Manualmente**
    - Desempenho previsível
    - Descontos por capacidade reservada
-   - Melhor para cargas estáveis
+   - Melhor para cargas de trabalho estáveis
 
-2. **Provisionamento de Throughput com Autoescalonamento**
-   - Escalonamento automático com base no uso
-   - Paga-se pelo que usa (com mínimo)
-   - Bom para cargas variáveis
+2. **Débito Provisonado com Autoescala**
+   - Escalabilidade automática baseada no uso
+   - Pague pelo que usar (com mínimo)
+   - Bom para cargas de trabalho variáveis
 
 3. **Serverless**
-   - Paga-se por pedido
-   - Sem throughput provisionado
+   - Pague por pedido
+   - Sem débito provisonado
    - Ideal para desenvolvimento e cargas intermitentes
 
 #### Exemplos de SKU
@@ -396,19 +400,19 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 }
 ```
 
-### Azure Storage Account
+### Conta de Armazenamento Azure
 
 #### Tipos de Conta de Armazenamento
 
 1. **Standard_LRS** - Desenvolvimento, dados não críticos
-2. **Standard_GRS** - Produção, necessidade de geo-redundância
+2. **Standard_GRS** - Produção, redundância geográfica necessária
 3. **Premium_LRS** - Aplicações de alto desempenho
-4. **Premium_ZRS** - Alta disponibilidade com redundância por zona
+4. **Premium_ZRS** - Alta disponibilidade com redundância de zona
 
-#### Camadas de Desempenho
+#### Níveis de Desempenho
 
-- **Standard**: Uso geral, económico
-- **Premium**: Alto desempenho, cenários com baixa latência
+- **Standard**: propósito geral, custo-efetivo
+- **Premium**: cenários de alto desempenho, baixa latência
 
 ```bicep
 // Development
@@ -451,19 +455,22 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## Estratégias de Otimização de Custos
 
-### 1. Reserved Capacity
+### 1. Capacidade Reservada
 
 Reserve recursos por 1-3 anos para descontos significativos:
 
 ```bash
-# Verificar opções de reserva
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
+
+As ofertas de reserva e tipos de recursos elegíveis variam; inspecione o catálogo e os termos de compra em vez de assumir que cada serviço/SKU suporta uma reserva.
 
 ### 2. Dimensionamento Adequado
 
-Comece com SKUs mais pequenos e escale com base no uso real:
+Comece com SKUs menores e aumente com base no uso real:
 
 ```yaml
 # Progressive scaling approach
@@ -477,9 +484,9 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. Configuração de Autoescalonamento
+### 3. Configuração de Auto-escala
 
-Implemente escalonamento inteligente para otimizar custos:
+Implemente escalabilidade inteligente para otimizar custos:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -536,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. Escalonamento Programado
+### 4. Escala Agendada
 
-Reduza a escala durante períodos de menor atividade:
+Reduza durante horários de menor atividade:
 
 ```json
 {
@@ -585,9 +594,9 @@ Reduza a escala durante períodos de menor atividade:
 
 ## Considerações de Desempenho
 
-### Requisitos de Desempenho Básicos
+### Requisitos Baseline de Desempenho
 
-Defina requisitos de desempenho claros antes da seleção do SKU:
+Defina requisitos claros antes da seleção do SKU:
 
 ```yaml
 performance_requirements:
@@ -603,21 +612,23 @@ performance_requirements:
     rto: "30 minutes"
 ```
 
-### Testes de Carga
+### Teste de Carga
 
-Teste diferentes SKUs para validar desempenho:
+Teste diferentes SKUs para validar o desempenho:
 
 ```bash
-# Serviço Azure de Testes de Carga
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
 ### Monitorização e Otimização
 
-Configure monitorização abrangente:
+Configure uma monitorização abrangente:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -646,43 +658,43 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## Tabelas de Referência Rápida
 
-### Referência Rápida de SKUs do App Service
+### Referência Rápida de SKU do App Service
 
-| SKU | Nível | vCPU | RAM | Storage | Intervalo de Preço | Caso de Uso |
+| SKU | Nível | vCPU | RAM | Armazenamento | Faixa de Preço | Caso de Uso |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | Free | Shared | 1GB | 1GB | Free | Desenvolvimento |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | Pequenas aplicações |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Produção |
+| F1 | Gratuito | Partilhado | 1GB | 1GB | Grátis | Desenvolvimento |
+| B1 | Básico | 1 | 1,75GB | 10GB | $ | Apps pequenas |
+| S1 | Standard | 1 | 1,75GB | 50GB | $$ | Produção |
 | P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Alto desempenho |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Empresa |
+| I1V2 | Isolado V2 | 2 | 8GB | 1TB | $$$$ | Empresarial |
 
-### Referência Rápida de SKUs do SQL Database
+### Referência Rápida de SKU do SQL Database
 
-| SKU | Nível | DTU/vCore | Storage | Intervalo de Preço | Caso de Uso |
+| SKU | Nível | DTU/vCore | Armazenamento | Faixa de Preço | Caso de Uso |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Desenvolvimento |
+| Básico | Básico | 5 DTU | 2GB | $ | Desenvolvimento |
 | S2 | Standard | 50 DTU | 250GB | $$ | Pequena produção |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Alto desempenho |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Equilibrado |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Crítico |
+| GP_Gen5_4 | Propósito Geral | 4 vCore | 4TB | $$$ | Equilibrado |
+| BC_Gen5_8 | Crítico para Negócios | 8 vCore | 4TB | $$$$ | Crítico para missão |
 
-### Referência Rápida de SKUs do Container Apps
+### Referência Rápida de SKU dos Container Apps
 
-| Model | Pricing | CPU/Memory | Caso de Uso |
+| Modelo | Preço | CPU/Memória | Caso de Uso |
 |-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | Desenvolvimento, carga variável |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | Produção |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | Alto desempenho |
+| Consumo | Pague pelo uso | Combinações suportadas de CPU/memória dependem do ambiente/perfil | Desenvolvimento ou produção, carga variável |
+| Dedicado D4 | Cobrança por nó dedicado | 4 vCPU, 16GiB por nó | Carga sustentada/necessidades de isolamento |
+| Dedicado D8 | Cobrança por nó dedicado | 8 vCPU, 32GiB por nó | Carga sustentada maior |
 
 ---
 
 ## Ferramentas de Validação
 
-### Verificador de Disponibilidade de SKUs
+### Verificador de Disponibilidade de SKU
 
 ```bash
 #!/bin/bash
-# Verificar a disponibilidade do SKU na região de destino
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# Utilização
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### Script de Estimação de Custos
+### Script de Estimativa de Custos
+
+**Apenas pseudocódigo:** `Get-ResourceCost` abaixo é uma função específica de projeto que deve implementar usando preços regionais/contratuais atuais e pressupostos de uso. Não é um cmdlet PowerShell ou Azure.
 
 ```powershell
-# Script PowerShell para estimativa de custos
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Utilize a API de preços do Azure ou a calculadora
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# Utilização
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -749,6 +764,8 @@ Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
 ### Validação de Desempenho
+
+O YAML seguinte é um esboço de requisitos, **não** um esquema de entrada para Azure Load Testing, JMeter, Locust, ou k6. Traduza-o para a configuração real da sua ferramenta escolhida antes de usar o comando de teste de carga acima.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,43 +800,43 @@ test_configuration:
 
 ---
 
-## Resumo das Boas Práticas
+## Resumo das Melhores Práticas
 
-### O que Fazer
+### O que fazer
 
-1. **Começar pequeno e escalar para cima** com base no uso real
-2. **Usar SKUs diferentes para ambientes diferentes**
-3. **Monitorizar desempenho e custos continuamente**
-4. **Aproveitar capacidade reservada para cargas de produção**
-5. **Implementar autoescalonamento quando apropriado**
-6. **Testar desempenho com cargas de trabalho realistas**
-7. **Planear o crescimento mas evitar sobredimensionamento**
-8. **Usar níveis gratuitos para desenvolvimento quando possível**
+1. **Comece pequeno e aumente** com base no uso real
+2. **Use SKUs diferentes para ambientes diferentes**
+3. **Monitorize desempenho e custos continuamente**
+4. **Aproveite a capacidade reservada para cargas de produção**
+5. **Implemente auto-escalabilidade onde adequado**
+6. **Teste desempenho com cargas de trabalho realistas**
+7. **Planeie para o crescimento mas evite sobreprovisionamento**
+8. **Use níveis gratuitos para desenvolvimento quando possível**
 
-### A Evitar
+### O que não fazer
 
-1. **Não usar SKUs de produção para desenvolvimento**
-2. **Não ignorar a disponibilidade regional das SKUs**
-3. **Não esquecer os custos de transferência de dados**
-4. **Não sobredimensionar sem justificação**
-5. **Não ignorar o impacto das dependências**
-6. **Não definir limites de autoescalonamento demasiado elevados**
-7. **Não esquecer os requisitos de conformidade**
-8. **Não tomar decisões baseadas apenas no preço**
+1. **Não use SKUs de produção para desenvolvimento**
+2. **Não ignore a disponibilidade regional de SKUs**
+3. **Não se esqueça dos custos de transferência de dados**
+4. **Não faça sobreprovisionamento sem justificação**
+5. **Não ignore o impacto das dependências**
+6. **Não defina limites de auto-escalabilidade demasiado altos**
+7. **Não se esqueça dos requisitos de conformidade**
+8. **Não tome decisões baseadas só no preço**
 
 ---
 
-**Dica Profissional**: Utilize o Azure Cost Management e o Advisor para obter recomendações personalizadas para otimizar as suas seleções de SKUs com base em padrões reais de utilização.
+**Dica Profissional**: Use Azure Cost Management e Advisor para obter recomendações personalizadas para otimizar a seleção dos seus SKUs com base em padrões reais de utilização.
 
 ---
 
 **Navegação**
 - **Lição Anterior**: [Planeamento de Capacidade](capacity-planning.md)
-- **Próxima Lição**: [Verificações Pré-implantação](preflight-checks.md)
+- **Lição Seguinte**: [Verificações Pré-voo](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Isenção de responsabilidade:
-Este documento foi traduzido utilizando o serviço de tradução por IA Co-op Translator (https://github.com/Azure/co-op-translator). Embora nos esforcemos por precisão, tenha em atenção que traduções automáticas podem conter erros ou imprecisões. A versão original no seu idioma deve ser considerada a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional por um tradutor humano. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes da utilização desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

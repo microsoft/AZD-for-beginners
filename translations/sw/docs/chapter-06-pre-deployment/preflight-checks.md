@@ -1,73 +1,75 @@
-# Ukaguzi wa Kabla ya Uwasilishaji kwa Utekelezaji wa AZD
+# Ukaguzi wa Kabla ya Ndege kwa Uwekaji AZD
 
 **Uvinjari wa Sura:**
-- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanziaji](../../README.md)
-- **📖 Sura ya Sasa**: Sura 6 - Uthibitishaji na Upangaji Kabla ya Uwasilishaji
-- **⬅️ Iliyotangulia**: [Uteuzi wa SKU](sku-selection.md)
-- **➡️ Sura Ifuatayo**: [Sura 7: Utatuzi wa Matatizo](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Inayohusiana**: [Sura 4: Mwongozo wa Uwasilishaji](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Mwanzo wa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
+- **📖 Sura ya Sasa**: Sura 6 - Uhakiki na Mipango Kabla ya Uwekaji
+- **⬅️ Iliyopita**: [Uchaguzi wa SKU](sku-selection.md)
+- **➡️ Sura Ifuatayo**: [Sura 7: Utatuzi wa Tatizo](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Zinazohusiana**: [Sura 4: Mwongozo wa Uwekaji](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Utangulizi
 
-Mwongozo huu kamili unatoa skiripti za uthibitisho kabla ya uwasilishaji na taratibu ili kuhakikisha utekelezaji wa Azure Developer CLI unafanikiwa kabla haujaanza. Jifunze jinsi ya kutekeleza ukaguzi otomatiki wa uthibitisho, upatikanaji wa rasilimali, makato, ufuataji wa usalama, na mahitaji ya utendaji ili kuzuia kushindwa kwa uwasilishaji na kuboresha viwango vya mafanikio ya uwasilishaji.
+Mwongozo huu kamili unatoa hati za uthibitisho kabla ya uwekaji na taratibu ili kuhakikisha uwekaji wa Azure Developer CLI unafanikishwa kabla ya kuanza. Jifunze kutekeleza ukaguzi wa moja kwa moja wa uthibitisho, upatikanaji wa rasilimali, kikwazo, ufuataji wa usalama, na mahitaji ya utendaji ili kuzuia kushindwa kwa uwekaji na kuboresha viwango vya mafanikio ya uwekaji.
 
 ## Malengo ya Kujifunza
 
-Kwa kumaliza mwongozo huu, utaweza:
-- Kumiliki mbinu na skiripti za uthibitisho otomatiki kabla ya uwasilishaji
-- Kuelewa mikakati kamili ya ukaguzi kwa uthibitisho, ruhusa, na makato
+Kwa kukamilisha mwongozo huu, utakuwa na uwezo wa:
+- Kubobea mbinu na hati za uthibitisho wa kabla ya uwekaji kwa njia ya moja kwa moja
+- Kuelewa mikakati kamili ya ukaguzi kwa uthibitisho, ruhusa, na vikwazo
 - Kutekeleza taratibu za uthibitisho wa upatikanaji na uwezo wa rasilimali
-- Kusanidi ukaguzi wa usalama na ufuataji wa sera za shirika
-- Kubuni makmirio ya makisio ya gharama na taratibu za uthibitisho wa bajeti
-- Kuunda otomatiki za ukaguzi kabla ya uwasilishaji kwa mifumo ya CI/CD
+- Kusanifu ukaguzi wa usalama na ufuataji wa sera za shirika
+- Kubuni mtiririko wa makisio ya gharama na uthibitisho wa bajeti
+- Kuunda otomatiki ya ukaguzi wa kabla ya ndege kwa mitiririko ya CI/CD
 
 ## Matokeo ya Kujifunza
 
-Baada ya kumaliza, utakuwa na uwezo wa:
-- Kuunda na kutekeleza skiripti kamili za uthibitisho wa kabla ya ndege
-- Kubuni taratibu za ukaguzi otomatiki kwa matukio tofauti ya uwasilishaji
+Baada ya kukamilisha, utaweza:
+- Kuunda na kutekeleza hati kamili za uthibitisho wa kabla ya ndege
+- Kubuni mitiririko ya ukaguzi wa moja kwa moja kwa hali tofauti za uwekaji
 - Kutekeleza taratibu na sera za uthibitisho maalum kwa mazingira
-- Kusanidi ufuatiliaji wa kisukuma na arifu za utayari wa uwasilishaji
-- Kutatua masuala kabla ya uwasilishaji na kutekeleza hatua za kurekebisha
-- Kuunganisha ukaguzi kabla ya ndege katika mabomba ya DevOps na taratibu za otomatiki
+- Kusanifu ufuatiliaji na tahadhari za awali kwa uandaliwa wa uwekaji
+- Kutatua matatizo kabla ya uwekaji na kutekeleza hatua za marekebisho
+- Kuunganisha ukaguzi wa kabla ya ndege ndani ya mitiririko ya DevOps na otomatiki
 
-## Yaliyomo
+## Jedwali la Maudhui
 
-- [Muhtasari](#muhtasari)
-- [Skripti ya Pre-flight Otomatiki](#skripti-ya-pre-flight-otomatiki)
-- [Orodha ya Ukaguzi wa Mikono](#codeblock1)
-- [Uhakiki wa Mazingira](#✅-uhifadhi-ufufuaji)
-- [Uhakiki wa Rasilimali](#uhakiki-wa-mazingira-ya-uzalishaji)
-- [Uhakiki wa Usalama & Uzingatiaji](#security--compliance-checks)
-- [Mipango ya Utendaji & Uwezo](#performance--capacity-planning)
-- [Kutatua Masuala ya Kawaida](#troubleshooting-common-issues)
+- [Muhtasari](#overview)
+- [Hati za Ukaguzi wa Moja kwa Moja wa Kabla ya Ndege](#automated-pre-flight-script)
+- [Orodha ya Ukaguzi wa Mikono](#manual-validation-checklist)
+- [Uthibitisho wa Mazingira](#environment-validation)
+- [Uthibitisho wa Rasilimali](#resource-validation)
+- [Ukaguzi wa Usalama na Ufuataji](#security--compliance-checks)
+- [Mipango ya Utendaji na Uwezo](capacity-planning.md)
+- [Utatuzi wa Masuala Yawezekano](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 ## Muhtasari
 
-Ukaguzi wa kabla ya uwasilishaji ni uthibitisho muhimu unaofanywa kabla ya kupeleka ili kuhakikisha:
+Ukaguzi wa kabla ya ndege ni uthibitisho muhimu unaofanyika kabla ya uwekaji ili kuhakikisha:
 
-- **Upatikanaji wa rasilimali** na makato katika maeneo lengwa
-- **Uthibitisho na ruhusa** vimewekwa ipasavyo
-- **Uhalali wa kiolezo** na usahihi wa vigezo
+- **Upatikanaji wa rasilimali** na vikwazo katika maeneo lengwa
+- **Uthibitisho na ruhusa** zimewekwa vizuri
+- **Uhalali wa templeti** na usahihi wa vigezo
 - **Muunganisho wa mtandao** na utegemezi
-- **Uzingatiaji wa usalama** na sera za shirika
-- **Makisio ya gharama** ndani ya vigezo vya bajeti
+- **Ufuataji wa usalama** kwa sera za shirika
+- **Makisio ya gharama** ndani ya mipaka ya bajeti
 
-### Wakati wa Kuta Run Ukaguzi wa Kabla ya Uwasilishaji
+### Wakati wa Kufanya Ukaguzi wa Kabla ya Ndege
 
-- **Kabla ya uwasilishaji wa kwanza** kwa mazingira mapya
-- **Baada ya mabadiliko makubwa ya kiolezo**
-- **Kabla ya uwasilishaji wa uzalishaji**
+- **Kabla ya uwekaji wa kwanza** kwa mazingira mapya
+- **Baada ya mabadiliko makubwa ya templeti**
+- **Kabla ya uwekaji wa uzalishaji**
 - **Wakati wa kubadilisha maeneo ya Azure**
-- **Kama sehemu ya mabomba ya CI/CD**
+- **Kama sehemu ya mitiririko ya CI/CD**
 
 ---
 
-## Skripti ya Pre-flight Otomatiki
+## Hati za Moja kwa Moja za Ukaguzi wa Kabla ya Ndege
 
-### PowerShell Pre-flight Checker
+> **Wigo na mahitaji ya awali:** Hizi ni hati za msingi za kuanza kuhifadhi katika mradi wako binafsi, si faili za ndani zinazotolewa na sura hii. Toleo la PowerShell linahitaji PowerShell **7.3+** (kuleta makosa ya amri ya asili) na moduli ya `powershell-yaml` kwa `ConvertFrom-Yaml`. Toleo la Bash linahitaji Bash, `jq`, Python 3.10+, na PyYAML. Zote zinahitaji Azure CLI, azd, na mradi unaofanya kazi wa Bicep. Ni uchunguzi, si ushahidi wa uandaliwa wa uwekaji, uwezo, au ufuataji. Angalia nyongeza za templeti kabla ya `azd provision --preview`; nyongeza zinaweza kutekeleza amri yoyote ya mradi.
+
+### Ukaguzi wa Kabla ya Ndege wa PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +102,14 @@ param(
     [switch]$Detailed
 )
 
-# Uwekaji wa rangi kwa pato
+# Fail native commands into catch blocks instead of reporting false successes.
+$ErrorActionPreference = 'Stop'
+if ($PSVersionTable.PSVersion -lt [version]'7.3') {
+    throw 'PowerShell 7.3+ is required for this script.'
+}
+$PSNativeCommandUseErrorActionPreference = $true
+
+# Color coding for output
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +137,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # Kagua ufungaji wa AZD
+    # Check AZD installation
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +147,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Kagua ufungaji wa Azure CLI
+    # Check Azure CLI installation
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +157,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Kagua toleo la PowerShell
+    # Check PowerShell version
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,23 +172,23 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # Kagua uthibitishaji wa AZD
+        # Check AZD authentication
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
-        if ($azdAuth.status -eq "Logged-in") {
-            Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
+        if ($azdAuth.status -eq "success") {
+            Write-Status "AZD authentication" "Success" "Token available; expires $($azdAuth.expiresOn)"
         }
         else {
             Write-Status "AZD authentication" "Error" "Run 'azd auth login'"
             return $false
         }
         
-        # Kagua uthibitishaji wa Azure CLI
+        # Check Azure CLI authentication
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Thibitisha ufikiaji wa usajili
+        # Validate subscription access
         $subscriptionId = $azAccount.id
-        $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
+        $subscription = az account show --subscription $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
         
         return $true
@@ -194,39 +203,29 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Pata uteuzi wa majukumu ya mtumiaji wa sasa
+        # Get current user's role assignments
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
             $_.roleDefinitionName -eq "Contributor" -or 
-            $_.roleDefinitionName -eq "Owner" -or
-            $_.roleDefinitionName -eq "User Access Administrator"
+            $_.roleDefinitionName -eq "Owner"
         }
         
         if ($hasContributor) {
-            Write-Status "Required permissions" "Success" "Contributor or higher role found"
+            Write-Status "Role assignment inventory" "Info" "Contributor/Owner found; verify effective scope, policy and any role-assignment permissions separately"
         }
         else {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Jaribu utengenezaji wa kikundi cha rasilimali (ikiwa imeainishwa)
+        # Test resource group creation (if specified)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Jaribu uwezo wa kuunda kikundi cha rasilimali
-                try {
-                    az group create --name "preflight-test-rg" --location $Location --output none
-                    az group delete --name "preflight-test-rg" --yes --output none
-                    Write-Status "Resource group creation" "Success" "Can create resource groups"
-                }
-                catch {
-                    Write-Status "Resource group creation" "Error" "Cannot create resource groups"
-                    return $false
-                }
+                Write-Status "Resource group creation" "Warning" "Group does not exist. Review subscription-scope permissions; this diagnostic does not create/delete test groups."
             }
         }
         
@@ -242,25 +241,28 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Kagua vikwazo vya kompyuta
+        # Check compute quotas
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # Kagua vikwazo maalum
+        # Check specific quotas
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
-        if ($coreQuota) {
+        if ($coreQuota -and $coreQuota.limit -gt 0) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
             if ($usagePercent -lt 80) {
                 Write-Status "Compute cores quota" "Success" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
+            } else {
+                Write-Status "Compute cores quota" "Warning" "Missing or zero quota; verify service requirements"
             }
             else {
                 Write-Status "Compute cores quota" "Warning" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
             }
         }
         
-        # Kagua mipaka ya App Service
+        # Check App Service limits
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
-            if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
+            $displayLocation = az account list-locations --query "[?name=='$Location'].displayName | [0]" -o tsv
+            if ($appServiceUsage | Where-Object { $_.name -eq $Location -or $_.name -eq $displayLocation }) {
                 Write-Status "App Service availability" "Success" "Available in $Location"
             }
             else {
@@ -271,28 +273,27 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Kagua mipaka ya akaunti ya uhifadhi
-        $storageAccounts = az storage account list --output json | ConvertFrom-Json
-        $accountCount = ($storageAccounts | Measure-Object).Count
-        if ($accountCount -lt 200) {
-            Write-Status "Storage account limit" "Success" "$accountCount/250 storage accounts"
+        # Check storage account limits
+        $storageUsage = @(az storage account show-usage --location $Location --output json | ConvertFrom-Json)[0]
+        if ($storageUsage -and $storageUsage.limit -gt 0 -and $storageUsage.currentValue -lt $storageUsage.limit) {
+            Write-Status "Storage account quota" "Info" "$($storageUsage.currentValue)/$($storageUsage.limit) in $Location"
         }
         else {
-            Write-Status "Storage account limit" "Warning" "$accountCount/250 storage accounts"
+            Write-Status "Storage account quota" "Warning" "No headroom or missing quota data"
         }
         
         return $true
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # Isiyozuia
+        return $true # Non-blocking
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Jaribu endpoints za Azure
+    # Test Azure endpoints
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -306,13 +307,19 @@ function Test-NetworkConnectivity {
             Write-Status "Connectivity to $endpoint" "Success" "Status: $($response.StatusCode)"
         }
         catch {
-            Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+            # A 401/403/404 response may still prove HTTP reachability.
+            if ($_.Exception.Response) {
+                Write-Status "Connectivity to $endpoint" "Info" "HTTP response received; this is not an authorization test"
+            } else {
+                Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+                return $false
+            }
         }
     }
     
-    # Jaribu utatuzi wa DNS
+    # Test DNS resolution
     try {
-        $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
+        $dnsResult = [System.Net.Dns]::GetHostAddresses("management.azure.com")
         Write-Status "DNS resolution" "Success" "Resolved successfully"
     }
     catch {
@@ -326,18 +333,21 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Angalia kama azure.yaml ipo
+    # Check if azure.yaml exists
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # Changanua azure.yaml
+        # Parse azure.yaml
         try {
+            if (-not (Get-Command ConvertFrom-Yaml -ErrorAction SilentlyContinue)) {
+                throw 'ConvertFrom-Yaml requires the powershell-yaml module.'
+            }
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Thibitisha huduma
+            # Validate services
             if ($azureYaml.services) {
-                $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
+                $serviceCount = $azureYaml.services.Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
             }
             else {
@@ -345,7 +355,7 @@ function Test-TemplateValidation {
             }
         }
         catch {
-            Write-Status "azure.yaml parsing" "Error" "Invalid YAML format"
+            Write-Status "azure.yaml parsing" "Error" $_.Exception.Message
             return $false
         }
     }
@@ -354,13 +364,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Angalia faili za miundombinu
+    # Check for infrastructure files
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Thibitisha main.bicep ikiwa ipo
+            # Validate main.bicep if it exists
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,12 +391,12 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 MPYA: Jaribu muhtasari wa miundombinu (jaribio kavu salama)
+    # Preview ARM changes only after reviewing the project's hooks.
     try {
-        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        Write-Status "Infrastructure preview test" "Info" "Previewing proposed changes (not a capacity or deployment guarantee)..."
         $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
-            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+            Write-Status "Infrastructure preview" "Success" "Preview completed; review changes and remaining diagnostics"
         }
         else {
             Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
@@ -403,7 +413,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # Angalia kama eneo ni halali
+        # Check if location is valid
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,13 +425,13 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Angalia upatikanaji wa huduma katika mkoa
+        # Check service availability in region
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
             try {
                 $providers = az provider show --namespace $service --output json | ConvertFrom-Json
-                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $Location }
+                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $validLocation.displayName }
                 
                 if ($resourceTypes) {
                     Write-Status "$service availability" "Success" "Available in $Location"
@@ -446,11 +456,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Makadirio ya gharama ya msingi (itahitaji Azure Pricing API kwa makadirio sahihi)
+    # Basic cost estimation (would need Azure Pricing API for accurate estimates)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Angalia kama bajeti ipo
+    # Check if budget exists
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +480,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Angalia taratibu za kawaida za usalama
+    # Text-search heuristics only: presence of keywords is not compliance proof.
     try {
-        # Angalia kama Key Vault imewekwa
+        # Check if Key Vault is configured
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +490,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Angalia matumizi ya kitambulisho kilichosimamiwa
+        # Check for managed identity usage
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +498,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Angalia kulazimishwa kwa HTTPS
+        # Check for HTTPS enforcement
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +514,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# Utekelezaji mkuu
+# Main execution
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +526,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # Endesha ukaguzi wote
+    # Run all checks
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -527,7 +537,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # Muhtasari
+    # Summary
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -547,7 +557,7 @@ function Invoke-PreflightCheck {
     Write-Host ""
     if ($allPassed) {
         Write-Host "${Green}✓ All pre-flight checks passed ($passedCount/$totalCount)${Reset}"
-        Write-Host "${Green}✓ Ready for deployment!${Reset}"
+        Write-Host "${Green}✓ Implemented checks passed; review warnings and untested requirements.${Reset}"
         exit 0
     }
     else {
@@ -557,26 +567,27 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Endesha ukaguzi wa awali
+# Run the pre-flight check
+azd env select $EnvironmentName
 Invoke-PreflightCheck
 ```
 
-### Bash Pre-flight Checker
+### Ukaguzi wa Kabla ya Ndege wa Bash
 
 ```bash
 #!/bin/bash
-# Toleo la Bash la ukaguzi wa awali kwa mifumo za Unix/Linux
+# Bash version of pre-flight checks for Unix/Linux systems
 
 set -euo pipefail
 
-# Misimbo ya rangi
+# Color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # Hakuna rangi
+NC='\033[0m' # No Color
 
-# Vigezo vya kimataifa
+# Global variables
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -606,7 +617,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # Kagua usakinishaji wa AZD
+    # Check AZD installation
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +626,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Kagua usakinishaji wa Azure CLI
+    # Check Azure CLI installation
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,12 +635,16 @@ check_prerequisites() {
         return 1
     fi
     
-    # Kagua usakinishaji wa jq
+    # Check jq installation
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
-        print_status "jq not found" "warning" "Install jq for better JSON parsing"
+        print_status "jq not found" "error" "jq is required"
+        return 1
     fi
+    python3 -c "import yaml" >/dev/null 2>&1 || {
+        print_status "Python/PyYAML not found" "error" "Python 3 and PyYAML are required"; return 1;
+    }
     
     return 0
 }
@@ -637,16 +652,16 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Kagua uthibitisho wa AZD
-    if azd auth login --check-status >/dev/null 2>&1; then
-        local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
-        print_status "AZD authentication" "success" "User: $principal_name"
+    # Check AZD authentication
+    # --check-status returns exit code 0 even when unauthenticated; inspect JSON.
+    if azd auth login --check-status --output json | jq -e '.status == "success"' >/dev/null; then
+        print_status "AZD authentication" "success" "Token available"
     else
         print_status "AZD authentication" "error" "Run 'azd auth login'"
         return 1
     fi
     
-    # Kagua uthibitisho wa Azure CLI
+    # Check Azure CLI authentication
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,11 +676,11 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # Kagua azure.yaml
+    # Check azure.yaml
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # Uthibitisho wa msingi wa YAML
+        # Basic YAML validation
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -677,13 +692,13 @@ check_template_validation() {
         return 1
     fi
     
-    # Kagua faili za miundombinu
+    # Check infrastructure files
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # Thibitisha main.bicep ikiwa ipo
+            # Validate main.bicep if exists
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +721,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Hakiki kama eneo ni halali
+    # Check if location is valid
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,11 +729,13 @@ check_regional_availability() {
         return 1
     fi
     
-    # Angalia upatikanaji wa huduma
+    # Check service availability
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
+    local display_location
+    display_location=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
     for service in "${services[@]}"; do
-        if az provider show --namespace "$service" --query "resourceTypes[?locations[?contains(@, '$LOCATION')]]" --output tsv | grep -q .; then
+        if az provider show --namespace "$service" --query "resourceTypes[?contains(locations, '$display_location')]" --output tsv | grep -q .; then
             print_status "$service availability" "success" "Available in $LOCATION"
         else
             print_status "$service availability" "warning" "May not be available in $LOCATION"
@@ -729,7 +746,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Changanua vigezo vya mstari wa amri
+    # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +772,7 @@ main() {
         esac
     done
     
-    # Thibitisha vigezo vinavyohitajika
+    # Validate required parameters
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,20 +785,22 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Endesha ukaguzi
+    # Run checks
     local all_passed=true
     
     check_prerequisites || all_passed=false
+    if ! $all_passed; then exit 1; fi
+    azd env select "$ENVIRONMENT_NAME" || exit 1
     check_authentication || all_passed=false
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # Muhtasari
+    # Summary
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
         echo -e "${GREEN}✓ All pre-flight checks passed${NC}"
-        echo -e "${GREEN}✓ Ready for deployment!${NC}"
+        echo -e "${GREEN}✓ Implemented checks passed; review warnings and untested requirements.${NC}"
         exit 0
     else
         echo -e "${RED}✗ Some pre-flight checks failed${NC}"
@@ -790,7 +809,7 @@ main() {
     fi
 }
 
-# Endesha kazi kuu
+# Run main function
 main "$@"
 ```
 
@@ -798,92 +817,95 @@ main "$@"
 
 ## Orodha ya Ukaguzi wa Mikono
 
-### Orodha ya Kukagua Kabla ya Uwasilishaji
+### Orodha ya Kabla ya Uwekaji
 
-Chapisha orodha hii na uhakikishe kila kipengee kabla ya uwasilishaji:
+Chapisha orodha hii na thibitisha kila kipengee kabla ya uwekaji:
 
 #### ✅ Usanidi wa Mazingira
-- [ ] AZD CLI installed and updated to latest version
-- [ ] Azure CLI installed and authenticated
-- [ ] Correct Azure subscription selected
-- [ ] Environment name is unique and follows naming conventions
-- [ ] Target resource group identified or can be created
+- [ ] AZD CLI imewekwa na imesasishwa hadi toleo la hivi karibuni
+- [ ] Azure CLI imewekwa na kuthibitishwa
+- [ ] Usajili sahihi wa Azure umechaguliwa
+- [ ] Jina la mazingira ni la kipekee na linalifuata kanuni za majina
+- [ ] Kundi la rasilimali lengwa limebainika au linaweza kuundwa
 
 #### ✅ Uthibitisho & Ruhusa
-- [ ] Successfully authenticated with `azd auth login`
-- [ ] User has Contributor role on target subscription/resource group
-- [ ] Service principal configured for CI/CD (if applicable)
-- [ ] No expired certificates or credentials
+- [ ] Uthibitisho umefanikiwa na `azd auth login`
+- [ ] Mtumiaji ana jukumu la Mchangiaji kwenye usajili/kundi la rasilimali lengwa
+- [ ] Ikiwa templeti zinaunda uteuzi wa majukumu, kitambulisho cha kuweka pia kina ruhusa za uteuzi wa majukumu (Mchangiaji pekee hauruhusu hizi)
+- [ ] Mwakilishi wa huduma amesanidiwa kwa CI/CD (ikiwa inahitajika)
+- [ ] Hakuna vyeti au vyeti vilivyodumu
 
-#### ✅ Uhakiki wa Template
-- [ ] `azure.yaml` exists and is valid YAML
-- [ ] All services defined in azure.yaml have corresponding source code
-- [ ] Bicep templates in `infra/` directory are present
-- [ ] `main.bicep` compiles without errors (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastructure preview runs successfully (`azd provision --preview`)
-- [ ] All required parameters have default values or will be provided
-- [ ] No hardcoded secrets in templates
+#### ✅ Uthibitisho wa Templeti
+- [ ] `azure.yaml` ipo na ni YAML halali
+- [ ] Huduma zote zilizobainishwa katika azure.yaml zina msimbo wa chanzo unalingana
+- [ ] Templeti za Bicep katika saraka ya `infra/` zipo
+- [ ] `main.bicep` inatayarisha bila makosa (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Mapitio ya miundombinu yanatokea kwa mafanikio (`azd provision --preview`)
+- [ ] Vigezo vyote vinavyohitajika vina thamani za msingi au vitatolewa
+- [ ] Hakuna siri zilizofungwa ndani ya templeti
 
 #### ✅ Mipango ya Rasilimali
-- [ ] Target Azure region selected and validated
-- [ ] Required Azure services available in target region
-- [ ] Sufficient quotas available for planned resources
-- [ ] Resource naming conflicts checked
-- [ ] Dependencies between resources understood
+- [ ] Eneo lengwa la Azure limechaguliwa na kuthibitishwa
+- [ ] Huduma za Azure zinazohitajika zinapatikana katika eneo lengwa
+- [ ] Vikwazo vya kutosha vinapatikana kwa rasilimali zilizopangwa
+- [ ] Migogoro ya majina ya rasilimali imethibitishwa
+- [ ] Utegemezi kati ya rasilimali umeeleweka
 
 #### ✅ Mtandao & Usalama
-- [ ] Network connectivity to Azure endpoints verified
-- [ ] Firewall/proxy settings configured if needed
-- [ ] Key Vault configured for secrets management
-- [ ] Managed identities used where possible
-- [ ] HTTPS enforcement enabled for web applications
+- [ ] Muunganisho wa mtandao kwa vituo vya Azure umethibitishwa
+- [ ] Mipangilio ya kuta za moto/wakala imesanidiwa ikiwa inahitajika
+- [ ] Key Vault imesanidiwa kwa usimamizi wa siri
+- [ ] Kitambulisho kinachosimamiwa kinatumika pale inapowezekana
+- [ ] Utekelezaji wa HTTPS kwa programu za wavuti umewezeshwa
 
 #### ✅ Usimamizi wa Gharama
-- [ ] Cost estimates calculated using Azure Pricing Calculator
-- [ ] Budget alerts configured if required
-- [ ] Appropriate SKUs selected for environment type
-- [ ] Reserved capacity considered for production workloads
+- [ ] Makisio ya gharama yamehesabiwa kwa kutumia Azure Pricing Calculator
+- [ ] Tahadhari za bajeti zimesanidiwa ikiwa zinahitajika
+- [ ] SKU zinazofaa zimechaguliwa kwa aina ya mazingira
+- [ ] Uwezo ulihifadhiwa umezingatiwa kwa mzigo wa uzalishaji
 
-#### ✅ Ufuatiliaji & Uonekano
-- [ ] Application Insights configured in templates
-- [ ] Log Analytics workspace planned
-- [ ] Alert rules defined for critical metrics
-- [ ] Health check endpoints implemented in applications
+#### ✅ Ufuatiliaji & Uangalizi
+- [ ] Application Insights imesanidiwa katika templeti
+- [ ] Eneo la kazi la Log Analytics limepangwa
+- [ ] Sheria za tahadhari zimetengenezwa kwa vipimo vya msingi
+- [ ] Vituo vya ukaguzi wa afya vimetekelezwa katika programu
 
-#### ✅ Uhifadhi & Ufufuaji
-- [ ] Backup strategy defined for data resources
-- [ ] Recovery time objectives (RTO) documented
-- [ ] Recovery point objectives (RPO) documented
-- [ ] Disaster recovery plan in place for production
+#### ✅ Nakala ya Hali na Ufufuo
+- [ ] Mikakati ya nakala ya data imedhamiriwa
+- [ ] Malengo ya muda wa ufufuo (RTO) yamedokumentwa
+- [ ] Malengo ya alama ya ufufuo (RPO) yamedokumentwa
+- [ ] Mpango wa kupona msiba uko tayari kwa uzalishaji
 
 ---
 
-## Uhakiki wa Mazingira
+## Uthibitisho wa Mazingira
 
-### Uhakiki wa Mazingira ya Maendeleo
+Ukaguzi wa `grep` ufuatao ni viashiria vya mafundisho tu. Neno linalolingana haliwezi kuthibitisha kuwa kipengee kimewekwa kwa rasilimali sahihi, na neno lisilopo haliwezi kuthibitisha kutokuwepo kwake (moduli/zenyeji huenda zikakitoa). Usitumia kama lango la ufuataji wa uzalishaji.
+
+### Uthibitisho wa Mazingira ya Maendeleo
 
 ```bash
 #!/bin/bash
-# Uhakiki maalum wa mazingira ya maendeleo
+# Development environment specific validations
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Angalia usanidi unaofaa kwa ajili ya maendeleo
+    # Check for development-friendly configurations
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Angalia usanidi wa kuzimwa kiotomatiki
+    # Check for auto-shutdown configurations
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Thibitisha usanidi wa hifadhidata za maendeleo
+    # Validate development database configurations
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,37 +914,37 @@ validate_dev_environment() {
 }
 ```
 
-### Uhakiki wa Mazingira ya Uzalishaji
+### Uthibitisho wa Mazingira ya Uzalishaji
 
 ```bash
 #!/bin/bash
-# Uhakiki maalum wa mazingira ya uzalishaji
+# Production environment specific validations
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Angalia usanidi wa upatikanaji wa juu
+    # Check for high availability configurations
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Angalia usanidi wa chelezo
+    # Check for backup configurations
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Thibitisha usanidi wa ufuatiliaji
+    # Validate monitoring setup
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Angalia usanidi wa usalama
+    # Check for security configurations
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -933,9 +955,9 @@ validate_prod_environment() {
 
 ---
 
-## Uhakiki wa Rasilimali
+## Uthibitisho wa Rasilimali
 
-### Skripti ya Uhakiki wa Quota
+### Hati ya Uthibitisho wa Kikwazo
 
 ```python
 #!/usr/bin/env python3
@@ -948,17 +970,17 @@ import subprocess
 import sys
 from typing import Dict, List, Tuple
 
-def run_command(command: List[str]) -> Dict:
+def run_command(command: List[str]) -> dict | list | None:
     """Run Azure CLI command and return JSON result"""
     try:
         result = subprocess.run(command, capture_output=True, text=True, check=True)
         return json.loads(result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error running command {' '.join(command)}: {e}")
-        return {}
+        return None
     except json.JSONDecodeError as e:
         print(f"Error parsing JSON: {e}")
-        return {}
+        return None
 
 def check_compute_quotas(location: str) -> bool:
     """Check compute quotas in specified location"""
@@ -976,7 +998,10 @@ def check_compute_quotas(location: str) -> bool:
         if quota_item['name']['value'] in critical_quotas:
             current = quota_item['currentValue']
             limit = quota_item['limit']
-            usage_percent = (current / limit) * 100 if limit > 0 else 0
+            if limit <= 0:
+                print(f"❌ No quota for {quota_item['name']['value']}")
+                return False
+            usage_percent = (current / limit) * 100
             
             status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
             print(f"{status} {quota_item['name']['localizedValue']}: {current}/{limit} ({usage_percent:.1f}%)")
@@ -990,15 +1015,17 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Pata akaunti za kuhifadhi katika usajili
-    accounts = run_command(['az', 'storage', 'account', 'list'])
+    # Retrieve regional quota rather than assuming a subscription-wide constant.
+    usages = run_command(['az', 'storage', 'account', 'show-usage', '--location', location])
     
-    if accounts is None:
+    if not usages:
         print("❌ Could not retrieve storage account information")
         return False
     
-    account_count = len(accounts)
-    max_accounts = 250  # Kikomo cha chaguo-msingi cha Azure
+    account_count = usages['currentValue']
+    max_accounts = usages['limit']
+    if max_accounts <= 0:
+        return False
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,18 +1038,14 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # Kagua mitandao ya pepe
-    vnets = run_command(['az', 'network', 'vnet', 'list'])
-    if vnets is not None:
-        vnet_count = len(vnets)
-        print(f"✅ Virtual Networks: {vnet_count}/1000")
-    
-    # Kagua anwani za IP za umma
-    public_ips = run_command(['az', 'network', 'public-ip', 'list'])
-    if public_ips is not None:
-        ip_count = len(public_ips)
-        print(f"✅ Public IP Addresses: {ip_count}/1000")
-    
+    usages = run_command(['az', 'network', 'list-usages', '--location', location])
+    if not usages:
+        return False
+    for item in usages:
+        current, limit = item['currentValue'], item['limit']
+        print(f"{item['name']['value']}: {current}/{limit}")
+        if limit <= 0 or current >= limit:
+            return False
     return True
 
 def main():
@@ -1034,19 +1057,20 @@ def main():
     
     print("🔍 Azure Quota and Limits Validation")
     print(f"📍 Location: {location}")
-    print(f"⏰ Time: {subprocess.run(['date'], capture_output=True, text=True).stdout.strip()}")
+    from datetime import datetime, timezone
+    print(f"⏰ Time: {datetime.now(timezone.utc).isoformat()}")
     
     all_passed = True
     
-    # Endesha ukaguzi
+    # Run checks
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # Muhtasari
+    # Summary
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
-        print("✅ All quota checks passed - sufficient capacity available")
+        print("✅ Implemented quota thresholds passed; not a capacity reservation")
         sys.exit(0)
     else:
         print("❌ Some quota limits are near capacity - consider requesting increases")
@@ -1058,20 +1082,20 @@ if __name__ == "__main__":
 
 ---
 
-## Uhakiki wa Usalama & Uzingatiaji
+## Ukaguzi wa Usalama & Ufuataji
 
-### Skripti ya Uhakiki wa Usalama
+### Hati ya Uthibitisho wa Usalama
 
 ```bash
 #!/bin/bash
-# Uhakiki wa usalama na uzingatiaji kwa uanzishaji wa AZD
+# Security and compliance validation for AZD deployments
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Angalia matumizi ya Key Vault
+    # Check for Key Vault usage
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Angalia matumizi ya kitambulisho kilichosimamiwa
+    # Check for managed identity usage
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Angalia utekelezaji wa HTTPS
+    # Check for HTTPS enforcement
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1119,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Angalia toleo la chini la TLS
+    # Check for minimum TLS version
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1127,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Angalia vikwazo vya upatikanaji wa umma
+    # Check for public access restrictions
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1135,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Angalia vikundi vya usalama vya mtandao
+    # Check for network security groups
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1148,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Angalia usimbaji fiche wa data
+    # Check for data encryption
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Angalia kumbukumbu za ukaguzi
+    # Check for audit logging
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Angalia sera za nakala rudufu na uhifadhi
+    # Check for backup and retention policies
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1170,7 @@ check_compliance_requirements() {
     fi
 }
 
-# Utekelezaji mkuu
+# Main execution
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1157,13 +1181,13 @@ main() {
         exit 1
     fi
     
-    local security_issues
-    security_issues=$(check_security_practices)
+    local security_issues=0
+    check_security_practices || security_issues=$?
     check_compliance_requirements
     
     echo -e "\n=== Security Check Summary ==="
     if [[ $security_issues -eq 0 ]]; then
-        echo "✅ All security checks passed"
+        echo "✅ Text-search reminders passed; this is not a security/compliance assessment"
         exit 0
     else
         echo "⚠️  $security_issues security recommendations found"
@@ -1203,20 +1227,36 @@ on:
 
 jobs:
   preflight:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
     - name: Install AZD
       uses: Azure/setup-azd@v0.1.0
+      with:
+        version: 1.37.2
     
-    - name: Install Azure CLI
-      uses: azure/setup-azure@v3
+    - name: Verify prerequisites
+      run: |
+        az version
+        jq --version
+        python3 -c "import yaml"
     
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+    - name: AZD Login
+      run: |
+        azd auth login --client-id "${{ vars.AZURE_CLIENT_ID }}" \
+          --tenant-id "${{ vars.AZURE_TENANT_ID }}" \
+          --federated-credential-provider github
     
     - name: Run Pre-flight Checks
       run: |
@@ -1230,13 +1270,9 @@ jobs:
         chmod +x ./scripts/security-check.sh
         ./scripts/security-check.sh
     
-    - name: Upload Results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: preflight-results
-        path: preflight-results.json
 ```
+
+Sanidi vyeti vya ushirika kwa mtiririko huu wa kazi na unda/fufua mazingira ya azd uliochaguliwa kabla ya kuendesha hati zilizohifadhiwa. Mifano hii hutoa matokeo ya kibodi tu; hakuna faili la `preflight-results.json` au JUnit linalozalishwa.
 
 ### Uunganishaji wa Azure DevOps
 
@@ -1272,76 +1308,80 @@ steps:
       curl -fsSL https://aka.ms/install-azd.sh | bash
       export PATH=$PATH:~/.azd/bin
 
-- task: Bash@3
+- task: AzureCLI@2
   displayName: 'Run Pre-flight Checks'
   inputs:
-    targetType: filePath
-    filePath: './scripts/preflight-check.sh'
-    arguments: '--environment-name ${{ parameters.environment }} --location ${{ parameters.location }}'
-
-- task: PublishTestResults@2
-  displayName: 'Publish Pre-flight Results'
-  condition: always()
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: 'preflight-results.xml'
-    testRunTitle: 'Pre-flight Validation'
+    azureSubscription: $(serviceConnection)
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      set -e
+      # Requires a workload-identity-federated service connection.
+      # AzureCLI@2 supplies AZURESUBSCRIPTION_* for the azd provider.
+      azd auth login --federated-credential-provider azure-pipelines
+      bash ./scripts/preflight-check.sh \
+        --environment-name "${{ parameters.environment }}" \
+        --location "${{ parameters.location }}"
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 ```
+
+Mtiririko lazima urejee/unde mazingira yake ya azd na uhifadhi hati zilizoonyeshwa katika somo hili kabla ya kazi hii. Sanidi muunganisho wa huduma wa ushirika na mpe mtiririko ruhusa za tokeni zinazohitajika. Usitarajie kuingia Azure CLI kwa kazi ya awali ya `AzureCLI@2` kuthibitisha kazi rahisi ya Bash baadaye.
 
 ---
 
 ## Muhtasari wa Mbinu Bora
 
-### ✅ Mbinu Bora za Ukaguzi wa Pre-flight
+### ✅ Mbinu Bora za Ukaguzi wa Kabla ya Ndege
 
-1. **Otomatisha Pale Panapowezekana**
-   - Integrate checks into CI/CD pipelines
-   - Use scripts for repeatable validations
-   - Store results for audit trails
+1. **Tumia Otomatiki Pana**
+   - Unganisha ukaguzi katika mitiririko ya CI/CD
+   - Tumia hati kwa uthibitisho unaorudiwa
+   - Hifadhi matokeo kwa njia za ukaguzi
 
-2. **Uhakiki Maalum kwa Mazingira**
-   - Different checks for dev/staging/prod
-   - Appropriate security requirements per environment
-   - Cost optimization for non-production environments
+2. **Uthibitisho Maalum kwa Mazingira**
+   - Ukaguzi tofauti kwa maendeleo/kujaribu/uzalishaji
+   - Mahitaji ya usalama yanayofaa kwa mazingira
+   - Uboreshaji wa gharama kwa mazingira yasiyo ya uzalishaji
 
-3. **Ushughulikiaji Kamili**
-   - Authentication and permissions
-   - Resource quotas and availability
-   - Template validation and syntax
-   - Security and compliance requirements
+3. **Ufunikaji Kamili**
+   - Uthibitisho na ruhusa
+   - Vikwazo na upatikanaji wa rasilimali
+   - Uthibitisho wa templeti na sarufi
+   - Mahitaji ya usalama na ufuataji
 
-4. **Mawasilisho Wazi**
-   - Color-coded status indicators
-   - Detailed error messages with remediation steps
-   - Summary reports for quick assessment
+4. **Ripoti Wazi**
+   - Viashiria vya hali vilivyo na rangi
+   - Ujumbe wa makosa ya kina na hatua za kurekebisha
+   - Ripoti za muhtasari kwa tathmini ya haraka
 
-5. **Koma Haraka**
-   - Stop deployment if critical checks fail
-   - Provide clear guidance for resolution
-   - Enable easy re-running of checks
+5. **Kosa Haraka**
+   - Simamisha uwekaji ikiwa ukaguzi muhimu unashindwa
+   - Toa mwongozo wazi wa utatuzi
+   - Wezesha upitishaji rahisi wa ukaguzi
 
-### Makosa ya Kawaida ya Pre-flight
+### Makosa ya Kawaida ya Kabla ya Ndege
 
-1. **Skipping validation** for "quick" deployments
-2. **Insufficient permissions** checking before deployment
-3. **Ignoring quota limits** until deployment fails
-4. **Not validating templates** in CI/CD pipelines
-5. **Missing security validation** for production environments
-6. **Inadequate cost estimation** leading to budget surprises
+1. **Kukosa uthibitisho** kwa uwekaji "wa haraka"
+2. **Kukagua ruhusa chache** kabla ya uwekaji
+3. **Kupuuza vikwazo vya rasilimali** hadi uwekaji uashindikane
+4. **Kutoidhinishwa kwa templeti** katika mitiririko ya CI/CD
+5. **Kukosa uthibitisho wa usalama** kwa mazingira ya uzalishaji
+6. **Makisio duni ya gharama** yanayosababisha mshangao wa bajeti
 
 ---
 
-**Ushauri wa Mtaalam**: Run pre-flight checks as a separate job in your CI/CD pipeline before the actual deployment job. This allows you to catch issues early and provides faster feedback to developers.
+**Ushauri wa Kitaalamu**: Fanya ukaguzi wa kabla ya ndege kama kazi tofauti katika mtiririko wako wa CI/CD kabla ya kazi halisi ya uwekaji. Hii inakuwezesha kugundua matatizo mapema na kutoa mrejesho wa haraka kwa watengenezaji.
 
 ---
 
 **Uvinjari**
-- **Previous Lesson**: [Uteuzi wa SKU](sku-selection.md)
-- **Next Lesson**: [Karatasi ya Mwongozo](../../resources/cheat-sheet.md)
+- **Somo lililopita**: [Uchaguzi wa SKU](sku-selection.md)
+- **Somo lifuatalo**: [Karatasi ya Mdhihirisho](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Taarifa ya kutokuwajibika**:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya utafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Wakati tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokukamilika. Nyaraka ya asili katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatuwajibiki kwa kutokuelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

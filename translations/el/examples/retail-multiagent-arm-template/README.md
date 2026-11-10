@@ -1,784 +1,239 @@
-# Retail Multi-Agent Solution - Infrastructure Template
+# Υποδομή Λιανικής Πολλαπλών Πρακτόρων
 
-**Chapter 5: Production Deployment Package**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Related Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 Scenario Guide**: [Complete Architecture](../retail-scenario.md)
-- **🎯 Quick Deploy**: [One-Click Deployment](../../../../examples/retail-multiagent-arm-template)
+**Παράδειγμα προηγμένης αρχιτεκτονικής — όχι μια λειτουργική εφαρμογή πολλαπλών πρακτόρων.**
 
-> **⚠️ INFRASTRUCTURE TEMPLATE ONLY**  
-> Αυτό το ARM πρότυπο αναπτύσσει **πόρους Azure** για ένα σύστημα πολλαπλών agents.  
->  
-> **Τι αναπτύσσεται (15-25 λεπτά):**
-> - ✅ Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings σε 3 περιοχές)
-> - ✅ AI Search service (κενό, έτοιμο για δημιουργία index)
-> - ✅ Container Apps (εικόνες placeholder, έτοιμες για τον κώδικά σας)
-> - ✅ Storage, Cosmos DB, Key Vault, Application Insights
->  
-> **Τι ΔΕΝ περιλαμβάνεται (απαιτεί ανάπτυξη):**
-> - ❌ Κώδικας υλοποίησης agents (Customer Agent, Inventory Agent)
-> - ❌ Λογική δρομολόγησης και API endpoints
-> - ❌ Frontend chat UI
-> - ❌ Σχήματα index αναζήτησης και pipelines δεδομένων
-> - ❌ **Εκτιμώμενη προσπάθεια ανάπτυξης: 80-120 ώρες**
->  
-> **Χρησιμοποιήστε αυτό το πρότυπο αν:**
-> - ✅ Θέλετε να προμηθεύσετε υποδομή Azure για ένα έργο πολλαπλών agents
-> - ✅ Σκοπεύετε να αναπτύξετε την υλοποίηση του agent ξεχωριστά
-> - ✅ Χρειάζεστε μια παραγωγική βάση υποδομής
->  
-> **Μην το χρησιμοποιήσετε αν:**
-> - ❌ Περιμένετε άμεσα ένα λειτουργικό demo πολλαπλών agents
-> - ❌ Αναζητάτε πλήρη παραδείγματα κώδικα εφαρμογής
+[Αρχική του μαθήματος](../../README.md) ·
+[Κεφάλαιο 5](../../docs/chapter-05-multi-agent/README.md) ·
+[Σχέδιο αρχιτεκτονικής](../retail-scenario.md)
 
-## Overview
+## Τι αναπτύσσει αυτό
 
-Αυτός ο φάκελος περιέχει ένα ολοκληρωμένο Azure Resource Manager (ARM) πρότυπο για την ανάπτυξη του **θεμελιώδους υποδομής** ενός συστήματος υποστήριξης πελατών με πολλαπλούς agents. Το πρότυπο παρέχει όλες τις απαραίτητες υπηρεσίες Azure, σωστά διαμορφωμένες και διασυνδεδεμένες, έτοιμες για την ανάπτυξη της εφαρμογής σας.
+Αυτός ο κατάλογος περιέχει ένα πρότυπο ARM, παραμέτρους και ένα script ανάπτυξης Bash.
+Δεν υπάρχει **πηγαίος κώδικας `azure.yaml` ή εφαρμογής λιανικής**.
 
-**Μετά την ανάπτυξη, θα έχετε:** Παραγωγική υποδομή Azure  
-**Για να ολοκληρώσετε το σύστημα, χρειάζεστε:** Κώδικα agents, frontend UI και ρύθμιση δεδομένων (βλέπε [Architecture Guide](../retail-scenario.md))
+| Πόρος | Πραγματική κατάσταση μετά την παροχή |
+|---|---|
+| Πρωτεύων λογαριασμός Azure OpenAI | ανάπτυξη `gpt-4.1-chat` με χρήση `gpt-4.1` έκδοση `2025-04-14`, `GlobalStandard` |
+| Δευτερεύων λογαριασμός OpenAI (προαιρετικός) | `gpt-4.1-mini-inventory`, μοντέλο `gpt-4.1-mini` έκδοση `2025-04-14`, `GlobalStandard` |
+| Λογαριασμός Embeddings (προαιρετικός) | `text-embedding-ada-002` έκδοση `2`, `Standard`; χωρίς pipeline ευρετηρίασης |
+| Λογαριασμός Grader OpenAI | `gpt-4.1-grader`, μοντέλο `gpt-4.1` έκδοση `2025-04-14`, `GlobalStandard`; χωρίς αξιολογητή |
+| Αναζήτηση AI | Κενή υπηρεσία· χωρίς ευρετήριο ή έγγραφα |
+| Αποθήκευση | Κενά δοχεία blob `documents` και `uploads` |
+| Cosmos DB | Λογαριασμός χωρίς διακομιστή, βάση δεδομένων `chathistory`, κοντέινερ `conversations` διαμερισμένο κατά `/userId`, TTL αντικειμένου 30 ημερών |
+| Container Apps | Ο δρομολογητής και το frontend τρέχουν και τα δύο `mcr.microsoft.com/azuredocs/containerapps-helloworld:latest` στην θύρα 80 |
+| Key Vault (προαιρετικό) | Κενό vault με ενεργοποίηση RBAC; **χωρίς μυστικά ή αναθέσεις ρόλων** |
+| Application Insights / Log Analytics (προαιρετικό) | Πόροι και συλλογή καταγραφής περιβάλλοντος· χωρίς προσαρμοσμένη παρακολούθηση εφαρμογών, ειδοποιήσεις ή πίνακες εργαλείων |
+| Document Intelligence | Λογαριασμός S0· χωρίς ροή εργασίας επεξεργασίας εγγράφων |
 
-## 🎯 What Gets Deployed
+Η Legacy Bing Search v7 αποσύρθηκε στις 11 Αυγούστου 2025 και **δεν παρέχεται**.
+Δεν έχει υλοποιηθεί καμία εναλλακτική ενσωμάτωση αναζήτησης με βάση το web.
 
-### Core Infrastructure (Status After Deployment)
+**Δεν περιλαμβάνονται:** πράκτορες πελατών/αποθεμάτων, API δρομολογητή `/chat`, UI συνομιλίας frontend,
+σχήμα αναζήτησης ή scripts εισαγωγής, Azure Container Registry, ιδιωτικά σημεία πρόσβασης,
+διαχειριζόμενες ταυτότητες, αναθέσεις RBAC, αυτόματο failover, Front Door, εργαλείο
+σάρωσης κόκκινης ομάδας, CLI αξιολόγησης, αυθεντικοποίηση ή CI/CD.
 
-✅ **Microsoft Foundry Models Services** (Έτοιμο για κλήσεις API)
-  - Primary region: gpt-4.1 deployment (20K TPM capacity)
-  - Secondary region: gpt-4.1-mini deployment (10K TPM capacity)
-  - Tertiary region: Text embeddings model (30K TPM capacity)
-  - Evaluation region: gpt-4.1 grader model (15K TPM capacity)
-  - **Κατάσταση:** Πλήρως λειτουργικό - μπορεί να κάνει κλήσεις API αμέσως
+Ένα μήνυμα επιτυχίας ARM επιβεβαιώνει μόνο την παροχή πόρων. Δεν πιστοποιεί
+τη λειτουργικότητα της εφαρμογής, την ασφάλεια, τη διαθεσιμότητα ή την ετοιμότητα για παραγωγή.
 
-✅ **Azure AI Search** (Κενό - έτοιμο για διαμόρφωση)
-  - Δυνατότητες αναζήτησης με vectors ενεργοποιημένες
-  - Standard tier με 1 partition, 1 replica
-  - **Κατάσταση:** Η υπηρεσία λειτουργεί, αλλά απαιτεί δημιουργία index
-  - **Ενέργεια απαραίτητη:** Δημιουργήστε index αναζήτησης με το σχήμα σας
+## Προαπαιτούμενα και κόστη
 
-✅ **Azure Storage Account** (Κενό - έτοιμο για ανεβάσματα)
-  - Blob containers: `documents`, `uploads`
-  - Ασφαλής διαμόρφωση (μόνο HTTPS, χωρίς δημόσια πρόσβαση)
-  - **Κατάσταση:** Έτοιμο να δεχτεί αρχεία
-  - **Ενέργεια απαραίτητη:** Ανεβάστε τα δεδομένα προϊόντων και έγγραφά σας
-
-⚠️ **Container Apps Environment** (Αναπτυγμένες εικόνες placeholder)
-  - Agent router app (nginx default image)
-  - Frontend app (nginx default image)
-  - Αυτόματη κλιμάκωση διαμορφωμένη (0-10 instances)
-  - **Κατάσταση:** Τρέχουν placeholder containers
-  - **Ενέργεια απαραίτητη:** Δημιουργήστε και αναπτύξτε τις εφαρμογές των agents σας
-
-✅ **Azure Cosmos DB** (Κενό - έτοιμο για δεδομένα)
-  - Βάση δεδομένων και container προκαθορισμένα
-  - Βελτιστοποιημένο για λειτουργίες χαμηλής καθυστέρησης
-  - TTL ενεργοποιημένο για αυτόματο καθαρισμό
-  - **Κατάσταση:** Έτοιμο για αποθήκευση ιστορικού συνομιλιών
-
-✅ **Azure Key Vault** (Προαιρετικό - έτοιμο για μυστικά)
-  - Soft delete ενεργοποιημένο
-  - RBAC διαμορφωμένο για managed identities
-  - **Κατάσταση:** Έτοιμο για αποθήκευση API keys και connection strings
-
-✅ **Application Insights** (Προαιρετικό - παρακολούθηση ενεργή)
-  - Συνδεδεμένο με Log Analytics workspace
-  - Προσαρμοσμένα metrics και alerts διαμορφωμένα
-  - **Κατάσταση:** Έτοιμο να λαμβάνει τηλεμετρία από τις εφαρμογές σας
-
-✅ **Document Intelligence** (Έτοιμο για κλήσεις API)
-  - S0 tier για παραγωγικά φορτία
-  - **Κατάσταση:** Έτοιμο να επεξεργαστεί ανεβασμένα έγγραφα
-
-✅ **Bing Search API** (Έτοιμο για κλήσεις API)
-  - S1 tier για αναζητήσεις σε πραγματικό χρόνο
-  - **Κατάσταση:** Έτοιμο για ερωτήματα web search
-
-### Deployment Modes
-
-| Mode | OpenAI Capacity | Container Instances | Search Tier | Storage Redundancy | Best For |
-|------|-----------------|---------------------|-------------|-------------------|----------|
-| **Minimal** | 10K-20K TPM | 0-2 replicas | Basic | LRS (Local) | Dev/test, learning, proof-of-concept |
-| **Standard** | 30K-60K TPM | 2-5 replicas | Standard | ZRS (Zone) | Production, moderate traffic (<10K users) |
-| **Premium** | 80K-150K TPM | 5-10 replicas, zone-redundant | Premium | GRS (Geo) | Enterprise, high traffic (>10K users), 99.99% SLA |
-
-**Επίδραση στο Κόστος:**
-- **Minimal → Standard:** ~4x αύξηση κόστους ($100-370/mo → $420-1,450/mo)
-- **Standard → Premium:** ~3x αύξηση κόστους ($420-1,450/mo → $1,150-3,500/mo)
-- **Επιλογή βάσει:** Αναμενόμενο φορτίο, απαιτήσεις SLA, περιορισμοί προϋπολογισμού
-
-**Σχεδιασμός Χωρητικότητας:**
-- **TPM (Tokens Per Minute):** Συνολικό across όλες τις αναπτύξεις μοντέλων
-- **Container Instances:** Εύρος αυτόματης κλιμάκωσης (ελάχιστα-μέγιστα replicas)
-- **Search Tier:** Επηρεάζει την απόδοση των ερωτημάτων και τα όρια μεγέθους index
-
-## 📋 Prerequisites
-
-### Required Tools
-1. **Azure CLI** (version 2.50.0 or higher)
-   ```bash
-   az --version  # Ελέγξτε την έκδοση
-   az login      # Αυθεντικοποιήστε
-   ```
-
-2. **Active Azure subscription** with Owner or Contributor access
-   ```bash
-   az account show  # Επαληθεύστε τη συνδρομή
-   ```
-
-### Required Azure Quotas
-
-Πριν την ανάπτυξη, επαληθεύστε ότι υπάρχουν επαρκείς quota στις στοχευμένες περιοχές σας:
+- Bash (Git Bash/WSL σε Windows) και
+  [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- Συνδρομή με τις άδειες για δημιουργία όλων των αναφερόμενων πόρων.
+- Έλεγχος διαθεσιμότητας **κάθε μοντέλου/έκδοσης/SKU σε κάθε επιλεγμένη περιοχή** και
+  ποσοστώσεων για τη συνδρομή σας. Οι προεπιλογές είναι παραδείγματα, όχι εγγυήσεις.
+  Ανατρέξτε στη [διαθεσιμότητα μοντέλων](https://learn.microsoft.com/azure/ai-services/openai/concepts/models).
+- Επιλέξτε μια αφιερωμένη ομάδα πόρων που μπορείτε να διαγράψετε μετά τις δοκιμές.
 
 ```bash
-# Ελέγξτε τη διαθεσιμότητα των Microsoft Foundry Models στην περιοχή σας
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --location eastus2
-
-# Επαληθεύστε το όριο χρήσης του OpenAI (παράδειγμα για gpt-4.1)
-az cognitiveservices usage list \
-  --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
-
-# Ελέγξτε το όριο για τα Container Apps
-az provider show \
-  --namespace Microsoft.App \
-  --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
+az version
+az login
+az account show --query "{subscription:id,name:name}" -o table
+az cognitiveservices usage list --location eastus2 -o table
 ```
 
-**Ελάχιστες Απαιτούμενες Quotas:**
-- **Microsoft Foundry Models:** 3-4 αναπτύξεις μοντέλων σε διάφορες περιοχές
-  - gpt-4.1: 20K TPM (Tokens Per Minute)
-  - gpt-4.1-mini: 10K TPM
-  - text-embedding-ada-002: 30K TPM
-  - **Σημείωση:** Το gpt-4.1 μπορεί να έχει λίστα αναμονής σε μερικές περιοχές - ελέγξτε [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- **Container Apps:** Managed environment + 2-10 container instances
-- **AI Search:** Standard tier (το Basic δεν επαρκεί για vector search)
-- **Cosmos DB:** Standard provisioned throughput
+Προεπιλεγμένες τοποθεσίες: πρωτεύουσα `eastus2`, δευτερεύουσα `westus2`, embeddings `francecentral`;
+ο grader χρησιμοποιεί την πρωτεύουσα περιοχή εκτός αν δοθεί `graderLocation`.
+`--no-multi-region` παρακάμπτει τους δευτερεύοντες και embeddings λογαριασμούς· δεν παρακάμπτει
+τον λογαριασμό grader.
 
-**Εάν οι quotas είναι ανεπαρκείς:**
-1. Μεταβείτε στο Azure Portal → Quotas → Request increase
-2. Ή χρησιμοποιήστε το Azure CLI:
-   ```bash
-   az support tickets create \
-     --ticket-name "OpenAI-Quota-Increase" \
-     --severity "minimal" \
-     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
-   ```
-3. Εξετάστε εναλλακτικές περιοχές με διαθεσιμότητα
+Η Αναζήτηση χρεώνεται όσο παρέχεται ακόμα και όταν είναι άδεια. Οι ελάχιστες αντιγραφές Container,
+η πλεονάζουσα αποθήκευση, τα αιτήματα/η αποθήκευση Cosmos DB, οι τοκενες μοντέλου, οι κλήσεις Document Intelligence
+και η συλλογή/αποθήκευση λογ αρχείων μπορούν να προσθέσουν επιβαρύνσεις. Δεν υπάρχει **σταθερό ή επικυρωμένο
+μηνιαίο σύνολο**. Εκτιμήστε τα ακριβή SKUs στο
+[εργαλείο τιμολόγησης Azure](https://azure.microsoft.com/pricing/calculator/) και
+ρυθμίστε έναν προϋπολογισμό πριν την ανάπτυξη.
 
-## 🚀 Quick Deployment
+### Τρόποι ανάπτυξης
 
-### Option 1: Using Azure CLI
+Αυτές οι ρυθμίσεις αντιστοιχούν σε μεγέθη πόρων, **όχι πιστοποιήσεις παραγωγής ή SLA**:
+
+| Τρόπος | Μονάδες χωρητικότητας chat / mini / embedding / grader | Αντίγραφα δρομολογητή | Αντίγραφα frontend | Επίπεδο αναζήτησης | Αποθήκευση |
+|---|---|---|---|---|---|
+| ελάχιστο | 10 / 10 / 20 / 5 | 0–3 | 1–2 | βασικό, 1 αντίγραφο | Standard_LRS |
+| τυπικό | 20 / 15 / 30 / 15 | 1–3 | 1–2 | standard, 1 αντίγραφο | Standard_ZRS |
+| premium | 40 / 30 / 60 / 30 | 1–10 | 1–5 | standard2, 2 αντίγραφα | Standard_GRS |
+
+Οι μονάδες χωρητικότητας μοντέλου είναι μοντέλου/SKU-συγκεκριμένες· μην τις αθροίζετε ως καθολική
+εγγύηση TPM. Η premium έκδοση δεν ενεργοποιεί Container Apps με ζωνική πλεονάζουσα: αυτό απαιτεί
+επιπρόσθετο σχεδιασμό δικτύωσης. Η βασική Αναζήτηση υποστηρίζει αναζήτηση διανυσμάτων, υπό τους
+περιορισμούς υπηρεσίας· δεν είναι εγγενώς ασύμβατη με διανύσματα.
+
+## 🚀 Γρήγορη ανάπτυξη
+
+Εξετάστε πρώτα `azuredeploy.json` και `azuredeploy.parameters.json`. Οι παρακάτω εντολές
+**δημιουργούν χρεώσιμους πόρους Azure**· δεν είναι offline έλεγχοι.
+
+Από τη ρίζα του αποθετηρίου:
 
 ```bash
-# Κλωνοποιήστε ή κατεβάστε τα αρχεία προτύπου
-git clone <repository-url>
 cd examples/retail-multiagent-arm-template
-
-# Κάντε το script ανάπτυξης εκτελέσιμο
-chmod +x deploy.sh
-
-# Αναπτύξτε με τις προεπιλεγμένες ρυθμίσεις
-./deploy.sh -g myResourceGroup
-
-# Αναπτύξτε για παραγωγή με premium δυνατότητες
-./deploy.sh -g myProdRG -e prod -m premium -l eastus2
+bash deploy.sh --help
+bash deploy.sh -g retail-learning-rg -m minimal --no-multi-region
 ```
 
-### Option 2: Using Azure Portal
+Το script χρησιμοποιεί διαδρομές σχετικές με τον δικό του κατάλογο, ελέγχει σύνδεση/εργαλεία/ορίσματα,
+δημιουργεί την ομάδα πόρων αν δεν υπάρχει, επικυρώνει την ανάπτυξη, παρέχει τους πόρους, και
+εμφανίζει μη μυστικές έξοδοι. Δεν απαιτείται ή εκτελείται `jq`, πληθυσμός δεδομένων, ανάκτηση μυστικών ή
+ρύθμιση εφαρμογής μετά την ανάπτυξη.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
-
-### Option 3: Using Azure CLI directly
+Οι προεπιλεγμένες τιμές γραμμής εντολών του script υπερισχύουν των αντίστοιχων τιμών στο
+αρχείο παραμέτρων. Επεξεργαστείτε το αρχείο παραμέτρων για ρυθμίσεις όπως δευτερεύουσες/τριτεύουσες
+περιοχές· χρησιμοποιήστε απευθείας ανάπτυξη CLI αν χρειάζεστε αυθαίρετες παραμετρικές παρακάμψεις:
 
 ```bash
-# Δημιουργία ομάδας πόρων
-az group create --name myResourceGroup --location eastus2
-
-# Ανάπτυξη προτύπου
+az group create --name retail-learning-rg --location eastus2
 az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file azuredeploy.json \
-  --parameters azuredeploy.parameters.json
-```
-
-## ⏱️ Deployment Timeline
-
-### Τι να Περιμένετε
-
-| Phase | Duration | What Happens |
-|-------|----------|--------------||
-| **Template Validation** | 30-60 seconds | Το Azure επαληθεύει το σύνταξη και τις παραμέτρους του ARM template |
-| **Resource Group Setup** | 10-20 seconds | Δημιουργεί το resource group (αν χρειάζεται) |
-| **OpenAI Provisioning** | 5-8 minutes | Δημιουργεί 3-4 OpenAI accounts και αναπτύσσει τα μοντέλα |
-| **Container Apps** | 3-5 minutes | Δημιουργεί environment και αναπτύσσει placeholder containers |
-| **Search & Storage** | 2-4 minutes | Παρέχει AI Search service και storage accounts |
-| **Cosmos DB** | 2-3 minutes | Δημιουργεί βάση δεδομένων και ρυθμίζει containers |
-| **Monitoring Setup** | 2-3 minutes | Ρυθμίζει Application Insights και Log Analytics |
-| **RBAC Configuration** | 1-2 minutes | Διαμορφώνει managed identities και άδειες |
-| **Total Deployment** | **15-25 minutes** | Ολοκληρωμένη υποδομή έτοιμη |
-
-**Μετά την Ανάπτυξη:**
-- ✅ **Υποδομή Έτοιμη:** Όλες οι υπηρεσίες Azure παρεχόμενες και σε λειτουργία
-- ⏱️ **Ανάπτυξη Εφαρμογής:** 80-120 ώρες (ευθύνη σας)
-- ⏱️ **Διαμόρφωση Index:** 15-30 λεπτά (απαιτεί το σχήμα σας)
-- ⏱️ **Ανέβασμα Δεδομένων:** Εξαρτάται από το μέγεθος του dataset
-- ⏱️ **Δοκιμές & Επαλήθευση:** 2-4 ώρες
-
----
-
-## ✅ Verify Deployment Success
-
-### Step 1: Check Resource Provisioning (2 minutes)
-
-```bash
-# Επαληθεύστε ότι όλοι οι πόροι αναπτύχθηκαν επιτυχώς
-az resource list \
-  --resource-group myResourceGroup \
-  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
-  --output table
-```
-
-**Αναμενόμενο:** Κενός πίνακας (όλοι οι πόροι δείχνουν κατάσταση "Succeeded")
-
-### Step 2: Verify Microsoft Foundry Models Deployments (3 minutes)
-
-```bash
-# Καταγράψτε όλους τους λογαριασμούς OpenAI
-az cognitiveservices account list \
-  --resource-group myResourceGroup \
-  --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
-  --output table
-
-# Ελέγξτε τις αναπτύξεις μοντέλων για την κύρια περιοχή
-OPENAI_NAME=$(az cognitiveservices account list \
-  --resource-group myResourceGroup \
-  --query "[?kind=='OpenAI'] | [0].name" -o tsv)
-
-az cognitiveservices account deployment list \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --output table
-```
-
-**Αναμενόμενο:** 
-- 3-4 OpenAI accounts (primary, secondary, tertiary, evaluation regions)
-- 1-2 model deployments per account (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
-
-### Step 3: Test Infrastructure Endpoints (5 minutes)
-
-```bash
-# Λήψη διευθύνσεων URL της εφαρμογής κοντέινερ
-az containerapp list \
-  --resource-group myResourceGroup \
-  --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
-  --output table
-
-# Δοκιμή τελικού σημείου δρομολογητή (θα απαντήσει μια εικόνα κράτησης θέσης)
-ROUTER_URL=$(az containerapp show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --query "properties.configuration.ingress.fqdn" -o tsv)
-
-echo "Testing: https://$ROUTER_URL"
-curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expected)"
-```
-
-**Αναμενόμενο:** 
-- Τα Container Apps εμφανίζουν κατάσταση "Running"
-- Το placeholder nginx απαντά με HTTP 200 ή 404 (δεν υπάρχει ακόμα κώδικας εφαρμογής)
-
-### Step 4: Verify Microsoft Foundry Models API Access (3 minutes)
-
-```bash
-# Λήψη του endpoint και του κλειδιού της OpenAI
-OPENAI_ENDPOINT=$(az cognitiveservices account show \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --query "properties.endpoint" -o tsv)
-
-OPENAI_KEY=$(az cognitiveservices account keys list \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --query "key1" -o tsv)
-
-# Δοκιμή ανάπτυξης gpt-4.1
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
-  -H "Content-Type: application/json" \
-  -H "api-key: $OPENAI_KEY" \
-  -d '{
-    "messages": [{"role": "user", "content": "Say hello"}],
-    "max_tokens": 10
-  }'
-```
-
-**Αναμενόμενο:** JSON απόκριση με chat completion (επιβεβαιώνει ότι το OpenAI λειτουργεί)
-
-### Τι Λειτουργεί vs. Τι Δεν Λειτουργεί
-
-**✅ Λειτουργεί Μετά την Ανάπτυξη:**
-- Τα Microsoft Foundry Models έχουν αναπτυχθεί και δέχονται κλήσεις API
-- Η υπηρεσία AI Search τρέχει (κενή, χωρίς indexes)
-- Τα Container Apps τρέχουν (εικόνες nginx placeholder)
-- Οι Storage accounts είναι προσβάσιμοι και έτοιμοι για ανεβάσματα
-- Το Cosmos DB είναι έτοιμο για λειτουργίες δεδομένων
-- Το Application Insights συλλέγει τηλεμετρία υποδομής
-- Το Key Vault έτοιμο για αποθήκευση μυστικών
-
-**❌ Δεν Λειτουργούν Ακόμα (Απαιτείται Ανάπτυξη):**
-- Endpoints των agents (δεν υπάρχει αναπτυγμένος κώδικας εφαρμογής)
-- Λειτουργία chat (απαιτεί frontend + backend υλοποίηση)
-- Ερωτήματα αναζήτησης (δεν έχει δημιουργηθεί index αναζήτησης)
-- Pipeline επεξεργασίας εγγράφων (δεν έχουν ανέβει δεδομένα)
-- Προσαρμοσμένη τηλεμετρία (απαιτεί instrumentation εφαρμογής)
-
-**Επόμενα Βήματα:** Δείτε [Post-Deployment Configuration](../../../../examples/retail-multiagent-arm-template) για να αναπτύξετε και να ρυθμίσετε την εφαρμογή σας
-
----
-
-## ⚙️ Configuration Options
-
-### Template Parameters
-
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `projectName` | string | "retail" | Prefix for all resource names |
-| `location` | string | Resource group location | Primary deployment region |
-| `secondaryLocation` | string | "westus2" | Secondary region for multi-region deployment |
-| `tertiaryLocation` | string | "francecentral" | Region for embeddings model |
-| `environmentName` | string | "dev" | Environment designation (dev/staging/prod) |
-| `deploymentMode` | string | "standard" | Deployment configuration (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | Enable multi-region deployment |
-| `enableMonitoring` | bool | true | Enable Application Insights and logging |
-| `enableSecurity` | bool | true | Enable Key Vault and enhanced security |
-
-### Customizing Parameters
-
-Edit `azuredeploy.parameters.json`:
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "projectName": {
-      "value": "mycompany"
-    },
-    "environmentName": {
-      "value": "prod"
-    },
-    "deploymentMode": {
-      "value": "premium"
-    },
-    "location": {
-      "value": "eastus2"
-    }
-  }
-}
-```
-
-## 🏗️ Architecture Overview
-
-```mermaid
-graph TD
-    Frontend[Διεπαφή Χρήστη<br/>Εφαρμογή Κοντέινερ] --> Router[Δρομολογητής Πρακτόρων<br/>Εφαρμογή Κοντέινερ] --> Agents[Πράκτορες<br/>Πελάτης + Αποθέματα]
-    Router --> Search[Αναζήτηση AI<br/>Βάση Δεδομένων Διανυσμάτων]
-    Router --> Models[Μοντέλα Microsoft Foundry<br/>Πολλαπλές Περιοχές]
-    Agents --> Storage[Αποθήκευση<br/>Έγγραφα]
-    Search --> CosmosDB[Cosmos DB<br/>Ιστορικό Συνομιλιών]
-    Models --> AppInsights[App Insights<br/>Παρακολούθηση]
-    Storage --> KeyVault[Key Vault<br/>Μυστικά]
-```
-## 📖 Deployment Script Usage
-
-Το script `deploy.sh` παρέχει μια διαδραστική εμπειρία ανάπτυξης:
-
-```bash
-# Εμφάνιση βοήθειας
-./deploy.sh --help
-
-# Βασική ανάπτυξη
-./deploy.sh -g myResourceGroup
-
-# Προηγμένη ανάπτυξη με προσαρμοσμένες ρυθμίσεις
-./deploy.sh \
-  -g myProductionRG \
-  -p companyname \
-  -e prod \
-  -m premium \
-  -l eastus2
-
-# Ανάπτυξη για περιβάλλον ανάπτυξης χωρίς υποστήριξη πολλαπλών περιοχών
-./deploy.sh \
-  -g myDevRG \
-  -e dev \
-  -m minimal \
-  --no-multi-region \
-  --no-security
-```
-
-### Script Features
-
-- ✅ **Έλεγχος προαπαιτούμενων** (Azure CLI, κατάσταση σύνδεσης, αρχεία template)
-- ✅ **Διαχείριση resource group** (δημιουργεί αν δεν υπάρχει)
-- ✅ **Επαλήθευση template** πριν την ανάπτυξη
-- ✅ **Παρακολούθηση προόδου** με χρωματιστή έξοδο
-- ✅ **Εξαγωγή αποτελεσμάτων ανάπτυξης**
-- ✅ **Καθοδήγηση μετά την ανάπτυξη**
-
-## 📊 Monitoring Deployment
-
-### Έλεγχος Κατάστασης Ανάπτυξης
-
-```bash
-# Λίστα αναπτύξεων
-az deployment group list --resource-group myResourceGroup --output table
-
-# Λήψη λεπτομερειών ανάπτυξης
-az deployment group show \
-  --resource-group myResourceGroup \
-  --name retail-deployment-YYYYMMDD-HHMMSS
-
-# Παρακολούθηση προόδου ανάπτυξης
-az deployment group create \
-  --resource-group myResourceGroup \
+  --resource-group retail-learning-rg \
+  --name retail-learning \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json \
-  --verbose
+  --parameters projectName=retail environmentName=dev \
+    deploymentMode=minimal enableMultiRegion=false
 ```
 
-### Deployment Outputs
+Η παροχή μπορεί να διαρκέσει 15–45 λεπτά ή περισσότερο, και μπορεί να αποτύχει σε ποσοστώσεις περιφέρειας ή
+περιορισμούς κύκλου ζωής μοντέλου. Μην ξαναδοκιμάζετε τυφλά: διαβάστε πρώτα την αποτυχημένη ενέργεια.
 
-Μετά από επιτυχή ανάπτυξη, είναι διαθέσιμα τα εξής outputs:
+## Επιλογές διαμόρφωσης
 
-- **Frontend URL**: Δημόσιο endpoint για το web interface
-- **Router URL**: API endpoint για τον agent router
-- **OpenAI Endpoints**: Primary και secondary OpenAI service endpoints
-- **Search Service**: Endpoint της υπηρεσίας Azure AI Search
-- **Storage Account**: Όνομα του storage account για έγγραφα
-- **Key Vault**: Όνομα του Key Vault (αν είναι ενεργοποιημένο)
-- **Application Insights**: Όνομα της υπηρεσίας παρακολούθησης (αν είναι ενεργοποιημένο)
+| Παράμετρος | Προεπιλογή στο πρότυπο | Σημασία |
+|---|---|---|
+| `projectName` | Υποχρεωτικό (`retail` στο αρχείο παραμέτρων) | 3–10 γράμματα/ψηφία πεζά |
+| `location` | Τοποθεσία ομάδας πόρων | Πρωτεύουσα περιοχή (`eastus2` στο αρχείο παραμέτρων) |
+| `secondaryLocation` | `westus2` | Περιοχή λογαριασμού mini μοντέλου |
+| `tertiaryLocation` | `francecentral` | Περιοχή λογαριασμού embeddings |
+| `graderLocation` | Πρωτεύουσα περιοχή | Περιοχή λογαριασμού ανεξάρτητου grader |
+| `environmentName` | `dev` | `dev`, `staging`, ή `prod`; μόνο όνομα, όχι διακόπτης ενίσχυσης |
+| `deploymentMode` | `standard` | Επιλογή SKU/χωρητικότητας |
+| `enableMultiRegion` | `true` | Προσθήκη δευτερευόντων και λογαριασμών embeddings |
+| `enableMonitoring` | `true` | Προσθήκη Insights/χώρου εργασίας και συλλογής καταγραφής περιβάλλοντος |
+| `enableSecurity` | `true` | Δημιουργία μόνο κενού vault με ενεργοποίηση RBAC |
 
-## 🔧 Post-Deployment: Next Steps
-> **📝 Σημαντικό:** Η υποδομή έχει αναπτυχθεί, αλλά πρέπει να αναπτύξετε και να διανείμετε τον κώδικα της εφαρμογής.
+Αφαιρέθηκε η παραπλανητική παράμετρος `openAiApiVersion`: μια έκδοση API επιπέδου δεδομένων
+δεν ελέγχει τις εκδόσεις πόρων ARM ή τις εκδόσεις μοντέλου. Τα ζεύγη ονόματος/έκδοσης μοντέλου
+βρίσκονται σε `variables.modelDeployments`· ελέγξτε τα μαζί με το SKU ανάπτυξης.
 
-### Φάση 1: Ανάπτυξη Εφαρμογών Πρακτόρων (Δική σας Ευθύνη)
+## Επαλήθευση παροχής
 
-Το πρότυπο ARM δημιουργεί **κενές Container Apps** με εικόνες nginx ως δείκτες θέσης. Πρέπει να:
-
-**Απαιτούμενη Ανάπτυξη:**
-1. **Agent Implementation** (30-40 hours)
-   - Πράκτορας εξυπηρέτησης πελατών με ενσωμάτωση gpt-4.1
-   - Πράκτορας αποθεμάτων με ενσωμάτωση gpt-4.1-mini
-   - Λογική δρομολόγησης πρακτόρων
-
-2. **Frontend Development** (20-30 hours)
-   - Διεπαφή συνομιλίας UI (React/Vue/Angular)
-   - Λειτουργία μεταφόρτωσης αρχείων
-   - Απόδοση και μορφοποίηση απαντήσεων
-
-3. **Backend Services** (12-16 hours)
-   - FastAPI or Express router
-   - Middleware ελέγχου ταυτότητας
-   - Ενσωμάτωση τηλεμετρίας
-
-**Δείτε:** [Architecture Guide](../retail-scenario.md) για λεπτομερή πρότυπα υλοποίησης και παραδείγματα κώδικα
-
-### Φάση 2: Διαμορφώστε τον Δείκτη Αναζήτησης AI (15-30 λεπτά)
-
-Δημιουργήστε έναν δείκτη αναζήτησης που ταιριάζει με το μοντέλο δεδομένων σας:
+Χρησιμοποιήστε το όνομα ανάπτυξης από την έξοδο του script ή `az deployment group list`.
+Για απευθείας ανάπτυξη παραπάνω:
 
 ```bash
-# Λήψη λεπτομερειών υπηρεσίας αναζήτησης
-SEARCH_NAME=$(az search service list \
-  --resource-group myResourceGroup \
-  --query "[0].name" -o tsv)
-
-SEARCH_KEY=$(az search admin-key show \
-  --service-name $SEARCH_NAME \
-  --resource-group myResourceGroup \
-  --query "primaryKey" -o tsv)
-
-# Δημιουργήστε ευρετήριο με το σχήμα σας (παράδειγμα)
-curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
-  -H "Content-Type: application/json" \
-  -H "api-key: ${SEARCH_KEY}" \
-  -d '{
-    "name": "products",
-    "fields": [
-      {"name": "id", "type": "Edm.String", "key": true},
-      {"name": "title", "type": "Edm.String", "searchable": true},
-      {"name": "content", "type": "Edm.String", "searchable": true},
-      {"name": "category", "type": "Edm.String", "filterable": true},
-      {"name": "content_vector", "type": "Collection(Edm.Single)", 
-       "searchable": true, "dimensions": 1536, "vectorSearchProfile": "default"}
-    ],
-    "vectorSearch": {
-      "algorithms": [{"name": "default", "kind": "hnsw"}],
-      "profiles": [{"name": "default", "algorithm": "default"}]
-    }
-  }'
+RG=retail-learning-rg
+DEPLOYMENT=retail-learning
+az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.provisioningState -o tsv
+az deployment operation group list -g "$RG" -n "$DEPLOYMENT" -o table
+az resource list -g "$RG" -o table
 ```
 
-**Πόροι:**
-- [Σχεδιασμός Σχήματος Δείκτη Αναζήτησης AI](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [Διαμόρφωση Αναζήτησης Διανυσμάτων](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+Αναμενόμενο: κατάσταση ανάπτυξης `Succeeded`. Για αποτυχία, εξετάστε λεπτομέρειες σφάλματος λειτουργίας.
+Η έξοδος λίστας πόρων από μόνη της δεν αποτελεί αξιόπιστο έλεγχο κατάστασης παροχής.
 
-### Φάση 3: Μεταφορτώστε τα Δεδομένα σας (ο χρόνος διαφέρει)
-
-Μόλις έχετε δεδομένα προϊόντων και έγγραφα:
+Δοκιμάστε το placeholder **root**, όχι ένα μη υπαρκτό τελικό σημείο πράκτορα:
 
 ```bash
-# Λήψη στοιχείων λογαριασμού αποθήκευσης
-STORAGE_NAME=$(az storage account list \
-  --resource-group myResourceGroup \
-  --query "[0].name" -o tsv)
-
-STORAGE_KEY=$(az storage account keys list \
-  --account-name $STORAGE_NAME \
-  --resource-group myResourceGroup \
-  --query "[0].value" -o tsv)
-
-# Ανεβάστε τα έγγραφά σας
-az storage blob upload-batch \
-  --destination documents \
-  --source /path/to/your/product/docs \
-  --account-name $STORAGE_NAME \
-  --account-key $STORAGE_KEY
-
-# Παράδειγμα: Ανέβασμα ενός αρχείου
-az storage blob upload \
-  --container-name documents \
-  --name "product-manual.pdf" \
-  --file /path/to/product-manual.pdf \
-  --account-name $STORAGE_NAME \
-  --account-key $STORAGE_KEY
+ROUTER_URL=$(az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.outputs.routerUrl.value -o tsv)
+curl --fail-with-body "$ROUTER_URL"
 ```
 
-### Φάση 4: Κατασκευάστε και Αναπτύξτε τις Εφαρμογές σας (8-12 ώρες)
+Αναμενόμενο: HTTP 200 σελίδα hello-world, **όχι απάντηση συνομιλίας**. Σφάλμα HTTP δεν
+μετρά ως επιτυχημένη επαλήθευση.
 
-Μόλις αναπτύξετε τον κώδικα των πρακτόρων σας:
+Για να δοκιμάσετε πραγματική inference πρωτεύοντος μοντέλου (που χρεώνεται):
 
 ```bash
-# 1. Δημιουργήστε το Azure Container Registry (εάν χρειάζεται)
-az acr create \
-  --name myregistry \
-  --resource-group myResourceGroup \
-  --sku Basic
-
-# 2. Δημιουργήστε και ανεβάστε την εικόνα του agent router
-docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
-az acr login --name myregistry
-docker push myregistry.azurecr.io/agent-router:v1
-
-# 3. Δημιουργήστε και ανεβάστε την εικόνα του frontend
-docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
-docker push myregistry.azurecr.io/frontend:v1
-
-# 4. Ενημερώστε τα Container Apps με τις εικόνες σας
-az containerapp update \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/agent-router:v1
-
-az containerapp update \
-  --name retail-frontend \
-  --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/frontend:v1
-
-# 5. Ρυθμίστε τις μεταβλητές περιβάλλοντος
-az containerapp update \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --set-env-vars \
-    OPENAI_ENDPOINT=secretref:openai-endpoint \
-    OPENAI_KEY=secretref:openai-key \
-    SEARCH_ENDPOINT=secretref:search-endpoint \
-    SEARCH_KEY=secretref:search-key
+OPENAI_ENDPOINT=$(az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.outputs.openAiEndpointPrimary.value -o tsv)
+OPENAI_NAME=$(az cognitiveservices account list -g "$RG" \
+  --query "[?kind=='OpenAI' && contains(name, '-openai-primary-')].name | [0]" -o tsv)
+OPENAI_KEY=$(az cognitiveservices account keys list -g "$RG" -n "$OPENAI_NAME" \
+  --query key1 -o tsv)
+curl --fail-with-body \
+  "${OPENAI_ENDPOINT%/}/openai/deployments/gpt-4.1-chat/chat/completions?api-version=2024-10-21" \
+  -H "Content-Type: application/json" -H "api-key: $OPENAI_KEY" \
+  -d '{"messages":[{"role":"user","content":"Say hello"}],"max_tokens":20}'
+unset OPENAI_KEY
 ```
 
-### Φάση 5: Δοκιμάστε την Εφαρμογή σας (2-4 ώρες)
+Αναμενόμενο: JSON με `choices` και `usage`. Το όνομα ανάπτυξης είναι
+`gpt-4.1-chat`, όχι το υποκείμενο όνομα μοντέλου `gpt-4.1`.
+
+## 🔧 Μετά την ανάπτυξη: Επόμενα βήματα
+
+Αυτό είναι ένα **αναπτυξιακό backlog**, όχι μια ολοκληρωμένη άσκηση:
+
+1. Υλοποιήστε πιστοποιημένους πράκτορες πελατών/αποθεμάτων και το συμβόλαιο δρομολογητή.
+2. Υλοποιήστε το frontend και επικυρώστε τη διαμόρφωσή του.
+3. Δημιουργήστε και γεμίστε έναν δείκτη αναζήτησης με διάσταση/προφίλ που ταιριάζει στο
+   embedding μοντέλο σας, και χειριστείτε αποτυχίες και ενημερώσεις εγγράφων.
+4. Δημιουργήστε ένα μητρώο και ρυθμίστε την ταυτότητα/άδειες ανάκλησης εικόνας.
+5. Δημιουργήστε και ωθήστε πραγματικές εικόνες. Αλλάξτε τις θύρες εισόδου και probes Container App ώστε
+   να ταιριάζουν σε αυτές τις εικόνες πριν τη δοκιμή· η θύρα 80 εδώ ανήκει στα placeholders.
+6. Ρυθμίστε μυστικά ή διαχειριζόμενες ταυτότητες και ρόλους δεδομένων με ορίζοντα. Μην
+   αναφέρεστε σε φανταστικά ονόματα μυστικών· αυτό το πρότυπο δεν δημιουργεί μυστικά εφαρμογής.
+7. Παρακολουθήστε τις εφαρμογές, ρυθμίστε ειδοποιήσεις, δοκιμάστε αποτυχία/ανάκτηση, και αξιολογήστε
+   τα αποτελέσματα με αντιπροσωπευτικά αληθινά δεδομένα και ανθρώπινη ανασκόπηση.
+
+Δείτε το [σχέδιο αρχιτεκτονικής](../retail-scenario.md) για όρια σχεδιασμού.
+
+## Αντιμετώπιση προβλημάτων και όρια ασφαλείας
+
+- **Μοντέλο μη διαθέσιμο:** επαληθεύστε μοντέλο/έκδοση/SKU, περιοχή και ποσοστώσεις συνδρομής·
+  το script δεν προελέγχει καταλόγους μοντέλων.
+- **Απενεργοποίηση παρακολούθησης:** ο προορισμός καταγραφής περιβάλλοντος είναι `none`, όχι
+  άκυρη κενή διαμόρφωση Log Analytics.
+- **Μόνο placeholders:** `/chat`, αξιολόγηση πράκτορα και εισαγωγή αρχείων δεν υπάρχουν.
+- **Δίκτυο/ταυτότητα:** δημόσια τελικά σημεία και τοπική αυθεντικοποίηση είναι ενεργοποιημένα.
+  Η ενεργοποίηση RBAC σε Key Vault μόνο δεν δημιουργεί αναθέσεις ρόλων ή ταυτότητες.
+- **Παραγωγή:** προσθέστε αυθεντικοποίηση, scoped ταυτότητες, διαχείριση μυστικών,
+  ιδιωτικό δίκτυο όπου απαιτείται, σχεδιασμό διαθεσιμότητας και επιχειρησιακές δοκιμές.
+  Λογαριασμοί μοντέλων πολλαπλών περιοχών μόνοι τους δεν παρέχουν failover.
+
+## Καθαρισμός
+
+Δεν υπάρχει έργο AZD εδώ· `azd down` δεν είναι η εντολή καθαρισμού.
+Μετά τον έλεγχο ότι η ομάδα περιέχει μόνο τα εκπαιδευτικά σας πόρους:
 
 ```bash
-# Αποκτήστε το URL της εφαρμογής σας
-ROUTER_URL=$(az containerapp show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --query "properties.configuration.ingress.fqdn" -o tsv)
-
-# Δοκιμάστε το endpoint του πράκτορα (μόλις ο κώδικάς σας αναπτυχθεί)
-curl -X POST "https://${ROUTER_URL}/chat" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "message": "Hello, I need help with my order",
-    "agent": "customer"
-  }'
-
-# Ελέγξτε τα αρχεία καταγραφής της εφαρμογής
-az containerapp logs show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --follow
+az group delete --name retail-learning-rg --yes
+az group exists --name retail-learning-rg
 ```
 
-### Πόροι Υλοποίησης
+Αναμενόμενο μετά το πέρας διαγραφής: `false`. Τα πόροι με μαλακή διαγραφή Key Vault και Cognitive Services
+μπορεί να διατηρούν ονόματα· η εκκαθάριση απαιτεί κατάλληλες άδειες.
+Ελέγξτε τη Διαχείριση Κόστους για καθυστερημένες χρεώσεις χρήσης.
 
-**Αρχιτεκτονική & Σχεδιασμός:**
-- 📖 [Πλήρης Οδηγός Αρχιτεκτονικής](../retail-scenario.md) - Λεπτομερή πρότυπα υλοποίησης
-- 📖 [Σχεδιαστικά Πρότυπα Πολυπρακτορικών Συστημάτων](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
-
-**Παραδείγματα Κώδικα:**
-- 🔗 [Δείγμα Chat Microsoft Foundry Models](https://github.com/Azure-Samples/azure-search-openai-demo) - πρότυπο RAG
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Πλαίσιο πρακτόρων (C#)
-- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Ορχήστρωση πρακτόρων (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Συνομιλίες πολυπρακτόρων
-
-**Εκτιμώμενη Συνολική Προσπάθεια:**
-- Ανάπτυξη υποδομής: 15-25 minutes (✅ Complete)
-- Ανάπτυξη εφαρμογής: 80-120 hours (🔨 Η δική σας εργασία)
-- Δοκιμές και βελτιστοποίηση: 15-25 hours (🔨 Η δική σας εργασία)
-
-## 🛠️ Αντιμετώπιση προβλημάτων
-
-### Συνηθισμένα Προβλήματα
-
-#### 1. Υπέρβαση ποσοστώσεων Microsoft Foundry Models
-
-```bash
-# Ελέγξτε την τρέχουσα χρήση του ορίου
-az cognitiveservices usage list --location eastus2
-
-# Ζητήστε αύξηση του ορίου
-az support tickets create \
-  --ticket-name "OpenAI-Quota-Increase" \
-  --severity "minimal" \
-  --description "Request quota increase for Microsoft Foundry Models in region X"
-```
-
-#### 2. Η ανάπτυξη των Container Apps απέτυχε
-
-```bash
-# Έλεγχος των αρχείων καταγραφής της εφαρμογής κοντέινερ
-az containerapp logs show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --follow
-
-# Επανεκκίνηση της εφαρμογής κοντέινερ
-az containerapp revision restart \
-  --name retail-router \
-  --resource-group myResourceGroup
-```
-
-#### 3. Αρχικοποίηση Υπηρεσίας Αναζήτησης
-
-```bash
-# Επαλήθευση κατάστασης υπηρεσίας αναζήτησης
-az search service show \
-  --name <search-service-name> \
-  --resource-group myResourceGroup
-
-# Δοκιμή συνδεσιμότητας υπηρεσίας αναζήτησης
-curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
-  -H "api-key: <search-admin-key>"
-```
-
-### Επικύρωση Ανάπτυξης
-
-```bash
-# Επαληθεύστε ότι όλοι οι πόροι έχουν δημιουργηθεί
-az resource list \
-  --resource-group myResourceGroup \
-  --output table
-
-# Ελέγξτε την υγεία των πόρων
-az resource list \
-  --resource-group myResourceGroup \
-  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
-  --output table
-```
-
-## 🔐 Ζητήματα Ασφαλείας
-
-### Διαχείριση Κλειδιών
-- Όλα τα μυστικά αποθηκεύονται στο Azure Key Vault (όταν είναι ενεργοποιημένο)
-- Οι Container apps χρησιμοποιούν διαχειριζόμενη ταυτότητα για έλεγχο ταυτότητας
-- Οι λογαριασμοί αποθήκευσης έχουν ασφαλείς προεπιλογές (μόνο HTTPS, χωρίς δημόσια πρόσβαση blob)
-
-### Ασφάλεια Δικτύου
-- Οι Container apps χρησιμοποιούν εσωτερική δικτύωση όπου είναι δυνατό
-- Η υπηρεσία αναζήτησης είναι διαμορφωμένη με την επιλογή ιδιωτικών endpoints
-- Το Cosmos DB είναι διαμορφωμένο με τις ελάχιστες απαραίτητες άδειες
-
-### Διαμόρφωση RBAC
-```bash
-# Ανάθεση των απαραίτητων ρόλων στη διαχειριζόμενη ταυτότητα
-az role assignment create \
-  --assignee <container-app-managed-identity> \
-  --role "Cognitive Services OpenAI User" \
-  --scope <openai-resource-id>
-```
-
-## 💰 Βελτιστοποίηση Κόστους
-
-### Εκτιμήσεις Κόστους (Μηνιαίο, USD)
-
-| Λειτουργία | OpenAI | Container Apps | Αναζήτηση | Αποθήκευση | Συνολ. Εκτίμηση |
-|------|--------|----------------|--------|---------|------------|
-| Ελάχιστο | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
-| Τυπικό | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
-| Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
-
-### Παρακολούθηση Κόστους
-
-```bash
-# Ρύθμιση ειδοποιήσεων προϋπολογισμού
-az consumption budget create \
-  --account-name <subscription-id> \
-  --budget-name "retail-budget" \
-  --amount 500 \
-  --time-grain Monthly \
-  --start-date 2024-01-01 \
-  --end-date 2024-12-31
-```
-
-## 🔄 Ενημερώσεις και Συντήρηση
-
-### Ενημερώσεις Προτύπου
-- Χρησιμοποιήστε έλεγχο εκδόσεων για τα αρχεία προτύπου ARM
-- Δοκιμάστε τις αλλαγές πρώτα στο περιβάλλον ανάπτυξης
-- Χρησιμοποιήστε λειτουργία incremental deployment για ενημερώσεις
-
-### Ενημερώσεις Πόρων
-```bash
-# Ενημέρωση με νέες παραμέτρους
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file azuredeploy.json \
-  --parameters azuredeploy.parameters.json \
-  --mode Incremental
-```
-
-### Δημιουργία αντιγράφων ασφαλείας και Αποκατάσταση
-- Αυτόματη δημιουργία αντιγράφων ασφαλείας Cosmos DB ενεργοποιημένη
-- Η δυνατότητα soft delete του Key Vault ενεργοποιημένη
-- Οι αναθεωρήσεις των Container app διατηρούνται για επαναφορά
-
-## 📞 Υποστήριξη
-
-- **Ζητήματα Προτύπου**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Υποστήριξη Azure**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **Κοινότητα**: [Azure AI Discord](https://discord.gg/microsoft-azure)
-
----
-
-**⚡ Έτοιμοι να αναπτύξετε τη λύση πολλαπλών πρακτόρων σας;**
-
-Ξεκινήστε με: `./deploy.sh -g myResourceGroup`
+[Αναφέρετε ένα πρόβλημα](https://github.com/microsoft/AZD-for-beginners/issues) ·
+[Azure AI Search](https://learn.microsoft.com/azure/search/) ·
+[Container Apps](https://learn.microsoft.com/azure/container-apps/)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθύνης:
-Το παρόν έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης τεχνητής νοημοσύνης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρότι καταβάλλουμε προσπάθειες για ακρίβεια, λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες συνιστάται η επαγγελματική, ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρανοήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση ευθυνών**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

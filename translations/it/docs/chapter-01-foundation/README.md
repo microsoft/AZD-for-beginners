@@ -1,19 +1,19 @@
 # Capitolo 1: Fondamenti & Avvio Rapido
 
-**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 30-45 minuti | **⭐ Complessità**: Principiante
+**📚 Corso**: [AZD per Principianti](../../README.md) | **⏱️ Durata**: 75-120 minuti incluso il primo deployment; esercizi aggiuntivi richiedono più tempo | **⭐ Complessità**: Principiante
 
 ---
 
 ## Panoramica
 
-Questo capitolo introduce i fondamenti di Azure Developer CLI (azd). Imparerai i concetti principali, installerai gli strumenti e distribuirai la tua prima applicazione su Azure.
+Questo capitolo introduce i fondamenti di Azure Developer CLI (azd). Imparerai i concetti base, installerai gli strumenti e distribuirai la tua prima applicazione su Azure.
 
-> Validato con `azd 1.27.1` a luglio 2026.
+> Obiettivo revisione comandi e configurazioni: `azd 1.37.2` (novembre 2026). La provisioning live di Azure non è stata eseguita durante la revisione.
 
 ## Obiettivi di Apprendimento
 
 Completando questo capitolo, sarai in grado di:
-- Capire cos'è Azure Developer CLI e come si differenzia da Azure CLI
+- Comprendere cos’è Azure Developer CLI e come si differenzia da Azure CLI
 - Installare e configurare AZD sulla tua piattaforma
 - Distribuire la tua prima applicazione su Azure con `azd up`
 - Pulire le risorse con `azd down`
@@ -24,17 +24,17 @@ Completando questo capitolo, sarai in grado di:
 
 | # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Fondamenti di AZD](azd-basics.md) | Concetti principali, terminologia e struttura del progetto | 15 min |
-| 2 | [Installazione & Configurazione](installation.md) | Guide specifiche per piattaforma per l'installazione | 10 min |
-| 3 | [Il Tuo Primo Progetto](first-project.md) | Pratica: Distribuire un'app web su Azure | 20 min |
-| 4 | [Porta la Tua App](bring-your-own-app.md) | Aggiungi azd a un progetto esistente che hai già | 15 min |
-| 5 | [Dev Containers & Codespaces](dev-containers.md) | Ambienti azd riproducibili con contenitori di sviluppo | 15 min |
+| 1 | [Nozioni di base AZD](azd-basics.md) | Concetti base, terminologia e struttura del progetto | 15 min |
+| 2 | [Installazione & Configurazione](installation.md) | Guide all’installazione specifiche per piattaforma | 10 min |
+| 3 | [Il tuo primo progetto](first-project.md) | Pratico: Distribuire un’app web su Azure | 20 min |
+| 4 | [Porta la tua app](bring-your-own-app.md) | Aggiungi azd a un progetto esistente che hai già | 15 min |
+| 5 | [Container di sviluppo & Codespaces](dev-containers.md) | Ambienti azd riproducibili con container di sviluppo | 15 min |
 
 ---
 
-## ✅ Inizia Qui: Verifica la Tua Configurazione
+## ✅ Inizia Qui: Valida la tua Configurazione
 
-Prima di iniziare, conferma che la tua macchina locale sia pronta per il modello del Capitolo 1:
+Prima di iniziare, conferma che la tua macchina locale sia pronta per il template del Capitolo 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Prima di iniziare, conferma che la tua macchina locale sia pronta per il modello
 bash ./validate-setup.sh
 ```
 
-Se lo script segnala strumenti mancanti, correggi quelli prima di continuare con il capitolo.
+Se lo script segnala strumenti mancanti, risolvili prima e poi continua con il capitolo.
 
 ---
 
 ## 🚀 Avvio Rapido
 
 ```bash
-# Verifica l'installazione
+# Check installation
 azd version
 
-# Autenticati per AZD
-# Opzionale: az login se prevedi di eseguire direttamente comandi Azure CLI
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Distribuisci la tua prima app
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Pulisci quando hai finito
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -75,11 +77,11 @@ azd down --force --purge
 Dopo aver completato questo capitolo, dovresti essere in grado di:
 
 ```bash
-azd version              # Mostra versione installata
-azd init --template todo-nodejs-mongo  # Inizializza progetto
-azd up                   # Distribuisce su Azure
-azd show                 # Mostra URL dell'app in esecuzione
-azd down --force --purge # Pulisce le risorse
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -95,7 +97,7 @@ azd down --force --purge # Pulisce le risorse
 
 ## 📖 Risorse Correlate
 
-- [Cheat Sheet Comandi](../../resources/cheat-sheet.md)
+- [Scheda Rapida Comandi](../../resources/cheat-sheet.md)
 - [FAQ](../../resources/faq.md)
 - [Glossario](../../resources/glossary.md)
 

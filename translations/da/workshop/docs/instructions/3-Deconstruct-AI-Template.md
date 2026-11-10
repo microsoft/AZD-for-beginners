@@ -1,280 +1,133 @@
-# 3. Nedbryd en skabelon
+# 3. Nedbryd en Skabelon
 
-!!! tip "VED SLUTNINGEN AF DETTE MODUL VIL DU KUNNE"
+!!! tip "VED SLUTNINGEN AF DENNE MODUL VIL DU VÆRE I STAND TIL AT"
 
-    - [ ] Aktivere GitHub Copilot med MCP-servere til Azure-assistance
-    - [ ] Forstå AZD-skabelonens mappeopsætning og komponenter
-    - [ ] Udforske infrastruktur-som-kode (Bicep) organiseringsmønstre
-    - [ ] **Lab 3:** Brug GitHub Copilot til at udforske og forstå repository-arkitektur 
-
----
-
-
-Med AZD-skabeloner og Azure Developer CLI (`azd`) kan vi hurtigt kickstarte vores AI-udviklingsrejse med standardiserede repositories, der leverer eksempelcode, infrastruktur- og konfigurationsfiler - i form af et klar-til-distribution _starter_-projekt.
-
-**Men nu skal vi forstå projektstrukturen og kodebasen - og være i stand til at tilpasse AZD-skabelonen - uden nogen forudgående erfaring eller forståelse af AZD!**
+    - [ ] Use GitHub Copilot and optional MCP tools for Azure documentation and read-only exploration
+    - [ ] Identify the template's application, infrastructure, configuration, and test entry points
+    - [ ] Verify generated explanations against actual repository files
+    - [ ] **Lab 3:** Trace one request and one configuration input through the project
 
 ---
 
 ## 1. Aktivér GitHub Copilot
 
-### 1.1 Installér GitHub Copilot Chat
+Åbn det initialiserede AI-eksempel i VS Code, og aktivér [GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Log ind med en konto, der har en gyldig plan; brugsgrænser varierer. Bed Copilot om at forklare repository'et før du godkender ændringer.
 
-Det er tid til at udforske [GitHub Copilot med Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Nu kan vi bruge naturligt sprog til at beskrive vores opgave på højere niveau og få hjælp til udførelsen. Til dette lab bruger vi [Copilot Free plan](https://github.com/github-copilot/signup), som har en månedlig grænse for completioner og chatinteraktioner.
+### Valgfri MCP-servere
 
-Udvidelsen kan installeres fra marketplace, og den er ofte allerede tilgængelig i Codespaces eller dev container-miljøer. _Klik `Open Chat` fra Copilot-ikonets drop-down - og skriv et prompt som `What can you do?`_ - du kan blive bedt om at logge ind. **GitHub Copilot Chat er klar**.
+Disse tjenester kan levere yderligere værktøjer:
 
-### 1.2. Installér MCP-servere
+- [Azure MCP Server](https://learn.microsoft.com/azure/developer/azure-mcp-server/overview)
+- [Microsoft Learn MCP Server](https://learn.microsoft.com/training/support/mcp)
 
-For at Agent mode er effektiv, skal den have adgang til de rigtige værktøjer for at hjælpe med at hente viden eller udføre handlinger. Her kan MCP-servere hjælpe. Vi konfigurerer følgende servere:
+I VS Code, gennemgå [MCP konfigurationsvejledningen](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) og opret `.vscode/mcp.json` hvis nødvendigt:
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+```json
+{
+  "servers": {
+    "Azure MCP Server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"]
+    },
+    "microsoft.docs.mcp": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
 
-For at aktivere disse:
+Kommandoen `npx` kræver en understøttet Node.js/npm installation og downloader eksekverbar kode. Gennemgå pakken og fastgør en godkendt version for en reproducerbar teamopsætning. Start serverne ved hjælp af VS Codes MCP-kontroller og inspicer de tilgængelige værktøjer; navnene kan ændre sig mellem versioner.
 
-1. Opret en fil kaldet `.vscode/mcp.json` hvis den ikke eksisterer
-1. Kopiér følgende ind i den fil - og start serverne!
-   ```json title=".vscode/mcp.json"
-   {
-      "servers": {
-         "Azure MCP Server": {
-            "command": "npx",
-            "args": [
-            "-y",
-            "@azure/mcp@latest",
-            "server",
-            "start"
-            ]
-         },
-         "microsoft.docs.mcp": {
-            "type": "http",
-            "url": "https://learn.microsoft.com/api/mcp"
-         }
-      }
-   }
-   ```
+**Godkendelse er separat.** Brug `azd auth login` for AZD. Følg Azure MCP's dokumenterede godkendelsesflow for dets værktøjer; AZD-login alene etablerer ikke en MCP-session. Brug `az login` separat, når en øvelse eller hook kalder Azure CLI.
 
-??? warning "Du kan få en fejl om, at `npx` ikke er installeret (klik for at udvide for løsning)"
+Prøv læse- og skrivebeskyttede prompts:
 
-      For at rette dette, åbn `.devcontainer/devcontainer.json` filen og tilføj denne linje til features-sektionen. Byg derefter containeren igen. Du bør nu have `npx` installeret.
+1. "Brug Microsoft Learn MCP til at finde dokumentationen for Azure Developer CLI konfiguration."
+2. "Forklar dette repository's `azure.yaml`; angiv de filer der implementerer hver hook."
+3. "Ved brug af de tilgængelige Azure MCP værktøjer, list mine deployerede ressourcer uden at ændre noget."
 
-      ```title="" linenums="0"
-         "features": {
-            "ghcr.io/devcontainers/features/node:1": {},
-            ...
-         },
-      ```
+Tjek den valgte tenant/abonnement og hvert foreslået værktøjskald. Godkend ikke oprettelse, sletning eller ændring af adgang til ressourcer blot for at udforske arkitekturen.
 
----
+## 2. Forstå arkitekturen
 
-### 1.3. Test GitHub Copilot Chat
+Eksemplet huser en Python FastAPI backend og en React/TypeScript frontend i Azure Container Apps. Backend kommunikerer med en agent i et Microsoft Foundry-projekt. Hentning og observabilitet afhænger af de aktiverede skabelonfunktioner og succesfuld opsætning; de er ikke garanteret blot fordi applikationen er deployeret.
 
-**Brug først `azd auth login` for at godkende over for Azure fra VS Code-kommando-linjen. Brug også `az login` kun hvis du planlægger at køre Azure CLI-kommandoer direkte.**
+![Illustrativ arkitektur](../../../../../translated_images/da/architecture.8cec470ec15c65c7.webp)
 
-Du bør nu kunne forespørge din Azure-abonnementsstatus og stille spørgsmål om udrullede ressourcer eller konfiguration. Prøv disse prompts:
+Sammenlign dette diagram med den [aktuelt upstream deployment guide](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) og dine faktiske ressourcer. Tjek den konfigurerede modeldeployment, agentværktøjer, managed identity, rollefordelinger og valgfrie AI Search/Application Insights ressourcer.
 
-1. `List my Azure resource groups`
-1. `#foundry list my current deployments`
+**Øvelse:** Bed Copilot om at spore en chatforespørgsel fra frontend gennem API til Foundry, med fil- og funktionsreferencer. Åbn disse referencer og verificér forklaringen. Drop ikke at udlede implementeret godkendelse, routing eller autorisation kun ud fra et diagram.
 
-Du kan også stille spørgsmål om Azure-dokumentation og få svar funderet i Microsoft Docs MCP-serveren. Prøv disse prompts:
+## 3. Repository struktur
 
-1. `#microsoft_docs_search What is Azure Developer CLI?`
-1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
+Følgende udvalgte stier blev kontrolleret mod eksemplet den 4. november 2026. Din initialiserede revision er fortsat den sande kilde:
 
-Eller du kan bede om kodeudsnit til at fuldføre en opgave. Prøv dette prompt.
+```text
+get-started-with-ai-agents/
+  azure.yaml
+  docker-compose.yaml
+  requirements-dev.txt
+  .devcontainer/
+  infra/
+    main.bicep
+    main.parameters.json
+    api.bicep
+    core/
+  src/
+    Dockerfile
+    pyproject.toml
+    requirements.txt
+    api/
+      main.py
+      routes.py
+      search_index_manager.py
+    frontend/
+      package.json
+      src/
+    files/
+  scripts/
+    validate_env_vars.sh
+    validate_env_vars.ps1
+    postdeploy.sh
+    postdeploy.ps1
+  tests/
+    test_evaluation.py
+    test_red_teaming.py
+  docs/
+    deployment.md
+    deploy_customization.md
+    ai_search.md
+    observability.md
+    local_development.md
+    troubleshooting.md
+```
 
-1. `Give me a Python code example that uses AAD for an interactive chat client`
+### Infrastruktur og konfiguration
 
-I `Ask`-tilstand vil dette give kode, som du kan copy-paste og prøve. I `Agent`-tilstand kan dette gå et skridt videre og oprette relevante ressourcer for dig - inklusive opsætningsscripts og dokumentation - for at hjælpe dig med at udføre den opgave.
+`infra/main.bicep` orkestrerer ressourcer; `main.parameters.json` forbinder skabeloninput til AZD miljøværdier. `azure.yaml` vælger applikationstjenesten og livscyklus-hooks. Spor et input som `USE_AZURE_AI_SEARCH_SERVICE` gennem disse filer for at finde ud af, hvad der faktisk ændres.
 
-**Du er nu rustet til at begynde at udforske template-repositoriet**
+### Applikation og identitet
 
----
+Læs `src/api/` og `src/frontend/` sammen. Identificér, hvor agenten oprettes eller hentes, hvor instruktioner/værktøjer konfigureres, og hvilken identitet hvert Azure-kald bruger. Eksempelfiler under `src/files/` er demonstrationsdata, ikke en produktionskatalog eller autorisationsmodel.
 
-## 2. Nedbryd arkitekturen
+### Tests og observabilitet
 
-??? prompt "SPØRGSMÅL: Forklar applikationsarkitekturen i docs/images/architecture.png på 1 afsnit"
+De nuværende evaluerings- og red-team adgangspunkter er under `tests/`; ældre `evals/` og `airedteaming/` mappehenvisninger er forældede for dette eksempel. Læs `docs/observability.md` for forudsætninger og omkostninger før du kører cloudtests. Disse Python-tests er adskilt fra den valgfri `azure.ai.evaluations` AZD-udvidelse.
 
-      Denne applikation er en AI-drevet chatapplikation bygget på Azure, der demonstrerer en moderne agent-baseret arkitektur. Løsningen centrerer sig omkring en Azure Container App, som hoster hovedapplikationskoden, der behandler brugerinput og genererer intelligente svar gennem en AI-agent. 
-      
-      Arkitekturen bygger på Microsoft Foundry Project som fundament for AI-kapabiliteter og kobler til Azure AI Services, som leverer de underliggende sprogmodeller (såsom gpt-4.1-mini) og agentfunktionalitet. Brugerinteraktioner flyder gennem en React-baseret frontend til en FastAPI-backend, som kommunikerer med AI-agenttjenesten for at generere kontekstuelle svar. 
-      
-      Systemet indarbejder videnhentningsmuligheder gennem enten filsøgning eller Azure AI Search-tjenesten, hvilket gør det muligt for agenten at få adgang til og citere information fra uploadede dokumenter. For driftssikkerhed inkluderer arkitekturen omfattende overvågning via Application Insights og Log Analytics Workspace til sporing, logging og performance-optimering. 
-      
-      Azure Storage leverer blob-lagring til applikationsdata og filuploads, mens Managed Identity sikrer sikker adgang mellem Azure-ressourcer uden at gemme legitimationsoplysninger. Hele løsningen er designet til skalerbarhed og vedligeholdelse, med containeriserede applikationer der automatisk skalerer baseret på efterspørgsel samtidig med indbygget sikkerhed, overvågning og CI/CD-kapaciteter gennem Azures administrerede tjenesteøkosystem.
+## 4. Verificér dine fund
 
-![Arkitektur](../../../../../translated_images/da/architecture.48d94861e6e6cdc0.webp)
+- Identificér API-ruten, agentinteraktionen og hentningskoden for et eksempelspørgsmål.
+- Forklar hvilken identitet der tilgår Foundry og hvilken konfiguration der vælger dens endpoint.
+- Find de faktiske pre-up og post-deploy scripts og deres fejlbehandlingsadfærd.
+- List eventuelle afhængigheder eller valgfrie funktioner, der mangler i din deployment.
 
----
-
-## 3. Repository-struktur
-
-!!! prompt "ASK: Explain the template folder structure. Start with a visual hierarchical diagram."
-
-??? info "SVAR: Visuelt hierarkisk diagram"
-
-      ```bash title="" 
-      get-started-with-ai-agents/
-      ├── 📋 Konfiguration & Opsætning
-      │   ├── azure.yaml                    # Azure Developer CLI-konfiguration
-      │   ├── docker-compose.yaml           # Lokale udviklingscontainere
-      │   ├── pyproject.toml                # Python-projektkonfiguration
-      │   ├── requirements-dev.txt          # Udviklingsafhængigheder
-      │   └── .devcontainer/                # VS Code dev container-opsætning
-      │
-      ├── 🏗️ Infrastruktur (infra/)
-      │   ├── main.bicep                    # Hovedinfrastruktur-skabelon
-      │   ├── api.bicep                     # API-specifikke ressourcer
-      │   ├── main.parameters.json          # Infrastrukturparametre
-      │   └── core/                         # Modulare infrastrukturkomponenter
-      │       ├── ai/                       # AI-tjenestekonfigurationer
-      │       ├── host/                     # Hosting-infrastruktur
-      │       ├── monitor/                  # Overvågning og logging
-      │       ├── search/                   # Azure AI Search-opsætning
-      │       ├── security/                 # Sikkerhed og identitet
-      │       └── storage/                  # Storage account-konfigurationer
-      │
-      ├── 💻 Applikationskilde (src/)
-      │   ├── api/                          # Backend API
-      │   │   ├── main.py                   # FastAPI applikationsentry
-      │   │   ├── routes.py                 # API-rute-definitioner
-      │   │   ├── search_index_manager.py   # Søgefunktionalitet
-      │   │   ├── data/                     # API datahåndtering
-      │   │   ├── static/                   # Statisk web-assetter
-      │   │   └── templates/                # HTML-skabeloner
-      │   ├── frontend/                     # React/TypeScript frontend
-      │   │   ├── package.json              # Node.js-afhængigheder
-      │   │   ├── vite.config.ts            # Vite build-konfiguration
-      │   │   └── src/                      # Frontend-kildekode
-      │   ├── data/                         # Eksempelfiler
-      │   │   └── embeddings.csv            # Forudberegnede embeddings
-      │   ├── files/                        # Videnbasefiler
-      │   │   ├── customer_info_*.json      # Kundedata-eksempler
-      │   │   └── product_info_*.md         # Produktdokumentation
-      │   ├── Dockerfile                    # Containerkonfiguration
-      │   └── requirements.txt              # Python-afhængigheder
-      │
-      ├── 🔧 Automatisering & Scripts (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Post-deploy opsætning
-      │   ├── setup_credential.sh/.ps1     # Konfiguration af legitimationsoplysninger
-      │   ├── validate_env_vars.sh/.ps1    # Validering af miljøvariabler
-      │   └── resolve_model_quota.sh/.ps1  # Modelkvote-administration
-      │
-      ├── 🧪 Test & Evaluering
-      │   ├── tests/                        # Unit- og integrationstests
-      │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Agent-evalueringsframework
-      │   │   ├── evaluate.py               # Evaluerings-runner
-      │   │   ├── eval-queries.json         # Testforespørgsler
-      │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Udviklingslegeplads
-      │   │   ├── 1-quickstart.py           # Kom godt i gang-eksempler
-      │   │   └── aad-interactive-chat.py   # Autentifikationseksempler
-      │   └── airedteaming/                 # AI-sikkerhedsevaluering
-      │       └── ai_redteaming.py          # Red team-testning
-      │
-      ├── 📚 Dokumentation (docs/)
-      │   ├── deployment.md                 # Udrulningsvejledning
-      │   ├── local_development.md          # Lokal opsætningsinstruktion
-      │   ├── troubleshooting.md            # Almindelige problemer & løsninger
-      │   ├── azure_account_setup.md        # Azure-forudsætninger
-      │   └── images/                       # Dokumentationsassets
-      │
-      └── 📄 Projektmetadata
-         ├── README.md                     # Projektoversigt
-         ├── CODE_OF_CONDUCT.md           # Fællesskabsretningslinjer
-         ├── CONTRIBUTING.md              # Bidragsvejledning
-         ├── LICENSE                      # Licensbetingelser
-         └── next-steps.md                # Vejledning efter udrulning
-      ```
-
-### 3.1. Kerneapplikationsarkitektur
-
-Denne skabelon følger et **full-stack webapplikations** mønster med:
-
-- **Backend**: Python FastAPI med Azure AI-integration
-- **Frontend**: TypeScript/React med Vite build-system
-- **Infrastruktur**: Azure Bicep-skabeloner til cloud-ressourcer
-- **Containerisering**: Docker til konsistent deployment
-
-### 3.2 Infra som kode (bicep)
-
-Infrastrukturlaget bruger **Azure Bicep**-skabeloner organiseret modulært:
-
-   - **`main.bicep`**: Orkestrerer alle Azure-ressourcer
-   - **`core/` moduler**: Genanvendelige komponenter til forskellige services
-      - AI-tjenester (Microsoft Foundry Models, AI Search)
-      - Container-hosting (Azure Container Apps)
-      - Overvågning (Application Insights, Log Analytics)
-      - Sikkerhed (Key Vault, Managed Identity)
-
-### 3.3 Applikationskilde (`src/`)
-
-**Backend API (`src/api/`)**:
-
-- FastAPI-baseret REST API
-- Foundry Agents-integration
-- Administrering af søgeindeks til videnhentning
-- Filupload og behandlingsmuligheder
-
-**Frontend (`src/frontend/`)**:
-
-- Moderne React/TypeScript SPA
-- Vite til hurtig udvikling og optimerede builds
-- Chatgrænseflade til agentinteraktioner
-
-**Videnbase (`src/files/`)**:
-
-- Eksempeldata for kunder og produkter
-- Demonstrerer filbaseret videnhentning
-- JSON- og Markdown-eksempelformater
-
-
-### 3.4 DevOps & automatisering
-
-**Scripts (`scripts/`)**:
-
-- Tværplatform PowerShell- og Bash-scripts
-- Validering og opsætning af miljø
-- Post-deployment konfiguration
-- Modelkvote-administration
-
-**Azure Developer CLI-integration**:
-
-- `azure.yaml` konfiguration til `azd` workflows
-- Automatiseret provisioning og deployment
-- Håndtering af miljøvariabler
-
-### 3.5 Test & Kvalitetssikring
-
-**Evalueringsframework (`evals/`)**:
-
-- Agentens præstationsvurdering
-- Test af forespørgsel-svar kvalitet
-- Automatiseret vurderingspipeline
-
-**AI-sikkerhed (`airedteaming/`)**:
-
-- Red team-testning for AI-sikkerhed
-- Sikkerhedssårbarhedsscanning
-- Ansvarlige AI-praksisser
-
----
-
-## 4. Tillykke 🏆
-
-Du brugte succesfuldt GitHub Copilot Chat med MCP-servere til at udforske repositoryet.
-
-- [X] Aktiverede GitHub Copilot for Azure
-- [X] Forstod applikationsarkitekturen
-- [X] Udforskede AZD-skabelonstrukturen
-
-Dette giver dig en fornemmelse af _infrastruktur som kode_ aktiverne for denne skabelon. Næste trin ser vi på konfigurationsfilen for AZD.
+Fortsæt til [Konfigurer en Skabelon](4-Configure-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+**Ansvarsfraskrivelse**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

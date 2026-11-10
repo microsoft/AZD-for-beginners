@@ -1,26 +1,26 @@
-# TODO: A repó karbantartója még nem szerkesztette ezt a fájlt
-
-**REPÓ TULAJDONOS**: Szeretne ügyfélszolgálati és támogatási (CSS) segítséget ehhez a termékhez/projekthez?
-
-- **Nincs CSS támogatás:** Töltse ki ezt a sablont azzal az információval, hogy hogyan lehet hibákat bejelenteni és segítséget kérni.
-- **Van CSS támogatás:** Töltse ki a [aka.ms/onboardsupport](https://aka.ms/onboardsupport) oldalon található űrlapot. A CSS segít meghatározni a következő lépéseket.
-- **Nem biztos benne?** Töltse ki az űrlapot úgy, mintha a válasz "Igen" lenne. A CSS segít dönteni.
-
-*Ezután távolítsa el ezt az első címsort a SUPPORT.MD fájlból, mielőtt közzéteszi a repót.*
-
 # Támogatás
 
-## Hogyan lehet hibákat bejelenteni és segítséget kérni  
+## Tanfolyami problémák és kérdések
 
-Ez a projekt a GitHub Issues-t használja a hibák és funkciók iránti kérések nyomon követésére. Kérjük, keresse meg a meglévő hibákat, mielőtt újakat jelentene be, hogy elkerülje a duplikációkat. Új hibák esetén jelentse be a hibát vagy funkciókérést új Issue-ként.
+Keresse át a [tanfolyami problémákat](https://github.com/microsoft/AZD-for-beginners/issues), mielőtt hibát jelentene. Tartalmazza az érintett angol leckét, a futtatott parancsot, az AZD/kiterjesztés verzióit, valamint a hibaüzenetet. Távolítsa el a hitelesítő adatokat, tokeneket, előfizetési részleteket és személyes adatokat a naplókból és képernyőképekből.
 
-Ha segítségre van szüksége, vagy kérdése van a projekt használatával kapcsolatban, kérjük, **REPÓ KARBANTARTÓ: ADJA MEG AZ UTASÍTÁSOKAT, HOGYAN LEHET FELVENNI A KAPCSOLATOT A REPÓ TULAJDONOSOKKAL VAGY A KÖZÖSSÉGGEL SEGÍTSÉGÉRT. LEHET EGY STACK OVERFLOW CÍMKE VAGY MÁS CSATORNA. HOL SEGÍTENEK AZ EMBEREKNEK?**.
+Általános tanulási kérdésekhez használja az [Azure fejlesztői közösség](https://discord.gg/microsoft-azure) fórumot. A közösség válaszai nem garantált támogatási szolgáltatás.
 
-## Microsoft támogatási irányelv  
+## Eszköz- és szolgáltatásproblémák
 
-Ennek a **PROJEKTNEK vagy TERMÉKNEK** a támogatása az itt felsorolt erőforrásokra korlátozódik.
+Az ismételhető AZD CLI hibákat jelentse a [Azure/azure-dev](https://github.com/Azure/azure-dev/issues) oldalon. Az Azure szolgáltatási incidensekhez vagy előfizetés-specifikus segítséghez használja a [Azure portál](https://portal.azure.com/) támogatási lehetőségeit.
+
+## Biztonsági jelentések
+
+Kövesse a [SECURITY.md](SECURITY.md) irányelveit a privát sérülékenységek jelentéséhez. Ne tegye közzé titkokat vagy kihasználási részleteket nyilvános tanfolyami problémában.
+
+## Microsoft támogatási irányelvek
+
+Ennek az oktatási projektnek a támogatása az előbb felsorolt erőforrásokra korlátozódik. A tanfolyami példák nem tartalmaznak éles környezetbeli támogatási kötelezettséget.
 
 ---
 
-**Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

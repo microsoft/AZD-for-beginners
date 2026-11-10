@@ -1,75 +1,78 @@
-# Rozdział 8: Wzorce produkcyjne i korporacyjne
+# Rozdział 8: Wzorce produkcyjne i korporacyjne  
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Poziom trudności**: Zaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Poziom trudności**: Zaawansowany  
 
----
+---  
 
-## Przegląd
+## Przegląd  
 
-Ten rozdział obejmuje wzorce wdrożeń gotowych do użycia korporacyjnego, zabezpieczanie, monitorowanie oraz optymalizację kosztów dla produkcyjnych obciążeń AI.
+Ten rozdział obejmuje wzorce wdrażania gotowe na potrzeby przedsiębiorstw, wzmacnianie bezpieczeństwa, monitoring i optymalizację kosztów dla produkcyjnych obciążeń AI.  
 
-> Zatwierdzone na `azd 1.27.1` w lipcu 2026.
+Jest to odniesienie architektoniczne, a nie kompletny szablon do wdrożenia produkcyjnego. Przykłady pomijają szczegóły integracji, które muszą zostać dostarczone i przetestowane w twojej własnej aplikacji; przeczytanie listy kontrolnej nie gwarantuje gotowości do produkcji.  
 
-## Cele nauki
+> **Przegląd wydania (2026-11-04):** Wskazówki dotyczące AI CLI zostały sprawdzone względem dokumentacji/źródeł `azd 1.37.2`, agentów `1.0.0-beta.23` i ewaluacji `1.0.0-beta.2`. Zobacz [zmiany i poprawki w wydaniu](production-ai-practices.md#recent-release-changes-and-fixes) dotyczące wymagań kompatybilności i szczegółów migracji; nie jest to weryfikacja wdrożenia na żywo.  
 
-Po ukończeniu tego rozdziału będziesz potrafił:
-- Wdrożyć odporne aplikacje wieloregionowe
-- Zaimplementować korporacyjne wzorce bezpieczeństwa
-- Skonfigurować kompleksowe monitorowanie
-- Optymalizować koszty na dużą skalę
-- Ustawić pipeline CI/CD za pomocą AZD
+## Cele nauki  
 
----
+Po ukończeniu tego rozdziału będziesz potrafił:  
+- Wdrażać aplikacje odporne na wiele regionów  
+- Zastosować korporacyjne wzorce bezpieczeństwa  
+- Skonfigurować kompleksowy monitoring  
+- Optymalizować koszty na dużą skalę  
+- Ustawiać potoki CI/CD z AZD  
 
-## 📚 Lekcje
+---  
 
-| # | Lekcja | Opis | Czas |
-|---|--------|-------------|------|
-| 1 | [Praktyki produkcyjnego AI](production-ai-practices.md) | Wzorce wdrożeń korporacyjnych | 90 min |
+## 📚 Lekcje  
 
----
+| # | Lekcja | Opis | Czas |  
+|---|--------|-------------|------|  
+| 1 | [Praktyki AI w produkcji](production-ai-practices.md) | Wzorce wdrożeń korporacyjnych | 90 min |  
 
-## 🚀 Lista kontrolna produkcji
+---  
 
-- [ ] Wdrożenie wieloregionowe dla odporności
-- [ ] Zarządzana tożsamość do uwierzytelniania (bez kluczy)
-- [ ] Application Insights do monitorowania
-- [ ] Ustawione budżety i alerty kosztowe
-- [ ] Włączone skanowanie zabezpieczeń
-- [ ] Integracja pipeline CI/CD
-- [ ] Plan odzyskiwania po awarii
+## 🚀 Lista kontrolna do produkcji  
 
----
+- [ ] Wdrożenie wieloregionalne dla odporności  
+- [ ] Zarządzana tożsamość do uwierzytelniania (bez kluczy)  
+- [ ] Application Insights do monitorowania  
+- [ ] Konfiguracja budżetów kosztów i alertów  
+- [ ] Włączone skanowanie bezpieczeństwa  
+- [ ] Integracja potoku CI/CD  
+- [ ] Plan odzyskiwania po awarii  
 
-## 🏗️ Wzorce architektoniczne
+---  
 
-### Wzorzec 1: Mikroserwisy AI
+## 🏗️ Wzorce architektoniczne  
 
-```mermaid
-graph LR
-    Gateway[Bramą API] --> AI[Usługa AI] --> Models[Modele Microsoft Foundry]
-    Gateway --> Auth[Usługa uwierzytelniania]
-    AI --> Data[Magazyn danych]
-```
-
-### Wzorzec 2: AI sterowane zdarzeniami
+### Wzorzec 1: AI oparte na mikrousługach  
 
 ```mermaid
 graph LR
-    EventGrid[Siatka zdarzeń] --> Functions[Funkcje] --> Pipeline[Potok AI]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
+  
+### Wzorzec 2: AI sterowane zdarzeniami  
 
----
+```mermaid
+graph LR
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
+```
+  
+---  
 
-## 🔐 Najlepsze praktyki zabezpieczeń
+## 🔐 Najlepsze praktyki bezpieczeństwa  
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -77,59 +80,52 @@ properties: {
   }
 }
 ```
+  
+---  
 
----
+## 💰 Optymalizacja kosztów  
 
-## 💰 Optymalizacja kosztów
+| Strategia | Główne ograniczenie |  
+|----------|---------|  
+| Skalowanie do zera (Container Apps) | Wymaga odpowiedniego wyzwalacza; inne usługi nadal generują koszty |  
+| Korzystanie z poziomów konsumpcyjnych dla dev | Porównaj ceny wybranej usługi i obciążenie |  
+| Skalowanie zaplanowane | Skalowanie przez wspieraną infrastrukturę/automatyzację |  
+| Rezerwacje/zapewniona pojemność | Tylko gdy dostępne; zobowiązania mogą zwiększyć koszty bezczynności |  
 
-| Strategia | Oszczędności |
-|----------|-------------|
-| Skalowanie do zera (Container Apps) | 60-80% |
-| Użycie warstw konsumpcyjnych na potrzeby dewelopmentu | 50-70% |
-| Skalowanie zaplanowane | 30-50% |
-| Zarezerwowana pojemność | 20-40% |
+Skorzystaj z [kompletnego wzorca budżetu zasobów](production-ai-practices.md#2-cost-monitoring-and-budgets) z ważną datą rozpoczęcia, zakresem rozliczeniowym, odbiorcami i uprawnieniami. Budżet wysyła alerty; nie ogranicza wydatków. Oszczędności zależą od zmierzonego wykorzystania i nie są gwarantowanymi procentami.  
 
-```bash
-# Ustaw alerty budżetowe
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+---  
 
----
-
-## 📊 Konfiguracja monitoringu
+## 📊 Konfiguracja monitoringu  
 
 ```bash
-# Strumieniuj logi
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Sprawdź Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# Zobacz metryki
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
+  
+---  
 
----
+## 🔗 Nawigacja  
 
-## 🔗 Nawigacja
+| Kierunek | Rozdział |  
+|-----------|---------|  
+| **Poprzedni** | [Rozdział 7: Rozwiązywanie problemów](../chapter-07-troubleshooting/README.md) |  
+| **Kurs ukończony** | [Strona główna kursu](../../README.md) |  
 
-| Kierunek | Rozdział |
-|-----------|---------|
-| **Poprzedni** | [Rozdział 7: Rozwiązywanie problemów](../chapter-07-troubleshooting/README.md) |
-| **Kurs ukończony** | [Strona główna kursu](../../README.md) |
+---  
 
----
+## 📖 Powiązane zasoby  
 
-## 📖 Powiązane zasoby
-
-- [Przewodnik po agentach AI](../chapter-02-ai-development/agents.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Rozwiązania multi-agentowe](../chapter-05-multi-agent/README.md)
-- [Przykład mikroserwisów](../../examples/microservices/README.md)
+- [Przewodnik po agentach AI](../chapter-02-ai-development/agents.md)  
+- [Application Insights](../chapter-06-pre-deployment/application-insights.md)  
+- [Rozwiązania wieloagentowe](../chapter-05-multi-agent/README.md)  
+- [Przykład mikrousług](../../examples/microservices/README.md)  
 
 ---
 

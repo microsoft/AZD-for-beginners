@@ -1,95 +1,95 @@
-# 7. Yhteenveto ja seuraavat askeleet
+# 7. Yhteenveto & Seuraavat Askeleet
 
-!!! tip "Tärkeimmät opit"
+!!! tip "TÄRKEIMMÄT OPIT OVAT"
 
-    - [ ] AZD-mallit nopeuttavat tekoälysovellusten kehitystä päivistä tunneiksi
-    - [ ] Discovery → Deployment → Customization -menetelmä tarjoaa jäsennellyn oppimispolun
-    - [ ] GitHub Copilot MCP-palvelimien kanssa mahdollistaa luonnolliskielisen tutkimisen monimutkaisissa koodipohjissa
-    - [ ] Microsoft Foundry tarjoaa sisäänrakennetun valvonnan, arvioinnin ja tietoturvatestauksen
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. Mitä saavutit
+## 1. Mitä Saavutitte
 
 Onnittelut! Tässä työpajassa olet onnistuneesti:
 
 | Moduuli | Saavutus |
 |:---|:---|
-| **Moduuli 1** | Tutustui Azure Developer CLI:hin ja valitsi tekoälymallin |
-| **Moduuli 2** | Otti käyttöön ja varmisti täydellisen tekoälyagenttiratkaisun toimivuuden |
-| **Moduuli 3** | Purki mallin ymmärtääkseen sen arkkitehtuurin |
-| **Moduuli 4** | Tutki `azure.yaml`-määrityksiä ja elinkaarikoukkuja |
-| **Moduuli 5** | Mukautti mallin omaan käyttötapaukseesi |
-| **Moduuli 6** | Purki infrastruktuurin turvallisesti ja hallitsi resursseja |
+| **Moduuli 1** | Löytö Azure Developer CLI ja valittu AI-malli |
+| **Moduuli 2** | Otettu käyttöön ja validoitu täydellinen AI-agenttiratkaisu |
+| **Moduuli 3** | Hajotettu malli sen arkkitehtuurin ymmärtämiseksi |
+| **Moduuli 4** | Tutustuttu `azure.yaml` -määrityksiin ja elinkaarikoukkuihin |
+| **Moduuli 5** | Räätälöity malli omaan skenaarioon sopivaksi |
+| **Moduuli 6** | Purettu infrastruktuuri turvallisesti ja hallittu resursseja |
 
 ---
 
-## 2. Hallitsemasi keskeiset käsitteet
+## 2. Hallitut Keskeiset Käsitteet
 
 ### Azure Developer CLI (azd)
-- `azd init` - Alusta projekteja malleista
-- `azd up` - Provisioi ja ota käyttöön yhdellä komennolla
+- `azd init` - Aloita projektit malleista
+- `azd up` - Provisionoi ja ota käyttöön yhdellä komennolla
 - `azd env` - Hallitse ympäristömuuttujia
-- `azd down` - Poista resurssit turvallisesti
+- `azd down` - Siivoa resurssit turvallisesti
 
-### AZD-mallin rakenne
-- `azure.yaml` - Konfiguraatio ja käyttöönoton koukut
-- `infra/` - Bicep-infrastruktuuri koodina
+### AZD Mallin Rakenne
+- `azure.yaml` - Määritys- ja käyttöönotto-koukkuja
+- `infra/` - Bicep infrastruktuuri koodina
 - `src/` - Sovelluksen lähdekoodi
 - `scripts/` - Automaatio- ja asennusskriptit
 
-### Microsoft Foundryn ominaisuudet
-- AI Agent -palvelu älykkäille avustajille
-- File Search ja Azure AI Search tiedonhakua varten
-- Sisäänrakennettu jäljitys, valvonta ja arviointi
-- Red teaming tekoälyn turvallisuuden varmistamiseksi
+### Microsoft Foundryn Ominaisuudet
+- AI Agent Service älykkäille avustajille
+- Tiedostohaku ja Azure AI Search tiedon hakua varten
+- Sisäänrakennettu seuranta, monitorointi ja arviointi
+- Red teaming AI:n turvallisuuden validoimiseksi
 
 ---
 
-## 3. Jatka oppimismatkaasi
+## 3. Jatka Oppimismatkaasi
 
-### Suositellut seuraavat askeleet
+### Suositellut Seuraavat Askeleet
 
 | Polku | Resurssi | Aika |
 |:---|:---|:---|
-| **Kokonainen kurssi** | [AZD aloittelijoille - opintokokonaisuus](../../README.md) | 8-12 tuntia |
-| **Kokeile toista mallia** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 tuntia |
-| **Syväsukellus** | [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Jatkuva |
+| **Suorita Koulutus** | [AZD for Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Oma tahti |
+| **Kokeile Toista Mallia** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 tuntia |
+| **Syväsukellus** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Jatkuva |
 | **Yhteisö** | [Azure Discord](https://aka.ms/foundry/discord) | Liity tänään! |
 
-### Suositellut mallit kokeiltavaksi seuraavaksi
+### Ehdotetut Mallit Seuraavaksi Kokeiltavaksi
 
-1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Peruschat omien tietojesi kanssa
-2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Edistyneet RAG-mallit
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Yrityksen vähittäiskaupan skenaariot
+1. **[Aloita AI-chatin kanssa](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Perus-chat omien tietojesi kanssa
+2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Kehittyneet RAG-kuviot
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Yritysmyynnin skenaariot
 
 ---
 
-## 4. Työpajan haaste
+## 4. Työpajan Haaste
 
-Valmis testaamaan taitojasi? Kokeile näitä haasteita:
+Valmiina testaamaan taitojasi? Kokeile näitä haasteita:
 
 | Haaste | Kuvaus | Vaikeustaso |
 |:---|:---|:---|
-| **1. Moni-agenttinen skenaario** | Ota käyttöön ja mukauta eri toimialalle (esim. terveydenhuolto, rahoitus) | ⭐⭐ |
-| **2. Räätälöity tietopohja** | Lisää omat tiedostosi ja luo mukautettu hakemisto | ⭐⭐⭐ |
-| **3. Tuotantokäyttöönotto** | Määritä CI/CD GitHub Actionsilla käyttäen `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. Moniagenttinen Skenaario** | Käyttöönotto ja räätälöinti eri toimialalle (esim. terveydenhuolto, rahoitus) | ⭐⭐ |
+| **2. Räätälöity Tietokanta** | Lisää omat datatiedostot ja luo oma hakemisto | ⭐⭐⭐ |
+| **3. Tuotantokäyttöön Julkaisu** | Määritä CI/CD GitHub Actionsilla käyttäen `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. Jaa palautteesi
+## 5. Jaa Palautteesi
 
 Palautteesi auttaa meitä parantamaan tätä työpajaa!
 
-- **GitHub Issues**: [Jätä palaute](https://github.com/microsoft/azd-for-beginners/issues) - merkitse tagilla `Workshop`
-- **Discord**: Liity [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - julkaise kanavalla `#get-help`
-- **Osallistuminen**: Auta parantamaan työpajaa lähettämällä pull requesteja!
+- **GitHub Issues**: [Jätä palaute](https://github.com/microsoft/azd-for-beginners/issues) - merkitse `Workshop`
+- **Discord**: Liity [Microsoft Foundry Discordiin](https://aka.ms/foundry/discord) - kirjoita kanavalle `#get-help`
+- **Osallistuminen**: Auta parantamaan työpajaa lähettämällä pull-pyyntöjä!
 
 ---
 
 ## Kiitos! 🎉
 
-Kiitos, että osallistuit AZD for AI Developers -työpajaan. Toivomme, että tämä kokemus antoi sinulle taidot ja varmuuden rakentaa ja ottaa käyttöön tekoälysovelluksia Azurella.
+Kiitos, että suoristit AZD for AI Developers -työpajan. Toivomme, että tämä kokemus on antanut sinulle taidot ja itsevarmuuden rakentaa ja ottaa käyttöön AI-sovelluksia Azurella.
 
 **Jatka rakentamista, jatka oppimista, ja tervetuloa Azure AI -kehittäjäyhteisöön!**
 
@@ -97,7 +97,7 @@ Kiitos, että osallistuit AZD for AI Developers -työpajaan. Toivomme, että tä
 
 | | |
 |:---|:---|
-| **📚 Kurssin etusivu** | [AZD For Beginners](../../README.md) |
+| **📚 Koulutuksen Koti** | [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
 | **📖 Dokumentaatio** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
 | **🛠️ AI-mallit** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
 | **💬 Yhteisö** | [Azure Discord](https://aka.ms/foundry/discord) |
@@ -106,5 +106,5 @@ Kiitos, että osallistuit AZD for AI Developers -työpajaan. Toivomme, että tä
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty käyttämällä tekoälykäännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää määräävänä lähteenä. Kriittisen tiedon osalta suositellaan ammattimaisen ihmiskääntäjän tekemää käännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinymmärryksistä tai virhetulkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

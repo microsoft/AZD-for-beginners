@@ -1,6 +1,6 @@
-# Rozdział 3: Konfiguracja i uwierzytelnianie
+# Rozdział 3: Konfiguracja i Uwierzytelnianie
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 45-60 minut | **⭐ Poziom trudności**: Średniozaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 90-150 minut łącznie z praktyką integracji | **⭐ Poziom trudności**: Średniozaawansowany
 
 ---
 
@@ -8,15 +8,15 @@
 
 Ten rozdział obejmuje konfigurację środowiska, wzorce uwierzytelniania oraz najlepsze praktyki bezpieczeństwa dla wdrożeń Azure Developer CLI.
 
-> Zweryfikowano z `azd 1.27.1` w lipcu 2026.
+> Cel przeglądu poleceń i konfiguracji: `azd 1.37.2` (listopad 2026). Podczas przeglądu nie przeprowadzono rzeczywistego uruchomienia provisioning w Azure.
 
 ## Cele nauki
 
-Po ukończeniu tego rozdziału:
-- Opanujesz hierarchię konfiguracji AZD
-- Zarządzisz wieloma środowiskami (dev, staging, prod)
-- Wdrożysz bezpieczne uwierzytelnianie za pomocą zarządzanych tożsamości
-- Skonfigurujesz ustawienia specyficzne dla środowiska
+Po ukończeniu tego rozdziału będziesz potrafił:
+- Opanować hierarchię konfiguracji AZD
+- Zarządzać wieloma środowiskami (dev, staging, prod)
+- Wdrażać bezpieczne uwierzytelnianie za pomocą zarządzanych tożsamości
+- Konfigurować ustawienia specyficzne dla środowiska
 
 ---
 
@@ -24,59 +24,59 @@ Po ukończeniu tego rozdziału:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Przewodnik po konfiguracji](configuration.md) | Ustawienia i zarządzanie środowiskiem | 30 min |
+| 1 | [Przewodnik konfiguracji](configuration.md) | Ustawienie i zarządzanie środowiskiem | 30 min |
 | 2 | [Uwierzytelnianie i bezpieczeństwo](authsecurity.md) | Wzorce zarządzanej tożsamości i RBAC | 30 min |
 
 ---
 
 ## 🚀 Szybki start
 
+Uruchom z katalogu głównego **już zainicjowanej aplikacji azd**, nie z repozytorium kursu. Użyj nieużywanych nazw środowisk, jeśli te już istnieją.
+
 ```bash
-# Utwórz wiele środowisk
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Przełącz środowiska
+# Switch environments
 azd env select prod
 
-# Ustaw zmienne środowiskowe
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Wyświetl konfigurację
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` służy jako przykład: wpływa na infrastrukturę tylko wtedy, gdy twój szablon wyraźnie go wykorzystuje. Zwykłe wartości `azd env set` są zapisywane lokalnie w postaci zwykłego tekstu; nie są to bezpieczne magazyny sekretów.
 
 ---
 
 ## 🔧 Hierarchia konfiguracji
 
-AZD stosuje ustawienia w tej kolejności (późniejsze nadpisują wcześniejsze):
-
-1. **Domyślne wartości** (wbudowane w szablony)
-2. **azure.yaml** (konfiguracja projektu)
-3. **Zmienne środowiskowe** (`azd env set`)
-4. **Flagi wiersza poleceń** (`--location eastus`)
+Trzy różne powierzchnie konfiguracji utrzymuj oddzielnie: globalne preferencje (`azd config`), struktura projektu (`azure.yaml`) oraz wartości dla konkretnego środowiska (`azd env`). Flagi nadpisują tylko te ustawienia, które faktycznie obsługują; nie istnieje uniwersalna nakładka dowolnych zmiennych środowiskowych na `azure.yaml` lub Bicep.
 
 ---
 
 ## 🔐 Najlepsze praktyki bezpieczeństwa
 
 ```bash
-# Użyj zarządzanej tożsamości (zalecane)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Sprawdź status uwierzytelniania AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Opcjonalnie: zweryfikuj kontekst Azure CLI, jeśli planujesz uruchamiać polecenia az
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Ponownie się uwierzytelnij w razie potrzeby
+# Re-authenticate if needed
 azd auth login
 
-# Opcjonalnie: odśwież uwierzytelnianie Azure CLI dla poleceń az
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 

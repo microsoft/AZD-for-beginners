@@ -1,59 +1,59 @@
-# Naudokite savo programą – pridėkite azd prie esamo projekto
+# Atsineškite savo programą – pridėkite azd prie esamo projekto
 
-**Skyriaus navigacija:**
+**Skyriaus naršymas:**
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
 - **📖 Dabartinis skyrius**: 1 skyrius – Pagrindai ir greitas pradėjimas
 - **⬅️ Ankstesnis**: [Jūsų pirmasis projektas](first-project.md)
-- **➡️ Kitas**: [Kūrimo konteineriai ir Codespaces](dev-containers.md)
+- **➡️ Kitas**: [Dev konteineriai ir Codespaces](dev-containers.md)
 
-> Patikrinta su `azd 1.27.1` 2026 m. liepos mėn.
+> Komandos ir konfigūracijos peržiūros tikslas: `azd 1.37.2` (2026 m. lapkritis). Sugeneruoti failai priklauso nuo aptiktos programos; „Azure“ diegimas šioje peržiūroje nebuvo vykdomas.
 
 ## Įvadas
 
-[Jūsų pirmajame projekte](first-project.md) diegėte programą pradėdami nuo šablono. Tačiau dažniausiai jūs jau *turite* programą – Node.js API, Python Flask paslaugą, .NET žiniatinklio programą – esančią aplanke jūsų kompiuteryje. Šiame pamokoje parodoma, kaip pridėti azd prie šio jau esančio kodo, kad galėtumėte jį diegti tiesiog su `azd up`, be jokio šablono.
+Lektų jūsų pirmame projekte [Your First Project](first-project.md) diegėte programėlę pradėdami nuo šablono. Tačiau daugeliu atvejų jūs jau *turite* programėlę – Node.js API, Python Flask paslaugą, .NET internetinę programą – esančią aplanke jūsų kompiuteryje. Ši pamoka parodo, kaip pridėti azd prie esamo kodo, kad galėtumėte diegti jį naudojant `azd up`, nereikalingas šablonas.
 
 ## Mokymosi tikslai
 
-Pabaigę šią pamoką jūs:
-- Suprasite tris būdus, kaip pradėti azd projektą
-- Paleisite `azd init` esamame kodo base
-- Suprasite, ką daro `azure.yaml` ir `infra/` aplankas jūsų programai
-- Žinosite, kada leisti azd generuoti infrastruktūrą, o kada rašyti pačiam
-- Išdiegsime esamą programą Azure su `azd up`
+Pamokos pabaigoje jūs:
+- Suprasite tris būdus kaip pradėti azd projektą
+- Vykdysite `azd init` esamo kodo bazėje
+- Suprasite, ką atlieka `azure.yaml` ir `infra/` aplankas jūsų programėlėje
+- Žinosite, kada leisti azd generuoti infrastruktūrą, o kada rašyti ją patys
+- Pasiųsite savo esamą programėlę į Azure su `azd up`
 
 ## Mokymosi rezultatai
 
-Baigę pamoką galėsite:
-- Inicializuoti azd projekte, kurį jau turite
+Po šios pamokos galėsite:
+- Inicijuoti azd projekte, kurį jau turite
 - Perskaityti ir redaguoti pagrindinį `azure.yaml` failą
-- Sugeneruoti pradinę infrastruktūrą su `azd infra generate`
-- Pasirinkti tinkamą Azure talpinimą programai
-- Diegti ir išvalyti savo programą
+- Sugeneruoti pradžios infrastruktūrą su `azd infra generate`
+- Pasirinkti tinkamą Azure talpinimą savo programėlei
+- Diegti ir išvalyti savo programėlę
 
 ---
 
-## Trys būdai pradėti azd projektą
+## Tris būdai pradėti azd projektą
 
 | Pradžios taškas | Komanda | Kada naudoti |
 |----------------|---------|-------------|
-| **Iš šablono** | `azd init --template <name>` | Mokymuisi arba naujos programos pradžiai iš patikrinto pavyzdžio |
-| **Iš jūsų esamo kodo** | `azd init` (projekte) | Jau turite programą ir norite ją įdiegti |
-| **Iš Git repozitorijos** | `azd init --from-code` (klonuotame repozitoriuje) | Įsidiegiant azd esamam repozitorijui |
+| **Iš šablono** | `azd init --template <name> .` (tuščias katalogas) | Mokantis arba pradedant naują programėlę nuo patikrinto pavyzdžio |
+| **Iš jūsų esamo kodo** | `azd init` (jūsų projekto aplanke) | Jūs jau turite programėlę ir norite ją diegti |
+| **Iš Git saugyklos** | `azd init --from-code` (klonuotoje saugykloje) | Priimant azd prie esamos saugyklos |
 
-Jūs jau praktikuojate pirmą variantą. Šioje pamokoje aptariamas antras – dažniausias realiame pasaulyje atvejis.
+Jūs jau praktikavote pirmą variantą. Ši pamoka apima antrą – dažniausią realaus pasaulio scenarijų.
 
 ---
 
-## 1 žingsnis: Paleiskite `azd init` jūsų projekte
+## 1 žingsnis: paleiskite `azd init` savo projekte
 
-Atidarykite terminalą **jūsų esamo projekto aplanke** ir paleiskite:
+Atidarykite terminalą **jūsų esamo projekto aplanke** ir vykdykite:
 
 ```bash
 cd my-existing-app
 azd init
 ```
 
-azd paklaus, kaip norite inicializuoti. Pasirinkite:
+azd paklaus, kaip norite inicijuoti. Pasirinkite:
 
 ```
 ? How do you want to initialize your app?
@@ -61,31 +61,30 @@ azd paklaus, kaip norite inicializuoti. Pasirinkite:
   Select a template
 ```
 
-Pasirinkite **„Use code in the current directory.“** azd tada nuskaitys jūsų aplanką, aptiks kalbą ir karkasą bei pasiūlys talpinimo sprendimą.
+Pasirinkite **"Naudoti kodą esamame kataloge."** azd tada nuskaitys jūsų aplanką, nustatys kalbą ir sistemą, bei pasiūlys talpinimo galimybę.
 
 ### Ką aptinka azd
 
-azd ieško ženklų kaip `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` arba `Dockerfile` ir siūlo atitinkamą Azure talpinimą:
+azd ieško programėlės ženklų tokių kaip `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` arba `Dockerfile`. Kodo pagrindu vykdoma pradžia nėra bendrinis šeimininkų pasirinkimo vedlys kiekvienam palaikomam diegimo tikslui:
 
-| Jūsų programa | Tikėtinas aptiktas talpinimas |
+| Jūsų programėlė | Tikėtinas aptiktas šeimininkas |
 |----------|----------------------|
-| Node.js / Python / .NET web programa | Azure App Service arba Container Apps |
-| Programėlė konteineryje (`Dockerfile`) | Azure Container Apps |
-| Funkcinė programa | Azure Functions |
-| Statinis puslapis (React/Vue surinkimo išvestis) | Azure Static Web Apps |
+| Palaikoma Node.js / Python / .NET internetinė programa | Dažniausiai Azure Container Apps; peržiūrėkite sugeneruotą aprašymą |
+| Kontainerizuota programėlė (`Dockerfile`) | Azure Container Apps |
+| Function app arba Static Web Apps projektas | Naudokite atitinkamą šabloną arba parengkite `azure.yaml` ir infrastruktūrą jeigu kodo pagrindas nepalaiko jūsų struktūros |
 
-Patvirtinkite aptiktą paslaugą(-as), ir azd sugeneruoja reikiamus failus.
+Patvirtinkite aptiktas paslaugas, ir azd sukurs reikiamus failus.
 
 ---
 
-## 2 žingsnis: Supraskite, ką sukūrė azd
+## 2 žingsnis: Suprasti, ką sukūrė azd
 
-Po init turėsite du naujus dalykus savo projekte:
+Po inicijavimo peržiūrėkite `azure.yaml`. Sugeneruota infrastruktūra gali būti implicitinė iki kol paleisite `azd infra generate`; nesitikėkite, kad `infra/` jau egzistuoja:
 
 ```
 my-existing-app/
 ├── azure.yaml          # ← NEW: tells azd what to deploy and where
-├── infra/              # ← NEW: Infrastructure as Code (Bicep by default)
+├── infra/              # Materialized with azd infra generate when using implicit infrastructure
 │   ├── main.bicep
 │   └── main.parameters.json
 ├── src/ (your code)    # unchanged
@@ -94,7 +93,7 @@ my-existing-app/
 
 ### `azure.yaml` — projekto apibrėžimas
 
-Tai yra azd projekto širdis. Minimalus atrodo taip:
+Tai yra azd projekto širdis. Seletintis **iliustracinis App Service aprašymas** reikalauja atitinkamos App Service infrastruktūros; tai nėra priežastis keisti sugeneruotą Container Apps šeimininką be infrastruktūros pakeitimo:
 
 ```yaml
 # azure.yaml
@@ -106,64 +105,66 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-`services` bloko dalis yra svarbiausia: kiekvienas įrašas susieja jūsų kodo aplanką su Azure talpinimu. Jei jūsų programa turi front-end ir API, turėsite dvi paslaugas.
+`services` blokas yra pagrindinė dalis: kiekvienas įrašas sieja jūsų kodo aplanką su Azure šeimininku. Jei jūsų programėlėje yra tiek frontendas, tiek API, turėsite dvi paslaugas.
 
-### `infra/` — jūsų Azure resursai kaip kodas
+### `infra/` — jūsų Azure ištekliai kaip kodas
 
-`infra/` aplankas laiko Bicep failus, apibrėžiančius Azure išteklius, kurių reikia jūsų programai (App Service, duomenų bazę ir t.t.). Jums nereikia jų rašyti ranka – azd generuoja veikiančią pradinę bazę. Galite vėliau juos taisyti, pridėti išteklių arba griežtinti saugumą (apie tai [4 skyriuje](../chapter-04-infrastructure/README.md)).
+Aplanke `infra/` laikomi Bicep failai, apibrėžiantys Azure išteklius, kurių reikia jūsų programai (App Service, duomenų bazė ir kt.). Jų rašyti ranka nereikia – azd sugeneruoja veikiančią pradinę versiją. Vėliau juos *galite* redaguoti norėdami pridėti išteklių arba sustiprinti saugumą (apie tai skaitykite [4-je skyriuje](../chapter-04-infrastructure/README.md)).
 
-> **Patarimas:** Norite pamatyti ar pritaikyti sugeneruotą infrastruktūrą prieš diegiant? Paleiskite `azd infra generate` (taip pat galima `azd infra synth`), kad užrašytumėte IaC ant disko peržiūrai ir versijų kontrolei.
+> **Patarimas:** Norite peržiūrėti arba pritaikyti sugeneruotą infrastruktūrą prieš diegdami? Vykdykite `azd infra generate` (taip pat galima kaip `azd infra synth`), kad infrastruktūros kodas būtų įrašytas į diską ir galėtumėte jį peržiūrėti bei valdyti versijas.
 
 ---
 
-## 3 žingsnis: Nustatykite reikiamą konfigūraciją
+## 3 žingsnis: Nustatykite būtiną konfigūraciją
 
-Jei programai reikalingi nustatymai ar slapti duomenys (ryšio eilutė, API raktas), jų nekoduokite tiesiogiai. Naudokite aplinkos reikšmes:
+Jei jūsų programa reikalauja nustatymų arba slaptažodžių (prisijungimo eilutės, API rakto), jų nerašykite tiesiogiai. Naudokite aplinkos reikšmes:
 
 ```bash
-# Sukurkite aplinką
+# Create an environment
 azd env new dev
 
-# Nustatykite neslaptą reikšmę
+# Set a non-secret value
 azd env set API_VERSION 1.0.0
 ```
 
-Tikriems slaptiems duomenims laikykite Key Vault ir nurodykite juos infrastruktūroje – žr. [3 skyrių: Konfigūracija ir autentifikacija](../chapter-03-configuration/authsecurity.md).
+Tai saugo tik vietinę reikšmę. Norint paveikti programą, ją privaloma tiesiogiai naudoti infrastruktūros parametruose, palaikomame paslaugos nustatyme ar įvykio tvarkytuve; atsitiktinės kintamojo reikšmės nustatymas nekonfigūruoja diegiamo paleidimo laiko.
+
+Tikroms slaptybėms laikyti naudokite Key Vault ir nuorodą iš infrastruktūros – žr. [3 skyrių: Konfigūracija ir autentifikavimas](../chapter-03-configuration/authsecurity.md).
 
 ---
 
 ## 4 žingsnis: Diegimas
 
-Dabar naudokite pažįstamą darbo eigą:
+Dabar naudokite jau žinomą darbo eigą:
 
 ```bash
-# Autentifikuoti (reikalinga azd)
+# Authenticate (required for azd)
 azd auth login
 
-# Peržiūrėti resursus, kurie bus sukurti
+# Preview the resources that will be created
 azd provision --preview
 
-# Teikti infrastruktūrą ir diegti jūsų kodą
+# Provision infrastructure and deploy your code
 azd up
 ```
 
-Baigus, azd atspausdins jūsų programos URL. Patikrinkite kaip įprasta bet kuriai azd programai:
+Baigus azd išveda jūsų programos URL. Patikrinkite taip pat kaip ir bet kurį azd programą:
 
 ```bash
-azd show           # rodyti galutinius taškus
-azd monitor --logs # patikrinkite žurnalus, jei reikia
+azd show           # show endpoints
+azd monitor --logs # check logs if needed
 ```
 
 ---
 
-## Dažnos pirmosios klaidos
+## Dažniausios pirmo karto problemos
 
-| Simptomas | Galima priežastis | Sprendimas |
+| Simptomas | Tikėtina priežastis | Sprendimas |
 |---------|--------------|-----|
-| azd neatpažino mano programos | Trūksta manifestų (pvz., `package.json`) | Pridėkite manifestą arba pasirinkite talpinimą rankiniu būdu `azd init` metu |
-| Kļūva statyba vykdant `azd up` | Programai reikalinga statybos fazė | Įtraukite `buildCommand` / `outputPath` po paslauga `azure.yaml` faile |
-| Programa paleidžiama, bet grąžina klaidas | Trūksta konfigūracijos/slaptažodžių | Nustatykite reikšmes su `azd env set` arba sujunkite Key Vault |
-| Pasirinktas neteisingas talpinimas | Automatinis nustatymas suklydo | Redaguokite `host:` `azure.yaml` faile ir paleiskite `azd up` iš naujo |
+| azd nepastebėjo mano programos | Trūksta manifesto (pvz., `package.json`) | Pridėkite manifestą arba pasirinkite prieglobą rankiniu būdu vykdant `azd init` |
+| Kūrimas nepavyksta vykdant `azd up` | Programai reikia kūrimo žingsnio | Suplanuokite programos paketo scenarijus arba paslaugos `prepackage` kablį; naudokite `dist` diegimo išėjimui, o ne `buildCommand`/`outputPath` |
+| Programa paleidžiama, bet grąžina klaidas | Trūksta konfigūracijos/slapto rakto | Prijunkite reikšmes prie vykdymo laiko programos nustatymų arba Key Vault nuorodos; vien `azd env set` nepakanka |
+| Pasirinkta bloga priegloba | Automatinis aptikimas neatitinka jūsų poreikių | Pakeiskite tiek `host:`, tiek atitinkamą infrastruktūrą arba pasirinkite tinkamą šabloną |
 
 Daugiau žr. [7 skyrių: Trikčių šalinimas](../chapter-07-troubleshooting/README.md).
 
@@ -179,10 +180,10 @@ azd down --force --purge
 
 ## Santrauka
 
-- `azd init` → **„Use code in the current directory“** prideda azd prie programos, kurią jau turite.
-- `azure.yaml` sujungia jūsų kodo aplankus su Azure talpinimo paslaugomis; `infra/` apibrėžia išteklius kaip Bicep.
+- `azd init` → **"Naudoti kodą dabartiniame kataloge"** prideda azd prie jau turimos programos.
+- `azure.yaml` susieja jūsų kodo aplankus su Azure prieglobomis; `infra/` apibrėžia išteklius kaip Bicep.
 - `azd infra generate` leidžia peržiūrėti arba pritaikyti sugeneruotą infrastruktūrą.
-- Po inicializacijos jūsų esama programa naudoja tą pačią `azd up` / `azd down` darbo eigą kaip ir programa kuri pradėta iš šablono.
+- Sugužinus, jūsų esama programa naudoja tą patį `azd up` / `azd down` darbo srautą, kaip ir programos, grindžiamos šablonu.
 
 ---
 
@@ -191,14 +192,14 @@ azd down --force --purge
 | Kryptis | Pamoka |
 |-----------|--------|
 | **Ankstesnis** | [Jūsų pirmasis projektas](first-project.md) |
-| **Kitas** | [Kūrimo konteineriai ir Codespaces](dev-containers.md) |
+| **Kitas** | [Įrenginių konteineriai ir Codespaces](dev-containers.md) |
 
-## 📖 Susijusios medžiagos
+## 📖 Susiję ištekliai
 
 - [AZD pagrindai](azd-basics.md)
-- [4 skyrius: Infrastruktūra kaip kodas](../chapter-04-infrastructure/README.md)
+- [4 skyrius: infrastruktūra kaip kodas](../chapter-04-infrastructure/README.md)
 - [Konfigūracija ir autentifikacija](../chapter-03-configuration/authsecurity.md)
-- [Komandų santrauka](../../resources/cheat-sheet.md)
+- [Komandų spausdinimo lapas](../../resources/cheat-sheet.md)
 
 ---
 

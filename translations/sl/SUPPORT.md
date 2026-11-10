@@ -1,28 +1,26 @@
-# TODO: Vzdrževalec tega repozitorija še ni uredil te datoteke
-
-**LASTNIK REPOZITORIJA**: Ali želite podporo za stranke in pomoč (CSS) za ta izdelek/projekt?
-
-- **Brez CSS podpore:** Izpolnite to predlogo z informacijami o tem, kako prijaviti težave in dobiti pomoč.
-- **Da, CSS podpora:** Izpolnite obrazec na [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS bo sodeloval z vami in vam pomagal določiti naslednje korake.
-- **Niste prepričani?** Izpolnite obrazec, kot da je odgovor "Da". CSS vam bo pomagal pri odločitvi.
-
-*Potem odstranite ta prvi naslov iz te datoteke SUPPORT.MD, preden objavite svoj repozitorij.*
-
 # Podpora
 
-## Kako prijaviti težave in dobiti pomoč  
+## Težave in vprašanja o tečaju
 
-Ta projekt uporablja GitHub Issues za sledenje hroščem in zahtevam za funkcije. Preden prijavite novo težavo, prosimo, preiščite obstoječe težave, da se izognete podvajanju. Za nove težave prijavite svoj hrošč ali zahtevo za funkcijo kot novo težavo.
+Pred prijavo težave poiščite v [tečajnih težavah](https://github.com/microsoft/AZD-for-beginners/issues). Vključite prizadeto lekcijo v angleščini, ukaz, ki ste ga zagnali, različice AZD/razširitev in sporočilo o napaki. Iz dnevnikov in posnetkov zaslona odstranite poverilnice, žetone, podrobnosti o naročnini in osebne podatke.
 
-Za pomoč in vprašanja o uporabi tega projekta prosimo **VZDRŽEVALEC REPOZITORIJA: VSTAVITE NAVODILA TUKAJ 
-ZA KAKO SE POVEZATI Z LASTNIKI REPOZITORIJA ALI SKUPNOSTJO ZA POMOČ. LAHKO JE TAG NA STACK OVERFLOW ALI DRUG 
-KANAL. KJE BOSTE POMAGALI LJUDEM?**.
+Za splošna vprašanja o učenju uporabite [Azure razvijalno skupnost](https://discord.gg/microsoft-azure). Odzivi skupnosti niso zagotovljena podpora.
 
-## Microsoftova politika podpore  
+## Težave pri orodjih in storitvah
 
-Podpora za ta **PROJEKT ali IZDELEK** je omejena na zgoraj navedene vire.
+Prijavite ponovljive napake v AZD CLI na [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). Za incidente storitev Azure ali pomoč, specifično za naročnino, uporabite možnosti podpore v [Azure portalu](https://portal.azure.com/).
+
+## Varnostna poročila
+
+Sledite [SECURITY.md](SECURITY.md) za zasebno prijavo ranljivosti. Ne objavljajte skrivnosti ali podrobnosti o izrabi v javni težavi tečaja.
+
+## Politika podpore Microsofta
+
+Podpora za ta izobraževalni projekt je omejena na zgoraj navedene vire. Primeri v tečaju ne vključujejo obveznosti proizvodne podpore.
 
 ---
 
-**Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna napačna razumevanja ali napačne interpretacije, ki bi nastale zaradi uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

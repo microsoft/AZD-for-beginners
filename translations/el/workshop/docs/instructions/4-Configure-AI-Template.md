@@ -1,221 +1,25 @@
-# 4. Διαμόρφωση ενός Προτύπου
+# 4. Διαμόρφωση Προτύπου
 
-!!! tip "ΜΕΧΡΙ ΤΟ ΤΕΛΟΣ ΑΥΤΟΥ ΤΟΥ ΜΑΘΗΜΑΤΟΣ ΘΑ ΜΠΟΡΕΙΤΕ ΝΑ"
+!!! tip "ΣΤΟ ΤΕΛΟΣ ΑΥΤΟΥ ΤΟΥ ΜΑΘΗΜΑΤΟΣ ΘΑ ΕΙΣΤΕ ΙΚΑΝΟΙ ΝΑ"
 
-    - [ ] Κατανοήσετε τον σκοπό του `azure.yaml`
-    - [ ] Κατανοήσετε τη δομή του `azure.yaml`
-    - [ ] Κατανοήσετε τη σημασία των `hooks` του κύκλου ζωής του azd
-    - [ ] **Εργαστήριο 4:** Εξερευνήστε και τροποποιήστε τις μεταβλητές περιβάλλοντος
-
----
-
-!!! prompt "Τι κάνει το αρχείο `azure.yaml`; Χρησιμοποιήστε ένα μπλοκ κώδικα και εξηγήστε το γραμμή προς γραμμή"
-
-      Το αρχείο `azure.yaml` είναι το **αρχείο ρυθμίσεων για το Azure Developer CLI (azd)**. Ορίζει πώς θα αναπτυχθεί η εφαρμογή σας στο Azure, συμπεριλαμβανομένης της υποδομής, των υπηρεσιών, των hooks ανάπτυξης και των μεταβλητών περιβάλλοντος.
+    - [ ] Explain the purpose and structure of `azure.yaml`
+    - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
+    - [ ] Configure the selected environment using inputs supported by the template
+    - [ ] **Lab 4:** Review a configuration change before provisioning it
 
 ---
 
-## 1. Σκοπός και Λειτουργικότητα
+## 1. Ξεκινήστε με το πραγματικό πρότυπο
 
-Αυτό το αρχείο `azure.yaml` λειτουργεί ως το **σχέδιο ανάπτυξης** για μια εφαρμογή AI agent που:
+Ανοίξτε το [`azure.yaml` στο Ξεκινήστε με AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/azure.yaml) στο αποθετήριο που αρχικοποιήσατε. Το πρότυπο upstream μπορεί να αλλάξει ανεξάρτητα από αυτό το εργαστήριο. Το ακόλουθο **απόσπασμα** ελέγχθηκε στις 4 Νοεμβρίου 2026· δεν αποτελεί αντικατάσταση του πλήρους αρχείου:
 
-1. **Επαληθεύει το περιβάλλον** πριν την ανάπτυξη
-2. **Δημιουργεί υπηρεσίες Azure AI** (AI Hub, AI Project, Search κ.λπ.)
-3. **Αναπτύσσει μια εφαρμογή Python** σε Azure Container Apps
-4. **Διαμορφώνει μοντέλα AI** για λειτουργίες συνομιλίας και ενσωμάτωσης
-5. **Ρυθμίζει παρακολούθηση και εντοπισμό** για την εφαρμογή AI
-6. **Διαχειρίζεται τόσο νέα όσο και υπάρχοντα** σενάρια έργων Azure AI
-
-Το αρχείο επιτρέπει **ανάπτυξη με μία εντολή** (`azd up`) μιας πλήρους λύσης AI agent με κατάλληλη επαλήθευση, παροχή πόρων και μετα-αναπτυξιακή διαμόρφωση.
-
-??? info "Ανοίξτε για προβολή: `azure.yaml`"
-
-      Το αρχείο `azure.yaml` ορίζει πώς το Azure Developer CLI θα πρέπει να αναπτύξει και να διαχειριστεί αυτήν την εφαρμογή AI Agent στο Azure. Ας το αναλύσουμε γραμμή προς γραμμή.
-
-      ```yaml title="" linenums="0"
-
-      # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: do we need hooks? 
-      # TODO: do we need all of the variables?
-
-      name: azd-get-started-with-ai-agents
-      metadata:
-      template: azd-get-started-with-ai-agents@1.0.2
-      requiredVersions:
-      azd: ">=1.14.0"
-
-      hooks:
-      preup:
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-            interactive: true
-            continueOnError: false
-      windows:
-            shell: pwsh
-            run: ./scripts/validate_env_vars.ps1
-            interactive: true
-            continueOnError: false      
-      postprovision:
-      windows:
-            shell: pwsh
-            run: ./scripts/write_env.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-            continueOnError: true
-            interactive: true
-      postdeploy:
-      windows:
-            shell: pwsh
-            run: ./scripts/postdeploy.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-            continueOnError: true
-            interactive: true
-      services:
-      api_and_frontend:
-      project: ./src
-      language: py
-      host: containerapp
-      docker:
-            image: api_and_frontend
-            remoteBuild: true
-      pipeline:
-      variables:
-      - AZURE_RESOURCE_GROUP
-      - AZURE_AIHUB_NAME
-      - AZURE_AIPROJECT_NAME
-      - AZURE_AISERVICES_NAME
-      - AZURE_SEARCH_SERVICE_NAME
-      - AZURE_APPLICATION_INSIGHTS_NAME
-      - AZURE_CONTAINER_REGISTRY_NAME
-      - AZURE_KEYVAULT_NAME
-      - AZURE_STORAGE_ACCOUNT_NAME
-      - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-      - USE_CONTAINER_REGISTRY
-      - USE_APPLICATION_INSIGHTS
-      - USE_AZURE_AI_SEARCH_SERVICE
-      - AZURE_AI_AGENT_NAME
-      - AZURE_AI_AGENT_ID
-      - AZURE_AI_AGENT_DEPLOYMENT_NAME
-      - AZURE_AI_AGENT_DEPLOYMENT_SKU
-      - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-      - AZURE_AI_AGENT_MODEL_NAME
-      - AZURE_AI_AGENT_MODEL_FORMAT
-      - AZURE_AI_AGENT_MODEL_VERSION
-      - AZURE_AI_EMBED_DEPLOYMENT_NAME
-      - AZURE_AI_EMBED_DEPLOYMENT_SKU
-      - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-      - AZURE_AI_EMBED_MODEL_NAME
-      - AZURE_AI_EMBED_MODEL_FORMAT
-      - AZURE_AI_EMBED_MODEL_VERSION
-      - AZURE_AI_EMBED_DIMENSIONS
-      - AZURE_AI_SEARCH_INDEX_NAME
-      - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-      - AZURE_EXISTING_AIPROJECT_ENDPOINT
-      - AZURE_EXISTING_AGENT_ID
-      - ENABLE_AZURE_MONITOR_TRACING
-      - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-      ```
-
----
-
-## 2. Ανάλυση του Αρχείου
-
-Ας περάσουμε το αρχείο τμήμα προς τμήμα, για να κατανοήσουμε τι κάνει - και γιατί.
-
-### 2.1 **Κεφαλίδα και Σχήμα (1-3)**
-
-```yaml title="" linenums="0"
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-```
-
-- **Γραμμή 1**: Παρέχει έλεγχο σχήματος για τον YAML language server, για υποστήριξη IDE και IntelliSense
-
-### 2.2 Μεταδεδομένα Έργου (5-10)
-
-```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@1.0.2
+  template: azd-get-started-with-ai-agents@2.5.0
 requiredVersions:
   azd: ">=1.14.0"
-```
-
-- **Γραμμή 5**: Ορίζει το όνομα του έργου που χρησιμοποιείται από το Azure Developer CLI
-- **Γραμμές 6-7**: Καθορίζει ότι βασίζεται σε ένα πρότυπο έκδοσης 1.0.2
-- **Γραμμές 8-9**: Απαιτεί την έκδοση του Azure Developer CLI 1.14.0 ή νεότερη
-
-### 2.3 Hooks Ανάπτυξης (11-40)
-
-```yaml title="" linenums="0"
-hooks:
-  preup:
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-      interactive: true
-      continueOnError: false
-    windows:
-      shell: pwsh
-      run: ./scripts/validate_env_vars.ps1
-      interactive: true
-      continueOnError: false      
-```
-
-- **Γραμμές 11-20**: **Προ-αναπτυξιακό hook** - εκτελείται πριν το `azd up`
-
-      - Σε Unix/Linux: Κάνει το script επαλήθευσης εκτελέσιμο και το τρέχει
-      - Σε Windows: Εκτελεί το PowerShell script επαλήθευσης
-      - Και τα δύο είναι διαδραστικά και θα σταματήσουν την ανάπτυξη αν αποτύχουν
-
-```yaml  title="" linenums="0"
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Γραμμές 21-30**: **Hook μετά την παροχή πόρων** - εκτελείται μετά τη δημιουργία των πόρων Azure
-
-  - Εκτελεί σενάρια εγγραφής μεταβλητών περιβάλλοντος
-  - Συνεχίζει την ανάπτυξη ακόμα και αν αυτά τα scripts αποτύχουν (`continueOnError: true`)
-
-```yaml title="" linenums="0"
-  postdeploy:
-    windows:
-      shell: pwsh
-      run: ./scripts/postdeploy.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Γραμμές 31-40**: **Hook μετά την ανάπτυξη** - εκτελείται μετά την ανάπτυξη της εφαρμογής
-
-  - Εκτελεί τελικά σενάρια ρύθμισης
-  - Συνεχίζει ακόμα και αν τα scripts αποτύχουν
-
-### 2.4 Ρύθμιση Υπηρεσίας (41-48)
-
-Αυτό διαμορφώνει την υπηρεσία εφαρμογής που αναπτύσσετε.
-
-```yaml title="" linenums="0"
 services:
   api_and_frontend:
     project: ./src
@@ -226,162 +30,109 @@ services:
       remoteBuild: true
 ```
 
-- **Γραμμή 42**: Ορίζει μια υπηρεσία με το όνομα "api_and_frontend"
-- **Γραμμή 43**: Δείχνει στον κατάλογο `./src` για τον πηγαίο κώδικα
-- **Γραμμή 44**: Καθορίζει τη Python ως γλώσσα προγραμματισμού
-- **Γραμμή 45**: Χρησιμοποιεί τα Azure Container Apps ως πλατφόρμα φιλοξενίας
-- **Γραμμές 46-48**: Ρυθμίσεις Docker
+- `name` καθορίζει το έργο AZD· `metadata.template` καταγράφει την έκδοση του προτύπου.
+- `requiredVersions.azd` είναι το ελάχιστο του προτύπου, όχι σύσταση για παραμονή σε παλαιό CLI. Χρησιμοποιήστε μια τρέχουσα υποστηριζόμενη έκδοση AZD.
+- `services` ορίζει στόχους ανάπτυξης εφαρμογής. Αυτό το πρότυπο αναπτύσσει το API Python και το frontend ως μία υπηρεσία Container Apps.
+- `project` είναι σχετικό με `azure.yaml`.
+- `remoteBuild` ζητά απομακρυσμένη κατασκευή container. Η ταυτότητά σας χρειάζεται ακόμη τις απαιτούμενες άδειες Azure.
 
-      - Χρησιμοποιεί "api_and_frontend" ως όνομα εικόνας
-      - Δημιουργεί την εικόνα Docker απομακρυσμένα στο Azure (όχι τοπικά)
+Τα αρχεία Bicep του προτύπου κάτω από `infra/`, όχι μόνο η λίστα `services`, δηλώνουν πόρους όπως Microsoft Foundry, αναπτύξεις μοντέλων, αποθήκευση και προαιρετική Αναζήτηση AI.
 
-### 2.5 Μεταβλητές Pipeline (49-76)
+## 2. Κατανοήστε τα hooks κύκλου ζωής
 
-Αυτές είναι μεταβλητές που βοηθούν στο να τρέξετε το `azd` σε CI/CD pipelines για αυτοματοποίηση
+Εξετάστε την ενότητα `hooks` και τα σχετιζόμενα σενάρια πριν εκτελέσετε το πρότυπο. Η αναθεωρημένη έκδοση περιέχει:
 
-```yaml title="" linenums="0"
-pipeline:
-  variables:
-    - AZURE_RESOURCE_GROUP
-    - AZURE_AIHUB_NAME
-    - AZURE_AIPROJECT_NAME
-    - AZURE_AISERVICES_NAME
-    - AZURE_SEARCH_SERVICE_NAME
-    - AZURE_APPLICATION_INSIGHTS_NAME
-    - AZURE_CONTAINER_REGISTRY_NAME
-    - AZURE_KEYVAULT_NAME
-    - AZURE_STORAGE_ACCOUNT_NAME
-    - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-    - USE_CONTAINER_REGISTRY
-    - USE_APPLICATION_INSIGHTS
-    - USE_AZURE_AI_SEARCH_SERVICE
-    - AZURE_AI_AGENT_NAME
-    - AZURE_AI_AGENT_ID
-    - AZURE_AI_AGENT_DEPLOYMENT_NAME
-    - AZURE_AI_AGENT_DEPLOYMENT_SKU
-    - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-    - AZURE_AI_AGENT_MODEL_NAME
-    - AZURE_AI_AGENT_MODEL_FORMAT
-    - AZURE_AI_AGENT_MODEL_VERSION
-    - AZURE_AI_EMBED_DEPLOYMENT_NAME
-    - AZURE_AI_EMBED_DEPLOYMENT_SKU
-    - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-    - AZURE_AI_EMBED_MODEL_NAME
-    - AZURE_AI_EMBED_MODEL_FORMAT
-    - AZURE_AI_EMBED_MODEL_VERSION
-    - AZURE_AI_EMBED_DIMENSIONS
-    - AZURE_AI_SEARCH_INDEX_NAME
-    - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-    - AZURE_EXISTING_AIPROJECT_ENDPOINT
-    - AZURE_EXISTING_AGENT_ID
-    - ENABLE_AZURE_MONITOR_TRACING
-    - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-```
+| Hook | Σκοπός | Σημαντική συμπεριφορά |
+|------|---------|--------------------|
+| `preup` | Επικύρωση εισόδων περιβάλλοντος προτύπου πριν τη ροή εργασίας `up` | Τα scripts shell ειδικά για την πλατφόρμα μπορούν να διακόψουν τη ροή εργασίας σε αποτυχία |
+| `postdeploy` | Εκτέλεση ρυθμίσεων συγκεκριμένων για το πρότυπο μετά την ανάπτυξη εφαρμογής | Εξετάστε `continueOnError` και την έξοδο script· μια επιτυχημένη ανάπτυξη δεν αποδεικνύει κάθε εργασία ρύθμισης |
 
-Αυτή η ενότητα ορίζει μεταβλητές περιβάλλοντος που χρησιμοποιούνται **κατά τη διάρκεια της ανάπτυξης**, οργανωμένες κατά κατηγορία:
+Αυτή η έκδοση **δεν** περιέχει το παλαιότερο hook `postprovision` / `write_env` που εμφανίζεται σε προηγούμενο υλικό εργαστηρίου. Μην αντιγράφετε αναφορές hook σε scripts που δεν υπάρχουν πλέον.
 
-- **Ονόματα Πόρων Azure (Γραμμές 51-60)**:
-      - Κύρια ονόματα πόρων υπηρεσιών Azure, π.χ., Resource Group, AI Hub, AI Project κ.λπ.
-- **Σημαίες Χαρακτηριστικών (Γραμμές 61-63)**:
-      - Δυαδικές μεταβλητές για ενεργοποίηση/απενεργοποίηση συγκεκριμένων υπηρεσιών Azure
-- **Διαμόρφωση AI Agent (Γραμμές 64-71)**:
-      - Ρυθμίσεις για τον κύριο AI agent, συμπεριλαμβανομένου ονόματος, ID, ρυθμίσεων ανάπτυξης και λεπτομερειών μοντέλου
-- **Διαμόρφωση Ενσωμάτωσης AI (Γραμμές 72-79)**:
-      - Ρυθμίσεις για το μοντέλο ενσωμάτωσης που χρησιμοποιείται για διανυσματική αναζήτηση
-- **Αναζήτηση και Παρακολούθηση (Γραμμές 80-84)**:
-      - Όνομα ευρετηρίου αναζήτησης, υπάρχοντα IDs πόρων και ρυθμίσεις παρακολούθησης/εντοπισμού
+Τα κλειδιά hook επιλέγουν γεγονότα κύκλου ζωής· `posix` και `windows` επιλέγουν υλοποιήσεις πλατφόρμας. `shell`, `run`, `interactive`, και `continueOnError` ελέγχουν την εκτέλεση. Πρόκειται για εκτελέσιμα σενάρια με τις άδειές σας, οπότε εξετάστε τα όπως και τον κώδικα μιας εφαρμογής.
 
----
+Δείτε την [τεκμηρίωση AZD hooks](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-extensibility) για ολόκληρο τον κύκλο ζωής.
 
-## 3. Γνωρίστε τις μεταβλητές περιβάλλοντος
-Οι παρακάτω μεταβλητές περιβάλλοντος ελέγχουν τη ρύθμιση και τη συμπεριφορά της ανάπτυξής σας, οργανωμένες κατά τον κύριο σκοπό τους. Οι περισσότερες μεταβλητές έχουν λογικές προεπιλογές, αλλά μπορείτε να τις προσαρμόσετε ώστε να ταιριάζουν με τις ειδικές απαιτήσεις σας ή υπάρχοντες πόρους του Azure.
+## 3. Παρακολούθηση εισόδων περιβάλλοντος στην υποδομή
 
-### 3.1 Απαιτούμενες Μεταβλητές 
+Εκτελέστε αυτές τις εντολές από το αρχικοποιημένο πρότυπο δείγματος:
 
-```bash title="" linenums="0"
-# Βασική διαμόρφωση Azure
-AZURE_ENV_NAME                    # Όνομα περιβάλλοντος (χρησιμοποιείται στην ονοματοδοσία πόρων)
-AZURE_LOCATION                    # Περιοχή ανάπτυξης
-AZURE_SUBSCRIPTION_ID             # Στοχευμένη συνδρομή
-AZURE_RESOURCE_GROUP              # Όνομα ομάδας πόρων
-AZURE_PRINCIPAL_ID                # Κύριος χρήστη για RBAC
-
-# Ονόματα πόρων (Δημιουργούνται αυτόματα αν δεν οριστούν)
-AZURE_AIHUB_NAME                  # Όνομα hub του Microsoft Foundry
-AZURE_AIPROJECT_NAME              # Όνομα έργου τεχνητής νοημοσύνης
-AZURE_AISERVICES_NAME             # Όνομα λογαριασμού υπηρεσιών AI
-AZURE_STORAGE_ACCOUNT_NAME        # Όνομα λογαριασμού αποθήκευσης
-AZURE_CONTAINER_REGISTRY_NAME     # Όνομα μητρώου κοντέινερ
-AZURE_KEYVAULT_NAME               # Όνομα Key Vault (εάν χρησιμοποιείται)
-```
-
-### 3.2 Διαμόρφωση Μοντέλου 
-```bash title="" linenums="0"
-# Διαμόρφωση Μοντέλου Συνομιλίας
-AZURE_AI_AGENT_MODEL_NAME         # Προεπιλογή: gpt-4.1-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Προεπιλογή: OpenAI (ή Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Προεπιλογή: η πιο πρόσφατη διαθέσιμη
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Όνομα ανάπτυξης για το μοντέλο συνομιλίας
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Προεπιλογή: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Προεπιλογή: 80 (χιλιάδες TPM)
-
-# Διαμόρφωση Μοντέλου Ενσωμάτωσης
-AZURE_AI_EMBED_MODEL_NAME         # Προεπιλογή: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Προεπιλογή: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Προεπιλογή: η πιο πρόσφατη διαθέσιμη
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Όνομα ανάπτυξης για τις ενσωματώσεις
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Προεπιλογή: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Προεπιλογή: 50 (χιλιάδες TPM)
-
-# Διαμόρφωση Πράκτορα
-AZURE_AI_AGENT_NAME               # Όνομα εμφάνισης πράκτορα
-AZURE_EXISTING_AGENT_ID           # Χρήση υπάρχοντος πράκτορα (προαιρετικό)
-```
-
-### 3.3 Εναλλαγή Χαρακτηριστικών
-```bash title="" linenums="0"
-# Προαιρετικές υπηρεσίες
-USE_APPLICATION_INSIGHTS         # Προεπιλογή: αληθές
-USE_AZURE_AI_SEARCH_SERVICE      # Προεπιλογή: ψευδές
-USE_CONTAINER_REGISTRY           # Προεπιλογή: αληθές
-
-# Παρακολούθηση και ιχνηλάτηση
-ENABLE_AZURE_MONITOR_TRACING     # Προεπιλογή: ψευδές
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Προεπιλογή: ψευδές
-
-# Διαμόρφωση αναζήτησης
-AZURE_AI_SEARCH_INDEX_NAME       # Όνομα ευρετηρίου αναζήτησης
-AZURE_SEARCH_SERVICE_NAME        # Όνομα υπηρεσίας αναζήτησης
-```
-
-### 3.4 Διαμόρφωση Έργου AI 
-```bash title="" linenums="0"
-# Χρήση Υφιστάμενων Πόρων
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Πλήρες αναγνωριστικό πόρου του υπάρχοντος έργου AI
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Διεύθυνση URL του τελικού σημείου του υπάρχοντος έργου
-```
-
-### 3.5 Ελέγξτε τις Μεταβλητές σας
-
-Χρησιμοποιήστε το Azure Developer CLI για να προβάλετε και να διαχειριστείτε τις μεταβλητές περιβάλλοντος:
-
-```bash title="" linenums="0"
-# Προβολή όλων των μεταβλητών περιβάλλοντος για το τρέχον περιβάλλον
-azd env get-values
-
-# Λήψη συγκεκριμένης μεταβλητής περιβάλλοντος
+```bash
+azd env list
 azd env get-value AZURE_ENV_NAME
-
-# Ορισμός μεταβλητής περιβάλλοντος
-azd env set AZURE_LOCATION eastus
-
-# Ορισμός πολλαπλών μεταβλητών από αρχείο .env
-azd env set --from-file .env
+azd env get-value AZURE_LOCATION
 ```
+
+Εξετάστε το `infra/main.parameters.json` για να δείτε ποιες μεταβλητές περιβάλλοντος καταναλώνει πραγματικά το πρότυπο. Η ονομασία με `azd env set` δεν αλλάζει αυτόματα έναν πόρο Azure.
+
+Οι αναθεωρημένες προεπιλογές περιλαμβάνουν:
+
+| Είσοδος | Προεπιλογή / σκοπός |
+|-------|-------------------|
+| `AZURE_AI_AGENT_MODEL_NAME` | `gpt-5-mini` |
+| `AZURE_AI_AGENT_MODEL_VERSION` | `2025-08-07` |
+| `AZURE_AI_AGENT_DEPLOYMENT_SKU` | `GlobalStandard` |
+| `AZURE_AI_AGENT_DEPLOYMENT_CAPACITY` | `80`; οι μονάδες ποσόστωσης εξαρτώνται από το μοντέλο και τον τύπο ανάπτυξης |
+| `AZURE_AI_EMBED_MODEL_NAME` | `text-embedding-3-small` |
+| `AZURE_AI_EMBED_DIMENSIONS` | `1536` |
+| `USE_APPLICATION_INSIGHTS` | `true` |
+| `USE_AZURE_AI_SEARCH_SERVICE` | `false` |
+| `ENABLE_AZURE_MONITOR_TRACING` | `false` |
+| `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` | `false`; αφήστε απενεργοποιημένο εκτός αν έχει εξεταστεί ο χειρισμός δεδομένων |
+
+Αυτές είναι είσοδοι ειδικές για το δείγμα, όχι παγκόσμιες ρυθμίσεις AZD. Ελέγξτε την [τεκμηρίωση υποστήριξης μοντέλου και περιοχής](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) και το ποσόστωση της συνδρομής σας πριν επιλέξετε μοντέλο, SKU, χωρητικότητα ή τοποθεσία. Μην ερμηνεύετε κάθε μονάδα χωρητικότητας ως 1.000 tokens ανά λεπτό.
+
+Για να επιλέξετε διαφορετικό μοντέλο συνομιλίας, ενημερώστε το συμβατό **όνομα, έκδοση, φορμά, SKU, και χωρητικότητα μαζί**, ακολουθώντας τον [οδηγό προσαρμογής του δείγματος](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md). Η αλλαγή μόνο του ονόματος μπορεί να αφήσει μια ασύμβατη έκδοση ή τύπο ανάπτυξης.
+
+## 4. Εργαστήριο: ενεργοποίηση προαιρετικής αναζήτησης και παρακολούθησης
+
+!!! warning "Αυτές οι ρυθμίσεις μπορούν να προσθέσουν χρεώσιμους πόρους"
+
+    Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
+
+```bash
+azd env set USE_AZURE_AI_SEARCH_SERVICE true
+azd env set USE_APPLICATION_INSIGHTS true
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+
+# Inspect the infrastructure changes and any configured preview hooks
+azd provision --preview
+
+# Apply the resource changes and deploy the application
+azd up
+```
+
+Οι αλλαγές στην υποδομή απαιτούν προμήθεια· μόνο το `azd deploy` αναπτύσσει υπηρεσίες εφαρμογής. Για ευρετηρίαση αναζήτησης και υποστηριζόμενες επιλογές ανάκτησης, ακολουθήστε τον [οδηγό AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md). Για παρακολούθηση, ακολουθήστε τον [οδηγό observability](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md).
+
+Μην ενεργοποιείτε την καταγραφή περιεχομένου προτροπής/απάντησης σε πραγματικά δεδομένα πελατών χωρίς την απαιτούμενη συγκατάθεση, ελέγχους πρόσβασης, πολιτική διατήρησης και απόκρυψη.
+
+## 5. Υφιστάμενοι πόροι και CI/CD
+
+Για επαναχρησιμοποίηση ενός έργου Foundry, ακολουθήστε τις [οδηγίες για υπάρχοντες πόρους](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md#use-existing-resources) του δείγματος. Ο καθορισμός του `AZURE_EXISTING_AIPROJECT_RESOURCE_ID` αλλάζει τη διαδρομή ανάπτυξης· σε αυτήν την περίπτωση, το πρότυπο δεν δημιουργεί Application Insights ή AI Search για εσάς. Επαληθεύστε ρητά τις εξαρτήσεις, εκχωρήσεις ρόλων και αναπτύξεις μοντέλων.
+
+Η ενότητα `pipeline.variables` ελέγχει τιμές που περνιούνται σε ένα παραγόμενο pipeline· δεν είναι μυστική αποθήκη και δεν δημιουργεί πόρους Azure. Προτιμήστε διαχειριζόμενη ταυτότητα στην εφαρμογή και OIDC για CI/CD. Τα αρχεία περιβάλλοντος AZD είναι απλό κείμενο και δεν πρέπει να καταχωρούνται.
+
+Η AZD υποστηρίζει την εισαγωγή ενός αξιόπιστου, τοπικά προετοιμασμένου αρχείου dotenv:
+
+```bash
+azd env set --file .env
+```
+
+Εξετάστε αυτό το αρχείο πριν το εισάγετε, και μην εκτυπώνετε αρχεία περιβάλλοντος που περιέχουν μυστικά σε κοινόχρηστα τερματικά ή αρχεία καταγραφής CI.
+
+## 6. Ελέγξτε την κατανόησή σας
+
+- Ποια υπηρεσία `azure.yaml` αναπτύσσει την εφαρμογή;
+- Ποια παράμετρος υποδομής καταναλώνει κάθε τιμή που αλλάξατε;
+- Ποιες αλλαγές απαιτούν προμήθεια αντί μόνο ανάπτυξη;
+- Υποστήριξε η επιλεγμένη περιοχή και συνδρομή το μοντέλο και την ποσόστωση;
+- Επέτυχαν όλα τα hooks ρύθμισης, και μπορείτε να επαληθεύσετε τη συμπεριφορά της αναπτυγμένης εφαρμογής;
+
+Συνεχίστε στο [Προσαρμογή Προτύπου](5-Customize-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθύνης:
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη Co-op Translator (https://github.com/Azure/co-op-translator). Παρά τις προσπάθειές μας για ακρίβεια, λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από άνθρωπο. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση ευθυνών**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,237 +1,246 @@
-# Cơ Bản về Đa Tác Nhân - Triển Khai Hệ Thống AI Phối Hợp Đầu Tiên của Bạn
+# Kiến Thức Cơ Bản về Hệ Thống Đa Tác Nhân - Triển Khai Hệ Thống AI Phối Hợp Đầu Tiên của Bạn
 
 **Điều Hướng Chương:**
 - **📚 Trang Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
 - **📖 Chương Hiện Tại**: Chương 5 - Giải Pháp AI Đa Tác Nhân
 - **⬅️ Trước**: [Chương 4: Hạ Tầng](../chapter-04-infrastructure/README.md)
-- **➡️ Tiếp Theo**: [Mẫu Phối Hợp](../chapter-06-pre-deployment/coordination-patterns.md)
+- **➡️ Tiếp**: [Mẫu Phối Hợp](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Đã xác thực với `azd 1.27.1` vào tháng 7 năm 2026.
+> Hướng dẫn lệnh được rà soát dựa trên tham chiếu `azd 1.37.2` đã phát hành. Triển khai trên đám mây chưa được thực hiện.
 
-## Giới Thiệu
+## Giới thiệu
 
-Ở các chương trước, bạn đã triển khai một ứng dụng đơn lẻ—và trong Chương 2 bạn triển khai một tác nhân AI đơn lẻ. Bài học này tiến thêm một bước: triển khai một **hệ thống đa tác nhân**, nơi nhiều tác nhân chuyên môn hợp tác giải quyết một vấn đề mà một tác nhân đơn không thể xử lý tốt.
+Trong các chương trước, bạn đã triển khai một ứng dụng đơn—và trong Chương 2 bạn đã triển khai một tác nhân AI đơn lẻ. Bài học này đi bước tiếp theo: triển khai một **hệ thống đa tác nhân**, nơi nhiều tác nhân chuyên môn cùng phối hợp giải quyết một vấn đề mà một tác nhân đơn không thể xử lý tốt một mình.
 
-Tin tốt cho người mới: **bạn không cần lệnh mới.** Giải pháp đa tác nhân vẫn là một dự án azd. Bạn sẽ `azd init`, `azd up`, kiểm thử, và `azd down`—chính xác quy trình bạn đã biết. Thay đổi là *hình dạng* ứng dụng bên trong.
+Tin vui cho người mới: **bạn không cần lệnh mới nào.** Một giải pháp đa tác nhân vẫn là một dự án azd. Bạn sẽ `azd init`, `azd up`, kiểm thử, và `azd down`—chính là quy trình bạn đã biết. Điều thay đổi là *hình dạng* của ứng dụng bên trong.
 
 ## Mục Tiêu Học Tập
 
 Đến cuối bài học này, bạn sẽ:
-- Hiểu "đa tác nhân" là gì và khi nào nó xứng đáng với sự phức tạp thêm vào
+- Hiểu "đa tác nhân" nghĩa là gì và khi nào nó xứng đáng với độ phức tạp thêm
 - Nhận biết các vai trò phổ biến trong hệ thống đa tác nhân (điều phối viên + chuyên gia)
-- Triển khai một mẫu đa tác nhân thực tế hoạt động với `azd up`
-- Hiểu các nguồn lực Azure hỗ trợ ứng dụng đa tác nhân
-- Biết cách xác minh, tùy chỉnh, và dọn dẹp giải pháp an toàn
+- Triển khai mẫu đa tác nhân thực tế, hoạt động dùng `azd up`
+- Hiểu các tài nguyên Azure hỗ trợ một ứng dụng đa tác nhân
+- Biết cách xác minh, tùy chỉnh, và gỡ bỏ giải pháp một cách an toàn
 
 ## Kết Quả Học Tập
 
-Sau khi hoàn thành bài học này, bạn sẽ có thể:
-- Giải thích sự khác biệt giữa tác nhân đơn và hệ thống đa tác nhân
-- Lựa chọn giữa tác nhân đơn có công cụ và thiết kế đa tác nhân thật sự
-- Triển khai và kiểm thử mẫu đa tác nhân từ đầu đến cuối bằng azd
+Sau khi hoàn thành bài học, bạn sẽ có thể:
+- Giải thích sự khác biệt giữa một tác nhân đơn và một hệ thống đa tác nhân
+- Chọn giữa một tác nhân đơn với công cụ và một thiết kế đa tác nhân thực thụ
+- Triển khai và kiểm thử mẫu đa tác nhân đầu cuối bằng azd
 - Xác định nơi mỗi tác nhân chạy và cách chúng giao tiếp
-- Dọn dẹp tất cả tài nguyên để tránh phát sinh chi phí liên tục
+- Dọn dẹp mọi tài nguyên để tránh phát sinh phí liên tục
 
 ---
 
 ## Hệ Thống Đa Tác Nhân Là Gì?
 
-Một tác nhân AI đơn là một mô hình với bộ hướng dẫn và (tuỳ chọn) một số công cụ. Điều này hiệu quả cho các nhiệm vụ tập trung. Nhưng khi nhiệm vụ mở rộng—nghiên cứu, rồi viết, rồi chỉnh sửa, rồi kiểm chứng—gói tất cả vào một lời nhắc làm tác nhân chậm hơn, kém tin cậy, và khó gỡ lỗi.
+Một tác nhân AI đơn là một mô hình với tập lệnh và (tùy chọn) một số công cụ. Điều đó hoạt động tốt với các nhiệm vụ tập trung. Nhưng khi nhiệm vụ lớn lên—nghiên cứu, rồi viết, rồi biên tập, rồi kiểm tra sự thật—nhồi nhét mọi thứ vào một lời nhắc làm tác nhân chậm hơn, kém tin cậy hơn, và khó gỡ lỗi hơn.
 
-Một **hệ thống đa tác nhân** phân chia công việc thành các chuyên gia mỗi người làm tốt một phần, được điều phối bởi một điều phối viên:
+Một **hệ thống đa tác nhân** chia công việc thành những chuyên gia mỗi người làm tốt một việc, được điều phối bởi một điều phối viên:
 
 ```mermaid
 graph TD
-    User([Yêu cầu của người dùng]) --> Orchestrator[Tác nhân Điều phối<br/>Lập kế hoạch và phân công công việc]
-    Orchestrator --> Researcher[Tác nhân Nghiên cứu<br/>Thu thập dữ liệu]
-    Orchestrator --> Writer[Tác nhân Viết<br/>Phác thảo nội dung]
-    Orchestrator --> Editor[Tác nhân Biên tập<br/>Xem xét và chỉnh sửa]
+    User([User request]) --> Orchestrator[Orchestrator Agent<br/>Plans and routes the work]
+    Orchestrator --> Researcher[Researcher Agent<br/>Gathers facts]
+    Orchestrator --> Writer[Writer Agent<br/>Drafts content]
+    Orchestrator --> Editor[Editor Agent<br/>Reviews and refines]
     Researcher --> Orchestrator
     Writer --> Orchestrator
     Editor --> Orchestrator
-    Orchestrator --> Result([Câu trả lời cuối cùng])
+    Orchestrator --> Result([Final answer])
 ```
 
 ### Hai vai trò bạn luôn thấy
 
 | Vai trò | Công việc | Ví dụ |
 |------|-----|---------|
-| **Điều phối viên** | Quyết định *việc gì xảy ra tiếp theo* và phân phối công việc giữa các tác nhân | "Trước tiên nghiên cứu, rồi viết, rồi chỉnh sửa" |
-| **Chuyên gia** | Làm một việc tập trung tốt và trả về kết quả | Một "nhà nghiên cứu" chỉ thu thập dữ kiện |
+| **Điều phối viên** | Quyết định *việc tiếp theo* và phân phối công việc giữa các tác nhân | "Đầu tiên nghiên cứu, rồi viết, rồi chỉnh sửa" |
+| **Chuyên gia** | Làm một công việc chuyên sâu và trả kết quả | Một "nhà nghiên cứu" chỉ tìm kiếm thông tin |
 
-### Bạn có thực sự cần nhiều tác nhân không?
+### Liệu bạn có thật sự cần nhiều tác nhân?
 
-Bắt đầu đơn giản. Chỉ sử dụng đa tác nhân **khi nào** một trong các điều sau đúng:
+Bắt đầu đơn giản. Hãy dùng đa tác nhân **chỉ khi** một trong các điều sau đúng:
 
-- ✅ Nhiệm vụ có **các giai đoạn riêng biệt** cần hướng dẫn khác nhau (nghiên cứu so với viết so với đánh giá)
-- ✅ Bạn muốn các chuyên gia chạy **song song** để tiết kiệm thời gian
-- ✅ Các bước khác nhau cần **công cụ hay nguồn dữ liệu khác nhau**
+- ✅ Nhiệm vụ có **các giai đoạn riêng biệt** hưởng lợi từ chỉ dẫn khác nhau (nghiên cứu vs. viết vs. xem xét)
+- ✅ Bạn muốn các chuyên gia chạy **cùng lúc** để tiết kiệm thời gian
+- ✅ Các bước khác nhau cần **công cụ hoặc nguồn dữ liệu khác nhau**
 - ✅ Bạn cần mỗi bước **có thể kiểm thử và gỡ lỗi độc lập**
 
-Nếu nhiệm vụ của bạn là hỏi đáp đơn giản hoặc gọi công cụ đơn giản, thì **tác nhân đơn với công cụ** (Chương 2) đơn giản hơn, rẻ hơn, và dễ vận hành hơn.
+Nếu nhiệm vụ của bạn là một câu hỏi-trả lời đơn hoặc gọi công cụ đơn giản, một **tác nhân đơn với công cụ** (Chương 2) đơn giản hơn, rẻ hơn và dễ vận hành hơn.
 
-> **Mẹo cho người mới:** "Nhiều tác nhân hơn" không phải là "tốt hơn." Mỗi tác nhân thêm độ trễ, chi phí, và một thứ mới để giám sát. Chỉ thêm tác nhân khi vấn đề rõ ràng chia thành các phần.
+> **Mẹo cho người mới:** "Nhiều tác nhân hơn" không phải là "tốt hơn." Mỗi tác nhân thêm độ trễ, chi phí, và một món cần giám sát mới. Chỉ thêm tác nhân khi vấn đề rõ ràng chia thành các phần.
 
 ---
 
-## Hai Cách Xây Dựng Đa Tác Nhân trên Azure
+## Hai Cách Xây Hệ Thống Đa Tác Nhân trên Azure
 
 | Phương pháp | Là gì | Phù hợp với |
 |----------|-----------|----------|
-| **Tác nhân đơn + công cụ** | Một tác nhân Foundry gọi hàm/công cụ | Quy trình đơn giản, bắt đầu dễ dàng |
-| **Nhiều tác nhân phối hợp** | Nhiều tác nhân với điều phối viên | Giai đoạn riêng biệt, làm song song, chuyên môn hoá |
+| **Tác nhân đơn + công cụ** | Một tác nhân Foundry gọi hàm/công cụ | Quy trình đơn giản, mới bắt đầu |
+| **Nhiều tác nhân phối hợp** | Vài tác nhân với một điều phối viên | Các giai đoạn riêng biệt, làm việc song song, chuyên môn hóa |
 
-Bài học này tập trung vào phương pháp thứ hai dùng **mẫu có sẵn**, để bạn thấy hệ thống đa tác nhân thực chạy trước khi tự xây dựng.
+Bài học này tập trung vào phương pháp thứ hai sử dụng **mẫu sẵn có**, để bạn có thể thấy một hệ thống đa tác nhân thực chạy trước khi tự xây.
 
 ---
 
 ## Thực Hành: Triển Khai Ứng Dụng Đa Tác Nhân Hoạt Động
 
-Chúng ta sẽ triển khai **Contoso Creative Writer**, một mẫu Azure chính thức sử dụng nhiều tác nhân (nhà nghiên cứu, người viết, người chỉnh sửa) phối hợp tạo thành bài báo. Đây là app đa tác nhân đầu tiên tuyệt vời vì vai trò dễ hiểu.
+Chúng ta sẽ triển khai **Contoso Creative Writer**, một mẫu Azure chính thức điều phối các tác nhân nghiên cứu, sản phẩm, viết, và biên tập để tạo ra bài báo. Trước khi tiến hành, kiểm tra [yêu cầu và chi phí mẫu](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): nó cần hạn mức mô hình, Azure AI Search, quyền truy cập Bing Grounding, Python, Docker và các hook tương thích Bash. Sự khả dụng mô hình và khu vực tùy thuộc gói đăng ký của bạn; lựa chọn khu vực không đảm bảo triển khai thành công.
 
 ### Bước 1: Khởi tạo mẫu
 
 ```bash
-# Tạo một thư mục làm việc
+# Create a working folder
 mkdir creative-writer && cd creative-writer
 
-# Khởi tạo từ mẫu đa tác nhân chính thức
-azd init --template contoso-creative-writer
+# Initialize from the official multi-agent template
+azd init --template Azure-Samples/contoso-creative-writer .
 ```
 
-> Bạn có thể duyệt thêm các mẫu đa tác nhân bất kỳ lúc nào tại [Thư viện AZD AI Tuyệt vời](https://azure.github.io/awesome-azd/?tags=ai). Các lựa chọn thân thiện với người mới khác bao gồm `get-started-with-ai-agents` và `azure-ai-travel-agents`.
+> Xem thêm các mẫu đa tác nhân bất cứ lúc nào trong [Bộ sưu tập AZD AI tuyệt vời](https://azure.github.io/awesome-azd/?tags=ai). Các tùy chọn thân thiện với người mới khác bao gồm `get-started-with-ai-agents` và `azure-ai-travel-agents`.
 
 ### Bước 2: Xác thực
 
 ```bash
-# Bắt buộc cho các quy trình làm việc azd
+# Required for azd workflows
 azd auth login
+
+# Also required by this sample's Azure CLI hooks
+az login
 ```
 
-### Bước 3: Tạo môi trường
+### Bước 3: Kiểm tra môi trường
 
 ```bash
-azd env new dev
+# init normally creates/selects an environment; confirm it before proceeding
+azd env list
+# Only if you need an additional environment:
+# azd env new dev
 ```
 
-### Bước 4: Xem trước, sau đó triển khai
+### Bước 4: Xem trước, rồi triển khai
 
 ```bash
-# Xem những gì sẽ được tạo trước khi chi tiêu bất kỳ thứ gì (được khuyên dùng)
+# See what will be created before spending anything (recommended)
 azd provision --preview
 
-# Cung cấp cơ sở hạ tầng và triển khai tất cả các tác nhân trong một bước duy nhất
+# Provision infrastructure and deploy all agents in one step
 azd up
 ```
 
-`azd up` sẽ hỏi bạn chọn subscription và vùng, sau đó tạo các tài nguyên Azure và triển khai ứng dụng. Triển khai AI có thể mất lâu hơn ứng dụng web đơn giản—nếu bạn triển khai các mô hình lớn hơn, bạn có thể kéo dài thời gian chờ triển khai:
+`azd up` sẽ hỏi các cài đặt đăng ký và khu vực còn thiếu, rồi cấp phát tài nguyên và triển khai ứng dụng. Xem trước không giữ quota hay đảm bảo thành công; hook mẫu vẫn có thể chạy trong khi xem trước cấp phát, nên kiểm tra chúng trước. Để kéo dài thời gian chờ azd cho mỗi **triển khai dịch vụ** (không phải cấp phát mô hình):
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Lưu ý về chi phí và công suất:** Ứng dụng đa tác nhân triển khai các mô hình AI tiêu thụ hạn mức và phát sinh chi phí. Nếu `azd up` bị lỗi giới hạn mô hình, xem [Khắc phục sự cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md) để biết cách sửa vùng và hạn mức, và Chương 6 [Lập kế hoạch công suất](../chapter-06-pre-deployment/capacity-planning.md).
+Một thời gian chờ sẽ dừng azd chờ đợi; nó không hủy triển khai trong Azure. Kiểm tra trạng thái tài nguyên trước khi thử lại.
+
+> **Lưu ý về chi phí và dung lượng:** Ứng dụng đa tác nhân triển khai mô hình AI tiêu thụ quota và phát sinh chi phí. Nếu `azd up` gặp lỗi về quota mô hình, xem phần [Khắc phục sự cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md) để sửa khu vực và quota, và Chương 6 [Lập kế hoạch dung lượng](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Hiểu Việc Bạn Đã Triển Khai
+## Hiểu Những Gì Bạn Đã Triển Khai
 
-Một app đa tác nhân điển hình như thế này tạo ra một bộ tài nguyên Azure tương ứng trực tiếp với các trách nhiệm trong sơ đồ phía trên:
+Một ứng dụng đa tác nhân điển hình như thế này cấp phát một bộ tài nguyên Azure tương ứng trực tiếp với các trách nhiệm trong sơ đồ trên:
 
 | Tài nguyên | Tại sao nó ở đó |
 |----------|----------------|
-| **Microsoft Foundry / Models** | Lưu trữ các mô hình ngôn ngữ mà mỗi tác nhân sử dụng |
-| **Azure AI Search** | Cung cấp dữ liệu nền cho tác nhân nghiên cứu tìm kiếm |
+| **Microsoft Foundry / Mô hình** | Lưu trữ các mô hình ngôn ngữ mà từng tác nhân sử dụng |
+| **Azure AI Search** | Cung cấp dữ liệu có căn cứ cho tác nhân nghiên cứu tìm kiếm |
 | **Container Apps** (hoặc App Service) | Lưu trữ mã điều phối viên và tác nhân |
-| **Cosmos DB** (trong một số mẫu) | Lưu trạng thái/chung bộ nhớ được truyền giữa các tác nhân |
-| **Application Insights** | Theo dõi các yêu cầu *qua* các tác nhân giúp bạn gỡ lỗi luồng |
+| **Cosmos DB** (trong một số mẫu) | Lưu giữ trạng thái/bộ nhớ dùng chung được truyền giữa các tác nhân |
+| **Application Insights** | Theo dõi các yêu cầu *giữa* các tác nhân để bạn có thể gỡ lỗi luồng |
 
 ### Cách các tác nhân giao tiếp với nhau
 
-Trong đa số mẫu đa tác nhân azd, **điều phối viên chạy trong mã ứng dụng của bạn** (ví dụ dùng framework như Semantic Kernel hoặc Microsoft Agent Framework). Điều phối viên lần lượt gọi các tác nhân chuyên gia, truyền kết quả, và lắp ráp câu trả lời cuối cùng. Các tác nhân chia sẻ ngữ cảnh qua:
+Trong hầu hết các mẫu azd đa tác nhân, **điều phối viên chạy trong mã ứng dụng của bạn** (ví dụ, sử dụng framework như Semantic Kernel hoặc Microsoft Agent Framework). Điều phối viên gọi từng tác nhân chuyên gia theo lượt, chuyển tiếp kết quả, và ghép câu trả lời cuối cùng. Các tác nhân chia sẻ ngữ cảnh qua:
 
-- **Gọi hàm/công cụ** — điều phối viên gọi tác nhân chuyên gia rồi nhận kết quả lại
-- **Bộ nhớ chia sẻ** — một cơ sở dữ liệu (thường là Cosmos DB) giữ trạng thái mà cả hai đọc được
-- **Tin nhắn/sự kiện** — để liên kết lỏng hơn, các tác nhân giao tiếp qua hàng đợi hoặc Service Bus
+- **Gọi hàm/công cụ** — điều phối viên gọi tác nhân chuyên gia và nhận kết quả trở lại
+- **Bộ nhớ dùng chung** — một cơ sở dữ liệu (thường là Cosmos DB) chứa trạng thái mà cả hai tác nhân đọc được
+- **Tin nhắn/sự kiện** — để kết nối lỏng lẻo hơn, các tác nhân giao tiếp qua hàng đợi hoặc Service Bus
 
-> **Tại sao điều này quan trọng cho gỡ lỗi:** vì mỗi bước tách biệt, Application Insights cho bạn thấy *tác nhân nào* chậm hoặc lỗi. Đó là lý do chính để chia công việc giữa các tác nhân.
+> **Tại sao điều này quan trọng với việc gỡ lỗi:** vì mỗi bước riêng biệt, Application Insights cho bạn biết *tác nhân nào* chậm hoặc lỗi. Đây là lý do chính để chia công việc ra giữa các tác nhân ngay từ đầu.
 
 ---
 
 ## Xác Minh Việc Triển Khai
 
-Xác nhận hệ thống thực sự hoạt động trước khi tiếp tục:
+Xác nhận hệ thống thực sự chạy trước khi tiếp tục:
 
 ```bash
-# Hiển thị các điểm cuối đã triển khai
+# Show the deployed endpoints
 azd show
 
-# Mở bảng điều khiển giám sát của ứng dụng
+# Open the app's monitoring dashboard
 azd monitor
 
-# Theo dõi nhật ký nếu có điều gì đó không ổn
+# Open Application Insights Logs (not a terminal log stream)
 azd monitor --logs
 ```
 
-Sau đó mở URL ứng dụng từ `azd show` và thử một yêu cầu tác động đến tất cả các tác nhân (với Creative Writer, yêu cầu nó viết bài ngắn về chủ đề). Trong Application Insights **tìm kiếm giao dịch**, bạn sẽ thấy yêu cầu phân tán qua các bước nhà nghiên cứu, người viết và người chỉnh sửa.
+Rồi mở URL ứng dụng từ `azd show` và yêu cầu một bài báo ngắn. Dùng chế độ xem gỡ lỗi của mẫu để kiểm tra quy trình tác nhân. Tìm giao dịch Application Insights chỉ hiển thị các bước nếu mẫu đã cài đặt công cụ theo dõi và liên kết chúng; azd không tự động thêm các khoảng tác nhân.
 
 **Tiêu chí thành công:**
 - ✅ `azd show` liệt kê một điểm cuối có thể truy cập
-- ✅ Yêu cầu tạo ra kết quả rõ ràng đã qua nhiều giai đoạn
-- ✅ Application Insights hiển thị các dấu vết từ nhiều bước tác nhân khác nhau
+- ✅ Một yêu cầu tạo ra kết quả đi qua rõ ràng nhiều giai đoạn
+- ✅ Chế độ xem gỡ lỗi hiển thị nhiều bước tác nhân; nếu bật theo dõi, xác minh dữ liệu tương ứng sau khi thu thập
 
 ---
 
-## Tùy Chỉnh: Thêm Hoặc Điều Chỉnh Tác Nhân
+## Tùy Chỉnh: Thêm hoặc Điều Chỉnh Tác Nhân
 
-Vì mỗi tác nhân chỉ là hướng dẫn cộng công cụ, việc tùy chỉnh khá dễ tiếp cận:
+Vì mỗi tác nhân chỉ là lệnh cộng công cụ, việc tùy chỉnh rất dễ tiếp cận:
 
-1. **Tìm định nghĩa tác nhân** trong mẫu (thường là file trong `prompts/`, `agents/`, hoặc `*.prompty`).
-2. **Điều chỉnh hướng dẫn của tác nhân** — ví dụ, bảo tác nhân chỉnh sửa tuân thủ giọng điệu hoặc số từ nhất định.
-3. **Triển khai lại chỉ mã** (hạ tầng không đổi):
+1. **Tìm định nghĩa tác nhân** trong mẫu (thường là một bộ tệp `prompts/`, `agents/`, hoặc `*.prompty`).
+2. **Điều chỉnh lệnh của tác nhân** — ví dụ, bảo tác nhân biên tập tuân thủ một tông giọng hoặc số từ cụ thể.
+3. **Chỉ triển khai lại mã** (hạ tầng không thay đổi):
 
    ```bash
    azd deploy
    ```
 
-Để đi xa hơn và xây tác nhân từ *manifest* riêng, dùng phần mở rộng tác nhân và toàn bộ vòng đời:
+Để đi sâu hơn với dự án tác nhân Foundry *của bạn*, dùng mở rộng tác nhân để khởi tạo tương tác:
 
 ```bash
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
-azd ai agent invoke      # kiểm tra, với thời gian phản hồi
+azd ai agent invoke      # test, with response timing
 ```
 
-Xem [Chương 2: Tác nhân](../chapter-02-ai-development/agents.md) và [tham khảo AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) về vòng đời đầy đủ của tác nhân (`invoke`, `eval generate`, `optimize`, `delete`).
+Xem [Chương 2: Các tác nhân](../chapter-02-ai-development/agents.md) và [tham chiếu AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) cho vòng đời đầy đủ: tác nhân `invoke`, quy trình mở rộng đánh giá riêng `azd ai eval`, tác nhân `optimize`, và tác nhân `delete`.
 
 ---
 
 ## Dọn Dẹp
 
-Ứng dụng đa tác nhân chạy nhiều dịch vụ có phí. Hãy dọn sạch khi xong việc:
+Ứng dụng đa tác nhân chạy nhiều dịch vụ có thu phí. Xóa sạch khi xong:
 
 ```bash
-azd down --force --purge
+# Review the resources and confirm deletion interactively
+azd down
 ```
 
-Cờ `--purge` cũng xóa các tài nguyên AI đã bị xóa mềm (như tài khoản Foundry/Dịch vụ Azure AI) để chúng không chặn triển khai lại hoặc tiếp tục tính phí.
+Việc xóa là thủ tục phá hủy. Với phòng lab một lần, `azd down --force --purge` bỏ qua xóa và các xác nhận thanh lọc soft-delete được hỗ trợ; việc thanh lọc là không thể phục hồi nơi được phép và có thể bị chặn bởi bảo vệ thanh lọc. Xóa mềm liên quan đến khôi phục/tái sử dụng tên, không phải bằng chứng về việc phí tiếp tục. Kiểm tra tài nguyên còn giữ và hóa đơn sau khi dọn dẹp.
 
 ---
 
-## Ghi Chú về Hệ Thống Đa Tác Nhân Sản Xuất
+## Lời Nhắn Về Hệ Thống Đa Tác Nhân Trong Môi Trường Sản Xuất
 
-[Giải pháp Đa Tác Nhân Bán Lẻ](../../examples/retail-scenario.md) trong kho này là một **bản thiết kế kiến trúc**, không phải mẫu một lệnh—nó trình bày cách một hệ thống bán lẻ sản xuất *sẽ* được xây dựng (và nói rõ rằng xây dựng toàn diện là công việc lớn). Dùng nó làm tham khảo thiết kế *sau khi* bạn đã triển khai mẫu hoạt động tại đây. Về các vấn đề sản xuất (độ bền, chi phí, giám sát, quản trị), tiếp tục xem [Chương 8: Thực Hành AI Sản Xuất](../chapter-08-production/production-ai-practices.md).
+Giải pháp [Retail Multi-Agent](../../examples/retail-scenario.md) trong kho này là một **bản thiết kế kiến trúc**, không phải là một mẫu lệnh đơn—nó ghi lại cách một hệ thống bán lẻ sản xuất *sẽ* được xây dựng (và rõ ràng rằng một bản xây dựng đầy đủ là một nỗ lực đáng kể). Hãy sử dụng nó làm tài liệu tham khảo thiết kế *sau khi* bạn đã triển khai một mẫu hoạt động tại đây. Đối với các vấn đề về sản xuất (độ bền, chi phí, giám sát, quản trị), tiếp tục xem [Chương 8: Thực hành AI trong sản xuất](../chapter-08-production/production-ai-practices.md).
 
 ---
 
-## Tóm Tắt
+## Tóm tắt
 
-- Hệ thống đa tác nhân phân chia công việc giữa các chuyên gia được điều phối bởi một điều phối viên.
-- Chỉ dùng khi nhiệm vụ có các giai đoạn riêng biệt, song song, hoặc cần công cụ khác nhau cho mỗi bước—nếu không ưu tiên tác nhân đơn.
-- Quy trình azd không thay đổi: `azd init` → `azd up` → kiểm thử → `azd down`.
-- Mẫu thực tế như `contoso-creative-writer` cho phép bạn thấy và tùy chỉnh app đa tác nhân hoạt động ngay hôm nay.
-- Theo dõi Application Insights xuyên suốt các tác nhân là một trong những lợi ích thực tiễn lớn nhất của thiết kế đa tác nhân.
+- Một hệ thống đa tác nhân chia công việc giữa các chuyên gia được điều phối bởi một bộ điều phối.
+- Chỉ sử dụng khi nhiệm vụ có các giai đoạn riêng biệt, song song, hoặc sử dụng công cụ khác nhau cho mỗi bước—nếu không thì ưu tiên một tác nhân duy nhất.
+- Quy trình azd không thay đổi: `azd init` → `azd up` → test → `azd down`.
+- Một mẫu thực tế như `contoso-creative-writer` cho phép bạn xem và tùy chỉnh một ứng dụng đa tác nhân hoạt động ngay hôm nay.
+- Theo dõi Application Insights xuyên suốt các tác nhân là một trong những lợi ích thực tế lớn nhất của thiết kế đa tác nhân.
 
 ---
 
@@ -239,15 +248,15 @@ Cờ `--purge` cũng xóa các tài nguyên AI đã bị xóa mềm (như tài k
 
 | Hướng | Bài học |
 |-----------|--------|
-| **Trước** | [Chương 4: Hạ Tầng](../chapter-04-infrastructure/README.md) |
-| **Tiếp** | [Mẫu Phối Hợp](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Trước** | [Chương 4: Hạ tầng](../chapter-04-infrastructure/README.md) |
+| **Tiếp theo** | [Mô hình Phối hợp](../chapter-06-pre-deployment/coordination-patterns.md) |
 
 ## 📖 Tài Nguyên Liên Quan
 
-- [Hướng Dẫn Tác Nhân AI](../chapter-02-ai-development/agents.md)
-- [Mẫu Phối Hợp](../chapter-06-pre-deployment/coordination-patterns.md)
-- [Thực Hành AI Sản Xuất](../chapter-08-production/production-ai-practices.md)
-- [Khắc Phục Sự Cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Hướng dẫn Đại lý AI](../chapter-02-ai-development/agents.md)
+- [Mô hình Phối hợp](../chapter-06-pre-deployment/coordination-patterns.md)
+- [Thực hành AI trong Sản xuất](../chapter-08-production/production-ai-practices.md)
+- [Khắc phục sự cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

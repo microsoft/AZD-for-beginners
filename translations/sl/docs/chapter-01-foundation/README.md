@@ -1,21 +1,21 @@
-# Poglavje 1: Osnove in hiter začetek
+# Poglavje 1: Temelji in hitri začetek
 
-**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 30-45 minut | **⭐ Kompleksnost**: Začetnik
+**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 75-120 minut vključno s prvo namestitvijo; dodatne vaje trajajo dlje | **⭐ Kompleksnost**: Začetnik
 
 ---
 
 ## Pregled
 
-To poglavje uvaja temelje Azure Developer CLI (azd). Spoznali boste osnovne pojme, namestili orodja in razporedili svojo prvo aplikacijo v Azure.
+To poglavje uvaja osnove Azure Developer CLI (azd). Naučili se boste osnovnih pojmov, namestili orodja in namestili svojo prvo aplikacijo v Azure.
 
-> Preizkušeno z `azd 1.27.1` julija 2026.
+> Cilj pregleda ukazov in konfiguracije: `azd 1.37.2` (November 2026). Med pregledom ni bila izvedena živa namestitev Azure.
 
 ## Cilji učenja
 
-Z dokončanjem tega poglavja boste:
+S tem, ko boste dokončali to poglavje, boste:
 - Razumeli, kaj je Azure Developer CLI in kako se razlikuje od Azure CLI
 - Namestili in konfigurirali AZD na svoji platformi
-- Razporedili svojo prvo aplikacijo v Azure z `azd up`
+- Namestili svojo prvo aplikacijo v Azure z `azd up`
 - Počistili vire z `azd down`
 
 ---
@@ -24,17 +24,17 @@ Z dokončanjem tega poglavja boste:
 
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
-| 1 | [Osnove AZD](azd-basics.md) | Osnovni pojmi, terminologija in struktura projekta | 15 min |
-| 2 | [Namestitev in nastavitev](installation.md) | Vodniki po namestitvi za specificirane platforme | 10 min |
-| 3 | [Vaš prvi projekt](first-project.md) | Praktično: Razporeditev spletne aplikacije v Azure | 20 min |
-| 4 | [Uporabite svojo aplikacijo](bring-your-own-app.md) | Dodajte azd v obstoječi projekt, ki ga že imate | 15 min |
-| 5 | [Razvojni zabojniki in Codespaces](dev-containers.md) | Reproducibilna okolja azd z razvojnimi zabojniki | 15 min |
+| 1 | [Osnove AZD](azd-basics.md) | Osnovni koncepti, terminologija in struktura projekta | 15 min |
+| 2 | [Namestitev in nastavitev](installation.md) | Navodila za namestitev na specifičnih platformah | 10 min |
+| 3 | [Tvoj prvi projekt](first-project.md) | Praktično: Namestitev spletne aplikacije v Azure | 20 min |
+| 4 | [Uporabi svojo aplikacijo](bring-your-own-app.md) | Dodaj azd v obstoječi projekt, ki ga že imaš | 15 min |
+| 5 | [Razvojni kontejnerji in Codespaces](dev-containers.md) | Reproducibilna azd okolja z razvojnimi kontejnerji | 15 min |
 
 ---
 
-## ✅ Začnite tukaj: Preverite svojo namestitev
+## ✅ Začni tukaj: Preveri svojo nastavitev
 
-Pred začetkom potrdite, da je vaš lokalni računalnik pripravljen za predlogo poglavja 1:
+Pred začetkom preveri, da je tvoj lokalni računalnik pripravljen za predlogo Poglavja 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Pred začetkom potrdite, da je vaš lokalni računalnik pripravljen za predlogo 
 bash ./validate-setup.sh
 ```
 
-Če skripta poroča o manjkajočih orodjih, jih najprej odpravite in nato nadaljujte s poglavjem.
+Če skripta javi manjkajoča orodja, jih najprej odpravi in nato nadaljuj s poglavjem.
 
 ---
 
 ## 🚀 Hiter začetek
 
 ```bash
-# Preveri namestitev
+# Check installation
 azd version
 
-# Avtentikacija za AZD
-# Neobvezno: az login, če nameravate neposredno zagnati ukaze Azure CLI
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Namestite svojo prvo aplikacijo
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Po končanem čiščenje
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,14 +74,14 @@ azd down --force --purge
 
 ## ✅ Merila uspeha
 
-Po zaključku tega poglavja bi morali biti sposobni:
+Po končanem tem poglavju boš lahko:
 
 ```bash
-azd version              # Prikaže nameščeno različico
-azd init --template todo-nodejs-mongo  # Inicializira projekt
-azd up                   # Razporedi na Azure
-azd show                 # Prikaže URL zagnane aplikacije
-azd down --force --purge # Počisti vire
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -88,16 +90,16 @@ azd down --force --purge # Počisti vire
 
 | Smer | Poglavje |
 |-----------|---------|
-| **Naslednje** | [Poglavje 2: Razvoj z umetno inteligenco](../chapter-02-ai-development/README.md) |
+| **Naslednje** | [Poglavje 2: AI-prvi razvoj](../chapter-02-ai-development/README.md) |
 | **Preskoči na** | [Poglavje 3: Konfiguracija](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Povezani viri
 
-- [Povzetek ukazov](../../resources/cheat-sheet.md)
+- [Previdnica ukazov](../../resources/cheat-sheet.md)
 - [Pogosta vprašanja](../../resources/faq.md)
-- [Slovarček](../../resources/glossary.md)
+- [Slovar](../../resources/glossary.md)
 
 ---
 

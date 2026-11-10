@@ -1,22 +1,22 @@
-# Sura ya 7: Utatuzi wa Matatizo & Kurekebisha Hitilafu
+# Sura ya 7: Kutatua Matatizo & Kufuatilia Hitilafu
 
-**📚 Kozi**: [AZD Kwa Komo](../../README.md) | **⏱️ Muda**: Saa 1-1.5 | **⭐ Ugumu**: Kiwiliwili
+**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: Saa 1-1.5 | **⭐ Ugumu**: Kiwiliwili
 
 ---
 
 ## Muhtasari
 
-Sura hii inakusaidia kugundua na kutatua matatizo yanayojitokeza mara kwa mara wakati wa kutumia Azure Developer CLI. Kuanzia kwa kushindwa kwa uenezaji hadi matatizo maalum ya AI.
+Sura hii inakusaidia kubaini na kutatua matatizo yanayotokea mara kwa mara unapofanya kazi na Azure Developer CLI. Kuanzia kushindwa kwa usambazaji hadi matatizo maalum ya AI.
 
-> Imethibitishwa dhidi ya `azd 1.27.1` mwezi Julai 2026.
+> Mwongozo wa amri umeangaliwa dhidi ya marejeleo yaliyotolewa ya `azd 1.37.2`. Usambazaji wa wingu haukuendeshwa. Badilisha majina na vitambulisho vya rasilimali mfano kabla ya kutumia amri.
 
 ## Malengo ya Kujifunza
 
-Kwa kukamilisha sura hii, utakuwa na uwezo wa:
-- Kugundua kushindwa kwa uenezaji wa AZD mara kwa mara
-- Kurekebisha matatizo ya uthibitishaji na ruhusa
+Kwa kumaliza sura hii, utaweza:
+- Kubaini kushindwa kwa usambazaji wa AZD
+- Kufuatilia hitilafu za uthibitishaji na ruhusa
 - Kutatua matatizo ya muunganisho wa huduma za AI
-- Kutumia Azure Portal na CLI kwa ajili ya utatuzi wa matatizo
+- Kutumia Azure Portal na CLI kwa ajili ya kutatua matatizo
 
 ---
 
@@ -24,9 +24,9 @@ Kwa kukamilisha sura hii, utakuwa na uwezo wa:
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Matatizo ya Kawaida](common-issues.md) | Matatizo yanayotokea mara kwa mara | Dakika 30 |
-| 2 | [Mwongozo wa Kurekebisha Hitilafu](debugging.md) | Mikakati ya hatua kwa hatua ya kurekebisha hitilafu | Dakika 45 |
-| 3 | [Utatuzi wa AI](ai-troubleshooting.md) | Matatizo maalum ya AI | Dakika 30 |
+| 1 | [Matatizo ya Kawaida](common-issues.md) | Matatizo yanayojitokeza mara kwa mara | Dakika 30 |
+| 2 | [Mwongozo wa Kufuatilia Hitilafu](debugging.md) | Mikakati ya kufuatilia hitilafu hatua kwa hatua | Dakika 45 |
+| 3 | [Kutatua Matatizo ya AI](ai-troubleshooting.md) | Matatizo maalum ya AI | Dakika 30 |
 
 ---
 
@@ -34,16 +34,16 @@ Kwa kukamilisha sura hii, utakuwa na uwezo wa:
 
 ### Matatizo ya Uthibitishaji
 ```bash
-# Inahitajika kwa mzunguko wa kazi za AZD
+# Required for AZD workflows
 azd auth login
 
-# Hiari ikiwa pia unatumia amri za Azure CLI moja kwa moja
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Kushindwa kwa Upatanisho
+### Kushindwa kwa Utoaji
 ```bash
 azd show
 azd monitor --logs
@@ -51,18 +51,21 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Migogoro ya Rasilimali
+Kagua rasilimali iliyopo na makosa ya usambazaji kwanza. Usifute mazingira yaliyoshirikiwa au ya uzalishaji ili kutatua mgogoro wa majina. Kwa **mazingira mapya yanayotumika mara moja**, tumia jina la kipekee:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Kiwango cha Mpaka Kilizidiwa
+### Kiasi Kimezidiwa
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Kubadilisha `AZURE_LOCATION` hakuhamishi rasilimali zilizopo na kunaweza kusababisha migogoro ya eneo katika usambazaji mpya.
 
 ---
 
@@ -70,42 +73,44 @@ azd up
 
 | Hitilafu | Sababu | Suluhisho |
 |-------|-------|----------|
-| `AuthenticationError` | Hujasajiliwa | `azd auth login` |
+| `AuthenticationError` | Haujajiingia | `azd auth login` |
 | `ResourceNotFound` | Rasilimali haipo | Angalia majina ya rasilimali |
-| `QuotaExceeded` | Mipaka ya usajili | Omba ongezeko la kiwango |
-| `InvalidTemplate` | Makosa ya sintaksi ya Bicep | `az bicep build` |
-| `Conflict` | Rasilimali ipo tayari | Tumia jina jipya au futa |
-| `Forbidden` | Ruhusa hazitoshi | Angalia majukumu ya RBAC |
+| `QuotaExceeded` | Mipaka ya usajili | Omba ongezeko la kiasi |
+| `InvalidTemplate` | Hitilafu ya sentensi ya Bicep | `az bicep build` |
+| `Conflict` | Rasilimali ipo | Tumia jina jipya au futa |
+| `Forbidden` | Ruhusa zisizotosheka | Angalia majukumu ya RBAC |
 
 ---
 
-## 🔄 Weka Upya na Ufufuzi
+## 🔄 Weka Upya na Uokoaji
 
 ```bash
-# Weka upya kwa upole (hifadhi rasilimali, tengeneza tena msimbo)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Weka upya kwa nguvu (futa kila kitu, anza upya)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
 
+Weka upya mgumu hufuta data na inaweza kubadilisha vituo. Hifadhi nakala kwanza na pitia maelekezo ya kufuta ya mahiri. `--force --purge` inafaa tu kwa mazingira yanayotumika mara moja wakati kufuta kisizoweza kurekebishwa kunakusudiwa.
+
 ---
 
-## 🔗 Utabanano
+## 🔗 Urambazaji
 
 | Mwelekeo | Sura |
 |-----------|---------|
-| **Iliyotangulia** | [Sura ya 6: Kabla ya Uenezaji](../chapter-06-pre-deployment/README.md) |
-| **Inayofuata** | [Sura ya 8: Uzalishaji](../chapter-08-production/README.md) |
+| **Iliyotangulia** | [Sura ya 6: Kabla ya Usambazaji](../chapter-06-pre-deployment/README.md) |
+| **Ifuatayo** | [Sura ya 8: Uzalishaji](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Rasilimali Zinazohusiana
 
-- [Ukaguzi Kabla ya Uenezaji](../chapter-06-pre-deployment/preflight-checks.md)
+- [Ukaguzi Kabla ya Usambazaji](../chapter-06-pre-deployment/preflight-checks.md)
 - [Mwongozo wa Usanidi](../chapter-03-configuration/configuration.md)
-- [Masuala ya AZD GitHub](https://github.com/Azure/azure-dev/issues)
+- [Matatizo ya AZD GitHub](https://github.com/Azure/azure-dev/issues)
 
 ---
 

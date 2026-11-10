@@ -1,10 +1,10 @@
 # Application Insights integráció az AZD-vel
 
-⏱️ **Becsült idő**: 40-50 perc | 💰 **Költséghatás**: kb. $5-15/hónap | ⭐ **Bonyolultság**: Középhaladó
+⏱️ **Várható idő**: 40-50 perc | 💰 **Költséghatás**: kb. 5-15 $/hó | ⭐ **Bonyolultság**: Középhaladó
 
 **📚 Tanulási útvonal:**
-- ← Előző: [Előzetes ellenőrzések](preflight-checks.md) - Telepítés előtti validálás
-- 🎯 **Jelenleg itt vagy**: Application Insights integráció (monitorozás, telemetria, hibakeresés)
+- ← Előző: [Előzetes ellenőrzések](preflight-checks.md) - Telepítés előtti érvényesítés
+- 🎯 **Jelenleg itt tartasz**: Application Insights integráció (monitorozás, telemetria, hibakeresés)
 - → Következő: [Telepítési útmutató](../chapter-04-infrastructure/deployment-guide.md) - Telepítés Azure-ba
 - 🏠 [Tanfolyam kezdőlap](../../README.md)
 
@@ -12,19 +12,19 @@
 
 ## Amit megtanulsz
 
-Ezen lecke elvégzésével:
-- Automatikusan integrálod az **Application Insights**-t AZD projektekbe
-- Konfigurálod a **elosztott nyomkövetést** mikroservice-ekhez
-- Megvalósítod a **egyedi telemetriát** (mérőszámok, események, függőségek)
-- Beállítod a **valós idejű metrikákat** a folyamatkövetéshez
-- Létrehozol **értesítéseket és műszerfalakat** AZD telepítésekből
-- Hibákat hibakeresel **telemetria lekérdezések** segítségével
-- Optimalizálod a **költségeket és mintavételezési stratégiákat**
-- Monitorozod az **AI/LLM alkalmazásokat** (tokenek, késleltetés, költségek)
+Ennek a leckének az elvégzése után képes leszel:
+- Az **Application Insights** deklarálása az AZD infrastruktúrában és az SDK instrumentáció konfigurálása
+- A **elosztott követés** beállítása mikroszolgáltatásokhoz
+- **Egyedi telemetria** megvalósítása (mérőszámok, események, függőségek)
+- **Élő mérőszámok** beállítása valós idejű monitorozáshoz
+- **Riasztások és műszerfalak** létrehozása AZD telepítésekből
+- Gyártási hibák hibakeresése **telemetria lekérdezésekkel**
+- Költség- és mintavételi stratégiák optimalizálása
+- **AI/LLM alkalmazások** monitorozása (tokenek, késleltetés, költségek)
 
 ## Miért fontos az Application Insights az AZD-vel
 
-### A kihívás: Termelési megfigyelhetőség
+### A kihívás: Gyártási megfigyelhetőség
 
 **Application Insights nélkül:**
 ```
@@ -44,37 +44,37 @@ Ezen lecke elvégzésével:
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**Hasonlat**: Az Application Insights olyan, mint az alkalmazásod "fekete doboz" repülési naplózója + pilótafülke műszerfala. Mindent valós időben látsz, és bármilyen eseményt visszajátszhatsz.
+**Analógia**: Az Application Insights olyan, mint egy "fekete doboz" repülési rögzítő + pilótafülke műszerfal az alkalmazásod számára. Valós időben mindent látsz, ami történik, és bármilyen eseményt visszajátszhatsz.
 
 ---
 
-## Architektúra áttekintése
+## Architektúra áttekintés
 
 ### Application Insights az AZD architektúrában
 
 ```mermaid
 graph TB
-    User[Felhasználó/Ügyfél]
-    App1[Tartályalkalmazás 1<br/>API Kapu]
-    App2[Tartályalkalmazás 2<br/>Termék Szolgáltatás]
-    App3[Tartályalkalmazás 3<br/>Rendelés Szolgáltatás]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[Alkalmazás Elemzések<br/>Telemetria Központ]
-    LogAnalytics[(Napló Elemzés<br/>Munkaterület)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Azure Portál<br/>Irányítópultok és Értesítések]
-    Query[Kusto Lekérdezések<br/>Egyedi Elemzés]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Automatikus műszerelés| AppInsights
-    App2 -.->|Automatikus műszerelés| AppInsights
-    App3 -.->|Automatikus műszerelés| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,16 +83,19 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 ### Amit automatikusan monitoroz
 
-| Telemetria típus | Mit rögzít | Használat |
+A támogatott automatikus instrumentáció rögzíti a kéréseket/függőségeket az instrumentált könyvtárak esetén. Egyedi események és mérőszámok alkalmazáskódot igényelnek; az elérhetőségi teszteket külön kell konfigurálni. Nem gyűjti össze minden tételt alább csak azért, mert az erőforrás létezik.
+
+| Telemetria típusa | Mit rögzít | Használati eset |
 |----------------|------------------|----------|
 | **Kérések** | HTTP kérések, státuszkódok, időtartam | API teljesítmény monitorozása |
 | **Függőségek** | Külső hívások (adatbázis, API-k, tárhely) | Szűk keresztmetszetek azonosítása |
-| **Kivételek** | Kezeletlen hibák stack trace-dzsel | Hibák hibakeresése |
-| **Egyedi események** | Üzleti események (regisztráció, vásárlás) | Analitika és folyamatok |
-| **Mérőszámok** | Teljesítmény számlálók, egyedi mérőszámok | Kapacitástervezés |
-| **Nyomok (Traces)** | Log üzenetek súlyossággal | Hibakeresés és audit |
+| **Kivételek** | Kezeletlen hibák veremnyomokkal | Hibakeresés |
+| **Egyedi események** | Üzleti események (regisztráció, vásárlás) | Analitika és tölcsérek |
+| **Mérőszámok** | Teljesítményszámlálók, egyedi mérőszámok | Kapacitástervezés |
+| **Nyomok** | Naplóüzenetek súlyossággal | Hibakeresés és auditálás |
 | **Elérhetőség** | Üzemidő és válaszidő tesztek | SLA monitorozás |
 
 ---
@@ -102,40 +105,42 @@ graph TB
 ### Szükséges eszközök
 
 ```bash
-# Ellenőrizze az Azure Developer CLI-t
+# Verify Azure Developer CLI
 azd version
-# ✅ Várt: azd verzió 1.0.0 vagy magasabb
+# Command reference baseline: azd 1.37.2
 
-# Ellenőrizze az Azure CLI-t
+# Verify Azure CLI
 az --version
-# ✅ Várt: azure-cli 2.50.0 vagy magasabb
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Azure követelmények
 
 - Aktív Azure előfizetés
-- Jogosultságok a létrehozáshoz:
+- Jogosultságok az alábbiak létrehozásához:
   - Application Insights erőforrások
   - Log Analytics munkaterületek
-  - Container App-ek
-  - Erőforrás csoportok
+  - Konténer alkalmazások
+  - Erőforráscsoportok
 
 ### Tudás előfeltételek
 
 Előzőleg el kell végezned:
-- [AZD alapok](../chapter-01-foundation/azd-basics.md) - AZD alapfogalmak
+- [AZD Alapok](../chapter-01-foundation/azd-basics.md) - AZD alapfogalmak
 - [Konfiguráció](../chapter-03-configuration/configuration.md) - Környezet beállítása
-- [Első projekt](../chapter-01-foundation/first-project.md) - Alap telepítés
+- [Első projekt](../chapter-01-foundation/first-project.md) - Alapvető telepítés
 
 ---
 
 ## 1. lecke: Automatikus Application Insights az AZD-vel
 
-### Hogyan biztosítja az AZD az Application Insights-ot
+### Hogyan biztosítja az AZD az Application Insights szolgáltatást
 
-AZD automatikusan létrehozza és konfigurálja az Application Insights-ot a telepítéskor. Nézzük meg, hogyan működik.
+Az AZD csak akkor biztosítja az Application Insights-ot, **ha a projekt infrastruktúrája azt deklarálja**. `azure.yaml` önmagában nem hoz létre megfigyelést vagy nem instrumentálja az alkalmazáskódot.
 
-### Projektszerkezet
+> **Példa hatókör:** Ez a lecke integrációs töredékeket tartalmaz, nem egy teljes `monitored-app` projektet ebben a tárolóban. Biztosítson egy fő sablont és paramétertérképet, egy Container Apps környezetet, registry/kép és identitás konfigurációt, Dockerfile-t és szolgáltatáscímkéket a telepítés előtt. Későbbi leckék alternatív/kiterjesztő töredékeket mutatnak be, nem fájlokat, melyek változtatás nélkül összemásolhatók. Ha futtatható kiindulópontot szeretne, kezdje egy működő [mikroszolgáltatás-példával](../../../../examples/microservices).
+
+### Projekt Struktúra
 
 ```
 monitored-app/
@@ -169,14 +174,14 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**Ennyi az egész!** AZD alapértelmezés szerint létrehozza az Application Insights-ot. Alapmonitorozáshoz nincs szükség plusz konfigurációra.
+Ez deklarálja a telepíthető szolgáltatást. A következő Bicep és SDK konfigurációk biztosítják a megfigyelést; az azd nem adja hozzá őket implicit módon.
 
 ---
 
-### 2. lépés: Monitorozási infrastruktúra (Bicep)
+### 2. lépés: Megfigyelő infrastruktúra (Bicep)
 
 **Fájl: `infra/core/monitoring.bicep`**
 
@@ -223,11 +228,12 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
 
-### 3. lépés: Container App kapcsolása az Application Insights-hoz
+### 3. lépés: Csatlakoztassa a Container App-ot az Application Insights-hoz
 
 **Fájl: `infra/app/api.bicep`**
 
@@ -235,7 +241,8 @@ output applicationInsightsName string = applicationInsights.name
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -291,29 +299,23 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Szerezze be az Application Insights kapcsolati karakterláncát
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Elosztott követés konfigurálása
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # 100%-os mintavételezés fejlesztéshez
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # Naplózás konfigurálása
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # Adatbázis hívás szimulálása (automatikusan követett függőségként)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Lassú művelet szimulálása
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -367,27 +369,27 @@ if __name__ == '__main__':
 **Fájl: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+Ezeket a függőségeket oldja meg a projektjében, tesztelje őket együtt, és zárja le a kapott verziókat. Az új projekteknek az Azure Monitor OpenTelemetry-t kell használniuk, nem a megszüntetett OpenCensus Python exportőröket.
 
 ---
 
 ### 5. lépés: Telepítés és ellenőrzés
 
 ```bash
-# Inicializálja az AZD-t
-azd init
-
-# Telepítés (automatikusan biztosítja az Application Insights szolgáltatást)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# Az alkalmazás URL-jének lekérése
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# Telemetria generálása
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -404,47 +406,42 @@ curl $APP_URL/api/slow
 
 ---
 
-### 6. lépés: Telemetria megtekintése az Azure Portálon
+### 6. lépés: Telemetria megtekintése az Azure Portalon
 
 ```bash
-# Alkalmazásfigyelő részletek lekérése
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Megnyitás az Azure portálon
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Navigálj Azure Portál → Application Insights → Transaction Search**
+**Navigáljon az Azure Portalon → Application Insights → Transaction Search**
 
-Látnod kell:
-- ✅ HTTP kérések státuszkódokkal
-- ✅ Kérések időtartama (3+ másodperc a `/api/slow` esetén)
-- ✅ Kivétel részletek a `/api/error-test`-ből
-- ✅ Egyedi log üzenetek
+Ezeket kell látnia:
+- ✅ HTTP kérések állapotkódokkal
+- ✅ Kérés időtartama (3+ másodperc `/api/slow` esetén)
+- ✅ Kivétel részletek `/api/error-test`-ból
+- ✅ Egyéni naplóüzenetek
 
 ---
 
-## 2. lecke: Egyedi telemetria és események
+## 2. lecke: Egyéni telemetria és események
 
 ### Üzleti események követése
 
-Adjunk hozzá egyedi telemetriát üzleti fontosságú eseményekhez.
+Adjunk hozzá egyéni telemetriát az üzletileg kritikus eseményekhez.
 
 **Fájl: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # Naplózó beállítása
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # Metrikák exportáló beállítása
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # Követő beállítása
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# Globális telemetria kliens
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### Alkalmazás frissítése egyedi eseményekkel
+### Alkalmazás frissítése egyéni eseményekkel
 
-**Fájl: `src/app.py` (kibővített)**
+**Fájl: `src/app.py` (bővített)**
+
+Adja hozzá ezeket az útvonalakat a meglévő Flask alkalmazáshoz; tartsa meg a korábbi egészség/teszt útvonalakat is. Az alábbi rövidített blokk egy külön alkalmazást mutat a jobb átláthatóságért. A telemetria inicializálása most az `telemetry.py`-ben történik — ne inicializálja kétszer az exportőröket.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # Üzleti esemény követése
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Bevételek mérőszámának nyomon követése
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # Keresés szimulálása (valódi adatbázis lekérdezés lenne)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Átváltás ms-re
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # Keresési esemény követése
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Keresési teljesítménymutató követése
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # Külső API hívás szimulálása
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # Függőség követése
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -616,25 +586,25 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### Egyedi telemetria tesztelése
+### Tesztelje az egyéni telemetriát
 
 ```bash
-# Vásárlási esemény nyomon követése
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# Keresési esemény nyomon követése
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# Külső függőség nyomon követése
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
-**Megtekintés az Azure Portálon:**
+**Nézze meg az Azure Portalon:**
 
-Navigálj Application Insights → Logs, majd futtasd:
+Navigáljon az Application Insights → Logs menüponthoz, majd futtassa:
 
 ```kusto
 // View purchase events
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -665,11 +635,11 @@ traces
 
 ---
 
-## 3. lecke: Elosztott nyomkövetés mikroservice-ekhez
+## 3. lecke: Elosztott nyomkövetés mikroszolgáltatásokhoz
 
-### Kereszt-szolgáltatás nyomkövetés engedélyezése
+### Kapcsolt szolgáltatásközi nyomkövetés engedélyezése
 
-Mikroservice-eknél az Application Insights automatikusan összekapcsolja a kéréseket a szolgáltatások között.
+Kompatibilis instrumentációval és W3C trace-context propagációval az Application Insights összekapcsolja a kéréseket a szolgáltatások között. A csak kapcsolat string megosztása nem hoz létre szülő-gyermek nyomokat. Az alábbi architektúra töredék olyan modulokra hivatkozik, amelyeket implementálnia kell.
 
 **Fájl: `infra/main.bicep`**
 
@@ -744,35 +714,36 @@ output GATEWAY_URL string = apiGateway.outputs.uri
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API átjáró<br/>(Trace ID: abc123)
-    participant Product as Termék szolgáltatás<br/>(Parent ID: abc123)
-    participant Order as Megrendelés szolgáltatás<br/>(Parent ID: abc123)
-    participant AppInsights as Alkalmazás elemzések
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
+    participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Trace indítása: abc123
-    Gateway->>AppInsights: Kérés naplózása (Trace ID: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: Szülő azonosító: abc123
-    Product->>AppInsights: Függőség hívás naplózása
-    Product-->>Gateway: Termék adatok
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: Szülő azonosító: abc123
-    Order->>AppInsights: Függőség hívás naplózása
-    Order-->>Gateway: Megrendelés létrehozva
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: Vásárlás befejezve
-    Gateway->>AppInsights: Válasz naplózása (Időtartam: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: Összefüggés Trace ID alapján
+    Note over AppInsights: Correlation by Trace ID
 ```
-**Teljes end-to-end nyomkövetés lekérdezése:**
+
+**Teljes trace lekérdezése:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,65 +759,65 @@ dependencies
 
 ---
 
-## 4. lecke: Valós idejű metrikák és monitorozás
+## 4. lecke: Élő metrikák és valós idejű megfigyelés
 
-### Live Metrics stream engedélyezése
+### Élő metrikák stream engedélyezése
 
-A Live Metrics valós idejű telemetriát szolgáltat <1 másodperces késleltetéssel.
+Az Élő Metrikák közel valós idejű telemetriát biztosít, amikor az SDK támogatja és engedélyezi. Ez nem késleltetési SLA. A fentebb ismertetett Python OpenTelemetry setup az `enable_live_metrics=True` opcióval kapcsol be.
 
-**Live Metrics elérése:**
+**Élő metrikák elérése:**
 
 ```bash
-# Application Insights erőforrás lekérése
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Erőforráscsoport lekérése
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**Valós időben látható:**
-- ✅ Bejövő kérések sebessége (kérések/mp)
-- ✅ Kimenő függőség hívások
+**A valós időben látott adatok:**
+- ✅ Beérkező kérelmek sebessége (kérések/mp)
+- ✅ Kimenő függőségi hívások
 - ✅ Kivételszám
-- ✅ CPU és memória kihasználtság
-- ✅ Aktív szerverek száma
+- ✅ CPU és memória használat
+- ✅ Aktív szerver szám
 - ✅ Minta telemetria
 
-### Teszt terhelés generálása
+### Tesztelési terhelés létrehozása
 
 ```bash
-# Terhelés generálása az élő metrikák megtekintéséhez
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Élő metrikák megtekintése az Azure Portalon
-# Kérés sebesség csúcsot kell látnod
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
 
 ## Gyakorlati feladatok
 
-### 1. feladat: Értesítések beállítása ⭐⭐ (Középhaladó)
+### 1. feladat: Riasztások beállítása ⭐⭐ (Közepes)
 
-**Cél:** Értesítések létrehozása magas hibaarány és lassú válaszidő esetére.
+**Cél:** Riasztások létrehozása magas hibaarányra és lassú válaszokra.
 
 **Lépések:**
 
-1. **Értesítés létrehozása hibaarányra:**
+1. **Hozzon létre riasztást hibaarányra:**
 
 ```bash
-# Az Application Insights erőforrásazonosítójának lekérése
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Metriás riasztás létrehozása sikertelen kérésekre
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,10 +825,10 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
-2. **Értesítés létrehozása lassú válaszokra:**
+2. **Hozzon létre riasztást lassú válaszokra:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,7 +841,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Értesítés létrehozása Bicep-ben (ajánlott AZD-hez):**
+3. **Hozzon létre riasztást Bicep-pel (preferált AZD-hez):**
 
 **Fájl: `infra/core/alerts.bicep`**
 
@@ -944,55 +915,55 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **Értesítések tesztelése:**
+4. **Tesztelje a riasztásokat:**
 
 ```bash
-# Hibákat generál
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Lassú válaszokat generál
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Értesítési státusz ellenőrzése (várjon 5-10 percet)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
 **✅ Sikerkritériumok:**
-- ✅ Értesítések sikeresen létrejöttek
-- ✅ Értesítések aktiválódnak küszöbérték túllépésekor
-- ✅ Értesítési előzmények megtekinthetők az Azure Portalon
-- ✅ Integrálva AZD telepítéssel
+- ✅ A riasztások sikeresen létrejöttek
+- ✅ A riasztások akkor jelentenek, ha a küszöbértékek teljesülnek
+- ✅ A riasztások előzménye megtekinthető az Azure Portalon
+- ✅ Integrálva az AZD telepítéssel
 
 **Idő:** 20-25 perc
 
 ---
 
-### 2. feladat: Egyedi műszerfal létrehozása ⭐⭐ (Középhaladó)
+### 2. feladat: Egyéni műszerfal létrehozása ⭐⭐ (Közepes)
 
-**Cél:** Egy műszerfal készítése, amely kulcs alkalmazáshoz kapcsolódó mérőszámokat mutat.
+**Cél:** Készítsen műszerfalat a kulcsfontosságú alkalmazás-metrikák megjelenítéséhez.
 
 **Lépések:**
 
-1. **Műszerfal létrehozása az Azure Portálon:**
+1. **Hozzon létre műszerfalat Azure Portalon:**
 
-Navigálj: Azure Portal → Műszerfalak → Új műszerfal
+Navigáljon ide: Azure Portal → Dashboards → New Dashboard
 
-2. **Csempék hozzáadása kulcs mérőszámokhoz:**
+2. **Adjon hozzá lapokat a kulcsmérőszámoknak:**
 
 - Kérések száma (utolsó 24 óra)
 - Átlagos válaszidő
 - Hibaarány
-- 5 leglassabb művelet
-- Felhasználók földrajzi eloszlása
+- Az 5 leglassabb művelet
+- Felhasználók földrajzi megoszlása
 
-3. **Műszerfal létrehozása Bicep-ben:**
+3. **Hozzon létre műszerfalat Bicep segítségével:**
 
 **Fájl: `infra/core/dashboard.bicep`**
 
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1063,10 +1044,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **Műszerfal telepítése:**
+4. **Telepítse a műszerfalat:**
 
-```bash
-# Hozzáadás a main.bicep fájlhoz
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,28 +1057,30 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# Telepítés
+```bash
+# Deploy
 azd up
 ```
 
 **✅ Sikerkritériumok:**
-- ✅ A műszerfal mutatja a kulcs mérőszámokat
-- ✅ Kitűzhető az Azure Portal kezdőlapjára
+- ✅ A műszerfal mutatja a kulcsmérőszámokat
+- ✅ Rögzíthető az Azure Portal kezdőlapjára
 - ✅ Valós időben frissül
-- ✅ Telepíthető AZD által
+- ✅ Az AZD által telepíthető
 
 **Idő:** 25-30 perc
 
 ---
 
-### 3. feladat: AI/LLM alkalmazás monitorozása ⭐⭐⭐ (Haladó)
+### 3. feladat: AI/LLM alkalmazás megfigyelése ⭐⭐⭐ (Haladó)
 
-**Cél:** Microsoft Foundry Modellek használatának követése (tokenek, költségek, késleltetés).
+**Cél:** Kövesse a Microsoft Foundry Modellek használatát (tokenek, költségek, késleltetés).
 
 **Lépések:**
 
-1. **AI monitorozó wrapper létrehozása:**
+1. **Hozzon létre AI megfigyelő csomagot:**
 
 **Fájl: `src/ai_telemetry.py`**
 
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # Microsoft Foundry modellek hívása
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # Használat kivonása
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Költség kiszámítása (gpt-4.1 árképzés)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # 0,03 USD 1K tokenenként
-            completion_cost = (completion_tokens / 1000) * 0.06  # 0,06 USD 1K tokenenként
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # Egyedi esemény követése
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # Metrikák követése
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1182,7 +1169,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **Monitorozott kliens használata:**
+2. **Használja a megfigyelt klienst:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# Inicializálja a figyelt OpenAI klienst
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Automatikus megfigyeléssel hívja meg
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,13 +1205,13 @@ def chat():
     })
 ```
 
-3. **AI mérőszámok lekérdezése:**
+3. **Lekérdezze az AI metrikákat:**
 
 ```kusto
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1252,9 +1241,9 @@ traces
 
 **✅ Sikerkritériumok:**
 - ✅ Minden OpenAI hívás automatikusan követve van
-- ✅ Tokenhasználat és költségek láthatóak
-- ✅ Késleltetés monitorozva
-- ✅ Költségkeret értesítések beállíthatók
+- ✅ Token használat és költségek láthatóak
+- ✅ Késleltetés megfigyelve
+- ✅ Beállíthatók költségkeret riasztások
 
 **Idő:** 35-45 perc
 
@@ -1264,32 +1253,19 @@ traces
 
 ### Mintavételezési stratégiák
 
-A költségek szabályozása mintavételezéssel:
+A költségek szabályozása telemetria mintavételezéssel:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# Fejlesztés: 100% mintavétel
-sampler = ProbabilitySampler(rate=1.0)
-
-# Termelés: 10% mintavétel (költségek 90%-os csökkentése)
-sampler = ProbabilitySampler(rate=0.1)
-
-# Adaptív mintavétel (automatikusan állítja)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**Bicep-ben:**
+A trace mintavételezés nem csökkenti az összes telemetria kategóriát 90%-kal. A metrikáknak és az önállóan kibocsátott naplóknak külön hangerő szabályozásuk van. A mintavételi arányt a megfigyelési igények alapján válassza, ne általános termelési tiltásként.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+Az SDK mintavételezést kifejezetten állítsa be; az alkotó `SamplingPercentage` tulajdonsága nem helyettesíti a Python OpenTelemetry mintavételező konfigurációját.
 
 ### Adatmegőrzés
 
@@ -1305,27 +1281,27 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 ### Havi költségbecslések
 
-| Adatmennyiség | Megőrzési idő | Havi költség |
+| Adatméret | Megőrzési idő | Havi költség |
 |-------------|-----------|--------------|
 | 1 GB/hó | 30 nap | kb. $2-5 |
 | 5 GB/hó | 30 nap | kb. $10-15 |
 | 10 GB/hó | 90 nap | kb. $25-40 |
 | 50 GB/hó | 90 nap | kb. $100-150 |
 
-**Ingyenes réteg**: havi 5 GB benne van
+Ezek az értékek illusztratívak, nem árajánlatok. Ellenőrizze a régiójára és szerződésére vonatkozó bevitel, megőrzés, riasztás és teszt árakat; az ingyenes keretek az Azure Monitor árazás szerint megosztottak/hatóköriek, nem garantált ingyenes SKU minden Application Insights erőforrásra.
 
 ---
 
-## Tudásellenőrzés
+## Tudásellenőrző pont
 
 ### 1. Alap integráció ✓
 
-Teszteld az ismereteidet:
+Tesztelje tudását:
 
 - [ ] **K1**: Hogyan biztosítja az AZD az Application Insights-ot?
-  - **V**: Automatikusan Bicep sablonokkal az `infra/core/monitoring.bicep` fájlban
+  - **V**: A projekt Bicep/Terraform sablonjában explicit módon deklarált megfigyelő erőforrásokat telepíti.
 
-- [ ] **K2**: Melyik környezeti változó engedélyezi az Application Insights-t?
+- [ ] **K2**: Melyik környezeti változó engedélyezi az Application Insights-ot?
   - **V**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
 - [ ] **K3**: Mik a három fő telemetria típus?
@@ -1333,10 +1309,10 @@ Teszteld az ismereteidet:
 
 **Gyakorlati ellenőrzés:**
 ```bash
-# Ellenőrizze, hogy az Application Insights be van-e állítva
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Ellenőrizze, hogy a telemetria áramlik-e
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1345,18 +1321,18 @@ az monitor app-insights metrics show \
 
 ---
 
-### 2. Egyedi telemetria ✓
+### 2. Egyéni telemetria ✓
 
-Teszteld az ismereteidet:
+Tesztelje tudását:
 
-- [ ] **K1**: Hogyan követhetsz üzleti eseményeket?
-  - **V**: Logger használatával `custom_dimensions`-sel vagy `TelemetryClient.track_event()`-tel
+- [ ] **K1**: Hogyan kövesse az egyéni üzleti eseményeket?
+  - **V**: Ez a lecke csomagolása strukturált OTel naplókat ír `event_name` attribútumokkal, lekérdezhető `traces`-ban; ezek nem automatikusan `customEvents`.
 
-- [ ] **K2**: Mi a különbség események és mérőszámok között?
-  - **V**: Az események diszkrét események, a mérőszámok numerikus mérések
+- [ ] **K2**: Mi a különbség az események és a metrikák között?
+  - **V**: Az események diszkrét események, a metrikák számszerű mérések
 
-- [ ] **K3**: Hogyan korrelálsz telemetriát szolgáltatások között?
-  - **V**: Az Application Insights automatikusan használja az `operation_Id`-t korrelációhoz
+- [ ] **K3**: Hogyan kapcsolja össze a telemetriát a szolgáltatások között?
+  - **V**: Az Application Insights automatikusan használja a `operation_Id`-t az összekapcsoláshoz
 
 **Gyakorlati ellenőrzés:**
 ```kusto
@@ -1368,110 +1344,106 @@ traces
 
 ---
 
-### 3. Termelési monitorozás ✓
+### 3. Termelési megfigyelés ✓
 
-Teszteld az ismereteidet:
+Tesztelje tudását:
 
-- [ ] **K1**: Mi a mintavételezés és miért használjuk?
-  - **V**: A mintavételezés csökkenti az adat mennyiségét (és a költségeket) azáltal, hogy csak egy részt rögzít a telemetriából
+- [ ] **K1**: Mi a mintavételezés és miért használják?
+  - **V**: A mintavételezés csökkenti az adatmennyiséget (és költséget) azáltal, hogy csak egy százalékát rögzíti a telemetriának
 
-- [ ] **K2**: Hogyan állítasz be értesítéseket?
-  - **V**: Metric értesítések használata Bicep-ben vagy az Azure Portálon az Application Insights mérőszámai alapján
+- [ ] **K2**: Hogyan állít be riasztásokat?
+  - **V**: Használjon metrikariasztásokat Bicep-ben vagy az Azure Portalon az Application Insights metrikák alapján
 
 - [ ] **K3**: Mi a különbség a Log Analytics és az Application Insights között?
-  - **V**: Az Application Insights az adatokat Log Analytics munkaterületen tárolja; az App Insights alapvetően az alkalmazás-specifikus nézeteket nyújtja
+  - **V**: Az Application Insights az adatokat Log Analytics munkaterületen tárolja; az App Insights alkalmazás-specifikus nézeteket biztosít
 
 **Gyakorlati ellenőrzés:**
 ```bash
-# Ellenőrizze a mintavételezési konfigurációt
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
 
 ## Legjobb gyakorlatok
 
-### ✅ CSINÁLD:
+### ✅ TEKINTSE EZT:
 
-1. **Használj korrelációs azonosítókat**
+1. **Használjon korrelációs azonosítókat**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. **Állíts be értesítéseket kritikus mérőszámokra**
+2. **Állítson be riasztásokat kritikus metrikákra**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **Használj strukturált naplózást**
+3. **Használjon strukturált naplózást**
    ```python
-   # ✅ JÓ: Strukturált
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ ROSSZ: Strukturálatlan
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
-4. **Monitorozd a függőségeket**
+4. **Figyelje a függőségeket**
    ```python
-   # Automatikusan követi az adatbázis-hívásokat, HTTP kéréseket stb.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
-5. **Használd a Live Metrics-et telepítés alatt**
+5. **Használja az Élő Metrikákat a telepítések során**
 
-### ❌ NE TEDD:
+### ❌ NE TEGYE:
 
 1. **Ne naplózz érzékeny adatokat**
    ```python
-   # ❌ ROSSZ
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ JÓ
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **Ne használj 100%-os mintavételezést termelésben**
+2. **Ne válassz mintavételezést az adatmennyiség és diagnosztikai igények mérése nélkül**
    ```python
-   # ❌ Drága
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ Költséghatékony
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **Ne hagyd figyelmen kívül a dead letter queue-kat**
+3. **Ne hagyd figyelmen kívül a "dead letter" sorokat**
 
-4. **Ne felejtsd el beállítani az adatmegőrzési határokat**
+4. **Ne felejtsd el beállítani az adatok megtartási korlátait**
 
 ---
 
 ## Hibakeresés
 
-### Probléma: Nem jelenik meg telemetria
+### Probléma: Nincs megjelenő telemetria
 
 **Diagnózis:**
 ```bash
-# Ellenőrizze, hogy a kapcsolódási karakterlánc be van-e állítva
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Ellenőrizze az alkalmazás naplóit az Azure Monitor segítségével
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# Vagy használja az Azure CLI-t a Konténer Alkalmazásokhoz:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Megoldás:**
 ```bash
-# Ellenőrizze a kapcsolati karakterláncot a Konténeralkalmazásban
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1485,67 +1457,66 @@ az containerapp show \
 
 **Diagnózis:**
 ```bash
-# Ellenőrizze az adatok bevitelét
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **Megoldás:**
 - Csökkentsd a mintavételezési arányt
-- Rövidítsd az adatmegőrzési időt
-- Távolítsd el a bőbeszédű naplózást
+- Rövidítsd le a megtartási időszakot
+- Szűntesd meg a részletes naplózást
 
 ---
 
-## További tanulás
+## További információk
 
 ### Hivatalos dokumentáció
 - [Application Insights áttekintés](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights Pythonhoz](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto lekérdező nyelv](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD monitorozás](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [Azure Monitor OpenTelemetry beállítás](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
+- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### További lépések a tanfolyamon
+### További lépések a kurzusban
 - ← Előző: [Előzetes ellenőrzések](preflight-checks.md)
 - → Következő: [Telepítési útmutató](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Tanfolyam kezdőlap](../../README.md)
+- 🏠 [Kurzus kezdőlap](../../README.md)
 
 ### Kapcsolódó példák
-- [Microsoft Foundry Models példa](../../../../examples/azure-openai-chat) - AI telemetria
+- [Microsoft Foundry Modellek példa](../../../../examples/azure-openai-chat) - AI telemetria
 - [Mikroszolgáltatások példa](../../../../examples/microservices) - Elosztott nyomkövetés
 
 ---
 
 ## Összefoglalás
 
-**Megtanultad:**
-- ✅ Automatikus Application Insights biztosítása AZD-vel
-- ✅ Egyedi telemetria (események, mérőszámok, függőségek)
-- ✅ Elosztott nyomkövetés mikroservice-ek között
-- ✅ Valós idejű metrikák és monitorozás
-- ✅ Értesítések és műszerfalak
-- ✅ AI/LLM alkalmazás monitorozás
+**Amit tanultál:**
+- ✅ Automatikus Application Insights beállítás AZD-vel
+- ✅ Egyedi telemetria (események, metrikák, függőségek)
+- ✅ Elosztott nyomkövetés mikroszolgáltatások között
+- ✅ Élő metrikák és valós idejű felügyelet
+- ✅ Riasztások és műszerfalak
+- ✅ AI/LLM alkalmazásmegfigyelés
 - ✅ Költségoptimalizálási stratégiák
 
 **Főbb tanulságok:**
-1. **Az AZD előírások automatikus figyelése** - Nincs szükség kézi beállításra  
-2. **Használj strukturált naplózást** - Megkönnyíti a lekérdezést  
-3. **Kövesd a üzleti eseményeket** - Nem csak a műszaki mutatókat  
-4. **Figyeld az AI költségeket** - Kövesd a tokeneket és a kiadásokat  
-5. **Állíts be riasztásokat** - Légy proaktív, ne reaktív  
-6. **Optimalizáld a költségeket** - Használj mintavételezést és megőrzési korlátokat  
+1. **Határozd meg explicit módon a megfigyelést** - AZD telepíti a sablonokat; az SDK telemetriát küld
+2. **Használj strukturált naplózást** - Könnyíti a lekérdezést
+3. **Kövesd az üzleti eseményeket** - Nem csak technikai metrikákat
+4. **Figyeld az AI költségeit** - Kövesd a tokeneket és kiadásokat
+5. **Állíts be riasztásokat** - Légy proaktív, ne reaktív
+6. **Optimalizáld a költségeket** - Használj mintavételezést és megtartási korlátokat
 
-**Következő lépések:**  
-1. Fejezd be a gyakorlati feladatokat  
-2. Add hozzá az Application Insightsot AZD projektjeidhez  
-3. Készíts egyéni irányítópultokat a csapatod számára  
-4. Tanulmányozd a [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) dokumentumot
+**Következő lépések:**
+1. Teljesítsd a gyakorlati feladatokat
+2. Add hozzá az Application Insights-t az AZD projektjeidhez
+3. Készíts egyedi műszerfalakat a csapatod számára
+4. Tanulmányozd a [Telepítési útmutatót](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Felmentés**:
-Ezt a dokumentumot az AI fordítószolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk le. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. A dokumentum eredeti nyelvű változata tekintendő hiteles forrásnak. Kritikus információk esetén profi emberi fordítást javaslunk. Nem vállalunk felelősséget az ebből eredő félreértésekért vagy téves értelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

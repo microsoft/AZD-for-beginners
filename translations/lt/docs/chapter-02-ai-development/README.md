@@ -1,22 +1,22 @@
-# 2 skyrius: AI-Pirmas vystymas
+# 2 skyrius: AI-Pirmasis kūrimas
 
-**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 1-2 valandos | **⭐ Sudėtingumas**: Tarpinis
+**📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 4-5 valandos su praktiniu užsiėmimu | **⭐ Sudėtingumas**: Tarpinis
 
 ---
 
 ## Apžvalga
 
-Šis skyrius skirtas AI pagrįstų programų diegimui naudojant Azure Developer CLI ir Microsoft Foundry paslaugas. Nuo paprastų AI pokalbių programų iki intelektualių agentų su įrankiais.
+Šiame skyriuje daugiausia dėmesio skiriama AI pagrįstų programų diegimui naudojant Azure Developer CLI ir Microsoft Foundry paslaugas. Nuo paprastų AI pokalbių programėlių iki protingų agentų su įrankiais.
 
-> **Patvirtinimo pastaba (2026-07-13):** Šio skyriaus komandinės eilutės vykdymas ir plėtinio gidas buvo peržiūrėti lyginant su `azd` `1.27.1` ir dabartine AI agento plėtinio peržiūros versija `azure.ai.agents` `1.0.0-beta.5`. Jei naudojate senesnę AZD versiją, pirmiausia atnaujinkite, tada tęskite pratimus.
+> **Išleidimo apžvalga (2026-11-04):** AI CLI gairės buvo patikrintos pagal paskelbtą `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23` ir `azure.ai.evaluations` `1.0.0-beta.2` dokumentaciją/šaltinius. Naudokite `azd >= 1.37.0` sujungtam darbo eigai. Vertinimams dabar naudojama atskira `azd ai eval` vardų sritis; žr. [išleidimo pakeitimus ir migracijos gaires](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Tai nėra tiesioginis diegimo patvirtinimas.
 
 ## Mokymosi tikslai
 
-Baigę šį skyrių, jūs:
-- Išdiegs AI programas naudodami iš anksto paruoštas AZD šablonus
+Vykdydami šį skyrių jūs:
+- Optimizuosite AI programas naudodami iš anksto sukurtus AZD šablonus
 - Suprasite Microsoft Foundry integraciją su AZD
 - Konfigūruosite ir pritaikysite AI agentus su įrankiais
-- Įdiegsite RAG (Retrieval-Augmented Generation) programas
+- Diegsite RAG (Retrieval-Augmented Generation) programas
 
 ---
 
@@ -24,64 +24,68 @@ Baigę šį skyrių, jūs:
 
 | # | Pamoka | Aprašymas | Laikas |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry integracija](microsoft-foundry-integration.md) | Prisijungimas prie Foundry paslaugų per AZD | 30 min |
-| 2 | [AI agentų vadovas](agents.md) | Diegti intelektualius agentus su įrankiais | 45 min |
-| 3 | [AI modelio diegimas](ai-model-deployment.md) | Įdiegti ir konfigūruoti AI modelius | 30 min |
-| 4 | [AI dirbtuvės laboratorija](ai-workshop-lab.md) | Praktika: Paruoškite savo AI sprendimą AZD | 60 min |
+| 1 | [Microsoft Foundry integracija](microsoft-foundry-integration.md) | Susiekite AZD su Foundry paslaugomis | 30 min |
+| 2 | [AI agentų vadovas](agents.md) | Diegkite intelektualius agentus su įrankiais | 45 min |
+| 3 | [AI modelių diegimas](ai-model-deployment.md) | Diegkite ir konfigūruokite AI modelius | 30 min |
+| 4 | [AI praktinis užsiėmimas](ai-workshop-lab.md) | Praktika: Išnagrinėkite šabloną ir suplanuokite konvertavimą | 2-3 valandos |
 
 ---
 
-## 🚀 Greitas startas
+## 🚀 Greitas pradžia
+
+Pasirinkite vieną parinktį naujame tuščiame kataloge. Gale esantis `.` inicijuoja esamą katalogą; kitu atveju AZD gali sukurti poskyrį nekeisdamas jūsų apvalkalo darbo katalogo.
 
 ```bash
-# Parinktis 1: RAG pokalbių programa
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# Parinktis 2: DI agentai
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# Parinktis 3: Greita pokalbių programa
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
 ---
 
-## 🤖 Pažymėti AI šablonai
+## 🤖 Pasižymintys AI šablonai
 
 | Šablonas | Aprašymas | Paslaugos |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG pokalbis su citatomis | OpenAI + AI paieška |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agentas su įrankiais | AI agentų paslauga |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Pagrindinis AI pokalbis | OpenAI + konteinerių programos |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG pokalbis su citatomis | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agentas su įrankiais | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Pagrindinis AI pokalbis | OpenAI + Container Apps |
 
 ---
 
-## 💰 Kainų suvokimas
+## 💰 Sąnaudų supratimas
 
-| Aplinka | Numatomos mėnesinės sąnaudos |
-|-------------|----------------------|
-| Kūrimas | 80–150 USD |
-| Paruošimas | 150–300 USD |
-| Gamyba | 300–3 500+ USD |
+Tai yra iliustraciniai intervalai, o ne kainos ar limityrai; modelių srautas, Search/skaičiavimo SKU, regionas ir pasirenkamos funkcijos gali viršyti juos. Prieš teikdami paslaugas, peržiūrėkite pasirinkto pavyzdžio esamas kainų gaires.
 
-**Patarimas:** Po testo vykdykite `azd down`, kad išvengtumėte mokesčių.
+| Aplinka | Numatomos mėnesinės išlaidos |
+|-------------|----------------------------|
+| Kūrimas | $80-150 |
+| Parengimas | $150-300 |
+| Gamyba | $300-3,500+ |
+
+**Patariama:** Paleiskite `azd down` po testavimo, kad išvengtumėte mokesčių.
 
 ---
 
 ## 🔗 Navigacija
 
-| Kryptis | Skyrius |
+| Krytis | Skyrius |
 |-----------|---------|
 | **Ankstesnis** | [1 skyrius: Pagrindai](../chapter-01-foundation/README.md) |
 | **Kitas** | [3 skyrius: Konfigūracija](../chapter-03-configuration/README.md) |
-| **Praleisti į** | [8 skyrius: Gamybos modeliai](../chapter-08-production/README.md) |
+| **Praleisti iki** | [8 skyrius: Gamybos modeliai](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Susiję šaltiniai
+## 📖 Susiję ištekliai
 
 - [AI trikčių šalinimas](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [Gamybos AI praktikos](../chapter-08-production/production-ai-practices.md)

@@ -1,65 +1,45 @@
 # Wdrażanie modeli AI za pomocą Azure Developer CLI
 
 **Nawigacja po rozdziale:**
-- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
-- **📖 Aktualny rozdział**: Rozdział 2 - Rozwój z myślą o AI
-- **⬅️ Poprzedni**: [Integracja Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Następny**: [Warsztaty AI](ai-workshop-lab.md)
+- **📚 Strona kursu głównego**: [AZD dla początkujących](../../README.md)
+- **📖 Bieżący rozdział**: Rozdział 2 - AI-First Development
+- **⬅️ Poprzedni**: [Agenci AI](agents.md)
+- **➡️ Następny**: [Laboratorium AI Workshop](ai-workshop-lab.md)
 - **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../chapter-03-configuration/configuration.md)
 
-Ten poradnik zawiera szczegółowe instrukcje dotyczące wdrażania modeli AI przy użyciu szablonów AZD, obejmujące wszystko od wyboru modelu po wzorce wdrożenia produkcyjnego.
+Ten przewodnik zawiera kompleksowe instrukcje dotyczące wdrażania modeli AI za pomocą szablonów AZD, obejmujące wszystko od wyboru modelu po wzorce wdrożenia produkcyjnego.
 
-> **Uwaga weryfikacyjna (2026-07-13):** Przepływ pracy AZD w tym przewodniku został sprawdzony dla `azd` `1.27.1`. W przypadku wdrożeń AI trwających dłużej niż domyślne okno wdrożenia usługi, obecne wersje AZD obsługują `azd deploy --timeout <seconds>`.
+> **Przegląd wydania (2026-11-04):** Powiązane zmiany w CLI zostały sprawdzone względem `azd` `1.37.2`; dostępność modeli, wersje i limity zależą od regionu i subskrypcji. `azd deploy --timeout <seconds>` kontroluje okno wdrożenia usługi, nie gwarantuje aktywacji agenta. Zobacz [aktualne notatki wydania i wskazówki migracyjne AI](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
 ## Spis treści
 
-- [Strategia wyboru modelu](#strategia-wyboru-modelu)
-- [Konfiguracja AZD dla modeli AI](#konfiguracja-azd-dla-modeli-ai)
-- [Wzorce wdrożenia](#wzorce-wdrożenia)
-- [Zarządzanie modelem](#zarządzanie-modelem)
-- [Aspekty produkcyjne](#aspekty-produkcyjne)
-- [Monitorowanie i obserwowalność](#monitorowanie-i-obserwowalność)
+- [Strategia wyboru modelu](#model-selection-strategy)
+- [Konfiguracja AZD dla modeli AI](#azd-configuration-for-ai-models)
+- [Wzorce wdrożeń](#deployment-patterns)
+- [Zarządzanie modelem](#model-management)
+- [Rozważania produkcyjne](#production-considerations)
+- [Monitorowanie i obserwowalność](#monitoring-and-observability)
 
 ## Strategia wyboru modelu
 
-### Modele Microsoft Foundry
+### Modele Azure OpenAI w Microsoft Foundry
 
-Wybierz odpowiedni model dla swojego zastosowania:
+Wybierz odpowiedni model dla swojego przypadku użycia:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+Deklaruj wdrożenia modeli w Bicep (poniżej), a nie w dowolnych ustawieniach `services.*.config.AZURE_OPENAI_MODELS`. AZD nie interpretuje takiego ustawienia jako listy zasobów modeli. `project` usługi wskazuje na źródło aplikacji, a nie jej katalog `infra/`.
+
+Przykłady używają opublikowanej wersji `gpt-4.1-mini` **`2025-04-14`** oraz wersji embeddingu **`1`**. Upewnij się, że wersja modelu i SKU wdrożenia są obsługiwane w Twoim regionie/konta docelowego przed provisioningiem.
 
 ### Planowanie pojemności modelu
 
-| Typ modelu | Zastosowanie | Zalecana pojemność | Uwagi dotyczące kosztów |
-|------------|-------------|--------------------|-------------------------|
-| gpt-4.1-mini | Czat, pytania i odpowiedzi | 10-50 TPM | Opłacalne dla większości obciążeń |
-| gpt-4.1 | Złożone wnioskowanie | 20-100 TPM | Wyższy koszt, używać do funkcji premium |
-| text-embedding-3-large | Wyszukiwanie, RAG | 30-120 TPM | Silny domyślny wybór dla wyszukiwania i pobierania semantycznego |
-| Whisper | Mowa na tekst | 10-50 TPM | Obciążenia związane z przetwarzaniem audio |
+| Typ modelu | Przypadek użycia | Przykładowe zapotrzebowanie na tokeny | Rozważania kosztowe |
+|------------|----------|---------------------|-------------------|
+| gpt-4.1-mini | Chat, Q&A | 10,000-50,000 TPM | Benchmark koszt i jakość dla twojego obciążenia |
+| gpt-4.1 | Złożone zadania | 20,000-100,000 TPM | Oceń wzrost jakości względem kosztu tokenów |
+| text-embedding-3-large | Wyszukiwanie, RAG | 30,000-120,000 TPM | Uwzględnij ruch oraz przyjmowanie danych |
+| Whisper | Mowa na tekst | Planuj używając długości audio i limitów zapytań | Nie stosuj formuły TPM dla modeli tekstowych |
+
+TPM oznacza tokeny na minutę. Dla tych standardowych wdrożeń tekstowych, ARM `sku.capacity` jest w **jednostkach 1,000-TPM**, a nie pojedynczych TPM (pojemność `10` oznacza 10,000 TPM). Współczynniki RPM do TPM różnią się w zależności od typu modelu/wdrożenia; zweryfikuj oba limity wobec [dokumentacji limitów](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic). Te zakresy są przykładami, a nie zaleceniami rozmiarów.
 
 ## Konfiguracja AZD dla modeli AI
 
@@ -69,6 +49,9 @@ Twórz wdrożenia modeli za pomocą szablonów Bicep:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,21 +108,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
+To jest przykład infrastruktury programistycznej **ograniczonej do grupy zasobów**, nie kompletny szablon aplikacji AZD. Konto umożliwia dostęp przez sieć publiczną i wymaga uwierzytelnienia Entra ID/RBAC (`Cognitive Services OpenAI User` dla wywołujących). Produkcja wymaga prywatnego punktu końcowego, DNS oraz łączności aplikacji opisanej w Rozdziale 8. AZD potrzebuje też głównego szablonu/mapowania parametrów i zasobów hosta aplikacji; użyj działającego przykładu dla pełnego wdrożenia.
+
 ### Zmienne środowiskowe
 
-Skonfiguruj środowisko swojej aplikacji:
+Skonfiguruj środowisko aplikacji:
 
 ```bash
-# konfiguracja .env
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Wzorce wdrożenia
+Są to nazwy definiowane przez aplikację; podłącz je do konfiguracji hosta. Punkt końcowy Azure OpenAI v1 używany przez poniższy stan zdrowia nie wymaga przestarzałego parametru zapytania `api-version`; starsi klienci `AzureOpenAI` tak, więc stosuj generowanie API używane przez twoją aplikację.
 
-### Wzorzec 1: Wdrożenie w jednym regionie
+## Wzorce wdrożeń
+
+### Wzorzec 1: Wdrożenie w pojedynczym regionie
 
 ```yaml
 # azure.yaml - Single region
@@ -146,20 +133,21 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Najlepszy dla:
+Najlepsze dla:
 - Rozwoju i testów
-- Aplikacji na pojedynczym rynku
+- Aplikacji dla pojedynczego rynku
 - Optymalizacji kosztów
 
-### Wzorzec 2: Wdrożenie wieloregionowe
+### Wzorzec 2: Wdrożenie wieloregionalne
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,14 +157,18 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Najlepszy dla:
+Pominięte właściwości konta/SKU muszą być dostarczone; fragment nie jest gotowy do wdrożenia w obecnej formie. Wdroż modele w każdym koncie oraz zaimplementuj routing/przełączanie awaryjne i kontrolę lokalizacji danych oddzielnie.
+
+Najlepsze dla:
 - Aplikacji globalnych
-- Wymagań wysokiej dostępności
-- Równomiernego rozkładu obciążenia
+- Wysokiej dostępności
+- Rozkładu obciążenia
 
 ### Wzorzec 3: Wdrożenie hybrydowe
 
 Połącz modele Microsoft Foundry z innymi usługami AI:
+
+Następujące fragmenty zakładają, że nazwy i `location` są dostarczone przez otaczający szablon.
 
 ```bicep
 // Hybrid AI services
@@ -209,14 +201,14 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Kontrola wersji
 
-Śledź wersje modeli w konfiguracji AZD:
+Śledź wersje modelu w konfiguracji aplikacji lub IaC. Ten JSON jest **przykładem definiowanym przez aplikację**, nie wbudowanym schematem modelu AZD; konieczne jest zaimplementowanie i wdrożenie zapasowego mechanizmu:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -227,27 +219,27 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Aktualizacje modeli
+### Aktualizacje modelu
 
-Używaj haków AZD do aktualizacji modeli:
+Użyj hooka AZD do odczytu statusu dostępności, następnie zaktualizuj IaC i zdeplojuj:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# Jeśli wdrożenie zajmuje więcej czasu niż domyślny limit czasu
-azd deploy --timeout 1800
 ```
+
+Uruchamiaj `azd up` **poza** hookiem, aby zastosować zmiany infrastruktury modelu i wdrożyć kod. Nigdy nie wywołuj `azd deploy` z hooka `predeploy`: wywołuje to rekursywnie ten sam hook. `azd deploy --timeout 1800` przedłuża limit czasu wdrożenia aplikacji; nie aktualizuje zasobów Bicep.
 
 ### Testy A/B
 
-Wdróż wiele wersji modelu:
+Poniższy przykład zasobu wybiera nazwę wdrożenia i pojemność; tworzy **jedno** wdrożenie, nie test A/B. Do rzeczywistego eksperymentu stwórz dwie różne zasoby wdrożeniowe, kieruj kontrolowaną część żądań do każdego i porównuj jakość, opóźnienia oraz koszty. Zakłada `openAi` z przykładu konta:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -269,14 +261,15 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Aspekty produkcyjne
+## Rozważania produkcyjne
 
 ### Planowanie pojemności
 
-Oblicz wymaganą pojemność na podstawie wzorców użytkowania:
+Oblicz wymaganą pojemność na podstawie wzorców użycia:
 
 ```python
-# Przykład obliczania pojemności
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# Przykład użycia
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Konfiguracja autoskalowania
+Oczekiwany wynik: `Required capacity: 9100 TPM`. Przy jednostkach pojemności 1,000-TPM zaokrąglaj w górę do co najmniej `10`, następnie zweryfikuj szacunki RPM i limitów usługi specyficzne dla modelu (włączając budżet żądanego wyjścia). Ten szacunek zapotrzebowania na tokeny nie gwarantuje braku ograniczeń.
+
+### Konfiguracja automatycznego skalowania
 
 Skonfiguruj autoskalowanie dla Container Apps:
+
+**Częściowy zasób:** scal ustawienia `template.scale` z pełnym Container App z lokalizacją, środowiskiem zarządzanym, obrazem kontenera, zasobami i ingress. Skalowanie replik nie zwiększa limitu modelu.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -340,16 +337,19 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 Wdróż kontrolę kosztów:
 
+**Ilustracyjny zasób budżetu:** ustaw `budgetStartDate` na pierwszy dzień bieżącego miesiąca w UTC (np. `2026-11-01T00:00:00Z` dla tego przeglądu) i zmień adres kontaktowy. Start musi spełniać obecne wymagania dotyczące daty usługi. Budżety alarmują o opóźnieniach w danych rozliczeniowych; nie zatrzymują wydatków.
+
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
 
-### Własne metryki
+Fragment zasobu zakłada `applicationInsightsName`, `location` i istniejący `logAnalyticsWorkspace`. Tworzy monitoring, ale nie instrumentuje aplikacji ani nie tworzy niestandardowych metryk.
 
-Śledź specyficzne metryki AI:
+### Niestandardowe metryki
+
+Śledź metryki specyficzne dla AI:
+
+Użyj obsługiwanego [dystrybucji Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python), a nie przestarzałego `applicationinsights` Python SDK. Zainstaluj `azure-monitor-opentelemetry`, skonfiguruj `APPLICATIONINSIGHTS_CONNECTION_STRING` i zainicjuj raz przy starcie:
 
 ```python
-# Niestandardowa telemetria dla modeli AI
-import logging
-from applicationinsights import TelemetryClient
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
+
+To ilustruje emisję atrybutów, nie rzeczywistą instrumentację wywołań modelu. Otocz faktyczne żądanie spanem, aby zmierzyć czas trwania; przejrzyj `dependencies`/`traces` w Application Insights. Nie wysyłaj promptów, odpowiedzi, kluczy ani surowych komunikatów wyjątku z danymi wrażliwymi.
 
 ### Kontrole stanu zdrowia
 
 Wdróż monitorowanie stanu zdrowia usług AI:
 
+Zainstaluj `fastapi`, `uvicorn`, `httpx` i `azure-identity`. Ustaw powyższe zmienne punktu końcowego/wdrożenia i nadaj wywołującemu uprawnienia `Cognitive Services OpenAI User`. Ten **readiness probe** używa Azure OpenAI v1 data plane z Entra ID; wykonuje płatne wywołanie modelu. Uruchom z `uvicorn health:app` po zapisaniu jako `health.py`. Używaj osobnej lekkiej kontroli liveness, ograniczaj częstość/wyniki cache gotowości i nie udostępniaj tego endpointu publicznie bez kontroli dostępu.
+
 ```python
-# Punkty końcowe sprawdzania stanu zdrowia
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,43 +431,49 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Testuj połączenie z OpenAI
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
+
+Oczekiwane: `GET /health/ai-models` zwraca `200 {"status":"healthy"}` gdy skonfigurowane wdrożenie chatu jest używalne, lub `503` bez ujawniania szczegółów wewnętrznych. Lista wdrożeń to operacja w płaszczyźnie zarządzania i nie jest ważną sondą zdrowia płaszczyzny danych.
 
 ## Kolejne kroki
 
 1. **Przejrzyj [Przewodnik integracji Microsoft Foundry](microsoft-foundry-integration.md)** dotyczący wzorców integracji usług
-2. **Ukończ [Warsztaty AI](ai-workshop-lab.md)**, aby zdobyć praktyczne doświadczenie
-3. **Wdróż [Praktyki produkcyjne AI](production-ai-practices.md)** dla wdrożeń korporacyjnych
-4. **Zapoznaj się z [Przewodnikiem rozwiązywania problemów AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** dotyczącym typowych problemów
+2. **Ukończ [Laboratorium AI Workshop](ai-workshop-lab.md)**, aby zdobyć praktyczne doświadczenie
+3. **Wdróż [praktyki produkcyjne AI](../chapter-08-production/production-ai-practices.md)** dla wdrożeń korporacyjnych
+4. **Poznaj [Przewodnik rozwiązywania problemów AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** dotyczący typowych problemów
 
 ## Zasoby
 
 - [Dostępność modeli Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentacja Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Skalowanie Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Optymalizacja kosztów modeli AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Optymalizacja kosztów modelu AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Nawigacja po rozdziale:**
-- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
-- **📖 Aktualny rozdział**: Rozdział 2 - Rozwój z myślą o AI
-- **⬅️ Poprzedni**: [Integracja Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Następny**: [Warsztaty AI](ai-workshop-lab.md)
+- **📚 Strona kursu głównego**: [AZD dla początkujących](../../README.md)
+- **📖 Bieżący rozdział**: Rozdział 2 - AI-First Development
+- **⬅️ Poprzedni**: [Agenci AI](agents.md)
+- **➡️ Następny**: [Laboratorium AI Workshop](ai-workshop-lab.md)
 - **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../chapter-03-configuration/configuration.md)
 
 ---

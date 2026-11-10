@@ -1,4 +1,4 @@
-# How to Install & Set Up
+# Installation & Setup Guide
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
@@ -9,34 +9,34 @@
 
 ## Introduction
 
-Dis full guide go carry you step-by-step to install and configure Azure Developer CLI (azd) for your system. You go learn different ways to install for different operating systems, how to set up authentication, and how to do the first configuration to make your development environment ready for Azure deployments.
+Dis full guide go waka you through how to install and configure Azure Developer CLI (azd) for your system. You go learn different ways to install for different operating systems, how to set authentication, and how to configure am first to prepare your development environment for Azure deployments.
 
 ## Learning Goals
 
-By the end of dis lesson, you go:
-- Fit install Azure Developer CLI for your operating system
-- Configure authentication with Azure using different methods
-- Set up your development environment with wetin you need
-- Understand different installation options and when to use each one
-- Troubleshoot common installation and setup wahalas
+By di time dis lesson finish, you go fit:
+- Successfully install Azure Developer CLI for your operating system
+- Configure authentication with Azure using plenty methods
+- Set up your development environment with the things wey you need first
+- Understand different installation options and when you suppose use each one
+- Troubleshoot common installation and setup wahala dem
 
 ## Learning Outcomes
 
-After you finish dis lesson, you go sabi:
-- Install azd using the correct method for your platform
-- Authenticate with Azure using azd auth login
-- Verify say your installation correct and test basic azd commands
-- Configure your development environment to use azd well
-- Solve common installation problems by yourself
+After you don complete dis lesson, you go sabi how to:
+- Install azd using the correct method wey suit your platform
+- Authenticate with Azure by yan azd auth login
+- Check say your installation dey correct and run some basic azd commands
+- Arrange your development environment well well for better azd use
+- Solve common installation palava by yourself
 
-Dis guide go help you install and configure Azure Developer CLI on your system, no matter which operating system or development environment you dey use.
+Dis guide go help you setup and configure Azure Developer CLI for your system, no matter which operating system or development environment you dey use.
 
 ## Prerequisites
 
-Before you install azd, make sure say you get:
+Before you start to install azd, make sure say you get:
 - **Azure subscription** - [Create a free account](https://azure.microsoft.com/free/)
-- **Azure CLI** - For authentication and resource management
-- **Git** - For cloning templates and version control
+- **Azure CLI** (optional) - For examples wey run `az` well well; azd fit authenticate regardless
+- **Git** - To clone templates and manage version control
 - **Docker** (optional) - For containerized applications
 
 ## Installation Methods
@@ -50,7 +50,7 @@ winget install microsoft.azd
 
 #### Option 2: PowerShell Install Script
 ```powershell
-# E dey useful when winget no dey available
+# Useful when winget is unavailable
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
@@ -61,8 +61,8 @@ choco install azd
 
 #### Option 4: Manual Installation
 1. Download the latest release from [GitHub](https://github.com/Azure/azure-dev/releases)
-2. Extract to `C:\Program Files\azd\`
-3. Add to PATH environment variable
+2. Extract am to `C:\Program Files\azd\`
+3. Add am to your PATH environment variable
 
 ### macOS
 
@@ -78,10 +78,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
 #### Option 3: Manual Installation
-```bash
-# Download an install am
-curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
-```
+Download the archive for your macOS system from [the release assets](https://github.com/Azure/azure-dev/releases), extract am, and add the `azd` binary to your `PATH`.
 
 ### Linux
 
@@ -94,115 +91,117 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 **Manual installation from release assets:**
 ```bash
-# Download di latest archive wey match your Linux architecture from:
+# Download the latest archive for your Linux architecture from:
 # https://github.com/Azure/azure-dev/releases
-# Then extract am and put di azd binary for your PATH.
+# Then extract it and add the azd binary to your PATH.
 ```
 
 ### GitHub Codespaces
 
-Some Codespaces and dev container environments don already include `azd`, but you suppose check first make you no assume:
+Some Codespaces and dev container environments don already get `azd`, but you suppose check am yourself before you just assume say e dey:
 
 ```bash
 azd version
 ```
 
-If `azd` dey missing, install am with the standard script for the environment.
+If `azd` no dey, install am with the standard script wey dem use for the environment.
 
 ### Docker
 
 ```bash
-# Make azd run inside one container
-docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
+# Run azd in a container
+docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Make one alias so e go easy to use
-alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
+# Create an alias for easier use
+alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
+
+Dis temporary container no dey keep login state between runs. If you want to deploy many times, use the [dev container setup](dev-containers.md); container builds need Docker daemon wey dey inside the container.
 
 ## ✅ Verify Installation
 
-After you install, check say azd dey work fine:
+After you install am, make sure say azd dey work correct:
 
 ```bash
-# Check di version
+# Check version
 azd version
 
-# See di help
+# View help
 azd --help
 
-# List di templates wey dey available
+# List available templates
 azd template list
 ```
 
-Expected output:
+Wetin you suppose see:
 ```
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Note**: The real version number fit change. Check [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) for the latest version.
+**Note**: The real version number go fit change. Check [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) for the latest version.
 
 **✅ Installation Success Checklist:**
-- [ ] `azd version` shows version number without errors
-- [ ] `azd --help` displays command documentation
-- [ ] `azd template list` shows available templates
-- [ ] You fit create a test directory and run `azd init` successfully
+- [ ] `azd version` show version number without any error
+- [ ] `azd --help` display command documentation
+- [ ] `azd template list` show available templates
+- [ ] You fit create test directory and run `azd init` well
 
-**If all checks pass, you ready to proceed to [Your First Project](first-project.md)!**
+**If all checks pass, you ready to waka go [Your First Project](first-project.md)!**
 
 ## Authentication Setup
 
 ### Recommended Beginner Setup
 
-For AZD-first workflows, sign in with `azd auth login`.
+For AZD-first workflows, just sign in with `azd auth login`.
 
 ```bash
-# E necessary for AZD commands like azd up
+# Required for AZD commands such as azd up
 azd auth login
 
-# Make sure say AZD don authenticate
+# Verify AZD authentication status
 azd auth login --check-status
 ```
 
-Use Azure CLI sign-in only when you go run `az` commands yourself during the course.
+Use Azure CLI sign-in only if you plan to run `az` commands yourself during di course.
 
 ### Azure CLI Authentication (Optional)
 ```bash
-# Install Azure CLI if e never don install
-# Windows: run dis command - winget install Microsoft.AzureCLI
-# macOS: run dis command - brew install azure-cli
-# Linux: check di Azure CLI install docs wey match your distribution
+# Install Azure CLI if not already installed
+# Windows: winget install Microsoft.AzureCLI
+# macOS: brew install azure-cli
+# Linux: see the Azure CLI install docs for your distribution
 
-# Login go Azure
+# Login to Azure
 az login
 
-# Make sure say authentication correct
+# Verify authentication
 az account show
 ```
 
 ### Which Sign-In Flow Should You Use?
 
-- Use `azd auth login` if you dey follow the beginner AZD path and you dey mainly run `azd` commands.
-- Use `az login` too when you wan run Azure CLI commands like `az account show` or inspect resources directly.
-- If exercise get both `azd` and `az` commands, run both sign-in commands one time at the start.
+- Use `azd auth login` if you dey follow beginner AZD path and mainly run `azd` commands.
+- Use `az login` also if you want run Azure CLI commands like `az account show` or dey check resources direct.
+- If exercise get both `azd` and `az` commands, run both sign-in commands once for the start.
 
 ### Device Code Authentication
-If you dey on headless system or your browser dey give you wahala:
+If your system no get browser or e get browser wahala:
 ```bash
 azd auth login --use-device-code
 ```
 
 ### Service Principal (CI/CD)
-For automated environments:
+For automated environment:
 ```bash
 azd auth login \
-  --client-id <client-id> \
-  --client-secret <client-secret> \
-  --tenant-id <tenant-id>
+  --client-id "<client-id>" \
+  --client-secret "<client-secret>" \
+  --tenant-id "<tenant-id>"
 ```
 
 ### Validate Your Complete Setup
 
-If you want quick check before you start Chapter 1:
+If you wan quick check say everything ready before you start Chapter 1:
 
 **Windows:**
 ```powershell
@@ -218,35 +217,34 @@ bash ./validate-setup.sh
 
 ### Global Configuration
 ```bash
-# Put di subscription wey go be default
-azd config set defaults.subscription <subscription-id>
+# Set default subscription
+azd config set defaults.subscription "<subscription-id>"
 
-# Put di location wey go be default
+# Set default location
 azd config set defaults.location eastus2
 
-# See all di configuration dem
+# View all configuration
 azd config show
 ```
 
 ### Environment Variables
 Add am to your shell profile (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
-# Azure konfigureshon
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# azd konfigureshon
-export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Make debug logging dey
+# Enable diagnostics per command rather than relying on undocumented variables
+azd version --debug
 ```
 
 ## IDE Integration
 
 ### Visual Studio Code
-Install the Azure Developer CLI extension:
+Install Azure Developer CLI extension:
 1. Open VS Code
 2. Go to Extensions (Ctrl+Shift+X)
-3. Search for "Azure Developer CLI"
+3. Search "Azure Developer CLI"
 4. Install the extension
 
 Features:
@@ -256,7 +254,7 @@ Features:
 - Deployment monitoring
 
 ### GitHub Codespaces
-Create a `.devcontainer/devcontainer.json`:
+Create `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -269,7 +267,7 @@ Create a `.devcontainer/devcontainer.json`:
 ```
 
 ### IntelliJ/JetBrains
-1. Install the Azure plugin
+1. Install Azure plugin
 2. Configure Azure credentials
 3. Use integrated terminal for azd commands
 
@@ -279,7 +277,7 @@ Create a `.devcontainer/devcontainer.json`:
 
 #### Permission Denied (Windows)
 ```powershell
-# Make you run PowerShell as Administrator
+# Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
@@ -299,42 +297,39 @@ source ~/.bashrc
 
 #### Network/Proxy Issues
 ```bash
-# Set di proxy
-azd config set http.proxy http://proxy:8080
-azd config set https.proxy https://proxy:8080
-
-# No verify SSL (no dey recommend for production)
-azd config set http.insecure true
+# Configure standard proxy environment variables for the current Bash session
+export HTTP_PROXY="http://proxy:8080"
+export HTTPS_PROXY="http://proxy:8080"
+# Use your organization's trusted CA configuration; do not disable TLS validation.
 ```
 
 #### Version Conflicts
 ```bash
-# Comot di old installations
-# Windows: use winget uninstall microsoft.azd
-# macOS: use brew uninstall azd
-# Linux: comot di previous azd binary or symlink bifo you reinstall am
+# Remove old installations
+# Windows: winget uninstall microsoft.azd
+# macOS: brew uninstall azd
+# Linux: remove the previous azd binary or symlink before reinstalling
 
-# Clean di configuration
+# Clean configuration
 rm -rf ~/.azd
 ```
 
 ### Getting More Help
 ```bash
-# Make debug logging dey on
-export AZD_DEBUG=true
-azd <command> --debug
+# Enable debug logging
+azd show --debug
 
-# See di current configuration
+# View current configuration
 azd config show
 
-# See di status of di current deployment
+# View current deployment status
 azd show
 ```
 
 ## Updating azd
 
 ### Update Check
-azd go warn you when new release dey, and you fit confirm your current build with:
+azd go talk you if new release dey, you fit check your current build with:
 ```bash
 azd version
 ```
@@ -359,84 +354,86 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## 💡 Frequently Asked Questions
 
 <details>
-<summary><strong>Wetin be difference between azd and az CLI?</strong></summary>
+<summary><strong>Wetyn be di diff between azd and az CLI?</strong></summary>
 
-**Azure CLI (az)**: Low-level tool wey you dey use to manage individual Azure resources
+**Azure CLI (az)**: Na low-level tool to manage individual Azure resources
 - `az webapp create`, `az storage account create`
-- One resource at a time
-- Infrastructure management focus
+- Manage one resource at a time
+- Focus na infrastructure management
 
-**Azure Developer CLI (azd)**: High-level tool for complete application deployments
-- `azd up` dey deploy whole app with all resources
-- Template-based workflows
-- Developer productivity focus
+**Azure Developer CLI (azd)**: Na high-level tool wey dem use to deploy whole application
+- `azd up` dey deploy full app plus all resources
+- Template based workflow
+- Focus na developer productivity
 
-**You need both**: azd dey use az CLI for authentication
+**Dem independent**: azd get im own authentication by default. You go need to install and sign in Azure CLI only if you want run `az` commands or explicitly want use `azd config set auth.useAzCliAuth true`.
 </details>
 
 <details>
-<summary><strong>Fit I use azd with existing Azure resources?</strong></summary>
+<summary><strong>I fit use azd with di Azure resources wey I get before?</strong></summary>
 
 Yes! You fit:
-1. Import existing resources into azd environments
-2. Reference existing resources for your Bicep templates
-3. Use azd for new deployments side-by-side with existing infrastructure
+1. Import your existing resources inside azd environments
+2. Refer your existing resources for your Bicep templates
+3. Use azd for new deployments side by side with the infrastructure wey you get
 
-See [Configuration Guide](configuration.md) for details.
+Check the [Configuration Guide](../chapter-03-configuration/configuration.md) for more info.
 </details>
 
 <details>
-<summary><strong>Azd dey work with Azure Government or Azure China?</strong></summary>
+<summary><strong>AzD dey work for Azure Government or Azure China?</strong></summary>
 
-Yes, just configure the cloud:
+Yes, you fit set the cloud:
 ```bash
-# Azure Goment
-az cloud set --name AzureUSGovernment
-az login
+# Azure Government (azd)
+azd config set cloud.name AzureUSGovernment
+azd auth login
 
-# Azure China
-az cloud set --name AzureChinaCloud
-az login
+# Azure China (alternative)
+azd config set cloud.name AzureChinaCloud
+azd auth login
 ```
+
+If you dey use Azure CLI too, you need configure `az cloud set --name ...` separately. Template services and model availability differ by cloud.
 </details>
 
 <details>
-<summary><strong>Fit I use azd for CI/CD pipelines?</strong></summary>
+<summary><strong>I fit use azd for CI/CD pipelines?</strong></summary>
 
-Sure! azd design make automation easy:
-- GitHub Actions integration
+Sure! azd na tool wey dem make for automation:
+- E get GitHub Actions integration
 - Azure DevOps support
-- Service principal authentication
+- E get service principal authentication
 - Non-interactive mode
 
-See [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) for CI/CD patterns.
+Check [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) for CI/CD patterns.
 </details>
 
 <details>
 <summary><strong>How much e go cost to use azd?</strong></summary>
 
-azd self dey **completely free** and open-source. The only thing you go pay for na:
+azd na **completely free** and open-source. You go only pay for:
 - Azure resources wey you deploy
-- Azure consumption costs (compute, storage, etc.)
+- Azure consumption costs (like compute, storage, and others)
 
-Use `azd provision --preview` to estimate costs before deployment.
+Use `azd provision --preview` to see the resources wey you go use, then check dia price with [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/). Preview no sabi calculate price.
 </details>
 
 ## Next Steps
 
-1. **Complete authentication**: Make sure say you fit access your Azure subscription
-2. **Try your first deployment**: Follow the [First Project Guide](first-project.md)
-3. **Explore templates**: Browse available templates with `azd template list`
-4. **Configure your IDE**: Set up your development environment
+1. **Complete authentication**: Make sure say you fit enter your Azure subscription
+2. **Try your first deployment**: Follow di [First Project Guide](first-project.md)
+3. **Explore templates**: Browse templates wey dey available with `azd template list`
+4. **Configure your IDE**: Arrange your development environment
 
 ## Support
 
-If you meet wahala:
+If you get any problem:
 - [Official Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Report Issues](https://github.com/Azure/azure-dev/issues)
 - [Community Discussions](https://github.com/Azure/azure-dev/discussions)
 - [Azure Support](https://azure.microsoft.com/support/)
-- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Get Azure command guidance straight inside your editor with `npx skills add microsoft/github-copilot-for-azure`
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Get Azure command help direct for your editor with `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
@@ -453,5 +450,5 @@ If you meet wahala:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis dokument don translate using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg sabi say automated translations fit get errors or inaccuracies. Di original dokument for im native language suppose be di authoritative source. For critical information, e better make professional human translation handle am. We no dey liable for any misunderstandings or misinterpretations wey fit arise from the use of this translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

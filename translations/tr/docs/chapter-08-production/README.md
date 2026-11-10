@@ -1,22 +1,24 @@
-# Bölüm 8: Üretim ve Kurumsal Kalıplar
+# Bölüm 8: Üretim & Kurumsal Modeller
 
-**📚 Kurs**: [Yeni Başlayanlar için AZD](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Zorluk**: İleri Düzey
+**📚 Kurs**: [Başlangıç İçin AZD](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Zorluk Seviyesi**: İleri
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, kurumsal düzeye hazır dağıtım kalıpları, güvenlik sertleştirme, izleme ve üretim AI iş yükleri için maliyet optimizasyonunu kapsar.
+Bu bölüm, kurumsal kullanılabilirlikte dağıtım modellerini, güvenlik sertleştirme, izleme ve üretim AI iş yükleri için maliyet optimizasyonunu kapsar.
 
-> Temmuz 2026'da `azd 1.27.1` ile doğrulanmıştır.
+Bu, tam dağıtılabilir bir üretim şablonu değil, mimari bir referanstır. Örnekler, kendi uygulamanızda sağlanması ve test edilmesi gereken entegrasyon detaylarını atlar; kontrol listesini okumak üretim hazır olma sertifikası vermez.
+
+> **Sürüm incelemesi (2026-11-04):** AI CLI rehberi `azd 1.37.2`, ajanlar `1.0.0-beta.23` ve değerlendirmeler `1.0.0-beta.2` belgeleri/kaynakları ile karşılaştırıldı. Uyum gereksinimleri ve taşıma detayları için [sürüm değişiklikleri ve düzeltmeler](production-ai-practices.md#recent-release-changes-and-fixes) bakınız; bu canlı bir dağıtım doğrulaması değildir.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamlayarak:
-- Çok bölgeli dayanıklı uygulamalar dağıtacaksınız
-- Kurumsal güvenlik kalıplarını uygulayacaksınız
+Bu bölümü tamamladığınızda:
+- Çok bölgeli dayanıklı uygulamaları dağıtacaksınız
+- Kurumsal güvenlik modellerini uygulayacaksınız
 - Kapsamlı izleme yapılandıracaksınız
-- Ölçekli maliyet optimizasyonu yapacaksınız
+- Ölçekli maliyetleri optimize edeceksiniz
 - AZD ile CI/CD boru hatları kuracaksınız
 
 ---
@@ -25,38 +27,38 @@ Bu bölümü tamamlayarak:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Üretim AI Uygulamaları](production-ai-practices.md) | Kurumsal dağıtım kalıpları | 90 dk |
+| 1 | [Üretim AI Uygulamaları](production-ai-practices.md) | Kurumsal dağıtım modelleri | 90 dk |
 
 ---
 
 ## 🚀 Üretim Kontrol Listesi
 
 - [ ] Dayanıklılık için çok bölgeli dağıtım
-- [ ] Kimlik doğrulama için yönetilen kimlik (anahtarsız)
+- [ ] Kimlik doğrulama için yönetilen kimlik (anahtar yok)
 - [ ] İzleme için Application Insights
 - [ ] Maliyet bütçeleri ve uyarılar yapılandırıldı
-- [ ] Güvenlik taraması etkin
+- [ ] Güvenlik taraması etkinleştirildi
 - [ ] CI/CD boru hattı entegrasyonu
 - [ ] Felaket kurtarma planı
 
 ---
 
-## 🏗️ Mimari Kalıplar
+## 🏗️ Mimari Modeller
 
-### Kalıp 1: Mikroservis AI
+### Model 1: Mikroservisler AI
 
 ```mermaid
 graph LR
-    Gateway[API Geçidi] --> AI[AI Servisi] --> Models[Microsoft Foundry Modelleri]
-    Gateway --> Auth[Kimlik Doğrulama Servisi]
-    AI --> Data[Veri Deposu]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
-### Kalıp 2: Olay Tabanlı AI
+### Model 2: Olay Tabanlı AI
 
 ```mermaid
 graph LR
-    EventGrid[Olay Ağı] --> Functions[Fonksiyonlar] --> Pipeline[AI Boru Hattı]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
@@ -64,12 +66,13 @@ graph LR
 ## 🔐 Güvenlik En İyi Uygulamaları
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,45 +85,38 @@ properties: {
 
 ## 💰 Maliyet Optimizasyonu
 
-| Strateji | Tasarruf |
+| Strateji | Ana Kısıtlama |
 |----------|---------|
-| Sıfıra ölçekleme (Container Apps) | %60-80 |
-| Geliştirme için tüketim katmanlarını kullanma | %50-70 |
-| Planlı ölçeklendirme | %30-50 |
-| Ayrılmış kapasite | %20-40 |
+| Sıfıra ölçekleme (Container Apps) | Uygun bir tetikleyici gerekir; diğer servisler hala maliyet oluşturur |
+| Geliştirici için tüketim katmanları kullanımı | Seçilen hizmet fiyatlandırması ve iş yükü karşılaştırması |
+| Planlı ölçeklendirme | Desteklenen altyapı/otomasyon ile ölçeklendirme |
+| Rezervasyonlar/ayrılmış kapasite | Sadece desteklendiğinde; taahhütler boşta kalan maliyetleri artırabilir |
 
-```bash
-# Bütçe uyarılarını ayarla
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Geçerli bir başlangıç tarihi, faturalama kapsamı, alıcılar ve izinler ile [tam bütçe kaynak modeli](production-ai-practices.md#2-cost-monitoring-and-budgets) kullanın. Bir bütçe uyarılar gönderir; harcamayı sınırlandırmaz. Tasarruflar ölçülen kullanıma bağlıdır ve garanti edilen yüzdeler değildir.
 
 ---
 
-## 📊 İzleme Kurulumu
+## 📊 İzleme Ayarları
 
 ```bash
-# Akış günlükleri
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Uygulama İçgörülerini kontrol et
+# Check Application Insights
 azd monitor --overview
 
-# Ölçümleri görüntüle
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
 ---
 
-## 🔗 Gezinme
+## 🔗 Navigasyon
 
 | Yön | Bölüm |
 |-----------|---------|
 | **Önceki** | [Bölüm 7: Sorun Giderme](../chapter-07-troubleshooting/README.md) |
-| **Kurs Tamamlandı** | [Kurs Anasayfa](../../README.md) |
+| **Kurs Tamamlandı** | [Kurs Ana Sayfa](../../README.md) |
 
 ---
 
@@ -128,8 +124,8 @@ az monitor metrics list --resource <resource-id>
 
 - [AI Ajanları Kılavuzu](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Çoklu Ajan Çözümleri](../chapter-05-multi-agent/README.md)
-- [Mikroservis Örneği](../../examples/microservices/README.md)
+- [Çok Ajanlı Çözümler](../chapter-05-multi-agent/README.md)
+- [Mikroservisler Örneği](../../examples/microservices/README.md)
 
 ---
 

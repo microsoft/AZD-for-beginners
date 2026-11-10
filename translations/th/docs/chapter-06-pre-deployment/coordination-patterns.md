@@ -1,111 +1,113 @@
-# รูปแบบการประสานงานของตัวแทนหลายตัว
+# รูปแบบการประสานงานหลายเอเจนต์
 
-⏱️ **เวลาประมาณ**: 60-75 นาที | 💰 **ค่าใช้จ่ายประมาณ**: ~$100-300/เดือน | ⭐ **ความซับซ้อน**: ขั้นสูง
+⏱️ **เวลาประมาณ**: อ่าน 60-75 นาที; ใช้เวลาหลายชั่วโมงสำหรับการใช้งาน | 💰 **ค่าใช้จ่ายโดยประมาณ**: ขึ้นอยู่กับภาระงาน | ⭐ **ความซับซ้อน**: ขั้นสูง
 
 **📚 เส้นทางการเรียนรู้:**
-- ← ก่อนหน้า: [Capacity Planning](capacity-planning.md) - การวางแผนขนาดทรัพยากรและกลยุทธ์การปรับขนาด
-- 🎯 **คุณอยู่ที่นี่**: รูปแบบการประสานงานของตัวแทนหลายตัว (การจัดการ, การสื่อสาร, การจัดการสถานะ)
-- → ต่อไป: [SKU Selection](sku-selection.md) - การเลือกบริการ Azure ที่เหมาะสม
-- 🏠 [หน้าแรกหลักสูตร](../../README.md)
+- ← ก่อนหน้า: [การวางแผนความจุ](capacity-planning.md) - กลยุทธ์การกำหนดขนาดทรัพยากรและการปรับขนาด
+- 🎯 **คุณอยู่ที่นี่**: รูปแบบการประสานงานหลายเอเจนต์ (การจัดการ, การสื่อสาร, การจัดการสถานะ)
+- → ถัดไป: [การเลือก SKU](sku-selection.md) - การเลือกบริการ Azure ที่เหมาะสม
+- 🏠 [หน้าหลักคอร์ส](../../README.md)
 
 ---
 
 ## สิ่งที่คุณจะได้เรียนรู้
 
-โดยการทำบทเรียนนี้ให้เสร็จสิ้น คุณจะ:
-- เข้าใจรูปแบบ **สถาปัตยกรรมตัวแทนหลายตัว** และเมื่อใดควรใช้
-- นำ **รูปแบบการจัดการแบบออร์เคสเตรชัน** มาใช้ (แบบรวมศูนย์, แบบกระจาย, แบบลำดับชั้น)
-- ออกแบบกลยุทธ์ **การสื่อสารตัวแทน** (แบบซิงโครนัส, แบบอะซิงโครนัส, กำกับด้วยเหตุการณ์)
-- จัดการ **สถานะที่ใช้ร่วมกัน** ในตัวแทนที่กระจายตัว
-- ติดตั้ง **ระบบตัวแทนหลายตัว** บน Azure ด้วย AZD
-- ประยุกต์ใช้ **รูปแบบการประสานงาน** ในสถานการณ์ AI จริง
-- ตรวจสอบและแก้ไขปัญหาระบบตัวแทนที่กระจายตัว
+เมื่อคุณเรียนบทนี้จบ คุณจะสามารถ:
+- เข้าใจรูปแบบ **สถาปัตยกรรมหลายเอเจนต์** และเมื่อใดควรใช้
+- นำรูปแบบ **การจัดการ** มาใช้ (แบบรวมศูนย์, แบบกระจาย, แบบลำดับชั้น)
+- ออกแบบกลยุทธ์ **การสื่อสารระหว่างเอเจนต์** (แบบซิงโครนัส, แบบแอสิงโครนัส, แบบขับเคลื่อนด้วยเหตุการณ์)
+- จัดการ **สถานะร่วม** ระหว่างเอเจนต์ที่แจกจ่าย
+- ติดตั้ง **ระบบหลายเอเจนต์** บน Azure ด้วย AZD
+- ใช้ **รูปแบบการประสานงาน** สำหรับสถานการณ์ AI จริง
+- ตรวจสอบและแก้ไขข้อบกพร่องระบบเอเจนต์กระจาย
 
-## ทำไมการประสานงานของตัวแทนหลายตัวจึงสำคัญ
+## ทำไมการประสานงานหลายเอเจนต์จึงสำคัญ
 
-### การวิวัฒนาการ: จากตัวแทนเดี่ยวสู่ตัวแทนหลายตัว
+### วิวัฒนาการ: จากเอเจนต์เดียวสู่หลายเอเจนต์
 
-**ตัวแทนเดี่ยว (ง่าย):**
+**เอเจนต์เดียว (ง่าย):**
 ```
 User → Agent → Response
 ```
-- ✅ เข้าใจและนำไปใช้ได้ง่าย
-- ✅ รวดเร็วสำหรับงานง่ายๆ
-- ❌ จำกัดด้วยความสามารถของโมเดลเดี่ยว
-- ❌ ไม่สามารถประมวลผลแบบขนานในงานซับซ้อนได้
+- ✅ เข้าใจและใช้งานง่าย
+- ✅ เร็วสำหรับงานง่าย ๆ
+- ❌ จำกัดโดยความสามารถของโมเดลเดียว
+- ❌ ทำงานพร้อมกันไม่ได้สำหรับงานซับซ้อน
 - ❌ ไม่มีความเชี่ยวชาญเฉพาะทาง
 
-**ระบบตัวแทนหลายตัว (ขั้นสูง):**
+**ระบบหลายเอเจนต์ (ขั้นสูง):**
 ```mermaid
 graph TD
-    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>วางแผน]
-    Orchestrator --> Agent2[Agent2<br/>โค้ด]
-    Orchestrator --> Agent3[Agent3<br/>ตรวจสอบ]
-```- ✅ ตัวแทนเฉพาะสำหรับงานเฉพาะ
-- ✅ การทำงานแบบขนานเพื่อความรวดเร็ว
-- ✅ มีความยืดหยุ่นและบำรุงรักษาได้
-- ✅ ดีขึ้นสำหรับเวิร์กโฟลว์ซับซ้อน
-- ⚠️ ต้องมีตรรกะการประสานงาน
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```
+- ✅ เอเจนต์ที่มีความเชี่ยวชาญเฉพาะงาน
+- ✅ การทำงานพร้อมกันเพื่อความเร็ว
+- ✅ โมดูลาร์และง่ายต่อการบำรุงรักษา
+- ✅ ดีขึ้นสำหรับเวิร์กโฟลว์ที่ซับซ้อน
+- ⚠️ ต้องใช้ตรรกะการประสานงาน
 
-**เปรียบเทียบ**: ตัวแทนเดี่ยวเหมือนคนคนเดียวทำทุกงาน ตัวแทนหลายตัวเหมือนทีมที่สมาชิกแต่ละคนมีความเชี่ยวชาญเฉพาะด้าน (นักวิจัย, นักเขียนโค้ด, ผู้ตรวจสอบ, นักเขียน) ทำงานร่วมกัน
+**อุปมา**: เอเจนต์เดียวดุจเหมือนคนคนเดียวทำทุกงาน ทีมหลายเอเจนต์เหมือนทีมที่แต่ละคนมีทักษะเฉพาะทาง (นักวิจัย, นักเขียนโค้ด, ผู้ตรวจทาน, ผู้เขียน) ทำงานร่วมกัน
 
 ---
 
 ## รูปแบบการประสานงานหลัก
 
-### รูปแบบที่ 1: การประสานงานแบบลำดับ (ห่วงโซ่ความรับผิดชอบ)
+### รูปแบบที่ 1: การประสานงานแบบลำดับ (โซ่ความรับผิดชอบ)
 
-**เมื่อใดควรใช้**: งานต้องทำให้เสร็จตามลำดับที่กำหนด โดยตัวแทนแต่ละตัวสร้างต่อจากผลลัพธ์ก่อนหน้า
+**เมื่อใดควรใช้**: งานต้องเสร็จตามลำดับเฉพาะ เอเจนต์แต่ละตัวสร้างจากผลลัพธ์ของตัวก่อนหน้า
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as ตัวแทนวิจัย
-    participant Agent2 as ตัวแทนเขียน
-    participant Agent3 as ตัวแทนบรรณาธิการ
+    participant Agent1 as Research Agent
+    participant Agent2 as Writer Agent
+    participant Agent3 as Editor Agent
     
-    User->>Orchestrator: "เขียนบทความเกี่ยวกับ AI"
-    Orchestrator->>Agent1: ค้นคว้าหัวข้อ
-    Agent1-->>Orchestrator: ผลการค้นคว้า
-    Orchestrator->>Agent2: เขียนร่าง (ใช้การค้นคว้า)
-    Agent2-->>Orchestrator: ร่างบทความ
-    Orchestrator->>Agent3: แก้ไขและปรับปรุง
-    Agent3-->>Orchestrator: บทความขั้นสุดท้าย
-    Orchestrator-->>User: บทความที่ขัดเกลาแล้ว
+    User->>Orchestrator: "Write article about AI"
+    Orchestrator->>Agent1: Research topic
+    Agent1-->>Orchestrator: Research results
+    Orchestrator->>Agent2: Write draft (using research)
+    Agent2-->>Orchestrator: Draft article
+    Orchestrator->>Agent3: Edit and improve
+    Agent3-->>Orchestrator: Final article
+    Orchestrator-->>User: Polished article
     
-    Note over User,Agent3: ลำดับขั้น: แต่ละขั้นตอนรอขั้นตอนก่อนหน้า
+    Note over User,Agent3: Sequential: Each step waits for previous
 ```
+
 **ประโยชน์:**
 - ✅ การไหลของข้อมูลชัดเจน
-- ✅ ง่ายต่อการดีบัก
-- ✅ การทำงานมีลำดับที่คาดเดาได้
+- ✅ ง่ายต่อการแก้ปัญหา
+- ✅ ลำดับการทำงานที่คาดเดาได้
 
 **ข้อจำกัด:**
-- ❌ ช้ากว่า (ไม่มีการทำงานแบบขนาน)
-- ❌ ความล้มเหลวหนึ่งครั้งบล็อกทั้งห่วงโซ่
-- ❌ ไม่สามารถจัดการงานที่พึ่งพาอาศัยกันได้
+- ❌ ช้ากว่า (ไม่มีการทำงานพร้อมกัน)
+- ❌ ข้อผิดพลาดเดียวขัดขวางทั้งโซ่
+- ❌ จัดการงานที่ขึ้นต่อกันไม่ได้
 
 **ตัวอย่างการใช้งาน:**
-- กระบวนการสร้างเนื้อหา (ค้นคว้า → เขียน → แก้ไข → เผยแพร่)
-- การสร้างโค้ด (วางแผน → ทำโค้ด → ทดสอบ → ติดตั้ง)
-- การสร้างรายงาน (เก็บข้อมูล → วิเคราะห์ → แสดงผล → สรุป)
+- สายงานสร้างเนื้อหา (วิจัย → เขียน → แก้ไข → เผยแพร่)
+- การสร้างโค้ด (วางแผน → เขียน → ทดสอบ → ปล่อย)
+- การสร้างรายงาน (รวบรวมข้อมูล → วิเคราะห์ → แสดงภาพ → สรุป)
 
 ---
 
 ### รูปแบบที่ 2: การประสานงานแบบขนาน (Fan-Out/Fan-In)
 
-**เมื่อใดควรใช้**: งานอิสระสามารถทำงานพร้อมกันได้ ผลลัพธ์ถูกรวมกันในที่สุด
+**เมื่อใดควรใช้**: งานที่เป็นอิสระสามารถทำงานพร้อมกันได้ ผลลัพธ์ถูกรวมกันในตอนท้าย
 
 ```mermaid
 graph TB
-    User[คำขอผู้ใช้]
-    Orchestrator[ผู้ควบคุม]
-    Agent1[ตัวแทนวิเคราะห์]
-    Agent2[ตัวแทนวิจัย]
-    Agent3[ตัวแทนข้อมูล]
-    Aggregator[ผู้รวบรวมผลลัพธ์]
-    Response[การตอบกลับรวม]
+    User[User Request]
+    Orchestrator[Orchestrator]
+    Agent1[Analysis Agent]
+    Agent2[Research Agent]
+    Agent3[Data Agent]
+    Aggregator[Result Aggregator]
+    Response[Combined Response]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -119,20 +121,21 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **ประโยชน์:**
-- ✅ รวดเร็ว (ทำงานแบบขนาน)
-- ✅ ทนทานต่อความล้มเหลว (รับผลลัพธ์บางส่วนได้)
-- ✅ ขยายขนาดได้ในแนวนอน
+- ✅ เร็ว (การทำงานพร้อมกัน)
+- ✅ ทนต่อความผิดพลาด (ยอมรับผลลัพธ์บางส่วน)
+- ✅ ปรับขนาดแนวนอนได้
 
 **ข้อจำกัด:**
-- ⚠️ ผลลัพธ์อาจมาถึงไม่ตามลำดับ
-- ⚠️ ต้องมีตรรกะการรวบรวมผลลัพธ์
+- ⚠️ ผลลัพธ์อาจมาถึงไม่เป็นลำดับ
+- ⚠️ ต้องมีตรรกะการรวบรวม
 - ⚠️ การจัดการสถานะซับซ้อน
 
 **ตัวอย่างการใช้งาน:**
-- การรวบรวมข้อมูลจากหลายแหล่ง (API + ฐานข้อมูล + การเก็บข้อมูลเว็บ)
-- การวิเคราะห์การแข่งขัน (หลายโมเดลสร้างทางแก้, เลือกดีที่สุด)
-- บริการแปลภาษา (แปลพร้อมกันหลายภาษา)
+- การรวบรวมข้อมูลจากหลายแหล่ง (APIs + ฐานข้อมูล + การขูดเว็บ)
+- การวิเคราะห์การแข่งขัน (โมเดลหลายตัวสร้างวิธีแก้ปัญหา, เลือกที่ดีที่สุด)
+- บริการแปลภาษา (แปลหลายภาษาได้พร้อมกัน)
 
 ---
 
@@ -142,13 +145,13 @@ graph TB
 
 ```mermaid
 graph TB
-    Master[โปรแกรมจัดการหลัก]
-    Manager1[ผู้จัดการวิจัย]
-    Manager2[ผู้จัดการเนื้อหา]
-    W1[เว็บสแครปเปอร์]
-    W2[เครื่องวิเคราะห์บทความ]
-    W3[นักเขียน]
-    W4[บรรณาธิการ]
+    Master[Master Orchestrator]
+    Manager1[Research Manager]
+    Manager2[Content Manager]
+    W1[Web Scraper]
+    W2[Paper Analyzer]
+    W3[Writer]
+    W4[Editor]
     
     Master --> Manager1
     Master --> Manager2
@@ -161,75 +164,77 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
+
 **ประโยชน์:**
 - ✅ จัดการเวิร์กโฟลว์ซับซ้อนได้
-- ✅ มีความยืดหยุ่นและบำรุงรักษาได้
+- ✅ โมดูลาร์และง่ายต่อการบำรุงรักษา
 - ✅ ขอบเขตความรับผิดชอบชัดเจน
 
 **ข้อจำกัด:**
-- ⚠️ สถาปัตยกรรมซับซ้อนขึ้น
-- ⚠️ ความหน่วงสูงขึ้น (หลายชั้นการประสานงาน)
-- ⚠️ ต้องการการจัดการออร์เคสเตรชันที่ซับซ้อน
+- ⚠️ สถาปัตยกรรมซับซ้อนกว่า
+- ⚠️ มีความหน่วงสูงกว่า (หลายชั้นการประสานงาน)
+- ⚠️ ต้องการการจัดการขั้นสูง
 
 **ตัวอย่างการใช้งาน:**
-- การประมวลผลเอกสารองค์กร (จัดหมวดหมู่ → ส่งต่อ → ประมวลผล → เก็บถาวร)
-- ท่อข้อมูลหลายขั้นตอน (นำเข้า → ทำความสะอาด → แปลงรูป → วิเคราะห์ → รายงาน)
-- เวิร์กโฟลว์อัตโนมัติที่ซับซ้อน (วางแผน → จัดสรรทรัพยากร → ดำเนินการ → ตรวจสอบ)
+- การประมวลผลเอกสารองค์กร (จัดประเภท → ส่งต่อ → ประมวลผล → จัดเก็บ)
+- สายงานข้อมูลหลายขั้นตอน (รับเข้า → ทำความสะอาด → แปลง → วิเคราะห์ → รายงาน)
+- เวิร์กโฟลว์อัตโนมัติซับซ้อน (วางแผน → จัดสรรทรัพยากร → ดำเนินการ → ตรวจสอบ)
 
 ---
 
-### รูปแบบที่ 4: การประสานงานกำกับด้วยเหตุการณ์ (Publish-Subscribe)
+### รูปแบบที่ 4: การประสานงานแบบขับเคลื่อนด้วยเหตุการณ์ (เผยแพร่-สมัครสมาชิก)
 
-**เมื่อใดควรใช้**: ตัวแทนต้องตอบสนองต่อเหตุการณ์ ต้องการการเชื่อมโยงแบบหลวม
+**เมื่อใดควรใช้**: เอเจนต์ต้องตอบสนองต่อเหตุการณ์ ต้องการการเชื่อมโยงหลวม
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as ตัวเก็บข้อมูล
+    participant Agent1 as Data Collector
     participant EventBus as Azure Service Bus
-    participant Agent2 as นักวิเคราะห์
-    participant Agent3 as ผู้แจ้งเตือน
-    participant Agent4 as ผู้จัดเก็บถาวร
+    participant Agent2 as Analyzer
+    participant Agent3 as Notifier
+    participant Agent4 as Archiver
     
     Agent1->>EventBus: Publish "DataReceived" event
-    EventBus->>Agent2: Subscribe: วิเคราะห์ข้อมูล
-    EventBus->>Agent3: Subscribe: ส่งการแจ้งเตือน
-    EventBus->>Agent4: Subscribe: จัดเก็บข้อมูล
+    EventBus->>Agent2: Subscribe: Analyze data
+    EventBus->>Agent3: Subscribe: Send notification
+    EventBus->>Agent4: Subscribe: Archive data
     
-    Note over Agent1,Agent4: ผู้สมัครทั้งหมดประมวลผลอย่างอิสระ
+    Note over Agent1,Agent4: All subscribers process independently
     
     Agent2->>EventBus: Publish "AnalysisComplete" event
-    EventBus->>Agent3: Subscribe: ส่งรายงานวิเคราะห์
+    EventBus->>Agent3: Subscribe: Send analysis report
 ```
+
 **ประโยชน์:**
-- ✅ การเชื่อมโยงแบบหลวมระหว่างตัวแทน
-- ✅ เพิ่มตัวแทนใหม่ได้ง่าย (แค่สมัครรับข้อมูล)
-- ✅ การประมวลผลแบบอะซิงโครนัส
-- ✅ มีความทนทาน (เก็บข้อความ)
+- ✅ การเชื่อมโยงหลวมระหว่างเอเจนต์
+- ✅ เพิ่มเอเจนต์ใหม่ได้ง่าย (แค่สมัครสมาชิก)
+- ✅ การประมวลผลแบบแอสิงโครนัส
+- ✅ ทนทาน (ข้อความคงอยู่)
 
 **ข้อจำกัด:**
 - ⚠️ ความสอดคล้องในที่สุด
 - ⚠️ การดีบักซับซ้อน
-- ⚠️ ความท้าทายในการเรียงลำดับข้อความ
+- ⚠️ ปัญหาการเรียงลำดับข้อความ
 
 **ตัวอย่างการใช้งาน:**
-- ระบบตรวจสอบแบบเรียลไทม์ (แจ้งเตือน, แดชบอร์ด, บันทึก)
-- การแจ้งเตือนหลายช่องทาง (อีเมล, SMS, push, Slack)
-- ท่อการประมวลผลข้อมูล (ผู้บริโภคหลายตัวของข้อมูลชุดเดียวกัน)
+- ระบบตรวจสอบเรียลไทม์ (แจ้งเตือน, แดชบอร์ด, บันทึก)
+- การแจ้งเตือนหลายช่องทาง (อีเมล, SMS, การแจ้งเตือนแบบพุช, Slack)
+- สายงานประมวลผลข้อมูล (ผู้บริโภคข้อมูลหลายราย)
 
 ---
 
-### รูปแบบที่ 5: การประสานงานแบบจับมือ (Voting/Quorum)
+### รูปแบบที่ 5: การประสานงานแบบมีฉันทามติ (การลงคะแนน/กลุ่มเสียงข้างมาก)
 
-**เมื่อใดควรใช้**: ต้องการการตกลงจากตัวแทนหลายตัวก่อนดำเนินการ
+**เมื่อใดควรใช้**: ต้องการความเห็นชอบจากหลายเอเจนต์ก่อนดำเนินการต่อ
 
 ```mermaid
 graph TB
-    Input[งานนำเข้า]
-    Agent1[ตัวแทน 1: gpt-4.1]
-    Agent2[ตัวแทน 2: Claude]
-    Agent3[ตัวแทน 3: Gemini]
-    Voter[ผู้ลงคะแนนเห็นชอบ]
-    Output[ผลลัพธ์ที่ตกลงกัน]
+    Input[Input Task]
+    Agent1[Agent 1: gpt-4.1]
+    Agent2[Agent 2: Claude]
+    Agent3[Agent 3: Gemini]
+    Voter[Consensus Voter]
+    Output[Agreed Output]
     
     Input --> Agent1
     Input --> Agent2
@@ -241,42 +246,43 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
+
 **ประโยชน์:**
-- ✅ ความแม่นยำสูงขึ้น (หลายความเห็น)
-- ✅ ทนทานต่อความล้มเหลว (ยอมรับความล้มเหลวของส่วนน้อยได้)
-- ✅ มีระบบประกันคุณภาพในตัว
+- ✅ ความแม่นยำสูงขึ้น (หลายความคิดเห็น)
+- ✅ ทนต่อความผิดพลาด (ยอมรับความล้มเหลวของส่วนน้อย)
+- ✅ มีการประกันคุณภาพในตัว
 
 **ข้อจำกัด:**
-- ❌ มีค่าใช้จ่ายสูง (เรียกใช้โมเดลหลายตัว)
-- ❌ ช้ากว่า (รอตัวแทนทุกตัว)
-- ⚠️ ต้องมีการแก้ไขข้อขัดแย้ง
+- ❌ ค่าใช้จ่ายสูง (เรียกโมเดลหลายครั้ง)
+- ❌ ช้ากว่า (รอเอเจนต์ทั้งหมด)
+- ⚠️ ต้องจัดการความขัดแย้ง
 
 **ตัวอย่างการใช้งาน:**
-- การดูแลเนื้อหา (หลายโมเดลตรวจสอบเนื้อหา)
-- การตรวจสอบโค้ด (หลายตัวตรวจสอบ/วิเคราะห์)
-- การวินิจฉัยทางการแพทย์ (หลายโมเดล AI, ผู้เชี่ยวชาญตรวจสอบ)
+- การตรวจสอบเนื้อหา (โมเดลหลายตัวตรวจสอบเนื้อหา)
+- การตรวจสอบโค้ด (ลินเตอร์/เครื่องวิเคราะห์หลายตัว)
+- การวินิจฉัยทางการแพทย์ (โมเดล AI หลายตัว, การยืนยันโดยผู้เชี่ยวชาญ)
 
 ---
 
 ## ภาพรวมสถาปัตยกรรม
 
-### ระบบตัวแทนหลายตัวครบวงจรบน Azure
+### ระบบหลายเอเจนต์ครบถ้วนบน Azure
 
 ```mermaid
 graph TB
-    User[ผู้ใช้/ไคลเอนต์ API]
-    APIM[การจัดการ API ของ Azure]
-    Orchestrator[บริการ Orchestrator<br/>แอป Container]
-    ServiceBus[Azure Service Bus<br/>Event Hub]
+    User[User/API Client]
+    APIM[Azure API Management]
+    Orchestrator[Orchestrator Service<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Queues / Topics]
     
-    Agent1[ตัวแทนวิจัย<br/>แอป Container]
-    Agent2[ตัวแทนผู้เขียน<br/>แอป Container]
-    Agent3[ตัวแทนนักวิเคราะห์<br/>แอป Container]
-    Agent4[ตัวแทนผู้ตรวจสอบ<br/>แอป Container]
+    Agent1[Research Agent<br/>Container App]
+    Agent2[Writer Agent<br/>Container App]
+    Agent3[Analyst Agent<br/>Container App]
+    Agent4[Reviewer Agent<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>สถานะที่ใช้ร่วมกัน)]
-    Storage[Azure Storage<br/>ชิ้นงาน]
-    AppInsights[Application Insights<br/>การตรวจสอบ]
+    CosmosDB[(Cosmos DB<br/>Shared State)]
+    Storage[Azure Storage<br/>Artifacts]
+    AppInsights[Application Insights<br/>Monitoring]
     
     User --> APIM
     APIM --> Orchestrator
@@ -307,58 +313,67 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**ส่วนประกอบหลัก:**
+
+**ส่วนประกอบสำคัญ:**
 
 | ส่วนประกอบ | จุดประสงค์ | บริการ Azure |
 |-----------|---------|---------------|
-| **API Gateway** | จุดเข้าระบบ, จำกัดอัตราการใช้งาน, การรับรองสิทธิ์ | API Management |
-| **Orchestrator** | จัดการเวิร์กโฟลว์ตัวแทน | Container Apps |
-| **Message Queue** | การสื่อสารแบบอะซิงโครนัส | Service Bus / Event Hubs |
-| **Agents** | ตัวแทน AI เฉพาะทาง | Container Apps / Functions |
-| **State Store** | สถานะที่ใช้ร่วมกัน, การติดตามงาน | Cosmos DB |
+| **API Gateway** | จุดเข้าใช้งาน, จำกัดอัตรา, การยืนยันตัวตน | API Management |
+| **Orchestrator** | ประสานเวิร์กโฟลว์ของเอเจนต์ | Container Apps |
+| **Message Queue** | การสื่อสารแบบแอสิงโครนัส | Service Bus / Event Hubs |
+| **Agents** | เอเจนต์ AI เชี่ยวชาญงาน | Container Apps / Functions |
+| **State Store** | สถานะร่วม, การติดตามงาน | Cosmos DB |
 | **Artifact Storage** | เอกสาร, ผลลัพธ์, บันทึก | Blob Storage |
 | **Monitoring** | การติดตามแบบกระจาย, บันทึก | Application Insights |
 
+คิว/หัวข้อของ Service Bus และ Event Hubs เป็นบริการที่ต่างกันโดยมีรูปแบบการส่งมอบและการบริโภคที่แตกต่างกัน; Event Hubs ไม่ใช่การทดแทนแบบตรงสำหรับโค้ด Service Bus ด้านล่าง การทำงานพร้อมกัน, ข้อความที่คงอยู่ และการโหวตโมเดลไม่ได้รับประกันความทนทานหรือความแม่นยำสูงขึ้นโดยตัวเอง
+
 ---
 
-## ข้อกำหนดเบื้องต้น
+## สิ่งที่ต้องมีล่วงหน้า
 
 ### เครื่องมือที่ต้องใช้
 
 ```bash
-# ตรวจสอบ Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ ที่คาดไว้: azd เวอร์ชัน 1.0.0 หรือสูงกว่า
+# Command reference baseline: azd 1.37.2
 
-# ตรวจสอบ Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ ที่คาดไว้: azure-cli 2.50.0 หรือสูงกว่า
+# ✅ Expected: azure-cli 2.50.0 or higher
 
-# ตรวจสอบ Docker (สำหรับการทดสอบในเครื่อง)
+# Verify Docker (for local testing)
 docker --version
-# ✅ ที่คาดไว้: Docker เวอร์ชัน 20.10 หรือสูงกว่า
+# ✅ Expected: Docker version 20.10 or higher
 ```
 
-### ข้อกำหนดบน Azure
+### ข้อกำหนดของ Azure
 
-- ต้องมีการสมัครใช้งาน Azure
-- สิทธิ์ในการสร้าง:
+- สมัครสมาชิก Azure ที่ใช้งานอยู่
+- สิทธิ์สร้าง:
   - Container Apps
-  - เนมสเปซ Service Bus
+  - เนมสเปซของ Service Bus
   - บัญชี Cosmos DB
   - บัญชี Storage
   - Application Insights
 
-### ความรู้พื้นฐาน
+### ความรู้พื้นฐานที่ต้องมี
 
-คุณควรทำเสร็จแล้ว:
-- [Configuration Management](../chapter-03-configuration/configuration.md)
-- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
-- [Microservices Example](../../../../examples/microservices)
+คุณควรได้เรียนจบ:
+- [การจัดการกำหนดค่า](../chapter-03-configuration/configuration.md)
+- [การพิสูจน์ตัวตน & ความปลอดภัย](../chapter-03-configuration/authsecurity.md)
+- [ตัวอย่างไมโครเซอร์วิส](../../../../examples/microservices)
 
 ---
 
-## คู่มือการดำเนินการ
+## คู่มือการใช้งาน
+
+> **ชิ้นส่วนออกแบบ ไม่ใช่ห้องปฏิบัติการใช้งานได้ทันที:** โครงสร้างโปรเจกต์และป้าย `File:` ด้านล่างอธิบายไฟล์ที่ต้องสร้างในโปรเจกต์ของคุณเอง; รีโพสนี้ไม่มีแอปพลิเคชัน `multi-agent-system` สมบูรณ์ ชิ้นส่วนที่ขาดรวมถึงแม่แบบหลัก/พารามิเตอร์, สภาพแวดล้อม/รีจิสทรี Container Apps, Dockerfile และล็อก dependencies, การตั้งค่าฐานข้อมูล/คอนเทนเนอร์ Cosmos, การปรับใช้งานโมเดล, การตั้งค่าเอกลักษณ์/บทบาท, กฎการปรับขนาด และเวิร์กเกอร์/คิวแบบขนาน อย่าคาดหวังให้ `azd init` สร้างไฟล์เหล่านี้หรือ `azd up` ปรับใช้โค้ดตัวอย่างโดยไม่เปลี่ยนแปลง สำหรับจุดเริ่มต้นที่ใช้งานได้ ให้ทำ [พื้นฐานหลายเอเจนต์](../chapter-05-multi-agent/multi-agent-basics.md) ให้เสร็จ
+
+**สมมติฐานเวลารันไทม์:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, และ (สำหรับการตรวจสอบ) `azure-monitor-opentelemetry`; วาง `shared` ไว้ในเส้นทางนำเข้า Python ในแต่ละอิมเมจเซอร์วิส ตู้คอนเทนเนอร์ `agent-state/tasks` ของ Cosmos ต้องมีอยู่แล้วโดยมี partition key เป็น `/id` การเชื่อมต่อโดยใช้กุญแจทำให้ชิ้นส่วนเหล่านี้ง่ายขึ้น ไม่ใช่คำแนะนำสำหรับผลิตภัณฑ์: ควรใช้ managed identities พร้อมบทบาทข้อมูล Service Bus/Cosmos/OpenAI ที่จำกัดสิทธิ์ อย่าเปิดเผยกุญแจในผลลัพธ์หรือบันทึก
+
+การส่งมอบ Service Bus เป็นแบบ **อย่างน้อยหนึ่งครั้ง** ให้เก็บ idempotency ต่อภารกิจ **และขั้นตอน** ใช้ concurrency แบบมองโลกในแง่ดี (ETags) สำหรับอ่าน/แก้ไข/เขียนสถานะ และต่ออายุล็อกข้อความในระหว่างกระบวนการที่ใช้เวลานาน ตัวจัดการสถานะง่าย ๆ ด้านล่างรองรับเฉพาะแบบลำดับและไม่ได้รับประกันเหล่านี้เหมือนการใช้งานจริง
 
 ### โครงสร้างโปรเจกต์
 
@@ -392,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## บทเรียน 1: รูปแบบการประสานงานแบบลำดับ
+## บทที่ 1: รูปแบบการประสานงานแบบลำดับ
 
-### การใช้งาน: ท่อการสร้างเนื้อหา
+### การใช้งาน: สายงานสร้างเนื้อหา
 
-เราจะสร้างท่อประสานงานแบบลำดับ: ค้นคว้า → เขียน → แก้ไข → เผยแพร่
+มาสร้างสายงานแบบลำดับ: วิจัย → เขียน → แก้ไข การเผยแพร่เป็นนอกตัวอย่างนี้
 
 ### 1. การตั้งค่า AZD
 
@@ -483,16 +498,17 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 }
 
 output namespace string = serviceBusNamespace.name
-output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+// Do not output RootManageSharedAccessKey. Resolve scoped credentials
+// securely or use managed identity in the application and scale rules.
 ```
 
-### 3. ตัวจัดการสถานะที่ใช้ร่วมกัน
+### 3. ตัวจัดการสถานะร่วม
 
 **ไฟล์: `src/shared/state_manager.py`**
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 class StateManager:
@@ -513,7 +529,7 @@ class StateManager:
             'type': task_type,
             'status': 'pending',
             'input': input_data,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'steps': []
         }
         self.container.create_item(task)
@@ -525,7 +541,7 @@ class StateManager:
         
         task['steps'].append({
             'name': step_name,
-            'completed_at': datetime.utcnow().isoformat(),
+            'completed_at': datetime.now(timezone.utc).isoformat(),
             'result': result
         })
         
@@ -537,7 +553,7 @@ class StateManager:
         task = self.container.read_item(task_id, partition_key=task_id)
         task['status'] = 'completed'
         task['result'] = final_result
-        task['completed_at'] = datetime.utcnow().isoformat()
+        task['completed_at'] = datetime.now(timezone.utc).isoformat()
         self.container.replace_item(task_id, task)
         return task
     
@@ -561,7 +577,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# การเชื่อมต่อ Service Bus
+# Service Bus connection
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -572,15 +588,15 @@ def health():
 @app.route('/create-content', methods=['POST'])
 def create_content():
     """
-    Sequential workflow: Research → Write → Edit → Publish
+    Sequential workflow: Research → Write → Edit (returns a draft; no publishing)
     """
-    data = request.json
+    data = request.get_json(silent=True) or {}
     topic = data.get('topic')
     
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # สร้างงานใน state store
+    # Create task in state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -588,13 +604,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # ส่งข้อความไปยังตัวแทนวิจัย (ขั้นตอนแรก)
+    # Send message to research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # ส่งผลลัพธ์ไปที่ใด
+            'next_queue': 'writer-tasks'  # Where to send results
         }),
         content_type='application/json'
     )
@@ -606,7 +622,7 @@ def create_content():
         'task_id': task_id,
         'status': 'started',
         'workflow': 'sequential',
-        'steps': ['research', 'write', 'edit', 'publish'],
+        'steps': ['research', 'write', 'edit'],
         'message': 'Content creation pipeline initiated'
     }), 202
 
@@ -623,7 +639,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. ตัวแทนค้นคว้า
+### 5. เอเจนต์วิจัย
 
 **ไฟล์: `src/agents/research/app.py`**
 
@@ -635,7 +651,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# เริ่มต้นไคลเอนต์
+# Initialize clients
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -643,7 +659,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -655,9 +671,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # เรียกใช้ Microsoft Foundry Models สำหรับการวิจัย
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -667,14 +683,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # อัปเดตสถานะ
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # ส่งต่อไปยังตัวแทนถัดไป (ผู้เขียน)
+    # Send to next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -713,7 +729,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. ตัวแทนเขียน
+### 6. เอเจนต์นักเขียน
 
 **ไฟล์: `src/agents/writer/app.py`**
 
@@ -731,7 +747,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -744,9 +760,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # เรียกใช้ Microsoft Foundry Models เพื่อเขียนบทความ
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -756,14 +772,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # อัปเดตสถานะ
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # ส่งไปยังบรรณาธิการ
+    # Send to editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -801,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. ตัวแทนแก้ไข
+### 7. เอเจนต์บรรณาธิการ
 
 **ไฟล์: `src/agents/editor/app.py`**
 
@@ -819,7 +835,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -831,9 +847,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # เรียกใช้ Microsoft Foundry Models เพื่อแก้ไข
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -843,7 +859,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # ทำเครื่องหมายงานว่าเสร็จสมบูรณ์
+    # Mark task as complete
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -877,26 +893,27 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. การติดตั้งและทดสอบ
+### 8. ปรับใช้และทดสอบ
+
+คำสั่งเหล่านี้ใช้ได้ **หลังจากที่คุณสร้างไฟล์โปรเจกต์ที่ขาดหายไปแล้วเท่านั้น** การเริ่มต้นเอเจนต์ Foundry แบบโต้ตอบเป็นเวิร์กโฟลว์แยกต่างหาก; มันไม่ได้สร้างดีไซน์ Service Bus นี้
 
 ```bash
-# ตัวเลือก ก: การปรับใช้แบบใช้แม่แบบ
-azd init
+# In your completed custom project
 azd up
 
-# ตัวเลือก ข: การปรับใช้แบบเอกสารเอเจนต์ (ต้องใช้ส่วนขยาย)
+# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> ดู [คำสั่ง AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) สำหรับตัวเลือกและธงทั้งหมดของ `azd ai`
+> ดู [คำสั่ง AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) สำหรับ `azd ai` ทุกธงและตัวเลือก
 
 ```bash
-# รับ URL ตัวควบคุม
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# สร้างเนื้อหา
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
@@ -908,7 +925,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "status": "started",
   "workflow": "sequential",
-  "steps": ["research", "write", "edit", "publish"],
+  "steps": ["research", "write", "edit"],
   "message": "Content creation pipeline initiated"
 }
 ```
@@ -919,7 +936,7 @@ TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ ผลลัพธ์ที่คาดหวัง (เสร็จสมบูรณ์):**
+**✅ ผลลัพธ์ที่คาดหวัง (เมื่อเสร็จ):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -947,11 +964,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## บทเรียน 2: รูปแบบการประสานงานแบบขนาน
+## บทที่ 2: รูปแบบการประสานงานแบบขนาน
 
-### การใช้งาน: ตัวรวบรวมข้อมูลค้นคว้าจากหลายแหล่ง
+### การใช้งาน: ตัวรวบรวมข้อมูลจากหลายแหล่งพร้อมกัน
 
-เราจะสร้างระบบแบบขนานที่รวบรวมข้อมูลจากหลายแหล่งพร้อมกัน
+มาสร้างระบบแบบขนานที่รวบรวมข้อมูลจากแหล่งหลายแห่งพร้อมกัน
 
 ### Orchestrator แบบขนาน
 
@@ -990,7 +1007,7 @@ def research_parallel():
         }
     )
     
-    # ส่งออกพร้อมกัน: ส่งไปยังตัวแทนทั้งหมดพร้อมกัน
+    # Fan-out: publish sequentially; workers may process concurrently.
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1025,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### ตรรกะการรวบรวมผลลัพธ์
+### ตรรกะการรวบรวม
 
 **ไฟล์: `src/agents/aggregator/app.py`**
 
@@ -1041,9 +1058,10 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# ติดตามผลลัพธ์ต่อภารกิจ
-task_results = defaultdict(list)
-expected_agents = 4  # เว็บ, วิชาการ, ข่าว, สังคม
+# Single-process demo only: not durable or shared across replicas.
+# Production: use durable unique (task_id, agent_type) result records.
+task_results = defaultdict(dict)
+expected_agents = 4  # web, academic, news, social
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1051,29 +1069,29 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # เก็บผลลัพธ์
-    task_results[task_id].append({
+    # Store result
+    task_results[task_id][agent_type] = {
         'agent': agent_type,
         'data': result
-    })
+    }
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # ตรวจสอบว่าเอเจนต์ทั้งหมดเสร็จสิ้นแล้วหรือไม่ (fan-in)
+    # Check if all agents completed (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # รวมผลลัพธ์
+        # Combine results
         aggregated = {
             'query': message_data['query'],
-            'sources': task_results[task_id],
-            'summary': generate_summary(task_results[task_id])
+            'sources': list(task_results[task_id].values()),
+            'summary': generate_summary(list(task_results[task_id].values()))
         }
         
-        # ทำเครื่องหมายว่าสมบูรณ์
+        # Mark complete
         state_manager.complete_task(task_id, aggregated)
         
-        # ทำความสะอาด
+        # Clean up
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1105,129 +1123,94 @@ if __name__ == '__main__':
     main()
 ```
 
-**ประโยชน์ของรูปแบบแบบขนาน:**
-- ⚡ **เร็วขึ้น 4 เท่า** (ตัวแทนทำงานพร้อมกัน)
-- 🔄 **ทนทานต่อความล้มเหลว** (รับผลบางส่วนได้)
-- 📈 **ขยายขนาดได้** (เพิ่มตัวแทนได้ง่าย)
+**ประโยชน์ของรูปแบบขนาน:**
+- ⚡ **ลดความหน่วงได้** (ถูกจำกัดโดยคนงานที่ช้าที่สุดบวกภาระการประสานงาน)
+- 🔄 **รองรับผลลัพธ์บางส่วนได้** ด้วยกำหนดเวลาชัดเจนและนโยบายจัดการข้อผิดพลาด (ยังไม่ได้ทำในตัวรวบรวมพื้นฐาน)
+- 📈 **ปรับขนาดได้** (เพิ่มเอเจนต์ได้ง่าย)
 
 ---
 
-## แบบฝึกหัดจริง
+## แบบฝึกหัดปฏิบัติ
 
-### แบบฝึกหัด 1: เพิ่มการจัดการหมดเวลา ⭐⭐ (ระดับกลาง)
+### แบบฝึกหัด 1: เพิ่มการจัดการหมดเวลารอ ⭐⭐ (กลาง)
 
-**เป้าหมาย**: นำตรรกะหมดเวลาไปใช้ เพื่อไม่ให้ตัวรวบรวมรอช้าตัวแทนที่ช้าเกินไป
+**เป้าหมาย**: ใช้ตรรกะหมดเวลารอเพื่อให้ตัวรวบรวมไม่ต้องรอเอเจนต์ที่ช้าจนเกินไป
+
+**จุดเริ่มต้น:** รันการจำลองกำหนดเวลาท้องถิ่นนี้ก่อนนำไปผนวกรวมเข้ากับเวิร์กเกอร์คิว การตรวจสอบหมดเวลาที่ทำเฉพาะเมื่อมีข้อความใหม่มาเท่านั้นจะไม่ทำงานถ้าเอเจนต์ที่ขาดหายไม่ส่งข้อความใด ๆ
 
 **ขั้นตอน**:
 
-1. **เพิ่มการติดตามหมดเวลาในตัวรวบรวม:**
+1. **เพิ่มการติดตามหมดเวลารอในตัวรวบรวม:**
 
 ```python
-from datetime import datetime, timedelta
+import asyncio
 
-task_timeouts = {}  # task_id -> เวลา หมดอายุ
+async def simulated_agent(name, delay):
+    await asyncio.sleep(delay)
+    return {'agent': name, 'result': 'done'}
 
-def process_result(message_data):
-    task_id = message_data['task_id']
-    
-    # ตั้งเวลาหมดเวลาเมื่อได้รับผลลัพธ์แรก
-    if task_id not in task_timeouts:
-        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
-    
-    task_results[task_id].append({
-        'agent': message_data['agent_type'],
-        'data': message_data['result']
-    })
-    
-    # ตรวจสอบว่าสมบูรณ์หรือเวลาหมดอายุแล้ว
-    if len(task_results[task_id]) == expected_agents or \
-       datetime.utcnow() > task_timeouts[task_id]:
-        
-        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
-        
-        aggregated = {
-            'query': message_data['query'],
-            'sources': task_results[task_id],
-            'completed_agents': len(task_results[task_id]),
-            'timed_out': len(task_results[task_id]) < expected_agents
-        }
-        
-        state_manager.complete_task(task_id, aggregated)
-        
-        # ทำความสะอาด
-        del task_results[task_id]
-        del task_timeouts[task_id]
+async def main():
+    tasks = [asyncio.create_task(simulated_agent(name, delay))
+             for name, delay in [('web', 0.1), ('academic', 0.2),
+                                 ('news', 0.3), ('social', 3)]]
+    done, pending = await asyncio.wait(tasks, timeout=1)
+    results = [task.result() for task in done]
+    for task in pending:
+        task.cancel()
+    await asyncio.gather(*pending, return_exceptions=True)
+    print({'completed_agents': len(results), 'timed_out': bool(pending)})
+    assert len(results) == 3 and pending
+
+asyncio.run(main())
 ```
 
-2. **ทดสอบกับการหน่วงเวลาเทียม:**
+2. **ผลลัพธ์ที่คาดหวัง:**
 
-```python
-# ในตัวแทนหนึ่งตัว เพิ่มความล่าช้าเพื่อจำลองการประมวลผลช้า
-import time
-time.sleep(35)  # เกินเวลาหมดอายุ 30 วินาที
+```text
+{'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **ติดตั้งและตรวจสอบ:**
+3. **การผนวกรวมกับระบบคิว (งานออกแบบ):** เก็บกำหนดเวลาส่งงานและเอเจนต์ที่คาดหวังเมื่อสร้างงาน, รันการตรวจค้นกำหนดเวลาเป็นระยะโดยแยกจากผลลัพธ์ที่ได้รับ, สรุปผลลัพธ์บางส่วนอย่างอะตอมิก, และละเว้นข้อความซ้ำหรือล่าหลังสำหรับงานที่สรุปแล้ว การหมดเวลารอภายในระบบท้องถิ่นจะไม่ยกเลิกเอเจนต์ระยะไกล
+
+สำหรับโปรเจกต์ที่คุณสร้างเท่านั้น:
 
 ```bash
 azd deploy aggregator
 
-# ส่งงาน
+# Submit task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# ตรวจสอบผลลัพธ์หลังจาก 30 วินาที
+# Check results after 30 seconds
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ เกณฑ์ความสำเร็จ:**
-- ✅ งานเสร็จภายใน 30 วินาที แม้ว่าตัวแทนบางตัวจะไม่เสร็จ
-- ✅ การตอบกลับแสดงผลลัพธ์บางส่วน (`"timed_out": true`)
-- ✅ คืนค่าผลลัพธ์ที่มี (3 จาก 4 ตัวแทน)
+- ✅ การทดสอบในพื้นที่คืนค่าหลังครบกำหนดเวลาหนึ่งวินาทีแม้เอเจนต์ยังไม่เสร็จ
+- ✅ การตอบกลับระบุผลลัพธ์บางส่วน (`"timed_out": true`)
+- ✅ ผลลัพธ์ที่มีอยู่ถูกส่งคืน (3 จาก 4 เอเจนต์)
 
 **เวลา**: 20-25 นาที
 
 ---
 
-### แบบฝึกหัด 2: นำตรรกะลองใหม่มาใช้ ⭐⭐⭐ (ขั้นสูง)
+### แบบฝึกหัด 2: ใช้ตรรกะลองใหม่ ⭐⭐⭐ (ขั้นสูง)
 
-**เป้าหมาย**: ลองงานตัวแทนที่ล้มเหลวใหม่โดยอัตโนมัติก่อนยอมแพ้
+**เป้าหมาย**: ให้ลองทำงานที่ล้มเหลวของเอเจนต์ใหม่โดยอัตโนมัติก่อนยอมแพ้
 
 **ขั้นตอน**:
 
-1. **เพิ่มการติดตามลองใหม่ใน orchestrator:**
+1. **ใช้จำนวนการส่งมอบของ Service Bus แทนการใส่ตัวนับลองใหม่เอง:**
 
 ```python
-from dataclasses import dataclass
-from typing import Dict
-
-@dataclass
-class RetryConfig:
-    max_retries: int = 3
-    backoff_seconds: int = 5
-
-retry_counts: Dict[str, int] = {}  # message_id -> จำนวนครั้งที่ลองใหม่
-
-def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
-    """Send message with retry metadata"""
-    message_id = message_data.get('message_id', str(uuid.uuid4()))
-    message_data['message_id'] = message_id
-    message_data['retry_count'] = retry_counts.get(message_id, 0)
-    message_data['max_retries'] = retry_config.max_retries
-    
-    sender = servicebus_client.get_queue_sender(queue_name)
-    message = ServiceBusMessage(
-        body=json.dumps(message_data),
-        content_type='application/json',
-        message_id=message_id
-    )
-    
-    with sender:
-        sender.send_messages(message)
+import json
+import time
+# Integration fragment: use a live peek-lock ServiceBusReceiver.
+# Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **เพิ่มตัวจัดการลองใหม่ในตัวแทน:**
+2. **เพิ่มตัวจัดการลองใหม่ให้เอเจนต์:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,31 +1218,21 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # ประมวลผลข้อความ
+        # Process the message
         process_func(message_data)
         
-        # สำเร็จ - เสร็จสมบูรณ์
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
-        message_id = message.message_id
-        retry_count = message_data.get('retry_count', 0)
-        max_retries = message_data.get('max_retries', 3)
-        
-        if retry_count < max_retries:
-            # ลองใหม่: เลิกและใส่คิวใหม่พร้อมนับเพิ่ม
-            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
-            
-            message_data['retry_count'] = retry_count + 1
-            
-            # ส่งกลับไปยังคิวเดิมพร้อมหน่วงเวลา
-            time.sleep(5 * (retry_count + 1))  # การหน่วงเวลาทวีคูณ
-            send_with_retry(queue_name, message_data, RetryConfig())
-            
-            receiver.complete_message(message)  # ลบต้นฉบับ
+        if message.delivery_count < 4:
+            # Bounded exponential delay: 5s, 10s, 20s.
+            # Renew the lock if processing + waiting can exceed its duration.
+            time.sleep(5 * 2 ** (message.delivery_count - 1))
+            receiver.abandon_message(message)
         else:
-            # เกินจำนวนลองใหม่สูงสุด - ย้ายไปยังคิวจดหมายตาย
-            print(f"❌ Max retries exceeded for message {message_id}")
+            # Max retries exceeded - move to dead letter queue
+            print(f"❌ Max attempts exceeded for message {message.message_id}")
             receiver.dead_letter_message(
                 message,
                 reason="MaxRetriesExceeded",
@@ -1267,13 +1240,13 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **ตรวจสอบคิวจดหมายตาย:**
+3. **ตรวจสอบคิวจดหมายเสีย:**
 
 ```python
 def monitor_dead_letters():
     """Check dead letter queue for failed messages"""
     receiver = servicebus_client.get_queue_receiver(
-        'research-queue',
+        'research-tasks',
         sub_queue='deadletter'
     )
     
@@ -1286,31 +1259,31 @@ def monitor_dead_letters():
 ```
 
 **✅ เกณฑ์ความสำเร็จ:**
-- ✅ งานล้มเหลวลองใหม่อัตโนมัติ (สูงสุด 3 ครั้ง)
-- ✅ การหน่วงเวลาขึ้นเป็นทวีคูณระหว่างการลองใหม่ (5s, 10s, 15s)
-- ✅ หลังลองใหม่ครบ จะส่งข้อความไปคิวจดหมายตาย
-- ✅ สามารถตรวจสอบและเล่นซ้ำข้อความในคิวจดหมายตายได้
+- ✅ งานที่ล้มเหลวถูกลองใหม่อัตโนมัติ (สูงสุด 3 ครั้ง)
+- ✅ การหน่วงเวลาที่เพิ่มขึ้นตามลำดับระหว่างลองใหม่ (5ว, 10ว, 20ว) พร้อมต่ออายุล็อกข้อความที่จำเป็น
+- ✅ หลังจากลองสูงสุด ข้อความจะถูกส่งไปที่คิวจดหมายเสีย
+- ✅ สามารถตรวจสอบข้อความจดหมายเสียได้; การเล่นซ้ำต้องมีเวิร์กโฟลว์กู้คืนที่ให้ผลเหมือนเดิมแยกต่างหาก
 
 **เวลา**: 30-40 นาที
 
 ---
 
-### แบบฝึกหัด 3: นำวงจรเบรกเกอร์มาใช้ ⭐⭐⭐ (ขั้นสูง)
+### แบบฝึกหัด 3: ใช้ Circuit Breaker ⭐⭐⭐ (ขั้นสูง)
 
-**เป้าหมาย**: ป้องกันความล้มเหลวลามโดยการหยุดคำขอไปยังตัวแทนที่ล้มเหลว
+**เป้าหมาย**: ป้องกันความล้มเหลวเป็นทอดโดยหยุดคำขอต่อเอเจนต์ที่ล้มเหลว
 
 **ขั้นตอน**:
 
-1. **สร้างคลาสวงจรเบรกเกอร์:**
+1. **สร้างคลาส circuit breaker:**
 
 ```python
 from enum import Enum
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # การทำงานปกติ
-    OPEN = "open"          # ล้มเหลว ปฏิเสธคำขอ
-    HALF_OPEN = "half_open"  # ทดสอบว่าฟื้นตัวหรือไม่
+    CLOSED = "closed"      # Normal operation
+    OPEN = "open"          # Failing, reject requests
+    HALF_OPEN = "half_open"  # Testing if recovered
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1323,8 +1296,8 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # ตรวจสอบว่าหมดเวลาหรือยัง
-            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+            # Check if timeout expired
+            if datetime.now(timezone.utc) - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
             else:
@@ -1333,7 +1306,8 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # สำเร็จ
+            # Success
+            self.failure_count = 0 # Count consecutive failures only
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1343,19 +1317,19 @@ class CircuitBreaker:
             
         except Exception as e:
             self.failure_count += 1
-            self.last_failure_time = datetime.utcnow()
+            self.last_failure_time = datetime.now(timezone.utc)
             
             if self.failure_count >= self.failure_threshold:
                 self.state = CircuitState.OPEN
                 print(f"🔴 Circuit breaker: OPEN (too many failures)")
             
-            raise e
+            raise
 ```
 
-2. **ประยุกต์ใช้กับการเรียกตัวแทน:**
+2. **ใช้กับการเรียกเอเจนต์:**
 
 ```python
-# ในออร์เคสตราเตอร์
+# In orchestrator
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,89 +1345,89 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # ดำเนินการต่อกับเอเจนต์อื่น ๆ
+        # Continue with other agents
 ```
 
-3. **ทดสอบวงจรเบรกเกอร์:**
+วงจรนี้ปกป้อง **การส่งข้อมูล** ไม่ใช่การเสร็จสิ้นโดยคนทำงานระยะไกล: การนำข้อความเข้าคิวสำเร็จไม่ได้หมายความว่าเอเย่นต์ยังมีชีวิตอยู่ `send_message` คือฟังก์ชันตัวส่งของแอปพลิเคชันของคุณ สำหรับวงจรการทำงาน ให้ป้อนความล้มเหลว/หมดเวลาของงานที่สังเกตลงในตัวประสานงานที่ทนทาน คลาสในหน่วยความจำนี้เป็นตัวอย่างแบบเธรดเดียว ไม่ใช่วงจรเบรกเกอร์แบบกระจาย
 
-```bash
-# จำลองความล้มเหลวซ้ำๆ (หยุดเอเจนต์หนึ่งตัว)
-az containerapp stop --name web-research-agent --resource-group rg-agents
+3. **ทดสอบวงจรเบรกเกอร์ในเครื่อง:**
 
-# ส่งคำขอหลายรายการ
-for i in {1..10}; do
-  curl -X POST $ORCHESTRATOR_URL/research-parallel \
-    -H "Content-Type: application/json" \
-    -d '{"query": "test query '$i'"}'
-  sleep 2
-done
-
-# ตรวจสอบบันทึก — ควรเห็นวงจรเปิดหลังจากล้มเหลว 5 ครั้ง
-# ใช้ Azure CLI สำหรับบันทึกแอปคอนเทนเนอร์:
-az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```python
+# Run after the class definition; no Azure changes required.
+circuit = CircuitBreaker(failure_threshold=5, timeout_seconds=0)
+def fail():
+    raise RuntimeError("simulated failure")
+for _ in range(5):
+    try:
+        circuit.call(fail)
+    except RuntimeError:
+        pass
+assert circuit.state == CircuitState.OPEN
+assert circuit.call(lambda: "recovered") == "recovered"
+assert circuit.state == CircuitState.CLOSED
+print("Circuit breaker recovery verified")
 ```
 
 **✅ เกณฑ์ความสำเร็จ:**
-- ✅ หลังล้มเหลว 5 ครั้ง วงจรเปิด (ปฏิเสธคำขอ)
-- ✅ หลัง 60 วินาที วงจรเปิดครึ่งหนึ่ง (ทดสอบการกู้คืน)
-- ✅ ตัวแทนอื่่นทำงานต่อไปได้ตามปกติ
-- ✅ วงจรปิดเองเมื่อเกิดการกู้คืน
+- ✅ หลังจากเกิดความล้มเหลว 5 ครั้ง วงจรเปิด (ปฏิเสธคำขอ)
+- ✅ หลังจาก 60 วินาที วงจรจะเปิดครึ่งหนึ่ง (ทดสอบการกู้คืน)
+- ✅ เอเย่นต์อื่น ๆ ยังคงทำงานตามปกติ
+- ✅ วงจรจะปิดโดยอัตโนมัติเมื่อเอเย่นต์ฟื้นตัว
 
-**เวลา**: 40-50 นาที
+**เวลาที่ใช้**: 40-50 นาที
 
 ---
 
-## การตรวจสอบและแก้ไขปัญหา
+## การตรวจสอบและแก้ไขข้อผิดพลาด
 
 ### การติดตามแบบกระจายด้วย Application Insights
 
 **ไฟล์: `src/shared/tracing.py`**
 
 ```python
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.samplers import AlwaysOnSampler
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
-# กำหนดค่าการติดตาม
-config_integration.trace_integrations(['requests', 'logging'])
-
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# สร้างตัวติดตาม
-tracer = Tracer(
-    exporter=AzureExporter(connection_string=connection_string),
-    sampler=AlwaysOnSampler()
-)
+# Configure once per process. Message send/receive trace-context propagation
+# and agent attributes on exceptions need explicit instrumentation.
+if connection_string:
+    configure_azure_monitor(connection_string=connection_string, logger_name=__name__)
+tracer = trace.get_tracer(__name__)
 
-# กำหนดค่าการบันทึกข้อมูล
+# Configure logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
 
-def trace_agent_call(agent_name, task_id, operation):
+def trace_agent_call(agent_name, task_id, operation_name, operation):
     """Trace agent operations"""
-    with tracer.span(name=f'{agent_name}.{operation}') as span:
-        span.add_attribute('agent', agent_name)
-        span.add_attribute('task_id', task_id)
-        span.add_attribute('operation', operation)
+    with tracer.start_as_current_span(f'agent.{agent_name}.{operation_name}', kind=SpanKind.CLIENT) as span:
+        span.set_attribute('agent', agent_name)
+        span.set_attribute('task_id', task_id)
+        span.set_attribute('operation', operation_name)
         
         try:
             result = operation()
-            span.add_attribute('status', 'success')
+            span.set_attribute('status', 'success')
+            logger.info('Agent operation completed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             return result
         except Exception as e:
-            span.add_attribute('status', 'error')
-            span.add_attribute('error', str(e))
+            span.set_attribute('status', 'error')
+            logger.exception('Agent operation failed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             raise
 ```
 
-### คำสั่งสอบถาม Application Insights
+### คิวรี Application Insights
 
-**ติดตามเวิร์กโฟลว์ตัวแทนหลายตัว:**
+**ติดตามเวิร์กโฟลว์หลายเอเย่นต์:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1463,7 +1437,7 @@ traces
 | order by timestamp asc
 ```
 
-**เปรียบเทียบประสิทธิภาพตัวแทน:**
+**เปรียบเทียบประสิทธิภาพเอเย่นต์:**
 
 ```kusto
 // Compare agent execution times
@@ -1494,22 +1468,24 @@ exceptions
 
 ## การวิเคราะห์ค่าใช้จ่าย
 
-### ค่าใช้จ่ายระบบตัวแทนหลายตัว (ประมาณรายเดือน)
+### ต้นทุนระบบหลายเอเย่นต์ (ประมาณรายเดือน)
 
-| ส่วนประกอบ | การตั้งค่า | ค่าใช้จ่าย |
+ตัวเลขวางแผนเพื่อภาพประกอบเท่านั้น ไม่ใช่การเสนอราคา: ยอดรวมด้านล่างคือ **$240-565/เดือน** โปรดตรวจสอบอัตราในภูมิภาคปัจจุบัน ชั่วโมงสำเนาทำงาน/ว่าง การผสมผสานของโทเค็นนำเข้า/ส่งออก ที่จัดเก็บ และเทเลเมทรี Serverless ไม่มีขั้นต่ำสำหรับกำลังประมวลผลที่จัดสรร แต่ยังคิดค่าบริการสำหรับคำขอและที่จัดเก็บ
+
+| องค์ประกอบ | การกำหนดค่า | ค่าใช้จ่าย |
 |-----------|--------------|------|
 | **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 ตัวแทน** | 4 Container Apps (0.5 vCPU, 1GB แต่ละตัว) | $60-120 |
-| **Service Bus** | ระดับมาตรฐาน, 10 ล้านข้อความ | $10-20 |
-| **Cosmos DB** | Serverless, พื้นที่ 5GB, 1 ล้าน RUs | $25-50 |
-| **Blob Storage** | พื้นที่ 10GB, 100,000 การดำเนินการ | $5-10 |
-| **Application Insights** | การดึงข้อมูล 5GB | $10-15 |
-| **Microsoft Foundry Models** | gpt-4.1, 10 ล้านโทเคน | $100-300 |
-| **รวม** | | **$240-565/เดือน** |
+| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB แต่ละตัว) | $60-120 |
+| **Service Bus** | ระดับมาตรฐาน, 10M ข้อความ | $10-20 |
+| **Cosmos DB** | Serverless, ที่จัดเก็บ 5GB, 1M RUs | $25-50 |
+| **Blob Storage** | ที่จัดเก็บ 10GB, 100K การดำเนินการ | $5-10 |
+| **Application Insights** | การดูดซึม 5GB | $10-15 |
+| **Microsoft Foundry Models** | gpt-4.1, 10M โทเค็น | $100-300 |
+| **รวมทั้งหมด** | | **$240-565/เดือน** |
 
-### กลยุทธ์การปรับค่าใช้จ่าย
+### กลยุทธ์การเพิ่มประสิทธิภาพค่าใช้จ่าย
 
-1. **ใช้ serverless เมื่อทำได้:**
+1. **ใช้ serverless เมื่อเป็นไปได้:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1518,23 +1494,23 @@ exceptions
    }
    ```
 
-2. **ลดขนาดตัวแทนเป็นศูนย์เมื่อว่างงาน:**
+2. **ปรับขนาดเอเย่นต์เป็นศูนย์เมื่อว่าง:**
    ```bicep
    scale: {
-     minReplicas: 0  // Scale to zero when no messages
+     minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
      maxReplicas: 10
    }
    ```
 
-3. **ใช้การทำงานแบบแบตช์สำหรับ Service Bus:**
+3. **ใช้การประมวลผลแบบกลุ่มสำหรับ Service Bus:**
    ```python
-   # ส่งข้อความเป็นชุด (ถูกกว่า)
+   # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **เก็บแคชผลลัพธ์ที่ใช้บ่อย:**
+4. **แคชผลลัพธ์ที่ใช้งานบ่อย:**
    ```python
-   # ใช้ Azure Cache สำหรับ Redis
+   # Use Azure Cache for Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
@@ -1545,100 +1521,99 @@ exceptions
 
 ### ✅ ควรทำ:
 
-1. **ใช้การทำงานแบบเอื้อผลลัพธ์ซ้ำได้ (idempotent)**
+1. **ใช้การดำเนินการที่ไม่เปลี่ยนแปลงผลลัพธ์ (idempotent)**
    ```python
-   # ตัวแทนสามารถประมวลผลข้อความเดียวกันได้หลายครั้งอย่างปลอดภัย
+   # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
-       if state_manager.task_exists(task_id):
-           print(f"Task {task_id} already processed, skipping")
-           return
-       # กำลังประมวลผลงาน...
+       raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **บันทึกเหตุการณ์อย่างครบถ้วน**
+2. **ทำการบันทึกอย่างครบถ้วน**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **ใช้รหัสเชื่อมโยง (correlation IDs)**
+3. **ใช้หมายเลขประจำตัวการเชื่อมโยง (correlation IDs)**
    ```python
-   # ส่งต่อ task_id ผ่านกระบวนการทั้งหมด
+   # Pass task_id through entire workflow
    message_data = {
-       'task_id': task_id,  # รหัสความสัมพันธ์
+       'task_id': task_id,  # Correlation ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **ตั้งค่าเวลาหมดอายุของข้อความ (TTL)**
+4. **ตั้งเวลาหมดอายุข้อความ (TTL)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **ตรวจสอบคิวจดหมายตาย (dead letter queues)**
+5. **ตรวจสอบคิวจดหมายตาย**
    ```python
-   # การตรวจสอบข้อความที่ล้มเหลวอย่างสม่ำเสมอ
+   # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
-### ❌ หลีกเลี่ยง:
+### ❌ ไม่ควรทำ:
 
-1. **อย่าสร้างการขึ้นต่อกันแบบวงกลม**
+1. **อย่าสร้างการพึ่งพาแบบวงกลม**
    ```python
-   # ❌ ไม่ดี: ตัวแทน A → ตัวแทน B → ตัวแทน A (ลูปไม่สิ้นสุด)
-   # ✅ ดี: กำหนดกราฟมีทิศทางไม่มีวงจร (DAG) ที่ชัดเจน
+   # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
+   # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **อย่าบล็อกเธรดของตัวแทน**
+2. **อย่าบล็อกเธรดของเอเย่นต์**
    ```python
-   # ❌ แย่: การรอแบบซิงโครนัส
+   # ❌ BAD: Synchronous wait
    while not task_complete:
        time.sleep(1)
    
-   # ✅ ดี: ใช้ callback จากคิวข้อความ
+   # ✅ GOOD: Use message queue callbacks
    ```
 
 3. **อย่ามองข้ามความล้มเหลวบางส่วน**
    ```python
-   # ❌ ไม่ดี: ถ้างานตัวแทนตัวใดตัวหนึ่งล้มเหลวให้ล้มเหลวทั้งกระบวนการทำงาน
-   # ✅ ดี: คืนผลลัพธ์บางส่วนพร้อมตัวชี้วัดข้อผิดพลาด
+   # ❌ BAD: Fail entire workflow if one agent fails
+   # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **อย่าใช้การลองซ้ำแบบไม่จำกัด**
+4. **อย่าใช้การลองใหม่แบบไม่จำกัด**
    ```python
-   # ❌ ไม่ดี: พยายามใหม่ตลอดไป
-   # ✅ ดี: max_retries = 3, จากนั้นส่งไปที่ dead letter
+   # ❌ BAD: retry forever
+   # ✅ GOOD: max_retries = 3, then dead letter
    ```
 
 ---
 
 ## คู่มือแก้ไขปัญหา
 
-### ปัญหา: ข้อความค้างในคิว
+### ปัญหา: ข้อความติดอยู่ในคิว
 
 **อาการ:**
-- ข้อความสะสมอยู่ในคิว
-- ตัวแทนไม่ประมวลผล
-- สถานะงานติดที่ "รอดำเนินการ"
+- ข้อความสะสมในคิว
+- เอเย่นต์ไม่ประมวลผล
+- สถานะงานติดที่ "pending"
 
 **การวินิจฉัย:**
 ```bash
-# ตรวจสอบความลึกของคิว
+# Check queue depth
 az servicebus queue show \
+  --resource-group "$RG_NAME" \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# ตรวจสอบบันทึกของเอเย่นต์โดยใช้ Azure CLI
+# Check agent logs using Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **วิธีแก้ไข:**
 
-1. **เพิ่มจำนวนตัวแทน:**
+1. **เพิ่มจำนวนสำเนาเอเย่นต์:**
    ```bash
    az containerapp update \
+     --resource-group "$RG_NAME" \
      --name research-agent \
      --min-replicas 3 \
      --max-replicas 10
@@ -1647,6 +1622,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 2. **ตรวจสอบคิวจดหมายตาย:**
    ```bash
    az servicebus queue show \
+     --resource-group "$RG_NAME" \
      --namespace-name mybus \
      --name research-tasks \
      --query "countDetails.deadLetterMessageCount"
@@ -1654,36 +1630,36 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### ปัญหา: งานหมดเวลาหรือไม่เสร็จสมบูรณ์
+### ปัญหา: หมดเวลางาน/ไม่เสร็จสิ้น
 
 **อาการ:**
-- สถานะงานค้างที่ "กำลังดำเนินการ"
-- ตัวแทนบางตัวเสร็จ บางตัวไม่เสร็จ
+- สถานะงานคงที่ "in_progress"
+- เอเย่นต์บางตัวเสร็จ บางตัวไม่เสร็จ
 - ไม่มีข้อความแสดงข้อผิดพลาด
 
 **การวินิจฉัย:**
 ```bash
-# ตรวจสอบสถานะงาน
+# Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# ตรวจสอบ Application Insights
-# เรียกใช้คำสั่งค้นหา: traces | where customDimensions.task_id == "..."
+# Check Application Insights
+# Run query: traces | where customDimensions.task_id == "..."
 ```
 
 **วิธีแก้ไข:**
 
-1. **เพิ่มการหมดเวลาในตัวรวบรวมข้อมูล (แบบฝึกหัด 1)**
+1. **กำหนดเวลา timeout ในตัวรวบรวม (แบบฝึกหัด 1)**
 
-2. **ตรวจสอบความล้มเหลวของตัวแทนโดยใช้ Azure Monitor:**
+2. **ตรวจสอบความล้มเหลวของเอเย่นต์โดยใช้ Azure Monitor:**
    ```bash
-   # ดูบันทึกผ่าน azd monitor
+   # View logs via azd monitor
    azd monitor --logs
    
-   # หรือใช้ Azure CLI เพื่อตรวจสอบบันทึกของแอปคอนเทนเนอร์เฉพาะ
+   # Or use Azure CLI to check specific container app logs
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **ยืนยันว่าตัวแทนทั้งหมดกำลังทำงาน:**
+3. **ยืนยันว่าเอเย่นต์ทุกตัวกำลังทำงาน:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1698,44 +1674,44 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [รูปแบบการออกแบบ Multi-Agent](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
 ### ขั้นตอนถัดไปในหลักสูตรนี้
 - ← ก่อนหน้า: [การวางแผนความจุ](capacity-planning.md)
 - → ถัดไป: [การเลือก SKU](sku-selection.md)
-- 🏠 [หน้าหลักของหลักสูตร](../../README.md)
+- 🏠 [หน้าหลักหลักสูตร](../../README.md)
 
 ### ตัวอย่างที่เกี่ยวข้อง
 - [ตัวอย่างไมโครเซอร์วิส](../../../../examples/microservices) - รูปแบบการสื่อสารบริการ
-- [ตัวอย่างโมเดล Microsoft Foundry](../../../../examples/azure-openai-chat) - การรวม AI
+- [ตัวอย่าง Microsoft Foundry Models](../../../../examples/azure-openai-chat) - การบูรณาการ AI
 
 ---
 
 ## สรุป
 
 **คุณได้เรียนรู้:**
-- ✅ รูปแบบการประสานงาน 5 แบบ (เรียงลำดับ, พร้อมกัน, เป็นลำดับชั้น, ขับเคลื่อนด้วยเหตุการณ์, ฉันทามติ)
-- ✅ สถาปัตยกรรม multi-agent บน Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ การจัดการสถานะข้ามตัวแทนกระจาย
-- ✅ การจัดการหมดเวลา, การลองซ้ำ, และสวิตช์วงจร
-- ✅ การตรวจสอบและแก้ไขระบบกระจาย
-- ✅ กลยุทธ์การปรับแต่งค่าใช้จ่าย
+- ✅ รูปแบบการประสานงานห้ารูปแบบ (เรียงลำดับ, ขนาน, ลำดับชั้น, เหตุการณ์, ฉันทามติ)
+- ✅ สถาปัตยกรรมหลายเอเย่นต์บน Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ การจัดการสถานะระหว่างเอเย่นต์ที่กระจายกัน
+- ✅ การจัดการเวลาหมดอายุ, การลองใหม่, วงจรเบรกเกอร์
+- ✅ การตรวจสอบและแก้ไขข้อผิดพลาดในระบบกระจาย
+- ✅ กลยุทธ์การเพิ่มประสิทธิภาพค่าใช้จ่าย
 
-**ข้อคิดสำคัญ:**
-1. **เลือกแบบแผนที่เหมาะสม** - เรียงลำดับสำหรับเวิร์กโฟลว์ที่ต้องการความถูกต้อง, พร้อมกันเพื่อความเร็ว, ขับเคลื่อนด้วยเหตุการณ์เพื่อความยืดหยุ่น
-2. **จัดการสถานะอย่างระมัดระวัง** - ใช้ Cosmos DB หรือระบบที่คล้ายกันสำหรับสถานะร่วม
-3. **จัดการความล้มเหลวอย่างมีประสิทธิภาพ** - หมดเวลา, การลองซ้ำ, สวิตช์วงจร, คิวจดหมายตาย
-4. **ตรวจสอบทุกอย่าง** - การติดตามแบบกระจายจำเป็นสำหรับการแก้ไขข้อผิดพลาด
-5. **ปรับแต่งค่าใช้จ่าย** - ขยายไปเป็นศูนย์, ใช้เซิร์ฟเวอร์เลส, ใช้แคช
+**ข้อคิดหลัก:**
+1. **เลือกแบบที่เหมาะสม** - ใช้แบบเรียงลำดับสำหรับเวิร์กโฟลว์ที่มีลำดับ, ขนานสำหรับความเร็ว, เหตุการณ์สำหรับความยืดหยุ่น
+2. **จัดการสถานะอย่างระมัดระวัง** - ใช้ Cosmos DB หรือสิ่งที่คล้ายกันสำหรับสถานะที่ใช้ร่วมกัน
+3. **จัดการความล้มเหลวอย่างมีสติ** - เวลาหมดอายุ, การลองใหม่, วงจรเบรกเกอร์, คิวจดหมายตาย
+4. **ตรวจสอบทุกอย่าง** - การติดตามแบบกระจายมีความสำคัญสำหรับการแก้ไขข้อผิดพลาด
+5. **เพิ่มประสิทธิภาพค่าใช้จ่าย** - ปรับขนาดเป็นศูนย์, ใช้ serverless, นำแคชชิ่งไปใช้
 
 **ขั้นตอนถัดไป:**
 1. ทำแบบฝึกหัดปฏิบัติให้เสร็จ
-2. สร้างระบบ multi-agent สำหรับกรณีการใช้งานของคุณ
-3. ศึกษา [การเลือก SKU](sku-selection.md) เพื่อปรับแต่งประสิทธิภาพและค่าใช้จ่าย
+2. สร้างระบบหลายเอเย่นต์สำหรับกรณีการใช้งานของคุณ
+3. ศึกษา [การเลือก SKU](sku-selection.md) เพื่อเพิ่มประสิทธิภาพประสิทธิผลและค่าใช้จ่าย
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิดชอบ**:  
-เอกสารฉบับนี้ได้รับการแปลโดยใช้บริการแปลภาษาอัตโนมัติ [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้คำแปลมีความถูกต้อง โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่แม่นยำ เอกสารต้นฉบับในภาษาต้นทางถือเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลสำคัญแนะนำให้ใช้บริการแปลโดยนักแปลมืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดใดๆ ที่เกิดจากการใช้คำแปลนี้
+**ปฏิเสธความรับผิดชอบ**:
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) ขณะที่เราพยายามให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดขึ้นจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

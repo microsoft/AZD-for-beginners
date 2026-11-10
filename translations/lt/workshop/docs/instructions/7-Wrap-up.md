@@ -1,110 +1,110 @@
-# 7. Apibendrinimas ir tolesni žingsniai
+# 7. Apibendrinimas ir Tolimesni Žingsniai
 
-!!! tip "PAGRINDINIAI IŠSINEŠTI DALYKAI"
+!!! tip "PAGRINDINĖS IŠVEDIMO ŽINUTĖS YRA"
 
-    - [ ] AZD šablonai pagreitina AI programų kūrimą nuo dienų iki valandų
-    - [ ] Discovery → Deployment → Customization metodika suteikia struktūrizuotą mokymosi kelią
-    - [ ] GitHub Copilot su MCP serveriais leidžia natūralios kalbos būdu tyrinėti sudėtingas kodo bazes
-    - [ ] Microsoft Foundry suteikia integruotą stebėjimą, vertinimą ir saugumo testavimą
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. Ką pasiekėte
+## 1. Ką Pasiekei
 
-Sveikiname! Šioje dirbtuvėje sėkmingai atlikote:
+Sveikiname! Šiame mokymų užsiėmime tu sėkmingai:
 
 | Modulis | Pasiekimas |
 |:---|:---|
-| **Modulis 1** | Susipažinote su Azure Developer CLI ir pasirinkote AI šabloną |
-| **Modulis 2** | Išdiegėte ir patvirtinote pilną AI agentų sprendimą |
-| **Modulis 3** | Išardėte šabloną, kad suprastumėte jo architektūrą |
-| **Modulis 4** | Išnagrinėjote `azure.yaml` konfigūraciją ir gyvenimo ciklo hook'us |
-| **Modulis 5** | Priderinote šabloną pagal savo scenarijų |
-| **Modulis 6** | Saugiai nugriovėte infrastruktūrą ir valdėte išteklius |
+| **1 modulis** | Atradai Azure Developer CLI ir pasirinkai AI šabloną |
+| **2 modulis** | Įdiegėi ir patvirtinai pilną AI agentų sprendimą |
+| **3 modulis** | Išardžei šabloną, kad suprastum jo architektūrą |
+| **4 modulis** | Išnagrinėjai `azure.yaml` konfigūraciją ir gyvavimo ciklo kablius |
+| **5 modulis** | Priderinai šabloną savo pačiam scenarijui |
+| **6 modulis** | Saugaus infrastruktūros išardymo ir išteklių valdymo mokymo |
 
 ---
 
-## 2. Pagrindinės įsisavintos sąvokos
+## 2. Svarbiausios Įgytos Žinios
 
 ### Azure Developer CLI (azd)
-- `azd init` - Inicializuoti projektus iš šablonų
-- `azd up` - Paruošti ir išdiegti vienu komandu
-- `azd env` - Valdyti aplinkos kintamuosius
-- `azd down` - Saugiai pašalinti išteklius
+- `azd init` - Projektų inicijavimas iš šablonų
+- `azd up` - Vienu komandos įrašu resursų parengimas ir diegimas
+- `azd env` - Aplinkos kintamųjų valdymas
+- `azd down` - Išteklių saugus išvalymas
 
 ### AZD šablono struktūra
-- `azure.yaml` - Konfigūracija ir diegimo hook'ai
-- `infra/` - Bicep infrastruktūra kaip kodas
+- `azure.yaml` - Konfigūracijos ir diegimo kabliai
+- `infra/` - Bicep infrastruktūros kaip kodo aprašymas
 - `src/` - Programos šaltinio kodas
-- `scripts/` - Automatizacijos ir konfigūracijos scenarijai
+- `scripts/` - Automatizavimo ir nustatymo scenarijai
 
 ### Microsoft Foundry galimybės
-- AI Agent Service intelektualiems asistentams
-- File Search ir Azure AI Search žinių gavimui
-- Integruotas sekimas, stebėjimas ir vertinimas
-- Red teaming AI saugumo patikrai
+- AI agentų paslauga išmaniems asistentams
+- Failų paieška ir Azure AI Paieška žinių gavimui
+- Integruotas sekimas, stebėjimas ir įvertinimas
+- Raudonosios komandos metodas AI saugumo patikrinimui
 
 ---
 
-## 3. Tęskite savo mokymosi kelią
+## 3. Toliau Tęsk Mokymąsi
 
-### Rekomenduojami tolesni žingsniai
+### Rekomenduojami Tolimesni Žingsniai
 
-| Kryptis | Išteklius | Laikas |
+| Kelias | Šaltinis | Laikas |
 |:---|:---|:---|
-| **Užbaigti kursą** | [AZD pradedantiesiems kursas](../../README.md) | 8-12 valandų |
+| **Baigti kursą** | [AZD pradedantiesiems mokymo programa](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Savarankiškai |
 | **Išbandyti kitą šabloną** | [Microsoft Foundry šablonai](https://ai.azure.com/templates) | 1-2 valandos |
-| **Gilesnis įsigilinimas** | [Azure Developer CLI dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Nuolat |
-| **Bendruomenė** | [Azure Discord](https://aka.ms/foundry/discord) | Prisijunkite šiandien! |
+| **Gilintis** | [Azure Developer CLI dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Nuolatinis |
+| **Bendruomenė** | [Azure Discord](https://aka.ms/foundry/discord) | Prisijunk šiandien! |
 
-### Siūlomi šablonai, kuriuos verta išbandyti toliau
+### Rekomenduojami Šablonai Kitam Bandymui
 
-1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Pagrindinis pokalbis su jūsų duomenimis
-2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Išplėstiniai RAG modeliai
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Verslo mažmeninės prekybos scenarijai
+1. **[Pradėk su AI pokalbiu](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Paprastas pokalbis su savo duomenimis
+2. **[Azure Search OpenAI demonstracija](https://github.com/Azure-Samples/azure-search-openai-demo)** - Išplėstiniai RAG modeliai
+3. **[Contoso Pokalbis](https://github.com/Azure-Samples/contoso-chat)** - Įmonių mažmeninės prekybos scenarijai
 
 ---
 
-## 4. Dirbtuvių iššūkis
+## 4. Užsiėmimo Iššūkis
 
-Pasiruošę išbandyti įgūdžius? Išmėginkite šiuos iššūkius:
+Pasiruošęs išbandyti savo įgūdžius? Išbandyk šiuos iššūkius:
 
-| Iššūkis | Aprašymas | Sunkumo lygis |
+| Iššūkis | Aprašymas | Sunkumas |
 |:---|:---|:---|
-| **1. Daugiagentis scenarijus** | Įdiekite ir pritaikykite skirtingam sektoriui (pvz., sveikatos priežiūra, finansai) | ⭐⭐ |
-| **2. Pasirinktinė žinių bazė** | Pridėkite savo duomenų failus ir sukurkite pasirinktą paieškos indeksą | ⭐⭐⭐ |
-| **3. Diegimas į gamybą** | Nustatykite CI/CD su GitHub Actions naudojant `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. Daugiagentinis scenarijus** | Įdiek ir priderink skirtingai pramonei (pvz., sveikatos apsauga, finansai) | ⭐⭐ |
+| **2. Individualizuota žinių bazė** | Pridėk savo duomenų failus ir sukurk individualizuotą paieškos indeksą | ⭐⭐⭐ |
+| **3. Produkcinis diegimas** | Įdiek CI/CD su GitHub Actions naudojant `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. Pasidalinkite atsiliepimais
+## 5. Pasidalink savo atsiliepimais
 
-Jūsų atsiliepimai padeda mums tobulinti šias dirbtuves!
+Tavo atsiliepimai padeda mums tobulinti šį užsiėmimą!
 
-- **GitHub Issues**: [Pateikti atsiliepimą](https://github.com/microsoft/azd-for-beginners/issues) - pažymėkite žyma `Workshop`
-- **Discord**: Prisijunkite prie [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - rašykite kanale `#get-help`
-- **Prisidėjimai**: Padėkite tobulinti dirbtuves pateikdami pull request'us!
+- **GitHub Issues**: [Palik atsiliepimą](https://github.com/microsoft/azd-for-beginners/issues) - pažymėk su `Workshop`
+- **Discord**: Prisijunk prie [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - rašyk kanale `#get-help`
+- **Indėliai**: Padėk tobulinti užsiėmimą siųsdamas pull užklausas!
 
 ---
 
 ## Ačiū! 🎉
 
-Dėkojame, kad baigėte AZD for AI Developers dirbtuves. Tikimės, kad ši patirtis suteikė jums įgūdžių ir pasitikėjimo kurti ir diegti AI programas Azure platformoje.
+Ačiū, kad užbaigei AZD AI kūrėjų užsiėmimą. Tikimės, kad šis patyrimas suteikė tau įgūdžių ir pasitikėjimo kurti ir diegti AI programas Azure platformoje.
 
-**Tęskite kūrimą, toliau mokykitės ir sveiki atvykę į Azure AI kūrėjų bendruomenę!**
+**Tęsk kurti, tęsk mokytis ir sveikas atvykęs į Azure AI kūrėjų bendruomenę!**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 Kurso pradžia** | [AZD pradedantiesiems](../../README.md) |
+| **📚 Kursų pagrindinis puslapis** | [AZD Pradedantiesiems](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
 | **📖 Dokumentacija** | [Azure Developer CLI dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ AI šablonai** | [Microsoft Foundry šablonai](https://ai.azure.com/templates) |
+| **🛠️ AI Šablonai** | [Microsoft Foundry šablonai](https://ai.azure.com/templates) |
 | **💬 Bendruomenė** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Atsakomybės apribojimas:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas jo gimtąja kalba turi būti laikomas autoritetingu šaltiniu. Svarbios informacijos atveju rekomenduojamas profesionalus žmogaus atliktas vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

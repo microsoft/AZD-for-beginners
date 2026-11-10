@@ -6,14 +6,14 @@
     "language_code": "pa"
   },
   "CONTRIBUTING.md": {
-    "original_hash": "b1093f812f388f03943466e2e8f16d9b",
-    "translation_date": "2026-02-09T05:31:34+00:00",
+    "original_hash": "47aa6d19c47fcb6e5ed975fb3b3ef5bb",
+    "translation_date": "2026-11-10T04:13:41+00:00",
     "source_file": "CONTRIBUTING.md",
     "language_code": "pa"
   },
   "README.md": {
-    "original_hash": "de39d21c7bbb6bd8790f999b35c9903b",
-    "translation_date": "2026-07-14T06:45:34+00:00",
+    "original_hash": "5ab5f2daf9264cd9ec13ae09828c3223",
+    "translation_date": "2026-11-10T04:08:02+00:00",
     "source_file": "README.md",
     "language_code": "pa"
   },
@@ -24,21 +24,318 @@
     "language_code": "pa"
   },
   "SUPPORT.md": {
-    "original_hash": "b7244261ee19497082edf33bcce64717",
-    "translation_date": "2025-09-09T18:51:59+00:00",
+    "original_hash": "9c10a6100800f7dbc6d07aa04e45a1ce",
+    "translation_date": "2026-11-10T04:08:08+00:00",
     "source_file": "SUPPORT.md",
     "language_code": "pa"
   },
   "__translation_failures__": {
-    "README.md": {
-      "original_hash": "32128c6825ddb0f9bd051f7130f94755",
-      "source_file": "README.md",
+    "changelog.md": {
+      "original_hash": "247312270281a91d52d3198c1c948971",
+      "source_file": "changelog.md",
       "language_code": "pa",
-      "failure_date": "2026-11-04T23:12:04+00:00",
+      "failure_date": "2026-11-10T04:11:06+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'README.md', and the chunk could not be split further.",
-      "translator_version": "0.23.2",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1 of 'changelog.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "resources/study-guide.md": {
+      "original_hash": "15cd1e658f9b76ef86f2f5508f911dcc",
+      "source_file": "resources/study-guide.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T04:19:53+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 3.2.1.1 of 'study-guide.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "resources/cheat-sheet.md": {
+      "original_hash": "e70f4fb2afc355e88a544a7e8d939879",
+      "source_file": "resources/cheat-sheet.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T04:21:12+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2 of 'cheat-sheet.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "examples/README.md": {
+      "original_hash": "55ebabb511ae0cd2fb23c899b4dc8839",
+      "source_file": "examples/README.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T04:25:10+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1.1 of 'README.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-08-production/production-ai-practices.md": {
+      "original_hash": "5607d88a9ca9fcb5d9d396e3dcc804d2",
+      "source_file": "docs/chapter-08-production/production-ai-practices.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T04:43:10+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1 of 'production-ai-practices.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-03-configuration/authsecurity.md": {
+      "original_hash": "ad161796874379c68557a1af62614191",
+      "source_file": "docs/chapter-03-configuration/authsecurity.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T04:48:15+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of 'authsecurity.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-03-configuration/configuration.md": {
+      "original_hash": "0f149d295e8d48938b1b8ff712ea0bf9",
+      "source_file": "docs/chapter-03-configuration/configuration.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T04:52:46+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of 'configuration.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-04-infrastructure/provisioning.md": {
+      "original_hash": "739307a27421be2830b2d8f4cabf5751",
+      "source_file": "docs/chapter-04-infrastructure/provisioning.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T04:57:31+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of 'provisioning.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-04-infrastructure/deployment-guide.md": {
+      "original_hash": "cd62de73e7727b070a01f797227101e3",
+      "source_file": "docs/chapter-04-infrastructure/deployment-guide.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T05:05:30+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.2.1.1.1.1.1.1.1 of 'deployment-guide.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-04-infrastructure/custom-templates.md": {
+      "original_hash": "f82036ba18ad64cd0d486442b5e8e960",
+      "source_file": "docs/chapter-04-infrastructure/custom-templates.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T05:09:08+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of 'custom-templates.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-05-multi-agent/README.md": {
+      "original_hash": "1d8774a7a38b4a595cb18516f89df830",
+      "source_file": "docs/chapter-05-multi-agent/README.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T05:10:52+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of 'README.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-05-multi-agent/multi-agent-basics.md": {
+      "original_hash": "7f55ab87aae10e3ccc8c4c4a7d700c40",
+      "source_file": "docs/chapter-05-multi-agent/multi-agent-basics.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T05:16:19+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.suffix.1.2.2.1.1.1 of 'multi-agent-basics.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-07-troubleshooting/ai-troubleshooting.md": {
+      "original_hash": "eb5705b743dd6928965ca5446536e149",
+      "source_file": "docs/chapter-07-troubleshooting/ai-troubleshooting.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T05:21:30+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1.1 of 'ai-troubleshooting.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-02-ai-development/ai-workshop-lab.md": {
+      "original_hash": "b3775cedae34d50c9d3718b9d1e7fa8a",
+      "source_file": "docs/chapter-02-ai-development/ai-workshop-lab.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T05:26:32+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of 'ai-workshop-lab.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-02-ai-development/agents.md": {
+      "original_hash": "14c42007951064e0227c231ed4781667",
+      "source_file": "docs/chapter-02-ai-development/agents.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T05:31:33+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.2.1.1.1.1.1.1 of 'agents.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-02-ai-development/microsoft-foundry-integration.md": {
+      "original_hash": "1ded646a4aa65d197890c4af5f129903",
+      "source_file": "docs/chapter-02-ai-development/microsoft-foundry-integration.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T05:34:24+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 2.2.1.1.1.1.1 of 'microsoft-foundry-integration.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-02-ai-development/ai-model-deployment.md": {
+      "original_hash": "a90a5e8b15533bae7df5feb7675b073a",
+      "source_file": "docs/chapter-02-ai-development/ai-model-deployment.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T05:38:05+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of 'ai-model-deployment.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-06-pre-deployment/coordination-patterns.md": {
+      "original_hash": "5b3ae58f84b3a4f8e5c29955c38b7e56",
+      "source_file": "docs/chapter-06-pre-deployment/coordination-patterns.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T05:49:06+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of 'coordination-patterns.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-01-foundation/azd-basics.md": {
+      "original_hash": "f0b678263ead0764a6529842e7bc2154",
+      "source_file": "docs/chapter-01-foundation/azd-basics.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T05:55:03+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.4.2.1.1.1.1.1 of 'azd-basics.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-01-foundation/bring-your-own-app.md": {
+      "original_hash": "8d15677b11d2b439702213be8565897e",
+      "source_file": "docs/chapter-01-foundation/bring-your-own-app.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T06:00:01+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of 'bring-your-own-app.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "docs/chapter-01-foundation/installation.md": {
+      "original_hash": "486f39356b135590491e05d97c047968",
+      "source_file": "docs/chapter-01-foundation/installation.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T06:03:49+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1.1 of 'installation.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "workshop/docs/instructions/2-Validate-AI-Template.md": {
+      "original_hash": "08d94072fd61ef49bd86481689cb0484",
+      "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T06:07:38+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '2-Validate-AI-Template.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "workshop/docs/instructions/4-Configure-AI-Template.md": {
+      "original_hash": "3e735428a799a6f640ebdcc104fc6c21",
+      "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T06:14:15+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '4-Configure-AI-Template.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "workshop/docs/instructions/1-Select-AI-Template.md": {
+      "original_hash": "cb2d2ea3d9bc193741d132adea22d503",
+      "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T06:16:56+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '1-Select-AI-Template.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "workshop/docs/instructions/5-Customize-AI-Template.md": {
+      "original_hash": "d826ff36ca4a124c846145198d369388",
+      "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T06:19:41+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of '5-Customize-AI-Template.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "examples/container-app/README.md": {
+      "original_hash": "8ea904cae0e223f66fb33328bb4e6b96",
+      "source_file": "examples/container-app/README.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T06:23:39+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.1.1.1.1.1.1 of 'README.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "examples/retail-multiagent-arm-template/README.md": {
+      "original_hash": "80936e5750a2fff54e85231c0053f6ff",
+      "source_file": "examples/retail-multiagent-arm-template/README.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T06:27:09+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.2.2.1.1.1 of 'README.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
+      "failure_policy_version": 1
+    },
+    "examples/azure-openai-chat/README.md": {
+      "original_hash": "e14a657c0896c4ad83ef83b2b8236e23",
+      "source_file": "examples/azure-openai-chat/README.md",
+      "language_code": "pa",
+      "failure_date": "2026-11-10T06:37:08+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 1.1.2.2.2.1.1.1.1.1.1 of 'README.md', and the chunk could not be split further.",
+      "translator_version": "0.24.0",
       "failure_policy_version": 1
     }
   },
@@ -49,14 +346,14 @@
     "language_code": "pa"
   },
   "course-outline.md": {
-    "original_hash": "1b96d168339746c62266dd97f4abdfbe",
-    "translation_date": "2026-02-09T02:32:29+00:00",
+    "original_hash": "6353a81effc8c2ab34944d3fef689129",
+    "translation_date": "2026-11-10T04:12:40+00:00",
     "source_file": "course-outline.md",
     "language_code": "pa"
   },
   "docs/chapter-01-foundation/README.md": {
-    "original_hash": "89e1719c5a89ec8347b97e4f13a546e4",
-    "translation_date": "2026-07-14T07:05:53+00:00",
+    "original_hash": "4d8c632d428c659c0bc2aa5be0c37792",
+    "translation_date": "2026-11-10T05:56:36+00:00",
     "source_file": "docs/chapter-01-foundation/README.md",
     "language_code": "pa"
   },
@@ -73,14 +370,14 @@
     "language_code": "pa"
   },
   "docs/chapter-01-foundation/dev-containers.md": {
-    "original_hash": "28531c5f61c99b03433f5f38c2627559",
-    "translation_date": "2026-07-14T07:03:52+00:00",
+    "original_hash": "39ed05544aa414353f6c5abb07e40a9d",
+    "translation_date": "2026-11-10T05:56:56+00:00",
     "source_file": "docs/chapter-01-foundation/dev-containers.md",
     "language_code": "pa"
   },
   "docs/chapter-01-foundation/first-project.md": {
-    "original_hash": "bb756ca0754c1bf256c6651e59c17750",
-    "translation_date": "2026-06-18T02:49:31+00:00",
+    "original_hash": "a02b512d16367f948363b2cd4d0512f0",
+    "translation_date": "2026-11-10T05:56:24+00:00",
     "source_file": "docs/chapter-01-foundation/first-project.md",
     "language_code": "pa"
   },
@@ -91,8 +388,8 @@
     "language_code": "pa"
   },
   "docs/chapter-02-ai-development/README.md": {
-    "original_hash": "40d8c960ff10647e14a8351b829e0078",
-    "translation_date": "2026-07-14T07:14:29+00:00",
+    "original_hash": "fb9c8fc4d431094e94dc64d9bec2fe83",
+    "translation_date": "2026-11-10T05:21:45+00:00",
     "source_file": "docs/chapter-02-ai-development/README.md",
     "language_code": "pa"
   },
@@ -121,8 +418,8 @@
     "language_code": "pa"
   },
   "docs/chapter-03-configuration/README.md": {
-    "original_hash": "60b35e51123475e4568e29fc19f77e80",
-    "translation_date": "2026-07-14T07:18:37+00:00",
+    "original_hash": "f36eecda6a798bb2c817436462a691de",
+    "translation_date": "2026-11-10T04:43:28+00:00",
     "source_file": "docs/chapter-03-configuration/README.md",
     "language_code": "pa"
   },
@@ -139,8 +436,8 @@
     "language_code": "pa"
   },
   "docs/chapter-04-infrastructure/README.md": {
-    "original_hash": "0270a2a937fc1089566c069ae493ba78",
-    "translation_date": "2026-07-14T07:06:18+00:00",
+    "original_hash": "047082d5c9a97c4947646fd1b5e6f6a8",
+    "translation_date": "2026-11-10T04:53:05+00:00",
     "source_file": "docs/chapter-04-infrastructure/README.md",
     "language_code": "pa"
   },
@@ -175,20 +472,20 @@
     "language_code": "pa"
   },
   "docs/chapter-06-pre-deployment/README.md": {
-    "original_hash": "88286fe6faf9d65f8de88f4d74ced5cc",
-    "translation_date": "2026-07-14T07:19:04+00:00",
+    "original_hash": "b15d54054233a401323b0193e9de2df6",
+    "translation_date": "2026-11-10T05:40:44+00:00",
     "source_file": "docs/chapter-06-pre-deployment/README.md",
     "language_code": "pa"
   },
   "docs/chapter-06-pre-deployment/application-insights.md": {
-    "original_hash": "67b417ea3f08a7b67f364a3ebba364a0",
-    "translation_date": "2026-03-20T05:25:57+00:00",
+    "original_hash": "64fb0e9c4eea30b05ef93316731c32da",
+    "translation_date": "2026-11-10T05:45:07+00:00",
     "source_file": "docs/chapter-06-pre-deployment/application-insights.md",
     "language_code": "pa"
   },
   "docs/chapter-06-pre-deployment/capacity-planning.md": {
-    "original_hash": "3bc7f98dbe06a855a625b93f10ecd8e5",
-    "translation_date": "2026-02-09T06:09:57+00:00",
+    "original_hash": "24dc8ed7255b51775c686de177743864",
+    "translation_date": "2026-11-10T05:38:29+00:00",
     "source_file": "docs/chapter-06-pre-deployment/capacity-planning.md",
     "language_code": "pa"
   },
@@ -199,20 +496,20 @@
     "language_code": "pa"
   },
   "docs/chapter-06-pre-deployment/preflight-checks.md": {
-    "original_hash": "62a54f345cbca600fb5d830f53cfbcc7",
-    "translation_date": "2026-04-04T09:52:31+00:00",
+    "original_hash": "293537365ec4b386ecdf20c381365d0c",
+    "translation_date": "2026-11-10T05:40:31+00:00",
     "source_file": "docs/chapter-06-pre-deployment/preflight-checks.md",
     "language_code": "pa"
   },
   "docs/chapter-06-pre-deployment/sku-selection.md": {
-    "original_hash": "f84a36fe921c56f1c06b16f0021da530",
-    "translation_date": "2026-02-09T07:11:16+00:00",
+    "original_hash": "3e2606e5164a74d761724a5e71758a4d",
+    "translation_date": "2026-11-10T05:39:18+00:00",
     "source_file": "docs/chapter-06-pre-deployment/sku-selection.md",
     "language_code": "pa"
   },
   "docs/chapter-07-troubleshooting/README.md": {
-    "original_hash": "bf730f70682907ebc28e824cf8329f3d",
-    "translation_date": "2026-07-14T07:02:25+00:00",
+    "original_hash": "2e9e7554805d195e10123113b87acdc6",
+    "translation_date": "2026-11-10T05:17:04+00:00",
     "source_file": "docs/chapter-07-troubleshooting/README.md",
     "language_code": "pa"
   },
@@ -223,20 +520,20 @@
     "language_code": "pa"
   },
   "docs/chapter-07-troubleshooting/common-issues.md": {
-    "original_hash": "394d8f06b522e7fd90f097e4f8badd66",
-    "translation_date": "2026-04-04T10:55:00+00:00",
+    "original_hash": "d8cdb3ea7994b7da1f9ac0e5b2fbf473",
+    "translation_date": "2026-11-10T05:16:50+00:00",
     "source_file": "docs/chapter-07-troubleshooting/common-issues.md",
     "language_code": "pa"
   },
   "docs/chapter-07-troubleshooting/debugging.md": {
-    "original_hash": "bebec5bb3455d3ea71beed1fcbf968ea",
-    "translation_date": "2026-02-09T09:34:55+00:00",
+    "original_hash": "87089d6cf81625b4f92c7fad6be50fbc",
+    "translation_date": "2026-11-10T05:17:32+00:00",
     "source_file": "docs/chapter-07-troubleshooting/debugging.md",
     "language_code": "pa"
   },
   "docs/chapter-08-production/README.md": {
-    "original_hash": "2be2743c3681602c6cfae53f88d37d08",
-    "translation_date": "2026-07-14T07:02:59+00:00",
+    "original_hash": "c7220e4d731c823c1f1f715edb287a20",
+    "translation_date": "2026-11-10T04:37:46+00:00",
     "source_file": "docs/chapter-08-production/README.md",
     "language_code": "pa"
   },
@@ -265,26 +562,26 @@
     "language_code": "pa"
   },
   "examples/container-app/microservices/README.md": {
-    "original_hash": "4209d183f233fb19516ddb62643ab299",
-    "translation_date": "2026-03-20T04:46:57+00:00",
+    "original_hash": "d20100bdf1a817cbe289a15a97735e7c",
+    "translation_date": "2026-11-10T06:42:26+00:00",
     "source_file": "examples/container-app/microservices/README.md",
     "language_code": "pa"
   },
   "examples/container-app/simple-flask-api/README.md": {
-    "original_hash": "16c397337ff0c78284292241d6debec5",
-    "translation_date": "2026-06-18T02:31:19+00:00",
+    "original_hash": "d2c0058a4aae34b96af91eeec3240cfe",
+    "translation_date": "2026-11-10T06:44:22+00:00",
     "source_file": "examples/container-app/simple-flask-api/README.md",
     "language_code": "pa"
   },
   "examples/database-app/README.md": {
-    "original_hash": "abfa2c6c3930424edaaa4cce64941134",
-    "translation_date": "2026-06-18T02:20:06+00:00",
+    "original_hash": "6e4a05002613f86826171566f2b9a78f",
+    "translation_date": "2026-11-10T06:31:59+00:00",
     "source_file": "examples/database-app/README.md",
     "language_code": "pa"
   },
   "examples/microservices/README.md": {
-    "original_hash": "7f745f6ef4a46d3da780ac21838ca8ee",
-    "translation_date": "2026-02-09T03:43:01+00:00",
+    "original_hash": "62069bbc3d30c8355d43d08026ad2ec8",
+    "translation_date": "2026-11-10T06:27:14+00:00",
     "source_file": "examples/microservices/README.md",
     "language_code": "pa"
   },
@@ -295,8 +592,8 @@
     "language_code": "pa"
   },
   "examples/retail-scenario.md": {
-    "original_hash": "31e5bb316faae7444621e0ff69117a76",
-    "translation_date": "2026-06-18T02:05:12+00:00",
+    "original_hash": "27369f6dd209756c431fe90643aec680",
+    "translation_date": "2026-11-10T04:37:30+00:00",
     "source_file": "examples/retail-scenario.md",
     "language_code": "pa"
   },
@@ -307,14 +604,14 @@
     "language_code": "pa"
   },
   "resources/faq.md": {
-    "original_hash": "157fc29d4908b0723bb9264765a71187",
-    "translation_date": "2026-02-09T02:59:45+00:00",
+    "original_hash": "c37343ff1dfac95501c1af3bb297bac9",
+    "translation_date": "2026-11-10T04:16:28+00:00",
     "source_file": "resources/faq.md",
     "language_code": "pa"
   },
   "resources/glossary.md": {
-    "original_hash": "bee74c2b465a4943fca1c1c45a46720c",
-    "translation_date": "2026-06-18T02:14:55+00:00",
+    "original_hash": "8cd3c5fbea5f5311a1b910d82bdd6805",
+    "translation_date": "2026-11-10T04:17:28+00:00",
     "source_file": "resources/glossary.md",
     "language_code": "pa"
   },
@@ -325,14 +622,14 @@
     "language_code": "pa"
   },
   "workshop/README.md": {
-    "original_hash": "f28c384d31ed0dc72b4500a31fdbcdbb",
-    "translation_date": "2026-04-04T08:43:40+00:00",
+    "original_hash": "75fb5dac7deab10a5d8c26dbc4ca19cf",
+    "translation_date": "2026-11-10T04:22:14+00:00",
     "source_file": "workshop/README.md",
     "language_code": "pa"
   },
   "workshop/docs/index.md": {
-    "original_hash": "7d1e406235b80bb954883211e728a85c",
-    "translation_date": "2026-07-14T06:57:32+00:00",
+    "original_hash": "a1cbc39623d29f76aefe40099c5c890e",
+    "translation_date": "2026-11-10T06:04:06+00:00",
     "source_file": "workshop/docs/index.md",
     "language_code": "pa"
   },
@@ -355,8 +652,8 @@
     "language_code": "pa"
   },
   "workshop/docs/instructions/3-Deconstruct-AI-Template.md": {
-    "original_hash": "b78906b5709fa191d9a5f16d93074ffd",
-    "translation_date": "2026-04-04T09:03:04+00:00",
+    "original_hash": "4cd857b094d9c67f2ec442e741880fcf",
+    "translation_date": "2026-11-10T06:20:34+00:00",
     "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
     "language_code": "pa"
   },
@@ -373,14 +670,14 @@
     "language_code": "pa"
   },
   "workshop/docs/instructions/6-Teardown-Infrastructure.md": {
-    "original_hash": "5f7c2836539c2d6d5bdbe612cefdaf4c",
-    "translation_date": "2026-06-18T02:34:45+00:00",
+    "original_hash": "707b8a770cd716934ca04f3d1171c638",
+    "translation_date": "2026-11-10T06:20:44+00:00",
     "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
     "language_code": "pa"
   },
   "workshop/docs/instructions/7-Wrap-up.md": {
-    "original_hash": "4b73601423614f138c2b54df94ea105a",
-    "translation_date": "2026-02-09T03:17:37+00:00",
+    "original_hash": "df42692b5f631b684ee50df9016cd97f",
+    "translation_date": "2026-11-10T06:11:37+00:00",
     "source_file": "workshop/docs/instructions/7-Wrap-up.md",
     "language_code": "pa"
   }

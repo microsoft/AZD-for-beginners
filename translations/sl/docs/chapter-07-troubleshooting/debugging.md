@@ -1,77 +1,72 @@
-# Vodnik za odpravljanje napak pri razmestitvah AZD
+# Vodnik za odpravljanje napak pri nameščanju AZD
 
-**Navigacija poglavij:**
-- **📚 Domov tečaja**: [AZD For Beginners](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 7 - Odpravljanje težav in odpravljanje napak
+**Navigacija po poglavjih:**
+- **📚 Domov pri tečaju**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 7 - Odpravljanje težav in razhroščevanje
 - **⬅️ Prejšnje**: [Pogoste težave](common-issues.md)
-- **➡️ Naslednje**: [Odpravljanje težav za AI](ai-troubleshooting.md)
+- **➡️ Naslednje**: [Odpravljanje težav specifičnih za AI](ai-troubleshooting.md)
 - **🚀 Naslednje poglavje**: [Poglavje 8: Produkcijski in podjetniški vzorci](../chapter-08-production/production-ai-practices.md)
 
 ## Uvod
 
-Ta obsežen vodič ponuja napredne strategije za odpravljanje napak, orodja in tehnike za diagnosticiranje in reševanje zapletenih težav pri razmestitvah z Azure Developer CLI. Naučite se sistematičnih metodologij za odpravljanje težav, tehnik analize dnevnikov, profiliranja zmogljivosti in naprednih diagnostičnih orodij za učinkovito reševanje težav pri nameščanju in izvajanju.
+Ta obsežen vodnik ponuja napredne strategije razhroščevanja, orodja in tehnike za diagnosticiranje in reševanje zapletenih težav pri nameščanju Azure Developer CLI. Naučite se sistematičnih metod odpravljanja težav, tehnik analize dnevnikov, profiliranja zmogljivosti ter naprednih diagnostičnih orodij za učinkovito reševanje težav z nameščanjem in izvajanjem.
 
 ## Cilji učenja
 
-Z dokončanjem tega vodiča boste:
-- Obvladali sistematične metodologije odpravljanja napak za težave z Azure Developer CLI
+Z dokončanjem tega vodnika boste:
+- Obvladali sistematične metode razhroščevanja težav z Azure Developer CLI
 - Razumeli napredne nastavitve beleženja in tehnike analize dnevnikov
-- Izvedli strategije profiliranja in spremljanja zmogljivosti
-- Uporabljali Azure diagnostična orodja in storitve za reševanje zapletenih težav
-- Uporabili tehnike odpravljanja napak omrežja in varnostnega odpravljanja težav
-- Konfigurirali obsežno spremljanje in opozarjanje za proaktivno zaznavanje težav
+- Uvedli profiliranje zmogljivosti in strategije nadzora
+- Uporabljali Azure diagostična orodja in storitve za reševanje kompleksnih težav
+- Uporabljali tehnike odpravljanja težav z omrežjem in varnostjo
+- Konfigurirali celosten nadzor in opozarjanje za proaktivno odkrivanje težav
 
-## Pričakovani izidi učenja
+## Pričakovani rezultati učenja
 
-Po zaključku boste sposobni:
-- Uporabiti metodologijo TRIAGE za sistematično odpravljanje zapletenih težav pri razmestitvah
-- Konfigurirati in analizirati obsežne informacije o beleženju in sledenju
+Po dokončanju boste sposobni:
+- Uporabiti metodo TRIAGE za sistematično odpravljanje zapletenih težav z nameščanjem
+- Nastaviti in analizirati celovite informacije o beleženju in sledenju
 - Učinkovito uporabljati Azure Monitor, Application Insights in diagnostična orodja
-- Neodvisno odpravljati težave s omrežno povezanostjo, avtentikacijo in dovoljenji
-- Implementirati strategije spremljanja in optimizacije zmogljivosti
-- Ustvariti prilagojene skripte za odpravljanje napak in avtomatizacijo za ponavljajoče se težave
+- Neodvisno odpravljati težave z omrežno povezljivostjo, avtorizacijo in dovoljenji
+- Izvajati nadzor zmogljivosti in optimizacijske strategije
+- Ustvarjati prilagojene skripte za razhroščevanje in avtomatizacijo ponavljajočih se težav
 
-## Metodologija odpravljanja napak
+## Metodologija razhroščevanja
 
 ### Pristop TRIAGE
-- **T**ime: Kdaj se je težava začela?
-- **R**eproduce: Ali jo lahko dosledno reproducirate?
-- **I**solate: Katera komponenta odpoveduje?
-- **A**nalyze: Kaj nam povedo dnevniki?
-- **G**ather: Zberite vse ustrezne informacije
-- **E**scalate: Kdaj poiskati dodatno pomoč
+- **T**rajanje: Kdaj se je težava začela?
+- **R**epodobi: Ali jo lahko dosledno ponoviš?
+- **I**zoliraj: Kateri komponent odpove?
+- **A**n analiziraj: Kaj povedo dnevniki?
+- **G** zberi: Zberi vse relevantne informacije
+- **E** skaliraj: Kdaj poiskati dodatno pomoč
 
-## Omogočanje načina odpravljanja napak
+## Omogočanje načina za odpravljanje napak
+
+> **Obseg:** To so diagnostični primeri za prilagoditev, ne dobavljiva zbirka skript. Zamenjajte imena/ID-je virov; za ukazne bloke uporabite Bash. Izhod in okoljske vrednosti `--debug` lahko vsebujejo občutljive informacije – pred deljenjem jih preglejte in po potrebi uredite. Primeri, ki nameščajo, vračajo nazaj ali spreminjajo konfiguracijo, zahtevajo izrecno odobritev operaterja.
 
 ### Okoljske spremenljivke
 ```bash
-# Omogoči celovito odpravljanje napak
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Odpravljanje napak v Azure CLI
-export AZURE_CLI_DIAGNOSTICS=true
-
-# Onemogoči telemetrijo za čistejši izpis
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Konfiguracija odpravljanja napak
+### Konfiguracija razhroščevanja
 ```bash
-# Nastavi globalno konfiguracijo za odpravljanje napak
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# Omogoči podrobno beleženje
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
+
+`azd config set` lahko shrani poljubne ključe; to še ne pomeni, da so `debug.enabled`, `debug.logLevel` ali `trace.outputPath` podprte nastavitve. Uporabite zastavico `--debug` iz izdanega ukaza.
 
 ## 📊 Tehnike analize dnevnikov
 
-### Razumevanje ravni dnevnikov
+### Razumevanje stopenj dnevnikov
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Strukturirana analiza dnevnikov
+### Strukturna analiza dnevnikov
 ```bash
-# Ogled dnevnikov z Azure Monitor (prek azd monitor)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# Ogled dnevnikov aplikacije v realnem času
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# Za podrobno analizo dnevnikov uporabite Azure CLI z vašo App Service ali Container App:
-# Dnevniki App Service
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Dnevniki Container App
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# Izvozi dnevnike Application Insights za analizo
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
 ### Korelacija dnevnikov
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Poveži dnevnike med storitvami z uporabo Azure Monitorja
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Poišči v Application Insights povezane dnevnike
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Poišči dnevnike aktivnosti Azure
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ Napredna orodja za odpravljanje napak
+## 🛠️ Napredna orodja za razhroščevanje
 
 ### Poizvedbe Azure Resource Graph
 ```bash
-# Poišči vire po oznakah
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Poišči neuspešne razmestitve
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Preveri stanje virov
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Odpravljanje napak omrežja
+### Razhroščevanje omrežja
 ```bash
-# Preizkus povezljivosti med storitvami
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# Uporaba
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
-### Odpravljanje napak v kontejnerjih
+### Razhroščevanje v vsebnikih
 ```bash
-# Odpravljanje napak pri aplikaciji v kontejnerju
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -181,12 +178,12 @@ debug_container() {
 }
 ```
 
-### Odpravljanje napak povezave do baze podatkov
+### Razhroščevanje povezave do baze podatkov
 ```bash
-# Odpravljanje napak pri povezljivosti z bazo podatkov
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -200,26 +197,15 @@ debug_database() {
 }
 ```
 
-## 🔬 Odpravljanje napak zmogljivosti
+## 🔬 Razhroščevanje zmogljivosti
 
-### Spremljanje zmogljivosti aplikacij
+### Nadzor zmogljivosti aplikacije
 ```bash
-# Omogoči odpravljanje napak za Application Insights
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# Prilagojeno spremljanje zmogljivosti
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -238,23 +226,21 @@ monitor_performance() {
 
 ### Analiza izrabe virov
 ```bash
-# Spremljaj porabo virov
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
@@ -262,7 +248,7 @@ monitor_resources() {
 
 ## 🧪 Testiranje in preverjanje
 
-### Odpravljanje napak integracijskih testov
+### Razhroščevanje integracijskih testov
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Nastavi okolje za odpravljanje napak
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# Pridobi končne točke storitev
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Preizkusi končne točke zdravja
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# Zaženi teste
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Zaženi prilagojene integracijske teste
+# Run custom integration tests
 npm run test:integration
 ```
 
-### Obremenitveno testiranje za odpravljanje napak
+### Test obremenitve za razhroščevanje
 ```bash
-# Preprost test obremenitve za odkrivanje ozkih grl v zmogljivosti
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Uporaba Apache Bench (namestitev: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Izvleči ključne metrike
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Preverite morebitne napake
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 Odpravljanje napak infrastrukture
+## 🔧 Razhroščevanje infrastrukture
 
-### Odpravljanje napak predlog Bicep
+### Razhroščevanje predlog Bicep
 ```bash
-# Preveri predloge Bicep s podrobnim izhodom
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Preverjanje sintakse
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Preverjanje linta
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # Simulacija uvajanja (what-if)
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# Razhroščevanje uvajanja predloge
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,52 +361,44 @@ debug_deployment() {
 
 ### Analiza stanja virov
 ```bash
-# Analizirajte stanja virov glede neskladij
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # Naštejte vse vire z njihovimi stanji
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Preverite neuspele vire
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
-## 🔒 Odpravljanje varnostnih težav
+## 🔒 Razhroščevanje varnosti
 
-### Odpravljanje napak poteka avtentikacije
+### Razhroščevanje poteka overjanja
 ```bash
-# Odpravljanje napak pri overjanju v Azure
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # Dekodiraj JWT žeton (zahteva jq in base64)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Odpravljanje napak pri dostopu do Key Vault
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -438,16 +414,16 @@ debug_keyvault() {
 }
 ```
 
-### Odpravljanje varnostnih težav omrežja
+### Razhroščevanje varnosti omrežja
 ```bash
-# Odpravljanje napak v omrežnih varnostnih skupinah
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Preveri varnostna pravila
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 Odpravljanje napak specifičnih za aplikacijo
+## 📱 Razhroščevanje specifično za aplikacije
 
-### Odpravljanje napak aplikacij Node.js
+### Razhroščevanje Node.js aplikacij
 ```javascript
-// debug-middleware.js - Express vmesna programska oprema za odpravljanje napak
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Zabeleži podrobnosti zahteve
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // Prekrij res.json, da zabeleži odgovore
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Odpravljanje napak poizvedb v bazi podatkov
+### Razhroščevanje poizvedb v bazi podatkov
 ```javascript
-// database-debug.js - pripomočki za odpravljanje napak v bazi podatkov
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Postopki za nujno odpravljanje napak
+## 🚨 Postopki za nujno razhroščevanje
 
-### Reakcija na težave v produkciji
+### Odziv na težave v produkciji
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Nujno odpravljanje napak v produkciji
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Preklopi na pravilno okolje
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# Zberi kritične informacije
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# Uporabi Azure Monitor za dnevniške zapise napak
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Postopki povrnitve (rollback)
+### Postopki vračanja nazaj
 ```bash
-# Hiter skript za povrnitev
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # Preklopi okolje
+    # Switch environment
     azd env select "$environment"
     
-    # Povrnitev z uporabo Gita (AZD nima vgrajene funkcije za povrnitev)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # Preveri povrnitev
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # Preizkusi kritične končne točke
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 Nadzorne plošče za odpravljanje napak
+Ta rollback, ki vključuje samo kodo, ne povrne infrastrukture, migracij baze podatkov ali skrivnosti. Uporabite čist delovni drevo, zabeležite začetni commit in ga nato obnovite; ukaz izbere izbrani commit v trenutnem repozitoriju.
 
-### Prilagojena nadzorna plošča za spremljanje
+## 📊 Nadzorne plošče za razhroščevanje
+
+### Prilagojena nadzorna plošča
 ```bash
-# Ustvarite poizvedbe Application Insights za odpravljanje napak
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # Poizvedba za napake
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Poizvedba za težave z zmogljivostjo
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Poizvedba za napake odvisnosti
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Agregacija dnevnikov
+### Združevanje dnevnikov
 ```bash
-# Zbiranje dnevnikov iz več virov Azure
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,6 +630,7 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
@@ -662,20 +639,21 @@ aggregate_logs() {
 
 ## 🔗 Napredni viri
 
-### Prilagojene skripte za odpravljanje napak
+### Prilagojene skripte za razhroščevanje
 Ustvarite imenik `scripts/debug/` z:
-- `health-check.sh` - Celovito preverjanje zdravja
-- `performance-test.sh` - Avtomatizirano preizkušanje zmogljivosti
-- `log-analyzer.py` - Napredno razčlenjevanje in analiza dnevnikov
-- `resource-validator.sh` - Preverjanje infrastrukture
+- `health-check.sh` - Celovit nadzor zdravja
+- `performance-test.sh` - Avtomatizirano testiranje zmogljivosti
+- `log-analyzer.py` - Napredna parsiranje in analiza dnevnikov
+- `resource-validator.sh` - Validacija infrastrukture
 
-### Integracija spremljanja
+### Integracija nadzora
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -688,23 +666,23 @@ hooks:
 
 ## Najboljše prakse
 
-1. **Vedno omogočite beleženje za odpravljanje napak** v neprodukcijskih okoljih
-2. **Ustvarite ponovljive testne primere** za težave
-3. **Dokumentirajte postopke odpravljanja napak** za vašo ekipo
-4. **Avtomatizirajte preverjanja zdravja** in spremljanje
-5. **Posodabljajte orodja za odpravljanje napak** skladno z spremembami aplikacije
-6. **Vadite postopke odpravljanja napak** v času brez incidentov
+1. **Vedno omogočite beleženje za razhroščevanje** v neprodukcijskih okoljih
+2. **Ustvarite reproducibilne testne primere** za težave
+3. **Dokumentirajte postopke razhroščevanja** za vašo ekipo
+4. **Avtomatizirajte zdravstvene preglede** in nadzor
+5. **Ohranite orodja za razhroščevanje posodobljena** z vašimi spremembami aplikacije
+6. **Vadite postopke razhroščevanja** v obdobjih brez incidentov
 
 ## Naslednji koraki
 
-- [Načrtovanje zmogljivosti](../chapter-06-pre-deployment/capacity-planning.md) - Načrtujte potrebe po virih
-- [Izbira SKU](../chapter-06-pre-deployment/sku-selection.md) - Izberite ustrezne ravni storitev
-- [Predhodni pregledi](../chapter-06-pre-deployment/preflight-checks.md) - Preverjanje pred nameščanjem
-- [Priročni list](../../resources/cheat-sheet.md) - Hitri referenčni ukazi
+- [Načrtovanje zmogljivosti](../chapter-06-pre-deployment/capacity-planning.md) - Načrtujte zahteve virov
+- [Izbira SKU](../chapter-06-pre-deployment/sku-selection.md) - Izberite primerne nivoje storitev
+- [Predhodne kontrole](../chapter-06-pre-deployment/preflight-checks.md) - Preverjanje pred nameščanjem
+- [Hiter pregled](../../resources/cheat-sheet.md) - Ukazi za hitro referenco
 
 ---
 
-**Zapomnite si**: Dobro odpravljanje napak je sistematično, temeljito in potrpežljivo. Ta orodja in tehnike vam bodo pomagala diagnosticirati težave hitreje in učinkoviteje.
+**Zapomnite si**: Dobro razhroščevanje pomeni biti sistematičen, temeljit in potrpežljiv. Ta orodja in tehnike vam bodo pomagale hitreje in učinkoviteje diagnosticirati težave.
 
 ---
 
@@ -716,6 +694,6 @@ hooks:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Izjava o omejitvi odgovornosti:
-Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas opozarjamo, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku velja za avtoritativni vir. Za pomembne informacije priporočamo strokovni človeški prevod. Nismo odgovorni za morebitne nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,60 +1,58 @@
-# 6. ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਹਟਾਉਣਾ
+# 6. ਬੁਨਿਆਦੀ ਢਾਂਚਾ ਹਟਾਉਣਾ
 
-!!! tip "ਇਸ ਮਾਡਿਊਲ ਦੇ ਅੰਤ ਤੱਕ ਤੁਸੀਂ ਇਹ ਕਰਨ ਦੇ ਯੋਗ ਹੋਵੋਗੇ"
+!!! tip "ਇਸ ਮੋਡੀਊਲ ਦੇ ਅੰਤ ਤੱਕ ਤੁਸੀਂ ਇਹ ਕਰ ਸਕੋਗੇ"
 
-    - [ ] ਰਿਸੋਰਸ ਸਾਫ਼-ਸਫਾਈ ਅਤੇ ਲਾਗਤ ਪ੍ਰਬੰਧਨ ਦੀ ਮਹੱਤਤਾ ਨੂੰ ਸਮਝੋ
-    - [ ] ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਨੂੰ ਡੀਪ੍ਰੋਵਿਜ਼ਨ ਕਰਨ ਲਈ `azd down` ਦਾ ਪ੍ਰਯੋਗ ਕਰੋ
-    - [ ] ਲੋੜ ਪੈਣ 'ਤੇ ਨਰਮ-ਤੌਰ 'ਤੇ ਮਿਟਾਏ ਗਏ Azure AI Services ਨੂੰ ਰਿਕਵਰ ਕਰੋ
-    - [ ] **ਲੈਬ 6:** Azure ਸਰੋਤਾਂ ਨੂੰ ਸਾਫ਼ ਕਰੋ ਅਤੇ ਹਟਾਉਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
-
----
-
-## ਬੋਨਸ ਅਭਿਆਸ
-
-ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਹਟਾਉਣ ਤੋਂ ਪਹਿਲਾਂ, ਕੁਝ ਮਿੰਟ ਖੁੱਲ੍ਹੇ-ਅੰਤ ਅਨੁਸੰਧਾਨ ਲਈ ਲਓ।
-
-!!! info "ਇਹ ਖੋਜ ਪ੍ਰੰਪਟ ਅਜ਼ਮਾਓ"
-
-    **GitHub Copilot ਨਾਲ ਪ੍ਰਯੋਗ ਕਰੋ:**
-    
-    1. ਪੁੱਛੋ: `What other AZD templates could I try for multi-agent scenarios?`
-    2. ਪੁੱਛੋ: `How can I customize the agent instructions for a healthcare use case?`
-    3. ਪੁੱਛੋ: `What environment variables control cost optimization?`
-    
-    **Azure ਪੋਰਟਲ ਦੀ ਖੋਜ ਕਰੋ:**
-    
-    1. ਆਪਣੀ ਡਿਪਲੋਇਮੈਂਟ ਲਈ Application Insights ਮੈਟ੍ਰਿਕਸ ਦੀ ਸਮੀਖਿਆ ਕਰੋ
-    2. ਪ੍ਰੋਵਾਈਜ਼ਨ ਕੀਤੇ ਗਏ ਸਰੋਤਾਂ ਲਈ ਲਾਗਤ ਵਿਸ਼ਲੇਸ਼ਣ ਦੀ ਜਾਂਚ ਕਰੋ
-    3. Microsoft Foundry ਪੋਰਟਲ ਦੇ ਏਜੰਟ ਪਲੇਗ੍ਰਾਉਂਡ ਦੀ ਇੱਕ ਵਾਰੀ ਫਿਰ ਖੋਜ ਕਰੋ
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## ਇੰਫ੍ਰਾ ਡੀਪ੍ਰੋਵਿਜ਼ਨ
+## ਇਨਾਮੀ ਕਸਰਤਾਂ
 
-1. ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਨੂੰ ਬੰਦ/ਹਟਾਉਣਾ ਇੰਨਾ ਹੀ ਆਸਾਨ ਹੈ:
+ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਹਟਾਉਣ ਤੋਂ ਪਹਿਲਾਂ, ਕੁਝ ਮਿੰਟ ਖੁੱਲ੍ਹੇ ਢੰਗ ਨਾਲ ਖੋਜ ਕਰਨ ਲਈ ਲਓ।
+
+!!! info "ਇਹਨਾਂ ਖੋਜ ਸਵਾਲਾਂ ਨੂੰ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
+
+---
+
+## ਇੰਫਰਾਸਟਰੱਕਚਰ ਬੰਦ ਕਰੋ
+
+1. ਇੰਫਰਾਸਟਰੱਕਚਰ ਨੂੰ ਹਟਾਉਣਾ ਇੰਨਾ ਅਸਾਨ ਹੈ:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. ਚੁਣੀ ਹੋਈ ਵਾਤਾਵਰਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ ਅਤੇ ਮਿਟਾਏ ਜਾਣ ਵਾਲੇ ਸਰੋਤਾਂ ਦੀ ਸਮੀਖਿਆ ਕਰੋ। ਇਸ ਨਾਲ Azure ਸਰੋਤਾਂ ਨੂੰ ਹਟਾਇਆ ਜਾ ਸਕਦਾ ਹੈ ਅਤੇ ਡਾਟਾ ਨੂੰ ਨਸ਼ਟ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ। ਇਸ ਸਿੱਖਣ ਵਾਲੀ ਪ੍ਰਕਿਰਿਆ ਲਈ ਪੁਸ਼ਟੀ ਪ੍ਰੰਪਟ ਰੱਖੋ। ਮੁਕੰਮਲ ਹੋਣ 'ਤੇ ਤੁਹਾਨੂੰ ਇਸ ਤਰ੍ਹਾਂ ਦਾ ਨਤੀਜਾ ਦੇਖਣ ਨੂੰ ਮਿਲੇਗਾ:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (ਵਿਕਲਪਿਕ) ਜੇ ਤੁਸੀਂ ਹੁਣ ਦੁਬਾਰਾ `azd up` ਚਲਾਉਂਦੇ ਹੋ, ਤਾਂ ਤੁਸੀਂ ਦੇਖੋਗੇ ਕਿ gpt-4.1 ਮਾਡਲ ਡਿਪਲਾਇ ਹੋ ਜਾਂਦਾ ਹੈ ਕਿਉਂਕਿ ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲ ਨੂੰ ਬਦਲਿਆ ਗਿਆ (ਅਤੇ ਸਥਾਨਕ `.azure` ਫੋਲਡਰ ਵਿੱਚ ਸੇਵ ਕੀਤਾ ਗਿਆ) ਸੀ। 
+1. ਪੋਰਟਲ ਵਿੱਚ ਮਿਟਾਉਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ ਅਤੇ ਤਾਇਨਾਤੀ ਦੇ ਘੇਰੇ ਤੋਂ ਬਾਹਰ ਸਰੋਤਾਂ ਦੀ ਜਾਂਚ ਕਰੋ। ਲਾਗਤ ਰਿਪੋਰਟਿੰਗ ਅਤੇ ਕੋਟਾ ਅੱਪਡੇਟ ਵਿੱਚ ਦੇਰੀ ਹੋ ਸਕਦੀ ਹੈ। ਸਥਾਨਕ `.azure` ਸੰਰਚਨਾ ਬਰਕਰਾਰ ਰਹਿੰਦੀ ਹੈ ਜਦ ਤੱਕ ਤੁਸੀਂ ਇਸਨੂੰ ਖਾਸ ਤੌਰ 'ਤੇ ਨਾ ਹਟਾਓ।
 
-      Here is the model deployments **before**:
+1. `azd down --purge` ਸਹਾਇਤਾ ਪ੍ਰਾਪਤ ਸੋਫਟ-ਮਿਟਾਏ ਗਏ ਸਰੋਤਾਂ ਦੀ ਸਥਾਈ ਮਿਟਾਈ ਦੀ ਮੰਗ ਕਰਦਾ ਹੈ। ਇਸਨੂੰ ਸਿਰਫ਼ ਤਦ ਹੀ ਵਰਤੋਂ ਜਦੋਂ ਮੁੜ ਪ੍ਰਾਪਤੀ ਦੀ ਲੋੜ ਨਾ ਹੋਵੇ ਅਤੇ ਤੁਸੀਂ ਰੱਖ-ਰਖਾਵ/ਪੁਰਜ ਸੁਰੱਖਿਆ ਨੀਤੀਆਂ ਨੂੰ ਸਮਝਦੇ ਹੋ। ਇਹ ਤੁਰੰਤ ਕੋਟਾ ਰਿਹਾਈ ਦੀ ਗਾਰੰਟੀ ਨਹੀਂ ਦਿੰਦਾ।
 
-      ![ਆਰੰਭਕ](../../../../../translated_images/pa/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      And here it is **after**:
-      ![ਨਵਾਂ](../../../../../translated_images/pa/14-deploy-new.f7f3c355a3cf7299.webp)
+1. ਸਾਫ਼ ਸਫਾਈ ਦੀ ਜਾਂਚ ਲਈ ਮੁੜ ਤਾਇਨਾਤ ਨਾ ਕਰੋ। ਬਾਅਦ ਵਿੱਚ ਜਾਣ-ਬੂਝ ਕੇ ਕੀਤੀ ਗਈ `azd up` ਬਚੇ ਹੋਏ ਸਥਾਨਕ ਇਨਪੁਟਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਸਰੋਤਾਂ ਨੂੰ ਦੁਬਾਰਾ ਬਣਾਈ ਸਕਦੀ ਹੈ ਅਤੇ ਮੁੜ ਚਾਰਜ ਲੱਗਦਾ ਹੈ। ਮਾਡਲ ਅੱਪਡੇਟ ਆਮ ਤੌਰ 'ਤੇ ਸਹਾਇਤਾ ਪ੍ਰਾਪਤ ਪ੍ਰੋਵਿਜ਼ਨਿੰਗ ਬਦਲਾਅ ਵਰਤਦਾ ਹੈ, ਨਾ ਕਿ ਹਟਾਉਣਾ।
 
 ---
 

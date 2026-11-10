@@ -1,796 +1,269 @@
-# Architettura a Microservizi - Esempio Container App
+# Microservizi a due servizi — Azure Container Apps
 
-⏱️ **Tempo Stimato**: 25-35 minuti | 💰 **Costo Stimato**: ~$50-100/mese | ⭐ **Complessità**: Avanzato
+**Livello:** Intermedio · **Tempo:** 45–60 minuti inclusa la configurazione
 
-Un'architettura a microservizi **semplificata ma funzionale** distribuita su Azure Container Apps usando AZD CLI. Questo esempio dimostra la comunicazione servizio-servizio, l'orchestrazione dei container e il monitoraggio con una configurazione pratica a 2 servizi.
+Questo esempio didattico implementa un **Node.js API Gateway** e un **Servizio Prodotto Python in sola lettura**. Sono inclusi codice sorgente, Dockerfile, Bicep e configurazione azd.
 
-> **📚 Approccio di apprendimento**: Questo esempio parte da un'architettura minima a 2 servizi (API Gateway + Backend Service) che puoi effettivamente distribuire e studiare. Dopo aver padroneggiato questa base, forniamo indicazioni per espandere a un ecosistema di microservizi completo.
+Non si tratta di un sistema pronto per la produzione.
 
 ## Cosa imparerai
 
-Completando questo esempio, potrai:
-- Distribuire più container su Azure Container Apps
-- Implementare comunicazione servizio-servizio con networking interno
-- Configurare scaling basato sull'ambiente e controlli di integrità
-- Monitorare applicazioni distribuite con Application Insights
-- Comprendere pattern di deployment per microservizi e best practice
-- Imparare l'espansione progressiva da architetture semplici a complesse
-
-## Architettura
-
-### Fase 1: Cosa stiamo costruendo (incluso in questo esempio)
+- Distribuire due servizi indipendentemente.
+- Usare un FQDN backend interno su HTTPS.
+- Verificare le risposte di successo, non trovato e servizio non disponibile.
+- Capire la telemetria e i limiti di scalabilità indipendenti.
 
 ```mermaid
-graph TD
-    Internet[Internet] -- HTTPS --> Gateway[Gateway API<br/>Contenitore Node.js<br/>Instrada le richieste<br/>Controlli di integrità<br/>Registrazione delle richieste]
-    Gateway -- HTTP interno --> Product[Servizio Prodotti<br/>Contenitore Python<br/>CRUD prodotti<br/>Archivio in memoria<br/>API REST]
-    Product --> Insights[Application Insights<br/>Monitoraggio e log]
-```
-**Perché iniziare con semplicità?**
-- ✅ Distribuire e comprendere rapidamente (25-35 minuti)
-- ✅ Apprendere i pattern principali dei microservizi senza complessità
-- ✅ Codice funzionante che puoi modificare e sperimentare
-- ✅ Costo inferiore per l'apprendimento (~$50-100/mese vs $300-1400/mese)
-- ✅ Costruire fiducia prima di aggiungere database e code di messaggi
-
-**Analogia**: Pensa a questo come imparare a guidare. Inizi con un parcheggio vuoto (2 servizi), padroneggi le basi, poi passi al traffico cittadino (5+ servizi con database).
-
-### Fase 2: Espansione futura (Architettura di riferimento)
-
-```
-Full Architecture (Not Included - For Reference)
-├── API Gateway (✅ Included)
-├── Product Service (✅ Included)
-├── Order Service (🔜 Add next)
-├── User Service (🔜 Add next)
-├── Notification Service (🔜 Add last)
-├── Azure Service Bus (🔜 For async communication)
-├── Cosmos DB (🔜 For product persistence)
-├── Azure SQL (🔜 For order management)
-└── Azure Storage (🔜 For file storage)
+flowchart LR
+    Client -->|HTTPS| Gateway[Public Node.js gateway — port 8080]
+    Gateway -->|HTTPS internal FQDN| Product[Internal Python product API — port 8000]
+    Gateway -. request/dependency telemetry .-> Insights[Application Insights]
+    Product -. application log traces .-> Insights
 ```
 
-Vedi la sezione "Guida all'espansione" alla fine per istruzioni passo-passo.
-
-## Funzionalità incluse
-
-✅ **Service Discovery**: Rilevamento automatico basato su DNS tra i container  
-✅ **Bilanciamento del carico**: Bilanciamento del carico integrato tra le repliche  
-✅ **Auto-scaling**: Scalabilità indipendente per servizio basata sulle richieste HTTP  
-✅ **Monitoraggio di integrità**: Probe di liveness e readiness per entrambi i servizi  
-✅ **Logging distribuito**: Logging centralizzato con Application Insights  
-✅ **Networking interno**: Comunicazione sicura servizio-servizio  
-✅ **Orchestrazione dei container**: Distribuzione e scaling automatici  
-✅ **Aggiornamenti senza downtime**: Aggiornamenti rolling con gestione delle revisioni  
+Il catalogo prodotto contiene cinque prodotti fissi in memoria. Non ci sono **handler POST,
+PUT o DELETE**, database, Service Bus, servizi ordini/utenti/notifiche,
+codice C# o Go. Queste sono idee per sviluppi futuri, non funzionalità incluse.
+Il gateway non autentica gli utenti; l'ingresso interno non è un sostituto
+per l'autorizzazione dell'applicazione.
 
 ## Prerequisiti
 
-### Strumenti richiesti
-
-Prima di iniziare, verifica di avere installato questi strumenti:
-
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versione 1.0.0 o superiore)
-   ```bash
-   azd version
-   # Output previsto: azd versione 1.0.0 o superiore
-   ```
-
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versione 2.50.0 o superiore)
-   ```bash
-   az --version
-   # Output previsto: azure-cli 2.50.0 o superiore
-   ```
-
-3. **[Docker](https://www.docker.com/get-started)** (per sviluppo/test locale - opzionale)
-   ```bash
-   docker --version
-   # Output previsto: Docker versione 20.10 o superiore
-   ```
-
-### Requisiti Azure
-
-- Una **sottoscrizione Azure** attiva ([crea un account gratuito](https://azure.microsoft.com/free/))
-- Autorizzazioni per creare risorse nella tua sottoscrizione
-- Ruolo **Contributor** sulla sottoscrizione o sul gruppo di risorse
-
-### Conoscenze richieste
-
-Questo è un esempio di livello **avanzato**. Dovresti aver:
-- Completato l'esempio [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
-- Comprensione di base dell'architettura a microservizi
-- Familiarità con le REST API e HTTP
-- Comprensione dei concetti dei container
-
-**Nuovo a Container Apps?** Inizia prima con l'esempio [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) per apprendere le basi.
-
-## Avvio rapido (Passo dopo passo)
-
-### Passo 1: Clona e spostati nella directory
+Completa prima il [single Flask API](../../../../../examples/container-app/simple-flask-api).
+Installa una versione stabile attuale di azd (rilascio pubblicato al momento della revisione: 1.37.2), Azure CLI,
+e Docker con il demone in esecuzione. Hai bisogno di un abbonamento Azure, permessi
+di creazione risorse e quota regionale Container Apps.
 
 ```bash
-git clone https://github.com/microsoft/AZD-for-beginners.git
-cd AZD-for-beginners/examples/container-app/microservices
-```
-
-**✓ Verifica di successo**: Verifica che sia presente `azure.yaml`:
-```bash
-ls
-# Previsto: README.md, azure.yaml, infra/, src/
-```
-
-### Passo 2: Autenticarsi con Azure
-
-```bash
+azd version
+az version
+docker info
 azd auth login
+az login
 ```
 
-Questo apre il browser per l'autenticazione Azure. Accedi con le tue credenziali Azure.
+Usa lo stesso abbonamento in entrambi gli strumenti CLI. I comandi di seguito usano Bash.
 
-**✓ Verifica di successo**: Dovresti vedere:
-```
-Logged in to Azure.
-```
+## Distribuisci e verifica
 
-### Passo 3: Inizializza l'ambiente
+Dalla radice del repository:
 
 ```bash
-azd init
-```
-
-**Richieste che vedrai**:
-- **Nome ambiente**: Inserisci un nome breve (es., `microservices-dev`)
-- **Sottoscrizione Azure**: Seleziona la tua sottoscrizione
-- **Posizione Azure**: Scegli una regione (es., `eastus`, `westeurope`)
-
-**✓ Verifica di successo**: Dovresti vedere:
-```
-SUCCESS: New project initialized!
-```
-
-### Passo 4: Distribuisci infrastruttura e servizi
-
-```bash
+cd examples/container-app/microservices
+azd env new microservices-demo
 azd up
+GATEWAY_URL=$(azd env get-value API_GATEWAY_URL)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+GATEWAY_NAME=$(azd env get-value API_GATEWAY_NAME)
+PRODUCT_NAME=$(azd env get-value PRODUCT_SERVICE_NAME)
+
+curl --fail-with-body "${GATEWAY_URL}/health"
+curl --fail-with-body "${GATEWAY_URL}/api/products"
+curl --fail-with-body "${GATEWAY_URL}/api/products/1"
+curl -i "${GATEWAY_URL}/api/products/999"
 ```
 
-**Cosa succede** (richiede 8-12 minuti):
-1. Crea l'ambiente Container Apps
-2. Crea Application Insights per il monitoraggio
-3. Costruisce il container API Gateway (Node.js)
-4. Costruisce il container Product Service (Python)
-5. Distribuisce entrambi i container su Azure
-6. Configura la rete e i controlli di integrità
-7. Imposta monitoraggio e logging
+**Successo:** health 200; list 200 con **cinque** prodotti; il prodotto 1 è un Laptop
+dal prezzo 999,99 con stock 50; prodotto sconosciuto restituisce 404.
+Le descrizioni sono incluse nelle risposte; i timestamp variano.
 
-**✓ Verifica di successo**: Dovresti vedere:
+L'approvvigionamento iniziale utilizza immagini pubbliche hello-world sulla porta 80 così non prova
+a scaricare immagini inesistenti da un registro vuoto. I moduli Bicep specifici per il servizio
+e i file parametri le sostituiscono con immagini costruite e porte/probe app durante
+`azd deploy`. I parametri principali preservano i nomi immagine pubblicati per l'approvvigionamento successivo.
+
+## Servizi e rete
+
+| Servizio | Endpoint esposti | Risorse di default |
+|---|---|---|
+| Gateway | GET `/`, `/health`, `/api/products`, `/api/products/:id` | 1 vCPU, 2 GiB, 2–20 repliche |
+| Product | GET `/`, `/health`, `/products`, `/products/<id>` | 0.5 vCPU, 1 GiB, 1–10 repliche |
+
+L'ingresso del prodotto ha `external: false` e `allowInsecure: false`. Bicep inietta
+`PRODUCT_SERVICE_URL=https://<actual-internal-fqdn>` nel gateway. HTTP sarebbe
+redirect; HTTPS corrisponde all'ingress configurato. Un nome DNS breve deve corrispondere al
+**nome reale del Container App**, non alla chiave logica del servizio `product-service`.
+Non tentare di chiamare l'URL interno direttamente dal tuo laptop.
+
+Il gateway ha un timeout di cinque secondi per le chiamate di prodotto. Gli ID prodotto mancanti
+si propagano come 404; fallimenti di trasporto/altri fallimenti backend restituiscono 503. Il gateway
+`/health` verifica solo il gateway, non la disponibilità del backend.
+
+## File e configurazione
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/abbreviations.json
+infra/core/container-apps-environment.bicep
+infra/core/monitor.bicep
+infra/app/api-gateway.bicep
+infra/app/api-gateway.parameters.json
+infra/app/product-service.bicep
+infra/app/product-service.parameters.json
+src/api-gateway/{app.js,package.json,Dockerfile}
+src/product-service/{main.py,requirements.txt,Dockerfile}
 ```
-SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
-Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
-```
 
-**⏱️ Tempo**: 8-12 minuti
+Scaling, CPU/memoria, porte e probe sono configurati in `infra/app/*.bicep`. Modifica quei
+file e esegui `azd up` per applicare l'infrastruttura e ridistribuire. Non c'è
+un parametro di variabile d'ambiente `GATEWAY_MAX_REPLICAS` in questo esempio.
 
-### Passo 5: Testare la distribuzione
+Per modifiche solo al codice:
 
 ```bash
-# Ottieni l'endpoint del gateway
-GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
-
-# Verifica lo stato di salute dell'API Gateway
-curl $GATEWAY_URL/health
-
-# Output previsto:
-# {"status":"operativo","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
-```
-
-**Test del Product Service attraverso il gateway**:
-```bash
-# Elenca i prodotti
-curl $GATEWAY_URL/api/products
-
-# Output previsto:
-# [
-#   {"id":1,"name":"Laptop","price":999.99,"stock":50},
-#   {"id":2,"name":"Mouse","price":29.99,"stock":200},
-#   {"id":3,"name":"Keyboard","price":79.99,"stock":150}
-# ]
-```
-
-**✓ Verifica di successo**: Entrambi gli endpoint restituiscono dati JSON senza errori.
-
----
-
-**🎉 Congratulazioni!** Hai distribuito un'architettura a microservizi su Azure!
-
-## Struttura del progetto
-
-Tutti i file di implementazione sono inclusi—questo è un esempio completo e funzionante:
-
-```
-microservices/
-│
-├── README.md                         # This file
-├── azure.yaml                        # AZD configuration
-├── .gitignore                        # Git ignore patterns
-│
-├── infra/                           # Infrastructure as Code (Bicep)
-│   ├── main.bicep                   # Main orchestration
-│   ├── abbreviations.json           # Naming conventions
-│   ├── core/                        # Shared infrastructure
-│   │   ├── container-apps-environment.bicep  # Container environment + registry
-│   │   └── monitor.bicep            # Application Insights + Log Analytics
-│   └── app/                         # Service definitions
-│       ├── api-gateway.bicep        # API Gateway container app
-│       └── product-service.bicep    # Product Service container app
-│
-└── src/                             # Application source code
-    ├── api-gateway/                 # Node.js API Gateway
-    │   ├── app.js                   # Express server with routing
-    │   ├── package.json             # Node dependencies
-    │   └── Dockerfile               # Container definition
-    └── product-service/             # Python Product Service
-        ├── main.py                  # Flask API with product data
-        ├── requirements.txt         # Python dependencies
-        └── Dockerfile               # Container definition
-```
-
-**Cosa fa ogni componente:**
-
-**Infrastruttura (infra/)**:
-- `main.bicep`: Orchestra tutte le risorse Azure e le loro dipendenze
-- `core/container-apps-environment.bicep`: Crea l'ambiente Container Apps e l'Azure Container Registry
-- `core/monitor.bicep`: Configura Application Insights per il logging distribuito
-- `app/*.bicep`: Definizioni delle singole container app con scaling e controlli di integrità
-
-**API Gateway (src/api-gateway/)**:
-- Servizio esposto pubblicamente che instrada le richieste ai servizi backend
-- Implementa logging, gestione degli errori e inoltro delle richieste
-- Dimostra comunicazione HTTP tra servizi
-
-**Product Service (src/product-service/)**:
-- Servizio interno con catalogo prodotti (in memoria per semplicità)
-- API REST con controlli di integrità
-- Esempio di pattern di microservizio backend
-
-## Panoramica dei servizi
-
-### API Gateway (Node.js/Express)
-
-**Port**: 8080  
-**Accesso**: Pubblico (ingresso esterno)  
-**Scopo**: Instrada le richieste in ingresso ai servizi backend appropriati  
-
-**Endpoints**:
-- `GET /` - Informazioni sul servizio
-- `GET /health` - Endpoint di controllo integrità
-- `GET /api/products` - Inoltra al Product Service (elenca tutti)
-- `GET /api/products/:id` - Inoltra al Product Service (recupera per ID)
-
-**Funzionalità principali**:
-- Instradamento delle richieste con axios
-- Logging centralizzato
-- Gestione degli errori e dei timeout
-- Scoperta dei servizi tramite variabili d'ambiente
-- Integrazione con Application Insights
-
-**Evidenza del codice** (`src/api-gateway/app.js`):
-```javascript
-// Comunicazione interna tra servizi
-app.get('/api/products', async (req, res) => {
-  const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-  res.json(response.data);
-});
-```
-
-### Product Service (Python/Flask)
-
-**Port**: 8000  
-**Accesso**: Solo interno (nessun ingresso esterno)  
-**Scopo**: Gestisce il catalogo prodotti con dati in memoria  
-
-**Endpoints**:
-- `GET /` - Informazioni sul servizio
-- `GET /health` - Endpoint di controllo integrità
-- `GET /products` - Elenca tutti i prodotti
-- `GET /products/<id>` - Recupera prodotto per ID
-
-**Funzionalità principali**:
-- API REST con Flask
-- Archivio prodotti in memoria (semplice, senza database)
-- Monitoraggio di integrità con probe
-- Logging strutturato
-- Integrazione con Application Insights
-
-**Modello dei dati**:
-```python
-{
-  "id": 1,
-  "name": "Laptop",
-  "description": "High-performance laptop",
-  "price": 999.99,
-  "stock": 50
-}
-```
-
-**Perché solo interno?**
-Il Product Service non è esposto pubblicamente. Tutte le richieste devono passare attraverso l'API Gateway, che fornisce:
-- Sicurezza: Punto di accesso controllato
-- Flessibilità: Puoi cambiare il backend senza influenzare i client
-- Monitoraggio: Logging centralizzato delle richieste
-
-## Comprendere la comunicazione tra servizi
-
-### Come i servizi comunicano tra loro
-
-In questo esempio, l'API Gateway comunica con il Product Service usando **chiamate HTTP interne**:
-
-```javascript
-// Gateway API (src/api-gateway/app.js)
-const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
-
-// Effettua una richiesta HTTP interna
-const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-```
-
-**Punti chiave**:
-
-1. **Scoperta basata su DNS**: Container Apps fornisce automaticamente DNS per i servizi interni
-   - FQDN del Product Service: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Semplificato come: `http://product-service` (Container Apps lo risolve)
-
-2. **Nessuna esposizione pubblica**: Product Service ha `external: false` in Bicep
-   - Accessibile solo all'interno dell'ambiente Container Apps
-   - Non può essere raggiunto da internet
-
-3. **Variabili d'ambiente**: Gli URL dei servizi vengono iniettati al momento della distribuzione
-   - Bicep passa il FQDN interno al gateway
-   - Nessun URL hardcoded nel codice dell'applicazione
-
-**Analogia**: Pensa a questo come a stanze in un ufficio. L'API Gateway è la reception (esposta al pubblico), e il Product Service è uno studio (solo interno). I visitatori devono passare dalla reception per raggiungere qualsiasi ufficio.
-
-## Opzioni di distribuzione
-
-### Distribuzione completa (consigliata)
-
-```bash
-# Distribuisci l'infrastruttura e entrambi i servizi
-azd up
-```
-
-Questo distribuisce:
-1. Ambiente Container Apps
-2. Application Insights
-3. Container Registry
-4. Container API Gateway
-5. Container Product Service
-
-**Tempo**: 8-12 minuti
-
-### Distribuire un singolo servizio
-
-```bash
-# Distribuire solo un servizio (dopo l'azd up iniziale)
-azd deploy api-gateway
-
-# Oppure distribuire il servizio product
 azd deploy product-service
+azd deploy api-gateway
 ```
 
-**Caso d'uso**: Quando hai aggiornato il codice in un servizio e vuoi ridistribuire solo quel servizio.
+L'immagine Node utilizza Node 22; l'immagine Python utilizza Python 3.11. Entrambi si collegano a
+`0.0.0.0`. Ingress/probe usano rispettivamente le porte 8080 (gateway) e 8000 (prodotto).
 
-### Aggiorna configurazione
+## Sviluppo locale con Docker
+
+Esegui da questa directory di esempio. Usa una rete definita dall'utente, **non `localhost`
+da un container per raggiungere l'altro**:
 
 ```bash
-# Modifica i parametri di ridimensionamento
-azd env set GATEWAY_MAX_REPLICAS 30
-
-# Ridispiega con la nuova configurazione
-azd up
+docker network create azd-microservices-demo
+docker build -t local-product ./src/product-service
+docker build -t local-gateway ./src/api-gateway
+docker run -d --name azd-product --network azd-microservices-demo local-product
+docker run -d --name azd-gateway --network azd-microservices-demo \
+  -p 8080:8080 -e PRODUCT_SERVICE_URL=http://azd-product:8000 local-gateway
+curl --fail-with-body http://localhost:8080/api/products
 ```
 
-## Configurazione
-
-### Configurazione dello scaling
-
-Entrambi i servizi sono configurati con autoscaling basato su HTTP nei loro file Bicep:
-
-**API Gateway**:
-- Replica minima: 2 (sempre almeno 2 per disponibilità)
-- Replica massima: 20
-- Trigger di scaling: 50 richieste concorrenti per replica
-
-**Product Service**:
-- Replica minima: 1 (può scalare a zero se necessario)
-- Replica massima: 10
-- Trigger di scaling: 100 richieste concorrenti per replica
-
-**Personalizza lo scaling** (in `infra/app/*.bicep`):
-```bicep
-scale: {
-  minReplicas: 1
-  maxReplicas: 10
-  rules: [
-    {
-      name: 'http-scale-rule'
-      http: {
-        metadata: {
-          concurrentRequests: '100'  // Adjust this
-        }
-      }
-    }
-  ]
-}
-```
-
-### Allocazione delle risorse
-
-**API Gateway**:
-- CPU: 1.0 vCPU
-- Memoria: 2 GiB
-- Motivo: Gestisce tutto il traffico esterno
-
-**Product Service**:
-- CPU: 0.5 vCPU
-- Memoria: 1 GiB
-- Motivo: Operazioni leggere in memoria
-
-### Controlli di integrità
-
-Entrambi i servizi includono probe di liveness e readiness:
-
-```bicep
-probes: [
-  {
-    type: 'Liveness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 10
-    periodSeconds: 30
-  }
-  {
-    type: 'Readiness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 5
-    periodSeconds: 10
-  }
-]
-```
-
-**Cosa significa questo**:
-- **Liveness**: Se il controllo di integrità fallisce, Container Apps riavvia il container
-- **Readiness**: Se non è pronto, Container Apps smette di instradare il traffico a quella replica
-
-
-
-## Monitoraggio e osservabilità
-
-### Visualizzare i log dei servizi
+Previsto: cinque prodotti. HTTP è usato solo per questa rete Docker locale.
 
 ```bash
-# Visualizza i log usando azd monitor
-azd monitor --logs
-
-# Oppure usa Azure CLI per le Container Apps specifiche:
-# Esegui lo streaming dei log dall'API Gateway
-az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
-
-# Visualizza i log recenti del servizio product
-az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
+docker stop azd-product azd-gateway
+docker rm azd-product azd-gateway
+docker network rm azd-microservices-demo
 ```
 
-**Output previsto**:
+## Monitoraggio
+
+```bash
+az containerapp logs show --name "$GATEWAY_NAME" --resource-group "$RG_NAME" --follow
+# In a separate terminal:
+az containerapp logs show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" --tail 100
 ```
-[api-gateway] API Gateway listening on port 8080
-[api-gateway] Product Service URL: http://product-service
-[api-gateway] GET /api/products 200 - 45ms
-[product-service] Retrieved 5 products
-```
 
-### Query per Application Insights
+`azd monitor --logs` apre una vista portale; non trasmette i log del terminale.
+L'SDK Node raccoglie richieste/dipendenze del gateway. Il `AzureLogHandler` di Python
+esporta **tracce di log**, non richieste Flask automatiche, dipendenze SQL o tracce distribuite complete.
+OpenCensus è un SDK legacy; preferisci Azure Monitor OpenTelemetry
+quando estendi questo esempio.
 
-Accedi a Application Insights nel Portale di Azure, quindi esegui queste query:
+Nei Log di Application Insights, genera richieste e ispeziona:
 
-**Trova richieste lente**:
 ```kusto
 requests
 | where timestamp > ago(1h)
-| where duration > 1000  // Requests taking >1 second
-| summarize count() by name, cloud_RoleName
-| order by count_ desc
+| where name contains "products"
+| summarize RequestCount=count(), AvgDuration=avg(duration) by bin(timestamp, 5m)
 ```
 
-**Traccia le chiamate tra servizi**:
+Per i messaggi dell'applicazione Python:
+
 ```kusto
-dependencies
+traces
 | where timestamp > ago(1h)
-| where type == "Http"
-| project timestamp, name, target, duration, success
-| order by timestamp desc
+| where message contains "products"
+| project timestamp, message, severityLevel
 ```
 
-**Tasso di errore per servizio**:
-```kusto
-exceptions
-| where timestamp > ago(24h)
-| summarize errorCount = count() by cloud_RoleName, type
-| order by errorCount desc
-```
-
-**Volume di richieste nel tempo**:
-```kusto
-requests
-| where timestamp > ago(1h)
-| summarize requestCount = count() by bin(timestamp, 5m), cloud_RoleName
-| render timechart
-```
-
-### Accesso alla dashboard di monitoraggio
-
-```bash
-# Ottieni i dettagli di Application Insights
-azd env get-values | grep APPLICATIONINSIGHTS
-
-# Apri il monitoraggio nel Portale di Azure
-az monitor app-insights component show \
-  --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
-  --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
-  --query "appId" -o tsv
-```
-
-### Metriche in tempo reale
-
-1. Vai a Application Insights nel Portale di Azure
-2. Clicca "Live Metrics"
-3. Vedi richieste, errori e prestazioni in tempo reale
-4. Testa eseguendo: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+Consenti un ritardo di ingestione e un campionamento; non aspettarti un conteggio esatto delle richieste o una
+latenza garantita. Nessun avviso personalizzato o dashboard è configurato.
 
 ## Esercizi pratici
 
-[Nota: Vedi gli esercizi completi sopra nella sezione "Esercizi pratici" per esercizi dettagliati passo-passo inclusi verifica della distribuzione, modifica dei dati, test di autoscaling, gestione degli errori e aggiunta di un terzo servizio.]
+### Esercizio 1: Modifica il catalogo
 
-## Analisi dei costi
+**Punto di partenza:** `src/product-service/main.py`.
+**Obiettivo:** verificare il deployment indipendente del servizio.
+Cambia lo stock del Laptop da 50 a 49 nella lista fissa `products`, esegui
+`azd deploy product-service`, poi richiedi `${GATEWAY_URL}/api/products/1`.
 
-### Costi mensili stimati (per questo esempio a 2 servizi)
+**Criteri di successo / soluzione:** HTTP 200 con `"stock":49`. Ripristina 50 e ridistribuisci.
+**Problema comune:** modificare il gateway invece del servizio che possiede il catalogo.
+Questo cambia i dati sorgente, non un database persistente dell'inventario.
 
-| Risorsa | Configurazione | Costo stimato |
-|----------|--------------|----------------|
-| API Gateway | 2-20 repliche, 1 vCPU, 2GB RAM | $30-150 |
-| Product Service | 1-10 repliche, 0.5 vCPU, 1GB RAM | $15-75 |
-| Container Registry | livello Basic | $5 |
-| Application Insights | 1-2 GB/mese | $5-10 |
-| Log Analytics | 1 GB/mese | $3 |
-| **Totale** | | **$58-243/mese** |
+### Esercizio 2: Verifica la configurazione delle repliche
 
-**Ripartizione dei costi in base all'uso**:
-- **Traffico leggero** (test/apprendimento): ~$60/mese
-- **Traffico moderato** (piccola produzione): ~$120/mese
-- **Traffico elevato** (periodi intensi): ~$240/mese
-
-### Suggerimenti per l'ottimizzazione dei costi
-
-1. **Scalare a zero per lo sviluppo**:
-   ```bicep
-   scale: {
-     minReplicas: 0  // Save $30-40/month when not in use
-     maxReplicas: 10
-   }
-   ```
-
-2. **Usa il piano a consumo per Cosmos DB** (quando lo aggiungi):
-   - Paga solo per ciò che usi
-   - Nessun addebito minimo
-
-3. **Imposta il campionamento di Application Insights**:
-   ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Campiona il 50% delle richieste
-   ```
-
-4. **Pulisci quando non necessario**:
-   ```bash
-   azd down
-   ```
-
-### Opzioni del piano gratuito
-
-Per apprendimento/test, considera:
-- Usa i crediti gratuiti di Azure (primi 30 giorni)
-- Mantieni il numero minimo di repliche
-- Elimina dopo i test (nessun costo continuo)
-
----
-
-## Pulizia
-
-Per evitare costi continui, elimina tutte le risorse:
+**Punto di partenza:** `infra/app/product-service.bicep`.
+**Obiettivo:** osservare un cambiamento dell'infrastruttura senza indovinare l'autoscaling.
+Cambia `minReplicas: 1` in `minReplicas: 2`, esegui `azd up`, poi:
 
 ```bash
-azd down --force --purge
+az containerapp show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" \
+  --query properties.template.scale -o json
 ```
 
-**Prompt di conferma**:
-```
-? Total resources to delete: 6, are you sure you want to continue? (y/N)
-```
+**Criteri di successo:** il minimo configurato è 2 e il massimo resta 10.
+Ripristina il minimo a 1 e esegui `azd up`.
+**Problema comune:** `azd deploy` da solo non applica modifiche all'infrastruttura condivisa non correlata.
+Non impostare `maxReplicas` a zero come simulazione di fallimento.
+Questo verifica la configurazione, non un test di carico o un conteggio garantito e istantaneo delle repliche.
 
-Digita `y` per confermare.
+### Esercizio 3: Testa localmente la gestione del servizio non disponibile
 
-**Cosa viene eliminato**:
-- Ambiente Container Apps
-- Entrambe le Container Apps (gateway e servizio prodotti)
-- Registro dei Container
-- Application Insights
-- Workspace di Log Analytics
-- Gruppo di risorse
+**Punto di partenza:** entrambi i container Docker locali sopra sono in esecuzione.
+**Obiettivo:** distinguere un fallimento backend da un prodotto mancante.
+Ferma solo il container del prodotto:
 
-**✓ Verifica pulizia**:
 ```bash
-az group list --query "[?starts_with(name,'rg-microservices')]" --output table
+docker stop azd-product
+curl -i http://localhost:8080/api/products
+docker start azd-product
+curl --fail-with-body http://localhost:8080/api/products
 ```
 
-Dovrebbe restituire vuoto.
+**Criteri di successo:** mentre è fermo, il gateway restituisce 503 con
+`"error":"Product service unavailable"`; dopo il riavvio, la lista restituisce 200.
+Riprova dopo un breve ritardo di avvio se necessario.
+**Problema comune:** fermare il gateway testa un fallimento differente (nessuna risposta HTTP).
 
----
+## Costi e lacune in produzione
 
-## Guida all'espansione: da 2 a 5+ servizi
+Le repliche minime predefinite mantengono il calcolo in esecuzione. Anche il registro e il monitoraggio comportano
+costi. Non esiste un totale fisso convalidato di $50/mese: stima CPU/memoria regionale,
+ore di replica, richieste, registro e conservazione dei log nel
+[calcolatore prezzi Azure](https://azure.microsoft.com/pricing/calculator/).
+Elimina rapidamente le risorse di apprendimento.
 
-Una volta che hai padroneggiato questa architettura a 2 servizi, ecco come espanderla:
+Il lavoro di produzione include autenticazione/autorizzazione, identità gestite con ambito,
+dati persistenti, convalida input/risposta, strumentazione di osservabilità supportata,
+test di carico/errore, CI/CD, avvisi e procedure di recupero. Aggiungere un servizio di ordinazione,
+coda o database è un compito di implementazione separato, non un esercizio completato
+o una funzionalità già disponibile qui.
 
-### Fase 1: Aggiungere la persistenza del database (Passo successivo)
+## Risoluzione dei problemi e pulizia
 
-**Aggiungere Cosmos DB per il servizio prodotti**:
+- **Immagine non trovata durante la prima fornitura:** il bootstrap dovrebbe usare l’immagine pubblica;
+  verifica i valori predefiniti del parametro principale dell’immagine e le mappature del modulo di distribuzione.
+- **Errori 503:** controlla i log del prodotto, la revisione dell’immagine e l’URL HTTPS interno iniettato.
+- **Percorso 404 inatteso:** l’API del prodotto è di sola lettura; verifica il percorso, non un gestore CRUD inesistente.
+- **Nessuna telemetria:** ispeziona le stringhe di connessione in fase di esecuzione senza esporle e
+  consenti un ritardo nell’ingestione. Le tabelle delle richieste Python non sono popolate dal suo gestore di log.
 
-1. Crea `infra/core/cosmos.bicep`:
-   ```bicep
-   resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
-     name: name
-     location: location
-     kind: 'GlobalDocumentDB'
-     properties: {
-       databaseAccountOfferType: 'Standard'
-       locations: [{ locationName: location, failoverPriority: 0 }]
-     }
-   }
-   ```
+Da questa directory di esempio:
 
-2. Aggiorna il servizio prodotti per usare Cosmos DB invece della memorizzazione in memoria
-
-3. Costo aggiuntivo stimato: ~$25/mese (serverless)
-
-### Fase 2: Aggiungere un terzo servizio (Gestione ordini)
-
-**Creare il servizio ordini**:
-
-1. Nuova cartella: `src/order-service/` (Python/Node.js/C#)
-2. Nuovo Bicep: `infra/app/order-service.bicep`
-3. Aggiorna l'API Gateway per instradare `/api/orders`
-4. Aggiungi Azure SQL Database per la persistenza degli ordini
-
-**L'architettura diventa**:
-```
-API Gateway → Product Service (Cosmos DB)
-           → Order Service (Azure SQL)
-```
-
-### Fase 3: Aggiungere comunicazione asincrona (Service Bus)
-
-**Implementare un'architettura event-driven**:
-
-1. Aggiungi Azure Service Bus: `infra/core/servicebus.bicep`
-2. Il servizio prodotti pubblica eventi "ProductCreated"
-3. Il servizio ordini si sottoscrive agli eventi dei prodotti
-4. Aggiungi un servizio di notifiche per elaborare gli eventi
-
-**Pattern**: Request/Response (HTTP) + Event-Driven (Service Bus)
-
-### Fase 4: Aggiungere autenticazione utente
-
-**Implementare il servizio utenti**:
-
-1. Crea `src/user-service/` (Go/Node.js)
-2. Aggiungi Azure AD B2C o autenticazione JWT personalizzata
-3. L'API Gateway convalida i token
-4. I servizi verificano i permessi degli utenti
-
-### Fase 5: Prontezza per la produzione
-
-**Aggiungi questi componenti**:
-- Azure Front Door (bilanciamento del carico globale)
-- Azure Key Vault (gestione dei segreti)
-- Azure Monitor Workbooks (dashboard personalizzate)
-- Pipeline CI/CD (GitHub Actions)
-- Deployment Blue-Green
-- Managed Identity per tutti i servizi
-
-**Costo dell'architettura completa di produzione**: ~$300-1,400/mese
-
----
-
-## Per saperne di più
-
-### Documentazione correlata
-- [Documentazione Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Guida all'architettura a microservizi](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights per il tracciamento distribuito](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Documentazione Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-
-### Prossimi passi in questo corso
-- ← Precedente: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Esempio per principianti con singolo contenitore
-- → Successivo: [Guida all'integrazione AI](../../../../../examples/docs/ai-foundry) - Aggiungi funzionalità AI
-- 🏠 [Home del corso](../../README.md)
-
-### Confronto: quando usare cosa
-
-**Applicazione a contenitore singolo** (esempio Simple Flask API):
-- ✅ Applicazioni semplici
-- ✅ Architettura monolitica
-- ✅ Rapida da distribuire
-- ❌ Scalabilità limitata
-- **Costo**: ~$15-50/mese
-
-**Microservizi** (questo esempio):
-- ✅ Applicazioni complesse
-- ✅ Scalabilità indipendente per servizio
-- ✅ Autonomia dei team (diversi servizi, diversi team)
-- ❌ Più complesso da gestire
-- **Costo**: ~$60-250/mese
-
-**Kubernetes (AKS)**:
-- ✅ Controllo e flessibilità massimi
-- ✅ Portabilità multi-cloud
-- ✅ Networking avanzato
-- ❌ Richiede competenze su Kubernetes
-- **Costo**: ~$150-500/mese minimo
-
-**Raccomandazione**: Inizia con Container Apps (questo esempio), passa a AKS solo se hai bisogno di funzionalità specifiche di Kubernetes.
-
----
-
-## Domande frequenti
-
-**Q: Perché solo 2 servizi invece di 5+?**  
-A: Progressione didattica. Padroneggia i fondamentali (comunicazione tra servizi, monitoraggio, scalabilità) con un esempio semplice prima di aggiungere complessità. I pattern che impari qui si applicano ad architetture con 100 servizi.
-
-**Q: Posso aggiungere altri servizi da solo?**  
-A: Assolutamente! Segui la guida all'espansione sopra. Ogni nuovo servizio segue lo stesso pattern: crea la cartella src, crea il file Bicep, aggiorna azure.yaml, distribuisci.
-
-**Q: È pronto per la produzione?**  
-A: È una base solida. Per la produzione, aggiungi: managed identity, Key Vault, database persistenti, pipeline CI/CD, avvisi di monitoraggio e strategia di backup.
-
-**Q: Perché non utilizzare Dapr o un altro service mesh?**  
-A: Per mantenerlo semplice per l'apprendimento. Una volta compresa la rete nativa di Container Apps, puoi aggiungere Dapr per scenari avanzati.
-
-**Q: Come faccio il debug in locale?**  
-A: Esegui i servizi in locale con Docker:
 ```bash
-cd src/api-gateway
-docker build -t local-gateway .
-docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
+azd down
 ```
 
-**Q: Posso usare linguaggi di programmazione diversi?**  
-A: Sì! Questo esempio mostra Node.js (gateway) + Python (servizio prodotti). Puoi mescolare qualsiasi linguaggio che giri in container.
+Rivedi i prompt di eliminazione e verifica che il gruppo di risorse dedicato venga rimosso.
 
-**Q: E se non ho crediti Azure?**  
-A: Usa il piano gratuito di Azure (primi 30 giorni per account nuovo) o distribuisci per brevi periodi di test ed elimina immediatamente.
-
----
-
-> **🎓 Riepilogo del percorso di apprendimento**: Hai imparato a distribuire un'architettura multi-servizio con scaling automatico, networking interno, monitoraggio centralizzato e pattern pronti per la produzione. Questa base ti prepara per sistemi distribuiti complessi e architetture enterprise a microservizi.
- 
-**📚 Navigazione del corso:**
-- ← Precedente: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
-- → Successivo: [Esempio di integrazione database](../../../../../examples/database-app)
-- 🏠 [Home del corso](../../../README.md)
-- 📖 [Best practice per Container Apps](../../../docs/chapter-04-infrastructure/deployment-guide.md)
+[Precedente: Flask API](../../../../../examples/container-app/simple-flask-api) · [Successivo: App database](../../../../../examples/database-app) ·
+[Sviluppo AI](../../../docs/chapter-02-ai-development/README.md) ·
+[Home del corso](../../../README.md) · [Segnala un problema](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire la precisione, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall’uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

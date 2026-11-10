@@ -1,4 +1,4 @@
-# Bab 7: Penyelesaian Masalah & Pengendalian Ralat
+# Bab 7: Penyelesaian Masalah & Pengesan Ralat
 
 **📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1-1.5 jam | **⭐ Kerumitan**: Sederhana
 
@@ -6,15 +6,15 @@
 
 ## Gambaran Keseluruhan
 
-Bab ini membantu anda mendiagnosis dan menyelesaikan isu-isu biasa semasa bekerja dengan Azure Developer CLI. Dari kegagalan penyebaran hingga masalah khusus AI.
+Bab ini membantu anda mendiagnosis dan menyelesaikan isu biasa ketika bekerja dengan Azure Developer CLI. Dari kegagalan penyebaran hingga masalah khusus AI.
 
-> Disahkan dengan `azd 1.27.1` pada Julai 2026.
+> Panduan arahan disemak berdasarkan rujukan `azd 1.37.2` yang dikeluarkan. Penyebaran awan tidak dilaksanakan. Gantikan nama sumber dan ID contoh sebelum menggunakan arahan.
 
 ## Objektif Pembelajaran
 
 Dengan menamatkan bab ini, anda akan:
 - Mendiagnosis kegagalan penyebaran AZD yang biasa
-- Mengendalikan ralat pengesahan dan kebenaran
+- Mengesan ralat pengesahan dan kebenaran
 - Menyelesaikan masalah sambungan perkhidmatan AI
 - Menggunakan Azure Portal dan CLI untuk penyelesaian masalah
 
@@ -24,23 +24,23 @@ Dengan menamatkan bab ini, anda akan:
 
 | # | Pelajaran | Penerangan | Masa |
 |---|--------|-------------|------|
-| 1 | [Isu Biasa](common-issues.md) | Masalah yang sering dijumpai | 30 min |
-| 2 | [Panduan Pengendalian Ralat](debugging.md) | Strategi pengendalian ralat langkah demi langkah | 45 min |
+| 1 | [Isu Biasa](common-issues.md) | Masalah yang sering ditemui | 30 min |
+| 2 | [Panduan Pengesanan Ralat](debugging.md) | Strategi pengesanan ralat langkah demi langkah | 45 min |
 | 3 | [Penyelesaian Masalah AI](ai-troubleshooting.md) | Isu khusus AI | 30 min |
 
 ---
 
-## 🚨 Penyelesaian Cepat
+## 🚨 Pembetulan Pantas
 
 ### Isu Pengesahan
 ```bash
-# Diperlukan untuk aliran kerja AZD
+# Required for AZD workflows
 azd auth login
 
-# Pilihan jika anda juga menggunakan arahan Azure CLI secara langsung
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
 ### Kegagalan Penyediaan
@@ -51,44 +51,49 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Konflik Sumber
+Periksa terlebih dahulu sumber sedia ada dan ralat penyebaran. Jangan padam persekitaran yang dikongsi atau produksi untuk menyelesaikan konflik penamaan. Untuk **persekitaran buangan baru**, gunakan nama unik:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Kuota Melebihi Had
+### Kuota Terlampau
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Menukar `AZURE_LOCATION` tidak memindahkan sumber sedia ada dan boleh menyebabkan konflik lokasi semasa penyebaran semula.
 
 ---
 
 ## 📋 Rujukan Kod Ralat
 
-| Ralat | Punca | Penyelesaian |
+| Ralat | Sebab | Penyelesaian |
 |-------|-------|----------|
 | `AuthenticationError` | Tidak log masuk | `azd auth login` |
 | `ResourceNotFound` | Sumber hilang | Semak nama sumber |
-| `QuotaExceeded` | Had langganan | Mohon kenaikan kuota |
-| `InvalidTemplate` | Kesilapan sintaks Bicep | `az bicep build` |
-| `Conflict` | Sumber sudah wujud | Gunakan nama baru atau padam |
+| `QuotaExceeded` | Had langganan | Mohon peningkatan kuota |
+| `InvalidTemplate` | Ralat sintaks Bicep | `az bicep build` |
+| `Conflict` | Sumber wujud | Gunakan nama baru atau padam |
 | `Forbidden` | Kebenaran tidak mencukupi | Semak peranan RBAC |
 
 ---
 
-## 🔄 Reset dan Pemulihan
+## 🔄 Tetapan Semula dan Pemulihan
 
 ```bash
-# Reset lembut (simpan sumber, pasang semula kod)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Reset keras (padamkan semua, mula semula)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Tetapan semula keras memadam data dan mungkin mengubah titik hujung. Sandarkan terlebih dahulu dan semak arahan interaktif pemadaman. `--force --purge` hanya sesuai untuk persekitaran buangan apabila pemadaman tidak boleh dipulihkan dimaksudkan.
 
 ---
 
@@ -97,7 +102,7 @@ azd up
 | Arah | Bab |
 |-----------|---------|
 | **Sebelumnya** | [Bab 6: Pra-Penyebaran](../chapter-06-pre-deployment/README.md) |
-| **Seterusnya** | [Bab 8: Pengeluaran](../chapter-08-production/README.md) |
+| **Seterusnya** | [Bab 8: Produksi](../chapter-08-production/README.md) |
 
 ---
 

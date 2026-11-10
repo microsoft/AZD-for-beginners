@@ -1,59 +1,59 @@
-# Mang Ứng Dụng Riêng Của Bạn - Thêm azd vào Dự Án Hiện Tại
+# Mang Ứng Dụng Riêng Vào - Thêm azd vào Dự Án Hiện Có
 
-**Điều hướng chương:**
-- **📚 Trang Khóa Học**: [AZD Dành Cho Người Mới Bắt Đầu](../../README.md)
-- **📖 Chương Hiện Tại**: Chương 1 - Nền Tảng & Khởi Đầu Nhanh
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD Cho Người Mới](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 1 - Nền Tảng & Bắt Đầu Nhanh
 - **⬅️ Trước**: [Dự Án Đầu Tiên Của Bạn](first-project.md)
-- **➡️ Tiếp**: [Dev Containers & Codespaces](dev-containers.md)
+- **➡️ Tiếp Theo**: [Dev Containers & Codespaces](dev-containers.md)
 
-> Đã kiểm tra với `azd 1.27.1` vào tháng 7 năm 2026.
+> Mục tiêu xem xét lệnh và cấu hình: `azd 1.37.2` (Tháng 11/2026). Các tệp tạo ra phụ thuộc vào ứng dụng được phát hiện; việc triển khai Azure không được thực hiện trong bài kiểm tra này.
 
-## Giới thiệu
+## Giới Thiệu
 
-Trong [Dự Án Đầu Tiên Của Bạn](first-project.md) bạn đã triển khai một ứng dụng bằng cách bắt đầu từ một mẫu. Nhưng hầu hết thời gian bạn đã *có* một ứng dụng—một API Node.js, một dịch vụ Python Flask, một ứng dụng web .NET—đang nằm trong một thư mục trên máy của bạn. Bài học này hướng dẫn cách thêm azd vào mã hiện tại đó để bạn có thể triển khai nó bằng `azd up`, không cần mẫu.
+Trong [Dự Án Đầu Tiên Của Bạn](first-project.md) bạn đã triển khai một ứng dụng bằng cách bắt đầu từ một mẫu. Nhưng hầu hết thời gian bạn đã *có* một ứng dụng—một API Node.js, một dịch vụ Python Flask, một ứng dụng web .NET—nằm trong một thư mục trên máy bạn. Bài học này sẽ hướng dẫn bạn cách thêm azd vào mã nguồn hiện có đó để bạn có thể triển khai nó với `azd up`, không cần mẫu.
 
-## Mục tiêu học tập
+## Mục Tiêu Học Tập
 
-Sau bài học này, bạn sẽ:
-- Hiểu ba cách để bắt đầu một dự án azd
-- Chạy `azd init` trong một mã nguồn hiện có
+Sau khi kết thúc bài học này, bạn sẽ:
+- Hiểu ba cách để khởi tạo một dự án azd
+- Chạy `azd init` bên trong mã nguồn hiện có
 - Hiểu `azure.yaml` và thư mục `infra/` làm gì cho ứng dụng của bạn
-- Biết khi nào để azd tạo hạ tầng và khi nào tự viết
-- Triển khai ứng dụng hiện có của bạn lên Azure với `azd up`
+- Biết khi nào nên để azd tạo cơ sở hạ tầng vs. tự viết
+- Triển khai ứng dụng hiện có lên Azure bằng `azd up`
 
-## Kết quả học tập
+## Kết Quả Học Tập
 
 Sau khi hoàn thành bài học, bạn sẽ có thể:
-- Khởi tạo azd trong một dự án bạn đã có
-- Đọc và chỉnh sửa file `azure.yaml` cơ bản
-- Tạo hạ tầng khởi đầu với lệnh `azd infra generate`
-- Chọn dịch vụ Azure phù hợp cho ứng dụng của bạn
-- Triển khai và dọn dẹp ứng dụng của chính bạn
+- Khởi tạo azd trong dự án bạn đã có
+- Đọc và chỉnh sửa tệp `azure.yaml` cơ bản
+- Tạo cơ sở hạ tầng khởi đầu với `azd infra generate`
+- Chọn host Azure phù hợp cho ứng dụng của bạn
+- Triển khai và dọn dẹp ứng dụng của bạn
 
 ---
 
-## Ba Cách Bắt Đầu Dự Án azd
+## Ba Cách Khởi Đầu Một Dự Án azd
 
-| Điểm bắt đầu | Lệnh | Khi sử dụng |
+| Điểm khởi đầu | Lệnh | Khi nào dùng |
 |----------------|---------|-------------|
-| **Từ mẫu** | `azd init --template <name>` | Học tập, hoặc bắt đầu một ứng dụng mới từ mẫu có sẵn |
-| **Từ mã nguồn hiện có** | `azd init` (trong thư mục dự án) | Bạn đã có ứng dụng và muốn triển khai nó |
+| **Từ một mẫu** | `azd init --template <name> .` (thư mục trống) | Học tập, hoặc bắt đầu ứng dụng mới từ mẫu đã chứng minh |
+| **Từ mã nguồn hiện có** | `azd init` (trong thư mục dự án của bạn) | Bạn đã có ứng dụng và muốn triển khai nó |
 | **Từ repo Git** | `azd init --from-code` (trong repo đã clone) | Áp dụng azd cho repo hiện có |
 
-Bạn đã thực hành lựa chọn đầu tiên. Bài học này đề cập đến lựa chọn thứ hai—kịch bản thực tế phổ biến nhất.
+Bạn đã thực hành tùy chọn đầu tiên. Bài học này sẽ bao phủ tùy chọn thứ hai—kịch bản thực tế phổ biến nhất.
 
 ---
 
-## Bước 1: Chạy `azd init` trong dự án của bạn
+## Bước 1: Chạy `azd init` Trong Dự Án Của Bạn
 
-Mở terminal **trong thư mục dự án hiện có của bạn** và chạy:
+Mở terminal **bên trong thư mục dự án hiện có của bạn** và chạy:
 
 ```bash
 cd my-existing-app
 azd init
 ```
 
-azd sẽ hỏi bạn muốn khởi tạo như thế nào. Chọn:
+azd sẽ hỏi bạn muốn khởi tạo thế nào. Chọn:
 
 ```
 ? How do you want to initialize your app?
@@ -61,31 +61,30 @@ azd sẽ hỏi bạn muốn khởi tạo như thế nào. Chọn:
   Select a template
 ```
 
-Chọn **"Use code in the current directory."** azd sẽ quét thư mục, phát hiện ngôn ngữ và framework, và đề xuất máy chủ Azure.
+Chọn **"Sử dụng mã trong thư mục hiện tại."** azd sau đó sẽ quét thư mục, phát hiện ngôn ngữ và framework của bạn, và đề xuất một host.
 
-### azd phát hiện gì
+### Những gì azd phát hiện
 
-azd tìm các dấu hiệu như `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, hoặc `Dockerfile`, và gợi ý máy chủ Azure tương ứng:
+azd tìm kiếm các dấu hiệu ứng dụng như `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, hoặc một `Dockerfile`. Quy trình từ mã nguồn không phải là trình hướng dẫn chọn host chung cho mọi mục tiêu triển khai được hỗ trợ:
 
-| Ứng dụng của bạn | Máy chủ có thể phát hiện |
+| Ứng dụng của bạn | Host được phát hiện có thể là |
 |----------|----------------------|
-| Ứng dụng Node.js / Python / .NET web | Azure App Service hoặc Container Apps |
-| Ứng dụng đóng gói container (`Dockerfile`) | Azure Container Apps |
-| Ứng dụng Function | Azure Functions |
-| Website tĩnh (kết quả build React/Vue) | Azure Static Web Apps |
+| Ứng dụng web Node.js / Python / .NET được hỗ trợ | Thường là Azure Container Apps; kiểm tra định nghĩa được tạo ra |
+| Ứng dụng containerized (`Dockerfile`) | Azure Container Apps |
+| Ứng dụng Function hoặc dự án Static Web Apps | Dùng mẫu tương ứng hoặc viết `azure.yaml` và cơ sở hạ tầng nếu từ mã nguồn không hỗ trợ cấu trúc của bạn |
 
-Xác nhận dịch vụ được phát hiện, azd sẽ tạo các file bạn cần.
+Xác nhận dịch vụ được phát hiện, và azd tạo các tệp bạn cần.
 
 ---
 
 ## Bước 2: Hiểu Những Gì azd Tạo Ra
 
-Sau khi khởi tạo, dự án của bạn sẽ có hai thứ mới:
+Sau khi khởi tạo, kiểm tra `azure.yaml`. Quy trình tạo cơ sở hạ tầng có thể giữ cơ sở hạ tầng ngầm định cho đến khi bạn chạy `azd infra generate`; đừng cho rằng `infra/` đã tồn tại:
 
 ```
 my-existing-app/
 ├── azure.yaml          # ← NEW: tells azd what to deploy and where
-├── infra/              # ← NEW: Infrastructure as Code (Bicep by default)
+├── infra/              # Materialized with azd infra generate when using implicit infrastructure
 │   ├── main.bicep
 │   └── main.parameters.json
 ├── src/ (your code)    # unchanged
@@ -94,7 +93,7 @@ my-existing-app/
 
 ### `azure.yaml` — định nghĩa dự án
 
-Đây là phần trung tâm của dự án azd. Một file tối giản sẽ như sau:
+Đây là trái tim của dự án azd. Định nghĩa **App Service minh họa** sau đây yêu cầu cơ sở hạ tầng App Service tương ứng; không phải lý do để thay đổi host Container Apps được tạo ra mà không thay đổi cơ sở hạ tầng:
 
 ```yaml
 # azure.yaml
@@ -106,52 +105,54 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-Khối `services` là phần quan trọng: mỗi mục ánh xạ một thư mục mã nguồn của bạn tới một máy chủ Azure. Nếu ứng dụng bạn có frontend và API, bạn sẽ có hai dịch vụ.
+Khối `services` là phần quan trọng: mỗi mục ánh xạ một thư mục mã của bạn tới một host Azure. Nếu ứng dụng của bạn có cả giao diện frontend và API, bạn sẽ có hai dịch vụ.
 
-### `infra/` — tài nguyên Azure dưới dạng mã
+### `infra/` — tài nguyên Azure của bạn dưới dạng mã
 
-Thư mục `infra/` chứa các file Bicep định nghĩa các tài nguyên Azure cần cho ứng dụng (App Service, cơ sở dữ liệu, v.v.). Bạn không phải tự viết tay—azd sẽ tạo điểm bắt đầu làm việc. Bạn *có thể* chỉnh sửa sau để thêm tài nguyên hoặc nâng cao bảo mật (hướng dẫn trong [Chương 4](../chapter-04-infrastructure/README.md)).
+Thư mục `infra/` chứa các tệp Bicep định nghĩa các tài nguyên Azure mà ứng dụng của bạn cần (App Service, cơ sở dữ liệu, v.v.). Bạn không cần viết tay—azd tạo ra điểm khởi đầu hoạt động. Bạn *có thể* chỉnh sửa chúng sau để thêm tài nguyên hoặc tăng cường bảo mật (được đề cập trong [Chương 4](../chapter-04-infrastructure/README.md)).
 
-> **Mẹo:** Muốn xem hoặc tùy chỉnh hạ tầng được tạo ra trước khi triển khai? Chạy `azd infra generate` (cùng với lệnh `azd infra synth`) để ghi IaC ra ổ đĩa, bạn có thể xem xét và quản lý phiên bản.
+> **Mẹo:** Muốn xem hoặc tùy chỉnh cơ sở hạ tầng tạo ra trước khi triển khai? Chạy `azd infra generate` (cũng có dưới dạng `azd infra synth`) để ghi IaC ra đĩa, giúp bạn xem xét và kiểm soát phiên bản.
 
 ---
 
-## Bước 3: Thiết Lập Cấu Hình Cần Thiết
+## Bước 3: Cài Đặt Cấu Hình Cần Thiết
 
-Nếu ứng dụng của bạn cần cài đặt hoặc bí mật (chuỗi kết nối, khóa API), đừng nhúng cứng vào mã. Dùng biến môi trường:
+Nếu ứng dụng bạn cần các cài đặt hoặc bí mật (chuỗi kết nối, khóa API), đừng mã hóa cứng chúng. Dùng giá trị môi trường:
 
 ```bash
-# Tạo một môi trường
+# Create an environment
 azd env new dev
 
-# Đặt một giá trị không bí mật
+# Set a non-secret value
 azd env set API_VERSION 1.0.0
 ```
 
-Với các bí mật thật sự, lưu trữ trong Key Vault và tham chiếu từ hạ tầng—xem [Chương 3: Cấu Hình & Xác Thực](../chapter-03-configuration/authsecurity.md).
+Điều này chỉ lưu giá trị cục bộ. Để ảnh hưởng đến ứng dụng, phải sử dụng rõ ràng trong tham số cơ sở hạ tầng, cài đặt dịch vụ được hỗ trợ, hoặc hook; thiết lập biến tùy ý không cấu hình thời gian chạy đã triển khai.
+
+Với bí mật thật sự, hãy lưu trong Key Vault và tham chiếu trong cơ sở hạ tầng của bạn—xem [Chương 3: Cấu Hình & Xác Thực](../chapter-03-configuration/authsecurity.md).
 
 ---
 
 ## Bước 4: Triển Khai
 
-Giờ hãy dùng quy trình bạn đã biết:
+Bây giờ sử dụng quy trình bạn đã biết:
 
 ```bash
-# Xác thực (bắt buộc cho azd)
+# Authenticate (required for azd)
 azd auth login
 
-# Xem trước các tài nguyên sẽ được tạo
+# Preview the resources that will be created
 azd provision --preview
 
-# Cung cấp cơ sở hạ tầng và triển khai mã của bạn
+# Provision infrastructure and deploy your code
 azd up
 ```
 
-Khi hoàn tất, azd sẽ in URL ứng dụng của bạn. Kiểm tra nó giống như với bất kỳ ứng dụng azd nào:
+Khi hoàn thành, azd hiển thị URL ứng dụng của bạn. Kiểm tra nó như bất kỳ ứng dụng azd nào:
 
 ```bash
-azd show           # hiển thị các điểm cuối
-azd monitor --logs # kiểm tra nhật ký nếu cần thiết
+azd show           # show endpoints
+azd monitor --logs # check logs if needed
 ```
 
 ---
@@ -160,12 +161,12 @@ azd monitor --logs # kiểm tra nhật ký nếu cần thiết
 
 | Triệu chứng | Nguyên nhân có thể | Cách sửa |
 |---------|--------------|-----|
-| azd không phát hiện được ứng dụng của tôi | Thiếu file manifest (ví dụ `package.json`) | Thêm file manifest, hoặc chọn máy chủ thủ công khi `azd init` |
-| Build lỗi khi chạy `azd up` | Ứng dụng cần bước build | Thêm `buildCommand`/`outputPath` dưới dịch vụ trong `azure.yaml` |
-| Ứng dụng khởi chạy nhưng trả lỗi | Thiếu cấu hình/bí mật | Thiết lập bằng `azd env set` hoặc kết nối Key Vault |
-| Chọn sai máy chủ | Tự động phát hiện đoán sai | Chỉnh sửa `host:` trong `azure.yaml` và chạy lại `azd up` |
+| azd không phát hiện ứng dụng của tôi | Thiếu manifest (ví dụ, `package.json`) | Thêm manifest, hoặc chọn host thủ công khi chạy `azd init` |
+| Xây dựng lỗi trong lúc `azd up` | Ứng dụng cần bước xây dựng | Cấu hình script gói của ứng dụng hoặc hook dịch vụ `prepackage`; dùng `dist` cho đầu ra deploy, không dùng `buildCommand`/`outputPath` |
+| Ứng dụng khởi động nhưng trả lỗi | Thiếu cấu hình/bí mật | Kết nối giá trị vào cài đặt ứng dụng thời gian chạy hoặc tham chiếu Key Vault; chỉ `azd env set` không đủ |
+| Chọn sai host | Phát hiện tự động không phù hợp nhu cầu | Thay đổi cả `host:` và cơ sở hạ tầng tương ứng, hoặc chọn mẫu phù hợp |
 
-Thêm chi tiết xem [Chương 7: Khắc Phục Sự Cố](../chapter-07-troubleshooting/README.md).
+Chi tiết hơn, xem [Chương 7: Khắc Phục Sự Cố](../chapter-07-troubleshooting/README.md).
 
 ---
 
@@ -177,28 +178,28 @@ azd down --force --purge
 
 ---
 
-## Tóm tắt
+## Tóm Tắt
 
-- `azd init` → **"Use code in the current directory"** thêm azd vào dự án bạn đã có.
-- `azure.yaml` ánh xạ thư mục mã của bạn tới các máy chủ Azure; `infra/` định nghĩa tài nguyên dưới dạng Bicep.
-- `azd infra generate` cho phép xem lại hoặc tùy chỉnh hạ tầng đã tạo.
-- Khi đã khởi tạo, ứng dụng hiện có dùng cùng quy trình `azd up` / `azd down` như ứng dụng tạo từ mẫu.
+- `azd init` → **"Sử dụng mã trong thư mục hiện tại"** thêm azd vào ứng dụng bạn đã có.
+- `azure.yaml` ánh xạ các thư mục mã của bạn tới các host Azure; `infra/` định nghĩa tài nguyên dưới dạng Bicep.
+- `azd infra generate` cho phép bạn xem lại hoặc tùy chỉnh cơ sở hạ tầng tạo ra.
+- Sau khi khởi tạo, ứng dụng hiện có của bạn sử dụng chính xác quy trình `azd up` / `azd down` như ứng dụng dựa trên mẫu.
 
 ---
 
-## 🔗 Điều hướng
+## 🔗 Điều Hướng
 
-| Hướng | Bài học |
+| Hướng đi | Bài học |
 |-----------|--------|
 | **Trước** | [Dự Án Đầu Tiên Của Bạn](first-project.md) |
-| **Tiếp** | [Dev Containers & Codespaces](dev-containers.md) |
+| **Tiếp Theo** | [Dev Containers & Codespaces](dev-containers.md) |
 
-## 📖 Tài nguyên liên quan
+## 📖 Tài Nguyên Liên Quan
 
-- [Cơ bản về AZD](azd-basics.md)
-- [Chương 4: Hạ tầng như Mã](../chapter-04-infrastructure/README.md)
-- [Cấu hình & Xác thực](../chapter-03-configuration/authsecurity.md)
-- [Tổng hợp Lệnh](../../resources/cheat-sheet.md)
+- [Kiến Thức Cơ Bản AZD](azd-basics.md)
+- [Chương 4: Cơ Sở Hạ Tầng dưới dạng Mã](../chapter-04-infrastructure/README.md)
+- [Cấu Hình & Xác Thực](../chapter-03-configuration/authsecurity.md)
+- [Bảng Tóm Tắt Lệnh](../../resources/cheat-sheet.md)
 
 ---
 

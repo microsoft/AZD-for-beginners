@@ -1,63 +1,63 @@
-# Saját azd sablon készítése
+# Saját azd Sablon Írása
 
-**Fejezet navigáció:**
-- **📚 Tanfolyam főoldal**: [AZD kezdőknek](../../README.md)
-- **📖 Jelenlegi fejezet**: 4. fejezet - Infrastruktúra kódként és telepítés
-- **⬅️ Előző**: [Telepítési útmutató](deployment-guide.md)
-- **🚀 Következő fejezet**: [5. fejezet: Többügynökös megoldások](../chapter-05-multi-agent/README.md)
+**Fejezet Navigáció:**
+- **📚 Tanfolyam Kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Jelenlegi Fejezet**: 4. fejezet - Infrastruktúra kód formájában & Telepítés
+- **⬅️ Előző**: [Telepítési Útmutató](deployment-guide.md)
+- **🚀 Következő Fejezet**: [5. fejezet: Többügynökös megoldások](../chapter-05-multi-agent/README.md)
 
-> Ellenőrizve az `azd 1.27.1` verzióval 2026 júliusában.
+> Ellenőrizve `azd 1.37.2` alapján (2026 november). Ez egy **szerzői végigvezetés részleges fájlokkal**, nem egy teljes sablon: alkalmazáskódot és `modules/web.bicep`-t a környezettel, regisztrációval, Container Applikációval és kimenetekkel a telepítés előtt neked kell biztosítanod. Ebben az áttekintésben nem történt Azure előkészítés.
 
 ## Bevezetés
 
-Eddig *fogyasztottad* a sablonokat az `azd init --template <név>` paranccsal. De miután kialakítottad a projekthez azt az elrendezést, amit a csapatod szeret – például egy Container App-et Cosmos DB-vel és megfelelő monitorozással –, szeretnéd saját újrahasznosítható sablonná alakítani. Egy sablon egyszerűen egy Git tárhely előre meghatározott szerkezettel, amit az azd tud olvasni. Ez a lecké azt mutatja meg, hogyan készíts egy ilyen sablont nulláról, teszteld és (opcionálisan) publikáld a közösségi galériába.
+Eddig sablonokat *fogyasztottál* `azd init --template <name>`-vel. De amint van egy projektelrendezés, amit a csapatod szeret—például egy Container App Cosmos DB-vel és a megfelelő monitorozással—akkor saját újrahasznosítható sablont akarsz készíteni. Egy sablon csak egy Git repository kiszámítható szerkezettel, amit az azd tud olvasni. Ez a lecke megmutatja, hogyan kell egyet építeni a nulláról, tesztelni, és (opcionálisan) közzétenni a közösségi galériában.
 
 ## Tanulási célok
 
-A lecke végére:
-- Megérted, mi tesz egy mappát „azd sablonná”
-- Tudni fogod a szükséges fájlokat és mappa elrendezést
-- Hozzáadsz egy `azure.yaml` és `infra/` mappát, amit mások is újrahasznosíthatnak
-- Lokálisan teszteled a sablont megosztás előtt
-- Publikálod és (opcionálisan) beküldöd az Awesome AZD-be
+A lecke végére tudni fogod:
+- Mi teszi az azd sablonból mappát
+- Ismerni a kötelező fájlokat és mappastruktúrát
+- Hozzáadni egy `azure.yaml` és `infra/`, amit mások újrahasználhatnak
+- Helyben tesztelni a sablont megosztás előtt
+- Közzétenni és (opcionálisan) beküldeni az Awesome AZD-nek
 
 ## Tanulási eredmények
 
 A lecke elvégzése után képes leszel:
-- Létrehozni egy új sablon tárhelyet
+- Új sablon repositoryt létrehozni
 - Paraméterezni az infrastruktúrát, hogy bármely előfizetésben működjön
-- Érvényesíteni egy sablont `azd init` és `azd up` segítségével
-- Hozzáadni a közösségi galéria által megkövetelt metaadatokat
+- Érvényesíteni a sablont `azd init` és `azd up` segítségével
+- Hozzáadni a közösségi galéria számára szükséges metaadatokat
 
 ---
 
 ## Mi is az a sablon valójában?
 
-Egy azd sablon **egy Git tárhely**, amely legalább tartalmazza:
+Egy azd sablon **egy Git repository**, ami legalább a következőket tartalmazza:
 
 | Fájl / mappa | Cél | Kötelező? |
 |---------------|---------|-----------|
-| `azure.yaml` | Szolgáltatások, hosztok és infra szolgáltató leírása | ✅ Igen |
-| `infra/` | Bicep, Terraform vagy Pulumi, ami az erőforrásokat létrehozza | ✅ Igen |
-| `src/` (vagy a kódod) | Az alkalmazás kódja, amit az azd telepít | ✅ Igen |
+| `azure.yaml` | Leírja a szolgáltatásokat, hosztokat és az infra szolgáltatót | ✅ Igen |
+| `infra/` | Bicep vagy Terraform előkészítés definíciók | Kötelező ennél az expliciten IaC példánál; generált infrastruktúrás projektek kihagyhatják |
+| `src/` (vagy a kódod) | Az alkalmazáskód, amit az azd telepít | Kötelező forrás alapú szolgáltatásokhoz; nem minden sablon tartalmaz alkalmazáskódot |
 | `README.md` | Hogyan kell használni a sablont | ✅ Erősen ajánlott |
 | `.azdo/` vagy `.github/` | CI/CD pipeline definíciók | Opcionális |
-| `.devcontainer/` | Reprodukálható fejlesztői környezet | Opcionális |
-| `azure.yaml` `metadata` | Galéria + telemetria információk | Opcionális (publikáláshoz szükséges) |
+| `.devcontainer/` | Újrateremthető fejlesztői környezet | Opcionális |
+| `azure.yaml` `metadata` | Sablon identitás/telemetria adatok | Ajánlott; egy Git repo publikálásához nem kötelező |
 
-Nincs itt semmi varázslat: ha futtatod az `azd init --template you/your-repo` parancsot, az azd lemásolja a tárhelyet és beolvassa az `azure.yaml`-t.
+Nincs itt semmi varázslat: amikor futtatod az `azd init --template you/your-repo`-t, az azd lemásolja a repót és elolvassa az `azure.yaml`-et.
 
 ---
 
-## 1. lépés: A tárhely felépítése
+## 1. lépés: Repository Vázának Elkészítése
 
-Kézzel hozd létre a mappa struktúrát vagy indíts egy minimális sablonból és szerkeszd:
+Készítsd el a mappastruktúrát kézzel, vagy kezdj egy minimális sablonnal és szerkeszd azt:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Hozd létre az alapértelmezett elrendezést
+# Create the standard layout
 mkdir -p src infra
 ```
 
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## 2. lépés: Az `azure.yaml` megírása
+## 2. lépés: Írj `azure.yaml`-t
 
-Ez a sablon szíve. Megmondja az azd számára, hogy mit és hogyan telepítsen:
+Ez a sablon szíve. Megmondja az azd-nek, mit és hogyan telepítsen:
 
 ```yaml
 # azure.yaml
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -101,21 +101,21 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> A `metadata.template` mezőt használja a galéria telemetria a használat számlálására. Használd a `név@verzió` formátumot.
+> Az `metadata.template` mező a galéria telemetria számára használatos, hogy számolja a használatot. Használd az `name@version` konvenciót.
 
 ---
 
-## 3. lépés: Az infrastruktúra paraméterezése
+## 3. lépés: Paraméterezd az infrastruktúrát
 
-Egy *újrahasznosítható* sablon legfontosabb szabálya: **soha ne kódolj be neveket, régiókat vagy előfizetés-specifikus értékeket.** Használj paramétereket és erőforrás token mintát, hogy ugyanaz a sablon bárkinek az előfizetésében működjön.
+A *újrahasznosítható* sablon egyetlen legfontosabb szabálya: **soha ne kódolj be neveket, régiókat vagy előfizetés-specifikus értékeket.** Használj paramétereket és az erőforrás token mintát, hogy ugyanaz a sablon bármely előfizetésben működjön.
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -138,15 +145,18 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Két dolog teszi ezt a sablont barátivá:
+Két dolog teszi ezt sablonbaráttá:
 
-1. **`azd-env-name` címke** – az azd ez alapján követi és takarítja az erőforrásokat környezetenként.
-2. **`uniqueString(...)` erőforrás token** – stabil, globálisan egyedi utótagot állít elő, hogy a nevek ne ütközzenek.
+1. **`azd-env-name` címke** — az azd ezt használja a környezetenkénti erőforrások nyomon követésére és takarítására.
+2. **`uniqueString(...)` erőforrás token** — stabil hash végződést ad, hogy csökkentse az ütközéseket; nem garantál globális egyediséget.
 
-Adj meg egy hozzátartozó paraméterfájlt, amely olvassa az értékeket, amiket az azd injektál a környezetből:
+A hiányzó `modules/web.bicep`-nak el kell fogadnia az `name`, `location` és `tags` paramétereket, elő kell készítenie a Container Apps környezetet/regisztrációt és az alkalmazást, meg kell címkéznie az alkalmazást `azd-service-name: web`-tal, és exportálnia kell az `uri`-at. Kitéve kell továbbá a regisztrációs értékeket a választott build/deploy folyamathoz (például `AZURE_CONTAINER_REGISTRY_ENDPOINT` a gyökér modulból). Egy végpont kimenet önmagában nem vezeti be a szolgáltatásfelismerést, alkalmazásbeállításokat vagy regisztrációs hitelesítést.
+
+Biztosíts egy hozzáillő paraméterfájlt, ami az azd által a környezetből injektált értékeket olvassa:
+
+Mentsd a következőt `infra/main.parameters.json` néven:
 
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -157,87 +167,91 @@ Adj meg egy hozzátartozó paraméterfájlt, amely olvassa az értékeket, amike
 }
 ```
 
-Az azd automatikusan helyettesíti a `${AZURE_ENV_NAME}` és `${AZURE_LOCATION}` értékeket az aktuális környezetből.
+Az azd automatikusan behelyettesíti az `${AZURE_ENV_NAME}`-et és `${AZURE_LOCATION}`-t az aktuális környezetből.
 
 ---
 
-## 4. lépés: Teszteld a sablont helyben
+## 4. lépés: Teszteld helyben a sablont
 
-Megosztás előtt bizonyítsd be, hogy a sablon tiszta állapotból is működik.
+Megosztás előtt bizonyítsd be, hogy a sablon tiszta állapotból működik.
 
-**Teszteld a helyi mappából** (nem szükséges Git push):
+**Tesztelj a helyi mappából** (nem szükséges Git push):
 
 ```bash
-# Egy üres könyvtárból inicializálás a helyi sablon útvonal használatával
+# From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
-# Teljes körű előkészítés és telepítés
+# Provision + deploy end to end
 azd auth login
 azd up
 ```
 
-**Majd teszteld a lebontást** – egy jó sablon teljesen kitakarít:
+**Majd teszteld az eltávolítást**—egy jó sablon teljesen eltakarít:
 
 ```bash
 azd down --force --purge
 ```
 
-Ha az `azd down` erőforrásokat hagy maga után, valószínűleg hiányzik az `azd-env-name` címke egy erőforrásról.
+Ha az `azd down` erőforrásokat hagy hátra, ellenőrizd a környezet/erőforrás-csoport felismerést, külső/megosztott erőforrásokat, jogosultságokat, zárolásokat és törlés védelmet. Az `--purge` nem törli a helyi `.azure/` állapotot.
 
-> **Tipp:** futtasd először az `azd provision --preview` parancsot. Ez végrehajt egy "mi lenne ha" ellenőrzést, és hibákat jelez a sablonban mielőtt erőforrásokat hozna létre.
+> **Tipp:** miután megadtad az összes hiányzó fájlt, először futtasd az `azd provision --preview`-t. Nézd át a hookokat előnézet előtt, mert azok mellékhatásokat kiváltó parancsokat hajthatnak végre. Az előnézet nem árkalkuláció vagy garancia a sikeres előkészítésre.
 
 ---
 
-## 5. lépés: A sablon publikálása
+## 5. lépés: Tedd közzé a sablont
 
-Push-old a tárhelyet GitHub-ra (nyilvános, ha mások is használni akarják):
+Told fel a repo-t GitHubra (nyilvános, ha mások is használják):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
 Most bárki használhatja:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
 
-## 6. lépés (opcionális): Beküldés az Awesome AZD-be
+## 6. lépés (opcionális): Küldd be az Awesome AZD-nek
 
-Az [Awesome AZD galéria](https://azure.github.io/awesome-azd/) a közösségi sablonokat listázza. Ahhoz, hogy listázzanak, a repo-nak tartalmaznia kell:
+Az [Awesome AZD galéria](https://azure.github.io/awesome-azd/) közösségi sablonokat listáz. A listázáshoz a repo-nak tartalmaznia kell:
 
-- ✅ Egy érthető `README.md`-t előfeltételekkel, architektúra diagrammal és költségjegyzetekkel
-- ✅ Egy működő `azure.yaml`-t a `metadata.template`-tel
-- ✅ Infrastruktúrát, ami tisztán települ egy friss előfizetésbe
+- ✅ Egy világos `README.md`-et előfeltételekkel, architektúra diagrammal, és költségjegyzetekkel
+- ✅ Egy működő `azure.yaml`-et `metadata.template`-vel
+- ✅ Olyan infrastruktúrát, ami tisztán települ egy friss előfizetésbe
 - ✅ Egy `LICENSE` fájlt
 - ✅ (Ajánlott) Egy `.devcontainer/` egykattintásos Codespaces-hez
 
-Küldd be úgy, hogy pull requestet nyitsz, ami hozzáadja a sablonodat a galéria adatait tartalmazó fájlhoz, a hozzájárulási útmutató követésével az [Awesome AZD repóban](https://github.com/Azure/awesome-azd).
+Küldd be egy pull request formájában, ami hozzáadja a sablont a galéria adatfájlhoz, követve a hozzájárulási útmutatót az [Awesome AZD repositoryban](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Gyakori buktatók
+## Gyakori Buktatók
 
 | Buktató | Javítás |
 |---------|-----|
-| Beégetett erőforrás nevek | Használd a `uniqueString()` erőforrás tokent |
-| Az `azd down` erőforrásokat hagy | Címkézz fel minden erőforrást (vagy a resource groupot) `azd-env-name`-mel |
-| A sablon neked működik, másoknak nem | Távolítsd el az előfizetés ID-kat, tenant ID-kat és régió feltételezéseket |
-| Kimenetek nincsenek összekötve az alkalmazással | Exportáld a `SERVICE_<NÉV>_ENDPOINT_URL` és más `AZURE_*` kimeneteket |
-| Galéria beküldés elutasítva | Add hozzá a `README.md`-t, `LICENSE`-t és a `metadata.template`-et |
+| Beégetett erőforrásnevek | Használd az `uniqueString()` erőforrás tokent |
+| Az `azd down` erőforrásokat hagy | Címkézz meg minden erőforrást (vagy az erőforrás csoportot) az `azd-env-name`-val |
+| A sablon neked működik, másoknak nem | Távolítsd el az előfizetés-azonosítókat, bérlő azonosítókat és régió feltételezéseket |
+| A kimenetek nem csatlakoznak az app-hoz | Egyeztesd az `azd-service-name`/`resourceName`-ot a telepítéshez és explicit módon köss ki alkalmazás beállításokba |
+| Galéria beküldés elutasítva | Add hozzá az `README.md`-et, `LICENSE`-at és `metadata.template`-et |
 
 ---
 
 ## Összefoglalás
 
-- Egy sablon csak egy Git repo `azure.yaml`, `infra/` és a kódoddal.
-- Paraméterezd mindent – neveket, régiókat és azonosítókat –, hogy bárhol fusson.
-- Mindig címkézd az erőforrásokat `azd-env-name`-mel, hogy az `azd down` működjön.
-- Teszteld helyben az `azd init --template <helyi-útvonal>` paranccsal publikálás előtt.
-- Add hozzá a metaadatokat és egy README-t az Awesome AZD-be való beküldéshez.
+- Egy sablon csak egy Git repo `azure.yaml`-vel, `infra/`-vel és a kódoddal.
+- Paraméterezd az egészet— neveket, régiókat, és azonosítókat—hogy bárhol fusson.
+- Mindig címkézd az erőforrásokat `azd-env-name`-vel hogy `azd down` működjön.
+- Tesztelj helyben `azd init --template <local-path>`-vel a publikálás előtt.
+- Adj hozzá metaadatokat és egy README-t az Awesome AZD-nek való beküldéshez.
 
 ---
 
@@ -245,14 +259,14 @@ Küldd be úgy, hogy pull requestet nyitsz, ami hozzáadja a sablonodat a galér
 
 | Irány | Erőforrás |
 |-----------|----------|
-| **Előző** | [Telepítési útmutató](deployment-guide.md) |
-| **Fejezet főoldal** | [4. fejezet: Infrastruktúra kódként](README.md) |
-| **Következő fejezet** | [5. fejezet: Többügynökös megoldások](../chapter-05-multi-agent/README.md) |
+| **Előző** | [Telepítési Útmutató](deployment-guide.md) |
+| **Fejezet Kezdőlap** | [4. fejezet: Infrastruktúra kód formájában](README.md) |
+| **Következő Fejezet** | [5. fejezet: Többügynökös megoldások](../chapter-05-multi-agent/README.md) |
 
-## 📖 Kapcsolódó erőforrások
+## 📖 Kapcsolódó Erőforrások
 
-- [Erőforrások létrehozása](provisioning.md)
-- [Awesome AZD galéria](https://azure.github.io/awesome-azd/)
+- [Erőforrások előkészítése](provisioning.md)
+- [Awesome AZD Galéria](https://azure.github.io/awesome-azd/)
 - [Hivatalos azd sablon dokumentáció](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---

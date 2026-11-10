@@ -1,77 +1,72 @@
-# Gabay sa Pag-debug para sa Mga Pag-deploy ng AZD
+# Gabay sa Pag-debug para sa AZD Deployments
 
-**Pag-navigate ng Kabanata:**
-- **📚 Tahanan ng Kurso**: [AZD Para sa mga Nagsisimula](../../README.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Simula ng Kurso**: [AZD For Beginners](../../README.md)
 - **📖 Kasalukuyang Kabanata**: Kabanata 7 - Pag-troubleshoot at Pag-debug
-- **⬅️ Nakaraang**: [Karaniwang Mga Isyu](common-issues.md)
-- **➡️ Susunod**: [Pag-troubleshoot na Espesipiko sa AI](ai-troubleshooting.md)
-- **🚀 Susunod na Kabanata**: [Kabanata 8: Mga Pattern sa Produksyon at Enterprise](../chapter-08-production/production-ai-practices.md)
+- **⬅️ Nakaraan**: [Common Issues](common-issues.md)
+- **➡️ Susunod**: [AI-Specific Troubleshooting](ai-troubleshooting.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
 
 ## Panimula
 
-Ang komprehensibong gabay na ito ay nagbibigay ng mga advanced na estratehiya sa pag-debug, mga tool, at mga teknik para sa pag-diagnose at paglutas ng kumplikadong mga isyu sa mga pag-deploy gamit ang Azure Developer CLI. Matututuhan mo ang mga sistematikong metodolohiya ng pag-troubleshoot, mga teknik sa pagsusuri ng log, profiling ng pagganap, at mga advanced na diagnostic na tool upang mabisang malutas ang mga isyu sa pag-deploy at runtime.
+Ang masusing gabay na ito ay nagbibigay ng mga advanced na estratehiya sa pag-debug, mga tool, at mga teknik para sa pagsuri at paglutas ng mga komplikadong isyu sa deployments ng Azure Developer CLI. Matutunan ang sistematikong mga metodolohiya sa troubleshooting, mga teknik sa pagsusuri ng log, performance profiling, at mga advanced na diagnostic tools upang epektibong malutas ang mga isyu sa deployment at runtime.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng gabay na ito, matututuhan mo:
-- Maging bihasa sa sistematikong mga metodolohiya sa pag-debug para sa mga isyu ng Azure Developer CLI
-- Unawain ang advanced na konfigurasyon ng pag-log at mga teknik sa pagsusuri ng log
-- Ipatupad ang profiling ng pagganap at mga estratehiya sa pagmo-monitor
-- Gamitin ang mga diagnostic na tool at serbisyo ng Azure para sa paglutas ng kumplikadong problema
-- Ilapat ang mga teknik sa pag-debug ng network at pag-troubleshoot ng seguridad
-- I-configure ang komprehensibong pagmo-monitor at pag-aalerto para sa maagap na pagtuklas ng mga isyu
+Sa pagtatapos ng gabay na ito, magagawa mong:
+- Masterin ang sistematikong mga metodolohiya sa pag-debug para sa mga isyu sa Azure Developer CLI
+- Maunawaan ang advanced na konfigurasyon ng logging at mga teknik sa pagsusuri ng log
+- Ipatupad ang mga estratehiya sa performance profiling at monitoring
+- Gamitin ang mga Azure diagnostic tools at serbisyo para sa komplikadong paglutas ng problema
+- Ilapat ang network debugging at mga teknik sa troubleshooting ng seguridad
+- I-configure ang komprehensibong monitoring at alerting para sa maagap na pagtuklas ng isyu
 
-## Mga Kinalabasan ng Pagkatuto
+## Mga Kinalabasan sa Pagkatuto
 
-Sa pagtatapos, magagawa mo:
-- Ilapat ang metodolohiyang TRIAGE para sistematikong i-debug ang kumplikadong mga isyu sa pag-deploy
-- I-configure at suriin ang komprehensibong impormasyon ng pag-log at tracing
-- Gamitin nang epektibo ang Azure Monitor, Application Insights, at mga diagnostic na tool
-- Mag-debug ng mga isyu sa konektividad ng network, authentication, at mga permiso nang mag-isa
-- Ipatupad ang mga estratehiya sa pagmo-monitor at pag-optimize ng pagganap
-- Lumikha ng mga custom na script para sa pag-debug at automation para sa mga paulit-ulit na isyu
+Sa pagtatapos, magagawa mong:
+- Ilapat ang metodolohiyang TRIAGE upang sistematikong i-debug ang mga komplikadong isyu sa deployment
+- I-configure at suriin ang komprehensibong impormasyon ng logging at tracing
+- Gamitin nang epektibo ang Azure Monitor, Application Insights, at mga diagnostic tool
+- I-debug ang network connectivity, authentication, at mga isyu sa pahintulot nang mag-isa
+- Ipatupad ang mga estratehiya sa performance monitoring at optimization
+- Gumawa ng mga custom debugging script at automation para sa mga paulit-ulit na isyu
 
 ## Metodolohiya sa Pag-debug
 
-### Ang Pamamaraan ng TRIAGE
+### Ang Paraan ng TRIAGE
 - **T**ime: Kailan nagsimula ang isyu?
-- **R**eproduce: Maaari mo bang paulit-ulit na ma-reproduce ito?
-- **I**solate: Aling bahagi ang pumapalya?
+- **R**eproduce: Maaari mo ba itong paulit-ulit na mabuo?
+- **I**solate: Anong bahagi ang nagkakaproblema?
 - **A**nalyze: Ano ang sinasabi ng mga log?
-- **G**ather: Kolektahin ang lahat ng may-kinalamang impormasyon
-- **E**scalate: Kailan maghahanap ng karagdagang tulong
+- **G**ather: Kolektahin ang lahat ng mahalagang impormasyon
+- **E**scalate: Kailan hihingi ng karagdagang tulong
 
-## Pagpapagana ng Debug Mode
+## Pag-enable ng Debug Mode
 
-### Mga Environment Variable
+> **Saklaw:** Ang mga ito ay mga halimbawa ng diagnostic na maaaring i-adapt, hindi isang nakapaloob na suite ng mga script. Palitan ang mga pangalan/ID ng resource; gamitin ang Bash para sa mga shell block. Ang output at mga halaga ng kapaligiran ng `--debug` ay maaaring maglaman ng sensitibong impormasyon—suriin/itago bago magbahagi. Ang mga halimbawa na nag-de-deploy, nagro-roll back, o nagbabago ng konfigurasyon ay nangangailangan ng malinaw na pahintulot ng operator.
+
+### Mga Variable ng Kapaligiran
 ```bash
-# Paganahin ang komprehensibong pag-debug
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Pag-debug ng Azure CLI
-export AZURE_CLI_DIAGNOSTICS=true
-
-# I-disable ang telemetry para sa mas malinis na output
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Konfigurasyon ng Debug
 ```bash
-# Itakda ang debug na konfigurasyon nang global
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# Paganahin ang trace logging
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
+
+Ang `azd config set` ay maaaring mag-imbak ng mga arbitraryong key; hindi iyon nangangahulugan na ang `debug.enabled`, `debug.logLevel`, o `trace.outputPath` ay suportadong mga setting. Gamitin ang `--debug` flag ng inilabas na utos.
 
 ## 📊 Mga Teknik sa Pagsusuri ng Log
 
-### Pag-unawa sa Mga Antas ng Log
+### Pag-unawa sa Antas ng Log
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -83,66 +78,67 @@ FATAL   - Critical errors that cause application termination
 
 ### Structured Log Analysis
 ```bash
-# Tingnan ang mga log gamit ang Azure Monitor (sa pamamagitan ng azd monitor)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# Tingnan ang mga log ng aplikasyon sa real-time
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# Para sa mas detalyadong pagsusuri ng mga log, gamitin ang Azure CLI kasama ang iyong App Service o Container App:
-# Mga log ng App Service
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Mga log ng Container App
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# I-export ang mga log ng Application Insights para sa pagsusuri
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
 ### Log Correlation
 ```bash
 #!/bin/bash
-# correlate-logs.sh - I-korelasyon ang mga log sa iba't ibang serbisyo gamit ang Azure Monitor
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Maghanap sa Application Insights para sa mga magkakaugnay na log
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Maghanap sa mga tala ng aktibidad ng Azure
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
 ## 🛠️ Mga Advanced na Tool sa Pag-debug
 
-### Azure Resource Graph Queries
+### Mga Query sa Azure Resource Graph
 ```bash
-# Mag-query ng mga resource ayon sa mga tag
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Hanapin ang mga nabigong deployment
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Suriin ang kalusugan ng resource
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Network Debugging
 ```bash
-# Subukan ang koneksyon sa pagitan ng mga serbisyo
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# Paggamit
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Container Debugging
 ```bash
-# I-debug ang mga isyu ng container app
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -183,10 +180,10 @@ debug_container() {
 
 ### Database Connection Debugging
 ```bash
-# I-debug ang koneksyon sa database
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -200,26 +197,15 @@ debug_database() {
 }
 ```
 
-## 🔬 Pag-debug ng Pagganap
+## 🔬 Pag-debug ng Performance
 
 ### Application Performance Monitoring
 ```bash
-# Paganahin ang pag-debug ng Application Insights
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# Pasadyang pagmamanman ng pagganap
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -236,31 +224,29 @@ monitor_performance() {
 }
 ```
 
-### Resource Utilization Analysis
+### Pagsusuri ng Paggamit ng Resource
 ```bash
-# Subaybayan ang paggamit ng mga mapagkukunan
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
 ```
 
-## 🧪 Pagsusuri at Pagpapatunay
+## 🧪 Pagsubok at Pagpapatunay
 
 ### Integration Test Debugging
 ```bash
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Itakda ang debug na kapaligiran
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# Kunin ang mga endpoint ng serbisyo
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Subukan ang mga endpoint ng kalusugan
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# Patakbuhin ang mga pagsubok
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Patakbuhin ang mga pasadyang pagsubok sa integrasyon
+# Run custom integration tests
 npm run test:integration
 ```
 
-### Load Testing for Debugging
+### Load Testing para sa Pag-debug
 ```bash
-# Simpleng load test upang matukoy ang mga bottleneck sa pagganap
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Gumagamit ng Apache Bench (i-install: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Kunin ang mga pangunahing sukatan
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Suriin kung may mga pagkabigo
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 Pag-debug ng Imprastraktura
+## 🔧 Pag-debug ng Infrastructure
 
 ### Bicep Template Debugging
 ```bash
-# I-validate ang mga Bicep template na may detalyadong output
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Pag-validate ng syntax
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Pag-validate ng lint
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # What-if na deployment
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# Pag-debug ng pag-deploy ng template
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -375,54 +359,46 @@ debug_deployment() {
 }
 ```
 
-### Resource State Analysis
+### Pagsusuri ng Estado ng Resource
 ```bash
-# Suriin ang mga estado ng mga resource para sa mga hindi pagkakatugma
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # Ilista ang lahat ng mga resource at ang kanilang mga estado
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Suriin ang mga nabigong resource
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
 ## 🔒 Pag-debug ng Seguridad
 
-### Authentication Flow Debugging
+### Pag-debug ng Authentication Flow
 ```bash
-# I-debug ang pag-authenticate sa Azure
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # I-decode ang JWT token (nangangailangan ng jq at base64)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# I-debug ang pag-access sa Key Vault
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -438,16 +414,16 @@ debug_keyvault() {
 }
 ```
 
-### Network Security Debugging
+### Pag-debug ng Network Security
 ```bash
-# I-debug ang mga grupo ng seguridad ng network
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Suriin ang mga patakaran sa seguridad
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 Pag-debug na Nakatuon sa Aplikasyon
+## 📱 Pag-debug na Espesipiko sa Aplikasyon
 
-### Node.js Application Debugging
+### Pag-debug ng Node.js Application
 ```javascript
-// debug-middleware.js - Express middleware para sa pag-debug
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // I-log ang mga detalye ng kahilingan
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // I-override ang res.json upang i-log ang mga tugon
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Database Query Debugging
+### Pag-debug ng Database Query
 ```javascript
-// database-debug.js - Mga utility para sa pag-debug ng database
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -519,10 +494,10 @@ module.exports = DebuggingPool;
 
 ## 🚨 Mga Pamamaraan sa Emergency Debugging
 
-### Production Issue Response
+### Tugon sa Isyu sa Produksyon
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Pang-emergency na pag-debug ng produksyon
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Lumipat sa tamang kapaligiran
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# Kolektahin ang mahahalagang impormasyon
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# Gamitin ang Azure Monitor para sa mga error log
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Rollback Procedures
+### Mga Pamamaraan sa Rollback
 ```bash
-# Mabilis na script ng rollback
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # Lumipat ng kapaligiran
+    # Switch environment
     azd env select "$environment"
     
-    # I-rollback gamit ang Git (ang AZD ay walang built-in na rollback)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # Kumpirmahin ang rollback
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # Subukan ang mga kritikal na endpoint
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 Mga Dashboard para sa Pag-debug
+Ang rollback na ito na code lamang ay hindi nagbabalik ng imprastruktura, mga database migration, o mga lihim. Gumamit ng malinis na worktree, itala ang simulaing commit, at ibalik ito pagkatapos; ang utos ay nagla-check out ng piniling commit sa kasalukuyang repository.
+
+## 📊 Mga Dashboard sa Pag-debug
 
 ### Custom Monitoring Dashboard
 ```bash
-# Lumikha ng mga query ng Application Insights para sa pag-debug
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # Query para sa mga error
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query para sa mga isyu sa pagganap
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query para sa mga pagkabigo ng dependency
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Log Aggregation
+### Pag-aggregate ng Log
 ```bash
-# Pagsamahin ang mga log mula sa iba't ibang pinagmulan ng Azure
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,28 +630,30 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
 }
 ```
 
-## 🔗 Mga Advanced na Mapagkukunan
+## 🔗 Mga Advanced na Resources
 
-### Custom Debug Scripts
-Lumikha ng isang `scripts/debug/` directory na may:
+### Mga Custom Debug Script
+Gumawa ng isang `scripts/debug/` direktoryo na may:
 - `health-check.sh` - Komprehensibong health checking
-- `performance-test.sh` - Automated na pagsubok ng pagganap
+- `performance-test.sh` - Automated performance testing
 - `log-analyzer.py` - Advanced na pag-parse at pagsusuri ng log
-- `resource-validator.sh` - Pagpapatunay ng imprastraktura
+- `resource-validator.sh` - Pagpapatunay ng imprastruktura
 
-### Monitoring Integration
+### Integrasyon ng Monitoring
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -686,36 +664,36 @@ hooks:
       fi
 ```
 
-## Mga Pinakamahuhusay na Gawain
+## Mga Pinakamahusay na Kasanayan
 
 1. **Laging i-enable ang debug logging** sa mga non-production na kapaligiran
 2. **Gumawa ng reproducible test cases** para sa mga isyu
-3. **Idokumento ang mga pamamaraan ng pag-debug** para sa iyong koponan
-4. **I-automate ang health checks** at pagmo-monitor
-5. **Panatilihing napapanahon ang mga debug tool** kasabay ng mga pagbabago sa iyong aplikasyon
-6. **Sanayin ang mga pamamaraan ng pag-debug** sa mga oras na walang insidente
+3. **Idokumento ang mga pamamaraan sa pag-debug** para sa iyong koponan
+4. **I-automate ang health checks** at monitoring
+5. **Panatilihing updated ang mga debug tool** kasabay ng mga pagbabago sa iyong aplikasyon
+6. **Magsanay ng mga pamamaraan sa pag-debug** sa mga oras na walang insidente
 
-## Susunod na Mga Hakbang
+## Mga Susunod na Hakbang
 
-- [Pagpaplano ng Kapasidad](../chapter-06-pre-deployment/capacity-planning.md) - Planuhin ang mga kinakailangang mapagkukunan
-- [Pagpili ng SKU](../chapter-06-pre-deployment/sku-selection.md) - Pumili ng angkop na mga tier ng serbisyo
-- [Preflight Checks](../chapter-06-pre-deployment/preflight-checks.md) - Pagpapatunay bago ang pag-deploy
+- [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - Planuhin ang mga pangangailangan sa resource
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Pumili ng angkop na mga tier ng serbisyo
+- [Preflight Checks](../chapter-06-pre-deployment/preflight-checks.md) - Pre-deployment na pagpapatunay
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Mabilisang sanggunian ng mga utos
 
 ---
 
-**Tandaan**: Ang mahusay na pag-debug ay tungkol sa pagiging sistematiko, masusi, at matiyaga. Ang mga tool at teknik na ito ay makakatulong sa iyo na mas mabilis at mas epektibong ma-diagnose ang mga isyu.
+**Tandaan**: Ang mabuting pag-debug ay tungkol sa pagiging sistematiko, masusi, at matiyaga. Ang mga tool at teknik na ito ay tutulong sa iyo na mas mabilis at mas epektibong matukoy ang mga isyu.
 
 ---
 
 **Pag-navigate**
-- **Nakaraang Aralin**: [Karaniwang Mga Isyu](common-issues.md)
+- **Nakaraang Aralin**: [Common Issues](common-issues.md)
 
-- **Susunod na Aralin**: [Pagpaplano ng Kapasidad](../chapter-06-pre-deployment/capacity-planning.md)
+- **Susunod na Aralin**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Paunawa:
-Ang dokumentong ito ay isinalin gamit ang serbisyong AI na tagasalin na Co-op Translator (https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa kawastuhan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi kawastuhan. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na awtoritatibong sanggunian. Para sa mga kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

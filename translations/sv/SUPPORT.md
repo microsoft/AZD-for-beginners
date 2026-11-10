@@ -1,30 +1,26 @@
-# TODO: Underhållaren av detta repo har ännu inte redigerat denna fil
-
-**REPO-ÄGARE**: Vill du ha kundservice och support (CSS) för denna produkt/projekt?
-
-- **Ingen CSS-support:** Fyll i denna mall med information om hur man rapporterar problem och får hjälp.
-- **Ja, CSS-support:** Fyll i ett formulär på [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS kommer att arbeta med/hjälpa dig att bestämma nästa steg.
-- **Osäker?** Fyll i ett formulär som om svaret vore "Ja". CSS kommer att hjälpa dig att avgöra.
-
-*Ta sedan bort denna första rubrik från denna SUPPORT.MD-fil innan du publicerar ditt repo.*
-
 # Support
 
-## Hur man rapporterar problem och får hjälp  
+## Kursproblem och frågor
 
-Detta projekt använder GitHub Issues för att spåra buggar och funktionsförfrågningar. Sök bland befintliga 
-ärenden innan du skapar nya för att undvika dubbletter. För nya ärenden, rapportera din bugg eller 
-funktionsförfrågan som ett nytt ärende.
+Sök bland [kursproblem](https://github.com/microsoft/AZD-for-beginners/issues) innan du rapporterar ett problem. Inkludera den engelska lektionen som påverkats, kommandot du körde, dina AZD-/förlängningsversioner och felmeddelandet. Ta bort autentiseringsuppgifter, tokens, prenumerationsdetaljer och personlig data från loggar och skärmdumpar.
 
-För hjälp och frågor om hur man använder detta projekt, vänligen **REPO-UNDERHÅLLARE: INFOGA INSTRUKTIONER HÄR 
-FÖR HUR MAN KONTAKTAR REPO-ÄGARE ELLER GEMENSKAPEN FÖR HJÄLP. KAN VARA EN STACK OVERFLOW-TAGG ELLER ANNAN 
-KANAL. VAR KOMMER DU ATT HJÄLPA FOLK?**.
+För allmänna frågor om lärande, använd [Azure-utvecklargemenskapen](https://discord.gg/microsoft-azure). Svar från gemenskapen är inte en garanterad supporttjänst.
 
-## Microsofts supportpolicy  
+## Problem med verktyg och tjänster
 
-Support för detta **PROJEKT eller PRODUKT** är begränsad till de resurser som anges ovan.
+Rapportera reproducerbara AZD CLI-buggar på [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). För Azure-tjänstincidenter eller hjälp som är specifik för prenumeration, använd supportalternativen som finns tillgängliga i [Azure-portalen](https://portal.azure.com/).
+
+## Säkerhetsrapporter
+
+Följ [SECURITY.md](SECURITY.md) för privat rapportering av sårbarheter. Publicera inte hemligheter eller detaljer om exploateringar i ett offentligt kursproblem.
+
+## Microsofts supportpolicy
+
+Support för detta utbildningsprojekt är begränsad till de resurser som listas ovan. Kursens exempel innebär ingen supportåtagande för produktion.
 
 ---
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, vänligen notera att automatiserade översättningar kan innehålla fel eller inexaktheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

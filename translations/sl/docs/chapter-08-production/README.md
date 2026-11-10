@@ -1,75 +1,78 @@
-# Poglavje 8: Produkcijski in Podjetniški Vzorci
+# Poglavje 8: Vzorce proizvodnje in podjetij
 
-**📚 Tečaj**: [AZD Za Začetnike](../../README.md) | **⏱️ Trajanje**: 2-3 ure | **⭐ Kompleksnost**: Napredno
+**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 2-3 ure | **⭐ Kompleksnost**: Napredno
 
 ---
 
 ## Pregled
 
-To poglavje obravnava vzorce za pripravo na proizvodnjo, varnostno utrjevanje, spremljanje in optimizacijo stroškov za proizvodne AI delovne obremenitve.
+To poglavje pokriva vzorce nameščanja, pripravljenih za podjetja, utrjevanje varnosti, spremljanje in optimizacijo stroškov za produkcijske AI delovne obremenitve.
 
-> Preverjeno z `azd 1.27.1` julija 2026.
+To je arhitekturni referenčni zapis, ne popoln produkcijski predloga za namestitev. Primeri izpuščajo podrobnosti integracije, ki jih morate sami zagotoviti in preizkusiti v svoji aplikaciji; branje kontrolnega seznama ne zagotavlja pripravljenosti za produkcijo.
+
+> **Pregled izdaje (2026-11-04):** Navodila za AI CLI so bila preverjena glede na dokumentacijo/vir `azd 1.37.2`, agente `1.0.0-beta.23` in ocene `1.0.0-beta.2`. Za zahteve glede združljivosti in podrobnosti migracije si oglejte [spremembe in popravke izdaje](production-ai-practices.md#recent-release-changes-and-fixes); to ni preverjanje dejanske namestitve.
 
 ## Cilji učenja
 
 Z dokončanjem tega poglavja boste:
-- Implementirali več-regijske odporne aplikacije
-- Uvedli varnostne vzorce za podjetja
+- Namestili večregijske odporne aplikacije
+- Implementirali varnostne vzorce za podjetja
 - Konfigurirali celovito spremljanje
-- Optimizirali stroške v velikem obsegu
-- Nastavili CI/CD cevi z AZD
+- Optimizirali stroške v obsegu
+- Nastavili CI/CD procese z AZD
 
 ---
 
 ## 📚 Lekcije
 
 | # | Lekcija | Opis | Čas |
-|---|--------|-------------|------|
-| 1 | [Produkčne AI prakse](production-ai-practices.md) | Podjetniški vzorci uvajanja | 90 min |
+|---|--------|--------------|------|
+| 1 | [Prakse produkcijskega AI](production-ai-practices.md) | Vzorce namestitve za podjetja | 90 min |
 
 ---
 
-## 🚀 Kontrolni seznam za proizvodnjo
+## 🚀 Kontrolni seznam za produkcijo
 
-- [ ] Več-regijska uvedba za odpornost
-- [ ] Upravljana identiteta za avtentikacijo (brez ključev)
+- [ ] Večregijska namestitev za odpornost
+- [ ] Upravljana identiteta za preverjanje pristnosti (brez ključev)
 - [ ] Application Insights za spremljanje
-- [ ] Nastavljeni proračuni stroškov in opozorila
-- [ ] Omogočeno varnostno pregledovanje
-- [ ] Integracija CI/CD cevi
-- [ ] Načrt za obnovitev po nesreči
+- [ ] Nastavljeni proračuni in opozorila za stroške
+- [ ] Omogočeno varnostno skeniranje
+- [ ] Integracija CI/CD procesa
+- [ ] Načrt za obnovitev po katastrofi
 
 ---
 
 ## 🏗️ Arhitekturni vzorci
 
-### Vzorec 1: Microservices AI
+### Vzorec 1: Mikroservisi AI
 
 ```mermaid
 graph LR
-    Gateway[Prehod API] --> AI[AI storitev] --> Models[Microsoft Foundry modeli]
-    Gateway --> Auth[Avtentikacijska storitev]
-    AI --> Data[Shramba podatkov]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
-### Vzorec 2: Dogodkovno voden AI
+### Vzorec 2: Dogodkovno usmerjeni AI
 
 ```mermaid
 graph LR
-    EventGrid[Dogodkovno omrežje] --> Functions[Funkcije] --> Pipeline[AI cevovod]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
 
-## 🔐 Najboljše prakse za varnost
+## 🔐 Najboljše varnostne prakse
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,34 +85,27 @@ properties: {
 
 ## 💰 Optimizacija stroškov
 
-| Strategija | Prihranek |
+| Strategija | Glavna omejitev |
 |----------|---------|
-| Razširitev na nič (Container Apps) | 60-80% |
-| Uporaba porabniških nivojev za razvoj | 50-70% |
-| Urno razširjanje | 30-50% |
-| Rezervirana kapaciteta | 20-40% |
+| Skaliranje do ničle (Container Apps) | Zahteva ustrezen sprožilec; ostale storitve še vedno povzročajo stroške |
+| Uporaba plasti s porabo za razvoj | Primerjava cen izbrane storitve in delovne obremenitve |
+| Načrtovano skaliranje | Skaliranje preko podprte infrastrukture/avtomatizacije |
+| Rezervacije/rezervirana zmogljivost | Samo če je podprto; zaveze lahko povečajo stroške nedejavnosti |
 
-```bash
-# Nastavi opozorila o proračunu
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Uporabite [popolni vzorec proračuna](production-ai-practices.md#2-cost-monitoring-and-budgets) z veljavnim začetnim datumom, obsegom obračunavanja, prejemniki in dovoljenji. Proračun pošilja opozorila; ne omejuje porabe. Prihranki so odvisni od izmerjene porabe in niso zajamčeni odstotki.
 
 ---
 
 ## 📊 Nastavitev spremljanja
 
 ```bash
-# Pretakajte dnevnike
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Preverite Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# Ogled metrik
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -120,7 +116,7 @@ az monitor metrics list --resource <resource-id>
 | Smer | Poglavje |
 |-----------|---------|
 | **Prejšnje** | [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/README.md) |
-| **Dokončanje tečaja** | [Domača stran tečaja](../../README.md) |
+| **Zaključek tečaja** | [Domača stran tečaja](../../README.md) |
 
 ---
 
@@ -128,8 +124,8 @@ az monitor metrics list --resource <resource-id>
 
 - [Vodnik za AI agente](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Več-agentne rešitve](../chapter-05-multi-agent/README.md)
-- [Primer mikrostoritev](../../examples/microservices/README.md)
+- [Rešitve z več agenti](../chapter-05-multi-agent/README.md)
+- [Primer mikroservisov](../../examples/microservices/README.md)
 
 ---
 

@@ -1,200 +1,204 @@
-# Komentojen pikaopas - Olennaiset AZD-komennot
+# Komentojen pikakuvake – olennaiset AZD-komennot
 
-**Pikaviite kaikille luvuillesi**
-- **📚 Kurssin etusivu**: [AZD For Beginners](../README.md)
-- **📖 Nopea aloitus**: [Luku 1: Perusteet & Aloitus](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI-komennot**: [Luku 2: AI-First Development](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Edistynyt**: [Luku 4: Infrastructure as Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**Nopea viite kaikille luvuillesi**
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../README.md)
+- **📖 Pika-aloitus**: [Luku 1: Perusta & pika-aloitus](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI-komennot**: [Luku 2: AI-ensimmäinen kehitys](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Edistynyt**: [Luku 4: Infrastruktuuri koodina](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Johdanto
 
-Tämä kattava pikaopas tarjoaa nopean viitteen yleisimmin käytetyistä Azure Developer CLI -komennoista, järjestettynä kategorioittain käytännön esimerkkien kanssa. Täydellinen nopeisiin hakuhetkiin kehityksen, vianmäärityksen ja päivittäisten azd-projektien toimintojen aikana.
+Tämä kattava pikakuvake tarjoaa nopean viitteen yleisimmin käytetyistä Azure Developer CLI -komennoista, järjestettynä kategorioittain käytännön esimerkkien kanssa. Täydellinen nopeaan tarkistukseen kehityksen, vianmäärityksen ja päivittäisen azd-projektien kanssa työskentelyn aikana.
 
 ## Oppimistavoitteet
 
-Tämän pikaoppaan avulla:
+Tämän pikakuvakkeen avulla sinä:
 - Saat välittömän pääsyn olennaisiin Azure Developer CLI -komentoihin ja syntaksiin
-- Ymmärrät komentojen järjestelyn toiminnallisten kategorioiden ja käyttötapausten mukaan
-- Löydät käytännön esimerkkejä yleisistä kehitys- ja käyttöönottilanteista
-- Pääset vianmäärityskomentoihin nopeaa ongelmanratkaisua varten
-- Löydät edistyneet konfigurointi- ja mukautusvaihtoehdot tehokkaasti
-- Löydät ympäristönhallinta- ja moniympäristötyönkulkujen komennot
+- Ymmärrät komentojen järjestämisen toiminnallisiin kategorioihin ja käyttötapauksiin
+- Löydät käytännön esimerkkejä yleisistä kehitys- ja käyttöönotto-tilanteista
+- Saat vianmäärityskomennot nopeaan ongelmanratkaisuun
+- Löydät tehokkaasti edistyneet määrittely- ja mukautusvaihtoehdot
+- Löydät komentojen hallinnan ympäristöjen ja monien ympäristöjen työnkulkuun
 
 ## Oppimistulokset
 
-Säännöllisesti tätä pikaopasta käyttämällä pystyt:
-- Suorittamaan azd-komentoja luottavaisesti ilman täydellistä dokumentaatiota
-- Ratkaisemaan nopeasti yleisiä ongelmia sopivilla diagnostiikkakomennoilla
-- Hallitsemaan tehokkaasti useita ympäristöjä ja käyttöönotto-skenaarioita
-- Käyttämään tarvittaessa azd:n edistyneitä ominaisuuksia ja konfiguraatioita
-- Vianmäärityksessä käyttämään järjestelmällisiä komentojonoja käyttöönotto-ongelmien ratkaisemiseksi
-- Optimoimaan työnkulkuja azd:n pikavalintojen ja asetusten avulla
+Kun viittaat tähän pikakuvakkeeseen säännöllisesti, pystyt:
+- Suorittamaan azd-komennot itsevarmasti ilman täydelliseen dokumentaatioon viittaamista
+- Ratkaisemaan nopeasti yleisiä ongelmia asianmukaisilla diagnoosikomennoilla
+- Hallitsemaan tehokkaasti useita ympäristöjä ja käyttöönotto-tilanteita
+- Käyttämään tarpeen mukaan edistyneitä azd-ominaisuuksia ja määritysvaihtoehtoja
+- Vianmäärityksessä käyttämään järjestelmällistä komentojonoa käyttöönotto-ongelmien ratkaisuun
+- Optimoimaan työnkulkuja azd-pikakomentojen ja -asetusten tehokkaalla käytöllä
 
-## Aloituskomennot
+## Aloituskäskyt
 
-### Tunnistautuminen
+### Todennus
 ```bash
-# Kirjaudu Azureen AZD:n kautta
+# Login to Azure via AZD
 azd auth login
 
-# Kirjaudu Azure CLI:hin (AZD käyttää tätä taustalla)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# Tarkista nykyinen tili
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# Aseta oletustilaus
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# Kirjaudu ulos AZD:stä
+# Logout from AZD
 azd auth logout
 
-# Kirjaudu ulos Azure CLI:stä
+# Logout from Azure CLI
 az logout
 ```
 
 ### Projektin alustaminen
 ```bash
-# Selaa saatavilla olevia malleja
+# Browse available templates
 azd template list
 
-# Alusta mallipohjasta
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# Alusta nykyiseen hakemistoon
+# Initialize in current directory
 azd init .
 
-# Alusta mukautetulla nimellä
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
-## Keskeiset käyttöönotto-komennot
+## Peruskäyttöönoton komennot
 
 ### Täydellinen käyttöönoton työnkulku
 ```bash
-# Ota kaikki käyttöön (provisionointi + käyttöönotto)
+# Deploy everything (provision + deploy)
 azd up
 
-# Ota käyttöön ilman vahvistuskehotteita
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# Ota käyttöön tiettyyn ympäristöön
+# Deploy to specific environment
 azd up --environment production
 
-# Ota käyttöön mukautetuilla parametreilla
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
-### Vain infrastruktuuri
+### Pelkkä infrastruktuuri
 ```bash
-# Ota käyttöön Azure-resursseja
+# Provision Azure resources
 azd provision
 
-# 🧪 Esikatsele infrastruktuurin muutoksia
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# Näyttää esikatselun siitä, mitä resursseja luotaisiin/muokattaisiin/poistettaisiin
-# Vastaava kuin 'terraform plan' tai 'bicep what-if' - turvallinen suorittaa, muutoksia ei sovelleta
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
-### Vain sovellus
+### Pelkkä sovellus
 ```bash
-# Ota sovelluskoodi käyttöön
+# Deploy application code
 azd deploy
 
-# Ota tietty palvelu käyttöön
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Ota kaikki palvelut käyttöön
+# Deploy all services
 azd deploy --all
 ```
 
 ### Kokoa ja pakkaa
 ```bash
-# Palauta (lataa) sovelluksen riippuvuudet
+# Restore (download) application dependencies
 azd restore
 
-# Palauta tietty palvelu
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# Rakenna käyttöönotettava artefakti ilman käyttöönottoa
+# Build a deployable artifact without deploying
 azd package
 
-# Rakenna tietty palvelu
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** lataa sovelluksesi riippuvuudet (npm, pip, NuGet, Maven jne.). Se suoritetaan automaattisesti `azd package`- ja `azd deploy`-komentojen aikana, joten sitä harvoin kutsutaan suoraan — aja se manuaalisesti esilataamaan riippuvuuksia (esimerkiksi CI-välimuistin lämmittämiseksi tai työskennelläksesi offline-tilassa myöhemmin).
+> **`azd restore`** lataa sovelluksesi riippuvuudet (npm, pip, NuGet, Maven jne.). Se suoritetaan automaattisesti `azd package` ja `azd deploy` aikana, joten sitä ei harvoin kutsuta suoraan — suorita manuaalisesti ennakkonoutoa varten (esimerkiksi CI välimuistin lämmittämiseen tai offline-tilassa työskentelyyn myöhemmin).
 
-> **`azd package`** rakentaa käyttöönottokelpoisen artefaktin (konttikuvan tai zipin) **ilman** sen työntämistä Azureen. Käytä sitä erikseen varmistaaksesi, että build onnistuu, tarkastellaksesi tuotosta tai tuottaaksesi artefaktin, jonka erillinen prosessi ottaa käyttöön myöhemmin. `azd deploy` pakkaa automaattisesti, joten tarvitset `azd package`-komentoa vain kun haluat artefaktin ilman käyttöönottoa.
+> **`azd package`** valmistaa käyttöönottokelpoisen paketin ilman, että sovelluspalvelua otetaan käyttöön. Käytös riippuu kielestä ja isännästä: konttipakkaus voi käyttää Azure etärakennuksia ja julkaista kuvat rekisteriin, joten se ei välttämättä ole offline-tilassa tai Azure-kirjoituksista vapaa. `azd deploy` voi pakata automaattisesti; käytä erillistä pakkausvaihetta, kun tarvitset artefaktin tai rakennustarkistuksen.
 
 
 ## 🌍 Ympäristön hallinta
 
 ### Ympäristötoiminnot
 ```bash
-# Listaa kaikki ympäristöt
+# List all environments
 azd env list
 
-# Luo uusi ympäristö
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# Valitse ympäristö
+# Select environment
 azd env select production
 
-# Näytä saatavilla olevat ympäristöt
+# Show available environments
 azd env list
 
-# Päivitä ympäristön tila
+# Refresh environment state
 azd env refresh
 ```
 
 ### Ympäristömuuttujat
 ```bash
-# Aseta ympäristömuuttuja
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# Hae ympäristömuuttuja
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# Listaa kaikki ympäristömuuttujat
+# List all environment variables
 azd env get-values
 
-# Poista ympäristömuuttuja
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
 
-## ⚙️ Asetuskomennot
+Ympäristötiedostot ovat tekstimuotoisia. Älä käsittele `azd env set`:tä salaisena tallennustilana; käytä Key Vault -viittauksia tai hallittua identiteettiä tilanteen mukaan.
 
-### Globaalit asetukset
+## ⚙️ Määrityskomennot
+
+### Globaali määritys
 ```bash
-# Listaa kaikki asetukset
+# List all configuration
 azd config show
 
-# Aseta globaalit oletusarvot
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Poista konfiguraatio
+# Remove configuration
 azd config unset defaults.location
 
-# Nollaa kaikki asetukset
+# Reset all configuration
 azd config reset
 ```
 
-### Projektin asetukset
+### Projektin määritys
 ```bash
-# Validoi azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# Näytä projektin tiedot
+# Show project information
 azd show
 
-# Hae palvelun päätepisteet
+# Get service endpoints
 azd show --output json
 ```
 
@@ -202,323 +206,346 @@ azd show --output json
 
 ### Valvontapaneeli
 ```bash
-# Avaa Azure-portaalin monitorointinäkymä
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# Avaa Application Insightsin reaaliaikaiset mittarit
+# Open Application Insights live metrics
 azd monitor --live
 
-# Avaa Application Insightsin lokkipaneeli
+# Open Application Insights logs blade
 azd monitor --logs
 
-# Avaa Application Insightsin yleiskatsaus
+# Open Application Insights overview
 azd monitor --overview
 ```
 
-### Konttilokien tarkastelu
+Application Insights täytyy määrittää mallilla. AZD:n Live Metrics -vaihtoehtoa ei tällä hetkellä tueta Python-sovelluksille; käytä sijasta yleiskatsausta, lokeja tai näytteen dokumentoitua jäljitystyönkulkua.
+
+### Säiliölokien katselu
 ```bash
-# Näytä lokit Azure CLI:llä (Container Appsille)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Seuraa lokeja reaaliajassa
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Näytä lokit Azure-portaalista
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
-### Logianalytiikan kyselyt
+### Log Analytics -kyselyt
 ```bash
-# Käytä Log Analyticsia Azure-portaalin kautta
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# Tee lokikyselyjä Azure CLI:llä
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ Ylläpitokomennot
+## 🛠️ Huoltokomennot
 
 ### Siivous
 ```bash
-# Poista kaikki Azure-resurssit
+# Remove all Azure resources
 azd down
 
-# Pakota poisto ilman vahvistusta
+# Force delete without confirmation
 azd down --force
 
-# Poista lopullisesti pehmeästi poistetut resurssit
+# Purge soft-deleted resources
 azd down --purge
 
-# Täydellinen siivous
+# Complete cleanup
 azd down --force --purge
 ```
 
 ### Päivitykset
 ```bash
-# Tarkista azd-päivitykset
+# Check for azd updates
 azd version
 
-# Hae nykyinen versio
+# Get current version
 azd version
 
-# Näytä nykyinen konfiguraatio
+# View current configuration
 azd config show
 ```
 
 ## 🔧 Edistyneet komennot
 
-### Putki ja CI/CD
+### Pipeline ja CI/CD
 ```bash
-# Määritä GitHub Actions
+# Configure GitHub Actions
 azd pipeline config
 
-# Määritä Azure DevOps
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# Näytä putken kokoonpano
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
 ### Infrastruktuurin hallinta
 ```bash
-# Generoi infrastruktuurimalleja
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 Infrastruktuurin esikatselu ja suunnittelu
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# Simuloi infrastruktuurin provisiointia ilman varsinaista käyttöönottoa
-# Analysoi Bicep/Terraform-malleja ja näyttää:
-# - Lisättävät resurssit (vihreä +)
-# - Muokattavat resurssit (keltainen ~)
-# - Poistettavat resurssit (punainen -)
-# Turvallista suorittaa — ei todellisia muutoksia Azure-ympäristöön
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# Syntetisoi infrastruktuuri tiedostosta azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
-### Projektitiedot
+### Projektin tiedot
 ```bash
-# Näytä projektin tila ja päätepisteet
+# Show project status and endpoints
 azd show
 
-# Näytä yksityiskohtaiset projektitiedot JSON-muodossa
+# Show detailed project info as JSON
 azd show --output json
 
-# Hae palvelun päätepisteet
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI- ja laajennuskomennot
+## 🤖 AI & Laajennukset
 
 ### AZD-laajennukset
+
+AI CLI -viite tarkistettu 2026-11-04: `azd 1.37.2`, agentit `1.0.0-beta.23`, arvioinnit `1.0.0-beta.2`. Käytä `azd >= 1.37.0` yhdistettyyn työnkulkuun; päivitä ydinkomennot ennen yhteensopimattomia laajennuksia.
+
 ```bash
-# Luettele kaikki saatavilla olevat laajennukset (mukaan lukien tekoäly)
+# List all available extensions (including AI)
 azd extension list
 
-# Asenna Foundry Agents -laajennus
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Asenna Agent Skills -laajennus (esikatselu)
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the agent skills extension (preview)
 azd extension install azure.ai.skills
 
-# Asenna Foundry Connections -laajennus (esikatselu)
+# Install the Foundry connections extension (preview)
 azd extension install azure.ai.connections
 
-# Asenna hienosäätölaajennus
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Asenna mukautettujen mallien laajennus
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Päivitä kaikki asennetut laajennukset
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
-### AI-agenttikomennot
+### AI-agenttien komennot
 ```bash
-# Alusta agenttiprojekti manifestista
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# Kohdista tiettyyn Foundry-projektiin
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# Määritä agentin lähdekansio
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# Valitse isännöintikohde
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# Testaa otettu käyttöön oleva agentti (tulostaa latenssin ja ensimmäisen tavun vastaanottoajan)
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# Näytä aktiivisen päätepisteen määritykset
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# Luo arviointiaineisto ja optimoi sitten agentti
-azd ai agent eval generate
-azd ai agent optimize
-
-# Lataa koodipohjaisen isännöidyn agentin käytössä oleva lähdekoodi
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# Poista isännöity agentti ja kaikki sen versiot (--force lopettaa aktiiviset istunnot)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
-### MCP-palvelin (Alpha)
+`--template`/`-t` korvaa vanhentuneen `--manifest`/`-m` kirjoitusasun; vanhat manifestit vaativat migraation. Ei ole nykyistä agent-init-`--host containerapp` -vaihtoehtoa. Hallittu-harjanne, puhe ja pitkäkestoiset ennakkoversiot tarvitsevat itsenäisen shell/CI-ympäristön hyväksynnän; katso [AI CLI -viite](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+### AI-arvioinnit ja optimointi
 ```bash
-# Käynnistä MCP-palvelin projektiasi varten
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+Agentit beta.22 korvasi perinteiset arviointikomentot `azd ai eval` -komennolla `azure.ai.evaluations`:stä. Uusi arviointimääritys käyttää camelCase-avaimia. Optimointi `--config` ottaa erillisen optimointin API-kutsun, **ei** perinteistä `eval.yaml` tai uutta `azure.eval.yaml`; käytä `--eval`/`--eval-config` arvioinnin uudelleenkäyttöön. Katso [arvioinnin asennus](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) ja [optimoinnin migraatio](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### MCP-palvelin (Alfa)
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# Hallitse työkalujen suostumuksia MCP-toimintoja varten
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
 ### Infrastruktuurin generointi
 ```bash
-# Luo IaC-tiedostot projektimäärityksestäsi
+# Generate IaC files from your project definition
 azd infra generate
 
-# Luo infrastruktuurin azure.yaml-tiedostosta
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
 
 ## 🎯 Nopeat työnkulut
 
-### Kehitystyönkulku
+### Kehitystyön työnkulku
 ```bash
-# Aloita uusi projekti
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# Julkaise kehitysympäristöön
+# Deploy to development
 azd env new dev
 azd up
 
-# Tee muutoksia ja julkaise uudelleen
+# Make changes and redeploy
 azd deploy
 
-# Avaa valvontapaneeli
+# Open monitoring dashboard
 azd monitor --live
 ```
 
-### Moniympäristötyönkulku
+### Moniympäristöinen työnkulku
 ```bash
-# Määritä ympäristöt
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Julkaise kehitykseen
+# Deploy to dev
 azd env select dev
 azd up
 
-# Testaa ja siirrä esituotantoon
+# Test and promote to staging
 azd env select staging
 azd up
 
-# Julkaise tuotantoon
+# Deploy to production
 azd env select production
 azd up
 ```
 
 ### Vianmääritystyönkulku
 ```bash
-# Ota virheenkorjaustila käyttöön
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# Tarkista käyttöönoton tila
-azd show
-
-# Tarkista kokoonpano
+# Validate configuration
 azd config show
 
-# Avaa lokien valvontapaneeli
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# Tarkista resurssin tila
+# Check resource status
 azd show --output json
 ```
 
-## 🔍 Debuggauskomennot
+## 🔍 Vianetsintäkomennot
 
-### Debug-tiedot
+### Vianetsintätiedot
 ```bash
-# Ota virheenkorjaustulostus käyttöön
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# Poista telemetria käytöstä puhtaampaa tulostusta varten
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# Tarkista nykyinen kokoonpano
+# Check current configuration
 azd config show
 
-# Tarkista todennuksen tila
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
-### Mallien debuggaus
+### Mallin vianetsintä
 ```bash
-# Listaa saatavilla olevat mallit yksityiskohtineen
+# List available templates with details
 azd template list --output json
 
-# Näytä mallin tiedot
+# Show template information
 azd template show <template-name>
 
-# Validoi malli ennen alustusta
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
-## 📁 Tiedosto- ja hakemistokomennot
+## 📁 Tiedosto- ja hakemistokomentot
 
 ### Projektin rakenne
 ```bash
-# Näytä nykyinen hakemistorakenne
+# Show current directory structure
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Siirry azd-projektin juurihakemistoon
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# Näytä azd:n konfiguraatiohakemisto
-echo $AZD_CONFIG_DIR  # Yleensä ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
 ## 🎨 Tulosteen muotoilu
 
-### JSON-tulos
+### JSON-tuloste
 ```bash
-# Hae JSON-ulostulo skriptien käyttöä varten
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# Jäsennä jq:llä
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Taulukkoesitys
+### Taulukkotuloste
 ```bash
-# Muotoile taulukoksi
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# Näytä käyttöönotetut palvelut
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
 ## 🔧 Yleiset komentoyhdistelmät
 
-### Terveystarkastus-skripti
+### Terveystarkistusskripti
 ```bash
 #!/bin/bash
-# Nopea terveystarkastus
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
@@ -527,49 +554,44 @@ azd monitor --logs
 ### Käyttöönoton validointi
 ```bash
 #!/bin/bash
-# Ennen käyttöönottoa tehtävä validointi
+# Pre-deployment validation
 azd show
-azd provision --preview  # Esikatsele muutoksia ennen käyttöönottoa
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
 ### Ympäristöjen vertailu
 ```bash
 #!/bin/bash
-# Vertaa ympäristöjä
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
 ### Resurssien siivousskripti
 ```bash
 #!/bin/bash
-# Siivoa vanhoja ympäristöjä
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
 ## 📝 Ympäristömuuttujat
 
 ### Yleiset ympäristömuuttujat
 ```bash
-# Azure-konfiguraatio
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD-konfiguraatio
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# Sovelluksen konfiguraatio
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -578,57 +600,56 @@ export LOG_LEVEL="info"
 
 ### Nopeat korjaukset
 ```bash
-# Nollaa todennus
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# Pakota ympäristön päivitys
+# Force refresh environment
 azd env refresh
 
-# Ota kaikki palvelut uudelleen käyttöön
+# Redeploy all services
 azd deploy
 
-# Tarkista käyttöönoton tila
+# Check deployment status
 azd show --output json
 ```
 
 ### Palautuskomennot
 ```bash
-# Palauta epäonnistuneesta käyttöönotosta - puhdista ja ota uudelleen käyttöön
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# Provisioi vain infrastruktuuri uudelleen
+# Reprovision infrastructure only
 azd provision
 
-# Ota vain sovellus uudelleen käyttöön
+# Redeploy application only
 azd deploy
 ```
 
-## 💡 Ammattilaisvinkkejä
+## 💡 Pro Vinkit
 
-### Alias-komennot nopeampaan työnkulkuun
+### Alias-komennot työnkulun nopeuttamiseksi
 ```bash
-# Lisää .bashrc- tai .zshrc-tiedostoosi
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Toimintojen pikakomennot
+### Funktioiden pikakomennot
 ```bash
-# Nopea ympäristön vaihtaminen
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# Nopea käyttöönotto valvonnalla
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# Ympäristön tila
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -637,46 +658,46 @@ azd-status() {
 }
 ```
 
-## 📖 Ohje ja dokumentaatio
+## 📖 Apua ja dokumentaatio
 
-### Avun saanti
+### Avun saaminen
 ```bash
-# Yleinen ohje
+# General help
 azd --help
 azd help
 
-# Komentokohtainen ohje
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# Näytä versio- ja koontitiedot
+# Show version and build info
 azd version
 azd version --output json
 ```
 
-### Dokumenttilinkit
+### Dokumentaatio-linkit
 ```bash
-# Avaa dokumentaatio selaimessa
+# Open documentation in browser
 azd docs
 
-# Näytä mallin dokumentaatio
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Vinkki**: Tallenna tämä pikaopas kirjanmerkkeihin ja käytä `Ctrl+F` löytääksesi nopeasti tarvitsemiasi komentoja!
+**Vinkki**: Lisää tämä pikakuvake kirjanmerkkeihin ja käytä `Ctrl+F` löytääksesi tarvitsemasi komennot nopeasti!
 
 ---
 
 **Navigointi**
-- **Edellinen oppitunti**: [Ennakko-tarkistukset](../docs/pre-deployment/preflight-checks.md)
+- **Edellinen oppitunti**: [Esilennotustarkistukset](../docs/chapter-06-pre-deployment/preflight-checks.md)
 - **Seuraava oppitunti**: [Sanasto](glossary.md)
 
 ---
 
-> **💡 Haluatko Azure-komentoapua editoriisi?** Asenna [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) komennolla `npx skills add microsoft/github-copilot-for-azure` — 37 taitoa AI:ta, Foundryä, käyttöönottoa, diagnostiikkaa ja muuta varten.
+> **💡 Haluatko Azure-käskyapua editorissasi?** Asenna [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) käyttämällä `npx skills add microsoft/github-copilot-for-azure` — 37 taitoa AI:lle, Foundrylle, käyttöönotolle, diagnostiikalle ja muulle.
 
 ---
 

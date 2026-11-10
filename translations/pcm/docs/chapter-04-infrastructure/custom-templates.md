@@ -1,4 +1,4 @@
-# Di way o take write Your Own azd Template
+# Authoring Your Own azd Template
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
@@ -6,46 +6,46 @@
 - **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
 - **🚀 Next Chapter**: [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
 
-> E don tey we don check am for `azd 1.27.1` for July 2026.
+> Reviewed against `azd 1.37.2` (November 2026). This is an **authoring walkthrough with partial files**, not a complete template: you must supply application code and `modules/web.bicep` with its environment, registry, Container App, and outputs before deployment. Azure provisioning was not executed in this review.
 
 ## Introduction
 
-Until now, you don *use* templates with `azd init --template <name>`. But once your team don like di project layout—like Container App wey get Cosmos DB and proper monitoring—you go wan convert am into template wey you fit use yawa yawa. Template na just Git repository wey get correct structure wey azd sabi read. Dis lesson go show you how to build one from scratch, test am, and (if you want) publish am for community gallery.
+So far you don don *use* templates wit `azd init --template <name>`. But when you get project setup wey your team like—like, Container App wit Cosmos DB and the proper monitoring—you go wan turn am into your own reusable template. Template be Git repository wey get structure wey azd fit sabi. Dis lesson go show you how to build am from scratch, test am, and (if you want) publish am for community gallery.
 
 ## Learning Goals
 
-By di time you finish dis lesson, you go:
+By di end of dis lesson, you go:
 - Understand wetin make folder be "azd template"
 - Know di files and folder layout wey you need
-- Add `azure.yaml` and `infra/` wey other pipol fit use
-- Test your template locally before you share am
-- Publish am and (if you want) send am go Awesome AZD
+- Add `azure.yaml` and `infra/` wey other pipu fit use again
+- Test your template for your own machine before you share am
+- Publish am and (if you want) submit am to Awesome AZD
 
 ## Learning Outcomes
 
 After you finish dis lesson, you fit:
-- Create new template repository
-- Parameterize infrastructure make e fit work for any subscription
-- Check template with `azd init` and `azd up`
+- Scaffold new template repository
+- Parameterize infrastructure so e go fit work for any subscription
+- Validate template wit `azd init` and `azd up`
 - Add metadata wey community gallery need
 
 ---
 
-## Wetin Template Really Be?
+## What Is a Template, Really?
 
-Azd template na **Git repository** wey get, at least:
+Azd template na **Git repository** wey get at least:
 
-| File / folder | Wetin E Dey Do | You Need Am? |
-|---------------|--------------|--------------|
-| `azure.yaml` | E dey talk about services, hosts, and infra provider | ✅ Yes |
-| `infra/` | Bicep, Terraform, or Pulumi wey dey provide resources | ✅ Yes |
-| `src/` (or your code) | Di application code wey azd dey deploy | ✅ Yes |
-| `README.md` | How to use di template | ✅ Strongly recommended |
+| File / folder | Purpose | Required? |
+|---------------|---------|-----------|
+| `azure.yaml` | Describes services, hosts, and infra provider | ✅ Yes |
+| `infra/` | Bicep or Terraform provisioning definitions | Required for this explicit-IaC example; generated-infrastructure projects can omit it |
+| `src/` (or your code) | The application code azd deploys | Required for source-based services; not all templates contain application code |
+| `README.md` | How to use the template | ✅ Strongly recommended |
 | `.azdo/` or `.github/` | CI/CD pipeline definitions | Optional |
-| `.devcontainer/` | Dev environment wey fit reproduce | Optional |
-| `azure.yaml` `metadata` | Gallery + telemetry info | Optional (you need am if you wan publish) |
+| `.devcontainer/` | Reproducible dev environment | Optional |
+| `azure.yaml` `metadata` | Template identity/telemetry info | Recommended; publishing a Git repository does not require it |
 
-No magic dey here: when you run `azd init --template you/your-repo`, azd go clone di repo and read `azure.yaml`.
+Nothing special dey here: wen you run `azd init --template you/your-repo`, azd dey clone di repo and dey read `azure.yaml`.
 
 ---
 
@@ -57,11 +57,11 @@ Make di folder structure by hand or start from small template and edit am:
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Make di normal layout
+# Create the standard layout
 mkdir -p src infra
 ```
 
-Typical finished layout be dis:
+Dis na typical finished layout wey e go be like:
 
 ```
 my-azd-template/
@@ -83,7 +83,7 @@ my-azd-template/
 
 ## Step 2: Write `azure.yaml`
 
-Na di heart of di template dis one be. E go tell azd wetin and how to deploy:
+Na dis heart of di template. E go tell azd wetin to deploy and how e go do am:
 
 ```yaml
 # azure.yaml
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -101,21 +101,21 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Di `metadata.template` field na wetin gallery telemetry dey use count how e dey use. Use `name@version` style.
+> Di `metadata.template` field na wetin di gallery telemetry use count how dem dey use am. Use di `name@version` style.
 
 ---
 
-## Step 3: Parameterize di Infrastructure
+## Step 3: Parameterize the Infrastructure
 
-One important rule for *reusable* template: **no hardcode names, regions, or subscription-specific values.** Use parameters and di resource token pattern make di same template fit work for anybody subscription.
+Di most important rule for *reusable* template be: **no put hardcoded names, regions, or subscription-specific values.** Use parameters and resource token pattern so same template fit work for anybody subscription.
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -138,15 +145,18 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Two tins wey make dis template friendly be:
+Two tins make dis template better:
 
-1. **`azd-env-name` tag** — azd dey use am track and clean resources for each environment.
-2. **`uniqueString(...)` resource token** — e dey produce stable, globally unique suffix make names no clash.
+1. **`azd-env-name` tag** — azd dey use am track and clear resources by environment.
+2. **`uniqueString(...)` resource token** — e dey make stable hash suffix to reduce clash; but no be guarantee say e unique everywhere.
 
-Provide parameter file wey go read values wey azd inject from environment:
+Di missing `modules/web.bicep` suppose accept `name`, `location`, and `tags`, make Container Apps environment/registry and app, tag app wit `azd-service-name: web`, and export `uri`. E sef suppose expose registry values wey di chosen build/deploy fit need (like `AZURE_CONTAINER_REGISTRY_ENDPOINT` from root module). Output endpoint alone no connect service discovery, app settings, or registry authentication.
+
+Provide matching parameters file wey go read di values wey azd put from environment:
+
+Save am as `infra/main.parameters.json`:
 
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -157,86 +167,90 @@ Provide parameter file wey go read values wey azd inject from environment:
 }
 ```
 
-azd go replace `${AZURE_ENV_NAME}` and `${AZURE_LOCATION}` from current environment automatically.
+Azd go replace `${AZURE_ENV_NAME}` and `${AZURE_LOCATION}` from current environment automatically.
 
 ---
 
 ## Step 4: Test Your Template Locally
 
-Before you share am, prove say template dey work from clean state.
+Before you share am, make sure say di template work clean from fresh start.
 
-**Test am from local folder** (no need push Git):
+**Test am from your local folder** (no need Git push):
 
 ```bash
-# From one empty folder, begin wit your local template path
+# From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
-# Set up + deploy from start to finish
+# Provision + deploy end to end
 azd auth login
 azd up
 ```
 
-**Then test teardown**—good template go clean up well well:
+**Then test di teardown** — good template go clear everything well:
 
 ```bash
 azd down --force --purge
 ```
 
-If `azd down` leave resources, e mean you forget tag `azd-env-name` for some resource.
+If `azd down` leave resources behind, check environment/resource-group discovery, external/shared resources, permissions, locks, and purge protection. `--purge` no dey delete local `.azure/` state.
 
-> **Tip:** run `azd provision --preview` first. E go do what-if check and show template errors before any resource create.
+> **Tip:** after you supply all di missing files, run `azd provision --preview` first. Check hooks before preview because fit run commands wey get side-effects. Preview no be price estimate or guarantee say provisioning go succeed.
 
 ---
 
-## Step 5: Publish di Template
+## Step 5: Publish the Template
 
-Push di repo go GitHub (make e public if you want other people use am):
+Push di repository go GitHub (public if you want make others use am):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
 Anybody fit use am now:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
 
 ## Step 6 (Optional): Submit to Awesome AZD
 
-Di [Awesome AZD gallery](https://azure.github.io/awesome-azd/) dey list community templates. To appear for there, your repo suppose get:
+Di [Awesome AZD gallery](https://azure.github.io/awesome-azd/) dey list community templates. To add your repo for the list, e suppose get:
 
-- ✅ Clear `README.md` with prerequisites, architecture diagram, and cost notes
-- ✅ Working `azure.yaml` with `metadata.template`
-- ✅ Infrastructure wey fit provision cleanly for fresh subscription
+- ✅ Clear `README.md` wit prerequisites, architecture diagram, and cost info
+- ✅ Working `azure.yaml` wit `metadata.template`
+- ✅ Infrastructure wey fit provision well for fresh subscription
 - ✅ `LICENSE` file
 - ✅ (Recommended) `.devcontainer/` for one-click Codespaces
 
-Submit am by opening pull request wey add your template to gallery data file, follow di contribution guide for [Awesome AZD repository](https://github.com/Azure/awesome-azd).
+Submit am by opening pull request wey go add your template to gallery data file, follow di contribution guide for [Awesome AZD repository](https://github.com/Azure/awesome-azd).
 
 ---
 
 ## Common Pitfalls
 
-| Wahala | How to Fix Am |
-|---------|-------------|
+| Wahala | How to fix am |
+|---------|-----|
 | Hardcoded resource names | Use `uniqueString()` resource token |
-| `azd down` don leave resources | Tag all resources (or resource group) with `azd-env-name` |
-| Template work for you but fail others | Remove subscription IDs, tenant IDs, and region assumptions |
-| Outputs no connect into app | Export `SERVICE_<NAME>_ENDPOINT_URL` and other `AZURE_*` outputs |
-| Gallery reject your submission | Add `README.md`, `LICENSE`, and `metadata.template` |
+| `azd down` leave resources | Tag every resource (or resource group) wit `azd-env-name` |
+| Template work for you, no work for others | Remove subscription IDs, tenant IDs, and region assumptions |
+| Outputs no connect enter app | Match `azd-service-name`/`resourceName` for deployment and map outputs to app settings clearly |
+| Gallery submission reject | Add `README.md`, `LICENSE`, and `metadata.template` |
 
 ---
 
 ## Summary
 
 - Template na just Git repo with `azure.yaml`, `infra/`, and your code.
-- Parameterize everything—names, regions, and IDs—make e fit run anywhere.
-- Always tag resources with `azd-env-name` make `azd down` fit work.
-- Test am locally with `azd init --template <local-path>` before you publish.
+- Parameterize everything—names, regions, and IDs—so e fit run anywhere.
+- Always tag resources wit `azd-env-name` so `azd down` fit work.
+- Test am locally wit `azd init --template <local-path>` before you publish am.
 - Add metadata and README to submit to Awesome AZD.
 
 ---

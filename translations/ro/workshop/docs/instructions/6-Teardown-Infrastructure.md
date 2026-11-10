@@ -1,60 +1,58 @@
 # 6. Demontarea infrastructurii
 
-!!! tip "LA FINALUL ACESTUI MODUL VEI FI CAPABIL SĂ"
+!!! tip "LA SFÂRȘITUL ACESTUI MODUL VEI FI CAPABIL SĂ"
 
-    - [ ] Înțelegi importanța eliberării resurselor și gestionării costurilor
-    - [ ] Folosești `azd down` pentru a dezactiva infrastructura în siguranță
-    - [ ] Recuperezi serviciile Azure AI șterse soft dacă este nevoie
-    - [ ] **Laborator 6:** Curăță resursele Azure și verifică eliminarea acestora
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Exerciții bonus
 
-Înainte de a demonta proiectul, petrece câteva minute pentru a face o explorare deschisă.
+Înainte de a demonta proiectul, ia câteva minute pentru o explorare deschisă.
 
-!!! info "Încearcă aceste întrebări de explorare"
+!!! info "Încearcă aceste îndemnuri de explorare"
 
-    **Experimentează cu GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. Întreabă: `Ce alte șabloane AZD aș putea încerca pentru scenarii multi-agent?`
-    2. Întreabă: `Cum pot personaliza instrucțiunile pentru agenți în cazul unei aplicații în domeniul sănătății?`
-    3. Întreabă: `Ce variabile de mediu controlează optimizarea costurilor?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Explorează portalul Azure:**
+    **Explore the Azure Portal:**
     
-    1. Revizuiește metricile din Application Insights pentru implementarea ta
-    2. Verifică analiza costurilor pentru resursele provisionate
-    3. Explorează încă o dată agent playground în portalul Microsoft Foundry
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Dezactivează infrastructura
+## Dezprovisionare infrastructură
 
 1. Demontarea infrastructurii este la fel de simplă ca:
-
+      
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. Flag-ul `--purge` asigură că va șterge și resursele soft-delete ale Cognitive Service, eliberând astfel cota de resurse ocupată de acestea. Odată terminat vei vedea ceva de genul:
-
-      ```bash title="" linenums="0"
+1. Confirmă mediul selectat și revizuiește resursele ce urmează să fie șterse. Aceasta elimină resursele Azure și poate distruge date. Menține solicitarea de confirmare pentru acest flux de lucru de învățare. Odată finalizat vei vedea un rezultat similar cu:
+      
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Opțional) Dacă acum rulezi din nou `azd up`, vei observa că modelul gpt-4.1 este implementat deoarece variabila de mediu a fost schimbată (și salvată) în folderul local `.azure`.
+1. Verifică ștergerea în portal și caută resurse în afara domeniului de implementare. Raportarea costurilor și actualizările cotelor pot întârzia. Configurația locală `.azure` rămâne decât dacă o elimini explicit.
 
-      Iată implementările modelului **înainte**:
+1. `azd down --purge` solicită și ștergerea permanentă a resurselor soft-șterse suportate. Folosește această comandă doar când recuperarea nu este necesară și înțelegi politicile de retenție/protecție la ștergere. Nu garantează eliberarea imediată a cotei.
 
-      ![Inițial](../../../../../translated_images/ro/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      Și aici este **după**:
-      ![Nou](../../../../../translated_images/ro/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Nu reimplementa doar pentru a verifica curățarea. O comandă intenționată ulterioară `azd up` poate recrea resursele folosind intrările locale rămase și va genera din nou costuri. Actualizările modelului folosesc de obicei schimbări de aprovizionare suportate, nu demontarea.
 
 ---
 

@@ -1,22 +1,22 @@
-# Capítulo 2: Desarrollo AI-First
+# Capítulo 2: Desarrollo con IA como Prioridad
 
-**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duración**: 1-2 horas | **⭐ Complejidad**: Intermedio
+**📚 Curso**: [AZD para Principiantes](../../README.md) | **⏱️ Duración**: 4-5 horas incluyendo el taller | **⭐ Complejidad**: Intermedio
 
 ---
 
 ## Resumen
 
-Este capítulo se centra en desplegar aplicaciones impulsadas por IA utilizando Azure Developer CLI y los servicios de Microsoft Foundry. Desde aplicaciones simples de chat con IA hasta agentes inteligentes con herramientas.
+Este capítulo se centra en desplegar aplicaciones con IA usando Azure Developer CLI y los servicios de Microsoft Foundry. Desde simples aplicaciones de chat con IA hasta agentes inteligentes con herramientas.
 
-> **Nota de validación (2026-07-13):** El flujo de comandos y la guía de extensiones en este capítulo se revisaron contra `azd` `1.27.1` y la versión actual de previsualización de la extensión de agente IA `azure.ai.agents` `1.0.0-beta.5`. Si usas una versión anterior de AZD, actualiza primero y luego continúa con los ejercicios.
+> **Revisión de lanzamiento (2026-11-04):** La guía de AI CLI fue verificada contra la documentación/fuentes publicadas `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, y `azure.ai.evaluations` `1.0.0-beta.2`. Use `azd >= 1.37.0` para el flujo de trabajo combinado. Las evaluaciones ahora usan el namespace separado `azd ai eval`; vea [cambios de lanzamiento y guía de migración](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Esto no es una validación en tiempo real de despliegue.
 
-## Objetivos de aprendizaje
+## Objetivos de Aprendizaje
 
-Al completar este capítulo, usted:
-- Desplegará aplicaciones de IA usando plantillas AZD preconstruidas
-- Entenderá la integración de Microsoft Foundry con AZD
-- Configurará y personalizará agentes IA con herramientas
-- Desplegará aplicaciones RAG (Generación Aumentada por Recuperación)
+Al completar este capítulo, usted podrá:
+- Desplegar aplicaciones de IA usando plantillas preconstruidas de AZD
+- Entender la integración de Microsoft Foundry con AZD
+- Configurar y personalizar agentes de IA con herramientas
+- Desplegar aplicaciones RAG (Generación Aumentada por Recuperación)
 
 ---
 
@@ -27,23 +27,25 @@ Al completar este capítulo, usted:
 | 1 | [Integración Microsoft Foundry](microsoft-foundry-integration.md) | Conectar AZD con servicios Foundry | 30 min |
 | 2 | [Guía de Agentes IA](agents.md) | Desplegar agentes inteligentes con herramientas | 45 min |
 | 3 | [Despliegue de Modelos IA](ai-model-deployment.md) | Desplegar y configurar modelos de IA | 30 min |
-| 4 | [Laboratorio Taller IA](ai-workshop-lab.md) | Práctica: Hacer tu solución IA lista para AZD | 60 min |
+| 4 | [Laboratorio Taller de IA](ai-workshop-lab.md) | Práctica: Explorar una plantilla y planificar tu conversión | 2-3 horas |
 
 ---
 
 ## 🚀 Inicio Rápido
 
+Elige una opción en un directorio vacío nuevo. El `.` final inicializa el directorio actual; de lo contrario AZD puede crear un subdirectorio sin cambiar el directorio de trabajo de tu shell.
+
 ```bash
-# Opción 1: Aplicación de Chat RAG
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# Opción 2: Agentes de IA
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# Opción 3: Aplicación de Chat Rápida
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
@@ -55,19 +57,21 @@ azd up
 |----------|-------------|----------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG con citas | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agente IA con herramientas | Servicio de Agentes IA |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat básico de IA | OpenAI + Container Apps |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat IA básico | OpenAI + Container Apps |
 
 ---
 
-## 💰 Conciencia de Costos
+## 💰 Consciencia de Costos
 
-| Entorno | Costo Mensual Estimado |
+Estos son rangos ilustrativos, no cotizaciones ni topes; el tráfico del modelo, SKUs de búsqueda/cómputo, región y características opcionales pueden excederlos. Revise la guía de precios actual de su ejemplo elegido antes de provisionar.
+
+| Entorno | Coste Mensual Estimado |
 |-------------|----------------------|
 | Desarrollo | $80-150 |
-| Preproducción | $150-300 |
+| Pruebas | $150-300 |
 | Producción | $300-3,500+ |
 
-**Consejo:** Ejecuta `azd down` después de probar para evitar cargos.
+**Consejo:** Ejecute `azd down` después de probar para evitar cargos.
 
 ---
 

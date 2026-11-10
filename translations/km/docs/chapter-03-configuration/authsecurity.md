@@ -1,190 +1,195 @@
-# លំនាំការ Authenticate និង អត្តសញ្ញាណដែលបានគ្រប់គ្រង
+# លំនាំសម្គាល់អត្តសញ្ញាណ និងអត្តសញ្ញាណដែលគ្រប់គ្រង
 
-⏱️ **ពេលវេលាចំណាយឧទាហរណ៍**: 45-60 minutes | 💰 **តម្លៃចំណាយ**: Free (no additional charges) | ⭐ **ភាពស្មុគស្មាញ**: Intermediate
+⏱️ **ពេលវេលាប៉ាន់ប្រមាណ**: អាន ៤៥-៦០ នាទី; អនុញ្ញាតពេលវេលាបន្ថែមសម្រាប់បញ្ចូលលំហាត់ | 💰 **ផលប៉ះពាល់ថ្លៃដើម**: អត្តសញ្ញាណ/RBAC គឺឥតគិតថ្លៃ; ការគណនា, ការផ្ទុក និង Key Vault ដែលបានដាក់ប្រាក់ត្រូវគិតថ្លៃ | ⭐ **ភាពស្មុគស្មាញ**: កម្រិតមធ្យម
 
-**📚 ផ្លូវការសិក្សា:**
-- ← មុន៖ [ការគ្រប់គ្រងកំណត់រចនាសម្ពន្ធ](configuration.md) - គ្រប់គ្រងអថេរបរិយាកាស និង សម្ងាត់
-- 🎯 **អ្នកនៅទីនេះ**: ការផ្ទៀងផ្ទាត់ និងសន្តិសុខ (អត្តសញ្ញាណដែលបានគ្រប់គ្រង, Key Vault, លំនាំសុវត្ថិភាព)
-- → បន្ទាប់៖ [គម្រោងដំបូង](first-project.md) - សាងសង់កម្មវិធី AZD ជាលើកដំបូង
-- 🏠 [ទំព័រដើមថ្នាក់រៀន](../../README.md)
+> បានពិនិត្យឡើងវិញដោយផ្អែកលើ `azd 1.37.2` (វិច្ឆិកា 2026)។ មេរៀននេះមាន **ផ្នែករួមបញ្ចូលក្នុងការបង្ហាញ ប៉ុន្តែមិនមែនគំរូ `secure-app` ដែលអាចទាញយកបានពេញលេញទេ**។ បង្កើតឯកសារដែលបានយោង, ផ្គត់ផ្គង់ហេដ្ឋារចនាសម្ព័ន្ធដែលផ្គូផ្គង, និងជំនួសកន្លែងទំនេរមុនពេលបង្ហោះ។ គ្មានធនធាន Azure ត្រូវបានចែកចាយនៅពេលពិនិត្យឡើយ។
+
+**📚 ផ្លូវការសិក្សា៖**
+- ← មុន៖ [ការគ្រប់គ្រងការកំណត់រចនាសម្ព័ន្ធ](configuration.md) - ការគ្រប់គ្រងអថេរជាបរិបទ និងសម្ងាត់
+- 🎯 **អ្នកស្ថិតនៅទីនេះ**៖ ការផ្ទៀងផ្ទាត់ និងសុវត្ថិភាព (អត្តសញ្ញាណគ្រប់គ្រង, ថាសគន្លឹះ, គំរូសុវត្ថិភាព)
+- → បន្ទាប់៖ [ហេដ្ឋារចនាសម្ព័ន្ធជាទូទៅ](../chapter-04-infrastructure/README.md) - ការផ្ដល់ និងបញ្ចូលធនធាន
+- 🏠 [ទំព័រដើមមេរៀន](../../README.md)
 
 ---
 
-## អ្វីដែលអ្នក​នឹងរៀន
+## អ្វីដែលអ្នកនឹងរៀន
 
-ដោយបញ្ចប់មេរៀននេះ អ្នកនឹង:
-- យល់ពីលំនាំផ្ទៀងផ្ទាត់របស់ Azure (keys, connection strings, អត្តសញ្ញាណដែលបានគ្រប់គ្រង)
-- អនុវត្តអត្តសញ្ញាណដែលបានគ្រប់គ្រង សម្រាប់ការផ្ទៀងផ្ទាត់ដោយគ្មានពាក្យសម្ងាត់
-- រួមបញ្ចូល Azure Key Vault ដើម្បីការពារសម្ងាត់
-- កំណត់ role-based access control (RBAC) សម្រាប់ការដាក់ចេញ AZD
-- អនុវត្តគោលការណ៍សុវត្ថិភាពល្អបំផុតនៅក្នុង Container Apps និងសេវាកម្ម Azure
-- បម្លែងពីការផ្ទៀងផ្ទាត់ដោយផ្អែកលើ key ទៅការផ្អែកលើអត្តសញ្ញាណ
+ដោយបញ្ចប់មេរៀននេះ អ្នកនឹងអាច៖
+- យល់ដឹងអំពីគំរូការផ្ទៀងផ្ទាត់ Azure (កូនសោ, ខ្សែចងភ្ជាប់, អត្តសញ្ញាណគ្រប់គ្រង)
+- អនុវត្ត **អត្តសញ្ញាណគ្រប់គ្រង** សម្រាប់ការផ្ទៀងផ្ទាត់មិនបញ្ចូលពាក្យសម្ងាត់
+- សុវត្ថិភាពសម្ងាត់ជាមួយ **ការរួមបញ្ចូល Azure Key Vault**
+- កំណត់តួនាទីផ្អែកលើការគ្រប់គ្រងចូល (RBAC) សម្រាប់ការបង្ហោះ AZD
+- អនុវត្តភាពជាក់លាក់ល្អបំផុតសុវត្ថិភាពនៅក្នុង Container Apps និងសេវាកម្ម Azure
+- ផ្លាស់ប្តូរពីការផ្ទៀងផ្ទាត់ផ្អែកលើគន្លឹះ ទៅការផ្ទៀងផ្ទាត់ផ្អែកលើអត្តសញ្ញាណ
 
-## ហេតុអ្វីបានជា អត្តសញ្ញាណដែលបានគ្រប់គ្រង មានសារៈសំខាន់
+## ហេតុអ្វីបានជា អត្តសញ្ញាណគ្រប់គ្រងសំខាន់
 
-### បញ្ហា: ការផ្ទៀងផ្ទាត់បែបប្រពៃណី
+### បញ្ហា៖ ការផ្ទៀងផ្ទាត់ប្រពៃណី
 
-**មុននឹងអត្តសញ្ញាណដែលបានគ្រប់គ្រង:**
+**មុនអត្តសញ្ញាណគ្រប់គ្រង៖**
 ```javascript
-// ❌ ហានិភ័យសុវត្ថិភាព: សម្ងាត់ដែលបានកូដថេរនៅក្នុងកូដ
+// ❌ SECURITY RISK: Hardcoded secrets in code
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
-**បញ្ហា:**
-- 🔴 **សម្ងាត់ដែលបានបើកចំហ** នៅក្នុងកូដ, ឯកសារ config, អថេរបរិយាកាស
-- 🔴 **ការប្ដូរអត្ថសញ្ញាបត្រ** ត្រូវការការផ្លាស់ប្តូរកូដ និងការដាក់ចេញឡើងវិញ
-- 🔴 **បញ្ហាត្រួតពិនិត្យ (audit)** - នរណាដែលចូលប្រើអ្វី និងពេលណា?
-- 🔴 **ការរីងរាយ** - សម្ងាត់ត្រូវបានបែកចែកនៅក្នុងប្រព័ន្ធជាច្រើន
-- 🔴 **ហានិភ័យផ្នែកគោលការណ៍** - បរាជ័យក្នុងការត្រួតពិនិត្យសន្តិសុខ
+**បញ្ហា៖**
+- 🔴 **សម្ងាត់បង្ហាញចេញ** ក្នុងកូដ, ឯកសារកំណត់រចនាសម្ព័ន្ធ, អថេរជាបរិបទ
+- 🔴 **ការបង្វិលប្ដូរពាក្យសម្ងាត់** ត្រូវការការផ្លាស់ប្តូរកូដ និងការបង្ហោះឡើងវិញ
+- 🔴 **ការត្រួតពិនិត្យក្រោមសម្ពាធ** - អ្នកណាប្រើប្រាស់អ្វី នៅពេលណា?
+- 🔴 **ការចម្លងសម្ងាត់ច្រើនទីតាំង** - សម្ងាត់រាយចែកពូជក្នុងប្រព័ន្ធជាច្រើន
+- 🔴 **ហានិភ័យភាពជាអ្នកផ្ទៀងផ្ទាត់** - បរាជ័យការត្រួតពិនិត្យសុវត្ថិភាព
 
-### ដំណោះស្រាយ: អត្តសញ្ញាណដែលបានគ្រប់គ្រង
+### ដំណោះស្រាយ៖ អត្តសញ្ញាណគ្រប់គ្រង
 
-**បន្ទាប់ពីអត្តសញ្ញាណដែលបានគ្រប់គ្រង:**
+**បន្ទាប់ពីអត្តសញ្ញាណគ្រប់គ្រង៖**
 ```javascript
-// ✅ សុវត្ថិភាព: គ្មានសម្ងាត់នៅក្នុងកូដ
+// ✅ SECURE: No secrets in code
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Azure គ្រប់គ្រងការផ្ទៀងផ្ទាត់អត្តសញ្ញាណដោយស្វ័យប្រវត្តិ
+  credential  // Azure automatically handles authentication
 );
 ```
 
-**អត្ថប្រយោជន៍:**
-- ✅ **គ្មានសម្ងាត់** នៅក្នុងកូដ ឬ ការកំណត់រចនាសម្ព័ន្ធ
-- ✅ **ការប្ដូរឲ្យស្វ័យប្រវត្តិ** - Azure ទទួលខុសត្រូវ
-- ✅ **ចុះតាមប្រវត្តិ audit ពេញលេញ** ក្នុងកំណត់ហេតុ Microsoft Entra ID
-- ✅ **សន្តិសុខសម្រួលចងក្រង** - គ្រប់គ្រងនៅក្នុង Azure Portal
-- ✅ **រួចសម្រាប់គោលការណ៍** - ទាក់ទងស្តង់ដាសន្តិសុខ
+**អត្ថប្រយោជន៍៖**
+- ✅ **គ្មានសម្ងាត់** នៅក្នុងកូដ ឬការកំណត់រចនាសម្ព័ន្ធ
+- ✅ **ការបង្វិលប្ដូរប្រូហ្គ្រាមដោយស្វ័យប្រវត្តិ** - Azure គ្រប់គ្រងវា
+- ✅ **រោងចក្រ audit ពេញលេញ** នៅក្នុងកំណត់ហេតុ Microsoft Entra ID
+- ✅ **សុវត្ថិភាពមជ្ឈមណ្ឌល** - គ្រប់គ្រងក្នុង Azure Portal
+- ✅ **ឆាងលក្ខខណ្ឌសុវត្ថិភាព** - សម្របសម្រួលនឹងស្តង់ដាសុវត្ថិភាព
 
-**និមិត្តរូប**: ការផ្ទៀងផ្ទាត់បែបប្រពៃណី គឺដូចជាការយកកូនសោជាច្រើនសម្រាប់ទ្វារផ្សេងៗ។ អត្តសញ្ញាណដែលបានគ្រប់គ្រង គឺដូចជាកត្តាសន្តិសុខមួយដែលផ្ដល់ការចូលប្រើដោយស្វ័យប្រវត្តិផ្អែកលើអត្តសញ្ញាណរបស់អ្នក — គ្មានកូនសោដែលអាចបាត់, ចម្លង, ឬ ប្ដូរ។
+**ប្រៀបធៀប**៖ ការផ្ទៀងផ្ទាត់ប្រពៃណីដូចជា ការពាក់កូនសោផ្លូវទៅទ្វារផ្សេងៗ។ អត្តសញ្ញាណគ្រប់គ្រងដូចជា ប័ណ្ណសុវត្ថិភាពដែលផ្តល់ការចូលដោយស្វ័យប្រវត្តិ ដោយផ្អែកលើអ្នកជាអ្នក - គ្មានកូនសោដែលអាចបាត់បង់ ចម្លង ឬបង្វិល។
 
 ---
 
-## ទិដ្ឋភាពស្ថាបត្យកម្ម
+## ទិដ្ឋភាពធរណីមាត្រ
 
-### លំហូរផ្ទៀងផ្ទាត់ជាមួយអត្តសញ្ញាណដែលបានគ្រប់គ្រង
+### ចរន្តផ្ទៀងផ្ទាត់ជាមួយអត្តសញ្ញាណគ្រប់គ្រង
 
 ```mermaid
 sequenceDiagram
-    participant App as កម្មវិធីរបស់អ្នក<br/>(កម្មវិធីកុងតឺន័រ)
-    participant MI as អត្តសញ្ញាណគ្រប់​គ្រង<br/>(Microsoft Entra ID)
-    participant KV as ទូសម្ងាត់
-    participant Storage as ផ្ទុក Azure
-    participant DB as SQL របស់ Azure
+    participant App as Your Application<br/>(Container App)
+    participant MI as Managed Identity<br/>(Microsoft Entra ID)
+    participant KV as Key Vault
+    participant Storage as Azure Storage
+    participant DB as Azure SQL
     
-    App->>MI: ស្នើសុំ access token<br/>(ស្វ័យប្រវត្តិ)
-    MI->>MI: ផ្ទៀងផ្ទាត់អត្តសញ្ញាណ<br/>(មិនត្រូវការពាក្យសម្ងាត់)
-    MI-->>App: ត្រឡប់ token<br/>(មានសុពលភាព 1 ម៉ោង)
+    App->>MI: Request access token<br/>(automatic)
+    MI->>MI: Verify identity<br/>(no password needed)
+    MI-->>App: Return token for requested audience<br/>(lifetime varies)
     
-    App->>KV: យកសម្ងាត់<br/>(ប្រើ token)
-    KV->>KV: ពិនិត្យសិទ្ធិ RBAC
-    KV-->>App: ត្រឡប់តម្លៃសម្ងាត់
+    App->>KV: Get secret<br/>(using token)
+    KV->>KV: Check RBAC permissions
+    KV-->>App: Return secret value
     
-    App->>Storage: ផ្ទុក blob<br/>(ប្រើ token)
-    Storage->>Storage: ពិនិត្យសិទ្ធិ RBAC
-    Storage-->>App: ជោគជ័យ
+    App->>Storage: Upload blob<br/>(using token)
+    Storage->>Storage: Check RBAC permissions
+    Storage-->>App: Success
     
-    App->>DB: ស្នើរសុំទិន្នន័យ<br/>(ប្រើ token)
-    DB->>DB: ពិនិត្យសិទ្ធិ SQL
-    DB-->>App: ត្រឡប់លទ្ធផល
+    App->>DB: Query data<br/>(using token)
+    DB->>DB: Check SQL permissions
+    DB-->>App: Return results
     
-    Note over App,DB: ការផ្ទៀងផ្ទាត់ទាំងអស់គ្មានពាក្យសម្ងាត់!
+    Note over App,DB: Request a separate token for each service audience;<br/>SDK credentials handle caching and renewal
 ```
 
-### ប្រភេទនៃអត្តសញ្ញាណដែលបានគ្រប់គ្រង
+### ប្រភេទអត្តសញ្ញាណគ្រប់គ្រង
 
 ```mermaid
 graph TB
-    MI[អត្តសញ្ញាណដែលបានគ្រប់គ្រង]
-    SystemAssigned[អត្តសញ្ញាណផ្តល់ដោយប្រព័ន្ធ]
-    UserAssigned[អត្តសញ្ញាណផ្តល់ដោយអ្នកប្រើ]
+    MI[Managed Identity]
+    SystemAssigned[System-Assigned Identity]
+    UserAssigned[User-Assigned Identity]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[អាយុកាលភ្ជាប់ទៅនឹងធនធាន]
-    SystemAssigned --> SA2[ការបង្កើត/លុបដោយស្វ័យប្រវត្តិ]
-    SystemAssigned --> SA3[ល្អបំផុតសម្រាប់ធនធានតែមួយ]
+    SystemAssigned --> SA1[Lifecycle tied to resource]
+    SystemAssigned --> SA2[Automatic creation/deletion]
+    SystemAssigned --> SA3[Best for single resource]
     
-    UserAssigned --> UA1[អាយុកាលឯករាជ្យ]
-    UserAssigned --> UA2[ការបង្កើត/លុបដោយដៃ]
-    UserAssigned --> UA3[ចែករំលែករវាងធនធាន]
+    UserAssigned --> UA1[Independent lifecycle]
+    UserAssigned --> UA2[Manual creation/deletion]
+    UserAssigned --> UA3[Shared across resources]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
 
-| មុខងារ | បានចាត់តាំងដោយប្រព័ន្ធ | ចាត់តាំងដោយអ្នកប្រើ |
+| លក្ខណៈ | ចាត់​តាមប្រព័ន្ធ | ចាត់​តាមអ្នកប្រើប្រាស់ |
 |---------|----------------|---------------|
-| **រយៈពេលជីវិត** | ភ្ជាប់ទៅធនធាន | ឯករាជ្យ |
+| **ជីវិត** | ភ្ជាប់ជាមួយធនធាន | ប្រករ​ឈរ​ឯណា​មួយ |
 | **ការបង្កើត** | ស្វ័យប្រវត្តិជាមួយធនធាន | បង្កើតដោយដៃ |
-| **ការលុប** | លុបជាមួយធនធាន | អង្រឹងក្រោយការលុបធនធាន |
-| **ការចែករំលែក** | សម្រាប់ធនធានតែមួយ | ធនធានជាច្រើន |
-| **ករណីប្រើប្រាស់** | សេណារីយ៉ូមសាមញ្ញ | សេណារីយ៉ូមស្មុគស្មាញច្រើនធនធាន |
-| **លំនាំដើម AZD** | ✅ ត្រូវបានផ្ដល់អនុសាសន៍ | ជាវិសមរភាព |
+| **ការលុប** | លុបជាមួយធនធាន | មាននៅបន្តក្រោយការលុបធនធាន |
+| **ការចែករំលែក** | ធនធានមួយតែប៉ុណ្ណោះ | ធនធានច្រើន |
+| **ករណីប្រើប្រាស់** | សាមញ្ញ | ស្មុគស្មាញ និងមានធនធានច្រើន |
+| **ជម្រើសគំរូ** | កំណត់ជាថ្នាក់ហេដ្ឋារចនាសម្ព័ន្ធ | កំណត់ជាថ្នាក់ហេដ្ឋារចនាសម្ព័ន្ធ |
 
 ---
 
-## លក្ខខ័ណ្ឌមុនចាប់ផ្តើម
+## វិស័យជាមុន
 
-### ឧបករណ៍​ទាមទារ
+### ឧបករណ៍ដែលត្រូវការ
 
-អ្នកគួរតែបានដំឡើងទាំងនេះពីមេរៀនមុន:
+អ្នកគួរតែបានដំឡើងរួចពីមេរៀនមុនៗ៖
+
 ```bash
-# ផ្ទៀងផ្ទាត់ Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ រំពឹងទុក: azd កំណែ 1.0.0 ឬច្រើនជាងនេះ
+# ✅ Expected: azd version 1.0.0 or higher
 
-# ផ្ទៀងផ្ទាត់ Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ រំពឹកទុក: azure-cli 2.50.0 ឬច្រើនជាងនេះ
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
-### លក្ខខ័ណ្ឌ Azure
+### ការទាមទារ Azure
 
-- កម្មវិធីជាវ Azure សកម្ម
-- សិទ្ធិដើម្បី:
-  - បង្កើតអត្តសញ្ញាណដែលបានគ្រប់គ្រង
-  - ចាត់តាំងតួនាទី RBAC
+- មានការចុះឈ្មោះ Azure សកម្ម
+- មានសិទ្ធិ​ដូចខាងក្រោម៖
+  - បង្កើតអត្តសញ្ញាណគ្រប់គ្រង
+  - ចាត់តួនាទី RBAC
   - បង្កើតធនធាន Key Vault
-  - ដាក់ចេញ Container Apps
+  - បង្ហោះ Container Apps
 
-### ចំណេះដឹងដែលត្រូវមាន
+### គោលការណ៍ចំណេះដឹងមុន
 
-អ្នកគួរតែបានបញ្ចប់:
-- [មាគ៌ាដំឡើង](installation.md) - ការកំណត់ AZD
-- [មូលដ្ឋាន AZD](azd-basics.md) - គំនិតដើម
-- [ការគ្រប់គ្រងកំណត់រចនាសម្ព័ន្ធ](configuration.md) - អថេរបរិយាកាស
+អ្នកត្រូវបានបញ្ចប់៖
+- [មគ្គុទ្ទេសក៍ដំឡើង](../chapter-01-foundation/installation.md) - ការតំឡើង AZD
+- [មូលដ្ឋាន AZD](../chapter-01-foundation/azd-basics.md) - គំនិតគ្រឹះ
+- [ការគ្រប់គ្រងការកំណត់រចនាសម្ព័ន្ធ](configuration.md) - អថេរជាបរិបទបរិស្ថាន
 
 ---
 
-## មេរៀន 1: យល់ពីលំនាំផ្ទៀងផ្ទាត់
+## មេរៀន 1៖ យល់ដឹងអំពីគំរូការផ្ទៀងផ្ទាត់
 
-### លំនាំ 1: Connection Strings (ចាស់ - និងត្រូវជៀសវាង)
+### គំរូ 1៖ ខ្សែចងភ្ជាប់ (ចាស់ - មិនផ្តល់អនុសាសន៍)
 
-**របៀបវាធ្វើការ:**
+**របៀបដំណើរការ៖**
 ```bash
-# ខ្សែការភ្ជាប់មានព័ត៌មានអត្តសញ្ញាណ
+# Connection string contains credentials
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
-**បញ្ហា:**
-- ❌ សម្ងាត់មើលឃើញបាននៅក្នុងអថេរបរិយាកាស
-- ❌ បានកត់ត្រានៅក្នុងប្រព័ន្ធដាក់ចេញ
-- ❌ លំបាកក្នុងការប្ដូរ
-- ❌ គ្មានតាមដាន audit នៃការចូលប្រើ
+**បញ្ហា៖**
+- ❌ សម្ងាត់បង្ហាញក្នុងអថេរជាបរិបទបរិស្ថាន
+- ❌ បានចុះកំណត់ហេតុនៅក្នុងប្រព័ន្ធបញ្ចូល
+- ❌ ពិបាកក្នុងការបង្វិលប្ដូរ
+- ❌ គ្មានផ្លូវ audit នៃការចូលប្រើ
 
-**ពេលណាដើម្បីប្រើ:** សម្រាប់ការអភិវឌ្ឍក្នុងកន្លែងក្នុងស្រុក ប៉ុណ្ណោះ មិនសម្រាប់ផលិតកម្មទេ។
+**ម៉ោងប្រើប្រាស់៖** ពេលដែលសេវាដែលអ្នកចង់ប្រើការទាមទារការផ្ទៀងផ្ទាត់ដោយគន្លឹះ។ ចូរប្រើអត្តសញ្ញាណនៅកន្លែងដែលគាំទ្រ; មិនដូច្នោះទេត្រូវរក្សាកូនសោយ៉ាងសុវត្ថិភាព និងបង្វិលវា រួមទាំងនៅក្នុងផលិតកម្មផងដែរ។
 
 ---
 
-### លំនាំ 2: Key Vault References (ល្អជាង)
+### គំរូ 2៖ លំនាំ Key Vault (ល្អជាង)
 
-**របៀបវាធ្វើការ:**
+**របៀបដំណើរការ៖**
+**ផ្នែក Bicep បន្តិចបន្តួច៖** ប្រភេទលំនាំ vault ដែលត្រូវការ, អត្តសញ្ញាណ Container App និង`configuration.secrets` មិនមាននៅទីនេះទេ។ `secretRef` បង្ហាញឲ្យឃើញសម្ងាត់ Container App; វា **មិនមែន** URI Key Vault ទេ។ ដើម្បីប្រើ Key Vault, កំណត់សម្ងាត់ដែលមានឈ្មោះនោះជាមួយ `keyVaultUrl` និង`identity` ដែលមានសិទ្ធអនុញ្ញាត។
+
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -203,22 +208,24 @@ env: [
 ]
 ```
 
-**អត្ថប្រយោជន៍:**
-- ✅ សម្ងាត់បានផ្ទុកយ៉ាងសុវត្ថិភាពនៅក្នុង Key Vault
-- ✅ គ្រប់គ្រងសម្ងាត់នៅមជ្ឈមណ្ឌល
-- ✅ អាចប្ដូរបានដោយគ្មានការផ្លាស់ប្តូរកូដ
+**អត្ថប្រយោជន៍៖**
+- ✅ សម្ងាត់បានរក្សាទុកយ៉ាងសុវត្ថិភាពនៅក្នុង Key Vault
+- ✅ ការគ្រប់គ្រងសម្ងាត់មជ្ឈមណ្ឌល
+- ✅ ការបង្វិលប្ដូរ ដោយគ្មានការផ្លាស់ប្តូរកូដ
 
-**កំណត់ចំណុច:**
-- ⚠️ វានៅតែប្រើ keys/ពាក្យសម្ងាត់
-- ⚠️ ត្រូវមានការគ្រប់គ្រងការចូលប្រើ Key Vault
+**កំណត់ករិតៈ**
+- ⚠️ មិនទេហ្នឹងប្រើកូនសោ/ពាក្យសម្ងាត់
+- ⚠️ ត្រូវគ្រប់គ្រងការចូល Key Vault
 
-**ពេលណាដើម្បីប្រើ:** ជាជំហានផ្លាស់ប្តូរពី connection strings ទៅអត្តសញ្ញាណដែលបានគ្រប់គ្រង។
+**ម៉ោងប្រើប្រាស់៖** ជំហានផ្លាស់ប្តូរពីខ្សែចងភ្ជាប់ទៅអត្តសញ្ញាណគ្រប់គ្រង។
 
 ---
 
-### លំនាំ 3: អត្តសញ្ញាណដែលបានគ្រប់គ្រង (គោលការណ៍ល្អបំផុត)
+### គំរូ 3៖ អត្តសញ្ញាណគ្រប់គ្រង (អនុវត្តល្អបំផុត)
 
-**របៀបវាធ្វើការ:**
+**របៀបដំណើរការ៖**
+**ផ្នែក Bicep បន្តិចបន្តួច៖** បញ្ចូលប្លុកអត្តសញ្ញាណទៅក្នុង Container App ពេញលេញ និងផ្គត់ផ្គង់ `storageAccount` និងកំណត់តួនាទី។ ការចាត់តួនាទីមួយតម្រូវឲ្យមាន `name` យ៉ាងច្បាស់។
+
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -230,17 +237,19 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 // Grant permissions
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(storageAccount.id, containerApp.id, storageBlobDataContributorRole)
   scope: storageAccount
   properties: {
     roleDefinitionId: storageBlobDataContributorRole
     principalId: containerApp.identity.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 ```
 
 **កូដកម្មវិធី៖**
 ```javascript
-// មិនត្រូវការអាថ៌កំបាំង!
+// No secrets needed!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -251,33 +260,33 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-**អត្ថប្រយោជន៍:**
-- ✅ គ្មានសម្ងាត់ក្នុងកូដ/កំណត់រចនាសម្ព័ន្ធ
-- ✅ ការប្ដូរអត្ថសញ្ញាបត្រដោយស្វ័យប្រវត្តិ
-- ✅ ចុះតាមប្រវត្តិ audit ពេញលេញ
-- ✅ សិទ្ធិផ្អែកលើ RBAC
-- ✅ រួចសម្រាប់គោលការណ៍
+**អត្ថប្រយោជន៍៖**
+- ✅ គ្មានសម្ងាត់នៅក្នុងកូដ/ការកំណត់រចនាសម្ព័ន្ធ
+- ✅ ការបង្វិលប្ដូរប្រូហ្គ្រាមដោយស្វ័យប្រវត្តិ
+- ✅ ផ្លូវ audit ពេញលេញ
+- ✅ សិទ្ធិ​ផ្អែក​លើ RBAC
+- ✅ មានភាពឆាងលក្ខខណ្ឌ
 
-**ពេលណាដើម្បីប្រើ:** តែងតែប្រើ សម្រាប់កម្មវិធីផលិតកម្ម។
+**ម៉ោងប្រើប្រាស់៖** ជ្រើសរើសសម្រាប់កម្មវិធីដែលមាន Azure រៀបចំ ដែលចូលដំណើរការសេវាកម្មគាំទ្រការផ្ទៀងផ្ទាត់ Microsoft Entra។
 
 ---
 
-### លំនាំ 4: Service Principals (CI/CD និង ស្វ័យប្រវត្តិកម្ម)
+### គំរូ 4៖ អត្តសញ្ញាណសេវាកម្ម (CI/CD និងស្វ័យប្រវត្តិការណ៍)
 
-អត្តសញ្ញាណដែលបានគ្រប់គ្រង គឺជាគំរូល្អបំផុត សម្រាប់ធនធានដែលដំណើរការផ្ទាល់ក្នុង Azure។ ប៉ុន្តែតើអ្វីទៅជាករណីសម្រាប់អ្វីៗដែលដំណើរការខាងក្រៅ Azure — ដូចជា CI/CD pipeline លើ build agent ឬ ស្ក្រីបនៅលើកុំព្យូទ័រយួរដៃរបស់អ្នក ដែលមិនអាចប្រើការចូលតាមអន្តរកម្មបាន? នោះជាកន្លែងដែល **service principal** កើតមាន៖ គឺជា​អត្តសញ្ញាណមិនមនុស្សដែលមានគណនីសម្ងាត់របស់ខ្លួន ដែលប្រតិបត្តិការដែលមានស្វ័យប្រវត្តិអាចចូលឱ្យបាន។
+អត្តសញ្ញាណគ្រប់គ្រងគឺជាគំរូល្អបំផុត *សម្រាប់ធនធានចាប់ផ្តើមក្នុង Azure*។ តែលើសពីនេះទៅ តើធ្វើដូចម្តេចសម្រាប់ពេលធនធានដំណើរការចេញក្រៅ Azure—ដូចជារង្វង់បញ្ចូល CI/CD នៅលើភ្នាក់ងារសាងសង់ ឬស្គ្រីបនៅលើកុំព្យូទ័រយួរដៃរបស់អ្នកដែលមិនអាចប្រើការចូលមុខងារប្រកបដោយអន្តរកម្ម? នោះគឺជាកន្លែងដែល **អត្តសញ្ញាណសេវាកម្ម** ចូលរួម: អត្តសញ្ញាណមិនមែនមនុស្ស ដែលមានសម្ភារៈផ្ទាល់ខ្លួន និងដែលដំណើរការជាដៃគូអាចចូលបាន។
 
-**របៀបវាធ្វើការ:**
+**របៀបដំណើរការ៖**
 
-Create a service principal scoped to a resource group (least privilege):
+បង្កើតអត្តសញ្ញាណសេវាកម្មដែលមានព្រំដែនទៅក្រុមធនធាន (តួអត្តនិយមខ្ពស់បំផុត)៖
 
 ```bash
 az ad sp create-for-rbac \
   --name "myapp-cicd" \
   --role contributor \
-  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+  --scopes "/subscriptions/<sub-id>/resourceGroups/<rg-name>"
 ```
 
-This prints a client ID, client secret, and tenant ID. azd can sign in with them non-interactively:
+នេះបង្ហាញអត្តសញ្ញាណអតិថិជន, ពាក្យសម្ងាត់អតិថិជន, និង tenant ID។ azd អាចចុះឈ្មោះដោយមិនចូលរួមអន្តរកម្មបាន៖
 
 ```bash
 azd auth login \
@@ -286,7 +295,7 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-**ចូលចិត្តប្រើលទ្ធផលសមាជិកភាព (federated credentials - OIDC) ជាងសម្ងាត់។** ជំនួសសម្ងាត់ client ដែលមានអាយុកាលយូរ សូមកំណត់ federated credential ដើម្បីឲ្យ pipeline ប្ដូរទៅ token ដែលមានអាយុកាលខ្លី — គ្មានសម្ងាត់ដើម្បីរលាក់ឬប្ដូរ៖
+**របៀបប្រើផ្ទាល់អត្តសញ្ញាណសហគ្រិន (OIDC) ចំពោះសម្ងាត់។** ជំនួសពាក្យសម្ងាត់អតិថិជនប្រវែងវែង ព្យាយាមកំណត់ភាពនៅលើសិទិ្ធអត្តសញ្ញាណសហគ្រិនដែលអោយរង្វង់បញ្ចូលជួញដូរ Access token ខ្លី—គ្មានសម្ងាត់បែកចេញ ឬបង្វិលទេ៖
 
 ```bash
 azd auth login \
@@ -295,31 +304,31 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-> `azd pipeline config` sets this up for you automatically. មើលដំណើរការជាក់លាក់ CI/CD នៅក្នុង [ជំពូក 8](../chapter-08-production/production-ai-practices.md)។
+> `azd pipeline config` រៀបចំវាស្វ័យប្រវត្តិក្នុងឲ្យអ្នក។ មើលការដើរវិញ CI/CD នៅ [ជំពូកទី 8](../chapter-08-production/production-ai-practices.md)។
 
-**អត្ថប្រយោជន៍:**
-- ✅ ធ្វើការ​លើ​ផ្នែកខាងក្រៅ Azure (build agents, on-prem, clouds ផ្សេងៗ)
-- ✅ អាចចាត់តាំងដោយកម្រិតទៅក្រុមធនធានតែមួយជាមួយតួនាទីតែមួយ
-- ✅ ជាកម្រិត Federated (OIDC) មិនប្រើសម្ងាត់ដែលបានរក្សាទុក
+**អត្ថប្រយោជន៍៖**
+- ✅ ធ្វើការលើភាគីក្រៅ Azure (ភ្នាក់ងារសាងសង់, ក្នុងទីតាំង, ពពកផ្សេងៗ)
+- ✅ អាចកំណត់ព្រំដែនទៅក្រុមធនធានតែមួយជាមួយតួនាទីមួយ
+- ✅ របៀបសហគ្រិន (OIDC) មិនប្រើសម្ងាត់រក្សាទុក
 
-**ចំណុចចាត់ទុក:**
-- ⚠️ បរិមាណដែលផ្អែកលើសម្ងាត់ត្រូវការការផ្ទុក និងការប្ដូរយ៉ាងប្រុងប្រយ័ត្ន
-- ⚠️ សម្ងាត់ដែលរលាក់នឹងផ្ដល់អំណាចដូចដែល SP អាចធ្វើបាន — គួរតែរក្សាស្ដង់ដារ scopes ឲ្យតិចៗ
+**ការចាក់សោ៖**
+- ⚠️ របៀបផ្អែកលើសម្ងាត់ត្រូវការការរក្សាទុក និងបង្វិលយ៉ាងប្រុងប្រយ័ត្ន
+- ⚠️ ពាក្យសម្ងាត់របាយការណ៍ចេញអាចផ្តល់អោយអត្តសញ្ញាណសេវាកម្មអ្វីៗគ្រប់យ៉ាង—រក្សាព្រំដែនឲ្យតូច
 
-**ពេលណាដើម្បីប្រើ:** សម្រាប់ CI/CD pipelines និងស្វ័យប្រវត្តិកម្មដែលមិនអាចប្រើ managed identity ។ តែងតែចូលចិត្តប្រើប្រភេទ **federated/OIDC** ជាជម្រើសល្អជាង client secret ហើយអនុវត្ត managed identity រាល់ពេលដែលបេសកកម្មដំណើរក្នុង Azure ។
+**ម៉ោងប្រើប្រាស់៖** រង្វង់បញ្ចូល CI/CD និងស្វ័យប្រវត្តិការណ៍ដែលមិនអាចប្រើអត្តសញ្ញាណគ្រប់គ្រង។ តែងតែជ្រើសរើសរបៀប **សហគ្រិន/OIDC** ជាជម្រើសលើសម្ងាត់អតិថិជន ហើយជ្រើសរើសអត្តសញ្ញាណគ្រប់គ្រងនៅពេលដែលបន្ទុកការងារបើកដំណើរការនៅក្នុង Azure។
 
-**ការរក្សាគណនីយ៉ាងសុវត្ថិភាព:**
-- មិនចុះ commit សម្ងាត់ឡើយ — ប្រើស្ទកទុកសម្ងាត់របស់ pipeline (GitHub Actions secrets, Azure DevOps variable groups / Key Vault)។
-- កំណត់ SP ទៅតួនាទីតូចបំផុត និងក្រុមធនធានត្រូវការ។
-- កំណត់អង់តទាយ និងប្ដូរ, ឬលុបទាំងស្រុងសម្ងាត់ដោយប្រើ OIDC។
+**ការរក្សាទុកសម្ភារៈដោយសុវត្ថិភាព៖**
+- មិនដែលបញ្ចូលសម្ងាត់—ប្រើហាងសម្ងាត់របស់រង្វង់បញ្ចូល (GitHub Actions secrets, Azure DevOps variable groups / Key Vault)។
+- កំណត់អត្តសញ្ញាណសេវាកម្មទៅតួនាទីតូចបំផុតនិងក្រុមធនធានដែលចាំបាច់។
+- កំណត់កាលបរិច្ឆេទផុតកំណត់ និងបង្វិលវា ឬលុបសម្ងាត់ចេញដោយសារតែ OIDC។
 
 ---
 
-## មេរៀន 2: អនុវត្តអត្តសញ្ញាណដែលបានគ្រប់គ្រង ជាមួយ AZD
+## មេរៀន 2៖ អនុវត្តអត្តសញ្ញាណគ្រប់គ្រងជាមួយ AZD
 
-### ការអនុវត្តជំហានៗ
+### ដំណាក់កាលអនុវត្តជាជំហាន
 
-ឯឯណោះ យើងអាចសាងសង់ Container App ដែលមានសុវត្ថិភាព ដែលប្រើអត្តសញ្ញាណដែលបានគ្រប់គ្រង ដើម្បីចូលប្រើ Azure Storage និង Key Vault។
+ផ្នែកខ្សែចុងក្រោយខាងក្រោមបង្ហាញរបៀបរួមបញ្ចូលអត្តសញ្ញាណគ្រប់គ្រងទៅក្នុងគំរូ Container App។ វា **មិនមែនចម្លងរួចហើយរត់បានភ្លាម** អ្នកត្រូវការផ្នែក Storage, បរិស្ថានគ្រប់គ្រងសរុប/បណ្ណាល័យ, Dockerfile, និងឯកសារពារ៉ាម៉ែត្រមិនទាំងអស់បានផ្គត់ផ្គង់នៅទីនេះទេ។ ចាប់ផ្តើមពីគំរូ Container Apps ដែលដំណើរការបាន ហើយបញ្ចូលគំរូទាំងនេះ រក្សាទុកវគ្គបញ្ជាក់ទំនាក់ទំនង Container និងស្លាកសេវាកម្មរបស់វា។
 
 ### រចនាសម្ព័ន្ធគម្រោង
 
@@ -340,7 +349,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. កំណត់ค่า AZD (azure.yaml)
+### 1. កំណត់រចនាសម្ព័ន្ធ AZD (azure.yaml)
 
 ```yaml
 name: secure-app
@@ -353,10 +362,10 @@ services:
     language: js
     host: containerapp
 
-# Enable managed identity (AZD handles this automatically)
+# Managed identity must be enabled in the infrastructure, not by this YAML.
 ```
 
-### 2. រចនាស្ថាបត្យកម្ម: បើកអត្តសញ្ញាណដែលបានគ្រប់គ្រង
+### 2. ហេដ្ឋារចនាសម្ព័ន្ធ៖ បើកអត្តសញ្ញាណគ្រប់គ្រង
 
 **ឯកសារ: `infra/main.bicep`**
 
@@ -365,6 +374,8 @@ targetScope = 'subscription'
 
 param environmentName string
 param location string = 'eastus'
+param containerAppsEnvironmentId string
+param containerImage string
 
 var tags = { 'azd-env-name': environmentName }
 
@@ -407,6 +418,8 @@ module containerApp './app/container-app.bicep' = {
     tags: tags
     storageAccountName: storage.outputs.name
     keyVaultName: keyVault.outputs.name
+    containerAppsEnvironmentId: containerAppsEnvironmentId
+    containerImage: containerImage
   }
 }
 
@@ -417,7 +430,8 @@ module storageRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'  // Storage Blob Data Contributor
-    targetResourceId: storage.outputs.id
+    targetResourceType: 'storage'
+    targetResourceName: storage.outputs.name
   }
 }
 
@@ -428,7 +442,8 @@ module kvRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: '4633458b-17de-408a-b874-0445c86b69e6'  // Key Vault Secrets User
-    targetResourceId: keyVault.outputs.id
+    targetResourceType: 'keyvault'
+    targetResourceName: keyVault.outputs.name
   }
 }
 
@@ -438,7 +453,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App ជាមួយ System-Assigned Identity
+### 3. Container App ជាមួយអត្តសញ្ញាណប្រាក់ប្រព័ន្ធ
 
 **ឯកសារ: `infra/app/container-app.bicep`**
 
@@ -448,15 +463,18 @@ param location string
 param tags object = {}
 param storageAccountName string
 param keyVaultName string
+param containerAppsEnvironmentId string
+param containerImage string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: name
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'api' })
   identity: {
     type: 'SystemAssigned'  // 🔑 Enable managed identity
   }
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -467,7 +485,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Must exist; configure registry credentials for private images
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -495,18 +513,28 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. ម៉ូឌុលចាត់តាំងតួនាទី RBAC
+### 4. ម៉ូឌុលចាត់តួនាទី RBAC
 
 **ឯកសារ: `infra/core/role-assignment.bicep`**
 
 ```bicep
 param principalId string
 param roleDefinitionId string  // Azure built-in role ID
-param targetResourceId string
+@allowed(['storage', 'keyvault'])
+param targetResourceType string
+param targetResourceName string
 
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(principalId, roleDefinitionId, targetResourceId)
-  scope: resourceId('Microsoft.Resources/resourceGroups', resourceGroup().name)
+// Typed existing resources give Bicep a valid resource scope, not a string ID.
+resource storageTarget 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
+  name: targetResourceName
+}
+resource vaultTarget 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: targetResourceName
+}
+
+resource storageAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'storage') {
+  name: guid(storageTarget.id, principalId, roleDefinitionId)
+  scope: storageTarget
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
     principalId: principalId
@@ -514,10 +542,20 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
-output id string = roleAssignment.id
+resource vaultAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'keyvault') {
+  name: guid(vaultTarget.id, principalId, roleDefinitionId)
+  scope: vaultTarget
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
+    principalId: principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+// This module assigns at the target resource scope, not the whole resource group.
 ```
 
-### 5. កូដកម្មវិធីជាមួយអត្តសញ្ញាណដែលបានគ្រប់គ្រង
+### 5. កូដកម្មវិធីមានអត្តសញ្ញាណគ្រប់គ្រង
 
 **ឯកសារ: `src/app.js`**
 
@@ -530,29 +568,29 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 ចាប់ផ្តើមកំណត់ព័ត៌មានសម្គាល់ (ដំណើរការ​ដោយស្វ័យប្រវត្តិ​ជាមួយ​អត្តសញ្ញាណ​ដែលបាន​គ្រប់គ្រង)
+// 🔑 Initialize credential (works automatically with managed identity)
 const credential = new DefaultAzureCredential();
 
-// ការកំណត់ Azure Storage
+// Azure Storage setup
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
-  credential  // មិនត្រូវការសោទេ!
+  credential  // No keys needed!
 );
 
-// ការកំណត់ Key Vault
+// Key Vault setup
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
-  credential  // មិនត្រូវការសោទេ!
+  credential  // No keys needed!
 );
 
-// ការត្រួតពិនិត្យសុខភាព
+// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// ផ្ទុកឯកសារឡើង​ទៅ Blob Storage
+// Upload file to blob storage
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -561,7 +599,8 @@ app.post('/upload', async (req, res) => {
     const blobName = `file-${Date.now()}.txt`;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     
-    await blockBlobClient.upload('Hello from managed identity!', 30);
+    const content = 'Hello from managed identity!';
+    await blockBlobClient.upload(content, Buffer.byteLength(content));
     
     res.json({
       success: true,
@@ -574,7 +613,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// ទាញយកសម្ងាត់ពី Key Vault
+// Get secret from Key Vault
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -582,7 +621,7 @@ app.get('/secret/:name', async (req, res) => {
     
     res.json({
       name: secretName,
-      value: secret.value,
+      retrieved: secret.value !== undefined, // Never return the secret value to callers
       message: 'Secret retrieved using managed identity!'
     });
   } catch (error) {
@@ -591,7 +630,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// រាយបញ្ជីកុងតឺន័រ Blob (បង្ហាញពីសិទ្ធិអាន)
+// List blob containers (demonstrates read access)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -634,23 +673,25 @@ app.listen(PORT, () => {
 }
 ```
 
-### 6. ដាក់ចេញ និងសាកល្បង
+### 6. ដាក់បញ្ចូល និងសាកល្បង
+
+រត់ពាក្យបញ្ជានេះ **បន្ទាប់ពី** បញ្ចប់ការចងក្រងរចនាសម្ព័ន្ធខ្វះ, Dockerfile, និងការផ្គូផ្គង `main.parameters.json` ក្នុងគម្រោងរបស់អ្នក។ អះអាង azd ជាមួយ `azd auth login`; ចូលដោយឡែកជាមួយ `az login` សម្រាប់ការត្រួតពិនិត្យ Azure CLI ក្នុងពេលក្រោយ។ ចំណុចបញ្ចប់ដែលបង្ហាញគឺជា ការបង្ហាញម៉ូដែល ហើយតម្រូវឱ្យមានការគ្រប់គ្រងការចូលទៅត្រឹមត្រូវ មុនពេលប្រើប្រាស់សាធារណៈ។
 
 ```bash
-# ចាប់ផ្ដើមបរិយាកាស AZD
+# Initialize AZD environment
 azd init
 
-# បង្ហោះហេដ្ឋារចនាសម្ព័ន្ធ និងកម្មវិធី
+# Deploy infrastructure and application
 azd up
 
-# ទទួល URL នៃកម្មវិធី
-APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
+# Get the app URL
+APP_URL=$(azd env get-value APP_URL)
 
-# សាកល្បងការត្រួតពិនិត្យសុខភាព
+# Test health check
 curl $APP_URL/health
 ```
 
-**✅ លទ្ធផលដែលរំពឹងទុក:**
+**✅ ផលលទ្ធផលដែលរំពឹងទុក:**
 ```json
 {
   "status": "healthy",
@@ -658,12 +699,12 @@ curl $APP_URL/health
 }
 ```
 
-**សាកល្បងផ្ទុក blob:**
+**សាកល្បងបញ្ចូល blob:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
 
-**✅ លទ្ធផលដែលរំពឹងទុក:**
+**✅ ផលលទ្ធផលដែលរំពឹងទុក:**
 ```json
 {
   "success": true,
@@ -677,7 +718,7 @@ curl -X POST $APP_URL/upload
 curl $APP_URL/containers
 ```
 
-**✅ លទ្ធផលដែលរំពឹងទុក:**
+**✅ ផលលទ្ធផលដែលរំពឹងទុក:**
 ```json
 {
   "containers": ["uploads"],
@@ -688,46 +729,50 @@ curl $APP_URL/containers
 
 ---
 
-## តួនាទី RBAC Azure ដែលពេញនិយម
+## តួនាទី RBAC របស់ Azure ដែលត្រូវប្រើជាញឹកញាប់
 
-### Role IDs សាងសង់រួចសម្រាប់អត្តសញ្ញាណដែលបានគ្រប់គ្រង
+### អត្តសញ្ញាណ តួនាទី ដែលបានបង្កើតរួចសម្រាប់ Managed Identity
 
-| សេវាកម្ម | ឈ្មោះតួនាទី | Role ID | សិទ្ធិ |
+| សេវាកម្ម | ឈ្មោះតួនាទី | អត្តសញ្ញាណតួនាទី | សិទ្ធិ |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | អាន blob និង container |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | អាន, សរសេរ, លុប blob |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | អាន, សរសេរ, លុបសារ queue |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | អានសម្ងាត់ |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | អាន, សរសេរ, លុបសម្ងាត់ |
-| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | អានទិន្នន័យ Cosmos DB |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | អាន, សរសេរ ទិន្នន័យ Cosmos DB |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | គ្រប់គ្រងមូលដ្ឋានទិន្នន័យ SQL |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | ផ្ញើ, ទទួល, គ្រប់គ្រងសារ |
+| **Storage** | អ្នកអានទិន្នន័យ Blob របស់ Storage | `2a2b9908-6ea1-4ae2-8e65-a410df84e7d1` | អាន blobs និង containers |
+| **Storage** | អ្នករួមចំណែកទិន្នន័យ Blob របស់ Storage | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | អាន, សរសេរ, លុប blobs |
+| **Storage** | អ្នករួមចំណែកទិន្នន័យ Queue របស់ Storage | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | អាន, សរសេរ, លុប queues/messages |
+| **Key Vault** | អ្នកប្រើប្រាស់ Key Vault Secrets | `4633458b-17de-408a-b874-0445c86b69e6` | អានសម្ងាត់ |
+| **Key Vault** | អ្នកគ្រប់គ្រង Key Vault Secrets | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | អាន, សរសេរ, លុបសម្ងាត់ |
+| **Cosmos DB** | អ្នកអានទិន្នន័យ Cosmos DB ដោយស្វ័យប្រវត្តិ | `00000000-0000-0000-0000-000000000001` | អានទិន្នន័យ Cosmos DB |
+| **Cosmos DB** | អ្នករួមចំណែកទិន្នន័យ Cosmos DB ដោយស្វ័យប្រវត្តិ | `00000000-0000-0000-0000-000000000002` | អាន, សរសេរ ទិន្នន័យ Cosmos DB |
+| **SQL Database** | អ្នករួមចំណែក SQL DB | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | គ្រប់គ្រងធនាគារទិន្នន័យ; មិនផ្ដល់សិទ្ធិក្នុងការចូលដំណើរការ SQL ទិន្នន័យទេ |
+| **Service Bus** | ម្ចាស់ទិន្នន័យ Azure Service Bus | `090c5cfd-751d-490a-894a-3ce6f1109419` | ផ្ញើ, ទទួល, គ្រប់គ្រងសារ |
 
-### របៀបស្វែងរក Role IDs
+### របៀបស្វែងរកអត្តសញ្ញាណតួនាទី
+
+អត្តសញ្ញាណទាំងពីរបស់ Cosmos DB សម្រាប់ NoSQL ខាងលើគឺជា **និយមន័យតួនាទីផ្ទាល់ម៉ាស៊ីនអានទិន្នន័យ Cosmos ជាបុរាណ** មិនមែនជា អត្តសញ្ញាណតួនាទីរបស់ Azure RBAC សម្រាប់ការជាវទេ។ ផ្ដល់តួនាទីទាំងនេះជាមួយ `az cosmosdb sql role assignment create` (ឬ `Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments`), មិនមែន `az role assignment create`។ ការចូលដំណើរការទិន្នន័យ SQL ត្រូវការអ្នកប្រើប្រាស់ថាសទិន្នន័យ Entra និងសិទ្ធិក្នុង SQL។
 
 ```bash
-# បង្ហាញបញ្ជីតួនាទីដែលមានរួច
+# List all built-in roles
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# ស្វែងរកតួនាទីជាក់លាក់
+# Search for specific role
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# ទទួលព័ត៌មានលម្អិតអំពីតួនាទី
+# Get role details
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
 ---
 
-## លំហាត់អនុវត្ត
+## ហាត់ប្រាណប្រាជ្ញារបស់អ្នកអនុវត្ត
 
-### លំហាត់ 1: បើកអត្តសញ្ញាណដែលបានគ្រប់គ្រងសម្រាប់កម្មវិធីដែលមានរួច ⭐⭐ (មធ្យម)
+**លក្ខខណ្ឌមុនសម្រាប់ការសម្របសម្រួលក្នុងហាត់ទាំងបី៖** គំរូ Container App ដែលដំណើរការបានក្នុងគម្រោងផ្ទាល់ខ្លួនរបស់អ្នក, ការចងក្រងធនធាន Bicep ត្រូវគ្នា, ការចូលគណនី Azure CLI/azd និងសិទ្ធិក្នុងការផ្ដល់តួនាទីដែលត្រូវការ។ អ្នកកំពុងតែអនុវត្តន៍ការកែប្រែដែលមានការណែនាំ មិនមែនជាកំណត់ផ្ទាល់ខ្លួនមួយទេ; ជំនួសឈ្មោះធនធានគំរូជាឈ្មោះដែលបានផ្សព្វផ្សាយរបស់អ្នក។
 
-**គោលបំណង**: បន្ថែមអត្តសញ្ញាណដែលបានគ្រប់គ្រងទៅក្នុងការដាក់ចេញ Container App ដែលមានរួច
+### ហាត់ប្រាណទី ១៖ បើកក្លាយ Managed Identity សម្រាប់កម្មវិធី Container App មានស្រាប់ ⭐⭐ (មធ្យម)
 
-**សេណារីយ៉ូម**: អ្នកមាន Container App ដែលប្រើ connection strings។ បម្លែងវាទៅអត្តសញ្ញាណដែលបានគ្រប់គ្រង។
+**គោលដៅ**: បន្ថែម managed identity ទៅកាន់ការចាក់បញ្ចូល Container App មានស្រាប់
 
-**ចំណុចចាប់ផ្ដើម**: Container App ជាមួយការ​កំណត់រចនាសម្ព័ន្ធនេះ:
+**ស្ថានភាព**: អ្នកមាន Container App ដែលប្រើ connection strings។ បម្លែងវាទៅជា managed identity។
+
+**ចាប់ផ្ដើមពី**: Container App ជាមួយការកំណត់នេះ៖
 
 ```bicep
 // ❌ Current: Using connection string
@@ -739,9 +784,9 @@ env: [
 ]
 ```
 
-**ជំហាន**៖
+**ជំហាន**:
 
-1. **បើកអត្តសញ្ញាណដែលបានគ្រប់គ្រងក្នុង Bicep:**
+1. **បើក managed identity នៅក្នុង Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -753,7 +798,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **ផ្ដល់សិទ្ឋិចូលប្រើ Storage:**
+2. **ផ្ដល់សិទ្ធិ Storage:**
 
 ```bicep
 // Get storage account reference
@@ -773,7 +818,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-3. **អាប់ដេតកូដកម្មវិធី:**
+3. **បច្ចុប្បន្នភាពកូដកម្មវិធី:**
 
 **មុន (connection string):**
 ```javascript
@@ -796,7 +841,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **អាប់ដេតអថេរបរិយាកាស:**
+4. **បច្ចុប្បន្នភាពអថេរសាពត៍មានបរិស្ថាន:**
 
 ```bicep
 env: [
@@ -808,52 +853,53 @@ env: [
 ]
 ```
 
-5. **ដាក់ចេញ និងសាកល្បង:**
+5. **ចាក់បញ្ចូល និង សាកល្បង:**
 
 ```bash
-# ដាក់ប្រើឡើងវិញ
+# Redeploy
 azd up
 
-# សាកល្បងថាវានៅតែដំណើរការ​បាន
-curl https://myapp.azurecontainerapps.io/upload
+# Test that it still works
+APP_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail -X POST "$APP_URL/upload"
 ```
 
-**✅ ក្រមសូចនាករ​ជោគជ័យ:**
-- ✅ កម្មវិធីដាក់ចេញដោយគ្មានកំហុស
-- ✅ ប្រតិបត្តិការផ្ទុក Storage ធ្វើការផ្ទាល់ (ផ្ទុក, បញ្ជី, ទាញយក)
-- ✅ គ្មាន connection strings នៅក្នុងអថេរបរិយាកាស
-- ✅ អត្តសញ្ញាណមើលឃើញនៅក្នុង Azure Portal នៅក្រោមផ្ទាំង "Identity"
+**✅ លក្ខខណ្ឌជោគជ័យ:**
+- ✅ កម្មវិធីបានចាក់បញ្ចូលដោយគ្មានកំហុស
+- ✅ ប្រតិបត្តិការស្តុកធនធានដំណើរការ (upload, list, download)
+- ✅ គ្មាន connection strings នៅក្នុងអថេរសាពត៍មានបរិស្ថាន
+- ✅ អត្តសញ្ញាប័ណ្ណ មើលឃើញនៅក្នុង Azure Portal នៅខ្នាត "Identity"
 
-**ការត្រួតពិនិត្យ:**
+**ការផ្ទៀងផ្ទាត់:**
 
 ```bash
-# ពិនិត្យថា Managed Identity ត្រូវបានបើកប្រើ
+# Check managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ រំពឹងទុក៖ "SystemAssigned"
+# ✅ Expected: "SystemAssigned"
 
-# ពិនិត្យការចាត់តួនាទី
+# Check role assignment
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ រំពឹងទុក៖ បង្ហាញតួនាទី "Storage Blob Data Contributor"
+# ✅ Expected: Shows "Storage Blob Data Contributor" role
 ```
 
-**ពេលវេលា**: 20-30 minutes
+**ពេលវេលា**: 20-30 នាទី
 
 ---
 
-### លំហាត់ 2: ការចូលប្រើច្រើនសេវាមួយដោយអត្តសញ្ញាណដែលចាត់តាំងដោយអ្នកប្រើ ⭐⭐⭐ (កម្រិតខ្ពស់)
+### ហាត់ប្រាណទី ២៖ ការចូលដំណើរការប្រកបដោយសេវាកម្មច្រើនជាមួយ Managed Identity ដែលបានផ្ដល់ឲ្យអ្នកប្រើ ⭐⭐⭐ (កម្រិតខ្ពស់)
 
-**គោលបំណង**: បង្កើតអត្តសញ្ញាណដែលចាត់តាំងដោយអ្នកប្រើ ដែលចែករំលែករវាង Container Apps ជាច្រើន
+**គោលដៅ**: បង្កើត managed identity ដែលផ្ដល់ឲ្យអ្នកប្រើ ចែករំលែករវាង Container Apps ច្រើន
 
-**សេណារីយ៉ូម**: អ្នកមានសេវាមីក្រូ 3 ដែលទាំងអស់ត្រូវការចូលប្រើគណនី Storage និង Key Vault ដូចគ្នា។
+**ស្ថានភាព**: អ្នកមានសេវាកម្មតូច ៣ ត្រូវការចូលដំណើរការទៅកាន់គណនី Storage និង Key Vault ដូចគ្នា។
 
 **ជំហាន**:
 
-1. **បង្កើតអត្តសញ្ញាណដែលចាត់តាំងដោយអ្នកប្រើ:**
+1. **បង្កើត managed identity ដែលផ្ដល់ឲ្យអ្នកប្រើ:**
 
 **ឯកសារ: `infra/core/identity.bicep`**
 
@@ -873,7 +919,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **ចាត់តាំងតួនាទីទៅអត្តសញ្ញាណដែលចាត់តាំងដោយអ្នកប្រើ:**
+2. **ផ្ដល់តួនាទីទៅ managed identity ដែលផ្ដល់ឲ្យអ្នកប្រើ:**
 
 ```bicep
 // In main.bicep
@@ -889,7 +935,7 @@ module userIdentity './core/identity.bicep' = {
 
 // Grant Storage access
 resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'storage-contributor')
+  name: guid(storageAccount.id, environmentName, 'storage-contributor')
   scope: storageAccount
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
@@ -900,7 +946,7 @@ resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
 
 // Grant Key Vault access
 resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'kv-secrets-user')
+  name: guid(keyVault.id, environmentName, 'kv-secrets-user')
   scope: keyVault
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
@@ -910,7 +956,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **ចាត់តាំងអត្តសញ្ញាណទៅ Container Apps ច្រើន:**
+3. **ផ្ដល់អត្តសញ្ញាណទៅកាន់កម្មវិធី Container អនុវត្តន៍ជាច្រើន:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -947,18 +993,22 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **កូដកម្មវិធី (សេវាទាំងអស់ប្រើលំនាំដូចគ្នា):**
+4. **កូដកម្មវិធី (សេវាកម្មទាំងអស់ប្រើលំនាំដដែល):**
 
 ```javascript
-const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
+const { ManagedIdentityCredential } = require('@azure/identity');
+const { BlobServiceClient } = require('@azure/storage-blob');
 
-// សម្រាប់អត្តសញ្ញាណដែលបានកំណត់ដោយអ្នកប្រើ សូមបញ្ជាក់ ID អតិថិជន
+// For user-assigned identity, specify the client ID
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // ID អតិថិជន របស់អត្តសញ្ញាណដែលបានកំណត់ដោយអ្នកប្រើ
+  process.env.AZURE_CLIENT_ID  // User-assigned identity client ID
 );
 
-// ឬប្រើ DefaultAzureCredential (រកឃើញដោយស្វ័យប្រវត្តិ)
-const credential = new DefaultAzureCredential();
+// Alternative (choose ONE credential declaration):
+// const { DefaultAzureCredential } = require('@azure/identity');
+// const credential = new DefaultAzureCredential({
+//   managedIdentityClientId: process.env.AZURE_CLIENT_ID
+// });
 
 const blobServiceClient = new BlobServiceClient(
   `https://${process.env.STORAGE_ACCOUNT_NAME}.blob.core.windows.net`,
@@ -966,38 +1016,41 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **ដាក់ចេញ និងពិនិត្យ:**
+កំណត់ runtime `AZURE_CLIENT_ID` របស់កម្មវិធី Container នីមួយៗទៅជា `userIdentity.outputs.clientId` និង `STORAGE_ACCOUNT_NAME` ទៅឈ្មោះផ្ទុករបស់អ្នកនៅក្នុង Bicep។ ការផ្ដល់អត្តសញ្ញាណឬការរត់ `azd env set` តែម្តង មិនបានកំណត់តម្លៃ runtime ទាំងនេះឡើយ។
+
+5. **ដាក់ពាក្យ និងផ្ទៀងផ្ទាត់:**
 
 ```bash
 azd up
 
-# សាកល្បងថាសេវាកម្មទាំងអស់អាចចូលប្រើការផ្ទុកទិន្នន័យបាន
-curl https://api-gateway.azurecontainerapps.io/upload
-curl https://product-service.azurecontainerapps.io/upload
-curl https://order-service.azurecontainerapps.io/upload
+# Test all services can access storage
+# Replace with the actual ingress URLs reported for your three services
+curl --fail -X POST "$API_GATEWAY_URL/upload"
+curl --fail -X POST "$PRODUCT_SERVICE_URL/upload"
+curl --fail -X POST "$ORDER_SERVICE_URL/upload"
 ```
 
-**✅ ក្រមសូចនាករ​ជោគជ័យ:**
-- ✅ អត្តសញ្ញាណតែមួយចែករំលែកសម្រាប់សេវា 3 អង្គភាព
-- ✅ សេវាទាំងអស់អាចចូលប្រើ Storage និង Key Vault
-- ✅ អត្តសញ្ញាណនៅស្ថិតសព្វនៅបើអ្នកលុបសេវាមួយ
-- ✅ ការគ្រប់គ្រងសិទ្ធិចងក្រងមជ្ឈមណ្ឌល
+**✅ លក្ខខណ្ឌជោគជ័យ:**
+- ✅ អត្តសញ្ញាណតែមួយចែករំលែកគ្នា ទៅសេវាកម្ម 3
+- ✅ សេវាកម្មទាំងអស់អាចចូលប្រើ Storage និង Key Vault
+- ✅ អត្តសញ្ញាណនៅស្ថិតិបើអ្នកលុបសេវាកម្មមួយ
+- ✅ ការគ្រប់គ្រងសិទ្ធិកណ្តាល
 
-**អត្ថប្រយោជន៍នៃអត្តសញ្ញាណដែលចាត់តាំងដោយអ្នកប្រើ:**
-- អត្តសញ្ញាណតែមួយសម្រាប់គ្រប់គ្រង
-- សិទ្ធិជាប់គ្នាមានភាពសាមញ្ញ
-- ស្ថិតនៅក្រោយការលុបសេវា
-- ល្អសម្រាប់ស្ថាបត្យកម្មស្មុគស្មាញ
+**អត្ថប្រយោជន៍នៃអត្តសញ្ញាណដែលបានផ្ដល់ដោយអ្នកប្រើ:**
+- អត្តសញ្ញាណតែមួយដើម្បីគ្រប់គ្រង
+- សិទ្ធិមានភាពរួមគ្នាទៅលើសេវាកម្ម
+- អាចរួចរាលដាលនៅពេលលុបសេវាកម្ម
+- សមស្របសម្រាប់រចនាសម្ព័ន្ធស្មុគស្មាញ
 
-**ពេលវេលា**: 30-40 minutes
+**ពេលវេលា**: 30-40 នាទី
 
 ---
 
-### លំហាត់ 3: អនុវត្តការប្ដូរសម្ងាត់ Key Vault ⭐⭐⭐ (កម្រិតខ្ពស់)
+### លំហាត់ 3: អនុវត្តការបង្វិលសម្ងាត់ Key Vault ⭐⭐⭐ (កម្រិតខ្ពស់)
 
-**គោលបំណង**: ទុកសម្ងាត់ API ពីភាគីទីបីនៅក្នុង Key Vault និងចូលប្រើពួកវាដោយប្រើអត្តសញ្ញាណដែលបានគ្រប់គ្រង
+**គោលបំណង**: ទុកកូនសោ API ពីភាគីទីបីនៅក្នុង Key Vault និងចូលប្រើវាដោយប្រើអត្តសញ្ញាណបានគ្រប់គ្រង
 
-**សេណារីយ៉ូម**: កម្មវិធីរបស់អ្នកត្រូវតែហៅ API ខាងក្រៅ (OpenAI, Stripe, SendGrid) ដែលត្រូវការកូនសោ API។
+**សេណារីយ៉ូ**: កម្មវិធីរបស់អ្នកត្រូវការហៅ API ខាងក្រៅ (OpenAI, Stripe, SendGrid) ដែលតម្រូវឲ្យមានកូនសោ API។
 
 **ជំហាន**:
 
@@ -1032,13 +1085,13 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **ផ្ទុកសម្ងាត់នៅក្នុង Key Vault:**
+2. **រក្សាសម្ងាត់នៅក្នុង Key Vault:**
 
 ```bash
-# ទទួលបានឈ្មោះ Key Vault
-KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
+# Get Key Vault name
+KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
-# រក្សាទុកកូនសោ API ពីភាគីទីបី
+# Store third-party API keys
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1074,7 +1127,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // ពិនិត្យខេសជាមុន
+    // Check cache first
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1106,9 +1159,11 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **ប្រើសម្ងាត់ក្នុងកម្មវិធី:**
+4. **ប្រើសម្ងាត់នៅក្នុងកម្មវិធី:**
 
 **ឯកសារ: `src/app.js`**
+
+ចំណែកនៃ **កម្មវិធីជំនួសនេះ** តម្រូវឲ្យមាន `npm install openai`, កូនសោផ្លូវការពីភាគីទីបីពិត, ម៉ូដែលដែលអាចចូលដំណើរការ, និងសំណង់មូលដ្ឋានពីគំរោងការងាររបស់អ្នក។ វាហៅ OpenAI យ៉ាងផ្ទាល់មិនមែនជា Azure OpenAI deployment ទេ។ កូនសោទន់ខាងក្រោមមិនអនុញ្ញាតឲ្យស្នើសុំបានឡើយ។
 
 ```javascript
 const express = require('express');
@@ -1117,7 +1172,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// ចាប់ផ្ដើម OpenAI ជាមួយកូនសោពី Key Vault
+// Initialize OpenAI with key from Key Vault
 let openaiClient;
 
 async function initializeServices() {
@@ -1125,9 +1180,6 @@ async function initializeServices() {
   openaiClient = new OpenAI({ apiKey: openaiKey });
   console.log('✅ Services initialized with secrets from Key Vault');
 }
-
-// ហៅនៅពេលចាប់ផ្ដើម
-initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
   try {
@@ -1145,71 +1197,77 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Secure API with Key Vault integration running');
+// Start listening only after initialization succeeds.
+initializeServices().then(() => {
+  app.listen(3000, () => console.log('Key Vault demo running'));
+}).catch(error => {
+  console.error('Initialization failed:', error.message);
+  process.exitCode = 1;
 });
 ```
 
-5. **ដាក់ចេញ និងសាកល្បង:**
+5. **បញ្ចេញ និងសាកល្បង៖**
 
 ```bash
 azd up
 
-# សាកល្បងថា កូនសោ API កំពុងដំណើរការ
+# Test that API keys work
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
-**✅ ក្រមសូចនាករ​ជោគជ័យ:**
-- ✅ គ្មានកូនសោ API ក្នុងកូដ ឬអថេរបរិស្ថាន
-- ✅ កម្មវិធី​យកកូនសោពី Key Vault
-- ✅ APIs ពីភាគីទីបី ធ្វើការ​ត្រឹមត្រូវ
-- ✅ អាចប្ដូរកូនសោដោយមិនប្រែសម្រួលកូដ
+**✅ លក្ខខណ្ឌជោគជ័យ៖**
+- ✅ មិនមានកូនសោ API នៅក្នុងកូដ ឬអថេរស៊េរីបរិយាកាស
+- ✅ កម្មវិធីទាញយកកូនសោពី Key Vault
+- ✅ API ភាគីទីបីដំណើរការបានត្រឹមត្រូវ
+- ✅ អាចបង្វិលកូនសោដោយមិនបំលែងកូដ
 
-**ប្ដូរសម្ងាត់៖**
+**បង្វិលសម្ងាត់៖**
 
 ```bash
-# ធ្វើបច្ចុប្បន្នភាពសម្ងាត់នៅក្នុង Key Vault
+# Update secret in Key Vault
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# ចាប់ផ្តើមកម្មវិធីឡើងវិញ ដើម្បីប្រើសោថ្មី
+# Find the active revision name, then restart it to clear the in-process cache
+az containerapp revision list --name myapp --resource-group rg-myapp --output table
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
-**ពេលវេលា**: 25-35 នាទី
+**ពេលវេលា**៖ ២៥-៣៥ នាទី
 
 ---
 
-## ចំណុចត្រួតពិនិត្យចំណេះដឹង
+## ចំណុចពិនិត្យចំណេះដឹង
 
 ### 1. លំនាំផ្ទៀងផ្ទាត់អត្តសញ្ញាណ ✓
 
-សាកល្បងការយល់ដឹងរបស់អ្នក៖
+សាកល្បងយល់ដឹងរបស់អ្នក៖
 
-- [ ] **Q1**: តើមានលំនាំផ្ទៀងផ្ទាត់អត្តសញ្ញាណសំខាន់ៗបីយ៉ាងណាខ្លះ? 
-  - **A**: Connection strings (legacy), Key Vault references (transition), Managed Identity (ល្អបំផុត)
+- [ ] **សំណួរ ១**៖ តើលំនាំផ្ទៀងផ្ទាត់អត្តសញ្ញាណចម្បងបីប្រភេទមានអ្វីខ្លះ? 
+  - **ចម្លើយ**៖ ខ្សែសាំកំណត់ (ចាស់), យោងទៅ Key Vault (ផ្លាស់ប្តូរ), អត្តសញ្ញាណគ្រប់គ្រង (ល្អបំផុត)
 
-- [ ] **Q2**: ហេតុអ្វីបានជា Managed Identity ល្អជាង connection strings?
-  - **A**: គ្មានសម្ងាត់នៅក្នុងកូដ, ប្ដូរ/ញែរអូតូម៉ាទិក, មានកំណត់ហេតុ audit ពេញលេញ, សិទ្ធិ RBAC
+- [ ] **សំណួរ ២**៖ ហេតុអ្វីបានជា អត្តសញ្ញាណគ្រប់គ្រងបានល្អជាងខ្សែសាំកំណត់?
+  - **ចម្លើយ**៖ គ្មានសម្ងាត់នៅក្នុងកូដ, បង្វិលស្វ័យប្រវត្តិ, មុខតំណែងកំណត់ប្រតិបត្តិការពេញលេញ, អនុសាសន៍ RBAC
 
-- [ ] **Q3**: តើពេលណាដែលអ្នកនឹងប្រើ user-assigned identity ជំនួស system-assigned?
-  - **A**: យ៉ាងពេលចែករំលែកអត្តសញ្ញាណឆ្លងកាត់ធនធានជាច្រើន ឬពេលវដ្ត​ជីវិតនៃអត្តសញ្ញាណឈ្នះខុសពីវដ្តជីវិតនៃធនធាន
+- [ ] **សំណួរ ៣**៖ តើពេលណាអ្នកនឹងប្រើអត្តសញ្ញាណចាត់តាំងដោយអ្នកប្រើប្រាស់ជំនួសអត្តសញ្ញាណចាត់តាំងដោយប្រព័ន្ធ?
+  - **ចម្លើយ**៖ ពេលចែករំលែកអត្តសញ្ញាណនៅលើធនធានច្រើន ឬពេលជីវិតអត្តសញ្ញាណមិនពាក់ព័ន្ធនឹងជីវិតធនធាន
 
-**ការបញ្ជាក់ដោយអនុវត្ត:**
+**ផ្ទៀងផ្ទាត់ដោយដៃ៖**
 ```bash
-# ពិនិត្យថាកម្មវិធីរបស់អ្នកប្រើអត្តសញ្ញាណប្រភេទណា
+# Check what type of identity your app uses
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# រាយបញ្ជីការចាត់តាំងតួនាទីទាំងអស់សម្រាប់អត្តសញ្ញាណ
+# List all role assignments for the identity
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1218,130 +1276,135 @@ az role assignment list \
 
 ### 2. RBAC និងសិទ្ធិ ✓
 
-សាកល្បងការយល់ដឹងរបស់អ្នក៖
+សាកល្បងយល់ដឹងរបស់អ្នក៖
 
-- [ ] **Q1**: តើ role ID សម្រាប់ "Storage Blob Data Contributor" ជាអ្វី?
-  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+- [ ] **សំណួរ ១**៖ តើ ID តួនាទីសម្រាប់ "Storage Blob Data Contributor" ជាអ្វី?
+  - **ចម្លើយ**៖ `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2**: តើ "Key Vault Secrets User" ផ្តល់សិទ្ធិអ្វីខ្លះ?
-  - **A**: ការចូលដំណើរការអាន​តែប៉ុណ្ណោះចំពោះសម្ងាត់ (មិនអាចបង្កើត, បន្ទាន់សម្រួល ឬលុប)
+- [ ] **សំណួរ ២**៖ តើសិទ្ធិអ្វីដែល "Key Vault Secrets User" ផ្ដល់?
+  - **ចម្លើយ**៖ ចូលប្រើសម្ងាត់បានតែអានតែប៉ុណ្ណោះ (មិនអាចបង្កើត, និយម, ឬលុប)
 
-- [ ] **Q3**: តើធ្វើដូចម្តេចដើម្បីផ្តល់អនុញ្ញាតឲ្យ Container App ចូលដំណើរការ Azure SQL?
-  - **A**: កំណត់តួនាទី "SQL DB Contributor" ឬកំណត់ Microsoft Entra ID authentication សម្រាប់ SQL
+- [ ] **សំណួរ ៣**៖ តើធ្វើដូចម្តេចដើម្បីផ្ដល់សិទ្ធិ Container App ចូលទៅ Azure SQL?
+  - **ចម្លើយ**៖ កំណត់ Microsoft Entra authentication, បង្កើតអត្តសញ្ញាណជា អ្នកប្រើប្រាស់មូលដ្ឋានទិន្ន័យ, និងផ្ដល់សិទ្ធិ SQL ត្រូវការចាំបាច់។ "SQL DB Contributor" គ្រប់គ្រងធនធាន Azure ប៉ុណ្ណោះ មិនអនុញ្ញាតសំណួរទេ។
 
-**ការបញ្ជាក់ដោយអនុវត្ត:**
+**ផ្ទៀងផ្ទាត់ដោយដៃ៖**
 ```bash
-# ស្វែងរកតួនាទីជាក់លាក់
+# Find specific role
 az role definition list --name "Storage Blob Data Contributor"
 
-# ពិនិត្យមើលតួនាទីណាខ្លះដែលត្រូវបានផ្ដល់ឲ្យអត្តសញ្ញាណរបស់អ្នក
+# Check what roles are assigned to your identity
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
 
 ---
 
-### 3. រួមបញ្ចូល Key Vault ✓
+### 3. សមាសភាពជាមួយ Key Vault ✓
 
-សាកល្បងការយល់ដឹងរបស់អ្នក៖
+សាកល្បងយល់ដឹងរបស់អ្នក៖
 
-- [ ] **Q1**: តើធ្វើដូចម្តេចដើម្បីបើក RBAC សម្រាប់ Key Vault ជំនួសនឹង access policies?
-  - **A**: កំណត់ `enableRbacAuthorization: true` នៅក្នុង Bicep
+- [ ] **សំណួរ ១**៖ តើធ្វើដូចម្តេចដើម្បីបើក RBAC សម្រាប់ Key Vault ជំនួស access policies?
+  - **ចម្លើយ**៖ កំណត់ `enableRbacAuthorization: true` នៅក្នុង Bicep
 
-- [ ] **Q2**: តើបណ្ណាល័យ Azure SDK មួយណាដែលដោះស្រាយការផ្ទៀងផ្ទាត់អត្តសញ្ញាណ managed identity?
-  - **A**: `@azure/identity` ជាមួយថ្នាក់ `DefaultAzureCredential`
+- [ ] **សំណួរ ២**៖ តើបណ្ណាល័យ SDK Azure ដែលហៅថា អ្វីដើម្បីគ្រប់គ្រងការផ្ទៀងផ្ទាត់អត្តសញ្ញាណគ្រប់គ្រង?
+  - **ចម្លើយ**៖ `@azure/identity` ជាមួយ `DefaultAzureCredential` class
 
-- [ ] **Q3**: តើសម្ងាត់ក្នុង Key Vault នៅក្នុង cache រយៈពេលប៉ុន្មាន?
-  - **A**: អាស្រ័យលើកម្មវិធី; អនុវត្តយុទ្ធសាស្រ្ត caching របស់អ្នកឯង
+- [ ] **សំណួរ ៣**៖ តើសម្ងាត់ Key Vault នៅក្នុង cache រយៈពេលប៉ុន្មាន?
+  - **ចម្លើយ**៖ អាស្រ័យលើកម្មវិធី; អ្នកអាចអនុវត្តផែនការការរក្សាទុកដោយខ្លួនឯង
 
-**ការបញ្ជាក់ដោយអនុវត្ត:**
+**ផ្ទៀងផ្ទាត់ដោយដៃ៖**
 ```bash
-# សាកល្បងការចូលប្រើ Key Vault
+# Test Key Vault access
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
-  --query "value"
+  --query "{name:name,enabled:attributes.enabled}"
 
-# ពិនិត្យថា RBAC ត្រូវបានបើក
+# Check RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ រំពឹង: true
+# ✅ Expected: true
 ```
 
 ---
 
-## អត្ថប្រយោជន៍សុវត្ថិភាពល្អបេសកកម្ម
+## មោទនភាពសុវត្ថិភាពល្អបំផុត
 
-### ✅ ប្រែប្រួល៖
+### ✅ អនុវត្ត៖
 
-1. **តែងតែប្រើ Managed Identity ក្នុងផលិតកម្ម**
+1. **យកអត្តសញ្ញាណគ្រប់គ្រងជានិច្ចនៅក្នុងផលិតកម្ម**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **ប្រើតួនាទី RBAC មានសិទ្ធិតិចបំផុត**
-   - ប្រើតួនាទី "Reader" នៅពេលអាចធ្វើបាន
-   - ជៀសវាង "Owner" ឬ "Contributor" លុះត្រាតែចាំបាច់
+2. **ប្រើតួនាទី RBAC ដែលមានសិទ្ធិតិចបំផុត**
+   - ប្រើតួនាទី "Reader" នៅពេលអាចធ្វើទៅបាន
+   - មិនប្រើ "Owner" ឬ "Contributor" លើកលែងត្រូវការ
 
-3. **ផ្ទុកកូនសោពីភាគីទីបីនៅក្នុង Key Vault**
+3. **ផ្ទុកកូនសោផ្នែកទីបីក្នុង Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **បើក audit logging**
+4. **បើកកំណត់ហេតុ audit logging** (ចំណែកធនធានខ្នាតតូច; បញ្ចូលជាមួយការបញ្ជាក់កំប្លែងនិងកន្លែងធ្វើការ)
    ```bicep
-   diagnosticSettings: {
-     logs: [{ category: 'AuditEvent', enabled: true }]
+   resource vaultDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+     name: 'vault-audit'
+     scope: keyVault
+     properties: {
+       workspaceId: logAnalytics.id
+       logs: [{ category: 'AuditEvent', enabled: true }]
+     }
    }
    ```
 
-5. **ប្រើអត្តសញ្ញាណខុសគ្នាសម្រាប់ dev/staging/prod**
+5. **ប្រើអត្តសញ្ញាណផ្សេងគ្នាសម្រាប់ dev/staging/prod**
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
 
-6. **ប្ដូរសម្ងាត់ជាអត្រាថ្ងៃថ្ងៃ**
-   - កំណត់កាលបរិច្ឆេទផុតកំណត់លើសម្ងាត Key Vault
-   - អ៊ូតូម៉ាទកចិញ្ចៀនការប្ដូរជាមួយ Azure Functions
+6. **បង្វិលសម្ងាត់ជាប្រចាំ**
+   - កំណត់កាលបរិច្ឆេទផុតកំណត់លើសម្ងាត់ Key Vault
+   - ស្វ័យប្រវត្តិបង្វិលជាមួយ Azure Functions
 
-### ❌ កុំធ្វើ៖
+### ❌ មិនត្រូវធ្វើ៖
 
-1. **កុំដាក់សម្ងាត់នៅក្នុងកូដតាំងពីដំបូង**
+1. **មិនដែលផ្ទុកសម្ងាត់ជាអក្សរជញ្ជាំង**
    ```javascript
-   // ❌ អាក្រក់
+   // ❌ BAD
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **កុំប្រើ connection strings ក្នុងផលិតកម្ម**
+2. **មិនប្រើខ្សែសាំកំណត់ក្នុងផលិតកម្ម**
    ```javascript
-   // ❌ អាក្រក់
+   // ❌ BAD
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **កុំផ្តល់សិទ្ធិលើសគ tarpe**
+3. **មិនផ្ដល់សិទ្ធិលើសគ្រោះថ្នាក់**
    ```bicep
    // ❌ BAD - too much access
-   roleDefinitionId: 'Owner'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')
    
    // ✅ GOOD - least privilege
-   roleDefinitionId: 'Storage Blob Data Reader'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1')
    ```
 
-4. **កុំចុះកំណត់ហេតុសម្ងាត់**
+4. **មិនកត់ត្រាសម្ងាត់**
    ```javascript
-   // ❌ អាក្រក់
+   // ❌ BAD
    console.log('API Key:', apiKey);
    
-   // ✅ ល្អ
+   // ✅ GOOD
    console.log('API Key retrieved successfully');
    ```
 
-5. **កុំចែកអត្តសញ្ញាណផលិតកម្មអោយរួមគ្នាទៅពហុបរិស្ថាន**
+5. **មិនចែករំលែកអត្តសញ្ញាណផលិតកម្មក្រៅបរិេវេទ**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1351,34 +1414,34 @@ az keyvault show \
 
 ## មគ្គុទេសក៍ដោះស្រាយបញ្ហា
 
-### បញ្ហា៖ "Unauthorized" ខណៈពេលចូលប្រើ Azure Storage
+### បញ្ហា៖ "មិនមានសិទ្ធិ" ពេលចូលប្រើ Azure Storage
 
-**រោគសញ្ញា:**
+**រ៉ាពិន្នាក់៖**
 ```
 Error: Unauthorized (403)
 AuthorizationPermissionMismatch: This request is not authorized to perform this operation
 ```
 
-**ការធ្វើវិនិច្ឆ័យ:**
+**ការវិភាគ៖**
 
 ```bash
-# ពិនិត្យថា អត្តសញ្ញាណដែលគ្រប់គ្រងត្រូវបានបើកឬអត់
+# Check if managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ រំពឹងទុក: "SystemAssigned" ឬ "UserAssigned"
+# ✅ Expected: "SystemAssigned" or "UserAssigned"
 
-# ពិនិត្យការចាត់ចែងតួនាទី
+# Check role assignments
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# រំពឹងទុក: គួរតែឃើញ "Storage Blob Data Contributor" ឬតួនាទីស្រដៀង
+# Expected: Should see "Storage Blob Data Contributor" or similar role
 ```
 
-**ដំណោះស្រាយ:**
+**ដំណោះស្រាយ៖**
 
-1. **ផ្តល់តួនាទី RBAC ត្រឹមត្រូវ:**
+1. **ផ្ដល់តួនាទី RBAC ត្រឹមត្រូវ៖**
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1387,15 +1450,15 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **រង់ចាំការបំលែង (អាចចំណាយ 5-10 នាទី):**
+2. **រង់ចាំការចែកចាយ (អាចចំណាយពេល 5-10 នាទី)៖**
 ```bash
-# ពិនិត្យស្ថានភាពនៃការផ្ដល់តួនាទី
+# Check role assignment status
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **ត្រួតពិនិត្យកូដកម្មវិធីថាប្រើគ្រឿងសមរស់ត្រឹមត្រូវ:**
+3. **ផ្ទៀងផ្ទាត់កូដកម្មវិធីប្រើសក្ដានុពលត្រឹមត្រូវ៖**
 ```javascript
-// សូមប្រាកដថាអ្នកកំពុងប្រើ DefaultAzureCredential
+// Make sure you're using DefaultAzureCredential
 const credential = new DefaultAzureCredential();
 ```
 
@@ -1403,37 +1466,37 @@ const credential = new DefaultAzureCredential();
 
 ### បញ្ហា៖ មិនអនុញ្ញាតចូល Key Vault
 
-**រោគសញ្ញា:**
+**រ៉ាពិន្នាក់៖**
 ```
 Error: Forbidden (403)
 The user, group or application does not have secrets get permission
 ```
 
-**ការធ្វើវិនិច្ឆ័យ:**
+**ការវិភាគ៖**
 
 ```bash
-# ពិនិត្យថា RBAC របស់ Key Vault បានបើក
+# Check Key Vault RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ រំពឹង: ពិត
+# ✅ Expected: true
 
-# ពិនិត្យការចាត់តួនាទី
+# Check role assignments
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
 ```
 
-**ដំណោះស្រាយ:**
+**ដំណោះស្រាយ៖**
 
-1. **បើក RBAC លើ Key Vault:**
+1. **បើក RBAC លើ Key Vault៖**
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
 
-2. **ផ្តល់តួនាទី Key Vault Secrets User:**
+2. **ផ្ដល់តួនាទី Key Vault Secrets User៖**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1444,48 +1507,48 @@ az role assignment create \
 
 ---
 
-### បញ្ហា៖ DefaultAzureCredential សំណើបរាជ័យក្នុងកន្លែង​ក្នុងស្រុក
+### បញ្ហា៖ DefaultAzureCredential បរាជ័យក្នុងស្រុក
 
-**រោគសញ្ញា:**
+**រ៉ាពិន្នាក់៖**
 ```
 Error: DefaultAzureCredential failed to retrieve a token
 CredentialUnavailableError: No credential available
 ```
 
-**ការធ្វើវិនិច្ឆ័យ:**
+**ការវិភាគ៖**
 
 ```bash
-# ពិនិត្យថាតើអ្នកបានចូលគណនីរួចហើយឬទេ
+# Check if you're logged in
 az account show
 
-# ពិនិត្យការផ្ទៀងផ្ទាត់អត្តសញ្ញាណរបស់ Azure CLI
+# Check Azure CLI authentication
 az ad signed-in-user show
 ```
 
-**ដំណោះស្រាយ:**
+**ដំណោះស្រាយ៖**
 
-1. **ចូលទៅ Azure CLI:**
+1. **ចូលប្រើ Azure CLI៖**
 ```bash
 az login
 ```
 
-2. **កំណត់ subscription របស់ Azure:**
+2. **កំណត់ការជាវជាតិ Azure៖**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
 
-3. **សម្រាប់ការអភិវឌ្ឍក្នុងស្រុក ប្រើអថេរបរិស្ថាន:**
+3. **សម្រាប់ការអភិវឌ្ឍនៅក្នុងស្រុក ប្រើអថេរស៊េរីបរិយាកាស៖**
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **ឬប្រើ credential ផ្សេងសម្រាប់ក្នុងស្រុក:**
+4. **ឬប្រើសក្ដានុពលផ្សេងនៅក្នុងស្រុក៖**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// ប្រើ AzureCliCredential សម្រាប់ការអភិវឌ្ឍផ្ទាល់
+// Use AzureCliCredential for local dev
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
@@ -1493,64 +1556,59 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### បញ្ហា៖ ការកត់តួនាទីចំណាយពេលច្រើនពេកក្នុងការប្រមូលផ្ដុំ
+### បញ្ហា៖ ការផ្ដល់តួនាទីចំណាយពេលយូរទៅដល់ការចែកចាយ
 
-**រោគសញ្ញា:**
-- តួនាទីត្រូវបានផ្តល់ដោយជោគជ័យ
-- តែត្រូវទទួលបានកំហុស 403
-- ការចូលប្រើមិនស្ថាយត្រូវ (ពេលខ្លះដំណើរការ ពេលខ្លះមិន)
+**រ៉ាពិន្នាក់៖**
+- ការផ្ដល់តួនាទីបានជោគជ័យ
+- នៅតែទទួលបានកំហុស 403
+- ការចូលប្រើមិនរបៀបម៉្យាង (កាលលើកមិនដំណើរការ កាលលើកដំណើរការ)
 
-**ការពិពណ៌នា:**
-ការផ្លាស់ប្តូររបស់ Azure RBAC អាចចំណាយ 5-10 នាទីក្នុងការប្រមូលផ្ដុំជាសកល។
+**ការពន្យល់៖**
+ការផ្លាស់ប្តូរ Azure RBAC អាចចំណាយពេល 5-10 នាទីក្នុងការចែកចាយទូទាំងពិភពលោក។
 
-**ដំណោះស្រាយ:**
+**ដំណោះស្រាយ៖**
 
 ```bash
-# រង់ចាំ និងព្យាយាមម្តងទៀត
+# Wait and retry
 echo "Waiting for RBAC propagation..."
-sleep 300  # រង់ចាំ 5 នាទី
+sleep 300  # Wait 5 minutes
 
-# សាកល្បងការចូល
-curl https://myapp.azurecontainerapps.io/upload
+# Test access
+curl --fail -X POST "$APP_URL/upload"
 
-# បើនៅតែបរាជ័យ សូមចាប់ផ្តើមកម្មវិធីឡើងវិញ
+# If still failing, restart the app
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
 ---
 
-## ការពិចារណាផ្នែកចំណាយ
+## ការពិចារណាតម្លៃ
 
-### ចំណាយសម្រាប់ Managed Identity
+### ចំណាយអត្តសញ្ញាណគ្រប់គ្រង
 
-| ធនធាន | ចំណាយ |
+| ធនធាន | តម្លៃ |
 |----------|------|
-| **Managed Identity** | 🆓 **FREE** - មិនពីរប្រាក់ |
-| **RBAC Role Assignments** | 🆓 **FREE** - មិនពីរប្រាក់ |
-| **Microsoft Entra ID Token Requests** | 🆓 **FREE** - រួមបញ្ចូល |
-| **Key Vault Operations** | $0.03 per 10,000 operations |
-| **Key Vault Storage** | $0.024 per secret per month |
+| **អត្តសញ្ញាណគ្រប់គ្រង** | 🆓 **ឥតគិតថ្លៃ** - មិនមានសាកល្បង |
+| **ការផ្ដល់តួនាទី RBAC** | 🆓 **ឥតគិតថ្លៃ** - មិនមានសាកល្បង |
+| **សំណើ Token Microsoft Entra ID** | 🆓 **ឥតគិតថ្លៃ** - រួមបញ្ចូល |
+| **ប្រតិបត្តិការ Key Vault** | $0.03 សម្រាប់ប្រតិបត្តិការ ១០,០០០ ដង |
+| **ការផ្ទុកសម្ងាត់ Key Vault** | សូមពិនិត្យតម្លៃបច្ចុប្បន្ន; កុំសន្មតថាមានថ្លៃផ្ទុករត់ប្រចាំខែតាមចំនួនសម្ងាត់ |
 
-**Managed identity ជួយសន្សំប្រាក់ដោយ:**
-- ✅ ការបិទប្រតិបត្តិការក្នុង Key Vault សម្រាប់ authentication រវាងសេវាកម្ម
-- ✅ កាត់បន្ថយករណីវិបត្តិសុវត្ថិភាព (មិនមានឯកសារចេញលេច)
-- ✅ បន្ថយការបន្ទុកប្រតិបត្ដិការ (មិនចាំបាច់ប្ដូរដោយដៃ)
+**អត្តសញ្ញាណគ្រប់គ្រងសន្សំសំចៃប្រាក់ដោយ៖**
+- ✅ ដកហូតប្រតិបត្តិការ Key Vault សម្រាប់ការផ្ទៀងផ្ទាត់សេវាកម្មទៅសេវាកម្ម
+- ✅ កាត់បន្ថយហេតុការសុវត្ថិភាព (គ្មានសក្ដានុពលបានភ័ស្តុតាង)
+- ✅ បន្ថយការគ្រប់គ្រងប្រតិបត្តិការ (គ្មានការបង្វិលដៃ)
 
-**គំរូការប្រៀបធៀបចំណាយ (ប្រចាំខែ):**
-
-| សេណារីយូ | Connection Strings | Managed Identity | ការសន្សំ |
-|----------|-------------------|-----------------|---------|
-| Small app (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/month |
-| Medium app (10M requests) | ~$200 | ~$0 | $200/month |
-| Large app (100M requests) | ~$1,500 | ~$0 | $1,500/month |
+ចំនួនសំណើកម្មវិធីមិនស្មើនឹងចំនួនប្រតិបត្តិការ Key Vault: លំនាំបង្ហាញនិងបង្វិលកំណត់ថ្លៃអានសម្ងាត់។ អត្តសញ្ញាណមិនដកចេញឲ្យមានថ្លៃម៉ាស៊ីន/ផ្ទុកទេ។ សូមពិនិត្យ [តម្លៃ Key Vault](https://azure.microsoft.com/pricing/details/key-vault/) និងក្រឡា​តម្លៃ Azure សម្រាប់តំបន់របស់អ្នកជាជាងនឹកស្មានការសន្សំប្រាក់ប្រចាំខែពីចំនួនសំណើទេ។
 
 ---
 
-## เรียนបន្ថែម
+## រៀនបន្ថែម
 
-### ឯកសារផ្លូវការសម្រាប់យោង
+### ឯកសារផ្លូវការជាផ្លូវការ
 - [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
@@ -1561,38 +1619,38 @@ az containerapp revision restart \
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### ជំហានបន្ទាប់នៅក្នុងវគ្គនេះ
-- ← មុន: [Configuration Management](configuration.md)
-- → បន្ទាប់: [First Project](first-project.md)
-- 🏠 [ទំព័រផ្ទះវគ្គ](../../README.md)
+### ដំណាក់កាលបន្ទាប់នៅក្នុងវគ្គនេះ
+- ← មុន៖ [ការគ្រប់គ្រងការកំណត់](configuration.md)
+- → បន្ទាប់៖ [បណ្ដាញជា Code](../chapter-04-infrastructure/README.md)
+- 🏠 [ទំព័រដើមវគ្គ](../../README.md)
 
-### ឧទាហរណ៏ដែលទាក់ទង
-- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - ប្រើ managed identity សម្រាប់ Microsoft Foundry Models
-- [Microservices Example](../../../../examples/microservices) - លំនាំ authentication សម្រាប់សេវាច្រើន
+### ឧទាហរណ៍ដែលពាក់ព័ន្ធ
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - ប្រើអត្តសញ្ញាណគ្រប់គ្រងសម្រាប់ Microsoft Foundry Models
+- [Microservices Example](../../../../examples/microservices) - លំនាំផ្ទៀងផ្ទាត់អត្តសញ្ញាណសេវាកម្មច្រើន
 
 ---
 
 ## សង្ខេប
 
 **អ្នកបានរៀន៖**
-- ✅ បទបីលំនាំផ្ទៀងផ្ទាត់អត្តសញ្ញាណ (connection strings, Key Vault, managed identity)
-- ✅ របៀបបើក និងកំណត់ Managed Identity នៅក្នុង AZD
-- ✅ ការកត់តួនាទី RBAC សម្រាប់សេវាកម្ម Azure
-- ✅ រួមបញ្ចូល Key Vault សម្រាប់សម្ងាត់ពីភាគីទីបី
-- ✅ User-assigned បើប្រៀបធៀបនឹង system-assigned identities
-- ✅ ច្បាប់អនុវត្តសុវត្ថិភាពល្អ និងវិធីដោះស្រាយបញ្ហា
+- ✅ លំនាំផ្ទៀងផ្ទាត់អត្តសញ្ញាណបីប្រភេទ (ខ្សែសាំកំណត់, Key Vault, អត្តសញ្ញាណគ្រប់គ្រង)
+- ✅ របៀបបើកបរ និងកំណត់អត្តសញ្ញាណគ្រប់គ្រងក្នុង AZD
+- ✅ ការផ្ដល់តួនាទី RBAC សម្រាប់សេវាកម្ម Azure
+- ✅ ការចូលរួម Key Vault សម្រាប់សម្ងាត់ភាគីទីបី
+- ✅ អត្តសញ្ញាណចាត់តាំងដោយអ្នកប្រើប្រាស់ ឬខ្សែប្រព័ន្ធ
+- ✅ អនុវត្តវិធីសាស្រ្តសុវត្ថិភាពល្អបំផុត និងដោះស្រាយបញ្ហា
 
-**ចំណុចអនុគតិយោបល់៖**
-1. **តែងតែប្រើ Managed Identity ក្នុងផលិតកម្ម** - គ្មានសម្ងាត់, ប្ដូរអូតូម៉ាទិក
-2. **ប្រើតួនាទី RBAC មានសិទ្ធិតិចបំផុត** - ផ្តល់សិទ្ធិតែដែលចាំបាច់ប៉ុណ្ណោះ
-3. **ផ្ទុកកូនសោពីភាគីទីបីនៅក្នុង Key Vault** - ការគ្រប់គ្រងសម្ងាត់មួយកណ្តាល
-4. **បំបែកអត្តសញ្ញាណជាកម្មវិធីតាមបរិស្ថាន** - dev, staging, prod ដាច់ជាច្រើន
-5. **បើក audit logging** - តាមដានអ្នកដែលបានចូលប្រើអ្វីខ្លះ
+**ចំណុចសំខាន់៖**
+1. **យកអត្តសញ្ញាណគ្រប់គ្រងជានិច្ចនៅក្នុងផលិតកម្ម** - គ្មានសម្ងាត់, បង្វិលស្វ័យប្រវត្តិ
+2. **ប្រើតួនាទី RBAC ដែលមានសិទ្ធិតិចបំផុត** - ផ្ដល់សិទ្ធិត្រឹមត្រូវប៉ុណ្ណោះ
+3. **ផ្ទុកកូនសោភាគីទីបីក្នុង Key Vault** - ការគ្រប់គ្រងសម្ងាត់ក្នងមជ្ឈមណ្ឌល
+4. **បំបែកអត្តសញ្ញាណតាមបរិវេណ** - ចែកបំបែក dev, staging, prod
+5. **បើកកំណត់ហេតុ audit logging** - តាមដានអ្នកដែលបានចូលប្រើ
 
-**ជំហានបន្ទាប់៖**
-1. បញ្ចប់ហាត់ប្រាណអនុវត្តខាងលើយើងខាងលើ
-2. ផ្លាស់ទីកម្មវិធីដែលមានពី connection strings ទៅ managed identity
-3. សាងសង់គម្រោង AZD ទីមួយរបស់អ្នកជាមួយសន្តិសុខចាប់ពីថ្ងៃដំបូង៖ [First Project](first-project.md)
+**ដំណាក់កាលបន្ទាប់៖**
+1. សម្រួលលំហាត់អនុវត្តខាងលើឲ្យបានសម្រេច
+2. ផ្លាស់ប្តូរកម្មវិធីដែលមានពីខ្សែសាំកំណត់ទៅអត្តសញ្ញាណគ្រប់គ្រង
+3. ធ្វើសំណើជាសារសំខាន់លើការបញ្ចេញគំរូដំបូង៖ [គំរោងដំបូង](../chapter-01-foundation/first-project.md)
 
 ---
 

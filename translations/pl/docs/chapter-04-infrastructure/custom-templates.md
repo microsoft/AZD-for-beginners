@@ -2,66 +2,66 @@
 
 **Nawigacja po rozdziale:**
 - **📚 Strona główna kursu**: [AZD dla Początkujących](../../README.md)
-- **📖 Aktualny rozdział**: Rozdział 4 - Infrastruktura jako kod & Wdrażanie
-- **⬅️ Poprzedni**: [Przewodnik po wdrażaniu](deployment-guide.md)
+- **📖 Aktualny rozdział**: Rozdział 4 - Infrastruktura jako Kod & Wdrażanie
+- **⬅️ Poprzedni**: [Przewodnik po wdrożeniu](deployment-guide.md)
 - **🚀 Następny rozdział**: [Rozdział 5: Rozwiązania wieloagentowe](../chapter-05-multi-agent/README.md)
 
-> Zweryfikowano na `azd 1.27.1` w lipcu 2026.
+> Przejrzano względem `azd 1.37.2` (listopad 2026). To jest **przewodnik tworzenia z częściowymi plikami**, a nie kompletny szablon: musisz dostarczyć kod aplikacji oraz `modules/web.bicep` z jego środowiskiem, rejestrem, Container App i wynikami przed wdrożeniem. Provisioning w Azure nie był wykonany w tej recenzji.
 
 ## Wprowadzenie
 
-Jak dotąd *korzystałeś* z szablonów za pomocą `azd init --template <nazwa>`. Ale gdy tylko masz układ projektu, który podoba się twojemu zespołowi — na przykład Container App z Cosmos DB i odpowiednim monitorowaniem — będziesz chciał przekształcić go w własny, wielokrotnego użytku szablon. Szablon to po prostu repozytorium Git o przewidywalnej strukturze, którą azd potrafi odczytać. Ta lekcja pokaże, jak zbudować taki szablon od podstaw, przetestować go i (opcjonalnie) opublikować w galerii społeczności.
+Jak dotąd *korzystałeś* z szablonów za pomocą `azd init --template <name>`. Ale gdy masz już układ projektu, który spodobał się Twojemu zespołowi — np. Container App z Cosmos DB i odpowiednim monitoringiem — będziesz chciał zamienić go we własny szablon do wielokrotnego użytku. Szablon to po prostu repozytorium Git o przewidywalnej strukturze, które azd potrafi czytać. Ta lekcja pokazuje, jak zbudować taki szablon od podstaw, przetestować go i (opcjonalnie) opublikować w galerii społeczności.
 
 ## Cele nauki
 
-Pod koniec tej lekcji będziesz:
+Po zakończeniu tej lekcji będziesz:
 - Rozumieć, co sprawia, że folder jest „szablonem azd”
 - Znać wymagane pliki i układ folderów
-- Dodać `azure.yaml` i `infra/` tak, aby inni mogli ich używać
+- Dodać `azure.yaml` i `infra/`, których inni mogą użyć ponownie
 - Testować swój szablon lokalnie przed udostępnieniem
 - Opublikować go i (opcjonalnie) zgłosić do Awesome AZD
 
-## Efekty nauki
+## Rezultaty nauki
 
-Po ukończeniu tej lekcji będziesz potrafił:
+Po ukończeniu lekcji będziesz potrafił:
 - Szkieletować nowe repozytorium szablonu
-- Parametryzować infrastrukturę, aby działała w dowolnym subskrypcji
+- Parametryzować infrastrukturę, aby działała w dowolnej subskrypcji
 - Weryfikować szablon za pomocą `azd init` i `azd up`
-- Dodawać metadane wymagane przez galerię społeczności
+- Dodać metadane wymagane przez galerię społeczności
 
 ---
 
-## Czym Właściwie Jest Szablon?
+## Czym naprawdę jest szablon?
 
-Szablon azd to **repozytorium Git**, które zawiera przynajmniej:
+Szablon azd to **repozytorium Git**, które zawiera co najmniej:
 
-| Plik / folder | Przeznaczenie | Wymagany? |
-|---------------|--------------|-----------|
-| `azure.yaml` | Opisuje usługi, hosty i dostawcę infrastruktury | ✅ Tak |
-| `infra/` | Bicep, Terraform lub Pulumi do provisioningu zasobów | ✅ Tak |
-| `src/` (lub twój kod) | Kod aplikacji wdrażany przez azd | ✅ Tak |
-| `README.md` | Jak używać szablonu | ✅ Gorąco zalecany |
+| Plik / folder | Cel | Wymagane? |
+|---------------|---------|-----------|
+| `azure.yaml` | Opisuje usługi, hosty i dostawcę infrastuktury | ✅ Tak |
+| `infra/` | Definicje provisioningu Bicep lub Terraform | Wymagane dla tego przykładu explicit-IaC; projekty generujące infrastrukturę mogą pominąć |
+| `src/` (lub Twój kod) | Kod aplikacji wdrażany przez azd | Wymagany dla usług opartych na źródłach; nie wszystkie szablony zawierają kod aplikacji |
+| `README.md` | Jak używać szablonu | ✅ Mocno zalecane |
 | `.azdo/` lub `.github/` | Definicje pipeline CI/CD | Opcjonalne |
 | `.devcontainer/` | Powtarzalne środowisko deweloperskie | Opcjonalne |
-| `azure.yaml` `metadata` | Informacje o galerii + telemetryczne | Opcjonalne (wymagane do publikacji) |
+| `azure.yaml` `metadata` | Tożsamość/telemetria szablonu | Zalecane; publikacja repozytorium Git tego nie wymaga |
 
-Nie ma tu nic magicznego: kiedy uruchamiasz `azd init --template you/your-repo`, azd klonuje repozytorium i czyta `azure.yaml`.
+Nie ma tu nic magicznego: gdy uruchamiasz `azd init --template you/your-repo`, azd klonuje repozytorium i czyta `azure.yaml`.
 
 ---
 
-## Krok 1: Szkieletowanie Repozytorium
+## Krok 1: Wygeneruj strukturę repozytorium
 
-Utwórz strukturę folderów ręcznie lub zacznij od minimalnego szablonu i edytuj go:
+Utwórz strukturę folderów ręcznie lub zacznij od minimalnego szablonu i go edytuj:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Utwórz standardowy układ
+# Create the standard layout
 mkdir -p src infra
 ```
 
-Typowa gotowa struktura wygląda tak:
+Typowy gotowy układ wygląda tak:
 
 ```
 my-azd-template/
@@ -83,7 +83,7 @@ my-azd-template/
 
 ## Krok 2: Napisz `azure.yaml`
 
-To jest serce szablonu. Mówi azd, co wdrożyć i jak:
+To jest serce szablonu. Mówi azd, co wdrażać i jak:
 
 ```yaml
 # azure.yaml
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -101,21 +101,21 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Pole `metadata.template` jest używane przez telemetry galerię do liczenia użycia. Użyj konwencji `nazwa@wersja`.
+> Pole `metadata.template` jest używane przez telemetrię galerii do liczenia użyć. Użyj konwencji `name@version`.
 
 ---
 
-## Krok 3: Parametryzacja Infrastruktury
+## Krok 3: Parametryzuj infrastrukturę
 
-Najważniejsza zasada *wielokrotnego użytku* szablonu: **nigdy nie umieszczaj na stałe nazw, regionów ani wartości specyficznych dla subskrypcji.** Używaj parametrów oraz wzorca tokenów zasobów, aby ten sam szablon działał w dowolnej subskrypcji.
+Najważniejsza zasada dla *wielokrotnego użycia* szablonu: **nigdy nie koduj na sztywno nazw, regionów ani wartości specyficznych dla subskrypcji.** Używaj parametrów i wzorca tokena zasobów, aby ten sam szablon działał w każdej subskrypcji.
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -138,15 +145,18 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Dwie rzeczy czynią ten szablon przyjaznym do szablonowania:
+Dwie rzeczy czynią ten szablon przyjaznym:
 
-1. **Tag `azd-env-name`** — azd używa go do śledzenia i sprzątania zasobów per środowisko.
-2. **Token zasobu `uniqueString(...)`** — generuje stabilny, globalnie unikalny sufiks, aby nazwy się nie pokrywały.
+1. **Tag `azd-env-name`** — azd używa go do śledzenia i czyszczenia zasobów per środowisko.
+2. **Token zasobu `uniqueString(...)`** — generuje stabilny sufiks hash, by zmniejszyć kolizje; nie gwarantuje globalnej unikalności.
 
-Dodaj odpowiadający plik parametrów, który odczytuje wartości wstrzykiwane przez azd ze środowiska:
+Brakujący `modules/web.bicep` musi akceptować `name`, `location` i `tags`, stworzyć środowisko/rejestr Container Apps i aplikację, oznaczyć aplikację tagiem `azd-service-name: web` oraz eksportować `uri`. Musi także ujawnić wartości rejestru potrzebne dla wybranego procesu budowy/wdrażania (np. `AZURE_CONTAINER_REGISTRY_ENDPOINT` z modułu głównego). Sam wyjściowy endpoint nie konfiguruje wykrywania usług, ustawień aplikacji ani uwierzytelniania rejestru.
+
+Dostarcz odpowiadający plik parametrów, który odczytuje wartości wstrzykiwane przez azd ze środowiska:
+
+Zapisz następujący jako `infra/main.parameters.json`:
 
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -157,86 +167,90 @@ Dodaj odpowiadający plik parametrów, który odczytuje wartości wstrzykiwane p
 }
 ```
 
-azd automatycznie podstawia `${AZURE_ENV_NAME}` i `${AZURE_LOCATION}` z bieżącego środowiska.
+azd automatycznie zastępuje `${AZURE_ENV_NAME}` i `${AZURE_LOCATION}` z aktualnego środowiska.
 
 ---
 
-## Krok 4: Przetestuj Swoje Szablony Lokalnie
+## Krok 4: Testuj szablon lokalnie
 
-Przed udostępnieniem upewnij się, że szablon działa z czystego stanu.
+Przed udostępnieniem upewnij się, że szablon działa od czystego stanu.
 
-**Testuj z lokalnego folderu** (nie jest wymagane wypychanie do Git):
+**Testuj z lokalnego folderu** (nie wymaga wysłania do Git):
 
 ```bash
-# Z pustego katalogu, zainicjalizuj używając lokalnej ścieżki szablonu
+# From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
-# Provisionowanie + wdrożenie od początku do końca
+# Provision + deploy end to end
 azd auth login
 azd up
 ```
 
-**Następnie przetestuj usuwanie** — dobry szablon sprząta wszystko do końca:
+**Następnie przetestuj sprzątanie** — dobry szablon czyści wszystko dokładnie:
 
 ```bash
 azd down --force --purge
 ```
 
-Jeśli `azd down` zostawia zasoby, prawdopodobnie przegapiłeś tag `azd-env-name` na jakimś zasobie.
+Jeśli `azd down` pozostawia zasoby, sprawdź wykrywanie środowiska/grupy zasobów, zasoby zewnętrzne/współdzielone, uprawnienia, blokady i ochronę przed usunięciem. `--purge` nie usuwa lokalnego stanu `.azure/`.
 
-> **Wskazówka:** najpierw uruchom `azd provision --preview`. Wykonuje on symulację co by było i ujawnia błędy szablonu przed utworzeniem zasobów.
+> **Wskazówka:** po dostarczeniu wszystkich brakujących plików uruchom najpierw `azd provision --preview`. Sprawdź hooki przed podglądem, ponieważ mogą wykonywać polecenia z efektami ubocznymi. Podgląd nie jest szacowaniem kosztów ani gwarancją sukcesu provisioningu.
 
 ---
 
-## Krok 5: Opublikuj Szablon
+## Krok 5: Opublikuj szablon
 
-Wypchnij repozytorium do GitHub (publiczne, jeśli chcesz, by inni mogli go używać):
+Wypchnij repozytorium do GitHub (publiczne, jeśli chcesz, aby inni mogli go używać):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Każdy teraz może go użyć:
+Teraz każdy może go używać:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
 
-## Krok 6 (Opcjonalnie): Zgłoś do Awesome AZD
+## Krok 6 (opcjonalny): Zgłoś do Awesome AZD
 
-Galeria [Awesome AZD](https://azure.github.io/awesome-azd/) zawiera szablony społecznościowe. Aby zostać wymienionym, twoje repozytorium powinno zawierać:
+Galeria [Awesome AZD](https://azure.github.io/awesome-azd/) zawiera szablony społeczności. Aby zostać wymienionym, Twój repozytorium powinno zawierać:
 
-- ✅ Jasny `README.md` ze wstępem, diagramem architektury i uwagami o kosztach
+- ✅ Jasny `README.md` z wymaganiami wstępnymi, diagramem architektury i notatkami dotyczącej kosztów
 - ✅ Działający `azure.yaml` z `metadata.template`
-- ✅ Infrastrukturę, która poprawnie provisionuje się w świeżej subskrypcji
+- ✅ Infrastrukturę, która poprawnie się uruchamia na nowym subskrypcji
 - ✅ Plik `LICENSE`
-- ✅ (Zalecane) `.devcontainer/` do uruchamiania Codespaces jednym kliknięciem
+- ✅ (Zalecane) `.devcontainer/` do jednego kliknięcia w Codespaces
 
-Zgłoś, otwierając pull request, który dodaje twój szablon do pliku danych galerii, według przewodnika wkładu w repozytorium [Awesome AZD](https://github.com/Azure/awesome-azd).
+Prześlij, otwierając pull request, który dodaje Twój szablon do pliku danych galerii, zgodnie z przewodnikiem wkładu w repozytorium [Awesome AZD](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Częste Pułapki
+## Typowe pułapki
 
 | Pułapka | Naprawa |
-|---------|---------|
-| Nazwy zasobów na stałe zakodowane | Używaj tokena zasobu `uniqueString()` |
-| `azd down` zostawia zasoby | Oznacz każdy zasób (lub grupę zasobów) tagiem `azd-env-name` |
-| Szablon działa u ciebie, ale nie u innych | Usuń stałe ID subskrypcji, ID dzierżawy i założenia dotyczące regionu |
-| Wyniki nie są podłączone do aplikacji | Eksportuj `SERVICE_<NAME>_ENDPOINT_URL` i inne wyjścia `AZURE_*` |
-| Odrzucenie zgłoszenia przez galerię | Dodaj `README.md`, `LICENSE` i `metadata.template` |
+|---------|-----|
+| Na sztywno zapisane nazwy zasobów | Użyj tokenu zasobu `uniqueString()` |
+| `azd down` pozostawia zasoby | Oznacz każdy zasób (lub grupę zasobów) za pomocą `azd-env-name` |
+| Szablon działa u Ciebie, ale nie u innych | Usuń ID subskrypcji, ID dzierżawy i założenia dotyczące regionu |
+| Wyjścia nie powiązane z aplikacją | Dopasuj `azd-service-name`/`resourceName` dla wdrożenia i explicite mapuj wyjścia do ustawień aplikacji |
+| Odrzucono zgłoszenie do galerii | Dodaj `README.md`, `LICENSE` i `metadata.template` |
 
 ---
 
 ## Podsumowanie
 
-- Szablon to po prostu repozytorium Git z `azure.yaml`, `infra/` i twoim kodem.
-- Parametryzuj wszystko — nazwy, regiony i ID — żeby działał wszędzie.
-- Zawsze oznaczaj zasoby tagiem `azd-env-name`, aby `azd down` działał poprawnie.
-- Testuj lokalnie z `azd init --template <local-path>` przed publikacją.
+- Szablon to po prostu repozytorium Git z `azure.yaml`, `infra/` oraz Twoim kodem.
+- Parametryzuj wszystko — nazwy, regiony i ID — tak, aby działało wszędzie.
+- Zawsze oznaczaj zasoby `azd-env-name`, aby `azd down` działało.
+- Testuj lokalnie przy pomocy `azd init --template <local-path>` przed publikacją.
 - Dodaj metadane i README, aby zgłosić do Awesome AZD.
 
 ---
@@ -244,15 +258,15 @@ Zgłoś, otwierając pull request, który dodaje twój szablon do pliku danych g
 ## 🔗 Nawigacja
 
 | Kierunek | Zasób |
-|-----------|--------|
-| **Poprzedni** | [Przewodnik po wdrażaniu](deployment-guide.md) |
-| **Strona domu rozdziału** | [Rozdział 4: Infrastruktura jako kod](README.md) |
+|-----------|----------|
+| **Poprzedni** | [Przewodnik wdrożeniowy](deployment-guide.md) |
+| **Strona rozdziału** | [Rozdział 4: Infrastruktura jako kod](README.md) |
 | **Następny rozdział** | [Rozdział 5: Rozwiązania wieloagentowe](../chapter-05-multi-agent/README.md) |
 
 ## 📖 Powiązane zasoby
 
 - [Provisioning Resources](provisioning.md)
-- [Awesome AZD Gallery](https://azure.github.io/awesome-azd/)
+- [Galeria Awesome AZD](https://azure.github.io/awesome-azd/)
 - [Oficjalna dokumentacja szablonów azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---

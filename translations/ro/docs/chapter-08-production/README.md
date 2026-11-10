@@ -1,22 +1,24 @@
-# Capitolul 8: Modele de Producție și Enterprise
+# Capitolul 8: Modele pentru Producție & Întreprinderi
 
-**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 2-3 ore | **⭐ Complexitate**: Avansat
+**📚 Curs**: [AZD pentru Începători](../../README.md) | **⏱️ Durata**: 2-3 ore | **⭐ Complexitate**: Avansat
 
 ---
 
 ## Prezentare generală
 
-Acest capitol acoperă modele de implementare pregătite pentru întreprinderi, consolidarea securității, monitorizarea și optimizarea costurilor pentru sarcini de lucru AI în producție.
+Acest capitol acoperă modele de implementare pregătite pentru întreprindere, consolidarea securității, monitorizarea și optimizarea costurilor pentru sarcini AI de producție.
 
-> Validat cu `azd 1.27.1` în iulie 2026.
+Acesta este un reper arhitectural, nu un șablon complet de producție implementabil. Exemplele omit detaliile de integrare care trebuie furnizate și testate în propria aplicație; citirea listei de verificare nu certifică pregătirea pentru producție.
 
-## Obiective de învățare
+> **Revizuire lansare (2026-11-04):** Ghidul AI CLI a fost verificat față de documentația/sursa `azd 1.37.2`, agenți `1.0.0-beta.23` și evaluări `1.0.0-beta.2`. Consultați [modificările și corecțiile de lansare](production-ai-practices.md#recent-release-changes-and-fixes) pentru cerințe de compatibilitate și detalii de migrare; aceasta nu este o validare în timp real a implementării.
 
-Parcurgând acest capitol, vei:
+## Obiectivele învățării
+
+Prin finalizarea acestui capitol, veți putea:
 - Implementa aplicații rezistente multi-regiune
-- Implementa modele de securitate enterprise
+- Implementa modele de securitate pentru întreprindere
 - Configura monitorizare cuprinzătoare
-- Optimiza costurile la scară largă
+- Optimiza costurile la scară
 - Configura pipeline-uri CI/CD cu AZD
 
 ---
@@ -25,7 +27,7 @@ Parcurgând acest capitol, vei:
 
 | # | Lecție | Descriere | Durată |
 |---|--------|-------------|------|
-| 1 | [Practici AI în Producție](production-ai-practices.md) | Modele de implementare enterprise | 90 min |
+| 1 | [Practici AI de producție](production-ai-practices.md) | Modele de implementare pentru întreprinderi | 90 min |
 
 ---
 
@@ -34,7 +36,7 @@ Parcurgând acest capitol, vei:
 - [ ] Implementare multi-regiune pentru reziliență
 - [ ] Identitate gestionată pentru autentificare (fără chei)
 - [ ] Application Insights pentru monitorizare
-- [ ] Bugete și alerte de cost configurate
+- [ ] Bugete de cost și alerte configurate
 - [ ] Scanare de securitate activată
 - [ ] Integrare pipeline CI/CD
 - [ ] Plan de recuperare în caz de dezastru
@@ -43,20 +45,20 @@ Parcurgând acest capitol, vei:
 
 ## 🏗️ Modele arhitecturale
 
-### Modelul 1: Microservicii AI
+### Model 1: Microservicii AI
 
 ```mermaid
 graph LR
-    Gateway[Poarta API] --> AI[Serviciu AI] --> Models[Modele Microsoft Foundry]
-    Gateway --> Auth[Serviciu de Autentificare]
-    AI --> Data[Depozit de Date]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
-### Modelul 2: AI Eveniment-Condus
+### Model 2: AI bazat pe evenimente
 
 ```mermaid
 graph LR
-    EventGrid[Grilă de Evenimente] --> Functions[Funcții] --> Pipeline[Pipeline AI]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
@@ -64,12 +66,13 @@ graph LR
 ## 🔐 Cele mai bune practici de securitate
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,34 +85,27 @@ properties: {
 
 ## 💰 Optimizarea costurilor
 
-| Strategie | Economii |
+| Strategie | Principala constrângere |
 |----------|---------|
-| Scalare până la zero (Container Apps) | 60-80% |
-| Folosirea nivelurilor de consum pentru dev | 50-70% |
-| Scalare programată | 30-50% |
-| Capacitate rezervată | 20-40% |
+| Scalare la zero (Container Apps) | Necesită un declanșator adecvat; alte servicii generează totuși costuri |
+| Utilizare nivel de consum pentru dev | Comparați prețurile serviciului selectat și încărcarea de muncă |
+| Scalare programată | Scăderea prin infrastructură/automatizare suportată |
+| Rezervări/capacitate asigurată | Doar când este suportat; angajamentele pot crește costurile în perioadele de inactivitate |
 
-```bash
-# Setează alerte de buget
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Utilizați [modelul complet pentru buget](production-ai-practices.md#2-cost-monitoring-and-budgets) cu o dată validă de început, domeniu de facturare, destinatari și permisiuni. Un buget trimite alerte; nu limitează cheltuielile. Economiile depind de utilizarea măsurată și nu sunt procente garantate.
 
 ---
 
 ## 📊 Configurarea monitorizării
 
 ```bash
-# Flux de jurnale
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Verifică Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# Vizualizează metrici
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -119,14 +115,14 @@ az monitor metrics list --resource <resource-id>
 
 | Direcție | Capitol |
 |-----------|---------|
-| **Anterior** | [Capitolul 7: Rezolvarea problemelor](../chapter-07-troubleshooting/README.md) |
-| **Curs terminat** | [Pagina principală a cursului](../../README.md) |
+| **Anterior** | [Capitolul 7: Depanare](../chapter-07-troubleshooting/README.md) |
+| **Curs finalizat** | [Pagina principală a cursului](../../README.md) |
 
 ---
 
 ## 📖 Resurse conexe
 
-- [Ghid Agenți AI](../chapter-02-ai-development/agents.md)
+- [Ghid agenți AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Soluții Multi-Agent](../chapter-05-multi-agent/README.md)
 - [Exemplu Microservicii](../../examples/microservices/README.md)

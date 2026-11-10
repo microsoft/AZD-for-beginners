@@ -1,95 +1,108 @@
-# Panustamine AZD For Beginnersi jaoks
+# Panustamine AZD Algajatele
 
-Täname, et soovite panustada AZD For Beginners kursusesse! See dokument sisaldab panustajatele suunatud juhiseid ja teavet.
+Täname, et olete huvitatud panustamisest AZD Algajatele kursusesse! See dokument pakub juhiseid ja teavet panustajatele.
 
-## Kuidas panustada
+## Kuidas Panustada
 
-### Probleemide teatamine
+### Probleemide Teatamine
 
-Kui leiate vigu, tõrkeid või teil on ettepanekuid täiustuste kohta:
+Kui leiate vigu, eksimusi või teil on ettepanekuid parandusteks:
 
-1. **Kontrolli olemasolevaid probleeme**: Otsi [olemasolevaid probleeme](https://github.com/microsoft/azd-for-beginners/issues), et vältida duplikaate
-2. **Loo uus probleem**: Kasuta sobivat probleemi malli
-3. **Esita üksikasjad**: Lisa sammud probleemi taasesitamiseks, oodatav käitumine ja ekraanipildid, kui see on asjakohane
+1. **Kontrollige Olemasolevaid Probleeme**: Otsige [olemasolevaid probleeme](https://github.com/microsoft/azd-for-beginners/issues), et vältida duplikaate
+2. **Looge Uus Probleem**: Kasutage sobivat probleemitamplate
+3. **Andke Üksikasjad**: Lisage sammud reprodutseerimiseks, oodatud käitumine ja ekraanipildid, kui see on kohaldatav
 
-### Muudatuste ettepanek
+### Muudatuste Ettepanek
 
-1. **Forki hoidla**: Loo projekti oma fork
-2. **Loo haru**: Loo oma muudatuste jaoks feature-haru
-3. **Tee muudatused**: Järgige meie kodeerimis- ja dokumenteerimisstandardeid
-4. **Testi oma muudatusi**: Kontrolli, et kõik lingid töötavad ja sisu kuvatakse õigesti
-5. **Esita pull request**: Anna oma muudatustest selge kirjeldus
+1. **Tee Fork Repositooriumist**: Looge oma haru antud projektist
+2. **Looge Haru**: Looge oma muudatuste jaoks teenusbranch
+3. **Tehke Muudatusi**: Järgige meie kodeerimise ja dokumentatsiooni standardeid
+4. **Testige Oma Muudatusi**: Veenduge, et kõik lingid töötavad ja sisu kuvamine on korrektne
+5. **Esitage Pull Request**: Lisage selge kirjeldus oma muudatustest
 
-### Panuste tüübid
+### Panustamise Liigid
 
-Tervitame järgmisi panuseid:
+Me tervitame järgmisi panustamise liike:
 
-#### Sisu parandused
-- Paranda trükivead, grammatika- ja vormindusvead
-- Tee olemasolevast dokumentatsioonist selgem
-- Uuenda aegunud teavet
-- Lisa puuduvaid selgitusi või konteksti
+#### Sisuanparanded
+- Parandage trükivead, grammatikad ja vormindusvead
+- Parandage olemasoleva dokumentatsiooni selgust
+- Uuendage aegunud informatsiooni
+- Lisage puuduvad selgitused või kontekst
 
-#### Uued näited
-- Lisa reaalse maailma juurutamise stsenaariume
-- Loo uusi AZD malle levinud kasutusjuhtudeks
-- Paku täiendavaid koodinäiteid ja harjutusi
+#### Uued Näited
+- Lisage reaalse maailma juurutamise stsenaariumid
+- Looge uusi AZD malle levinud kasutusjuhtude jaoks
+- Lisage täiendavaid koodinäiteid ja harjutusi
 
-#### Tõlketugi
-- Aita hallata olemasolevaid tõlkeid
-- Paranda tõlgete kvaliteeti
-- Lisa tõlkeid uue sisu jaoks
+#### Tõlke Abi
+- Aidake olemasolevaid tõlkeid hoida
+- Parandage tõlke kvaliteeti
+- Lisage tõlkeid uuele sisule
 
-#### Veaaruanded
-- Teata katkenud linkidest või valedest koodinäidetest
-- Tuvasta dokumentatsiooni vastuolud
-- Tõsta esile ligipääsetavusega seotud probleemid
+#### Vea Aruanded
+- Teatage katkenud linkidest või valedest koodinäidetest
+- Tuvastage dokumentatsiooni ebajärjekindlused
+- Tõstke esile juurdepääsetavuse probleemid
 
-## Panustamise juhised
+## Panustamise Juhised
 
-### Dokumentatsiooni standardid
+### Dokumentatsiooni Standardid
 
-- Kasuta selget, algajasõbralikku keelt
-- Sisalda õpieesmärgid ja tulemused
-- Paku samm-sammult juhiseid koos oodatud väljunditega
-- Lisa navigeerimislingid seotud sisule
-- Kasuta ühtset vormindust ja markdown-stiili
+- Kasutage selget, algajale sõbralikku keelt
+- Lisage õpieesmärgid ja tulemused
+- Andke samm-sammulised juhised koos oodatavate tulemuste kirjeldustega
+- Lisage navigeerimislingid seotud sisule
+- Kasutage järjekindlat vormindust ja markdowni stiili
 
 ### Koodinäited
 
-- Veendu, et kõik koodinäited on testitud ja töötavad
-- Lisa kommentaarid, mis selgitavad peamisi mõisteid
-- Järgi Azure'i ja AZD parimaid tavasid
-- Esita oodatud väljundid, kui see on asjakohane
+- Veenduge, et kõik koodinäited on testitud ja töötavad
+- Lisage kommentaarid, mis selgitavad peamisi mõisteid
+- Järgige Azure ja AZD parimaid tavasid
+- Esitage oodatav väljund, kui see on kohaldatav
 
-### Commit'i sõnumid
+### Ingliskeelse Dokumentatsiooni Kontrollimine
 
-Kasuta selgeid, kirjeldavaid commit-sõnumeid:
+Repositooriumi juurest paigaldage olemasolevad arenduse nõuded ja käivitage:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s .github/scripts -p "test_*.py"
+python .github/scripts/check_links.py
+python -m mkdocs build --strict --config-file workshop/mkdocs.yml
+```
+
+Offline lingikontrollija kontrollib ingliskeelse Markdown/HTML teid, pealkirju, eksporditud ankruid ja tühje lingikohti. See välistab genereeritud `translations/` ja `translated_images/`, sh linkid nendesse kaustadesse. See ei küsi väliseid veebisaite ega kontrolli Azure juurutusi. Kasutage `--json <report-path>` vea- ja välise URL-i inventari eksportimiseks eraldi võrgu kontrolli jaoks. Kontrollige jooksvaid tootmis- ja näidisnõudeid tehniliste juhiste muutmisel; eristage testitud rakendusi disainikavanditest.
+
+### Commit Sõnumid
+
+Kasutage selgeid, kirjeldavaid commit sõnumeid:
 - `docs: fix typo in installation guide`
 - `feat: add new container app example`
 - `fix: correct broken link in chapter 2`
 
-## Käitumisjuhised
+## Käitumisjuhend
 
-Palun lugege ja järgige meie [Käitumisjuhiseid](CODE_OF_CONDUCT.md), et hoida kogukond sõbralik ja kaasav.
+Palun lugege ja järgige meie [Käitumisjuhendit](CODE_OF_CONDUCT.md), et hoida kogukond vastuvõtva ja kaasavana.
 
-## Abi saamine
+## Abi Saamine
 
-- **Küsimused**: Ava [GitHubi arutelu](https://github.com/microsoft/azd-for-beginners/discussions)
-- **Kogukond**: Liitu [Azure Discordiga](https://discord.gg/microsoft-azure)
-- **Dokumentatsioon**: Vaadake üle [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- **Küsimused**: Otsige või avage [GitHubi probleem](https://github.com/microsoft/AZD-for-beginners/issues)
+- **Kogukond**: Liituge [Azure Discordiga](https://discord.gg/microsoft-azure)
+- **Dokumentatsioon**: Vaadake [Azure Developer CLI dokumentatsiooni](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ## Litsents
 
-Panustades sellesse hoidlasse nõustute, et teie panused litsentseeritakse vastavalt [MIT litsentsile](../../LICENSE).
+Panustades sellesse repositooriumisse nõustute, et teie panused litsentseeritakse [MIT litsentsi](../../LICENSE) alusel.
 
 ---
 
-Täname, et aitate muuta AZD For Beginnersi paremaks õppematerjaliks kogukonnale!
+Täname, et aitate muuta AZD Algajatele paremaks õppematerjaliks kogukonnale!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest loobumine**:
-See dokument on tõlgitud tehisintellektil põhineva tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palun arvestage, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta ühegi arusaamatuse ega väärtõlgenduse eest, mis võib tekkida selle tõlke kasutamisest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

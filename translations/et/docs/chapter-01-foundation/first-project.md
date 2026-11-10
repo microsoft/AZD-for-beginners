@@ -1,46 +1,48 @@
-# Teie esimene projekt – praktiline juhend
+# Teie esimene projekt - praktiline juhend
 
-**Lõikude navigeerimine:**
+**Kavalehe navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 1 – Alus ja kiire algus
-- **⬅️ Eelmine**: [Paigaldamine ja seadistamine](installation.md)
-- **➡️ Järgmine**: [Konfigureerimine](configuration.md)
-- **🚀 Järgmine peatükk**: [Peatükk 2: Tehisintellekti-eelne arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Praegune peatükk**: 1. peatükk - alused ja kiire käivitamine
+- **⬅️ Eelmine**: [Installatsioon ja seadistus](installation.md)
+- **➡️ Järgmine**: [Too oma rakendus](bring-your-own-app.md)
+- **🚀 Järgmine peatükk**: [2. peatükk: tehisintellektile orienteeritud arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Sissejuhatus
 
-Tere tulemast oma esimese Azure Developer CLI projektiga! See põhjalik praktiline juhend annab täieliku ülevaate täisvirna (full-stack) rakenduse loomise, juurutamise ja haldamise kohta Azure'is, kasutades azd-d. Töötate tõelise todo-rakendusega, mis sisaldab React-i kasutajaliidest, Node.js API tagapoolt ja MongoDB andmebaasi.
+Tere tulemast oma esimesse Azure Developer CLI projekti! Te juurutate todo-rakenduse Reacti esiplaaniga, Node.js API-ga ja Azure Cosmos DB-ga. Mall säilitab ajaloolise nime `todo-nodejs-mongo`; selle praegune infrastruktuur kasutab NoSQL-i jaoks Cosmos DB-d, seega vaadake alla laaditud README-d ja `infra/`, selle asemel et arvestada andmebaasi API-ga nime järgi.
+
+> Kontrollitud vastu `azd 1.37.2` ja avalikku malli 2026. aasta novembris. Allolevad näited kasutavad Bash-i; JSON-i väljavõtmine nõuab ka `jq`. Azure juurutused võivad põhjustada kulusid ja neid ei teostatud selle ülevaate ajal.
 
 ## Õpieesmärgid
 
-Selle juhendi lõpetamisel:
-- Valdate azd projekti initsialiseerimise töövoogu mallide abil
-- Mõistate Azure Developer CLI projekti struktuuri ja konfiguratsioonifaile
-- Suudate teostada rakenduse täieliku juurutamise Azure’is koos infrastruktuuri loomisega
-- Rakendate rakenduse uuendamise ja uuesti juurutamise strateegiaid
-- Haldate mitut keskkonda arenduseks ja testimiseks
-- Rakendate ressursside puhastamise ja kulude haldamise praktikaid
+Selle juhendi lõpetamisega saate:
+- Valdada azd projekti algatuse töövoogu mallide abil
+- Mõista Azure Developer CLI projekti struktuuri ja konfiguratsioonifaile
+- Täieliku rakenduse juurutamine Azure’isse koos infrastruktuuri loomisega
+- Rakenduse uuenduste ja uuesti juurutamise strateegiate rakendamine
+- Halda mitut keskkonda arenduseks ja etappideks
+- Rakenduse ressursside koristamine ja kulude juhtimine
 
 ## Õpitulemused
 
-Pärast juhendi lõpetamist saate:
+Pärast lõpetamist oskate:
 - Iseseisvalt algatada ja konfigureerida azd projekte mallidest
-- Tõhusalt navigeerida ja muuta azd projekti struktuuri
-- Juurutada täisvirna rakendusi Azure’i kasutades ühe käsuga
-- Lahendada levinud juurutamis- ja autentimisprobleeme
-- Hallata Azure’i mitut keskkonda erinevate juurutusetappide jaoks
-- Rakendada pideva juurutamise töövoogusid rakenduse uuendamiseks
+- Efektiivselt navigeerida ja muuta azd projektistruktuure
+- Ühe käsuga juurutada täisvirna rakendusi Azure’isse
+- Lahendada tavalisi juurutus- ja autentimisprobleeme
+- Hallata mitut Azure keskkonda erinevate juurutusstaadiumite jaoks
+- Rakendada pidevaid juurutuse töövooge rakendusuuenduste jaoks
 
 ## Alustamine
 
-### Eeldused
-- ✅ Azure Developer CLI on installitud ([Paigaldusjuhend](installation.md))
-- ✅ AZD autentimine tehtud käsuga `azd auth login`
-- ✅ Git on süsteemis installitud
-- ✅ Node.js 16+ (selle juhendi jaoks)
-- ✅ Visual Studio Code (soovitatav)
+### Nõuete kontrollnimekiri
+- ✅ Azure Developer CLI paigaldatud ([Installatsioonijuhend](installation.md))
+- ✅ AZD autentimine tehtud `azd auth login` abil
+- ✅ Git paigaldatud teie süsteemi
+- ✅ Node.js 22 LTS (või alla laetud malli nõutud toetatud versioon)
+- ✅ Visual Studio Code (soovituslik)
 
-Enne jätkamist käivitage repositooriumi juurkataloogist seadistuse valideerija:
+Enne jätkamist käivitage seadistuskontroll juurkataloogist:
 
 **Windows:** `./validate-setup.ps1`
 
@@ -48,10 +50,10 @@ Enne jätkamist käivitage repositooriumi juurkataloogist seadistuse valideerija
 
 ### Kontrolli oma seadistust
 ```bash
-# Kontrolli azd paigaldust
+# Check azd installation
 azd version
 
-# Kontrolli AZD autentimist
+# Check AZD authentication
 azd auth login --check-status
 ```
 
@@ -66,48 +68,47 @@ az account show
 node --version
 ```
 
-## Samm 1: Vali ja initsialiseeri mall
+## Samm 1: Vali ja algata mall
 
-Alustame populaarse todo-rakenduse malliga, mis sisaldab React-i kasutajaliidest ja Node.js API tagapoolt.
+Alustame populaarse todo-rakenduse malliga, mis sisaldab Reacti esiplaani ja Node.js API tagaplaani.
 
 ```bash
-# Sirvige saadaolevaid malle
+# Browse available templates
 azd template list
 
-# Algatage todo-rakenduse mall
+# Initialize the todo app template
 mkdir my-first-azd-app
 cd my-first-azd-app
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
-# Järgige juhiseid:
-# - Sisestage keskkonna nimi: "dev"
-# - Valige tellimus (kui teil on mitu)
-# - Valige piirkond: "East US 2" (või teie eelistatud piirkond)
+# Follow the prompts:
+# - Enter an environment name: "dev"
+# - Choose a subscription (if you have multiple)
+# - Choose a region: "East US 2" (or your preferred region)
 ```
 
 ### Mis just juhtus?
-- Laaditi mallikood teie kohalikku kataloogi
-- Loodi `azure.yaml` fail teenuste määratlustega
-- Seati infrastruktuuri kood kataloogi `infra/`
+- Alla laaditi mallikood teie kohalikku kataloogi
+- Loodi `azure.yaml` fail teenuse määratlustega
+- Seati üles infrastruktuurikood kataloogi `infra/`
 - Loodi keskkonna konfiguratsioon
 
 ## Samm 2: Uuri projekti struktuuri
 
-Vaatame, mida azd meie jaoks lõi:
+Vaatame, mida azd meile lõi:
 
 ```bash
-# Vaata projekti struktuuri
+# View the project structure
 tree /f   # Windows
-# või
+# or
 find . -type f | head -20   # macOS/Linux
 ```
 
-Te peaksite nägema:
+Peaksite nägema:
 ```
 my-first-azd-app/
-├── .azd/
-│   └── config.json              # Project configuration
 ├── .azure/
+│   ├── config.json              # Selected local environment
 │   └── dev/                     # Environment-specific files
 ├── .devcontainer/               # Development container config
 ├── .github/workflows/           # GitHub Actions CI/CD
@@ -115,80 +116,77 @@ my-first-azd-app/
 ├── infra/                       # Infrastructure as code (Bicep)
 │   ├── main.bicep              # Main infrastructure template
 │   ├── main.parameters.json     # Parameters for deployment
-│   └── modules/                # Reusable infrastructure modules
+│   └── app/                    # Application infrastructure modules
 ├── src/
 │   ├── api/                    # Node.js backend API
 │   │   ├── src/               # API source code
-│   │   ├── package.json       # Node.js dependencies
-│   │   └── Dockerfile         # Container configuration
+│   │   └── package.json       # Node.js dependencies
 │   └── web/                   # React frontend
 │       ├── src/               # React source code
-│       ├── package.json       # React dependencies
-│       └── Dockerfile         # Container configuration
+│       └── package.json       # React dependencies
 ├── azure.yaml                  # azd project configuration
 └── README.md                   # Project documentation
 ```
 
-### Olulised failid mõistmiseks
+### Peamised failid, mida mõista
 
-**azure.yaml** – teie azd projekti süda:
+**azure.yaml** - Sinu azd projekti süda:
 ```bash
-# Vaata projekti konfiguratsiooni
+# View the project configuration
 cat azure.yaml
 ```
 
-**infra/main.bicep** – infrastruktuuri määratlus:
+**infra/main.bicep** - Infrastruktuuri määratlus:
 ```bash
-# Vaata infrastruktuuri koodi
+# View the infrastructure code
 head -30 infra/main.bicep
 ```
 
 ## Samm 3: Kohanda oma projekti (valikuline)
 
-Enne juurutamist võite rakendust kohandada:
+Enne juurutamist võid rakendust kohandada:
 
-### Muuda kasutajaliidest
+### Muuda esiplaani
 ```bash
-# Ava Reacti rakenduse komponent
-code src/web/src/App.tsx
+# Open the React app component
+code src/web/src/layout/header.tsx
 ```
 
 Tee lihtne muudatus:
-```typescript
-// Leia pealkiri ja muuda see
-<h1>My Awesome Todo App</h1>
+```tsx
+// Replace the existing <Text variant="xLarge">ToDo</Text> element
+<Text variant="xLarge">My Awesome Todo App</Text>
 ```
 
 ### Sea keskkonnamuutujad
 ```bash
-# Määra kohandatud keskkonnamuutujad
+# Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# Vaata kõiki keskkonnamuutujaid
+# View all environment variables
 azd env get-values
 ```
 
-## Samm 4: Juuruta Azure’i
+Need kaks kohandatud väärtust näitavad ainult kohalikku salvestust. Mall ei kasuta `WEBSITE_TITLE` ega `API_VERSION`, nii et need ei muuda rakendust. Selge allikamuudatus ülal muudab kuvatavat pealkirja.
 
-Nüüd põnev hetk – juuruta kõik Azure’i!
+## Samm 4: Juuruta Azure’isse
+
+Nüüd põnev osa - juuruta kõik Azure’i!
 
 ```bash
-# Paigalda infrastruktuur ja rakendus
+# Deploy infrastructure and application
 azd up
 
-# See käsk teeb järgmist:
-# 1. Hoiab Azure ressursid ette (App Service, Cosmos DB jne)
-# 2. Koostab sinu rakenduse
-# 3. Paigaldab ettevalmistatud ressurssidele
-# 4. Kuvab rakenduse URL-i
+# This command will:
+# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
+# 2. Build your application
+# 3. Deploy to the provisioned resources
+# 4. Display the application URL
 ```
 
-### Mis juhtub juurutamise ajal?
+### Mis toimub juurutuse ajal?
 
-Käsk `azd up` teostab järgmisi samme:
-1. **Provision** (`azd provision`) – loob Azure ressursse
-2. **Package** – ehitab rakenduse koodi
-3. **Deploy** (`azd deploy`) – juurutab koodi Azure’i ressurssidele
+Töövoog loob infrastruktuuri ja pakib/juurutab koodi. Täpne järjekord on kohandatav kaudu `workflows.up` failis `azure.yaml`; see mall täpsustab esmalt loomise ja seejärel juurutamise. Ära looda kõigi mallide universaalsele faasijärjestusele.
 
 ### Oodatav väljund
 ```
@@ -206,356 +204,356 @@ https://app-web-abc123def.azurewebsites.net
 ## Samm 5: Testi oma rakendust
 
 ### Juurdepääs rakendusele
-Klõpsake juurutusväljundis olevat URL-i või hankige see igal ajal:
+Klikka juurutuse väljundis antud URL-il või saa see igal ajal:
 ```bash
-# Hangi rakenduse lõpp-punktid
+# Get application endpoints
 azd show
 
-# Ava rakendus oma brauseris
-azd show --output json | jq -r '.services.web.endpoint'
+# Open the application in your browser
+azd show --output json | jq -er '.services.web.ingressUrl'
 ```
 
 ### Testi todo-rakendust
-1. **Lisa todo-ülesanne** – Klõpsa "Add Todo" ja sisesta ülesanne
-2. **Märgi täidetuks** – Märgi lõpetatud ülesanded
-3. **Kustuta üksused** – Eemalda mittevajalikud todo-d
+1. **Lisa todo-üksus** - kliki "Add Todo" ja sisesta ülesanne
+2. **Märgi lõpetatuks** - märgi lõpetatud üksused
+3. **Kustuta üksused** - eemalda todo’d, mida enam ei vaja
 
 ### Jälgi oma rakendust
 ```bash
-# Ava Azure'i portaal oma ressursside jaoks
+# Open Azure portal for your resources
 azd monitor
 
-# Vaata rakenduse logisid
+# View application logs
 azd monitor --logs
 
-# Vaata reaalajas mõõdikuid
+# View live metrics
 azd monitor --live
 ```
 
-### ✅ Kontrolli oma juurutust
+### ✅ Kinnita oma juurutus
 
-Enne edasi liikumist läbi see kiire kontrollnimekiri, et kinnitada kõik töötab – ära eelda, et "juurutus õnnestus" tähendab "rakendus töötab":
+Enne edasi liikumist tee kiire kontrollnimekiri, et veenduda kõiges töötab - ära eelda, et "juurutus õnnestus" tähendab "rakendus töötab":
 
 ```bash
-# 1. Kinnitage, et lõpp-punkt eksisteerib ja sellele pääseb ligi
+# 1. Confirm the endpoint exists and is reachable
 azd show
 
-# 2. Tehke lõpp-punkti kiire kontrolltest (ootab HTTP 200)
-curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+# 2. Smoke-test the endpoint (expects HTTP 200)
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error --location "$WEB_URL"
 
-# 3. Kontrollige tervise lõpp-punkti, kui teie rakendus selle avaldab
-curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+# 3. Test the API's actual list route (the template has no /health route)
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail --show-error "$API_URL/lists"
 ```
 
-**Juurutus on kinnitatud, kui:**
-- ✅ `azd show` näitab ligipääsetavat lõpp-punkti URL-i
-- ✅ URL avaneb brauseris ilma vigadeta
-- ✅ Põhifunktsioonid töötavad (todo lisamine/märgistamine/kustutamine)
-- ✅ `azd monitor --logs` näitab saabunud päringuid ilma ootamatute vigadeta
+**Juurutus on kontrollitud, kui:**
+- ✅ `azd show` kuvab kättesaadava lõpp-punkti URL-i
+- ✅ URL avaneb sinu brauseris ilma vigadeta
+- ✅ Põhifunktsioonid töötavad (lisa/lõpeta/kustuta todo)
+- ✅ `azd monitor --logs` näitab saabuvate päringute ilma ootamatute vigadeta
 
-Kui mõni kontroll ebaõnnestub, liikuge [Peatükk 7: Tõrkeotsing](../chapter-07-troubleshooting/README.md).
+Kui mõni kontroll kukub läbi, liigu [7. peatüki: tõrkeotsingu](../chapter-07-troubleshooting/README.md) juurde.
 
 ## Samm 6: Tee muudatusi ja juuruta uuesti
 
-Teeme muudatuse ja vaatame, kui lihtne on uuendada:
+Teeme muudatuse ja vaatame, kui lihtne seda uuendada on:
 
-### Muuda API-d
+### Muuda API-t
 ```bash
-# Muuda API koodi
-code src/api/src/routes/lists.js
+# Edit the API code
+code src/api/src/routes/lists.ts
 ```
 
 Lisa kohandatud vastuse päis:
 ```javascript
-// Leia marsruudi käsitleja ja lisa:
+// Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
 ### Juuruta ainult koodimuudatused
 ```bash
-# Paigalda ainult rakenduse kood (jää infrastruktuur vahele)
+# Deploy only the application code (skip infrastructure)
 azd deploy
 
-# See on palju kiirem kui 'azd up', kuna infrastruktuur on juba olemas
+# This is much faster than 'azd up' since infrastructure already exists
 ```
 
 ## Samm 7: Halda mitut keskkonda
 
-Loo testkeskkond muudatuste testimiseks enne tootmispakkumist:
+Loo testimiseks etappide keskkond enne tootmisse minekut:
 
 ```bash
-# Loo uus testkeskkond
+# Create a new staging environment
 azd env new staging
 
-# Kasuta testkeskkonda
+# Deploy to staging
 azd up
 
-# Vaheta tagasi arenduskeskkonda
+# Switch back to dev environment
 azd env select dev
 
-# Loetle kõik keskkonnad
+# List all environments
 azd env list
 ```
 
 ### Keskkondade võrdlus
 ```bash
-# Vaata arenduskeskkonda
+# View dev environment
 azd env select dev
 azd show
 
-# Vaata etapi keskkonda
+# View staging environment  
 azd env select staging
 azd show
 ```
 
 ## Samm 8: Puhasta ressursid
 
-Kui oled katsetamise lõpetanud, puhasta, et vältida edasisi kulusid:
+Kui eksperimenteerimine on tehtud, puhasta, et vältida pidevaid kulusid:
 
 ```bash
-# Kustuta kõik Azure ressursid praeguse keskkonna jaoks
-azd down
+# Review and delete BOTH environments created in this tutorial
+azd down --environment dev
+azd down --environment staging
 
-# Sundkustuta ilma kinnitusteta ja tühjenda pehmemõõduga kustutatud ressursid
-azd down --force --purge
-
-# Kustuta konkreetne keskkond
-azd env select staging
-azd down --force --purge
+# Automation alternative for a selected disposable environment:
+# azd down --environment dev --force --purge
+# --purge affects supported soft-deleted Azure resources, not local .azure files.
 ```
 
-## Klassikaline rakendus vs. AI-toega rakendus: sama töövoog
+## Klassikaline rakendus vs. tehisintellekti rakendus: sama töövoog
 
-Sa just juurutasid traditsioonilise veebirakenduse. Aga mis juhtub, kui soovid juurutada AI-toega rakenduse – näiteks Microsoft Foundry mudelitega vestlusrakenduse?
+Sa just juurutasid traditsioonilise veebirakenduse. Aga mis siis, kui soovid juurutada tehisintellektil põhinevat rakendust - näiteks jututuba Microsoft Foundry mudelitega?
 
 Hea uudis: **töövoog on identne.**
 
-| Samm | Klassikaline todo-rakendus | AI vestlusrakendus |
-|------|----------------------------|--------------------|
-| Initsialiseeri | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Samm | Klassikaline todo-rakendus | Tehisintellekti juturobot |
+|------|-----------------|-------------|
+| Algus (tühi kataloog) | `azd init --template todo-nodejs-mongo .` | `azd init --template azure-search-openai-demo .` |
 | Autentimine | `azd auth login` | `azd auth login` |
-| Juurutamine | `azd up` | `azd up` |
+| Juurutus | `azd up` | `azd up` |
 | Jälgimine | `azd monitor` | `azd monitor` |
 | Puhastamine | `azd down --force --purge` | `azd down --force --purge` |
 
-Ainus erinevus on **mall**, millest alustada. AI mall sisaldab lisainfrastruktuuri (näiteks Microsoft Foundry mudelite ressurss või AI Search indeks), kuid azd haldab seda kõike teie eest. Sul ei ole vaja õppida uusi käske, kasutusele võtta teist tööriista ega muuta juurutamise mõtlemist.
+Elutsükli käsud on samad, kuid eeltingimused erinevad. AI mall võib vajada mudeli ligipääsu, piirkondlikku kvota, andmete haaramist ja täiendavat konfigureerimist. Lugege selle README enne juurutamist; `azd up` ei saa tagada puuduvate õiguste ega kvota.
 
-See ongi azd põhiprintsiip: **üks töövoog, iga töökoormus.** Osavad oskused, mida selles juhendis harjutasid – initsialiseerimine, juurutamine, jälgimine, uuesti juurutamine ja puhastamine – kehtivad ühtemoodi nii AI-rakenduste kui ka agentide puhul.
+See on azd põhialus: **üks töövoog, kõik töökoormused.** Osavad oskused, mida selles juhendis harjutasid — algatamine, juurutamine, jälgimine, uuesti juurutamine ja koristamine — kehtivad võrdselt tehisintellekti rakendustele ja agentidele.
 
 ---
 
-## Mida õppisite
+## Mida sa õppisid
 
-Palju õnne! Olete edukalt:
+Palju õnne! Sa oled edukalt:
 - ✅ Algatanud azd projekti mallist
 - ✅ Uurinud projekti struktuuri ja olulisi faile
 - ✅ Juurutanud täisvirna rakenduse Azure’i
-- ✅ Teinud koodimuudatusi ja juurutanud uuesti
-- ✅ Haldanud mitut keskkonda
-- ✅ Puhastanud ressursse
+- ✅ Teinud koodimuudatusi ja uuesti juurutanud
+- ✅ Halda mitut keskkonda
+- ✅ Puhastanud ressursid
 
-## 🎯 Oskuste valideerimise harjutused
+## 🎯 Osavuse valideerimise harjutused
 
-### Harjutus 1: Juurutage erinev mall (15 minutit)
-**Eesmärk**: Tõestada azd init ja juurutustöövoo valdamist
+### Harjutus 1: Juuruta teine mall (15 minutit)
+**Eesmärk**: Demonstreerida valdamist azd init ja juurutuse töövoo osas
 
 ```bash
-# Proovi Python + MongoDB virna
+# Try Python + MongoDB stack
 mkdir todo-python && cd todo-python
-azd init --template todo-python-mongo
+azd init --template todo-python-mongo .
 azd up
 
-# Kontrolli juurutust
+# Verify deployment
 azd show
-curl $(azd show --output json | jq -r '.services.web.endpoint')
+curl --fail "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Puhasta
+# Clean up
 azd down --force --purge
 ```
 
 **Õnnestumise kriteeriumid:**
 - [ ] Rakendus juurutub ilma vigadeta
-- [ ] Saab rakenduse URL-i brauseris avada
-- [ ] Rakendus töötab korrektselt (todo lisamine/ kustutamine)
-- [ ] Kõik ressursid puhastati edukalt
+- [ ] Saab ligi rakenduse URL-ile brauseris
+- [ ] Rakendus töötab õigesti (lisa/eemalda todo’d)
+- [ ] Kõik ressursid on edukalt puhastatud
 
 ### Harjutus 2: Kohanda konfiguratsiooni (20 minutit)
-**Eesmärk**: Harjutada keskkonnamuutujate seadistamist
+**Eesmärk**: Harjutada kohaliku keskkonna väärtuste salvestamist, mitte segi ajada seda jooksuaja konfiguratsiooniga
 
 ```bash
-cd my-first-azd-app
+# Return to your original my-first-azd-app directory first
 
-# Loo kohandatud keskkond
+# Create custom environment
 azd env new custom-config
 
-# Määra kohandatud muutujad
+# Set custom variables
 azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
 
-# Kontrolli muutujaid
+# Verify variables
 azd env get-values | grep APP_TITLE
 
-# Käivita kohandatud konfiguratsiooniga
-azd up
+# Check one value exactly; expected: My Custom Todo App
+azd env get-value APP_TITLE
 ```
 
 **Õnnestumise kriteeriumid:**
-- [ ] Kohandatud keskkond on loodud edukalt
-- [ ] Keskkonnamuutujad on seadistatud ja kättesaadavad
-- [ ] Rakendus juurutub kohandatud konfiguratsiooniga
-- [ ] Saab kontrollida kohandatud seadeid juurutatud rakenduses
+- [ ] Kohandatud keskkond loodud edukalt
+- [ ] Keskkonnamuutujad seatud ja kättesaadavad
+- [ ] `azd env get-value APP_TITLE` väljastab `My Custom Todo App`
+- [ ] Osatakse selgitada, miks need väärtused ei muuda laos olevat rakendust, kui kood/infrastruktuur neid ei kasuta
 
 ### Harjutus 3: Mitme keskkonna töövoog (25 minutit)
-**Eesmärk**: Valdada keskkondade haldamist ja juurutamisstrateegiaid
+**Eesmärk**: Valdada keskkonna haldamist ja juurutamisstrateegiaid
 
 ```bash
-# Loo arenduskeskkond
+# Create dev environment
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# Märgi arenduse URL
-DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Dev: $DEV_URL"
 
-# Loo testkeskkond
+# Create staging environment
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# Märgi testimise URL
-STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Staging: $STAGING_URL"
 
-# Võrdle keskkondi
+# Compare environments
 azd env list
 
-# Testi mõlemaid keskkondi
-curl "$DEV_URL/health"
-curl "$STAGING_URL/health"
+# Test both environments
+curl --fail "$DEV_URL"
+curl --fail "$STAGING_URL"
 
-# Puhasta mõlemad
+# Clean up both
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
 **Õnnestumise kriteeriumid:**
-- [ ] Loodud on kaks keskkonda erinevate konfiguratsioonidega
-- [ ] Mõlema keskkonna juurutus on õnnestunud
-- [ ] Saab keskkondi muuta käsuga `azd env select`
+- [ ] Loodud kaks keskkonda erinevate konfiguratsioonidega
+- [ ] Mõlemad keskkonnad on edukalt juurutatud
+- [ ] Saab vahetada keskkondi kasutades `azd env select`
 - [ ] Keskkonnamuutujad erinevad keskkondade vahel
-- [ ] Mõlemad keskkonnad on puhtaks tehtud edukalt
+- [ ] Mõlemad keskkonnad on edukalt puhastatud
 
-## 📊 Teie edenemine
+## 📊 Teie edusammud
 
-**Kuluvas aeg**: ~60–90 minutit  
+**Aeg kulutatud**: ~60-90 minutit  
 **Omandatud oskused**:
-- ✅ Malle kasutades projekti alustamine
+- ✅ Mallipõhine projekti algatus
 - ✅ Azure ressursside loomine
-- ✅ Rakenduse juurutamise töövood
-- ✅ Keskkondade haldamine
-- ✅ Konfiguratsiooni haldamine
-- ✅ Ressursside puhastamine ja kulude haldamine
+- ✅ Rakenduse juurutuse töövood
+- ✅ Keskkondade haldus
+- ✅ Konfiguratsiooni haldus
+- ✅ Ressursside koristus ja kulude juhtimine
 
-**Järgmine tase**: Olete valmis [Konfigureerimisjuhendiks](configuration.md) õppimaks edasijõudnute konfiguratsioonimustreid!
+**Järgmine tase**: Oled valmis [Konfiguratsioonijuhendi](../chapter-03-configuration/configuration.md) õppimiseks, et avastada edasijõudnud konfiguratsioonimustreid!
 
-## Levinud probleemide lahendamine
+## Tavapäraste vigade tõrkeotsing
 
 ### Autentimisvead
 ```bash
-# Autendi uuesti Azure'is
-az login
+# Re-authenticate with azd (az login does not refresh azd's default credentials)
+azd auth login
 
-# Kontrolli tellimuse juurdepääsu
-az account show
+# Verify the selected environment's subscription
+azd env get-value AZURE_SUBSCRIPTION_ID
 ```
 
 ### Juurutuse ebaõnnestumised
 ```bash
-# Luba silumislogimine
-export AZD_DEBUG=true
+# Enable debug logging
 azd up --debug
 
-# Vaata rakenduse logisid Azure'is
+# View application logs in Azure
 azd monitor --logs
 
-# Konteinerirakenduste jaoks kasuta Azure CLI-d:
+# For Container Apps, use Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
-### Ressursinimede konfliktid
+### Ressursi nime konfliktid
 ```bash
-# Kasutage unikaalset keskkonna nime
+# Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### Pordi/võrgu probleemid
 ```bash
-# Kontrolli, kas pordid on vabad
+# Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
 ## Järgmised sammud
 
-Nüüd kui olete oma esimese projekti lõpetanud, uurige neid edasijõudnute teemasid:
+Nüüd, kui olete oma esimese projekti lõpetanud, uurige neid täiendavaid teemasid:
 
 ### 1. Kohanda infrastruktuuri
-- [Infrastruktuur koodina](../chapter-04-infrastructure/provisioning.md)
-- [Lisa andmebaase, salvestust ja muid teenuseid](../chapter-04-infrastructure/provisioning.md#adding-services)
+- [Infrastruktuur kui kood](../chapter-04-infrastructure/provisioning.md)
+- [Lisa andmebaasi infrastruktuur](../chapter-04-infrastructure/provisioning.md#%EF%B8%8F-database-provisioning)
 
-### 2. Seadista CI/CD
-- [Juurutamisjuhend](../chapter-04-infrastructure/deployment-guide.md) – täielikud CI/CD töövood
-- [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) – torujuhtme konfiguratsioon
+### 2. Sea üles CI/CD
+- [Juurutamisjuhend](../chapter-04-infrastructure/deployment-guide.md) - Täielikud CI/CD töövood
+- [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Torujuhtme konfiguratsioon
 
-### 3. Tootmiskõlblikud head praktikad
-- [Juurutamisjuhend](../chapter-04-infrastructure/deployment-guide.md) – turvalisus, jõudlus ja jälgimine
+### 3. Tootmise parimad tavad
+- [Juurutamisjuhend](../chapter-04-infrastructure/deployment-guide.md) - Turvalisus, jõudlus ja jälgimine
 
 ### 4. Uuri rohkem malle
 ```bash
-# Sirvi malle kategooria järgi
+# Browse templates by category
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Proovi erinevaid tehnoloogiapakke
-azd init --template todo-python-mongo
-azd init --template todo-csharp-sql
-azd init --template todo-java-mongo
+# Try different technology stacks
+# Choose ONE in a new empty directory, not all three in the same project
+azd init --template todo-python-mongo .
+# azd init --template todo-csharp-sql .
+# azd init --template todo-java-mongo .
 ```
 
-## Lisamaterjalid
+## Täiendavad ressursid
 
 ### Õppematerjalid
 - [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure arhitektuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure hästi arhitektuuri raamistik](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure hästi arhitektuuritud raamistik](https://learn.microsoft.com/en-us/azure/well-architected/)
 
-### Ühendus ja tugi
+### Kogukond ja tugi
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer kogukond](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
-- [Stack Overflow – azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
+- [Azure arendajate kogukond](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Mallid ja näited
-- [Ametlik malligalerii](https://azure.github.io/awesome-azd/)
-- [Kogukonna mallid](https://github.com/Azure-Samples/azd-templates)
-- [Ettevõtte mustrid](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Ametlik mallide galerii](https://azure.github.io/awesome-azd/)
+- [Kogukonna mallide panused](https://github.com/Azure/awesome-azd)
+- [Todo malli lähtekood](https://github.com/Azure-Samples/todo-nodejs-mongo)
 
 ---
 
-**Palju õnne oma esimese azd projekti lõpetamise puhul!** Olete nüüd valmis enesekindlalt Azure’is hämmastavaid rakendusi ehitama ja juurutama.
+**Palju õnne esimese azd projekti lõpetamisel!** Oled nüüd valmis ehitama ja juurutama suurepäraseid rakendusi Azure’is enesekindlalt.
 
 ---
 
-**Lõikude navigeerimine:**
+**Kavalehe navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 1 – Alus ja kiire algus
-- **⬅️ Eelmine**: [Paigaldamine ja seadistamine](installation.md)
-- **➡️ Järgmine**: [Too enda rakendus](bring-your-own-app.md)
-- **🚀 Järgmine peatükk**: [Peatükk 2: Tehisintellekti-eelne arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Praegune peatükk**: 1. peatükk - alused ja kiire käivitamine
+- **⬅️ Eelmine**: [Installatsioon ja seadistus](installation.md)
+- **➡️ Järgmine**: [Too oma rakendus](bring-your-own-app.md)
+- **🚀 Järgmine peatükk**: [2. peatükk: tehisintellektile orienteeritud arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 

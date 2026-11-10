@@ -1,45 +1,47 @@
-# Azure-erőforrások biztosítása az AZD-vel
+# Azure erőforrások biztosítása az AZD-vel
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam kezdőlapja**: [AZD kezdőknek](../../README.md)
-- **📖 Aktuális fejezet**: 4. fejezet – Infrastruktúra kódként és telepítés
+- **📚 Tanfolyam kezdőoldal**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 4. fejezet - Infrastruktúra kódként & Telepítés
 - **⬅️ Előző**: [Telepítési útmutató](deployment-guide.md)
-- **➡️ Következő fejezet**: [5. fejezet: Több ügynökös AI megoldások](../../examples/retail-scenario.md)
-- **🔧 Kapcsolódó**: [6. fejezet: Előtelepítési ellenőrzés](../chapter-06-pre-deployment/capacity-planning.md)
+- **➡️ Következő fejezet**: [5. fejezet: Több ügynökös MI megoldások](../../examples/retail-scenario.md)
+- **🔧 Kapcsolódó**: [6. fejezet: Előtelepítési érvényesítés](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató mindent lefed, amit tudnia kell az Azure-erőforrások Azure Developer CLI segítségével történő biztosításáról és kezeléséről. Tanulja meg az Infrastruktúra kódként (IaC) mintáit megvalósítani az egyszerű erőforrás-létrehozástól a fejlett vállalati szintű infrastruktúra-architektúrákig Bicep, ARM sablonok, Terraform és Pulumi használatával.
+Ez az útmutató az Azure Developer CLI beépített Bicep és Terraform szolgáltatóival történő Azure erőforrások létrehozását és kezelését fedi le.
+
+> Ellenőrizve a `azd 1.37.2` (2026. november) alapján. Ha nincs másként megadva, a Bicep, Terraform és szkript példák **illusztratív töredékek**, nem teljes sablonok. Egy projektbe illessze őket, amely biztosítja a hivatkozott paramétereket, modulokat, identitásokat, hálózatot és alkalmazáskódot. Az Azure erőforrások létrehozása nem történt meg ebben az ellenőrzésben.
 
 ## Tanulási célok
 
-Az útmutató végrehajtásával Ön:
-- Mesteri szintre emeli az Infrastruktúra kódként elveit és az Azure-erőforrások biztosítását
-- Megérti az Azure Developer CLI által támogatott többféle IaC szolgáltatót
-- Megtervezi és megvalósítja a Bicep sablonokat gyakori alkalmazásarchitektúrákhoz
-- Konfigurálja az erőforrás paramétereit, változóit és környezet-specifikus beállításait
-- Kivitelez fejlett infrastruktúra mintákat beleértve hálózatkezelést és biztonságot
-- Kezeli az erőforrás élettartamát, frissítéseit és a függőségek rendezését
+Az útmutató elvégzésével:
+- Elsajátítja az Infrastruktúra kódként elveit és az Azure erőforrások biztosítását
+- Megérti az Azure Developer CLI által támogatott több IaC szolgáltatót
+- Tervez és megvalósít Bicep sablonokat általános alkalmazásarchitektúrákhoz
+- Konfigurálja az erőforrás paramétereket, változókat és környezetspecifikus beállításokat
+- Fejlett infrastruktúra mintákat hajt végre, beleértve a hálózatot és biztonságot
+- Kezeli az erőforrás életciklust, frissítéseket és függőség feloldást
 
 ## Tanulási eredmények
 
-Az útmutató elvégzése után képes lesz:
+A befejezéskor képes lesz:
 - Azure infrastruktúra tervezésére és biztosítására Bicep és ARM sablonokkal
 - Összetett többszolgáltatásos architektúrák konfigurálására megfelelő erőforrás-függőségekkel
 - Paraméterezett sablonok megvalósítására több környezethez és konfigurációhoz
-- Infrastrukturális biztosítási problémák hibakeresésére és telepítési hibák megoldására
-- Az Azure jól megtervezett keretrendszerének alkalmazására az infrastruktúra tervezésében
-- Infrastrukturális frissítések kezelésére és infrastruktúra verziózásának megvalósítására
+- Infrastruktúra biztosítási problémák hibaelhárítására és telepítési hibák megoldására
+- Azure Well-Architected Framework elveinek alkalmazására az infrastruktúra tervezésében
+- Infrastruktúra frissítések kezelésére és verziókezelési stratégiák alkalmazására
 
-## Az infrastruktúra biztosításának áttekintése
+## Infrastruktúra biztosítás áttekintése
 
-Az Azure Developer CLI több Infrastruktúra kódként (IaC) szolgáltatót támogat:
-- **Bicep** (ajánlott) – az Azure domain-specifikus nyelve
-- **ARM sablonok** – JSON alapú Azure Resource Manager sablonok
-- **Terraform** – multi-cloud infrastruktúra eszköz
-- **Pulumi** – modern infrastruktúra kódként programozási nyelvekkel
+Az Azure Developer CLI több Infrastructure as Code (IaC) szolgáltatót támogat:
+- **Bicep** (ajánlott) - Azure domain-specifikus nyelv
+- **ARM Templates** - A Bicep ARM-re fordul; a nyers ARM JSON nem külön beépített `infra.provider`
+- **Terraform** - Többfelhős infrastruktúra eszköz
+- **Kiegészítő szolgáltatók** - Külön telepítendő szolgáltató kiegészítővel és dokumentált konfigurációval; ne feltételezzen semmilyen szolgáltató string támogatást
 
-## Az Azure-erőforrások megértése
+## Az Azure erőforrások megértése
 
 ### Erőforrás hierarchia
 ```
@@ -54,13 +56,14 @@ Azure Account
 - **Tárolás**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Hálózat**: Virtuális hálózat, Application Gateway, CDN
 - **Biztonság**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Azure AI szolgáltatások, Azure OpenAI, Azure Machine Learning
+- **MI/Gépi tanulás**: Azure MI szolgáltatások, Azure OpenAI, Azure Machine Learning
 
 ## Bicep infrastruktúra sablonok
 
-### Alapvető Bicep sablon szerkezet
+### Alapvető Bicep sablon struktúra
 ```bicep
-// infra/main.bicep
+// infra/modules/web.bicep - resource-group-scoped module fragment
+targetScope = 'resourceGroup'
 @description('The name of the environment')
 param environmentName string
 
@@ -75,11 +78,6 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var tags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
-}
-
-// Resource Group (created automatically by azd)
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
-  name: '${applicationName}-${environmentName}-rg'
 }
 
 // App Service Plan
@@ -100,11 +98,14 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'web' })
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
@@ -128,7 +129,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Fejlett Bicep minták
+Egy teljes azd projekthez ezt a modult egy előfizetés hatókörű `infra/main.bicep`-ból hívjuk meg, amely egy címkézett erőforrás csoportot hoz létre és átadja a hatókört. Illessze a `environmentName`/`location` értékeket a `main.parameters.json`-ben. A `azd-service-name: web` címke társítja az erőforrást a `services.web`; önmagukban tetszőleges kimeneti nevek nem konfigurálnak szolgáltatás felfedezést.
+
+### Haladó Bicep minták
 
 #### Moduláris infrastruktúra
 ```bicep
@@ -142,11 +145,14 @@ param appSettings array = []
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: name
   location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: planId
     siteConfig: {
       appSettings: appSettings
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
     }
     httpsOnly: true
@@ -202,11 +208,11 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 
 ## 🌐 Terraform használata az azd-vel
 
-A Bicep az azd alapértelmezettje, de az azd támogatja a **Terraformot** is – hasznos, ha a csapata már erre standardizált, vagy multi-cloud infrastruktúrát kezel. Az azd munkafolyamata (`azd up`, `azd provision`, `azd down`) azonos; csak az infrastruktúra nyelve és a mappaszerkezet változik.
+A Bicep az azd alapértelmezett, de azd támogatja a **Terraform**-ot is – hasznos, ha a csapata már ezt szabványosította, vagy többfelhős infrastruktúrát kezel. Az azd munkafolyamat (`azd up`, `azd provision`, `azd down`) azonos; csak az infrastruktúra nyelv és a mappa elrendezés változik.
 
-### Azd utasítása Terraform használatára
+### Azd utasítása a Terraform használatára
 
-Adjon hozzá egy `infra` szakaszt az `azure.yaml`-hoz, amely a Terraform szolgáltatóra mutat:
+Adjon hozzá egy `infra` szakaszt a `azure.yaml`-hoz, amely a Terraform szolgáltatóra mutat:
 
 ```yaml
 # azure.yaml
@@ -221,9 +227,9 @@ services:
     host: containerapp
 ```
 
-### Terraform mappaszerkezet
+### Terraform mappa elrendezés
 
-A Terraform szolgáltatóval az `infra/` mappa `.tf` fájlokat használ Bicep helyett:
+A Terraform szolgáltató esetén az `infra/` mappája `.tf` fájlokat használ Bicep helyett:
 
 ```
 infra/
@@ -234,7 +240,9 @@ infra/
 └── main.tfvars.json   # values azd injects per environment
 ```
 
-### Egy minimális `main.tf`
+### Egy `main.tf` töredék
+
+Ez csak egy erőforrás csoportot és tervet hoz létre, nem telepíthető szolgáltatást. Meg kell határozni bemeneti változókat, kompatibilis `azurerm` szolgáltatót, a webalkalmazást és annak szolgáltatás címkét/erőforrás név leképezését is.
 
 ```hcl
 # infra/main.tf
@@ -253,9 +261,9 @@ resource "azurerm_service_plan" "plan" {
 }
 ```
 
-### Hogyan kapcsolódik az azd a Terraform kimenetekhez
+### Hogyan kapcsolódik azd a Terraform kimenetekhez
 
-Az azd olvassa a Terraform **kimeneteket** annak érdekében, hogy megismerje az végpontokat és visszakösse a környezeti értékeket az alkalmazáshoz. A kimenet nevei számítanak – az azd specifikusakat keres:
+azd beolvassa a Terraform **kimeneteket** környezeti értékekként. Ez a töredék feltételezi, hogy definiált `azurerm_linux_web_app.web`; a szolgáltatás felfedezéshez még szükséges egy illeszkedő erőforrás név vagy `azd-service-name` címke:
 
 ```hcl
 # infra/outputs.tf
@@ -264,111 +272,48 @@ output "AZURE_LOCATION" {
 }
 
 output "SERVICE_WEB_ENDPOINT_URL" {
-  value = azurerm_linux_web_app.web.default_hostname
+  value = "https://${azurerm_linux_web_app.web.default_hostname}"
 }
 ```
 
-> **Fontos:** az azd használja az `azd-env-name` címkét és az `AZURE_*` kimeneteket a környezetenkénti erőforrások nyomon követésére. Mindig címkézze az erőforráscsoportot `"azd-env-name" = var.environment_name` értékkel, hogy az `azd down` megtalálhassa és törölhesse az összeset.
+> **Fontos:** az azd a `azd-env-name` címkét és `AZURE_*` kimeneteket használja az erőforrások környezeti alapon történő nyomon követésére. Mindig címkézze erőforráscsoportját `"azd-env-name" = var.environment_name`-vel, hogy `azd down` megtaláljon és eltávolítson mindent.
 
 ### Telepítés Terraformmal
 
-A parancsok pontosan megegyeznek a Bicep eseténivel:
+A parancsok pontosan ugyanazok, mint Bicep esetén:
 
 ```bash
 azd auth login
 azd env new dev
-azd provision --preview   # azd a háttérben lefuttatja a 'terraform plan' parancsot
-azd up                    # előkészítés + telepítés
-azd down --force          # törli a Terraform által kezelt erőforrásokat
+azd provision --preview   # azd runs 'terraform plan' under the hood
+azd up                    # provision + deploy
+azd down --force          # destroys the Terraform-managed resources
 ```
 
-> **Előfeltétel:** A Terraform telepítve legyen és elérhető legyen az ön `PATH`-ján. Az azd kezeli a Terraform *munkafolyamatot*, de nem telepíti a Terraformot. Az állapothoz az azd alapértelmezésként helyi állapotot használ; csapatok esetén konfiguráljon távoli backendet (például egy Azure Storage backendet) a `provider.tf`-ben.
+> **Előfeltétel:** A Terraform telepítve kell, hogy legyen és elérhető az Ön `PATH`-jén. Az azd kezeli a Terraform *munkafolyamatot*, de nem telepíti Ön helyett a Terraformot. Az állapot esetén az azd alapértelmezett helyi állapotot használ; csapatok esetén állítson be távoli backendet (például Azure Storage backendet) a `provider.tf`-ben.
 
-Teljes, futtatható Terraform alapú indulókhoz böngéssze az [Awesome AZD galériát](https://azure.github.io/awesome-azd/), és szűrjön Terraformra, vagy tekintse meg a hivatalos [azd Terraform dokumentációt](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+Teljes, futtatható Terraform alapú kiindulópontokért böngéssze az [Awesome AZD galériát](https://azure.github.io/awesome-azd/) és szűrjön Terraformra, vagy tekintse meg a hivatalos [azd Terraform dokumentációt](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
-## 🧩 Pulumi használata az azd-vel
+## 🧩 Egyéb infrastruktúra eszközök
 
-Ha a csapata általános célú nyelven (TypeScript, Python, Go vagy C#) ír infrastruktúrát a DSL helyett, az azd támogatja a **Pulumi**-t is. Ugyanúgy, mint a Terraformnál, az `azd up` / `azd provision` / `azd down` munkafolyamati sorrend változatlan – csak az infrastruktúra eszköz és a mappaszerkezet tér el.
+A Pulumi nem beépített azd 1.37.2 biztosítási szolgáltató. Csak az `infra.provider: pulumi` beállítása nem hoz létre működő integrációt, és a `azd env new` nem hoz létre/kiválaszt automatikusan Pulumi stack-et. Ha más IaC eszközt használ, kövesse az igazolt szolgáltató kiegészítő dokumentációját vagy kezelje annak életciklusát saját munkafolyamatában. Ez a tanfolyam nem biztosít vagy hitelesít Pulumi szolgáltatót.
 
-### Azd utasítása Pulumi használatára
+## 🎯 Szolgáltató környezet kiválasztása
 
-```yaml
-# azure.yaml
-name: my-pulumi-app
-infra:
-  provider: pulumi      # default is "bicep"
-  path: infra           # folder containing your Pulumi program
-services:
-  web:
-    project: ./src
-    language: js
-    host: containerapp
-```
+A `host` mező a `azure.yaml`-ben dönti el, hol fut a kódja. Az azd több gazdagépet támogat – a megfelelő kiválasztása fontosabb, mint az infrastruktúra nyelve. Itt egy kezdőknek szóló összehasonlítás:
 
-### Pulumi mappaszerkezet
-
-```
-infra/
-├── Pulumi.yaml          # project definition
-├── Pulumi.dev.yaml      # stack config (one per environment)
-├── index.ts             # your resource program (or __main__.py, main.go, etc.)
-├── package.json         # dependencies (for TypeScript)
-└── tsconfig.json
-```
-
-### Egy minimális `index.ts`
-
-```typescript
-import * as azure from "@pulumi/azure-native";
-import * as pulumi from "@pulumi/pulumi";
-
-const environmentName = pulumi.getStack();
-
-// Jelölj meg minden erőforrást, hogy az azd nyomon követhesse és eltakaríthassa őket
-const tags = { "azd-env-name": environmentName };
-
-const rg = new azure.resources.ResourceGroup("rg", {
-  resourceGroupName: `rg-${environmentName}`,
-  tags,
-});
-
-// azd ezeket a kimeneteket visszaolvassa a környezetedbe
-export const AZURE_LOCATION = rg.location;
-export const SERVICE_WEB_ENDPOINT_URL = "https://...";
-```
-
-### A stacket az azd környezetekhez rendeli
-
-A Pulumi a telepítéseket **stackekbe** szervezi, és az azd összerendeli az egyes azd környezeteket ugyanilyen nevű Pulumi stackekkel. Amikor az `azd env new staging` parancsot futtatja az azd kiválasztja (vagy létrehozza) a `staging` Pulumi stack-et. Ugyanaz az `azd-env-name` címkézési és `AZURE_*` kimeneti szabályok érvényesek, így az `azd down` megtalálhatja és törölheti az összeset.
-
-### Telepítés Pulumi-val
-
-```bash
-azd auth login
-azd env new dev
-azd provision --preview   # azd futtatja a 'pulumi preview'-t a háttérben
-azd up                    # előkészítés + telepítés
-azd down --force          # futtatja a 'pulumi destroy'-t
-```
-
-> **Előfeltétel:** A Pulumi telepítve legyen és elérhető az ön `PATH`-ján, valamint szüksége lesz egy állapot backend-re (Pulumi Cloud vagy egy önállóan kezelt backend, például Azure Blob Storage). Az azd kezeli a Pulumi *munkafolyamatot*, nem a telepítést. Lásd a hivatalos [azd Pulumi dokumentációt](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
-
-## 🎯 A hoszt kiválasztása szolgáltatásához
-
-Az `azure.yaml` fájl `host` mezője határozza meg, hol fut a kódja. Az azd több hosztot támogat – a megfelelő kiválasztása fontosabb az infrastruktúra nyelvénél. Íme egy kezdőbarát összehasonlítás:
-
-| `host` érték | Legjobb | Miért |
-|--------------|----------|-------|
-| `appservice` | Hagyományos webalkalmazások és API-k | Egyszerű legkevésbé erőforrásigényes PaaS; nem kell konténer |
+| `host` érték | Legalkalmasabb | Miért |
+|--------------|----------|-----|
+| `appservice` | Hagyományos webalkalmazások és API-k | Egyszerűbb PaaS; nem szükséges konténer |
 | `staticwebapp` | Front-end SPA-k (React, Vue, Angular) | Globális CDN + ingyenes SSL, beépített API támogatás |
-| `function` | Eseményvezérelt és szerver nélküli munkaterhelések | Automatikusan méretez zero-ra, fizetés futtatás szerint |
-| `containerapp` | Konténerizált mikroservízek | Szerver nélküli konténerek, automatikus skálázás, beépített bejövő forgalom |
-| `aks` | Összetett orchestration igények | Teljes Kubernetes kontroll valódi szükség esetén |
-| `springapp` | Java Spring Boot alkalmazások | Felügyelt Azure Spring Apps futtatókörnyezet Springre hangolva |
+| `function` | Eseményvezérelt és szerver nélküli munkafolyamatok | Scale-to-zero, fizetés futtatásonként |
+| `containerapp` | Konténerizált mikroszolgáltatások | Szerver nélküli konténerek, scale-to-zero, beépített belépés |
+| `aks` | Összetett orchestrációs igények | Teljes Kubernetes irányítás, ha tényleg szükséges |
+| `springapp` | Meglévő Azure Spring Apps telepítések | Elavult célpont; szolgáltatás 2028. március 31-én megszűnik és zárt új ügyfelek előtt |
 
-### Mikor érdemes AKS-t választani
+### Mikor használjuk az AKS-t
 
-**Azure Kubernetes Service (`host: aks`)** a Kubernetes teljes erejét adja – testreszabott kontrollerekkel, szolgáltatáshálók, összetett hálózatkezelés, és részletes ütemezés. Ez az erő hatalmas üzemeltetési terhet is jelent: a csomópont medencéket, frissítéseket és klaszterhálózatot Önnek kell kezelnie.
+**Azure Kubernetes Service (`host: aks`)** megadja a Kubernetes teljes erejét – egyedi kontrollerek, szolgáltatás hálózatok, összetett hálózat és finomhangolt ütemezés. Ez az erő nagy működtetési terhet is jelent: Ön kezeli a node poolokat, frissítéseket és a klaszter hálózatot.
 
 ```yaml
 services:
@@ -378,11 +323,11 @@ services:
     host: aks          # deploys to an existing AKS cluster
 ```
 
-> **Kezdje egyszerűbbel, ha lehet.** A legtöbb mikroservice esetében a **Container Apps** biztosít konténereket, automatikus skálázást, és skálázást nullára klaszterkezelés nélkül. AKS-t csak akkor válasszon, ha Kubernetes-specifikus funkciókra van szüksége.
+> **Kezdje egyszerűbben, ha tud.** A legtöbb mikroszolgáltatáshoz a **Container Apps** biztosít konténereket, automatikus skálázást és scale-to-zero funkciót klaszterkezelés nélkül. AKS-t csak akkor válasszon, ha Kubernetes-specifikus funkciókra van szüksége.
 
-### Mikor használjon Azure Spring Apps-t
+### Mikor használjuk az Azure Spring Apps-et
 
-**Azure Spring Apps (`host: springapp`)** egy menedzselt futtatókörnyezet, amely kifejezetten a Spring Boot számára készült. Kezeli a szolgáltatás-felderítést, konfigurációs szervert, és blue-green telepítést, így a Java csapatoknak nem kell saját infrastruktúrát üzemeltetniük.
+**Azure Spring Apps (`host: springapp`)** egy menedzselt futtatókörnyezet, amely kifejezetten a Spring Boot számára készült. Kezeli a szolgáltatás felfedezést, konfigurációs szervert és a blue-green telepítést, így a Java csapatoknak nem kell saját infrastruktúrát működtetniük.
 
 ```yaml
 services:
@@ -392,7 +337,7 @@ services:
     host: springapp
 ```
 
-> Használja a `springapp`-ot meglévő Spring Boot alkalmazásaihoz, ha egy rájuk hangolt futtatókörnyezetet szeretne. Új konténerizált Java alkalmazások esetén, amelyek nem igényelnek Spring-specifikus dolgokat, a `containerapp` gyakran egyszerűbb választás.
+> Ne válassza az Azure Spring Apps-et új kezdő projekthez: zárt az új ügyfelek előtt és [2028. március 31-én megszűnik](https://learn.microsoft.com/azure/spring-apps/basic-standard/retirement-announcement). Előnyben részesítendők a támogatott alternatívák, mint a Container Apps, és tervezze meg a meglévő telepítések migrációját.
 
 ## 🗃️ Adatbázis biztosítás
 
@@ -446,6 +391,8 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 ```
 
 ### PostgreSQL
+**Töredék előfeltételei:** deklarálja `@secure() param databasePassword string` és használjon erős megadott értéket. Válassza a nyilvános hozzáférést **vagy** integrálja az alább delegált alhálózat/privát DNS-t; a két töredék nem csatlakozik automatikusan egymáshoz.
+
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -492,6 +439,8 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
+A `0.0.0.0` szabály engedélyezi az Azure szolgáltatások kapcsolatait az előfizetésen túl. Ez nem privát hálózat; valós munkaterhelésekhez korlátozott hálózati terv ajánlott.
+
 ## 🔒 Biztonság és titkok kezelése
 
 ### Key Vault integráció
@@ -536,7 +485,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Managed Identity konfiguráció
+### Kezelt identitás konfiguráció
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -553,8 +502,8 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
           value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
         }
         {
-          name: 'AZURE_CLIENT_ID'
-          value: webApp.identity.principalId
+          name: 'NODE_ENV'
+          value: 'production'
         }
       ]
     }
@@ -562,7 +511,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Hálózat és kapcsolat
+Rendszer-hozta identitás esetén ne állítsa a `AZURE_CLIENT_ID`-t a főazonosítóra. Felhasználó-hozta identitás esetén annak **ügyfél azonosítóját** kell használni, nem a tárgy/főazonosítót. A Key Vault hivatkozás is igényli az alkalmazás identitásának kulcs tároló szerepkör hozzárendelését és hálózati hozzáférést.
+
+## 🌍 Hálózat és kapcsolódás
 
 ### Virtuális hálózat konfiguráció
 ```bicep
@@ -628,6 +579,8 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 ```
 
 ### Application Gateway SSL-lel
+**Hiányos architektúra töredék, nem telepíthető átjáró:** adjon hozzá dedikált `gateway-subnet`-t a VNet-hez, backend medencékkel, HTTP beállításokkal, hallgatókkal, prioritásos útvonal szabályokkal és TLS tanúsítvánnyal (vagy engedélyezett Key Vault hivatkozással). Csak a 443-as port megnyitása nem konfigurál HTTPS-t.
+
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -690,7 +643,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Figyelés és megfigyelhetőség
+## 📊 Monitorozás és megfigyelhetőség
 
 ### Application Insights
 ```bicep
@@ -721,7 +674,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Egyedi metrikák és riasztások
+### Egyéni metrikák és riasztások
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -731,7 +684,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
     description: 'Alert when CPU usage is high'
     severity: 2
     enabled: true
-    scopes: [webApp.id]
+    scopes: [appServicePlan.id]
     evaluationFrequency: 'PT5M'
     windowSize: 'PT5M'
     criteria: {
@@ -740,6 +693,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
         {
           name: 'CPU Usage'
           metricName: 'CpuPercentage'
+          metricNamespace: 'Microsoft.Web/serverfarms'
           operator: 'GreaterThan'
           threshold: 80
           timeAggregation: 'Average'
@@ -755,11 +709,14 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Környezet-specifikus konfigurációk
+## 🔧 Környezetspecifikus konfigurációk
 
 ### Paraméter fájlok különböző környezetekhez
+Az alábbi két fájl **alternatív paraméter-fájl példák**. Az azd nem választja automatikusan a `main.parameters.dev.json` vagy `main.parameters.prod.json`-t a környezet neve alapján. Használja a tényleges `main.parameters.json`-et környezeti helyettesítésekkel (például `${APP_SERVICE_SKU=B1}`), és deklarálja/fogyassza el minden paramétert a Bicep-ben.
+
+Példa tartalom a `infra/main.parameters.dev.json`-ra:
+
 ```json
-// infra/main.parameters.dev.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -783,8 +740,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
+Példa tartalom a `infra/main.parameters.prod.json`-ra:
+
 ```json
-// infra/main.parameters.prod.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -819,7 +777,7 @@ param environmentType string = 'dev'
 
 // Development resources
 resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'dev') {
-  name: '${applicationName}devstorage${resourceToken}'
+  name: 'stdev${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -829,7 +787,7 @@ resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environ
 
 // Production resources with geo-redundancy
 resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'prod') {
-  name: '${applicationName}prodstorage${resourceToken}'
+  name: 'stprod${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -843,9 +801,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Fejlett biztosítási minták
+## 🚀 Haladó biztosítási minták
 
-### Többszörös régiós telepítés
+### Több régiós telepítés
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -914,77 +872,53 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 ```
 
 ### Infrastruktúra tesztelés
-```bicep
-// infra/test/main.test.bicep
-param location string = resourceGroup().location
+```bash
+# Local compilation checks syntax/types; this does not provision infrastructure
+az bicep build --file infra/main.bicep --stdout
 
-module mainTemplate '../main.bicep' = {
-  name: 'main-template-test'
-  params: {
-    environmentName: 'test'
-    location: location
-    applicationName: 'testapp'
-  }
-}
-
-// Test assertions
-resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'test-deployment'
-  location: location
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '8.0'
-    scriptContent: '''
-      $webAppName = "${mainTemplate.outputs.WEB_NAME}"
-      $response = Invoke-WebRequest -Uri "https://${mainTemplate.outputs.WEB_URL}/health" -UseBasicParsing
-      if ($response.StatusCode -ne 200) {
-        throw "Health check failed"
-      }
-      Write-Output "All tests passed!"
-    '''
-    timeout: 'PT10M'
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'P1D'
-  }
-}
+# After deploying your own complete app, test an actual application route
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error "$WEB_URL"
 ```
 
-## 🧪 Infrastruktúra előnézet és ellenőrzés (ÚJ)
+Az infrastruktúra biztosítása nem telepíti alkalmazáskódját. Alkalmazásellenőrzéseket csak `azd deploy`/`azd up` után futtasson, és `/health` használatával csak akkor, ha az app implementálja. Az ARM telepítési szkriptek Azure erőforrásokat hoznak létre, és további identitást, támogatott futtatókörnyezet verziókat és engedélyeket igényelnek; nem helyi egységtesztek.
 
-### Előnézet az infrastruktúra változtatásairól telepítés előtt
+## 🧪 Infrastruktúra előnézete és érvényesítése (ÚJ)
 
-Az `azd provision --preview` funkció lehetővé teszi, hogy **szimulálja az infrastruktúra biztosítást** a tényleges erőforrások telepítése előtt. Ez hasonló szellemben működik, mint a `terraform plan` vagy a `bicep what-if`, egy **száraz futású nézetet** ad arról, milyen változtatások történnének az Azure környezetében.
+### Infrastruktúra változások előnézete telepítés előtt
+
+A `azd provision --preview` funkció lehetővé teszi a **szimulált infrastruktúra biztosítást** az erőforrások tényleges telepítése előtt. Hasonló a `terraform plan` vagy `bicep what-if` szelleméhez, egy **szárazfutás nézetet** adva az Azure környezetén esedékes változásokról.
 
 #### 🛠️ Mit csinál
-- **Elemzi az IaC sablonokat** (Bicep vagy Terraform)
-- **Előnézetet mutat az erőforrás változtatásokról**: hozzáadások, törlések, módosítások
-- **Nem hajt végre változtatásokat** – csak olvassa azokat, biztonságosan futtatható
+- **Elemzi IaC sablonjait** (Bicep vagy Terraform)
+- **Megjeleníti az erőforrás változások előnézetét**: hozzáadások, törlések, frissítések
+- **Nem alkalmazza a szolgáltató által javasolt infrastruktúra változásokat** — ellenőrizze projekthorogoltásokat először; a szkriptek mellékhatásokat okozhatnak és az előnézethez továbbra is szükséges az Azure engedély
 
-#### Felhasználási esetek
+#### Használati esetek
 ```bash
-# Infrastruktúra változtatások előzetes megtekintése telepítés előtt
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Előzetes megtekintés adott környezetre
+# Preview for specific environment
 azd provision --preview -e production
 ```
 
-Ez a parancs segít:
-- **Érvényesíteni az infrastruktúra változtatásait** az erőforrások elkötelezése előtt
-- **Korán felfedezni hibás konfigurációkat** a fejlesztési folyamatban
-- **Biztonságosan együttműködni** csapat környezetekben
-- **Biztosítani a legkisebb jogkörű telepítéseket** meglepetések nélkül
+Ez a parancs segít Önnek:
+- **Érvényesíteni infrastruktúra változásokat** mielőtt erőforrásokat fogad el
+- **Korán elcsípni hibás konfigurációkat** a fejlesztési ciklusban
+- **Biztonságosan együttműködni** csapat környezetben
+- **Biztosítani a legkisebb jogosultságú telepítést** meglepetések nélkül
 
 Különösen hasznos, ha:
-- Komplex többszolgáltatásos környezettel dolgozik
+- Összetett többszolgáltatásos környezettel dolgozik
 - Változtatásokat hajt végre éles infrastruktúrán
-- Érvényesíti a sablon módosításokat PR jóváhagyás előtt
+- Sablon módosításokat érvényesít PR jóváhagyás előtt
 - Új csapattagokat képez infrastruktúra mintákra
 
 ### Példa előnézeti kimenet
-A pontos előnézeti kimenet szolgáltatótól és projekt struktúrától függ, de az eredménynek egyértelműen azonosítania kell a javasolt változtatásokat mielőtt bármi alkalmazásra kerülne.
+A pontos előnézeti kimenet szolgáltatónként és projekt struktúránként változik, de az eredménynek világosan azonosítania kell a javasolt változásokat, mielőtt bármi alkalmazásra kerülne.
 
-```bash
+```text
 $ azd provision --preview
 
 🔍 Previewing infrastructure changes...
@@ -1011,18 +945,22 @@ The following resources will be destroyed:
 
 ### Biztonságos erőforrás frissítések
 ```bash
-# Előnézet készítése az infrastruktúra változásairól először (AJÁNLOTT)
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# A változtatások alkalmazása az előnézet visszaigazolása után
-azd provision --confirm-with-no-prompt
+# Apply changes after preview confirmation
+azd provision
+# In automation, --no-prompt uses known values and fails on unresolved decisions;
+# it is not an approval bypass.
 
-# Visszagörgetéshez használd a Git-et az infrastruktúra változtatások visszavonásához:
-git revert HEAD  # Az utolsó infrastruktúra commit visszaállítása
-azd provision    # Az előző infrastruktúra állapot alkalmazása
+# For rollback, use Git to revert infrastructure changes:
+git revert HEAD  # Revert last infrastructure commit
+azd provision    # Apply previous infrastructure state
 ```
 
-### Adatmigrációk
+### Adatbázis migrációk
+**Hiányos telepítési szkript minta:** szükséges egy felhasználó-hozott identitás konfigurálása ahol kell, támogatott Azure CLI futtatókörnyezet, elérhető migrációs eszközök, megadott migrációs könyvtár/konfiguráció és adatbázis kapcsolat. Nem futtatható csak az erőforrás sablonba illesztésével.
+
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -1047,11 +985,12 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
     ]
     timeout: 'PT30M'
     cleanupPreference: 'OnSuccess'
+    retentionInterval: 'P1D'
   }
 }
 ```
 
-## 🎯 Legjobb gyakorlatok
+## 🎯 Jó gyakorlatok
 
 ### 1. Erőforrás elnevezési konvenciók
 ```bicep
@@ -1059,13 +998,16 @@ var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
   appService: '${applicationName}-web-${resourceToken}'
   database: '${applicationName}-db-${resourceToken}'
-  storage: '${take(replace(applicationName, '-', ''), 15)}${environmentName}sa${take(resourceToken, 8)}'
-  keyVault: '${take(applicationName, 15)}-kv-${take(resourceToken, 8)}'
+  storage: 'st${resourceToken}' // lowercase alphanumeric, <=24 characters
+  keyVault: 'kv-${resourceToken}' // <=24 characters
 }
 ```
 
 ### 2. Címkézési stratégia
 ```bicep
+// utcNow is only allowed in a parameter default, not directly in a variable.
+param deploymentDate string = utcNow('yyyy-MM-dd')
+
 var commonTags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
@@ -1073,7 +1015,7 @@ var commonTags = {
   'cost-center': 'engineering'
   'owner': 'platform-team'
   'project': applicationName
-  'created-date': utcNow('yyyy-MM-dd')
+  'deployment-date': deploymentDate
 }
 ```
 
@@ -1093,7 +1035,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Kimeneti szervezés
+### 4. Kimenetek rendszerezése
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -1110,23 +1052,23 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Következő lépések
 
-- [Előtelepítési tervezés](../chapter-06-pre-deployment/capacity-planning.md) – Erőforrás elérhetőség érvényesítése
-- [Gyakori problémák](../chapter-07-troubleshooting/common-issues.md) – Infrastrukturális hibák elhárítása
-- [Hibakeresési útmutató](../chapter-07-troubleshooting/debugging.md) – Biztosítási problémák hibakeresése
-- [SKU kiválasztás](../chapter-06-pre-deployment/sku-selection.md) – Megfelelő szolgáltatási szintek kiválasztása
+- [Előtelepítés tervezés](../chapter-06-pre-deployment/capacity-planning.md) - Erőforrás elérhetőség érvényesítése
+- [Gyakori problémák](../chapter-07-troubleshooting/common-issues.md) - Infrastruktúra hibák hibaelhárítása
+- [Hibakeresési útmutató](../chapter-07-troubleshooting/debugging.md) - Problémák feltárása a felügyeletnél
+- [SKU kiválasztás](../chapter-06-pre-deployment/sku-selection.md) - Megfelelő szolgáltatási szintek kiválasztása
 
 ## További források
 
 - [Azure Bicep dokumentáció](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Resource Manager sablonok](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Azure Architektúra Központ](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Jól Megtervezett Keretrendszer](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Jól-Architektúrált Keretrendszer](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigáció**
 - **Előző lecke**: [Telepítési útmutató](deployment-guide.md)
-- **Következő lecke**: [Kapacitástervezés](../chapter-06-pre-deployment/capacity-planning.md)
+- **Következő lecke**: [Kapasitástervezés](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 

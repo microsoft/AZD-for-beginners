@@ -1,45 +1,47 @@
-# Azure ressursside provisjonimine AZD-ga
+# Azure'i ressursside ettevalmistamine AZD-ga
 
 **Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 4 - Infrastruktuur koodina ja juurutamine
-- **⬅️ Eelmine**: [Juurutusjuhend](deployment-guide.md)
-- **➡️ Järgmine peatükk**: [Peatükk 5: Mitmeagendi AI lahendused](../../examples/retail-scenario.md)
+- **📖 Praegune peatükk**: Peatükk 4 - Infrastruktuur koodina & juurutamine
+- **⬅️ Eelmine**: [Juurutamise juhend](deployment-guide.md)
+- **➡️ Järgmine peatükk**: [Peatükk 5: Mitme agenti AI lahendused](../../examples/retail-scenario.md)
 - **🔧 Seotud**: [Peatükk 6: Eeljuurutuse valideerimine](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Sissejuhatus
 
-See põhjalik juhend katab kõik, mida pead teadma Azure ressursside provisjonimisest ja haldamisest Azure Developer CLI abil. Õpi rakendama infrastruktuuri koodina (IaC) mustreid alates lihtsast ressursside loomisest kuni keerukate ettevõtte taseme infrastruktuuri arhitektuuride loomiseni Bicep, ARM mallide, Terraforma ja Pulumi abil.
+Käesolev juhend käsitleb Azure'i ressursside ettevalmistamist ja haldamist kasutades Azure Developer CLI-d koos selle sisseehitatud Bicep ja Terraform pakkujatega.
+
+> Kontrollitud vastavalt `azd 1.37.2` (november 2026). Kui ei ole teisiti märgitud, on Bicep-, Terraform- ja skriptinäited **illustreerivad fragmendid**, mitte täielik mall. Ühenda need projekti, mis pakub viidatud parameetreid, mooduleid, identiteete, võrgustikku ja rakenduse koodi. Azure'i ettevalmistamine ei toimunud selle ülevaate käigus.
 
 ## Õpieesmärgid
 
-Selle juhendi läbimisel:
-- Valdad infrastruktuuri koodina põhimõtteid ja Azure ressursside provisjonimist
-- Mõistad Azure Developer CLI toetatud mitut IaC pakkujat
-- Kujundad ja rakendad Bicep malle tavaliste rakenduste arhitektuuride jaoks
-- Konfigureerid ressursside parameetreid, muutujaid ja keskkonnaspetsiifilisi sätteid
-- Rakendad arenenud infrastruktuuri mustreid, kaasa arvatud võrgustiku ja turvalisuse
-- Halad ressursside elutsüklit, uuendusi ja sõltuvuste lahendamist
+Käesoleva juhendi lõpetamisega:
+- Saad valda Infrastruktuuri koodina põhimõtteid ja Azure'i ressursside ettevalmistamist
+- Mõistad mitmeid IaC pakkujaid, mida toetab Azure Developer CLI
+- Kujundad ja rakendad Bicep malle tavapäraste rakendusarhitektuuride jaoks
+- Konfigureerid ressursi parameetreid, muutujaid ja keskkondlikke seadeid
+- Rakendad täiustatud infrastruktuuri mustreid, sh võrgustikud ja turvalisus
+- Halad ressursi elutsüklit, uuendusi ja sõltuvuste lahendamist
 
 ## Õpitulemused
 
-Lõpetades saad:
-- Kujundada ja provisjonida Azure infrastruktuuri Bicep ja ARM mallide abil
-- Konfigureerida keerukaid mitme teenuse arhitektuure õige ressursisõltuvusega
-- Rakendada parameetriseeritud malle mitmele keskkonnale ja konfiguratsioonile
-- Tõrkeotsingut teha infrastruktuuri provisjonimisel ja lahendada juurutuse ebaõnnestumisi
-- Rakendada Azure hästi arhitektuuri raamistikku infrastruktuuri kujunduses
-- Haldada infrastruktuuri uuendusi ja rakendada versioonihaldusstrateegiaid
+Pärast juhendi lõpetamist suudad:
+- Kujundada ja ette valmistada Azure infrastruktuuri kasutades Bicep ja ARM malle
+- Konfigureerida keerukaid mitmeteenuseid arhitektuure koos sobivate ressursside sõltuvustega
+- Rakendada parameetriseeritud malle mitmes keskkonnas ja konfiguratsioonis
+- Lahendada infrastruktuuri ettevalmistamise probleeme ja juurutamise tõrkeid
+- Rakendada Azure hästi kujundatud raamistikupõhimõtteid infrastruktuuri disainis
+- Hallata infrastruktuuri uuendusi ja rakendada infrastruktuuri versioonihaldusstrateegiaid
 
-## Infrastruktuuri provisjonimise ülevaade
+## Infrastruktuuri ettevalmistamise ülevaade
 
-Azure Developer CLI toetab mitut infrastruktuuri koodina (IaC) pakkujat:
-- **Bicep** (soovitatud) - Azure domeenispetsiifiline keel
-- **ARM mallid** - JSON-põhised Azure Resource Manager’i mallid
-- **Terraform** - Mitme pilvega infrastruktuuritööriist
-- **Pulumi** - Kaasaegne infrastruktuur koodina, kasutades programmeerimiskeeli
+Azure Developer CLI toetab mitut Infrastruktuur kui Kood (IaC) pakkujat:
+- **Bicep** (soovitatav) - Azure'i domeenispetsiifiline keel
+- **ARM mallid** - Bicep kompileerib ARM-iks; puhast ARM JSON-i ei ole eraldi sisseehitatud `infra.provider`
+- **Terraform** - Mitme pilve infrastruktuuri tööriist
+- **Laienduse pakkujad** - Vajavad eraldi paigaldatud pakkuja laiendust ja selle dokumenteeritud konfiguratsiooni; ära eelda, et mõni pakkuja string oleks toetatud
 
-## Arusaamine Azure ressurssidest
+## Azure ressursside mõistmine
 
 ### Ressursside hierarhia
 ```
@@ -49,18 +51,19 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Levinumad Azure teenused rakendustele
-- **Arvutamine**: App Service, Container Apps, Functions, Virtual Machines
+### Rakenduste jaoks levinud Azure teenused
+- **Arvutus**: App Service, Container Apps, Functions, Virtuaalmasinad
 - **Salvestus**: Salvestuskonto, Cosmos DB, SQL andmebaas, PostgreSQL
-- **Võrgustik**: Virtuaalne võrk, Application Gateway, CDN
+- **Võrgustik**: Virtuaalne võrk, Rakenduse värav, CDN
 - **Turvalisus**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Azure AI teenused, Azure OpenAI, Azure Machine Learning
 
 ## Bicep infrastruktuuri mallid
 
-### Põhiline Bicep malli struktuur
+### Bicep malli põhiline struktuur
 ```bicep
-// infra/main.bicep
+// infra/modules/web.bicep - resource-group-scoped module fragment
+targetScope = 'resourceGroup'
 @description('The name of the environment')
 param environmentName string
 
@@ -75,11 +78,6 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var tags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
-}
-
-// Resource Group (created automatically by azd)
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
-  name: '${applicationName}-${environmentName}-rg'
 }
 
 // App Service Plan
@@ -100,11 +98,14 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'web' })
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
@@ -128,9 +129,11 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Arenenud Bicep mustrid
+Täieliku azd projekti jaoks kutsu see moodul tellimustasandil asuvast `infra/main.bicep`, mis loob sildistatud ressursigrupi ja edastab selle ulatuse. Sobita `environmentName`/`location` `main.parameters.json` sees. `azd-service-name: web` silt seob ressursi `services.web`; meelevaldsete väljundinimedega üksinda ei konfigureerita teenuse avastamist.
 
-#### Modulaarne infrastruktuur
+### Täiustatud Bicep mustrid
+
+#### Moodulipõhine infrastruktuur
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -142,11 +145,14 @@ param appSettings array = []
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: name
   location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: planId
     siteConfig: {
       appSettings: appSettings
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
     }
     httpsOnly: true
@@ -179,7 +185,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Tingimuslik ressursside loomine
+#### Tingimuslik ressursi loomine
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -202,11 +208,11 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 
 ## 🌐 Terraformi kasutamine azd-ga
 
-Bicep on azd vaikevariant, kuid azd toetab ka **Terraformi** – kasulik kui sinu meeskond kasutab seda juba standardina või haldad mitme pilve infrastruktuuri. Azd töövoog (`azd up`, `azd provision`, `azd down`) on identne; muutub ainult infrastruktuuri keel ja kaustade paigutus.
+Bicep on azd vaikimisi, kuid azd toetab ka **Terraformi** – kasulik, kui sinu meeskond juba standardiseerib selle peale või haldad mitmepilve infrastruktuuri. azd töövoog (`azd up`, `azd provision`, `azd down`) on identsed; muutub ainult infrastruktuuri keel ja kaustastruktuur.
 
 ### Ütle azd-le, et kasutaks Terraformi
 
-Lisa `azure.yaml` failile `infra` sektsioon, mis osutab Terraformi pakkujale:
+Lisa `infra` sektsioon `azure.yaml`, mis osutab Terraformi pakkujale:
 
 ```yaml
 # azure.yaml
@@ -223,7 +229,7 @@ services:
 
 ### Terraformi kaustastruktuur
 
-Terraformi pakkujaga kasutab su `infra/` kaust `.tf` faile Bicep asemel:
+Terraformi pakkujaga kasutab sinu `infra/` kaust `.tf` faile Bicepi asemel:
 
 ```
 infra/
@@ -234,7 +240,9 @@ infra/
 └── main.tfvars.json   # values azd injects per environment
 ```
 
-### Minimaalne `main.tf`
+### `main.tf` fragment
+
+See loob ainult ressursigrupi ja plaani, mitte juurutatavat teenust. Sa pead ka deklariseerima sisendimuutujad, sobiva `azurerm` pakkuja, veebirakenduse ja selle teenuse silti/ressursi nime kaardi.
 
 ```hcl
 # infra/main.tf
@@ -253,9 +261,9 @@ resource "azurerm_service_plan" "plan" {
 }
 ```
 
-### Kuidas azd loeb Terraformi väljundeid
+### Kuidas azd ühendub su Terraform väljunditega
 
-azd loeb Terraformi **väljundeid**, et teada saada oma lõpp-punkte ja siduda keskkonnamuutujad rakendusega. Väljundite nimed on olulised – azd otsib konkreetseid:
+azd loeb Terraformi **väljundid** keskkonnamuutujatesse. See fragment eeldab, et oled määratlenud `azurerm_linux_web_app.web`; teenuse avastamiseks on endiselt vaja sobivat ressursinime või `azd-service-name` silti:
 
 ```hcl
 # infra/outputs.tf
@@ -264,111 +272,48 @@ output "AZURE_LOCATION" {
 }
 
 output "SERVICE_WEB_ENDPOINT_URL" {
-  value = azurerm_linux_web_app.web.default_hostname
+  value = "https://${azurerm_linux_web_app.web.default_hostname}"
 }
 ```
 
-> **Oluline:** azd kasutab `azd-env-name` sildi ja `AZURE_*` väljundeid, et jälgida ressursse keskkonna lõikes. Märgi alati ressursside grupp sildiga `"azd-env-name" = var.environment_name`, nii suudab käsk `azd down` kõik tuvastada ja eemaldada.
+> **Tähtis:** azd kasutab `azd-env-name` silti ja `AZURE_*` väljundeid, et jälgida ressursse iga keskkonna kohta. Alati märgista oma ressursigrupp `"azd-env-name" = var.environment_name` abil, et `azd down` leiaks ja eemaldaks kõik.
 
-### Juurutus Terraformi abil
+### Juuruta Terraformiga
 
-Käsud on täpselt samad nagu Bicepi puhul:
-
-```bash
-azd auth login
-azd env new dev
-azd provision --preview   # azd käivitab "terraform plan" taustal
-azd up                    # varustamine + juurutamine
-azd down --force          # hävitab Terraformi hallatavad ressursid
-```
-
-> **Eeltingimus:** Terraform peab olema installitud ja sinu `PATH’is`. Azd haldab Terraformi *töövoogu*, aga ei installi Terraformi. Staatuse jaoks kasutab azd vaikeväärtusena lokaalset staatust; meeskondadel soovitatakse seadistada kaugtagatis (nt Azure Storage backend) failis `provider.tf`.
-
-Täielike ja käivitatavate Terraformi baasil alustajate näidete jaoks sirvi [Awesome AZD galeriid](https://azure.github.io/awesome-azd/) ja filtreeri Terraformi järgi või vaata ametlikku [azd Terraform dokumentatsiooni](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
-
-## 🧩 Pulumi kasutamine azd-ga
-
-Kui sinu meeskond kirjutab infrastruktuuri üldotstarbelises keeles (TypeScript, Python, Go või C#) mitte DSL-is, siis azd toetab ka **Pulumi**. Nagu Terraformi puhul, jääb `azd up` / `azd provision` / `azd down` töövoog muutumatuks – infrastruktuuri tööriistad ja kaustade struktuur on ainus erinevus.
-
-### Ütle azd-le, et kasutaks Pulumit
-
-```yaml
-# azure.yaml
-name: my-pulumi-app
-infra:
-  provider: pulumi      # default is "bicep"
-  path: infra           # folder containing your Pulumi program
-services:
-  web:
-    project: ./src
-    language: js
-    host: containerapp
-```
-
-### Pulumi kaustapakett
-
-```
-infra/
-├── Pulumi.yaml          # project definition
-├── Pulumi.dev.yaml      # stack config (one per environment)
-├── index.ts             # your resource program (or __main__.py, main.go, etc.)
-├── package.json         # dependencies (for TypeScript)
-└── tsconfig.json
-```
-
-### Minimaalne `index.ts`
-
-```typescript
-import * as azure from "@pulumi/azure-native";
-import * as pulumi from "@pulumi/pulumi";
-
-const environmentName = pulumi.getStack();
-
-// Märgi kõik ressursid, et azd saaks neid jälgida ja koristada
-const tags = { "azd-env-name": environmentName };
-
-const rg = new azure.resources.ResourceGroup("rg", {
-  resourceGroupName: `rg-${environmentName}`,
-  tags,
-});
-
-// azd loeb need väljundid tagasi sinu keskkonda
-export const AZURE_LOCATION = rg.location;
-export const SERVICE_WEB_ENDPOINT_URL = "https://...";
-```
-
-### Stakid seostuvad azd keskkondadega
-
-Pulumi korraldab juurutused **stakkidesse** ja azd seob iga azd keskkonna sama nimega Pulumi stakiga. Kui käivitate `azd env new staging`, valib või loob azd `staging` Pulumi staki. Kehtivad samad `azd-env-name` märgistuse ja `AZURE_*` väljundi reeglid, nii et `azd down` leiab ja eemaldab kõik.
-
-### Juurutus Pulumi abil
+Käsklused on täpselt samad mis Bicepiga:
 
 ```bash
 azd auth login
 azd env new dev
-azd provision --preview   # azd käivitab vaikimisi 'pulumi preview'
-azd up                    # hankimine + juurutamine
-azd down --force          # käivitab 'pulumi destroy'
+azd provision --preview   # azd runs 'terraform plan' under the hood
+azd up                    # provision + deploy
+azd down --force          # destroys the Terraform-managed resources
 ```
 
-> **Eeltingimus:** Pulumi peab olema installitud ja sinu `PATH’is`, ning vajad staatuse hoidmiseks backendit (Pulumi Cloud või ise hallatav backend nagu Azure Blob Storage). azd haldab Pulumi *töövoogu*, mitte installi. Vaata ametlikku [azd Pulumi dokumentatsiooni](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+> **Eeldus:** Terraform peab olema installitud ja sinu `PATH` sees. azd haldab Terraformi *töövoogu*, kuid ei paigalda seda sinu eest. Oleku jaoks kasutab azd vaikimisi kohalikku olekut; meeskondade jaoks seadista kauge tagapõhi (näiteks Azure Storage tagapõhi) `provider.tf`.
 
-## 🎯 Teenuse hosti valimine
+Täielike, käivitatavate Terraformi-põhiste algprojektide jaoks sirvi [Awesome AZD galeriid](https://azure.github.io/awesome-azd/) ja filtreeri Terraformi järgi või vaata ametlikku [azd Terraformi dokumentatsiooni](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
-`host` väli failis `azure.yaml` otsustab, kus su kood jookseb. azd toetab mitut hosti – õige valik on tähtsam kui infrastruktuuri keel. Siin on algajasõbralik võrdlus:
+## 🧩 Muud infrastruktuuritööriistad
 
-| `host` väärtus | Sobib hästi | Miks |
-|--------------|----------|-----|
-| `appservice` | Traditsioonilised veebirakendused ja API-d | Lihtsaim PaaS; konteinerid pole vajalikud |
-| `staticwebapp` | Esiotsa SPA-d (React, Vue, Angular) | Globaalne CDN + tasuta SSL, sisseehitatud API tugi |
-| `function` | Sündmuspõhised ja serverivabad tööload | Skaalub kuni nullini, maksa ainult käivitamise eest |
-| `containerapp` | Konteineripõhised mikroteenused | Serverivabad konteinerid, skaala kuni nullini, sisseehitatud sissetulek |
-| `aks` | Keerukad orkestreerimisvajadused | Täielik Kubernetes’i kontroll just siis, kui seda päriselt vajad |
-| `springapp` | Java Spring Boot rakendused | Hallatud Azure Spring Apps runtime, mis on optimeeritud Springi jaoks |
+Pulumi ei ole sisseehitatud azd 1.37.2 ettevalmistuse pakkuja. Ainult `infra.provider: pulumi` seadmine ei loo töötavat integratsiooni, ja `azd env new` ei loo ega vali automaatselt Pulumi virna. Kui kasutad mõnda muud IaC tööriista, järgi kinnitatud pakkuja laienduse dokumentatsiooni või halda selle elutsüklit oma töövoos selgelt. Käesolev kursus ei paku ega valideeri Pulumi pakkujat.
+
+## 🎯 Teenuse majutuse valik
+
+Välja `host` sees `azure.yaml` otsustab, kus sinu kood jookseb. azd toetab mitut majutuskeskkonda – õige valik on olulisem kui infrastruktuuri keel. Siin on algajasõbralik võrdlus:
+
+| `host` väärtus | Parim jaoks | Miks |
+|--------------|-------------|------|
+| `appservice` | Traditsioonilised veebirakendused ja APId | Lihtsaim PaaS; konteinerid pole vajalikud |
+| `staticwebapp` | Esirea SPA-d (React, Vue, Angular) | Globaalne CDN + tasuta SSL, sisseehitatud API tugi |
+| `function` | Sündmusel põhinevad ja serverivabad töömikud | Skaalumine nulli ja tasu käitumise järgi |
+| `containerapp` | Konteineriseeritud mikroteenused | Serverivad konteinerid, skaala nulli, sisseehitatud sissetulek |
+| `aks` | Keerukad orkestreerimisvajadused | Täielik Kubernetes juhtimine, kui seda päriselt vajad |
+| `springapp` | Olemasolevad Azure Spring Apps juurutused | Päritud sihtkoht; teenus lõpetatakse 31. märtsil 2028 ja on uutele klientidele suletud |
 
 ### Millal valida AKS
 
-**Azure Kubernetes Service (`host: aks`)** annab sulle kogu Kubernetes’i jõu – kohandatud kontrollerid, teenuse võrgustikud, keerukas võrguhaldus ja peenhäälestatud ajastamine. See võim kaasneb operatiivse koormusega: pead haldama sõlmede gruppe, uuendusi ja klastrivõrku.
+**Azure Kubernetes Service (`host: aks`)** annab sulle Kubernetes'i täisvõimsuse — kohandatud kontrollerid, teenuse meshid, keerukas võrgustik ja detailne ajastamine. See võimsus toob kaasa ka operatiivse koormuse: haldad sõlmede kelli, uuendusi ja klastrivõrgustikku.
 
 ```yaml
 services:
@@ -378,11 +323,11 @@ services:
     host: aks          # deploys to an existing AKS cluster
 ```
 
-> **Alusta lihtsamalt, kui võimalik.** Enamiku mikroteenuste puhul pakub **Container Apps** konteinerid, automaatskaala ja skaala-alla ilma klastrit haldamata. Vali AKS ainult siis, kui vajad Kubernetesile omaseid funktsioone.
+> **Alusta lihtsamalt kui saad.** Enamiku mikroteenuste puhul annab **Container Apps** konteinerid, automaatse skaleerimise ja nulli skaleerimise ilma, et peaksid klastrit haldama. Vali AKS ainult siis, kui vajad Kubernetes-spetsiifilisi funktsioone.
 
-### Millal kasutada Azure Spring Apps-i
+### Millal kasutada Azure Spring Apps
 
-**Azure Spring Apps (`host: springapp`)** on hallatud runtime, mis on spetsiaalselt loodud Spring Booti jaoks. See haldab teenuse avastust, konfiguratsiooniserverit ja sinine-roheline juurutust, nii et Java tiimid ei pea ise infrastruktuuri jooksutama.
+**Azure Spring Apps (`host: springapp`)** on hallatav tööaeg, mis on spetsiaalselt loodud Spring Boot'ile. See haldab teenuse avastamist, konfiguratsiooniserverit ja sinise-rohelise juurutamist, nii et Java meeskonnad ei pea oma infrastruktuuri jooksutama.
 
 ```yaml
 services:
@@ -392,9 +337,9 @@ services:
     host: springapp
 ```
 
-> Kasuta `springapp` juhul, kui sul on olemasolevad Spring Boot rakendused ja soovid neile optimeeritud runtime’i. Uute konteineripõhiste Java rakenduste puhul ilma Springi spetsiifiliste vajadusteta on sageli lihtsam valik `containerapp`.
+> Ära vali Azure Spring Appsi uue algajaprojekti jaoks: see on uutele klientidele suletud ja [lõpetatakse 31. märtsil 2028](https://learn.microsoft.com/azure/spring-apps/basic-standard/retirement-announcement). Eelista toetatud alternatiive nagu Container Apps ja planeeri migratsiooni olemasolevatele juurutustele.
 
-## 🗃️ Andmebaasi provisjonimine
+## 🗃️ Andmebaaside ettevalmistamine
 
 ### Cosmos DB
 ```bicep
@@ -446,6 +391,8 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 ```
 
 ### PostgreSQL
+**Fragmentide eeltingimused:** deklareeri `@secure() param databasePassword string` ja kasuta tugevat sisendväärtust. Vali avalik juurdepääs **või** integreeri allpool olev volitatud alamvõrk/privaatne DNS; need kaks lõiku ei ühendu automaatselt omavahel.
+
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -492,9 +439,11 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
+`0.0.0.0` reegel lubab ühendusi Azure teenustest väljaspool sinu tellimust. See ei ole privaatne võrgustik; eelistada tuleks piiratud võrgudisaini päris töökoormuste jaoks.
+
 ## 🔒 Turvalisus ja saladuste haldamine
 
-### Key Vault integratsioon
+### Key Vaulti integratsioon
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -536,7 +485,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Hallatud identiteedi seadistus
+### Hallatud identiteedi konfigureerimine
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -553,8 +502,8 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
           value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
         }
         {
-          name: 'AZURE_CLIENT_ID'
-          value: webApp.identity.principalId
+          name: 'NODE_ENV'
+          value: 'production'
         }
       ]
     }
@@ -562,9 +511,11 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
+Süsteemi määratud identiteedi puhul ära sea `AZURE_CLIENT_ID` selle põhi-ID-ks. Kasutaja määratud identiteet kasutab oma **kliendi ID-d**, mitte objekti/põhijuhte. Key Vaulti viide vajab ka rakenduse identiteedi võtmehoidla rolli määramist ja võrgule juurdepääsu.
+
 ## 🌍 Võrgustik ja ühenduvus
 
-### Virtuaalvõrgu seadistus
+### Virtuaalvõrgu konfigureerimine
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -627,7 +578,9 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### Application Gateway koos SSL-iga
+### Rakenduse värav SSL-iga
+**Täitmata arhitektuuri fragment, mitte juurutatav värav:** lisa pühendatud `gateway-subnet` virtuaalvõrku koos tagapoolsete basseinidega, HTTP seadistuste, kuulajate, marsruutimisreeglite prioriteetidega ja TLS sertifikaadiga (või volitatud Key Vaulti viitega). Ainult pordi 443 avamine ei konfigureeri HTTPS-i.
+
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -690,7 +643,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Jälgimine ja nähtavus
+## 📊 Järelevalve ja jälgitavus
 
 ### Application Insights
 ```bicep
@@ -721,7 +674,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Kohandatud mõõdikud ja häired
+### Kohandatud mõõdikud ja hoiatused
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -731,7 +684,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
     description: 'Alert when CPU usage is high'
     severity: 2
     enabled: true
-    scopes: [webApp.id]
+    scopes: [appServicePlan.id]
     evaluationFrequency: 'PT5M'
     windowSize: 'PT5M'
     criteria: {
@@ -740,6 +693,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
         {
           name: 'CPU Usage'
           metricName: 'CpuPercentage'
+          metricNamespace: 'Microsoft.Web/serverfarms'
           operator: 'GreaterThan'
           threshold: 80
           timeAggregation: 'Average'
@@ -757,9 +711,12 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ## 🔧 Keskkonnaspetsiifilised konfiguratsioonid
 
-### Parameetrite failid erinevatele keskkondadele
+### Parameeterfailid erinevatele keskkondadele
+Järgmised kaks faili on **alternatiivsed parameeterfailide näited**. azd ei vali ülesannete järgi automaatselt `main.parameters.dev.json` ega `main.parameters.prod.json`. Kasuta tegelikku `main.parameters.json` koos keskkonna asendustega (nt `${APP_SERVICE_SKU=B1}`) ja deklareeri/kasuuta iga parameetrit Bicepis.
+
+Näidis sisu jaoks `infra/main.parameters.dev.json`:
+
 ```json
-// infra/main.parameters.dev.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -783,8 +740,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
+Näidis sisu jaoks `infra/main.parameters.prod.json`:
+
 ```json
-// infra/main.parameters.prod.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -811,7 +769,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Tingimuslik ressursside provisjonimine
+### Tingimuslik ressursi ettevalmistamine
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -819,7 +777,7 @@ param environmentType string = 'dev'
 
 // Development resources
 resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'dev') {
-  name: '${applicationName}devstorage${resourceToken}'
+  name: 'stdev${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -829,7 +787,7 @@ resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environ
 
 // Production resources with geo-redundancy
 resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'prod') {
-  name: '${applicationName}prodstorage${resourceToken}'
+  name: 'stprod${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -843,7 +801,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Arendatud provisjonimise mustrid
+## 🚀 Täiustatud ettevalmistuse mustrid
 
 ### Mitmeregiooniline juurutus
 ```bicep
@@ -914,77 +872,53 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 ```
 
 ### Infrastruktuuri testimine
-```bicep
-// infra/test/main.test.bicep
-param location string = resourceGroup().location
+```bash
+# Local compilation checks syntax/types; this does not provision infrastructure
+az bicep build --file infra/main.bicep --stdout
 
-module mainTemplate '../main.bicep' = {
-  name: 'main-template-test'
-  params: {
-    environmentName: 'test'
-    location: location
-    applicationName: 'testapp'
-  }
-}
-
-// Test assertions
-resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'test-deployment'
-  location: location
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '8.0'
-    scriptContent: '''
-      $webAppName = "${mainTemplate.outputs.WEB_NAME}"
-      $response = Invoke-WebRequest -Uri "https://${mainTemplate.outputs.WEB_URL}/health" -UseBasicParsing
-      if ($response.StatusCode -ne 200) {
-        throw "Health check failed"
-      }
-      Write-Output "All tests passed!"
-    '''
-    timeout: 'PT10M'
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'P1D'
-  }
-}
+# After deploying your own complete app, test an actual application route
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error "$WEB_URL"
 ```
 
-## 🧪 Infrastruktuuri eelvaade ja valideerimine (UUED)
+Infrastruktuuri ettevalmistamine ei juuruta sinu rakenduse koodi. Käivita rakenduse testid alles pärast `azd deploy`/`azd up` ja kasuta `/health` ainult, kui sinu rakendus seda toetab. ARM juurutusskriptid loovad Azure ressursid ja nõuavad täiendavat identiteeti, toetatud runtime versioone ja õigusi; need ei ole kohalikud ühikutestid.
 
-### Eelvaata infrastruktuuri muudatusi enne juurutust
+## 🧪 Infrastruktuuri eelvaade ja valideerimine (UUS)
 
-Funktsioon `azd provision --preview` võimaldab **simuleerida infrastruktuuri provisjonimist** enne ressursside tegelikku juurutamist. See on sarnane `terraform plan` või `bicep what-if` käskudega, pakkudes **kuivjooksu vaadet** sellele, millised muudatused su Azure keskkonnas tehtaks.
+### Eelvaata muudatusi enne juurutamist
+
+`azd provision --preview` funktsioon võimaldab sul **simuleerida infrastruktuuri ettevalmistamist** enne tegelike ressursside juurutamist. See on sarnane `terraform plan` või `bicep what-if` vaimule, pakudes sulle **kuiva jooksu eelvaadet** sellest, milliseid muudatusi su Azure keskkonnas tehakse.
 
 #### 🛠️ Mida see teeb
-- **Analüüsib su IaC malle** (Bicep või Terraform)
-- **Näitab ressursside muudatuste eelvaadet**: lisamised, kustutamised, uuendused
-- **Ei rakenda muudatusi** – on ainult lugemisrežiimis ning ohutu kasutada
+- **Analüüsib sinu IaC malle** (Bicep või Terraform)
+- **Näitab ressursside muudatuste eelvaadet**: lisamise, kustutamise, uuendamisega
+- **Ei rakenda pakkuja pakutud infrastruktuuri muudatusi** — vaata enne projekti haake; skriptid võivad omada kõrvalmõjusid ja eelvaade vajab ikkagi Azure'i õigusi
 
 #### Kasutusjuhtumid
 ```bash
-# Ehituse muutuste eelvaade enne juurutamist
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Eelvaade konkreetse keskkonna jaoks
+# Preview for specific environment
 azd provision --preview -e production
 ```
 
 See käsk aitab sul:
 - **Valideerida infrastruktuuri muudatusi** enne ressursside pühendumist
-- **Tuvastada valesti seadistusi varajases arendusetapis**
-- **Koostööd teha turvaliselt meeskonna keskkonnas**
-- **Tagada minimaalsete õigustega juurutused ilma üllatusteta**
+- **Tuvastada valekonfiguratsioone varakult** arendustsükli jooksul
+- **Töötada turvaliselt meeskondlikes keskkondades**
+- **Tagada vähimate õigustega juurutused** ilma üllatusteta
 
-See sobib eriti hästi, kui:
-- Töötad keerukate mitmes teenuses keskkondadega
-- Teed muudatusi tootmisinfrastruktuuris
-- Valideerid mallimuudatusi enne PR kinnitamist
-- Koolitad uusi meeskonnaliikmeid infrastruktuuri mustritele
+See on eriti kasulik, kui:
+- Töötad keerukate mitmeteenuste keskkondadega
+- Teed muudatusi tootmise infrastruktuuris
+- Valideerid malli muudatusi enne PR kinnitamist
+- Koolitad uusi meeskonnaliikmeid infrastruktuuri mustrite osas
 
-### Eelvaate väljundi näide
-Täielik eelvaate väljund varieerub sõltuvalt pakkujast ja projekti struktuurist, kuid tulemus peaks selgelt näitama kavandatavaid muudatusi enne nende rakendamist.
+### Näidis eelvaate väljund
+Täpne eelvaate väljund varieerub pakkuja ja projekti struktuuri järgi, kuid tulemus peaks selgelt näitama kavandatud muudatusi enne, kui midagi rakendatakse.
 
-```bash
+```text
 $ azd provision --preview
 
 🔍 Previewing infrastructure changes...
@@ -1009,20 +943,24 @@ The following resources will be destroyed:
 
 ## �🔄 Ressursside uuendused ja migratsioonid
 
-### Turvalised ressursside uuendused
+### Turvalised ressursi uuendused
 ```bash
-# Vaadake esmalt infrastruktuuri muudatused üle (SOOVITATAV)
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Rakendage muudatused pärast eelvaate kinnitust
-azd provision --confirm-with-no-prompt
+# Apply changes after preview confirmation
+azd provision
+# In automation, --no-prompt uses known values and fails on unresolved decisions;
+# it is not an approval bypass.
 
-# Tagasikerimiseks kasutage Git'i infrastruktuuri muudatuste tagasi võtmiseks:
-git revert HEAD  # Võtke tagasi viimane infrastruktuuri commit
-azd provision    # Rakendage eelmine infrastruktuuri olek
+# For rollback, use Git to revert infrastructure changes:
+git revert HEAD  # Revert last infrastructure commit
+azd provision    # Apply previous infrastructure state
 ```
 
 ### Andmebaasi migratsioonid
+**Puudulik juurutusskriptide muster:** vajab konfigureeritud kasutaja määratud identiteeti seal, kus vaja, toetatud Azure CLI runtime'i, saadaval migratsioonitööriistu, antud migratsioonikausta/konfiguratsiooni ja andmebaasi ühenduvust. See ei ole täidetav ainult selle ressursi mallisse kleepimisega.
+
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -1047,11 +985,12 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
     ]
     timeout: 'PT30M'
     cleanupPreference: 'OnSuccess'
+    retentionInterval: 'P1D'
   }
 }
 ```
 
-## 🎯 Parimad tavad
+## 🎯 Parimad praktikad
 
 ### 1. Ressursside nimetamise konventsioonid
 ```bicep
@@ -1059,13 +998,16 @@ var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
   appService: '${applicationName}-web-${resourceToken}'
   database: '${applicationName}-db-${resourceToken}'
-  storage: '${take(replace(applicationName, '-', ''), 15)}${environmentName}sa${take(resourceToken, 8)}'
-  keyVault: '${take(applicationName, 15)}-kv-${take(resourceToken, 8)}'
+  storage: 'st${resourceToken}' // lowercase alphanumeric, <=24 characters
+  keyVault: 'kv-${resourceToken}' // <=24 characters
 }
 ```
 
-### 2. Sildistamisstrateegia
+### 2. Sildistamise strateegia
 ```bicep
+// utcNow is only allowed in a parameter default, not directly in a variable.
+param deploymentDate string = utcNow('yyyy-MM-dd')
+
 var commonTags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
@@ -1073,7 +1015,7 @@ var commonTags = {
   'cost-center': 'engineering'
   'owner': 'platform-team'
   'project': applicationName
-  'created-date': utcNow('yyyy-MM-dd')
+  'deployment-date': deploymentDate
 }
 ```
 
@@ -1093,7 +1035,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Väljundi organiseerimine
+### 4. Väljundite organiseerimine
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -1110,10 +1052,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Järgmised sammud
 
-- [Eeljuurutuse planeerimine](../chapter-06-pre-deployment/capacity-planning.md) - Ressursside kättesaadavuse valideerimine
-- [Levinumad probleemid](../chapter-07-troubleshooting/common-issues.md) - Infrastruktuuri probleemide tõrkeotsing
-- [Silumine](../chapter-07-troubleshooting/debugging.md) - Provisjonimisprobleemide silumine
-- [SKU valik](../chapter-06-pre-deployment/sku-selection.md) - Sobivate teenusetasemete valimine
+- [Eeljuurutuse planeerimine](../chapter-06-pre-deployment/capacity-planning.md) - Hoolitse ressursside olemasolu eest
+- [Levinud probleemid](../chapter-07-troubleshooting/common-issues.md) - Lahenda infrastruktuuri tõrkeid
+- [Silumise juhend](../chapter-07-troubleshooting/debugging.md) - tõrkeotsing potentsiaalsetes varustuse probleemides
+- [SKU valik](../chapter-06-pre-deployment/sku-selection.md) - vali sobivad teenustasemed
 
 ## Täiendavad ressursid
 
@@ -1125,8 +1067,8 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigeerimine**
-- **Eelmine õppetükk**: [Juurutusjuhend](deployment-guide.md)
-- **Järgmine õppetükk**: [Võimekuse planeerimine](../chapter-06-pre-deployment/capacity-planning.md)
+- **Eelmine õppetükk**: [Kohaleviimise juhend](deployment-guide.md)
+- **Järgmine õppetükk**: [Mahtude planeerimine](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 

@@ -1,90 +1,92 @@
-# SKU Selection Guide - Choosing the Right Azure Service Tiers
+# SKU ఎంపిక గైడ్ - సరైన Azure సర్వీస్ టియర్స్ ఎంచుకోవడం
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD ప్రారంభికులకు](../../README.md)
-- **📖 Current Chapter**: అధ్యాయం 6 - ప్రి-డిప్లాయ్‌మెంట్ ధ్రువీకరణ మరియు ప్రణాళిక
-- **⬅️ Previous**: [Capacity Planning](capacity-planning.md)
-- **➡️ Next**: [Pre-flight Checks](preflight-checks.md)
-- **🚀 Next Chapter**: [అధ్యాయం 7: సమస్య పరిష్కరణ](../chapter-07-troubleshooting/common-issues.md)
+**అధ్యాయం నావిగేషన్:**
+- **📚 కోర్స్ హోమ్**: [AZD ప్రారంభకులకు](../../README.md)
+- **📖 ప్రస్తుత అధ్యాయం**: అధ్యాయం 6 - ప్రీ-డిప్లాయ్‌మెంట్ ధృవీకరణ & ప్రణాళిక
+- **⬅️ముందటి**: [क्षमता योजना](capacity-planning.md)
+- **➡️తరువాత**: [ప్రి-ఫ్లైట్ చెక్కులు](preflight-checks.md)
+- **🚀 తదుపరి అధ్యాయం**: [అధ్యాయం 7: సమస్య పరిష్కారం](../chapter-07-troubleshooting/common-issues.md)
 
 ## పరిచయం
 
-ఈ సమగ్ర మార్గదర్శకము వివిధ పర్యావరణాలు, వర్క్‌లోడ్లు మరియు అవసరాల కోసం అనుకూల Azure సేవ SKUలు (Stock Keeping Units) ను ఎంచుకునే విధానంలో మీకు సహాయపడుతుంది. మీ Azure Developer CLI డిప్లాయ్‌మెంట్‌ల కోసం అభిమానమైన సేవా స్థాయిలను ఎంచుకోవడానికి పనితీరు అవసరాలు, ఖర్చు పరామర్శలు మరియు స్కేలబిలిటీ అవసరాలను విశ్లేషించడం నేర్చుకోండి.
+ఈ సమగ్ర గైడ్ మీరు వివిధ వాతావరణాలు, పనిభారం, మరియు అవసరాలకు సరిపోయే ఉత్తమ Azure సర్వీస్ SKUs (స్టాక్ కీపింగ్ యూనిట్స్) ఎంచుకోవడంలో సహాయపడుతుంది. పనితీరు అవసరాలు, వ్యయ పరిశీలన మరియు స్కేలబిలిటీ అవసరాలను విశ్లేషించి మీ Azure Developer CLI డిప్లాయ్‌మెంట్లకు సరైన సర్వీస్ టియర్స్ ఎంచుకోవడం నేర్చుకోండి.
 
 ## నేర్చుకునే లక్ష్యాలు
 
-ఈ మార్గదర్శకాన్ని పూర్తి చేసిన తర్వాత, మీరు:
-- Azure SKU కాన్సెప్ట్స్, ధర నమూనాలు, మరియు ఫీచర్ తేడాలను అర్థం చేసుకుంటారు
-- development, staging, మరియు production కోసం పర్యావరణ-నిర్దిష్ట SKU ఎంపిక వ్యూహాలలో నైపుణ్యాన్ని సంపాదిస్తారు
-- వర్క్‌లోడ్ అవసరాలను విశ్లేషించి వాటిని సరైన సేవా స్థాయిలకు సరిపోల్చడం నేర్చుకుంటారు
-- తెలివైన SKU ఎంపిక ద్వారా ఖర్చు ఆప్టిమైజేషన్ వ్యూహాలను అమలు చేస్తారు
-- SKU ఎంపికల కోసం పనితీరు పరీక్ష మరియు ధృవీకరణ సాంకేతికతలను వర్తింపజేస్తారు
-- ఆటోమేటెడ్ SKU సిఫార్సులు మరియు మానిటరింగ్‌ను కాంఫిగర్ చేస్తారు
+ఈ గైడ్ పూర్తి చేసిన తర్వాత, మీరు:
+- Azure SKU కాన్సెప్ట్స్, ధరల నమూనాలు, మరియు ఫీచర్ తేడాలను అర్థం చేసుకోగలరు
+- అభివృద్ధి, స్టేజింగ్, మరియు ప్రొడక్షన్ వాతావరణాలకు అనుగుణంగా SKU ఎంచుకునే వ్యూహాలలో నైపుణ్యం పొందగలరు
+- పనిభారం అవసరాలను విశ్లేషించి సరైన సర్వీస్ టియర్స్‌కు సరిపోల్చగలరు
+- తెలివైన SKU ఎంపిక ద్వారా వ్యయం ఆప్టిమైజేషన్ వ్యూహాలను అమలు చేయగలరు
+- SKU ఎంపికలకు పనితీరు పరీక్ష మరియు ధృవీకరణ సాంకేతికతలను వర్తించగలరు
+- ఆటోమేటెడ్ SKU సిఫార్సులు మరియు మోనిటరింగ్ సెటప్ చేయగలరు
 
 ## నేర్చుకున్న ఫలితాలు
 
-పూర్తి చేసిన తర్వాత, మీరు సాధించగలుగుతారు:
-- వర్క్‌లోడ్ అవసరాలు మరియు పరిమితులను ఆధారంగా సరైన Azure సేవ SKUలను ఎంచుకోవచ్చు
-- సరైన స్థాయి ఎంపికతో ఖర్చు-సమర్థమైన బహు-పర్యావరణ నిర్మాణాలను డిజైన్ చేయండి
-- SKU ఎంపికల కోసం పనితీరు బెంచ్మార్కింగ్ మరియు ధృవీకరణను అమలు చేయండి
-- SKU సిఫారసుల మరియు ఖర్చు ఆప్టిమైజేషన్ కోసం ఆటోమేటెడ్ టూల్స్ సృష్టించండి
-- మారుతున్న అవసరాల కోసం SKU మైగ్రేషన్లు మరియు స్కేలింగ్ వ్యూహాలను ప్లాన్ చేయండి
-- సేవా స్థాయి ఎంపికలో Azure Well-Architected Framework సూత్రాలను వర్తింపజేయండి
+పూర్తి చేసిన తరువాత, మీరు చేయగలరు:
+- పనిభార అవసరాలు మరియు పరిమితుల ఆధారంగా సరైన Azure సర్వీస్ SKUs ఎంచుకోవడం
+- సరైన టియర్ ఎంపికతో వ్యయ సమర్థవంతమైన బహు-వాతావరణ నిర్మాణాలను డిజైన్ చేయడం
+- SKU ఎంపికలకు పనితీరు బెంచ్‌మార్కింగ్ మరియు ధృవీకరణను అమలు చేయడం
+- SKU సిఫార్సులు మరియు వ్యయ ఆప్టిమైజేషన్ కోసం ఆటోమేటెడ్ టూల్స్ తయారు చేయడం
+- మారుతున్న అవసరాలకు SKU మైగ్రేషన్‌లు మరియు స్కేలింగ్ వ్యూహాలను ప్లాన్ చేయడం
+- Azure వీల్-ఆర్కిటెక్టెడ్ ఫ్రేమ్‌వర్క్ సూత్రాలను సర్వీస్ టియర్ ఎంపికలో వర్తించటం
 
-## సూచిక పట్టిక
+## విషయసૂచీ
 
-- [Understanding SKUs](../../../../docs/chapter-06-pre-deployment)
-- [Environment-Based Selection](../../../../docs/chapter-06-pre-deployment)
-- [Service-Specific Guidelines](../../../../docs/chapter-06-pre-deployment)
-- [Cost Optimization Strategies](../../../../docs/chapter-06-pre-deployment)
-- [Performance Considerations](../../../../docs/chapter-06-pre-deployment)
-- [Quick Reference Tables](../../../../docs/chapter-06-pre-deployment)
-- [Validation Tools](../../../../docs/chapter-06-pre-deployment)
+- [SKU లను అర్థం చేసుకోడం](#understanding-skus)
+- [వాతావరణ ఆధారిత ఎంపిక](#environment-based-selection)
+- [సర్వీస్-స్పెసిఫిక్ మార్గదర్శకాలు](#service-specific-guidelines)
+- [ఖర్చు ఆప్టిమైజేషన్ వ్యూహాలు](#cost-optimization-strategies)
+- [పనితీరు పరిశీలనలు](#performance-considerations)
+- [త్వరిత సూచిక పట్టికలు](#quick-reference-tables)
+- [ధృవీకరణ సాధనాలు](#validation-tools)
 
 ---
 
-## Understanding SKUs
+## SKU లను అర్థం చేసుకోవడం
 
-### SKUs అంటే ఏమిటి?
+> **ఉదాహరణ పరిధి:** YAML SKU మ్యాప్స్ మరియు పనితీరు కాన్ఫిగరేషన్లు క్రింద డిజైన్ గమనికలు మాత్రమే, `azure.yaml` స్కీమా లేదా లోడ్-టూల్ కాన్ఫిగరేషన్ కాదు. బైసిప్ బ్లాక్స్ ప్రత్యామ్నాయాలు/భాగాలు: వాటి పరామితులు మరియు ప్రెంట్ రిసోర్సులను ప్రకటించండి, వాటిని కలిపినప్పుడు ప్రత్యేక సంకేతాత్మక నామాలు ఉపయోగించండి మరియు మాడ్యూల్స్‌ను పనిపెట్టబడ్డ ప్రాజెక్టులో వాయర్ చేయండి. ధరలు, పరిమితులు, మరియు ప్రాంతం/SKU లభ్యతను మీ సబ్స్క్రిప్షన్ కోసం డిప్లాయ్‌మెంట్ ముందే పరిశీలించాలి.
 
-SKUs (Stock Keeping Units) అనేవి Azure రిసోర్సుల కోసం వివిధ సేవా స్థాయిలు మరియు పనితీరు స్థాయిలను సూచిస్తాయి. ప్రతి SKU వివిధ విషయాలను అందిస్తుంది:
+### SKU లు ఏమిటి?
+
+SKU లు (స్టాక్ కీపింగ్ యూనిట్స్) Azure వనరుల కోసం వేరే వేరే సర్వీస్ టియర్స్ మరియు పనితీరు స్థాయిలను సూచిస్తాయి. ప్రతి SKU ఏమిటి అందిస్తుంది:
 
 - **పనితీరు లక్షణాలు** (CPU, మెమరీ, థ్రూపుట్)
-- **ఫీచర్ లభ్యత** (స్కేలింగ్ ఎంపికలు, SLA స్థాయిలు)
-- **ధర నమూనాలు** (ఖర్చు-పరిమాణంపై ఆధారంగా, రిజర్వుడ్ కెపాసిటీ)
-- **ప్రాంతీయ లభ్యత** (ప్రతి ప్రాంతంలో అన్ని SKUలు లభ్యం ఉండవు)
+- **ఫీచర్ లభ్యత** (స్కేలింగ్ ఆప్షన్లు, SLA స్థాయిలు)
+- **ధర నమూనాలు** (ఖర్చు ఆధారిత, రిజర్వ్ కాపాసిటీ)
+- **ప్రాంతీయ లభ్యత** (అన్ని SKUలు అన్ని ప్రాంతాలలో అందుబాటులో ఉండవు)
 
-### SKU ఎంపికలో కీలక factorలు
+### SKU ఎంపికలో కీలక అంశాలు
 
-1. **వర్క్‌లోడ్ అవసరాలు**
-   - అంచనా ట్రాఫిక్/లొడ్ నమూనాలు
+1. **పనిభారం అవసరాలు**
+   - అంచనా ట్రాఫిక్/లోడ్ మోడళ్లు
    - పనితీరు అవసరాలు (CPU, మెమరీ, I/O)
    - నిల్వ అవసరాలు మరియు యాక్సెస్ నమూనాలు
 
-2. **పర్యావరణ రకం**
-   - Development/testing వర్సెస్ production
+2. **వాతావరణ రకం**
+   - అభివృద్ధి/పరీక్ష vs. ప్రొడక్షన్
    - లభ్యత అవసరాలు
-   - సెక్యూరిటీ మరియు కంప్లయెన్స్ అవసరాలు
+   - సెక్యూరిటీ మరియు అనుగుణత అవసరాలు
 
 3. **బడ్జెట్ పరిమితులు**
-   - ప్రారంభ ఖర్చులు వర్సెస్ ఆపరేషన్ ఖర్చులు
-   - రిజర్వ్డ్ కెపాసిటీ డిస్కౌంట్లు
-   - ఆటో-స్కేలింగ్ ఖర్చు ప్రభావాలు
+   - ప్రారంభ వ్యయాలు vs. ఆపరేషనల్ ఖర్చులు
+   - రిజర్వ్ కాపాసిటీ డిస్కౌంట్లు
+   - ఆటో-స్కేలింగ్ ఖర్చుల ప్రభావం
 
 4. **వృద్ధి అంచనాలు**
-   - స్కేల‌బిలిటీ అవసరాలు
+   - స్కేలబిలిటీ అవసరాలు
    - భవిష్యత్ ఫీచర్ అవసరాలు
-   - మైగ్రేషన్ సంక్లిష్టత
+   - మైగ్రేషన్ కాంప్లెక్సిటీ
 
 ---
 
-## Environment-Based Selection
+## వాతావరణ ఆధారిత ఎంపిక
 
-### Development Environment
+### అభివృద్ధి వాతావరణం
 
-**ప్రాధాన్యతలు**: ఖర్చు ఆప్టిమైజేషన్, మౌలిక కార్యాచరణ, సులభం provisioning/de-provisioning
+**ప్రాధాన్యతలు**: ఖర్చు ఆప్టిమైజేషన్, ప్రాథమిక ఫంక్షనాలిటీ, సులభమైన ప్రావిజనింగ్/డీ-ప్రావిజనింగ్
 
-#### Recommended SKUs
+#### సిఫార్సు చేసిన SKU లు
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### లక్షణాలు
-- **App Service**: సాదారణ పరీక్షల కోసం F1 (Free) లేదా B1 (Basic)
-- **Databases**: కనిష్ట వనరులతో Basic tier
-- **Storage**: స్థానిక రిడండన్సీతో Standard మాత్రమే
-- **Compute**: షేర్డ్ రిసోర్సులు అనుకూలం
-- **Networking**: ప్రాథమిక కట్టింగ్‌లు
+- **యాప్ సర్వీస్**: సులభ పరీక్షలకి F1 (ఉచితం) లేదా B1 (బేసిక్)
+- **డేటాబేస్‌లు**: కనిష్ట వనరులతో బేసిక్ టియర్
+- **స్టోరేజ్**: స్థానిక రెడండన్సీతో స్టాండర్డ్ మాత్రమే
+- **కంప్యూట్**: షేర్డ్ వనరులు అనుకూలం
+- **నెట్వర్కింగ్**: ప్రాథమిక కాన్ఫిగరేషన్లు
 
-### Staging/Testing Environment
+### స్టేజింగ్/పరీక్ష వాతావరణం
 
-**ప్రాధాన్యతలు**: ప్రొడక్షన్‌లాగా కాన్ఫిగరేషన్, ఖర్చు సమతుల్యం, పనితీరు పరీక్ష సామర్థ్యం
+**ప్రాధాన్యతలు**: ప్రొడక్షన్‌లాగా కాన్ఫిగరేషన్, ఖర్చు సమతౌల్యం, పనితీరు పరీక్ష సామర్థ్యం
 
-#### Recommended SKUs
+#### సిఫార్సు చేసిన SKU లు
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -121,55 +123,55 @@ skus:
 ```
 
 #### లక్షణాలు
-- **Performance**: ప్రొడక్షన్ సామర్ధ్యానికి 70-80%
-- **Features**: బహుళ ప్రొడక్షన్ ఫీచర్‌లు ఎనేబుల్ చేయబడినవి
-- **Redundancy**: కొంత భౌగోళిక redundancy
-- **Scaling**: పరీక్షలకి పరిమిత ఆటో-స్కేలింగ్
-- **Monitoring**: పూర్తయ్యిన మానిటరింగ్ స్టాక్
+- **పనితీరు**: ఉత్పత్తి సామర్థ్యం యొక్క 70-80%
+- **ఫీచర్లు**: ఎక్కువ భాగం ప్రొడక్షన్ ఫీచర్లు రానabled
+- **రెడండన్సీ**: కొంత భౌగోళిక రెడండన్సీ
+- **స్కేలింగ్**: పరీక్షల కోసం పరిమిత ఆటో-స్కేలింగ్
+- **మోనిటరింగ్**: పూర్తి మోనిటరింగ్ స్టాక్
 
-### Production Environment
+### ప్రొడక్షన్ వాతావరణం
 
-**ప్రాధాన్యతలు**: పనితీరు, లభ్యత, భద్రత, కంప్లయెన్స్, స్కేల‌బిలిటీ
+**ప్రాధాన్యతలు**: పనితీరు, లభ్యత, భద్రత, అనుగుణత, స్కేలబిలిటీ
 
-#### Recommended SKUs
+#### సిఫార్సు చేసిన SKU లు
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
 #### లక్షణాలు
-- **High availability**: 99.9%+ SLA అవసరాలు
-- **Performance**: డెడికేటెడ్ వనరులు, అధిక థ్రూపుట్
-- **Security**: ప్రీమియం సెక్యూరిటీ ఫీచర్లు
-- **Scaling**: పూర్తి ఆటో-స్కేలింగ్ సామర్థ్యాలు
-- **Monitoring**: సమగ్ర observability
+- **అత్యంత లభ్యత**: 99.9%+ SLA అవసరాలు
+- **పనితీరు**: ప్రత్యేక వనరులు, అధిక థ్రూపుట్
+- **భద్రత**: ప్రీమియం భద్రత ఫీచర్లు
+- **స్కేలింగ్**: పూర్తి ఆటో-స్కేలింగ్ సామర్థ్యాలు
+- **మోనిటరింగ్**: సమగ్ర విశ్లేషణ
 
 ---
 
-## Service-Specific Guidelines
+## సర్వీస్-స్పెసిఫిక్ మార్గదర్శకాలు
 
-### Azure App Service
+### Azure యాప్ సర్వీసు
 
-#### SKU Decision Matrix
+#### SKU నిర్ణయ మేట్రిక్స్
 
-| Use Case | Recommended SKU | Rationale |
+| ఉపయోగ కేసు | సిఫార్సు చేయబడిన SKU | కారణం |
 |----------|----------------|-----------|
-| Development/Testing | F1 (Free) or B1 (Basic) | ఖర్చుకు అనుకూలం, పరీక్షలకు తగినంత |
-| Small production apps | S1 (Standard) | కస్టమ్ డొమైన్‌లు, SSL, ఆటో-స్కేలింగ్ |
-| Medium production apps | P1V3 (Premium V3) | మెరుగైన పనితీరు, మరిన్ని ఫీచర్‌లు |
-| High-traffic apps | P2V3 or P3V3 | డెడికేటెడ్ వనరులు, అధిక పనితీరు |
-| Mission-critical apps | I1V2 (Isolated V2) | నెట్‌వర్క్ ఐసోలేషన్, డెడికేటెడ్ హార్డ్వేర్ |
+| అభివృద్ధి/పరీక్ష | F1 (ఉచితం) లేదా B1 (బేసిక్) | వ్యయ సమర్థవంతమైనది, పరీక్షలకు సరిపోతుంది |
+| చిన్న ప్రొడక్షన్ యాప్స్ | S1 (స్టాండర్డ్) | కస్టమ్ డొమైన్‌లు, SSL, ఆటో-స్కేలింగ్ |
+| మధ్యమ ప్రొడక్షన్ యాప్స్ | P1V3 (ప్రీమియం V3) | మెరుగైన పనితీరు, మరిన్ని ఫీచర్లు |
+| అధిక ట్రాఫిక్ యాప్స్ | P2V3 లేదా P3V3 | ప్రత్యేక వనరులు, అధిక పనితీరు |
+| మిషన్-క్రిటికల్ యాప్స్ | I1V2 (ఐసోలేటెడ్ V2) | నెట్వర్క్ ఐసోలేషన్, ప్రత్యేక హార్డ్‌వేర్ |
 
-#### Configuration Examples
+#### కాన్ఫిగరేషన్ ఉదాహరణలు
 
-**Development**
+**అభివృద్ధి**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-dev'
@@ -185,7 +187,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-**Production**
+**ప్రొడక్షన్**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-prod'
@@ -201,19 +203,19 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-### Azure SQL Database
+### Azure SQL డేటాబేస్
 
-#### SKU Selection Framework
+#### SKU ఎంపిక ఫ్రేమ్‌వర్క్
 
-1. **DTU-based (Database Transaction Units)**
-   - **Basic**: 5 DTU - Development/testing
-   - **Standard**: S0-S12 (10-3000 DTU) - సాధారణ ఉద్దేశ్యాలు
-   - **Premium**: P1-P15 (125-4000 DTU) - పనితీరు-నిర్ణయక
+1. **DTU-ఆధారిత (డేటాబేస్ ట్రాన్సాక్షన్ యూనిట్స్)**
+   - **బేసిక్**: 5 DTU - అభివృద్ధి/పరీక్ష
+   - **స్టాండర్డ్**: S0-S12 (10-3000 DTU) - జెనరల్ పర్పస్
+   - **ప్రీమియం**: P1-P15 (125-4000 DTU) - పనితీరు-తీవ్రమైన
 
-2. **vCore-based** (Productionకి సిఫార్సు చేయబడింది)
-   - **General Purpose**: సమతుల్య compute మరియు storage
-   - **Business Critical**: తక్కువ లేటెన్సీ, అధిక IOPS
-   - **Hyperscale**: అత్యధికంగా స్కేలబుల్ నిల్వ (అంతరించు 100TB వరకు)
+2. **vCore-ఆధారిత** (ప్రొడక్షన్‌కు సిఫార్సు చేయబడింది)
+   - **జెనరల్ పర్పస్**: సమతుల్య కంఫ్యూట్ మరియు నిల్వ
+   - **బిజినెస్ క్రిటికల్**: తక్కువ లేటెన్సీ, అధిక IOPS
+   - **హైపర్‌స్కేల్**: అత్యంత స్కేలబుల్ నిల్వ; ప్రస్తుత పరిమాణ పరిమితులు మరియు ప్రాంతీయ మద్దతును నిర్ధారించుకోండి
 
 #### ఉదాహరణ కాన్ఫిగరేషన్లు
 
@@ -250,23 +252,23 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 }
 ```
 
-### Azure Container Apps
+### Azure కంటెయినర్ యాప్స్
 
-#### Environment Types
+#### వాతావరణ రకాలు
 
-1. **Consumption-based**
-   - Pay-per-use pricing
-   - development మరియు మార్పిడి వర్క్‌లోడ్స్ కు సర్దుబాటు
-   - షేర్డ్ ఇన్‌ఫ్రాస్ట్రక్చర్
+1. **ఖర్చు-ఆధారిత**
+   - వినియోగం ప్రకారం చెల్లింపు
+   - అభివృద్ధి మరియు మార్పిడి పనిభారాలకు అనుకూలం
+   - షేర్డ్ మౌలిక సదుపాయాలు
 
-2. **Dedicated (Workload Profiles)**
-   - డెడికేటెడ్ compute వనరులు
-   - ఊహించదగిన పనితీరు
-   - ప్రొడక్షన్ వర్క్‌లోడ్స్ కోసం మెరుగ్గా
+2. **ప్రత్యేక (పనిభారం ప్రొఫైల్స్)**
+   - ప్రత్యేక కంఫ్యూట్ వనరులు
+   - అంచనా పనితీరు
+   - ప్రొడక్షన్ పనిభారాలకు మెరుగైనది
 
-#### Configuration Examples
+#### కాన్ఫిగరేషన్ ఉదాహరణలు
 
-**Development (Consumption)**
+**అభివృద్ధి (వినియోగం ఆధారిత)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Production (Dedicated)**
+**ప్రొడక్షన్ (ప్రత్యేక)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,33 +317,35 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
-### Azure Cosmos DB
+జోన్ రెడండన్సీకి మద్దతు ఉన్న ప్రాంతీయ మౌలిక సదుపాయాలు మరియు అనుకూల VNet/సబ్‌నెట్ కాన్ఫిగరేషన్ అవసరం, ఇది ఇక్కడ తగ్గించబడింది. ఈ ఉదాహరణలో మూడు ప్రత్యేక నోడ్ల బడ్జెట్ ఉన్నది; క్రాస్-జోన్ పంపిణీ కోసం కనీసం రెండు యాప్ రిప్లికాలను కన్ఫిగర్ చేయండి మరియు జోన్ వైఫల్యానికి రిప్లికాలు మరియు నోడ్ల పరిమాణాన్ని సెట్ చేయండి. [కంటెయినర్ యాప్స్ విశ్వసనీయత మార్గదర్శకం](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps) చూడండి. ఈ ప్రొఫైల్‌పై యాప్‌ను ఉంచడానికి, దాని `workloadProfileName: 'production-profile'` సెట్చేయాలి; ప్రొఫైల్ సృష్టించడం మాత్రమె యాప్స్‌ను దానికి తరలించడం కాదు.
 
-#### Throughput Models
+### Azure కోస్మోస్ DB
 
-1. **Manual Provisioned Throughput**
-   - ఊహించదగిన పనితీరు
-   - రిజర్వ్డ్ కెపాసిటీ డిస్కౌంట్లు
-   - స్థిరమైన వర్క్‌లోడ్స్‌కు ఉత్తమం
+#### థ్రూపుట్ మోడళ్లు
 
-2. **Autoscale Provisioned Throughput**
-   - ఉపయోగంపై ఆధారపడి ఆటోమేటిక్ స్కేల్ అవుతుంది
-   - మీరు ఉపయోగించే మేరకు చెల్లించండి (కనిష్టతో)
-   - మార్పిడీత్వ వర్క్‌లోడ్స్‌కు మంచిది
+1. **మెన్యువల్ ప్రోవిజన్డ్ థ్రూపుట్**
+   - అంచనా పనితీరు
+   - రిజర్వ్ కాపాసిటీ డిస్కౌంట్లు
+   - స్థిరమైన పనిభారాల కోసం ఉత్తమం
 
-3. **Serverless**
-   - ప్ర‌తి-రెక్వెస్ట్‌కు చెల్లింపు
-   - ప్రోవిజన్డ్ throughput అవసరం లేదు
-   - development మరియు మధ్యంతర వర్క్‌లోడ్స్‌కు идеల్
+2. **ఆటోస్కేల్ ప్రోవిజన్డ్ థ్రూపుట్**
+   - వినియోగంపై ఆధారపడి ఆటోమేటిక్ స్కేలింగ్
+   - ఉపయోగించిన మేరకు చెల్లించండి (కనిష్టం తో)
+   - మార్పిడి పనిభారాలకు సరైనది
 
-#### SKU Examples
+3. **సర్వర్‌లెస్**
+   - అభ్యర్థనల వారీగా చెల్లింపు
+   - ప్రోవిజన్డ్ థ్రూపుట్ లేదు
+   - అభివృద్ధి మరియు అంతరాయం ఉన్న పనిభారాలకు ఆదర్శం
+
+#### SKU ఉదాహరణలు
 
 ```bicep
 // Development - Serverless
@@ -396,19 +400,19 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 }
 ```
 
-### Azure Storage Account
+### Azure స్టోరేజ్ అకౌంట్
 
-#### Storage Account Types
+#### స్టోరేజ్ అకౌంట్ రకాలు
 
-1. **Standard_LRS** - Development, non-critical data
-2. **Standard_GRS** - Production, geo-redundancy అవసరమైనప్పుడు
-3. **Premium_LRS** - అధిక పనితీరు అప్లికేషన్స్
-4. **Premium_ZRS** - జోన్ రిడండన్సీతో అధిక లభ్యత
+1. **స్టాండర్డ్_LRS** - అభివృద్ధి, కాదు-తీవ్రమైన డేటా
+2. **స్టాండర్డ్_GRS** - ప్రొడక్షన్, భౌగోళిక రెడండన్సీ అవసరం
+3. **ప్రీమియం_LRS** - అధిక పనితీరు అప్లికేషన్లు
+4. **ప్రీమియం_ZRS** - జోన్ రెడండన్సీతో అధిక లభ్యత
 
-#### Performance Tiers
+#### పనితీరు టియర్స్
 
-- **Standard**: సాధారణ ఉద్దేశ్యం, ఖర్చుకు అనుకూలం
-- **Premium**: అధిక పనితీరు, తక్కువ లేటెన్సీ పరిస్థితులు
+- **స్టాండర్డ్**: సాధారణ ఉపయోగం, ఖర్చు సమర్థవంతం
+- **ప్రీమియం**: అధిక పనితీరు, తక్కువ లేటెన్సీ క్షేత్రాలు
 
 ```bicep
 // Development
@@ -449,21 +453,24 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ---
 
-## Cost Optimization Strategies
+## ఖర్చు ఆప్టిమైజేషన్ వ్యూహాలు
 
-### 1. Reserved Capacity
+### 1. రిజర్వ్ కాపాసిటీ
 
-1-3 సంవత్సరాల కోసం వనరులను రిజర్వ్ చేయండి భారీ డిస్కౌంట్స్ కోసం:
+గొప్ప డిస్కౌంట్ల కోసం 1-3 సంవత్సరాల కోసం వనరులను రిజర్వు చేయండి:
 
 ```bash
-# రిజర్వేషన్ ఎంపికలను తనిఖీ చేయండి
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. Right-Sizing
+రిజర్వేషన్ ఆఫరింగ్‌లు మరియు అర్హత గల వనరు రకాలు మారవచ్చు; ప్రతీ సర్వీస్/SKU రిజర్వేషన్ ను మద్దతు ఇచ్చిందని అనుకోవడం కాకుండా క్యాటలాగ్ మరియు కొనుగోలు నిబంధనలను పరిశీలించండి.
 
-చిన్న SKUలతో ప్రారంభించి వాస్తవ వినియోగంపై ఆధారంగా పెంచండి:
+### 2. సరైన వడిమినలు (Right-Sizing)
+
+చిన్న SKU లతో ప్రారంభించి వాస్తవ వినియోగం ఆధారంగా పెంపొందండి:
 
 ```yaml
 # Progressive scaling approach
@@ -477,7 +484,7 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. Auto-Scaling Configuration
+### 3. ఆటో-స్కేలింగ్ కాన్ఫిగరేషన్
 
 ఖర్చులను ఆప్టిమైజ్ చేయడానికి తెలివైన స్కేలింగ్ అమలు చేయండి:
 
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -536,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. Scheduled Scaling
+### 4. షెడ్యూల్ చేసిన స్కేలింగ్
 
-ఆఫ్-ఓర్లు సమయంలో స్కేల్ డౌన్ చేయండి:
+ఆఫ్-ఆవర్ల సమయంలో తగ్గించండి:
 
 ```json
 {
@@ -583,11 +592,11 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ---
 
-## Performance Considerations
+## పనితీరు పరిశీలనలు
 
-### Baseline Performance Requirements
+### బేస్లైన్ పనితీరు అవసరాలు
 
-SKU ఎంపికకు ముందు స్పష్టమైన పనితీరు అవసరాలను నిర్వచించండి:
+SKU ఎంచుకునే ముందుగా సున్నితం పనితీరు అవసరాలను నిర్వచించండి:
 
 ```yaml
 performance_requirements:
@@ -603,21 +612,23 @@ performance_requirements:
     rto: "30 minutes"
 ```
 
-### Load Testing
+### లోడ్ టెస్టింగ్
 
-పనితీరు ధృవీకరించడానికి వివిధ SKUలను పరీక్షించండి:
+పనితీరును ధృవీకరించడానికి వేర్వేరు SKUలను పరీక్షించండి:
 
 ```bash
-# Azure లోడ్ పరీక్ష సేవ
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
-### Monitoring and Optimization
+### మోనిటరింగ్ మరియు ఆప్టిమైజేషన్
 
-సమగ్ర మానిటరింగ్ సెటప్ చేయండి:
+సమగ్ర మోనిటరింగ్ సెటప్ చేయండి:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -644,45 +656,45 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## Quick Reference Tables
+## త్వరిత సూచిక పట్టికలు
 
-### App Service SKU Quick Reference
+### యాప్ సర్వీస్ SKU త్వరిత సూచిక
 
-| SKU | Tier | vCPU | RAM | Storage | Price Range | Use Case |
+| SKU | టియర్ | vCPU | RAM | నిల్వ | ధర పరిధి | ఉపయోగం కేసు |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | Free | Shared | 1GB | 1GB | Free | Development |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | చిన్న అప్లికేషన్లు |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Production |
-| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | అధిక పనితీరు |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | ఎంటర్ప్రైజ్ |
+| F1 | ఉచితం | షేర్డ్ | 1GB | 1GB | ఉచితం | అభివృద్ధి |
+| B1 | బేసిక్ | 1 | 1.75GB | 10GB | $ | చిన్న యాప్స్ |
+| S1 | స్టాండర్డ్ | 1 | 1.75GB | 50GB | $$ | ప్రొడక్షన్ |
+| P1V3 | ప్రీమియం V3 | 2 | 8GB | 250GB | $$$ | అధిక పనితీరు |
+| I1V2 | ఐసోలేటెడ్ V2 | 2 | 8GB | 1TB | $$$$ | ఎంటర్ప్రైజ్ |
 
-### SQL Database SKU Quick Reference
+### SQL డేటాబేస్ SKU త్వరిత సూచిక
 
-| SKU | Tier | DTU/vCore | Storage | Price Range | Use Case |
+| SKU | టియర్ | DTU/vCore | నిల్వ | ధర పరిధి | ఉపయోగం కేసు |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Development |
-| S2 | Standard | 50 DTU | 250GB | $$ | చిన్న ప్రొడక్షన్ |
-| P2 | Premium | 250 DTU | 1TB | $$$ | అధిక పనితీరు |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | సమతుల్య అవసరాలు |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | మిషన్-క్రిటికల్ |
+| బేసిక్ | బేసిక్ | 5 DTU | 2GB | $ | అభివృద్ధి |
+| S2 | స్టాండర్డ్ | 50 DTU | 250GB | $$ | చిన్న ప్రొడక్షన్ |
+| P2 | ప్రీమియం | 250 DTU | 1TB | $$$ | అధిక పనితీరు |
+| GP_Gen5_4 | జెనరల్ పర్పస్ | 4 vCore | 4TB | $$$ | సమతుల్యమైనది |
+| BC_Gen5_8 | బిజినెస్ క్రిటికల్ | 8 vCore | 4TB | $$$$ | మిషన్ క్రిటికల్ |
 
-### Container Apps SKU Quick Reference
+### కంటెయినర్ యాప్స్ SKU త్వరిత సూచిక
 
-| Model | Pricing | CPU/Memory | Use Case |
+| మోడల్ | ధరాచారం | CPU/మెమరీ | ఉపయోగం కేసు |
 |-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | Development, మార్పిడీత్వ లోడ్ |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | Production |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | అధిక పనితీరు |
+| వినియోగం | ఉపయోగించినదానికుగాను చెల్లింపు | వాతావరణం/ప్రొఫైల్ ఆధారంగా మద్దతుతో CPU/మెమరీ కలయికలు | అభివృద్ధి లేదా ప్రొడక్షన్, మార్పిడి లోడ్ |
+| ప్రత్యేక D4 | ప్రత్యేక నోడ్ బిల్లింగ్ | 4 vCPU, 16GiB ప్రతి నోడ్ | స్థిరమైన లోడ్/ఐసోలేషన్ అవసరాలు |
+| ప్రత్యేక D8 | ప్రత్యేక నోడ్ బిల్లింగ్ | 8 vCPU, 32GiB ప్రతి నోడ్ | ఎక్కువ స్థిరమైన లోడ్ |
 
 ---
 
-## Validation Tools
+## ధృవీకరణ సాధనాలు
 
-### SKU Availability Checker
+### SKU లభ్యత చెకర్
 
 ```bash
 #!/bin/bash
-# లక్ష్య ప్రాంతంలో SKU అందుబాటును తనిఖీ చేయండి
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# ఉపయోగం
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### Cost Estimation Script
+### ఖర్చు అంచనా స్క్రిప్ట్
+
+**సుడోకోడ్ మాత్రమే:** క్రింద `Get-ResourceCost` ప్రాజెక్ట్-నిర్దిష్ట ఫంక్షన్ మీరు అమలు చేయాలి ప్రస్తుత ప్రాంతీయ/ఒప్పంద ధరలు మరియు వినియోగ అంచనాలతో. ఇది పవర్‌షెల్ లేదా Azure cmdlet కాదు.
 
 ```powershell
-# ఖర్చు అంచనా కోసం PowerShell స్క్రిప్ట్
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Azure ధరల API లేదా క్యాల్క్యులేటర్ ఉపయోగించండి
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# ఉపయోగం
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -748,7 +763,9 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### Performance Validation
+### పనితీరు ధృవీకరణ
+
+ఈ క్రింది YAML అవసరాలకు రూపకల్పన మాత్రమే, **కాదు** Azure లోడ్ టెస్టింగ్, JMeter, Locust, లేదా k6 ఇన్‌పుట్ స్కీమా. పై లోడ్-టెస్ట్ కమాండ్ వాడే ముందు దీన్ని మీ ఎంపిక టూల్ యొక్క వాస్తవ కాన్ఫిగరేషన్‌గా మార్చండి.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,43 +800,43 @@ test_configuration:
 
 ---
 
-## ఉత్తమ ఆచరణలు (Best Practices) సంక్షిప్తం
+## ఉత్తమ ప్రచార సారాంశం
 
-### చేయాల్సినవి
+### చేయవలసినవి
 
-1. **Start small and scale up** వాస్తవ వినియోగ ఆధారంగా పెంచండి
-2. **Use different SKUs for different environments**
-3. **Monitor performance and costs continuously**
-4. **Leverage reserved capacity for production workloads**
-5. **Implement auto-scaling where appropriate**
-6. **Test performance with realistic workloads**
-7. **Plan for growth but avoid over-provisioning**
-8. **Use free tiers for development when possible**
+1. **చిన్నగా ప్రారంభించి వాస్తవ వినియోగం ఆధారంగా పెంపొందించండి**
+2. **వేర్వేరు వాతావరణాలకు వేర్వేరు SKUలను ఉపయోగించండి**
+3. **పనితీరు మరియు ఖర్చులను నిరంతరం మోనిటర్ చేయండి**
+4. **ప్రొడక్షన్ పనిభారాలకు రిజర్వ్ కాపాసిటీని ఉపయోగించండి**
+5. **సరైన చోట్ల ఆటో-స్కేలింగ్ అమలు చేయండి**
+6. **వాస్తవిక పనిభారాలతో పనితీరు పరీక్షించండి**
+7. **వృద్ధికి ప్లాన్ చేయండి కాని అతిగా ప్రావిజనింగ్ నుండి దూరంగా ఉండండి**
+8. **అభివృద్ధికి సాధ్యమైనప్పుడు ఉచిత టియర్స్ ఉపయోగించండి**
 
-### చేయకూడదని ఉన్నవి
+### చేయకూడని పనులు
 
-1. **Don't use production SKUs for development**
-2. **Don't ignore regional SKU availability**
-3. **Don't forget about data transfer costs**
-4. **Don't over-provision without justification**
-5. **Don't ignore the impact of dependencies**
-6. **Don't set auto-scaling limits too high**
-7. **Don't forget about compliance requirements**
-8. **Don't make decisions based on price alone**
-
----
-
-**Pro Tip**: వాస్తవ వినియోగ నమూనాల ఆధారంగా మీ SKU ఎంపికలను ఆప్టిమైజ్ చేయడానికి Azure Cost Management మరియు Advisor ను ఉపయోగించండి.
+1. **అభివృద్ధికి ప్రొడక్షన్ SKUలను ఉపయోగించవద్దు**
+2. **ప్రాంతీయ SKU లభ్యతను మిస్ అవ్వవద్దు**
+3. **డేటా ట్రాన్స్ఫర్ ఖర్చులను మరవవద్దు**
+4. **వాజిబైన కారణం లేకుండా అతిగా ప్రావిజనింగ్ చేయొద్దు**
+5. **ఆధారాలను దృష్టిలో పెట్టుకోకపోవద్దు**
+6. **అటో-స్కేలింగ్ పరిమితులను ఎక్కువగా సెట్ చేయొద్దు**
+7. **అనుగుణత అవసరాలను మరవవద్దు**
+8. **ధర ఆధారంగా మాత్రమే నిర్ణయాలు తీసుకోకూడదు**
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Capacity Planning](capacity-planning.md)
-- **Next Lesson**: [Preflight Checks](preflight-checks.md)
+**ప్రో చిట్కా**: మీ వాస్తవ వినియోగ నమూనాల ఆధారంగా SKU ఎంపికలను ఆప్టిమైజ్ చేయటానికి Azure ఖర్చు మేనేజ్మెంట్ మరియు అడ్వైజర్ ఉపయోగించి వ్యక్తిగత సిఫార్సులు పొందండి.
+
+---
+
+**నావిగేషన్**
+- **ముందటి పాఠము**: [क्षमता योजना](capacity-planning.md)
+- **తదుపరి పాఠము**: [ప్రి-ఫ్లైట్ చెక్కులు](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-నిరాకరణ:
-ఈ డాక్యుమెంట్‌ను AI అనువాద సేవ అయిన [Co-op Translator](https://github.com/Azure/co-op-translator) ద్వారా అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమేటెడ్ అనువాదాల్లో పొరపాట్లు లేదా లోపాలు ఉండవచ్చునని దయచేసి గమనించండి. మూల భాషలో ఉన్న అసలు డాక్యుమెంట్నే అధికారిక మూలంగా పరిగణించాలి. కీలకమైన సమాచారానికి వృత్తిపరమైన మానవ అనువాదాన్ని సిఫార్సు చేస్తున్నాము. ఈ అనువాదాన్ని ఉపయోగించడం వలన ఏర్పడే ఏవైనా అవగాహనా లోపాలు లేదా తప్పుగా అర్థం చేసుకోవడాలపై మేము బాధ్యులు కాదు.
+**అస్వీకరణ**:
+ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నిస్తున్నప్పటికీ, ఆటోమేటెడ్ అనువాదాలు తప్పులు లేదా అసమగ్రతలను కలిగి ఉండవచ్చు. దాని స్వదేశ భాషలో ఉన్న అసలు పత్రాన్ని అధికారం కలిగిన మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, ప్రొఫెషనల్ మానవ అనువాదాన్ని సిఫారసు చేస్తాము. ఈ అనువాదం ఉపయోగం వల్ల కలిగే ఏవైనా అపార్థాలు లేదా తప్పుదారులు కోసం మేము బాధ్యత వహించము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

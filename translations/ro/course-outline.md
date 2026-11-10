@@ -1,560 +1,560 @@
-# AZD For Beginners: Course Outline & Learning Framework
+# AZD Pentru Începători: Sumarul Cursului & Cadrul de Învățare
 
-## Course Overview
+## Prezentarea Cursului
 
-Master Azure Developer CLI (azd) through structured chapters designed for progressive learning. **Special focus on AI application deployment with Microsoft Foundry integration.**
+Stăpânește Azure Developer CLI (azd) prin capitole structurate concepute pentru învățare progresivă. **Accent special pe implementarea aplicațiilor AI cu integrarea Microsoft Foundry.**
 
-### Why This Course is Essential for Modern Developers
+### De ce este acest curs esențial pentru dezvoltatorii moderni
 
-Based on Microsoft Foundry Discord community insights, **45% of developers want to use AZD for AI workloads** but encounter challenges with:
-- Complex multi-service AI architectures
-- Production AI deployment best practices  
-- Azure AI service integration and configuration
-- Cost optimization for AI workloads
-- Troubleshooting AI-specific deployment issues
+Dezvoltatorii care implementează lucrări AI au adesea nevoie de ghidare privind:
+- Arhitecturi AI complexe cu mai multe servicii
+- Cele mai bune practici pentru implementarea AI în producție  
+- Integrarea și configurarea serviciilor Azure AI
+- Optimizarea costurilor pentru lucrările AI
+- Depanarea problemelor specifice implementării AI
 
-### Core Learning Objectives
+### Obiective de Învățare de Bază
 
-By completing this structured course, you will:
-- **Master AZD Fundamentals**: Core concepts, installation, and configuration
-- **Deploy AI Applications**: Use AZD with Microsoft Foundry services
-- **Implement Infrastructure as Code**: Manage Azure resources with Bicep templates
-- **Troubleshoot Deployments**: Resolve common issues and debug problems
-- **Optimize for Production**: Security, scaling, monitoring, and cost management
-- **Build Multi-Agent Solutions**: Deploy complex AI architectures
+Finalizând acest curs structurat, vei:
+- **Stăpâni Fundamentele AZD**: Concepte de bază, instalare și configurare
+- **Implementa Aplicații AI**: Folosește AZD cu serviciile Microsoft Foundry
+- **Implementează Infrastructură ca și Cod**: Gestionează resurse Azure cu șabloane Bicep
+- **Depanează Implementările**: Rezolvă probleme comune și depanează erori
+- ** Optimizează pentru Producție**: Securitate, scalare, monitorizare și management al costurilor
+- **Construiește Soluții Multi-Agent**: Implementează arhitecturi AI complexe
 
-## 🎓 Workshop Learning Experience
+## 🎓 Experiența de Învățare în Atelier
 
-### Flexible Learning Delivery Options
-This course is designed to support both **self-paced individual learning** and **facilitated workshop sessions**, enabling learners to get hands-on experience with AZD while developing practical skills through interactive exercises.
+### Opțiuni Flexibile de Livrare a Învățării
+Acest curs este conceput să susțină atât **învățarea individuală în ritm propriu**, cât și **sesiuni facilitate de atelier**, permițând cursanților să obțină experiență practică cu AZD în timp ce dezvoltă abilități practice prin exerciții interactive.
 
-#### 🚀 Self-Paced Learning Mode
-**Perfect for individual developers and continuous learning**
+#### 🚀 Modul de Învățare în Ritm Propriu
+**Perfect pentru dezvoltatori individuali și învățare continuă**
 
-**Features:**
-- **Browser-Based Interface**: Complete MkDocs-powered workshop accessible through any web browser
-- **GitHub Codespaces Integration**: One-click development environment with pre-configured tools
-- **Interactive DevContainer Environment**: No local setup required - start coding immediately
-- **Progress Tracking**: Built-in checkpoints and validation exercises
-- **Community Support**: Access to Azure Discord channels for questions and collaboration
+**Caracteristici:**
+- **Interfață bazată pe browser**: Atelier complet alimentat de MkDocs accesibil prin orice browser web
+- **Integrare GitHub Codespaces**: Mediu de dezvoltare cu un singur clic cu instrumente preconfigurate
+- **Mediu interactiv DevContainer**: Nu este necesară configurarea locală - începe să programezi imediat
+- **Urmărirea progresului**: Puncte de control și exerciții de validare încorporate
+- **Suport comunitar**: Acces la canalele Discord Azure pentru întrebări și colaborare
 
-**Learning Structure:**
-- **Flexible Timing**: Complete chapters at your own pace over days or weeks
-- **Checkpoint System**: Validate learning before advancing to complex topics
-- **Resource Library**: Comprehensive documentation, examples, and troubleshooting guides
-- **Portfolio Development**: Build deployable projects for professional portfolios
+**Structura Învățării:**
+- **Timp flexibil**: Finalizează capitolele în ritmul tău, pe zile sau săptămâni
+- **Sistem de puncte de control**: Validează învățarea înainte de a trece la subiecte complexe
+- **Bibliotecă de resurse**: Documentație cuprinzătoare, exemple și ghiduri de depanare
+- **Dezvoltarea portofoliului**: Construiește proiecte implementabile pentru portofolii profesionale
 
-**Getting Started (Self-Paced):**
+**Începe (Ritm Propriu):**
 ```bash
-# Opțiunea 1: GitHub Codespaces (Recomandată)
-# Accesați depozitul și faceți clic pe "Code" → "Create codespace on main"
+# Option 1: GitHub Codespaces (Recommended)
+# Navigate to the repository and click "Code" → "Create codespace on main"
 
-# Opțiunea 2: Dezvoltare locală
+# Option 2: Local Development
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Urmați instrucțiunile de configurare din workshop/README.md
+# Follow setup instructions in workshop/README.md
 ```
 
-#### 🏛️ Facilitated Workshop Sessions
-**Ideal for corporate training, bootcamps, and educational institutions**
+#### 🏛️ Sesiuni Facilitated Workshop
+**Ideal pentru training corporativ, bootcamp-uri și instituții educaționale**
 
-**Workshop Format Options:**
+**Opțiuni de format pentru atelier:**
 
-**📚 Academic Course Integration (8-12 weeks)**
-- **University Programs**: Semester-long course with weekly 2-hour sessions
-- **Bootcamp Format**: Intensive 3-5 day program with daily 6-8 hour sessions
-- **Corporate Training**: Monthly team sessions with practical project implementation
-- **Assessment Framework**: Graded assignments, peer reviews, and final projects
+**📚 Integrare curs academic (8-12 săptămâni)**
+- **Programe universitare**: Curs pe semestru cu sesiuni săptămânale de 2 ore
+- **Format Bootcamp**: Program intensiv de 3-5 zile cu sesiuni zilnice de 6-8 ore
+- **Training corporativ**: Sesiuni lunare pentru echipe cu implementare practică de proiecte
+- **Cadru de evaluare**: Temele notate, evaluări între colegi și proiecte finale
 
-**🚀 Intensive Workshop (1-3 days)**
-- **Day 1**: Foundation + AI Development (Chapters 1-2) - 6 hours
-- **Day 2**: Configuration + Infrastructure (Chapters 3-4) - 6 hours  
-- **Day 3**: Advanced Patterns + Production (Chapters 5-8) - 8 hours
-- **Follow-up**: Optional 2-week mentorship for project completion
+**🚀 Atelier intensiv (1-3 zile)**
+- **Ziua 1**: Fundamente + Dezvoltare AI (Capitolele 1-2) - 6 ore
+- **Ziua 2**: Configurare + Infrastructură (Capitolele 3-4) - 6 ore  
+- **Ziua 3**: Modele avansate + Producție (Capitolele 5-8) - 8 ore
+- **Urmărire**: Mentorare opțională de 2 săptămâni pentru finalizarea proiectului
 
-**⚡ Executive Briefing (4-6 hours)**
-- **Strategic Overview**: AZD value proposition and business impact (1 hour)
-- **Hands-On Demo**: Deploy AI application end-to-end (2 hours)
-- **Architecture Review**: Enterprise patterns and governance (1 hour)
-- **Implementation Planning**: Organizational adoption strategy (1-2 hours)
+**⚡ Briefing executiv (4-6 ore)**
+- **Prezentare strategică**: Propunerea de valoare AZD și impactul asupra afacerii (1 oră)
+- **Demo Practic**: Implementare completă a unei aplicații AI (2 ore)
+- **Revizuirea arhitecturii**: Modele enterprise și guvernanță (1 oră)
+- **Planificare implementare**: Strategie de adopție organizațională (1-2 ore)
 
-#### 🛠️ Workshop Learning Methodology
-**Discovery → Deployment → Customization approach for hands-on skill development**
+#### 🛠️ Metodologia de Învățare a Atelierului
+**Abordarea Descoperire → Implementare → Personalizare pentru dezvoltarea abilităților practice**
 
-**Phase 1: Discovery (45 minutes)**
-- **Template Exploration**: Evaluate Microsoft Foundry templates and services
-- **Architecture Analysis**: Understand multi-agent patterns and deployment strategies
-- **Requirement Assessment**: Identify organizational needs and constraints
-- **Environment Setup**: Configure development environment and Azure resources
+**Faza 1: Descoperire (45 minute)**
+- **Explorarea șabloanelor**: Evaluează șabloanele și serviciile Microsoft Foundry
+- **Analiza arhitecturii**: Înțelege modelele multi-agent și strategiile de implementare
+- **Evaluarea cerințelor**: Identifică nevoile și constrângerile organizaționale
+- **Configurarea mediului**: Configurează mediul de dezvoltare și resursele Azure
 
-**Phase 2: Deployment (2 hours)**
-- **Guided Implementation**: Step-by-step deployment of AI applications with AZD
-- **Service Configuration**: Configure Azure AI services, endpoints, and authentication
-- **Security Implementation**: Apply enterprise security patterns and access controls
-- **Validation Testing**: Verify deployments and troubleshoot common issues
+**Faza 2: Implementare (2 ore)**
+- **Implementare ghidată**: Implementare pas cu pas a aplicațiilor AI cu AZD
+- **Configurare servicii**: Configurează serviciile Azure AI, punctele finale și autentificarea
+- **Implementare securitate**: Aplică modele de securitate enterprise și controale de acces
+- **Testare de validare**: Verifică implementările și depanează probleme comune
 
-**Phase 3: Customization (45 minutes)**
-- **Application Modification**: Adapt templates for specific use cases and requirements
-- **Production Optimization**: Implement monitoring, cost management, and scaling strategies
-- **Advanced Patterns**: Explore multi-agent coordination and complex architectures
-- **Next Steps Planning**: Define learning path for continued skill development
+**Faza 3: Personalizare (45 minute)**
+- **Modificarea aplicației**: Adaptează șabloanele pentru cazuri de utilizare și cerințe specifice
+- **Optimizare pentru producție**: Implementează monitorizare, managementul costurilor și strategii de scalare
+- **Modele avansate**: Explorează coordonarea multi-agent și arhitecturi complexe
+- **Planificarea pașilor următori**: Definește calea de învățare pentru dezvoltarea continuă a abilităților
 
-#### 🎯 Workshop Learning Outcomes
-**Measurable skills developed through hands-on practice**
+#### 🎯 Rezultatele Învățării Atelierului
+**Competențe măsurabile dezvoltate prin practică hands-on**
 
-**Technical Competencies:**
-- **Deploy Production AI Applications**: Successfully deploy and configure AI-powered solutions
-- **Infrastructure as Code Mastery**: Create and manage custom Bicep templates
-- **Multi-Agent Architecture**: Implement coordinated AI agent solutions
-- **Production Readiness**: Apply security, monitoring, and governance patterns
-- **Troubleshooting Expertise**: Independently resolve deployment and configuration issues
+**Competențe tehnice:**
+- **Implementarea aplicațiilor AI în producție**: Implementează și configurează soluții AI eficiente
+- **Stăpânire Infrastructură ca și Cod**: Creează și gestionează șabloane Bicep personalizate
+- **Arhitectură multi-agent**: Implementează soluții AI coordonate multi-agent
+- **Pregătire pentru producție**: Aplică modele de securitate, monitorizare și guvernanță
+- **Expertiză în depanare**: Rezolvă independent probleme de implementare și configurare
 
-**Professional Skills:**
-- **Project Leadership**: Lead technical teams in cloud deployment initiatives
-- **Architecture Design**: Design scalable, cost-effective Azure solutions
-- **Knowledge Transfer**: Train and mentor colleagues in AZD best practices
-- **Strategic Planning**: Influence organizational cloud adoption strategies
+**Competențe profesionale:**
+- **Leadership în proiecte**: Conduce echipe tehnice în inițiative de implementare cloud
+- **Design arhitectural**: Proiectează soluții Azure scalabile și eficiente ca și cost
+- **Transfer de cunoștințe**: Instruieste și mentorizează colegii în bune practici AZD
+- **Planificare strategică**: Influențează strategiile organizaționale de adopție cloud
 
-#### 📋 Workshop Resources and Materials
-**Comprehensive toolkit for facilitators and learners**
+#### 📋 Resurse și materiale pentru atelier
+**Kit cuprinzător pentru facilitatorii și cursanții atelierului**
 
-**For Facilitators:**
-- **Instructor Guide**: [Workshop Overview](workshop/README.md) - Session planning and delivery guidance
-- **Presentation Materials**: Slide decks, architecture diagrams, and demo scripts
-- **Assessment Tools**: Practical exercises, knowledge checks, and evaluation rubrics
-- **Technical Setup**: Environment configuration, troubleshooting guides, and backup plans
+**Pentru facilitatori:**
+- **Ghid instructor**: [Prezentare atelier](workshop/README.md) - Planificarea și livrarea sesiunilor
+- **Materiale de prezentare**: Slide-uri, diagrame arhitecturale și scripturi demo
+- **Instrumente de evaluare**: Exerciții practice, verificări de cunoștințe și rubrici de evaluare
+- **Configurare tehnică**: Configurarea mediului, ghiduri de depanare și planuri de rezervă
 
-**For Learners:**
-- **Interactive Workshop Environment**: [Workshop Materials](workshop/README.md) - Browser-based learning platform
-- **Step-by-Step Instructions**: [Guided Exercises](../../workshop/docs/instructions) - Detailed implementation walkthroughs  
-- **Reference Documentation**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-focused deep dives
-- **Community Resources**: Azure Discord channels, GitHub discussions, and expert support
+**Pentru cursanți:**
+- **Mediu interactiv de atelier**: [Materiale atelier](workshop/README.md) - Platformă de învățare bazată pe browser
+- **Instrucțiuni pas cu pas**: [Exerciții ghidate](../../workshop/docs/instructions) - Tutoriale detaliate de implementare  
+- **Documentație de referință**: [Laborator AI Atelier](docs/chapter-02-ai-development/ai-workshop-lab.md) - Explorări aprofundate axate pe AI
+- **Resurse comunitare**: Canale Discord Azure, discuții GitHub și suport de la experți
 
-#### 🏢 Enterprise Workshop Implementation
-**Organizational deployment and training strategies**
+#### 🏢 Implementarea atelierului în mediul enterprise
+**Strategii de implementare organizațională și training**
 
-**Corporate Training Programs:**
-- **Developer Onboarding**: New hire orientation with AZD fundamentals (2-4 weeks)
-- **Team Upskilling**: Quarterly workshops for existing development teams (1-2 days)
-- **Architecture Review**: Monthly sessions for senior engineers and architects (4 hours)
-- **Leadership Briefings**: Executive workshops for technical decision makers (half-day)
+**Programe de training corporativ:**
+- **Orientare pentru dezvoltatori**: Inducerea noilor angajați cu fundamente AZD (2-4 săptămâni)
+- **Dezvoltarea echipei**: Workshop-uri trimestriale pentru echipe de dezvoltare existente (1-2 zile)
+- **Revizuirea arhitecturii**: Sesiuni lunare pentru ingineri seniori și arhitecți (4 ore)
+- **Briefing-uri executive**: Workshop-uri pentru decidenți tehnici (jumătate de zi)
 
-**Implementation Support:**
-- **Custom Workshop Design**: Tailored content for specific organizational needs
-- **Pilot Program Management**: Structured rollout with success metrics and feedback loops  
-- **Ongoing Mentorship**: Post-workshop support for project implementation
-- **Community Building**: Internal Azure AI developer communities and knowledge sharing
+**Suport pentru implementare:**
+- **Design personalizat de atelier**: Conținut adaptat nevoilor organizaționale specifice
+- **Management program pilot**: Lansare structurată cu metrici de succes și feedback  
+- **Mentorat continuu**: Suport post-atelier pentru implementarea proiectelor
+- **Construirea comunității**: Comunități interne de dezvoltatori Azure AI și partajare de cunoștințe
 
-**Success Metrics:**
-- **Skill Acquisition**: Pre/post assessments measuring technical competency growth
-- **Deployment Success**: Percentage of participants successfully deploying production applications
-- **Time to Productivity**: Reduced onboarding time for new Azure AI projects
-- **Knowledge Retention**: Follow-up assessments 3-6 months post-workshop
+**Metrici de succes:**
+- **Dobândirea abilităților**: Evaluări pre/post care măsoară creșterea competențelor tehnice
+- **Succes în implementare**: Procentajul participanților care implementează cu succes aplicații în producție
+- **Timp până la productivitate**: Reducerea timpului de inducere pentru noi proiecte Azure AI
+- **Reținerea cunoștințelor**: Evaluări ulterioare la 3-6 luni după atelier
 
-## 8-Chapter Learning Structure
+## Structura de Învățare în 8 Capitole
 
-### Chapter 1: Foundation & Quick Start (30-45 minutes) 🌱
-**Precondiții**: Azure subscription, basic command line knowledge  
+### Capitolul 1: Fundamente & Pornire Rapidă (30-45 minute) 🌱
+**Prerechizite**: Abonament Azure, cunoștințe de bază în linia de comandă  
 **Complexitate**: ⭐
 
-#### What You'll Learn
-- Understanding Azure Developer CLI fundamentals
-- Installing AZD on your platform  
-- Your first successful deployment
-- Core concepts and terminology
+#### Ce vei învăța
+- Înțelegerea fundamentelor Azure Developer CLI
+- Instalarea AZD pe platforma ta  
+- Prima ta implementare cu succes
+- Concepte și terminologie de bază
 
-#### Learning Resources
-- [AZD Basics](docs/getting-started/azd-basics.md) - Core concepts
-- [Installation & Setup](docs/getting-started/installation.md) - Platform-specific guides
-- [Your First Project](docs/getting-started/first-project.md) - Hands-on tutorial
-- [Command Cheat Sheet](resources/cheat-sheet.md) - Quick reference
+#### Resurse de Învățare
+- [Noțiuni de bază AZD](docs/chapter-01-foundation/azd-basics.md) - Concepte fundamentale
+- [Instalare & Configurare](docs/chapter-01-foundation/installation.md) - Ghiduri specifice platformei
+- [Primul tău proiect](docs/chapter-01-foundation/first-project.md) - Tutorial practic
+- [Fișă de comenzi rapide](resources/cheat-sheet.md) - Referință rapidă
 
-#### Practical Outcome
-Successfully deploy a simple web application to Azure using AZD
-
----
-
-### Chapter 2: AI-First Development (1-2 hours) 🤖
-**Precondiții**: Chapter 1 completed  
-**Complexitate**: ⭐⭐
-
-#### What You'll Learn
-- Microsoft Foundry integration with AZD
-- Deploying AI-powered applications
-- Understanding AI service configurations
-- RAG (Retrieval-Augmented Generation) patterns
-
-#### Learning Resources
-- [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- [AI Model Deployment](docs/microsoft-foundry/ai-model-deployment.md)
-- [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - **NEW**: Comprehensive 2-3 hour hands-on lab
-- [Interactive Workshop Guide](workshop/README.md) - **NEW**: Browser-based workshop with MkDocs preview
-- [Microsoft Foundry Templates](README.md#featured-microsoft-foundry-templates)
-- [Workshop Instructions](../../workshop/docs/instructions) - **NEW**: Step-by-step guided exercises
-
-#### Practical Outcome
-Deploy and configure an AI-powered chat application with RAG capabilities
-
-#### Workshop Learning Path (Optional Enhancement)
-**NEW Interactive Experience**: [Complete Workshop Guide](workshop/README.md)
-1. **Discovery** (30 mins): Template selection and evaluation
-2. **Deployment** (45 mins): Deploy and validate AI template functionality  
-3. **Deconstruction** (30 mins): Understand template architecture and components
-4. **Configuration** (30 mins): Customize settings and parameters
-5. **Customization** (45 mins): Modify and iterate to make it yours
-6. **Teardown** (15 mins): Clean up resources and understand lifecycle
-7. **Wrap-up** (15 mins): Next steps and advanced learning paths
+#### Rezultat Practic
+Implementează cu succes o aplicație web simplă în Azure folosind AZD
 
 ---
 
-### Chapter 3: Configuration & Authentication (45-60 minutes) ⚙️
-**Precondiții**: Chapter 1 completed  
-**Complexitate**: ⭐⭐
-
-#### What You'll Learn
-- Environment configuration and management
-- Authentication and security best practices
-- Resource naming and organization
-- Multi-environment deployments
-
-#### Learning Resources
-- [Configuration Guide](docs/getting-started/configuration.md) - Environment setup
-- [Authentication & Security Patterns](docs/getting-started/authsecurity.md) - Managed identity and Key Vault integration
-- Multi-environment examples
-
-#### Practical Outcome
-Manage multiple environments with proper authentication and security
-
----
-
-### Chapter 4: Infrastructure as Code & Deployment (1-1.5 hours) 🏗️
-**Precondiții**: Chapters 1-3 completed  
-**Complexitate**: ⭐⭐⭐
-
-#### What You'll Learn
-- Advanced deployment patterns
-- Infrastructure as Code with Bicep
-- Resource provisioning strategies
-- Custom template creation
-
-- Containerized application deployment with Azure Container Apps and AZD
-
-#### Learning Resources
-- [Deployment Guide](docs/deployment/deployment-guide.md) - Complete workflows
-- [Provisioning Resources](docs/deployment/provisioning.md) - Resource management
-- Container and microservices examples
-- [Container App Examples](examples/container-app/README.md) - Quick start, production, and advanced deployment patterns
-
-#### Practical Outcome
-Deploy complex multi-service applications using custom infrastructure templates
-
----
-
-### Chapter 5: Multi-Agent AI Solutions (2-3 hours) 🤖🤖
-**Precondiții**: Chapters 1-2 completed  
-**Complexitate**: ⭐⭐⭐⭐
-
-#### What You'll Learn
-- Multi-agent architecture patterns
-- Agent orchestration and coordination
-- Production-ready AI deployments
-- Customer and Inventory agent implementations
-
-- Integrating containerized microservices as part of agent-based solutions
-
-#### Learning Resources
-- [Retail Multi-Agent Solution](examples/retail-scenario.md) - Complete implementation
-- [ARM Template Package](../../examples/retail-multiagent-arm-template) - One-click deployment
-- Multi-agent coordination patterns
-- [Microservices Architecture Example](../../examples/container-app/microservices) - Service-to-service communication, async messaging, and production deployment
-
-#### Practical Outcome
-Deploy and manage a production-ready multi-agent AI solution
-
----
-
-### Chapter 6: Pre-Deployment Validation & Planning (1 hour) 🔍
-**Precondiții**: Chapter 4 completed  
-**Complexitate**: ⭐⭐
-
-#### What You'll Learn
-- Capacity planning and resource validation
-- SKU selection strategies
-- Pre-flight checks and automation
-- Cost optimization planning
-
-#### Learning Resources
-- [Capacity Planning](docs/pre-deployment/capacity-planning.md) - Resource validation
-- [SKU Selection](docs/pre-deployment/sku-selection.md) - Cost-effective choices
-- [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Automated scripts
-- [Application Insights Integration](docs/pre-deployment/application-insights.md) - Monitoring and observability
-- [Multi-Agent Coordination Patterns](docs/pre-deployment/coordination-patterns.md) - Agent orchestration strategies
-
-#### Practical Outcome
-Validate and optimize deployments before execution
-
----
-
-### Capitolul 7: Depanare și debugare (1-1.5 ore) 🔧
-**Prerechizite**: Orice capitol de implementare finalizat  
+### Capitolul 2: Dezvoltare AI-First (1-2 ore) 🤖
+**Prerechizite**: Capitolul 1 finalizat  
 **Complexitate**: ⭐⭐
 
 #### Ce vei învăța
+- Integrarea Microsoft Foundry cu AZD
+- Implementarea aplicațiilor alimentate de AI
+- Înțelegerea configurațiilor serviciilor AI
+- Modelele RAG (Generarea Augmentată prin Recuperare)
+
+#### Resurse de Învățare
+- [Integrarea Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- [Implementarea Modelului AI](docs/chapter-02-ai-development/ai-model-deployment.md)
+- [Laborator AI Atelier](docs/chapter-02-ai-development/ai-workshop-lab.md) - **NOU**: Laborator practic cuprinzător de 2-3 ore
+- [Ghid interactiv atelier](workshop/README.md) - **NOU**: Atelier bazat pe browser cu previzualizare MkDocs
+- [Șabloane Microsoft Foundry](README.md#featured-microsoft-foundry-templates)
+- [Instrucțiuni atelier](../../workshop/docs/instructions) - **NOU**: Exerciții ghidate pas cu pas
+
+#### Rezultat Practic
+Implementează și configurează o aplicație de chat AI cu capabilități RAG
+
+#### Calea de învățare a atelierului (Îmbunătățire opțională)
+**Nouă experiență interactivă**: [Ghid complet de atelier](workshop/README.md)
+1. **Descoperire** (30 min): Selectarea și evaluarea șabloanelor
+2. **Implementare** (45 min): Implementarea și validarea funcționalității șablonului AI  
+3. **Deconstrucție** (30 min): Înțelegerea arhitecturii și componentelor șablonului
+4. **Configurare** (30 min): Personalizarea setărilor și parametrilor
+5. **Personalizare** (45 min): Modificarea și iterarea pentru a-l face al tău
+6. **Demontare** (15 min): Curățarea resurselor și înțelegerea ciclului de viață
+7. **Încheiere** (15 min): Pașii următori și căi avansate de învățare
+
+---
+
+### Capitolul 3: Configurare & Autentificare (45-60 minute) ⚙️
+**Prerechizite**: Capitolul 1 finalizat  
+**Complexitate**: ⭐⭐
+
+#### Ce vei învăța
+- Configurarea și gestionarea mediului
+- Practici recomandate de autentificare și securitate
+- Denumirea și organizarea resurselor
+- Implementări multi-mediu
+
+#### Resurse de Învățare
+- [Ghid de configurare](docs/chapter-03-configuration/configuration.md) - Configurarea mediului
+- [Modele de autentificare & securitate](docs/chapter-03-configuration/authsecurity.md) - Identitate gestionată și integrare Key Vault
+- Exemple multi-mediu
+
+#### Rezultat Practic
+Gestionează medii multiple cu autentificare și securitate corespunzătoare
+
+---
+
+### Capitolul 4: Infrastructură ca Cod & Implementare (1-1.5 ore) 🏗️
+**Prerechizite**: Capitolele 1-3 finalizate  
+**Complexitate**: ⭐⭐⭐
+
+#### Ce vei învăța
+- Modele avansate de implementare
+- Infrastructură ca Cod cu Bicep
+- Strategii de aprovizionare a resurselor
+- Crearea de șabloane customizate
+
+- Implementarea aplicațiilor containerizate cu Azure Container Apps și AZD
+
+#### Resurse de Învățare
+- [Ghid de implementare](docs/chapter-04-infrastructure/deployment-guide.md) - Fluxuri de lucru complete
+- [Aprovizionarea resurselor](docs/chapter-04-infrastructure/provisioning.md) - Managementul resurselor
+- Exemple container și microservicii
+- [Exemple Container Apps](examples/container-app/README.md) - Pornire rapidă, producție și modele avansate
+
+#### Rezultat Practic
+Implementează aplicații multi-serviciu complexe folosind șabloane personalizate de infrastructură
+
+---
+
+### Capitolul 5: Soluții AI Multi-Agent (2-3 ore) 🤖🤖
+**Prerechizite**: Capitolele 1-2 finalizate  
+**Complexitate**: ⭐⭐⭐⭐
+
+#### Ce vei învăța
+- Modele arhitecturale multi-agent
+- Orchestrarea și coordonarea agenților
+- Implementări AI pregătite pentru producție
+- Implementări agent client și inventar
+
+- Integrarea microserviciilor containerizate ca parte a soluțiilor bazate pe agenți
+
+#### Resurse de Învățare
+- [Soluție Multi-Agent Retail](examples/retail-scenario.md) - Plan arhitectural, nu o aplicație completă
+- [Pachet șabloane ARM](../../examples/retail-multiagent-arm-template) - Schelet de infrastructură cu prerechizite pentru implementare
+- Modele de coordonare multi-agent
+- [Exemplu arhitectură microservicii](../../examples/container-app/microservices) - Comunicare între servicii, mesagerie asincronă, implementare în producție
+
+#### Rezultat Practic
+Proiectează o soluție AI multi-agent și identifică implementarea aplicației, validarea și operațiunile necesare dincolo de aprovizionarea infrastructurii
+
+---
+
+### Capitolul 6: Validare & Planificare Pre-Implementare (1 oră) 🔍
+**Prerechizite**: Capitolul 4 finalizat  
+**Complexitate**: ⭐⭐
+
+#### Ce vei învăța
+- Planificarea capacității și validarea resurselor
+- Strategii de selecție SKU
+- Verificări pre-implementare și automatizare
+- Planificarea optimizării costurilor
+
+#### Resurse de Învățare
+- [Planificarea capacității](docs/chapter-06-pre-deployment/capacity-planning.md) - Validarea resurselor
+- [Selecția SKU](docs/chapter-06-pre-deployment/sku-selection.md) - Alegeri cost-eficiente
+- [Verificări pre-implementare](docs/chapter-06-pre-deployment/preflight-checks.md) - Scripturi automate
+- [Integrarea Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - Monitorizare și observabilitate
+- [Modele de coordonare multi-agent](docs/chapter-06-pre-deployment/coordination-patterns.md) - Strategii de organizare a agenților
+
+#### Rezultat Practic
+Validează și optimizează implementările înainte de executare
+
+---
+
+### Capitolul 7: Depanare & Debugging (1-1.5 ore) 🔧
+**Prerechizite**: Orice capitol de implementare finalizat  
+**Complexitate**: ⭐⭐
+
+#### Ce Veți Învăța
 - Abordări sistematice de depanare
 - Probleme comune și soluții
 - Depanare specifică AI
 - Optimizarea performanței
 
-#### Resurse de învățare
-- [Common Issues](docs/troubleshooting/common-issues.md) - Întrebări frecvente și soluții
-- [Debugging Guide](docs/troubleshooting/debugging.md) - Strategii pas cu pas
-- [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - Probleme ale serviciilor AI
+#### Resurse de Învățare
+- [Probleme Comune](docs/chapter-07-troubleshooting/common-issues.md) - FAQ și soluții
+- [Ghid de depanare](docs/chapter-07-troubleshooting/debugging.md) - Strategii pas cu pas
+- [Depanare Specifică AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Probleme cu serviciile AI
 
-#### Rezultat practic
-Diagnostichează și rezolvă independent probleme comune de implementare
+#### Rezultat Practic
+Diagnosticați și rezolvați independent problemele comune de implantare
 
 ---
 
-### Capitolul 8: Producție și modele pentru întreprinderi (2-3 ore) 🏢
+### Capitolul 8: Modele de Producție & Enterprise (2-3 ore) 🏢
 **Prerechizite**: Capitolele 1-4 finalizate  
 **Complexitate**: ⭐⭐⭐⭐
 
-#### Ce vei învăța
+#### Ce Veți Învăța
 - Strategii de implementare în producție
-- Modele de securitate pentru întreprinderi
+- Modele de securitate enterprise
 - Monitorizare și optimizare a costurilor
 - Scalabilitate și guvernanță
 
-- Cele mai bune practici pentru implementările aplicațiilor containerizate în producție (securitate, monitorizare, costuri, CI/CD)
+- Cele mai bune practici pentru implementările de aplicații containerizate în producție (securitate, monitorizare, cost, CI/CD)
 
-#### Resurse de învățare
-- [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Modele pentru întreprinderi
-- Exemple de microservicii și întreprinderi
-- Cadre pentru monitorizare și guvernanță
-- [Microservices Architecture Example](../../examples/container-app/microservices) - Implementare blue-green/canary, trasare distribuită și optimizare a costurilor
+#### Resurse de Învățare
+- [Cele Mai Bune Practici AI în Producție](docs/chapter-08-production/production-ai-practices.md) - Modele enterprise
+- Exemple de microservicii și enterprise
+- Programe de monitorizare și guvernanță
+- [Exemplu de Arhitectură Microservicii](../../examples/container-app/microservices) - Implementare blue-green/canary, trasare distribuită și optimizare costuri
 
-#### Rezultat practic
-Implementează aplicații pregătite pentru mediul de producție cu capabilități complete de producție
+#### Rezultat Practic
+Implementați aplicații pregătite pentru enterprise cu capabilități complete de producție
 
 ---
 
-## Progresia învățării și complexitate
+## Progresie în Învățare și Complexitate
 
-### Dezvoltarea progresivă a abilităților
+### Dezvoltarea Treptată a Abilităților
 
-- **🌱 Începători**: Începe cu Capitolul 1 (Fundament) → Capitolul 2 (Dezvoltare AI)
-- **🔧 Intermediar**: Capitolele 3-4 (Configurație & Infrastructură) → Capitolul 6 (Validare)
-- **🚀 Avansat**: Capitolul 5 (Soluții multi-agent) → Capitolul 7 (Depanare)
-- **🏢 Întreprindere**: Finalizează toate capitolele, concentrează-te pe Capitolul 8 (Modele pentru producție)
+- **🌱 Începători**: Începeți cu Capitolul 1 (Fundament) → Capitolul 2 (Dezvoltare AI)
+- **🔧 Intermediar**: Capitolele 3-4 (Configurare & Infrastructură) → Capitolul 6 (Validare)
+- **🚀 Avansat**: Capitolul 5 (Soluții Multi-Agent) → Capitolul 7 (Depanare)
+- **🏢 Enterprise**: Finalizați toate capitolele, cu accent pe Capitolul 8 (Modele de Producție)
 
-- **Traseu aplicație container**: Capitolele 4 (Implementare containerizată), 5 (Integrare microservicii), 8 (Cele mai bune practici pentru producție)
+- **Traiectorie Aplicație Containerizată**: Capitolele 4 (Implementare containerizată), 5 (Integrare microservicii), 8 (Cele mai bune practici în producție)
 
-### Indicatori de complexitate
+### Indicatori de Complexitate
 
-- **⭐ De bază**: Concepte unice, tutoriale ghidate, 30-60 de minute
-- **⭐⭐ Intermediar**: Concepte multiple, practică hands-on, 1-2 ore  
+- **⭐ Basic**: Concepte unice, tutoriale ghidate, 30-60 minute
+- **⭐⭐ Intermediar**: Mai multe concepte, practică aplicată, 1-2 ore  
 - **⭐⭐⭐ Avansat**: Arhitecturi complexe, soluții personalizate, 1-3 ore
-- **⭐⭐⭐⭐ Expert**: Sisteme de producție, modele pentru întreprinderi, 2-4 ore
+- **⭐⭐⭐⭐ Expert**: Sisteme de producție, modele enterprise, 2-4 ore
 
-### Căi flexibile de învățare
+### Traiectorii Flexibile de Învățare
 
-#### 🎯 Traseu accelerat pentru dezvoltatori AI (4-6 ore)
-1. **Capitolul 1**: Fundament & Start rapid (45 minute)
-2. **Capitolul 2**: Dezvoltare orientată AI (2 ore)  
-3. **Capitolul 5**: Soluții AI multi-agent (3 ore)
-4. **Capitolul 8**: Cele mai bune practici AI pentru producție (1 oră)
+#### 🎯 Traseu Rapid pentru Dezvoltatori AI (4-6 ore)
+1. **Capitolul 1**: Fundament & Pornire Rapidă (45 min)
+2. **Capitolul 2**: Dezvoltare AI-First (2 ore)  
+3. **Capitolul 5**: Soluții Multi-Agent AI (3 ore)
+4. **Capitolul 8**: Cele Mai Bune Practici AI în Producție (1 oră)
 
-#### 🛠️ Traseu specialist în infrastructură (5-7 ore)
-1. **Capitolul 1**: Fundament & Start rapid (45 minute)
-2. **Capitolul 3**: Configurație & Autentificare (1 oră)
-3. **Capitolul 4**: Infrastructură ca cod & Implementare (1.5 ore)
-4. **Capitolul 6**: Validare și planificare pre-implementare (1 oră)
+#### 🛠️ Traseu Specialist Infrastructură (5-7 ore)
+1. **Capitolul 1**: Fundament & Pornire Rapidă (45 min)
+2. **Capitolul 3**: Configurare & Autentificare (1 oră)
+3. **Capitolul 4**: Infrastructură ca Cod & Implementare (1.5 ore)
+4. **Capitolul 6**: Validare și Planificare Pre-Implementare (1 oră)
 5. **Capitolul 7**: Depanare & Debugging (1.5 ore)
-6. **Capitolul 8**: Producție & Modele pentru întreprinderi (2 ore)
+6. **Capitolul 8**: Modele de Producție & Enterprise (2 ore)
 
-#### 🎓 Parcurs complet de învățare (8-12 ore)
-Finalizare secvențială a tuturor celor 8 capitole cu practică hands-on și validare
+#### 🎓 Traseu Complet de Învățare (8-12 ore)
+Finalizarea secvențială a tuturor celor 8 capitole cu practică și validare
 
-## Cadrul de finalizare a cursului
+## Cadrul de Finalizare a Cursului
 
-### Validarea cunoștințelor
-- **Puncte de control pe capitole**: Exerciții practice cu rezultate măsurabile
-- **Verificare hands-on**: Implementează soluții funcționale pentru fiecare capitol
-- **Urmărirea progresului**: Indicatori vizuali și insigne de finalizare
-- **Validare comunitară**: Împărtășește experiențele în canalele Azure Discord
+### Validarea Cunoștințelor
+- **Puncte de Control pe Capitole**: Exerciții practice cu rezultate măsurabile
+- **Verificare Practică**: Implementați soluții funcționale pentru fiecare capitol
+- **Urmărire Progres**: Indicatori vizuali și insigne de completare
+- **Validare Comunitară**: Partajați experiențe în canalele Azure Discord
 
-### Evaluarea rezultatelor învățării
+### Evaluarea Rezultatelor Învățării
 
-#### Finalizarea capitolelor 1-2 (Fundament + AI)
-- ✅ Implementează o aplicație web de bază folosind AZD
-- ✅ Implementează o aplicație de chat cu AI cu RAG
-- ✅ Înțelege conceptele de bază AZD și integrarea AI
+#### Finalizarea Capitolului 1-2 (Fundament + AI)
+- ✅ Implementați aplicație web de bază folosind AZD
+- ✅ Implementați aplicație de chat AI cu RAG
+- ✅ Înțelegeți conceptele de bază AZD și integrarea AI
 
-#### Finalizarea capitolelor 3-4 (Configurație + Infrastructură)  
-- ✅ Gestionează implementări multi-mediu
-- ✅ Creează șabloane Bicep personalizate pentru infrastructură ca cod
-- ✅ Implementează modele de autentificare securizate
+#### Finalizarea Capitolului 3-4 (Configurare + Infrastructură)  
+- ✅ Gestionați implementările multi-mediu
+- ✅ Creați șabloane Bicep personalizate pentru infrastructură
+- ✅ Implementați modele de autentificare securizate
 
-#### Finalizarea capitolelor 5-6 (Multi-Agent + Validare)
-- ✅ Implementează o soluție complexă multi-agent AI
-- ✅ Realizează planificarea capacității și optimizarea costurilor
-- ✅ Implementează validare automată pre-implementare
+#### Finalizarea Capitolului 5-6 (Multi-Agent + Validare)
+- ✅ Implementați soluție AI multi-agent complexă
+- ✅ Efectuați planificare capacitate și optimizare costuri
+- ✅ Implementați validare automată pre-implementare
 
-#### Finalizarea capitolelor 7-8 (Depanare + Producție)
-- ✅ Depanează și rezolvă probleme de implementare independent  
-- ✅ Implementează monitorizare și securitate la nivel enterprise
-- ✅ Implementează aplicații pregătite pentru producție cu guvernanță
+#### Finalizarea Capitolului 7-8 (Depanare + Producție)
+- ✅ Depanați și rezolvați probleme de implantare independent  
+- ✅ Implementați monitorizare și securitate la nivel enterprise
+- ✅ Implementați aplicații pregătite pentru producție cu guvernanță
 
-### Certificare și recunoaștere
-- **Insignă de finalizare a cursului**: Finalizează toate cele 8 capitole cu validare practică
-- **Recunoaștere în comunitate**: Participare activă în Microsoft Foundry Discord
-- **Dezvoltare profesională**: Competențe relevante în domeniu pentru implementarea AZD și AI
-- **Avansare în carieră**: Capacități pentru implementări cloud la nivel enterprise
+### Certificare și Recunoaștere
+- **Insigna de Finalizare Curs**: Finalizați toate cele 8 capitole cu validare practică
+- **Recunoaștere Comunitară**: Participare activă în Microsoft Foundry Discord
+- **Dezvoltare Profesională**: Abilități relevante pentru industrie în AZD și implementare AI
+- **Avansare în Carieră**: Capacități de implementare cloud pregătite pentru enterprise
 
-## 🎓 Rezultate cuprinzătoare ale învățării
+## 🎓 Rezultate Cuprinzătoare ale Învățării
 
 ### Nivel Fundament (Capitolele 1-2)
-După finalizarea capitolelor fundamentale, cursanții vor demonstra:
+La finalizarea capitolelor fundament, cursanții vor demonstra:
 
-**Capabilități tehnice:**
-- Implementează aplicații web simple în Azure folosind comenzi AZD
-- Configurează și implementează aplicații de chat cu AI și capabilități RAG
-- Înțelege conceptele de bază AZD: șabloane, medii, fluxuri de aprovizionare
-- Integrează serviciile Microsoft Foundry cu implementările AZD
-- Navighează configurațiile serviciilor Azure AI și endpoint-urile API
+**Capabilități Tehnice:**
+- Implementați aplicații web simple pe Azure folosind comenzi AZD
+- Configurați și implementați aplicații chat AI cu capabilități RAG
+- Înțelegeți conceptele de bază AZD: șabloane, medii, fluxuri de aprovizionare
+- Integrați serviciile Microsoft Foundry cu implementările AZD
+- Navigați configurațiile serviciilor Azure AI și punctele finale API
 
-**Competențe profesionale:**
-- Urmează fluxuri structurate de implementare pentru rezultate consecvente
-- Depanează probleme de implementare de bază folosind jurnale și documentație
-- Comunică eficient despre procesele de implementare în cloud
-- Aplică bune practici pentru integrarea securizată a serviciilor AI
+**Abilități Profesionale:**
+- Urmați fluxuri de lucru structurate pentru implementări consistente
+- Depanați probleme de implementare de bază folosind jurnale și documentație
+- Comunicați eficient despre procesele de implementare cloud
+- Aplicați cele mai bune practici pentru integrare securizată a serviciilor AI
 
-**Verificare a învățării:**
-- ✅ Implementați cu succes șablonul `todo-nodejs-mongo`
-- ✅ Implementează și configurează `azure-search-openai-demo` cu RAG
-- ✅ Finalizează exercițiile practice din atelier (faza de Descoperire)
-- ✅ Participă la discuțiile comunității Azure Discord
+**Verificare a Învățării:**
+- ✅ Implementați cu succes șablon `todo-nodejs-mongo`
+- ✅ Implementați și configurați `azure-search-openai-demo` cu RAG
+- ✅ Finalizați exercițiile atelierului interactiv (Faza de descoperire)
+- ✅ Participați în discuții în comunitatea Azure Discord
 
 ### Nivel Intermediar (Capitolele 3-4)
-După finalizarea capitolelor intermediare, cursanții vor demonstra:
+La finalizarea capitolelor intermediare, cursanții vor demonstra:
 
-**Capabilități tehnice:**
-- Gestionează implementări multi-mediu (dev, staging, production)
-- Creează șabloane Bicep personalizate pentru infrastructură ca cod
-- Implementează modele de autentificare securizate cu managed identity
-- Implementează aplicații complexe multi-serviciu cu configurații personalizate
-- Optimizează strategii de aprovizionare a resurselor pentru cost și performanță
+**Capabilități Tehnice:**
+- Gestionați implementări multi-mediu (dev, staging, producție)
+- Creați șabloane Bicep personalizate pentru infrastructură ca cod
+- Implementați modele sigure de autentificare cu identitate gestionată
+- Implementați aplicații complexe multi-serviciu cu configurații personalizate
+- Optimizați strategii de aprovizionare resurse pentru cost și performanță
 
-**Competențe profesionale:**
-- Proiectează arhitecturi de infrastructură scalabile
-- Aplică bune practici de securitate pentru implementările în cloud
-- Documentează modele de infrastructură pentru colaborarea echipei
-- Evaluează și selectează serviciile Azure potrivite pentru cerințe
+**Abilități Profesionale:**
+- Proiectați arhitecturi scalabile de infrastructură
+- Implementați cele mai bune practici de securitate pentru implementări cloud
+- Documentați modele de infrastructură pentru colaborare în echipă
+- Evaluați și selectați servicii Azure potrivite cerințelor
 
-**Verificare a învățării:**
-- ✅ Configurează medii separate cu setări specifice mediului
-- ✅ Creează și implementează șablon Bicep personalizat pentru aplicație multi-serviciu
-- ✅ Implementează autentificare cu managed identity pentru acces securizat
-- ✅ Finalizează exerciții de management al configurației cu scenarii reale
+**Verificare a Învățării:**
+- ✅ Configurați medii separate cu setări specifice fiecărui mediu
+- ✅ Creați și implementați șablon Bicep personalizat pentru aplicație multi-serviciu
+- ✅ Implementați autentificare cu identitate gestionată pentru acces securizat
+- ✅ Finalizați exerciții de gestionare a configurațiilor în scenarii reale
 
 ### Nivel Avansat (Capitolele 5-6)
-După finalizarea capitolelor avansate, cursanții vor demonstra:
+La finalizarea capitolelor avansate, cursanții vor demonstra:
 
-**Capabilități tehnice:**
-- Implementează și orchestrează soluții AI multi-agent cu fluxuri de lucru coordonate
-- Implementează arhitecturi de agenți Client și Inventory pentru scenarii retail
-- Efectuează planificare completă a capacității și validare a resurselor
-- Execută validare automată pre-implementare și optimizare
-- Proiectează selecții SKU eficiente din punct de vedere al costurilor în funcție de cerințele de lucru
+**Capabilități Tehnice:**
+- Implementați și orchestrați soluții AI multi-agent cu fluxuri de lucru coordonate
+- Implementați arhitecturi pentru agenți Client și Inventar pentru scenarii retail
+- Efectuați planificare capacitate cuprinzătoare și validare resurse
+- Executați validare automată pre-implementare și optimizare
+- Proiectați selecții SKU cost-eficiente pe baza cerințelor de lucru
 
-**Competențe profesionale:**
-- Arhitectează soluții AI complexe pentru medii de producție
-- Conduce discuții tehnice despre strategii de implementare AI
-- Mentorizează dezvoltatorii juniori în practicile AZD și implementare AI
-- Evaluează și recomandă modele de arhitectură AI pentru cerințele de business
+**Abilități Profesionale:**
+- Arhitectați soluții AI complexe pentru medii de producție
+- Conduceți discuții tehnice despre strategii de implementare AI
+- Mentorați dezvoltatori juniori în bune practici AZD și implementare AI
+- Evaluați și recomandați modele arhitecturale AI pentru cerințe de business
 
-**Verificare a învățării:**
-- ✅ Implementează soluția completă multi-agent pentru retail cu șabloane ARM
-- ✅ Demonstrează coordonarea agenților și orchestrarea fluxurilor de lucru
-- ✅ Finalizează exerciții de planificare a capacității cu constrângeri reale de resurse
-- ✅ Validează pregătirea pentru implementare prin verificări automate pre-flight
+**Verificare a Învățării:**
+- ✅ Examinați planul retail multi-agent și distingeți infrastructura aprovizionată de implementarea aplicației lipsă
+- ✅ Demonstrați coordonarea agenților și orchestrarea fluxurilor de lucru
+- ✅ Finalizați exerciții de planificare capacitate în condiții reale de resurse
+- ✅ Validați pregătirea pentru implementare prin verificări automate prealabile
 
 ### Nivel Expert (Capitolele 7-8)
-După finalizarea capitolelor pentru experți, cursanții vor demonstra:
+La finalizarea capitolelor pentru experți, cursanții vor demonstra:
 
-**Capabilități tehnice:**
-- Diagnostichează și rezolvă independent probleme complexe de implementare
-- Implementează modele de securitate la nivel enterprise și cadre de guvernanță
-- Proiectează strategii cuprinzătoare de monitorizare și alertare
-- Optimizează implementările de producție pentru scală, cost și performanță
-- Stabilește pipeline-uri CI/CD cu testare și validare adecvată
+**Capabilități Tehnice:**
+- Diagnosticați și rezolvați independent probleme complexe de implementare
+- Implementați modele de securitate la nivel enterprise și cadre de guvernanță
+- Proiectați strategii cuprinzătoare de monitorizare și alertare
+- Optimizați implementările de producție pentru scalabilitate, cost și performanță
+- Stabiliți pipeline-uri CI/CD cu testare și validare adecvate
 
-**Competențe profesionale:**
-- Conduce inițiative de transformare cloud la nivel enterprise
-- Proiectează și implementează standarde organizaționale de implementare
-- Instruiește și mentorizează echipele de dezvoltare în practici AZD avansate
-- Influențează deciziile tehnice pentru implementările AI la nivel enterprise
+**Abilități Profesionale:**
+- Conduceți inițiative de transformare cloud enterprise
+- Proiectați și implementați standarde organizaționale de implementare
+- Instruți și mentorați echipele de dezvoltare în practici avansate AZD
+- Influențați deciziile tehnice pentru implementări AI enterprise
 
-**Verificare a învățării:**
-- ✅ Rezolvă eșecuri complexe de implementare multi-serviciu
-- ✅ Implementează modele de securitate enterprise cu cerințe de conformitate
-- ✅ Proiectează și implementează monitorizare de producție cu Application Insights
-- ✅ Finalizează implementarea cadrului de guvernanță enterprise
+**Verificare a Învățării:**
+- ✅ Rezolvați eșecurile complexe de implementare multi-serviciu
+- ✅ Implementați modele de securitate enterprise cu cerințe de conformitate
+- ✅ Proiectați și implementați monitorizare de producție folosind Application Insights
+- ✅ Finalizați implementarea cadrului de guvernanță enterprise
 
-## 🎯 Certificarea finalizării cursului
+## 🎯 Certificare de Finalizare Curs
 
-### Cadrul de urmărire a progresului
-Urmărește progresul învățării prin puncte de control structurate:
+### Cadrul de Urmărire a Progresului
+Urmăriți progresul învățării prin puncte de control structurate:
 
-- [ ] **Capitolul 1**: Fundament & Start rapid ✅
-- [ ] **Capitolul 2**: Dezvoltare orientată AI ✅  
-- [ ] **Capitolul 3**: Configurație & Autentificare ✅
-- [ ] **Capitolul 4**: Infrastructură ca cod & Implementare ✅
-- [ ] **Capitolul 5**: Soluții AI multi-agent ✅
-- [ ] **Capitolul 6**: Validare și planificare pre-implementare ✅
+- [ ] **Capitolul 1**: Fundament & Pornire Rapidă ✅
+- [ ] **Capitolul 2**: Dezvoltare AI-First ✅  
+- [ ] **Capitolul 3**: Configurare & Autentificare ✅
+- [ ] **Capitolul 4**: Infrastructură ca Cod & Implementare ✅
+- [ ] **Capitolul 5**: Soluții Multi-Agent AI ✅
+- [ ] **Capitolul 6**: Validare & Planificare Pre-Implementare ✅
 - [ ] **Capitolul 7**: Depanare & Debugging ✅
-- [ ] **Capitolul 8**: Producție & Modele pentru întreprinderi ✅
+- [ ] **Capitolul 8**: Modele de Producție & Enterprise ✅
 
-### Procesul de verificare
-După finalizarea fiecărui capitol, verifică-ți cunoștințele prin:
+### Proces de Verificare
+După finalizarea fiecărui capitol, verificați cunoștințele prin:
 
-1. **Finalizarea exercițiilor practice**: Implementează soluții funcționale pentru fiecare capitol
-2. **Evaluarea cunoștințelor**: Revizuiește secțiunile FAQ și completează auto-evaluările
-3. **Implicare în comunitate**: Împărtășește experiențe și primește feedback în Azure Discord
-4. **Dezvoltarea portofoliului**: Documentează implementările și lecțiile învățate
-5. **Revizuire între colegi**: Colaborează cu alți cursanți la scenarii complexe
+1. **Finalizarea Exercițiilor Practice**: Implementați soluții funcționale pentru fiecare capitol
+2. **Evaluarea Cunoștințelor**: Revizuiți secțiunile FAQ și completați autoevaluări
+3. **Implicare Comunitară**: Partajați experiențe și primiți feedback în Azure Discord
+4. **Dezvoltarea Portofoliului**: Documentați implementările și lecțiile învățate
+5. **Revizuire între Colegi**: Colaborați cu alți cursanți pe scenarii complexe
 
-### Beneficiile finalizării cursului
-După finalizarea tuturor capitolelor cu verificare, absolvenții vor avea:
+### Beneficiile Finalizării Cursului
+La finalizarea tuturor capitolelor cu verificare, absolvenții vor avea:
 
-**Expertiză tehnică:**
-- **Experiență în producție**: Aplicații AI reale implementate în medii Azure
-- **Competențe profesionale**: Capacități de implementare și depanare pregătite pentru întreprindere  
-- **Cunoștințe de arhitectură**: Soluții AI multi-agent și modele de infrastructură complexe
-- **Măiestrie în depanare**: Rezolvarea independentă a problemelor de implementare și configurare
+**Expertiză Tehnică:**
+- **Experiență în Producție**: Aplicații AI reale implementate în medii Azure
+- **Abilități Profesionale**: Capacități de implementare și depanare la nivel enterprise  
+- **Cunoștințe de Arhitectură**: Soluții AI multi-agent și modele complexe de infrastructură
+- **Măiestrie în Depanare**: Rezolvarea independentă a problemelor de implementare și configurare
 
-**Dezvoltare profesională:**
-- **Recunoaștere în industrie**: Competențe verificabile în domenii de mare cerere pentru AZD și implementarea AI
-- **Avansare în carieră**: Calificări pentru roluri de arhitect cloud și specialist în implementarea AI
-- **Leadership în comunitate**: Membru activ în comunitățile dezvoltatorilor Azure și AI
-- **Învățare continuă**: Fundament pentru specializări avansate Microsoft Foundry
+**Dezvoltare Profesională:**
+- **Recunoaștere în Industrie**: Abilități verificabile în zonele de mare cerere AZD și implementare AI
+- **Avansare în Carieră**: Calificări pentru roluri de arhitect cloud și specialist AI în implementare
+- **Conducere în Comunitate**: Membri activi în comunitățile dezvoltatorilor Azure și AI
+- **Învățare Continuă**: Fundament pentru specializarea avansată Microsoft Foundry
 
-**Active pentru portofoliu:**
-- **Soluții implementate**: Exemple funcționale de aplicații AI și modele de infrastructură
-- **Documentație**: Ghiduri de implementare cuprinzătoare și proceduri de depanare  
-- **Contribuții în comunitate**: Discuții, exemple și îmbunătățiri împărtășite comunității Azure
-- **Rețea profesională**: Conexiuni cu experți Azure și practicieni în implementarea AI
+**Resurse în Portofoliu:**
+- **Soluții Implementate**: Exemple funcționale de aplicații AI și modele de infrastructură
+- **Documentație**: Ghiduri complete de implementare și proceduri de depanare  
+- **Contribuții Comunitare**: Discuții, exemple și îmbunătățiri distribuite comunității Azure
+- **Rețea Profesională**: Conexiuni cu experți Azure și practicieni în implementarea AI
 
-### Parcurs post-curs de învățare
-Absolvenții sunt pregătiți pentru specializare avansată în:
+### Traseu de Învățare Post-Curs
+Absolvenții sunt pregătiți pentru specializări avansate în:
 - **Microsoft Foundry Expert**: Specializare profundă în implementarea și orchestrarea modelelor AI
-- **Leadership în arhitectura cloud**: Proiectare și guvernanță pentru implementări la scară enterprise
-- **Leadership în comunitatea de dezvoltatori**: Contribuții la exemple Azure și resurse comunitare
-- **Training corporativ**: Predarea competențelor AZD și implementării AI în cadrul organizațiilor
+- **Leadership în Arhitectură Cloud**: Proiectarea și guvernanța implementărilor enterprise la scară largă
+- **Conducerea Comunității Dezvoltatorilor**: Contribuții la exemple Azure și resurse comunitare
+- **Training Corporativ**: Instruirea echipelor în AZD și abilități de implementare AI
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare de responsabilitate**:
-Acest document a fost tradus folosind serviciul de traducere bazat pe inteligență artificială [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm nicio răspundere pentru eventualele neînțelegeri sau interpretări greșite care pot apărea în urma utilizării acestei traduceri.
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

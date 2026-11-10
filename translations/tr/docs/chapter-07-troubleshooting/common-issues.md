@@ -1,55 +1,56 @@
-# Yaygın Sorunlar ve Çözümleri
+# Yaygın Sorunlar ve Çözümler
 
-**Bölüm Gezinmesi:**
-- **📚 Course Home**: [AZD Yeni Başlayanlar İçin](../../README.md)
-- **📖 Mevcut Bölüm**: Bölüm 7 - Sorun Giderme ve Hata Ayıklama
+**Bölüm Navigasyonu:**
+- **📚 Kurs Anasayfa**: [Başlangıç Seviyesi AZD](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 7 - Sorun Giderme & Hata Ayıklama
 - **⬅️ Önceki Bölüm**: [Bölüm 6: Ön Kontroller](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ Next**: [Hata Ayıklama Rehberi](debugging.md)
-- **🚀 Next Chapter**: [Bölüm 8: Üretim ve Kurumsal Desenler](../chapter-08-production/production-ai-practices.md)
+- **➡️ Sonraki**: [Hata Ayıklama Kılavuzu](debugging.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 8: Üretim & Kurumsal Modeller](../chapter-08-production/production-ai-practices.md)
 
 ## Giriş
 
-Bu kapsamlı sorun giderme rehberi, Azure Developer CLI kullanırken en sık karşılaşılan sorunları kapsar. Kimlik doğrulama, dağıtım, altyapı sağlama ve uygulama yapılandırmasıyla ilgili yaygın sorunları teşhis etmeyi, gidermeyi ve çözmeyi öğrenin. Her sorun için ayrıntılı belirtiler, temel nedenler ve adım adım çözüm prosedürleri yer almaktadır.
+Bu kapsamlı sorun giderme kılavuzu, Azure Developer CLI kullanırken en sık karşılaşılan sorunları ele almaktadır. Kimlik doğrulama, dağıtım, altyapı sağlama ve uygulama yapılandırması ile ilgili yaygın problemleri teşhis etmeyi, gidermeyi ve çözmeyi öğrenin. Her sorun detaylı belirtiler, temel nedenler ve adım adım çözümler içerir.
 
 ## Öğrenme Hedefleri
 
-Bu rehberi tamamlayarak:
-- Azure Developer CLI sorunları için tanılama tekniklerinde uzmanlaşacaksınız
-- Yaygın kimlik doğrulama ve izin problemlerini ve çözümlerini anlayacaksınız
-- Dağıtım hatalarını, altyapı sağlama hatalarını ve yapılandırma problemlerini çözebileceksiniz
+Bu kılavuzu tamamlayarak:
+- Azure Developer CLI sorunları için teşhis tekniklerini ustalıkla öğreneceksiniz
+- Yaygın kimlik doğrulama ve izin sorunlarını ve çözümlerini anlayacaksınız
+- Dağıtım hatalarını, altyapı sağlama hatalarını ve yapılandırma problemlerini çözeceksiniz
 - Proaktif izleme ve hata ayıklama stratejileri uygulayacaksınız
-- Karmaşık problemler için sistematik sorun giderme yöntemlerini uygulayacaksınız
-- Gelecekteki sorunları önlemek için uygun günlükleme ve izleme yapılandıracaksınız
+- Karmaşık sorunlar için sistematik sorun giderme metodolojilerini benimseyeceksiniz
+- Gelecekteki sorunları önlemek için uygun günlük kaydı ve izlemeyi yapılandıracaksınız
 
 ## Öğrenme Çıktıları
 
-Tamamladıktan sonra şunları yapabileceksiniz:
-- Dahili tanılama araçlarını kullanarak Azure Developer CLI sorunlarını teşhis etmek
-- Kimlik doğrulama, abonelik ve izinlerle ilgili problemleri bağımsız olarak çözmek
+Tamamlandığında şunları yapabileceksiniz:
+- Yerleşik teşhis araçlarını kullanarak Azure Developer CLI sorunlarını teşhis etmek
+- Kimlik doğrulama, abonelik ve izinle ilgili sorunları bağımsız şekilde çözmek
 - Dağıtım hatalarını ve altyapı sağlama hatalarını etkili şekilde gidermek
-- Uygulama yapılandırma sorunlarını ve ortama özgü problemleri hata ayıklamak
+- Uygulama yapılandırma sorunlarını ve ortam bazlı problemleri hata ayıklamak
 - Potansiyel sorunları proaktif olarak belirlemek için izleme ve uyarı uygulamak
-- Günlükleme, hata ayıklama ve sorun çözme iş akışları için en iyi uygulamaları uygulamak
+- Günlük kaydı, hata ayıklama ve sorun çözme iş akışları için en iyi uygulamaları uygulamak
 
-## Hızlı Tanılama
+## Hızlı Teşhis
 
-Belirli sorunlara girmeden önce tanısal bilgi toplamak için bu komutları çalıştırın:
+> Örnek isimleri/ID'leri kendi ortamınızın değerleriyle değiştirin. Bash, Bicep, JavaScript ve parametre dosyası parçaları ayrı şekilde etiketlenmiştir; bunlar tek bir yürütülebilir betik değildir. Yıkıcı işlemleri gözden geçirin ve tanı paylaşmadan önce gizli bilgileri gizleyin. `azd monitor --logs` tarayıcı açar; terminal günlüklerini canlı yayınlamaz.
+
+Belirli sorunlara dalmadan önce, teşhis bilgisi toplamak için bu komutları çalıştırın:
 
 ```bash
-# azd sürümünü ve sağlığını kontrol et
+# Check azd version and health
 azd version
 azd config show
 
-# Azure kimlik doğrulamasını doğrula
+# Verify Azure authentication
 az account show
 az account list
 
-# Mevcut ortamı kontrol et
+# Check current environment
 azd env list
 azd env get-values
 
-# Hata ayıklama günlük kaydını etkinleştir
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
@@ -58,24 +59,28 @@ azd <command> --debug
 ### Sorun: "Erişim belirteci alınamadı"
 **Belirtiler:**
 - `azd up` kimlik doğrulama hatalarıyla başarısız olur
-- Komutlar 'unauthorized' veya 'access denied' döndürüyor
+- Komutlar "yetkisiz" veya "erişim reddedildi" döner
 
 **Çözümler:**
 ```bash
-# Azure CLI ile yeniden kimlik doğrula
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# Önbellekteki kimlik bilgilerini temizle
+# 2. Clear cached credentials
 az account clear
 az login
 
-# Cihaz kodu akışını kullan (başsız sistemler için)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# Belirli aboneliği ayarla
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
 ### Sorun: Dağıtım sırasında "Yetersiz ayrıcalıklar"
@@ -85,26 +90,26 @@ azd config set defaults.subscription "your-subscription-id"
 
 **Çözümler:**
 ```bash
-# 1. Azure rol atamalarınızı kontrol edin
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Gerekli rollere sahip olduğunuzdan emin olun
-# - Katkıda Bulunan (kaynak oluşturma için)
-# - Kullanıcı Erişim Yöneticisi (rol atamaları için)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. Uygun izinler için Azure yöneticinizle iletişime geçin
+# 3. Contact your Azure administrator for proper permissions
 ```
 
-### Sorun: Çok kiracılı kimlik doğrulama problemleri
+### Sorun: Çok kiracılı kimlik doğrulama sorunları
 **Çözümler:**
 ```bash
-# 1. Belirli bir kiracı ile oturum aç
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. Yapılandırmada kiracıyı ayarla
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. Kiracılar arasında geçiş yapılıyorsa kiracı önbelleğini temizle
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
@@ -112,64 +117,71 @@ az account clear
 
 ### Sorun: Kaynak adı çakışmaları
 **Belirtiler:**
-- "The resource name already exists" hataları
-- Kaynak oluşturma sırasında dağıtım başarısız olur
+- "Kaynak adı zaten mevcut" hataları
+- Kaynak oluşturulurken dağıtım başarısız olur
 
 **Çözümler:**
-```bash
-# 1. Belirteçlerle benzersiz kaynak adları kullanın
-# Bicep şablonunuzda:
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
+```
 
-# 2. Ortam adını değiştirin
+```bash
+# 2. Change environment name
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Mevcut kaynakları temizleyin
-azd down --force --purge
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
 ```
 
 ### Sorun: Konum/Bölge kullanılamıyor
 **Belirtiler:**
-- "The location 'xyz' is not available for resource type"
-- Bazı SKU'lar seçilen bölgede mevcut değil
+- "xyz konumu kaynak türü için uygun değil"
+- Seçilen bölgede bazı SKU'lar yok
 
 **Çözümler:**
 ```bash
-# 1. Kaynak türleri için kullanılabilir konumları kontrol edin
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Yaygın olarak mevcut bölgeleri kullanın
-azd config set defaults.location eastus2
-# veya
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. Bölgeye göre hizmet kullanılabilirliğini kontrol edin
-# Ziyaret edin: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
+
+Konum değişkenini değiştirmek mevcut kaynakları taşımaz. Mevcut bir kaynak grubu veya kaynak konum değişikliğini reddedebilir; bölgesel yeniden dağıtım için ayrı bir ortam kullanın.
 
 ### Sorun: Kota aşıldı hataları
 **Belirtiler:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+- "Kaynak türü için kota aşıldı"
+- "Maksimum kaynak sayısına ulaşıldı"
 
 **Çözümler:**
 ```bash
-# 1. Mevcut kota kullanımını kontrol edin
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# 2. Azure portalı üzerinden kota artışı talep edin
-# Şuraya gidin: Abonelikler > Kullanım + kotalar
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# 3. Geliştirme için daha küçük SKU'lar kullanın
-# main.parameters.json dosyasında:
+```
+
+Geliştirme için, `infra/main.parameters.json` içinde desteklenen daha küçük bir SKU seçin:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# 4. Kullanılmayan kaynakları temizleyin
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
@@ -180,16 +192,16 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 **Çözümler:**
 ```bash
-# 1. Bicep sözdizimini doğrula
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Bicep linter'ını kullan
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Parametre dosyası sözdizimini kontrol et
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. Dağıtım değişikliklerini önizle
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
@@ -197,56 +209,56 @@ azd provision --preview
 
 ### Sorun: Derleme hataları
 **Belirtiler:**
-- Dağıtım sırasında uygulama derlenemiyor
+- Uygulama dağıtım sırasında derlenemiyor
 - Paket yükleme hataları
 
 **Çözümler:**
 ```bash
-# 1. Derleme çıktısını hata ayıklama bayrağıyla kontrol et
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. Dağıtılan hizmetin durumunu görüntüle
+# 2. View deployed service status
 azd show
 
-# 3. Derlemeyi yerel olarak test et
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Node.js/Python sürüm uyumluluğunu kontrol et
-node --version  # azure.yaml ayarlarıyla eşleşmeli
+# 3. Check Node.js/Python version compatibility
+node --version  # Should match azure.yaml settings
 python --version
 
-# 4. Derleme önbelleğini temizle
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. Konteyner kullanıyorsanız Dockerfile'ı kontrol et
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Sorun: Konteyner dağıtımı hataları
+### Sorun: Konteyner dağıtım hataları
 **Belirtiler:**
-- Konteyner uygulamaları başlatılamıyor
+- Konteyner uygulamalar başlatılamıyor
 - İmaj çekme hataları
 
 **Çözümler:**
 ```bash
-# 1. Docker derlemesini yerel olarak test edin
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Azure CLI kullanarak konteyner günlüklerini kontrol edin
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. azd aracılığıyla uygulamayı izleyin
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. Konteyner kayıt defterine erişimi doğrulayın
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. Konteyner uygulama yapılandırmasını kontrol edin
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
@@ -257,17 +269,17 @@ az containerapp show --name my-app --resource-group my-rg
 
 **Çözümler:**
 ```bash
-# 1. Veritabanı güvenlik duvarı kurallarını kontrol edin
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Uygulamadan bağlantıyı test edin
-# Uygulamanıza geçici olarak ekleyin:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Bağlantı dizesi biçimini doğrulayın
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# 4. Veritabanı sunucusu durumunu kontrol edin
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
@@ -280,17 +292,17 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 **Çözümler:**
 ```bash
-# 1. Ortam değişkenlerinin ayarlı olduğunu doğrulayın
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. azure.yaml içindeki değişken adlarını kontrol edin
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. Uygulamayı yeniden başlatın
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. app service yapılandırmasını kontrol edin
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
@@ -301,34 +313,39 @@ az webapp config appsettings list --name myapp --resource-group myrg
 
 **Çözümler:**
 ```bash
-# 1. SSL sertifikası durumunu kontrol et
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# 2. Sadece HTTPS'i etkinleştir
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Özel alan adı ekle (gerekirse)
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
 ### Sorun: CORS yapılandırma problemleri
 **Belirtiler:**
-- Ön uç API'yi çağaramıyor
-- Çapraz kaynak isteği engellendi
+- Ön yüz API'yi çağramıyor
+- Kaynaklar arası istek engellendi
 
 **Çözümler:**
 ```bash
-# 1. App Service için CORS'u yapılandırın
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. CORS'u ele almak için API'yi güncelleyin
-# Express.js'te:
+```
+
+2. Mevcut Express uygulamanızı (içeri `cors` olarak aktarılmış) güncelleyin:
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# 3. Doğru URL'lerde çalışıp çalışmadığını kontrol edin
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
@@ -337,41 +354,42 @@ azd show
 ### Sorun: Ortam değiştirme problemleri
 **Belirtiler:**
 - Yanlış ortam kullanılıyor
-- Yapılandırma düzgün değişmiyor
+- Yapılandırma doğru şekilde değişmiyor
 
 **Çözümler:**
 ```bash
-# 1. Tüm ortamları listele
+# 1. List all environments
 azd env list
 
-# 2. Ortamı açıkça seç
+# 2. Explicitly select environment
 azd env select production
 
-# 3. Mevcut ortamı doğrula
+# 3. Verify current environment
 azd env list
 
-# 4. Bozulduysa yeni ortam oluştur
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
-### Sorun: Ortam bozulması
+### Sorun: Ortam bozukluğu
 **Belirtiler:**
-- Ortam geçersiz bir durum gösteriyor
-- Kaynaklar yapılandırmayla eşleşmiyor
+- Ortam geçersiz durumda gösteriliyor
+- Kaynaklar yapılandırmayla uyuşmuyor
 
 **Çözümler:**
 ```bash
-# 1. Ortam durumunu yenile
+# 1. Refresh environment state
 azd env refresh
 
-# 2. Ortam yapılandırmasını sıfırla
+# 2. Reset environment configuration
 azd env new production-reset
-# Gerekli ortam değişkenlerini kopyala
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. Mevcut kaynakları içe aktar (mümkünse)
-# Manuel olarak .azure/production/config.json dosyasını kaynak kimlikleriyle güncelle
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
 ## 🔍 Performans Sorunları
@@ -383,21 +401,17 @@ azd env set DATABASE_URL "your-value"
 
 **Çözümler:**
 ```bash
-# 1. Daha hızlı yineleme için belirli servisleri dağıtın
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. Altyapı değişmemişse sadece kod dağıtımını kullanın
-azd deploy  # azd up'dan daha hızlı
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. Derleme sürecini optimize edin
-# package.json içinde:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. Kaynak konumlarını kontrol edin (aynı bölgeyi kullanın)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
 ### Sorun: Uygulama performans problemleri
@@ -407,101 +421,100 @@ azd config set defaults.location eastus2
 
 **Çözümler:**
 ```bash
-# 1. Kaynakları ölçeklendirin
-# main.parameters.json dosyasındaki SKU'yu güncelleyin:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# 2. Application Insights izlemeyi etkinleştirin
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# 3. Azure'da uygulama günlüklerini kontrol edin
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# veya Container Apps için:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. Önbellekleme uygulayın
-# Altyapınıza Redis önbelleği ekleyin
+# 4. Implement caching
+# Add Redis cache to your infrastructure
 ```
 
-## 🛠️ Sorun Giderme Araçları ve Komutları
+## 🛠️ Sorun Giderme Araçları ve Komutlar
 
 ### Hata Ayıklama Komutları
 ```bash
-# Kapsamlı hata ayıklama
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# azd sürümünü kontrol et
+# Check azd version
 azd version
 
-# Mevcut yapılandırmayı görüntüle
+# View current configuration
 azd config show
 
-# Bağlantıyı test et
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### Günlük Analizi
 ```bash
-# Azure CLI aracılığıyla uygulama günlükleri
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# azd ile uygulamayı izleyin
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Azure kaynak günlükleri
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
-# Konteyner günlükleri (Container Apps için)
+# Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### Kaynak İncelemesi
 ```bash
-# Tüm kaynakları listele
+# List all resources
 az resource list --resource-group myrg -o table
 
-# Kaynak durumunu kontrol et
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# Ağ tanılama
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 Ek Yardım Alma
 
-### Ne Zaman Eskalasyon Yapılmalı
-- Tüm çözümleri denedikten sonra kimlik doğrulama sorunları devam ediyorsa
-- Azure hizmetleriyle ilgili altyapı problemleri
-- Faturalama veya abonelikle ilgili sorunlar
-- Güvenlik endişeleri veya olayları
+### Ne Zaman Yükseltmeli
+- Tüm çözümler denendikten sonra kimlik doğrulama sorunları devam ediyorsa
+- Azure servisleriyle altyapı problemleri varsa
+- Faturalandırma veya abonelikle ilgili sorunlar varsa
+- Güvenlik endişeleri veya olayları varsa
 
 ### Destek Kanalları
 ```bash
-# 1. Azure Hizmet Sağlığını Kontrol Edin
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Azure destek bileti oluşturun
-# Şuraya gidin: https://portal.azure.com -> Yardım + destek
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. Topluluk kaynakları
-# - Stack Overflow: azure-developer-cli etiketi
-# - GitHub Sorunları: https://github.com/Azure/azure-dev/issues
-# - Microsoft Soru-Cevap: https://learn.microsoft.com/en-us/answers/
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
+# - GitHub Issues: https://github.com/Azure/azure-dev/issues
+# - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
 ### Toplanacak Bilgiler
-Desteğe başvurmadan önce aşağıdakileri toplayın:
+Destekle iletişime geçmeden önce toplayın:
 - `azd version` çıktısı
 - `azd config show` çıktısı
 - `azd show` çıktısı (mevcut dağıtım durumu)
 - Hata mesajları (tam metin)
 - Sorunu yeniden oluşturma adımları
-- Ortam detayları (`azd env get-values`)
-- Sorunun başladığı zaman çizelgesi
+- Gizlenmiş ortam detayları (ham `azd env get-values` asla paylaşmayın, gizli bilgiler içerebilir)
+- Sorunun başladığı zamana ait zaman çizelgesi
 
 ### Günlük Toplama Betiği
 ```bash
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -530,71 +543,73 @@ echo "Debug information collected in debug-logs/"
 
 ### Dağıtımdan Önce Kontrol Listesi
 ```bash
-# 1. Kimlik doğrulamasını doğrulayın
+# 1. Validate authentication
 az account show
 
-# 2. Kotaları ve limitleri kontrol edin
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# 3. Şablonları doğrulayın
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# 4. Önce yerelde test edin
+# 4. Test locally first
 npm run build
 npm run test
 
-# 5. Deneme dağıtımlarını kullanın
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
-### İzleme Kurulumu
-```bash
-# Application Insights'ı etkinleştir
-# main.bicep'e ekle:
+### İzleme Ayarı
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# Uyarıları yapılandır
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
 ### Düzenli Bakım
 ```bash
-# Haftalık sağlık kontrolleri
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# Aylık maliyet incelemesi
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# Üç aylık güvenlik incelemesi
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
 ## İlgili Kaynaklar
 
-- [Hata Ayıklama Rehberi](debugging.md) - İleri seviye hata ayıklama teknikleri
+- [Hata Ayıklama Kılavuzu](debugging.md) - Gelişmiş hata ayıklama teknikleri
 - [Kaynak Sağlama](../chapter-04-infrastructure/provisioning.md) - Altyapı sorun giderme
 - [Kapasite Planlaması](../chapter-06-pre-deployment/capacity-planning.md) - Kaynak planlama rehberi
-- [SKU Seçimi](../chapter-06-pre-deployment/sku-selection.md) - Hizmet katmanı önerileri
+- [SKU Seçimi](../chapter-06-pre-deployment/sku-selection.md) - Servis katmanı önerileri
 
 ---
 
-**İpucu**: Bu rehberi yer işaretlerine ekleyin ve sorunla karşılaştığınızda başvurun. Çoğu problem daha önce görülmüştür ve belirlenmiş çözümleri vardır!
+**İpucu**: Bu kılavuzu yer imlerine ekleyin ve sorun yaşadığınızda başvurun. Çoğu problem daha önce görülmüş ve denenmiş çözümlerle beraber kayıtlıdır!
 
 ---
 
-**Gezinme**
+**Navigasyon**
 - **Önceki Ders**: [Kaynak Sağlama](../chapter-04-infrastructure/provisioning.md)
-- **Sonraki Ders**: [Hata Ayıklama Rehberi](debugging.md)
+- **Sonraki Ders**: [Hata Ayıklama Kılavuzu](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki versiyonu yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi tavsiye edilir. Bu çevirinin kullanımı sonucunda ortaya çıkan herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

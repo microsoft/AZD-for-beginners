@@ -1,221 +1,25 @@
-# 4. Mengonfigurasi Template
+# 4. Konfigurasikan Template
 
-!!! tip "DI AKHIR MODUL INI ANDA AKAN MAMPU"
+!!! tip "PADA AKHIR MODUL INI ANDA AKAN BISA"
 
-    - [ ] Memahami tujuan `azure.yaml`
-    - [ ] Memahami struktur `azure.yaml`
-    - [ ] Memahami nilai azd lifecycle `hooks`
-    - [ ] **Lab 4:** Jelajahi dan ubah variabel lingkungan
-
----
-
-!!! prompt "Apa yang dilakukan file `azure.yaml`? Gunakan codefence dan jelaskan baris demi baris"
-
-      File `azure.yaml` adalah **file konfigurasi untuk Azure Developer CLI (azd)**. Ia menentukan bagaimana aplikasi Anda harus dideploy ke Azure, termasuk infrastruktur, layanan, hook penyebaran, dan variabel lingkungan.
+    - [ ] Explain the purpose and structure of `azure.yaml`
+    - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
+    - [ ] Configure the selected environment using inputs supported by the template
+    - [ ] **Lab 4:** Review a configuration change before provisioning it
 
 ---
 
-## 1. Tujuan dan Fungsionalitas
+## 1. Mulai dengan template yang sebenarnya
 
-File `azure.yaml` ini berfungsi sebagai **cetakan penyebaran** untuk aplikasi agen AI yang:
+Buka [`azure.yaml` dalam Mulai dengan Agen AI](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/azure.yaml) di repositori yang Anda inisialisasi. Template induk dapat berubah secara independen dari lokakarya ini. Berikut **kutipan** yang diperiksa pada 4 November 2026; ini bukan pengganti untuk file lengkap:
 
-1. **Memvalidasi lingkungan** sebelum penyebaran
-2. **Menyediakan layanan Azure AI** (AI Hub, AI Project, Search, dll.)
-3. **Menyebarkan aplikasi Python** ke Azure Container Apps
-4. **Mengonfigurasi model AI** untuk fungsi obrolan dan embedding
-5. **Menyiapkan pemantauan dan pelacakan** untuk aplikasi AI
-6. **Menangani skenario proyek Azure AI yang baru maupun yang sudah ada**
-
-File ini memungkinkan **penyebaran dengan satu perintah** (`azd up`) untuk solusi agen AI lengkap dengan pemvalidasian, penyediaan, dan konfigurasi pasca-penyebaran yang tepat.
-
-??? info "Perluas untuk Melihat: `azure.yaml`"
-
-      File `azure.yaml` mendefinisikan bagaimana Azure Developer CLI harus mendeploy dan mengelola aplikasi Agen AI ini di Azure. Mari kita uraikan baris demi baris.
-
-      ```yaml title="" linenums="0"
-
-      # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: do we need hooks? 
-      # TODO: do we need all of the variables?
-
-      name: azd-get-started-with-ai-agents
-      metadata:
-      template: azd-get-started-with-ai-agents@1.0.2
-      requiredVersions:
-      azd: ">=1.14.0"
-
-      hooks:
-      preup:
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-            interactive: true
-            continueOnError: false
-      windows:
-            shell: pwsh
-            run: ./scripts/validate_env_vars.ps1
-            interactive: true
-            continueOnError: false      
-      postprovision:
-      windows:
-            shell: pwsh
-            run: ./scripts/write_env.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-            continueOnError: true
-            interactive: true
-      postdeploy:
-      windows:
-            shell: pwsh
-            run: ./scripts/postdeploy.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-            continueOnError: true
-            interactive: true
-      services:
-      api_and_frontend:
-      project: ./src
-      language: py
-      host: containerapp
-      docker:
-            image: api_and_frontend
-            remoteBuild: true
-      pipeline:
-      variables:
-      - AZURE_RESOURCE_GROUP
-      - AZURE_AIHUB_NAME
-      - AZURE_AIPROJECT_NAME
-      - AZURE_AISERVICES_NAME
-      - AZURE_SEARCH_SERVICE_NAME
-      - AZURE_APPLICATION_INSIGHTS_NAME
-      - AZURE_CONTAINER_REGISTRY_NAME
-      - AZURE_KEYVAULT_NAME
-      - AZURE_STORAGE_ACCOUNT_NAME
-      - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-      - USE_CONTAINER_REGISTRY
-      - USE_APPLICATION_INSIGHTS
-      - USE_AZURE_AI_SEARCH_SERVICE
-      - AZURE_AI_AGENT_NAME
-      - AZURE_AI_AGENT_ID
-      - AZURE_AI_AGENT_DEPLOYMENT_NAME
-      - AZURE_AI_AGENT_DEPLOYMENT_SKU
-      - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-      - AZURE_AI_AGENT_MODEL_NAME
-      - AZURE_AI_AGENT_MODEL_FORMAT
-      - AZURE_AI_AGENT_MODEL_VERSION
-      - AZURE_AI_EMBED_DEPLOYMENT_NAME
-      - AZURE_AI_EMBED_DEPLOYMENT_SKU
-      - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-      - AZURE_AI_EMBED_MODEL_NAME
-      - AZURE_AI_EMBED_MODEL_FORMAT
-      - AZURE_AI_EMBED_MODEL_VERSION
-      - AZURE_AI_EMBED_DIMENSIONS
-      - AZURE_AI_SEARCH_INDEX_NAME
-      - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-      - AZURE_EXISTING_AIPROJECT_ENDPOINT
-      - AZURE_EXISTING_AGENT_ID
-      - ENABLE_AZURE_MONITOR_TRACING
-      - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-      ```
-
----
-
-## 2. Menguraikan Berkas
-
-Mari kita telaah berkas bagian demi bagian, untuk memahami apa yang dilakukannya - dan mengapa.
-
-### 2.1 **Header dan Skema (1-3)**
-
-```yaml title="" linenums="0"
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-```
-
-- **Baris 1**: Menyediakan validasi skema untuk YAML language server agar mendukung IDE dan IntelliSense
-
-### 2.2 Metadata Proyek (5-10)
-
-```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@1.0.2
+  template: azd-get-started-with-ai-agents@2.5.0
 requiredVersions:
   azd: ">=1.14.0"
-```
-
-- **Baris 5**: Menentukan nama proyek yang digunakan oleh Azure Developer CLI
-- **Baris 6-7**: Menyatakan bahwa ini didasarkan pada template versi 1.0.2
-- **Baris 8-9**: Memerlukan Azure Developer CLI versi 1.14.0 atau lebih tinggi
-
-### 2.3 Hook Deploy (11-40)
-
-```yaml title="" linenums="0"
-hooks:
-  preup:
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-      interactive: true
-      continueOnError: false
-    windows:
-      shell: pwsh
-      run: ./scripts/validate_env_vars.ps1
-      interactive: true
-      continueOnError: false      
-```
-
-- **Baris 11-20**: **Hook pra-penyebaran** - dijalankan sebelum `azd up`
-
-      - Pada Unix/Linux: Membuat skrip validasi dapat dieksekusi dan menjalankannya
-      - Pada Windows: Menjalankan skrip validasi PowerShell
-      - Keduanya bersifat interaktif dan akan menghentikan penyebaran jika gagal
-
-```yaml  title="" linenums="0"
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Baris 21-30**: **Hook pasca-provisi** - dijalankan setelah sumber daya Azure dibuat
-
-  - Menjalankan skrip penulisan variabel lingkungan
-  - Meneruskan penyebaran bahkan jika skrip ini gagal (`continueOnError: true`)
-
-```yaml title="" linenums="0"
-  postdeploy:
-    windows:
-      shell: pwsh
-      run: ./scripts/postdeploy.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Baris 31-40**: **Hook pasca-penyebaran** - dijalankan setelah penyebaran aplikasi
-
-  - Menjalankan skrip pengaturan akhir
-  - Tetap melanjutkan meskipun skrip gagal
-
-### 2.4 Konfigurasi Layanan (41-48)
-
-Ini mengonfigurasi layanan aplikasi yang Anda sebarkan.
-
-```yaml title="" linenums="0"
 services:
   api_and_frontend:
     project: ./src
@@ -226,162 +30,109 @@ services:
       remoteBuild: true
 ```
 
-- **Baris 42**: Mendefinisikan layanan bernama "api_and_frontend"
-- **Baris 43**: Mengarah ke direktori `./src` untuk kode sumber
-- **Baris 44**: Menentukan Python sebagai bahasa pemrograman
-- **Baris 45**: Menggunakan Azure Container Apps sebagai platform hosting
-- **Baris 46-48**: Konfigurasi Docker
+- `name` mengidentifikasi proyek AZD; `metadata.template` mencatat versi template.
+- `requiredVersions.azd` adalah minimum template, bukan rekomendasi untuk tetap menggunakan CLI lama. Gunakan rilis AZD yang didukung saat ini.
+- `services` mendefinisikan target penyebaran aplikasi. Template ini menyebarkan API Python dan frontend sebagai satu layanan Container Apps.
+- `project` relatif terhadap `azure.yaml`.
+- `remoteBuild` meminta build container jarak jauh. Identitas Anda masih memerlukan izin Azure yang diperlukan.
 
-      - Menggunakan "api_and_frontend" sebagai nama image
-      - Membangun image Docker secara remote di Azure (bukan secara lokal)
+File Bicep template di bawah `infra/`, bukan hanya daftar `services`, mendeklarasikan sumber daya seperti Microsoft Foundry, penyebaran model, penyimpanan, dan AI Search opsional.
 
-### 2.5 Variabel Pipeline (49-76)
+## 2. Pahami hook siklus hidup
 
-Ini adalah variabel untuk membantu Anda menjalankan `azd` di pipeline CI/CD untuk otomatisasi
+Periksa bagian `hooks` dan skrip yang direferensikan sebelum menjalankan template. Versi yang ditinjau berisi:
 
-```yaml title="" linenums="0"
-pipeline:
-  variables:
-    - AZURE_RESOURCE_GROUP
-    - AZURE_AIHUB_NAME
-    - AZURE_AIPROJECT_NAME
-    - AZURE_AISERVICES_NAME
-    - AZURE_SEARCH_SERVICE_NAME
-    - AZURE_APPLICATION_INSIGHTS_NAME
-    - AZURE_CONTAINER_REGISTRY_NAME
-    - AZURE_KEYVAULT_NAME
-    - AZURE_STORAGE_ACCOUNT_NAME
-    - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-    - USE_CONTAINER_REGISTRY
-    - USE_APPLICATION_INSIGHTS
-    - USE_AZURE_AI_SEARCH_SERVICE
-    - AZURE_AI_AGENT_NAME
-    - AZURE_AI_AGENT_ID
-    - AZURE_AI_AGENT_DEPLOYMENT_NAME
-    - AZURE_AI_AGENT_DEPLOYMENT_SKU
-    - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-    - AZURE_AI_AGENT_MODEL_NAME
-    - AZURE_AI_AGENT_MODEL_FORMAT
-    - AZURE_AI_AGENT_MODEL_VERSION
-    - AZURE_AI_EMBED_DEPLOYMENT_NAME
-    - AZURE_AI_EMBED_DEPLOYMENT_SKU
-    - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-    - AZURE_AI_EMBED_MODEL_NAME
-    - AZURE_AI_EMBED_MODEL_FORMAT
-    - AZURE_AI_EMBED_MODEL_VERSION
-    - AZURE_AI_EMBED_DIMENSIONS
-    - AZURE_AI_SEARCH_INDEX_NAME
-    - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-    - AZURE_EXISTING_AIPROJECT_ENDPOINT
-    - AZURE_EXISTING_AGENT_ID
-    - ENABLE_AZURE_MONITOR_TRACING
-    - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-```
+| Hook | Tujuan | Perilaku penting |
+|------|---------|--------------------|
+| `preup` | Validasi input lingkungan template sebelum alur kerja `up` | Skrip shell spesifik platform dapat menghentikan alur kerja jika gagal |
+| `postdeploy` | Jalankan setup khusus template setelah penyebaran aplikasi | Periksa `continueOnError` dan keluaran skrip; penyebaran yang berhasil tidak membuktikan semua tugas setup berhasil |
 
-Bagian ini mendefinisikan variabel lingkungan yang digunakan **selama penyebaran**, diatur berdasarkan kategori:
+Versi ini **tidak** berisi hook lama `postprovision` / `write_env` yang ditampilkan pada materi lokakarya sebelumnya. Jangan menyalin referensi hook ke skrip yang tidak ada lagi.
 
-- **Nama Sumber Daya Azure (Baris 51-60)**:
-      - Nama sumber daya layanan Azure inti, misalnya Resource Group, AI Hub, AI Project, dll.- 
-- **Flag Fitur (Baris 61-63)**:
-      - Variabel boolean untuk mengaktifkan/mematikan layanan Azure tertentu
-- **Konfigurasi Agen AI (Baris 64-71)**:
-      - Konfigurasi untuk agen AI utama termasuk nama, ID, pengaturan penyebaran, detail model- 
-- **Konfigurasi Embedding AI (Baris 72-79)**:
-      - Konfigurasi untuk model embedding yang digunakan untuk pencarian vektor
-- **Pencarian dan Pemantauan (Baris 80-84)**:
-      - Nama index pencarian, ID sumber daya yang sudah ada, dan pengaturan pemantauan/pelacakan
+Kunci hook memilih event siklus hidup; `posix` dan `windows` memilih implementasi platform. `shell`, `run`, `interactive`, dan `continueOnError` mengontrol eksekusi. Ini adalah skrip eksekusi dengan izin Anda, jadi tinjau seperti Anda meninjau kode aplikasi.
 
----
+Lihat [dokumentasi hook AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-extensibility) untuk siklus hidup lengkap.
 
-## 3. Kenali Variabel Lingkungan
-Variabel lingkungan berikut mengontrol konfigurasi dan perilaku penyebaran Anda, diatur berdasarkan tujuan utamanya. Sebagian besar variabel memiliki nilai default yang masuk akal, tetapi Anda dapat menyesuaikannya agar sesuai dengan kebutuhan spesifik atau sumber daya Azure yang sudah ada.
+## 3. Lacak input lingkungan ke infrastruktur
 
-### 3.1 Variabel Wajib 
+Jalankan perintah ini dari repositori contoh yang diinisialisasi:
 
-```bash title="" linenums="0"
-# Konfigurasi Inti Azure
-AZURE_ENV_NAME                    # Nama lingkungan (digunakan dalam penamaan sumber daya)
-AZURE_LOCATION                    # Wilayah penyebaran
-AZURE_SUBSCRIPTION_ID             # Langganan target
-AZURE_RESOURCE_GROUP              # Nama grup sumber daya
-AZURE_PRINCIPAL_ID                # Prinsipal pengguna untuk RBAC
-
-# Nama sumber daya (dibuat otomatis jika tidak ditentukan)
-AZURE_AIHUB_NAME                  # Nama hub Microsoft Foundry
-AZURE_AIPROJECT_NAME              # Nama proyek AI
-AZURE_AISERVICES_NAME             # Nama akun layanan AI
-AZURE_STORAGE_ACCOUNT_NAME        # Nama akun penyimpanan
-AZURE_CONTAINER_REGISTRY_NAME     # Nama registri container
-AZURE_KEYVAULT_NAME               # Nama Key Vault (jika digunakan)
-```
-
-### 3.2 Konfigurasi Model 
-```bash title="" linenums="0"
-# Konfigurasi Model Chat
-AZURE_AI_AGENT_MODEL_NAME         # Bawaan: gpt-4.1-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Bawaan: OpenAI (atau Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Bawaan: terbaru yang tersedia
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Nama penyebaran untuk model chat
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Bawaan: Standar
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Bawaan: 80 (ribuan TPM)
-
-# Konfigurasi Model Embedding
-AZURE_AI_EMBED_MODEL_NAME         # Bawaan: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Bawaan: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Bawaan: terbaru yang tersedia
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Nama penyebaran untuk embedding
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Bawaan: Standar
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Bawaan: 50 (ribuan TPM)
-
-# Konfigurasi Agen
-AZURE_AI_AGENT_NAME               # Nama tampilan agen
-AZURE_EXISTING_AGENT_ID           # Gunakan agen yang ada (opsional)
-```
-
-### 3.3 Toggle Fitur
-```bash title="" linenums="0"
-# Layanan Opsional
-USE_APPLICATION_INSIGHTS         # Bawaan: benar
-USE_AZURE_AI_SEARCH_SERVICE      # Bawaan: salah
-USE_CONTAINER_REGISTRY           # Bawaan: benar
-
-# Pemantauan dan Pelacakan
-ENABLE_AZURE_MONITOR_TRACING     # Bawaan: salah
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Bawaan: salah
-
-# Konfigurasi Pencarian
-AZURE_AI_SEARCH_INDEX_NAME       # Nama indeks pencarian
-AZURE_SEARCH_SERVICE_NAME        # Nama layanan pencarian
-```
-
-### 3.4 Konfigurasi Proyek AI 
-```bash title="" linenums="0"
-# Gunakan Sumber Daya yang Ada
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # ID sumber daya lengkap dari proyek AI yang ada
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL endpoint dari proyek yang ada
-```
-
-### 3.5 Periksa Variabel Anda
-
-Gunakan Azure Developer CLI untuk melihat dan mengelola variabel lingkungan Anda:
-
-```bash title="" linenums="0"
-# Lihat semua variabel lingkungan untuk lingkungan saat ini
-azd env get-values
-
-# Dapatkan variabel lingkungan tertentu
+```bash
+azd env list
 azd env get-value AZURE_ENV_NAME
-
-# Setel variabel lingkungan
-azd env set AZURE_LOCATION eastus
-
-# Setel beberapa variabel dari file .env
-azd env set --from-file .env
+azd env get-value AZURE_LOCATION
 ```
+
+Periksa `infra/main.parameters.json` untuk melihat variabel lingkungan mana yang benar-benar dikonsumsi template. Menetapkan nama sembarangan dengan `azd env set` tidak otomatis mengubah sumber daya Azure.
+
+Default yang ditinjau meliputi:
+
+| Input | Default / tujuan |
+|-------|-------------------|
+| `AZURE_AI_AGENT_MODEL_NAME` | `gpt-5-mini` |
+| `AZURE_AI_AGENT_MODEL_VERSION` | `2025-08-07` |
+| `AZURE_AI_AGENT_DEPLOYMENT_SKU` | `GlobalStandard` |
+| `AZURE_AI_AGENT_DEPLOYMENT_CAPACITY` | `80`; satuan kuota tergantung model dan tipe penyebaran |
+| `AZURE_AI_EMBED_MODEL_NAME` | `text-embedding-3-small` |
+| `AZURE_AI_EMBED_DIMENSIONS` | `1536` |
+| `USE_APPLICATION_INSIGHTS` | `true` |
+| `USE_AZURE_AI_SEARCH_SERVICE` | `false` |
+| `ENABLE_AZURE_MONITOR_TRACING` | `false` |
+| `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` | `false`; jangan aktifkan kecuali pengelolaan data sudah ditinjau |
+
+Ini adalah input spesifik contoh, bukan pengaturan AZD global. Periksa [dokumentasi dukungan model dan wilayah](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) dan kuota langganan Anda sebelum memilih model, SKU, kapasitas, atau lokasi. Jangan mengartikan setiap satuan kapasitas sebagai 1.000 token per menit.
+
+Untuk memilih model chat yang berbeda, perbarui **nama, versi, format, SKU, dan kapasitas yang kompatibel bersama-sama**, sesuai [panduan kustomisasi contoh](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md). Mengubah hanya nama bisa meninggalkan versi atau tipe penyebaran yang tidak kompatibel.
+
+## 4. Lab: aktifkan pencarian dan pelacakan opsional
+
+!!! warning "Pengaturan ini dapat menambah sumber daya berbayar"
+
+    Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
+
+```bash
+azd env set USE_AZURE_AI_SEARCH_SERVICE true
+azd env set USE_APPLICATION_INSIGHTS true
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+
+# Inspect the infrastructure changes and any configured preview hooks
+azd provision --preview
+
+# Apply the resource changes and deploy the application
+azd up
+```
+
+Perubahan infrastruktur memerlukan provisioning; `azd deploy` saja hanya menyebarkan layanan aplikasi. Untuk pengindeksan pencarian dan opsi pengambilan yang didukung, ikuti [panduan AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md). Untuk pemantauan, ikuti [panduan observability](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md).
+
+Jangan aktifkan penangkapan isi prompt/respons pada data pelanggan nyata tanpa persetujuan, kontrol akses, kebijakan retensi, dan redaksi yang diperlukan.
+
+## 5. Sumber daya yang ada dan CI/CD
+
+Untuk menggunakan kembali proyek Foundry, ikuti [instruksi sumber daya yang ada pada contoh](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md#use-existing-resources). Menetapkan `AZURE_EXISTING_AIPROJECT_RESOURCE_ID` mengubah jalur penyebaran; dalam skenario itu, template tidak membuat Application Insights atau AI Search untuk Anda. Verifikasi dependensi, penugasan peran, dan penyebaran model secara eksplisit.
+
+Bagian `pipeline.variables` mengontrol nilai yang diteruskan ke pipeline yang dihasilkan; ini bukan toko rahasia dan tidak membuat sumber daya Azure. Utamakan managed identity dalam aplikasi dan OIDC untuk CI/CD. File lingkungan AZD adalah teks polos dan tidak boleh dikomit.
+
+AZD mendukung impor file dotenv yang disiapkan secara lokal dan dipercaya:
+
+```bash
+azd env set --file .env
+```
+
+Tinjau file itu sebelum mengimpornya, dan jangan cetak file lingkungan yang berisi rahasia di terminal bersama atau log CI.
+
+## 6. Periksa pemahaman Anda
+
+- Layanan `azure.yaml` mana yang menyebarkan aplikasi?
+- Parameter infrastruktur mana yang mengkonsumsi setiap nilai yang Anda ubah?
+- Perubahan mana yang memerlukan provisioning dan bukan hanya penyebaran?
+- Apakah wilayah dan langganan yang dipilih mendukung model dan kuota?
+- Apakah semua hook setup berhasil, dan dapatkah Anda memverifikasi perilaku aplikasi yang disebarkan?
+
+Lanjutkan ke [Sesuaikan Template](5-Customize-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha keras agar hasil terjemahan akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,173 +1,176 @@
 <div align="center">
   <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🎯 AZD AI ਵਿਕਾਸਕਰਤਿਆਂ ਲਈ ਵਰਕਸ਼ਾਪ
+      🎯 ਏਜ਼ੀਡੀ ਫਾਰ ਏਆਈ ਡਿਵੈਲਪਰ ਵਰਕਸ਼ਾਪ
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>Azure Developer CLI ਨਾਲ AI ਐਪਲੀਕੇਸ਼ਨਾਂ ਬਣਾਉਣ ਲਈ ਇੱਕ ਹੱਥ-ਅਨੁਭਵ ਵਰਕਸ਼ਾਪ।</strong><br>
-      AZD ਟੈਂਪਲੇਟ ਅਤੇ AI ਡਿਪਲੋਇਮੈਂਟ ਵਰਕਫਲੋਜ਼ 'ਤੇ ਮਾਹਿਰ ਹੋਣ ਲਈ 7 ਮੌਡੀਊਲ ਪੂਰੇ ਕਰੋ।
+      <strong>ਐਜ਼ਯੂਰ ਡਿਵੈਲਪਰ CLI ਨਾਲ AI ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣ ਲਈ ਇੱਕ ਕਾਰਗਰ ਵਰਕਸ਼ਾਪ।</strong><br>
+      ਏਜ਼ੀਡੀ ਟੈਮਪਲੇਟ ਅਤੇ ਏਆਈ ਡਿਪਲੋਇਮੈਂਟ ਵਰਕਫਲੋਜ਼ ਵਿੱਚ ਨਿਪੁੰਨ ਬਣਨ ਲਈ 7 ਮੋਡੀਊਲਜ਼ ਪੂਰੇ ਕਰੋ।
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 ਆਖਰੀ ਅਪਡੇਟ: ਮਾਰਚ 2026
+        📅 ਸਰੋਤ ਮਾਰਗਦਰਸ਼ਨ ਸਮੀਖਿਆ: ਨਵੰਬਰ 2026
       </span>
     </div>
   </div>
 </div>
 
-# AZD AI ਵਿਕਾਸਕਰਤਿਆਂ ਲਈ ਵਰਕਸ਼ਾਪ
+# ਏਜ਼ੀਡੀ ਫਾਰ ਏਆਈ ਡਿਵੈਲਪਰ ਵਰਕਸ਼ਾਪ
 
-Welcome to the hands-on workshop for learning Azure Developer CLI (AZD) with a focus on AI application deployment. This workshop helps you gain an applied understanding of AZD templates in 3 steps:
+ਏਜ਼ਯੂਰ ਡਿਵੈਲਪਰ CLI (AZD) ਸਿਖਣ ਲਈ ਏਆਈ ਐਪਲੀਕੇਸ਼ਨ ਡਿਪਲੋਇਮੈਂਟ ਦੇ ਕੇਂਦਰ ਨਾਲ ਇੱਕ ਕਾਰਗਰ ਵਰਕਸ਼ਾਪ ਵਿੱਚ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ। ਇਸ ਵਰਕਸ਼ਾਪ ਨਾਲ ਤੁਸੀਂ 3 ਕਦਮਾਂ ਵਿੱਚ ਏਜ਼ੀਡੀ ਟੈਮਪਲੇਟ ਦੀ ਵਰਤੋਂ ਬਾਰੇ ਪ੍ਰਯੋਗਾਤਮਕ ਸਮਝ ਪ੍ਰਾਪਤ ਕਰੋਂਗੇ:
 
-1. **ਖੋਜ** - ਆਪਣੇ ਲਈ ਸਹੀ ਟੈਂਪਲੇਟ ਲੱਭੋ.
-1. **ਡਿਪਲੋਇਮੈਂਟ** - ਡਿਪਲੋਇ ਕਰੋ ਅਤੇ ਪੁਸ਼ਟੀ ਕਰੋ ਕਿ ਇਹ ਕੰਮ ਕਰਦਾ ਹੈ
-1. **ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ** - ਸੋਧੋ ਅਤੇ ਦੁਹਰਾਓ ਤਾਂ ਜੋ ਇਹ ਤੁਹਾਡਾ ਬਣ ਜਾਵੇ!
+1. **ਖੋਜ** - ਆਪਣੀ ਲਈ ਠੀਕ ਟੈਮਪਲੇਟ ਲੱਭੋ।
+1. **ਡਿਪਲੋਇਮੈਂਟ** - ਡਿਪਲੋਇ ਕਰੋ ਅਤੇ ਇਹ ਕੰਮ ਕਰਦਾ ਹੈ ਜਾਂ ਨਹੀਂ, ਜाँच ਕਰੋ
+1. **ਕਸਟਮਾਈਜੇਸ਼ਨ** - ਸੋਧੋ ਅਤੇ ਮੁੜ ਸੋਚ ਕਰਕੇ ਇਹਨੂੰ ਆਪਣਾ ਬਣਾਓ!
 
-Over the course of this workshop, you will also be introduced to core developer tools and workflows, to help you streamline your end-to-end development journey.
+ਇਸ ਵਰਕਸ਼ਾਪ ਦੇ ਦੌਰਾਨ, ਤੁਹਾਨੂੰ ਮੁੱਖ ਡਿਵੈਲਪਰ ਟੂਲਾਂ ਅਤੇ ਵਰਕਫਲੋਜ਼ ਨਾਲ ਵੀ ਜਾਣੂ ਕਰਵਾਇਆ ਜਾਵੇਗਾ, ਜੋ ਤੁਹਾਡੇ ਸਭ-ਤਰਫ਼ੀ ਵਿਕਾਸ ਯਾਤਰਾ ਨੂੰ ਸੁਗਮ ਬਣਾਉਣ ਵਿੱਚ ਮਦਦ ਕਰੇਗਾ।
 
 <br/>
 
-## ਬ੍ਰਾਊਜ਼ਰ-ਅਧਾਰਤ ਗਾਈਡ
+## ਬਰਾਊਜ਼ਰ-ਅਧਾਰਿਤ ਗਾਈਡ
 
-The workshop lessons are in Markdown. You can navigate them directly in GitHub - or launch a browser-based preview as shown in the screenshot below.
+ਵਰਕਸ਼ਾਪ ਦੇ ਪਾਠ ਮਾਰਕਡਾਊਨ ਵਿੱਚ ਹਨ। ਤੁਸੀਂ ਇਨ੍ਹਾਂ ਨੂੰ ਸਿੱਧਾ GitHub ਵਿੱਚ ਨੈਵੀਗੇਟ ਕਰ ਸਕਦੇ ਹੋ - ਜਾਂ ਹੇਠਲੇ ਸਕ੍ਰੀਨਸ਼ਾਟ ਵਿੱਚ ਵੇਖਾਏ ਗਏ ਬਰਾਊਜ਼ਰ-ਅਧਾਰਿਤ ਪ੍ਰੀਵਿਊ ਨੂੰ ਲਾਂਚ ਕਰੋ।
 
-![ਵਰਕਸ਼ਾਪ](../../../translated_images/pa/workshop.75906f133e6f8ba0.webp)
+![Workshop](../../../translated_images/pa/workshop.75906f133e6f8ba0.webp)
 
-To use this option - fork the repository to your profile, and launch GitHub Codespaces. Once the VS Code terminal is active, type this command:
+ਇਸ ਵਿਕਲਪ ਨੂੰ ਵਰਤਣ ਲਈ - ਰਿਪੋਜ਼ਿਟਰੀ ਨੂੰ ਆਪਣੇ ਪ੍ਰੋਫ਼ਾਈਲ ਵਿੱਚ ਫੋਰਕ ਕਰੋ, ਅਤੇ GitHub ਕੋਡਸਪੇਸ ਲਾਂਚ ਕਰੋ। ਇੱਕ ਵਾਰੀ VS ਕੋਡ ਟਰਮੀਨਲ ਸਰਗਰਮ ਹੋ ਜਾਵੇ, ਇਹ ਕਮਾਂਡ ਟਾਈਪ ਕਰੋ:
 
-This browser preview works in GitHub Codespaces, dev containers, or a local clone with Python and MkDocs installed.
+ਇਹ ਬਰਾਊਜ਼ਰ ਪ੍ਰੀਵਿਊ GitHub ਕੋਡਸਪੇਸ, ਡੈਵ ਕੰਟੇਨਰਜ਼ ਜਾਂ ਪਾਇਥਨ ਅਤੇ MkDocs ਨਾਲ ਇੱਕ ਲੋਕਲ ਕਲੋਨ ਵਿੱਚ ਕੰਮ ਕਰਦਾ ਹੈ।
 
 ```bash title="" linenums="0"
-mkdocs serve > /dev/null 2>&1 &
+python -m pip install -r requirements-dev.txt
+python -m mkdocs serve --config-file workshop/mkdocs.yml
 ```
 
-In a few seconds, you will see a pop-up dialog. Select the option to `ਬਰਾਊਜ਼ਰ ਵਿੱਚ ਖੋਲ੍ਹੋ`. The web-based guide will now open in a new browser tab. Some benefits of this preview:
+ਇਹ ਕਮਾਂਡਾਂ **ਕੋਰਸ ਰਿਪੋਜ਼ਿਟਰੀ ਦੇ ਰੂਟ** ਤੋਂ ਚਲਾਓ, ਵੱਖ-ਵੱਖ ਸ਼ੁਰੂਆਤੀ ਏਆਈ ਸੈਂਪਲ ਤੋਂ ਨਹੀਂ। ਪ੍ਰੀਵਿਊ ਨੂੰ ਫੋਰਗ੍ਰਾਊਂਡ ਵਿੱਚ ਰੱਖੋ ਤਾਂ ਜੋ ਗਲਤੀਆਂ ਦਿਖਾਈ ਦੇਣ। ਇਸਨੂੰ Ctrl+C ਨਾਲ ਬੰਦ ਕਰੋ। ਸਾਈਟ ਬਿਨਾਂ ਸਰਵਿੰਗ ਦੇ ਜਾਂਚਣ ਲਈ, `python -m mkdocs build --strict --config-file workshop/mkdocs.yml` ਚਲਾਓ।
 
-1. **ਬਿਲਟ-ਇਨ ਖੋਜ** - ਕੀਵਰਡ ਜਾਂ ਪਾਠ ਤੁਰੰਤ ਲੱਭੋ.
-1. **ਕਾਪੀ ਆਈਕਨ** - ਕੋਡਬਲਾਕ 'ਤੇ ਕਰਸਰ ਰੱਖੋ ਤਾਂ ਜੋ ਇਹ ਵਿਕਲਪ ਦਿਖੇ
-1. **ਥੀਮ ਟੌਗਲ** - ਡਾਰਕ ਅਤੇ ਲਾਈਟ ਥੀਮਾਂ ਵਿੱਚ ਬਦਲੋ
-1. **ਮਦਦ ਲਵੋ** - ਸ਼ਾਮਲ ਹੋਣ ਲਈ ਫੂਟਰ ਵਿੱਚ Discord ਆਈਕਨ 'ਤੇ ਕਲਿਕ ਕਰੋ!
+ਕੁਝ ਸਕਿੰਟਾਂ ਵਿੱਚ, ਤੁਸੀਂ ਇੱਕ ਪੌਪ-ਅੱਪ ਡਾਇਲਾਗ ਦੇਖੋਗੇ। ਵਿਕਲਪ ਚੁਣੋ ਕਿ ਇਹ `Open in browser` ਕਰੇ। ਵੈੱਬ ਅਧਾਰਿਤ ਗਾਈਡ ਹੁਣ ਇੱਕ ਨਵੇਂ ਬਰਾਊਜ਼ਰ ਟੈਬ ਵਿੱਚ ਖੁਲ ਜਾਵੇਗੀ। ਇਸ ਪ੍ਰੀਵਿਊ ਦੇ ਕੁਝ ਫਾਇਦੇ:
+
+1. **ਬਿਲਟ-ਇਨ ਖੋਜ** - ਤੇਜ਼ੀ ਨਾਲ ਕੁੰਜੀ ਸ਼ਬਦ ਜਾਂ ਪਾਠ ਲੱਭੋ।
+1. **ਕਾਪੀ ਆਈਕਨ** - ਕੋਡਬਲਾਕਾਂ 'ਤੇ ਮਾਊਸ ਲਿਜਾਣ ਤੇ ਇਹ ਵਿਕਲਪ ਵੇਖੋ
+1. **ਥੀਮ ਟੋਗਲ** - ਡਾਰਕ ਅਤੇ ਲਾਈਟ ਥੀਮਾਂ ਵਿਚਕਾਰ ਬਦਲੋ
+1. **ਸਹਾਇਤਾ ਪ੍ਰਾਪਤ ਕਰੋ** - ਫੁੱਟਰ ਵਿੱਚ ਡਿਸਕਾਰਡ ਆਈਕਨ 'ਤੇ ਕਲਿੱਕ ਕਰਕੇ ਜੁੜੋ!
 
 <br/>
 
-## ਵਰਕਸ਼ਾਪ ਓਵਰਵਿਊ
+## ਵਰਕਸ਼ਾਪ ਦਾ ਜਾਇਜ਼ਾ
 
-**ਅवਧੀ:** 3-4 hours  
-**ਸਤਰ:** Beginner to Intermediate  
-**ਪੂਰਵ-ਸ਼ਰਤਾਂ:** Familiarity with Azure, AI concepts, VS Code & command-line tools.
+**ਅਵਧੀ:** 3-4 ਘੰਟੇ  
+**ਸਤਰ:** ਸ਼ੁਰੂਆਤੀ ਤੋਂ ਮੱਧਮ  
+**ਜਰੂਰੀ ਗੁਣ:** ਏਜ਼ਯੂਰ, ਏਆਈ ਧਾਰਨਾਂ, VS ਕੋਡ ਅਤੇ ਕਮਾਂਡ-ਲਾਈਨ ਟੂਲਾਂ ਨਾਲ ਪਰਿਚਿਤ ਹੋਣਾ।
 
-This is a hands-on workshop where you learn by doing. Once you have completed the exercises, we recommend reviewing the AZD For Beginners curriculum to continue your learning journey into Security and Productivity best practices.
+ਇਹ ਇੱਕ ਕਾਰਗਰ ਵਰਕਸ਼ਾਪ ਹੈ ਜਿੱਥੇ ਤੁਸੀਂ ਕਰਕੇ ਸਿੱਖਦੇ ਹੋ। ਜਦੋਂ ਤੁਸੀਂ ਕਸਰਤਾਂ ਪੂਰੀਆਂ ਕਰ ਲਿਆ, ਤਾਂ ਅਸੀਂ ਸਿਫਾਰਸ਼ ਕਰਦੇ ਹਾਂ ਕਿ AZD ਫਾਰ ਬਿਗਿਨਰਜ਼ ਕਰੀਕੁਲਮ ਦੀ ਸਮੀਖਿਆ ਕਰੋ ਤਾਂ ਜੋ ਸੁਰੱਖਿਆ ਅਤੇ ਪ੍ਰਮਾਣਿਕਤਾ ਦੇ ਅੱਗੇ ਵਧਣ ਵਾਲੇ ਤਰੀਕੇ ਸਿੱਖ ਸਕੋ।
 
-| ਸਮਾਂ| ਮੌਡੀਊਲ  | ਉਦੇਸ਼ |
+| ਸਮਾਂ| ਮੋਡੀਊਲ  | ਲਕੜੀ ਦਾ ਟੀਚਾ |
 |:---|:---|:---|
-| 15 ਮਿੰਟ | [ਪਰਿਚਯ](docs/instructions/0-Introduction.md) | ਸਟੇਜ ਸੈੱਟ ਕਰੋ, ਲਕਸ਼ਾਂ ਨੂੰ ਸਮਝੋ |
-| 30 ਮਿੰਟ | [AI ਟੈਂਪਲੇਟ ਚੁਣੋ](docs/instructions/1-Select-AI-Template.md) | ਵਿਕਲਪਾਂ ਦੀ ਪੜਤਾਲ ਕਰੋ ਅਤੇ ਸ਼ੁਰੂਆਤੀ ਪਿਕ ਕਰੋ | 
-| 30 ਮਿੰਟ | [Validate AI Template](docs/instructions/2-Validate-AI-Template.md) | ਡਿਫੋਲਟ ਹੱਲ ਨੂੰ Azure 'ਤੇ ਡਿਪਲੋਇ ਕਰੋ |
-| 30 ਮਿੰਟ | [Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) | ਸੰਰਚਨਾ ਅਤੇ ਕੰਫਿਗਰੇਸ਼ਨ ਦੀ ਪੜਤਾਲ ਕਰੋ |
-| 30 ਮਿੰਟ | [Configure AI Template](docs/instructions/4-Configure-AI-Template.md) | ਉਪਲਬਧ ਫੀਚਰਾਂ ਨੂੰ ਸਰਗਰਮ ਕਰੋ ਅਤੇ ਅਜ਼ਮਾਓ |
-| 30 ਮਿੰਟ | [Customize AI Template](docs/instructions/5-Customize-AI-Template.md) | ਟੈਂਪਲੇਟ ਨੂੰ ਆਪਣੀਆਂ ਲੋੜਾਂ ਅਨੁਸਾਰ ਅਨੁਕੂਲ ਕਰੋ |
-| 30 ਮਿੰਟ | [Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) | ਸਫਾਈ ਕਰੋ ਅਤੇ ਸਰੋਤ ਰਿਲੀਜ਼ ਕਰੋ |
-| 15 ਮਿੰਟ | [Wrap-Up & Next Steps](docs/instructions/7-Wrap-up.md) | ਸਿੱਖਣ ਦੇ ਸਰੋਤ, ਵਰਕਸ਼ਾਪ ਚੈਲੇਂਜ |
+| 15 ਮਿੰਟ | [ਪ੍ਰਸਤਾਵਨਾ](docs/instructions/0-Introduction.md) | ਮਕਸਦ ਸਮਝਣਾ, ਦ੍ਰਿਸ਼ਟਿਕੋਣ ਸੈੱਟ ਕਰਨਾ |
+| 30 ਮਿੰਟ | [ਏਆਈ ਟੈਮਪਲੇਟ ਚੁਣੋ](docs/instructions/1-Select-AI-Template.md) | ਵਿਕਲਪਾਂ ਦੀ ਖੋਜ ਅਤੇ ਸ਼ੁਰੂਆਤ ਚੁਣਨਾ | 
+| 30 ਮਿੰਟ | [ਏਆਈ ਟੈਮਪਲੇਟ ਠੀਕ ਕਰੋ](docs/instructions/2-Validate-AI-Template.md) | ਡਿਫੌਲਟ ਹੱਲ ਨੂੰ ਏਜ਼ਯੂਰ 'ਤੇ ਡਿਪਲੋਇ ਕਰੋ |
+| 30 ਮਿੰਟ | [ਏਆਈ ਟੈਮਪਲੇਟ ਨੂੰ ਵਿਖੰਡਿਤ ਕਰੋ](docs/instructions/3-Deconstruct-AI-Template.md) | ਸੰਰਚਨਾ ਅਤੇ ਕਨਫਿਗਰੇਸ਼ਨ ਦੀ ਖੋਜ |
+| 30 ਮਿੰਟ | [ਏਆਈ ਟੈਮਪਲੇਟ ਕਨਫਿਗਰ ਕਰੋ](docs/instructions/4-Configure-AI-Template.md) | ਉਪਲਬਧ ਫੀਚਰਸ ਨੂੰ ਐਕਟਿਵ ਕਰੋ ਅਤੇ ਕੋਸ਼ਿਸ਼ ਕਰੋ |
+| 30 ਮਿੰਟ | [ਏਆਈ ਟੈਮਪਲੇਟ ਕਸਟਮਾਈਜ਼ ਕਰੋ](docs/instructions/5-Customize-AI-Template.md) | ਟੈਮਪਲੇਟ ਨੂੰ ਆਪਣੀਆਂ ਜ਼ਰੂਰਤਾਂ ਅਨੁਸਾਰ ਬਦਲੋ |
+| 30 ਮਿੰਟ | [ਇੰਫ਼ਰਾਸਟਰਕਚਰ ਨੂੰ ਹਟਾਓ](docs/instructions/6-Teardown-Infrastructure.md) | ਸਾਫ਼-ਸਫਾਈ ਅਤੇ ਸਰੋਤਾਂ ਨੂੰ ਰਿਹਾਈ ਦਿਓ |
+| 15 ਮਿੰਟ | [ਸਾਰਾ ਸੰਘਰਸ਼ & ਅਗਲੇ ਕਦਮ](docs/instructions/7-Wrap-up.md) | ਸਿੱਖਣ ਦੇ ਸੰਸਾਧਨ, ਵਰਕਸ਼ਾਪ ਚੈਲੈਂਜ |
 
 <br/>
 
 ## ਤੁਸੀਂ ਕੀ ਸਿੱਖੋਗੇ
 
-Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Microsoft Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
+ਏਜ਼ੀਡੀ ਟੈਮਪਲੇਟ ਨੂੰ ਇੱਕ ਸਿੱਖਣ ਵਾਲੇ ਸैंडਬਾਕਸ ਵਜੋਂ ਸੋਚੋ ਜੋ ਮਾਈਕ੍ਰੋਸਾਫਟ ਫਾਊਂਡਰੀ 'ਤੇ ਅੰਤ-ਤਰਫ਼ਾ ਵਿਕਾਸ ਲਈ ਵੱਖ-ਵੱਖ ਸਮਰੱਥਾਵਾਂ ਅਤੇ ਟੂਲਾਂ ਦੀ ਖੋਜ ਦਾ ਮੌਕਾ ਦਿੰਦਾ ਹੈ। ਇਸ ਵਰਕਸ਼ਾਪ ਦੇ ਅੰਤ ਤੱਕ, ਤੁਹਾਡੇ ਕੋਲ ਇਸ ਸੰਦਰਭ ਵਿੱਚ ਵੱਖ-ਵੱਖ ਟੂਲਾਂ ਅਤੇ ਧਾਰਨਾਵਾਂ ਦੀ ਇੱਕ ਅੰਦਰੂਨੀ ਸਮਝ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ।
 
-| ਧਾਰਨਾ  | ਉਦੇਸ਼ |
+| ਧਾਰਨਾ  | ਲਕੜੀ ਦਾ ਟੀਚਾ |
 |:---|:---|
-| **Azure Developer CLI** | ਟੂਲ ਕਮਾਂਡ ਅਤੇ ਵਰਕਫਲੋਅਜ਼ ਨੂੰ ਸਮਝੋ|
-| **AZD Templates**| ਪ੍ਰੋਜੈਕਟ ਸੰਰਚਨਾ ਅਤੇ ਕੰਫਿਗ ਨੂੰ ਸਮਝੋ|
-| **Azure AI Agent**| Microsoft Foundry ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਪ੍ਰੋਵਿਜ਼ਨ ਅਤੇ ਡਿਪਲੋਇ ਕਰੋ  |
-| **Azure AI Search**| ਏਜੰਟਸ ਨਾਲ ਸੰਦਰਭ ਇੰਜੀਨੀਅਰਿੰਗ ਯੋਗ ਬਣਾਓ |
-| **Observability**| ਟਰੇਸਿੰਗ, ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਮੁਲਾਂਕਣ ਦੀ ਪੜਤਾਲ ਕਰੋ |
-| **Red Teaming**| ਵਿਰੋਧੀ ਜਾਂਚ ਅਤੇ ਰੋਕਥਾਮਾਂ ਦੀ ਪੜਤਾਲ ਕਰੋ |
+| **ਏਜ਼ਯੂਰ ਡਿਵੈਲਪਰ CLI** | ਟੂਲ ਕਮਾਂਡ ਅਤੇ ਵਰਕਫਲੋਜ਼ ਨੂੰ ਸਮਝੋ|
+| **AZD ਟੈਮਪਲੇਟਸ**| ਪ੍ਰੋਜੈਕਟ ਦੀ ਸੰਰਚਨਾ ਅਤੇ ਕਨਫਿਗਰੇਸ਼ਨ ਨੂੰ ਸਮਝੋ|
+| **ਏਜ਼ਯੂਰ ਏਆਈ ਏਜੰਟ**| ਮਾਈਕ੍ਰੋਸਾਫਟ ਫਾਊਂਡਰੀ ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਪ੍ਰੋਵਿਜ਼ਨ ਅਤੇ ਡਿਪਲੋਇ ਕਰੋ  |
+| **ਏਜ਼ਯੂਰ ਏਆਈ ਖੋਜ**| ਏਜੰਟਸ ਨਾਲ ਸੰਦਰਭ ਇੰਜੀਨੀਅਰਿੰਗ ਯੋਗ ਬਣਾਓ |
+| **ਨਿਗਰਾਨੀਯੋਗਤਾ**| ਟਰੇਸਿੰਗ, ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਮੁਲਾਂਕਣ ਦੀ ਖੋਜ |
+| **ਰੇਡ ਟੀਮਿੰਗ**| ਵਿਰੋਧੀ ਟੈਸਟਿੰਗ ਅਤੇ ਰੋਕਥਾਮ ਦੀ ਖੋਜ |
 
 <br/>
 
 ## ਵਰਕਸ਼ਾਪ ਦੀ ਸੰਰਚਨਾ
 
-The workshop is structured to take you on a journey from template discovery, to deployment, deconstruction, and customization - using the official [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) starter template as the basis.
+ਵਰਕਸ਼ਾਪ ਨੂੰ ਇਸ ਤਰ੍ਹਾਂ ਬਣਾਇਆ ਗਿਆ ਹੈ ਕਿ ਤੁਹਾਨੂੰ ਟੈਮਪਲੇਟ ਦੀ ਖੋਜ ਤੋਂ ਲੈ ਕੇ ਡਿਪਲੋਇਮੈਂਟ, ਵਿਖੰਡਨ ਅਤੇ ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ ਦੇ ਸਫ਼ਰ 'ਤੇ ਲੈ ਜਾਵੇ - ਜਿਸ ਵਿੱਚ ਸਰਕਾਰੀ [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) ਸਟਾਰਟਰ ਟੈਮਪਲੇਟ ਮੁੱਖ ਆਧਾਰ ਹੈ।
 
-### [ਮੌਡੀਊਲ 1: AI ਟੈਂਪਲੇਟ ਚੁਣੋ](docs/instructions/1-Select-AI-Template.md) (30 ਮਿੰਟ)
+### [ਮੋਡੀਊਲ 1: ਏਆਈ ਟੈਮਪਲੇਟ ਚੁਣੋ](docs/instructions/1-Select-AI-Template.md) (30 ਮਿੰਟ)
 
-- AI ਟੈਂਪਲੇਟ ਕੀ ਹਨ?
-- ਤੁਸੀਂ AI ਟੈਂਪਲੇਟ ਕਿੱਥੇ ਲੱਭ ਸਕਦੇ ਹੋ?
-- ਤੁਸੀਂ AI ਏਜੰਟ ਬਣਾਉਣਾ ਕਿਵੇਂ ਸ਼ੁਰੂ ਕਰ ਸਕਦੇ ਹੋ?
-- **ਲੈਬ**: Codespaces ਜਾਂ dev container ਵਿੱਚ Quickstart
+- ਏਆਈ ਟੈਮਪਲੇਟ ਕੀ ਹਨ?
+- ਮੈਂ ਏਆਈ ਟੈਮਪਲੇਟ ਕਿੱਥੇ ਲੱਭ ਸਕਦਾ ਹਾਂ?
+- ਮੈਂ ਕਿਵੇਂ ਏਆਈ ਏਜੰਟ ਬਣਾਉਣ ਦੀ ਸ਼ੁਰੂਆਤ ਕਰ ਸਕਦਾ ਹਾਂ?
+- **ਲੇਬ**: ਕੋਡਸਪੇਸ ਜਾਂ ਡੈਵ ਕੰਟੇਨਰ ਵਿੱਚ ਤੁਰੰਤ ਸ਼ੁਰੂਆਤ
 
-### [ਮੌਡੀਊਲ 2: Validate AI Template](docs/instructions/2-Validate-AI-Template.md) (30 ਮਿੰਟ)
+### [ਮੋਡੀਊਲ 2: ਏਆਈ ਟੈਮਪਲੇਟ ਠੀਕ ਕਰੋ](docs/instructions/2-Validate-AI-Template.md) (30 ਮਿੰਟ)
 
-- AI ਟੈਂਪਲੇਟ ਆਰਕੀਟੈਕਚਰ ਕੀ ਹੈ?
+- ਏਆਈ ਟੈਮਪਲੇਟ ਆਰਕੀਟੈਕਚਰ ਕੀ ਹੈ?
 - AZD ਵਿਕਾਸ ਵਰਕਫਲੋ ਕੀ ਹੈ?
-- AZD ਵਿਕਾਸ ਲਈ ਮਦਦ ਕਿਵੇਂ ਪ੍ਰਾਪਤ ਕਰ ਸਕਦੇ ਹੋ?
-- **ਲੈਬ**: Deploy & Validate AI Agents template
+- ਮੈਂ AZD ਵਿਕਾਸ ਵਿੱਚ ਕਿਵੇਂ ਸਹਾਇਤਾ ਲੈ ਸਕਦਾ ਹਾਂ?
+- **ਲੇਬ**: ਏਆਈ ਏਜੰਟਸ ਟੈਮਪਲੇਟ ਡਿਪਲੋਇਅਰ ਅਤੇ ਵੈਰੀਫਾਈ ਕਰੋ
 
-### [ਮੌਡੀਊਲ 3: Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) (30 ਮਿੰਟ)
+### [ਮੋਡੀਊਲ 3: ਏਆਈ ਟੈਮਪਲੇਟ ਨੂੰ ਵਿਖੰਡਿਤ ਕਰੋ](docs/instructions/3-Deconstruct-AI-Template.md) (30 ਮਿੰਟ)
 
-- ਆਪਣੇ ਵਾਤਾਵਰਣ `.azure/` ਵਿੱਚ ਖੋਜੋ 
-- ਆਪਣੇ ਰਿਸੋਰਸ ਸੈਟਅਪ `infra/` ਵਿੱਚ ਖੋਜੋ 
-- ਆਪਣੀ AZD ਕੰਫਿਗਰੇਸ਼ਨ `azure.yaml`s ਵਿੱਚ ਖੋਜੋ
-- **ਲੈਬ**: Environment Variables ਸੋਧੋ & ਦੁਬਾਰਾ ਡਿਪਲੋਇ ਕਰੋ
+- ਆਪਣੇ ਵਾਤਾਵਰਨ ਦੀ ਖੋਜ ਕਰੋ `.azure/` 
+- ਆਪਣੇ ਸਰੋਤ ਸੈੱਟਅਪ ਦੀ ਖੋਜ ਕਰੋ `infra/` 
+- ਆਪਣੇ AZD ਕਨਫਿਗਰੇਸ਼ਨ ਦੀ ਖੋਜ ਕਰੋ `azure.yaml`s
+- **ਲੇਬ**: ਵਾਤਾਵਰਨ ਚਲਣ ਵਾਲੇ ਤੱਤ ਸੋਧੋ ਅਤੇ ਮੁੜ ਡਿਪਲੋਇ ਕਰੋ
 
-### [ਮੌਡੀਊਲ 4: Configure AI Template](docs/instructions/4-Configure-AI-Template.md) (30 ਮਿੰਟ)
-- ਖੋਜੋ: Retrieval Augmented Generation
-- ਖੋਜੋ: Agent Evaluation & Red Teaming
-- ਖੋਜੋ: Tracing & Monitoring
-- **ਲੈਬ**: AI Agent + Observability ਖੋਜੋ 
+### [ਮੋਡੀਊਲ 4: ਏਆਈ ਟੈਮਪਲੇਟ ਕਨਫਿਗਰ ਕਰੋ](docs/instructions/4-Configure-AI-Template.md) (30 ਮਿੰਟ)
+- ਖੋਜ ਕਰੋ: ਰੀਟਰੀਵਲ ਅਗ਼ਮੈਂਟਡ ਜਨਰੇਸ਼ਨ
+- ਖੋਜ ਕਰੋ: ਏਜੰਟ ਮੁਲਾਂਕਣ ਅਤੇ ਰੇਡ ਟੀਮਿੰਗ
+- ਖੋਜ ਕਰੋ: ਟਰੇਸਿੰਗ ਅਤੇ ਮਾਨੀਟਰਿੰਗ
+- **ਲੇਬ**: ਏਆਈ ਏਜੰਟ ਅਤੇ ਨਿਗਰਾਨੀਯੋਗਤਾ ਦੀ ਖੋਜ ਕਰੋ 
 
-### [ਮੌਡੀਊਲ 5: Customize AI Template](docs/instructions/5-Customize-AI-Template.md) (30 ਮਿੰਟ)
-- ਪਰਿਭਾਸ਼ਿਤ ਕਰੋ: PRD ਨਾਲ ਸਿਨੇਰੀਓ ਲੋੜਾਂ
-- ਕੰਫਿਗਰ ਕਰੋ: AZD ਲਈ Environment Variables
-- ਲਾਗੂ ਕਰੋ: ਜੁੜੇ ਟਾਸਕਾਂ ਲਈ Lifecycle Hooks
-- **ਲੈਬ**: ਮੇਰੇ ਸਿਨੇਰੀਓ ਲਈ ਟੈਂਪਲੇਟ ਕਸਟਮਾਈਜ਼ ਕਰੋ
+### [ਮੋਡੀਊਲ 5: ਏਆਈ ਟੈਮਪਲੇਟ ਕਸਟਮਾਈਜ਼ ਕਰੋ](docs/instructions/5-Customize-AI-Template.md) (30 ਮਿੰਟ)
+- ਪਰਿਭਾਸ਼ਿਤ ਕਰੋ: ਦ੍ਰਿਸ਼ਟੀਕੋਣ ਸਾਥ ਸੀਨੀਰੀਓ ਦੀਆਂ ਲੋੜਾਂ
+- ਕਨਫਿਗਰ ਕਰੋ: AZD ਲਈ ਵਾਤਾਵਰਨ ਚਲਣ ਵਾਲੇ ਤੱਤ
+- ਲਾਗੂ ਕਰੋ: ਵਧੇਰੇ ਕੰਮ ਲਈ ਲਾਈਫਸਾਈਕਲ ਹੁੱਕਸ
+- **ਲੇਬ**: ਆਪਣੇ ਸੀਨੀਰੀਓ ਲਈ ਟੈਮਪਲੇਟ ਕਸਟਮਾਈਜ਼ ਕਰੋ
 
-### [ਮੌਡੀਊਲ 6: Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) (30 ਮਿੰਟ)
-- ਸੰਖੇਪ: AZD ਟੈਂਪਲੇਟ ਕੀ ਹਨ?
-- ਸੰਖੇਪ: Azure Developer CLI ਕਿਉਂ ਵਰਤਣਾ?
-- ਅਗਲੇ ਕਦਮ: ਕੋਈ ਵੱਖਰਾ ਟੈਂਪਲੇਟ ਅਜ਼ਮਾਓ!
-- **ਲੈਬ**: ਇੰਫਰਾਸਟ੍ਰਕਚਰ ਨੂੰ ਡੀ-ਪ੍ਰੋਵਿਜ਼ਨ ਕਰੋ & ਸਫਾਈ ਕਰੋ
+### [ਮੋਡੀਊਲ 6: ਇੰਫ਼ਰਾਸਟਰਕਚਰ ਹਟਾਓ](docs/instructions/6-Teardown-Infrastructure.md) (30 ਮਿੰਟ)
+- ਦੁਹਰਾਓ: AZD ਟੈਮਪਲੇਟ ਕੀ ਹਨ?
+- ਦੁਹਰਾਓ: ਕਿਉਂ ਏਜ਼ਯੂਰ ਡਿਵੈਲਪਰ CLI ਵਰਤਣਾ ਹੈ?
+- ਅਗਲੇ ਕਦਮ: ਵੱਖਰਾ ਟੈਮਪਲੇਟ ਅਜ਼ਮਾਓ!
+- **ਲੇਬ**: ਇੰਫ਼ਰਾਸਟਰਕਚਰ ਦੀ ਡਿਪ੍ਰੋਵਿਜ਼ਨ ਅਤੇ ਸਾਫ਼-ਸਫਾਈ
 
 <br/>
 
-## ਵਰਕਸ਼ਾਪ ਚੈਲੇਂਜ
+## ਵਰਕਸ਼ਾਪ ਚੈਲੈਂਜ
 
-Want to challenge yourself to do more? Here are some project suggestions - or share your ideas with us!!
+ਆਪਣੇ ਆਪ ਨੂੰ ਹੋਰ ਚੁਣੌਤੀ ਦੇਣੀ ਹੈ? ਇੱਥੇ ਕੁਝ ਪ੍ਰੋਜੈਕਟ ਸੁਝਾਅ ਹਨ - ਜਾਂ ਸਾਡੇ ਨਾਲ ਆਪਣੇ ਵਿਚਾਰ ਸਾਂਝੇ ਕਰੋ!!
 
 | ਪ੍ਰੋਜੈਕਟ | ਵੇਰਵਾ |
 |:---|:---|
-|1. **ਇੱਕ ਜਟਿਲ AI ਟੈਂਪਲੇਟ ਨੂੰ ਵਿਭਾਜਿਤ ਕਰੋ** | ਉਹ ਵਰਕਫਲੋ ਅਤੇ ਟੂਲ ਵਰਤੋ ਜੋ ਅਸੀਂ ਦਰਸਾਏ ਹਨ ਅਤੇ ਵੇਖੋ ਕਿ ਕੀ ਤੁਸੀਂ ਕਿਸੇ ਵੱਖਰੇ AI ਹੱਲ ਟੈਂਪਲੇਟ ਨੂੰ ਡਿਪਲੋਇ, ਵੈਲਿਡੇਟ, ਅਤੇ ਕਸਟਮਾਈਜ਼ ਕਰ ਸਕਦੇ ਹੋ। _ਤੁਸੀਂ ਕੀ ਸਿੱਖਿਆ?_|
-|2. **ਆਪਣੇ ਸਿਨੇਰੀਓ ਨਾਲ ਕਸਟਮਾਈਜ਼ ਕਰੋ**  | ਇੱਕ ਵੱਖਰੇ ਸਿਨੇਰੀਓ ਲਈ PRD (Product Requirements Document) ਲਿਖਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਫਿਰ ਆਪਣੇ ਟੈਂਪਲੇਟ ਰੇਪੋ ਵਿੱਚ Agent Model ਵਿੱਚ GitHub Copilot ਦੀ ਵਰਤੋਂ ਕਰੋ - ਅਤੇ ਇਸਨੂੰ ਕਹੋ ਕਿ ਤੁਹਾਡੇ ਲਈ ਇੱਕ ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ ਵਰਕਫਲੋ ਬਣਾਵੇ। _ਤੁਸੀਂ ਕੀ ਸਿੱਖਿਆ? ਤੁਸੀਂ ਇਨ੍ਹਾਂ ਸੁਝਾਵਾਂ ਨੂੰ ਕਿਵੇਂ ਸੁਧਾਰ ਸਕਦੇ ਹੋ?_|
+|1. **ਇੱਕ ਜਟਿਲ ਏਆਈ ਟੈਮਪਲੇਟ ਨੂੰ ਵਿਖੰਡਿਤ ਕਰੋ** | ਜੋ ਵਰਕਫਲੋਅ ਅਤੇ ਟੂਲ ਅਸੀਂ ਦਿੱਤੇ ਉਹਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ ਅਤੇ ਦੇਖੋ ਕਿ ਕੀ ਤੁਸੀਂ ਇਕ ਹੋਰ ਏਆਈ ਹੱਲ ਵਾਲਾ ਟੈਮਪਲੇਟ ਡਿਪਲੋਇ, ਵੈਰੀਫਾਈ ਅਤੇ ਕਸਟਮਾਈਜ਼ ਕਰ ਸਕਦੇ ਹੋ। _ਤੁਸੀਂ ਕੀ ਸਿੱਖਿਆ?_|
+|2. **ਆਪਣੇ ਸੀਨੀਰੀਓ ਨਾਲ ਕਸਟਮਾਈਜ਼ ਕਰੋ**  | ਕਿਸੇ ਹੋਰ ਸੀਨੀਰੀਓ ਲਈ PRD (ਉਤਪਾਦ ਦੀਆਂ ਲੋੜਾਂ ਦਾ ਦਸਤਾਵੇਜ਼) ਲਿਖ ਕੇ ਦੇਖੋ। ਫਿਰ ਆਪਣੇ ਟੈਮਪਲੇਟ ਰਿਪੋ ਵਿੱਚ GitHub ਕੋਪਾਈਲਟ ਸਹਾਇਤਾ ਨਾਲ ਏਜੰਟ ਮਾਡਲ ਵਿਚ ਇਸ ਲਈ ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ ਵਰਕਫਲੋਅ ਬਣਵਾਓ। _ਤੁਸੀਂ ਕੀ ਸਿੱਖਿਆ? ਤੁਸੀਂ ਇਹ ਸੁਝਾਅ ਕਿਵੇਂ ਸੁਧਾਰ ਸਕਦੇ ਹੋ?_|
 | | |
 
-## ਫੀਡਬੈਕ?
+## ਫੀਡਬੈਕ ਹੈ?
 
-1. ਇਸ ਰੇਪੋ 'ਤੇ ਇਕ issue ਪੋਸਟ ਕਰੋ - ਸੁਵਿਧਾ ਲਈ ਇਸਨੂੰ `Workshop` ਨਾਲ ਟੈਗ ਕਰੋ.
-1. Microsoft Foundry Discord ਵਿੱਚ ਸ਼ਾਮਿਲ ਹੋਵੋ - ਆਪਣੇ ਸਹਿਯੋਗੀਆਂ ਨਾਲ ਜੁੜੋ!
+1. ਇਸ ਰਿਪੋ 'ਤੇ ਇਕ ਇਸ਼ੂ ਪੋਸਟ ਕਰੋ - ਸੁਵਿਧਾ ਲਈ ਇਸਨੂੰ `Workshop` ਨਾਲ ਟੈਗ ਕਰੋ।
+1. ਮਾਈਕ੍ਰੋਸਾਫਟ ਫਾਊਂਡਰੀ ਡਿਸਕਾਰਡ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ - ਆਪਣੇ ਸਾਥੀਆਂ ਨਾਲ ਜੁੜੋ!
 
 
 | | | 
 |:---|:---|
-| **📚 ਕੋਰਸ ਮੁੱਖ**| [AZD For Beginners](../README.md)|
-| **📖 ਦਸਤਾਵੇਜ਼** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 ਅਗਲੇ ਕਦਮ** | [ਵਰਕਸ਼ਾਪ ਸ਼ੁਰੂ ਕਰੋ](#ਵਰਕਸ਼ਾਪ-ਓਵਰਵਿਊ) |
+| **📚 ਕੋਰਸ ਹੈਲਪ**| [AZD ਫਾਰ ਬਿਗਿਨਰਜ਼](../README.md)|
+| **📖 ਦਸਤਾਵੇਜ਼ੀਕਰਨ** | [ਏਆਈ ਟੈਮਪਲੇਟ ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️ਏਆਈ ਟੈਮਪਲੇਟ** | [ਮਾਈਕ੍ਰੋਸਾਫਟ ਫਾਊਂਡਰੀ ਟੈਮਪਲੇਟ](https://ai.azure.com/templates) |
+|**🚀 ਅਗਲੇ ਕਦਮ** | [ਵਰਕਸ਼ਾਪ ਸ਼ੁਰੂ ਕਰੋ](#workshop-overview) |
 | | |
 
 <br/>
 
 ---
 
-**ਨੈਵੀਗੇਸ਼ਨ:** [ਮੁੱਖ ਕੋਰਸ](../README.md) | [ਪਰਿਚਯ](docs/instructions/0-Introduction.md) | [ਮੌਡੀਊਲ 1: AI ਟੈਂਪਲੇਟ ਚੁਣੋ](docs/instructions/1-Select-AI-Template.md)
+**ਨੀਵੀਗੇਸ਼ਨ:** [ਮੁੱਖ ਕੋਰਸ](../README.md) | [ਪ੍ਰਸਤਾਵਨਾ](docs/instructions/0-Introduction.md) | [ਮੋਡੀਊਲ 1: ਟੈਮਪਲੇਟ ਚੁਣੋ](docs/instructions/1-Select-AI-Template.md)
 
-**ਕੀ AZD ਨਾਲ AI ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣ ਲਈ ਤਿਆਰ ਹੋ?**
+**ਕੀ ਤੁਸੀਂ AZD ਨਾਲ ਏਆਈ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ?**
 
-[ਵਰਕਸ਼ਾਪ ਸ਼ੁਰੂ ਕਰੋ: ਪਰਿਚਯ →](docs/instructions/0-Introduction.md)
+[ਵਰਕਸ਼ਾਪ ਸ਼ੁਰੂ ਕਰੋ: ਪ੍ਰਸਤਾਵਨਾ →](docs/instructions/0-Introduction.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਆਟੋਮੇਟਿਕ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਣਸਹੀਤੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਮੌਜੂਦ ਅਸਲੀ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਪ੍ਰਮਾਣਿਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਸੰਵੇਦਨਸ਼ੀਲ ਜਾਂ ਜ਼ਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਿਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਉਪਜਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**ਅਸਵੀਕਾਰੋਪਣ**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾਵਾਂ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਮੱਤਿਆਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

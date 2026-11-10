@@ -1,238 +1,244 @@
-# Rýchly prehľad príkazov - Základné AZD príkazy
+# Príkazový prehľad - Základné príkazy AZD
 
-**Rýchla referencia pre všetky kapitoly**
-- **📚 Domov kurzu**: [AZD For Beginners](../README.md)
-- **📖 Rýchly štart**: [Kapitola 1: Základy & Rýchly štart](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI príkazy**: [Kapitola 2: Vývoj zameraný na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Pokročilé**: [Kapitola 4: Infrastruktúra ako kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**Rýchly prehľad pre všetky kapitoly**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../README.md)
+- **📖 Rýchly štart**: [Kapitola 1: Základy a rýchly štart](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Príkazy AI**: [Kapitola 2: Vývoj s AI na prvom mieste](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Pokročilé**: [Kapitola 4: Infraštruktúra ako kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Úvod
 
-Tento komplexný rýchly prehľad poskytuje stručnú referenciu pre najčastejšie používané príkazy Azure Developer CLI, usporiadané podľa kategórií s praktickými príkladmi. Ideálne na rýchle vyhľadávanie počas vývoja, riešenia problémov a každodenných operácií s azd projektami.
+Tento komplexný prehľad príkazov poskytuje rýchly prístup k najpoužívanejším príkazom Azure Developer CLI, zoradených podľa kategórií s praktickými príkladmi. Perfektné na rýchle vyhľadávanie počas vývoja, riešenia problémov a každodennej práce s projektmi azd.
 
 ## Ciele učenia
 
-Používaním tohto rýchleho prehľadu:
-- Budete mať okamžitý prístup k základným príkazom a syntaxi Azure Developer CLI
-- Pochopíte organizáciu príkazov podľa funkčných kategórií a prípadov použitia
-- Nájdete praktické príklady pre bežné scenáre vývoja a nasadenia
-- Získate príkazy na riešenie problémov pre rýchle odstraňovanie chýb
-- Efektívne nájdete pokročilé možnosti konfigurácie a prispôsobenia
-- Lokalizujete príkazy na správu prostredí a workflow pre viac prostredí
+Použitím tohto prehľadu budete:
+- Mať okamžitý prístup k základným príkazom a syntaxu Azure Developer CLI
+- Rozumieť organizácii príkazov podľa funkčných kategórií a prípadov použitia
+- Odkazovať na praktické príklady pre bežné scenáre vývoja a nasadenia
+- Mať prístup k príkazom na riešenie problémov pre rýchle vyriešenie problémov
+- Nájsť efektívne pokročilé možnosti konfigurácie a prispôsobenia
+- Lokalizovať príkazy na správu prostredí a pracovné postupy s viacerými prostrediami
 
 ## Výsledky učenia
 
-Pri pravidelnom používaní tohto prehľadu budete schopní:
-- Spúšťať azd príkazy sebevedome bez nutnosti odkazovať sa na plnú dokumentáciu
-- Rýchlo riešiť bežné problémy použitím vhodných diagnostických príkazov
-- Efektívne spravovať viacero prostredí a scenárov nasadenia
-- Používať pokročilé funkcie a možnosti konfigurácie azd podľa potreby
+Pravidelným odkazovaním na tento prehľad budete schopní:
+- Spúšťať príkazy azd sebavedome bez potreby plnej dokumentácie
+- Rýchlo riešiť bežné problémy pomocou vhodných diagnostických príkazov
+- Efektívne spravovať viaceré prostredia a scenáre nasadenia
+- Používať pokročilé funkcie azd a možnosti konfigurácie podľa potreby
 - Riešiť problémy s nasadením pomocou systematických sekvencií príkazov
-- Optimalizovať workflowy pomocou efektívneho využitia azd skratiek a možností
+- Optimalizovať pracovné postupy účinným využitím skratiek a možností azd
 
 ## Začiatočné príkazy
 
-### Autentifikácia
+### Overenie identity
 ```bash
-# Prihlásiť sa do Azure cez AZD
+# Login to Azure via AZD
 azd auth login
 
-# Prihlásiť sa do Azure CLI (AZD to používa na pozadí)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# Skontrolovať aktuálny účet
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# Nastaviť predvolené predplatné
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# Odhlásiť sa z AZD
+# Logout from AZD
 azd auth logout
 
-# Odhlásiť sa z Azure CLI
+# Logout from Azure CLI
 az logout
 ```
 
 ### Inicializácia projektu
 ```bash
-# Prehliadať dostupné šablóny
+# Browse available templates
 azd template list
 
-# Inicializovať z šablóny
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# Inicializovať v aktuálnom adresári
+# Initialize in current directory
 azd init .
 
-# Inicializovať s vlastným názvom
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
-## Hlavné príkazy nasadenia
+## Základné príkazy nasadenia
 
 ### Kompletný pracovný tok nasadenia
 ```bash
-# Nasadiť všetko (príprava + nasadenie)
+# Deploy everything (provision + deploy)
 azd up
 
-# Nasadiť s vypnutými potvrzovacími výzvami
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# Nasadiť do konkrétneho prostredia
+# Deploy to specific environment
 azd up --environment production
 
-# Nasadiť s vlastnými parametrami
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
 ### Iba infraštruktúra
 ```bash
-# Nasadiť zdroje Azure
+# Provision Azure resources
 azd provision
 
-# 🧪 Náhľad zmien infraštruktúry
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# Zobrazuje simulovaný náhľad toho, ktoré zdroje by boli vytvorené/upravené/odstránené
-# Podobné 'terraform plan' alebo 'bicep what-if' - bezpečné spustiť, žiadne zmeny sa neaplikujú
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
 ### Iba aplikácia
 ```bash
-# Nasadiť kód aplikácie
+# Deploy application code
 azd deploy
 
-# Nasadiť konkrétnu službu
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Nasadiť všetky služby
+# Deploy all services
 azd deploy --all
 ```
 
-### Build a balenie
+### Kompilácia a balenie
 ```bash
-# Obnoviť (stiahnuť) závislosti aplikácie
+# Restore (download) application dependencies
 azd restore
 
-# Obnoviť konkrétnu službu
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# Zostaviť nasaditeľný artefakt bez nasadenia
+# Build a deployable artifact without deploying
 azd package
 
-# Zostaviť konkrétnu službu
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** stiahne závislosti vašej aplikácie (npm, pip, NuGet, Maven, atď.). Spúšťa sa automaticky počas `azd package` a `azd deploy`, takže ho zriedka voláte priamo — spustite ho manuálne na prednačítanie závislostí (napríklad na nahriatie CI cache alebo na prácu offline neskôr).
+> **`azd restore`** sťahuje závislosti vašej aplikácie (npm, pip, NuGet, Maven atď.). Spúšťa sa automaticky počas `azd package` a `azd deploy`, takže ho zriedka voláte priamo — spustite ho manuálne na predvyhľadávanie závislostí (napríklad na predhrievanie cache CI alebo prácu offline neskôr).
 
-> **`azd package`** zostaví nasaditeľný artefakt (kontajnerový image alebo zip) **bez** jeho odoslania do Azure. Použite ho samostatne na overenie, že zostavenie prebehlo úspešne, na preskúmanie výstupu alebo na vytvorenie artefaktu, ktorý neskôr nasadí samostatný proces. `azd deploy` balí automaticky, takže potrebujete `azd package` len keď chcete artefakt bez nasadenia.
+> **`azd package`** pripraví nasaditeľný artefakt bez nasadenia aplikácie. Správanie závisí od jazyka a hostiteľa: balenie kontajnera môže využiť vzdialené zostavovanie Azure a publikovať obrázky do registru, takže nemusí byť nevyhnutne offline alebo bez zápisov do Azure. `azd deploy` môže balíčkovať automaticky; použite samostatný krok balenia, keď potrebujete artefakt alebo kontrolu zostavenia.
 
 
 ## 🌍 Správa prostredí
 
-### Operácie prostredia
+### Operácie s prostrediami
 ```bash
-# Zoznam všetkých prostredí
+# List all environments
 azd env list
 
-# Vytvoriť nové prostredie
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# Vybrať prostredie
+# Select environment
 azd env select production
 
-# Zobraziť dostupné prostredia
+# Show available environments
 azd env list
 
-# Obnoviť stav prostredia
+# Refresh environment state
 azd env refresh
 ```
 
 ### Premenné prostredia
 ```bash
-# Nastaviť premennú prostredia
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# Získať premennú prostredia
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# Zobraziť všetky premenné prostredia
+# List all environment variables
 azd env get-values
 
-# Odstrániť premennú prostredia
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
+
+Súbory prostredia sú obyčajný text. Nezaobchádzajte s `azd env set` ako s úložiskom tajomstiev; použite odkazy na Key Vault alebo spravovanú identitu podľa potreby.
 
 ## ⚙️ Konfiguračné príkazy
 
 ### Globálna konfigurácia
 ```bash
-# Zoznam všetkých konfigurácií
+# List all configuration
 azd config show
 
-# Nastaviť globálne predvolené hodnoty
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Odstrániť konfiguráciu
+# Remove configuration
 azd config unset defaults.location
 
-# Resetovať všetky konfigurácie
+# Reset all configuration
 azd config reset
 ```
 
 ### Konfigurácia projektu
 ```bash
-# Overiť azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# Zobraziť informácie o projekte
+# Show project information
 azd show
 
-# Získať koncové body služby
+# Get service endpoints
 azd show --output json
 ```
 
 ## 📊 Monitorovanie a diagnostika
 
-### Panel monitorovania
+### Monitorovací panel
 ```bash
-# Otvoriť monitorovací panel v portáli Azure
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# Otvoriť živé metriky Application Insights
+# Open Application Insights live metrics
 azd monitor --live
 
-# Otvoriť blade s logmi Application Insights
+# Open Application Insights logs blade
 azd monitor --logs
 
-# Otvoriť prehľad Application Insights
+# Open Application Insights overview
 azd monitor --overview
 ```
 
+Application Insights musí byť nakonfigurovaný šablónou. Funkcia Live Metrics AZD zatiaľ nie je podporovaná pre Python aplikácie; namiesto toho použite prehľad, logy alebo zdokumentovaný priebeh trasovania vzorového projektu.
+
 ### Zobrazenie logov kontajnera
 ```bash
-# Zobraziť záznamy cez Azure CLI (pre Container Apps)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Sledovať záznamy v reálnom čase
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Zobraziť záznamy v Azure Portal
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
 ### Dotazy Log Analytics
 ```bash
-# Prístup k Log Analytics cez Azure portál
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# Dotazovanie v protokoloch pomocou Azure CLI
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -242,28 +248,28 @@ az monitor log-analytics query \
 
 ### Čistenie
 ```bash
-# Odstrániť všetky zdroje Azure
+# Remove all Azure resources
 azd down
 
-# Vynútiť zmazanie bez potvrdenia
+# Force delete without confirmation
 azd down --force
 
-# Natrvalo odstrániť dočasne zmazané zdroje
+# Purge soft-deleted resources
 azd down --purge
 
-# Dokončiť vyčistenie
+# Complete cleanup
 azd down --force --purge
 ```
 
 ### Aktualizácie
 ```bash
-# Skontrolovať aktualizácie azd
+# Check for azd updates
 azd version
 
-# Získať aktuálnu verziu
+# Get current version
 azd version
 
-# Zobraziť aktuálnu konfiguráciu
+# View current configuration
 azd config show
 ```
 
@@ -271,245 +277,266 @@ azd config show
 
 ### Pipeline a CI/CD
 ```bash
-# Konfigurovať GitHub Actions
+# Configure GitHub Actions
 azd pipeline config
 
-# Konfigurovať Azure DevOps
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# Zobraziť konfiguráciu pipeline
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
 ### Správa infraštruktúry
 ```bash
-# Vygenerovať šablóny infraštruktúry
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 Náhľad a plánovanie infraštruktúry
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# Simuluje poskytovanie infraštruktúry bez nasadenia
-# Analyzuje Bicep/Terraform šablóny a zobrazuje:
-# - Prostriedky, ktoré budú pridané (zelené +)
-# - Prostriedky, ktoré budú upravené (žlté ~)
-# - Prostriedky, ktoré budú odstránené (červené -)
-# Bezpečné spustenie - v prostredí Azure nebudú vykonané žiadne skutočné zmeny
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# Syntetizovať infraštruktúru z azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ### Informácie o projekte
 ```bash
-# Zobraziť stav projektu a koncové body
+# Show project status and endpoints
 azd show
 
-# Zobraziť podrobné informácie o projekte vo formáte JSON
+# Show detailed project info as JSON
 azd show --output json
 
-# Získať koncové body služby
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
-## 🤖 Príkazy pre AI a rozšírenia
+## 🤖 AI a rozšírenia
 
 ### Rozšírenia AZD
+
+Referencia AI CLI aktualizovaná 2026-11-04: `azd 1.37.2`, agenti `1.0.0-beta.23`, hodnotenia `1.0.0-beta.2`. Používajte `azd >= 1.37.0` na zjednotený pracovný tok; najskôr aktualizujte jadro CLI pred nekompatibilnými rozšíreniami.
+
 ```bash
-# Zobraziť všetky dostupné rozšírenia (vrátane AI)
+# List all available extensions (including AI)
 azd extension list
 
-# Nainštalovať rozšírenie Foundry Agents
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Nainštalovať rozšírenie Agent Skills (náhľad)
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the agent skills extension (preview)
 azd extension install azure.ai.skills
 
-# Nainštalovať rozšírenie Foundry Connections (náhľad)
+# Install the Foundry connections extension (preview)
 azd extension install azure.ai.connections
 
-# Nainštalovať rozšírenie pre doladenie
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Nainštalovať rozšírenie pre vlastné modely
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Aktualizovať všetky nainštalované rozšírenia
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
-### Príkazy AI agenta
+### Príkazy AI agentov
 ```bash
-# Inicializovať projekt agenta z manifestu
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# Zamerať sa na konkrétny projekt Foundry
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# Určiť adresár so zdrojovým kódom agenta
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# Vybrať hostingový cieľ
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# Otestovať nasadeného agenta (vypíše latenciu + čas do prvého bajtu)
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# Zobraziť konfiguráciu živého koncového bodu
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# Vygenerovať evaluačnú dátovú sadu, potom optimalizovať agenta
-azd ai agent eval generate
-azd ai agent optimize
-
-# Stiahnuť nasadený zdrojový kód hostovaného agenta
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# Zmazať hostovaného agenta a všetky jeho verzie (--force ukončí aktívne relácie)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
+`--template`/`-t` nahrádza zastarané `--manifest`/`-m` pravopisné varianty; staré manifesty je potrebné migrovať. Momentálne nie je k dispozícii agent-init `--host containerapp` voľba. Náhľady spravovaného rámca, hlasové a dlhodobé náhľady vyžadujú nezávislé zapnutí v shell/CI prostredí; pozrite si [AI CLI referenciu](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+### Hodnotenia a optimalizácia AI
+```bash
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+Agenti beta.22 nahradili staré príkazy hodnotenia `azd ai eval` z `azure.ai.evaluations`. Nová konfigurácia hodnotenia používa camelCase kľúče. Optimalizačný `--config` vyžaduje samostatný optimalizačný API požiadavok, **nie** starý `eval.yaml` alebo nový `azure.eval.yaml`; použite `--eval`/`--eval-config` na opätovné využitie hodnotenia. Viď [nastavenie hodnotenia](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) a [migrácia optimalizácie](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
 ### MCP Server (Alpha)
 ```bash
-# Spustite MCP server pre váš projekt
+# Start the MCP server for your project
 azd mcp start
 
-# Spravujte súhlas nástrojov pre operácie MCP
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
 ### Generovanie infraštruktúry
 ```bash
-# Vygenerujte súbory IaC z definície vášho projektu
+# Generate IaC files from your project definition
 azd infra generate
 
-# Syntetizovať infraštruktúru zo súboru azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
 
 ## 🎯 Rýchle pracovné postupy
 
-### Vývojový pracovný postup
+### Vývojový pracovný tok
 ```bash
-# Začať nový projekt
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# Nasadiť do vývojového prostredia
+# Deploy to development
 azd env new dev
 azd up
 
-# Urobte zmeny a vykonajte opätovné nasadenie
+# Make changes and redeploy
 azd deploy
 
-# Otvorte monitorovací panel
+# Open monitoring dashboard
 azd monitor --live
 ```
 
-### Pracovný postup pre viacero prostredí
+### Pracovný tok s viacerými prostrediami
 ```bash
-# Nastaviť prostredia
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Nasadiť do vývojového prostredia
+# Deploy to dev
 azd env select dev
 azd up
 
-# Otestovať a presunúť do prípravného prostredia
+# Test and promote to staging
 azd env select staging
 azd up
 
-# Nasadiť do produkčného prostredia
+# Deploy to production
 azd env select production
 azd up
 ```
 
-### Postup pri riešení problémov
+### Pracovný tok riešenia problémov
 ```bash
-# Povoliť režim ladenia
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# Skontrolovať stav nasadenia
-azd show
-
-# Overiť konfiguráciu
+# Validate configuration
 azd config show
 
-# Otvoriť monitorovací panel pre protokoly
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# Skontrolovať stav zdrojov
+# Check resource status
 azd show --output json
 ```
 
-## 🔍 Príkazy na ladenie
+## 🔍 Príkazy ladenia
 
-### Informácie na ladenie
+### Informácie o ladení
 ```bash
-# Povoliť ladený výstup
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# Vypnúť telemetriu pre čistejší výstup
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# Skontrolovať aktuálnu konfiguráciu
+# Check current configuration
 azd config show
 
-# Skontrolovať stav autentifikácie
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
 ### Ladenie šablón
 ```bash
-# Zobraziť dostupné šablóny s podrobnosťami
+# List available templates with details
 azd template list --output json
 
-# Zobraziť informácie o šablóne
+# Show template information
 azd template show <template-name>
 
-# Overiť šablónu pred inicializáciou
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
-## 📁 Príkazy súborov a adresárov
+## 📁 Príkazy pre súbory a adresáre
 
 ### Štruktúra projektu
 ```bash
-# Zobraziť aktuálnu štruktúru adresárov
+# Show current directory structure
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Prejdite do koreňového adresára projektu azd
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# Zobraziť konfiguračný adresár azd
-echo $AZD_CONFIG_DIR  # Zvyčajne ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
 ## 🎨 Formátovanie výstupu
 
-### Výstup v JSON
+### Výstup JSON
 ```bash
-# Získať JSON výstup pre skriptovanie
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# Parsovať pomocou jq
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Výstup v tabuľke
+### Výstup tabuľky
 ```bash
-# Formátovať ako tabuľku
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# Zobraziť nasadené služby
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
@@ -518,7 +545,7 @@ azd show --output json | jq '.services | keys'
 ### Skript kontroly stavu
 ```bash
 #!/bin/bash
-# Rýchla kontrola stavu
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
@@ -527,89 +554,83 @@ azd monitor --logs
 ### Overenie nasadenia
 ```bash
 #!/bin/bash
-# Validácia pred nasadením
+# Pre-deployment validation
 azd show
-azd provision --preview  # Prezrite si zmeny pred nasadením
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
 ### Porovnanie prostredí
 ```bash
 #!/bin/bash
-# Porovnať prostredia
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
-### Skript čistenia prostriedkov
+### Skript na čistenie zdrojov
 ```bash
 #!/bin/bash
-# Vyčistiť staré prostredia
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
 ## 📝 Premenné prostredia
 
 ### Bežné premenné prostredia
 ```bash
-# Konfigurácia Azure
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# Konfigurácia AZD
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# Konfigurácia aplikácie
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Pohotovostné príkazy
+## 🚨 Núdzové príkazy
 
 ### Rýchle opravy
 ```bash
-# Obnoviť autentifikáciu
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# Vynútiť obnovenie prostredia
+# Force refresh environment
 azd env refresh
 
-# Znovu nasadiť všetky služby
+# Redeploy all services
 azd deploy
 
-# Skontrolovať stav nasadenia
+# Check deployment status
 azd show --output json
 ```
 
-### Príkazy na obnovenie
+### Príkazy na obnovu
 ```bash
-# Obnoviť po neúspešnom nasadení - vyčistiť a znovu nasadiť
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# Iba opätovné nasadenie infraštruktúry
+# Reprovision infrastructure only
 azd provision
 
-# Iba opätovné nasadenie aplikácie
+# Redeploy application only
 azd deploy
 ```
 
-## 💡 Užitočné tipy
+## 💡 Profesionálne tipy
 
-### Aliasy pre rýchlejší pracovný postup
+### Alias pre rýchlejší pracovný tok
 ```bash
-# Pridajte do svojho .bashrc alebo .zshrc
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
@@ -618,17 +639,17 @@ alias azde='azd env'
 
 ### Skratky funkcií
 ```bash
-# Rýchle prepínanie prostredí
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# Rýchle nasadenie s monitorovaním
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# Stav prostredia
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -641,42 +662,42 @@ azd-status() {
 
 ### Získanie pomoci
 ```bash
-# Všeobecná pomoc
+# General help
 azd --help
 azd help
 
-# Nápoveda pre konkrétny príkaz
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# Zobraziť informácie o verzii a zostavení
+# Show version and build info
 azd version
 azd version --output json
 ```
 
 ### Odkazy na dokumentáciu
 ```bash
-# Otvoriť dokumentáciu v prehliadači
+# Open documentation in browser
 azd docs
 
-# Zobraziť dokumentáciu šablóny
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Tip**: Uložte si tento rýchly prehľad príkazov a použite `Ctrl+F` na rýchle nájdenie príkazov, ktoré potrebujete!
+**Tip**: Pridajte si tento prehľad do záložiek a používajte `Ctrl+F` na rýchle vyhľadanie potrebných príkazov!
 
 ---
 
 **Navigácia**
-- **Predchádzajúca lekcia**: [Kontroly pred nasadením](../docs/pre-deployment/preflight-checks.md)
-- **Nasledujúca lekcia**: [Slovník](glossary.md)
+- **Predchádzajúca lekcia**: [Pre-flight kontroly](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Nasledujúca lekcia**: [Glosár](glossary.md)
 
 ---
 
-> **💡 Chcete pomoc s Azure príkazmi vo vašom editore?** Nainštalujte [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) pomocou `npx skills add microsoft/github-copilot-for-azure` — 37 zručností pre AI, Foundry, nasadenie, diagnostiku a ďalšie.
+> **💡 Chcete pomoc s Azure príkazmi vo svojom editore?** Nainštalujte si [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) s `npx skills add microsoft/github-copilot-for-azure` — 37 zručností pre AI, Foundry, nasadenie, diagnostiku a ďalšie.
 
 ---
 

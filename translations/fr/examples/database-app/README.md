@@ -1,924 +1,284 @@
-# Déploiement d'une base de données Microsoft SQL et d'une application Web avec AZD
+# Flask et Azure SQL sur App Service
 
-⏱️ **Temps estimé** : 20-30 minutes | 💰 **Coût estimé** : ~15-25 $/mois | ⭐ **Complexité** : Intermédiaire
+**Niveau :** Intermédiaire · **Durée :** 30–60 minutes incluant les prérequis
 
-Cet **exemple complet et fonctionnel** montre comment utiliser la [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) pour déployer une application web Python Flask avec une base de données Microsoft SQL sur Azure. Tout le code est inclus et testé—aucune dépendance externe requise.
+Cet exemple déploie une API de lecture Python Flask sur **Linux App Service** et une base de données Azure SQL Basic.
+Le code source, les fichiers Bicep et la configuration azd sont inclus. Il s'agit d'une
+application d'apprentissage, et non d'une architecture de base de données prête pour la production.
 
 ## Ce que vous apprendrez
 
-En réalisant cet exemple, vous allez :
-- Déployer une application multi-niveaux (application web + base de données) via l'infrastructure en tant que code
-- Configurer des connexions sécurisées à la base de données sans coder en dur les secrets
-- Surveiller la santé de l'application avec Application Insights
-- Gérer efficacement les ressources Azure avec la CLI AZD
-- Suivre les meilleures pratiques Azure pour la sécurité, l'optimisation des coûts et l'observabilité
+- Provisionner les ressources App Service, SQL et de surveillance avec Bicep.
+- Configurer une connectivité SQL sécurisée sans compromettre les identifiants.
+- Initialiser un schéma avant de démarrer les travailleurs Gunicorn.
+- Vérifier les données semées, les réponses « non trouvé » et la santé de la base de données.
 
-## Présentation du scénario
-- **Application Web** : API REST Python Flask avec connectivité à la base de données
-- **Base de données** : Azure SQL Database avec données d’exemple
-- **Infrastructure** : Provisionnée via Bicep (modèles modulaires et réutilisables)
-- **Déploiement** : Entièrement automatisé avec les commandes `azd`
-- **Surveillance** : Application Insights pour les journaux et la télémétrie
+```mermaid
+flowchart LR
+    User -->|HTTPS| Web[App Service — Flask]
+    Web -->|ODBC + encrypted SQL connection| SQL[Azure SQL — products table]
+    Web -. application log traces .-> AI[Application Insights]
+```
+
+Ressources : groupe de ressources dédié, plan App Service Linux B1, application Web Python 3.11,
+serveur SQL et base de données Basique 2 Go, Application Insights et Log Analytics.
+L’application Web utilise **le déploiement source/ZIP et l’installation de dépendances Oryx** ;
+`azd deploy` ne construit ni ne déploie le Dockerfile optionnel.
 
 ## Prérequis
 
-### Outils requis
+- Version stable actuelle de [azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (version publiée au moment de la revue : 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) pour vérification.
+- Abonnement Azure, permissions pour créer les ressources listées, et quota régional.
+- Python **3.11** pour le développement local ; le `pyodbc==5.0.1` commité peut nécessiter
+  des outils de build natifs sur les versions plus récentes de Python.
+- Microsoft ODBC Driver 18 (ou 17) pour SQL Server sur les machines locales. `pip install
+  pyodbc` n’installe pas le pilote système. Voir
+  [installation ODBC](https://learn.microsoft.com/sql/connect/odbc/download-odbc-driver-for-sql-server).
+- Docker uniquement si vous testez le conteneur optionnel localement.
 
-Avant de commencer, vérifiez que vous avez ces outils installés :
-
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 ou supérieure)
-   ```sh
-   az --version
-   # Sortie attendue : azure-cli 2.50.0 ou supérieur
-   ```
-
-2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 ou supérieure)
-   ```sh
-   azd version
-   # Sortie attendue : version azd 1.0.0 ou supérieure
-   ```
-
-3. **[Python 3.8+](https://www.python.org/downloads/)** (pour le développement local)
-   ```sh
-   python --version
-   # Résultat attendu : Python 3.8 ou supérieur
-   ```
-
-4. **[Docker](https://www.docker.com/get-started)** (optionnel, pour le développement local en conteneur)
-   ```sh
-   docker --version
-   # Résultat attendu : version Docker 20.10 ou supérieure
-   ```
-
-### Exigences Azure
-
-- Un **abonnement Azure** actif ([créer un compte gratuit](https://azure.microsoft.com/free/))
-- Les permissions pour créer des ressources dans votre abonnement
-- Rôle **Propriétaire** ou **Contributeur** sur l'abonnement ou le groupe de ressources
-
-### Connaissances préalables
-
-Ceci est un exemple de niveau **intermédiaire**. Vous devriez connaître :
-- Les opérations de base en ligne de commande
-- Les concepts fondamentaux du cloud (ressources, groupes de ressources)
-- Une compréhension basique des applications web et des bases de données
-
-**Nouveau sur AZD ?** Commencez par le [guide de démarrage](../../docs/chapter-01-foundation/azd-basics.md).
-
-## Architecture
-
-Cet exemple déploie une architecture en deux niveaux avec une application web et une base de données SQL :
-
-```mermaid
-graph TD
-    Browser[Navigateur Utilisateur] <--> WebApp[Application Web Azure<br/>API Flask<br/>/santé<br/>/produits]
-    WebApp -- Connexion Sécurisée<br/>Cryptée --> SQL[Base de données Azure SQL<br/>Table Produits<br/>Données d'exemple]
-```
-
-**Déploiement des ressources :**
-- **Groupe de ressources** : Conteneur pour toutes les ressources
-- **Plan App Service** : Hébergement Linux (niveau B1 pour l'efficacité des coûts)
-- **Application Web** : runtime Python 3.11 avec application Flask
-- **Serveur SQL** : serveur de base de données managé avec TLS 1.2 minimum
-- **Base de données SQL** : niveau Basic (2 Go, adapté au développement/tests)
-- **Application Insights** : surveillance et journalisation
-- **Espace de travail Log Analytics** : stockage centralisé des journaux
-
-**Analogie** : Imaginez un restaurant (application web) avec un congélateur (base de données). Les clients commandent depuis le menu (endpoints API) et la cuisine (app Flask) récupère les ingrédients (données) dans le congélateur. Le gérant du restaurant (Application Insights) suit tout ce qui se passe.
-
-## Structure des dossiers
-
-Tous les fichiers sont inclus dans cet exemple—aucune dépendance externe requise :
-
-```
-examples/database-app/
-│
-├── README.md                    # This file
-├── azure.yaml                   # AZD configuration file
-├── .env.sample                  # Sample environment variables
-├── .gitignore                   # Git ignore patterns
-│
-├── infra/                       # Infrastructure as Code (Bicep)
-│   ├── main.bicep              # Main orchestration template
-│   ├── abbreviations.json      # Azure naming conventions
-│   └── resources/              # Modular resource templates
-│       ├── sql-server.bicep    # SQL Server configuration
-│       ├── sql-database.bicep  # Database configuration
-│       ├── app-service-plan.bicep  # Hosting plan
-│       ├── app-insights.bicep  # Monitoring setup
-│       └── web-app.bicep       # Web application
-│
-└── src/
-    └── web/                    # Application source code
-        ├── app.py              # Flask REST API
-        ├── requirements.txt    # Python dependencies
-        └── Dockerfile          # Container definition
-```
-
-**Fonction de chaque fichier :**
-- **azure.yaml** : indique à AZD quoi déployer et où
-- **infra/main.bicep** : orchestre toutes les ressources Azure
-- **infra/resources/*.bicep** : définitions individuelles des ressources (modulaires pour réutilisation)
-- **src/web/app.py** : application Flask avec logique base de données
-- **requirements.txt** : dépendances Python
-- **Dockerfile** : instructions de containerisation pour le déploiement
-
-## Démarrage rapide (pas à pas)
-
-### Étape 1 : Cloner et naviguer
-
-```sh
-git clone https://github.com/microsoft/AZD-for-beginners.git
-cd AZD-for-beginners/examples/database-app
-```
-
-**✓ Vérification de succès** : Vérifiez que vous voyez `azure.yaml` et le dossier `infra/` :
-```sh
-ls
-# Attendu : README.md, azure.yaml, infra/, src/
-```
-
-### Étape 2 : Authentification avec Azure
-
-```sh
+```bash
+azd version
+az version
 azd auth login
-```
-
-Cela ouvre votre navigateur pour l’authentification Azure. Connectez-vous avec vos identifiants Azure.
-
-**✓ Vérification de succès** : Vous devriez voir :
-```
-Logged in to Azure.
-```
-
-### Étape 3 : Initialiser l’environnement
-
-```sh
-azd init
-```
-
-**Ce qui se passe** : AZD crée une configuration locale pour votre déploiement.
-
-**Prompts affichés** :
-- **Nom de l’environnement** : Entrez un nom court (ex. `dev`, `monapp`)
-- **Abonnement Azure** : Choisissez votre abonnement dans la liste
-- **Région Azure** : Choisissez une région (ex. `eastus`, `westeurope`)
-
-**✓ Vérification de succès** : Vous devriez voir :
-```
-SUCCESS: New project initialized!
-```
-
-### Étape 4 : Provisionner les ressources Azure
-
-```sh
-azd provision
-```
-
-**Ce qui se passe** : AZD déploie toute l’infrastructure (prend 5-8 minutes) :
-1. Création du groupe de ressources
-2. Création du serveur SQL et de la base de données
-3. Création du plan App Service
-4. Création de l’application web
-5. Création d’Application Insights
-6. Configuration du réseau et de la sécurité
-
-**Vous serez invité à fournir** :
-- **Nom d’administrateur SQL** : Entrez un nom d’utilisateur (ex. `sqladmin`)
-- **Mot de passe administrateur SQL** : Entrez un mot de passe fort (conservez-le !)
-
-**✓ Vérification de succès** : Vous devriez voir :
-```
-SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
-You can view the resources created under the resource group rg-<env-name> in Azure Portal:
-https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
-```
-
-**⏱️ Durée** : 5-8 minutes
-
-### Étape 5 : Déployer l’application
-
-```sh
-azd deploy
-```
-
-**Ce qui se passe** : AZD construit et déploie votre application Flask :
-1. Emballage de l’application Python
-2. Construction du conteneur Docker
-3. Publication sur Azure Web App
-4. Initialisation de la base de données avec des données d’exemple
-5. Démarrage de l’application
-
-**✓ Vérification de succès** : Vous devriez voir :
-```
-SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
-You can view the resources created under the resource group rg-<env-name> in Azure Portal:
-https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
-```
-
-**⏱️ Durée** : 3-5 minutes
-
-### Étape 6 : Naviguer dans l’application
-
-```sh
-azd browse
-```
-
-Cela ouvre votre application web déployée dans le navigateur à l’adresse `https://app-<unique-id>.azurewebsites.net`
-
-**✓ Vérification de succès** : Vous devriez voir une sortie JSON :
-```json
-{
-  "message": "Welcome to the Database App API",
-  "endpoints": {
-    "/": "This help message",
-    "/health": "Health check endpoint",
-    "/products": "List all products",
-    "/products/<id>": "Get product by ID"
-  }
-}
-```
-
-### Étape 7 : Tester les endpoints API
-
-**Vérification de la santé** (vérifie la connexion à la base de données) :
-```sh
-curl https://app-<your-id>.azurewebsites.net/health
-```
-
-**Réponse attendue** :
-```json
-{
-  "status": "healthy",
-  "database": "connected"
-}
-```
-
-**Liste des produits** (données d’exemple) :
-```sh
-curl https://app-<your-id>.azurewebsites.net/products
-```
-
-**Réponse attendue** :
-```json
-[
-  {
-    "id": 1,
-    "name": "Laptop",
-    "description": "High-performance laptop",
-    "price": 1299.99,
-    "created_at": "2025-11-19T10:30:00"
-  },
-  ...
-]
-```
-
-**Obtenir un produit unique** :
-```sh
-curl https://app-<your-id>.azurewebsites.net/products/1
-```
-
-**✓ Vérification de succès** : Tous les endpoints retournent des données JSON sans erreurs.
-
----
-
-**🎉 Félicitations !** Vous avez déployé avec succès une application web avec une base de données sur Azure en utilisant AZD.
-
-## Analyse approfondie de la configuration
-
-### Variables d’environnement
-
-Les secrets sont gérés en toute sécurité via la configuration Azure App Service—**jamais codés en dur dans le code source**.
-
-**Configuré automatiquement par AZD** :
-- `SQL_CONNECTION_STRING` : chaîne de connexion à la base de données avec identifiants chiffrés
-- `APPLICATIONINSIGHTS_CONNECTION_STRING` : point de télémétrie pour la surveillance
-- `SCM_DO_BUILD_DURING_DEPLOYMENT` : active l'installation automatique des dépendances
-
-**Où les secrets sont stockés** :
-1. Lors du `azd provision`, vous fournissez les identifiants SQL via des invites sécurisées
-2. AZD les enregistre dans votre fichier local `.azure/<nom-env>/.env` (ignoré par git)
-3. AZD les injecte dans la configuration Azure App Service (chiffré au repos)
-4. L’application les lit via `os.getenv()` à l’exécution
-
-### Développement local
-
-Pour tester localement, créez un fichier `.env` à partir de l’exemple :
-
-```sh
-cp .env.sample .env
-# Modifiez .env avec la connexion à votre base de données locale
-```
-
-**Flux de travail pour le développement local** :
-```sh
-# Installer les dépendances
-cd src/web
-pip install -r requirements.txt
-
-# Définir les variables d'environnement
-export SQL_CONNECTION_STRING="your-local-connection-string"
-
-# Exécuter l'application
-python app.py
-```
-
-**Test local** :
-```sh
-curl http://localhost:8000/health
-# Attendu : {"statut": "sain", "base de données": "connectée"}
-```
-
-### Infrastructure en tant que code
-
-Toutes les ressources Azure sont définies dans des modèles **Bicep** (`infra/`):
-
-- **Conception modulaire** : chaque type de ressource a son propre fichier pour réutilisabilité
-- **Paramétrable** : personnalisez SKU, régions, conventions de nommage
-- **Meilleures pratiques** : suit les standards Azure et les paramètres de sécurité par défaut
-- **Versionné** : les modifications d’infrastructure sont suivies dans Git
-
-**Exemple de personnalisation** :
-Pour changer le niveau de la base de données, modifiez `infra/resources/sql-database.bicep` :
-```bicep
-sku: {
-  name: 'Standard'  // Changed from 'Basic'
-  tier: 'Standard'
-  capacity: 10
-}
-```
-
-## Meilleures pratiques de sécurité
-
-Cet exemple suit les meilleures pratiques de sécurité Azure :
-
-### 1. **Pas de secrets dans le code source**
-- ✅ Identifiants stockés dans la configuration Azure App Service (chiffrée)
-- ✅ Fichiers `.env` exclus de Git via `.gitignore`
-- ✅ Secrets transmis via des paramètres sécurisés lors du provisionnement
-
-### 2. **Connexions chiffrées**
-- ✅ TLS 1.2 minimum pour le serveur SQL
-- ✅ HTTPS uniquement pour l’Application Web
-- ✅ Connexions base de données via canaux chiffrés
-
-### 3. **Sécurité réseau**
-- ✅ Pare-feu SQL configuré pour autoriser uniquement les services Azure
-- ✅ Accès réseau public restreint (peut être renforcé via des endpoints privés)
-- ✅ FTPS désactivé sur l’Application Web
-
-### 4. **Authentification & Autorisation**
-- ⚠️ **Actuel** : authentification SQL classique (nom d’utilisateur/mot de passe)
-- ✅ **Recommandation production** : utiliser une identité managée Azure pour une authentification sans mot de passe
-
-**Pour passer à l’identité managée** (en production) :
-1. Activer l’identité managée sur l’App Web
-2. Accorder les permissions SQL à cette identité
-3. Mettre à jour la chaîne de connexion pour utiliser l’identité managée
-4. Retirer l’authentification basée sur mot de passe
-
-### 5. **Audit & conformité**
-- ✅ Application Insights journalise toutes les requêtes et erreurs
-- ✅ Audit de la base de données SQL activé (peut être configuré pour conformité)
-- ✅ Toutes les ressources sont taguées pour la gouvernance
-
-**Checklist de sécurité avant la production** :
-- [ ] Activer Azure Defender pour SQL
-- [ ] Configurer les endpoints privés pour la base de données SQL
-- [ ] Activer un Web Application Firewall (WAF)
-- [ ] Implémenter Azure Key Vault pour la rotation des secrets
-- [ ] Configurer l’authentification Microsoft Entra ID
-- [ ] Activer la journalisation diagnostique pour toutes les ressources
-
-## Optimisation des coûts
-
-**Coûts mensuels estimés** (à novembre 2025) :
-
-| Ressource | SKU/Niveau | Coût estimé |
-|----------|------------|-------------|
-| Plan App Service | B1 (Basic) | ~13 $/mois |
-| Base de données SQL | Basic (2 Go) | ~5 $/mois |
-| Application Insights | Paiement à l’usage | ~2 $/mois (trafic faible) |
-| **Total** |  | **~20 $/mois** |
-
-**💡 Astuces pour économiser** :
-
-1. **Utiliser le niveau gratuit pour apprendre** :
-   - App Service : niveau F1 (gratuit, heures limitées)
-   - Base de données SQL : Azure SQL Database sans serveur (serverless)
-   - Application Insights : 5 Go/mois ingestion gratuite
-
-2. **Arrêter les ressources quand inutilisées** :
-   ```sh
-   # Arrêter l'application web (la base de données continue de facturer)
-   az webapp stop --name <app-name> --resource-group <rg-name>
-   
-   # Redémarrer lorsque nécessaire
-   az webapp start --name <app-name> --resource-group <rg-name>
-   ```
-
-3. **Tout supprimer après les tests** :
-   ```sh
-   azd down
-   ```
-   Cela supprime TOUTES les ressources et arrête les coûts.
-
-4. **SKU pour développement vs production** :
-   - **Développement** : niveau Basic (utilisé dans cet exemple)
-   - **Production** : niveau Standard/Premium avec redondance
-
-**Suivi des coûts** :
-- Consultez les coûts dans [Gestion des coûts Azure](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Configurez des alertes budgétaires pour éviter les surprises
-- Tagguez toutes les ressources avec `azd-env-name` pour le suivi
-
-**Alternative niveau gratuit** :
-Pour apprendre, vous pouvez modifier `infra/resources/app-service-plan.bicep` :
-```bicep
-sku: {
-  name: 'F1'  // Free tier
-  tier: 'Free'
-}
-```
-**Note** : Le niveau gratuit a des limites (60 min/jour CPU, pas toujours actif).
-
-## Surveillance & Observabilité
-
-### Intégration Application Insights
-
-Cet exemple inclut **Application Insights** pour une surveillance complète :
-
-**Ce qui est surveillé** :
-- ✅ Requêtes HTTP (latence, codes d’état, endpoints)
-- ✅ Erreurs et exceptions applicatives
-- ✅ Journalisation personnalisée depuis Flask
-- ✅ Santé de la connexion à la base de données
-- ✅ Indicateurs de performance (CPU, mémoire)
-
-**Accéder à Application Insights** :
-1. Ouvrez le [portail Azure](https://portal.azure.com)
-2. Naviguez vers votre groupe de ressources (`rg-<nom-env>`)
-3. Cliquez sur la ressource Application Insights (`appi-<unique-id>`)
-
-**Requêtes utiles** (Application Insights → Journaux) :
-
-**Afficher toutes les requêtes** :
-```kusto
-requests
-| where timestamp > ago(1h)
-| order by timestamp desc
-| project timestamp, name, url, resultCode, duration
-```
-
-**Trouver les erreurs** :
-```kusto
-exceptions
-| where timestamp > ago(24h)
-| order by timestamp desc
-| project timestamp, type, outerMessage, operation_Name
-```
-
-**Vérifier l’endpoint santé** :
-```kusto
-requests
-| where name contains "health"
-| summarize count() by resultCode, bin(timestamp, 1h)
-```
-
-### Audit de la base de données SQL
-
-**L’audit SQL est activé** pour suivre :
-- Les accès à la base de données
-- Les tentatives de connexion échouées
-- Les modifications du schéma
-- Les accès aux données (pour conformité)
-
-**Accéder aux journaux d’audit** :
-1. Portail Azure → Base de données SQL → Audit
-2. Consultez les journaux dans Log Analytics
-
-### Surveillance en temps réel
-
-**Afficher les métriques en direct** :
-1. Application Insights → Live Metrics
-2. Voir en temps réel les requêtes, échecs et performances
-
-**Configurer des alertes** :
-Créez des alertes pour événements critiques :
-- Erreurs HTTP 500 > 5 en 5 minutes
-- Échecs de connexion base de données
-- Temps de réponse élevés (>2 secondes)
-
-**Exemple de création d’alerte** :
-```sh
-az monitor metrics alert create \
-  --name "High-Response-Time" \
-  --resource-group <rg-name> \
-  --scopes <app-insights-resource-id> \
-  --condition "avg requests/duration > 2000" \
-  --description "Alert when response time exceeds 2 seconds"
-```
-
-## Dépannage
-### Problèmes Courants et Solutions
-
-#### 1. `azd provision` échoue avec "Location not available"
-
-**Symptôme** :  
-```
-Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
-```
-  
-**Solution** :  
-Choisissez une autre région Azure ou enregistrez le fournisseur de ressources :  
-```sh
-az provider register --namespace Microsoft.Insights
-```
-  
-#### 2. Échec de la connexion SQL lors du déploiement
-
-**Symptôme** :  
-```
-pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
-```
-  
-**Solution** :  
-- Vérifiez que le pare-feu du serveur SQL autorise les services Azure (configuré automatiquement)  
-- Vérifiez que le mot de passe admin SQL a été saisi correctement lors de `azd provision`  
-- Assurez-vous que le serveur SQL est complètement provisionné (cela peut prendre 2-3 minutes)  
-
-**Vérifier la connexion** :  
-```sh
-# Depuis le portail Azure, allez dans Base de données SQL → Éditeur de requête
-# Essayez de vous connecter avec vos identifiants
-```
-  
-#### 3. L’application Web affiche "Application Error"
-
-**Symptôme** :  
-Le navigateur affiche une page d’erreur générique.
-
-**Solution** :  
-Consultez les journaux de l’application :  
-```sh
-# Voir les journaux récents
-az webapp log tail --name <app-name> --resource-group <rg-name>
-```
-  
-**Causes courantes** :  
-- Variables d’environnement manquantes (vérifiez App Service → Configuration)  
-- Échec de l’installation des paquets Python (vérifiez les journaux de déploiement)  
-- Erreur d’initialisation de la base de données (vérifiez la connectivité SQL)  
-
-#### 4. `azd deploy` échoue avec "Build Error"
-
-**Symptôme** :  
-```
-Error: Failed to build project
-```
-  
-**Solution** :  
-- Assurez-vous que `requirements.txt` ne contient pas d’erreurs de syntaxe  
-- Vérifiez que Python 3.11 est spécifié dans `infra/resources/web-app.bicep`  
-- Vérifiez que le Dockerfile a une image de base correcte  
-
-**Déboguer localement** :  
-```sh
-cd src/web
-docker build -t test-app .
-docker run -p 8000:8000 test-app
-```
-  
-#### 5. "Unauthorized" lors de l’exécution des commandes AZD
-
-**Symptôme** :  
-```
-ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
-```
-  
-**Solution** :  
-Ré-authentifiez-vous avec Azure :  
-```sh
-# Requis pour les workflows AZD
-azd auth login
-
-# Optionnel si vous utilisez également les commandes Azure CLI directement
 az login
 ```
-  
-Vérifiez que vous disposez des autorisations correctes (rôle Contributeur) sur l’abonnement.
 
-#### 6. Coûts élevés de la base de données
+Utilisez le même abonnement dans les deux outils. Les commandes ci-dessous utilisent Bash.
 
-**Symptôme** :  
-Facture Azure inattendue.
+## Déployer
 
-**Solution** :  
-- Vérifiez si vous avez oublié de lancer `azd down` après les tests  
-- Vérifiez que la base de données SQL utilise le niveau Basic (pas Premium)  
-- Consultez les coûts dans Azure Cost Management  
-- Configurez des alertes de coûts  
+Depuis la racine du dépôt :
 
-### Obtenir de l’aide
-
-**Voir toutes les variables d’environnement AZD** :  
-```sh
-azd env get-values
+```bash
+cd examples/database-app
+azd env new sql-demo
+azd provision
+azd deploy
+WEB_URL=$(azd env get-value WEB_APP_URI)
+WEB_NAME=$(azd env get-value WEB_APP_NAME)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
 ```
-  
-**Vérifier l’état du déploiement** :  
-```sh
-az webapp show --name <app-name> --resource-group <rg-name> --query state
+
+Choisissez une région prise en charge. `sqlAdminLogin` utilise par défaut `sqladmin` ; le
+`sqlAdminPassword` requis est un paramètre sécurisé. Fournissez un mot de passe fort lorsqu’il est demandé.
+Gardez les identifiants de déploiement hors de Git et des rapports de problèmes. L’interpolation actuelle de la chaîne de connexion
+attend un mot de passe sans les délimiteurs de chaîne de connexion tels que
+`;` ; adaptez l’échappement avant d’utiliser de telles valeurs.
+
+Bicep définit une commande de démarrage qui exécute `init_database()` **avant** Gunicorn
+les workers démarrent. Cela est nécessaire car importer `app:app` n'exécute pas
+le bloc `if __name__ == '__main__'` de Python. Sur une base de données neuve, l'initialisation
+crée `products` et insère cinq lignes. C'est une graine pédagogique simple, pas un
+cadre de migration concurrente ; utilisez des migrations appropriées avant de déployer plusieurs instances.
+
+L'application sélectionne le pilote Microsoft ODBC Driver 18 installé, puis le 17, si la chaîne de connexion
+ne nomme pas explicitement un pilote. Si aucun n'existe, le démarrage échoue avec
+une erreur d'installation exploitable. Vérifiez la disponibilité du pilote dans votre runtime
+App Service choisi au lieu de l'assumer.
+
+## Vérification
+
+```bash
+curl --fail-with-body "${WEB_URL}/"
+curl --fail-with-body "${WEB_URL}/health"
+curl --fail-with-body "${WEB_URL}/products"
+curl --fail-with-body "${WEB_URL}/products/1"
+curl -i "${WEB_URL}/products/999"
 ```
-  
-**Accéder aux journaux de l’application** :  
-```sh
-az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
+
+Attendu :
+
+- `/` renvoie les informations de point de terminaison.
+- `/health` renvoie 200 avec `{"status":"healthy","database":"connected"}`.
+- `/products` retourne cinq produits initialisés sur une base de données neuve.
+- `/products/1` retourne Laptop avec un prix de 1299.99.
+- Un produit inexistant renvoie 404 avec `{"error":"Product not found"}`.
+
+L'API est en lecture seule. Il n'y a pas de route POST/PUT/DELETE ni d'interface navigateur.
+L’échec de connectivité à la base de données renvoie 503 depuis `/health` ; ce n'est pas un succès.
+
+## Fichiers et configuration
+
+```text
+azure.yaml                         # Python App Service source deployment
+infra/main.bicep
+infra/main.parameters.json
+infra/abbreviations.json
+infra/resources/sql-server.bicep
+infra/resources/sql-database.bicep
+infra/resources/app-service-plan.bicep
+infra/resources/web-app.bicep       # Settings + initialization/startup command
+infra/resources/app-insights.bicep
+src/web/app.py
+src/web/requirements.txt
+src/web/Dockerfile                 # Optional local container, not the azd target
+.env.sample
 ```
-  
-**Besoin de plus d’aide ?**  
-- [Guide de dépannage AZD](../../docs/chapter-07-troubleshooting/common-issues.md)  
-- [Dépannage Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)  
-- [Dépannage Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)  
 
-## Exercices Pratiques
+`SQL_CONNECTION_STRING` est passé comme paramètre sécurisé Bicep au module Web App
+et stocké dans les paramètres App Service, non dans les sorties de déploiement.
+`APPLICATIONINSIGHTS_CONNECTION_STRING` configure l’export des logs.
+`SCM_DO_BUILD_DURING_DEPLOYMENT=true` active l'installation de dépendances côté serveur.
+Définir des valeurs `azd env` arbitraires ne modifie pas automatiquement les paramètres de l’application.
 
-### Exercice 1 : Vérifier votre déploiement (Débutant)
+La règle `0.0.0.0` du pare-feu SQL autorise les connexions provenant des **services Azure,
+y compris des abonnements d’autres clients**, sous réserve d’une authentification SQL. Elle n'est
+pas limitée à cette application ou abonnement. L'accès réseau public SQL est activé.
+Utilisez un réseau à portée restreinte et une identité d'application non admin avant la production.
 
-**Objectif** : Confirmer que toutes les ressources sont déployées et que l’application fonctionne.
+## Développement local
 
-**Étapes** :  
-1. Listez toutes les ressources dans votre groupe de ressources :  
-   ```sh
-   az resource list --resource-group rg-<env-name> --output table
-   ```
-  
-**Attendu** : 6-7 ressources (Web App, SQL Server, Base de données SQL, Plan App Service, Application Insights, Log Analytics)
+Utilisez Python 3.11 et un pilote Microsoft SQL ODBC installé :
 
-2. Testez tous les points de terminaison API :  
-   ```sh
-   curl https://app-<your-id>.azurewebsites.net/
-   curl https://app-<your-id>.azurewebsites.net/health
-   curl https://app-<your-id>.azurewebsites.net/products
-   curl https://app-<your-id>.azurewebsites.net/products/1
-   ```
-  
-**Attendu** : Tous renvoient un JSON valide sans erreurs
+```bash
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/web/requirements.txt
+export SQL_CONNECTION_STRING='Server=tcp:YOUR_SERVER.database.windows.net,1433;Database=YOUR_DATABASE;UID=YOUR_USER;PWD=YOUR_PASSWORD;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+python src/web/app.py
+```
 
-3. Vérifiez Application Insights :  
-   - Accédez à Application Insights dans le portail Azure  
-   - Allez à "Live Metrics"  
-   - Actualisez votre navigateur sur l’application Web  
-   **Attendu** : Voir les requêtes apparaître en temps réel
+Remplacez les espaces réservés de manière sécurisée. Un fichier `.env` copié **n’est pas chargé automatiquement**
+par cette application. Exportez plutôt les variables dans votre shell actuel.
+Pour Azure SQL depuis un ordinateur portable, autorisez temporairement uniquement votre IP publique :
 
-**Critère de réussite** : Toutes les 6-7 ressources existent, tous les points de terminaison renvoient des données, Live Metrics montre l’activité.
+```bash
+SQL_SERVER=$(azd env get-value SQL_SERVER_NAME)
+MY_IP=YOUR_PUBLIC_IP
+az sql server firewall-rule create -g "$RG_NAME" -s "$SQL_SERVER" \
+  -n AllowMyLearningIP --start-ip-address "$MY_IP" --end-ip-address "$MY_IP"
+```
 
----
+Supprimez la règle après les tests :
 
-### Exercice 2 : Ajouter un nouveau point d’API (Intermédiaire)
+```bash
+az sql server firewall-rule delete -g "$RG_NAME" -s "$SQL_SERVER" -n AllowMyLearningIP
+```
 
-**Objectif** : Étendre l’application Flask avec un nouveau point d’API.
+Test facultatif en conteneur depuis ce répertoire d’exemple :
 
-**Code de départ** : Points d’API actuels dans `src/web/app.py`
+```bash
+docker build -t sql-flask:local src/web
+docker run --rm -p 8000:8000 -e SQL_CONNECTION_STRING sql-flask:local
+```
 
-**Étapes** :  
-1. Modifiez `src/web/app.py` et ajoutez un nouveau point d’API après la fonction `get_product()` :  
-   ```python
-   @app.route('/products/search/<keyword>')
-   def search_products(keyword):
-       """Search products by name or description."""
-       try:
-           conn = get_db_connection()
-           cursor = conn.cursor()
-           cursor.execute(
-               "SELECT id, name, description, price, created_at FROM products WHERE name LIKE ? OR description LIKE ?",
-               (f'%{keyword}%', f'%{keyword}%')
-           )
-           
-           products = []
-           for row in cursor.fetchall():
-               products.append({
-                   'id': row[0],
-                   'name': row[1],
-                   'description': row[2],
-                   'price': float(row[3]) if row[3] else None,
-                   'created_at': row[4].isoformat() if row[4] else None
-               })
-           
-           cursor.close()
-           conn.close()
-           
-           logger.info(f"Search for '{keyword}' returned {len(products)} results")
-           return jsonify(products), 200
-           
-       except Exception as e:
-           logger.error(f"Error searching products: {str(e)}")
-           return jsonify({'error': str(e)}), 500
-   ```
-  
-2. Déployez l’application mise à jour :  
-   ```sh
-   azd deploy
-   ```
-  
-3. Testez le nouveau point d’API :  
-   ```sh
-   curl https://app-<your-id>.azurewebsites.net/products/search/laptop
-   ```
-  
-**Attendu** : Renvoie les produits correspondant à "laptop"
+Cette image installe le Driver 18 via le dépôt Debian 12 correspondant à sa base
+Bookworm, initialise la base de données une fois, puis lance Gunicorn.
 
-**Critère de réussite** : Le nouveau point d’API fonctionne, renvoie des résultats filtrés, apparaît dans les journaux Application Insights.
+## Supervision et dépannage
 
----
+Activez/suivez les logs d’application du système de fichiers App Service lors du diagnostic du démarrage :
 
-### Exercice 3 : Ajouter la surveillance et les alertes (Avancé)
+```bash
+az webapp log config --name "$WEB_NAME" --resource-group "$RG_NAME" \
+  --application-logging filesystem --level information
+az webapp log tail --name "$WEB_NAME" --resource-group "$RG_NAME"
+```
 
-**Objectif** : Mettre en place une surveillance proactive avec alertes.
+Ce code exporte des **traces logs** d’application via un gestionnaire OpenCensus hérité.
+Il ne configure pas la traçabilité automatique de requêtes/dépendances Flask, Live Metrics,
+l’audit SQL, les paramètres diagnostics ou les alertes. Ces fonctions nécessitent une configuration séparée.
+Pour une instrumentation nouvelle, préférez Azure Monitor OpenTelemetry.
 
-**Étapes** :  
-1. Créez une alerte pour les erreurs HTTP 500 :  
-   ```sh
-   # Obtenir l'ID de la ressource Application Insights
-   AI_ID=$(az monitor app-insights component show \
-     --app appi-<your-id> \
-     --resource-group rg-<env-name> \
-     --query id -o tsv)
-   
-   # Créer une alerte
-   az monitor metrics alert create \
-     --name "High-Error-Rate" \
-     --resource-group rg-<env-name> \
-     --scopes $AI_ID \
-     --condition "count requests/failed > 5" \
-     --window-size 5m \
-     --evaluation-frequency 1m \
-     --description "Alert when >5 failed requests in 5 minutes"
-   ```
-  
-2. Déclenchez l’alerte en provoquant des erreurs :  
-   ```sh
-   # Demander un produit inexistant
-   for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
-   ```
-  
-3. Vérifiez si l’alerte s’est déclenchée :  
-   - Portail Azure → Alertes → Règles d’alerte  
-   - Consultez votre e-mail (si configuré)
+Dans Application Insights Logs, après des requêtes API :
 
-**Critère de réussite** : La règle d’alerte est créée, se déclenche sur les erreurs, les notifications sont reçues.
+```kusto
+traces
+| where timestamp > ago(1h)
+| where message contains "products" or message contains "Health check"
+| project timestamp, message, severityLevel
+```
 
----
+Tenez compte d’un délai d’ingestion. L’activité dans la table de requêtes ou Live Metrics n’est pas un
+critère d’achèvement pour cette instrumentation dédiée aux logs.
 
-### Exercice 4 : Changements de schéma de base de données (Avancé)
+- **Pilote manquant :** inspectez `pyodbc.drivers()` dans le runtime et installez
+  un pilote Microsoft ODBC supporté. Un paquet Python seul est insuffisant.
+- **Échec de connexion :** vérifiez paramètres SQL, authentifications, pare-feu, et abonnement choisi.
+  Ne désactivez pas le chiffrement pour contourner une erreur.
+- **Table produits manquante :** confirmez que la commande de démarrage Bicep a été déployée ;
+  démarrer `gunicorn app:app` seul saute l'initialisation.
+- **Échec de construction du paquet :** utilisez Python 3.11 ou fournissez les prérequis natifs.
+- **Données à prix zéro :** zéro est un prix décimal valide ; il doit se sérialiser en 0.0,
+  pas en `null`.
 
-**Objectif** : Ajouter une nouvelle table et modifier l’application pour l’utiliser.
+## Exercices pratiques
 
-**Étapes** :  
-1. Connectez-vous à la base de données SQL via l’éditeur de requête du portail Azure
+### Exercice 1 : Vérifier le comportement en cas de produit manquant
 
-2. Créez une nouvelle table `categories` :  
-   ```sql
-   CREATE TABLE categories (
-       id INT PRIMARY KEY IDENTITY(1,1),
-       name NVARCHAR(50) NOT NULL,
-       description NVARCHAR(200)
-   );
-   
-   INSERT INTO categories (name, description) VALUES
-   ('Electronics', 'Electronic devices and accessories'),
-   ('Office Supplies', 'Office equipment and supplies');
-   
-   -- Add category to products table
-   ALTER TABLE products ADD category_id INT;
-   UPDATE products SET category_id = 1; -- Set all to Electronics
-   ```
-  
-3. Mettez à jour `src/web/app.py` pour inclure les informations de catégorie dans les réponses
+**Point de départ :** API déployée et `WEB_URL` ci-dessus.
+**Objectif :** distinguer une ligne manquante d’une base de données cassée.
+Requêtez `/health` et `/products/999` avec les commandes ci-dessus.
+**Critères de réussite / réponse:** santé 200, produit inexistant 404 (pas 500 ou 503).
+**Problème fréquent :** supposer qu’une réponse « non trouvée » prouve que la connexion SQL est cassée.
 
-4. Déployez et testez
+### Exercice 2 : Modifier une valeur initialisée
 
-**Critère de réussite** : La nouvelle table existe, les produits affichent l’information de catégorie, l’application fonctionne toujours.
+**Point de départ :** éditeur de requêtes Azure SQL, connecté à la base de données d'exemple.
+**Objectif :** montrer que les données de l’API sont stockées dans SQL plutôt que dans la mémoire du processus.
 
----
+```sql
+UPDATE products SET price = 0 WHERE id = 1;
+SELECT id, name, price FROM products WHERE id = 1;
+```
 
-### Exercice 5 : Implémenter la mise en cache (Expert)
+Requêtez `${WEB_URL}/products/1`. **Critères de réussite :** le prix est `0.0`, pas `null`.
+Restaurez la valeur :
 
-**Objectif** : Ajouter Azure Redis Cache pour améliorer les performances.
+```sql
+UPDATE products SET price = 1299.99 WHERE id = 1;
+```
 
-**Étapes** :  
-1. Ajoutez Redis Cache à `infra/main.bicep`  
-2. Mettez à jour `src/web/app.py` pour mettre en cache les requêtes produits  
-3. Mesurez l’amélioration des performances avec Application Insights  
-4. Comparez les temps de réponse avant et après la mise en cache
+**Problème fréquent :** modifier la liste de graines Python ne met pas à jour les lignes déjà en SQL.
+Ne faites pas d'exercices de schéma/données sur une base de production.
 
-**Critère de réussite** : Redis est déployé, la mise en cache fonctionne, les temps de réponse s’améliorent de plus de 50 %.
+### Exercice 3 : Ajouter un endpoint de comptage en lecture seule
 
-**Conseil** : Commencez par la [documentation Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**Point de départ :** `src/web/app.py`.
+**Objectif :** étendre l’API avec une requête agrégée sans paramètre.
+Ajoutez ceci avant le bloc `if __name__ == '__main__':` :
 
----
+```python
+@app.route('/product-count')
+def product_count():
+    from contextlib import closing
+    with closing(get_db_connection()) as conn, closing(conn.cursor()) as cursor:
+        cursor.execute("SELECT COUNT(*) FROM products")
+        return jsonify({'count': cursor.fetchone()[0]})
+```
 
-## Nettoyage
+Lancez `azd deploy web`, puis requêtez `${WEB_URL}/product-count`.
+**Critères de réussite :** 200 avec `{"count":5}` sur la base initialisée intacte.
+**Problème fréquent :** changer la route sans redéployer.
+En production, ajoutez gestion d’erreur/tests ; cet exercice court se concentre sur la requête.
 
-Pour éviter des frais récurrents, supprimez toutes les ressources lorsque vous avez terminé :
+## Coûts, lacunes production et nettoyage
 
-```sh
+Le service B1 App Service et la base Basic sont facturés tant qu’ils sont provisionnés. Arrêter
+le Web App ne met **pas** fin à la facturation du plan App Service. Les logs et stockage peuvent générer des coûts.
+Utilisez la [calculatrice de prix Azure](https://azure.microsoft.com/pricing/calculator/)
+pour les tarifs régionaux actuels. Passer à F1 nécessite aussi de désactiver `alwaysOn` ;
+ce n’est pas un remplacement plug-and-play en une ligne. Le SQL serverless n’est pas gratuit automatiquement.
+
+Le travail en production inclut une identité d’application à privilèges minimaux (pas admin SQL),
+l’authentification/autorisation, un réseau privé, des migrations sûres, la gestion/validation du pool de connexions,
+la télémétrie, l’audit, les alertes, les tests et les procédures de récupération.
+La mise en cache Redis et des tables supplémentaires sont des idées de développement, non des exercices mis en œuvre.
+
+Depuis ce répertoire d’exemple :
+
+```bash
 azd down
 ```
-  
-**Invite de confirmation** :  
-```
-? Total resources to delete: 7, are you sure you want to continue? (y/N)
-```
-  
-Tapez `y` pour confirmer.
 
-**✓ Vérification de réussite** :  
-- Toutes les ressources sont supprimées du portail Azure  
-- Aucun frais récurrent  
-- Le dossier local `.azure/<env-name>` peut être supprimé
+Vérifiez l’invite de suppression et assurez-vous que le groupe de ressources dédié est supprimé.
+Ne supprimez pas les groupes contenant des données non liées.
 
-**Alternative** (garder l’infrastructure, supprimer les données) :  
-```sh
-# Supprimer uniquement le groupe de ressources (conserver la configuration AZD)
-az group delete --name rg-<env-name> --yes
-```
-  
-## En savoir plus
-
-### Documentation associée  
-- [Documentation Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
-- [Documentation Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/)  
-- [Documentation Azure App Service](https://learn.microsoft.com/azure/app-service/)  
-- [Documentation Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)  
-- [Référence langage Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)  
-
-### Prochaines étapes dans ce cours  
-- **[Exemple Container Apps](../../../../examples/container-app)** : Déployer des microservices avec Azure Container Apps  
-- **[Guide d’intégration IA](../../../../docs/ai-foundry)** : Ajouter des capacités d’IA à votre application  
-- **[Bonnes pratiques de déploiement](../../docs/chapter-04-infrastructure/deployment-guide.md)** : Modèles de déploiement en production  
-
-### Sujets avancés  
-- **Identité managée** : Supprimez les mots de passe et utilisez l’authentification Microsoft Entra ID  
-- **Points de terminaison privés** : Sécurisez les connexions base de données dans un réseau virtuel  
-- **Intégration CI/CD** : Automatisez les déploiements avec GitHub Actions ou Azure DevOps  
-- **Multi-environnements** : Configurez des environnements dev, staging et production  
-- **Migrations de base de données** : Utilisez Alembic ou Entity Framework pour la version du schéma  
-
-### Comparaison avec d’autres approches
-
-**AZD vs. Templates ARM** :  
-- ✅ AZD : Abstraction de haut niveau, commandes simples  
-- ⚠️ ARM : Plus verbeux, contrôle granulaire  
-
-**AZD vs. Terraform** :  
-- ✅ AZD : Azure natif, intégré aux services Azure  
-- ⚠️ Terraform : Support multi-cloud, écosystème plus large  
-
-**AZD vs. Portail Azure** :  
-- ✅ AZD : Répétable, versionné, automatisable  
-- ⚠️ Portail : Clics manuels, difficile à reproduire  
-
-**Pensez à AZD comme** : Docker Compose pour Azure — configuration simplifiée pour des déploiements complexes.
-
----
-
-## Questions Fréquemment Posées
-
-**Q : Puis-je utiliser un autre langage de programmation ?**  
-R : Oui ! Remplacez `src/web/` par Node.js, C#, Go, ou tout autre langage. Mettez à jour `azure.yaml` et Bicep en conséquence.
-
-**Q : Comment ajouter plusieurs bases de données ?**  
-R : Ajoutez un autre module SQL Database dans `infra/main.bicep` ou utilisez PostgreSQL/MySQL des services Azure Database.
-
-**Q : Puis-je utiliser ceci en production ?**  
-R : C’est un point de départ. Pour la production, ajoutez : identité managée, points de terminaison privés, redondance, stratégie de sauvegarde, WAF, et surveillance améliorée.
-
-**Q : Et si je veux utiliser des conteneurs au lieu du déploiement de code ?**  
-R : Consultez l’[Exemple Container Apps](../../../../examples/container-app) qui utilise des conteneurs Docker partout.
-
-**Q : Comment me connecter à la base de données depuis ma machine locale ?**  
-R : Ajoutez votre IP au pare-feu du serveur SQL :  
-```sh
-az sql server firewall-rule create \
-  --resource-group rg-<env-name> \
-  --server sql-<unique-id> \
-  --name AllowMyIP \
-  --start-ip-address <your-ip> \
-  --end-ip-address <your-ip>
-```
-  
-**Q : Puis-je utiliser une base de données existante au lieu d’en créer une nouvelle ?**  
-R : Oui, modifiez `infra/main.bicep` pour référencer un serveur SQL existant et mettez à jour les paramètres de chaîne de connexion.
-
----
-
-> **Note :** Cet exemple illustre les bonnes pratiques pour déployer une application web avec une base de données en utilisant AZD. Il inclut un code fonctionnel, une documentation complète, et des exercices pratiques pour renforcer l’apprentissage. Pour les déploiements en production, examinez les exigences de sécurité, montée en charge, conformité, et coûts spécifiques à votre organisation.
-
-**📚 Navigation dans le cours :**  
-- ← Précédent : [Exemple Container Apps](../../../../examples/container-app)  
-- → Suivant : [Guide d’intégration IA](../../../../docs/ai-foundry)  
-- 🏠 [Accueil du cours](../../README.md)
+[Exemples de conteneurs](../../../../examples/container-app) ·
+[Développement IA](../../docs/chapter-02-ai-development/README.md) ·
+[Accueil du cours](../../README.md) · [Signaler un problème](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

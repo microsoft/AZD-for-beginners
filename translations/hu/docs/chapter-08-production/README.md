@@ -1,29 +1,31 @@
 # 8. fejezet: Termelési és vállalati minták
 
-**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 2-3 óra | **⭐ Bonyolultság**: Haladó
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 2-3 óra | **⭐ Összetettség**: Haladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet vállalati szintű telepítési mintákat, biztonsági megerősítést, megfigyelést és költségoptimalizálást tárgyal az AI termelési munkaterhelésekhez.
+Ebben a fejezetben vállalati szintű telepítési mintákat, biztonsági megerősítést, megfigyelést és költségoptimalizálást tárgyalunk éles AI munkafolyamatokhoz.
 
-> Ellenőrizve az `azd 1.27.1` verzióval 2026 júliusában.
+Ez egy architekturális referencia, nem egy teljesen telepíthető termelési sablon. A példák kihagyják az integrációs részleteket, amelyeket a saját alkalmazásodban kell biztosítani és tesztelni; a listát elolvasni nem jelent termelési készséget.
+
+> **Kiadás átvizsgálás (2026-11-04):** Az AI CLI útmutatót összevetettük az `azd 1.37.2`, az agentek `1.0.0-beta.23` és az értékelések `1.0.0-beta.2` dokumentáció/forrásaival. Lásd a [kiadási változások és hibajavítások](production-ai-practices.md#recent-release-changes-and-fixes) kompatibilitási követelményeit és migrációs részleteit; ez nem élő telepítési érvényesítés.
 
 ## Tanulási célok
 
-Ennek a fejezetnek a befejezésével Ön:
-- Többszörös régiókban reziliens alkalmazásokat telepít
-- Vállalati biztonsági mintákat valósít meg
-- Átfogó megfigyelést konfigurál
-- Költségeket optimalizál nagy léptékben
-- AZD-vel állítja be a CI/CD csővezetékeket
+A fejezet elvégzése után képes leszel:
+- Több régióra kiterjedő ellenálló alkalmazásokat telepíteni
+- Vállalati biztonsági mintákat megvalósítani
+- Átfogó megfigyelést konfigurálni
+- Költségeket méretezve optimalizálni
+- AZD-vel CI/CD csővezetékeket beállítani
 
 ---
 
-## 📚 Leckék
+## 📚 Tananyagok
 
-| # | Lecke | Leírás | Idő |
+| # | Lecke | Leírás | Időtartam |
 |---|--------|-------------|------|
 | 1 | [Termelési AI gyakorlatok](production-ai-practices.md) | Vállalati telepítési minták | 90 perc |
 
@@ -31,11 +33,11 @@ Ennek a fejezetnek a befejezésével Ön:
 
 ## 🚀 Termelési ellenőrzőlista
 
-- [ ] Több régióban történő telepítés a reziliencia érdekében
-- [ ] Kezelt identitás az hitelesítéshez (nincsenek kulcsok)
+- [ ] Több régiós telepítés az ellenálló képességért
+- [ ] Kezelt identitás hitelesítéshez (kulcsok nélkül)
 - [ ] Application Insights a megfigyeléshez
-- [ ] Költségkeretek és riasztások beállítva
-- [ ] Biztonsági vizsgálat engedélyezve
+- [ ] Költségvetések és riasztások beállítva
+- [ ] Biztonsági szkennelés engedélyezve
 - [ ] CI/CD csővezeték integráció
 - [ ] Katasztrófa-helyreállítási terv
 
@@ -43,20 +45,20 @@ Ennek a fejezetnek a befejezésével Ön:
 
 ## 🏗️ Architektúra minták
 
-### Minta 1: Mikroszolgáltatások AI
+### Minta 1: Mikroservice AI
 
 ```mermaid
 graph LR
-    Gateway[API átjáró] --> AI[MI Szolgáltatás] --> Models[Microsoft Foundry modellek]
-    Gateway --> Auth[Hitelesítő szolgáltatás]
-    AI --> Data[Adattárhely]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
 ### Minta 2: Eseményvezérelt AI
 
 ```mermaid
 graph LR
-    EventGrid[Eseményrács] --> Functions[Funkciók] --> Pipeline[MI folyamatlánc]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
@@ -64,12 +66,13 @@ graph LR
 ## 🔐 Biztonsági legjobb gyakorlatok
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,34 +85,27 @@ properties: {
 
 ## 💰 Költségoptimalizálás
 
-| Stratégia | Megtakarítás |
+| Stratégia | Fő korlát |
 |----------|---------|
-| Nulla skálázás (Container Apps) | 60-80% |
-| Fogyasztási szintek használata fejlesztéshez | 50-70% |
-| Ütemezett skálázás | 30-50% |
-| Fenntartott kapacitás | 20-40% |
+| Skálázás nullára (Container Apps) | Megfelelő kiváltó ok szükséges; más szolgáltatások továbbra is költséget okoznak |
+| Fogyasztási szintek használata fejlesztéshez | Összehasonlítja a kiválasztott szolgáltatás árazását és a munkaterhelést |
+| Ütemezett skálázás | A támogatott infrastruktúrán/automatizáláson keresztül történő skálázás |
+| Foglalások/fenntartott kapacitás | Csak ha támogatott; kötelezettségek növelhetik a tétlen költségeket |
 
-```bash
-# Költségvetési riasztások beállítása
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Használd a [teljes költségvetési erőforrás-mintát](production-ai-practices.md#2-cost-monitoring-and-budgets) érvényes kezdő dátummal, számlázási hatókörrel, címzettekkel és jogosultságokkal. A költségvetés riasztásokat küld; nem korlátozza a kiadásokat. A megtakarítások a mért használattól függenek és nem garantált százalékok.
 
 ---
 
 ## 📊 Megfigyelés beállítása
 
 ```bash
-# Logok folyamatos közvetítése
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Application Insights ellenőrzése
+# Check Application Insights
 azd monitor --overview
 
-# Metriák megtekintése
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -120,15 +116,15 @@ az monitor metrics list --resource <resource-id>
 | Irány | Fejezet |
 |-----------|---------|
 | **Előző** | [7. fejezet: Hibakeresés](../chapter-07-troubleshooting/README.md) |
-| **Tanfolyam vége** | [Tanfolyam kezdőlap](../../README.md) |
+| **Tanfolyam befejezve** | [Tanfolyam kezdőlap](../../README.md) |
 
 ---
 
 ## 📖 Kapcsolódó források
 
-- [AI ügynökök útmutatója](../chapter-02-ai-development/agents.md)
+- [AI Agentek útmutatója](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Többügynökös megoldások](../chapter-05-multi-agent/README.md)
+- [Több-agent megoldások](../chapter-05-multi-agent/README.md)
 - [Mikroszolgáltatások példa](../../examples/microservices/README.md)
 
 ---

@@ -1,305 +1,308 @@
-# AI Ügynökök az Azure Developer CLI-vel
+# AI ügynökök az Azure Developer CLI segítségével
 
-**Fejezet Navigáció:**
-- **📚 Tanfolyam Kezdőlap**: [AZD Kezdőknek](../../README.md)
-- **📖 Aktuális Fejezet**: 2. fejezet - AI-első Fejlesztés
-- **⬅️ Előző**: [Microsoft Foundry Integráció](microsoft-foundry-integration.md)
-- **➡️ Következő**: [AI Modell Bevetés](ai-model-deployment.md)
-- **🚀 Haladó**: [Többügynökös Megoldások](../../examples/retail-scenario.md)
+**Fejezet navigáció:**
+- **📚 Tanfolyam kezdőlapja**: [AZD kezdőknek](../../README.md)
+- **📖 Jelenlegi fejezet**: 2. fejezet - AI-első fejlesztés
+- **⬅️ Előző**: [Microsoft Foundry integráció](microsoft-foundry-integration.md)
+- **➡️ Következő**: [AI modell telepítése](ai-model-deployment.md)
+- **🚀 Haladó**: [Többügynökös megoldások](../../examples/retail-scenario.md)
 
 ---
 
 ## Bevezetés
 
-Az AI ügynökök önálló programok, amelyek képesek érzékelni környezetüket, döntéseket hozni és cselekedni meghatározott célok elérése érdekében. Ellentétben az egyszerű chatbotokkal, amelyek válaszolnak a kérdésekre, az ügynökök képesek:
+Az AI ügynökök autonóm programok, amelyek érzékelik környezetüket, döntéseket hoznak, és cselekvéseket hajtanak végre adott célok elérése érdekében. Az egyszerű chatbotokkal ellentétben, amelyek csak válaszolnak kérdésekre, az ügynökök képesek:
 
-- **Eszközök használata** - API-k hívása, adatbázisok keresése, kód végrehajtása
-- **Tervezni és következtetni** - Bonyolult feladatokat lépésekre bontani
-- **Környezetből tanulni** - Memóriát fenntartani és alkalmazkodni a viselkedéshez
-- **Együttműködni** - Más ügynökökkel dolgozni (többügynökös rendszerek)
+- **Eszközöket használni** – API-kat hívni, adatbázisokat keresni, kódot futtatni
+- **Tervezni és gondolkodni** – Összetett feladatokat lépésekre bontani
+- **Tanulni a kontextusból** – Memóriát fenntartani és viselkedést adaptálni
+- **Együttműködni** – Más ügynökökkel dolgozni (többügynökös rendszerek)
 
-Ez az útmutató megmutatja, hogyan telepíthetsz AI ügynököket az Azure-ra az Azure Developer CLI (azd) segítségével.
+Ez az útmutató megmutatja, hogyan telepíts AI ügynököket az Azure-ra az Azure Developer CLI (azd) segítségével.
 
-> **Érvényességi megjegyzés (2026-07-13):** Ez az útmutató az `azd` `1.27.1` és az `azure.ai.agents` `1.0.0-beta.5` verzióival került ellenőrzésre. Az `azd ai` élmény még mindig előzetes, ezért ellenőrizd a kiterjesztés súgóját, ha a telepített zászlóid eltérnek.
+A beszélgetési kontextus használata nem modelltréning: tartós memóriát, hozzáférés-vezérlést és megtartást az alkalmazásnak kell megvalósítania/konfigurálnia.
 
-## Tanulási Célok
+> **Kiadás áttekintése (2026-11-04):** A CLI példákat összevetették az `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, és `azure.ai.evaluations` `1.0.0-beta.2` dokumentáció/forrással, nem egy élő Azure telepítéssel. Használd a `azd >= 1.37.0` parancsot az integrált munkafolyamathoz. Tekintsd meg a [legutóbbi változtatásokat és javításokat](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) régebbi projektek frissítése előtt.
+
+## Tanulási célok
 
 Az útmutató elvégzésével:
-- Megérted, mik azok az AI ügynökök és hogyan különböznek a chatbotoktól
-- Képes leszel előre elkészített AI ügynök sablonokat telepíteni AZD-vel
-- Beállítod a Foundry ügynököket egyedi ügynökökhez
-- Megvalósítasz alapvető ügynökmintákat (eszközhasználat, RAG, többügynökös)
-- Figyeled és hibakeresed a telepített ügynököket
+- Megérted, mik az AI ügynökök és hogyan különböznek a chatbotoktól
+- Előre elkészített AI ügynök sablonokat telepítesz AZD-vel
+- Foundry ügynököket konfigurálsz egyedi ügynökök számára
+- Alap ügynökmintákat valósítasz meg (eszközhasználat, RAG, többügynök)
+- Követed és hibakeresed a telepített ügynököket
 
-## Tanulási Eredmények
+## Tanulási eredmények
 
-A végére képes leszel:
-- AI ügynök alkalmazásokat egyetlen paranccsal telepíteni az Azure-ra
-- Ügynök eszközök és képességek konfigurálása
-- Végrehajtani a lekérés-alapú generálást (RAG) ügynökökkel
-- Többügynökös architektúrák tervezése összetett munkafolyamatokhoz
-- Általános hibák elhárítása az ügynök telepítésében
+Az útmutató után képes leszel:
+- AI ügynök alkalmazásokat egyetlen paranccsal Azure-ra telepíteni
+- Ügynöki eszközöket és képességeket konfigurálni
+- Visszakeresés-alapú generálást (RAG) ügynökökkel megvalósítani
+- Többügynökös architektúrákat tervezni összetett munkafolyamatokhoz
+- Gyakori ügynök telepítési hibákat hárítani
 
 ---
 
-## 🤖 Miben különbözik az ügynök a chatbotól?
+## 🤖 Miben különbözik egy ügynök egy chatbot-tól?
 
-| Jellemző | Chatbot | AI Ügynök |
+| Jellemző | Chatbot | AI ügynök |
 |---------|---------|----------|
 | **Viselkedés** | Válaszol a kérdésekre | Autonóm cselekvéseket hajt végre |
-| **Eszközök** | Nincs | Képes API-kat hívni, keresni, kódot futtatni |
-| **Memória** | Csak munkamenet alapú | Állandó memória a munkamenetek között |
-| **Tervezés** | Egyszeri válasz | Többlépcsős következtetés |
-| **Együttműködés** | Egyetlen entitás | Tud más ügynökökkel együtt dolgozni |
+| **Eszközök** | Használhat visszakeresést vagy eszközöket | Jellemzően eszközöket használ célorientált ciklusban |
+| **Memória** | Alkalmazásfüggő | Tartós memória csak explicit megvalósítás esetén |
+| **Tervezés** | Egy válaszra korlátozva | Többlépéses gondolkodás |
+| **Együttműködés** | Egyedüli entitás | Más ügynökökkel is képes dolgozni |
 
-### Egyszerű Hasonlat
+### Egyszerű hasonlat
 
-- **Chatbot** = Egy segítőkész személy, aki válaszol a kérdésekre egy információs pulton
-- **AI Ügynök** = Egy személyi asszisztens, aki képes telefonálni, időpontot foglalni és feladatokat elvégezni helyetted
+- **Chatbot** = Egy segítőkész személy az információs pultnál
+- **AI ügynök** = Egy személyi asszisztens, aki hívásokat intéz, időpontokat foglal és elvégzi a feladatokat helyetted
 
 ---
 
-## 🚀 Gyors Kezdés: Telepítsd az Első Ügynöködet
+## 🚀 Gyors kezdés: Telepítsd első ügynöködet
 
-### Opció 1: Foundry Ügynökök Sablon (Ajánlott)
+Válassz egy opciót egy **új, üres munkakönyvtárban**. A végződő `.` ott inicializál; kifejezett célpont nélkül az aktuális AZD létrehozhat egy sablonnevű alkönyvtárat, és nem vált át a shell könyvtáradra. Tartsd a különböző sablonokat/ünnepélyeket külön mappákban.
+
+Az alábbi idő- és költségtartományok illusztratívak, nem hiteles árajánlatok. Minden mintánál ellenőrizd az aktuális előfeltételeket, árakat, modell kereteket és opcionális szolgáltatásokat telepítés előtt.
+
+### 1. opció: Foundry ügynök sablon (ajánlott)
 
 ```bash
-# Inicializálja az AI ügynökök sablonját
-azd init --template get-started-with-ai-agents
+# Initialize the AI agents template
+azd init --template get-started-with-ai-agents .
 
-# Telepítés Azure-ra
+# Deploy to Azure
 azd up
 ```
 
-**Mi kerül telepítésre:**
-- ✅ Foundry Ügynökök
-- ✅ Microsoft Foundry Modellek (gpt-4.1)
-- ✅ Azure AI Keresés (RAG-hez)
-- ✅ Azure Konténer Alkalmazások (webes felület)
-- ✅ Application Insights (felügyelet)
+**Mi települ:** A minta aktuális infrastruktúrája és kiválasztott opciói határozzák meg a modellt, eszközöket, hosztolást és monitorozási erőforrásokat. Nézd át a README-jét és a `infra/`-t provisioning előtt; ne feltételezd, hogy minden ügynök sablon tartalmaz Keresést vagy webes felületet.
 
-**Idő:** ~15-20 perc
-**Költség:** ~$100-150/hónap (fejlesztés)
+**Idő:** kb. 15-20 perc
+**Költség:** kb. 100-150 USD/hónap (fejlesztés)
 
-### Opció 2: OpenAI Ügynök Prompty-val
+### 2. opció: Kreatív író ügynökök Prompty-val
 
 ```bash
-# Inicializáld a Prompty-alapú ügynök sablont
-azd init --template agent-openai-python-prompty
+# Initialize the Prompty-based agent template
+azd init --template https://github.com/Azure-Samples/contoso-creative-writer .
 
-# Telepítés Azure-ra
+# Deploy to Azure
 azd up
 ```
 
-**Mi kerül telepítésre:**
-- ✅ Azure Functions (szerver nélküli ügynök futtatás)
-- ✅ Microsoft Foundry Modellek
-- ✅ Prompty konfigurációs fájlok
-- ✅ Minta ügynök megvalósítás
+**Mi települ:** FastAPI/Prompty többügynökös író minta Azure OpenAI-val, Bing Grounding-gel, és Azure AI Kereséssel. A korábbi `agent-openai-python-prompty` tároló ide irányít; nem egy minimális Azure Functions időjárás-ügynök sablon. Kövesd az aktuális README-t hosztolás, modellkeret és Bing Grounding előfeltételekhez.
 
-**Idő:** ~10-15 perc
-**Költség:** ~$50-100/hónap (fejlesztés)
+**Idő:** kb. 10-15 perc
+**Költség:** kb. 50-100 USD/hónap (fejlesztés)
 
-### Opció 3: RAG Csevegő Ügynök
+### 3. opció: RAG csevegő ügynök
 
 ```bash
-# RAG csevegési sablon inicializálása
-azd init --template azure-search-openai-demo
+# Initialize RAG chat template
+azd init --template azure-search-openai-demo .
 
-# Telepítés Azure-ba
+# Deploy to Azure
 azd up
 ```
 
-**Mi kerül telepítésre:**
-- ✅ Microsoft Foundry Modellek
-- ✅ Azure AI Keresés mintad adatokkal
-- ✅ Dokumentum feldolgozó folyamat
+**Mi települ:**
+- ✅ Microsoft Foundry modellek
+- ✅ Azure AI Keresés mintaadatokkal
+- ✅ Dokumentumfeldolgozó csővezeték
 - ✅ Csevegőfelület hivatkozásokkal
 
-**Idő:** ~15-25 perc
-**Költség:** ~$80-150/hónap (fejlesztés)
+**Idő:** kb. 15-25 perc
+**Költség:** kb. 80-150 USD/hónap (fejlesztés)
 
-### Opció 4: AZD AI Ügynök Inicializálás (Manifeszt vagy Sablon Alapú Előzetes)
+### 4. opció: AZD AI Agent Init (Projekt sablon előnézet)
 
-Ha rendelkezel ügynök manifeszt fájllal, használhatod az `azd ai` parancsot a Foundry Agent Service projekt közvetlen előkészítésére. A legújabb előzetes kiadások sablon alapú inicializálást is támogatnak, így a pontos folyamat enyhén eltérhet a telepített kiterjesztés verziójától függően.
+Használd `azd ai agent init` interaktívan, vagy alkalmazz egy aktuális `azure.yaml` ügynök projektet `--template`/`-t`-mal. A régi `--manifest`/`-m` opció egy elavult alias, nem konvertáló régi manifesztumokhoz.
 
 ```bash
-# Telepítse az AI ügynökök bővítményt
+# Install the AI agents extension
 azd extension install azure.ai.agents
 
-# Opcionális: ellenőrizze a telepített előzetes verziót
+# Optional: verify the installed preview version
 azd extension show azure.ai.agents
 
-# Inicializálás egy ügynök manifesztumból
-azd ai agent init -m agent-manifest.yaml
+# Initialize from a current agent project template (supply your template path)
+azd ai agent init --template ./templates/support-agent/azure.yaml
 
-# Telepítés az Azure-ra
+# Deploy to Azure
 azd up
 
-# Tesztelje a telepített ügynököt (mutatja a késleltetést + az első bájtig eltelt időt)
+# Test the deployed agent (shows latency + time-to-first-byte)
 azd ai agent invoke
 ```
 
-**Mikor használd az `azd ai agent init`-et a `azd init --template` helyett:**
+**Mikor használd a `azd ai agent init` vs `azd init --template`:**
 
-| Megközelítés | Legjobb hasznosítás | Működés |
+| Megközelítés | Legjobb | Hogyan működik |
 |----------|----------|------|
-| `azd init --template` | Egy működő mintaalkalmazásból indulva | Teljes sablon repo klónozása kóddal + infrastruktúrával |
-| `azd ai agent init -m` | Saját ügynök manifeszt alapján építkezve | Projektstruktúra építése az ügynök definíciód alapján |
+| `azd init --template` | Egy működő mintaalkalmazással kezdve | Teljes sablon repo klónozása kóddal + infrastruktúrával |
+| `azd ai agent init --template` | Egy aktuális Foundry ügynök projekt alkalmazása | Egy `azure.yaml` projekt dokumentumot és definíciókat használ |
 
-> **Tipp:** Tanuláshoz használd az `azd init --template` opciókat (1-3 fent). Éles ügynökök építéséhez használd az `azd ai agent init`-et saját manifesztjeiddel.
+> **Tipp:** Tanuláshoz használd a `azd init --template` parancsot (a fentiek 1-3. opció). Foundry ügynök munkafolyamathoz a `azd ai agent init`-t használd. Az ügynök közvetlen definiálásához meglévő projekthez lásd a [inicializálás és migráció útmutatót](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
 
-Az `azd up` után ugyanaz a kiterjesztés végigvezeti az ügynök élettartamán: `azd ai agent invoke` a teszthez, `azd ai agent eval generate` és `azd ai agent optimize` a minőség méréséhez és javításához, valamint `azd ai agent delete` a takarításhoz. Teljes lista az [AZD AI CLI parancsok](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) oldalon.
+A `azd up` után használd a `azd ai agent invoke`-t teszteléshez, a különálló `azure.ai.evaluations` bővítményt (`azd ai eval init`, `generate`, és `run start`) a minőség mérésére, és `azd ai agent optimize`-t a minőség javítására új értékelési konfigurációval. Az Agents beta.22 lecserélte a régi értékelési munkafolyamatot és megváltoztatta az optimalizáció `--config` formátumát. Lásd a [értékelési migrációt](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) és [optimalizációs migrációt](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) régebbi példák újrafelhasználása előtt.
 
 ---
 
-## 🏗️ Ügynök Architektúra Minták
+## 🏗️ Ügynök architektúra minták
 
-### Minta 1: Egyetlen Ügynök Eszközökkel
+### Minta 1: Egyetlen ügynök eszközökkel
 
-A legegyszerűbb ügynökminta - egy ügynök, amely több eszközt is tud használni.
+A legegyszerűbb ügynökminta – egy ügynök, amely több eszközt is használhat.
 
 ```mermaid
 graph TD
-    UI[Felhasználói felület] --> Agent[Mesterséges intelligencia ügynök<br/>gpt-4.1]
-    Agent --> Search[Keresőeszköz]
-    Agent --> Database[Adatbázis eszköz]
-    Agent --> API[API eszköz]
+    UI[User Interface] --> Agent[AI Agent<br/>gpt-4.1]
+    Agent --> Search[Search Tool]
+    Agent --> Database[Database Tool]
+    Agent --> API[API Tool]
 ```
 
-**Legjobb használatra:**
-- Ügyfélszolgálati robotok
+**Leginkább alkalmas:**
+- Ügyfélszolgálati chatbotok
 - Kutatási asszisztensek
-- Adat elemző ügynökök
+- Adatfeldolgozó ügynökök
 
-**AZD sablon:** `azure-search-openai-demo`
+**Kapcsolódó alkalmazás minta:** `azure-search-openai-demo` bemutatja a RAG-ot, nem egy általános tetszőleges-eszköz ügynök ciklust.
 
-### Minta 2: RAG Ügynök (Lekérdezés-alapú Generálás)
+### Minta 2: RAG ügynök (Visszakeresés-alapú generálás)
 
-Egy olyan ügynök, amely releváns dokumentumokat keres elő a válaszok generálása előtt.
+Egy olyan ügynök, amely adott dokumentumokat keres elő a válasz generálása előtt.
 
 ```mermaid
 graph TD
-    Query[Felhasználói lekérdezés] --> RAG[RAG Ügynök]
-    RAG --> Vector[Vektor keresés]
+    Query[User Query] --> RAG[RAG Agent]
+    RAG --> Vector[Vector Search]
     RAG --> LLM[LLM<br/>gpt-4.1]
     Vector -- Documents --> LLM
-    LLM --> Response[Válasz hivatkozásokkal]
+    LLM --> Response[Response with Citations]
 ```
 
-**Legjobb használatra:**
+**Leginkább alkalmas:**
 - Vállalati tudásbázisok
-- Dokumentum alapú kérdés-válasz rendszerek
-- Jogszabályi és megfelelőségi kutatás
+- Dokumentum kérdés-válasz rendszerek
+- Megfelelőségi és jogi kutatások
 
 **AZD sablon:** `azure-search-openai-demo`
 
-### Minta 3: Többügynökös Rendszer
+### Minta 3: Többügynökös rendszer
 
-Több specializált ügynök együtt dolgozik összetett feladatokon.
+Több speciális ügynök együtt dolgozik összetett feladatokon.
 
 ```mermaid
 graph TD
-    Orchestrator[Koordinátor Ügynök] --> Research[Kutató Ügynök<br/>gpt-4.1]
-    Orchestrator --> Writer[Író Ügynök<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[Felülvizsgáló Ügynök<br/>gpt-4.1]
+    Orchestrator[Orchestrator Agent] --> Research[Research Agent<br/>gpt-4.1]
+    Orchestrator --> Writer[Writer Agent<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Reviewer Agent<br/>gpt-4.1]
 ```
 
-**Legjobb használatra:**
+**Leginkább alkalmas:**
 - Összetett tartalom generálás
-- Többlépcsős munkafolyamatok
-- Különböző szakterületi tudást igénylő feladatok
+- Többlépéses munkafolyamatok
+- Különböző szakértelmet igénylő feladatok
 
-**További információ:** [Többügynökös koordinációs minták](../chapter-06-pre-deployment/coordination-patterns.md)
+**Továbbtanulás:** [Többügynökös koordinációs minták](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ Ügynök Eszközök Konfigurálása
+## ⚙️ Ügynöki eszközök konfigurálása
 
-Az ügynökök erősek lesznek, ha eszközöket tudnak használni. Íme a gyakori eszközök beállítása:
+Ügynökök akkor válnak erőssé, ha eszközöket használhatnak. Íme, hogyan konfigurálhatod a gyakori eszközöket:
 
-### Eszközök beállítása Foundry Ügynökökben
+### Eszközkonfiguráció Foundry ügynököknél
+
+Ez a **klasszikus Agent Service SDK töredék** az `azure-ai-projects==1.0.0` és `azure-ai-agents==1.1.0` API-kat célozza `azure-identity`-tel. Nem az újabb versioned-agent/Responses API, amit néhány aktuális Foundry sablon használ, és nem az `azure.ai.agents` AZD bővítmény (másik csomag). Ne keverd az API generációkat. Állítsd be a `PROJECT_ENDPOINT` egy klasszikus Foundry projekt végpontra és `MODEL_DEPLOYMENT_NAME` egy létező támogatott modell telepítésre; hitelesíts helyileg `az login`-val és adj meg a szükséges projekt engedélyeket.
 
 ```python
 # agent_config.py
+import os
 from azure.ai.projects import AIProjectClient
-from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
+from azure.ai.agents.models import FunctionTool
+from azure.identity import DefaultAzureCredential
 
-# Egyedi eszközök definiálása
-search_tool = FunctionTool(
-    name="search_knowledge_base",
-    description="Search the company knowledge base for relevant documents",
-    parameters={
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "The search query"
-            }
-        },
-        "required": ["query"]
-    }
+def search_knowledge_base(query: str) -> str:
+    """Search the demonstration knowledge base.
+
+    :param query: Search text.
+    :return: Matching demonstration information.
+    """
+    # Local fixture only, not a production search implementation.
+    return "Demo policy: returns are accepted within 30 days."
+
+project_client = AIProjectClient(
+    endpoint=os.environ["PROJECT_ENDPOINT"],
+    credential=DefaultAzureCredential(),
 )
-
-# Ügynök létrehozása eszközökkel
+search_tool = FunctionTool(functions={search_knowledge_base})
+project_client.agents.enable_auto_function_calls(search_tool)
 agent = project_client.agents.create_agent(
-    model="gpt-4.1",
+    model=os.environ["MODEL_DEPLOYMENT_NAME"],
     name="Support Agent",
-    instructions="You are a helpful support agent. Use the search tool to find relevant information.",
-    tools=[search_tool, CodeInterpreterTool()]
+    instructions="Use search_knowledge_base for policy questions. Label results as demo data.",
+    tools=search_tool.definitions,
 )
 ```
 
-### Környezeti beállítások
+Egy függvény sémájának regisztrálása nem futtat Python kódot a szolgáltatáson. Ebben az SDK-ban a `enable_auto_function_calls` plusz `agents.runs.create_and_process(...)` futtatja a regisztrált callback-eket a kliens folyamatodban. Lásd a [kiadott SDK példát](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py). A munka befejeztével zárd be a klienst és töröld a demó ügynököket/fonalakat.
+
+### Környezeti konfiguráció
+
+A következő nevek **illusztratív egyéni sablonbemenetek**, nem beépített AZD kapcsolók. Először minden értéket átvezetsz a `infra/main.parameters.json`-n, infrastruktúrán és alkalmazáskódban. A `azd env set` önmagában nem változtat az ügynök eszközein vagy utasításain.
 
 ```bash
-# Ügynökspecifikus környezeti változók beállítása
+# Set up agent-specific environment variables
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Telepítés frissített konfigurációval
-azd deploy
+# Apply wired infrastructure and application changes
+azd up
 ```
 
 ---
 
-## 📊 Ügynökök Felügyelete
+## 📊 Ügynökök monitorozása
 
-### Application Insights Integráció
+### Application Insights integráció
 
-Minden AZD ügynöksablon tartalmazza az Application Insights-t a figyeléshez:
+Ha az általad választott sablon biztosítja az Application Insights szolgáltatást és konfigurálja az instrumentálást:
 
 ```bash
-# Nyisd meg a megfigyelő irányítópultot
+# Open monitoring dashboard
 azd monitor --overview
 
-# Élő naplók megtekintése
+# Open the Application Insights logs view (not a streaming log tail)
 azd monitor --logs
 
-# Élő mérőszámok megtekintése
+# View live metrics
 azd monitor --live
 ```
 
-### Követendő Fontos Mutatók
+### Nyomon követendő kulcsfontosságú mutatók
 
 | Mutató | Leírás | Cél |
 |--------|-------------|--------|
-| Válasz Késleltetés | Idő a válasz generálásáig | < 5 másodperc |
-| Token Használat | Tokenek lekérelésenként | Költségfigyelés |
-| Eszköz Hívás Sikerességi Arány | Eszközök sikeres futtatásának %-a | > 95% |
+| Válasz késleltetés | A válasz létrejöttének ideje | < 5 másodperc |
+| Token használat | Tokenek minden kérésnél | Költség nyomon követése |
+| Eszközhívás sikerességi arány | Sikeres eszközvégrehajtások aránya | > 95% |
 | Hibaarány | Sikertelen ügynök kérések | < 1% |
-| Felhasználói Elégedettség | Visszajelzések pontszámai | > 4.0/5.0 |
+| Felhasználói elégedettség | Visszajelzési pontszámok | > 4,0/5,0 |
 
-### Egyedi Naplózás Ügynököknek
+### Egyéni naplózás az ügynökök számára
 
 ```python
 import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# Azure Monitor konfigurálása OpenTelemetry-vel
+# Configure Azure Monitor with OpenTelemetry
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -309,111 +312,107 @@ tracer = trace.get_tracer(__name__)
 def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
     with tracer.start_as_current_span("agent_interaction") as span:
         span.set_attributes({
-            "user_query": user_query,
+            "query_length": len(user_query),  # Do not log raw prompts or personal data
             "response_length": len(agent_response),
             "tools_used": tools_used,
             "latency_ms": latency_ms
         })
 ```
 
-> **Megjegyzés:** Telepítsd a szükséges csomagokat: `pip install azure-monitor-opentelemetry opentelemetry`
+> **Megjegyzés:** Telepítsd a szükséges csomagot: `pip install azure-monitor-opentelemetry`. Ez tartalmazza az OpenTelemetry függőségeket; a import névtér nem követelmény egy `opentelemetry` nevű csomag telepítéséhez.
 
 ---
 
-## 💰 Költség Megfontolások
+## 💰 Költségszempontok
 
-### Becslések havi költségekre mintánként
+### Becsült havi költségek mintánként
 
-| Minta | Fejlesztői Környezet | Éles környezet |
+Ezek illusztratív tervezési tartományok, nem árajánlatok vagy költési felső korlátok. A régió, modell tokenek, Keresés/számítás SKU-k, eszköz munkamenetek, tárolás és forgalom meghaladhatják őket. Ellenőrizd a minta költség útmutatóját és az Azure árakat `azd up` előtt.
+
+| Minta | Fejlesztési környezet | Éles környezet |
 |---------|-----------------|------------|
-| Egyetlen Ügynök | $50-100 | $200-500 |
-| RAG Ügynök | $80-150 | $300-800 |
-| Többügynökös (2-3 ügynök) | $150-300 | $500-1,500 |
-| Vállalati Többügynökös | $300-500 | $1,500-5,000+ |
+| Egyetlen ügynök | 50-100 USD | 200-500 USD |
+| RAG ügynök | 80-150 USD | 300-800 USD |
+| Többügynök (2-3 ügynök) | 150-300 USD | 500-1 500 USD |
+| Vállalati többügynök | 300-500 USD | 1 500-5 000+ USD |
 
-### Költségoptimalizálási Tippek
+### Költségoptimalizálási tippek
 
-1. **Egyszerű feladatokhoz használd a gpt-4.1-mini-t**
+1. **Használd a gpt-4.1-mini modellt egyszerű feladatokhoz** (ha a sablon elfogadja ezt a bemenetet)
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Ismétlődő lekérdezésekhez alkalmazz gyorsítótárazást**
-   ```python
-   from functools import lru_cache
-   
-   @lru_cache(maxsize=1000)
-   def get_cached_response(query_hash):
-       return agent.run(query_hash)
-   ```
+2. **Valósíts meg körülhatárolt gyorsítótárazást biztonságos ismételt lekérdezésekhez.** Tartalmazza a bérlő/felhasználó jogosultságot, modell telepítést, utasításokat és visszakeresési verziót a cache kulcsban; állíts be lejárati időt. Ne ossz meg privát beszélgetési válaszokat folyamat-szintű, csak lekérdezéses gyorsítótárral. Az SDK ügynök objektumnak nincs általános `agent.run()` metódusa.
 
-3. **Állíts be token limiteket lefutásonként**
+3. **Állíts be token korlátokat futásonként**
    ```python
-   # Állítsa be a max_completion_tokens értéket az ügynök futtatásakor, ne a létrehozáskor
-   run = project_client.agents.create_run(
+   # Set max_completion_tokens when running the agent, not during creation
+   run = project_client.agents.runs.create_and_process(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # Válasz hosszának korlátozása
+       max_completion_tokens=1000  # Budget across the run; may finish as incomplete
    )
    ```
 
-4. **Használaton kívül zero skálázás**
+4. **Skálázd a jogosult Container Applikációkat nullára, ha nem használod őket**
    ```bash
-   # A Container Apps automatikusan skálázódik nullára
+   # Custom-template input: must map to template.scale.minReplicas
    azd env set MIN_REPLICAS "0"
    ```
+   Alkalmazd az infrastruktúra változtatást `azd provision` vagy `azd up` használatával. A nullára skálázás megfelelő triggerrel működik, de nem állítja le a Keresést, tárolást, vagy modell/eszköz díjakat.
 
 ---
 
-## 🔧 Ügynökök Hibakeresése
+## 🔧 Ügynök hibakeresés
 
-### Gyakori Problémák és Megoldások
+### Gyakori problémák és megoldások
 
 <details>
-<summary><strong>❌ Ügynök nem reagál az eszköz hívásokra</strong></summary>
+<summary><strong>❌ Az ügynök nem válaszol eszközhívásokra</strong></summary>
 
 ```bash
-# Ellenőrizze, hogy az eszközök megfelelően vannak-e regisztrálva
+# Inspect the application deployment (not the agent's registered tools)
 azd show
 
-# Ellenőrizze az OpenAI telepítést
+# Verify OpenAI deployment
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# Ellenőrizze az ügynök naplóit
+# Check agent logs
 azd monitor --logs
 ```
 
 **Gyakori okok:**
-- Az eszköz függvény aláírása nem egyezik
+- Eszköz függvény szignatúra eltérés
 - Hiányzó szükséges engedélyek
 - API végpont nem elérhető
 </details>
 
 <details>
-<summary><strong>❌ Magas késleltetés az ügynök válaszaiban</strong></summary>
+<summary><strong>❌ Magas késleltetés az ügynök válaszokban</strong></summary>
 
 ```bash
-# Ellenőrizze az Application Insights-t a szűk keresztmetszetekért
+# Check Application Insights for bottlenecks
 azd monitor --live
 
-# Fontolja meg egy gyorsabb modell használatát
+# Consider using a faster model
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
-azd deploy
+azd up
 ```
 
 **Optimalizálási tippek:**
-- Használj folyamatos válaszokat (streaming)
-- Válaszg közötti gyorsítótárazás alkalmazása
-- Kontex ablak méretének csökkentése
+- Használj streaming válaszokat
+- Valósíts meg válasz gyorsítótárat
+- Csökkentsd a kontextusablak méretét
 </details>
 
 <details>
-<summary><strong>❌ Ügynök helytelen vagy hamis információt ad vissza</strong></summary>
+<summary><strong>❌ Ügynök pontatlan vagy kitalált információt ad vissza</strong></summary>
 
 ```python
-# Fejlessze jobb rendszer utasításokkal
+# Improve with better system prompts
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -422,22 +421,21 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Adjon hozzá lekérést az igazításhoz
-agent = project_client.agents.create_agent(
-    model="gpt-4.1",
-    instructions=instructions,
-    tools=[FileSearchTool()]  # Igazítsa a válaszokat dokumentumokhoz
-)
+# Use these instructions in the agent definition.
+# For classic file search, first upload/index documents in a vector store,
+# then use FileSearchTool(vector_store_ids=[...]) and pass both its
+# .definitions and .resources when creating the agent.
 ```
+Utásítások és visszakeresés csökkenti a kockázatot; egyik sem garantál tényalapú válaszokat. Értékeld a megalapozott és témán kívüli kérdéseket ismert válaszokkal szemben.
 </details>
 
 <details>
-<summary><strong>❌ Token limit túllépése okozta hibák</strong></summary>
+<summary><strong>❌ Token limit túllépési hibák</strong></summary>
 
 ```python
-# Kontextusablak kezelésének megvalósítása
+# Implement context window management
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
-    """Keep only recent messages within token limit."""
+    """Approximate content-only budget for objects with .content strings."""
     import tiktoken
     encoding = tiktoken.encoding_for_model(model)
     total_tokens = 0
@@ -452,154 +450,165 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     
     return truncated
 ```
+Ez a segéd kizárja a szerep/eszköz sémákat, rendszer instrukciókat, képtokeneket és protokolltöbbletet. Foglalj helyet ezeknek és a kitöltésnek; ne szétválaszd az eszköz-hívás/eredmény párokat vagy dobd el a szükséges rendszer utasításokat. Telepítsd külön a `tiktoken`-t. Nem általános kontextusablak ellenőrző.
 </details>
 
 ---
 
-## 🎓 Gyakorlati Feladatok
+## 🎓 Gyakorlati feladatok
 
-### Gyakorlat 1: Alap ügynök telepítése (20 perc)
+### 1. gyakorlat: Alapvető ügynök telepítése (20 perc)
 
-**Cél:** Az első AI ügynök telepítése AZD-vel
+**Cél:** Telepítsd első AI ügynöködet az AZD használatával
 
 ```bash
-# 1. lépés: Sablon inicializálása
-azd init --template get-started-with-ai-agents
+# Step 1: Initialize template
+azd init --template get-started-with-ai-agents .
 
-# 2. lépés: Bejelentkezés az Azure-ba
+# Step 2: Login to Azure
 azd auth login
-# Ha több bérlő között dolgozik, adja hozzá a --tenant-id <tenant-id> paramétert
+# If you work across tenants, add --tenant-id <tenant-id>
 
-# 3. lépés: Telepítés
+# Step 3: Deploy
 azd up
 
-# 4. lépés: Ügynök tesztelése
-# Várt kimenet a telepítés után:
-#   Telepítés befejezve!
-#   Végpont: https://<app-name>.<region>.azurecontainerapps.io
-# Nyissa meg a kimenetben megjelenő URL-t, és próbáljon kérdést feltenni
+# Step 4: Test the agent
+# Expected output after deployment:
+#   Deployment Complete!
+#   Endpoint: https://<app-name>.<region>.azurecontainerapps.io
+# Open the URL shown in the output and try asking a question
 
-# 5. lépés: Megfigyelés megtekintése
+# Step 5: View monitoring
 azd monitor --overview
 
-# 6. lépés: Takarítás
+# Step 6: Clean up
 azd down --force --purge
 ```
 
 **Siker kritériumok:**
 - [ ] Az ügynök válaszol a kérdésekre
-- [ ] Elérhető a figyelő műszerfal az `azd monitor` paranccsal
-- [ ] Az erőforrások sikeresen takarítva
+- [ ] Hozzáfér az `azd monitor` monitorozó irányítópulthoz
+- [ ] Az erőforrásokat sikeresen törlik
 
-### Gyakorlat 2: Egyedi eszköz hozzáadása (30 perc)
+### 2. gyakorlat: Egyedi eszköz hozzáadása (30 perc)
 
-**Cél:** Egy ügynök bővítése egy egyedi eszközzel
+**Cél:** Bővítsd ügynöködet egyedi eszközzel
 
-1. Telepítsd az ügynök sablont:
-   ```bash
-   azd init --template get-started-with-ai-agents
-   azd up
-   ```
-2. Hozz létre egy új eszköz függvényt az ügynök kódjában:
+**Kiindulópont:** Használd a klasszikus SDK klienset a [Eszköz konfiguráció](#tool-configuration-in-foundry-agents) útmutatóból, ne egy általános sablont más SDK generációval.
+
+1. Add hozzá ezt a determinisztikus konfigurációt a `agent_config.py`-hez:
    ```python
    def get_weather(location: str) -> str:
-       """Get current weather for a location."""
-       # API hívás az időjárási szolgáltatáshoz
-       return f"Weather in {location}: Sunny, 72°F"
+       """Return demonstration weather, not live conditions.
+
+       :param location: City name.
+       :return: A clearly labelled fixture.
+       """
+       print(f"TOOL_CALLED: {location}")
+       return f"Demo weather in {location}: Sunny, 72°F (fixture, not live)"
    ```
-3. Regisztráld az eszközt az ügynöknél:
+2. Cseréld ki a keresőeszköz regisztrációs és létrehozási blokkot erre:
    ```python
-   from azure.ai.projects.models import FunctionTool
-
-   weather_tool = FunctionTool(
-       name="get_weather",
-       description="Get current weather for a location",
-       parameters={
-           "type": "object",
-           "properties": {
-               "location": {"type": "string", "description": "City name"}
-           },
-           "required": ["location"]
-       }
-   )
-
+   weather_tool = FunctionTool(functions={get_weather})
+   project_client.agents.enable_auto_function_calls(weather_tool)
    agent = project_client.agents.create_agent(
-       model="gpt-4.1",
+       model=os.environ["MODEL_DEPLOYMENT_NAME"],
        name="Weather Agent",
-       tools=[weather_tool]
+       instructions="Call get_weather for weather questions; explain that it returns demo data.",
+       tools=weather_tool.definitions,
    )
+   thread = project_client.agents.threads.create()
+   try:
+       project_client.agents.messages.create(
+           thread_id=thread.id, role="user", content="Use get_weather for Seattle."
+       )
+       run = project_client.agents.runs.create_and_process(
+           thread_id=thread.id, agent_id=agent.id
+       )
+       if run.status != "completed":
+           raise RuntimeError(f"Run status: {run.status}; error: {run.last_error}")
+       for message in project_client.agents.messages.list(thread_id=thread.id):
+           for text in message.text_messages:
+               print(text.text.value)
+   finally:
+       project_client.agents.threads.delete(thread.id)
+       project_client.agents.delete_agent(agent.id)
+       project_client.close()
    ```
-4. Újratelepítés és teszt:
+3. Futtasd helyileg (ez a meglévő Azure projektet hívja meg és modeldíjakat von maga után):
    ```bash
-   azd deploy
-   # Kérdezd meg: "Milyen az idő Seattle-ben?"
-   # Várt eredmény: Az ügynök meghívja a get_weather("Seattle") függvényt és visszaadja az időjárási információkat
+   python agent_config.py
+   # Expected: TOOL_CALLED: Seattle, then a completed answer labelled demo data.
    ```
 
-**Siker kritériumok:**
-- [ ] Az ügynök felismeri az időjárással kapcsolatos lekérdezéseket
-- [ ] Az eszköz helyesen hívódik meg
-- [ ] A válasz tartalmazza az időjárási információkat
+**Sikerkritériumok:**
+- [ ] Az ügynök felismeri az időjáráshoz kapcsolódó kérdéseket
+- [ ] Az eszköz helyesen kerül meghívásra
+- [ ] A válasz tartalmaz időjárási információkat
 
-### Gyakorlat 3: RAG Ügynök építése (45 perc)
+### 3. Gyakorlat: Építs egy RAG ügynököt (45 perc)
 
-**Cél:** Olyan ügynök készítése, amely dokumentumaidból válaszol kérdésekre
+**Cél:** Készíts olyan ügynököt, amely a dokumentumaidból válaszol kérdésekre
 
 ```bash
-# 1. lépés: RAG sablon telepítése
-azd init --template azure-search-openai-demo
+# Step 1: Deploy RAG template
+azd init --template azure-search-openai-demo .
 azd up
 
-# 2. lépés: Dokumentumok feltöltése
-# Helyezze a PDF/TXT fájlokat a data/ könyvtárba, majd futtassa:
-python scripts/prepdocs.py
+# Step 2: Upload your documents
+# For the sample's local ingestion path, place supported files in data/.
+# Run from the sample root after following its Python environment setup:
+./scripts/prepdocs.sh
+# Windows PowerShell equivalent: .\\scripts\\prepdocs.ps1
 
-# 3. lépés: Tesztelés domain-specifikus kérdésekkel
-# Nyissa meg a webalkalmazás URL-jét az azd up kimenetéből
-# Tegyen fel kérdéseket a feltöltött dokumentumokról
-# A válaszok tartalmazzanak hivatkozásokat, például [doc.pdf]
+# Step 3: Test with domain-specific questions
+# Open the web app URL from the azd up output
+# Ask questions about your uploaded documents
+# Responses should include citation references like [doc.pdf]
 ```
 
-**Siker kritériumok:**
-- [ ] Az ügynök az feltöltött dokumentumok alapján válaszol
-- [ ] A válaszok hivatkozásokat tartalmaznak
-- [ ] Nincs téves válasz hatáskörön kívüli kérdésekre
+**Sikerkritériumok:**
+- [ ] Az ügynök a feltöltött dokumentumokból válaszol
+- [ ] A válaszok tartalmaznak hivatkozásokat
+- [ ] A hatáskörön kívüli tesztkérdéseket támogatás nélküli állítások nélkül kezeli (nem garancia minden jövőbeli kérdésre)
+
+Ha `USE_CLOUD_INGESTION=true`, akkor használd helyette a minta felhőbeli archiválási/feltöltési munkafolyamatát; a helyi csomagoló szándékosan kihagyja az archiválást. Tesztelés után futtasd `azd down` a RAG környezetben, és tekintsd át a törlendő erőforrásokat.
 
 ---
 
 ## 📚 Következő lépések
 
-Most, hogy megértetted az AI ügynököket, fedezd fel ezeket a haladó témákat:
+Most, hogy megérted az AI ügynököket, fedezd fel ezeket a haladó témákat:
 
 | Téma | Leírás | Link |
 |-------|-------------|------|
-| **Többügynökös Rendszerek** | Több együttműködő ügynök rendszereinek építése | [Kiskereskedelmi Többügynökös Példa](../../examples/retail-scenario.md) |
-| **Koordinációs Minták** | Tanulj meg összehangolási és kommunikációs mintákat | [Koordinációs Minták](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Éles Telepítés** | Vállalati igényeknek megfelelő ügynök telepítés | [Prod AI Gyakorlatok](../chapter-08-production/production-ai-practices.md) |
-| **Ügynök Értékelés** | Ügynök teljesítmény tesztelése és értékelése | [AI Hibakeresés](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI Műhely Labor** | Gyakorlati: Készítsd AI megoldásod AZD-kompatibilissé | [AI Műhely Labor](ai-workshop-lab.md) |
+| **Többügynökös rendszerek** | Több, együttműködő ügynökből álló rendszerek építése | [Kiskereskedelmi Többügynökös Példa](../../examples/retail-scenario.md) |
+| **Koordinációs minták** | Tanuld meg az összehangolási és kommunikációs mintákat | [Koordinációs Minták](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Éles üzembe helyezés** | Üzleti szintű ügynök telepítés | [Éles AI gyakorlatok](../chapter-08-production/production-ai-practices.md) |
+| **Ügynök értékelés** | Teszteld és értékeld az ügynök teljesítményét | [AI hibakeresés](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI Műhely Labor** | Gyakorlati: Tedd AZD-kompatibilissé az AI megoldásodat | [AI Műhely Labor](ai-workshop-lab.md) |
 
 ---
 
-## 📖 További Források
+## 📖 További erőforrások
 
-### Hivatalos Dokumentáció
-- [Microsoft Foundry Ügynök Szolgáltatás](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Microsoft Foundry Ügynök Szolgáltatás Gyors Start](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
-- [Semantic Kernel Ügynök Keretrendszer](https://learn.microsoft.com/semantic-kernel/)
+### Hivatalos dokumentáció
+- [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Microsoft Foundry Agent Service Gyorsindítás](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
-### AZD Sablonok Ügynökökhöz
-- [AI Ügynökök Kezdése](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
+### AZD sablonok ügynökökhöz
+- [Kezdő lépések az AI ügynökökkel](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Kreatív író ügynökök Prompty-val](https://github.com/Azure-Samples/contoso-creative-writer)
 - [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Közösségi Források
-- [Szuper AZD - Ügynök Sablonok](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### Közösségi erőforrások
+- [Awesome AZD - Ügynök sablonok](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Ügynök Képességek a Szerkesztődbe
-- [**Microsoft Azure Ügynök Képességek**](https://skills.sh/microsoft/github-copilot-for-azure) - Telepíts újrahasználható AI ügynök képességeket Azure fejlesztéshez GitHub Copilot-ban, Cursor-ban vagy bármely támogatott ügynökben. Tartalmaz képességeket [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [telepítés](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) és [diagnosztika](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) témakörökben:
+### Ügynök képességek a szerkesztődnek
+- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Telepíts újrafelhasználható AI ügynök képességeket Azure fejlesztéshez GitHub Copilotban, Cursorban vagy bármely támogatott ügynökben. Tartalmaz képességeket [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [telepítés](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) és [diagnosztika](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) területeken:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -607,8 +616,8 @@ Most, hogy megértetted az AI ügynököket, fedezd fel ezeket a haladó témák
 ---
 
 **Navigáció**
-- **Előző Lecke**: [Microsoft Foundry Integráció](microsoft-foundry-integration.md)
-- **Következő Lecke**: [AI Modell Bevetés](ai-model-deployment.md)
+- **Előző lecke**: [Microsoft Foundry Integráció](microsoft-foundry-integration.md)
+- **Következő lecke**: [AI Modell telepítés](ai-model-deployment.md)
 
 ---
 

@@ -1,83 +1,83 @@
-# 6 skyrius: Išankstinis diegimo planavimas ir patikra
+# 6 skyrius: išankstinis diegimo planavimas ir patikrinimas
 
-**📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 1 valanda | **⭐ Sudėtingumas**: Vidutinis
+**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2–4 val. skaitymo; papildomas laikas adaptuotiems laboratoriniams darbams | **⭐ Sudėtingumas**: vidutinis–pažengęs
 
 ---
 
 ## Apžvalga
 
-Šiame skyriuje aptariami esminiai planavimo ir patikros žingsniai prieš diegiant jūsų programą. Išmokite išvengti brangių klaidų tinkamai planuojant pajėgumus, pasirenkant SKU ir atliekant priešdiegimo patikras.
+Šiame skyriuje apžvelgiami svarbūs planavimo ir patikrinimo žingsniai prieš diegiant jūsų programą. Išmokite išvengti brangių klaidų tinkamai planuodami talpą, pasirinkdami SKU ir atlikdami išankstinius patikrinimus.
 
-> Patikrinta su `azd 1.27.1` 2026 metų liepos mėn.
+> Komandų vadovai patikrinti pagal išleistą `azd 1.37.2` referenciją. Debesies diegimai nebuvo vykdomi. Ilgesnės pamokos apima iliustracinius fragmentus, bet ne pilnus vietinius diegimo projektus.
 
 ## Mokymosi tikslai
 
 Baigę šį skyrių jūs:
-- Atliksite priešdiegimo patikras
-- Planuosite pajėgumus ir įvertinsite išteklių poreikį
-- Pasirinksite tinkamus SKU kainų optimizavimui
+- Atliksite išankstinius patikrinimus prieš diegimą
+- Planuosite talpą ir įvertinsite resursų poreikius
+- Pasirinksite tinkamus SKU, kad optimizuotumėte išlaidas
 - Konfigūruosite Application Insights stebėjimui
-- Suprasite komandos koordinavimo modelius
+- Suprasite daugiaveiksmo koordinavimo modelius ir jų diegimo reikalavimus
 
 ---
 
 ## 📚 Pamokos
 
-| # | Pamoka | Aprašymas | Laikas |
+| Nr. | Pamoka | Aprašas | Trukmė |
 |---|--------|-------------|------|
-| 1 | [Priešdiegimo patikros](preflight-checks.md) | Patikrinkite konfigūraciją prieš diegdami | 15 min |
-| 2 | [Pajėgumų planavimas](capacity-planning.md) | Įvertinkite išteklių poreikį | 20 min |
+| 1 | [Išankstiniai patikrinimai](preflight-checks.md) | Patikrinkite konfigūraciją prieš diegimą | 15 min |
+| 2 | [Talpos planavimas](capacity-planning.md) | Įvertinkite resursų poreikius | 20 min |
 | 3 | [SKU pasirinkimas](sku-selection.md) | Pasirinkite tinkamus kainų lygius | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfigūruokite stebėjimą | 20 min |
-| 5 | [Koordinavimo modeliai](coordination-patterns.md) | Komandos diegimo darbo eiga | 15 min |
+| 5 | [Koordinavimo modeliai](coordination-patterns.md) | Pažangus daugiaveiksmo orkestravimo dizainas | 60–75 min |
 
 ---
 
-## 🚀 Greitas pradžios vadovas
+## 🚀 Greitas pradžia
 
 ```bash
-# Patikrinti prenumeratos kvotas
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Peržiūrėti diegimą (nesukuriant išteklių)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Patikrinti Bicep sintaksę
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Patikrinti aplinkos konfigūraciją
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Priešdiegimo kontrolinis sąrašas
+## ☑️ Išankstinis diegimo kontrolinis sąrašas
 
 ### Prieš `azd provision`
 
-- [ ] Regiono kvota patikrinta
-- [ ] SKU pasirinkti tinkamai
-- [ ] Kainos įvertinimas peržiūrėtas
-- [ ] Pavadinimų konvencija nuosekli
-- [ ] Saugumas/RBAC sukonfigūruotas
+- [ ] Patikrintas kvotas regione
+- [ ] Tinkamai pasirinkti SKU
+- [ ] Peržiūrėtas kaštų įvertinimas
+- [ ] Nuosekli pavadinimų konvencija
+- [ ] Sukonfigūruotas saugumas/RBAC
 
 ### Prieš `azd deploy`
 
-- [ ] Aplinkos kintamieji nustatyti
-- [ ] Slaptažodžiai Key Vault
-- [ ] Ryšio eilutės patikrintos
-- [ ] Sveikatos patikros sukonfigūruotos
+- [ ] Nustatyti aplinkos kintamieji
+- [ ] Slapti raktai Key Vault
+- [ ] Patikrinti jungties eilutės
+- [ ] Sukonfigūruoti sveikatos patikrinimai
 
 ---
 
 ## 💰 SKU pasirinkimo vadovas
 
-| Darbo krūvis | Kūrimas | Gamyba |
+| Darbo krūvis | Kūrimas | Produkcija |
 |----------|-------------|------------|
-| Container Apps | Sąnaudų modelis | Dedicated D4 |
+| Container Apps | Consumption | Consumption arba specialus darbo krūvio profilis, pagal išmatuotą apkrovą |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standartinis | Standartinis + PTU |
-| AI Search | Pagrindinis | Standartinis S2+ |
+| Azure OpenAI modeliai | Palaikomas mokėkite už naudojimą tipas | Mokėkite už naudojimą arba rezervuotas pralaidumas; priklauso nuo modelio/regiono |
+| AI Search | Nemokamas/Pagrindinis su ribomis | Pagrindinis arba standartinis lygis, pritaikytas indeksui, replikoms ir užklausų apkrovai |
 
 ---
 
@@ -85,12 +85,12 @@ azd env get-values
 
 | Kryptis | Skyrius |
 |-----------|---------|
-| **Ankstesnis** | [5 skyrius: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Ankstesnis** | [5 skyrius: Daugiaveiksmas](../chapter-05-multi-agent/README.md) |
 | **Kitas** | [7 skyrius: Gedimų šalinimas](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Susiję ištekliai
+## 📖 Susiję šaltiniai
 
 - [Konfigūracijos vadovas](../chapter-03-configuration/configuration.md)
 - [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md)

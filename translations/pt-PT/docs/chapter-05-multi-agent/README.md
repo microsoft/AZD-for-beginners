@@ -1,18 +1,18 @@
 # Capítulo 5: Soluções de IA Multi-Agente
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
+**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
 
 ---
 
 ## Visão Geral
 
-Este capítulo aborda padrões avançados de arquitetura multi-agente, orquestração de agentes e implementações de IA prontas para produção em cenários complexos.
+Este capítulo aborda padrões avançados de arquitetura multi-agente, orquestração de agentes e implementações de IA prontas para produção para cenários complexos.
 
-> Validado contra `azd 1.27.1` em julho de 2026.
+> Orientação de comandos revisada com base na referência `azd 1.37.2` divulgada. Não foram executadas implementações em nuvem.
 
 ## Objetivos de Aprendizagem
 
-Ao concluir este capítulo, você irá:
+Ao completar este capítulo, irá:
 - Compreender padrões de arquitetura multi-agente
 - Implementar sistemas coordenados de agentes de IA
 - Implementar comunicação entre agentes
@@ -20,32 +20,34 @@ Ao concluir este capítulo, você irá:
 
 ---
 
-## 📚 Lições
+## 📚 Aulas
 
-| # | Lição | Descrição | Tempo |
+| # | Aula | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Noções Básicas de Multi-Agente](multi-agent-basics.md) | Prático: implante uma aplicação multi-agente funcional com `azd up` | 45 min |
+| 1 | [Noções Básicas de Multi-Agentes](multi-agent-basics.md) | Prático: implemente uma aplicação multi-agente funcional com `azd up` | 45 min |
 | 2 | [Padrões de Coordenação](../chapter-06-pre-deployment/coordination-patterns.md) | Estratégias de orquestração de agentes (continua no Capítulo 6) | 30 min |
-| 3 | [Implantação com Template ARM](../../examples/retail-multiagent-arm-template/README.md) | Exemplo de implantação com um clique | 30 min |
+| 3 | [Implementação com ARM Template](../../examples/retail-multiagent-arm-template/README.md) | Exemplo de implementação com um clique | 30 min |
 
-> **Comece pela Lição 1.** É a única lição totalmente prática e implantável deste capítulo. A lição 2 está no Capítulo 6 (compartilhado com planejamento pré-implantação) e a [Solução Multi-Agente para Retalho](../../examples/retail-scenario.md) é um modelo arquitetónico—uma referência de design, não um template de um comando só.
+> **Comece pela Aula 1.** É a única aula completamente prática e implementável neste capítulo. A Aula 2 está no Capítulo 6 (compartilhada com planeamento pré-implementação), e a [Solução Multi-Agente para Retalho](../../examples/retail-scenario.md) é um modelo de arquitetura—uma referência de design, não um template de um único comando.
 
 ---
 
 ## 🚀 Início Rápido
 
 ```bash
-# Opção 1: Implantar a partir de um modelo
-azd init --template agent-openai-python-prompty
+# Option 1: Deploy the multi-agent template used in Lesson 1
+azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Opção 2: Implantar a partir de um manifesto de agente (requer a extensão azure.ai.agents)
+# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> **Qual abordagem?** Use `azd init --template` para começar a partir de um exemplo funcional. Use `azd ai agent init` quando tiver seu próprio manifesto de agente. Veja a [referência do AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para detalhes completos.
+> **Qual abordagem?** Use `azd init --template` para começar com um exemplo funcional. Use `azd ai agent init` interativamente, ou `azd ai agent init --template <path-to-azure.yaml>` para adotar um projeto de agente atual. Consulte a [referência AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para requisitos de versão e migração de avaliação.
+
+Execute estas alternativas em pastas vazias separadas. A extensão de agentes `1.0.0-beta.23` requer `azd >= 1.37.0`; o seu fluxo interativo não gera o pipeline personalizado de Service Bus na aula de coordenação.
 
 ---
 
@@ -53,8 +55,8 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Agente Orquestrador<br/>Encaminha pedidos, gere o fluxo de trabalho] --> Customer[Agente do Cliente<br/>Consultas do utilizador, preferências]
-    Orchestrator --> Inventory[Agente de Inventário<br/>Níveis de stock, encomendas]
+    Orchestrator[Orchestrator Agent<br/>Routes requests, manages workflow] --> Customer[Customer Agent<br/>User queries, preferences]
+    Orchestrator --> Inventory[Inventory Agent<br/>Stock levels, orders]
 ```
 
 ---
@@ -63,19 +65,19 @@ graph TD
 
 A [Solução Multi-Agente para Retalho](../../examples/retail-scenario.md) demonstra:
 
-- **Agente de Cliente**: Lida com interações e preferências dos utilizadores
+- **Agente do Cliente**: Gere interações e preferências dos utilizadores
 - **Agente de Inventário**: Gere stock e processamento de encomendas
-- **Orquestrador**: Coordena entre os agentes
-- **Memória Partilhada**: Gestão do contexto entre agentes
+- **Orquestrador**: Coordena entre agentes
+- **Memória Partilhada**: Gestão de contexto entre agentes
 
-### Serviços Utilizados
+### Serviços Usados
 
-| Serviço | Finalidade |
-|---------|-----------|
-| Microsoft Foundry Models | Compreensão de linguagem |
+| Serviço | Propósito |
+|---------|---------|
+| Modelos Microsoft Foundry | Compreensão de linguagem |
 | Azure AI Search | Catálogo de produtos |
-| Cosmos DB | Estado e memória dos agentes |
-| Container Apps | Hospedagem dos agentes |
+| Cosmos DB | Estado e memória do agente |
+| Container Apps | Hospedagem de agentes |
 | Application Insights | Monitorização |
 
 ---
@@ -85,7 +87,7 @@ A [Solução Multi-Agente para Retalho](../../examples/retail-scenario.md) demon
 | Direção | Capítulo |
 |-----------|---------|
 | **Anterior** | [Capítulo 4: Infraestrutura](../chapter-04-infrastructure/README.md) |
-| **Seguinte** | [Capítulo 6: Pré-Implantação](../chapter-06-pre-deployment/README.md) |
+| **Seguinte** | [Capítulo 6: Pré-Implementação](../chapter-06-pre-deployment/README.md) |
 
 ---
 
@@ -93,7 +95,7 @@ A [Solução Multi-Agente para Retalho](../../examples/retail-scenario.md) demon
 
 - [Guia de Agentes de IA](../chapter-02-ai-development/agents.md)
 - [Práticas de IA para Produção](../chapter-08-production/production-ai-practices.md)
-- [Resolução de Problemas em IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Resolução de Problemas de IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

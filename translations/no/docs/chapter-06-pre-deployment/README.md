@@ -1,51 +1,51 @@
-# Kapittel 6: Planlegging og Validering før Distribusjon
+# Kapittel 6: Forhåndsplanlegging og validering før distribusjon
 
-**📚 Kurs**: [AZD For Begynnere](../../README.md) | **⏱️ Varighet**: 1 time | **⭐ Vanskelighetsgrad**: Middels
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 2–4 timer lesing; ekstra tid for tilpassede laboratorier | **⭐ Vanskelighetsgrad**: Middels–Avansert
 
 ---
 
 ## Oversikt
 
-Dette kapittelet dekker viktige planleggings- og valideringstrinn før du distribuerer applikasjonen din. Lær å unngå kostbare feil med riktig kapasitetplanlegging, SKU-valg og preflight-sjekker.
+Dette kapitlet dekker viktige planleggings- og valideringstrinn før distribusjon av applikasjonen din. Lær å unngå kostbare feil med riktig kapasitetsplanlegging, SKU-valg og forhåndssjekker.
 
-> Validert med `azd 1.27.1` i juli 2026.
+> Kommandoveiledning gjennomgått mot utgitt `azd 1.37.2` referanse. Sky-distribusjoner ble ikke utført. De lengre leksjonene inkluderer illustrerende fragmenter, ikke komplette lokale distribusjonsprosjekter.
 
 ## Læringsmål
 
 Ved å fullføre dette kapittelet vil du:
-- Kjøre preflight-sjekker før distribusjon
+- Kjøre forhåndssjekker før distribusjon
 - Planlegge kapasitet og estimere ressursbehov
-- Velge passende SKUer for kostnadsoptimalisering
+- Velge passende SKUs for kostnadsoptimalisering
 - Konfigurere Application Insights for overvåking
-- Forstå teamkoordinasjonsmønstre
+- Forstå mønstre for koordinering av flere agenter og deres distribusjonsbehov
 
 ---
 
 ## 📚 Leksjoner
 
 | # | Leksjon | Beskrivelse | Tid |
-|---|---------|-------------|-----|
-| 1 | [Preflight-sjekker](preflight-checks.md) | Valider konfigurasjon før distribusjon | 15 min |
-| 2 | [Kapasitetsplanlegging](capacity-planning.md) | Estimere ressursbehov | 20 min |
-| 3 | [SKU-valg](sku-selection.md) | Velge passende prisnivåer | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfigurere overvåking | 20 min |
-| 5 | [Koordinasjonsmønstre](coordination-patterns.md) | Teamets distribusjonsarbeidsflyter | 15 min |
+|---|--------|-------------|------|
+| 1 | [Forhåndssjekker](preflight-checks.md) | Valider konfigurasjon før distribusjon | 15 min |
+| 2 | [Kapasitetsplanlegging](capacity-planning.md) | Estimer ressursbehov | 20 min |
+| 3 | [SKU-valg](sku-selection.md) | Velg passende prisskalaer | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigurer overvåking | 20 min |
+| 5 | [Koordineringsmønstre](coordination-patterns.md) | Avansert orkestreringsdesign for flere agenter | 60–75 min |
 
 ---
 
-## 🚀 Kom i gang raskt
+## 🚀 Rask start
 
 ```bash
-# Sjekk abonnementskvoter
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Forhåndsvis distribusjon (ingen ressurser opprettet)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Valider Bicep-syntaks
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Sjekk miljøkonfigurasjon
+# Check environment configuration
 azd env get-values
 ```
 
@@ -56,9 +56,9 @@ azd env get-values
 ### Før `azd provision`
 
 - [ ] Kvote verifisert for region
-- [ ] SKUer valgt riktig
+- [ ] SKUs valgt passende
 - [ ] Kostnadsestimat gjennomgått
-- [ ] Konsistent navnekonvensjon
+- [ ] Navnekonvensjon konsistent
 - [ ] Sikkerhet/RBAC konfigurert
 
 ### Før `azd deploy`
@@ -66,31 +66,31 @@ azd env get-values
 - [ ] Miljøvariabler satt
 - [ ] Hemmeligheter i Key Vault
 - [ ] Tilkoblingsstrenger verifisert
-- [ ] Helsesjekker konfigurert
+- [ ] Helsekontroller konfigurert
 
 ---
 
 ## 💰 Veiledning for SKU-valg
 
 | Arbeidsbelastning | Utvikling | Produksjon |
-|------------------|-----------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+|----------|-------------|------------|
+| Container Apps | Consumption | Consumption eller dedikert arbeidsprofil, basert på målt belastning |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Azure OpenAI-modeller | Støttet betalingsmodell for bruk | Betaling etter bruk eller forhåndsallokert gjennomstrømning; avhengig av modell/region |
+| AI Search | Gratis/Basic innenfor grenser | Basic eller Standard-nivå tilpasset indeks, replikater og spørringsbelastning |
 
 ---
 
 ## 🔗 Navigasjon
 
 | Retning | Kapittel |
-|---------|----------|
+|-----------|---------|
 | **Forrige** | [Kapittel 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
 | **Neste** | [Kapittel 7: Feilsøking](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Relaterte Ressurser
+## 📖 Relaterte ressurser
 
 - [Konfigurasjonsveiledning](../chapter-03-configuration/configuration.md)
 - [Distribusjonsveiledning](../chapter-04-infrastructure/deployment-guide.md)

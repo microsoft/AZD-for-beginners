@@ -1,77 +1,72 @@
-# Guía de depuración para despliegues de AZD
+# Guía de Depuración para Despliegues AZD
 
-**Navegación del capítulo:**
-- **📚 Inicio del curso**: [AZD para principiantes](../../README.md)
-- **📖 Capítulo actual**: Capítulo 7 - Solución de problemas y depuración
-- **⬅️ Anterior**: [Problemas comunes](common-issues.md)
-- **➡️ Siguiente**: [Solución de problemas específica de IA](ai-troubleshooting.md)
-- **🚀 Siguiente capítulo**: [Capítulo 8: Patrones de producción y empresariales](../chapter-08-production/production-ai-practices.md)
+**Navegación por el Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 7 - Resolución de Problemas y Depuración
+- **⬅️ Anterior**: [Problemas Comunes](common-issues.md)
+- **➡️ Siguiente**: [Resolución de Problemas Específica para IA](ai-troubleshooting.md)
+- **🚀 Próximo Capítulo**: [Capítulo 8: Patrones de Producción y Empresariales](../chapter-08-production/production-ai-practices.md)
 
 ## Introducción
 
-Esta guía integral proporciona estrategias avanzadas de depuración, herramientas y técnicas para diagnosticar y resolver problemas complejos con los despliegues de Azure Developer CLI. Aprenda metodologías sistemáticas de solución de problemas, técnicas de análisis de registros, perfilado de rendimiento y herramientas de diagnóstico avanzadas para resolver de forma eficiente problemas de despliegue y en tiempo de ejecución.
+Esta guía completa provee estrategias avanzadas de depuración, herramientas y técnicas para diagnosticar y resolver problemas complejos con despliegues de Azure Developer CLI. Aprende metodologías sistemáticas de resolución de problemas, técnicas de análisis de registros, perfiles de rendimiento y herramientas avanzadas de diagnóstico para resolver eficientemente problemas de despliegue y tiempo de ejecución.
 
 ## Objetivos de aprendizaje
 
 Al completar esta guía, usted:
-- Dominará metodologías sistemáticas de depuración para problemas con Azure Developer CLI
-- Entenderá la configuración avanzada de registro y técnicas de análisis de registros
-- Implementará estrategias de perfilado y monitoreo de rendimiento
-- Utilizará herramientas y servicios de diagnóstico de Azure para la resolución de problemas complejos
+- Dominará metodologías sistemáticas de depuración para problemas de Azure Developer CLI
+- Entenderá configuraciones avanzadas de registros y técnicas de análisis de logs
+- Implementará perfiles de rendimiento y estrategias de monitoreo
+- Usará herramientas y servicios de diagnóstico de Azure para resolución de problemas complejos
 - Aplicará técnicas de depuración de red y solución de problemas de seguridad
-- Configurará monitoreo y alertas integrales para la detección proactiva de problemas
+- Configurará monitoreo y alertas integrales para detección proactiva de problemas
 
 ## Resultados de aprendizaje
 
-Al finalizar, usted podrá:
+Al finalizar, podrá:
 - Aplicar la metodología TRIAGE para depurar sistemáticamente problemas complejos de despliegue
-- Configurar y analizar información completa de registro y trazas
-- Usar Azure Monitor, Application Insights y herramientas de diagnóstico de forma efectiva
-- Depurar de manera independiente problemas de conectividad de red, autenticación y permisos
+- Configurar y analizar información completa de registros y trazas
+- Usar de manera efectiva Azure Monitor, Application Insights y herramientas de diagnóstico
+- Depurar problemas de conectividad de red, autenticación y permisos de forma independiente
 - Implementar estrategias de monitoreo y optimización de rendimiento
-- Crear scripts de depuración personalizados y automatización para problemas recurrentes
+- Crear scripts personalizados de depuración y automatización para problemas recurrentes
 
 ## Metodología de depuración
 
-### Enfoque TRIAGE
+### El enfoque TRIAGE
 - **T**iempo: ¿Cuándo comenzó el problema?
-- **R**eproducir: ¿Puede reproducirlo de forma consistente?
-- **I**dentificar: ¿Qué componente está fallando?
-- **A**nalizar: ¿Qué nos dicen los registros?
-- **G**ather: Recopilar toda la información relevante
-- **E**scalar: ¿Cuándo solicitar ayuda adicional?
+- **R**eproducir: ¿Puede reproducirse consistentemente?
+- **I**solar: ¿Qué componente está fallando?
+- **A**nálisis: ¿Qué nos dicen los logs?
+- **G**ather (Recolectar): Recopilar toda la información relevante
+- **E**scalar: Cuándo buscar ayuda adicional
 
-## Activar el modo de depuración
+## Habilitación del Modo Depuración
 
-### Variables de entorno
+> **Alcance:** Estos son ejemplos diagnósticos para adaptar, no un conjunto de scripts suministrados. Reemplace nombres/IDs de recursos; use Bash para bloques de shell. La salida y valores del entorno de `--debug` pueden contener información sensible—revise / edite antes de compartir. Los ejemplos que despliegan, revierten o cambian configuración requieren aprobación explícita del operador.
+
+### Variables de Entorno
 ```bash
-# Habilitar depuración exhaustiva
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Depuración de Azure CLI
-export AZURE_CLI_DIAGNOSTICS=true
-
-# Desactivar la telemetría para una salida más limpia
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Configuración de depuración
+### Configuración de Depuración
 ```bash
-# Establecer la configuración de depuración globalmente
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# Habilitar el registro de trazas
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
 
-## 📊 Técnicas de análisis de registros
+`azd config set` puede almacenar claves arbitrarias; eso no significa que `debug.enabled`, `debug.logLevel` o `trace.outputPath` sean configuraciones soportadas. Use la bandera `--debug` del comando liberado.
 
-### Comprender los niveles de registro
+## 📊 Técnicas de Análisis de Logs
+
+### Entendiendo los niveles de logs
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Análisis de registros estructurados
+### Análisis estructurado de logs
 ```bash
-# Ver registros con Azure Monitor (vía azd monitor)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# Ver registros de la aplicación en tiempo real
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# Para un análisis detallado de los registros, use Azure CLI con su App Service o Container App:
-# Registros de App Service
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Registros de Container App
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# Exportar registros de Application Insights para su análisis
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
-### Correlación de registros
+### Correlación de Logs
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlacionar registros entre servicios usando Azure Monitor
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Buscar registros correlacionados en Application Insights
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Buscar registros de actividad de Azure
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ Herramientas avanzadas de depuración
+## 🛠️ Herramientas Avanzadas de Depuración
 
-### Consultas de Azure Resource Graph
+### Consultas Azure Resource Graph
 ```bash
-# Consultar recursos por etiquetas
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Encontrar implementaciones fallidas
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Comprobar la salud del recurso
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Depuración de red
+### Depuración de Red
 ```bash
-# Probar la conectividad entre servicios
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# Uso
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
-### Depuración de contenedores
+### Depuración de Contenedores
 ```bash
-# Depurar problemas de aplicaciones en contenedores
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -181,12 +178,12 @@ debug_container() {
 }
 ```
 
-### Depuración de conexión a la base de datos
+### Depuración de Conexiones de Base de Datos
 ```bash
-# Depurar la conectividad con la base de datos
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -200,26 +197,15 @@ debug_database() {
 }
 ```
 
-## 🔬 Depuración de rendimiento
+## 🔬 Depuración de Rendimiento
 
-### Monitoreo del rendimiento de la aplicación
+### Monitoreo del Rendimiento de la Aplicación
 ```bash
-# Habilitar la depuración de Application Insights
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# Monitoreo de rendimiento personalizado
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -236,33 +224,31 @@ monitor_performance() {
 }
 ```
 
-### Análisis de utilización de recursos
+### Análisis de Utilización de Recursos
 ```bash
-# Supervisar el uso de recursos
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
 ```
 
-## 🧪 Pruebas y validación
+## 🧪 Pruebas y Validación
 
-### Depuración de pruebas de integración
+### Depuración de Pruebas de Integración
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Configurar entorno de depuración
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# Obtener endpoints del servicio
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Probar endpoints de salud
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# Ejecutar pruebas
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Ejecutar pruebas de integración personalizadas
+# Run custom integration tests
 npm run test:integration
 ```
 
-### Pruebas de carga para depuración
+### Pruebas de Carga para Depuración
 ```bash
-# Prueba de carga simple para identificar cuellos de botella en el rendimiento
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Usando Apache Bench (instalar: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extraer métricas clave
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Comprobar si hay fallos
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 Depuración de infraestructura
+## 🔧 Depuración de Infraestructura
 
-### Depuración de plantillas Bicep
+### Depuración de Plantillas Bicep
 ```bash
-# Validar plantillas Bicep con salida detallada
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Validación de sintaxis
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Validación de lint
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # Despliegue What-If
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# Depurar despliegue de plantillas
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -375,54 +359,46 @@ debug_deployment() {
 }
 ```
 
-### Análisis del estado de recursos
+### Análisis del Estado de Recursos
 ```bash
-# Analizar los estados de los recursos en busca de inconsistencias
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # Listar todos los recursos con sus estados
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Comprobar recursos fallidos
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
-## 🔒 Depuración de seguridad
+## 🔒 Depuración de Seguridad
 
-### Depuración del flujo de autenticación
+### Depuración del Flujo de Autenticación
 ```bash
-# Depurar la autenticación de Azure
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # Decodificar el token JWT (requiere jq y base64)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Depurar el acceso a Key Vault
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -438,16 +414,16 @@ debug_keyvault() {
 }
 ```
 
-### Depuración de seguridad de red
+### Depuración de Seguridad de Red
 ```bash
-# Depurar grupos de seguridad de red
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Comprobar reglas de seguridad
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 Depuración específica de la aplicación
+## 📱 Depuración Específica de Aplicaciones
 
-### Depuración de aplicaciones Node.js
+### Depuración de Aplicaciones Node.js
 ```javascript
-// debug-middleware.js - middleware de depuración de Express
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Registrar detalles de la solicitud
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // Sobrescribir res.json para registrar las respuestas
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Depuración de consultas de bases de datos
+### Depuración de Consultas de Base de Datos
 ```javascript
-// database-debug.js - Utilidades de depuración de la base de datos
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Procedimientos de depuración de emergencia
+## 🚨 Procedimientos de Depuración de Emergencia
 
-### Respuesta ante incidentes en producción
+### Respuesta a Problemas en Producción
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Depuración de emergencia en producción
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Cambiar al entorno correcto
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# Recopilar información crítica
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# Usar Azure Monitor para los registros de errores
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Procedimientos de reversión
+### Procedimientos de Reversión
 ```bash
-# Script de reversión rápida
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # Cambiar entorno
+    # Switch environment
     azd env select "$environment"
     
-    # Reversión usando Git (AZD no tiene reversión incorporada)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # Verificar la reversión
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # Probar endpoints críticos
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 Paneles de depuración
+Esta reversión solo de código no revierte infraestructura, migraciones de base de datos ni secretos. Use un árbol de trabajo limpio, registre el commit inicial y restáurelo después; el comando revisa el commit seleccionado en el repositorio actual.
 
-### Panel de monitorización personalizado
+## 📊 Paneles de Depuración
+
+### Panel de Monitoreo Personalizado
 ```bash
-# Crear consultas de Application Insights para depuración
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # Consulta de errores
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Consulta para problemas de rendimiento
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Consulta para fallos de dependencias
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Agregación de registros
+### Agregación de Logs
 ```bash
-# Agregar registros de múltiples fuentes de Azure
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,28 +630,30 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
 }
 ```
 
-## 🔗 Recursos avanzados
+## 🔗 Recursos Avanzados
 
-### Scripts de depuración personalizados
+### Scripts Personalizados de Depuración
 Cree un directorio `scripts/debug/` con:
-- `health-check.sh` - Comprobación integral de estado
-- `performance-test.sh` - Pruebas de rendimiento automatizadas
-- `log-analyzer.py` - Análisis avanzado y procesamiento de registros
+- `health-check.sh` - Verificación integral del estado
+- `performance-test.sh` - Pruebas automatizadas de rendimiento
+- `log-analyzer.py` - Análisis y parseo avanzado de logs
 - `resource-validator.sh` - Validación de infraestructura
 
-### Integración de monitorización
+### Integración de Monitoreo
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -686,36 +664,36 @@ hooks:
       fi
 ```
 
-## Mejores prácticas
+## Mejores Prácticas
 
-1. **Habilite siempre el registro de depuración** en entornos que no sean de producción
+1. **Siempre habilite el logging de depuración** en entornos que no sean de producción
 2. **Cree casos de prueba reproducibles** para los problemas
 3. **Documente los procedimientos de depuración** para su equipo
-4. **Automatice las comprobaciones de estado** y la monitorización
-5. **Mantenga las herramientas de depuración actualizadas** con los cambios de su aplicación
-6. **Practique los procedimientos de depuración** en momentos sin incidentes
+4. **Automatice chequeos de estado** y monitoreo
+5. **Mantenga actualizadas las herramientas de depuración** con los cambios en su aplicación
+6. **Practique los procedimientos de depuración** en tiempos sin incidentes
 
-## Próximos pasos
+## Próximos Pasos
 
-- [Planificación de capacidad](../chapter-06-pre-deployment/capacity-planning.md) - Planificar los requisitos de recursos
-- [Selección de SKU](../chapter-06-pre-deployment/sku-selection.md) - Elegir los niveles de servicio apropiados
-- [Comprobaciones previas](../chapter-06-pre-deployment/preflight-checks.md) - Validación previa al despliegue
-- [Hoja de referencia](../../resources/cheat-sheet.md) - Comandos de referencia rápida
+- [Planificación de Capacidad](../chapter-06-pre-deployment/capacity-planning.md) - Planee los requisitos de recursos
+- [Selección de SKU](../chapter-06-pre-deployment/sku-selection.md) - Elija los niveles de servicio adecuados
+- [Chequeos Previos](../chapter-06-pre-deployment/preflight-checks.md) - Validación previa al despliegue
+- [Hoja de Consulta](../../resources/cheat-sheet.md) - Comandos de referencia rápida
 
 ---
 
-**Recuerde**: Una buena depuración consiste en ser sistemático, minucioso y paciente. Estas herramientas y técnicas le ayudarán a diagnosticar problemas de forma más rápida y eficaz.
+**Recuerde**: Una buena depuración es ser sistemático, minucioso y paciente. Estas herramientas y técnicas le ayudarán a diagnosticar problemas más rápido y eficazmente.
 
 ---
 
 **Navegación**
-- **Lección anterior**: [Problemas comunes](common-issues.md)
+- **Lección Anterior**: [Problemas Comunes](common-issues.md)
 
-- **Próxima lección**: [Planificación de capacidad](../chapter-06-pre-deployment/capacity-planning.md)
+- **Próxima Lección**: [Planificación de Capacidad](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Descargo de responsabilidad**:
-Este documento ha sido traducido utilizando el servicio de traducción por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por traductores humanos. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional humana. No somos responsables de cualquier malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

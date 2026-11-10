@@ -1,22 +1,22 @@
-# Chương 7: Xử lý sự cố & Gỡ lỗi
+# Chương 7: Khắc phục sự cố & Gỡ lỗi
 
-**📚 Khóa học**: [AZD Dành cho Người Mới](../../README.md) | **⏱️ Thời lượng**: 1-1.5 giờ | **⭐ Độ phức tạp**: Trung cấp
+**📚 Khóa học**: [AZD Dành cho Người mới bắt đầu](../../README.md) | **⏱️ Thời lượng**: 1-1.5 giờ | **⭐ Độ phức tạp**: Trung cấp
 
 ---
 
 ## Tổng quan
 
-Chương này giúp bạn chẩn đoán và giải quyết các vấn đề phổ biến khi làm việc với Azure Developer CLI. Từ lỗi triển khai đến các sự cố đặc thù về AI.
+Chương này giúp bạn chẩn đoán và giải quyết các sự cố phổ biến khi làm việc với Azure Developer CLI. Từ lỗi triển khai đến các vấn đề riêng biệt về AI.
 
-> Đã kiểm tra với `azd 1.27.1` vào tháng 7 năm 2026.
+> Hướng dẫn lệnh được kiểm tra so với tham khảo `azd 1.37.2` đã phát hành. Việc triển khai trên đám mây không được thực thi. Thay thế tên và ID tài nguyên ví dụ trước khi sử dụng các lệnh.
 
 ## Mục tiêu học tập
 
-Khi hoàn thành chương này, bạn sẽ:
-- Chẩn đoán các lỗi triển khai AZD phổ biến
-- Gỡ lỗi các sự cố xác thực và quyền truy cập
+Sau khi hoàn thành chương này, bạn sẽ:
+- Chẩn đoán lỗi triển khai AZD thường gặp
+- Gỡ lỗi các vấn đề xác thực và quyền truy cập
 - Giải quyết các vấn đề kết nối dịch vụ AI
-- Sử dụng Azure Portal và CLI để xử lý sự cố
+- Sử dụng Cổng Azure và CLI để xử lý sự cố
 
 ---
 
@@ -24,26 +24,26 @@ Khi hoàn thành chương này, bạn sẽ:
 
 | # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Vấn đề phổ biến](common-issues.md) | Các vấn đề thường gặp | 30 phút |
-| 2 | [Hướng dẫn gỡ lỗi](debugging.md) | Chiến lược gỡ lỗi từng bước | 45 phút |
-| 3 | [Xử lý sự cố AI](ai-troubleshooting.md) | Các vấn đề đặc thù AI | 30 phút |
+| 1 | [Sự cố phổ biến](common-issues.md) | Các vấn đề thường gặp | 30 phút |
+| 2 | [Hướng dẫn Gỡ lỗi](debugging.md) | Chiến lược gỡ lỗi từng bước | 45 phút |
+| 3 | [Khắc phục sự cố AI](ai-troubleshooting.md) | Vấn đề riêng về AI | 30 phút |
 
 ---
 
-## 🚨 Cách sửa nhanh
+## 🚨 Sửa lỗi nhanh
 
 ### Vấn đề xác thực
 ```bash
-# Yêu cầu cho các quy trình làm việc AZD
+# Required for AZD workflows
 azd auth login
 
-# Tùy chọn nếu bạn cũng đang sử dụng các lệnh Azure CLI trực tiếp
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Lỗi trong quá trình cấp phát
+### Lỗi Provisioning
 ```bash
 azd show
 azd monitor --logs
@@ -51,22 +51,25 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Xung đột tài nguyên
+Kiểm tra tài nguyên hiện có và lỗi triển khai trước. Không xóa môi trường dùng chung hoặc môi trường sản xuất để giải quyết xung đột tên. Với **môi trường dùng thử mới**, hãy sử dụng tên duy nhất:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Vượt quá hạn mức
+### Quá hạn mức
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Thay đổi `AZURE_LOCATION` không di chuyển tài nguyên hiện có và có thể gây ra xung đột vị trí khi triển khai lại.
 
 ---
 
-## 📋 Tham khảo mã lỗi
+## 📋 Tham chiếu mã lỗi
 
 | Lỗi | Nguyên nhân | Giải pháp |
 |-------|-------|----------|
@@ -74,21 +77,23 @@ azd up
 | `ResourceNotFound` | Thiếu tài nguyên | Kiểm tra tên tài nguyên |
 | `QuotaExceeded` | Giới hạn đăng ký | Yêu cầu tăng hạn mức |
 | `InvalidTemplate` | Lỗi cú pháp Bicep | `az bicep build` |
-| `Conflict` | Tài nguyên đã tồn tại | Dùng tên mới hoặc xóa bỏ |
+| `Conflict` | Tài nguyên tồn tại | Dùng tên mới hoặc xóa đi |
 | `Forbidden` | Quyền không đủ | Kiểm tra vai trò RBAC |
 
 ---
 
-## 🔄 Đặt lại và Phục hồi
+## 🔄 Đặt lại và Khôi phục
 
 ```bash
-# Đặt lại mềm (giữ tài nguyên, triển khai lại mã)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Đặt lại cứng (xóa hết, bắt đầu lại)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Việc đặt lại cứng sẽ xóa dữ liệu và có thể thay đổi điểm cuối. Sao lưu trước và xem lại các lời nhắc xóa tương tác. `--force --purge` chỉ phù hợp cho môi trường dùng thử khi dự định xóa không thể phục hồi.
 
 ---
 
@@ -96,7 +101,7 @@ azd up
 
 | Hướng | Chương |
 |-----------|---------|
-| **Trước** | [Chương 6: Trước khi Triển khai](../chapter-06-pre-deployment/README.md) |
+| **Trước** | [Chương 6: Trước Triển khai](../chapter-06-pre-deployment/README.md) |
 | **Tiếp** | [Chương 8: Sản xuất](../chapter-08-production/README.md) |
 
 ---

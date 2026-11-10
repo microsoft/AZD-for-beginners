@@ -1,209 +1,217 @@
-# Multi-Agent Basics - Deploy je eerste gecoördineerde AI-systeem
+# Multi-Agent Basis - Zet Je Eerste Gecoördineerde AI Systeem In Productie
 
-**Hoofdstuknavigatie:**
+**Hoofdstuk Navigatie:**
 - **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 5 - Multi-Agent AI-oplossingen
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 5 - Multi-Agent AI Oplossingen
 - **⬅️ Vorige**: [Hoofdstuk 4: Infrastructuur](../chapter-04-infrastructure/README.md)
 - **➡️ Volgende**: [Coördinatiepatronen](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Gevalideerd met `azd 1.27.1` in juli 2026.
+> Commandorichtlijnen nagekeken tegen de vrijgegeven `azd 1.37.2` referentie. Cloud implementaties zijn niet uitgevoerd.
 
 ## Introductie
 
-In de eerdere hoofdstukken heb je een enkele applicatie geïmplementeerd—en in Hoofdstuk 2 heb je een enkele AI-agent uitgerold. Deze les neemt de volgende stap: het uitrollen van een **multi-agent systeem**, waarin meerdere gespecialiseerde agenten samenwerken om een probleem op te lossen dat geen enkele agent alleen goed aankan.
+In de eerdere hoofdstukken heb je een enkele applicatie ingezet—en in Hoofdstuk 2 heb je een enkele AI-agent ingezet. Deze les zet de volgende stap: het inzetten van een **multi-agent systeem**, waarbij meerdere gespecialiseerde agenten samenwerken om een probleem op te lossen dat geen enkele agent goed alleen kan afhandelen.
 
-Het goede nieuws voor beginners: **je hebt geen nieuwe commando's nodig.** Een multi-agent oplossing is nog steeds een azd-project. Je doet `azd init`, `azd up`, test en `azd down`—exact dezelfde workflow die je al kent. Wat verandert is de *vorm* van de app vanbinnen.
+Het goede nieuws voor beginners: **je hebt geen nieuwe commando’s nodig.** Een multi-agent oplossing is nog steeds een azd project. Je zult `azd init`, `azd up`, testen en `azd down`—precies de workflow die je al kent. Wat verandert is de *vorm* van de app van binnen.
 
 ## Leerdoelen
 
 Aan het einde van deze les zul je:
 - Begrijpen wat "multi-agent" betekent en wanneer het de extra complexiteit waard is
-- De algemene rollen in een multi-agent systeem herkennen (orchestrator + specialisten)
-- Een echte, werkende multi-agent template uitrollen met `azd up`
-- Begrijpen welke Azure-middelen een multi-agent app ondersteunen
+- De gebruikelijke rollen in een multi-agent systeem herkennen (orchestrator + specialisten)
+- Een echte, werkende multi-agent template inzetten met `azd up`
+- De Azure resources begrijpen die een multi-agent app ondersteunen
 - Weten hoe je de oplossing veilig kunt verifiëren, aanpassen en afbreken
 
 ## Leerresultaten
 
-Na het voltooien van deze les zul je in staat zijn om:
+Na het voltooien van deze les ben je in staat om:
 - Het verschil uit te leggen tussen een enkele agent en een multi-agent systeem
 - Te kiezen tussen een enkele agent met tools en een echt multi-agent ontwerp
 - Een multi-agent template end-to-end te implementeren en testen met azd
-- Te identificeren waar elke agent draait en hoe ze communiceren
-- Alle resources op te ruimen om voortdurende kosten te vermijden
+- Te identificeren waar elke agent draait en hoe zij communiceren
+- Alle resources op te ruimen om doorlopende kosten te vermijden
 
 ---
 
 ## Wat is een Multi-Agent Systeem?
 
-Een enkele AI-agent is één model met een set instructies en (optioneel) enkele tools. Dat werkt goed voor gerichte taken. Maar naarmate een taak groeit—onderzoek, dan schrijven, dan redigeren, dan feiten controleren—maakt het samenvoegen van alles in één prompt de agent trager, minder betrouwbaar en moeilijker te debuggen.
+Een enkele AI-agent is één model met een set instructies en (optioneel) een aantal tools. Dat werkt goed voor gerichte taken. Maar naarmate een taak groeit—onderzoeken, dan schrijven, dan redigeren, dan fact-checking—maakt alles in één prompt stoppen de agent trager, minder betrouwbaar en moeilijker te debuggen.
 
-Een **multi-agent systeem** verdeelt het werk over specialisten die elk één taak goed doen, gecoördineerd door een orchestrator:
+Een **multi-agent systeem** verdeelt het werk in specialisten die elk één taak goed uitvoeren, gecoördineerd door een orchestrator:
 
 ```mermaid
 graph TD
-    User([Gebruikersverzoek]) --> Orchestrator[Orkestrator Agent<br/>Plant en leidt het werk]
-    Orchestrator --> Researcher[Onderzoeker Agent<br/>Verzamelt feiten]
-    Orchestrator --> Writer[Schrijver Agent<br/>Stelt inhoud op]
-    Orchestrator --> Editor[Redacteur Agent<br/>Beoordeelt en verfijnt]
+    User([User request]) --> Orchestrator[Orchestrator Agent<br/>Plans and routes the work]
+    Orchestrator --> Researcher[Researcher Agent<br/>Gathers facts]
+    Orchestrator --> Writer[Writer Agent<br/>Drafts content]
+    Orchestrator --> Editor[Editor Agent<br/>Reviews and refines]
     Researcher --> Orchestrator
     Writer --> Orchestrator
     Editor --> Orchestrator
-    Orchestrator --> Result([Eindantwoord])
+    Orchestrator --> Result([Final answer])
 ```
 
 ### De twee rollen die je altijd zult zien
 
 | Rol | Taak | Voorbeeld |
 |------|-----|---------|
-| **Orchestrator** | Bepaalt *wat er daarna gebeurt* en verdeelt werk tussen agenten | "Eerst onderzoek, dan schrijven, dan redigeren" |
+| **Orchestrator** | Beslist *wat er als volgende gebeurt* en verdeelt werk tussen agenten | "Eerst onderzoek, dan schrijven, dan redigeren" |
 | **Specialist** | Voert één gerichte taak uit en levert een resultaat | Een "onderzoeker" die alleen feiten verzamelt |
 
 ### Heb je echt meerdere agenten nodig?
 
-Begin simpel. Pak multi-agent **alleen** als een van deze waar is:
+Begin eenvoudig. Kies voor multi-agent **alleen** als één van deze waar is:
 
-- ✅ De taak heeft **duidelijke fasen** die baat hebben bij verschillende instructies (onderzoek vs. schrijven vs. beoordelen)
-- ✅ Je wilt specialisten die **gelijktijdig** werken om tijd te besparen
-- ✅ Verschillende stappen hebben **verschillende tools of gegevensbronnen** nodig
-- ✅ Je moet elke stap **onafhankelijk kunnen testen en debuggen**
+- ✅ De taak heeft **onderscheidende fasen** die baat hebben bij verschillende instructies (onderzoek vs. schrijven vs. review)
+- ✅ Je wilt dat specialisten **parallel** werken om tijd te besparen
+- ✅ Verschillende stappen vereisen **verschillende tools of databronnen**
+- ✅ Je hebt elke stap **onafhankelijk testbaar en debugbaar** nodig
 
-Als je taak een enkele vraag-en-antwoord of eenvoudige tool-aanroep is, is een **enkele agent met tools** (Hoofdstuk 2) eenvoudiger, goedkoper en makkelijker in gebruik.
+Als jouw taak een enkele vraag-en-antwoord is of een eenvoudige tool-call, is een **enkele agent met tools** (Hoofdstuk 2) eenvoudiger, goedkoper en makkelijker te bedienen.
 
-> **Beginnertip:** "Meer agenten" is niet "beter." Elke agent voegt latentie, kosten en een nieuw monitorpunt toe. Voeg agenten alleen toe als het probleem duidelijk in delen splitst.
+> **Beginners tip:** "Meer agenten" is niet "beter." Elke agent voegt latentie, kosten en iets nieuws om te monitoren toe. Voeg agenten alleen toe wanneer het probleem duidelijk in delen splitst.
 
 ---
 
-## Twee Manieren om Multi-Agent te Bouwen op Azure
+## Twee Manieren om Multi-Agent op Azure te Bouwen
 
-| Benadering | Wat het is | Best voor |
+| Aanpak | Wat het is | Beste voor |
 |----------|-----------|----------|
-| **Enkele agent + tools** | Eén Foundry-agent die functies/tools aanroept | Eenvoudige workflows, beginnen met AI |
-| **Meerdere gecoördineerde agenten** | Meerdere agenten met een orchestrator | Duidelijke fasen, parallel werk, specialisatie |
+| **Enkele agent + tools** | Eén Foundry agent die functies/tools aanroept | Eenvoudige workflows, beginnen |
+| **Meerdere gecoördineerde agenten** | Meerdere agenten met een orchestrator | Onderscheidende fasen, parallel werk, specialisatie |
 
-Deze les richt zich op de tweede aanpak met een **kant-en-klare template**, zodat je een echt multi-agent systeem aan het werk kunt zien voordat je je eigen bouwt.
+Deze les richt zich op de tweede aanpak met een **kant-en-klare template**, zodat je een echt multi-agent systeem in werking ziet voordat je zelf bouwt.
 
 ---
 
-## Praktijk: Rol een Werkende Multi-Agent App uit
+## Praktijk: Zet een Werkende Multi-Agent App in Productie
 
-We rollen **Contoso Creative Writer** uit, een officiële Azure voorbeeldapp die meerdere agenten gebruikt (onderzoeker, schrijver, redacteur) gecoördineerd om een artikel te produceren. Het is een geweldige eerste multi-agent app omdat de rollen makkelijk te begrijpen zijn.
+We gaan **Contoso Creative Writer** inzetten, een officiële Azure sample die onderzoeks-, product-, schrijvende en redigeeragenten coördineert om een artikel te produceren. Controleer vóór het doorlopen de [vereisten en kosten van de sample](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): het heeft modelquota, Azure AI Search, Bing Grounding toegang, Python, Docker en Bash-compatibele hooks nodig. Beschikbaarheid van model en regio hangt af van je abonnement; inzet is niet gegarandeerd door een regio te kiezen.
 
 ### Stap 1: Initialiseer de template
 
 ```bash
-# Maak een werkmap aan
+# Create a working folder
 mkdir creative-writer && cd creative-writer
 
-# Initialiseren vanuit de officiële multi-agent sjabloon
-azd init --template contoso-creative-writer
+# Initialize from the official multi-agent template
+azd init --template Azure-Samples/contoso-creative-writer .
 ```
 
-> Blader op elk moment door meer multi-agent templates in de [Awesome AZD AI galerij](https://azure.github.io/awesome-azd/?tags=ai). Andere beginnersvriendelijke opties zijn `get-started-with-ai-agents` en `azure-ai-travel-agents`.
+> Blader op elk moment door meer multi-agent templates in de [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai). Andere beginnervriendelijke opties zijn `get-started-with-ai-agents` en `azure-ai-travel-agents`.
 
-### Stap 2: Authenticeer
+### Stap 2: Authenticatie
 
 ```bash
-# Vereist voor azd-workflows
+# Required for azd workflows
 azd auth login
+
+# Also required by this sample's Azure CLI hooks
+az login
 ```
 
-### Stap 3: Maak een omgeving
+### Stap 3: Controleer de omgeving
 
 ```bash
-azd env new dev
+# init normally creates/selects an environment; confirm it before proceeding
+azd env list
+# Only if you need an additional environment:
+# azd env new dev
 ```
 
-### Stap 4: Bekijk een voorbeeld, en rol dan uit
+### Stap 4: Voorvertoning, dan inzetten
 
 ```bash
-# Bekijk wat er zal worden gemaakt voordat u iets uitgeeft (aanbevolen)
+# See what will be created before spending anything (recommended)
 azd provision --preview
 
-# Voorzie infrastructuur en implementeer alle agents in één stap
+# Provision infrastructure and deploy all agents in one step
 azd up
 ```
 
-`azd up` vraagt om een abonnement en regio, provisioneert dan de Azure-middelen en rolt de applicatie uit. AI-implementaties kunnen langer duren dan een simpele webapp—als je grotere modellen implementeert, kun je de uitrol-timeout verlengen:
+`azd up` vraagt om ontbrekende abonnement- en regio-instellingen en voorziet daarna resources en zet de applicatie in. De voorvertoning reserveert geen quota of garandeert succes; template hooks kunnen mogelijk nog lopen tijdens een provisioning preview, inspecteer deze eerst. Om te verlengen hoe lang azd wacht op elke **service-implementatie** (niet modelvoorziening):
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Let op kosten en capaciteit:** Multi-agent apps rollen AI-modellen uit die quota verbruiken en kosten veroorzaken. Als `azd up` faalt vanwege modelquota, zie [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) voor regio- en quotaoplossingen, en Hoofdstuk 6 [Capaciteitsplanning](../chapter-06-pre-deployment/capacity-planning.md).
+Een timeout stopt het wachten van azd; het annuleert de implementatie in Azure niet. Inspecteer de resource status voor je het opnieuw probeert.
+
+> **Let op kosten en capaciteit:** Multi-agent apps zetten AI-modellen in die quota verbruiken en kosten veroorzaken. Als `azd up` faalt op modelquota, zie [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) voor regio- en quotahulpmiddelen, en Hoofdstuk 6 [Capaciteitsplanning](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Begrijpen wat je hebt uitgerold
+## Begrijpen wat je hebt ingezet
 
-Een typische multi-agent app zoals deze provisioneert een set Azure-middelen die direct aansluiten op de verantwoordelijkheden in het diagram hierboven:
+Een typisch multi-agent app als deze voorziet een set Azure-resources die rechtstreeks corresponderen met de verantwoordelijkheden in het diagram hierboven:
 
 | Resource | Waarom het er is |
 |----------|----------------|
 | **Microsoft Foundry / Modellen** | Host de taalmodellen die elke agent gebruikt |
-| **Azure AI Search** | Geeft de onderzoeker agent gefundeerde data om te doorzoeken |
+| **Azure AI Search** | Geeft de onderzoeksagent gegronde data om te doorzoeken |
 | **Container Apps** (of App Service) | Host de orchestrator en agent-code |
-| **Cosmos DB** (in sommige voorbeelden) | Slaat gedeelde status/geheugen op die tussen agenten wordt doorgegeven |
-| **Application Insights** | Traceert verzoeken *over* agenten zodat je de flow kunt debuggen |
+| **Cosmos DB** (in sommige samples) | Slaat gedeelde status/geheugen op die tussen agenten wordt doorgegeven |
+| **Application Insights** | Volgt verzoeken *over* agents heen zodat je de flow kunt debuggen |
 
-### Hoe de agenten met elkaar communiceren
+### Hoe agenten met elkaar praten
 
-In de meeste azd multi-agent voorbeelden draait de **orchestrator in je applicatiecode** (bijvoorbeeld met een framework als Semantic Kernel of het Microsoft Agent Framework). De orchestrator roept elke specialist agent om beurt op, geeft resultaten door en stelt het eindantwoord samen. De agenten delen context via:
+In de meeste azd multi-agent samples draait de **orchestrator in je applicatiecode** (bijvoorbeeld met een framework zoals Semantic Kernel of het Microsoft Agent Framework). De orchestrator roept elke specialist agent om de beurt aan, geeft de resultaten door en stelt het eindantwoord samen. De agenten delen context via:
 
 - **Functie/tool-aanroepen** — de orchestrator roept een specialist aan en krijgt een resultaat terug
-- **Gedeeld geheugen** — een database (vaak Cosmos DB) bewaart status die beide agenten kunnen lezen
-- **Berichten/evenementen** — voor lossere koppeling communiceren agenten via een wachtrij of Service Bus
+- **Gedeeld geheugen** — een database (vaak Cosmos DB) houdt status die beide agenten kunnen lezen
+- **Berichten/gebeurtenissen** — voor lossere koppeling communiceren agenten via een wachtrij of Service Bus
 
-> **Waarom dit belangrijk is voor debuggen:** omdat elke stap apart is, toont Application Insights *welke* agent traag was of faalde. Dat is een belangrijke reden om werk te verdelen over agenten.
+> **Waarom dit belangrijk is voor debuggen:** omdat elke stap gescheiden is, toont Application Insights je *welke* agent traag was of faalde. Dat is een belangrijke reden om werk te splitsen over agents in de eerste plaats.
 
 ---
 
-## Verifieer de implementatie
+## Verifieer de Implementatie
 
-Controleer of het systeem daadwerkelijk werkt voordat je verder gaat:
+Bevestig dat het systeem daadwerkelijk werkt voordat je verder gaat:
 
 ```bash
-# Toon de gedeployde eindpunten
+# Show the deployed endpoints
 azd show
 
-# Open het monitoringdashboard van de app
+# Open the app's monitoring dashboard
 azd monitor
 
-# Volg de logs als er iets niet klopt
+# Open Application Insights Logs (not a terminal log stream)
 azd monitor --logs
 ```
 
-Open dan de app-URL van `azd show` en probeer een verzoek dat alle agenten benut (voor Creative Writer, vraag om een kort artikel over een onderwerp te schrijven). In de Application Insights **transactie-zoekopdracht** zou je moeten zien dat het verzoek zich verspreidt over de onderzoeker, schrijver en redacteur stappen.
+Open dan de app-URL van `azd show` en vraag om een kort artikel. Gebruik de debug-weergave van de sample om de agent workflow te inspecteren. Application Insights transaction search kan de individuele stappen laten zien als de sample ze instrumenteert en correleert; azd voegt agent spans niet automatisch toe.
 
 **Succescriteria:**
 - ✅ `azd show` toont een bereikbare endpoint
-- ✅ Een verzoek levert een resultaat op dat duidelijk door meerdere stappen ging
-- ✅ Application Insights toont traceringen voor meer dan één agent-stap
+- ✅ Een verzoek produceert een resultaat dat duidelijk meerdere fases doorloopt
+- ✅ De debug-weergave toont meerdere agent stappen; als tracing aan staat, controleer dan de corresponderende telemetrie na ingestie
 
 ---
 
-## Aanpassen: Een Agent Toevoegen of Wijzigen
+## Aanpassen: Voeg een Agent toe of Pas Aan
 
-Omdat elke agent slechts instructies plus tools is, is aanpassen goed te doen:
+Omdat elke agent gewoon instructies plus tools is, is aanpassen toegankelijk:
 
-1. **Vind de agentdefinities** in de template (vaak een `prompts/`, `agents/` of `*.prompty` set bestanden).
-2. **Stel de instructies van een agent af** — bijvoorbeeld, vertel de redacteur-agent een specifieke toon of woordenaantal af te dwingen.
-3. **Rol alleen de code opnieuw uit** (infrastructuur blijft ongewijzigd):
+1. **Vind de agentdefinities** in de template (vaak een `prompts/`, `agents/`, of `*.prompty` set bestanden).
+2. **Stel de instructies van een agent bij** — bijvoorbeeld, vertel de editor agent om een specifieke toon of woordenaantal af te dwingen.
+3. **Implementeer alleen de code opnieuw** (infrastructuur blijft hetzelfde):
 
    ```bash
    azd deploy
    ```
 
-Wil je verder gaan en agenten bouwen vanuit je *eigen* manifest, gebruik dan de agent-extensie en zijn volledige lifecycle:
+Om verder te gaan met je *eigen* Foundry agent project, gebruik de interactieve initialisatie van de agent-extensie:
 
 ```bash
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
-azd ai agent invoke      # test, met responstijd
+azd ai agent invoke      # test, with response timing
 ```
 
-Zie [Hoofdstuk 2: Agenten](../chapter-02-ai-development/agents.md) en de [AZD AI CLI referentie](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor de volledige agent lifecycle (`invoke`, `eval generate`, `optimize`, `delete`).
+Zie [Hoofdstuk 2: Agenten](../chapter-02-ai-development/agents.md) en de [AZD AI CLI referentie](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor de volledige levenscyclus: agent `invoke`, de aparte evaluatie extensie’s `azd ai eval` workflow, agent `optimize`, en agent `delete`.
 
 ---
 
@@ -212,26 +220,27 @@ Zie [Hoofdstuk 2: Agenten](../chapter-02-ai-development/agents.md) en de [AZD AI
 Multi-agent apps draaien meerdere factureerbare services. Breek alles af als je klaar bent:
 
 ```bash
-azd down --force --purge
+# Review the resources and confirm deletion interactively
+azd down
 ```
 
-De `--purge` vlag verwijdert ook soft-verwijderde AI resources (zoals Foundry/Azure AI Services accounts) zodat deze geen toekomstige implementaties blokkeren of kosten blijven veroorzaken.
+Verwijderen is destructief. Voor een disposable lab slaat `azd down --force --purge` verwijdering over en ondersteunde soft-delete purge-bevestigingen over; wissen is onomkeerbaar waar ondersteund en kan worden geblokkeerd door purge bescherming. Soft deletion is een herstel-/naamhergebruik-kwestie, niet op zichzelf bewijs van doorlopende kosten. Controleer op achtergebleven resources en facturering na opruimen.
 
 ---
 
 ## Een Opmerking over Productie Multi-Agent Systemen
 
-De [Retail Multi-Agent Oplossing](../../examples/retail-scenario.md) in deze repo is een **architectuur blauwdruk**, geen template met één commando—het documenteert hoe een productie retail systeem *zou* worden gebouwd (en geeft expliciet aan dat een volledige bouw een substantiële inspanning is). Gebruik het als ontwerpgids *nadat* je hier een werkend voorbeeld hebt uitgerold. Voor productie-aandachtspunten (veerkracht, kosten, monitoring, governance), ga verder naar [Hoofdstuk 8: Productie AI Praktijken](../chapter-08-production/production-ai-practices.md).
+De [Retail Multi-Agent Solution](../../examples/retail-scenario.md) in deze repo is een **architectuur blauwdruk**, geen één-commando template—het documenteert hoe een productie retail systeem *zou* worden gebouwd (en stelt expliciet dat een volledige bouw aanzienlijke inspanning kost). Gebruik het als ontwerpreferentie *nadat* je hier een werkende sample hebt ingezet. Voor productieaandachtspunten (veerkracht, kosten, monitoring, governance) ga verder naar [Hoofdstuk 8: Productie AI Praktijken](../chapter-08-production/production-ai-practices.md).
 
 ---
 
 ## Samenvatting
 
-- Een multi-agent systeem verdeelt werk over specialisten gecoördineerd door een orchestrator.
-- Gebruik het alleen als de taak duidelijke fasen, parallelisme of verschillende tools per stap heeft—anders heeft een enkele agent de voorkeur.
-- De azd-workflow blijft hetzelfde: `azd init` → `azd up` → testen → `azd down`.
+- Een multi-agent systeem verdeelt werk over specialisten die gecoördineerd worden door een orchestrator.
+- Gebruik het alleen als de taak onderscheidende fases, parallel werk, of verschillende tools per stap heeft—anders geef de voorkeur aan een enkele agent.
+- De azd workflow blijft hetzelfde: `azd init` → `azd up` → test → `azd down`.
 - Een echte template zoals `contoso-creative-writer` laat je vandaag een werkende multi-agent app zien en aanpassen.
-- Application Insights tracing over agenten is een van de grootste praktische voordelen van het multi-agent ontwerp.
+- Application Insights tracing over agenten heen is een van de grootste praktische voordelen van het multi-agent ontwerp.
 
 ---
 
@@ -247,7 +256,7 @@ De [Retail Multi-Agent Oplossing](../../examples/retail-scenario.md) in deze rep
 - [AI Agents Gids](../chapter-02-ai-development/agents.md)
 - [Coördinatiepatronen](../chapter-06-pre-deployment/coordination-patterns.md)
 - [Productie AI Praktijken](../chapter-08-production/production-ai-practices.md)
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI Probleemoplossing](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

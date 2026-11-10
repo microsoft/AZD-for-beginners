@@ -1,798 +1,269 @@
-# Microservices architektúra - Container App példa
+# Két szolgáltatásos mikroservizek — Azure Container Apps
 
-⏱️ **Becsült idő**: 25-35 perc | 💰 **Becsült költség**: kb. 50-100 USD/hó | ⭐ **Bonyolultság**: Haladó
+**Szint:** Középhaladó · **Időtartam:** 45–60 perc, beleértve a beállítást
 
-Egy **egyszerűsített, de működőképes** microservices architektúra, amelyet AZD CLI segítségével telepítünk Azure Container Apps-re. Ez a példa szolgálat-szolgálat kommunikációt, konténer-orchestrationt és monitorozást mutat be egy gyakorlati 2-szolgáltatásos felállással.
+Ez a tanulási példa egy **Node.js API átjárót** és egy **csak olvasható Python
+termékszolgáltatást** valósít meg. Forráskód, Dockerfile-ok, Bicep és azd konfigurációk is szerepelnek.
+Nem egy éles környezetbe szánt rendszer.
 
-> **📚 Tanulási megközelítés**: Ez a példa egy minimális 2-szolgáltatásos architektúrával (API Gateway + Backend Service) kezdődik, amit ténylegesen telepíthetsz és tanulhatsz belőle. Miután elsajátítottad ezt az alapot, útmutatást kapsz a teljes microservices ökoszisztéma bővítéséhez.
+## Amit megtanulsz
 
-## Amit tanulni fogsz
-
-A példa végrehajtásával:
-- Több konténert telepítesz Azure Container Apps-re
-- Belso hálózaton alapulo szolgáltatás-szolgáltatás kommunikációt valósítasz meg
-- Környezeti alapú skálázást és egészségügyi ellenőrzéseket konfigurálsz
-- Elosztott alkalmazásokat monitorozol Application Insights-szal
-- Megérted a microservices telepítési mintákat és legjobb gyakorlatokat
-- Megtanulod az egyszerű architektúráktól a bonyolultabbakig való folyamatos bővítést
-
-## Architektúra
-
-### 1. fázis: Amit építünk (Ez a példa tartalmazza)
+- Két szolgáltatás független telepítése.
+- Belső backend FQDN használata HTTPS-en keresztül.
+- Sikeres, nem található és nem elérhető szolgáltatás válaszok ellenőrzése.
+- Telemetria és független skálázási határok megértése.
 
 ```mermaid
-graph TD
-    Internet[Internet] -- HTTPS --> Gateway[API Gateway<br/>Node.js konténer<br/>Kérések irányítása<br/>Állapotellenőrzések<br/>Kérések naplózása]
-    Gateway -- HTTP internal --> Product[Termék Szolgáltatás<br/>Python konténer<br/>Termék CRUD<br/>Memóriában tárolt adat<br/>REST API]
-    Product --> Insights[Alkalmazás Elemzések<br/>Monitorozás & Naplók]
-```
-**Miért kezdünk egyszerűvel?**
-- ✅ Gyors telepítés és megértés (25-35 perc)
-- ✅ Alap microservices minták tanulása bonyolultság nélkül
-- ✅ Működő kód, amit módosíthatsz és kísérletezhetsz vele
-- ✅ Alacsonyabb tanulási költség (~50-100 USD/hó vs 300-1400 USD/hó)
-- ✅ Magabiztosság építése adatbázis és üzenetsor hozzáadása előtt
-
-**Hasonlat**: Olyan, mintha vezetést tanulnál. Üres parkolóval (2 szolgáltatás) kezded, elsajátítod az alapokat, majd továbblépsz a városi forgalomba (5+ szolgáltatás adatbázisokkal).
-
-### 2. fázis: Jövőbeli bővítés (Referenciális architektúra)
-
-Amint elsajátítod a 2-szolgáltatásos architektúrát, bővítheted:
-
-```
-Full Architecture (Not Included - For Reference)
-├── API Gateway (✅ Included)
-├── Product Service (✅ Included)
-├── Order Service (🔜 Add next)
-├── User Service (🔜 Add next)
-├── Notification Service (🔜 Add last)
-├── Azure Service Bus (🔜 For async communication)
-├── Cosmos DB (🔜 For product persistence)
-├── Azure SQL (🔜 For order management)
-└── Azure Storage (🔜 For file storage)
+flowchart LR
+    Client -->|HTTPS| Gateway[Public Node.js gateway — port 8080]
+    Gateway -->|HTTPS internal FQDN| Product[Internal Python product API — port 8000]
+    Gateway -. request/dependency telemetry .-> Insights[Application Insights]
+    Product -. application log traces .-> Insights
 ```
 
-Lépésről lépésre útmutatóért lásd a "Bővítési útmutató" szakaszt a végén.
-
-## Tartalmazott funkciók
-
-✅ **Szolgáltatás-felfedezés**: Konténerek közötti automatikus DNS-alapú felfedezés  
-✅ **Terheléselosztás**: Beépített terheléselosztás a replikák között  
-✅ **Auto-skalázás**: Szolgáltatásonként független skálázás HTTP-kérések alapján  
-✅ **Egészségügyi monitorozás**: Liveness és readiness probe-ok mindkét szolgáltatásra  
-✅ **Elosztott naplózás**: Centralizált naplózás Application Insights segítségével  
-✅ **Belső hálózat**: Biztonságos szolgáltatás-szolgáltatás kommunikáció  
-✅ **Konténer orchestration**: Automatikus telepítés és skálázás  
-✅ **Zéró leállásos frissítés**: Rolling update revíziókezeléssel  
+A termékkatalógus öt rögzített terméket tartalmaz a memóriában. **Nincsenek POST,
+PUT vagy DELETE kezelők**, adatbázis, Service Bus, rendelés/felhasználó/értesítés szolgáltatás,
+C# vagy Go kód. Ezek jövőbeli fejlesztési ötletek, nem tartalmazott funkciók.
+A gateway nem hitelesíti a felhasználókat; a belső bejutás nem helyettesíti
+az alkalmazás jogosultságkezelését.
 
 ## Előfeltételek
 
-### Szükséges eszközök
-
-Kezdés előtt ellenőrizd, hogy telepítve vannak ezek az eszközök:
-
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (1.0.0 vagy újabb verzió)
-   ```bash
-   azd version
-   # Várt kimenet: azd verzió 1.0.0 vagy újabb
-   ```
-
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (2.50.0 vagy újabb verzió)
-   ```bash
-   az --version
-   # Várt kimenet: azure-cli 2.50.0 vagy újabb
-   ```
-
-3. **[Docker](https://www.docker.com/get-started)** (helyi fejlesztéshez/teszteléshez - opcionális)
-   ```bash
-   docker --version
-   # Várt kimenet: Docker verzió 20.10 vagy újabb
-   ```
-
-### Azure követelmények
-
-- Aktív **Azure előfizetés** ([ingyenes fiók létrehozása](https://azure.microsoft.com/free/))
-- Jogosultság az erőforrások létrehozására előfizetésedben
-- **Contributor** szerepkör az előfizetés vagy erőforráscsoport szintjén
-
-### Tudás-előfeltételek
-
-Ez egy **haladó szintű** példa. Ajánlott, hogy:
-- Elvégezted a [Simple Flask API példát](../../../../../examples/container-app/simple-flask-api)  
-- Alapvető ismereteid legyenek microservices architektúráról
-- Ismerd a REST API-kat és HTTP-t
-- Értsd a konténer fogalmakat
-
-**Új vagy a Container Apps-ben?** Először a [Simple Flask API példával](../../../../../examples/container-app/simple-flask-api) érdemes kezdeni az alapok megtanulásához.
-
-## Gyors kezdés (lépésről lépésre)
-
-### 1. lépés: Klónozás és navigálás
+Először fejezze be az [egyszerű Flask API](../../../../../examples/container-app/simple-flask-api) használatát.
+Telepítsen egy aktuális stabil azd verziót (a felülvizsgálat idején kiadott verzió: 1.37.2), Azure CLI-t,
+és Dockert a futó démonnal. Szüksége van Azure előfizetésre, erőforrás
+létrehozási jogosultságokra és Container Apps régiós kvótára.
 
 ```bash
-git clone https://github.com/microsoft/AZD-for-beginners.git
-cd AZD-for-beginners/examples/container-app/microservices
-```
-
-**✓ Siker ellenőrzés**: Győződj meg róla, hogy látod az `azure.yaml` fájlt:
-```bash
-ls
-# Várt: README.md, azure.yaml, infra/, src/
-```
-
-### 2. lépés: Azure-ba való hitelesítés
-
-```bash
+azd version
+az version
+docker info
 azd auth login
+az login
 ```
 
-Ez megnyitja a böngésződ az Azure hitelesítéshez. Jelentkezz be Azure azonosítóddal.
+Ugyanazt az előfizetést használja mindkét CLI eszközben. Az alábbi parancsok Bash-ben vannak.
 
-**✓ Siker ellenőrzés**: Ezt kell látnod:
-```
-Logged in to Azure.
-```
+## Telepítés és ellenőrzés
 
-### 3. lépés: Környezet inicializálása
+A tároló gyökérkönyvtárából:
 
 ```bash
-azd init
-```
-
-**Megjelenő kérdések**:
-- **Környezet neve**: Adj meg egy rövid nevet (pl. `microservices-dev`)
-- **Azure előfizetés**: Válaszd ki az előfizetésed
-- **Azure helyszín**: Válassz régiót (pl. `eastus`, `westeurope`)
-
-**✓ Siker ellenőrzés**: Ezt kell látnod:
-```
-SUCCESS: New project initialized!
-```
-
-### 4. lépés: Infrastruktúra és szolgáltatások telepítése
-
-```bash
+cd examples/container-app/microservices
+azd env new microservices-demo
 azd up
+GATEWAY_URL=$(azd env get-value API_GATEWAY_URL)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+GATEWAY_NAME=$(azd env get-value API_GATEWAY_NAME)
+PRODUCT_NAME=$(azd env get-value PRODUCT_SERVICE_NAME)
+
+curl --fail-with-body "${GATEWAY_URL}/health"
+curl --fail-with-body "${GATEWAY_URL}/api/products"
+curl --fail-with-body "${GATEWAY_URL}/api/products/1"
+curl -i "${GATEWAY_URL}/api/products/999"
 ```
 
-**Mi történik** (8-12 percet vesz igénybe):
-1. Létrehozza a Container Apps környezetet
-2. Létrehozza az Application Insights-ot a monitorozáshoz
-3. Felépíti az API Gateway konténert (Node.js)
-4. Felépíti a Product Service konténert (Python)
-5. Telepíti mindkét konténert Azure-be
-6. Konfigurálja a hálózatot és egészségügyi ellenőrzéseket
-7. Beállítja a monitorozást és naplózást
+**Siker:** health 200; lista 200 **öt** termékkel; az 1-es termék egy Laptop,
+ára 999,99, készlet 50; az ismeretlen termék 404-et ad vissza.
+A válaszok tartalmazzák a leírásokat; az időbélyegek változóak.
 
-**✓ Siker ellenőrzés**: Ezt kell látnod:
+Az első üzembe helyezés nyilvános hello-world képeket használ port 80-on, így nem próbál
+nem létező képeket lehúzni egy üres tárolóból. A szolgáltatás-specifikus Bicep modulok
+és paraméter fájlok a beépített képekkel és alkalmazás portokkal/probírókkal helyettesítik ezeket a
+`azd deploy` során. A fő paraméterek megőrzik a közzétett képek neveit a későbbi üzembe helyezéshez.
+
+## Szolgáltatások és hálózat
+
+| Szolgáltatás | Kitettségi végpontok | Alapértelmezett erőforrások |
+|---|---|---|
+| Gateway | GET `/`, `/health`, `/api/products`, `/api/products/:id` | 1 vCPU, 2 GiB, 2–20 példány |
+| Product | GET `/`, `/health`, `/products`, `/products/<id>` | 0.5 vCPU, 1 GiB, 1–10 példány |
+
+A Product belépési pont rendelkezik `external: false` és `allowInsecure: false`-zal. A Bicep beszúrja
+`PRODUCT_SERVICE_URL=https://<actual-internal-fqdn>` a gateway-be. A HTTP
+átirányítás; az HTTPS egyezik a konfigurált ingress-szel. Egy rövid DNS névnek meg kell egyeznie a
+**valódi Container App névvel**, nem a logikai szolgáltatáskulccsal `product-service`.
+Ne próbáld meg közvetlenül hívni a belső URL-t a laptopodról.
+
+A gateway-nek öt másodperces időkorlátja van a termékhívásokra. Az hiányzó termékazonosítók
+404-ként terjednek tovább; szállítási hibák/más háttérrendszeri hibák 503-at adnak vissza. A gateway
+`/health` csak a gateway-t ellenőrzi, nem a háttérrendszer elérhetőségét.
+
+## Fájlok és konfiguráció
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/abbreviations.json
+infra/core/container-apps-environment.bicep
+infra/core/monitor.bicep
+infra/app/api-gateway.bicep
+infra/app/api-gateway.parameters.json
+infra/app/product-service.bicep
+infra/app/product-service.parameters.json
+src/api-gateway/{app.js,package.json,Dockerfile}
+src/product-service/{main.py,requirements.txt,Dockerfile}
 ```
-SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
-Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
-```
 
-**⏱️ Idő**: 8-12 perc
+A skálázás, CPU/memória, portok és probe-ok az `infra/app/*.bicep` fájlban vannak beállítva. Módosítsd ezeket
+a fájlokat, majd futtasd az `azd up` parancsot az infrastruktúra alkalmazásához és az újratelepítéshez. Nincs
+`GATEWAY_MAX_REPLICAS` környezeti változós paraméter ebben a példában.
 
-### 5. lépés: Teszteld a telepítést
+Csak kódváltozások esetén:
 
 ```bash
-# Szerezze be a gateway végpontját
-GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
-
-# Tesztelje az API Gateway állapotát
-curl $GATEWAY_URL/health
-
-# Várt kimenet:
-# {"status":"healthy","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
-```
-
-**Teszteld a termék szolgáltatást a gateway-en keresztül**:
-```bash
-# Termékek listázása
-curl $GATEWAY_URL/api/products
-
-# Várt kimenet:
-# [
-#   {"id":1,"name":"Laptop","price":999.99,"stock":50},
-#   {"id":2,"name":"Mouse","price":29.99,"stock":200},
-#   {"id":3,"name":"Keyboard","price":79.99,"stock":150}
-# ]
-```
-
-**✓ Siker ellenőrzés**: Mindkét végpont JSON adatot ad hibák nélkül vissza.
-
----
-
-**🎉 Gratulálunk!** Sikeresen telepítettél egy microservices architektúrát Azure-re!
-
-## Projekt struktúra
-
-A teljes implementációs fájlok benne vannak — ez egy teljes, működő példa:
-
-```
-microservices/
-│
-├── README.md                         # This file
-├── azure.yaml                        # AZD configuration
-├── .gitignore                        # Git ignore patterns
-│
-├── infra/                           # Infrastructure as Code (Bicep)
-│   ├── main.bicep                   # Main orchestration
-│   ├── abbreviations.json           # Naming conventions
-│   ├── core/                        # Shared infrastructure
-│   │   ├── container-apps-environment.bicep  # Container environment + registry
-│   │   └── monitor.bicep            # Application Insights + Log Analytics
-│   └── app/                         # Service definitions
-│       ├── api-gateway.bicep        # API Gateway container app
-│       └── product-service.bicep    # Product Service container app
-│
-└── src/                             # Application source code
-    ├── api-gateway/                 # Node.js API Gateway
-    │   ├── app.js                   # Express server with routing
-    │   ├── package.json             # Node dependencies
-    │   └── Dockerfile               # Container definition
-    └── product-service/             # Python Product Service
-        ├── main.py                  # Flask API with product data
-        ├── requirements.txt         # Python dependencies
-        └── Dockerfile               # Container definition
-```
-
-**Mit csinál az egyes komponens?**
-
-**Infrastruktúra (infra/)**:
-- `main.bicep`: Minden Azure erőforrást és függőségeiket összehangolja
-- `core/container-apps-environment.bicep`: Létrehozza a Container Apps környezetet és az Azure Container Registry-t
-- `core/monitor.bicep`: Beállítja az Application Insights-ot az elosztott naplózáshoz
-- `app/*.bicep`: Egyedi konténer app definíciók skálázással és egészségügyi ellenőrzésekkel
-
-**API Gateway (src/api-gateway/)**:
-- Közvetlenül elérhető szolgáltatás, ami a backend szolgáltatásokhoz irányít
-- Naplózást, hiba kezelést és kérés továbbítást valósít meg
-- Mutatja a szolgáltatás-szolgáltatás HTTP kommunikációt
-
-**Product Service (src/product-service/)**:
-- Belső szolgáltatás termékkatalógussal (memóriában egyszerűség miatt)
-- REST API egészségügyi ellenőrzéssel
-- Backend microservice minta példája
-
-## Szolgáltatások áttekintése
-
-### API Gateway (Node.js/Express)
-
-**Port**: 8080  
-**Hozzáférés**: Nyilvános (külső bejárat)  
-**Cél**: Bejövő kérések továbbítása a megfelelő backend szolgáltatásokhoz  
-
-**Végpontok**:
-- `GET /` - Szolgáltatás információ
-- `GET /health` - Egészségügyi ellenőrző végpont
-- `GET /api/products` - Továbbítja a termék szolgáltatásnak (összes lista)
-- `GET /api/products/:id` - Továbbítja a termék szolgáltatásnak (ID alapján lekérés)
-
-**Főbb funkciók**:
-- Kérés irányítás axios-szal
-- Centralizált naplózás
-- Hibakezelés és időkorlát kezelése
-- Szolgáltatás felfedezés környezeti változók alapján
-- Application Insights integráció
-
-**Kódkiemelés** (`src/api-gateway/app.js`):
-```javascript
-// Belső szolgáltatás kommunikáció
-app.get('/api/products', async (req, res) => {
-  const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-  res.json(response.data);
-});
-```
-
-### Product Service (Python/Flask)
-
-**Port**: 8000  
-**Hozzáférés**: Csak belső (nincs külső bejárat)  
-**Cél**: Termékkatalógus kezelése memóriában  
-
-**Végpontok**:
-- `GET /` - Szolgáltatás információ
-- `GET /health` - Egészségügyi ellenőrző végpont
-- `GET /products` - Összes termék listázása
-- `GET /products/<id>` - Termék lekérése ID alapján
-
-**Főbb funkciók**:
-- RESTful API Flask-kel
-- Memóriában tárolt termékek (egyszerű, adatbázis nem szükséges)
-- Egészségügyi ellenőrzés probe-okkal
-- Strukturált naplózás
-- Application Insights integráció
-
-**Adatmodell**:
-```python
-{
-  "id": 1,
-  "name": "Laptop",
-  "description": "High-performance laptop",
-  "price": 999.99,
-  "stock": 50
-}
-```
-
-**Miért csak belső?**
-A termék szolgáltatás nincs kitéve nyilvánosan. Minden kérés az API Gateway-en keresztül megy, ami biztosítja:
-- Biztonság: Szabályozott elérési pont
-- Rugalmasság: Backend módosítható a kliensek befolyásolása nélkül
-- Monitorozás: Centralizált kérés naplózás
-
-## Szolgáltatás kommunikáció megértése
-
-### Hogyan kommunikálnak a szolgáltatások egymással?
-
-Ebben a példában az API Gateway **belső HTTP hívással** kommunikál a Product Service-szel:
-
-```javascript
-// API átjáró (src/api-gateway/app.js)
-const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
-
-// Belső HTTP kérés küldése
-const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-```
-
-**Főbb pontok**:
-
-1. **DNS alapú felfedezés**: A Container Apps automatikusan biztosít DNS-t a belső szolgáltatásokhoz
-   - Termék szolgáltatás FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Egyszerűsítve: `http://product-service` (a Container Apps ezt feloldja)
-
-2. **Nincs nyilvános elérés**: A product service-nek a Bicep-ben `external: false` van
-   - Csak a Container Apps környezetében elérhető
-   - Internet felől nem érhető el
-
-3. **Környezeti változók**: A szolgáltatások URL-jei telepítéskor injektálódnak
-   - A Bicep átadja a belső FQDN-t a gateway-nek
-   - Nincs keménykódolt URL a kódban
-
-**Hasonlat**: Olyan, mintha irodai helyiségek lennének. Az API Gateway a recepció (nyilvános), a Product Service egy iroda (csak belső). A látogatóknak át kell menniük a recepción bármelyik irodába való eljutáshoz.
-
-## Telepítési opciók
-
-### Teljes telepítés (ajánlott)
-
-```bash
-# Telepítse az infrastruktúrát és mindkét szolgáltatást
-azd up
-```
-
-Ez telepíti:
-1. Container Apps környezet
-2. Application Insights
-3. Conténer-regisztráció
-4. API Gateway konténer
-5. Product Service konténer
-
-**Idő**: 8-12 perc
-
-### Egyedi szolgáltatás telepítése
-
-```bash
-# Csak egy szolgáltatás telepítése (az első azd up után)
-azd deploy api-gateway
-
-# Vagy a termékszolgáltatás telepítése
 azd deploy product-service
+azd deploy api-gateway
 ```
 
-**Használat**: Ha egy szolgáltatás kódját frissítetted, és csak azt akarod újratelepíteni.
+A Node képfájl a Node 22-t használja; a Python képfájl a Python 3.11-et használja. Mindkettő a
+`0.0.0.0`-hez kötődik. Az ingressz/probák rendre a 8080-as (átjáró) és 8000-es (termék) portokat használják.
 
-### Konfiguráció frissítése
+## Helyi fejlesztés Dockerral
+
+Fuss ebből a példakönyvtárból. Használj felhasználó által definiált hálózatot, **ne `localhost`
+az egyik tárolóból a másik eléréséhez**:
 
 ```bash
-# Méretezési paraméterek módosítása
-azd env set GATEWAY_MAX_REPLICAS 30
-
-# Új konfigurációval történő újratelepítés
-azd up
+docker network create azd-microservices-demo
+docker build -t local-product ./src/product-service
+docker build -t local-gateway ./src/api-gateway
+docker run -d --name azd-product --network azd-microservices-demo local-product
+docker run -d --name azd-gateway --network azd-microservices-demo \
+  -p 8080:8080 -e PRODUCT_SERVICE_URL=http://azd-product:8000 local-gateway
+curl --fail-with-body http://localhost:8080/api/products
 ```
 
-## Konfiguráció
-
-### Skálázási konfiguráció
-
-Mindkét szolgáltatáshoz HTTP-alapú automatikus skálázás van beállítva a Bicep fájlokban:
-
-**API Gateway**:
-- Min replikák: 2 (mindig legalább kettő az elérhetőségért)
-- Max replikák: 20
-- Skálázási trigger: 50 párhuzamos kérés replikánként
-
-**Product Service**:
-- Min replikák: 1 (szükség esetén leállítható nullára)
-- Max replikák: 10
-- Skálázási trigger: 100 párhuzamos kérés replikánként
-
-**Skálázás testreszabása** (`infra/app/*.bicep`):
-```bicep
-scale: {
-  minReplicas: 1
-  maxReplicas: 10
-  rules: [
-    {
-      name: 'http-scale-rule'
-      http: {
-        metadata: {
-          concurrentRequests: '100'  // Adjust this
-        }
-      }
-    }
-  ]
-}
-```
-
-### Erőforrás allokáció
-
-**API Gateway**:
-- CPU: 1.0 vCPU
-- Memória: 2 GiB
-- Indok: Minden külső forgalmat kezeli
-
-**Product Service**:
-- CPU: 0.5 vCPU
-- Memória: 1 GiB
-- Indok: Könnyű, memórián belüli műveletek
-
-### Egészségügyi ellenőrzések
-
-Mindkét szolgáltatás tartalmaz liveness és readiness probe-okat:
-
-```bicep
-probes: [
-  {
-    type: 'Liveness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 10
-    periodSeconds: 30
-  }
-  {
-    type: 'Readiness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 5
-    periodSeconds: 10
-  }
-]
-```
-
-**Mit jelent ez**:
-- **Liveness**: Ha az egészségügyi ellenőrzés megbukik, a Container Apps újraindítja a konténert
-- **Readiness**: Ha nincs készen, a Container Apps nem irányít forgalmat az adott replikára
-
-
-
-## Monitorozás és megfigyelhetőség
-
-### Szolgáltatás naplók megtekintése
+Várható eredmény: öt termék. Az HTTP csak ehhez a helyi Docker hálózathoz van használva.
 
 ```bash
-# Naplók megtekintése az azd monitor segítségével
-azd monitor --logs
-
-# Vagy használd az Azure CLI-t specifikus Container Apps-hez:
-# Naplók folyamatos közvetítése az API Gateway-ről
-az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
-
-# A termék szolgáltatás legutóbbi naplóinak megtekintése
-az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
+docker stop azd-product azd-gateway
+docker rm azd-product azd-gateway
+docker network rm azd-microservices-demo
 ```
 
-**Várt kimenet**:
+## Monitorozás
+
+```bash
+az containerapp logs show --name "$GATEWAY_NAME" --resource-group "$RG_NAME" --follow
+# In a separate terminal:
+az containerapp logs show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" --tail 100
 ```
-[api-gateway] API Gateway listening on port 8080
-[api-gateway] Product Service URL: http://product-service
-[api-gateway] GET /api/products 200 - 45ms
-[product-service] Retrieved 5 products
-```
 
-### Application Insights lekérdezések
+Az `azd monitor --logs` portál nézetet nyit; nem streameli a terminál logokat.
+A Node SDK gyűjti a gateway kéréseket/függőségeket. A Python `AzureLogHandler`
+**log trace-eket** exportál, nem automatikus Flask kéréseket, SQL függőségeket, vagy teljes
+elosztott trace-eket. Az OpenCensus egy régi SDK; ehelyett a Azure Monitor OpenTelemetry használata ajánlott,
+amikor ezt a példát bővíted.
 
-Az Azure Portalban lépj be az Application Insights-ba, majd futtasd ezeket a lekérdezéseket:
+Az Application Insights Logs-ban generálj kéréseket és vizsgáld meg azokat:
 
-**Lassú kérések keresése**:
 ```kusto
 requests
 | where timestamp > ago(1h)
-| where duration > 1000  // Requests taking >1 second
-| summarize count() by name, cloud_RoleName
-| order by count_ desc
+| where name contains "products"
+| summarize RequestCount=count(), AvgDuration=avg(duration) by bin(timestamp, 5m)
 ```
 
-**Szolgáltatás-szolgáltatás hívások követése**:
+Python alkalmazásüzenetek esetén:
+
 ```kusto
-dependencies
+traces
 | where timestamp > ago(1h)
-| where type == "Http"
-| project timestamp, name, target, duration, success
-| order by timestamp desc
+| where message contains "products"
+| project timestamp, message, severityLevel
 ```
 
-**Szolgáltatásonkénti hibaarány**:
-```kusto
-exceptions
-| where timestamp > ago(24h)
-| summarize errorCount = count() by cloud_RoleName, type
-| order by errorCount desc
-```
-
-**Kérések volumen időben**:
-```kusto
-requests
-| where timestamp > ago(1h)
-| summarize requestCount = count() by bin(timestamp, 5m), cloud_RoleName
-| render timechart
-```
-
-### Monitorozó műszerfal elérése
-
-```bash
-# Alkalmazásfigyelés részleteinek lekérése
-azd env get-values | grep APPLICATIONINSIGHTS
-
-# Azure Portal megnyitása a megfigyeléshez
-az monitor app-insights component show \
-  --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
-  --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
-  --query "appId" -o tsv
-```
-
-### Élő metrikák
-
-1. Lépj az Application Insights-ra az Azure Portalban
-2. Kattints az "Élő metrikák" lehetőségre
-3. Nézd valós időben a kéréseket, hibákat és teljesítményt
-4. Teszteld: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+Vedd figyelembe a feldolgozási késleltetést és a mintavételezést; ne várj pontos kérésszámot vagy
+garantált késleltetést. Nincsenek testreszabott riasztások vagy műszerfalak konfigurálva.
 
 ## Gyakorlati feladatok
 
-[Figyelem: A teljes gyakorlatokat lásd fent a "Practical Exercises" szakaszban részletes lépésenkénti munkafolyamatokkal a telepítés ellenőrzésére, adatmanipulációra, automatikus skálázás tesztre, hibakezelésre és harmadik szolgáltatás hozzáadására.]
+### 1. gyakorlat: Módosítsd a katalógust
 
-## Költségelemzés
+**Kezdőpont:** `src/product-service/main.py`.
+**Cél:** független szolgáltatás telepítésének ellenőrzése.
+Változtasd meg a Laptop készletét 50-ről 49-re a rögzített `products` listában, futtasd
+az `azd deploy product-service`-at, majd kérd le az `${GATEWAY_URL}/api/products/1`-et.
 
-### Becsült havi költségek (ehhez a 2-szolgáltatásos példához)
+**Siker kritérium / megoldás:** HTTP 200 az `"stock":49`-tel. Állítsd vissza 50-re és telepítsd újra.
+**Gyakori hiba:** a katalógust tartalmazó szolgáltatás helyett a gateway szerkesztése.
+Ez a forrásadatokat változtatja, nem egy tartós készletadatbázist.
 
-| Erőforrás | Konfiguráció | Becsült költség |
-|----------|--------------|----------------|
-| API Gateway | 2-20 replika, 1 vCPU, 2GB RAM | 30-150 USD |
-| Product Service | 1-10 replika, 0.5 vCPU, 1GB RAM | 15-75 USD |
-| Container Registry | Alap szint | 5 USD |
-| Application Insights | 1-2 GB/hó | 5-10 USD |
-| Log Analytics | 1 GB/hó | 3 USD |
-| **Összesen** | | **58-243 USD/hó** |
+### 2. gyakorlat: Replika konfiguráció ellenőrzése
 
-**Használat szerinti költségek**:
-- **Könnyű forgalom** (tesztelés/tanulás): kb. 60 USD/hó
-- **Mérsékelt forgalom** (kis éles környezet): kb. 120 USD/hó
-- **Magas forgalom** (forgalmas időszakok): kb. 240 USD/hó
-
-### Költségoptimalizálási tippek
-
-1. **Skálázás nullára fejlesztési környezethez**:
-   ```bicep
-   scale: {
-     minReplicas: 0  // Save $30-40/month when not in use
-     maxReplicas: 10
-   }
-   ```
-
-2. **Cosmos DB esetén fogyasztás alapú terv használata** (ha hozzáadod):
-   - Csak a tényleges használat után fizetsz
-   - Nincs minimális díj
-
-3. **Állíts be Application Insights mintavételezést**:
-   ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // A kérések 50%-ának mintavétele
-   ```
-
-4. **Takarítsd ki, ha nincs rá szükség**:
-   ```bash
-   azd down
-   ```
-
-### Ingyenes szint lehetőségek
-
-Tanuláshoz/teszteléshez fontold meg:
-- Használja az Azure ingyenes jóváírásait (az első 30 napban)
-- Tartsa minimálisra a replikákat
-- Törölje a tesztelés után (nincs folyamatos díj)
-
----
-
-## Takarítás
-
-A folyamatos díjak elkerülése érdekében töröljön minden erőforrást:
+**Kezdőpont:** `infra/app/product-service.bicep`.
+**Cél:** infrastruktúra-változás megfigyelése automatikus skálázás nélkül.
+Változtasd `minReplicas: 1`-et `minReplicas: 2`-ra, futtasd az `azd up`-at, majd:
 
 ```bash
-azd down --force --purge
+az containerapp show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" \
+  --query properties.template.scale -o json
 ```
 
-**Megerősítés felkérés**:
-```
-? Total resources to delete: 6, are you sure you want to continue? (y/N)
-```
+**Siker kritérium:** konfigurált minimum 2, maximális érték 10 marad.
+Állítsd vissza az 1-es minimumot és futtasd az `azd up`-at.
+**Gyakori hiba:** az `azd deploy` egyedül nem alkalmaz változtatásokat a nem kapcsolódó megosztott
+infrastruktúrára. Ne állítsd az `maxReplicas` értékét nullára mint leállási szimulációt.
+Ez a konfiguráció ellenőrzése, nem terhelés-teszt vagy garantált azonnali replika szám.
 
-Írja be, hogy `y` a megerősítéshez.
+### 3. gyakorlat: Teszteld a helyi nem elérhető szolgáltatás kezelését
 
-**Mi törlődik**:
-- Container Apps környezet
-- Mindkét Container App (gateway & termék szolgáltatás)
-- Container Registry
-- Application Insights
-- Log Analytics Workspace
-- Erőforráscsoport
+**Kezdőpont:** mindkét helyi Docker konténer fent van.
+**Cél:** megkülönböztetni a backend hibát a hiányzó terméktől.
+Állítsd le csak a termék tárolót:
 
-**✓ Takarítás ellenőrzése**:
 ```bash
-az group list --query "[?starts_with(name,'rg-microservices')]" --output table
+docker stop azd-product
+curl -i http://localhost:8080/api/products
+docker start azd-product
+curl --fail-with-body http://localhost:8080/api/products
 ```
 
-Üres visszatérítést kell adnia.
+**Siker kritérium:** leállítás alatt a gateway 503-at ad válaszként az
+`"error":"Product service unavailable"`-val; újraindítás után a lista 200-at ad vissza.
+Szükség esetén próbáld újra egy rövid indítási késleltetés után.
+**Gyakori hiba:** a gateway megállítása más hibát tesztel (nincs HTTP válasz).
 
----
+## Költségek és gyártási hiányosságok
 
-## Bővítési útmutató: 2 szolgáltatástól 5+ szolgáltatásig
+Az alapértelmezett minimum replika a számítást folyamatosan futtatja. A Registry és a monitorozás is
+költségeket okoz. Nincs validált fix havi összeg $50: becsüld meg a régió CPU/memória,
+replika órák, lekérések, registry és log megőrzést az
+[Azure árkalkulátor](https://azure.microsoft.com/pricing/calculator/) segítségével.
+Töröld időben a tanulási erőforrásokat.
 
-Miután elsajátította ezt a 2-szolgáltatásos architektúrát, így bővíthet:
+A gyártási munka magában foglalja a hitelesítést/engedélyezést, környezetre szabott kezelt identitásokat,
+tartós adatokat, bemenet/válasz validálást, támogatott megfigyelhetőségi eszközöket,
+terhelési/hiba teszteket, CI/CD-t, riasztásokat és helyreállítási eljárásokat. Egy rendelési
+szolgáltatás, sor vagy adatbázis hozzáadása külön implementációs feladat, nem kész
+gyakorlat vagy már itt elérhető funkció.
 
-### 1. fázis: Adatbázis-perzisztencia hozzáadása (Következő lépés)
+## Hibakeresés és takarítás
 
-**Cosmos DB hozzáadása a termék szolgáltatáshoz**:
+- **Kép nem található az első telepítéskor:** a bootstrapnak a nyilvános képet kell használni;
+  ellenőrizd az alapértelmezett fő kép paramétereket és a telepítési modul leképezéseket.
+- **503-as termékek:** ellenőrizd a termék logokat, a kép verzióját és a befecskendezett belső HTTPS URL-t.
+- **404 váratlan útvonal:** a termék API csak olvasható; ellenőrizd az útvonalat, ne egy nem létező CRUD kezelőt.
+- **Nincs telemetria:** vizsgáld meg a futási kapcsolatot sztringeket anélkül, hogy azok nyilvánosak lennének és
+  engedd meg a késleltetett feldolgozást. A Python kérés táblák nem töltődnek a log kezelője által.
 
-1. Hozza létre az `infra/core/cosmos.bicep` fájlt:
-   ```bicep
-   resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
-     name: name
-     location: location
-     kind: 'GlobalDocumentDB'
-     properties: {
-       databaseAccountOfferType: 'Standard'
-       locations: [{ locationName: location, failoverPriority: 0 }]
-     }
-   }
-   ```
+Innen a példa könyvtárból:
 
-2. Frissítse a termék szolgáltatást, hogy a memóriában lévő adatok helyett a Cosmos DB-t használja
-
-3. Becslés szerint további költség: kb. 25 USD/hó (serverless)
-
-### 2. fázis: Harmadik szolgáltatás hozzáadása (Rendeléskezelés)
-
-**Rendelés szolgáltatás létrehozása**:
-
-1. Új mappa: `src/order-service/` (Python/Node.js/C#)
-2. Új Bicep: `infra/app/order-service.bicep`
-3. Frissítse az API Gateway-t, hogy irányítsa a `/api/orders` útvonalat
-4. Adjon hozzá Azure SQL adatbázist a rendelés perzisztenciához
-
-**Az architektúra így alakul**:
-```
-API Gateway → Product Service (Cosmos DB)
-           → Order Service (Azure SQL)
-```
-
-### 3. fázis: Aszinkron kommunikáció hozzáadása (Service Bus)
-
-**Eseményvezérelt architektúra megvalósítása**:
-
-1. Adjon hozzá Azure Service Bus-t: `infra/core/servicebus.bicep`
-2. A termék szolgáltatás közzéteszi a "ProductCreated" eseményeket
-3. A rendelés szolgáltatás feliratkozik a termékeseményekre
-4. Adjon hozzá Értesítési szolgáltatást az események feldolgozásához
-
-**Minta**: Kérés/Válasz (HTTP) + eseményvezérelt (Service Bus)
-
-### 4. fázis: Felhasználói hitelesítés hozzáadása
-
-**Felhasználói szolgáltatás megvalósítása**:
-
-1. Hozza létre a `src/user-service/` mappát (Go/Node.js)
-2. Adjon hozzá Azure AD B2C-t vagy egyéni JWT hitelesítést
-3. Az API Gateway érvényesíti a tokeneket
-4. A szolgáltatások ellenőrzik a felhasználói jogosultságokat
-
-### 5. fázis: Termelési kész állapot
-
-**Ezeknek a komponenseknek az hozzáadása**:
-- Azure Front Door (globális terheléselosztás)
-- Azure Key Vault (titkok kezelése)
-- Azure Monitor Workbooks (egyedi műszerfalak)
-- CI/CD pipeline (GitHub Actions)
-- Blue-Green telepítések
-- Kezelt identitás minden szolgáltatásnak
-
-**Teljes termelési architektúra költsége**: kb. 300-1400 USD/hó
-
----
-
-## További információk
-
-### Kapcsolódó dokumentáció
-- [Azure Container Apps dokumentáció](https://learn.microsoft.com/azure/container-apps/)
-- [Mikroszolgáltatás-architektúra útmutató](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights elosztott követéshez](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Azure Developer CLI dokumentáció](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-
-### Következő lépések a tanfolyamban
-- ← Előző: [Egyszerű Flask API](../../../../../examples/container-app/simple-flask-api) – Kezdő egydobozos példa
-- → Következő: [AI integrációs útmutató](../../../../../examples/docs/ai-foundry) – AI képességek hozzáadása
-- 🏠 [Tanfolyam kezdőlap](../../README.md)
-
-### Összehasonlítás: Mikor mit használjunk
-
-**Egydobozos alkalmazás** (Egyszerű Flask API példa):
-- ✅ Egyszerű alkalmazások
-- ✅ Monolitikus architektúra
-- ✅ Gyors telepítés
-- ❌ Korlátozott skálázhatóság
-- **Költség**: kb. 15-50 USD/hó
-
-**Mikroszolgáltatások** (Ez a példa):
-- ✅ Összetett alkalmazások
-- ✅ Szolgáltatásonként független skálázás
-- ✅ Csapat autonómia (különböző szolgáltatások, különböző csapatok)
-- ❌ Nehezebb menedzselni
-- **Költség**: kb. 60-250 USD/hó
-
-**Kubernetes (AKS)**:
-- ✅ Maximális irányítás és rugalmasság
-- ✅ Többfelhős hordozhatóság
-- ✅ Fejlett hálózatkezelés
-- ❌ Kubernetes szakértelmet igényel
-- **Költség**: kb. 150-500 USD/hó minimum
-
-**Ajánlás**: Kezdje Container Apps alkalmazásokkal (ez a példa), csak akkor lépjen AKS-re, ha Kubernetes-specifikus funkciókra van szüksége.
-
----
-
-## GYIK
-
-**Kérdés: Miért csak 2 szolgáltatás van az 5+ helyett?**  
-Válasz: Oktatási fokozatosság. Sajátítsd el az alapokat (szolgáltatás kommunikáció, monitorozás, skálázás) egy egyszerű példán keresztül, mielőtt bonyolítanál. Itt tanult minták 100-szolgáltatásos architektúrákra is érvényesek.
-
-**Kérdés: Hozzáadhatok több szolgáltatást én magam?**  
-Válasz: Természetesen! Kövesd a fentebb leírt bővítési útmutatót. Minden új szolgáltatás ugyanazon a mintán alapul: hozz létre src mappát, Bicep fájlt, frissítsd az azure.yaml fájlt, és telepítsd.
-
-**Kérdés: Ez termelésre is alkalmas?**  
-Válasz: Szilárd alap. Termeléshez adj hozzá: kezelt identitást, Key Vault-ot, tartós adatbázisokat, CI/CD pipeline-t, monitorozási riasztásokat és mentési stratégiát.
-
-**Kérdés: Miért ne használjak Dapr-t vagy más service mesh-t?**  
-Válasz: Tartsd egyszerűnek a tanuláshoz. Miután megértetted a natív Container Apps hálózatkezelést, ráépíthetsz Dapr-t fejlettebb forgatókönyvekhez.
-
-**Kérdés: Hogyan hibakereshetek helyben?**  
-Válasz: Futtasd helyben a szolgáltatásokat Docker-rel:
 ```bash
-cd src/api-gateway
-docker build -t local-gateway .
-docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
+azd down
 ```
 
-**Kérdés: Használhatok más programozási nyelveket?**  
-Válasz: Igen! Ez a példa Node.js (gateway) + Python (termék szolgáltatás). Bármilyen konténerben futtatható nyelvet keverhetsz.
+Nézd át a törlési megerősítéseket és ellenőrizd, hogy a dedikált erőforrás csoport törlésre került-e.
 
-**Kérdés: Mi van, ha nincs Azure jóváírásom?**  
-Válasz: Használd az Azure ingyenes szintjét (az első 30 nap új fiókoknak), vagy telepíts rövid tesztelési időszakra, majd töröld azonnal.
-
----
-
-> **🎓 Tanulási útvonal összefoglaló**: Megtanultad, hogyan telepíts több szolgáltatásos architektúrát automatikus skálázással, belső hálózattal, központosított monitorozással és termelésre kész mintákkal. Ez az alap felkészít összetett elosztott rendszerekre és vállalati mikroszolgáltatás-architektúrákra.
-
-**📚 Tanfolyam navigáció:**
-- ← Előző: [Egyszerű Flask API](../../../../../examples/container-app/simple-flask-api)
-- → Következő: [Adatbázis integrációs példa](../../../../../examples/database-app)
-- 🏠 [Tanfolyam kezdőlap](../../../README.md)
-- 📖 [Container Apps legjobb gyakorlatok](../../../docs/chapter-04-infrastructure/deployment-guide.md)
+[Előző: Flask API](../../../../../examples/container-app/simple-flask-api) · [Következő: Adatbázis alkalmazás](../../../../../examples/database-app) ·
+[AI fejlesztés](../../../docs/chapter-02-ai-development/README.md) ·
+[Tanfolyam kezdőlap](../../../README.md) · [Jelents hibát](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Jogi nyilatkozat**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatizált fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum a saját nyelvén tekintendő hivatalos forrásnak. Kritikus információk esetén professzionális, emberi fordítást javaslunk. Nem vállalunk felelősséget semmilyen félreértésért vagy félreértelmezésért, amely ebből a fordításból ered.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

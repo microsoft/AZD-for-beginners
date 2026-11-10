@@ -1,433 +1,227 @@
-# Simple Flask API - Container App Example
+# 簡易 Flask API — Azure Container Apps
 
-**學習路徑：** 初學者 ⭐ | **時間：** 25-35 分鐘 | **成本：** $0-15/月
+**程度：** 初學者 · **時間：** 包含設定約 30–45 分鐘
 
-一個完整可運作的 Python Flask REST API，使用 Azure Developer CLI (azd) 部署到 Azure Container Apps。此範例示範容器部署、自動縮放與監控基礎。
+使用 Azure Developer CLI (azd) 部署 Python Flask CRUD API。包含原始碼、Dockerfile、
+Bicep 以及部署參數。這是 <strong>學習範例</strong>，並非
+生產環境準備好的 API。
 
-## 🎯 你將學到
+## 您將學到
 
-- 將容器化的 Python 應用程式部署到 Azure
-- 設定具備縮減為零的自動縮放
-- 實作健康檢查（liveness）和準備就緒檢查（readiness）
-- 監控應用程式日誌與指標
-- 使用 Azure Developer CLI 進行快速部署
-
-## 📦 包含內容
-
-✅ **Flask 應用程式** - 完整的 REST API，包含 CRUD 操作 (`src/app.py`)  
-✅ **Dockerfile** - 可用於生產環境的容器設定  
-✅ **Bicep 基礎架構** - Container Apps 環境與 API 部署  
-✅ **AZD 設定** - 一指令部署設定  
-✅ <strong>健康檢查點</strong> - 已設定存活與準備就緒檢查  
-✅ <strong>自動縮放</strong> - 根據 HTTP 負載 0-10 個副本  
-
-## Architecture
+- 透過 azd 建構與發佈容器。
+- 配置入口流量和存活/就緒探測。
+- 驗證 CRUD 回應並檢視應用程式日誌。
+- 了解為什麼記憶體資料不適用於持久化應用程式。
 
 ```mermaid
-graph TD
-    subgraph ACA[Azure Container Apps 環境]
-        Flask[Flask API 容器<br/>健康端點<br/>REST API<br/>自動擴展 0-10 個副本]
-        AppInsights[應用程式洞察]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
 
-## Prerequisites
+**重要：** 項目保存在單一程序。預設為 **一個 Gunicorn 工作程序，
+0–1 副本**，故意避免工作程序/副本間的資料不一致。
+重新啟動、版本變更或縮減到零時會遺失項目。增加副本數
+需共享持久性儲存。此 API 無身份驗證或授權。
 
-### 必要項目
-- **Azure Developer CLI (azd)** - [安裝指南](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [免費帳戶](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [安裝 Docker](https://www.docker.com/products/docker-desktop/) (供本機測試使用)
+## 先決條件
 
-### 驗證先決條件
+- [目前穩定版 azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (審查時發布版本：1.37.2)。
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) 用於驗證。
+- Docker 及其守護程序運行中；為預設本地映像建構所需。
+- Azure 訂閱、資源建立權限，以及 Container Apps 區域配額。
+- 用於以下指令的 Bash（或相等的是 PowerShell）。
+- 選用本地開發的 Python 3.11。
 
 ```bash
-# 檢查 azd 版本（需要 1.5.0 或更高）
 azd version
-
-# 驗證 Azure 登入
+az version
+docker info
 azd auth login
-
-# 檢查 Docker（可選，用於本機測試）
-docker --version
+az login
 ```
 
-## ⏱️ 部署時間表
-
-| 階段 | 時間 | 發生事項 |
-|-------|----------|--------------||
-| Environment setup | 30 seconds | Create azd environment |
-| Build container | 2-3 minutes | Docker build Flask app |
-| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
-| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| <strong>總計</strong> | **8-12 minutes** | 完成部署並準備就緒 |
+CLI 工具擁有獨立登入，請兩者使用相同訂閱。
 
 ## 快速開始
 
+從儲存庫根目錄開始：
+
 ```bash
-# 前往範例
 cd examples/container-app/simple-flask-api
-
-# 初始化環境（選擇唯一名稱）
-azd env new myflaskapi
-
-# 部署所有項目（基礎架構 + 應用程式）
+azd env new flask-demo
 azd up
-# 系統會提示您：
-# 1. 選擇 Azure 訂閱
-# 2. 選擇區域（例如：eastus2）
-# 3. 等待 8-12 分鐘完成部署
-
-# 取得您的 API 端點
-azd env get-values
-
-# 測試 API
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**預期輸出：**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ 驗證部署
-
-### 步驟 1：檢查部署狀態
-
-```bash
-# 檢視已部署的服務
-azd show
-
-# 預期輸出顯示:
-# - 服務: api
-# - 端點: https://ca-api-[env].xxx.azurecontainerapps.io
-# - 狀態: 執行中
-```
-
-### 步驟 2：測試 API 端點
-
-```bash
-# 取得 API 端點
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# 測試健康狀態
-curl $API_URL/health
+預期：HTTP 200 及包含 `"status":"healthy"`、
+`"service":"simple-flask-api"` 與當前 UTC 時戳的 JSON 回應。
+建置和映像建構通常需數分鐘；時間有異。
 
-# 測試根端點
-curl $API_URL/
+初始部署使用一個公共 hello-world 映像，監聽 80 埠。
+`azure.yaml` 選擇 `infra/app/api.bicep` 及其對應參數檔
+進行服務部署，切換映像、入口與探測為 8000 埠。
+請勿刪除這些部署參數。
 
-# 建立一個項目
-curl -X POST $API_URL/api/items \
+## 驗證 CRUD
+
+在相同副本持續運作時，依序執行下列指令：
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# 取得所有項目
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**成功準則：**
-- ✅ 健康端點返回 HTTP 200
-- ✅ 根端點顯示 API 資訊
-- ✅ POST 建立項目並返回 HTTP 201
-- ✅ GET 返回已建立的項目
+成功：POST 201，讀取/PUT 200，DELETE 204 無內容，接著缺少項目回傳 404。
+格式錯誤/非物件 JSON 或空名稱回傳 400。
+若項目於請求間消失，請檢查是否重新啟動或縮減至零；
+此為刻意的記憶體限制，非持久化行為。
 
-### 步驟 3：檢視日誌
+| 端點 | 方法 |
+|---|---|
+| `/` | GET — 服務資訊 |
+| `/health` | GET — 存活/就緒檢查 |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## 日誌與設定
 
 ```bash
-# 使用 azd monitor 即時串流日誌
-azd monitor --logs
-
-# 或使用 Azure CLI：
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# 您應該會看到：
-# - Gunicorn 啟動訊息
-# - HTTP 請求日誌
-# - 應用程式資訊日誌
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## 專案結構
+預期：Gunicorn 啟動、請求存取日誌及應用程式訊息。
+`azd monitor --logs` 開啟入口網站檢視；不會在終端機串流輸出。
+已配置 Application Insights，但 **此 Flask 程式碼無接入指標**；
+請使用 Container Apps/Log Analytics 取得標準輸出日誌。
 
+編輯 `infra/app/api.bicep` 以調整 CPU/記憶體、副本限制或擴縮規則，然後
+執行 `azd up`。預設值為 0.5 vCPU，1 GiB，最小 0 / 最大 1 副本，
+HTTP 閾值為 50 同時請求。縮減至零可能增加冷啟動延遲。
+
+任意 `azd env set MAX_REPLICAS`、`API_KEY`、`LOG_LEVEL` 或
+`SCALE_TO_ZERO_TIMEOUT` 值 <strong>不與此範本或應用綁定</strong>。
+設定值不會自動作為執行時環境變數。
+映像明確綁定 8000 埠，若改變埠號須同時更新 Dockerfile、Bicep 入口與探測。
+
+
+## 檔案
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API 端點
+## 本地開發
 
-| 端點 | 方法 | 說明 |
-|----------|--------|-------------|
-| `/health` | GET | 健康檢查 |
-| `/api/items` | GET | 列出所有項目 |
-| `/api/items` | POST | 建立新項目 |
-| `/api/items/{id}` | GET | 取得特定項目 |
-| `/api/items/{id}` | PUT | 更新項目 |
-| `/api/items/{id}` | DELETE | 刪除項目 |
-
-## 設定
-
-### 環境變數
+從此範例目錄開始：
 
 ```bash
-# 設定自訂組態
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### 縮放設定
-
-此 API 會根據 HTTP 流量自動縮放：
-- <strong>最小副本數</strong>: 0（閒置時縮減為零）
-- <strong>最大副本數</strong>: 10
-- <strong>每個副本的同時請求數</strong>: 50
-
-## 開發
-
-### 在本機執行
+在另一個終端測試 `http://localhost:8000/health` 和 CRUD 端點。
+或構建並執行實際映像：
 
 ```bash
-# 安裝相依套件
-cd src
-pip install -r requirements.txt
-
-# 執行應用程式
-python app.py
-
-# 在本機測試
-curl http://localhost:8000/health
-```
-
-### 建置並測試容器
-
-```bash
-# 建立 Docker 映像檔
 docker build -t flask-api:local ./src
-
-# 在本機執行容器
-docker run -p 8000:8000 flask-api:local
-
-# 測試容器
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## 部署
+在首次部署後，僅對代碼變更執行 `azd deploy api`。
+對 Bicep 變更，執行 `azd up` 重新佈建並部署。
 
-### 完整部署
+## 實作練習
+
+### 1. 驗證輸入拒絕
+
+**起點：** 已部署 API，如上方 `API_URL`。
+**目標：** 驗證 API 拒絕無效的 JSON 結構和缺少名稱。
 
 ```bash
-# 部署基礎架構與應用程式
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### 僅程式碼部署
+**成功標準 / 解決方案：** 兩者皆返回 400 和 JSON 錯誤，而非 500。
+**常見問題：** 忘記帶上 JSON 內容類型標頭。
+
+### 2. 新增唯讀版本端點
+
+**起點：** `src/app.py`。**目標：** 擴充並重新部署 API。
+在 `if __name__ == '__main__':` 區塊前新增此內容：
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+執行 `azd deploy api`，然後 `curl --fail-with-body "${API_URL}/version"`。
+**成功標準：** HTTP 200 與 `{"version":"1.0.0"}`。
+**常見問題：** 在阻塞的 `app.run()` 調用之後放置路由時
+使用 `python src/app.py` 測試。
+
+### 知識檢測點
+
+為什麼只有一個工作程序不足以保存持久數據？因為即使是一個進程在重新啟動時也會丟失其字典。
+生產版本需要持久的共享存儲、身份驗證、授權、遷移、測試和運維監控。
+
+
+## 成本與故障排除
+
+這並不是保證零成本的部署：基本登錄和日誌存儲/攝取即使在應用計算為零時也可能產生費用。
+使用
+[計價計算器](https://azure.microsoft.com/pricing/calculator/) 根據您的區域。
+
+- **Docker 建置失敗：** 確認 `docker info`、網路存取和依賴項。
+- **應用程式不健康：** 檢查控制台/系統日誌並驗證映像埠、入口，以及探測設定是否一致。Flask 埠上不應探測到佔位符。
+  和探測設定是否一致。Flask 埠上不應探測到佔位符。
+- **403/權限：** 確認訂閱和資源建立權限。
+- **項目消失：** 記憶體中的狀態於重啟/縮放至零時重置；新增資料庫以實現持久行為。
+  為持久化行為新增資料庫。
+
+## 清理與後續步驟
 
 ```bash
-# 僅部署應用程式的程式碼（基礎架構不變）
-azd deploy api
+azd down
 ```
 
-### 更新設定
+請檢視刪除提示，並確認專用資源群組已被移除。
+請勿對包含無關資料的資源群組使用破壞性清理。
 
-```bash
-# 更新環境變數
-azd env set API_KEY "new-api-key"
-
-# 以新設定重新部署
-azd deploy api
-```
-
-## 監控
-
-### 檢視日誌
-
-```bash
-# 使用 azd monitor 串流即時日誌
-azd monitor --logs
-
-# 或使用用於 Container Apps 的 Azure CLI:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# 檢視最近 100 行
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### 監控指標
-
-```bash
-# 開啟 Azure Monitor 儀表板
-azd monitor --overview
-
-# 檢視特定指標
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## 測試
-
-### 健康檢查
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-預期回應：
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### 建立項目
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### 取得所有項目
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## 成本優化
-
-此部署使用縮減為零（scale-to-zero），因此只有在 API 處理請求時才會產生費用：
-
-- <strong>閒置成本</strong>: 約 $0/月（縮減為零）
-- <strong>運行中成本</strong>: 每副本約 $0.000024/秒
-- <strong>預期每月成本</strong>（輕度使用）: $5-15
-
-### 進一步降低成本
-
-```bash
-# 將開發環境的最大副本數縮減
-azd env set MAX_REPLICAS 3
-
-# 使用較短的閒置逾時時間
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 分鐘
-```
-
-## 疑難排解
-
-### 容器無法啟動
-
-```bash
-# 使用 Azure CLI 檢查容器日誌
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# 驗證 Docker 映像能否在本機成功建置
-docker build -t test ./src
-```
-
-### API 無法存取
-
-```bash
-# 驗證 Ingress 是否為外部
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### 響應時間過長
-
-```bash
-# 檢查 CPU/記憶體 使用率
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# 如有需要，擴充資源
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## 清理
-
-```bash
-# 刪除所有資源
-azd down --force --purge
-```
-
-## 下一步
-
-### 擴展此範例
-
-1. <strong>新增資料庫</strong> - 整合 Azure Cosmos DB 或 SQL Database
-   ```bash
-   # 將 Cosmos DB 模組加入 infra/main.bicep
-   # 在 app.py 中更新資料庫連線
-   ```
-
-2. <strong>新增驗證</strong> - 實作 Microsoft Entra ID 或 API 金鑰
-   ```python
-   # 在 app.py 中加入驗證中介軟體
-   from functools import wraps
-   ```
-
-3. **建立 CI/CD** - GitHub Actions 工作流程
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **加入受管理身分識別（Managed Identity）** - 保障對 Azure 服務的存取
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### 相關範例
-
-- **[資料庫應用程式](../../../../../examples/database-app)** - 含 SQL 資料庫的完整範例
-- **[微服務](../../../../../examples/container-app/microservices)** - 多服務架構
-- **[Container Apps 主指南](../README.md)** - 所有容器範式
-
-### 學習資源
-
-- 📚 [AZD 初學者課程](../../../README.md) - 課程主頁
-- 📚 [Container Apps Patterns](../README.md) - 更多部署範例
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - 社群範本
-
-## 其他資源
-
-### 文件
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask 框架指南
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - 官方 Azure 文件
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd 指令參考
-
-### 教學
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - 部署您的第一個應用程式
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python 開發指南
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - 基礎架構即程式碼
-
-### 工具
-- **[Azure Portal](https://portal.azure.com)** - 以視覺化方式管理資源
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - 整合至 IDE
-
----
-
-**🎉 恭喜！** 你已將一個可用於生產的 Flask API 部署到 Azure Container Apps，並具備自動縮放與監控功能。
-
-**有問題嗎？** [開啟 Issue](https://github.com/microsoft/AZD-for-beginners/issues) 或查看 [常見問題 (FAQ)](../../../resources/faq.md)
+[下一節：資料庫應用程式](../../../../../examples/database-app) · [微服務](../../../../../examples/container-app/microservices) ·
+[容器概覽](../README.md) · [課程首頁](../../../README.md) ·
+[回報問題](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

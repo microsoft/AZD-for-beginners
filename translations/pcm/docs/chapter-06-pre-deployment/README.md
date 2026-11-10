@@ -1,23 +1,23 @@
 # Chapter 6: Pre-Deployment Planning & Validation
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1 hour | **⭐ Complexity**: Intermediate
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 2-4 hours reading; additional time for adapted labs | **⭐ Complexity**: Intermediate–Advanced
 
 ---
 
 ## Overview
 
-Dis chapter dey cover di important steps for planning and validation wey you gats do before you deploy your application. Learn how to avoid expensive mistakes with correct capacity planning, SKU selection, and preflight checks.
+Dis chapter dey cover di important planning an validation steps wey you for do before you deploy your application. Learn how to sidon avoid costly mistakes wit proper capacity planning, SKU selection, an preflight checks.
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command guidance wey dem review against di released `azd 1.37.2` reference. Dem no run cloud deployments. Di longer lessons get example fragments, no be complete local deployment projects.
 
 ## Learning Objectives
 
-By finishing dis chapter, you go:
+If you finish dis chapter, you go fit:
 - Run preflight checks before deployment
-- Plan capacity and guess how much resource go need
-- Choose correct SKUs to save money
-- Set up Application Insights to monitor things well
-- Understand how team go coordinate work
+- Plan capacity and estimate resource requirements
+- Select appropriate SKUs for cost optimization
+- Configure Application Insights for monitoring
+- Understand multi-agent coordination patterns and their deployment requirements
 
 ---
 
@@ -25,27 +25,27 @@ By finishing dis chapter, you go:
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Check configuration before deployment | 15 min |
-| 2 | [Capacity Planning](capacity-planning.md) | Guess how much resource you go need | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Pick correct price tiers | 15 min |
-| 4 | [Application Insights](application-insights.md) | Set up monitoring | 20 min |
-| 5 | [Coordination Patterns](coordination-patterns.md) | Team deployment workflows | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Validate configuration before deployment | 15 min |
+| 2 | [Capacity Planning](capacity-planning.md) | Estimate resource requirements | 20 min |
+| 3 | [SKU Selection](sku-selection.md) | Choose appropriate pricing tiers | 15 min |
+| 4 | [Application Insights](application-insights.md) | Configure monitoring | 20 min |
+| 5 | [Coordination Patterns](coordination-patterns.md) | Advanced multi-agent orchestration design | 60-75 min |
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Check di subscription quota dem
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Preview di deployment (no resources go create)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Validate Bicep sintax
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Check environment konfiguration
+# Check environment configuration
 azd env get-values
 ```
 
@@ -55,18 +55,18 @@ azd env get-values
 
 ### Before `azd provision`
 
-- [ ] Quota check for region
-- [ ] SKUs pick correct
-- [ ] Money estimate review
-- [ ] Naming style consistent
-- [ ] Security/RBAC set up
+- [ ] Quota verified for region
+- [ ] SKUs selected appropriately
+- [ ] Cost estimate reviewed
+- [ ] Naming convention consistent
+- [ ] Security/RBAC configured
 
 ### Before `azd deploy`
 
 - [ ] Environment variables set
-- [ ] Secrets for Key Vault
-- [ ] Connection strings check
-- [ ] Health checks set up
+- [ ] Secrets in Key Vault
+- [ ] Connection strings verified
+- [ ] Health checks configured
 
 ---
 
@@ -74,10 +74,10 @@ azd env get-values
 
 | Workload | Development | Production |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Consumption | Consumption or dedicated workload profile, based on measured load |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Azure OpenAI models | Supported pay-as-you-go deployment type | Pay-as-you-go or provisioned throughput; model/region dependent |
+| AI Search | Free/Basic within limits | Basic or Standard tier sized for index, replicas, and query load |
 
 ---
 

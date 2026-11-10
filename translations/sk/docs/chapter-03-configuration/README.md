@@ -1,22 +1,22 @@
 # Kapitola 3: Konfigurácia a autentifikácia
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 45-60 minút | **⭐ Zložitosť**: Stredne pokročilý
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 90-150 minút vrátane praktickej integrácie | **⭐ Zložitosť**: Stredne pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola pokrýva konfiguráciu prostredia, vzory autentifikácie a najlepšie postupy zabezpečenia pre nasadenia Azure Developer CLI.
+Táto kapitola pokrýva konfiguráciu prostredia, vzory autentifikácie a najlepšie bezpečnostné praktiky pre nasadzovanie Azure Developer CLI.
 
-> Overené na `azd 1.27.1` v júli 2026.
+> Cieľ kontroly príkazov a konfigurácie: `azd 1.37.2` (november 2026). Počas kontroly nebolo spustené živé provisioning v Azure.
 
 ## Ciele učenia
 
 Po dokončení tejto kapitoly budete:
 - Ovládať hierarchiu konfigurácie AZD
-- Spravovať viaceré prostredia (dev, staging, prod)
-- Implementovať bezpečnú autentifikáciu s riadenými identitami
-- Konfigurovať nastavenia špecifické pre prostredie
+- Spravovať viacero prostredí (vývoj, staging, produkcia)
+- Implementovať bezpečnú autentifikáciu pomocou spravovaných identít
+- Nakonfigurovať nastavenia špecifické pre prostredie
 
 ---
 
@@ -25,58 +25,58 @@ Po dokončení tejto kapitoly budete:
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
 | 1 | [Sprievodca konfiguráciou](configuration.md) | Nastavenie a správa prostredia | 30 min |
-| 2 | [Autentifikácia a zabezpečenie](authsecurity.md) | Vzory riadenej identity a RBAC | 30 min |
+| 2 | [Autentifikácia a bezpečnosť](authsecurity.md) | Vzory spravovanej identity a RBAC | 30 min |
 
 ---
 
 ## 🚀 Rýchly štart
 
+Spustite z koreňa **už inicializovanej aplikácie azd**, nie z repozitára kurzu. Použite nepoužité názvy prostredí, ak už existujú.
+
 ```bash
-# Vytvoriť viacero prostredí
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Prepnúť prostredia
+# Switch environments
 azd env select prod
 
-# Nastaviť premenné prostredia
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Zobraziť konfiguráciu
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` je ilustratívny: ovplyvňuje infraštruktúru iba v prípade, že ho váš šablóna explicitne využíva. Bežné hodnoty `azd env set` sa ukladajú lokálne v čitateľnej forme; nie sú to bezpečné úložiská tajomstiev.
 
 ---
 
 ## 🔧 Hierarchia konfigurácie
 
-AZD uplatňuje nastavenia v tomto poradí (neskoršie prepíše skoršie):
-
-1. **Predvolené hodnoty** (zabudované v šablónach)
-2. **azure.yaml** (konfigurácia projektu)
-3. **Premenné prostredia** (`azd env set`)
-4. **Príkazové prepínače** (`--location eastus`)
+Udržujte tri rôzne konfiguračné plochy oddelené: globálne preferencie (`azd config`), štruktúru projektu (`azure.yaml`) a hodnoty pre jednotlivé prostredia (`azd env`). Vlajky prepíšu len tie nastavenia, ktoré naozaj podporujú; neexistuje univerzálne prekrytie ľubovoľných premenných prostredia nad `azure.yaml` alebo Bicep.
 
 ---
 
-## 🔐 Najlepšie bezpečnostné postupy
+## 🔐 Najlepšie bezpečnostné praktiky
 
 ```bash
-# Použite spravovanú identitu (odporúčané)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Skontrolujte stav autentifikácie AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Voliteľné: overte kontext Azure CLI, ak plánujete spustiť príkazy az
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Znova sa autentifikujte, ak je to potrebné
+# Re-authenticate if needed
 azd auth login
 
-# Voliteľné: obnovte autentifikáciu Azure CLI pre príkazy az
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -87,13 +87,13 @@ az login
 | Smer | Kapitola |
 |-----------|---------|
 | **Predchádzajúca** | [Kapitola 2: Vývoj AI](../chapter-02-ai-development/README.md) |
-| **Nasledujúca** | [Kapitola 4: Infrastruktúra](../chapter-04-infrastructure/README.md) |
+| **Nasledujúca** | [Kapitola 4: Infraštruktúra](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 Súvisiace zdroje
 
-- [Prednasadzovacie kontroly](../chapter-06-pre-deployment/README.md)
+- [Kontroly pred nasadením](../chapter-06-pre-deployment/README.md)
 - [Riešenie problémov](../chapter-07-troubleshooting/common-issues.md)
 
 ---

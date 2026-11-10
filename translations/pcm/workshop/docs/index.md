@@ -1,51 +1,51 @@
 # AZD for AI Developers Workshop
 
-> Validated against `azd 1.27.1` in July 2026.
+> Source guidance reviewed against AZD 1.37.2 on November 4, 2026. Screenshots dey show example; service availability, portal labels, and template defaults fit change.
 
 > [!IMPORTANT]  
-> **Dis workshop get workshop guide wey you fit preview for your local browser. To start, open di repo for GitHub Codespaces, dev container, or local clone wey get MkDocs—den wait till you see active VS Code terminal and type:**  
-> `mkdocs serve > /dev/null 2>&1 &`  
-> **You suppose see pop-up dialog to open di preview page for browser.**
+> **Dis workshop get workshop guide wey you fit preview for your local browser. To start, open di repo for GitHub Codespaces, dev container, or local clone wit MkDocs install—den wait make you see active VS Code terminal and type:**  
+> From di course repo root, install `requirements-dev.txt`, den run `python -m mkdocs serve --config-file workshop/mkdocs.yml` for foreground.
+> **You go see pop-up dialog to open preview page for browser.**
 
-Welcome to di hands-on workshop for learning Azure Developer CLI (AZD) with focus on AI application deployment. Dis workshop go help you sabi AZD templates well well for 3 steps:
+Welcome to di hands-on workshop to learn Azure Developer CLI (AZD) focused on AI application deployment. Dis workshop go help you sabi how to use AZD templates for 3 steps:
 
-1. **Discovery** - find di template wey correct for you.
+1. **Discovery** - find di template wey good for you.
 1. **Deployment** - deploy am and confirm say e dey work
-1. **Customization** - change am and improve to make am your own!
+1. **Customization** - change am and improve am till e be your own!
 
-Throughout dis workshop, dem go show you main developer tools and workflows to help make your end-to-end development journey easy.
+For dis workshop time, you go also learn core developer tools and workflows wey go make your end-to-end development journey smoother.
 
 | | | 
 |:---|:---|
-| **📚 Course Home**| [AZD For Beginners](../README.md)|
+| **📚 Course Home**| [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md)|
 | **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
 | **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Take The Challenge](#workshop-challenge) |
+|**🚀 Next Steps** | [Take The Challenge](instructions/7-Wrap-up.md#4-workshop-challenge) |
 | | |
 
 ## Workshop Overview
 
 **Duration:** 3-4 hours  
 **Level:** Beginner to Intermediate  
-**Prerequisites:** Make sure say you sabi Azure, AI concepts, VS Code & command-line tools.
+**Prerequisites:** Make you sabi Azure, AI concepts, VS Code & command-line tools.
 
-Dis na hands-on workshop wey you learn by doing. After you don finish di exercises, we recommend say make you check di AZD For Beginners curriculum to continue your learning journey into Security and Productivity best practices.
+This na hands-on workshop wey you go learn by doing. After you finish di exercises, we recommend say you make review AZD For Beginners curriculum to continue your learning journey inside Security and Productivity best practices.
 
 | Time| Module  | Objective |
 |:---|:---|:---|
 | 15 mins | Introduction | Set di stage, understand di goals |
-| 30 mins | Select AI Template | Look options and choose starter | 
-| 30 mins | Validate AI Template | Deploy di default solution to Azure |
-| 30 mins | Deconstruct AI Template | Look di structure and configuration |
-| 30 mins | Configure AI Template | Activate and try available features |
-| 30 mins | Customize AI Template | Change di template to your needs |
-| 30 mins | Teardown Infrastructure | Clear and release resources |
+| 30 mins | Select AI Template | Check options and pick starter | 
+| 30 mins | Validate AI Template | Deploy default solution for Azure |
+| 30 mins | Deconstruct AI Template | Explore structure and configuration |
+| 30 mins | Configure AI Template | Activate and try di available features |
+| 30 mins | Customize AI Template | Change di template to fit your needs |
+| 30 mins | Teardown Infrastructure | Clean up and release resources |
 | 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
 | | |
 
 ## Wetin You Go Learn
 
-Think of di AZD Template as learning sandbox to explore different capabilities and tools for end-to-end development on Microsoft Foundry. By end of dis workshop, you go get correct understanding of di tools and concepts for this context.
+Think of di AZD Template as learning sandbox to explore different capabilities and tools for end-to-end development on Microsoft Foundry. By end of dis workshop, you suppose get intuitive understanding of different tools and concepts for dis kind context.
 
 | Concept  | Objective |
 |:---|:---|
@@ -54,7 +54,7 @@ Think of di AZD Template as learning sandbox to explore different capabilities a
 | **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
 | **Azure AI Search**| Enable context engineering with agents |
 | **Observability**| Explore tracing, monitoring and evaluations |
-| **Red Teaming**| Explore adversarial testing and mitigations |
+| **Red Teaming**| Explore adversarial testing and ways to stop am |
 | | |
 
 ## Workshop Modules
@@ -69,7 +69,7 @@ Ready to start? Navigate through di workshop modules:
 - [Module 6: Teardown Infrastructure](instructions/6-Teardown-Infrastructure.md)
 - [Module 7: Wrap-up & Next Steps](instructions/7-Wrap-up.md)
 
-## You get feedback?
+## Get feedback?
 
 Post issue for dis repo (tag am `Workshop`) or join us for [Discord](https://aka.ms/foundry/discord) and post for our `#get-help` channel
 

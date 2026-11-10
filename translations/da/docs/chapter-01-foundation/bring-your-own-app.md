@@ -1,46 +1,46 @@
-# Bring Your Own App - Tilføj azd til et eksisterende projekt
+# Medbring Din Egen App - Tilføj azd til Et Eksisterende Projekt
 
-**Kapitelnavigation:**
-- **📚 Kursus Hjem**: [AZD for begyndere](../../README.md)
-- **📖 Nuværende kapitel**: Kapitel 1 - Fundament & Hurtig start
-- **⬅️ Forrige**: [Dit første projekt](first-project.md)
+**Kapitel Navigation:**
+- **📚 Kursus Hjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 1 - Fundament & Hurtig Start
+- **⬅️ Forrige**: [Dit Første Projekt](first-project.md)
 - **➡️ Næste**: [Dev Containere & Codespaces](dev-containers.md)
 
-> Valideret mod `azd 1.27.1` i juli 2026.
+> Mål for kommando- og konfigurationsgennemgang: `azd 1.37.2` (november 2026). Genererede filer afhænger af den opdagede applikation; Azure-udrulning blev ikke udført i denne gennemgang.
 
 ## Introduktion
 
-I [Dit første projekt](first-project.md) implementerede du en app ved at starte ud fra en skabelon. Men de fleste gange har du allerede *en app*—en Node.js API, en Python Flask service, en .NET web-app—liggende i en mappe på din maskine. Denne lektion viser, hvordan du tilføjer azd til den eksisterende kode, så du kan deploye den med `azd up`, uden brug af en skabelon.
+I [Dit Første Projekt](first-project.md) deployerede du en app ved at starte fra en skabelon. Men det meste af tiden har du allerede *en* app—en Node.js API, en Python Flask-service, en .NET webapp—liggende i en mappe på din maskine. Denne lektion viser, hvordan du tilføjer azd til den eksisterende kode, så du kan deploye den med `azd up`, uden skabelon.
 
 ## Læringsmål
 
-Når du har gennemført denne lektion, vil du:
+Ved slutningen af denne lektion vil du:
 - Forstå de tre måder at starte et azd-projekt på
-- Køre `azd init` inde i et eksisterende kodearkiv
+- Køre `azd init` inde i en eksisterende kodebase
 - Forstå hvad `azure.yaml` og mappen `infra/` gør for din app
 - Vide, hvornår du skal lade azd generere infrastruktur versus skrive din egen
 - Deploye din eksisterende app til Azure med `azd up`
 
-## Læringsudbytte
+## Læringsresultater
 
 Efter at have gennemført denne lektion vil du kunne:
 - Initialisere azd i et projekt, du allerede har
-- Læse og redigere en basal `azure.yaml` fil
+- Læse og redigere en grundlæggende `azure.yaml` fil
 - Generere startinfrastruktur med `azd infra generate`
-- Vælge et passende Azure-host for din app
+- Vælge en passende Azure-vært til din app
 - Deploye og rydde op i din egen applikation
 
 ---
 
 ## Tre måder at starte et azd-projekt på
 
-| Startpunkt | Kommando | Hvornår det skal bruges |
-|----------------|---------|-----------------------|
-| **Fra en skabelon** | `azd init --template <name>` | Læring eller starte en ny app fra et gennemprøvet eksempel |
-| **Fra din eksisterende kode** | `azd init` (i din projektmappe) | Du har allerede en app og ønsker at deploye den |
+| Startpunkt | Kommando | Hvornår man bruger |
+|----------------|---------|-------------|
+| **Fra en skabelon** | `azd init --template <name> .` (tom mappe) | Læring eller starte en ny app fra et bevist eksempel |
+| **Fra din eksisterende kode** | `azd init` (i din projektmappe) | Du har allerede en app og vil deploye den |
 | **Fra et Git-repo** | `azd init --from-code` (i et klonet repo) | Tage azd i brug for et eksisterende repository |
 
-Du har allerede øvet dig på den første mulighed. Denne lektion dækker den anden—det mest almindelige scenarie i praksis.
+Du har allerede prøvet den første mulighed. Denne lektion dækker den anden—det mest almindelige virkelige scenarie.
 
 ---
 
@@ -53,7 +53,7 @@ cd my-existing-app
 azd init
 ```
 
-azd vil spørge, hvordan du ønsker at initialisere. Vælg:
+azd vil spørge, hvordan du vil initialisere. Vælg:
 
 ```
 ? How do you want to initialize your app?
@@ -61,31 +61,30 @@ azd vil spørge, hvordan du ønsker at initialisere. Vælg:
   Select a template
 ```
 
-Vælg **"Brug kode i det aktuelle bibliotek."** azd scanner så din mappe, detekterer dit sprog og framework, og foreslår en hosting.
+Vælg **"Use code in the current directory."** azd scanner derefter din mappe, registrerer dit sprog og framework og foreslår en vært.
 
-### Hvad azd opdager
+### Hvad azd registrerer
 
-azd leder efter signaler som `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` eller en `Dockerfile` og foreslår en tilsvarende Azure-host:
+azd leder efter applikationssignaler som `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` eller en `Dockerfile`. ”From-code”-flowet er ikke en generel vært-udvælgelsesguide for alle understøttede deploymål:
 
-| Din app | Sandsynligt opdaget host |
-|----------|-----------------------|
-| Node.js / Python / .NET web app | Azure App Service eller Container Apps |
+| Din app | Sandsynligt registreret vært |
+|----------|----------------------|
+| Understøttet Node.js / Python / .NET webapp | Typisk Azure Container Apps; undersøg den genererede definition |
 | Containeriseret app (`Dockerfile`) | Azure Container Apps |
-| Funktionsapp | Azure Functions |
-| Statisk site (React/Vue build output) | Azure Static Web Apps |
+| Function app eller Static Web Apps projekt | Brug en matchende skabelon eller skriv selv `azure.yaml` og infrastruktur, hvis from-code ikke understøtter dit layout |
 
-Bekræft de opdagede service(r), og azd opretter de nødvendige filer for dig.
+Bekræft de registrerede tjenester, og azd genererer de nødvendige filer.
 
 ---
 
 ## Trin 2: Forstå, hvad azd har oprettet
 
-Efter init har du to nye ting i dit projekt:
+Efter init skal du inspicere `azure.yaml`. Det genererede-infrastruktur flow kan holde infrastrukturen implicit, indtil du kører `azd infra generate`; antag ikke at `infra/` allerede findes:
 
 ```
 my-existing-app/
 ├── azure.yaml          # ← NEW: tells azd what to deploy and where
-├── infra/              # ← NEW: Infrastructure as Code (Bicep by default)
+├── infra/              # Materialized with azd infra generate when using implicit infrastructure
 │   ├── main.bicep
 │   └── main.parameters.json
 ├── src/ (your code)    # unchanged
@@ -94,7 +93,7 @@ my-existing-app/
 
 ### `azure.yaml` — projektdefinitionen
 
-Dette er hjertet i et azd-projekt. En minimal fil ser sådan ud:
+Dette er kernen i et azd-projekt. Følgende **illustrative App Service-definition** kræver matchende App Service-infrastruktur; det er ikke en grund til at ændre en genereret Container Apps-vært uden at ændre infrastrukturen:
 
 ```yaml
 # azure.yaml
@@ -106,70 +105,72 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-Blokken `services` er den vigtigste del: hver post kortlægger en mappe med din kode til en Azure-host. Hvis din app både har frontend og API, vil du have to services.
+Blokken `services` er den vigtigste del: hver post kortlægger en mappe af din kode til en Azure-vært. Hvis din app har både en frontend og en API, vil du have to services.
 
 ### `infra/` — dine Azure-ressourcer som kode
 
-Mappen `infra/` indeholder Bicep-filer, der definerer Azure-ressourcerne, din app har brug for (App Service, databasen osv.). Du behøver ikke skrive dem manuelt—azd genererer et fungerende udgangspunkt. Du *kan* redigere dem senere for at tilføje ressourcer eller øge sikkerheden (behandles i [Kapitel 4](../chapter-04-infrastructure/README.md)).
+Mappen `infra/` indeholder Bicep-filer, der definerer de Azure-ressourcer, din app har brug for (App Service, databasen osv.). Du behøver ikke skrive dem manuelt—azd genererer et fungerende udgangspunkt. Du *kan* redigere dem senere for at tilføje ressourcer eller stramme sikkerheden (omtalt i [Kapitel 4](../chapter-04-infrastructure/README.md)).
 
-> **Tip:** Vil du se eller tilpasse den genererede infrastruktur før deployment? Kør `azd infra generate` (tilgængelig som `azd infra synth`) for at skrive IaC til disk, så du kan gennemgå og versionere det.
+> **Tip:** Vil du se eller tilpasse den genererede infrastruktur før udrulning? Kør `azd infra generate` (også tilgængelig som `azd infra synth`) for at skrive IaC til disk, så du kan gennemgå og version-styre det.
 
 ---
 
-## Trin 3: Sæt nødvendig konfiguration
+## Trin 3: Indstil nødvendige konfigurationer
 
-Hvis din app har brug for indstillinger eller hemmeligheder (en connection string, en API-nøgle), hårdkod dem ikke. Brug miljøværdier:
+Hvis din app har brug for indstillinger eller hemmeligheder (en forbindelsesstreng, en API-nøgle), skal du ikke hardkode dem. Brug miljøværdier:
 
 ```bash
-# Opret et miljø
+# Create an environment
 azd env new dev
 
-# Indstil en ikke-hemmelig værdi
+# Set a non-secret value
 azd env set API_VERSION 1.0.0
 ```
 
-For ægte hemmeligheder, gem dem i Key Vault og referer til dem fra din infrastruktur—se [Kapitel 3: Konfiguration & godkendelse](../chapter-03-configuration/authsecurity.md).
+Dette gemmer kun en lokal værdi. For at påvirke appen, skal du eksplicit bruge den i infrastrukturparametre, en understøttet serviceindstilling eller en hook; indstilling af en vilkårlig variabel konfigurerer ikke den udrullede runtime.
+
+For ægte hemmeligheder, gem dem i Key Vault og referer til dem fra din infrastruktur—se [Kapitel 3: Konfiguration & Autentificering](../chapter-03-configuration/authsecurity.md).
 
 ---
 
-## Trin 4: Deploy
+## Trin 4: Udrul
 
 Brug nu den samme arbejdsgang, som du allerede kender:
 
 ```bash
-# Godkend (påkrævet for azd)
+# Authenticate (required for azd)
 azd auth login
 
-# Forhåndsvis de ressourcer, der vil blive oprettet
+# Preview the resources that will be created
 azd provision --preview
 
-# Tilvejebring infrastruktur og implementer din kode
+# Provision infrastructure and deploy your code
 azd up
 ```
 
-Når det er færdigt, udskriver azd URL'en til din app. Bekræft den på samme måde som enhver azd-app:
+Når det er færdigt, viser azd din apps URL. Bekræft den på samme måde som enhver azd-app:
 
 ```bash
-azd show           # vis endepunkter
-azd monitor --logs # tjek logs hvis nødvendigt
+azd show           # show endpoints
+azd monitor --logs # check logs if needed
 ```
 
 ---
 
-## Almindelige fejl ved første gang
+## Almindelige problemer første gang
 
 | Symptom | Sandsynlig årsag | Løsning |
 |---------|-----------------|---------|
-| azd opdagede ikke min app | Manglende manifest (fx `package.json`) | Tilføj manifestet, eller vælg host manuelt under `azd init` |
-| Build fejler under `azd up` | App kræver et build-step | Tilføj `buildCommand`/`outputPath` under servicen i `azure.yaml` |
-| App starter men returnerer fejl | Manglende konfiguration/hemmelighed | Sæt værdier med `azd env set` eller tilslut Key Vault |
-| Forkert host valgt | Auto-detektion gættede forkert | Rediger `host:` i `azure.yaml` og kør `azd up` igen |
+| azd opdagede ikke min app | Manglende manifest (f.eks. `package.json`) | Tilføj manifestet, eller vælg manuelt host under `azd init` |
+| Build fejler under `azd up` | Appen kræver et build-trin | Konfigurer pakkesk scripts eller service `prepackage` hook; brug `dist` til udrulningsoutput, ikke `buildCommand`/`outputPath` |
+| App starter men returnerer fejl | Manglende konfig/hemmelighed | Tilkobling af værdier i runtime app-indstillinger eller en Key Vault-reference; `azd env set` alene er ikke nok |
+| Forkert host valgt | Automatisk registrering matcher ikke dine behov | Skift både `host:` og den tilsvarende infrastruktur, eller vælg en matchende skabelon |
 
 For mere, se [Kapitel 7: Fejlfinding](../chapter-07-troubleshooting/README.md).
 
 ---
 
-## Ryd Op
+## Ryd op
 
 ```bash
 azd down --force --purge
@@ -179,26 +180,26 @@ azd down --force --purge
 
 ## Resumé
 
-- `azd init` → **"Brug kode i det aktuelle bibliotek"** tilføjer azd til en app, du allerede har.
-- `azure.yaml` kortlægger dine kodemapper til Azure-hosts; `infra/` definerer ressourcer som Bicep.
+- `azd init` → **"Brug kode i den aktuelle mappe"** tilføjer azd til en app, du allerede har.
+- `azure.yaml` kobler dine kodemapper til Azure-værter; `infra/` definerer ressourcerne som Bicep.
 - `azd infra generate` lader dig gennemgå eller tilpasse den genererede infrastruktur.
-- Når den er initialiseret, bruger din eksisterende app den samme `azd up` / `azd down` arbejdsgang som en skabelonbaseret app.
+- Når den er initialiseret, bruger din eksisterende app den helt samme `azd up` / `azd down` arbejdsgang som en skabelonbaseret app.
 
 ---
 
 ## 🔗 Navigation
 
 | Retning | Lektion |
-|----------|---------|
+|-----------|--------|
 | **Forrige** | [Dit første projekt](first-project.md) |
-| **Næste** | [Dev Containere & Codespaces](dev-containers.md) |
+| **Næste** | [Dev Containers & Codespaces](dev-containers.md) |
 
 ## 📖 Relaterede ressourcer
 
 - [AZD Grundlæggende](azd-basics.md)
 - [Kapitel 4: Infrastruktur som kode](../chapter-04-infrastructure/README.md)
 - [Konfiguration & godkendelse](../chapter-03-configuration/authsecurity.md)
-- [Kommando Quickreference](../../resources/cheat-sheet.md)
+- [Kommando oversigt](../../resources/cheat-sheet.md)
 
 ---
 

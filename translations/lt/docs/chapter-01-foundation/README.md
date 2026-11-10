@@ -1,40 +1,40 @@
-# 1 skyrius: Pagrindai ir Greitas pradėjimas
+# 1 skyrius: Pagrindai ir Greitas Pradžia
 
-**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 30-45 minutės | **⭐ Sudėtingumas**: Pradedantysis
+**📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 75–120 minučių, įskaitant pirmąjį diegimą; papildomos užduotys gali užtrukti ilgiau | **⭐ Sudėtingumas**: Pradedančiųjų
 
 ---
 
 ## Apžvalga
 
-Šiame skyriuje pristatomi Azure Developer CLI (azd) pagrindai. Išmoksite pagrindines sąvokas, įdiegsite įrankius ir paskelbsite savo pirmąją programą Azure.
+Šiame skyriuje bus pristatyti Azure Developer CLI (azd) pagrindai. Išmoksite pagrindines sąvokas, įdiegsite įrankius ir diegsite pirmąją programą Azure platformoje.
 
-> Patikrinta su `azd 1.27.1` 2026 metų liepos mėn.
+> Komandų ir konfigūracijos peržiūros tikslas: `azd 1.37.2` (2026 m. lapkritis). Gyvas Azure teikimas peržiūros metu nebuvo vykdomas.
 
 ## Mokymosi tikslai
 
 Baigę šį skyrių, jūs:
 - Suprasite, kas yra Azure Developer CLI ir kuo jis skiriasi nuo Azure CLI
-- Įdiegs ir sukonfigūruos AZD savo platformoje
-- Paskelbs savo pirmąją programą Azure naudodami `azd up`
-- Išvalys resursus naudodami `azd down`
+- Įdiegs ir sukonfigūruos AZD jūsų platformoje
+- Išleisite pirmąją programą į Azure su `azd up`
+- Pašalinsite resursus su `azd down`
 
 ---
 
 ## 📚 Pamokos
 
-| # | Pamoka | Aprašymas | Laikas |
+| # | Pamoka | Aprašymas | Trukmė |
 |---|--------|-------------|------|
-| 1 | [AZD pagrindai](azd-basics.md) | Pagrindinės sąvokos, terminologija ir projekto struktūra | 15 min |
-| 2 | [Diegimas ir sąranka](installation.md) | Platformos specifinės diegimo instrukcijos | 10 min |
-| 3 | [Jūsų pirmasis projektas](first-project.md) | Praktinė dalis: internetinės programos paskelbimas Azure | 20 min |
-| 4 | [Pridėkite savo programą](bring-your-own-app.md) | Pridėti azd prie jau turimo projekto | 15 min |
-| 5 | [Kūrimo konteineriai ir Codespaces](dev-containers.md) | Reprodukcinės azd aplinkos su kūrimo konteineriais | 15 min |
+| 1 | [AZD Pagrindai](azd-basics.md) | Pagrindinės sąvokos, terminologija ir projekto struktūra | 15 min |
+| 2 | [Įdiegimas ir Paruošimas](installation.md) | Platformos specifinės įdiegimo instrukcijos | 10 min |
+| 3 | [Jūsų Pirmasis Projektas](first-project.md) | Praktinė užduotis: išleiskite interneto programą į Azure | 20 min |
+| 4 | [Pridėkite Savo Programą](bring-your-own-app.md) | Pridėkite azd prie jau turimo projekto | 15 min |
+| 5 | [Kūrimo Konteineriai ir Codespaces](dev-containers.md) | Atkuriamos azd aplinkos su kūrimo konteineriais | 15 min |
 
 ---
 
-## ✅ Pradėkite čia: patikrinkite savo sąranką
+## ✅ Pradėkite čia: Patikrinkite savo aplinką
 
-Prieš pradėdami, įsitikinkite, kad jūsų vietinis kompiuteris paruoštas 1 skyriaus šablonui:
+Prieš pradėdami, įsitikinkite, kad jūsų vietinis kompiuteris yra paruoštas 1 skyriui:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Prieš pradėdami, įsitikinkite, kad jūsų vietinis kompiuteris paruoštas 1 s
 bash ./validate-setup.sh
 ```
 
-Jei scenarijus praneša apie trūkstamus įrankius, pirmiausia juos įdiekite, tada tęskite skyrių.
+Jei scenarijus nurodo trūkstamus įrankius, pirmiausia juos įdiekite, tada tęskite skyrių.
 
 ---
 
-## 🚀 Greitas pradėjimas
+## 🚀 Greitas Pradžia
 
 ```bash
-# Patikrinti diegimą
+# Check installation
 azd version
 
-# Autentifikuotis AZD
-# Pasirinktinai: az login, jei ketinate tiesiogiai vykdyti Azure CLI komandas
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Diegti pirmą programėlę
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Sutvarkyti po darbo
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,14 +74,14 @@ azd down --force --purge
 
 ## ✅ Sėkmės kriterijai
 
-Baigę šį skyrių, turėtumėte sugebėti:
+Baigę šį skyrių, turėsite gebėti:
 
 ```bash
-azd version              # Rodo įdiegtą versiją
-azd init --template todo-nodejs-mongo  # Inicializuoja projektą
-azd up                   # Diegia į Azure
-azd show                 # Rodo veikiančios programos URL
-azd down --force --purge # Išvalo resursus
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -88,16 +90,16 @@ azd down --force --purge # Išvalo resursus
 
 | Kryptis | Skyrius |
 |-----------|---------|
-| **Toliau** | [2 skyrius: DI pirmasis vystymas](../chapter-02-ai-development/README.md) |
-| **Praleisti į** | [3 skyrius: Konfigūracija](../chapter-03-configuration/README.md) |
+| **Kitas** | [2 skyrius: AI pirmoji plėtra](../chapter-02-ai-development/README.md) |
+| **Praleisti iki** | [3 skyrius: Konfigūracija](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Susiję ištekliai
 
-- [Komandų atmintinė](../../resources/cheat-sheet.md)
+- [Komandų kortelė](../../resources/cheat-sheet.md)
 - [DUK](../../resources/faq.md)
-- [Žodynėlis](../../resources/glossary.md)
+- [Terminų žodynas](../../resources/glossary.md)
 
 ---
 

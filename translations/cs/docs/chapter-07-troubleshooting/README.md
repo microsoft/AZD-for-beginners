@@ -1,22 +1,22 @@
 # Kapitola 7: Řešení problémů a ladění
 
-**📚 Kurz**: [AZD Pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 1-1,5 hodiny | **⭐ Složitost**: Středně pokročilý
+**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 1-1,5 hodiny | **⭐ Složitost**: Středně pokročilý
 
 ---
 
 ## Přehled
 
-Tato kapitola vám pomůže diagnostikovat a vyřešit běžné problémy při práci s Azure Developer CLI. Od neúspěšných nasazení až po problémy specifické pro AI.
+Tato kapitola vám pomůže diagnostikovat a vyřešit běžné problémy při práci s Azure Developer CLI. Od neúspěšných nasazení až po specifické problémy s AI.
 
-> Ověřeno s `azd 1.27.1` v červenci 2026.
+> Příkazy byly ověřeny podle vydané reference `azd 1.37.2`. Nasazení do cloudu nebyla provedena. Před použitím příkazů nahraďte příkladové názvy a ID zdrojů.
 
-## Výukové cíle
+## Vzdělávací cíle
 
 Po dokončení této kapitoly budete umět:
-- Diagnostikovat běžné chyby nasazení AZD
-- Ladit problémy s ověřováním a oprávněními
-- Řešit problémy s konektivitou služeb AI
-- Používat Azure Portal a CLI pro řešení problémů
+- Diagnostikovat běžné chyby nasazení v AZD
+- Ladit problémy s autentizací a oprávněními
+- Vyřešit problémy s konektivitou AI služeb
+- Používat Azure Portal a CLI k řešení problémů
 
 ---
 
@@ -25,25 +25,25 @@ Po dokončení této kapitoly budete umět:
 | # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
 | 1 | [Běžné problémy](common-issues.md) | Často se vyskytující problémy | 30 min |
-| 2 | [Průvodce laděním](debugging.md) | Postupy ladění krok za krokem | 45 min |
-| 3 | [Řešení problémů AI](ai-troubleshooting.md) | Problémy specifické pro AI | 30 min |
+| 2 | [Průvodce laděním](debugging.md) | Postupné ladící strategie | 45 min |
+| 3 | [Řešení problémů s AI](ai-troubleshooting.md) | Problémy specifické pro AI | 30 min |
 
 ---
 
 ## 🚨 Rychlé opravy
 
-### Problémy s ověřováním
+### Problémy s autentizací
 ```bash
-# Požadováno pro pracovní postupy AZD
+# Required for AZD workflows
 azd auth login
 
-# Volitelné, pokud také přímo používáte příkazy Azure CLI
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Selhání nasazení
+### Neúspěšné vytváření
 ```bash
 azd show
 azd monitor --logs
@@ -51,44 +51,49 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Konflikty zdrojů
+Nejprve zkontrolujte existující zdroj a chyby při nasazení. Neukládejte sdílené nebo produkční prostředí kvůli vyřešení konfliktu názvů. Pro **nové jednorázové prostředí** použijte unikátní název:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Překročený limit kvóty
+### Překročená kvóta
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Změna `AZURE_LOCATION` nepřesune existující zdroje a může způsobit konflikty umístění při opětovném nasazení.
 
 ---
 
-## 📋 Referenční seznam chybových kódů
+## 📋 Referenční kódy chyb
 
 | Chyba | Příčina | Řešení |
 |-------|-------|----------|
-| `AuthenticationError` | Nejsou přihlášeni | `azd auth login` |
+| `AuthenticationError` | Neprihlášen | `azd auth login` |
 | `ResourceNotFound` | Chybějící zdroj | Zkontrolujte názvy zdrojů |
-| `QuotaExceeded` | Omezení předplatného | Požádejte o navýšení kvóty |
+| `QuotaExceeded` | Limit předplatného | Požádejte o navýšení kvóty |
 | `InvalidTemplate` | Chyba syntaxe Bicep | `az bicep build` |
-| `Conflict` | Zdroj již existuje | Použijte nový název nebo vymažte existující |
-| `Forbidden` | Nedostatečná oprávnění | Zkontrolujte role RBAC |
+| `Conflict` | Zdroj již existuje | Použijte nový název nebo odstraňte |
+| `Forbidden` | Nedostatečná oprávnění | Zkontrolujte RBAC role |
 
 ---
 
-## 🔄 Resetování a zotavení
+## 🔄 Reset a obnovení
 
 ```bash
-# Měkký reset (ponechat zdroje, znovu nasadit kód)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Tvrdý reset (smazat vše, začít od začátku)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Tvrdý reset smaže data a může změnit koncové body. Nejprve si vytvořte zálohu a přečtěte si interaktivní výzvy při mazání. `--force --purge` je vhodné pouze pro jednorázová prostředí, kdy je zamýšleno nevratné odstranění.
 
 ---
 
@@ -96,16 +101,16 @@ azd up
 
 | Směr | Kapitola |
 |-----------|---------|
-| **Předchozí** | [Kapitola 6: Předsazení](../chapter-06-pre-deployment/README.md) |
+| **Předchozí** | [Kapitola 6: Před nasazením](../chapter-06-pre-deployment/README.md) |
 | **Další** | [Kapitola 8: Produkce](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Související zdroje
 
-- [Předsazení - kontroly](../chapter-06-pre-deployment/preflight-checks.md)
+- [Kontroly před nasazením](../chapter-06-pre-deployment/preflight-checks.md)
 - [Průvodce konfigurací](../chapter-03-configuration/configuration.md)
-- [AZD GitHub problémy](https://github.com/Azure/azure-dev/issues)
+- [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 
 ---
 

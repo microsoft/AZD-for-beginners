@@ -1,433 +1,227 @@
-# Απλό Flask API - Παράδειγμα Container App
+# Απλή Flask API — Azure Container Apps
 
-**Μονοπάτι Μάθησης:** Αρχάριος ⭐ | **Χρόνος:** 25-35 λεπτά | **Κόστος:** $0-15/μήνα
+**Επίπεδο:** Αρχάριος · **Χρόνος:** 30–45 λεπτά συμπεριλαμβανομένης της εγκατάστασης
 
-Μια πλήρης, λειτουργική Python Flask REST API αναπτυγμένη σε Azure Container Apps χρησιμοποιώντας το Azure Developer CLI (azd). Αυτό το παράδειγμα δείχνει την ανάπτυξη container, την αυτόματη κλιμάκωση και τα βασικά παρακολούθησης.
+Αναπτύξτε μια Python Flask CRUD API με το Azure Developer CLI (azd). Περιλαμβάνονται ο κώδικας, το Dockerfile,
+τα Bicep και οι παράμετροι ανάπτυξης. Πρόκειται για ένα **παράδειγμα μάθησης**, όχι
+μια API έτοιμη για παραγωγή.
 
-## 🎯 Τι θα μάθετε
+## Τι θα μάθετε
 
-- Αναπτύξτε μια εφαρμογή Python σε container στο Azure
-- Διαμορφώστε αυτόματη κλιμάκωση με scale-to-zero
-- Υλοποιήστε probes υγείας και ελέγχους ετοιμότητας
-- Παρακολουθήστε τα αρχεία καταγραφής και τις μετρήσεις της εφαρμογής
-- Χρησιμοποιήστε το Azure Developer CLI για γρήγορη ανάπτυξη
-
-## 📦 Τι περιλαμβάνεται
-
-✅ **Εφαρμογή Flask** - Πλήρες REST API με λειτουργίες CRUD (`src/app.py`)  
-✅ **Dockerfile** - Ρυθμίσεις container έτοιμες για παραγωγή  
-✅ **Bicep Infrastructure** - Περιβάλλον Container Apps και ανάπτυξη του API  
-✅ **Διαμόρφωση AZD** - Ρύθμιση ανάπτυξης με μία εντολή  
-✅ **Probes Υγείας** - Διαμορφωμένοι έλεγχοι liveness και readiness  
-✅ **Αυτόματη κλιμάκωση** - 0-10 αντίγραφα ανάλογα με το HTTP φορτίο  
-
-## Architecture
+- Δημιουργήστε και δημοσιεύστε ένα container μέσω azd.
+- Διαμορφώστε το ingress και τα liveness/readiness probes.
+- Επαληθεύστε τις απαντήσεις CRUD και εξετάστε τα αρχεία καταγραφής εφαρμογής.
+- Κατανοήστε γιατί τα δεδομένα στη μνήμη δεν είναι κατάλληλα για ανθεκτικές εφαρμογές.
 
 ```mermaid
-graph TD
-    subgraph ACA[Περιβάλλον Azure Container Apps]
-        Flask[Δοχείο Flask API<br/>Τερματικά υγείας<br/>Διεπαφή REST API<br/>Αυτόματη κλιμάκωση 0-10 αντιγράφων]
-        AppInsights[Insights εφαρμογής]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
+
+**Σημαντικό:** τα αντικείμενα διατηρούνται σε μία διαδικασία. Η προεπιλογή είναι **ένας worker Gunicorn,
+0–1 αντίγραφα**, αποφεύγοντας σκόπιμα ασυνεπή δεδομένα μεταξύ εργαζομένων/αντιγράφων.
+Τα αντικείμενα χάνονται σε επανεκκίνηση, αλλαγή έκδοσης ή κλιμάκωση σε μηδέν αντίγραφα. Η αύξηση των αντιγράφων
+απαιτεί κοινόχρηστο μόνιμο αποθηκευτικό χώρο. Η API δεν έχει αυθεντικοποίηση ή εξουσιοδότηση.
 
 ## Προαπαιτούμενα
 
-### Απαιτείται
-- **Azure Developer CLI (azd)** - [Οδηγός εγκατάστασης](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Συνδρομή Azure** - [Δωρεάν λογαριασμός](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Εγκατάσταση Docker](https://www.docker.com/products/docker-desktop/) (για τοπικές δοκιμές)
-
-### Επαλήθευση προαπαιτούμενων
+- [Τρέχον αξιόπιστο azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (δημοσιευμένη έκδοση κατά τον χρόνο αξιολόγησης: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) για τον έλεγχο.
+- Docker με το daemon να τρέχει· απαιτείται για τη δημιουργία τοπικής εικόνας από προεπιλογή.
+- Συνδρομή Azure, δικαιώματα δημιουργίας πόρων και περιφερειακό όριο Container Apps.
+- Bash για τις παρακάτω εντολές (ή ισοδύναμο PowerShell).
+- Python 3.11 για προαιρετική τοπική ανάπτυξη.
 
 ```bash
-# Έλεγχος έκδοσης azd (απαιτείται 1.5.0 ή νεότερη)
 azd version
-
-# Επαλήθευση σύνδεσης στο Azure
+az version
+docker info
 azd auth login
-
-# Έλεγχος Docker (προαιρετικό, για τοπικές δοκιμές)
-docker --version
+az login
 ```
 
-## ⏱️ Χρονοδιάγραμμα Ανάπτυξης
+Τα εργαλεία CLI έχουν ξεχωριστές συνεδρίες σύνδεσης. Χρησιμοποιήστε την ίδια συνδρομή και στα δύο.
 
-| Phase | Duration | What Happens |
-|-------|----------|--------------||
-| Ρύθμιση περιβάλλοντος | 30 δευτερόλεπτα | Δημιουργία περιβάλλοντος azd |
-| Κατασκευή container | 2-3 λεπτά | Εκτέλεση Docker build για την εφαρμογή Flask |
-| Προετοιμασία υποδομής | 3-5 λεπτά | Δημιουργία Container Apps, registry και υπηρεσιών παρακολούθησης |
-| Ανάπτυξη εφαρμογής | 2-3 λεπτά | Αποστολή εικόνας και ανάπτυξη σε Container Apps |
-| **Σύνολο** | **8-12 λεπτά** | Ολοκληρωμένη ανάπτυξη έτοιμη |
+## Γρήγορη εκκίνηση
 
-## Γρήγορη Εκκίνηση
+Από τη ρίζα του αποθετηρίου:
 
 ```bash
-# Μεταβείτε στο παράδειγμα
 cd examples/container-app/simple-flask-api
-
-# Αρχικοποιήστε το περιβάλλον (επιλέξτε μοναδικό όνομα)
-azd env new myflaskapi
-
-# Αναπτύξτε τα πάντα (υποδομή + εφαρμογή)
+azd env new flask-demo
 azd up
-# Θα σας ζητηθεί να:
-# 1. Επιλέξτε συνδρομή Azure
-# 2. Επιλέξτε τοποθεσία (π.χ., eastus2)
-# 3. Περιμένετε 8-12 λεπτά για την ανάπτυξη
-
-# Λάβετε το endpoint του API σας
-azd env get-values
-
-# Δοκιμάστε το API
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**Αναμενόμενο αποτέλεσμα:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ Επαλήθευση Ανάπτυξης
-
-### Βήμα 1: Έλεγχος κατάστασης ανάπτυξης
-
-```bash
-# Προβολή αναπτυγμένων υπηρεσιών
-azd show
-
-# Το αναμενόμενο αποτέλεσμα δείχνει:
-# - Υπηρεσία: api
-# - Σημείο τερματισμού: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Κατάσταση: Σε λειτουργία
-```
-
-### Βήμα 2: Δοκιμή τελικών σημείων API
-
-```bash
-# Λήψη του endpoint του API
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# Έλεγχος υγείας
-curl $API_URL/health
+Αναμένεται: HTTP 200 και JSON με `"status":"healthy"`,
+`"service":"simple-flask-api"`, και τρέχον χρονικό σήμα UTC.
+Η προμήθεια και η δημιουργία εικόνας συνήθως διαρκούν μερικά λεπτά· οι χρόνοι ποικίλλουν.
 
-# Δοκιμή του ριζικού endpoint
-curl $API_URL/
+Η αρχική προμήθεια χρησιμοποιεί μια δημόσια εικόνα hello-world που ακούει στην πόρτα 80.
+`azure.yaml` επιλέγει `infra/app/api.bicep` και το αντίστοιχο αρχείο παραμέτρων για
+ανάπτυξη υπηρεσίας, που αλλάζει την εικόνα, το ingress και τα probes στην πόρτα 8000.
+Μην διαγράψετε αυτές τις παραμέτρους ανάπτυξης.
 
-# Δημιουργία ενός αντικειμένου
-curl -X POST $API_URL/api/items \
+## Επαλήθευση CRUD
+
+Τρέξτε τα ακόλουθα διαδοχικά όσο παραμένει ενεργό το ίδιο αντίγραφο:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# Λήψη όλων των αντικειμένων
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**Κριτήρια επιτυχίας:**
-- ✅ Το endpoint υγείας (/health) επιστρέφει HTTP 200
-- ✅ Το κύριο endpoint εμφανίζει πληροφορίες του API
-- ✅ Το POST δημιουργεί στοιχείο και επιστρέφει HTTP 201
-- ✅ Το GET επιστρέφει τα δημιουργημένα στοιχεία
+Επιτυχία: POST 201, reads/PUT 200, DELETE 204 χωρίς σώμα, μετά απούσα εγγραφή 404.
+Λανθασμένο/μη αντικείμενο JSON ή κενό όνομα επιστρέφει 400.
+Αν ένα αντικείμενο εξαφανίζεται μεταξύ αιτημάτων, ελέγξτε για επανεκκίνηση ή κλιμάκωση σε μηδέν·
+αυτό είναι ένας σκόπιμος περιορισμός στη μνήμη, όχι συνεχή αποθήκευση.
 
-### Βήμα 3: Προβολή καταγραφών
+| Σημείο πρόσβασης | Μέθοδοι |
+|---|---|
+| `/` | GET — πληροφορίες υπηρεσίας |
+| `/health` | GET — liveness/readiness |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## Αρχεία καταγραφής και διαμόρφωση
 
 ```bash
-# Μεταδώστε ζωντανά αρχεία καταγραφής χρησιμοποιώντας azd monitor
-azd monitor --logs
-
-# Ή χρησιμοποιήστε το Azure CLI:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Θα πρέπει να δείτε:
-# - Μηνύματα εκκίνησης του Gunicorn
-# - Καταγραφές αιτημάτων HTTP
-# - Καταγραφές πληροφοριών εφαρμογής
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## Δομή έργου
+Αναμένεται: εκκίνηση Gunicorn, αιτήματα πρόσβασης στα αρχεία καταγραφής, και μηνύματα εφαρμογής.
+`azd monitor --logs` ανοίγει την προβολή portal· δεν ροή στο τερματικό.
+Το Application Insights έχει προμηθευτεί αλλά **δεν είναι ορισμένο από αυτόν τον κώδικα Flask**·
+χρησιμοποιήστε Container Apps/Log Analytics για stdout αρχεία καταγραφής.
 
+Επεξεργαστείτε `infra/app/api.bicep` για CPU/μνήμη, όρια αντιγράφων ή κανόνες κλιμάκωσης, και μετά
+τρέξτε `azd up`. Οι προεπιλογές είναι 0.5 vCPU, 1 GiB, ελάχιστο 0 / μέγιστο 1 αντίγραφο, και ένα
+όριο HTTP των 50 ταυτόχρονων αιτημάτων. Η κλιμάκωση σε μηδέν μπορεί να προσθέσει καθυστέρηση κρύας εκκίνησης.
+
+Τυχαίες `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL`, ή
+`SCALE_TO_ZERO_TIMEOUT` τιμές **δεν συνδέονται με αυτό το πρότυπο ή την εφαρμογή**.
+Η ορισμός μιας τιμής δεν την καθιστά αυτόματα μεταβλητή περιβάλλοντος χρόνου εκτέλεσης.
+Η εικόνα δένεται ρητά στην πόρτα 8000· ενημερώστε το Dockerfile, το ingress Bicep και τα probes
+μαζί εάν αλλάξετε την πόρτα.
+
+## Αρχεία
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## Τερματικά API
+## Τοπική ανάπτυξη
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | Έλεγχος υγείας |
-| `/api/items` | GET | Λίστα όλων των αντικειμένων |
-| `/api/items` | POST | Δημιουργία νέου αντικειμένου |
-| `/api/items/{id}` | GET | Λήψη συγκεκριμένου αντικειμένου |
-| `/api/items/{id}` | PUT | Ενημέρωση αντικειμένου |
-| `/api/items/{id}` | DELETE | Διαγραφή αντικειμένου |
-
-## Διαμόρφωση
-
-### Μεταβλητές περιβάλλοντος
+Από αυτόν τον φάκελο παραδείγματος:
 
 ```bash
-# Ορίστε προσαρμοσμένη διαμόρφωση
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### Ρυθμίσεις κλιμάκωσης
-
-Το API κλιμακώνεται αυτόματα με βάση την κίνηση HTTP:
-- **Ελάχιστα αντίγραφα**: 0 (κλιμακώνεται στο μηδέν όταν είναι αδρανές)
-- **Μέγιστα αντίγραφα**: 10
-- **Ταυτόχρονες αιτήσεις ανά αντίγραφο**: 50
-
-## Ανάπτυξη
-
-### Εκτέλεση τοπικά
+Σε άλλο τερματικό, δοκιμάστε `http://localhost:8000/health` και τα σημεία πρόσβασης CRUD.
+Ή κατασκευάστε και τρέξτε την πραγματική εικόνα:
 
 ```bash
-# Εγκαταστήστε τις εξαρτήσεις
-cd src
-pip install -r requirements.txt
-
-# Εκτελέστε την εφαρμογή
-python app.py
-
-# Δοκιμάστε το τοπικά
-curl http://localhost:8000/health
-```
-
-### Κατασκευή και δοκιμή container
-
-```bash
-# Δημιουργία εικόνας Docker
 docker build -t flask-api:local ./src
-
-# Εκτέλεση κοντέινερ τοπικά
-docker run -p 8000:8000 flask-api:local
-
-# Δοκιμή κοντέινερ
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## Ανάπτυξη
+Για αλλαγές αποκλειστικά στον κώδικα μετά την πρώτη ανάπτυξη, τρέξτε `azd deploy api`.
+Για αλλαγές στο Bicep, τρέξτε `azd up` για επανεκκίνηση και ανάπτυξη.
 
-### Πλήρης ανάπτυξη
+## Πρακτικές ασκήσεις
+
+### 1. Επικύρωση απόρριψης εισόδου
+
+**Αφετηρία:** αναπτυγμένη API, `API_URL` παραπάνω.
+**Στόχος:** επαληθεύστε ότι η API απορρίπτει άκυρες μορφές JSON και ελλείποντα ονόματα.
 
 ```bash
-# Αναπτύξτε την υποδομή και την εφαρμογή
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### Ανάπτυξη μόνο με κώδικα
+**Κριτήρια επιτυχίας / λύση:** και τα δύο επιστρέφουν 400 με JSON σφάλμα, όχι 500.
+**Συνηθισμένο πρόβλημα:** παράλειψη της κεφαλίδας content-type JSON.
+
+### 2. Προσθήκη endpoint μόνο για ανάγνωση
+
+**Αφετηρία:** `src/app.py`. **Στόχος:** επεκτείνετε και αναπτύξτε ξανά την API.
+Προσθέστε το πριν από το μπλοκ `if __name__ == '__main__':`:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+Τρέξτε `azd deploy api`, μετά `curl --fail-with-body "${API_URL}/version"`.
+**Κριτήρια επιτυχίας:** HTTP 200 και `{"version":"1.0.0"}`.
+**Συνηθισμένο πρόβλημα:** τοποθέτηση της διαδρομής μετά το αποκλειστικό κάλεσμα `app.run()` όταν
+δοκιμάζετε με `python src/app.py`.
+
+### Στάση γνώσης
+
+Γιατί ένας worker δεν αρκεί για ανθεκτικά δεδομένα; Επειδή ακόμα και μια μόνο διαδικασία χάνει
+το λεξικό της σε επανεκκίνηση. Μια έκδοση παραγωγής χρειάζεται κοινόχρηστο μόνιμο αποθηκευτικό χώρο,
+αυθεντικοποίηση, εξουσιοδότηση, μεταναστεύσεις, δοκιμές και επιχειρησιακή παρακολούθηση.
+
+## Κόστη και αντιμετώπιση προβλημάτων
+
+Πρόκειται για ανάπτυξη που δεν είναι εγγυημένη ως δωρεάν: το Basic registry και η αποθήκευση/καταγραφή
+μπορούν να επιφέρουν χρεώσεις ακόμη και όταν ο υπολογισμός της εφαρμογής είναι στο μηδέν. Χρησιμοποιήστε τον
+[υπολογιστή κόστους](https://azure.microsoft.com/pricing/calculator/) για την περιοχή σας.
+
+- **Σφάλμα δημιουργίας Docker:** επιβεβαιώστε `docker info`, πρόσβαση δικτύου και εξαρτήσεις.
+- **Μη υγιής εφαρμογή:** εξετάστε τα αρχεία καταγραφής κονσόλας/συστήματος και βεβαιωθείτε ότι η πόρτα εικόνας, το ingress,
+  και τα probes συμφωνούν. Ένα placeholder δεν πρέπει να ελέγχεται στην πόρτα Flask.
+- **403/δικαιώματα:** επιβεβαιώστε τη συνδρομή και τα δικαιώματα δημιουργίας πόρων.
+- **Εξαφάνιση αντικειμένων:** η κατάσταση στη μνήμη μηδενίζεται σε επανεκκίνηση/κλιμάκωση σε μηδέν· προσθέστε μια βάση δεδομένων
+  για ανθεκτική συμπεριφορά.
+
+## Καθαρισμός και επόμενα βήματα
 
 ```bash
-# Αναπτύξτε μόνο τον κώδικα της εφαρμογής (χωρίς αλλαγή στην υποδομή)
-azd deploy api
+azd down
 ```
 
-### Ενημέρωση διαμόρφωσης
+Εξετάστε την προτροπή διαγραφής και επαληθεύστε ότι η αφιερωμένη ομάδα πόρων αφαιρείται.
+Μην χρησιμοποιείτε καταστροφικό καθαρισμό σε ομάδα πόρων που περιέχει άσχετα δεδομένα.
 
-```bash
-# Ενημερώστε τις μεταβλητές περιβάλλοντος
-azd env set API_KEY "new-api-key"
-
-# Αναπτύξτε ξανά με τη νέα διαμόρφωση
-azd deploy api
-```
-
-## Παρακολούθηση
-
-### Προβολή καταγραφών
-
-```bash
-# Μετάδωσε ζωντανά αρχεία καταγραφής χρησιμοποιώντας το azd monitor
-azd monitor --logs
-
-# Ή χρησιμοποιήστε το Azure CLI για τα Container Apps:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Προβολή των τελευταίων 100 γραμμών
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### Παρακολούθηση μετρικών
-
-```bash
-# Άνοιγμα του πίνακα εργαλείων του Azure Monitor
-azd monitor --overview
-
-# Προβολή συγκεκριμένων μετρικών
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## Δοκιμές
-
-### Έλεγχος υγείας
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-Αναμενόμενη απάντηση:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### Δημιουργία αντικειμένου
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### Λήψη όλων των αντικειμένων
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## Βελτιστοποίηση κόστους
-
-Αυτή η ανάπτυξη χρησιμοποιεί scale-to-zero, οπότε πληρώνετε μόνο όταν το API επεξεργάζεται αιτήσεις:
-
-- **Κόστος αδράνειας**: ~$0/μήνα (κλιμακώνεται στο μηδέν)
-- **Κόστος κατά την ενεργή λειτουργία**: ~$0.000024/δευτερόλεπτο ανά αντίγραφο
-- **Αναμενόμενο μηνιαίο κόστος** (ελαφριά χρήση): $5-15
-
-### Περαιτέρω μείωση κόστους
-
-```bash
-# Μείωσε τον μέγιστο αριθμό αντιγράφων για το περιβάλλον ανάπτυξης
-azd env set MAX_REPLICAS 3
-
-# Χρησιμοποίησε μικρότερο χρονικό όριο αδράνειας
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 λεπτά
-```
-
-## Επίλυση προβλημάτων
-
-### Το container δεν ξεκινάει
-
-```bash
-# Ελέγξτε τα αρχεία καταγραφής του κοντέινερ χρησιμοποιώντας το Azure CLI
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Επαληθεύστε ότι η εικόνα Docker χτίζεται τοπικά
-docker build -t test ./src
-```
-
-### Το API δεν είναι προσβάσιμο
-
-```bash
-# Επιβεβαιώστε ότι το ingress είναι εξωτερικό
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### Υψηλοί χρόνοι απόκρισης
-
-```bash
-# Ελέγξτε τη χρήση CPU/μνήμης
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# Αυξήστε τους πόρους αν χρειάζεται
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## Καθαρισμός
-
-```bash
-# Διαγράψτε όλους τους πόρους
-azd down --force --purge
-```
-
-## Επόμενα βήματα
-
-### Επέκταση αυτού του παραδείγματος
-
-1. **Προσθήκη βάσης δεδομένων** - Ενσωμάτωση Azure Cosmos DB ή SQL Database
-   ```bash
-   # Προσθέστε τη μονάδα Cosmos DB στο infra/main.bicep
-   # Ενημερώστε το app.py με τη σύνδεση στη βάση δεδομένων
-   ```
-
-2. **Προσθήκη αυθεντικοποίησης** - Υλοποίηση Microsoft Entra ID ή κλειδιών API
-   ```python
-   # Προσθέστε middleware αυθεντικοποίησης στο app.py
-   from functools import wraps
-   ```
-
-3. **Ρύθμιση CI/CD** - Workflow GitHub Actions
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Προσθήκη Managed Identity** - Ασφαλής πρόσβαση σε υπηρεσίες Azure
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### Σχετικά παραδείγματα
-
-- **[Εφαρμογή βάσης δεδομένων](../../../../../examples/database-app)** - Πλήρες παράδειγμα με SQL Database
-- **[Μικροϋπηρεσίες](../../../../../examples/container-app/microservices)** - Αρχιτεκτονική πολλαπλών υπηρεσιών
-- **[Οδηγός Container Apps](../README.md)** - Όλα τα μοτίβα container
-
-### Πόροι εκμάθησης
-
-- 📚 [Μάθημα AZD για αρχάριους](../../../README.md) - Κύρια σελίδα μαθήματος
-- 📚 [Πρότυπα Container Apps](../README.md) - Περισσότερα μοτίβα ανάπτυξης
-- 📚 [Συλλογή προτύπων AZD](https://azure.github.io/awesome-azd/) - Πρότυπα της κοινότητας
-
-## Πρόσθετοι πόροι
-
-### Τεκμηρίωση
-- **[Τεκμηρίωση Flask](https://flask.palletsprojects.com/)** - Οδηγός του πλαισίου Flask
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Επίσημη τεκμηρίωση Azure
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Αναφορά εντολών azd
-
-### Σεμινάρια
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Αναπτύξτε την πρώτη σας εφαρμογή
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Οδηγός ανάπτυξης Python
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Υποδομή ως κώδικας
-
-### Εργαλεία
-- **[Azure Portal](https://portal.azure.com)** - Διαχειριστείτε πόρους οπτικά
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Ενσωμάτωση IDE
-
----
-
-**🎉 Συγχαρητήρια!** Έχετε αναπτύξει ένα έτοιμο για παραγωγή Flask API σε Azure Container Apps με αυτόματη κλιμάκωση και παρακολούθηση.
-
-**Ερωτήσεις;** [Ανοίξτε ένα issue](https://github.com/microsoft/AZD-for-beginners/issues) ή ελέγξτε το [FAQ](../../../resources/faq.md)
+[Επόμενο: Εφαρμογή βάσης δεδομένων](../../../../../examples/database-app) · [Μικροϋπηρεσίες](../../../../../examples/container-app/microservices) ·
+[Επισκόπηση Container](../README.md) · [Αρχική σελίδα μαθήματος](../../../README.md) ·
+[Αναφορά προβλήματος](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

@@ -1,30 +1,30 @@
 # Integrácia Application Insights s AZD
 
-⏱️ **Odhadovaný čas**: 40-50 minút | 💰 **Dopad na náklady**: ~$5-15/mesiac | ⭐ **Zložitosť**: Stredne náročné
+⏱️ **Odhadovaný čas**: 40-50 minút | 💰 **Dopad na náklady**: ~$5-15/mesiac | ⭐ **Zložitosť**: Stredne pokročilá
 
-**📚 Vzdelávacia cesta:**
-- ← Predošlé: [Kontroly pred nasadením](preflight-checks.md) - Prednasadzovacie overenie
-- 🎯 **Tu ste**: Integrácia Application Insights (monitoring, telemetria, ladenie)
-- → Ďalej: [Príručka nasadenia](../chapter-04-infrastructure/deployment-guide.md) - Nasadiť do Azure
-- 🏠 [Domov kurzu](../../README.md)
+**📚 Učiaca sa cesta:**
+- ← Predchádzajúce: [Preflight Checks](preflight-checks.md) - Pred nasadením validácia
+- 🎯 **Ste tu**: Integrácia Application Insights (monitorovanie, telemetria, ladenie)
+- → Nasledujúce: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Nasadenie do Azure
+- 🏠 [Domovská stránka kurzu](../../README.md)
 
 ---
 
 ## Čo sa naučíte
 
-Po dokončení tejto lekcie budete:
-- Integrovať **Application Insights** do projektov AZD automaticky
-- Konfigurovať **distribuované trasovanie** pre mikroslužby
-- Implementovať **vlastnú telemetriu** (metry, udalosti, závislosti)
-- Nastaviť **live metrics** pre monitorovanie v reálnom čase
-- Vytvárať **upozornenia a panely** z nasadení AZD
-- Ladiť problémy v produkcii pomocou **telemetrických dotazov**
-- Optimalizovať **náklady a stratégie vzorkovania**
+Po dokončení tejto lekcie budete vedieť:
+- Deklarovať **Application Insights** v infraštruktúre AZD a konfigurovať SDK instrumentáciu
+- Nastaviť **distribuované trasovanie** pre mikroservisy
+- Implementovať **vlastnú telemetriu** (metriky, udalosti, závislosti)
+- Nastaviť **live metriky** pre monitorovanie v reálnom čase
+- Vytvoriť **upozornenia a dashboardy** z nasadení AZD
+- Ladiť produkčné problémy pomocou **telemetrických dopytov**
+- Optimalizovať **náklady a sampling** stratégie
 - Monitorovať **AI/LLM aplikácie** (tokeny, latencia, náklady)
 
-## Prečo je Application Insights s AZD dôležitý
+## Prečo záleží na Application Insights s AZD
 
-### Výzva: Observabilita v produkcii
+### Výzva: Produkčná pozorovateľnosť
 
 **Bez Application Insights:**
 ```
@@ -44,10 +44,10 @@ Po dokončení tejto lekcie budete:
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**Analógia**: Application Insights je ako mať „čiernu skrinku“ leteckého záznamníka + kokpitový panel pre vašu aplikáciu. Vidíte všetko, čo sa deje v reálnom čase, a môžete si prehrávať akýkoľvek incident.
+**Analógiou**: Application Insights je ako mať "čiernu skrinku" letu + palubnú dosku pre vašu aplikáciu. Vidíte všetko, čo sa deje v reálnom čase, a môžete prehrávať akúkoľvek udalosť.
 
 ---
 
@@ -57,24 +57,24 @@ Po dokončení tejto lekcie budete:
 
 ```mermaid
 graph TB
-    User[Používateľ/Klient]
-    App1[Kontajnerová aplikácia 1<br/>API brána]
-    App2[Kontajnerová aplikácia 2<br/>Služba produktov]
-    App3[Kontajnerová aplikácia 3<br/>Služba objednávok]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[Application Insights<br/>Telemetrické centrum]
-    LogAnalytics[(Log Analytics<br/>Pracovný priestor)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Portál Azure<br/>Dashboardy a upozornenia]
-    Query[Kusto dotazy<br/>Vlastná analýza]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Automatická instrumentácia| AppInsights
-    App2 -.->|Automatická instrumentácia| AppInsights
-    App3 -.->|Automatická instrumentácia| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,44 +83,47 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 ### Čo sa monitoruje automaticky
+
+Podporovaná auto-instrumentácia zachytáva požiadavky/závislosti pre instrumentované knižnice. Vlastné udalosti a metriky vyžadujú kód aplikácie; testy dostupnosti musia byť konfigurované samostatne. Nezachytáva každý riadok len preto, že zdroj existuje.
 
 | Typ telemetrie | Čo zachytáva | Použitie |
 |----------------|--------------|---------|
-| **Requests** | HTTP požiadavky, status kódy, trvanie | Monitorovanie výkonu API |
-| **Dependencies** | Externé volania (DB, API, úložisko) | Identifikácia úzkych miest |
-| **Exceptions** | Nezachytené chyby s stack trace | Ladenie zlyhaní |
-| **Custom Events** | Biznis udalosti (registrácia, nákup) | Analytika a konverzné kanály |
-| **Metrics** | Výkonnostné počítadlá, vlastné metriky | Kapacitné plánovanie |
-| **Traces** | Log správy s úrovňou závažnosti | Ladenie a audit |
-| **Availability** | Testy dostupnosti a času odozvy | Monitorovanie SLA |
+| **Požiadavky** | HTTP požiadavky, status kódy, trvanie | Monitorovanie výkonu API |
+| **Závislosti** | Externé volania (DB, API, úložisko) | Identifikácia zúžených miest |
+| **Výnimky** | Nezachytené chyby so stack trace | Ladenie chýb |
+| **Vlastné udalosti** | Obchodné udalosti (registrácia, nákup) | Analytika a funnel |
+| **Metriky** | Výkonové ukazovatele, vlastné metriky | Kapacitné plánovanie |
+| **Trasy** | Log správy s vážnosťou | Ladenie a audit |
+| **Dostupnosť** | Testy času prevádzky a odpovede | Monitorovanie SLA |
 
 ---
 
-## Požiadavky
+## Predpoklady
 
-### Požadované nástroje
+### Vyžadované nástroje
 
 ```bash
-# Overiť Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Očakávané: azd verzia 1.0.0 alebo vyššia
+# Command reference baseline: azd 1.37.2
 
-# Overiť Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Očakávané: azure-cli 2.50.0 alebo vyššia
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
-### Požiadavky v Azure
+### Požiadavky Azure
 
-- Aktívne predplatné Azure
+- Aktívne Azure predplatné
 - Povolenia na vytváranie:
   - Application Insights zdrojov
-  - Log Analytics workspace
+  - Log Analytics pracovných priestorov
   - Container Apps
   - Resource groups
 
-### Predchádzajúce znalosti
+### Vedomostné predpoklady
 
 Mali by ste mať dokončené:
 - [AZD základy](../chapter-01-foundation/azd-basics.md) - Základné koncepty AZD
@@ -133,7 +136,9 @@ Mali by ste mať dokončené:
 
 ### Ako AZD poskytuje Application Insights
 
-AZD automaticky vytvára a konfiguruje Application Insights pri nasadení. Pozrime sa, ako to funguje.
+AZD poskytuje Application Insights **len keď infraštruktúra projektu ho deklaruje**. `azure.yaml` samostatne nevytvára monitorovanie alebo neinstrumentuje aplikačný kód.
+
+> **Príklad rozsahu:** Táto lekcia obsahuje integračné fragmenty, nie kompletný projekt `monitored-app` v tomto repozitári. Dodajte hlavný template a mapovanie parametrov, prostredie Container Apps, konfiguráciu registry/obrázku a identity, Dockerfile a značky služieb pred nasadením. Neskoršie lekcie ukazujú alternatívne/rozširujúce fragmenty, nie sú to súbory, ktoré by sa dali všetky jednoducho prilepiť bez zmien. Začnite s funkčným [príkladom mikroservisov](../../../../examples/microservices), ak potrebujete spustiteľnú základňu.
 
 ### Štruktúra projektu
 
@@ -154,7 +159,7 @@ monitored-app/
 
 ---
 
-### Krok 1: Konfigurujte AZD (azure.yaml)
+### Krok 1: Konfigurácia AZD (azure.yaml)
 
 **Súbor: `azure.yaml`**
 
@@ -169,10 +174,10 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**To je všetko!** AZD vytvorí Application Insights predvolene. Pre základné monitorovanie nie je potrebná žiadna ďalšia konfigurácia.
+Toto deklaruje nasaditeľnú službu. Nasledujúca Bicep a SDK konfigurácia zabezpečuje monitorovanie; azd ich nepridáva implicitne.
 
 ---
 
@@ -223,11 +228,12 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
 
-### Krok 3: Pripojte Container App k Application Insights
+### Krok 3: Pripojiť Container App k Application Insights
 
 **Súbor: `infra/app/api.bicep`**
 
@@ -235,7 +241,8 @@ output applicationInsightsName string = applicationInsights.name
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -291,29 +299,23 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Získať reťazec pripojenia Application Insights
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Konfigurovať distribuované trasovanie
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # 100% vzorkovanie pre vývoj
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # Konfigurovať logovanie
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # Simulovať volanie databázy (automaticky sledované ako závislosť)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Simulovať pomalú operáciu
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -367,27 +369,27 @@ if __name__ == '__main__':
 **Súbor: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+Riešte závislosti vo vašom projekte, testujte ich spolu a zafixujte výsledné verzie. Nové projekty by mali používať Azure Monitor OpenTelemetry, nie už ukončených OpenCensus Python exporterov.
 
 ---
 
 ### Krok 5: Nasadiť a overiť
 
 ```bash
-# Inicializovať AZD
-azd init
-
-# Nasadiť (automaticky zriaďuje Application Insights)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# Získať URL aplikácie
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# Vygenerovať telemetriu
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -404,24 +406,24 @@ curl $APP_URL/api/slow
 
 ---
 
-### Krok 6: Zobraziť telemetriu v Azure Porte
+### Krok 6: Zobraziť Telemetriu v Azure Portáli
 
 ```bash
-# Získať podrobnosti o Application Insights
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Otvoriť v portáli Azure
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Prejdite do Azure Portal → Application Insights → Transaction Search**
+**Prejdite do Azure Portál → Application Insights → Transaction Search**
 
 Mali by ste vidieť:
-- ✅ HTTP požiadavky so status kódmi
-- ✅ Trvanie požiadavky (3+ sekundy pre `/api/slow`)
+- ✅ HTTP požiadavky so stavovými kódmi
+- ✅ Dĺžku požiadavky (3+ sekúnd pre `/api/slow`)
 - ✅ Detaily výnimiek z `/api/error-test`
 - ✅ Vlastné log správy
 
@@ -429,22 +431,17 @@ Mali by ste vidieť:
 
 ## Lekcia 2: Vlastná telemetria a udalosti
 
-### Sledovanie biznis udalostí
+### Sledovanie obchodných udalostí
 
-Pridajme vlastnú telemetriu pre biznis-kritické udalosti.
+Pridajme vlastnú telemetriu pre obchodne kritické udalosti.
 
 **Súbor: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # Nastavenie loggera
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # Nastavenie exportéra metrík
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # Nastavenie traceru
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# Globálny telemetrický klient
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### Aktualizovať aplikáciu s vlastnými udalosťami
+### Aktualizovať aplikáciu o vlastné udalosti
 
-**Súbor: `src/app.py` (rozšírené)**
+**Súbor: `src/app.py` (vylepšený)**
+
+Pridajte tieto trasy do existujúcej Flask aplikácie; zachovajte predchádzajúce health/test trasy. Skrátený blok nižšie ukazuje samostatnú aplikáciu pre prehľadnosť. Inicializácia telemetrie je teraz v `telemetry.py` — neinicializujte exportéry dvakrát.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # Sledovať obchodnú udalosť
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Sledovať metriku príjmov
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # Simulovať vyhľadávanie (bol by to skutočný dotaz do databázy)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Previesť na ms
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # Sledovať udalosť vyhľadávania
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Sledovať metriku výkonu vyhľadávania
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # Simulovať volanie externého API
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # Sledovať závislosť
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -619,20 +589,20 @@ if __name__ == '__main__':
 ### Testovanie vlastnej telemetrie
 
 ```bash
-# Sledovať udalosť nákupu
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# Sledovať udalosť vyhľadávania
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# Sledovať externú závislosť
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
-**Zobraziť v Azure Porte:**
+**Zobraziť v Azure Portáli:**
 
 Prejdite do Application Insights → Logs, potom spustite:
 
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -665,11 +635,11 @@ traces
 
 ---
 
-## Lekcia 3: Distribuované trasovanie pre mikroslužby
+## Lekcia 3: Distribuované trasovanie pre mikroservisy
 
-### Povoliť trasovanie cez služby
+### Zapnúť cross-service trasovanie
 
-Pre mikroslužby Application Insights automaticky koreluje požiadavky naprieč službami.
+S kompatibilnou instrumentáciou a W3C trace-context propagáciou Application Insights koreluje požiadavky medzi službami. Len zdieľanie connection stringu nezabezpečuje parent-child span-y. Nasledujúci fragment architektúry odkazuje na moduly, ktoré musíte implementovať.
 
 **Súbor: `infra/main.bicep`**
 
@@ -744,35 +714,36 @@ output GATEWAY_URL string = apiGateway.outputs.uri
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API brána<br/>(ID trasovania: abc123)
-    participant Product as Služba produktov<br/>(Rodičovské ID: abc123)
-    participant Order as Služba objednávok<br/>(Rodičovské ID: abc123)
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
     participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Začiatok trasovania: abc123
-    Gateway->>AppInsights: Zaznamenať požiadavku (ID trasovania: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: Rodičovské ID: abc123
-    Product->>AppInsights: Zaznamenať volanie závislosti
-    Product-->>Gateway: Detaily produktu
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: Rodičovské ID: abc123
-    Order->>AppInsights: Zaznamenať volanie závislosti
-    Order-->>Gateway: Objednávka vytvorená
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: Dokončenie nákupu
-    Gateway->>AppInsights: Zaznamenať odpoveď (Trvanie: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: Korelácia podľa ID trasovania
+    Note over AppInsights: Correlation by Trace ID
 ```
-**Dotaz na end-to-end trasu:**
+
+**Dopyt end-to-end trace:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,43 +759,43 @@ dependencies
 
 ---
 
-## Lekcia 4: Live Metrics a monitorovanie v reálnom čase
+## Lekcia 4: Live metriky a monitorovanie v reálnom čase
 
-### Povoliť Live Metrics Stream
+### Zapnúť Live Metrics Stream
 
-Live Metrics poskytuje telemetriu v reálnom čase s latenciou <1 sekundy.
+Live Metrics poskytujú takmer v reálnom čase telemetriu, keď je podporovaná a SDK je aktivované. Nie je to latencia SLA. Nastavenie Python OpenTelemetry vyššie používa `enable_live_metrics=True` na zapnutie.
 
-**Prístup k Live Metrics:**
+**Prístup k Live Metrix:**
 
 ```bash
-# Získať zdroj Application Insights
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Získať skupinu prostriedkov
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**Čo uvidíte v reálnom čase:**
-- ✅ Rýchlosť prichádzajúcich požiadaviek (requests/sec)
-- ✅ Odchádzajúce závislosti volaní
+**Čo vidíte v reálnom čase:**
+- ✅ Rýchlosť prichádzajúcich požiadaviek (požiadavky/sek)
+- ✅ Odchádzajúce závislosti
 - ✅ Počet výnimiek
 - ✅ Využitie CPU a pamäte
 - ✅ Počet aktívnych serverov
-- ✅ Vzorkovanú telemetriu
+- ✅ Vzorky telemetrie
 
-### Generovať záťaž na testovanie
+### Generovanie záťaže na testovanie
 
 ```bash
-# Vygenerujte záťaž, aby ste videli živé metriky
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Sledujte živé metriky v Azure portáli
-# Mali by ste vidieť nárast miery požiadaviek
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
@@ -833,20 +804,20 @@ done
 
 ### Cvičenie 1: Nastaviť upozornenia ⭐⭐ (Stredne)
 
-**Cieľ**: Vytvoriť upozornenia na vysokú mieru chýb a pomalé odpovede.
+**Cieľ**: Vytvoriť upozornenia na vysoké chyby a pomalé odozvy.
 
 **Kroky:**
 
-1. **Vytvorte upozornenie pre mieru chýb:**
+1. **Vytvoriť upozornenie na mieru chýb:**
 
 ```bash
-# Získajte ID prostriedku Application Insights
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Vytvorte metrické upozornenie pre neúspešné požiadavky
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,10 +825,10 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
-2. **Vytvorte upozornenie pre pomalé odpovede:**
+2. **Vytvoriť upozornenie na pomalú odozvu:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,7 +841,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Vytvorte upozornenie cez Bicep (preferované pre AZD):**
+3. **Vytvoriť upozornenie cez Bicep (preferované pre AZD):**
 
 **Súbor: `infra/core/alerts.bicep`**
 
@@ -944,30 +915,30 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **Otestujte upozornenia:**
+4. **Testovať upozornenia:**
 
 ```bash
-# Generovať chyby
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Generovať pomalé odpovede
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Skontrolovať stav upozornenia (počkajte 5–10 minút)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
 **✅ Kritériá úspechu:**
 - ✅ Upozornenia úspešne vytvorené
 - ✅ Upozornenia sa spustia pri prekročení prahov
-- ✅ Je možné zobraziť históriu upozornení v Azure Porte
+- ✅ História upozornení viditeľná v Azure Portáli
 - ✅ Integrované s nasadením AZD
 
 **Čas**: 20-25 minút
@@ -980,14 +951,14 @@ az monitor metrics alert list \
 
 **Kroky:**
 
-1. **Vytvorte dashboard cez Azure Portal:**
+1. **Vytvoriť dashboard cez Azure Portál:**
 
-Prejdite na: Azure Portal → Dashboards → New Dashboard
+Prejdite do: Azure Portál → Dashboardy → Nový dashboard
 
 2. **Pridať dlaždice pre kľúčové metriky:**
 
-- Počet požiadaviek (za posledných 24 hodín)
-- Priemerný čas odpovede
+- Počet požiadaviek (posledných 24 hodín)
+- Priemerný čas odozvy
 - Miera chýb
 - Top 5 najpomalších operácií
 - Geografické rozloženie používateľov
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1065,8 +1046,8 @@ output dashboardId string = dashboard.id
 
 4. **Nasadiť dashboard:**
 
-```bash
-# Pridať do main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,28 +1057,30 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# Nasadiť
+```bash
+# Deploy
 azd up
 ```
 
 **✅ Kritériá úspechu:**
 - ✅ Dashboard zobrazuje kľúčové metriky
-- ✅ Možnosť pripnúť na domovskú stránku Azure Portal
-- ✅ Aktualizuje sa v reálnom čase
+- ✅ Možné pripnúť na domovskú stránku Azure Portálu
+- ✅ Aktualizácie v reálnom čase
 - ✅ Nasaditeľné cez AZD
 
 **Čas**: 25-30 minút
 
 ---
 
-### Cvičenie 3: Monitorovať AI/LLM aplikáciu ⭐⭐⭐ (Pokročilé)
+### Cvičenie 3: Monitorovanie AI/LLM aplikácie ⭐⭐⭐ (Pokročilé)
 
 **Cieľ**: Sledovať používanie Microsoft Foundry Models (tokeny, náklady, latencia).
 
 **Kroky:**
 
-1. **Vytvorte AI monitorovací wrapper:**
+1. **Vytvoriť wrapper monitorujúci AI:**
 
 **Súbor: `src/ai_telemetry.py`**
 
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # Volanie Microsoft Foundry modelov
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # Extrahovať využitie
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Vypočítať náklady (ceny gpt-4.1)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0,03 za 1K tokenov
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0,06 za 1K tokenov
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # Sledovať vlastnú udalosť
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # Sledovať metriky
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# Inicializovať monitorovaného klienta OpenAI
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Zavolať s automatickým monitorovaním
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,13 +1205,13 @@ def chat():
     })
 ```
 
-3. **Dotazovať AI metriky:**
+3. **Dopytovať AI metriky:**
 
 ```kusto
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1251,10 +1240,10 @@ traces
 ```
 
 **✅ Kritériá úspechu:**
-- ✅ Každé OpenAI volanie je sledované automaticky
-- ✅ Používanie tokenov a náklady sú viditeľné
-- ✅ Latencia je monitorovaná
-- ✅ Možnosť nastaviť rozpočtové upozornenia
+- ✅ Každé volanie OpenAI sledované automaticky
+- ✅ Použitie tokenov a náklady viditeľné
+- ✅ Latencia monitorovaná
+- ✅ Možnosť nastaviť upozornenia na rozpočet
 
 **Čas**: 35-45 minút
 
@@ -1262,36 +1251,23 @@ traces
 
 ## Optimalizácia nákladov
 
-### Stratégie vzorkovania
+### Sampling stratégie
 
-Ovládajte náklady pomocou vzorkovania telemetrie:
+Regulujte náklady pomocou sampling telemetrie:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# Vývoj: 100% vzorkovanie
-sampler = ProbabilitySampler(rate=1.0)
-
-# Produkcia: 10% vzorkovanie (znižuje náklady o 90%)
-sampler = ProbabilitySampler(rate=0.1)
-
-# Adaptívne vzorkovanie (automaticky sa prispôsobuje)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**V Bicep:**
+Sampling trace neznižuje každú telemetriu o 90 %. Metriky a samostatne emitované logy potrebujú vlastné ovládanie objemu. Vyberte mieru podľa potrieb pozorovateľnosti, nie ako všeobecnú produkčnú zákazku.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+Explicitne nastavte sampling v SDK; vlastnosť komponentu `SamplingPercentage` nie je náhradou za konfiguráciu sampleru v Python OpenTelemetry.
 
-### Ukladanie dát
+### Uchovávanie dát
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1305,38 +1281,38 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 ### Mesačné odhady nákladov
 
-| Objem dát | Retencia | Mesačné náklady |
-|-----------|----------|-----------------|
+| Objem dát | Uchovávanie | Mesačné náklady |
+|-----------|-------------|------------------|
 | 1 GB/mesiac | 30 dní | ~$2-5 |
 | 5 GB/mesiac | 30 dní | ~$10-15 |
 | 10 GB/mesiac | 90 dní | ~$25-40 |
 | 50 GB/mesiac | 90 dní | ~$100-150 |
 
-**Bezplatná úroveň**: 5 GB/mesiac zahrnuté
+Tieto čísla sú ilustratívne, nie cenové ponuky. Overte si príjmy, uchovávanie, upozornenia a ceny testov vo vašom regióne a zmluve; bezplatné limity sú zdieľané/obmedzené podľa ceny Azure Monitor, nie garantované SKU zdarma na každú Application Insights službu.
 
 ---
 
-## Kontrolný bod vedomostí
+## Skúška vedomostí
 
 ### 1. Základná integrácia ✓
 
-Otestujte svoje pochopenie:
+Otestujte svoje znalosti:
 
-- [ ] **Q1**: Ako AZD poskytuje Application Insights?
-  - **A**: Automaticky cez Bicep šablóny v `infra/core/monitoring.bicep`
+- [ ] **Otázka 1**: Ako AZD poskytuje Application Insights?
+  - **Odpoveď**: Nasadzuje monitorovacie zdroje explicitne deklarované Bicep/Terraform šablónami projektu.
 
-- [ ] **Q2**: Ktorá premenná prostredia povoľuje Application Insights?
-  - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [ ] **Otázka 2**: Ktorá env premenná zapína Application Insights?
+  - **Odpoveď**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: Aké sú tri hlavné typy telemetrie?
-  - **A**: Requests (HTTP volania), Dependencies (externé volania), Exceptions (chyby)
+- [ ] **Otázka 3**: Aké sú tri hlavné typy telemetrie?
+  - **Odpoveď**: Požiadavky (HTTP volania), Závislosti (externé volania), Výnimky (chyby)
 
-**Overenie prakticky:**
+**Overenie praxou:**
 ```bash
-# Skontrolujte, či je Application Insights nakonfigurovaný
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Overte, či telemetria prúdi
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1347,18 +1323,18 @@ az monitor app-insights metrics show \
 
 ### 2. Vlastná telemetria ✓
 
-Otestujte svoje pochopenie:
+Otestujte svoje znalosti:
 
-- [ ] **Q1**: Ako sledovať vlastné biznis udalosti?
-  - **A**: Použiť logger s `custom_dimensions` alebo `TelemetryClient.track_event()`
+- [ ] **Otázka 1**: Ako sledujete vlastné obchodné udalosti?
+  - **Odpoveď**: Wrapper tejto lekcie zapisuje štruktúrované OTel logy s `event_name` atribútmi, ktoré sa dajú dopytovať v `traces`; nie sú automaticky `customEvents`.
 
-- [ ] **Q2**: Aký je rozdiel medzi udalosťami a metrikami?
-  - **A**: Udalosti sú diskrétne udalosti, metriky sú číselné merania
+- [ ] **Otázka 2**: Aký je rozdiel medzi udalosťami a metrikami?
+  - **Odpoveď**: Udalosti sú jednotlivé výskyty, metriky sú číselné merania
 
-- [ ] **Q3**: Ako korelovať telemetriu naprieč službami?
-  - **A**: Application Insights automaticky používa `operation_Id` pre koreláciu
+- [ ] **Otázka 3**: Ako korelujete telemetriu medzi službami?
+  - **Odpoveď**: Application Insights používa automaticky `operation_Id` pre koreláciu
 
-**Overenie prakticky:**
+**Overenie praxou:**
 ```kusto
 // Verify custom events
 traces
@@ -1370,24 +1346,22 @@ traces
 
 ### 3. Produkčné monitorovanie ✓
 
-Otestujte svoje pochopenie:
+Otestujte svoje znalosti:
 
-- [ ] **Q1**: Čo je vzorkovanie a prečo ho používať?
-  - **A**: Vzorkovanie znižuje objem dát (a náklady) tým, že zachytí len percento telemetrie
+- [ ] **Otázka 1**: Čo je sampling a prečo ho používať?
+  - **Odpoveď**: Sampling znižuje objem dát (a náklady) tým, že zachytáva len časť telemetrie
 
-- [ ] **Q2**: Ako nastaviť upozornenia?
-  - **A**: Použiť metrické upozornenia v Bicep alebo Azure Portal na základe metrik Application Insights
+- [ ] **Otázka 2**: Ako nastavíte upozornenia?
+  - **Odpoveď**: Použite metrické upozornenia v Bicep alebo Azure Portáli na metriky Application Insights
 
-- [ ] **Q3**: Aký je rozdiel medzi Log Analytics a Application Insights?
-  - **A**: Application Insights ukladá dáta do Log Analytics workspace; App Insights poskytuje pohľady špecifické pre aplikácie
+- [ ] **Otázka 3**: Aký je rozdiel medzi Log Analytics a Application Insights?
+  - **Odpoveď**: Application Insights ukladá dáta do Log Analytics workspace; App Insights poskytuje pohľady špecifické pre aplikáciu
 
-**Overenie prakticky:**
+**Overenie praxou:**
 ```bash
-# Skontrolujte konfiguráciu vzorkovania
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
@@ -1399,79 +1373,77 @@ az monitor app-insights component show \
 1. **Používať korelačné ID**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. **Nastaviť upozornenia pre kritické metriky**
+2. **Nastaviť upozornenia na kritické metriky**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
 3. **Používať štruktúrované logovanie**
    ```python
-   # ✅ DOBRÉ: Štruktúrované
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ ZLÉ: Neštruktúrované
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
 4. **Monitorovať závislosti**
    ```python
-   # Automaticky sledujte volania do databázy, HTTP požiadavky atď.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
 5. **Používať Live Metrics počas nasadení**
 
 ### ❌ NEROBIŤ:
 
-1. **Nezaznamenávať citlivé údaje**
+1. **Nezaznamenávajte citlivé údaje**
    ```python
-   # ❌ ZLÉ
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ DOBRÉ
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **Nepoužívať 100% vzorkovanie v produkcii**
+2. **Nevyberajte vzorkovanie bez merania objemu a diagnostických potrieb**
    ```python
-   # ❌ Drahé
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ Nákladovo efektívne
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **Neignorovať dead letter queues**
+3. **Neprehliadajte dead letter queue (fronty mŕtvych správ)**
 
-4. **Nezabudnúť nastaviť limity retencie dát**
+4. **Nezabudnite nastaviť limity uchovávania údajov**
 
 ---
 
 ## Riešenie problémov
 
-### Problém: Nezobrazuje sa žiadna telemetria
+### Problém: Žiadna telemetria sa nezobrazuje
 
 **Diagnóza:**
 ```bash
-# Skontrolujte, či je reťazec pripojenia nastavený
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Skontrolujte protokoly aplikácie pomocou Azure Monitoru
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# Alebo použite Azure CLI pre Container Apps:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Riešenie:**
 ```bash
-# Skontrolujte reťazec pripojenia v kontajnerovej aplikácii
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1485,32 +1457,31 @@ az containerapp show \
 
 **Diagnóza:**
 ```bash
-# Skontrolovať príjem údajov
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **Riešenie:**
-- Znížiť mieru vzorkovania
-- Skrátiť obdobie retencie
-- Odstrániť detailné logovanie
+- Znížte mieru vzorkovania
+- Skráťte dobu uchovávania
+- Odstráňte detailné logovanie
 
 ---
 
 ## Zistiť viac
 
 ### Oficiálna dokumentácia
-- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [Prehľad Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Nastavenie Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
+- [Jazyk Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [Monitorovanie AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
 ### Ďalšie kroky v tomto kurze
-- ← Predošlé: [Kontroly pred nasadením](preflight-checks.md)
-- → Ďalej: [Príručka nasadenia](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Domov kurzu](../../README.md)
+- ← Predchádzajúce: [Preflight Checks](preflight-checks.md)
+- → Ďalšie: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- 🏠 [Domovská stránka kurzu](../../README.md)
 
 ### Súvisiace príklady
 - [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI telemetria
@@ -1521,31 +1492,31 @@ az monitor app-insights metrics show \
 ## Zhrnutie
 
 **Naučili ste sa:**
-- ✅ Automatické poskytovanie Application Insights s AZD
+- ✅ Automatické nastavovanie Application Insights pomocou AZD
 - ✅ Vlastná telemetria (udalosti, metriky, závislosti)
-- ✅ Distribuované trasovanie naprieč mikroslužbami
-- ✅ Live metrics a monitorovanie v reálnom čase
-- ✅ Upozornenia a panely
+- ✅ Distribuované trasovanie cez mikro-služby
+- ✅ Živé metriky a monitorovanie v reálnom čase
+- ✅ Upozornenia a dashboardy
 - ✅ Monitorovanie AI/LLM aplikácií
 - ✅ Stratégie optimalizácie nákladov
 
-**Kľúčové zhrnutia:**
-1. **AZD poskytuje monitoring automaticky** - Žiadne manuálne nastavenie
-2. **Použite štruktúrované logovanie** - Uľahčuje dotazovanie
+**Kľúčové body:**
+1. **Explicitne deklarujte monitorovanie** - AZD nasadí vaše šablóny; SDK inštrumentácia odosiela telemetriu
+2. **Používajte štruktúrované logovanie** - Uľahčuje dotazovanie
 3. **Sledujte obchodné udalosti** - Nielen technické metriky
-4. **Sledujte náklady na AI** - Sledujte tokeny a výdavky
+4. **Monitorujte náklady na AI** - Sledujte tokeny a výdavky
 5. **Nastavte upozornenia** - Buďte proaktívni, nie reaktívni
-6. **Optimalizujte náklady** - Použite vzorkovanie a limity uchovávania
+6. **Optimalizujte náklady** - Používajte vzorkovanie a limity uchovávania
 
 **Ďalšie kroky:**
 1. Dokončite praktické cvičenia
-2. Pridajte Application Insights do vašich AZD projektov
-3. Vytvorte vlastné dashboardy pre váš tím
-4. Prečítajte si [Sprievodcu nasadením](../chapter-04-infrastructure/deployment-guide.md)
+2. Pridajte Application Insights do svojich projektov AZD
+3. Vytvorte vlastné dashboardy pre svoj tím
+4. Naučte sa [Príručku nasadenia](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vylúčenie zodpovednosti**:
-Tento dokument bol preložený pomocou služby automatického prekladu založenej na umelej inteligencii [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, majte prosím na pamäti, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho originálnom jazyku by sa mal považovať za záväzný zdroj. Pre kritické informácie sa odporúča profesionálny preklad vykonaný človekom. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

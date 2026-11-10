@@ -1,60 +1,58 @@
-# 6. انفراسٹرکچر کو ختم کرنا
+# 6۔ انفراسٹرکچر کا خاتمہ
 
-!!! tip "اس ماڈیول کے اختتام تک آپ قابل ہو جائیں گے"
+!!! tip "اس ماڈیول کے اختتام تک آپ درج ذیل کرنے کے قابل ہو جائیں گے"
 
-    - [ ] وسائل کی صفائی اور لاگت کے انتظام کی اہمیت کو سمجھنا
-    - [ ] `azd down` کا استعمال کرتے ہوئے انفراسٹرکچر کو محفوظ طریقے سے ختم کرنا
-    - [ ] اگر ضرورت ہو تو نرم حذف شدہ Azure AI سروسز کی بازیابی کرنا
-    - [ ] **لیب 6:** Azure وسائل کی صفائی اور ہٹانے کی تصدیق کرنا
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## اضافی مشقیں
 
-پروجیکٹ ختم کرنے سے پہلے، چند منٹ نکال کر کچھ کھلے تحقیقاتی کام کریں۔
+پروجیکٹ ختم کرنے سے پہلے، چند منٹ نکال کر کچھ آزادانہ کھوج کریں۔
 
-!!! info "ان دریافت کرنے والے سوالات کو آزمائیں"
+!!! info "یہ دریافت کے سوالات آزمائیں"
 
-    **GitHub Copilot کے ساتھ تجربہ کریں:**
+    **Experiment with GitHub Copilot:**
     
-    1. پوچھیں: `کون سے دیگر AZD ٹیمپلیٹس میں میں ملٹی ایجنٹ کے مناظر کے لیے آزما سکتا ہوں؟`
-    2. پوچھیں: `ہیلتھ کیئر کے استعمال کے کیس کے لیے ایجنٹ کی ہدایات کو کس طرح حسب ضرورت بنا سکتا ہوں؟`
-    3. پوچھیں: `کس ماحول کے متغیرات لاگت کے بہتر انتظام کو کنٹرول کرتے ہیں؟`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Azure پورٹل کو دریافت کریں:**
+    **Explore the Azure Portal:**
     
-    1. اپنے ڈیپلائمنٹ کے Application Insights میٹرکس کا جائزہ لیں
-    2. فراہم کیے گئے وسائل کی لاگت کا تجزیہ چیک کریں
-    3. Microsoft Foundry پورٹل ایجنٹ پلے گراؤنڈ کو ایک بار پھر دریافت کریں
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## انفراسٹرکچر کو ختم کرنا
+## انفراسٹرکچر کی ڈی پروویژننگ
 
-1. انفراسٹرکچر کو ختم کرنا اتنا ہی آسان ہے جتنا:
-
+1۔ انفراسٹرکچر کا خاتمہ اتنا ہی آسان ہے جتنا کہ:
+      
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. `--purge` فلیگ اس بات کو یقینی بناتا ہے کہ یہ نرم طور پر حذف شدہ Cognitive Service وسائل کو بھی صاف کر دیتا ہے، جس سے ان وسائل کی کیوٹا جاری ہو جاتی ہے۔ مکمل ہونے کے بعد آپ کو کچھ ایسا نظر آئے گا:
-
-      ```bash title="" linenums="0"
+1۔ منتخب شدہ ماحول کی تصدیق کریں اور حذف کیے جانے والے وسائل کا جائزہ لیں۔ اس سے Azure وسائل ختم ہو سکتے ہیں اور ڈیٹا متاثر ہو سکتا ہے۔ اس سیکھنے کے عمل کے لئے تصدیقی پیغام رکھیں۔ مکمل ہونے پر آپ کو اس جیسا آؤٹ پٹ دکھائی دے گا:
+      
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (اختیاری) اگر آپ اب دوبارہ `azd up` چلائیں تو آپ دیکھیں گے کہ gpt-4.1 ماڈل ڈیپلائے ہو جائے گا کیونکہ ماحول کا متغیر لوکل `.azure` فولڈر میں تبدیل (اور محفوظ) کیا گیا تھا۔
+1۔ پورٹل میں حذف کرنے کی تصدیق کریں اور تعیناتی کے دائرہ کار سے باہر کے وسائل چیک کریں۔ لاگت کی رپورٹنگ اور کوٹا اپ ڈیٹس میں تاخیر ہو سکتی ہے۔ مقامی `.azure` ترتیب تب تک رہتی ہے جب تک آپ اسے واضح طور پر ہٹا نہ دیں۔
 
-      یہاں ماڈل کی ڈیپلائمنٹس **قبل**:
+1۔ `azd down --purge` اضافی طور پر حمایت یافتہ سافٹ-حذف شدہ وسائل کی مستقل حذف کی درخواست کرتا ہے۔ اسے صرف اس وقت استعمال کریں جب بازیابی ضروری نہ ہو اور آپ احتفاظ/صفائی-تحفظ کی پالیسیاں سمجھتے ہوں۔ یہ فوری کوٹا کی رہائی کی ضمانت نہیں دیتا۔
 
-      ![Initial](../../../../../translated_images/ur/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      اور یہاں یہ ہے **بعد**:
-      ![New](../../../../../translated_images/ur/14-deploy-new.f7f3c355a3cf7299.webp)
+1۔ صفائی کی تصدیق کے لئے دوبارہ تعیناتی نہ کریں۔ بعد میں جان بوجھ کر کی جانے والی `azd up` بچا ہوا مقامی انپٹس استعمال کرتے ہوئے وسائل دوبارہ بنا سکتی ہے، اور اس پر دوبارہ چارجز لاگو ہوتے ہیں۔ ماڈل اپ ڈیٹس عام طور پر معاون پروویژننگ تبدیلیوں کا استعمال کرتے ہیں، نہ کہ انفراسٹرکچر ختم کرنے کا۔
 
 ---
 

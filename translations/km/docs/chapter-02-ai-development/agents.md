@@ -1,305 +1,308 @@
-# អ្នកភ្នាក់ងារបញ្ញាសិប្បនិម្មិតជាមួយ Azure Developer CLI
+# ប្រភេទភ្នាក់ងារ AI ជាមួយ Azure Developer CLI
 
-**ការរុករកជំពូក៖**
-- **📚 មុខងារមុខវិជ្ជា**៖ [AZD សម្រាប់អ្នកចាប់ផ្តើម](../../README.md)
-- **📖 ជំពូកបច្ចុប្បន្ន**៖ ជំពូក 2 - ការអភិវឌ្ឍមុខងារ AI ជាទីមុខ
-- **⬅️ មុននេះ**៖ [ការរួមបញ្ចូល Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ បន្ទាប់**៖ [ការដាក់បញ្ចូលម៉ូដែល AI](ai-model-deployment.md)
-- **🚀 ជំហាន់ខ្ពស់**៖ [ដំណោះស្រាយពហុភ្នាក់ងារ](../../examples/retail-scenario.md)
+**ការរុករកជំពូក:**
+- **📚 ទំព័រដើមវគ្គសិក្សា**: [AZD សម្រាប់អ្នកចាប់ផ្តើម](../../README.md)
+- **📖 ជំពូកបច្ចុប្បន្ន**: ជំពូក 2 - ការអភិវឌ្ឍផ្អែកលើ AI ជាដើម
+- **⬅️ មុននេះ**: [ការរួមបញ្ចូល Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ បន្ទាប់**: [ការចាប់ផ្តើមម៉ូដែល AI](ai-model-deployment.md)
+- **🚀 កម្រិតខ្ពស់**: [ដំណោះស្រាយពហុភ្នាក់ងារ](../../examples/retail-scenario.md)
 
 ---
 
 ## ការណែនាំ
 
-អ្នកភ្នាក់ងារបញ្ញាសិប្បនិម្មិតជាប្រព័ន្ធកម្មវិធីឯករាជ្យដែលអាចទទួលបានព័ត៌មានពីបរិយាកាសរបស់ពួកគេ, ធ្វើការសម្រេចចិត្ត និងអនុវត្តសកម្មភាពដើម្បីសម្រេចបានគោលដៅជាក់លាក់។ ផ្ទុយពី chatbot ងាយៗដែលចម្លើយតាមសំណួរ, អ្នកភ្នាក់ងារអាច៖
+ភ្នាក់ងារ AI គឺជាប្រព័ន្ធកម្មវិធីអូតូណូម៉ាសដែលអាចសង្កេតបរិស្ថាន របស់ខ្លួន រៀបចំសេចក្តីសម្រេច ហើយធ្វើសកម្មភាពដើម្បីសម្រេចគោលបំណងជាក់លាក់។ មិនដូចជាប៉ុណ្ណោះ chatbot សាមញ្ញ ដែលឆ្លើយតបតាមការស្នើរសុំ ភ្នាក់ងារអាច:
 
-- **ប្រើឧបករណ៍** - ហៅ API, ស្វែងរកទិន្នន័យ, ប្រតិបត្តិការ​កូដ
-- **រៀបចំ និងយល់ដឹង** - បំបែកភារកិច្ចស្មុគស្មាញជាកំហុសៗ
-- **រៀនពីបរិបទ** - រក្សារម២០ល និងបត់បែនអាកប្បកិរិយា
-- **សហការគ្នា** - ធ្វើការជាមួយអ្នកភ្នាក់ងារផ្សេងទៀត (ប្រព័ន្ធពហុភ្នាក់ងារ)
+- **ប្រើឧបករណ៍** - เรียก API ស្វែងរកមូលដ្ឋានទិន្នន័យ ប្រតិបត្តិការ code
+- **ផែនការ និងគិតស្មាន** - បំបែកភារកិច្ចស្មុគស្មាញជា​ជំហានៗ
+- **រៀនពីបរិបទ** - រក្សាអនុស្សាវរីយ៍ និងបង្វែរផ្លូវការប្រព្រឹត្ត
+- **ធ្វើការសហការ** - ធ្វើការជាមួយភ្នាក់ងារផ្សេងទៀត (ប្រព័ន្ធពហុភ្នាក់ងារ)
 
-មគ្គុទេសក៍នេះបង្ហាញពីរបៀបបញ្ចូលអ្នកភ្នាក់ងារ AI ទៅ Azure ដោយប្រើ Azure Developer CLI (azd)។
+មគ្គុទេសក៍នេះបង្ហាញពីរបៀបចាប់ផ្តើមភ្នាក់ងារ AI ទៅ Azure ដោយប្រើ Azure Developer CLI (azd)។
 
-> **កំណត់សម្គាល់ការត្រួតពិនិត្យ (2026-07-13):** មគ្គុទេសក៍នេះបានពិនិត្យជាមួយ `azd` `1.27.1` និង `azure.ai.agents` `1.0.0-beta.5`។ បទពិសោធន៍ `azd ai` នៅតែងជាស្ថានភាពមើលមុន, ដូច្នោះសូមពិនិត្យជំនួយបន្ថែមប្រសិនបើពាក្យបញ្ចូលដែលអ្នកបានដំឡើងខុសគ្នា។
+ការប្រើប្រាស់ context ការសន្ទនា មិនមែនជាការបណ្តុះម៉ូដែលទេៈ អនុស្សាវរីយ៍ចាំបាច់ ការត្រួតពិនិត្យការចូល និងការរក្សាទុកត្រូវតែត្រូវបានអនុវត្ត/កំណត់ដោយកម្មវិធី។
 
-## គោលបំណងរៀន
+> **ការពិនិត្យការចេញផ្សាយ (2026-11-04):** ឧទាហរណ៍ CLI ត្រូវបានពិនិត្យប្រឆាំងនឹងឯកសារ/ប្រភព `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, និង `azure.ai.evaluations` `1.0.0-beta.2` មិនមែនក្នុងការដាក់ឲ្យដំណើរការផ្ទាល់លើ Azure ទេ។ សូមប្រើ `azd >= 1.37.0` សម្រាប់ប្រតិបត្តិការសម្ព័ន្ធតែមួយ។ ចូលមើល [ការផ្លាស់ប្តូរនិងកំណែថ្មីៗ](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) មុនពេលធ្វើបច្ចុប្បន្នភាពគម្រោងចាស់ៗ។
 
-ដោយបញ្ចប់មគ្គុទេសក៍នេះ អ្នកនឹងបាន៖
-- ស្វែងយល់ពីអ្វីទៅជាអ្នកភ្នាក់ងារ AI និងចំណុះរវាងវានិង chatbot
-- បញ្ចូលទម្រង់អ្នកភ្នាក់ងារ AI ដោយប្រើ AZD
-- បង្កើតការកំណត់ Foundry Agents សម្រាប់អ្នកភ្នាក់ងារផ្ទាល់ខ្លួន
-- អនុវត្តលំនាំអ្នកភ្នាក់ងារជាមូលដ្ឋាន (ប្រើឧបករណ៍, RAG, ពហុភ្នាក់ងារ)
-- ត្រួតពិនិត្យ និងដោះស្រាយបញ្ហាអ្នកភ្នាក់ងារដាក់បញ្ចូល
+## គោលដៅសិក្សា
 
-## លទ្ធផលរៀន
+ដោយបញ្ចប់មគ្គុទេសក៍នេះ អ្នកនឹងអាចៈ
+- យល់ដឹងពីមុខងារនៃភ្នាក់ងារត្រូវចែកផ្តាច់ពី chatbot
+- បង្ហោះទម្រង់ភ្នាក់ងារដែលបានបង្កើតរួចជាមួយ AZD
+- កំណត់ Foundry Agents សម្រាប់ភ្នាក់ងារត្រូវការផ្ទាល់ខ្លួន
+- អនុវត្តន៍រៀបចំរ៉ូម៉ែនរួម (ប្រើឧបករណ៍, RAG, ភ្នាក់ងារច្រើន)
+- ត្រួតពិនិត្យ និងកែតម្រូវភ្នាក់ងារដាក់ចេញ
 
-បន្ទាប់ពីបញ្ចប់ អ្នកនឹងអាច៖
-- បញ្ចូលកម្មវិធីអ្នកភ្នាក់ងារ AI ទៅ Azure ដោយមួយពាក្យបញ្ជា
-- កំណត់ឧបករណ៍ និងសមត្ថភាពអ្នកភ្នាក់ងារ
-- អនុវត្តបច្ចេកវិទ្យាច្នៃប្រឌិតបង្កើតបន្ថែម (RAG) ជាមួយអ្នកភ្នាក់ងារ
-- រចនាសម្ព័ន្ធពហុភ្នាក់ងារសម្រាប់ចរន្តការងារស្មុគស្មាញ
-- ដោះស្រាយបញ្ហាពេញនិយមក្នុងការដាក់ជូនអ្នកភ្នាក់ងារ
+## លទ្ធផលសិក្សា
+
+បន្ទាប់ពីបញ្ចប់ អ្នកនឹងអាចៈ
+- បង្ហោះកម្មវិធីភ្នាក់ងារ AI ទៅ Azure ដោយប្រើពាក្យបញ្ជាតែមួយ
+- កំណត់ឧបករណ៍និងសមត្ថភាពរបស់ភ្នាក់ងារ
+- អនុវត្តបច្ចេកវិទ្យា​បន្ថែមការទាញយក (RAG) ជាមួយភ្នាក់ងារ
+- រៀបចំស្ថាបត្យកម្មភ្នាក់ងារច្រើនសម្រាប់ប្រតិបត្តិការស្មុគស្មាញ
+- ដោះស្រាយបញ្ហាទូទៅក្នុងការដាក់ចេញភ្នាក់ងារ
 
 ---
 
-## 🤖 អ្វីដែលធ្វើឲ្យអ្នកភ្នាក់ងារប្រកួតប្រជែងខុសពី Chatbot?
+## 🤖 តើអ្វីដែលធ្វើអោយភ្នាក់ងារខុសប្លែកពី Chatbot?
 
-| លក្ខណៈពិសេស | Chatbot | អ្នកភ្នាក់ងារ AI |
+| លក្ខណៈ | Chatbot | ភ្នាក់ងារ AI |
 |---------|---------|----------|
-| **អាកប្បកិរិយា** | ឆ្លើយតបតាមសំណួរ | ធ្វើសកម្មភាពឯករាជ្យ |
-| **ឧបករណ៍** | គ្មាន | អាចហៅ API, ស្វែងរក, ប្រតិបត្តិការ​កូដ |
-| **អង្គចងចាំ** | មានតែសម័យ | អង្គចងចាំប្រចាំសម័យ
-| **ការរៀបចំ** | ឆ្លើយតបមួយ | មានការយល់ដឹងច្រើនជំហាន |
-| **ការសហការគ្នា** | អង្គភាពតែមួយ | អាចធ្វើការជាមួយអ្នកភ្នាក់ងារផ្សេងទៀត |
+| **ឥរិយាបថ** | ឆ្លើយតបនឹងសំណួរ | ធ្វើសកម្មភាពដោយឯករាជ្យ |
+| **ឧបករណ៍** | ប្រហែលជាអាចប្រើការទាញយកឬឧបករណ៍ | ជាទូទៅប្រើឧបករណ៍ក្នុងសាកល្បងមានគោលបំណង |
+| **ចងចាំ** | អាស្រ័យលើកម្មវិធី | មានចងចាំថេរពេលមានការអនុវត្តដោយបញ្ចាក់ច្បាស់ |
+| **ការធ្វើផែនការ** | ចម្លើយតែមួយ | គិតបង្រួបបង្រួមជាតាឡើងវិញជាច្រើនជំហាន |
+| **សហការណ៍** | អង្គភាពតែមួយ | អាចធ្វើការជាមួយភ្នាក់ងារផ្សេងទៀត |
 
-### ឧទាហរណ៍សាមញ្ញ
+### ឧទាហរណ៍ងាយៗ
 
-- **Chatbot** = បុគ្គលជំរុញជួយឆ្លើយសំណួរនៅតុព័ត៌មាន
-- **អ្នកភ្នាក់ងារ AI** = ជំនួយផ្ទាល់ខ្លួនដែលអាចហៅទូរស័ព្ទ, កក់ពេលជួប, និងបញ្ចប់ការងារសម្រាប់អ្នក
+- **Chatbot** = មនុស្សជួយឆ្លើយសំណួរនៅតុព័ត៌មាន
+- **ភ្នាក់ងារ AI** = អ្នកជំនួយផ្ទាល់ខ្លួនដែលអាចទំនាក់ទំនងទូរស័ព្ទ កំណត់ការណាត់ និងបញ្ចប់ភារកិច្ចសម្រាប់អ្នក
 
 ---
 
-## 🚀 ការចាប់ផ្តើមលឿន៖ បញ្ចូលអ្នកភ្នាក់ងារដំបូងរបស់អ្នក
+## 🚀 ចាប់ផ្តើមរហ័ស៖ បង្ហោះភ្នាក់ងារដំបូងរបស់អ្នក
 
-### ជម្រើសទី 1: ទម្រង់ Foundry Agents (ផ្តល់អនុសាសន៍)
+ជ្រើសរើសជម្រើសមួយនៅក្នុង **ថតការងារថ្មីទទេមួយ**។ `.` នឹងចាប់ផ្តើមនៅទីនោះ; ប្រសិនបើមិនមានតំបន់កំណត់ច្បាស់ កម្មវិធី AZD បច្ចុប្បន្នអាចបង្កើតថតឈ្មោះទម្រង់និយមជាយថាហេតុ និងមិនប្ដូរថតshell របស់អ្នកទេ។ រក្សាទុកទម្រង់/បរិយាកាសផ្សេងៗនៅក្នុងថតផ្សេងៗ។
+
+កាលបរិច្ឆេទ/តម្លៃដែលបង្ហាញខាងក្រោមគឺជាគំរូសម្គាល់ មិនមែនជាប្រាក់កក់ដែលបានផ្ទៀងផ្ទាត់ឡើយ។ សូមពិនិត្យមើលលក្ខខណ្ឌជាក់លាក់ ប្រាក់ចំណាយ កំណត់គំរូ និងសេវាកម្មជាស្រេចមុនពេលបង្ហោះ។
+
+### ជម្រើស 1៖ ទម្រង់ភ្នាក់ងារ Foundry (ផ្ដល់អនុសាសន៍)
 
 ```bash
-# ចាប់ផ្តើមពុម្ពអក្សរភ្នាក់ងារបញ្ញាសិប្បនិម្មិត
-azd init --template get-started-with-ai-agents
+# Initialize the AI agents template
+azd init --template get-started-with-ai-agents .
 
-# ដាក់ចេញទៅ Azure
+# Deploy to Azure
 azd up
 ```
 
-**អ្វីដែលត្រូវបានដាក់បញ្ចូល៖**
-- ✅ Foundry Agents
-- ✅ ម៉ូដែល Microsoft Foundry (gpt-4.1)
-- ✅ Azure AI Search (សម្រាប់ RAG)
-- ✅ Azure Container Apps (ចំណុចចូលវែបសាយ)
-- ✅ Application Insights (ត្រួតពិនិត្យ)
+**អ្វីដែលត្រូវបានបង្ហោះ៖** វត្ថុបំណងចុងក្រោយនិងជម្រើសដែលបានជ្រើសរើសកំណត់គំរូឧបករណ៍ មជ្ឈមណ្ឌលផ្តល់សេវា និងធនធានត្រួតពិនិត្យ។ សូមពិនិត្យ README និង `infra/` មុនផ្ដល់សេវា; កុំគិតថាទម្រង់ភ្នាក់ងាររាល់ម៉ូដែលមាន Search ឬផ្ទាំងគេហទំព័រ។
 
 **ពេលវេលា៖** ~15-20 នាទី
-**គិតថ្លៃ៖** ~$100-150/ខែ (ការអភិវឌ្ឍ)
+**តម្លៃ៖** ~$100-150/ខែ (ការអភិវឌ្ឍន៍)
 
-### ជម្រើសទី 2: អ្នកភ្នាក់ងារ OpenAI ជាមួយ Prompty
+### ជម្រើស 2៖ ភ្នាក់ងារ Creative Writing ជាមួយ Prompty
 
 ```bash
-# បង្កើតខ្នាត​របស់ភាជន Prompty
-azd init --template agent-openai-python-prompty
+# Initialize the Prompty-based agent template
+azd init --template https://github.com/Azure-Samples/contoso-creative-writer .
 
-# ដាក់បញ្ចូលទៅ Azure
+# Deploy to Azure
 azd up
 ```
 
-**អ្វីដែលត្រូវបានដាក់បញ្ចូល៖**
-- ✅ Azure Functions (អនុវត្តអ្នកភ្នាក់ងារឥតម៉ាស៊ីនមេ)
-- ✅ ម៉ូដែល Microsoft Foundry
-- ✅ ឯកសារការកំណត់ Prompty
-- ✅ ការអនុវត្តអ្នកភ្នាក់ងារគំរូ
+**អ្វីដែលត្រូវបានបង្ហោះ៖** គំរូកិច្ចការសរសេរច្រើនភ្នាក់ងារយ៉ាងឆាប់រហ័ស FastAPI/Prompty ប្រើ Azure OpenAI, Bing Grounding, និង Azure AI Search។ ឃ្លាំង `agent-openai-python-prompty` ជាមុនប.gson្ជបញ្ជូនទៅទីនេះ; វាមិនមែនជា​ទម្រង់ agent អាកាសធាតុ Azure Functions តិចតួចទេ។ តាមតែមើល README បច្ចុប្បន្នសម្រាប់ហូស្ទីង កំណត់គំរូ និងលក្ខខណ្ឌ Bing Grounding។
 
 **ពេលវេលា៖** ~10-15 នាទី
-**គិតថ្លៃ៖** ~$50-100/ខែ (ការអភិវឌ្ឍ)
+**តម្លៃ៖** ~$50-100/ខែ (ការអភិវឌ្ឍន៍)
 
-### ជម្រើសទី 3: អ្នកភ្នាក់ងារ RAG Chat
+### ជម្រើស 3៖ ភ្នាក់ងារ RAG Chat
 
 ```bash
-# បើកផ្ទាំងជជែក RAG
-azd init --template azure-search-openai-demo
+# Initialize RAG chat template
+azd init --template azure-search-openai-demo .
 
-# ប្រើប្រាស់ទៅ Azure
+# Deploy to Azure
 azd up
 ```
 
-**អ្វីដែលត្រូវបានដាក់បញ្ចូល៖**
+**អ្វីដែលត្រូវបានបង្ហោះ៖**
 - ✅ ម៉ូដែល Microsoft Foundry
 - ✅ Azure AI Search ជាមួយទិន្នន័យគំរូ
-- ✅ បំណែកដំណើរការឯកសារ
-- ✅ ចំណុចចូលផ្ទាល់ការជជែកជាមួយយោង
+- ✅ សូម្បីដំណើរការឯកសារ
+- ✅ ផ្ទាំងជជែកជាមួយហៅយោង
 
 **ពេលវេលា៖** ~15-25 នាទី
-**គិតថ្លៃ៖** ~$80-150/ខែ (ការអភិវឌ្ឍ)
+**តម្លៃ៖** ~$80-150/ខែ (ការអភិវឌ្ឍន៍)
 
-### ជម្រើសទី 4: AZD AI Agent Init (ការមើលមុនដោយអំពី Manifest ឬ Template)
+### ជម្រើស 4៖ AZD AI Agent Init (មើលទម្រង់គម្រោង)
 
-ប្រសិនបើអ្នកមានឯកសារ manifest អ្នកភ្នាក់ងារ អ្នកអាចប្រើពាក្យបញ្ជា `azd ai` ដើម្បីបង្កើតគម្រោង Foundry Agent Service តាមផ្លូវផ្ទាល់។ ការចេញផ្សាយមើលមុនថ្មីៗក៏បានបន្ថែមការគាំទ្រចាប់ផ្តើមដោយទម្រង់ផងដែរ, ដូច្នេះលំដាប់ prompt ពិតប្រាកដអាចមានខុសគ្នាបន្តិចតាមច្បាប់បន្ថែមដែលអ្នកបានដំឡើង។
+ប្រើ `azd ai agent init` ជារបៀបអន្តរកម្ម ឬទទួលយក `azure.yaml` គម្រោងភ្នាក់ងារ​បច្ចុប្បន្នជាមួយ `--template`/`-t`។ ជម្រើសចាស់ `--manifest`/`-m` គឺជាឈ្មោះចាស់ដែលគ្មានប្រើវិញមិនមែនជាឧបករណ៍បម្លែងសម្រាប់សេចក្តីប្រកាសចាស់ទេ។
 
 ```bash
-# តំឡើងសាខា AI agents
+# Install the AI agents extension
 azd extension install azure.ai.agents
 
-# ជាជម្រើសៈ ពិនិត្យការតំឡើងកំណែសាកល្បង
+# Optional: verify the installed preview version
 azd extension show azure.ai.agents
 
-# កំណត់ពី manifest ពីភ្នាក់ងារ
-azd ai agent init -m agent-manifest.yaml
+# Initialize from a current agent project template (supply your template path)
+azd ai agent init --template ./templates/support-agent/azure.yaml
 
-# ដាក់បញ្ចូលទៅ Azure
+# Deploy to Azure
 azd up
 
-# ពិសោធន៍ភ្នាក់ងារដែលបានដាក់ (បង្ហាញពេលយឺត + ពេល​ទៅ​ប៊ីត​ដំបូង)
+# Test the deployed agent (shows latency + time-to-first-byte)
 azd ai agent invoke
 ```
 
-**ពេលដែលថៅកែ `azd ai agent init` ប្រៀបធៀប `azd init --template`:**
+**ពេលណាដើម្បីប្រើ `azd ai agent init` ប្រឆាំងនឹង `azd init --template`:**
 
-| វិធីសាស្រ្ត | សម្រួលសម្រាប់ | វិធីដែលវាដំណើរការ |
+| វិធីសាស្រ្ត | សមស្របសម្រាប់ | វិធីធ្វើការ |
 |----------|----------|------|
-| `azd init --template` | ចាប់ផ្តើមពីកម្មវិធីគំរូដំណើរការ | ចម្លងរក្សាទុកទម្រង់ពេញលេញមួយដែលមានកូដ + គម្រប |
-| `azd ai agent init -m` | ការសង់ពីឯកសារ manifest អ្នកភ្នាក់ងាររបស់អ្នក | បង្កើតរចនាសម្ព័ន្ធគម្រោងពីការបកស្រាយអ្នកភ្នាក់ងារ |
+| `azd init --template` | ចាប់ផ្តើមពីកម្មវិធីគំរូដំណើរការ | ចម្លងឃ្លាំងទម្រង់ពេញលេញរួមមានកូដ + មូលដ្ឋានបណ្ដាញ |
+| `azd ai agent init --template` | ទទួលយកគម្រោងភ្នាក់ងារ Foundry បច្ចុប្បន្ន | ប្រើឯកសារគម្រោង `azure.yaml` និងនិយមន័យរបស់វា |
 
-> **គន្លឹះ:** ប្រើ `azd init --template` ពេលរៀន (ជម្រើស 1-3 ខាងលើ)។ ប្រើ `azd ai agent init` ពេលសាងសង់អ្នកភ្នាក់ងារផលិតកម្មជាមួយ manifest របស់អ្នក។
+> **យោបល់៖** ប្រើ `azd init --template` ពេលកំពុងសិក្សា (ជម្រើស 1-3 ខាងលើ)។ ប្រើ `azd ai agent init` សម្រាប់របៀបធ្វើការភ្នាក់ងារ Foundry។ ដើម្បីបន្ថែមនិយមន័យភ្នាក់ងារផ្ទាល់ទៅគម្រោងដែលមានស្រាប់ សូមមើល [មគ្គុទេសក៍ការចាប់ផ្តើមនិងការផ្លាស់ប្ដូរ](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init)។
 
-បន្ទាប់ពី `azd up`, បន្ដបន្ដ ខ្សែការអឺកសង់នេះនាំអ្នកឆ្ពោះទៅរកជីវចលន៍អ្នកភ្នាក់ងារ៖ `azd ai agent invoke` សម្រាប់តេស្ត, `azd ai agent eval generate` និង `azd ai agent optimize` ដើម្បីវាស់វែង និងបង្កើតគុណភាព, និង `azd ai agent delete` ដើម្បីសម្អាត។ មើល [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) សម្រាប់កំណត់យោងពេញលេញ។
+បន្ទាប់ពី `azd up`, ប្រើ `azd ai agent invoke` ដើម្បីសាកល្បង, ភាគបំបែក `azure.ai.evaluations` ផ្នែកបន្ថែម (`azd ai eval init`, `generate` និង `run start`) ដើម្បីវាស់កម្រិតគុណភាព និង `azd ai agent optimize` ដើម្បីបង្កើនវា ដោយប្រើការកំណត់ការវាយតម្លៃថ្មី។ Agents beta.22 បានជំនួសដំណើរការវាយតម្លៃចាស់ និងបានផ្លាស់ប្តូររូបមន្ត `--config` នៃការអុបទីម៉ា។ រកមើល [ការផ្លាស់ប្តូរវាយតម្លៃ](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) និង [ការផ្លាស់ប្តូរការអុបទីម៉ា](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) មុនពេលប្រើឧទាហរណ៍ចាស់ៗម្តងទៀត។
 
 ---
 
-## 🏗️ លំនាំស្ថាបត្យកម្មអ្នកភ្នាក់ងារ
+## 🏗️ លំនាំរចនាសម្ព័ន្ធ Agent
 
-### លំនាំទី 1: អ្នកភ្នាក់ងារតែមួយជាមួយឧបករណ៍
+### លំនាំទី ១៖ Agent តែមួយជាមួយឧបករណ៍
 
-លំនាំអ្នកភ្នាក់ងារដែលសាមញ្ញបំផុត - អ្នកភ្នាក់ងារតែមួយដែលអាចប្រើឧបករណ៍ច្រើន។
+លំនាំ Agent ងាយស្រួលបំផុត - Agent មួយអាចប្រើឧបករណ៍ជាច្រើន។
 
 ```mermaid
 graph TD
-    UI[មុខងារប្រើប្រាស់] --> Agent[គូប្រតិបត្តិ AI<br/>gpt-4.1]
-    Agent --> Search[ឧបករណ៍ស្វែងរក]
-    Agent --> Database[ឧបករណ៍មូលដ្ឋានទិន្នន័យ]
-    Agent --> API[ឧបករណ៍ API]
+    UI[User Interface] --> Agent[AI Agent<br/>gpt-4.1]
+    Agent --> Search[Search Tool]
+    Agent --> Database[Database Tool]
+    Agent --> API[API Tool]
 ```
 
-**សម្រួលល្អសម្រាប់៖**
-- គ្រប់គ្រងគាំទ្រអតិថិជន
-- ជំនួយស្រាវជ្រាវ
-- អ្នកភ្នាក់ងារវិភាគទិន្នន័យ
+**ល្អបំផុតសម្រាប់៖**
+- បុណ្ណ inbound ទូរស័ព្ទអតិថិជន
+- ជំនួយការស្រាវជ្រាវ
+- Agent វិភាគទិន្នន័យ
 
-**AZD ទម្រង់:** `azure-search-openai-demo`
+**ឧទាហរណ៍កម្មវិធីដែលពាក់ព័ន្ធ៖** `azure-search-openai-demo` បង្ហាញពី RAG មិនមែនជាលំនាំ Agent ឧបករណ៍បែបចៃដន្យទូទៅទេ។
 
-### លំនាំទី 2: អ្នកភ្នាក់ងារRAG (បង្កើតបន្ថែមដោយការទាញយក)
+### លំនាំទី ២៖ Agent RAG (ការបង្កើតដោយបន្ថែមការយកឯកសារ)
 
-អ្នកភ្នាក់ងារដែលទាញយកឯកសារដែលពាក់ព័ន្ធមុនពេលបង្កើតចម្លើយ។
+Agent ដែលយកឯកសារពាក់ព័ន្ធមុនពេលបង្កើតចម្លើយ។
 
 ```mermaid
 graph TD
-    Query[សំណួរអ្នកប្រើ] --> RAG[អ្នកចាត់ការ RAG]
-    RAG --> Vector[ការស្វែងរកវ៉ិចទ័រ]
+    Query[User Query] --> RAG[RAG Agent]
+    RAG --> Vector[Vector Search]
     RAG --> LLM[LLM<br/>gpt-4.1]
     Vector -- Documents --> LLM
-    LLM --> Response[ចម្លើយជាមួយឯកសារ​រាយការណ៍]
+    LLM --> Response[Response with Citations]
 ```
 
-**សម្រួលល្អសម្រាប់៖**
+**ល្អបំផុតសម្រាប់៖**
 - មូលដ្ឋានចំណេះដឹងសហគ្រាស
-- ប្រព័ន្ធសំណួរនិងចម្លើយឯកសារ
-- ការស្រាវជ្រាវគោលការណ៍ និងច្បាប់
+- ប្រព័ន្ធសំណួរ-ចម្លើយឯកសារ
+- ការស្រាវជ្រាវគោលការណ៍ និងផ្នែកច្បាប់
 
-**AZD ទម្រង់:** `azure-search-openai-demo`
+**ទម្រង់ AZD:** `azure-search-openai-demo`
 
-### លំនាំទី 3: ប្រព័ន្ធពហុភ្នាក់ងារ
+### លំនាំទី ៣៖ ប្រព័ន្ធ Multi-Agent
 
-អ្នកភ្នាក់ងារពិសេសច្រើនធ្វើការចូលរួមគ្នាដើម្បីធ្វើភារកិច្ចស្មុគស្មាញ។
+អ្នកជំនាញ Agent ចម្បងច្រើនដែលធ្វើការជាមួយគ្នាលើតប៉ារម៉ែតធ្ងន់ច្រើន។
 
 ```mermaid
 graph TD
-    Orchestrator[អ្នកប្រតkinson្នាការ] --> Research[អ្នកស្រាវជ្រាវ<br/>gpt-4.1]
-    Orchestrator --> Writer[អ្នកនិពន្ធ<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[អ្នកពិនិត្យឡើងវិញ<br/>gpt-4.1]
+    Orchestrator[Orchestrator Agent] --> Research[Research Agent<br/>gpt-4.1]
+    Orchestrator --> Writer[Writer Agent<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Reviewer Agent<br/>gpt-4.1]
 ```
 
-**សម្រួលល្អសម្រាប់៖**
-- ការបង្កើតមាតិកាស្មុគស្មាញ
-- ចរន្តការងារជា​ជំហានច្រើន
-- ភារកិច្ចដែលត្រូវការជំនាញខុសគ្នា
+**ល្អបំផុតសម្រាប់៖**
+- ការបង្កើតមាតិកាមួយស្មុគស្មាញ
+- សំណុំការងារជាច្រើនជំហាន
+- ការងារដែលត្រូវការជំនាញខុសគ្នា
 
-**ស្វែងយល់បន្ថែម៖** [លំនាំសម្របសម្រួលពហុភ្នាក់ងារ](../chapter-06-pre-deployment/coordination-patterns.md)
+**សូមរៀនបន្ថែម៖** [លំនាំសម្រុក Multi-Agent](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ ការកំណត់ឧបករណ៍អ្នកភ្នាក់ងារ
+## ⚙️ ការកំណត់ឧបករណ៍ភ្នាក់ងារ
 
-អ្នកភ្នាក់ងារត្រូវក្លាយជាម្លិះពពួកពេញចិត្តនៅពេលអាចប្រើឧបករណ៍បាន។ នេះជារបៀបកំណត់ឧបករណ៍ទូទៅ៖
+ភ្នាក់ងាររីកចម្រើនខ្លាំងនៅពេលពួកគេអាចប្រើឧបករណ៍បាន។ នេះជាវិធីកំណត់ឧបករណ៍ទូទៅ៖
 
-### ការកំណត់ឧបករណ៍នៅ Foundry Agents
+### ការកំណត់ឧបករណ៍នៅក្នុងភ្នាក់ងារ Foundry
+
+នេះគឺជា **ខ្លឹមសារសេវាភ្នាក់ងារបែបបុរាណ** ដែលផ្តោតទៅលើ `azure-ai-projects==1.0.0` និង `azure-ai-agents==1.1.0` ជាមួយ `azure-identity`។ វាមិនមែនជាកំណែ API versioned-agent/Responses ថ្មីដែលប្រើដោយគំរូ Foundry បច្ចុប្បន្នខ្លះទេ ហើយមិនមែនជា `azure.ai.agents` AZD extension (កញ្ចប់ផ្សេងទៀត)។ កុំលាយ API ជំនាន់នេះ។ កំណត់ `PROJECT_ENDPOINT` ទៅចំណុចបញ្ចប់គម្រោង Foundry បែបបុរាណ និង `MODEL_DEPLOYMENT_NAME` ទៅនឹងការតំឡើងម៉ូឌែលគាំទ្រមួយដែលមានស្រាប់; បញ្ជាក់ដោយ `az login` នៅក្នុងเครื่อง និងផ្ដល់សិទ្ធិគម្រោងត្រឹមត្រូវ។
 
 ```python
 # agent_config.py
+import os
 from azure.ai.projects import AIProjectClient
-from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
+from azure.ai.agents.models import FunctionTool
+from azure.identity import DefaultAzureCredential
 
-# កំណត់ឧបករណ៍ផ្ទាល់ខ្លួន
-search_tool = FunctionTool(
-    name="search_knowledge_base",
-    description="Search the company knowledge base for relevant documents",
-    parameters={
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "The search query"
-            }
-        },
-        "required": ["query"]
-    }
+def search_knowledge_base(query: str) -> str:
+    """Search the demonstration knowledge base.
+
+    :param query: Search text.
+    :return: Matching demonstration information.
+    """
+    # Local fixture only, not a production search implementation.
+    return "Demo policy: returns are accepted within 30 days."
+
+project_client = AIProjectClient(
+    endpoint=os.environ["PROJECT_ENDPOINT"],
+    credential=DefaultAzureCredential(),
 )
-
-# បង្កើតភ្នាក់ងារជាមួយឧបករណ៍
+search_tool = FunctionTool(functions={search_knowledge_base})
+project_client.agents.enable_auto_function_calls(search_tool)
 agent = project_client.agents.create_agent(
-    model="gpt-4.1",
+    model=os.environ["MODEL_DEPLOYMENT_NAME"],
     name="Support Agent",
-    instructions="You are a helpful support agent. Use the search tool to find relevant information.",
-    tools=[search_tool, CodeInterpreterTool()]
+    instructions="Use search_knowledge_base for policy questions. Label results as demo data.",
+    tools=search_tool.definitions,
 )
 ```
 
-### ការកំណត់បរិបូណ៌
+ការចុះបញ្ជីស្កីម៉ាត្រការងារមិនធ្វើឲ្យ Python ដំណើរការលើសេវានោះទេ។ ក្នុង SDK នេះ, `enable_auto_function_calls` បូកជាមួយ `agents.runs.create_and_process(...)` នឹងរត់ callback ដែលបានចុះបញ្ជីនៅក្នុងដំណើរការអតិថិជនរបស់អ្នក។ មើលឧទាហរណ៍ SDK ដែលបានចេញផ្សាយ [released SDK example](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py)។ បិទអតិថិជន និងលុបភ្នាក់ងារ/ខ្សែចំនាត់បង្ហាញពេលបញ្ចប់។
+
+### ការកំណត់បរិស្ថាន
+
+ឈ្មោះខាងក្រោមគឺជាការបញ្ចូលគំរូប тұлឥតស្តង់ដារ **ដែលមានលក្ខណៈប្រើប្រាស់ក្នុងការបង្ហាញ** មិនមែនជាការប្តូរដែលបានបង្កើតរួចរបស់ AZD ទេ។ ជាមុនសិន បណ្តតម្លៃនីមួយៗត្រូវតែកាត់ជាតំណតាមកូដ `infra/main.parameters.json`, សេដ្ឋាភាពហិរញ្ញវត្ថុ និងកូដកម្មវិធី។ `azd env set` តែម្ដងមិនបម្លែងឧបករណ៍ឬការណែនាំរបស់ភ្នាក់ងារឡើយ។
 
 ```bash
-# កំណត់អថេរបរិយាកាសជាក់លាក់សម្រាប់ភ្នាក់ងារ
+# Set up agent-specific environment variables
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# ចាក់ផ្សាយជាមួយការកំណត់រចនាសម្ព័ន្ធដែលបានអាប់ដេត
-azd deploy
+# Apply wired infrastructure and application changes
+azd up
 ```
 
 ---
 
-## 📊 ការតាមដានអ្នកភ្នាក់ងារ
+## 📊 ការត្រួតពិនិត្យភ្នាក់ងារ
 
-### ការរួមបញ្ចូល Application Insights
+### ការបញ្ចូល Application Insights
 
-គ្រប់ទម្រង់ AZD អ្នកភ្នាក់ងាររួមបញ្ចូល Application Insights សម្រាប់ការត្រួតពិនិត្យ៖
+ប្រសិនបើគំរូដែលអ្នកជ្រើសរើសបានផ្តល់សិទ្ធិ Application Insights និងកំណត់ឧបករណ៍វាស់វែង៖
 
 ```bash
-# បើកផ្ទាំងគ្រប់គ្រងតាមដាន
+# Open monitoring dashboard
 azd monitor --overview
 
-# មើលកំណត់ហេតុបង្កើតឡើងថ្មីៗ
+# Open the Application Insights logs view (not a streaming log tail)
 azd monitor --logs
 
-# មើលគ្រប់លទ្ធផលបច្ចុប្បន្ន
+# View live metrics
 azd monitor --live
 ```
 
-### អត្រាកំណត់សំខាន់ៗដែលត្រូវតាមដាន
+### គោលសញ្ជាតិរបស់គួរត្រួតពិនិត្យ
 
-| ប្រតិទិន | ការពិពណ៌នា | គោលដៅ |
+| គោលសញ្ញា | សេចក្ដីពិពណ៌នា | គោលដៅ |
 |--------|-------------|--------|
-| ល្បឿនឆ្លើយតប | ពេលវេលាក្នុងការបង្កើតចម្លើយ | < 5 វិនាទី |
-| ការប្រើប្រាស់ Token | Token ក្នុងមួយសំណើ | ត្រួតពិនិត្យថ្លៃជាមួយ |
-| អត្រាជោគជ័យហៅឧបករណ៍ | % នៃការប្រតិបត្តិការឧបករណ៍ជោគជ័យ | > 95% |
-| អត្រាភាពកំហុស | សំណើអ្នកភ្នាក់ងារបរាជ័យ | < 1% |
-| កម្រិតពេញចិត្តអ្នកប្រើ | ពិន្ទុមតិយោបល់ | > 4.0/5.0 |
+| ពេលវេលាឆ្លើយតប | ពេលវេលាដើម្បីបង្កើតចម្លើយ | < 5 វិនាទី |
+| ការប្រើប្រាស់ Token | តួអក្សរត្រូវបានប្រើក្នុងការស្នើសុំ | តាមដានសម្រាប់ថ្លៃកម្រៃ |
+| អត្រាជោគជ័យការហៅឧបករណ៍ | ភាគរយនៃការប្រតិបត្ដិការ​ឧបករណ៍​ជោគជ័យ | > 95% |
+| អត្រាខុសបញ្ជា | សំណើភ្នាក់ងារដែលបរាជ័យ | < 1% |
+| ការពេញចិត្តរបស់អ្នកប្រើ | ពិន្ទុមតិយោបល់ | > 4.0/5.0 |
 
-### ការចុះបញ្ជីវចនានុក្រមផ្ទាល់ខ្លួនសម្រាប់អ្នកភ្នាក់ងារ
+### ការចុះបញ្ជីផ្ទាល់ខ្លួនសម្រាប់ភ្នាក់ងារ
 
 ```python
 import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# កំណត់រចនាសម្ព័ន្ធ Azure Monitor ជាមួយ OpenTelemetry
+# Configure Azure Monitor with OpenTelemetry
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -309,111 +312,107 @@ tracer = trace.get_tracer(__name__)
 def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
     with tracer.start_as_current_span("agent_interaction") as span:
         span.set_attributes({
-            "user_query": user_query,
+            "query_length": len(user_query),  # Do not log raw prompts or personal data
             "response_length": len(agent_response),
             "tools_used": tools_used,
             "latency_ms": latency_ms
         })
 ```
 
-> **ចំណាំ:** ដំឡើងកញ្ចប់ដែលទាមទារ: `pip install azure-monitor-opentelemetry opentelemetry`
+> **កំណត់សំគាល់៖** ត្រូវដំឡើងកញ្ចប់ដែលត្រូវការ៖ `pip install azure-monitor-opentelemetry`។ វាប្រើប្រាស់សំណុំបណ្ណៈ OpenTelemetry; ការនាំចូល namespace មិនមែនជាភារកិច្ចក្នុងការដំឡើងកញ្ចប់ដែលមានឈ្មោះ `opentelemetry` ទេ។
 
 ---
 
-## 💰 ការពិចារណាគិតថ្លៃ
+## 💰 ការផ្តល់អត្រាតម្លៃ
 
-### តម្លៃប្រចាំខែប្រចាំលំនាំ
+### ការវាយតម្លៃថ្លៃប្រចាំខែតាមលំនាំ
 
-| លំនាំ | បរិបទអភិវឌ្ឍន៍ | ផលិតកម្ម |
+នេះគឺជាជួររចនាប្រាក់សម្រាប់គំរូប៉ុណ្ណោះ មិនមែនជាការដាក់ទំនងថ្លៃឬកំណត់ការចំណាយទេ។ តំបន់ ម៉ូឌែល token SKU ស្វែងរក/គណនា, ការសម្របសម្រួលឧបករណ៍ ប្រភេទផ្ទុក និងចរាចរណ៍អាចលើសពីនេះ។ សូមពិនិត្យការណែនាំថ្លៃរបស់គំរូ និងតម្លៃ Azure មុនពេល `azd up`។
+
+| លំនាំ | បរិបទកំណត់អភិវឌ្ឍន៍ | ផលិតកម្ម |
 |---------|-----------------|------------|
-| អ្នកភ្នាក់ងារតែមួយ | $50-100 | $200-500 |
-| អ្នកភ្នាក់ងារ RAG | $80-150 | $300-800 |
-| ពហុភ្នាក់ងារ (2-3 នាក់) | $150-300 | $500-1,500 |
-| ពហុភ្នាក់ងារសហគ្រាស | $300-500 | $1,500-5,000+ |
+| ភ្នាក់ងារតែមួយ | $50-100 | $200-500 |
+| ភ្នាក់ងារ RAG | $80-150 | $300-800 |
+| ភ្នាក់ងារច្រើន (2-3 ភ្នាក់ងារ) | $150-300 | $500-1,500 |
+| ភ្នាក់ងារច្រើនសហគ្រាស | $300-500 | $1,500-5,000+ |
 
-### គន្លឹះបង្រួមថ្លៃ
+### សន្លឹកជំនួយបង្កើនប្រសិទ្ធភាពថ្លៃ
 
-1. **ប្រើ gpt-4.1-mini សម្រាប់ភារកិច្ចងាយៗ**
+1. **ប្រើ gpt-4.1-mini សម្រាប់ភារកិច្ចសាមញ្ញៗ** (គ្រាន់តែបើទម្រង់របស់អ្នកប្រើបញ្ចូលទិន្នន័យនេះ)
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **អនុវត្តតំណរភ្ជាប់សម្រាប់សំណួរដដែល**
-   ```python
-   from functools import lru_cache
-   
-   @lru_cache(maxsize=1000)
-   def get_cached_response(query_hash):
-       return agent.run(query_hash)
-   ```
+2. **អនុវត្តការផ្ទុកក្នុងឃ្លាំងដែលមានដែនកំណត់សម្រាប់ការស្វែងរកម្ដងទៅម្ដងដោយសុវត្ថិភាព។** រួមបញ្ចូលការអនុញ្ញាតជួលអ្នកប្រើ, ការដាក់ចេញម៉ូដែល, ការណែនាំ និងកំណែដកយកក្នុងកូនសោរផ្ទុកក្នុងឃ្លាំង; កំណត់កំណត់ពេលផុតកំណត់។ កុំចែករំលែកការឆ្លើយតបជាឯកជនតាមការស្វែងរកដែលមានតែសំណួរតែមួយតាមដំណើរការទូទៅ។ ឯកសារ SDK agent គ្មានវិធីសាស្រ្តទូទៅ `agent.run()` មួយឡើយ។
 
-3. **កំណត់កំណត់គ្រាប់ Token ចំពោះមួយដំណើរ**
+3. **កំណត់ដែនកំណត់ token ក្នុងមួយកំណត់ដំណើរ**
    ```python
-   # កំណត់ max_completion_tokens ពេលបើកដំណើរការ agent មិនមែនពេលបង្កើតទេ
-   run = project_client.agents.create_run(
+   # Set max_completion_tokens when running the agent, not during creation
+   run = project_client.agents.runs.create_and_process(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # គោលដៅរយៈពេលចំណែកប្រតិកម្ម
+       max_completion_tokens=1000  # Budget across the run; may finish as incomplete
    )
    ```
 
-4. **កំណត់ជម្រើសបន្ថែមពិបាកក្រោមបើគ្មានការប្រើប្រាស់**
+4. **កំណត់ស្កាមប៊ែល Container Apps ដែលមានសិទ្ធិទៅសូន្យនៅពេលមិនបានប្រើបា្រះ**
    ```bash
-   # កម្មវិធី Container Apps បំពេញការតម្រូវបានអូតូម៉ាទិកទៅសូន្យ
+   # Custom-template input: must map to template.scale.minReplicas
    azd env set MIN_REPLICAS "0"
    ```
+   អនុវត្តបម្រែបម្រួលហេដ្ឋារចនាសម្ព័ន្ធជាមួយ `azd provision` ឬ `azd up`។ ការហ្វឹកហាត់ទៅសូន្យត្រូវការការជំរុញសមស្រប ហើយមិនបញ្ឈប់ការស្វែងរក, ការផ្ទុកទិន្នន័យ, ឬការទូទាត់ម៉ូដែល/ឧបករណ៍ឡើយ។
 
 ---
 
-## 🔧 ដោះស្រាយបញ្ហាអ្នកភ្នាក់ងារ
+## 🔧 ការជួសជុលបញ្ហា Agents
 
 ### បញ្ហាទូទៅ និងដំណោះស្រាយ
 
 <details>
-<summary><strong>❌ អ្នកភ្នាក់ងារមិនឆ្លើយតបទៅហៅឧបករណ៍</strong></summary>
+<summary><strong>❌ តំណាងមិនឆ្លើយតបនឹងការហៅឧបករណ៍</strong></summary>
 
 ```bash
-# ពិនិត្យមើលថា​ឧបករណ៍​ទាំងអស់​ត្រូវ​បាន​ចុះបញ្ជី​ឲ្យបានត្រឹមត្រូវ
+# Inspect the application deployment (not the agent's registered tools)
 azd show
 
-# ធ្វើការត្រួតពិនិត្យការប្រើប្រាស់ OpenAI
+# Verify OpenAI deployment
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# ពិនិត្យកំណត់ហេតុភ្នាក់ងារ
+# Check agent logs
 azd monitor --logs
 ```
 
-**មូលហេតុទូទៅ៖**
-- ការមិនត្រូវគ្នានៃហត្ថលេខាភункញោមឧបករណ៍
-- ខ្វះសិទ្ធិក្នុងការចូលប្រើ
-- មិនអាចចូលទៅកាន់ប៊ឺម៉ែ API
+**ហេតុផលធម្មតា៖**
+- ការដាក់ហត្ថលេខាឧបករណ៍មិនត្រូវគ្នា
+- ខ្វះសិទ្ធិទាមទារ
+- មិនអាចចូលប្រើ API endpoint បាន
 </details>
 
 <details>
-<summary><strong>❌ ពេលយឺតខ្ពស់ក្នុងការឆ្លើយតបអ្នកភ្នាក់ងារ</strong></summary>
+<summary><strong>❌ ពេលយឺតខ្ពស់ក្នុងការឆ្លើយតប Agent</strong></summary>
 
 ```bash
-# ពិនិត្យមើល Application Insights សម្រាប់ចំណុចខូច
+# Check Application Insights for bottlenecks
 azd monitor --live
 
-# ពិចារណាការប្រើម៉ូដែលរហ័សជាងនេះ
+# Consider using a faster model
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
-azd deploy
+azd up
 ```
 
-**គន្លឹះបង្កើនប្រសិទ្ធភាព៖**
-- ប្រើចម្លើយបញ្ចាំង
-- អនុវត្តការផ្ទុកចម្លើយជាមុន
-- កាត់បន្ថយទំហំបង្អួចបរិបទ
+**គន្លឹះធ្វើឲ្យប្រសើរឡើង៖**
+- ប្រើការឆ្លើយតបឆ្លាតវៃតាមបទចងក្រង
+- អនុវត្តការផ្ទុកឆ្លើយតបក្នុងឃ្លាំង
+- បន្ថយទំហំវីនដូ context
 </details>
 
 <details>
-<summary><strong>❌ អ្នកភ្នាក់ងារបញ្ចូនព័ត៌មានខុសឬបង្កើតមិនពិត</strong></summary>
+<summary><strong>❌ តំណាងបង្ហាញព័ត៌មានមិនត្រឹមត្រូវ ឬមានការស្រមៃ</strong></summary>
 
 ```python
-# កែលម្អជាមួយប្រព័ន្ធ​បង្ហាញ​ដែល​ប្រសើរជាង​មុន
+# Improve with better system prompts
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -422,22 +421,21 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# បន្ថែមការយកយកសម្រាប់ការដាក់ឲ្យមានមូលដ្ឋាន
-agent = project_client.agents.create_agent(
-    model="gpt-4.1",
-    instructions=instructions,
-    tools=[FileSearchTool()]  # ដាក់ឆ្លើយតបឲ្យមានមូលដ្ឋានជាលិខិតឯកសារ
-)
+# Use these instructions in the agent definition.
+# For classic file search, first upload/index documents in a vector store,
+# then use FileSearchTool(vector_store_ids=[...]) and pass both its
+# .definitions and .resources when creating the agent.
 ```
+ ការណែនាំ និងការដកយកកាត់បន្ថយហានិភ័យ; មិនមានអ្វីធានាថាចម្លើយពិតប្រាកដទេ។ វាយតម្លៃសំណួរដែលមានមូលដ្ឋាន ភាគច្រើន និងក្រៅសម្រាប់ការឆ្លើយតបផ្អែកលើចម្លើយដែលបានស្គាល់។
 </details>
 
 <details>
-<summary><strong>❌ កំហុសហែតខ្សែ Token ឆ្លងកាត់</strong></summary>
+<summary><strong>❌ កំហុសលើកំណត់កំណត់ token</strong></summary>
 
 ```python
-# អនុវត្តការគ្រប់គ្រងបង្អួចបរិបទ
+# Implement context window management
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
-    """Keep only recent messages within token limit."""
+    """Approximate content-only budget for objects with .content strings."""
     import tiktoken
     encoding = tiktoken.encoding_for_model(model)
     total_tokens = 0
@@ -452,154 +450,165 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     
     return truncated
 ```
+ជំនួយនេះមិនរាប់បញ្ចូលកាលណាស៊ីស្រេមតួនាទី/ឧបករណ៍, សេចក្តីណែនាំប្រព័ន្ធ, សញ្ញារូបភាព និងបន្ទុកពហុប្រព័ន្ធទេ។ សូមរក្សាទីវៅសម្រាប់វា និងការសម្រេច; កុំបំបែកជាគូហៅឧបករណ៍/លទ្ធផលឬបោះបង់សេចក្តីណែនាំប្រព័ន្ធដែលត្រូវការ។ ដំឡើង `tiktoken` ផ្សេងពីគ្នា។ វាមិនមែនជាកម្មវិធីផ្ទៀងផ្ទាត់បង្អួចបរិបទទូទៅឡើយ។
 </details>
 
 ---
 
-## 🎓 វគ្គហាត់ប្រាណ
+## 🎓 ថ្លែងការណ៍ដៃអនុវត្ត
 
-### ហាត់ប្រាណទី 1: បញ្ចូលអ្នកភ្នាក់ងារមូលដ្ឋាន (២០ នាទី)
+### លំហាត់ ១៖ ចេញផ្សាយមនុស្សជំនួយមូលដ្ឋាន (២០ នាទី)
 
-**គោលបំណង៖** បញ្ចូលអ្នកភ្នាក់ងារ AI ដំបូងរបស់អ្នក ដោយប្រើ AZD
+**គោលបំណង៖** ចេញផ្សាយមនុស្សជំនួយ AI ដំបូងរបស់អ្នកដោយប្រើ AZD
 
 ```bash
-# ជំហានទី ១៖ បង្កើតឧទាហរណ៍
-azd init --template get-started-with-ai-agents
+# Step 1: Initialize template
+azd init --template get-started-with-ai-agents .
 
-# ជំហានទី ២៖ ចូលទៅកាន់ Azure
+# Step 2: Login to Azure
 azd auth login
-# ប្រសិនបើអ្នកធ្វើការ​ឆ្លងកាត់ tenants សូមបន្ថែម --tenant-id <tenant-id>
+# If you work across tenants, add --tenant-id <tenant-id>
 
-# ជំហានទី ៣៖ ដំឡើង
+# Step 3: Deploy
 azd up
 
-# ជំហានទី ៤៖ ពិនិត្យតំណាងភ្នាក់ងារ
-# លទ្ធផលដែលរំពឹងទុកបន្ទាប់ពីការដំឡើង៖
-#   ការដំឡើងបានសម្រេច!
-#   គោលបំណង៖ https://<app-name>.<region>.azurecontainerapps.io
-# បើក URL ដែលបង្ហាញនៅលើលទ្ធផល ហើយសាកសួរពាក្យសំណួរ
+# Step 4: Test the agent
+# Expected output after deployment:
+#   Deployment Complete!
+#   Endpoint: https://<app-name>.<region>.azurecontainerapps.io
+# Open the URL shown in the output and try asking a question
 
-# ជំហានទី ៥៖ មើលការត្រួតពិនិត្យ
+# Step 5: View monitoring
 azd monitor --overview
 
-# ជំហានទី ៦៖ សម្អាត
+# Step 6: Clean up
 azd down --force --purge
 ```
 
-**លក្ខណៈជោគជ័យ៖**
-- [ ] អ្នកភ្នាក់ងារឆ្លើយសំណួរ
-- [ ] អាចចូលទៅកាន់ផ្ទាំងត្រួតពិនិត្យតាម `azd monitor`
-- [ ] ធនធានបានសំអាតដោយជោគជ័យ
+**កម្រិតជោគជ័យ៖**
+- [ ] មនុស្សជំនួយឆ្លើយសំណួរ
+- [ ] អាចចូលប្រើផ្ទាំងតាមដានតាមរយៈ `azd monitor`
+- [ ] ធនធានត្រូវបានសម្អាតដោយជោគជ័យ
 
-### ហាត់ប្រាណទី 2: បន្ថែមឧបករណ៍ផ្ទាល់ខ្លួន (៣០ នាទី)
+### លំហាត់ ២៖ បន្ថែមឧបករណ៍ផ្ទាល់ខ្លួន (៣០ នាទី)
 
-**គោលបំណង៖** ពង្រឹងអ្នកភ្នាក់ងារជាមួយឧបករណ៍ផ្ទាល់ខ្លួន
+**គោលបំណង៖** ត្រលប់មនុស្សជំនួយជាមួយឧបករណ៍ផ្ទាល់ខ្លួន
 
-1. បញ្ចូលទម្រង់អ្នកភ្នាក់ងារ៖
-   ```bash
-   azd init --template get-started-with-ai-agents
-   azd up
-   ```
-2. បង្កើតមុខងារឧបករណ៍ថ្មីនៅក្នុងកូដអ្នកភ្នាក់ងារ៖
+**ចំណុចចាប់ផ្តើម៖** ប្រើអត្រាសកល SDK ដែលមានចាស់ពី [ការកំណត់ឧបករណ៍](#tool-configuration-in-foundry-agents) មិនមែនគំរូដែលបង្កើតដោយសំណុំSDK ផ្សេងទេ។
+
+1. បន្ថែមឧបករណ៍កំណត់ដែនបញ្ជាក់នេះទៅក្នុង `agent_config.py`:
    ```python
    def get_weather(location: str) -> str:
-       """Get current weather for a location."""
-       # ការហៅ API ទៅសេវាកម្មអាកាសធាតុ
-       return f"Weather in {location}: Sunny, 72°F"
+       """Return demonstration weather, not live conditions.
+
+       :param location: City name.
+       :return: A clearly labelled fixture.
+       """
+       print(f"TOOL_CALLED: {location}")
+       return f"Demo weather in {location}: Sunny, 72°F (fixture, not live)"
    ```
-3. ចុះបញ្ជីឧបករណ៍ជាមួយអ្នកភ្នាក់ងារ៖
+2. ជំនួសប្លុកការចុះឈ្មោះនិងបង្កើត search-tool ជាមួយ:
    ```python
-   from azure.ai.projects.models import FunctionTool
-
-   weather_tool = FunctionTool(
-       name="get_weather",
-       description="Get current weather for a location",
-       parameters={
-           "type": "object",
-           "properties": {
-               "location": {"type": "string", "description": "City name"}
-           },
-           "required": ["location"]
-       }
-   )
-
+   weather_tool = FunctionTool(functions={get_weather})
+   project_client.agents.enable_auto_function_calls(weather_tool)
    agent = project_client.agents.create_agent(
-       model="gpt-4.1",
+       model=os.environ["MODEL_DEPLOYMENT_NAME"],
        name="Weather Agent",
-       tools=[weather_tool]
+       instructions="Call get_weather for weather questions; explain that it returns demo data.",
+       tools=weather_tool.definitions,
    )
+   thread = project_client.agents.threads.create()
+   try:
+       project_client.agents.messages.create(
+           thread_id=thread.id, role="user", content="Use get_weather for Seattle."
+       )
+       run = project_client.agents.runs.create_and_process(
+           thread_id=thread.id, agent_id=agent.id
+       )
+       if run.status != "completed":
+           raise RuntimeError(f"Run status: {run.status}; error: {run.last_error}")
+       for message in project_client.agents.messages.list(thread_id=thread.id):
+           for text in message.text_messages:
+               print(text.text.value)
+   finally:
+       project_client.agents.threads.delete(thread.id)
+       project_client.agents.delete_agent(agent.id)
+       project_client.close()
    ```
-4. បញ្ចូលឡើងវិញ និងសាកល្បង៖
+3. រត់ក្នុងកន្លែង (នេះហៅគម្រោង Azure ដែលមានស្រាប់ ហើយប៉ះពាល់លើការចំណាយម៉ូដែល):
    ```bash
-   azd deploy
-   # សួរ៖ "រអ៊ូរស្ថានអាកាសនៅទីក្រុងស៊ីអាតលមានអ្វីខ្លះ?"
-   # យោងតាមការ៖ កម្មវិធីហៅ get_weather("Seattle") ហើយត្រឡប់ព័ត៌មានអាកាសធាតុតាមមក
+   python agent_config.py
+   # Expected: TOOL_CALLED: Seattle, then a completed answer labelled demo data.
    ```
 
-**លក្ខណៈជោគជ័យ៖**
-- [ ] អ្នកភ្នាក់ងារទទួលស្គាល់សំណួរពាក់ព័ន្ធអាកាសធាតុ
+**លទ្ធផលជោគជ័យ៖**
+- [ ] ដំណេករាស្រ្តទាក់ទងនឹងសំណួរអាកាសធាតុ
 - [ ] ឧបករណ៍ត្រូវបានហៅយ៉ាងត្រឹមត្រូវ
-- [ ] ចម្លើយមានព័ត៌មានអាកាសធាតុ
+- [ ] ចម្លើយរួមបញ្ចូលព័ត៌មានអាកាសធាតុ
 
-### ហាត់ប្រាណទី 3: សង់អ្នកភ្នាក់ងារ RAG (៤៥ នាទី)
+### អនុវត្តទី 3៖ បង្កើតអាជីស RAG (45 នាទី)
 
-**គោលបំណង៖** បង្កើតអ្នកភ្នាក់ងារដែលឆ្លើយសំណួរពីឯកសាររបស់អ្នក
+**គោលបំណង៖** បង្កើតអាជីសដែលឆ្លើយសំណួរពីឯកសាររបស់អ្នក
 
 ```bash
-# ជំហានទី 1: បង្កើតគំរូ RAG
-azd init --template azure-search-openai-demo
+# Step 1: Deploy RAG template
+azd init --template azure-search-openai-demo .
 azd up
 
-# ជំហានទី 2: ផ្ទុកឡើងឯកសាររបស់អ្នក
-# ដាក់ឯកសារ PDF/TXT ក្នុងថត data/ បន្ទាប់មកដំណើរការៈ
-python scripts/prepdocs.py
+# Step 2: Upload your documents
+# For the sample's local ingestion path, place supported files in data/.
+# Run from the sample root after following its Python environment setup:
+./scripts/prepdocs.sh
+# Windows PowerShell equivalent: .\\scripts\\prepdocs.ps1
 
-# ជំហានទី 3: សាកល្បងជាមួយសំណួរពិសេសសម្រាប់វិស័យ
-# បើក URL កម្មវិធីវែបពីលទ្ធផល azd up
-# សួរសំណួរអំពីឯកសារដែលអ្នកបានផ្ទុកឡើង
-# ចម្លើយគួរត្រូវមានការដកស្រង់យោងដូចជា [doc.pdf]
+# Step 3: Test with domain-specific questions
+# Open the web app URL from the azd up output
+# Ask questions about your uploaded documents
+# Responses should include citation references like [doc.pdf]
 ```
 
-**លក្ខណៈជោគជ័យ៖**
-- [ ] អ្នកភ្នាក់ងារឆ្លើយតបពីឯកសារដែលបានផ្ទុកឡើង
-- [ ] ចម្លើយរួមមានយោង
-- [ ] គ្មានការបង្កើតមិនពិតលើសំណួរចេញពីជួរមិនគ្រប់គ្រាន់
+**លទ្ធផលជោគជ័យ៖**
+- [ ] អាជីសឆ្លើយពីឯកសារដែលបានផ្ទុកឡើង
+- [ ] ចម្លើយរួមបញ្ចូលបញ្ជាក់ប្រភព
+- [ ] សំណួរធ្វើតេស្តក្រៅកម្រិតត្រូវបានដោះស្រាយដោយគ្មានការអះអាងមិនគាំទ្រ (មិនមែនជាការធានាថាចំពោះសំណួរចុងក្រោយទាំងអស់)
+
+ប្រសិនបើ `USE_CLOUD_INGESTION=true`, ប្រើការចម្លង / បញ្ចូលពពកគំរូជំនួសផ្ទាល់មុខ; wrapper ក្នុងតំបន់បង្កើតត្រូវបានរំលងការចម្លងដោយមានចេតនា។ បន្ទាប់ពីសាកល្បង រត់ `azd down` នៅក្នុងបរិស្ថាន RAG ហើយពិនិត្យមើលធនធានសម្រាប់លុបចោល។
 
 ---
 
 ## 📚 ជំហានបន្ទាប់
 
-ឥឡូវនេះអ្នកបានយល់ពីអ្នកភ្នាក់ងារ AI, ស្វែងរកប្រធានបទជំហាន់ខ្ពស់ពួកនេះ៖
+ឥឡូវនេះដែលអ្នកយល់ពីអាជីស AI សូមស្វែងយល់អំពីប្រធានបទកម្រិតខ្ពស់ទាំងនេះ៖
 
-| ប្រធានបទ | ការពិពណ៌នា | តំណភ្ជាប់ |
+| ប្រធានបទ | សេចក្ដីអធិប្បាយ | តំណភ្ជាប់ |
 |-------|-------------|------|
-| **ប្រព័ន្ធពហុភ្នាក់ងារ** | សង់ប្រព័ន្ធជាមួយអ្នកភ្នាក់ងារច្រើនជាមួយការសហការ | [ឧទាហរណ៍ពហុភ្នាក់ងារលក់រាយ](../../examples/retail-scenario.md) |
-| **លំនាំសម្របសម្រួល** | រៀនលំនាំអូឃេស្ត្រាទឺសិន និងការទំនាក់ទំនង | [លំនាំសម្របសម្រួល](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **ការដាក់ផលិតកម្ម** | ការដាក់បញ្ចូលអ្នកភ្នាក់ងារសហគ្រាស | [អនុវត្ត AI ផលិតកម្ម](../chapter-08-production/production-ai-practices.md) |
-| **ការវាយតម្លៃអ្នកភ្នាក់ងារ** | សាកល្បង និងវាយតម្លៃកម្រិតអ្នកភ្នាក់ងារ | [ដោះស្រាយបញ្ហា AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **មហាសន្និបាត AI** | ការអនុវត្តដៃ - ធ្វើឲ្យដំណោះស្រាយ AI របស់អ្នករួសរាយជាមួយ AZD | [មហាសន្និបាត AI](ai-workshop-lab.md) |
+| **ប្រព័ន្ធអាជីសច្រើន** | បង្កើតប្រព័ន្ធជាមួយអាជីសច្រើនដែលសហការគ្នា | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
+| **លំនាំសម្របសម្រួល** | រៀនលំនាំសម្របសម្រួលនិងទំនាក់ទំនង | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **ការចែកចាយក្នុងផលិតកម្ម** | ការចេញដំណើរការអាជីសសម្រាប់អាជីវកម្ម | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
+| **ការវាយតម្លៃអាជីស** | សាកល្បងនិងវាយតម្លៃសមត្ថភាពអាជីស | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **មន្ទីរពិសោធន៍ AI** | ប្រែក្លាយជាដៃ: ធ្វើឲ្យដំណោះស្រាយ AI របស់អ្នកមាន AZD | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---
 
 ## 📖 ឯកសារបន្ថែម
 
-### ឯកសារផ្លូវការដ៏សំខាន់
+### ឯកសារផ្លូវការជាកំណត់
 - [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
-- [ការចាប់ផ្តើមរហ័ស Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
-### ទម្រង់ AZD សម្រាប់អ្នកភ្នាក់ងារ
-- [ចាប់ផ្តើមជាមួយអ្នកភ្នាក់ងារ AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
+### លំនាំ AZD សម្រាប់អាជីស
+- [ចាប់ផ្តើមជាមួយអាជីស AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [អាជីសការសរសេរច្នៃប្រឌិតជាមួយ Prompty](https://github.com/Azure-Samples/contoso-creative-writer)
 - [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### ឯកសារពាណិជ្ជកម្មសហគមន៍
-- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### ឯកសារសហគមន៍
+- [Awesome AZD - លំនាំអាជីស](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### ជំនាញអ្នកភ្នាក់ងារសម្រាប់កម្មវិធីកែសម្រួលរបស់អ្នក
-- [**ជំនាញអ្នកភ្នាក់ងារ Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - ដំឡើងជំនាញអ្នកភ្នាក់ងារ AI វិលត្រលប់សម្រាប់អភិវឌ្ឍ Azure ក្នុង GitHub Copilot, Cursor, ឬអ្នកភ្នាក់ងារណាមួយដែលគាំទ្រ។ រួមមានជំនាញសម្រាប់ [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), និង [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+### ជំនាញអាជីសសម្រាប់អ្នកកែសម្រួលរបស់អ្នក
+- [**ជំនាញអាជីស Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - តំឡើងជំនាញអាជីស AI ដែលអាចប្រើឡើងវិញសម្រាប់ការអភិវឌ្ឍ Azure ក្នុង GitHub Copilot, Cursor, ឬអាជីសណាមួយគាំទ្រ។ រួមបញ្ចូលជំនាញសម្រាប់ [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), និង [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -607,8 +616,8 @@ python scripts/prepdocs.py
 ---
 
 **ការរុករក**
-- **មុខវិជ្ជាមុន**៖ [ការរួមបញ្ចូល Microsoft Foundry](microsoft-foundry-integration.md)
-- **មុខវិជ្ជាបន្ទាប់**៖ [ការដាក់បញ្ចូលម៉ូដែល AI](ai-model-deployment.md)
+- **មេរៀនមុន**៖ [ការអាំងតេករេស្យុន Microsoft Foundry](microsoft-foundry-integration.md)
+- **មេរៀនបន្ទាប់**៖ [ការបង្កើតម៉ូដែល AI](ai-model-deployment.md)
 
 ---
 

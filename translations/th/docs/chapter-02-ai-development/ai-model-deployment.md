@@ -1,74 +1,57 @@
-# การนำแบบจำลอง AI ไปใช้งานด้วย Azure Developer CLI
+# การปรับใช้โมเดล AI ด้วย Azure Developer CLI
 
 **การนำทางบทเรียน:**
-- **📚 หน้าแรกของคอร์ส**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
-- **📖 บทปัจจุบัน**: บทที่ 2 - การพัฒนาโดย AI เป็นหลัก
-- **⬅️ ก่อนหน้า**: [การผสานรวม Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ ถัดไป**: [ห้องปฏิบัติการเวิร์กช็อป AI](ai-workshop-lab.md)
-- **🚀 บทถัดไป**: [บทที่ 3: การกำหนดค่า](../chapter-03-configuration/configuration.md)
+- **📚 หน้าแรกหลักสูตร**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
+- **📖 บทปัจจุบัน**: บทที่ 2 - การพัฒนา AI-First
+- **⬅️ ก่อนหน้า**: [AI Agents](agents.md)
+- **➡️ ถัดไป**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 บทถัดไป**: [บทที่ 3: การตั้งค่า](../chapter-03-configuration/configuration.md)
 
-คู่มือนี้ให้คำแนะนำแบบครบวงจรสำหรับการนำแบบจำลอง AI ไปใช้งานโดยใช้แม่แบบ AZD ครอบคลุมทุกขั้นตอนตั้งแต่การเลือกแบบจำลองไปจนถึงรูปแบบการนำไปใช้งานในสภาพแวดล้อมจริง
+คู่มือนี้ให้คำแนะนำที่ครอบคลุมสำหรับการปรับใช้โมเดล AI โดยใช้เทมเพลต AZD ครอบคลุมตั้งแต่การเลือกโมเดลจนถึงรูปแบบการปรับใช้ในสภาพแวดล้อมจริง
 
-> **หมายเหตุการตรวจสอบ (2026-07-13):** เวิร์กโฟลว์ AZD ในคู่มือนี้ได้ตรวจสอบกับ `azd` `1.27.1` สำหรับการนำ AI ไปใช้ซึ่งใช้เวลานานกว่าช่วงเวลาการนำบริการไปใช้ปกติ รุ่น AZD ปัจจุบันรองรับ `azd deploy --timeout <seconds>`
+> **การทบทวนการเปิดตัว (2026-11-04):** การเปลี่ยนแปลง CLI ที่เกี่ยวข้องได้รับการทบทวนตาม `azd` `1.37.2`; การมีอยู่ของโมเดล รุ่น และโควต้ายังคงขึ้นอยู่กับภูมิภาคและการสมัครใช้บริการ `azd deploy --timeout <seconds>` ควบคุมช่วงเวลาการปรับใช้บริการ ไม่ใช่การรับประกันการเปิดใช้งานตัวแทน ดู [บันทึกการเปิดตัวปัจจุบันและคู่มือการย้าย AI](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
 ## สารบัญ
 
-- [กลยุทธ์การเลือกแบบจำลอง](#กลยุทธ์การเลือกแบบจำลอง)
-- [การกำหนดค่า AZD สำหรับแบบจำลอง AI](#การกำหนดค่า-azd-สำหรับแบบจำลอง-ai)
-- [รูปแบบการนำไปใช้](#รูปแบบการนำไปใช้)
-- [การจัดการแบบจำลอง](#การจัดการแบบจำลอง)
-- [ข้อควรพิจารณาในการผลิต](#ข้อควรพิจารณาในการผลิต)
-- [การเฝ้าระวังและการสังเกตการณ์](#การเฝ้าระวังและการสังเกตการณ์)
+- [กลยุทธ์การเลือกโมเดล](#model-selection-strategy)
+- [การกำหนดค่า AZD สำหรับโมเดล AI](#azd-configuration-for-ai-models)
+- [รูปแบบการปรับใช้](#deployment-patterns)
+- [การจัดการโมเดล](#model-management)
+- [ข้อพิจารณาในสภาพแวดล้อมการผลิต](#production-considerations)
+- [การตรวจสอบและความสามารถในการสังเกตการณ์](#monitoring-and-observability)
 
-## กลยุทธ์การเลือกแบบจำลอง
+## กลยุทธ์การเลือกโมเดล
 
-### แบบจำลอง Microsoft Foundry
+### โมเดล Azure OpenAI ใน Microsoft Foundry
 
-เลือกแบบจำลองที่เหมาะสมกับกรณีการใช้งานของคุณ:
+เลือกโมเดลที่เหมาะสมกับกรณีการใช้งานของคุณ:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+ประกาศการปรับใช้โมเดลใน Bicep (ด้านล่าง) ไม่ใช่ในการตั้งค่า `services.*.config.AZURE_OPENAI_MODELS` แบบสุ่ม AZD จะไม่ตีความการตั้งค่านั้นเป็นรายการของทรัพยากรโมเดล `project` ของบริการจะชี้ไปยังแหล่งที่มาของแอปพลิเคชัน ไม่ใช่ไดเรกทอรี `infra/`
 
-### การวางแผนความจุของแบบจำลอง
+ตัวอย่างใช้รุ่น `gpt-4.1-mini` ที่เผยแพร่ **`2025-04-14`** และรุ่น embedding **`1`** ยืนยันว่ารุ่นโมเดลและ SKU การปรับใช้ได้รับการสนับสนุนในภูมิภาค/บัญชีเป้าหมายของคุณก่อนเพิ่มทรัพยากร
 
-| ประเภทแบบจำลอง | กรณีการใช้งาน | ความจุที่แนะนำ | ข้อพิจารณาด้านต้นทุน |
+### การวางแผนความจุของโมเดล
+
+| ประเภทโมเดล | กรณีการใช้งาน | ความต้องการโทเค็นโดยประมาณ | ข้อพิจารณาด้านต้นทุน |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | แชท, ถาม-ตอบ | 10-50 TPM | ประหยัดต้นทุนสำหรับงานส่วนใหญ่ |
-| gpt-4.1 | การให้เหตุผลที่ซับซ้อน | 20-100 TPM | ต้นทุนสูงกว่า ใช้สำหรับฟีเจอร์พรีเมียม |
-| text-embedding-3-large | การค้นหา, RAG | 30-120 TPM | ตัวเลือกเริ่มต้นที่แข็งแกร่งสำหรับการค้นหาและดึงข้อมูลเชิงความหมาย |
-| Whisper | พูดเป็นข้อความ | 10-50 TPM | งานประมวลผลเสียง |
+| gpt-4.1-mini | แชท, ถาม-ตอบ | 10,000-50,000 TPM | ทดสอบต้นทุนและคุณภาพสำหรับภาระงานของคุณ |
+| gpt-4.1 | งานซับซ้อน | 20,000-100,000 TPM | ประเมินการเพิ่มคุณภาพเทียบกับต้นทุนโทเค็น |
+| text-embedding-3-large | การค้นหา, RAG | 30,000-120,000 TPM | คำนึงถึงการรับข้อมูลเข้าและการรับส่งคำค้น |
+| Whisper | การแปลงเสียงเป็นข้อความ | วางแผนโดยใช้ระยะเวลาของเสียงและขีดจำกัดคำขอ | ห้ามใช้สูตรคำนวณความจุ TPM ของโมเดลข้อความ |
 
-## การกำหนดค่า AZD สำหรับแบบจำลอง AI
+TPM หมายถึงโทเค็นต่อนาที สำหรับการปรับใช้ข้อความมาตรฐานเหล่านี้ ARM `sku.capacity` อยู่ในหน่วย **1,000 TPM** ไม่ใช่ TPM เดี่ยว (ความจุ `10` หมายถึง 10,000 TPM) อัตราส่วน RPM ต่อ TPM แตกต่างกันไปตามประเภทโมเดล/การปรับใช้; ตรวจสอบขีดจำกัดทั้งสองกับ [เอกสารโควต้า](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic) ช่วงตัวเลขเหล่านี้เป็นตัวอย่าง ไม่ใช่คำแนะนำในการกำหนดขนาด
 
-### การกำหนดค่าแม่แบบ Bicep
+## การกำหนดค่า AZD สำหรับโมเดล AI
 
-สร้างการนำแบบจำลองไปใช้ผ่านแม่แบบ Bicep:
+### การกำหนดค่าเทมเพลต Bicep
+
+สร้างการปรับใช้โมเดลผ่านเทมเพลต Bicep:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,21 +108,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### ตัวแปรสิ่งแวดล้อม
+นี่คือตัวอย่าง **โครงสร้างพื้นฐานสำหรับการพัฒนา** ที่มีขอบเขตเฉพาะในกลุ่มทรัพยากร ไม่ใช่แม่แบบแอปพลิเคชัน AZD แบบสมบูรณ์ บัญชีนี้อนุญาตให้เข้าถึงเครือข่ายสาธารณะและต้องการการตรวจสอบสิทธิ์ Entra ID/RBAC (`Cognitive Services OpenAI User` สำหรับผู้เรียกใช้งาน) การใช้งานจริงจำเป็นต้องมี private endpoint, DNS และการเชื่อมต่อแอปพลิเคชันที่อธิบายในบทที่ 8 AZD ยังต้องการแม่แบบหลัก/การแมปพารามิเตอร์และทรัพยากรโฮสต์แอปพลิเคชัน; ใช้ตัวอย่างที่ใช้งานได้สำหรับการปรับใช้งานเต็มรูปแบบ
 
-กำหนดค่าสิ่งแวดล้อมแอปพลิเคชันของคุณ:
+### ตัวแปรสภาพแวดล้อม
+
+กำหนดค่าสภาพแวดล้อมแอปพลิเคชันของคุณ:
 
 ```bash
-# การกำหนดค่า .env
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## รูปแบบการนำไปใช้
+เหล่านี้เป็นชื่อที่กำหนดโดยแอปพลิเคชัน; ต่อสายเข้ากับการกำหนดค่าของโฮสต์ของคุณ จุดสิ้นสุด Azure OpenAI v1 ที่ใช้โดยการตรวจสอบสถานะด้านล่างไม่ต้องการพารามิเตอร์ `api-version` ที่มีวันที่; `AzureOpenAI` ลูกค้าเก่าต้องใช้ ดังนั้นจึงควรปฏิบัติตามการสร้าง API ที่แอปพลิเคชันของคุณใช้
 
-### รูปแบบที่ 1: การนำไปใช้ในภูมิภาคเดียว
+## รูปแบบการปรับใช้
+
+### รูปแบบ 1: การปรับใช้ในภูมิภาคเดียว
 
 ```yaml
 # azure.yaml - Single region
@@ -146,20 +133,21 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 เหมาะสำหรับ:
 - การพัฒนาและทดสอบ
-- แอปพลิเคชันในตลาดเดียว
-- การเพิ่มประสิทธิภาพต้นทุน
+- แอปพลิเคชันตลาดเดี่ยว
+- การปรับค่าใช้จ่ายให้เหมาะสม
 
-### รูปแบบที่ 2: การนำไปใช้หลายภูมิภาค
+### รูปแบบ 2: การปรับใช้หลายภูมิภาค
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,14 +157,18 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
+คุณสมบัติ/SKU บัญชีที่ละเว้นต้องถูกจัดเตรียม; ชิ้นส่วนนี้ไม่สามารถปรับใช้ได้ตามที่เขียนไว้ ปรับใช้โมเดลในบัญชีแต่ละบัญชีและดำเนินการกำหนดเส้นทาง/การเปลี่ยนไปใช้สำรองและการควบคุมถิ่นที่อยู่ของข้อมูลแยกกัน
+
 เหมาะสำหรับ:
-- แอปพลิเคชันระดับโลก
+- แอปพลิเคชันทั่วโลก
 - ความต้องการความพร้อมใช้งานสูง
 - การกระจายโหลด
 
-### รูปแบบที่ 3: การนำไปใช้แบบไฮบริด
+### รูปแบบ 3: การปรับใช้งานแบบไฮบริด
 
-ผสมผสานแบบจำลอง Microsoft Foundry กับบริการ AI อื่นๆ:
+ผสมผสาน Microsoft Foundry Models กับบริการ AI อื่นๆ:
+
+ชิ้นส่วนต่อไปนี้สมมติว่าชื่อและ `location` ถูกจัดเตรียมโดยแม่แบบที่บรรจุ
 
 ```bicep
 // Hybrid AI services
@@ -205,18 +197,18 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## การจัดการแบบจำลอง
+## การจัดการโมเดล
 
 ### การควบคุมเวอร์ชัน
 
-ติดตามเวอร์ชันแบบจำลองในกำหนดค่า AZD ของคุณ:
+ติดตามเวอร์ชันของโมเดลในกำหนดค่าของแอปพลิเคชันหรือ IaC JSON นี้เป็น **ตัวอย่างที่กำหนดโดยแอปพลิเคชัน** ไม่ใช่สคีม่าโมเดล AZD ในตัว; ต้องมีการใช้งานสำรองและปรับใช้ชัดเจน:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -227,27 +219,27 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### การอัปเดตแบบจำลอง
+### การอัปเดตโมเดล
 
-ใช้ AZD hooks สำหรับการอัปเดตแบบจำลอง:
+ใช้ฮุก AZD สำหรับการตรวจสอบการมีอยู่แบบอ่านอย่างเดียว แล้วอัปเดต IaC และจัดเตรียม:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# หากการปรับใช้ใช้เวลานานกว่าค่า timeout เริ่มต้น
-azd deploy --timeout 1800
 ```
+
+เรียก `azd up` **นอก** ฮุกเพื่อใช้โครงสร้างพื้นฐานโมเดลที่เปลี่ยนแปลงและปรับใช้โค้ด อย่าเรียก `azd deploy` จากฮุก `predeploy`: จะกระตุ้นฮุกเดียวกันแบบวนซ้ำ `azd deploy --timeout 1800` ขยายเวลาโหมดปรับใช้แอปพลิเคชัน; ไม่ได้อัปเดตทรัพยากร Bicep
 
 ### การทดสอบ A/B
 
-นำเวอร์ชันแบบจำลองหลายเวอร์ชันไปใช้งาน:
+ทรัพยากรตัวอย่างด้านล่างเลือกชื่อปรับใช้และความจุ; สร้างการปรับใช้ **หนึ่งครั้ง** ไม่ใช่การทดสอบ A/B สำหรับการทดลองจริง ให้จัดเตรียมทรัพยากรปรับใช้สองชุดแยกกัน จัดเส้นทางคำขอตามสัดส่วนที่ควบคุมไปยังแต่ละชุด และเปรียบเทียบคุณภาพ ความหน่วง และค่าใช้จ่าย สมมติ `openAi` จากตัวอย่างบัญชี:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -269,14 +261,15 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## ข้อควรพิจารณาในการผลิต
+## การพิจารณาผลิต
 
 ### การวางแผนความจุ
 
-คำนวณความจุที่จำเป็นตามรูปแบบการใช้งาน:
+คำนวณความจุที่ต้องการตามรูปแบบการใช้งาน:
 
 ```python
-# ตัวอย่างการคำนวณความจุ
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# ตัวอย่างการใช้งาน
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
+ผลลัพธ์ที่คาดหวัง: `Required capacity: 9100 TPM` ด้วยความจุ 1,000-TPM ให้วงกลมขึ้นเป็นอย่างน้อย `10` แล้วตรวจสอบการประมาณ RPM เฉพาะโมเดลและอัตราจำกัดบริการ (รวมถึงงบประมาณผลลัพธ์ที่ร้องขอ) การประมาณความต้องการโทเค็นนี้ไม่ใช่การรับประกันว่าจะไม่มีการจำกัด
+
 ### การกำหนดค่า Auto-scaling
 
 กำหนดค่า auto-scaling สำหรับ Container Apps:
+
+**ทรัพยากรบางส่วน:** รวมการตั้งค่า `template.scale` เข้ากับ Container App ที่สมบูรณ์พร้อมตำแหน่ง สภาพแวดล้อมที่จัดการ ภาพคอนเทนเนอร์ ทรัพยากร และการเข้าถึง การขยายจำนวนสำเนาไม่เพิ่มโควต้าโมเดล
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -336,20 +333,23 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### การเพิ่มประสิทธิภาพต้นทุน
+### การปรับค่าใช้จ่ายให้เหมาะสม
 
-ดำเนินการควบคุมต้นทุน:
+ดำเนินการควบคุมค่าใช้จ่าย:
+
+**ทรัพยากรงบประมาณตัวอย่าง:** กำหนด `budgetStartDate` เป็นวันแรกของเดือนปัจจุบันใน UTC (เช่น `2026-11-01T00:00:00Z` สำหรับการทบทวนนี้) และเปลี่ยนที่อยู่อีเมลที่ติดต่อ เริ่มต้นต้องตรงกับข้อจำกัดวันที่ปัจจุบันของบริการ งบประมาณจะแจ้งเตือนเมื่อข้อมูลใบแจ้งหนี้ล่าช้า; แต่ไม่หยุดการใช้จ่าย
 
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## การเฝ้าระวังและการสังเกตการณ์
+## การตรวจสอบและการสังเกต
 
-### การผสานรวม Application Insights
+### การรวม Application Insights
 
-กำหนดค่าการเฝ้าดูแลสำหรับงาน AI:
+กำหนดค่าการตรวจสอบสำหรับภาระงาน AI:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
 
-### เมตริกส์ที่กำหนดเอง
+ส่วนทรัพยากรนี้สมมติว่า`applicationInsightsName`, `location` และ `logAnalyticsWorkspace` ที่มีอยู่แล้ว มันจัดเตรียมการตรวจสอบสถานะ แต่ไม่ได้ดำเนินการติดตั้งแอปหรือสร้างเมตริกที่กำหนดเอง
 
-ติดตามเมตริกส์เฉพาะ AI:
+### เมตริกที่กำหนดเอง
+
+ติดตามเมตริกเฉพาะ AI:
+
+ใช้ [Azure Monitor OpenTelemetry distribution](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python) ที่รองรับ แทน SDK Python รุ่นเก่า `applicationinsights` ติดตั้ง `azure-monitor-opentelemetry` กำหนดค่า `APPLICATIONINSIGHTS_CONNECTION_STRING` และเริ่มต้นเพียงครั้งเดียวในตอนเริ่มต้น:
 
 ```python
-# โทรเมตรีที่กำหนดเองสำหรับโมเดล AI
-import logging
-from applicationinsights import TelemetryClient
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
 
-### การตรวจสุขภาพ
+นี่แสดงถึงการส่งออกแอตทริบิวต์ ไม่ใช่การติดตั้งการโทรแบบโมเดลจริง ห่อหุ้มคำขอจริงในสแปนเพื่อวัดระยะเวลา; ตรวจสอบ `dependencies`/`traces` ใน Application Insights ห้ามส่งคำสั่ง, การตอบสนอง, คีย์ หรืข้อความข้อยกเว้นดิบที่มีข้อมูลที่ละเอียดอ่อน
+
+### การตรวจสอบสุขภาพ
 
 ดำเนินการตรวจสอบสุขภาพบริการ AI:
 
+ติดตั้ง `fastapi`, `uvicorn`, `httpx` และ `azure-identity` กำหนดค่าตัวแปร endpoint/deployment ข้างต้นและมอบ `Cognitive Services OpenAI User` ให้กับผู้เรียก โปรบ **readiness** นี้ใช้ Azure OpenAI v1 data plane กับ Entra ID; มันเป็นการโทรโมเดลที่มีค่าใช้จ่าย ใช้ `uvicorn health:app` หลังบันทึกเป็น `health.py` ใช้การตรวจสอบ liveness ที่เบาแยกต่างหาก จำกัดอัตรา/แคชผล readiness และอย่าเปิดเผยเส้นทางนี้สู่สาธารณะโดยไม่มีการควบคุมการเข้าถึง
+
 ```python
-# จุดตรวจสอบสุขภาพ
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,43 +431,49 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # ทดสอบการเชื่อมต่อ OpenAI
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
+
+คาดว่า: `GET /health/ai-models` จะส่งคืน `200 {"status":"healthy"}` เมื่อติดตั้งแชทที่กำหนดค่าใช้งานได้ หรือ `503` โดยไม่เปิดเผยรายละเอียด upstream การแสดงรายการ deployment เป็นการดำเนินการใน management-plane และไม่ใช่โปรบสุขภาพ data-plane ที่ถูกต้อง
 
 ## ขั้นตอนถัดไป
 
-1. **ทบทวน [คู่มือการผสานรวม Microsoft Foundry](microsoft-foundry-integration.md)** สำหรับรูปแบบการผสานบริการ
-2. **ทำ [ห้องปฏิบัติการเวิร์กช็อป AI](ai-workshop-lab.md)** เพื่อประสบการณ์ปฏิบัติการจริง
-3. **ดำเนินการตาม [แนวปฏิบัติ AI ในการผลิต](production-ai-practices.md)** สำหรับการนำไปใช้ในองค์กร
-4. **ศึกษาจาก [คู่มือแก้ปัญหา AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** สำหรับปัญหาทั่วไป
+1. **ตรวจสอบ [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** สำหรับรูปแบบการรวมบริการ
+2. **ทำ [AI Workshop Lab](ai-workshop-lab.md)** สำหรับประสบการณ์ใช้งานจริง
+3. **ใช้งาน [Production AI Practices](../chapter-08-production/production-ai-practices.md)** สำหรับการปรับใช้ในองค์กร
+4. **สำรวจ [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** สำหรับปัญหาทั่วไป
 
 ## แหล่งข้อมูล
 
-- [การมีแบบจำลอง Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [เอกสาร Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [การปรับขนาด Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [การเพิ่มประสิทธิภาพต้นทุนสำหรับแบบจำลอง AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**การนำทางบทเรียน:**
-- **📚 หน้าแรกของคอร์ส**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
-- **📖 บทปัจจุบัน**: บทที่ 2 - การพัฒนาโดย AI เป็นหลัก
-- **⬅️ ก่อนหน้า**: [การผสานรวม Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ ถัดไป**: [ห้องปฏิบัติการเวิร์กช็อป AI](ai-workshop-lab.md)
+**การนำทางบท:**
+- **📚 หน้าแรกของคอร์ส**: [AZD For Beginners](../../README.md)
+- **📖 บทปัจจุบัน**: บทที่ 2 - การพัฒนา AI-First
+- **⬅️ ก่อนหน้า**: [AI Agents](agents.md)
+- **➡️ ถัดไป**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 บทถัดไป**: [บทที่ 3: การกำหนดค่า](../chapter-03-configuration/configuration.md)
 
 ---

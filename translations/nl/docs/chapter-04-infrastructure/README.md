@@ -1,22 +1,22 @@
-# Hoofdstuk 4: Infrastructure as Code & Deployment
+# Hoofdstuk 4: Infrastructure as Code & Implementatie
 
-**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 1-1.5 uur | **⭐ Complexiteit**: Gemiddeld
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 2-3 uur lezen; reken extra tijd voor implementatie-oefeningen | **⭐ Complexiteit**: Gemiddeld
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk behandelt Infrastructure as Code (IaC) patronen met Bicep-sjablonen, resource provisioning en deploymentstrategieën met behulp van Azure Developer CLI.
+Dit hoofdstuk behandelt Infrastructure as Code (IaC) patronen met Bicep templates, resource provisioning, en implementatiestrategieën met Azure Developer CLI.
 
-> Gecontroleerd met `azd 1.27.1` in juli 2026.
+> Doel van commando- en configuratiereview: `azd 1.37.2` (november 2026). Live Azure provisioning werd niet uitgevoerd tijdens de review.
 
 ## Leerdoelen
 
-Door dit hoofdstuk te voltooien, zal je:
-- De structuur en syntaxis van Bicep-sjablonen begrijpen
-- Azure-resources provisionen met `azd provision`
+Door dit hoofdstuk af te ronden, zul je:
+- Begrijpen hoe een Bicep template is opgebouwd en de syntaxis
+- Azure resources provisionen met `azd provision`
 - Applicaties deployen met `azd deploy`
-- Blue-green en rolling deploymentstrategieën implementeren
+- Blue-green en rolling deployment strategieën implementeren
 
 ---
 
@@ -24,28 +24,31 @@ Door dit hoofdstuk te voltooien, zal je:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Azure resourcebeheer met AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Deploymentstrategieën voor applicaties | 45 min |
-| 3 | [Authoring Your Own Template](custom-templates.md) | Maak en publiceer herbruikbare azd-sjablonen | 30 min |
+| 1 | [Resources Provisionen](provisioning.md) | Azure resourcebeheer met AZD | 45 min |
+| 2 | [Implementatie Gids](deployment-guide.md) | Strategieën voor applicatie-implementatie | 45 min |
+| 3 | [Je Eigen Template Schrijven](custom-templates.md) | Opbouwen en publiceren van herbruikbare azd-templates | 30 min |
 
 ---
 
-## 🚀 Snelstartgids
+## 🚀 Snelle Start
 
 ```bash
-# Initialiseren vanuit sjabloon
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Voorbeeldweergave van wat gemaakt zal worden
+# Preview what will be created
 azd provision --preview
 
-# Alleen infrastructuur voorzien
+# Provision infrastructure only
 azd provision
 
-# Alleen code implementeren
+# Deploy code only
 azd deploy
 
-# Of beide samen
+# Or both together
 azd up
 ```
 
@@ -74,9 +77,9 @@ my-project/
 |---------|-------------|
 | `azd init` | Project initialiseren |
 | `azd provision` | Azure resources aanmaken |
-| `azd deploy` | Applicatiecode deployen |
+| `azd deploy` | Applicatiecode implementeren |
 | `azd up` | provision + deploy |
-| `azd down` | Verwijder alle resources |
+| `azd down` | Alle resources verwijderen |
 
 ---
 
@@ -91,7 +94,7 @@ my-project/
 
 ## 📖 Gerelateerde Bronnen
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
+- [Pre-Deployment Controles](../chapter-06-pre-deployment/README.md)
 - [Container App Voorbeelden](../../examples/container-app/README.md)
 - [Database App Voorbeeld](../../examples/database-app/README.md)
 

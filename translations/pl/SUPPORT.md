@@ -1,26 +1,26 @@
-# TODO: Właściciel tego repozytorium nie edytował jeszcze tego pliku
-
-**WŁAŚCICIEL REPOZYTORIUM**: Czy chcesz wsparcie Customer Service & Support (CSS) dla tego produktu/projektu?
-
-- **Brak wsparcia CSS:** Wypełnij ten szablon informacjami o tym, jak zgłaszać problemy i uzyskiwać pomoc.
-- **Wsparcie CSS:** Wypełnij formularz na stronie [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS pomoże Ci określić kolejne kroki.
-- **Nie jesteś pewien?** Wypełnij formularz tak, jakby odpowiedź brzmiała "Tak". CSS pomoże Ci podjąć decyzję.
-
-*Następnie usuń ten pierwszy nagłówek z pliku SUPPORT.MD przed opublikowaniem repozytorium.*
-
 # Wsparcie
 
-## Jak zgłaszać problemy i uzyskiwać pomoc  
+## Problemy i pytania dotyczące kursu
 
-Ten projekt korzysta z GitHub Issues do śledzenia błędów i próśb o nowe funkcje. Przed zgłoszeniem nowego problemu przeszukaj istniejące zgłoszenia, aby uniknąć duplikatów. W przypadku nowych zgłoszeń, zgłoś swój błąd lub prośbę o funkcję jako nowe Issue.
+Przeszukaj [problemy kursu](https://github.com/microsoft/AZD-for-beginners/issues) przed zgłoszeniem problemu. Dołącz dotkniętą lekcję angielską, polecenie, które wykonałeś, wersje AZD/rozszerzeń oraz komunikat o błędzie. Usuń dane uwierzytelniające, tokeny, szczegóły subskrypcji i dane osobowe z logów i zrzutów ekranu.
 
-W przypadku pytań i pomocy dotyczącej korzystania z tego projektu, proszę **WŁAŚCICIEL REPOZYTORIUM: WSTAW INSTRUKCJE TUTAJ, JAK SKONTAKTOWAĆ SIĘ Z WŁAŚCICIELAMI REPOZYTORIUM LUB SPOŁECZNOŚCIĄ W CELU UZYSKANIA POMOCY. MOŻE TO BYĆ TAG NA STACK OVERFLOW LUB INNY KANAŁ. GDZIE BĘDZIESZ POMAGAĆ LUDZIOM?**.
+W przypadku ogólnych pytań związanych z nauką, skorzystaj z [społeczności programistów Azure](https://discord.gg/microsoft-azure). Odpowiedzi społeczności nie są gwarantowaną usługą wsparcia.
 
-## Polityka wsparcia Microsoft  
+## Problemy z narzędziami i usługami
 
-Wsparcie dla tego **PROJEKTU lub PRODUKTU** jest ograniczone do zasobów wymienionych powyżej.
+Zgłaszaj powtarzalne błędy AZD CLI w [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). W przypadku incydentów usług Azure lub pomocy specyficznej dla subskrypcji, korzystaj z opcji wsparcia dostępnych w [portalu Azure](https://portal.azure.com/).
+
+## Raporty bezpieczeństwa
+
+Postępuj zgodnie z [SECURITY.md](SECURITY.md) w celu prywatnego zgłaszania podatności. Nie publikuj sekretów ani szczegółów exploitów w publicznych problemach kursu.
+
+## Polityka wsparcia Microsoft
+
+Wsparcie dla tego projektu edukacyjnego jest ograniczone do powyższych zasobów. Przykłady w kursie nie obejmują zobowiązania do wsparcia produkcyjnego.
 
 ---
 
-**Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

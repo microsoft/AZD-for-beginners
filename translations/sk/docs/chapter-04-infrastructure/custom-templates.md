@@ -1,33 +1,33 @@
 # Vytváranie vlastnej šablóny azd
 
-**Navigácia kapitolami:**
+**Navigácia kapitolou:**
 - **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
 - **📖 Aktuálna kapitola**: Kapitola 4 - Infrastruktúra ako kód a nasadenie
-- **⬅️ Predchádzajúca**: [Sprievodca nasadením](deployment-guide.md)
-- **🚀 Nasledujúca kapitola**: [Kapitola 5: Riešenia s viacerými agentmi](../chapter-05-multi-agent/README.md)
+- **⬅️ Predchádzajúca**: [Návod na nasadenie](deployment-guide.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 5: Riešenia s viacerými agentmi](../chapter-05-multi-agent/README.md)
 
-> Overené s `azd 1.27.1` v júli 2026.
+> Skontrolované podľa `azd 1.37.2` (november 2026). Toto je **sprievodca tvorbou s čiastočnými súbormi**, nie kompletná šablóna: pred nasadením musíte dodať aplikačný kód a `modules/web.bicep` s jeho prostredím, registrom, Container App a výstupmi. V tejto revízii nebolo vykonané provisionovanie Azure.
 
 ## Úvod
 
-Doteraz ste *spotrebovali* šablóny pomocou `azd init --template <názov>`. Ale keď už máte rozloženie projektu, ktoré sa vášmu tímu páči—napríklad Container App s Cosmos DB a správnym monitorovaním—chcete ho premeniť na opakovane použiteľnú šablónu. Šablóna je jednoducho Git repozitár s predvídateľnou štruktúrou, ktorú azd vie načítať. Táto lekcia vám ukáže, ako ju vytvoriť od nuly, otestovať a (voliteľne) zverejniť v komunitnej galérii.
+Zatiaľ ste *používali* šablóny s `azd init --template <name>`. Ale keď budete mať rozloženie projektu, ktoré váš tím má rád – napríklad Container App s Cosmos DB a vhodným monitorovaním – budete chcieť vytvoriť vlastnú znovupoužiteľnú šablónu. Šablóna je len Git repozitár so predvídateľnou štruktúrou, ktorú azd vie prečítať. Tento návod vám ukáže, ako šablónu vytvoriť od začiatku, otestovať a (voliteľne) zverejniť v komunite.
 
 ## Ciele učenia
 
 Na konci tejto lekcie budete:
-- Rozumieť, čo robí zložku "azd šablónou"
-- Poznať potrebné súbory a rozloženie adresárov
-- Pridať `azure.yaml` a `infra/`, ktoré môžu používať aj iní ľudia
+- Rozumieť, čo tvorí "azd šablónu"
+- Poznať požadované súbory a rozloženie priečinkov
+- Pridať `azure.yaml` a `infra/`, ktoré môžu ostatní používať
 - Otestovať šablónu lokálne pred zdieľaním
-- Publikovať ju a (voliteľne) odoslať do Awesome AZD
+- Publikovať ju a (voliteľne) poslať do Awesome AZD
 
 ## Výsledky učenia
 
-Po dokončení tejto lekcie budete vedieť:
-- Vytvoriť novú šablónu repozitára
-- Parameterizovať infraštruktúru tak, aby fungovala v akomkoľvek predplatnom
+Po dokončení lekcie budete vedieť:
+- Vytvoriť novú templátovú repozitárovú štruktúru
+- Parametrizovať infraštruktúru tak, aby fungovala v akejkoľvek predplatnom
 - Overiť šablónu pomocou `azd init` a `azd up`
-- Pridať metadáta, ktoré galéria vyžaduje
+- Pridať metaúdaje požadované komunitnou galériou
 
 ---
 
@@ -35,33 +35,33 @@ Po dokončení tejto lekcie budete vedieť:
 
 Azd šablóna je **Git repozitár**, ktorý obsahuje minimálne:
 
-| Súbor / adresár | Účel | Povinné? |
+| Súbor / priečinok | Účel | Povinné? |
 |---------------|---------|-----------|
-| `azure.yaml` | Popis služieb, hostiteľov a poskytovateľa infraštruktúry | ✅ Áno |
-| `infra/` | Bicep, Terraform alebo Pulumi, ktoré zriaďujú zdroje | ✅ Áno |
-| `src/` (alebo váš kód) | Kód aplikácie, ktorý azd nasadzuje | ✅ Áno |
-| `README.md` | Ako používať šablónu | ✅ Silne odporúčané |
+| `azure.yaml` | Popisuje služby, hostiteľov a poskytovateľa infraštruktúry | ✅ Áno |
+| `infra/` | Definície provisionovania v Bicep alebo Terraform | Povinné pre tento explicitný príklad IaC; projekty s generovanou infraštruktúrou ho môžu vynechať |
+| `src/` (alebo váš kód) | Aplikačný kód, ktorý azd nasadzuje | Povinné pre služby založené na zdrojových kódoch; nie všetky šablóny obsahujú aplikačný kód |
+| `README.md` | Ako používať šablónu | ✅ Dôrazne odporúčané |
 | `.azdo/` alebo `.github/` | Definície CI/CD pipeline | Voliteľné |
 | `.devcontainer/` | Reprodukovateľné vývojové prostredie | Voliteľné |
-| `azure.yaml` `metadata` | Informácie pre galériu a telemetriu | Voliteľné (vyžaduje sa pre publikovanie) |
+| `azure.yaml` `metadata` | Identita/telemetria šablóny | Odporúčané; publikovanie Git repozitára to nevyžaduje |
 
-Nie je na tom nič magické: keď spustíte `azd init --template vy/vaš-repo`, azd sklonuje repozitár a prečíta `azure.yaml`.
+Nie je na tom nič magické: keď spustíte `azd init --template you/your-repo`, azd naklonuje repozitár a prečíta `azure.yaml`.
 
 ---
 
-## Krok 1: Vytvorte repozitár
+## Krok 1: Vytvorte štruktúru repozitára
 
-Vytvorte štruktúru priečinkov ručne alebo začnite z minimálnej šablóny a upravte ju:
+Vytvorte priečinkovú štruktúru ručne alebo začnite z minimálnej šablóny a upravte ju:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Vytvorte štandardné rozloženie
+# Create the standard layout
 mkdir -p src infra
 ```
 
-Typické finálne rozloženie vyzerá takto:
+Typické hotové rozloženie vyzerá takto:
 
 ```
 my-azd-template/
@@ -83,7 +83,7 @@ my-azd-template/
 
 ## Krok 2: Napíšte `azure.yaml`
 
-Toto je jadro šablóny. Hovorí azd, čo nasadiť a ako:
+Toto je jadro šablóny. Hovorí azd, čo a ako nasadiť:
 
 ```yaml
 # azure.yaml
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -101,21 +101,21 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Pole `metadata.template` sa používa v telemetrii galérie na sledovanie používania. Použite konvenciu `name@version`.
+> Pole `metadata.template` sa používa na telemetriu galérie na sledovanie používania. Použite konvenciu `name@version`.
 
 ---
 
-## Krok 3: Parameterizujte infraštruktúru
+## Krok 3: Parametrizujte infraštruktúru
 
-Najdôležitejšie pravidlo pre *opakovane použiteľnú* šablónu: **nikdy nezadávajte napevno názvy, regióny alebo hodnoty špecifické pre predplatné.** Používajte parametre a vzor tokenov zdrojov, aby rovnaká šablóna fungovala v predplatnom kohokoľvek.
+Najdoležitejšie pravidlo pre *znovupoužiteľnú* šablónu: **nikdy nezadávajte názvy, regióny ani predplatné pevne do kódu.** Používajte parametre a vzor tokenu zdrojov, aby šablóna fungovala v predplatnom kohokoľvek.
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -140,13 +147,16 @@ output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 
 Dve veci robia túto šablónu priateľskou:
 
-1. **Značka `azd-env-name`** — azd ju používa na sledovanie a upratovanie zdrojov podľa prostredia.
-2. **Token zdroja `uniqueString(...)`** — vytvára stabilný, globálne unikátny príponový reťazec, aby sa názvy nepotkýnali.
+1. **`azd-env-name` tag** — azd ho používa na sledovanie a čistenie zdrojov podľa prostredia.
+2. **`uniqueString(...)` resource token** — vytvára stabilný hashový suffix na zníženie kolízií; nie je to záruka globálnej jedinečnosti.
 
-Poskytnite zodpovedajúci súbor parametrov, ktorý číta hodnoty, ktoré azd z prostredia vkladá:
+Chýbajúci `modules/web.bicep` musí prijať `name`, `location` a `tags`, provisionovať prostredie/registrov Container Apps a aplikáciu, označiť aplikáciu značkou `azd-service-name: web` a exportovať `uri`. Tiež musí sprístupniť hodnoty registra potrebné pre vybraný build/deploy tok (napríklad `AZURE_CONTAINER_REGISTRY_ENDPOINT` z koreňového modulu). Výstup samotného endpointu nezapája service discovery, nastavenia aplikácie ani autentifikáciu registra.
+
+Poskytnite zodpovedajúci súbor parametrov, ktorý načíta hodnoty, ktoré azd automaticky injektuje z prostredia:
+
+Uložte nasledujúce ako `infra/main.parameters.json`:
 
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -157,87 +167,91 @@ Poskytnite zodpovedajúci súbor parametrov, ktorý číta hodnoty, ktoré azd z
 }
 ```
 
-azd automaticky nahrádza `${AZURE_ENV_NAME}` a `${AZURE_LOCATION}` z aktuálneho prostredia.
+Azd automaticky nahrádza `${AZURE_ENV_NAME}` a `${AZURE_LOCATION}` z aktuálneho prostredia.
 
 ---
 
-## Krok 4: Lokálne otestujte svoju šablónu
+## Krok 4: Otestujte svoju šablónu lokálne
 
-Pred zdieľaním overte, že šablóna funguje zoči-voči čistému stavu.
+Pred zdieľaním dokážte, že šablóna funguje z čistého stavu.
 
-**Testujte z lokálneho priečinka** (netreba použiť Git push):
+**Testujte z lokálneho priečinka** (nie je potrebné pushovať na Git):
 
 ```bash
-# Z prázdneho adresára inicializujte pomocou lokálnej šablóny cesty
+# From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
-# Provision + nasadenie od začiatku do konca
+# Provision + deploy end to end
 azd auth login
 azd up
 ```
 
-**Potom otestujte odstránenie** — dobrá šablóna dôkladne uprace:
+**Potom otestujte zrušenie** — dobrá šablóna dôkladne vyčistí všetko:
 
 ```bash
 azd down --force --purge
 ```
 
-Ak `azd down` zanechá zdroje, pravdepodobne vám chýba značka `azd-env-name` na zdroji.
+Ak `azd down` necháva za sebou zdroje, skontrolujte zistenie prostredia/skupiny zdrojov, externé/zdieľané zdroje, povolenia, zámky a ochranu pred vymazaním. `--purge` neodstráni lokálny stav `.azure/`.
 
-> **Tip:** Najprv spustite `azd provision --preview`. Vykoná sa čo-ak analýza a zobrazia sa chyby šablóny pred vytvorením akéhokoľvek zdroja.
+> **Tip:** po doplnení všetkých chýbajúcich súborov najprv spustite `azd provision --preview`. Skontrolujte hooky pred preview, pretože môžu vykonávať príkazy vedľajších efektov. Preview nie je oceňovanie ani záruka úspešného provisionovania.
 
 ---
 
 ## Krok 5: Publikujte šablónu
 
-Nahrajte repozitár na GitHub (verziu verejnú, ak chcete, aby ju používali iní):
+Pushnite repozitár na GitHub (verejný, ak chcete, aby ju používali aj ostatní):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Teraz ju môže používať ktokoľvek:
+Ktokoľvek ju teraz môže použiť:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
 
 ## Krok 6 (voliteľné): Odoslať do Awesome AZD
 
-Galéria [Awesome AZD](https://azure.github.io/awesome-azd/) obsahuje šablóny komunity. Na zaradenie by váš repozitár mal obsahovať:
+Galéria [Awesome AZD](https://azure.github.io/awesome-azd/) obsahuje šablóny od komunity. Aby bol váš repozitár zaradený, mal by obsahovať:
 
-- ✅ Jasný `README.md` s predpokladmi, diagram architektúry a poznámky o nákladoch
+- ✅ Jasný `README.md` s predpokladmi, architektonickým diagramom a poznámkami o nákladoch
 - ✅ Fungujúci `azure.yaml` s `metadata.template`
-- ✅ Infraštruktúru, ktorá sa čisto zriaďuje v novom predplatnom
+- ✅ Infraštruktúru, ktorá sa čisto vytvorí v novom predplatnom
 - ✅ Súbor `LICENSE`
 - ✅ (Odporúčané) `.devcontainer/` pre jedným kliknutím Codespaces
 
-Odoslať to môžete otvorením pull requestu, ktorý pridá vašu šablónu do dátového súboru galérie podľa príručky príspevkov v [Awesome AZD repozitári](https://github.com/Azure/awesome-azd).
+Príspevok odošlite otvorením pull requestu, ktorý pridá vašu šablónu do dátového súboru galérie, podľa návodu na prispievanie v repozitári [Awesome AZD](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Bežné úskalia
+## Bežné nástrahy
 
-| Úskalie | Riešenie |
-|---------|----------|
-| Napevno zadané názvy zdrojov | Použiť token zdroja `uniqueString()` |
-| `azd down` nechá zdroje | Označiť každý zdroj (alebo skupinu zdrojov) značkou `azd-env-name` |
-| Šablóna funguje u vás, zlyháva u iných | Odstrániť ID predplatných, tenantov a predpoklady o regiónoch |
-| Výstupy nie sú prepojené s aplikáciou | Exportovať `SERVICE_<NAME>_ENDPOINT_URL` a ďalšie `AZURE_*` výstupy |
-| Odmietnutie príspevku do galérie | Pridať `README.md`, `LICENSE` a `metadata.template` |
+| Nástraha | Riešenie |
+|---------|-----|
+| Tvrdé kódované názvy zdrojov | Použite `uniqueString()` token zdroja |
+| `azd down` označuje zdroje | Označte každý zdroj (alebo skupinu zdrojov) pomocou `azd-env-name` |
+| Šablóna funguje pre vás, zlyháva pre ostatných | Odstráňte ID predplatného, ID nájomcu a predpoklady regiónu |
+| Výstupy nie sú prepojené s aplikáciou | Zodpovedajte `azd-service-name`/`resourceName` pre nasadenie a výslovne mapujte výstupy na nastavenia aplikácie |
+| Odmietnutie odoslania do galérie | Pridajte `README.md`, `LICENSE` a `metadata.template` |
 
 ---
 
 ## Zhrnutie
 
 - Šablóna je len Git repozitár s `azure.yaml`, `infra/` a vaším kódom.
-- Parameterizujte všetko—mená, regióny a ID—aby to fungovalo kdekoľvek.
-- Vždy označujte zdroje značkou `azd-env-name`, aby `azd down` fungoval.
-- Najprv otestujte lokálne pomocou `azd init --template <local-path>` pred zverejnením.
-- Pridajte metadáta a README, aby ste mohli odoslať do Awesome AZD.
+- Parametrizujte všetko — mená, regióny a ID — aby fungovala kdekoľvek.
+- Vždy označujte zdroje pomocou `azd-env-name`, aby fungovalo `azd down`.
+- Testujte lokálne s `azd init --template <local-path>` pred zverejnením.
+- Pridajte metaúdaje a README pre odoslanie do Awesome AZD.
 
 ---
 
@@ -246,14 +260,14 @@ Odoslať to môžete otvorením pull requestu, ktorý pridá vašu šablónu do 
 | Smer | Zdroj |
 |-----------|----------|
 | **Predchádzajúce** | [Sprievodca nasadením](deployment-guide.md) |
-| **Domov kapitoly** | [Kapitola 4: Infrastruktúra ako kód](README.md) |
+| **Domov kapitoly** | [Kapitola 4: Infraštruktúra ako kód](README.md) |
 | **Nasledujúca kapitola** | [Kapitola 5: Riešenia s viacerými agentmi](../chapter-05-multi-agent/README.md) |
 
 ## 📖 Súvisiace zdroje
 
-- [Provisioning Resources](provisioning.md)
-- [Awesome AZD Gallery](https://azure.github.io/awesome-azd/)
-- [Oficiálna dokumentácia azd šablón](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Zdroje na poskytovanie](provisioning.md)
+- [Úžasná galéria AZD](https://azure.github.io/awesome-azd/)
+- [Oficiálna dokumentácia šablón azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

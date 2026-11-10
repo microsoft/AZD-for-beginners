@@ -1,23 +1,25 @@
 # 8 skyrius: Produkcijos ir įmonių modeliai
 
-**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2–3 valandos | **⭐ Sudėtingumas**: Išplėstinis
+**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2-3 valandos | **⭐ Sudėtingumas**: Pažengęs
 
 ---
 
 ## Apžvalga
 
-Šiame skyriuje aptariami įmonių lygmens diegimo modeliai, saugumo stiprinimas, stebėsena ir kaštų optimizavimas dirbtinio intelekto gamybos darbo krūviams.
+Šiame skyriuje aptariami įmonių lygio diegimo modeliai, saugumo stiprinimas, stebėsena ir kaštų optimizavimas gamybos AI darbo apkrovoms.
 
-> Patikrinta su `azd 1.27.1` 2026 m. liepos mėn.
+Tai yra architektūrinis vadovas, o ne pilnas diegimui tinkamas gamybos šablonas. Pavyzdžiai neapima integracijos detalių, kurias turite papildyti ir išbandyti savo taikomojoje programoje; perskaitę kontrolinį sąrašą negaunate gamybos parengimo sertifikato.
+
+> **Leidimo peržiūra (2026-11-04):** AI CLI gaires patikrino su `azd 1.37.2`, agentais `1.0.0-beta.23` ir vertinimų `1.0.0-beta.2` dokumentacija/šaltiniu. Žr. [leidimo pakeitimus ir pataisas](production-ai-practices.md#recent-release-changes-and-fixes) dėl suderinamumo reikalavimų ir migracijos detalių; tai nėra tiesioginis diegimo patvirtinimas.
 
 ## Mokymosi tikslai
 
-Baigę šį skyrių jūs:
-- Įdiegsime daugregionius atsparius taikomųjų programų sprendimus
-- Įgyvendinsime įmonių saugumo modelius
-- Suprasime visapusišką stebėsenos konfigūraciją
-- Optimizuosime kaštus dideliu mastu
-- Sukursime CI/CD vamzdynus naudojant AZD
+Baigę šį skyrių, galėsite:
+- Diegti daugregiones atsparias programas
+- Įgyvendinti įmonių saugumo modelius
+- Konfigūruoti išsamų stebėjimą
+- Optimizuoti kaštus dideliu mastu
+- Sukurti CI/CD kanalus su AZD
 
 ---
 
@@ -25,7 +27,7 @@ Baigę šį skyrių jūs:
 
 | # | Pamoka | Aprašymas | Trukmė |
 |---|--------|-------------|------|
-| 1 | [Dirbtinio intelekto gamybos praktikos](production-ai-practices.md) | Įmonių diegimo modeliai | 90 min |
+| 1 | [Produkcijos AI praktikos](production-ai-practices.md) | Įmonių diegimo modeliai | 90 min |
 
 ---
 
@@ -33,30 +35,30 @@ Baigę šį skyrių jūs:
 
 - [ ] Daugregionis diegimas dėl atsparumo
 - [ ] Tvarkoma tapatybė autentifikacijai (be raktų)
-- [ ] Application Insights stebėsenai
-- [ ] Nustatytos sąnaudų biudžeto ribos ir įspėjimai
-- [ ] Įjungta saugumo skenavimas
-- [ ] CI/CD vamzdyno integracija
-- [ ] Atsarginių kopijų atkūrimo planas
+- [ ] „Application Insights“ stebėjimui
+- [ ] Biudžetų ir įspėjimų konfigūracija
+- [ ] Įjungtas saugumo skanavimas
+- [ ] CI/CD kanalo integracija
+- [ ] Atsistatymo po nelaimės planas
 
 ---
 
-## 🏗️ Architektūros modeliai
+## 🏗️ Architektūriniai modeliai
 
-### Modelis 1: Mikroservisų DI
+### Modelis 1: Mikroservisai AI
 
 ```mermaid
 graph LR
-    Gateway[API Vartai] --> AI[DI Paslauga] --> Models[Microsoft Foundry Modeliai]
-    Gateway --> Auth[Autentifikavimo Paslauga]
-    AI --> Data[Duomenų Saugykla]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
-### Modelis 2: Įvykių varomas DI
+### Modelis 2: Įvykiu varomas AI
 
 ```mermaid
 graph LR
-    EventGrid[Įvykių tinklelis] --> Functions[Funkcijos] --> Pipeline[DI kanalas]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
@@ -64,12 +66,13 @@ graph LR
 ## 🔐 Geriausios saugumo praktikos
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -80,36 +83,29 @@ properties: {
 
 ---
 
-## 💰 Sąnaudų optimizavimas
+## 💰 Kaštų optimizavimas
 
-| Strategija | Sutaupymai |
-|----------|------------|
-| Mastelio keitimas iki nulio (Container Apps) | 60-80 % |
-| Naudoti vartojimo lygius kūrimui | 50-70 % |
-| Planuojamas mastelio keitimas | 30-50 % |
-| Rezervuota talpa | 20-40 % |
+| Strategija | Pagrindinė sąlyga |
+|----------|---------|
+| Skalavimas iki nulio (Container Apps) | Reikia tinkamo suveikimo; kitos paslaugos vis tiek kainuoja |
+| Naudoti vartojimo lygius kūrimui | Palyginti pasirinktos paslaugos kainodarą ir darbo apkrovą |
+| Planuojamas skalavimas | Skalavimas per palaikomą infrastruktūrą/automatizavimą |
+| Rezervacijos/rezervuota talpa | Tik kai palaikoma; įsipareigojimai gali didinti tuščias išlaidas |
 
-```bash
-# Nustatyti biudžeto įspėjimus
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Naudokite [pilną biudžeto resursų modelį](production-ai-practices.md#2-cost-monitoring-and-budgets) su galiojančia pradžios data, atsiskaitymo sritimi, gavėjais ir leidimais. Biudžetas siunčia įspėjimus; jis neriboja išlaidų. Taupymas priklauso nuo matuojamo naudojimo ir nėra garantuotas procentais.
 
 ---
 
-## 📊 Stebėsenos nustatymai
+## 📊 Stebėjimo nustatymai
 
 ```bash
-# Srautiniai žurnalai
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Patikrinkite Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# Peržiūrėti metrikas
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -118,17 +114,17 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigacija
 
 | Kryptis | Skyrius |
-|--------|----------|
-| **Ankstesnis** | [7 skyrius: Trikčių šalinimas](../chapter-07-troubleshooting/README.md) |
-| **Kurso pabaiga** | [Kurso pradžia](../../README.md) |
+|-----------|---------|
+| **Ankstesnis** | [7 skyrius: Gedimų šalinimas](../chapter-07-troubleshooting/README.md) |
+| **Kursas baigtas** | [Kurso pradžia](../../README.md) |
 
 ---
 
 ## 📖 Susiję resursai
 
-- [DI agentų vadovas](../chapter-02-ai-development/agents.md)
+- [AI agentų vadovas](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Daugiagentiniai sprendimai](../chapter-05-multi-agent/README.md)
+- [Multi-agentų sprendimai](../chapter-05-multi-agent/README.md)
 - [Mikroservisų pavyzdys](../../examples/microservices/README.md)
 
 ---
