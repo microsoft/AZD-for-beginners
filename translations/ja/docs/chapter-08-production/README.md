@@ -1,6 +1,6 @@
 # 第8章: 本番およびエンタープライズパターン
 
-**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: 2-3時間 | **⭐ 難易度**: 上級
+**📚 コース**: [AZD 入門](../../README.md) | **⏱️ 所要時間**: 2-3時間 | **⭐ 難易度**: 上級
 
 ---
 
@@ -25,7 +25,7 @@
 
 | # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [Production AI Practices](production-ai-practices.md) | エンタープライズデプロイメントパターン | 90 分 |
+| 1 | [本番環境におけるAIの実践](production-ai-practices.md) | エンタープライズデプロイメントパターン | 90 分 |
 
 ---
 
@@ -126,10 +126,10 @@ az monitor metrics list --resource <resource-id>
 
 ## 📖 関連リソース
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
+- [AIエージェントガイド](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
-- [Microservices Example](../../examples/microservices/README.md)
+- [マルチエージェントソリューション](../chapter-05-multi-agent/README.md)
+- [マイクロサービスの例](../../examples/microservices/README.md)
 
 ---
 
