@@ -66,7 +66,7 @@ services:
 <strong>使用タイミング</strong>: バッチ処理、ドキュメント解析、非同期ワークフロー
 
 ```bicep
-// Event Hub for AI processing pipeline
+// AI処理パイプライン向けイベントハブ
 resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
   name: eventHubNamespaceName
   location: location
@@ -77,7 +77,7 @@ resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
   }
 }
 
-// Service Bus for reliable message processing
+// 信頼性の高いメッセージ処理を実現する Service Bus
 resource serviceBus 'Microsoft.ServiceBus/namespaces@2022-10-01-preview' = {
   name: serviceBusNamespaceName
   location: location
@@ -88,7 +88,7 @@ resource serviceBus 'Microsoft.ServiceBus/namespaces@2022-10-01-preview' = {
   }
 }
 
-// Function App for processing
+// 処理用Function App
 resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
   name: functionAppName
   location: location
@@ -120,7 +120,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 
 従来のアプリは動作するかしないかの二択が多いです。AI エージェントは動作しているように見えても結果が悪いことがあります。エージェントのヘルスは二層で考えましょう:
 
-| Layer | What to Watch | Where to Look |
+| レイヤー | 確認すべき点 | 確認場所 |
 |-------|--------------|---------------|
 | <strong>インフラの健全性</strong> | サービスは稼働していますか？リソースはプロビジョニングされていますか？エンドポイントに到達できますか？ | `azd monitor`, Azure Portal のリソースヘルス, コンテナー/アプリのログ |
 | <strong>振る舞いの健全性</strong> | エージェントは正確に応答していますか？応答はタイムリーですか？モデルは正しく呼び出されていますか？ | Application Insights のトレース、モデル呼び出しのレイテンシ指標、応答品質ログ |
@@ -152,13 +152,13 @@ AI アプリケーションが期待した結果を出さない場合、概念�
 - 最小権限アクセス制御
 
 ```bicep
-// Managed Identity for each service
+// 各サービス向けのマネージドID
 resource chatServiceIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
   name: 'chat-service-identity'
   location: location
 }
 
-// Role assignments with minimal permissions
+// 最小限の権限を伴う役割の割り当て
 resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: openAIAccount
   name: guid(openAIAccount.id, chatServiceIdentity.id, openAIUserRoleDefinitionId)
@@ -175,7 +175,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 **Key Vault 統合パターン**:
 
 ```bicep
-// Key Vault with proper access policies
+// 適切なアクセス ポリシーが設定された Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: keyVaultName
   location: location
@@ -192,7 +192,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   }
 }
 
-// Store all AI service credentials
+// すべてのAIサービス用認証情報を保存する
 resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   parent: keyVault
   name: 'openai-api-key'
@@ -210,7 +210,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 <strong>プライベートエンドポイントの構成</strong>:
 
 ```bicep
-// Virtual Network for AI services
+// AIサービス向け仮想ネットワーク
 resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: vnetName
   location: location
@@ -244,7 +244,7 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   }
 }
 
-// Private endpoints for all AI services
+// すべてのAIサービスに対するプライベートエンドポイント
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
   name: '${openAIAccountName}-pe'
   location: location
@@ -285,14 +285,14 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
     }
     template: {
       scale: {
-        minReplicas: 2  // Always have 2 instances minimum
-        maxReplicas: 50 // Scale up to 50 for high load
+        minReplicas: 2  // 常に最低2つのインスタンスを確保しておくこと
+        maxReplicas: 50 // 高負荷時には50までスケールアップする
         rules: [
           {
             name: 'http-scaling'
             http: {
               metadata: {
-                concurrentRequests: '20'  // Scale when >20 concurrent requests
+                concurrentRequests: '20'  // 同時リクエスト数が20件を超えたらスケールする
               }
             }
           }
@@ -302,7 +302,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
               type: 'cpu'
               metadata: {
                 type: 'Utilization'
-                value: '70'  // Scale when CPU >70%
+                value: '70'  // CPU使用率が70%を超えたらスケールする
               }
             }
           }
@@ -318,7 +318,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 **AI 応答のための Redis キャッシュ**:
 
 ```bicep
-// Redis Premium for production workloads
+// 本番ワークロード向け Redis Premium
 resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
   name: redisCacheName
   location: location
@@ -333,13 +333,13 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
     redisConfiguration: {
       'maxmemory-policy': 'allkeys-lru'
     }
-    // Enable clustering for high availability
+    // 高可用性を実現するためにクラスタリングを有効にする
     redisVersion: '6.0'
     shardCount: 2
   }
 }
 
-// Cache configuration in application
+// アプリケーションにおけるキャッシュ設定
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
@@ -348,7 +348,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 **WAF を備えた Application Gateway**:
 
 ```bicep
-// Application Gateway with Web Application Firewall
+// Web アプリケーション ファイアウォールを備えた Application Gateway
 resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' = {
   name: appGatewayName
   location: location
@@ -364,7 +364,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
       ruleSetType: 'OWASP'
       ruleSetVersion: '3.2'
     }
-    // Backend pools for AI services
+    // AIサービス向けバックエンドプール
     backendAddressPools: [
       {
         name: 'ai-services-pool'
@@ -408,7 +408,7 @@ azd env set CONTAINER_MEMORY 4.0
 ### 2. コスト監視と予算
 
 ```bicep
-// Cost management and budgets
+// コスト管理と予算
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
   properties: {
@@ -480,7 +480,7 @@ class TokenOptimizer {
 ### 1. 包括的な Application Insights
 
 ```bicep
-// Application Insights with advanced features
+// 高度な機能を備えた Application Insights
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   name: applicationInsightsName
   location: location
@@ -493,7 +493,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI operations
+// AI運用向けのカスタムメトリクス
 resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: 'ai-high-error-rate'
   location: 'global'
@@ -527,7 +527,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 **AI メトリクス用カスタムダッシュボード**:
 
 ```json
-// Dashboard configuration for AI workloads
+// AIワークロード向けのダッシュボード設定
 {
   "dashboard": {
     "name": "AI Application Monitoring",
@@ -556,7 +556,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 ### 3. ヘルスチェックと稼働率監視
 
 ```bicep
-// Application Insights availability tests
+// Application Insights 可用性テスト
 resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
   name: 'ai-app-availability-test'
   location: location
@@ -627,7 +627,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 ### 1. マルチリージョン展開
 
 ```yaml
-# azure.yaml - Multi-region configuration
+# azure.yaml - マルチリージョン構成
 name: ai-app-multiregion
 services:
   api-primary:
@@ -643,7 +643,7 @@ services:
 ```
 
 ```bicep
-// Traffic Manager for global load balancing
+// グローバル負荷分散のための Traffic Manager
 resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = {
   name: trafficManagerProfileName
   location: 'global'
@@ -689,7 +689,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 ### 2. データのバックアップと復旧
 
 ```bicep
-// Backup configuration for critical data
+// 重要なデータのバックアップ構成
 resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
   name: backupVaultName
   location: location
@@ -706,7 +706,7 @@ resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
   }
 }
 
-// Backup policy for AI models and data
+// AIモデルとデータのバックアップポリシー
 resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023-05-01' = {
   parent: backupVault
   name: 'ai-data-backup-policy'
@@ -907,14 +907,14 @@ echo "Infrastructure validation completed successfully!"
 
 ### 典型的な本番指標
 
-| Metric | Target | Monitoring |
+| 指標 | 目標値 | 監視方法 |
 |--------|--------|------------|
-| **Response Time** | < 2 seconds | Application Insights |
-| **Availability** | 99.9% | Uptime monitoring |
-| **Error Rate** | < 0.1% | Application logs |
-| **Token Usage** | < $500/month | Cost management |
-| **Concurrent Users** | 1000+ | Load testing |
-| **Recovery Time** | < 1 hour | Disaster recovery tests |
+| **応答時間** | 2秒未満 | Application Insights |
+| **可用性** | 99.9% | 稼働状況監視 |
+| **エラー率** | 0.1%未満 | アプリケーションログ |
+| **トークン利用料** | 月額500ドル未満 | コスト管理 |
+| **同時ユーザー数** | 1000以上 | 負荷テスト |
+| **復旧時間** | 1時間未満 | 災害復旧テスト |
 
 ### 負荷テスト
 
@@ -977,14 +977,14 @@ azd extension upgrade --all
 
 **利用可能な AI 拡張:**
 
-| Extension | Purpose | Status |
+| 拡張機能 | 目的 | 状態 |
 |-----------|---------|--------|
-| `azure.ai.agents` | Foundry Agent Service の管理 | Preview |
-| `azure.ai.skills` | 再利用可能なエージェントスキル | Preview |
-| `azure.ai.connections` | Foundry の接続（データソース、ツール） | Preview |
-| `azure.ai.finetune` | Foundry のモデル微調整 | Preview |
-| `azure.ai.models` | Foundry のカスタムモデル | Preview |
-| `azure.coding-agent` | コーディングエージェントの構成 | Available |
+| `azure.ai.agents` | Foundry Agent Service の管理 | プレビュー |
+| `azure.ai.skills` | 再利用可能なエージェントスキル | プレビュー |
+| `azure.ai.connections` | Foundry の接続（データソース、ツール） | プレビュー |
+| `azure.ai.finetune` | Foundry のモデル微調整 | プレビュー |
+| `azure.ai.models` | Foundry のカスタムモデル | プレビュー |
+| `azure.coding-agent` | コーディングエージェントの構成 | 利用可能 |
 
 > `azure.ai.agents` 拡張は急速に進化しています。本コースは `0.1.40-preview` に対して検証されています。最新のコマンドセットを取得するには `azd extension upgrade --all` を実行し、インストール済みバージョンを確認するには `azd extension show azure.ai.agents` を実行してください。
 
@@ -1017,7 +1017,7 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 
 **主要フラグ:**
 
-| Flag | Description |
+| フラグ | 説明 |
 |------|-------------|
 | `-m, --manifest` | プロジェクトに追加するエージェントマニフェストへのパスまたは URI |
 | `-p, --project-id` | azd 環境用の既存 Microsoft Foundry Project ID |
@@ -1057,7 +1057,7 @@ azd ai agent delete --force
 
 **ライフサイクル概要:**
 
-| Stage | Command | Production use |
+| ステージ | コマンド | 本番利用 |
 |-------|---------|----------------|
 | Test | `azd ai agent invoke` | リリース前に応答を検証しレイテンシを測定する |
 | Inspect | `azd ai agent endpoint show` | エンドポイントの認証/構成を確認し、破壊的変更を早期発見する |
@@ -1083,9 +1083,9 @@ MCPサーバーは、azdプロジェクトのコンテキスト—環境、サ�
 
 - **AI支援によるデプロイ**: コーディングエージェントがプロジェクトの状態を照会してデプロイをトリガーできます
 - <strong>リソース検出</strong>: AIツールがプロジェクトで使用されているAzureリソースを検出できます
-- **Environment management**: エージェントが dev/staging/production 環境を切り替えられます
+- **環境管理**: エージェントが dev/staging/production 環境を切り替えられます
 
-### Infrastructure Generation with `azd infra generate`
+### `azd infra generate` によるインフラ生成
 
 本番環境のAIワークロードでは、自動プロビジョニングに頼るのではなく、Infrastructure as Code（IaC）を生成してカスタマイズできます：
 
@@ -1105,7 +1105,7 @@ azd infra generate
 AZDフックを使うと、デプロイライフサイクルの各段階でカスタムロジックを挿入できます—これは本番のAIワークフローで重要です：
 
 ```yaml
-# azure.yaml - Production hooks example
+# azure.yaml - 本番環境用フックの例
 name: ai-production-app
 hooks:
   preprovision:
@@ -1144,7 +1144,7 @@ azd hooks run predeploy
 | `predeploy` | AIの安全性テストを実行し、プロンプトテンプレートを検証する |
 | `postdeploy` | エージェントの応答をスモークテストし、モデル接続性を検証する |
 
-### CI/CD Pipeline Configuration
+### CI/CDパイプラインの設定
 
 `azd pipeline config` を使用して、プロジェクトをGitHub ActionsまたはAzure Pipelinesに安全なAzure認証で接続します：
 
@@ -1162,11 +1162,11 @@ azd pipeline config --provider github
 - パイプライン定義ファイルを生成または更新する
 - CI/CDシステムに必要な環境変数を設定する
 
-#### Step-by-step: your first GitHub Actions pipeline
+#### ステップ・バイ・ステップ：初めてのGitHub Actionsパイプライン
 
 以下は、動作中のazdプロジェクトから、プッシュごとに自動デプロイを行うまでの完全な手順です。
 
-**1. Make sure your project is on GitHub**
+**1. プロジェクトがGitHub上にあることを確認する**
 
 ```bash
 git init
@@ -1175,7 +1175,7 @@ git commit -m "Initial azd project"
 gh repo create my-ai-app --private --source=. --push
 ```
 
-**2. Run pipeline config**
+**2. パイプライン設定の実行**
 
 ```bash
 azd pipeline config --provider github
@@ -1187,7 +1187,7 @@ azd は対話的に以下を行います：
 - **フェデレーテッド資格情報（OIDC）** を設定します—これにより GitHub は短期間有効なトークンで Azure に認証し、<strong>シークレットは一切保存されません</strong>
 - 必要な <strong>変数</strong> をあなたの GitHub リポジトリにプッシュします（`AZURE_CLIENT_ID`、`AZURE_TENANT_ID`、`AZURE_SUBSCRIPTION_ID`、`AZURE_ENV_NAME`、`AZURE_LOCATION`）
 
-**3. Understand the generated workflow**
+**3.生成されたワークフローを理解する**
 
 azd は `.github/workflows/azure-dev.yml` を追加します。主要な部分は次のようになります：
 
@@ -1223,7 +1223,7 @@ jobs:
         run: azd deploy --no-prompt
 ```
 
-**4. Verify it works**
+**4. 動作を確認する**
 
 ```bash
 # パイプラインをトリガーするために変更をプッシュする
@@ -1250,15 +1250,15 @@ azd pipeline config --provider github
 # 3. パイプラインは main ブランチへのすべての push ごとに azd deploy を実行する
 ```
 
-#### Step-by-step: Azure DevOps Pipelines
+#### ステップバイステップ：Azure DevOps Pipelines
 
 GitHub ActionsよりAzure DevOpsを好みますか？ azdは `azdo` プロバイダーをネイティブにサポートしています。フローはほぼ同一で、azdがパイプラインファイルを生成し、サービスコネクションを作成し、認証を設定します。
 
-**1. Make sure you have an Azure DevOps project**
+**1. Azure DevOpsプロジェクトがあることを確認する**
 
 `https://dev.azure.com/<your-org>` に組織とプロジェクトが必要です。**Build (Read & execute)**、**Code (Read & write)**、**Service Connections (Read, query & manage)** スコープを持つ Personal Access Token (PAT) を生成してください—azd がそれを求めます。
 
-**2. Configure the pipeline**
+**2. パイプラインを構成する**
 
 ```bash
 azd pipeline config --provider azdo
@@ -1270,7 +1270,7 @@ azd は以下を行います：
 - クライアントシークレットが保存されないように **ワークロードアイデンティティフェデレーション（OIDC）** を構成する
 - `azure-dev.yml` のパイプライン定義をリポジトリにコミットする
 
-**3. Review the generated `azure-dev.yml`**
+**3. 生成された `azure-dev.yml` を確認する**
 
 azd は `main` へのプッシュごとにプロビジョニングとデプロイを行うパイプラインを書き出します：
 
@@ -1301,13 +1301,13 @@ steps:
       AZURE_LOCATION: $(AZURE_LOCATION)
 ```
 
-**4. Where the variables come from**
+**4. 変数の由来**
 
 azd は環境値（`AZURE_ENV_NAME`、`AZURE_LOCATION`、`AZURE_SUBSCRIPTION_ID`）を Azure DevOps の **variable group** として保存し、パイプラインがそれらを読み取れるようにします。**Pipelines → Library** で表示・編集できます。
 
 > **GitHub と同じ OIDC の利点：** `azdo` プロバイダーもデフォルトでワークロードアイデンティティフェデレーションを構成するため、サービスコネクションにクライアントシークレットは保存されません—Azure DevOps は実行時に短期間有効なトークンを交換します。組織がまだ OIDC を使用できない場合に限り、`--auth-type client-credentials` を渡してください。
 
-**5. Run it**
+**5. 実行する**
 
 ```bash
 git commit -am "Add Azure DevOps pipeline" --allow-empty
@@ -1316,7 +1316,7 @@ git push
 
 Azure DevOps の **Pipelines** を開き、`azd provision` と `azd deploy` が実行されるのを確認してください。
 
-### Adding Components with `azd add`
+### `azd add` を使用したコンポーネントの追加
 
 既存のプロジェクトに Azure サービスを段階的に追加します：
 
@@ -1327,13 +1327,13 @@ azd add
 
 これは本番のAIアプリケーションを拡張する際に特に有用です。例えば、ベクター検索サービスの追加、新しいエージェントエンドポイントの追加、既存のデプロイへのモニタリングコンポーネントの追加などです。
 
-## Additional Resources
+## その他のリソース
 
 - **Azure Well-Architected Framework**: [AI ワークロードガイダンス](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [公式ドキュメント](https://learn.microsoft.com/azure/ai-studio/)
-- **Community Templates**: [Azure サンプル](https://github.com/Azure-Samples)
+- **Microsoft Foundry ドキュメント**: [公式ドキュメント](https://learn.microsoft.com/azure/ai-studio/)
+- **コミュニティ テンプレート**: [Azure サンプル](https://github.com/Azure-Samples)
 - **Discord Community**: [#Azure チャンネル](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [skills.sh 上の microsoft/github-copilot-for-azure](https://skills.sh/microsoft/github-copilot-for-azure) - Azure AI、Foundry、デプロイ、コスト最適化、診断向けの37の公開エージェントスキル。エディタにインストール：
+- **Azure 向けエージェント スキル**: [skills.sh 上の microsoft/github-copilot-for-azure](https://skills.sh/microsoft/github-copilot-for-azure) - Azure AI、Foundry、デプロイ、コスト最適化、診断向けの37の公開エージェントスキル。エディタにインストール：
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
