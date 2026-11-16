@@ -1,920 +1,284 @@
-# Menerapkan Database Microsoft SQL dan Web App dengan AZD
+# Flask dan Azure SQL di App Service
 
-⏱️ **Perkiraan Waktu**: 20-30 menit | 💰 **Perkiraan Biaya**: ~$15-25/bulan | ⭐ **Kompleksitas**: Menengah
+**Tingkat:** Menengah · **Waktu:** 30–60 menit termasuk prasyarat
 
-Contoh **lengkap dan berfungsi** ini menunjukkan cara menggunakan [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) untuk menerapkan aplikasi web Python Flask dengan Database Microsoft SQL ke Azure. Semua kode disertakan dan diuji—tidak memerlukan dependensi eksternal.
+Contoh ini menerapkan API baca Python Flask ke **Linux App Service** dan database Azure SQL Basic.
+Sumber, Bicep, dan konfigurasi azd disertakan. Ini adalah
+aplikasi pembelajaran, bukan arsitektur database siap produksi.
 
-## Apa yang Akan Anda Pelajari
+## Apa yang akan Anda pelajari
 
-Dengan menyelesaikan contoh ini, Anda akan:
-- Menerapkan aplikasi multi-tier (web app + database) menggunakan infrastructure-as-code
-- Mengonfigurasi koneksi database yang aman tanpa menyematkan rahasia di kode
-- Memantau kesehatan aplikasi dengan Application Insights
-- Mengelola sumber daya Azure secara efisien dengan AZD CLI
-- Mengikuti praktik terbaik Azure untuk keamanan, optimisasi biaya, dan observabilitas
+- Menyediakan sumber daya App Service, SQL, dan pemantauan dengan Bicep.
+- Mengonfigurasi konektivitas SQL terenkripsi tanpa menyimpan kredensial.
+- Inisialisasi skema sebelum memulai pekerja Gunicorn.
+- Memverifikasi data yang sudah dimasukkan, respons tidak ditemukan, dan kesehatan database.
 
-## Ikhtisar Skenario
-- **Web App**: REST API Python Flask dengan konektivitas basis data
-- **Database**: Azure SQL Database dengan data contoh
-- **Infrastruktur**: Disediakan menggunakan Bicep (template modular, dapat digunakan ulang)
-- **Penerapan**: Sepenuhnya otomatis dengan perintah `azd`
-- **Pemantauan**: Application Insights untuk log dan telemetri
+```mermaid
+flowchart LR
+    User -->|HTTPS| Web[App Service — Flask]
+    Web -->|ODBC + encrypted SQL connection| SQL[Azure SQL — products table]
+    Web -. application log traces .-> AI[Application Insights]
+```
+
+Sumber daya: grup sumber daya khusus, paket App Service Linux B1, Python 3.11 Web
+App, server SQL dan database Basic 2-GB, Application Insights, dan Log Analytics.
+Web App menggunakan **deployment sumber/ZIP dan instalasi dependensi Oryx**;
+`azd deploy` tidak membangun atau menerapkan Dockerfile opsional.
 
 ## Prasyarat
 
-### Alat yang Diperlukan
+- Saat ini stabil [azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (rilis yang diterbitkan saat tinjauan: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) untuk verifikasi.
+- Langganan Azure, izin untuk membuat sumber daya yang terdaftar, dan kuota regional.
+- Python **3.11** untuk pengembangan lokal; `pyodbc==5.0.1` yang dikomit mungkin memerlukan
+  alat build native pada versi Python yang lebih baru.
+- Microsoft ODBC Driver 18 (atau 17) untuk SQL Server pada mesin lokal. `pip install
+  pyodbc` tidak menginstal driver sistem. Lihat
+  [instalasi ODBC](https://learn.microsoft.com/sql/connect/odbc/download-odbc-driver-for-sql-server).
+- Docker hanya jika menguji kontainer opsional secara lokal.
 
-Sebelum memulai, pastikan Anda telah menginstal alat-alat berikut:
-
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versi 2.50.0 atau lebih tinggi)
-   ```sh
-   az --version
-   # Output yang diharapkan: azure-cli 2.50.0 atau lebih tinggi
-   ```
-
-2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versi 1.0.0 atau lebih tinggi)
-   ```sh
-   azd version
-   # Output yang diharapkan: azd versi 1.0.0 atau lebih tinggi
-   ```
-
-3. **[Python 3.8+](https://www.python.org/downloads/)** (untuk pengembangan lokal)
-   ```sh
-   python --version
-   # Output yang diharapkan: Python 3.8 atau lebih tinggi
-   ```
-
-4. **[Docker](https://www.docker.com/get-started)** (opsional, untuk pengembangan tercontainer lokal)
-   ```sh
-   docker --version
-   # Keluaran yang diharapkan: Docker versi 20.10 atau lebih tinggi
-   ```
-
-### Persyaratan Azure
-
-- Langganan **Azure** aktif ([buat akun gratis](https://azure.microsoft.com/free/))
-- Izin untuk membuat sumber daya di langganan Anda
-- Peran **Owner** atau **Contributor** pada langganan atau grup sumber daya
-
-### Prasyarat Pengetahuan
-
-Ini adalah contoh tingkat **menengah**. Anda sebaiknya terbiasa dengan:
-- Operasi dasar baris perintah
-- Konsep dasar cloud (sumber daya, grup sumber daya)
-- Pemahaman dasar tentang aplikasi web dan basis data
-
-**Baru dengan AZD?** Mulai dengan [Panduan Memulai](../../docs/chapter-01-foundation/azd-basics.md) terlebih dahulu.
-
-## Arsitektur
-
-Contoh ini menerapkan arsitektur dua lapis dengan aplikasi web dan database SQL:
-
-```mermaid
-graph TD
-    Browser[Peramban Pengguna] <--> WebApp[Aplikasi Web Azure<br/>API Flask<br/>/health<br/>/products]
-    WebApp -- Koneksi Aman<br/>Terenkripsi --> SQL[Database SQL Azure<br/>Tabel Produk<br/>Data sampel]
-```
-
-**Penerapan Sumber Daya:**
-- **Grup Sumber Daya**: Wadah untuk semua sumber daya
-- **App Service Plan**: Hosting berbasis Linux (tingkat B1 untuk efisiensi biaya)
-- **Web App**: runtime Python 3.11 dengan aplikasi Flask
-- **SQL Server**: Server basis data terkelola dengan minimal TLS 1.2
-- **SQL Database**: tingkat Basic (2GB, cocok untuk pengembangan/pengujian)
-- **Application Insights**: Pemantauan dan pencatatan
-- **Log Analytics Workspace**: Penyimpanan log terpusat
-
-**Analogi**: Anggap ini seperti restoran (aplikasi web) dengan freezer walk-in (database). Pelanggan memesan dari menu (endpoint API), dan dapur (aplikasi Flask) mengambil bahan (data) dari freezer. Manajer restoran (Application Insights) melacak semuanya yang terjadi.
-
-## Struktur Folder
-
-Semua file disertakan dalam contoh ini—tidak memerlukan dependensi eksternal:
-
-```
-examples/database-app/
-│
-├── README.md                    # This file
-├── azure.yaml                   # AZD configuration file
-├── .env.sample                  # Sample environment variables
-├── .gitignore                   # Git ignore patterns
-│
-├── infra/                       # Infrastructure as Code (Bicep)
-│   ├── main.bicep              # Main orchestration template
-│   ├── abbreviations.json      # Azure naming conventions
-│   └── resources/              # Modular resource templates
-│       ├── sql-server.bicep    # SQL Server configuration
-│       ├── sql-database.bicep  # Database configuration
-│       ├── app-service-plan.bicep  # Hosting plan
-│       ├── app-insights.bicep  # Monitoring setup
-│       └── web-app.bicep       # Web application
-│
-└── src/
-    └── web/                    # Application source code
-        ├── app.py              # Flask REST API
-        ├── requirements.txt    # Python dependencies
-        └── Dockerfile          # Container definition
-```
-
-**Fungsi Setiap File:**
-- **azure.yaml**: Memberitahu AZD apa yang harus diterapkan dan dimana
-- **infra/main.bicep**: Mengorkestrasi semua sumber daya Azure
-- **infra/resources/*.bicep**: Definisi sumber daya individual (modular untuk digunakan ulang)
-- **src/web/app.py**: Aplikasi Flask dengan logika basis data
-- **requirements.txt**: Dependensi paket Python
-- **Dockerfile**: Instruksi containerisasi untuk penerapan
-
-## Panduan Cepat (Langkah demi Langkah)
-
-### Langkah 1: Clone dan Navigasi
-
-```sh
-git clone https://github.com/microsoft/AZD-for-beginners.git
-cd AZD-for-beginners/examples/database-app
-```
-
-**✓ Pemeriksaan Keberhasilan**: Verifikasi Anda melihat `azure.yaml` dan folder `infra/`:
-```sh
-ls
-# Diharapkan: README.md, azure.yaml, infra/, src/
-```
-
-### Langkah 2: Autentikasi dengan Azure
-
-```sh
+```bash
+azd version
+az version
 azd auth login
-```
-
-Ini membuka browser Anda untuk autentikasi Azure. Masuk dengan kredensial Azure Anda.
-
-**✓ Pemeriksaan Keberhasilan**: Anda seharusnya melihat:
-```
-Logged in to Azure.
-```
-
-### Langkah 3: Inisialisasi Lingkungan
-
-```sh
-azd init
-```
-
-**Apa yang terjadi**: AZD membuat konfigurasi lokal untuk penerapan Anda.
-
-**Prompt yang akan Anda lihat**:
-- **Nama lingkungan**: Masukkan nama singkat (mis., `dev`, `myapp`)
-- **Langganan Azure**: Pilih langganan Anda dari daftar
-- **Lokasi Azure**: Pilih region (mis., `eastus`, `westeurope`)
-
-**✓ Pemeriksaan Keberhasilan**: Anda seharusnya melihat:
-```
-SUCCESS: New project initialized!
-```
-
-### Langkah 4: Menyediakan Sumber Daya Azure
-
-```sh
-azd provision
-```
-
-**Apa yang terjadi**: AZD menerapkan seluruh infrastruktur (memakan waktu 5-8 menit):
-1. Membuat grup sumber daya
-2. Membuat SQL Server dan Database
-3. Membuat App Service Plan
-4. Membuat Web App
-5. Membuat Application Insights
-6. Mengonfigurasi jaringan dan keamanan
-
-**Anda akan diminta untuk**:
-- **SQL admin username**: Masukkan nama pengguna (mis., `sqladmin`)
-- **SQL admin password**: Masukkan kata sandi yang kuat (simpan ini!)
-
-**✓ Pemeriksaan Keberhasilan**: Anda seharusnya melihat:
-```
-SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
-You can view the resources created under the resource group rg-<env-name> in Azure Portal:
-https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
-```
-
-**⏱️ Waktu**: 5-8 menit
-
-### Langkah 5: Menerapkan Aplikasi
-
-```sh
-azd deploy
-```
-
-**Apa yang terjadi**: AZD membangun dan menerapkan aplikasi Flask Anda:
-1. Mengemas aplikasi Python
-2. Membangun container Docker
-3. Mendorong ke Azure Web App
-4. Menginisialisasi database dengan data contoh
-5. Memulai aplikasi
-
-**✓ Pemeriksaan Keberhasilan**: Anda seharusnya melihat:
-```
-SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
-You can view the resources created under the resource group rg-<env-name> in Azure Portal:
-https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
-```
-
-**⏱️ Waktu**: 3-5 menit
-
-### Langkah 6: Menjelajahi Aplikasi
-
-```sh
-azd browse
-```
-
-Ini membuka aplikasi web yang diterapkan di browser pada `https://app-<unique-id>.azurewebsites.net`
-
-**✓ Pemeriksaan Keberhasilan**: Anda seharusnya melihat keluaran JSON:
-```json
-{
-  "message": "Welcome to the Database App API",
-  "endpoints": {
-    "/": "This help message",
-    "/health": "Health check endpoint",
-    "/products": "List all products",
-    "/products/<id>": "Get product by ID"
-  }
-}
-```
-
-### Langkah 7: Uji Endpoint API
-
-**Pemeriksaan Kesehatan** (verifikasi koneksi database):
-```sh
-curl https://app-<your-id>.azurewebsites.net/health
-```
-
-**Respons yang Diharapkan**:
-```json
-{
-  "status": "healthy",
-  "database": "connected"
-}
-```
-
-**Daftar Produk** (data contoh):
-```sh
-curl https://app-<your-id>.azurewebsites.net/products
-```
-
-**Respons yang Diharapkan**:
-```json
-[
-  {
-    "id": 1,
-    "name": "Laptop",
-    "description": "High-performance laptop",
-    "price": 1299.99,
-    "created_at": "2025-11-19T10:30:00"
-  },
-  ...
-]
-```
-
-**Ambil Produk Tunggal**:
-```sh
-curl https://app-<your-id>.azurewebsites.net/products/1
-```
-
-**✓ Pemeriksaan Keberhasilan**: Semua endpoint mengembalikan data JSON tanpa error.
-
----
-
-**🎉 Selamat!** Anda telah berhasil menerapkan aplikasi web dengan basis data ke Azure menggunakan AZD.
-
-## Pendalaman Konfigurasi
-
-### Variabel Lingkungan
-
-Rahasia dikelola secara aman melalui konfigurasi Azure App Service—**jangan pernah menulisnya langsung di kode sumber**.
-
-**Dikonfigurasi Secara Otomatis oleh AZD**:
-- `SQL_CONNECTION_STRING`: Koneksi database dengan kredensial terenkripsi
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Endpoint telemetri pemantauan
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Mengaktifkan pemasangan dependensi otomatis
-
-**Di Mana Rahasia Disimpan**:
-1. Selama `azd provision`, Anda memberikan kredensial SQL melalui prompt aman
-2. AZD menyimpannya di file lokal `.azure/<env-name>/.env` (diabaikan oleh Git)
-3. AZD menyuntikkannya ke konfigurasi Azure App Service (terenkripsi saat disimpan)
-4. Aplikasi membacanya melalui `os.getenv()` saat runtime
-
-### Pengembangan Lokal
-
-Untuk pengujian lokal, buat file `.env` dari contoh:
-
-```sh
-cp .env.sample .env
-# Edit .env dengan koneksi database lokal Anda
-```
-
-**Alur Kerja Pengembangan Lokal**:
-```sh
-# Instal dependensi
-cd src/web
-pip install -r requirements.txt
-
-# Atur variabel lingkungan
-export SQL_CONNECTION_STRING="your-local-connection-string"
-
-# Jalankan aplikasi
-python app.py
-```
-
-**Uji secara lokal**:
-```sh
-curl http://localhost:8000/health
-# Diharapkan: {"status": "healthy", "database": "connected"}
-```
-
-### Infrastruktur sebagai Kode
-
-Semua sumber daya Azure didefinisikan dalam **template Bicep** (`infra/` folder):
-
-- **Desain Modular**: Setiap tipe sumber daya memiliki file sendiri untuk dapat digunakan kembali
-- **Diperparameterisasi**: Sesuaikan SKU, region, konvensi penamaan
-- **Praktik Terbaik**: Mengikuti standar penamaan Azure dan default keamanan
-- **Terkontrol Versi**: Perubahan infrastruktur dilacak di Git
-
-**Contoh Kustomisasi**:
-Untuk mengubah tingkat database, edit `infra/resources/sql-database.bicep`:
-```bicep
-sku: {
-  name: 'Standard'  // Changed from 'Basic'
-  tier: 'Standard'
-  capacity: 10
-}
-```
-
-## Praktik Keamanan Terbaik
-
-Contoh ini mengikuti praktik keamanan terbaik Azure:
-
-### 1. **Tidak Ada Rahasia di Kode Sumber**
-- ✅ Kredensial disimpan di konfigurasi Azure App Service (terenkripsi)
-- ✅ File `.env` dikecualikan dari Git melalui `.gitignore`
-- ✅ Rahasia diteruskan melalui parameter aman selama provisioning
-
-### 2. **Koneksi Terenkripsi**
-- ✅ TLS 1.2 minimal untuk SQL Server
-- ✅ Hanya HTTPS yang diberlakukan untuk Web App
-- ✅ Koneksi basis data menggunakan saluran terenkripsi
-
-### 3. **Keamanan Jaringan**
-- ✅ Firewall SQL Server dikonfigurasi untuk mengizinkan hanya layanan Azure
-- ✅ Akses jaringan publik dibatasi (dapat dikunci lebih lanjut dengan Private Endpoints)
-- ✅ FTPS dinonaktifkan pada Web App
-
-### 4. **Autentikasi & Otorisasi**
-- ⚠️ **Saat ini**: autentikasi SQL (username/password)
-- ✅ **Rekomendasi Produksi**: Gunakan Azure Managed Identity untuk autentikasi tanpa kata sandi
-
-**Untuk Mengupgrade ke Managed Identity** (untuk produksi):
-1. Aktifkan managed identity pada Web App
-2. Berikan izin SQL ke identity
-3. Perbarui connection string untuk menggunakan managed identity
-4. Hapus autentikasi berbasis kata sandi
-
-### 5. **Audit & Kepatuhan**
-- ✅ Application Insights mencatat semua permintaan dan error
-- ✅ Audit SQL Database diaktifkan (dapat dikonfigurasi untuk kepatuhan)
-- ✅ Semua sumber daya diberi tag untuk tata kelola
-
-**Daftar Periksa Keamanan Sebelum Produksi**:
-- [ ] Aktifkan Azure Defender untuk SQL
-- [ ] Konfigurasikan Private Endpoints untuk SQL Database
-- [ ] Aktifkan Web Application Firewall (WAF)
-- [ ] Implementasikan Azure Key Vault untuk rotasi rahasia
-- [ ] Konfigurasikan autentikasi Microsoft Entra ID
-- [ ] Aktifkan pencatatan diagnostik untuk semua sumber daya
-
-## Optimasi Biaya
-
-**Perkiraan Biaya Bulanan** (per November 2025):
-
-| Sumber Daya | SKU/Tier | Perkiraan Biaya |
-|----------|----------|----------------|
-| App Service Plan | B1 (Basic) | ~$13/month |
-| SQL Database | Basic (2GB) | ~$5/month |
-| Application Insights | Pay-as-you-go | ~$2/month (lalu lintas rendah) |
-| **Total** | | **~$20/month** |
-
-**💡 Tip Penghematan Biaya**:
-
-1. **Gunakan Tier Gratis untuk Pembelajaran**:
-   - App Service: tier F1 (gratis, jam terbatas)
-   - SQL Database: Gunakan Azure SQL Database serverless
-   - Application Insights: 5GB/bulan ingest gratis
-
-2. **Hentikan Sumber Daya Saat Tidak Digunakan**:
-   ```sh
-   # Hentikan aplikasi web (basis data masih akan dikenakan biaya)
-   az webapp stop --name <app-name> --resource-group <rg-name>
-   
-   # Mulai ulang saat diperlukan
-   az webapp start --name <app-name> --resource-group <rg-name>
-   ```
-
-3. **Hapus Semua Setelah Pengujian**:
-   ```sh
-   azd down
-   ```
-   Ini menghapus SEMUA sumber daya dan menghentikan tagihan.
-
-4. **SKU Pengembangan vs. Produksi**:
-   - **Pengembangan**: Tingkat Basic (digunakan dalam contoh ini)
-   - **Produksi**: Tingkat Standard/Premium dengan redundansi
-
-**Pemantauan Biaya**:
-- Lihat biaya di [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Atur notifikasi biaya untuk menghindari kejutan
-- Tandai semua sumber daya dengan `azd-env-name` untuk pelacakan
-
-**Alternatif Tier Gratis**:
-Untuk tujuan pembelajaran, Anda dapat mengubah `infra/resources/app-service-plan.bicep`:
-```bicep
-sku: {
-  name: 'F1'  // Free tier
-  tier: 'Free'
-}
-```
-**Catatan**: Tier gratis memiliki keterbatasan (60 min/hari CPU, tidak selalu aktif).
-
-## Pemantauan & Observabilitas
-
-### Integrasi Application Insights
-
-Contoh ini menyertakan **Application Insights** untuk pemantauan menyeluruh:
-
-**Apa yang Dipantau**:
-- ✅ Permintaan HTTP (latensi, kode status, endpoint)
-- ✅ Error dan exception aplikasi
-- ✅ Pencatatan khusus dari aplikasi Flask
-- ✅ Kesehatan koneksi database
-- ✅ Metrik kinerja (CPU, memori)
-
-**Akses Application Insights**:
-1. Buka [Azure Portal](https://portal.azure.com)
-2. Buka grup sumber daya Anda (`rg-<env-name>`)
-3. Klik pada resource Application Insights (`appi-<unique-id>`)
-
-**Kueri Berguna** (Application Insights → Logs):
-
-**Lihat Semua Permintaan**:
-```kusto
-requests
-| where timestamp > ago(1h)
-| order by timestamp desc
-| project timestamp, name, url, resultCode, duration
-```
-
-**Cari Error**:
-```kusto
-exceptions
-| where timestamp > ago(24h)
-| order by timestamp desc
-| project timestamp, type, outerMessage, operation_Name
-```
-
-**Periksa Endpoint Kesehatan**:
-```kusto
-requests
-| where name contains "health"
-| summarize count() by resultCode, bin(timestamp, 1h)
-```
-
-### Audit Database SQL
-
-**Audit SQL Database diaktifkan** untuk melacak:
-- Pola akses database
-- Upaya login yang gagal
-- Perubahan skema
-- Akses data (untuk kepatuhan)
-
-**Akses Log Audit**:
-1. Azure Portal → SQL Database → Auditing
-2. Lihat log di Log Analytics workspace
-
-### Pemantauan Waktu Nyata
-
-**Lihat Metrik Langsung**:
-1. Application Insights → Live Metrics
-2. Lihat permintaan, kegagalan, dan kinerja secara waktu nyata
-
-**Atur Peringatan**:
-Buat peringatan untuk kejadian kritis:
-- Error HTTP 500 > 5 dalam 5 menit
-- Kegagalan koneksi database
-- Waktu respons tinggi (>2 detik)
-
-**Contoh Pembuatan Peringatan**:
-```sh
-az monitor metrics alert create \
-  --name "High-Response-Time" \
-  --resource-group <rg-name> \
-  --scopes <app-insights-resource-id> \
-  --condition "avg requests/duration > 2000" \
-  --description "Alert when response time exceeds 2 seconds"
-```
-
-## Pemecahan Masalah
-### Masalah Umum dan Solusi
-
-#### 1. `azd provision` gagal dengan "Location not available"
-
-**Gejala**:
-```
-Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
-```
-
-**Solusi**:
-Pilih wilayah Azure yang berbeda atau daftarkan penyedia sumber daya:
-```sh
-az provider register --namespace Microsoft.Insights
-```
-
-#### 2. Koneksi SQL Gagal Saat Penyebaran
-
-**Gejala**:
-```
-pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
-```
-
-**Solusi**:
-- Verifikasi firewall SQL Server mengizinkan layanan Azure (dikonfigurasi secara otomatis)
-- Periksa apakah kata sandi admin SQL dimasukkan dengan benar saat `azd provision`
-- Pastikan SQL Server sepenuhnya diprovisikan (bisa memakan 2-3 menit)
-
-**Verifikasi Koneksi**:
-```sh
-# Dari Azure Portal, buka SQL Database → Editor kueri
-# Coba sambungkan dengan kredensial Anda
-```
-
-#### 3. Web App Menampilkan "Application Error"
-
-**Gejala**:
-Browser menampilkan halaman kesalahan umum.
-
-**Solusi**:
-Periksa log aplikasi:
-```sh
-# Lihat log terbaru
-az webapp log tail --name <app-name> --resource-group <rg-name>
-```
-
-**Penyebab umum**:
-- Variabel lingkungan hilang (periksa App Service → Configuration)
-- Instalasi paket Python gagal (periksa log penyebaran)
-- Kesalahan inisialisasi basis data (periksa konektivitas SQL)
-
-#### 4. `azd deploy` Gagal dengan "Build Error"
-
-**Gejala**:
-```
-Error: Failed to build project
-```
-
-**Solusi**:
-- Pastikan `requirements.txt` tidak memiliki kesalahan sintaks
-- Periksa bahwa Python 3.11 ditentukan di `infra/resources/web-app.bicep`
-- Verifikasi Dockerfile memiliki image dasar yang benar
-
-**Debug secara lokal**:
-```sh
-cd src/web
-docker build -t test-app .
-docker run -p 8000:8000 test-app
-```
-
-#### 5. "Unauthorized" Saat Menjalankan Perintah AZD
-
-**Gejala**:
-```
-ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
-```
-
-**Solusi**:
-Autentikasi ulang dengan Azure:
-```sh
-# Diperlukan untuk alur kerja AZD
-azd auth login
-
-# Opsional jika Anda juga menggunakan perintah Azure CLI secara langsung
 az login
 ```
 
-Verifikasi Anda memiliki izin yang benar (role Contributor) pada subscription.
+Gunakan langganan yang sama di kedua alat. Perintah di bawah menggunakan Bash.
 
-#### 6. Biaya Database Tinggi
+## Deploy
 
-**Gejala**:
-Tagihan Azure tidak terduga.
+Dari akar repositori:
 
-**Solusi**:
-- Periksa jika Anda lupa menjalankan `azd down` setelah pengujian
-- Verifikasi SQL Database menggunakan tier Basic (bukan Premium)
-- Tinjau biaya di Azure Cost Management
-- Atur peringatan biaya
-
-### Mendapatkan Bantuan
-
-**Tampilkan Semua Variabel Lingkungan AZD**:
-```sh
-azd env get-values
+```bash
+cd examples/database-app
+azd env new sql-demo
+azd provision
+azd deploy
+WEB_URL=$(azd env get-value WEB_APP_URI)
+WEB_NAME=$(azd env get-value WEB_APP_NAME)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
 ```
 
-**Periksa Status Penyebaran**:
-```sh
-az webapp show --name <app-name> --resource-group <rg-name> --query state
+Pilih wilayah yang didukung. `sqlAdminLogin` default ke `sqladmin`; 
+`sqlAdminPassword` adalah parameter yang aman. Berikan kata sandi yang kuat saat diminta.
+Jaga kredensial penyebaran agar tidak masuk ke Git dan laporan masalah. Penyusunan string koneksi saat ini
+mengharapkan kata sandi tanpa pembatas string koneksi seperti
+`;`; sesuaikan penghindaran sebelum menggunakan nilai tersebut.
+
+Bicep mengatur perintah startup yang menjalankan `init_database()` **sebelum** pekerja Gunicorn
+dimulai. Ini diperlukan karena mengimpor `app:app` tidak mengeksekusi
+blok `if __name__ == '__main__'` Python. Pada basis data baru, inisialisasi
+membuat `products` dan menyisipkan lima baris. Ini adalah bibit pengajaran sederhana, 
+bukan kerangka migrasi konkuren; gunakan migrasi yang tepat sebelum memperbanyak instance.
+
+Aplikasi memilih Microsoft ODBC Driver 18 yang terpasang, kemudian 17, jika string koneksi
+tidak secara eksplisit menyebutkan driver. Jika keduanya tidak ada, startup gagal dengan
+kesalahan instalasi yang dapat diatasi. Verifikasi ketersediaan driver di runtime App Service yang Anda pilih
+daripada mengasumsikannya.
+
+## Verifikasi
+
+```bash
+curl --fail-with-body "${WEB_URL}/"
+curl --fail-with-body "${WEB_URL}/health"
+curl --fail-with-body "${WEB_URL}/products"
+curl --fail-with-body "${WEB_URL}/products/1"
+curl -i "${WEB_URL}/products/999"
 ```
 
-**Akses Log Aplikasi**:
-```sh
-az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
+Diharapkan:
+
+- `/` mengembalikan informasi endpoint.
+- `/health` mengembalikan 200 dengan `{"status":"healthy","database":"connected"}`.
+- `/products` mengembalikan lima produk yang sudah dimasukkan pada database yang baru.
+- `/products/1` mengembalikan Laptop dengan harga 1299.99.
+- Produk yang tidak ada mengembalikan 404 dengan `{"error":"Product not found"}`.
+
+API ini hanya untuk baca. Tidak ada route POST/PUT/DELETE atau UI browser.
+Kegagalan konektivitas database mengembalikan 503 dari `/health`; ini bukan sukses.
+
+## File dan konfigurasi
+
+```text
+azure.yaml                         # Python App Service source deployment
+infra/main.bicep
+infra/main.parameters.json
+infra/abbreviations.json
+infra/resources/sql-server.bicep
+infra/resources/sql-database.bicep
+infra/resources/app-service-plan.bicep
+infra/resources/web-app.bicep       # Settings + initialization/startup command
+infra/resources/app-insights.bicep
+src/web/app.py
+src/web/requirements.txt
+src/web/Dockerfile                 # Optional local container, not the azd target
+.env.sample
 ```
 
-**Butuh Bantuan Lebih?**
-- [Panduan Pemecahan Masalah AZD](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Pemecahan Masalah Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Pemecahan Masalah Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+`SQL_CONNECTION_STRING` diteruskan sebagai parameter Bicep yang aman ke modul Web App
+dan disimpan di pengaturan App Service, bukan output deployment.
+`APPLICATIONINSIGHTS_CONNECTION_STRING` mengonfigurasi ekspor log.
+`SCM_DO_BUILD_DURING_DEPLOYMENT=true` mengaktifkan instalasi dependensi sisi server.
+Menetapkan nilai `azd env` secara sembarangan tidak secara otomatis mengubah pengaturan aplikasi.
+
+Aturan firewall SQL `0.0.0.0` mengizinkan koneksi dari **layanan Azure,
+termasuk langganan pelanggan lain**, dengan syarat autentikasi SQL. Ini
+tidak dibatasi pada aplikasi atau langganan ini. Akses jaringan publik SQL diaktifkan.
+Gunakan jaringan terbatas dan identitas aplikasi non-admin sebelum produksi.
+
+## Pengembangan lokal
+
+Gunakan Python 3.11 dan driver Microsoft SQL ODBC yang terinstal:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/web/requirements.txt
+export SQL_CONNECTION_STRING='Server=tcp:YOUR_SERVER.database.windows.net,1433;Database=YOUR_DATABASE;UID=YOUR_USER;PWD=YOUR_PASSWORD;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+python src/web/app.py
+```
+
+Ganti placeholder dengan aman. File `.env` yang disalin **tidak dimuat secara otomatis**
+oleh aplikasi ini. Ekspor variabel di shell Anda saat ini sebagai gantinya.
+Untuk Azure SQL dari laptop, sementara izinkan hanya IP publik Anda sendiri:
+
+```bash
+SQL_SERVER=$(azd env get-value SQL_SERVER_NAME)
+MY_IP=YOUR_PUBLIC_IP
+az sql server firewall-rule create -g "$RG_NAME" -s "$SQL_SERVER" \
+  -n AllowMyLearningIP --start-ip-address "$MY_IP" --end-ip-address "$MY_IP"
+```
+
+Hapus aturan setelah pengujian:
+
+```bash
+az sql server firewall-rule delete -g "$RG_NAME" -s "$SQL_SERVER" -n AllowMyLearningIP
+```
+
+Tes kontainer opsional dari direktori contoh ini:
+
+```bash
+docker build -t sql-flask:local src/web
+docker run --rm -p 8000:8000 -e SQL_CONNECTION_STRING sql-flask:local
+```
+
+Gambar ini memasang Driver 18 menggunakan repositori paket Debian 12 yang sesuai dengan
+basis Bookworm-nya, menginisialisasi basis data sekali, lalu memulai Gunicorn.
+
+## Pemantauan dan pemecahan masalah
+
+Aktifkan/tail log aplikasi sistem file App Service saat mendiagnosis startup:
+
+```bash
+az webapp log config --name "$WEB_NAME" --resource-group "$RG_NAME" \
+  --application-logging filesystem --level information
+az webapp log tail --name "$WEB_NAME" --resource-group "$RG_NAME"
+```
+
+Kode ini mengekspor **jejak log** aplikasi melalui handler OpenCensus lawas.
+Ini tidak mengonfigurasi pelacakan otomatis permintaan/dependensi Flask, Live Metrics,
+audit SQL, pengaturan diagnostik, atau peringatan. Itu memerlukan pengaturan terpisah.
+Untuk instrumentasi baru, disarankan Azure Monitor OpenTelemetry.
+
+Dalam Application Insights Logs, setelah membuat permintaan API:
+
+```kusto
+traces
+| where timestamp > ago(1h)
+| where message contains "products" or message contains "Health check"
+| project timestamp, message, severityLevel
+```
+
+Beri waktu penundaan pengambilan data. Aktivitas tabel permintaan atau Live Metrics bukan
+kriteria penyelesaian untuk instrumentasi hanya log ini.
+
+- **Driver hilang:** periksa `pyodbc.drivers()` di runtime dan pasang
+  driver ODBC Microsoft yang didukung. Paket Python saja tidak cukup.
+- **Kegagalan koneksi:** periksa pengaturan SQL, kredensial, firewall, dan langganan
+  yang dipilih. Jangan nonaktifkan enkripsi untuk mengatasi kesalahan.
+- **Tabel produk hilang:** pastikan perintah startup Bicep telah diterapkan;
+  menjalankan `gunicorn app:app` saja melewati inisialisasi.
+- **Kegagalan build paket:** gunakan Python 3.11 atau sediakan prasyarat build native.
+- **Data harga nol:** nol adalah harga desimal yang valid; harus serialisasi sebagai 0.0,
+  bukan `null`.
 
 ## Latihan Praktis
 
-### Latihan 1: Verifikasi Penyebaran Anda (Pemula)
+### Latihan 1: Verifikasi perilaku produk hilang
 
-**Tujuan**: Pastikan semua sumber daya telah disebarkan dan aplikasi berfungsi.
+**Titik awal:** API dan `WEB_URL` yang diterapkan di atas.
+**Tujuan:** membedakan baris yang hilang dari basis data yang rusak.
+Minta `/health` dan `/products/999` menggunakan perintah di atas.
+**Kriteria keberhasilan / jawaban:** status 200 untuk sehat, 404 untuk produk tidak ada (bukan 500 atau 503).
+**Masalah umum:** menganggap respons tidak ditemukan sebagai bukti koneksi SQL rusak.
 
-**Langkah-langkah**:
-1. Daftar semua sumber daya di resource group Anda:
-   ```sh
-   az resource list --resource-group rg-<env-name> --output table
-   ```
-   **Diharapkan**: 6-7 sumber daya (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+### Latihan 2: Ubah nilai yang sudah ditetapkan
 
-2. Uji semua endpoint API:
-   ```sh
-   curl https://app-<your-id>.azurewebsites.net/
-   curl https://app-<your-id>.azurewebsites.net/health
-   curl https://app-<your-id>.azurewebsites.net/products
-   curl https://app-<your-id>.azurewebsites.net/products/1
-   ```
-   **Diharapkan**: Semua mengembalikan JSON valid tanpa kesalahan
+**Titik awal:** Azure SQL Query Editor, terhubung ke basis data contoh.
+**Tujuan:** tunjukkan bahwa data API disimpan di SQL bukan memori proses.
 
-3. Periksa Application Insights:
-   - Navigasikan ke Application Insights di Azure Portal
-   - Buka "Live Metrics"
-   - Segarkan browser Anda pada web app
-   **Diharapkan**: Lihat permintaan muncul secara real-time
+```sql
+UPDATE products SET price = 0 WHERE id = 1;
+SELECT id, name, price FROM products WHERE id = 1;
+```
 
-**Kriteria Keberhasilan**: Semua 6-7 sumber daya ada, semua endpoint mengembalikan data, Live Metrics menunjukkan aktivitas.
+Minta `${WEB_URL}/products/1`. **Kriteria keberhasilan:** harga adalah `0.0`, bukan `null`.
+Pulihkan nilainya:
 
----
+```sql
+UPDATE products SET price = 1299.99 WHERE id = 1;
+```
 
-### Latihan 2: Tambahkan Endpoint API Baru (Menengah)
+**Masalah umum:** mengedit daftar seed Python tidak memperbarui baris yang sudah ada di SQL.
+Jangan jalankan latihan skema/data pada basis data produksi.
 
-**Tujuan**: Perluas aplikasi Flask dengan endpoint baru.
+### Latihan 3: Tambahkan endpoint hitung hanya baca
 
-**Kode Awal**: Endpoint saat ini di `src/web/app.py`
+**Titik awal:** `src/web/app.py`.
+**Tujuan:** memperluas API menggunakan query agregat tanpa parameter.
+Tambahkan ini sebelum blok `if __name__ == '__main__':`:
 
-**Langkah-langkah**:
-1. Edit `src/web/app.py` dan tambahkan endpoint baru setelah fungsi `get_product()`:
-   ```python
-   @app.route('/products/search/<keyword>')
-   def search_products(keyword):
-       """Search products by name or description."""
-       try:
-           conn = get_db_connection()
-           cursor = conn.cursor()
-           cursor.execute(
-               "SELECT id, name, description, price, created_at FROM products WHERE name LIKE ? OR description LIKE ?",
-               (f'%{keyword}%', f'%{keyword}%')
-           )
-           
-           products = []
-           for row in cursor.fetchall():
-               products.append({
-                   'id': row[0],
-                   'name': row[1],
-                   'description': row[2],
-                   'price': float(row[3]) if row[3] else None,
-                   'created_at': row[4].isoformat() if row[4] else None
-               })
-           
-           cursor.close()
-           conn.close()
-           
-           logger.info(f"Search for '{keyword}' returned {len(products)} results")
-           return jsonify(products), 200
-           
-       except Exception as e:
-           logger.error(f"Error searching products: {str(e)}")
-           return jsonify({'error': str(e)}), 500
-   ```
+```python
+@app.route('/product-count')
+def product_count():
+    from contextlib import closing
+    with closing(get_db_connection()) as conn, closing(conn.cursor()) as cursor:
+        cursor.execute("SELECT COUNT(*) FROM products")
+        return jsonify({'count': cursor.fetchone()[0]})
+```
 
-2. Deploy aplikasi yang diperbarui:
-   ```sh
-   azd deploy
-   ```
+Jalankan `azd deploy web`, lalu minta `${WEB_URL}/product-count`.
+**Kriteria keberhasilan:** 200 dengan `{"count":5}` pada database seeded yang belum disentuh.
+**Masalah umum:** mengubah route tetapi lupa untuk menyebarkan ulang.
+Untuk produksi, tambahkan penanganan kesalahan/penguji; latihan singkat ini fokus pada query.
 
-3. Uji endpoint baru:
-   ```sh
-   curl https://app-<your-id>.azurewebsites.net/products/search/laptop
-   ```
-   **Diharapkan**: Mengembalikan produk yang cocok dengan "laptop"
+## Biaya, celah produksi, dan pembersihan
 
-**Kriteria Keberhasilan**: Endpoint baru berfungsi, mengembalikan hasil terfilter, muncul di log Application Insights.
+B1 App Service dan database Basic dikenai biaya saat disediakan. Menghentikan
+Web App **tidak** menghentikan penagihan App Service plan. Log dan penyimpanan dapat menambah biaya.
+Gunakan [Azure pricing calculator](https://azure.microsoft.com/pricing/calculator/)
+untuk harga regional saat ini. Beralih ke F1 juga memerlukan menonaktifkan `alwaysOn`;
+ini bukan pengganti satu baris langsung. SQL serverless tidak otomatis gratis.
 
----
+Pekerjaan produksi meliputi identitas aplikasi least-privilege (bukan admin SQL),
+otentikasi/otorisasi, jaringan privat, migrasi aman, review pooling/siklus koneksi,
+telemetri, auditing, peringatan, pengujian, dan prosedur pemulihan.
+Caching Redis dan tabel tambahan adalah ide pengembangan, bukan latihan yang diimplementasikan.
 
-### Latihan 3: Tambahkan Pemantauan dan Peringatan (Lanjutan)
+Dari direktori contoh ini:
 
-**Tujuan**: Siapkan pemantauan proaktif dengan peringatan.
-
-**Langkah-langkah**:
-1. Buat peringatan untuk error HTTP 500:
-   ```sh
-   # Dapatkan ID sumber daya Application Insights
-   AI_ID=$(az monitor app-insights component show \
-     --app appi-<your-id> \
-     --resource-group rg-<env-name> \
-     --query id -o tsv)
-   
-   # Buat peringatan
-   az monitor metrics alert create \
-     --name "High-Error-Rate" \
-     --resource-group rg-<env-name> \
-     --scopes $AI_ID \
-     --condition "count requests/failed > 5" \
-     --window-size 5m \
-     --evaluation-frequency 1m \
-     --description "Alert when >5 failed requests in 5 minutes"
-   ```
-
-2. Picu peringatan dengan menyebabkan error:
-   ```sh
-   # Meminta produk yang tidak ada
-   for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
-   ```
-
-3. Periksa apakah peringatan menyala:
-   - Azure Portal → Alerts → Alert Rules
-   - Periksa email Anda (jika dikonfigurasi)
-
-**Kriteria Keberhasilan**: Aturan peringatan dibuat, memicu pada error, notifikasi diterima.
-
----
-
-### Latihan 4: Perubahan Skema Database (Lanjutan)
-
-**Tujuan**: Tambahkan tabel baru dan modifikasi aplikasi untuk menggunakannya.
-
-**Langkah-langkah**:
-1. Terhubung ke SQL Database melalui Query Editor di Azure Portal
-
-2. Buat tabel `categories` baru:
-   ```sql
-   CREATE TABLE categories (
-       id INT PRIMARY KEY IDENTITY(1,1),
-       name NVARCHAR(50) NOT NULL,
-       description NVARCHAR(200)
-   );
-   
-   INSERT INTO categories (name, description) VALUES
-   ('Electronics', 'Electronic devices and accessories'),
-   ('Office Supplies', 'Office equipment and supplies');
-   
-   -- Add category to products table
-   ALTER TABLE products ADD category_id INT;
-   UPDATE products SET category_id = 1; -- Set all to Electronics
-   ```
-
-3. Perbarui `src/web/app.py` untuk menyertakan informasi kategori dalam respons
-
-4. Deploy dan uji
-
-**Kriteria Keberhasilan**: Tabel baru ada, produk menampilkan informasi kategori, aplikasi tetap berfungsi.
-
----
-
-### Latihan 5: Implementasikan Caching (Ahli)
-
-**Tujuan**: Tambahkan Azure Redis Cache untuk meningkatkan kinerja.
-
-**Langkah-langkah**:
-1. Tambahkan Redis Cache ke `infra/main.bicep`
-2. Perbarui `src/web/app.py` untuk caching query produk
-3. Ukur peningkatan kinerja dengan Application Insights
-4. Bandingkan waktu respons sebelum/sesudah caching
-
-**Kriteria Keberhasilan**: Redis dideploy, caching berfungsi, waktu respons meningkat >50%.
-
-**Petunjuk**: Mulai dengan [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/).
-
----
-
-## Pembersihan
-
-Untuk menghindari biaya berkelanjutan, hapus semua sumber daya saat selesai:
-
-```sh
+```bash
 azd down
 ```
 
-**Prompt konfirmasi**:
-```
-? Total resources to delete: 7, are you sure you want to continue? (y/N)
-```
+Tinjau prompt penghapusan dan verifikasi bahwa grup sumber daya khusus dihapus.
+Jangan hapus grup yang berisi data tidak terkait.
 
-Ketik `y` untuk mengonfirmasi.
-
-**✓ Pemeriksaan Keberhasilan**: 
-- Semua sumber daya dihapus dari Azure Portal
-- Tidak ada biaya berkelanjutan
-- Folder lokal `.azure/<env-name>` dapat dihapus
-
-**Alternatif** (pertahankan infrastruktur, hapus data):
-```sh
-# Hapus hanya grup sumber daya (pertahankan konfigurasi AZD)
-az group delete --name rg-<env-name> --yes
-```
-## Pelajari Lebih Lanjut
-
-### Dokumentasi Terkait
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
-- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
-
-### Langkah Berikutnya dalam Kursus Ini
-- **[Container Apps Example](../../../../examples/container-app)**: Deploy microservices dengan Azure Container Apps
-- **[Panduan Integrasi AI](../../../../docs/ai-foundry)**: Tambahkan kemampuan AI ke aplikasi Anda
-- **[Panduan Praktik Terbaik Penyebaran](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Pola penyebaran ke produksi
-
-### Topik Lanjutan
-- **Managed Identity**: Hapus kata sandi dan gunakan autentikasi Microsoft Entra ID
-- **Private Endpoints**: Amankan koneksi database dalam jaringan virtual
-- **Integrasi CI/CD**: Otomatiskan penyebaran dengan GitHub Actions atau Azure DevOps
-- **Multi-Environment**: Siapkan lingkungan dev, staging, dan production
-- **Migrasi Database**: Gunakan Alembic atau Entity Framework untuk versi skema
-
-### Perbandingan dengan Pendekatan Lain
-
-**AZD vs. ARM Templates**:
-- ✅ AZD: Abstraksi tingkat tinggi, perintah lebih sederhana
-- ⚠️ ARM: Lebih verbose, kontrol yang lebih rinci
-
-**AZD vs. Terraform**:
-- ✅ AZD: Native Azure, terintegrasi dengan layanan Azure
-- ⚠️ Terraform: Dukungan multi-cloud, ekosistem lebih besar
-
-**AZD vs. Azure Portal**:
-- ✅ AZD: Dapat diulang, dikendalikan versi, dapat diotomatisasi
-- ⚠️ Portal: Klik manual, sulit direproduksi
-
-**Pikirkan AZD sebagai**: Docker Compose untuk Azure—konfigurasi yang disederhanakan untuk penyebaran kompleks.
-
----
-
-## Pertanyaan yang Sering Diajukan
-
-**T: Bisakah saya menggunakan bahasa pemrograman yang berbeda?**  
-J: Bisa! Ganti `src/web/` dengan Node.js, C#, Go, atau bahasa apa pun. Perbarui `azure.yaml` dan Bicep sesuai kebutuhan.
-
-**T: Bagaimana cara menambahkan lebih banyak database?**  
-J: Tambahkan modul SQL Database lain di `infra/main.bicep` atau gunakan PostgreSQL/MySQL dari layanan Azure Database.
-
-**T: Bisakah saya menggunakan ini untuk produksi?**  
-J: Ini adalah titik awal. Untuk produksi, tambahkan: managed identity, private endpoints, redundansi, strategi cadangan, WAF, dan pemantauan yang ditingkatkan.
-
-**T: Bagaimana jika saya ingin menggunakan container alih-alih penyebaran kode?**  
-J: Lihat [Container Apps Example](../../../../examples/container-app) yang menggunakan Docker container secara menyeluruh.
-
-**T: Bagaimana cara menghubungkan ke database dari mesin lokal saya?**  
-J: Tambahkan IP Anda ke firewall SQL Server:
-```sh
-az sql server firewall-rule create \
-  --resource-group rg-<env-name> \
-  --server sql-<unique-id> \
-  --name AllowMyIP \
-  --start-ip-address <your-ip> \
-  --end-ip-address <your-ip>
-```
-
-**T: Bisakah saya menggunakan database yang sudah ada alih-alih membuat yang baru?**  
-J: Ya, modifikasi `infra/main.bicep` untuk mereferensikan SQL Server yang sudah ada dan perbarui parameter connection string.
-
----
-
-> **Catatan:** Contoh ini menunjukkan praktik terbaik untuk menyebarkan web app dengan database menggunakan AZD. Ini mencakup kode yang berfungsi, dokumentasi komprehensif, dan latihan praktis untuk memperkuat pembelajaran. Untuk penyebaran produksi, tinjau keamanan, skala, kepatuhan, dan persyaratan biaya yang spesifik untuk organisasi Anda.
-
-**📚 Navigasi Kursus:**
-- ← Sebelumnya: [Container Apps Example](../../../../examples/container-app)
-- → Selanjutnya: [Panduan Integrasi AI](../../../../docs/ai-foundry)
-- 🏠 [Beranda Kursus](../../README.md)
+[Contoh Container](../../../../examples/container-app) ·
+[Pengembangan AI](../../docs/chapter-02-ai-development/README.md) ·
+[Halaman kursus](../../README.md) · [Laporkan masalah](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

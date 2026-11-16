@@ -1,36 +1,36 @@
-# Lembaran Pantau Perintah - Perintah Azd Penting
+# Lembaran Panduan Perintah - Perintah Asas AZD
 
 **Rujukan Pantas untuk Semua Bab**
-- **📚 Rumah Kursus**: [AZD Untuk Pemula](../README.md)
-- **📖 Mulakan Cepat**: [Bab 1: Asas & Mula Cepat](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Perintah AI**: [Bab 2: Pembangunan AI-Utama](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../README.md)
+- **📖 Mula Pantas**: [Bab 1: Asas & Mula Pantas](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Perintah AI**: [Bab 2: Pembangunan Utama AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Lanjutan**: [Bab 4: Infrastruktur sebagai Kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Pengenalan
 
-Lembaran pantau menyeluruh ini menyediakan rujukan pantas untuk perintah Azure Developer CLI yang paling sering digunakan, disusun mengikut kategori dengan contoh praktikal. Sesuai untuk rujukan pantas semasa pembangunan, penyelesaian masalah, dan operasi harian dengan projek azd.
+Lembaran panduan menyeluruh ini menyediakan rujukan pantas untuk perintah Azure Developer CLI yang paling kerap digunakan, disusun mengikut kategori dengan contoh praktikal. Sesuai untuk rujukan cepat semasa pembangunan, penyelesaian masalah, dan operasi harian dengan projek azd.
 
 ## Matlamat Pembelajaran
 
-Dengan menggunakan lembaran pantau ini, anda akan:
-- Mendapatkan akses segera kepada perintah dan sintaks Azure Developer CLI penting
-- Memahami organisasi perintah mengikut kategori fungsional dan kes penggunaan
-- Merujuk contoh praktikal untuk scenario pembangunan dan penyebaran biasa
-- Mengakses perintah penyelesaian masalah untuk penyelesaian isu cepat
-- Mencari pilihan konfigurasi lanjutan dan penyesuaian dengan cekap
-- Menemukan perintah pengurusan persekitaran dan aliran kerja pelbagai persekitaran
+Dengan menggunakan lembaran panduan ini, anda akan:
+- Mempunyai akses segera ke perintah dan sintaks Azure Developer CLI yang penting
+- Memahami organisasi perintah mengikut kategori fungsi dan kes penggunaan
+- Merujuk contoh praktikal untuk senario pembangunan dan penyebaran biasa
+- Mengakses perintah penyelesaian masalah untuk penyelesaian isu yang cepat
+- Menemukan pilihan konfigurasi dan pengkhususan lanjutan dengan cekap
+- Menemui perintah pengurusan persekitaran dan aliran kerja pelbagai persekitaran
 
 ## Hasil Pembelajaran
 
-Dengan rujukan kerap kepada lembaran pantau ini, anda akan dapat:
-- Melaksanakan perintah azd dengan yakin tanpa merujuk dokumentasi penuh
+Dengan merujuk lembaran panduan ini secara kerap, anda akan boleh:
+- Menjalankan perintah azd dengan yakin tanpa merujuk dokumentasi penuh
 - Menyelesaikan isu biasa dengan cepat menggunakan perintah diagnostik yang sesuai
-- Mengurus pelbagai persekitaran dan scenario penyebaran dengan cekap
-- Menerapkan ciri dan pilihan konfigurasi azd lanjutan bila perlu
-- Menyelesaikan isu penyebaran menggunakan urutan perintah yang sistematik
+- Mengurus persekitaran dan senario penyebaran berganda dengan cekap
+- Menerapkan ciri dan pilihan konfigurasi azd lanjutan mengikut keperluan
+- Menyelesaikan masalah penyebaran menggunakan urutan perintah sistematik
 - Mengoptimumkan aliran kerja melalui penggunaan pintasan dan pilihan azd yang berkesan
 
-## Perintah Mula
+## Perintah Memulakan
 
 ### Pengesahan
 ```bash
@@ -71,7 +71,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 cd my-awesome-app
 ```
 
-## Perintah Penyebaran Teras
+## Perintah Teras Penyebaran
 
 ### Aliran Kerja Penyebaran Lengkap
 ```bash
@@ -128,9 +128,9 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** memuat turun kebergantungan aplikasi anda (npm, pip, NuGet, Maven, dll.). Ia berjalan secara automatik semasa `azd package` dan `azd deploy`, jadi anda jarang memanggilnya secara langsung—jalankan secara manual untuk memuat awal kebergantungan (contohnya, untuk menghangatkan cache CI atau bekerja luar talian kemudian).
+> **`azd restore`** memuat turun kebergantungan aplikasi anda (npm, pip, NuGet, Maven, dll.). Ia berjalan secara automatik semasa `azd package` dan `azd deploy`, jadi anda jarang memanggilnya secara langsung—jalankan secara manual untuk pramuat kebergantungan (contohnya, untuk menghangatkan cache CI atau bekerja secara luar talian kemudian).
 
-> **`azd package`** menyediakan artifak yang boleh disebarkan tanpa menyebarkan servis aplikasi. Tingkah laku bergantung pada bahasa dan hos: pembungkusan kontena boleh menggunakan binaan jarak jauh Azure dan menerbitkan imej ke registri, jadi ia tidak semestinya luar talian atau bebas daripada penulisan Azure. `azd deploy` boleh membungkus secara automatik; gunakan langkah pek berasingan apabila anda memerlukan artifak atau pemeriksaan bina.
+> **`azd package`** menyediakan artifak yang boleh disebarkan tanpa menyebarkan perkhidmatan aplikasi. Tingkah laku bergantung pada bahasa dan hos: pembungkusan kontena boleh menggunakan binaan jauh Azure dan menerbitkan imej ke registri, jadi ia tidak semestinya luar talian atau bebas dari penulisan Azure. `azd deploy` boleh membungkus secara automatik; gunakan langkah pek berasingan apabila anda memerlukan artifak atau pemeriksaan binaan.
 
 
 ## 🌍 Pengurusan Persekitaran
@@ -219,7 +219,7 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-Application Insights mesti dikonfigurasikan oleh templat. Pilihan Metrik Langsung AZD tidak disokong buat masa ini untuk aplikasi Python; gunakan gambaran keseluruhan, log, atau aliran kerja pelacakan yang didokumentasikan dalam sampel sebaliknya.
+Application Insights mesti dikonfigurasi oleh templat. Pilihan Metrik Langsung AZD tidak disokong buat masa ini untuk aplikasi Python; gunakan gambaran keseluruhan, log, atau aliran kerja penjejakan terdokumentasi sampel sebagai gantinya.
 
 ### Melihat Log Kontena
 ```bash
@@ -321,23 +321,22 @@ azd show --output json | jq '.services'
 
 ### Sambungan AZD
 
-Rujukan AI CLI dikaji semula 2026-11-04: `azd 1.37.2`, ejen `1.0.0-beta.23`, penilaian `1.0.0-beta.2`. Gunakan `azd >= 1.37.0` untuk aliran kerja gabungan; naik taraf CLI teras sebelum sambungan tidak serasi.
+Rujukan Foundry GA dikemas kini 2026-11-09: pek `microsoft.foundry` 1.0, diumumkan [5 November 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Gunakan `azd >= 1.37.0`; komponen dilesenkan secara bebas dan ciri pratonton pilihan mengekalkan status mereka sendiri.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,9 +344,12 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
+
+Pek ini tidak termasuk penilaian, set data, penyempurnaan, atau model tersuai. Pemasangan sambungan teras individu masih disokong. Ikuti [panduan hos agen GA](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) untuk sampel boleh jalankan dengan Python 3.13+, uv semasa, kebenaran, dan kuota model.
 
 ### Perintah Ejen AI
 ```bash
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` menggantikan ejaan lama `--manifest`/`-m`; manifes legacy perlu migrasi. Tiada pilihan ejen-init `--host containerapp` sekarang. Pratonton managed-harness, suara, dan jangka panjang memerlukan pilihan persekitaran shell/CI bebas; lihat [rujukan AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` menggantikan ejaan `--manifest`/`-m` yang usang; manifes lama perlu dipindahkan. Tiada pilihan ejen-init `--host containerapp` semasa. Pratonton dikelola, suara, dan berjalan lama memerlukan opt-in persekitaran shell/CI bebas; lihat [rujukan AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+Pengujian tempatan masih menggunakan penyebaran model Azure dan dikenakan caj. Untuk pembersihan, `azd down` memadamkan kumpulan sumber projek Foundry yang baru dibuat, tetapi meninggalkan sumber projek yang digunakan semula; hanya alih keluar sumber yang tidak diingini yang anda miliki secara berasingan.
 
 ### Penilaian dan Pengoptimuman AI
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,7 +417,22 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-Ejen beta.22 menggantikan arahan penilaian warisan dengan `azd ai eval` dari `azure.ai.evaluations`. Konfigurasi penilaian baru menggunakan kekunci camelCase. Pengoptimuman `--config` mengambil permintaan API pengoptimuman berdiri sendiri, **bukan** warisan `eval.yaml` atau `azure.eval.yaml` baru; gunakan `--eval`/`--eval-config` untuk penggunaan semula penilaian. Lihat [penyediaan penilaian](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) dan [pemindahan pengoptimuman](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Agen beta.22 menggantikan arahan penilaian legacy dengan `azd ai eval` dari `azure.ai.evaluations`. Konfigurasi penilaian baru menggunakan kekunci camelCase. Pengoptimuman `--config` mengambil permintaan API pengoptimuman berdiri sendiri, **bukan** legacy `eval.yaml` atau baru `azure.eval.yaml`; gunakan `--eval`/`--eval-config` untuk guna semula penilaian. Lihat [persediaan penilaian](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) dan [migrasi pengoptimuman](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+Fragmen pelari bukan aliran kerja lengkap. Komit konfigurasi penilaian yang disemak dan aset bukan rahsia, berikan akses dataset/evaluator/model, dan gunakan persekitaran bagi setiap tahap. Lihat [contoh CI/CD yang diautentikasi](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
 
 ### Pelayan MCP (Alpha)
 ```bash
@@ -438,7 +473,7 @@ azd deploy
 azd monitor --live
 ```
 
-### Aliran Kerja Multi-Persekitaran
+### Aliran Kerja Pelbagai Persekitaran
 ```bash
 # Set up environments
 azd env new dev
@@ -475,7 +510,7 @@ azd show --output json
 
 ## 🔍 Arahan Penyahpepijatan
 
-### Maklumat Penyahpepijatan
+### Maklumat Nyahpepijat
 ```bash
 # Enable debug output for a command
 azd <command> --debug
@@ -490,7 +525,7 @@ azd config show
 azd auth login
 ```
 
-### Penyahpepijatan Templat
+### Penyahpepijatan Templet
 ```bash
 # List available templates with details
 azd template list --output json
@@ -551,7 +586,7 @@ azd env get-values
 azd monitor --logs
 ```
 
-### Pengesahan Penyebaran
+### Pengesahan Penempatan
 ```bash
 #!/bin/bash
 # Pre-deployment validation
@@ -598,7 +633,7 @@ export LOG_LEVEL="info"
 
 ## 🚨 Arahan Kecemasan
 
-### Pembaikan Pantas
+### Pembetulan Pantas
 ```bash
 # Reauthenticate AZD without changing Azure CLI's account cache
 azd auth login
@@ -628,7 +663,7 @@ azd deploy
 
 ## 💡 Petua Profesional
 
-### Alias untuk Aliran Kerja Lebih Cepat
+### Alias untuk Aliran Kerja Lebih Pantas
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up'
@@ -637,7 +672,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Pautan Pintasan Fungsi
+### Pintasan Fungsi
 ```bash
 # Quick environment switching
 azd-env() {

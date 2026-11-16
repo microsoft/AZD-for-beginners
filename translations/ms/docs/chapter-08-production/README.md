@@ -1,25 +1,25 @@
 # Bab 8: Corak Pengeluaran & Perusahaan
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 2-3 jam | **⭐ Kerumitan**: Lanjutan
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 2-3 jam | **⭐ Kerumitan**: Lanjutan
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi corak penerapan siap perusahaan, pengukuhan keselamatan, pemantauan, dan pengoptimuman kos untuk beban kerja AI pengeluaran.
+Bab ini merangkumi corak penyebaran bersedia perusahaan, pengukuhan keselamatan, pemantauan, dan pengoptimuman kos untuk beban kerja AI pengeluaran.
 
-Ini adalah rujukan seni bina, bukan templat pengeluaran lengkap yang boleh diterapkan. Contoh mengabaikan butiran integrasi yang mesti disediakan dan diuji dalam aplikasi anda sendiri; membaca senarai semak tidak mengesahkan kesiapan pengeluaran.
+Ini adalah rujukan seni bina, bukan templat produksi lengkap yang boleh digunakan. Contoh mengabaikan butiran integrasi yang mesti disediakan dan diuji dalam aplikasi anda sendiri; membaca senarai semak tidak mengesahkan kesediaan pengeluaran.
 
-> **Semakan pelepasan (2026-11-04):** Panduan AI CLI telah disemak mengikut `azd 1.37.2`, ejen `1.0.0-beta.23`, dan dokumentasi/sumber penilaian `1.0.0-beta.2`. Lihat [perubahan dan pembetulan pelepasan](production-ai-practices.md#recent-release-changes-and-fixes) untuk keperluan keserasian dan butiran migrasi; ini bukan pengesahan penerapan langsung.
+> **Kemas kini GA Foundry (2026-11-09):** Gunakan `azd >= 1.37.0` dan bundel `microsoft.foundry` 1.0 yang tersedia secara am untuk aliran kerja Foundry; penilaian dipasang secara berasingan. Lihat [skop pelepasan dan migrasi](production-ai-practices.md#recent-release-changes-and-fixes) serta [contoh saluran pengesahan](production-ai-practices.md#cicd-pipeline-configuration). Ini adalah semakan dokumentasi, bukan pengesahan penyebaran langsung atau status GA menyeluruh untuk ciri pratonton pilihan.
 
 ## Objektif Pembelajaran
 
-Dengan menyelesaikan bab ini, anda akan:
-- Menggunakan aplikasi multi-wilayah yang tahan lasak
+Dengan menyiapkan bab ini, anda akan:
+- Menyebarkan aplikasi tahan lasak pelbagai rantau
 - Melaksanakan corak keselamatan perusahaan
-- Mengkonfigurasi pemantauan menyeluruh
+- Mengkonfigurasi pemantauan komprehensif
 - Mengoptimumkan kos pada skala besar
-- Menyediakan saluran paip CI/CD dengan AZD
+- Menyediakan saluran CI/CD dengan AZD
 
 ---
 
@@ -27,25 +27,25 @@ Dengan menyelesaikan bab ini, anda akan:
 
 | # | Pelajaran | Penerangan | Masa |
 |---|--------|-------------|------|
-| 1 | [Amalan AI Pengeluaran](production-ai-practices.md) | Corak penerapan perusahaan | 90 min |
+| 1 | [Amalan AI Pengeluaran](production-ai-practices.md) | Corak penyebaran perusahaan | 90 min |
 
 ---
 
 ## 🚀 Senarai Semak Pengeluaran
 
-- [ ] Penerapan multi-wilayah untuk ketahanan
+- [ ] Penyebaran pelbagai rantau untuk ketahanan
 - [ ] Identiti terurus untuk pengesahan (tanpa kunci)
 - [ ] Application Insights untuk pemantauan
-- [ ] Belanjawan kos dan amaran dikonfigurasikan
-- [ ] Imbasan keselamatan diaktifkan
-- [ ] Integrasi saluran paip CI/CD
+- [ ] Bajet kos dan amaran dikonfigurasikan
+- [ ] Pengimbasan keselamatan diaktifkan
+- [ ] Integrasi saluran CI/CD
 - [ ] Pelan pemulihan bencana
 
 ---
 
 ## 🏗️ Corak Seni Bina
 
-### Corak 1: AI Perkhidmatan Mikro
+### Corak 1: AI Mikroskhidmat
 
 ```mermaid
 graph LR
@@ -87,16 +87,16 @@ properties: {
 
 | Strategi | Kekangan Utama |
 |----------|---------|
-| Skalakan ke sifar (Container Apps) | Memerlukan pencetus yang sesuai; perkhidmatan lain masih menanggung kos |
+| Skala ke sifar (Aplikasi Kontena) | Memerlukan pencetus yang sesuai; perkhidmatan lain masih mengenakan kos |
 | Gunakan tahap penggunaan untuk pembangunan | Bandingkan harga perkhidmatan yang dipilih dan beban kerja |
-| Skalakan mengikut jadual | Skalakan melalui infrastruktur/automasi yang disokong |
-| Tempahan/kapasiti diperuntukkan | Hanya apabila disokong; komitmen boleh meningkatkan kos menganggur |
+| Skala berjadual | Skala melalui infrastruktur/automasi yang disokong |
+| Tempahan/kapasiti yang disediakan | Hanya apabila disokong; komitmen boleh meningkatkan kos tidak aktif |
 
-Gunakan [corak sumber bajet lengkap](production-ai-practices.md#2-cost-monitoring-and-budgets) dengan tarikh mula yang sah, skop bil, penerima, dan kebenaran. Bajet menghantar amaran; ia tidak mengehadkan perbelanjaan. Penjimatan bergantung pada penggunaan yang diukur dan tidak dijamin peratusannya.
+Gunakan [corak sumber bajet lengkap](production-ai-practices.md#2-cost-monitoring-and-budgets) dengan tarikh mula sah, skop pengebilan, penerima, dan kebenaran. Bajet menghantar amaran; ia tidak mengehadkan perbelanjaan. Penjimatan bergantung pada penggunaan yang diukur dan tidak dijamin peratusannya.
 
 ---
 
-## 📊 Tetapan Pemantauan
+## 📊 Pengaturan Pemantauan
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -116,7 +116,7 @@ az monitor metrics list --resource <resource-id>
 | Arah | Bab |
 |-----------|---------|
 | **Sebelumnya** | [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/README.md) |
-| **Kursus Selesai** | [Halaman Kursus](../../README.md) |
+| **Kursus Lengkap** | [Laman Utama Kursus](../../README.md) |
 
 ---
 
@@ -124,8 +124,8 @@ az monitor metrics list --resource <resource-id>
 
 - [Panduan Ejen AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Penyelesaian Multi-Ejen](../chapter-05-multi-agent/README.md)
-- [Contoh Perkhidmatan Mikro](../../examples/microservices/README.md)
+- [Penyelesaian Pelbagai Ejen](../chapter-05-multi-agent/README.md)
+- [Contoh Mikroskhidmat](../../examples/microservices/README.md)
 
 ---
 

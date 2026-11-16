@@ -1,45 +1,45 @@
-# Madalas Itanong (FAQ)
+# Mga Madalas na Itanong (FAQ)
 
 **Kumuha ng Tulong ayon sa Kabanata**
-- **📚 Tahanan ng Kurso**: [AZD For Beginners](../README.md)
-- **🚆 Mga Isyu sa Pag-install**: [Chapter 1: Installation & Setup](../docs/chapter-01-foundation/installation.md)
-- **🤖 Mga Tanong sa AI**: [Chapter 2: AI-First Development](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
-- **🔧 Pag-troubleshoot**: [Chapter 7: Troubleshooting & Debugging](../docs/chapter-07-troubleshooting/common-issues.md)
+- **📚 Bahay ng Kurso**: [AZD Para sa Mga Nagsisimula](../README.md)
+- **🚆 Mga Isyu sa Instalasyon**: [Kabanata 1: Instalasyon at Pag-setup](../docs/chapter-01-foundation/installation.md)
+- **🤖 Mga Tanong tungkol sa AI**: [Kabanata 2: AI-First na Pag-unlad](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🔧 Pag-troubleshoot**: [Kabanata 7: Pag-troubleshoot at Pag-debug](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ## Panimula
 
-Ang komprehensibong FAQ na ito ay nagbibigay ng mga sagot sa mga pinakakaraniwang tanong tungkol sa Azure Developer CLI (azd) at mga deployment sa Azure. Hanapin ang mabilis na mga solusyon sa mga karaniwang problema, unawain ang mga pinakamahusay na kasanayan, at makakuha ng paglilinaw tungkol sa mga konsepto at workflows ng azd.
+Ang komprehensibong FAQ na ito ay nagbibigay ng mga sagot sa mga pinaka-karaniwang tanong tungkol sa Azure Developer CLI (azd) at mga deployment sa Azure. Makahanap ng mabilis na mga solusyon sa mga karaniwang problema, maintindihan ang mga pinakamahusay na kasanayan, at magkaroon ng paglilinaw tungkol sa mga konsepto at workflows ng azd.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pamamagitan ng pagrepaso sa FAQ na ito, ikaw ay:
-- Makakahanap ng mabilis na sagot sa mga karaniwang tanong at isyu ng Azure Developer CLI
-- Makakaunawa ng mga pangunahing konsepto at terminolohiya sa pamamagitan ng praktikal na Q&A na pormat
-- Makakakuha ng mga solusyon sa pag-troubleshoot para sa mga madalas na problema at mga sitwasyon ng error
-- Matutunan ang mga pinakamahusay na kasanayan sa pamamagitan ng mga karaniwang tanong tungkol sa pag-optimize
-- Matuklasan ang mga advanced na tampok at kakayahan sa pamamagitan ng mga tanong na antas-eksperto
-- Magagamit ang mga patnubay sa gastos, seguridad, at estratehiya sa deployment nang mabilis
+Sa pamamagitan ng pag-repaso sa FAQ na ito, ikaw ay:
+- Makakahanap ng mabilis na mga sagot sa mga karaniwang tanong at isyu tungkol sa Azure Developer CLI
+- Mauunawaan ang mga pangunahing konsepto at terminolohiya gamit ang praktikal na paraan ng tanong at sagot
+- Maa-access ang mga solusyon sa pag-troubleshoot para sa mga madalas na problema at senaryo ng error
+- Matutunan ang mga pinakamahusay na kasanayan sa pamamagitan ng mga madalas itanong tungkol sa optimisasyon
+- Matuklasan ang mga advanced na tampok at kakayahan sa pamamagitan ng mga tanong na eksperto ang antas
+- Magrereperensya ng mga gabay sa gastos, seguridad, at estratehiya sa deployment nang madali
 
-## Mga Kinalabasan ng Pagkatuto
+## Mga Kinalabasan sa Pagkatuto
 
-Sa regular na paggamit ng FAQ na ito, magagawa mong:
-- Lutasin nang mag-isa ang mga karaniwang problema sa Azure Developer CLI gamit ang mga ibinigay na solusyon
-- Gumawa ng mga pinag-isipang desisyon tungkol sa mga estratehiya at pagsasaayos ng deployment
-- Maunawaan ang relasyon ng azd sa iba pang mga tool at serbisyo ng Azure
-- Ipatupad ang mga pinakamahusay na kasanayan batay sa karanasan ng komunidad at mga rekomendasyon ng eksperto
-- Epektibong mag-troubleshoot ng mga problema sa authentication, deployment, at konfigurasyon
-- I-optimize ang gastos at performance gamit ang mga insight at rekomendasyon mula sa FAQ
+Sa regular na pag-refer sa FAQ na ito, kakayanin mong:
+- Lutasin nang mag-isa ang mga karaniwang isyu sa Azure Developer CLI gamit ang mga ibinigay na solusyon
+- Gumawa ng maalam na mga desisyon tungkol sa mga estratehiya at konfigurasyon sa deployment
+- Mauunawaan ang relasyon sa pagitan ng azd at ibang mga Azure na tool at serbisyo
+- Maglapat ng mga pinakamahusay na kasanayan base sa karanasan ng komunidad at mga rekomendasyon ng eksperto
+- Mag-troubleshoot ng mga problema sa authentication, deployment, at konfigurasyon nang epektibo
+- I-optimize ang mga gastos at performance gamit ang mga insight at rekomendasyon sa FAQ
 
 ## Talaan ng mga Nilalaman
 
 - [Pagsisimula](#getting-started)
 - [Authentication at Access](#authentication--access)
-- [Mga Template at Proyekto](#templates--projects)
-- [Deployment at Inprastruktura](#deployment--infrastructure)
-- [Konfigurasyon at Mga Kapaligiran](#configuration--environments)
+- [Mga Templates at Proyekto](#templates--projects)
+- [Deployment at Inprastraktura](#deployment--infrastructure)
+- [Konfigurasyon at mga Kapaligiran](#configuration--environments)
 - [Pag-troubleshoot](#troubleshooting)
 - [Gastos at Billing](#cost--billing)
-- [Pinakamahusay na Kasanayan](#best-practices)
+- [Mga Pinakamahusay na Kasanayan](#best-practices)
 - [Mga Advanced na Paksa](#advanced-topics)
 
 ---
@@ -47,56 +47,64 @@ Sa regular na paggamit ng FAQ na ito, magagawa mong:
 ## Pagsisimula
 
 ### Q: Ano ang Azure Developer CLI (azd)?
-**A**: Ang Azure Developer CLI (azd) ay isang command-line tool na nakatuon sa developer na nagpapabilis ng panahon mula sa iyong lokal na development environment papuntang Azure. Nagbibigay ito ng mga pinakamahusay na kasanayan sa pamamagitan ng mga template at tumutulong sa buong lifecycle ng deployment.
+**A**: Ang Azure Developer CLI (azd) ay isang command-line na tool na nakatuon sa mga developer na nagpapabilis ng oras upang mailipat ang iyong aplikasyon mula sa lokal na kapaligiran ng pag-unlad patungo sa Azure. Nagbibigay ito ng mga pinakamahusay na kasanayan sa pamamagitan ng mga template at tumutulong sa buong lifecycle ng deployment.
 
 ### Q: Ano ang pagkakaiba ng azd sa Azure CLI?
 **A**: 
-- **Azure CLI**: Pangkalahatang gamit na tool para sa pamamahala ng mga Azure resource
-- **azd**: Nakatuong tool para sa developer para sa mga workflow ng application deployment
-- Ang azd ay may sarili nitong authentication at deployment workflow; ang Azure CLI ay isang hiwalay at komplementaryong tool
-- Kasama sa azd ang mga template, pamamahala ng kapaligiran, at automation ng deployment
+- **Azure CLI**: Tool na pangkalahatan para sa pamamahala ng mga Azure resources
+- **azd**: Tool na nakatuon sa developer para sa mga workflow ng deployment ng aplikasyon
+- May sariling authentication at deployment workflow ang azd; ang Azure CLI ay hiwalay, pangkomplementong tool
+- Kasama sa azd ang mga template, pamamahala ng kapaligiran, at awtomasyon sa deployment
 
-### Q: Kailangan ko ba ng Azure CLI na naka-install para gamitin ang azd?
-**A**: Hindi para sa pangunahing workflow ng AZD. Mag-authenticate gamit ang `azd auth login`. I-install ang Azure CLI nang hiwalay kapag ang isang template hook o isang exercise ay hayagang nagpapatakbo ng mga utos na `az`.
+### Q: Kailangan ko ba ng Azure CLI na naka-install para magamit ang azd?
+**A**: Hindi para sa pangunahing workflow ng AZD. Mag-authenticate gamit ang `azd auth login`. I-install ang Azure CLI nang hiwalay kapag ang isang template hook o ehersisyo ay partikular na nagpapatakbo ng mga utos na `az`.
 
 ### Q: Anong mga programming language ang sinusuportahan ng azd?
-**A**: Ang azd ay language-agnostic. Gumagana ito sa:
+**A**: Language-agnostic ang azd. Gumagana ito sa:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
 - Java
 - Go
 - PHP
-- Static websites
-- Containerized applications
+- Mga static na website
+- Mga containerized na aplikasyon
 
 ### Q: Maaari ko bang gamitin ang azd sa mga umiiral na proyekto?
 **A**: Oo! Maaari mong:
-1. Gamitin ang `azd init` para idagdag ang konfigurasyon ng azd sa umiiral na mga proyekto
-2. I-adapt ang umiiral na mga proyekto upang tumugma sa istraktura ng template ng azd
-3. Gumawa ng custom na mga template batay sa iyong umiiral na arkitektura
+1. Gamitin ang `azd init` para idagdag ang konfigurasyon ng azd sa mga umiiral na proyekto
+2. I-adapt ang mga umiiral na proyekto upang tumugma sa istraktura ng template ng azd
+3. Gumawa ng mga custom na template base sa umiiral mong arkitektura
+
+### Q: Ano ang nagbago sa general availability ng Foundry extension?
+**A**: Naabot ng `microsoft.foundry` bundle ang bersyon 1.0 at GA noong Nobyembre 5, 2026. Sa AZD 1.37.0+ gamitin ang `azd ext install microsoft.foundry` para i-install ang pitong pangunahing extension para sa mga agent, koneksyon, inspector, proyekto, routines, skills, at toolboxes. Hindi ito isang bagong command namespace, at ang mga bahagi nito ay independenteng may sariling bersyon. Ang mga evaluation, dataset, fine-tuning, at custom models ay naka-install nang hiwalay; ang mga opsyonal na feature sa preview ay hindi nagiging GA dahil lamang GA ang bundle.
+
+Gumagamit ang [hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) ng Python 3.13+ at kasalukuyang uv. `azd ai agent run` ay nagbubukas ng Agent Inspector nang lokal, ngunit ang mga tawag sa modelo ay gumagamit pa rin ng Azure at may kasamang singil. Ang code-mode na `azd deploy` ay nag-upload ng source para sa remote build nang hindi kailangan ng lokal na container build.
+
+### Q: Tinatanggal ba ng `azd down` ang hosted agent mula sa umiiral na Foundry project?
+**A**: Hindi para sa reused-project na landas na inilalarawan sa hosted-agent quickstart: iniiwan nito ang proyekto, hosted agent, at iba pang resources nang buo. Alisin ang mga hindi gustong resources nang magkahiwalay nang hindi nade-delete ang mga shared resources. Kung ang kapaligiran ay gumawa ng bagong Foundry project, tinatanggal ng `azd down` ang resource group nito at lahat ng laman nito. Suriin ang [gabayan sa paglilinis](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#7-clean-up-deliberately) at mga paalala sa pagtanggal bago mag-kumpirma.
 
 ---
 
 ## Authentication at Access
 
 ### Q: Paano ako mag-authenticate sa Azure gamit ang azd?
-**A**: Gamitin ang `azd auth login` na magbubukas ng isang browser window para sa Azure authentication. Para sa mga sitwasyon ng CI/CD, gamitin ang service principals o managed identities.
+**A**: Gamitin ang `azd auth login` na magbubukas ng browser window para sa authentication sa Azure. Para sa mga senaryo ng CI/CD, gamitin ang service principals o managed identities.
 
 ### Q: Maaari ko bang gamitin ang azd sa maraming Azure subscription?
-**A**: Oo. Gamitin ang `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` upang tukuyin kung aling subscription ang gagamitin para sa bawat kapaligiran.
+**A**: Oo. Gamitin ang `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` para tukuyin kung anong subscription ang gagamitin para sa bawat kapaligiran.
 
 ### Q: Anong mga permiso ang kailangan ko para mag-deploy gamit ang azd?
-**A**: Karaniwang kailangan mo ng:
-- Papel na **Contributor** sa resource group o subscription
-- **User Access Administrator** kung nagde-deploy ng mga resource na nangangailangan ng role assignments
-- Ang partikular na mga permiso ay nag-iiba depende sa template at mga resource na dini-deploy
+**A**: Karaniwan kailangan mo ng:
+- **Contributor** na papel sa resource group o subscription
+- **User Access Administrator** kung nagde-deploy ng mga resources na nangangailangan ng role assignments
+- Ang tiyak na permiso ay nag-iiba depende sa template at mga rekurso na dine-deploy
 
-### Q: Maaari ko bang gamitin ang azd sa mga CI/CD pipeline?
-**A**: Oo naman! Ang azd ay dinisenyo para sa CI/CD integration. Gamitin ang mga service principals para sa authentication at mag-set ng environment variables para sa konfigurasyon.
+### Q: Maaari ko bang gamitin ang azd sa CI/CD pipelines?
+**A**: Oo naman! Dinisenyo ang azd para sa integrasyon ng CI/CD. Gamitin ang mga service principal para sa authentication at itakda ang mga variable ng kapaligiran para sa konfigurasyon.
 
 ### Q: Paano ko hahawakan ang authentication sa GitHub Actions?
-**A**: Mas mainam ang workload identity federation (OIDC), na naka-configure gamit ang `azd pipeline config`. Ang generated workflow ay nag-i-install ng AZD at nag-authenticate ng AZD nang direkta gamit ang federated identity. Ang isang hakbang na `azure/login` lamang ay hindi naga-establish ng AZD login. Ang isang login step sa loob ng umiiral na trabaho ay:
+**A**: Gamitin ang workload identity federation (OIDC), naka-configure sa `azd pipeline config`. Ang nilikhang workflow ay nag-iinstall ng AZD at nag-authenticate ng AZD nang direkta gamit ang federated identity. Ang isang `azure/login` na hakbang lamang ay hindi nagtatatag ng AZD login. Ang login step sa loob ng umiiral na trabaho ay:
 ```yaml
 permissions:
   contents: read
@@ -111,54 +119,54 @@ steps:
       --federated-credential-provider github
 ```
 
-Mag-provision o mag-deploy pagkatapos ng login, gamit ang nilalayong AZD environment, subscription, at naka-configure na lokasyon. Ang federated credential ng identity ay dapat magtiwala sa repository/ref ng workflow o sa GitHub environment, at ang mga Azure role nito ay dapat pahintulutan ang mga hiniling na operasyon.
+Mag-provision o mag-deploy pagkatapos ng login, gamit ang nakalaang AZD environment, subscription, at location na naka-configure. Ang federated credential ng identity ay dapat magtiwala sa repository/ref ng workflow o Azure environment, at ang mga papel nito sa Azure ay dapat payagan ang hinihinging operasyon.
 
 ---
 
 ## Mga Template at Proyekto
 
-### Q: Saan ko mahahanap ang mga azd template?
+### Q: Saan ko mahahanap ang mga template ng azd?
 **A**: 
-- Opisyal at community templates: [Awesome AZD](https://azure.github.io/awesome-azd/)
-- Mga community template: Paghahanap sa GitHub gamit ang "azd-template"
-- Gamitin ang `azd template list` para mag-browse ng mga available na template
+- Mga opisyal at komunidad na template: [Awesome AZD](https://azure.github.io/awesome-azd/)
+- Mga komunidad na template: GitHub search para sa "azd-template"
+- Gamitin ang `azd template list` upang i-browse ang mga available na template
 
 ### Q: Paano ako gagawa ng custom template?
 **A**: 
-1. Magsimula sa isang umiiral na istraktura ng template
-2. Baguhin ang `azure.yaml`, mga file ng infrastruktura, at code ng application
-3. Subukan nang lubusan gamit ang `azd up`
-4. I-publish sa GitHub kasama ang mga angkop na tag
+1. Magsimula sa umiiral na istraktura ng template
+2. Baguhin ang `azure.yaml`, mga infrastructure file, at code ng aplikasyon
+3. Subukan nang mabuti gamit ang `azd up`
+4. I-publish sa GitHub na may angkop na mga tag
 
 ### Q: Maaari ko bang gamitin ang azd nang walang template?
-**A**: Oo, gamitin ang `azd init` sa isang umiiral na proyekto upang malikha ang kinakailangang mga file ng konfigurasyon. Kailangan mong manu-manong i-configure ang `azure.yaml` at mga file ng infrastruktura.
+**A**: Oo, gamitin ang `azd init` sa umiiral na proyekto upang gumawa ng kinakailangang mga configuration file. Kailangan mong mano-manong i-configure ang `azure.yaml` at mga infrastructure file.
 
-### Q: Ano ang pagkakaiba sa pagitan ng opisyal at community templates?
+### Q: Ano ang pagkakaiba ng opisyal at komunidad na mga template?
 **A**: 
-- **Opisyal na mga template**: Pinangangalagaan ng Microsoft, regular na ina-update, kumpletong dokumentasyon
-- **Mga community template**: Ginawa ng mga developer, maaaring may mga espesyal na gamit, nag-iiba ang kalidad at pangangalaga
+- **Opisyal na mga template**: Pinapanatili ng Microsoft, regular na ina-update, may komprehensibong dokumentasyon
+- **Komunidad na mga template**: Ginawa ng mga developer, maaaring may espesyal na gamit, iba-iba ang kalidad at maintenance
 
-### Q: Paano ko i-update ang template sa aking proyekto?
-**A**: Hindi awtomatikong ina-update ang mga template. Maaari mong:
-1. Manu-manong i-compare at pagsamahin ang mga pagbabago mula sa pinagmulang template
+### Q: Paano ko ia-update ang template sa aking proyekto?
+**A**: Hindi awtomatikong na-a-update ang mga template. Maaari mong:
+1. Mano-manong ikumpara at pagsamahin ang mga pagbabago mula sa source template
 2. Magsimula muli gamit ang `azd init` gamit ang na-update na template
-3. Piliin lamang ang partikular na mga pagpapabuti mula sa mga na-update na template
+3. Pumili lamang ng mga partikular na pagbuti mula sa mga na-update na template
 
 ---
 
-## Deployment at Inprastruktura
+## Deployment at Inprastraktura
 
-### Q: Anong mga serbisyo ng Azure ang maaaring i-deploy gamit ang azd?
-**A**: Maaari i-deploy ng azd ang anumang serbisyo ng Azure gamit ang Bicep/ARM templates, kabilang ang:
+### Q: Anong mga Azure services ang kayang i-deploy ng azd?
+**A**: Kayang i-deploy ng azd ang anumang Azure service sa pamamagitan ng Bicep/ARM templates, kabilang ang:
 - App Services, Container Apps, Functions
 - Databases (SQL, PostgreSQL, Cosmos DB)
 - Storage, Key Vault, Application Insights
-- Mga networking, seguridad, at monitoring resources
+- Networking, seguridad, at mga monitoring resource
 
 ### Q: Maaari ba akong mag-deploy sa maraming rehiyon?
-**A**: Oo, i-configure ang maraming rehiyon sa iyong mga Bicep template at itakda nang tama ang location parameter para sa bawat kapaligiran.
+**A**: Oo, i-configure ang maraming rehiyon sa iyong Bicep template at itakda ang lokasyon na parameter nang naaangkop para sa bawat kapaligiran.
 
-### Q: Paano ko hahawakan ang mga migration ng database schema?
+### Q: Paano ko hahawakan ang mga database schema migration?
 **A**: Gamitin ang mga deployment hook sa `azure.yaml`:
 ```yaml
 hooks:
@@ -169,51 +177,51 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### Q: Maaari ba akong mag-deploy ng infrastruktura lamang nang walang mga application?
-**A**: Oo, gamitin ang `azd provision` upang mag-deploy ng mga komponent ng infrastruktura na tinukoy sa iyong mga template.
+### Q: Maaari ko bang i-deploy ang imprastraktura lang nang walang mga aplikasyon?
+**A**: Oo, gamitin ang `azd provision` upang i-deploy lamang ang mga komponent ng imprastraktura na tinukoy sa iyong mga template.
 
-### Q: Paano ako mag-deploy sa umiiral na mga resource ng Azure?
-**A**: Oo, kapag sinusuportahan ito ng template. I-refer ang mga umiiral na resource sa Bicep gamit ang `existing` declarations o sa mga dokumentadong existing-resource parameters ng template, at i-map ang mga serbisyo ng application sa kanilang mga target. Hindi nito ini-import ang pagmamay-ari o awtomatikong lumilikha ng nawawalang mga permiso. Suriin ang template bago mag-deploy.
+### Q: Paano ako mag-deploy sa mga umiiral na Azure resources?
+**A**: Oo, kapag sinusuportahan ito ng template. I-reference ang umiiral na mga resource gamit ang mga deklarasyon ng Bicep na `existing` o ang mga documented na existing-resource parameter ng template, at i-map ang mga serbisyo ng aplikasyon sa kanilang layuning target. Hindi nito ini-import ang pag-aari o awtomatikong lumilikha ng mga nawawalang permiso. Suriin ang template bago mag-deploy.
 
-### Q: Maaari ba akong gumamit ng Terraform bilang pamalit sa Bicep?
-**A**: Oo. Sinusuportahan ng AZD ang Terraform pati na rin ang Bicep. Pumili ng Terraform-based na template o i-configure ang `infra.provider: terraform` sa `azure.yaml`, kasama ang angkop na mga Terraform file at state/backend configuration. Tingnan ang [Terraform workflow](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+### Q: Maaari ko bang gamitin ang Terraform sa halip na Bicep?
+**A**: Oo. Sinusuportahan ng AZD ang Terraform pati na rin ang Bicep. Pumili ng template na nakabase sa Terraform o i-configure ang `infra.provider: terraform` sa `azure.yaml`, kasama ang angkop na mga Terraform file at state/backend na konfigurasyon. Tingnan ang [Terraform workflow](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
 ---
 
-## Konfigurasyon at Mga Kapaligiran
+## Konfigurasyon at mga Kapaligiran
 
-### Q: Paano ko pinamamahalaan ang iba't ibang kapaligiran (dev, staging, prod)?
-**A**: Gumawa ng hiwalay na mga kapaligiran gamit ang `azd env new <environment-name>` at i-configure ang iba't ibang mga setting para sa bawat isa:
+### Q: Paano ko pamahalaan ang iba’t ibang kapaligiran (dev, staging, prod)?
+**A**: Gumawa ng magkahiwalay na mga kapaligiran gamit ang `azd env new <environment-name>` at ayusin ang iba’t ibang settings para sa bawat isa:
 ```bash
 azd env new development
 azd env new staging  
 azd env new production
 ```
 
-### Q: Saan naka-imbak ang mga konfigurasyon ng kapaligiran?
-**A**: Sa `.azure` na folder sa loob ng iyong proyekto. Bawat kapaligiran ay may sariling folder na may mga configuration file.
+### Q: Saan nakaimbak ang mga konfigurasyon ng kapaligiran?
+**A**: Sa `.azure` na folder sa loob ng iyong direktoryo ng proyekto. Bawat kapaligiran ay may sariling folder na may mga configuration file.
 
-### Q: Paano ko iseset ang environment-specific na konfigurasyon?
-**A**: Gamitin ang `azd env set` upang i-configure ang environment variables:
+### Q: Paano ako mag-set ng environment-specific configuration?
+**A**: Gamitin ang `azd env set` upang i-configure ang mga environment variable:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### Q: Maaari ko bang ibahagi ang mga environment configuration sa mga miyembro ng team?
-**A**: Ang `.azure` folder ay naglalaman ng sensitibong impormasyon at hindi dapat i-commit sa version control. Sa halip:
-1. Idokumento ang kinakailangang environment variables
-2. Gamitin ang mga deployment script upang i-setup ang mga kapaligiran
+### Q: Maaari ko bang i-share ang mga environment configuration sa mga kasama sa team?
+**A**: Ang `.azure` na folder ay naglalaman ng sensitibong impormasyon at hindi dapat i-commit sa version control. Sa halip:
+1. Idokumento ang mga kinakailangang environment variable
+2. Gamitin ang mga deployment script para mag-set up ng mga kapaligiran
 3. Gamitin ang Azure Key Vault para sa sensitibong konfigurasyon
 
-### Q: Paano ko malalampasan ang mga default ng template?
+### Q: Paano ko i-override ang mga default ng template?
 **A**: Mag-set ng environment variables na tumutugma sa mga parameter ng template:
 ```bash
 azd env set AZURE_LOCATION westus2
 azd env set SKU_NAME "B1"
 ```
 
-Tanging mga variable na kinakailangan ng template ang nakakaapekto sa deployment. Ang `SKU_NAME` sa itaas ay isang halimbawa ng custom na input, hindi isang unibersal na setting ng AZD.
+Tanging ang mga variable na ginagamit ng template ang nakakaapekto sa deployment. Ang `SKU_NAME` sa itaas ay isang halimbawa ng custom na input, hindi isang unibersal na setting ng AZD.
 
 ---
 
@@ -222,84 +230,84 @@ Tanging mga variable na kinakailangan ng template ang nakakaapekto sa deployment
 ### Q: Bakit pumapalya ang `azd up`?
 **A**: Mga karaniwang sanhi:
 1. **Mga isyu sa authentication**: Patakbuhin ang `azd auth login`
-2. **Kulang na permiso**: Suriin ang iyong mga Azure role assignment
-3. **Pagkakasalungat sa pangalan ng resource**: Suriin ang nagkokonfliktong resource at ang mga input ng pangalan sa template; gumawa ng hiwalay na kapaligiran gamit ang `azd env new` kapag kailangan ng isolation
-4. **Mga isyu sa quota/kapasidad**: Suriin ang availability sa rehiyon
-5. **Mga error sa template**: I-validate ang mga Bicep template
+2. **Hindi sapat na permiso**: Suriin ang iyong Azure role assignments
+3. **Mga conflict sa pangalan ng resource**: Suriin ang nagtatalunang resource at ang mga input ng pangalan sa template; gumawa ng hiwalay na kapaligiran gamit ang `azd env new` kapag kailangan ang pag-iisa
+4. **Mga isyu sa quota/capacity**: Suriin ang availability sa rehiyon
+5. **Mga error sa template**: Validate ang mga Bicep template
 
-### Q: Paano ko ide-debug ang mga deployment failure?
+### Q: Paano ko i-debug ang mga pagkabigo sa deployment?
 **A**: 
 1. Gamitin ang `azd deploy --debug` para sa verbose output
-2. Suriin ang deployment history sa Azure portal
-3. Suriin ang Activity Log sa Azure portal
-4. Gamitin ang `azd show` upang ipakita ang kasalukuyang estado ng kapaligiran
+2. Suriin ang kasaysayan ng deployment sa Azure portal
+3. Repasuhin ang Activity Log sa Azure portal
+4. Gamitin ang `azd show` para ipakita ang kasalukuyang estado ng kapaligiran
 
 ### Q: Bakit hindi gumagana ang aking mga environment variable?
-**A**: Tingnan:
-1. Ang mga pangalan ng variable ay tugma sa mga parameter ng template eksakto
-2. Ang mga halaga ay maayos na naka-quote kung may mga spaces
-3. Naka-select ang tamang kapaligiran: `azd env select <environment>`
-4. Ang mga variable ay naka-set sa tamang kapaligiran
+**A**: Suriin ang:
+1. Tumutugma ba ang mga pangalan ng variable sa mga parameter ng template nang eksakto
+2. Tama ba ang pag-quote sa mga value kung may mga space
+3. Napili ba ang kapaligiran: `azd env select <environment>`
+4. Na-set ba ang mga variable sa tamang kapaligiran
 
-### Q: Paano ko nililinis ang mga nabigong deployment?
+### Q: Paano ko lilinisin ang mga nabigong deployment?
 **A**: 
 ```bash
 azd down
 ```
-Suriin muna ang napiling kapaligiran at ang kumpirmasyon ng pagtanggal. Binubura nito ang mga na-provision na Azure resource, hindi ang lokal na `.azure` na konfigurasyon ng kapaligiran. Ang `--purge` ay karagdagang humihiling na permanenteng tanggalin ang mga suportadong soft-deleted na resource at maaaring ma-block ng retention/purge protection; hindi ito isang rutineng hakbang sa recovery.
+Suriin muna ang napiling kapaligiran at mga kumpirmasyon sa pagtanggal. Ito ay nagbubura ng mga provisioned Azure resource, hindi ang lokal na `.azure` na configuration ng kapaligiran. Ang `--purge` ay dagdag na humihiling ng permanenteng pagtanggal ng suportadong soft-deleted na resource at maaaring hadlangan ng retention/purge protection; hindi ito isang routine recovery step.
 
-### Q: Bakit hindi ma-access ang aking application pagkatapos ng deployment?
-**A**: Suriin:
-1. Nakumpleto nang matagumpay ang deployment
-2. Naka-run ang application (suriin ang mga log sa Azure portal)
-3. Pinapayagan ng Network Security Groups ang traffic
-4. Naka-configure nang tama ang DNS/custom domains
+### Q: Bakit hindi ma-access ang aking aplikasyon pagkatapos i-deploy?
+**A**: Suriin ang:
+1. Tapos ba nang maayos ang deployment
+2. Tumakbo ba ang aplikasyon (suriin ang mga log sa Azure portal)
+3. Pinapayagan ba ng network security groups ang traffic
+4. Tama ba ang pagkaka-configure ng DNS/custom domains
 
 ---
 
 ## Gastos at Billing
 
-### Q: Magkano ang magiging gastos sa azd deployments?
-**A**: Ang mga gastos ay nakadepende sa:
-- Mga serbisyong Azure na dineploy
+### Q: Magkano ang magagastos sa azd deployments?
+**A**: Nakasalalay ang gastos sa:
+- Mga Azure service na dina-deploy
 - Mga tier/SKU ng serbisyo na pinili
 - Mga pagkakaiba sa presyo sa rehiyon
 - Mga pattern ng paggamit
 
-Gamitin ang [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) para sa mga pagtataya.
+Gamitin ang [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) para sa pagtatantya.
 
-### Q: Paano ko kokontrolin ang gastos sa azd deployments?
+### Q: Paano ko makokontrol ang gastos sa azd deployments?
 **A**: 
-1. Gamitin ang mas mababang tier ng SKU para sa mga development environment
-2. Mag-setup ng mga budget at alerto sa Azure
-3. Gamitin ang `azd down` upang alisin ang mga resource kapag hindi na kailangan
-4. Pumili ng angkop na mga rehiyon (nagkakaiba ang gastos batay sa lokasyon)
-5. Gamitin ang mga tool ng Azure Cost Management
+1. Gumamit ng lower-tier SKU para sa mga development environment
+2. Mag-set up ng Azure budgets at alerts
+3. Gamitin ang `azd down` para tanggalin ang mga resource kapag hindi na kailangan
+4. Pumili ng angkop na mga rehiyon (iba ang gastos depende sa lokasyon)
+5. Gamitin ang Azure Cost Management tools
 
-### Q: Mayroon bang libreng tier na opsyon para sa azd templates?
-**A**: May ilang serbisyo na may libreng SKU o buwanang grant, na sakop ng eligibility, hosting plan, rehiyon, at subscription limits. Hindi nito ginagawa ang buong template na libre: ang mga databases, search, networking, registry, telemetry, at model inference ay maaaring magdulot ng hiwalay na singil. Suriin ang [Azure free services list](https://azure.microsoft.com/free/) at kasalukuyang presyo para sa bawat resource bago mag-deploy.
+### Q: May mga libreng tier ba para sa mga azd template?
+**A**: Ang ilang serbisyo ay may mga libreng SKU o buwanang grant, depende sa pagiging karapat-dapat, hosting plan, rehiyon, at limitasyon ng subscription. Hindi nito ginagawang libre ang buong template: ang mga database, paghahanap, networking, registry, telemetry, at model inference ay maaaring magkaroon ng sarili nilang singil. Tingnan ang [Azure free services list](https://azure.microsoft.com/free/) at kasalukuyang presyo para sa bawat resource bago mag-deploy.
 
-### Q: Paano ko tantyahin ang mga gastos bago mag-deploy?
+### Q: Paano ko maitataya ang mga gastos bago mag-deploy?
 **A**: 
-1. Suriin ang `main.bicep` ng template upang makita kung anong mga resource ang nililikha
-2. Gamitin ang Azure Pricing Calculator na may tiyak na mga SKU
-3. Mag-deploy muna sa isang development environment upang masubaybayan ang aktwal na mga gastos
-4. Gamitin ang Azure Cost Management para sa detalyadong pagsusuri ng gastos
+1. Suriin ang `main.bicep` ng template upang makita kung anu-anong mga resources ang nililikha
+2. Gamitin ang Azure Pricing Calculator na may partikular na mga SKU
+3. I-deploy muna sa development environment upang suriin ang aktwal na gastos
+4. Gamitin ang Azure Cost Management para sa detalyadong pagsusuri sa gastos
 
 ---
 
-## Pinakamahusay na Kasanayan
+## Pinakamahuhusay na Praktis
 
-### Q: Ano ang mga pinakamahusay na kasanayan para sa istraktura ng azd proyekto?
+### Q: Ano ang mga pinakamahusay na praktis para sa istruktura ng azd project?
 **A**: 
-1. Panatilihing hiwalay ang code ng application mula sa infrastruktura
-2. Gamitin ang mga makahulugang pangalan ng serbisyo sa `azure.yaml`
-3. Magpatupad ng wastong error handling sa mga build script
-4. Gamitin ang environment-specific na konfigurasyon
+1. Panatilihing hiwalay ang application code mula sa infrastructure
+2. Gumamit ng makabuluhang mga pangalan ng serbisyo sa `azure.yaml`
+3. Magpatupad ng tamang error handling sa mga build script
+4. Gumamit ng environment-specific configuration
 5. Isama ang komprehensibong dokumentasyon
 
 ### Q: Paano ko dapat ayusin ang maraming serbisyo sa azd?
-**A**: Gamitin ang inirerekomendang istraktura:
+**A**: Gamitin ang inirerekomendang istruktura:
 ```
 ├── src/
 │   ├── web/          # Frontend service
@@ -316,26 +324,26 @@ Gamitin ang [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calcu
 .azure/
 ```
 
-### Q: Paano ko hahawakan ang mga lihim at sensitibong configuration?
+### Q: Paano ko hahawakan ang mga sikreto at sensitibong configuration?
 **A**: 
-1. Gamitin ang Azure Key Vault para sa mga lihim
-2. I-refer ang mga lihim ng Key Vault sa application configuration
-3. Huwag kailanman i-commit ang mga lihim sa version control
-4. Gamitin ang managed identities para sa service-to-service authentication
+1. Gamitin ang Azure Key Vault para sa mga sikreto
+2. I-refer ang mga sikreto ng Key Vault sa application configuration
+3. Huwag kailanman i-commit ang mga sikreto sa version control
+4. Gumamit ng managed identities para sa service-to-service authentication
 
-### Q: Ano ang inirerekomendang pamamaraan para sa CI/CD gamit ang azd?
+### Q: Ano ang inirerekomendang paraan para sa CI/CD gamit ang azd?
 **A**: 
 1. Gumamit ng hiwalay na mga environment para sa bawat yugto (dev/staging/prod)
-2. Magpatupad ng automated testing bago ang deployment
-3. Gamitin ang service principals para sa authentication
-4. Itago ang sensitibong configuration sa pipeline secrets/variables
+2. Magpatupad ng automated testing bago mag-deploy
+3. Gumamit ng service principals para sa authentication
+4. I-imbak ang sensitibong configuration sa mga pipeline secrets/variables
 5. Magpatupad ng approval gates para sa mga production deployment
 
 ---
 
-## Advanced Topics
+## Mga Advanced na Paksa
 
-### Q: Maaari ko bang palawigin ang azd gamit ang custom na functionality?
+### Q: Maaari ko bang palawakin ang azd gamit ang custom na functionality?
 **A**: Oo, sa pamamagitan ng deployment hooks sa `azure.yaml`:
 ```yaml
 hooks:
@@ -345,38 +353,38 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### Q: Paano ko i-integrate ang azd sa umiiral na DevOps processes?
+### Q: Paano ko i-integrate ang azd sa umiiral na mga proseso ng DevOps?
 **A**: 
-1. Gamitin ang azd commands sa umiiral na mga pipeline script
-2. I-standardize ang mga azd templates sa lahat ng team
+1. Gamitin ang mga utos ng azd sa mga umiiral na pipeline script
+2. Standardisahin ang azd templates sa pagitan ng mga team
 3. I-integrate sa umiiral na monitoring at alerting
 4. Gamitin ang JSON output ng azd para sa pipeline integration
 
-### Q: Maaari ko bang gamitin ang azd kasama ang Azure DevOps?
-**A**: Oo, ang azd ay tumatakbo sa anumang CI/CD system. Gumawa ng Azure DevOps pipelines na gumagamit ng azd commands.
+### Q: Maaari ko bang gamitin ang azd sa Azure DevOps?
+**A**: Oo, ang azd ay gumagana sa anumang CI/CD system. Gumawa ng mga Azure DevOps pipeline na gumagamit ng mga utos ng azd.
 
-### Q: Paano ako makakatulong sa azd o gumawa ng community templates?
+### Q: Paano ako makakatulong sa azd o makakalikha ng mga community template?
 **A**: 
 1. **azd tool**: Mag-ambag sa [Azure/azure-dev](https://github.com/Azure/azure-dev)
 2. **Templates**: Sundin ang [Awesome AZD gallery contribution instructions](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
-3. **Documentation**: Mag-ambag sa docs sa [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+3. **Dokumentasyon**: Mag-ambag sa docs sa [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
 
 ### Q: Ano ang roadmap para sa azd?
-**A**: Tingnan ang [official roadmap](https://github.com/Azure/azure-dev/projects) para sa mga nakaplanong features at improvements.
+**A**: Tingnan ang [opisyal na roadmap](https://github.com/Azure/azure-dev/projects) para sa mga planadong tampok at pagpapabuti.
 
-### Q: Paano ako magmi-migrate mula sa ibang deployment tools papuntang azd?
+### Q: Paano ako mag-migrate mula sa ibang deployment tools papuntang azd?
 **A**: 
-1. Suriin ang kasalukuyang deployment architecture
+1. Suriin ang kasalukuyang arkitektura ng deployment
 2. Gumawa ng katumbas na Bicep templates
 3. I-configure ang `azure.yaml` upang tumugma sa kasalukuyang mga serbisyo
-4. Subukan nang lubusan sa development environment
+4. Subukan ng mabuti sa development environment
 5. Unti-unting i-migrate ang mga environment
 
 ---
 
-## May Tanong Pa?
+## May Mga Tanong Ka Pa Ba?
 
-### **Maghanap Muna**
+### **Maghanap muna**
 - Tingnan ang [opisyal na dokumentasyon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - Maghanap sa [GitHub issues](https://github.com/Azure/azure-dev/issues) para sa mga katulad na problema
 
@@ -386,17 +394,17 @@ hooks:
 - [Azure Discord](https://discord.gg/azure) - Real-time na chat ng komunidad
 
 ### **I-report ang mga Isyu**
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Mga ulat ng bug at kahilingan ng feature
-- Isama ang mga kaukulang log, mga mensahe ng error, at mga hakbang upang maulit
+- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Mga bug report at feature request
+- Isama ang mga kaugnay na log, mga mensahe ng error, at mga hakbang para maulit ang problema
 
 ### **Matuto Pa**
-- [Dokumentasyon ng Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-*Inirepasong teknikal na gabay: Nobyembre 4, 2026. Ang availability sa cloud at pagpepresyo ay kailangang suriin para sa iyong subscription at rehiyon.*
+*Sinuring teknikal na gabay: Nobyembre 4, 2026. Dapat suriin ang availability ng cloud at presyo para sa iyong subscription at rehiyon.*
 
 ---
 

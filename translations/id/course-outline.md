@@ -1,12 +1,12 @@
 # AZD Untuk Pemula: Garis Besar Kursus & Kerangka Pembelajaran
 
-## Ikhtisar Kursus
+## Gambaran Kursus
 
-Kuasai Azure Developer CLI (azd) melalui bab-bab terstruktur yang dirancang untuk pembelajaran bertahap. **Fokus khusus pada penerapan aplikasi AI dengan integrasi Microsoft Foundry.**
+Kuasai Azure Developer CLI (azd) melalui bab terstruktur yang dirancang untuk pembelajaran bertahap. **Fokus khusus pada penerapan aplikasi AI dengan integrasi Microsoft Foundry.**
 
 ### Mengapa Kursus Ini Penting untuk Pengembang Modern
 
-Pengembang yang menerapkan beban kerja AI biasanya memerlukan panduan mengenai:
+Pengembang yang menerapkan beban kerja AI biasanya membutuhkan panduan tentang:
 - Arsitektur AI multi-layanan yang kompleks
 - Praktik terbaik penerapan AI di produksi  
 - Integrasi dan konfigurasi layanan Azure AI
@@ -16,31 +16,31 @@ Pengembang yang menerapkan beban kerja AI biasanya memerlukan panduan mengenai:
 ### Tujuan Pembelajaran Inti
 
 Dengan menyelesaikan kursus terstruktur ini, Anda akan:
-- **Menguasai Dasar-Dasar AZD**: Konsep inti, instalasi, dan konfigurasi
+- **Menguasai Dasar AZD**: Konsep inti, instalasi, dan konfigurasi
 - **Menerapkan Aplikasi AI**: Gunakan AZD dengan layanan Microsoft Foundry
 - **Mengimplementasikan Infrastruktur sebagai Kode**: Kelola sumber daya Azure dengan template Bicep
-- **Memecahkan Masalah Penerapan**: Menyelesaikan masalah umum dan debug
+- **Memecahkan Masalah Penerapan**: Menyelesaikan masalah umum dan debugging
 - **Mengoptimalkan untuk Produksi**: Keamanan, penskalaan, pemantauan, dan manajemen biaya
-- **Membangun Solusi Multi-Agen**: Menerapkan arsitektur AI yang kompleks
+- **Membangun Solusi Multi-Agen**: Terapkan arsitektur AI yang kompleks
 
 ## 🎓 Pengalaman Pembelajaran Workshop
 
-### Opsi Penyampaian Pembelajaran Fleksibel  
-Kursus ini dirancang untuk mendukung **pembelajaran mandiri sesuai kecepatan individu** dan **sesi workshop yang difasilitasi**, memungkinkan peserta memperoleh pengalaman langsung dengan AZD sambil mengembangkan keterampilan praktis melalui latihan interaktif.
+### Opsi Penyampaian Pembelajaran yang Fleksibel
+Kursus ini dirancang untuk mendukung baik **pembelajaran mandiri dengan kecepatan sendiri** maupun **sesi workshop yang difasilitasi**, memungkinkan peserta untuk mendapatkan pengalaman langsung dengan AZD sambil mengembangkan keterampilan praktis melalui latihan interaktif.
 
-#### 🚀 Mode Pembelajaran Mandiri  
+#### 🚀 Mode Pembelajaran Mandiri
 **Sempurna untuk pengembang individu dan pembelajaran berkelanjutan**
 
 **Fitur:**
-- **Antarmuka Berbasis Browser**: Workshop yang didukung MkDocs lengkap dapat diakses melalui browser web apa saja
-- **Integrasi GitHub Codespaces**: Lingkungan pengembangan dengan satu klik dan alat terkonfigurasi sebelumnya
-- **Lingkungan DevContainer Interaktif**: Tidak perlu pengaturan lokal - mulai coding langsung
+- **Antarmuka Berbasis Browser**: Workshop berbasis MkDocs yang dapat diakses melalui browser web mana pun
+- **Integrasi GitHub Codespaces**: Lingkungan pengembangan satu klik dengan alat yang telah dikonfigurasi sebelumnya
+- **Lingkungan DevContainer Interaktif**: Tidak perlu pengaturan lokal - mulai coding segera
 - **Pelacakan Kemajuan**: Titik pemeriksaan dan latihan validasi bawaan
 - **Dukungan Komunitas**: Akses ke saluran Azure Discord untuk pertanyaan dan kolaborasi
 
 **Struktur Pembelajaran:**
-- **Waktu Fleksibel**: Selesaikan bab sesuai kecepatan Anda selama beberapa hari atau minggu
-- **Sistem Titik Pemeriksaan**: Validasi pembelajaran sebelum melanjutkan ke topik kompleks
+- **Waktu Fleksibel**: Selesaikan bab sesuai kecepatan Anda sendiri selama beberapa hari atau minggu
+- **Sistem Checkpoint**: Validasi pembelajaran sebelum melanjutkan ke topik yang kompleks
 - **Perpustakaan Sumber Daya**: Dokumentasi lengkap, contoh, dan panduan pemecahan masalah
 - **Pengembangan Portofolio**: Bangun proyek yang dapat diterapkan untuk portofolio profesional
 
@@ -55,7 +55,7 @@ cd azd-for-beginners/workshop
 # Follow setup instructions in workshop/README.md
 ```
 
-#### 🏛️ Sesi Workshop yang Difasilitasi  
+#### 🏛️ Sesi Workshop yang Difasilitasi
 **Ideal untuk pelatihan korporat, bootcamp, dan institusi pendidikan**
 
 **Opsi Format Workshop:**
@@ -64,78 +64,78 @@ cd azd-for-beginners/workshop
 - **Program Universitas**: Kursus selama satu semester dengan sesi mingguan 2 jam
 - **Format Bootcamp**: Program intensif 3-5 hari dengan sesi harian 6-8 jam
 - **Pelatihan Korporat**: Sesi tim bulanan dengan implementasi proyek praktis
-- **Kerangka Penilaian**: Tugas berperingkat, tinjauan sejawat, dan proyek akhir
+- **Kerangka Penilaian**: Tugas bernilai, ulasan sejawat, dan proyek akhir
 
 **🚀 Workshop Intensif (1-3 hari)**
 - **Hari 1**: Dasar + Pengembangan AI (Bab 1-2) - 6 jam
 - **Hari 2**: Konfigurasi + Infrastruktur (Bab 3-4) - 6 jam  
-- **Hari 3**: Pola Lanjutan + Produksi (Bab 5-8) - 8 jam
+- **Hari 3**: Pola Lanjut + Produksi (Bab 5-8) - 8 jam
 - **Tindak Lanjut**: Mentorship opsional selama 2 minggu untuk penyelesaian proyek
 
 **⚡ Briefing Eksekutif (4-6 jam)**
-- **Ikhtisar Strategis**: Proposisi nilai AZD dan dampak bisnis (1 jam)
-- **Demo Praktis**: Penerapan aplikasi AI dari awal sampai akhir (2 jam)
+- **Tinjauan Strategis**: Proposisi nilai AZD dan dampak bisnis (1 jam)
+- **Demo Praktis**: Terapkan aplikasi AI secara menyeluruh (2 jam)
 - **Tinjauan Arsitektur**: Pola perusahaan dan tata kelola (1 jam)
 - **Perencanaan Implementasi**: Strategi adopsi organisasi (1-2 jam)
 
-#### 🛠️ Metodologi Pembelajaran Workshop  
-**Pendekatan Penemuan → Penerapan → Kustomisasi untuk pengembangan keterampilan praktis**
+#### 🛠️ Metodologi Pembelajaran Workshop
+**Pendekatan Penemuan → Penerapan → Kustomisasi untuk pengembangan keterampilan langsung**
 
-**Tahap 1: Penemuan (45 menit)**
+**Fase 1: Penemuan (45 menit)**
 - **Eksplorasi Template**: Evaluasi template dan layanan Microsoft Foundry
-- **Analisis Arsitektur**: Pahami pola multi-agen dan strategi penerapan
-- **Penilaian Kebutuhan**: Identifikasi kebutuhan dan keterbatasan organisasi
-- **Pengaturan Lingkungan**: Konfigurasikan lingkungan pengembangan dan sumber daya Azure
+- **Analisis Arsitektur**: Memahami pola multi-agen dan strategi penerapan
+- **Penilaian Kebutuhan**: Identifikasi kebutuhan dan kendala organisasi
+- **Pengaturan Lingkungan**: Konfigurasi lingkungan pengembangan dan sumber daya Azure
 
-**Tahap 2: Penerapan (2 jam)**
-- **Implementasi Terpandu**: Langkah demi langkah menerapkan aplikasi AI dengan AZD
-- **Konfigurasi Layanan**: Konfigurasikan layanan Azure AI, endpoint, dan autentikasi
+**Fase 2: Penerapan (2 jam)**
+- **Implementasi Berpanduan**: Penerapan langkah-demi-langkah aplikasi AI dengan AZD
+- **Konfigurasi Layanan**: Konfigurasi layanan Azure AI, titik akhir, dan autentikasi
 - **Implementasi Keamanan**: Terapkan pola keamanan perusahaan dan kontrol akses
-- **Pengujian Validasi**: Verifikasi penerapan dan pecahkan masalah umum
+- **Pengujian Validasi**: Verifikasi penerapan dan pemecahan masalah umum
 
-**Tahap 3: Kustomisasi (45 menit)**
+**Fase 3: Kustomisasi (45 menit)**
 - **Modifikasi Aplikasi**: Sesuaikan template untuk kasus penggunaan dan kebutuhan spesifik
 - **Optimasi Produksi**: Terapkan pemantauan, manajemen biaya, dan strategi penskalaan
-- **Pola Lanjutan**: Jelajahi koordinasi multi-agen dan arsitektur kompleks
-- **Perencanaan Langkah Selanjutnya**: Tentukan jalur pembelajaran untuk pengembangan keterampilan berkelanjutan
+- **Pola Lanjut**: Jelajahi koordinasi multi-agen dan arsitektur kompleks
+- **Perencanaan Langkah Selanjutnya**: Definisikan jalur pembelajaran untuk pengembangan keterampilan berkelanjutan
 
-#### 🎯 Hasil Pembelajaran Workshop  
+#### 🎯 Hasil Pembelajaran Workshop
 **Keterampilan terukur yang dikembangkan melalui praktik langsung**
 
 **Kompetensi Teknis:**
-- **Menerapkan Aplikasi AI Produksi**: Berhasil menerapkan dan mengonfigurasi solusi AI
+- **Menerapkan Aplikasi AI Produksi**: Berhasil menerapkan dan mengonfigurasi solusi bertenaga AI
 - **Penguasaan Infrastruktur sebagai Kode**: Membuat dan mengelola template Bicep kustom
-- **Arsitektur Multi-Agen**: Menerapkan solusi agen AI terkoordinasi
+- **Arsitektur Multi-Agen**: Mengimplementasikan solusi agen AI terkoordinasi
 - **Kesiapan Produksi**: Terapkan pola keamanan, pemantauan, dan tata kelola
 - **Keahlian Pemecahan Masalah**: Menyelesaikan masalah penerapan dan konfigurasi secara mandiri
 
 **Keterampilan Profesional:**
 - **Kepemimpinan Proyek**: Memimpin tim teknis dalam inisiatif penerapan cloud
 - **Desain Arsitektur**: Merancang solusi Azure yang skalabel dan hemat biaya
-- **Transfer Pengetahuan**: Melatih dan membimbing rekan mengenai praktik terbaik AZD
+- **Transfer Pengetahuan**: Melatih dan membimbing rekan dalam praktik terbaik AZD
 - **Perencanaan Strategis**: Mempengaruhi strategi adopsi cloud organisasi
 
-#### 📋 Sumber Daya dan Materi Workshop  
-**Peralatan lengkap untuk fasilitator dan peserta**
+#### 📋 Sumber Daya dan Materi Workshop
+**Perangkat lengkap untuk fasilitator dan peserta**
 
 **Untuk Fasilitator:**
-- **Panduan Instruktur**: [Ikhtisar Workshop](workshop/README.md) - Panduan perencanaan dan penyampaian sesi
-- **Materi Presentasi**: Deck slide, diagram arsitektur, dan skrip demo
+- **Panduan Instruktur**: [Gambaran Workshop](workshop/README.md) - Perencanaan dan panduan penyampaian sesi
+- **Materi Presentasi**: Slide, diagram arsitektur, dan skrip demo
 - **Alat Penilaian**: Latihan praktis, pemeriksaan pengetahuan, dan rubrik evaluasi
-- **Setup Teknis**: Konfigurasi lingkungan, panduan pemecahan masalah, dan rencana cadangan
+- **Pengaturan Teknis**: Konfigurasi lingkungan, panduan pemecahan masalah, dan rencana cadangan
 
 **Untuk Peserta:**
 - **Lingkungan Workshop Interaktif**: [Materi Workshop](workshop/README.md) - Platform pembelajaran berbasis browser
-- **Instruksi Langkah-demi-Langkah**: [Latihan Terpandu](../../workshop/docs/instructions) - Panduan implementasi detail  
+- **Instruksi Langkah-demi-Langkah**: [Latihan Berpanduan](../../workshop/docs/instructions) - Panduan implementasi detail  
 - **Dokumentasi Referensi**: [Lab Workshop AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - Pendalaman fokus AI
-- **Sumber Daya Komunitas**: Saluran Azure Discord, diskusi GitHub, dan dukungan pakar
+- **Sumber Daya Komunitas**: Saluran Azure Discord, diskusi GitHub, dan dukungan ahli
 
 #### 🏢 Implementasi Workshop Perusahaan
-**Strategi penerapan organisasi dan pelatihan**
+**Strategi penerapan dan pelatihan organisasi**
 
 **Program Pelatihan Korporat:**
-- **Orientasi Pengembang Baru**: Orientasi pegawai baru dengan dasar-dasar AZD (2-4 minggu)
-- **Pengembangan Keterampilan Tim**: Workshop triwulanan untuk tim pengembangan yang ada (1-2 hari)
+- **Orientasi Pengembang Baru**: Orientasi karyawan baru dengan dasar AZD (2-4 minggu)
+- **Peningkatan Keterampilan Tim**: Workshop kuartalan untuk tim pengembangan yang ada (1-2 hari)
 - **Tinjauan Arsitektur**: Sesi bulanan untuk insinyur senior dan arsitek (4 jam)
 - **Briefing Kepemimpinan**: Workshop eksekutif untuk pengambil keputusan teknis (setengah hari)
 
@@ -146,63 +146,67 @@ cd azd-for-beginners/workshop
 - **Pembangunan Komunitas**: Komunitas pengembang Azure AI internal dan berbagi pengetahuan
 
 **Metrik Keberhasilan:**
-- **Perolehan Keterampilan**: Penilaian sebelum/sesudah mengukur pertumbuhan kompetensi teknis
+- **Akuisisi Keterampilan**: Penilaian pra/pasca mengukur pertumbuhan kompetensi teknis
 - **Keberhasilan Penerapan**: Persentase peserta yang berhasil menerapkan aplikasi produksi
-- **Waktu Hingga Produktivitas**: Pengurangan waktu orientasi untuk proyek Azure AI baru
+- **Waktu sampai Produktivitas**: Pengurangan waktu orientasi untuk proyek Azure AI baru
 - **Retensi Pengetahuan**: Penilaian tindak lanjut 3-6 bulan setelah workshop
 
 ## Struktur Pembelajaran 8 Bab
 
-### Bab 1: Dasar & Memulai Cepat (30-45 menit) 🌱
+### Bab 1: Dasar & Mulai Cepat (30-45 menit) 🌱
 **Prasyarat**: Langganan Azure, pengetahuan dasar baris perintah  
 **Kompleksitas**: ⭐
 
 #### Apa yang Akan Anda Pelajari
-- Memahami dasar-dasar Azure Developer CLI
+- Memahami dasar Azure Developer CLI
 - Menginstal AZD di platform Anda  
-- Penerapan sukses pertama Anda
-- Konsep inti dan terminologi
+- Penerapan pertama Anda yang berhasil
+- Konsep dan terminologi inti
 
 #### Sumber Daya Pembelajaran
-- [Dasar-Dasar AZD](docs/chapter-01-foundation/azd-basics.md) - Konsep inti
-- [Instalasi & Setup](docs/chapter-01-foundation/installation.md) - Panduan spesifik platform
-- [Proyek Pertama Anda](docs/chapter-01-foundation/first-project.md) - Tutorial langsung
-- [Lembar Curang Perintah](resources/cheat-sheet.md) - Referensi cepat
+- [Dasar AZD](docs/chapter-01-foundation/azd-basics.md) - Konsep inti
+- [Instalasi & Persiapan](docs/chapter-01-foundation/installation.md) - Panduan khusus platform
+- [Proyek Pertama Anda](docs/chapter-01-foundation/first-project.md) - Tutorial praktis
+- [Lembar Cheat Perintah](resources/cheat-sheet.md) - Referensi cepat
 
 #### Hasil Praktis
 Berhasil menerapkan aplikasi web sederhana ke Azure menggunakan AZD
 
 ---
 
-### Bab 2: Pengembangan AI-Pertama (1-2 jam) 🤖
+### Bab 2: Pengembangan AI-Pertama (4-5 jam termasuk workshop) 🤖
 **Prasyarat**: Bab 1 selesai  
 **Kompleksitas**: ⭐⭐
 
 #### Apa yang Akan Anda Pelajari
 - Integrasi Microsoft Foundry dengan AZD
+- Instalasi paket GA `microsoft.foundry` dan penerapan kode hosted-agent
+- Pengujian Local Agent Inspector dan dataset/rubrik evaluasi terpisah
 - Menerapkan aplikasi bertenaga AI
 - Memahami konfigurasi layanan AI
 - Pola RAG (Retrieval-Augmented Generation)
 
 #### Sumber Daya Pembelajaran
 - [Integrasi Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- [Panduan Hosted-Agent (GA)](docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) - Inisialisasi, tinjau `azure.yaml`, penyediaan, pengujian lokal, penerapan, evaluasi, dan pembersihan
+- [Panduan Agen AI](docs/chapter-02-ai-development/agents.md)
 - [Penerapan Model AI](docs/chapter-02-ai-development/ai-model-deployment.md)
-- [Lab Workshop AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - **BARU**: Lab hands-on komprehensif 2-3 jam
+- [Lab Workshop AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - **BARU**: Lab praktis komprehensif 2-3 jam
 - [Panduan Workshop Interaktif](workshop/README.md) - **BARU**: Workshop berbasis browser dengan pratinjau MkDocs
 - [Template Microsoft Foundry](README.md#featured-microsoft-foundry-templates)
-- [Instruksi Workshop](../../workshop/docs/instructions) - **BARU**: Latihan panduan langkah demi langkah
+- [Instruksi Workshop](../../workshop/docs/instructions) - **BARU**: Latihan panduan langkah-demi-langkah
 
 #### Hasil Praktis
-Menerapkan dan mengonfigurasi aplikasi chat bertenaga AI dengan kemampuan RAG
+Uji hosted agent secara lokal dan di Foundry menggunakan paket GA, tinjau hasil evaluasi, dan bedakan pembersihan proyek baru dan yang digunakan ulang. Jalur RAG/workshop terpisah mencakup konfigurasi aplikasi chat bertenaga AI.
 
-#### Jalur Pembelajaran Workshop (Pengayaan Opsional)
+#### Jalur Pembelajaran Workshop (Peningkatan Opsional)
 **Pengalaman Interaktif BARU**: [Panduan Workshop Lengkap](workshop/README.md)
 1. **Penemuan** (30 menit): Pemilihan dan evaluasi template
-2. **Penerapan** (45 menit): Menerapkan dan memvalidasi fungsi template AI  
+2. **Penerapan** (45 menit): Terapkan dan validasi fungsionalitas template AI  
 3. **Dekonstruksi** (30 menit): Memahami arsitektur dan komponen template
-4. **Konfigurasi** (30 menit): Menyesuaikan pengaturan dan parameter
-5. **Kustomisasi** (45 menit): Memodifikasi dan mengulangi agar menjadi milik Anda
-6. **Pembongkaran** (15 menit): Membersihkan sumber daya dan memahami siklus hidup
+4. **Konfigurasi** (30 menit): Kustomisasi pengaturan dan parameter
+5. **Kustomisasi** (45 menit): Modifikasi dan iterasi agar sesuai kebutuhan Anda
+6. **Pembongkaran** (15 menit): Bersihkan sumber daya dan pahami siklus hidup
 7. **Penutupan** (15 menit): Langkah selanjutnya dan jalur pembelajaran lanjutan
 
 ---
@@ -212,18 +216,18 @@ Menerapkan dan mengonfigurasi aplikasi chat bertenaga AI dengan kemampuan RAG
 **Kompleksitas**: ⭐⭐
 
 #### Apa yang Akan Anda Pelajari
-- Konfigurasi dan manajemen lingkungan
+- Konfigurasi dan pengelolaan lingkungan
 - Praktik terbaik autentikasi dan keamanan
-- Penamaan dan organisasi sumber daya
+- Penamaan dan pengorganisasian sumber daya
 - Penerapan multi-lingkungan
 
 #### Sumber Daya Pembelajaran
-- [Panduan Konfigurasi](docs/chapter-03-configuration/configuration.md) - Pengaturan lingkungan
-- [Pola Autentikasi & Keamanan](docs/chapter-03-configuration/authsecurity.md) - Integrasi managed identity dan Key Vault
+- [Panduan Konfigurasi](docs/chapter-03-configuration/configuration.md) - Persiapan lingkungan
+- [Pola Autentikasi & Keamanan](docs/chapter-03-configuration/authsecurity.md) - Identitas terkelola dan integrasi Key Vault
 - Contoh multi-lingkungan
 
 #### Hasil Praktis
-Mengelola beberapa lingkungan dengan autentikasi dan keamanan yang tepat
+Kelola beberapa lingkungan dengan autentikasi dan keamanan yang tepat
 
 ---
 
@@ -237,16 +241,16 @@ Mengelola beberapa lingkungan dengan autentikasi dan keamanan yang tepat
 - Strategi penyediaan sumber daya
 - Pembuatan template kustom
 
-- Penerapan aplikasi containerized dengan Azure Container Apps dan AZD
+- Penerapan aplikasi terkontainer dengan Azure Container Apps dan AZD
 
 #### Sumber Daya Pembelajaran
 - [Panduan Penerapan](docs/chapter-04-infrastructure/deployment-guide.md) - Alur kerja lengkap
 - [Penyediaan Sumber Daya](docs/chapter-04-infrastructure/provisioning.md) - Manajemen sumber daya
-- Contoh container dan mikroservis
-- [Contoh Aplikasi Container](examples/container-app/README.md) - Memulai cepat, produksi, dan pola penerapan lanjutan
+- Contoh aplikasi kontainer dan mikroservis
+- [Contoh Aplikasi Kontainer](examples/container-app/README.md) - Mulai cepat, produksi, dan pola penerapan lanjutan
 
 #### Hasil Praktis
-Menerapkan aplikasi multi-layanan kompleks menggunakan template infrastruktur kustom
+Terapkan aplikasi multi-layanan kompleks menggunakan template infrastruktur kustom
 
 ---
 
@@ -260,16 +264,16 @@ Menerapkan aplikasi multi-layanan kompleks menggunakan template infrastruktur ku
 - Penerapan AI siap produksi
 - Implementasi agen Pelanggan dan Inventaris
 
-- Mengintegrasikan mikroservis containerized sebagai bagian dari solusi berbasis agen
+- Mengintegrasikan mikroservis terkontainer sebagai bagian dari solusi berbasis agen
 
 #### Sumber Daya Pembelajaran
-- [Solusi Multi-Agen Retail](examples/retail-scenario.md) - Cetak biru arsitektur, bukan aplikasi lengkap
+- [Solusi Multi-Agen Ritel](examples/retail-scenario.md) - Cetak biru arsitektur, bukan aplikasi lengkap
 - [Paket Template ARM](../../examples/retail-multiagent-arm-template) - Kerangka infrastruktur dengan prasyarat implementasi
 - Pola koordinasi multi-agen
 - [Contoh Arsitektur Mikroservis](../../examples/container-app/microservices) - Komunikasi layanan-ke-layanan, pesan asinkron, dan penerapan produksi
 
 #### Hasil Praktis
-Merancang solusi AI multi-agen dan mengidentifikasi pekerjaan implementasi aplikasi, validasi, dan operasional yang diperlukan di luar penyediaan infrastruktur
+Rancang solusi AI multi-agen dan identifikasi pekerjaan implementasi aplikasi, validasi, dan operasional yang diperlukan di luar penyediaan infrastruktur
 
 ---
 
@@ -286,24 +290,24 @@ Merancang solusi AI multi-agen dan mengidentifikasi pekerjaan implementasi aplik
 #### Sumber Daya Pembelajaran
 - [Perencanaan Kapasitas](docs/chapter-06-pre-deployment/capacity-planning.md) - Validasi sumber daya
 - [Pemilihan SKU](docs/chapter-06-pre-deployment/sku-selection.md) - Pilihan hemat biaya
-- [Pemeriksaan Pra-Penerbangan](docs/chapter-06-pre-deployment/preflight-checks.md) - Skrip otomatis
+- [Pemeriksaan Pra-penerbangan](docs/chapter-06-pre-deployment/preflight-checks.md) - Skrip otomatis
 - [Integrasi Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - Pemantauan dan keterlihatan
 - [Pola Koordinasi Multi-Agen](docs/chapter-06-pre-deployment/coordination-patterns.md) - Strategi orkestrasi agen
 
 #### Hasil Praktis
-Memvalidasi dan mengoptimalkan penerapan sebelum eksekusi
+Validasi dan optimalkan penerapan sebelum eksekusi
 
 ---
 
 ### Bab 7: Pemecahan Masalah & Debugging (1-1.5 jam) 🔧
-**Prasyarat**: Selesai bab deployman mana pun  
+**Prasyarat**: Bab penerapan apapun telah selesai  
 **Kompleksitas**: ⭐⭐
 
-#### Yang Akan Anda Pelajari
+#### Apa yang Akan Anda Pelajari
 - Pendekatan debugging sistematis
-- Masalah umum dan solusinya
+- Masalah umum dan solusi
 - Pemecahan masalah khusus AI
-- Optimasi kinerja
+- Optimalisasi kinerja
 
 #### Sumber Belajar
 - [Masalah Umum](docs/chapter-07-troubleshooting/common-issues.md) - FAQ dan solusi
@@ -311,7 +315,7 @@ Memvalidasi dan mengoptimalkan penerapan sebelum eksekusi
 - [Pemecahan Masalah Khusus AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Masalah layanan AI
 
 #### Hasil Praktis
-Mendiagnosis dan menyelesaikan masalah deployman umum secara mandiri
+Mendiagnosis dan menyelesaikan masalah penerapan umum secara mandiri
 
 ---
 
@@ -319,97 +323,97 @@ Mendiagnosis dan menyelesaikan masalah deployman umum secara mandiri
 **Prasyarat**: Bab 1-4 selesai  
 **Kompleksitas**: ⭐⭐⭐⭐
 
-#### Yang Akan Anda Pelajari
-- Strategi deployman produksi
+#### Apa yang Akan Anda Pelajari
+- Strategi penerapan produksi
 - Pola keamanan perusahaan
 - Pemantauan dan optimasi biaya
 - Skalabilitas dan tata kelola
 
-- Praktik terbaik untuk deployman aplikasi container produksi (keamanan, pemantauan, biaya, CI/CD)
+- Praktik terbaik untuk penerapan aplikasi kontainer produksi (keamanan, pemantauan, biaya, CI/CD)
 
 #### Sumber Belajar
 - [Praktik Terbaik AI Produksi](docs/chapter-08-production/production-ai-practices.md) - Pola perusahaan
 - Contoh microservices dan perusahaan
 - Kerangka kerja pemantauan dan tata kelola
-- [Contoh Arsitektur Microservices](../../examples/container-app/microservices) - Deploy blue-green/canary, distributed tracing, dan optimasi biaya
+- [Contoh Arsitektur Microservices](../../examples/container-app/microservices) - Penerapan blue-green/canary, distributed tracing, dan optimasi biaya
 
 #### Hasil Praktis
-Mendeploy aplikasi siap perusahaan dengan kemampuan produksi penuh
+Terapkan aplikasi siap produksi untuk perusahaan dengan kemampuan penuh
 
 ---
 
-## Progresi Pembelajaran dan Kompleksitas
+## Progres Pembelajaran dan Kompleksitas
 
-### Pembangunan Keterampilan Bertahap
+### Pembangunan Keterampilan Secara Bertahap
 
 - **🌱 Pemula**: Mulai dari Bab 1 (Dasar) → Bab 2 (Pengembangan AI)
 - **🔧 Menengah**: Bab 3-4 (Konfigurasi & Infrastruktur) → Bab 6 (Validasi)
-- **🚀 Lanjutan**: Bab 5 (Solusi Multi-Agent) → Bab 7 (Pemecahan Masalah)
+- **🚀 Lanjutan**: Bab 5 (Solusi Multi-Agen) → Bab 7 (Pemecahan Masalah)
 - **🏢 Perusahaan**: Selesaikan semua bab, fokus pada Bab 8 (Pola Produksi)
 
-- **Jalur Aplikasi Container**: Bab 4 (deployman containerized), 5 (integrasi microservices), 8 (praktik terbaik produksi)
+- **Jalur Aplikasi Kontainer**: Bab 4 (Penerapan containerized), 5 (Integrasi microservices), 8 (Praktik terbaik produksi)
 
 ### Indikator Kompleksitas
 
 - **⭐ Dasar**: Konsep tunggal, tutorial terpandu, 30-60 menit
-- **⭐⭐ Menengah**: Beberapa konsep, praktik langsung, 1-2 jam  
+- **⭐⭐ Menengah**: Banyak konsep, praktik langsung, 1-2 jam  
 - **⭐⭐⭐ Lanjutan**: Arsitektur kompleks, solusi kustom, 1-3 jam
-- **⭐⭐⭐⭐ Pakar**: Sistem produksi, pola perusahaan, 2-4 jam
+- **⭐⭐⭐⭐ Ahli**: Sistem produksi, pola perusahaan, 2-4 jam
 
 ### Jalur Pembelajaran Fleksibel
 
 #### 🎯 Jalur Cepat Pengembang AI (4-6 jam)
 1. **Bab 1**: Dasar & Mulai Cepat (45 menit)
-2. **Bab 2**: Pengembangan AI-First (2 jam)  
-3. **Bab 5**: Solusi AI Multi-Agent (3 jam)
+2. **Bab 2**: Pengembangan AI-Pertama (2 jam)  
+3. **Bab 5**: Solusi AI Multi-Agen (3 jam)
 4. **Bab 8**: Praktik Terbaik AI Produksi (1 jam)
 
 #### 🛠️ Jalur Spesialis Infrastruktur (5-7 jam)
 1. **Bab 1**: Dasar & Mulai Cepat (45 menit)
 2. **Bab 3**: Konfigurasi & Autentikasi (1 jam)
-3. **Bab 4**: Infrastruktur sebagai Kode & Deployman (1,5 jam)
-4. **Bab 6**: Validasi & Perencanaan Pra-Deploy (1 jam)
-5. **Bab 7**: Pemecahan Masalah & Debugging (1,5 jam)
+3. **Bab 4**: Infrastructure as Code & Penerapan (1.5 jam)
+4. **Bab 6**: Validasi & Perencanaan Pra-Penerapan (1 jam)
+5. **Bab 7**: Pemecahan Masalah & Debugging (1.5 jam)
 6. **Bab 8**: Pola Produksi & Perusahaan (2 jam)
 
 #### 🎓 Perjalanan Pembelajaran Lengkap (8-12 jam)
-Penyelesaian berurutan dari semua 8 bab dengan praktik langsung dan validasi
+Penyelesaian berurutan semua 8 bab dengan praktik langsung dan validasi
 
 ## Kerangka Penyelesaian Kursus
 
 ### Validasi Pengetahuan
 - **Checkpoint Bab**: Latihan praktis dengan hasil terukur
-- **Verifikasi Praktis**: Deploy solusi yang berfungsi untuk tiap bab
-- **Pelacakan Progres**: Indikator visual dan badge penyelesaian
-- **Validasi Komunitas**: Bagikan pengalaman di kanal Discord Azure
+- **Verifikasi Praktis**: Terapkan solusi yang bekerja untuk setiap bab
+- **Pelacakan Kemajuan**: Indikator visual dan lencana penyelesaian
+- **Validasi Komunitas**: Bagikan pengalaman di saluran Discord Azure
 
 ### Penilaian Hasil Pembelajaran
 
 #### Penyelesaian Bab 1-2 (Dasar + AI)
-- ✅ Deploy aplikasi web dasar menggunakan AZD
-- ✅ Deploy aplikasi chat bertenaga AI dengan RAG
-- ✅ Memahami konsep inti AZD dan integrasi AI
+- ✅ Terapkan aplikasi web dasar menggunakan AZD
+- ✅ Terapkan aplikasi chat bertenaga AI dengan RAG
+- ✅ Pahami konsep inti AZD dan integrasi AI
 
 #### Penyelesaian Bab 3-4 (Konfigurasi + Infrastruktur)  
-- ✅ Mengelola deployman multi-lingkungan
-- ✅ Membuat template infrastruktur Bicep kustom
-- ✅ Menerapkan pola autentikasi aman
+- ✅ Kelola penerapan multi-lingkungan
+- ✅ Buat template Bicep infrastruktur kustom
+- ✅ Terapkan pola autentikasi aman
 
-#### Penyelesaian Bab 5-6 (Multi-Agent + Validasi)
-- ✅ Deploy solusi AI multi-agent kompleks
-- ✅ Melakukan perencanaan kapasitas dan optimasi biaya
-- ✅ Menerapkan validasi otomatis pra-deploy
+#### Penyelesaian Bab 5-6 (Multi-Agen + Validasi)
+- ✅ Terapkan solusi AI multi-agen kompleks
+- ✅ Lakukan perencanaan kapasitas dan optimasi biaya
+- ✅ Terapkan validasi pra-penerapan otomatis
 
 #### Penyelesaian Bab 7-8 (Pemecahan Masalah + Produksi)
-- ✅ Debug dan selesaikan masalah deployman secara mandiri  
-- ✅ Menerapkan pemantauan dan keamanan tingkat perusahaan
-- ✅ Deploy aplikasi siap produksi dengan tata kelola
+- ✅ Debug dan selesaikan masalah penerapan secara mandiri  
+- ✅ Terapkan pemantauan dan keamanan tingkat perusahaan
+- ✅ Terapkan aplikasi siap produksi dengan tata kelola
 
 ### Sertifikasi dan Pengakuan
-- **Badge Penyelesaian Kursus**: Selesaikan semua 8 bab dengan validasi praktis
+- **Lencana Penyelesaian Kursus**: Selesaikan semua 8 bab dengan validasi praktis
 - **Pengakuan Komunitas**: Partisipasi aktif di Microsoft Foundry Discord
-- **Pengembangan Profesional**: Keterampilan deploy AI dan AZD yang relevan industri
-- **Kemajuan Karir**: Kapabilitas deploy cloud siap perusahaan
+- **Pengembangan Profesional**: Keterampilan penerapan AZD dan AI yang relevan industri
+- **Kemajuan Karier**: Kapabilitas penerapan cloud siap perusahaan
 
 ## 🎓 Hasil Pembelajaran Komprehensif
 
@@ -417,140 +421,140 @@ Penyelesaian berurutan dari semua 8 bab dengan praktik langsung dan validasi
 Setelah menyelesaikan bab dasar, peserta akan menunjukkan:
 
 **Kemampuan Teknis:**
-- Deploy aplikasi web sederhana ke Azure menggunakan perintah AZD
-- Konfigurasi dan deploy aplikasi chat bertenaga AI dengan kemampuan RAG
-- Memahami konsep inti AZD: template, lingkungan, workflow provisioning
-- Integrasi layanan Microsoft Foundry dengan deploy AZD
+- Terapkan aplikasi web sederhana ke Azure menggunakan perintah AZD
+- Konfigurasi dan terapkan aplikasi chat bertenaga AI dengan kemampuan RAG
+- Pahami konsep inti AZD: template, lingkungan, alur kerja provisioning
+- Integrasikan layanan Microsoft Foundry dengan penerapan AZD
 - Navigasi konfigurasi layanan Azure AI dan endpoint API
 
 **Keterampilan Profesional:**
-- Mengikuti workflow deploy terstruktur untuk hasil konsisten
-- Memecahkan masalah deploy dasar menggunakan log dan dokumentasi
-- Berkomunikasi efektif tentang proses deploy cloud
-- Menerapkan praktik terbaik integrasi layanan AI yang aman
+- Ikuti alur kerja penerapan yang terstruktur untuk hasil konsisten
+- Atasi masalah penerapan dasar menggunakan log dan dokumentasi
+- Komunikasikan secara efektif proses penerapan cloud
+- Terapkan praktik terbaik untuk integrasi layanan AI yang aman
 
 **Verifikasi Pembelajaran:**
-- ✅ Berhasil deploy template `todo-nodejs-mongo`
-- ✅ Deploy dan konfigurasi `azure-search-openai-demo` dengan RAG
-- ✅ Menyelesaikan latihan workshop interaktif (fase Discovery)
+- ✅ Berhasil menerapkan template `todo-nodejs-mongo`
+- ✅ Terapkan dan konfigurasi `azure-search-openai-demo` dengan RAG
+- ✅ Selesaikan latihan lokakarya interaktif (fase Discovery)
 - ✅ Berpartisipasi dalam diskusi komunitas Azure Discord
 
 ### Tingkat Menengah (Bab 3-4)
 Setelah menyelesaikan bab menengah, peserta akan menunjukkan:
 
 **Kemampuan Teknis:**
-- Mengelola deployman multi-lingkungan (dev, staging, produksi)
-- Membuat template Bicep kustom untuk infrastruktur sebagai kode
-- Menerapkan pola autentikasi aman dengan managed identity
-- Deploy aplikasi multi-layanan kompleks dengan konfigurasi kustom
-- Mengoptimasi strategi provisioning sumber daya untuk biaya dan kinerja
+- Kelola penerapan multi-lingkungan (dev, staging, produksi)
+- Buat template Bicep kustom untuk infrastruktur sebagai kode
+- Terapkan pola autentikasi aman dengan managed identity
+- Terapkan aplikasi multi-layanan kompleks dengan konfigurasi kustom
+- Optimalkan strategi provisioning sumber daya untuk biaya dan performa
 
 **Keterampilan Profesional:**
-- Merancang arsitektur infrastruktur yang skalabel
-- Menerapkan praktik keamanan terbaik untuk deploy cloud
-- Mendokumentasikan pola infrastruktur untuk kolaborasi tim
-- Mengevaluasi dan memilih layanan Azure yang sesuai kebutuhan
+- Rancang arsitektur infrastruktur yang skalabel
+- Terapkan praktik keamanan terbaik untuk penerapan cloud
+- Dokumentasikan pola infrastruktur untuk kolaborasi tim
+- Evaluasi dan pilih layanan Azure yang sesuai kebutuhan
 
 **Verifikasi Pembelajaran:**
-- ✅ Konfigurasi lingkungan terpisah dengan pengaturan spesifik lingkungan
-- ✅ Membuat dan deploy template Bicep kustom untuk aplikasi multi-layanan
-- ✅ Menerapkan autentikasi managed identity untuk akses aman
-- ✅ Menyelesaikan latihan manajemen konfigurasi dengan skenario nyata
+- ✅ Konfigurasikan lingkungan terpisah dengan setting khusus lingkungan
+- ✅ Buat dan terapkan template Bicep kustom untuk aplikasi multi-layanan
+- ✅ Terapkan autentikasi managed identity untuk akses aman
+- ✅ Selesaikan latihan manajemen konfigurasi dengan skenario nyata
 
 ### Tingkat Lanjutan (Bab 5-6)
 Setelah menyelesaikan bab lanjutan, peserta akan menunjukkan:
 
 **Kemampuan Teknis:**
-- Deploy dan orkestrasi solusi AI multi-agent dengan workflow terkoordinasi
-- Menerapkan arsitektur agen Customer dan Inventory untuk skenario ritel
-- Melakukan perencanaan kapasitas komprehensif dan validasi sumber daya
-- Menjalankan validasi otomatis pra-deploy dan optimasi
-- Merancang pemilihan SKU hemat biaya berdasarkan kebutuhan beban kerja
+- Terapkan dan orkestrasi solusi AI multi-agen dengan alur kerja terkoordinasi
+- Terapkan arsitektur Customer dan Inventory agent untuk skenario ritel
+- Lakukan perencanaan kapasitas menyeluruh dan validasi sumber daya
+- Jalankan validasi pra-penerapan otomatis dan optimasi
+- Rancang pemilihan SKU yang hemat biaya berdasarkan kebutuhan beban kerja
 
 **Keterampilan Profesional:**
-- Merancang arsitektur solusi AI kompleks untuk lingkungan produksi
-- Memimpin diskusi teknis tentang strategi deploy AI
-- Membimbing pengembang junior dalam praktik terbaik AZD dan deploy AI
-- Mengevaluasi dan merekomendasikan pola arsitektur AI untuk kebutuhan bisnis
+- Arsitek solusi AI kompleks untuk lingkungan produksi
+- Pimpin diskusi teknis tentang strategi penerapan AI
+- Mentor pengembang junior dalam praktik terbaik AZD dan penerapan AI
+- Evaluasi dan rekomendasikan pola arsitektur AI untuk kebutuhan bisnis
 
 **Verifikasi Pembelajaran:**
-- ✅ Mengulas cetak biru multi-agent ritel dan membedakan infrastruktur yang di-provision dari implementasi aplikasi yang hilang
-- ✅ Mendemonstrasikan koordinasi agen dan orkestrasi workflow
-- ✅ Menyelesaikan latihan perencanaan kapasitas dengan kendala sumber daya nyata
-- ✅ Memvalidasi kesiapan deploy melalui pemeriksaan pra-penerbangan otomatis
+- ✅ Tinjau blueprint multi-agen ritel dan bedakan infrastruktur terprovisi dari implementasi aplikasi yang hilang
+- ✅ Demonstrasikan koordinasi agen dan orkestrasi alur kerja
+- ✅ Selesaikan latihan perencanaan kapasitas dengan batasan sumber daya nyata
+- ✅ Validasi kesiapan penerapan melalui pemeriksaan pra-penerbangan otomatis
 
-### Tingkat Pakar (Bab 7-8)
-Setelah menyelesaikan bab pakar, peserta akan menunjukkan:
+### Tingkat Ahli (Bab 7-8)
+Setelah menyelesaikan bab ahli, peserta akan menunjukkan:
 
 **Kemampuan Teknis:**
-- Mendiagnosis dan menyelesaikan masalah deploy kompleks secara mandiri
-- Menerapkan pola keamanan tingkat perusahaan dan kerangka tata kelola
-- Merancang strategi pemantauan dan pengalertan komprehensif
-- Mengoptimasi deploy produksi untuk skala, biaya, dan kinerja
-- Membangun pipeline CI/CD dengan pengujian dan validasi tepat
+- Diagnosa dan selesaikan masalah penerapan kompleks secara mandiri
+- Terapkan pola keamanan tingkat perusahaan dan kerangka tata kelola
+- Rancang strategi pemantauan dan peringatan menyeluruh
+- Optimalkan penerapan produksi untuk skala, biaya, dan performa
+- Bangun pipeline CI/CD dengan pengujian dan validasi yang tepat
 
 **Keterampilan Profesional:**
-- Memimpin inisiatif transformasi cloud perusahaan
-- Merancang dan menerapkan standar deploy organisasi
-- Melatih dan membimbing tim pengembang dalam praktik AZD lanjutan
-- Mempengaruhi pengambilan keputusan teknis untuk deploy AI perusahaan
+- Pimpin inisiatif transformasi cloud perusahaan
+- Rancang dan terapkan standar penerapan organisasi
+- Latih dan bimbing tim pengembangan dalam praktik AZD lanjutan
+- Pengaruhi pengambilan keputusan teknis untuk penerapan AI perusahaan
 
 **Verifikasi Pembelajaran:**
-- ✅ Menyelesaikan kegagalan deploy multi-layanan kompleks
-- ✅ Menerapkan pola keamanan perusahaan sesuai persyaratan kepatuhan
-- ✅ Merancang dan deploy pemantauan produksi dengan Application Insights
-- ✅ Menyelesaikan implementasi kerangka tata kelola perusahaan
+- ✅ Selesaikan kegagalan penerapan multi-layanan kompleks
+- ✅ Terapkan pola keamanan perusahaan dengan persyaratan kepatuhan
+- ✅ Rancang dan terapkan pemantauan produksi dengan Application Insights
+- ✅ Selesaikan implementasi kerangka tata kelola perusahaan
 
 ## 🎯 Sertifikasi Penyelesaian Kursus
 
-### Kerangka Pelacakan Progres
-Lacak progres pembelajaran Anda melalui checkpoint terstruktur:
+### Kerangka Pelacakan Kemajuan
+Lacak kemajuan pembelajaran Anda melalui checkpoint terstruktur:
 
 - [ ] **Bab 1**: Dasar & Mulai Cepat ✅
-- [ ] **Bab 2**: Pengembangan AI-First ✅  
+- [ ] **Bab 2**: Pengembangan AI-Pertama ✅  
 - [ ] **Bab 3**: Konfigurasi & Autentikasi ✅
-- [ ] **Bab 4**: Infrastruktur sebagai Kode & Deploy ✅
-- [ ] **Bab 5**: Solusi AI Multi-Agent ✅
-- [ ] **Bab 6**: Validasi & Perencanaan Pra-Deploy ✅
+- [ ] **Bab 4**: Infrastructure as Code & Penerapan ✅
+- [ ] **Bab 5**: Solusi AI Multi-Agen ✅
+- [ ] **Bab 6**: Validasi & Perencanaan Pra-Penerapan ✅
 - [ ] **Bab 7**: Pemecahan Masalah & Debugging ✅
 - [ ] **Bab 8**: Pola Produksi & Perusahaan ✅
 
 ### Proses Verifikasi
-Setelah menyelesaikan tiap bab, verifikasi pengetahuan Anda melalui:
+Setelah menyelesaikan setiap bab, verifikasi pengetahuan Anda melalui:
 
-1. **Penyelesaian Latihan Praktis**: Deploy solusi yang berfungsi untuk tiap bab
-2. **Penilaian Pengetahuan**: Tinjau bagian FAQ dan selesaikan self-assessment
+1. **Penyelesaian Latihan Praktis**: Terapkan solusi yang bekerja untuk tiap bab
+2. **Penilaian Pengetahuan**: Tinjau bagian FAQ dan selesaikan penilaian mandiri
 3. **Keterlibatan Komunitas**: Bagikan pengalaman dan dapatkan umpan balik di Azure Discord
-4. **Pengembangan Portofolio**: Dokumentasikan deployman dan pelajaran yang dipelajari
-5. **Peer Review**: Kolaborasi dengan peserta lain untuk skenario kompleks
+4. **Pengembangan Portofolio**: Dokumentasikan penerapan dan pembelajaran Anda
+5. **Ulasan Rekan**: Kolaborasi dengan peserta lain pada skenario kompleks
 
 ### Manfaat Penyelesaian Kursus
 Setelah menyelesaikan semua bab dengan verifikasi, lulusan akan memiliki:
 
 **Keahlian Teknis:**
-- **Pengalaman Produksi**: Mendeploy aplikasi AI nyata ke lingkungan Azure
-- **Keterampilan Profesional**: Kapabilitas deploy dan pemecahan masalah siap perusahaan  
-- **Pengetahuan Arsitektur**: Solusi AI multi-agent dan pola infrastruktur kompleks
-- **Keahlian Pemecahan Masalah**: Penyelesaian mandiri isu deploy dan konfigurasi
+- **Pengalaman Produksi**: Menerapkan aplikasi AI nyata ke lingkungan Azure
+- **Keterampilan Profesional**: Kemampuan penerapan dan pemecahan masalah siap perusahaan  
+- **Pengetahuan Arsitektur**: Solusi AI multi-agen dan pola infrastruktur kompleks
+- **Penguasaan Pemecahan Masalah**: Penyelesaian mandiri masalah penerapan dan konfigurasi
 
 **Pengembangan Profesional:**
-- **Pengakuan Industri**: Keterampilan terverifikasi dalam area AZD dan deploy AI yang banyak dicari
-- **Kemajuan Karir**: Kualifikasi untuk peran arsitek cloud dan spesialis deploy AI
+- **Pengakuan Industri**: Keterampilan terverifikasi di area penerapan AZD dan AI yang diminati
+- **Kemajuan Karier**: Kualifikasi untuk peran arsitek cloud dan spesialis penerapan AI
 - **Kepemimpinan Komunitas**: Keanggotaan aktif dalam komunitas pengembang Azure dan AI
-- **Pembelajaran Berkelanjutan**: Dasar untuk spesialisasi Microsoft Foundry tingkat lanjut
+- **Pembelajaran Berkelanjutan**: Dasar untuk spesialisasi Microsoft Foundry lanjutan
 
 **Aset Portofolio:**
-- **Solusi yang Dideploy**: Contoh aplikasi AI dan pola infrastruktur yang berfungsi
-- **Dokumentasi**: Panduan deploy lengkap dan prosedur pemecahan masalah  
+- **Solusi Diterapkan**: Contoh kerja aplikasi AI dan pola infrastruktur
+- **Dokumentasi**: Panduan penerapan menyeluruh dan prosedur pemecahan masalah  
 - **Kontribusi Komunitas**: Diskusi, contoh, dan perbaikan yang dibagikan dengan komunitas Azure
-- **Jaringan Profesional**: Koneksi dengan ahli Azure dan praktisi deploy AI
+- **Jaringan Profesional**: Koneksi dengan pakar Azure dan praktisi penerapan AI
 
 ### Jalur Pembelajaran Pasca-Kursus
 Lulusan siap untuk spesialisasi lanjutan dalam:
-- **Pakar Microsoft Foundry**: Spesialisasi mendalam dalam deploy dan orkestrasi model AI
-- **Kepemimpinan Arsitektur Cloud**: Desain deploy berskala perusahaan dan tata kelola
-- **Kepemimpinan Komunitas Pengembang**: Kontribusi pada contoh Azure dan sumber komunitas
-- **Pelatihan Korporat**: Mengajar keterampilan AZD dan deploy AI dalam organisasi
+- **Microsoft Foundry Expert**: Spesialisasi mendalam dalam penerapan dan orkestrasi model AI
+- **Kepemimpinan Arsitektur Cloud**: Desain dan tata kelola penerapan skala perusahaan
+- **Kepemimpinan Komunitas Pengembang**: Kontribusi pada contoh Azure dan sumber daya komunitas
+- **Pelatihan Korporat**: Mengajar keterampilan AZD dan penerapan AI dalam organisasi
 
 ---
 
