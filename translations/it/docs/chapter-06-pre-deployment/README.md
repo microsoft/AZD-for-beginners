@@ -1,23 +1,23 @@
 # Capitolo 6: Pianificazione e Validazione Pre-Distribuzione
 
-**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 1 ora | **⭐ Complessità**: Intermedio
+**📚 Corso**: [AZD per Principianti](../../README.md) | **⏱️ Durata**: 2-4 ore di lettura; tempo aggiuntivo per laboratori adattati | **⭐ Complessità**: Intermedio–Avanzato
 
 ---
 
 ## Panoramica
 
-Questo capitolo copre i passaggi essenziali di pianificazione e validazione prima di distribuire la tua applicazione. Impara a evitare errori costosi con una corretta pianificazione della capacità, selezione dello SKU e controlli preliminari.
+Questo capitolo copre i passaggi essenziali di pianificazione e validazione prima di distribuire la tua applicazione. Impara a evitare errori costosi con una corretta pianificazione della capacità, selezione degli SKU e controlli pre-volo.
 
-> Validato con `azd 1.27.1` a luglio 2026.
+> Indicazioni sui comandi riviste rispetto al riferimento rilasciato `azd 1.37.2`. Le distribuzioni cloud non sono state eseguite. Le lezioni più lunghe includono frammenti illustrativi, non progetti completi di distribuzione locale.
 
 ## Obiettivi di Apprendimento
 
 Completando questo capitolo, sarai in grado di:
-- Eseguire controlli preliminari prima della distribuzione
+- Eseguire controlli pre-volo prima della distribuzione
 - Pianificare la capacità e stimare i requisiti delle risorse
-- Selezionare gli SKU appropriati per l’ottimizzazione dei costi
+- Selezionare SKU appropriate per l'ottimizzazione dei costi
 - Configurare Application Insights per il monitoraggio
-- Comprendere i modelli di coordinamento del team
+- Comprendere i modelli di coordinamento multi-agente e i loro requisiti di distribuzione
 
 ---
 
@@ -25,48 +25,48 @@ Completando questo capitolo, sarai in grado di:
 
 | # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Controlli Preliminari](preflight-checks.md) | Validare la configurazione prima della distribuzione | 15 min |
+| 1 | [Controlli Pre-Vol](preflight-checks.md) | Validare la configurazione prima della distribuzione | 15 min |
 | 2 | [Pianificazione della Capacità](capacity-planning.md) | Stimare i requisiti delle risorse | 20 min |
-| 3 | [Selezione SKU](sku-selection.md) | Scegliere i livelli di prezzo appropriati | 15 min |
+| 3 | [Selezione SKU](sku-selection.md) | Scegliere livelli di prezzo appropriati | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configurare il monitoraggio | 20 min |
-| 5 | [Modelli di Coordinamento](coordination-patterns.md) | Workflow di distribuzione del team | 15 min |
+| 5 | [Modelli di Coordinamento](coordination-patterns.md) | Progettazione avanzata di orchestrazione multi-agente | 60-75 min |
 
 ---
 
 ## 🚀 Avvio Rapido
 
 ```bash
-# Controlla le quote di sottoscrizione
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Anteprima distribuzione (nessuna risorsa creata)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Valida la sintassi Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Controlla la configurazione dell'ambiente
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Lista di Controllo Pre-Distribuzione
+## ☑️ Checklist Pre-Distribuzione
 
 ### Prima di `azd provision`
 
-- [ ] Quota verificata per la regione
-- [ ] SKU selezionati appropriatamente
-- [ ] Stima dei costi rivista
+- [ ] Quota verificata per regione
+- [ ] SKU selezionati correttamente
+- [ ] Stima dei costi revisionata
 - [ ] Convenzione di denominazione coerente
 - [ ] Sicurezza/RBAC configurata
 
 ### Prima di `azd deploy`
 
-- [ ] Variabili d’ambiente impostate
-- [ ] Segreti nel Key Vault
+- [ ] Variabili d'ambiente impostate
+- [ ] Segreti in Key Vault
 - [ ] Stringhe di connessione verificate
-- [ ] Controlli di integrità configurati
+- [ ] Controlli di salute configurati
 
 ---
 
@@ -74,10 +74,10 @@ azd env get-values
 
 | Carico di lavoro | Sviluppo | Produzione |
 |----------|-------------|------------|
-| Container Apps | Consumo | Dedicato D4 |
+| Container Apps | Consumo | Consumo o profilo di carico dedicato, basato sul carico misurato |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Base | Standard S2+ |
+| Modelli Azure OpenAI | Tipo di distribuzione a consumo supportato | Consumo o throughput provvisto; dipendente da modello/regione |
+| AI Search | Free/Base nei limiti | Tier Base o Standard dimensionato per indice, repliche e carico query |
 
 ---
 
@@ -85,8 +85,8 @@ azd env get-values
 
 | Direzione | Capitolo |
 |-----------|---------|
-| **Precedente** | [Capitolo 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Successivo** | [Capitolo 7: Risoluzione Problemi](../chapter-07-troubleshooting/README.md) |
+| **Precedente** | [Capitolo 5: Multi-Agente](../chapter-05-multi-agent/README.md) |
+| **Successivo** | [Capitolo 7: Risoluzione dei Problemi](../chapter-07-troubleshooting/README.md) |
 
 ---
 

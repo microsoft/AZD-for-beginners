@@ -1,67 +1,67 @@
-# Kurkite Savo Paties azd Šabloną
+# Kurkite savo azd šabloną
 
-**Skyriaus navigacija:**
-- **📚 Kurso Pradžia**: [AZD Pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 4 skyrius - Infrastruktūra kaip Kodas ir Diegimas
-- **⬅️ Ankstesnis**: [Diegimo Vadovas](deployment-guide.md)
-- **🚀 Kitas skyrius**: [5 skyrius: Daugiaagentės Sprendimai](../chapter-05-multi-agent/README.md)
+**Skyriaus naršymas:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 4 skyrius – Infrastruktūra kaip kodas ir diegimas
+- **⬅️ Ankstesnis**: [Diegimo vadovas](deployment-guide.md)
+- **🚀 Kitas skyrius**: [5 skyrius: Daugelio agentų sprendimai](../chapter-05-multi-agent/README.md)
 
-> Patikrinta su `azd 1.27.1` 2026 metų liepą.
+> Peržiūrėta pagal `azd 1.37.2` (2026 m. lapkričio mėn.). Tai yra **kūrybos vadovas su daliniais failais**, o ne pilnas šablonas: prieš diegimą turite pateikti programos kodą ir `modules/web.bicep` su jos aplinka, registru, konteinerių programa ir išvestimis. Azure teikimas nebuvo vykdomas peržiūros metu.
 
 ## Įvadas
 
-Iki šiol jūs *naudojote* šablonus su `azd init --template <name>`. Bet kai turite projekto išdėstymą, kuris patinka jūsų komandai – pavyzdžiui, Container App su Cosmos DB ir tinkama stebėsena – norėsite jį paversti savo pakartotinai naudojamu šablonu. Šablonas yra tiesiog Git repozitorija su nuspėjama struktūra, kurią azd moka skaityti. Ši pamoka parodys, kaip sukurti tokį šabloną nuo nulio, išbandyti jį ir (pasirinktinai) paskelbti bendruomenės galerijoje.
+Iki šiol jūs *naudojotės* šablonais su `azd init --template <name>`. Bet kai turėsite projekto struktūrą, kuri jūsų komandai patinka – tarkime, konteinerių programą su Cosmos DB ir tinkama stebėsena – norėsite ją paversti pakartotinai naudojamu savo šablonu. Šablonas yra tiesiog Git saugykla su nuspėjama struktūra, kurią azd žino kaip skaityti. Ši pamoka parodo, kaip sukurti tokį šabloną nuo nulio, išbandyti jį ir (pasirinktinai) paskelbti bendruomenės galerijoje.
 
-## Mokymosi Tikslai
+## Mokymosi tikslai
 
-Pamokos pabaigoje jūs:
-- Suprasite, kas daro aplanką „azd šablonu“
-- Sužinosite reikalingus failus ir aplankų išdėstymą
+Užbaigus šią pamoką, jūs:
+- Suprasite, kas daro aplanką "azd šablonu"
+- Žinosite reikiamus failus ir aplanko išdėstymą
 - Pridėsite `azure.yaml` ir `infra/`, kuriuos kiti galės pakartotinai naudoti
-- Išbandysite savo šabloną vietoje prieš dalinantis juo
-- Paskelbsite jį ir (pasirinktinai) pateiksite Awesome AZD galerijai
+- Išbandysite savo šabloną vietoje prieš dalijantis
+- Paskelbsite jį ir (pasirinktinai) pateiksite Awesome AZD
 
-## Mokymosi Rezultatai
+## Mokymosi rezultatai
 
-Baigę šią pamoką galėsite:
-- Sukurti naują šablono repozitoriją
-- Parametrizuoti infrastruktūrą, kad ji veiktų bet kurioje prenumeratoje
-- Patikrinti šabloną su `azd init` ir `azd up`
+Baigę šią pamoką, galėsite:
+- Sukurti naują šablono saugyklą
+- Parametrizuoti infrastruktūrą taip, kad veiktų bet kurioje prenumeratoje
+- Patikrinti šabloną naudojant `azd init` ir `azd up`
 - Pridėti metaduomenis, kurių reikalauja bendruomenės galerija
 
 ---
 
-## Kas Iš Tikrųjų Yra Šablonas?
+## Kas iš tikrųjų yra šablonas?
 
-azd šablonas yra **Git repozitorija**, kuri turi bent:
+Azd šablonas yra **Git saugykla**, kuri turi bent jau:
 
-| Failas / aplankas | Paskirtis | Privalomas? |
+| Failas / aplankas | Paskirtis | Privaloma? |
 |---------------|---------|-----------|
-| `azure.yaml` | Apibūdina paslaugas, talpyklas ir infrastruktūros tiekėją | ✅ Taip |
-| `infra/` | Bicep, Terraform arba Pulumi, kuris kuria resursus | ✅ Taip |
-| `src/` (arba jūsų kodas) | Programos kodas, kurį azd diegia | ✅ Taip |
-| `README.md` | Kaip naudoti šabloną | ✅ Rekomenduojama labai |
-| `.azdo/` arba `.github/` | CI/CD konfigūracijos | Pasirinktinai |
-| `.devcontainer/` | Pakartotinai atstatoma kūrimo aplinka | Pasirinktinai |
-| `azure.yaml` `metadata` | Galerijos + telemetrijos informacija | Pasirinktinai (reikalinga paskelbimui) |
+| `azure.yaml` | Aprašo paslaugas, talpyklas ir infrastruktūros tiekėją | ✅ Taip |
+| `infra/` | Bicep arba Terraform tiekimo aprašymai | Privalomas šiam tiesioginiam IaC pavyzdžiui; projektuose su generuojama infrastruktūra gali būti praleistas |
+| `src/` (arba jūsų kodas) | Programos kodas, kurį diegia azd | Privalomas kodą turinčioms paslaugoms; ne visi šablonai turi programos kodą |
+| `README.md` | Kaip naudoti šabloną | ✅ Labai rekomenduojama |
+| `.azdo/` arba `.github/` | CI/CD darbo pipeline aprašymai | Pasirinktinai |
+| `.devcontainer/` | Atkartojama kūrėjo aplinka | Pasirinktinai |
+| `azure.yaml` `metadata` | Šablono identifikacija / telemetrijos informacija | Rekomenduojama; paskelbus Git saugyklą nebūtina |
 
-Čia nėra jokių stebuklų: kai paleidžiate `azd init --template you/your-repo`, azd klonuoją repozitoriją ir skaito `azure.yaml`.
+Čia nėra jokios magijos: kai paleidžiate `azd init --template you/your-repo`, azd nukopijuoja repozitoriją ir skaito `azure.yaml`.
 
 ---
 
-## 1 Žingsnis: Sukurkite Repozitoriją
+## 1 žingsnis: Sukurkite saugyklą
 
-Sukurkite aplankų struktūrą rankiniu būdu arba pradėkite nuo minimalaus šablono ir redaguokite:
+Sukurkite aplankų struktūrą rankiniu būdu arba pradėkite nuo minimalaus šablono ir redaguokite jį:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Sukurti standartinę išdėstymą
+# Create the standard layout
 mkdir -p src infra
 ```
 
-Įprastas galutinis išdėstymas atrodo taip:
+Tipinė užbaigta struktūra atrodo taip:
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## 2 Žingsnis: Parašykite `azure.yaml`
+## 2 žingsnis: Parašykite `azure.yaml`
 
-Tai šablono širdis. Jis nurodo azd, ką ir kaip diegti:
+Čia yra šablono širdis. Jis pasakoja azd, ką ir kaip diegti:
 
 ```yaml
 # azure.yaml
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -101,21 +101,21 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> `metadata.template` laukas yra naudojamas galerijos telemetrijoje vartojimo skaičiavimui. Naudokite „name@version“ konvenciją.
+> `metadata.template` laukas yra tas, kurį galerijos telemetrija naudoja naudojimui skaičiuoti. Naudokite `name@version` konvenciją.
 
 ---
 
-## 3 Žingsnis: Parametrizuokite Infrastruktūrą
+## 3 žingsnis: Parametrizuokite infrastruktūrą
 
-Svarbiausia taisyklė kuriant *pakartotinai naudojamą* šabloną: **niekada nekoduokite vardų, regionų ar prenumeratos specifinių reikšmių tiesiogiai.** Naudokite parametrus ir resursų žetonų šabloną, kad tas pats šablonas veiktų bet kurios prenumeratos aplinkoje.
+Svarbiausia taisyklė *pakartotinai naudojamam* šablonui: **niekada nekoduokite vardų, regionų ar prenumeratai būdingų reikšmių tiesiogiai.** Naudokite parametrus ir išteklių ženklo modelį, kad tas pats šablonas veiktų bet kurioje prenumeratoje.
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -138,15 +145,18 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Dvi svarbios savybės daro šį šabloną patogų:
+Du dalykai daro šį šabloną draugišką:
 
-1. **`azd-env-name` žyma** — azd ją naudoja stebėti ir valyti resursus kiekvienai aplinkai.
-2. **`uniqueString(...)` resursų žetonas** — generuoja stabilų, globaliai unikalų priesagą, kad vardai nesikirstų.
+1. **`azd-env-name` žyma** — azd naudoja ją stebėti ir pašalinti išteklius pagal aplinką.
+2. **`uniqueString(...)` išteklių ženklas** — generuoja stabilų hešo priesagą, mažinančią konfliktų tikimybę; tai nėra globalaus unikalumo garantija.
 
-Pateikite atitinkamą parametrų failą, kuris skaito vertes, kuriuos azd įdiegia iš aplinkos:
+Trūkstamas `modules/web.bicep` turi priimti `name`, `location`, ir `tags`, sukurti Container Apps aplinką/registrą ir programą, pažymėti programą `azd-service-name: web`, ir eksportuoti `uri`. Jis taip pat turi pateikti registruotą informaciją, reikalingą pasirinktame kūrimo/diegimo sraute (pvz., `AZURE_CONTAINER_REGISTRY_ENDPOINT` iš pagrindinio modulio). Vien išvestis apie galinį tašką neužtikrina paslaugos atradimo, programos nustatymų ar registracijos autentifikacijos.
+
+Pateikite atitinkamą parametrų failą, kuris paima reikšmes, kurias azd įterpia iš aplinkos:
+
+Išsaugokite šį failą kaip `infra/main.parameters.json`:
 
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -157,86 +167,90 @@ Pateikite atitinkamą parametrų failą, kuris skaito vertes, kuriuos azd įdieg
 }
 ```
 
-azd automatiškai pakeičia `${AZURE_ENV_NAME}` ir `${AZURE_LOCATION}` iš esamos aplinkos.
+Azd automatiškai pakeičia `${AZURE_ENV_NAME}` ir `${AZURE_LOCATION}` pagal dabartinę aplinką.
 
 ---
 
-## 4 Žingsnis: Išbandykite Šabloną Vietoje
+## 4 žingsnis: Išbandykite šabloną vietoje
 
-Prieš dalijantis, įsitikinkite, kad šablonas veikia iš švarios būsenos.
+Prieš dalijantis įrodykite, kad šablonas veikia nuo švarios būsenos.
 
-**Išbandykite iš vietinio aplanko** (nereikia push į Git):
+**Išbandykite vietiniame aplanke** (Git push nereikalingas):
 
 ```bash
-# Iš tuščio katalogo inicijuokite naudodami savo vietinį šablono kelią
+# From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
-# Paruoškite ir įdiekite nuo pradžios iki pabaigos
+# Provision + deploy end to end
 azd auth login
 azd up
 ```
 
-**Tada išbandykite pašalinimą** – geras šablonas viską visiškai sutvarko:
+**Tada išbandykite pašalinimą** – geras šablonas visiškai išvalo:
 
 ```bash
 azd down --force --purge
 ```
 
-Jei `azd down` palieka resursus, greičiausiai praleidote `azd-env-name` žymą ant resurso.
+Jei `azd down` palieka išteklius, patikrinkite aplinkos/išteklių grupės nustatymus, išorinius/bendrinamus išteklius, leidimus, užraktus ir apsaugą nuo išvalymo. `--purge` neištrina vietinės `.azure/` būsenos.
 
-> **Patarimas:** pirmiausia paleiskite `azd provision --preview`. Jis atlieka „kas, jeigu“ analizę ir rodo šablono klaidas prieš kuriant bet kokius resursus.
+> **Patarimas:** pateikę visus trūkstamus failus, pirmiausia paleiskite `azd provision --preview`. Patikrinkite kablius prieš peržiūrą, nes jie gali vykdyti šalutinius efektus sukeliančias komandas. Peržiūra nėra kainos įvertinimas ar garantija, kad tiekimas pavyks.
 
 ---
 
-## 5 Žingsnis: Paskelbkite Šabloną
+## 5 žingsnis: Paskelbkite šabloną
 
-Įkelkite repozitoriją į GitHub (viešą, jei norite, kad kiti galėtų naudoti):
+Nusiųskite saugyklą į GitHub (viešą, jei norite, kad kiti ją naudotų):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Dabar bet kas gali jį naudoti:
+Dabar ją gali naudoti bet kas:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
 
-## 6 Žingsnis (Pasirinktinai): Pateikite į Awesome AZD
+## 6 žingsnis (pasirinktinai): Pateikite į Awesome AZD
 
-[Awesome AZD galerija](https://azure.github.io/awesome-azd/) surenka bendruomenės šablonus. Norint būti įtrauktam, jūsų repozitorijuje turėtų būti:
+Galerija [Awesome AZD](https://azure.github.io/awesome-azd/) pateikia bendruomenės šablonus. Kad jūsų saugykla būtų įtraukta į sąrašą, ji turėtų turėti:
 
-- ✅ Aiškus `README.md` su išankstiniais reikalavimais, architektūros schema ir kaštų pastabomis
+- ✅ Aiškus `README.md` su išankstiniais reikalavimais, architektūros diagrama ir sąnaudų pastabomis
 - ✅ Veikiantis `azure.yaml` su `metadata.template`
-- ✅ Infrastruktūra, kuri tvarkingai kuriama švarioje prenumeratoje
+- ✅ Infrastruktūra, kuri švariai įdiegiama naujame prenumeratos abonemente
 - ✅ `LICENSE` failas
-- ✅ (Rekomenduojama) `.devcontainer/` vieno paspaudimo Codespaces aplinkai
+- ✅ (Rekomenduojama) `.devcontainer/` vieno paspaudimo Codespaces
 
-Pateikite, atidarydami pull request, kuris prideda jūsų šabloną į galerijos duomenų failą, vadovaujantis prisidėjimo instrukcija [Awesome AZD repozitorijoje](https://github.com/Azure/awesome-azd).
+Pateikite atidarydami pull request'ą, kuris prideda jūsų šabloną prie galerijos duomenų failo, vadovaudamiesi indėlio vadovu [Awesome AZD saugykloje](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Dažniausios Klaidos
+## Dažnos klaidos
 
-| Klaida | Sprendimas |
+| Spąstai | Sprendimas |
 |---------|-----|
-| Kietai užkoduoti resursų pavadinimai | Naudokite `uniqueString()` resursų žetoną |
-| `azd down` palieka resursus | Pažymėkite kiekvieną resursą (arba resursų grupę) `azd-env-name` žyma |
-| Šablonas veikia jums, bet kitiems ne | Pašalinkite prenumeratos ID, nuomininko ID ir regiono prielaidų |
-| Išvestys nėra susietos su programa | Eksportuokite `SERVICE_<NAME>_ENDPOINT_URL` ir kitas `AZURE_*` išvestis |
-| Nenustatytas pateikimas galerijai | Pridėkite `README.md`, `LICENSE` ir `metadata.template` |
+| Iš anksto įrašyti resursų pavadinimai | Naudokite `uniqueString()` resurso žetoną |
+| `azd down` palieka resursus | Pažymėkite kiekvieną resursą (arba resursų grupę) su `azd-env-name` |
+| Šablonas veikia jums, bet nepavyksta kitiems | Pašalinkite prenumeratos ID, nuomininko ID ir regiono prielaidas |
+| Išvestys neprijungtos prie programos | Suderinkite `azd-service-name`/`resourceName` diegimui ir aiškiai susiekite išvestis su programos nustatymais |
+| Galerijos pateikimas atmestas | Pridėkite `README.md`, `LICENSE` ir `metadata.template` |
 
 ---
 
 ## Santrauka
 
-- Šablonas yra tiesiog Git repozitorija su `azure.yaml`, `infra/` ir jūsų kodu.
-- Parametrizuokite viską – vardus, regionus ir ID – kad veiktų bet kur.
-- Visada žymėkite resursus `azd-env-name`, kad veiktų `azd down`.
-- Išbandykite vietoje su `azd init --template <local-path>` prieš skelbdami.
+- Šablonas yra tiesiog Git saugykla su `azure.yaml`, `infra/` ir jūsų kodu.
+- Parametrizuokite viską — pavadinimus, regionus ir ID — kad veiktų bet kur.
+- Visada pažymėkite išteklius su `azd-env-name`, kad veiktų `azd down`.
+- Išbandykite vietoje su `azd init --template <local-path>` prieš publikuodami.
 - Pridėkite metaduomenis ir README, kad pateiktumėte į Awesome AZD.
 
 ---
@@ -245,13 +259,13 @@ Pateikite, atidarydami pull request, kuris prideda jūsų šabloną į galerijos
 
 | Kryptis | Ištekliai |
 |-----------|----------|
-| **Ankstesnis** | [Diegimo Vadovas](deployment-guide.md) |
-| **Skyriaus pradžia** | [4 skyrius: Infrastruktūra kaip Kodas](README.md) |
-| **Kitas skyrius** | [5 skyrius: Daugiaagentės Sprendimai](../chapter-05-multi-agent/README.md) |
+| **Ankstesnis** | [Diegimo vadovas](deployment-guide.md) |
+| **Skyriaus pradžia** | [4 skyrius: Infrastruktūra kaip kodas](README.md) |
+| **Kitas skyrius** | [5 skyrius: Daugiagentės sprendimai](../chapter-05-multi-agent/README.md) |
 
-## 📖 Susiję Ištekliai
+## 📖 Susiję ištekliai
 
-- [Resursų įrengimas](provisioning.md)
+- [Ištekliai planavimui](provisioning.md)
 - [Awesome AZD galerija](https://azure.github.io/awesome-azd/)
 - [Oficiali azd šablonų dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 

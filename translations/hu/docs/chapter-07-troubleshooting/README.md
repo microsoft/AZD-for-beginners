@@ -1,94 +1,99 @@
-# 7. fejezet: Hibakeresés és Hibák Elhárítása
+# 7. fejezet: Hibakeresés és hibaelhárítás
 
-**📚 Tanfolyam**: [AZD Kezdőknek](../../README.md) | **⏱️ Időtartam**: 1-1,5 óra | **⭐ Nehézségi szint**: Középhaladó
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 1-1,5 óra | **⭐ Bonyolultság**: Középhaladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet segít diagnosztizálni és megoldani a gyakori problémákat az Azure Developer CLI használata közben. A telepítési hibáktól az AI specifikus gondokig.
+Ez a fejezet segít diagnosztizálni és megoldani a gyakori problémákat az Azure Developer CLI használata közben. A telepítési hibáktól az AI-specifikus problémákig.
 
-> Ellenőrizve az `azd 1.27.1` verzióval 2026 júliusában.
+> A parancsok útmutatása a kiadott `azd 1.37.2` referencia alapján készült. Felhőbe történő telepítések nem kerültek végrehajtásra. A parancsok használata előtt cseréld ki a példa erőforrásneveket és azonosítókat.
 
 ## Tanulási célok
 
-Ennek a fejezetnek az elvégzése után képes leszel:
+Ennek a fejezetnek a befejezése után képes leszel:
 - Diagnosztizálni a gyakori AZD telepítési hibákat
-- Hibakeresni az autentikációs és jogosultsági problémákat
-- Megoldani az AI szolgáltatások kapcsolódási gondjait
+- Hibakeresni az autentikációs és engedélyezési problémákat
+- Megoldani az AI szolgáltatás kapcsolódási problémáit
 - Az Azure Portal és CLI használata hibakereséshez
 
 ---
 
-## 📚 Tananyagok
+## 📚 Leckék
 
-| # | Tananyag | Leírás | Idő |
+| # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Gyakori Problémák](common-issues.md) | Gyakran előforduló gondok | 30 perc |
-| 2 | [Hibakeresési Útmutató](debugging.md) | Lépésről lépésre hibakeresési stratégiák | 45 perc |
-| 3 | [AI Hibák Elhárítása](ai-troubleshooting.md) | AI-specifikus problémák | 30 perc |
+| 1 | [Gyakori problémák](common-issues.md) | Gyakran előforduló gondok | 30 perc |
+| 2 | [Hibakeresési útmutató](debugging.md) | Lépésenkénti hibakeresési stratégiák | 45 perc |
+| 3 | [AI hibaelhárítás](ai-troubleshooting.md) | AI-specifikus problémák | 30 perc |
 
 ---
 
-## 🚨 Gyors Javítások
+## 🚨 Gyors javítások
 
-### Hitelesítési Problémák
+### Autentikációs problémák
 ```bash
-# Szükséges az AZD munkafolyamatokhoz
+# Required for AZD workflows
 azd auth login
 
-# Opcionális, ha közvetlenül Azure CLI parancsokat is használsz
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Telepítési Hibák
+### Telepítési hibák
 ```bash
 azd show
 azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### Erőforrás Ütközések
+### Erőforrás-ütközések
+Először vizsgáld meg a meglévő erőforrást és a telepítési hibákat. Ne törölj megosztott vagy éles környezetet egy névütközés megoldása érdekében. Egy **új, eldobható környezethez** használj egyedi nevet:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Kvóta Túllépés
+### Kvóta túllépve
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Az `AZURE_LOCATION` módosítása nem mozgatja a meglévő erőforrásokat, és újratelepítéskor helyszínütközéseket okozhat.
 
 ---
 
-## 📋 Hibakód Referencia
+## 📋 Hibakód referencia
 
-| Hiba | Ok | Megoldás |
+| Hiba | Oka | Megoldás |
 |-------|-------|----------|
 | `AuthenticationError` | Nincs bejelentkezve | `azd auth login` |
-| `ResourceNotFound` | Hiányzó erőforrás | Ellenőrizd az erőforrás neveket |
-| `QuotaExceeded` | Előfizetési korlátok | Kérj kvóta növelést |
+| `ResourceNotFound` | Hiányzó erőforrás | Ellenőrizd az erőforrásneveket |
+| `QuotaExceeded` | Előfizetési korlátok | Kérj kvótaemelést |
 | `InvalidTemplate` | Bicep szintaxis hiba | `az bicep build` |
-| `Conflict` | Az erőforrás már létezik | Használj új nevet vagy töröld |
+| `Conflict` | Erőforrás már létezik | Használj új nevet vagy töröld |
 | `Forbidden` | Nem elegendő jogosultság | Ellenőrizd az RBAC szerepköröket |
 
 ---
 
-## 🔄 Visszaállítás és Helyreállítás
+## 🔄 Visszaállítás és helyreállítás
 
 ```bash
-# Puha visszaállítás (források megtartása, kód újratelepítése)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Kemény visszaállítás (minden törlése, újrakezdés)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+A kemény visszaállítás törli az adatokat és megváltoztathatja a végpontokat. Először készíts biztonsági mentést és ellenőrizd az interaktív törlési megerősítéseket. Az `--force --purge` csak eldobható környezeteknél alkalmas, amikor visszafordíthatatlan törlés a cél.
 
 ---
 
@@ -96,16 +101,16 @@ azd up
 
 | Irány | Fejezet |
 |-----------|---------|
-| **Előző** | [6. fejezet: Telepítés előtti lépések](../chapter-06-pre-deployment/README.md) |
+| **Előző** | [6. fejezet: Előtelepítés](../chapter-06-pre-deployment/README.md) |
 | **Következő** | [8. fejezet: Éles környezet](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Kapcsolódó Források
+## 📖 Kapcsolódó források
 
-- [Telepítés előtti ellenőrzések](../chapter-06-pre-deployment/preflight-checks.md)
+- [Előtelepítési ellenőrzések](../chapter-06-pre-deployment/preflight-checks.md)
 - [Konfigurációs útmutató](../chapter-03-configuration/configuration.md)
-- [AZD GitHub Kérdések](https://github.com/Azure/azure-dev/issues)
+- [AZD GitHub problémák](https://github.com/Azure/azure-dev/issues)
 
 ---
 

@@ -6,15 +6,17 @@
 
 ## Ikhtisar
 
-Bab ini membahas pola penerapan siap perusahaan, penguatan keamanan, pemantauan, dan optimisasi biaya untuk beban kerja AI produksi.
+Bab ini membahas pola penyebaran siap perusahaan, penguatan keamanan, pemantauan, dan optimasi biaya untuk beban kerja AI produksi.
 
-> Divalidasi menggunakan `azd 1.27.1` pada Juli 2026.
+Ini adalah referensi arsitektur, bukan template produksi yang dapat langsung diterapkan. Contoh menghilangkan detail integrasi yang harus disediakan dan diuji dalam aplikasi Anda sendiri; membaca daftar periksa tidak menjamin kesiapan produksi.
+
+> **Tinjauan rilis (2026-11-04):** Panduan AI CLI telah diperiksa melawan dokumentasi/sumber `azd 1.37.2`, agen `1.0.0-beta.23`, dan evaluasi `1.0.0-beta.2`. Lihat [perubahan dan perbaikan rilis](production-ai-practices.md#recent-release-changes-and-fixes) untuk persyaratan kompatibilitas dan detail migrasi; ini bukan validasi penyebaran secara langsung.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
-- Menerapkan aplikasi tahan multi-wilayah
-- Mengimplementasikan pola keamanan perusahaan
+- Menyebarkan aplikasi multi-wilayah yang tahan banting
+- Menerapkan pola keamanan perusahaan
 - Mengonfigurasi pemantauan menyeluruh
 - Mengoptimalkan biaya dalam skala besar
 - Menyiapkan pipeline CI/CD dengan AZD
@@ -25,16 +27,16 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Praktik AI Produksi](production-ai-practices.md) | Pola penerapan perusahaan | 90 menit |
+| 1 | [Praktik AI Produksi](production-ai-practices.md) | Pola penyebaran perusahaan | 90 mnt |
 
 ---
 
 ## 🚀 Daftar Periksa Produksi
 
-- [ ] Penerapan multi-wilayah untuk ketahanan
-- [ ] Identitas terkelola untuk autentikasi (tanpa kunci)
+- [ ] Penyebaran multi-wilayah untuk ketahanan
+- [ ] Identitas terkelola untuk otentikasi (tanpa kunci)
 - [ ] Application Insights untuk pemantauan
-- [ ] Anggaran dan peringatan biaya dikonfigurasi
+- [ ] Anggaran biaya dan peringatan dikonfigurasi
 - [ ] Pemindaian keamanan diaktifkan
 - [ ] Integrasi pipeline CI/CD
 - [ ] Rencana pemulihan bencana
@@ -43,33 +45,34 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 ## 🏗️ Pola Arsitektur
 
-### Pola 1: Microservices AI
+### Pola 1: AI Microservices
 
 ```mermaid
 graph LR
-    Gateway[Gerbang API] --> AI[Layanan AI] --> Models[Model Foundry Microsoft]
-    Gateway --> Auth[Layanan Authentikasi]
-    AI --> Data[Tempat Penyimpanan Data]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
 ### Pola 2: AI Berbasis Peristiwa
 
 ```mermaid
 graph LR
-    EventGrid[Event Grid] --> Functions[Fungsi] --> Pipeline[Jalur AI]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
 
-## 🔐 Praktik Terbaik Keamanan
+## 🔐 Praktik Keamanan Terbaik
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -80,36 +83,29 @@ properties: {
 
 ---
 
-## 💰 Optimisasi Biaya
+## 💰 Optimasi Biaya
 
-| Strategi | Penghematan |
+| Strategi | Kendala Utama |
 |----------|---------|
-| Skala ke nol (Container Apps) | 60-80% |
-| Gunakan tingkat konsumsi untuk pengembangan | 50-70% |
-| Skala terjadwal | 30-50% |
-| Kapasitas terpesan | 20-40% |
+| Skalakan ke nol (Container Apps) | Memerlukan pemicu yang sesuai; layanan lain tetap menimbulkan biaya |
+| Gunakan tingkat konsumsi untuk pengembangan | Bandingkan harga layanan terpilih dan beban kerja |
+| Skalasi terjadwal | Skalakan melalui infrastruktur/otomasi yang didukung |
+| Reservasi/kapasitas penyediaan | Hanya ketika didukung; komitmen dapat meningkatkan biaya menganggur |
 
-```bash
-# Atur peringatan anggaran
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Gunakan [pola sumber daya anggaran lengkap](production-ai-practices.md#2-cost-monitoring-and-budgets) dengan tanggal mulai yang valid, ruang lingkup penagihan, penerima, dan izin. Anggaran mengirimkan peringatan; tidak membatasi pengeluaran. Penghematan bergantung pada pemanfaatan yang diukur dan tidak dijamin persentasenya.
 
 ---
 
 ## 📊 Pengaturan Pemantauan
 
 ```bash
-# Alirkan log
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Periksa Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# Lihat metrik
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -120,7 +116,7 @@ az monitor metrics list --resource <resource-id>
 | Arah | Bab |
 |-----------|---------|
 | **Sebelumnya** | [Bab 7: Pemecahan Masalah](../chapter-07-troubleshooting/README.md) |
-| **Kursus Selesai** | [Beranda Kursus](../../README.md) |
+| **Selesai Kursus** | [Beranda Kursus](../../README.md) |
 
 ---
 

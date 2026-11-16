@@ -1,74 +1,57 @@
-# פריסת מודל בינה מלאכותית עם Azure Developer CLI
+# פריסת מודלים של AI עם Azure Developer CLI
 
-**ניווט בפרק:**
+**ניווט בפרקים:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 2 - פיתוח מונחה בינה מלאכותית
-- **⬅️ קודם**: [אינטגרציית Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ הבא**: [סדנת מעבדה לבינה מלאכותית](ai-workshop-lab.md)
+- **📖 הפרק הנוכחי**: פרק 2 - פיתוח עם AI כראשון
+- **⬅️ קודם**: [סוכני AI](agents.md)
+- **➡️ הבא**: [מעבדת סדנת AI](ai-workshop-lab.md)
 - **🚀 הפרק הבא**: [פרק 3: תצורה](../chapter-03-configuration/configuration.md)
 
-מדריך זה מספק הוראות מקיפות לפריסת מודלים של בינה מלאכותית באמצעות תבניות AZD, הכולל את כל מה שבין בחירת המודל לתבניות פריסה בסביבת ייצור.
+מדריך זה מספק הוראות מקיפות לפריסת מודלים של AI תוך שימוש בתבניות AZD, ומכסה הכל מבחירת מודל ועד דפוסי פריסה לייצור.
 
-> **הערת אימות (2026-07-13):** תהליך העבודה של AZD במדריך זה נבדק עם `azd` `1.27.1`. לפריסות בינה מלאכותית שלוקחות יותר זמן מחלון הפריסה המוגדר כברירת מחדל, גרסאות AZD הנוכחיות תומכות ב- `azd deploy --timeout <seconds>`.
+> **בדיקת גרסה (2026-11-04):** שינויים קשורים ב-CLI נסקרו לעומת `azd` `1.37.2`; זמינות דגמים, גרסאות, ומכסת שימוש נשארות תלויות אזור ומנוי. `azd deploy --timeout <seconds>` מפקח על חלון פריסת השירות, לא מבטיח הפעלת הסוכן. ראו [הערות שחרור נוכחיות והנחיות מיגרציה ל-AI](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
 ## תוכן העניינים
 
-- [אסטרטגיית בחירת מודל](#אסטרטגיית-בחירת-מודל)
-- [תצורת AZD למודלים של בינה מלאכותית](#תצורת-azd-למודלים-של-בינה-מלאכותית)
-- [תבניות פריסה](#תבניות-פריסה)
-- [ניהול מודלים](#ניהול-מודלים)
-- [שיקולים בייצור](#שיקולים-בייצור)
-- [ניטור ותצפית](#ניטור-ותצפית)
+- [אסטרטגיית בחירת מודל](#model-selection-strategy)
+- [תצורת AZD עבור מודלים של AI](#azd-configuration-for-ai-models)
+- [דפוסי פריסה](#deployment-patterns)
+- [ניהול מודלים](#model-management)
+- [שיקולים בייצור](#production-considerations)
+- [ניטור ותצפית](#monitoring-and-observability)
 
 ## אסטרטגיית בחירת מודל
 
-### מודלים של Microsoft Foundry Models
+### מודלים של Azure OpenAI ב-Microsoft Foundry
 
-בחר את המודל הנכון למקרה השימוש שלך:
+בחר את המודל המתאים למקרה השימוש שלך:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+הכרז על פריסות מודלים ב-Bicep (להלן), לא בהגדרות `services.*.config.AZURE_OPENAI_MODELS` אקראיות. AZD אינה מפרשת הגדרה כזו כרשימת משאבי מודל. ה-`project` של שירות מצביע למקור היישום, לא לתיקיית ה-`infra/` שלו.
 
-### תכנון קיבולת מודל
+הדוגמאות משתמשות בגרסת `gpt-4.1-mini` שפורסמה **`2025-04-14`** ובגרסת ההטמעה **`1`**. אשר שהגרסה וה-SKU של הפריסה נתמכים באזור/חשבון היעד לפני ההקצאה.
 
-| סוג המודל | מקרה שימוש | קיבולת מומלצת | שיקולי עלות |
+### תכנון קיבולת המודל
+
+| סוג המודל | מקרה השימוש | דרישת סימנים משוערת | שיקולי עלות |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | שיחה, שאלות ותשובות | 10-50 TPM | יעיל בעלות עבור רוב העומסים |
-| gpt-4.1 | חשיבה מורכבת | 20-100 TPM | עלות גבוהה יותר, לשימוש בתכונות פרימיום |
-| text-embedding-3-large | חיפוש, RAG | 30-120 TPM | בחירה חזקה כברירת מחדל לחיפוש סמנטי ושחזור |
-| Whisper | דיבור לטקסט | 10-50 TPM | עומסי עיבוד קול |
+| gpt-4.1-mini | צ'אט, שאלות ותשובות | 10,000-50,000 סימנים לדקה | הערכת עלות ואיכות לעומס העבודה שלך |
+| gpt-4.1 | משימות מורכבות | 20,000-100,000 סימנים לדקה | הערכת גידול איכות אל מול עלות הסימנים |
+| text-embedding-3-large | חיפוש, RAG | 30,000-120,000 סימנים לדקה | התחשבות בכניסה ובתעבורת שאילתות |
+| Whisper | דיבור לטקסט | תכנן לפי משך האודיו ומגבלות הבקשות | אל תיישם נוסחת קיבולת סימנים למודל טקסט |
 
-## תצורת AZD למודלים של בינה מלאכותית
+TPM פירושו סימנים לדקה. לפריסות טקסט סטנדרטיות אלה, `sku.capacity` ב-ARM הוא ב**יחידות של 1,000 TPM**, לא TPM בודדים (קיבולת `10` משמעותה 10,000 TPM). יחס RPM ל-TPM משתנה לפי סוג מודל/פריסה; אמת את שתי המגבלות מול [תיעוד המכסה](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic). טווחים אלה הם דוגמאות, לא המלצות מימדי.
+
+## תצורת AZD עבור מודלים של AI
 
 ### תצורת תבנית Bicep
 
-צור פריסות מודלים בעזרת תבניות Bicep:
+צור פריסות מודלים באמצעות תבניות Bicep:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,21 +108,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
+זהו דוגמה לתשתית **בטווח קבוצת משאבים**, לא תבנית AZD מלאה. החשבון מאפשר גישה לרשת ציבורית ודורש אימות Entra ID/RBAC (`Cognitive Services OpenAI User` לבקשות). לייצור דרוש קצה פרטי, DNS, וחיבור יישום המת beschrieben בפרק 8. AZD זקוק גם למיפוי תבנית/פרמטר ראשי ומשאבי אירוח יישומים; השתמש בדוגמה עובדת לפריסה מלאה.
+
 ### משתני סביבה
 
-קבע את סביבת היישום שלך:
+הגדר את סביבת האפליקציה שלך:
 
 ```bash
-# תצורת .env
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## תבניות פריסה
+אלו שמות שהוגדרו באפליקציה; חבר אותם לתצורת המארח שלך. נקודת הקצה של Azure OpenAI v1 המשמשת לבדיקה למטה אינה דורשת את פרמטר השאילתה המיושן `api-version`; לקוחות ישנים `AzureOpenAI` כן, לכן עקוב אחר גרסת ה-API בה האפליקציה שלך משתמשת.
 
-### תבנית 1: פריסה לאזור בודד
+## דפוסי פריסה
+
+### דפוס 1: פריסה באיזור יחיד
 
 ```yaml
 # azure.yaml - Single region
@@ -146,20 +133,21 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-הטובה ביותר עבור:
+מתאים ל:
 - פיתוח ובדיקות
-- יישומים לשוק בודד
+- יישומים בשוק יחיד
 - אופטימיזציה של עלויות
 
-### תבנית 2: פריסה במספר אזורים
+### דפוס 2: פריסה במספר אזורים
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,14 +157,18 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-הטובה ביותר עבור:
+תכונות החשבון/SKU שהושמטו חייבות להינתן; קטע זה אינו ניתן לפריסה כפי שהוא. פרוס מודלים בכל חשבון ויישם הגדרות ניתוב/כשל ונתוני שהות בנפרד.
+
+מתאים ל:
 - יישומים גלובליים
 - דרישות זמינות גבוהה
 - פיזור עומסים
 
-### תבנית 3: פריסה היברידית
+### דפוס 3: פריסה מעורבת
 
-שלב בין Microsoft Foundry Models לשירותי בינה מלאכותית נוספים:
+שלב מודלים של Microsoft Foundry עם שירותי AI נוספים:
+
+הקטעים הבאים מניחים ששמות ו-`location` ניתנים על ידי תבנית המכילה.
 
 ```bicep
 // Hybrid AI services
@@ -209,14 +201,14 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### בקרת גרסאות
 
-עקוב אחרי גרסאות מודל בתצורת AZD שלך:
+עקוב אחרי גרסאות המודל בתצורת האפליקציה או IaC. JSON זה הוא **דוגמה שהוגדרה באפליקציה**, לא סכמת מודל מובנית ב-AZD; יש ליישם ולפרוס מגנון גיבוי במפורש:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -229,25 +221,25 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### עדכוני מודל
 
-השתמש ב-hooks של AZD לעדכוני מודל:
+השתמש בקוק ב-AZD לבדיקה לקריאה בלבד לזמינות, ואז עדכן IaC והקצה:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# אם הפריסה לוקחת יותר זמן מה.Timeout ברירת המחדל
-azd deploy --timeout 1800
 ```
+
+הרץ את `azd up` **מחוץ** לקוק להחלת תשתית מודל מעודכנת ופריסת קוד. לעולם אל תקרא ל-`azd deploy` מתוך קוק `predeploy`: זה מפעיל מחדש רקורסיבית את אותו קוק. `azd deploy --timeout 1800` מאריך את זמן ההמתנה לפריסת אפליקציה; אינו מעדכן משאבי Bicep.
 
 ### בדיקות A/B
 
-פרוס מספר גרסאות של מודל:
+משאב הדוגמה מטה בוחר שם פריסה וקיבולת; הוא יוצר **פריסה אחת**, לא ניסוי A/B. לניסוי אמיתי, הקצה שני משאבי פריסה נפרדים, נהל הפניה מבוקרת של בקשות לכל אחד, והשווה איכות, שהייה ועלות. הוא מניח `openAi` מדוגמת החשבון:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -273,10 +265,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### תכנון קיבולת
 
-חשב קיבולת דרושה בהתבסס על דפוסי שימוש:
+חשב את הקיבולת הדרושה בהתבסס על דפוסי שימוש:
 
 ```python
-# דוגמה לחישוב קיבולת
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# דוגמה לשימוש
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### תצורת סקיילינג אוטומטי
+פלט צפוי: `Required capacity: 9100 TPM`. עם יחידות קיבולת של 1,000 TPM, עגל למעלה לפחות ל-`10`, ואז אמת את ההערכה הספציפית של RPM ומגבלות שירות (כולל תקציב פלט מבוקש). הערכת דרישת סימנים זו אינה הבטחה נגד החסימה.
 
-קבע סקיילינג אוטומטי לאפליקציות מכולות:
+### תצורת קנה מידה אוטומטי
+
+הגדר קנה מידה אוטומטי עבור Container Apps:
+
+**משאב חלקי:** שלב את הגדרות `template.scale` לתוך Container App מלא עם מיקום, סביבה מנוהלת, תמונת מכולה, משאבים וכניסה. הגדלת העתקים אינה מגדילה את מכסת המודל.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,18 +335,21 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### אופטימיזציית עלויות
 
-הטמע בקרות עלויות:
+יישם ביקורות עלויות:
+
+**משאב תקציב דוגמטי:** הגדר את `budgetStartDate` כראשון לחודש הנוכחי ב-UTC (לדוגמה `2026-11-01T00:00:00Z` לביקורת זו), והחלף את כתובת הקשר. ההתחלה חייבת לעמוד במגבלות התאריך הנוכחי של השירות. תקציבים מזהירים באיחור בנתוני חיוב; הם אינם מפסיקים את ההוצאה.
 
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -372,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### אינטגרציה עם Application Insights
 
-קבע ניטור לעומסי בינה מלאכותית:
+הגדר ניטור לעומסי עבודה של AI:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
+
+קטע המשאב מניח `applicationInsightsName`, `location`, ו-`logAnalyticsWorkspace` קיים. הוא מקצה ניטור, אך אינו מגדיר את האפליקציה ואינו יוצר מדדים מותאמים אישית.
 
 ### מדדים מותאמים אישית
 
-עקוב אחרי מדדים ספציפיים לבינה מלאכותית:
+עקוב אחרי מדדים ייחודיים ל-AI:
+
+השתמש ב[הפצת Azure Monitor OpenTelemetry הנתמכת](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python), לא ב-SDK הפייתון `applicationinsights` הישן. התקן את `azure-monitor-opentelemetry`, הגדר את `APPLICATIONINSIGHTS_CONNECTION_STRING`, ואתחל פעם אחת בעת ההפעלה:
 
 ```python
-# טלמטריה מותאמת אישית עבור מודלי בינה מלאכותית
-import logging
-from applicationinsights import TelemetryClient
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
 
-### בדיקת בריאות
+זה מדגים שליחת מאפיינים, לא כלים לקריאה ממשית למודל. עטוף את הבקשה האמיתית בבזק על מנת למדוד את משכה; בדוק ב-`dependencies`/`traces` ב-Application Insights. אל תשלח פקודות, תגובות, מפתחות, או הודעות שגיאה גולמיות עם נתונים רגישים.
 
-הטמע ניטור בריאות של שירותי בינה מלאכותית:
+### בדיקות בריאות
+
+יישם ניטור בריאות שירות AI:
+
+התקן את `fastapi`, `uvicorn`, `httpx`, ו-`azure-identity`. הגדר למעלה את משתני ה-endpoint/הפריסה והענק לייצרן את `Cognitive Services OpenAI User`. זוהי **בדיקת מוכנות** המשתמשת במישור הנתונים Azure OpenAI v1 עם Entra ID; מבצעת קריאת מודל לחיוב. הרץ עם `uvicorn health:app` לאחר שמירת הקובץ כ-`health.py`. השתמש בבדיקת חיים נפרדת קלה, נהל הגבלה/מטמון לתוצאות המוכנות, ואל תחשוף נתיב זה בציבור ללא בקרות גישה.
 
 ```python
-# נקודות קצה לבדיקת מצב בריאות
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,43 +431,49 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # בדוק חיבור ל-OpenAI
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
 
-## צעדים הבאים
+צפוי: `GET /health/ai-models` מחזיר `200 {"status":"healthy"}` כאשר פריסת הצ'ט שהוגדרה זמינה לשימוש, או `503` ללא חשיפת פרטים מקדימים. רשימת פריסות היא פעולה במישור הניהול ואינה מהווה בדיקת בריאות למישור הנתונים.
 
-1. **סקור את [מדריך האינטגרציה של Microsoft Foundry](microsoft-foundry-integration.md)** עבור תבניות אינטגרציה של שירותים
-2. **סיים את [סדנת המעבדה לבינה מלאכותית](ai-workshop-lab.md)** לניסיון מעשי
-3. **הטמע [פרקטיקות בינה מלאכותית לייצור](production-ai-practices.md)** לפריסות ארגוניות
-4. **חקור את [מדריך פתרון הבעיות לבינה מלאכותית](../chapter-07-troubleshooting/ai-troubleshooting.md)** לבעיות נפוצות
+## השלבים הבאים
+
+1. **סקור את [מדריך האינטגרציה של Microsoft Foundry](microsoft-foundry-integration.md)** לדפוסי אינטגרציה של שירות
+2. **סיים את [מעבדת הסדנה AI](ai-workshop-lab.md)** לניסיון מעשי
+3. **יישם [פרקטיקות AI לייצור](../chapter-08-production/production-ai-practices.md)** לפריסות ארגוניות
+4. **חקור את [מדריך פתרון בעיות AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** לבעיות נפוצות
 
 ## משאבים
 
-- [זמינות מודלים של Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [זמינות מודלים ב-Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [תיעוד Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [סקיילינג של Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [אופטימיזציית עלות למודל בינה מלאכותית](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [קנה מידה של Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [אופטימיזציית עלויות למודל AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**ניווט בפרק:**
+**ניווט בפרקים:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 2 - פיתוח מונחה בינה מלאכותית
-- **⬅️ קודם**: [אינטגרציית Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ הבא**: [סדנת מעבדה לבינה מלאכותית](ai-workshop-lab.md)
+- **📖 הפרק הנוכחי**: פרק 2 - פיתוח עם AI כראשון
+- **⬅️ קודם**: [סוכני AI](agents.md)
+- **➡️ הבא**: [מעבדת סדנת AI](ai-workshop-lab.md)
 - **🚀 הפרק הבא**: [פרק 3: תצורה](../chapter-03-configuration/configuration.md)
 
 ---

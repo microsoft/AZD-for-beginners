@@ -1,221 +1,25 @@
-# 4. Konfigurácia šablóny
+# 4. Nakonfigurujte šablónu
 
 !!! tip "NA KONCI TOHTO MODULU BUDETE SCHOPNÍ"
 
-    - [ ] Pochopiť účel `azure.yaml`
-    - [ ] Pochopiť štruktúru `azure.yaml`
-    - [ ] Pochopiť význam `hooks` v životnom cykle azd
-    - [ ] **Lab 4:** Preskúmať a upraviť premenné prostredia
+    - [ ] Explain the purpose and structure of `azure.yaml`
+    - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
+    - [ ] Configure the selected environment using inputs supported by the template
+    - [ ] **Lab 4:** Review a configuration change before provisioning it
 
 ---
 
-!!! prompt "Na čo slúži súbor `azure.yaml`? Použite blok kódu a vysvetlite ho riadok po riadku"
+## 1. Začnite so skutočnou šablónou
 
-      Súbor `azure.yaml` je **konfiguračný súbor pre Azure Developer CLI (azd)**. Definuje, ako by mala byť vaša aplikácia nasadená do Azure, vrátane infraštruktúry, služieb, nasadzovacích hookov a premenných prostredia.
+Otvorte [`azure.yaml` v Začíname s AI agentmi](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/azure.yaml) v repozitári, ktorý ste inicializovali. Zdrojová šablóna sa môže meniť nezávisle od tohto workshopu. Nasledujúci **výňatok** bol skontrolovaný 4. novembra 2026; nie je náhradou za kompletný súbor:
 
----
-
-## 1. Účel a funkčnosť
-
-Tento súbor `azure.yaml` slúži ako **plán nasadenia** pre aplikáciu AI agenta, ktorá:
-
-1. **Overuje prostredie** pred nasadením
-2. **Zriaďuje Azure AI služby** (AI Hub, AI Project, Search, atď.)
-3. **Nasadzuje Python aplikáciu** do Azure Container Apps
-4. **Konfiguruje AI modely** pre chat aj embedding
-5. **Nastavuje monitorovanie a trasovanie** pre AI aplikáciu
-6. **Rieši scenáre** nových i existujúcich Azure AI projektov
-
-Súbor umožňuje **nasadenie jedným príkazom** (`azd up`) kompletného riešenia AI agenta s náležitou validáciou, zriaďovaním prostriedkov a post-nasadením konfigurácie.
-
-??? info "Rozbaľte na zobrazenie: `azure.yaml`"
-
-      Súbor `azure.yaml` definuje, ako má Azure Developer CLI nasadiť a spravovať túto aplikáciu AI agenta v Azure. Rozoberme ho riadok po riadku.
-
-      ```yaml title="" linenums="0"
-
-      # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: do we need hooks? 
-      # TODO: do we need all of the variables?
-
-      name: azd-get-started-with-ai-agents
-      metadata:
-      template: azd-get-started-with-ai-agents@1.0.2
-      requiredVersions:
-      azd: ">=1.14.0"
-
-      hooks:
-      preup:
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-            interactive: true
-            continueOnError: false
-      windows:
-            shell: pwsh
-            run: ./scripts/validate_env_vars.ps1
-            interactive: true
-            continueOnError: false      
-      postprovision:
-      windows:
-            shell: pwsh
-            run: ./scripts/write_env.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-            continueOnError: true
-            interactive: true
-      postdeploy:
-      windows:
-            shell: pwsh
-            run: ./scripts/postdeploy.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-            continueOnError: true
-            interactive: true
-      services:
-      api_and_frontend:
-      project: ./src
-      language: py
-      host: containerapp
-      docker:
-            image: api_and_frontend
-            remoteBuild: true
-      pipeline:
-      variables:
-      - AZURE_RESOURCE_GROUP
-      - AZURE_AIHUB_NAME
-      - AZURE_AIPROJECT_NAME
-      - AZURE_AISERVICES_NAME
-      - AZURE_SEARCH_SERVICE_NAME
-      - AZURE_APPLICATION_INSIGHTS_NAME
-      - AZURE_CONTAINER_REGISTRY_NAME
-      - AZURE_KEYVAULT_NAME
-      - AZURE_STORAGE_ACCOUNT_NAME
-      - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-      - USE_CONTAINER_REGISTRY
-      - USE_APPLICATION_INSIGHTS
-      - USE_AZURE_AI_SEARCH_SERVICE
-      - AZURE_AI_AGENT_NAME
-      - AZURE_AI_AGENT_ID
-      - AZURE_AI_AGENT_DEPLOYMENT_NAME
-      - AZURE_AI_AGENT_DEPLOYMENT_SKU
-      - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-      - AZURE_AI_AGENT_MODEL_NAME
-      - AZURE_AI_AGENT_MODEL_FORMAT
-      - AZURE_AI_AGENT_MODEL_VERSION
-      - AZURE_AI_EMBED_DEPLOYMENT_NAME
-      - AZURE_AI_EMBED_DEPLOYMENT_SKU
-      - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-      - AZURE_AI_EMBED_MODEL_NAME
-      - AZURE_AI_EMBED_MODEL_FORMAT
-      - AZURE_AI_EMBED_MODEL_VERSION
-      - AZURE_AI_EMBED_DIMENSIONS
-      - AZURE_AI_SEARCH_INDEX_NAME
-      - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-      - AZURE_EXISTING_AIPROJECT_ENDPOINT
-      - AZURE_EXISTING_AGENT_ID
-      - ENABLE_AZURE_MONITOR_TRACING
-      - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-      ```
-
----
-
-## 2. Rozobratie súboru
-
-Prejdeme súbor sekciu po sekcii, aby sme pochopili, čo robí - a prečo.
-
-### 2.1 **Hlavička a schéma (1-3)**
-
-```yaml title="" linenums="0"
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-```
-
-- **Riadok 1**: Poskytuje validáciu schémy prostredníctvom YAML language servera pre podporu IDE a IntelliSense
-
-### 2.2 Metaúdaje projektu (5-10)
-
-```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@1.0.2
+  template: azd-get-started-with-ai-agents@2.5.0
 requiredVersions:
   azd: ">=1.14.0"
-```
-
-- **Riadok 5**: Definuje názov projektu používaný Azure Developer CLI
-- **Riadky 6-7**: Určuje, že je to založené na šablóne verzie 1.0.2
-- **Riadky 8-9**: Vyžaduje Azure Developer CLI verziu 1.14.0 alebo vyššiu
-
-### 2.3 Nasadzovacie hooky (11-40)
-
-```yaml title="" linenums="0"
-hooks:
-  preup:
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-      interactive: true
-      continueOnError: false
-    windows:
-      shell: pwsh
-      run: ./scripts/validate_env_vars.ps1
-      interactive: true
-      continueOnError: false      
-```
-
-- **Riadky 11-20**: **Prednasadzovací hook** - beží pred `azd up`
-
-      - Na Unix/Linux: Urobí validačný skript spustiteľným a spustí ho
-      - Na Windows: Spustí PowerShell validačný skript
-      - Obe sú interaktívne a zastavia nasadenie, ak zlyhajú
-
-```yaml  title="" linenums="0"
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Riadky 21-30**: **Post-provision hook** - beží po vytvorení Azure prostriedkov
-
-  - Spustí skripty zapisujúce premenné prostredia
-  - Pokračuje v nasadení aj keď tieto skripty zlyhajú (`continueOnError: true`)
-
-```yaml title="" linenums="0"
-  postdeploy:
-    windows:
-      shell: pwsh
-      run: ./scripts/postdeploy.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Riadky 31-40**: **Post-deploy hook** - beží po nasadení aplikácie
-
-  - Spustí finálne konfiguračné skripty
-  - Pokračuje, aj keď skripty zlyhajú
-
-### 2.4 Konfigurácia služby (41-48)
-
-Toto konfiguruje aplikačnú službu, ktorú nasadzujete.
-
-```yaml title="" linenums="0"
 services:
   api_and_frontend:
     project: ./src
@@ -226,162 +30,109 @@ services:
       remoteBuild: true
 ```
 
-- **Riadok 42**: Definuje službu s názvom "api_and_frontend"
-- **Riadok 43**: Ukazuje na adresár `./src` pre zdrojový kód
-- **Riadok 44**: Špecifikuje Python ako programovací jazyk
-- **Riadok 45**: Používa Azure Container Apps ako hostingovú platformu
-- **Riadky 46-48**: Docker konfigurácia
+- `name` identifikuje projekt AZD; `metadata.template` zaznamenáva verziu šablóny.
+- `requiredVersions.azd` je minimálna verzia šablóny, nie odporúčanie zostať na starej CLI. Použite aktuálne podporovanú verziu AZD.
+- `services` definuje ciele nasadenia aplikácie. Táto šablóna nasadzuje svoje Python API a front-end ako jednu službu Container Apps.
+- `project` je relatívny voči `azure.yaml`.
+- `remoteBuild` požaduje vzdialené zostavenie kontajnera. Vaša identita stále potrebuje príslušné povolenia v Azure.
 
-      - Používa "api_and_frontend" ako názov image
-      - Stavia Docker image vzdialene v Azure (nie lokálne)
+Súbory Bicep šablóny pod `infra/`, nie iba zoznam `services`, deklarujú zdroje ako Microsoft Foundry, nasadenia modelov, úložisko a voliteľné AI Search.
 
-### 2.5 Premenné pipeliny (49-76)
+## 2. Pochopte životný cyklus háčikov
 
-Toto sú premenné, ktoré vám pomáhajú spustiť `azd` v CI/CD pipeline pre automatizáciu
+Prezrite si sekciu `hooks` a jej referencované skripty pred spustením šablóny. Revidovaná verzia obsahuje:
 
-```yaml title="" linenums="0"
-pipeline:
-  variables:
-    - AZURE_RESOURCE_GROUP
-    - AZURE_AIHUB_NAME
-    - AZURE_AIPROJECT_NAME
-    - AZURE_AISERVICES_NAME
-    - AZURE_SEARCH_SERVICE_NAME
-    - AZURE_APPLICATION_INSIGHTS_NAME
-    - AZURE_CONTAINER_REGISTRY_NAME
-    - AZURE_KEYVAULT_NAME
-    - AZURE_STORAGE_ACCOUNT_NAME
-    - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-    - USE_CONTAINER_REGISTRY
-    - USE_APPLICATION_INSIGHTS
-    - USE_AZURE_AI_SEARCH_SERVICE
-    - AZURE_AI_AGENT_NAME
-    - AZURE_AI_AGENT_ID
-    - AZURE_AI_AGENT_DEPLOYMENT_NAME
-    - AZURE_AI_AGENT_DEPLOYMENT_SKU
-    - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-    - AZURE_AI_AGENT_MODEL_NAME
-    - AZURE_AI_AGENT_MODEL_FORMAT
-    - AZURE_AI_AGENT_MODEL_VERSION
-    - AZURE_AI_EMBED_DEPLOYMENT_NAME
-    - AZURE_AI_EMBED_DEPLOYMENT_SKU
-    - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-    - AZURE_AI_EMBED_MODEL_NAME
-    - AZURE_AI_EMBED_MODEL_FORMAT
-    - AZURE_AI_EMBED_MODEL_VERSION
-    - AZURE_AI_EMBED_DIMENSIONS
-    - AZURE_AI_SEARCH_INDEX_NAME
-    - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-    - AZURE_EXISTING_AIPROJECT_ENDPOINT
-    - AZURE_EXISTING_AGENT_ID
-    - ENABLE_AZURE_MONITOR_TRACING
-    - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-```
+| Háčik | Účel | Dôležité správanie |
+|------|-------|--------------------|
+| `preup` | Overenie vstupov prostredia šablóny pred pracovným tokom `up` | Platformovo špecifické shell skripty môžu zastaviť pracovný tok v prípade zlyhania |
+| `postdeploy` | Spustenie nastavenia špecifického pre šablónu po nasadení aplikácie | Skontrolujte `continueOnError` a výstup skriptu; úspešné nasadenie neznamená, že každá úloha nastavenia bola úspešná |
 
-Táto sekcia definuje premenné prostredia používané **počas nasadenia**, usporiadané podľa kategórie:
+Táto verzia **neobsahuje** starší háčik `postprovision` / `write_env`, ktorý bol uvedený v skorších materiáloch workshopu. Nekopírujte odkazy na háčiky do skriptov, ktoré už neexistujú.
 
-- **Názvy Azure prostriedkov (Riadky 51-60)**:
-      - Základné názvy Azure služieb, napr. Resource Group, AI Hub, AI Project, atď.- 
-- **Prepínače funkcií (Riadky 61-63)**:
-      - Booleovské premenné na zapnutie/vypnutie konkrétnych Azure služieb
-- **Konfigurácia AI agenta (Riadky 64-71)**:
-      - Konfigurácia hlavného AI agenta vrátane názvu, ID, nastavení nasadenia a detailov modelu- 
-- **Konfigurácia embeddingu AI (Riadky 72-79)**:
-      - Konfigurácia modelu embedding používaného pre vyhľadávanie vo vektoroch
-- **Vyhľadávanie a monitorovanie (Riadky 80-84)**:
-      - Názov vyhľadávacieho indexu, existujúce ID prostriedkov a nastavenia monitorovania/trasovania
+Kľúče háčikov vyberajú životné cykly udalostí; `posix` a `windows` vyberajú platformové implementácie. `shell`, `run`, `interactive` a `continueOnError` riadia vykonávanie. Sú to spustiteľné skripty s vašimi povoleniami, takže ich skontrolujte rovnako dôkladne ako aplikačný kód.
 
----
+Pozrite si dokumentáciu [AZD háčikov](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-extensibility) pre kompletný životný cyklus.
 
-## 3. Premenné prostredia
-Nasledujúce premenné prostredia ovládajú konfiguráciu a správanie vášho nasadenia, usporiadané podľa ich primárneho účelu. Väčšina premenných má rozumné predvolené hodnoty, ale môžete ich prispôsobiť podľa vašich špecifických požiadaviek alebo existujúcich Azure prostriedkov.
+## 3. Sledovanie vstupov prostredia do infraštruktúry
 
-### 3.1 Povinné premenné 
+Spustite tieto príkazy z inicializovaného vzorového repozitára:
 
-```bash title="" linenums="0"
-# Základné nastavenie Azure
-AZURE_ENV_NAME                    # Názov prostredia (používa sa pri pomenovaní zdrojov)
-AZURE_LOCATION                    # Región nasadenia
-AZURE_SUBSCRIPTION_ID             # Cieľové predplatné
-AZURE_RESOURCE_GROUP              # Názov skupiny prostriedkov
-AZURE_PRINCIPAL_ID                # Používateľský princíp pre RBAC
-
-# Názvy prostriedkov (automaticky vygenerované, ak nie sú špecifikované)
-AZURE_AIHUB_NAME                  # Názov hubu Microsoft Foundry
-AZURE_AIPROJECT_NAME              # Názov AI projektu
-AZURE_AISERVICES_NAME             # Názov účtu služieb AI
-AZURE_STORAGE_ACCOUNT_NAME        # Názov účtu úložiska
-AZURE_CONTAINER_REGISTRY_NAME     # Názov registra kontajnerov
-AZURE_KEYVAULT_NAME               # Názov Key Vaultu (ak sa používa)
-```
-
-### 3.2 Konfigurácia modelu 
-```bash title="" linenums="0"
-# Konfigurácia modelu chatu
-AZURE_AI_AGENT_MODEL_NAME         # Predvolené: gpt-4.1-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Predvolené: OpenAI (alebo Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Predvolené: najnovšie dostupné
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Názov nasadenia pre model chatu
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Predvolené: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Predvolené: 80 (tisíce TPM)
-
-# Konfigurácia modelu vkladania
-AZURE_AI_EMBED_MODEL_NAME         # Predvolené: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Predvolené: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Predvolené: najnovšie dostupné
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Názov nasadenia pre vkladacie modely
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Predvolené: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Predvolené: 50 (tisíce TPM)
-
-# Konfigurácia agenta
-AZURE_AI_AGENT_NAME               # Zobrazovaný názov agenta
-AZURE_EXISTING_AGENT_ID           # Použiť existujúceho agenta (voliteľné)
-```
-
-### 3.3 Prepínače funkcií
-```bash title="" linenums="0"
-# Voliteľné služby
-USE_APPLICATION_INSIGHTS         # Predvolené: true
-USE_AZURE_AI_SEARCH_SERVICE      # Predvolené: false
-USE_CONTAINER_REGISTRY           # Predvolené: true
-
-# Monitorovanie a trasovanie
-ENABLE_AZURE_MONITOR_TRACING     # Predvolené: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Predvolené: false
-
-# Konfigurácia vyhľadávania
-AZURE_AI_SEARCH_INDEX_NAME       # Názov indexu vyhľadávania
-AZURE_SEARCH_SERVICE_NAME        # Názov vyhľadávacej služby
-```
-
-### 3.4 Konfigurácia AI projektu 
-```bash title="" linenums="0"
-# Použiť existujúce zdroje
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Úplné ID zdroja existujúceho AI projektu
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL koncového bodu existujúceho projektu
-```
-
-### 3.5 Skontrolujte svoje premenné
-
-Použite Azure Developer CLI na zobrazenie a správu vašich premenných prostredia:
-
-```bash title="" linenums="0"
-# Zobraziť všetky premenné prostredia pre aktuálne prostredie
-azd env get-values
-
-# Získať konkrétnu premennú prostredia
+```bash
+azd env list
 azd env get-value AZURE_ENV_NAME
-
-# Nastaviť premennú prostredia
-azd env set AZURE_LOCATION eastus
-
-# Nastaviť viacero premenných zo súboru .env
-azd env set --from-file .env
+azd env get-value AZURE_LOCATION
 ```
+
+Prezrite si `infra/main.parameters.json`, aby ste videli, ktoré premenné prostredia šablóna skutočne využíva. Nastavenie ľubovoľného mena pomocou `azd env set` automaticky nezmení zdroj Azure.
+
+Skontrolované predvolené hodnoty zahŕňajú:
+
+| Vstup | Predvolené / účel |
+|-------|-------------------|
+| `AZURE_AI_AGENT_MODEL_NAME` | `gpt-5-mini` |
+| `AZURE_AI_AGENT_MODEL_VERSION` | `2025-08-07` |
+| `AZURE_AI_AGENT_DEPLOYMENT_SKU` | `GlobalStandard` |
+| `AZURE_AI_AGENT_DEPLOYMENT_CAPACITY` | `80`; kvóty jednotiek závisia od modelu a typu nasadenia |
+| `AZURE_AI_EMBED_MODEL_NAME` | `text-embedding-3-small` |
+| `AZURE_AI_EMBED_DIMENSIONS` | `1536` |
+| `USE_APPLICATION_INSIGHTS` | `true` |
+| `USE_AZURE_AI_SEARCH_SERVICE` | `false` |
+| `ENABLE_AZURE_MONITOR_TRACING` | `false` |
+| `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` | `false`; nechajte vypnuté, pokiaľ nebola preskúmaná manipulácia s údajmi |
+
+Toto sú vstupy špecifické pre vzor, nie globálne nastavenia AZD. Pred výberom modelu, SKU, kapacity alebo lokality si skontrolujte [dokumentáciu podpory modelu a regiónu](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) a kvótu vášho predplatného. Neposudzujte každú kapacitnú jednotku ako 1 000 tokenov za minútu.
+
+Ak chcete vybrať iný chatovací model, aktualizujte jeho kompatibilné **meno, verziu, formát, SKU a kapacitu spoločne**, podľa [návodu na prispôsobenie vzoru](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md). Zmena iba mena môže nechať nekompatibilnú verziu alebo typ nasadenia.
+
+## 4. Laboratórium: povolenie voliteľného vyhľadávania a sledovania
+
+!!! warning "Tieto nastavenia môžu pridať fakturovateľné zdroje"
+
+    Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
+
+```bash
+azd env set USE_AZURE_AI_SEARCH_SERVICE true
+azd env set USE_APPLICATION_INSIGHTS true
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+
+# Inspect the infrastructure changes and any configured preview hooks
+azd provision --preview
+
+# Apply the resource changes and deploy the application
+azd up
+```
+
+Zmeny infraštruktúry potrebujú provisionovanie; samotné `azd deploy` nasadzuje len aplikačné služby. Pre indexovanie vyhľadávania a podporované možnosti vyhľadávania postupujte podľa [návodu AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md). Pre monitoring postupujte podľa [návodu na observabilitu](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md).
+
+Nezapojujte zachytávanie obsahu výziev/odpovedí na reálnych zákazníckych údajoch bez potrebného súhlasu, prístupových kontrol, politiky uchovávania a redakcie.
+
+## 5. Existujúce zdroje a CI/CD
+
+Ak chcete znovu použiť projekt Foundry, riaďte sa pokynmi pre [existujúce zdroje vzoru](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md#use-existing-resources). Nastavenie `AZURE_EXISTING_AIPROJECT_RESOURCE_ID` mení cestu nasadenia; v takom prípade šablóna nevytvára Application Insights ani AI Search za vás. Explicitne skontrolujte závislosti, priradenia rolí a nasadenia modelov.
+
+Sekcia `pipeline.variables` riadi hodnoty odovzdané do generovaného pipeline; nie je to úložisko tajomstiev a nevytvára zdroje Azure. Preferujte spravovanú identitu v aplikácii a OIDC pre CI/CD. Súbory prostredia AZD sú čistý text a nemali by sa commitovať.
+
+AZD podporuje import dôveryhodného, lokálne pripraveného dotenv súboru:
+
+```bash
+azd env set --file .env
+```
+
+Pred importom tento súbor skontrolujte a nezobrazujte súbory prostredia obsahujúce tajomstvá v zdieľaných termináloch alebo CI záznamoch.
+
+## 6. Otestujte svoje porozumenie
+
+- Ktorá služba `azure.yaml` nasadzuje aplikáciu?
+- Ktorý infraštruktúrny parameter spotrebúva každú hodnotu, ktorú ste zmenili?
+- Ktoré zmeny vyžadujú provisionovanie namiesto iba nasadenia?
+- Podporoval vybraný región a predplatné model a kvótu?
+- Podarilo sa všetkým inštalačným háčikom, a dokážete overiť správanie nasadenej aplikácie?
+
+Pokračujte na [Prispôsobenie šablóny](5-Customize-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zrieknutie sa zodpovednosti**:
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre dôležité informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne výklady, ktoré vzniknú v dôsledku použitia tohto prekladu.
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

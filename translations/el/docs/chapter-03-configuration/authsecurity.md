@@ -1,191 +1,195 @@
-# Πρότυπα Πιστοποίησης και Διαχειριζόμενη Ταυτότητα
+# Πρότυπα Αυθεντικοποίησης και Διαχειριζόμενη Ταυτότητα
 
-⏱️ **Εκτιμώμενος Χρόνος**: 45-60 λεπτά | 💰 **Επιπτώσεις Κόστους**: Δωρεάν (χωρίς πρόσθετες χρεώσεις) | ⭐ **Πολυπλοκότητα**: Μεσαίο
+⏱️ **Εκτιμώμενος Χρόνος**: 45-60 λεπτά ανάγνωσης· επιτρέψτε επιπλέον χρόνο για ενσωμάτωση ασκήσεων | 💰 **Επίδραση Κόστους**: Η ταυτότητα/RBAC είναι δωρεάν· η αναπτυχθείσα υπολογιστική ισχύς, αποθήκευση και Key Vault χρεώνονται | ⭐ **Πολυπλοκότητα**: Μεσαίου επιπέδου
 
-**📚 Μονοπάτι Μάθησης:**
+> Ελεγμένο σύμφωνα με `azd 1.37.2` (Νοέμβριος 2026). Αυτό το μάθημα περιέχει **ενδεικτικά τμήματα ενσωμάτωσης, όχι πλήρες πρότυπο λήψης `secure-app`**. Δημιουργήστε τα αναφερόμενα αρχεία, παρέχετε την αντίστοιχη υποδομή και αντικαταστήστε τα στοιχεία κράτησης πριν την ανάπτυξη. Δεν αναπτύχθηκαν πόροι Azure κατά τον έλεγχο.
+
+**📚 Διαδρομή Μάθησης:**
 - ← Προηγούμενο: [Διαχείριση Διαμόρφωσης](configuration.md) - Διαχείριση μεταβλητών περιβάλλοντος και μυστικών
-- 🎯 **Είστε Εδώ**: Πιστοποίηση & Ασφάλεια (Διαχειριζόμενη Ταυτότητα, Key Vault, ασφαλή πρότυπα)
-- → Επόμενο: [Πρώτο Έργο](first-project.md) - Δημιουργήστε την πρώτη σας εφαρμογή AZD
-- 🏠 [Αρχική Μαθήματος](../../README.md)
+- 🎯 **Είστε εδώ**: Αυθεντικοποίηση & Ασφάλεια (Διαχειριζόμενη Ταυτότητα, Key Vault, ασφαλή πρότυπα)
+- → Επόμενο: [Υποδομή ως Κώδικας](../chapter-04-infrastructure/README.md) - Παροχή και ανάπτυξη πόρων
+- 🏠 [Αρχική Σελίδα Μαθήματος](../../README.md)
 
 ---
 
-## Τι θα μάθετε
+## Τι Θα Μάθετε
 
-Με την ολοκλήρωση αυτού του μαθήματος, θα:
-- Κατανοήσετε τα πρότυπα πιστοποίησης του Azure (κλειδιά, connection strings, διαχειριζόμενη ταυτότητα)
-- Υλοποιήσετε **Διαχειριζόμενη Ταυτότητα** για πιστοποίηση χωρίς κωδικό
+Ολοκληρώνοντας αυτό το μάθημα, θα:
+- Κατανοήσετε τα πρότυπα αυθεντικοποίησης του Azure (κλειδιά, συμβολοσειρές σύνδεσης, διαχειριζόμενη ταυτότητα)
+- Υλοποιήσετε **Διαχειριζόμενη Ταυτότητα** για αυθεντικοποίηση χωρίς κωδικό πρόσβασης
 - Ασφαλίσετε μυστικά με ενσωμάτωση **Azure Key Vault**
-- Διαμορφώσετε **έλεγχο πρόσβασης βασισμένο σε ρόλους (RBAC)** για αναπτύξεις AZD
-- Εφαρμόσετε βέλτιστες πρακτικές ασφάλειας σε Container Apps και υπηρεσίες Azure
-- Μεταβείτε από πιστοποίηση με κλειδιά σε πιστοποίηση με ταυτότητα
+- Διαμορφώσετε τον **έλεγχο πρόσβασης βάσει ρόλων (RBAC)** για αναπτύξεις AZD
+- Εφαρμόσετε βέλτιστες πρακτικές ασφάλειας στις Εφαρμογές Κοντέινερ και υπηρεσίες Azure
+- Μεταβείτε από αυθεντικοποίηση βασισμένη σε κλειδιά σε αυθεντικοποίηση βασισμένη σε ταυτότητα
 
-## Γιατί έχει σημασία η Διαχειριζόμενη Ταυτότητα
+## Γιατί η Διαχειριζόμενη Ταυτότητα Είναι Σημαντική
 
-### Το Πρόβλημα: Παραδοσιακή Πιστοποίηση
+### Το Πρόβλημα: Παραδοσιακή Αυθεντικοποίηση
 
 **Πριν τη Διαχειριζόμενη Ταυτότητα:**
 ```javascript
-// ❌ ΚΙΝΔΥΝΟΣ ΑΣΦΑΛΕΙΑΣ: Σκληροκωδικοποιημένα μυστικά στον κώδικα
+// ❌ SECURITY RISK: Hardcoded secrets in code
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Προβλήματα:**
-- 🔴 **Εκτεθειμένα μυστικά** σε κώδικα, αρχεία ρυθμίσεων, μεταβλητές περιβάλλοντος
-- 🔴 **Περιστροφή διαπιστευτηρίων** απαιτεί αλλαγές κώδικα και επαναδιανομή
-- 🔴 **Καλών ελέγχων** - ποιος προσέβαλε τι, πότε; (nightmares)
-- 🔴 **Διάσπαρτα** - μυστικά σκορπισμένα σε πολλαπλά συστήματα
-- 🔴 **Κίνδυνοι συμμόρφωσης** - αποτυγχάνει σε ελέγχους ασφαλείας
+- 🔴 **Αποκαλυπτόμενα μυστικά** στον κώδικα, στα αρχεία διαμόρφωσης, στις μεταβλητές περιβάλλοντος
+- 🔴 **Ανανέωση διαπιστευτηρίων** απαιτεί αλλαγές κώδικα και εκ νέου ανάπτυξη
+- 🔴 **Εφιάλτες ελέγχου** - ποιος προσέβαλε τι και πότε;
+- 🔴 **Διάσπαρτα μυστικά** - μυστικά σκορπισμένα σε πολλά συστήματα
+- 🔴 **Κίνδυνοι συμμόρφωσης** - αποτυχία ελέγχων ασφαλείας
 
 ### Η Λύση: Διαχειριζόμενη Ταυτότητα
 
 **Μετά τη Διαχειριζόμενη Ταυτότητα:**
 ```javascript
-// ✅ ΑΣΦΑΛΕΣ: Χωρίς μυστικά στον κώδικα
+// ✅ SECURE: No secrets in code
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Το Azure διαχειρίζεται αυτόματα την αυθεντικοποίηση
+  credential  // Azure automatically handles authentication
 );
 ```
 
 **Οφέλη:**
 - ✅ **Μηδενικά μυστικά** στον κώδικα ή τη διαμόρφωση
-- ✅ **Αυτόματη περιστροφή** - το Azure το διαχειρίζεται
-- ✅ **Πλήρες ιστορικό ελέγχων** στα αρχεία καταγραφής του Microsoft Entra ID
-- ✅ **Κεντρικοποιημένη ασφάλεια** - διαχείριση στο Azure Portal
+- ✅ **Αυτόματη ανανέωση** - το Azure το διαχειρίζεται
+- ✅ **Πλήρες ιστορικό ελέγχου** στα αρχεία καταγραφής Microsoft Entra ID
+- ✅ **Κεντρική ασφάλεια** - διαχείριση στο Azure Portal
 - ✅ **Έτοιμο για συμμόρφωση** - πληροί πρότυπα ασφάλειας
 
-**Αναλογία**: Η παραδοσιακή πιστοποίηση είναι σαν να κουβαλάτε πολλαπλά φυσικά κλειδιά για διαφορετικές πόρτες. Η Διαχειριζόμενη Ταυτότητα είναι σαν ένα ταυτότητα/κάρτα ασφαλείας που παρέχει αυτόματα πρόσβαση βάσει του ποιος είστε — χωρίς κλειδιά για να χαθούν, αντιγραφούν ή περιστραφούν.
+**Παρομοίωση**: Η παραδοσιακή αυθεντικοποίηση είναι σαν να κουβαλάς πολλαπλά φυσικά κλειδιά για διαφορετικές πόρτες. Η Διαχειριζόμενη Ταυτότητα είναι σαν να έχεις ταυτότητα ασφαλείας που παρέχει αυτόματα πρόσβαση ανάλογα με το ποιος είσαι - χωρίς κλειδιά να χάνονται, να αντιγράφονται ή να ανανεώνονται.
 
 ---
 
 ## Επισκόπηση Αρχιτεκτονικής
 
-### Ροή Πιστοποίησης με Διαχειριζόμενη Ταυτότητα
+### Ροή Αυθεντικοποίησης με Διαχειριζόμενη Ταυτότητα
 
 ```mermaid
 sequenceDiagram
-    participant App as Η εφαρμογή σας<br/>(Εφαρμογή σε κοντέινερ)
-    participant MI as Διαχειριζόμενη ταυτότητα<br/>(Microsoft Entra ID)
-    participant KV as Αποθήκη κλειδιών
-    participant Storage as Αποθήκευση Azure
+    participant App as Your Application<br/>(Container App)
+    participant MI as Managed Identity<br/>(Microsoft Entra ID)
+    participant KV as Key Vault
+    participant Storage as Azure Storage
     participant DB as Azure SQL
     
-    App->>MI: Αίτηση διακριτικού πρόσβασης<br/>(αυτόματη)
-    MI->>MI: Επαλήθευση ταυτότητας<br/>(χωρίς κωδικό)
-    MI-->>App: Επιστροφή διακριτικού<br/>(έγκυρο για 1 ώρα)
+    App->>MI: Request access token<br/>(automatic)
+    MI->>MI: Verify identity<br/>(no password needed)
+    MI-->>App: Return token for requested audience<br/>(lifetime varies)
     
-    App->>KV: Λήψη μυστικού<br/>(χρησιμοποιώντας το διακριτικό)
-    KV->>KV: Έλεγχος δικαιωμάτων RBAC
-    KV-->>App: Επιστροφή τιμής μυστικού
+    App->>KV: Get secret<br/>(using token)
+    KV->>KV: Check RBAC permissions
+    KV-->>App: Return secret value
     
-    App->>Storage: Μεταφόρτωση blob<br/>(χρησιμοποιώντας το διακριτικό)
-    Storage->>Storage: Έλεγχος δικαιωμάτων RBAC
-    Storage-->>App: Επιτυχία
+    App->>Storage: Upload blob<br/>(using token)
+    Storage->>Storage: Check RBAC permissions
+    Storage-->>App: Success
     
-    App->>DB: Ερώτημα δεδομένων<br/>(χρησιμοποιώντας το διακριτικό)
-    DB->>DB: Έλεγχος δικαιωμάτων SQL
-    DB-->>App: Επιστροφή αποτελεσμάτων
+    App->>DB: Query data<br/>(using token)
+    DB->>DB: Check SQL permissions
+    DB-->>App: Return results
     
-    Note over App,DB: Όλη η αυθεντικοποίηση χωρίς κωδικούς!
+    Note over App,DB: Request a separate token for each service audience;<br/>SDK credentials handle caching and renewal
 ```
 
 ### Τύποι Διαχειριζόμενων Ταυτοτήτων
 
 ```mermaid
 graph TB
-    MI[Διαχειριζόμενη ταυτότητα]
-    SystemAssigned[Ταυτότητα εκχωρημένη στο σύστημα]
-    UserAssigned[Ταυτότητα εκχωρημένη στον χρήστη]
+    MI[Managed Identity]
+    SystemAssigned[System-Assigned Identity]
+    UserAssigned[User-Assigned Identity]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Κύκλος ζωής συνδεδεμένος με τον πόρο]
-    SystemAssigned --> SA2[Αυτόματη δημιουργία/διαγραφή]
-    SystemAssigned --> SA3[Ιδανικό για μεμονωμένο πόρο]
+    SystemAssigned --> SA1[Lifecycle tied to resource]
+    SystemAssigned --> SA2[Automatic creation/deletion]
+    SystemAssigned --> SA3[Best for single resource]
     
-    UserAssigned --> UA1[Ανεξάρτητος κύκλος ζωής]
-    UserAssigned --> UA2[Χειροκίνητη δημιουργία/διαγραφή]
-    UserAssigned --> UA3[Κοινόχρηστο μεταξύ πόρων]
+    UserAssigned --> UA1[Independent lifecycle]
+    UserAssigned --> UA2[Manual creation/deletion]
+    UserAssigned --> UA3[Shared across resources]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
 
-| Χαρακτηριστικό | Καθορισμένη από το σύστημα | Καθορισμένη από τον χρήστη |
-|---------|----------------|---------------|
-| **Κύκλος ζωής** | Συσχετισμένη με πόρο | Ανεξάρτητη |
+| Χαρακτηριστικό | Αντιστοιχισμένη από το Σύστημα | Αντιστοιχισμένη από τον Χρήστη |
+|--------------|---------------------------|-------------------------|
+| **Κύκλος Ζωής** | Δεμένη στον πόρο | Ανεξάρτητη |
 | **Δημιουργία** | Αυτόματη με τον πόρο | Χειροκίνητη δημιουργία |
-| **Διαγραφή** | Διαγράφεται με τον πόρο | Παραμένει μετά τη διαγραφή του πόρου |
-| **Κοινή χρήση** | Μόνο ένας πόρος | Πολλοί πόροι |
-| **Σενάριο χρήσης** | Απλά σενάρια | Σύνθετα σενάρια με πολλαπλούς πόρους |
-| **Προεπιλογή AZD** | ✅ Συνιστάται | Προαιρετικό |
+| **Διαγραφή** | Διαγράφεται με τον πόρο | Παραμένει μετά τη διαγραφή πόρου |
+| **Κοινή χρήση** | Μόνο σε έναν πόρο | Σε πολλούς πόρους |
+| **Περίπτωση Χρήσης** | Απλά σενάρια | Πολύπλοκα σενάρια με πολλούς πόρους |
+| **Επιλογή Προτύπου** | Ορισμένο στην υποδομή | Ορισμένο στην υποδομή |
 
 ---
 
 ## Προαπαιτούμενα
 
-### Απαιτούμενα Εργαλεία
+### Απαραίτητα Εργαλεία
 
-Θα πρέπει ήδη να έχετε εγκατεστημένα τα ακόλουθα από προηγούμενα μαθήματα:
+Πρέπει να έχετε ήδη εγκαταστήσει από προηγούμενα μαθήματα:
 
 ```bash
-# Επαλήθευση Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Αναμενόμενο: azd έκδοση 1.0.0 ή νεότερη
+# ✅ Expected: azd version 1.0.0 or higher
 
-# Επαλήθευση Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Αναμενόμενο: azure-cli 2.50.0 ή νεότερη
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Απαιτήσεις Azure
 
-- Ενεργή συνδρομή Azure
+- Ενεργή συνδρομή στο Azure
 - Δικαιώματα για:
   - Δημιουργία διαχειριζόμενων ταυτοτήτων
   - Ανάθεση ρόλων RBAC
   - Δημιουργία πόρων Key Vault
-  - Ανάπτυξη Container Apps
+  - Ανάπτυξη Εφαρμογών Κοντέινερ
 
-### Προαπαιτούμενες Γνώσεις
+### Γνώσεις Προαπαιτούμενες
 
-Θα πρέπει να έχετε ολοκληρώσει:
-- [Οδηγός Εγκατάστασης](installation.md) - Ρύθμιση AZD
-- [Βασικά AZD](azd-basics.md) - Κύριες έννοιες
+Πρέπει να έχετε ολοκληρώσει:
+- [Οδηγός Εγκατάστασης](../chapter-01-foundation/installation.md) - Ρύθμιση AZD
+- [Βασικά AZD](../chapter-01-foundation/azd-basics.md) - Βασικές έννοιες
 - [Διαχείριση Διαμόρφωσης](configuration.md) - Μεταβλητές περιβάλλοντος
 
 ---
 
-## Μάθημα 1: Κατανόηση Προτύπων Πιστοποίησης
+## Μάθημα 1: Κατανόηση Προτύπων Αυθεντικοποίησης
 
-### Πρότυπο 1: Συμβολοσειρές Σύνδεσης (Παλιό - Αποφεύγετε)
+### Πρότυπο 1: Συμβολοσειρές Σύνδεσης (Παραδοσιακό - Αποφύγετε)
 
 **Πώς λειτουργεί:**
 ```bash
-# Η συμβολοσειρά σύνδεσης περιέχει διαπιστευτήρια
+# Connection string contains credentials
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
 **Προβλήματα:**
-- ❌ Μυστικά ορατά σε μεταβλητές περιβάλλοντος
-- ❌ Καταγράφονται σε συστήματα ανάπτυξης
-- ❌ Δύσκολη περιστροφή
-- ❌ Χωρίς ιστορικό ελέγχων πρόσβασης
+- ❌ Τα μυστικά είναι ορατά στις μεταβλητές περιβάλλοντος
+- ❌ Καταγεγραμμένα στα συστήματα ανάπτυξης
+- ❌ Δύσκολη η ανανέωση
+- ❌ Δεν υπάρχει ιστορικό ελέγχου πρόσβασης
 
-**Πότε να χρησιμοποιήσετε:** Μόνο για τοπική ανάπτυξη, ποτέ για παραγωγή.
+**Πότε να χρησιμοποιηθεί:** Όταν η στοχευόμενη υπηρεσία απαιτεί αυθεντικοποίηση βασισμένη σε κλειδί. Προτιμήστε την ταυτότητα όπου υποστηρίζεται· αλλιώς αποθηκεύστε τα κλειδιά με ασφάλεια και ανανεώστε τα, ακόμα και σε παραγωγή.
 
 ---
 
 ### Πρότυπο 2: Αναφορές Key Vault (Καλύτερο)
 
 **Πώς λειτουργεί:**
+**Μερικά τμήματα Bicep:** απαραίτητα πεδία vault, ταυτότητα Container App και η `configuration.secrets` εισαγωγή παραλείπονται. Το `secretRef` αναφέρει όνομα μυστικού Container App· δεν είναι **αυτοτελές** URI Key Vault. Για χρήση Key Vault, ορίστε το συγκεκριμένο μυστικό με `keyVaultUrl` και εγκεκριμένο `identity`.
+
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -207,19 +211,21 @@ env: [
 **Οφέλη:**
 - ✅ Τα μυστικά αποθηκεύονται με ασφάλεια στο Key Vault
 - ✅ Κεντρική διαχείριση μυστικών
-- ✅ Περιστροφή χωρίς αλλαγές στον κώδικα
+- ✅ Ανανέωση χωρίς αλλαγές στον κώδικα
 
 **Περιορισμοί:**
-- ⚠️ Ακόμα χρήση κλειδιών/κωδικών
-- ⚠️ Χρειάζεται διαχείριση πρόσβασης στο Key Vault
+- ⚠️ Χρησιμοποιούνται ακόμα κλειδιά/κωδικοί
+- ⚠️ Απαιτείται διαχείριση πρόσβασης Key Vault
 
-**Πότε να χρησιμοποιήσετε:** Βήμα μετάβασης από connection strings σε διαχειριζόμενη ταυτότητα.
+**Πότε να χρησιμοποιηθεί:** Βήμα μετάβασης από συμβολοσειρές σύνδεσης προς διαχειριζόμενη ταυτότητα.
 
 ---
 
-### Πρότυπο 3: Διαχειριζόμενη Ταυτότητα (Καλύτερη Πρακτική)
+### Πρότυπο 3: Διαχειριζόμενη Ταυτότητα (Βέλτιστη Πρακτική)
 
 **Πώς λειτουργεί:**
+**Μερικά Bicep:** συγχωνεύστε το μπλοκ ταυτότητας σε πλήρη Container App και παρέχετε `storageAccount` και τον ορισμό ρόλου. Ανάθεση ρόλου απαιτεί επίσης καθοριστικό `name`.
+
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -231,17 +237,19 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 // Grant permissions
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(storageAccount.id, containerApp.id, storageBlobDataContributorRole)
   scope: storageAccount
   properties: {
     roleDefinitionId: storageBlobDataContributorRole
     principalId: containerApp.identity.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 ```
 
 **Κώδικας εφαρμογής:**
 ```javascript
-// Δεν χρειάζονται μυστικά!
+// No secrets needed!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -254,31 +262,31 @@ const blobServiceClient = new BlobServiceClient(
 
 **Οφέλη:**
 - ✅ Μηδενικά μυστικά στον κώδικα/διαμόρφωση
-- ✅ Αυτόματη περιστροφή διαπιστευτηρίων
-- ✅ Πλήρες ιστορικό ελέγχων
+- ✅ Αυτόματη ανανέωση διαπιστευτηρίων
+- ✅ Πλήρες ιστορικό ελέγχου
 - ✅ Δικαιώματα βάσει RBAC
 - ✅ Έτοιμο για συμμόρφωση
 
-**Πότε να χρησιμοποιήσετε:** Πάντα, για παραγωγικές εφαρμογές.
+**Πότε να χρησιμοποιηθεί:** Προτιμήστε για εφαρμογές που φιλοξενούνται στο Azure και έχουν πρόσβαση σε υπηρεσίες που υποστηρίζουν αυθεντικοποίηση Microsoft Entra.
 
 ---
 
-### Πρότυπο 4: Service Principals (CI/CD & Αυτοματισμός)
+### Πρότυπο 4: Υπηρεσιακοί Χρήστες (CI/CD & Αυτοματισμός)
 
-Η διαχειριζόμενη ταυτότητα είναι το χρυσό πρότυπο για πόρους που εκτελούνται εντός Azure. Αλλά τι γίνεται με πράγματα που εκτελούνται **εκτός** Azure — όπως ένας αγωγός CI/CD σε έναν build agent, ή ένα script στο laptop σας που δεν μπορεί να χρησιμοποιήσει την αλληλεπιδραστική σύνδεσή σας; Εκεί έρχεται το **service principal**: μια μη ανθρώπινη ταυτότητα με τα δικά της διαπιστευτήρια που μια αυτοματοποιημένη διαδικασία μπορεί να χρησιμοποιήσει.
+Η διαχειριζόμενη ταυτότητα είναι το χρυσό πρότυπο *για πόρους που τρέχουν μέσα στο Azure*. Αλλά τι γίνεται με πράγματα που τρέχουν **εκτός** Azure — όπως μια ροή CI/CD σε έναν πράκτορα δημιουργίας, ή ένα σενάριο στο λάπτοπ σας που δεν μπορεί να χρησιμοποιήσει την αλληλεπιδραστική είσοδό σας; Εκεί έρχεται ο **υπηρεσιακός χρήστης**: μια μη ανθρώπινη ταυτότητα με δικά της διαπιστευτήρια που μπορεί να χρησιμοποιεί μια αυτοματοποιημένη διαδικασία.
 
 **Πώς λειτουργεί:**
 
-Δημιουργήστε ένα service principal με scope σε ένα resource group (ελάχιστα δικαιώματα):
+Δημιουργήστε έναν υπηρεσιακό χρήστη περιορισμένο σε μια ομάδα πόρων (ελάχιστα προνόμια):
 
 ```bash
 az ad sp create-for-rbac \
   --name "myapp-cicd" \
   --role contributor \
-  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+  --scopes "/subscriptions/<sub-id>/resourceGroups/<rg-name>"
 ```
 
-Αυτό εμφανίζει ένα client ID, client secret, και tenant ID. Το azd μπορεί να συνδεθεί με αυτά μη αλληλεπιδραστικά:
+Αυτό εμφανίζει ένα client ID, client secret και tenant ID. Το azd μπορεί να κάνει είσοδο με αυτά μη αλληλεπιδραστικά:
 
 ```bash
 azd auth login \
@@ -287,7 +295,7 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-**Προτιμήστε federated credentials (OIDC) αντί για μυστικά.** Αντί για ένα μακροχρόνιο client secret, διαμορφώστε ένα federated credential ώστε το pipeline να ανταλλάσσει ένα βραχύβιο token—δεν υπάρχει μυστικό για διαρροή ή περιστροφή:
+**Προτιμήστε διαπιστευτήρια ομοσπονδίας (OIDC) αντί για μυστικά.** Αντί για μακροχρόνιο client secret, διαμορφώστε ένα ομοσπονδιακό διαπιστευτήριο ώστε η ροή εργασίας να ανταλλάσσει ένα βραχύβιο διακριτικό — χωρίς μυστικό να εκτίθεται ή να ανανεώνεται:
 
 ```bash
 azd auth login \
@@ -296,33 +304,33 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-> `azd pipeline config` ρυθμίζει αυτόματα αυτό για εσάς. Δείτε τους οδηγούς CI/CD στο [Κεφάλαιο 8](../chapter-08-production/production-ai-practices.md).
+> `azd pipeline config` το ρυθμίζει αυτό αυτόματα για εσάς. Δείτε τα βήματα CI/CD στο [Κεφάλαιο 8](../chapter-08-production/production-ai-practices.md).
 
 **Οφέλη:**
-- ✅ Λειτουργεί εκτός Azure (build agents, on-prem, άλλα clouds)
-- ✅ Μπορεί να περιοριστεί σε ένα resource group με έναν ρόλο
-- ✅ Η παραλλαγή Federated (OIDC) δεν χρησιμοποιεί αποθηκευμένο μυστικό
+- ✅ Λειτουργεί εκτός Azure (πράκτορες κατασκευής, εσωτερικά δίκτυα, άλλα clouds)
+- ✅ Μπορεί να περιοριστεί σε μία ομάδα πόρων με έναν ρόλο
+- ✅ Η ομοσπονδιακή (OIDC) μορφή δεν χρησιμοποιεί αποθηκευμένο μυστικό
 
-**Αντίβαρα:**
-- ⚠️ Η παραλλαγή με μυστικά απαιτεί προσεκτική αποθήκευση και περιστροφή
-- ⚠️ Ένα διαρρεύσαν μυστικό δίνει ό,τι δικαιώματα έχει το SP—κρατήστε τα scopes μικρά
+**Αντισταθμίσεις:**
+- ⚠️ Η μορφή με μυστικό απαιτεί προσεκτική αποθήκευση και ανανέωση
+- ⚠️ Αν διαρρεύσει το μυστικό, παρέχει πλήρη δικαιώματα - περιορίστε αυστηρά το πεδίο
 
-**Πότε να χρησιμοποιήσετε:** Pipelines CI/CD και αυτοματισμοί που δεν μπορούν να χρησιμοποιήσουν διαχειριζόμενη ταυτότητα. Προτιμήστε πάντα την παραλλαγή **federated/OIDC** αντί του client secret, και προτιμήστε διαχειριζόμενη ταυτότητα όταν το φορτίο εκτελείται εντός Azure.
+**Πότε να χρησιμοποιήσετε:** Ροές εργασίας CI/CD και αυτοματισμοί που δεν μπορούν να χρησιμοποιήσουν διαχειριζόμενη ταυτότητα. Πάντα προτιμήστε την **ομοσπονδιακή/OIDC** μορφή έναντι του client secret, και προτιμήστε τη διαχειριζόμενη ταυτότητα όταν το φορτίο εκτελείται μέσα στο Azure.
 
 **Αποθήκευση διαπιστευτηρίων με ασφάλεια:**
-- Μην αποθηκεύετε μυστικά σε αποθετήρια—χρησιμοποιήστε το αποθηκευτικό στοιχείο μυστικών του pipeline (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
-- Περιορίστε το SP στον ελάχιστο ρόλο και resource group που χρειάζεται.
-- Ορίστε ημερομηνία λήξης και περιστρέψτε, ή εξαλείψτε το μυστικό εντελώς με OIDC.
+- Ποτέ μην καταχωρείτε μυστικά—χρησιμοποιήστε το μυστικό αποθήκευσης της ροής σας (GitHub Actions secrets, Azure DevOps groups μεταβλητών / Key Vault).
+- Περιορίστε τον υπηρεσιακό χρήστη στον ελάχιστο απαιτούμενο ρόλο και ομάδα πόρων.
+- Ορίστε ημερομηνία λήξης και ανανεώστε ή αφαιρέστε το μυστικό εντελώς με OIDC.
 
 ---
 
 ## Μάθημα 2: Υλοποίηση Διαχειριζόμενης Ταυτότητας με AZD
 
-### Βήμα-βήμα Υλοποίηση
+### Υλοποίηση Βήμα-βήμα
 
-Ας κατασκευάσουμε ένα ασφαλές Container App που χρησιμοποιεί διαχειριζόμενη ταυτότητα για πρόσβαση στο Azure Storage και Key Vault.
+Τα παρακάτω τμήματα δείχνουν πώς να ενσωματώσετε διαχειριζόμενη ταυτότητα σε έργο Container App. Δεν είναι **αντιγραφή-εκτέλεση αρχικό πλαίσιο**: το Storage module, πλήρης υποδομή διαχειριζόμενου περιβάλλοντος/καταλόγου, Dockerfile και αρχείο παραμέτρων δεν παρέχονται πλήρως εδώ. Ξεκινήστε από ένα λειτουργικό πρότυπο Container Apps και ενσωματώστε αυτά τα πρότυπα, διατηρώντας τη διαμόρφωση καταλόγου και τις ετικέτες υπηρεσιών.
 
-### Δομή έργου
+### Δομή Έργου
 
 ```
 secure-app/
@@ -354,7 +362,7 @@ services:
     language: js
     host: containerapp
 
-# Enable managed identity (AZD handles this automatically)
+# Managed identity must be enabled in the infrastructure, not by this YAML.
 ```
 
 ### 2. Υποδομή: Ενεργοποίηση Διαχειριζόμενης Ταυτότητας
@@ -366,6 +374,8 @@ targetScope = 'subscription'
 
 param environmentName string
 param location string = 'eastus'
+param containerAppsEnvironmentId string
+param containerImage string
 
 var tags = { 'azd-env-name': environmentName }
 
@@ -408,6 +418,8 @@ module containerApp './app/container-app.bicep' = {
     tags: tags
     storageAccountName: storage.outputs.name
     keyVaultName: keyVault.outputs.name
+    containerAppsEnvironmentId: containerAppsEnvironmentId
+    containerImage: containerImage
   }
 }
 
@@ -418,7 +430,8 @@ module storageRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'  // Storage Blob Data Contributor
-    targetResourceId: storage.outputs.id
+    targetResourceType: 'storage'
+    targetResourceName: storage.outputs.name
   }
 }
 
@@ -429,7 +442,8 @@ module kvRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: '4633458b-17de-408a-b874-0445c86b69e6'  // Key Vault Secrets User
-    targetResourceId: keyVault.outputs.id
+    targetResourceType: 'keyvault'
+    targetResourceName: keyVault.outputs.name
   }
 }
 
@@ -439,7 +453,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App με Ταυτότητα Καθορισμένη από το Σύστημα
+### 3. Container App με Ταυτότητα Αντιστοιχισμένη από το Σύστημα
 
 **Αρχείο: `infra/app/container-app.bicep`**
 
@@ -449,15 +463,18 @@ param location string
 param tags object = {}
 param storageAccountName string
 param keyVaultName string
+param containerAppsEnvironmentId string
+param containerImage string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: name
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'api' })
   identity: {
     type: 'SystemAssigned'  // 🔑 Enable managed identity
   }
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -468,7 +485,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Must exist; configure registry credentials for private images
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -503,11 +520,21 @@ output url string = 'https://${containerApp.properties.configuration.ingress.fqd
 ```bicep
 param principalId string
 param roleDefinitionId string  // Azure built-in role ID
-param targetResourceId string
+@allowed(['storage', 'keyvault'])
+param targetResourceType string
+param targetResourceName string
 
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(principalId, roleDefinitionId, targetResourceId)
-  scope: resourceId('Microsoft.Resources/resourceGroups', resourceGroup().name)
+// Typed existing resources give Bicep a valid resource scope, not a string ID.
+resource storageTarget 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
+  name: targetResourceName
+}
+resource vaultTarget 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: targetResourceName
+}
+
+resource storageAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'storage') {
+  name: guid(storageTarget.id, principalId, roleDefinitionId)
+  scope: storageTarget
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
     principalId: principalId
@@ -515,7 +542,17 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
-output id string = roleAssignment.id
+resource vaultAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'keyvault') {
+  name: guid(vaultTarget.id, principalId, roleDefinitionId)
+  scope: vaultTarget
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
+    principalId: principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+// This module assigns at the target resource scope, not the whole resource group.
 ```
 
 ### 5. Κώδικας Εφαρμογής με Διαχειριζόμενη Ταυτότητα
@@ -531,29 +568,29 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Αρχικοποίηση διαπιστευτηρίου (λειτουργεί αυτόματα με διαχειριζόμενη ταυτότητα)
+// 🔑 Initialize credential (works automatically with managed identity)
 const credential = new DefaultAzureCredential();
 
-// Ρύθμιση Azure Storage
+// Azure Storage setup
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
-  credential  // Δεν χρειάζονται κλειδιά!
+  credential  // No keys needed!
 );
 
-// Ρύθμιση Key Vault
+// Key Vault setup
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
-  credential  // Δεν χρειάζονται κλειδιά!
+  credential  // No keys needed!
 );
 
-// Έλεγχος υγείας
+// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Ανέβασμα αρχείου στο blob storage
+// Upload file to blob storage
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -562,7 +599,8 @@ app.post('/upload', async (req, res) => {
     const blobName = `file-${Date.now()}.txt`;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     
-    await blockBlobClient.upload('Hello from managed identity!', 30);
+    const content = 'Hello from managed identity!';
+    await blockBlobClient.upload(content, Buffer.byteLength(content));
     
     res.json({
       success: true,
@@ -575,7 +613,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// Λήψη μυστικού από το Key Vault
+// Get secret from Key Vault
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -583,7 +621,7 @@ app.get('/secret/:name', async (req, res) => {
     
     res.json({
       name: secretName,
-      value: secret.value,
+      retrieved: secret.value !== undefined, // Never return the secret value to callers
       message: 'Secret retrieved using managed identity!'
     });
   } catch (error) {
@@ -592,7 +630,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Λίστα κοντέινερ blob (επιδεικνύει πρόσβαση ανάγνωσης)
+// List blob containers (demonstrates read access)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -637,21 +675,23 @@ app.listen(PORT, () => {
 
 ### 6. Ανάπτυξη και Δοκιμή
 
+Εκτελέστε αυτές τις εντολές **μετά** την ολοκλήρωση της υποδομής που λείπει, Dockerfile και το αντίστοιχο `main.parameters.json` στο δικό σας έργο. Πραγματοποιήστε αυθεντικοποίηση azd με `azd auth login`· κάντε είσοδο χωριστά με `az login` για τους ελέγχους Azure CLI αργότερα. Τα endpoints που εμφανίζονται είναι επιδείξεις και απαιτούν κατάλληλους ελέγχους πρόσβασης πριν τη δημόσια χρήση.
+
 ```bash
-# Αρχικοποίηση περιβάλλοντος AZD
+# Initialize AZD environment
 azd init
 
-# Ανάπτυξη υποδομής και εφαρμογής
+# Deploy infrastructure and application
 azd up
 
-# Λήψη του URL της εφαρμογής
-APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
+# Get the app URL
+APP_URL=$(azd env get-value APP_URL)
 
-# Δοκιμή ελέγχου υγείας
+# Test health check
 curl $APP_URL/health
 ```
 
-**✅ Αναμενόμενο αποτέλεσμα:**
+**✅ Αναμενόμενη έξοδος:**
 ```json
 {
   "status": "healthy",
@@ -659,12 +699,12 @@ curl $APP_URL/health
 }
 ```
 
-**Δοκιμή upload blob:**
+**Δοκιμή μεταφόρτωσης blob:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
 
-**✅ Αναμενόμενο αποτέλεσμα:**
+**✅ Αναμενόμενη έξοδος:**
 ```json
 {
   "success": true,
@@ -673,12 +713,12 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Δοκιμή λίστα containers:**
+**Δοκιμή λίστας κοντέινερ:**
 ```bash
 curl $APP_URL/containers
 ```
 
-**✅ Αναμενόμενο αποτέλεσμα:**
+**✅ Αναμενόμενη έξοδος:**
 ```json
 {
   "containers": ["uploads"],
@@ -689,32 +729,34 @@ curl $APP_URL/containers
 
 ---
 
-## Συνηθισμένοι Ρόλοι Azure RBAC
+## Συνήθεις Ρόλοι Azure RBAC
 
 ### Ενσωματωμένα Αναγνωριστικά Ρόλων για Διαχειριζόμενη Ταυτότητα
 
-| Υπηρεσία | Όνομα Ρόλου | Ταυτότητα Ρόλου | Δικαιώματα |
-|---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Ανάγνωση blob και κοντέινερ |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Ανάγνωση, εγγραφή, διαγραφή blob |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Ανάγνωση, εγγραφή, διαγραφή μηνυμάτων ουράς |
+| Υπηρεσία | Όνομα Ρόλου | Αναγνωριστικό Ρόλου | Δικαιώματα |
+|---------|-------------|--------------------|-------------|
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6ea1-4ae2-8e65-a410df84e7d1` | Ανάγνωση blobs και κοντέινερ |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Ανάγνωση, εγγραφή, διαγραφή blobs |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Ανάγνωση, εγγραφή, διαγραφή ουρών/μηνυμάτων |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Ανάγνωση μυστικών |
 | **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Ανάγνωση, εγγραφή, διαγραφή μυστικών |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Ανάγνωση δεδομένων Cosmos DB |
 | **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Ανάγνωση, εγγραφή δεδομένων Cosmos DB |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Διαχείριση βάσεων δεδομένων SQL |
+| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Διαχείριση πόρων βάσης δεδομένων· δεν παρέχει SQL πρόσβαση δεδομένων |
 | **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Αποστολή, λήψη, διαχείριση μηνυμάτων |
 
-### Πώς να Βρείτε τα Αναγνωριστικά Ρόλων
+### Πώς να Βρείτε Αναγνωριστικά Ρόλων
+
+Τα δύο παραπάνω IDs για Cosmos DB για NoSQL είναι **ενσωματωμένοι ορισμοί ρόλων δεδομένων Cosmos** και όχι IDs ρόλων συνδρομής Azure RBAC. Αναθέστε τα με `az cosmosdb sql role assignment create` (ή `Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments`), όχι `az role assignment create`. Η πρόσβαση σε δεδομένα SQL απαιτεί χρήστη βάσης Entra και δικαιώματα SQL.
 
 ```bash
-# Εμφάνιση όλων των ενσωματωμένων ρόλων
+# List all built-in roles
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# Αναζήτηση συγκεκριμένου ρόλου
+# Search for specific role
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# Λήψη λεπτομερειών του ρόλου
+# Get role details
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
@@ -722,13 +764,15 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## Πρακτικές Ασκήσεις
 
+**Προαπαιτούμενα ενσωμάτωσης για τις τρεις ασκήσεις:** λειτουργικό πρότυπο Container App στο δικό σας έργο, αντίστοιχοι πόροι Bicep, είσοδος Azure CLI/azd και εξουσιοδότηση για ανάθεση των απαιτούμενων ρόλων. Πρόκειται για καθοδηγούμενες προσαρμογές, όχι ανεξάρτητα αρχικά· αντικαταστήστε τα δείγματα ονομάτων πόρων με τα αναπτυγμένα ονόματά σας.
+
 ### Άσκηση 1: Ενεργοποίηση Διαχειριζόμενης Ταυτότητας για Υφιστάμενη Εφαρμογή ⭐⭐ (Μεσαίο)
 
-**Στόχος**: Προσθέστε διαχειριζόμενη ταυτότητα σε μια υπάρχουσα ανάπτυξη Container App
+**Σκοπός**: Προσθήκη διαχειριζόμενης ταυτότητας σε υπάρχουσα ανάπτυξη Container App
 
-**Σενάριο**: Έχετε ένα Container App που χρησιμοποιεί connection strings. Μετατρέψτε το σε διαχειριζόμενη ταυτότητα.
+**Σενάριο**: Έχετε μια Container App που χρησιμοποιεί συμβολοσειρές σύνδεσης. Μετατρέψτε τη σε διαχειριζόμενη ταυτότητα.
 
-**Αφετηρία**: Container App με αυτή τη διαμόρφωση:
+**Αρχικό Σημείο**: Container App με αυτή τη διαμόρφωση:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -742,7 +786,7 @@ env: [
 
 **Βήματα**:
 
-1. **Ενεργοποιήστε τη διαχειριζόμενη ταυτότητα στο Bicep:**
+1. **Ενεργοποιήστε διαχειριζόμενη ταυτότητα στο Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -754,7 +798,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Παροχή πρόσβασης στο Storage:**
+2. **Παρέχετε πρόσβαση Storage:**
 
 ```bicep
 // Get storage account reference
@@ -774,9 +818,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-3. **Ενημέρωση κώδικα εφαρμογής:**
+3. **Ενημερώστε τον κώδικα εφαρμογής:**
 
-**Πριν (connection string):**
+**Πριν (συμβολοσειρά σύνδεσης):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -797,7 +841,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **Ενημέρωση μεταβλητών περιβάλλοντος:**
+4. **Ενημερώστε μεταβλητές περιβάλλοντος:**
 
 ```bicep
 env: [
@@ -812,49 +856,50 @@ env: [
 5. **Αναπτύξτε και δοκιμάστε:**
 
 ```bash
-# Επαναπτύξτε
+# Redeploy
 azd up
 
-# Ελέγξτε ότι εξακολουθεί να λειτουργεί
-curl https://myapp.azurecontainerapps.io/upload
+# Test that it still works
+APP_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail -X POST "$APP_URL/upload"
 ```
 
 **✅ Κριτήρια Επιτυχίας:**
 - ✅ Η εφαρμογή αναπτύσσεται χωρίς σφάλματα
-- ✅ Οι λειτουργίες Storage δουλεύουν (upload, λίστα, λήψη)
-- ✅ Δεν υπάρχουν connection strings σε μεταβλητές περιβάλλοντος
-- ✅ Η ταυτότητα ορατή στο Azure Portal κάτω από την καρτέλα "Identity"
+- ✅ Λειτουργίες αποθήκευσης δουλεύουν (ανέβασμα, λίστα, λήψη)
+- ✅ Καμία συμβολοσειρά σύνδεσης στις μεταβλητές περιβάλλοντος
+- ✅ Ταυτότητα ορατή στο Azure Portal στην ενότητα "Identity"
 
 **Επαλήθευση:**
 
 ```bash
-# Ελέγξτε ότι η διαχειριζόμενη ταυτότητα είναι ενεργοποιημένη
+# Check managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Αναμενόμενο: "SystemAssigned"
+# ✅ Expected: "SystemAssigned"
 
-# Ελέγξτε την ανάθεση ρόλου
+# Check role assignment
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ Αναμενόμενο: Εμφανίζει τον ρόλο "Storage Blob Data Contributor"
+# ✅ Expected: Shows "Storage Blob Data Contributor" role
 ```
 
 **Χρόνος**: 20-30 λεπτά
 
 ---
 
-### Άσκηση 2: Πρόσβαση πολλών υπηρεσιών με User-Assigned Identity ⭐⭐⭐ (Προχωρημένο)
+### Άσκηση 2: Πρόσβαση Πολλών Υπηρεσιών με Διαχειριζόμενη Ταυτότητα Ανατεθείσα από Χρήστη ⭐⭐⭐ (Προχωρημένο)
 
-**Στόχος**: Δημιουργήστε μια user-assigned identity που θα μοιράζεται μεταξύ πολλαπλών Container Apps
+**Σκοπός**: Δημιουργήστε μια διαχειριζόμενη ταυτότητα ανατεθείσα από χρήστη κοινή σε πολλαπλές Εφαρμογές Κοντέινερ
 
-**Σενάριο**: Έχετε 3 microservices που όλα χρειάζονται πρόσβαση στο ίδιο Storage account και Key Vault.
+**Σενάριο**: Έχετε 3 μικροϋπηρεσίες που όλες χρειάζονται πρόσβαση στον ίδιο λογαριασμό Storage και Key Vault.
 
 **Βήματα**:
 
-1. **Δημιουργία user-assigned identity:**
+1. **Δημιουργία διαχειριζόμενης ταυτότητας ανατεθείσας από χρήστη:**
 
 **Αρχείο: `infra/core/identity.bicep`**
 
@@ -874,7 +919,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Ανάθεση ρόλων στην user-assigned identity:**
+2. **Ανάθεση ρόλων στη διαχειριζόμενη ταυτότητα ανατεθείσα από χρήστη:**
 
 ```bicep
 // In main.bicep
@@ -890,7 +935,7 @@ module userIdentity './core/identity.bicep' = {
 
 // Grant Storage access
 resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'storage-contributor')
+  name: guid(storageAccount.id, environmentName, 'storage-contributor')
   scope: storageAccount
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
@@ -901,7 +946,7 @@ resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
 
 // Grant Key Vault access
 resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'kv-secrets-user')
+  name: guid(keyVault.id, environmentName, 'kv-secrets-user')
   scope: keyVault
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
@@ -911,7 +956,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Ανάθεση ταυτότητας σε πολλαπλά Container Apps:**
+3. **Ανάθεση ταυτότητας σε πολλαπλές Εφαρμογές Container:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -948,18 +993,22 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **Κώδικας εφαρμογής (όλες οι υπηρεσίες χρησιμοποιούν το ίδιο πρότυπο):**
+4. **Κώδικας εφαρμογής (όλες οι υπηρεσίες χρησιμοποιούν το ίδιο μοτίβο):**
 
 ```javascript
-const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
+const { ManagedIdentityCredential } = require('@azure/identity');
+const { BlobServiceClient } = require('@azure/storage-blob');
 
-// Για την ταυτότητα που εκχωρήθηκε από τον χρήστη, καθορίστε το αναγνωριστικό πελάτη
+// For user-assigned identity, specify the client ID
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // Αναγνωριστικό πελάτη της ταυτότητας που εκχωρήθηκε από τον χρήστη
+  process.env.AZURE_CLIENT_ID  // User-assigned identity client ID
 );
 
-// Ή χρησιμοποιήστε το DefaultAzureCredential (εντοπίζει αυτόματα)
-const credential = new DefaultAzureCredential();
+// Alternative (choose ONE credential declaration):
+// const { DefaultAzureCredential } = require('@azure/identity');
+// const credential = new DefaultAzureCredential({
+//   managedIdentityClientId: process.env.AZURE_CLIENT_ID
+// });
 
 const blobServiceClient = new BlobServiceClient(
   `https://${process.env.STORAGE_ACCOUNT_NAME}.blob.core.windows.net`,
@@ -967,42 +1016,45 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
+Ορίστε το runtime `AZURE_CLIENT_ID` κάθε Εφαρμογής Container σε `userIdentity.outputs.clientId` και `STORAGE_ACCOUNT_NAME` στο όνομα αποθήκευσης σας στο Bicep. Το απλό να αναθέσετε την ταυτότητα ή να τρέξετε `azd env set` δεν ρυθμίζει αυτές τις τιμές runtime.
+
 5. **Ανάπτυξη και επαλήθευση:**
 
 ```bash
 azd up
 
-# Ελέγξτε αν όλες οι υπηρεσίες μπορούν να αποκτήσουν πρόσβαση στην αποθήκευση
-curl https://api-gateway.azurecontainerapps.io/upload
-curl https://product-service.azurecontainerapps.io/upload
-curl https://order-service.azurecontainerapps.io/upload
+# Test all services can access storage
+# Replace with the actual ingress URLs reported for your three services
+curl --fail -X POST "$API_GATEWAY_URL/upload"
+curl --fail -X POST "$PRODUCT_SERVICE_URL/upload"
+curl --fail -X POST "$ORDER_SERVICE_URL/upload"
 ```
 
-**✅ Κριτήρια Επιτυχίας:**
-- ✅ Μία ταυτότητα κοινή σε 3 υπηρεσίες
+**✅ Κριτήρια επιτυχίας:**
+- ✅ Μία ταυτότητα κοινή για 3 υπηρεσίες
 - ✅ Όλες οι υπηρεσίες μπορούν να έχουν πρόσβαση σε Storage και Key Vault
-- ✅ Η ταυτότητα παραμένει αν διαγράψετε μία υπηρεσία
+- ✅ Η ταυτότητα διατηρείται αν διαγράψετε μία υπηρεσία
 - ✅ Κεντρική διαχείριση δικαιωμάτων
 
-**Οφέλη της User-Assigned Identity:**
-- Μία ταυτότητα για διαχείριση
-- Συνεπής δικαιώματα σε υπηρεσίες
-- Επιβιώνει της διαγραφής υπηρεσίας
-- Κατάλληλο για σύνθετες αρχιτεκτονικές
+**Οφέλη της ταυτότητας που της ανατίθεται από τον χρήστη:**
+- Μία μοναδική ταυτότητα για διαχείριση
+- Συνεπή δικαιώματα ανάμεσα σε υπηρεσίες
+- Επιβιώνει από τη διαγραφή υπηρεσίας
+- Καλύτερο για σύνθετες αρχιτεκτονικές
 
 **Χρόνος**: 30-40 λεπτά
 
 ---
 
-### Άσκηση 3: Υλοποίηση Περιστροφής Μυστικών Key Vault ⭐⭐⭐ (Προχωρημένο)
+### Άσκηση 3: Υλοποίηση Περιστροφής Μυστικού Key Vault ⭐⭐⭐ (Προχωρημένο)
 
-**Στόχος**: Αποθηκεύστε κλειδιά τρίτων στο Key Vault και αποκτήστε πρόσβαση σε αυτά χρησιμοποιώντας διαχειριζόμενη ταυτότητα
+**Στόχος**: Αποθήκευση κλειδιών API τρίτων μερών στο Key Vault και πρόσβαση σε αυτά χρησιμοποιώντας managed identity
 
-**Σενάριο**: Η εφαρμογή σας χρειάζεται να καλέσει ένα εξωτερικό API (OpenAI, Stripe, SendGrid) που απαιτεί API keys.
+**Σενάριο**: Η εφαρμογή σας πρέπει να καλέσει ένα εξωτερικό API (OpenAI, Stripe, SendGrid) που απαιτεί κλειδιά API.
 
 **Βήματα**:
 
-1. **Δημιουργήστε Key Vault με RBAC:**
+1. **Δημιουργία Key Vault με RBAC:**
 
 **Αρχείο: `infra/core/keyvault.bicep`**
 
@@ -1036,10 +1088,10 @@ output uri string = keyVault.properties.vaultUri
 2. **Αποθήκευση μυστικών στο Key Vault:**
 
 ```bash
-# Λήψη ονόματος του Key Vault
-KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
+# Get Key Vault name
+KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
-# Αποθήκευση κλειδιών API τρίτων μερών
+# Store third-party API keys
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1075,7 +1127,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // Ελέγξτε πρώτα την κρυφή μνήμη
+    // Check cache first
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1107,9 +1159,11 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **Χρήση μυστικών στην εφαρμογή:**
+4. **Χρησιμοποίηση μυστικών στην εφαρμογή:**
 
 **Αρχείο: `src/app.js`**
+
+Αυτό το **αντικαταστατικό τμήμα εφαρμογής** απαιτεί `npm install openai`, ένα πραγματικό κλειδί τρίτου μέρους, ένα προσβάσιμο μοντέλο και την υποδομή από το έργο εργασίας σας. Καλεί το OpenAI απευθείας, όχι μια ανάπτυξη Azure OpenAI. Τα παρακάτω δείγματα κλειδιών δεν εξουσιοδοτούν κάποιο αίτημα.
 
 ```javascript
 const express = require('express');
@@ -1118,7 +1172,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Αρχικοποιήστε το OpenAI χρησιμοποιώντας το κλειδί από το Key Vault
+// Initialize OpenAI with key from Key Vault
 let openaiClient;
 
 async function initializeServices() {
@@ -1126,9 +1180,6 @@ async function initializeServices() {
   openaiClient = new OpenAI({ apiKey: openaiKey });
   console.log('✅ Services initialized with secrets from Key Vault');
 }
-
-// Καλέστε κατά την εκκίνηση
-initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
   try {
@@ -1146,8 +1197,12 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Secure API with Key Vault integration running');
+// Start listening only after initialization succeeds.
+initializeServices().then(() => {
+  app.listen(3000, () => console.log('Key Vault demo running'));
+}).catch(error => {
+  console.error('Initialization failed:', error.message);
+  process.exitCode = 1;
 });
 ```
 
@@ -1156,31 +1211,33 @@ app.listen(3000, () => {
 ```bash
 azd up
 
-# Ελέγξτε ότι τα κλειδιά API λειτουργούν
+# Test that API keys work
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
-**✅ Κριτήρια Επιτυχίας:**
-- ✅ Δεν υπάρχουν κλειδιά API στον κώδικα ή στις μεταβλητές περιβάλλοντος
-- ✅ Η εφαρμογή ανακτά κλειδιά από το Key Vault
-- ✅ Εξωτερικά API τρίτων λειτουργούν σωστά
-- ✅ Μπορείτε να περιστρέψετε κλειδιά χωρίς αλλαγές στον κώδικα
+**✅ Κριτήρια επιτυχίας:**
+- ✅ Κανένα κλειδί API στον κώδικα ή στις μεταβλητές περιβάλλοντος
+- ✅ Η εφαρμογή ανακτά τα κλειδιά από το Key Vault
+- ✅ Τα API τρίτων λειτουργούν σωστά
+- ✅ Μπορεί να περιστρέψει τα κλειδιά χωρίς αλλαγές κώδικα
 
-**Περιστρέψτε ένα μυστικό:**
+**Περιστροφή μυστικού:**
 
 ```bash
-# Ενημέρωση του μυστικού στο Key Vault
+# Update secret in Key Vault
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Επανεκκινήστε την εφαρμογή για να φορτωθεί το νέο κλειδί
+# Find the active revision name, then restart it to clear the in-process cache
+az containerapp revision list --name myapp --resource-group rg-myapp --output table
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
 **Χρόνος**: 25-35 λεπτά
@@ -1189,113 +1246,118 @@ az containerapp revision restart \
 
 ## Σημείο Ελέγχου Γνώσης
 
-### 1. Authentication Patterns ✓
+### 1. Μοτίβα Αυθεντικοποίησης ✓
 
 Ελέγξτε την κατανόησή σας:
 
-- [ ] **Q1**: Ποια είναι τα τρία κύρια μοτίβα αυθεντικοποίησης; 
-  - **A**: Connection strings (legacy), Key Vault references (transition), Managed Identity (best)
+- [ ] **Ε1**: Ποια είναι τα τρία βασικά μοτίβα αυθεντικοποίησης; 
+  - **Α**: Connection strings (παρωχημένα), Αναφορές Key Vault (μετάβαση), Managed Identity (το καλύτερο)
 
-- [ ] **Q2**: Γιατί η managed identity είναι καλύτερη από τις connection strings;
-  - **A**: Δεν υπάρχουν μυστικά στον κώδικα, αυτόματη περιστροφή, πλήρες ιστορικό ελέγχου, δικαιώματα RBAC
+- [ ] **Ε2**: Γιατί η managed identity είναι καλύτερη από τα connection strings;
+  - **Α**: Χωρίς μυστικά στον κώδικα, αυτόματη περιστροφή, πλήρες ιστορικό ελέγχου, δικαιώματα RBAC
 
-- [ ] **Q3**: Πότε θα χρησιμοποιήσετε user-assigned identity αντί για system-assigned;
-  - **A**: Όταν μοιράζεστε την ταυτότητα μεταξύ πολλαπλών πόρων ή όταν ο κύκλος ζωής της ταυτότητας είναι ανεξάρτητος από τον κύκλο ζωής του πόρου
+- [ ] **Ε3**: Πότε θα χρησιμοποιούσατε user-assigned identity αντί για system-assigned;
+  - **Α**: Όταν μοιράζεστε ταυτότητα μεταξύ πολλών πόρων ή όταν ο κύκλος ζωής της ταυτότητας είναι ανεξάρτητος από τον κύκλο ζωής του πόρου
 
 **Πρακτικός Έλεγχος:**
 ```bash
-# Ελέγξτε ποιον τύπο ταυτότητας χρησιμοποιεί η εφαρμογή σας
+# Check what type of identity your app uses
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Καταγράψτε όλες τις αναθέσεις ρόλων για την ταυτότητα
+# List all role assignments for the identity
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
 
 ---
 
-### 2. RBAC and Permissions ✓
+### 2. RBAC και Δικαιώματα ✓
 
 Ελέγξτε την κατανόησή σας:
 
-- [ ] **Q1**: Ποιο είναι το role ID για "Storage Blob Data Contributor";
-  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+- [ ] **Ε1**: Ποιος είναι ο ρόλος ID για "Storage Blob Data Contributor";
+  - **Α**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2**: Τι δικαιώματα παρέχει ο ρόλος "Key Vault Secrets User";
-  - **A**: Πρόσβαση μόνο-ανάγνωσης σε μυστικά (δεν μπορεί να δημιουργήσει, ενημερώσει ή διαγράψει)
+- [ ] **Ε2**: Ποια δικαιώματα παρέχει ο ρόλος "Key Vault Secrets User";
+  - **Α**: Πρόσβαση μόνο ανάγνωσης σε μυστικά (δεν μπορεί να δημιουργήσει, ενημερώσει ή διαγράψει)
 
-- [ ] **Q3**: Πώς δίνετε πρόσβαση σε ένα Container App στο Azure SQL;
-  - **A**: Αναθέστε τον ρόλο "SQL DB Contributor" ή ρυθμίστε την αυθεντικοποίηση Microsoft Entra ID για το SQL
+- [ ] **Ε3**: Πώς δίνετε πρόσβαση Εφαρμογής Container σε Azure SQL;
+  - **Α**: Ρυθμίστε την αυθεντικοποίηση Microsoft Entra, δημιουργήστε την ταυτότητα ως χρήστη βάσης δεδομένων, και δώστε τα απαραίτητα δικαιώματα SQL. Ο ρόλος "SQL DB Contributor" διαχειρίζεται μόνο πόρους Azure, δεν εξουσιοδοτεί τα ερωτήματα.
 
 **Πρακτικός Έλεγχος:**
 ```bash
-# Βρείτε συγκεκριμένο ρόλο
+# Find specific role
 az role definition list --name "Storage Blob Data Contributor"
 
-# Ελέγξτε ποιους ρόλους έχουν ανατεθεί στην ταυτότητά σας
+# Check what roles are assigned to your identity
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
 
 ---
 
-### 3. Key Vault Integration ✓
+### 3. Ενσωμάτωση Key Vault ✓
 
 Ελέγξτε την κατανόησή σας:
 
-- [ ] **Q1**: Πώς ενεργοποιείτε RBAC για το Key Vault αντί για access policies;
-  - **A**: Ορίστε `enableRbacAuthorization: true` στο Bicep
+- [ ] **Ε1**: Πώς ενεργοποιείτε το RBAC για το Key Vault αντί για τις πολιτικές πρόσβασης;
+  - **Α**: Ορίστε `enableRbacAuthorization: true` στο Bicep
 
-- [ ] **Q2**: Ποια βιβλιοθήκη του Azure SDK χειρίζεται την αυθεντικοποίηση με managed identity;
-  - **A**: `@azure/identity` με την κλάση `DefaultAzureCredential`
+- [ ] **Ε2**: Ποια βιβλιοθήκη Azure SDK χειρίζεται την αυθεντικοποίηση managed identity;
+  - **Α**: `@azure/identity` με την κλάση `DefaultAzureCredential`
 
-- [ ] **Q3**: Πόσο μένουν τα μυστικά του Key Vault στην cache;
-  - **A**: Εξαρτάται από την εφαρμογή · υλοποιήστε τη δική σας στρατηγική caching
+- [ ] **Ε3**: Πόσο καιρό παραμένουν τα μυστικά Key Vault στην κρυφή μνήμη;
+  - **Α**: Εξαρτάται από την εφαρμογή· υλοποιήστε τη δική σας στρατηγική caching
 
 **Πρακτικός Έλεγχος:**
 ```bash
-# Δοκιμή πρόσβασης στο Key Vault
+# Test Key Vault access
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
-  --query "value"
+  --query "{name:name,enabled:attributes.enabled}"
 
-# Ελέγξτε ότι το RBAC είναι ενεργοποιημένο
+# Check RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Αναμενόμενο: true
+# ✅ Expected: true
 ```
 
 ---
 
-## Καλές Πρακτικές Ασφαλείας
+## Καλύτερες Πρακτικές Ασφαλείας
 
-### ✅ ΚΑΝΤΕ:
+### ✅ ΚΑΝΕΤΕ:
 
-1. **Χρησιμοποιείτε πάντα διαχειριζόμενη ταυτότητα στην παραγωγή**
+1. **Πάντα να χρησιμοποιείτε managed identity σε παραγωγή**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Χρησιμοποιήστε ρόλους RBAC με τα ελάχιστα δυνατά προνόμια**
-   - Χρησιμοποιήστε ρόλους "Reader" όταν είναι δυνατόν
-   - Αποφύγετε τους "Owner" ή "Contributor" εκτός αν είναι απαραίτητο
+2. **Χρησιμοποιήστε ρόλους RBAC με την ελάχιστη δυνατή άδεια**
+   - Χρησιμοποιήστε ρόλους "Reader" όπου είναι δυνατόν
+   - Αποφύγετε ρόλους "Owner" ή "Contributor" εκτός αν είναι απαραίτητο
 
 3. **Αποθηκεύστε κλειδιά τρίτων στο Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Ενεργοποιήστε την καταγραφή ελέγχου**
+4. **Ενεργοποιήστε την καταγραφή ελέγχου** (μερικό τμήμα πόρου· συγχωνεύστε με τις δηλώσεις του vault και του workspace σας)
    ```bicep
-   diagnosticSettings: {
-     logs: [{ category: 'AuditEvent', enabled: true }]
+   resource vaultDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+     name: 'vault-audit'
+     scope: keyVault
+     properties: {
+       workspaceId: logAnalytics.id
+       logs: [{ category: 'AuditEvent', enabled: true }]
+     }
    }
    ```
 
@@ -1306,43 +1368,43 @@ az keyvault show \
    azd env new prod
    ```
 
-6. **Ανανεώνετε τα μυστικά τακτικά**
-   - Ορίστε ημερομηνίες λήξης στα μυστικά του Key Vault
-   - Αυτοματοποιήστε την ανανέωση με Azure Functions
+6. **Περιστρέψτε τα μυστικά τακτικά**
+   - Ορίστε ημερομηνίες λήξης στα μυστικά Key Vault
+   - Αυτοματοποιήστε την περιστροφή με Azure Functions
 
 ### ❌ ΜΗΝ:
 
-1. **Μην ενσωματώνετε ποτέ μυστικά στον κώδικα**
+1. **Ποτέ μην ενσωματώνετε μυστικά στον κώδικα**
    ```javascript
-   // ❌ ΚΑΚΟ
+   // ❌ BAD
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **Μην χρησιμοποιείτε connection strings στην παραγωγή**
+2. **Μην χρησιμοποιείτε connection strings σε παραγωγή**
    ```javascript
-   // ❌ ΚΑΚΟ
+   // ❌ BAD
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **Μην παραχωρείτε υπερβολικά δικαιώματα**
+3. **Μην δίνετε υπερβολικά δικαιώματα**
    ```bicep
    // ❌ BAD - too much access
-   roleDefinitionId: 'Owner'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')
    
    // ✅ GOOD - least privilege
-   roleDefinitionId: 'Storage Blob Data Reader'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1')
    ```
 
-4. **Μην καταγράφετε μυστικά στα logs**
+4. **Μην καταγράφετε μυστικά**
    ```javascript
-   // ❌ ΚΑΚΟ
+   // ❌ BAD
    console.log('API Key:', apiKey);
    
-   // ✅ ΚΑΛΟ
+   // ✅ GOOD
    console.log('API Key retrieved successfully');
    ```
 
-5. **Μην μοιράζεστε παραγωγικές ταυτότητες μεταξύ περιβαλλόντων**
+5. **Μην μοιράζεστε ταυτότητες παραγωγής μεταξύ περιβαλλόντων**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1352,7 +1414,7 @@ az keyvault show \
 
 ## Οδηγός Επίλυσης Προβλημάτων
 
-### Πρόβλημα: "Unauthorized" κατά την πρόσβαση στο Azure Storage
+### Πρόβλημα: "Ανεπιθύμητη πρόσβαση" κατά την πρόσβαση στο Azure Storage
 
 **Συμπτώματα:**
 ```
@@ -1363,18 +1425,18 @@ AuthorizationPermissionMismatch: This request is not authorized to perform this 
 **Διάγνωση:**
 
 ```bash
-# Ελέγξτε αν η διαχειριζόμενη ταυτότητα είναι ενεργοποιημένη
+# Check if managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Αναμενόμενο: "SystemAssigned" ή "UserAssigned"
+# ✅ Expected: "SystemAssigned" or "UserAssigned"
 
-# Ελέγξτε τις εκχωρήσεις ρόλων
+# Check role assignments
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Αναμενόμενο: Θα πρέπει να δείτε "Storage Blob Data Contributor" ή παρόμοιο ρόλο
+# Expected: Should see "Storage Blob Data Contributor" or similar role
 ```
 
 **Λύσεις:**
@@ -1388,21 +1450,21 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Περιμένετε τη διάδοση (μπορεί να πάρει 5-10 λεπτά):**
+2. **Περίμενε για τη διάδοση (μπορεί να πάρει 5-10 λεπτά):**
 ```bash
-# Ελέγξτε την κατάσταση ανάθεσης ρόλου
+# Check role assignment status
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
 3. **Επαληθεύστε ότι ο κώδικας της εφαρμογής χρησιμοποιεί τα σωστά διαπιστευτήρια:**
 ```javascript
-// Βεβαιωθείτε ότι χρησιμοποιείτε το DefaultAzureCredential
+// Make sure you're using DefaultAzureCredential
 const credential = new DefaultAzureCredential();
 ```
 
 ---
 
-### Πρόβλημα: Άρνηση πρόσβασης στο Key Vault
+### Πρόβλημα: Αρνηση πρόσβασης στο Key Vault
 
 **Συμπτώματα:**
 ```
@@ -1413,13 +1475,13 @@ The user, group or application does not have secrets get permission
 **Διάγνωση:**
 
 ```bash
-# Ελέγξτε αν το RBAC του Key Vault είναι ενεργοποιημένο
+# Check Key Vault RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Αναμενόμενο: true
+# ✅ Expected: true
 
-# Ελέγξτε τις αναθέσεις ρόλων
+# Check role assignments
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1427,14 +1489,14 @@ az role assignment list \
 
 **Λύσεις:**
 
-1. **Ενεργοποιήστε RBAC στο Key Vault:**
+1. **Ενεργοποιήστε το RBAC στο Key Vault:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
 
-2. **Παραχωρήστε τον ρόλο Key Vault Secrets User:**
+2. **Παραχωρήστε ρόλο Key Vault Secrets User:**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1445,7 +1507,7 @@ az role assignment create \
 
 ---
 
-### Πρόβλημα: DefaultAzureCredential αποτυγχάνει τοπικά
+### Πρόβλημα: Το DefaultAzureCredential αποτυγχάνει τοπικά
 
 **Συμπτώματα:**
 ```
@@ -1456,37 +1518,37 @@ CredentialUnavailableError: No credential available
 **Διάγνωση:**
 
 ```bash
-# Έλεγχος αν είστε συνδεδεμένοι
+# Check if you're logged in
 az account show
 
-# Έλεγχος της αυθεντικοποίησης του Azure CLI
+# Check Azure CLI authentication
 az ad signed-in-user show
 ```
 
 **Λύσεις:**
 
-1. **Κάντε είσοδο στο Azure CLI:**
+1. **Συνδεθείτε στο Azure CLI:**
 ```bash
 az login
 ```
 
-2. **Ορίστε τη συνδρομή Azure:**
+2. **Ορίστε την συνδρομή Azure:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
 
-3. **Για τοπική ανάπτυξη, χρησιμοποιήστε μεταβλητές περιβάλλοντος:**
+3. **Για τοπική ανάπτυξη, χρησιμοποιήστε περιβαλλοντικές μεταβλητές:**
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Ή χρησιμοποιήστε διαφορετικό credential τοπικά:**
+4. **Ή χρησιμοποιήστε διαφορετικό διαπιστευτήριο τοπικά:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// Χρησιμοποιήστε το AzureCliCredential για την τοπική ανάπτυξη
+// Use AzureCliCredential for local dev
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
@@ -1494,65 +1556,60 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Πρόβλημα: Η ανάθεση ρόλου χρειάζεται πολύ χρόνο για διάδοση
+### Πρόβλημα: Η ανάθεση ρόλου χρειάζεται πολύ χρόνο για να διαδοθεί
 
 **Συμπτώματα:**
 - Ο ρόλος ανατέθηκε επιτυχώς
-- Παρόλα αυτά λαμβάνετε 403 σφάλματα
-- Εναλλασσόμενη πρόσβαση (μερικές φορές λειτουργεί, μερικές φορές όχι)
+- Ακόμα εμφανίζονται σφάλματα 403
+- Εναλλασσόμενη πρόσβαση (μερικές φορές λειτουργεί, άλλες φορές όχι)
 
 **Εξήγηση:**
-Οι αλλαγές στο Azure RBAC μπορεί να χρειαστούν 5-10 λεπτά για να διαδοθούν παγκοσμίως.
+Οι αλλαγές Azure RBAC μπορεί να πάρουν 5-10 λεπτά για να διαδοθούν παγκοσμίως.
 
 **Λύση:**
 
 ```bash
-# Περιμένετε και δοκιμάστε ξανά
+# Wait and retry
 echo "Waiting for RBAC propagation..."
-sleep 300  # Περιμένετε 5 λεπτά
+sleep 300  # Wait 5 minutes
 
-# Δοκιμάστε την πρόσβαση
-curl https://myapp.azurecontainerapps.io/upload
+# Test access
+curl --fail -X POST "$APP_URL/upload"
 
-# Εάν εξακολουθεί να αποτυγχάνει, επανεκκινήστε την εφαρμογή
+# If still failing, restart the app
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
 ---
 
-## Οικονομικές Σκέψεις
+## Σκέψεις Κόστους
 
-### Κόστη Διαχειριζόμενης Ταυτότητας
+### Κόστος Managed Identity
 
 | Πόρος | Κόστος |
 |----------|------|
-| **Διαχειριζόμενη Ταυτότητα** | 🆓 **ΔΩΡΕΑΝ** - Χωρίς χρέωση |
+| **Managed Identity** | 🆓 **ΔΩΡΕΑΝ** - Χωρίς χρέωση |
 | **Αναθέσεις ρόλων RBAC** | 🆓 **ΔΩΡΕΑΝ** - Χωρίς χρέωση |
-| **Αιτήσεις token Microsoft Entra ID** | 🆓 **ΔΩΡΕΑΝ** - Συμπεριλαμβάνεται |
-| **Key Vault Operations** | $0.03 per 10,000 operations |
-| **Key Vault Storage** | $0.024 per secret per month |
+| **Αιτήσεις Token Microsoft Entra ID** | 🆓 **ΔΩΡΕΑΝ** - Συμπεριλαμβανόμενο |
+| **Ενέργειες Key Vault** | $0.03 ανά 10.000 ενέργειες |
+| **Αποθήκευση μυστικών Key Vault** | Ελέγξτε τις τρέχουσες τιμές· μην υποθέτετε μηνιαία χρέωση ανά μυστικό |
 
-**Η διαχειριζόμενη ταυτότητα εξοικονομεί χρήματα με:**
-- ✅ Εξάλειψη των Key Vault operations για service-to-service authentication
-- ✅ Μείωση περιστατικών ασφαλείας (χωρίς εκτεθειμένα διαπιστευτήρια)
-- ✅ Μείωση του λειτουργικού φόρτου (χωρίς χειροκίνητη περιστροφή)
+**Η managed identity εξοικονομεί χρήματα με:**
+- ✅ Κατάργηση ενεργειών Key Vault για την αυθεντικοποίηση υπηρεσίας προς υπηρεσία
+- ✅ Μείωση περιστατικών ασφαλείας (χωρίς διαρροή διαπιστευτηρίων)
+- ✅ Μείωση χειροκίνητου κόστους λειτουργίας (χωρίς χειροκίνητη περιστροφή)
 
-**Παράδειγμα Σύγκρισης Κόστους (μηνιαίο):**
-
-| Σενάριο | Connection Strings | Διαχειριζόμενη Ταυτότητα | Εξοικονόμηση |
-|----------|-------------------|-----------------|---------|
-| Μικρή εφαρμογή (1M αιτήσεις) | ~$50 (Key Vault + ops) | ~$0 | $50/μήνα |
-| Μεσαία εφαρμογή (10M αιτήσεις) | ~$200 | ~$0 | $200/μήνα |
-| Μεγάλη εφαρμογή (100M αιτήσεις) | ~$1,500 | ~$0 | $1,500/μήνα |
+Ο αριθμός αιτήσεων εφαρμογής δεν ισούται με τον αριθμό ενεργειών Key Vault: τα μοτίβα caching και περιστροφής καθορίζουν το κόστος ανάγνωσης μυστικών. Η ταυτότητα δεν αφαιρεί χρεώσεις υπολογισμού ή αποθήκευσης. Ελέγξτε το [τιμολόγιο Key Vault](https://azure.microsoft.com/pricing/details/key-vault/) και τον Υπολογιστή Τιμών Azure για την περιοχή σας, αντί να υποθέτετε μηνιαίες αποταμιεύσεις μόνο από τον αριθμό αιτήσεων.
 
 ---
 
 ## Μάθετε Περισσότερα
 
 ### Επίσημη Τεκμηρίωση
-- [Διαχειριζόμενη Ταυτότητα Azure](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
@@ -1564,36 +1621,36 @@ az containerapp revision restart \
 
 ### Επόμενα Βήματα σε Αυτό το Μάθημα
 - ← Προηγούμενο: [Διαχείριση Διαμόρφωσης](configuration.md)
-- → Επόμενο: [Πρώτο Έργο](first-project.md)
-- 🏠 [Κεντρική Σελίδα Μαθήματος](../../README.md)
+- → Επόμενο: [Υποδομή ως Κώδικας](../chapter-04-infrastructure/README.md)
+- 🏠 [Αρχική Σελίδα Μαθήματος](../../README.md)
 
 ### Σχετικά Παραδείγματα
-- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Χρησιμοποιεί διαχειριζόμενη ταυτότητα για Microsoft Foundry Models
-- [Microservices Example](../../../../examples/microservices) - Πολυ-υπηρεσιακά πρότυπα αυθεντικοποίησης
+- [Παράδειγμα Συνομιλίας Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Χρησιμοποιεί managed identity για Microsoft Foundry Models
+- [Παράδειγμα Microservices](../../../../examples/microservices) - Μοτίβα αυθεντικοποίησης πολλαπλών υπηρεσιών
 
 ---
 
 ## Περίληψη
 
 **Έχετε μάθει:**
-- ✅ Τα τρία μοτίβα αυθεντικοποίησης (connection strings, Key Vault, διαχειριζόμενη ταυτότητα)
-- ✅ Πώς να ενεργοποιήσετε και να διαμορφώσετε τη διαχειριζόμενη ταυτότητα στο AZD
+- ✅ Τρία μοτίβα αυθεντικοποίησης (connection strings, Key Vault, managed identity)
+- ✅ Πώς να ενεργοποιήσετε και να ρυθμίσετε managed identity σε AZD
 - ✅ Αναθέσεις ρόλων RBAC για υπηρεσίες Azure
 - ✅ Ενσωμάτωση Key Vault για μυστικά τρίτων
-- ✅ User-assigned έναντι system-assigned ταυτότητες
-- ✅ Καλές πρακτικές ασφάλειας και επίλυση προβλημάτων
+- ✅ Ταυτότητες που ανατίθενται από χρήστη έναντι συστημικά ανατιθέμενων
+- ✅ Καλύτερες πρακτικές ασφαλείας και επίλυση προβλημάτων
 
-**Κύρια Συμπεράσματα:**
-1. **Χρησιμοποιείτε πάντα διαχειριζόμενη ταυτότητα στην παραγωγή** - Μηδενικά μυστικά, αυτόματη περιστροφή
-2. **Χρησιμοποιήστε ρόλους RBAC με τα ελάχιστα δυνατά προνόμια** - Παραχωρήστε μόνο τα απαραίτητα δικαιώματα
+**Σημαντικά σημεία:**
+1. **Πάντα να χρησιμοποιείτε managed identity σε παραγωγή** - Μηδενικά μυστικά, αυτόματη περιστροφή
+2. **Χρησιμοποιήστε ρόλους RBAC με την ελάχιστη δικαιοδοσία** - Παραχωρήστε μόνο τα απαραίτητα δικαιώματα
 3. **Αποθηκεύστε κλειδιά τρίτων στο Key Vault** - Κεντρική διαχείριση μυστικών
-4. **Χωρίστε ταυτότητες ανά περιβάλλον** - Απομόνωση dev, staging, prod
-5. **Ενεργοποιήστε την καταγραφή ελέγχου** - Παρακολουθήστε ποιος πρόσβαλε τι
+4. **Διαχωρισμός ταυτοτήτων ανά περιβάλλον** - Απομόνωση dev, staging, prod
+5. **Ενεργοποίηση καταγραφής ελέγχου** - Παρακολούθηση ποιος είχε πρόσβαση σε τι
 
-**Επόμενα Βήματα:**
+**Επόμενα βήματα:**
 1. Ολοκληρώστε τις πρακτικές ασκήσεις παραπάνω
-2. Μεταφέρετε μια υπάρχουσα εφαρμογή από connection strings σε διαχειριζόμενη ταυτότητα
-3. Δημιουργήστε το πρώτο σας έργο AZD με ασφάλεια από την πρώτη μέρα: [Πρώτο Έργο](first-project.md)
+2. Μεταφέρετε μια υπάρχουσα εφαρμογή από connection strings σε managed identity
+3. Επανεξετάστε τη ροή ανάπτυξης για αρχάριους: [Πρώτο Έργο](../chapter-01-foundation/first-project.md)
 
 ---
 

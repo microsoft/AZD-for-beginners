@@ -1,110 +1,110 @@
-# 7. Avslutning och nästa steg
+# 7. Sammanfattning & Nästa Steg
 
 !!! tip "DE VIKTIGASTE BUDSKAPEN ÄR"
 
-    - [ ] AZD-mallar påskyndar utvecklingen av AI-applikationer från dagar till timmar
-    - [ ] Discovery → Deployment → Customization-metodiken ger en strukturerad inlärningsväg
-    - [ ] GitHub Copilot med MCP-servrar möjliggör utforskning av komplexa kodbaser med naturligt språk
-    - [ ] Microsoft Foundry erbjuder inbyggd observerbarhet, utvärdering och säkerhetstestning
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. Vad du har åstadkommit
+## 1. Vad Du Har Uppnått
 
-Grattis! I den här workshoppen har du framgångsrikt:
+Grattis! I denna workshop har du framgångsrikt:
 
-| Modul | Resultat |
+| Modul | Uppnåelse |
 |:---|:---|
-| **Module 1** | Upptäckte Azure Developer CLI och valde en AI-mall |
-| **Module 2** | Distribuerade och validerade en komplett lösning för AI-agenter |
-| **Module 3** | Bröt ned mallen för att förstå dess arkitektur |
-| **Module 4** | Utforskade `azure.yaml`-konfiguration och livscykelhooks |
-| **Module 5** | Anpassade mallen för ditt eget scenario |
-| **Module 6** | Tog ner infrastrukturen på ett säkert sätt och hanterade resurser |
+| **Modul 1** | Upptäckt Azure Developer CLI och valt en AI-mall |
+| **Modul 2** | Distribuerat och validerat en komplett AI-agentlösning |
+| **Modul 3** | Dekonstruerat mallen för att förstå dess arkitektur |
+| **Modul 4** | Utforskat `azure.yaml`-konfiguration och livscykelhakar |
+| **Modul 5** | Anpassat mallen för ditt eget scenario |
+| **Modul 6** | Tryggt tagit ned infrastrukturen och hanterat resurser |
 
 ---
 
-## 2. Viktiga begrepp som du behärskar
+## 2. Centrala Begrepp Du Behärskar
 
 ### Azure Developer CLI (azd)
 - `azd init` - Initiera projekt från mallar
-- `azd up` - Provisionera och distribuera med ett kommando
+- `azd up` - Förse och distribuera med ett kommando
 - `azd env` - Hantera miljövariabler
-- `azd down` - Rensa upp resurser på ett säkert sätt
+- `azd down` - Rensa upp resurser säkert
 
-### AZD-mallstruktur
-- `azure.yaml` - Konfiguration och distributionshooks
-- `infra/` - Bicep-infrastruktur-som-kod
-- `src/` - Applikationens källkod
-- `scripts/` - Automations- och installationsskript
+### AZD Mallstruktur
+- `azure.yaml` - Konfigurations- och distributionshakar
+- `infra/` - Bicep infrastruktur-som-kod
+- `src/` - Applikationskällkod
+- `scripts/` - Automatiserings- och installationsskript
 
-### Funktioner i Microsoft Foundry
-- AI Agent Service för intelligenta assistenter
-- File Search och Azure AI Search för kunskapsinhämtning
+### Microsoft Foundry Funktioner
+- AI Agenttjänst för intelligenta assistenter
+- Fil-sökning och Azure AI Search för kunskapsåtervinning
 - Inbyggd spårning, övervakning och utvärdering
-- Red teaming för validering av AI-säkerhet
+- Red teaming för AI-säkerhetsvalidering
 
 ---
 
-## 3. Fortsätt din inlärningsresa
+## 3. Fortsätt Din Läranderesa
 
-### Rekommenderade nästa steg
+### Rekommenderade Nästa Steg
 
 | Väg | Resurs | Tid |
 |:---|:---|:---|
-| **Complete Course** | [AZD for Beginners Curriculum](../../README.md) | 8–12 timmar |
-| **Try Another Template** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1–2 timmar |
-| **Deep Dive** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Pågående |
+| **Slutför Kurs** | [AZD for Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Självstudier |
+| **Prova En Annan Mall** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 timmar |
+| **Fördjupning** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Pågående |
 | **Community** | [Azure Discord](https://aka.ms/foundry/discord) | Gå med idag! |
 
-### Föreslagna mallar att prova härnäst
+### Föreslagna Mallar att Prova Nästa
 
-1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Grundläggande chatt med dina data
+1. **[Kom Igång med AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Grundläggande chatt med dina data
 2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Avancerade RAG-mönster
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Företagsdetaljhandelsscenarier
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Enterprise detaljhandelsscenarier
 
 ---
 
-## 4. Workshoputmaning
+## 4. Workshop Utmaning
 
-Redo att testa dina kunskaper? Prova dessa utmaningar:
+Redo att testa dina färdigheter? Prova dessa utmaningar:
 
 | Utmaning | Beskrivning | Svårighetsgrad |
 |:---|:---|:---|
 | **1. Multi-Agent Scenario** | Distribuera och anpassa för en annan bransch (t.ex. vård, finans) | ⭐⭐ |
-| **2. Custom Knowledge Base** | Lägg till dina egna datafiler och skapa ett anpassat sökindex | ⭐⭐⭐ |
-| **3. Production Deployment** | Sätt upp CI/CD med GitHub Actions med hjälp av `azd pipeline config` | ⭐⭐⭐⭐ |
+| **2. Anpassad Kunskapsbas** | Lägg till dina egna datafiler och skapa ett anpassat sökindex | ⭐⭐⭐ |
+| **3. Produktionsdistribution** | Sätt upp CI/CD med GitHub Actions med `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. Dela din feedback
+## 5. Dela Din Feedback
 
 Din feedback hjälper oss att förbättra denna workshop!
 
-- **GitHub Issues**: [Post feedback](https://github.com/microsoft/azd-for-beginners/issues) - tagga med `Workshop`
+- **GitHub Issues**: [Lämna feedback](https://github.com/microsoft/azd-for-beginners/issues) - tagga med `Workshop`
 - **Discord**: Gå med i [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - posta i `#get-help`
-- **Contributions**: Hjälp till att förbättra workshoppen genom att skicka pull requests!
+- **Bidrag**: Hjälp till att förbättra workshopen genom att skicka in pull requests!
 
 ---
 
 ## Tack! 🎉
 
-Tack för att du genomförde AZD for AI Developers Workshop. Vi hoppas att denna upplevelse har försett dig med de färdigheter och det självförtroende som krävs för att bygga och distribuera AI-applikationer på Azure.
+Tack för att du slutförde AZD for AI Developers Workshop. Vi hoppas att denna erfarenhet har gett dig färdigheterna och självförtroendet att bygga och distribuera AI-applikationer på Azure.
 
-**Fortsätt bygga, fortsätt lära dig, och välkommen till Azure AI-utvecklargemenskapen!**
+**Fortsätt bygga, fortsätt lära, och välkommen till Azure AI utvecklargemenskap!**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 Kurshemsida** | [AZD For Beginners](../../README.md) |
+| **📚 Kursstart** | [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
 | **📖 Dokumentation** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ AI-mallar** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-| **💬 Gemenskap** | [Azure Discord](https://aka.ms/foundry/discord) |
+| **🛠️ AI Mallar** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+| **💬 Community** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi eftersträvar noggrannhet, observera att automatiska översättningar kan innehålla fel eller brister. Originaldokumentet i dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår genom användningen av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,120 +1,122 @@
-# יסודות AZD - הבנת Azure Developer CLI
+# יסודות AZD - מושגים ועקרונות מרכזיים
 
-# יסודות AZD - מושגים מרכזיים ויסודות
-
-**ניווט בפרקים:**
+**ניווט הפרק:**
 - **📚 דף הקורס הראשי**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 1 - יסודות והתחלה מהירה
-- **⬅️ קודם**: [סקירת הקורס](../../README.md#-chapter-1-foundation--quick-start)
+- **📖 הפרק הנוכחי**: פרק 1 - יסוד והתחלה מהירה
+- **⬅️ הקודם**: [סקירת הקורס](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ הבא**: [התקנה והגדרה](installation.md)
-- **🚀 פרק הבא**: [פרק 2: פיתוח מבוסס AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 הפרק הבא**: [פרק 2: פיתוח מונחה AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## مقدمة
+## הקדמה
 
-השיעור הזה מציג בפניך את Azure Developer CLI (azd), כלי שורת פקודה רב-עוצמה שמאיץ את המסע שלך מפיתוח מקומי לפריסה ב-Azure. תלמד את המושגים הבסיסיים, התכונות המרכזיות, ותבין כיצד azd מפשט את פריסת יישומים טבעיים לענן.
+> נסקר מול `azd 1.37.2` (נובמבר 2026). פקודות בשורת הפקודה משתמשות במשתני פלאס-הולדרים שמחייבים החלפה. זרמי עבודה בתבניות משתמשים ב-`.` לאתחול ספריית העבודה הנוכחית; ללא ארגומנט ספרייה, אתחול התבנית יוצר תת-ספרייה ואינו משנה את ספריית העבודה של ה-shell שלך. קטעי קוד מתקדמים הם להמחשה בלבד, לא פרויקטים מלאים.
 
-## יעדי הלמידה
+שיעור זה מציג את Azure Developer CLI (azd), כלי שורת פקודה חזק שמאיץ את המסלול שלך מפיתוח מקומי לפריסה ב-Azure. תלמד את עקרונות היסוד, התכונות המרכזיות, ותבין כיצד azd מפשט פריסת יישומים מבוססי ענן.
 
-בסיום שיעור זה תוכל:
+## מטרות הלמידה
+
+בסוף שיעור זה תדע:
 - להבין מהו Azure Developer CLI ומה מטרתו העיקרית
 - ללמוד את המושגים המרכזיים של תבניות, סביבות ושירותים
 - לחקור תכונות עיקריות כולל פיתוח מונחה תבניות ותשתית כקוד
-- להבין את מבנה פרויקט azd ואת זרימת העבודה שלו
-- להיות מוכן להתקין ולהגדיר את azd עבור סביבת הפיתוח שלך
+- להבין את מבנה הפרויקט וזרימת העבודה של azd
+- להיות מוכן להתקין ולהגדיר את azd לסביבת הפיתוח שלך
 
 ## תוצאות הלמידה
 
-עם סיום השיעור תוכל:
-- להסביר את תפקיד azd בזרמי העבודה של פיתוח ענן מודרניים
-- לזהות את רכיבי מבנה פרויקט azd
-- לתאר איך תבניות, סביבות ושירותים פועלים יחד
+לאחר השלמת שיעור זה, תוכל:
+- להסביר את תפקיד azd בזרמי עבודה מודרניים לפיתוח ענני
+- לזהות את המרכיבים במבנה פרויקט azd
+- לתאר כיצד תבניות, סביבות ושירותים פועלים יחד
 - להבין את היתרונות של תשתית כקוד עם azd
-- לזהות פקודות azd שונות ואת מטרותיהן
+- לזהות פקודות שונות של azd ואת מטרתן
 
 ## מהו Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) הוא כלי שורת פקודה שנועד להאיץ את המסלול שלך מפיתוח מקומי לפריסה ב-Azure. הוא מפשט את תהליך הבנייה, הפריסה וניהול יישומים טבעיים-ענן ב-Azure.
+Azure Developer CLI (azd) הוא כלי שורת פקודה שנועד להאיץ את המסלול שלך מפיתוח מקומי לפריסה בענן Azure. הוא מפשט את תהליך הבנייה, הפריסה, והניהול של יישומים מבוססי ענן ב-Azure.
 
-### במה ניתן לפרוס עם azd?
+### מה ניתן לפרוס עם azd?
 
-azd תומך במגוון רחב של עומסי עבודה - וההרשימה ממשיכה לגדול. היום, תוכל להשתמש ב-azd לפרוס:
+azd תומך במגוון רחב של עומסי עבודה – והרשימה ממשיכה לגדול. כיום, באפשרותך להשתמש ב-azd כדי לפרוס:
 
-| סוג העומס | דוגמאות | אותה זרימת עבודה? |
-|-----------|---------|-------------------|
+| סוג עומס עבודה | דוגמאות | אותה זרימת עבודה? |
+|---------------|----------|----------------|
 | **יישומים מסורתיים** | אפליקציות ווב, REST APIs, אתרים סטטיים | ✅ `azd up` |
-| **שירותים ומיקרושירותים** | Container Apps, Function Apps, Backend רב-שירותי | ✅ `azd up` |
-| **יישומים מבוססי AI** | אפליקציות צ׳אט עם דגמי Microsoft Foundry, פתרונות RAG עם חיפוש AI | ✅ `azd up` |
-| **סוכנים אינטיליגנטיים** | סוכנים המתארחים ב-Foundry, אוטורכזציה של סוכנים מרובי | ✅ `azd up` |
+| **שירותים ומיקרו-שירותים** | Container Apps, Function Apps, מערכות שירות מרובות | ✅ `azd up` |
+| **יישומי בינה מלאכותית** | אפליקציית צ'אט עם דגמי Microsoft Foundry, פתרונות RAG עם AI Search | ✅ `azd up` |
+| **סוכנים אינטיליגנטיים** | סוכנים מתוחזקים על Foundry, ארכיטקטורות מרובות סוכנים | ✅ `azd up` |
 
-התובנה המרכזית היא ש**מחזור החיים של azd נשאר זהה ללא קשר למה שאתה מפרוס**. אתה יוזם פרויקט, מספק תשתית, מפרוס את הקוד שלך, מנטר את האפליקציה, ומנקה - בין אם מדובר באתר פשוט או סוכן AI מתוחכם.
+התובנה המרכזית היא ש-**מחזור החיים של azd נשאר זהה ללא קשר למה שאתה מפרוס**. אתה מאתחל פרויקט, מספק את התשתית, מפרוס את הקוד, מנטר את האפליקציה, ומנקה משאבים – בין אם מדובר באתר פשוט או סוכן AI מתקדם.
 
-רצף זה הוא במכוון. azd מתייחס ליכולות AI כשירות נוסף שהאפליקציה שלך יכולה להשתמש בו, לא כמשהו שונה במהותו. נקודת קצה של צ׳אט מונעת על ידי דגמי Microsoft Foundry היא, מנקודת המבט של azd, רק שירות נוסף שיש להגדיר ולפרוס.
+המשכיות זו מתוכננת מראש. azd מתייחס ליכולות בינה מלאכותית כשירות נוסף שהאפליקציה שלך יכולה להשתמש בו, ולא כמשהו שונה באופן מהותי. נקודת קצה לצ'אט שמגובה בדגמי Microsoft Foundry היא, מנקודת מבט של azd, שירות נוסף שיש להגדיר ולפרוס.
 
-### 🎯 למה להשתמש ב-AZD? השוואה מעשית
+### 🎯 מדוע להשתמש ב-AZD? השוואה מהעולם האמיתי
 
-נעשה השוואה בין פריסת אפליקציית ווב פשוטה עם בסיס נתונים:
+נשווה פריסת אפליקציית ווב פשוטה עם בסיס נתונים:
 
-#### ❌ בלי AZD: פריסה ידנית (מעל 30 דקות)
+#### ❌ בלי AZD: פריסה ידנית ב-Azure (30+ דקות)
+
+**השוואת Bash להמחשה בלבד, לא יישום הפעלה.** מניח קוד יישום קיים, שמות משאבים ייחודיים, אימות CLI של Azure, וכל תוספים נדרשים ב-CLI. השתמש בתרגיל התבנית למטה בשביל המסלול הנתמך מקצה לקצה.
 
 ```bash
-# שלב 1: צור קבוצת משאבים
+# Step 1: Create resource group
 az group create --name myapp-rg --location eastus
 
-# שלב 2: צור תוכנית שירות אפליקציות
+# Step 2: Create App Service Plan
 az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# שלב 3: צור אפליקציית רשת
+# Step 3: Create Web App
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
-  --runtime "NODE:18-lts"
+  --runtime "NODE:22-lts"
 
-# שלב 4: צור חשבון Cosmos DB (10-15 דקות)
+# Step 4: Create Cosmos DB account (10-15 minutes)
 az cosmosdb create --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --kind MongoDB
 
-# שלב 5: צור מסד נתונים
+# Step 5: Create database
 az cosmosdb mongodb database create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --name tododb
 
-# שלב 6: צור אוסף
+# Step 6: Create collection
 az cosmosdb mongodb collection create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --database-name tododb \
   --name todos
 
-# שלב 7: קבל מחרוזת חיבור
+# Step 7: Get connection string
 CONN_STR=$(az cosmosdb keys list \
   --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --type connection-strings \
   --query "connectionStrings[0].connectionString" -o tsv)
 
-# שלב 8: קבע הגדרות אפליקציה
+# Step 8: Configure app settings
 az webapp config appsettings set \
   --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --settings MONGODB_URI="$CONN_STR"
 
-# שלב 9: הפעל רישום יומן
+# Step 9: Enable logging
 az webapp log config --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --application-logging filesystem \
   --detailed-error-messages true
 
-# שלב 10: הגדר Application Insights
+# Step 10: Set up Application Insights
 az monitor app-insights component create \
   --app myapp-insights \
   --location eastus \
   --resource-group myapp-rg
 
-# שלב 11: קישור App Insights לאפליקציית רשת
+# Step 11: Link App Insights to Web App
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -125,230 +127,238 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings APPINSIGHTS_INSTRUMENTATIONKEY="$INSTRUMENTATION_KEY"
 
-# שלב 12: בנה את האפליקציה באופן מקומי
+# Step 12: Build application locally
 npm install
 npm run build
 
-# שלב 13: צור חבילת פריסה
+# Step 13: Create deployment package
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
-# שלב 14: פרוס את האפליקציה
+# Step 14: Deploy application
 az webapp deployment source config-zip \
   --resource-group myapp-rg \
   --name myapp-web-unique123 \
   --src app.zip
 
-# שלב 15: המתן והתפלל שזה יעבוד 🙏
-# (אין אימות אוטומטי, נדרש בדיקה ידנית)
+# Step 15: Wait and pray it works 🙏
+# (No automated validation, manual testing required)
 ```
 
 **בעיות:**
-- ❌ מעל 15 פקודות לזכור ולהריץ לפי סדר
-- ❌ עבודה ידנית של 30-45 דקות
-- ❌ קל לטעות (טעויות כתיב, פרמטרים שגויים)
-- ❌ מחרוזות חיבור מוגלות בהיסטוריית הטרמינל
-- ❌ אין ביטול אוטומטי אם משהו נכשל
-- ❌ קשה לשכפל לחברי צוות
-- ❌ שונה בכל פעם (לא ניתן לשחזור)
+- ❌ יותר מ-15 פקודות לזכור ולבצע לפי סדר
+- ❌ 30-45 דקות עבודה ידנית
+- ❌ קל לעשות טעויות (שגיאות הקלדה, פרמטרים שגויים)
+- ❌ אימותים דורשים טיפול מפורש; יומני איתור שגיאות ו-tracing של ה-shell עלולים לחשוף אותם
+- ❌ אין גלילה אוטומטית לאחור אם משהו נכשל
+- ❌ קשה לשכפל עבור חברי צוות
+- ❌ שונה בכל פעם (לא שחזורית)
 
 #### ✅ עם AZD: פריסה אוטומטית (5 פקודות, 10-15 דקות)
 
 ```bash
-# שלב 1: אתחל מתוך תבנית
-azd init --template todo-nodejs-mongo
+# Step 1: Initialize from template
+azd init --template todo-nodejs-mongo .
 
-# שלב 2: אימות
+# Step 2: Authenticate
 azd auth login
 
-# שלב 3: צור סביבה
-azd env new dev
+# Step 3: Select the environment created during init
+azd env select dev
 
-# שלב 4: תצוגה מקדימה של שינויים (אופציונלי אך מומלץ)
+# Step 4: Preview changes (optional but recommended)
 azd provision --preview
 
-# שלב 5: פרוס הכל
+# Step 5: Deploy everything
 azd up
 
-# ✨ הושלם! הכל פרוס, מוגדר ונצפה
+# ✨ Done! Everything is deployed, configured, and monitored
 ```
 
 **יתרונות:**
-- ✅ **5 פקודות** לעומת 15+ שלבים ידניים
-- ✅ **10-15 דקות** זמן כולל (בעיקר המתנה ל-Azure)
-- ✅ **פחות טעויות ידניות** - זרימת עבודה עקבית ומבוססת תבניות
-- ✅ **טיפול בטוח בסודות** - תבניות רבות משתמשות באחסון סודות מנוהל על ידי Azure
-- ✅ **פריסות הניתנות לחזרה** - אותה זרימת עבודה בכל פעם
-- ✅ **שחזור מלא** - אותו תוצאה בכל פעם
-- ✅ **מוכנות לצוות** - כל אחד יכול לפרוס עם אותן פקודות
+- ✅ **5 פקודות** לעומת יותר מ-15 שלבים ידניים
+- ✅ **10-15 דקות** סך הכל (בעיקר המתנה ל-Azure)
+- ✅ **טעויות ידניות מופחתות** - זרימת עבודה עקבית ומונחית תבניות
+- ✅ **טיפול סודי מאובטח** - רבות מהתבניות משתמשות באחסון סודי מנוהל ב-Azure
+- ✅ **פריסות ניתנות לחזרה** - אותו תהליך בכל פעם
+- ✅ **הגדרות תשתית ניתנות לחזרה** - כפוף למגבלות, זמינות אזור, וגרסאות תבנית
+- ✅ **מוכן לצוות** - כל אחד יכול לפרוס עם אותן פקודות
 - ✅ **תשתית כקוד** - תבניות Bicep מבוקרות בגרסאות
-- ✅ **ניטור מובנה** - Application Insights מוגדר אוטומטית
+- ✅ **ניטור מוגדר בתבנית** - Application Insights כאשר כלול בתבנית
 
-### 📊 הקטנת זמן ושגיאות
+### זמן ואמינות
 
-| מדד | פריסה ידנית | פריסת AZD | שיפור |
-|:----|:-------------|:-----------|:-------|
-| **פקודות** | 15+ | 5 | 67% פחות |
-| **זמן** | 30-45 דקות | 10-15 דקות | 60% מהיר יותר |
-| **שיעור שגיאות** | ~40% | <5% | ירידה של 88% |
-| **עקביות** | נמוכה (ידנית) | 100% (אוטומטית) | מושלם |
-| **קבלת צוות** | 2-4 שעות | 30 דקות | 75% מהיר יותר |
-| **זמן ביטול** | מעל 30 דקות (ידני) | 2 דקות (אוטומטי) | 93% מהיר יותר |
+הזמנים שמוצגים הם אומדנים, לא מדדים מדויקים. azd מצמצם את מספר הפקודות שעליך לתאם, אך אינו מבטיח משך פריסה, לא מבטל שגיאות, ואינו מספק גלילה אוטומטית לאחור של האפליקציה/בסיס הנתונים. שמור גרסאות עובדות בשליטת מקור ונסה פרוצדורות שחזור.
 
 ## מושגים מרכזיים
 
 ### תבניות
-התבניות הן היסוד של azd. הן מכילות:
-- **קוד אפליקציה** - קוד המקור והתלויות שלך
+התבניות הן הבסיס של azd. הן מכילות:
+- **קוד אפליקציה** - קוד המקור והספריות התלויות
 - **הגדרות תשתית** - משאבי Azure המוגדרים ב-Bicep או Terraform
-- **קבצי תצורה** - הגדרות ומשתני סביבה
-- **סקריפטים לפריסה** - זרימות עבודה של פריסה אוטומטית
+- **קבצי הגדרות** - הגדרות ומשתני סביבה
+- **סקריפטי פריסה** - זרמי עבודה לפריסה אוטומטית
 
 ### סביבות
-הסביבות מייצגות יעדי פריסה שונים:
+סביבות מייצגות יעדי פריסה שונים:
 - **פיתוח** - לבדיקות ופיתוח
-- **סטייג׳ינג** - סביבת טרום-ייצור
-- **ייצור** - סביבת ייצור חיה
+- **הכנה** - סביבה לפני-ייצור
+- **ייצור** - סביבה חיה בפועל
 
-כל סביבה מחזיקה ב:
-- קבוצת משאבים ב-Azure משלה
-- הגדרות תצורה משלה
-- מצב פריסה משלה
+לכל סביבה יש:
+- שם הסביבה וערכיה; בידוד המשאבים תלוי בתבנית התשתית
+- הגדרות קונפיגורציה
+- מצב הפריסה
 
 ### שירותים
-השירותים הם אבני הבניין של האפליקציה שלך:
-- **חזית** - אפליקציות ווב, SPA
-- **גב** - APIs, מיקרושירותים
-- **מסד נתונים** - פתרונות אחסון נתונים
-- **אחסון** - אחסון קבצים ובלובים
+שירותים ב-`azure.yaml` מתארים רכיבי יישום שניתנים לפריסה:
+- **פרונטאנד** - אפליקציות ווב, אפליקציות SPA
+- **בקאנד** - APIs, מיקרו-שירותים
 
-## תכונות עיקריות
+בסיסי נתונים ואחסון מסופקים בדרך כלל כמשאבי תשתית, לא כאירוח שירות חדשני כגון `host: postgres`.
+
+## תכונות מפתח
 
 ### 1. פיתוח מונחה תבניות
 ```bash
-# דפדף בתבניות הזמינות
+# Browse available templates
 azd template list
 
-# אתחל מתבנית
-azd init --template <template-name>
+# Initialize from a template
+azd init --template "<template-name>" .
 ```
 
 ### 2. תשתית כקוד
-- **Bicep** - שפת דומיין ספציפית של Azure
+- **Bicep** - שפת תחום ספציפית של Azure
 - **Terraform** - כלי תשתית רב-ענני
-- **תבניות ARM** - תבניות Azure Resource Manager
+- Bicep מתורגם לתבניות ARM; JSON גולמי של ARM אינו `infra.provider` מובנה נפרד.
 
 ### 3. זרימות עבודה משולבות
 ```bash
-# זרימת עבודה מלאה לפריסה
-azd up            # אספקה + פריסה זה ללא התערבות להתקנה ראשונית
+# Complete deployment workflow
+azd up            # Provision + Deploy this is hands off for first time setup
 
-# 🧪 חדש: תצוגה מוקדמת של שינויים בתשתית לפני פריסה (בטוח)
-azd provision --preview    # לדמות פריסת תשתית ללא ביצוע שינויים
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
 
-azd provision     # ליצור משאבי Azure אם מעדכנים את התשתית השתמש בזה
-azd deploy        # לפרוס קוד אפליקציה או לפרוס מחדש את קוד האפליקציה לאחר עדכון
-azd down          # לנקות משאבים
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
+azd down          # Clean up resources
 ```
 
-#### 🛡️ תכנון תשתית בטוח עם תצוגה מוקדמת
-פקודת `azd provision --preview` משנה את כללי המשחק לפריסות בטוחות:
-- **הרצת יבש** - מראה מה ייווצר, ישונה או יימחק
-- **סיכון אפס** - אין שינויים ממשיים בסביבת Azure שלך
-- **שיתוף בצוות** - שתף תוצאות תצוגה מוקדמת לפני הפריסה
-- **הערכת עלויות** - הבן את עלות המשאבים לפני המחויבות
+#### 🛡️ תכנון תשתית בטוח עם תצוגה מקדימה
+הפקודה `azd provision --preview` משנה את התמונה לפריסות בטוחות:
+- **הרצת יבש** - מציג מה יווצר, ישונה או יימחק
+- **ללא יישום תשתית** - סוקר שינויים של הספק; בדוק קודם את נקודות החיבור של הפרויקט, מכיוון שהן עלולות להריץ פקודות עם תופעות לוואי
+- **שיתוף צוות** - שיתוף תוצאות התצוגה המקדימה לפני הפריסה
+- **קלט לתכנון עלויות** - בדוק את ה-SKU המוצעים, ולאחר מכן חשב מחירים עם מחשבון המחירים של Azure; תצוגה מקדימה לא מחשבת מחירים
 
 ```bash
-# דוגמת תצוגה מקדימה של זרימת עבודה
-azd provision --preview           # ראה מה ישתנה
-# סקור את הפלט, דון עם הצוות
-azd provision                     # החל שינויים בביטחון
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
-### 📊 ויזואלי: זרימת עבודה בפיתוח AZD
+### 📊 המחשה: זרימת עבודה בפיתוח עם AZD
 
 ```mermaid
 graph LR
-    A[azd init] -->|אתחול פרויקט| B[azd auth login]
-    B -->|אימות| C[azd env new]
-    C -->|יצירת סביבה| D{האם זו הפריסה הראשונה?}
-    D -->|כן| E[azd up]
-    D -->|לא| F[azd provision --preview]
-    F -->|סקירת שינויים| G[azd provision]
-    E -->|מספק ומפרוס| H[משאבים פועלים]
-    G -->|מעדכן תשתית| H
-    H -->|מעקב| I[azd monitor]
-    I -->|ביצוע שינויים בקוד| J[azd deploy]
-    J -->|פריסה מחדש של הקוד בלבד| H
-    H -->|ניקוי| K[azd down]
+    %% Initialization Phase
+    subgraph Setup & Init
+        A[azd init] -->|Initialize project| B[azd auth login]
+        B -->|Authenticate| C[azd env new]
+        C -->|Create environment| D{First deployment?}
+    end
+
+    %% Deployment Phase
+    D -->|Yes| E[azd up]
+    D -->|No| F[azd provision --preview]
     
-    style A fill:#e1f5fe
-    style E fill:#c8e6c9
-    style F fill:#fff9c4
-    style H fill:#c5e1a5
-    style K fill:#ffcdd2
+    F -->|Review changes| G[azd provision]
+    
+    %% Operational Phase
+    E -->|Provisions & deploys| H((Resources running))
+    G -->|Updates infrastructure| H
+    
+    H -->|Monitor logs/metrics| I[azd monitor]
+    
+    %% Daily Dev Loop
+    J[azd deploy] -->|Redeploy code only| H
+    H -->|Make code changes| J
+    
+    %% Cleanup
+    H -->|Teardown resources| K[azd down]
+
+    %% Styling
+    style A fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style E fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    style F fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style H fill:#d1c4e9,stroke:#512da8,stroke-width:2px
+    style J fill:#e1f5fe,stroke:#01579b,stroke-width:1px
+    style K fill:#ffcdd2,stroke:#c62828,stroke-width:2px
 ```
 
-**הסבר זרימת עבודה:**
-1. **איתחול** - התחיל עם תבנית או פרויקט חדש
-2. **אימות** - התחבר אל Azure
-3. **סביבה** - צור סביבת פריסה מבודדת
-4. **תצוגה מוקדמת** - 🆕 תמיד תצוגה מוקדמת של שינויים בתשתית תחילה (פרקטיקה בטוחה)
-5. **פרוביזיה** - צור/עדכן משאבי Azure
-6. **פריסה** - דחוף את קוד האפליקציה שלך
-7. **ניטור** - התבונן בביצועי האפליקציה
-8. **איטרציה** - בצע שינויים ופרוס מחדש את הקוד
-9. **ניקוי** - הסר משאבים כשסיימת
+**הסבר זרימת העבודה:**
+1. **Init** - התחלה עם תבנית או פרויקט חדש
+2. **Auth** - האימות עם Azure
+3. **Environment** - יצירת סביבת פריסה מבודדת
+4. **Preview** - 🆕 תמיד תצוגה מקדימה של שינויים בתשתית תחילה (נהלי בטיחות)
+5. **Provision** - יצירה/עדכון של משאבי Azure
+6. **Deploy** - דחיפת קוד האפליקציה שלך
+7. **Monitor** - תצפית על ביצועי האפליקציה
+8. **Iterate** - ביצוע שינויים ופריסת קוד מחודשת
+9. **Cleanup** - הסרת משאבים כשמסיימים
 
-### 4. ניהול סביבה
+### 4. ניהול סביבות
 ```bash
-# צור ונהל סביבות
-azd env new <environment-name>
-azd env select <environment-name>
+# Create and manage environments
+azd env new "<environment-name>"
+azd env select "<environment-name>"
 azd env list
 ```
 
 ### 5. תוספים ופקודות AI
 
-azd משתמש במערכת תוספים להוספת יכולות מעבר לליבת ה-CLI. זה שימושי במיוחד לעומסי עבודה מבוססי AI:
+azd משתמש במערכת תוספים להוספת יכולות מעבר ל-CLI המרכזי. זה שימושי במיוחד לעומסי עבודה של בינה מלאכותית:
 
 ```bash
-# רשום את ההרחבות הזמינות
+# List available extensions
 azd extension list
 
-# התקן את ההרחבה של סוכני Foundry
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# אתחל פרויקט סוכן AI מתוך מנייו
-azd ai agent init -m agent-manifest.yaml
+# Initialize an AI agent project interactively
+azd ai agent init
 
-# בדוק סוכן שהופעל (מציג השהייה וזמן לקבלת הבייט הראשון)
+# Test a deployed agent (shows latency and time-to-first-byte)
 azd ai agent invoke
 
-# הפעל את שרת MCP לפיתוח בעזר AI (אלפא)
+# Start the MCP server for AI-assisted development (Alpha)
 azd mcp start
 ```
 
-**מחזור החיים של הסוכן, מקצה לקצה.** לאחר שהתקנת `azure.ai.agents`, זרימת עבודה אחת תיקח אותך מהרעיונות לסוכן הפועל ומנוטר. אינך צריך את כולם ביום הראשון - רק דע שהם קיימים:
+**מחזור החיים של הסוכן, מקצה לקצה.** השתמש ב-`azure.ai.agents` עבור פעולות מחזור חיים של סוכן והתקן בנפרד את `azure.ai.evaluations` להערכה. השתמש ב-`azd >= 1.37.0` עבור זרימת עבודה משולבת. אתה לא חייב את כולם מהיום הראשון:
 
 | שלב | פקודה | מה היא עושה |
 |-------|---------|--------------|
-| **הכנה** | `azd ai agent init -m <manifest>` | יוצר פרויקט סוכן מ-Manifest |
-| **בדיקה** | `azd ai agent invoke` | מפעיל את הסוכן וצופה בתגובה |
-| **מדידה** | `azd ai agent eval generate` | יוצר מאגר נתונים להערכת הסוכן |
-| **שיפור** | `azd ai agent optimize` | מייעל הוראות סוכן מול הנתונים שלך |
-| **בדיקה** | `azd ai agent endpoint show` | מציג את תצורת נקודת הקצה החיה |
-| **ניקוי** | `azd ai agent delete` | מוחק סוכן מתארח וכל הגרסאות שלו |
+| **יצירה** | `azd ai agent init --template <path-to-azure.yaml>` | לאמץ תבנית פרויקט סוכן עדכנית |
+| **בדיקה** | `azd ai agent invoke` | קריאה לסוכן וצפייה בזמני תגובה |
+| **מדידה** | `azd ai eval init`, `generate`, `run start` | הגדרה, פריסה והרצת הערכות באמצעות התוסף הנפרד |
+| **שיפור** | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | שימוש חוזר בהערכה תואמת לשיפור הסוכן |
+| **בדיקה** | `azd ai agent endpoint show` | צפייה בקונפיגורציית נקודת הקצה החיה |
+| **ניקוי** | `azd ai agent delete` | מחיקת סוכן אירוח וכל הגרסאות שלו |
 
-> תוספים מפורטים בפרק [2: פיתוח מבוסס AI](../chapter-02-ai-development/agents.md) ובהפניה ל-[פקודות AZD AI CLI ותוספים](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> התוספים מכוסים בפירוט ב[פרק 2: פיתוח מונחה AI](../chapter-02-ai-development/agents.md) ובמדריך הפקודות [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ## 📁 מבנה הפרויקט
 
-מבנה פרויקט azd טיפוסי:  
+מבנה פרויקט טיפוסי של azd:
 ```
 my-app/
-├── .azd/                    # azd configuration
-│   └── config.json
-├── .azure/                  # Azure deployment artifacts
+├── .azure/                  # Local environments and selected-environment config
+│   ├── config.json
+│   └── dev/.env
 ├── .devcontainer/          # Development container config
 ├── .github/workflows/      # GitHub Actions
 ├── .vscode/               # VS Code settings
@@ -363,10 +373,10 @@ my-app/
 └── README.md
 ```
 
-## 🔧 קבצי תצורה
+## 🔧 קבצי קונפיגורציה
 
 ### azure.yaml
-קובץ תצורת הפרויקט הראשי:  
+קובץ הקונפיגורציה הראשי של הפרויקט:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -389,67 +399,63 @@ hooks:
 ```
 
 ### .azure/config.json
-תצורה ספציפית לסביבה:  
+בחירת סביבה ברירת מחדל מקומית לפרויקט (להמחשה; מנוהל על ידי azd):
 ```json
 {
-  "version": 1,
-  "defaultEnvironment": "dev",
-  "environments": {
-    "dev": {
-      "subscriptionId": "your-subscription-id",
-      "location": "eastus"
-    }
-  }
+  "defaultEnvironment": "dev"
 }
 ```
 
 ## 🎪 זרימות עבודה נפוצות עם תרגילים מעשיים
 
-> **💡 טיפ ללמידה:** עקוב אחרי התרגילים האלה בסדר כדי לבנות את מיומנויות ה-AZD שלך בהדרגה.
+> **💡 טיפ למידה:** עקוב אחרי התרגילים הללו לסדר כדי לפתח את מיומנויות AZD שלך בהדרגה.
 
-### 🎯 תרגיל 1: איתחול הפרויקט הראשון שלך
+### 🎯 תרגיל 1: אתחול הפרויקט הראשון שלך
 
-**מטרה:** צור פרויקט AZD וחקור את המבנה שלו
+**מטרה:** יצירת פרויקט AZD וחקר מבנהו
 
-**שלבים:**  
+**שלבים:**
 ```bash
-# השתמש בתבנית מוכחת
-azd init --template todo-nodejs-mongo
+# Use a proven template
+mkdir azd-basics-practice
+cd azd-basics-practice
+# Choose "dev" for the environment name when prompted
+azd init --template todo-nodejs-mongo .
 
-# חקור את הקבצים שנוצרו
-ls -la  # הצג את כל הקבצים כולל מוסתרים
+# Explore the generated files
+ls -la  # View all files including hidden ones
 
-# קבצים מרכזיים שנוצרו:
-# - azure.yaml (תצורה ראשית)
-# - infra/ (קוד תשתית)
-# - src/ (קוד אפליקציה)
+# Key files created:
+# - azure.yaml (main config)
+# - infra/ (infrastructure code)
+# - src/ (application code)
 ```
 
-**✅ הצלחה:** יש לך ספריות azure.yaml, infra/, ו-src/
+**✅ הצלחה:** יש לך את הקבצים azure.yaml, infra/ ו-src/
 
 ---
 
 ### 🎯 תרגיל 2: פריסה ל-Azure
 
-**מטרה:** סגור פריסה מקצה לקצה
+**מטרה:** השלם פריסה מקצה לקצה
 
-**שלבים:**  
+**שלבים:**
 ```bash
-# 1. לאמת
-az login && azd auth login
+# 1. Authenticate
+azd auth login
 
-# 2. ליצור סביבה
-azd env new dev
+# 2. Select the dev environment created in Exercise 1
+azd env select dev
 azd env set AZURE_LOCATION eastus
 
-# 3. תצוגה מקדימה של שינויים (מומלץ)
+# 3. Preview changes (RECOMMENDED)
 azd provision --preview
 
-# 4. לפרוס הכל
+# 4. Deploy everything
 azd up
 
-# 5. לאמת את הפריסה
-azd show    # הצג את כתובת ה-URL של האפליקציה שלך
+# 5. Verify deployment
+azd show    # View your app URL
 ```
 
 **זמן מוערך:** 10-15 דקות  
@@ -459,208 +465,210 @@ azd show    # הצג את כתובת ה-URL של האפליקציה שלך
 
 ### 🎯 תרגיל 3: סביבות מרובות
 
-**מטרה:** פרוס לסביבות dev ו-staging
+**מטרה:** פריסת dev ו-staging
 
-**שלבים:**  
+**שלבים:**
 ```bash
-# כבר יש לך סביבה לפיתוח, יצירת סביבה לניסויים
+# Already have dev, create staging
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
 
-# החלף ביניהן
+# Switch between them
 azd env list
 azd env select dev
 ```
 
-**✅ הצלחה:** שתי קבוצות משאבים נפרדות ב-Azure Portal
+**✅ הצלחה:** שתי קבוצות משאבים נפרדות בפורטל Azure
+
+**ניקוי:** התרגיל יוצר פריסה שנייה עם חיוב. מחק את השניים בסיום:
+
+```bash
+azd down --environment dev
+azd down --environment staging
+```
 
 ---
 
-### 🛡️ ניקוי כולל: `azd down --force --purge`
+### 🛡️ ניקוי הרסני: `azd down --force --purge`
 
-כאשר אתה צריך לאפס הכל לחלוטין:
+כאשר ברצונך למחוק במתכוון משאבים של סביבת Azure שנבחרה:
 
 ```bash
 azd down --force --purge
 ```
 
-**מה זה עושה:**
+**מה שזה עושה:**
 - `--force`: ללא בקשות אישור
-- `--purge`: מוחק את כל מצב מקומי ומשאבי Azure
+- `--purge`: מוחק לצמיתות גם משאבים למחוקים ברכות שנתמכים (לדוגמה Key Vaults), כאשר הגנת הניקוי מתירה זאת. הוא אינו מוחק את תיקיית `.azure/` המקומית.
 
-**שימוש מתי:**
-- פריסה נכשלה באמצע הדרך
-- מעביר פרויקטים
-- צורך בפתיחה חדשה
+**שימוש מתי:** סיימת עם סביבה חד-פעמית. אל תטפל בניקוי הרסני כתגובה ראשונה לבעיה באימות, מכסת שימוש או בהגדרת תצורה.
 
 ---
 
 ## 🎪 הפניה לזרימת עבודה מקורית
 
-### התחלת פרויקט חדש  
+### התחלת פרויקט חדש
 ```bash
-# שיטה 1: השתמש בתבנית קיימת
-azd init --template todo-nodejs-mongo
+# Method 1: Use existing template
+azd init --template todo-nodejs-mongo .
 
-# שיטה 2: התחל מאפס
+# Method 2: Start from scratch
 azd init
 
-# שיטה 3: השתמש בספרייה הנוכחית
+# Method 3: Use current directory
 azd init .
 ```
 
-### מחזור פיתוח  
+### מחזור פיתוח
 ```bash
-# הגדר את סביבת הפיתוח
+# Set up development environment
 azd auth login
 azd env new dev
 azd env select dev
 
-# פרוס את הכל
+# Deploy everything
 azd up
 
-# בצע שינויים ופרוס מחדש
+# Make changes and redeploy
 azd deploy
 
-# נקה כשמסיימים
-azd down --force --purge # הפקודה ב-Azure Developer CLI היא **איפוס קשה** לסביבה שלך—שימושית במיוחד כאשר אתה בודק בעיות בפריסות שנכשלו, מנקה משאבים יתומים, או מתכונן לפריסה מחדש נקייה.
+# Clean up when done
+azd down --force --purge # Deletes this environment's discovered Azure resources; review before forcing deletion.
 ```
 
 ## הבנת `azd down --force --purge`
-הפקודה `azd down --force --purge` היא דרך עוצמתית לפרק לחלוטין את סביבת azd ואת כל המשאבים המקושרים. הנה פירוט של מה שכל דגל עושה:  
+הפקודה `azd down --force --purge` היא דרך עוצמתית לפרק לחלוטין את סביבה azd שלך ואת כל המשאבים הקשורים לה. הנה פירוט מה עושה כל דגל:
 ```
 --force
 ```
-- מדלג על בקשות אישור.  
-- שימושי לאוטומציה או סקריפטים בהם אין אפשרות להזין ידנית.  
-- מבטיח שההריסה תמשיך ללא הפרעה, אפילו אם ה-CLI מזהה אי-התאמות.  
+- מדלג על בקשות אישור.
+- שימושי לאוטומציה או לסקריפטים שבהם קלט ידני אינו אפשרי.
+- אינו עוקף הרשאות, הגנת ניקוי או כישלונות מחיקה.
 
 ```
 --purge
 ```
-מוחק **את כל המטא-נתונים הקשורים**, כולל:  
-מצב סביבה  
-תיקיית `.azure` מקומית  
-מידע פריסה מטמון  
-מונע מ-azd "לזכור" פריסות קודמות, שיכולות לגרום לבעיות כמו קבוצות משאבים לא תואמות או הפניות רישום מיושנות.  
+מוחק לצמיתות משאבי Azure במחיקה רכה שנתמכים ללא אישור נוסף. הגנת הניקוי וההרשאות עדיין חלות. הוא **אינו** מסיר סביבות מקומיות או את תיקיית `.azure/`.
 
-### למה להשתמש בשניהם?  
-כשנתקלת בבעיה עם `azd up` עקב מצב מתמשך או פריסות חלקיות, קומבינציה זו מבטיחה **תחיל נקי**.
 
-זה במיוחד מועיל אחרי מחיקות משאבים ידניות בפורטל Azure או כשמתחלפים תבניות, סביבות, או שמות קבוצות משאבים.
+### למה להשתמש בשניהם?
+השתמש בשניהם רק כאשר בכוונתך למחוק את משאבי ה-Azure של הסביבה הנבחרת ולנקות משאבים שניתנים לשחזור. זהו ניקוי הרסני, לא תיקון כללי או איפוס מצב מקומי.
 
-### ניהול סביבות מרובות  
+זה שימושי במיוחד לאחר מחיקות ידניות של משאבים בפורטל Azure או בעת החלפת תבניות, סביבות או קונבנציות שמות קבוצות משאבים.
+
+
+### ניהול סביבות מרובות
 ```bash
-# צור סביבת סטייג'ינג
+# Create staging environment
 azd env new staging
 azd env select staging
 azd up
 
-# חזור לפיתוח
+# Switch back to dev
 azd env select dev
 
-# השווה בין הסביבות
+# Compare environments
 azd env list
 ```
 
 ## 🔐 אימות ואישורים
 
-הבנת האימות היא קריטית לפריסות מוצלחות עם azd. Azure משתמש בשיטות אימות מרובות, ו-azd מנצל את אותה שרשרת קרדנציאלים המשמשת כלים אחרים של Azure.
+הבדל בין אימות פריסת (`azd auth login`) לבין אימות SDK עבור אפליקציות (`DefaultAzureCredential`). הם נפרדים. azd אינה משתמשת כברירת מחדל בהרשאות Azure CLI.
 
-### אימות ב-Azure CLI (`az login`)
+### אימות Azure CLI (`az login`)
 
-לפני השימוש ב-azd, עליך להתחבר ל-Azure. השיטה הנפוצה ביותר היא שימוש ב-Azure CLI:
+הרץ `azd auth login` עבור azd. פקודות Azure CLI הבאות הן אופציונליות ומאמתות פקודות `az` בנפרד:
 
 ```bash
-# התחברות אינטראקטיבית (פותח דפדפן)
+# Interactive login (opens browser)
 az login
 
-# התחבר עם שוכר ספציפי
-az login --tenant <tenant-id>
+# Login with specific tenant
+az login --tenant "<tenant-id>"
 
-# התחבר עם פרסונל שירות
-az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+# Login with service principal
+az login --service-principal -u "<app-id>" -p "<password>" --tenant "<tenant-id>"
 
-# בדוק את מצב ההתחברות הנוכחי
+# Check current login status
 az account show
 
-# רשום את המנויים הזמינים
+# List available subscriptions
 az account list --output table
 
-# הגדר את המנוי ברירת מחדל
-az account set --subscription <subscription-id>
+# Set default subscription
+az account set --subscription "<subscription-id>"
 ```
 
-### זרימת אימות
-1. **כניסה אינטראקטיבית**: פותח את הדפדפן שלך להתחברות
-2. **Device Code Flow**: עבור סביבות ללא גישה לדפדפן
-3. **Service Principal**: לאוטומציה וסביבות CI/CD
-4. **זהות מנוהלת**: עבור אפליקציות המארחות ב-Azure
+### רצף אימות
+1. **התחברות אינטראקטיבית**: פותחת את הדפדפן ברירת המחדל שלך לאימות
+2. **זרימת קוד מכשיר**: לסביבות שאין להן גישה לדפדפן
+3. **נושא שירות**: לאוטומציה ותרחישי CI/CD
+4. **זהות מנוהלת**: לאפליקציות המארחות ב-Azure
 
 ### שרשרת DefaultAzureCredential
 
-`DefaultAzureCredential` הוא סוג קרדנציאל שמספק חווית אימות פשוטה על ידי ניסיון אוטומטי של מקורות קרדנציאל שונים לפי סדר ספציפי:
+`DefaultAzureCredential` הוא סוג של אישור שנותן חוויית אימות מופשטת על ידי ניסיון אוטומטי של מקורות הרשאות מרובים בסדר מסוים:
 
-#### סדר שרשרת קרדנציאל  
+#### שרשרת אישורי SDK של אפליקציה
+
+שרשרת המדויקת תלויה בשפת Azure Identity SDK, בגרסה, בתוספים המותקנים, ובאפשרויות. הדיאגרמה הזו היא רעיונית, לא רצף אימות azd קבוע; SDKs עדכניים יכולים לכלול גם הרשאות Azure Developer CLI.
 ```mermaid
 graph TD
-    A[DefaultAzureCredential] --> B[משתני סביבה]
-    B --> C[זהות עומס עבודה]
-    C --> D[זהות מנוהלת]
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
     D --> E[Visual Studio]
     E --> F[Visual Studio Code]
     F --> G[Azure CLI]
     G --> H[Azure PowerShell]
-    H --> I[דפדפן אינטראקטיבי]
+    H --> I[Interactive Browser]
 ```
 
-#### 1. משתני סביבה  
+#### 1. משתני סביבה
 ```bash
-# הגדר משתני סביבה עבור ראש שירות
+# Set environment variables for service principal
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. Workload Identity (Kubernetes/GitHub Actions)  
-משמש אוטומטית ב:  
-- Azure Kubernetes Service (AKS) עם Workload Identity  
-- GitHub Actions עם פדרציית OIDC  
-- תרחישי זהות מפדרים נוספים
+#### 2. Workload Identity (Kubernetes/GitHub Actions)
+משומש אוטומטית ב:
+- שירות Kubernetes של Azure (AKS) עם Workload Identity
+- GitHub Actions עם פדרציית OIDC
+- תרחישי זהות מאוחדת אחרים
 
-#### 3. זהות מנוהלת  
-עבור משאבי Azure כגון:  
-- מכונות וירטואליות  
-- App Service  
-- Azure Functions  
-- Container Instances
+#### 3. זהות מנוהלת
+עבור משאבי Azure כמו:
+- מכונות וירטואליות
+- App Service
+- Azure Functions
+- מכולות מופעלות
 
 ```bash
-# בדוק אם רץ על משאב Azure עם זהות מנוהלת
-az account show --query "user.type" --output tsv
-# מחזיר: "servicePrincipal" אם משתמשים בזהות מנוהלת
+# Inspect a deployed Container App's configured identity (requires az login)
+az containerapp show --name "<app-name>" --resource-group "<rg-name>" --query identity
 ```
 
-#### 4. אינטגרציית כלי מפתח  
-- **Visual Studio**: משתמש אוטומטית בחשבון שנכנס  
-- **VS Code**: משתמש בקרדנציאלים של הרחבת Azure Account  
-- **Azure CLI**: משתמש בקרדנציאלים של `az login` (השכיח ביותר לפיתוח מקומי)
+#### 4. שילוב כלים למפתחים
+- **Visual Studio**: משתמש אוטומטית בחשבון מחובר
+- **VS Code**: התמיכה תלויה ב-SDK ובהגדרות התווך/תוסף הנתמכים
+- **Azure CLI**: משתמש בהרשאות `az login` (השכיח ביותר לפיתוח מקומי)
 
-### הגדרת אימות ב-AZD
+### הקמת אימות ב-AZD
 
 ```bash
-# שיטה 1: השתמש ב-Azure CLI (מומלץ לפיתוח)
-az login
-azd auth login  # משתמש באישורי Azure CLI קיימים
+# Method 1: Direct azd authentication (recommended)
+azd auth login
 
-# שיטה 2: אימות ישיר עם azd
-azd auth login --use-device-code  # לסביבות ללא ממשק משתמש
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
 
-# שיטה 3: בדיקת מצב האימות
+# Method 3: Check authentication status
 azd auth login --check-status
 
-# שיטה 4: התנתק ואמת מחדש
+# Method 4: Logout and re-authenticate
 azd auth logout
 azd auth login
 ```
@@ -669,25 +677,20 @@ azd auth login
 
 #### לפיתוח מקומי
 ```bash
-# 1. התחבר עם Azure CLI
-az login
-
-# 2. אמת את המנוי הנכון
-az account show
-az account set --subscription "Your Subscription Name"
-
-# 3. השתמש ב-azd עם האישורים הקיימים
+# 1. Log in to azd
 azd auth login
+
+# 2. Select the subscription for this initialized environment
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+
+# 3. Check azd sign-in details (read the status message)
+azd auth login --check-status
 ```
 
-#### לצנרות CI/CD
+#### לצינורות CI/CD
 ```yaml
-# GitHub Actions example
-- name: Azure Login
-  uses: azure/login@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+# Partial GitHub Actions steps: assumes checkout, azd installation,
+# required AZURE_* environment values, and pipeline secret configuration.
 - name: Deploy with azd
   run: |
     azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
@@ -696,17 +699,17 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### לסביבות ייצור
-- השתמש ב**זהות מנוהלת** כאשר מריצים על משאבי Azure
-- השתמש ב**Service Principal** לתרחישי אוטומציה
-- הימנע מאחסון הרשאות בקוד או בקבצי תצורה
-- השתמש ב**Azure Key Vault** עבור תצורה רגישה
+#### לסביבות הפקה
+- השתמשו ב-**זהות מנוהלת** כשמריצים על משאבי Azure
+- השתמשו ב-**Service Principal** לתרחישי אוטומציה
+- הימנעו מאחסון הרשאות בקוד או בקבצי תצורה
+- השתמשו ב-**Azure Key Vault** עבור תצורה רגישה
 
 ### בעיות אימות נפוצות ופתרונות
 
-#### בעיה: "לא נמצאה הרשמה"
+#### בעיה: "לא נמצאה מנוי"
 ```bash
-# פתרון: הגדר את המנוי כברירת מחדל
+# Solution: Set default subscription
 az account list --output table
 az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
@@ -714,17 +717,17 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 
 #### בעיה: "הרשאות לא מספיקות"
 ```bash
-# פתרון: בדוק והקצה תפקידים דרושים
+# Solution: Check and assign required roles
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
-# תפקידים דרושים נפוצים:
-# - תורם (לניהול משאבים)
-# - מנהל גישת משתמשים (להקצאת תפקידים)
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
 ```
 
-#### בעיה: "האסימון פג תוקף"
+#### בעיה: "הטוקן פג תוקף"
 ```bash
-# פתרון: אימות מחדש
+# Solution: Re-authenticate
 az logout
 az login
 azd auth logout
@@ -735,139 +738,144 @@ azd auth login
 
 #### פיתוח מקומי
 ```bash
-# חשבון לפיתוח אישי
+# Personal development account
 az login
 azd auth login
 ```
 
 #### פיתוח צוותי
 ```bash
-# השתמש בשוכר ספציפי לארגון
+# Use specific tenant for organization
 az login --tenant contoso.onmicrosoft.com
-azd auth login
+azd auth login --tenant-id "<tenant-id>"
 ```
 
-#### תרחישי רב-שוכנים
+#### תרחישי רב-שוכני
 ```bash
-# להחליף בין שוכרים
+# Switch between tenants
 az login --tenant tenant1.onmicrosoft.com
-# לפרוס לשוכר 1
+azd auth login --tenant-id "<tenant-1-id>"
+# Select an environment configured with tenant 1's subscription
+azd env select tenant1-dev
+# Deploy to tenant 1
 azd up
 
 az login --tenant tenant2.onmicrosoft.com  
-# לפרוס לשוכר 2
+azd auth login --tenant-id "<tenant-2-id>"
+azd env select tenant2-dev
+# Deploy to tenant 2
 azd up
 ```
 
-### שיקולי אבטחה
+### התחשבות באבטחה
 
-1. **אחסון אישורים**: לעולם אל תאחסן אישורים בקוד המקור
-2. **הגבלת היקף**: השתמש בעקרון המינימום הרשאה עבור שירותי Service Principal
-3. **סיבוב אסימונים**: סובב סודות Service Principal באופן קבוע
-4. **רישום ביקורת**: נטר פעולות אימות ופריסה
-5. **אבטחת רשת**: השתמש בנקודות קצה פרטיות ככל האפשר
+1. **אחסון הרשאות**: לעולם אל תאחסן הרשאות בקוד המקור
+2. **הגבלת תחום**: השתמשו בעיקרון הפחות הרשאות עבור service principals
+3. **סיבוב טוקנים**: סובבו סודות service principal באופן קבוע
+4. **עקבות ביקורת**: נטרו פעילויות אימות ופריסה
+5. **אבטחת רשת**: השתמשו בנקודות קצה פרטיות כשאפשרי
 
 ### פתרון בעיות אימות
 
 ```bash
-# איתור תקלות באימות
+# Debug authentication issues
 azd auth login --check-status
 az account show
 az account get-access-token
 
-# פקודות אבחון נפוצות
-whoami                          # הקשר המשתמש הנוכחי
-az ad signed-in-user show      # פרטי משתמש של Microsoft Entra ID
-az group list                  # בדוק גישה למשאב
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Microsoft Entra ID user details
+az group list                  # Test resource access
 ```
 
-## הבנת `azd down --force --purge`
+## גילוי פקודות
 
 ### גילוי
 ```bash
-azd template list              # דפדף בתבניות
-azd template show <template>   # פרטי התבנית
-azd init --help               # אפשרויות אתחול
+azd template list              # Browse templates
+azd template list --help       # Template discovery options
+azd init --help               # Initialization options
 ```
 
 ### ניהול פרויקטים
 ```bash
-azd show                     # סקירת הפרויקט
-azd env list                # סביבות זמינות וברירת מחדל שנבחרה
-azd config show            # הגדרות תצורה
+azd show                     # Project overview
+azd env list                # Available environments and selected default
+azd config show            # Configuration settings
 ```
 
 ### ניטור
 ```bash
-azd monitor                  # פותח ניתוח בפורטל Azure
-azd monitor --logs           # הצג יומני יישומים
-azd monitor --live           # הצג מדדים בזמן אמת
-azd pipeline config          # הגדר CI/CD
+azd monitor                  # Open Azure portal monitoring
+azd monitor --logs           # View application logs
+azd monitor --live           # View live metrics
+azd pipeline config          # Set up CI/CD
 ```
 
 ## שיטות עבודה מומלצות
 
-### 1. השתמש בשמות משמעותיים
+### 1. השתמש בשמות בעלי משמעות
 ```bash
-# טוב
+# Good
 azd env new production-east
-azd init --template web-app-secure
+azd init --template todo-nodejs-mongo .
 
-# להימנע
+# Avoid
 azd env new env1
-azd init --template template1
+azd init --template template1 .
 ```
 
 ### 2. נצל תבניות
-- התחל מתבניות קיימות
-- התאם לצרכים שלך
-- צור תבניות לשימוש חוזר בארגון שלך
+- התחל בתבניות קיימות
+- התאם לצרכיך
+- צור תבניות לשימוש חוזר בארגונך
 
-### 3. בידוד סביבה
-- השתמש בסביבות נפרדות לפיתוח/בדיקות/ייצור
-- לעולם אל תפיץ ישירות לייצור מהמחשב המקומי
-- השתמש בצנרת CI/CD לפריסות ייצור
+### 3. בידוד סביבות
+- השתמש בסביבות נפרדות לפיתוח/ביניים/הפקה
+- לעולם אל תפיץ ישירות לסביבת ההפקה מהמחשב המקומי
+- השתמש בצינורות CI/CD לפריסות הפקה
 
 ### 4. ניהול תצורה
-- השתמש במשתני סביבה עבור מידע רגיש
-- שמור תצורה במערכת בקרת גרסאות
-- תעד הגדרות מיוחדות לסביבה
+- השתמש בזהות מנוהלת ו-Key Vault עבור סודות; ערכי `azd env set` רגילים הם טקסט רגיל מקומי
+- שמור תצורה בבקרת גרסאות
+- תעד הגדרות ייחודיות לסביבה
 
 ## התקדמות בלמידה
 
 ### מתחילים (שבוע 1-2)
-1. התקן azd ואמת
+1. התקן את azd ואמת
 2. פרוס תבנית פשוטה
 3. הבן את מבנה הפרויקט
 4. למד פקודות בסיסיות (up, down, deploy)
 
-### בינוני (שבוע 3-4)
-1. התאם תבניות
-2. נהל סביבות מרובות
+### בינוניים (שבוע 3-4)
+1. התאם תבניות אישית
+2. נהל מספר סביבות
 3. הבן קוד תשתיתי
 4. הקם צינורות CI/CD
 
-### מתקדם (שבוע 5+)
+### מתקדמים (שבוע 5+)
 1. צור תבניות מותאמות אישית
 2. דפוסי תשתית מתקדמים
 3. פריסות רב-אזוריות
-4. תצורות בסטנדרט תאגידי
+4. תצורות ברמת ארגון
 
 ## צעדים הבאים
 
-**📖 המשך ללמוד פרק 1:**
-- [התקנה והגדרה](installation.md) - התקן והגדר את azd
-- [הפרויקט הראשון שלך](first-project.md) - סיום מדריך מעשי
-- [מדריך תצורה](configuration.md) - אפשרויות תצורה מתקדמות
+**📖 המשך למידה פרק 1:**
+- [התקנה והגדרה](installation.md) - קבל את azd מותקן ומוגדר
+- [הפרויקט הראשון שלך](first-project.md) - סיים מדריך מעשי
+- [מדריך תצורה](../chapter-03-configuration/configuration.md) - אפשרויות תצורה מתקדמות
 
 **🎯 מוכן לפרק הבא?**
-- [פרק 2: פיתוח מונחה בינה מלאכותית](../chapter-02-ai-development/microsoft-foundry-integration.md) - התחל לבנות אפליקציות AI
+- [פרק 2: פיתוח עם AI](../chapter-02-ai-development/microsoft-foundry-integration.md) - התחל לבנות אפליקציות AI
 
 ## משאבים נוספים
 
 - [סקירת Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [גלריית תבניות](https://azure.github.io/awesome-azd/)
-- [דוגמאות קהילתיות](https://github.com/Azure-Samples)
+- [דוגמאות מהקהילה](https://github.com/Azure-Samples)
 
 ---
 
@@ -877,160 +885,162 @@ azd init --template template1
 
 **ש: מה ההבדל בין AZD ל-Azure CLI?**
 
-ת: Azure CLI (`az`) משמש לניהול משאבי Azure בודדים. AZD (`azd`) לניהול אפליקציות שלמות:
+ת: Azure CLI (`az`) מיועד לניהול משאבי Azure יחידים. AZD (`azd`) מיועד לניהול אפליקציות שלמות:
 
 ```bash
-# ממשק שורת הפקודה של Azure - ניהול משאבים ברמת נמוכה
+# Azure CLI - Low-level resource management
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ... דרושות פקודות רבות נוספות
+# ...many more commands needed
 
-# AZD - ניהול ברמת אפליקציה
-azd up  # מפעיל את כל האפליקציה עם כל המשאבים
+# AZD - Application-level management
+azd up  # Deploys entire app with all resources
 ```
 
-**חשוב את זה כך:**
-- `az` = הפעולה על לבני לגו בודדות
-- `azd` = עבודה עם סטים שלמים של לגו
+**תחשוב על זה כך:**
+- `az` = הפעלה על לבני לגו יחידים
+- `azd` = עבודה עם סטים מלאים של לגו
 
 ---
 
-**ש: האם עלי לדעת Bicep או Terraform כדי להשתמש ב-AZD?**
+**ש: האם צריך לדעת Bicep או Terraform כדי להשתמש ב-AZD?**
 
-ת: לא! התחל עם תבניות:
+ת: לא! התחל בתבניות:
 ```bash
-# השתמש בתבנית קיימת - לא נדרשת ידע ב-IaC
-azd init --template todo-nodejs-mongo
+# Use existing template - no IaC knowledge needed
+azd init --template todo-nodejs-mongo .
 azd up
 ```
 
-תוכל ללמוד Bicep מאוחר יותר כדי להתאים את התשתית. תבניות מספקות דוגמאות עובדות ללמידה.
+ניתן ללמוד Bicep מאוחר יותר להתאמת התשתית. התבניות מספקות דוגמאות עובדות ללמוד מהן.
 
 ---
 
-**ש: כמה עולה להפעיל תבניות AZD?**
+**ש: כמה עולה להריץ תבניות AZD?**
 
-ת: העלויות משתנות לפי התבנית. רוב התבניות לפיתוח עולות בין 50 ל-150 דולר לחודש:
+ת: העלויות משתנות לפי אזור, SKU, זמינות, מצב בסיס נתונים, ושימוש במודל. סביבת פיתוח יכולה לגרום לעלויות חודשיות משמעותיות גם במצב מנוחה; אל תסמוך על טווח כללי של 50-150 דולר:
 
 ```bash
-# תצוגה מקדימה של עלויות לפני הפריסה
+# Preview resource changes (not prices)
 azd provision --preview
 
-# תמיד לנקות כאשר לא משתמשים
-azd down --force --purge  # מסיר את כל המשאבים
+# Always cleanup when not using
+azd down --force --purge  # Removes all resources
 ```
 
-**טיפ מקצועי:** השתמש בשכבות חינם כשיש:
+**טיפ מקצועי:** השתמש בשכבות חינמיות כשאפשרי:
 - App Service: שכבת F1 (חינמית)
-- Microsoft Foundry Models: Azure OpenAI עד 50,000 אסימונים בחודש חינם
-- Cosmos DB: שכבת 1000 RU/s חינמית
+- Azure OpenAI: אין עלות חודשית חופשית מובטחת כללית; בדוק מחירון ודגם נוכחי
+- Cosmos DB: חשבונות עם תעבורה מסופקת זכאים לבחור בשכבה חינמית; תבניות serverless אינן זכאיות אוטומטית
 
 ---
 
-**ש: האם могу להשתמש ב-AZD עם משאבי Azure קיימים?**
+**ש: האם אפשר להשתמש ב-AZD עם משאבי Azure קיימים?**
 
-ת: כן, אבל קל יותר להתחיל מחדש. AZD מתפקד טוב ביותר כשהוא מנהל את מחזור החיים המלא. עבור משאבים קיימים:
+ת: כן, אך קל יותר להתחיל מחדש. AZD עובד טוב ביותר כאשר הוא מנהל את כל המחזור חיים. עבור משאבים קיימים:
 
 ```bash
-# אפשרות 1: ייבוא משאבים קיימים (מתקדם)
+# Option 1: Import existing resources (advanced)
 azd init
-# לאחר מכן שנה את infra/ כדי להתייחס למשאבים קיימים
+# Then modify infra/ to reference existing resources
 
-# אפשרות 2: התחלה מחדש (מומלץ)
-azd init --template matching-your-stack
-azd up  # יוצר סביבה חדשה
+# Option 2: Start fresh (recommended)
+azd init --template "<verified-template-name>" .
+azd up  # Creates new environment
 ```
 
 ---
 
-**ש: איך לשתף את הפרויקט שלי עם חברי צוות?**
+**ש: איך משתפים את הפרויקט עם חברי צוות?**
 
-ת: בצע commit לפרויקט AZD ל-Git (אבל לא לתיקיית .azure):
+ת: שנה את פרויקט AZD ל-Git (אבל לא את התיקייה .azure):
 
 ```bash
-# כבר כלול ב-.gitignore כברירת מחדל
-.azure/        # מכיל סודות ונתוני סביבה
-*.env          # משתני סביבה
+# Already in .gitignore by default
+.azure/        # Contains secrets and environment data
+*.env          # Environment variables
 
-# חברי הצוות אז:
-git clone <your-repo>
+# Team members then:
+git clone "<your-repo>"
+# Change into the cloned repository before running the remaining commands.
 azd auth login
-azd env new <their-name>-dev
+azd env new "<their-name>-dev"
 azd up
 ```
 
-כולם מקבלים את אותה תשתית מהתבניות האלו.
+כולם מקבלים תשתית זהה מאותן תבניות.
 
 ---
 
 ### שאלות פתרון בעיות
 
-**ש: "azd up" נכשל באמצע. מה לעשות?**
+**ש: "azd up" נכשל באמצע ריצתו. מה עושים?**
 
 ת: בדוק את השגיאה, תקן, ונסה שוב:
 
 ```bash
-# הצג יומנים מפורטים
-azd show
+# Capture detailed diagnostics (redact sensitive values before sharing)
+azd up --debug
 
-# תיקונים נפוצים:
+# Common fixes:
 
-# 1. אם המיכסה חרגה:
-azd env set AZURE_LOCATION "westus2"  # נסה אזור שונה
+# 1. If quota exceeded:
+azd env set AZURE_LOCATION "westus2"  # Try different region
 
-# 2. אם יש קונפליקט בשם משאב:
-azd down --force --purge  # אפס הכל
-azd up  # נסה שוב
+# 2. If resource name conflict:
+azd down --force --purge  # Clean slate
+azd up  # Retry
 
-# 3. אם האימות פג תוקף:
+# 3. If auth expired:
 az login
 azd auth login
 azd up
 ```
 
-**הבעיה הנפוצה ביותר:** נבחרה הרשמת Azure שגויה
+**בעיה נפוצה ביותר:** נבחר מנוי Azure שגוי
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
+azd env set AZURE_SUBSCRIPTION_ID "<correct-subscription-id>"
 ```
 
 ---
 
-**ש: איך לפרוס שינויים בקוד בלבד בלי פרוס מחדש?**
+**ש: איך מפעילים רק שינויים בקוד בלי פריסה מחודשת?**
 
-ת: השתמש ב`azd deploy` במקום `azd up`:
+ת: השתמש ב-`azd deploy` במקום `azd up`:
 
 ```bash
-azd up          # בפעם הראשונה: הקצאה + פריסה (איטי)
+azd up          # First time: provision + deploy (slow)
 
-# בצע שינויים בקוד...
+# Make code changes...
 
-azd deploy      # בפעמים הבאות: פריסה בלבד (מהיר)
+azd deploy      # Subsequent times: deploy only (fast)
 ```
 
 השוואת מהירות:
-- `azd up`: 10-15 דקות (מסדיר תשתית)
+- `azd up`: 10-15 דקות (מגדיר תשתית)
 - `azd deploy`: 2-5 דקות (רק קוד)
 
 ---
 
-**ש: האם ניתן להתאים את תבניות התשתית?**
+**ש: אפשר להתאים תבניות תשתית?**
 
-ת: כן! ערוך את קבצי Bicep ב`infra/`:
+ת: כן! ערוך את קבצי Bicep ב-`infra/`:
 
 ```bash
-# אחרי azd init
+# After azd init
 cd infra/
-code main.bicep  # ערוך ב-VS Code
+code main.bicep  # Edit in VS Code
 
-# תצוגה מקדימה של שינויים
+# Preview changes
 azd provision --preview
 
-# החל שינויים
+# Apply changes
 azd provision
 ```
 
-**טיפ:** התחל בקטן - שנה SKU תחילה:
+**טיפ:** התחל בקטן - שנה קודם כל SKU:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -1040,51 +1050,50 @@ sku: {
 
 ---
 
-**ש: איך למחוק את כל מה ש-AZD יצר?**
+**ש: איך מוחקים את כל מה ש-AZD יצר?**
 
 ת: פקודה אחת מסירה את כל המשאבים:
 
 ```bash
 azd down --force --purge
 
-# זה מוחק:
-# - כל המשאבים של Azure
-# - קבוצת המשאבים
-# - מצב הסביבה המקומית
-# - נתוני פריסה מטמון
+# This deletes:
+# - Azure resources/resource groups discovered for the selected environment
+# - Supported soft-deleted resources, if purge protection allows
+# Local .azure files remain; shared/external resources may remain too.
 ```
 
-**הרץ זאת תמיד כש:**
+**הרץ זאת תמיד כאשר:**
 - סיימת לבדוק תבנית
-- מעביר לפרויקט אחר
+- עובר לפרויקט שונה
 - רוצה להתחיל מחדש
 
-**חיסכון בעלויות:** מחיקת משאבים לא בשימוש = אין חיובים
+**בדיקת עלויות:** אשר מחיקה ב-Azure ובדוק משאבים שנשארו/שיתופיים. חיובים שהתחייבו עדיין תקפים.
 
 ---
 
-**ש: מה אם בטעות מחקתי משאבים בפורטל Azure?**
+**ש: מה אם בטעות מחקתי משאבים ב-Azure Portal?**
 
-ת: מצב AZD עלול לא להתעדכן. גש לגישה של נקי:
+ת: מצב AZD עלול להתנתק מסנכרון. גישה של התחלה נקייה:
 
 ```bash
-# 1. הסר את המצב המקומי
+# 1. Delete remaining resources only if that is your intent
 azd down --force --purge
 
-# 2. התחל מחדש
+# 2. Start fresh
 azd up
 
-# אפשרות חלופית: תן ל-AZD לזהות ולתקן
-azd provision  # ייצור משאבים חסרים
+# Alternative: Let AZD detect and fix
+azd provision  # Will create missing resources
 ```
 
 ---
 
 ### שאלות מתקדמות
 
-**ש: אפשר להשתמש ב-AZD בצנרות CI/CD?**
+**ש: האם אפשר להשתמש ב-AZD בצינורות CI/CD?**
 
-ת: כן! דוגמת GitHub Actions:
+ת: כן! דוגמה ל-GitHub Actions:
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -1098,7 +1107,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Install azd
         run: curl -fsSL https://aka.ms/install-azd.sh | bash
@@ -1111,27 +1120,27 @@ jobs:
             --tenant-id ${{ secrets.AZURE_TENANT_ID }}
       
       - name: Deploy
+        env:
+          AZURE_ENV_NAME: dev
+          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
         run: azd up --no-prompt
 ```
 
 ---
 
-**ש: איך מטפלים בסודות ומידע רגיש?**
+**ש: איך מטפלים בסודות ונתונים רגישים?**
 
-ת: AZD משתלב עם Azure Key Vault אוטומטית:
+ת: השתמש ב-Key Vault במפורש. `azd env set` כותב ערכים רגילים לקובץ הסביבה המקומי; אינו יוצר אוטומטית ארון, לא מגדיר תפקידים, ואינו מזריק סודות לאפליקציה.
 
 ```bash
-# סודות מאוחסנים ב-Key Vault, לא בקוד
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
-
-# AZD אוטומטית:
-# 1. יוצר Key Vault
-# 2. מאחסן סוד
-# 3. מעניק לאפליקציה גישה דרך זהות מנוהלת
-# 4. מזריק בזמן הריצה
+# Interactive: create/select a Key Vault secret and save its reference
+azd env set-secret DATABASE_PASSWORD
 ```
 
-**לעולם אל תבצע commit של:**
+אתה זקוק להרשאות מתאימות בארון. התשתית/אפליקציה שלך חייבות עדיין לכוון את הסוד לצרכן ולהעניק גישה לזהות בזמן ריצה. אל תדפיס ערכים של סודות שנפתרו ביומנים.
+
+**לעולם אל תבצע commit על:**
 - תיקיית `.azure/` (מכילה נתוני סביבה)
 - קבצי `.env` (סודות מקומיים)
 - מחרוזות חיבור
@@ -1143,69 +1152,68 @@ azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 ת: כן, צור סביבה לכל אזור:
 
 ```bash
-# סביבה של מזרח ארה"ב
+# East US environment
 azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
 
-# סביבה של מערב אירופה
+# West Europe environment
 azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
 
-# כל סביבה עצמאית
+# Each environment is independent
 azd env list
 ```
 
-לאפליקציות רב-אזוריות אמיתיות, התאם את תבניות Bicep כדי לפרוס לכמה אזורים בו-זמנית.
+עבור אפליקציות אמתיות רב-אזוריות, התאם תבניות Bicep לפריסה בו-זמנית באזורים מרובים.
 
 ---
 
-**ש: איפה אפשר לקבל עזרה כשנתקעתי?**
+**ש: איפה אוכל לקבל עזרה כשאני תקוע?**
 
 1. **תיעוד AZD:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
-2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
+2. **בעיות ב-GitHub:** https://github.com/Azure/azure-dev/issues
 3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - ערוץ #azure-developer-cli
 4. **Stack Overflow:** תגית `azure-developer-cli`
-5. **הקורס הזה:** [מדריך פתרון בעיות](../chapter-07-troubleshooting/common-issues.md)
+5. **קורס זה:** [מדריך פתרון בעיות](../chapter-07-troubleshooting/common-issues.md)
 
 **טיפ מקצועי:** לפני שתשאל, הרץ:
 ```bash
-azd show       # מציג את המצב הנוכחי
-azd version    # מציג את הגרסה שלך
+azd show       # Shows current state
+azd version    # Shows your version
 ```
-
-כלול את המידע הזה בשאלה לקבלת עזרה מהירה יותר.
+כלול מידע זה בשאלה שלך לקבלת עזרה מהירה יותר.
 
 ---
 
 ## 🎓 מה הלאה?
 
-כעת אתה מבין את יסודות AZD. בחר מסלול:
+כעת אתה מבין את יסודות AZD. בחר את דרכך:
 
 ### 🎯 למתחילים:
-1. **הבא:** [התקנה והגדרה](installation.md) - התקן AZD במחשב
+1. **הבא:** [התקנה והגדרה](installation.md) - התקן את AZD במחשב שלך
 2. **אחר כך:** [הפרויקט הראשון שלך](first-project.md) - פרוס את האפליקציה הראשונה שלך
-3. **תרגל:** סיים את כל 3 התרגילים בשיעור
+3. **תרגל:** השלם את כל 3 התרגילים בשיעור זה
 
 ### 🚀 למפתחי AI:
-1. **דלג אל:** [פרק 2: פיתוח מונחה AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
-2. **פרוס:** התחל עם `azd init --template get-started-with-ai-chat`
+1. **דילג ל:** [פרק 2: פיתוח עם AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+2. **פרוס:** בתיקיית פרויקט ריקה, התחל עם `azd init --template get-started-with-ai-chat .`
 3. **למד:** בנה תוך כדי פריסה
 
 ### 🏗️ למפתחים מנוסים:
-1. **סקור:** [מדריך תצורה](configuration.md) - הגדרות מתקדמות
-2. **חקור:** [תשתית כקוד](../chapter-04-infrastructure/provisioning.md) - למידת Bicep מעמיקה
-3. **בנה:** צור תבניות מותאמות אישית לערימה שלך
+1. **סקור:** [מדריך תצורה](../chapter-03-configuration/configuration.md) - הגדרות מתקדמות
+2. **חקור:** [תשתית כקוד](../chapter-04-infrastructure/provisioning.md) - צלול עמוק ל-Bicep
+3. **בנה:** צור תבניות מותאמות אישית לערכה שלך
 
 ---
 
 **ניווט פרקים:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 1 - יסודות והתחלה מהירה  
-- **⬅️ הקודם**: [סקירת הקורס](../../README.md#-chapter-1-foundation--quick-start)
+- **📖 פרק נוכחי**: פרק 1 - יסודות והתחלה מהירה  
+- **⬅️ קודם**: [סקירת הקורס](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ הבא**: [התקנה והגדרה](installation.md)
-- **🚀 פרק הבא**: [פרק 2: פיתוח מונחה AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 פרק הבא**: [פרק 2: פיתוח עם AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 

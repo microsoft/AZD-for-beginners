@@ -1,22 +1,22 @@
-# Bölüm 7: Sorun Giderme ve Hata Ayıklama
+# 7. Bölüm: Sorun Giderme ve Hata Ayıklama
 
-**📚 Kurs**: [AZD Yeni Başlayanlar İçin](../../README.md) | **⏱️ Süre**: 1-1.5 saat | **⭐ Zorluk Seviyesi**: Orta
+**📚 Kurs**: [Başlangıç Seviyesi AZD](../../README.md) | **⏱️ Süre**: 1-1.5 saat | **⭐ Zorluk**: Orta Seviye
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, Azure Developer CLI ile çalışırken karşılaşılan yaygın sorunları teşhis etmenize ve çözmenize yardımcı olur. Dağıtım hatalarından AI'ya özgü problemlere kadar.
+Bu bölüm, Azure Developer CLI ile çalışırken karşılaşılan yaygın sorunları teşhis edip çözmenize yardımcı olur. Dağıtım hatalarından AI özgü problemlere kadar.
 
-> Temmuz 2026'da `azd 1.27.1` sürümü ile doğrulanmıştır.
+> Komut rehberi, yayımlanmış `azd 1.37.2` referansı ile karşılaştırılarak incelenmiştir. Bulut dağıtımları gerçekleştirilmemiştir. Komutları kullanmadan önce örnek kaynak adları ve kimliklerini değiştirin.
 
 ## Öğrenme Hedefleri
 
 Bu bölümü tamamlayarak:
-- Yaygın AZD dağıtım hatalarını teşhis edeceksiniz
-- Kimlik doğrulama ve izin sorunlarını hata ayıklayacaksınız
-- AI hizmeti bağlantı sorunlarını çözeceksiniz
-- Sorun gidermek için Azure Portal ve CLI kullanacaksınız
+- Yaygın AZD dağıtım hatalarını teşhis edebileceksiniz
+- Kimlik doğrulama ve izin sorunlarını hata ayıklayabileceksiniz
+- AI servis bağlantı problemlerini çözebileceksiniz
+- Sorun giderme için Azure Portal ve CLI kullanabileceksiniz
 
 ---
 
@@ -26,7 +26,7 @@ Bu bölümü tamamlayarak:
 |---|--------|-------------|------|
 | 1 | [Yaygın Sorunlar](common-issues.md) | Sık karşılaşılan problemler | 30 dk |
 | 2 | [Hata Ayıklama Rehberi](debugging.md) | Adım adım hata ayıklama stratejileri | 45 dk |
-| 3 | [AI Sorun Giderme](ai-troubleshooting.md) | AI'ya özgü sorunlar | 30 dk |
+| 3 | [AI Sorun Giderme](ai-troubleshooting.md) | AI özgü sorunlar | 30 dk |
 
 ---
 
@@ -34,13 +34,13 @@ Bu bölümü tamamlayarak:
 
 ### Kimlik Doğrulama Sorunları
 ```bash
-# AZD iş akışları için gereklidir
+# Required for AZD workflows
 azd auth login
 
-# Aynı zamanda doğrudan Azure CLI komutlarını kullanıyorsanız isteğe bağlıdır
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
 ### Sağlama Hataları
@@ -51,8 +51,9 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Kaynak Çakışmaları
+Öncelikle mevcut kaynak ve dağıtım hatalarını inceleyin. İsim çakışmasını çözmek için paylaşılan veya üretim ortamını silmeyin. **Yeni bir geçici ortam** için benzersiz bir ad kullanın:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
@@ -60,18 +61,20 @@ azd up
 ### Kota Aşıldı
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+`AZURE_LOCATION` değerini değiştirmek mevcut kaynakları taşımayacak ve yeniden dağıtımda konum çakışmalarına neden olabilir.
 
 ---
 
 ## 📋 Hata Kodu Referansı
 
-| Hata | Neden | Çözüm |
+| Hata | Sebep | Çözüm |
 |-------|-------|----------|
-| `AuthenticationError` | Giriş yapılmadı | `azd auth login` |
-| `ResourceNotFound` | Kaynak eksik | Kaynak isimlerini kontrol edin |
+| `AuthenticationError` | Giriş yapılmamış | `azd auth login` |
+| `ResourceNotFound` | Kaynak eksik | Kaynak adlarını kontrol edin |
 | `QuotaExceeded` | Abonelik sınırları | Kota artışı talep edin |
 | `InvalidTemplate` | Bicep sözdizimi hatası | `az bicep build` |
 | `Conflict` | Kaynak mevcut | Yeni isim kullanın veya silin |
@@ -82,22 +85,24 @@ azd up
 ## 🔄 Sıfırlama ve Kurtarma
 
 ```bash
-# Yumuşak sıfırlama (kaynakları koru, kodu yeniden dağıt)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Sert sıfırlama (her şeyi sil, sıfırdan başla)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
 
+Zorunlu sıfırlama verileri siler ve uç noktaları değiştirebilir. Önce yedek alın ve interaktif silme istemlerini gözden geçirin. `--force --purge` yalnızca geri dönüşü olmayan silme amaçlandığında geçici ortamlar için uygundur.
+
 ---
 
-## 🔗 Navigasyon
+## 🔗 Gezinme
 
 | Yön | Bölüm |
 |-----------|---------|
-| **Önceki** | [Bölüm 6: Dağıtımdan Önce](../chapter-06-pre-deployment/README.md) |
-| **Sonraki** | [Bölüm 8: Üretim](../chapter-08-production/README.md) |
+| **Önceki** | [6. Bölüm: Dağıtımdan Önce](../chapter-06-pre-deployment/README.md) |
+| **Sonraki** | [8. Bölüm: Üretim](../chapter-08-production/README.md) |
 
 ---
 

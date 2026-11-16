@@ -1,173 +1,176 @@
 <div align="center">
   <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🎯 AZD a mesterséges intelligencia fejlesztőknek műhelymunka
+      🎯 AZD a mesterséges intelligencia fejlesztőknek workshop
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>Gyakorlati műhelymunka az Azure Developer CLI használatával történő MI-alkalmazások építéséhez.</strong><br>
-      Teljesíts 7 modult az AZD sablonok és az MI telepítési munkafolyamatok elsajátításához.
+      <strong>Gyakorlati workshop az Azure Developer CLI-vel AI alkalmazások építéséhez.</strong><br>
+      Teljesítsd a 7 modult, hogy elsajátítsd az AZD sablonokat és az AI telepítési munkafolyamatokat.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Utolsó frissítés: 2026 március
+        📅 Forrás útmutató ellenőrizve: 2026 november
       </span>
     </div>
   </div>
 </div>
 
-# AZD a mesterséges intelligencia fejlesztőknek műhelymunka
+# AZD a mesterséges intelligencia fejlesztőknek workshop
 
-Üdvözlünk a gyakorlati műhelymunkán, ahol az Azure Developer CLI (AZD) megtanulására fókuszálunk, különös tekintettel az MI-alkalmazások telepítésére. Ez a műhelymunka segít alkalmazott szinten megérteni az AZD sablonokat 3 lépésben:
+Üdvözlünk a gyakorlati workshopon, amely az Azure Developer CLI (AZD) AI alkalmazások telepítésére fókuszáló használatát tanítja. Ez a workshop 3 lépésben segít mélyrehatóan megismerni az AZD sablonokat:
 
-1. **Felfedezés** - találd meg a számodra legmegfelelőbb sablont.
-1. **Telepítés** - telepítsd és ellenőrizd, hogy működik-e
-1. **Testreszabás** - módosítsd és ismételd, hogy a sajátoddá váljon!
+1. **Felfedezés** - találd meg a számodra megfelelő sablont.
+1. **Telepítés** - telepítsd és ellenőrizd, hogy működik
+1. **Testreszabás** - módosítsd és ismételd meg, hogy a sajátoddá váljon!
 
-A műhelymunka során megismerkedsz alapvető fejlesztői eszközökkel és munkafolyamatokkal is, hogy hatékonyabbá tedd az end-to-end fejlesztési utadat.
+A workshop során megismerkedsz a fő fejlesztői eszközökkel és munkafolyamatokkal is, hogy egyszerűsítsd a teljes fejlesztési folyamatodat.
 
 <br/>
 
-## Böngésző alapú útmutató
+## Böngészőalapú útmutató
 
-A műhely leckék Markdown formátumban vannak. Közvetlenül a GitHubon navigálhatsz közöttük - vagy elindíthatsz egy böngésző alapú előnézetet a lenti képernyőkép szerint.
+A workshop leckéi Markdown formátumban vannak. Közvetlenül a GitHubon navigálhatsz bennük – vagy elindíthatsz egy böngészőalapú előnézetet az alábbi képernyőkép szerint.
 
 ![Workshop](../../../translated_images/hu/workshop.75906f133e6f8ba0.webp)
 
-Ehhez az opcióhoz - forkold az adattárat a profilodra, majd indítsd el a GitHub Codespaces-t. Amint aktiválódik a VS Code terminál, írd be ezt a parancsot:
+Ehhez az opcióhoz készíts egy forkot a repositoriról a profilodra, majd indítsd el a GitHub Codespaces-et. Amikor a VS Code terminál aktív, írd be ezt a parancsot:
 
-Ez a böngésző előnézet működik GitHub Codespaces-ben, fejlesztői konténerekben vagy helyi klónban, ahol Python és MkDocs telepítve van.
+Ez a böngészőelőnézet működik GitHub Codespaces-ben, fejlesztőkörnyezetekben vagy egy helyi klónban, ha telepítve van Python és MkDocs.
 
 ```bash title="" linenums="0"
-mkdocs serve > /dev/null 2>&1 &
+python -m pip install -r requirements-dev.txt
+python -m mkdocs serve --config-file workshop/mkdocs.yml
 ```
 
-Néhány másodperc múlva megjelenik egy felugró párbeszédablak. Válaszd az `Open in browser` opciót. A webes útmutató ekkor új böngészőfülön nyílik meg. Ennek az előnézetnek néhány előnye:
+Ezeket a parancsokat a **tanfolyam tárhely gyökeréből** kell futtatni, nem az AI minta külön elindított könyvtárából. Tartsd az előnézetet az előtérben, hogy a hibák láthatók maradjanak; a Ctrl+C-vel állíthatod le. Az oldalt kiszolgálás nélkül a `python -m mkdocs build --strict --config-file workshop/mkdocs.yml` paranccsal tudod megnézni.
+
+Pár másodperc múlva megjelenik egy felugró ablak. Válaszd az opciót `Open in browser`. A webalapú útmutató most új böngészőfülön nyílik meg. Ez az előnézet többek között a következő előnyökkel jár:
 
 1. **Beépített keresés** - gyorsan megtalálhatod a kulcsszavakat vagy leckéket.
-1. **Másolás ikon** - kódblokkok fölé mozgatva található
-1. **Téma váltó** - válthatsz világos és sötét téma között
-1. **Segítség kérése** - kattints a Discord ikonra a láblécben, hogy csatlakozz!
+1. **Másolás ikon** - az egérrel a kódrészletek fölé húzva jelenik meg
+1. **Téma váltás** - válthatsz világos és sötét megjelenés között
+1. **Segítségkérés** - kattints a Discord ikonra a láblécben a csatlakozáshoz!
 
 <br/>
 
-## Műhely áttekintése
+## Workshop áttekintés
 
 **Időtartam:** 3-4 óra  
-**Szint:** Kezdő és középhaladó  
-**Előfeltételek:** Azure, MI koncepciók, VS Code és parancssori eszközök ismerete.
+**Szint:** Kezdőtől középhaladóig  
+**Előfeltételek:** Ismeretek az Azure-ról, AI fogalmakról, VS Code-ról és parancssori eszközökről.
 
-Ez egy gyakorlati műhely, ahol tanulás közben csinálsz. A feladatok teljesítése után javasoljuk az AZD kezdőknek tananyagot, hogy folytasd tanulmányaidat biztonság és termelékenység legjobb gyakorlatairól.
+Ez egy gyakorlati workshop, ahol a tanulás cselekvéssel történik. A gyakorlatok elvégzése után ajánljuk az AZD Kezdőknek tananyagot, hogy folytasd a tanulást a biztonság és a termelékenység legjobb gyakorlataira fókuszálva.
 
-| Idő | Modul  | Cél |
+| Idő| Modul  | Cél |
 |:---|:---|:---|
-| 15 perc | [Bevezetés](docs/instructions/0-Introduction.md) | Alapok lefektetése, célok megértése |
-| 30 perc | [Válassz MI sablont](docs/instructions/1-Select-AI-Template.md) | Fedezd fel a lehetőségeket, válassz kezdőt | 
-| 30 perc | [Érvényesíts MI sablont](docs/instructions/2-Validate-AI-Template.md) | Alapértelmezett megoldás telepítése Azure-ban |
-| 30 perc | [Bonts szét MI sablont](docs/instructions/3-Deconstruct-AI-Template.md) | Fedezd fel a szerkezetet és beállításokat |
-| 30 perc | [Konfiguráld MI sablont](docs/instructions/4-Configure-AI-Template.md) | Aktiváld és próbáld ki a funkciókat |
-| 30 perc | [Testreszabás MI sablont](docs/instructions/5-Customize-AI-Template.md) | Alakítsd a sablont a saját igényeid szerint |
-| 30 perc | [Infrastruktúra felszámolása](docs/instructions/6-Teardown-Infrastructure.md) | Takard le és szabadíts fel erőforrásokat |
-| 15 perc | [Összegzés és továbblépés](docs/instructions/7-Wrap-up.md) | Tanulási források, műhely kihívás |
+| 15 perc | [Bevezető](docs/instructions/0-Introduction.md) | A téma felvezetése, célok megértése |
+| 30 perc | [AI Sablon kiválasztása](docs/instructions/1-Select-AI-Template.md) | Opciók felfedezése és kezdő sablon választása | 
+| 30 perc | [AI Sablon érvényesítése](docs/instructions/2-Validate-AI-Template.md) | Alapmegoldás telepítése Azure-ra |
+| 30 perc | [AI Sablon szétszedése](docs/instructions/3-Deconstruct-AI-Template.md) | Szerkezet és konfiguráció felfedezése |
+| 30 perc | [AI Sablon konfigurálása](docs/instructions/4-Configure-AI-Template.md) | Elérhető funkciók aktiválása és kipróbálása |
+| 30 perc | [AI Sablon testreszabása](docs/instructions/5-Customize-AI-Template.md) | A sablon igényeid szerinti igazítása |
+| 30 perc | [Infrastruktúra bontása](docs/instructions/6-Teardown-Infrastructure.md) | Erőforrások kitakarítása és felszabadítása |
+| 15 perc | [Összefoglalás & következő lépések](docs/instructions/7-Wrap-up.md) | Tanulási források, workshop kihívás |
 
 <br/>
 
-## Amit tanulni fogsz
+## Amit megtanulsz
 
-Gondolj az AZD sablonra úgy, mint egy tanulási homokozóra, ahol felfedezheted a Microsoft Foundry end-to-end fejlesztési képességeit és eszközeit. A műhely végére intuitív érzésed lesz a különböző eszközökről és fogalmakról ebben a kontextusban.
+Az AZD sablont tekintheted egy tanuló játszótérnek különféle képességek és eszközök felfedezésére a Microsoft Foundry végponttól végpontig történő fejlesztéséhez. A workshop végére intuitív érzéked lesz e kontextus különböző eszközeihez és fogalmaihoz.
 
 | Fogalom  | Cél |
 |:---|:---|
-| **Azure Developer CLI** | Értsd meg az eszköz parancsait és munkafolyamatait |
-| **AZD Sablonok**| Értsd meg a projekt struktúráját és konfigurációját |
-| **Azure AI Agent**| Microsoft Foundry projekt előkészítése és telepítése |
-| **Azure AI Search**| Kontextus alapú MI szolgáltatások üzemeltetése |
-| **Megfigyelhetőség**| Tracing, monitorozás és értékelések vizsgálata |
-| **Red Teaming**| Adverszári tesztelés és kivédési módszerek megismerése |
+| **Azure Developer CLI** | Az eszközparancsok és munkafolyamatok megértése|
+| **AZD sablonok**| Projekt szerkezet és konfiguráció megértése|
+| **Azure AI Agent**| Microsoft Foundry projekt létrehozása és telepítése  |
+| **Azure AI Search**| Kontextus-alapú mérnökség engedélyezése ügynökökkel |
+| **Megfigyelhetőség**| Követés, monitorozás és értékelések felfedezése |
+| **Red Teaming**| Ellenséges tesztelés és enyhítési megoldások feltérképezése |
 
 <br/>
 
-## Műhely szerkezete
+## A workshop felépítése
 
-A műhely úgy van felépítve, hogy végigvezessen a sablonfelfedezéstől a telepítésen, szétbontáson és testreszabáson át - amely az hivatalos [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) kezdősablont használja alapul.
+A workshop úgy van felépítve, hogy elvezessen a sablon felfedezésétől a telepítésen, szétszedésen át a testreszabásig - az hivatalos [AI ügynökökkel való kezdés](https://github.com/Azure-Samples/get-started-with-ai-agents) kezdő sablon alapjaként használata mellett.
 
-### [1. modul: MI sablon kiválasztása](docs/instructions/1-Select-AI-Template.md) (30 perc)
+### [1. modul: AI sablon kiválasztása](docs/instructions/1-Select-AI-Template.md) (30 perc)
 
-- Mik az MI sablonok?
-- Hol találok MI sablonokat?
-- Hogyan kezdjem el az MI ügynökök építését?
-- **Lab:** Gyors indítás Codespaces-ben vagy fejlesztői konténerben
+- Mik azok az AI sablonok?
+- Hol találhatók AI sablonok?
+- Hogyan kezdjem el építeni AI ügynökök?
+- **Labor**: Gyors indulás Codespaces-ben vagy fejlesztőkörnyezetben
 
-### [2. modul: MI sablon érvényesítése](docs/instructions/2-Validate-AI-Template.md) (30 perc)
+### [2. modul: AI sablon érvényesítése](docs/instructions/2-Validate-AI-Template.md) (30 perc)
 
-- Mi az MI sablon architektúrája?
+- Mi az AI sablon architektúra?
 - Mi az AZD fejlesztési munkafolyamat?
-- Hol kérhetek segítséget az AZD fejlesztéshez?
-- **Lab:** Telepítsd és érvényesítsd az MI ügynök sablont
+- Hogyan kérhetek segítséget az AZD fejlesztéshez?
+- **Labor**: AI ügynök sablon telepítése és érvényesítése
 
-### [3. modul: MI sablon szétbontása](docs/instructions/3-Deconstruct-AI-Template.md) (30 perc)
+### [3. modul: AI sablon szétszedése](docs/instructions/3-Deconstruct-AI-Template.md) (30 perc)
 
-- Fedezd fel a környezeted `.azure/` mappát  
-- Fedezd fel az erőforrás beállításaiddat az `infra/` mappában  
-- Fedezd fel AZD konfigurációdat az `azure.yaml` fájlokban  
-- **Lab:** Módosíts környezeti változókat és telepíts újra
+- Fedezd fel a környezetedet az `.azure/`-ban
+- Fedezd fel erőforrásaid beállítását az `infra/`-ban
+- Fedezd fel AZD konfigurációdat az `azure.yaml`-ben
+- **Labor**: Környezeti változók módosítása és újratelepítés
 
-### [4. modul: MI sablon konfigurálása](docs/instructions/4-Configure-AI-Template.md) (30 perc)
-- Fedezd fel: Retrieval Augmented Generation (kiegészített lekérdezés generálás)
-- Fedezd fel: Ügynök értékelés és Red Teaming
-- Fedezd fel: Tracing és monitorozás
-- **Lab:** Fedezd fel az MI ügynököt + megfigyelhetőséget
+### [4. modul: AI sablon konfigurálása](docs/instructions/4-Configure-AI-Template.md) (30 perc)
+- Fedezd fel: Visszakereséssel kiegészített generálás
+- Fedezd fel: Ügynök értékelés és red teaming
+- Fedezd fel: Követés és monitorozás
+- **Labor**: AI ügynök és megfigyelhetőség felfedezése
 
-### [5. modul: MI sablon testreszabása](docs/instructions/5-Customize-AI-Template.md) (30 perc)
-- Határozd meg: Funkcionális specifikációt (PRD) forgatókönyvekhez
-- Konfiguráld: Környezeti változókat az AZD-hez
-- Implementáld: Életciklus hookokat további feladatokhoz
-- **Lab:** Testreszabás a saját forgatókönyvedhez
+### [5. modul: AI sablon testreszabása](docs/instructions/5-Customize-AI-Template.md) (30 perc)
+- Határozd meg: Termékkövetelmény dokumentum forgatókönyvvel
+- Konfiguráld: Környezeti változók az AZD-hez
+- Valósítsd meg: Életciklus horgok hozzáadott feladatokhoz
+- **Labor**: Sablon testreszabása az én forgatókönyvemre
 
-### [6. modul: Infrastruktúra felszámolása](docs/instructions/6-Teardown-Infrastructure.md) (30 perc)
+### [6. modul: Infrastrukturális bontás](docs/instructions/6-Teardown-Infrastructure.md) (30 perc)
 - Összefoglalás: Mik az AZD sablonok?
-- Összefoglalás: Miért érdemes az Azure Developer CLI-t használni?
-- Következő lépések: Próbálj ki más sablont!
-- **Lab:** Erőforrások felszámolása és takarítás
+- Összefoglalás: Miért használjuk az Azure Developer CLI-t?
+- Következő lépések: Próbálj ki egy másik sablont!
+- **Labor**: Infrastrukturális bontás és takarítás
 
 <br/>
 
-## Műhely kihívás
+## Workshop kihívás
 
-Szeretnéd magad próbára tenni? Néhány projektjavaslat - vagy oszd meg ötleteidet velünk!!
+Szeretnéd magad kihívás elé állítani és többet csinálni? Íme néhány projektjavaslat – vagy oszd meg ötleteidet velünk!
 
 | Projekt | Leírás |
 |:---|:---|
-|1. **Bonts szét egy összetett MI sablont** | Használd a munkafolyamatot és eszközöket, amiket bemutattunk, és próbálj meg telepíteni, érvényesíteni és testreszabni egy másik MI megoldás sablont. _Mit tanultál?_|
-|2. **Testreszabás a saját forgatókönyvedhez**  | Írj egy PRD-t (termék követelmény dokumentumot) egy másik forgatókönyvhöz. Használd a GitHub Copilotot a sablon repo-dban Agent Model módban, és kérd meg a testreszabási munkafolyamat generálását. _Mit tanultál? Hogyan fejleszthetnéd tovább ezeket a javaslatokat?_|
+|1. **Egy összetett AI sablon elemzése** | Használd a felvázolt munkafolyamatot és eszközöket, és próbáld meg telepíteni, érvényesíteni, valamint testreszabni egy másik AI megoldász sablont. _Mit tanultál?_|
+|2. **Testreszabás a saját forgatókönyvedhez**  | Próbálj meg írna egy PRD-t (Termékkövetelmény dokumentum) egy másik forgatókönyvhöz. Ezután használd a GitHub Copilot-ot az ügynök modell sablonrepo-ban, és kérd meg, hogy generáljon neked testreszabási munkafolyamatot. _Mit tanultál? Hogyan javíthatnál ezeken a javaslatokon?_|
 | | |
 
 ## Van visszajelzésed?
 
-1. Hozz létre egy issue-t ebben az adattárban – címkézd „Workshop”-ként a könnyebb kereshetőségért.
-1. Csatlakozz a Microsoft Foundry Discord szerveréhez – lépj kapcsolatba a társakkal!
+1. Nyiss egy issue-t ebben a tárolóban – jelöld meg `Workshop` címkével a könnyebb kezelhetőségért.
+1. Csatlakozz a Microsoft Foundry Discordhoz – találkozz a társaiddal!
 
 
 | | | 
 |:---|:---|
-| **📚 Kurzus kezdőlap**| [AZD kezdőknek](../README.md)|
-| **📖 Dokumentáció** | [Kezdés MI sablonokkal](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️MI sablonok** | [Microsoft Foundry sablonok](https://ai.azure.com/templates) |
-|**🚀 Következő lépések** | [Kezdő műhelymunka](#műhely-áttekintése) |
+| **📚 Tanfolyam otthona**| [AZD kezdőknek](../README.md)|
+| **📖 Dokumentáció** | [Kezdj bele az AI sablonokba](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI sablonok** | [Microsoft Foundry sablonok](https://ai.azure.com/templates) |
+|**🚀 Következő lépések** | [Indítsd el a workshopot](#workshop-overview) |
 | | |
 
 <br/>
 
 ---
 
-**Navigáció:** [Fő kurzus](../README.md) | [Bevezetés](docs/instructions/0-Introduction.md) | [1. modul: Sablon kiválasztása](docs/instructions/1-Select-AI-Template.md)
+**Navigáció:** [Fő tanfolyam](../README.md) | [Bevezető](docs/instructions/0-Introduction.md) | [1. modul: Sablon kiválasztása](docs/instructions/1-Select-AI-Template.md)
 
-**Készen állsz, hogy elkezdd MI alkalmazások építését AZD-vel?**
+**Készen állsz, hogy AI alkalmazásokat építs AZD-vel?**
 
-[Kezdő műhelymunka: Bevezetés →](docs/instructions/0-Introduction.md)
+[Indítsd el a workshopot: Bevezető →](docs/instructions/0-Introduction.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Jogi nyilatkozat**:  
-Ez a dokumentum az AI fordítószolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) használatával készült. Habár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatizált fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum a saját nyelvén számít hiteles forrásnak. Kritikus információk esetén ajánlott szakmai emberi fordítást igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

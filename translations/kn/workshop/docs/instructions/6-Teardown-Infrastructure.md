@@ -1,61 +1,58 @@
-# 6. ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ತೆರವುಗೊಳಿಸುವುದು
+# 6. ಮೂಲಸೌಕರ್ಯವನ್ನು ಅಗಲಾಗಿಸುವುದು
 
-!!! tip "ಈ ಘಟಕದ ಕೊನೆಯಲ್ಲಿ ನೀವು ಕೆಳಗಿನ বিষয়ಗಳನ್ನು ಮಾಡಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ"
+!!! tip "ಈ ಘಟಕದ ಅಂತ್ಯಕ್ಕೆ ನೀವು ಸಾಧ್ಯವಾಗುತ್ತದೆ"
 
-    - [ ] ಸಂಪನ್ಮೂಲಗಳ ಸ್ವಚ್ಛೀಕರಣ ಮತ್ತು ವೆಚ್ಚ ನಿರ್ವಹಣೆಯ ಮಹತ್ವವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ
-    - [ ] ಸುರಕ್ಷಿತವಾಗಿ ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಅನ್ನು ಡೀಪ್ರೊವಿಷನ್ ಮಾಡಲು `azd down` ಅನ್ನು ಬಳಸಿ
-    - [ ] ಅಗತ್ಯವಿದ್ದರೆ ಸಾಫ್ಟ್-ಡಿಲೀಟ್ ಮಾಡಿದ Azure AI ಸೇವೆಗಳನ್ನು ಪುನರುद्धರಿಸು
-    - [ ] **ಲ್ಯಾಬ್ 6:** Azure ಸಂಪನ್ಮೂಲಗಳನ್ನು ಸ್ವಚ್ಛಗೊಳಿಸಿ ಮತ್ತು ತೆಗೆದುಹಾಕಲಾದುದನ್ನು ಪರಿಶೀಲಿಸಿ
-
----
-
-## ಬೋನಸ್ ವ್ಯಾಯಾಮಗಳು
-
-Before we tear down the project, take a few minutes to do some open-ended exploration.
-
-!!! info "ಈ ಅನ್ವೇಷಣಾ ಪ್ರಾಂಪ್ಟ್‌ಗಳನ್ನು ಪ್ರಯತ್ನಿಸಿ"
-
-    **GitHub Copilot ಜೊತೆಗೆ ಪ್ರಯೋಗ ಮಾಡಿ:**
-    
-    1. ಪ್ರಶ್ನೆ ಕೇಳಿ: `What other AZD templates could I try for multi-agent scenarios?`
-    2. ಪ್ರಶ್ನೆ ಕೇಳಿ: `How can I customize the agent instructions for a healthcare use case?`
-    3. ಪ್ರಶ್ನೆ ಕೇಳಿ: `What environment variables control cost optimization?`
-    
-    **Azure ಪೋರ್ಟಲ್ ಅನ್ನು ಅನ್ವೇಷಿಸಿ:**
-    
-    1. ನಿಮ್ಮ ಡಿಪ್ಲಾಯ್ಮೆಂಟ್‌ಗೆ ಸಂಬಂಧಿಸಿದ Application Insights ಮೆಟ್ರಿಕ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
-    2. Provision ಮಾಡಲಾದ ಸಂಪನ್ಮೂಲಗಳ ವೆಚ್ಚ ವಿಶ್ಲೇಷಣೆಯನ್ನು ನೋಡಿ
-    3. Microsoft Foundry ಪೋರ್ಟಲ್‌ನ ಏಜೆಂಟ್ ಪ್ಲೇಗ್ರೌಂಡ್ ಅನ್ನು ಮತ್ತೊಮ್ಮೆ ಅನ್ವೇಷಿಸಿ
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ತೆರವು
+## ಬಹುಮಾನ ವ್ಯಾಯಾಮಗಳು
 
-1. ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಅನ್ನು ತೆರವುಗೊಳಿಸುವುದು ಹೀಗೇ ಸುಲಭ:
+ನಾವು ಯೋಜನೆಯನ್ನು ಮುಗಿಸುವ ಮುನ್ನ, ಸ್ವಲ್ಪ ಸಮಯ ತೆಗೆದುಕೊಂಡು ಕೆಲವು ತೆರೆಯಲಾದ ಅನ್ವೇಷಣೆಗಳನ್ನು ಮಾಡಿ.
 
+!!! info "ಈ ಅನ್ವೇಷಣೆ ಪ್ರಾಂಪ್ಟ್‌ಗಳನ್ನು ಪ್ರಯತ್ನಿಸಿ"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
+
+---
+
+## ಮೂಲಸೌಕರ್ಯವನ್ನು ಡೀಪ್ರೊವಿಷನ್ ಮಾಡುವುದು
+
+1. ಮೂಲಸೌಕರ್ಯವನ್ನು ಅಗಲಿಸುವುದು ಬಹಳ ಸುಲಭ:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. ಆಯ್ಕೆಯಾದ ಪರಿಸರವನ್ನು ದೃಢೀಕರಿಸಿ ಮತ್ತು ಅಳಿಸಲು ಇರುವ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಪರಿಶೀಲಿಸಿ. ಇದು Azure ಸಂಪನ್ಮೂಲಗಳನ್ನು ತೆಗೆದುಹಾಕುತ್ತದೆ ಮತ್ತು ಡೇಟಾವನ್ನು ನಾಶ ಮಾಡಬಹುದು. ಈ ಕಲಿಕೆಯ ಕಾರ್ಯಪ್ರವಾಹಕ್ಕಾಗಿ ದೃಢೀಕರಣ ಪ್ರಾಂಪ್ಟ್ ಅನ್ನು ಉಳಿಸಿ. ಪೂರ್ಣಗೊಳ್ಳುವತ್ತ ನೀವು ಹೀಗೊಂದು ಔಟ್ಪುಟ್ ನೋಡುತ್ತೀರಿ:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (ಐಚ್ಛಿಕ) ನೀವು ಈಗ `azd up` ಅನ್ನು ಮತ್ತೆ ಚಾಲನೆ ಮಾಡಿದರೆ, ಸ್ಥಳೀಯ `.azure` ಫೋಲ್ಡರ್‌ನಲ್ಲಿ ಪರಿಸರ ಚರ ಬದಲಾಗಿರುವುದರಿಂದ (ಮತ್ತು ಉಳಿಸಲಾಗಿದೆ) gpt-4.1 ಮಾದರಿ ನಿಯೋಜಿತವಾಗುತ್ತದೆ ಎಂಬುದನ್ನು ನೀವು ಗಮನಿಸುವಿರಿ. 
+1. ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ಅಳಿಸುವಿಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ನಿಯೋಜನೆಯ ವ್ಯಾಪ್ತಿಯ ಹೊರಗಿನ ಸಂಪನ್ಮೂಲಗಳನ್ನೂ ಪರಿಶೀಲಿಸಿ. ವೆಚ್ಚ ವರದಿ ಮತ್ತು ಕೋಟಾ ನವೀಕರಣದಲ್ಲಿ ಸಮಯ ಬೇಕಾಗಬಹುದು. ನೀವು ಸ್ಪಷ್ಟವಾಗಿ ತೆಗೆದುಹಾಕದಿದ್ದರೆ ಸ್ಥಳೀಯ `.azure` ಸಂರಚನೆ ಉಳಿಯುತ್ತದೆ.
 
-      ಇಲ್ಲಿ ಮಾದರಿ ನಿಯೋಜನೆಗಳು **ಮೊದಲು** ಹೀಗಿದ್ದವು:
+1. `azd down --purge` ಹೆಚ್ಚುವರಿ ಆಗಿ ಸಾಫ್ಟ್-ಅಳಿಸಿರುವ ಸಂಪನ್ಮೂಲಗಳ ಶಾಶ್ವತ ಅಳಿಸುವಿಕೆಯನ್ನು ವಿನಂತಿಸುತ್ತದೆ. ಇದು ಪುನರುಜ್ಜೀವಿಸಲು ಅಗತ್ಯವಿಲ್ಲದಾಗ ಮಾತ್ರ ಉಪಯೋಗಿಸಿ ಮತ್ತು ಉಳಿಸುವಿಕೆ/ನಿರ್ವಹಣೆ ರಕ್ಷಣೆ ನೀತಿಗಳನ್ನು ನೀವು ತಿಳಿದುಕೊಳ್ಳಬೇಕು. ಇದು ತಕ್ಷಣದ ಕೋಟಾ ಬಿಡುಗಡೆ ಗಿವಂಟು ನೀಡುವುದಿಲ್ಲ.
 
-      ![ಆರಂಭಿಕ](../../../../../translated_images/kn/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      ಮತ್ತು ಇದು **ನಂತರ** ಹೀಗಿದೆ:
-      ![ಹೊಸ](../../../../../translated_images/kn/14-deploy-new.f7f3c355a3cf7299.webp)
+1. ಶುದ್ಧೀಕರಣವನ್ನು ಪರಿಶೀಲಿಸಲು ಪುನಃ ನಿಯೋಜನೆ ಮಾಡಬೇಡಿ. ನಂತರದ ಉದ್ದೇಶಿತ `azd up` ಉಳಿದ ಸ್ಥಳೀಯ ಇನ್‌ಪುಟ್‌ಗಳನ್ನು ಉಪಯೋಗಿಸಿ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಪುನರ್ ನಿರ್ಮಿಸುತ್ತವೆ ಮತ್ತು ಮತ್ತೆ ಶುಲ್ಕ ವಿಧಿಸಲಾಗುತ್ತದೆ. ಮಾದರಿ ನವೀಕರಣಗಳು ಸಾಮಾನ್ಯವಾಗಿ ಬೆಂಬಲಿತ ಒದಗಿಸುವಿಕೆ ಬದಲಾವಣೆಗಳನ್ನು ಬಳಸುತ್ತವೆ, ಮೂಲಸೌಕರ್ಯವನ್ನು ಅಗಿಸಲು ಅಲ್ಲ.
 
 ---
 

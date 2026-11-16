@@ -1,49 +1,49 @@
 # 第7章：故障排除与调试
 
-**📚 课程**：[AZD 入门](../../README.md) | **⏱️ 时长**：1-1.5小时 | **⭐ 复杂度**：中级
+**📚 课程**: [入门AZD](../../README.md) | **⏱️ 时长**: 1-1.5小时 | **⭐ 复杂度**: 中级
 
 ---
 
 ## 概述
 
-本章帮助您诊断并解决使用 Azure Developer CLI 时常见的问题。从部署失败到 AI 特定问题。
+本章帮助您诊断并解决使用Azure Developer CLI时常见的问题。从部署失败到AI特定问题。
 
-> 经过 `azd 1.27.1` 验证，时间为2026年7月。
+> 命令指导根据发布的`azd 1.37.2`参考进行复核。未执行云部署。使用命令前请替换示例资源名称和ID。
 
 ## 学习目标
 
 完成本章后，您将能够：
-- 诊断常见的 AZD 部署失败
-- 调试身份验证和权限问题
-- 解决 AI 服务连接问题
-- 使用 Azure 门户和 CLI 进行故障排除
+- 诊断常见的AZD部署失败
+- 调试身份验证与权限问题
+- 解决AI服务连接问题
+- 使用Azure门户和CLI进行故障排除
 
 ---
 
-## 📚 课程内容
+## 📚 课程
 
-| # | 课程 | 描述 | 时长 |
+| # | 课程 | 描述 | 时间 |
 |---|--------|-------------|------|
-| 1 | [常见问题](common-issues.md) | 经常遇到的问题 | 30 分钟 |
-| 2 | [调试指南](debugging.md) | 逐步调试策略 | 45 分钟 |
-| 3 | [AI 故障排除](ai-troubleshooting.md) | AI 相关问题 | 30 分钟 |
+| 1 | [常见问题](common-issues.md) | 常见问题 | 30分钟 |
+| 2 | [调试指南](debugging.md) | 逐步调试策略 | 45分钟 |
+| 3 | [AI故障排除](ai-troubleshooting.md) | AI特定问题 | 30分钟 |
 
 ---
 
-## 🚨 快速修复
+## 🚨 快速解决方法
 
 ### 身份验证问题
 ```bash
-# AZD 工作流所需
+# Required for AZD workflows
 azd auth login
 
-# 如果您也直接使用 Azure CLI 命令，则可选
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### 预配失败
+### 资源配置失败
 ```bash
 azd show
 azd monitor --logs
@@ -51,18 +51,21 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### 资源冲突
+请先检查现有资源和部署错误。不要删除共享或生产环境以解决命名冲突。对于<strong>新的一次性环境</strong>，请使用唯一名称：
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### 超出配额
+### 配额超限
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+更改`AZURE_LOCATION`不会移动现有资源，且可能导致重新部署时的位置冲突。
 
 ---
 
@@ -72,23 +75,25 @@ azd up
 |-------|-------|----------|
 | `AuthenticationError` | 未登录 | `azd auth login` |
 | `ResourceNotFound` | 资源缺失 | 检查资源名称 |
-| `QuotaExceeded` | 订阅限制 | 请求增加配额 |
-| `InvalidTemplate` | Bicep 语法错误 | `az bicep build` |
+| `QuotaExceeded` | 订阅限制 | 申请配额增加 |
+| `InvalidTemplate` | Bicep语法错误 | `az bicep build` |
 | `Conflict` | 资源已存在 | 使用新名称或删除 |
-| `Forbidden` | 权限不足 | 检查 RBAC 角色 |
+| `Forbidden` | 权限不足 | 检查RBAC角色 |
 
 ---
 
 ## 🔄 重置与恢复
 
 ```bash
-# 软重置（保留资源，重新部署代码）
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# 硬重置（删除所有内容，重新开始）
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+硬重置会删除数据并可能更改端点。请先备份并仔细查看交互式删除提示。`--force --purge`只适用于打算进行不可逆删除的一次性环境。
 
 ---
 
@@ -105,7 +110,7 @@ azd up
 
 - [部署前检查](../chapter-06-pre-deployment/preflight-checks.md)
 - [配置指南](../chapter-03-configuration/configuration.md)
-- [AZD GitHub 问题](https://github.com/Azure/azure-dev/issues)
+- [AZD GitHub问题](https://github.com/Azure/azure-dev/issues)
 
 ---
 

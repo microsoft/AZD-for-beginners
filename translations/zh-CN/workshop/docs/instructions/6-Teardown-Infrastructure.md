@@ -1,31 +1,31 @@
 # 6. 拆除基础设施
 
-!!! tip "在本模块结束时您将能够"
+!!! tip "完成本模块后，您将能够"
 
-    - [ ] 了解资源清理和成本管理的重要性
-    - [ ] 使用 `azd down` 安全地取消资源配置
-    - [ ] 在需要时恢复已软删除的 Azure AI 服务
-    - [ ] **Lab 6:** 清理 Azure 资源并验证已删除
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## 额外练习
 
-在我们拆除项目之前，花几分钟时间进行一些开放式探索。
+在拆除项目之前，花几分钟进行一些开放式探索。
 
 !!! info "尝试这些探索提示"
 
-    **与 GitHub Copilot 进行实验：**
+    **Experiment with GitHub Copilot:**
     
-    1. 询问：`我可以尝试哪些其他 AZD 模板用于多代理场景？`
-    2. 询问：`我如何为医疗保健用例自定义代理指令？`
-    3. 询问：`哪些环境变量控制成本优化？`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **探索 Azure 门户：**
+    **Explore the Azure Portal:**
     
-    1. 查看部署的 Application Insights 指标
-    2. 检查已配置资源的成本分析
-    3. 再次探索 Microsoft Foundry 门户的代理沙盒
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
@@ -34,27 +34,25 @@
 1. 拆除基础设施很简单：
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. `--purge` 标志可确保它同时清除已软删除的认知服务资源，从而释放这些资源占用的配额。完成后您将看到类似如下：
+1. 确认所选环境并审查将被删除的资源。这会移除 Azure 资源并可能销毁数据。在此学习流程中保留确认提示。完成后，您将看到类似的输出：
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optional) 如果您现在再次运行 `azd up`，您会注意到 gpt-4.1 模型会被部署，因为环境变量已在本地 `.azure` 文件夹中更改（并已保存）。 
+1. 在门户中验证删除并检查部署范围外的资源。成本报告和配额更新可能有延迟。本地 `.azure` 配置保留，除非您显式地将其移除。
 
-      这是模型部署的<strong>之前</strong>：
+1. `azd down --purge` 还会请求永久删除支持的软删除资源。仅在不需要恢复且您理解保留/清除保护策略时使用。它不能保证立即释放配额。
 
-      ![初始](../../../../../translated_images/zh-CN/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      而这是<strong>之后</strong>：
-      ![新](../../../../../translated_images/zh-CN/14-deploy-new.f7f3c355a3cf7299.webp)
+1. 不要仅为了验证清理而重新部署。后期有意的 `azd up` 可以使用剩余的本地输入重新创建资源，并会再次产生费用。模型更新通常使用支持的配置更改，而不是拆除。
 
 ---
 

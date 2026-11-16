@@ -1,60 +1,58 @@
-# 6. Infrastruktúra bontása
+# 6. Infrastruktúra lebontása
 
-!!! tip "A MODUL VÉGÉRE KÉPES LESZ"
+!!! tip "A MODUL VÉGÉRE KÉPES LESZEL"
 
-    - [ ] Megérteni az erőforrás-tisztítás és a költségkezelés fontosságát
-    - [ ] Az `azd down` használata az infrastruktúra biztonságos leszereléséhez
-    - [ ] Az Azure AI Szolgáltatások soft-törölt példányainak visszaállítása, ha szükséges
-    - [ ] **6. labor:** Azure erőforrások eltávolítása és eltávolítás igazolása
-
----
-
-## Bónusz gyakorlatok
-
-Mielőtt lebontanánk a projektet, szánj néhány percet egy nyitott végű felfedezésre.
-
-!!! info "Próbáld ki ezeket a felfedező kérdéseket"
-
-    **Kísérletezz a GitHub Copilottal:**
-    
-    1. Kérdezd meg: `Milyen más AZD sablonokat próbálhatok ki több ügynökös forgatókönyvekhez?`
-    2. Kérdezd meg: `Hogyan testre szabhatom az ügynök utasításait egy egészségügyi esethez?`
-    3. Kérdezd meg: `Milyen környezeti változók szabályozzák a költségoptimalizálást?`
-    
-    **Fedezd fel az Azure Portált:**
-    
-    1. Tekintsd át a telepítésed Application Insights mérőszámait
-    2. Nézd meg a költségelemzést a létrehozott erőforrásokra vonatkozóan
-    3. Fedezd fel még egyszer a Microsoft Foundry portál ügynök játszóterét
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## Infrastruktúra leszerelése
+## Bónusz feladatok
 
-1. Az infrastruktúra lebontása ennyire egyszerű:
+Mielőtt lebontanánk a projektet, szánj néhány percet szabad feltáró tevékenységre.
+
+!!! info "Próbáld ki ezeket a feltáró kérdéseket"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
+
+---
+
+## Infrastruktúra eltávolítása
+
+1. Az infrastruktúra lebontása egyszerű:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. A `--purge` kapcsoló biztosítja, hogy az puhán törölt Kognitív Szolgáltatás erőforrásokat is törli, így felszabadítva az ezek által lefoglalt kvótát. A folyamat végén ilyesmit fogsz látni:
+1. Erősítsd meg a kiválasztott környezetet, és tekintsd át a törlendő erőforrásokat. Ez eltávolítja az Azure erőforrásokat, és adatokat törölhet. Tartsd meg a megerősítő üzenetet ehhez a tanulási folyamathoz. A befejezés után hasonló kimenetet fogsz látni:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Opcionális) Ha most újra lefuttatod az `azd up` parancsot, észre fogod venni, hogy a gpt-4.1 modell települ, mivel a környezeti változót megváltoztattuk (és elmentettük) a helyi `.azure` mappában.
+1. Ellenőrizd a törlést a portálon, és keresd meg a telepítés körén kívüli erőforrásokat. A költségjelentés és a kvóta-frissítések késhetnek. A helyi `.azure` konfiguráció megmarad, hacsak nem törlöd kifejezetten.
 
-      Íme a modell telepítések **előtte**:
+1. Az `azd down --purge` továbbá kéri a támogatott, lágyan törölt erőforrások végleges törlését. Csak akkor használd, ha nincs szükség a helyreállításra, és ismered a megőrzési / törlési védelmi szabályzatokat. Nem garantálja a kvóta azonnali felszabadulását.
 
-      ![Kezdeti](../../../../../translated_images/hu/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      És íme **utána**:
-      ![Új](../../../../../translated_images/hu/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Ne telepítsd újra csak a takarítás ellenőrzése miatt. Egy későbbi szándékos `azd up` újra létrehozhatja az erőforrásokat a megmaradt helyi bemenetek felhasználásával, és újra költségekkel jár. A modellfrissítések általában támogatott szolgáltatásváltoztatásokat használnak, nem lebontást.
 
 ---
 

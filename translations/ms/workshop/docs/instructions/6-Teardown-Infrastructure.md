@@ -1,60 +1,58 @@
-# 6. Membongkar Infrastruktur
+# 6. Menyahpasang Infrastruktur
 
-!!! tip "PADA AKHIR MODUL INI ANDA AKAN MAMPU"
+!!! tip "PADA AKHIR MODUL INI ANDA AKAN BOLEH"
 
-    - [ ] Memahami kepentingan pembersihan sumber dan pengurusan kos
-    - [ ] Menggunakan `azd down` untuk membatalkan penyediaan infrastruktur dengan selamat
-    - [ ] Memulihkan Perkhidmatan Azure AI yang dipadamkan secara lembut jika perlu
-    - [ ] **Makmal 6:** Bersihkan sumber Azure dan sahkan penghapusannya
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Latihan Bonus
 
-Sebelum kita membongkar projek, luangkan beberapa minit untuk melakukan penerokaan terbuka.
+Sebelum kita menyahpasang projek, luangkan beberapa minit untuk melakukan penerokaan terbuka.
 
-!!! info "Cuba Arahan Penerokaan Ini"
+!!! info "Cuba Panduan Penerokaan Ini"
 
-    **Bersuai dengan GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. Tanya: `Apakah templat AZD lain yang boleh saya cuba untuk senario agen berganda?`
-    2. Tanya: `Bagaimana saya boleh sesuaikan arahan agen untuk kes penggunaan penjagaan kesihatan?`
-    3. Tanya: `Apakah pembolehubah persekitaran yang mengawal pengoptimuman kos?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Terokai Portal Azure:**
+    **Explore the Azure Portal:**
     
-    1. Semak metrik Application Insights untuk penyebaran anda
-    2. Semak analisis kos untuk sumber yang disediakan
-    3. Terokai taman permainan agen portal Microsoft Foundry sekali lagi
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Membatalkan Penyediaan Infra
+## Nyahpasang Infra
 
-1. Membongkar infrastruktur semudah:
-
+1. Menyahpasang infrastruktur adalah semudah:
+      
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. Bendera `--purge` memastikan ia juga membersihkan sumber Perkhidmatan Kognitif yang dipadamkan secara lembut, dengan itu melepaskan kuota yang dipegang oleh sumber ini. Setelah selesai anda akan melihat sesuatu seperti ini:
-
-      ```bash title="" linenums="0"
+1. Sahkan persekitaran yang dipilih dan semak sumber yang hendak dipadamkan. Ini akan mengalih keluar sumber Azure dan boleh memusnahkan data. Kekalkan arahan pengesahan untuk aliran pembelajaran ini. Setelah selesai anda akan melihat output serupa:
+      
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Pilihan) Jika anda menjalankan `azd up` lagi sekarang, anda akan perhatikan model gpt-4.1 dikerahkan kerana pembolehubah persekitaran telah diubah (dan disimpan) dalam folder `.azure` tempatan.
+1. Sahkan pemadaman di portal dan periksa sumber di luar skop penyebaran. Pelaporan kos dan kemas kini kuota boleh berlaku lambat. Konfigurasi `.azure` tempatan kekal melainkan anda nyahpadamkannya secara eksplisit.
 
-      Berikut adalah penyebaran model **sebelum**:
+1. `azd down --purge` juga meminta pemadaman kekal sumber yang disokong yang dipadamkan secara lembut. Gunakan hanya apabila pemulihan tidak diperlukan dan anda faham polisi pengekalan/pemeliharaan lindungan hapus. Ia tidak menjamin pelepasan kuota segera.
 
-      ![Initial](../../../../../translated_images/ms/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      Dan inilah **selepas**:
-      ![New](../../../../../translated_images/ms/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Jangan pasang semula hanya untuk mengesahkan pembersihan. `azd up` yang disengajakan kemudian boleh mencipta semula sumber menggunakan input tempatan yang tinggal, dan akan mengenakan caj semula. Kemas kini model biasanya menggunakan perubahan penyediaan yang disokong, bukan pembuangan.
 
 ---
 

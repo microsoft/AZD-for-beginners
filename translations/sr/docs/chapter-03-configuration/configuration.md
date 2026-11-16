@@ -1,118 +1,118 @@
 # Водич за конфигурацију
 
-**Chapter Navigation:**
-- **📚 Course Home**: [Почетак курса](../../README.md)
-- **📖 Current Chapter**: Поглавље 3 - Конфигурација и аутентификација
-- **⬅️ Previous**: [Ваш први пројекат](first-project.md)
-- **➡️ Next**: [Водич за деплој](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Поглавље 4: Инфраструктура као код](../chapter-04-infrastructure/deployment-guide.md)
+**Навигација по поглављима:**
+- **📚 Почетна страна курса**: [AZD за почетнике](../../README.md)
+- **📖 Тренутно поглавље**: Поглавље 3 - Конфигурација и аутентификација
+- **⬅️ Претходно**: [Ваш први пројекат](../chapter-01-foundation/first-project.md)
+- **➡️ Следеће**: [Водич за деплојмент](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Следеће поглавље**: [Поглавље 4: Инфраструктура као код](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Увод
 
-Ова свеобухватна документација покрива све аспекте конфигурисања Azure Developer CLI за оптималне токове рада развоја и деплоја. Научићете о хијерархији конфигурације, управљању окружењима, методама аутентификације и напредним обрасцима конфигурације који омогућавају ефикасан и безбедан деплој на Azure.
+> Прегледано у складу са `azd 1.37.2` (новембар 2026). Баш команде претпостављају иницијализован azd пројекат. Ако није јасно описано као потпуна датотека, YAML/Bicep исечци су фрагменти за уметање у одговарајуће пројектне датотеке, не самостални пројекти спремни за покретање.
+
+Овај обухватни водич покрива све аспекте конфигурисања Azure Developer CLI за оптималне токове рада у развоју и деплојменту. Научићете о хијерархији конфигурације, управљању окружењем, методама аутентикације и напредним шаблонима конфигурације који омогућавају ефикасан и безбедан Azure деплојмент.
 
 ## Циљеви учења
 
-До краја ове лекције, ви ћете:
-- Усвојити хијерархију конфигурације azd и разумети како се подешавања приоритизују
-- Ефикасно конфигурисати глобална и пројектно-специфична подешавања
+До краја ове лекције, научићете:
+- Савладати хијерархију конфигурације azd и разумети како се приоритетизују подешавања
+- Ефикасно конфигурисати глобална и специјална подешавања за пројекте
 - Управљати више окружења са различитим конфигурацијама
-- Имплементирати безбедне шеме аутентификације и ауторизације
-- Разумети напредне обрасце конфигурације за сложене сценарије
+- Имплементирати безбедне шаблоне аутентификације и ауторизације
+- Разумети напредне шаблоне конфигурације за сложене сценарије
 
-## Исходи учења
+## Резултати учења
 
-Након завршетка ове лекције, моћи ћете да:
-- Конфигуришете azd за оптималне токове рада развоја
-- Подесите и управљате више окружења за деплој
-- Имплементирате праксе безбедног управљања конфигурацијом
+Након завршетка ове лекције, бићете у могућности да:
+- Конфигуришете azd за оптималне токове рада у развоју
+- Постављате и управљате више окружења за деплојмент
+- Имплементирате безбедне праксе управљања конфигурацијама
 - Решавате проблеме везане за конфигурацију
-- Прилагодите понашање azd за одређене организационе захтеве
+- Прилагодите понашање azd за специфичне организационе потребе
 
-Ова свеобухватна документација покрива све аспекте конфигурисања Azure Developer CLI за оптималне токове рада развоја и деплоја.
+Овај обухватни водич покрива све аспекте конфигурисања Azure Developer CLI за оптималне токове рада у развоју и деплојменту.
 
 ## Разумевање AI агената у azd пројекту
 
-Ако сте нови у вези AI агената, ево једноставног начина да их замислите у свету azd.
+Ако сте нови у AI агентима, ево једноставног начина да их разумете у азд свету.
 
 ### Шта је агент?
 
-Агент је комад софтвера који може да прими захтев, размисли о њему и предузме акције — често позивањем AI модела, претраживањем података или позивањем других сервиса. У azd пројекту, агент је само још један **сервис** поред вашег веб фронтенда или API бекенда.
+Агент је софтверски елемент који може примати захтев, размишљати о њему и предузимати акције — често позивајући AI модел, претражујући податке или позивајући друге сервисе. У azd пројекту, агент је само још један **сервис** поред вашег веб фронтенда или API бекенда.
 
-### Како се агенти уклапају у структуру azd пројекта
+### Како агенти уклапају у структуру azd пројекта
 
-azd пројекат се састоји из три слоја: **инфраструктура**, **код** и **конфигурација**. Агенти се укључују у ове слојеве на исти начин као и било који други сервис:
+azd пројекат се састоји из три слоја: **инфраструктура**, **код** и **конфигурација**. Агенти се убацују у ове слојеве као и било који други сервис:
 
-| Layer | What It Does for a Traditional App | What It Does for an Agent |
+| Слој | Шта ради за традиционалну апликацију | Шта ради за агента |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Обезбеђује веб апликацију и базу података | Обезбеђује endpoint AI модела, претражни индекс или хост за агента |
-| **Code** (`src/`) | Садржи ваш фронтенд и изворни код API-ја | Садржи логику агента и дефиниције упита |
-| **Configuration** (`azure.yaml`) | Наводи ваше сервисе и њихове хостинг циљеве | Наводи ваш агент као сервис, указујући на његов код и хост |
+| **Инфраструктура** (`infra/`) | Пропразује веб апликацију и базу података | Пропразује AI модел крајњу тачку, индекс претраге или хост агента |
+| **Код** (`src/`) | Садржи изворни код фронтенда и API-а | Садржи логику агента и дефиниције упита |
+| **Конфигурација** (`azure.yaml`) | Наводи ваше сервисе и њихове хостинг циљеве | Наводи вашег агента као сервис, упућујући на његов код и домаћина |
 
 ### Улога `azure.yaml`
 
-Не морате да памтите синтаксу у овом тренутку. Концептуално, `azure.yaml` је фајл у ком кажете azd: *"Ово су сервиси који чине моју апликацију, и ево где се налази њихов код."*
+Не морате сада да памтите синтаксу. Концептуално, `azure.yaml` је датотека у којој кажете azd-у: *"Овде су сервиси који чине моју апликацију и овде се налази њихов код."*
 
-Када ваш пројекат укључује AI агента, `azure.yaml` једноставно наводи тај агент као један од сервиса. azd онда зна да треба да обезбеди одговарајућу инфраструктуру (као што је Microsoft Foundry Models endpoint или Container App за хостовање агента) и деплојује код вашег агента — исто као што би то учинио за веб апликацију или API.
+Када ваш пројекат укључује AI агента, `azure.yaml` једноставно листа тог агента као једног од сервиса. azd онда зна да обезбеди одговарајућу инфраструктуру (као Microsoft Foundry Models крајњу тачку или Container App за хостовање агента) и деплојује ваш агентски код — као што то ради за веб апликацију или API.
 
 Ово значи да нема ничег фундаментално новог за учење. Ако разумете како azd управља веб сервисом, већ разумете како управља агентом.
 
 ## Хијерархија конфигурације
 
-azd користи хијерархијски систем конфигурације:
-1. **Флагови командне линије** (највиши приоритет)
-2. **Променљиве окружења**
-3. **Локална пројектна конфигурација** (`.azd/config.json`)
-4. **Глобална корисничка конфигурација** (`~/.azd/config.json`)
-5. **Подразумеване вредности** (најнижи приоритет)
+azd има различите конфигурационе површине, а не један универзални преклоп:
+- **Глобалне корисничке преференце**: `~/.azd/config.json`, управља `azd config`.
+- **Дефиниција пројекта**: `azure.yaml` спецификује сервисе, инфраструктуру и хукове.
+- **Избор локалног окружења**: `.azure/config.json`.
+- **Вредности по окружењу**: `.azure/<name>/.env`, управља `azd env`; додатна подешавања се налазе у `config.json` тог окружења.
+- **Флагови и променљиве процеса**: преовлађују само подешавања које одређена команда/провајдер подржава.
+
+Која било вредност `azd env set` не постаје аутоматски параметар инфраструктуре или подешавање распоређене апликације. Јасно је наведите у параметар датотеци, подржаној конфигурацији сервиса или хуку.
 
 ## Глобална конфигурација
 
-### Подешавање глобалних подразумеваних вредности
+### Постављање глобалних подразумеваних вредности
 ```bash
-# Постави подразумевану претплату
+# Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Постави подразумевану локацију
+# Set default location
 azd config set defaults.location "eastus2"
 
-# Постави подразумевану конвенцију именовања групе ресурса
-azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
-
-# Прикажи сву глобалну конфигурацију
+# View all global configuration
 azd config show
 
-# Уклони конфигурацију
+# Remove a configuration
 azd config unset defaults.location
 ```
 
 ### Уобичајена глобална подешавања
 ```bash
-# Подешавања за развој
-azd config set alpha.enable true                    # Омогући алфа функције
-azd config set telemetry.enabled false             # Онемогући телеметрију
-azd config set output.format json                  # Подеси формат излаза
+# Discover supported settings instead of inventing configuration keys
+azd config options
+azd config list-alpha
 
-# Безбедносна подешавања
-azd config set auth.useAzureCliCredential true     # Користи Azure CLI за аутентификацију
-azd config set tls.insecure false                  # Примени верификацију TLS
+# Explicit opt-in only: use Azure CLI credentials rather than azd's default login
+azd config set auth.useAzCliAuth true
+# Restore azd's default credential behavior
+azd config unset auth.useAzCliAuth
 
-# Подешавање перформанси
-azd config set provision.parallelism 5             # Паралелно креирање ресурса
-azd config set deploy.timeout 30m                  # Временско ограничење распоређивања
+# Use per-command flags for supported behavior
+azd show --output json
+azd deploy --timeout 1800   # seconds; stops waiting, not the Azure-side deployment
 ```
 
-## 🏗️ Пројектна конфигурација
+## 🏗️ Конфигурација пројекта
 
-### Структура `azure.yaml`
-Фајл `azure.yaml` је срце вашег azd пројекта:
+### Структура azure.yaml
+Датотека `azure.yaml` је срце вашег azd пројекта:
 
 ```yaml
 # Minimum configuration
 name: my-awesome-app
 metadata:
   template: my-template@1.0.0
-  templateBranch: main
 
 # Service definitions
 services:
@@ -129,21 +129,13 @@ services:
     language: python
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-    
-  # Database service
-  database:
-    project: ./src/db
-    host: postgres
+      context: .
+      path: Dockerfile
     
 # Infrastructure configuration
 infra:
   provider: bicep                   # Infrastructure provider
   path: ./infra                    # Infrastructure code location
-  parameters:
-    environmentName: ${AZURE_ENV_NAME}
-    location: ${AZURE_LOCATION}
 
 # Deployment hooks
 hooks:
@@ -181,9 +173,11 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Опције конфигурисања сервиса
+Ово је пример **дефиниције пројекта**, а не испоручени стартер. Креирајте наведене изворне фасцикле, хук скрипте, пакетске скрипте и одговарајуће `infra/main.bicep`/`main.parameters.json` пре покретања. Базе података припадају инфраструктури; `postgres` није уграђени хост сервиса. Параметри инфраструктуре иду у датотеку параметара провајдера, не у `infra.parameters`.
 
-#### Врсте хоста
+### Опције конфигурације сервиса
+
+#### Типови хоста
 ```yaml
 services:
   web-static:
@@ -202,46 +196,53 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Подешавања специфична за језик
+#### Језички специфични хукови за изградњу
+
+Следећи исечци сервиса илуструју хукове; спојите их са стварним `project` и `host` сваког сервиса. `buildCommand` и `startCommand` нису општи азд својства сервиса. Конфигуришите покретање у апликацији, Dockerfile-у или инфраструктури хоста.
+
 ```yaml
 services:
   node-app:
+    project: ./src/node
+    host: appservice
     language: js
-    buildCommand: npm run build
-    startCommand: npm start
+    hooks:
+      prepackage:
+        shell: sh
+        run: npm run build
     
   python-app:
+    project: ./src/python
+    host: appservice
     language: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
     
   dotnet-app:
+    project: ./src/dotnet
+    host: appservice
     language: csharp
-    buildCommand: dotnet build
-    startCommand: dotnet run
     
   java-app:
+    project: ./src/java
+    host: appservice
     language: java
-    buildCommand: mvn clean package
-    startCommand: java -jar target/app.jar
 ```
 
 ## 🌟 Управљање окружењима
 
 ### Креирање окружења
 ```bash
-# Креирај ново окружење
+# Create a new environment
 azd env new development
 
-# Креирај са одређеном локацијом
+# Create with specific location
 azd env new staging --location "westus2"
 
-# Креирај из шаблона
+# Create from template
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### Конфигурација окружења
-Свако окружење има своју конфигурацију у `.azure/<env-name>/config.json`:
+Основне вредности окружења налазе се у `.azure/<env-name>/.env`, укључујући `AZURE_ENV_NAME`, `AZURE_SUBSCRIPTION_ID`, и `AZURE_LOCATION`. Користите `azd env config get/set` за додатна подешавања окружења у JSON формату. Следећи JSON је **концептуално стање апликације**, а не azd конфигурациона шема; не копирајте га у azd датотеке:
 
 ```json
 {
@@ -264,129 +265,133 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### Променљиве окружења
+
+**Само демонстрација у чистом тексту.** Обичне `azd env set` вредности се записују у `.azure/<name>/.env` и могу се исписати read командама. Немојте користити пример API кључа као прави креденцијал. За тајне користите `azd env set-secret` и експлицитно повезивање у време извршења.
+
 ```bash
-# Поставите променљиве специфичне за окружење
+# Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# Прикажите променљиве окружења
+# View environment variables
 azd env get-values
 
-# Очекује се излаз:
+# Expected output:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# Уклоните променљиву окружења
+# Remove environment variable
 azd env unset DEBUG
 
-# Потврдите уклањање
+# Verify removal
 azd env get-values | grep DEBUG
-# (не би требало да врати ништа)
+# (should return nothing)
 ```
 
 ### Шаблони окружења
-Креирајте `.azure/env.template` за доследно подешавање окружења:
+Креирајте **не-тајни, ручно одржавани** `.env.example` у корену пројекта за конзистентна подешавања. azd не учитава аутоматски датотеку са именом `env.template`:
 ```bash
-# Обавезне променљиве
+# Required variables
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Подешавања апликације
+# Application settings
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Опционална подешавања за развој
+# Optional development settings
 DEBUG=false
 LOG_LEVEL=info
 ```
 
 ### Дељење окружења у тиму
 
-Када више особа ради на пројекту, морате се договорити о **шта иде уз репо и шта остаје локално**. azd смешта свако окружење у фасциклу `.azure/`, и не све у њој треба да се комитује.
+Када више особа ради на пројекту, потребно је договорити се **шта путује са репозиторијумом, а шта остаје локално**. azd чува свако окружење у `.azure/` фасцикли, али не треба све уписивати у репозиторијум.
 
-**Шта се налази у `.azure/`:**
+**Шта је у `.azure/`:**
 
 ```
 .azure/
 ├── config.json              # which env is currently selected (local)
 └── <env-name>/
-    ├── config.json          # subscription, location, resource IDs
-    └── .env                 # environment variables (may contain secrets!)
+    ├── config.json          # additional environment settings
+    └── .env                 # subscription, location, outputs; may contain secrets!
 ```
 
-**Шта ставити у .gitignore.** azd-ов подразумевани `.gitignore` већ изузима `.azure/`. Оставите га таквим — `.env` фајлови могу да садрже тајне, а ID-ови ресурса су специфични за онога ко их је провизионисао. Сваки члан тима креира своје **сопствено** окружење локално:
+**Шта треба додати у .gitignore.** Подразумевани `.gitignore` azd-а већ изузима `.azure/`. Оставите је тако — `.env` датотеке могу садржати тајне, а ID-ови ресурса су специфични за онога ко их је креирао. Свако из тима креира своје **локално** окружење:
 
 ```bash
-# Сваки програмер ово покреће једном да би добио своје изоловано окружење
+# Every developer runs this once to get their own isolated environment
 azd env new dev-alice
 azd up
 ```
 
-**Прелазак између окружења.** Програмер који управља више окружења одабира активно пре покретања команди:
+**Преваљивање између окружења.** Програмер који управља са неколико окружења бира активно пре покретања команди:
 
 ```bash
-azd env list                 # види сва локална окружења и које је подразумевано
-azd env select staging       # подеси 'staging' као активно окружење
-azd env get-values           # потврди да си усмерен на право окружење
+azd env list                 # see all local environments and which is default
+azd env select staging       # make 'staging' the active environment
+azd env get-values           # confirm you're pointed at the right one
 ```
 
-**Пружање неповерљивих подразумеваних вредности тиму.** Комуитујте шаблон (као `.azure/env.template` горе) да би сви знали које променљиве треба подесити — али никад не комитујте попуњене вредности. Нови чланови тима копирају шаблон и попуне своје вредности.
+**Обезбеђивање позадине која није тајна за тим.** Комуницирајте `.env.example` ван игнорисане `.azure/` фасцикле. Нови чланови тима је копирају у локалну игнорисану датотеку, попуњавају вредности и експлицитно је увозе помоћу `azd env set --file <local-file>`. Никада не уводите празне резервне места у радно окружење.
 
-**Окружења у CI/CD.** Пайплајни не читају вашу локалну фасциклу `.azure/`. Уместо тога, доставите вредности окружења као променљиве/тајне у пайплајну, а azd их чита из процесног окружења:
+**Окружења у CI/CD.** Пипелина не чита вашу локалну `.azure/` фасциклу. Уместо тога, обезбедите вредности окружења као променљиве/тајне пипелина, а azd их чита из процесног окружења:
 
 ```bash
-# У CI-ју, azd их чита из окружења, а не из .azure/
+# In CI, azd reads these from the environment, not from .azure/
 export AZURE_ENV_NAME=production
 export AZURE_LOCATION=eastus2
-export AZURE_SUBSCRIPTION_ID=<sub-id>
+export AZURE_SUBSCRIPTION_ID="<sub-id>"
 azd provision --no-prompt
 azd deploy --no-prompt
 ```
 
-> **Правило:** инфраструктурни код (`infra/`, `azure.yaml`) је дељен у гиту; окружење *стање и тајне* (`.azure/`) су по-развојачу и по-пајплајну. `azd pipeline config` аутоматски подешава променљиве пайплајна за вас.
+> **Пропоручено правило:** код инфраструктуре (`infra/`, `azure.yaml`) дели се у Гиту; *статус и тајне окружења* (`.azure/`) су поразличите за сваког програмера и за сваку линију интеграције. `azd pipeline config` аутоматски подешава променљиве линије за вас.
 
 ## 🔐 Конфигурација аутентификације
 
-### Интеграција са Azure CLI
+### Интеграција Azure CLI-ја
 ```bash
-# Користи Azure CLI креденцијале (подразумевано)
-azd config set auth.useAzureCliCredential true
+# Explicit opt-in; NOT the default
+azd config set auth.useAzCliAuth true
 
-# Пријави се са одређеним тенантом
-az login --tenant <tenant-id>
+# Login with specific tenant
+az login --tenant "<tenant-id>"
 
-# Подеси подразумевану претплату
-az account set --subscription <subscription-id>
+# Set default subscription
+az account set --subscription "<subscription-id>"
 ```
 
-### Аутентикација сервисним принципалом
-За CI/CD пайплајнове:
+### Аутентификација помоћу Service Principal-а
+За CI/CD линије:
 ```bash
-# Подесите променљиве окружења
+# Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Или конфигуришите директно
-azd config set auth.clientId "your-client-id"
-azd config set auth.tenantId "your-tenant-id"
+# Authenticate azd explicitly (prefer pipeline federation over a long-lived secret)
+azd auth login --client-id "$AZURE_CLIENT_ID" \
+  --client-secret "$AZURE_CLIENT_SECRET" --tenant-id "$AZURE_TENANT_ID"
 ```
 
 ### Управљани идентитет
-За окружења хостована у Azure:
+За окружења која су хостована у Azure-у:
 ```bash
-# Омогући аутентификацију управљаног идентитета
-azd config set auth.useMsi true
-azd config set auth.msiClientId "your-managed-identity-client-id"
+# Enable managed identity authentication
+azd auth login --managed-identity
+# Alternative: choose an identity assigned to the host by client ID
+azd auth login --managed-identity --client-id "<managed-identity-client-id>"
 ```
 
-## 🏗️ Инфраструктурна конфигурација
+## 🏗️ Конфигурација инфраструктуре
 
-### Bicep параметри
-Конфигуришите параметре инфраструктуре у `infra/main.parameters.json`:
+### Параметри за Bicep
+Подесите параметре инфраструктуре у `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -408,38 +413,45 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### Terraform конфигурација
-За Terraform пројекте, конфигуришите у `infra/terraform.tfvars`:
-```hcl
-environment_name = "${AZURE_ENV_NAME}"
-location = "${AZURE_LOCATION}"
-app_service_sku = "B1"
-database_sku = "GP_Gen5_2"
+### Конфигурација Terraform-а
+За Terraform пројекте, azd замењује прописане ознаке у `infra/main.tfvars.json`. Ова имена морају одговарати декларисаним улазним променљивима Terraform-а:
+```json
+{
+  "environment_name": "${AZURE_ENV_NAME}",
+  "location": "${AZURE_LOCATION}",
+  "app_service_sku": "B1"
+}
 ```
 
-## 🚀 Конфигурација деплоја
+## 🚀 Конфигурација распореда
 
-### Конфигурација изградње
+### Конфигурација компилације
 ```yaml
 # In azure.yaml
 services:
   web:
     project: ./src/web
+    host: appservice
     language: js
-    buildCommand: npm run build:prod
-    buildEnvironment:
-      NODE_ENV: production
-      REACT_APP_API_URL: ${API_URL}
     dist: build
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          NODE_ENV=production REACT_APP_API_URL="$API_URL" npm run build:prod
     
   api:
     project: ./src/api
+    host: appservice
     language: python
-    buildCommand: |
-      pip install -r requirements.txt
-      python -m pytest tests/
-    buildEnvironment:
-      PYTHONPATH: src
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          python -m pip install -r requirements.txt
+          PYTHONPATH=src python -m pytest tests/
 ```
 
 ### Docker конфигурација
@@ -449,60 +461,50 @@ services:
     project: ./src/api
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        NODE_ENV: production
-        API_VERSION: v1.0.0
+        - NODE_ENV=production
+        - API_VERSION=v1.0.0
 ```
-Example `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Путање су релативне на пројекат сервиса. Dockerfile мора декларисати сваки `ARG` параметар који користи. За вишефазну компилацију, поставите фазу распореда као последњу или користите прилагођени ток паковања; `docker.target` није подржани атрибут у прегледаној шеми.
 
 ## 🔧 Напредна конфигурација
 
 ### Прилагођено именовање ресурса
-```bash
-# Поставите правила именовања
-azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
-azd config set naming.storageAccount "{project}{env}sa"
-azd config set naming.keyVault "kv-{project}-{env}"
+```yaml
+# azure.yaml fragment: override resource-group discovery where appropriate
+resourceGroup: rg-${AZURE_ENV_NAME}
 ```
 
-### Конфигурација мреже
-```yaml
-# In azure.yaml
-infra:
-  provider: bicep
-  parameters:
-    vnetAddressPrefix: "10.0.0.0/16"
-    subnetAddressPrefix: "10.0.1.0/24"
-    enablePrivateEndpoints: true
+Дефинишите стварна имена ресурса у Bicep-у/Terraform-у и одржавајте доследност приликом креирања ресурсних група према овом подешавању. Не постоје генерички `naming.storageAccount` или `naming.keyVault` кључеви конфигурације.
+
+### Мрежна конфигурација
+```json
+{
+  "vnetAddressPrefix": { "value": "10.0.0.0/16" },
+  "subnetAddressPrefix": { "value": "10.0.1.0/24" },
+  "enablePrivateEndpoints": { "value": true }
+}
 ```
 
-### Конфигурација надгледања
-```yaml
-# In azure.yaml
-monitoring:
-  applicationInsights:
-    enabled: true
-    samplingPercentage: 100
-  logAnalytics:
-    enabled: true
-    retentionDays: 30
-```
+Упишите ове **илустративне параметре** у `infra/main.parameters.json` у делу `parameters` и декларишите и користите одговарајуће параметре у Bicep-у. Они сами по себи не раде ништа.
+
+### Мониторинг конфигурација
+Обезбедите Application Insights и Log Analytics у Bicep-у/Terraform-у и конфигуришите телеметрију апликације у вашем SDK-у. Не постоји општа врхунска `monitoring` секција у `azure.yaml` која аутоматски прави ове ресурсе. Погледајте [инфраструктуру за мониторинг](../chapter-04-infrastructure/provisioning.md#-monitoring-and-observability).
 
 ## 🎯 Конфигурације специфичне за окружење
 
-### Развојно окружење
+### Девелоперско окружење
 ```bash
-# .азуре/развој/.env
+# .azure/development/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Претпродукцијско окружење
+### Сценско окружење
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -522,20 +524,21 @@ ENABLE_SECURITY_HEADERS=true
 
 ## 🔍 Валидација конфигурације
 
-### Валидација конфигурације
+### Провери конфигурацију
 ```bash
-# Провери синтаксу конфигурације
-azd config validate
+# Inspect supported global settings and current project
+azd config options
+azd show
 
-# Тестирај променљиве окружења
+# Test environment variables
 azd env get-values
 
-# Потврди инфраструктуру
-azd provision --dry-run
+# Validate infrastructure
+azd provision --preview
 ```
 
 ### Скрипте за конфигурацију
-Креирајте скрипте за валидацију у `scripts/`:
+Направите скрипте за валидацију у `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -543,15 +546,15 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# Провери потребне променљиве окружења
+# Check required environment variables
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Провери синтаксу azure.yaml
-if ! azd config validate; then
-  echo "Error: Invalid azure.yaml configuration"
+# Ask azd to load the project (not full schema or infrastructure validation)
+if ! azd show --output json; then
+  echo "Error: Could not load the azd project"
   exit 1
 fi
 
@@ -566,16 +569,20 @@ echo "Configuration validation passed!"
 database:
   connectionString: ${DATABASE_CONNECTION_STRING}
 
+```
+
+Избегавајте убацивање осетљивих вредности непосредно у код (одвојена илустративна конфигурација, не други `database` кључ у истом фајлу):
+
+```yaml
 # Avoid: Hardcode sensitive values
 database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Организујте фајлове конфигурације
+### 2. Организујте конфигурационе фајлове
 ```
 .azure/
 ├── config.json              # Global project config
-├── env.template             # Environment template
 ├── development/
 │   ├── config.json         # Dev environment config
 │   └── .env                # Dev environment variables
@@ -587,12 +594,12 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Разматрања везана за контролу верзија
+### 3. Разматрања о контроли верзија
 ```bash
 # .gitignore
-.azure/*/config.json         # Конфигурације окружења (садрже ИД-ове ресурса)
-.azure/*/.env               # Променљиве окружења (могу садржати тајне)
-.env                        # Локална датотека окружења
+.azure/*/config.json         # Environment configs (contain resource IDs)
+.azure/*/.env               # Environment variables (may contain secrets)
+.env                        # Local environment file
 ```
 
 ### 4. Документација конфигурације
@@ -611,88 +618,87 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Практични вежбања
+## 🎯 Вежбе за практичан рад
 
 ### Вежба 1: Конфигурација за више окружења (15 минута)
 
-**Циљ**: Креирајте и конфигуришите три окружења са различитим подешавањима
+**Циљ**: Креирајте и конфигуришите три локална окружења са различитим вредностима. Почните у већ иницијализованом пројекту; користите непостојећа имена ако ови већ постоје. Ове вредности специфичне за апликацију не мењају подешавања телеметрије или извршавања док их ваша шаблона не употреби.
 
 ```bash
-# Креирајте развојно окружење
+# Create development environment
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Креирајте предпродукционо окружење
+# Create staging environment
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# Креирајте продукционо окружење
+# Create production environment
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# Проверите свако окружење
+# Verify each environment
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
 **Критеријуми успеха:**
-- [ ] Три окружења успешно креирана
+- [ ] Три окружења су успешно креирана
 - [ ] Свако окружење има јединствену конфигурацију
-- [ ] Могуће је пребацивати се између окружења без грешака
+- [ ] Могу се пребацивати између окружења без грешака
 - [ ] `azd env list` приказује све три окружења
 
-### Вежба 2: Управљање тајнама (10 минута)
+### Вежба 2: Референце Кеy Vault тајни (10-20 минута)
 
-**Циљ**: Вежба сигурне конфигурације са осетљивим подацима
+**Циљ**: Смештати референцу на Key Vault уместо plain текст. **Почетна тачка:** иницијализовано окружење, Azure пријава, и приступ Key Vault-у са дозволама за креирање/читање тестне тајне. Операције над Vault-ом могу изазвати трошкове.
 
 ```bash
-# Постави тајне (неће бити приказане у излазу)
-azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+# Follow the interactive prompts; use a dummy training value, not a production key
+azd env set-secret TRAINING_API_KEY
 
-# Постави конфигурацију која није тајна
+# Set non-secret config
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Прикажи окружење (тајне треба да буду сакривене)
-azd env get-values
-
-# Потврди да су тајне сачуване
-azd env get DB_PASSWORD  # Требало би да прикаже стварну вредност
+# Inspect .azure/<environment>/.env locally: TRAINING_API_KEY should
+# contain an azd Key Vault reference, not the dummy secret text.
+# Do not print resolved values in CI or shared terminal logs.
 ```
 
 **Критеријуми успеха:**
-- [ ] Тајне сачуване без приказивања у терминалу
-- [ ] `azd env get-values` приказује редаковане тајне
-- [ ] Појединачно `azd env get <SECRET_NAME>` враћа стварну вредност
+- [ ] Интерактивна команда пријављује изабрани vault и референцу на тајну
+- [ ] Локални `.env` садржи референцу уместо тестне тајне
+- [ ] Може се објаснити да идентитет током извршавања/RBAC и потрошња и даље морају бити конфигурисани
+
+**Уобичајени проблеми:** 403 захтева исправну улогу за vault data-plane и време да се промена прошири; `azd env set ... --secret` није валидна команда. Обични `get-values`/`get-value` излаз не мора бити аутоматски цензурисан. Уклоните референцу за обуку командом `azd env unset TRAINING_API_KEY`; ово не брише тајну у vault-у, коју морате посебно очистити ако сте је креирали.
 
 ## Следећи кораци
 
-- [Ваш први пројекат](first-project.md) - Примените конфигурацију у пракси
-- [Водич за деплој](../chapter-04-infrastructure/deployment-guide.md) - Користите конфигурацију за деплој
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Конфигурације спремне за продукцију
+- [Ваш први пројекат](../chapter-01-foundation/first-project.md) - Примена конфигурације у пракси
+- [Водич за распоређивање](../chapter-04-infrastructure/deployment-guide.md) - Користите конфигурацију за распоређивање
+- [Обезбеђивање ресурса](../chapter-04-infrastructure/provisioning.md) - Конфигурације спремне за производњу
 
 ## Референце
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd Reference za konfiguraciju](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml Шема](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-schema)
+- [Променљиве окружења](https://learn.microsoft.com/azure/developer/azure-developer-cli/manage-environment-variables)
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [Почетак курса](../../README.md)
-- **📖 Current Chapter**: Поглавље 3 - Конфигурација и аутентификација
-- **⬅️ Previous**: [Ваш први пројекат](first-project.md)
-- **➡️ Next Chapter**: [Поглавље 4: Инфраструктура као код](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Ваш први пројекат](first-project.md)
+**Навигација кроз поглавља:**
+- **📚 Почетна страница курса**: [AZD For Beginners](../../README.md)
+- **📖 Тренутно поглавље**: Поглавље 3 - Конфигурација и аутентификација
+- **⬅️ Претходно**: [Ваш први пројекат](../chapter-01-foundation/first-project.md)
+- **➡️ Следеће поглавље**: [Поглавље 4: Инфраструктура као код](../chapter-04-infrastructure/deployment-guide.md)
+- **Следећа лекција**: [Аутентификација и безбедност](authsecurity.md)
 
 ---
 

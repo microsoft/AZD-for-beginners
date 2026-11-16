@@ -1,56 +1,56 @@
-# Príručka inštalácie a nastavenia
+# Inštalačný a Nastavovací Návod
 
-**Navigácia kapitolami:**
+**Navigácia kapitolou:**
 - **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
 - **📖 Aktuálna kapitola**: Kapitola 1 - Základy a rýchly štart
-- **⬅️ Predchádzajúca**: [Základné info o AZD](azd-basics.md)
+- **⬅️ Predchádzajúca**: [Základy AZD](azd-basics.md)
 - **➡️ Nasledujúca**: [Váš prvý projekt](first-project.md)
-- **🚀 Nasledujúca kapitola**: [Kapitola 2: Vývoj s AI na prvom mieste](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 Nasledujúca kapitola**: [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Úvod
 
-Táto komplexná príručka vás prevedie inštaláciou a konfiguráciou Azure Developer CLI (azd) na vašom systéme. Naučíte sa viaceré metódy inštalácie pre rôzne operačné systémy, nastavenie autentifikácie a počiatočnú konfiguráciu na prípravu vývojového prostredia pre Azure nasadenia.
+Tento komplexný návod vás prevedie inštaláciou a konfiguráciou Azure Developer CLI (azd) na vašom systéme. Naučíte sa viacero spôsobov inštalácie pre rôzne operačné systémy, nastavenie autentifikácie a počiatočnú konfiguráciu na prípravu vášho vývojového prostredia pre nasadenia do Azure.
 
 ## Ciele učenia
 
 Na konci tejto lekcie budete:
-- Úspešne inštalovať Azure Developer CLI na váš operačný systém
-- Konfigurovať autentifikáciu s Azure pomocou viacerých metód
-- Nastaviť vývojové prostredie s potrebnými predpokladmi
-- Pochopiť rôzne možnosti inštalácie a kedy ich použiť
-- Riešiť bežné problémy s inštaláciou a nastavením
+- Úspešne nainštalovať Azure Developer CLI na vašom operačnom systéme
+- Nakonfigurovať autentifikáciu s Azure rôznymi metódami
+- Nastaviť vaše vývojové prostredie s potrebnými predpokladmi
+- Rozumieť rôznym možnostiam inštalácie a kedy ich používať
+- Riešiť bežné problémy pri inštalácii a nastavení
 
-## Výstupy učenia
+## Výsledky učenia
 
 Po dokončení tejto lekcie budete schopní:
-- Inštalovať azd vhodnou metódou pre vašu platformu
-- Autentifikovať sa v Azure pomocou príkazu azd auth login
+- Nainštalovať azd vhodnou metódou pre vašu platformu
+- Autentifikovať sa v Azure pomocou azd auth login
 - Overiť inštaláciu a otestovať základné príkazy azd
-- Nakonfigurovať vaše vývojové prostredie pre optimálne používanie azd
-- Samostatne riešiť bežné problémy s inštaláciou
+- Nakonfigurovať vývojové prostredie pre optimálne používanie azd
+- Samostatne vyriešiť bežné inštalačné problémy
 
-Táto príručka vám pomôže nainštalovať a nakonfigurovať Azure Developer CLI na vašom systéme, bez ohľadu na váš operačný systém alebo vývojové prostredie.
+Tento návod vám pomôže nainštalovať a nakonfigurovať Azure Developer CLI na vašom systéme, bez ohľadu na operačný systém alebo vývojové prostredie.
 
 ## Predpoklady
 
 Pred inštaláciou azd sa uistite, že máte:
-- **Predplatné Azure** - [Založte si bezplatný účet](https://azure.microsoft.com/free/)
-- **Azure CLI** - pre autentifikáciu a správu zdrojov
-- **Git** - na klonovanie šablón a správu verzií
-- **Docker** (voliteľné) - pre kontajnerizované aplikácie
+- **Azure predplatné** - [Vytvorte si bezplatný účet](https://azure.microsoft.com/free/)
+- **Azure CLI** (voliteľné) - Pre príklady, ktoré explicitne používajú `az`; azd však autentifikuje samostatne
+- **Git** - Pre klonovanie šablón a správu verzií
+- **Docker** (voliteľné) - Pre kontajnerizované aplikácie
 
 ## Spôsoby inštalácie
 
 ### Windows
 
-#### Možnosť 1: Windows Package Manager (Odporúčané)
+#### Možnosť 1: Windows Package Manager (odporúčané)
 ```cmd
 winget install microsoft.azd
 ```
 
-#### Možnosť 2: PowerShell inštalačný skript
+#### Možnosť 2: Inštalačný skript pre PowerShell
 ```powershell
-# Užitočné, keď winget nie je dostupný
+# Useful when winget is unavailable
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
@@ -60,13 +60,13 @@ choco install azd
 ```
 
 #### Možnosť 4: Manuálna inštalácia
-1. Stiahnite si najnovšiu verziu z [GitHub](https://github.com/Azure/azure-dev/releases)
+1. Stiahnite si najnovšie vydanie z [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Rozbaľte do `C:\Program Files\azd\`
 3. Pridajte do systémovej premennej PATH
 
 ### macOS
 
-#### Možnosť 1: Homebrew (Odporúčané)
+#### Možnosť 1: Homebrew (odporúčané)
 ```bash
 brew tap azure/azd
 brew install azd
@@ -78,30 +78,27 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
 #### Možnosť 3: Manuálna inštalácia
-```bash
-# Stiahnite a nainštalujte
-curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
-```
+Stiahnite archív pre vašu macOS architektúru z [výrobných súborov vydania](https://github.com/Azure/azure-dev/releases), rozbaľte ho a pridajte binárku `azd` do vášho `PATH`.
 
 ### Linux
 
-#### Možnosť 1: Inštalačný skript (Odporúčané)
+#### Možnosť 1: Inštalačný skript (odporúčané)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Možnosť 2: Správcovia balíkov
+#### Možnosť 2: Správca balíkov
 
-**Manuálna inštalácia z releasových súborov:**
+**Manuálna inštalácia z vydaných súborov:**
 ```bash
-# Stiahnite si najnovší archív pre vašu Linuxovú architektúru z:
+# Download the latest archive for your Linux architecture from:
 # https://github.com/Azure/azure-dev/releases
-# Potom ho rozbaľte a pridajte binárny súbor azd do vašej PATH.
+# Then extract it and add the azd binary to your PATH.
 ```
 
 ### GitHub Codespaces
 
-Niektoré Codespaces a dev container prostredia už obsahujú `azd`, no mali by ste to overiť, nie predpokladať:
+Niektoré Codespaces a dev kontajnerové prostredia už obsahujú `azd`, ale radšej to overte, než predpokladajte:
 
 ```bash
 azd version
@@ -112,25 +109,27 @@ Ak chýba `azd`, nainštalujte ho štandardným skriptom pre dané prostredie.
 ### Docker
 
 ```bash
-# Spustiť azd v kontajneri
-docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
+# Run azd in a container
+docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Vytvoriť alias pre jednoduchšie použitie
-alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
+# Create an alias for easier use
+alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
+
+Tento dočasný kontajner neukladá stav prihlásenia medzi spusteniami. Pre opakované nasadenia použite [nastavenie dev kontajnera](dev-containers.md); kontajnerové zostavovanie tiež vyžaduje prístup k Docker daemonovi z vnútra kontajnera.
 
 ## ✅ Overenie inštalácie
 
 Po inštalácii overte, či azd funguje správne:
 
 ```bash
-# Skontrolovať verziu
+# Check version
 azd version
 
-# Zobraziť pomoc
+# View help
 azd --help
 
-# Zoznam dostupných šablón
+# List available templates
 azd template list
 ```
 
@@ -139,54 +138,54 @@ Očakávaný výstup:
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Poznámka**: Skutočné číslo verzie sa bude líšiť. Skontrolujte [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) pre najnovšiu verziu.
+**Poznámka**: Skutočné číslo verzie sa môže líšiť. Skontrolujte [Azure Developer CLI vydania](https://github.com/Azure/azure-dev/releases) pre najnovšiu verziu.
 
 **✅ Kontrolný zoznam úspešnej inštalácie:**
 - [ ] `azd version` zobrazuje číslo verzie bez chýb
 - [ ] `azd --help` zobrazuje dokumentáciu príkazov
 - [ ] `azd template list` zobrazuje dostupné šablóny
-- [ ] Viete vytvoriť testovací adresár a úspešne spustiť `azd init`
+- [ ] Môžete vytvoriť testovací adresár a úspešne spustiť `azd init`
 
-**Ak všetky kontroly prejdú, môžete pokračovať do [Vášho prvého projektu](first-project.md)!**
+**Ak všetko prebehne úspešne, môžete pokračovať na [Váš prvý projekt](first-project.md)!**
 
 ## Nastavenie autentifikácie
 
 ### Odporúčané nastavenie pre začiatočníkov
 
-Pre pracovné postupy založené na AZD sa prihláste pomocou `azd auth login`.
+Pre pracovné postupy s prioritou AZD sa prihláste pomocou `azd auth login`.
 
 ```bash
-# Vyžaduje sa pre príkazy AZD, ako je azd up
+# Required for AZD commands such as azd up
 azd auth login
 
-# Overiť stav overenia AZD
+# Verify AZD authentication status
 azd auth login --check-status
 ```
 
-Použite prihlásenie cez Azure CLI len vtedy, keď plánujete počas kurzu spúšťať príkazy `az` sami.
+Používajte prihlásenie cez Azure CLI len ak plánujete počas kurzu sami spúšťať príkazy `az`.
 
-### Autentifikácia cez Azure CLI (voliteľné)
+### Autentifikácia Azure CLI (voliteľná)
 ```bash
-# Nainštalujte Azure CLI, ak nie je už nainštalovaný
+# Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
-# Linux: pozrite si dokumentáciu inštalácie Azure CLI pre vašu distribúciu
+# Linux: see the Azure CLI install docs for your distribution
 
-# Prihláste sa do Azure
+# Login to Azure
 az login
 
-# Overte overenie identity
+# Verify authentication
 az account show
 ```
 
-### Ktorý spôsob prihlásenia použiť?
+### Ktorý spôsob prihlásenia by ste mali použiť?
 
-- Použite `azd auth login`, ak nasledujete začiatočnícku cestu AZD a väčšinou spúšťate príkazy `azd`.
-- Použite tiež `az login`, ak chcete spúšťať Azure CLI príkazy ako `az account show` alebo priamo kontrolovať zdroje.
-- Ak cvičenie obsahuje príkazy `azd` aj `az`, spustite oba príkazy na prihlásenie raz na začiatku.
+- Použite `azd auth login`, ak nasledujete začiatočnícku cestu AZD a väčšinou spúšťate `azd` príkazy.
+- Používajte aj `az login`, keď chcete spúšťať príkazy Azure CLI ako `az account show` alebo priamo skúmať zdroje.
+- Ak cvičenie zahŕňa oba príkazy `azd` a `az`, spustite obidva príkazy na prihlásenie na začiatku.
 
-### Autentifikácia cez Device Code
-Ak používate systém bez GUI alebo máte problémy s prehliadačom:
+### Autentifikácia cez kód zariadenia
+Ak používate bezhlavý systém alebo máte problémy s prehliadačom:
 ```bash
 azd auth login --use-device-code
 ```
@@ -195,14 +194,14 @@ azd auth login --use-device-code
 Pre automatizované prostredia:
 ```bash
 azd auth login \
-  --client-id <client-id> \
-  --client-secret <client-secret> \
-  --tenant-id <tenant-id>
+  --client-id "<client-id>" \
+  --client-secret "<client-secret>" \
+  --tenant-id "<tenant-id>"
 ```
 
-### Overenie kompletného nastavenia
+### Overenie úplného nastavenia
 
-Ak chcete rýchlo overiť pripravenosť pred začatím Kapitoly 1:
+Ak chcete rýchlu kontrolu pripravenosti pred začatím Kapitoly 1:
 
 **Windows:**
 ```powershell
@@ -218,40 +217,39 @@ bash ./validate-setup.sh
 
 ### Globálna konfigurácia
 ```bash
-# Nastaviť predplatné ako predvolené
-azd config set defaults.subscription <subscription-id>
+# Set default subscription
+azd config set defaults.subscription "<subscription-id>"
 
-# Nastaviť predvolenú lokalitu
+# Set default location
 azd config set defaults.location eastus2
 
-# Zobraziť všetky nastavenia
+# View all configuration
 azd config show
 ```
 
 ### Premenné prostredia
-Pridajte do vášho shell profilu (`.bashrc`, `.zshrc`, `.profile`):
+Pridajte do svojho profilového skriptu shellu (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
-# Konfigurácia Azure
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# Konfigurácia azd
-export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Povoliť ladenie protokolovania
+# Enable diagnostics per command rather than relying on undocumented variables
+azd version --debug
 ```
 
-## Integrácia do IDE
+## Integrácia IDE
 
 ### Visual Studio Code
 Nainštalujte rozšírenie Azure Developer CLI:
 1. Otvorte VS Code
-2. Prejdite do rozšírení (Ctrl+Shift+X)
-3. Vyhľadajte „Azure Developer CLI“
+2. Prejdite na Rozšírenia (Ctrl+Shift+X)
+3. Vyhľadajte "Azure Developer CLI"
 4. Nainštalujte rozšírenie
 
 Funkcie:
 - IntelliSense pre azure.yaml
-- Integrované terminálové príkazy
+- Integrované príkazy v termináli
 - Prehliadanie šablón
 - Monitorovanie nasadenia
 
@@ -271,15 +269,15 @@ Vytvorte `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. Nainštalujte Azure plugin
 2. Nakonfigurujte Azure poverenia
-3. Používajte integrovaný terminál pre príkazy azd
+3. Používajte integrovaný terminál pre azd príkazy
 
 ## 🐛 Riešenie problémov s inštaláciou
 
 ### Bežné problémy
 
-#### Odmietnuté povolenie (Windows)
+#### Prístup zamietnutý (Windows)
 ```powershell
-# Spustiť PowerShell ako správca
+# Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
@@ -297,44 +295,41 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Sieťové/proxy problémy
+#### Problémy s sieťou/proxy
 ```bash
-# Nakonfigurujte proxy
-azd config set http.proxy http://proxy:8080
-azd config set https.proxy https://proxy:8080
-
-# Preskočiť overovanie SSL (neodporúča sa pre produkciu)
-azd config set http.insecure true
+# Configure standard proxy environment variables for the current Bash session
+export HTTP_PROXY="http://proxy:8080"
+export HTTPS_PROXY="http://proxy:8080"
+# Use your organization's trusted CA configuration; do not disable TLS validation.
 ```
 
 #### Konflikty verzií
 ```bash
-# Odstrániť staré inštalácie
+# Remove old installations
 # Windows: winget uninstall microsoft.azd
 # macOS: brew uninstall azd
-# Linux: pred opätovnou inštaláciou odstráňte predchádzajúci binárny súbor azd alebo symbolický odkaz
+# Linux: remove the previous azd binary or symlink before reinstalling
 
-# Vyčistiť konfiguráciu
+# Clean configuration
 rm -rf ~/.azd
 ```
 
-### Ako získať ďalšiu pomoc
+### Ako získať viac pomoci
 ```bash
-# Povoliť ladenie zápisu do denníka
-export AZD_DEBUG=true
-azd <command> --debug
+# Enable debug logging
+azd show --debug
 
-# Zobraziť aktuálnu konfiguráciu
+# View current configuration
 azd config show
 
-# Zobraziť aktuálny stav nasadenia
+# View current deployment status
 azd show
 ```
 
 ## Aktualizácia azd
 
 ### Kontrola aktualizácie
-azd vás upozorní, keď je k dispozícii novšie vydanie, a súčasnú verziu môžete skontrolovať príkazom:
+azd upozorní, keď je dostupné novšie vydanie, a môžete si overiť aktuálnu verziu pomocou:
 ```bash
 azd version
 ```
@@ -366,23 +361,23 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 - Jeden zdroj naraz
 - Zameranie na správu infraštruktúry
 
-**Azure Developer CLI (azd)**: Vysokoúrovňový nástroj pre kompletné nasadenie aplikácií
-- `azd up` nasadí celú aplikáciu s všetkými zdrojmi
+**Azure Developer CLI (azd)**: Vysokoúrovňový nástroj na kompletné nasadenie aplikácií
+- `azd up` nasadzuje celú aplikáciu so všetkými zdrojmi
 - Pracovné postupy založené na šablónach
-- Zameranie na produktivitu vývojára
+- Zameranie na produktivitu vývojárov
 
-**Potrebujete oba**: azd používa az CLI na autentifikáciu
+**Sú nezávislé**: azd používa predvolene vlastnú autentifikáciu. Inštalujte a prihlasujte sa do Azure CLI len pre príkazy `az` alebo ak výslovne chcete používať `azd config set auth.useAzCliAuth true`.
 </details>
 
 <details>
-<summary><strong>Môžem použiť azd so existujúcimi Azure zdrojmi?</strong></summary>
+<summary><strong>Môžem používať azd s existujúcimi Azure zdrojmi?</strong></summary>
 
 Áno! Môžete:
 1. Importovať existujúce zdroje do azd prostredí
-2. Odkazovať na existujúce zdroje vo vašich Bicep šablónach
-3. Používať azd na nové nasadenia vedľa existujúcej infraštruktúry
+2. Odkazovať sa na existujúce zdroje vo vašich Bicep šablónach
+3. Používať azd pre nové nasadenia vedľa existujúcej infraštruktúry
 
-Pozrite [Konfiguračnú príručku](configuration.md) pre detaily.
+Pozrite si [Sprievodcu konfiguráciou](../chapter-03-configuration/configuration.md) pre detaily.
 </details>
 
 <details>
@@ -390,42 +385,44 @@ Pozrite [Konfiguračnú príručku](configuration.md) pre detaily.
 
 Áno, nakonfigurujte cloud:
 ```bash
-# Azure vládny
-az cloud set --name AzureUSGovernment
-az login
+# Azure Government (azd)
+azd config set cloud.name AzureUSGovernment
+azd auth login
 
-# Azure Čína
-az cloud set --name AzureChinaCloud
-az login
+# Azure China (alternative)
+azd config set cloud.name AzureChinaCloud
+azd auth login
 ```
+
+Ak používate aj Azure CLI, konfigurujte `az cloud set --name ...` samostatne. Služby šablón a dostupnosť modelov sa líši podľa cloudu.
 </details>
 
 <details>
-<summary><strong>Môžem použiť azd v CI/CD pipeline?</strong></summary>
+<summary><strong>Môžem používať azd v CI/CD pipeline?</strong></summary>
 
 Určite! azd je navrhnutý pre automatizáciu:
 - Integrácia s GitHub Actions
 - Podpora Azure DevOps
-- Autentifikácia cez service principal
+- Autentifikácia pomocou service principal
 - Neinteraktívny režim
 
-Pozrite [Príručku nasadenia](../chapter-04-infrastructure/deployment-guide.md) pre CI/CD vzory.
+Pozrite si [Sprievodcu nasadením](../chapter-04-infrastructure/deployment-guide.md) pre vzory CI/CD.
 </details>
 
 <details>
 <summary><strong>Koľko stojí používanie azd?</strong></summary>
 
-azd je **úplne zadarmo** a open-source. Platíte len za:
+Samotný azd je **úplne zadarmo** a open-source. Platíte iba za:
 - Azure zdroje, ktoré nasadíte
-- Náklady na spotrebu Azure (výpočetný výkon, ukladanie atď.)
+- Spotrebu Azure (výpočtový výkon, ukladanie atď.)
 
-Použite `azd provision --preview` na odhad nákladov pred nasadením.
+Použite `azd provision --preview` na kontrolu navrhovaných zdrojov a následne odhadnite ich náklady v [Azure kalkulačke cien](https://azure.microsoft.com/pricing/calculator/). Ukážka nepočítá ceny.
 </details>
 
 ## Ďalšie kroky
 
 1. **Dokončite autentifikáciu**: Uistite sa, že máte prístup k vášmu Azure predplatnému
-2. **Vyskúšajte prvé nasadenie**: Postupujte podľa [Príručky prvého projektu](first-project.md)
+2. **Vyskúšajte prvé nasadenie**: Postupujte podľa [Sprievodcu prvým projektom](first-project.md)
 3. **Preskúmajte šablóny**: Prezrite si dostupné šablóny pomocou `azd template list`
 4. **Nakonfigurujte svoje IDE**: Nastavte si vývojové prostredie
 
@@ -436,22 +433,22 @@ Ak narazíte na problémy:
 - [Nahlásiť problémy](https://github.com/Azure/azure-dev/issues)
 - [Diskusie komunity](https://github.com/Azure/azure-dev/discussions)
 - [Podpora Azure](https://azure.microsoft.com/support/)
-- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Získajte pomoc s Azure príkazmi priamo v editore pomocou `npx skills add microsoft/github-copilot-for-azure`
+- [**Schopnosti Azure agenta**](https://skills.sh/microsoft/github-copilot-for-azure) - Získajte priamu pomoc s Azure príkazmi vo vašom editore s `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Navigácia kapitolami:**
+**Navigácia kapitolou:**
 - **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
 - **📖 Aktuálna kapitola**: Kapitola 1 - Základy a rýchly štart
-- **⬅️ Predchádzajúca**: [Základné info o AZD](azd-basics.md)
+- **⬅️ Predchádzajúca**: [Základy AZD](azd-basics.md)
 - **➡️ Nasledujúca**: [Váš prvý projekt](first-project.md)
-- **🚀 Nasledujúca kapitola**: [Kapitola 2: Vývoj s AI na prvom mieste](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 Nasledujúca kapitola**: [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Inštalácia dokončená!** Pokračujte do [Vášho prvého projektu](first-project.md) a začnite s tvorbou pomocou azd.
+**✅ Inštalácia dokončená!** Pokračujte na [Váš prvý projekt](first-project.md) a začnite používať azd.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vylúčenie zodpovednosti**:  
-Tento dokument bol preložený pomocou služby prekladov AI [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, majte prosím na pamäti, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Za akékoľvek nedorozumenia alebo nesprávne výklady vyplývajúce z používania tohto prekladu nenesieme zodpovednosť.
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

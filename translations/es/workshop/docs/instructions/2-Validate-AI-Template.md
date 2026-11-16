@@ -1,295 +1,152 @@
 # 2. Validar una plantilla
 
-> Validado contra `azd 1.27.1` en julio de 2026.
+> Guía revisada según AZD 1.37.2 y el ejemplo actual el 4 de noviembre de 2026. Las capturas de pantalla son ilustrativas; la navegación del portal, valores predeterminados de la plantilla y disponibilidad de servicios pueden cambiar. Esta revisión no realizó una implementación en vivo en Azure.
 
-!!! tip "AL FINALIZAR ESTE MÓDULO PODRÁS"
+!!! tip "AL FINAL DE ESTE MÓDULO PODRÁS"
 
-    - [ ] Analizar la arquitectura de la solución de IA
-    - [ ] Entender el flujo de trabajo de implementación de AZD
-    - [ ] Usar GitHub Copilot para obtener ayuda sobre el uso de AZD
-    - [ ] **Lab 2:** Implementar y validar la plantilla de agentes de IA
-
----
-
-
-## 1. Introducción
-
-El [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) o `azd` es una herramienta de línea de comandos de código abierto que agiliza el flujo de trabajo del desarrollador al construir e implementar aplicaciones en Azure.
-
-[Las plantillas AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) son repositorios estandarizados que incluyen código de aplicación de ejemplo, activos de infraestructura como código y archivos de configuración `azd` para una arquitectura de solución cohesiva. El aprovisionamiento de la infraestructura se vuelve tan simple como el comando `azd provision`, mientras que el uso de `azd up` permite aprovisionar la infraestructura **y** desplegar tu aplicación de una sola vez.
-
-Como resultado, iniciar tu proceso de desarrollo de aplicaciones puede ser tan sencillo como encontrar la plantilla _AZD Starter_ adecuada que se acerque a tus necesidades de aplicación e infraestructura, y luego personalizar el repositorio para adaptarlo a los requisitos de tu escenario.
-
-Antes de comenzar, asegúrate de tener instalado el Azure Developer CLI.
-
-1. Abre una terminal en VS Code y escribe este comando:
-
-      ```bash title="" linenums="0"
-      azd version
-      ```
-
-1. ¡Deberías ver algo como esto!
-
-      ```bash title="" linenums="0"
-      azd version 1.27.1 (commit <current-build>)
-      ```
-
-**Ahora estás listo para seleccionar y desplegar una plantilla con azd**
+    - [ ] Identify the sample's prerequisites and intended resources
+    - [ ] Deploy the selected template into an intentional environment
+    - [ ] Verify the application and agent behavior separately from deployment success
+    - [ ] **Lab 2:** Record evidence of a working baseline, or an actionable deployment blocker
 
 ---
 
-## 2. Selección de plantilla
+## 1. Verificar los requisitos previos
 
-La plataforma Microsoft Foundry viene con un [conjunto de plantillas AZD recomendadas](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) que cubren escenarios populares como la _automatización de flujos de trabajo multiagente_ y el _procesamiento de contenido multimodal_. También puedes descubrir estas plantillas visitando el portal Microsoft Foundry.
+El [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) gestiona el despliegue de aplicaciones usando la configuración, infraestructura y código de la plantilla. Verifica tu versión instalada:
 
-1. Visita [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Inicia sesión en el portal Microsoft Foundry cuando se te solicite; verás algo así.
+```bash
+azd version
+```
 
-![Pick](../../../../../translated_images/es/01-pick-template.60d2d5fff5ebc374.webp)
+Usa las [instrucciones actuales de instalación/actualización](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) si es necesario. El ejemplo revisado declara AZD `>=1.14.0`, pero se recomienda una versión soportada actual. Las extensiones opcionales de IA tienen requisitos de versión separados; el flujo de trabajo normal `azd up` de este ejemplo no requiere la extensión de agentes.
 
+Antes de aprovisionar, lee la [configuración de cuenta de Azure](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/azure_account_setup.md) y la [guía de despliegue](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) del ejemplo. Confirma tu suscripción, permisos, disponibilidad del modelo, cuota regional y cargos esperados. Una cuenta gratuita de Azure no garantiza acceso ni uso gratuito para todos los servicios necesarios.
 
-Las opciones **Básicas** son tus plantillas de inicio:
+## 2. Abrir el ejemplo seleccionado
 
-1. [ ] [Comenzar con AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) que despliega una aplicación de chat básica _con tus datos_ en Azure Container Apps. Úsala para explorar un escenario básico de chatbot con IA.
-1. [X] [Comenzar con AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) que también despliega un agente de IA estándar (con los Agentes Foundry). Úsalo para familiarizarte con soluciones de IA agentica que involucran herramientas y modelos.
+Usa el repositorio [Iniciar con Agentes de IA](https://github.com/Azure-Samples/get-started-with-ai-agents) inicializado en el Módulo 1. Si no lo has inicializado, elige una de estas alternativas:
 
-Visita el segundo enlace en una pestaña nueva del navegador (o haz clic en `Open in GitHub` en la tarjeta relacionada). Deberías ver el repositorio para esta plantilla AZD. Tómate un momento para explorar el README. La arquitectura de la aplicación se ve así:
+- Abre un [Codespace para el ejemplo](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents).
+- Clona el ejemplo y sigue su configuración local/contenedor-dev.
+- En un **directorio vacío**, ejecuta:
 
-![Arch](../../../../../translated_images/es/architecture.8cec470ec15c65c7.webp)
+```bash
+azd init --template Azure-Samples/get-started-with-ai-agents .
+```
 
----
+No inicialices una segunda plantilla sobre un proyecto existente. Ejecuta los comandos subsiguientes desde la raíz del ejemplo que contiene `azure.yaml`, no desde la raíz del repositorio del curso.
 
-## 3. Activación de la plantilla
+El ejemplo aloja una aplicación de chat respaldada por agente en Container Apps y aprovisiona recursos de Foundry de soporte. Revisa la arquitectura actual y servicios opcionales en lugar de tratar una captura antigua como el inventario exacto de recursos.
 
-Intentemos desplegar esta plantilla y asegurarnos de que es válida. Seguiremos las pautas en la sección [Empezando](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
+![Arquitectura ilustrativa](../../../../../translated_images/es/architecture.8cec470ec15c65c7.webp)
 
-1. Elige un entorno de trabajo para el repositorio de plantilla:
+## 3. Desplegar intencionadamente
 
-      - **GitHub Codespaces**: Haz clic en [este enlace](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) y confirma `Create codespace`
-      - **Clonación local o contenedor dev**: Clona `Azure-Samples/get-started-with-ai-agents` y ábrelo en VS Code
+```bash
+azd auth login
+azd up
+```
 
-1. Espera hasta que la terminal de VS Code esté lista, luego escribe el siguiente comando:
+Revisa las indicaciones:
 
-   ```bash title="" linenums="0"
-   azd up
-   ```
+1. Elige un nombre único para el entorno AZD.
+2. Selecciona la suscripción deseada, no simplemente la primera que se ofrezca.
+3. Selecciona una región compatible con el modelo/versión/SKU requerido y tu cuota.
+4. Lee la salida de aprovisionamiento, despliegue y hooks posteriores al despliegue.
 
-Completa los pasos del flujo de trabajo que esto activará:
+Los valores predeterminados revisados incluyen `gpt-5-mini`, versión `2025-08-07`, y `GlobalStandard`. Verifica tu plantilla inicializada y las [combinaciones soportadas de modelo/región](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support). Ninguna región garantiza funcionamiento universal.
 
-1. Se te pedirá iniciar sesión en Azure - sigue las instrucciones para autenticarte
-1. Ingresa un nombre único para tu entorno - por ejemplo, usé `nitya-mshack-azd`
-1. Esto creará una carpeta `.azure/` - verás una subcarpeta con el nombre del entorno
-1. Se te pedirá seleccionar un nombre de suscripción - selecciona la predeterminada
-1. Se te pedirá una ubicación - usa `East US 2`
+La duración del despliegue varía. Si el aprovisionamiento falla, conserva el error y corrige la causa antes de reintentar. No elimines el despliegue ni purgues recursos permanentemente como paso genérico de solución de problemas.
 
-Ahora, espera a que el aprovisionamiento termine. **Esto toma de 10 a 15 minutos**
+## 4. Validar la aplicación
 
-1. Cuando termine, tu consola mostrará un mensaje de ÉXITO como este:
-      ```bash title="" linenums="0"
-      SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
-      ```
-1. El Portal de Azure ahora tendrá un grupo de recursos aprovisionado con ese nombre de entorno:
+```bash
+azd show
+```
 
-      ![Infra](../../../../../translated_images/es/02-provisioned-infra.46c706b14f56e0bf.webp)
+Abre el endpoint para `api_and_frontend`, o encuentra la Container App en el grupo de recursos del despliegue en el [portal de Azure](https://portal.azure.com/). Sigue las instrucciones de acceso/autenticación del ejemplo si requiere inicio de sesión; no deshabilites la autenticación para que una prueba rápida pase.
 
-1. **Ahora estás listo para validar la infraestructura y aplicación desplegadas**.
+![Pantalla de aplicación ilustrativa](../../../../../translated_images/es/03-test-application.471910da12c3038e.webp)
 
----
+Prueba algunas [preguntas de ejemplo](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md):
 
-## 4. Validación de la plantilla
+- Una pregunta general de hechos.
+- Una pregunta cuya respuesta debería estar en los documentos cargados del ejemplo.
+- Una pregunta que no puede ser respondida con esos documentos.
 
-1. Visita la página de [Grupos de recursos](https://portal.azure.com/#browse/resourcegroups) del Portal Azure - inicia sesión cuando se te solicite
-1. Haz clic en el grupo de recursos para el nombre de tu entorno - verás la página mostrada arriba
+Verifica que la UI cargue, la API responda, la recuperación use los datos esperados, las citas coincidan con el contenido de origen y que las preguntas no soportadas se gestionen apropiadamente. Un mensaje `azd up` exitoso por sí solo no confirma estos resultados.
 
-      - haz clic en el recurso Azure Container Apps
-      - haz clic en la URL de la aplicación en la sección _Esenciales_ (arriba a la derecha)
+## 5. Inspeccionar el agente desplegado
 
-1. Deberías ver una interfaz de usuario frontal de la aplicación alojada como esta:
+Abre tu proyecto en el [portal Foundry](https://ai.azure.com/). En el flujo revisado del portal, selecciona **Build**, luego **Agents**, y localiza el agente creado por el ejemplo. Las etiquetas de navegación pueden cambiar.
 
-   ![App](../../../../../translated_images/es/03-test-application.471910da12c3038e.webp)
+Registra:
 
-1. Prueba haciendo un par de [preguntas de ejemplo](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+- El nombre y versión del agente.
+- Su despliegue de modelo configurado.
+- Las instrucciones reales y herramientas habilitadas.
+- Qué archivos o índice de búsqueda están conectados, y si la configuración finalizó exitosamente.
 
-      1. Pregunta: ```¿Cuál es la capital de Francia?``` 
-      1. Pregunta: ```¿Cuál es la mejor tienda de campaña por menos de $200 para dos personas, y qué características incluye?```
+El ejemplo revisado usa un identificador de agente en formato `agent_name:agent_version` para sus pruebas de evaluación. No copies un identificador clásico de agente/hilo de una captura antigua a un flujo de trabajo API más reciente.
 
-1. Deberías obtener respuestas similares a las mostradas abajo. _¿Pero cómo funciona esto?_
+Compara los documentos cargados con `src/files/` en tu revisión inicializada. Capturas anteriores mostraban 32 archivos; ese conteo no es un valor predeterminado garantizado actual. Verifica cualquier respuesta sobre clientes/productos en el ejemplo contra datos sintéticos reales y no cargues datos reales de clientes para este ejercicio.
 
-      ![App](../../../../../translated_images/es/03-test-question.521c1e863cbaddb6.webp)
+## 6. Comparar con el entorno de pruebas (playground)
 
----
+Abre el playground del agente seleccionado en Foundry y formula la misma pregunta de recuperación. Compara la versión del agente configurada, herramientas, citas y calidad de respuestas con la aplicación desplegada.
 
-## 5. Validación del Agente
+Las respuestas son probabilísticas; que coincidan palabra por palabra no es el criterio. Si los resultados difieren sustancialmente, verifica que la app y playground apunten al mismo proyecto, agente/versión y fuente de conocimiento.
 
-La aplicación Azure Container App despliega un endpoint que se conecta al agente de IA aprovisionado en el proyecto Microsoft Foundry para esta plantilla. Veamos qué significa esto.
+## 7. Verificar requisitos previos de observabilidad
 
-1. Regresa a la página _Resumen_ del portal Azure para tu grupo de recursos
+La [guía de observabilidad](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md) del ejemplo es la fuente de verdad para configuración de trazas, evaluación y red-teaming.
 
-1. Haz clic en el recurso `Microsoft Foundry` en esa lista
+En los valores predeterminados de infraestructura revisados, Application Insights está habilitado pero **el trazado del cliente está deshabilitado** (`ENABLE_AZURE_MONITOR_TRACING=false`). Crear un recurso de monitoreo no prueba que la aplicación esté exportando trazas. El Módulo 5 trata sobre habilitar trazado y generar una solicitud de prueba.
 
-1. Deberías ver esto. Haz clic en el botón `Ir al portal Microsoft Foundry`.
-   ![Foundry](../../../../../translated_images/es/04-view-foundry-project.fb94ca41803f28f3.webp)
+Usa los logs de aplicación del Container App para investigar errores de inicio/API. En Foundry, inspecciona las vistas de trazado y monitoreo disponibles del agente. Las entradas de evaluación requieren la configuración relevante, evaluadores/región soportados, y solicitudes reales; no están garantizadas automáticamente para cada ejecución.
 
-1. Deberías ver la página del proyecto Foundry para tu aplicación de IA
-   ![Project](../../../../../translated_images/es/05-visit-foundry-portal.d734e98135892d7e.webp)
+Deja deshabilitada la captura de contenido de indicaciones/respuestas a menos que se hayan revisado sus requisitos de privacidad, retención, acceso y redacción.
 
-1. Haz clic en `Agentes` - verás al agente predeterminado aprovisionado en tu proyecto
-   ![Agents](../../../../../translated_images/es/06-visit-agents.bccb263f77b00a09.webp)
+## 8. Comprender valores de entorno
 
-1. Selecciónalo - y verás los detalles del agente. Nota lo siguiente:
+AZD almacena el entorno seleccionado en `.azure/<environment-name>/`. Las entradas persistentes y salidas de despliegue pueden leerse con:
 
-      - El agente usa Búsqueda de Archivos por defecto (siempre)
-      - El campo `Conocimiento` del agente indica que tiene 32 archivos subidos (para búsqueda de archivos)
-      ![Agents](../../../../../translated_images/es/07-view-agent-details.0e049f37f61eae62.webp)
+```bash
+azd env list
+azd env get-value AZURE_ENV_NAME
+azd env get-value AZURE_LOCATION
+```
 
-1. Busca la opción `Datos+índices` en el menú lateral y haz clic para ver los detalles.
+`azd env get-values` lista todos los valores, que pueden incluir configuración sensible. No pegues esa salida en problemas o logs públicos.
 
-      - Deberías ver los 32 archivos de datos subidos para el conocimiento.
-      - Estos corresponderán a los 12 archivos de clientes y 20 archivos de productos bajo `src/files`
-      ![Data](../../../../../translated_images/es/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+AZD usa el entorno seleccionado al ejecutar sus comandos/hooks, mientras que las variables de entorno del proceso también pueden influir en comandos y plantillas. Esto **no** exporta valores a tu shell padre ni a cada proceso Python iniciado independientemente. Sigue las [instrucciones para desarrollo local](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/local_development.md) del ejemplo.
 
-**¡Has validado la operación del Agente!**
+Los valores predeterminados de plantilla pueden aplicarse en `infra/main.parameters.json` sin aparecer como valores locales explícitos. Configurar una variable arbitraria no cambia infraestructura a menos que la plantilla la consuma.
 
-1. Las respuestas del agente están fundamentadas en el conocimiento en esos archivos.
-1. Ahora puedes hacer preguntas relacionadas con esos datos, y obtener respuestas fundamentadas.
-1. Ejemplo: `customer_info_10.json` describe las 3 compras hechas por "Amanda Perez"
+Por ejemplo, para seleccionar explícitamente los valores predeterminados del modelo revisado:
 
-Regresa a la pestaña del navegador con el endpoint de la aplicación Container App y pregunta: `¿Qué productos posee Amanda Perez?`. Deberías ver algo como esto:
+```bash
+azd env set AZURE_AI_AGENT_MODEL_NAME gpt-5-mini
+azd env set AZURE_AI_AGENT_MODEL_VERSION 2025-08-07
+azd env set AZURE_AI_AGENT_DEPLOYMENT_SKU GlobalStandard
+azd provision --preview
+azd up
+```
 
-![Data](../../../../../translated_images/es/09-ask-in-aca.4102297fc465a4d5.webp)
+Revisa primero compatibilidad, capacidad, disponibilidad y los cambios planeados. Las actualizaciones de infraestructura requieren aprovisionamiento; `azd deploy` por sí solo no es suficiente. Los cambios soportados de modelo normalmente no requieren destruir toda la aplicación.
 
----
+`azd env refresh` recupera salidas de despliegue para un entorno accesible; no reconstruye todas las entradas personalizadas, sincroniza secretos ni reemplaza la gestión de configuración.
 
-## 6. Área de pruebas del Agente
+## 9. Registra tu línea base
 
-Construyamos un poco más de intuición sobre las capacidades de Microsoft Foundry, probando el agente en el área de pruebas Agents Playground.
+- [ ] Entorno, suscripción, región y modelo correctos verificados.
+- [ ] Aprovisionamiento, despliegue y hooks de configuración requeridos completados sin errores pendientes.
+- [ ] Acceso a la aplicación, chat, recuperación y citas comprobados.
+- [ ] Agente/versión y fuente de conocimiento identificados.
+- [ ] Requisitos previos de observabilidad y bloqueos restantes documentados.
 
-1. Regresa a la página `Agentes` en Microsoft Foundry - selecciona el agente predeterminado
-1. Haz clic en la opción `Probar en Playground` - deberías obtener una interfaz como esta
-1. Haz la misma pregunta: `¿Qué productos posee Amanda Perez?`
-
-    ![Data](../../../../../translated_images/es/09-ask-in-playground.a1b93794f78fa676.webp)
-
-Obtienes la misma (o similar) respuesta, pero también obtienes información adicional que puedes usar para entender la calidad, costo y desempeño de tu aplicación agentica. Por ejemplo:
-
-1. Nota que la respuesta cita los archivos de datos usados para "fundamentar" la respuesta
-1. Pasa el ratón sobre cualquiera de estas etiquetas de archivo - ¿coincide la data con tu consulta y respuesta mostrada?
-
-También ves una fila de _estadísticas_ debajo de la respuesta.
-
-1. Pasa el cursor sobre cualquier métrica - por ejemplo, Seguridad. Verás algo así
-1. ¿Coincide la calificación evaluada con tu intuición sobre el nivel de seguridad de la respuesta?
-
-      ![Data](../../../../../translated_images/es/10-view-run-info-meter.6cdb89a0eea5531f.webp)
-
----
-
-## 7. Observabilidad incorporada
-
-La observabilidad se trata de instrumentar tu aplicación para generar datos que puedan usarse para entender, depurar y optimizar sus operaciones. Para tener una idea:
-
-1. Haz clic en el botón `Ver información de ejecución` - deberías ver esta vista. Este es un ejemplo de [seguimiento de agentes](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) en acción. _También puedes obtener esta vista haciendo clic en Registros de Hilo en el menú superior_.
-
-   - Entiende los pasos de ejecución y las herramientas usadas por el agente
-   - Comprende el conteo total de Tokens (vs. tokens de salida usados) para la respuesta
-   - Entiende la latencia y dónde se está invirtiendo tiempo en la ejecución
-
-      ![Agent](../../../../../translated_images/es/10-view-run-info.b20ebd75fef6a1cc.webp)
-
-1. Haz clic en la pestaña `Metadatos` para ver atributos adicionales de la ejecución, que pueden proporcionar contexto útil para depurar problemas después.
-
-      ![Agent](../../../../../translated_images/es/11-view-run-info-metadata.7966986122c7c2df.webp)
-
-
-1. Haz clic en la pestaña `Evaluaciones` para ver autoevaluaciones hechas sobre la respuesta del agente. Incluyen evaluaciones de seguridad (por ejemplo, autolesiones) y evaluaciones específicas del agente (por ejemplo, resolución de intenciones, cumplimiento de tareas).
-
-      ![Agent](../../../../../translated_images/es/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
-
-1. Por último, haz clic en la pestaña `Monitoreo` en el menú lateral.
-
-      - Selecciona la pestaña `Uso de recursos` en la página mostrada y visualiza las métricas.
-      - Rastrea el uso de la aplicación en términos de costos (tokens) y carga (solicitudes).
-      - Rastrea la latencia de la aplicación hasta el primer byte (procesamiento de entrada) y el último byte (salida).
-
-      ![Agent](../../../../../translated_images/es/13-monitoring-resources.5148015f7311807f.webp)
-
----
-
-## 8. Variables de entorno
-
-Hasta ahora, hemos recorrido el despliegue en el navegador y validado que nuestra infraestructura está aprovisionada y la aplicación está operativa. Pero para trabajar con el código de la aplicación de manera _code-first_, necesitamos configurar nuestro entorno de desarrollo local con las variables relevantes necesarias para trabajar con estos recursos. Usar `azd` lo hace fácil.
-
-1. El Azure Developer CLI [usa variables de entorno](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) para almacenar y gestionar configuraciones de despliegue de aplicaciones.
-
-1. Las variables de entorno se almacenan en `.azure/<env-name>/.env` - esto las limita al entorno `env-name` usado durante el despliegue y ayuda a aislar entornos entre distintos objetivos de despliegue en el mismo repositorio.
-
-1. Las variables de entorno se cargan automáticamente con el comando `azd` cada vez que se ejecuta un comando específico (por ejemplo, `azd up`). Nota que `azd` no lee automáticamente variables de entorno a nivel de OS (por ejemplo, configuradas en el shell); en cambio, usa `azd set env` y `azd get env` para transferir información en scripts.
-
-
-Probemos algunos comandos:
-
-1. Obtén todas las variables de entorno establecidas para `azd` en este entorno:
-
-      ```bash title="" linenums="0"
-      azd env get-values
-      ```
-      
-      Verás algo como:
-
-      ```bash title="" linenums="0"
-      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
-      AZURE_AI_AGENT_NAME="agent-template-assistant"
-      AZURE_AI_EMBED_DEPLOYMENT_NAME="text-embedding-3-small"
-      AZURE_AI_EMBED_DIMENSIONS=100
-      ...
-      ```
-
-1. Obtén un valor específico - por ejemplo, quiero saber si configuramos `AZURE_AI_AGENT_MODEL_NAME`
-
-      ```bash title="" linenums="0"
-      azd env get-value AZURE_AI_AGENT_MODEL_NAME 
-      ```
-      
-      Verás algo como esto - ¡no estaba configurado por defecto!
-
-      ```bash title="" linenums="0"
-      ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
-      ```
-
-1. Establece una nueva variable de entorno para `azd`. Aquí, actualizamos el nombre del modelo del agente. _Nota: cualquier cambio hecho se reflejará inmediatamente en el archivo `.azure/<env-name>/.env`.
-
-      ```bash title="" linenums="0"
-      azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
-      azd env set AZURE_AI_AGENT_MODEL_VERSION 2025-04-14
-      azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
-      ```
-
-      Ahora, deberíamos encontrar que el valor está configurado:
-
-      ```bash title="" linenums="0"
-      azd env get-value AZURE_AI_AGENT_MODEL_NAME 
-      ```
-
-1. Nota que algunos recursos son persistentes (por ejemplo, los despliegues de modelos) y requerirán algo más que un `azd up` para forzar el redepliegue. Probemos desmantelar el despliegue original y redeplegar con variables de entorno cambiadas.
-
-1. **Actualizar** Si previamente desplegaste infraestructura usando una plantilla azd, puedes _actualizar_ el estado de tus variables de entorno locales basándote en el estado actual de tu despliegue en Azure usando este comando:
-
-      ```bash title="" linenums="0"
-      azd env refresh
-      ```
-
-
-      Esta es una forma poderosa de _sincronizar_ variables de entorno entre dos o más entornos de desarrollo locales (por ejemplo, equipo con múltiples desarrolladores), permitiendo que la infraestructura desplegada sirva como la verdad fundamental para el estado de las variables de entorno. Los miembros del equipo simplemente _actualizan_ las variables para volver a sincronizarse.
-
----
-
-## 9. Felicitaciones 🏆
-
-Acabas de completar un flujo de trabajo de extremo a extremo donde:
-
-- [X] Seleccionaste la plantilla AZD que deseas usar
-- [X] Abriste la plantilla en un entorno de desarrollo compatible
-- [X] Desplegaste la plantilla y validaste que funciona
+Continúa con [Deconstruir una plantilla](3-Deconstruct-AI-Template.md).
 
 ---
 

@@ -1,507 +1,520 @@
 # సాధారణ సమస్యలు మరియు పరిష్కారాలు
 
-**చాప్టర్ నావిగేషన్:**
-- **📚 కోర్సు హోమ్**: [AZD ప్రారంభికుల కోసం](../../README.md)
-- **📖 ప్రస్తుత అధ్యాయం**: అధ్యాయం 7 - సమస్య పరిష్కారం & డీబగ్గింగ్
-- **⬅️ గత అధ్యాయం**: [అధ్యాయం 6: ముందస్తు తనిఖీలు](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ తదుపరి**: [డీబగ్గింగ్ గైడ్](debugging.md)
-- **🚀 తర్వాతి అధ్యాయం**: [అధ్యాయం 8: ఉత్పత్తి & సంస్థా నమూనాలు](../chapter-08-production/production-ai-practices.md)
+**అధ్యాయం నావిగేషన్:**
+- **📚 కోర్సు హోమ్**: [AZD ఫర్ బిగినర్స్](../../README.md)
+- **📖 ప్రస్తుతం అధ్యాయం**: అధ్యాయం 7 - సమస్యం పరిష్కారం & డీబగ్గింగ్
+- **⬅️ కొత్త అధ్యాయం**: [అధ్యాయం 6: ప్రీ-ఫ్లైట్ చెక్స్](../chapter-06-pre-deployment/preflight-checks.md)
+- **➡️ తర్వాత**: [డీబగ్గింగ్ గైడ్](debugging.md)
+- **🚀 తదుపరి అధ్యాయం**: [అధ్యాయం 8: ప్రొడక్షన్ & ఎంటర్‌ప్రైజ్ ప్యాటర్న్స్](../chapter-08-production/production-ai-practices.md)
 
 ## పరిచయం
 
-ఈ విస్తృతమైన సమస్య పరిష్కార గైడ్ Azure Developer CLI ఉపయోగించినప్పుడు తరచుగా ఎదురయ్యే సమస్యలను కవర్ చేస్తుంది. ప్రామాణీకరణ, డిప్లాయ్‌మెంట్, ఇన్‌ఫ్రాస్ట్రక్చర్ ప్రొవిజనింగ్, మరియు అప్లికేషన్ కాన్ఫిగరేషన్ సంబంధిత సాధారణ సమస్యలను నిర్ధారించుకోవడం, ట్రబుల్‌షూట్ చేయడం, మరియు పరిష్కరించడం నేర్చుకోండి. ప్రతి సమస్యకు లక్షణాలు, మూల కారణాలు మరియు క్రమబద్ధ పరిష్కార ప్రక్రియలు ఇవ్వబడ్డాయి.
+ఈ సమగ్ర troubleshooting గైడ్ Azure Developer CLI ఉపయోగించినప్పుడు చాలా సార్లు ఎదురయ్యే సమస్యలను కవరిస్తుంది. ఆథెంటికేషన్, డిప్లాయ్‌మెంట్, ఇన్ఫ్రాస్ట్రక్చర్ ప్రొవిజనింగ్, మరియు అప్లికేషన్ కాన్ఫిగరేషన్ సమస్యలను ఎలా గుర్తించాలో, పరిష్కరించాలో తెలుసుకోండి. ప్రతి సమస్యకు విపులమైన లక్షణాలు, మూల కారణాలు, మరియు దశల వారీ పరిష్కారం సాధనాలు ఉంటాయి.
 
-## అభ్యాస లక్ష్యాలు
+## నేర్చుకోబోయే లక్ష్యాలు
 
-ఈ గైడ్ పూర్తి చేసిన తర్వాత మీరు:
-- Azure Developer CLI సమస్యల diagnostics తెక్నిక్స్‌లో నైపుణ్యం పొందతారు
-- సాధారణ ప్రామాణీకరణ మరియు అనుమతి సమస్యలు మరియు వాటి పరిష్కారాలను అర్థం చేసుకుంటారు
-- డిప్లాయ్‌మెంట్ వైఫల్యాలు, ఇన్‌ఫ్రాస్ట్రక్చర్ ప్రొవిజనింగ్ లోపాలు, మరియు కాన్ఫిగరేషన్ సమస్యలను పరిష్కరిస్తారు
-- ప్రో-యాక్టివ్ మానిటరింగ్ మరియు డీబగ్గింగ్ వ్యూహాలను అమలు చేస్తారు
-- సంక్లిష్ట సమస్యల కోసం సిస్టమెటిక్ ట్రబుల్‌షూటింగ్ పద్ధతులను ప్రయోగిస్తారు
-- భవిష్యత్లో సమస్యలను తగ్గించడానికి సరికొత్త లాగింగ్ మరియు మానిటరింగ్ కాన్ఫిగరేషన్లను అమలు చేస్తారు
+ఈ గైడ్ పూర్తి చేసి మీరు:
+- Azure Developer CLI సమస్యల కోసం డయాగ్నోస్టిక్ టెక్నిక్స్‌లో నిపుణులవుతారు
+- సాధారణ ఆథెంటికేషన్ మరియు అనుమతి సమస్యలు మరియు వాటి పరిష్కారాలను అర్థం చేసుకుంటారు
+- డిప్లాయ్‌మెంట్ విఫలాలు, ఇన్ఫ్రాస్ట్రక్చర్ ప్రొవిజనింగ్ లోపాలు, మరియు కాన్ఫిగరేషన్ సమస్యలను పరిష్కరించగలుగుతారు
+- పూర్వ‌క‌మ‌న మానిట‌రింగ్ మరియు డీబగ్గింగ్ వ్యూహాలు అమలు చేస్తారు
+- క్లిష్ట సమస్యలకు విధానపూర్వక troubleshooting పద్ధతులు ఉపయోగిస్తారు
+- భవిష్యత్తులో సమస్యలు రావడం నివారించడానికి సరైన లాగింగ్ మరియు మానిటరింగ్‌ను కాన్ఫిగర్ చేస్తారు
 
-## అభ్యాస ఫలితాలు
+## నేర్చుకున్న ఫలితాలు
 
-పూర్తి చేసిన తరువాత, మీరు చేయగలరు:
-- బిల్ట్-ఇన్ diagnostics టూల్స్ ఉపయోగించి Azure Developer CLI సమస్యలను నిర్ధారించగలుగుతారు
-- స్వతంత్రంగా ప్రామాణీకరణ, సబ్‌స్క్రిప్షన్, మరియు అనుమతి సంబంధిత సమస్యలను పరిష్కరిస్తారు
-- డిప్లాయ్‌మెంట్ విఫలతలు మరియు ఇన్‌ఫ్రాస్ట్రక్చర్ ప్రొవిజనింగ్ లోపాలను సమర్థవంతంగా ట్రబుల్‌షూట్ చేస్తారు
-- అప్లికేషన్ కాన్ఫిగరేషన్ సమస్యలు మరియు వాతావరణ-నిర్ధిష్ట సమస్యలను డీబగ్ చేస్తారు
-- సంభావ్య సమస్యలను ముందే గుర్తించడానికి మానిటరింగ్ మరియు అలర్టింగ్ అమలు చేస్తారు
-- లాగింగ్, డీబగ్గింగ్, మరియు సమస్య పరిష్కార వర్క్‌ఫ్లోల सर्वोత్తమ ఆచరణలను అనుసరించగలుగుతారు
+పూర్తి చేసిన తర్వాత, మీరు చేయగలరని:
+- బిల్ట్-ఇన్ డయాగ్నోస్టిక్ టూల్స్ ఉపయోగించి Azure Developer CLI సమస్యలను గుర్తించగలరు
+- ఆథెంటికేషన్, సబ్‌స్క్రిప్షన్, మరియు అనుమతి సంబంధిత సమస్యలను స్వతంత్రంగా పరిష్కరించగలరు
+- డిప్లాయ్‌మెంట్ విఫలాలు మరియు ఇన్ఫ్రాస్ట్రక్చర్ ప్రొవిజనింగ్ లోపాలను సమర్థవంతంగా గుర్తించి పరిష్కరించగలరు
+- అప్లికేషన్ కాన్ఫిగరేషన్ సమస్యల్ని మరియు ఎన్విరాన్మెంట్-స్పెసిఫిక్ సమస్యలను డీబగ్గింగ్ చేయగలరు
+- ఉప మందుకొండ‌లు మరియు అలెర్టింగ్ సెటప్ చేసి సమస్యలను ముందుగానే గుర్తించగలరు
+- లాగింగ్, డీబగ్గింగ్, సమస్య పరిష్కార పనులకి ఉత్తమ పద్ధతులను అనుసరిస్తారు
 
-## వేగవంతమైన నిర్ధారణలు
+## త్వరిత డయాగ్నోస్టిక్స్
 
-కొత్త సమస్యలకు దిగేము ముందే ఈ ఆదేశాలను అమలు చేసి డయాగ్నోస్టిక్ సమాచారం సేకరించండి:
+> ఉదాహరణ పేర్లు/ఐడీలను మీ ఎన్విరాన్మెంట్ విలువలతో మార్చండి. Bash, Bicep, JavaScript, మరియు ప్యారామీటర్-ఫైల్ భాగాలు వేరుగా లేబుల్ చేయబడ్డాయి; అవి ఒకే అమలు అయ్యే స్క్రిప్ట్ కాదని గమనించండి. నాశనాత్మక ఆపరేషన్లను సమీక్షించి రహస్యాలు షేర్ చేసే ముందు తొలగించండి. `azd monitor --logs` బ్రౌజర్ ఓపెన్ చేస్తుంది; ఇది టెర్మినల్ లాగ్స్‌ను స్ట్రీమ్ చేయదు.
+
+ప్రత్యేక సమస్యలకుప్రేమీరు, డయాగ్నోస్టిక్ సమాచారాన్ని సేకరించడానికి ఈ కమాండ్లు నడిపించండి:
 
 ```bash
-# azd వెర్షన్ మరియు ఆరోగ్య స్థితిని తనిఖీ చేయండి
+# Check azd version and health
 azd version
 azd config show
 
-# Azure ప్రమాణీకరణను ధృవీకరించండి
+# Verify Azure authentication
 az account show
 az account list
 
-# ప్రస్తుత పర్యావరణాన్ని తనిఖీ చేయండి
+# Check current environment
 azd env list
 azd env get-values
 
-# డీబగ్ లాగింగ్‌ను సక్రియం చేయండి
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
-## ప్రామాణీకరణ సమస్యలు
+## ఆథెంటికేషన్ సమస్యలు
 
-### సమస్య: "Failed to get access token"
+### సమస్య: "ప్రవేశ టోకెన్ పొందడంలో విఫలం"
 **లక్షణాలు:**
-- `azd up` అథెంటికేషన్ లోపాలతో విఫలమవుతుంది
-- కమాండ్లు "unauthorized" లేదా "access denied" తిరిగి ఇస్తాయి
+- `azd up` ఆథెంటికేషన్ తప్పిదాలతో విఫలమవుతుంది
+- కమాండ్లు "అనుమతి లేదు" లేదా "ప్రవేశం నిరాకరించబడింది" పరిసరిని చూపిస్తాయి
 
 **పరిష్కారాలు:**
 ```bash
-# 1. Azure CLIతో మళ్లీ ప్రామాణీకరణ చేయండి
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# 2. క్యాష్ చేయబడిన ప్రమాణ పత్రాలను తొలగించండి
+# 2. Clear cached credentials
 az account clear
 az login
 
-# 3. డివైస్ కోడ్ ఫ్లో ఉపయోగించండి (హెడ్లెస్ సిస్టమ్‌ల కోసం)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# 4. నిర్దిష్ట సబ్‌స్క్రిప్షన్‌ను సెట్ చేయండి
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
-### సమస్య: డిప్లాయ్‌మెంట్ సమయంలో "Insufficient privileges"
+### సమస్య: "డిప్లాయ్‌మెంట్లో అపరిపూర్ణ అనుమతులు"
 **లక్షణాలు:**
-- అనుమతి లోపాలతో డిప్లాయ్‌మెంట్ విఫలమవుతుంది
+- అనుమతుల లోపాల కారణంగా డిప్లాయ్‌మెంట్ విఫలమవుతుంది
 - కొన్ని Azure వనరులను సృష్టించలేరు
 
 **పరిష్కారాలు:**
 ```bash
-# 1. మీ Azure పాత్ర కేటాయింపులను తనిఖీ చేయండి
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. తగిన పాత్రలు మీకు ఉన్నాయో నిర్ధారించుకోండి
-# - Contributor (వనరులు సృష్టించడానికి)
-# - User Access Administrator (పాత్ర కేటాయింపుల కోసం)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. సరైన అనుమతుల కోసం మీ Azure నిర్వాహకుడిని సంప్రదించండి
+# 3. Contact your Azure administrator for proper permissions
 ```
 
 ### సమస్య: మల్టీ-టెనెంట్ ఆథెంటికేషన్ సమస్యలు
-**పరిషణాలు:**
+**పరిష్కారాలు:**
 ```bash
-# 1. నిర్దిష్ట టెనెంట్‌తో లాగిన్ చేయండి
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. కాన్ఫిగరేషన్‌లో టెనెంట్‌ను సెట్ చేయండి
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. టెనెంట్లు మారుతున్నప్పుడు టెనెంట్ క్యాష్‌ను క్లియర్ చేయండి
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
-## 🏗️ ఇన్‌ఫ్రాస్ట్రక్చర్ ప్రొవిజనింగ్ లోపాలు
+## 🏗️ ఇన్ఫ్రాస్ట్రక్చర్ ప్రొవిజనింగ్ లోపాలు
 
 ### సమస్య: వనరు పేరు సంకర్షణలు
 **లక్షణాలు:**
-- "The resource name already exists" లోపాలు
-- వనరు సృష్టి సమయంలో డిప్లాయ్‌మెంట్ విఫలమవుతుంది
+- "ఉన్న వనరు పేరు ఇప్పటికే ఉంది" అనే తప్పిదాలు
+- వనరు సృష్టించేటప్పుడు డిప్లాయ్‌మెంట్ విఫలమవుతుంది
 
 **పరిష్కారాలు:**
-```bash
-# 1. టోకెన్లతో ప్రత్యేకమైన రిసోర్సుల పేర్లను ఉపయోగించండి
-# మీ Bicep టెంప్లేట్‌లో:
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
+```
 
-# 2. పర్యావరణం పేరును మార్చండి
+```bash
+# 2. Change environment name
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. ఇప్పటికే ఉన్న రిసోర్సులను శుభ్రం చేయండి
-azd down --force --purge
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
 ```
 
-### సమస్య: స్థానం/ప్రాంతం అందుబాటులో లేదు
+### సమస్య: ప్రాంతం/రీజియన్ అందుబాటులో లేదు
 **లక్షణాలు:**
-- "The location 'xyz' is not available for resource type"
-- ఎంపికచేసిన ప్రాంగణంలో కొన్ని SKUs అందుబాటులో లేవు
+- "xyz ప్రాంతం 'వనరు రకం' కు అందుబాటులో లేదు" సందేశాలు
+- ఎంపిక చేసిన ప్రాంతంలో కొన్ని SKUలు లభ్యంకాలేవు
 
 **పరిష్కారాలు:**
 ```bash
-# 1. వనరుల రకాల కోసం అందుబాటులో ఉన్న ప్రాంతాలు తనిఖీ చేయండి
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. సాధారణంగా అందుబాటులో ఉన్న ప్రాంతాలను ఉపయోగించండి
-azd config set defaults.location eastus2
-# లేదా
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. ప్రాంతాల వారీగా సేవల అందుబాటును తనిఖీ చేయండి
-# సందర్శించండి: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### సమస్య: క్వోటా అధిగమించబడిన లోపాలు
+స్థానంలో మార్చడం మునుపటి వనరులను మారుస్తూ ఉండదు. ఒక ఉన్న వనరు గ్రూపు లేదా వనరు స్థాన మార్పును నిరాకరించవచ్చు; ప్రాంతీయ పునఃవ్యవస్థీకరణకు వేరొక ఎన్విరాన్మెంట్ ఉపయోగించండి.
+
+### సమస్య: కోటా దాటిపోయిన లోపాలు
 **లక్షణాలు:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+- "వనరు రకం కోసం కోటా దాటిపోయింది" సందేశాలు
+- "గరిష్ఠ వనరు సంఖ్య చేరింది" సందేశాలు
 
 **పరిష్కారాలు:**
 ```bash
-# 1. ప్రస్తుత కోటా వినియోగాన్ని తనిఖీ చేయండి
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# 2. Azure పోర్టల్ ద్వారా కోటా పెంచాలని అభ్యర్థించండి
-# వెళ్ళండి: సబ్‌స్క్రిప్షన్లు > వినియోగం + కోటాలు
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# 3. డెవలప్‌మెంట్ కోసం చిన్న SKUలను ఉపయోగించండి
-# main.parameters.json లో:
+```
+
+అభివృద్ధి కోసం, `infra/main.parameters.json`లో మద్దతు లభించే చిన్న SKUను ఎంచుకోండి:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# 4. వినియోగంలో లేని వనరులను తొలగించండి
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
 ### సమస్య: Bicep టెంప్లేట్ లోపాలు
 **లక్షణాలు:**
-- టెంప్లేట్ ధృవీకరణ విఫలమవుతుంది
-- Bicep ఫైళ్లలో వాక్య రీతిలో లోపాలు
+- టెంప్లేట్ చెల్లింపులు విఫలమవుతాయి
+- Bicep ఫైళ్లలో సింటాక్స్ లోపాలు
 
 **పరిష్కారాలు:**
 ```bash
-# 1. Bicep సింటాక్స్‌ను ధృవీకరించండి
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Bicep లింటర్‌ను ఉపయోగించండి
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. పరామితి ఫైల్ సింటాక్స్‌ను తనిఖీ చేయండి
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. డిప్లాయ్‌మెంట్ మార్పులను ముందుగా చూడండి
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
-## 🚀 డిప్లాయ్‌మెంట్ విఫలతలు
+## 🚀 డిప్లాయ్‌మెంట్ విఫలమవుతాయి
 
-### సమస్య: బిల్డ్ విఫలతలు
+### సమస్య: బిల్డ్ విఫలాలు
 **లక్షణాలు:**
-- డిప్లాయ్‌మెంట్ సమయంలో అప్లికేషన్ బిల్డ్ అవ్వడం లేదు
-- ప్యాకేజీ ఇన్‌స్టాలేషన్ లోపాలు
+- అప్లికేషన్ డిప్లాయ్‌మెంట్ సమయంలో బిల్డ్ చెయ్యలేదు
+- ప్యాకేజ్ ఇన్‌స్టాలేషన్ లో తప్పిదాలు
 
 **పరిష్కారాలు:**
 ```bash
-# 1. డీబగ్ ఫ్లాగ్‌తో బిల్డ్ అవుట్‌పుట్‌ను తనిఖీ చేయండి
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. డిప్లాయ్ చేయబడిన సేవ యొక్క స్థితిని చూడండి
+# 2. View deployed service status
 azd show
 
-# 3. బిల్డ్‌ను స్థానికంగా పరీక్షించండి
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Node.js/Python వర్షన్ అనుకూలతను తనిఖీ చేయండి
-node --version  # azure.yaml సెట్టింగ్‌లకు సరిపోవాలి
+# 3. Check Node.js/Python version compatibility
+node --version  # Should match azure.yaml settings
 python --version
 
-# 4. బిల్డ్ క్యాష్‌ను క్లియర్ చేయండి
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. కంటైనర్లు ఉపయోగిస్తే Dockerfile‌ను తనిఖీ చేయండి
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### సమస్య: కంటైనర్ డిప్లాయ్‌మెంట్ విఫలతలు
+### సమస్య: కంటైనర్ డిప్లాయ్‌మెంట్ విఫలాలు
 **లక్షణాలు:**
-- కంటైనర్ యాప్స్ ప్రారంభం కావట్లేదు
+- కంటైనర్ యాప్స్ స్టార్ట్ కాలేకపోవడం
 - ఇమేజ్ పుల్ లోపాలు
 
 **పరిష్కారాలు:**
 ```bash
-# 1. Docker బిల్డ్‌ను స్థానికంగా పరీక్షించండి
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Azure CLI ఉపయోగించి కంటెయినర్ లాగ్‌లను తనిఖీ చేయండి
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. azd ద్వారా అప్లికేషన్‌ను పర్యవేక్షించండి
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. కంటెయినర్ రిజిస్ట్రీ యాక్సెస్‌ను ధృవీకరించండి
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. కంటెయినర్ యాప్ కాన్ఫిగరేషన్‌ను తనిఖీ చేయండి
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### సమస్య: డేటాబేస్ కనెక్షన్ విఫలతలు
+### సమస్య: డేటాబేస్ కనెక్షన్ విఫలాలు
 **లక్షణాలు:**
-- అప్లికేషన్ డేటాబేస్‌కు కనెక్ట్ చేయలేకపోతోంది
-- కనెక్షన్ టైమ్‌అవుట్ లోపాలు
+- అప్లికేషన్ డేటాబేస్‌కు కనెక్ట్ కాలేకపోవడం
+- కనెక్షన్ టైమౌట్ లోపాలు
 
 **పరిష్కారాలు:**
 ```bash
-# 1. డేటాబేస్ ఫైర్వాల్ నియమాలు తనిఖీ చేయండి
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. అప్లికేషన్ నుండి కనెక్టివిటీని పరీక్షించండి
-# తాత్కాలికంగా మీ యాప్‌లో చేర్చండి:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. కనెక్షన్ స్ట్రింగ్ ఫార్మాట్‌ను ధృవీకరించండి
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# 4. డేటాబేస్ సర్వర్ స్థితిని తనిఖీ చేయండి
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
 ## 🔧 కాన్ఫిగరేషన్ సమస్యలు
 
-### సమస్య: పర్యావరణ వేరియబుల్స్ పని చేయడం లేదు
+### సమస్య: ఎన్విరాన్మెంట్ వేరియబుల్స్ పనిచేయడం లేదు
 **లక్షణాలు:**
-- యాప్ కాన్ఫిగరేషన్ విలువలను చదవలేకపోతోంది
-- పర్యావరణ వేరియబుల్స్ ఖాళీగా కనిపిస్తూనే ఉంటాయి
+- యాప్ కాన్ఫిగరేషన్ విలువలను చదవడం కాదు
+- ఎన్విరాన్మెంట్ వేరియబుల్స్ ఖాళీగా కనిపిస్తాయి
 
 **పరిష్కారాలు:**
 ```bash
-# 1. పర్యావరణ చరాలు సెట్ చేయబడ్డాయని నిర్ధారించండి
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. azure.yamlలో వేరియబుల్ పేర్లను తనిఖీ చేయండి
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. అనువర్తనాన్ని పునరారంభించండి
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. యాప్ సర్వీస్ కాన్ఫిగరేషన్‌ను తనిఖీ చేయండి
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### సమస్య: SSL/TLS సర్టిఫికెట్ సమస్యలు
+### సమస్య: SSL/TLS సర్టిఫికేట్ సమస్యలు
 **లక్షణాలు:**
-- HTTPS పని చేయడం లేదు
-- సర్టిఫికెట్ ధృవీకరణలో లోపాలు
+- HTTPS పనిచేయడం లేదు
+- సర్టిఫికెట్ వాలిడేషన్ లోపాలు
 
 **పరిష్కారాలు:**
 ```bash
-# 1. SSL సర్టిఫికేట్ స్థితిని తనిఖీ చేయండి
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# 2. కేవలం HTTPSని సక్రియం చేయండి
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. అవసరమైతే కస్టమ్ డొమైన్ జోడించండి
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
 ### సమస్య: CORS కాన్ఫిగరేషన్ సమస్యలు
 **లక్షణాలు:**
-- ఫ్రంట్‌ఎండ్ API కాల్ చేయలేకపోతుంది
-- క్రాస్-ఒరిజిన్ రిక్వెస్ట్ బ్లాక్ అవుతుంది
+- ఫ్రంట్‌ఎండ్ API కాల్ చేయలేకపోవడం
+- క్రాస్-ఆరిజిన్ రిక్వెస్ట్ బ్లాక్ చేయబడింది
 
 **పరిష్కారాలు:**
 ```bash
-# 1. App Service కోసం CORS‌ను కాన్ఫిగర్ చేయండి
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. CORS ను నిర్వహించేలా API ను నవీకరించండి
-# Express.jsలో:
+```
+
+2. మీ ఉన్న ఎక్స్ప్రెస్ అప్లికేషన్ (తో `cors` దిగుమతి చేసుకున్నది) అప్డేట్ చేయండి:
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# 3. సరైన URL లపై నడుస్తున్నదో లేదో తనిఖీ చేయండి
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
-## 🌍 పరిసర నిర్వహణ సమస్యలు
+## 🌍 ఎన్విరాన్మెంట్ నిర్వహణ సమస్యలు
 
-### సమస్య: పరిసర మార్పిడి సమస్యలు
+### సమస్య: ఎన్విరాన్మెంట్ మార్పు సమస్యలు
 **లక్షణాలు:**
-- తప్పైన పరిసరాన్ని ఉపయోగిస్తోంది
-- కాన్ఫిగరేషన్ సరైనంగా మార్చడం కాదు
+- తప్పు ఎన్విరాన్మెంట్ ఉపయోగించడం
+- కాన్ఫిగరేషన్ సరైనట్లుగా మారడం లేదు
 
 **పరిష్కారాలు:**
 ```bash
-# 1. అన్ని ఎన్విరాన్‌మెంట్‌లను జాబితా చేయండి
+# 1. List all environments
 azd env list
 
-# 2. స్పష్టంగా ఎన్విరాన్‌మెంట్‌ను ఎంచుకోండి
+# 2. Explicitly select environment
 azd env select production
 
-# 3. ప్రస్తుత ఎన్విరాన్‌మెంట్‌ను ధృవీకరించండి
+# 3. Verify current environment
 azd env list
 
-# 4. ఖరాబైనట్లయితే కొత్త ఎన్విరాన్‌మెంట్‌ను సృష్టించండి
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
-### సమస్య: పరిసర కరప్షన్
+### సమస్య: ఎన్విరాన్మెంట్ కంప్రేషన్
 **లక్షణాలు:**
-- పరిసరంలో చెల్లనిది స్థితి చూపిస్తుంది
-- వనరులు కాన్ఫిగరేషన్‌కు సరిపోవు
+- ఎన్విరాన్మెంట్ చెల్లని స్థితిని చూపిస్తుంది
+- వనరులు కాన్ఫిగరేషన్‌కు సరిపోకపోవడం
 
 **పరిష్కారాలు:**
 ```bash
-# 1. పరిసర స్థితిని నవీకరించండి
+# 1. Refresh environment state
 azd env refresh
 
-# 2. పరిసర కాన్ఫిగరేషన్‌ను రీసెట్ చేయండి
+# 2. Reset environment configuration
 azd env new production-reset
-# అవసరమైన వాతావరణ చరాలను కాపీ చేయండి
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. ఉన్న వనరులను దిగుమతి చేయండి (సాధ్యమైతే)
-# వనరు IDలతో .azure/production/config.jsonని మాన్యువల్‌గా నవీకరించండి
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
 ## 🔍 పనితీరు సమస్యలు
 
-### సమస్య: డిప్లాయ్‌మెంట్ స్లో టైమ్స్
+### సమస్య: నెమ్మదిగా డిప్లాయ్‌మెంట్ సమయాలు
 **లక్షణాలు:**
-- డిప్లాయ్‌మెంట్‌లు చాలా సమయం తీసుకుంటున్నాయి
-- డిప్లాయ్‌మెంట్ సమయంలో టైమ్‌అవుట్లు
+- డిప్లాయ్‌మెంట్ చాలా సమయం తీసుకోవడం
+- డిప్లాయ్‌మెంట్ సమయంలో టైమౌట్‌లు
 
 **పరిష్కారాలు:**
 ```bash
-# 1. వేగవంతమైన పునరావృతాల కోసం నిర్దిష్ట సేవలను డిప్లాయ్ చేయండి
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. ఇన్‌ఫ్రాస్ట్రక్చర్ మారనప్పుడు కోడ్-మాత్రమే డిప్లాయ్ చేయండి
-azd deploy  # azd up కంటే వేగంగా
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. బిల్డ్ ప్రక్రియను మెరుగుపరచండి
-# package.json లో:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. రీసోర్సుల ప్రాంతాలను తనిఖీ చేయండి (ఒకే రీజియన్‌ను ఉపయోగించండి)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
 ### సమస్య: అప్లికేషన్ పనితీరు సమస్యలు
 **లక్షణాలు:**
-- స్పందనా వేగం మెల్లగా ఉంది
-- అధిక వనరుల ఉపయోగం
+- స్లో రెస్పాన్స్ టైమ్స్
+- అధిక వనరు వినియోగం
 
 **పరిష్కారాలు:**
 ```bash
-# 1. వనరులను పెంచండి
-# main.parameters.jsonలో SKUని నవీకరించండి:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# 2. Application Insights పర్యవేక్షణను ప్రారంభించండి
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# 3. Azureలో అప్లికేషన్ లాగ్‌లను తనిఖీ చేయండి
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# లేదా Container Apps కోసం:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. క్యాషింగ్‌ను అమలు చేయండి
-# మీ ఇన్‌ఫ్రాస్ట్రక్చర్‌లో Redis క్యాష్‌ను జోడించండి
+# 4. Implement caching
+# Add Redis cache to your infrastructure
 ```
 
-## 🛠️ ట్రబుల్‌షూటింగ్ టూల్స్ మరియు కమాండ్లు
+## 🛠️ troubleshooting సాధనాలు మరియు కమాండ్లు
 
 ### డీబగ్ కమాండ్లు
 ```bash
-# సమగ్ర డీబగ్గింగ్
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# azd వెర్షన్‌ను తనిఖీ చేయండి
+# Check azd version
 azd version
 
-# ప్రస్తుత కాన్ఫిగరేషన్‌ను వీక్షించండి
+# View current configuration
 azd config show
 
-# కనెక్టివిటీని పరీక్షించండి
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### లాగ్ విశ్లేషణ
 ```bash
-# Azure CLI ద్వారా అనువర్తన లాగ్‌లు
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# azd తో అనువర్తనాన్ని పర్యవేక్షించండి
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Azure వనరుల లాగ్‌లు
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
-# కంటైనర్ లాగ్‌లు (Container Apps కోసం)
+# Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### వనరు పరిశోధన
+### వనరు అన్వేషణ
 ```bash
-# అన్ని వనరులను జాబితా చేయండి
+# List all resources
 az resource list --resource-group myrg -o table
 
-# వనరు స్థితిని తనిఖీ చేయండి
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# నెట్‌వర్క్ డయాగ్నొస్టిక్స్
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 అదనపు సహాయం పొందడం
 
 ### ఎప్పుడు ఎస్కలేట్ చేయాలి
-- అన్ని పరిష్కారాలు ప్రయత్నించిన తర్వాత ప్రామాణీకరణ సమస్యలు కొనసాగితే
-- Azure సేవలతో సంబందించిన ఇన్‌ఫ్రాస్ట్రక్చర్ సమస్యలు ఉన్నప్పుడు
-- బిల్లింగ్ లేదా సబ్‌స్క్రిప్షన్ సంబంధించిన సమస్యలు ఉన్నప్పుడు
-- భద్రతా ఆందోళనలు లేదా ఘటనలు ఉన్నప్పుడు
+- అన్ని పరిష్కారాలు చేసిన తర్వాత కూడా ఆథెంటికేషన్ సమస్యలు కొనసాగుతున్నప్పుడు
+- Azure సేవలతో ఇన్ఫ్రాస్ట్రక్చర్ సమస్యలు ఉన్నప్పుడు
+- బిల్లింగ్ లేదా సబ్‌స్క్రిప్షన్ సంబంధిత సమస్యలు ఉన్నప్పుడు
+- భద్రతా సందేహాలు లేదా సర్వసాధారణ సంఘటనలు ఉన్నప్పుడు
 
 ### సపోర్ట్ ఛానెల్స్
 ```bash
-# 1. Azure సేవా ఆరోగ్యాన్ని తనిఖీ చేయండి
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Azure మద్దతు టికెట్ సృష్టించండి
-# కి వెళ్ళండి: https://portal.azure.com -> సహాయం + మద్దతు
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. కమ్యూనిటీ వనరులు
-# - Stack Overflow: azure-developer-cli ట్యాగ్
-# - GitHub ఇష్యూస్: https://github.com/Azure/azure-dev/issues
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
+# - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### సేకరించాల్సిన సమాచారం
-సపోర్ట్‌ను సంప్రదించే ముందు ఈ సమాచారాన్ని సేకరించండి:
-- `azd version` ఔట్‌పుట్
-- `azd config show` ఔట్‌పుట్
-- `azd show` ఔట్‌పుట్ (ప్రస్తుత డిప్లాయ్‌మెంట్ స్థితి)
-- లోప సందేశాలు (పూర్తి టెక్స్ట్)
-- సమస్యను పునరుత్పత్తి చేసే స్టెప్స్
-- పరిసర వివరాలు (`azd env get-values`)
-- సమస్య ప్రారంభమైన టైమ్లైన్
+### సేకరించవలసిన సమాచారం
+సపోర్ట్‌ను సంప్రదించే ముందు, ఈ సమాచారాన్ని సేకరించండి:
+- `azd version` అవుట్పుట్
+- `azd config show` అవుట్పుట్
+- `azd show` అవుట్పుట్ (ప్రస్తుత డిప్లాయ్‌మెంట్ స్థితి)
+- తప్పిద సందేశాలు (పూర్తి వచనం)
+- సమస్యను పునరుత్పత్తి చేయడానికి తీసుకున్న దశలు
+- రీకార్డింగ్ వాతావరణ వివరాలు (ఎప్పుడూ మిగిలిన `azd env get-values` షేర్ చేయవద్దు, అందులో రహస్యాలు ఉండవచ్చు)
+- సమస్య ఎప్పుడు మొదలైంది Timeline
 
 ### లాగ్ సేకరణ స్క్రిప్ట్
 ```bash
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -528,73 +541,75 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 సమస్య నివారణ
 
-### ప్రీ-డిప్లాయ్‌మెంట్ చెక్లిస్ట్
+### మునుపటి అమరిక చెక్‌లిస్ట్
 ```bash
-# 1. ప్రామాణీకరణను నిర్ధారించండి
+# 1. Validate authentication
 az account show
 
-# 2. కోటాలు మరియు పరిమితులను తనిఖీ చేయండి
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# 3. టెంప్లేట్లను ధృవీకరించండి
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# 4. ముందుగా స్థానికంగా పరీక్షించండి
+# 4. Test locally first
 npm run build
 npm run test
 
-# 5. పరీక్షాత్మక అమలులను ఉపయోగించండి
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
-### మానిటరింగ్ సెటప్
-```bash
-# Application Insightsని సక్రియం చేయండి
-# main.bicepలో జోడించండి:
+### మానిటరింగ్ సెట్‌అప్
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# అలర్ట్‌లను ఏర్పాటు చేయండి
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
-### రొటీన్ మెయింటెనెన్స్
+### నియమిత నిర్వహణ
 ```bash
-# సాప్తాహిక ఆరోగ్య తనిఖీలు
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# మాసిక వ్యయ సమీక్ష
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# త్రైమాసిక భద్రతా సమీక్ష
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
 ## సంబంధిత వనరులు
 
-- [డీబగ్గింగ్ గైడ్](debugging.md) - అధునాతన డీబగ్గింగ్ పద్ధతులు
-- [వనరుల ప్రొవిజనింగ్](../chapter-04-infrastructure/provisioning.md) - ఇన్‌ఫ్రాస్ట్రక్చర్ సమస్య పరిష్కారం
-- [సామర్థ్య ప్రణాళిక](../chapter-06-pre-deployment/capacity-planning.md) - వనరుల ప్లానింగ్ మార్గదర్శకం
-- [SKU ఎంపిక](../chapter-06-pre-deployment/sku-selection.md) - సర్వీస్ స్థాయి సిఫార్సులు
+- [డీబగ్గింగ్ గైడ్](debugging.md) - అధునాతన డీబగ్గింగ్ సాంకేతికతలు
+- [ప్రొవిజనింగ్ వనరులు](../chapter-04-infrastructure/provisioning.md) - మౌలిక వసతుల సమస్య పరిష్కారం
+- [ధారితల ప్రణాళిక](../chapter-06-pre-deployment/capacity-planning.md) - వనరుల ప్రణాళిక మార్గదర్శకాలు
+- [SKU ఎంపిక](../chapter-06-pre-deployment/sku-selection.md) - సేవా స్థాయి సిఫార్సులు
 
 ---
 
-**సూక్ష్మ సూచన**: ఈ గైడ్‌ను బుక్‌మార్క్ చేసి సమస్యలు ఎదురైనప్పుడు తిరిగి చూడండి. చాలా సమస్యలు ఇప్పటికే చూస్తూ గుర్తించబడినవి మరియు పరిష్కారాలు అమలు చేయబడ్డాయి!
+**సూచన**: ఈ గైడ్‌ను బుక్‌మార్క్ చేసి మీకు సమస్యలు వస్తే దీనిని సూచించండి. చాలా సమస్యలు ముందు చూసేవి మరియు పరిష్కారాలు ఉన్నాయి!
 
 ---
 
 **నావిగేషన్**
-- **గత పాఠం**: [వనరుల ప్రొవిజనింగ్](../chapter-04-infrastructure/provisioning.md)
-- **తదుపరి పాఠం**: [డీబగ్గింగ్ గైడ్](debugging.md)
+- **ముందటి పాఠం**: [ప్రొవిజనింగ్ వనరులు](../chapter-04-infrastructure/provisioning.md)
+- **తరువాత పాఠం**: [డీబగ్గింగ్ గైడ్](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**డిస్క్లెయిమర్**:
-ఈ పత్రాన్ని AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి శ్రమిస్తున్నప్పటికీ, ఆటోమేటెడ్ అనువాదాలలో పొరపాట్లు లేదా అస్వస్థతలు ఉండవచ్చని దయచేసి గమనించండి. మూల పత్రాన్ని దాని స్థానిక భాషలోనే అధికారిక మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, వృత్తిపరమైన మానవ అనువాదం సిఫార్సు చేయబడుతుంది. ఈ అనువాదం ఉపయోగం వల్ల ఏర్పడే ఏవైనా అపార్థాలు లేదా తప్పుగా అర్థం చేసుకోవడాలకు మేము బాధ్యులు కాదు.
+**అస్వీకరణ**:
+ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నిస్తున్నప్పటికీ, ఆటోమేటెడ్ అనువాదాలు తప్పులు లేదా అసమగ్రతలను కలిగి ఉండవచ్చు. దాని స్వదేశ భాషలో ఉన్న అసలు పత్రాన్ని అధికారం కలిగిన మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, ప్రొఫెషనల్ మానవ అనువాదాన్ని సిఫారసు చేస్తాము. ఈ అనువాదం ఉపయోగం వల్ల కలిగే ఏవైనా అపార్థాలు లేదా తప్పుదారులు కోసం మేము బాధ్యత వహించము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

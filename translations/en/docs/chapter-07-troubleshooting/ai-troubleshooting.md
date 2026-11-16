@@ -9,9 +9,11 @@
 
 This comprehensive troubleshooting guide addresses common issues when deploying AI solutions with AZD, providing solutions and debugging techniques specific to Azure AI services.
 
+> **Scope:** Commands use example resource names; replace them and select the correct subscription. Bicep blocks are fragments to merge into an existing template, not standalone deployments. Python snippets require the stated SDKs and application configuration. No live Azure deployment was executed for this review.
+
 ## Table of Contents
 
-- [Microsoft Foundry Models Service Issues](#azure-openai-service-issues)
+- [Microsoft Foundry Models Service Issues](#microsoft-foundry-models-service-issues)
 - [Azure AI Search Problems](#azure-ai-search-problems)
 - [Container Apps Deployment Issues](#container-apps-deployment-issues)
 - [Authentication and Permission Errors](#authentication-and-permission-errors)
@@ -38,27 +40,22 @@ Error: The requested resource type is not available in the location 'westus'
 
 1. **Check Region Availability:**
 ```bash
-# List available regions for OpenAI
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --query "[].locations[]" \
-  --output table
+# Inspect model/deployment-type offerings in a candidate region
+az cognitiveservices model list --location eastus2 --output json
+# Availability in the catalog does not guarantee quota or physical capacity.
 ```
 
 2. **Update AZD Configuration:**
-```yaml
-# azure.yaml - Force specific region
-infra:
-  provider: bicep
-  path: infra
-  module: main
-parameters:
-  location: "eastus2"  # Known working region
+```bash
+# For a new environment: choose a supported region with available quota
+azd env set AZURE_LOCATION eastus2
+# Templates with a separate model-location parameter must wire that value
+# through infra/main.parameters.json as documented by the template.
 ```
 
 3. **Use Alternative Regions:**
 ```bicep
-// infra/main.bicep - Multi-region fallback
+// infra/main.bicep - Explicit location selection, NOT automatic fallback
 @allowed([
   'eastus2'
   'francecentral'
@@ -81,34 +78,28 @@ Error: Deployment failed due to insufficient quota
 ```bash
 # Check quota usage
 az cognitiveservices usage list \
-  --name YOUR_OPENAI_RESOURCE \
-  --resource-group YOUR_RG
+  --location eastus2 --output table
 ```
 
 2. **Request Quota Increase:**
-```bash
-# Submit quota increase request
-az support tickets create \
-  --ticket-name "OpenAI Quota Increase" \
-  --description "Need increased quota for production deployment" \
-  --severity "minimal" \
-  --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
-```
+Use the Foundry portal's quota management workflow for the affected subscription, region, model, and deployment type. See the [official quota guidance](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). A VM quota request does not increase model quota.
 
 3. **Optimize Model Capacity:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi // Existing account resource declared in your template
+  name: 'chat-model'
   properties: {
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
-    name: 'Standard'
-    capacity: 1  // Start with minimal capacity
+    name: 'GlobalStandard' // Verify this model/version/type in the target region
+    capacity: 1  // Capacity units are model/deployment-type specific
   }
 }
 ```
@@ -124,17 +115,12 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **Use Supported API Version:**
 ```python
-# Use latest supported version
-AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
+# Stable dated Azure OpenAI data-plane API, where supported by your feature
+AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
 2. **Check API Version Compatibility:**
-```bash
-# List supported API versions
-az rest --method get \
-  --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
-  --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
-```
+Check the [Azure OpenAI API lifecycle reference](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). ARM resource-provider API versions do **not** list inference/data-plane API versions. New v1 clients use `/openai/v1/` without a dated `api-version`; do not mix the two client configurations.
 
 ## Azure AI Search Problems
 
@@ -147,11 +133,14 @@ Error: Semantic search requires Basic tier or higher
 
 **Solutions:**
 
-1. **Upgrade Pricing Tier:**
+1. **Use a Supported Pricing Tier:**
+
+Semantic ranker requires Basic or higher. Moving from Free/Basic to a different tier may require creating a new search service and rebuilding indexes; editing a SKU is not a guaranteed in-place upgrade.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
   name: searchServiceName
+  location: location
   location: location
   sku: {
     name: 'basic'  // Minimum for semantic search
@@ -204,6 +193,7 @@ from azure.search.documents.indexes.models import SearchIndex
 
 def validate_index_schema(index_definition):
     """Validate index schema before creation."""
+    # These are this application's requirements, not universal Search fields.
     required_fields = ['id', 'content']
     field_names = [field.name for field in index_definition.fields]
     
@@ -214,13 +204,14 @@ def validate_index_schema(index_definition):
 
 3. **Use Managed Identity:**
 ```bicep
-// Grant search permissions to managed identity
+// Grant index-definition management permissions to the managed identity.
+// Search Index Data Contributor manages documents, not index definitions.
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: searchService
-  name: guid(searchService.id, containerApp.id, searchIndexDataContributorRole)
+  name: guid(searchService.id, containerApp.id, 'Search Service Contributor')
   properties: {
     principalId: containerApp.identity.principalId
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8ebe5a00-799e-43f5-93ac-243d3dce84a7')
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7ca78c08-252a-4471-8644-bb5ff32d4ba0')
     principalType: 'ServicePrincipal'
   }
 }
@@ -261,14 +252,15 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 2. **Validate Dependencies:**
 ```txt
-# requirements.txt - Pin versions for stability
-fastapi==0.104.1
-uvicorn==0.24.0
-openai==1.3.7
-azure-identity==1.14.1
-azure-keyvault-secrets==4.7.0
-azure-search-documents==11.4.0
-azure-cosmos==4.5.1
+# Dependency names for these snippets. Resolve supported versions in your
+# project's environment, test together, then commit a lock/pinned requirements file.
+fastapi
+uvicorn
+openai
+azure-identity
+azure-keyvault-secrets
+azure-search-documents
+azure-cosmos
 ```
 
 3. **Add Health Check:**
@@ -307,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
           }
           probes: [
             {
-              type: 'startup'
+              type: 'Startup'
               httpGet: {
                 path: '/health'
                 port: 8000
@@ -328,8 +320,11 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 2. **Optimize Model Loading:**
 ```python
 # Lazy load models to reduce startup time
+# Illustrative skeleton: implement _initialize_client and synchronize concurrent
+# initialization before using this pattern in an application.
 import asyncio
 from contextlib import asynccontextmanager
+from fastapi import FastAPI
 
 class ModelManager:
     def __init__(self):
@@ -397,14 +392,18 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
-async def test_authentication():
+def test_authentication():
     try:
-        credential = DefaultAzureCredential()
-        token = await credential.get_token("https://cognitiveservices.azure.com/.default")
-        print(f"Authentication successful: {token.token[:10]}...")
+        with DefaultAzureCredential() as credential:
+            token = credential.get_token("https://cognitiveservices.azure.com/.default")
+            print(f"Token acquired; expires at Unix time {token.expires_on}")
     except ClientAuthenticationError as e:
         print(f"Authentication failed: {e}")
+
+test_authentication()
 ```
+
+Token acquisition proves authentication, not permission to invoke a model. Test the intended operation separately. Locally, `DefaultAzureCredential` may use developer credentials; in Azure, verify the intended managed identity is selected.
 
 ### Issue: Key Vault Access Denied
 
@@ -416,6 +415,8 @@ Error: The user, group or application does not have secrets get permission
 **Solutions:**
 
 1. **Grant Key Vault Permissions:**
+
+Use the following access-policy fragment only for a vault with `enableRbacAuthorization: false`. For an RBAC-enabled vault, use option 2; adding an access policy does not grant data-plane access in RBAC mode.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -435,6 +436,8 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 ```
 
 2. **Use RBAC Instead of Access Policies:**
+
+The vault must have `enableRbacAuthorization: true`; changing permission models requires a planned migration of existing access.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -464,59 +467,43 @@ Error: Model version 'gpt-4-32k' is not available
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
-  --query "[].{name:model.name, version:model.version}" \
+  --query "[].{name:name, version:version}" \
   --output table
 ```
 
-2. **Use Model Fallbacks:**
+2. **Select an Available Model Explicitly:**
 ```bicep
-// Model deployment with fallback
+// Example model selection; verify version and deployment type in the catalog.
 @description('Primary model configuration')
 param primaryModel object = {
   name: 'gpt-4.1-mini'
-  version: '2024-07-18'
+  version: '2025-04-14'
 }
 
-@description('Fallback model configuration')
-param fallbackModel object = {
-  name: 'gpt-4.1'
-  version: '2024-08-06'
-}
-
-// Try primary model first, fallback if unavailable
+// Bicep does not catch provisioning failures and retry a fallback model.
 resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
   name: 'chat-model'
   properties: {
-    model: primaryModel
+    model: {
+      format: 'OpenAI'
+      name: primaryModel.name
+      version: primaryModel.version
+    }
   }
   sku: {
-    name: 'Standard'
+    name: 'GlobalStandard'
     capacity: 10
   }
 }
 ```
 
 3. **Validate Model Before Deployment:**
-```python
-# Pre-deployment model validation
-import httpx
-
-async def validate_model_availability(model_name: str, version: str) -> bool:
-    """Check if model is available before deployment."""
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/models",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
-            )
-            models = response.json()
-            return any(
-                model["id"] == f"{model_name}-{version}"
-                for model in models.get("data", [])
-            )
-    except Exception:
-        return False
+```bash
+# Management-plane catalog for the actual account
+az cognitiveservices account list-models \
+  --name YOUR_OPENAI_RESOURCE --resource-group YOUR_RG --output json
+# Inspect model/version and supported SKUs; check regional quota separately.
 ```
 
 ## Performance and Scaling Issues
@@ -637,6 +624,9 @@ class MemoryOptimizedAI:
     def __init__(self):
         self.max_memory_percent = 80
         
+    async def _process_ai_request(self, request):
+        raise NotImplementedError("Supply the application's AI operation")
+
     async def process_request(self, request):
         """Process request with memory monitoring."""
         # Check memory usage before processing
@@ -681,23 +671,26 @@ class TokenTracker:
         return total_tokens
 ```
 
+This in-memory counter is illustrative, not a monthly spending control: it resets on restart, is not shared across replicas, and checks usage only after a call. A real limit needs durable accounting, concurrency-safe reservations before requests, and a monthly reset policy. Container memory metrics must also account for cgroup limits; `psutil.virtual_memory()` is not a reliable container-limit measurement, and garbage collection does not enforce a memory cap.
+
 2. **Set up Cost Alerts:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate // Parameter: first day of a supported budget period
+      endDate: budgetEndDate     // Parameter: a future date
     }
     timeGrain: 'Monthly'
-    amount: 500  // $500 monthly limit
+    amount: 500  // Notification threshold in the subscription's billing currency
     category: 'Cost'
     notifications: {
       Actual_GreaterThan_80_Percent: {
         enabled: true
         operator: 'GreaterThan'
         threshold: 80
+        thresholdType: 'Actual'
         contactEmails: ['admin@company.com']
         contactRoles: ['Owner']
       }
@@ -705,6 +698,8 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   }
 }
 ```
+
+Declare `budgetStartDate` and `budgetEndDate` in your template. Budgets notify; they do not stop resources or impose a hard spending cap.
 
 3. **Optimize Model Selection:**
 ```python
@@ -751,8 +746,11 @@ If you deployed agents using `azd ai agent init`, these additional tools are ava
 # Ensure the agents extension is installed
 azd extension install azure.ai.agents
 
-# Re-initialize or update an agent from a manifest
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Check project storage permissions and agent configuration
+azd ai agent doctor
+
+# Inspect the deployed endpoint
+azd ai agent endpoint show
 
 # Use the MCP server to let AI tools query project state
 azd mcp start
@@ -762,6 +760,10 @@ azd infra generate
 ```
 
 > **Tip:** Use `azd infra generate` to write IaC to disk so you can inspect exactly what resources were provisioned. This is invaluable when debugging resource configuration issues. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
+
+**Release-aware diagnostics (2026-11-04):** Agents `1.0.0-beta.23` requires `azd >= 1.37.0`; upgrade the core CLI before incompatible extensions. This agent release retains developer RBAC warnings in final deployment output and identifies the version involved in activation failures/timeouts. A timeout does not establish that deployment failed: inspect the attempted version before retrying. It also fixes A2A 0.3 invocations displaying lifecycle messages instead of completed answers. Core `azd 1.37.1` fixes cancellation propagation across extensions; `1.37.2` improves critical provisioning confirmations and cancellation handling.
+
+If an older tutorial's evaluation command only prints migration guidance, install `azure.ai.evaluations` (`1.0.0-beta.2` requires `azd >= 1.33.0`) and use `azd ai eval init`, `generate`, and `run start`. Optimization's `--config` no longer accepts legacy evaluation files. See [evaluation migration](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) and [optimization migration](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
 ### Application Debugging
 
@@ -791,29 +793,33 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
 
 2. **Health Check Endpoints:**
 ```python
+# Integration fragment: add to an existing FastAPI app, protect this diagnostic
+# endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
+# authorization, not Azure OpenAI inference.
+import os
+from azure.identity.aio import DefaultAzureCredential
+from azure.search.documents.indexes.aio import SearchIndexClient
+from fastapi import Response
+
 @app.get("/debug/health")
-async def detailed_health_check():
+async def detailed_health_check(response: Response):
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Check OpenAI connectivity
-    try:
-        client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
-        await client.models.list()
-        checks['openai'] = {'status': 'healthy'}
-    except Exception as e:
-        checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
-    
     # Check Search service
     try:
-        search_client = SearchIndexClient(
-            endpoint=AZURE_SEARCH_ENDPOINT,
-            credential=DefaultAzureCredential()
-        )
-        indexes = await search_client.list_index_names()
-        checks['search'] = {'status': 'healthy', 'indexes': list(indexes)}
-    except Exception as e:
-        checks['search'] = {'status': 'unhealthy', 'error': str(e)}
+        async with DefaultAzureCredential() as credential:
+            async with SearchIndexClient(
+                endpoint=os.environ['AZURE_SEARCH_ENDPOINT'],
+                credential=credential
+            ) as search_client:
+                # AsyncItemPaged is iterated asynchronously, not awaited as a list.
+                async for _ in search_client.list_index_names():
+                    break
+        checks['search'] = {'status': 'healthy'}
+    except Exception:
+        response.status_code = 503
+        checks['search'] = {'status': 'unhealthy'}
     
     return checks
 ```
@@ -868,7 +874,7 @@ def monitor_performance(func):
 
 ## Resources
 
-- [Microsoft Foundry Models Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Azure OpenAI quota and throttling troubleshooting](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
 - [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
 - [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Install Azure troubleshooting skills in your editor: `npx skills add microsoft/github-copilot-for-azure`

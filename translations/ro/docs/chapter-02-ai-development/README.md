@@ -1,49 +1,51 @@
 # Capitolul 2: Dezvoltare AI-First
 
-**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 1-2 ore | **⭐ Complexitate**: Intermediar
+**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 4-5 ore inclusiv atelierul | **⭐ Complexitate**: Intermediar
 
 ---
 
 ## Prezentare generală
 
-Acest capitol se concentrează pe implementarea aplicațiilor bazate pe AI folosind Azure Developer CLI și serviciile Microsoft Foundry. De la aplicații simple de chat AI până la agenți inteligenți cu unelte.
+Acest capitol se concentrează pe implementarea aplicațiilor alimentate de AI folosind Azure Developer CLI și serviciile Microsoft Foundry. De la aplicații simple de chat AI la agenți inteligenți cu unelte.
 
-> **Notă de validare (2026-07-13):** Fluxul de comenzi și ghidul pentru extensii din acest capitol au fost revizuite față de `azd` `1.27.1` și actuala versiune preview a extensiei agentului AI `azure.ai.agents` `1.0.0-beta.5`. Dacă utilizați o versiune mai veche AZD, actualizați mai întâi și apoi continuați cu exercițiile.
+> **Recenzie lansare (2026-11-04):** Ghidul AI CLI a fost verificat în raport cu documentația/sursa publicată `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, și `azure.ai.evaluations` `1.0.0-beta.2`. Folosiți `azd >= 1.37.0` pentru fluxul de lucru combinat. Evaluările folosesc acum namespace separat `azd ai eval`; vezi [schimbările din lansare și ghidul de migrare](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Aceasta nu este o validare de implementare live.
 
 ## Obiective de învățare
 
-Finalizând acest capitol, vei putea:
+Parcurgând acest capitol, vei:
 - Implementa aplicații AI folosind șabloane AZD predefinite
 - Înțelege integrarea Microsoft Foundry cu AZD
 - Configura și personaliza agenți AI cu unelte
-- Implementa aplicații RAG (Retrieval-Augmented Generation)
+- Implementa aplicații RAG (Generare augmentată prin recuperare)
 
 ---
 
 ## 📚 Lecții
 
-| # | Lecție | Descriere | Timp |
+| # | Lecție | Descriere | Durată |
 |---|--------|-------------|------|
-| 1 | [Integrarea Microsoft Foundry](microsoft-foundry-integration.md) | Conectează AZD cu serviciile Foundry | 30 min |
-| 2 | [Ghid agenți AI](agents.md) | Implementare agenți inteligenți cu unelte | 45 min |
-| 3 | [Implementare modele AI](ai-model-deployment.md) | Implementare și configurare modele AI | 30 min |
-| 4 | [Laborator AI Workshop](ai-workshop-lab.md) | Practic: Pregătește soluția AI pentru AZD | 60 min |
+| 1 | [Integrare Microsoft Foundry](microsoft-foundry-integration.md) | Conectează AZD cu serviciile Foundry | 30 min |
+| 2 | [Ghid Agenți AI](agents.md) | Implementarea agenților inteligenți cu unelte | 45 min |
+| 3 | [Implementare Model AI](ai-model-deployment.md) | Implementare și configurare modele AI | 30 min |
+| 4 | [Atelier AI](ai-workshop-lab.md) | Practic: Explorează un șablon și planifică conversia ta | 2-3 ore |
 
 ---
 
-## 🚀 Început rapid
+## 🚀 Pornire rapidă
+
+Alege o opțiune într-un director nou și gol. `.` de la final inițializează directorul curent; în caz contrar AZD poate crea un subdirector fără a schimba directorul curent în shell-ul tău.
 
 ```bash
-# Opțiunea 1: Aplicație de chat RAG
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# Opțiunea 2: Agenți AI
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# Opțiunea 3: Aplicație de chat rapidă
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
@@ -53,21 +55,23 @@ azd up
 
 | Șablon | Descriere | Servicii |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG cu citări | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent AI cu unelte | Serviciul Agent AI |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG cu citări | OpenAI + Căutare AI |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent AI cu unelte | Serviciu Agent AI |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat AI de bază | OpenAI + Container Apps |
 
 ---
 
-## 💰 Conștientizarea costurilor
+## 💰 Conștientizare a costurilor
+
+Acestea sunt intervale ilustrative, nu oferte sau plafoane; traficul modelului, SKU-urile Search/compute, regiunea și opțiunile suplimentare pot depăși aceste valori. Consultă ghidul de prețuri curent al eșantionului ales înainte de aprovizionare.
 
 | Mediu | Cost lunar estimat |
 |-------------|----------------------|
-| Dezvoltare | 80-150 $ |
-| Pre-producție | 150-300 $ |
-| Producție | 300-3,500+ $ |
+| Dezvoltare | $80-150 |
+| Staging | $150-300 |
+| Producție | $300-3,500+ |
 
-**Sfat:** Rulează `azd down` după testare pentru a evita costuri suplimentare.
+**Sfat:** Rulează `azd down` după testare pentru a evita taxe.
 
 ---
 
@@ -75,7 +79,7 @@ azd up
 
 | Direcție | Capitol |
 |-----------|---------|
-| **Anterior** | [Capitolul 1: Bază](../chapter-01-foundation/README.md) |
+| **Anterior** | [Capitolul 1: Fundație](../chapter-01-foundation/README.md) |
 | **Următor** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
 | **Sari la** | [Capitolul 8: Modele de producție](../chapter-08-production/README.md) |
 
@@ -83,8 +87,8 @@ azd up
 
 ## 📖 Resurse conexe
 
-- [Depanarea AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Practici AI în producție](../chapter-08-production/production-ai-practices.md)
+- [Depanare AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Practici AI de producție](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

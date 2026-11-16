@@ -1,60 +1,58 @@
-# 6. Infrastructuur opruimen
+# 6. Infrastructuur afbreken
 
-!!! tip "AAN HET EINDE VAN DEZE MODULE ZUL JE IN STAAT ZIJN OM"
+!!! tip "AAN HET EINDE VAN DEZE MODULE KUN JE"
 
-    - [ ] Het belang van het opruimen van resources en kostenbeheer begrijpen
-    - [ ] Gebruik `azd down` om infrastructuur veilig te deprovisioneren
-    - [ ] Herstel soft-verwijderde Azure AI Services indien nodig
-    - [ ] **Lab 6:** Ruim Azure-resources op en verifieer verwijdering
-
----
-
-## Bonusopdrachten
-
-Voordat we het project opruimen, neem een paar minuten voor wat open verkenning.
-
-!!! info "Probeer deze verkenningsprompts"
-
-    **Experimenteer met GitHub Copilot:**
-    
-    1. Vraag: `Welke andere AZD-sjablonen zou ik kunnen proberen voor multi-agent scenario's?`
-    2. Vraag: `Hoe kan ik de agentinstructies aanpassen voor een zorgtoepassing?`
-    3. Vraag: `Welke omgevingsvariabelen regelen kostenoptimalisatie?`
-    
-    **Verken het Azure-portaal:**
-    
-    1. Bekijk de Application Insights-metrics voor je implementatie
-    2. Controleer de kostenanalyse voor de geprovisioneerde resources
-    3. Verken nogmaals de agent-playground van de Microsoft Foundry-portal one more time
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## Infrastructuur verwijderen
+## Bonus Oefeningen
 
-1. Het afbreken van de infrastructuur is zo eenvoudig als:
+Voordat we het project afbreken, neem een paar minuten om wat open verkenning te doen.
+
+!!! info "Probeer Deze Verkenningsvragen"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
+
+---
+
+## Infra deprovisie
+
+1. Het afbreken van infrastructuur is zo eenvoudig als:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. De `--purge`-vlag zorgt ervoor dat ook soft-verwijderde Cognitive Service-resources worden verwijderd, waardoor de door deze resources gebruikte quota worden vrijgegeven. Zodra dit is voltooid zie je iets als dit:
+1. Bevestig de geselecteerde omgeving en controleer de resources die verwijderd worden. Dit verwijdert Azure-resources en kan data vernietigen. Houd de bevestigingsprompt voor deze leerworkflow aan. Zodra voltooid zie je output vergelijkbaar met:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optioneel) Als je nu opnieuw `azd up` uitvoert, zul je opmerken dat het gpt-4.1-model wordt uitgerold aangezien de omgevingsvariabele is gewijzigd (en opgeslagen) in de lokale `.azure`-map. 
+1. Controleer de verwijdering in het portaal en controleer op resources buiten de scope van de implementatie. Kostenrapportage en quotaupdates kunnen vertraging oplopen. Lokale `.azure` configuratie blijft behouden tenzij je die expliciet verwijdert.
 
-      Hier zijn de modelimplementaties **voor**:
+1. `azd down --purge` vraagt ook om permanente verwijdering van ondersteunde soft-verwijderde resources. Gebruik dit alleen als herstel niet vereist is en je de bewaarbeleid/opschoningsbescherming begrijpt. Het garandeert geen onmiddellijke vrijgave van quotum.
 
-      ![Begin](../../../../../translated_images/nl/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      En hier is het **daarna**:
-      ![Nieuw](../../../../../translated_images/nl/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Voer geen herimplementatie uit alleen om de opruiming te verifiëren. Een latere bewuste `azd up` kan resources opnieuw aanmaken met de resterende lokale inputs, en brengt opnieuw kosten met zich mee. Modelupdates gebruiken normaal gesproken ondersteunde wijzigingswijzen voor provisioning, niet afbreken.
 
 ---
 

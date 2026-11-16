@@ -1,10 +1,10 @@
-# Application Insights-integration med AZD
+# Application Insights Integration med AZD
 
-⏱️ **Anslået tid**: 40-50 minutter | 💰 **Omkostningspåvirkning**: ~$5-15/måned | ⭐ **Kompleksitet**: Mellem
+⏱️ **Anslået tid**: 40-50 minutter | 💰 **Omkostningspåvirkning**: ~$5-15/måned | ⭐ **Kompleksitet**: Mellemstadie
 
 **📚 Læringssti:**
 - ← Forrige: [Preflight Checks](preflight-checks.md) - Validering før udrulning
-- 🎯 **Du er her**: Application Insights Integration (overvågning, telemetri, fejlfinding)
+- 🎯 **Du er her**: Application Insights Integration (Overvågning, telemetri, fejlfinding)
 - → Næste: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Udrul til Azure
 - 🏠 [Kursusforside](../../README.md)
 
@@ -12,19 +12,19 @@
 
 ## Hvad du vil lære
 
-Ved at gennemføre denne lektion vil du:
-- Integrere **Application Insights** i AZD-projekter automatisk
-- Konfigurere **distribueret sporing** for mikrotjenester
-- Implementere **brugerdefineret telemetri** (målinger, hændelser, afhængigheder)
-- Sætte op **realtidsmålinger** for overvågning i realtid
-- Oprette **alarmer og dashboards** fra AZD-udrulninger
-- Fejlfinde produktionsproblemer med **telemetri-forespørgsler**
+Ved at gennemføre denne lektion, vil du:
+- Deklarere **Application Insights** i AZD infrastruktur og konfigurere SDK-instrumentering
+- Konfigurere **distribueret tracing** for mikrotjenester
+- Implementere **brugerdefineret telemetri** (målinger, begivenheder, afhængigheder)
+- Opsætte **live målinger** til realtidsmonitorering
+- Oprette **advarsler og dashboards** fra AZD-udrulninger
+- Fejlfinding af produktionsproblemer med **telemetriforespørgsler**
 - Optimere **omkostninger og sampling** strategier
-- Overvåge **AI/LLM-applikationer** (tokens, latenstid, omkostninger)
+- Overvåge **AI/LLM applikationer** (tokens, latenstid, omkostninger)
 
 ## Hvorfor Application Insights med AZD er vigtigt
 
-### Udfordringen: Observabilitet i produktion
+### Udfordringen: Produktionsobservabilitet
 
 **Uden Application Insights:**
 ```
@@ -44,37 +44,37 @@ Ved at gennemføre denne lektion vil du:
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**Analogi**: Application Insights er som at have en "black box" flyregistrator + instrumentbræt i cockpittet for din applikation. Du ser alt, hvad der sker i realtid, og kan afspille enhver hændelse.
+**Analogi**: Application Insights er som at have en "black box" flyregistrator + cockpittavle til din applikation. Du ser alt, hvad der sker i realtid, og kan afspille enhver hændelse.
 
 ---
 
 ## Arkitekturoversigt
 
-### Application Insights i AZD-arkitektur
+### Application Insights i AZD-arkitekturen
 
 ```mermaid
 graph TB
-    User[Bruger/Klient]
-    App1[Container-app 1<br/>API-gateway]
-    App2[Container-app 2<br/>Produktservice]
-    App3[Container-app 3<br/>Ordreservice]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[Application Insights<br/>Telemetri-hub]
-    LogAnalytics[(Log Analytics<br/>Arbejdsområde)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Azure Portal<br/>Dashboards og alarmer]
-    Query[Kusto-forespørgsler<br/>Brugerdefineret analyse]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Automatisk instrumentering| AppInsights
-    App2 -.->|Automatisk instrumentering| AppInsights
-    App3 -.->|Automatisk instrumentering| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,49 +83,52 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-### Hvad overvåges automatisk
 
-| Telemetri-type | Hvad det indfanger | Anvendelsestilfælde |
-|----------------|--------------------|---------------------|
-| **Requests** | HTTP-forespørgsler, statuskoder, varighed | API-ydeevneovervågning |
-| **Dependencies** | Eksterne kald (DB, API'er, storage) | Identificer flaskehalse |
-| **Exceptions** | Ubehandlede fejl med stack traces | Fejlfinding |
-| **Custom Events** | Forretningshændelser (tilmelding, køb) | Analyse og funnels |
-| **Metrics** | Performance-tællere, brugerdefinerede målinger | Kapacitetsplanlægning |
-| **Traces** | Logbeskeder med alvorlighedsgrad | Fejlfinding og revision |
-| **Availability** | Oppetid og svartidstests | SLA-overvågning |
+### Hvad der overvåges automatisk
+
+Understøttet auto-instrumentering fanger anmodninger/afhængigheder for instrumenterede biblioteker. Tilpassede begivenheder og målinger kræver applikationskode; tilgængelighedstests skal konfigureres separat. Den indsamler ikke hver række nedenfor kun fordi ressourcen eksisterer.
+
+| Telemetri Type | Hvad Den Fanger | Brugstilfælde |
+|----------------|------------------|----------|
+| **Anmodninger** | HTTP-anmodninger, statuskoder, varighed | API-ydeevneovervågning |
+| **Afhængigheder** | Eksterne kald (DB, API'er, lagring) | Identificere flaskehalse |
+| **Undtagelser** | Ubehandlede fejl med stack-traces | Fejlfinding af fejl |
+| **Brugerdefinerede Begivenheder** | Forretningsbegivenheder (tilmelding, køb) | Analyse og funnels |
+| **Målinger** | Ydeevnetællere, brugerdefinerede målinger | Kapacitetsplanlægning |
+| **Spor** | Logbeskeder med alvorlighed | Fejlfinding og revision |
+| **Tilgængelighed** | Oppetid og svartidstest | SLA-overvågning |
 
 ---
 
 ## Forudsætninger
 
-### Krævede værktøjer
+### Nødvendige værktøjer
 
 ```bash
-# Bekræft Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Forventet: azd version 1.0.0 eller nyere
+# Command reference baseline: azd 1.37.2
 
-# Bekræft Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Forventet: azure-cli 2.50.0 eller nyere
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Azure-krav
 
-- Aktiv Azure-abonnement
-- Tilladelser til at oprette:
-  - Application Insights-ressourcer
-  - Log Analytics-workspaces
+- Aktivt Azure abonnement
+- Rettigheder til at oprette:
+  - Application Insights ressourcer
+  - Log Analytics arbejdsområder
   - Container Apps
   - Ressourcegrupper
 
-### Forudgående viden
+### Faglige forudsætninger
 
 Du bør have gennemført:
-- [AZD Grundlæggende](../chapter-01-foundation/azd-basics.md) - Kernekoncepter i AZD
-- [Konfiguration](../chapter-03-configuration/configuration.md) - Miljøopsætning
-- [Første projekt](../chapter-01-foundation/first-project.md) - Grundlæggende udrulning
+- [AZD Basics](../chapter-01-foundation/azd-basics.md) - Grundlæggende AZD-koncepter
+- [Configuration](../chapter-03-configuration/configuration.md) - Miljøopsætning
+- [First Project](../chapter-01-foundation/first-project.md) - Grundlæggende udrulning
 
 ---
 
@@ -133,7 +136,9 @@ Du bør have gennemført:
 
 ### Hvordan AZD opretter Application Insights
 
-AZD opretter og konfigurerer automatisk Application Insights, når du udruller. Lad os se, hvordan det fungerer.
+AZD opretter Application Insights **kun når projektets infrastruktur deklarerer det**. `azure.yaml` alene opretter ikke overvågning eller instrumenterer applikationskode.
+
+> **Eksempelscope:** Denne lektion indeholder integrationsfragmenter, ikke et komplet `monitored-app` projekt i dette arkiv. Lever en hovedskabelon og parameterkortlægning, et Container Apps-miljø, registry/image og identitetskonfiguration, Dockerfile og servicetag før udrulning. Senere lektioner viser alternative/udvidelsesfragmenter, ikke filer der alle kan indsættes sammen uændret. Start med et fungerende [mikrotjenest eksempel](../../../../examples/microservices) hvis du har brug for en kørbar baseline.
 
 ### Projektstruktur
 
@@ -156,7 +161,7 @@ monitored-app/
 
 ### Trin 1: Konfigurer AZD (azure.yaml)
 
-**File: `azure.yaml`**
+**Fil: `azure.yaml`**
 
 ```yaml
 name: monitored-app
@@ -169,16 +174,16 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**Det var det!** AZD vil oprette Application Insights som standard. Ingen ekstra konfiguration er nødvendig for grundlæggende overvågning.
+Dette deklarerer den deployerbare service. Følgende Bicep og SDK-konfiguration leverer overvågning; azd tilføjer dem ikke implicit.
 
 ---
 
 ### Trin 2: Overvågningsinfrastruktur (Bicep)
 
-**File: `infra/core/monitoring.bicep`**
+**Fil: `infra/core/monitoring.bicep`**
 
 ```bicep
 param logAnalyticsName string
@@ -223,19 +228,21 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
 
 ### Trin 3: Forbind Container App til Application Insights
 
-**File: `infra/app/api.bicep`**
+**Fil: `infra/app/api.bicep`**
 
 ```bicep
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -285,35 +293,29 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ---
 
-### Trin 4: Applikationskode med telemetri
+### Trin 4: Applikationskode med Telemetri
 
-**File: `src/app.py`**
+**Fil: `src/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Hent Application Insights-forbindelsesstreng
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Konfigurer distribueret sporing
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # 100% prøvetagning til udvikling
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # Konfigurer logning
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # Simuler databasekald (automatisk sporet som afhængighed)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Simuler langsom operation
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -364,30 +366,30 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**File: `src/requirements.txt`**
+**Fil: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+Løs disse afhængigheder i dit projekt, test dem sammen, og fastlås de resulterende versioner. Nye projekter bør bruge Azure Monitor OpenTelemetry, ikke de pensionerede OpenCensus Python eksportører.
 
 ---
 
 ### Trin 5: Udrul og verificer
 
 ```bash
-# Initialiser AZD
-azd init
-
-# Udrul (opretter Application Insights automatisk)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# Hent app-URL
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# Generer telemetri
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -404,47 +406,42 @@ curl $APP_URL/api/slow
 
 ---
 
-### Trin 6: Se telemetri i Azure-portalen
+### Trin 6: Vis telemetri i Azure Portal
 
 ```bash
-# Hent Application Insights-detaljer
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Åbn i Azure-portalen
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Naviger til Azure-portalen → Application Insights → Transaction Search**
+**Naviger til Azure Portal → Application Insights → Transaction Search**
 
 Du bør se:
-- ✅ HTTP-forespørgsler med statuskoder
+- ✅ HTTP-anmodninger med statuskoder
 - ✅ Anmodningsvarighed (3+ sekunder for `/api/slow`)
 - ✅ Undtagelsesdetaljer fra `/api/error-test`
 - ✅ Brugerdefinerede logbeskeder
 
 ---
 
-## Lektion 2: Brugerdefineret telemetri og hændelser
+## Lektion 2: Brugerdefineret Telemetri og Begivenheder
 
-### Spor forretningshændelser
+### Spor forretningsbegivenheder
 
-Lad os tilføje brugerdefineret telemetri for forretningskritiske hændelser.
+Lad os tilføje brugerdefineret telemetri for forretningskritiske begivenheder.
 
-**File: `src/telemetry.py`**
+**Fil: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # Opsæt logger
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # Opsæt metrikeksportør
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # Opsæt tracer
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# Global telemetri-klient
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### Opdater applikationen med brugerdefinerede hændelser
+### Opdater applikation med brugerdefinerede begivenheder
 
-**File: `src/app.py` (udvidet)**
+**Fil: `src/app.py` (forbedret)**
+
+Tilføj disse routes til den eksisterende Flask-applikation; behold de tidligere helbredstest-routes. Det forkortede blok nedenfor viser en separat app for klarhed. Telemetriinitialisering bor nu i `telemetry.py`—initialiser ikke eksportører to gange.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # Spor forretningsbegivenhed
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Spor indtægtsmetrik
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # Simuler søgning (ville være en rigtig databaseforespørgsel)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Konverter til ms
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # Spor søgehændelse
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Spor søgeydelsesmetrik
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # Simuler kald til ekstern API
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # Spor afhængighed
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -619,20 +589,20 @@ if __name__ == '__main__':
 ### Test brugerdefineret telemetri
 
 ```bash
-# Spor købshændelse
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# Spor søgehændelse
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# Spor ekstern afhængighed
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
-**Se i Azure-portalen:**
+**Vis i Azure Portal:**
 
 Naviger til Application Insights → Logs, og kør derefter:
 
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -665,13 +635,13 @@ traces
 
 ---
 
-## Lektion 3: Distribueret sporing for mikrotjenester
+## Lektion 3: Distribueret Tracing for Mikrotjenester
 
-### Aktivér sporing på tværs af tjenester
+### Aktiver cross-service tracing
 
-For mikrotjenester korrelerer Application Insights automatisk forespørgsler på tværs af tjenester.
+Med kompatibel instrumentering og W3C trace-context propagation korrelerer Application Insights anmodninger på tværs af tjenester. Deling af en forbindelse streng alene etablerer ikke parent-child spans. Det følgende arkitekturfragment refererer til moduler, du skal implementere.
 
-**File: `infra/main.bicep`**
+**Fil: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### Se end-to-end-transaktion
+### Vis end-to-end transaktion
 
 ```mermaid
 sequenceDiagram
-    participant User as Bruger
-    participant Gateway as API-gateway<br/>(Spor-id: abc123)
-    participant Product as Produktservice<br/>(Overordnet id: abc123)
-    participant Order as Ordreservice<br/>(Overordnet id: abc123)
-    participant AppInsights as Applikationsindsigt
+    participant User
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
+    participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Start spor: abc123
-    Gateway->>AppInsights: Log forespørgsel (Spor-id: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: Overordnet id: abc123
-    Product->>AppInsights: Log afhængighedsopkald
-    Product-->>Gateway: Produktdetaljer
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: Overordnet id: abc123
-    Order->>AppInsights: Log afhængighedsopkald
-    Order-->>Gateway: Ordre oprettet
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: Checkout fuldført
-    Gateway->>AppInsights: Log svar (Varighed: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: Korrelering efter spor-id
+    Note over AppInsights: Correlation by Trace ID
 ```
-**Forespørg end-to-end-trace:**
+
+**Forespørg end-to-end trace:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,11 +759,11 @@ dependencies
 
 ---
 
-## Lektion 4: Live-målinger og realtidsmonitorering
+## Lektion 4: Live Metrics og Realtidsmonitorering
 
-### Aktivér Live Metrics-stream
+### Aktiver Live Metrics Stream
 
-Live Metrics giver realtidstelemetri med <1 sekunds latenstid.
+Live Metrics giver næsten realtids telemetri når understøttet og aktiveret af SDK'en. Det er ikke en latenstid SLA. Python OpenTelemetry setup'et ovenfor inkluderer det med `enable_live_metrics=True`.
 
 **Adgang til Live Metrics:**
 
@@ -807,46 +778,46 @@ echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME 
 ```
 
 **Hvad du ser i realtid:**
-- ✅ Indgående anmodningshastighed (requests/sec)
+- ✅ Indkommende anmodningshastighed (anmodninger/sek)
 - ✅ Udgående afhængighedskald
 - ✅ Antal undtagelser
 - ✅ CPU- og hukommelsesforbrug
-- ✅ Antal aktive servere
-- ✅ Sample telemetri
+- ✅ Aktiv serverantal
+- ✅ Eksempeltelemetri
 
 ### Generer belastning til test
 
 ```bash
-# Generer belastning for at se live-målinger
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Se live-målinger i Azure-portalen
-# Du bør se en stigning i anmodningsraten
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
 
 ## Praktiske øvelser
 
-### Øvelse 1: Opret alarmer ⭐⭐ (Mellem)
+### Øvelse 1: Opsæt advarsler ⭐⭐ (Mellem)
 
-**Mål**: Opret alarmer for høj fejlrate og langsomme responser.
+**Mål**: Opret advarsler for høje fejlhastigheder og langsomme svartider.
 
 **Trin:**
 
-1. **Opret alarm for fejlrate:**
+1. **Opret advarsel for fejlhastighed:**
 
 ```bash
-# Hent Application Insights-ressource-id
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Opret metrisk alarm for mislykkede anmodninger
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,10 +825,10 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
-2. **Opret alarm for langsomme responser:**
+2. **Opret advarsel for langsomme svar:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,9 +841,9 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Opret alarm via Bicep (foretrukket for AZD):**
+3. **Opret advarsel via Bicep (foretrukket for AZD):**
 
-**File: `infra/core/alerts.bicep`**
+**Fil: `infra/core/alerts.bicep`**
 
 ```bicep
 param applicationInsightsId string
@@ -944,31 +915,31 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **Test alarmer:**
+4. **Test advarsler:**
 
 ```bash
-# Generer fejl
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Generer langsomme svar
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Tjek alarmstatus (vent 5-10 minutter)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
 **✅ Succeskriterier:**
-- ✅ Alarmer oprettet succesfuldt
-- ✅ Alarmer udløses, når tærskler overskrides
-- ✅ Kan se alarmhistorik i Azure-portalen
-- ✅ Integreret med AZD-udrulning
+- ✅ Advarsler oprettet succesfuldt
+- ✅ Advarsler aktiveres når tærskler overskrides
+- ✅ Kan se advarselshistorik i Azure Portal
+- ✅ Integreret med AZD udrulning
 
 **Tid**: 20-25 minutter
 
@@ -976,25 +947,25 @@ az monitor metrics alert list \
 
 ### Øvelse 2: Opret brugerdefineret dashboard ⭐⭐ (Mellem)
 
-**Mål**: Byg et dashboard, der viser centrale applikationsmålinger.
+**Mål**: Byg et dashboard der viser nøgleapplikationsmålinger.
 
 **Trin:**
 
-1. **Opret dashboard via Azure-portalen:**
+1. **Opret dashboard via Azure Portal:**
 
-Naviger til: Azure-portalen → Dashboards → Nyt dashboard
+Naviger til: Azure Portal → Dashboards → Nyt Dashboard
 
 2. **Tilføj fliser for nøglemålinger:**
 
-- Antal forespørgsler (seneste 24 timer)
+- Antal anmodninger (sidste 24 timer)
 - Gennemsnitlig svartid
 - Fejlrate
 - Top 5 langsomste operationer
-- Geografisk fordeling af brugere
+- Geografisk brugerfordeling
 
 3. **Opret dashboard via Bicep:**
 
-**File: `infra/core/dashboard.bicep`**
+**Fil: `infra/core/dashboard.bicep`**
 
 ```bicep
 param dashboardName string
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1065,8 +1046,8 @@ output dashboardId string = dashboard.id
 
 4. **Udrul dashboard:**
 
-```bash
-# Tilføj til main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,14 +1057,16 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# Udrul
+```bash
+# Deploy
 azd up
 ```
 
 **✅ Succeskriterier:**
 - ✅ Dashboard viser nøglemålinger
-- ✅ Kan fastgøres til Azure-portalen startside
+- ✅ Kan fastgøres til Azure Portals startside
 - ✅ Opdateres i realtid
 - ✅ Kan udrulles via AZD
 
@@ -1093,13 +1076,13 @@ azd up
 
 ### Øvelse 3: Overvåg AI/LLM-applikation ⭐⭐⭐ (Avanceret)
 
-**Mål**: Spor brug af Microsoft Foundry-modeller (tokens, omkostninger, latenstid).
+**Mål**: Spor Microsoft Foundry Models forbrug (tokens, omkostninger, latenstid).
 
 **Trin:**
 
 1. **Opret AI-overvågningswrapper:**
 
-**File: `src/ai_telemetry.py`**
+**Fil: `src/ai_telemetry.py`**
 
 ```python
 from telemetry import telemetry
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # Kald Microsoft Foundry-modeller
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # Ekstraher brug
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Beregn omkostninger (gpt-4.1-priser)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0,03 pr. 1K tokener
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0,06 pr. 1K tokener
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # Spor brugerdefineret hændelse
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # Spor målinger
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# Initialiser overvåget OpenAI-klient
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Kald med automatisk overvågning
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1222,7 +1211,7 @@ def chat():
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1253,8 +1242,8 @@ traces
 **✅ Succeskriterier:**
 - ✅ Hvert OpenAI-kald spores automatisk
 - ✅ Tokenforbrug og omkostninger synlige
-- ✅ Latenstid overvåges
-- ✅ Kan opsætte budgetalarmer
+- ✅ Latenstid overvåget
+- ✅ Kan sætte budgetadvarsler
 
 **Tid**: 35-45 minutter
 
@@ -1264,32 +1253,19 @@ traces
 
 ### Samplingstrategier
 
-Kontrollér omkostninger ved sampling af telemetri:
+Kontroller omkostninger ved sampling af telemetri:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# Udvikling: 100% prøvetagning
-sampler = ProbabilitySampler(rate=1.0)
-
-# Produktion: 10% prøvetagning (reducerer omkostningerne med 90%)
-sampler = ProbabilitySampler(rate=0.1)
-
-# Adaptiv prøvetagning (justerer sig automatisk)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**I Bicep:**
+Trace sampling reducerer ikke hver telemetrikategori med 90%. Målinger og uafhængigt udsendte logs har brug for egne volumenkontroller. Vælg rate ud fra observabilitetsbehov, ikke et generelt produktionsforbud.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+Indstil SDK-sampling eksplicit; komponentens `SamplingPercentage` property er ikke en erstatning for at konfigurere Python OpenTelemetry sampler.
 
 ### Dataopbevaring
 
@@ -1305,38 +1281,38 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 ### Månedlige omkostningsestimater
 
-| Datavolumen | Bevaring | Månedlig pris |
-|-------------|----------|---------------|
+| Datavolumen | Opbevaring | Månedlig omkostning |
+|-------------|-----------|---------------------|
 | 1 GB/måned | 30 dage | ~$2-5 |
 | 5 GB/måned | 30 dage | ~$10-15 |
 | 10 GB/måned | 90 dage | ~$25-40 |
 | 50 GB/måned | 90 dage | ~$100-150 |
 
-**Gratis niveau**: 5 GB/måned inkluderet
+Disse tal er vejledende, ikke tilbud. Verificer indtagelse, opbevaring, advarsler og test priser i din region og aftale; gratis kvoter deles/afgrænses i henhold til Azure Monitor priser, ikke en garanteret gratis SKU per Application Insights-ressource.
 
 ---
 
-## Videnstjek
+## Fagligt checkpoint
 
-### 1. Grundlæggende integration ✓
+### 1. Grundlæggende Integration ✓
 
 Test din forståelse:
 
 - [ ] **Q1**: Hvordan opretter AZD Application Insights?
-  - **A**: Automatisk via Bicep-skabeloner i `infra/core/monitoring.bicep`
+  - **S**: Den deployerer overvågningsressourcer, der eksplicit er deklareret i projektets Bicep/Terraform skabeloner.
 
 - [ ] **Q2**: Hvilken miljøvariabel aktiverer Application Insights?
-  - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+  - **S**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: Hvad er de tre vigtigste telemetri-typer?
-  - **A**: Requests (HTTP-kald), Dependencies (eksterne kald), Exceptions (fejl)
+- [ ] **Q3**: Hvad er de tre hovedtyper af telemetri?
+  - **S**: Anmodninger (HTTP-kald), Afhængigheder (eksterne kald), Undtagelser (fejl)
 
-**Hands-On-verifikation:**
+**Praktisk verifikation:**
 ```bash
-# Kontroller, om Application Insights er konfigureret
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Bekræft, at telemetri sendes
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1349,16 +1325,16 @@ az monitor app-insights metrics show \
 
 Test din forståelse:
 
-- [ ] **Q1**: Hvordan sporer du brugerdefinerede forretningshændelser?
-  - **A**: Brug logger med `custom_dimensions` eller `TelemetryClient.track_event()`
+- [ ] **Q1**: Hvordan sporer du brugerdefinerede forretningsbegivenheder?
+  - **S**: Denne lektions wrapper skriver strukturerede OTel-logs med `event_name` attributter, der kan forespørges i `traces`; de er ikke automatisk `customEvents`.
 
-- [ ] **Q2**: Hvad er forskellen mellem hændelser og målinger?
-  - **A**: Hændelser er diskrete forekomster, målinger er numeriske målinger
+- [ ] **Q2**: Hvad er forskellen på begivenheder og målinger?
+  - **S**: Begivenheder er diskrete hændelser, målinger er numeriske værdier
 
 - [ ] **Q3**: Hvordan korrelerer du telemetri på tværs af tjenester?
-  - **A**: Application Insights bruger automatisk `operation_Id` til korrelation
+  - **S**: Application Insights bruger automatisk `operation_Id` til korrelation
 
-**Hands-On-verifikation:**
+**Praktisk verifikation:**
 ```kusto
 // Verify custom events
 traces
@@ -1368,61 +1344,57 @@ traces
 
 ---
 
-### 3. Produktionsovervågning ✓
+### 3. Produktionsmonitorering ✓
 
 Test din forståelse:
 
 - [ ] **Q1**: Hvad er sampling, og hvorfor bruge det?
-  - **A**: Sampling reducerer datavolumen (og omkostninger) ved kun at indfange en procentdel af telemetrien
+  - **S**: Sampling reducerer datavolumen (og omkostninger) ved kun at fange en procentdel af telemetrien
 
-- [ ] **Q2**: Hvordan opsætter du alarmer?
-  - **A**: Brug metrikalarmer i Bicep eller i Azure-portalen baseret på Application Insights-målinger
+- [ ] **Q2**: Hvordan opsætter du advarsler?
+  - **S**: Brug metrisk advarsler i Bicep eller Azure Portal baseret på Application Insights målinger
 
-- [ ] **Q3**: Hvad er forskellen mellem Log Analytics og Application Insights?
-  - **A**: Application Insights gemmer data i et Log Analytics-workspace; App Insights leverer applikationsspecifikke visninger
+- [ ] **Q3**: Hvad er forskellen på Log Analytics og Application Insights?
+  - **S**: Application Insights gemmer data i Log Analytics arbejdsområde; App Insights giver applikationsspecifikke visninger
 
-**Hands-On-verifikation:**
+**Praktisk verifikation:**
 ```bash
-# Kontroller konfigurationen for prøvetagning
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
 
-## Bedste praksis
+## Best Practices
 
 ### ✅ GØR:
 
-1. **Brug korrelations-ID'er**
+1. **Brug korrelations-IDs**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. **Opsæt alarmer for kritiske målinger**
+2. **Opsæt advarsler for kritiske målinger**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
 3. **Brug struktureret logging**
    ```python
-   # ✅ GOD: Struktureret
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ DÅRLIG: Ustruktureret
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
 4. **Overvåg afhængigheder**
    ```python
-   # Spor automatisk databasekald, HTTP-forespørgsler osv.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
 5. **Brug Live Metrics under udrulninger**
@@ -1431,47 +1403,47 @@ az monitor app-insights component show \
 
 1. **Log ikke følsomme data**
    ```python
-   # ❌ DÅRLIG
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ GOD
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **Brug ikke 100% sampling i produktion**
+2. **Vælg ikke sampling uden at måle volumen og diagnostiske behov**
    ```python
-   # ❌ Dyr
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ Omkostningseffektiv
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
 3. **Ignorer ikke dead letter queues**
 
-4. **Glem ikke at sætte begrænsninger for dataopbevaring**
+4. **Glem ikke at sætte grænser for dataopbevaring**
 
 ---
 
 ## Fejlfinding
 
-### Problem: Ingen telemetri vises
+### Problem: Ingen telemetry vises
 
 **Diagnose:**
 ```bash
-# Kontroller, at forbindelsesstrengen er angivet
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Kontroller applikationslogfiler via Azure Monitor
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# Eller brug Azure CLI til Container Apps:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Løsning:**
 ```bash
-# Kontroller forbindelsesstrengen i Container App
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1485,17 +1457,16 @@ az containerapp show \
 
 **Diagnose:**
 ```bash
-# Kontroller dataindtagelsen
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **Løsning:**
-- Reducer samplingsrate
-- Sænk opbevaringsperioden
-- Fjern detaljeret logging
+- Reducer samplingfrekvensen
+- Forkort opbevaringsperioden
+- Fjern detaljeret logning
 
 ---
 
@@ -1503,49 +1474,49 @@ az monitor app-insights metrics show \
 
 ### Officiel dokumentation
 - [Application Insights Oversigt](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights til Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query-sprog](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD-overvågning](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [Azure Monitor OpenTelemetry opsætning](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
+- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [AZD Overvågning](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### Næste skridt i dette kursus
+### Næste trin i dette kursus
 - ← Forrige: [Preflight Checks](preflight-checks.md)
 - → Næste: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Kursusforside](../../README.md)
+- 🏠 [Kursus Hjem](../../README.md)
 
 ### Relaterede eksempler
-- [Microsoft Foundry Models-eksempel](../../../../examples/azure-openai-chat) - AI telemetri
-- [Microservices-eksempel](../../../../examples/microservices) - Distribueret sporing
+- [Microsoft Foundry-modeller Eksempel](../../../../examples/azure-openai-chat) - AI telemetry
+- [Microservices Eksempel](../../../../examples/microservices) - Distribueret tracing
 
 ---
 
-## Opsummering
+## Resumé
 
 **Du har lært:**
-- ✅ Automatisk Application Insights-oprettelse med AZD
-- ✅ Brugerdefineret telemetri (hændelser, målinger, afhængigheder)
-- ✅ Distribueret sporing på tværs af mikrotjenester
-- ✅ Live-målinger og realtidsmonitorering
-- ✅ Alarmer og dashboards
-- ✅ Overvågning af AI/LLM-applikationer
-- ✅ Strategier for omkostningsoptimering
+- ✅ Automatisk Application Insights provisionering med AZD
+- ✅ Tilpasset telemetry (hændelser, målinger, afhængigheder)
+- ✅ Distribueret tracing på tværs af microservices
+- ✅ Live-målinger og overvågning i realtid
+- ✅ Alarmfunktioner og dashboards
+- ✅ AI/LLM applikationsovervågning
+- ✅ Omkostningsoptimeringsstrategier
 
 **Vigtige pointer:**
-1. **AZD opsætter overvågning automatisk** - Ingen manuel opsætning
+1. **Deklarér overvågning eksplicit** - AZD deployer dine skabeloner; SDK-instrumentering sender telemetry
 2. **Brug struktureret logning** - Gør forespørgsler nemmere
-3. **Spor forretningsevents** - Ikke kun tekniske målinger
-4. **Overvåg AI-omkostninger** - Spor tokens og udgifter
+3. **Spor forretningstransaktioner** - Ikke kun tekniske målinger
+4. **Overvåg AI-omkostninger** - Spor tokens og forbrug
 5. **Opsæt alarmer** - Vær proaktiv, ikke reaktiv
 6. **Optimer omkostninger** - Brug sampling og opbevaringsgrænser
 
-**Næste skridt:**
+**Næste trin:**
 1. Gennemfør de praktiske øvelser
 2. Tilføj Application Insights til dine AZD-projekter
-3. Opret tilpassede dashboards til dit team
-4. Læs [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md)
+3. Lav tilpassede dashboards til dit team
+4. Lær [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

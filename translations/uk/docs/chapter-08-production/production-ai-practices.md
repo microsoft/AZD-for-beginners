@@ -1,44 +1,40 @@
-# Найкращі практики продуктивного AI-навантаження з AZD
+# Кращі практики робочих навантажень AI для виробництва з AZD
 
 **Навігація по розділах:**
-- **📚 Головна сторінка курсу**: [AZD For Beginners](../../README.md)
-- **📖 Поточний розділ**: Розділ 8 - Продуктові та корпоративні патерни
+- **📚 Домашня сторінка курсу**: [AZD для початківців](../../README.md)
+- **📖 Поточний розділ**: Розділ 8 - Виробничі та корпоративні шаблони
 - **⬅️ Попередній розділ**: [Розділ 7: Усунення несправностей](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Також пов’язано**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Завершення курсу**: [AZD For Beginners](../../README.md)
+- **⬅️ Також пов’язано**: [Лабораторія AI Workshop](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Завершення курсу**: [AZD для початківців](../../README.md)
 
 ## Огляд
 
-Цей посібник надає комплексні найкращі практики для розгортання готових до продукції AI-навантажень за допомогою Azure Developer CLI (AZD). На основі відгуків спільноти Microsoft Foundry Discord та реального досвіду клієнтів, ці практики охоплюють найпоширеніші проблеми в продуктивних AI-системах.
+Цей посібник пояснює шаблони проєктування AI для виробництва з використанням Azure Developer CLI (AZD). Це довідник із проєктування, а не готовий до розгортання застосунок або сертифікат для виробництва.
 
-## Основні розглянуті проблеми
+**Приклади межі:** Якщо явно не описано як завершені, фрагменти Bicep припускають параметри та ресурси, що посилаються, з контейнерного шаблону. Вони не включають хост-зображення/плани, ідентичності, призначення ролей, DNS, виводи та інші необхідні інтеграції. Шляхи сервісів YAML і скрипти хуків/тестів — це ілюстративні файли для створення у **вашому власному застосунку**; вони не надаються цим курсом. Використовуйте робочий зразок AZD як основу, скомпілюйте повну інфраструктуру та протестуйте її в ізольованому середовищі перед виробництвом.
 
-За результатами нашого опитування спільноти, ось топ-завдань, з якими стикаються розробники:
+## Основні вирішувані проблеми
 
-- **45%** мають труднощі з багатосервісними AI-розгортаннями
-- **38%** мають проблеми з управлінням обліковими даними та секретами  
-- **35%** вважають складною готовність до продукції та масштабування
-- **32%** потребують кращих стратегій оптимізації витрат
-- **29%** потребують покращеного моніторингу та усунення несправностей
+Загальні проблеми для виробництва включають розгортання багатосервісних застосунків, управління ідентичностями і секретами, масштабування, контроль витрат і моніторинг. Тут не претендується на вимірену поширеність.
 
-## Патерни архітектури для продуктивного AI
+## Архітектурні шаблони для виробничого AI
 
-### Патерн 1: Мікросервісна AI-архітектура
+### Шаблон 1: Архітектура AI на базі мікросервісів
 
-**Коли використовувати**: Складні AI-додатки з кількома можливостями
+**Коли використовувати**: складні AI-застосунки з кількома можливостями
 
 ```mermaid
 graph TD
-    Frontend[Веб-фронтенд] --- Gateway[API Gateway] --- LB[Балансувальник навантаження]
-    Gateway --> Chat[Сервіс Чату]
-    Gateway --> Image[Сервіс Зображень]
-    Gateway --> Text[Сервіс Тексту]
-    Chat --> OpenAI[Моделі Microsoft Foundry]
-    Image --> Vision[Комп'ютерний Зір]
-    Text --> DocIntel[Інтелект Документів]
+    Frontend[Web Frontend] --- Gateway[API Gateway] --- LB[Load Balancer]
+    Gateway --> Chat[Chat Service]
+    Gateway --> Image[Image Service]
+    Gateway --> Text[Text Service]
+    Chat --> OpenAI[Microsoft Foundry Models]
+    Image --> Vision[Computer Vision]
+    Text --> DocIntel[Document Intelligence]
 ```
 
-**Імплементація в AZD**:
+**Реалізація AZD**:
 
 ```yaml
 # azure.yaml
@@ -61,13 +57,13 @@ services:
     host: containerapp
 ```
 
-### Патерн 2: Обробка AI на основі подій
+### Шаблон 2: Подієво-орієнтована обробка AI
 
-**Коли використовувати**: Пакетна обробка, аналіз документів, асинхронні робочі процеси
+**Коли використовувати**: пакетна обробка, аналіз документів, асинхронні робочі процеси
 
 ```bicep
 // Event Hub for AI processing pipeline
-resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
+resource eventHub 'Microsoft.EventHub/namespaces@2024-01-01' = {
   name: eventHubNamespaceName
   location: location
   sku: {
@@ -78,7 +74,7 @@ resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
 }
 
 // Service Bus for reliable message processing
-resource serviceBus 'Microsoft.ServiceBus/namespaces@2022-10-01-preview' = {
+resource serviceBus 'Microsoft.ServiceBus/namespaces@2024-01-01' = {
   name: serviceBusNamespaceName
   location: location
   sku: {
@@ -110,46 +106,48 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Роздуми про здоров’я AI-агента
+Це створює фрагменти іменних просторів, а не хаби, черги, підписки чи тригери функцій. Виконувана функція також потребує хостинг-плану, конфігурації середовища виконання/зберігання, прикріпленої ідентичності, RBAC і мережевого доступу. Посилання на Key Vault потребує дозволу на читання секрету; URL кінцевої точки сам по собі не є обліковими даними.
 
-Коли традиційний веб-додаток ламається, прояви знайомі: сторінка не завантажується, API повертає помилку або розгортання не вдається. AI-застосунки можуть ламатися так само, але також поводяться більш делікатно, без очевидних повідомлень про помилки.
+## Роздуми про здоров’я AI агента
 
-Цей розділ допомагає побудувати ментальну модель моніторингу AI-навантажень, щоб знати, куди дивитися, якщо щось йде не так.
+Коли традиційний веб-застосунок ламається, симптоми знайомі: сторінка не завантажується, API повертає помилку або розгортання не вдається. Застосунки з AI можуть ламатися так само, але також можуть поводитися неправильно більш тонкими способами, які не дають очевидних помилок.
 
-### Чим здоров’я агента відрізняється від здоров’я традиційного додатка
+Цей розділ допоможе вам побудувати ментальну модель для моніторингу робочих навантажень AI, щоб знати, куди дивитись, коли щось не так.
 
-Традиційний додаток або працює, або ні. AI-агент може виглядати працюючим, але давати погані результати. Уявляйте здоров’я агента у двох шарах:
+### Чим здоров’я агента відрізняється від здоров’я традиційного застосунку
 
-| Шар | На що дивитися | Де шукати |
+Традиційні застосунки також можуть мати тонкі проблеми з коректністю. AI агент додає недетерміновану якість відповіді до звичних питань доступності й коректності. Розгляньте здоров’я агента на двох рівнях:
+
+| Рівень | На що дивитись | Де дивитись |
 |-------|--------------|---------------|
-| **Здоров’я інфраструктури** | Чи працює сервіс? Чи виділені ресурси? Чи досяжні кінцеві точки? | `azd monitor`, здоров’я ресурсів в Azure Portal, логи контейнерів/додатків |
-| **Здоров’я поведінки** | Чи відповідає агент точно? Чи відповіді вчасні? Чи коректно викликається модель? | трасування Application Insights, метрики затримки викликів моделі, логи якості відповідей |
+| **Здоров’я інфраструктури** | Сервіс працює? Ресурси надані? Кінцеві точки досяжні? | `azd monitor`, здоров’я ресурсу в Azure Portal, логи контейнерів/застосунку |
+| **Здоров’я поведінки** | Агент відповідає точно? Відповіді вчасні? Модель викликається коректно? | сліди Application Insights, метрики латентності виклику моделі, логи якості відповіді |
 
-Здоров’я інфраструктури знайоме — так само, як у будь-якого azd-додатка. Здоров’я поведінки — це новий шар, який вводять AI-навантаження.
+Здоров’я інфраструктури знайоме — воно однакове для будь-якого застосунку azd. Здоров’я поведінки — це новий рівень, який вводять робочі навантаження AI.
 
-### Куди дивитися, коли AI-додатки поводяться не так, як очікувалося
+### Куди дивитись, коли AI-застосунки поводяться не так, як очікувалося
 
-Якщо ваш AI-додаток не дає бажаних результатів, ось концептуальний чекліст:
+Якщо ваш AI-застосунок не дає очікуваних результатів, ось концептуальний чеклист:
 
-1. **Почніть з основ.** Чи запущено додаток? Чи він може звертатись до своїх залежностей? Перевірте `azd monitor` і здоров’я ресурсів, як для звичайного додатку.
-2. **Перевірте підключення до моделі.** Чи успішно ваше додаток викликає AI-модель? Невдалі або з тайм-аутом виклики моделі — найпоширеніша причина проблем і будуть видно в логах додатку.
-3. **Подивіться, що модель отримала.** Відповіді AI залежать від вводу (промпт і будь-який витягнутий контекст). Якщо вихід некоректний, вхід зазвичай неправильний. Перевірте, чи ваше додаток надсилає в модель правильні дані.
-4. **Перевірте затримку відповіді.** Виклики AI-моделі повільніші, ніж звичайні API-виклики. Якщо додаток здається повільним, перевірте, чи збільшився час відповіді моделі — це може свідчити про обмеження пропускної здатності, ліміти потужності або затори в регіоні.
-5. **Слідкуйте за сигналами вартості.** Несподівані сплески використання токенів або викликів API можуть вказувати на цикл, неправильно налаштований промпт або надмірні повторні спроби.
+1. **Почніть з основ.** Чи працює застосунок? Чи може він дістатися своїх залежностей? Перевірте `azd monitor` і здоров’я ресурсу так само, як і для будь-якого застосунку.
+2. **Перевірте підключення до моделі.** Чи ваш застосунок успішно викликає AI модель? Неуспішні або тайм-аут виклики моделі — найпоширеніша причина проблем AI-застосунку, вони з’являться у логах застосунку.
+3. **Безпечно перевірте введення і заземлення.** Неправильні відповіді можуть бути через отримання даних, інструкції, обмеження моделі або виконання інструментів. Використовуйте діагностичні дані з контролем доступу та редагуванням; не вмикайте необмежене логування запитів/відповідей у виробництві.
+4. **Перевірте затримку відповіді.** Виклики AI моделей повільніші за типові виклики API. Якщо застосунок здається повільним, перевірте збільшення часу відповіді моделі — це може вказувати на обмеження пропускної здатності, ліміти ємності або регіональні затори.
+5. **Слідкуйте за сигналами вартості.** Несподівані стрибки у використанні токенів або викликів API можуть означати цикл, некоректно налаштований запит або надмірні повторні спроби.
 
-Вам не потрібно відразу освоювати інструменти спостереження. Головне — AI-додатки мають додатковий шар поведінки для моніторингу, і вбудований моніторинг azd (`azd monitor`) дає відправну точку для дослідження обох шарів.
+Вам не потрібно одразу освоювати інструменти спостереження. Ключова думка — AI-застосунки мають додатковий рівень поведінки для моніторингу, і вбудований у azd моніторинг (`azd monitor`) дає відправну точку для розслідування обох рівнів.
 
 ---
 
-## Найкращі практики безпеки
+## Кращі практики безпеки
 
-### 1. Модель безпеки "нульова довіра"
+### 1. Модель безпеки з нульовою довірою (Zero-Trust)
 
-**Стратегія імплементації:**
-- Немає комунікацій між сервісами без автентифікації
+**Стратегія впровадження**:
+- Немає зв’язку сервіс до сервісу без автентифікації
 - Всі API виклики використовують керовані ідентичності
-- Ізоляція мережі за допомогою приватних кінцевих точок
-- Політики найменшого привілею для доступу
+- Ізоляція мережі з приватними кінцевими точками
+- Контроль доступу з найменшими повноваженнями
 
 ```bicep
 // Managed Identity for each service
@@ -161,7 +159,7 @@ resource chatServiceIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2
 // Role assignments with minimal permissions
 resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: openAIAccount
-  name: guid(openAIAccount.id, chatServiceIdentity.id, openAIUserRoleDefinitionId)
+  name: guid(openAIAccount.id, chatServiceIdentity.id, '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
     principalId: chatServiceIdentity.properties.principalId
@@ -172,7 +170,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Безпечне управління секретами
 
-**Патерн інтеграції з Key Vault**:
+**Шаблон інтеграції Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -183,7 +181,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
     tenantId: tenant().tenantId
     sku: {
       family: 'A'
-      name: 'premium'  // Use premium for production
+      name: 'standard' // Premium is needed for HSM-backed keys, not ordinary secrets
     }
     enableRbacAuthorization: true  // Use RBAC instead of access policies
     enablePurgeProtection: true    // Prevent accidental deletion
@@ -192,7 +190,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   }
 }
 
-// Store all AI service credentials
+// Optional legacy key-auth alternative; omit when using Entra ID.
 resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   parent: keyVault
   name: 'openai-api-key'
@@ -205,9 +203,11 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
+Призначте ідентичність середовища виконання `Key Vault Secrets User` у відповідному просторі та прив’яжіть її до хоста; сам по собі `enableRbacAuthorization` не дає доступу. Віддавайте перевагу автентифікації за керованою ідентичністю OpenAI з `disableLocalAuth: true`. Опціональний секрет ключа осмислений лише для навмисно активованого ключем облікового запису, і головному обліковому запису також потрібен дозвіл на запис секретів.
+
 ### 3. Мережева безпека
 
-**Налаштування приватних кінцевих точок**:
+**Конфігурація приватної кінцевої точки**:
 
 ```bicep
 // Virtual Network for AI services
@@ -265,11 +265,13 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
+Приватні кінцеві точки також потребують груп приватних зон DNS/VNet посилань і інтеграції застосунку з VNet. Вони автоматично не блокують публічний доступ: явним чином відключіть публічний мережевий доступ облікового запису AI після перевірки приватної доступності і доступу до розгортання.
+
 ## Продуктивність і масштабування
 
-### 1. Автоматичні стратегії масштабування
+### 1. Стратегії автоматичного масштабування
 
-**Автоматичне масштабування контейнерних додатків**:
+**Автоматичне масштабування Container Apps**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -315,10 +317,10 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. Стратегії кешування
 
-**Redis кеш для AI-відповідей**:
+**Кеш Redis для відповідей AI**:
 
 ```bicep
-// Redis Premium for production workloads
+// Legacy Azure Cache for Redis example (not recommended for new deployments)
 resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
   name: redisCacheName
   location: location
@@ -333,8 +335,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
     redisConfiguration: {
       'maxmemory-policy': 'allkeys-lru'
     }
-    // Enable clustering for high availability
-    redisVersion: '6.0'
+    // Sharding distributes data; replication/failover provides availability.
     shardCount: 2
   }
 }
@@ -343,7 +344,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Балансування навантаження та керування трафіком
+Azure Cache for Redis Basic/Standard/Premium перебуває на [шляху виведення з експлуатації](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Використовуйте Azure Managed Redis для нових проєктів та його документовані SKU, ідентичність та конфігурацію TLS замість копіювання цього застарілого ресурсу у нову виробничу систему. Лінія рядка з’єднання — нефункціональний заповнювач, а не облікові дані. Розбивайте ключі кешу за авторизацією, моделлю/інструкціями та версією отримання з терміном дії; спільний кеш лише для запитів може розкрити дані іншого користувача.
+
+### 3. Балансування навантаження і управління трафіком
 
 **Application Gateway з WAF**:
 
@@ -381,14 +384,18 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
+Це частковий ресурс шлюзу: для реального розгортання потрібні також підмережі шлюзу/конфігурація IP, фронтенд IP та порти, TLS слухачі/сертифікати, налаштування HTTP бекенду/перевірки, правила маршрутизації та пріоритети, а також переглянута політика WAF. TLS ім’я хоста/SNI і автентифікація повинні відповідати бекенду Container App.
+
 ## 💰 Оптимізація витрат
 
-### 1. Правильний розмір ресурсів
+### 1. Вірний розмір ресурсів
 
 **Конфігурації для конкретного середовища**:
 
+Ці імена є **ілюстративними вхідними даними кастомного шаблону**, а не автоматичними налаштуваннями AZD. Спершу відобразіть кожен у `infra/main.parameters.json`/Bicep та конфігурації хоста. Наприклад, зразок RAG використовує `AZURE_SEARCH_SERVICE_SKU` та `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, а не загальні імена нижче. Задайте пам’ять Container Apps у підтримуваній одиниці, такій як `1Gi` у фактичному ресурсі. Застосуйте зміни інфраструктури за допомогою `azd up` або `azd provision`; сам `azd deploy` не застосовує зміни Bicep.
+
 ```bash
-# Середовище розробки
+# Development environment
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -396,7 +403,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Продуктивне середовище
+# Production environment  
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -408,16 +415,18 @@ azd env set CONTAINER_MEMORY 4.0
 ### 2. Моніторинг витрат та бюджети
 
 ```bicep
+// Supply the first day of the current UTC month, e.g. 2026-11-01T00:00:00Z.
+param budgetStartDate string
+
 // Cost management and budgets
-resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
-    amount: 2000  // $2000 monthly budget
+    amount: 2000  // In the billing currency, not necessarily USD
     category: 'Cost'
     notifications: {
       warning: {
@@ -446,38 +455,49 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
+Замініть приклади отримувачів і перевірте область/дозволи. Сповіщення бюджету використовують затримані дані білінгу і не обмежують витрати.
+
 ### 3. Оптимізація використання токенів
 
-**Управління вартістю OpenAI**:
+**Управління витратами OpenAI**:
+
+Це лише евристика на основі символів для перегляду інтерфейсу, **не** валідатор ліміту токенів моделі. Виробничий код має використовувати токенізатор, відповідний розгорнутій моделі, та враховувати системні інструкції, схеми інструментів, історію й бюджет виводу. Відхиляйте занадто великий користувацький запит, а не тихо обрізайте його.
 
 ```typescript
-// Оптимізація токенів на рівні застосунку
+// Application-level token optimization
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
   
   optimizePrompt(userInput: string, context: string): string {
     const availableTokens = this.maxTokens - this.reserveTokens;
-    const estimatedTokens = this.estimateTokens(userInput + context);
+    if (this.estimateTokens(userInput) + 8 >= availableTokens) {
+      throw new Error("User input exceeds the illustrative prompt budget");
+    }
+    const estimatedTokens = this.estimateTokens(userInput + context) + 8;
     
     if (estimatedTokens > availableTokens) {
-      // Усікати контекст, а не введення користувача
-      context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
+      // Truncate context, not user input
+      context = this.truncateContext(context, Math.max(0, availableTokens - this.estimateTokens(userInput) - 8));
     }
     
     return `${context}\n\nUser: ${userInput}`;
   }
   
   private estimateTokens(text: string): number {
-    // Приблизна оцінка: 1 токен ≈ 4 символи
+    // Rough estimation: 1 token ≈ 4 characters
     return Math.ceil(text.length / 4);
+  }
+
+  private truncateContext(text: string, estimatedBudget: number): string {
+    return text.slice(0, Math.max(0, estimatedBudget) * 4);
   }
 }
 ```
 
-## Моніторинг та спостереження
+## Моніторинг та спостережливість
 
-### 1. Вичерпні Application Insights
+### 1. Повний Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -488,8 +508,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   properties: {
     Application_Type: 'web'
     WorkspaceResourceId: logAnalyticsWorkspace.id
-    SamplingPercentage: 100  // Full sampling for AI apps
-    DisableIpMasking: false  // Enable for security
+    SamplingPercentage: 100  // Ingestion setting; review cost and SDK sampling separately
+    DisableIpMasking: false  // Retain IP masking
   }
 }
 
@@ -498,7 +518,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: 'ai-high-error-rate'
   location: 'global'
   properties: {
-    description: 'Alert when AI service error rate is high'
+    description: 'Alert when failed request count exceeds 10 in five minutes'
     severity: 2
     enabled: true
     scopes: [
@@ -522,23 +542,22 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Специфічний моніторинг AI
+### 2. Моніторинг, специфічний для AI
 
-**Кастомні дашборди для AI-метрик**:
+**Користувацькі панелі приладів для метрик AI**:
 
 ```json
-// Dashboard configuration for AI workloads
 {
   "dashboard": {
     "name": "AI Application Monitoring",
     "tiles": [
       {
         "name": "OpenAI Request Volume",
-        "query": "requests | where name contains 'openai' | summarize count() by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize count() by bin(timestamp, 5m)"
       },
       {
         "name": "AI Response Latency",
-        "query": "requests | where name contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
       },
       {
         "name": "Token Usage",
@@ -553,7 +572,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Перевірки здоров’я та моніторинг часу доступності
+Цей JSON — ескіз, визначений застосунком, а не імпортована схема панелі Azure portal. Запити для токенів/витрат вимагають, щоб ваш застосунок виводив саме ці метрики; AZD їх не створює. Підлаштуйте фільтри залежностей під ваші фактичні імена кінцевих точок/спанів моделі.
+
+### 3. Перевірки стану і моніторинг доступності
 
 ```bicep
 // Application Insights availability tests
@@ -570,7 +591,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
     Enabled: true
     Frequency: 300  // 5 minutes
     Timeout: 120    // 2 minutes
-    Kind: 'ping'
+    Kind: 'standard'
     Locations: [
       {
         Id: 'us-east-2-azr'
@@ -579,50 +600,24 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
         Id: 'us-west-2-azr'
       }
     ]
-    Configuration: {
-      WebTest: '''
-        <WebTest Name="AI Health Check" 
-                 Id="8d2de8d2-a2b0-4c2e-9a0d-8f9c9a0b8c8d" 
-                 Enabled="True" 
-                 CssProjectStructure="" 
-                 CssIteration="" 
-                 Timeout="120" 
-                 WorkItemIds="" 
-                 xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" 
-                 Description="" 
-                 CredentialUserName="" 
-                 CredentialPassword="" 
-                 PreAuthenticate="True" 
-                 Proxy="default" 
-                 StopOnError="False" 
-                 RecordedResultFile="" 
-                 ResultsLocale="">
-          <Items>
-            <Request Method="GET" 
-                     Guid="a5f10126-e4cd-570d-961c-cea43999a200" 
-                     Version="1.1" 
-                     Url="${webApp.properties.defaultHostName}/health" 
-                     ThinkTime="0" 
-                     Timeout="120" 
-                     ParseDependentRequests="True" 
-                     FollowRedirects="True" 
-                     RecordResult="True" 
-                     Cache="False" 
-                     ResponseTimeGoal="0" 
-                     Encoding="utf-8" 
-                     ExpectedHttpStatusCode="200" 
-                     ExpectedResponseUrl="" 
-                     ReportingName="" 
-                     IgnoreHttpStatusCode="False" />
-          </Items>
-        </WebTest>
-      '''
+    Request: {
+      RequestUrl: 'https://${webApp.properties.defaultHostName}/health'
+      HttpVerb: 'GET'
+      FollowRedirects: true
+      ParseDependentRequests: false
+    }
+    ValidationRules: {
+      ExpectedHttpStatusCode: 200
+      SSLCheck: true
+      SSLCertRemainingLifetimeCheck: 7
     }
   }
 }
 ```
 
-## Відновлення після аварій та висока доступність
+## Відновлення після катастроф і висока доступність
+
+Попередній тест припускає існування App Service `webApp` та ресурсу Application Insights. Стандартні тести доступності виставляються в рахунок та потребують досяжної кінцевої точки; програми тільки з приватним доступом потребують відповідного приватного дизайну моніторингу. Тести пінгу URL застаріли; використовуйте [стандартні тести доступності](https://learn.microsoft.com/azure/azure-monitor/app/availability).
 
 ### 1. Розгортання в кількох регіонах
 
@@ -634,16 +629,16 @@ services:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=eastus
+      AZURE_REGION: eastus
   api-secondary:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=westus2
+      AZURE_REGION: westus2
 ```
 
 ```bicep
-// Traffic Manager for global load balancing
+// Separate App Service topology, not the Container Apps declarations above
 resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = {
   name: trafficManagerProfileName
   location: 'global'
@@ -686,7 +681,9 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Резервне копіювання та відновлення даних
+Змінні середовища не вибирають розташування ресурсів. IaC має провізувати окремі регіональні хости і прив’язувати кожен сервіс тегами `resourceName` або `azd-service-name`. Приклад Traffic Manager — це **окрема топологія App Service** (`primaryAppService`/`secondaryAppService`), а не маршрутизація для декларацій Container Apps. Container Apps вимагає належним чином налаштованої зовнішньої кінцевої точки/front door, TLS/маршрутизації з власним доменом і перевірки стану.
+
+### 2. Резервне копіювання і відновлення даних
 
 ```bicep
 // Backup configuration for critical data
@@ -706,40 +703,13 @@ resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
   }
 }
 
-// Backup policy for AI models and data
-resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023-05-01' = {
-  parent: backupVault
-  name: 'ai-data-backup-policy'
-  properties: {
-    policyRules: [
-      {
-        backupParameters: {
-          backupType: 'Full'
-          objectType: 'AzureBackupParams'
-        }
-        trigger: {
-          schedule: {
-            repeatingTimeIntervals: [
-              'R/2024-01-01T02:00:00+00:00/P1D'  // Daily at 2 AM
-            ]
-          }
-          objectType: 'ScheduleBasedTriggerContext'
-        }
-        dataStore: {
-          datastoreType: 'VaultStore'
-          objectType: 'DataStoreInfoBase'
-        }
-        name: 'BackupDaily'
-        objectType: 'AzureBackupRule'
-      }
-    ]
-  }
-}
 ```
+
+Сам сховок не виконує резервне копіювання. Налаштуйте **специфічну для робочого навантаження підтримувану політику і екземпляр резервного копіювання**, початкові дозволи, зберігання і тести відновлення з використанням [матриць підтримки Azure Backup](https://learn.microsoft.com/azure/backup/backup-support-matrix). Для розгортання моделей Azure OpenAI немає загальної політики резервного копіювання Azure. Зберігайте дефініції інфраструктури/моделі в системі контролю версій; захищайте завантажені документи, дані застосунку та артефакти тонкого налаштування з використанням підтримуваних функцій резервного копіювання/експорту кожного сервісу. Чітко визначте і протестуйте RPO/RTO.
 
 ## DevOps та інтеграція CI/CD
 
-### 1. GitHub Actions робочий процес
+### 1. Робочий процес GitHub Actions
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -775,151 +745,123 @@ jobs:
           python scripts/test_ai_safety.py
           python scripts/validate_prompts.py
 
-  deploy-staging:
-    needs: test
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Staging
-        run: |
-          azd env select staging
-          azd deploy
-
-  deploy-production:
-    needs: test
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Production
-        run: |
-          azd env select production
-          azd deploy
-          
-      - name: Run Production Health Checks
-        run: |
-          python scripts/health_check.py --env production
 ```
 
-### 2. Валідація інфраструктури
+Це **частина робочого процесу тільки для тестування** і передбачає, що ви створили `requirements.txt`, `tests/`, а також два скрипти безпеки. Додайте автентифіковані завдання OIDC провізування/розгортання з [конфігурації CI/CD](#cicd-pipeline-configuration), з `needs: test`, надійним тригером push/manual і захищеними середовищами GitHub. Не розгортайте недовірений код pull-request з обліковими даними хмари. Новий раннер не має вибраного локального середовища AZD; подайте вхідні дані середовища/підписки/розташування і використовуйте `azd auth login`, а не тільки `azure/login`.
+
+### 2. Перевірка інфраструктури
 
 ```bash
 # scripts/validate_infrastructure.sh
 #!/bin/bash
+set -euo pipefail
 
 echo "Validating AI infrastructure deployment..."
 
-# Перевірте, чи всі необхідні служби працюють
-services=("openai" "search" "storage" "keyvault")
-for service in "${services[@]}"; do
-    echo "Checking $service..."
-    if ! az resource list --resource-type "Microsoft.CognitiveServices/accounts" --query "[?contains(name, '$service')]" -o tsv; then
-        echo "ERROR: $service not found"
+# Requires Azure CLI login and the resource group selected explicitly.
+: "${AZURE_RESOURCE_GROUP:?Set AZURE_RESOURCE_GROUP}"
+: "${AZURE_OPENAI_NAME:?Set AZURE_OPENAI_NAME}"
+: "${AZURE_OPENAI_CHAT_DEPLOYMENT:?Set the actual deployment name}"
+
+# A successful empty list is not proof that resources exist.
+types=("Microsoft.CognitiveServices/accounts" "Microsoft.Search/searchServices"
+       "Microsoft.Storage/storageAccounts" "Microsoft.KeyVault/vaults")
+for resource_type in "${types[@]}"; do
+    count=$(az resource list --resource-group "$AZURE_RESOURCE_GROUP" \
+        --resource-type "$resource_type" --query "length(@)" -o tsv)
+    if [[ "$count" -lt 1 ]]; then
+        echo "ERROR: No $resource_type found in $AZURE_RESOURCE_GROUP"
         exit 1
     fi
 done
 
-# Перевірте розгортання моделей OpenAI
+# Validate OpenAI model deployments
 echo "Validating OpenAI model deployments..."
-models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-4.1-mini"* ]]; then
-  echo "ERROR: Required model gpt-4.1-mini not deployed"
+state=$(az cognitiveservices account deployment show \
+  --name "$AZURE_OPENAI_NAME" --resource-group "$AZURE_RESOURCE_GROUP" \
+  --deployment-name "$AZURE_OPENAI_CHAT_DEPLOYMENT" \
+  --query "properties.provisioningState" -o tsv)
+if [[ "$state" != "Succeeded" ]]; then
+    echo "ERROR: Required model deployment is not provisioned successfully"
     exit 1
 fi
-
-# Перевірте підключення до AI-сервісу
-echo "Testing AI service connectivity..."
-python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Чекліст готовності до продукції
+Очікувано: нульовий код виходу і повідомлення про завершення лише тоді, коли всі очікувані типи існують, а іменоване розгортання моделі надане. Це перевіряє інвентаризацію/стан провізування, **не** здоров’я ресурсу, точну топологію, RBAC, мережеву досяжність або поведінку моделі. Підлаштуйте очікувані типи під вашу архітектуру, потім виконайте окремий автентифікований тест готовності застосунку.
+
+## Чеклист готовності до виробництва
 
 ### Безпека ✅
 - [ ] Всі сервіси використовують керовані ідентичності
-- [ ] Секрети зберігаються в Key Vault
-- [ ] Налаштовані приватні кінцеві точки
-- [ ] Впроваджені мережеві групи безпеки
-- [ ] RBAC з найменшим привілеєм
+- [ ] Секрети збережені в Key Vault
+- [ ] Приватні кінцеві точки налаштовані
+- [ ] Реалізовані мережеві групи безпеки
+- [ ] RBAC з найменшими повноваженнями
 - [ ] WAF увімкнено на публічних кінцевих точках
 
 ### Продуктивність ✅
-- [ ] Налаштоване автоматичне масштабування
-- [ ] Впроваджене кешування
-- [ ] Налаштоване балансування навантаження
-- [ ] CDN для статичного контенту
+- [ ] Налаштовано автоматичне масштабування
+- [ ] Реалізовано кешування
+- [ ] Налаштовано балансування навантаження
+- [ ] CDN для статичного вмісту
 - [ ] Пулінг підключень до бази даних
 - [ ] Оптимізація використання токенів
 
 ### Моніторинг ✅
-- [ ] Налаштований Application Insights
-- [ ] Визначені кастомні метрики
-- [ ] Налаштовані правила оповіщень
-- [ ] Створено дашборд
-- [ ] Впроваджені перевірки здоров’я
-- [ ] Політики збереження логів
+- [ ] Налаштовано Application Insights
+- [ ] Визначено кастомні метрики
+- [ ] Налаштовано правила оповіщень
+- [ ] Створено панель приладів
+- [ ] Реалізовано перевірки стану
+- [ ] Політики зберігання логів
 
 ### Надійність ✅
 - [ ] Розгортання в кількох регіонах
-- [ ] План резервного копіювання та відновлення
-- [ ] Впроваджені circuit breakers
+- [ ] План резервного копіювання і відновлення
+- [ ] Реалізовані запобіжники (Circuit breakers)
 - [ ] Налаштовані політики повторних спроб
-- [ ] Коректне деградування
-- [ ] Кінцеві точки для перевірки здоров’я
+- [ ] Плавне деградування
+- [ ] Кінцеві точки перевірки стану
 
 ### Управління витратами ✅
-- [ ] Налаштовані сповіщення про бюджет
-- [ ] Правильний розмір ресурсів
-- [ ] Застосовані знижки для dev/test середовищ
-- [ ] Придбані резервовані інстанси
-- [ ] Дашборд моніторингу витрат
+- [ ] Налаштовано оповіщення бюджету
+- [ ] Вірний розмір ресурсів
+- [ ] Застосовано знижки для dev/test
+- [ ] Закупівля зарезервованих інстансів
+- [ ] Панель моніторингу витрат
 - [ ] Регулярні огляди витрат
 
 ### Відповідність ✅
-- [ ] Відповідність вимогам розміщення даних
-- [ ] Увімкнене аудиторське логування
+- [ ] Вимоги до розташування даних дотримані
+- [ ] Увімкнено журналювання аудиту
 - [ ] Застосовані політики відповідності
-- [ ] Впроваджені базові заходи безпеки
+- [ ] Реалізовані базові стандарти безпеки
 - [ ] Регулярні оцінки безпеки
 - [ ] План реагування на інциденти
 
 ## Бенчмарки продуктивності
 
-### Типові виробничі метрики
+### Ілюстративні виробничі цілі
+
+Це приклади SLO для узгодження та навантажувального тестування, а не виміряні бенчмарки або гарантії. Затримка відповіді залежить від моделі/довжини виводу; місячні витрати токенів залежать від трафіку і цін, а не лише від кількості токенів.
 
 | Метрика | Ціль | Моніторинг |
 |--------|--------|------------|
-| **Час відповіді** | < 2 секунд | Application Insights |
-| **Доступність** | 99.9% | Моніторинг часу доступності |
-| **Рівень помилок** | < 0.1% | Логи додатку |
-| **Використання токенів** | < $500/місяць | Управління витратами |
-| **Конкурентні користувачі** | 1000+ | Навантажувальне тестування |
-| **Час відновлення** | < 1 година | Тести відновлення після аварій |
+| **Час відповіді** | < 2 секунди | Application Insights |
+| **Доступність** | 99.9% | Моніторинг Uptime |
+| **Рівень помилок** | < 0.1% | Логи застосунку |
+| **Витрати на модель** | < $500/місяць (приклад бюджету) | Управління витратами |
+| **Кількість одночасних користувачів** | 1000+ | Навантажувальне тестування |
+| **Час відновлення** | < 1 години | Тести аварійного відновлення |
 
-### Навантажувальне тестування
+### Тестування навантаження
+
+Нижче наведено ескіз інтерфейсу для скрипта тестування навантаження, **який ви маєте реалізувати**; цей репозиторій не містить `scripts/load_test.py`. Визначте навантаження на запити, автентифікацію, репрезентативні робочі обсяги, твердження щодо затримки/помилок перцентилів та ліміт витрат у вибраному інструменті тестування навантаження перед запуском:
 
 ```bash
-# Скрипт для навантажувального тестування AI-додатків
+# Load testing script for AI applications
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -927,182 +869,275 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Спільнотні найкращі практики
+## 🤝 Найкращі практики спільноти
 
 На основі відгуків спільноти Microsoft Foundry Discord:
 
-### Топ рекомендації від спільноти:
+### Головні рекомендації від спільноти:
 
-1. **Починайте з малого, масштабуйтесь поступово**: Починайте з базових SKU та нарощуйте залежно від реального навантаження
-2. **Моніторте все**: Налаштуйте комплексний моніторинг з першого дня
-3. **Автоматизуйте безпеку**: Використовуйте інфраструктуру як код для послідовної безпеки
-4. **Перевіряйте ретельно**: Включайте AI-специфічне тестування у ваш pipeline
-5. **Плануйте витрати**: Моніторте використання токенів і рано налаштовуйте оповіщення бюджету
+1. **Починайте з малого, масштабуйте поступово**: починайте з базових SKU і масштабуйте відповідно до фактичного використання
+2. **Моніторте все**: налаштуйте всебічний моніторинг з першого дня
+3. **Автоматизуйте безпеку**: використовуйте інфраструктуру як код для послідовної безпеки
+4. **Ретельно тестуйте**: включайте тестування, специфічне для AI, у ваш конвеєр
+5. **Плануйте витрати**: моніторте використання токенів і встановлюйте бюджетні сповіщення заздалегідь
 
-### Поширені помилки, яких слід уникати:
+### Типові помилки, яких слід уникати:
 
-- ❌ Хардкодити ключі API у коді
-- ❌ Не налаштовувати належний моніторинг
-- ❌ Ігнорувати оптимізацію витрат
-- ❌ Не тестувати сценарії відмов
-- ❌ Розгортати без перевірок здоров’я
+- ❌ Жорстке кодування API-ключів в коді
+- ❌ Відсутність налаштування належного моніторингу
+- ❌ Ігнорування оптимізації витрат
+- ❌ Відсутність тестування сценаріїв відмов
+- ❌ Розгортання без перевірок стану
 
-## AZD AI CLI команди та розширення
+## Команди та розширення AZD AI CLI
 
-AZD включає зростаючий набір AI-специфічних команд та розширень, які оптимізують продуктивні AI-робочі процеси. Ці інструменти з’єднують локальну розробку і продуктивне розгортання AI-навантажень.
+AZD включає зростаючий набір команд і розширень, специфічних для AI, які спрощують робочі процеси виробництва AI. Ці інструменти долають розрив між локальною розробкою та розгортанням у виробництві для AI-навантажень.
+
+> **Огляд випуску (2026-11-04):** Нижче наведені вказівки CLI перевірено відповідно до опублікованих релізів `azd` **1.37.2**, `azure.ai.agents` **1.0.0-beta.23**, і `azure.ai.evaluations` **1.0.0-beta.2**. Агентам beta.23 потрібен `azd >= 1.37.0`; оцінкам beta.2 потрібен `azd >= 1.33.0`. Використовуйте принаймні 1.37.0 для комбінованого робочого процесу. Це огляд документації/джерела, а не перевірка живого розгортання Azure.
 
 ### Розширення AZD для AI
 
-AZD використовує систему розширень для додавання AI-специфічних можливостей. Встановлюйте і керуйте розширеннями за допомогою:
+AZD використовує систему розширень для додавання специфічних для AI можливостей. Встановлюйте і керуйте розширеннями за допомогою:
 
 ```bash
-# Перелік усіх доступних розширень (включно з AI)
+# List all available extensions (including AI)
 azd extension list
 
-# Переглянути інформацію про встановлені розширення
+# Inspect installed extension details
+azd version
 azd extension show azure.ai.agents
 
-# Встановити розширення агентів Foundry
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Встановити розширення тонкого налаштування
+# Install the separate Foundry evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Встановити розширення користувацьких моделей
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Оновити всі встановлені розширення
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
 **Доступні AI-розширення:**
 
 | Розширення | Призначення | Статус |
-|-----------|---------|--------|
-| `azure.ai.agents` | Керування Foundry Agent Service | Preview |
-| `azure.ai.skills` | Повторно використовувані навички агента | Preview |
-| `azure.ai.connections` | Foundry connections (джерела даних, інструменти) | Preview |
-| `azure.ai.finetune` | Тонке налаштування моделей Foundry | Preview |
-| `azure.ai.models` | Користувацькі моделі Foundry | Preview |
-| `azure.coding-agent` | Конфігурація агента для кодування | Доступно |
+|-----------|------------|--------|
+| `azure.ai.agents` | Керування службою Foundry Agent | Попередній перегляд |
+| `azure.ai.evaluations` | Оцінкові набори даних, оцінювачі, групи оцінок і запуски | Попередній перегляд |
+| `azure.ai.skills` | Повторно використовувані навички агента | Попередній перегляд |
+| `azure.ai.connections` | З’єднання Foundry (джерела даних, інструменти) | Попередній перегляд |
+| `azure.ai.finetune` | Тонке налаштування моделей Foundry | Попередній перегляд |
+| `azure.ai.models` | Користувацькі моделі Foundry | Попередній перегляд |
+| `azure.coding-agent` | Конфігурація кодувального агента | Доступно |
 
-> Розширення `azure.ai.agents` швидко розвивається. Цей курс перевірено проти версії `0.1.40-preview`. Запустіть `azd extension upgrade --all`, щоб отримати найновіші команди, і `azd extension show azure.ai.agents`, щоб переконатися у версії.
+> Запустіть `azd extension list --installed` і `azd extension show azure.ai.evaluations` для перевірки встановлених версій. Спочатку оновіть основний CLI за допомогою [інструкцій з установки/оновлення](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) (для установки Windows winget: `winget upgrade Microsoft.Azd`), після чого виконайте `azd extension upgrade --all`. Команди основного `azd upgrade` відсутні. Ознайомтеся з критичними змінами перед оновленням виробничої автоматизації; не припускайте, що оновлення розширення зберігає старі формати команд або конфігурації.
 
-**Що таке нові розширення `skills` і `connections`?**
+### Останні зміни та виправлення у релізах
 
-Два прев’ю-розширення з’явилися разом із агентськими інструментами і є корисними для розуміння, навіть для початківців:
+| Реліз | Що змінено для цього курсу |
+|---------|-------------------------|
+| `azd 1.37.0` | Додає стабільні API для попереднього перегляду розгортання і виправляє редагування розширення, що перезаписують несуттєві налаштування `azure.yaml`. |
+| `azd 1.37.1` | Виправляє поширення Ctrl+C через розширення та розрізняє скасування/тайм-аути від загальних збоїв. |
+| `azd 1.37.2` | Покращує валідацію провізії: критичні попередження за замовчуванням **Ні**, у безконтрольних запусках – збої без підтвердження, а скасування пропускає післяпровізійні хуки. Також виправляє незрозумілі значення оточення в списках заперечень Deployment Stacks для увімкненої альфа-функції. |
+| Агенти `beta.22` | Міграція оцінок на `azd ai eval`, зміна оптимізації на GA v1 API, вимагає множини `toolboxes`, і розділяє керовані режими, голосові та довготривалі попередні перегляди. Виправляє вибір моделей та автентифікацію toolbox відповідно до оточення. |
+| Агенти `beta.23` | Відкриває `init --harness`; виправляє вивід відповіді A2A 0.3, недійсні шляхи/модулі prompt-agent в інфраструктурних шарах, діагностику тайм-аутів активації, і збережені попередження розробника RBAC. |
+| Оцінки `beta.2` | Вимагає конфігурацію оцінки у camelCase, додає створення статичних/симульованих розмов і явні джерела локальних файлів, а також виправляє обробку ідентичності/версії наборів даних, підрахунок якісних проходів і діагностику невдалих запусків. |
 
-- **`azure.ai.skills`** — **Навичка** — це повторно використовувана можливість (пакетний інструмент або поведінка), яку можна прикріпити до одного або кількох агентів замість повторної реалізації кожного разу. Це як спільний будівельний блок: визначте навичку "пошук в документації" або "перевірка замовлення" один раз, а потім використовуйте її у різних агентах. Це забезпечує консистентність мультиагентних систем (Розділ 5) і запобігає копіюванню та вставці.
-- **`azure.ai.connections`** — **Підключення** — це кероване посилання з вашого проекту Foundry до зовнішнього ресурсу, необхідного вашим агентам — джерела даних (наприклад, Azure AI Search), кінцевої точки інструменту або іншого сервісу. Підключення централізують **де** і **як** агенти отримують дані, тож облікові дані та кінцеві точки зберігаються в одному керованому місці, а не розкидані по коду.
+Таймаут активації агента не означає відмову розгортання: спочатку перевірте спробувану версію та її стан перед повторною спробою. Попередження RBAC розробника можуть залишатися навіть при успішній провізії; усуньте відсутність доступу перед викликом під тим розробником.
 
-Для першого розгортання агентів вони не потрібні — дотримуйтесь `azure.ai.agents` під час навчання. Використовуйте `skills`, коли дублюєте одні й ті ж інструменти між агентами, та `connections`, коли декілька агентів спільно використовують одне джерело даних.
+Джерела: [релізи AZD](https://github.com/Azure/azure-dev/releases), [реліз агентів beta.23](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [міграція агентів beta.22](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), та [реліз оцінок beta.2](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
 
-### Ініціалізація агентських проектів з `azd ai agent init`
+**Що таке нові розширення `skills` та `connections`?**
 
-Команда `azd ai agent init` створює проект AI-агента, готовий для продуктивності, з інтеграцією Microsoft Foundry Agent Service:
+Два розширення в попередньому перегляді з’явилися разом з інструментами агента і варто їх зрозуміти навіть як новачок:
+
+- **`azure.ai.skills`** — **навичка** це повторно використовувана можливість (упакований інструмент або поведінка), яку можна прикріпити до одного або кількох агентів замість повторного впровадження. Уявіть це як спільний будівельний блок: визначте навичку «пошуку в документації» або «перевірки замовлення» один раз і повторно використовуйте її серед агентів. Це забезпечує послідовність у багатофункціональних системах агентів (розділ 5) і уникає копіювання.
+- **`azure.ai.connections`** — **з’єднання** це кероване посилання з вашого проекту Foundry до зовнішнього ресурсу, необхідного агентам — джерело даних (наприклад, Azure AI Search), кінцева точка інструменту або інша служба. З’єднання централізують *де* і *як* агенти отримують доступ до даних, тому облікові дані та кінцеві точки зберігаються в одному контрольованому місці, а не розкидані по коду.
+
+Вам не потрібні ці функції для першого розгортання агентів — дотримуйтеся `azure.ai.agents` під час навчання. Використовуйте `skills`, коли дублюєте той самий інструмент серед агентів, і `connections`, коли кілька агентів спільно використовують одне джерело даних.
+
+### Ініціалізація агентських проєктів з `azd ai agent init`
+
+Команда `azd ai agent init` створює шаблон проекту агента Microsoft Foundry. Використовуйте актуальний шаблон проекту `azure.yaml`, а не спадковий явний маніфест агента:
 
 ```bash
-# Ініціалізувати новий проект агента з маніфесту агента
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize a new agent project from a local project template
+azd ai agent init --template ./templates/support-agent/azure.yaml
 
-# Ініціалізувати та націлити конкретний проект Foundry
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Initialize and target a specific Foundry project
+azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <foundry-project-id>
 
-# Ініціалізувати з власним каталогом джерела
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
-
-# Використовувати Container Apps як хост
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt the template into a different directory
+azd ai agent init --template ./templates/support-agent/azure.yaml --src ./agents/my-agent
 ```
 
-**Основні прапорці:**
+**Головні прапорці:**
 
 | Прапорець | Опис |
-|------|-------------|
-| `-m, --manifest` | Шлях або URI маніфесту агента для додавання у проект |
-| `-p, --project-id` | Існуючий Project ID Microsoft Foundry для вашого середовища azd |
-| `-s, --src` | Директорія для завантаження визначення агента (за замовчуванням `src/<agent-id>`) |
-| `--host` | Перевизначення стандартного хоста (наприклад, `containerapp`) |
+|----------|------|
+| `-t, --template` | Шлях або підтримуваний GitHub URI до документу проекту `azure.yaml` |
+| `-p, --project-id` | Існуючий Microsoft Foundry Project ID для вашого середовища azd |
+| `-s, --src` | Каталог джерел для створених агентів або цільовий каталог при прийнятті проекту |
+| `--kind` | Ініціалізує `hosted`, `prompt` або попередній перегляд агента `prompt-voice` |
+| `--harness` | Опційне середовище виконання для `--kind prompt`; вимагає підписки на попередній перегляд |
 | `-e, --environment` | Середовище azd для використання |
 
-**Порада для продуктивності**: Використовуйте `--project-id`, щоб підключатися безпосередньо до існуючого проекту Foundry, зберігаючи зв’язок коду агента та хмарних ресурсів з самого початку.
+`--manifest`/`-m` — це застарілий псевдонім для `--template`/`-t`; перейменування прапорця не перетворює старий маніфест у актуальний документ проекту. `--host containerapp` не є актуальним прапорцем agent-init. Для звичайного додатку Container Apps використовуйте `azd init --template` з шаблоном, що оголошує `host: containerapp`.
+
+Для існуючого проекту з точно одним сервісом `azure.ai.project`, `azd ai agent add support-agent --file ./agents/support-agent.yaml` додає або оновлює прямий опис агента без провізії або розгортання. Команди під час виконання не підтримують спадкові імпліцитні `agent.yaml`/AgentManifest і вкладені сервісні визначення `config:`; мігруйте їх на актуальний сервіс `azure.ai.agent`. Коли init виводить наступний крок `cd`, виконайте його перед `azd up`: init не змінює вашу робочу директорію shell.
+
+**Практична порада**: Використовуйте `--project-id`, щоб з’єднатися безпосередньо з існуючим проектом Foundry, зберігаючи зв’язок вашого коду агента та хмарних ресурсів із самого початку.
+
+#### Опційні функції попереднього перегляду
+
+Керований режим, голос і довготривалі виклики за замовчуванням окремо відключені. Встановлюйте лише перемикач для потрібної функції у **середовищі процесу shell/CI**, а не за допомогою `azd env set`:
+
+| Функція | Змінна середовища процесу |
+|---------|---------------------------|
+| Керований режим (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
+| Голос (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
+| Довготривалі виклики | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
+
+Наприклад, у Bash використовуйте `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` або в PowerShell — `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` перед запуском відповідної команди. Один перемикач не активує інші. Дивіться [початковий README агентів](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) для всіх перемикачів попереднього перегляду та обмежень.
 
 ### Керування життєвим циклом агента
 
-Окрім `init`, розширення `azure.ai.agents` забезпечує команди для повного життєвого циклу розміщеного агента – тестування, оцінки, оптимізації та виведення з експлуатації:
+Використовуйте `azure.ai.agents` для тестування, огляду, оптимізації та виведення з експлуатації агентів, а окреме розширення `azure.ai.evaluations` — для вимірювання якості:
 
 ```bash
-# Викликати розгорнутого агента та переглянути час відповіді сервера
-# (загальна затримка та час до першого байта)
+# Invoke a deployed agent and view server response timing
+# (total latency and time to first byte)
 azd ai agent invoke
 
-# Показати конфігурацію активного кінцевого пункту перед її зміною
+# Show the live endpoint configuration before changing it
 azd ai agent endpoint show
 
-# Згенерувати набір даних для оцінювання агента
-azd ai agent eval generate --dataset ./eval/dataset.jsonl
-
-# Оптимізувати інструкції агента на основі ваших оцінювальних даних
-# (потребує optimization_model у проекті агента)
-azd ai agent optimize
-
-# Завантажити розгорнуте джерело агента, основаного на коді
-# (з перевіркою SHA-256)
+# Download the deployed source of a code-based hosted agent
+# (with SHA-256 verification)
 azd ai agent code download
 
-# Видалити розміщеного агента та всі його версії
-# (--force завершує активні сесії)
+# Delete a hosted agent and all of its versions
+# (--force terminates active sessions)
 azd ai agent delete --force
 ```
 
-**Життєвий цикл коротко:**
+**Життєвий цикл на перший погляд:**
 
-| Етап | Команда | Використання у продукції |
-|-------|---------|----------------|
-| Тестування | `azd ai agent invoke` | Перевірка відповідей та вимірювання затримки перед релізом |
-| Перевірка | `azd ai agent endpoint show` | Огляд авторизації/конфігурації кінцевої точки; раннє виявлення помилок |
-| Вимірювання | `azd ai agent eval generate` | Створення повторюваного набору оцінки з реальних трас |
-| Покращення | `azd ai agent optimize` | Налаштування інструкцій на основі вимірюваної якості |
-| Відновлення | `azd ai agent code download` | Отримання точної розгорнутої версії коду для аудиту/відкату |
-| Виведення | `azd ai agent delete --force` | Чисте видалення агента та його версій |
+| Етап | Команда | Використання у продакшені |
+|-------|---------|--------------------------|
+| Тестування | `azd ai agent invoke` | Перевірка відповідей і вимірювання затримки перед релізом |
+| Огляд | `azd ai agent endpoint show` | Перевірка автентифікації/налаштувань кінцевої точки; раннє виявлення серйозних змін |
+| Вимірювання | `azd ai eval init`, `generate`, `run start` | Визначення, розгортання і виконання повторюваних оцінок |
+| Поліпшення | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Повторне використання сумісної оцінки для оптимізації агента |
+| Відновлення | `azd ai agent code download` | Відновлення точної розгорнутої версії для аудиту/відкату |
+| Виведення з експлуатації | `azd ai agent delete --force` | Очищення агента та його версій |
 
-> Це прев’ю-команди і вони можуть змінюватися між релізами розширень. Виконайте `azd ai agent --help`, щоб побачити актуальні підкоманди у вашій версії.
+> Це команди попереднього перегляду і можуть змінюватися між версіями розширень. Запустіть `azd ai agent --help`, щоб побачити точні підкоманди у вашій встановленій версії.
 
-### Протокол контексту моделі (MCP) з `azd mcp`
-AZD включає вбудовану підтримку MCP сервера (альфа-версія), що дозволяє AI агентам і інструментам взаємодіяти з вашими ресурсами Azure через стандартизований протокол:
+`endpoint show` підтримує хостовані, prompt і голосові агенти, але оновлення кінцевих точок доступні лише для хостованих; агенти робочого процесу не підтримуються. Завантаження коду і приклад виведення хостованого агента вище не є універсальними операціями для всіх типів агентів.
+
+#### Міграція оцінок і перевірка якості
+
+Починаючи з агентів **1.0.0-beta.22 (2026-10-23)**, застарілі команди `azd ai agent eval` надають інструкції для міграції замість колишнього робочого процесу оцінки. Не копіюйте старі приклади `eval generate --dataset ...`: оцінка тепер знаходиться під **`azd ai eval`**.
+
+В ініціалізованому проекті агента аутентифікуйтеся за допомогою `azd auth login`, підтвердіть вибране середовище/проект Foundry та встановіть `azure.ai.evaluations`. Для оцінки моделі судді потрібне розгортання моделі; генерація і симуляція розмов можуть вимагати власних виборів моделей і викликати додаткові витрати.
 
 ```bash
-# Запустіть сервер MCP для вашого проєкту
+# Scaffold evals/ and wire an azure.ai.eval service into azure.yaml
+azd ai eval init
+
+# Optionally synthesize a rubric and dataset from the agent
+azd ai eval generate
+
+# Review generated files, then register datasets, evaluators, and eval groups
+azd up
+
+# Start an evaluation and wait for its results
+azd ai eval run start --wait
+
+# Inspect runs and available test-case output
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+```
+
+Дотримуйтесь інтерактивних виборів і надрукованих наступних кроків замість припущень, що згенеровані ресурси вже зареєстровані. Конфігурація оцінки зазвичай розміщується у `evals/azure.eval.yaml`, на яку посилається сервіс `azure.ai.eval` у `azure.yaml`. Ключі мають бути **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); старі ключі конфігурації у snake_case відхиляються. Шляхи у посилальних конфігураціях розв’язуються відносно цього файлу, а не кореня репозиторію.
+
+Для оцінки розмов виберіть **статичну**, щоб оцінити готові стенограми без виклику агента, або **симуляцію**, щоб генерувати розмови за основою сценаріїв. Для симуляції потрібен цільовий агент, модель симулятора і окремий вибір моделі судді. Для безлюдних команд вкажіть вхідні дані, перелічені у `azd ai eval init --help` і `azd ai eval generate --help`; не припускайте, що модель генерації також є суддею або симулятором.
+
+Для CI налаштуйте явну політику якості за допомогою `azd ai eval run start --help` (`--fail-on`) і вважайте ненульовий вихід хоста невдачею. Завершений запуск не означає автоматического проходження якості. Перевірте рядки з помилками та діагностику; відсутність або невідповідність кількості результатів не є доказом успіху. Зареєстровані набори даних зберігають ідентичність/версію сервісу; `--max-samples` не може вибірково обробляти зареєстрований набір даних. Публікуйте навмисно менший набір даних або використовуйте підтримуване локальне джерело файлів.
+
+```bash
+# Example CI policy: at least 90% of all test cases must pass
+azd ai eval run start --wait --fail-on "pass-rate=0.9"
+```
+
+Прохідний поріг використовує кількість пройдених тестів, поділену на загальну кількість; невдалі, з помилками, пропущені та інші непройдені рядки враховуються проти нього. Не комбінуйте поріг з `--no-wait`, яка повертає результат раніше, ніж стає доступний вердикт.
+
+#### Міграція конфігурації оптимізації
+
+Оптимізація тепер використовує GA v1 API. Щоб повторно використати сумісну **оцінку на рівні кроку, підкріплену набором даних** з нового робочого процесу:
+
+```bash
+# Replace placeholders with the evaluation name and optimizer model deployment
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+`--eval` вибирає оцінку; `--eval-config` вибирає її конфігураційний файл (включно з визначеннями на основі файлів). `--config` замість цього приймає **окремий запит на оптимізацію API** у форматі YAML або JSON. Не передавайте старого агента `eval.yaml` або нового `azure.eval.yaml` в `--config`, і не поєднуйте `--config` з `--eval`/`--eval-config`. Оцінки на основі розмов, трасування або моделювання не є взаємозамінними з оптимізаційним скороченням на основі набору даних; для цих сценаріїв використовуйте підтримуваний формат запиту на оптимізацію. Переглядайте кандидати перед застосуванням або розгортанням.
+
+Див. [довідку оцінок для переглянутого релізу](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) та [початковий код команди оптимізації для переглянутого релізу](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) для точних опцій.
+
+#### Попередній перегляд розгортання розміщеного агента лише для читання
+
+Для існуючого середовища, пов’язаного з Foundry, з уніфікованим сервісом `azure.ai.agent` від `kind: hosted`, порівняйте підтримувану конфігурацію перед розгортанням:
+
+```bash
+azd deploy <service-name> --preview --no-prompt
+```
+
+Цей попередній перегляд не розгортає агента. Це не повний диференціал інфраструктури/безпеки: агенти підказок/голосу/робочих процесів, застарілі макети конфігурацій і деякі розміщені налаштування поза його сферою. Результат `unknown` не є дозволом на розгортання. Немає окремої команди `azd ai agent deploy` або агента `--dry-run`; використовуйте основний робочий процес розгортання.
+
+### Протокол контексту моделі (MCP) з `azd mcp`
+
+AZD має вбудовану підтримку MCP-сервера (альфа), що дозволяє AI-агентам і інструментам взаємодіяти з вашими ресурсами Azure через стандартизований протокол:
+
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# Перегляньте поточні правила згоди Copilot для виконання інструменту
+# Review current Copilot consent rules for tool execution
 azd copilot consent list
 ```
 
-MCP сервер надає контекст вашого проєкту azd — середовища, служби та ресурси Azure — інструментам розробки з підтримкою AI. Це дає змогу:
+MCP-сервер надає ваш контекст проекту azd — середовища, сервіси та ресурси Azure — інструментам розробки на основі штучного інтелекту. Це забезпечує:
 
-- **Розгортання з підтримкою AI**: дозвольте агентам кодувати, щоб вони могли запитувати стан вашого проєкту і запускати розгортання
-- **Виявлення ресурсів**: інструменти AI можуть з’ясувати, які ресурси Azure використовує ваш проєкт
-- **Керування середовищами**: агенти можуть перемикатися між середовищами розробки/staging/production
+- **Допомога при розгортанні за допомогою AI**: дає агентам коду можливість запитувати стан вашого проекту та запускати розгортання
+- **Виявлення ресурсів**: інструменти AI можуть виявляти, які ресурси Azure використовує ваш проект
+- **Управління середовищами**: агенти можуть перемикатися між середовищами розробки/стейджингу/продукції
 
-### Генерація інфраструктури за допомогою `azd infra generate`
+### Генерація інфраструктури з `azd infra generate`
 
-Для робочих навантажень AI у продакшені ви можете генерувати та налаштовувати Інфраструктуру як код, замість автоматичного надання:
+Для виробничих AI-навантажень ви можете генерувати та налаштовувати Інфраструктуру як код замість автоматичного забезпечення:
 
 ```bash
-# Генеруйте файли Bicep/Terraform з вашого визначення проекту
+# Generate supported infrastructure for this project type
 azd infra generate
 ```
 
-Це записує IaC на диск, щоб ви могли:
-- Переглянути та проаналізувати інфраструктуру перед розгортанням
-- Додати власні політики безпеки (правила мережі, приватні кінцеві точки)
-- Інтегрувати з існуючими процесами перегляду IaC
-- Версіонувати зміни інфраструктури окремо від коду програми
+Підтримка залежить від проекту/хозяїна і встановлених провайдерів; це не загальна команда зворотного інжинірингу для довільних ресурсів Azure і не обіцянка генерувати одночасно Bicep та Terraform. Запустіть `azd infra generate --help` і перевірте згенерований формат. Там, де підтримується, запис IaC на диск дає вам можливість:
+- Переглядати та проводити аудит інфраструктури перед розгортанням
+- Додавати власні політики безпеки (мережеві правила, приватні кінцеві точки)
+- Інтегрувати з існуючими процесами аудиту IaC
+- Контролювати версії змін інфраструктури окремо від коду додатка
 
-### Хуки життєвого циклу для продакшену
+### Хуки життєвого циклу виробництва
 
-Хуки AZD дозволяють вставляти власну логіку на кожному етапі життєвого циклу розгортання — критично важливо для робочих навантажень AI у продакшені:
+Хуки AZD дозволяють впроваджувати власну логіку на кожному етапі життєвого циклу розгортання — критично для виробничих AI-навантажень:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1113,7 +1148,7 @@ hooks:
     run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
   postprovision:
     shell: sh
-    run: scripts/configure-networking.sh  # Set up private endpoints
+    run: scripts/verify-networking.sh  # Verify IaC-provisioned private connectivity
   predeploy:
     shell: sh
     run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
@@ -1131,42 +1166,42 @@ services:
 ```
 
 ```bash
-# Запустити конкретний хук вручну під час розробки
+# Run a specific hook manually during development
 azd hooks run predeploy
 ```
 
-**Рекомендовані продакшен хукi для AI навантажень:**
+**Рекомендовані хуки виробництва для AI-навантажень:**
 
-| Hook | Використання |
+| Хук | Випадок використання |
 |------|----------|
 | `preprovision` | Перевірка квот підписки для ємності AI моделей |
-| `postprovision` | Налаштування приватних кінцевих точок, розгортання ваг моделей |
-| `predeploy` | Запуск тестів безпеки AI, перевірка шаблонів запитів |
-| `postdeploy` | Смок-тестування відповідей агентів, перевірка підключення моделей |
+| `postprovision` | Перевірка приватного підключення та необхідних виходів ресурсів |
+| `predeploy` | Запуск тестів безпеки AI, перевірка шаблонів підказок |
+| `postdeploy` | Тестування реакцій агента, перевірка підключення моделі |
 
 ### Налаштування CI/CD конвеєра
 
-Використовуйте `azd pipeline config`, щоб підключити ваш проєкт до GitHub Actions або Azure Pipelines із безпечним Azure-аутентифікатором:
+Використовуйте `azd pipeline config` для підключення вашого проекту до GitHub Actions або Azure Pipelines з безпечною аутентифікацією Azure:
 
 ```bash
-# Налаштуйте конвеєр CI/CD (інтерактивно)
+# Configure CI/CD pipeline (interactive)
 azd pipeline config
 
-# Налаштуйте з певним провайдером
+# Configure with a specific provider
 azd pipeline config --provider github
 ```
 
 Ця команда:
-- Створює сервісний принципал з найбільш обмеженими правами
-- Налаштовує федеративну автентифікацію (без збережених секретів)
-- Генерує або оновлює файл визначення вашого конвеєра
+- Створює або налаштовує особу конвеєра; переглядайте її сформовані області ролей/дозволи замість припущення мінімальних привілеїв
+- Налаштовує федеративні облікові дані (без збережених секретів)
+- Генерує або оновлює файл визначення конвеєра
 - Встановлює потрібні змінні середовища у вашій системі CI/CD
 
-#### Покроково: ваш перший конвеєр GitHub Actions
+#### Крок за кроком: ваш перший конвеєр GitHub Actions
 
-Ось повний посібник від робочого проєкту azd до автоматичних розгортань при кожному пуші.
+Ось повний покроковий процес від робочого проекту azd до автоматизованих розгортань при кожному пуші.
 
-**1. Переконайтеся, що ваш проєкт на GitHub**
+**1. Переконайтеся, що ваш проект знаходиться на GitHub**
 
 ```bash
 git init
@@ -1175,21 +1210,21 @@ git commit -m "Initial azd project"
 gh repo create my-ai-app --private --source=. --push
 ```
 
-**2. Запустіть pipeline config**
+**2. Запустіть конфігурацію конвеєра**
 
 ```bash
 azd pipeline config --provider github
 ```
 
 azd інтерактивно:
-- Запитає, яку підписку Azure та середовище використовувати
-- Створить реєстрацію додатку Entra **+ сервісний принципал** для конвеєра
-- Налаштує **федеративні облікові дані (OIDC)** — щоб GitHub аутентифікувався в Azure за допомогою токенів з коротким терміном дії і **без збереження секретів**
-- Додасть необхідні **змінні** до вашого GitHub репозиторію (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+- Запитає, яку підписку Azure і середовище цілити
+- Створить Entra **реєстрацію додатка + сервісний принципал** для конвеєра
+- Налаштує **федеративні облікові дані (OIDC)** — щоб GitHub аутентифікувався в Azure за допомогою короткочасних токенів і **без збереження секретів**
+- Надішле потрібні **змінні** у ваш репозиторій GitHub (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
 
-**3. Ознайомтеся зі згенерованим workflow**
+**3. Ознайомтеся з згенерованим робочим процесом**
 
-azd додає `.github/workflows/azure-dev.yml`. Основні частини виглядають так:
+Для підтримуваного шаблону налаштуйте/перегляньте `.github/workflows/azure-dev.yml`. Ключові частини виглядають так (шаблон має надавати набори інструментів і параметри середовища додатка):
 
 ```yaml
 # .github/workflows/azure-dev.yml
@@ -1223,40 +1258,40 @@ jobs:
         run: azd deploy --no-prompt
 ```
 
-**4. Перевірте, що це працює**
+**4. Перевірте, що все працює**
 
 ```bash
-# Натисніть зміни, щоб запустити конвеєр
+# Push a change to trigger the pipeline
 git commit -am "Trigger pipeline" --allow-empty
 git push
 ```
 
-Відкрийте вкладку **Actions** у вашому GitHub репозиторії та спостерігайте, як workflow автоматично запускає `azd provision` і `azd deploy`.
+Відкрийте вкладку **Actions** у вашому репозиторії GitHub і спостерігайте, як автоматично виконуються `azd provision` і `azd deploy`.
 
-> **Чому важливі федеративні облікові дані:** старі конвеєри зберігали клієнтський секрет в GitHub. Федеративні облікові дані OIDC повністю усувають цей секрет — GitHub запитує короткостроковий токен під час виконання, що є безпечнішим і не потребує ротації або ризику витоку. Це стандартна конфігурація `azd pipeline config`.
+> **Чому федеративні облікові дані важливі:** старі конвеєри зберігали секрет клієнта в GitHub. Федеративні облікові дані OIDC повністю усувають цей секрет — GitHub запитує короткочасний токен під час виконання, що є більш безпечним і не вимагає обертання або ризику витоку. Це налаштування за замовчуванням, яке встановлює `azd pipeline config`.
 
-> **Секрети проти змінних:** не чутливі ідентифікатори (`AZURE_CLIENT_ID` тощо) зберігаються у змінних репозиторію. Якщо ваш застосунок справді потребує секрету під час збірки, додайте його як GitHub **секрет** і звертайтесь до нього через `${{ secrets.NAME }}` — але віддавайте перевагу Key Vault + керованій ідентичності під час виконання (див. [Розділ 3](../chapter-03-configuration/authsecurity.md)).
+> **Секрети проти змінних:** не конфіденційні ідентифікатори (`AZURE_CLIENT_ID` тощо) розміщуються в репозиторії як **змінні**. Якщо вашому додатку дійсно потрібен секрет на етапі збірки, додайте його як GitHub **секрет** і посилайтеся на нього через `${{ secrets.NAME }}` — але надавайте перевагу Key Vault + керованій ідентичності під час виконання (див. [Розділ 3](../chapter-03-configuration/authsecurity.md)).
 
-**Продакшен workflow з pipeline config:**
+**Виробничий робочий процес з конфігурацією конвеєра:**
 
 ```bash
-# 1. Налаштуйте виробниче середовище
+# 1. Set up production environment
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. Налаштуйте конвеєр
+# 2. Configure the pipeline
 azd pipeline config --provider github
 
-# 3. Конвеєр запускає azd deploy при кожному пуші в main
+# 3. Review the generated trigger, provisioning/deployment steps, and approvals
 ```
 
-#### Покроково: Azure DevOps Pipelines
+#### Крок за кроком: Azure DevOps Pipelines
 
-Віддаєте перевагу Azure DevOps замість GitHub Actions? azd підтримує це рідною підтримкою через провайдера `azdo`. Потік майже ідентичний — azd створює файл конвеєра, створює сервісне з’єднання і налаштовує автентифікацію.
+Віддаєте перевагу Azure DevOps замість GitHub Actions? azd підтримує його нативно через провайдера `azdo`. Потік майже ідентичний — azd генерує файл конвеєра, створює сервісне підключення та налаштовує аутентифікацію.
 
-**1. Переконайтесь, що у вас є проєкт Azure DevOps**
+**1. Переконайтеся, що у вас є проект в Azure DevOps**
 
-Вам потрібна організація та проєкт на `https://dev.azure.com/<your-org>`. Створіть персональний токен доступу (PAT) із правами **Build (Read & execute)**, **Code (Read & write)** та **Service Connections (Read, query & manage)** – azd запропонує ввести його.
+Потрібна організація і проект в `https://dev.azure.com/<your-org>`. Згенеруйте Особистий токен доступу (PAT) з правами **Build (читання та виконання)**, **Code (читання і запис)** і **Service Connections (читання, запит і керування)** — azd запитає його у вас.
 
 **2. Налаштуйте конвеєр**
 
@@ -1265,17 +1300,17 @@ azd pipeline config --provider azdo
 ```
 
 azd:
-- Запитає вашу організацію Azure DevOps і проєкт
-- Створить (або переиспользує) **сервісне з’єднання** до Azure з використанням сервісного принципала
-- Налаштує **федеративну автентифікацію (OIDC)**, щоб не зберігати клієнтський секрет
-- Задіє `azure-dev.yml` файл з визначенням конвеєра у ваш репозиторій
+- Запитає вашу організацію Azure DevOps та проект
+- Створить (або повторно використає) **сервісне підключення** до Azure за допомогою сервісного принципала
+- Налаштує **федерацію робочих ідентичностей (OIDC)** так, що секрет клієнта не зберігається
+- Налаштує визначення конвеєра (звичайно `.azdo/pipelines/azure-dev.yml`) із шаблону конвеєра проекту
 
-**3. Перевірте згенерований `azure-dev.yml`**
+**3. Перегляньте згенерований конвеєр**
 
-azd створює конвеєр, який забезпечує провізію та розгортання при кожному пуші до `main`:
+Використовуйте згенерований конвеєр проекту, включно з його **Azure сервісним підключенням і кроками аутентифікації AZD**. Офіційний [посібник з налаштування Azure Pipelines](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) містить нижченаведений фрагмент інсталяції; це **тільки інсталяція**, а не робочий процес розгортання з аутентифікацією:
 
 ```yaml
-# azure-dev.yml
+# .azdo/pipelines/azure-dev.yml (installer fragment only)
 trigger:
   - main
 
@@ -1283,29 +1318,17 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  - task: setup-azd@1
+  - task: setup-azd@0
     displayName: Install azd
-
-  - script: azd provision --no-prompt
-    displayName: Provision Infrastructure
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
-
-  - script: azd deploy --no-prompt
-    displayName: Deploy Application
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
 ```
+
+Встановіть розширення AZD Azure DevOps, якщо завдання недоступне у вашій організації. Не копіюйте голі `azd provision`/`azd deploy` shell кроки без аутентифікації: наявність налаштованого сервісного підключення не означає автоматичний вхід у AZD для всіх процесів. Дотримуйтеся OIDC-логіну та контексту авторизованого завдання згенерованого шаблону і вказуйте вибране середовище/підписку/локацію.
 
 **4. Звідки беруться змінні**
 
-azd зберігає значення середовища (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) у **variable group** в Azure DevOps, щоб конвеєр міг їх читати. Ви можете переглядати та редагувати їх у **Pipelines → Library**.
+azd зберігає значення середовищ (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) у вигляді **групи змінних** в Azure DevOps, щоб конвеєр міг їх читати. Ви можете переглянути і редагувати їх у **Pipelines → Library**.
 
-> **Та сама перевага OIDC, що й у GitHub:** провайдер `azdo` також за замовчуванням налаштовує федеративний доступ через workload identity, тому сервісне з’єднання не зберігає клієнтський секрет — Azure DevOps обмінює короткостроковий токен під час виконання. Використовуйте `--auth-type client-credentials` лише якщо ваша організація ще не підтримує OIDC.
+> **Такий самий OIDC виграш, як у GitHub:** провайдер `azdo` також за замовчуванням налаштовує федерацію робочих ідентичностей, тому секрет клієнта не зберігається у сервісному підключенні — Azure DevOps обмінює короткочасний токен під час виконання. Передавайте `--auth-type client-credentials` лише в разі, якщо ваша організація ще не може використовувати OIDC.
 
 **5. Запустіть його**
 
@@ -1314,26 +1337,26 @@ git commit -am "Add Azure DevOps pipeline" --allow-empty
 git push
 ```
 
-Відкрийте **Pipelines** в Azure DevOps і дивіться, як запускаються `azd provision` та `azd deploy`.
+Відкрийте **Pipelines** в Azure DevOps, щоб спостерігати за виконанням `azd provision` і `azd deploy`.
 
 ### Додавання компонентів за допомогою `azd add`
 
-Поступово додавайте сервіси Azure до існуючого проєкту:
+Поступово додавайте сервіси Azure в існуючий проект:
 
 ```bash
-# Додати новий компонент сервісу інтерактивно
+# Add a new service component interactively
 azd add
 ```
 
-Це особливо корисно для розширення продакшен AI-застосунків — наприклад, додавання служби векторного пошуку, нового кінцевого пункту агента або компонента моніторингу до існуючого розгортання.
+Це особливо корисно для розширення виробничих AI-додатків — наприклад, додавання сервісу векторного пошуку, нової кінцевої точки агента або компонента моніторингу до існуючого розгортання.
 
 ## Додаткові ресурси
 
-- **Azure Well-Architected Framework**: [Рекомендації для AI навантажень](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure Well-Architected Framework**: [Рекомендації для AI-навантажень](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Документація Microsoft Foundry**: [Офіційна документація](https://learn.microsoft.com/azure/ai-studio/)
 - **Шаблони спільноти**: [Azure Samples](https://github.com/Azure-Samples)
-- **Спільнота Discord**: [Канал #Azure](https://discord.gg/microsoft-azure)
-- **Навички агентів для Azure**: [microsoft/github-copilot-for-azure на skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 відкритих навичок агентів для Azure AI, Foundry, розгортання, оптимізації вартості та діагностики. Встановіть у ваш редактор:
+- **Спільнота Discord**: [#Azure канал](https://discord.gg/microsoft-azure)
+- **Навички агента для Azure**: [microsoft/github-copilot-for-azure на skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) – багаторазові навички агента для Azure AI, Foundry, розгортання, оптимізації витрат і діагностики. Встановіть у вашому редакторі:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1341,13 +1364,13 @@ azd add
 ---
 
 **Навігація по розділах:**
-- **📚 Головна сторінка курсу**: [AZD For Beginners](../../README.md)
-- **📖 Поточний розділ**: Розділ 8 - Продакшен та корпоративні шаблони
+- **📚 Головна сторінка курсу**: [AZD Для початківців](../../README.md)
+- **📖 Поточний розділ**: Розділ 8 — Виробничі та корпоративні шаблони
 - **⬅️ Попередній розділ**: [Розділ 7: Усунення несправностей](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Також пов’язаний**: [AI Workshop Lab](ai-workshop-lab.md)
-- **� Завершення курсу**: [AZD For Beginners](../../README.md)
+- **⬅️ Також пов’язано**: [AI Workshop Lab](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Завершення курсу**: [AZD Для початківців](../../README.md)
 
-**Пам’ятайте:** робочі навантаження AI у продакшені потребують ретельного планування, моніторингу та постійної оптимізації. Починайте з цих шаблонів і адаптуйте їх під ваші конкретні вимоги.
+**Пам’ятайте**: Виробничі AI-навантаження вимагають ретельного планування, моніторингу та постійної оптимізації. Починайте з цих шаблонів і адаптуйте їх під свої конкретні вимоги.
 
 ---
 

@@ -1,73 +1,86 @@
 # Bijdragen aan AZD For Beginners
 
-Bedankt voor je interesse om bij te dragen aan de AZD For Beginners-cursus! Dit document biedt richtlijnen en informatie voor bijdragers.
+Dank u voor uw interesse in het bijdragen aan de cursus AZD For Beginners! Dit document biedt richtlijnen en informatie voor bijdragers.
 
 ## Hoe bij te dragen
 
 ### Problemen melden
 
-Als je bugs, fouten vindt of suggesties voor verbeteringen hebt:
+Als u fouten, bugs of suggesties voor verbeteringen vindt:
 
-1. **Controleer bestaande issues**: Zoek in [bestaande issues](https://github.com/microsoft/azd-for-beginners/issues) om duplicaten te voorkomen
-2. **Maak een nieuw issue aan**: Gebruik het juiste issue-sjabloon
-3. **Geef details**: Voeg stappen toe om het probleem te reproduceren, het verwachte gedrag en screenshots indien van toepassing
+1. **Controleer bestaande problemen**: Zoek in [bestaande issues](https://github.com/microsoft/azd-for-beginners/issues) om duplicaten te voorkomen
+2. **Maak een nieuw issue aan**: Gebruik de juiste issue-sjabloon
+3. **Geef details**: Voeg stappen toe om het probleem te reproduceren, verwacht gedrag, en screenshots indien van toepassing
 
 ### Wijzigingen voorstellen
 
-1. **Fork de repository**: Maak je eigen fork van het project
-2. **Maak een branch aan**: Maak een feature-branch voor je wijzigingen
-3. **Voer wijzigingen door**: Volg onze codeer- en documentatiestandaarden
-4. **Test je wijzigingen**: Controleer of alle links werken en de inhoud correct wordt weergegeven
-5. **Dien een pull request in**: Geef een duidelijke beschrijving van je wijzigingen
+1. **Fork de repository**: Maak een eigen fork van het project
+2. **Maak een branch aan**: Maak een feature-branch voor uw wijzigingen
+3. **Breng wijzigingen aan**: Volg onze codeer- en documentatiestandaarden
+4. **Test uw wijzigingen**: Controleer of alle links werken en inhoud correct wordt weergegeven
+5. **Dien een pull request in**: Geef een duidelijke omschrijving van uw wijzigingen
 
 ### Soorten bijdragen
 
 We verwelkomen de volgende soorten bijdragen:
 
 #### Inhoudsverbeteringen
-- Corrigeer typefouten, grammatica en opmaakproblemen
-- Verbeter de duidelijkheid van bestaande documentatie
+- Corrigeer typfouten, grammatica en opmaakproblemen
+- Verbeter de helderheid van bestaande documentatie
 - Werk verouderde informatie bij
 - Voeg ontbrekende uitleg of context toe
 
 #### Nieuwe voorbeelden
-- Voeg implementatiescenario's uit de praktijk toe
-- Maak nieuwe AZD-templates voor veelvoorkomende gebruikssituaties
+- Voeg praktijkgerichte implementatiescenario's toe
+- Maak nieuwe AZD-sjablonen voor veelvoorkomende gebruikssituaties
 - Bied extra codevoorbeelden en oefeningen
 
-#### Vertaalondersteuning
+#### Ondersteuning vertalingen
 - Help bij het onderhouden van bestaande vertalingen
-- Verbeter de vertaalkwaliteit
+- Verbeter de kwaliteit van vertalingen
 - Voeg vertalingen toe voor nieuwe inhoud
 
-#### Bugrapporten
-- Meld gebroken links of onjuiste codevoorbeelden
-- Identificeer inconsistenties in de documentatie
-- Geef toegankelijkheidsproblemen aan
+#### Bugrapportages
+- Meld kapotte links of onjuiste codevoorbeelden
+- Identificeer inconsistenties in documentatie
+- Markeer toegankelijkheidsproblemen
 
-## Richtlijnen voor bijdragen
+## Bijdragende richtlijnen
 
-### Documentatienormen
+### Documentatiestandaarden
 
-- Gebruik duidelijke, beginnervriendelijke taal
+- Gebruik heldere, voor beginners geschikte taal
 - Voeg leerdoelen en resultaten toe
-- Geef stapsgewijze instructies met verwachte uitvoer
+- Bied stapsgewijze instructies met verwachte uitkomsten
 - Voeg navigatielinks toe naar gerelateerde inhoud
-- Gebruik consistente opmaak en markdown-stijl
+- Gebruik consistente opmaak en markdownstijl
 
 ### Codevoorbeelden
 
-- Zorg ervoor dat alle codevoorbeelden getest en werkend zijn
-- Voeg opmerkingen toe die de belangrijkste concepten uitleggen
+- Zorg dat alle codevoorbeelden getest en werkend zijn
+- Voeg opmerkingen toe die kernconcepten uitleggen
 - Volg Azure- en AZD-best practices
-- Geef de verwachte uitvoer waar van toepassing
+- Geef waar van toepassing de verwachte uitvoer weer
+
+### Controleer Engelse documentatie
+
+Vanaf de root van de repository, installeer de bestaande ontwikkelvereisten en voer uit:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s .github/scripts -p "test_*.py"
+python .github/scripts/check_links.py
+python -m mkdocs build --strict --config-file workshop/mkdocs.yml
+```
+
+De offline linkchecker controleert Engelse Markdown/HTML-paden, koppen, expliciete ankers en lege link placeholders. Hij sluit gegenereerde `translations/` en `translated_images/` uit, inclusief links naar die mappen. Hij haalt geen externe websites op en valideert geen Azure-implementaties. Gebruik `--json <report-path>` om fouten en de externe URL-inventaris te exporteren voor een aparte netwerkcontrole. Verifieer huidige upstream-commando’s en voorbeeldvereisten bij het wijzigen van technische instructies; onderscheid geteste applicaties van ontwerpblauwdrukken.
 
 ### Commitberichten
 
-Gebruik duidelijke, beschrijvende commitberichten:
-- `docs: corrigeer typefout in installatiehandleiding`
-- `feat: voeg nieuw container-appvoorbeeld toe`
-- `fix: corrigeer gebroken link in hoofdstuk 2`
+Gebruik heldere, beschrijvende commitberichten:
+- `docs: fix typo in installation guide`
+- `feat: add new container app example`
+- `fix: correct broken link in chapter 2`
 
 ## Gedragscode
 
@@ -75,21 +88,21 @@ Lees en volg onze [Gedragscode](CODE_OF_CONDUCT.md) om een gastvrije en inclusie
 
 ## Hulp krijgen
 
-- **Vragen**: Open een [GitHub Discussion](https://github.com/microsoft/azd-for-beginners/discussions)
-- **Community**: Word lid van de [Azure Discord](https://discord.gg/microsoft-azure)
+- **Vragen**: Zoek of open een [GitHub issue](https://github.com/microsoft/AZD-for-beginners/issues)
+- **Gemeenschap**: Word lid van de [Azure Discord](https://discord.gg/microsoft-azure)
 - **Documentatie**: Bekijk de [Azure Developer CLI docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ## Licentie
 
-Door bij te dragen aan deze repository ga je ermee akkoord dat je bijdragen onder de [MIT-licentie](../../LICENSE) worden gelicenseerd.
+Door bij te dragen aan deze repository gaat u ermee akkoord dat uw bijdragen worden gelicenseerd onder de [MIT License](../../LICENSE).
 
 ---
 
-Bedankt dat je helpt om AZD For Beginners een betere leerbron voor de gemeenschap te maken!
+Bedankt dat u helpt om AZD For Beginners een betere leerbron voor de gemeenschap te maken!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dit document is vertaald met behulp van de AI-vertalingsdienst Co‑op Translator (https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

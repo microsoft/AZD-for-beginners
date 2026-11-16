@@ -1,27 +1,26 @@
-# TODO: Proprietarul acestui depozit nu a editat încă acest fișier
+# Asistență
 
-**PROPRIETARUL DEPOZITULUI**: Doriți suport pentru Servicii și Asistență pentru Clienți (CSS) pentru acest produs/proiect?
+## Probleme și întrebări legate de curs
 
-- **Fără suport CSS:** Completați acest șablon cu informații despre cum să raportați probleme și să obțineți ajutor.
-- **Suport CSS activat:** Completați un formular de introducere la [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS va colabora cu dvs. pentru a determina pașii următori.
-- **Nu sunteți sigur?** Completați un formular de introducere ca și cum răspunsul ar fi "Da". CSS vă va ajuta să decideți.
+Căutați în [problemele cursului](https://github.com/microsoft/AZD-for-beginners/issues) înainte de a raporta o problemă. Includeți lecția de engleză afectată, comanda pe care ați executat-o, versiunile AZD/extensiei și mesajul de eroare. Îndepărtați acreditările, tokenurile, detaliile abonamentului și datele personale din jurnale și capturi de ecran.
 
-*Apoi eliminați acest prim titlu din fișierul SUPPORT.MD înainte de a publica depozitul.*
+Pentru întrebări generale de învățare, folosiți [comunitatea dezvoltatorilor Azure](https://discord.gg/microsoft-azure). Răspunsurile comunității nu sunt un serviciu garantat de asistență.
 
-# Suport
+## Probleme cu instrumente și servicii
 
-## Cum să raportați probleme și să obțineți ajutor  
+Raportați bug-uri reproducibile ale AZD CLI în [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). Pentru incidente la serviciile Azure sau asistență specifică abonamentului, folosiți opțiunile de suport disponibile în [portalul Azure](https://portal.azure.com/).
 
-Acest proiect utilizează GitHub Issues pentru a urmări erorile și cererile de funcționalități. Vă rugăm să căutați problemele existente înainte de a raporta probleme noi pentru a evita duplicatele. Pentru probleme noi, raportați eroarea sau cererea de funcționalitate ca o nouă problemă.
+## Raportări de securitate
 
-Pentru ajutor și întrebări legate de utilizarea acestui proiect, vă rugăm **MENTORUL DEPOZITULUI: INSERAȚI INSTRUCȚIUNI AICI 
-DESPRE CUM SĂ CONTACTAȚI PROPRIETARII DEPOZITULUI SAU COMUNITATEA PENTRU AJUTOR. AR PUTEA FI UN TAG STACK OVERFLOW SAU ALT CANAL. UNDE VEȚI AJUTA OAMENII?**.
+Urmați [SECURITY.md](SECURITY.md) pentru raportarea privată a vulnerabilităților. Nu postați secrete sau detalii despre exploatări în problema publică a cursului.
 
-## Politica de Suport Microsoft  
+## Politica de asistență Microsoft
 
-Suportul pentru acest **PROIECT sau PRODUS** este limitat la resursele enumerate mai sus.
+Suportul pentru acest proiect educațional este limitat la resursele enumerate mai sus. Exemplele din curs nu includ un angajament de suport în producție.
 
 ---
 
-**Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

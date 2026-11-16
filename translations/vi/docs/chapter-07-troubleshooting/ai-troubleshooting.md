@@ -1,64 +1,61 @@
-# Hướng dẫn khắc phục sự cố dành cho AI
+# Hướng Dẫn Khắc Phục Sự Cố Cụ Thể Cho AI
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD cho Người mới bắt đầu](../../README.md)
-- **📖 Current Chapter**: Chương 7 - Khắc phục sự cố & Gỡ lỗi
-- **⬅️ Previous**: [Hướng dẫn gỡ lỗi](debugging.md)
-- **➡️ Next Chapter**: [Chương 8: Thực hành Sản xuất & Doanh nghiệp](../chapter-08-production/production-ai-practices.md)
-- **🤖 Related**: [Chương 2: Phát triển theo hướng AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Điều Hướng Chương:**
+- **📚 Trang Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 7 - Khắc Phục Sự Cố & Gỡ Lỗi
+- **⬅️ Trước**: [Hướng Dẫn Gỡ Lỗi](debugging.md)
+- **➡️ Chương Tiếp Theo**: [Chương 8: Mẫu Quy Trình Sản Xuất & Doanh Nghiệp](../chapter-08-production/production-ai-practices.md)
+- **🤖 Liên Quan**: [Chương 2: Phát Triển AI Là Ưu Tiên](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Hướng dẫn khắc phục sự cố toàn diện này giải quyết các vấn đề phổ biến khi triển khai giải pháp AI với AZD, cung cấp các giải pháp và kỹ thuật gỡ lỗi dành riêng cho các dịch vụ AI của Azure.
+Hướng dẫn khắc phục sự cố toàn diện này giải quyết các vấn đề thường gặp khi triển khai các giải pháp AI với AZD, cung cấp các giải pháp và kỹ thuật gỡ lỗi đặc thù cho dịch vụ Azure AI.
 
-## Mục lục
+> **Phạm vi:** Các lệnh sử dụng tên tài nguyên ví dụ; hãy thay thế và chọn đăng ký đúng. Các khối Bicep là mảnh ghép để hợp nhất vào mẫu hiện có, không phải để triển khai độc lập. Các đoạn mã Python yêu cầu SDK và cấu hình ứng dụng đã nêu. Không có triển khai Azure trực tiếp nào được thực hiện cho đánh giá này.
 
-- [Microsoft Foundry Models Service Issues](#azure-openai-service-issues)
-- [Azure AI Search Problems](#azure-ai-search-problems)
-- [Container Apps Deployment Issues](#container-apps-deployment-issues)
-- [Authentication and Permission Errors](#authentication-and-permission-errors)
-- [Model Deployment Failures](#model-deployment-failures)
-- [Performance and Scaling Issues](#performance-and-scaling-issues)
-- [Cost and Quota Management](#cost-and-quota-management)
-- [Debugging Tools and Techniques](#debugging-tools-and-techniques)
+## Mục Lục
 
-## Microsoft Foundry Models Service Issues
+- [Vấn Đề Dịch Vụ Microsoft Foundry Models](#microsoft-foundry-models-service-issues)
+- [Vấn Đề Azure AI Search](#azure-ai-search-problems)
+- [Vấn Đề Triển Khai Container Apps](#container-apps-deployment-issues)
+- [Lỗi Xác Thực và Quyền Truy Cập](#authentication-and-permission-errors)
+- [Lỗi Triển Khai Mô Hình](#model-deployment-failures)
+- [Vấn Đề Hiệu Năng và Mở Rộng](#performance-and-scaling-issues)
+- [Quản Lý Chi Phí và Hạn Mức](#cost-and-quota-management)
+- [Công Cụ và Kỹ Thuật Gỡ Lỗi](#debugging-tools-and-techniques)
 
-### Issue: OpenAI Service Unavailable in Region
+## Vấn Đề Dịch Vụ Microsoft Foundry Models
 
-**Symptoms:**
+### Vấn Đề: Dịch Vụ OpenAI Không Có Sẵn Ở Vùng
+
+**Triệu Chứng:**
 ```
 Error: The requested resource type is not available in the location 'westus'
 ```
 
-**Causes:**
-- Microsoft Foundry Models không khả dụng ở khu vực đã chọn
-- Hạn mức (quota) đã hết ở các khu vực ưa thích
-- Hạn chế năng lực theo khu vực
+**Nguyên Nhân:**
+- Microsoft Foundry Models không khả dụng ở vùng được chọn
+- Hạn mức đã dùng hết ở vùng ưu tiên
+- Hạn chế về năng lực vùng
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Check Region Availability:**
+1. **Kiểm Tra Khả Dụng Vùng:**
 ```bash
-# Liệt kê các vùng khả dụng cho OpenAI
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --query "[].locations[]" \
-  --output table
+# Inspect model/deployment-type offerings in a candidate region
+az cognitiveservices model list --location eastus2 --output json
+# Availability in the catalog does not guarantee quota or physical capacity.
 ```
 
-2. **Update AZD Configuration:**
-```yaml
-# azure.yaml - Force specific region
-infra:
-  provider: bicep
-  path: infra
-  module: main
-parameters:
-  location: "eastus2"  # Known working region
+2. **Cập Nhật Cấu Hình AZD:**
+```bash
+# For a new environment: choose a supported region with available quota
+azd env set AZURE_LOCATION eastus2
+# Templates with a separate model-location parameter must wire that value
+# through infra/main.parameters.json as documented by the template.
 ```
 
-3. **Use Alternative Regions:**
+3. **Sử Dụng Vùng Thay Thế:**
 ```bicep
-// infra/main.bicep - Multi-region fallback
+// infra/main.bicep - Explicit location selection, NOT automatic fallback
 @allowed([
   'eastus2'
   'francecentral'
@@ -68,90 +65,82 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Issue: Model Deployment Quota Exceeded
+### Vấn Đề: Hạn Mức Triển Khai Mô Hình Bị Vượt Quá
 
-**Symptoms:**
+**Triệu Chứng:**
 ```
 Error: Deployment failed due to insufficient quota
 ```
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Check Current Quota:**
+1. **Kiểm Tra Hạn Mức Hiện Tại:**
 ```bash
-# Kiểm tra mức sử dụng hạn ngạch
+# Check quota usage
 az cognitiveservices usage list \
-  --name YOUR_OPENAI_RESOURCE \
-  --resource-group YOUR_RG
+  --location eastus2 --output table
 ```
 
-2. **Request Quota Increase:**
-```bash
-# Gửi yêu cầu tăng hạn mức
-az support tickets create \
-  --ticket-name "OpenAI Quota Increase" \
-  --description "Need increased quota for production deployment" \
-  --severity "minimal" \
-  --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
-```
+2. **Yêu Cầu Tăng Hạn Mức:**
+Sử dụng quy trình quản lý hạn mức trên cổng Foundry cho đăng ký, vùng, mô hình và loại triển khai bị ảnh hưởng. Xem [hướng dẫn hạn mức chính thức](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Yêu cầu giới hạn VM không làm tăng hạn mức mô hình.
 
-3. **Optimize Model Capacity:**
+3. **Tối Ưu Dung Lượng Mô Hình:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi // Existing account resource declared in your template
+  name: 'chat-model'
   properties: {
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
-    name: 'Standard'
-    capacity: 1  // Start with minimal capacity
+    name: 'GlobalStandard' // Verify this model/version/type in the target region
+    capacity: 1  // Capacity units are model/deployment-type specific
   }
 }
 ```
 
-### Issue: Invalid API Version
+### Vấn Đề: Phiên Bản API Không Hợp Lệ
 
-**Symptoms:**
+**Triệu Chứng:**
 ```
 Error: The API version '2023-05-15' is not available for OpenAI
 ```
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Use Supported API Version:**
+1. **Sử Dụng Phiên Bản API Hỗ Trợ:**
 ```python
-# Sử dụng phiên bản mới nhất được hỗ trợ
-AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
+# Stable dated Azure OpenAI data-plane API, where supported by your feature
+AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
-2. **Check API Version Compatibility:**
-```bash
-# Liệt kê các phiên bản API được hỗ trợ
-az rest --method get \
-  --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
-  --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
-```
+2. **Kiểm Tra Tương Thích Phiên Bản API:**
+Kiểm tra [tham khảo vòng đời API Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). Phiên bản API của nhà cung cấp tài nguyên ARM **không** liệt kê phiên bản API của inference/data-plane. Khách hàng mới v1 dùng `/openai/v1/` mà không có `api-version` đánh ngày; không trộn hai cấu hình khách hàng này.
 
-## Azure AI Search Problems
+## Vấn Đề Azure AI Search
 
-### Issue: Search Service Pricing Tier Insufficient
+### Vấn Đề: Cấp Giá Dịch Vụ Tìm Kiếm Không Đủ
 
-**Symptoms:**
+**Triệu Chứng:**
 ```
 Error: Semantic search requires Basic tier or higher
 ```
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Upgrade Pricing Tier:**
+1. **Sử Dụng Cấp Giá Hỗ Trợ:**
+
+Semantic ranker yêu cầu Basic hoặc cao hơn. Việc chuyển từ Free/Basic sang cấp khác có thể yêu cầu tạo dịch vụ tìm kiếm mới và xây dựng lại chỉ mục; chỉnh sửa SKU không đảm bảo nâng cấp tại chỗ.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
   name: searchServiceName
+  location: location
   location: location
   sku: {
     name: 'basic'  // Minimum for semantic search
@@ -165,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Disable Semantic Search (Development):**
+2. **Tắt Semantic Search (Phát Triển):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -179,31 +168,32 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Issue: Index Creation Failures
+### Vấn Đề: Lỗi Tạo Chỉ Mục
 
-**Symptoms:**
+**Triệu Chứng:**
 ```
 Error: Cannot create index, insufficient permissions
 ```
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Verify Search Service Keys:**
+1. **Xác Minh Khóa Dịch Vụ Tìm Kiếm:**
 ```bash
-# Lấy khóa quản trị dịch vụ tìm kiếm
+# Get search service admin key
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
 ```
 
-2. **Check Index Schema:**
+2. **Kiểm Tra Lược Đồ Chỉ Mục:**
 ```python
-# Xác thực lược đồ chỉ mục
+# Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
 def validate_index_schema(index_definition):
     """Validate index schema before creation."""
+    # These are this application's requirements, not universal Search fields.
     required_fields = ['id', 'content']
     field_names = [field.name for field in index_definition.fields]
     
@@ -212,32 +202,33 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Use Managed Identity:**
+3. **Sử Dụng Managed Identity:**
 ```bicep
-// Grant search permissions to managed identity
+// Grant index-definition management permissions to the managed identity.
+// Search Index Data Contributor manages documents, not index definitions.
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: searchService
-  name: guid(searchService.id, containerApp.id, searchIndexDataContributorRole)
+  name: guid(searchService.id, containerApp.id, 'Search Service Contributor')
   properties: {
     principalId: containerApp.identity.principalId
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8ebe5a00-799e-43f5-93ac-243d3dce84a7')
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7ca78c08-252a-4471-8644-bb5ff32d4ba0')
     principalType: 'ServicePrincipal'
   }
 }
 ```
 
-## Container Apps Deployment Issues
+## Vấn Đề Triển Khai Container Apps
 
-### Issue: Container Build Failures
+### Vấn Đề: Lỗi Xây Dựng Container
 
-**Symptoms:**
+**Triệu Chứng:**
 ```
 Error: Failed to build container image
 ```
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Check Dockerfile Syntax:**
+1. **Kiểm Tra Cú Pháp Dockerfile:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -259,21 +250,22 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Validate Dependencies:**
+2. **Xác Thực Các Phụ Thuộc:**
 ```txt
-# requirements.txt - Pin versions for stability
-fastapi==0.104.1
-uvicorn==0.24.0
-openai==1.3.7
-azure-identity==1.14.1
-azure-keyvault-secrets==4.7.0
-azure-search-documents==11.4.0
-azure-cosmos==4.5.1
+# Dependency names for these snippets. Resolve supported versions in your
+# project's environment, test together, then commit a lock/pinned requirements file.
+fastapi
+uvicorn
+openai
+azure-identity
+azure-keyvault-secrets
+azure-search-documents
+azure-cosmos
 ```
 
-3. **Add Health Check:**
+3. **Thêm Kiểm Tra Sức Khỏe:**
 ```python
-# main.py - Thêm endpoint kiểm tra sức khỏe
+# main.py - Add health check endpoint
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -283,16 +275,16 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Issue: Container App Startup Failures
+### Vấn Đề: Lỗi Khởi Động Container App
 
-**Symptoms:**
+**Triệu Chứng:**
 ```
 Error: Container failed to start within timeout period
 ```
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Increase Startup Timeout:**
+1. **Tăng Thời Gian Chờ Khởi Động:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -307,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
           }
           probes: [
             {
-              type: 'startup'
+              type: 'Startup'
               httpGet: {
                 path: '/health'
                 port: 8000
@@ -325,11 +317,14 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimize Model Loading:**
+2. **Tối Ưu Tải Mô Hình:**
 ```python
-# Tải mô hình theo nhu cầu để giảm thời gian khởi động
+# Lazy load models to reduce startup time
+# Illustrative skeleton: implement _initialize_client and synchronize concurrent
+# initialization before using this pattern in an application.
 import asyncio
 from contextlib import asynccontextmanager
+from fastapi import FastAPI
 
 class ModelManager:
     def __init__(self):
@@ -341,40 +336,40 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Khởi tạo client AI ở đây
+        # Initialize AI client here
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Khởi động
+    # Startup
     app.state.model_manager = ModelManager()
     yield
-    # Tắt
+    # Shutdown
     pass
 
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Authentication and Permission Errors
+## Lỗi Xác Thực và Quyền Truy Cập
 
-### Issue: Managed Identity Permission Denied
+### Vấn Đề: Managed Identity Bị Từ Chối Quyền
 
-**Symptoms:**
+**Triệu Chứng:**
 ```
 Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Verify Role Assignments:**
+1. **Xác Minh Phân Quyền Vai Trò:**
 ```bash
-# Kiểm tra các vai trò được phân công hiện tại
+# Check current role assignments
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Assign Required Roles:**
+2. **Phân Công Vai Trò Cần Thiết:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -391,31 +386,37 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Test Authentication:**
+3. **Kiểm Tra Xác Thực:**
 ```python
-# Kiểm tra xác thực danh tính được quản lý
+# Test managed identity authentication
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
-async def test_authentication():
+def test_authentication():
     try:
-        credential = DefaultAzureCredential()
-        token = await credential.get_token("https://cognitiveservices.azure.com/.default")
-        print(f"Authentication successful: {token.token[:10]}...")
+        with DefaultAzureCredential() as credential:
+            token = credential.get_token("https://cognitiveservices.azure.com/.default")
+            print(f"Token acquired; expires at Unix time {token.expires_on}")
     except ClientAuthenticationError as e:
         print(f"Authentication failed: {e}")
+
+test_authentication()
 ```
 
-### Issue: Key Vault Access Denied
+Việc lấy token chứng minh xác thực, không phải quyền gọi mô hình. Kiểm tra thao tác dự kiến riêng. Cục bộ, `DefaultAzureCredential` có thể dùng thông tin đăng nhập nhà phát triển; trên Azure, xác minh managed identity mong muốn được chọn.
 
-**Symptoms:**
+### Vấn Đề: Truy Cập Key Vault Bị Từ Chối
+
+**Triệu Chứng:**
 ```
 Error: The user, group or application does not have secrets get permission
 ```
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Grant Key Vault Permissions:**
+1. **Cấp Quyền Key Vault:**
+
+Chỉ dùng đoạn chính sách truy cập sau cho vault dùng `enableRbacAuthorization: false`. Với vault bật RBAC, dùng tùy chọn 2; thêm chính sách truy cập không cấp quyền quản lý dữ liệu trong chế độ RBAC.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Use RBAC Instead of Access Policies:**
+2. **Dùng RBAC Thay Vì Chính Sách Truy Cập:**
+
+Vault phải có `enableRbacAuthorization: true`; thay đổi mô hình quyền yêu cầu kế hoạch di chuyển quyền truy cập hiện có.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -447,92 +450,76 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Model Deployment Failures
+## Lỗi Triển Khai Mô Hình
 
-### Issue: Model Version Not Available
+### Vấn Đề: Phiên Bản Mô Hình Không Có Sẵn
 
-**Symptoms:**
+**Triệu Chứng:**
 ```
 Error: Model version 'gpt-4-32k' is not available
 ```
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Check Available Models:**
+1. **Kiểm Tra Các Mô Hình Có Sẵn:**
 ```bash
-# Liệt kê các mô hình có sẵn
+# List available models
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
-  --query "[].{name:model.name, version:model.version}" \
+  --query "[].{name:name, version:version}" \
   --output table
 ```
 
-2. **Use Model Fallbacks:**
+2. **Chọn Rõ Ràng Mô Hình Có Sẵn:**
 ```bicep
-// Model deployment with fallback
+// Example model selection; verify version and deployment type in the catalog.
 @description('Primary model configuration')
 param primaryModel object = {
   name: 'gpt-4.1-mini'
-  version: '2024-07-18'
+  version: '2025-04-14'
 }
 
-@description('Fallback model configuration')
-param fallbackModel object = {
-  name: 'gpt-4.1'
-  version: '2024-08-06'
-}
-
-// Try primary model first, fallback if unavailable
+// Bicep does not catch provisioning failures and retry a fallback model.
 resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
   name: 'chat-model'
   properties: {
-    model: primaryModel
+    model: {
+      format: 'OpenAI'
+      name: primaryModel.name
+      version: primaryModel.version
+    }
   }
   sku: {
-    name: 'Standard'
+    name: 'GlobalStandard'
     capacity: 10
   }
 }
 ```
 
-3. **Validate Model Before Deployment:**
-```python
-# Xác thực mô hình trước khi triển khai
-import httpx
-
-async def validate_model_availability(model_name: str, version: str) -> bool:
-    """Check if model is available before deployment."""
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/models",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
-            )
-            models = response.json()
-            return any(
-                model["id"] == f"{model_name}-{version}"
-                for model in models.get("data", [])
-            )
-    except Exception:
-        return False
+3. **Xác Thực Mô Hình Trước Khi Triển Khai:**
+```bash
+# Management-plane catalog for the actual account
+az cognitiveservices account list-models \
+  --name YOUR_OPENAI_RESOURCE --resource-group YOUR_RG --output json
+# Inspect model/version and supported SKUs; check regional quota separately.
 ```
 
-## Performance and Scaling Issues
+## Vấn Đề Hiệu Năng và Mở Rộng
 
-### Issue: High Latency Responses
+### Vấn Đề: Phản Hồi Trễ Cao
 
-**Symptoms:**
+**Triệu Chứng:**
 - Thời gian phản hồi > 30 giây
 - Lỗi timeout
 - Trải nghiệm người dùng kém
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Implement Request Timeouts:**
+1. **Áp Dụng Thời Gian Chờ Yêu Cầu:**
 ```python
-# Cấu hình thời gian chờ phù hợp
+# Configure proper timeouts
 import httpx
 
 client = httpx.AsyncClient(
@@ -545,9 +532,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Add Response Caching:**
+2. **Thêm Bộ Nhớ Đệm Phản Hồi:**
 ```python
-# Bộ nhớ đệm Redis cho các phản hồi
+# Redis cache for responses
 import redis.asyncio as redis
 import json
 
@@ -565,7 +552,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Configure Auto-scaling:**
+3. **Cấu Hình Tự Động Mở Rộng:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -599,16 +586,16 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Issue: Memory Out of Errors
+### Vấn Đề: Lỗi Hết Bộ Nhớ
 
-**Symptoms:**
+**Triệu Chứng:**
 ```
 Error: Container killed due to memory limit exceeded
 ```
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Increase Memory Allocation:**
+1. **Tăng Dung Lượng Bộ Nhớ:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -627,9 +614,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimize Memory Usage:**
+2. **Tối Ưu Sử Dụng Bộ Nhớ:**
 ```python
-# Quản lý mô hình tiết kiệm bộ nhớ
+# Memory-efficient model handling
 import gc
 import psutil
 
@@ -637,34 +624,37 @@ class MemoryOptimizedAI:
     def __init__(self):
         self.max_memory_percent = 80
         
+    async def _process_ai_request(self, request):
+        raise NotImplementedError("Supply the application's AI operation")
+
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Kiểm tra mức sử dụng bộ nhớ trước khi xử lý
+        # Check memory usage before processing
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Buộc thu gom rác
+            gc.collect()  # Force garbage collection
             
         result = await self._process_ai_request(request)
         
-        # Dọn dẹp sau khi xử lý
+        # Clean up after processing
         gc.collect()
         return result
 ```
 
-## Cost and Quota Management
+## Quản Lý Chi Phí và Hạn Mức
 
-### Issue: Unexpected High Costs
+### Vấn Đề: Chi Phí Cao Bất Thường
 
-**Symptoms:**
-- Hóa đơn Azure cao hơn dự kiến
+**Triệu Chứng:**
+- Hoá đơn Azure cao hơn dự kiến
 - Sử dụng token vượt ước tính
-- Cảnh báo ngân sách được kích hoạt
+- Cảnh báo vượt ngân sách xuất hiện
 
-**Solutions:**
+**Giải Pháp:**
 
-1. **Implement Cost Controls:**
+1. **Triển Khai Kiểm Soát Chi Phí:**
 ```python
-# Theo dõi sử dụng token
+# Token usage tracking
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -681,23 +671,26 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **Set up Cost Alerts:**
+Bộ đếm trong bộ nhớ này chỉ mang tính minh họa, không phải kiểm soát chi tiêu hàng tháng: nó đặt lại khi khởi động lại, không chia sẻ giữa các bản sao, và chỉ kiểm tra sau gọi. Giới hạn thực sự cần kế toán bền vững, đặt trước yêu cầu an toàn đồng thời và chính sách đặt lại hàng tháng. Chỉ số bộ nhớ container cũng phải tính đến giới hạn cgroup; `psutil.virtual_memory()` không phải phép đo giới hạn container tin cậy, và thu gom rác không thực thi giới hạn bộ nhớ.
+
+2. **Thiết Lập Cảnh Báo Chi Phí:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate // Parameter: first day of a supported budget period
+      endDate: budgetEndDate     // Parameter: a future date
     }
     timeGrain: 'Monthly'
-    amount: 500  // $500 monthly limit
+    amount: 500  // Notification threshold in the subscription's billing currency
     category: 'Cost'
     notifications: {
       Actual_GreaterThan_80_Percent: {
         enabled: true
         operator: 'GreaterThan'
         threshold: 80
+        thresholdType: 'Actual'
         contactEmails: ['admin@company.com']
         contactRoles: ['Owner']
       }
@@ -706,9 +699,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-3. **Optimize Model Selection:**
+Khai báo `budgetStartDate` và `budgetEndDate` trong mẫu của bạn. Ngân sách thông báo; không dừng tài nguyên hoặc áp giới hạn chi tiêu cứng.
+
+3. **Tối Ưu Việc Chọn Mô Hình:**
 ```python
-# Lựa chọn mô hình cân nhắc chi phí
+# Cost-aware model selection
 MODEL_COST_TIERS = {
   'gpt-4.1-mini': 'low',
   'gpt-4.1': 'high'
@@ -722,55 +717,62 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4.1'
 ```
 
-## Debugging Tools and Techniques
+## Công Cụ và Kỹ Thuật Gỡ Lỗi
 
-### AZD Debugging Commands
+### Lệnh Gỡ Lỗi AZD
 
 ```bash
-# Bật ghi nhật ký chi tiết
+# Enable verbose logging
 azd up --debug
 
-# Kiểm tra trạng thái triển khai
+# Check deployment status
 azd show
 
-# Xem nhật ký ứng dụng (mở bảng điều khiển giám sát)
+# View application logs (opens monitoring dashboard)
 azd monitor --logs
 
-# Xem số liệu thời gian thực
+# View live metrics
 azd monitor --live
 
-# Kiểm tra biến môi trường
+# Check environment variables
 azd env get-values
 ```
 
-### AZD AI Extension Commands for Diagnostics
+### Lệnh AZD AI Extension Cho Chẩn Đoán
 
-If you deployed agents using `azd ai agent init`, these additional tools are available:
+Nếu bạn triển khai agents dùng `azd ai agent init`, các công cụ bổ sung này có sẵn:
 
 ```bash
-# Đảm bảo phần mở rộng agents đã được cài đặt
+# Ensure the agents extension is installed
 azd extension install azure.ai.agents
 
-# Khởi tạo lại hoặc cập nhật một agent từ tệp manifest
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Check project storage permissions and agent configuration
+azd ai agent doctor
 
-# Sử dụng máy chủ MCP để các công cụ AI truy vấn trạng thái dự án
+# Inspect the deployed endpoint
+azd ai agent endpoint show
+
+# Use the MCP server to let AI tools query project state
 azd mcp start
 
-# Tạo các tệp hạ tầng để xem xét và kiểm toán
+# Generate infrastructure files for review and audit
 azd infra generate
 ```
 
-> **Mẹo:** Sử dụng `azd infra generate` để ghi IaC ra đĩa nhằm bạn có thể kiểm tra chính xác những tài nguyên nào đã được cung cấp. Điều này vô cùng giá trị khi gỡ lỗi các vấn đề cấu hình tài nguyên. Xem [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) để biết chi tiết đầy đủ.
+> **Mẹo:** Dùng `azd infra generate` để ghi IaC ra đĩa để bạn có thể kiểm tra chính xác tài nguyên nào đã được cung cấp. Điều này vô cùng quý giá khi gỡ lỗi lỗi cấu hình tài nguyên. Xem [tham khảo CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) để biết chi tiết.
 
-### Application Debugging
+**Chẩn đoán nhận biết phiên bản (2026-11-04):** Agents `1.0.0-beta.23` yêu cầu `azd >= 1.37.0`; nâng cấp CLI lõi trước các extension không tương thích. Phiên bản agent này giữ cảnh báo RBAC nhà phát triển trong đầu ra triển khai cuối cùng và xác định phiên bản liên quan khi kích hoạt thất bại/timeout. Timeout không chứng minh triển khai thất bại: kiểm tra phiên bản đã thử trước khi thử lại. Nó cũng sửa lỗi gọi A2A 0.3 hiển thị tin nhắn vòng đời thay vì câu trả lời hoàn tất. Core `azd 1.37.1` sửa lỗi lan truyền huỷ bỏ qua các extension; `1.37.2` cải thiện xác nhận cung cấp quan trọng và xử lý hủy.
 
-1. **Structured Logging:**
+Nếu lệnh đánh giá của hướng dẫn cũ chỉ in hướng dẫn di chuyển, hãy cài `azure.ai.evaluations` (`1.0.0-beta.2` yêu cầu `azd >= 1.33.0`) và dùng `azd ai eval init`, `generate`, và `run start`. Tối ưu hoá của `--config` không còn chấp nhận file đánh giá cũ. Xem [di chuyển đánh giá](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) và [di chuyển tối ưu hoá](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Gỡ Lỗi Ứng Dụng
+
+1. **Ghi Nhật Ký Có Cấu Trúc:**
 ```python
 import logging
 import json
 
-# Cấu hình ghi nhật ký có cấu trúc cho các ứng dụng AI
+# Configure structured logging for AI applications
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -789,36 +791,40 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Health Check Endpoints:**
+2. **Điểm Kiểm Tra Sức Khỏe:**
 ```python
+# Integration fragment: add to an existing FastAPI app, protect this diagnostic
+# endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
+# authorization, not Azure OpenAI inference.
+import os
+from azure.identity.aio import DefaultAzureCredential
+from azure.search.documents.indexes.aio import SearchIndexClient
+from fastapi import Response
+
 @app.get("/debug/health")
-async def detailed_health_check():
+async def detailed_health_check(response: Response):
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Kiểm tra kết nối OpenAI
+    # Check Search service
     try:
-        client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
-        await client.models.list()
-        checks['openai'] = {'status': 'healthy'}
-    except Exception as e:
-        checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
-    
-    # Kiểm tra dịch vụ tìm kiếm
-    try:
-        search_client = SearchIndexClient(
-            endpoint=AZURE_SEARCH_ENDPOINT,
-            credential=DefaultAzureCredential()
-        )
-        indexes = await search_client.list_index_names()
-        checks['search'] = {'status': 'healthy', 'indexes': list(indexes)}
-    except Exception as e:
-        checks['search'] = {'status': 'unhealthy', 'error': str(e)}
+        async with DefaultAzureCredential() as credential:
+            async with SearchIndexClient(
+                endpoint=os.environ['AZURE_SEARCH_ENDPOINT'],
+                credential=credential
+            ) as search_client:
+                # AsyncItemPaged is iterated asynchronously, not awaited as a list.
+                async for _ in search_client.list_index_names():
+                    break
+        checks['search'] = {'status': 'healthy'}
+    except Exception:
+        response.status_code = 503
+        checks['search'] = {'status': 'unhealthy'}
     
     return checks
 ```
 
-3. **Performance Monitoring:**
+3. **Giám Sát Hiệu Năng:**
 ```python
 import time
 from functools import wraps
@@ -849,43 +855,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Common Error Codes and Solutions
+## Các Mã Lỗi Phổ Biến và Giải Pháp
 
-| Error Code | Description | Solution |
+| Mã Lỗi | Mô Tả | Giải Pháp |
 |------------|-------------|----------|
-| 401 | Unauthorized | Kiểm tra API keys và cấu hình managed identity |
-| 403 | Forbidden | Xác minh phân quyền RBAC |
-| 429 | Rate Limited | Thực hiện logic retry với exponential backoff |
-| 500 | Internal Server Error | Kiểm tra trạng thái triển khai mô hình và nhật ký |
-| 503 | Service Unavailable | Xác minh tình trạng dịch vụ và khả dụng theo khu vực |
+| 401 | Không Có Quyền | Kiểm tra khoá API và cấu hình managed identity |
+| 403 | Bị Cấm | Xác minh phân công vai trò RBAC |
+| 429 | Giới Hạn Tốc Độ | Triển khai logic thử lại với lùi thời gian theo hàm mũ |
+| 500 | Lỗi Máy Chủ Nội Bộ | Kiểm tra trạng thái triển khai mô hình và nhật ký |
+| 503 | Dịch Vụ Không Có Sẵn | Kiểm tra tình trạng dịch vụ và khả dụng vùng |
 
-## Next Steps
+## Bước Tiếp Theo
 
-1. **Review [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** để biết các thực hành tốt nhất về triển khai
-2. **Complete [Production AI Practices](../chapter-08-production/production-ai-practices.md)** cho các giải pháp sẵn sàng doanh nghiệp
-3. **Tham gia [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** để nhận hỗ trợ cộng đồng
-4. **Gửi issues** tới [kho lưu trữ GitHub AZD](https://github.com/Azure/azure-dev) cho các vấn đề cụ thể của AZD
+1. **Xem lại [Hướng Dẫn Triển Khai Mô Hình AI](../chapter-02-ai-development/ai-model-deployment.md)** cho thực hành tốt nhất triển khai
+2. **Hoàn Thành [Thực Hành AI Trong Sản Xuất](../chapter-08-production/production-ai-practices.md)** cho giải pháp sẵn sàng doanh nghiệp
+3. **Tham Gia [Discord Microsoft Foundry](https://aka.ms/foundry/discord)** để được hỗ trợ cộng đồng
+4. **Gửi báo cáo sự cố** tới [kho AZD trên GitHub](https://github.com/Azure/azure-dev) cho các vấn đề liên quan đến AZD
 
-## Resources
+## Tài Nguyên
 
-- [Microsoft Foundry Models Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Cài đặt kỹ năng gỡ lỗi Azure trong trình soạn thảo của bạn: `npx skills add microsoft/github-copilot-for-azure`
+- [Khắc Phục Sự Cố Hạn Mức và Giới Hạn Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
+- [Khắc Phục Sự Cố Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Khắc Phục Sự Cố Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Kỹ Năng Gỡ Lỗi Azure Diagnostics Agent**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Cài kỹ năng khắc phục sự cố Azure trong trình soạn thảo của bạn: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD cho Người mới bắt đầu](../../README.md)
-- **📖 Current Chapter**: Chương 7 - Khắc phục sự cố & Gỡ lỗi
-- **⬅️ Previous**: [Hướng dẫn gỡ lỗi](debugging.md)
-- **➡️ Next Chapter**: [Chương 8: Thực hành Sản xuất & Doanh nghiệp](../chapter-08-production/production-ai-practices.md)
-- **🤖 Related**: [Chương 2: Phát triển theo hướng AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 Reference**: [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**Điều Hướng Chương:**
+- **📚 Trang Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 7 - Khắc Phục Sự Cố & Gỡ Lỗi
+- **⬅️ Trước**: [Hướng Dẫn Gỡ Lỗi](debugging.md)
+- **➡️ Chương Tiếp Theo**: [Chương 8: Mẫu Quy Trình Sản Xuất & Doanh Nghiệp](../chapter-08-production/production-ai-practices.md)
+- **🤖 Liên Quan**: [Chương 2: Phát Triển AI Là Ưu Tiên](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Tham Khảo**: [Khắc Phục Sự Cố Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Miễn trừ trách nhiệm**:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ ban đầu nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

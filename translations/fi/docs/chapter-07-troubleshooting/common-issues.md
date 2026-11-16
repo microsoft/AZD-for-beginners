@@ -1,175 +1,187 @@
 # Yleisiä ongelmia ja ratkaisuja
 
-**Chapter Navigation:**
-- **📚 Kurssin etusivu**: [AZD For Beginners](../../README.md)
-- **📖 Nykyinen luku**: Luku 7 - Vianmääritys ja virheenkorjaus
-- **⬅️ Previous Chapter**: [Luku 6: Ennen käyttöönottoa tehtävät tarkastukset](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ Next**: [Vianetsintäopas](debugging.md)
-- **🚀 Next Chapter**: [Luku 8: Tuotanto- ja yritysmallit](../chapter-08-production/production-ai-practices.md)
+**Luku Navigointi:**
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 7 - Vianmääritys ja virheiden korjaus
+- **⬅️ Edellinen luku**: [Luku 6: Ennen lentoonlähtöä tarkistukset](../chapter-06-pre-deployment/preflight-checks.md)
+- **➡️ Seuraava**: [Vianmäärityksen opas](debugging.md)
+- **🚀 Seuraava luku**: [Luku 8: Tuotantoympäristön ja yrityskäytännöt](../chapter-08-production/production-ai-practices.md)
 
 ## Johdanto
 
-Tämä kattava vianmääritysohje kattaa yleisimmin esiintyvät ongelmat Azure Developer CLI:n käytössä. Opit diagnosoimaan, vianmääritykset ja ratkaisemaan yleisiä ongelmia todennuksen, käyttöönoton, infrastruktuurin provisioinnin ja sovelluskonfiguraation osalta. Jokaisessa ongelmassa on yksityiskohtaiset oireet, juurisyyt ja vaiheittaiset korjausohjeet.
+Tämä kattava vianmääritysohje kattaa useimmin esiintyvät ongelmat Azure Developer CLI:n käytössä. Opit diagnosoimaan, vianmääräämään ja ratkaisemaan yleisiä ongelmia todennusongelmissa, käyttöönotossa, infrastruktuurin provisioinnissa ja sovelluksen konfiguraatiossa. Jokaisen ongelman yhteydessä on yksityiskohtaiset oireet, juurisyyt ja vaiheittaiset ratkaisutoimenpiteet.
 
 ## Oppimistavoitteet
 
-Tämän oppaan suorittamisen jälkeen osaat:
-- Hallita diagnostiikkatekniikoita Azure Developer CLI -ongelmien selvittämiseksi
-- Ymmärtää yleisiä todennus- ja oikeusongelmia sekä niiden ratkaisuja
-- Ratkaista käyttöönoton virheitä, infrastruktuurin provisiointivirheitä ja konfiguraatio-ongelmia
-- Toteuttaa ennakoivia valvonta- ja debuggausstrategioita
-- Soveltaa systemaattisia vianmääritysmenetelmiä monimutkaisten ongelmien ratkaisuun
-- Konfiguroida asianmukaisen lokituksen ja valvonnan estääksesi tulevia ongelmia
+Tämän oppaan suorittamalla:
+- Hallitset Azure Developer CLI -ongelmien diagnosointitekniikat
+- Ymmärrät yleiset todennus- ja käyttöoikeusongelmat ja niiden ratkaisut
+- Ratkaiset käyttöönottovirheet, infrastruktuurin provisiointivirheet ja konfiguraatio-ongelmat
+- Toteutat ennakoivia valvonta- ja vianmääritysstrategioita
+- Käytät systemaattisia vianmääritysmenetelmiä monimutkaisiin ongelmiin
+- Konfiguroit asianmukaisen kirjaamisen ja valvonnan tulevien ongelmien välttämiseksi
 
 ## Oppimistulokset
 
-Suoritettuasi oppaan osaat:
-- Diagnoisoida Azure Developer CLI -ongelmia sisäänrakennetuilla diagnostiikkatyökaluilla
-- Ratkaista todennus-, tilaus- ja käyttöoikeuksiin liittyvät ongelmat itsenäisesti
-- Vianmäärityä käyttöönoton epäonnistumiset ja infrastruktuurin provisiointivirheet tehokkaasti
-- Debugata sovelluskonfiguraatio-ongelmia ja ympäristökohtaisia virheitä
-- Toteuttaa valvontaa ja hälytyksiä tunnistaaksesi mahdolliset ongelmat ennakolta
-- Soveltaa parhaita käytäntöjä lokituksen, debuggaamisen ja ongelmanratkaisutyönkulkuihin
+Suoritettuasi oppaan pystyt:
+- Diagnosoimaan Azure Developer CLI -ongelmia sisäänrakennettujen diagnostiikkatyökalujen avulla
+- Ratkaisemaan todennus-, tilaus- ja käyttöoikeuksiin liittyvät ongelmat itsenäisesti
+- Vianmääräämään käyttöönottovirheitä ja infrastruktuurin provisiointivirheitä tehokkaasti
+- Virheenkorjaamaan sovelluksen konfiguraatio-ongelmia ja ympäristökohtaisia ongelmia
+- Toteuttamaan valvontaa ja hälytyksiä mahdollisten ongelmien ennakoimiseksi
+- Soveltamaan parhaita käytäntöjä kirjaamisessa, virheenkorjauksessa ja ongelmanratkaisuprosesseissa
 
-## Nopeat diagnostiikkotarkastukset
+## Pikadiagnostiikka
 
-Ennen kuin sukellat tiettyihin ongelmiin, suorita nämä komennot kerätäksesi diagnostiikkatietoja:
+> Korvaa esimerkkinimet/ID:t oman ympäristösi arvoilla. Bash, Bicep, JavaScript ja parametrien tiedostokatkelmat on merkitty erikseen alla; ne eivät ole yksi suoritettava skripti. Tarkista tuhoisat toiminnot ja sensuroi salaisuudet ennen diagnostiikan jakamista. `azd monitor --logs` avaa selaimen; se ei suoratoista terminaalin lokitietoja.
+
+Ennen kuin sukellat erityisiin ongelmiin, suorita nämä komennot kerätäksesi diagnostiikkatiedot:
 
 ```bash
-# Tarkista azd:n versio ja kunto
+# Check azd version and health
 azd version
 azd config show
 
-# Varmista Azure-autentikointi
+# Verify Azure authentication
 az account show
 az account list
 
-# Tarkista nykyinen ympäristö
+# Check current environment
 azd env list
 azd env get-values
 
-# Ota virheenkorjauslokitus käyttöön
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
 ## Todennusongelmat
 
-### Ongelma: "Failed to get access token"
+### Ongelma: "Failed to get access token" (Epäonnistui pääsytunnuksen saannissa)
 **Oireet:**
-- `azd up` epäonnistuu todennusvirheiden vuoksi
-- Komennot palauttavat "unauthorized" tai "access denied"
+- `azd up` epäonnistuu todennusvirheisiin
+- Komennot palauttavat "luvattua" tai "pääsy evätty"
 
 **Ratkaisut:**
 ```bash
-# 1. Kirjaudu uudelleen Azure CLI:llä
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# 2. Tyhjennä välimuistiin tallennetut tunnistetiedot
+# 2. Clear cached credentials
 az account clear
 az login
 
-# 3. Käytä laitekoodivirtausta (päätteettömille järjestelmille)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# 4. Aseta nimenomainen tilaus
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
-### Ongelma: "Insufficient privileges" during deployment
+### Ongelma: "Insufficient privileges" (Riittämättömät oikeudet) käyttöönoton aikana
 **Oireet:**
-- Käyttöönotto epäonnistuu oikeusvirheiden vuoksi
-- Et voi luoda tiettyjä Azure-resursseja
+- Käyttöönotto epäonnistuu käyttöoikeusvirheisiin
+- Tiettyjä Azure-resursseja ei voi luoda
 
 **Ratkaisut:**
 ```bash
-# 1. Tarkista Azure-roolimäärityksesi
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Varmista, että sinulla on vaaditut roolit
-# - Contributor (resurssien luomista varten)
-# - User Access Administrator (roolimäärityksiä varten)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. Ota yhteyttä Azure-järjestelmänvalvojaasi saadaksesi tarvittavat käyttöoikeudet
+# 3. Contact your Azure administrator for proper permissions
 ```
 
-### Ongelma: Moni-tenanttien todennusongelmat
+### Ongelma: Monivuokraaja-todennusongelmat
 **Ratkaisut:**
 ```bash
-# 1. Kirjaudu sisään tietylle vuokralaiselle
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. Aseta vuokralainen kokoonpanoon
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. Tyhjennä vuokralaisen välimuisti, jos vaihdat vuokralaisesta toiseen
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
 ## 🏗️ Infrastruktuurin provisiointivirheet
 
-### Ongelma: Resurssin nimen ristiriidat
+### Ongelma: Resurssin nimi ristiriidassa
 **Oireet:**
-- "The resource name already exists" -virheitä
-- Käyttöönotto epäonnistuu resurssin luomisen aikana
+- "Resurssin nimi on jo olemassa" -virheitä
+- Käyttöönotto epäonnistuu resurssin luonnin aikana
 
 **Ratkaisut:**
-```bash
-# 1. Käytä ainutlaatuisia resurssinimiä tunnisteiden avulla
-# Bicep-mallissasi:
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
-
-# 2. Muuta ympäristön nimeä
-azd env new my-app-dev-$(whoami)-$(date +%s)
-
-# 3. Siivoa olemassa olevat resurssit
-azd down --force --purge
 ```
 
-### Ongelma: Sijainti/alue ei saatavilla
+```bash
+# 2. Change environment name
+azd env new my-app-dev-$(whoami)-$(date +%s)
+
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
+```
+
+### Ongelma: Sijaintia/Aluetta ei ole saatavilla
 **Oireet:**
-- "The location 'xyz' is not available for resource type"
+- "Sijaintia 'xyz' ei ole saatavilla resurstyyppiin" -viesti
 - Tietyt SKU:t eivät ole saatavilla valitussa alueessa
 
 **Ratkaisut:**
 ```bash
-# 1. Tarkista resurssityyppien saatavilla olevat sijainnit
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Käytä yleisesti saatavilla olevia alueita
-azd config set defaults.location eastus2
-# tai
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. Tarkista palveluiden saatavuus alueittain
-# Vieraile: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Ongelma: Kiintiön ylitysvirheet
+Sijaintimuuttujan vaihtaminen ei siirrä olemassa olevia resursseja. Olemassa oleva resurssiryhmä tai resurssi saattaa hylätä sijainnin muutoksen; käytä erillistä ympäristöä alueelliseen uudelleenasennukseen.
+
+### Ongelma: Kiintiön ylittyminen (Quota exceeded)
 **Oireet:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+- "Kiintiö ylittynyt resurssityypille"
+- "Maksimimäärä resursseja saavutettu"
 
 **Ratkaisut:**
 ```bash
-# 1. Tarkista nykyinen kiintiön käyttö
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# 2. Pyydä kiintiön korotusta Azure-portaalin kautta
-# Siirry kohtaan: Tilaukset > Käyttö ja kiintiöt
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# 3. Käytä kehitykseen pienempiä SKUja
-# Tiedostossa main.parameters.json:
+```
+
+Kehitystä varten valitse tuettu pienempi SKU `infra/main.parameters.json`:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# 4. Siivoa käyttämättömät resurssit
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
@@ -180,330 +192,331 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 **Ratkaisut:**
 ```bash
-# 1. Tarkista Bicep-syntaksi
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Käytä Bicep-linteriä
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Tarkista parametritiedoston syntaksi
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. Esikatsele käyttöönoton muutoksia
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
-## 🚀 Käyttöönoton epäonnistumiset
+## 🚀 Käyttöönottovirheet
 
-### Ongelma: Build failures
+### Ongelma: Rakennusvirheet
 **Oireet:**
-- Sovellus ei käänny käyttöönoton aikana
-- Paketoinnin asennusvirheitä
+- Sovellus epäonnistuu käännettäessä käyttöönoton aikana
+- Pakettien asennusvirheitä
 
 **Ratkaisut:**
 ```bash
-# 1. Tarkista rakennuksen tuloste debug-lipulla
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. Tarkastele käyttöönotetun palvelun tilaa
+# 2. View deployed service status
 azd show
 
-# 3. Testaa rakennus paikallisesti
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Tarkista Node.js- ja Python-versioiden yhteensopivuus
-node --version  # Pitäisi vastata azure.yaml-tiedoston asetuksia
+# 3. Check Node.js/Python version compatibility
+node --version  # Should match azure.yaml settings
 python --version
 
-# 4. Tyhjennä rakennuksen välimuisti
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. Tarkista Dockerfile, jos käytössä on kontteja
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Ongelma: Container deployment failures
+### Ongelma: Konttikäyttöönoton virheet
 **Oireet:**
 - Konttisovellukset eivät käynnisty
-- Image pull -virheitä
+- Kuvan noutovirheitä
 
 **Ratkaisut:**
 ```bash
-# 1. Testaa Docker-kuvan rakentaminen paikallisesti
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Tarkista säilöjen lokit Azure CLI:llä
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. Seuraa sovellusta azd:n kautta
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. Varmista pääsy säilörekisteriin
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. Tarkista Container App -sovelluksen asetukset
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Ongelma: Database connection failures
+### Ongelma: Tietokantayhteyksien epäonnistuminen
 **Oireet:**
-- Sovellus ei saa yhteyttä tietokantaan
+- Sovellus ei pääse tietokantaan
 - Yhteyden aikakatkaisuvirheitä
 
 **Ratkaisut:**
 ```bash
-# 1. Tarkista tietokannan palomuurisäännöt
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Testaa yhteyden toimivuus sovelluksesta
-# Lisää sovellukseesi väliaikaisesti:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Varmista yhteysmerkkijonon muoto
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# 4. Tarkista tietokantapalvelimen tila
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
 ## 🔧 Konfiguraatio-ongelmat
 
-### Ongelma: Environment variables not working
+### Ongelma: Ympäristömuuttujat eivät toimi
 **Oireet:**
 - Sovellus ei lue konfiguraatioarvoja
 - Ympäristömuuttujat näyttävät tyhjiltä
 
 **Ratkaisut:**
 ```bash
-# 1. Varmista, että ympäristömuuttujat on asetettu
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. Tarkista muuttujien nimet tiedostosta azure.yaml
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. Käynnistä sovellus uudelleen
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. Tarkista App Service -konfiguraatio
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### Ongelma: SSL/TLS-sertifikaatio-ongelmat
+### Ongelma: SSL/TLS-sertifikaattiongelmat
 **Oireet:**
 - HTTPS ei toimi
 - Sertifikaatin validointivirheitä
 
 **Ratkaisut:**
 ```bash
-# 1. Tarkista SSL-varmenteen tila
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# 2. Ota käyttöön vain HTTPS
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Lisää mukautettu verkkotunnus (tarvittaessa)
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
 ### Ongelma: CORS-konfiguraatio-ongelmat
 **Oireet:**
-- Frontend ei pysty kutsumaan APIa
-- Cross-origin -pyyntö estetty
+- Frontend ei voi kutsua API:a
+- Cross-origin-pyyntö estetty
 
 **Ratkaisut:**
 ```bash
-# 1. Määritä CORS App Service -palvelulle
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Päivitä API käsittelemään CORS:ia
-# Express.js:ssä:
+```
+
+2. Päivitä olemassa oleva Express-sovelluksesi (johon `cors` on tuotu):
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# 3. Tarkista, ajetaanko oikeilla URL-osoitteilla
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
-## 🌍 Ympäristöhallinnan ongelmat
+## 🌍 Ympäristön hallintaongelmat
 
-### Ongelma: Ympäristön vaihtamiseen liittyvät ongelmat
+### Ongelma: Ympäristön vaihtamisongelmat
 **Oireet:**
-- Väärä ympäristö käytössä
+- Käytetään väärää ympäristöä
 - Konfiguraatio ei vaihdu oikein
 
 **Ratkaisut:**
 ```bash
-# 1. Listaa kaikki ympäristöt
+# 1. List all environments
 azd env list
 
-# 2. Valitse ympäristö nimenomaisesti
+# 2. Explicitly select environment
 azd env select production
 
-# 3. Tarkista nykyinen ympäristö
+# 3. Verify current environment
 azd env list
 
-# 4. Luo uusi ympäristö, jos se on korruptoitunut
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
-### Ongelma: Ympäristön korruptoituminen
+### Ongelma: Ympäristön vioittuminen
 **Oireet:**
-- Ympäristö näyttää virhetilassa olevalta
+- Ympäristö näyttää virhetilaa
 - Resurssit eivät vastaa konfiguraatiota
 
 **Ratkaisut:**
 ```bash
-# 1. Päivitä ympäristön tila
+# 1. Refresh environment state
 azd env refresh
 
-# 2. Nollaa ympäristön konfiguraatio
+# 2. Reset environment configuration
 azd env new production-reset
-# Kopioi tarvittavat ympäristömuuttujat
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. Tuo olemassa olevat resurssit (jos mahdollista)
-# Päivitä .azure/production/config.json manuaalisesti resurssitunnuksilla
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
 ## 🔍 Suorituskykyongelmat
 
-### Ongelma: Hitaat käyttöönottoajat
+### Ongelma: Hitautta käyttöönotossa
 **Oireet:**
-- Käyttöönotot kestävät liian kauan
-- Aikakatkaisuja käyttöönoton aikana
+- Käyttöönottoprosessit kestävät liian kauan
+- Aikakatkaisuja käytön aikana
 
 **Ratkaisut:**
 ```bash
-# 1. Ota käyttöön tietyt palvelut nopeampaa iterointia varten
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. Käytä vain koodin käyttöönottoa, kun infrastruktuuri ei muutu
-azd deploy  # Nopeampi kuin azd up
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. Optimoi rakennusprosessi
-# package.json-tiedostossa:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. Tarkista resurssien sijainnit (käytä samaa aluetta)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
 ### Ongelma: Sovelluksen suorituskykyongelmat
 **Oireet:**
 - Hitaat vasteajat
-- Korkea resurssinkulutus
+- Korkea resurssien käyttö
 
 **Ratkaisut:**
 ```bash
-# 1. Skaalaa resursseja
-# Päivitä SKU tiedostossa main.parameters.json:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# 2. Ota Application Insights -valvonta käyttöön
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# 3. Tarkista sovelluksen lokit Azuresta
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# tai Container Appsille:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. Ota välimuisti käyttöön
-# Lisää Redis-välimuisti infrastruktuuriisi
+# 4. Implement caching
+# Add Redis cache to your infrastructure
 ```
 
-## 🛠️ Vianmääritystyökalut ja -komennot
+## 🛠️ Vianmääritystyökalut ja komennot
 
 ### Virheenkorjauskomennot
 ```bash
-# Kattava virheenkorjaus
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# Tarkista azd-versio
+# Check azd version
 azd version
 
-# Näytä nykyinen kokoonpano
+# View current configuration
 azd config show
 
-# Testaa yhteys
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
-### Lokien analysointi
+### Lokien analyysi
 ```bash
-# Sovelluksen lokit Azure CLI:n kautta
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# Valvo sovellusta azd:llä
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Azure-resurssien lokit
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
-# Konttien lokit (Container Appsille)
+# Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### Resurssien tutkinta
+### Resurssien tutkiminen
 ```bash
-# Luettele kaikki resurssit
+# List all resources
 az resource list --resource-group myrg -o table
 
-# Tarkista resurssin tila
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# Verkon diagnostiikka
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Lisäapu
+## 🆘 Lisäavun hankkiminen
 
 ### Milloin eskaloida
-- Todennusongelmat jatkuvat kaikkien ratkaisujen kokeilemisen jälkeen
+- Todennusongelmat jatkuvat kaikkien ratkaisuyritysten jälkeen
 - Infrastruktuuriongelmat Azure-palveluissa
-- Laskutus- tai tilaukseen liittyvät ongelmat
-- Turvallisuusongelmat tai -tapaukset
+- Laskutus- tai tilausongelmat
+- Turvallisuushuomiot tai -tapaukset
 
 ### Tukikanavat
 ```bash
-# 1. Tarkista Azure Service Health
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Luo Azure-tukipyyntö
-# Siirry: https://portal.azure.com -> Ohje ja tuki
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. Yhteisön resurssit
-# - Stack Overflow: azure-developer-cli tunniste
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
 ### Kerättävät tiedot
-Ennen tukipyynnön lähettämistä kerää:
-- `azd version` output
-- `azd config show` output
-- `azd show` output (käynnissä olevan käyttöönoton tila)
-- Virheilmoitukset (kokonainen teksti)
+Ennen tukipalveluun ottamista yhteyttä, kerää:
+- `azd version` tuloste
+- `azd config show` tuloste
+- `azd show` tuloste (käyttöönottotilanne)
+- Virheilmoitukset (täydellinen teksti)
 - Vaiheet ongelman toistamiseksi
-- Ympäristötiedot (`azd env get-values`)
-- Aikajana siitä, milloin ongelma alkoi
+- Sensuroidut ympäristötiedot (älä koskaan jaa raakaa `azd env get-values`, joka voi sisältää salaisuuksia)
+- Aikajana ongelman alkamisajankohdalle
 
-### Lokien keruuskirjoitus
+### Lokien keräysskripti
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -528,74 +541,75 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Ongelmien ennaltaehkäisy
 
-### Ennen käyttöönottoa - tarkistuslista
+### Ennen käyttöönottoa tarkistuslista
 ```bash
-# 1. Vahvista todennus
+# 1. Validate authentication
 az account show
 
-# 2. Tarkista kiintiöt ja rajoitukset
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# 3. Vahvista mallipohjat
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# 4. Testaa ensin paikallisesti
+# 4. Test locally first
 npm run build
 npm run test
 
-# 5. Käytä simuloituja käyttöönottoja
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
-### Valvonnan asetukset
-```bash
-# Ota Application Insights käyttöön
-# Lisää main.bicep-tiedostoon:
+### Valvonnan asetus
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# Määritä hälytykset
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
 ### Säännöllinen ylläpito
 ```bash
-# Viikoittaiset terveystarkastukset
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# Kuukausittainen kustannuskatsaus
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# Neljännesvuosittainen turvallisuuskatsaus
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
-## Aiheeseen liittyvät resurssit
+## Liittyvät resurssit
 
-- [Vianetsintäopas](debugging.md) - Edistyneet vianetsintätekniikat
+- [Vianmäärityksen opas](debugging.md) - Edistyneet vianmääritystekniikat
 - [Resurssien provisiointi](../chapter-04-infrastructure/provisioning.md) - Infrastruktuurin vianmääritys
-- [Kapasiteettisuunnittelu](../chapter-06-pre-deployment/capacity-planning.md) - Resurssien suunnittelun ohjeet
-- [SKU-valinta](../chapter-06-pre-deployment/sku-selection.md) - Palvelutaso-suositukset
+- [Kapasiteetin suunnittelu](../chapter-06-pre-deployment/capacity-planning.md) - Resurssien suunnittelun ohjeet
+- [SKU:n valinta](../chapter-06-pre-deployment/sku-selection.md) - Palvelutason suositukset
 
 ---
 
-**Vinkki**: Tallenna tämä opas kirjanmerkkeihin ja palaa siihen aina, kun kohtaat ongelmia. Useimmat ongelmat ovat tuttuja ja niille on olemassa vakiintuneita ratkaisuja!
+**Vinkki**: Pidä tämä opas kirjanmerkkinä ja käytä sitä aina, kun kohtaat ongelmia. Useimmat ongelmat ovat jo käyneet läpi ja niihin on olemassa vakiintuneet ratkaisut!
 
 ---
 
 **Navigointi**
-- **Previous Lesson**: [Resurssien provisiointi](../chapter-04-infrastructure/provisioning.md)
-- **Next Lesson**: [Vianetsintäopas](debugging.md)
+- **Edellinen oppitunti**: [Resurssien provisiointi](../chapter-04-infrastructure/provisioning.md)
+- **Seuraava oppitunti**: [Vianmäärityksen opas](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-
-Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattikäännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulisi pitää auktoriteettisena lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa mahdollisista väärinymmärryksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

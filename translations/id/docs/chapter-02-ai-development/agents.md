@@ -4,40 +4,42 @@
 - **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 2 - Pengembangan AI-Pertama
 - **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Berikutnya**: [Penerapan Model AI](ai-model-deployment.md)
+- **➡️ Selanjutnya**: [Penerapan Model AI](ai-model-deployment.md)
 - **🚀 Lanjutan**: [Solusi Multi-Agen](../../examples/retail-scenario.md)
 
 ---
 
 ## Pendahuluan
 
-Agen AI adalah program otonom yang dapat mengamati lingkungan mereka, mengambil keputusan, dan melakukan tindakan untuk mencapai tujuan tertentu. Berbeda dengan chatbot sederhana yang hanya merespons perintah, agen dapat:
+Agen AI adalah program otonom yang dapat mengamati lingkungan mereka, membuat keputusan, dan mengambil tindakan untuk mencapai tujuan tertentu. Berbeda dengan chatbot sederhana yang merespons permintaan, agen dapat:
 
-- **Menggunakan alat** - Memanggil API, mencari database, mengeksekusi kode
+- **Menggunakan alat** - Memanggil API, mencari database, menjalankan kode
 - **Merencanakan dan bernalar** - Memecah tugas kompleks menjadi langkah-langkah
 - **Belajar dari konteks** - Mempertahankan memori dan menyesuaikan perilaku
 - **Bekerja sama** - Bekerja dengan agen lain (sistem multi-agen)
 
 Panduan ini menunjukkan cara menerapkan agen AI ke Azure menggunakan Azure Developer CLI (azd).
 
-> **Catatan validasi (2026-07-13):** Panduan ini telah diperiksa dengan `azd` `1.27.1` dan `azure.ai.agents` `1.0.0-beta.5`. Pengalaman `azd ai` masih berbasis preview, jadi periksa bantuan ekstensi jika flag yang Anda pasang berbeda.
+Menggunakan konteks percakapan bukanlah pelatihan model: memori persisten, kontrol akses, dan retensi harus diimplementasikan/dikonfigurasi oleh aplikasi.
+
+> **Tinjauan rilis (2026-11-04):** Contoh CLI telah dicek terhadap dokumentasi/sumber `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, dan `azure.ai.evaluations` `1.0.0-beta.2`, bukan pada penerapan Azure langsung. Gunakan `azd >= 1.37.0` untuk alur kerja gabungan. Lihat [perubahan dan perbaikan terbaru](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) sebelum memperbarui proyek lama.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
-- Memahami apa itu agen AI dan bagaimana perbedaannya dengan chatbot
+- Memahami apa itu agen AI dan bagaimana mereka berbeda dari chatbot
 - Menerapkan template agen AI yang sudah dibuat menggunakan AZD
-- Mengonfigurasi Foundry Agents untuk agen kustom
-- Menerapkan pola agen dasar (penggunaan alat, RAG, multi-agen)
-- Memantau dan meng-debug agen yang diterapkan
+- Mengonfigurasi Agen Foundry untuk agen kustom
+- Mengimplementasikan pola agen dasar (penggunaan alat, RAG, multi-agen)
+- Memantau dan men-debug agen yang diterapkan
 
 ## Hasil Pembelajaran
 
 Setelah selesai, Anda akan dapat:
 - Menerapkan aplikasi agen AI ke Azure dengan satu perintah
 - Mengonfigurasi alat dan kemampuan agen
-- Menerapkan retrieval-augmented generation (RAG) dengan agen
-- Merancang arsitektur multi-agen untuk alur kerja kompleks
+- Mengimplementasikan retrieval-augmented generation (RAG) dengan agen
+- Mendesain arsitektur multi-agen untuk alur kerja kompleks
 - Memecahkan masalah umum penerapan agen
 
 ---
@@ -46,56 +48,51 @@ Setelah selesai, Anda akan dapat:
 
 | Fitur | Chatbot | Agen AI |
 |---------|---------|----------|
-| **Perilaku** | Merespon perintah | Mengambil tindakan secara otonom |
-| **Alat** | Tidak ada | Bisa memanggil API, mencari, mengeksekusi kode |
-| **Memori** | Hanya berbasis sesi | Memori persisten antar sesi |
-| **Perencanaan** | Respon tunggal | Penalaran berlangkah banyak |
+| **Perilaku** | Merespons permintaan | Mengambil tindakan otonom |
+| **Alat** | Mungkin menggunakan retrieval atau alat | Biasanya menggunakan alat dalam siklus berorientasi tujuan |
+| **Memori** | Bergantung aplikasi | Memori persisten hanya jika diimplementasikan secara eksplisit |
+| **Perencanaan** | Respon tunggal | Penalaran multi-langkah |
 | **Kolaborasi** | Entitas tunggal | Bisa bekerja dengan agen lain |
 
 ### Analogi Sederhana
 
 - **Chatbot** = Seseorang yang membantu menjawab pertanyaan di meja informasi
-- **Agen AI** = Asisten pribadi yang bisa membuat panggilan, memesan janji, dan menyelesaikan tugas untuk Anda
+- **Agen AI** = Asisten pribadi yang bisa melakukan panggilan, memesan janji, dan menyelesaikan tugas untuk Anda
 
 ---
 
 ## 🚀 Mulai Cepat: Terapkan Agen Pertama Anda
 
-### Opsi 1: Template Foundry Agents (Direkomendasikan)
+Pilih salah satu opsi di **direktori kerja kosong baru**. Trailing `.` menginisialisasi di sana; tanpa tujuan eksplisit, AZD saat ini mungkin membuat subdirektori bernama template dan tidak mengubah direktori shell Anda. Jaga template/lingkungan terpisah di direktori terpisah.
+
+Rentang waktu/biaya di bawah ini hanya ilustrasi, bukan kutipan yang divalidasi. Periksa prasyarat, harga, kuota model, dan layanan opsional setiap contoh saat ini sebelum penerapan.
+
+### Opsi 1: Template Agen Foundry (Direkomendasikan)
 
 ```bash
-# Inisialisasi template agen AI
-azd init --template get-started-with-ai-agents
+# Initialize the AI agents template
+azd init --template get-started-with-ai-agents .
 
-# Deploy ke Azure
+# Deploy to Azure
 azd up
 ```
 
-**Yang diterapkan:**
-- ✅ Foundry Agents
-- ✅ Microsoft Foundry Models (gpt-4.1)
-- ✅ Azure AI Search (untuk RAG)
-- ✅ Azure Container Apps (antarmuka web)
-- ✅ Application Insights (pemantauan)
+**Apa yang diterapkan:** Infrastruktur contoh saat ini dan opsi yang dipilih menentukan model, alat, hosting, dan sumber daya pemantauan. Baca README dan `infra/` sebelum provisioning; jangan asumsikan setiap template agen termasuk Search atau antarmuka web.
 
 **Waktu:** ~15-20 menit
 **Biaya:** ~$100-150/bulan (pengembangan)
 
-### Opsi 2: Agen OpenAI dengan Prompty
+### Opsi 2: Agen Penulisan Kreatif dengan Prompty
 
 ```bash
-# Inisialisasi template agen berbasis Prompty
-azd init --template agent-openai-python-prompty
+# Initialize the Prompty-based agent template
+azd init --template https://github.com/Azure-Samples/contoso-creative-writer .
 
-# Deploy ke Azure
+# Deploy to Azure
 azd up
 ```
 
-**Yang diterapkan:**
-- ✅ Azure Functions (eksekusi agen serverless)
-- ✅ Microsoft Foundry Models
-- ✅ File konfigurasi Prompty
-- ✅ Implementasi agen contoh
+**Apa yang diterapkan:** Contoh penulisan multi-agen FastAPI/Prompty menggunakan Azure OpenAI, Bing Grounding, dan Azure AI Search. Repositori `agent-openai-python-prompty` sebelumnya mengarahkan ke sini; ini bukan template agen cuaca Azure Functions minimal. Ikuti README saat ini untuk hosting, kuota model, dan prasyarat Bing Grounding.
 
 **Waktu:** ~10-15 menit
 **Biaya:** ~$50-100/bulan (pengembangan)
@@ -103,40 +100,40 @@ azd up
 ### Opsi 3: Agen Chat RAG
 
 ```bash
-# Inisialisasi template obrolan RAG
-azd init --template azure-search-openai-demo
+# Initialize RAG chat template
+azd init --template azure-search-openai-demo .
 
-# Terapkan ke Azure
+# Deploy to Azure
 azd up
 ```
 
-**Yang diterapkan:**
-- ✅ Microsoft Foundry Models
+**Apa yang diterapkan:**
+- ✅ Model Microsoft Foundry
 - ✅ Azure AI Search dengan data contoh
 - ✅ Pipeline pemrosesan dokumen
-- ✅ Antarmuka chat dengan kutipan
+- ✅ Antarmuka chat dengan sitasi
 
 **Waktu:** ~15-25 menit
 **Biaya:** ~$80-150/bulan (pengembangan)
 
-### Opsi 4: AZD AI Agent Init (Preview Berbasis Manifest atau Template)
+### Opsi 4: Inisialisasi Agen AI AZD (Pratinjau Template Proyek)
 
-Jika Anda memiliki file manifest agen, Anda bisa menggunakan perintah `azd ai` untuk membuat proyek Foundry Agent Service langsung. Rilis preview terbaru juga menambahkan dukungan inisialisasi berbasis template, jadi alur prompt tepat mungkin sedikit berbeda tergantung versi ekstensi yang Anda pasang.
+Gunakan `azd ai agent init` secara interaktif, atau adopsi proyek agen `azure.yaml` saat ini dengan `--template`/`-t`. Opsi lama `--manifest`/`-m` adalah alias yang sudah tidak digunakan, bukan konverter untuk manifest warisan.
 
 ```bash
-# Instal ekstensi agen AI
+# Install the AI agents extension
 azd extension install azure.ai.agents
 
-# Opsional: verifikasi versi pratinjau yang terpasang
+# Optional: verify the installed preview version
 azd extension show azure.ai.agents
 
-# Inisialisasi dari manifes agen
-azd ai agent init -m agent-manifest.yaml
+# Initialize from a current agent project template (supply your template path)
+azd ai agent init --template ./templates/support-agent/azure.yaml
 
-# Terapkan ke Azure
+# Deploy to Azure
 azd up
 
-# Uji agen yang diterapkan (menampilkan latensi + waktu-ke-byte-pertama)
+# Test the deployed agent (shows latency + time-to-first-byte)
 azd ai agent invoke
 ```
 
@@ -144,12 +141,12 @@ azd ai agent invoke
 
 | Pendekatan | Terbaik Untuk | Cara Kerja |
 |----------|----------|------|
-| `azd init --template` | Memulai dari aplikasi contoh kerja | Mengkloning repositori template lengkap dengan kode + infrastruktur |
-| `azd ai agent init -m` | Membangun dari manifest agen sendiri | Membuat struktur proyek dari definisi agen Anda |
+| `azd init --template` | Memulai dari aplikasi contoh yang berfungsi | Mengkloning repo template penuh dengan kode + infra |
+| `azd ai agent init --template` | Mengadopsi proyek agen Foundry saat ini | Menggunakan dokumen proyek `azure.yaml` dan definisinya |
 
-> **Tips:** Gunakan `azd init --template` saat belajar (Opsi 1-3 di atas). Gunakan `azd ai agent init` saat membangun agen produksi dengan manifest Anda sendiri.
+> **Tip:** Gunakan `azd init --template` saat belajar (Opsi 1-3 di atas). Gunakan `azd ai agent init` untuk alur kerja agen Foundry. Untuk menambahkan definisi agen langsung ke proyek yang ada, lihat [panduan inisialisasi dan migrasi](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
 
-Setelah `azd up`, ekstensi yang sama membawa Anda melewati siklus hidup agen: `azd ai agent invoke` untuk menguji, `azd ai agent eval generate` dan `azd ai agent optimize` untuk mengukur dan meningkatkan kualitas, serta `azd ai agent delete` untuk membersihkan. Lihat [Perintah AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk referensi lengkap.
+Setelah `azd up`, gunakan `azd ai agent invoke` untuk menguji, ekstensi `azure.ai.evaluations` terpisah (`azd ai eval init`, `generate`, dan `run start`) untuk mengukur kualitas, dan `azd ai agent optimize` untuk meningkatkannya menggunakan konfigurasi evaluasi baru. Agen beta.22 menggantikan alur evaluasi warisan dan mengubah format `--config` optimasi. Lihat [migrasi evaluasi](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) dan [migrasi optimasi](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) sebelum menggunakan kembali contoh lama.
 
 ---
 
@@ -157,14 +154,14 @@ Setelah `azd up`, ekstensi yang sama membawa Anda melewati siklus hidup agen: `a
 
 ### Pola 1: Agen Tunggal dengan Alat
 
-Pola agen paling sederhana - satu agen yang dapat menggunakan berbagai alat.
+Pola agen paling sederhana - satu agen yang dapat menggunakan banyak alat.
 
 ```mermaid
 graph TD
-    UI[Antarmuka Pengguna] --> Agent[Agen AI<br/>gpt-4.1]
-    Agent --> Search[Alat Pencarian]
-    Agent --> Database[Alat Basis Data]
-    Agent --> API[Alat API]
+    UI[User Interface] --> Agent[AI Agent<br/>gpt-4.1]
+    Agent --> Search[Search Tool]
+    Agent --> Database[Database Tool]
+    Agent --> API[API Tool]
 ```
 
 **Terbaik untuk:**
@@ -172,42 +169,42 @@ graph TD
 - Asisten riset
 - Agen analisis data
 
-**Template AZD:** `azure-search-openai-demo`
+**Contoh aplikasi terkait:** `azure-search-openai-demo` mendemonstrasikan RAG, bukan loop agen alat sewenang-wenang generik.
 
 ### Pola 2: Agen RAG (Retrieval-Augmented Generation)
 
-Agen yang mengambil dokumen relevan sebelum menghasilkan jawaban.
+Agen yang mengambil dokumen relevan sebelum menghasilkan respons.
 
 ```mermaid
 graph TD
-    Query[Kueri Pengguna] --> RAG[Agen RAG]
-    RAG --> Vector[Pencarian Vektor]
+    Query[User Query] --> RAG[RAG Agent]
+    RAG --> Vector[Vector Search]
     RAG --> LLM[LLM<br/>gpt-4.1]
     Vector -- Documents --> LLM
-    LLM --> Response[Respon dengan Sitasi]
+    LLM --> Response[Response with Citations]
 ```
 
 **Terbaik untuk:**
 - Basis pengetahuan perusahaan
-- Sistem Q&A dokumen
-- Riset kepatuhan dan hukum
+- Sistem tanya jawab dokumen
+- Penelitian kepatuhan dan hukum
 
 **Template AZD:** `azure-search-openai-demo`
 
 ### Pola 3: Sistem Multi-Agen
 
-Beberapa agen khusus bekerja sama pada tugas kompleks.
+Beberapa agen khusus yang bekerja sama pada tugas kompleks.
 
 ```mermaid
 graph TD
-    Orchestrator[Agen Orkestrator] --> Research[Agen Peneliti<br/>gpt-4.1]
-    Orchestrator --> Writer[Agen Penulis<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[Agen Peninjau<br/>gpt-4.1]
+    Orchestrator[Orchestrator Agent] --> Research[Research Agent<br/>gpt-4.1]
+    Orchestrator --> Writer[Writer Agent<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Reviewer Agent<br/>gpt-4.1]
 ```
 
 **Terbaik untuk:**
-- Generasi konten kompleks
-- Alur kerja bertahap
+- Pembuatan konten kompleks
+- Alur kerja multi-langkah
 - Tugas yang memerlukan keahlian berbeda
 
 **Pelajari Lebih Lanjut:** [Pola Koordinasi Multi-Agen](../chapter-06-pre-deployment/coordination-patterns.md)
@@ -216,51 +213,57 @@ graph TD
 
 ## ⚙️ Mengonfigurasi Alat Agen
 
-Agen menjadi kuat ketika bisa menggunakan alat. Berikut cara mengonfigurasi alat umum:
+Agen menjadi kuat ketika mereka dapat menggunakan alat. Berikut cara mengonfigurasi alat umum:
 
-### Konfigurasi Alat di Foundry Agents
+### Konfigurasi Alat di Agen Foundry
+
+Fragmen **Agent Service SDK klasik** ini menargetkan `azure-ai-projects==1.0.0` dan `azure-ai-agents==1.1.0` dengan `azure-identity`. Ini bukan API responses/agen versi baru yang digunakan beberapa template Foundry saat ini, bukan ekstensi AZD `azure.ai.agents` (paket berbeda). Jangan mencampur generasi API ini. Setel `PROJECT_ENDPOINT` ke titik akhir proyek Foundry klasik dan `MODEL_DEPLOYMENT_NAME` ke penerapan model yang didukung; autentikasi dengan `az login` secara lokal dan berikan izin proyek yang diperlukan.
 
 ```python
 # agent_config.py
+import os
 from azure.ai.projects import AIProjectClient
-from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
+from azure.ai.agents.models import FunctionTool
+from azure.identity import DefaultAzureCredential
 
-# Definisikan alat khusus
-search_tool = FunctionTool(
-    name="search_knowledge_base",
-    description="Search the company knowledge base for relevant documents",
-    parameters={
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "The search query"
-            }
-        },
-        "required": ["query"]
-    }
+def search_knowledge_base(query: str) -> str:
+    """Search the demonstration knowledge base.
+
+    :param query: Search text.
+    :return: Matching demonstration information.
+    """
+    # Local fixture only, not a production search implementation.
+    return "Demo policy: returns are accepted within 30 days."
+
+project_client = AIProjectClient(
+    endpoint=os.environ["PROJECT_ENDPOINT"],
+    credential=DefaultAzureCredential(),
 )
-
-# Buat agen dengan alat-alat
+search_tool = FunctionTool(functions={search_knowledge_base})
+project_client.agents.enable_auto_function_calls(search_tool)
 agent = project_client.agents.create_agent(
-    model="gpt-4.1",
+    model=os.environ["MODEL_DEPLOYMENT_NAME"],
     name="Support Agent",
-    instructions="You are a helpful support agent. Use the search tool to find relevant information.",
-    tools=[search_tool, CodeInterpreterTool()]
+    instructions="Use search_knowledge_base for policy questions. Label results as demo data.",
+    tools=search_tool.definitions,
 )
 ```
 
+Mendaftarkan skema fungsi tidak menjalankan Python di layanan. Dalam SDK ini, `enable_auto_function_calls` plus `agents.runs.create_and_process(...)` menjalankan callback terdaftar dalam proses klien Anda. Lihat [contoh SDK yang dirilis](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py). Tutup klien dan hapus agen/thread demo setelah selesai.
+
 ### Konfigurasi Lingkungan
 
+Nama berikut adalah **input template kustom ilustratif**, bukan saklar bawaan AZD. Pertama sambungkan setiap nilai melalui `infra/main.parameters.json`, infrastruktur, dan kode aplikasi. `azd env set` sendiri tidak mengubah alat atau instruksi agen.
+
 ```bash
-# Atur variabel lingkungan spesifik agen
+# Set up agent-specific environment variables
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Deploy dengan konfigurasi yang diperbarui
-azd deploy
+# Apply wired infrastructure and application changes
+azd up
 ```
 
 ---
@@ -269,27 +272,27 @@ azd deploy
 
 ### Integrasi Application Insights
 
-Semua template agen AZD menyertakan Application Insights untuk pemantauan:
+Jika template yang Anda pilih melakukan provisioning Application Insights dan mengonfigurasi instrumentasi:
 
 ```bash
-# Buka dasbor pemantauan
+# Open monitoring dashboard
 azd monitor --overview
 
-# Lihat log langsung
+# Open the Application Insights logs view (not a streaming log tail)
 azd monitor --logs
 
-# Lihat metrik langsung
+# View live metrics
 azd monitor --live
 ```
 
-### Metrik Kunci yang Dipantau
+### Metrik Kunci untuk Dilacak
 
 | Metrik | Deskripsi | Target |
 |--------|-------------|--------|
-| Latensi Respon | Waktu menghasilkan respon | < 5 detik |
+| Latensi Respons | Waktu untuk menghasilkan respons | < 5 detik |
 | Penggunaan Token | Token per permintaan | Pantau untuk biaya |
 | Tingkat Keberhasilan Panggilan Alat | % eksekusi alat berhasil | > 95% |
-| Tingkat Kesalahan | Permintaan agen yang gagal | < 1% |
+| Tingkat Kesalahan | Permintaan agen gagal | < 1% |
 | Kepuasan Pengguna | Skor umpan balik | > 4.0/5.0 |
 
 ### Logging Kustom untuk Agen
@@ -299,7 +302,7 @@ import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# Konfigurasikan Azure Monitor dengan OpenTelemetry
+# Configure Azure Monitor with OpenTelemetry
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -309,103 +312,99 @@ tracer = trace.get_tracer(__name__)
 def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
     with tracer.start_as_current_span("agent_interaction") as span:
         span.set_attributes({
-            "user_query": user_query,
+            "query_length": len(user_query),  # Do not log raw prompts or personal data
             "response_length": len(agent_response),
             "tools_used": tools_used,
             "latency_ms": latency_ms
         })
 ```
 
-> **Catatan:** Instal paket yang diperlukan: `pip install azure-monitor-opentelemetry opentelemetry`
+> **Catatan:** Instal paket yang diperlukan: `pip install azure-monitor-opentelemetry`. Paket ini menyertakan dependensi OpenTelemetry; namespace impor bukan persyaratan untuk menginstal paket bernama `opentelemetry`.
 
 ---
 
 ## 💰 Pertimbangan Biaya
 
-### Estimasi Biaya Bulanan berdasarkan Pola
+### Estimasi Biaya Bulanan Berdasarkan Pola
+
+Ini adalah rentang perencanaan ilustratif, bukan kutipan atau batas pengeluaran. Wilayah, token model, SKU Search/komputasi, sesi alat, penyimpanan, dan lalu lintas dapat melebihi ini. Periksa panduan biaya contoh dan harga Azure sebelum `azd up`.
 
 | Pola | Lingkungan Dev | Produksi |
 |---------|-----------------|------------|
 | Agen Tunggal | $50-100 | $200-500 |
 | Agen RAG | $80-150 | $300-800 |
-| Multi-Agen (2-3 agen) | $150-300 | $500-1,500 |
-| Multi-Agen Perusahaan | $300-500 | $1,500-5,000+ |
+| Multi-Agen (2-3 agen) | $150-300 | $500-1.500 |
+| Multi-Agen Perusahaan | $300-500 | $1.500-5.000+ |
 
 ### Tips Optimasi Biaya
 
-1. **Gunakan gpt-4.1-mini untuk tugas sederhana**
+1. **Gunakan gpt-4.1-mini untuk tugas sederhana** (hanya jika template Anda mengonsumsi input ini)
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Terapkan caching untuk kueri berulang**
-   ```python
-   from functools import lru_cache
-   
-   @lru_cache(maxsize=1000)
-   def get_cached_response(query_hash):
-       return agent.run(query_hash)
-   ```
+2. **Implementasikan caching terarah untuk kueri berulang yang aman.** Sertakan otorisasi tenant/user, penerapan model, instruksi, dan versi pengambilan dalam kunci cache; setel masa berlaku. Jangan bagikan respons percakapan privat melalui cache query-only yang berlaku proses. Objek agen SDK tidak memiliki metode `agent.run()` generik.
 
-3. **Tetapkan batas token per jalankan**
+3. **Tetapkan batas token per run**
    ```python
-   # Tetapkan max_completion_tokens saat menjalankan agen, bukan saat pembuatan
-   run = project_client.agents.create_run(
+   # Set max_completion_tokens when running the agent, not during creation
+   run = project_client.agents.runs.create_and_process(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # Batasi panjang respons
+       max_completion_tokens=1000  # Budget across the run; may finish as incomplete
    )
    ```
 
-4. **Skalakan ke nol saat tidak digunakan**
+4. **Skalakan Container Apps yang memenuhi syarat ke nol saat tidak digunakan**
    ```bash
-   # Aplikasi Kontainer secara otomatis skala hingga nol
+   # Custom-template input: must map to template.scale.minReplicas
    azd env set MIN_REPLICAS "0"
    ```
+ Terapkan perubahan infrastruktur dengan `azd provision` atau `azd up`. Skala ke nol membutuhkan pemicu yang sesuai dan tidak menghentikan biaya Search, penyimpanan, atau model/alat.
 
 ---
 
 ## 🔧 Pemecahan Masalah Agen
 
-### Masalah dan Solusi Umum
+### Masalah Umum dan Solusinya
 
 <details>
 <summary><strong>❌ Agen tidak merespons panggilan alat</strong></summary>
 
 ```bash
-# Periksa apakah alat sudah terdaftar dengan benar
+# Inspect the application deployment (not the agent's registered tools)
 azd show
 
-# Verifikasi penempatan OpenAI
+# Verify OpenAI deployment
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# Periksa log agen
+# Check agent logs
 azd monitor --logs
 ```
 
 **Penyebab umum:**
-- Ketidaksesuaian tanda tangan fungsi alat
-- Izin yang dibutuhkan hilang
-- Endpoint API tidak dapat diakses
+- Tanda tangan fungsi alat tidak cocok
+- Izin yang diperlukan hilang
+- Titik akhir API tidak dapat diakses
 </details>
 
 <details>
-<summary><strong>❌ Latensi tinggi pada respon agen</strong></summary>
+<summary><strong>❌ Latensi tinggi dalam respons agen</strong></summary>
 
 ```bash
-# Periksa Application Insights untuk hambatan
+# Check Application Insights for bottlenecks
 azd monitor --live
 
-# Pertimbangkan menggunakan model yang lebih cepat
+# Consider using a faster model
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
-azd deploy
+azd up
 ```
 
 **Tips optimasi:**
-- Gunakan respon streaming
-- Terapkan caching respon
+- Gunakan respons streaming
+- Terapkan caching respons
 - Kurangi ukuran jendela konteks
 </details>
 
@@ -413,7 +412,7 @@ azd deploy
 <summary><strong>❌ Agen mengembalikan informasi salah atau halusinasi</strong></summary>
 
 ```python
-# Tingkatkan dengan prompt sistem yang lebih baik
+# Improve with better system prompts
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -422,22 +421,21 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Tambahkan pengambilan untuk dasar
-agent = project_client.agents.create_agent(
-    model="gpt-4.1",
-    instructions=instructions,
-    tools=[FileSearchTool()]  # Dasarkan respons dalam dokumen
-)
+# Use these instructions in the agent definition.
+# For classic file search, first upload/index documents in a vector store,
+# then use FileSearchTool(vector_store_ids=[...]) and pass both its
+# .definitions and .resources when creating the agent.
 ```
+Instruksi dan pengambilan mengurangi risiko; keduanya tidak menjamin jawaban faktual. Evaluasi pertanyaan yang didasarkan dan di luar cakupan terhadap jawaban yang diketahui.
 </details>
 
 <details>
 <summary><strong>❌ Kesalahan batas token terlampaui</strong></summary>
 
 ```python
-# Terapkan manajemen jendela konteks
+# Implement context window management
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
-    """Keep only recent messages within token limit."""
+    """Approximate content-only budget for objects with .content strings."""
     import tiktoken
     encoding = tiktoken.encoding_for_model(model)
     total_tokens = 0
@@ -452,6 +450,7 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     
     return truncated
 ```
+Pembantu ini mengecualikan skema peran/alat, instruksi sistem, token gambar, dan overhead protokol. Sisakan ruang untuk itu dan kelengkapan; jangan pisahkan pasangan panggilan alat/hasil atau buang instruksi sistem yang dibutuhkan. Instal `tiktoken` secara terpisah. Ini bukan validator jendela konteks umum.
 </details>
 
 ---
@@ -463,121 +462,131 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 **Tujuan:** Terapkan agen AI pertama Anda menggunakan AZD
 
 ```bash
-# Langkah 1: Inisialisasi template
-azd init --template get-started-with-ai-agents
+# Step 1: Initialize template
+azd init --template get-started-with-ai-agents .
 
-# Langkah 2: Masuk ke Azure
+# Step 2: Login to Azure
 azd auth login
-# Jika Anda bekerja lintas tenant, tambahkan --tenant-id <tenant-id>
+# If you work across tenants, add --tenant-id <tenant-id>
 
-# Langkah 3: Deploy
+# Step 3: Deploy
 azd up
 
-# Langkah 4: Uji agen
-# Output yang diharapkan setelah deployment:
-#   Deployment Selesai!
+# Step 4: Test the agent
+# Expected output after deployment:
+#   Deployment Complete!
 #   Endpoint: https://<app-name>.<region>.azurecontainerapps.io
-# Buka URL yang ditampilkan di output dan coba ajukan pertanyaan
+# Open the URL shown in the output and try asking a question
 
-# Langkah 5: Lihat monitoring
+# Step 5: View monitoring
 azd monitor --overview
 
-# Langkah 6: Bersihkan
+# Step 6: Clean up
 azd down --force --purge
 ```
 
 **Kriteria Keberhasilan:**
-- [ ] Agen merespon pertanyaan
-- [ ] Dapat mengakses dasbor pemantauan melalui `azd monitor`
+- [ ] Agen merespons pertanyaan
+- [ ] Dapat mengakses dashboard pemantauan via `azd monitor`
 - [ ] Sumber daya dibersihkan dengan sukses
 
 ### Latihan 2: Tambahkan Alat Kustom (30 menit)
 
 **Tujuan:** Perluas agen dengan alat kustom
 
-1. Terapkan template agen:
-   ```bash
-   azd init --template get-started-with-ai-agents
-   azd up
-   ```
-2. Buat fungsi alat baru dalam kode agen Anda:
+**Titik awal:** Gunakan klien SDK klasik dari [Konfigurasi Alat](#tool-configuration-in-foundry-agents), bukan template sewenang-wenang dengan generasi SDK berbeda.
+
+1. Tambahkan fixture deterministik ini ke `agent_config.py`:
    ```python
    def get_weather(location: str) -> str:
-       """Get current weather for a location."""
-       # Panggilan API ke layanan cuaca
-       return f"Weather in {location}: Sunny, 72°F"
+       """Return demonstration weather, not live conditions.
+
+       :param location: City name.
+       :return: A clearly labelled fixture.
+       """
+       print(f"TOOL_CALLED: {location}")
+       return f"Demo weather in {location}: Sunny, 72°F (fixture, not live)"
    ```
-3. Daftarkan alat dengan agen:
+2. Ganti blok registrasi dan pembuatan search-tool dengan:
    ```python
-   from azure.ai.projects.models import FunctionTool
-
-   weather_tool = FunctionTool(
-       name="get_weather",
-       description="Get current weather for a location",
-       parameters={
-           "type": "object",
-           "properties": {
-               "location": {"type": "string", "description": "City name"}
-           },
-           "required": ["location"]
-       }
-   )
-
+   weather_tool = FunctionTool(functions={get_weather})
+   project_client.agents.enable_auto_function_calls(weather_tool)
    agent = project_client.agents.create_agent(
-       model="gpt-4.1",
+       model=os.environ["MODEL_DEPLOYMENT_NAME"],
        name="Weather Agent",
-       tools=[weather_tool]
+       instructions="Call get_weather for weather questions; explain that it returns demo data.",
+       tools=weather_tool.definitions,
    )
+   thread = project_client.agents.threads.create()
+   try:
+       project_client.agents.messages.create(
+           thread_id=thread.id, role="user", content="Use get_weather for Seattle."
+       )
+       run = project_client.agents.runs.create_and_process(
+           thread_id=thread.id, agent_id=agent.id
+       )
+       if run.status != "completed":
+           raise RuntimeError(f"Run status: {run.status}; error: {run.last_error}")
+       for message in project_client.agents.messages.list(thread_id=thread.id):
+           for text in message.text_messages:
+               print(text.text.value)
+   finally:
+       project_client.agents.threads.delete(thread.id)
+       project_client.agents.delete_agent(agent.id)
+       project_client.close()
    ```
-4. Terapkan ulang dan uji:
+3. Jalankan secara lokal (ini memanggil proyek Azure yang ada dan menimbulkan biaya model):
    ```bash
-   azd deploy
-   # Tanya: "Bagaimana cuaca di Seattle?"
-   # Diharapkan: Agen memanggil get_weather("Seattle") dan mengembalikan info cuaca
+   python agent_config.py
+   # Expected: TOOL_CALLED: Seattle, then a completed answer labelled demo data.
    ```
 
 **Kriteria Keberhasilan:**
-- [ ] Agen mengenali kueri terkait cuaca
+- [ ] Agen mengenali pertanyaan terkait cuaca
 - [ ] Alat dipanggil dengan benar
-- [ ] Respon menyertakan informasi cuaca
+- [ ] Respon mencakup informasi cuaca
 
-### Latihan 3: Bangun Agen RAG (45 menit)
+### Latihan 3: Membangun Agen RAG (45 menit)
 
-**Tujuan:** Buat agen yang menjawab pertanyaan dari dokumen Anda
+**Tujuan:** Membuat agen yang menjawab pertanyaan dari dokumen Anda
 
 ```bash
-# Langkah 1: Terapkan template RAG
-azd init --template azure-search-openai-demo
+# Step 1: Deploy RAG template
+azd init --template azure-search-openai-demo .
 azd up
 
-# Langkah 2: Unggah dokumen Anda
-# Tempatkan file PDF/TXT di direktori data/, kemudian jalankan:
-python scripts/prepdocs.py
+# Step 2: Upload your documents
+# For the sample's local ingestion path, place supported files in data/.
+# Run from the sample root after following its Python environment setup:
+./scripts/prepdocs.sh
+# Windows PowerShell equivalent: .\\scripts\\prepdocs.ps1
 
-# Langkah 3: Uji dengan pertanyaan khusus domain
-# Buka URL aplikasi web dari output azd up
-# Ajukan pertanyaan tentang dokumen yang Anda unggah
-# Respons harus menyertakan referensi kutipan seperti [doc.pdf]
+# Step 3: Test with domain-specific questions
+# Open the web app URL from the azd up output
+# Ask questions about your uploaded documents
+# Responses should include citation references like [doc.pdf]
 ```
 
 **Kriteria Keberhasilan:**
 - [ ] Agen menjawab dari dokumen yang diunggah
 - [ ] Respon menyertakan kutipan
-- [ ] Tidak ada halusinasi pada pertanyaan di luar cakupan
+- [ ] Pertanyaan uji di luar cakupan ditangani tanpa klaim yang tidak didukung (bukan jaminan untuk setiap pertanyaan di masa depan)
+
+Jika `USE_CLOUD_INGESTION=true`, gunakan alur kerja pengunggahan/ingesti cloud dalam contoh ini; pembungkus lokal sengaja melewati ingesti. Setelah pengujian, jalankan `azd down` di lingkungan RAG dan tinjau sumber daya yang akan dihapus.
 
 ---
 
 ## 📚 Langkah Selanjutnya
 
-Sekarang Anda memahami agen AI, jelajahi topik lanjutan ini:
+Sekarang setelah Anda memahami agen AI, jelajahi topik lanjutan ini:
 
 | Topik | Deskripsi | Tautan |
 |-------|-------------|------|
-| **Sistem Multi-Agen** | Bangun sistem dengan banyak agen yang berkolaborasi | [Contoh Multi-Agen Retail](../../examples/retail-scenario.md) |
+| **Sistem Multi-Agen** | Membangun sistem dengan beberapa agen yang berkolaborasi | [Contoh Multi-Agen Ritel](../../examples/retail-scenario.md) |
 | **Pola Koordinasi** | Pelajari pola orkestrasi dan komunikasi | [Pola Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Penerapan Produksi** | Penerapan agen siap perusahaan | [Praktik AI Produksi](../chapter-08-production/production-ai-practices.md) |
+| **Penerapan Produksi** | Penerapan agen yang siap untuk perusahaan | [Praktik AI Produksi](../chapter-08-production/production-ai-practices.md) |
 | **Evaluasi Agen** | Uji dan evaluasi kinerja agen | [Pemecahan Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **Workshop Lab AI** | Praktik langsung: Buat solusi AI Anda siap AZD | [Workshop Lab AI](ai-workshop-lab.md) |
+| **Lab Workshop AI** | Praktik langsung: Buat solusi AI Anda siap AZD | [Lab Workshop AI](ai-workshop-lab.md) |
 
 ---
 
@@ -586,12 +595,12 @@ Sekarang Anda memahami agen AI, jelajahi topik lanjutan ini:
 ### Dokumentasi Resmi
 - [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
 - [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
-- [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
+- [Kerangka Agen Semantic Kernel](https://learn.microsoft.com/semantic-kernel/)
 
 ### Template AZD untuk Agen
-- [Memulai dengan Agen AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
-- [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Mulai dengan Agen AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Agen Penulisan Kreatif dengan Prompty](https://github.com/Azure-Samples/contoso-creative-writer)
+- [Demo Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 ### Sumber Daya Komunitas
 - [Awesome AZD - Template Agen](https://azure.github.io/awesome-azd/?tags=ai-agents)
@@ -599,7 +608,7 @@ Sekarang Anda memahami agen AI, jelajahi topik lanjutan ini:
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
 ### Keterampilan Agen untuk Editor Anda
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Instal keterampilan agen AI yang dapat digunakan ulang untuk pengembangan Azure di GitHub Copilot, Cursor, atau agen yang didukung lainnya. Termasuk keterampilan untuk [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [penerapan](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), dan [diagnostik](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+- [**Keterampilan Agen Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Instal keterampilan agen AI yang dapat digunakan ulang untuk pengembangan Azure di GitHub Copilot, Cursor, atau agen yang didukung. Termasuk keterampilan untuk [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [penyebaran](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), dan [diagnostik](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -608,7 +617,7 @@ Sekarang Anda memahami agen AI, jelajahi topik lanjutan ini:
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
-- **Pelajaran Berikutnya**: [Penerapan Model AI](ai-model-deployment.md)
+- **Pelajaran Selanjutnya**: [Penerapan Model AI](ai-model-deployment.md)
 
 ---
 

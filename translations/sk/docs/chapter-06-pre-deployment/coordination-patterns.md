@@ -1,11 +1,11 @@
 # Vzory koordinácie viacerých agentov
 
-⏱️ **Odhadovaný čas**: 60-75 minút | 💰 **Odhadované náklady**: ~$100-300/mesiac | ⭐ **Zložitosť**: Pokročilá
+⏱️ **Odhadovaný čas**: 60-75 minút čítania; niekoľko hodín implementácie | 💰 **Odhadované náklady**: závislé od pracovného zaťaženia | ⭐ **Zložitosť**: Pokročilá
 
-**📚 Učebná cesta:**
-- ← Predchádzajúce: [Plánovanie kapacity](capacity-planning.md) - Veľkosť zdrojov a stratégie škálovania
-- 🎯 **Ste tu**: Vzory koordinácie viacerých agentov (orchestration, komunikácia, správa stavu)
-- → Ďalej: [Výber SKU](sku-selection.md) - Výber vhodných služieb Azure
+**📚 Učiaca sa cesta:**
+- ← Predchádzajúca: [Plánovanie kapacít](capacity-planning.md) - stratégie veľkosti a škálovania zdrojov
+- 🎯 **Ste tu**: Vzory koordinácie viacerých agentov (orchestrace, komunikácia, správa stavu)
+- → Ďalšia: [Výber SKU](sku-selection.md) - Výber správnych služieb Azure
 - 🏠 [Domov kurzu](../../README.md)
 
 ---
@@ -13,81 +13,83 @@
 ## Čo sa naučíte
 
 Po absolvovaní tejto lekcie budete:
-- Rozumieť **vzory architektúry viacerých agentov** a kedy ich použiť
-- Implementovať **vzory orchestrácie** (centralizovaná, decentralizovaná, hierarchická)
-- Navrhovať **spôsoby komunikácie agentov** (synchronné, asynchronné, riadené udalosťami)
-- Spravovať **zdieľaný stav** medzi rozptýlenými agentmi
-- Nasadiť **systémy viacerých agentov** na Azure s AZD
-- Aplikovať **vzory koordinácie** pre reálne AI scenáre
-- Monitorovať a ladiť distribuované systémy agentov
+- Rozumieť vzorom **architektúry viacerých agentov** a kedy ich používať
+- Implementovať **vzor orchestrace** (centralizovaný, decentralizovaný, hierarchický)
+- Navrhnúť stratégie **komunikácie agentov** (synchrónna, asynchrónna, riadená udalosťami)
+- Spravovať **zdieľaný stav** medzi distribuovanými agentmi
+- Nasadiť **systémy viacerých agentov** na Azure pomocou AZD
+- Aplikovať **vzory koordinácie** pre reálne scenáre AI
+- Monitorovať a ladit distribuované systémy agentov
 
 ## Prečo je koordinácia viacerých agentov dôležitá
 
 ### Vývoj: Od jedného agenta k viacerým agentom
 
-**Jeden agent (jednoduché):**
+**Jeden agent (jednoduchý):**
 ```
 User → Agent → Response
 ```
-- ✅ Jednoduché na pochopenie a implementáciu
-- ✅ Rýchle pre jednoduché úlohy
-- ❌ Obmedzené schopnosťami jediného modelu
-- ❌ Nedokáže paralelizovať zložité úlohy
+- ✅ Ľahko pochopiteľný a implementovateľný
+- ✅ Rýchly pre jednoduché úlohy
+- ❌ Obmedzený schopnosťami jedného modelu
+- ❌ Nemožnosť paralelizovať zložité úlohy
 - ❌ Žiadna špecializácia
 
 **Systém viacerých agentov (pokročilý):**
 ```mermaid
 graph TD
-    Orchestrator[Orchestrátor] --> Agent1[Agent1<br/>Plán]
-    Orchestrator --> Agent2[Agent2<br/>Kód]
-    Orchestrator --> Agent3[Agent3<br/>Revízia]
-```- ✅ Špecializovaní agenti pre konkrétne úlohy
-- ✅ Paralelné vykonávanie pre rýchlosť
-- ✅ Modulárny a udržiavateľný
-- ✅ Lepší pri zložitých pracovných postupoch
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```
+- ✅ Špecializovaní agenti na konkrétne úlohy
+- ✅ Paralelné vykonávanie pre zrýchlenie
+- ✅ Modularita a udržiavateľnosť
+- ✅ Lepší pre zložité pracovné toky
 - ⚠️ Vyžaduje logiku koordinácie
 
-**Analógia**: Jeden agent je ako jedna osoba, ktorá vykonáva všetky úlohy. Viacagentový systém je ako tím, kde má každý člen špecializované zručnosti (výskumník, programátor, recenzent, autor) pracujúci spolu.
+**Analógia**: Jeden agent je ako jedna osoba robí všetky úlohy. Viacerí agenti sú ako tím, kde každý člen má špecializované zručnosti (výskumník, programátor, recenzent, spisovateľ) a spolupracujú.
 
 ---
 
 ## Základné vzory koordinácie
 
-### Vzor 1: Sekvenčná koordinácia (Chain of Responsibility)
+### Vzor 1: Sekvenčná koordinácia (Reťaz zodpovednosti)
 
-**Kedy použiť**: Úlohy sa musia vykonať v konkrétnom poradí, každý agent stavia na výstupe predchádzajúceho.
+**Kedy používať**: Úlohy musia byť dokončené v špecifickom poradí, každý agent nadväzuje na výstup predchádzajúceho.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as Výskumný agent
-    participant Agent2 as Písací agent
-    participant Agent3 as Redakčný agent
+    participant Agent1 as Research Agent
+    participant Agent2 as Writer Agent
+    participant Agent3 as Editor Agent
     
-    User->>Orchestrator: "Napíš článok o umelej inteligencii"
-    Orchestrator->>Agent1: Preskúmaj tému
-    Agent1-->>Orchestrator: Výsledky výskumu
-    Orchestrator->>Agent2: Napíš návrh (s využitím výskumu)
-    Agent2-->>Orchestrator: Návrh článku
-    Orchestrator->>Agent3: Uprav a vylepši
-    Agent3-->>Orchestrator: Finálny článok
-    Orchestrator-->>User: Upravený článok
+    User->>Orchestrator: "Write article about AI"
+    Orchestrator->>Agent1: Research topic
+    Agent1-->>Orchestrator: Research results
+    Orchestrator->>Agent2: Write draft (using research)
+    Agent2-->>Orchestrator: Draft article
+    Orchestrator->>Agent3: Edit and improve
+    Agent3-->>Orchestrator: Final article
+    Orchestrator-->>User: Polished article
     
-    Note over User,Agent3: Sekvenčné: Každý krok čaká na predchádzajúci
+    Note over User,Agent3: Sequential: Each step waits for previous
 ```
+
 **Výhody:**
 - ✅ Jasný tok dát
-- ✅ Ľahké ladenie
+- ✅ Jednoduché ladenie
 - ✅ Predvídateľné poradie vykonávania
 
 **Obmedzenia:**
-- ❌ Pomalšie (bez paralelizácie)
+- ❌ Pomalšie (žiadna paralelizácia)
 - ❌ Jedna chyba zablokuje celý reťazec
-- ❌ Nedokáže zvládnuť vzájomne závislé úlohy
+- ❌ Nepodporuje vzájomne závislé úlohy
 
 **Príklady použitia:**
-- Potrubie tvorby obsahu (výskum → písanie → editovanie → publikovanie)
+- Rúra tvorby obsahu (výskum → písanie → úprava → publikovanie)
 - Generovanie kódu (plán → implementácia → testovanie → nasadenie)
 - Generovanie správ (zber dát → analýza → vizualizácia → zhrnutie)
 
@@ -95,17 +97,17 @@ sequenceDiagram
 
 ### Vzor 2: Paralelná koordinácia (Fan-Out/Fan-In)
 
-**Kedy použiť**: Nezávislé úlohy môžu bežať súčasne, výsledky sa kombinujú na konci.
+**Kedy používať**: Nezávislé úlohy môžu bežať súčasne, výsledky sa spoja na konci.
 
 ```mermaid
 graph TB
-    User[Požiadavka používateľa]
-    Orchestrator[Orchestrátor]
-    Agent1[Analytický agent]
-    Agent2[Výskumný agent]
-    Agent3[Dátový agent]
-    Aggregator[Agregátor výsledkov]
-    Response[Kombinovaná odpoveď]
+    User[User Request]
+    Orchestrator[Orchestrator]
+    Agent1[Analysis Agent]
+    Agent2[Research Agent]
+    Agent3[Data Agent]
+    Aggregator[Result Aggregator]
+    Response[Combined Response]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -119,36 +121,37 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Výhody:**
 - ✅ Rýchle (paralelné vykonávanie)
 - ✅ Odolné voči chybám (čiastočné výsledky sú prijateľné)
 - ✅ Horizontálne škálovateľné
 
 **Obmedzenia:**
-- ⚠️ Výsledky môžu prísť v nesprávnom poradí
-- ⚠️ Vyžaduje logiku agregácie
-- ⚠️ Zložité spravovanie stavu
+- ⚠️ Výsledky môžu prísť mimo poradia
+- ⚠️ Vyžaduje agregačnú logiku
+- ⚠️ Komplexná správa stavu
 
 **Príklady použitia:**
-- Zhromažďovanie údajov z viacerých zdrojov (API + databázy + web scraping)
-- Konkurenčná analýza (viac modelov generuje riešenia, vyberie sa najlepší)
+- Zber dát z viacerých zdrojov (API + databázy + web scraping)
+- Konkurenčná analýza (viaceré modely generujú riešenia, vyberie sa najlepšie)
 - Prekladateľské služby (súbežný preklad do viacerých jazykov)
 
 ---
 
-### Vzor 3: Hierarchická koordinácia (Manager-Worker)
+### Vzor 3: Hierarchická koordinácia (Manažér-pracovník)
 
-**Kedy použiť**: Zložité pracovné postupy so sub-úlohami, potreba delegovania.
+**Kedy používať**: Zložité pracovné toky s podúlohami, potrebná delegácia.
 
 ```mermaid
 graph TB
-    Master[Hlavný orchestrátor]
-    Manager1[Manažér výskumu]
-    Manager2[Manažér obsahu]
-    W1[Webový scraper]
-    W2[Analyzátor článkov]
-    W3[Autor]
-    W4[Redaktor]
+    Master[Master Orchestrator]
+    Manager1[Research Manager]
+    Manager2[Content Manager]
+    W1[Web Scraper]
+    W2[Paper Analyzer]
+    W3[Writer]
+    W4[Editor]
     
     Master --> Manager1
     Master --> Manager2
@@ -161,75 +164,77 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
+
 **Výhody:**
-- ✅ Rieši zložité pracovné postupy
-- ✅ Modulárny a udržiavateľný
+- ✅ Rieši zložité pracovné toky
+- ✅ Modularita a udržiavateľnosť
 - ✅ Jasné hranice zodpovednosti
 
 **Obmedzenia:**
 - ⚠️ Zložitejšia architektúra
-- ⚠️ Vyššia latencia (viac vrstiev koordinácie)
-- ⚠️ Vyžaduje sofistikovanú orchestráciu
+- ⚠️ Vyššia latencia (viaceré vrstvy koordinácie)
+- ⚠️ Vyžaduje sofistikovanú orchestrace
 
 **Príklady použitia:**
-- Podnikové spracovanie dokumentov (klasifikovať → smerovať → spracovať → archivovať)
-- Viacstupňové dátové potrubia (ingest → čistenie → transformácia → analýza → report)
-- Zložité automatizačné pracovné postupy (plánovanie → prideľovanie zdrojov → vykonávanie → monitorovanie)
+- Spracovanie podnikových dokumentov (klasifikácia → smerovanie → spracovanie → archivácia)
+- Viacstupňové dátové rúry (nahrávanie → čistenie → transformácia → analýza → report)
+- Zložité automatizačné pracovné toky (plánovanie → alokácia zdrojov → vykonávanie → monitoring)
 
 ---
 
-### Vzor 4: Koordinácia riadená udalosťami (Publish-Subscribe)
+### Vzor 4: Koordinácia riadená udalosťami (Publikuj-Prihlás)
 
-**Kedy použiť**: Agenti potrebujú reagovať na udalosti, žiaduce je voľné prepojenie.
+**Kedy používať**: Agentom treba reagovať na udalosti, želaná voľná väzba.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as Zberač údajov
+    participant Agent1 as Data Collector
     participant EventBus as Azure Service Bus
-    participant Agent2 as Analyzátor
-    participant Agent3 as Oznamovateľ
-    participant Agent4 as Archivátor
+    participant Agent2 as Analyzer
+    participant Agent3 as Notifier
+    participant Agent4 as Archiver
     
-    Agent1->>EventBus: Publikovať "ÚdajePrijaté" udalosť
-    EventBus->>Agent2: Prihlásiť sa: Analyzovať údaje
-    EventBus->>Agent3: Prihlásiť sa: Odoslať oznámenie
-    EventBus->>Agent4: Prihlásiť sa: Archivovať údaje
+    Agent1->>EventBus: Publish "DataReceived" event
+    EventBus->>Agent2: Subscribe: Analyze data
+    EventBus->>Agent3: Subscribe: Send notification
+    EventBus->>Agent4: Subscribe: Archive data
     
-    Note over Agent1,Agent4: Všetci odberatelia spracúvajú nezávisle
+    Note over Agent1,Agent4: All subscribers process independently
     
-    Agent2->>EventBus: Publikovať "AnalýzaDokončená" udalosť
-    EventBus->>Agent3: Prihlásiť sa: Odoslať správu o analýze
+    Agent2->>EventBus: Publish "AnalysisComplete" event
+    EventBus->>Agent3: Subscribe: Send analysis report
 ```
+
 **Výhody:**
-- ✅ Voľné prepojenie medzi agentmi
+- ✅ Voľná väzba medzi agentmi
 - ✅ Jednoduché pridávanie nových agentov (stačí sa prihlásiť)
 - ✅ Asynchrónne spracovanie
-- ✅ Odolné (trvalosť správ)
+- ✅ Odolné (perzistencia správ)
 
 **Obmedzenia:**
-- ⚠️ Eventuálna konzistencia
-- ⚠️ Zložité ladenie
+- ⚠️ Postupná konzistencia
+- ⚠️ Komplikované ladenie
 - ⚠️ Problémy s poradím správ
 
 **Príklady použitia:**
-- Systémy monitorovania v reálnom čase (alerty, panely, logy)
+- Systémy monitoringu v reálnom čase (upozornenia, panely, logy)
 - Viackanálové notifikácie (email, SMS, push, Slack)
-- Dátové potrubia (viacerí spotrebitelia rovnakých dát)
+- Dátové rúry na spracovanie (viacerí konzumenti rovnakých dát)
 
 ---
 
-### Vzor 5: Koordinácia založená na konsenze (Voting/Quorum)
+### Vzor 5: Koordinácia založená na konsenze (Hlasovanie/Kvorum)
 
-**Kedy použiť**: Potrebné je získanie dohody od viacerých agentov pred postupovaním ďalej.
+**Kedy používať**: Potrebná dohoda viacerých agentov pred pokračovaním.
 
 ```mermaid
 graph TB
-    Input[Vstupná úloha]
+    Input[Input Task]
     Agent1[Agent 1: gpt-4.1]
     Agent2[Agent 2: Claude]
     Agent3[Agent 3: Gemini]
-    Voter[Konsenzusný volič]
-    Output[Dohodnutý výstup]
+    Voter[Consensus Voter]
+    Output[Agreed Output]
     
     Input --> Agent1
     Input --> Agent2
@@ -241,20 +246,21 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
+
 **Výhody:**
-- ✅ Vyššia presnosť (viac názorov)
-- ✅ Odolné voči chybám (zlyhanie menšiny je akceptovateľné)
-- ✅ Zabudovaná kontrola kvality
+- ✅ Vyššia presnosť (viacero názorov)
+- ✅ Odolné voči chybám (akceptovateľné neúspechy menšiny)
+- ✅ Vstavaná kontrola kvality
 
 **Obmedzenia:**
-- ❌ Nákladné (viaceré volania modelov)
-- ❌ Pomalšie (čakanie na viacerých agentov)
-- ⚠️ Potrebné riešenie konfliktov
+- ❌ Nákladné (viacero volaní modelov)
+- ❌ Pomalšie (čakanie na všetkých agentov)
+- ⚠️ Nutné riešenie konfliktov
 
 **Príklady použitia:**
-- Moderovanie obsahu (viac modelov kontroluje obsah)
-- Kontrola kódu (viac linterov/analyzátorov)
-- Lekárska diagnostika (viaceré AI modely, overenie expertom)
+- Moderovanie obsahu (viaceré modely kontrolujú obsah)
+- Code review (viaceré lintre/analyzátory)
+- Lekárska diagnostika (viaceré AI modely, odborné overenie)
 
 ---
 
@@ -264,19 +270,19 @@ graph TB
 
 ```mermaid
 graph TB
-    User[Používateľ/API klient]
-    APIM[Azure správa API]
-    Orchestrator[Služba orchestrátora<br/>Kontajnerová aplikácia]
-    ServiceBus[Azure Service Bus<br/>Event Hub]
+    User[User/API Client]
+    APIM[Azure API Management]
+    Orchestrator[Orchestrator Service<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Queues / Topics]
     
-    Agent1[Agent pre výskum<br/>Kontajnerová aplikácia]
-    Agent2[Agent pre písanie<br/>Kontajnerová aplikácia]
-    Agent3[Analytický agent<br/>Kontajnerová aplikácia]
-    Agent4[Agent pre recenziu<br/>Kontajnerová aplikácia]
+    Agent1[Research Agent<br/>Container App]
+    Agent2[Writer Agent<br/>Container App]
+    Agent3[Analyst Agent<br/>Container App]
+    Agent4[Reviewer Agent<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>Zdieľaný stav)]
-    Storage[Azure Storage<br/>Artefakty]
-    AppInsights[Application Insights<br/>Monitorovanie]
+    CosmosDB[(Cosmos DB<br/>Shared State)]
+    Storage[Azure Storage<br/>Artifacts]
+    AppInsights[Application Insights<br/>Monitoring]
     
     User --> APIM
     APIM --> Orchestrator
@@ -307,51 +313,54 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Kľúčové komponenty:**
 
 | Komponent | Účel | Služba Azure |
 |-----------|---------|---------------|
-| **API Gateway** | Vstupný bod, obmedzovanie rýchlosti, autentifikácia | API Management |
-| **Orchestrator** | Koordinuje pracovné postupy agentov | Container Apps |
-| **Message Queue** | Asynchrónna komunikácia | Service Bus / Event Hubs |
-| **Agents** | Špecializovaní AI pracovníci | Container Apps / Functions |
-| **State Store** | Zdieľaný stav, sledovanie úloh | Cosmos DB |
-| **Artifact Storage** | Dokumenty, výsledky, logy | Blob Storage |
-| **Monitoring** | Distribuované trasovanie, logy | Application Insights |
+| **API Gateway** | Vstupný bod, limitovanie rýchlosti, autentifikácia | API Management |
+| **Orchestrátor** | Koordinuje pracovné toky agentov | Container Apps |
+| **Fronta správ** | Asynchrónna komunikácia | Service Bus / Event Hubs |
+| **Agenti** | Špecializovaní AI pracovníci | Container Apps / Functions |
+| **Ukladanie stavu** | Zdieľaný stav, sledovanie úloh | Cosmos DB |
+| **Úložisko artefaktov** | Dokumenty, výsledky, logy | Blob Storage |
+| **Monitorovanie** | Distribuované trasovanie, logy | Application Insights |
+
+Fronty/topic služby Service Bus a Event Hubs sú rôzne služby s rôznymi modelmi doručovania/konzumácie; Event Hubs nie je náhradou za kód služby Service Bus nižšie. Paralelizmus, perzistencia správ a hlasovanie modelov nie sú samy o sebe zárukou odolnosti voči chybám alebo vyššej presnosti.
 
 ---
 
 ## Predpoklady
 
-### Povinné nástroje
+### Vyžadované nástroje
 
 ```bash
-# Overiť Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Očakávané: azd verzia 1.0.0 alebo novšia
+# Command reference baseline: azd 1.37.2
 
-# Overiť Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Očakávané: azure-cli verzia 2.50.0 alebo novšia
+# ✅ Expected: azure-cli 2.50.0 or higher
 
-# Overiť Docker (pre lokálne testovanie)
+# Verify Docker (for local testing)
 docker --version
-# ✅ Očakávané: Docker verzia 20.10 alebo novšia
+# ✅ Expected: Docker version 20.10 or higher
 ```
 
 ### Požiadavky na Azure
 
 - Aktívne predplatné Azure
-- Oprávnenia na vytváranie:
+- Oprávnenia na vytvorenie:
   - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
+  - Názvové priestory služby Service Bus
+  - Účty Cosmos DB
+  - Účty úložiska
   - Application Insights
 
-### Požadované znalosti
+### Predchádzajúce znalosti
 
-Mali by ste mať dokončené:
+Mali by ste mať absolvované:
 - [Správa konfigurácie](../chapter-03-configuration/configuration.md)
 - [Autentifikácia a bezpečnosť](../chapter-03-configuration/authsecurity.md)
 - [Príklad mikroslužieb](../../../../examples/microservices)
@@ -359,6 +368,12 @@ Mali by ste mať dokončené:
 ---
 
 ## Sprievodca implementáciou
+
+> **Dizajnové fragmenty, nie úplný deployovateľný lab:** Strom projektu a označenia `File:` nižšie popisujú súbory, ktoré si vytvoríte vo vlastnom projekte; tento repozitár neobsahuje kompletnú aplikáciu `multi-agent-system`. Chýbajúce časti zahŕňajú hlavné/parametrické šablóny, prostredie/registr kontajnerových aplikácií, Dockerfile a zámky závislostí, nastavenie databázy/kontajnera Cosmos, nasadenie modelov, konfiguráciu identity/rolí, pravidlá škálovania a paralelné pracovníky/fronty. Neočakávajte, že `azd init` vygeneruje tieto súbory alebo že `azd up` nasadí útržky bez zmien. Pre spustiteľný východiskový bod dokončite [Základy viacerých agentov](../chapter-05-multi-agent/multi-agent-basics.md).
+
+**Predpoklady runtime:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask a (pre monitorovanie) `azure-monitor-opentelemetry`; umiestnite `shared` do importnej cesty Pythonu v každom obrazovom servise. Kontajner Cosmos `agent-state/tasks` už musí existovať s kľúčom partície `/id`. Pripojenia viazané na kľúče tieto fragmenty zjednodušujú, nie sú však odporúčaním pre produkciu: uprednostnite spravované identity s ohraničenými rolami Service Bus/Cosmos/OpenAI na dátovej rovine. Nezverejňujte kľúče vo výstupoch alebo logoch.
+
+Doručovanie v Service Bus je **aspoň raz**. Persistujte idempotenciu pre každú úlohu **a krok**, používajte optimistickú konkurenciu (ETags) na čítanie/upravovanie/zápis stavu a obnovujte zámky správ počas dlhej spracovateľskej doby. Jednoduchý manažér stavu nižšie je iba sekvenčný a neimplementuje tieto produkčné záruky.
 
 ### Štruktúra projektu
 
@@ -394,9 +409,9 @@ multi-agent-system/
 
 ## Lekcia 1: Vzor sekvenčnej koordinácie
 
-### Implementácia: Potrubie tvorby obsahu
+### Implementácia: Rúra tvorby obsahu
 
-Postavme sekvenčné potrubie: Výskum → Písanie → Editovanie → Publikovanie
+Navrhnime sekvenčnú rúru: Výskum → Písanie → Úprava. Publikovanie je mimo tohto príkladu.
 
 ### 1. Konfigurácia AZD
 
@@ -429,7 +444,7 @@ services:
     host: containerapp
 ```
 
-### 2. Infrastruktúra: Service Bus pre koordináciu
+### 2. Infraštruktúra: Service Bus pre koordináciu
 
 **Súbor: `infra/core/servicebus.bicep`**
 
@@ -483,16 +498,17 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 }
 
 output namespace string = serviceBusNamespace.name
-output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+// Do not output RootManageSharedAccessKey. Resolve scoped credentials
+// securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Správca zdieľaného stavu
+### 3. Manažér zdieľaného stavu
 
 **Súbor: `src/shared/state_manager.py`**
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 class StateManager:
@@ -513,7 +529,7 @@ class StateManager:
             'type': task_type,
             'status': 'pending',
             'input': input_data,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'steps': []
         }
         self.container.create_item(task)
@@ -525,7 +541,7 @@ class StateManager:
         
         task['steps'].append({
             'name': step_name,
-            'completed_at': datetime.utcnow().isoformat(),
+            'completed_at': datetime.now(timezone.utc).isoformat(),
             'result': result
         })
         
@@ -537,7 +553,7 @@ class StateManager:
         task = self.container.read_item(task_id, partition_key=task_id)
         task['status'] = 'completed'
         task['result'] = final_result
-        task['completed_at'] = datetime.utcnow().isoformat()
+        task['completed_at'] = datetime.now(timezone.utc).isoformat()
         self.container.replace_item(task_id, task)
         return task
     
@@ -546,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Služba orchestrátora
+### 4. Orchestrátor služba
 
 **Súbor: `src/orchestrator/app.py`**
 
@@ -561,7 +577,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Pripojenie k Service Busu
+# Service Bus connection
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -572,15 +588,15 @@ def health():
 @app.route('/create-content', methods=['POST'])
 def create_content():
     """
-    Sequential workflow: Research → Write → Edit → Publish
+    Sequential workflow: Research → Write → Edit (returns a draft; no publishing)
     """
-    data = request.json
+    data = request.get_json(silent=True) or {}
     topic = data.get('topic')
     
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Vytvoriť úlohu v úložisku stavov
+    # Create task in state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -588,13 +604,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # Odoslať správu výskumnému agentovi (prvý krok)
+    # Send message to research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Kam poslať výsledky
+            'next_queue': 'writer-tasks'  # Where to send results
         }),
         content_type='application/json'
     )
@@ -606,7 +622,7 @@ def create_content():
         'task_id': task_id,
         'status': 'started',
         'workflow': 'sequential',
-        'steps': ['research', 'write', 'edit', 'publish'],
+        'steps': ['research', 'write', 'edit'],
         'message': 'Content creation pipeline initiated'
     }), 202
 
@@ -623,7 +639,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Výskumný agent
+### 5. Agent pre výskum
 
 **Súbor: `src/agents/research/app.py`**
 
@@ -635,7 +651,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# Inicializovať klientov
+# Initialize clients
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -643,7 +659,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -655,9 +671,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Zavolať modely Microsoft Foundry pre výskum
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -667,14 +683,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # Aktualizovať stav
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # Poslať nasledujúcemu agentovi (autorovi)
+    # Send to next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -731,7 +747,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -744,9 +760,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Zavolať Microsoft Foundry Models, aby napísal článok
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -756,14 +772,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # Aktualizovať stav
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # Poslať redaktorovi
+    # Send to editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -801,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Editorský agent
+### 7. Agent pre úpravy
 
 **Súbor: `src/agents/editor/app.py`**
 
@@ -819,7 +835,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -831,9 +847,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Zavolať Microsoft Foundry Models na úpravu
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -843,7 +859,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Označiť úlohu ako dokončenú
+    # Mark task as complete
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -877,26 +893,27 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Nasadiť a otestovať
+### 8. Nasadenie a testovanie
+
+Tieto príkazy platia **len ak implementujete chýbajúce projektové súbory**. Inicializácia agenta Foundry v interaktívnom režime je samostatný pracovný tok; nevygeneruje tento dizajn Service Bus.
 
 ```bash
-# Možnosť A: nasadenie založené na šablóne
-azd init
+# In your completed custom project
 azd up
 
-# Možnosť B: nasadenie pomocou manifestu agenta (vyžaduje rozšírenie)
+# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> Pozri [Príkazy AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pre všetky `azd ai` flagy a možnosti.
+> Pozrite si [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pre všetky príznaky a možnosti `azd ai`.
 
 ```bash
-# Získajte URL orchestrátora
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# Vytvorte obsah
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
@@ -908,18 +925,18 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "status": "started",
   "workflow": "sequential",
-  "steps": ["research", "write", "edit", "publish"],
+  "steps": ["research", "write", "edit"],
   "message": "Content creation pipeline initiated"
 }
 ```
 
-**Skontrolovať priebeh úlohy:**
+**Kontrola priebehu úlohy:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Očakávaný výstup (dokončené):**
+**✅ Očakávaný výstup (ukončené):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -953,7 +970,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 Postavme paralelný systém, ktorý súčasne zhromažďuje informácie z viacerých zdrojov.
 
-### Paralelný orchestrátor
+### Paralelný koordinátor
 
 **Súbor: `src/orchestrator/parallel_workflow.py`**
 
@@ -990,7 +1007,7 @@ def research_parallel():
         }
     )
     
-    # Fan-out: Poslať všetkým agentom súčasne
+    # Fan-out: publish sequentially; workers may process concurrently.
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1041,9 +1058,10 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# Sledovať výsledky pre každú úlohu
-task_results = defaultdict(list)
-expected_agents = 4  # web, akademické, správy, sociálne
+# Single-process demo only: not durable or shared across replicas.
+# Production: use durable unique (task_id, agent_type) result records.
+task_results = defaultdict(dict)
+expected_agents = 4  # web, academic, news, social
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1051,29 +1069,29 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # Uložiť výsledok
-    task_results[task_id].append({
+    # Store result
+    task_results[task_id][agent_type] = {
         'agent': agent_type,
         'data': result
-    })
+    }
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Skontrolovať, či všetci agenti dokončili (fan-in)
+    # Check if all agents completed (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # Zlúčiť výsledky
+        # Combine results
         aggregated = {
             'query': message_data['query'],
-            'sources': task_results[task_id],
-            'summary': generate_summary(task_results[task_id])
+            'sources': list(task_results[task_id].values()),
+            'summary': generate_summary(list(task_results[task_id].values()))
         }
         
-        # Označiť ako dokončené
+        # Mark complete
         state_manager.complete_task(task_id, aggregated)
         
-        # Vyčistiť
+        # Clean up
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1106,128 +1124,93 @@ if __name__ == '__main__':
 ```
 
 **Výhody paralelného vzoru:**
-- ⚡ **4x rýchlejší** (agenti bežia súčasne)
-- 🔄 **Odolné voči chybám** (čiastočné výsledky sú prijateľné)
-- 📈 **Škálovateľné** (ľahé pridanie ďalších agentov)
+- ⚡ **Potenciálne nižšia latencia** (obmedzená najpomalším pracovníkom plus režijné náklady koordinácie)
+- 🔄 **Podpora čiastkových výsledkov** s explicitnými termínmi a politikou zlyhania (základný agregátor túto funkcionalitu nemá)
+- 📈 **Škálovateľný** (jednoducho sa pridávajú ďalší agenti)
 
 ---
 
 ## Praktické cvičenia
 
-### Cvičenie 1: Pridať spracovanie časového limitu ⭐⭐ (Stredne náročné)
+### Cvičenie 1: Pridanie správy timeoutu ⭐⭐ (Stredne náročné)
 
-**Cieľ**: Implementovať logiku timeoutu tak, aby agregátor nečakal večne na pomalých agentov.
+**Cieľ**: Implementovať logiku časového limitu, aby agregátor nečakal nekonečne dlho na pomalých agentov.
+
+**Počiatočný bod:** Najprv spustite túto lokálnu simuláciu termínu pred jej integráciou do frontového pracovníka. Timeout kontrolovaný len pri príchode ďalšej správy nikdy nenastane, ak chýbajúci pracovník nič neodošle.
 
 **Kroky**:
 
-1. **Pridať sledovanie timeoutu do agregátora:**
+1. **Pridajte sledovanie timeoutu do agregátora:**
 
 ```python
-from datetime import datetime, timedelta
+import asyncio
 
-task_timeouts = {}  # task_id -> čas vypršania
+async def simulated_agent(name, delay):
+    await asyncio.sleep(delay)
+    return {'agent': name, 'result': 'done'}
 
-def process_result(message_data):
-    task_id = message_data['task_id']
-    
-    # Nastaviť časový limit pre prvý výsledok
-    if task_id not in task_timeouts:
-        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
-    
-    task_results[task_id].append({
-        'agent': message_data['agent_type'],
-        'data': message_data['result']
-    })
-    
-    # Skontrolovať, či je dokončené alebo či čas vypršal
-    if len(task_results[task_id]) == expected_agents or \
-       datetime.utcnow() > task_timeouts[task_id]:
-        
-        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
-        
-        aggregated = {
-            'query': message_data['query'],
-            'sources': task_results[task_id],
-            'completed_agents': len(task_results[task_id]),
-            'timed_out': len(task_results[task_id]) < expected_agents
-        }
-        
-        state_manager.complete_task(task_id, aggregated)
-        
-        # Vyčistenie
-        del task_results[task_id]
-        del task_timeouts[task_id]
+async def main():
+    tasks = [asyncio.create_task(simulated_agent(name, delay))
+             for name, delay in [('web', 0.1), ('academic', 0.2),
+                                 ('news', 0.3), ('social', 3)]]
+    done, pending = await asyncio.wait(tasks, timeout=1)
+    results = [task.result() for task in done]
+    for task in pending:
+        task.cancel()
+    await asyncio.gather(*pending, return_exceptions=True)
+    print({'completed_agents': len(results), 'timed_out': bool(pending)})
+    assert len(results) == 3 and pending
+
+asyncio.run(main())
 ```
 
-2. **Otestovať s umelými oneskoreniami:**
+2. **Očakávaný výstup:**
 
-```python
-# U jedného agenta pridajte oneskorenie na simulovanie pomalého spracovania
-import time
-time.sleep(35)  # Presahuje 30-sekundový časový limit
+```text
+{'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Nasadiť a overiť:**
+3. **Integrácia do systému fronty (dizajnový úkol):** Uložte dátum termínu odoslania a očakávaných agentov pri vytváraní úlohy, pravidelne kontrolujte termín nezávisle od prichádzajúcich výsledkov, atómovo dokončite čiastkové výsledky a ignorujte neskoré/duplicitné správy pre dokončené úlohy. Lokálny timeout neruší vzdialených pracovníkov.
+
+Len pre váš implementovaný projekt:
 
 ```bash
 azd deploy aggregator
 
-# Odoslať úlohu
+# Submit task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# Skontrolujte výsledky po 30 sekundách
+# Check results after 30 seconds
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Kritériá úspechu:**
-- ✅ Úloha sa dokončí po 30 sekundách aj keď agenti nie sú kompletní
-- ✅ Odpoveď indikuje čiastočné výsledky ("timed_out": true)
-- ✅ Dostupné výsledky sú vrátené (3 zo 4 agentov)
+- ✅ Lokálny test sa ukončí po jeho jednosekundovom termíne aj keď je agent neúplný
+- ✅ Odozva indikuje čiastkové výsledky (`"timed_out": true`)
+- ✅ Sú k dispozícii výsledky odovzdané (3 z 4 agentov)
 
 **Čas**: 20-25 minút
 
 ---
 
-### Cvičenie 2: Implementovať logiku opakovaní (retry) ⭐⭐⭐ (Pokročilé)
+### Cvičenie 2: Implementovanie logiky opakovaných pokusov ⭐⭐⭐ (Pokročilé)
 
-**Cieľ**: Automaticky opakovať zlyhané úlohy agentov pred ukončením.
+**Cieľ**: Automaticky opakovať zlyhané úlohy agenta pred vzdávaním sa.
 
 **Kroky**:
 
-1. **Pridať sledovanie retry do orchestrátora:**
+1. **Použite čítanie počtu doručení z Service Bus namiesto vlastných počítadiel opakovaných pokusov:**
 
 ```python
-from dataclasses import dataclass
-from typing import Dict
-
-@dataclass
-class RetryConfig:
-    max_retries: int = 3
-    backoff_seconds: int = 5
-
-retry_counts: Dict[str, int] = {}  # id_správy -> počet_opakovaní
-
-def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
-    """Send message with retry metadata"""
-    message_id = message_data.get('message_id', str(uuid.uuid4()))
-    message_data['message_id'] = message_id
-    message_data['retry_count'] = retry_counts.get(message_id, 0)
-    message_data['max_retries'] = retry_config.max_retries
-    
-    sender = servicebus_client.get_queue_sender(queue_name)
-    message = ServiceBusMessage(
-        body=json.dumps(message_data),
-        content_type='application/json',
-        message_id=message_id
-    )
-    
-    with sender:
-        sender.send_messages(message)
+import json
+import time
+# Integration fragment: use a live peek-lock ServiceBusReceiver.
+# Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Pridať retry handler do agentov:**
+2. **Pridajte správcu opakovaných pokusov agentom:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,31 +1218,21 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # Spracovať správu
+        # Process the message
         process_func(message_data)
         
-        # Úspech - dokončené
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
-        message_id = message.message_id
-        retry_count = message_data.get('retry_count', 0)
-        max_retries = message_data.get('max_retries', 3)
-        
-        if retry_count < max_retries:
-            # Opakovať: opustiť a znovu zaradiť do fronty so zvýšeným počtom pokusov
-            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
-            
-            message_data['retry_count'] = retry_count + 1
-            
-            # Poslať späť do tej istej fronty s oneskorením
-            time.sleep(5 * (retry_count + 1))  # Exponenciálne zvyšovanie oneskorenia
-            send_with_retry(queue_name, message_data, RetryConfig())
-            
-            receiver.complete_message(message)  # Odstrániť originál
+        if message.delivery_count < 4:
+            # Bounded exponential delay: 5s, 10s, 20s.
+            # Renew the lock if processing + waiting can exceed its duration.
+            time.sleep(5 * 2 ** (message.delivery_count - 1))
+            receiver.abandon_message(message)
         else:
-            # Maximálny počet pokusov prekročený - presunúť do fronty nedoručiteľných správ
-            print(f"❌ Max retries exceeded for message {message_id}")
+            # Max retries exceeded - move to dead letter queue
+            print(f"❌ Max attempts exceeded for message {message.message_id}")
             receiver.dead_letter_message(
                 message,
                 reason="MaxRetriesExceeded",
@@ -1267,13 +1240,13 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Monitorovať dead letter queue:**
+3. **Monitorovanie fronty mŕtvych správ:**
 
 ```python
 def monitor_dead_letters():
     """Check dead letter queue for failed messages"""
     receiver = servicebus_client.get_queue_receiver(
-        'research-queue',
+        'research-tasks',
         sub_queue='deadletter'
     )
     
@@ -1286,31 +1259,31 @@ def monitor_dead_letters():
 ```
 
 **✅ Kritériá úspechu:**
-- ✅ Zlyhané úlohy sa automaticky opakujú (až 3x)
-- ✅ Exponenciálny backoff medzi opakovaniami (5s, 10s, 15s)
-- ✅ Po maximálnom počte opakovaní idú správy do dead letter queue
-- ✅ Dead letter queue je možné monitorovať a znovu prehrávať
+- ✅ Zlyhané úlohy sa automaticky opakujú (až 3 krát)
+- ✅ Exponenciálny spätný odklad medzi pokusmi (5s, 10s, 20s), s obnovením uzamknutia správy, kde je to potrebné
+- ✅ Po prekročení maximálneho počtu pokusov správy putujú do fronty mŕtvych správ
+- ✅ Správy vo fronte mŕtvych správ môžu byť kontrolované; opätovné prehrávanie vyžaduje samostatný idempotentný obnovovací pracovný postup
 
 **Čas**: 30-40 minút
 
 ---
 
-### Cvičenie 3: Implementovať circuit breaker ⭐⭐⭐ (Pokročilé)
+### Cvičenie 3: Implementovanie circuit breaker-a ⭐⭐⭐ (Pokročilé)
 
-**Cieľ**: Zabrániť kaskádovým zlyhaniam tým, že sa zastavia požiadavky na zlyhávajúce agentov.
+**Cieľ**: Predísť kaskádovým zlyhaniam zastavením požiadaviek na zlyhávajúcich agentov.
 
 **Kroky**:
 
-1. **Vytvoriť triedu circuit breaker:**
+1. **Vytvorte triedu circuit breaker:**
 
 ```python
 from enum import Enum
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # Normálna prevádzka
-    OPEN = "open"          # Zlyháva, odmieta požiadavky
-    HALF_OPEN = "half_open"  # Testovanie, či sa zotavil
+    CLOSED = "closed"      # Normal operation
+    OPEN = "open"          # Failing, reject requests
+    HALF_OPEN = "half_open"  # Testing if recovered
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1323,8 +1296,8 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Skontrolovať, či vypršal časový limit
-            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+            # Check if timeout expired
+            if datetime.now(timezone.utc) - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
             else:
@@ -1333,7 +1306,8 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # Úspech
+            # Success
+            self.failure_count = 0 # Count consecutive failures only
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1343,19 +1317,19 @@ class CircuitBreaker:
             
         except Exception as e:
             self.failure_count += 1
-            self.last_failure_time = datetime.utcnow()
+            self.last_failure_time = datetime.now(timezone.utc)
             
             if self.failure_count >= self.failure_threshold:
                 self.state = CircuitState.OPEN
                 print(f"🔴 Circuit breaker: OPEN (too many failures)")
             
-            raise e
+            raise
 ```
 
-2. **Aplikovať na volania agentov:**
+2. **Použite pri volaniach agentov:**
 
 ```python
-# V orchestrátore
+# In orchestrator
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,33 +1345,34 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Pokračujte s ostatnými agentmi
+        # Continue with other agents
 ```
 
-3. **Otestovať circuit breaker:**
+Tento obvod chráni **odosielaciu operáciu**, nie dokončenie na vzdialenom pracovníkovi: úspešné zaradenie správy do fronty nič nehovorí o tom, či je agent aktívny. `send_message` je funkcia odosielateľa vo vašej aplikácii. Pre vykonávacie obvody privádzajte pozorované zlyhania/časové výpadky úloh do trvanlivého koordinátora. Táto trieda v pamäti je demonštrácia s jedným vláknom, nie distribuovaný obvodový istič.
 
-```bash
-# Simulovať opakované zlyhania (zastaviť jedného agenta)
-az containerapp stop --name web-research-agent --resource-group rg-agents
+3. **Otestujte obvodový istič lokálne:**
 
-# Odoslať viacero požiadaviek
-for i in {1..10}; do
-  curl -X POST $ORCHESTRATOR_URL/research-parallel \
-    -H "Content-Type: application/json" \
-    -d '{"query": "test query '$i'"}'
-  sleep 2
-done
-
-# Skontrolujte logy - mali by ste vidieť, že obvod je otvorený po 5 zlyhaniach
-# Použite Azure CLI pre logy Container App:
-az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```python
+# Run after the class definition; no Azure changes required.
+circuit = CircuitBreaker(failure_threshold=5, timeout_seconds=0)
+def fail():
+    raise RuntimeError("simulated failure")
+for _ in range(5):
+    try:
+        circuit.call(fail)
+    except RuntimeError:
+        pass
+assert circuit.state == CircuitState.OPEN
+assert circuit.call(lambda: "recovered") == "recovered"
+assert circuit.state == CircuitState.CLOSED
+print("Circuit breaker recovery verified")
 ```
 
 **✅ Kritériá úspechu:**
 - ✅ Po 5 zlyhaniach sa obvod otvorí (odmieta požiadavky)
-- ✅ Po 60 sekundách sa obvod prejde do half-open (testuje zotavenie)
+- ✅ Po 60 sekundách sa obvod polo-otvorí (testuje zotavenie)
 - ✅ Ostatní agenti pokračujú v práci normálne
-- ✅ Obvod sa automaticky zavrie, keď sa agent zotaví
+- ✅ Obvod sa automaticky zatvorí, keď sa agent zotaví
 
 **Čas**: 40-50 minút
 
@@ -1405,55 +1380,54 @@ az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 5
 
 ## Monitorovanie a ladenie
 
-### Distribuované trasovanie s Application Insights
+### Distribuované sledovanie pomocou Application Insights
 
 **Súbor: `src/shared/tracing.py`**
 
 ```python
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.samplers import AlwaysOnSampler
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
-# Nakonfigurujte trasovanie
-config_integration.trace_integrations(['requests', 'logging'])
-
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# Vytvorte tracer
-tracer = Tracer(
-    exporter=AzureExporter(connection_string=connection_string),
-    sampler=AlwaysOnSampler()
-)
+# Configure once per process. Message send/receive trace-context propagation
+# and agent attributes on exceptions need explicit instrumentation.
+if connection_string:
+    configure_azure_monitor(connection_string=connection_string, logger_name=__name__)
+tracer = trace.get_tracer(__name__)
 
-# Nakonfigurujte logovanie
+# Configure logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
 
-def trace_agent_call(agent_name, task_id, operation):
+def trace_agent_call(agent_name, task_id, operation_name, operation):
     """Trace agent operations"""
-    with tracer.span(name=f'{agent_name}.{operation}') as span:
-        span.add_attribute('agent', agent_name)
-        span.add_attribute('task_id', task_id)
-        span.add_attribute('operation', operation)
+    with tracer.start_as_current_span(f'agent.{agent_name}.{operation_name}', kind=SpanKind.CLIENT) as span:
+        span.set_attribute('agent', agent_name)
+        span.set_attribute('task_id', task_id)
+        span.set_attribute('operation', operation_name)
         
         try:
             result = operation()
-            span.add_attribute('status', 'success')
+            span.set_attribute('status', 'success')
+            logger.info('Agent operation completed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             return result
         except Exception as e:
-            span.add_attribute('status', 'error')
-            span.add_attribute('error', str(e))
+            span.set_attribute('status', 'error')
+            logger.exception('Agent operation failed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             raise
 ```
 
-### Dotazy v Application Insights
+### Dotazy do Application Insights
 
-**Sledovať pracovné postupy viacerých agentov:**
+**Sledovanie workflow viacerých agentov:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1463,7 +1437,7 @@ traces
 | order by timestamp asc
 ```
 
-**Porovnanie výkonu agentov:**
+**Porovnanie výkonnosti agentov:**
 
 ```kusto
 // Compare agent execution times
@@ -1494,22 +1468,24 @@ exceptions
 
 ## Analýza nákladov
 
-### Náklady systému viacerých agentov (mesačné odhady)
+### Náklady multi-agentného systému (mesačné odhady)
 
-| Komponent | Konfigurácia | Náklady |
+Iba ilustračné plánovacie čísla, nie cenové ponuky: suma nižšie je **240-565 USD/mesiac**. Overte si aktuálne regionálne sadzby, aktívne/neaktívne hodiny replík, mix vstupných/výstupných tokenov, ukladanie a telemetriu. Serverless nemá minimum zaručeného priepustného pásma, ale stále sa účtuje za požiadavky a ukladanie.
+
+| Komponent | Konfigurácia | Náklad |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB každý) | $60-120 |
-| **Service Bus** | Standard tier, 10M messages | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
-| **Celkom** | | **$240-565/month** |
+| **Orchestrátor** | 1 Container App (1 vCPU, 2GB) | 30-50 USD |
+| **4 Agenti** | 4 Container Apps (0,5 vCPU, 1GB každý) | 60-120 USD |
+| **Service Bus** | Štandardná úroveň, 10M správ | 10-20 USD |
+| **Cosmos DB** | Serverless, 5GB ukladanie, 1M RUs | 25-50 USD |
+| **Blob Storage** | 10GB ukladanie, 100K operácií | 5-10 USD |
+| **Application Insights** | 5GB ingestovanie | 10-15 USD |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokenov | 100-300 USD |
+| **Spolu** | | **240-565 USD/mesiac** |
 
 ### Stratégie optimalizácie nákladov
 
-1. **Použite serverless kde je to možné:**
+1. **Používajte serverless kdekoľvek je možné:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1518,41 +1494,38 @@ exceptions
    }
    ```
 
-2. **Škálujte agentov na nulu, keď sú nečinní:**
+2. **Škálujte agentov na nulu počas nečinnosti:**
    ```bicep
    scale: {
-     minReplicas: 0  // Scale to zero when no messages
+     minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
      maxReplicas: 10
    }
    ```
 
-3. **Použite dávkovanie pre Service Bus:**
+3. **Používajte batchovanie pre Service Bus:**
    ```python
-   # Posielať správy v dávkach (lacnejšie)
+   # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Ukladajte často používané výsledky do medzipamäti:**
+4. **Ukladajte výsledky, ktoré sa často používajú:**
    ```python
-   # Použite Azure Cache for Redis
+   # Use Azure Cache for Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
 
 ---
 
-## Najlepšie postupy
+## Najlepšie praktiky
 
-### ✅ ROBIŤ:
+### ✅ ROBTE:
 
 1. **Používajte idempotentné operácie**
    ```python
-   # Agent môže bezpečne spracovať tú istú správu viackrát
+   # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
-       if state_manager.task_exists(task_id):
-           print(f"Task {task_id} already processed, skipping")
-           return
-       # Spracovať úlohu...
+       raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
 2. **Implementujte komplexné logovanie**
@@ -1562,9 +1535,9 @@ exceptions
 
 3. **Používajte korelačné ID**
    ```python
-   # Preneste task_id cez celý pracovný tok
+   # Pass task_id through entire workflow
    message_data = {
-       'task_id': task_id,  # ID korelácie
+       'task_id': task_id,  # Correlation ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
@@ -1576,77 +1549,80 @@ exceptions
    }
    ```
 
-5. **Sledujte dead-letter fronty**
+5. **Monitorujte fronty mŕtvych listov**
    ```python
-   # Pravidelné sledovanie zlyhaných správ
+   # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
-### ❌ NEROBIŤ:
+### ❌ NEROBTE:
 
 1. **Nevytvárajte kruhové závislosti**
    ```python
-   # ❌ ZLÉ: Agent A → Agent B → Agent A (nekonečná slučka)
-   # ✅ DOBRÉ: Definujte jasný orientovaný acyklický graf (DAG)
+   # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
+   # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
 2. **Nezablokujte vlákna agentov**
    ```python
-   # ❌ ZLÉ: Synchronné čakanie
+   # ❌ BAD: Synchronous wait
    while not task_complete:
        time.sleep(1)
    
-   # ✅ DOBRÉ: Použite spätné volania fronty správ
+   # ✅ GOOD: Use message queue callbacks
    ```
 
 3. **Neignorujte čiastočné zlyhania**
    ```python
-   # ❌ ZLÉ: Spôsobiť zlyhanie celého pracovného postupu, ak jeden agent zlyhá
-   # ✅ DOBRÉ: Vrátiť čiastočné výsledky s indikátormi chýb
+   # ❌ BAD: Fail entire workflow if one agent fails
+   # ✅ GOOD: Return partial results with error indicators
    ```
 
 4. **Nepoužívajte nekonečné opakovania**
    ```python
-   # ❌ ZLÉ: opakovať navždy
-   # ✅ DOBRÉ: max_retries = 3, potom do fronty mŕtvych správ
+   # ❌ BAD: retry forever
+   # ✅ GOOD: max_retries = 3, then dead letter
    ```
 
 ---
 
-## Príručka riešenia problémov
+## Návod na riešenie problémov
 
 ### Problém: Správy uviaznuté vo fronte
 
 **Príznaky:**
 - Správy sa hromadia vo fronte
-- Agenti nespracúvajú správy
-- Stav úlohy uviazol na "čakajúci"
+- Agenti nespracovávajú
+- Stav úlohy uviaznutý na "pending"
 
 **Diagnóza:**
 ```bash
-# Skontrolujte hĺbku fronty
+# Check queue depth
 az servicebus queue show \
+  --resource-group "$RG_NAME" \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Skontrolujte protokoly agenta pomocou Azure CLI
+# Check agent logs using Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Riešenia:**
 
-1. **Zvýšte počet replík agentov:**
+1. **Zvýšte počet replík agenta:**
    ```bash
    az containerapp update \
+     --resource-group "$RG_NAME" \
      --name research-agent \
      --min-replicas 3 \
      --max-replicas 10
    ```
 
-2. **Skontrolujte dead-letter queue:**
+2. **Skontrolujte frontu mŕtvych listov:**
    ```bash
    az servicebus queue show \
+     --resource-group "$RG_NAME" \
      --namespace-name mybus \
      --name research-tasks \
      --query "countDetails.deadLetterMessageCount"
@@ -1654,20 +1630,20 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problém: Vypršanie časového limitu úlohy / nikdy sa nedokončí
+### Problém: Časový limit úlohy / nikdy sa nedokončí
 
 **Príznaky:**
-- Stav úlohy zostáva "prebieha"
+- Stav úlohy zostáva "in_progress"
 - Niektorí agenti dokončia, iní nie
 - Žiadne chybové hlásenia
 
 **Diagnóza:**
 ```bash
-# Skontrolujte stav úlohy
+# Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# Skontrolujte Application Insights
-# Spustite dotaz: traces | where customDimensions.task_id == "..."
+# Check Application Insights
+# Run query: traces | where customDimensions.task_id == "..."
 ```
 
 **Riešenia:**
@@ -1676,14 +1652,14 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 2. **Skontrolujte zlyhania agentov pomocou Azure Monitor:**
    ```bash
-   # Zobraziť protokoly pomocou azd monitor
+   # View logs via azd monitor
    azd monitor --logs
    
-   # Alebo použite Azure CLI na kontrolu protokolov konkrétnej kontajnerovej aplikácie
+   # Or use Azure CLI to check specific container app logs
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Overte, že všetci agenti bežia:**
+3. **Overte, či všetci agenti bežia:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1692,50 +1668,50 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Dozvedieť sa viac
+## Zistite viac
 
 ### Oficiálna dokumentácia
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [Vzory orchestrace AI agentov](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
 ### Ďalšie kroky v tomto kurze
 - ← Predchádzajúce: [Plánovanie kapacity](capacity-planning.md)
-- → Nasledujúce: [Výber SKU](sku-selection.md)
-- 🏠 [Domov kurzu](../../README.md)
+- → Ďalšie: [Výber SKU](sku-selection.md)
+- 🏠 [Domovská stránka kurzu](../../README.md)
 
-### Súvisiace príklady
-- [Príklad mikroslužieb](../../../../examples/microservices) - Vzory komunikácie služieb
-- [Príklad Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Integrácia AI
+### Príklady súvisiace
+- [Príklad mikroservisov](../../../../examples/microservices) - Vzory komunikácie služieb
+- [Príklad Microsoft Foundry Models](../../../../examples/azure-openai-chat) - AI integrácia
 
 ---
 
 ## Zhrnutie
 
 **Naučili ste sa:**
-- ✅ Päť vzorov koordinácie (sekvenčný, paralelný, hierarchický, riadený udalosťami, konsenzus)
-- ✅ Viacagentová architektúra v Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Päť vzorov koordinácie (sekvenčné, paralelné, hierarchické, riadené udalosťami, konsenzus)
+- ✅ Multi-agentná architektúra na Azure (Service Bus, Cosmos DB, Container Apps)
 - ✅ Správa stavu medzi distribuovanými agentmi
-- ✅ Riešenie časových limitov, opakovaní a circuit-breakerov
+- ✅ Riešenie časových limitov, opakovaní a obvodových ističov
 - ✅ Monitorovanie a ladenie distribuovaných systémov
 - ✅ Stratégie optimalizácie nákladov
 
-**Kľúčové poznatky:**
-1. **Vyberte správny vzor** - Sekvenčný pre usporiadané pracovné postupy, paralelný pre rýchlosť, riadený udalosťami pre flexibilitu
-2. **Opatrne spravujte stav** - Použite Cosmos DB alebo podobné riešenie pre zdieľaný stav
-3. **Riešte zlyhania elegantne** - Časové limity, opakovania, circuit-breakery, dead-letter fronty
-4. **Monitorujte všetko** - Distribuované trasovanie je nevyhnutné pre ladenie
-5. **Optimalizujte náklady** - Skalujte na nulu, používajte serverless, implementujte cachovanie
+**Kľúčové závery:**
+1. **Vyberte správny vzor** - Sekvenčný pre usporiadané workflow, paralelný pre rýchlosť, riadený udalosťami pre flexibilitu
+2. **Starostlivo spravujte stav** - Používajte Cosmos DB alebo podobné riešenia pre zdieľaný stav
+3. **Zvládajte zlyhania dôstojne** - Časové limity, opakovania, obvodové ističe, fronty mŕtvych listov
+4. **Monitorujte všetko** - Distribuované sledovanie je kľúčové pre ladenie
+5. **Optimalizujte náklady** - Škálujte na nulu, používajte serverless, implementujte caching
 
 **Ďalšie kroky:**
 1. Dokončite praktické cvičenia
-2. Vytvorte viacagentový systém pre váš prípad použitia
-3. Preštudujte si [Výber SKU](sku-selection.md) pre optimalizáciu výkonu a nákladov
+2. Postavte multi-agentný systém pre váš prípad použitia
+3. Naštudujte si [Výber SKU](sku-selection.md) pre optimalizáciu výkonu a nákladov
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zrieknutie sa zodpovednosti**:
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa usilujeme o presnosť, berte prosím na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho originálnom jazyku by sa mal považovať za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

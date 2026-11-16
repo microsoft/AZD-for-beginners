@@ -1,23 +1,23 @@
-# Bab 6: Perencanaan & Validasi Pra-Penerapan
+# Bab 6: Perencanaan & Validasi Pra-Penyebaran
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 1 jam | **⭐ Kompleksitas**: Menengah
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 2-4 jam membaca; waktu tambahan untuk lab yang disesuaikan | **⭐ Kompleksitas**: Menengah–Lanjutan
 
 ---
 
 ## Ikhtisar
 
-Bab ini membahas langkah penting perencanaan dan validasi sebelum menerapkan aplikasi Anda. Pelajari cara menghindari kesalahan mahal dengan perencanaan kapasitas yang tepat, pemilihan SKU, dan pemeriksaan awal.
+Bab ini membahas langkah-langkah penting untuk perencanaan dan validasi sebelum menyebarkan aplikasi Anda. Pelajari cara menghindari kesalahan mahal dengan perencanaan kapasitas yang tepat, pemilihan SKU, dan pemeriksaan pra-penerbangan.
 
-> Diverifikasi dengan `azd 1.27.1` pada Juli 2026.
+> Panduan perintah ditinjau terhadap referensi `azd 1.37.2` yang dirilis. Penyebaran cloud tidak dilakukan. Pelajaran yang lebih panjang mencakup fragmen ilustratif, bukan proyek penyebaran lokal lengkap.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
-- Menjalankan pemeriksaan awal sebelum penerapan
+- Menjalankan pemeriksaan pra-penerbangan sebelum penyebaran
 - Merencanakan kapasitas dan memperkirakan kebutuhan sumber daya
-- Memilih SKU yang tepat untuk optimasi biaya
+- Memilih SKU yang sesuai untuk optimasi biaya
 - Mengonfigurasi Application Insights untuk pemantauan
-- Memahami pola koordinasi tim
+- Memahami pola koordinasi multi-agen dan kebutuhan penyebarannya
 
 ---
 
@@ -25,33 +25,33 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Pemeriksaan Pra-Penerapan](preflight-checks.md) | Validasi konfigurasi sebelum penerapan | 15 menit |
-| 2 | [Perencanaan Kapasitas](capacity-planning.md) | Perkirakan kebutuhan sumber daya | 20 menit |
-| 3 | [Pemilihan SKU](sku-selection.md) | Pilih tingkat harga yang sesuai | 15 menit |
-| 4 | [Application Insights](application-insights.md) | Konfigurasi pemantauan | 20 menit |
-| 5 | [Pola Koordinasi](coordination-patterns.md) | Alur kerja penerapan tim | 15 menit |
+| 1 | [Pemeriksaan Pra-penerbangan](preflight-checks.md) | Validasi konfigurasi sebelum penyebaran | 15 mnt |
+| 2 | [Perencanaan Kapasitas](capacity-planning.md) | Memperkirakan kebutuhan sumber daya | 20 mnt |
+| 3 | [Pemilihan SKU](sku-selection.md) | Memilih tingkatan harga yang sesuai | 15 mnt |
+| 4 | [Application Insights](application-insights.md) | Mengonfigurasi pemantauan | 20 mnt |
+| 5 | [Pola Koordinasi](coordination-patterns.md) | Desain orkestrasi multi-agen tingkat lanjut | 60-75 mnt |
 
 ---
 
 ## 🚀 Mulai Cepat
 
 ```bash
-# Periksa kuota langganan
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Pratinjau penyebaran (tidak ada sumber daya yang dibuat)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Validasi sintaks Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Periksa konfigurasi lingkungan
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Daftar Periksa Pra-Penerapan
+## ☑️ Daftar Periksa Pra-Penyebaran
 
 ### Sebelum `azd provision`
 
@@ -63,7 +63,7 @@ azd env get-values
 
 ### Sebelum `azd deploy`
 
-- [ ] Variabel lingkungan diatur
+- [ ] Variabel lingkungan disetel
 - [ ] Rahasia di Key Vault
 - [ ] String koneksi diverifikasi
 - [ ] Pemeriksaan kesehatan dikonfigurasi
@@ -74,10 +74,10 @@ azd env get-values
 
 | Beban Kerja | Pengembangan | Produksi |
 |----------|-------------|------------|
-| Container Apps | Konsumsi | Dedicated D4 |
+| Container Apps | Konsumsi | Konsumsi atau profil beban kerja khusus, berdasarkan beban terukur |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standar | Standar + PTU |
-| AI Search | Dasar | Standar S2+ |
+| model Azure OpenAI | Tipe penyebaran bayar sesuai penggunaan yang didukung | Bayar sesuai penggunaan atau throughput yang disediakan; tergantung model/wilayah |
+| AI Search | Gratis/Dasar dalam batas | Tingkat Dasar atau Standar yang disesuaikan dengan indeks, replika, dan beban kueri |
 
 ---
 
@@ -85,15 +85,15 @@ azd env get-values
 
 | Arah | Bab |
 |-----------|---------|
-| **Sebelumnya** | [Bab 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Selanjutnya** | [Bab 7: Pemecahan Masalah](../chapter-07-troubleshooting/README.md) |
+| **Sebelumnya** | [Bab 5: Multi-Agen](../chapter-05-multi-agent/README.md) |
+| **Berikutnya** | [Bab 7: Pemecahan Masalah](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 Sumber Daya Terkait
 
 - [Panduan Konfigurasi](../chapter-03-configuration/configuration.md)
-- [Panduan Penerapan](../chapter-04-infrastructure/deployment-guide.md)
+- [Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md)
 - [Masalah Umum](../chapter-07-troubleshooting/common-issues.md)
 
 ---

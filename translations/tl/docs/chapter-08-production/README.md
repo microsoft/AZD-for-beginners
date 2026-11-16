@@ -1,41 +1,43 @@
-# Kabanata 8: Mga Pattern sa Produksyon at Negosyo
+# Kabanata 8: Mga Pattern sa Produksyon at Enterprise
 
-**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 2-3 oras | **⭐ Antas ng Kahirapan**: Advanced
+**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 2-3 oras | **⭐ Antas ng Hirap**: Advanced
 
 ---
 
 ## Pangkalahatang-ideya
 
-Tinalakay sa kabanatang ito ang mga pattern ng pag-deploy na handa para sa negosyo, pagpapalakas ng seguridad, pagmamanman, at pag-optimize ng gastos para sa mga workload ng AI sa produksyon.
+Tinalakay sa kabanatang ito ang mga pattern para sa enterprise-ready deployment, pagpapalakas ng seguridad, pagmo-monitor, at pag-optimize ng gastos para sa mga AI na workload sa produksyon.
 
-> Napatunayan gamit ang `azd 1.27.1` noong Hulyo 2026.
+Ito ay isang arkitekturang sanggunian, hindi isang kumpletong template na maaaring direktang i-deploy sa produksyon. Ang mga halimbawa ay hindi kasama ang mga detalye ng integrasyon na kailangang ipasok at subukan sa iyong sariling aplikasyon; ang pagbabasa ng checklist ay hindi nangangahulugang sertipikadong handa para sa produksyon.
+
+> **Pagsusuri ng release (2026-11-04):** Ang patnubay ng AI CLI ay sinuri laban sa dokumentasyon/source ng `azd 1.37.2`, mga ahente `1.0.0-beta.23`, at mga pagsusuri `1.0.0-beta.2`. Tingnan ang [mga pagbabago at pag-aayos sa release](production-ai-practices.md#recent-release-changes-and-fixes) para sa mga kinakailangan sa pagiging compatible at mga detalye ng migrasyon; hindi ito pagsusuri para sa aktwal na deployment.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagkumpleto ng kabanatang ito, matututuhan mo:
-- Mag-deploy ng mga multi-region resilient na aplikasyon
-- Magpatupad ng mga pattern ng seguridad para sa negosyo
-- Mag-ayos ng komprehensibong pagmamanman
-- Mag-optimize ng mga gastos sa malaking sukat
+Sa pagtatapos ng kabanatang ito, magagawa mong:
+- Mag-deploy ng mga multi-region na resilient na aplikasyon
+- Ipatupad ang mga pattern ng seguridad para sa enterprise
+- I-configure ang komprehensibong pagmo-monitor
+- I-optimize ang gastos sa malawakang sukat
 - Mag-set up ng mga CI/CD pipeline gamit ang AZD
 
 ---
 
 ## 📚 Mga Aralin
 
-| # | Aralin | Paglalarawan | Oras |
+| # | Aralin | Deskripsyon | Oras |
 |---|--------|-------------|------|
-| 1 | [Mga Praktis sa Produksyon ng AI](production-ai-practices.md) | Mga pattern ng pag-deploy sa negosyo | 90 min |
+| 1 | [Mga Kasanayan sa AI para sa Produksyon](production-ai-practices.md) | Mga pattern ng enterprise deployment | 90 min |
 
 ---
 
 ## 🚀 Checklist para sa Produksyon
 
-- [ ] Multi-region deployment para sa resilience
-- [ ] Managed identity para sa authentication (walang mga key)
-- [ ] Application Insights para sa pagmamanman
-- [ ] Mga nakatakdang badyet at mga alerto sa gastos
-- [ ] Security scanning na naka-enable
+- [ ] Multi-region deployment para sa katatagan
+- [ ] Managed identity para sa pagpapatunay (walang mga susi)
+- [ ] Application Insights para sa pagmo-monitor
+- [ ] Nakakonfigyur na mga budget sa gastos at mga alerto
+- [ ] Na-enable na pag-scan sa seguridad
 - [ ] Integrasyon ng CI/CD pipeline
 - [ ] Plano para sa disaster recovery
 
@@ -61,15 +63,16 @@ graph LR
 
 ---
 
-## 🔐 Pinakamahusay na Praktis sa Seguridad
+## 🔐 Pinakamahusay na Kasanayan sa Seguridad
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,28 +85,21 @@ properties: {
 
 ## 💰 Pag-optimize ng Gastos
 
-| Strategy | Savings |
+| Estratehiya | Pangunahing Limitasyon |
 |----------|---------|
-| Sukatin hanggang zero (Container Apps) | 60-80% |
-| Gumamit ng consumption tiers para sa dev | 50-70% |
-| Iskedyul na scaling | 30-50% |
-| Reserved capacity | 20-40% |
+| Scale sa zero (Container Apps) | Nangangailangan ng angkop na trigger; ang ibang serbisyo ay patuloy na may gastos |
+| Gumamit ng consumption tiers para sa dev | Ihambing ang presyo ng piniling serbisyo at workload |
+| Scheduled scaling | Mag-scale gamit ang suportadong imprastraktura/automation |
+| Reservations/provisioned capacity | Kapag sinusuportahan lamang; maaaring tumaas ang gastos ng idle kapag may commitments |
 
-```bash
-# Set budget alerts
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Gamitin ang [kumpletong budget resource pattern](production-ai-practices.md#2-cost-monitoring-and-budgets) na may balidong petsa ng pagsisimula, saklaw ng pagsingil, mga tatanggap, at mga permiso. Ang budget ay nagpapadala ng mga alerto; hindi ito nagsasaad ng limitasyon sa paggastos. Ang mga tipid ay nakadepende sa nasukatang paggamit at hindi garantisadong porsyento.
 
 ---
 
-## 📊 Setup ng Monitoring
+## 📊 Pag-setup ng Pagmo-monitor
 
 ```bash
-# Stream logs
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
 # Check Application Insights
@@ -117,19 +113,19 @@ az monitor metrics list --resource <resource-id>
 
 ## 🔗 Navigasyon
 
-| Direction | Chapter |
+| Direksyon | Kabanata |
 |-----------|---------|
-| **Nakaraan** | [Kabanata 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
-| **Tapos na ang Kurso** | [Home ng Kurso](../../README.md) |
+| **Nakaraan** | [Kabanata 7: Pag-aayos ng Problema](../chapter-07-troubleshooting/README.md) |
+| **Kumpleto na ang Kurso** | [Home ng Kurso](../../README.md) |
 
 ---
 
-## 📖 Kaugnay na mga Resources
+## 📖 Kaugnay na mga Mapagkukunan
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
+- [Patnubay para sa mga AI Agents](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
-- [Microservices Example](../../examples/microservices/README.md)
+- [Mga Solusyon sa Multi-Agent](../chapter-05-multi-agent/README.md)
+- [Halimbawa ng Microservices](../../examples/microservices/README.md)
 
 ---
 

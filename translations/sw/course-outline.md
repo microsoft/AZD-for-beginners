@@ -1,559 +1,560 @@
-# AZD Kwa Kompyuta Mpya: Muhtasari wa Kozi & Mfumo wa Kujifunza
+# AZD Kwa Waanzilishi: Muhtasari wa Kozi & Ufungaji wa Kujifunza
 
 ## Muhtasari wa Kozi
 
-Shinda Azure Developer CLI (azd) kupitia sura zilizopangwa kwa ajili ya kujifunza kwa hatua. **Kuzingatia maalum juu ya uwekaji wa programu za AI kwa integrasiyo ya Microsoft Foundry.**
+Jifunze Azure Developer CLI (azd) kupitia sura zilizopangwa kwa ajili ya kujifunza hatua kwa hatua. **Lengo maalum ni jinsi ya kupeleka programu za AI kwa ushirikiano wa Microsoft Foundry.**
 
-### Kwa Nini Kozi Hii ni Muhimu kwa Waendelezaji wa Kisasa
+### Kwa Nini Kozi Hii Ni Muhimu kwa Waendelezaji wa Kisasa
 
-Kulingana na maarifa ya jamii ya Microsoft Foundry Discord, **45% ya waendelezaji wanataka kutumia AZD kwa mzigo wa AI** lakini wanakutana na changamoto za:
-- Miundo tata ya AI yenye huduma nyingi
-- Mbinu bora za uenezaji AI wa uzalishaji  
-- Integrasiyo na usanidi wa huduma za Azure AI
-- Uboreshaji wa gharama kwa mzigo wa AI
-- Utatuzi wa matatizo maalum ya uenezaji wa AI
+Waendelezaji wanaopeleka kazi za AI mara nyingi wanahitaji mwongozo kuhusu:
+- Miundo tata ya huduma nyingi za AI  
+- Mazoea bora ya upelekezaji wa AI kwa uzalishaji
+- Ushirikiano na usanidi wa huduma za AI za Azure
+- Uboreshaji wa gharama kwa kazi za AI
+- Utatuzi wa matatizo maalum ya upelekezaji wa AI
 
-### Malengo Makuu ya Kujifunza
+### Malengo Muhimu ya Kujifunza
 
-Kwa kukamilisha kozi hii iliyopangwa, utaweza:
-- **Shinda Misingi ya AZD**: Misingi, usakinishaji, na usanidi
-- **Enezaji Programu za AI**: Tumia AZD na huduma za Microsoft Foundry
-- **Tekeleza Miundombinu kama Msimbo**: Dhibiti rasilimali za Azure kwa templeti za Bicep
-- **Tatua Matatizo ya Uenezaji**: Rekebisha matatizo ya kawaida na pepeta matatizo
-- **Boresha kwa Uzalishaji**: Usalama, upanuzi, ufuatiliaji, na usimamizi wa gharama
-- **Jenga Suluhisho za Wakala Wengi**: Enezaji miundo tata ya AI
+Kwa kukamilisha kozi hii iliyopangwa, utakuwa na uwezo wa:
+- **Kufahamu Misingi ya AZD**: Dhana kuu, usakinishaji, na usanidi
+- **Kuweka Programu za AI**: Tumia AZD na huduma za Microsoft Foundry
+- **Kutekeleza Miundombinu kama Msimbo**: Simamia rasilimali za Azure kwa kutumia templates za Bicep
+- **Kutatuza Tatizo za Upelekezaji**: Tatuza matatizo ya kawaida na kufanya debug
+- **Kuboresha kwa Uzalishaji**: Usalama, upanuzi, ufuatiliaji, na usimamizi wa gharama
+- **Kujenga Suluhisho za Mawakala Wengi**: Peleka miundo tata ya AI
 
-## 🎓 Uzoefu wa Kujifunza Kwenye Warsha
+## 🎓 Uzoefu wa Kujifunza Katika Warsha
 
-### Chaguzi za Uwasilishaji wa Kujifunza Zenye Ustahimilivu
-Kozi hii imeundwa kusaidia **kujifunza binafsi kwa kasi yako mwenyewe** na **vipindi vya warsha zinazoratibiwa**, kuruhusu wanafunzi kupata uzoefu wa vitendo na AZD huku wakikuza ujuzi kupitia mazoezi ya ushirikiano.
+### Chaguzi za Uwasilishaji wa Kujifunza Zinazobadilika
+Kozi hii imesanifiwa kusaidia **kujifunza kwa kiwango binafsi** na pia **vikao vya mafunzo vilivyoongozwa**, kuwezesha wanafunzi kupata uzoefu wa vitendo na AZD huku wakikuza ujuzi kupitia mazoezi ya kiutendaji.
 
-#### 🚀 Njia ya Kujifunza Binafsi
-**Bora kwa waendelezaji binafsi na kujifunza endelevu**
+#### 🚀 Njia ya Kujifunza Kwa Kasi Yako
+**Inafaa kwa waendelezaji binafsi na kujifunza endelevu**
 
 **Sifa:**
-- **Kiolesura Kinachotumia Kivinjari**: Warsha iliyoendeshwa na MkDocs inapatikana kupitia kivinjari chochote cha wavuti
-- **Integrasiyo na GitHub Codespaces**: Mazingira ya maendeleo kwa bonyeza moja na zana zilizotayarishwa
-- **Mazingira ya DevContainer Shirikishi**: Hakuna setup ya eneo la kazi inayohitajika - anza kuandika msimbo mara moja
-- **Ufuatiliaji wa Maendeleo**: Vidhibiti vya muda na mazoezi ya uthibitisho
+- **Jukwaa la Kuviendesha Kivinjari**: Warsha kamili kwa MkDocs inayopatikana kupitia kivinjari chochote cha mtandao
+- **Ushirikiano na GitHub Codespaces**: Mazingira ya maendeleo kwa kitufe kimoja na zana zilizoandaliwa kabla
+- **Mazingira ya DevContainer Inayoshirikiana**: Hakuna usanidi wa maeneo ya ndani unahitajika - anza kuandika msimbo mara moja
+- **Ufuatiliaji wa Maendeleo**: Pointi na mazoezi ya uthibitisho yaliyojengwa ndani
 - **Msaada wa Jamii**: Ufikiaji wa vituo vya Azure Discord kwa maswali na ushirikiano
 
 **Muundo wa Kujifunza:**
-- **Muda Raha**: Kamilisha sura kwa kasi yako mwenyewe kwa siku au wiki
-- **Mfumo wa Vidhibiti**: Thibitisha kujifunza kabla ya kuendelea kwa mada ngumu
-- **Maktaba ya Rasilimali**: Nyaraka kamilifu, mifano, na mwongozo wa kutatua matatizo
-- **Ujenzi wa Kifaa cha Kazi**: Tengeneza miradi inayoweza kuenezwa kwa maeneo ya kitaaluma
+- **Wakati Uliobadilika**: Kamilisha sura kwa kasi yako ndani ya siku au wiki
+- **Mfumo wa Pointi za Kuthibitisha**: Thibitisha kujifunza kabla ya kuendelea kwa mada ngumu
+- **Maktaba ya Rasilimali**: Nyaraka kamili, mifano, na miongozo ya kutatua matatizo
+- **Maendeleo ya Portfolio**: Tengeneza miradi inayoweza kupelekwa kwa portfolio za kitaaluma
 
-**Kuanza (Binafsi):**
+**Kuanzia (Kujifunza Kwa Kasi Yako):**
 ```bash
-# Chaguo 1: GitHub Codespaces (Iliopendekezwa)
-# Elekea kwenye hifadhidata na bonyeza "Code" → "Create codespace on main"
+# Option 1: GitHub Codespaces (Recommended)
+# Navigate to the repository and click "Code" → "Create codespace on main"
 
-# Chaguo 2: Maendeleo ya Kwenye Kifaa Mwenyewe
+# Option 2: Local Development
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Fuata maelekezo ya usanidi katika workshop/README.md
+# Follow setup instructions in workshop/README.md
 ```
 
-#### 🏛️ Vipindi vya Warsha Vilivyoratibiwa
-**Bora kwa mafunzo ya kampuni, bootcamps, na taasisi za elimu**
+#### 🏛️ Vikao vya Warsha Vilivyoongozwa
+**Inafaa kwa mafunzo ya kampuni, bootcamps, na taasisi za elimu**
 
-**Chaguzi za Muundo wa Warsha:**
+**Chaguzi za Umbizo la Warsha:**
 
-**📚 Muingiliano wa Kozi za Kielimu (wiki 8-12)**
-- **Programu za Chuo Kikuu**: Kozi ya muhula kamili yenye vipindi viwili kwa wiki
-- **Muundo wa Bootcamp**: Programu ya siku 3-5 yenye vipindi vya saa 6-8 kila siku
-- **Mafunzo ya Kampuni**: Vipindi vya timu kila mwezi na utekelezaji wa miradi ya vitendo
-- **Mfumo wa Tathmini**: Kazi za nyumbani zilizopimwa, maoni ya wenzao, na miradi ya mwisho
+**📚 Ushirikiano wa Kozi za Chuo (wiki 8-12)**
+- **Mipango ya Chuo Kikuu**: Kozi ya muhula nzima na vikao vya masaa 2 kwa wiki
+- **Umbizo la Bootcamp**: Programu mkali ya siku 3-5 na vikao vya masaa 6-8 kila siku
+- **Mafunzo ya Kampuni**: Vikao vya timu kila mwezi na utekelezaji wa miradi ya vitendo
+- **Mfumo wa Tathmini**: Majukumu yaliyo pangwa, mapitio ya wenzao, na miradi ya mwisho
 
-**🚀 Warsha ya Kujitolea (siku 1-3)**
-- **Siku ya 1**: Msingi + Maendeleo ya AI (Sura 1-2) - saa 6
-- **Siku ya 2**: Usanidi + Miundombinu (Sura 3-4) - saa 6  
-- **Siku ya 3**: Mifumo ya Juu + Uzalishaji (Sura 5-8) - saa 8
-- **Ufuatiliaji**: Ushauri wa wiki 2 kwa kumaliza mradi
+**🚀 Warsha ya Kwa Kiwango Kikubwa (siku 1-3)**
+- **Siku ya 1**: Msingi + Maendeleo ya AI (Sura 1-2) - masaa 6
+- **Siku ya 2**: Usanidi + Miundombinu (Sura 3-4) - masaa 6  
+- **Siku ya 3**: Mifumo ya Juu + Uzalishaji (Sura 5-8) - masaa 8
+- **Mfuatano**: Ukutani wa kijulisho wa wiki 2 kwa kukamilisha mradi
 
-**⚡ Mkutano wa Uongozi (saa 4-6)**
-- **Muhtasari wa Kimkakati**: Maelezo ya thamani ya AZD na athari za biashara (saa 1)
-- **Onyesho la Vitendo**: Enezaji ya programu ya AI kuanzia mwanzo hadi mwisho (saa 2)
-- **Ukaguzi wa Miundo**: Mifumo ya biashara na utawala (saa 1)
-- **Mpango wa Utekelezaji**: Mkakati wa uanzishaji wa shirika (saa 1-2)
+**⚡ Muhtasari wa Wakurugenzi (masaa 4-6)**
+- **Muhtasari wa Mikakati**: Pendekezo la thamani ya AZD na athari za biashara (saa 1)
+- **Onyesho la Vitendo**: Peleka programu ya AI kutoka mwanzo hadi mwisho (masaa 2)
+- **Marejeleo ya Miundo**: Mifumo ya mashirika na utawala (saa 1)
+- **Mipango ya Utekelezaji**: Mkakati wa kukubalika kwa shirika (masaa 1-2)
 
-#### 🛠️ Mbinu ya Kujifunza Kwenye Warsha
-**Uchunguzi → Uenezaji → Kubadilisha kwa maendeleo ya ujuzi wa vitendo**
+#### 🛠️ Mbinu ya Kujifunza Katika Warsha
+**Njia ya Kugundua → Upelekezaji → Urekebishaji kwa maendeleo ya ujuzi wa vitendo**
 
-**Kipindi cha 1: Uchunguzi (dakika 45)**
-- **Uchunguzi wa Templeti**: Pima templeti na huduma za Microsoft Foundry
-- **Uchambuzi wa Miundombinu**: Elewa mifumo ya wakala wengi na mikakati ya uenezaji
-- **Tathmini ya Mahitaji**: Tambua mahitaji na vikwazo vya shirika
-- **Uwekaji Mazingira**: Sanidi mazingira ya maendeleo na rasilimali za Azure
+**Mzunguko 1: Ugunduzi (dakika 45)**
+- **Uchunguzi wa Template**: Tathmini templates na huduma za Microsoft Foundry
+- **Uchambuzi wa Miundo**: Elewa mifumo ya mawakala wengi na mikakati ya upelekezaji
+- **Tathmini Mahitaji**: Tambua mahitaji na vikwazo vya shirika
+- **Usanidi wa Mazingira**: Sanidi mazingira ya maendeleo na rasilimali za Azure
 
-**Kipindi cha 2: Uenezaji (saa 2)**
-- **Utekelezaji ulioratibiwa**: Hatua kwa hatua ya uenezaji wa programu za AI na AZD
-- **Usanidi wa Huduma**: Sanidi huduma za Azure AI, vituo, na uthibitisho
-- **Tekeleza Usalama**: Tumia mifumo ya usalama wa biashara na udhibiti wa ufikiaji
-- **Upimaji wa Uthibitisho**: Hakiki uenezaji na tatua matatizo ya kawaida
+**Mzunguko 2: Upelekezaji (masaa 2)**
+- **Utekelezaji wa Hatua kwa Hatua**: Peleka programu za AI kwa AZD
+- **Usanidi wa Huduma**: Sanidi huduma za Azure AI, pointi za mwisho na uthibitisho
+- **Utekelezaji wa Usalama**: Tumia mifumo ya usalama ya mashirika na udhibiti wa huduma
+- **Upimaji wa Uthibitisho**: Hakiki upelekezaji na tatua matatizo ya kawaida
 
-**Kipindi cha 3: Kubadilisha (dakika 45)**
-- **Marekebisho ya Programu**: Badilisha templeti kwa matumizi maalum na mahitaji
-- **Boresha Uzalishaji**: Tekeleza ufuatiliaji, usimamizi wa gharama, na mikakati ya upanuzi
-- **Mifumo ya Juu**: Chunguza uratibu wa wakala wengi na miundombinu tata
-- **Mipango ya Hatua Inayofuata**: Eleza njia ya kujifunza kwa maendeleo endelevu
+**Mzunguko 3: Urekebishaji (dakika 45)**
+- **Marekebisho ya Programu**: Rekebisha templates kwa matumizi maalum na mahitaji
+- **Uboreshaji wa Uzalishaji**: Tekeleza ufuatiliaji, usimamizi wa gharama, na mikakati ya upanuzi
+- **Mifumo Juu**: Chunguza uratibu wa mawakala wengi na miundo tata
+- **Mipango ya Hatua Inayofuata**: Bainisha njia ya kujifunza kwa maendeleo endelevu ya ujuzi
 
-#### 🎯 Matokeo ya Kujifunza Kwenye Warsha
-**Ujuzi unaopimika uliotengenezwa kupitia mazoezi ya vitendo**
+#### 🎯 Matokeo ya Kujifunza Katika Warsha
+**Ujuzi unaopimika uliopatikana kupitia mazoezi ya vitendo**
 
-**Uwezo wa Kiufundi:**
-- **Enezaji ya Programu za AI za Uzalishaji**: Enezaji na usanidi wa mafanikio ya suluhisho za AI
-- **Uwezo Kamili wa Miundombinu kama Msimbo**: Tengeneza na dhibiti templeti za Bicep kwa desturi
-- **Miundo ya Wakala Wengi**: Tekeleza suluhisho za wakala wa AI walioratibiwa
-- **Uko tayari kwa Uzalishaji**: Tumia mifumo ya usalama, ufuatiliaji, na utawala
-- **Utaalamu wa Utatuzi wa Matatizo**: Tatua peke yako matatizo ya uenezaji na usanidi
+**Ujuzi wa Kiufundi:**
+- **Peleka Programu za AI za Uzalishaji**: Fanikiwa kupeleka na kusanidi suluhisho za AI
+- **Ujuzi wa Miundombinu kama Msimbo**: Tengeneza na simamia templates za Bicep kwa ajili yako
+- **Miundo ya Mawakala Wengi**: Tekeleza suluhisho za wakala wa AI walioratibiwa
+- **Utoaji kwa Uzalishaji**: Tumia mifumo ya usalama, ufuatiliaji, na utawala
+- **Utaalamu wa Kutatua Matatizo**: Jitegemee kutatua matatizo ya upelekezaji na usanidi
 
 **Ujuzi wa Kitaaluma:**
-- **Uongozi wa Mradi**: Ongoza timu za kiufundi katika juhudi za uenezaji wingu
-- **Ubunifu wa Miundo**: Tengeneza suluhisho za Azure zinazoweza kupanuwa na za gharama nafuu
-- **Uhamishaji wa Maarifa**: Fundisha na kuwa mshauri kwa wenzako juu ya mbinu bora za AZD
-- **Mipango ya Kimkakati**: Hifadhi mikakati ya shirika ya uanzishaji wingu
+- **Uongozi wa Miradi**: Kuongoza timu za kiufundi katika juhudi za upelekezaji kwa wingu
+- **Muundo wa Miundo**: Unda suluhisho za Azure zinazoweza kupanuka na gharama nafuu
+- **Uhamishaji wa Maarifa**: Fundisha na kuwa mshauri kwa wenzako kuhusu mazoea bora ya AZD
+- **Mipango ya Mikakati**: Kuathiri mikakati ya kukubaliwa kwa wingu katika shirika
 
 #### 📋 Rasilimali na Vifaa vya Warsha
-**Kifaa kamili kwa waandaaji na wanafunzi**
+**Kifaa kamili kwa walimu na wanafunzi**
 
-**Kwa Waandaaji:**
-- **Mwongozo wa Mwalimu**: [Muhtasari wa Warsha](workshop/README.md) - Mipango ya vipindi na mwongozo wa utoaji
-- **Vifaa vya Uwasilishaji**: Mabango, michoro ya miundombinu, na maandishi ya onyesho
-- **Zana za Tathmini**: Mazoezi ya vitendo, ukaguzi wa maarifa, na viwango vya tathmini
-- **Usanidi wa Kiufundi**: Usanidi wa mazingira, mwongozo wa matatizo, na mipango ya kuhifadhi
+**Kwa Walimu:**
+- **Mwongozo wa Mwalimu**: [Muhtasari wa Warsha](workshop/README.md) - Mipango ya kikao na maelekezo ya utoaji
+- **Vifaa vya Uwasilishaji**: Miuonekano ya slaidi, michoro ya miundo, na maandishi ya maonyesho
+- **Vyombo vya Tathmini**: Mazoezi ya vitendo, ukaguzi wa maarifa, na viwango vya tathmini
+- **Usanidi wa Kiufundi**: Usanidi wa mazingira, miongozo ya kutatua matatizo, na mipango ya nakala rudufu
 
 **Kwa Wanafunzi:**
-- **Mazingira ya Warsha Shirikishi**: [Vifaa vya Warsha](workshop/README.md) - Jukwaa la kujifunza linalotumia kivinjari
-- **Maelekezo Hatua kwa Hatua**: [Mazoezi Yaliyoongoza](../../workshop/docs/instructions) - Mwongozo wa utekelezaji kwa kina  
-- **Nyaraka za Marejeleo**: [Maabara ya Warsha ya AI](docs/microsoft-foundry/ai-workshop-lab.md) - Mafunzo ya kina yanayohusiana na AI
+- **Mazingira ya Warsha Yenye Majiisiliano**: [Vifaa vya Warsha](workshop/README.md) - Jukwaa la kujifunza lililo kwenye kivinjari
+- **Maelekezo Hatua kwa Hatua**: [Mazoezi Yaliyoongozwa](../../workshop/docs/instructions) - Miongozo ya utekelezaji kwa undani  
+- **Nyaraka za Marejeleo**: [Maabara ya Warsha ya AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - Utafiti wa kina juu ya AI
 - **Rasilimali za Jamii**: Vituo vya Azure Discord, mijadala ya GitHub, na msaada wa wataalamu
 
 #### 🏢 Utekelezaji wa Warsha wa Shirika
-**Mikakati ya uenezaji na mafunzo ya shirika**
+**Mikakati ya upelekezaji na mafunzo ya shirika**
 
-**Programu za Mafunzo ya Kampuni:**
-- **Utangulizi kwa Waendelezaji**: Maelekezo kwa wafanyakazi wapya na misingi ya AZD (wiki 2-4)
-- **Kuboresha Ujuzi wa Timu**: Warsha za robo mwaka kwa timu za maendeleo zilizopo (siku 1-2)
-- **Ukaguzi wa Miundo**: Vipindi vya kila mwezi kwa waningeni na waanzilishi (saa 4)
-- **Mkutano wa Uongozi**: Warsha za wakurugenzi kwa watendaji wa maamuzi ya kiufundi (nusu siku)
+**Mipango ya Mafunzo ya Kampuni:**
+- **Utambulisho wa Waendelezaji**: Mwelekeo kwa waajiri wapya na misingi ya AZD (wiki 2-4)
+- **Kuongeza Ujuzi wa Timu**: Warsha kila robo mwaka kwa timu za maendeleo zilizopo (siku 1-2)
+- **Mapitio ya Miundo**: Vikao vya kila mwezi kwa wahandisi wakuu na wachora miundo (masaa 4)
+- **Mikutano ya Uongozi**: Warsha za wakurugenzi kwa wenye maamuzi ya kiufundi (nusu siku)
 
 **Msaada wa Utekelezaji:**
-- **Ubunifu wa Warsha za Desturi**: Maudhui yaliyozingatia mahitaji maalum ya shirika
-- **Usimamizi wa Programu ya Jaribio**: Uanzishaji ulioratibiwa na vipimo vya mafanikio na maoni  
-- **Ushauri Endelevu**: Msaada baada ya warsha kwa utekelezaji wa miradi
-- **Ujenzi wa Jamii**: Jamii za wakufunzi wa Azure AI ndani ya shirika na kushirikiana maarifa
+- **Ubunifu wa Warsha Maalum**: Yaliyomo yaliyobinafsishwa kwa mahitaji maalum ya shirika
+- **Usimamizi wa Programu ya Jaribio**: Utekelezaji uliopangwa kwa viwango vya mafanikio na maoni
+- **Ushauri Endelevu**: Msaada baada ya warsha kwa utekelezaji wa mradi
+- **Ujenzi wa Jamii**: Jamii za waendelezaji wa AI Azure ndani ya shirika na kushirikiana kwa maarifa
 
 **Vipimo vya Mafanikio:**
-- **Upataji wa Ujuzi**: Tathmini kabla/baada kupima ukuaji wa ufanisi wa kiufundi
-- **Mafanikio ya Uenezaji**: Asilimia ya washiriki waliofanikiwa kueneza programu za uzalishaji
-- **Muda wa Kuandaa Kufanya Kazi**: Kupungua kwa muda wa uanzishaji kwa miradi mpya ya Azure AI  
-- **Uhifadhi wa Maarifa**: Tathmini za ufuatiliaji miezi 3-6 baada ya warsha
+- **Kupata Ujuzi**: Tathmini kabla/baada kupima ukuaji wa ujuzi wa kiufundi
+- **Mafanikio ya Upelekezaji**: Asilimia ya washiriki waliowafaulu kupeleka programu za uzalishaji
+- **Muda wa Ufanisi**: Kupunguza muda wa utambulisho wa miradi mipya ya Azure AI
+- **Uhifadhi wa Maarifa**: Tathmini za kufuatilia miezi 3-6 baada ya warsha
 
 ## Muundo wa Kujifunza wa Sura 8
 
-### Sura 1: Msingi & Kuanza Haraka (dakika 30-45) 🌱
+### Sura 1: Msingi & Anza Haraka (dakika 30-45) 🌱
 **Mahitaji**: Usajili wa Azure, maarifa ya msingi ya mstari wa amri  
 **Ugumu**: ⭐
 
 #### Utajifunza Nini
 - Kuelewa misingi ya Azure Developer CLI
 - Kusakinisha AZD kwenye jukwaa lako  
-- Uenezaji wako wa kwanza uliotimia
-- Misingi na istilahi kuu
+- Upelekezaji wako wa kwanza wenye mafanikio
+- Dhana kuu na istilahi
 
 #### Rasilimali za Kujifunza
-- [Misingi ya AZD](docs/getting-started/azd-basics.md) - Misingi ya msingi
-- [Usakinishaji & Usanidi](docs/getting-started/installation.md) - Mwongozo wa jukwaa maalum
-- [Mradi Wako wa Kwanza](docs/getting-started/first-project.md) - Mafunzo ya vitendo
+- [Misingi ya AZD](docs/chapter-01-foundation/azd-basics.md) - Dhana kuu
+- [Usakinishaji & Usanidi](docs/chapter-01-foundation/installation.md) - Miongozo maalum ya jukwaa
+- [Mradi Wako wa Kwanza](docs/chapter-01-foundation/first-project.md) - Mafunzo ya vitendo
 - [Karatasi ya Amri](resources/cheat-sheet.md) - Marejeleo ya haraka
 
-#### Matokeo ya Vitendo
-Enezaji mafanikio ya programu rahisi ya wavuti kwenye Azure kwa kutumia AZD
+#### Matokeo ya Kivitendo
+Peleka programu rahisi ya wavuti kwenye Azure kwa kutumia AZD
 
 ---
 
-### Sura 2: Maendeleo ya AI-Kwanza (saa 1-2) 🤖
-**Mahitaji**: Sura 1 imemalizika  
+### Sura 2: Maendeleo ya AI-Kwanza (masaa 1-2) 🤖
+**Mahitaji**: Sura 1 imekamilika  
 **Ugumu**: ⭐⭐
 
 #### Utajifunza Nini
-- Integrasiyo ya Microsoft Foundry na AZD
-- Uenezaji wa programu zinazoendeshwa na AI
+- Ushirikiano wa Microsoft Foundry na AZD
+- Upelekezaji wa programu zenye nguvu za AI
 - Kuelewa usanidi wa huduma za AI
-- Mifumo ya RAG (Kukusanya-Maendeleo)
+- Mifumo ya RAG (Retrieval-Augmented Generation)
 
 #### Rasilimali za Kujifunza
-- [Integrasiyo ya Microsoft Foundry](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- [Uenezaji wa Modeli za AI](docs/microsoft-foundry/ai-model-deployment.md)
-- [Maabara ya Warsha ya AI](docs/microsoft-foundry/ai-workshop-lab.md) - **MPYA**: maabara kamilifu ya vitendo kwa saa 2-3
-- [Mwongozo wa Warsha Shirikishi](workshop/README.md) - **MPYA**: warsha inayoendeshwa kivinjari na muonesho wa MkDocs
-- [Templeti za Microsoft Foundry](README.md#featured-microsoft-foundry-templates)
-- [Maelekezo ya Warsha](../../workshop/docs/instructions) - **MPYA**: mazoezi yaliyoongozwa hatua kwa hatua
+- [Ushirikiano wa Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- [Upelekezaji wa Mfano wa AI](docs/chapter-02-ai-development/ai-model-deployment.md)
+- [Maabara ya Warsha ya AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - **MPYA**: Maabara kamili ya masaa 2-3 ya vitendo
+- [Mwongozo wa Warsha Inayoshirikiana](workshop/README.md) - **MPYA**: Warsha kwenye kivinjari na muonekano wa MkDocs
+- [Templates za Microsoft Foundry](README.md#featured-microsoft-foundry-templates)
+- [Maelekezo ya Warsha](../../workshop/docs/instructions) - **MPYA**: Mazoezi ya kuongozwa hatua kwa hatua
 
-#### Matokeo ya Vitendo
-Enezaji na usanidi wa programu ya mazungumzo yenye uwezo wa RAG
+#### Matokeo ya Kivitendo
+Peleka na sanidi programu ya mazungumzo yenye nguvu za AI na uwezo wa RAG
 
-#### Njia ya Kujifunza ya Warsha (Kuboresha Chaguo)
-**MPYA Uzoefu Shirikishi**: [Mwongozo Kamili wa Warsha](workshop/README.md)
-1. **Uchunguzi** (dakika 30): Uchaguzi na tathmini ya templeti
-2. **Uenezaji** (dakika 45): Enezaji na uthibitishaji wa utendaji wa templeti ya AI  
-3. **Uvunjaji** (dakika 30): Elewa muundo na vipengele vya templeti
+#### Njia ya Kujifunza Katika Warsha (Uboreshaji wa Hiari)
+**Uzoefu Mpya Ushirikiano**: [Mwongozo Kamili wa Warsha](workshop/README.md)
+1. **Ugunduzi** (dakika 30): Uchaguzi na tathmini ya template
+2. **Upelekezaji** (dakika 45): Peleka na thibitisha utendaji wa template ya AI  
+3. **Uchambuzi** (dakika 30): Elewa usanifu na vipengele vya template
 4. **Usanidi** (dakika 30): Rekebisha mipangilio na vigezo
-5. **Ubadilishaji** (dakika 45): Badilisha na rudia ili iwe yako
-6. **Ufutaji** (dakika 15): Safisha rasilimali na elewa mzunguko wa maisha
-7. **Hitimisho** (dakika 15): Hatua zinazofuata na njia za juu za kujifunza
+5. **Urekebishaji** (dakika 45): Badilisha na urudie hadi iwe yako
+6. **Usafishaji** (dakika 15): Ondoa rasilimali na elewa mzunguko wa maisha
+7. **Hitimisho** (dakika 15): Hatua zinazofuata na njia za kujifunza za hali ya juu
 
 ---
 
 ### Sura 3: Usanidi & Uthibitishaji (dakika 45-60) ⚙️
-**Mahitaji**: Sura 1 imemalizika  
+**Mahitaji**: Sura 1 imekamilika  
 **Ugumu**: ⭐⭐
 
 #### Utajifunza Nini
 - Usanidi na usimamizi wa mazingira
-- Mbinu bora za uthibitishaji na usalama
-- Kuweka majina na kupanga rasilimali
-- Uenezaji wa mazingira mengi
+- Mazoea bora ya uthibitisho na usalama
+- Uratibu wa majina na mpangilio wa rasilimali
+- Upelekezaji katika mazingira mbalimbali
 
 #### Rasilimali za Kujifunza
-- [Mwongozo wa Usanidi](docs/getting-started/configuration.md) - Uwekaji mazingira
-- [Mifumo ya Uthibitishaji & Usalama](docs/getting-started/authsecurity.md) - Integrasiyo ya utambulisho uliodhibitiwa na Key Vault
-- Mifano ya mazingira mengi
+- [Mwongozo wa Usanidi](docs/chapter-03-configuration/configuration.md) - Usanidi wa mazingira
+- [Mifumo ya Uthibitisho na Usalama](docs/chapter-03-configuration/authsecurity.md) - Ushirikiano wa utambulisho uliodhibitiwa na Key Vault
+- Mifano ya mazingira mbalimbali
 
-#### Matokeo ya Vitendo
-Dhibiti mazingira mengi kwa uthibitishaji na usalama sahihi
+#### Matokeo ya Kivitendo
+Simamia mazingira mbalimbali kwa uthibitisho na usalama sahihi
 
 ---
 
-### Sura 4: Miundombinu kama Msimbo & Uenezaji (saa 1-1.5) 🏗️
-**Mahitaji**: Sura 1-3 zimetimia  
+### Sura 4: Miundombinu kama Msimbo & Upelekezaji (saa 1-1.5) 🏗️
+**Mahitaji**: Sura 1-3 zimekamilika  
 **Ugumu**: ⭐⭐⭐
 
 #### Utajifunza Nini
-- Mifumo ya juu ya uenezaji
+- Mifumo ya juu ya upelekezaji
 - Miundombinu kama Msimbo kwa Bicep
-- Mikakati ya upatikanaji wa rasilimali
-- Uundaji wa templeti za desturi
+- Mikakati ya kutoa rasilimali
+- Uundaji wa template maalum
 
-- Uenezaji wa programu zilizoingia ndani ya kontejina kwa Azure Container Apps na AZD
+- Upelekezaji wa programu zilizo na kontena kwa Azure Container Apps na AZD
 
 #### Rasilimali za Kujifunza
-- [Mwongozo wa Uenezaji](docs/deployment/deployment-guide.md) - Mifumo kamili
-- [Upatikanaji wa Rasilimali](docs/deployment/provisioning.md) - Usimamizi wa rasilimali
-- Mifano ya kontejina na huduma ndogo ndogo
-- [Mifano ya Programu za Kontejina](examples/container-app/README.md) - Kuanza haraka, uzalishaji, na mifumo ya juu ya uenezaji
+- [Mwongozo wa Upelekezaji](docs/chapter-04-infrastructure/deployment-guide.md) - Taratibu kamili
+- [Utoaji wa Rasilimali](docs/chapter-04-infrastructure/provisioning.md) - Usimamizi wa rasilimali
+- Mifano ya kontena na microservices
+- [Mifano ya Programu za Kontena](examples/container-app/README.md) - Mwanzo wa haraka, uzalishaji, na mifumo ya juu ya upelekezaji
 
-#### Matokeo ya Vitendo
-Enezaji za programu nyingi na huduma nyingi kwa kutumia templeti za miundombinu za desturi
+#### Matokeo ya Kivitendo
+Peleka programu tata zenye huduma nyingi kwa kutumia templates maalum za miundombinu
 
 ---
 
-### Sura 5: Suluhisho za AI za Wakala Wengi (saa 2-3) 🤖🤖
-**Mahitaji**: Sura 1-2 zimetimia  
+### Sura 5: Suluhisho za AI za Mawakala Wengi (masaa 2-3) 🤖🤖
+**Mahitaji**: Sura 1-2 zimekamilika  
 **Ugumu**: ⭐⭐⭐⭐
 
 #### Utajifunza Nini
-- Mifumo ya usanifu wa wakala wengi
-- Uratibu na usimamizi wa wakala
-- Uenezaji wa AI tayari kwa uzalishaji
+- Mifumo ya miundombinu ya mawakala wengi
+- Uratibu na kuratibu wa mawakala
+- Upelekezaji wa AI tayari kwa uzalishaji
 - Utekelezaji wa wakala wa wateja na hesabu
 
-- Integrasiyo ya huduma ndogo zilizokwisha kontejina kama sehemu ya suluhisho za wakala
+- Ushirikiano wa microservices zilizo na kontena kama sehemu ya suluhisho za wakala
 
 #### Rasilimali za Kujifunza
-- [Suluhisho la Wakala Wengi kwa Rejareja](examples/retail-scenario.md) - Utekelezaji kamili
-- [Pakiti ya Templeti za ARM](../../examples/retail-multiagent-arm-template) - Uenezaji kwa bonyeza moja
-- Mifumo ya uratibu wa wakala wengi
-- [Mfano wa Miundo ya Huduma Ndogo](../../examples/container-app/microservices) - Mawasiliano ya huduma kwa huduma, ujumbe usio wa papo hapo, na uenezaji wa uzalishaji
+- [Suluhisho za AI za Mawakala Wengi kwa Rejareja](examples/retail-scenario.md) - Ramani ya usanifu, si programu kamili
+- [Mfuko wa Template wa ARM](../../examples/retail-multiagent-arm-template) - Msingi wa miundombinu na mahitaji ya utekelezaji
+- Mifumo ya uratibu wa mawakala mingi
+- [Mfano wa Miundo ya Microservices](../../examples/container-app/microservices) - Mawasiliano ya huduma kwa huduma, ujumbe wa asynchronous, na upelekezaji wa uzalishaji
 
-#### Matokeo ya Vitendo
-Enezaji na usimamizi wa suluhisho liwe tayari uzalishaji la wakala wengi la AI
+#### Matokeo ya Kivitendo
+Unda suluhisho la AI la mawakala wengi na bainisha utekelezaji wa programu, uthibitishaji, na kazi za uendeshaji zinazohitajika zaidi ya kutoa miundombinu
 
 ---
 
-### Sura 6: Uthibitishaji & Mipango Kabla ya Uenezaji (saa 1) 🔍
-**Mahitaji**: Sura 4 imemalizika  
+### Sura 6: Uthibitishaji wa Kabla ya Upelekezaji & Mipango (saa 1) 🔍
+**Mahitaji**: Sura 4 imekamilika  
 **Ugumu**: ⭐⭐
 
 #### Utajifunza Nini
 - Mipango ya uwezo na uthibitishaji wa rasilimali
-- Mikakati ya uchaguzi wa SKU
-- Ukaguzi wa kabla ya uenezaji na ut automatishi
+- Mikakati ya kuchagua SKU
+- Ukaguzi kabla ya kuanza na uendeshaji wa kiotomatiki
 - Mipango ya uboreshaji wa gharama
 
 #### Rasilimali za Kujifunza
-- [Mipango ya Uwezo](docs/pre-deployment/capacity-planning.md) - Uthibitishaji wa rasilimali
-- [Uchaguzi wa SKU](docs/pre-deployment/sku-selection.md) - Chaguo la gharama nafuu
-- [Ukaguzi wa Kabla ya Kupaa](docs/pre-deployment/preflight-checks.md) - Script za automatishi
-- [Integrasiyo ya Application Insights](docs/pre-deployment/application-insights.md) - Ufuatiliaji na uonekano
-- [Mifumo ya Uratibu wa Wakala Wengi](docs/pre-deployment/coordination-patterns.md) - Mikakati ya uratibu wa wakala
+- [Mipango ya Uwezo](docs/chapter-06-pre-deployment/capacity-planning.md) - Uthibitishaji wa rasilimali
+- [Uchaguzi wa SKU](docs/chapter-06-pre-deployment/sku-selection.md) - Chaguo za gharama nafuu
+- [Ukaguzi wa Kabla ya Kuanzia](docs/chapter-06-pre-deployment/preflight-checks.md) - Skiripti za kiotomatiki
+- [Ushirikiano wa Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - Ufuatiliaji na uwezo wa kuona
+- [Mifumo ya Uratibu wa Mawakala Wengi](docs/chapter-06-pre-deployment/coordination-patterns.md) - Mikakati ya uratibu wa mawakala
 
-#### Matokeo ya Vitendo
-Thibitisha na boresha uenezaji kabla ya utekelezaji
+#### Matokeo ya Kivitendo
+Thibitisha na boresha upelekezaji kabla ya utekelezaji
+
 ---
 
-### Sura ya 7: Utatuzi wa Matatizo & Urekebishaji wa Mende (masaa 1-1.5) 🔧
-**Masharti ya awali**: Sura yoyote ya utoaji imemalizika  
+### Sura 7: Kutatua Matatizo & Kufanya Debug (saa 1-1.5) 🔧
+**Mambo Yanayohitajika**: Sura yoyote ya usambazaji imekamilika  
 **Ugumu**: ⭐⭐
 
 #### Utajifunza Nini
-- Mbinu za kivitendo za urekebishaji wa mende
-- Masuala ya kawaida na suluhisho
-- Utatuzi wa matatizo maalum kwa AI
+- Mbinu za mfumo wa kutatua matatizo
+- Masuala na suluhisho ya kawaida
+- Utatuaji wa matatizo maalum ya AI
 - Uboreshaji wa utendaji
 
 #### Vyanzo vya Kujifunza
-- [Masuala ya Kawaida](docs/troubleshooting/common-issues.md) - Maswali yanayoulizwa mara kwa mara na suluhisho
-- [Mwongozo wa Urekebishaji wa Mende](docs/troubleshooting/debugging.md) - Mikakati hatua kwa hatua
-- [Utatuzi wa Matatizo wa KI maalum](docs/troubleshooting/ai-troubleshooting.md) - Matatizo ya huduma za AI
+- [Masuala ya Kawaida](docs/chapter-07-troubleshooting/common-issues.md) - Maswali yanayoulizwa mara kwa mara na suluhisho
+- [Mwongozo wa Kutatua Matatizo](docs/chapter-07-troubleshooting/debugging.md) - Mikakati ya hatua kwa hatua
+- [Utatuaji wa Matatizo wa AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Matatizo ya huduma za AI
 
-#### Matokeo ya Kivitendo
-Tambua na utatue matatizo ya kawaida ya utoaji kwa uhuru
+#### Matokeo ya Vitendo
+Jitambue na utatue masuala ya kawaida ya usambazaji kwa uhuru
 
 ---
 
-### Sura ya 8: Mifumo ya Uzalishaji & Biashara (masaa 2-3) 🏢  
-**Masharti ya awali**: Sura 1-4 zimemalizika  
+### Sura ya 8: Mifumo ya Uzalishaji & Biashara (saa 2-3) 🏢
+**Mambo Yanayohitajika**: Suras 1-4 zimekamilika  
 **Ugumu**: ⭐⭐⭐⭐
 
 #### Utajifunza Nini
-- Mikakati ya utoaji wa uzalishaji
-- Mifumo ya usalama kwa biashara
+- Mikakati ya usambazaji wa uzalishaji
+- Mifumo ya usalama ya biashara
 - Ufuatiliaji na uboreshaji wa gharama
-- Ustawi na utawala
+- Upanuzi na usimamizi
 
-- Mbinu bora za utoaji wa programu za kontena za uzalishaji (usalama, ufuatiliaji, gharama, CI/CD)
+- Mazoea bora kwa usambazaji wa programu za kontena uzalishaji (usalama, ufuatiliaji, gharama, CI/CD)
 
 #### Vyanzo vya Kujifunza
-- [Mbinu Bora za AI za Uzalishaji](docs/microsoft-foundry/production-ai-practices.md) - Mifumo ya biashara
+- [Mazoea Bora ya AI ya Uzalishaji](docs/chapter-08-production/production-ai-practices.md) - Mifumo ya biashara
 - Mifano ya huduma ndogo na biashara
-- Mifumo ya ufuatiliaji na utawala
-- [Mfano wa Miundo ya Huduma ndogo](../../examples/container-app/microservices) - Utoaji wa bluu-kijani/canary, ufuatiliaji wa kuenea, na uboreshaji wa gharama
+- Mifumo ya ufuatiliaji na usimamizi
+- [Mfano wa Usanifu wa Microservices](../../examples/container-app/microservices) - Usambazaji wa blue-green/canary, ufuatiliaji uliosambazwa, na uboreshaji wa gharama
 
-#### Matokeo ya Kivitendo
-Tumia programu zenye maandalizi ya biashara zilizo na uwezo kamili wa uzalishaji
+#### Matokeo ya Vitendo
+Sambaza programu zinazostahiki biashara zenye uwezo kamili wa uzalishaji
 
 ---
 
-## Mchakato wa Kujifunza na Ugumu
+## Maendeleo ya Kujifunza na Ugumu
 
-### Ujenzi wa Ujuzi Polepole
+### Ujenzi wa Ujuzi Kwa Mpangilio
 
-- **🌱 Waanzilishi**: Anza na Sura 1 (Msingi) → Sura 2 (Maendeleo ya AI)
-- **🔧 Wazito Wastani**: Suras 3-4 (Usanidi & Miundombinu) → Sura 6 (Uthibitisho)
-- **🚀 Wao Kadiri**: Sura 5 (Suluhisho za Wakala Wengi) → Sura 7 (Utatuzi wa Matatizo)
-- **🏢 Biashara**: Kamilisha sura zote, zingatia Sura 8 (Mifumo ya Uzalishaji)
+- **🌱 Waanzilishi**: Anza na Sura ya 1 (Msingi) → Sura ya 2 (Maendeleo ya AI)
+- **🔧 Wastani**: Suras 3-4 (Usanidi & Miundombinu) → Sura ya 6 (Uthibitishaji)
+- **🚀 Waandishi wa Juu**: Sura ya 5 (Suluhisho za Wakala Wengi) → Sura ya 7 (Utatuaji wa Matatizo)
+- **🏢 Biashara**: Kamilisha sura zote, zingatia Sura ya 8 (Mifumo ya Uzalishaji)
 
-- **Njia ya Programu za Kontena**: Suras 4 (Utoaji wa kontena), 5 (Muunganiko wa huduma ndogo), 8 (Mbinu bora za uzalishaji)
+- **Njia ya Programu ya Kontena**: Suras 4 (Usambazaji wa kontena), 5 (Uunganishaji wa microservices), 8 (Mazoea bora ya uzalishaji)
 
 ### Viashiria vya Ugumu
 
-- **⭐ Msingi**: Mifano moja, mafunzo yalioongozwa, dakika 30-60  
-- **⭐⭐ Wastani**: Mifano mingi, mazoezi ya mikono, saa 1-2  
-- **⭐⭐⭐ Juu**: Miundo tata, suluhisho maalum, saa 1-3  
-- **⭐⭐⭐⭐ Mtaalamu**: Mifumo ya uzalishaji, mifumo ya biashara, saa 2-4  
+- **⭐ Msingi**: Dhana moja, mafunzo yaliyoongozwa, dakika 30-60
+- **⭐⭐ Wastani**: Dhana nyingi, mazoezi ya vitendo, saa 1-2  
+- **⭐⭐⭐ Juu**: Miundo tata, suluhisho maalum, saa 1-3
+- **⭐⭐⭐⭐ Mtaalamu**: Mifumo ya uzalishaji, mifumo ya biashara, saa 2-4
 
-### Njia za Kujifunza Zenye Urahisi
+### Njia za Kujifunza Zinazobadilika
 
-#### 🎯 Njia ya Haraka kwa Waendelezaji wa AI (masaa 4-6)  
-1. **Sura 1**: Msingi & Kuanzisha Haraka (dakika 45)  
-2. **Sura 2**: Maendeleo ya AI Kwanza (saa 2)  
-3. **Sura 5**: Suluhisho za Wakala Wengi za AI (saa 3)  
-4. **Sura 8**: Mbinu Bora za AI za Uzalishaji (saa 1)  
+#### 🎯 Njia ya Haraka ya Mtaalamu wa AI (saa 4-6)
+1. **Sura ya 1**: Msingi & Mwanzo wa Haraka (dakika 45)
+2. **Sura ya 2**: Maendeleo ya AI-Kwanza (saa 2)  
+3. **Sura ya 5**: Suluhisho za Wakala Wengi wa AI (saa 3)
+4. **Sura ya 8**: Mazoea Bora ya AI ya Uzalishaji (saa 1)
 
-#### 🛠️ Njia ya Mtaalamu wa Miundombinu (masaa 5-7)  
-1. **Sura 1**: Msingi & Kuanzisha Haraka (dakika 45)  
-2. **Sura 3**: Usanidi & Uthibitishaji (saa 1)  
-3. **Sura 4**: Miundombinu kama Msimbo & Utoaji (saa 1.5)  
-4. **Sura 6**: Uthibitisho wa Kabla ya Utoaji & Mipango (saa 1)  
-5. **Sura 7**: Utatuzi wa Matatizo & Urekebishaji wa Mende (saa 1.5)  
-6. **Sura 8**: Mifumo ya Uzalishaji & Biashara (saa 2)  
+#### 🛠️ Njia ya Mtaalamu wa Miundombinu (saa 5-7)
+1. **Sura ya 1**: Msingi & Mwanzo wa Haraka (dakika 45)
+2. **Sura ya 3**: Usanidi & Uthibitishaji (saa 1)
+3. **Sura ya 4**: Miundombinu kama Msimbo & Usambazaji (saa 1.5)
+4. **Sura ya 6**: Uthibitishaji na Mipango Kabla ya Usambazaji (saa 1)
+5. **Sura ya 7**: Utatuaji wa Matatizo & Uchambuzi (saa 1.5)
+6. **Sura ya 8**: Mifumo ya Uzalishaji & Biashara (saa 2)
 
-#### 🎓 Safari Kamili ya Kujifunza (masaa 8-12)  
-Kumaliza sura zote 8 mfululizo na mazoezi ya mikono na uthibitisho
+#### 🎓 Safari Kamili ya Kujifunza (saa 8-12)
+Kukamilishwa kwa sura zote 8 kwa mazoezi ya vitendo na uthibitishaji
 
 ## Mfumo wa Kukamilisha Kozi
 
-### Uthibitisho wa Maarifa
-- **Vipindi vya Kila Sura**: Mazoezi ya vitendo yenye matokeo yanayoweza kupimwa  
-- **Uthibitisho wa Mikono**: Tumia suluhisho zinazoendelea kwa kila sura  
-- **Ufuatiliaji wa Maendeleo**: Viashiria vya kuona na alama za kukamilika  
-- **Uthibitisho wa Jumuiya**: Shiriki uzoefu kwenye chaneli za Azure Discord
+### Uthibitishaji wa Maarifa
+- **Vizingiti vya Sura**: Mazoezi ya vitendo yenye matokeo yanayopimika
+- **Uhakiki wa Vitendo**: Sambaza suluhisho zinazofanya kazi kwa kila sura
+- **Ufuatiliaji wa Maendeleo**: Viashiria vya kuona na bagesi za kukamilika
+- **Uthibitishaji wa Jumuiya**: Shiriki uzoefu katika chaneli za Azure Discord
 
 ### Tathmini ya Matokeo ya Kujifunza
 
 #### Kukamilika kwa Suras 1-2 (Msingi + AI)
-- ✅ Tumia programu rahisi ya wavuti kwa kutumia AZD  
-- ✅ Tumia programu ya mazungumzo yenye nguvu za AI kwa RAG  
-- ✅ Elewa dhana msingi za AZD na muunganiko wa AI  
+- ✅ Sambaza programu rahisi ya wavuti kwa kutumia AZD
+- ✅ Sambaza programu ya mazungumzo ya AI inayotumia RAG
+- ✅ Elewa dhana kuu za AZD na ujumuishaji wa AI
 
 #### Kukamilika kwa Suras 3-4 (Usanidi + Miundombinu)  
-- ✅ Simamia utoaji katika mazingira mbalimbali  
-- ✅ Tengeneza templeti za Bicep maalum za miundombinu  
-- ✅ Tekeleza mifumo ya uthibitishaji salama  
+- ✅ Simamia usambazaji wa mazingira mengi
+- ✅ Tengeneza templates maalum za miundombinu za Bicep
+- ✅ Tekeleza mifumo salama ya uthibitishaji
 
-#### Kukamilika kwa Suras 5-6 (Wakala Wengi + Uthibitisho)  
-- ✅ Tumia suluhisho tata za AI za wakala wengi  
-- ✅ Fanya mipango ya uwezo na uboreshaji wa gharama  
-- ✅ Tekeleza uthibitisho wa kabla ya utoaji ulioandaliwa kiotomati  
+#### Kukamilika kwa Suras 5-6 (Wakala Wengi + Uthibitishaji)
+- ✅ Sambaza suluhisho tata la AI la wakala wengi
+- ✅ Fanya mipango ya uwezo na uboreshaji wa gharama
+- ✅ Tekeleza uthibitishaji wa kabla ya usambazaji ulioj automatiska
 
-#### Kukamilika kwa Suras 7-8 (Utatuzi wa Matatizo + Uzalishaji)  
-- ✅ Rekebisha matatizo ya utoaji kwa uhuru  
-- ✅ Tekeleza mifumo ya usalama na ufuatiliaji wa biashara  
-- ✅ Tumia programu zenye maandalizi ya uzalishaji zilizo na utawala  
+#### Kukamilika kwa Suras 7-8 (Utatuaji wa Matatizo + Uzalishaji)
+- ✅ Tatua matatizo ya usambazaji kwa uhuru  
+- ✅ Tekeleza ufuatiliaji na usalama wa kiwango cha biashara
+- ✅ Sambaza programu zinazostahiki uzalishaji kwa usimamizi
 
-### Cheti na Utambuzi  
-- **Alama ya Kukamilika kwa Kozi**: Kamilisha sura zote 8 kwa uthibitisho wa vitendo  
-- **Utambuzi wa Jumuiya**: Ushiriki hai katika Microsoft Foundry Discord  
-- **Maendeleo ya Kitaalamu**: Uwezo wa AZD na utoaji wa AI unaohitajika sokoni  
-- **Mafanikio ya Kazi**: Uwezo wa utoaji wa wingu bora kwa biashara  
+### Cheti na Utambuzi
+- **Bagesi la Kukamilika kwa Kozi**: Kamilisha sura zote 8 na uthibitishaji wa vitendo
+- **Utambuzi wa Jumuiya**: Shughuli hai katika Microsoft Foundry Discord
+- **Maendeleo ya Kitaalamu**: Ujuzi wa AZD na usambazaji wa AI unaotambulika katika sekta
+- **Mafanikio ya Kazi**: Uwezo wa usambazaji wa wingu wa kiwango cha biashara
 
 ## 🎓 Matokeo Kamili ya Kujifunza
 
-### Kiwango cha Msingi (Suras 1-2)  
-Baada ya kukamilisha sura za msingi, mwanafunzi ataonyesha:
+### Ngazi ya Msingi (Suras 1-2)
+Baada ya kukamilisha sura za msingi, wanafunzi wataonyesha:
 
-**Uwezo wa Kiufundi:**  
-- Tumia programu rahisi za wavuti Azure kwa kutumia amri za AZD  
-- Sanidi na tumia programu za mazungumzo zilizo na nguvu za AI kwa RAG  
-- Elewa dhana msingi za AZD: templeti, mazingira, michakato ya utoaji  
-- Unganisha huduma za Microsoft Foundry na utoaji za AZD  
-- Pata maarifa ya usanidi wa huduma za AI Azure na huduma za API  
+**Uwezo wa Kiufundi:**
+- Sambaza programu za wavuti rahisi kwenda Azure kwa kutumia amri za AZD
+- Sanidi na sambaza programu za mazungumzo zenye nguvu ya AI na uwezo wa RAG
+- Elewa dhana za msingi za AZD: templates, mazingira, mtiririko wa upatikanaji
+- Jumuisha huduma za Microsoft Foundry na usambazaji wa AZD
+- Pitia usanidi wa huduma za Azure AI na API endpoints
 
-**Ujuzi wa Kitaalamu:**  
-- Fuata michakato ya utoaji iliyo ndani kwa matokeo yanayodumu  
-- Tatua matatizo ya msingi ya utoaji kwa kutumia kumbukumbu na nyaraka  
-- Wasiliana kwa ufanisi kuhusu michakato ya utoaji wa wingu  
-- Tumia mbinu bora za usalama wa huduma za AI  
+**Ujuzi wa Kitaalamu:**
+- Fuata taratibu za usambazaji zilizopangwa kwa matokeo yanayolingana
+- Tatua masuala msingi ya usambazaji kwa kutumia kumbukumbu na nyaraka
+- Wasiliana kwa ufanisi kuhusu michakato ya usambazaji wa wingu
+- Tumia mbinu bora za ujumuishaji wa huduma salama za AI
 
-**Uthibitisho wa Kujifunza:**  
-- ✅ Tumia templeti `todo-nodejs-mongo` kwa ufanisi  
-- ✅ Tumia na sanidi `azure-search-openai-demo` yenye RAG  
-- ✅ Kamilisha mazoezi ya warsha ya mtandaoni (Faasaha za Ugunduzi)  
-- ✅ Shirikiana katika mijadala ya jumuiya ya Azure Discord  
+**Uthibitishaji wa Kujifunza:**
+- ✅ Sambaza template ya `todo-nodejs-mongo` kwa mafanikio
+- ✅ Sambaza na sanidi `azure-search-openai-demo` na uwezo wa RAG
+- ✅ Kamilisha mazoezi ya warsha ya mwingiliano (kifaa cha ugunduzi)
+- ✅ Shiriki mijadala ya jumuiya ya Azure Discord
 
-### Kiwango cha Wastani (Suras 3-4)  
-Baada ya kukamilisha sura za wastani, mwanafunzi ataonyesha:
+### Ngazi ya Kati (Suras 3-4)
+Baada ya kukamilisha sura za kati, wanafunzi wataonyesha:
 
-**Uwezo wa Kiufundi:**  
-- Simamia utoaji kwa mazingira mengi (dev, staging, uzalishaji)  
-- Tengeneza templeti za Bicep maalum kwa miundombinu kama msimbo  
-- Tekeleza mifumo salama ya uthibitisho kwa utambuzi uliodhibitiwa  
-- Tumia programu tata zenye huduma nyingi na usanidi maalum  
-- Boresha mikakati ya upatikanaji wa rasilimali kwa gharama na utendaji  
+**Uwezo wa Kiufundi:**
+- Simamia usambazaji wa mazingira mengi (maendeleo, kujaribu, uzalishaji)
+- Tengeneza templates maalum za Bicep kwa miundombinu kama msimbo
+- Tekeleza mifumo salama ya uthibitishaji kwa utambulisho ulioendeshwa
+- Sambaza programu tata za huduma nyingi zenye usanidi maalum
+- Boresha mikakati ya upatikanaji wa rasilimali kwa gharama na utendaji
 
-**Ujuzi wa Kitaalamu:**  
-- Tengeneza miundo ya miundombinu inayoweza kupanuka  
-- Tekeleza mbinu bora za usalama kwa utoaji wa wingu  
-- Andika mifumo ya miundombinu kwa ushirikiano wa timu  
-- Hakiki na chagua huduma za Azure zinazofaa mahitaji  
+**Ujuzi wa Kitaalamu:**
+- Tunga miundo ya miundombinu inayopanuka
+- Tekeleza mbinu bora za usalama kwa usambazaji wa wingu
+- Andika mifumo ya miundombinu kwa ushirikiano wa timu
+- Tathmini na chagua huduma za Azure zinazofaa mahitaji
 
-**Uthibitisho wa Kujifunza:**  
-- ✅ Sanidi mazingira tofauti na usanidi maalum kwa kila mazingira  
-- ✅ Tengeneza na tumia templeti za Bicep kwa programu ya huduma nyingi  
-- ✅ Tekeleza uthibitishaji kwa utambuzi uliodhibitiwa  
-- ✅ Kamilisha mazoezi ya usimamizi wa usanidi kwa hali halisi  
+**Uthibitishaji wa Kujifunza:**
+- ✅ Sanidi mazingira tofauti na usanidi maalum wa mazingira
+- ✅ Tengeneza na sambaza template maalum za Bicep kwa programu ya huduma nyingi
+- ✅ Tekeleza uthibitishaji wa utambulisho wa utambulisho ulioendeshwa kwa usalama
+- ✅ Kamilisha mazoezi ya usimamizi wa usanidi kwa hali halisi
 
-### Kiwango cha Juu (Suras 5-6)  
-Baada ya kukamilisha sura za juu, mwanafunzi ataonyesha:
+### Ngazi ya Juu (Suras 5-6)
+Baada ya kukamilisha sura za juu, wanafunzi wataonyesha:
 
-**Uwezo wa Kiufundi:**  
-- Tumia na ratibu suluhisho za AI za wakala wengi  
-- Tekeleza usanifu wa wakala wa Wateja na Hewlett kwa mazingira ya rejareja  
-- Fanya mipango kamilifu ya uwezo na uthibitisho wa rasilimali  
-- Tekeleza uthibitisho wa kabla ya utoaji ulioandaliwa kiotomati  
-- Tengeneza uteuzi wa SKU unaozingatia gharama kulingana na mahitaji  
+**Uwezo wa Kiufundi:**
+- Sambaza na kuongoza suluhisho za AI za wakala wengi zenye mtiririko wa kazi unaoratibiwa
+- Tekeleza usanifu wa wakala wa Mteja na Hesabu kwa mazingira ya rejareja
+- Fanya mipango ya kina ya uwezo na uthibitishaji wa rasilimali
+- Endesha uthibitishaji ulioj automatiska na uboreshaji kabla ya usambazaji
+- Tunga uteuzi wa SKU unaoendana na gharama kulingana na mahitaji ya mzigo wa kazi
 
-**Ujuzi wa Kitaalamu:**  
-- Sanifu suluhisho tata za AI kwa mazingira ya uzalishaji  
-- Simamia mijadala ya kitaalamu kuhusu mikakati ya AI  
-- Fundisha waendelezaji chipukizi kwenye mbinu bora za AZD na AI  
-- Tathmini na pendekeza mifumo ya usanifu wa AI kwa mahitaji ya biashara  
+**Ujuzi wa Kitaalamu:**
+- Sanifu suluhisho tata za AI kwa mazingira ya uzalishaji
+- Kiongozi wa mijadala ya kiufundi kuhusu mikakati ya usambazaji wa AI
+- Msaada wa wakufunzi wachanga katika AZD na mbinu bora za usambazaji wa AI
+- Tathmini na pendekeza mifumo ya usanifu wa AI kwa mahitaji ya biashara
 
-**Uthibitisho wa Kujifunza:**  
-- ✅ Tumia suluhisho kamili za wakala wengi kwa rejareja kwa templeti za ARM  
-- ✅ Onyesha muunganisho wa wakala na ratiba za kazi  
-- ✅ Kamilisha mipango ya uwezo na mazoezi ya rasilimali halisi  
-- ✅ Thibitisha maandalizi ya utoaji kupitia vipimo vya kabla ya safari  
+**Uthibitishaji wa Kujifunza:**
+- ✅ Pitia mpango wa wakala wengi wa rejareja na tofautisha miundombinu iliyotolewa na kutekelezwa kwa maombi yaliyokosekana
+- ✅ Onyesha utaratibu wa uratibu wa wakala na uongozi wa mtiririko wa kazi
+- ✅ Kamilisha mazoezi ya mipango ya uwezo kwa vikwazo halisi vya rasilimali
+- ✅ Thibitisha utayari wa usambazaji kupitia udhibiti wa hali ya awali ulioj automatiska
 
-### Kiwango cha Mtaalamu (Suras 7-8)  
-Baada ya kukamilisha sura za mtaalamu, mwanafunzi ataonyesha:
+### Ngazi ya Mtaalamu (Suras 7-8)
+Baada ya kukamilisha sura za mtaalamu, wanafunzi wataonyesha:
 
-**Uwezo wa Kiufundi:**  
-- Tambua na tatua matatizo tata ya utoaji kwa uhuru  
-- Tekeleza mifumo ya usalama ya biashara na mifumo ya utawala  
-- Sanifu mikakati kamilifu ya ufuatiliaji na tahadhari  
-- Boresha utoaji wa uzalishaji kwa ukubwa, gharama, na utendaji  
-- Tengeneza mistari ya CI/CD na vipimo na uthibitisho sahihi  
+**Uwezo wa Kiufundi:**
+- Tambua na tatua matatizo tata ya usambazaji kwa uhuru
+- Tekeleza mifumo ya usalama ya kiwango cha biashara na mifumo ya usimamizi
+- Tunga mikakati kamili ya ufuatiliaji na tahadhari
+- Boresha usambazaji wa uzalishaji kwa ukubwa, gharama, na utendaji
+- Anzisha mizunguko ya CI/CD yenye upimaji na uthibitishaji sahihi
 
-**Ujuzi wa Kitaalamu:**  
-- Simamia miradi ya mabadiliko ya wingu wa biashara  
-- Sanifu na tekereza viwango vya utoaji vya taasisi  
-- Fundisha na lekelea timu za maendeleo kwenye mbinu za juu za AZD  
-- Shinikiza maamuzi ya kitaalamu kwa utoaji wa AI wa biashara  
+**Ujuzi wa Kitaalamu:**
+- Kuongoza miradi ya mabadiliko ya wingu ya biashara
+- Tunga na tekeleza viwango vya usambazaji vya shirika
+- Fundisha na toa ushauri kwa timu za maendeleo katika mbinu za juu za AZD
+- Thibitisha maamuzi ya kiufundi kwa usambazaji wa AI wa biashara
 
-**Uthibitisho wa Kujifunza:**  
-- ✅ Rekebisha matatizo makubwa ya utoaji wa huduma nyingi  
-- ✅ Tekeleza mifumo ya usalama ya biashara kwa mahitaji ya utekelezaji  
-- ✅ Sanifu na tumia ufuatiliaji wa uzalishaji kwa Application Insights  
-- ✅ Kamilisha utekelezaji wa mfumo wa utawala wa biashara  
+**Uthibitishaji wa Kujifunza:**
+- ✅ Tatua kushindwa tata za usambazaji wa huduma nyingi
+- ✅ Tekeleza mifumo ya usalama ya biashara ikiwa na mahitaji ya uwajibikaji
+- ✅ Tunga na sambaza ufuatiliaji wa uzalishaji kwa Application Insights
+- ✅ Kamilisha utekelezaji wa mfumo wa usimamizi wa biashara
 
 ## 🎯 Cheti cha Kukamilisha Kozi
 
-### Mfumo wa Ufuatiliaji wa Maendeleo  
-Fuata maendeleo yako kupitia vipindi vya muundo:
+### Mfumo wa Ufuatiliaji wa Maendeleo
+Fuata maendeleo yako ya kujifunza kupitia vizingiti vilivyopangwa:
 
-- [ ] **Sura 1**: Msingi & Kuanzisha Haraka ✅  
-- [ ] **Sura 2**: Maendeleo ya AI Kwanza ✅  
-- [ ] **Sura 3**: Usanidi & Uthibitishaji ✅  
-- [ ] **Sura 4**: Miundombinu kama Msimbo & Utoaji ✅  
-- [ ] **Sura 5**: Suluhisho za Wakala Wengi za AI ✅  
-- [ ] **Sura 6**: Uthibitisho wa Kabla ya Utoaji & Mipango ✅  
-- [ ] **Sura 7**: Utatuzi wa Matatizo & Urekebishaji wa Mende ✅  
-- [ ] **Sura 8**: Mifumo ya Uzalishaji & Biashara ✅  
+- [ ] **Sura ya 1**: Msingi & Mwanzo wa Haraka ✅
+- [ ] **Sura ya 2**: Maendeleo ya AI-Kwanza ✅  
+- [ ] **Sura ya 3**: Usanidi & Uthibitishaji ✅
+- [ ] **Sura ya 4**: Miundombinu kama Msimbo & Usambazaji ✅
+- [ ] **Sura ya 5**: Suluhisho za Wakala Wengi wa AI ✅
+- [ ] **Sura ya 6**: Uthibitishaji na Mipango Kabla ya Usambazaji ✅
+- [ ] **Sura ya 7**: Utatuaji wa Matatizo & Uchambuzi ✅
+- [ ] **Sura ya 8**: Mifumo ya Uzalishaji & Biashara ✅
 
-### Mchakato wa Uthibitisho  
+### Mchakato wa Uthibitishaji
 Baada ya kukamilisha kila sura, thibitisha maarifa yako kupitia:
 
-1. **Kumaliza Mazoezi ya Kivitendo**: Tumia suluhisho zinazoendelea kwa kila sura  
-2. **Tathmini Maarifa**: Pitia sehemu za maswali yanayoulizwa mara kwa mara na kufanya tathmini binafsi  
-3. **Ushiriki wa Jumuiya**: Shiriki uzoefu na upokee maoni kwenye Azure Discord  
-4. **Maendeleo ya Hati ya Kazi**: Andika nakala za utoaji na mafunzo yaliyopatikana  
-5. **Mapitio ya Mienendo ya Wenzako**: Shirikiana na wanafunzi wengine katika hali tata  
+1. **Kamilisha Mazoezi ya Vitendo**: Sambaza suluhisho zinazofanya kazi kwa kila sura
+2. **Tathmini ya Maarifa**: Pitia sehemu za FAQ na kamilisha tathmini za kujitathmini
+3. **Shiriki Jumuiya**: Shiriki uzoefu na upokee maoni katika Azure Discord
+4. **Unda Magodoro**: Andika usambazaji wako na masomo uliyopata
+5. **Kagua wenzako**: Shirikiana na wanafunzi wengine kwenye hali tata
 
-### Faida za Kukamilisha Kozi  
-Baada ya kumaliza sura zote kwa uthibitisho, wahitimu watakuwa na:
+### Manufaa ya Kukamilisha Kozi
+Baada ya kukamilisha sura zote kwa uthibitishaji, wahitimu watakuwa na:
 
-**Utaalam wa Kiufundi:**  
-- **Uzoefu wa Uzalishaji**: Wameweka matumizi halisi ya programu za AI kwenye mazingira ya Azure  
-- **Ujuzi wa Kitaalamu**: Uwezo wa utoaji wa biashara na utatuzi wa matatizo  
-- **Maarifa ya Miundo**: Suluhisho za AI za wakala wengi na mifumo tata ya miundombinu  
-- **Ujuzi wa Utatuzi**: Kutatua matatizo ya utoaji na usanidi kwa uhuru  
+**Utaalamu wa Kiufundi:**
+- **Uzoefu wa Uzalishaji**: Zilizowekwa programu halisi za AI kwenye mazingira ya Azure
+- **Ujuzi wa Kitaalamu**: Uwezo wa usambazaji na utatuaji wa matatizo wa kiwango cha biashara  
+- **Maarifa ya Usanifu**: Suluhisho za AI za wakala wengi na mifumo tata ya miundombinu
+- **Utaalamu wa Utatuaji wa Matatizo**: Urejeshaji wa matatizo ya usambazaji na usanidi kwa uhuru
 
-**Maendeleo ya Kitaalamu:**  
-- **Utambuzi wa Sekta**: Ujuzi wa kuthibitishwa katika maeneo ya AZD na AI yenye mahitaji makubwa  
-- **Maendeleo ya Kazi**: Sifa za muundo na mtaalamu wa utoaji wa AI  
-- **Uongozi wa Jumuiya**: Uanachama hai katika jumuiya za waendelezaji wa Azure na AI  
-- **Kujifunza Endelevu**: Msingi wa utaala wa hali ya juu wa Microsoft Foundry  
+**Maendeleo ya Kitaalamu:**
+- **Utambuzi wa Sekta**: Ujuzi unaothibitishwa katika maeneo ya juu ya AZD na usambazaji wa AI
+- **Mafanikio ya Kazi**: Sifa za mbunifu wa wingu na mtaalamu wa usambazaji wa AI
+- **Uongozi wa Jumuiya**: Uanachama hai katika jamii za wapangaji Azure na AI
+- **Kujifunza Endelea**: Msingi wa utaalamu wa juu wa Microsoft Foundry
 
-**Maktaba ya Kazi:**  
-- **Suluhisho Zilizoteuliwa**: Mifano ya kazi za AI na mifumo ya miundombinu  
-- **Nyaraka**: Mwongozo kamili wa utoaji na taratibu za kutatua matatizo  
-- **Michango ya Jumuiya**: Mijadala, mifano, na maboresho yaliyoshirikiwa na jumuiya ya Azure  
-- **Mtandao wa Kitaalamu**: Mahusiano na wataalamu wa Azure na waendeshaji wa utekelezaji wa AI  
+**Mali za Magodoro:**
+- **Suluhisho Zilizowekwa**: Mifano inayofanya kazi ya programu za AI na mifumo ya miundombinu
+- **Nyaraka**: Miongozo kamili ya usambazaji na taratibu za utatuaji matatizo  
+- **Mchango wa Jumuiya**: Mijadala, mifano, na maboresho yaliyoshirikiwa na jumuiya ya Azure
+- **Mtandao wa Kitaalamu**: Mshikamano na wataalam wa Azure na watendaji wa usambazaji wa AI
 
-### Njia ya Kujifunza Baada ya Kozi  
-Wahitimu wako tayari kwa utaala wa hali ya juu katika:  
-- **Mtaalamu wa Microsoft Foundry**: Utaala wa kina katika utoaji na upangaji wa modeli za AI  
-- **Uongozi wa Miundo ya Wingu**: Ubunifu wa utoaji kwa kiwango cha biashara na utawala  
-- **Uongozi wa Jumuiya ya Waendelezaji**: Michango kwa sampuli za Azure na rasilimali za jumuiya  
-- **Mafunzo ya Kileo**: Kufundisha ujuzi wa AZD na AI ndani ya mashirika  
+### Njia ya Kujifunza Baada ya Kozi
+Wahitimu wameandaliwa kwa utaalamu wa juu katika:
+- **Mtaalamu wa Microsoft Foundry**: Utaalamu wa kina katika usambazaji na kuratibu modeli za AI
+- **Uongozi wa Miundo ya Wingu**: Ubunifu wa usambazaji wa viwango vya biashara na usimamizi
+- **Uongozi wa Jumuiya ya Wapangaji**: Kuchangia mifano ya Azure na rasilimali za jumuiya
+- **Mafunzo ya Kampuni**: Kufundisha ujuzi wa AZD na usambazaji wa AI ndani ya mashirika
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Kiarifu cha Kutotegemea**:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Wakati tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za moja kwa moja zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya asili katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa habari muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatuwajibiki kwa kutoelewana au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

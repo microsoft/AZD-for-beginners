@@ -1,30 +1,30 @@
-# Application Insights -integraatio AZD:n kanssa
+# Application Insights -integrointi AZD:n kanssa
 
-⏱️ **Arvioitu aika**: 40-50 minuuttia | 💰 **Kustannusvaikutus**: ~$5-15/kuukausi | ⭐ **Vaativuus**: Keskitaso
+⏱️ **Arvioitu aika**: 40-50 minuuttia | 💰 **Kustannusvaikutus**: ~5-15 $/kk | ⭐ **Vaikeustaso**: Keskitaso
 
 **📚 Oppimispolku:**
-- ← Previous: [Ennakkotarkastukset](preflight-checks.md) - Ennakkotarkastus ennen käyttöönottoa
-- 🎯 **Olet tässä**: Application Insights -integraatio (valvonta, telemetria, virheenkorjaus)
-- → Next: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Ota käyttöön Azureen
-- 🏠 [Kurssin etusivu](../../README.md)
+- ← Edellinen: [Preflight Checks](preflight-checks.md) - Julkaisua edeltävä validointi
+- 🎯 **Olet tässä**: Application Insights -integrointi (Valvonta, telemetria, virheenkorjaus)
+- → Seuraava: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Julkaisu Azureen
+- 🏠 [Koulutuksen etusivu](../../README.md)
 
 ---
 
 ## Mitä opit
 
-By completing this lesson, you will:
-- Integroi **Application Insights** AZD-projekteihin automaattisesti
-- Ota käyttöön **hajautettu jäljitys** mikropalveluille
-- Toteuta **mukautettu telemetria** (mittarit, tapahtumat, riippuvuudet)
-- Ota käyttöön **reaaliaikaiset mittarit** reaaliaikaista valvontaa varten
-- Luo **hälytykset ja kojelaudat** AZD-julkaisuista
-- Tee tuotantovirheiden vianmääritys **telemetriakyselyillä**
-- Optimoi **kustannus- ja otantastrategiat**
-- Valvo **AI/LLM-sovelluksia** (tokenit, latenssi, kustannukset)
+Tässä oppitunnissa opit:
+- Määrittämään **Application Insightsin** AZD-infrastruktuurissa ja konfiguroimaan SDK-instrumentoinnin
+- Konfiguroimaan **hajautetun seurannan** mikropalveluille
+- Toteuttamaan **mukautettua telemetriaa** (mittarit, tapahtumat, riippuvuudet)
+- Ottamaan käyttöön **reaaliaikaiset mittarit** valvontaan
+- Luomaan **hälytyksiä ja kojelautoja** AZD-julkaisuista
+- Virheenkorjaamaan tuotantovikoja **telemetriakyselyjen** avulla
+- Optimoimaan **kustannus- ja otostus** strategioita
+- Valvomaan **AI/LLM-sovelluksia** (tokenit, viiveet, kustannukset)
 
-## Miksi Application Insights AZD:n kanssa on tärkeä
+## Miksi Application Insights ja AZD ovat tärkeitä
 
-### Haaste: tuotannon havaittavuus
+### Haaste: Tuotantovalvonta
 
 **Ilman Application Insightsia:**
 ```
@@ -36,7 +36,7 @@ By completing this lesson, you will:
 ❌ Unknown failure rates and bottlenecks
 ```
 
-**Application Insights + AZD:**
+**Application Insightsin ja AZD:n kanssa:**
 ```
 ✅ Automatic telemetry collection
 ✅ Centralized logs from all services
@@ -44,37 +44,37 @@ By completing this lesson, you will:
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**Analogia**: Application Insights on kuin "black box" -lentotallennin + ohjaamon kojelauta sovelluksellesi. Näet kaiken, mitä tapahtuu reaaliajassa, ja voit toistaa minkä tahansa tapauksen.
+**Vertauskuva**: Application Insights on kuin sovelluksesi "mustan laatikon" lentoasema ja ohjaamon kojelauta. Näet kaiken reaaliajassa ja voit toistaa minkä tahansa tapauksen.
 
 ---
 
-## Arkkitehtuurin yleiskuva
+## Arkkitehtuurin yleiskatsaus
 
 ### Application Insights AZD-arkkitehtuurissa
 
 ```mermaid
 graph TB
-    User[Käyttäjä/Asiakas]
-    App1[Konttisovellus 1<br/>API-väylä]
-    App2[Konttisovellus 2<br/>Tuotepalvelu]
-    App3[Konttisovellus 3<br/>Tilauspalvelu]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[Application Insights<br/>Telemetriakeskus]
-    LogAnalytics[(Log Analytics<br/>Työtila)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Azure-portaali<br/>Koontinäytöt & Hälytykset]
-    Query[Kusto-kyselyt<br/>Mukautettu analyysi]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Automaattinen instrumentointi| AppInsights
-    App2 -.->|Automaattinen instrumentointi| AppInsights
-    App3 -.->|Automaattinen instrumentointi| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,57 +83,62 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 ### Mitä valvotaan automaattisesti
 
-| Telemetriatyyppi | Mitä se tallentaa | Käyttötapaus |
-|------------------|-------------------|--------------|
-| **Requests** | HTTP-pyynnöt, tilakoodit, kesto | API:n suorituskyvyn valvonta |
-| **Dependencies** | Ulkoiset kutsut (DB, API:t, tallennustila) | Pullonkaulojen tunnistaminen |
-| **Exceptions** | Käsittelemättömät virheet pinon jäljityksineen | Virheiden vianmääritys |
-| **Custom Events** | Liiketoimintatapahtumat (rekisteröinti, osto) | Analytiikka ja suppilot |
-| **Metrics** | Suorituskykymittarit, mukautetut mittarit | Kapasiteettisuunnittelu |
-| **Traces** | Lokiviestit vakavuustasolla | Vianmääritys ja auditointi |
-| **Availability** | Käytettävyys ja vasteaikatestit | SLA-valvonta |
+Tuettu automaattinen instrumentointi kerää pyyntöjä ja riippuvuuksia instrumentoiduista kirjastoista. Mukautetut tapahtumat ja mittarit vaativat sovelluskoodia; saatavuustestit täytyy konfiguroida erikseen. Se ei kerää kaikkea tiedostetta vain resurssin olemassaolon perusteella.
+
+| Telemetriatyyppi | Mitä se kerää | Käyttötarkoitus |
+|----------------|--------------|----------------|
+| **Pyyntöjä** | HTTP-pyynnöt, tilakoodit, kesto | API-suorituskyvyn valvonta |
+| **Riippuvuuksia** | Ulkoiset kutsut (tietokanta, API:t, tallennus) | Pullonkaulojen tunnistus |
+| **Poikkeuksia** | Käsittelemättömät virheet pinon seurannalla | Virheiden korjaus |
+| **Mukautetut tapahtumat** | Liiketoimintatapahtumat (rekisteröityminen, ostot) | Analytiikka ja suppilot |
+| **Mittarit** | Suorituskykylaskurit, mukautetut mittarit | Kapasiteetin suunnittelu |
+| **Seurannat** | Lokiviestit vakavuustasolla | Virheenkorjaus ja tarkastus |
+| **Saatavuus** | Käytettävyys- ja vasteaikatestit | SLA-valvonta |
 
 ---
 
-## Vaatimukset
+## Esivaatimukset
 
 ### Tarvittavat työkalut
 
 ```bash
-# Tarkista Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Odotettu: azd versio 1.0.0 tai uudempi
+# Command reference baseline: azd 1.37.2
 
-# Tarkista Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Odotettu: azure-cli 2.50.0 tai uudempi
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Azure-vaatimukset
 
-- Aktiivinen Azure-tilaus
+- Aktiivinen Azure-tilaustili
 - Oikeudet luoda:
   - Application Insights -resursseja
   - Log Analytics -työtiloja
-  - Container Apps -instansseja
+  - Container Apps -sovelluksia
   - Resurssiryhmiä
 
-### Ennakkotiedot
+### Tiedolliset esivaatimukset
 
 Sinun tulisi olla suorittanut:
-- [AZD-perusteet](../chapter-01-foundation/azd-basics.md) - AZD:n keskeiset käsitteet
-- [Konfigurointi](../chapter-03-configuration/configuration.md) - Ympäristön asetukset
+- [AZD Basics](../chapter-01-foundation/azd-basics.md) - AZD:n ydinkonseptit
+- [Configuration](../chapter-03-configuration/configuration.md) - Ympäristön määrittäminen
 - [Ensimmäinen projekti](../chapter-01-foundation/first-project.md) - Perusjulkaisu
 
 ---
 
-## Oppitunti 1: Automaattinen Application Insights AZD:llä
+## Oppitunti 1: Automaattinen Application Insights AZD:n kanssa
 
-### Kuinka AZD provisioi Application Insightsin
+### Miten AZD tarjoaa Application Insightsin
 
-AZD luo ja konfiguroi Application Insightsin automaattisesti, kun julkaiset. Katsotaan kuinka se toimii.
+AZD tarjoaa Application Insightsin **vain, kun projektin infrastruktuuri määrittelee sen**. `azure.yaml` yksinään ei luo valvontaa tai instrumentoi sovelluskoodia.
+
+> **Esimerkin laajuus:** Tässä oppitunnissa on integrointipaloja, ei täydellistä `monitored-app`-projektia tässä repossa. Toimita päämalli ja parametrien kartoitus, Container Apps -ympäristö, rekisteri/kuva ja identiteettikonfiguraatio, Dockerfile ja palvelutunnisteet ennen julkaisua. Myöhemmät oppitunnit näyttävät vaihtoehtoisia/lisäpaloja, eivät kaikki kerralla liitettävissä olevia tiedostoja. Aloita toimivasta [mikropalveluesimerkistä](../../../../examples/microservices), jos tarvitset ajettavan pohjan.
 
 ### Projektin rakenne
 
@@ -156,7 +161,7 @@ monitored-app/
 
 ### Vaihe 1: Konfiguroi AZD (azure.yaml)
 
-**File: `azure.yaml`**
+**Tiedosto: `azure.yaml`**
 
 ```yaml
 name: monitored-app
@@ -169,16 +174,16 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**Siinä kaikki!** AZD luo Application Insightsin oletuksena. Perusvalvontaan ei tarvita lisäkonfiguraatiota.
+Tämä määrittelee julkaistavan palvelun. Seuraava Bicep- ja SDK-konfiguraatio tarjoaa valvonnan; azd ei lisää niitä automaattisesti.
 
 ---
 
-### Vaihe 2: Valvonta-infrastruktuuri (Bicep)
+### Vaihe 2: Valvontainfrastruktuuri (Bicep)
 
-**File: `infra/core/monitoring.bicep`**
+**Tiedosto: `infra/core/monitoring.bicep`**
 
 ```bicep
 param logAnalyticsName string
@@ -223,19 +228,21 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
 
 ### Vaihe 3: Yhdistä Container App Application Insightsiin
 
-**File: `infra/app/api.bicep`**
+**Tiedosto: `infra/app/api.bicep`**
 
 ```bicep
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -287,33 +295,27 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ### Vaihe 4: Sovelluskoodi telemetrialla
 
-**File: `src/app.py`**
+**Tiedosto: `src/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Hae Application Insights -yhteysmerkkijono
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Määritä hajautettu jäljitys
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # 100 % näytteenotto kehitystä varten
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # Määritä lokitus
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # Simuloi tietokantakutsua (seurataan automaattisesti riippuvuutena)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Simuloi hidasta operaatiota
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -364,30 +366,30 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**File: `src/requirements.txt`**
+**Tiedosto: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+Ratkaise nämä riippuvuudet projektissasi, testaa ne yhdessä ja lukitse tuloksena olevat versiot. Uusien projektien tulisi käyttää Azure Monitor OpenTelemetrya, ei eläkkeelle jääneitä OpenCensus Python -viejäosia.
 
 ---
 
-### Vaihe 5: Ota käyttöön ja varmista
+### Vaihe 5: Julkaise ja varmista
 
 ```bash
-# Alusta AZD
-azd init
-
-# Ota käyttöön (ottaa Application Insightsin käyttöön automaattisesti)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# Hae sovelluksen URL-osoite
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# Luo telemetriaa
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -404,25 +406,25 @@ curl $APP_URL/api/slow
 
 ---
 
-### Vaihe 6: Näytä telemetria Azure-portaalissa
+### Vaihe 6: Katso telemetriaa Azure-portaalissa
 
 ```bash
-# Hae Application Insights -tiedot
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Avaa Azure-portaalissa
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Siirry Azure-portaaliin → Application Insights → Transaction Search**
+**Mene Azure-portaaliin → Application Insights → Transaction Search**
 
-Sinun pitäisi nähdä:
+Näet:
 - ✅ HTTP-pyynnöt tilakoodeineen
-- ✅ Pyyntöjen kesto (yli 3 sekuntia polulle `/api/slow`)
-- ✅ Poikkeustiedot polulta `/api/error-test`
+- ✅ Pyynnön kesto (3+ sekuntia `/api/slow`)
+- ✅ Poikkeustiedot `/api/error-test`
 - ✅ Mukautetut lokiviestit
 
 ---
@@ -431,20 +433,15 @@ Sinun pitäisi nähdä:
 
 ### Seuraa liiketoimintatapahtumia
 
-Lisätään mukautettua telemetriaa liiketoimintakriittisille tapahtumille.
+Lisätään mukautettua telemetriaa liiketoiminnalle kriittisistä tapahtumista.
 
-**File: `src/telemetry.py`**
+**Tiedosto: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # Määritä lokittaja
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # Määritä metriikoiden viejä
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # Määritä jäljitin
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# Globaali telemetriaklientti
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
 ### Päivitä sovellus mukautetuilla tapahtumilla
 
-**File: `src/app.py` (enhanced)**
+**Tiedosto: `src/app.py` (parannettu)**
+
+Lisää nämä reitit olemassa olevaan Flask-sovellukseen; pidä aiemmat health/test -reitit. Alla lyhennetty lohko näyttää erillisen sovelluksen selkeyttä varten. Telemetrian alustaminen on nyt `telemetry.py`—älä alusta vientipisteitä kahdesti.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # Seuraa liiketoimintatapahtumaa
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Seuraa tulojen mittaria
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # Simuloi hakua (olisi oikea tietokantakysely)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Muunna millisekunneiksi
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # Seuraa hakutapahtumaa
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Seuraa haun suorituskykymittaria
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # Simuloi ulkoista API-kutsua
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # Seuraa riippuvuutta
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -616,25 +586,25 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### Testaa mukautettu telemetria
+### Testaa mukautettua telemetriaa
 
 ```bash
-# Seuraa ostotapahtumaa
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# Seuraa hakutapahtumaa
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# Seuraa ulkoista riippuvuutta
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
-**Näytä Azure-portaalissa:**
+**Katso Azure-portaalissa:**
 
-Siirry Application Insights → Logs, ja suorita:
+Siirry Application Insights → Lokit, sitten suorita:
 
 ```kusto
 // View purchase events
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -667,11 +637,11 @@ traces
 
 ## Oppitunti 3: Hajautettu jäljitys mikropalveluille
 
-### Ota palvelujen välinen jäljitys käyttöön
+### Ota käyttöön eri palveluiden välinen jäljitys
 
-Mikropalveluille Application Insights korreloi pyynnöt automaattisesti palvelujen välillä.
+Yhteensopivalla instrumentoinnilla ja W3C trace-context -levityksellä Application Insights yhdistää pyynnöt palveluiden välillä. Yhteyden merkkijonon jakaminen yksinään ei luo vanhempi-lapsi span-suhteita. Seuraava arkkitehtuurin osa viittaa moduuleihin, jotka sinun on toteutettava.
 
-**File: `infra/main.bicep`**
+**Tiedosto: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### Näytä päästä päähän -tapahtuma
+### Näytä kokonaisvaltainen transaktio
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API-väylä<br/>(Jäljitunnus: abc123)
-    participant Product as Tuotepalvelu<br/>(Vanhemman tunnus: abc123)
-    participant Order as Tilauspalvelu<br/>(Vanhemman tunnus: abc123)
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
     participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Aloita jäljitys: abc123
-    Gateway->>AppInsights: Kirjaa pyyntö (Jäljitunnus: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: Vanhemman tunnus: abc123
-    Product->>AppInsights: Kirjaa riippuvuuskutsu
-    Product-->>Gateway: Tuotetiedot
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: Vanhemman tunnus: abc123
-    Order->>AppInsights: Kirjaa riippuvuuskutsu
-    Order-->>Gateway: Tilaus luotu
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: Kassaus valmis
-    Gateway->>AppInsights: Kirjaa vastaus (Kesto: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: Korrelointi jäljitunnuksen perusteella
+    Note over AppInsights: Correlation by Trace ID
 ```
-**Kysely päästä päähän -jäljityksestä:**
+
+**Kysely koko jäljestä:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,43 +759,43 @@ dependencies
 
 ---
 
-## Oppitunti 4: Live Metrics ja reaaliaikainen valvonta
+## Oppitunti 4: Live-metriikat ja reaaliaikainen valvonta
 
-### Ota reaaliaikainen mittarivirta käyttöön
+### Ota käyttöön Live Metrics -virta
 
-Live Metrics tarjoaa reaaliaikaista telemetriaa alle 1 sekunnin viiveellä.
+Live Metrics tarjoaa lähes reaaliaikaista telemetriaa, kun SDK tukee ja ominaisuus on käytössä. Se ei ole viiveen SLA. Yllä oleva Python OpenTelemetry -asennus ottaa sen käyttöön käyttämällä `enable_live_metrics=True`.
 
-**Avaa Live Metrics:**
+**Käytä Live Metricsiä:**
 
 ```bash
-# Hae Application Insights -resurssi
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Hae resurssiryhmä
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
 **Mitä näet reaaliajassa:**
-- ✅ Saapuvien pyyntöjen määrä (requests/sec)
+- ✅ Saapuvien pyyntöjen määrä (pyyntöjä/s)
 - ✅ Lähtevät riippuvuuskutsut
-- ✅ Poikkeusten määrä
-- ✅ CPU- ja muistin käyttö
-- ✅ Aktiivisten palvelinten määrä
-- ✅ Näyte-telemetria
+- ✅ Poikkeusten lukumäärä
+- ✅ CPU:n ja muistin käyttö
+- ✅ Aktiivisten palvelimien määrä
+- ✅ Näyte telemetriasta
 
-### Luo kuormitusta testaukseen
+### Luo kuormitusta testausta varten
 
 ```bash
-# Luo kuormitusta nähdäksesi reaaliaikaiset mittarit
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Tarkkaile reaaliaikaisia mittareita Azure-portaalissa
-# Sinun pitäisi nähdä pyyntöjen määrän piikki
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
@@ -833,20 +804,20 @@ done
 
 ### Harjoitus 1: Aseta hälytykset ⭐⭐ (Keskitaso)
 
-**Tavoite**: Luo hälytyksiä korkeille virheprosenteille ja hitaalle vasteelle.
+**Tavoite**: Luo hälytykset korkeille virheiden määrille ja hitaalle vasteelle.
 
 **Vaiheet:**
 
-1. **Luo hälytys virheprosentille:**
+1. **Luo hälytys virheiden määrälle:**
 
 ```bash
-# Hae Application Insights -resurssin tunnus
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Luo metriikkahälytys epäonnistuneille pyynnöille
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,10 +825,10 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
-2. **Luo hälytys hitaalle vasteelle:**
+2. **Luo hälytys hitaalle vasteajalle:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,9 +841,9 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Luo hälytys Bicepillä (suositeltavaa AZD:lle):**
+3. **Luo hälytys Bicepillä (suositeltava AZD:lle):**
 
-**File: `infra/core/alerts.bicep`**
+**Tiedosto: `infra/core/alerts.bicep`**
 
 ```bicep
 param applicationInsightsId string
@@ -947,27 +918,27 @@ output slowResponseAlertId string = slowResponseAlert.id
 4. **Testaa hälytykset:**
 
 ```bash
-# Tuota virheitä
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Tuota hitaita vastauksia
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Tarkista hälytyksen tila (odota 5–10 minuuttia)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
-**✅ Onnistumiskriteerit:**
+**✅ Onnistumisen kriteerit:**
 - ✅ Hälytykset luotu onnistuneesti
-- ✅ Hälytykset laukeavat, kun kynnysarvot ylittyvät
-- ✅ Hälytyshistorian voi nähdä Azure-portaalissa
+- ✅ Hälytykset laukeavat raja-arvojen ylittyessä
+- ✅ Hälytyksen historia näkyvissä Azure-portaalissa
 - ✅ Integroitu AZD-julkaisuun
 
 **Aika**: 20-25 minuuttia
@@ -982,19 +953,19 @@ az monitor metrics alert list \
 
 1. **Luo kojelauta Azure-portaalissa:**
 
-Siirry: Azure-portaali → Dashboards → New Dashboard
+Siirry: Azure Portal → Kojelaudat → Uusi kojelauta
 
-2. **Lisää ruutuja keskeisille mittareille:**
+2. **Lisää laatat keskeisille mittareille:**
 
-- Pyyntöjen määrä (viimeiset 24 tuntia)
-- Keskimääräinen vasteaika
-- Virheprosentti
-- Top 5 hitainta operaatiota
-- Käyttäjien maantieteellinen jakautuma
+- Pyynnöt (viimeiset 24 tuntia)
+- Keskiarvoinen vasteaika
+- Virheiden määrä
+- Viisi hituinta operaatiota
+- Käyttäjien maantieteellinen jakautuminen
 
 3. **Luo kojelauta Bicepillä:**
 
-**File: `infra/core/dashboard.bicep`**
+**Tiedosto: `infra/core/dashboard.bicep`**
 
 ```bicep
 param dashboardName string
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1063,10 +1044,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **Ota kojelauta käyttöön:**
+4. **Julkaise kojelauta:**
 
-```bash
-# Lisää tiedostoon main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,15 +1057,17 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# Ota käyttöön
+```bash
+# Deploy
 azd up
 ```
 
-**✅ Onnistumiskriteerit:**
+**✅ Onnistumisen kriteerit:**
 - ✅ Kojelauta näyttää keskeiset mittarit
-- ✅ Voidaan kiinnittää Azure-portaalin etusivulle
-- ✅ Päivittyy reaaliajassa
+- ✅ Voidaan kiinnittää Azure-portaalin kotiin
+- ✅ Päivittyy reaaliaikaisesti
 - ✅ Julkaistavissa AZD:llä
 
 **Aika**: 25-30 minuuttia
@@ -1093,13 +1076,13 @@ azd up
 
 ### Harjoitus 3: Valvo AI/LLM-sovellusta ⭐⭐⭐ (Edistynyt)
 
-**Tavoite**: Seuraa Microsoft Foundry -mallien käyttöä (tokenit, kustannukset, latenssi).
+**Tavoite**: Seuraa Microsoft Foundry Models -käyttöä (tokenit, kustannukset, viive).
 
 **Vaiheet:**
 
 1. **Luo AI-valvontakääre:**
 
-**File: `src/ai_telemetry.py`**
+**Tiedosto: `src/ai_telemetry.py`**
 
 ```python
 from telemetry import telemetry
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # Kutsu Microsoft Foundry-malleja
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # Poimi käyttötiedot
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Laske kustannus (gpt-4.1-hinnoittelu)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 per 1K tokenia
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 per 1K tokenia
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # Seuraa mukautettua tapahtumaa
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # Seuraa mittareita
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1182,7 +1169,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **Käytä valvottua klienttiä:**
+2. **Käytä valvottua asiakasta:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# Alusta valvottu OpenAI-asiakas
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Kutsu automaattisella seurannalla
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,13 +1205,13 @@ def chat():
     })
 ```
 
-3. **Kysy AI-mittareita:**
+3. **Kysy AI-mittarit:**
 
 ```kusto
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1250,11 +1239,11 @@ traces
     AvgCostPerRequest = avg(Cost)
 ```
 
-**✅ Onnistumiskriteerit:**
+**✅ Onnistumisen kriteerit:**
 - ✅ Jokainen OpenAI-kutsu seurataan automaattisesti
-- ✅ Token-käyttö ja kustannukset näkyvissä
-- ✅ Latenssi valvottu
-- ✅ Mahdollisuus asettaa budjettihälytyksiä
+- ✅ Tokenien käyttö ja kustannukset näkyvissä
+- ✅ Viive valvottu
+- ✅ Budjettihälytykset asetettavissa
 
 **Aika**: 35-45 minuuttia
 
@@ -1264,34 +1253,21 @@ traces
 
 ### Näytteenottostrategiat
 
-Hallinnoi kustannuksia näytteistämällä telemetriaa:
+Hallitse kustannuksia näytteistämällä telemetriaa:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# Kehitys: 100 % näytteenotto
-sampler = ProbabilitySampler(rate=1.0)
-
-# Tuotanto: 10 % näytteenotto (vähentää kustannuksia 90 %)
-sampler = ProbabilitySampler(rate=0.1)
-
-# Mukautuva näytteenotto (säätyy automaattisesti)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**Bicepissä:**
+Jäljitteen näytteistys ei vähennä kaikkia telemetrian kategorioita 90 %. Mittarit ja itsenäisesti tuotetut lokit tarvitsevat omat määränsäätönsä. Valitse näyteprosentti havaittavuustarpeiden mukaan, ei yleisen tuotantokiellon perusteella.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+Aseta SDK:n näytteenotto nimenomaisesti; komponentin `SamplingPercentage`-ominaisuus ei korvaa Python OpenTelemetry -näytteenottajan konfigurointia.
 
-### Tietojen säilytys
+### Datan säilytys
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1303,40 +1279,40 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### Kuukausikustannusarviot
+### Kuukausittaiset kustannusarviot
 
-| Datamäärä | Säilytys | Kuukausikustannus |
-|-----------|---------|-------------------|
-| 1 GB/kuukausi | 30 päivää | ~$2-5 |
-| 5 GB/kuukausi | 30 päivää | ~$10-15 |
-| 10 GB/kuukausi | 90 päivää | ~$25-40 |
-| 50 GB/kuukausi | 90 päivää | ~$100-150 |
+| Datan määrä | Säilytys | Kuukausikustannus |
+|-------------|-----------|-------------------|
+| 1 GB/kk | 30 päivää | ~$2-5 |
+| 5 GB/kk | 30 päivää | ~$10-15 |
+| 10 GB/kk | 90 päivää | ~$25-40 |
+| 50 GB/kk | 90 päivää | ~$100-150 |
 
-**Ilmainen taso**: 5 GB/kuukausi sisältyy
+Nämä luvut ovat suuntaa-antavia, eivät sitovia tarjouksia. Tarkista ingestio-, säilytys-, hälytys- ja testihinnat alueeltasi ja sopimuksestasi; ilmaiskäytöt ovat jaettuja/laajuisia Azure Monitorin hinnoittelun mukaan, eivät takattuja ilmaisia SKUja per Application Insights -resurssi.
 
 ---
 
-## Tietämystarkastus
+## Tietovälikoe
 
 ### 1. Perusintegraatio ✓
 
-Testaa ymmärryksesi:
+Testaa ymmärrystäsi:
 
-- [ ] **Q1**: Miten AZD provisioi Application Insightsin?
-  - **A**: Automaattisesti Bicep-mallien kautta tiedostossa `infra/core/monitoring.bicep`
+- [ ] **K1**: Miten AZD provisioi Application Insightsin?
+  - **V**: Se ottaa käyttöön valvontaresurssit, jotka projekti on selkeästi määritellyt Bicep/Terraform-malleissaan.
 
-- [ ] **Q2**: Mikä ympäristömuuttuja mahdollistaa Application Insightsin?
-  - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [ ] **K2**: Mikä ympäristömuuttuja ottaa Application Insightsin käyttöön?
+  - **V**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: Mitkä ovat kolme päätelemetriatyyppiä?
-  - **A**: Requests (HTTP-kutsut), Dependencies (ulkoiset kutsut), Exceptions (virheet)
+- [ ] **K3**: Mitkä ovat kolme pääasiallista telemetriatyyppiä?
+  - **V**: Pyynnöt (HTTP-kutsut), Riippuvuudet (ulkoiset kutsut), Poikkeukset (virheet)
 
-**Hands-On Verification:**
+**Käytännön tarkistus:**
 ```bash
-# Tarkista, onko Application Insights määritetty
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Varmista, että telemetria virtaa
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1347,18 +1323,18 @@ az monitor app-insights metrics show \
 
 ### 2. Mukautettu telemetria ✓
 
-Testaa ymmärryksesi:
+Testaa ymmärrystäsi:
 
-- [ ] **Q1**: Kuinka seuraat mukautettuja liiketoimintatapahtumia?
-  - **A**: Käytä lokittajaa `custom_dimensions`-kentällä tai `TelemetryClient.track_event()`
+- [ ] **K1**: Miten seuraat mukautettuja liiketoimintatapahtumia?
+  - **V**: Tämän oppitunnin wrapper kirjoittaa jäsenneltyjä OTel-lokeja `event_name` -attribuuteilla, joita voi kysellä `traces`; näitä ei tallenneta automaattisesti `customEvents`.
 
-- [ ] **Q2**: Mikä on ero tapahtumien ja mittareiden välillä?
-  - **A**: Tapahtumat ovat erillisiä tapahtumia, mittarit ovat numeerisia mittauksia
+- [ ] **K2**: Mikä on ero tapahtumien ja mittareiden välillä?
+  - **V**: Tapahtumat ovat yksittäisiä tapahtumia, mittarit ovat numeerisia mittauksia
 
-- [ ] **Q3**: Kuinka korreloit telemetriaa palveluiden välillä?
-  - **A**: Application Insights käyttää automaattisesti `operation_Id`-kenttää korrelaatioon
+- [ ] **K3**: Miten yhdistät telemetrian eri palveluiden välillä?
+  - **V**: Application Insights käyttää automaattisesti `operation_Id`-menetelmää korrelaatioon
 
-**Hands-On Verification:**
+**Käytännön tarkistus:**
 ```kusto
 // Verify custom events
 traces
@@ -1368,110 +1344,106 @@ traces
 
 ---
 
-### 3. Tuotannon valvonta ✓
+### 3. Tuotantovalvonta ✓
 
-Testaa ymmärryksesi:
+Testaa ymmärrystäsi:
 
-- [ ] **Q1**: Mikä on näytteistäminen ja miksi sitä käytetään?
-  - **A**: Näytteistäminen vähentää datamäärää (ja kustannuksia) tallentamalla vain osan telemetriasta
+- [ ] **K1**: Mikä on näytteistys ja miksi sitä käytetään?
+  - **V**: Näytteistys vähentää datamäärää (ja kustannuksia) ottamalla vain osan telemetriasta
 
-- [ ] **Q2**: Kuinka asetat hälytyksiä?
-  - **A**: Käytä mittarihlytyksiä Bicepissä tai Azure-portaalissa Application Insights -mittareiden perusteella
+- [ ] **K2**: Miten asetat hälytyksiä?
+  - **V**: Käytä metriikkahälytyksiä Bicepissä tai Azure-portaalissa Application Insightsin metriikkatietojen perusteella
 
-- [ ] **Q3**: Mikä on ero Log Analyticsin ja Application Insightsin välillä?
-  - **A**: Application Insights tallentaa dataa Log Analytics -työtilaan; App Insights tarjoaa sovelluskohtaiset näkymät
+- [ ] **K3**: Mikä ero on Log Analyticsin ja Application Insightsin välillä?
+  - **V**: Application Insights tallentaa datan Log Analytics -tilaan; App Insights tarjoaa sovelluskohtaisia näkymiä
 
-**Hands-On Verification:**
+**Käytännön tarkistus:**
 ```bash
-# Tarkista näytteenottoasetukset
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
 
 ## Parhaat käytännöt
 
-### ✅ DO:
+### ✅ TEHDÄÄN:
 
-1. **Käytä korrelaatio-ID:itä**
+1. **Käytä korrelaatioID:itä**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. **Aseta hälytykset kriittisille mittareille**
+2. **Perusta hälytykset kriittisille mittareille**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
 3. **Käytä jäsenneltyä lokitusta**
    ```python
-   # ✅ HYVÄ: Jäsennelty
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ HUONO: Epäjäsennelty
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
 4. **Valvo riippuvuuksia**
    ```python
-   # Seuraa automaattisesti tietokantakutsuja, HTTP-pyyntöjä jne.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
-5. **Käytä Live Metricsia käyttöönottojen aikana**
+5. **Käytä Live Metricsejä julkaisujen aikana**
 
-### ❌ ÄLÄ:
+### ❌ EI TEHDÄ:
 
 1. **Älä kirjaa arkaluontoisia tietoja**
    ```python
-   # ❌ HUONO
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ HYVÄ
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **Älä käytä 100% otantaa tuotannossa**
+2. **Älä valitse näytteenottoa mittaamatta määrää ja diagnostiikkatarpeita**
    ```python
-   # ❌ Kallis
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ Kustannustehokas
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **Älä jätä kuolleita viestijonoja huomiotta**
+3. **Älä sivuuta kuolleiden kirjeiden jonoja**
 
 4. **Älä unohda asettaa tietojen säilytysrajoja**
 
 ---
 
-## Vianetsintä
+## Vianmääritys
 
-### Ongelma: Telemetriaa ei näy
+### Ongelma: Telemetria ei näy
 
-**Diagnostiikka:**
+**Diagnoosi:**
 ```bash
-# Tarkista, että yhteysmerkkijono on asetettu
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Tarkista sovelluksen lokit Azure Monitorin kautta
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# Tai käytä Azure CLI:tä Container Appsille:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Ratkaisu:**
 ```bash
-# Tarkista yhteysmerkkijono Container Appissa
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1483,69 +1455,68 @@ az containerapp show \
 
 ### Ongelma: Korkeat kustannukset
 
-**Diagnostiikka:**
+**Diagnoosi:**
 ```bash
-# Tarkista datan tuonti
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **Ratkaisu:**
-- Alenna otantaprosenttia
+- Laske näytteenottotaajuutta
 - Lyhennä säilytysaikaa
-- Poista yksityiskohtainen lokitus
+- Poista laajasanainen lokitus
 
 ---
 
 ## Lisätietoja
 
-### Virallinen dokumentaatio
-- [Application Insights -yleiskatsaus](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights Pythonille](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+### Virallinen Dokumentaatio
+- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Azure Monitor OpenTelemetry setup](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
 - [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD-valvonta](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
 ### Seuraavat vaiheet tässä kurssissa
-- ← Previous: [Ennakkotarkastukset](preflight-checks.md)
-- → Next: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Kurssin etusivu](../../README.md)
+- ← Edellinen: [Preflight Checks](preflight-checks.md)
+- → Seuraava: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- 🏠 [Kurssin koti](../../README.md)
 
 ### Aiheeseen liittyvät esimerkit
-- [Microsoft Foundry -malliesimerkki](../../../../examples/azure-openai-chat) - AI-telemetria
-- [Mikropalveluesimerkki](../../../../examples/microservices) - Hajautettu jäljitys
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI-telemetria
+- [Microservices Example](../../../../examples/microservices) - Hajautettu jäljitys
 
 ---
 
 ## Yhteenveto
 
 **Olet oppinut:**
-- ✅ Automaattinen Application Insightsin provisiointi AZD:n avulla
+- ✅ Automaattinen Application Insightsin käyttöönotto AZD:llä
 - ✅ Mukautettu telemetria (tapahtumat, mittarit, riippuvuudet)
-- ✅ Hajautettu jäljitys mikropalvelujen yli
-- ✅ Live Metrics ja reaaliaikainen valvonta
-- ✅ Hälytykset ja kojelaudat
+- ✅ Hajautettu jäljitys mikropalveluissa
+- ✅ Live-mittarit ja reaaliaikainen seuranta
+- ✅ Hälytykset ja koontinäytöt
 - ✅ AI/LLM-sovellusten valvonta
 - ✅ Kustannusten optimointistrategiat
 
 **Tärkeimmät opit:**
-1. **AZD ottaa valvonnan käyttöön automaattisesti** - Ei manuaalista asetusta
-2. **Käytä jäsenneltyä lokitusta** - Helpottaa kyselyjen tekemistä
+1. **Määrittele seuranta selkeästi** - AZD ottaa käyttöön mallisi; SDK-instrumentointi lähettää telemetrian
+2. **Käytä jäsenneltyä lokitusta** - Helpottaa kyselyitä
 3. **Seuraa liiketoimintatapahtumia** - Ei pelkästään teknisiä mittareita
-4. **Valvo tekoälykustannuksia** - Seuraa tokeneita ja kuluja
-5. **Ota hälytykset käyttöön** - Ole proaktiivinen, älä reaktiivinen
-6. **Optimoi kustannuksia** - Käytä otantaa ja säilytysrajoja
+4. **Valvo AI-kustannuksia** - Seuraa tokeneita ja kulutusta
+5. **Aseta hälytykset** - Ole ennakoiva, ei reaktiivinen
+6. **Optimoi kustannukset** - Käytä näytteenottoa ja säilytysrajoja
 
-**Seuraavat askeleet:**
-1. Suorita käytännön harjoitukset
+**Seuraavat vaiheet:**
+1. Suorita käytännön harjoitukset loppuun
 2. Lisää Application Insights AZD-projekteihisi
-3. Luo mukautettuja kojelautoja tiimillesi
-4. Tutustu [Käyttöönotto-opas](../chapter-04-infrastructure/deployment-guide.md)
+3. Luo mukautettuja koontinäyttöjä tiimillesi
+4. Opiskele [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää auktoritatiivisena lähteenä. Kriittisten tietojen osalta suositellaan ammattimaisen ihmiskääntäjän tekemää käännöstä. Emme ole vastuussa mistään väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

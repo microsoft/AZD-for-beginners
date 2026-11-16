@@ -1,110 +1,110 @@
-# 7. Tổng kết & Các bước tiếp theo
+# 7. Tổng Kết & Các Bước Tiếp Theo
 
-!!! tip "NHỮNG ĐIỂM CHÍNH CẦN NHỚ"
+!!! tip "NHỮNG ĐIỂM CHÍNH RÚT RA LÀ"
 
-    - [ ] Mẫu AZD tăng tốc phát triển ứng dụng AI từ hàng ngày xuống còn vài giờ
-    - [ ] Phương pháp Khám phá → Triển khai → Tùy chỉnh cung cấp một lộ trình học tập có cấu trúc
-    - [ ] GitHub Copilot với các máy chủ MCP cho phép khám phá codebase phức tạp bằng ngôn ngữ tự nhiên
-    - [ ] Microsoft Foundry cung cấp khả năng giám sát, đánh giá và kiểm thử bảo mật tích hợp sẵn
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. Những gì bạn đã đạt được
+## 1. Những Gì Bạn Đã Hoàn Thành
 
 Chúc mừng! Trong hội thảo này, bạn đã thành công:
 
-| Module | Thành tựu |
+| Module | Những Thành Tựu |
 |:---|:---|
-| **Module 1** | Khám phá Azure Developer CLI và chọn một mẫu AI |
-| **Module 2** | Triển khai và xác thực một giải pháp tác nhân AI hoàn chỉnh |
+| **Module 1** | Khám phá Azure Developer CLI và chọn mẫu AI |
+| **Module 2** | Triển khai và xác nhận giải pháp đại lý AI hoàn chỉnh |
 | **Module 3** | Phân tích mẫu để hiểu kiến trúc của nó |
-| **Module 4** | Khám phá `azure.yaml` cấu hình và các hook vòng đời |
+| **Module 4** | Khám phá cấu hình `azure.yaml` và các hook vòng đời |
 | **Module 5** | Tùy chỉnh mẫu cho kịch bản của bạn |
-| **Module 6** | Tháo dỡ hạ tầng an toàn và quản lý tài nguyên |
+| **Module 6** | An toàn dỡ bỏ hạ tầng và quản lý tài nguyên |
 
 ---
 
-## 2. Những khái niệm chính đã nắm
+## 2. Các Khái Niệm Chính Đã Thông Thạo
 
 ### Azure Developer CLI (azd)
-- `azd init` - Khởi tạo dự án từ mẫu
+- `azd init` - Khởi tạo dự án từ các mẫu
 - `azd up` - Cấp phát và triển khai chỉ với một lệnh
 - `azd env` - Quản lý biến môi trường
 - `azd down` - Dọn dẹp tài nguyên một cách an toàn
 
-### Cấu trúc Mẫu AZD
+### Cấu Trúc Mẫu AZD
 - `azure.yaml` - Cấu hình và hook triển khai
-- `infra/` - Bicep hạ tầng như mã
+- `infra/` - Bicep hạ tầng dưới dạng mã nguồn
 - `src/` - Mã nguồn ứng dụng
-- `scripts/` - Các script tự động hóa và thiết lập
+- `scripts/` - Tập lệnh tự động hóa và thiết lập
 
-### Khả năng của Microsoft Foundry
-- Dịch vụ Tác nhân AI cho trợ lý thông minh
+### Khả Năng Microsoft Foundry
+- Dịch vụ AI Agent cho trợ lý thông minh
 - Tìm kiếm tệp và Azure AI Search để truy xuất kiến thức
 - Theo dõi, giám sát và đánh giá tích hợp sẵn
-- Red teaming để kiểm chứng an toàn AI
+- Red teaming để xác nhận an toàn AI
 
 ---
 
-## 3. Tiếp tục hành trình học của bạn
+## 3. Tiếp Tục Hành Trình Học Tập Của Bạn
 
-### Các bước tiếp theo được khuyến nghị
+### Các Bước Tiếp Theo Được Khuyến Nghị
 
-| Lộ trình | Tài nguyên | Thời gian |
+| Lộ Trình | Tài Nguyên | Thời Gian |
 |:---|:---|:---|
-| **Hoàn thành Khóa học** | [Chương trình AZD cho Người mới bắt đầu](../../README.md) | 8-12 giờ |
-| **Thử Mẫu Khác** | [Mẫu Microsoft Foundry](https://ai.azure.com/templates) | 1-2 giờ |
-| **Tìm hiểu chuyên sâu** | [Tài liệu Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Liên tục |
-| **Cộng đồng** | [Azure Discord](https://aka.ms/foundry/discord) | Tham gia ngay hôm nay! |
+| **Hoàn Thành Khóa Học** | [AZD for Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Tự học |
+| **Thử Một Mẫu Khác** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 giờ |
+| **Nâng Cao** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Liên tục |
+| **Cộng Đồng** | [Azure Discord](https://aka.ms/foundry/discord) | Tham gia ngay! |
 
-### Các mẫu gợi ý để thử tiếp theo
+### Mẫu Được Đề Xuất Thử Tiếp Theo
 
-1. **[Bắt đầu với Trò chuyện AI](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Trò chuyện cơ bản với dữ liệu của bạn
-2. **[Demo Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Các mẫu RAG nâng cao
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Các kịch bản bán lẻ doanh nghiệp
+1. **[Bắt Đầu với AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Chat cơ bản với dữ liệu của bạn
+2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Mẫu RAG nâng cao
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Kịch bản bán lẻ doanh nghiệp
 
 ---
 
-## 4. Thử thách hội thảo
+## 4. Thách Thức Hội Thảo
 
-Sẵn sàng kiểm tra kỹ năng của bạn? Thử những thử thách sau:
+Sẵn sàng để thử thách kỹ năng của bạn? Thử các thách thức sau:
 
-| Thử thách | Mô tả | Độ khó |
+| Thách Thức | Mô Tả | Độ Khó |
 |:---|:---|:---|
-| **1. Kịch bản đa tác nhân** | Triển khai và tùy chỉnh cho một ngành khác (ví dụ: chăm sóc sức khỏe, tài chính) | ⭐⭐ |
-| **2. Cơ sở tri thức tùy chỉnh** | Thêm các tệp dữ liệu của bạn và tạo một chỉ mục tìm kiếm tùy chỉnh | ⭐⭐⭐ |
-| **3. Triển khai sản xuất** | Thiết lập CI/CD với GitHub Actions sử dụng `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. Kịch Bản Multi-Agent** | Triển khai và tùy chỉnh cho ngành khác nhau (ví dụ, y tế, tài chính) | ⭐⭐ |
+| **2. Cơ Sở Tri Thức Tùy Chỉnh** | Thêm tệp dữ liệu của bạn và tạo chỉ mục tìm kiếm tùy chỉnh | ⭐⭐⭐ |
+| **3. Triển Khai Sản Xuất** | Thiết lập CI/CD với GitHub Actions sử dụng `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. Chia sẻ phản hồi của bạn
+## 5. Chia Sẻ Phản Hồi Của Bạn
 
 Phản hồi của bạn giúp chúng tôi cải thiện hội thảo này!
 
 - **GitHub Issues**: [Gửi phản hồi](https://github.com/microsoft/azd-for-beginners/issues) - gắn thẻ với `Workshop`
 - **Discord**: Tham gia [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - đăng bài trong `#get-help`
-- **Đóng góp**: Giúp cải thiện hội thảo bằng cách gửi pull requests!
+- **Đóng Góp**: Giúp cải thiện hội thảo bằng cách gửi pull request!
 
 ---
 
-## Cảm ơn bạn! 🎉
+## Cảm Ơn Bạn! 🎉
 
-Cảm ơn bạn đã hoàn thành Hội thảo AZD dành cho Nhà phát triển AI. Chúng tôi hy vọng trải nghiệm này đã trang bị cho bạn những kỹ năng và sự tự tin để xây dựng và triển khai các ứng dụng AI trên Azure.
+Cảm ơn bạn đã hoàn thành hội thảo AZD cho Nhà Phát Triển AI. Chúng tôi hy vọng trải nghiệm này đã trang bị cho bạn kỹ năng và tự tin để xây dựng và triển khai các ứng dụng AI trên Azure.
 
-**Tiếp tục xây dựng, tiếp tục học hỏi, và chào mừng bạn đến với cộng đồng nhà phát triển Azure AI!**
+**Hãy tiếp tục xây dựng, tiếp tục học hỏi, và chào mừng bạn đến với cộng đồng nhà phát triển AI Azure!**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 Trang khóa học** | [AZD cho Người mới bắt đầu](../../README.md) |
-| **📖 Tài liệu** | [Tài liệu Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ Mẫu AI** | [Mẫu Microsoft Foundry](https://ai.azure.com/templates) |
-| **💬 Cộng đồng** | [Azure Discord](https://aka.ms/foundry/discord) |
+| **📚 Trang Khóa Học** | [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
+| **📖 Tài Liệu** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
+| **🛠️ Mẫu AI** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+| **💬 Cộng Đồng** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Miễn trừ trách nhiệm:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn có thẩm quyền. Đối với những thông tin quan trọng, khuyến nghị sử dụng bản dịch chuyên nghiệp do người dịch thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

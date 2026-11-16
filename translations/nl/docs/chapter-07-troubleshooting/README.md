@@ -6,17 +6,17 @@
 
 ## Overzicht
 
-Dit hoofdstuk helpt je bij het diagnosticeren en oplossen van veelvoorkomende problemen bij het werken met Azure Developer CLI. Van foutmeldingen bij deployment tot AI-specifieke problemen.
+Dit hoofdstuk helpt je bij het diagnosticeren en oplossen van veelvoorkomende problemen bij het werken met Azure Developer CLI. Van implementatiefouten tot AI-specifieke problemen.
 
-> Gecontroleerd met `azd 1.27.1` in juli 2026.
+> Commandoregelinstructies gecontroleerd aan de hand van de vrijgegeven `azd 1.37.2` referentie. Cloud-implementaties zijn niet uitgevoerd. Vervang voorbeeldresource-namen en ID's voordat je commando's gebruikt.
 
 ## Leerdoelen
 
 Door dit hoofdstuk te voltooien, zul je:
-- Veelvoorkomende AZD deploymentfouten diagnosticeren
+- Veelvoorkomende AZD-implementatiefouten diagnosticeren
 - Authenticatie- en machtigingsproblemen debuggen
-- Problemen met AI-serviceconnectiviteit oplossen
-- De Azure Portal en CLI gebruiken voor probleemoplossing
+- Connectiviteitsproblemen van AI-services oplossen
+- Azure Portal en CLI gebruiken voor probleemoplossing
 
 ---
 
@@ -24,71 +24,76 @@ Door dit hoofdstuk te voltooien, zul je:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Veelvoorkomende problemen](common-issues.md) | Vaak voorkomende problemen | 30 min |
-| 2 | [Debugginsgids](debugging.md) | Stapsgewijze debugstrategieën | 45 min |
-| 3 | [AI Problemen oplossen](ai-troubleshooting.md) | AI-specifieke problemen | 30 min |
+| 1 | [Veelvoorkomende Problemen](common-issues.md) | Vaak voorkomende problemen | 30 min |
+| 2 | [Debugging Gids](debugging.md) | Stapsgewijze debugstrategieën | 45 min |
+| 3 | [AI Probleemoplossing](ai-troubleshooting.md) | AI-specifieke problemen | 30 min |
 
 ---
 
-## 🚨 Snelle oplossingen
+## 🚨 Snelle Oplossingen
 
 ### Authenticatieproblemen
 ```bash
-# Vereist voor AZD-workflows
+# Required for AZD workflows
 azd auth login
 
-# Optioneel als u ook Azure CLI-commando's rechtstreeks gebruikt
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Fouten bij provisioning
+### Implementatiefouten
 ```bash
 azd show
 azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### Resource conflicten
+### Resource-conflicten
+Controleer eerst de bestaande resource en implementatiefouten. Verwijder geen gedeelde of productieomgeving om een naamconflict op te lossen. Voor een **nieuwe wegwerpomgeving**, gebruik een unieke naam:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Quota overschreden
+### Quota Overschreden
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Wijziging van `AZURE_LOCATION` verplaatst geen bestaande resources en kan locatieconflicten veroorzaken bij herimplementatie.
 
 ---
 
-## 📋 Foutcode referentie
+## 📋 Foutcode Referentie
 
 | Fout | Oorzaak | Oplossing |
-|-------|-------|----------|
+|-------|---------|----------|
 | `AuthenticationError` | Niet ingelogd | `azd auth login` |
-| `ResourceNotFound` | Ontbrekende bron | Controleer bron namen |
-| `QuotaExceeded` | Abonnementsbeperkingen | Vraag quota uitbreiding aan |
-| `InvalidTemplate` | Bicep syntaxfout | `az bicep build` |
-| `Conflict` | Bron bestaat al | Gebruik nieuwe naam of verwijder |
-| `Forbidden` | Onvoldoende rechten | Controleer RBAC rollen |
+| `ResourceNotFound` | Ontbrekende resource | Controleer resourcenamen |
+| `QuotaExceeded` | Abonnementsbeperkingen | Vraag quota-verhoging aan |
+| `InvalidTemplate` | Bicep-syntaxisfout | `az bicep build` |
+| `Conflict` | Resource bestaat al | Gebruik nieuwe naam of verwijder |
+| `Forbidden` | Onvoldoende rechten | Controleer RBAC-rollen |
 
 ---
 
-## 🔄 Reset en herstel
+## 🔄 Resetten en Herstel
 
 ```bash
-# Zachte reset (houd bronnen vast, code opnieuw implementeren)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Harde reset (alles verwijderen, opnieuw beginnen)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+De harde reset verwijdert gegevens en kan endpoints veranderen. Maak eerst een back-up en bekijk de interactieve verwijderingsprompt. `--force --purge` is alleen geschikt voor wegwerpomgevingen wanneer onomkeerbare verwijdering is bedoeld.
 
 ---
 
@@ -96,14 +101,14 @@ azd up
 
 | Richting | Hoofdstuk |
 |-----------|---------|
-| **Vorige** | [Hoofdstuk 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
+| **Vorige** | [Hoofdstuk 6: Pre-Implementatie](../chapter-06-pre-deployment/README.md) |
 | **Volgende** | [Hoofdstuk 8: Productie](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Gerelateerde bronnen
+## 📖 Gerelateerde Middelen
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/preflight-checks.md)
+- [Pre-Implementatie Controles](../chapter-06-pre-deployment/preflight-checks.md)
 - [Configuratie Gids](../chapter-03-configuration/configuration.md)
 - [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 

@@ -1,14 +1,14 @@
 # Kapitel 4: Infrastruktur als Code & Bereitstellung
 
-**📚 Kurs**: [AZD Für Anfänger](../../README.md) | **⏱️ Dauer**: 1-1,5 Stunden | **⭐ Komplexität**: Mittelstufe
+**📚 Kurs**: [AZD Für Anfänger](../../README.md) | **⏱️ Dauer**: 2-3 Stunden Lesezeit; zusätzliche Zeit für Bereitstellungsübungen einplanen | **⭐ Komplexität**: Mittelstufe
 
 ---
 
 ## Überblick
 
-Dieses Kapitel behandelt Muster für Infrastruktur als Code (IaC) mit Bicep-Vorlagen, Ressourcenbereitstellung und Bereitstellungsstrategien mithilfe der Azure Developer CLI.
+Dieses Kapitel behandelt Infrastructure as Code (IaC) Muster mit Bicep-Vorlagen, Ressourcenbereitstellung und Bereitstellungsstrategien mit dem Azure Developer CLI.
 
-> Validiert mit `azd 1.27.1` im Juli 2026.
+> Ziel der Befehls- und Konfigurationsüberprüfung: `azd 1.37.2` (November 2026). Eine Live-Azure-Bereitstellung wurde während der Überprüfung nicht ausgeführt.
 
 ## Lernziele
 
@@ -16,7 +16,7 @@ Nach Abschluss dieses Kapitels werden Sie:
 - Die Struktur und Syntax von Bicep-Vorlagen verstehen
 - Azure-Ressourcen mit `azd provision` bereitstellen
 - Anwendungen mit `azd deploy` bereitstellen
-- Blue-Green- und Rolling-Deployment-Strategien umsetzen
+- Blue-Green- und Rolling-Bereitstellungsstrategien implementieren
 
 ---
 
@@ -25,27 +25,30 @@ Nach Abschluss dieses Kapitels werden Sie:
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
 | 1 | [Ressourcen bereitstellen](provisioning.md) | Azure-Ressourcenverwaltung mit AZD | 45 Min |
-| 2 | [Bereitstellungsanleitung](deployment-guide.md) | Strategien zur Anwendungsbereitstellung | 45 Min |
-| 3 | [Eigenes Template erstellen](custom-templates.md) | Wiederverwendbare azd-Vorlagen erstellen und veröffentlichen | 30 Min |
+| 2 | [Bereitstellungsleitfaden](deployment-guide.md) | Anwendungsbereitstellungsstrategien | 45 Min |
+| 3 | [Erstellen Ihrer eigenen Vorlage](custom-templates.md) | Wiederverwendbare azd-Vorlagen erstellen und veröffentlichen | 30 Min |
 
 ---
 
-## 🚀 Schneller Einstieg
+## 🚀 Schnellstart
 
 ```bash
-# Vom Template initialisieren
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Vorschau dessen, was erstellt wird
+# Preview what will be created
 azd provision --preview
 
-# Nur Infrastruktur bereitstellen
+# Provision infrastructure only
 azd provision
 
-# Nur Code bereitstellen
+# Deploy code only
 azd deploy
 
-# Oder beides zusammen
+# Or both together
 azd up
 ```
 
@@ -74,8 +77,8 @@ my-project/
 |---------|-------------|
 | `azd init` | Projekt initialisieren |
 | `azd provision` | Azure-Ressourcen erstellen |
-| `azd deploy` | Anwendungscode bereitstellen |
-| `azd up` | provision + deploy |
+| `azd deploy` | Anwendungs-Code bereitstellen |
+| `azd up` | bereitstellen + deployen |
 | `azd down` | Alle Ressourcen löschen |
 
 ---
@@ -85,15 +88,15 @@ my-project/
 | Richtung | Kapitel |
 |-----------|---------|
 | **Vorheriges** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |
-| **Nächstes** | [Kapitel 5: Multi-Agent-Lösungen](../chapter-05-multi-agent/README.md) |
+| **Nächstes** | [Kapitel 5: Multi-Agenten-Lösungen](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
-- [Container App Beispiele](../../examples/container-app/README.md)
-- [Datenbank-App Beispiel](../../examples/database-app/README.md)
+- [Pre-Deployment-Checks](../chapter-06-pre-deployment/README.md)
+- [Container-App-Beispiele](../../examples/container-app/README.md)
+- [Datenbank-App-Beispiel](../../examples/database-app/README.md)
 
 ---
 

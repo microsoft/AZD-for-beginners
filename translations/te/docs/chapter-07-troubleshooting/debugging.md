@@ -1,77 +1,72 @@
 # AZD డిప్లాయ్‌మెంట్ల కోసం డీబగ్గింగ్ గైడ్
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD ప్రారంభికులకు](../../README.md)
-- **📖 Current Chapter**: అధ్యాయం 7 - Troubleshooting & Debugging
-- **⬅️ Previous**: [సామాన్య సమస్యలు](common-issues.md)
-- **➡️ Next**: [AI-స్పెసిఫిక్ ట్రబుల్షూటింగ్](ai-troubleshooting.md)
-- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+**అధ్యాయం నావిగేషన్:**
+- **📚 కోర్సు హోమ్**: [AZD ప్రారంభికులకోసం](../../README.md)
+- **📖 ప్రస్తుత అధ్యాయం**: అధ్యాయం 7 - సమస్య పరిష్కారం & డీబగ్గింగ్
+- **⬅️ గతం**: [సాధారణ సమస్యలు](common-issues.md)
+- **➡️ తరువాత**: [AI ప్రత్యేక సమస్య పరిష్కారం](ai-troubleshooting.md)
+- **🚀 తరువాత అధ్యాయం**: [అధ్యాయం 8: ఉత్పత్తి & ఎంటర్ప్రైజ్ నమూనాలు](../chapter-08-production/production-ai-practices.md)
 
 ## పరిచయం
 
-ఈ సమగ్ర గైడ్ Azure Developer CLI డిప్లాయ్‌మెంట్లతో సంబంధం ఉన్న సంక్లిష్ట సమస్యలను గుర్తించడానికి మరియు పరిష్కరించడానికి ఉన్న ఆధునిక డీబగ్గింగ్ వ్యూహాలు, సాధనాలు మరియు సాంకేతికాల గురించి వివరిస్తుంది. వ్యవస్థాత్మక ట్రబుల్షూటింగ్ పద్ధతులు, లాగ్ విశ్లేషణ సాంకేతికతలు, పనితీరు ప్రొఫైల్ చేయడం మరియు అధునాతన నిర్ధారణ సాధనాలు నేర్చుకుని డిప్లాయ్‌మెంట్ మరియు రన్‌టైమ్ సమస్యలను సమర్థవంతంగా పరిష్కరించండి.
+ఈ సమగ్ర గైడ్ అనేక సంక్లిష్టమైన Azure Developer CLI డిప్లాయ్‌మెంట్‌ల సమస్యలను నిర్ధారణ చేయడం మరియు పరిష్కరించేందుకు అధునాతన డీబగ్గింగ్ వ్యూహాలు, పరికరాలు మరియు సాంకేతికతలను అందిస్తుంది. వ్యస్థాబద్ధమైన సమస్య పరిష్కారం విధానాలు, లాగ్ విశ్లేషణ సాంకేతికతలు, పనితీరు ప్రొఫైలింగ్ మరియు అధునాతన నిర్ధారణ పరికరాలను నేర్చుకుని డిప్లాయ్‌మెంట్ మరియు రన్‌టైమ్ సమస్యలను సమర్థవంతంగా పరిష్కరించండి.
 
-## అధ్యయన లక్ష్యాలు
+## నేర్చుకోవాల్సిన లక్ష్యాలు
 
-ఈ గైడ్ పూర్తి చేయడంవల్ల మీరు:
-- Azure Developer CLI సమస్యల కోసం వ్యవస్థాత్మక డీబగ్గింగ్ పద్ధతులను నేర్చుకోవడం
-- అధునాతన లాగింగ్ కాన్ఫిగరేషన్ మరియు లాగ్ విశ్లేషణ సాంకేతికతలను అవగాహన చేయడం
-- పనితీరు ప్రొఫైలింగ్ మరియు మానిటరింగ్ వ్యూహాలను అమలు చేయడం
-- సంక్లిష్ట సమస్య పరిష్కారానికి Azure డయాగ్నొస్టిక్ టూల్స్ మరియు సేవలను ఉపయోగించడం
-- నెట్‌వర్క్ డీబగ్గింగ్ మరియు భద్రత ట్రబుల్షూటింగ్ సాంకేతికతలను వర్తింపజేయడం
-- ప్రాక్టివ్ సమస్య గుర్తింపుకు సమగ్ర మానిటరింగ్ మరియు అలర్టింగ్ కాన్ఫిగరేషన్ చేయడం
+ఈ గైడ్ పూర్తి చేయడం ద్వారా మీరు:
+- Azure Developer CLI సమస్యల కోసం వ్యస్థాబద్ధమైన డీబగ్గింగ్ విధానాలను ఆర్జించుకుంటారు
+- అధునాతన లాగింగ్ కాన్ఫిగరేషన్ మరియు లాగ్ విశ్లేషణ సాంకేతికతలను అర్థం చేసుకుంటారు
+- పనితీరు ప్రొఫైలింగ్ మరియు మానిటరింగ్ వ్యూహాలను అమలు చేస్తారు
+- సంక్లిష్ట సమస్య పరిష్కారం కోసం Azure నిర్ధారణ పరికరాలు మరియు సేవలను ఉపయోగిస్తారు
+- నెట్వర్క్ డీబగ్గింగ్ మరియు భద్రత సమస్య పరిష్కారం సాంకేతికతలను వర్తింపజేస్తారు
+- ముందు జాగ్రత్తగా సమస్య గుర్తింపు కోసం సమగ్ర మానిటరింగ్ మరియు అలెర్టింగ్‌ను కంఫిగర్ చేస్తారు
 
-## అభ్యాస ఫలితాలు
+## నేర్చుకున్న ఫలితాలు
 
-పూర్తి చేసిన తర్వాత, మీరు చేయగలుగుతారు:
-- సంక్లిష్ట డిప్లాయ్‌మెంట్ సమస్యలను వ్యవస్థాత్మకంగా డీబగ్ చేయడానికి TRIAGE విధానాన్ని వర్తింపజేయండి
-- సమగ్ర లాగింగ్ మరియు ట్రేసింగ్ సమాచారం కాన్ఫిగర్ చేయడం మరియు విశ్లేషించడం
-- Azure Monitor, Application Insights మరియు డయాగ్నొస్టిక్ టూల్స్‌ను సమర్థంగా ఉపయోగించండి
-- నెట్‌వర్క్ కనెక్టివిటీ, ఆథెంటికేషన్ మరియు అనుమతి సమస్యలను స్వతంత్రంగా డీబగ్ చేయండి
+పూర్తి చేసిన తరువాత, మీరు చేయగలుగుతారు:
+- సంక్లిష్ట డిప్లాయ్‌మెంట్ సమస్యలను వ్యస్థాబద్ధంగా TRIAGE పద్ధతిని వర్తింపజేయండి
+- సమగ్ర లాగింగ్ మరియు ట్రేసింగ్ సమాచారాన్ని కంఫిగర్ చేసి విశ్లేషించండి
+- Azure మానిటర్, అప్లికేషన్ ఇన్సైట్స్, మరియు నిర్ధారణ పరికరాలను సమర్థవంతంగా ఉపయోగించండి
+- నెట్వర్క్ కనెక్టివిటీ, ఆథెంటికేషన్ మరియు అనుమతి సమస్యలను స్వతంత్రంగా డీబగ్గ్ చేయండి
 - పనితీరు మానిటరింగ్ మరియు ఆప్టిమైజేషన్ వ్యూహాలను అమలు చేయండి
-- పునరావృత సమస్యల కోసం కస్టమ్ డీబగ్గింగ్ స్క్రిప్ట్స్ మరియు ఆటోమేషన్ సృష్టించండి
+- పునరావృత సమస్యల కోసం కస్టమ్ డీబగ్గింగ్ స్క్రిప్టులు మరియు ఆటోమేషన్ సృష్టించండి
 
-## డీబగ్గింగ్ విధానం
+## డీబగ్గింగ్ విధానాలు
 
-### The TRIAGE Approach
-- **T**ime: When did the issue start?
-- **R**eproduce: Can you consistently reproduce it?
-- **I**solate: What component is failing?
-- **A**nalyze: What do the logs tell us?
-- **G**ather: Collect all relevant information
-- **E**scalate: When to seek additional help
+### TRIAGE దృష్టికోణం
+- **T** సమయం: సమస్య ఎప్పుడూ ప్రారంభమైంది?
+- **R** పునరుత్పత్తి: మీరు దాన్ని స్థిరంగా పునరుత్పత్తి చేయగలరా?
+- **I** విడగొట్టు: ఏ భాగం విఫలమవుతోంది?
+- **A** విశ్లేషించు: లాగ్లు ఏం చెబుతున్నాయి?
+- **G** సేకరించు: సంబంధిత సమాచారాన్ని సేకరించు
+- **E** పెంపొందించు: అదనపు సహాయం ఎప్పుడు కోరుకోవాలి
 
-## డీబగ్ మోడ్‌ను ఎనేబుల్ చేయడం
+## డీబగ్ మోడ్ ప్రారంభించుట
 
-### Environment Variables
+> **వ్యాప్తి:** ఇవి అనుకూలపరచు నిర్ధారణ ఉదాహరణలు; అందించిన స్క్రిప్ట్ సూట్ కాదు. వనరుల పేర్లు/IDలను మార్చండి; షెల్ బ్లోక్స్ కోసం Bash ఉపయోగించండి. `--debug` అవుట్పుట్ మరియు పర్యావరణ విలువల్లో సున్నితమైన సమాచారాలు ఉండవచ్చు—పంపకం ముందు సమీక్షించండి/సవరించండి. డిప్లాయ్, రోల్ బ్యాక్ చేయడం లేదా కాన్ఫిగరేషన్ మార్చే ఉదాహరణలకోసం స్పష్టమైన ఆపరేటర్ ఆమోదం అవసరం.
+
+### పర్యావరణ చలక్స్
 ```bash
-# సమగ్ర డీబగ్గింగ్‌ను ప్రారంభించండి
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Azure CLI డీబగ్గింగ్
-export AZURE_CLI_DIAGNOSTICS=true
-
-# శుభ్రమైన అవుట్‌పుట్ కోసం టెలిమెట్రీని నిలిపివేయండి
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Debug Configuration
+### డీబగ్ కాన్ఫిగరేషన్
 ```bash
-# డీబగ్ కాన్ఫిగరేషన్‌ను గ్లోబల్‌గా సెట్ చేయండి
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# ట్రేస్ లాగింగ్‌ను సక్రియం చేయండి
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
+
+`azd config set` ఏదైనా కీస్ నిల్వ చేయవచ్చు; ఇది `debug.enabled`, `debug.logLevel` లేదా `trace.outputPath` మద్దతు ఉన్న సెట్టింగ్స్ అవ్వవు. విడుదలైన కమాండ్ యొక్క `--debug` ఫ్లాగ్ ను ఉపయోగించండి.
 
 ## 📊 లాగ్ విశ్లేషణ సాంకేతికతలు
 
-### లాగ్ స్థాయిలను అవగాహన చేసుకోవడం
+### లాగ్ స్థాయిలర్ను అర్థం చేసుకోండి
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### స్ట్రక్చర్డ్ లాగ్ విశ్లేషణ
+### నిర్మిత లాగ్ విశ్లేషణ
 ```bash
-# Azure Monitor ద్వారా లాగ్‌లను వీక్షించండి (azd monitor ద్వారా)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# అప్లికేషన్ లాగ్‌లను నిజసమయంలో వీక్షించండి
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# వివరమైన లాగ్ విశ్లేషణ కోసం, మీ App Service లేదా Container App తో Azure CLI ఉపయోగించండి:
-# App Service లాగ్‌లు
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Container App లాగ్‌లు
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# విశ్లేషణ కోసం Application Insights లాగ్‌లను ఎగుమతి చేయండి
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
-### లాగ్ కోరిలేషన్
+### లాగ్ సంబంధం
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Azure Monitor ఉపయోగించి సేవల మధ్య లాగ్‌లను సమన్వయపరచడం
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Application Insightsలో సంబంధిత లాగ్‌లను శోధించండి
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Azure కార్యాచరణ లాగ్‌లను శోధించండి
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ అధునాతన డీబగ్గింగ్ టూల్స్
+## 🛠️ అధునాతన డీబగ్గింగ్ పరికరాలు
 
-### Azure Resource Graph Queries
+### Azure రిసోర్స్ గ్రాఫ్ క్వెరీస్
 ```bash
-# ట్యాగ్‌ల ద్వారా వనరులను శోధించండి
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# విఫలమైన డిప్లాయ్‌మెంట్లను కనుగొనండి
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# వనరుల ఆరోగ్యాన్ని తనిఖీ చేయండి
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### నెట్‌వర్క్ డీబగ్గింగ్
 ```bash
-# సర్వీసుల మధ్య కనెక్టివిటీని పరీక్షించండి
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# ఉపయోగం
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
 ### కంటైనర్ డీబగ్గింగ్
 ```bash
-# కంటైనర్ యాప్ సమస్యలను డీబగ్గ్ చేయండి
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -183,10 +180,10 @@ debug_container() {
 
 ### డేటాబేస్ కనెక్షన్ డీబగ్గింగ్
 ```bash
-# డేటాబేస్ కనెక్టివిటీని డీబగ్ చేయండి
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -204,22 +201,11 @@ debug_database() {
 
 ### అప్లికేషన్ పనితీరు మానిటరింగ్
 ```bash
-# Application Insights డీబగ్గింగ్‌ను సక్రియం చేయండి
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# అనుకూల పనితీరు పర్యవేక్షణ
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -236,25 +224,23 @@ monitor_performance() {
 }
 ```
 
-### రిసోర్సు వినియోగ విశ్లేషణ
+### వనరు వినియోగ విశ్లేషణ
 ```bash
-# వనరుల వినియోగాన్ని పర్యవేక్షించండి
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# డీబగ్గింగ్ పర్యావరణాన్ని సెట్ చేయండి
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# సేవా ఎండ్‌పాయింట్లను పొందండి
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# ఆరోగ్య ఎండ్‌పాయింట్లను పరీక్షించండి
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# పరీక్షలను నడపండి
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# కస్టమ్ ఇంటిగ్రేషన్ పరీక్షలను నడపండి
+# Run custom integration tests
 npm run test:integration
 ```
 
-### లోడ్ టెస్టింగ్ ఫర్ డీబగ్గింగ్
+### డీబగ్గింగ్ కోసం లోడ్ టెస్టింగ్
 ```bash
-# పనితీరు అడ్డంకులను గుర్తించడానికి సరళమైన లోడ్ పరీక్ష
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Apache Bench ఉపయోగించడం (ఇన్‌స్టాల్: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # ప్రధాన మెట్రిక్స్‌ను ఎక్స్‌ట్రాక్ట్ చేయండి
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # విఫలాల కోసం తనిఖీ చేయండి
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 ఇన్‌ఫ్రాస్ట్రక్చర్ డీబగ్గింగ్
+## 🔧 మౌలిక సదుపాయాల డీబగ్గింగ్
 
-### Bicep టెంప్లేట్ డీబగ్గింగ్
+### బైసెప్ టెంప్లేట్ డీబగ్గింగ్
 ```bash
-# వివరమైన అవుట్‌పుట్‌తో Bicep టెంప్లేట్లను ధృవీకరించండి
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # సింటాక్స్ ధృవీకరణ
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # లింట్ ధృవీకరణ
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # What-if డిప్లాయ్‌మెంట్
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# టెంప్లేట్ డిప్లాయ్‌మెంట్‌ను డీబగ్ చేయండి
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -375,30 +359,24 @@ debug_deployment() {
 }
 ```
 
-### రిసోర్స్ స్థితి విశ్లేషణ
+### వనరు స్థితి విశ్లేషణ
 ```bash
-# అసమంజసతల కోసం వనరుల స్థితులను విశ్లేషించండి
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # అన్ని వనరులను వాటి స్థితులతో జాబితా చేయండి
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # విఫలమైన వనరుల కోసం తనిఖీ చేయండి
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
@@ -406,23 +384,21 @@ analyze_resources() {
 
 ### ఆథెంటికేషన్ ఫ్లో డీబగ్గింగ్
 ```bash
-# Azure ప్రామాణీకరణను డీబగ్ చేయండి
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # JWT టోకెన్‌ను డీకోడ్ చేయండి (jq మరియు base64 అవసరం)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Key Vault ప్రవేశాన్ని డీబగ్ చేయండి
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -438,16 +414,16 @@ debug_keyvault() {
 }
 ```
 
-### నెట్‌వర్క్ సెక్యూరిటీ డీబగ్గింగ్
+### నెట్‌వర్క్ భద్రత డీబగ్గింగ్
 ```bash
-# నెట్‌వర్క్ భద్రతా గుంపులను డీబగ్ చేయండి
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # భద్రతా నియమాలను తనిఖీ చేయండి
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 అప్లికేషన్-స్పెసిఫిక్ డీబగ్గింగ్
+## 📱 అప్లికేషన్ ప్రత్యేక డీబగ్గింగ్
 
 ### Node.js అప్లికేషన్ డీబగ్గింగ్
 ```javascript
-// debug-middleware.js - Express డీబగ్గింగ్ మిడిల్వేర్
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // అభ్యర్థన వివరాలను లాగ్ చేయండి
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // res.json ను ఓవర్‌రైడ్ చేసి స్పందనలను లాగ్ చేయండి
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -489,14 +462,16 @@ module.exports = (req, res, next) => {
 
 ### డేటాబేస్ క్వెరీ డీబగ్గింగ్
 ```javascript
-// database-debug.js - డేటాబేస్ డీబగ్గింగ్ ఉపకరణాలు
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -519,10 +494,10 @@ module.exports = DebuggingPool;
 
 ## 🚨 అత్యవసర డీబగ్గింగ్ ప్రక్రియలు
 
-### ప్రొడక్షన్ సమస్య స్పందన
+### ఉత్పత్తి సమస్య స్పందన
 ```bash
 #!/bin/bash
-# emergency-debug.sh - అత్యవసర ఉత్పత్తి డీబగ్గింగ్
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# సరైన పర్యావరణానికి మార్చండి
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# ముఖ్యమైన సమాచారాన్ని సేకరించండి
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# లోపాల లాగ్‌ల కోసం Azure Monitor ఉపయోగించండి
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### రోల్‌బ్యాక్ ప్రక్రియలు
+### రోల్ బ్యాక్ ప్రక్రియలు
 ```bash
-# త్వరిత రోల్‌బ్యాక్ స్క్రిప్ట్
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # పరిసరాన్ని మార్చడం
+    # Switch environment
     azd env select "$environment"
     
-    # Git ఉపయోగించి రోల్‌బ్యాక్ (AZDలో బిల్ట్-ఇన్ రోల్‌బ్యాక్ లేదు)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # రోల్‌బ్యాక్‌ను ధృవీకరించండి
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # ముఖ్యమైన ఎండ్‌పాయింట్లను పరీక్షించండి
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 డీబగ్గింగ్ డాష్‌బోర్డ్స్
+ఈ కోడ్-కేవలం రోల్ బ్యాక్ మౌలిక సదుపాయాలు, డేటాబేస్ మైగ్రేషన్లు లేదా సీక్రెట్లు తిరుగుదల చేయదు. ఒక శుభ్రమైన వర్క్‌ట్రీ ఉపయోగించండి, ప్రారంభ కమిట్‌ను నమోదు చేసి తరువాత దాన్ని పునరుద్ధరించండి; ఈ కమాండ్ ప్రస్తుత రిపాజిటరీలో ఎంచుకున్న కమిట్‌ను చెక్‌ఔట్ చేస్తుంది.
 
-### కస్టమ్ మానిటరింగ్ డాష్‌బోర్డు
+## 📊 డీబగ్గింగ్ డ్యాష్‌బోర్డ్లు
+
+### కస్టమ్ మానిటరింగ్ డ్యాష్‌బోర్డు
 ```bash
-# డీబగ్గింగ్ కోసం Application Insights క్వెరీలు సృష్టించండి
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # లోపాల కోసం క్వెరీ
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # పనితీరు సమస్యల కోసం క్వెరీ
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # డిపెండెన్సీ విఫలతల కోసం క్వెరీ
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### లాగ్ ఏగ్రిగేషన్
+### లాగ్ సమీకరణ
 ```bash
-# అనేక Azure మూలాల నుండి లాగ్‌లను సమీకరించండి
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,6 +630,7 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
@@ -662,20 +639,21 @@ aggregate_logs() {
 
 ## 🔗 అధునాతన వనరులు
 
-### కస్టమ్ డీబగ్గింగ్ స్క్రిప్ట్స్
-Create a `scripts/debug/` directory with:
+### కస్టమ్ డీబగ్ స్క్రిప్టులు
+క్రింది అంశాలతో `scripts/debug/` డైరెక్టరీని సృష్టించండి:
 - `health-check.sh` - సమగ్ర ఆరోగ్య తనిఖీలు
 - `performance-test.sh` - ఆటోమేటెడ్ పనితీరు పరీక్షలు
 - `log-analyzer.py` - అధునాతన లాగ్ పార్సింగ్ మరియు విశ్లేషణ
-- `resource-validator.sh` - ఇన్‌ఫ్రాస్ట్రక్చర్ ధృవీకరణ
+- `resource-validator.sh` - మౌలిక సదుపాయాల ధృవీకరణ
 
-### Monitoring Integration
+### మానిటరింగ్ ఇంటిగ్రేషన్
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -686,36 +664,36 @@ hooks:
       fi
 ```
 
-## ఉత్తమ విధానాలు
+## ఉత్తమ ప్రవర్తనలు
 
-1. **నాన్-ప్రొడక్షన్ వాతావరణాలలో ఎల్లప్పుడూ డీబగ్ లాగింగ్‌ను ఎనేబుల్ చేయండి**
-2. **సమస్యల కొరకు పునరుత్పాదక టెస్ట్ కేసులను సృష్టించండి**
+1. **అధికారం లేని వాతావరణాలలో ఎప్పుడూ డీబగ్ లాగింగ్ ప్రారంభించండి**
+2. **సమస్యల కోసం పునరుత్పత్తి చేసుకోగల టెస్ట్ కేసులు సృష్టించండి**
 3. **మీ బృందం కోసం డీబగ్గింగ్ ప్రక్రియలను డాక్యుమెంట్ చేయండి**
-4. **ఆరోగ్య తనిఖీలు మరియు మానిటరింగ్‌ను ఆటోమేటు చేయండి**
-5. **డీబగ్గింగ్ టూల్స్‌ను మీ అప్లికేషన్ మార్పులతో అప్డేట్ చేయచూసుకోండి**
-6. **నాన్-ఇన్సిడెంట్ సమయంలో డీబగ్గింగ్ ప్రక్రియలను ప్రాక్టిస్ చేయండి**
+4. **ఆరోగ్య తనిఖీలు మరియు మానిటరింగ్ ఆటోమేట్ చేయండి**
+5. **మీ అప్లికేషన్ మార్పులకు అనుగుణంగా డీబగ్గింగ్ పరికరాలను అప్డేట్ చేయండి**
+6. **సాధారణ కాలాల్లో డీబగ్గింగ్ ప్రక్రియలను శిక్షణపై చేర్చండి**
 
-## తదుపరి చర్యలు
+## తదుపరి దశలు
 
-- [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - రిసోర్స్ అవసరాలను ప్లాన్ చేయండి
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - సరైన సర్వీస్ టియర్‌లను ఎంచుకోండి
-- [Preflight Checks](../chapter-06-pre-deployment/preflight-checks.md) - డిప్లాయ్‌మెంట్ ముందు ధ్రువీకరణ
-- [Cheat Sheet](../../resources/cheat-sheet.md) - వేగవంతమైన సూచన కమాండ్లు
-
----
-
-**జ్ఞాపకం పెట్టుకోండి**: మంచి డీబగ్గింగ్ అనేది వ్యవస్థాత్మకంగా, సమగ్రంగా మరియు పనికట్టుగా ఉండటం. ఈ టూల్స్ మరియు సాంకేతికతలు సమస్యలను వేగంగా మరియు ప్రభావవంతంగా గుర్తించడంలో మీకు సహాయపడతాయి.
+- [క్యాపాసిటీ ప్లానింగ్](../chapter-06-pre-deployment/capacity-planning.md) - వనరు అవసరాలను ప్రణాళిక చేయండి
+- [SKU ఎంపిక](../chapter-06-pre-deployment/sku-selection.md) - సరైన సేవా స్థాయిలను ఎంచుకోండి
+- [ప్రీఫ్లైట్ తనిఖీలు](../chapter-06-pre-deployment/preflight-checks.md) - డిప్లాయ్‌మెంట్ ముందస్తు ధృవీకరణ
+- [చీట్ షీట్](../../resources/cheat-sheet.md) - త్వరిత సూచన కమాండ్లు
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [సామాన్య సమస్యలు](common-issues.md)
+**గమనిక**: మంచి డీబగ్గింగ్ అనేది వ్యస్థాబద్ధంగా, సమగ్రంగా మరియు ఓర్పుతో ఉండాలి. ఈ పరికరాలు మరియు సాంకేతికతలు సమస్యలను వేగంగా మరియు సమర్థవంతంగా గుర్తించడంలో సహాయ పడతాయి.
 
-- **Next Lesson**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+---
+
+**నావిగేషన్**
+- **గత పాఠం**: [సాధారణ సమస్యలు](common-issues.md)
+
+- **తదుపరి పాఠం**: [క్యాపాసిటీ ప్లానింగ్](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-అస్పష్టం (Disclaimer):
-ఈ పత్రాన్ని AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మనము ఖచ్చితత్వానికి విలక్షణ శ్రద్ధ చూపించినప్పటికీ, ఆటోమేటెడ్ అనువాదాలలో తప్పులు లేదా అసంపూర్ణతలు ఉండే అవకాశం ఉంటుందన్న విషయాన్ని దయచేసి గుర్తుంచుకోండి. మూల పత్రాన్ని దాని స్థానిక భాషలోని ప్రామాణిక వనరుగా పరిగణించాలి. కీలక సమాచారం కోసం వృత్తిపరమైన మానవ అనువాదం అవసరమని సిఫార్సు చేస్తున్నాము. ఈ అనువాదాన్ని ఉపయోగించడం వల్ల ఏర్పడిన ఏవైనా అపార్థాలు లేదా తప్పు భావనల కోసం మేము బాధ్యత వహించము.
+**అస్వీకరణ**:
+ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నిస్తున్నప్పటికీ, ఆటోమేటెడ్ అనువాదాలు తప్పులు లేదా అసమగ్రతలను కలిగి ఉండవచ్చు. దాని స్వదేశ భాషలో ఉన్న అసలు పత్రాన్ని అధికారం కలిగిన మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, ప్రొఫెషనల్ మానవ అనువాదాన్ని సిఫారసు చేస్తాము. ఈ అనువాదం ఉపయోగం వల్ల కలిగే ఏవైనా అపార్థాలు లేదా తప్పుదారులు కోసం మేము బాధ్యత వహించము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

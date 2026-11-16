@@ -1,60 +1,58 @@
-# 6. Teardown Infrastructure
+# 6. Altyapıyı Kaldırma
 
 !!! tip "BU MODÜLÜN SONUNDA ŞUNLARI YAPABİLECEKSİNİZ"
 
-    - [ ] Kaynak temizliğinin ve maliyet yönetiminin önemini anlayın
-    - [ ] `azd down` komutunu kullanarak altyapıyı güvenli şekilde kaldırın
-    - [ ] Gerekirse yumuşak silinmiş Azure AI Hizmetlerini kurtarın
-    - [ ] **Lab 6:** Azure kaynaklarını temizleyin ve kaldırılmasını doğrulayın
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## Bonus Alıştırmalar
+## Bonus Egzersizler
 
-Before we tear down the project, take a few minutes to do some open-ended exploration.
+Projeyi kaldırmadan önce, birkaç dakika açık uçlu keşif yapın.
 
 !!! info "Bu Keşif Yönlendirmelerini Deneyin"
 
-    **GitHub Copilot ile Deneyin:**
+    **Experiment with GitHub Copilot:**
     
-    1. Sor: `Çoklu ajan senaryoları için başka hangi AZD şablonlarını deneyebilirim?`
-    2. Sor: `Ajan talimatlarını sağlık kullanım durumu için nasıl özelleştirebilirim?`
-    3. Sor: `Maliyet optimizasyonunu hangi ortam değişkenleri kontrol ediyor?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Azure Portalını Keşfedin:**
+    **Explore the Azure Portal:**
     
-    1. Dağıtımınız için Application Insights metriklerini gözden geçirin
-    2. Sağlanan kaynaklar için maliyet analizini kontrol edin
-    3. Microsoft Foundry portalı ajan oyun alanını bir kez daha keşfedin
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Altyapıyı Kaldır
+## Altyapıyı Devreden Çıkar
 
-1. Altyapıyı sökmek şu kadar kolaydır:
+1. Altyapıyı kaldırmak şu kadar kolaydır:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. Seçilen ortamı onaylayın ve silinecek kaynakları gözden geçirin. Bu Azure kaynaklarını kaldırır ve veri yok edebilir. Bu öğrenme iş akışı için onay istemi kalmalıdır. Tamamlandığında şöyle bir çıktı görürsünüz:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (İsteğe bağlı) Eğer şimdi tekrar `azd up` çalıştırırsanız, ortam değişkeni yerel `.azure` klasöründe değiştirildiği (ve kaydedildiği) için gpt-4.1 modelinin dağıtıldığını fark edeceksiniz. 
+1. Portalda silmeyi doğrulayın ve dağıtım kapsamının dışındaki kaynakları kontrol edin. Maliyet raporlaması ve kota güncellemeleri gecikebilir. Yerel `.azure` yapılandırması açıkça kaldırmadığınız sürece kalır.
 
-      Here is the model deployments **before**:
+1. `azd down --purge` ayrıca desteklenen yumuşak silinmiş kaynakların kalıcı silinmesini talep eder. Kurtarma gerekmiyorsa ve saklama/temizleme koruma politikalarını anlıyorsanız kullanın. Hemen kota serbest bırakma garantisi vermez.
 
-      ![Başlangıç](../../../../../translated_images/tr/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      And here it is **after**:
-      ![Yeni](../../../../../translated_images/tr/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Temizliği doğrulamak için yeniden dağıtım yapmayın. Sonradan kasıtlı bir `azd up` kalan yerel girişleri kullanarak kaynakları tekrar oluşturabilir ve ücretlendirmeyi yeniden başlatır. Model güncellemeleri normalde desteklenen sağlama değişiklikleriyle yapılır, kaldırma ile değil.
 
 ---
 

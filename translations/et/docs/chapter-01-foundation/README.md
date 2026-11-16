@@ -1,22 +1,22 @@
-# 1. peatükk: Alused ja kiire algus
+# 1. peatükk: Alus ja kiire algus
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 30–45 minutit | **⭐ Tase**: Algaja
+**📚 Kursus**: [AZD Algajatele](../../README.md) | **⏱️ Kestus**: 75-120 minutit, esimese juurutamisega; lisaülesanded võtavad kauem aega | **⭐ keerukus**: Algaja
 
 ---
 
 ## Ülevaade
 
-Selles peatükis tutvustatakse Azure Developer CLI (azd) põhialuseid. Õpid põhimõisted, installeerid tööriistad ja juurutad oma esimese rakenduse Azure'i.
+See peatükk tutvustab Azure Developer CLI (azd) põhialuseid. Õpid põhimõisteid, installeerid tööriistad ja juurutad oma esimese rakenduse Azure'i.
 
-> Kinnitatud `azd 1.27.1` vastu juulis 2026.
+> Käskude ja konfiguratsiooni ülevaate siht: `azd 1.37.2` (november 2026). Ülevaate ajal otse Azure'i juurutamist ei tehtud.
 
 ## Õpieesmärgid
 
-Selle peatüki lõpuks:
+Selle peatüki läbimisel sa:
 - Mõistad, mis on Azure Developer CLI ja kuidas see erineb Azure CLI-st
 - Installeerid ja seadistad AZD oma platvormil
-- Juurutad oma esimese rakenduse Azure'i käsuga `azd up`
-- Puhastad ressursid käsuga `azd down`
+- Juurutad oma esimese rakenduse Azure'i kasutades `azd up`
+- Puhastad ressursid kasutades `azd down`
 
 ---
 
@@ -24,17 +24,17 @@ Selle peatüki lõpuks:
 
 | # | Õppetund | Kirjeldus | Aeg |
 |---|--------|-------------|------|
-| 1 | [AZD põhitõed](azd-basics.md) | Põhimõisted, terminoloogia ja projekti struktuur | 15 min |
-| 2 | [Installeerimine ja seadistamine](installation.md) | Platvormispetsiifilised juhised | 10 min |
-| 3 | [Sinu esimene projekt](first-project.md) | Praktiline juhend: juuruta veebirakendus Azure'i | 20 min |
-| 4 | [Lisa oma rakendus](bring-your-own-app.md) | Lisa azd juba olemasolevale projektile | 15 min |
-| 5 | [Arenduskonteinerid ja Codespaces](dev-containers.md) | Taastoodavad azd keskkonnad arenduskonteineritega | 15 min |
+| 1 | [AZD Põhitõed](azd-basics.md) | Põhimõisted, terminoloogia ja projekti struktuur | 15 min |
+| 2 | [Installatsioon & Seadistus](installation.md) | Platvormi spetsiifilised installijuhised | 10 min |
+| 3 | [Sinu Esimene Projekt](first-project.md) | Praktiline: Veebirakenduse juurutamine Azure'i | 20 min |
+| 4 | [Too Oma Oma Rakendus](bring-your-own-app.md) | Lisa azd olemasolevale projektile | 15 min |
+| 5 | [Dev Kontainerid ja Codespaces](dev-containers.md) | Reproducible azd keskkonnad dev konteineritega | 15 min |
 
 ---
 
 ## ✅ Alusta siit: Kontrolli oma seadistust
 
-Enne alustamist veendu, et sinu kohalik masin oleks valmis 1. peatüki malliga töötamiseks:
+Enne alustamist veendu, et sinu kohalik arvuti on valmis 1. peatüki malliks:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Enne alustamist veendu, et sinu kohalik masin oleks valmis 1. peatüki malliga t
 bash ./validate-setup.sh
 ```
 
-Kui skript teatab puuduvatest tööriistadest, lahenda need esmalt ja seejärel jätka peatükiga.
+Kui skript teatab puuduvaid tööriistu, paranda need esmalt ja jätka seejärel peatükiga.
 
 ---
 
 ## 🚀 Kiire algus
 
 ```bash
-# Kontrolli paigaldust
+# Check installation
 azd version
 
-# Autendi AZD jaoks
-# Valikuline: kasuta az login, kui plaanid otse Azure CLI käske käivitada
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Kasuta oma esimest rakendust
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Puhasta pärast lõpetamist
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,32 +74,32 @@ azd down --force --purge
 
 ## ✅ Edu kriteeriumid
 
-Pärast selle peatüki lõpetamist peaksid olema suuteline:
+Pärast selle peatüki läbimist peaksid suutma:
 
 ```bash
-azd version              # Kuvab paigaldatud versiooni
-azd init --template todo-nodejs-mongo  # Algatab projekti
-azd up                   # Paigaldab Azure'i
-azd show                 # Kuvab jooksva rakenduse URL-i
-azd down --force --purge # Puhastab ressursid
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
 
-## 🔗 Navigeerimine
+## 🔗 Navigatsioon
 
 | Suund | Peatükk |
-|-------|---------|
+|-----------|---------|
 | **Järgmine** | [2. peatükk: AI-esimene arendus](../chapter-02-ai-development/README.md) |
-| **Mine edasi** | [3. peatükk: Konfiguratsioon](../chapter-03-configuration/README.md) |
+| **Jäta vahele** | [3. peatükk: Konfiguratsioon](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Seotud ressursid
 
-- [Käskude abileht](../../resources/cheat-sheet.md)
+- [Käsu kiire ülevaade](../../resources/cheat-sheet.md)
 - [KKK](../../resources/faq.md)
-- [Terminite sõnastik](../../resources/glossary.md)
+- [Sõnastik](../../resources/glossary.md)
 
 ---
 

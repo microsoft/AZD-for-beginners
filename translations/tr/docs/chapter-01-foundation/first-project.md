@@ -1,43 +1,45 @@
 # İlk Projeniz - Uygulamalı Eğitim
 
-**Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar](../../README.md)
-- **📖 Güncel Bölüm**: Bölüm 1 - Temel ve Hızlı Başlangıç
-- **⬅️ Önceki**: [Kurulum ve Yapılandırma](installation.md)
-- **➡️ Sonraki**: [Yapılandırma](configuration.md)
+**Bölüm Gezinme:**
+- **📚 Kurs Ana Sayfa**: [Yeni Başlayanlar için AZD](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 1 - Temel ve Hızlı Başlangıç  
+- **⬅️ Önceki**: [Kurulum ve Ayarlar](installation.md)
+- **➡️ Sonraki**: [Kendi Uygulamanı Getir](bring-your-own-app.md)
 - **🚀 Sonraki Bölüm**: [Bölüm 2: Yapay Zeka Öncelikli Geliştirme](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Giriş
 
-Azure Developer CLI ile ilk projenize hoş geldiniz! Bu kapsamlı uygulamalı eğitim, azd kullanarak tam yığın bir uygulamayı Azure'da oluşturma, dağıtma ve yönetme sürecini eksiksiz bir şekilde adım adım anlatır. Bir React önyüzü, Node.js API arka ucu ve MongoDB veritabanı içeren gerçek bir todo uygulaması üzerinde çalışacaksınız.
+İlk Azure Developer CLI projenize hoş geldiniz! React ön yüz, Node.js API ve Azure Cosmos DB ile bir todo uygulaması dağıtacaksınız. Şablon tarihsel adı olan `todo-nodejs-mongo` ismini koruyor; mevcut altyapısı NoSQL için Cosmos DB kullanıyor, bu yüzden indirilen README ve `infra/` dosyasını inceleyin, veritabanı API’sini adı üzerinden varsaymayın.
+
+> Kasım 2026'da `azd 1.37.2` ve genel şablon ile gözden geçirilmiştir. Aşağıdaki örnekler Bash kullanır; JSON çıkarımı için ayrıca `jq` gereklidir. Azure dağıtımları ücretlendirildiğinden bu incelemede çalıştırılmamıştır.
 
 ## Öğrenme Hedefleri
 
 Bu eğitimi tamamlayarak:
-- Şablonları kullanarak azd proje başlatma iş akışında ustalaşacaksınız
+- Şablonları kullanarak azd proje başlatma iş akışını öğreneceksiniz
 - Azure Developer CLI proje yapısını ve yapılandırma dosyalarını anlayacaksınız
-- Altyapı sağlama ile birlikte uygulamayı Azure'a eksiksiz olarak dağıtacaksınız
-- Uygulama güncellemeleri ve yeniden dağıtım stratejilerini uygulayacaksınız
-- Geliştirme ve staging için birden fazla ortam yöneteceksiniz
-- Kaynak temizleme ve maliyet yönetimi uygulamalarını uygulayacaksınız
+- Altyapı temini ile Azure’a tam uygulama dağıtımı yapacaksınız
+- Uygulama güncellemeleri ve yeniden dağıtım stratejileri uygulayacaksınız
+- Geliştirme ve ön üretim için birden fazla ortam yöneteceksiniz
+- Kaynak temizliği ve maliyet yönetimi uygulayacaksınız
 
-## Öğrenme Çıktıları
+## Öğrenme Kazanımları
 
-Tamamladıktan sonra şunları yapabileceksiniz:
-- Şablonlardan bağımsız olarak azd projelerini başlatıp yapılandırmak
+Tamamlandığında şunları yapabiliyor olacaksınız:
+- Şablonlardan bağımsız olarak azd projelerini başlatmak ve yapılandırmak
 - azd proje yapılarını etkili şekilde gezmek ve değiştirmek
-- Tek komutlarla tam yığın uygulamaları Azure'a dağıtmak
-- Yaygın dağıtım sorunları ve kimlik doğrulama problemlerini gidermek
+- Tek komutlarla Azure’a tam yığın uygulamalar dağıtmak
+- Yaygın dağıtım sorunlarını ve kimlik doğrulama sorunlarını çözmek
 - Farklı dağıtım aşamaları için birden çok Azure ortamını yönetmek
 - Uygulama güncellemeleri için sürekli dağıtım iş akışları uygulamak
 
 ## Başlarken
 
-### Önkoşullar Kontrol Listesi
+### Gereksinimler Kontrol Listesi
 - ✅ Azure Developer CLI yüklü ([Kurulum Kılavuzu](installation.md))
 - ✅ `azd auth login` ile AZD kimlik doğrulaması tamamlandı
 - ✅ Sisteminizde Git yüklü
-- ✅ Node.js 16+ (bu eğitim için)
+- ✅ Node.js 22 LTS (veya indirilen şablonun gerektirdiği desteklenen sürüm)
 - ✅ Visual Studio Code (önerilir)
 
 Devam etmeden önce, depo kökünden kurulum doğrulayıcısını çalıştırın:
@@ -48,10 +50,10 @@ Devam etmeden önce, depo kökünden kurulum doğrulayıcısını çalıştırı
 
 ### Kurulumunuzu Doğrulayın
 ```bash
-# azd kurulumunu kontrol et
+# Check azd installation
 azd version
 
-# AZD kimlik doğrulamasını kontrol et
+# Check AZD authentication
 azd auth login --check-status
 ```
 
@@ -68,46 +70,45 @@ node --version
 
 ## Adım 1: Bir Şablon Seçin ve Başlatın
 
-Bir React önyüzü ve Node.js API arka ucu içeren popüler bir todo uygulaması şablonuyla başlayalım.
+React ön yüz ve Node.js API arka uç içeren popüler bir todo uygulaması şablonuyla başlayalım.
 
 ```bash
-# Kullanılabilir şablonlara göz at
+# Browse available templates
 azd template list
 
-# Yapılacaklar uygulaması şablonunu başlat
+# Initialize the todo app template
 mkdir my-first-azd-app
 cd my-first-azd-app
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
-# İstemleri takip edin:
-# - Bir ortam adı girin: "dev"
-# - Bir abonelik seçin (birden fazlanız varsa)
-# - Bir bölge seçin: "East US 2" (veya tercih ettiğiniz bölge)
+# Follow the prompts:
+# - Enter an environment name: "dev"
+# - Choose a subscription (if you have multiple)
+# - Choose a region: "East US 2" (or your preferred region)
 ```
 
 ### Ne Oldu?
 - Şablon kodu yerel dizininize indirildi
-- Servis tanımları içeren bir `azure.yaml` dosyası oluşturuldu
+- Hizmet tanımlarını içeren bir `azure.yaml` dosyası oluşturuldu
 - `infra/` dizininde altyapı kodu ayarlandı
-- Bir ortam yapılandırması oluşturuldu
+- Ortam yapılandırması oluşturuldu
 
 ## Adım 2: Proje Yapısını İnceleyin
 
-azd'nin bizim için oluşturduklarını inceleyelim:
+azd'nin bizim için neler oluşturduğuna bakalım:
 
 ```bash
-# Proje yapısını görüntüle
+# View the project structure
 tree /f   # Windows
-# veya
+# or
 find . -type f | head -20   # macOS/Linux
 ```
 
 Şunları görmelisiniz:
 ```
 my-first-azd-app/
-├── .azd/
-│   └── config.json              # Project configuration
 ├── .azure/
+│   ├── config.json              # Selected local environment
 │   └── dev/                     # Environment-specific files
 ├── .devcontainer/               # Development container config
 ├── .github/workflows/           # GitHub Actions CI/CD
@@ -115,31 +116,29 @@ my-first-azd-app/
 ├── infra/                       # Infrastructure as code (Bicep)
 │   ├── main.bicep              # Main infrastructure template
 │   ├── main.parameters.json     # Parameters for deployment
-│   └── modules/                # Reusable infrastructure modules
+│   └── app/                    # Application infrastructure modules
 ├── src/
 │   ├── api/                    # Node.js backend API
 │   │   ├── src/               # API source code
-│   │   ├── package.json       # Node.js dependencies
-│   │   └── Dockerfile         # Container configuration
+│   │   └── package.json       # Node.js dependencies
 │   └── web/                   # React frontend
 │       ├── src/               # React source code
-│       ├── package.json       # React dependencies
-│       └── Dockerfile         # Container configuration
+│       └── package.json       # React dependencies
 ├── azure.yaml                  # azd project configuration
 └── README.md                   # Project documentation
 ```
 
-### Anlaşılması Gereken Ana Dosyalar
+### Anlaşılması Gereken Temel Dosyalar
 
 **azure.yaml** - azd projenizin kalbi:
 ```bash
-# Proje yapılandırmasını görüntüle
+# View the project configuration
 cat azure.yaml
 ```
 
 **infra/main.bicep** - Altyapı tanımı:
 ```bash
-# Altyapı kodunu görüntüleyin
+# View the infrastructure code
 head -30 infra/main.bicep
 ```
 
@@ -147,48 +146,47 @@ head -30 infra/main.bicep
 
 Dağıtımdan önce uygulamayı özelleştirebilirsiniz:
 
-### Önyüzü Değiştirin
+### Ön Yüzü Değiştirin
 ```bash
-# React uygulama bileşenini aç
-code src/web/src/App.tsx
+# Open the React app component
+code src/web/src/layout/header.tsx
 ```
 
 Basit bir değişiklik yapın:
-```typescript
-// Başlığı bulun ve değiştirin
-<h1>My Awesome Todo App</h1>
+```tsx
+// Replace the existing <Text variant="xLarge">ToDo</Text> element
+<Text variant="xLarge">My Awesome Todo App</Text>
 ```
 
 ### Ortam Değişkenlerini Yapılandırın
 ```bash
-# Özel ortam değişkenleri ayarla
+# Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# Tüm ortam değişkenlerini görüntüle
+# View all environment variables
 azd env get-values
 ```
 
-## Adım 4: Azure'a Dağıtın
+Bu iki özel değer sadece yerel depolamayı gösterir. Stok şablon `WEBSITE_TITLE` veya `API_VERSION` kullanımına sahip değildir, bu nedenle uygulamayı değiştirmezler. Yukarıdaki açık kaynak düzenlemesi gösterilen başlığı değiştirir.
 
-Şimdi heyecanlı kısım - her şeyi Azure'a dağıtın!
+## Adım 4: Azure’a Dağıtım Yapın
+
+Şimdi heyecan verici bölüm - her şeyi Azure’a dağıtalım!
 
 ```bash
-# Altyapıyı ve uygulamayı dağıt
+# Deploy infrastructure and application
 azd up
 
-# Bu komut şunları yapacak:
-# 1. Azure kaynaklarını oluşturacak (App Service, Cosmos DB vb.)
-# 2. Uygulamanızı derleyecek
-# 3. Oluşturulan kaynaklara dağıtacak
-# 4. Uygulama URL'sini gösterecek
+# This command will:
+# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
+# 2. Build your application
+# 3. Deploy to the provisioned resources
+# 4. Display the application URL
 ```
 
 ### Dağıtım Sırasında Neler Oluyor?
 
-`azd up` komutu şu adımları gerçekleştirir:
-1. **Provision** (`azd provision`) - Azure kaynaklarını oluşturur
-2. **Package** - Uygulama kodunuzu paketler/derler
-3. **Deploy** (`azd deploy`) - Kodu Azure kaynaklarına dağıtır
+İş akışı altyapıyı tesis eder ve kodu paketleyip dağıtır. Kesin sıralama `workflows.up` içinde `azure.yaml` ile özelleştirilebilir; bu şablon önce tesis, sonra dağıtım belirtir. Her şablon için evrensel bir aşama sırasına güvenmeyin.
 
 ### Beklenen Çıktı
 ```
@@ -205,239 +203,239 @@ https://app-web-abc123def.azurewebsites.net
 
 ## Adım 5: Uygulamanızı Test Edin
 
-### Uygulamanıza Erişim
-Dağıtım çıktısında sağlanan URL'ye tıklayın veya istediğiniz zaman alın:
+### Uygulamanıza Erişin
+Dağıtım çıktısında verilen URL’ye tıklayın veya istediğiniz zaman edinin:
 ```bash
-# Uygulamanın uç noktalarını alın
+# Get application endpoints
 azd show
 
-# Uygulamayı tarayıcınızda açın
-azd show --output json | jq -r '.services.web.endpoint'
+# Open the application in your browser
+azd show --output json | jq -er '.services.web.ingressUrl'
 ```
 
 ### Todo Uygulamasını Test Edin
-1. **Bir todo öğesi ekleyin** - "Add Todo" düğmesine tıklayın ve bir görev girin
-2. **Tamamlandı olarak işaretle** - Tamamlanan öğeleri işaretleyin
-3. **Öğeleri silin** - Artık ihtiyacınız olmayan todo'ları kaldırın
+1. **Bir todo öğesi ekleyin** - "Todo Ekle"ye tıklayın ve görev girin  
+2. **Tamamlandı olarak işaretleyin** - Bitmiş öğeleri işaretleyin  
+3. **Öğeleri silin** - Artık ihtiyacınız olmayan todoları kaldırın  
 
 ### Uygulamanızı İzleyin
 ```bash
-# Kaynaklarınız için Azure portalını aç
+# Open Azure portal for your resources
 azd monitor
 
-# Uygulama günlüklerini görüntüle
+# View application logs
 azd monitor --logs
 
-# Canlı metrikleri görüntüle
+# View live metrics
 azd monitor --live
 ```
 
 ### ✅ Dağıtımınızı Doğrulayın
 
-Devam etmeden önce, her şeyin gerçekten çalıştığını doğrulamak için bu hızlı kontrol listesini uygulayın — "deploy succeeded" ifadesinin "uygulama çalışıyor" demek olmadığını varsaymayın:
+Devam etmeden önce, her şeyin gerçekten çalıştığını doğrulamak için bu hızlı kontrol listesini geçin—"dağıtım başarıyla tamamlandı" demek "uygulama çalışıyor" demek değildir:
 
 ```bash
-# 1. Uç noktanın var olduğunu ve erişilebilir olduğunu doğrulayın
+# 1. Confirm the endpoint exists and is reachable
 azd show
 
-# 2. Uç noktayı hızlıca test edin (HTTP 200 beklenir)
-curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+# 2. Smoke-test the endpoint (expects HTTP 200)
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error --location "$WEB_URL"
 
-# 3. Uygulamanız böyle bir uç nokta sunuyorsa sağlık uç noktasını kontrol edin
-curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+# 3. Test the API's actual list route (the template has no /health route)
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail --show-error "$API_URL/lists"
 ```
 
-**Dağıtım şu durumlarda doğrulanır:**
-- ✅ `azd show` erişilebilir bir uç nokta URL'si listeler
+**Dağıtım doğrulanırsa:**
+- ✅ `azd show` erişilebilir bir uç nokta URL’si listeler
 - ✅ URL tarayıcınızda hatasız açılır
-- ✅ Temel özellikler çalışır (bir todo ekleme/tamamlama/silme)
-- ✅ `azd monitor --logs` beklenmeyen hata olmadan gelen istekleri gösterir
+- ✅ Temel özellikler çalışır (todo ekle/tamamla/sil)
+- ✅ `azd monitor --logs` beklenmeyen hata olmadan istekleri gösterir
 
-Herhangi bir kontrol başarısız olursa, atlayın ve [Bölüm 7: Sorun Giderme](../chapter-07-troubleshooting/README.md)'ye bakın.
+Herhangi bir kontrol başarısız olursa, [Bölüm 7: Sorun Giderme](../chapter-07-troubleshooting/README.md) kısmına atlayın.
 
 ## Adım 6: Değişiklik Yapın ve Yeniden Dağıtın
 
-Hadi bir değişiklik yapalım ve güncellemenin ne kadar kolay olduğunu görelim:
+Bir değişiklik yapalım ve güncellemenin ne kadar kolay olduğuna bakalım:
 
-### API'yi Değiştirin
+### API’yı Değiştirin
 ```bash
-# API kodunu düzenle
-code src/api/src/routes/lists.js
+# Edit the API code
+code src/api/src/routes/lists.ts
 ```
 
 Özel bir yanıt başlığı ekleyin:
 ```javascript
-// Bir rota işleyicisi bulun ve şunu ekleyin:
+// Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
 ### Sadece Kod Değişikliklerini Dağıtın
 ```bash
-# Yalnızca uygulama kodunu dağıt (altyapıyı atla)
+# Deploy only the application code (skip infrastructure)
 azd deploy
 
-# Altyapı zaten mevcut olduğundan 'azd up' işlemine göre bu çok daha hızlıdır.
+# This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## Adım 7: Birden Fazla Ortamı Yönetin
+## Adım 7: Birden Fazla Ortam Yönetin
 
-Değişiklikleri üretime almadan önce test etmek için bir staging (hazırlık) ortamı oluşturun:
+Üretime geçmeden önce değişiklikleri test etmek için ön üretim ortamı oluşturun:
 
 ```bash
-# Yeni bir hazırlık ortamı oluştur
+# Create a new staging environment
 azd env new staging
 
-# Hazırlık ortamına dağıt
+# Deploy to staging
 azd up
 
-# Geliştirme ortamına geri dön
+# Switch back to dev environment
 azd env select dev
 
-# Tüm ortamları listele
+# List all environments
 azd env list
 ```
 
 ### Ortam Karşılaştırması
 ```bash
-# Geliştirme ortamını görüntüle
+# View dev environment
 azd env select dev
 azd show
 
-# Hazırlık ortamını görüntüle
+# View staging environment  
 azd env select staging
 azd show
 ```
 
 ## Adım 8: Kaynakları Temizleyin
 
-Denemeyi bitirdiğinizde, sürekli ücretlendirmeyi önlemek için temizlik yapın:
+Denemeyi bitirdiğinizde, devam eden ücretlerden kaçınmak için temizleyin:
 
 ```bash
-# Mevcut ortam için tüm Azure kaynaklarını sil
-azd down
+# Review and delete BOTH environments created in this tutorial
+azd down --environment dev
+azd down --environment staging
 
-# Onay olmadan zorla sil ve geçici olarak silinmiş kaynakları kalıcı olarak kaldır
-azd down --force --purge
-
-# Belirli bir ortamı sil
-azd env select staging
-azd down --force --purge
+# Automation alternative for a selected disposable environment:
+# azd down --environment dev --force --purge
+# --purge affects supported soft-deleted Azure resources, not local .azure files.
 ```
 
 ## Klasik Uygulama vs. Yapay Zeka Destekli Uygulama: Aynı İş Akışı
 
-Az önce geleneksel bir web uygulaması dağıttınız. Peki ya Microsoft Foundry Modelleri tarafından desteklenen bir sohbet uygulaması gibi bir yapay zeka destekli uygulama dağıtmak isteseydiniz?
+Az önce geleneksel bir web uygulaması dağıttınız. Peki ya Microsoft Foundry Modelleri destekli bir sohbet uygulaması gibi yapay zeka destekli bir uygulama dağıtmak isteseydiniz?
 
 İyi haber: **iş akışı aynıdır.**
 
 | Adım | Klasik Todo Uygulaması | Yapay Zeka Sohbet Uygulaması |
-|------|-------------------------|-----------------------------|
-| Başlat | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
-| Kimlik Doğrulama | `azd auth login` | `azd auth login` |
-| Dağıtım | `azd up` | `azd up` |
-| İzleme | `azd monitor` | `azd monitor` |
-| Temizlik | `azd down --force --purge` | `azd down --force --purge` |
+|------|-----------------|-------------|
+| Başlat (boş dizin) | `azd init --template todo-nodejs-mongo .` | `azd init --template azure-search-openai-demo .` |
+| Kimlik Doğrula | `azd auth login` | `azd auth login` |
+| Dağıt | `azd up` | `azd up` |
+| İzle | `azd monitor` | `azd monitor` |
+| Temizle | `azd down --force --purge` | `azd down --force --purge` |
 
-Tek fark başladığınız **şablon**dur. Bir AI şablonu ek altyapı (ör. bir Microsoft Foundry Models kaynağı veya bir AI Search dizini) içerir, ancak azd bunların tümünü sizin için yönetir. Yeni komutlar öğrenmeniz, farklı bir araç benimsemeniz veya dağıtımı düşünme şeklinizi değiştirmeniz gerekmez.
+Yaşam döngüsü komutları aynıdır ama ön koşullar farklıdır. Bir yapay zeka şablonu model erişimi, bölgesel kota, veri yükleme ve ek yapılandırma isteyebilir. Dağıtımdan önce README dosyasını okuyun; `azd up` eksik izin veya kota sağlayamaz.
 
-Bu, azd'nin temel prensibidir: **bir iş akışı, her tür iş yükü.** Bu eğitimde uyguladığınız beceriler—başlatma, dağıtma, izleme, yeniden dağıtma ve temizleme—AI uygulamaları ve ajanlar için de eşit şekilde geçerlidir.
+azd'nin temel ilkesi budur: **bir iş akışı, her iş yükü.** Bu eğitimde pratik yaptığınız beceriler—başlatma, dağıtım, izleme, yeniden dağıtım ve temizleme—yapay zeka uygulamaları ve ajanları için de geçerlidir.
 
 ---
 
-## Neler Öğrendiniz
+## Öğrendikleriniz
 
-Tebrikler! Başarıyla şunları yaptınız:
+Tebrikler! Başarıyla:
 - ✅ Bir şablondan azd projesi başlattınız
-- ✅ Proje yapısını ve ana dosyaları incelediniz
-- ✅ Tam yığın bir uygulamayı Azure'a dağıttınız
+- ✅ Proje yapısını ve temel dosyaları incelediniz
+- ✅ Tam yığın uygulamayı Azure’a dağıttınız
 - ✅ Kod değişiklikleri yapıp yeniden dağıttınız
-- ✅ Birden fazla ortam yönettiniz
+- ✅ Birden çok ortamı yönettiniz
 - ✅ Kaynakları temizlediniz
 
-## 🎯 Yetenek Doğrulama Egzersizleri
+## 🎯 Becerileri Doğrulama Egzersizleri
 
 ### Egzersiz 1: Farklı Bir Şablon Dağıtın (15 dakika)
-**Hedef**: azd init ve dağıtım iş akışında ustalığınızı gösterin
+**Hedef**: azd init ve dağıtım iş akışında ustalığı gösterin
 
 ```bash
-# Python + MongoDB yığını deneyin
+# Try Python + MongoDB stack
 mkdir todo-python && cd todo-python
-azd init --template todo-python-mongo
+azd init --template todo-python-mongo .
 azd up
 
-# Dağıtımı doğrulayın
+# Verify deployment
 azd show
-curl $(azd show --output json | jq -r '.services.web.endpoint')
+curl --fail "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Temizleyin
+# Clean up
 azd down --force --purge
 ```
 
 **Başarı Kriterleri:**
-- [ ] Uygulama hatasız şekilde dağıtılır
-- [ ] Tarayıcıda uygulama URL'sine erişilebilir
-- [ ] Uygulama doğru çalışır (todo ekleme/kaldırma)
-- [ ] Tüm kaynaklar başarıyla temizlendi
+- [ ] Uygulama hatasız dağıtılır
+- [ ] Uygulama URL’sine tarayıcıdan erişilebilir
+- [ ] Uygulama düzgün çalışır (todo ekle/kaldır)
+- [ ] Tüm kaynaklar başarıyla temizlenir
 
 ### Egzersiz 2: Yapılandırmayı Özelleştirin (20 dakika)
-**Hedef**: Ortam değişkenleri yapılandırmasını uygulamak
+**Hedef**: Yerel ortam değeri depolamayı ve bunun çalışma zamanı yapılandırması olmadığını anlama pratiği yapın
 
 ```bash
-cd my-first-azd-app
+# Return to your original my-first-azd-app directory first
 
-# Özel ortam oluştur
+# Create custom environment
 azd env new custom-config
 
-# Özel değişkenleri ayarla
+# Set custom variables
 azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
 
-# Değişkenleri doğrula
+# Verify variables
 azd env get-values | grep APP_TITLE
 
-# Özel yapılandırmayla dağıt
-azd up
+# Check one value exactly; expected: My Custom Todo App
+azd env get-value APP_TITLE
 ```
 
 **Başarı Kriterleri:**
-- [ ] Özel ortam başarıyla oluşturuldu
-- [ ] Ortam değişkenleri ayarlandı ve alınabiliyor
-- [ ] Uygulama özel yapılandırma ile dağıtıldı
-- [ ] Dağıtılan uygulamada özel ayarları doğrulayabilirsiniz
+- [ ] Özel bir ortam başarıyla oluşturuldu
+- [ ] Ortam değişkenleri ayarlandı ve erişilebilir
+- [ ] `azd env get-value APP_TITLE`, `My Custom Todo App` yazdırır
+- [ ] Bu değerlerin kod/altyapı tarafından tüketilmediği sürece stok uygulamayı neden değiştirmediğini açıklayabilir
 
-### Egzersiz 3: Çoklu Ortam İş Akışı (25 dakika)
-**Hedef**: Ortam yönetimi ve dağıtım stratejilerinde ustalaşmak
+### Egzersiz 3: Çok Ortamlı İş Akışı (25 dakika)
+**Hedef**: Ortam yönetimi ve dağıtım stratejilerinde ustalaşın
 
 ```bash
-# Geliştirme ortamı oluştur
+# Create dev environment
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# Geliştirme URL'sini not et
-DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Dev: $DEV_URL"
 
-# Staging ortamı oluştur
+# Create staging environment
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# Staging URL'sini not et
-STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Staging: $STAGING_URL"
 
-# Ortamları karşılaştır
+# Compare environments
 azd env list
 
-# Her iki ortamı da test et
-curl "$DEV_URL/health"
-curl "$STAGING_URL/health"
+# Test both environments
+curl --fail "$DEV_URL"
+curl --fail "$STAGING_URL"
 
-# Her iki ortamı da temizle
+# Clean up both
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
@@ -445,67 +443,66 @@ azd env select staging-$(whoami) && azd down --force --purge
 **Başarı Kriterleri:**
 - [ ] Farklı yapılandırmalara sahip iki ortam oluşturuldu
 - [ ] Her iki ortam da başarıyla dağıtıldı
-- [ ] `azd env select` ile ortamlar arasında geçiş yapılabilir
-- [ ] Ortam değişkenleri ortamlar arasında farklılık gösterir
-- [ ] Her iki ortam da başarıyla temizlendi
+- [ ] `azd env select` kullanarak ortamlar arasında geçiş yapılabilir
+- [ ] Ortam değişkenleri ortamlar arasında farklıdır
+- [ ] Her iki ortam da başarıyla temizlenmiştir
 
-## 📊 İlerlemeniz
+## 📊 İlerleyişiniz
 
-**Harcanan Süre**: ~60-90 dakika  
-**Edinilen Yetenekler**:
-- ✅ Şablona dayalı proje başlatma
+**Harcanan Zaman**: ~60-90 dakika  
+**Kazandığınız Beceriler**:
+- ✅ Şablon tabanlı proje başlatma
 - ✅ Azure kaynak sağlama
 - ✅ Uygulama dağıtım iş akışları
 - ✅ Ortam yönetimi
 - ✅ Yapılandırma yönetimi
-- ✅ Kaynak temizleme ve maliyet yönetimi
+- ✅ Kaynak temizliği ve maliyet yönetimi
 
-**Sonraki Seviye**: İleri yapılandırma kalıplarını öğrenmek için [Yapılandırma Rehberi](configuration.md) ile devam edin!
+**Sonraki Seviyeye Hazır**: Gelişmiş yapılandırma desenlerini öğrenmek için [Yapılandırma Rehberi](../chapter-03-configuration/configuration.md)’ne hazırsınız!
 
-## Yaygın Sorun Giderme
+## Yaygın Sorunların Çözümü
 
 ### Kimlik Doğrulama Hataları
 ```bash
-# Azure ile yeniden kimlik doğrulaması yapın
-az login
+# Re-authenticate with azd (az login does not refresh azd's default credentials)
+azd auth login
 
-# Abonelik erişimini doğrulayın
-az account show
+# Verify the selected environment's subscription
+azd env get-value AZURE_SUBSCRIPTION_ID
 ```
 
-### Dağıtım Hataları
+### Dağıtım Başarısızlıkları
 ```bash
-# Hata ayıklama günlük kaydını etkinleştir
-export AZD_DEBUG=true
+# Enable debug logging
 azd up --debug
 
-# Azure'da uygulama günlüklerini görüntüle
+# View application logs in Azure
 azd monitor --logs
 
-# Container Apps için Azure CLI kullanın:
+# For Container Apps, use Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
-### Kaynak Adı Çakışmaları
+### Kaynak Ad Çakışmaları
 ```bash
-# Benzersiz bir ortam adı kullanın
+# Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### Port/Ağ Sorunları
 ```bash
-# Portların kullanılabilir olup olmadığını kontrol et
+# Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
 ## Sonraki Adımlar
 
-İlk projenizi tamamladığınıza göre, bu ileri konuları keşfedin:
+İlk projenizi tamamladığınıza göre, şu gelişmiş konuları keşfedin:
 
 ### 1. Altyapıyı Özelleştirin
 - [Kod Olarak Altyapı](../chapter-04-infrastructure/provisioning.md)
-- [Veritabanları, depolama ve diğer hizmetleri ekleyin](../chapter-04-infrastructure/provisioning.md#adding-services)
+- [Veritabanı altyapısı ekleyin](../chapter-04-infrastructure/provisioning.md#%EF%B8%8F-database-provisioning)
 
 ### 2. CI/CD Kurulumu
 - [Dağıtım Kılavuzu](../chapter-04-infrastructure/deployment-guide.md) - Tam CI/CD iş akışları
@@ -516,15 +513,16 @@ netstat -an | grep :3100
 
 ### 4. Daha Fazla Şablon Keşfedin
 ```bash
-# Kategorilere göre şablonlara göz at
+# Browse templates by category
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Farklı teknoloji yığınlarını deneyin
-azd init --template todo-python-mongo
-azd init --template todo-csharp-sql
-azd init --template todo-java-mongo
+# Try different technology stacks
+# Choose ONE in a new empty directory, not all three in the same project
+azd init --template todo-python-mongo .
+# azd init --template todo-csharp-sql .
+# azd init --template todo-java-mongo .
 ```
 
 ## Ek Kaynaklar
@@ -532,7 +530,7 @@ azd init --template todo-java-mongo
 ### Öğrenme Materyalleri
 - [Azure Developer CLI Belgeleri](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Mimari Merkezi](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Çerçevesi](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure İyi Tasarlanmış Çerçevesi](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Topluluk ve Destek
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
@@ -541,20 +539,20 @@ azd init --template todo-java-mongo
 
 ### Şablonlar ve Örnekler
 - [Resmi Şablon Galerisi](https://azure.github.io/awesome-azd/)
-- [Topluluk Şablonları](https://github.com/Azure-Samples/azd-templates)
-- [Kurumsal Kalıplar](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Topluluk Şablon Katkıları](https://github.com/Azure/awesome-azd)
+- [Todo Şablon Kaynağı](https://github.com/Azure-Samples/todo-nodejs-mongo)
 
 ---
 
-**Tebrikler! İlk azd projenizi tamamladınız.** Artık Azure'da harika uygulamalar oluşturup dağıtmaya güvenle hazırsınız.
+**İlk azd projenizi tamamladığınız için tebrikler!** Artık Azure’da harika uygulamalar oluşturup dağıtmaya hazır ve kendinizden emin durumdasınız.
 
 ---
 
-**Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar](../../README.md)
-- **📖 Güncel Bölüm**: Bölüm 1 - Temel ve Hızlı Başlangıç
-- **⬅️ Önceki**: [Kurulum ve Yapılandırma](installation.md)
-- **➡️ Sonraki**: [Kendi Uygulamanızı Getirin](bring-your-own-app.md)
+**Bölüm Gezinme:**
+- **📚 Kurs Ana Sayfa**: [Yeni Başlayanlar için AZD](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 1 - Temel ve Hızlı Başlangıç  
+- **⬅️ Önceki**: [Kurulum ve Ayarlar](installation.md)
+- **➡️ Sonraki**: [Kendi Uygulamanı Getir](bring-your-own-app.md)
 - **🚀 Sonraki Bölüm**: [Bölüm 2: Yapay Zeka Öncelikli Geliştirme](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---

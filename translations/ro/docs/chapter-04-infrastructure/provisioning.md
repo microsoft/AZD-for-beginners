@@ -1,43 +1,45 @@
 # Provisionarea resurselor Azure cu AZD
 
-**Navigare capitole:**
-- **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul curent**: Capitolul 4 - Infrastructură ca Cod & Implementare
-- **⬅️ Anterior**: [Ghid de Implementare](deployment-guide.md)
-- **➡️ Capitol următor**: [Capitolul 5: Soluții AI Multi-Agent](../../examples/retail-scenario.md)
-- **🔧 Related**: [Capitolul 6: Validare Pre-Implementare](../chapter-06-pre-deployment/capacity-planning.md)
+**Navigare capitol:**
+- **📚 Acasă curs**: [AZD pentru începători](../../README.md)
+- **📖 Capitolul curent**: Capitolul 4 - Infrastructură ca și cod & implementare
+- **⬅️ Anterior**: [Ghid de implementare](deployment-guide.md)
+- **➡️ Capitolul următor**: [Capitolul 5: Soluții AI multi-agent](../../examples/retail-scenario.md)
+- **🔧 Relaționat**: [Capitolul 6: Validare pre-implementare](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Introducere
 
-Acest ghid complet acoperă tot ce trebuie să știi despre provisioning-ul și gestionarea resurselor Azure folosind Azure Developer CLI. Învață să implementezi modele de Infrastructură ca Cod (IaC) de la crearea de bază a resurselor până la arhitecturi avansate de infrastructură de nivel enterprise folosind Bicep, șabloane ARM, Terraform și Pulumi.
+Acest ghid acoperă provisionarea și gestionarea resurselor Azure folosind Azure Developer CLI cu furnizorii săi integrați Bicep și Terraform.
+
+> Revizuit conform `azd 1.37.2` (noiembrie 2026). Dacă nu se precizează altfel, exemplele Bicep, Terraform și de script sunt **fragmente ilustrative**, nu un șablon complet. Combină-le într-un proiect care furnizează parametrii, modulele, identitățile, rețeaua și codul aplicației referite. Provisionarea Azure nu a fost executată în această recenzie.
 
 ## Obiective de învățare
 
-Finalizând acest ghid, vei:
-- Stăpâni principiile Infrastructurii ca Cod și provisioning-ul resurselor Azure
-- Înțelege mai mulți furnizori IaC suportați de Azure Developer CLI
+Parcurgând acest ghid, vei:
+- Stăpâni principiile Infrastructure as Code și provisionarea resurselor Azure
+- Înțelege mai mulți furnizori IaC susținuți de Azure Developer CLI
 - Proiecta și implementa șabloane Bicep pentru arhitecturi comune de aplicații
-- Configura parametri de resurse, variabile și setări specifice mediului
-- Implementa modele avansate de infrastructură incluzând rețelistică și securitate
+- Configura parametrii de resurse, variabile și setări specifice mediului
+- Implementa modele avansate de infrastructură inclusiv rețelistică și securitate
 - Gestiona ciclul de viață al resurselor, actualizări și rezolvarea dependențelor
 
-## Rezultate de învățare
+## Rezultate ale învățării
 
-La final, vei putea să:
-- Proiectezi și să provisionezi infrastructură Azure folosind Bicep și șabloane ARM
-- Configurezi arhitecturi multi-serviciu complexe cu dependențe corecte între resurse
-- Implementezi șabloane parametrizate pentru multiple medii și configurații
-- Depanezi problemele de provisioning al infrastructurii și să rezolvi eșecurile de implementare
-- Aplici principiile Azure Well-Architected Framework în designul infrastructurii
-- Gestionezi actualizările infrastructurii și implementezi strategii de versionare a infrastructurii
+La finalizare, vei putea:
+- Proiecta și provisiona infrastructură Azure folosind șabloane Bicep și ARM
+- Configura arhitecturi complexe multi-serviciu cu dependențe corecte de resurse
+- Implementa șabloane parametrizate pentru mai multe medii și configurații
+- Depana probleme de provisionare și rezolva eșecuri de implementare
+- Aplica principiile Azure Well-Architected Framework la proiectarea infrastructurii
+- Gestionează actualizările infrastructurii și implementează strategii de versionare a infrastructurii
 
-## Prezentare generală a provisioning-ului infrastructurii
+## Prezentare generală a provisionării infrastructurii
 
 Azure Developer CLI suportă mai mulți furnizori Infrastructure as Code (IaC):
 - **Bicep** (recomandat) - limbaj specific domeniului Azure
-- **Șabloane ARM** - șabloane Azure Resource Manager bazate pe JSON
-- **Terraform** - unelte multi-cloud pentru infrastructură
-- **Pulumi** - infrastructură modernă ca și cod cu limbaje de programare
+- **ARM Templates** - Bicep compilează către ARM; JSON ARM brut nu este un `infra.provider` separat încorporat
+- **Terraform** - Instrument de infrastructură multi-cloud
+- **Furnizori extensii** - Necesită instalarea separată a extensiei provider și configurarea documentată; nu presupuneți că orice șir de provider este suportat
 
 ## Înțelegerea resurselor Azure
 
@@ -50,9 +52,9 @@ Azure Account
 ```
 
 ### Servicii Azure comune pentru aplicații
-- **Calcul**: App Service, Container Apps, Functions, Mașini Virtuale
-- **Stocare**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Rețelistică**: Virtual Network, Application Gateway, CDN
+- **Computare**: App Service, Container Apps, Functions, Mașini Virtuale
+- **Stocare**: Cont de stocare, Cosmos DB, SQL Database, PostgreSQL
+- **Rețelistică**: Rețea Virtuală, Application Gateway, CDN
 - **Securitate**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Servicii Azure AI, Azure OpenAI, Azure Machine Learning
 
@@ -60,7 +62,8 @@ Azure Account
 
 ### Structura de bază a unui șablon Bicep
 ```bicep
-// infra/main.bicep
+// infra/modules/web.bicep - resource-group-scoped module fragment
+targetScope = 'resourceGroup'
 @description('The name of the environment')
 param environmentName string
 
@@ -75,11 +78,6 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var tags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
-}
-
-// Resource Group (created automatically by azd)
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
-  name: '${applicationName}-${environmentName}-rg'
 }
 
 // App Service Plan
@@ -100,11 +98,14 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'web' })
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
@@ -128,6 +129,8 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
+Pentru un proiect azd complet, apelează acest modul dintr-un `infra/main.bicep` cu scara la nivelul abonamentului care creează un grup de resurse etichetat și îi transmite această scală. Potrivește `environmentName`/`location` în `main.parameters.json`. Eticheta `azd-service-name: web` asociază resursa cu `services.web`; doar denumirile arbitrare de ieșire nu configurează descoperirea serviciului.
+
 ### Modele avansate Bicep
 
 #### Infrastructură modulară
@@ -142,11 +145,14 @@ param appSettings array = []
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: name
   location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: planId
     siteConfig: {
       appSettings: appSettings
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
     }
     httpsOnly: true
@@ -179,7 +185,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Crearea condiționată a resurselor
+#### Crearea condițională de resurse
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -202,11 +208,11 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 
 ## 🌐 Utilizarea Terraform cu azd
 
-Bicep este implicit pentru azd, dar azd suportă și **Terraform**—util dacă echipa ta deja îl folosește sau gestionezi infrastructură multi-cloud. Fluxul de lucru azd (`azd up`, `azd provision`, `azd down`) este identic; doar limbajul infrastructurii și structura folderului se schimbă.
+Bicep este implicit pentru azd, dar azd suportă și **Terraform**—util dacă echipa ta standardizează deja pe acesta sau gestionezi infrastructură multi-cloud. Fluxul de lucru azd (`azd up`, `azd provision`, `azd down`) este identic; se schimbă doar limbajul pentru infrastructură și structura dosarelor.
 
-### Specifică azd să folosească Terraform
+### Spune azd să folosească Terraform
 
-Adaugă o secțiune `infra` în `azure.yaml` care indică către furnizorul Terraform:
+Adaugă o secțiune `infra` în `azure.yaml` indicând spre furnizorul Terraform:
 
 ```yaml
 # azure.yaml
@@ -221,9 +227,9 @@ services:
     host: containerapp
 ```
 
-### Structura folderului Terraform
+### Structura dosarului Terraform
 
-Cu furnizorul Terraform, folderul tău `infra/` folosește fișiere `.tf` în loc de Bicep:
+Cu furnizorul Terraform, dosarul tău `infra/` folosește fișiere `.tf` în loc de Bicep:
 
 ```
 infra/
@@ -234,7 +240,9 @@ infra/
 └── main.tfvars.json   # values azd injects per environment
 ```
 
-### Un `main.tf` minimal
+### Un fragment `main.tf`
+
+Aceasta creează doar un grup de resurse și un plan, nu un serviciu implementabil. Trebuie să declari și variabile de intrare, un furnizor `azurerm` compatibil, aplicația web și maparea tagului/numele resursei serviciului.
 
 ```hcl
 # infra/main.tf
@@ -253,9 +261,9 @@ resource "azurerm_service_plan" "plan" {
 }
 ```
 
-### Cum se conectează azd la output-urile Terraform
+### Cum se conectează azd la ieșirile Terraform
 
-azd citește **output-urile** Terraform pentru a descoperi endpoint-urile tale și pentru a conecta valorile de mediu înapoi în aplicație. Numele output-urilor sunt importante — azd caută unele specifice:
+azd citește **ieșirile** Terraform ca valori de mediu. Acest fragment presupune că ai definit `azurerm_linux_web_app.web`; descoperirea serviciilor necesită în continuare un nume de resursă care să se potrivească sau o etichetă `azd-service-name`:
 
 ```hcl
 # infra/outputs.tf
@@ -264,11 +272,11 @@ output "AZURE_LOCATION" {
 }
 
 output "SERVICE_WEB_ENDPOINT_URL" {
-  value = azurerm_linux_web_app.web.default_hostname
+  value = "https://${azurerm_linux_web_app.web.default_hostname}"
 }
 ```
 
-> **Important:** azd folosește eticheta `azd-env-name` și output-urile `AZURE_*` pentru a urmări resursele pe mediu. Etichetează întotdeauna grupul tău de resurse cu `"azd-env-name" = var.environment_name` astfel încât `azd down` să poată găsi și șterge tot.
+> **Important:** azd folosește eticheta `azd-env-name` și ieșirile `AZURE_*` pentru a urmări resursele pe medii. Etichetează întotdeauna grupul de resurse cu `"azd-env-name" = var.environment_name` ca `azd down` să poată găsi și elimina tot.
 
 ### Implementare cu Terraform
 
@@ -277,98 +285,35 @@ Comenzile sunt exact aceleași ca pentru Bicep:
 ```bash
 azd auth login
 azd env new dev
-azd provision --preview   # azd rulează 'terraform plan' în fundal
-azd up                    # provisionare + implementare
-azd down --force          # distruge resursele gestionate de Terraform
+azd provision --preview   # azd runs 'terraform plan' under the hood
+azd up                    # provision + deploy
+azd down --force          # destroys the Terraform-managed resources
 ```
 
-> **Precondiție:** Terraform trebuie instalat și să fie în `PATH`. azd gestionează fluxul Terraform dar nu îl instalează pentru tine. Pentru starea infrastructurii, azd folosește starea locală implicit; pentru echipe, configurează un backend remote (de exemplu, un backend Azure Storage) în `provider.tf`.
+> **Precondiție:** Terraform trebuie să fie instalat și în `PATH`. azd gestionează *fluxul* Terraform, dar nu îl instalează pentru tine. Pentru stare, azd utilizează implicit starea locală; pentru echipe, configurează un backend remote (de exemplu, backend Azure Storage) în `provider.tf`.
 
-Pentru startere complete și rulabile bazate pe Terraform, parcurge galeria [Awesome AZD](https://azure.github.io/awesome-azd/) și filtrează pentru Terraform sau vezi documentația oficială [azd Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+Pentru startere Terraform complete, rulabile, navighează în [galeria Awesome AZD](https://azure.github.io/awesome-azd/) și filtrează pentru Terraform, sau vezi documentația oficială [azd Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
-## 🧩 Utilizarea Pulumi cu azd
+## 🧩 Alte instrumente de infrastructură
 
-Dacă echipa ta scrie infrastructura într-un limbaj general-purpose (TypeScript, Python, Go sau C#) în loc de un DSL, azd suportă de asemenea **Pulumi**. La fel ca la Terraform, fluxul de lucru `azd up` / `azd provision` / `azd down` rămâne neschimbat—diferența este doar în instrumentele infrastructurii și structura folderului.
+Pulumi nu este un furnizor încorporat în azd 1.37.2. Setarea `infra.provider: pulumi` singură nu stabilește o integrare funcțională, iar `azd env new` nu creează/selectează automat un stack Pulumi. Dacă folosești alt instrument IaC, urmărește documentația unei extensii verificate sau gestionează ciclul său de viață explicit în propriul flux de lucru. Acest curs nu furnizează și nici nu validează un provider Pulumi.
 
-### Specifică azd să folosească Pulumi
+## 🎯 Alegerea unui gazdă pentru serviciul tău
 
-```yaml
-# azure.yaml
-name: my-pulumi-app
-infra:
-  provider: pulumi      # default is "bicep"
-  path: infra           # folder containing your Pulumi program
-services:
-  web:
-    project: ./src
-    language: js
-    host: containerapp
-```
+Câmpul `host` din `azure.yaml` decide unde rulează codul tău. azd suportă mai mulți gazde—alegerea corectă contează mai mult decât limbajul infrastructurii. Iată o comparație prietenoasă pentru începători:
 
-### Structura folderului Pulumi
-
-```
-infra/
-├── Pulumi.yaml          # project definition
-├── Pulumi.dev.yaml      # stack config (one per environment)
-├── index.ts             # your resource program (or __main__.py, main.go, etc.)
-├── package.json         # dependencies (for TypeScript)
-└── tsconfig.json
-```
-
-### Un `index.ts` minimal
-
-```typescript
-import * as azure from "@pulumi/azure-native";
-import * as pulumi from "@pulumi/pulumi";
-
-const environmentName = pulumi.getStack();
-
-// Marchează fiecare resursă pentru ca azd să le poată urmări și curăța
-const tags = { "azd-env-name": environmentName };
-
-const rg = new azure.resources.ResourceGroup("rg", {
-  resourceGroupName: `rg-${environmentName}`,
-  tags,
-});
-
-// azd citește aceste ieșiri înapoi în mediul tău
-export const AZURE_LOCATION = rg.location;
-export const SERVICE_WEB_ENDPOINT_URL = "https://...";
-```
-
-### Stack-urile se map-ează pe mediile azd
-
-Pulumi organizează implementările în **stack-uri**, iar azd asociază fiecare mediu azd cu un stack Pulumi cu același nume. Când rulezi `azd env new staging`, azd selectează (sau creează) stack-ul Pulumi `staging`. Se aplică aceleași reguli pentru etichetarea cu `azd-env-name` și output-urile `AZURE_*` pentru ca `azd down` să poată găsi și elimina toate resursele.
-
-### Implementare cu Pulumi
-
-```bash
-azd auth login
-azd env new dev
-azd provision --preview   # azd rulează 'pulumi preview' în fundal
-azd up                    # aprovizionare + implementare
-azd down --force          # rulează 'pulumi destroy'
-```
-
-> **Precondiție:** Pulumi trebuie instalat și să fie în `PATH`, iar tu ai nevoie de un backend pentru stare (Pulumi Cloud sau un backend autogestionat precum Azure Blob Storage). azd gestionează fluxul Pulumi, nu instalarea acestuia. Vezi documentația oficială [azd Pulumi](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
-
-## 🎯 Alegerea unui host pentru serviciul tău
-
-Câmpul `host` din `azure.yaml` decide unde rulează codul tău. azd suportă mai mulți hosturi—alegerea corectă este mai importantă decât limbajul infrastructurii. Iată o comparație prietenoasă pentru începători:
-
-| Valoare `host` | Ideal pentru | De ce |
-|----------------|--------------|-------|
-| `appservice` | Aplicații web și API-uri tradiționale | Cel mai simplu PaaS; nu sunt necesare containere |
-| `staticwebapp` | SPA-uri front-end (React, Vue, Angular) | CDN global + SSL gratuit, suport API încorporat |
-| `function` | Workload-uri event-driven și serverless | Scalare la zero, plată per execuție |
-| `containerapp` | Microservicii containerizate | Containere serverless, scalare la zero, ingress integrat |
-| `aks` | Necesită orchestrare complexă | Control complet Kubernetes când chiar ai nevoie |
-| `springapp` | Aplicații Java Spring Boot | Runtime Azure Spring Apps gestionat și optimizat pentru Spring |
+| Valoare `host` | Potrivit pentru | De ce |
+|--------------|----------|-----|
+| `appservice` | Aplicații web tradiționale și API-uri | PaaS cel mai simplu; nu sunt necesare containere |
+| `staticwebapp` | Front-end SPAs (React, Vue, Angular) | CDN global + SSL gratuit, suport API integrat |
+| `function` | Lucrări event-driven și serverless | Scalare-la-zero, plătești după execuție |
+| `containerapp` | Microservicii containerizate | Containere serverless, scalare-la-zero, ingress integrat |
+| `aks` | Nevoi complexe de orchestrare | Control Kubernetes complet când ai nevoie cu adevărat |
+| `springapp` | Implementări existente Azure Spring Apps | Țintă veche; serviciul se retrage pe 31 martie 2028 și este închis pentru clienți noi |
 
 ### Când să alegi AKS
 
-**Azure Kubernetes Service (`host: aks`)** îți oferă puterea completă a Kubernetes — controlere personalizate, mesh-uri de servicii, rețelistică complexă și scheduling granulat. Această putere vine cu o complexitate operațională: administrezi pool-uri de noduri, upgrade-uri și rețelistica cluster-ului.
+**Azure Kubernetes Service (`host: aks`)** îți oferă puterea completă a Kubernetes—controlere personalizate, mesh-uri de servicii, rețelistică complexă și programare detaliată. Această putere vine cu costuri operaționale: tu gestionezi pool-uri de noduri, upgrade-uri și rețeaua clusterului.
 
 ```yaml
 services:
@@ -378,11 +323,11 @@ services:
     host: aks          # deploys to an existing AKS cluster
 ```
 
-> **Începe mai simplu dacă poți.** Pentru majoritatea microserviciilor, **Container Apps** oferă containere, scalare automată și scalare la zero fără să administrezi un cluster. Alege AKS doar când ai nevoie de caracteristici specifice Kubernetes.
+> **Pornește mai simplu dacă poți.** Pentru majoritatea microserviciilor, **Container Apps** îți oferă containere, autoscalare și scalare-la-zero fără să gestionezi un cluster. Alege AKS doar când ai nevoie de funcționalități specifice Kubernetes.
 
 ### Când să folosești Azure Spring Apps
 
-**Azure Spring Apps (`host: springapp`)** este un runtime gestionat, construit special pentru Spring Boot. Gestionază service discovery, config server și implementare blue-green astfel încât echipele Java nu trebuie să administreze singure infrastructura.
+**Azure Spring Apps (`host: springapp`)** este un runtime gestionat construit pentru Spring Boot. Gestionează descoperirea serviciului, serverul de configurare, și implementarea blue-green astfel încât echipele Java să nu gestioneze infrastructura.
 
 ```yaml
 services:
@@ -392,7 +337,7 @@ services:
     host: springapp
 ```
 
-> Folosește `springapp` când ai aplicații Spring Boot existente și dorești un runtime optimizat pentru ele. Pentru aplicații Java containerizate noi fără nevoi specifice Spring, `containerapp` este de obicei alegerea mai simplă.
+> Nu selecta Azure Spring Apps pentru un proiect nou de începător: este închis pentru clienți noi și [se retrage la 31 martie 2028](https://learn.microsoft.com/azure/spring-apps/basic-standard/retirement-announcement). Preferă alternative susținute precum Container Apps și planifică migrarea pentru implementările existente.
 
 ## 🗃️ Provisionarea bazelor de date
 
@@ -446,6 +391,8 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 ```
 
 ### PostgreSQL
+**Precondiții fragment:** declară `@secure() param databasePassword string` și folosește o valoare puternică furnizată. Alege acces public **sau** integrează subnetul delegat/DNS privat de mai jos; cele două fragmente nu se conectează automat.
+
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -492,6 +439,8 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
+Regula `0.0.0.0` permite conexiuni din serviciile Azure dincolo de abonamentul tău. Nu reprezintă o rețea privată; preferă un design de rețea restricționat pentru sarcini reale.
+
 ## 🔒 Securitate și gestionarea secretelor
 
 ### Integrarea Key Vault
@@ -536,7 +485,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Configurarea Managed Identity
+### Configurarea identității gestionate
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -553,8 +502,8 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
           value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
         }
         {
-          name: 'AZURE_CLIENT_ID'
-          value: webApp.identity.principalId
+          name: 'NODE_ENV'
+          value: 'production'
         }
       ]
     }
@@ -562,9 +511,11 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
+Pentru o identitate atribuită sistemului, nu seta `AZURE_CLIENT_ID` la ID-ul său principal. O identitate atribuită utilizatorului folosește **client ID**, nu obiectul/ID-ul principal. Referința Key Vault are nevoie și de atribuirea rolului de depozit pentru identitatea aplicației și accesul în rețea.
+
 ## 🌍 Rețelistică și conectivitate
 
-### Configurarea Virtual Network
+### Configurarea rețelei virtuale
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -628,6 +579,8 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 ```
 
 ### Application Gateway cu SSL
+**Fragment arhitectural incomplet, nu un gateway implementabil:** adaugă un `gateway-subnet` dedicat la VNet plus pool-urile backend, setările HTTP, ascultătorii, regulile de rutare cu priorități și un certificat TLS (sau referință autorizată Key Vault). Simplul deschiderii a portului 443 nu configurează HTTPS.
+
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -721,7 +674,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Metrici personalizate și alerte
+### Metrice și alerte personalizate
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -731,7 +684,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
     description: 'Alert when CPU usage is high'
     severity: 2
     enabled: true
-    scopes: [webApp.id]
+    scopes: [appServicePlan.id]
     evaluationFrequency: 'PT5M'
     windowSize: 'PT5M'
     criteria: {
@@ -740,6 +693,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
         {
           name: 'CPU Usage'
           metricName: 'CpuPercentage'
+          metricNamespace: 'Microsoft.Web/serverfarms'
           operator: 'GreaterThan'
           threshold: 80
           timeAggregation: 'Average'
@@ -758,8 +712,11 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 ## 🔧 Configurații specifice mediului
 
 ### Fișiere de parametri pentru medii diferite
+Cele două fișiere de mai jos sunt **exemple alternative de fișiere de parametri**. azd nu selectează automat `main.parameters.dev.json` sau `main.parameters.prod.json` după numele mediului. Folosește `main.parameters.json` cu substituiri de mediu (de exemplu `${APP_SERVICE_SKU=B1}`) și declară/consumă fiecare parametru în Bicep.
+
+Conținut exemplu pentru `infra/main.parameters.dev.json`:
+
 ```json
-// infra/main.parameters.dev.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -783,8 +740,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
+Conținut exemplu pentru `infra/main.parameters.prod.json`:
+
 ```json
-// infra/main.parameters.prod.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -811,7 +769,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Provisionarea condițională a resurselor
+### Provisionare condițională de resurse
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -819,7 +777,7 @@ param environmentType string = 'dev'
 
 // Development resources
 resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'dev') {
-  name: '${applicationName}devstorage${resourceToken}'
+  name: 'stdev${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -829,7 +787,7 @@ resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environ
 
 // Production resources with geo-redundancy
 resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'prod') {
-  name: '${applicationName}prodstorage${resourceToken}'
+  name: 'stprod${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -843,7 +801,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Modele avansate de provisioning
+## 🚀 Modele avansate de provisionare
 
 ### Implementare multi-regiune
 ```bicep
@@ -914,78 +872,53 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 ```
 
 ### Testarea infrastructurii
-```bicep
-// infra/test/main.test.bicep
-param location string = resourceGroup().location
+```bash
+# Local compilation checks syntax/types; this does not provision infrastructure
+az bicep build --file infra/main.bicep --stdout
 
-module mainTemplate '../main.bicep' = {
-  name: 'main-template-test'
-  params: {
-    environmentName: 'test'
-    location: location
-    applicationName: 'testapp'
-  }
-}
-
-// Test assertions
-resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'test-deployment'
-  location: location
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '8.0'
-    scriptContent: '''
-      $webAppName = "${mainTemplate.outputs.WEB_NAME}"
-      $response = Invoke-WebRequest -Uri "https://${mainTemplate.outputs.WEB_URL}/health" -UseBasicParsing
-      if ($response.StatusCode -ne 200) {
-        throw "Health check failed"
-      }
-      Write-Output "All tests passed!"
-    '''
-    timeout: 'PT10M'
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'P1D'
-  }
-}
+# After deploying your own complete app, test an actual application route
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error "$WEB_URL"
 ```
 
-## 🧪 Previziunea și validarea infrastructurii (NOU)
+Provisionarea infrastructurii nu implementează codul aplicației tale. Execută controale aplicației doar după `azd deploy`/`azd up`, și folosește `/health` doar dacă aplicația ta îl implementează. Scripturile de implementare ARM creează resurse Azure și necesită identitate suplimentară, versiuni runtime suportate și permisiuni; ele nu sunt teste locale unitare.
 
-### Previzionează modificările infrastructurii înainte de implementare
+## 🧪 Previziune și validare a infrastructurii (NOI)
 
-Funcția `azd provision --preview` îți permite să **simulezi provisioning-ul infrastructurii** înainte să implementezi efectiv resursele. Este similară cu `terraform plan` sau `bicep what-if`, oferindu-ți o **vizualizare de tip dry-run** a modificărilor care ar fi aplicate în mediul tău Azure.
+### Previzionează schimbările de infrastructură înainte de implementare
+
+Funcția `azd provision --preview` îți permite să **simulezi provisionarea infrastructurii** înainte de a implementa resursele efectiv. Este similară cu `terraform plan` sau `bicep what-if`, oferindu-ți o **previziune detaliată** a modificărilor ce s-ar face în mediul tău Azure.
 
 #### 🛠️ Ce face
 - **Analizează șabloanele tale IaC** (Bicep sau Terraform)
-- **Afișează un preview al modificărilor resurselor**: adăugări, ștergeri, actualizări
-- **Nu aplică modificările** — este doar citire și sigur de rulat
+- **Arată o previziune a modificărilor de resurse**: adăugiri, ștergeri, actualizări
+- **Nu aplică modificările propuse de provider** — inspectează mai întâi hook-urile proiectului; scripturile pot avea efecte secundare și previziunea încă necesită permisiuni Azure
 
 #### Cazuri de utilizare
 ```bash
-# Previzualizează modificările infrastructurii înainte de implementare
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Previzualizare pentru un mediu specific
+# Preview for specific environment
 azd provision --preview -e production
 ```
 
 Această comandă te ajută să:
-- **Validezi modificările infrastructurii** înainte de a angaja resurse
+- **Validezi modificările infrastructurii** înainte de a aproba resurse
 - **Depistezi configurări greșite devreme** în ciclul de dezvoltare
-- **Colaborezi în siguranță** în echipe
-- **Asiguri implementări cu privilegii minime** fără surprize
+- **Colaborezi în siguranță** în medii de echipă
+- **Asiguri implementări cu cele mai mici privilegii** fără surprize
 
-Este utilă mai ales când:
+Este mai ales utilă când:
 - Lucrezi cu medii complexe multi-serviciu
-- Faci modificări în infrastructura de producție
-- Validezi modificările șabloanelor înainte de aprobare PR
-- Instrui membri noi ai echipei în modele de infrastructură
+- Faci modificări infrastructurii în producție
+- Verifici modificări de șablon înainte de aprobarea PR-ului
+- Oferi instruire membrilor noi ai echipei pe modele de infrastructură
 
-### Exemplu de ieșire la previziune
+### Exemplu de ieșire previzionată
+Ieșirea exactă a previziunii variază în funcție de provider și structura proiectului, dar rezultatul trebuie să identifice clar modificările propuse înainte de a se aplica ceva.
 
-Ieșirea exactă variază în funcție de furnizor și structură de proiect, dar rezultatul trebuie să identifice clar schimbările propuse înainte de aplicare.
-
-```bash
+```text
 $ azd provision --preview
 
 🔍 Previewing infrastructure changes...
@@ -1008,22 +941,26 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Actualizări și migrații ale resurselor
+## 🔄 Actualizări și migrații de resurse
 
 ### Actualizări sigure ale resurselor
 ```bash
-# Previzualizați mai întâi modificările infrastructurii (RECOMANDAT)
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Aplicați modificările după confirmarea previzualizării
-azd provision --confirm-with-no-prompt
+# Apply changes after preview confirmation
+azd provision
+# In automation, --no-prompt uses known values and fails on unresolved decisions;
+# it is not an approval bypass.
 
-# Pentru revenire, folosiți Git pentru a anula modificările infrastructurii:
-git revert HEAD  # Anulați ultimul commit al infrastructurii
-azd provision    # Aplicați starea anterioară a infrastructurii
+# For rollback, use Git to revert infrastructure changes:
+git revert HEAD  # Revert last infrastructure commit
+azd provision    # Apply previous infrastructure state
 ```
 
-### Migrații de bază de date
+### Migrații de baze de date
+**Model script de implementare incomplet:** necesită o identitate atribuită utilizatorului configurată unde este nevoie, runtime Azure CLI suportat, unelte de migrare disponibile, un director/configurație de migrare furnizată și conectivitate la baza de date. Nu este executabil doar prin inserarea acestei resurse într-un șablon.
+
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -1048,25 +985,29 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
     ]
     timeout: 'PT30M'
     cleanupPreference: 'OnSuccess'
+    retentionInterval: 'P1D'
   }
 }
 ```
 
 ## 🎯 Cele mai bune practici
 
-### 1. Convenții de numire a resurselor
+### 1. Convenții de denumire a resurselor
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
   appService: '${applicationName}-web-${resourceToken}'
   database: '${applicationName}-db-${resourceToken}'
-  storage: '${take(replace(applicationName, '-', ''), 15)}${environmentName}sa${take(resourceToken, 8)}'
-  keyVault: '${take(applicationName, 15)}-kv-${take(resourceToken, 8)}'
+  storage: 'st${resourceToken}' // lowercase alphanumeric, <=24 characters
+  keyVault: 'kv-${resourceToken}' // <=24 characters
 }
 ```
 
 ### 2. Strategie de etichetare
 ```bicep
+// utcNow is only allowed in a parameter default, not directly in a variable.
+param deploymentDate string = utcNow('yyyy-MM-dd')
+
 var commonTags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
@@ -1074,7 +1015,7 @@ var commonTags = {
   'cost-center': 'engineering'
   'owner': 'platform-team'
   'project': applicationName
-  'created-date': utcNow('yyyy-MM-dd')
+  'deployment-date': deploymentDate
 }
 ```
 
@@ -1094,7 +1035,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organizarea output-urilor
+### 4. Organizarea rezultatelor
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -1111,23 +1052,23 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Pașii următori
 
-- [Planificarea pre-implementare](../chapter-06-pre-deployment/capacity-planning.md) - Validarea disponibilității resurselor
-- [Probleme frecvente](../chapter-07-troubleshooting/common-issues.md) - Depanarea problemelor de infrastructură
-- [Ghid de depanare](../chapter-07-troubleshooting/debugging.md) - Diagnosticare probleme de provisioning
-- [Selecția SKU](../chapter-06-pre-deployment/sku-selection.md) - Alegerea nivelurilor adecvate pentru serviciu
+- [Planificare pre-implementare](../chapter-06-pre-deployment/capacity-planning.md) - Validează disponibilitatea resurselor
+- [Probleme comune](../chapter-07-troubleshooting/common-issues.md) - Depanează probleme de infrastructură
+- [Ghid de depanare](../chapter-07-troubleshooting/debugging.md) - Depanarea problemelor de aprovizionare
+- [Selecția SKU](../chapter-06-pre-deployment/sku-selection.md) - Alegerea nivelurilor de servicii potrivite
 
 ## Resurse suplimentare
 
 - [Documentația Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Șabloane Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Centrul de arhitectură Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Cadrul bine arhitecturat Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigare**
-- **Lecția anterioară**: [Ghid de implementare](deployment-guide.md)
-- **Lecția următoare**: [Planificare Capacitate](../chapter-06-pre-deployment/capacity-planning.md)
+- **Lecția Anterioară**: [Ghid de implementare](deployment-guide.md)
+- **Lecția Următoare**: [Planificarea capacității](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 

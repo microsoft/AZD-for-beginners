@@ -1,82 +1,82 @@
-# Sura ya 3: Uundaji & Uthibitishaji
+# Sura ya 3: Usanidi & Uthibitishaji
 
-**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: Dakika 45-60 | **⭐ Ugumu**: Kiwango cha Kati
+**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: Dakika 90-150 ikijumuisha mazoezi ya kuunganisha | **⭐ Ugumu**: Wastani
 
 ---
 
 ## Muhtasari
 
-Sura hii inahusu usanidi wa mazingira, mifumo ya uthibitishaji, na mbinu bora za usalama kwa utoaji wa Azure Developer CLI.
+Sura hii inashughulikia usanidi wa mazingira, mifumo ya uthibitishaji, na mbinu bora za usalama kwa usambazaji wa Azure Developer CLI.
 
-> Imehakikiwa dhidi ya `azd 1.27.1` mwezi Julai 2026.
+> Lengo la mapitio ya amri na usanidi: `azd 1.37.2` (Novemba 2026). Utoaji halisi wa Azure haukufanyika wakati wa mapitio.
 
 ## Malengo ya Kujifunza
 
 Kwa kumaliza sura hii, utakuwa umeweza:
-- Kumjua mtawanyiko wa usanidi wa AZD
-- Kusimamia mazingira mbalimbali (dev, staging, prod)
-- Kutekeleza uthibitishaji salama kwa vitambulisho vilivyosimamiwa
-- Kusanidi mipangilio ya mazingira maalum
+- Kufahamu mlinganyo wa usanidi wa AZD
+- Kudhibiti mazingira mbalimbali (dev, staging, prod)
+- Kutekeleza uthibitishaji salama kwa kutumia utambulisho ulioendeshwa
+- Kusanidi mipangilio maalum kwa mazingira
 
 ---
 
-## 📚 Somo
+## 📚 Masomo
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Mwongozo wa Usanidi](configuration.md) | Kuandaa na kusimamia mazingira | Dakika 30 |
-| 2 | [Uthibitishaji & Usalama](authsecurity.md) | Mfumo wa utambulisho uliofikiwa na RBAC | Dakika 30 |
+| 1 | [Mwongozo wa Usanidi](configuration.md) | Usanidi na usimamizi wa mazingira | Dak 30 |
+| 2 | [Uthibitishaji & Usalama](authsecurity.md) | Mfano wa utambulisho ulioendeshwa na RBAC | Dak 30 |
 
 ---
 
 ## 🚀 Anza Haraka
 
+Endesha kutoka mzizi wa **programu ya azd tayari kusanidiwa**, sio hifadhi ya kozi. Tumia majina ya mazingira ambayo hayajatumika kama haya tayari yapo.
+
 ```bash
-# Unda mazingira mengi
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Badilisha mazingira
+# Switch environments
 azd env select prod
 
-# Weka mabadiliko ya mazingira
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Tazama usanidi
+# View configuration
 azd env get-values
 ```
 
+`SKU_NAME` ni mfano: huathiri miundombinu tu ikiwa templeti yako inaitumia waziwazi. Thamani za kawaida za `azd env set` huhifadhiwa mahali pa karibu wazi; si hifadhi salama ya siri.
+
 ---
 
-## 🔧 Mtawanyiko wa Usanidi
+## 🔧 Mlinganyo wa Usanidi
 
-AZD hutumia mipangilio kwa mpangilio huu (baadaye huvuka ya awali):
-
-1. **Thamani za msingi** (zilizo katika templeti)
-2. **azure.yaml** (usanidi wa mradi)
-3. **Mazingira ya vigezo** (`azd env set`)
-4. **Bendera za mstari wa amri** (`--location eastus`)
+Hifadhi uso tatu tofauti wa usanidi kwa mbali: mapendeleo ya ulimwengu (`azd config`), muundo wa mradi (`azure.yaml`), na thamani kwa kila mazingira (`azd env`). Bendera huondoa mipangilio wanayoidhinisha tu; hakuna utupu wa ulimwengu wa vigezo vya mazingira chochote juu ya `azure.yaml` au Bicep.
 
 ---
 
 ## 🔐 Mbinu Bora za Usalama
 
 ```bash
-# Tumia utambulisho ulioendeshwa (linapendekezwa)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Angalia hali ya uthibitishaji ya AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Hiari: hakiki muktadha wa Azure CLI ikiwa unapanga kuendesha amri za az
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Thibitisha tena ikiwa inahitajika
+# Re-authenticate if needed
 azd auth login
 
-# Hiari: sasisha uthibitishaji wa Azure CLI kwa amri za az
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -87,14 +87,14 @@ az login
 | Mwelekeo | Sura |
 |-----------|---------|
 | **Iliyopita** | [Sura ya 2: Maendeleo ya AI](../chapter-02-ai-development/README.md) |
-| **Inayofuata** | [Sura ya 4: Miundombinu](../chapter-04-infrastructure/README.md) |
+| **Ifuatayo** | [Sura ya 4: Miundombinu](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Rasilimali Zinazohusiana
+## 📖 Rasilimali Zilizohusiana
 
-- [Ukaguzi Kabla ya Utoaji](../chapter-06-pre-deployment/README.md)
-- [Kutatua Matatizo](../chapter-07-troubleshooting/common-issues.md)
+- [Ukaguzi Kabla ya Usambazaji](../chapter-06-pre-deployment/README.md)
+- [Utatuzi wa Matatizo](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

@@ -1,60 +1,58 @@
-# 6. पूर्वाधार हटाउने
+# ६. पूर्वाधारको विघटन
 
-!!! tip "यस मोड्युलको अन्त्यसम्म तपाईं सक्षम हुनुहुनेछ"
+!!! tip "यस मोड्युल समाप्त हुँदा तपाईं सक्षम हुनुहुनेछ"
 
-    - [ ] स्रोत सफाइ र लागत व्यवस्थापनको महत्व बुझ्नु
-    - [ ] पूर्वाधार सुरक्षित रूपमा हटाउन `azd down` प्रयोग गर्नुहोस्
-    - [ ] आवश्यक परे सफ्ट-डिलिट गरिएको Azure AI सेवाहरू पुन:प्राप्त गर्नुहोस्
-    - [ ] **Lab 6:** Azure स्रोतहरू सफा गर्नुहोस् र हटाइयो कि भनी सुनिश्चित गर्नुहोस्
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## बोनस अभ्यासहरू
 
-Before we tear down the project, take a few minutes to do some open-ended exploration.
+परियोजना विघटन गर्नु अघि, केही मिनेट लिएर केहि खुला-अन्त अन्वेषण गर्नुहोस्।
 
-!!! info "यी अन्वेषण प्रॉम्प्टहरू प्रयास गर्नुहोस्"
+!!! info "यी अन्वेषण सुत्रहरू प्रयास गर्नुहोस्"
 
-    **GitHub Copilot सँग प्रयोग गर्नुहोस्:**
+    **Experiment with GitHub Copilot:**
     
-    1. पूछ्नुहोस्: `What other AZD templates could I try for multi-agent scenarios?`
-    2. पूछ्नुहोस्: `How can I customize the agent instructions for a healthcare use case?`
-    3. पूछ्नुहोस्: `What environment variables control cost optimization?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Azure पोर्टल अन्वेषण गर्नुहोस्:**
+    **Explore the Azure Portal:**
     
-    1. तपाईंको परिनियोजनका लागि Application Insights मेट्रिक्सको समीक्षा गर्नुहोस्
-    2. प्रदाय गरिएको स्रोतहरूको लागत विश्लेषण जाँच गर्नुहोस्
-    3. Microsoft Foundry पोर्टलको एजेन्ट प्लेग्राउन्ड फेरि एक पटक अन्वेषण गर्नुहोस्
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
 ## पूर्वाधार हटाउने
 
-1. पूर्वाधार हटाउन यति नै सजिलो छ:
+1. पूर्वाधार हटाउनु निम्नानुसार सजिलो छ:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. चयन गरिएको वातावरण पुष्टि गर्नुहोस् र मेट्नुपर्ने स्रोतहरू समीक्षा गर्नुहोस्। यसले Azure स्रोतहरू हटाउँछ र डेटा नष्ट हुन सक्छ। यस सिकाइ कार्यप्रवाहको लागि पुष्टिकरण संकेत राख्नुहोस्। पूरै भएपछि निम्न जस्ता आउटपुट देखिनेछ:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (वैकल्पिक) यदि तपाईं अहिले फेरि `azd up` चलाउनुहुन्छ भने, तपाईंले नोट गर्नु हुनेछ कि gpt-4.1 मोडेल डिप्लोय हुन्छ किनकि वातावरण चर परिवर्तन गरिएको थियो (र स्थानीय `.azure` फोल्डरमा सेभ गरिएको)। 
+1. पोर्टलमा मेटिएको पुष्टि गर्नुहोस् र परिचालनको क्षेत्रभन्दा बाहिरका स्रोतहरू जाँच गर्नुहोस्। लागत रिपोर्टिङ र कोटा अपडेटमा ढिलाइ हुन सक्छ। स्थानीय `.azure` सेटिङ तबसम्म रहन्छ जबसम्म तपाईं यसलाई स्पष्ट रूपमा हटाउनु हुँदैन।
 
-      Here is the model deployments **पहिले**:
+1. `azd down --purge` ले थप रूपमा समर्थित सफ्ट-डिलिट गरिएको स्रोतहरूको स्थायी मेटाइ माग गर्दछ। यो मात्र प्रयोग गर्नुहोस् जब पुन: प्राप्ति आवश्यक नभएको छ र तपाईंले रिटेन्सन/पर्ज-प्रोटेक्शन नीतिहरू बुझ्नुभएको छ। यसले तत्काल कोटा मुक्ते गराउने सुनिश्चितता दिन्छ भन्ने छैन।
 
-      ![प्रारम्भिक](../../../../../translated_images/ne/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      र यहाँ यो **पछि**:
-      ![नयाँ](../../../../../translated_images/ne/14-deploy-new.f7f3c355a3cf7299.webp)
+1. सफाइ जाँच गर्न पुन: परिनियोजन गर्नुहोस् भने नरहनुहोस्। पछि इच्छित `azd up` ले बाँकी स्थानीय इनपुटहरू प्रयोग गरी स्रोतहरू पुनः सिर्जना गर्न सक्छ र पुनः शुल्क लाग्छ। मोडेल अपडेटहरू सामान्य रूपमा समर्थित प्रावधान परिवर्तनों प्रयोग गर्छन्, विघटन होइन।
 
 ---
 

@@ -1,784 +1,239 @@
-# Решение для розничной торговли с несколькими агентами - Шаблон инфраструктуры
+# Инфраструктурный каркас для розничной многоагентной системы
 
-**Глава 5: Пакет для развертывания в продакшене**
-- **📚 Главная страница курса**: [AZD для начинающих](../../README.md)
-- **📖 Связанная глава**: [Глава 5: Сложные решения с несколькими агентами AI](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 Руководство по сценарию**: [Полная архитектура](../retail-scenario.md)
-- **🎯 Быстрое развертывание**: [Однокликовое развертывание](../../../../examples/retail-multiagent-arm-template)
+**Продвинутый пример архитектуры — не функционирующее многоагентное приложение.**
 
-> **⚠️ ТОЛЬКО ШАБЛОН ИНФРАСТРУКТУРЫ**  
-> Этот ARM-шаблон развертывает **ресурсы Azure** для системы с несколькими агентами.  
->  
-> **Что развернется (15-25 минут):**
-> - ✅ Сервисы Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings в 3 регионах)
-> - ✅ Сервис AI Search (пустой, готов к созданию индекса)
-> - ✅ Приложения контейнеров (зависимые образы-заглушки, готовые для вашего кода)
-> - ✅ Хранилище, Cosmos DB, Key Vault, Application Insights
->  
-> **Что НЕ включено (требуется разработка):**
-> - ❌ Код реализации агентов (Customer Agent, Inventory Agent)
-> - ❌ Логика маршрутизации и API-конечные точки
-> - ❌ Фронтенд чат-интерфейс
-> - ❌ Схемы индексов поиска и конвейеры данных
-> - ❌ **Оценочное время разработки: 80-120 часов**
->  
-> **Используйте этот шаблон если:**
-> - ✅ Хотите развернуть инфраструктуру Azure для проекта с несколькими агентами
-> - ✅ Планируете разработку реализации агентов отдельно
-> - ✅ Нужна инфраструктурная база, готовая к продакшену
->  
-> **Не используйте если:**
-> - ❌ Ожидаете сразу готовое демо с несколькими агентами
-> - ❌ Ищете примеры полного кода приложений
+[Главная курса](../../README.md) ·
+[Глава 5](../../docs/chapter-05-multi-agent/README.md) ·
+[Чертеж архитектуры](../retail-scenario.md)
 
-## Обзор
+## Что разворачивается
 
-Этот каталог содержит полный шаблон Azure Resource Manager (ARM) для развертывания **фундамента инфраструктуры** системы поддержки клиентов с несколькими агентами. Шаблон создает все необходимые сервисы Azure, настроенные и связные, готовые для разработки вашего приложения.
+Этот каталог содержит ARM-шаблон, параметры и скрипт развертывания Bash.
+Источник **`azure.yaml` или розничного приложения отсутствует**.
 
-**После развертывания у вас будет:** Инфраструктура Azure, готовая к продакшену  
-**Чтобы завершить систему, вам потребуется:** Код агентов, фронтенд UI и настройка данных (см. [Руководство по архитектуре](../retail-scenario.md))
+| Ресурс | Фактическое состояние после предоставления |
+|---|---|
+| Основная учётная запись Azure OpenAI | Развёртывание `gpt-4.1-chat` с использованием версии `gpt-4.1` `2025-04-14`, `GlobalStandard` |
+| Вспомогательная учётная запись OpenAI (опционально) | `gpt-4.1-mini-inventory`, модель `gpt-4.1-mini` версия `2025-04-14`, `GlobalStandard` |
+| Учётная запись для эмбеддингов (опционально) | `text-embedding-ada-002` версия `2`, `Standard`; конвейер индексирования отсутствует |
+| Учётная запись Grader OpenAI | `gpt-4.1-grader`, модель `gpt-4.1` версия `2025-04-14`, `GlobalStandard`; оценщик отсутствует |
+| AI Search | Пустой сервис; индекс и документы отсутствуют |
+| Хранилище | Пустые контейнеры блобов `documents` и `uploads` |
+| Cosmos DB | Безсерверная учётная запись, база данных `chathistory`, контейнер `conversations`, разбитый по разделу `/userId`, TTL элементов 30 дней |
+| Container Apps | Маршрутизатор и фронтенд оба работают на `mcr.microsoft.com/azuredocs/containerapps-helloworld:latest` на порту 80 |
+| Key Vault (опционально) | Пустой хранилище с включённым RBAC; **нет секретов или назначений ролей** |
+| Application Insights / Log Analytics (опционально) | Ресурсы и сбор журналов среды; отсутствует пользовательская инструментализация приложения, оповещения или панели управления |
+| Document Intelligence | Учётная запись S0; рабочий процесс обработки документов отсутствует |
 
-## 🎯 Что развертывается
+Легаси версия Bing Search v7 была снята с поддержки 11 августа 2025 года и **не предоставляется**.
+Замена для интеграции с веб-поиском не реализована.
 
-### Основная инфраструктура (состояние после развертывания)
+**Не включено:** агенты клиента/инвентаря, API маршрутизатора `/chat`, пользовательский интерфейс чата на фронтенде,
+схема поиска или скрипты загрузки, Azure Container Registry, приватные конечные точки,
+управляемые идентичности, назначения RBAC, автоматическое переключение, Front Door, сканер красной команды,
+CLI для оценки, аутентификация или CI/CD.
 
-✅ **Сервисы Microsoft Foundry Models** (Готовы к API вызовам)
-  - Основной регион: развертывание gpt-4.1 (мощность 20K TPM)
-  - Вторичный регион: развертывание gpt-4.1-mini (мощность 10K TPM)
-  - Третичный регион: модель текстовых эмбеддингов (30K TPM)
-  - Регион оценки: модель gpt-4.1 grader (15K TPM)
-  - **Статус:** Полностью функционирует - можно вызывать API сразу
+Сообщение об успешном выполнении ARM подтверждает только создание ресурсов. Оно не гарантирует
+функциональность приложения, безопасность, доступность или готовность к производству.
 
-✅ **Azure AI Search** (Пустой - готов к настройке)
-  - Включены возможности векторного поиска
-  - Стандартный тариф с 1 разбиением и 1 репликой
-  - **Статус:** Сервис запущен, требуется создание индекса
-  - **Действие:** Создайте индекс поиска со своей схемой
+## Предварительные требования и стоимость
 
-✅ **Аккаунт Azure Storage** (Пустой - готов для загрузок)
-  - Blob контейнеры: `documents`, `uploads`
-  - Безопасная конфигурация (только HTTPS, без публичного доступа)
-  - **Статус:** Готов принимать файлы
-  - **Действие:** Загрузите ваши данные о продуктах и документы
-
-⚠️ **Среда контейнерных приложений** (Развернуты образы-заглушки)
-  - Приложение маршрутизатора агентов (стандартный образ nginx)
-  - Фронтенд приложение (стандартный образ nginx)
-  - Автомасштабирование настроено (0-10 экземпляров)
-  - **Статус:** Запущены контейнеры-заглушки
-  - **Действие:** Создайте и разверните ваши агентские приложения
-
-✅ **Azure Cosmos DB** (Пустой - готов для данных)
-  - Настроена база данных и контейнер
-  - Оптимизирован для операций с низкой задержкой
-  - Включен TTL для автоматической очистки
-  - **Статус:** Готов хранить историю чатов
-
-✅ **Azure Key Vault** (Опционально - готов для секретов)
-  - Включено мягкое удаление
-  - Конфигурация RBAC для управляемых идентичностей
-  - **Статус:** Готов хранить API-ключи и строки подключения
-
-✅ **Application Insights** (Опционально - мониторинг активен)
-  - Подключен к рабочей области Log Analytics
-  - Настроены пользовательские метрики и оповещения
-  - **Статус:** Готов принимать телеметрию от приложений
-
-✅ **Document Intelligence** (Готов для API вызовов)
-  - Тариф S0 для продакшен-нагрузок
-  - **Статус:** Готов обрабатывать загруженные документы
-
-✅ **Bing Search API** (Готов для API вызовов)
-  - Тариф S1 для поиска в реальном времени
-  - **Статус:** Готов к веб-поисковым запросам
-
-### Режимы развертывания
-
-| Режим | Мощность OpenAI | Экземпляры контейнеров | Тариф поиска | Избыточность хранилища | Лучшее применение |
-|-------|-----------------|-----------------------|--------------|-----------------------|-------------------|
-| **Минимальный** | 10K-20K TPM | 0-2 реплики | Basic | LRS (локальная) | Разработка/тестирование, обучение, proof-of-concept |
-| **Стандартный** | 30K-60K TPM | 2-5 реплик | Стандарт | ZRS (зональная) | Продакшен, умеренный трафик (<10K пользователей) |
-| **Премиум** | 80K-150K TPM | 5-10 реплик, зонально-избыточные | Премиум | GRS (гео-избыточность) | Корпоративный, высокий трафик (>10K пользователей), 99,99% SLA |
-
-**Влияние на стоимость:**
-- **Минимальный → Стандартный:** увеличение стоимости примерно в 4 раза ($100-370/мес → $420-1,450/мес)
-- **Стандартный → Премиум:** увеличение стоимости примерно в 3 раза ($420-1,450/мес → $1,150-3,500/мес)
-- **Выбор зависит от:** ожидаемой нагрузки, требований SLA, бюджета
-
-**Планирование мощности:**
-- **TPM (Токенов в минуту):** Суммарно по всем развернутым моделям
-- **Экземпляры контейнеров:** Диапазон автомасштабирования (минимум-максимум реплик)
-- **Тариф поиска:** Влияет на производительность запросов и ограничения по размеру индекса
-
-## 📋 Требования
-
-### Необходимые инструменты
-1. **Azure CLI** (версия 2.50.0 или выше)
-   ```bash
-   az --version  # Проверить версию
-   az login      # Аутентификация
-   ```
-
-2. **Активная подписка Azure** с правами владельца или участника
-   ```bash
-   az account show  # Проверить подписку
-   ```
-
-### Требуемые квоты Azure
-
-Перед развертыванием проверьте достаточность квот в целевых регионах:
+- Bash (Git Bash/WSL в Windows) и
+  [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- Подписка с правами на создание всех перечисленных ресурсов.
+- Проверьте доступность **каждой модели/версии/SKU в каждом выбранном регионе** и
+  квоту для вашей подписки. Значения по умолчанию приведены для примера и не гарантируют наличие.
+  Обратитесь к [доступности моделей](https://learn.microsoft.com/azure/ai-services/openai/concepts/models).
+- Выберите выделенную группу ресурсов, которую сможете удалить после тестирования.
 
 ```bash
-# Проверьте доступность Microsoft Foundry моделей в вашем регионе
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --location eastus2
-
-# Проверьте квоту OpenAI (пример для gpt-4.1)
-az cognitiveservices usage list \
-  --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
-
-# Проверьте квоту Container Apps
-az provider show \
-  --namespace Microsoft.App \
-  --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
+az version
+az login
+az account show --query "{subscription:id,name:name}" -o table
+az cognitiveservices usage list --location eastus2 -o table
 ```
 
-**Минимально необходимые квоты:**
-- **Microsoft Foundry Models:** 3-4 развертывания моделей по регионам
-  - gpt-4.1: 20K TPM (токенов в минуту)
-  - gpt-4.1-mini: 10K TPM
-  - text-embedding-ada-002: 30K TPM
-  - **Примечание:** gpt-4.1 может требовать лист ожидания в некоторых регионах - проверяйте [доступность моделей](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- **Container Apps:** Управляемая среда + 2-10 экземпляров контейнеров
-- **AI Search:** Стандартный уровень (Basic недостаточен для векторного поиска)
-- **Cosmos DB:** Стандартный пропуск пропускной способности
+Значения по умолчанию для локаций: основная `eastus2`, вторичная `westus2`, для эмбеддингов `francecentral`;
+grader по умолчанию работает в основном регионе, если не указан `graderLocation`.
+`--no-multi-region` пропускает вторичные и эмбеддинг-учётные записи; он не пропускает учётную запись
+для grader.
 
-**Если квот недостаточно:**
-1. Перейдите в портал Azure → Квоты → Запросить увеличение
-2. Или используйте Azure CLI:
-   ```bash
-   az support tickets create \
-     --ticket-name "OpenAI-Quota-Increase" \
-     --severity "minimal" \
-     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
-   ```
-3. Рассмотрите альтернативные регионы с доступностью
+За службу поиска взимается плата во время её присутствия, даже если она пустая. Минимальное количество реплик
+контейнеров, избыточность хранения, запросы/хранение Cosmos DB, токены модели, вызовы Document Intelligence
+и хранение/загрузка журналов могут увеличить расходы. Нет **фиксированной или утверждённой
+ежемесячной суммы**. Оцените точные SKU в
+[калькуляторе цен Azure](https://azure.microsoft.com/pricing/calculator/) и
+настройте бюджет перед развёртыванием.
+
+### Режимы развёртывания
+
+Эти настройки определяют размеры ресурсов, **а не производственные или SLA-сертификаты**:
+
+| Режим | Единицы мощности чата / мини / встраивания / оценщика | Копии роутера | Копии фронтенда | Уровень поиска | Хранение |
+|---|---|---|---|---|---|
+| минимальный | 10 / 10 / 20 / 5 | 0–3 | 1–2 | базовый, 1 копия | Standard_LRS |
+| стандартный | 20 / 15 / 30 / 15 | 1–3 | 1–2 | стандартный, 1 копия | Standard_ZRS |
+| премиум | 40 / 30 / 60 / 30 | 1–10 | 1–5 | standard2, 2 копии | Standard_GRS |
+
+Единицы мощности модели специфичны для модели/SKU; не суммируйте их как универсальную гарантию TPM.
+Премиум не включает зонально-избыточные Container Apps: для этого требуется
+дополнительное проектирование сети. Базовый поиск поддерживает векторный поиск, с учетом
+ограничений сервиса; он не является по своей сути несовместимым с векторами.
 
 ## 🚀 Быстрое развертывание
 
-### Вариант 1: Использование Azure CLI
+Сначала ознакомьтесь с `azuredeploy.json` и `azuredeploy.parameters.json`. Команды
+ниже **создают оплачиваемые ресурсы Azure**; это не оффлайн-проверки.
+
+Из корня репозитория:
 
 ```bash
-# Клонировать или скачать файлы шаблона
-git clone <repository-url>
 cd examples/retail-multiagent-arm-template
-
-# Сделать скрипт развертывания исполняемым
-chmod +x deploy.sh
-
-# Развернуть с настройками по умолчанию
-./deploy.sh -g myResourceGroup
-
-# Развернуть в производственной среде с премиальными функциями
-./deploy.sh -g myProdRG -e prod -m premium -l eastus2
+bash deploy.sh --help
+bash deploy.sh -g retail-learning-rg -m minimal --no-multi-region
 ```
 
-### Вариант 2: Использование портала Azure
+Скрипт использует пути относительно своей директории, проверяет вход/инструменты/аргументы,
+создает группу ресурсов, если её нет, проверяет развертывание, выделяет ресурсы и
+показывает неопубликованные результаты. Не требуется и не выполняется `jq`, заполнение данными, получение секретов или
+настройка приложения после развертывания.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
-
-### Вариант 3: Прямое использование Azure CLI
+Значения командной строки по умолчанию скрипта переопределяют соответствующие значения в
+файле параметров. Измените файл параметров для настроек, таких как вторичные/третичные
+регионы; используйте прямое развертывание CLI, если нужны произвольные переопределения параметров:
 
 ```bash
-# Создать группу ресурсов
-az group create --name myResourceGroup --location eastus2
-
-# Развернуть шаблон
+az group create --name retail-learning-rg --location eastus2
 az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file azuredeploy.json \
-  --parameters azuredeploy.parameters.json
-```
-
-## ⏱️ Временная шкала развертывания
-
-### Чего ожидать
-
-| Фаза | Продолжительность | Что происходит |
-|-------|------------------|---------------||
-| **Проверка шаблона** | 30-60 секунд | Azure проверяет синтаксис и параметры ARM шаблона |
-| **Создание группы ресурсов** | 10-20 секунд | Создает группу ресурсов (если нужно) |
-| **Provisioning OpenAI** | 5-8 минут | Создает 3-4 аккаунта OpenAI и развертывает модели |
-| **Контейнерные приложения** | 3-5 минут | Создаёт среду и развертывает контейнеры-заглушки |
-| **Поиск и хранилище** | 2-4 минуты | Прокладывает сервис AI Search и аккаунты хранения |
-| **Cosmos DB** | 2-3 минуты | Создает базу и настраивает контейнеры |
-| **Настройка мониторинга** | 2-3 минуты | Настраивает Application Insights и Log Analytics |
-| **Настройка RBAC** | 1-2 минуты | Конфигурирует управляемые идентичности и права |
-| **Общее время** | **15-25 минут** | Полная готовая инфраструктура |
-
-**После развертывания:**
-- ✅ **Инфраструктура готова:** Все сервисы Azure созданы и работают
-- ⏱️ **Разработка приложения:** 80-120 часов (ваша ответственность)
-- ⏱️ **Настройка индексов:** 15-30 минут (требуется ваша схема)
-- ⏱️ **Загрузка данных:** зависит от объема данных
-- ⏱️ **Тестирование и валидация:** 2-4 часа
-
----
-
-## ✅ Проверка успешности развертывания
-
-### Шаг 1: Проверка создания ресурсов (2 минуты)
-
-```bash
-# Проверьте, что все ресурсы развернуты успешно
-az resource list \
-  --resource-group myResourceGroup \
-  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
-  --output table
-```
-
-**Ожидается:** Пустая таблица (все ресурсы имеют статус "Succeeded")
-
-### Шаг 2: Проверка развертываний Microsoft Foundry Models (3 минуты)
-
-```bash
-# Перечислить все аккаунты OpenAI
-az cognitiveservices account list \
-  --resource-group myResourceGroup \
-  --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
-  --output table
-
-# Проверить развертывания моделей для основного региона
-OPENAI_NAME=$(az cognitiveservices account list \
-  --resource-group myResourceGroup \
-  --query "[?kind=='OpenAI'] | [0].name" -o tsv)
-
-az cognitiveservices account deployment list \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --output table
-```
-
-**Ожидается:** 
-- 3-4 аккаунта OpenAI (основной, вторичный, третичный, регион оценки)
-- 1-2 развертывания моделей на аккаунт (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
-
-### Шаг 3: Тестирование конечных точек инфраструктуры (5 минут)
-
-```bash
-# Получить URL-адреса контейнерного приложения
-az containerapp list \
-  --resource-group myResourceGroup \
-  --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
-  --output table
-
-# Тестировать конечную точку маршрутизатора (ответит заглушка изображения)
-ROUTER_URL=$(az containerapp show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --query "properties.configuration.ingress.fqdn" -o tsv)
-
-echo "Testing: https://$ROUTER_URL"
-curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expected)"
-```
-
-**Ожидается:** 
-- Приложения контейнеров показывают статус "Running"
-- Заглушка nginx отвечает HTTP 200 или 404 (код приложения отсутствует)
-
-### Шаг 4: Проверка доступа к API Microsoft Foundry Models (3 минуты)
-
-```bash
-# Получить конечную точку и ключ OpenAI
-OPENAI_ENDPOINT=$(az cognitiveservices account show \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --query "properties.endpoint" -o tsv)
-
-OPENAI_KEY=$(az cognitiveservices account keys list \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --query "key1" -o tsv)
-
-# Тест развертывания gpt-4.1
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
-  -H "Content-Type: application/json" \
-  -H "api-key: $OPENAI_KEY" \
-  -d '{
-    "messages": [{"role": "user", "content": "Say hello"}],
-    "max_tokens": 10
-  }'
-```
-
-**Ожидается:** JSON ответ с завершением чата (подтверждает работоспособность OpenAI)
-
-### Работает vs Не работает
-
-**✅ Работает после развертывания:**
-- Развернуты модели Microsoft Foundry Models и доступ по API
-- Запущен сервис AI Search (пустой, без индексов)
-- Запущены контейнерные приложения (образы nginx-заглушки)
-- Доступны аккаунты хранения и готовы к загрузкам
-- Cosmos DB готов к операциям с данными
-- Application Insights собирает телеметрию инфраструктуры
-- Key Vault готов к хранению секретов
-
-**❌ Еще не работает (требуется разработка):**
-- Конечные точки агентов (код приложения не развернут)
-- Функция чата (требуется фронтенд + бэкенд)
-- Поисковые запросы (индекс поиска не создан)
-- Обработка документов (данные не загружены)
-- Пользовательская телеметрия (требуется инструментирование)
-
-**Следующие шаги:** смотрите [Конфигурация после развертывания](../../../../examples/retail-multiagent-arm-template) для разработки и развертывания вашего приложения
-
----
-
-## ⚙️ Опции конфигурации
-
-### Параметры шаблона
-
-| Параметр | Тип | Значение по умолчанию | Описание |
-|----------|-----|-----------------------|----------|
-| `projectName` | string | "retail" | Префикс для всех имен ресурсов |
-| `location` | string | Расположение группы ресурсов | Основной регион развертывания |
-| `secondaryLocation` | string | "westus2" | Вторичный регион для мульти-регионального развертывания |
-| `tertiaryLocation` | string | "francecentral" | Регион для модели эмбеддингов |
-| `environmentName` | string | "dev" | Название окружения (dev/staging/prod) |
-| `deploymentMode` | string | "standard" | Конфигурация развертывания (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | Включить мульти-региональное развертывание |
-| `enableMonitoring` | bool | true | Включить Application Insights и логирование |
-| `enableSecurity` | bool | true | Включить Key Vault и расширенную безопасность |
-
-### Настройка параметров
-
-Отредактируйте `azuredeploy.parameters.json`:
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "projectName": {
-      "value": "mycompany"
-    },
-    "environmentName": {
-      "value": "prod"
-    },
-    "deploymentMode": {
-      "value": "premium"
-    },
-    "location": {
-      "value": "eastus2"
-    }
-  }
-}
-```
-
-## 🏗️ Обзор архитектуры
-
-```mermaid
-graph TD
-    Frontend[Фронтенд<br/>Контейнерное приложение] --> Router[Маршрутизатор агента<br/>Контейнерное приложение] --> Agents[Агенты<br/>Клиенты + Инв]
-    Router --> Search[ИИ Поиск<br/>Векторная БД]
-    Router --> Models[Модели Microsoft Foundry<br/>Мульти-регион]
-    Agents --> Storage[Хранилище<br/>Документы]
-    Search --> CosmosDB[Cosmos DB<br/>История чата]
-    Models --> AppInsights[App Insights<br/>Мониторинг]
-    Storage --> KeyVault[Key Vault<br/>Секреты]
-```
-## 📖 Использование скрипта развертывания
-
-Скрипт `deploy.sh` предоставляет интерактивный опыт развертывания:
-
-```bash
-# Показать помощь
-./deploy.sh --help
-
-# Базовое развертывание
-./deploy.sh -g myResourceGroup
-
-# Расширенное развертывание с пользовательскими настройками
-./deploy.sh \
-  -g myProductionRG \
-  -p companyname \
-  -e prod \
-  -m premium \
-  -l eastus2
-
-# Развертывание для разработки без мульти-регионов
-./deploy.sh \
-  -g myDevRG \
-  -e dev \
-  -m minimal \
-  --no-multi-region \
-  --no-security
-```
-
-### Особенности скрипта
-
-- ✅ **Проверка предварительных требований** (Azure CLI, статус входа, файлы шаблона)
-- ✅ **Управление группой ресурсов** (создает, если не существует)
-- ✅ **Валидация шаблона** перед развертыванием
-- ✅ **Отслеживание прогресса** с цветным выводом
-- ✅ **Отображение выходных данных развертывания**
-- ✅ **Руководство по действиям после развертывания**
-
-## 📊 Мониторинг развертывания
-
-### Проверка состояния развертывания
-
-```bash
-# Список развертываний
-az deployment group list --resource-group myResourceGroup --output table
-
-# Получить детали развертывания
-az deployment group show \
-  --resource-group myResourceGroup \
-  --name retail-deployment-YYYYMMDD-HHMMSS
-
-# Отслеживать прогресс развертывания
-az deployment group create \
-  --resource-group myResourceGroup \
+  --resource-group retail-learning-rg \
+  --name retail-learning \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json \
-  --verbose
+  --parameters projectName=retail environmentName=dev \
+    deploymentMode=minimal enableMultiRegion=false
 ```
 
-### Выходные данные после развертывания
+Процесс выделения ресурсов может занять 15–45 минут или больше, и может не удаться из-за региональных квот или
+ограничений жизненного цикла модели. Не повторяйте слепо: сначала изучите ошибку операции.
 
-После успешного развертывания доступны следующие выходные данные:
+## Опции конфигурации
 
-- **URL фронтенда**: Публичный адрес веб-интерфейса
-- **URL маршрутизатора**: API-конечная точка для маршрутизатора агентов
-- **OpenAI endpoints**: Основной и вторичный сервисы OpenAI
-- **Search Service**: Адрес сервиса Azure AI Search
-- **Аккаунт хранения**: Имя аккаунта для документов
-- **Key Vault**: Имя Key Vault (если включен)
-- **Application Insights**: Имя сервиса мониторинга (если включен)
+| Параметр | Значение по умолчанию в шаблоне | Значение |
+|---|---|---|
+| `projectName` | Обязательно (`retail` в файле параметров) | 3–10 строчных букв/цифр |
+| `location` | Местоположение группы ресурсов | Основной регион (`eastus2` в файле параметров) |
+| `secondaryLocation` | `westus2` | Регион аккаунта мини-модели |
+| `tertiaryLocation` | `francecentral` | Регион аккаунта встраиваний |
+| `graderLocation` | Основной регион | Регион аккаунта независимого оценщика |
+| `environmentName` | `dev` | `dev`, `staging`, или `prod`; только имя, не переключатель усиления |
+| `deploymentMode` | `standard` | Выбор SKU/мощности |
+| `enableMultiRegion` | `true` | Добавить вторичные и аккаунты встраивания |
+| `enableMonitoring` | `true` | Добавить Insights/рабочее пространство и сбор логов окружения |
+| `enableSecurity` | `true` | Создать пустое RBAC-включенное хранилище только |
 
-## 🔧 После развертывания: Следующие шаги
-> **📝 Важно:** Инфраструктура развернута, но вам нужно разработать и развернуть код приложения.
+Введённый в заблуждение параметр `openAiApiVersion` был удален: версия API плоскости данных
+не контролирует версии ARM ресурсов или модели. Пары имя/версия модели
+находятся в `variables.modelDeployments`; проверьте их вместе с SKU развертывания.
 
-### Фаза 1: Разработка приложений агентов (Ваша ответственность)
+## Проверка подготовки
 
-ARM-шаблон создает **пустые Container Apps** с заглушечными образами nginx. Вам необходимо:
-
-**Требуемая разработка:**
-1. **Реализация агента** (30-40 часов)
-   - Агент службы поддержки с интеграцией gpt-4.1
-   - Агент инвентаризации с интеграцией gpt-4.1-mini
-   - Логика маршрутизации агентов
-
-2. **Разработка frontend** (20-30 часов)
-   - UI чат-интерфейса (React/Vue/Angular)
-   - Функция загрузки файлов
-   - Отображение и форматирование ответов
-
-3. **Backend-сервисы** (12-16 часов)
-   - FastAPI или роутер Express
-   - Middleware для аутентификации
-   - Интеграция телеметрии
-
-**См.:** [Руководство по архитектуре](../retail-scenario.md) для детальных шаблонов реализации и примеров кода
-
-### Фаза 2: Настройка индекса поиска AI (15-30 минут)
-
-Создайте индекс поиска, соответствующий вашей модели данных:
+Используйте имя развертывания из вывода скрипта или `az deployment group list`.
+Для прямого развертывания выше:
 
 ```bash
-# Получить сведения о сервисе поиска
-SEARCH_NAME=$(az search service list \
-  --resource-group myResourceGroup \
-  --query "[0].name" -o tsv)
-
-SEARCH_KEY=$(az search admin-key show \
-  --service-name $SEARCH_NAME \
-  --resource-group myResourceGroup \
-  --query "primaryKey" -o tsv)
-
-# Создать индекс с вашей схемой (пример)
-curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
-  -H "Content-Type: application/json" \
-  -H "api-key: ${SEARCH_KEY}" \
-  -d '{
-    "name": "products",
-    "fields": [
-      {"name": "id", "type": "Edm.String", "key": true},
-      {"name": "title", "type": "Edm.String", "searchable": true},
-      {"name": "content", "type": "Edm.String", "searchable": true},
-      {"name": "category", "type": "Edm.String", "filterable": true},
-      {"name": "content_vector", "type": "Collection(Edm.Single)", 
-       "searchable": true, "dimensions": 1536, "vectorSearchProfile": "default"}
-    ],
-    "vectorSearch": {
-      "algorithms": [{"name": "default", "kind": "hnsw"}],
-      "profiles": [{"name": "default", "algorithm": "default"}]
-    }
-  }'
+RG=retail-learning-rg
+DEPLOYMENT=retail-learning
+az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.provisioningState -o tsv
+az deployment operation group list -g "$RG" -n "$DEPLOYMENT" -o table
+az resource list -g "$RG" -o table
 ```
 
-**Ресурсы:**
-- [Проектирование схемы индекса поиска AI](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [Настройка векторного поиска](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+Ожидается: состояние развертывания `Succeeded`. В случае ошибки проверьте подробности ошибки операции.
+Вывод списка ресурсов сам по себе не является надежной проверкой состояния подготовки.
 
-### Фаза 3: Загрузка ваших данных (Время зависит от объема)
-
-Когда у вас появятся данные о продуктах и документы:
+Тестируйте заполнитель **root**, а не несуществующую конечную точку агента:
 
 ```bash
-# Получить детали учетной записи хранения
-STORAGE_NAME=$(az storage account list \
-  --resource-group myResourceGroup \
-  --query "[0].name" -o tsv)
-
-STORAGE_KEY=$(az storage account keys list \
-  --account-name $STORAGE_NAME \
-  --resource-group myResourceGroup \
-  --query "[0].value" -o tsv)
-
-# Загрузите ваши документы
-az storage blob upload-batch \
-  --destination documents \
-  --source /path/to/your/product/docs \
-  --account-name $STORAGE_NAME \
-  --account-key $STORAGE_KEY
-
-# Пример: Загрузить один файл
-az storage blob upload \
-  --container-name documents \
-  --name "product-manual.pdf" \
-  --file /path/to/product-manual.pdf \
-  --account-name $STORAGE_NAME \
-  --account-key $STORAGE_KEY
+ROUTER_URL=$(az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.outputs.routerUrl.value -o tsv)
+curl --fail-with-body "$ROUTER_URL"
 ```
 
-### Фаза 4: Сборка и развертывание ваших приложений (8-12 часов)
+Ожидается: HTTP 200 страница hello-world, **а не ответ чата**. HTTP-ошибка
+не считается успешной проверкой.
 
-После разработки кода агентов:
+Чтобы протестировать фактическое инференс основного первичного модели (платный):
 
 ```bash
-# 1. Создать Azure Container Registry (если необходимо)
-az acr create \
-  --name myregistry \
-  --resource-group myResourceGroup \
-  --sku Basic
-
-# 2. Собрать и отправить образ маршрутизатора агента
-docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
-az acr login --name myregistry
-docker push myregistry.azurecr.io/agent-router:v1
-
-# 3. Собрать и отправить образ фронтенда
-docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
-docker push myregistry.azurecr.io/frontend:v1
-
-# 4. Обновить Container Apps с вашими образами
-az containerapp update \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/agent-router:v1
-
-az containerapp update \
-  --name retail-frontend \
-  --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/frontend:v1
-
-# 5. Настроить переменные окружения
-az containerapp update \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --set-env-vars \
-    OPENAI_ENDPOINT=secretref:openai-endpoint \
-    OPENAI_KEY=secretref:openai-key \
-    SEARCH_ENDPOINT=secretref:search-endpoint \
-    SEARCH_KEY=secretref:search-key
+OPENAI_ENDPOINT=$(az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.outputs.openAiEndpointPrimary.value -o tsv)
+OPENAI_NAME=$(az cognitiveservices account list -g "$RG" \
+  --query "[?kind=='OpenAI' && contains(name, '-openai-primary-')].name | [0]" -o tsv)
+OPENAI_KEY=$(az cognitiveservices account keys list -g "$RG" -n "$OPENAI_NAME" \
+  --query key1 -o tsv)
+curl --fail-with-body \
+  "${OPENAI_ENDPOINT%/}/openai/deployments/gpt-4.1-chat/chat/completions?api-version=2024-10-21" \
+  -H "Content-Type: application/json" -H "api-key: $OPENAI_KEY" \
+  -d '{"messages":[{"role":"user","content":"Say hello"}],"max_tokens":20}'
+unset OPENAI_KEY
 ```
 
-### Фаза 5: Тестирование вашего приложения (2-4 часа)
+Ожидается: JSON с `choices` и `usage`. Имя развертывания —
+`gpt-4.1-chat`, а не имя базовой модели `gpt-4.1`.
+
+## 🔧 После развертывания: следующие шаги
+
+Это **рабочий список разработки**, а не готовое упражнение:
+
+1. Реализовать аутентификацию агентов клиентов/инвентаризации и контракт маршрутизатора.
+2. Реализовать frontend и проверить его конфигурацию.
+3. Создать и заполнить индекс поиска с размерностью/профилем,
+   соответствующим вашей модели эмбеддинга, а также обработать сбои в документах и обновления.
+4. Создать реестр и настроить идентификацию/разрешения для загрузки образов.
+5. Создать и отправить реальные образы. Измените порты ingress Container App и проверочные запросы,
+   чтобы они соответствовали этим образам перед тестированием; порт 80 здесь принадлежит заполнителям.
+6. Настроить секреты или управляемые идентичности и роли с областью действия данных.
+   Не используйте вымышленные имена секретов: этот шаблон не создает секретов приложения.
+7. Инструментировать приложения, настроить оповещения, тестировать сбои/восстановление и оценивать
+   результаты с использованием репрезентативной эталонной информации и проверки человеком.
+
+См. [архитектурный чертеж](../retail-scenario.md) для проектных границ.
+
+## Устранение неполадок и границы безопасности
+
+- **Модель недоступна:** проверьте модель/версию/SKU, регион и квоту подписки;
+  скрипт не проверяет каталоги моделей.
+- **Мониторинг отключен:** место назначения журнала окружения — `none`, а не неверная пустая конфигурация Log Analytics.
+
+- **Только заполнители:** `/chat`, оценка агента и загрузка файлов отсутствуют.
+- **Сеть/идентичность:** включены публичные конечные точки и локальная аутентификация.
+  Простое включение RBAC для Key Vault не создает назначения ролей или идентичности.
+- **Производство:** добавьте аутентификацию, идентичности с областью действия, управление секретами,
+  частную сеть, где необходимо, проектирование высокой доступности и операционные тесты.
+  Мультирегиональные учетные записи моделей сами по себе не обеспечивают отказоустойчивость.
+
+## Очистка
+
+Здесь нет проекта AZD; `azd down` — это не команда очистки.
+После проверки, что в группе находятся только ваши учебные ресурсы:
 
 ```bash
-# Получите URL вашего приложения
-ROUTER_URL=$(az containerapp show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --query "properties.configuration.ingress.fqdn" -o tsv)
-
-# Тестовая конечная точка агента (после развертывания вашего кода)
-curl -X POST "https://${ROUTER_URL}/chat" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "message": "Hello, I need help with my order",
-    "agent": "customer"
-  }'
-
-# Проверьте журналы приложения
-az containerapp logs show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --follow
+az group delete --name retail-learning-rg --yes
+az group exists --name retail-learning-rg
 ```
 
-### Ресурсы для реализации
+Ожидается после окончания удаления: `false`. Ресурсы Key Vault и Cognitive Services,
+помещенные в мягкое удаление, могут сохранять имена; для полного удаления требуются соответствующие разрешения.
+Проверьте Cost Management на наличие отложенных начислений за использование.
 
-**Архитектура и дизайн:**
-- 📖 [Полное руководство по архитектуре](../retail-scenario.md) — подробные шаблоны реализации
-- 📖 [Шаблоны дизайна мультиагентных систем](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
-
-**Примеры кода:**
-- 🔗 [Пример чата на Microsoft Foundry Models](https://github.com/Azure-Samples/azure-search-openai-demo) — паттерн RAG
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) — фреймворк агентов (C#)
-- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) — оркестрация агентов (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) — мультиягентные диалоги
-
-**Оценка общего времени:**
-- Развертывание инфраструктуры: 15-25 минут (✅ Завершено)
-- Разработка приложения: 80-120 часов (🔨 Ваша работа)
-- Тестирование и оптимизация: 15-25 часов (🔨 Ваша работа)
-
-## 🛠️ Устранение неполадок
-
-### Общие проблемы
-
-#### 1. Превышена квота Microsoft Foundry Models
-
-```bash
-# Проверить текущее использование квоты
-az cognitiveservices usage list --location eastus2
-
-# Запросить увеличение квоты
-az support tickets create \
-  --ticket-name "OpenAI-Quota-Increase" \
-  --severity "minimal" \
-  --description "Request quota increase for Microsoft Foundry Models in region X"
-```
-
-#### 2. Не удалось развернуть Container Apps
-
-```bash
-# Проверить логи контейнерного приложения
-az containerapp logs show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --follow
-
-# Перезапустить контейнерное приложение
-az containerapp revision restart \
-  --name retail-router \
-  --resource-group myResourceGroup
-```
-
-#### 3. Инициализация сервиса поиска
-
-```bash
-# Проверить состояние службы поиска
-az search service show \
-  --name <search-service-name> \
-  --resource-group myResourceGroup
-
-# Проверить подключение к службе поиска
-curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
-  -H "api-key: <search-admin-key>"
-```
-
-### Проверка развертывания
-
-```bash
-# Проверить создание всех ресурсов
-az resource list \
-  --resource-group myResourceGroup \
-  --output table
-
-# Проверить состояние ресурса
-az resource list \
-  --resource-group myResourceGroup \
-  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
-  --output table
-```
-
-## 🔐 Вопросы безопасности
-
-### Управление ключами
-- Все секреты хранятся в Azure Key Vault (если включено)
-- Container Apps используют управляемую идентичность для аутентификации
-- Аккаунты хранения настроены с безопасными параметрами (только HTTPS, без публичного доступа к blob)
-
-### Безопасность сети
-- Container Apps по возможности используют внутренние сети
-- Сервис поиска настроен с опцией приватных конечных точек
-- Cosmos DB настроен с минимально необходимыми правами
-
-### Настройка RBAC
-```bash
-# Назначьте необходимые роли для управляемой идентичности
-az role assignment create \
-  --assignee <container-app-managed-identity> \
-  --role "Cognitive Services OpenAI User" \
-  --scope <openai-resource-id>
-```
-
-## 💰 Оптимизация затрат
-
-### Оценка затрат (в месяц, USD)
-
-| Режим    | OpenAI   | Container Apps | Search  | Storage | Общая оценка |
-|----------|----------|----------------|---------|---------|--------------|
-| Минимальный | $50-200 | $20-50         | $25-100 | $5-20   | $100-370     |
-| Стандартный | $200-800 | $100-300       | $100-300| $20-50  | $420-1450    |
-| Премиум    | $500-2000| $300-800       | $300-600| $50-100 | $1150-3500   |
-
-### Мониторинг затрат
-
-```bash
-# Настроить оповещения о бюджете
-az consumption budget create \
-  --account-name <subscription-id> \
-  --budget-name "retail-budget" \
-  --amount 500 \
-  --time-grain Monthly \
-  --start-date 2024-01-01 \
-  --end-date 2024-12-31
-```
-
-## 🔄 Обновления и сопровождение
-
-### Обновления шаблона
-- Версионирование файлов ARM-шаблона
-- Сначала тестировать изменения в dev-среде
-- Использовать режим инкрементного развертывания для обновлений
-
-### Обновления ресурсов
-```bash
-# Обновить с новыми параметрами
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file azuredeploy.json \
-  --parameters azuredeploy.parameters.json \
-  --mode Incremental
-```
-
-### Резервное копирование и восстановление
-- Включено автоматическое резервное копирование Cosmos DB
-- Включено мягкое удаление в Key Vault
-- Поддерживаются ревизии Container Apps для отката
-
-## 📞 Поддержка
-
-- **Проблемы с шаблоном:** [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Поддержка Azure:** [Портал поддержки Azure](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **Сообщество:** [Azure AI Discord](https://discord.gg/microsoft-azure)
-
----
-
-**⚡ Готовы развернуть ваше мультиягентное решение?**
-
-Начните с: `./deploy.sh -g myResourceGroup`
+[Сообщить о проблеме](https://github.com/microsoft/AZD-for-beginners/issues) ·
+[Azure AI Search](https://learn.microsoft.com/azure/search/) ·
+[Container Apps](https://learn.microsoft.com/azure/container-apps/)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Отказ от ответственности**:  
-Этот документ был переведен с помощью AI-сервиса перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Несмотря на наши усилия обеспечить точность, просим учитывать, что автоматический перевод может содержать ошибки или неточности. Оригинальный документ на исходном языке следует считать достоверным и авторитетным источником. Для получения критически важной информации рекомендуется использовать профессиональный перевод, выполненный человеком. Мы не несем ответственности за любые недоразумения или неверные толкования, возникшие в результате использования данного перевода.
+**Отказ от ответственности**:
+Этот документ был переведен с использованием сервиса машинного перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Несмотря на наши усилия по обеспечению точности, имейте в виду, что автоматический перевод может содержать ошибки или неточности. Оригинальный документ на его исходном языке следует считать авторитетным источником. Для получения критически важной информации рекомендуется обратиться к профессиональному человеческому переводу. Мы не несем ответственности за любые недоразумения или неправильные толкования, возникшие в результате использования этого перевода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

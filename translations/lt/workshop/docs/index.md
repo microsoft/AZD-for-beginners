@@ -1,77 +1,77 @@
-# AZD dirbtinio intelekto kūrėjams dirbtuvės
+# AZD AI kūrėjams dirbtuvės
 
-> Patikrinta su `azd 1.27.1` 2026 m. liepos mėn.
+> Šaltinio gairės peržiūrėtos pagal AZD 1.37.2 2026 m. lapkričio 4 d. Ekrano kopijos yra iliustracinės; paslaugų prieinamumas, portalo etiketės ir šablonų numatytoji reikšmė gali keistis.
 
 > [!IMPORTANT]  
-> **Šios dirbtuvių metu naudojamas dirbtuvių vadovas, kurį galite peržiūrėti savo vietiniame naršyklės lange. Norėdami pradėti, atidarykite repo GitHub Codespaces, kūrimo konteineryje arba vietiniame klone su įdiegta MkDocs — tada palaukite, kol pamatysite aktyvų VS Code terminalą ir įveskite:**  
-> `mkdocs serve > /dev/null 2>&1 &`  
-> **Turėtumėte pamatyti iššokantį dialogą, siūlantį atidaryti peržiūros puslapį naršyklėje.**
+> **Šios dirbtuvės instrumentuotos su dirbtuvių vadovu, kurį galite peržiūrėti savo vietiniame naršyklėje. Norėdami pradėti, atidarykite saugyklą GitHub Codespaces, kūrėjo konteineryje arba vietinėje klonuotoje versijoje su įdiegta MkDocs—tada palaukite, kol pamatysite aktyvų VS Code terminalą ir įveskite:**  
+> Iš kurso saugyklos šaknies įdiekite `requirements-dev.txt`, tada vykdykite `python -m mkdocs serve --config-file workshop/mkdocs.yml` pirmame plane.
+> **Turėtumėte pamatyti iškylančiąją dialogo langą, kuriame galite atidaryti peržiūros puslapį naršyklėje.**
 
-Sveiki atvykę į praktines dirbtuves apie Azure Developer CLI (AZD), orientuotas į dirbtinio intelekto programų diegimą. Šios dirbtuvės padės jums įgyti praktinių žinių apie AZD šablonus 3 žingsniais:
+Sveiki atvykę į praktines dirbtuves, skirtas mokytis Azure Developer CLI (AZD) su dėmesiu AI programų diegimui. Šios dirbtuvės padės jums įgyti taikomą supratimą apie AZD šablonus per 3 žingsnius:
 
-1. **Atranka** - raskite sau tinkamą šabloną.
-1. **Diegimas** - įdiekite ir patikrinkite, ar veikia
-1. **Priešinimas** - modifikuokite ir tobulinkite pagal save!
+1. **Atranka** - raskite jums tinkamą šabloną.
+1. **Diegimas** - įdiekite ir patikrinkite, ar veikia.
+1. **Priderinimas** - modifikuokite ir iteruokite, kad jis taptų jūsų!
 
-Per šias dirbtuves taip pat susipažinsite su pagrindiniais kūrėjų įrankiais ir darbo eigomis, kurios padės jums supaprastinti visą kūrimo procesą nuo pradžios iki pabaigos.
+Per šių dirbtuvių laikotarpį taip pat susipažinsite su pagrindiniais kūrėjo įrankiais ir darbo eiga, kurie padės supaprastinti jūsų viso kūrimo proceso kelią.
 
 | | | 
 |:---|:---|
-| **📚 Kurso pradžia**| [AZD Pradedantiesiems](../README.md)|
-| **📖 Dokumentacija** | [Pradėkite dirbti su DI šablonais](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️DI Šablonai** | [Microsoft Foundry Šablonai](https://ai.azure.com/templates) |
-|**🚀 Kiti žingsniai** | [Imkitės Iššūkio](#workshop-challenge) |
+| **📚 Kurso Pagrindinis**| [AZD Pradedantiesiems](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md)|
+| **📖 Dokumentacija** | [Pradėkite su AI šablonais](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI Šablonai** | [Microsoft Foundry Šablonai](https://ai.azure.com/templates) |
+|**🚀 Tolimesni Žingsniai** | [Imkitės Iššūkio](instructions/7-Wrap-up.md#4-workshop-challenge) |
 | | |
 
-## Dirbtuvių peržvalga
+## Dirbtuvių Apžvalga
 
 **Trukmė:** 3-4 valandos  
-**Lygis:** Pradedantysis iki vidutinio  
-**Išankstinės sąlygos:** Susipažinimas su Azure, DI koncepcijomis, VS Code ir komandų eilutės įrankiais.
+**Lygis:** Nuo pradedančiųjų iki vidutinio  
+**Išankstinės sąlygos:** Susipažinimas su Azure, AI sąvokomis, VS Code ir komandinės eilutės įrankiais.
 
-Tai praktinės dirbtuvės, kuriose mokotės darydami. Baigę pratimus rekomenduojame peržiūrėti AZD Pradedantiesiems programą, kad tęstumėte mokymąsi apie saugumo ir produktyvumo gerąsias praktikas.
+Tai praktinės dirbtuvės, kuriose mokotės veikdami. Baigę pratimus, rekomenduojame peržiūrėti AZD Pradedantiesiems programą, kad tęstumėte mokymosi kelią į saugumo ir produktyvumo gerąsias praktikas.
 
 | Laikas| Modulis  | Tikslas |
 |:---|:---|:---|
-| 15 min | Įvadas | Nustatyti pagrindus, suprasti tikslus |
-| 30 min | Pasirinkti DI šabloną | Išnagrinėti galimybes ir pasirinkti pradžios tašką | 
-| 30 min | Patvirtinti DI šabloną | Įdiegti numatytą sprendimą į Azure |
-| 30 min | Išanalizuoti DI šabloną | Išnagrinėti struktūrą ir konfigūraciją |
-| 30 min | Konfigūruoti DI šabloną | Aktyvuoti ir išbandyti prieinamas funkcijas |
-| 30 min | Pritaikyti DI šabloną | Priderinti šabloną pagal savo poreikius |
-| 30 min | Nutraukti infrastruktūrą | Išvalyti ir atlaisvinti resursus |
-| 15 min | Apibendrinimas ir kiti žingsniai | Mokymosi ištekliai, dirbtuvių iššūkis |
+| 15 min | Įvadas | Nustatyti sceną, suprasti tikslus |
+| 30 min | Pasirinkti AI Šabloną | Ištirti variantus ir pasirinkti pradinį | 
+| 30 min | Patvirtinti AI Šabloną | Įdiegti numatytą sprendimą Azure |
+| 30 min | Išnagrinėti AI Šabloną | Ištyrinėti struktūrą ir konfigūraciją |
+| 30 min | Konfigūruoti AI Šabloną | Aktyvuoti ir išbandyti galimas funkcijas |
+| 30 min | Priderinti AI Šabloną | Priderinti šabloną pagal savo poreikius |
+| 30 min | Pašalinti Infrastrukturą | Išvalyti ir išlaisvinti išteklius |
+| 15 min | Apibendrinimas & Tolimesni Žingsniai | Mokymosi ištekliai, dirbtuvių iššūkis |
 | | |
 
-## Ko išmoksite
+## Ką Išmoksite
 
-Žiūrėkite į AZD šabloną kaip į mokymosi smėlio dėžę, kurioje galite tyrinėti įvairias Microsoft Foundry įrankių ir galimybių pabaigos iki pabaigos kūrimo kontekste. Baigę šias dirbtuves, turėtumėte turėti intuityvų supratimą apie įvairius įrankius ir koncepcijas šioje srityje.
+Galvokite apie AZD Šabloną kaip apie mokymosi smėlio dėžę, kurioje galite išbandyti įvairias galimybes ir įrankius viso kūrimo proceso metu Microsoft Foundry. Po šių dirbtuvių turėtumėte intuityviai suprasti įvairius įrankius ir sąvokas šiame kontekste.
 
-| Koncepcija  | Tikslas |
+| Sąvoka  | Tikslas |
 |:---|:---|
-| **Azure Developer CLI** | Suprasti įrankio komandas ir darbo eigas|
+| **Azure Developer CLI** | Suprasti įrankių komandas ir darbo eigą|
 | **AZD Šablonai**| Suprasti projekto struktūrą ir konfigūraciją|
-| **Azure DI agentas**| Įdiegti ir diegti Microsoft Foundry projektą  |
-| **Azure DI paieška**| Įgalinti kontekstinę inžineriją su agentais |
-| **Stebėjimas**| Tyrinėti sekimą, monitoringą ir vertinimus |
-| **Raudonųjų komandų testai**| Tyrinėti priešiškų testavimų ir rizikų mažinimą |
+| **Azure AI Agentas**| Teikti ir diegti Microsoft Foundry projektą  |
+| **Azure AI Paieška**| Įgalinti kontekstinę inžineriją su agentais |
+| **Stebėjimas**| Ištirti sekimą, stebėjimą ir vertinimus |
+| **Raudonųjų komandų testavimas**| Ištirti priešininko testavimą ir prevencijas |
 | | |
 
-## Dirbtuvių moduliai
+## Dirbtuvių Moduliai
 
-Pasiruošę pradėti? Pereikite prie dirbtuvių modulių:
+Pasirengę pradėti? Naršykite per dirbtuvių modulius:
 
-- [1 modulis: Pasirinkite DI šabloną](instructions/1-Select-AI-Template.md)
-- [2 modulis: Patvirtinkite DI šabloną](instructions/2-Validate-AI-Template.md) 
-- [3 modulis: Išanalizuokite DI šabloną](instructions/3-Deconstruct-AI-Template.md)
-- [4 modulis: Konfigūruokite DI šabloną](instructions/4-Configure-AI-Template.md)
-- [5 modulis: Pritaikykite DI šabloną](instructions/5-Customize-AI-Template.md)
-- [6 modulis: Nutraukite infrastruktūrą](instructions/6-Teardown-Infrastructure.md)
-- [7 modulis: Apibendrinimas ir kiti žingsniai](instructions/7-Wrap-up.md)
+- [1 modulis: Pasirinkti AI Šabloną](instructions/1-Select-AI-Template.md)
+- [2 modulis: Patvirtinti AI Šabloną](instructions/2-Validate-AI-Template.md) 
+- [3 modulis: Išnagrinėti AI Šabloną](instructions/3-Deconstruct-AI-Template.md)
+- [4 modulis: Konfigūruoti AI Šabloną](instructions/4-Configure-AI-Template.md)
+- [5 modulis: Priderinti AI Šabloną](instructions/5-Customize-AI-Template.md)
+- [6 modulis: Pašalinti Infrastrukturą](instructions/6-Teardown-Infrastructure.md)
+- [7 modulis: Apibendrinimas & Tolimesni Žingsniai](instructions/7-Wrap-up.md)
 
 ## Turite atsiliepimų?
 
-Praneškite apie problemą šiame repo (pažymėkite jį `Workshop`) arba prisijunkite prie mūsų per [Discord](https://aka.ms/foundry/discord) ir rašykite kanale `#get-help`
+Parašykite problemą šioje saugykloje (pažymėkite `Workshop`) arba prisijunkite prie mūsų [Discord](https://aka.ms/foundry/discord) ir paskelbkite mūsų `#get-help` kanale
 
 ---
 

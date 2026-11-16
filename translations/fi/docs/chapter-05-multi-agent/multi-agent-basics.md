@@ -1,237 +1,246 @@
-# Moni-agenttijärjestelmän perusteet – Ota käyttöön ensimmäinen koordinoitu tekoälyjärjestelmäsi
+# Moniagenttijärjestelmän perusteet - Ota käyttöön ensimmäinen koordinoitu tekoälyjärjestelmäsi
 
-**Luvun navigointi:**
-- **📚 Kurssin aloitus**: [AZD aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 5 – Moni-agenttinen tekoälyratkaisu
+**Lukuvalikko:**
+- **📚 Kurssin kotisivu**: [AZD aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 5 - Moniagenttiset tekoälyratkaisut
 - **⬅️ Edellinen**: [Luku 4: Infrastruktuuri](../chapter-04-infrastructure/README.md)
 - **➡️ Seuraava**: [Koordinointimallit](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Vahvistettu `azd 1.27.1`:llä heinäkuussa 2026.
+> Komentojen ohjeistus tarkistettu julkaistuun `azd 1.37.2`-viitteeseen nähden. Pilvipalveluihin kohdistuvia käyttöönottoja ei suoritettu.
 
 ## Johdanto
 
-Aiemmissa luvuissa otit käyttöön yhden sovelluksen – ja luvussa 2 otit käyttöön yhden tekoälyagentin. Tässä oppitunnissa siirrytään seuraavaan vaiheeseen: otetaan käyttöön **moni-agenttijärjestelmä**, jossa useat erikoistuneet agentit työskentelevät yhdessä ratkaistakseen ongelman, jota yksittäinen agentti ei pystyisi hyvin hoitamaan yksin.
+Aiemmissa luvuissa otit käyttöön yhden sovelluksen — ja luvussa 2 otit käyttöön yhden tekoälyagentin. Tämä oppitunti vie askeleen pidemmälle: moniagenttijärjestelmän käyttöönottoon, jossa useat erikoistuneet agentit työskentelevät yhdessä ratkaistakseen ongelman, jota yksittäinen agentti ei voisi hyvin itse ratkaista.
 
-Hyvä uutinen aloittelijoille: **sinun ei tarvitse uusia komentoja.** Moni-agenttiratkaisu on silti azd-projekti. Suoritat `azd init`, `azd up`, testaat ja `azd down` – juuri samalla työnkululla, jonka jo tunnet. Muuttuu vain sovelluksen *muoto* sisällä.
+Hyvä uutinen aloittelijoille: **et tarvitse uusia komentoja.** Moniagenttiratkaisu on edelleen azd-projekti. Sinä `azd init`, `azd up`, testaat ja `azd down` — juuri se työprosessi, jonka jo tunnet. Muuttuu vain sovelluksen *rakenne* sisällä.
 
 ## Oppimistavoitteet
 
-Oppitunnin lopuksi osaat:
-- Ymmärtää mitä "moni-agentti" tarkoittaa ja milloin se on lisäkomplikaation arvoinen
-- Tunnistaa yleiset roolit moni-agenttijärjestelmässä (orkestroija + erikoistuneet)
-- Ottaa käyttöön toimivan moni-agenttipohjan `azd up` -komennolla
-- Ymmärtää Azure-resurssit, jotka tukevat moni-agenttisovellusta
-- Tietää miten varmennat, räätälöit ja puret ratkaisun turvallisesti
+Tämän oppitunnin jälkeen osaat:
+- Ymmärtää, mitä "moniagenttinen" tarkoittaa ja milloin lisäkompleksisuus kannattaa
+- Tunnistaa tavalliset roolit moniagenttijärjestelmässä (orkestroija + erikoisasiantuntijat)
+- Ottaa käyttöön toimivan moniagenttimallin `azd up` kanssa
+- Ymmärtää Azure-resurssit, jotka tukevat moniagenttisovellusta
+- Osata varmistaa, räätälöidä ja purkaa ratkaisu turvallisesti
 
-## Oppimisen tulokset
+## Oppimistulokset
 
-Oppitunnin jälkeen osaat:
-- Selittää eron yksittäisen agentin ja moni-agenttijärjestelmän välillä
-- Valita yksittäisen työkaluin varustetun agentin ja aidon moni-agenttisuunnittelun välillä
-- Ota moni-agenttipohja käyttöön ja testaa se kokonaan azd:llä
-- Tunnistaa missä kukin agentti toimii ja miten ne kommunikoivat
-- Siivota kaikki resurssit välttääksesi jatkuvat kustannukset
+Oppitunnin suorittamisen jälkeen osaat:
+- Selittää eron yksittäisen agentin ja moniagenttijärjestelmän välillä
+- Valita yksittäisen agentin työkalujen kera tai todellisen moniagenttisuunnittelun välillä
+- Ottaa käyttöön ja testata moniagenttimallin alusta loppuun azd:llä
+- Tunnistaa, missä kukin agentti toimii ja miten ne kommunikoivat keskenään
+- Siivota kaikki resurssit käyttöönottomaksujen välttämiseksi
 
 ---
 
-## Mikä on moni-agenttijärjestelmä?
+## Mikä on moniagenttijärjestelmä?
 
-Yksi tekoälyagentti on yksi malli tietojoukolla ja (vapaaehtoisesti) työkaluilla. Se toimii hyvin tarkoin rajatuissa tehtävissä. Mutta kun tehtävä kasvaa – tutkimuksesta kirjoittamiseen, sitten muokkaukseen ja tosiasioiden tarkistamiseen – kaiken sullominen yhteen kehotteeseen hidastaa agenttia, tekee siitä vähemmän luotettavan ja vaikeuttaa virheen etsimistä.
+Yksi tekoälyagentti on yksi malli, jolla on joukko ohjeita ja (valinnaisesti) joitain työkaluja. Se toimii hyvin keskittyneissä tehtävissä. Mutta kun tehtävä kasvaa — tutkimus, kirjoittaminen, muokkaus, faktantarkistus — kaiken sullominen yhteen kehotteeseen hidastaa agenttia, tekee siitä epäluotettavamman ja vaikeamman virheenkorjauksen kannalta.
 
-**Moni-agenttijärjestelmä** jakaa työn erikoistuneisiin osiin, joista kukin tekee yhden työn hyvin, orkestroijan koordinoimana:
+**Moniagenttijärjestelmä** jakaa työn erikoisasiantuntijoihin, jotka tekevät kukin hyvin oman tehtävänsä, ja orkestroijaan, joka koordinoi:
 
 ```mermaid
 graph TD
-    User([Käyttäjän pyyntö]) --> Orchestrator[Orkestroija-agentti<br/>Suunnittelee ja ohjaa työtä]
-    Orchestrator --> Researcher[Tutkija-agentti<br/>Kerää tietoja]
-    Orchestrator --> Writer[Kirjoittaja-agentti<br/>Laatii sisältöä]
-    Orchestrator --> Editor[Toimittaja-agentti<br/>Tarkistaa ja hioo]
+    User([User request]) --> Orchestrator[Orchestrator Agent<br/>Plans and routes the work]
+    Orchestrator --> Researcher[Researcher Agent<br/>Gathers facts]
+    Orchestrator --> Writer[Writer Agent<br/>Drafts content]
+    Orchestrator --> Editor[Editor Agent<br/>Reviews and refines]
     Researcher --> Orchestrator
     Writer --> Orchestrator
     Editor --> Orchestrator
-    Orchestrator --> Result([Lopullinen vastaus])
+    Orchestrator --> Result([Final answer])
 ```
 
 ### Kaksi roolia, jotka näet aina
 
-| Rooli | Työ | Esimerkki |
-|------|-----|---------|
-| **Orkestroija** | Päätää *mitä seuraavaksi tapahtuu* ja ohjaa työtä agenttien välillä | "Ensin tutkimus, sitten kirjoitus, lopuksi muokkaus" |
-| **Erikoistunut agentti** | Tekee yhden kohdennetun työn ja palauttaa tuloksen | Tutkija, joka kerää vain faktoja |
+| Rooli | Tehtävä | Esimerkki |
+|------|---------|-----------|
+| **Orkestroija** | Päätää *mitä seuraavaksi tapahtuu* ja ohjaa työtä agenttien välillä | "Ensiksi tutki, sitten kirjoita, lopuksi muokkaa" |
+| **Erikoisasiantuntija** | Tekee yhden keskittyneen työn ja palauttaa tuloksen | "Tutkija", joka vain kerää faktoja |
 
 ### Tarvitsetko oikeasti useita agentteja?
 
-Aloita yksinkertaisesti. Ryhdy moni-agentiksi **vain** kun jokin näistä pätee:
+Aloita yksinkertaisesti. Moniagenttinen ratkaisu **vain silloin**, kun jokin seuraavista toteutuu:
 
-- ✅ Tehtävässä on **selvät vaiheet**, jotka hyötyvät erilaisista ohjeista (tutkimus vs. kirjoitus vs. tarkastus)
-- ✅ Haluat, että erikoistuneet agentit toimivat **samanaikaisesti** säästääksesi aikaa
-- ✅ Eri vaiheissa tarvitaan **erilaisia työkaluja tai tietolähteitä**
+- ✅ Tehtävässä on **selkeät vaiheet**, jotka hyötyvät erilaisista ohjeista (tutkimus vs. kirjoitus vs. tarkastus)
+- ✅ Haluat, että erikoisasiantuntijat toimivat **samanaikaisesti** ajan säästämiseksi
+- ✅ Vaiheissa tarvitaan **eri työkaluja tai tietolähteitä**
 - ✅ Jokaisen vaiheen pitää olla **itsenäisesti testattavissa ja virheenkorjattavissa**
 
-Jos tehtävä on yksinkertainen kysymys-vastaus tai yksinkertainen työkalukutsu, **yksi agentti työkaluineen** (Luku 2) on yksinkertaisempi, edullisempi ja helpompi ottaa käyttöön.
+Jos tehtävä on yksinkertainen kysymys-vastaus tai yksinkertainen työkalukutsu, **yksi agentti työkalujen kanssa** (luku 2) on yksinkertaisempi, halvempi ja helpompi käyttää.
 
-> **Aloittelijan vinkki:** "Enemmän agenteja" ei tarkoita "parempaa". Jokainen agentti lisää viivettä, kustannuksia ja valvottavan kokonaisuuden. Lisää agentteja vain, kun ongelma selvästi jakautuu osiin.
-
----
-
-## Kaksi tapaa rakentaa moni-agentti Azureen
-
-| Lähestymistapa | Mitä se on | Parhaiten soveltuva |
-|----------|-----------|----------|
-| **Yksi agentti + työkalut** | Yksi Foundry-agentti, joka kutsuu funktioita/työkaluja | Yksinkertaiset työnkulut, aloittelu |
-| **Useat koordinoidut agentit** | Useita agentteja orkestroijan kanssa | Selkeät vaiheet, samanaikainen työ, erikoistuminen |
-
-Tämä oppitunti keskittyy toiseen lähestymistapaan käyttämällä **valmista pohjaa**, jotta voit nähdä toimivan moni-agenttijärjestelmän ennen oman rakentamista.
+> **Aloittelijan vinkki:** "Enemmän agentteja" ei ole "parempi". Jokainen agentti lisää viivettä, kustannuksia ja uuden seurattavan asian. Lisää agentteja vain, kun ongelma jakautuu selvästi osiin.
 
 ---
 
-## Käytännössä: Ota käyttöön toimiva moni-agenttisovellus
+## Kaksi tapaa rakentaa moniagenttijärjestelmä Azuren päälle
 
-Otamme käyttöön **Contoso Creative Writer** -esimerkin, joka on virallinen Azure-esimerkki, jossa useat agentit (tutkija, kirjoittaja, muokkaaja) työskentelevät yhdessä tuottaakseen artikkelin. Se on erinomainen ensimmäinen moni-agenttisovellus, koska roolit ovat helppo ymmärtää.
+| Lähestymistapa | Mikä se on | Parhaiten soveltuva käyttöön |
+|-------------|------------|---------------------|
+| **Yksi agentti + työkalut** | Yksi Foundry-agentti, joka kutsuu funktioita/työkaluja | Yksinkertaiset työnkulut, aloittamiseen |
+| **Useita koordinoituja agentteja** | Useita agenteja orkestroijan kanssa | Eri vaiheet, rinnakkaistyö, erikoistuminen |
 
-### Vaihe 1: Alusta pohja
+Tämä oppitunti keskittyy toiseen lähestymistapaan käyttäen **valmista mallia**, jotta voit nähdä oikean moniagenttijärjestelmän toiminnassa ennen oman rakentamista.
+
+---
+
+## Käytännössä: Ota käyttöön toimiva moniagenttisovellus
+
+Otamme käyttöön **Contoso Creative Writerin**, virallisen Azuren esimerkin, joka koordinoi tutkimus-, tuote-, kirjoitus- ja muokkausagentit artikkelin tuottamiseksi. Ennen etenemistä tarkista [esimerkin edellytykset ja kustannukset](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): se tarvitsee mallivolyymin, Azure AI Searchin, Bing Grounding -käytön, Pythonin, Dockerin ja Bash-yhteensopivat koukut. Mallin ja alueen saatavuus riippuvat tilauksestasi; käyttöönottoa ei taata valitsemalla tiettyä aluetta.
+
+### Vaihe 1: Alusta malli
 
 ```bash
-# Luo työskentelykansio
+# Create a working folder
 mkdir creative-writer && cd creative-writer
 
-# Alusta virallisesta moni-agenttipohjasta
-azd init --template contoso-creative-writer
+# Initialize from the official multi-agent template
+azd init --template Azure-Samples/contoso-creative-writer .
 ```
 
-> Selaa lisää moni-agenttipohjia milloin tahansa [Awesome AZD AI -galleriassa](https://azure.github.io/awesome-azd/?tags=ai). Muita helposti aloitetettavia vaihtoehtoja ovat mm. `get-started-with-ai-agents` ja `azure-ai-travel-agents`.
+> Selaa lisää moniagenttimalleja milloin tahansa [Awesome AZD AI galleryssä](https://azure.github.io/awesome-azd/?tags=ai). Muut aloittelijaystävälliset vaihtoehdot sisältävät `get-started-with-ai-agents` ja `azure-ai-travel-agents`.
 
 ### Vaihe 2: Todennus
 
 ```bash
-# Vaaditaan azd-työnkuluille
+# Required for azd workflows
 azd auth login
+
+# Also required by this sample's Azure CLI hooks
+az login
 ```
 
-### Vaihe 3: Luo ympäristö
+### Vaihe 3: Tarkista ympäristö
 
 ```bash
-azd env new dev
+# init normally creates/selects an environment; confirm it before proceeding
+azd env list
+# Only if you need an additional environment:
+# azd env new dev
 ```
 
-### Vaihe 4: Esikatselu ja käyttöönotto
+### Vaihe 4: Esikatselu, sitten käyttöönotto
 
 ```bash
-# Katso mitä luodaan ennen kuin kulutat mitään (suositeltu)
+# See what will be created before spending anything (recommended)
 azd provision --preview
 
-# Tarjoa infrastruktuuri ja ota kaikki agentit käyttöön yhdessä vaiheessa
+# Provision infrastructure and deploy all agents in one step
 azd up
 ```
 
-`azd up` pyytää tilauksen ja alueen, sitten provisionaa Azure-resurssit ja ottaa sovelluksen käyttöön. Tekoälyn käyttöönotot voivat kestää pidempään kuin yksinkertaisen web-sovelluksen – jos otat käyttöön suurempia malleja, voit pidentää käyttöönoton aikakatkaisua:
+`azd up` pyytää puuttuvat tilaus- ja aluetiedot, sitten provisioi resurssit ja ottaa sovelluksen käyttöön. Esikatselu ei varaa volyymia eikä takaa onnistumista; mallin koukut voivat edelleen suorittaa provisiointiesikatselun aikana, joten tarkista ne ensin. Pidentääksesi aikaa, jonka azd odottaa kunkin **palvelun käyttöönottoa** (ei mallin provisiointia):
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Huomio kustannuksista ja kapasiteetista:** Moni-agenttisovellukset ottavat käyttöön tekoälymalleja, jotka kuluttavat kiintiötä ja aiheuttavat kustannuksia. Jos `azd up` epäonnistuu mallikiintiön takia, katso [AI-vianetsintä](../chapter-07-troubleshooting/ai-troubleshooting.md) alue- ja kiintiökorjauksia varten sekä luku 6 [Kapsiteettisuunnittelu](../chapter-06-pre-deployment/capacity-planning.md).
+Aikakatkaisu pysäyttää azdin odottamisen; se ei peruuta käyttöönottoa Azureen. Tarkista resurssin tila ennen uudelleenyritystä.
+
+> **Huomio kustannuksista ja kapasiteetista:** Moniagenttisovellukset ottavat käyttöön tekoälymalleja, jotka kuluttavat volyymia ja aiheuttavat kustannuksia. Jos `azd up` epäonnistuu mallin volyymin takia, katso [tekoälyn vianmääritys](../chapter-07-troubleshooting/ai-troubleshooting.md) alue- ja volyymikorjauksiin sekä luvusta 6 [Kapasiteettisuunnittelu](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Ymmärrä mitä otit käyttöön
+## Ymmärrä, mitä otit käyttöön
 
-Tämän kaltainen tyypillinen moni-agenttisovellus ottaa käyttöön joukon Azure-resursseja, jotka vastaavat suoraan yllä olevassa kaaviossa esitettyjä vastuuta:
+Tyypillinen moniagenttisovellus kuten tämä luo joukon Azure-resursseja, jotka vastaavat suoraan yllä olevan kaavion vastuualueita:
 
 | Resurssi | Miksi se on siellä |
-|----------|----------------|
-| **Microsoft Foundry / Mallit** | Isännöi kielimalleja, joita kukin agentti käyttää |
-| **Azure AI Search** | Antaa tutkija-agentille pohjautuvaa dataa haettavaksi |
-| **Container Apps** (tai App Service) | Isännöi orkestroijaa ja agenttikoodia |
-| **Cosmos DB** (joissain esimerkeissä) | Tallentaa jaetun tilan/muistin, jota agentit käyttävät |
-| **Application Insights** | Seuraa pyyntöjä *agenttien välillä* jotta voit virheenkorjata toimintaa |
+|----------|----------------------|
+| **Microsoft Foundry / Mallit** | Isännöi kunkin agentin käyttämät kielimallit |
+| **Azure AI Search** | Antaa tutkija-agentille maadoitetun datan haulle |
+| **Container Apps** (tai App Service) | Isännöi orkestroijan ja agenttien koodin |
+| **Cosmos DB** (joissain esimerkeissä) | Tallentaa jaettua tilaa/muistia, jota agentit käyttävät |
+| **Application Insights** | Seuraa pyyntöjä *agenttien välillä*, jotta voit virheenkorjata työnkulun |
 
 ### Miten agentit keskustelevat keskenään
 
-Useimmissa azd moni-agenttiesimerkeissä **orkestroija toimii sovelluskoodissasi** (esim. Semantic Kernel -kehystä tai Microsoft Agent Frameworkia käyttäen). Orkestroija kutsuu kukin erikoistuneen agentin vuorollaan, välittää tulokset eteenpäin ja kokoaa lopullisen vastauksen. Agentit jakavat kontekstin seuraavilla tavoilla:
+Useimmissa azd-monitagenttiesimerkeissä **orkestroija toimii sovelluskoodissasi** (esimerkiksi Semantic Kernelin tai Microsoft Agent Frameworkin kaltaisella kirjastolla). Orkestroija kutsuu kukin erikoisagentin vuorollaan, välittää tulokset eteenpäin ja kokoaa lopullisen vastauksen. Agentit jakavat kontekstia seuraavasti:
 
-- **Funktio-/työkalukutsut** — orkestroija kutsuu erikoistunutta agenttia ja saa tuloksen takaisin
-- **Jaettu muisti** — tietokanta (yleensä Cosmos DB) sisältää tilan, jota molemmat agentit voivat lukea
-- **Viesti-/tapahtumat** — löyhemmässä kytkennässä agentit kommunikoivat jonon tai Service Busin kautta
+- **Funktio-/työkalukutsut** — orkestroija kutsuu erikoisasiantuntijaa ja saanut tuloksen takaisin
+- **Jaettu muisti** — tietokanta (usein Cosmos DB) pitää yllä tilaa, jota molemmat agentit voivat lukea
+- **Viestit/tapahtumat** — löyhemmässä kytkennässä agentit kommunikoivat jonon tai Service Busin kautta
 
-> **Miksi tämä on tärkeää virheenkorjauksessa:** koska kukin vaihe on erillinen, Application Insights näyttää *mikä* agentti oli hidas tai epäonnistui. Tämä on tärkein syy jakaa työtä agenttien kesken.
+> **Miksi tämä on tärkeää virheenkorjauksessa:** koska jokainen vaihe on erillinen, Application Insights näyttää, *mikä* agentti oli hidas tai epäonnistui. Tämä on merkittävä syy työn jakamiseen agenttien kesken alun perinkin.
 
 ---
 
 ## Varmista käyttöönotto
 
-Varmista, että järjestelmä toimii ennen etenemistä:
+Varmista, että järjestelmä todella toimii ennen etenemistä:
 
 ```bash
-# Näytä käyttöönotetut päätepisteet
+# Show the deployed endpoints
 azd show
 
-# Avaa sovelluksen valvontapaneeli
+# Open the app's monitoring dashboard
 azd monitor
 
-# Seuraa lokeja, jos jokin vaikuttaa oudolta
+# Open Application Insights Logs (not a terminal log stream)
 azd monitor --logs
 ```
 
-Avaa sitten sovelluksen URL-osoite `azd show` -komennolla ja tee pyyntö, joka käyttää kaikkia agenteja (Creative Writerille pyydä kirjoittamaan lyhyt artikkeli aiheesta). Application Insightsin **transaction search** näyttää pyynnön jakautuvan tutkijan, kirjoittajan ja muokkaajan vaiheisiin.
+Avaa sitten sovelluksen URL osoitteesta `azd show` ja pyydä lyhyt artikkeli. Käytä esimerkin debug-näkymää tarkastellaksesi agentin työnkulkua. Application Insights -tapahtumahaku näyttää yksittäiset vaiheet vain, jos esimerkki kirjaa ja korreloi ne; azd ei automaattisesti lisää agentin aikajana-alueita.
 
-**Onnistumiskriteerit:**
+**Menestyskriteerit:**
 - ✅ `azd show` näyttää saavutettavan päätepisteen
-- ✅ Pyyntö tuottaa tuloksen, joka käy selvästi läpi useita vaiheita
-- ✅ Application Insights näyttää jäljitteen useammasta kuin yhdestä agenttivaiheesta
+- ✅ Pyyntö tuottaa tuloksen, joka selvästi kulki useiden vaiheiden läpi
+- ✅ Debug-näkymässä näkyy useita agenttivaiheita; jos jäljitys on päällä, varmista vastaava telemetria ingestoinnin jälkeen
 
 ---
 
-## Mukauta: Lisää tai säädä agenttia
+## Räätälöi: Lisää tai säädä agenttia
 
-Koska kukin agentti on pelkät ohjeet plus työkalut, muokkaaminen on lähestyttävää:
+Koska jokainen agentti on vain ohjeita plus työkaluja, räätälöinti on lähestyttävää:
 
-1. **Etsi agenttien määritelmät** pohjasta (usein kansiot `prompts/`, `agents/` tai tiedostot `*.prompty`).
-2. **Säädä agentin ohjeita** — esim. kerro muokkaajagentille, että sen pitää noudattaa tiettyä sävyä tai sanamäärää.
-3. **Ottaa vain koodi uudelleen käyttöön** (infrastruktuuri pysyy samana):
+1. **Etsi agenttien määritelmät** mallista (usein `prompts/`, `agents/` tai `*.prompty` tiedostoja).
+2. **Säädä agentin ohjeita** — esimerkiksi kerro muokkausagentille käyttää tiettyä tyyliä tai sanamäärää.
+3. **Ota käyttöön pelkkä koodi uudelleen** (infrastruktuuri pysyy samana):
 
    ```bash
    azd deploy
    ```
 
-Edetäksesi pidemmälle ja rakentaaksesi agenteja *omista* manifesteistasi, käytä agenttilaajennusta ja sen täyttä elinkaarta:
+Jos haluat edetä *oman* Foundry-agenttiprojektisi kanssa, käytä agenttien laajennuksen interaktiivista alustamista:
 
 ```bash
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
-azd ai agent invoke      # testi, vasteaikaan liittyen
+azd ai agent invoke      # test, with response timing
 ```
 
-Katso [luku 2: Agentit](../chapter-02-ai-development/agents.md) ja [AZD AI CLI -viite](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) täydelle agenttien elinkaarelle (`invoke`, `eval generate`, `optimize`, `delete`).
+Katso [Luku 2: Agentit](../chapter-02-ai-development/agents.md) ja [AZD AI CLI -viite](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) täydestä elinkaaresta: agenttien `invoke`, erillisen arvion laajennuksen `azd ai eval` työnkulku, agenttien `optimize` ja agenttien `delete`.
 
 ---
 
-## Siivoa
+## Siivous
 
-Moni-agenttijärjestelmät käyttävät useita laskutettavia palveluita. Pura kaikki, kun olet valmis:
+Moniagenttisovellukset käyttävät useita laskutettavia palveluita. Purka kaikki kun olet valmis:
 
 ```bash
-azd down --force --purge
+# Review the resources and confirm deletion interactively
+azd down
 ```
 
-`--purge`-lipuke poistaa myös pehmeästi poistetut tekoälyresurssit (kuten Foundry/Azure AI Services -tilit), jotta ne eivät estä tulevaa uudelleenkäyttöönottoa eivätkä pidä yllä kuluja.
+Poisto on tuhoava toimenpide. Kertakäyttöisessä laboratoriossa `azd down --force --purge` ohittaa poiston ja tuetut soft-delete-puhdistuksen vahvistukset; puhdistus on peruuttamaton, missä se on tuettu, ja purkuprotektio voi estää sen. Soft delete on palautus-/nimenkäyttöhuoli, ei itsessään merkki jatkuvista maksuista. Tarkista jäljellä olevat resurssit ja laskutus siivouksen jälkeen.
 
 ---
 
-## Huomautus tuotantotason moni-agenttijärjestelmistä
+## Huomio tuotantoympäristön moniagenttijärjestelmistä
 
-Tässä repossa oleva [Retail Multi-Agent Solution](../../examples/retail-scenario.md) on **arkkitehtuurimalli**, ei yhden komennon pohja – se dokumentoi, miten tuotantotason vähittäiskauppajärjestelmä *rakennettaisiin* (ja kertoo suoraan, että täydellinen toteutus on merkittävä projekti). Käytä sitä suunnittelun viitteenä *sen jälkeen*, kun olet ottanut täältä käyttöön toimivan esimerkin. Tuotantohuolissa (kestävyys, kustannukset, valvonta, hallinto) siirry edelleen lukuun 8: [Tuotantotason tekoälykäytännöt](../chapter-08-production/production-ai-practices.md).
+Tässä repossa oleva [Retail Multi-Agent Solution](../../examples/retail-scenario.md) on **arkkitehtuurisuunnitelma**, ei yhden komennon mallipohja — se dokumentoi, miten tuotannon vähittäismyyntijärjestelmä *voitaisiin* rakentaa (ja korostaa, että täydellinen rakentaminen on merkittävä ponnistus). Käytä sitä suunnittelun viitteenä *sen jälkeen*, kun olet ottanut käyttöön toimivan mallin täällä. Tuotantoon liittyvissä asioissa (joustavuus, kustannukset, valvonta, hallinnointi) siirry kohtaan [Luku 8: Tuotannon AI-käytännöt](../chapter-08-production/production-ai-practices.md).
 
 ---
 
 ## Yhteenveto
 
-- Moni-agenttijärjestelmä jakaa työn erikoistuneille agenteille orkestroijan johdolla.
-- Käytä sitä vain, kun tehtävällä on selviä vaiheita, rinnakkaisuutta tai eri työkaluja joka vaiheessa – muuten käytä yhtä agenttia.
-- azd:n työnkulku pysyy ennallaan: `azd init` → `azd up` → testaa → `azd down`.
-- Aito pohja kuten `contoso-creative-writer` näyttää toimivan moni-agenttisovelluksen tänään, ja voit muokata sitä.
-- Application Insightsin jäljitys agenttien välillä on yksi suurimmista käytännön hyödyistä moni-agenttisuunnittelussa.
+- Moniagenttijärjestelmä jakaa työn erikoistuneiden asiantuntijoiden kesken, joita koordinoi orkestroija.
+- Käytä sitä vain, kun tehtävällä on selkeät vaiheet, rinnakkaisuus tai eri työkalut kussakin vaiheessa—muuten mieluummin yksittäinen agentti.
+- Azd-työnkulku pysyy muuttumattomana: `azd init` → `azd up` → test → `azd down`.
+- Todellinen malli, kuten `contoso-creative-writer`, antaa sinun nähdä ja mukauttaa toimivan moniagenttisovelluksen jo tänään.
+- Application Insightsin jäljitys agenttien välillä on yksi moniagenttisuunnittelun suurimmista käytännön eduista.
 
 ---
 
@@ -242,12 +251,12 @@ Tässä repossa oleva [Retail Multi-Agent Solution](../../examples/retail-scenar
 | **Edellinen** | [Luku 4: Infrastruktuuri](../chapter-04-infrastructure/README.md) |
 | **Seuraava** | [Koordinointimallit](../chapter-06-pre-deployment/coordination-patterns.md) |
 
-## 📖 Aiheeseen liittyviä resursseja
+## 📖 Aiheeseen liittyvät resurssit
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
+- [AI-agenttien opas](../chapter-02-ai-development/agents.md)
 - [Koordinointimallit](../chapter-06-pre-deployment/coordination-patterns.md)
-- [Tuotantotason tekoälykäytännöt](../chapter-08-production/production-ai-practices.md)
-- [AI-vianetsintä](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Tuotannon AI-käytännöt](../chapter-08-production/production-ai-practices.md)
+- [AI-ongelmien ratkominen](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

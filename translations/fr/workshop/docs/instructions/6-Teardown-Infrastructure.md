@@ -2,30 +2,30 @@
 
 !!! tip "À LA FIN DE CE MODULE, VOUS SAUREZ"
 
-    - [ ] Comprendre l'importance du nettoyage des ressources et de la gestion des coûts
-    - [ ] Utiliser `azd down` pour déprovisionner l'infrastructure en toute sécurité
-    - [ ] Récupérer les services Azure AI supprimés en douce si nécessaire
-    - [ ] **Lab 6 :** Nettoyer les ressources Azure et vérifier leur suppression
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## Exercices Bonus
+## Exercices bonus
 
 Avant de démanteler le projet, prenez quelques minutes pour une exploration libre.
 
-!!! info "Essayez ces suggestions d'exploration"
+!!! info "Essayez ces pistes d'exploration"
 
-    **Expérimentez avec GitHub Copilot :**
+    **Experiment with GitHub Copilot:**
     
-    1. Demandez : `Quels autres modèles AZD pourrais-je essayer pour des scénarios multi-agents ?`
-    2. Demandez : `Comment puis-je personnaliser les instructions des agents pour un cas d'utilisation en santé ?`
-    3. Demandez : `Quelles variables d'environnement contrôlent l'optimisation des coûts ?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Explorez le portail Azure :**
+    **Explore the Azure Portal:**
     
-    1. Examinez les métriques Application Insights pour votre déploiement
-    2. Vérifiez l'analyse des coûts pour les ressources provisionnées
-    3. Explorez encore une fois le terrain de jeu des agents du portail Microsoft Foundry
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
@@ -34,27 +34,25 @@ Avant de démanteler le projet, prenez quelques minutes pour une exploration lib
 1. Démanteler l'infrastructure est aussi simple que :
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. L’option `--purge` garantit également la suppression définitive des ressources Cognitive Service supprimées en douce, ce qui libère les quotas détenus par ces ressources. Une fois terminé, vous verrez quelque chose comme ceci :
+1. Confirmez l'environnement sélectionné et examinez les ressources à supprimer. Cela supprime les ressources Azure et peut détruire les données. Conservez l'invite de confirmation pour ce workflow d'apprentissage. Une fois terminé, vous verrez une sortie similaire à :
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optionnel) Si vous lancez à nouveau `azd up`, vous remarquerez que le modèle gpt-4.1 est déployé puisque la variable d’environnement a été modifiée (et enregistrée) dans le dossier local `.azure`. 
+1. Vérifiez la suppression dans le portail et recherchez les ressources en dehors du périmètre du déploiement. Les rapports de coûts et les mises à jour des quotas peuvent être retardés. La configuration locale `.azure` reste en place sauf si vous la supprimez explicitement.
 
-      Voici les déploiements de modèle **avant** :
+1. `azd down --purge` demande également la suppression permanente des ressources supprimées de manière temporaire prises en charge. Utilisez-le uniquement si la récupération n'est pas nécessaire et si vous comprenez les politiques de rétention/protection contre la purge. Cela ne garantit pas la libération immédiate des quotas.
 
-      ![Initial](../../../../../translated_images/fr/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      Et voici **après** :
-      ![Nouveau](../../../../../translated_images/fr/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Ne redéployez pas juste pour vérifier le nettoyage. Un `azd up` intentionnel ultérieur peut recréer les ressources en utilisant les entrées locales restantes, ce qui engendre de nouveau des frais. Les mises à jour du modèle utilisent normalement des modifications de provisionnement prises en charge, pas un démantèlement.
 
 ---
 

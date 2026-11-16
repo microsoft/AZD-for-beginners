@@ -1,67 +1,67 @@
-# 7. Wrap-Up & Next Steps
+# 7. Muhtasari & Hatua Zifuatazo
 
-!!! tip "Mambo muhimu ya kukumbuka"
+!!! tip "UFAHAMU MKUU WA MAWAZO NI"
 
-    - [ ] templeti za AZD zinaharakisha maendeleo ya programu za AI kutoka siku hadi masaa
-    - [ ] Mbinu ya Discovery → Deployment → Customization hutoa njia ya kujifunza iliyopangwa
-    - [ ] GitHub Copilot pamoja na seva za MCP inaruhusu uchunguzi kwa lugha ya asili wa misombo ngumu ya msimbo
-    - [ ] Microsoft Foundry inatoa ufuatiliaji uliojengwa, tathmini, na upimaji wa usalama
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. Uliyofanikiwa
+## 1. Ulivyofanikiwa
 
 Hongera! Katika warsha hii, umefanikiwa:
 
-| Module | Accomplishment |
+| Sehemu | Mafanikio |
 |:---|:---|
-| **Module 1** | Umegundua Azure Developer CLI na kuchagua templeti ya AI |
-| **Module 2** | Ulipeleka na kuthibitisha suluhisho kamili la maajenti wa AI |
-| **Module 3** | Umetenganisha templeti ili kuelewa usanifu wake |
-| **Module 4** | Ulichunguza `azure.yaml` usanidi na lifecycle hooks |
-| **Module 5** | Ulibinafsisha templeti kwa hali yako mwenyewe |
-| **Module 6** | Umeondoa miundombinu kwa usalama na kusimamia rasilimali |
+| **Sehemu ya 1** | Ugundua Azure Developer CLI na kuchagua kiolezo cha AI |
+| **Sehemu ya 2** | Umeweka na kuthibitisha suluhisho kamili la maajenti wa AI |
+| **Sehemu ya 3** | Ulivunja kiolezo kuelewa usanifu wake |
+| **Sehemu ya 4** | Ulichunguza usanidi wa `azure.yaml` na vifungo vya mzunguko wa maisha |
+| **Sehemu ya 5** | Ulibadilisha kiolezo kwa hali yako mwenyewe |
+| **Sehemu ya 6** | Umetupa kwa usalama miundombinu na kusimamia rasilimali |
 
 ---
 
-## 2. Dhana Muhimu Uliyopata
+## 2. Mafundisho Muhimu Uliyoyajua
 
 ### Azure Developer CLI (azd)
-- `azd init` - Anzisha miradi kutoka kwa templeti
-- `azd up` - Tayarisha na upeleke kwa amri moja
-- `azd env` - Dhibiti vigezo vya mazingira
-- `azd down` - Ondoa rasilimali kwa usalama
+- `azd init` - Anzisha miradi kutoka kwa vitozo
+- `azd up` - Toa huduma na weka kwa amri moja
+- `azd env` - Simamia mabadiliko ya mazingira
+- `azd down` - Safisha rasilimali kwa usalama
 
-### AZD Template Structure
-- `azure.yaml` - Usanidi na hooks za upeleka
-- `infra/` - Bicep (miundombinu-kama-msimbo)
+### Muundo wa Kiolezo cha AZD
+- `azure.yaml` - Usanidi na vifungo vya uwasilishaji
+- `infra/` - Bicep infrastructure-as-code
 - `src/` - Msimbo wa chanzo wa programu
-- `scripts/` - Skiripti za otomatiki na za usanidi
+- `scripts/` - Skripti za kiotomatiki na za usanidi
 
-### Microsoft Foundry Capabilities
-- Huduma ya Maajenti ya AI kwa wasaidizi wenye akili
-- Utafutaji wa Faili na Azure AI Search kwa urejeshaji wa maarifa
-- Ufuatiliaji, uangalizi, na tathmini zilizojengwa ndani
+### Uwezo wa Microsoft Foundry
+- Huduma ya Maajenti wa AI kwa wasaidizi werevu
+- Tafutaji la Faili na Azure AI Search kwa utafutaji wa maarifa
+- Ufuatiliaji, uangalizi, na tathmini vilivyojengwa ndani
 - Red teaming kwa uthibitisho wa usalama wa AI
 
 ---
 
 ## 3. Endelea Safari Yako ya Kujifunza
 
-### Recommended Next Steps
+### Hatua Zilizopendekezwa Kufuatilia
 
-| Path | Resource | Time |
+| Njia | Rasilimali | Muda |
 |:---|:---|:---|
-| **Kozi Kamili** | [AZD for Beginners Curriculum](../../README.md) | 8-12 saa |
-| **Jaribu Templeti Nyingine** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 saa |
-| **Deep Dive** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Inayoendelea |
-| **Community** | [Azure Discord](https://aka.ms/foundry/discord) | Jiunge leo! |
+| **Kamilisha Kozi** | [AZD for Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Kujifunza kwa mtindo wa mwenyewe |
+| **Jaribu Kiolezo Kingine** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | Saa 1-2 |
+| **Tafiti Zaidi** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Inaendelea |
+| **Jumuiya** | [Azure Discord](https://aka.ms/foundry/discord) | Jiunge leo! |
 
-### Suggested Templates to Try Next
+### Vitozo Vilivyopendekezwa Kujaribu Ifuatayo
 
-1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Chat ya msingi na data yako
-2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Mifumo ya RAG ya juu
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Matukio ya rejareja ya kampuni
+1. **[Anza na AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Mazungumzo ya msingi na data yako
+2. **[Demonstration ya Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Mifumo ya juu ya RAG
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Hali za rejareja za biashara
 
 ---
 
@@ -69,42 +69,42 @@ Hongera! Katika warsha hii, umefanikiwa:
 
 Tayari kujaribu ujuzi wako? Jaribu changamoto hizi:
 
-| Challenge | Description | Difficulty |
+| Changamoto | Maelezo | Ugumu |
 |:---|:---|:---|
-| **1. Multi-Agent Scenario** | Weka na ubinafsishe kwa sekta tofauti (kwa mfano, afya, fedha) | ⭐⭐ |
-| **2. Custom Knowledge Base** | Ongeza faili zako za data na unda faharisi ya utafutaji iliyobinafsishwa | ⭐⭐⭐ |
-| **3. Production Deployment** | Sanidi CI/CD na GitHub Actions ukitumia `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. Hali ya Maajenti Wengi** | Weka na ubadilishe kwa sekta tofauti (mfano, huduma za afya, fedha) | ⭐⭐ |
+| **2. Hifadhidata ya Maarifa Binafsi** | Ongeza faili zako za data na unda kipeperushi cha kutafuta cha kibinafsi | ⭐⭐⭐ |
+| **3. Uwasilishaji wa Uzalishaji** | Sanidi CI/CD na GitHub Actions ukitumia `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
 ## 5. Shiriki Maoni Yako
 
-Maoni yako yanatusaidia kuboresha warsha hii!
+Maoni yako hutusaidia kuboresha warsha hii!
 
-- **GitHub Issues**: [Tuma maoni](https://github.com/microsoft/azd-for-beginners/issues) - tumia tag `Workshop`
-- **Discord**: Jiunge [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - tuma ujumbe kwenye `#get-help`
-- **Contributions**: Saidia kuboresha warsha kwa kuwasilisha pull requests!
+- **Maswala ya GitHub**: [Tuma maoni](https://github.com/microsoft/azd-for-beginners/issues) - tagi na `Workshop`
+- **Discord**: Jiunge na [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - chapisha katika `#get-help`
+- **Mchango**: Saidia kuboresha warsha kwa kuwasilisha maombi ya mabadiliko!
 
 ---
 
-## Asante! 🎉
+## Asante Sana! 🎉
 
 Asante kwa kukamilisha Warsha ya AZD kwa Waendelezaji wa AI. Tunatumai uzoefu huu umekupa ujuzi na kujiamini kujenga na kupeleka programu za AI kwenye Azure.
 
-**Endelea kujenga, endelea kujifunza, na karibu katika jamii ya waendelezaji wa Azure AI!**
+**Endelea kujenga, endelea kujifunza, na karibu katika jumuiya ya waendelezaji wa Azure AI!**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 Course Home** | [AZD For Beginners](../../README.md) |
-| **📖 Documentation** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-| **💬 Community** | [Azure Discord](https://aka.ms/foundry/discord) |
+| **📚 Nyumbani kwa Kozi** | [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
+| **📖 Nyaraka** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
+| **🛠️ Vitozo vya AI** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+| **💬 Jumuiya** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Taarifa ya kukanusha:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya utafsiri wa AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Nyaraka ya asili katika lugha yake inapaswa kuzingatiwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tunapendekeza kutumia tafsiri ya kitaalamu iliyofanywa na mtafsiri wa binadamu. Hatutawajibika kwa kutoelewana, ufafanuzi mbaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,116 +1,118 @@
-# Authentication Patterns and Managed Identity
+# প্রমাণীকরণ প্যাটার্ন এবং ব্যবস্থাপিত পরিচয়
 
-⏱️ **Estimated Time**: 45-60 minutes | 💰 **Cost Impact**: Free (no additional charges) | ⭐ **Complexity**: Intermediate
+⏱️ **প্রাক্কলিত সময়**: ৪৫-৬০ মিনিট পাঠ; অনুশীলন সম্পৃক্ত করতে অতিরিক্ত সময় দিন | 💰 **খরচ প্রভাব**: পরিচয়/RBAC বিনামূল্যে; স্থাপিত কম্পিউট, স্টোরেজ, এবং কী ভল্ট বিলযোগ্য | ⭐ **জটিলতা**: মধ্যবর্তী
 
-**📚 Learning Path:**
-- ← Previous: [কনফিগারেশন ব্যবস্থাপনা](configuration.md) - পরিবেশ ভেরিয়েবল এবং সিক্রেটস পরিচালনা
-- 🎯 **You Are Here**: Authentication & Security (Managed Identity, Key Vault, secure patterns)
-- → Next: [First Project](first-project.md) - আপনার প্রথম AZD অ্যাপ্লিকেশন তৈরি করুন
-- 🏠 [Course Home](../../README.md)
+> `azd 1.37.2` বিরুদ্ধে পর্যালোচনা করা হয়েছে (নভেম্বর ২০২৬)। এই পাঠে **সম্পূর্ণ ডাউনলোডযোগ্য `secure-app` টেম্পলেট নয়, শুধুমাত্র চিত্রণমূলক ইন্টিগ্রেশন ফ্র্যাগমেন্ট রয়েছে**। উল্লেখিত ফাইলগুলি তৈরি করুন, মিল রাখা অবকাঠামো প্রদান করুন, এবং বাস্তবায়নের আগে প্লেসহোল্ডারগুলি প্রতিস্থাপন করুন। পর্যালোচনার সময় কোন Azure সম্পদ প্রদান করা হয়নি।
+
+**📚 শেখার পথ:**
+- ← পূর্ববর্তী: [কনফিগারেশন ব্যবস্থাপনা](configuration.md) - পরিবেশ ভেরিয়েবল এবং গোপনীয়তা পরিচালনা
+- 🎯 **আপনি এখানে আছেন**: প্রমাণীকরণ ও সুরক্ষা (ম্যানেজড আইডেন্টিটি, কী ভল্ট, নিরাপদ প্যাটার্ন)
+- → পরবর্তী: [ইনফ্রাসট্রাকচার অ্যাজ কোড](../chapter-04-infrastructure/README.md) - সম্পদ প্রভিড এবং ডিপ্লয় করুন
+- 🏠 [কোর্স হোম](../../README.md)
 
 ---
 
-## What You'll Learn
+## আপনি কি শিখবেন
 
-By completing this lesson, you will:
-- Understand Azure authentication patterns (keys, connection strings, managed identity)
-- Implement **Managed Identity** for passwordless authentication
-- Secure secrets with **Azure Key Vault** integration
-- Configure **role-based access control (RBAC)** for AZD deployments
-- Apply security best practices in Container Apps and Azure services
-- Migrate from key-based to identity-based authentication
+এই পাঠটি সম্পন্ন করে, আপনি পাবেন:
+- আজুর প্রমাণীকরণ প্যাটার্নগুলি বোঝা (কি, সংযোগ স্ট্রিং, ম্যানেজড আইডেন্টিটি)
+- পাসওয়ার্ড ছাড়াই প্রমাণীকরণের জন্য **ম্যানেজড আইডেন্টিটি** বাস্তবায়ন
+- **আজুর কি ভল্ট** ইন্টিগ্রেশনের মাধ্যমে সিক্রেট সুরক্ষা
+- AZD ডিপ্লয়মেন্টের জন্য **ভূমিকা-ভিত্তিক প্রবেশ নিয়ন্ত্রণ (RBAC)** কনফিগার করা
+- কনটেইনার অ্যাপস এবং আজুর সার্ভিসগুলিতে নিরাপত্তার সেরা অনুশীলন প্রয়োগ
+- কি-ভিত্তিক থেকে আইডেন্টিটি-ভিত্তিক প্রমাণীকরণে স্থানান্তরিত হওয়া
 
-## Why Managed Identity Matters
+## কেন Managed Identity গুরুত্বপূর্ণ
 
-### The Problem: Traditional Authentication
+### সমস্যা: প্রচলিত প্রমাণিকরণ
 
-**Before Managed Identity:**
+**Managed Identity এর আগে:**
 ```javascript
-// ❌ নিরাপত্তা ঝুঁকি: কোডে হার্ডকোড করা গোপন তথ্য
+// ❌ SECURITY RISK: Hardcoded secrets in code
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
-**Problems:**
-- 🔴 **Exposed secrets** in code, config files, environment variables
-- 🔴 **Credential rotation** requires code changes and redeployment
-- 🔴 **Audit nightmares** - who accessed what, when?
-- 🔴 **Sprawl** - secrets scattered across multiple systems
-- 🔴 **Compliance risks** - fails security audits
+**সমস্যাসমূহ:**
+- 🔴 কোড, কনফিগ ফাইল, পরিবেশ ভেরিয়েবলগুলিতে **প্রকাশিত গোপন তথ্য**
+- 🔴 **ক্রেডেনশিয়াল রোটেশন** এর জন্য কোড পরিবর্তন ও পুনরায় স্থাপন প্রয়োজন
+- 🔴 **অডিটের দুঃস্বপ্ন** - কে কী, কখন অ্যাক্সেস করেছে?
+- 🔴 **বিস্তৃতি** - গোপন তথ্য বিভিন্ন সিস্টেমে ছড়িয়ে ছিটিয়ে আছে
+- 🔴 **অনুবর্তিতা ঝুঁকি** - নিরাপত্তা অডিটে ফেল
 
-### The Solution: Managed Identity
+### সমাধান: Managed Identity
 
-**After Managed Identity:**
+**ম্যানেজড আইডেন্টিটির পরে:**
 ```javascript
-// ✅ নিরাপদ: কোডে কোনো গোপন তথ্য নেই
+// ✅ SECURE: No secrets in code
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Azure স্বয়ংক্রিয়ভাবে প্রমাণীকরণ পরিচালনা করে
+  credential  // Azure automatically handles authentication
 );
 ```
 
-**Benefits:**
-- ✅ **Zero secrets** in code or configuration
-- ✅ **Automatic rotation** - Azure handles it
-- ✅ **Full audit trail** in Microsoft Entra ID logs
-- ✅ **Centralized security** - manage in Azure Portal
-- ✅ **Compliance ready** - meets security standards
+**সুবিধাসমূহ:**
+- ✅ কোড বা কনফিগারেশনে **জিরো সিক্রেটস**
+- ✅ **স্বয়ংক্রিয় রোটেশন** - এটি Azure পরিচালনা করে
+- ✅ Microsoft Entra ID লগে **পূর্ণ অডিট ট্রেইল**
+- ✅ **কেন্দ্রীভূত নিরাপত্তা** - Azure পোর্টালে পরিচালনা করুন
+- ✅ **কমপ্লায়েন্স রেডি** - নিরাপত্তা মানদণ্ড পূরণ করে
 
-**Analogy**: Traditional authentication is like carrying multiple physical keys for different doors. Managed Identity is like having a security badge that automatically grants access based on who you are—no keys to lose, copy, or rotate.
+**উপমা**: প্রচলিত প্রমাণীকরণ হলো বিভিন্ন দরজার জন্য একাধিক শারীরিক চাবি বহন করার মতো। ম্যানেজড আইডেন্টিটি হলো এমন একটি নিরাপত্তা ব্যাজ যা স্বয়ংক্রিয়ভাবে আপনার পরিচয়ের ভিত্তিতে প্রবেশাধিকার প্রদান করে — কোন চাবি হারানোর, অনুলিপি করার বা রোটেট করার প্রয়োজন নেই।
 
 ---
 
-## Architecture Overview
+## স্থাপত্যের সারাংশ
 
-### Authentication Flow with Managed Identity
+### ম্যানেজড আইডেন্টিটি দিয়ে প্রমাণীকরণ প্রবাহ
 
 ```mermaid
 sequenceDiagram
-    participant App as আপনার অ্যাপ্লিকেশন<br/>(কন্টেইনার অ্যাপ)
-    participant MI as ম্যানেজড আইডেন্টিটি<br/>(Microsoft Entra ID)
-    participant KV as কী ভল্ট
-    participant Storage as আজুর স্টোরেজ
-    participant DB as আজুর SQL
+    participant App as Your Application<br/>(Container App)
+    participant MI as Managed Identity<br/>(Microsoft Entra ID)
+    participant KV as Key Vault
+    participant Storage as Azure Storage
+    participant DB as Azure SQL
     
-    App->>MI: অ্যাক্সেস টোকেন অনুরোধ করুন<br/>(স্বয়ংক্রিয়)
-    MI->>MI: পরিচয় যাচাই করুন<br/>(পাসওয়ার্ড প্রয়োজন নেই)
-    MI-->>App: টোকেন ফেরত দিন<br/>(১ ঘন্টা বৈধ)
+    App->>MI: Request access token<br/>(automatic)
+    MI->>MI: Verify identity<br/>(no password needed)
+    MI-->>App: Return token for requested audience<br/>(lifetime varies)
     
-    App->>KV: গোপন নিন<br/>(টোকেন ব্যবহার করে)
-    KV->>KV: RBAC অনুমতিসমূহ পরীক্ষা করুন
-    KV-->>App: গোপন মান ফেরত দিন
+    App->>KV: Get secret<br/>(using token)
+    KV->>KV: Check RBAC permissions
+    KV-->>App: Return secret value
     
-    App->>Storage: ব্লব আপলোড করুন<br/>(টোকেন ব্যবহার করে)
-    Storage->>Storage: RBAC অনুমতিসমূহ পরীক্ষা করুন
-    Storage-->>App: সফল
+    App->>Storage: Upload blob<br/>(using token)
+    Storage->>Storage: Check RBAC permissions
+    Storage-->>App: Success
     
-    App->>DB: ডেটা কোয়েরি করুন<br/>(টোকেন ব্যবহার করে)
-    DB->>DB: SQL অনুমতিসমূহ পরীক্ষা করুন
-    DB-->>App: ফলাফল ফেরত দিন
+    App->>DB: Query data<br/>(using token)
+    DB->>DB: Check SQL permissions
+    DB-->>App: Return results
     
-    Note over App,DB: সমস্ত প্রমাণীকরণ পাসওয়ার্ডবিহীন!
+    Note over App,DB: Request a separate token for each service audience;<br/>SDK credentials handle caching and renewal
 ```
 
-### Types of Managed Identities
+### ম্যানেজড আইডেন্টিটির ধরন
 
 ```mermaid
 graph TB
-    MI[ম্যানেজড পরিচয়]
-    SystemAssigned[সিস্টেম-নির্ধারিত পরিচয়]
-    UserAssigned[ব্যবহারকারী-নির্ধারিত পরিচয়]
+    MI[Managed Identity]
+    SystemAssigned[System-Assigned Identity]
+    UserAssigned[User-Assigned Identity]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[জীবনচক্র সম্পদের সঙ্গে সংযুক্ত]
-    SystemAssigned --> SA2[স্বয়ংক্রিয়ভাবে তৈরি/মুছে ফেলা]
-    SystemAssigned --> SA3[একক সম্পদের জন্য সেরা]
+    SystemAssigned --> SA1[Lifecycle tied to resource]
+    SystemAssigned --> SA2[Automatic creation/deletion]
+    SystemAssigned --> SA3[Best for single resource]
     
-    UserAssigned --> UA1[স্বতন্ত্র জীবনচক্র]
-    UserAssigned --> UA2[ম্যানুয়ালি তৈরি/মুছা]
-    UserAssigned --> UA3[সম্পদগুলোর মধ্যে ভাগ করা]
+    UserAssigned --> UA1[Independent lifecycle]
+    UserAssigned --> UA2[Manual creation/deletion]
+    UserAssigned --> UA3[Shared across resources]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
@@ -118,74 +120,76 @@ graph TB
 
 | বৈশিষ্ট্য | সিস্টেম-অ্যাসাইনড | ইউজার-অ্যাসাইনড |
 |---------|----------------|---------------|
-| **Lifecycle** | রিসোর্সের সাথে বাঁধা | স্বাধীন |
-| **Creation** | রিসোর্সের সাথে স্বয়ংক্রিয় | ম্যানুয়াল তৈরি |
-| **Deletion** | রিসোর্স ডিলেট হলে মুছে যায় | রিসোর্স ডিলেটের পরও থাকে |
-| **Sharing** | শুধুমাত্র এক রিসোর্স | একাধিক রিসোর্সে ভাগ করা যায় |
-| **Use Case** | সিম্পল সিচুয়েশনগুলোর জন্য | জটিল মাল্টি-রিসোর্স সিচুয়েশনগুলোর জন্য |
-| **AZD Default** | ✅ পরামর্শকৃত | ঐচ্ছিক |
+| **লাইফসাইকেল** | রিসোর্সের সঙ্গে আবদ্ধ | স্বতন্ত্র |
+| **তৈরি** | রিসোর্সের সঙ্গে স্বয়ংক্রিয় | ম্যানুয়াল তৈরী |
+| **মুছে ফেলা** | রিসোর্সের সঙ্গে মিলিয়ে মুছে ফেলা হয় | রিসোর্স মুছে ফেলার পরও অব্যাহত থাকে |
+| **শেয়ারিং** | শুধুমাত্র একটি রিসোর্সের জন্য | একাধিক রিসোর্সে ব্যবহারযোগ্য |
+| **ব্যবহারের ক্ষেত্রে** | সহজ পরিস্থিতি | জটিল মাল্টি-রিসোর্স পরিস্থিতি |
+| **টেমপ্লেট নির্বাচন** | অবকাঠামোতে নির্ধারিত | অবকাঠামোতে নির্ধারিত |
 
 ---
 
-## Prerequisites
+## পূর্বশর্তসমূহ
 
-### Required Tools
+### প্রয়োজনীয় সরঞ্জাম
 
-You should already have these installed from previous lessons:
+পূর্বের পাঠ থেকে ইতিমধ্যে এইগুলি আপনার কাছে থাকা উচিত:
 
 ```bash
-# Azure Developer CLI যাচাই করুন
+# Verify Azure Developer CLI
 azd version
-# ✅ প্রত্যাশিত: azd সংস্করণ 1.0.0 বা তার বেশি
+# ✅ Expected: azd version 1.0.0 or higher
 
-# Azure CLI যাচাই করুন
+# Verify Azure CLI
 az --version
-# ✅ প্রত্যাশিত: azure-cli 2.50.0 বা তার বেশি
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
-### Azure Requirements
+### Azure প্রয়োজনীয়তা
 
-- Active Azure subscription
-- Permissions to:
-  - Create managed identities
-  - Assign RBAC roles
-  - Create Key Vault resources
-  - Deploy Container Apps
+- সক্রিয় Azure সাবস্ক্রিপশন
+- অনুমতিসমূহ:
+  - ম্যানেজড আইডেন্টিটি তৈরি করার
+  - RBAC ভূমিকা অ্যাসাইন করার
+  - কী ভল্ট রিসোর্স তৈরি করার
+  - কন্টেইনার অ্যাপস ডিপ্লয় করার
 
-### Knowledge Prerequisites
+### জ্ঞানের পূর্বশর্তসমূহ
 
-You should have completed:
-- [Installation Guide](installation.md) - AZD setup
-- [AZD Basics](azd-basics.md) - Core concepts
-- [Configuration Management](configuration.md) - Environment variables
+আপনাকে শেষ করে নেয়া উচিত:
+- [ইনস্টলেশন গাইড](../chapter-01-foundation/installation.md) - AZD সেটআপ
+- [AZD বেসিকস](../chapter-01-foundation/azd-basics.md) - মূল ধারণা
+- [কনফিগারেশন ম্যানেজমেন্ট](configuration.md) - পরিবেশ ভেরিয়েবলস
 
 ---
 
-## Lesson 1: Understanding Authentication Patterns
+## পাঠ ১: প্রমাণীকরণ প্যাটার্ন বোঝা
 
-### Pattern 1: Connection Strings (Legacy - Avoid)
+### প্যাটার্ন ১: সংযোগ স্ট্রিং (পুরানো - এড়িয়ে চলুন)
 
-**How it works:**
+**এটি কীভাবে কাজ করে:**
 ```bash
-# সংযোগ স্ট্রিংতে প্রমাণীকরণ তথ্য রয়েছে
+# Connection string contains credentials
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
-**Problems:**
-- ❌ Secrets visible in environment variables
-- ❌ Logged in deployment systems
-- ❌ Difficult to rotate
-- ❌ No audit trail of access
+**সমস্যাসমূহ:**
+- ❌ গোপন তথ্য পরিবেশ ভেরিয়েবলসে দৃশ্যমান
+- ❌ লগ হয় ডিপ্লয়মেন্ট সিস্টেমে
+- ❌ ঘোরানো কঠিন
+- ❌ অ্যাক্সেসের কোন অডিট ট্রেইল নেই
 
-**When to use:** Only for local development, never production.
+**কখন ব্যবহার করবেন:** যখন লক্ষ্য সেবাটি কী-ভিত্তিক প্রমাণীকরণ চায়। সমর্থিত হলে পরিচয় পছন্দ করুন; অন্যথায় কী সুরক্ষিতভাবে সংরক্ষণ করুন এবং ঘোরান, প্রোডাকশনের মধ্যে সহ।
 
 ---
 
-### Pattern 2: Key Vault References (Better)
+### প্যাটার্ন ২: কী ভল্ট রেফারেন্স (ভাল)
 
-**How it works:**
+**এটি কীভাবে কাজ করে:**
+**আংশিক বাইসিপ খণ্ড:** প্রয়োজনীয় ভল্ট ফিল্ড, কন্টেইনার অ্যাপ পরিচয় এবং এর `configuration.secrets` এন্ট্রি বাদ দেওয়া হয়েছে। `secretRef` কন্টেইনার অ্যাপের একটি সিক্রেটকে নামিত করে; এটি **নিজেই** কী ভল্ট ইউআরআই নয়। কী ভল্ট ব্যবহার করতে, ঐ নামকৃত সিক্রেটটি `keyVaultUrl` এবং অনুমোদিত `identity` দিয়ে সংজ্ঞায়িত করুন।
+
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -204,22 +208,24 @@ env: [
 ]
 ```
 
-**Benefits:**
-- ✅ Secrets stored securely in Key Vault
-- ✅ Centralized secret management
-- ✅ Rotation without code changes
+**সুবিধাসমূহ:**
+- ✅ কী ভল্টে সিক্রেটগুলি সুরক্ষিতভাবে সংরক্ষিত
+- ✅ কেন্দ্রীভূত সিক্রেট ব্যবস্থাপনা
+- ✅ কোড পরিবর্তন ছাড়াই ঘোরানো
 
-**Limitations:**
-- ⚠️ Still using keys/passwords
-- ⚠️ Need to manage Key Vault access
+**সীমাবদ্ধতা:**
+- ⚠️ এখনও কী/পাসওয়ার্ড ব্যবহার হচ্ছে
+- ⚠️ কী ভল্ট অ্যাক্সেস ম্যানেজ করতে হবে
 
-**When to use:** Transition step from connection strings to managed identity.
+**কখন ব্যবহার করবেন:** সংযোগ স্ট্রিং থেকে ব্যবস্থাপিত পরিচয়ে রূপান্তরের ধাপ।
 
 ---
 
-### Pattern 3: Managed Identity (Best Practice)
+### প্যাটার্ন ৩: ব্যবস্থাপিত পরিচয় (সেরা অনুশীলন)
 
-**How it works:**
+**এটি কীভাবে কাজ করে:**
+**আংশিক বাইসিপ:** পরিচয় ব্লককে একটি সম্পূর্ণ কন্টেইনার অ্যাপে একত্রিত করুন এবং `storageAccount` এবং রোল ডেফিনিশন সরবরাহ করুন। একটি রোল অ্যাসাইনমেন্টেও একটি নির্ধারিত `name` প্রয়োজন।
+
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -231,17 +237,19 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 // Grant permissions
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(storageAccount.id, containerApp.id, storageBlobDataContributorRole)
   scope: storageAccount
   properties: {
     roleDefinitionId: storageBlobDataContributorRole
     principalId: containerApp.identity.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 ```
 
-**Application code:**
+**অ্যাপ্লিকেশন কোড:**
 ```javascript
-// কোনও গোপনীয়তা প্রয়োজন নেই!
+// No secrets needed!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -252,33 +260,33 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-**Benefits:**
-- ✅ Zero secrets in code/config
-- ✅ Automatic credential rotation
-- ✅ Full audit trail
-- ✅ RBAC-based permissions
-- ✅ Compliance ready
+**সুবিধাসমূহ:**
+- ✅ কোড/কনফিগে শূন্য সিক্রেট
+- ✅ স্বয়ংক্রিয় ক্রেডেনশিয়াল ঘোরানো
+- ✅ সম্পূর্ণ অডিট ট্রেইল
+- ✅ RBAC-ভিত্তিক অনুমতি
+- ✅ কমপ্লায়েন্স প্রস্তুত
 
-**When to use:** Always, for production applications.
+**কখন ব্যবহার করবেন:** মাইক্রোসফট এনট্রা প্রমাণীকরণ সমর্থন করে এমন সেবাগুলিতে অ্যাক্সেস করা আজুর হোস্টেড অ্যাপ্লিকেশনের জন্য পছন্দ করুন।
 
 ---
 
-### Pattern 4: Service Principals (CI/CD & Automation)
+### প্যাটার্ন ৪: সার্ভিস প্রিন্সিপালস (CI/CD এবং অটোমেশন)
 
-Managed identity is the gold standard *for resources running inside Azure*. But what about things running **outside** Azure—like a CI/CD pipeline on a build agent, or a script on your laptop that can't use your interactive login? That's where a **service principal** comes in: a non-human identity with its own credentials that an automated process can sign in as.
+ব্যবস্থাপিত পরিচয় হলো আজুরের ভিতরে চলা সম্পদের জন্য স্বর্ণমান। কিন্তু আজুরের বাইরের—যেমন একটি বিল্ড এজেন্টে CI/CD পাইপলাইন, বা আপনার ল্যাপটপে একটি স্ক্রিপ্ট যা আপনার ইন্টারেক্টিভ লগইন ব্যবহার করতে পারে না—সেসব ক্ষেত্রে কী হবে? সেক্ষেত্রে একটি **সার্ভিস প্রিন্সিপাল** ব্যবহৃত হয়: একটি অমানবিক পরিচয় যার নিজস্ব প্রমাণপত্র আছে যেটি একটি অটোমেটেড প্রক্রিয়া সাইন ইন হিসেবে ব্যবহার করতে পারে।
 
-**How it works:**
+**এটি কীভাবে কাজ করে:**
 
-Create a service principal scoped to a resource group (least privilege):
+একটি রিসোর্স গ্রুপ স্পেকট্রুমের জন্য সার্ভিস প্রিন্সিপাল তৈরি করুন (সবচেয়ে কম অনুমতি):
 
 ```bash
 az ad sp create-for-rbac \
   --name "myapp-cicd" \
   --role contributor \
-  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+  --scopes "/subscriptions/<sub-id>/resourceGroups/<rg-name>"
 ```
 
-This prints a client ID, client secret, and tenant ID. azd can sign in with them non-interactively:
+এটি ক্লায়েন্ট আইডি, ক্লায়েন্ট সিক্রেট, এবং টেন্যান্ট আইডি প্রিন্ট করে। azd এগুলি দিয়ে নন-ইন্টারেক্টিভভাবে সাইন ইন করতে পারে:
 
 ```bash
 azd auth login \
@@ -287,7 +295,7 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-**Prefer federated credentials (OIDC) over secrets.** Instead of a long-lived client secret, configure a federated credential so the pipeline exchanges a short-lived token—no secret to leak or rotate:
+**সিক্রেটের উপর federated ক্রেডেনশিয়াল (OIDC) পছন্দ করুন।** দীর্ঘমেয়াদি ক্লায়েন্ট সিক্রেটের পরিবর্তে, একটি federated ক্রেডেনশিয়াল কনফিগার করুন যাতে পাইপলাইন একটি স্বল্পকালীন টোকেন এক্সচেঞ্জ করে—কোনো সিক্রেট ফাঁস হওয়ার বা ঘোরানোর ঝুঁকি নেই:
 
 ```bash
 azd auth login \
@@ -296,33 +304,33 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-> `azd pipeline config` sets this up for you automatically. See the CI/CD walkthroughs in [চ্যাপ্টার 8](../chapter-08-production/production-ai-practices.md).
+> `azd pipeline config` এটি আপনার জন্য স্বয়ংক্রিয়ভাবে সেট আপ করে। [অধ্যায় ৮](../chapter-08-production/production-ai-practices.md) এ CI/CD হাঁটার পথ দেখুন।
 
-**Benefits:**
-- ✅ Works outside Azure (build agents, on-prem, other clouds)
-- ✅ Can be scoped to a single resource group with one role
-- ✅ Federated (OIDC) variant uses no stored secret
+**সুবিধাসমূহ:**
+- ✅ Azure-এর বাইরে কাজ করে (বিল্ড এজেন্ট, অন-প্রিম, অন্যান্য ক্লাউড)
+- ✅ একটি রোল দিয়ে একটি নির্দিষ্ট রিসোর্স গ্রুপের মধ্যে সীমাবদ্ধ করা যেতে পারে
+- ✅ ফেডারেটেড (OIDC) ভ্যারিয়েন্টে কোনো সংরক্ষিত সিক্রেট ব্যবহার হয় না
 
-**Trade-offs:**
-- ⚠️ Secret-based variant requires careful storage and rotation
-- ⚠️ A leaked secret grants whatever the SP can do—keep scopes tight
+**টার্ন-অফ:**
+- ⚠️ সিক্রেট-ভিত্তিক ভ্যারিয়েন্টের জন্য সতর্ক স্টোরেজ এবং ঘূর্ণন দরকার
+- ⚠️ একটি ফাঁস হওয়া সিক্রেট SP যা করতে পারে তা দেয়—স্কোপ সঙ্কুচিত রাখুন
 
-**When to use:** CI/CD pipelines and automation that can't use managed identity. Always prefer the **federated/OIDC** variant over a client secret, and prefer managed identity whenever the workload runs inside Azure.
+**কখন ব্যবহার করবেন:** CI/CD পাইপলাইন এবং অটোমেশন যা ম্যানেজড আইডেন্টিটি ব্যবহার করতে পারে না। সর্বদা ক্লায়েন্ট সিক্রেটের চেয়ে **ফেডারেটেড/OIDC** ভ্যারিয়েন্ট পছন্দ করুন, এবং যখনও কাজের ওজন Azure-এর ভিতরে চলে তখন ম্যানেজড আইডেন্টিটি পছন্দ করুন।
 
-**Storing credentials safely:**
-- Never commit secrets—use your pipeline's secret store (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
-- Scope the SP to the smallest role and resource group it needs.
-- Set an expiry and rotate, or eliminate the secret entirely with OIDC.
+**ক্রেডেনশিয়াল নিরাপদে সংরক্ষণ:**
+- কখনো সিক্রেট কমিট করবেন না—আপনার পাইপলাইনের সিক্রেট স্টোর ব্যবহার করুন (GitHub Actions সিক্রেট, Azure DevOps ভ্যারিয়েবল গ্রুপ / কী ভল্ট)।
+- SP কে তার প্রয়োজনীয় সবচেয়ে ছোট রোল এবং রিসোর্স গ্রুপ দিয়ে স্কোপ করুন।
+- একটি মেয়াদ নির্ধারণ করুন এবং ঘুরান, অথবা OIDC দিয়ে সম্পূর্ণ সিক্রেট বাদ দিন।
 
 ---
 
-## Lesson 2: Implementing Managed Identity with AZD
+## পাঠ ২: AZD দিয়ে ম্যানেজড আইডেন্টিটি বাস্তবায়ন
 
-### Step-by-Step Implementation
+### ধাপে ধাপে বাস্তবায়ন
 
-Let's build a secure Container App that uses managed identity to access Azure Storage and Key Vault.
+নিম্নলিখিত অংশগুলি দেখায় কিভাবে একটি Container App প্রকল্পে ম্যানেজড আইডেন্টিটি ইন্টিগ্রেট করবেন। এগুলো **কপি-এবং-রান স্টার্টার নয়**: স্টোরেজ মডিউল, সম্পূর্ণ ম্যানেজড পরিবেশ/রেজিস্ট্রি ইনফ্রাস্ট্রাকচার, Dockerfile এবং প্যারামিটার ফাইল সব এখানে সরবরাহ করা হয়নি। একটি কাজ করা Container Apps টেমপ্লেট থেকে শুরু করুন এবং এই প্যাটার্নগুলো মিলিয়ে নিন, এর রেজিস্ট্রি কনফিগারেশন এবং সার্ভিস ট্যাগগুলি রেখে দিন।
 
-### Project Structure
+### প্রকল্প কাঠামো
 
 ```
 secure-app/
@@ -341,7 +349,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. Configure AZD (azure.yaml)
+### ১. AZD কনফিগার করুন (azure.yaml)
 
 ```yaml
 name: secure-app
@@ -354,18 +362,20 @@ services:
     language: js
     host: containerapp
 
-# Enable managed identity (AZD handles this automatically)
+# Managed identity must be enabled in the infrastructure, not by this YAML.
 ```
 
-### 2. Infrastructure: Enable Managed Identity
+### ২. ইনফ্রাস্ট্রাকচার: ম্যানেজড আইডেন্টিটি সক্রিয় করুন
 
-**File: `infra/main.bicep`**
+**ফাইল: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
 
 param environmentName string
 param location string = 'eastus'
+param containerAppsEnvironmentId string
+param containerImage string
 
 var tags = { 'azd-env-name': environmentName }
 
@@ -408,6 +418,8 @@ module containerApp './app/container-app.bicep' = {
     tags: tags
     storageAccountName: storage.outputs.name
     keyVaultName: keyVault.outputs.name
+    containerAppsEnvironmentId: containerAppsEnvironmentId
+    containerImage: containerImage
   }
 }
 
@@ -418,7 +430,8 @@ module storageRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'  // Storage Blob Data Contributor
-    targetResourceId: storage.outputs.id
+    targetResourceType: 'storage'
+    targetResourceName: storage.outputs.name
   }
 }
 
@@ -429,7 +442,8 @@ module kvRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: '4633458b-17de-408a-b874-0445c86b69e6'  // Key Vault Secrets User
-    targetResourceId: keyVault.outputs.id
+    targetResourceType: 'keyvault'
+    targetResourceName: keyVault.outputs.name
   }
 }
 
@@ -439,9 +453,9 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App with System-Assigned Identity
+### ৩. সিস্টেম-অ্যাসাইনড আইডেন্টিটি সহ Container App
 
-**File: `infra/app/container-app.bicep`**
+**ফাইল: `infra/app/container-app.bicep`**
 
 ```bicep
 param name string
@@ -449,15 +463,18 @@ param location string
 param tags object = {}
 param storageAccountName string
 param keyVaultName string
+param containerAppsEnvironmentId string
+param containerImage string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: name
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'api' })
   identity: {
     type: 'SystemAssigned'  // 🔑 Enable managed identity
   }
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -468,7 +485,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Must exist; configure registry credentials for private images
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -496,18 +513,28 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. RBAC Role Assignment Module
+### ৪. RBAC রোল অ্যাসাইনমেন্ট মডিউল
 
-**File: `infra/core/role-assignment.bicep`**
+**ফাইল: `infra/core/role-assignment.bicep`**
 
 ```bicep
 param principalId string
 param roleDefinitionId string  // Azure built-in role ID
-param targetResourceId string
+@allowed(['storage', 'keyvault'])
+param targetResourceType string
+param targetResourceName string
 
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(principalId, roleDefinitionId, targetResourceId)
-  scope: resourceId('Microsoft.Resources/resourceGroups', resourceGroup().name)
+// Typed existing resources give Bicep a valid resource scope, not a string ID.
+resource storageTarget 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
+  name: targetResourceName
+}
+resource vaultTarget 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: targetResourceName
+}
+
+resource storageAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'storage') {
+  name: guid(storageTarget.id, principalId, roleDefinitionId)
+  scope: storageTarget
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
     principalId: principalId
@@ -515,12 +542,22 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
-output id string = roleAssignment.id
+resource vaultAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'keyvault') {
+  name: guid(vaultTarget.id, principalId, roleDefinitionId)
+  scope: vaultTarget
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
+    principalId: principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+// This module assigns at the target resource scope, not the whole resource group.
 ```
 
-### 5. Application Code with Managed Identity
+### ৫. ম্যানেজড আইডেন্টিটি সহ অ্যাপ্লিকেশন কোড
 
-**File: `src/app.js`**
+**ফাইল: `src/app.js`**
 
 ```javascript
 const express = require('express');
@@ -531,29 +568,29 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 শংসাপত্র আরম্ভ করুন (ম্যানেজড আইডেন্টিটির মাধ্যমে স্বয়ংক্রিয়ভাবে কাজ করে)
+// 🔑 Initialize credential (works automatically with managed identity)
 const credential = new DefaultAzureCredential();
 
-// Azure Storage সেটআপ
+// Azure Storage setup
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
-  credential  // কোন কী প্রয়োজন নেই!
+  credential  // No keys needed!
 );
 
-// Key Vault সেটআপ
+// Key Vault setup
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
-  credential  // কোন কী প্রয়োজন নেই!
+  credential  // No keys needed!
 );
 
-// স্বাস্থ্য পরীক্ষা
+// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// ব্লব স্টোরেজে ফাইল আপলোড করুন
+// Upload file to blob storage
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -562,7 +599,8 @@ app.post('/upload', async (req, res) => {
     const blobName = `file-${Date.now()}.txt`;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     
-    await blockBlobClient.upload('Hello from managed identity!', 30);
+    const content = 'Hello from managed identity!';
+    await blockBlobClient.upload(content, Buffer.byteLength(content));
     
     res.json({
       success: true,
@@ -575,7 +613,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// Key Vault থেকে সিক্রেট পান
+// Get secret from Key Vault
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -583,7 +621,7 @@ app.get('/secret/:name', async (req, res) => {
     
     res.json({
       name: secretName,
-      value: secret.value,
+      retrieved: secret.value !== undefined, // Never return the secret value to callers
       message: 'Secret retrieved using managed identity!'
     });
   } catch (error) {
@@ -592,7 +630,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// ব্লব কনটেইনারগুলির তালিকা (পড়ার অ্যাক্সেস প্রদর্শন করে)
+// List blob containers (demonstrates read access)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -617,7 +655,7 @@ app.listen(PORT, () => {
 });
 ```
 
-**File: `src/package.json`**
+**ফাইল: `src/package.json`**
 
 ```json
 {
@@ -635,23 +673,25 @@ app.listen(PORT, () => {
 }
 ```
 
-### 6. Deploy and Test
+### ৬. ডিপ্লয় ও পরীক্ষা করুন
+
+এই কমান্ডগুলি চালান শুধুমাত্র **তারা পূরণ করার পরে** অনুপস্থিত ইনফ্রাস্ট্রাকচার, Dockerfile, এবং মেলানো `main.parameters.json` আপনার নিজস্ব প্রকল্পে। azd কে Authenticate করুন `azd auth login` দিয়ে; আলাদাভাবে `az login` দিয়ে সাইন ইন করুন পরে Azure CLI চেকের জন্য। প্রদর্শিত এন্ডপয়েন্টগুলি ডেমো এবং পাবলিক ব্যবহারের আগে যথাযথ অ্যাক্সেস নিয়ন্ত্রণ দরকার।
 
 ```bash
-# AZD পরিবেশ প্রাথমিকীকরণ করুন
+# Initialize AZD environment
 azd init
 
-# ইনফ্রাস্ট্রাকচার এবং অ্যাপ্লিকেশন স্থাপন করুন
+# Deploy infrastructure and application
 azd up
 
-# অ্যাপের URL পান
-APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
+# Get the app URL
+APP_URL=$(azd env get-value APP_URL)
 
-# হেলথ চেক পরীক্ষা করুন
+# Test health check
 curl $APP_URL/health
 ```
 
-**✅ Expected output:**
+**✅ প্রত্যাশিত আউটপুট:**
 ```json
 {
   "status": "healthy",
@@ -659,12 +699,12 @@ curl $APP_URL/health
 }
 ```
 
-**Test blob upload:**
+**টেস্ট ব্লব আপলোড:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
 
-**✅ Expected output:**
+**✅ প্রত্যাশিত আউটপুট:**
 ```json
 {
   "success": true,
@@ -673,12 +713,12 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Test container listing:**
+**টেস্ট কন্টেইনার তালিকা:**
 ```bash
 curl $APP_URL/containers
 ```
 
-**✅ Expected output:**
+**✅ প্রত্যাশিত আউটপুট:**
 ```json
 {
   "containers": ["uploads"],
@@ -689,46 +729,50 @@ curl $APP_URL/containers
 
 ---
 
-## Common Azure RBAC Roles
+## সাধারণ Azure RBAC রোল
 
-### Built-in Role IDs for Managed Identity
+### ম্যানেজড আইডেন্টিটির জন্য বিল্ট-ইন রোল আইডি
 
-| Service | Role Name | Role ID | Permissions |
+| সার্ভিস | রোল নাম | রোল আইডি | অনুমতি |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Read blobs and containers |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Read, write, delete blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Read, write, delete queue messages |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Read secrets |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Read, write, delete secrets |
-| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Read Cosmos DB data |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Read, write Cosmos DB data |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Manage SQL databases |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Send, receive, manage messages |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6ea1-4ae2-8e65-a410df84e7d1` | ব্লব এবং কন্টেইনার পড়ুন |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | ব্লব পড়ুন, লিখুন, মুছে ফেলুন |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | কিউ/বার্তা পড়ুন, লিখুন, মুছে ফেলুন |
+| **কী ভল্ট** | কী ভল্ট সিক্রেটস ব্যবহারকারী | `4633458b-17de-408a-b874-0445c86b69e6` | সিক্রেট পড়ুন |
+| **কী ভল্ট** | কী ভল্ট সিক্রেটস অফিসার | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | সিক্রেট পড়া, লেখা, মুছুন |
+| **কসমস ডিবি** | কসমস ডিবি বিল্ট-ইন ডেটা রিডার | `00000000-0000-0000-0000-000000000001` | কসমস ডিবি ডেটা পড়ুন |
+| **কসমস ডিবি** | কসমস ডিবি বিল্ট-ইন ডেটা কন্ট্রিবিউটার | `00000000-0000-0000-0000-000000000002` | কসমস ডিবি ডেটা পড়া, লেখা |
+| **এসকিউএল ডাটাবেস** | এসকিউএল ডিবি কন্ট্রিবিউটার | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | ডাটাবেস রিসোর্স ম্যানেজ করুন; এসকিউএল ডেটা অ্যাক্সেস প্রদান করে না |
+| **সার্ভিস বাস** | আজুর সার্ভিস বাস ডেটা ওনার | `090c5cfd-751d-490a-894a-3ce6f1109419` | মেসেজ পাঠানো, গ্রহণ, ম্যানেজ করুন |
 
-### How to Find Role IDs
+### কীভাবে রোল আইডি খুঁজবেন
+
+নোসকিউএলের জন্য কসমস ডিবির উপরের দুটি আইডি হলো **নেটিভ কসমস ডেটা-প্লেন রোল সংজ্ঞা**, আজুর আরবিএসি সাবস্ক্রিপশন রোল আইডি নয়। এগুলোকে `az cosmosdb sql role assignment create` (অথবা `Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments`) দিয়ে অ্যাসাইন করুন, `az role assignment create` দিয়ে নয়। এসকিউএল ডেটা অ্যাক্সেসের জন্য একটি এন্ট্রা ডাটাবেস ব্যবহারকারী এবং এসকিউএল অনুমতি প্রয়োজন।
 
 ```bash
-# সমস্ত বিল্ট-ইন রোল তালিকাভুক্ত করুন
+# List all built-in roles
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# নির্দিষ্ট রোল খুঁজুন
+# Search for specific role
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# রোলের বিস্তারিত তথ্য পান
+# Get role details
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
 ---
 
-## Practical Exercises
+## ব্যবহারিক অনুশীলন
 
-### Exercise 1: Enable Managed Identity for Existing App ⭐⭐ (Medium)
+**তিনটি অনুশীলনের জন্য ইন্টিগ্রেশন পূর্বশর্ত:** আপনার নিজের প্রকল্পে একটি কাজ করা কন্টেইনার অ্যাপ টেমপ্লেট, মিল থাকা বিসেপ রিসোর্স, আজুর সিএলআই/azd সাইন-ইন, এবং প্রয়োজনীয় রোলগুলি অ্যাসাইন করার ক্ষমতা। এগুলো গাইডেড অভিযোজন, স্বাধীন লোকাল স্টার্টার নয়; প্রদর্শনী রিসোর্স নামগুলো আপনার ডিপ্লয়কৃত নাম দিয়ে প্রতিস্থাপন করুন।
 
-**Goal**: Add managed identity to an existing Container App deployment
+### অনুশীলন ১: বিদ্যমান অ্যাপের জন্য ম্যানেজড আইডেনটি সক্ষম করা ⭐⭐ (মাঝারি)
 
-**Scenario**: You have a Container App using connection strings. Convert it to managed identity.
+**লক্ষ্য**: বিদ্যমান কন্টেইনার অ্যাপ ডিপ্লয়মেন্টে ম্যানেজড আইডেনটি যোগ করা
 
-**Starting Point**: Container App with this configuration:
+**পরিস্থিতি**: আপনার একটি কন্টেইনার অ্যাপ আছে যা কানেকশন স্ট্রিং ব্যবহার করে। এটিকে ম্যানেজড আইডেনটিতে রূপান্তর করুন।
+
+**শুরু বিন্দু**: নিম্নলিখিত কনফিগারেশন সহ কন্টেইনার অ্যাপ:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -740,9 +784,9 @@ env: [
 ]
 ```
 
-**Steps**:
+**পদক্ষেপসমূহ**:
 
-1. **Enable managed identity in Bicep:**
+১. **বিসেপে ম্যানেজড আইডেনটি সক্ষম করুন:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -754,7 +798,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Grant Storage access:**
+২. **স্টোরেজ অ্যাক্সেস অনুমতি দিন:**
 
 ```bicep
 // Get storage account reference
@@ -774,9 +818,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-3. **Update application code:**
+৩. **অ্যাপ্লিকেশন কোড আপডেট করুন:**
 
-**Before (connection string):**
+**আগে (কানেকশন স্ট্রিং):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -785,7 +829,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**After (managed identity):**
+**পরে (ম্যানেজড আইডেনটি):**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -797,7 +841,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **Update environment variables:**
+৪. **পরিবেশ ভেরিয়েবল আপডেট করুন:**
 
 ```bicep
 env: [
@@ -809,54 +853,55 @@ env: [
 ]
 ```
 
-5. **Deploy and test:**
+৫. **ডিপ্লয় এবং পরীক্ষা করুন:**
 
 ```bash
-# পুনরায় স্থাপন
+# Redeploy
 azd up
 
-# পরীক্ষা করুন যে এটি এখনও কাজ করে
-curl https://myapp.azurecontainerapps.io/upload
+# Test that it still works
+APP_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail -X POST "$APP_URL/upload"
 ```
 
-**✅ Success Criteria:**
-- ✅ Application deploys without errors
-- ✅ Storage operations work (upload, list, download)
-- ✅ No connection strings in environment variables
-- ✅ Identity visible in Azure Portal under "Identity" blade
+**✅ সফলতার মানদণ্ড:**
+- ✅ অ্যাপ্লিকেশন ভুল ছাড়া ডিপ্লয় হয়
+- ✅ স্টোরেজ অপারেশন কাজ করে (আপলোড, তালিকা, ডাউনলোড)
+- ✅ পরিবেশ ভেরিয়েবলে কোন কানেকশন স্ট্রিং নেই
+- ✅ আজুর পোর্টালে "আইডেনটিটি" ব্লেডের অধীনে আইডেনটি দৃশ্যমান
 
-**Verification:**
+**যাচাই:**
 
 ```bash
-# যাচাই করুন যে ম্যানেজড আইডেন্টিটি সক্রিয় আছে
+# Check managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ প্রত্যাশিত: "SystemAssigned"
+# ✅ Expected: "SystemAssigned"
 
-# রোল অ্যাসাইনমেন্ট পরীক্ষা করুন
+# Check role assignment
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ প্রত্যাশিত: "Storage Blob Data Contributor" রোল দেখায়
+# ✅ Expected: Shows "Storage Blob Data Contributor" role
 ```
 
-**Time**: 20-30 minutes
+**সময়**: ২০-৩০ মিনিট
 
 ---
 
-### Exercise 2: Multi-Service Access with User-Assigned Identity ⭐⭐⭐ (Advanced)
+### অনুশীলন ২: মাল্টি-সার্ভিস অ্যাক্সেস ব্যবহারকারী-অ্যাসাইন আইডেনটির মাধ্যমে ⭐⭐⭐ (এডভান্সড)
 
-**Goal**: Create a user-assigned identity shared across multiple Container Apps
+**লক্ষ্য**: একাধিক কন্টেইনার অ্যাপের জন্য একটি ব্যবহারকারী-অ্যাসাইন আইডেনটি তৈরি করা যা শেয়ার করা হবে
 
-**Scenario**: You have 3 microservices that all need access to the same Storage account and Key Vault.
+**পরিস্থিতি**: আপনার ৩টি মাইক্রোসার্ভিস আছে যা একই স্টোরেজ অ্যাকাউন্ট এবং কী ভল্ট অ্যাক্সেস করতে হবে।
 
-**Steps**:
+**পদক্ষেপসমূহ**:
 
-1. **Create user-assigned identity:**
+১. **ব্যবহারকারী-অ্যাসাইন আইডেনটি তৈরি করুন:**
 
-**File: `infra/core/identity.bicep`**
+**ফাইল: `infra/core/identity.bicep`**
 
 ```bicep
 param name string
@@ -874,7 +919,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Assign roles to user-assigned identity:**
+২. **ব্যবহারকারী-অ্যাসাইন আইডেনটিতে রোল অ্যাসাইন করুন:**
 
 ```bicep
 // In main.bicep
@@ -890,7 +935,7 @@ module userIdentity './core/identity.bicep' = {
 
 // Grant Storage access
 resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'storage-contributor')
+  name: guid(storageAccount.id, environmentName, 'storage-contributor')
   scope: storageAccount
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
@@ -901,7 +946,7 @@ resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
 
 // Grant Key Vault access
 resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'kv-secrets-user')
+  name: guid(keyVault.id, environmentName, 'kv-secrets-user')
   scope: keyVault
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
@@ -911,7 +956,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Assign identity to multiple Container Apps:**
+৩. **একাধিক কন্টেইনার অ্যাপের জন্য পরিচয় বরাদ্দ করুন:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -948,18 +993,22 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **Application code (all services use same pattern):**
+৪. **অ্যাপ্লিকেশন কোড (সকল পরিষেবা একই প্যাটার্ন ব্যবহার করে):**
 
 ```javascript
-const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
+const { ManagedIdentityCredential } = require('@azure/identity');
+const { BlobServiceClient } = require('@azure/storage-blob');
 
-// ব্যবহারকারী-নিযুক্ত পরিচয়ের জন্য, ক্লায়েন্ট আইডি নির্দিষ্ট করুন
+// For user-assigned identity, specify the client ID
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // ব্যবহারকারী-নিযুক্ত পরিচয়ের ক্লায়েন্ট আইডি
+  process.env.AZURE_CLIENT_ID  // User-assigned identity client ID
 );
 
-// অথবা DefaultAzureCredential ব্যবহার করুন (স্বয়ংক্রিয়ভাবে সনাক্ত করে)
-const credential = new DefaultAzureCredential();
+// Alternative (choose ONE credential declaration):
+// const { DefaultAzureCredential } = require('@azure/identity');
+// const credential = new DefaultAzureCredential({
+//   managedIdentityClientId: process.env.AZURE_CLIENT_ID
+// });
 
 const blobServiceClient = new BlobServiceClient(
   `https://${process.env.STORAGE_ACCOUNT_NAME}.blob.core.windows.net`,
@@ -967,44 +1016,47 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **Deploy and verify:**
+প্রতিটি কন্টেইনার অ্যাপের রানটাইম `AZURE_CLIENT_ID`-কে Bicep-এ আপনার স্টোরেজ নামের `userIdentity.outputs.clientId` ও `STORAGE_ACCOUNT_NAME`-তে সেট করুন। পরিচয় বরাদ্দ করা বা `azd env set` চালানো কেবলই এই রানটাইম মানগুলি কনফিগার করে না।
+
+৫. **ডিপ্লয় এবং যাচাই করুন:**
 
 ```bash
 azd up
 
-# সব সার্ভিসগুলো স্টোরেজে অ্যাক্সেস করতে পারে কিনা পরীক্ষা করুন
-curl https://api-gateway.azurecontainerapps.io/upload
-curl https://product-service.azurecontainerapps.io/upload
-curl https://order-service.azurecontainerapps.io/upload
+# Test all services can access storage
+# Replace with the actual ingress URLs reported for your three services
+curl --fail -X POST "$API_GATEWAY_URL/upload"
+curl --fail -X POST "$PRODUCT_SERVICE_URL/upload"
+curl --fail -X POST "$ORDER_SERVICE_URL/upload"
 ```
 
-**✅ Success Criteria:**
-- ✅ One identity shared across 3 services
-- ✅ All services can access Storage and Key Vault
-- ✅ Identity persists if you delete one service
-- ✅ Centralized permission management
+**✅ সফলতার মানদণ্ড:**
+- ✅ ৩ টি পরিষেবার মধ্যে এক পরিচয় ভাগ করা হয়েছে
+- ✅ সব পরিষেবা স্টোরেজ এবং কী ভল্টে প্রবেশাধিকার পায়
+- ✅ একটি পরিষেবা মুছে ফেলার পরও পরিচয় থেকে যায়
+- ✅ কেন্দ্রীভূত পারমিশন ব্যবস্থাপনা
 
-**Benefits of User-Assigned Identity:**
-- Single identity to manage
-- Consistent permissions across services
-- Survives service deletion
-- Better for complex architectures
+**ইউজার-অ্যাসাইনড পরিচয়ের সুবিধাসমূহ:**
+- একক পরিচয় যা পরিচালনা করা সহজ
+- পরিষেবাগুলোর মধ্যে সঙ্গতিপূর্ণ অনুমতি
+- পরিষেবা মুছে ফেলার পরও টিকে থাকা
+- জটিল স্থাপত্যের জন্য আরও ভালো
 
-**Time**: 30-40 minutes
+**সময়**: ৩০-৪০ মিনিট
 
 ---
 
-### Exercise 3: Implement Key Vault Secret Rotation ⭐⭐⭐ (Advanced)
+### অনুশীলন ৩: কী ভল্ট সিক্রেট রোটেশন বাস্তবায়ন করুন ⭐⭐⭐ (উন্নত)
 
-**Goal**: Store third-party API keys in Key Vault and access them using managed identity
+**লক্ষ্য**: তৃতীয় পক্ষের API কী কী ভল্টে সংরক্ষণ করুন এবং ম্যানেজড পরিচয়ের মাধ্যমে সেগুলো অ্যাক্সেস করুন
 
-**Scenario**: Your app needs to call an external API (OpenAI, Stripe, SendGrid) that requires API keys.
+**দৃশ্যপট**: আপনার অ্যাপ একটি বহির্গত API (OpenAI, Stripe, SendGrid) কল করতে চায় যা API কী প্রয়োজন।
 
-**Steps**:
+**ধাপসমূহ**:
 
-1. **Create Key Vault with RBAC:**
+১. **RBAC সহ কী ভল্ট তৈরি করুন:**
 
-**File: `infra/core/keyvault.bicep`**
+**ফাইল: `infra/core/keyvault.bicep`**
 
 ```bicep
 param name string
@@ -1033,13 +1085,13 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **Store secrets in Key Vault:**
+২. **কী ভল্টে সিক্রেট সংরক্ষণ করুন:**
 
 ```bash
-# Key Vault-এর নাম নিন
-KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
+# Get Key Vault name
+KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
-# তৃতীয় পক্ষের API কীগুলো সংরক্ষণ করুন
+# Store third-party API keys
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1056,9 +1108,9 @@ az keyvault secret set \
   --value "SG.xxxxxxxxxxxxx"
 ```
 
-3. **Application code to retrieve secrets:**
+৩. **সিক্রেট পুনরুদ্ধারের জন্য অ্যাপ্লিকেশন কোড:**
 
-**File: `src/config.js`**
+**ফাইল: `src/config.js`**
 
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
@@ -1075,7 +1127,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // প্রথমে ক্যাশ চেক করুন
+    // Check cache first
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1107,9 +1159,11 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **Use secrets in application:**
+৪. **অ্যাপ্লিকেশনে সিক্রেট ব্যবহার করুন:**
 
-**File: `src/app.js`**
+**ফাইল: `src/app.js`**
+
+এই **বিকল্প অ্যাপ্লিকেশন অংশ**-এর জন্য প্রয়োজন `npm install openai`, একটি সত্যিকারের তৃতীয় পক্ষের কী, একটি প্রবেশযোগ্য মডেল, এবং আপনার ওয়ার্কিং প্রকল্পের অবকাঠামো। এটি সরাসরি OpenAI-কে কল করে, Azure OpenAI ডিপ্লয়মেন্ট নয়। নিম্নলিখিত প্লেসহোল্ডার কীগুলো কোনো অনুমোদন দেয় না।
 
 ```javascript
 const express = require('express');
@@ -1118,7 +1172,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Key Vault থেকে কী ব্যবহার করে OpenAI ইনিশিয়ালাইজ করুন
+// Initialize OpenAI with key from Key Vault
 let openaiClient;
 
 async function initializeServices() {
@@ -1126,9 +1180,6 @@ async function initializeServices() {
   openaiClient = new OpenAI({ apiKey: openaiKey });
   console.log('✅ Services initialized with secrets from Key Vault');
 }
-
-// স্টার্টআপে কল করুন
-initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
   try {
@@ -1146,203 +1197,214 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Secure API with Key Vault integration running');
+// Start listening only after initialization succeeds.
+initializeServices().then(() => {
+  app.listen(3000, () => console.log('Key Vault demo running'));
+}).catch(error => {
+  console.error('Initialization failed:', error.message);
+  process.exitCode = 1;
 });
 ```
 
-5. **Deploy and test:**
+৫. **ডিপ্লয় এবং পরীক্ষা করুন:**
 
 ```bash
 azd up
 
-# API কীগুলো কাজ করছে কি না পরীক্ষা করুন
+# Test that API keys work
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
-**✅ Success Criteria:**
-- ✅ কোড বা পরিবেশ ভেরিয়েবলে কোন API কী নেই
-- ✅ অ্যাপ্লিকেশন Key Vault থেকে কী পুনরুদ্ধার করে
-- ✅ তৃতীয়-পক্ষ API গুলো সঠিকভাবে কাজ করে
+**✅ সফলতার মানদণ্ড:**
+- ✅ কোড বা পরিবেশ ভেরিয়েবলে কোনো API কী নেই
+- ✅ অ্যাপ্লিকেশন কী ভল্ট থেকে কী সংগ্রহ করে
+- ✅ তৃতীয় পক্ষের API সঠিকভাবে কাজ করে
 - ✅ কোড পরিবর্তন ছাড়াই কী রোটেট করা যায়
 
-**একটি সিক্রেট রোটেট করুন:**
+**সিক্রেট রোটেট করুন:**
 
 ```bash
-# Key Vault-এ সিক্রেট আপডেট করুন
+# Update secret in Key Vault
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# নতুন কী কার্যকর করার জন্য অ্যাপটি পুনরায় চালু করুন
+# Find the active revision name, then restart it to clear the in-process cache
+az containerapp revision list --name myapp --resource-group rg-myapp --output table
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
-**সময়**: 25-35 মিনিট
+**সময়**: ২৫-৩৫ মিনিট
 
 ---
 
-## জ্ঞান যাচাইকরণ
+## জ্ঞান পরীক্ষণ পয়েন্ট
 
-### 1. প্রমাণীকরণ প্যাটার্ন ✓
+### ১. অথেনটিকেশন প্যাটার্ন ✓
 
 আপনার বোঝাপড়া পরীক্ষা করুন:
 
-- [ ] **Q1**: প্রধান তিনটি প্রমাণীকরণ প্যাটার্ন কী কী? 
-  - **A**: Connection strings (legacy), Key Vault references (transition), Managed Identity (best)
+- [ ] **Q1**: তিনটি প্রধান অথেনটিকেশন প্যাটার্ন কী কী? 
+  - **উত্তর**: সংযোগ স্ট্রিং (পুরাতন), কী ভল্ট রেফারেন্স (রূপান্তর), ম্যানেজড পরিচয় (সেরা)
 
-- [ ] **Q2**: কেন Managed Identity connection strings-এর তুলনায় ভালো?
-  - **A**: কোডে কোন সিক্রেট নেই, স্বয়ংক্রিয় রোটেশন, পূর্ণ অডিট ট্রেইল, RBAC অনুমতিসমূহ
+- [ ] **Q2**: কেন ম্যানেজড পরিচয় সংযোগ স্ট্রিংয়ের চেয়ে ভালো?
+  - **উত্তর**: কোডে কোনো সিক্রেট থাকে না, স্বয়ংক্রিয় রোটেশন, পূর্ণ অডিট ট্রেল, RBAC পারমিশন
 
-- [ ] **Q3**: কখন user-assigned identity ব্যবহার করবেন system-assigned-এর পরিবর্তে?
-  - **A**: যখন একাধিক রিসোর্সে আইডেন্টিটি শেয়ার করা হয় অথবা যখন আইডেন্টিটির লাইফসাইকেল রিসোর্সের লাইফসাইকেলের থেকে স্বাধীন থাকে
+- [ ] **Q3**: কখন আপনি সিস্টেম-অ্যাসাইনডের বদলে ইউজার-অ্যাসাইনড পরিচয় ব্যবহার করবেন?
+  - **উত্তর**: যখন একটি পরিচয় বহুত পক্ষের মধ্যে ভাগ করা হয় বা পরিচয়ের জীবনচক্র সম্পদের জীবনচক্র থেকে আলাদা থাকে
 
-**Hands-On Verification:**
+**প্রাকটিক্যাল যাচাই:**
 ```bash
-# আপনার অ্যাপ কোন ধরনের পরিচয় ব্যবহার করে তা যাচাই করুন
+# Check what type of identity your app uses
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# পরিচয়ের জন্য সমস্ত ভূমিকা নিয়োগসমূহ তালিকাভুক্ত করুন
+# List all role assignments for the identity
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
 
 ---
 
-### 2. RBAC এবং অনুমতিসমূহ ✓
+### ২. RBAC এবং পারমিশন ✓
 
 আপনার বোঝাপড়া পরীক্ষা করুন:
 
-- [ ] **Q1**: "Storage Blob Data Contributor" এর role ID কী?
-  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+- [ ] **Q1**: "Storage Blob Data Contributor" এর রোল আইডি কী?
+  - **উত্তর**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2**: "Key Vault Secrets User" কী অনুমতি দিয়ে থাকে?
-  - **A**: সিক্রেটগুলিতে রিড-ওনলি অ্যাক্সেস (তৈরি, আপডেট বা মুছতে পারবে না)
+- [ ] **Q2**: "Key Vault Secrets User" কী পারমিশন দেয়?
+  - **উত্তর**: সিক্রেট পড়ার অনুমতি (তৈরি, আপডেট বা মুছে ফেলা যায় না)
 
-- [ ] **Q3**: কিভাবে একটি Container App-কে Azure SQL-এ অ্যাক্সেস দেওয়া হয়?
-  - **A**: "SQL DB Contributor" রোল অ্যাসাইন করুন অথবা SQL-এর জন্য Microsoft Entra ID authentication কনফিগার করুন
+- [ ] **Q3**: কিভাবে আপনি একটি কন্টেইনার অ্যাপকে Azure SQL-এ অ্যাক্সেস দেবেন?
+  - **উত্তর**: Microsoft Entra অথেনটিকেশন কনফিগার করুন, পরিচয়টিকে ডাটাবেস ইউজার হিসেবে তৈরি করুন এবং প্রয়োজনীয় SQL পারমিশন দিন। "SQL DB Contributor" শুধুমাত্র Azure রিসোর্স ম্যানেজ করে; এটি কোয়েরি অনুমোদন করে না।
 
-**Hands-On Verification:**
+**প্রাকটিক্যাল যাচাই:**
 ```bash
-# নির্দিষ্ট ভূমিকা খুঁজুন
+# Find specific role
 az role definition list --name "Storage Blob Data Contributor"
 
-# আপনার পরিচয়কে কোন কোন ভূমিকা বরাদ্দ করা হয়েছে তা পরীক্ষা করুন
+# Check what roles are assigned to your identity
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
 
 ---
 
-### 3. Key Vault ইন্টিগ্রেশন ✓
+### ৩. কী ভল্ট ইন্টিগ্রেশন ✓
 
 আপনার বোঝাপড়া পরীক্ষা করুন:
 
-- [ ] **Q1**: অ্যাক্সেস পলিসির পরিবর্তে Key Vault-এর জন্য RBAC কিভাবে সক্রিয় করবেন?
-  - **A**: Bicep-এ `enableRbacAuthorization: true` সেট করুন
+- [ ] **Q1**: কী ভল্টে অ্যাক্সেস পলিসির পরিবর্তে RBAC কিভাবে সক্রিয় করবেন?
+  - **উত্তর**: Bicep-এ `enableRbacAuthorization: true` সেট করুন
 
-- [ ] **Q2**: কোন Azure SDK লাইব্রেরি managed identity authentication হ্যান্ডেল করে?
-  - **A**: `@azure/identity` with `DefaultAzureCredential` class
+- [ ] **Q2**: কোন Azure SDK লাইব্রেরি ম্যানেজড পরিচয়ের অথেনটিকেশন হ্যান্ডেল করে?
+  - **উত্তর**: `@azure/identity` যা `DefaultAzureCredential` ক্লাস ব্যবহার করে
 
-- [ ] **Q3**: Key Vault সিক্রেটগুলি কতক্ষণ ক্যাশে থাকে?
-  - **A**: এটি অ্যাপ্লিকেশন-নির্ভর; আপনার নিজের ক্যাশিং কৌশল বাস্তবায়ন করুন
+- [ ] **Q3**: কী ভল্ট সিক্রেটগুলি ক্যাশে কতদিন থাকে?
+  - **উত্তর**: অ্যাপ্লিকেশন-নির্ভর; আপনার নিজস্ব ক্যাশিং কৌশল প্রয়োগ করুন
 
-**Hands-On Verification:**
+**প্রাকটিক্যাল যাচাই:**
 ```bash
-# Key Vault অ্যাক্সেস পরীক্ষা
+# Test Key Vault access
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
-  --query "value"
+  --query "{name:name,enabled:attributes.enabled}"
 
-# যাচাই করুন যে RBAC সক্রিয় আছে
+# Check RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ প্রত্যাশিত: true
+# ✅ Expected: true
 ```
 
 ---
 
-## নিরাপত্তা সেরা অনুশীলন
+## নিরাপত্তা সেরা চর্চা
 
 ### ✅ করণীয়:
 
-1. **প্রোডাকশনে সবসময় Managed Identity ব্যবহার করুন**
+১. **প্রোডাকশন-এ সর্বদা ম্যানেজড পরিচয় ব্যবহার করুন**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **কম-প্রিভিলেজ RBAC রোল ব্যবহার করুন**
-   - সম্ভব হলে "Reader" রোল ব্যবহার করুন
-   - প্রয়োজন না হলে "Owner" বা "Contributor" এড়িয়ে চলুন
+২. **সর্বনিম্ন অধিকারের RBAC রোল ব্যবহার করুন**
+   - সম্ভব হলে "রিডার" রোল ব্যবহার করুন
+   - প্রয়োজনে "অনার" বা "কন্ট্রিবিউটর" এড়িয়ে চলুন
 
-3. **তৃতীয়-পক্ষ কীগুলো Key Vault-এ সংরক্ষণ করুন**
+৩. **তৃতীয় পক্ষের কী কী ভল্টে সংরক্ষণ করুন**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **অডিট লগিং সক্ষম করুন**
+৪. **অডিট লগিং সক্রিয় করুন** (আংশিক রিসোর্স ফ্রাগমেন্ট; আপনার ভল্ট ও ওয়ার্কস্পেস ঘোষণার সাথে একত্রিত করুন)
    ```bicep
-   diagnosticSettings: {
-     logs: [{ category: 'AuditEvent', enabled: true }]
+   resource vaultDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+     name: 'vault-audit'
+     scope: keyVault
+     properties: {
+       workspaceId: logAnalytics.id
+       logs: [{ category: 'AuditEvent', enabled: true }]
+     }
    }
    ```
 
-5. **dev/staging/prod-এর জন্য আলাদা পরিচয় ব্যবহার করুন**
+৫. **ডেভ/স্টেজিং/প্রোডাকশনের জন্য আলাদা পরিচয় ব্যবহার করুন**
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
 
-6. **নিয়মিত সিক্রেট রোটেট করুন**
-   - Key Vault সিক্রেটগুলিতে মেয়াদসীমা (expiration dates) সেট করুন
-   - Azure Functions দিয়ে রোটেশন স্বয়ংক্রিয় করুন
+৬. **নিয়মিত সিক্রেট রোটেট করুন**
+   - কী ভল্ট সিক্রেটে মেয়াদ শেষের তারিখ সেট করুন
+   - Azure Functions দিয়ে স্বয়ংক্রিয় রোটেশন করুন
 
-### ❌ করবেন না:
+### ❌ এড়িয়ে চলুন:
 
-1. **কোনও অবস্থাতেই সিক্রেট হার্ডকোড করবেন না**
+১. **কখনো সিক্রেট হার্ডকোড করবেন না**
    ```javascript
-   // ❌ খারাপ
+   // ❌ BAD
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **প্রোডাকশনে connection strings ব্যবহার করবেন না**
+২. **প্রোডাকশন-এ সংযোগ স্ট্রিং ব্যবহার করবেন না**
    ```javascript
-   // ❌ খারাপ
+   // ❌ BAD
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **অতিরিক্ত অনুমতি দেবেন না**
+৩. **অতিরিক্ত অনুমতি দেবেন না**
    ```bicep
    // ❌ BAD - too much access
-   roleDefinitionId: 'Owner'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')
    
    // ✅ GOOD - least privilege
-   roleDefinitionId: 'Storage Blob Data Reader'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1')
    ```
 
-4. **সিক্রেট লগ করবেন না**
+৪. **সিক্রেট লগ করবেন না**
    ```javascript
-   // ❌ খারাপ
+   // ❌ BAD
    console.log('API Key:', apiKey);
    
-   // ✅ ভালো
+   // ✅ GOOD
    console.log('API Key retrieved successfully');
    ```
 
-5. **প্রোডাকশন পরিচয়গুলি পরিবেশগুলোর মধ্যে শেয়ার করবেন না**
+৫. **পরিবেশের মধ্যে প্রোডাকশন পরিচয় শেয়ার করবেন না**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1350,36 +1412,36 @@ az keyvault show \
 
 ---
 
-## ট্রাবলশুটিং গাইড
+## সমস্যার সমাধান নির্দেশিকা
 
-### সমস্যা: Azure Storage-এ অ্যাক্সেস করার সময় "Unauthorized"
+### সমস্যা: Azure স্টোরেজে প্রবেশ করার সময় "Unauthorized" ত্রুটি
 
-**লক্ষণ:**
+**লক্ষণসমূহ:**
 ```
 Error: Unauthorized (403)
 AuthorizationPermissionMismatch: This request is not authorized to perform this operation
 ```
 
-**রোগনিদান:**
+**নির্ণয়:**
 
 ```bash
-# ম্যানেজড আইডেন্টিটি সক্রিয় আছে কি না পরীক্ষা করুন
+# Check if managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ প্রত্যাশিত: "SystemAssigned" অথবা "UserAssigned"
+# ✅ Expected: "SystemAssigned" or "UserAssigned"
 
-# রোল বরাদ্দ পরীক্ষা করুন
+# Check role assignments
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# প্রত্যাশিত: "Storage Blob Data Contributor" বা অনুরূপ কোনো রোল দেখা উচিত
+# Expected: Should see "Storage Blob Data Contributor" or similar role
 ```
 
 **সমাধানসমূহ:**
 
-1. **সঠিক RBAC রোল প্রদান করুন:**
+১. **ঠিক RBAC রোল দিন:**
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1388,38 +1450,38 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **প্রচারের জন্য অপেক্ষা করুন (5-10 মিনিট লাগতে পারে):**
+২. **প্রচারের জন্য অপেক্ষা করুন (৫-১০ মিনিট লাগতে পারে):**
 ```bash
-# ভূমিকা বরাদ্দের অবস্থা পরীক্ষা করুন
+# Check role assignment status
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **নিশ্চিত করুন অ্যাপ্লিকেশন কোড সঠিক credential ব্যবহার করছে:**
+৩. **অ্যাপ্লিকেশন কোডে সঠিক প্রমাণপত্র ব্যবহার হচ্ছে কিনা যাচাই করুন:**
 ```javascript
-// নিশ্চিত করুন যে আপনি DefaultAzureCredential ব্যবহার করছেন
+// Make sure you're using DefaultAzureCredential
 const credential = new DefaultAzureCredential();
 ```
 
 ---
 
-### সমস্যা: Key Vault অ্যাক্সেস প্রত্যাখ্যান
+### সমস্যা: কী ভল্ট অ্যাক্সেস অস্বীকার
 
-**লক্ষণ:**
+**লক্ষণসমূহ:**
 ```
 Error: Forbidden (403)
 The user, group or application does not have secrets get permission
 ```
 
-**রোগনিদান:**
+**নির্ণয়:**
 
 ```bash
-# Key Vault RBAC সক্রিয় আছে কিনা পরীক্ষা করুন
+# Check Key Vault RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ প্রত্যাশিত: true
+# ✅ Expected: true
 
-# রোল অ্যাসাইনমেন্টগুলো পরীক্ষা করুন
+# Check role assignments
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1427,14 +1489,14 @@ az role assignment list \
 
 **সমাধানসমূহ:**
 
-1. **Key Vault-এ RBAC সক্ষম করুন:**
+১. **কী ভল্টে RBAC সক্রিয় করুন:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
 
-2. **Key Vault Secrets User রোল প্রদান করুন:**
+২. **কী ভল্ট সিক্রেট ইউজার রোল দিন:**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1445,48 +1507,48 @@ az role assignment create \
 
 ---
 
-### সমস্যা: লোকালে DefaultAzureCredential ব্যর্থ হচ্ছে
+### সমস্যা: DefaultAzureCredential স্থানীয়ভাবে ব্যর্থ
 
-**লক্ষণ:**
+**লক্ষণসমূহ:**
 ```
 Error: DefaultAzureCredential failed to retrieve a token
 CredentialUnavailableError: No credential available
 ```
 
-**রোগনিদান:**
+**নির্ণয়:**
 
 ```bash
-# আপনি লগ ইন করেছেন কিনা যাচাই করুন
+# Check if you're logged in
 az account show
 
-# Azure CLI প্রমাণীকরণ যাচাই করুন
+# Check Azure CLI authentication
 az ad signed-in-user show
 ```
 
 **সমাধানসমূহ:**
 
-1. **Azure CLI-তে লগইন করুন:**
+১. **Azure CLI তে লগইন করুন:**
 ```bash
 az login
 ```
 
-2. **Azure সাবস্ক্রিপশন সেট করুন:**
+২. **Azure সাবস্ক্রিপশন সেট করুন:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
 
-3. **লোকাল ডেভেলপমেন্টের জন্য environment variables ব্যবহার করুন:**
+৩. **স্থানীয় ডেভেলপমেন্টের জন্য পরিবেশ ভেরিয়েবল ব্যবহার করুন:**
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **বা লোকালি ভিন্ন credential ব্যবহার করুন:**
+৪. **অথবা স্থানীয়ভাবে ভিন্ন প্রমাণপত্র ব্যবহার করুন:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// স্থানীয় ডেভেলপমেন্টের জন্য AzureCliCredential ব্যবহার করুন
+// Use AzureCliCredential for local dev
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
@@ -1494,62 +1556,57 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### সমস্যা: রোল অ্যাসাইনমেন্ট প্রচার হতে অনেকক্ষণ সময় নেয়
+### সমস্যা: রোল অ্যাসাইনমেন্ট প্রচার হতে বেশি সময় নেয়
 
-**লক্ষণ:**
+**লক্ষণসমূহ:**
 - রোল সফলভাবে অ্যাসাইন করা হয়েছে
-- তবুও 403 ত্রুটি দেখা যাচ্ছে
-- মাঝে মাঝে অ্যাক্সেস (কখনও কাজ করে, কখনও করে না)
+- এখনও ৪০৩ ত্রুটি পাচ্ছেন
+- মাঝে মাঝে প্রবেশাধিকার (কখনো কাজ করে, কখনো করে না)
 
 **ব্যাখ্যা:**
-Azure RBAC পরিবর্তনগুলি বিশ্বব্যাপী প্রচার হতে 5-10 মিনিট সময় নিতে পারে।
+Azure RBAC পরিবর্তন বিশ্বব্যাপী প্রচার হতে ৫-১০ মিনিট সময় নিতে পারে।
 
 **সমাধান:**
 
 ```bash
-# অপেক্ষা করুন এবং পুনরায় চেষ্টা করুন
+# Wait and retry
 echo "Waiting for RBAC propagation..."
-sleep 300  # ৫ মিনিট অপেক্ষা করুন
+sleep 300  # Wait 5 minutes
 
-# অ্যাক্সেস পরীক্ষা করুন
-curl https://myapp.azurecontainerapps.io/upload
+# Test access
+curl --fail -X POST "$APP_URL/upload"
 
-# যদি এখনও ব্যর্থ হয়, অ্যাপটি পুনরায় চালু করুন
+# If still failing, restart the app
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
 ---
 
 ## খরচ বিবেচনা
 
-### Managed Identity খরচ
+### ম্যানেজড পরিচয়ের খরচ
 
 | রিসোর্স | খরচ |
 |----------|------|
-| **Managed Identity** | 🆓 **FREE** - চার্জ নেই |
-| **RBAC Role Assignments** | 🆓 **FREE** - চার্জ নেই |
-| **Microsoft Entra ID Token Requests** | 🆓 **FREE** - অন্তর্ভুক্ত |
-| **Key Vault Operations** | $0.03 প্রতি 10,000 অপারেশন |
-| **Key Vault Storage** | $0.024 প্রতি সিক্রেট প্রতি মাস |
+| **ম্যানেজড পরিচয়** | 🆓 **ফ্রি** - কোনো চার্জ নেই |
+| **RBAC রোল অ্যাসাইনমেন্ট** | 🆓 **ফ্রি** - কোনো চার্জ নেই |
+| **Microsoft Entra ID টোকেন অনুরোধ** | 🆓 **ফ্রি** - অন্তর্ভুক্ত |
+| **কী ভল্ট অপারেশন** | প্রতি ১০,০০০ অপারেশনে $0.03 |
+| **কী ভল্ট সিক্রেট স্টোরেজ** | বর্তমান মূল্য যাচাই করুন; প্রতি সিক্রেট মাসিক ফি ধরবেন না |
 
-**Managed identity টাকায় সাশ্রয় করে কারণ:**
-- ✅ সার্ভিস-টু-সার্ভিস প্রমাণীকরণের জন্য Key Vault অপারেশন বাদ দেওয়া
-- ✅ নিরাপত্তা ঘটনার হ্রাস (কোনও credentials লিক হয় না)
-- ✅ অপারেশনাল ওভারহেড কমানো (কোনও ম্যানুয়াল রোটেশন নেই)
+**ম্যানেজড পরিচয় অর্থ সাশ্রয় করে:**
+- ✅ সার্ভিস-টু-সার্ভিস অথের জন্য কী ভল্ট অপারেশন দূর করে
+- ✅ নিরাপত্তা ঘটনাগুলো কমায় (ফাঁস হওয়া ক্রেডেনশিয়াল থাকে না)
+- ✅ অপারেশনাল ওভারহেড কমায় (ম্যানুয়াল রোটেশন নেই)
 
-**উদাহরণ খরচ তুলনা (মাসিক):**
-
-| সিনারিও | Connection Strings | Managed Identity | সঞ্চয় |
-|----------|-------------------|-----------------|---------|
-| ছোট অ্যাপ (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/মাস |
-| মাঝারি অ্যাপ (10M requests) | ~$200 | ~$0 | $200/মাস |
-| বড় অ্যাপ (100M requests) | ~$1,500 | ~$0 | $1,500/মাস |
+অ্যাপ্লিকেশন অনুরোধ সংখ্যা কী ভল্ট অপারেশন সংখ্যার সমান নয়: ক্যাশিং এবং রোটেশন প্যাটার্ন সিক্রেট-পঠনের খরচ নির্ধারণ করে। পরিচয় কম্পিউট/স্টোরেজ চার্জ সরান না। আপনার অঞ্চলের জন্য [কী ভল্ট মূল্য](https://azure.microsoft.com/pricing/details/key-vault/) এবং অ্যাজুর মূল্য হিসাবকারী চেক করুন, শুধুমাত্র অনুরোধ সংখ্যা থেকে মাসিক সাশ্রয় ধরে নিবেন না।
 
 ---
 
-## আরও জানুন
+## আরো জানুন
 
 ### অফিসিয়াল ডকুমেন্টেশন
 - [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
@@ -1562,38 +1619,38 @@ az containerapp revision restart \
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### এই কোর্সে পরবর্তী ধাপসমূহ
-- ← পূর্ববর্তী: [কনফিগারেশন ম্যানেজমেন্ট](configuration.md)
-- → পরবর্তী: [প্রথম প্রকল্প](first-project.md)
+### এই কোর্সের পরবর্তী ধাপ
+- ← পূর্ববর্তী: [Configuration Management](configuration.md)
+- → পরবর্তী: [Infrastructure as Code](../chapter-04-infrastructure/README.md)
 - 🏠 [কোর্স হোম](../../README.md)
 
-### সম্পর্কিত উদাহরণ
-- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Microsoft Foundry Models-এর জন্য managed identity ব্যবহার করে
-- [Microservices Example](../../../../examples/microservices) - বহু-সার্ভিস প্রমাণীকরণ প্যাটার্ন
+### সম্পর্কিত উদাহরণসমূহ
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - ম্যানেজড পরিচয় ব্যবহার করে Microsoft Foundry Models
+- [Microservices Example](../../../../examples/microservices) - বহু-সেবা অথেনটিকেশন প্যাটার্ন
 
 ---
 
-## সারাংশ
+## সারসংক্ষেপ
 
-**আপনি যা শিখলেন:**
-- ✅ তিনটি প্রমাণীকরণ প্যাটার্ন (connection strings, Key Vault, managed identity)
-- ✅ AZD-এ Managed Identity কীভাবে সক্ষম ও কনফিগার করবেন
-- ✅ Azure সার্ভিসগুলোর জন্য RBAC রোল অ্যাসাইনমেন্ট
-- ✅ তৃতীয়-পক্ষ সিক্রেটের জন্য Key Vault ইন্টিগ্রেশন
-- ✅ User-assigned বনাম system-assigned identities
-- ✅ নিরাপত্তা সেরা অনুশীলন এবং ট্রাবলশুটিং
+**আপনি যা শিখেছেন:**
+- ✅ তিনটি অথেনটিকেশন প্যাটার্ন (সংযোগ স্ট্রিং, কী ভল্ট, ম্যানেজড পরিচয়)
+- ✅ AZD-তে ম্যানেজড পরিচয় সক্রিয়করণ ও কনফিগারেশন
+- ✅ Azure পরিষেবার জন্য RBAC রোল বরাদ্দ
+- ✅ তৃতীয় পক্ষের সিক্রেটের জন্য কী ভল্ট ইন্টিগ্রেশন
+- ✅ ইউজার-অ্যাসাইনড বনাম সিস্টেম-অ্যাসাইনড পরিচয়
+- ✅ নিরাপত্তা সেরা চর্চা এবং সমস্যা সমাধান
 
-**মূল বার্তাগুলো:**
-1. **প্রোডাকশনে সবসময় Managed Identity ব্যবহার করুন** - কোন সিক্রেট নেই, স্বয়ংক্রিয় রোটেশন
-2. **কম-প্রিভিলেজ RBAC রোল ব্যবহার করুন** - শুধুমাত্র প্রয়োজনীয় অনুমতি দিন
-3. **তৃতীয়-পক্ষ কীগুলো Key Vault-এ সংরক্ষণ করুন** - কেন্দ্রীভূত সিক্রেট ম্যানেজমেন্ট
-4. **প্রতিটি পরিবেশের জন্য আলাদা পরিচয় রাখুন** - Dev, staging, prod আলাদা করুন
-5. **অডিট লগিং সক্ষম করুন** - কে কী অ্যাক্সেস করেছে তা ট্র্যাক করুন
+**মূল বিষয়সমূহ:**
+১. **সবসময় প্রোডাকশনে ম্যানেজড পরিচয় ব্যবহার করুন** - কোনো সিক্রেট নয়, স্বয়ংক্রিয় রোটেশন
+২. **সর্বনিম্ন অধিকারের RBAC রোল ব্যবহার করুন** - প্রয়োজনীয় পারমিশনই দিন
+৩. **তৃতীয় পক্ষের কী কী ভল্টে সংরক্ষণ করুন** - কেন্দ্রীভূত সিক্রেট ব্যবস্থাপনা
+৪. **পরিবেশ অনুসারে আলাদা পরিচয়** - ডেভ, স্টেজিং, প্রোডাকশন বংন
+৫. **অডিট লগিং চালু করুন** - কারা কী অ্যাক্সেস করেছে ট্র্যাক করুন
 
-**পরবর্তী ধাপসমূহ:**
-1. উপরের বাস্তব অনুশীলনগুলো সম্পন্ন করুন
-2. একটি বিদ্যমান অ্যাপ connection strings থেকে managed identity-তে মাইগ্রেট করুন
-3. প্রথম দিন থেকেই নিরাপত্তা নিয়ে আপনার প্রথম AZD প্রকল্প তৈরি করুন: [প্রথম প্রকল্প](first-project.md)
+**পরবর্তী ধাপ:**
+১. উপরোক্ত ব্যবহারিক অনুশীলনগুলি সম্পন্ন করুন
+২. একটি বিদ্যমান অ্যাপ সংযোগ স্ট্রিং থেকে ম্যানেজড পরিচয়ে মাইগ্রেট করুন
+৩. প্রাথমিক ডিপ্লয়মেন্ট প্রবাহ পুনরায় দেখুন: [প্রথম প্রকল্প](../chapter-01-foundation/first-project.md)
 
 ---
 

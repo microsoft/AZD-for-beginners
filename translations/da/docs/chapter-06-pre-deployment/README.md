@@ -1,23 +1,23 @@
-# Kapitel 6: Planlægning & Validering Før Udrulning
+# Kapitel 6: Forud for Udrulning - Planlægning & Validering
 
-**📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Varighed**: 1 time | **⭐ Sværhedsgrad**: Mellem
+**📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Varighed**: 2-4 timers læsning; yderligere tid til tilpassede øvelser | **⭐ Sværhedsgrad**: Mellem–Avanceret
 
 ---
 
 ## Oversigt
 
-Dette kapitel dækker væsentlige planlægnings- og valideringstrin før udrulning af din applikation. Lær at undgå dyre fejl med korrekt kapacitetsplanlægning, valg af SKU'er og preflight-tjek.
+Dette kapitel dækker væsentlige planlægnings- og valideringstrin før implementering af din applikation. Lær at undgå dyre fejl med korrekt kapacitetsplanlægning, SKU-udvælgelse og forudgående kontrol.
 
-> Valideret med `azd 1.27.1` i juli 2026.
+> Kommandoanvisninger gennemgået i forhold til den udgivne `azd 1.37.2` reference. Cloud-udrulninger blev ikke udført. De længere lektioner indeholder illustrerende uddrag, ikke komplette lokale udrulningsprojekter.
 
 ## Læringsmål
 
-Ved at gennemføre dette kapitel vil du:
-- Køre preflight-tjek før udrulning
-- Planlægge kapacitet og estimere ressourcernes behov
-- Vælge passende SKU'er til omkostningsoptimering
+Når du har gennemført dette kapitel, vil du:
+- Køre forudgående kontroller før udrulning
+- Planlægge kapacitet og estimere ressourcebehov
+- Vælge passende SKU'er for omkostningsoptimering
 - Konfigurere Application Insights til overvågning
-- Forstå teamkoordinationsmønstre
+- Forstå mønstre for multi-agent koordinering og deres udrulningskrav
 
 ---
 
@@ -25,59 +25,59 @@ Ved at gennemføre dette kapitel vil du:
 
 | # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Valider konfiguration før udrulning | 15 min |
-| 2 | [Capacity Planning](capacity-planning.md) | Estimer ressourcernes behov | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Vælg passende prismodeller | 15 min |
+| 1 | [Forudgående Kontroller](preflight-checks.md) | Valider konfiguration før udrulning | 15 min |
+| 2 | [Kapacitetsplanlægning](capacity-planning.md) | Estimer ressourcebehov | 20 min |
+| 3 | [SKU-Valg](sku-selection.md) | Vælg passende prisniveau | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfigurer overvågning | 20 min |
-| 5 | [Coordination Patterns](coordination-patterns.md) | Teamets udrulningsarbejdsgange | 15 min |
+| 5 | [Koordinationsmønstre](coordination-patterns.md) | Avanceret multi-agent orkestrering design | 60-75 min |
 
 ---
 
-## 🚀 Kom Godt I Gang
+## 🚀 Kom hurtigt i gang
 
 ```bash
-# Tjek abonnementskvoter
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Forhåndsvis implementering (ingen ressourcer oprettes)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Validér Bicep-syntaks
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Tjek miljøkonfiguration
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Tjekliste Før Udrulning
+## ☑️ Tjekliste før udrulning
 
 ### Før `azd provision`
 
-- [ ] Kvota bekræftet for region
-- [ ] SKU'er valgt passende
-- [ ] Omkostningsoverslag gennemgået
-- [ ] Konsistent navngivningskonvention
+- [ ] Kvote bekræftet for region
+- [ ] SKU'er valgt korrekt
+- [ ] Omkostningsestimat gennemgået
+- [ ] Navngivningskonvention konsekvent
 - [ ] Sikkerhed/RBAC konfigureret
 
 ### Før `azd deploy`
 
 - [ ] Miljøvariabler sat
 - [ ] Hemmeligheder i Key Vault
-- [ ] Forbindelsesstrenge bekræftet
-- [ ] Sundhedstjek konfigureret
+- [ ] Forbindelsesstrenge verificeret
+- [ ] Helbredskontroller konfigureret
 
 ---
 
-## 💰 Guide til SKU-Valg
+## 💰 SKU-Valgsvejledning
 
-| Arbejdsbelastning | Udvikling | Produktion |
+| Arbejdsbyrde | Udvikling | Produktion |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Forbrug | Forbrug eller dedikeret arbejdsbyrdeprofil, baseret på målt belastning |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Azure OpenAI modeller | Understøttet pay-as-you-go udrulningstype | Pay-as-you-go eller provisioneret throughput; model/region afhængig |
+| AI Search | Gratis/Basic inden for grænser | Basic eller Standard trin størrelsesanpasset til indeks, replikaer og forespørgselsbelastning |
 
 ---
 
@@ -92,8 +92,8 @@ azd env get-values
 
 ## 📖 Relaterede Ressourcer
 
-- [Konfigurationsguide](../chapter-03-configuration/configuration.md)
-- [Udrulningsguide](../chapter-04-infrastructure/deployment-guide.md)
+- [Konfigurationsvejledning](../chapter-03-configuration/configuration.md)
+- [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md)
 - [Almindelige Problemer](../chapter-07-troubleshooting/common-issues.md)
 
 ---

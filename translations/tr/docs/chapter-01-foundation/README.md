@@ -1,22 +1,22 @@
-# Bölüm 1: Temeller & Hızlı Başlangıç
+# Bölüm 1: Temel & Hızlı Başlangıç
 
-**📚 Kurs**: [Yeni Başlayanlar için AZD](../../README.md) | **⏱️ Süre**: 30-45 dakika | **⭐ Zorluk**: Başlangıç
+**📚 Kurs**: [Başlangıç İçin AZD](../../README.md) | **⏱️ Süre**: İlk dağıtım dahil 75-120 dakika; ek alıştırmalar daha uzun sürer | **⭐ Zorluk**: Başlangıç
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm Azure Developer CLI (azd) temel bilgilerini tanıtır. Temel kavramları öğrenecek, araçları kuracak ve ilk uygulamanızı Azure'a dağıtacaksınız.
+Bu bölüm Azure Developer CLI (azd) temellerini tanıtır. Temel kavramları öğrenecek, araçları kuracak ve ilk uygulamanızı Azure'a dağıtacaksınız.
 
-> Temmuz 2026'da `azd 1.27.1` sürümü ile doğrulanmıştır.
+> Komut ve yapılandırma inceleme hedefi: `azd 1.37.2` (Kasım 2026). İnceleme sırasında canlı Azure sağlama çalıştırılmadı.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamladığınızda:
-- Azure Developer CLI'nın ne olduğunu ve Azure CLI'dan nasıl farklılaştığını anlayacaksınız
-- Platformunuza AZD'yi kurup yapılandıracaksınız
-- `azd up` ile ilk uygulamanızı Azure'a dağıtacaksınız
-- `azd down` komutuyla kaynakları temizleyeceksiniz
+Bu bölümü tamamlayarak:
+- Azure Developer CLI'nin ne olduğunu ve Azure CLI'dan nasıl farklılaştığını anlayacaksınız
+- Platformunuzda AZD'yi kurup yapılandıracaksınız
+- İlk uygulamanızı Azure'a `azd up` ile dağıtacaksınız
+- `azd down` ile kaynakları temizleyeceksiniz
 
 ---
 
@@ -24,17 +24,17 @@ Bu bölümü tamamladığınızda:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [AZD Temelleri](azd-basics.md) | Temel kavramlar, terimler ve proje yapısı | 15 dk |
-| 2 | [Kurulum & Ayar](installation.md) | Platforma özel kurulum rehberleri | 10 dk |
-| 3 | [İlk Projeniz](first-project.md) | Pratik: Bir web uygulamasını Azure'a dağıtın | 20 dk |
-| 4 | [Kendi Uygulamanızı Getirin](bring-your-own-app.md) | Sahip olduğunuz mevcut projeye azd ekleyin | 15 dk |
-| 5 | [Geliştirici Konteynerleri & Codespaces](dev-containers.md) | Geliştirici konteynerleri ile tekrarlanabilir azd ortamları | 15 dk |
+| 1 | [AZD Temelleri](azd-basics.md) | Temel kavramlar, terminoloji ve proje yapısı | 15 dk |
+| 2 | [Kurulum & Ayarlar](installation.md) | Platforma özgü kurulum rehberleri | 10 dk |
+| 3 | [İlk Projeniz](first-project.md) | Uygulamalı: Azure'a web uygulaması dağıtımı | 20 dk |
+| 4 | [Mevcut Uygulamanızı Getirin](bring-your-own-app.md) | Sahip olduğunuz mevcut bir projeye azd ekleyin | 15 dk |
+| 5 | [Geliştirici Konteynerleri & Codespaces](dev-containers.md) | Geliştirici konteynerleri ile çoğaltılabilir azd ortamları | 15 dk |
 
 ---
 
 ## ✅ Buradan Başlayın: Kurulumunuzu Doğrulayın
 
-Başlamadan önce, yerel bilgisayarınızın Bölüm 1 şablonu için hazır olduğunu doğrulayın:
+Başlamadan önce, yerel bilgisayarınızın Bölüm 1 şablonuna hazır olduğundan emin olun:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Başlamadan önce, yerel bilgisayarınızın Bölüm 1 şablonu için hazır old
 bash ./validate-setup.sh
 ```
 
-Eğer betik eksik araçlar bildiriyorsa, önce onları düzeltin, sonra bölüme devam edin.
+Komut dosyası eksik araçları bildirirse, önce bunları düzeltin ve ardından bölüme devam edin.
 
 ---
 
 ## 🚀 Hızlı Başlangıç
 
 ```bash
-# Kurulumu kontrol et
+# Check installation
 azd version
 
-# AZD için kimlik doğrulaması yap
-# İsteğe bağlı: Azure CLI komutlarını doğrudan çalıştırmayı planlıyorsanız az login yapın
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# İlk uygulamanızı dağıtın
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# İşiniz bittiğinde temizlik yapın
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,23 +74,23 @@ azd down --force --purge
 
 ## ✅ Başarı Kriterleri
 
-Bu bölümü tamamladıktan sonra yapabilmelisiniz:
+Bu bölümü tamamladıktan sonra şunları yapabilmelisiniz:
 
 ```bash
-azd version              # Yüklenen sürümü gösterir
-azd init --template todo-nodejs-mongo  # Projeyi başlatır
-azd up                   # Azure'a dağıtır
-azd show                 # Çalışan uygulama URL'sini gösterir
-azd down --force --purge # Kaynakları temizler
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
 
-## 🔗 Gezinme
+## 🔗 Navigasyon
 
 | Yön | Bölüm |
 |-----------|---------|
-| **Sonraki** | [Bölüm 2: Yapay Zeka Öncelikli Geliştirme](../chapter-02-ai-development/README.md) |
+| **Sonraki** | [Bölüm 2: AI-İlk Geliştirme](../chapter-02-ai-development/README.md) |
 | **Atla** | [Bölüm 3: Yapılandırma](../chapter-03-configuration/README.md) |
 
 ---

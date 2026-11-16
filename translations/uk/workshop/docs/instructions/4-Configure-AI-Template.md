@@ -1,221 +1,25 @@
 # 4. Налаштування шаблону
 
-!!! tip "НА КІНЕЦЬ ЦЬОГО МОДУЛЯ ВИ БУДЕТЕ МОГТИ"
+!!! tip "У КІНЦІ ЦЬОГО МОДУЛЮ ВИ ЗМОЖЕТЕ"
 
-    - [ ] Зрозуміти призначення `azure.yaml`
-    - [ ] Зрозуміти структуру `azure.yaml`
-    - [ ] Зрозуміти цінність lifecycle `hooks` в azd
-    - [ ] **Лабораторна робота 4:** Вивчити та модифікувати змінні середовища
-
----
-
-!!! prompt "Що робить файл `azure.yaml`? Використайте кодову вставку та поясніть рядок за рядком"
-
-      Файл `azure.yaml` — це **конфігураційний файл для Azure Developer CLI (azd)**. Він визначає, як ваша програма повинна бути розгорнута в Azure, включно з інфраструктурою, сервісами, хуками розгортання та змінними середовища.
+    - [ ] Explain the purpose and structure of `azure.yaml`
+    - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
+    - [ ] Configure the selected environment using inputs supported by the template
+    - [ ] **Lab 4:** Review a configuration change before provisioning it
 
 ---
 
-## 1. Призначення та функціональність
+## 1. Почніть з фактичного шаблону
 
-Цей файл `azure.yaml` слугує як **план розгортання** для AI-агенту, який:
+Відкрийте [`azure.yaml` у розділі Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/azure.yaml) у репозиторії, який ви ініціалізували. Вихідний шаблон може змінюватися незалежно від цього майстер-класу. Наступний **витяг** перевірено 4 листопада 2026 року; він не є заміною повного файлу:
 
-1. **Перевіряє середовище** перед розгортанням
-2. **Створює ресурси Azure AI** (AI Hub, AI Project, Search тощо)
-3. **Розгортає Python-застосунок** в Azure Container Apps
-4. **Налаштовує AI-моделі** для чатового та вбудованого функціоналу
-5. **Встановлює моніторинг і трасування** для AI-застосунку
-6. **Обробляє як нові, так і існуючі** сценарії Azure AI проектів
-
-Файл дає змогу здійснювати **розгортання в один крок** (`azd up`) повного рішення AI агента з належною перевіркою, створенням ресурсів та післярозгортковими налаштуваннями.
-
-??? info "Розгорнутий перегляд: `azure.yaml`"
-
-      Файл `azure.yaml` визначає, як Azure Developer CLI має розгортати та керувати цим додатком AI агенту в Azure. Розглянемо його рядок за рядком.
-
-      ```yaml title="" linenums="0"
-
-      # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: чи потрібні нам хуки? 
-      # TODO: чи потрібні всі змінні?
-
-      name: azd-get-started-with-ai-agents
-      metadata:
-      template: azd-get-started-with-ai-agents@1.0.2
-      requiredVersions:
-      azd: ">=1.14.0"
-
-      hooks:
-      preup:
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-            interactive: true
-            continueOnError: false
-      windows:
-            shell: pwsh
-            run: ./scripts/validate_env_vars.ps1
-            interactive: true
-            continueOnError: false      
-      postprovision:
-      windows:
-            shell: pwsh
-            run: ./scripts/write_env.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-            continueOnError: true
-            interactive: true
-      postdeploy:
-      windows:
-            shell: pwsh
-            run: ./scripts/postdeploy.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-            continueOnError: true
-            interactive: true
-      services:
-      api_and_frontend:
-      project: ./src
-      language: py
-      host: containerapp
-      docker:
-            image: api_and_frontend
-            remoteBuild: true
-      pipeline:
-      variables:
-      - AZURE_RESOURCE_GROUP
-      - AZURE_AIHUB_NAME
-      - AZURE_AIPROJECT_NAME
-      - AZURE_AISERVICES_NAME
-      - AZURE_SEARCH_SERVICE_NAME
-      - AZURE_APPLICATION_INSIGHTS_NAME
-      - AZURE_CONTAINER_REGISTRY_NAME
-      - AZURE_KEYVAULT_NAME
-      - AZURE_STORAGE_ACCOUNT_NAME
-      - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-      - USE_CONTAINER_REGISTRY
-      - USE_APPLICATION_INSIGHTS
-      - USE_AZURE_AI_SEARCH_SERVICE
-      - AZURE_AI_AGENT_NAME
-      - AZURE_AI_AGENT_ID
-      - AZURE_AI_AGENT_DEPLOYMENT_NAME
-      - AZURE_AI_AGENT_DEPLOYMENT_SKU
-      - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-      - AZURE_AI_AGENT_MODEL_NAME
-      - AZURE_AI_AGENT_MODEL_FORMAT
-      - AZURE_AI_AGENT_MODEL_VERSION
-      - AZURE_AI_EMBED_DEPLOYMENT_NAME
-      - AZURE_AI_EMBED_DEPLOYMENT_SKU
-      - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-      - AZURE_AI_EMBED_MODEL_NAME
-      - AZURE_AI_EMBED_MODEL_FORMAT
-      - AZURE_AI_EMBED_MODEL_VERSION
-      - AZURE_AI_EMBED_DIMENSIONS
-      - AZURE_AI_SEARCH_INDEX_NAME
-      - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-      - AZURE_EXISTING_AIPROJECT_ENDPOINT
-      - AZURE_EXISTING_AGENT_ID
-      - ENABLE_AZURE_MONITOR_TRACING
-      - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-      ```
-
----
-
-## 2. Розбір файлу
-
-Розглянемо файл по секціях, щоб зрозуміти що він робить і навіщо.
-
-### 2.1 **Заголовок та схема (1-3)**
-
-```yaml title="" linenums="0"
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-```
-
-- **Рядок 1**: Забезпечує валідацію схеми YAML для підтримки IDE та IntelliSense
-
-### 2.2 Метадані проекту (5-10)
-
-```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@1.0.2
+  template: azd-get-started-with-ai-agents@2.5.0
 requiredVersions:
   azd: ">=1.14.0"
-```
-
-- **Рядок 5**: Визначає ім’я проекту, яке використовує Azure Developer CLI
-- **Рядки 6-7**: Вказує, що цей файл базується на шаблоні версії 1.0.2
-- **Рядки 8-9**: Вимагає версію Azure Developer CLI 1.14.0 або вище
-
-### 2.3 Хуки розгортання (11-40)
-
-```yaml title="" linenums="0"
-hooks:
-  preup:
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-      interactive: true
-      continueOnError: false
-    windows:
-      shell: pwsh
-      run: ./scripts/validate_env_vars.ps1
-      interactive: true
-      continueOnError: false      
-```
-
-- **Рядки 11-20**: **Прехук (pre-deployment hook)** – виконується перед `azd up`
-
-      - В Unix/Linux: надає виконувані права для скрипту валідації і запускає його
-      - В Windows: запускає PowerShell скрипт валідації
-      - Обидва інтерактивні та зупиняють розгортання у разі помилки
-
-```yaml  title="" linenums="0"
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Рядки 21-30**: **Пост-хук після створення ресурсів (post-provision hook)** – виконується після створення ресурсів Azure
-
-  - Виконує скрипти для запису змінних середовища
-  - Розгортання продовжується навіть у разі помилки скриптів (`continueOnError: true`)
-
-```yaml title="" linenums="0"
-  postdeploy:
-    windows:
-      shell: pwsh
-      run: ./scripts/postdeploy.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Рядки 31-40**: **Пост-хук після розгортання (post-deploy hook)** – виконується після розгортання додатку
-
-  - Виконує фінальні налаштувальні скрипти
-  - Розгортання продовжується навіть при помилках у скриптах
-
-### 2.4 Конфігурація сервісу (41-48)
-
-Цей розділ налаштовує сервіс застосунку, який ви розгортаєте.
-
-```yaml title="" linenums="0"
 services:
   api_and_frontend:
     project: ./src
@@ -226,162 +30,109 @@ services:
       remoteBuild: true
 ```
 
-- **Рядок 42**: Визначає сервіс з ім’ям "api_and_frontend"
-- **Рядок 43**: Вказує директорію `./src` для вихідного коду
-- **Рядок 44**: Задає мову програмування Python
-- **Рядок 45**: Використовує Azure Container Apps як платформу хостингу
-- **Рядки 46-48**: Налаштування Docker
+- `name` ідентифікує проект AZD; `metadata.template` записує версію шаблону.
+- `requiredVersions.azd` — це мінімум шаблону, а не рекомендація залишатися на старому CLI. Використовуйте актуальну підтримувану версію AZD.
+- `services` визначає цілі розгортання програми. Цей шаблон розгортає свій Python API і фронтенд як одну службу Container Apps.
+- `project` відноситься до `azure.yaml`.
+- `remoteBuild` запитує віддалене побудування контейнера. Ваша особистість все ще потребує необхідних дозволів Azure.
 
-      - Вказано ім’я Docker-образу "api_and_frontend"
-      - Збірка образу виконується віддалено в Azure (не локально)
+Файли Bicep шаблону під `infra/`, а не тільки список `services`, оголошують ресурси, такі як Microsoft Foundry, розгортання моделей, сховище та необов’язковий AI Search.
 
-### 2.5 Змінні конвеєра (49-76)
+## 2. Розуміння lifecycle hooks
 
-Це змінні, які допомагають запускати `azd` в CI/CD конвеєрах для автоматизації
+Перегляньте розділ `hooks` та пов’язані скрипти перед запуском шаблону. Перевірена версія містить:
 
-```yaml title="" linenums="0"
-pipeline:
-  variables:
-    - AZURE_RESOURCE_GROUP
-    - AZURE_AIHUB_NAME
-    - AZURE_AIPROJECT_NAME
-    - AZURE_AISERVICES_NAME
-    - AZURE_SEARCH_SERVICE_NAME
-    - AZURE_APPLICATION_INSIGHTS_NAME
-    - AZURE_CONTAINER_REGISTRY_NAME
-    - AZURE_KEYVAULT_NAME
-    - AZURE_STORAGE_ACCOUNT_NAME
-    - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-    - USE_CONTAINER_REGISTRY
-    - USE_APPLICATION_INSIGHTS
-    - USE_AZURE_AI_SEARCH_SERVICE
-    - AZURE_AI_AGENT_NAME
-    - AZURE_AI_AGENT_ID
-    - AZURE_AI_AGENT_DEPLOYMENT_NAME
-    - AZURE_AI_AGENT_DEPLOYMENT_SKU
-    - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-    - AZURE_AI_AGENT_MODEL_NAME
-    - AZURE_AI_AGENT_MODEL_FORMAT
-    - AZURE_AI_AGENT_MODEL_VERSION
-    - AZURE_AI_EMBED_DEPLOYMENT_NAME
-    - AZURE_AI_EMBED_DEPLOYMENT_SKU
-    - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-    - AZURE_AI_EMBED_MODEL_NAME
-    - AZURE_AI_EMBED_MODEL_FORMAT
-    - AZURE_AI_EMBED_MODEL_VERSION
-    - AZURE_AI_EMBED_DIMENSIONS
-    - AZURE_AI_SEARCH_INDEX_NAME
-    - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-    - AZURE_EXISTING_AIPROJECT_ENDPOINT
-    - AZURE_EXISTING_AGENT_ID
-    - ENABLE_AZURE_MONITOR_TRACING
-    - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-```
+| Хук | Призначення | Важлива поведінка |
+|------|---------|--------------------|
+| `preup` | Перевірка вхідних даних середовища шаблону перед потоком робіт `up` | Платформенно-специфічні shell-скрипти можуть зупинити потік робіт у разі помилки |
+| `postdeploy` | Запуск специфічного для шаблону налаштування після розгортання застосунку | Перевірте `continueOnError` та вивід скрипта; успішне розгортання не гарантує успіх кожного завдання налаштування |
 
-Цей розділ визначає змінні середовища, які використовуються **під час розгортання**, організовані по категоріях:
+Ця версія **не містить** старіший хук `postprovision` / `write_env`, показаний у попередніх матеріалах майстер-класу. Не копіюйте посилання на хуки у скрипти, які більше не існують.
 
-- **Назви ресурсів Azure (рядки 51-60)**:
-      - Основні назви сервісних ресурсів Azure, наприклад група ресурсів, AI Hub, AI Project тощо
-- **Фічер-флаги (рядки 61-63)**:
-      - Булеві змінні для увімкнення/вимкнення конкретних сервісів Azure
-- **Конфігурація AI агента (рядки 64-71)**:
-      - Налаштування основного AI агента включно з іменем, ідентифікатором, параметрами розгортання, деталями моделі
-- **Конфігурація вбудованої моделі (рядки 72-79)**:
-      - Конфігурація для вбудованої моделі, яка використовується для векторного пошуку
-- **Пошук і моніторинг (рядки 80-84)**:
-      - Назва індексу пошуку, ідентифікатори існуючих ресурсів, а також налаштування моніторингу/трасування
+Ключі хуків вибирають події життєвого циклу; `posix` і `windows` вибирають реалізації для платформи. `shell`, `run`, `interactive` та `continueOnError` контролюють виконання. Це виконувані скрипти з вашими правами, тому переглядайте їх так само ретельно, як і код застосунку.
 
----
+Дивіться повний життєвий цикл у [документації хуків AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-extensibility).
 
-## 3. Ознайомлення зі змінними середовища
-Наступні змінні середовища керують конфігурацією та поведінкою вашого розгортання, організовані за основним призначенням. Більшість змінних мають сенсові значення за замовчуванням, але ви можете налаштувати їх під ваші конкретні потреби або існуючі ресурси Azure.
+## 3. Відстеження вхідних даних середовища у інфраструктуру
 
-### 3.1 Обов’язкові змінні 
+Виконайте ці команди в ініціалізованому репозиторії з прикладом:
 
-```bash title="" linenums="0"
-# Основна конфігурація Azure
-AZURE_ENV_NAME                    # Назва середовища (використовується у найменуванні ресурсів)
-AZURE_LOCATION                    # Регіон розгортання
-AZURE_SUBSCRIPTION_ID             # Цільова підписка
-AZURE_RESOURCE_GROUP              # Назва групи ресурсів
-AZURE_PRINCIPAL_ID                # Користувацький обліковий запис для RBAC
-
-# Імена ресурсів (генеруються автоматично, якщо не вказані)
-AZURE_AIHUB_NAME                  # Назва хаба Microsoft Foundry
-AZURE_AIPROJECT_NAME              # Назва проекту AI
-AZURE_AISERVICES_NAME             # Назва облікового запису сервісів AI
-AZURE_STORAGE_ACCOUNT_NAME        # Назва облікового запису зберігання
-AZURE_CONTAINER_REGISTRY_NAME     # Назва контейнерного реєстру
-AZURE_KEYVAULT_NAME               # Назва Key Vault (якщо використовується)
-```
-
-### 3.2 Конфігурація моделі 
-```bash title="" linenums="0"
-# Конфігурація моделі чату
-AZURE_AI_AGENT_MODEL_NAME         # За замовчуванням: gpt-4.1-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # За замовчуванням: OpenAI (або Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # За замовчуванням: остання доступна
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Назва розгортання для моделі чату
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # За замовчуванням: Стандарт
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # За замовчуванням: 80 (тисяч TPM)
-
-# Конфігурація моделі ембеддінгу
-AZURE_AI_EMBED_MODEL_NAME         # За замовчуванням: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # За замовчуванням: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # За замовчуванням: остання доступна
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Назва розгортання для ембеддінгів
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # За замовчуванням: Стандарт
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # За замовчуванням: 50 (тисяч TPM)
-
-# Конфігурація агента
-AZURE_AI_AGENT_NAME               # Відображуване ім’я агента
-AZURE_EXISTING_AGENT_ID           # Використовувати існуючого агента (опційно)
-```
-
-### 3.3 Перемикач функцій
-```bash title="" linenums="0"
-# Необов’язкові служби
-USE_APPLICATION_INSIGHTS         # За замовчуванням: true
-USE_AZURE_AI_SEARCH_SERVICE      # За замовчуванням: false
-USE_CONTAINER_REGISTRY           # За замовчуванням: true
-
-# Моніторинг і трасування
-ENABLE_AZURE_MONITOR_TRACING     # За замовчуванням: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # За замовчуванням: false
-
-# Конфігурація пошуку
-AZURE_AI_SEARCH_INDEX_NAME       # Назва індексу пошуку
-AZURE_SEARCH_SERVICE_NAME        # Назва служби пошуку
-```
-
-### 3.4 Конфігурація AI проекту 
-```bash title="" linenums="0"
-# Використання існуючих ресурсів
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Повний ідентифікатор ресурсу існуючого AI-проєкту
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL кінцевої точки існуючого проєкту
-```
-
-### 3.5 Перевірте свої змінні
-
-Використовуйте Azure Developer CLI для перегляду та керування змінними середовища:
-
-```bash title="" linenums="0"
-# Переглянути всі змінні середовища для поточного середовища
-azd env get-values
-
-# Отримати конкретну змінну середовища
+```bash
+azd env list
 azd env get-value AZURE_ENV_NAME
-
-# Встановити змінну середовища
-azd env set AZURE_LOCATION eastus
-
-# Встановити кілька змінних зі файлу .env
-azd env set --from-file .env
+azd env get-value AZURE_LOCATION
 ```
+
+Перегляньте `infra/main.parameters.json`, щоб побачити, які змінні середовища шаблон фактично використовує. Встановлення довільної назви через `azd env set` не змінює автоматично ресурс Azure.
+
+Перевірені значення за замовчуванням включають:
+
+| Вхідні дані | Значення за замовчуванням / призначення |
+|-------|-------------------|
+| `AZURE_AI_AGENT_MODEL_NAME` | `gpt-5-mini` |
+| `AZURE_AI_AGENT_MODEL_VERSION` | `2025-08-07` |
+| `AZURE_AI_AGENT_DEPLOYMENT_SKU` | `GlobalStandard` |
+| `AZURE_AI_AGENT_DEPLOYMENT_CAPACITY` | `80`; кількість квот залежить від моделі та типу розгортання |
+| `AZURE_AI_EMBED_MODEL_NAME` | `text-embedding-3-small` |
+| `AZURE_AI_EMBED_DIMENSIONS` | `1536` |
+| `USE_APPLICATION_INSIGHTS` | `true` |
+| `USE_AZURE_AI_SEARCH_SERVICE` | `false` |
+| `ENABLE_AZURE_MONITOR_TRACING` | `false` |
+| `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` | `false`; залишайте відключеним, поки не буде переглянуто обробку даних |
+
+Це специфічні для прикладу вхідні дані, а не глобальні налаштування AZD. Перевірте [документацію підтримки моделей і регіонів](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) та квоту вашої підписки перед вибором моделі, SKU, потужності чи місця розташування. Не тлумачте кожну одиницю потужності як 1 000 токенів на хвилину.
+
+Щоб вибрати іншу модель чату, оновіть сумісні **назву, версію, формат, SKU та потужність разом**, дотримуючись [керівництва зі зміни прикладу](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md). Зміна лише назви може залишити несумісну версію або тип розгортання.
+
+## 4. Лабораторна робота: увімкнення необов’язкового пошуку та трасування
+
+!!! warning "Ці налаштування можуть додати платні ресурси"
+
+    Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
+
+```bash
+azd env set USE_AZURE_AI_SEARCH_SERVICE true
+azd env set USE_APPLICATION_INSIGHTS true
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+
+# Inspect the infrastructure changes and any configured preview hooks
+azd provision --preview
+
+# Apply the resource changes and deploy the application
+azd up
+```
+
+Зміни у інфраструктурі потребують провізіонінгу; лише `azd deploy` розгортає службові застосунки. Для індексації пошуку й підтримуваних опцій вилучення виконуйте [керівництво AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md). Для моніторингу виконуйте [керівництво з спостережуваності](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md).
+
+Не вмикайте захоплення контенту запитів/відповідей на реальних даних клієнтів без необхідної згоди, контролю доступу, політики зберігання й редагування.
+
+## 5. Існуючі ресурси та CI/CD
+
+Щоб повторно використати проект Foundry, дотримуйтесь [інструкцій щодо існуючих ресурсів](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md#use-existing-resources) у прикладі. Встановлення `AZURE_EXISTING_AIPROJECT_RESOURCE_ID` змінює шлях розгортання; у такому випадку шаблон не створює Application Insights або AI Search для вас. Явно перевіряйте залежності, призначення ролей і розгортання моделей.
+
+Розділ `pipeline.variables` керує значеннями, які передаються у згенерований пайплайн; він не є сховищем секретів і не створює ресурси Azure. Віддавайте перевагу керованим ідентичностям у застосунку та OIDC для CI/CD. Файли середовища AZD — це простий текст, і їх не слід комітити.
+
+AZD підтримує імпорт довірених локально підготовлених dotenv файлів:
+
+```bash
+azd env set --file .env
+```
+
+Перегляньте цей файл перед імпортом і не виводьте файли середовища, що містять секрети, у спільні термінали або логи CI.
+
+## 6. Перевірте своє розуміння
+
+- Яка служба `azure.yaml` розгортає застосунок?
+- Який параметр інфраструктури використовує кожне змінене вами значення?
+- Які зміни потребують провізіонінгу, а не лише розгортання?
+- Чи підтримували обрана область і підписка модель і квоту?
+- Чи всі хуки налаштування спрацювали успішно, і чи ви можете підтвердити поведінку розгорнутого застосунку?
+
+Продовжуйте до [Налаштування шаблону](5-Customize-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Відмова від відповідальності**:
-Цей документ було перекладено за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ його рідною мовою слід вважати авторитетним джерелом. Для важливої інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникають у результаті використання цього перекладу.
+Цей документ було перекладено за допомогою сервісу штучного інтелекту для перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

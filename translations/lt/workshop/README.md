@@ -1,173 +1,176 @@
 <div align="center">
   <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🎯 AZD dirbtuvės dirbtinio intelekto kūrėjams
+      🎯 AZD kūrėjams dirbtinio intelekto srityje dirbantiems dirbtuvės
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>Praktinės dirbtuvės, skirtos kurti DI taikomąsias programas naudojant Azure Developer CLI.</strong><br>
-      Atlikite 7 modulius, kad įvaldytumėte AZD šablonus ir DI diegimo darbo eigas.
+      <strong>Praktinės dirbtuvės, skirtos kurti DI programas su Azure Developer CLI.</strong><br>
+      Užbaikite 7 modulius, kad įvaldytumėte AZD šablonus ir DI diegimo darbo eigas.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Paskutinį kartą atnaujinta: 2026 m. kovo
+        📅 Šaltinio gairių peržiūra: 2026 m. lapkritis
       </span>
     </div>
   </div>
 </div>
 
-# AZD for AI Developers Workshop
+# AZD kūrėjams dirbtinio intelekto srityje skirtos dirbtuvės
 
-Welcome to the hands-on workshop for learning Azure Developer CLI (AZD) with a focus on AI application deployment. This workshop helps you gain an applied understanding of AZD templates in 3 steps:
+Sveiki atvykę į praktines dirbtuves, skirtas mokytis Azure Developer CLI (AZD) su dėmesiu DI programų diegimui. Šios dirbtuvės padės jums praktiškai suprasti AZD šablonus per 3 žingsnius:
 
-1. **Discovery** - find the template that is right for you.
-1. **Deployment** - deploy and validate that it works
-1. **Customization** - modify and iterate to make it yours!
+1. **Atranka** – raskite jums tinkamą šabloną.
+1. **Diegimas** – įdiekite ir patikrinkite, ar veikia
+1. **Tinkininimas** – modifikuokite ir tobulinkite, kad jis būtų jūsų!
 
-Over the course of this workshop, you will also be introduced to core developer tools and workflows, to help you streamline your end-to-end development journey.
+Per šias dirbtuves taip pat susipažinsite su pagrindiniais kūrėjų įrankiais ir darbo eiga, kad padėtumėte supaprastinti visą kūrimo procesą nuo pradžios iki pabaigos.
 
 <br/>
 
-## Browser-Based Guide
+## Naršyklėje veikianti vadovė
 
-The workshop lessons are in Markdown. You can navigate them directly in GitHub - or launch a browser-based preview as shown in the screenshot below.
+Dirbtuvių pamokos pateiktos Markdown formatu. Jas galite naršyti tiesiogiai GitHub – arba paleisti naršyklėje veikiančią peržiūrą, kaip parodyta žemiau esančioje ekrano kopijoje.
 
-![Dirbtuvės](../../../translated_images/lt/workshop.75906f133e6f8ba0.webp)
+![Workshop](../../../translated_images/lt/workshop.75906f133e6f8ba0.webp)
 
-To use this option - fork the repository to your profile, and launch GitHub Codespaces. Once the VS Code terminal is active, type this command:
+Norėdami naudoti šią parinktį – atsiskirkite šį saugyklą į savo profilį ir paleiskite GitHub Codespaces. Kai VS Code terminalas bus aktyvus, įveskite šią komandą:
 
-This browser preview works in GitHub Codespaces, dev containers, or a local clone with Python and MkDocs installed.
+Ši naršyklės peržiūra veikia GitHub Codespaces, kūrėjų konteineriuose arba vietinėje klono aplinkoje su įdiegtais Python ir MkDocs.
 
 ```bash title="" linenums="0"
-mkdocs serve > /dev/null 2>&1 &
+python -m pip install -r requirements-dev.txt
+python -m mkdocs serve --config-file workshop/mkdocs.yml
 ```
 
-In a few seconds, you will see a pop-up dialog. Select the option to `Atidaryti naršyklėje`. The web-based guide will now open in a new browser tab. Some benefits of this preview:
+Vykdykite šias komandas iš **kurso saugyklos šaknies**, o ne iš atskirai inicializuoto DI pavyzdžio. Laikykite peržiūrą aktyvią, kad būtų matomos klaidos; sustabdykite ją su Ctrl+C. Norėdami patikrinti svetainę be jos paleidimo, vykdykite `python -m mkdocs build --strict --config-file workshop/mkdocs.yml`.
 
-1. **Built-in search** - find keywords or lessons quickly.
-1. **Copy icon** - hover over codeblocks to see this option
-1. **Theme toggle** - switch between dark and light themes
-1. **Get help** - click the Discord icon in footer to join!
+Po kelių sekundžių pamatysite iššokantį dialogą. Pasirinkite parinktį `Open in browser`. Tada internetinis vadovas atsidarys naujame naršyklės skirtuke. Keletas šios peržiūros privalumų:
+
+1. **Įmontuota paieška** – greitai raskite raktinius žodžius ar pamokas.
+1. **Nukopijuoti ikonėlė** – užveskite pelės žymeklį ant kodo blokų ir pamatysite šią parinktį
+1. **Temų perjungimas** – pereikite tarp tamsios ir šviesios temos
+1. **Pagalba** – spustelėkite Discord ikoną poraštėje, kad prisijungtumėte!
 
 <br/>
 
-## Workshop Overview
+## Dirbtuvių apžvalga
 
-**Duration:** 3-4 hours  
-**Level:** Beginner to Intermediate  
-**Prerequisites:** Familiarity with Azure, AI concepts, VS Code & command-line tools.
+**Trukmė:** 3-4 valandos  
+**Lygis:** Pradedantiesiems ir vidutiniams  
+**Reikalavimai:** Esamas pažinimas apie Azure, DI koncepcijas, VS Code ir komandų eilutės įrankius.
 
-This is a hands-on workshop where you learn by doing. Once you have completed the exercises, we recommend reviewing the AZD For Beginners curriculum to continue your learning journey into Security and Productivity best practices.
+Tai praktinės dirbtuvės, kuriose mokomasi per veiksmą. Baigę pratimus rekomenduojame peržiūrėti AZD Pradedantiesiems mokymų programą, kad tęstumėte mokymąsi apie saugumo ir produktyvumo gerąsias praktikas.
 
-| Time| Module  | Objective |
+| Laikas| Modulis  | Tikslas |
 |:---|:---|:---|
-| 15 mins | [Introduction](docs/instructions/0-Introduction.md) | Set the stage, understand the goals |
-| 30 mins | [Select AI Template](docs/instructions/1-Select-AI-Template.md) | Explore options and pick starter | 
-| 30 mins | [Validate AI Template](docs/instructions/2-Validate-AI-Template.md) | Deploy default solution to Azure |
-| 30 mins | [Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) | Explore structure and configuration |
-| 30 mins | [Configure AI Template](docs/instructions/4-Configure-AI-Template.md) | Activate and try available features |
-| 30 mins | [Customize AI Template](docs/instructions/5-Customize-AI-Template.md) | Adapt the template to your needs |
-| 30 mins | [Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) | Cleanup and release resources |
-| 15 mins | [Wrap-Up & Next Steps](docs/instructions/7-Wrap-up.md) | Learning resources, Workshop challenge |
+| 15 min | [Įvadas](docs/instructions/0-Introduction.md) | Nustatyti pagrindą, suprasti tikslus |
+| 30 min | [Pasirinkti DI šabloną](docs/instructions/1-Select-AI-Template.md) | Išnagrinėti parinktis ir pasirinkti pradžiai | 
+| 30 min | [Patikrinti DI šabloną](docs/instructions/2-Validate-AI-Template.md) | Įdiegti numatytąją Azure sprendimą |
+| 30 min | [Išardyti DI šabloną](docs/instructions/3-Deconstruct-AI-Template.md) | Išnagrinėti struktūrą ir konfigūraciją |
+| 30 min | [Konfigūruoti DI šabloną](docs/instructions/4-Configure-AI-Template.md) | Aktyvuoti ir išbandyti galimas funkcijas |
+| 30 min | [Tinkinti DI šabloną](docs/instructions/5-Customize-AI-Template.md) | Priderinti šabloną prie savo poreikių |
+| 30 min | [Naikinti infrastruktūrą](docs/instructions/6-Teardown-Infrastructure.md) | Išvalyti ir atleisti išteklius |
+| 15 min | [Apibendrinimas ir kiti žingsniai](docs/instructions/7-Wrap-up.md) | Mokymosi šaltiniai, dirbtuvių iššūkis |
 
 <br/>
 
-## What You'll Learn
+## Ko išmoksite
 
-Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Microsoft Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
+Galvokite apie AZD šabloną kaip apie mokymosi smėlio dėžę, skirtą tyrinėti įvairias galimybes ir įrankius pilnam kūrimo ciklui Microsoft Foundry platformoje. Pabaigoje šių dirbtuvių turėtumėte turėti intuiciją apie įvairius įrankius ir koncepcijas šiame kontekste.
 
-| Concept  | Objective |
+| Koncepcija  | Tikslas |
 |:---|:---|
-| **Azure Developer CLI** | Understand tool commands and workflows|
-| **AZD Templates**| Understand project structure and config|
-| **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
-| **Azure AI Search**| Enable context engineering with agents |
-| **Observability**| Explore tracing, monitoring and evaluations |
-| **Red Teaming**| Explore adversarial testing and mitigations |
+| **Azure Developer CLI** | Suprasti įrankio komandas ir darbo eigas|
+| **AZD šablonai**| Suprasti projekto struktūrą ir konfigūraciją|
+| **Azure DI agentas**| Pateikti ir įdiegti Microsoft Foundry projektą  |
+| **Azure DI paieška**| Įgalinti konteksto inžineriją agentais |
+| **Stebėjimas**| Išnagrinėti stebėjimą, vertinimą ir monitoringą |
+| **Raudonoji komanda**| Išnagrinėti priešiškų bandymų vykdymą ir prevenciją |
 
 <br/>
 
-## Workshop Structure
+## Dirbtuvių struktūra
 
-The workshop is structured to take you on a journey from template discovery, to deployment, deconstruction, and customization - using the official [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) starter template as the basis.
+Dirbtuvės yra struktūrizuotos taip, kad nukeliautumėte nuo šablono paieškos iki diegimo, išardymo ir tinkinimo – naudojant oficialų [Pradžia su DI agentais](https://github.com/Azure-Samples/get-started-with-ai-agents) pradinį šabloną kaip pagrindą.
 
-### [Module 1: Select AI Template](docs/instructions/1-Select-AI-Template.md) (30 mins)
+### [Modulis 1: Pasirinkti DI šabloną](docs/instructions/1-Select-AI-Template.md) (30 min)
 
-- What are AI Templates?
-- Where can I find AI Templates?
-- How can I get started building AI Agents?
-- **Lab**: Quickstart in Codespaces or a dev container
+- Kas yra DI šablonai?
+- Kur rasti DI šablonus?
+- Kaip pradėti kurti DI agentus?
+- **Laboratorinis darbas**: Greitas startas Codespaces arba kūrėjų konteineryje
 
-### [Module 2: Validate AI Template](docs/instructions/2-Validate-AI-Template.md) (30 mins)
+### [Modulis 2: Patikrinti DI šabloną](docs/instructions/2-Validate-AI-Template.md) (30 min)
 
-- What is the AI Template Architecture?
-- What is the AZD Development Workflow?
-- How can I get help with AZD Development?
-- **Lab**: Deploy & Validate AI Agents template
+- Kokia yra DI šablono architektūra?
+- Kas yra AZD kūrimo darbo eiga?
+- Kaip gauti pagalbą AZD kūrimui?
+- **Laboratorinis darbas**: Įdiegti ir patikrinti DI agentų šabloną
 
-### [Module 3: Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) (30 mins)
+### [Modulis 3: Išardyti DI šabloną](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
 
-- Explore your environment in `.azure/` 
-- Explore your resource setup in `infra/` 
-- Explore your AZD configuration in `azure.yaml`s
-- **Lab**: Modify Environment Variables & Redeploy
+- Išnagrinėti savo aplinką naudojant `.azure/` 
+- Išnagrinėti savo išteklių konfigūraciją naudojant `infra/` 
+- Išnagrinėti savo AZD konfigūraciją `azure.yaml`
+- **Laboratorinis darbas**: Keisti aplinkos kintamuosius ir diegti iš naujo
 
-### [Module 4: Configure AI Template](docs/instructions/4-Configure-AI-Template.md) (30 mins)
-- Explore: Retrieval Augmented Generation
-- Explore: Agent Evaluation & Red Teaming
-- Explore: Tracing & Monitoring
-- **Lab**: Explore AI Agent + Observability 
+### [Modulis 4: Konfigūruoti DI šabloną](docs/instructions/4-Configure-AI-Template.md) (30 min)
+- Išnagrinėti: Atkuriamąją generaciją
+- Išnagrinėti: Agentų vertinimą ir raudonąją komandą
+- Išnagrinėti: Sekimą ir monitoringą
+- **Laboratorinis darbas**: Tyrinėti DI agentą ir stebėjimą 
 
-### [Module 5: Customize AI Template](docs/instructions/5-Customize-AI-Template.md) (30 mins)
-- Define: PRD with Scenario Requirements
-- Configure: Environment Variables for AZD
-- Implement: Lifecycle Hooks for added tasks
-- **Lab**: Customize template for my scenario
+### [Modulis 5: Tinkinti DI šabloną](docs/instructions/5-Customize-AI-Template.md) (30 min)
+- Apibrėžti: PRD su scenarijų reikalavimais
+- Konfigūruoti: Aplinkos kintamuosius AZD
+- Įgyvendinti: Gyvavimo ciklo kablius papildomoms užduotims
+- **Laboratorinis darbas**: Tinkinti šabloną savo scenarijui
 
-### [Module 6: Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) (30 mins)
-- Recap: What are AZD Templates?
-- Recap: Why use Azure Developer CLI?
-- Next Steps: Try a different template!
-- **Lab**: Deprovision infrastructure & cleanup
+### [Modulis 6: Naikinti infrastruktūrą](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
+- Apžvelgti: Kas yra AZD šablonai?
+- Apžvelgti: Kodėl naudoti Azure Developer CLI?
+- Kiti žingsniai: Išbandyti kitą šabloną!
+- **Laboratorinis darbas**: Naikinti infrastruktūrą ir išvalyti
 
 <br/>
 
-## Workshop Challenge
+## Dirbtuvių iššūkis
 
-Want to challenge yourself to do more? Here are some project suggestions - or share your ideas with us!!
+Norite sau iškelti aukštesnius tikslus? Štai keletas projekto pasiūlymų – arba pasidalinkite savo idėjomis su mumis!
 
-| Project | Description |
+| Projektas | Aprašymas |
 |:---|:---|
-|1. **Deconstruct A Complex AI Template** | Use the workflow and tools we outlined and see if you can deploy, validate, and customize a different AI solution template. _What did you learn?_|
-|2. **Customize With Your Scenario**  | Try writing a PRD (Product Requirements Document) for a different scenario. Then use GitHub Copilot in your template repo in Agent Model - and ask it to generate a customization workflow for you. _What did you learn? How could you improve on these suggestions?_|
+|1. **Išardyti sudėtingą DI šabloną** | Naudokite aprašytą darbo eigą ir įrankius ir pažiūrėkite, ar galite įdiegti, patikrinti ir tinkinti kitą DI sprendimo šabloną. _Ką išmokote?_|
+|2. **Tinkinti pagal savo scenarijų**  | Pabandykite parašyti PRD (Produkto reikalavimų dokumentą) kitam scenarijui. Tada naudokite GitHub Copilot savo šablono saugykloje Agent Model režimu – ir paprašykite sukurti tinkinimo darbo eigą. _Ką išmokote? Kaip galėtumėte patobulinti šiuos pasiūlymus?_|
 | | |
 
-## Have feedback?
+## Turite atsiliepimų?
 
-1. Post an issue on this repo - tag it `Workshop` for convenience.
-1. Join the Microsoft Foundry Discord - connect with your peers!
+1. Parašykite problemą šiame saugykloje – pažymėkite ją `Workshop` patogumui.
+1. Prisijunkite prie Microsoft Foundry Discord – susisiekite su bendraamžiais!
 
 
 | | | 
 |:---|:---|
-| **📚 Course Home**| [AZD For Beginners](../README.md)|
-| **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Begin Workshop](#workshop-overview) |
+| **📚 Kurso pradžia**| [AZD Pradedantiesiems](../README.md)|
+| **📖 Dokumentacija** | [Pradžia su DI šablonais](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️DI šablonai** | [Microsoft Foundry šablonai](https://ai.azure.com/templates) |
+|**🚀 Tolimesni žingsniai** | [Pradėti dirbtuves](#workshop-overview) |
 | | |
 
 <br/>
 
 ---
 
-**Navigation:** [Main Course](../README.md) | [Introduction](docs/instructions/0-Introduction.md) | [Module 1: Select Template](docs/instructions/1-Select-AI-Template.md)
+**Navigacija:** [Pagrindinis kursas](../README.md) | [Įvadas](docs/instructions/0-Introduction.md) | [Modulis 1: Pasirinkti šabloną](docs/instructions/1-Select-AI-Template.md)
 
-**Ready to start building AI applications with AZD?**
+**Pasiruošę pradėti kurti DI programas su AZD?**
 
-[Begin Workshop: Introduction →](docs/instructions/0-Introduction.md)
+[Pradėti dirbtuves: Įvadas →](docs/instructions/0-Introduction.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kilusius naudojant šį vertimą.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

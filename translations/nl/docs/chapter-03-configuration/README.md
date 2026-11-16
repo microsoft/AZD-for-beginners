@@ -1,19 +1,19 @@
 # Hoofdstuk 3: Configuratie & Authenticatie
 
-**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 45-60 minuten | **⭐ Complexiteit**: Gemiddeld
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 90-150 minuten inclusief integratiepraktijk | **⭐ Complexiteit**: Gemiddeld
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk behandelt omgevingconfiguratie, authenticatiepatronen en beste beveiligingspraktijken voor Azure Developer CLI-implementaties.
+Dit hoofdstuk behandelt omgevingsconfiguratie, authenticatiepatronen en beveiligingsbest practices voor Azure Developer CLI-implementaties.
 
-> Gevalideerd met `azd 1.27.1` in juli 2026.
+> Doel van commando- en configuratiereview: `azd 1.37.2` (november 2026). Live Azure-provisioning is niet uitgevoerd tijdens de review.
 
 ## Leerdoelen
 
 Door dit hoofdstuk te voltooien, zul je:
-- Meesterschap krijgen over de AZD-configuratiehiërarchie
+- De AZD-configuratiehiërarchie beheersen
 - Meerdere omgevingen beheren (dev, staging, prod)
 - Veilige authenticatie implementeren met beheerde identiteiten
 - Omgevingsspecifieke instellingen configureren
@@ -24,59 +24,59 @@ Door dit hoofdstuk te voltooien, zul je:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Configuratie Gids](configuration.md) | Omgevingsinstelling en beheer | 30 min |
-| 2 | [Authenticatie & Beveiliging](authsecurity.md) | Beheerde identiteit en RBAC-patronen | 30 min |
+| 1 | [Configuratiegids](configuration.md) | Omgevingsopzet en beheer | 30 min |
+| 2 | [Authenticatie & Beveiliging](authsecurity.md) | Patronen voor beheerde identiteit en RBAC | 30 min |
 
 ---
 
 ## 🚀 Snel Starten
 
+Voer uit vanuit de root van een **al geïnitialiseerde azd-applicatie**, niet vanuit de cursusrepository. Gebruik ongebruikte omgevingsnamen als deze al bestaan.
+
 ```bash
-# Meerdere omgevingen maken
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Omgevingen wisselen
+# Switch environments
 azd env select prod
 
-# Omgevingsvariabelen instellen
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Configuratie bekijken
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` is illustratief: het beïnvloedt alleen infrastructuur als je sjabloon het expliciet gebruikt. Gewone `azd env set` waarden worden lokaal in platte tekst opgeslagen; ze zijn geen veilige geheime opslag.
 
 ---
 
 ## 🔧 Configuratiehiërarchie
 
-AZD past instellingen toe in deze volgorde (latere overschrijft eerdere):
-
-1. **Standaardwaarden** (ingebouwd in sjablonen)
-2. **azure.yaml** (projectconfiguratie)
-3. **Omgevingsvariabelen** (`azd env set`)
-4. **Opdrachtregel-vlaggen** (`--location eastus`)
+Houd drie verschillende configuratievlakken gescheiden: globale voorkeuren (`azd config`), projectstructuur (`azure.yaml`), en omgevingsspecifieke waarden (`azd env`). Flags overschrijven alleen de instellingen die ze daadwerkelijk ondersteunen; er is geen universele overlay van willekeurige omgevingsvariabelen op `azure.yaml` of Bicep.
 
 ---
 
-## 🔐 Beste Beveiligingspraktijken
+## 🔐 Beveiligingsbest practices
 
 ```bash
-# Gebruik beheerde identiteit (aanbevolen)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Controleer AZD-authenticatiestatus
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Optioneel: verifieer Azure CLI-context als je van plan bent az-opdrachten uit te voeren
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Herauthenticeer indien nodig
+# Re-authenticate if needed
 azd auth login
 
-# Optioneel: vernieuw Azure CLI-authenticatie voor az-opdrachten
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -86,14 +86,14 @@ az login
 
 | Richting | Hoofdstuk |
 |-----------|---------|
-| **Vorige** | [Hoofdstuk 2: AI Ontwikkeling](../chapter-02-ai-development/README.md) |
-| **Volgende** | [Hoofdstuk 4: Infrastructuur](../chapter-04-infrastructure/README.md) |
+| **Voorgaand** | [Hoofdstuk 2: AI-ontwikkeling](../chapter-02-ai-development/README.md) |
+| **Volgend** | [Hoofdstuk 4: Infrastructuur](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 Gerelateerde Bronnen
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
+- [Pre-deployment Checks](../chapter-06-pre-deployment/README.md)
 - [Probleemoplossing](../chapter-07-troubleshooting/common-issues.md)
 
 ---

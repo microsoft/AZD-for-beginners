@@ -1,60 +1,58 @@
-# 6. Avveckla infrastruktur
+# 6. Nedmontering av infrastruktur
 
-!!! tip "NÄR DU HAR SLUTFÖRT DENNA MODUL KOMMER DU ATT KUNNA"
+!!! tip "VID SLUTET AV DENNA MODUL KOMMER DU ATT KUNNA"
 
-    - [ ] Förstå vikten av att rensa upp resurser och kostnadshantering
-    - [ ] Använd `azd down` för att avprovisionera infrastrukturen säkert
-    - [ ] Återställ vid behov mjukborttagna Azure AI-tjänster
-    - [ ] **Laboration 6:** Rensa Azure-resurser och verifiera borttagning
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Bonusövningar
 
-Innan vi avvecklar projektet, ta några minuter för att göra lite öppen utforskning.
+Innan vi river ner projektet, ta några minuter för att göra lite öppen utforskning.
 
-!!! info "Prova dessa utforskningstips"
+!!! info "Prova dessa utforskningsuppmaningar"
 
-    **Experimentera med GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. Fråga: `What other AZD templates could I try for multi-agent scenarios?`
-    2. Fråga: `How can I customize the agent instructions for a healthcare use case?`
-    3. Fråga: `What environment variables control cost optimization?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Utforska Azure-portalen:**
+    **Explore the Azure Portal:**
     
-    1. Granska Application Insights-metriker för din driftsättning
-    2. Kontrollera kostnadsanalysen för de resurser som provisionerats
-    3. Utforska Microsoft Foundry-portalens agent playground en gång till
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Avprovisionera infrastruktur
+## Avveckla infrastruktur
 
-1. Att avveckla infrastrukturen är lika enkelt som:
+1. Att riva ner infrastrukturen är lika enkelt som:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. Flaggan `--purge` säkerställer att den även tar bort mjukborttagna Cognitive Service-resurser, vilket frigör kvot som hålls av dessa resurser. När den är klar kommer du att se något liknande detta:
+1. Bekräfta den valda miljön och granska resurserna som ska tas bort. Detta tar bort Azure-resurser och kan förstöra data. Behåll bekräftelseprompten för detta lärande arbetsflöde. När det är klart kommer du att se en utdata liknande:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Valfritt) Om du nu kör `azd up` igen kommer du att märka att modellen gpt-4.1 driftsätts eftersom miljövariabeln ändrades (och sparades) i den lokala `.azure`-mappen. 
+1. Verifiera borttagning i portalen och kontrollera resurser utanför distributionens omfattning. Kostnadsrapportering och kvotuppdateringar kan fördröjas. Lokal `.azure` konfiguration kvarstår om du inte uttryckligen tar bort den.
 
-      Här är modellutplaceringarna **före**:
+1. `azd down --purge` begär dessutom permanent borttagning av stödda mjuk-borttagna resurser. Använd den endast när återställning inte krävs och du förstår behållnings-/renskyddspolicys. Den garanterar inte omedelbar kvotfrigörelse.
 
-      ![Före](../../../../../translated_images/sv/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      Och här är det **efter**:
-      ![Efter](../../../../../translated_images/sv/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Distribuera inte om bara för att verifiera rensning. En senare avsiktlig `azd up` kan återskapa resurser med de återstående lokala inmatningarna, och medför avgifter igen. Modelluppdateringar använder normalt sett stödda provisioneringsändringar, inte nedmontering.
 
 ---
 

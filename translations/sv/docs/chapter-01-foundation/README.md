@@ -1,22 +1,22 @@
 # Kapitel 1: Grundläggande & Snabbstart
 
-**📚 Kurs**: [AZD För nybörjare](../../README.md) | **⏱️ Varaktighet**: 30-45 minuter | **⭐ Svårighetsgrad**: Nybörjare
+**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 75-120 minuter inklusive första driftsättningen; ytterligare övningar tar längre tid | **⭐ Svårighetsgrad**: Nybörjare
 
 ---
 
 ## Översikt
 
-Detta kapitel introducerar grunderna för Azure Developer CLI (azd). Du kommer att lära dig kärnbegrepp, installera verktygen och distribuera din första applikation till Azure.
+Detta kapitel introducerar grunderna i Azure Developer CLI (azd). Du lär dig kärnkoncept, installerar verktygen och driftsätter din första applikation till Azure.
 
-> Validerad med `azd 1.27.1` i juli 2026.
+> Kommandon och konfigurationsgranskning mål: `azd 1.37.2` (november 2026). Live Azure-provisionering kördes inte under granskningen.
 
 ## Lärandemål
 
-Genom att slutföra detta kapitel kommer du att:
+Genom att genomföra detta kapitel kommer du att:
 - Förstå vad Azure Developer CLI är och hur det skiljer sig från Azure CLI
 - Installera och konfigurera AZD på din plattform
-- Distribuera din första applikation till Azure med `azd up`
-- Rensa resurser med `azd down`
+- Driftsätta din första applikation till Azure med `azd up`
+- Rensa upp resurser med `azd down`
 
 ---
 
@@ -24,15 +24,15 @@ Genom att slutföra detta kapitel kommer du att:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Grundläggande om AZD](azd-basics.md) | Kärnbegrepp, terminologi och projektstruktur | 15 min |
-| 2 | [Installation & Setup](installation.md) | Plattformspecifika installationsguider | 10 min |
-| 3 | [Ditt första projekt](first-project.md) | Praktisk övning: Distribuera en webbapp till Azure | 20 min |
-| 4 | [Ta med din egen app](bring-your-own-app.md) | Lägg till azd i ett existerande projekt du redan har | 15 min |
-| 5 | [Utvecklingscontainrar & Codespaces](dev-containers.md) | Reproducerbara azd-miljöer med utvecklingscontainrar | 15 min |
+| 1 | [AZD Grundläggande](azd-basics.md) | Kärnkoncept, terminologi och projektstruktur | 15 min |
+| 2 | [Installation & Setup](installation.md) | Plattformsspecifika installationsguider | 10 min |
+| 3 | [Ditt Första Projekt](first-project.md) | Praktiskt: Driftsätt en webbapp till Azure | 20 min |
+| 4 | [Ta Med Din Egen App](bring-your-own-app.md) | Lägg till azd till ett befintligt projekt du redan har | 15 min |
+| 5 | [Dev Containers & Codespaces](dev-containers.md) | Reproducerbara azd-miljöer med dev containers | 15 min |
 
 ---
 
-## ✅ Börja här: Validera din installation
+## ✅ Börja Här: Validera Din Setup
 
 Innan du börjar, bekräfta att din lokala dator är redo för Kapitel 1-mallen:
 
@@ -53,18 +53,20 @@ Om skriptet rapporterar saknade verktyg, åtgärda dessa först och fortsätt se
 ## 🚀 Snabbstart
 
 ```bash
-# Kontrollera installation
+# Check installation
 azd version
 
-# Autentisera för AZD
-# Valfritt: az login om du planerar att köra Azure CLI-kommandon direkt
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Distribuera din första app
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Rensa upp när du är klar
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,14 +74,14 @@ azd down --force --purge
 
 ## ✅ Framgångskriterier
 
-Efter att ha slutfört detta kapitel ska du kunna:
+Efter att ha slutfört detta kapitel bör du kunna:
 
 ```bash
-azd version              # Visar installerad version
-azd init --template todo-nodejs-mongo  # Initierar projekt
-azd up                   # Distribuerar till Azure
-azd show                 # Visar körande app-URL
-azd down --force --purge # Rensar upp resurser
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -88,15 +90,15 @@ azd down --force --purge # Rensar upp resurser
 
 | Riktning | Kapitel |
 |-----------|---------|
-| **Nästa** | [Kapitel 2: AI-först utveckling](../chapter-02-ai-development/README.md) |
+| **Nästa** | [Kapitel 2: AI-First Utveckling](../chapter-02-ai-development/README.md) |
 | **Hoppa till** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Relaterade resurser
+## 📖 Relaterade Resurser
 
-- [Kommandocheat sheet](../../resources/cheat-sheet.md)
-- [FAQ](../../resources/faq.md)
+- [Kommandolathund](../../resources/cheat-sheet.md)
+- [Vanliga frågor](../../resources/faq.md)
 - [Ordlista](../../resources/glossary.md)
 
 ---

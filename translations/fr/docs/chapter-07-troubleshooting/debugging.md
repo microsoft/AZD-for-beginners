@@ -1,77 +1,72 @@
-# Guide de débogage pour les déploiements AZD
+# Guide de Débogage pour les Déploiements AZD
 
-**Navigation du chapitre :**
-- **📚 Accueil du cours**: [AZD pour débutants](../../README.md)
-- **📖 Chapitre actuel**: Chapitre 7 - Dépannage et débogage
-- **⬅️ Précédent**: [Problèmes courants](common-issues.md)
-- **➡️ Suivant**: [Dépannage spécifique à l'IA](ai-troubleshooting.md)
-- **🚀 Chapitre suivant**: [Chapitre 8: Modèles de production et d'entreprise](../chapter-08-production/production-ai-practices.md)
+**Navigation du Chapitre :**
+- **📚 Accueil du Cours** : [AZD Pour Débutants](../../README.md)
+- **📖 Chapitre Actuel** : Chapitre 7 - Dépannage & Débogage
+- **⬅️ Précédent** : [Problèmes Courants](common-issues.md)
+- **➡️ Suivant** : [Dépannage Spécifique à l’IA](ai-troubleshooting.md)
+- **🚀 Chapitre Suivant** : [Chapitre 8 : Modèles Production & Entreprise](../chapter-08-production/production-ai-practices.md)
 
 ## Introduction
 
-Ce guide complet fournit des stratégies, outils et techniques avancés de débogage pour diagnostiquer et résoudre des problèmes complexes avec les déploiements via Azure Developer CLI. Apprenez des méthodologies systématiques de dépannage, des techniques d'analyse des journaux, du profilage des performances et des outils de diagnostic avancés pour résoudre efficacement les problèmes de déploiement et d'exécution.
+Ce guide complet fournit des stratégies, outils et techniques avancés de débogage pour diagnostiquer et résoudre des problèmes complexes liés aux déploiements avec Azure Developer CLI. Apprenez des méthodologies de dépannage systématique, des techniques d’analyse des journaux, du profilage de performance, et des outils de diagnostic avancés pour résoudre efficacement les problèmes de déploiement et d’exécution.
 
-## Objectifs d'apprentissage
+## Objectifs d’Apprentissage
 
-En complétant ce guide, vous allez :
-- Maîtriser les méthodologies de débogage systématiques pour les problèmes d'Azure Developer CLI
-- Comprendre la configuration avancée des journaux et les techniques d'analyse des journaux
-- Mettre en œuvre des stratégies de profilage des performances et de surveillance
+En suivant ce guide, vous allez :
+- Maîtriser les méthodologies systématiques de débogage pour les problèmes Azure Developer CLI
+- Comprendre la configuration avancée des journaux et les techniques d’analyse des logs
+- Mettre en œuvre le profilage de performance et les stratégies de surveillance
 - Utiliser les outils et services de diagnostic Azure pour résoudre des problèmes complexes
-- Appliquer des techniques de débogage réseau et de dépannage de sécurité
-- Configurer une surveillance et des alertes complètes pour une détection proactive des problèmes
+- Appliquer les techniques de débogage réseau et le dépannage de la sécurité
+- Configurer une surveillance complète et des alertes pour une détection proactive des problèmes
 
-## Résultats d'apprentissage
+## Résultats d’Apprentissage
 
-À l'issue de ce guide, vous serez capable de :
-- Appliquer la méthodologie TRIAGE pour déboguer systématiquement des problèmes de déploiement complexes
+À l’issue, vous serez capable de :
+- Appliquer la méthodologie TRIAGE pour déboguer systématiquement des problèmes complexes de déploiement
 - Configurer et analyser des informations complètes de journalisation et de traçage
 - Utiliser efficacement Azure Monitor, Application Insights et les outils de diagnostic
-- Déboguer de manière autonome les problèmes de connectivité réseau, d'authentification et d'autorisations
-- Mettre en place des stratégies de surveillance et d'optimisation des performances
-- Créer des scripts de débogage personnalisés et de l'automatisation pour les problèmes récurrents
+- Déboguer de façon autonome la connectivité réseau, l’authentification, et les problèmes de permissions
+- Mettre en œuvre des stratégies de surveillance des performances et d’optimisation
+- Créer des scripts de débogage personnalisés et automatiser les problèmes récurrents
 
-## Méthodologie de débogage
+## Méthodologie de Débogage
 
-### L'approche TRIAGE
+### L’Approche TRIAGE
 - **T**emps : Quand le problème a-t-il commencé ?
 - **R**eproduire : Pouvez-vous le reproduire de façon constante ?
-- **I**soler : Quel composant est en panne ?
-- **A**nalyser : Que nous disent les journaux ?
-- **G**rouper : Rassemblez toutes les informations pertinentes
-- **E**scalader : Quand solliciter une aide supplémentaire
+- **I**soler : Quel composant échoue ?
+- **A**nalyser : Que disent les journaux ?
+- **R**assembler : Collecter toutes les informations pertinentes
+- **E**scalader : Quand demander de l’aide supplémentaire
 
-## Activation du mode débogage
+## Activation du Mode Debug
 
-### Variables d'environnement
+> **Portée :** Ce sont des exemples de diagnostic à adapter, pas une suite de scripts fournie. Remplacez les noms/IDs de ressources ; utilisez Bash pour les blocs shell. `--debug` la sortie et les valeurs d’environnement peuvent contenir des informations sensibles — vérifiez/éditez avant de partager. Les exemples qui déploient, annulent ou modifient la configuration nécessitent l’approbation explicite de l’opérateur.
+
+### Variables d’Environnement
 ```bash
-# Activer le débogage complet
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Débogage de l'Azure CLI
-export AZURE_CLI_DIAGNOSTICS=true
-
-# Désactiver la télémétrie pour une sortie plus claire
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Configuration du débogage
+### Configuration Debug
 ```bash
-# Définir la configuration de débogage globalement
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# Activer la journalisation de trace
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
 
-## 📊 Techniques d'analyse des journaux
+`azd config set` peut stocker des clés arbitraires ; cela ne rend pas `debug.enabled`, `debug.logLevel`, ou `trace.outputPath` des réglages supportés. Utilisez le flag `--debug` de la commande publiée.
 
-### Comprendre les niveaux de journalisation
+## 📊 Techniques d’Analyse des Journaux
+
+### Comprendre les Niveaux de Logs
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Analyse des journaux structurés
+### Analyse Structurée des Logs
 ```bash
-# Afficher les journaux avec Azure Monitor (via azd monitor)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# Afficher les journaux de l'application en temps réel
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# Pour une analyse détaillée des journaux, utilisez l'Azure CLI avec votre App Service ou votre Container App:
-# Journaux App Service
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Journaux Container App
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# Exporter les journaux d'Application Insights pour analyse
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
-### Corrélation des journaux
+### Corrélation des Logs
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Corréler les journaux entre les services à l'aide d'Azure Monitor
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Rechercher dans Application Insights les journaux corrélés
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Rechercher les journaux d'activité Azure
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ Outils avancés de débogage
+## 🛠️ Outils de Débogage Avancés
 
 ### Requêtes Azure Resource Graph
 ```bash
-# Rechercher des ressources par étiquettes
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Trouver les déploiements échoués
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Vérifier la santé des ressources
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Débogage réseau
+### Débogage Réseau
 ```bash
-# Tester la connectivité entre les services
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# Utilisation
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
-### Débogage des conteneurs
+### Débogage de Conteneurs
 ```bash
-# Déboguer les problèmes d'applications conteneurisées
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -181,12 +178,12 @@ debug_container() {
 }
 ```
 
-### Débogage des connexions à la base de données
+### Débogage de Connexion à la Base de Données
 ```bash
-# Déboguer la connectivité à la base de données
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -200,26 +197,15 @@ debug_database() {
 }
 ```
 
-## 🔬 Débogage des performances
+## 🔬 Débogage des Performances
 
-### Surveillance des performances applicatives
+### Surveillance des Performances des Applications
 ```bash
-# Activer le débogage d'Application Insights
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# Surveillance personnalisée des performances
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -236,33 +224,31 @@ monitor_performance() {
 }
 ```
 
-### Analyse de l'utilisation des ressources
+### Analyse de l’Utilisation des Ressources
 ```bash
-# Surveiller l'utilisation des ressources
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
 ```
 
-## 🧪 Tests et validation
+## 🧪 Tests et Validation
 
-### Débogage des tests d'intégration
+### Débogage des Tests d’Intégration
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Configurer l'environnement de débogage
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# Récupérer les points de terminaison du service
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Tester les points de terminaison de santé
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# Exécuter les tests
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Exécuter des tests d'intégration personnalisés
+# Run custom integration tests
 npm run test:integration
 ```
 
-### Tests de charge pour le débogage
+### Tests de Charge pour le Débogage
 ```bash
-# Test de charge simple pour identifier les goulots d'étranglement de performance
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Utilisation d'Apache Bench (installation : apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extraire les métriques clés
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Vérifier les échecs
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 Débogage d'infrastructure
+## 🔧 Débogage Infrastructure
 
-### Débogage des templates Bicep
+### Débogage des Templates Bicep
 ```bash
-# Valider les modèles Bicep avec une sortie détaillée
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Validation de la syntaxe
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Validation lint
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # Déploiement what-if
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# Déboguer le déploiement du modèle
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -375,54 +359,46 @@ debug_deployment() {
 }
 ```
 
-### Analyse de l'état des ressources
+### Analyse de l’État des Ressources
 ```bash
-# Analyser les états des ressources pour détecter des incohérences
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # Lister toutes les ressources avec leurs états
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Vérifier les ressources en échec
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
-## 🔒 Débogage de la sécurité
+## 🔒 Débogage Sécurité
 
-### Débogage du flux d'authentification
+### Débogage du Flux d’Authentification
 ```bash
-# Débogage de l'authentification Azure
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # Décoder le jeton JWT (nécessite jq et base64)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Débogage de l'accès au Key Vault
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -438,16 +414,16 @@ debug_keyvault() {
 }
 ```
 
-### Débogage de la sécurité réseau
+### Débogage de la Sécurité Réseau
 ```bash
-# Déboguer les groupes de sécurité réseau
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Vérifier les règles de sécurité
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 Débogage spécifique aux applications
+## 📱 Débogage Spécifique aux Applications
 
-### Débogage d'applications Node.js
+### Débogage des Applications Node.js
 ```javascript
-// debug-middleware.js - Middleware de débogage pour Express
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Consigner les détails de la requête
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // Remplacer res.json pour consigner les réponses
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Débogage des requêtes de base de données
+### Débogage des Requêtes à la Base de Données
 ```javascript
-// database-debug.js - Utilitaires de débogage de la base de données
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Procédures de débogage d'urgence
+## 🚨 Procédures de Débogage d’Urgence
 
-### Réponse aux incidents en production
+### Réponse aux Incidents en Production
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Débogage d'urgence en production
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Basculer vers l'environnement correct
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# Collecter les informations critiques
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# Utiliser Azure Monitor pour les journaux d'erreurs
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Procédures de retour arrière
+### Procédures de Restauration
 ```bash
-# Script de restauration rapide
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # Changer d'environnement
+    # Switch environment
     azd env select "$environment"
     
-    # Retour arrière via Git (AZD n'a pas de fonctionnalité de retour arrière intégrée)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # Vérifier le retour arrière
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # Tester les points de terminaison critiques
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 Tableaux de bord de débogage
+Cette restauration limitée au code ne rétablit pas l’infrastructure, les migrations de base de données, ni les secrets. Utilisez un worktree propre, enregistrez le commit de départ, et restaurez-le ensuite ; la commande extrait le commit sélectionné dans le dépôt actuel.
 
-### Tableau de bord de surveillance personnalisé
+## 📊 Tableaux de Bord de Débogage
+
+### Tableau de Bord de Surveillance Personnalisé
 ```bash
-# Créer des requêtes Application Insights pour le débogage
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # Requête pour les erreurs
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Requête pour les problèmes de performance
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Requête pour les défaillances des dépendances
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Agrégation des journaux
+### Agrégation des Journaux
 ```bash
-# Agréger les journaux provenant de plusieurs sources Azure
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,28 +630,30 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
 }
 ```
 
-## 🔗 Ressources avancées
+## 🔗 Ressources Avancées
 
-### Scripts de débogage personnalisés
-Créez un répertoire `scripts/debug/` contenant :
-- `health-check.sh` - Vérification complète de l'état
+### Scripts de Débogage Personnalisés
+Créez un répertoire `scripts/debug/` avec :
+- `health-check.sh` - Contrôles complets de santé
 - `performance-test.sh` - Tests de performance automatisés
-- `log-analyzer.py` - Analyse avancée des journaux
-- `resource-validator.sh` - Validation de l'infrastructure
+- `log-analyzer.py` - Analyse et parsing avancés des logs
+- `resource-validator.sh` - Validation de l’infrastructure
 
-### Intégration de la surveillance
+### Intégration de la Surveillance
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -686,36 +664,36 @@ hooks:
       fi
 ```
 
-## Bonnes pratiques
+## Bonnes Pratiques
 
-1. **Activez toujours la journalisation de débogage** dans les environnements non-production
-2. **Créez des cas de test reproductibles** pour les problèmes
-3. **Documentez les procédures de débogage** pour votre équipe
-4. **Automatisez les vérifications de santé** et la surveillance
-5. **Maintenez les outils de débogage à jour** avec les changements de votre application
-6. **Exercez les procédures de débogage** en dehors des périodes d'incident
+1. **Toujours activer la journalisation de débogage** dans les environnements non productifs
+2. **Créer des cas de test reproductibles** pour les problèmes
+3. **Documenter les procédures de débogage** pour votre équipe
+4. **Automatiser les contrôles de santé** et la surveillance
+5. **Maintenir les outils de débogage à jour** avec les changements de votre application
+6. **S’exercer aux procédures de débogage** en dehors des périodes d’incident
 
-## Prochaines étapes
+## Étapes Suivantes
 
-- [Planification de la capacité](../chapter-06-pre-deployment/capacity-planning.md) - Planifier les besoins en ressources
-- [Sélection des SKU](../chapter-06-pre-deployment/sku-selection.md) - Choisir les niveaux de service appropriés
-- [Vérifications pré-déploiement](../chapter-06-pre-deployment/preflight-checks.md) - Validation avant déploiement
-- [Aide-mémoire](../../resources/cheat-sheet.md) - Commandes de référence rapide
+- [Planification de Capacité](../chapter-06-pre-deployment/capacity-planning.md) - Planifier les besoins en ressources
+- [Sélection de SKU](../chapter-06-pre-deployment/sku-selection.md) - Choisir les niveaux de service appropriés
+- [Vérifications Préliminaires](../chapter-06-pre-deployment/preflight-checks.md) - Validation pré-déploiement
+- [Fiche de Référence](../../resources/cheat-sheet.md) - Commandes de référence rapide
 
 ---
 
-**Rappelez-vous** : Le bon débogage consiste à être systématique, minutieux et patient. Ces outils et techniques vous aideront à diagnostiquer les problèmes plus rapidement et de manière plus efficace.
+**Souvenez-vous** : Un bon débogage est systématique, rigoureux et patient. Ces outils et techniques vous aideront à diagnostiquer les problèmes plus rapidement et plus efficacement.
 
 ---
 
 **Navigation**
-- **Leçon précédente**: [Problèmes courants](common-issues.md)
+- **Leçon Précédente** : [Problèmes Courants](common-issues.md)
 
-- **Leçon suivante**: [Planification de la capacité](../chapter-06-pre-deployment/capacity-planning.md)
+- **Prochaine Leçon** : [Planification de Capacité](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Avertissement :
-Ce document a été traduit à l'aide du service de traduction automatique par IA Co‑op Translator (https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent comporter des erreurs ou des inexactitudes. Le document original, dans sa langue d'origine, doit être considéré comme la source faisant foi. Pour les informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+**Avertissement** :
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforçions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant autorité. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous ne saurions être tenus responsables des malentendus ou erreurs d'interprétation découlant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

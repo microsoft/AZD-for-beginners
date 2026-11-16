@@ -1,23 +1,23 @@
-# Rozdział 6: Planowanie i walidacja przed wdrożeniem
+# Rozdział 6: Planowanie i weryfikacja przed wdrożeniem
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 1 godzina | **⭐ Poziom trudności**: Średniozaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-4 godziny czytania; dodatkowy czas na dostosowane laboratoria | **⭐ Stopień trudności**: Średniozaawansowany–Zaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział obejmuje niezbędne kroki planowania i walidacji przed wdrożeniem aplikacji. Naucz się unikać kosztownych błędów dzięki właściwemu planowaniu pojemności, doborowi SKU oraz kontrolom przed wdrożeniem.
+Ten rozdział obejmuje kluczowe kroki planowania i weryfikacji przed wdrożeniem aplikacji. Naucz się unikać kosztownych błędów dzięki właściwemu planowaniu pojemności, wyborowi SKU i kontrolom przed wdrożeniem.
 
-> Zweryfikowano z `azd 1.27.1` w lipcu 2026.
+> Wskazówki dotyczące poleceń sprawdzane w odniesieniu do wydanego referencyjnego `azd 1.37.2`. Wdrożenia w chmurze nie były wykonywane. Dłuższe lekcje zawierają fragmenty ilustracyjne, a nie kompletne projekty wdrożenia lokalnego.
 
 ## Cele nauki
 
 Po ukończeniu tego rozdziału będziesz potrafił:
 - Przeprowadzać kontrole przed wdrożeniem
-- Planować pojemność i szacować wymagania dotyczące zasobów
+- Planować pojemność i szacować wymagania zasobów
 - Wybierać odpowiednie SKU dla optymalizacji kosztów
-- Konfigurować Application Insights dla monitoringu
-- Rozumieć wzorce koordynacji zespołowej
+- Konfigurować Application Insights do monitorowania
+- Rozumieć wzorce koordynacji multi-agentów oraz ich wymagania wdrożeniowe
 
 ---
 
@@ -25,27 +25,27 @@ Po ukończeniu tego rozdziału będziesz potrafił:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Kontrole przed wdrożeniem](preflight-checks.md) | Walidacja konfiguracji przed wdrożeniem | 15 min |
+| 1 | [Kontrole przed wdrożeniem](preflight-checks.md) | Weryfikacja konfiguracji przed wdrożeniem | 15 min |
 | 2 | [Planowanie pojemności](capacity-planning.md) | Szacowanie wymagań zasobów | 20 min |
-| 3 | [Dobór SKU](sku-selection.md) | Wybór odpowiednich poziomów cenowych | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfiguracja monitoringu | 20 min |
-| 5 | [Wzorce koordynacji](coordination-patterns.md) | Procesy wdrożeniowe zespołu | 15 min |
+| 3 | [Wybór SKU](sku-selection.md) | Dobór odpowiednich poziomów cenowych | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfiguracja monitorowania | 20 min |
+| 5 | [Wzorce koordynacji](coordination-patterns.md) | Zaawansowany projekt orkiestracji multi-agentów | 60-75 min |
 
 ---
 
 ## 🚀 Szybki start
 
 ```bash
-# Sprawdź limity subskrypcji
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Podgląd wdrożenia (nie tworzono zasobów)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Zweryfikuj składnię Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Sprawdź konfigurację środowiska
+# Check environment configuration
 azd env get-values
 ```
 
@@ -57,7 +57,7 @@ azd env get-values
 
 - [ ] Zweryfikowano limit dla regionu
 - [ ] Odpowiednio wybrane SKU
-- [ ] Przejrzano szacunkowe koszty
+- [ ] Przejrzano szacunek kosztów
 - [ ] Spójna konwencja nazewnictwa
 - [ ] Skonfigurowano zabezpieczenia/RBAC
 
@@ -66,18 +66,18 @@ azd env get-values
 - [ ] Ustawione zmienne środowiskowe
 - [ ] Sekrety w Key Vault
 - [ ] Zweryfikowane łańcuchy połączeń
-- [ ] Skonfigurowane testy zdrowotności
+- [ ] Skonfigurowane kontrole stanu
 
 ---
 
-## 💰 Przewodnik po doborze SKU
+## 💰 Przewodnik po wyborze SKU
 
 | Obciążenie | Rozwój | Produkcja |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Konsumpcja | Konsumpcja lub dedykowany profil obciążenia, w zależności od zmierzonego obciążenia |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Modele Azure OpenAI | Obsługiwany typ wdrożenia pay-as-you-go | Pay-as-you-go lub przepustowość zarezerwowana; zależy od modelu/regionu |
+| AI Search | Darmowy/Podstawowy w limitach | Poziom Podstawowy lub Standardowy dostosowany do indeksu, replik i obciążenia zapytań |
 
 ---
 
@@ -93,8 +93,8 @@ azd env get-values
 ## 📖 Powiązane zasoby
 
 - [Przewodnik konfiguracji](../chapter-03-configuration/configuration.md)
-- [Przewodnik wdrażania](../chapter-04-infrastructure/deployment-guide.md)
-- [Typowe problemy](../chapter-07-troubleshooting/common-issues.md)
+- [Przewodnik wdrożenia](../chapter-04-infrastructure/deployment-guide.md)
+- [Częste problemy](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

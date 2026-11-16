@@ -1,583 +1,216 @@
-# Microsoft Foundry mudelite vestlusrakendus
+# Azure OpenAI Chat — Kohalik CLI ja AZD infrastruktuur
 
-**Õppeteekond:** Kesktase ⭐⭐ | **Aeg:** 35-45 minutit | **Kulu:** $50-200/kuus
+**Tase:** Kesktase · **Aeg:** 35–60 minutit, sealhulgas seadistamine
 
-Täielik Microsoft Foundry mudelite vestlusrakendus, mis on juurutatud kasutades Azure Developer CLI-t (azd). See näidis demonstreerib gpt-4.1 juurutamist, turvalist API ligipääsu ning lihtsat vestlusliidest.
+See näidis loob **Azure OpenAI ressursi ja Key Vaulti**, seejärel käivitab
+interaktiivse Python vestluse CLI **sinu masinas**. See ei hosti veebirakendust
+ega konteinerirakendust. Vaikimisi mudel on `gpt-4.1`, versioon `2025-04-14`, koos
+`GlobalStandard` juurutusmahtuvusega 20. Kontrolli valitud piirkonna praegust saadavust ja limiiti enne juurutamist;
+mudeli elutsükli kuupäevad võivad muutuda.
 
-## 🎯 Mida Sa Õpid
+## Õpieesmärgid
 
-- Juurutada Microsoft Foundry mudelite teenus koos gpt-4.1 mudeliga  
-- Turvata OpenAI API võtmed Key Vault abil  
-- Ehita lihtne vestlusliides Pythoni abil  
-- Jälgi tokenite kasutust ja kulusid  
-- Rakenda piiranguid ja veakäsitlust  
-
-## 📦 Mida Sisaldab
-
-✅ **Microsoft Foundry mudelite teenus** - gpt-4.1 mudeli juurutus  
-✅ **Python vestlusrakendus** - Lihtne käsurida vestlusliides  
-✅ **Key Vault integratsioon** - Turvaline API võtmete hoiustamine  
-✅ **ARM mallid** - Täielik infrastruktuur koodina  
-✅ **Kulu jälgimine** - Tokeni kasutuse jälgimine  
-✅ **Piirangud** - Kaitse kvotaaži ületamise eest  
-
-## Arhitektuur
+- Mudeli infrastruktuuri juurutamine Bicep ja azd abil.
+- API-võtme hankimine Key Vaultist ilma selle lisamiseta juurutuse väljunditesse.
+- Chat Completions päringute saatmine ja vestluse ajaloo säilitamine.
+- Sõnumite arvu tõlgendamine ja kuluhindade piirangud.
 
 ```mermaid
-graph TD
-    App[Pythoni vestlusrakendus<br/>Kohalik/Pilv<br/>Käsurealiides<br/>Vestluse ajalugu<br/>Tokeni kasutamise jälgimine] -- "HTTPS (API võti)" --> Foundry[Microsoft Foundry mudelite teenus<br/>gpt-4.1 mudel<br/>20K tokenit/min võimsus<br/>Mitme piirkonna varukoopia]
-    Foundry --> KV[Azure võtmekogu<br/>OpenAI API võti<br/>Lõpp-punkti URL]
-    Foundry -. Halduse identiteet .-> KV
+flowchart LR
+    Deploy[azd provision + Bicep] --> AOAI[Azure OpenAI deployment]
+    Deploy --> KV[Key Vault stores endpoint + API key]
+    Shell[Your authenticated Azure CLI] -->|Read secret into local environment| KV
+    Chat[Local Python chat CLI] -->|HTTPS + API key| AOAI
 ```
+
+Selles näites ei ole hallatava identiteedi käitusaegset integratsiooni, mitme piirkonna
+varukoopiat, kohandatud kiirusepiirajat, voogedastusrežiimi ega hostitud arvutusvõimsust.
+OpenAI SDK proovib korduvate vigade korral kuni kahte taasalustamist; CLI teatab ülejäänud vigadest.
 
 ## Eeltingimused
 
-### Nõutud
-
-- **Azure Developer CLI (azd)** - [Paigaldusjuhend](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)  
-- **Azure tellimus** koos OpenAI ligipääsuga - [Taotlemise leht](https://aka.ms/oai/access)  
-- **Python 3.9+** - [Paigalda Python](https://www.python.org/downloads/)  
-
-### Kontrolli Eeltingimusi
+- Värske stabiilne [azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (vabastamise ajal versioon 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- Python **3.10+** (soovitatav 3.11) ja virtuaalne keskkond.
+- Azure tellimus, millel on õigus luua Cognitive Services ja Key Vaulti
+  ressursse, juurutada mudeleid ja lugeda voltme saladusi.
+- Piirkondlik saadavus ja `GlobalStandard` limiit `gpt-4.1` jaoks. Juurdepääsunõuded
+  sõltuvad tellimusest ja funktsioonist; heakskiituks ei ole garantii kohta kindlat aega.
 
 ```bash
-# Kontrolli azd versiooni (vajalik 1.5.0 või uuem)
 azd version
-
-# Kontrolli Azure sisselogimist
+az version
+python --version
 azd auth login
-
-# Kontrolli Pythoni versiooni
-python --version  # või python3 --version
-
-# Kontrolli OpenAI ligipääsu (kontrolli Azure Portaalis)
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --location eastus
+az login
 ```
 
-> **⚠️ Tähtis:** Microsoft Foundry mudelid vajavad rakenduse kinnitust. Kui sa pole taotlenud, külasta lehte [aka.ms/oai/access](https://aka.ms/oai/access). Kinnitamine võtab tavaliselt 1-2 tööpäeva.
+Need on erinevad autentimisseansid. Valige mõlemas tööriistas enne allolevate käskude käivitamist sama tellimus.
+tööriistas enne allolevate käskude käivitamist.
 
-## ⏱️ Juurutuse ajakava
+## Kiire alustamine (Bash)
 
-| Etapp | Kestus | Mis Juhtub |
-|-------|--------|------------|
-| Eeltingimuste kontroll | 2-3 minutit | Kontrollib OpenAI kvotaaži kättesaadavust |
-| Infrastruktuuri juurutus | 8-12 minutit | Loob OpenAI, Key Vault, mudeli juurutus |
-| Rakenduse seadistamine | 2-3 minutit | Seadistab keskkonna ja sõltuvused |
-| **Kokku** | **12-18 minutit** | Valmis vestlema gpt-4.1-ga |
-
-**Märkus:** Esmane OpenAI juurutus võib võtta kauem mudeli ettevalmistamise tõttu.
-
-## Kiire algus
+Käivitage hoiukohana juurest:
 
 ```bash
-# Navigeeri näitele
 cd examples/azure-openai-chat
-
-# Algata keskkond
 azd env new myopenai
-
-# Paigalda kõik (infrastruktuur + konfiguratsioon)
-azd up
-# Sinult küsitakse:
-# 1. Vali Azure tellimus
-# 2. Vali asukoht, kus on OpenAI saadavus (nt eastus, eastus2, westus)
-# 3. Oota 12-18 minutit paigalduse lõpuleviimiseks
-
-# Paigalda Python'i sõltuvused
-pip install -r requirements.txt
-
-# Alusta vestlust!
-python chat.py
+azd provision
 ```
 
-**Oodatav väljund:**
-```
-🤖 Microsoft Foundry Models Chat Application
-Connected to: gpt-4.1 (eastus)
-Type your message (or 'quit' to exit)
+Valige toetatud piirkond. Provisioning loob ressursigrupi, OpenAI konto,
+mudeli juurutuse, Key Vaulti ja `openai-endpoint`/`openai-api-key` saladused.
+'Sellel pole **ühtegi teenust, mida juurutada**' aadressil `azure.yaml`.
 
-You: Hello! Tell me about Microsoft Foundry Models.
-Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's powerful language models including gpt-4.1, GPT-3.5-Turbo, and Embeddings...
-
-[Tokens used: 145 | Estimated cost: $0.0044]
-```
-
-## ✅ Kontrolli Juurutust
-
-### Samm 1: Kontrolli Azure ressursse
+Laadige mitteesituslikud väljundid ja hankige saladus oma praegusesse shelli:
 
 ```bash
-# Kuvada juurutatud ressursid
-azd show
-
-# Oodatud väljund näitab:
-# - OpenAI teenus: (ressursi nimi)
-# - Võtmehoidla: (ressursi nimi)
-# - Juurutamine: gpt-4.1
-# - Asukoht: eastus (või teie valitud piirkond)
-```
-
-### Samm 2: Testi OpenAI API-t
-
-```bash
-# Hangi OpenAI lõpp-punkt ja võti
-OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
-OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
-
-# Testi API kõne
-curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
-  -H "Content-Type: application/json" \
-  -H "api-key: $OPENAI_KEY" \
-  -d '{
-    "messages": [{"role": "user", "content": "Say hello!"}],
-    "max_tokens": 50
-  }'
-```
-
-**Oodatud vastus:**
-```json
-{
-  "choices": [
-    {
-      "message": {
-        "role": "assistant",
-        "content": "Hello! How can I assist you today?"
-      }
-    }
-  ],
-  "usage": {
-    "prompt_tokens": 8,
-    "completion_tokens": 9,
-    "total_tokens": 17
-  }
-}
-```
-
-### Samm 3: Kontrolli Key Vault ligipääsu
-
-```bash
-# Loetle saladused Key Vaultis
-KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
-
-az keyvault secret list \
-  --vault-name $KV_NAME \
-  --query "[].name" \
-  --output table
-```
-
-**Oodatavad saladused:**
-- `openai-api-key`  
-- `openai-endpoint`  
-
-**Edu kriteeriumid:**
-- ✅ OpenAI teenus juurutatud gpt-4.1 mudeliga  
-- ✅ API kõne tagastab kehtiva vastuse  
-- ✅ Saladused salvestatud Key Vault'i  
-- ✅ Tokenite kasutuse jälgimine toimib  
-
-## Projekti struktuur
-
-```
-azure-openai-chat/
-├── README.md                   ✅ This guide
-├── azure.yaml                  ✅ AZD configuration
-├── infra/                      ✅ Infrastructure as Code
-│   ├── main.bicep             ✅ Main Bicep template
-│   ├── main.parameters.json   ✅ Parameters
-│   └── openai.bicep           ✅ OpenAI resource definition
-├── src/                        ✅ Application code
-│   ├── chat.py                ✅ Chat interface
-│   ├── config.py              ✅ Configuration loader
-│   └── requirements.txt       ✅ Python dependencies
-└── .gitignore                  ✅ Git ignore rules
-```
-
-## Rakenduse omadused
-
-### Vestlusliides (`chat.py`)
-
-Vestlusrakendus sisaldab:
-
-- **Vestluse ajalugu** - Säilitab konteksti sõnumite vahel  
-- **Tokenite lugemine** - Jälgib kasutust ja hindab kulusid  
-- **Veakäsitlus** - Ilmne piirangute ja API vigade korral  
-- **Kulu hinnang** - Reaalajas sõnumi kulude arvutus  
-- **Voogedastuse tugi** - Valikuline voogedastusvastuste võimalus  
-
-### Käsud
-
-Vesteldes saad kasutada:  
-- `quit` või `exit` - Sessiooni lõpetamiseks  
-- `clear` - Vestluse ajaloo tühjendamiseks  
-- `tokens` - Näita tokenite kogukasutust  
-- `cost` - Näita eeldatavat kogu kulu  
-
-### Konfiguratsioon (`config.py`)
-
-Laeb konfiguratsiooni keskkonnamuutujatest:  
-```python
-AZURE_OPENAI_ENDPOINT  # Võtmehoidlast
-AZURE_OPENAI_API_KEY   # Võtmehoidlast
-AZURE_OPENAI_MODEL     # Vaikimisi: gpt-4.1
-AZURE_OPENAI_MAX_TOKENS # Vaikimisi: 800
-```
-
-## Kasutuse näited
-
-### Lihtne vestlus
-
-```bash
-python chat.py
-```
-
-### Vestlus kohandatud mudeliga
-
-```bash
-export AZURE_OPENAI_MODEL=gpt-35-turbo
-python chat.py
-```
-
-### Vestlus voogedastusega
-
-```bash
-python chat.py --stream
-```
-
-### Näidiskõne
-
-```
-You: Explain Microsoft Foundry Models Service in 3 sentences.
-Assistant: Microsoft Foundry Models Service is Microsoft Azure's cloud platform offering 
-that provides access to OpenAI's powerful language models. It enables developers 
-to integrate capabilities like gpt-4.1 into their applications with enterprise-grade 
-security and compliance. The service includes features for content filtering, 
-abuse monitoring, and responsible AI practices.
-
-[Tokens used: 89 | Estimated cost: $0.0027]
-
-You: What models are available?
-Assistant: Microsoft Foundry Models Service offers several model families including gpt-4.1 
-(most capable), GPT-3.5-Turbo (faster and cost-effective), and Embeddings models 
-for vector search. Each model has different capabilities, pricing, and token limits.
-
-[Tokens used: 67 | Estimated cost: $0.0020]
-
-Total session: 156 tokens | $0.0047
-```
-
-## Kulude haldamine
-
-### Tokeni hinnakiri (gpt-4.1)
-
-| Mudel | Sisend (1000 tokeni kohta) | Väljund (1000 tokeni kohta) |
-|-------|----------------------------|-----------------------------|
-| gpt-4.1 | $0.03 | $0.06 |
-| GPT-3.5-Turbo | $0.0015 | $0.002 |
-
-### Hinnangulised kuukulud
-
-Tuginedes kasutusmustritele:
-
-| Kasutusmaht | Sõnumeid päevas | Tokeneid päevas | Kuukulu |
-|-------------|-----------------|-----------------|---------|
-| **Keriline** | 20 sõnumit | 3,000 tokenit | $3-5 |
-| **Mõõdukas** | 100 sõnumit | 15,000 tokenit | $15-25 |
-| **Tugev** | 500 sõnumit | 75,000 tokenit | $75-125 |
-
-**Baasinfrastruktuuri kulu:** $1-2/kuus (Key Vault + minimaalne arvutus)
-
-### Kulude optimeerimise näpunäited
-
-```bash
-# 1. Kasuta lihtsamate ülesannete jaoks GPT-3.5-Turbo (20 korda odavam)
-export AZURE_OPENAI_MODEL=gpt-35-turbo
-
-# 2. Vähenda maksimaalset tokenite arvu lühemate vastuste jaoks
-export AZURE_OPENAI_MAX_TOKENS=400
-
-# 3. Jälgi tokenite kasutust
-python chat.py --show-tokens
-
-# 4. Sea eelarvehoiatused sisse
-az consumption budget create \
-  --budget-name "openai-budget" \
-  --amount 50 \
-  --time-grain Monthly
-```
-
-## Jälgimine
-
-### Vaata tokeni kasutust
-
-```bash
-# Azure Portaali:
-# OpenAI ressursid → Mõõdikud → Vali "Tokeni tehing"
-
-# Või Azure CLI kaudu:
-az monitor metrics list \
-  --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
-  --metric "TokenTransaction" \
-  --start-time $(date -u -d '1 hour ago' '+%Y-%m-%dT%H:%M:%S') \
-  --interval PT1M
-```
-
-### Vaata API logisid
-
-```bash
-# Voogesita diagnostikapäevaraamatuid
-az monitor diagnostic-settings create \
-  --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
-  --name openai-logs \
-  --logs '[{"category": "Audit", "enabled": true}]' \
-  --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
-
-# Päringu päevikud
-az monitor log-analytics query \
-  --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
-  --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
-```
-
-## Veaotsing
-
-### Probleem: "Ligipääs keelatud" viga
-
-**Sümptomid:** 403 Keelatud API-kõne puhul
-
-**Lahendused:**
-```bash
-# 1. Kontrolli, kas OpenAI ligipääs on heaks kiidetud
-az cognitiveservices account show \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
-
-# 2. Kontrolli, kas API võti on õige
-azd env get-value AZURE_OPENAI_API_KEY
-
-# 3. Kontrolli lõpp-punkti URL-i formaati
-azd env get-value AZURE_OPENAI_ENDPOINT
-# Peaks olema: https://[nimi].openai.azure.com/
-```
-
-### Probleem: "Piirangu ületamine"
-
-**Sümptomid:** 429 Liiga palju päringuid
-
-**Lahendused:**
-```bash
-# 1. Kontrolli praegust limiiti
-az cognitiveservices account deployment show \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-4.1
-
-# 2. Taotle limiidi suurendamist (vajadusel)
-# Mine Azure Portaal → OpenAI Ressurss → Limiidid → Taotle suurendamist
-
-# 3. Rakenda korduskatsete loogika (juba failis chat.py)
-# Rakendus proovib automaatselt uuesti ekponentsiaalse viivitusega
-```
-
-### Probleem: "Mudel puudub"
-
-**Sümptomid:** 404 viga juurutuse puhul
-
-**Lahendused:**
-```bash
-# 1. Loetle saadaolevad juurutused
-az cognitiveservices account deployment list \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
-
-# 2. Kinnita mudeli nimi keskkonnas
-echo $AZURE_OPENAI_MODEL
-
-# 3. Uuenda õige juurutuse nimeks
-export AZURE_OPENAI_MODEL=gpt-4.1  # või gpt-35-turbo
-```
-
-### Probleem: Kõrge latentsus
-
-**Sümptomid:** Aeglane vastus (>5 sekundit)
-
-**Lahendused:**
-```bash
-# 1. Kontrolli piirkondlikku latentsust
-# Paiguta piirkonda, mis on kasutajatele lähim
-
-# 2. Vähenda max_tokens kiiremate vastuste saamiseks
-export AZURE_OPENAI_MAX_TOKENS=400
-
-# 3. Kasuta voogedastust parema kasutajakogemuse saavutamiseks
-python chat.py --stream
-```
-
-## Turvalisuse parimad tavad
-
-### 1. Kaitse API võtmeid
-
-```bash
-# Ärge kunagi hoidke võtmeid lähtekoodi halduses
-# Kasutage Key Vaulti (juba konfigureeritud)
-
-# Keerake võtmeid regulaarselt
-az cognitiveservices account keys regenerate \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --key-name key1
-```
-
-### 2. Rakenda sisu filtreerimine
-
-```python
-# Microsoft Foundry Models sisaldab sisseehitatud sisufiltreerimist
-# Konfigureeri Azure Portaalis:
-# OpenAI ressurss → Sisufiltrid → Loo kohandatud filter
-
-# Kategooriad: Viha, Seksuaalne, Vägivald, Enesevigastus
-# Tasemed: Madal, Keskmine, Kõrge filtreerimine
-```
-
-### 3. Kasuta haldatud identiteeti (tootmiskeskkond)
-
-```bash
-# Tootmise valmiste paigalduste jaoks kasuta hallatud identiteeti
-# API-võtmete asemel (nõuab rakenduse majutamist Azure'is)
-
-# Uuenda infra/openai.bicep, et lisada:
-# identity: { type: 'SystemAssigned' }
-```
-
-## Arendus
-
-### Käivita lokaalselt
-
-```bash
-# Paigalda sõltuvused
-pip install -r src/requirements.txt
-
-# Määra keskkonnamuutujad
-export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
-export AZURE_OPENAI_API_KEY="your-api-key"
-export AZURE_OPENAI_MODEL="gpt-4.1"
-
-# Käivita rakendus
+export AZURE_OPENAI_ENDPOINT="$(azd env get-value AZURE_OPENAI_ENDPOINT)"
+export AZURE_OPENAI_MODEL="$(azd env get-value AZURE_OPENAI_MODEL)"
+KV_NAME="$(azd env get-value AZURE_KEY_VAULT_NAME)"
+export AZURE_OPENAI_API_KEY="$(az keyvault secret show \
+  --vault-name "$KV_NAME" --name openai-api-key --query value --output tsv)"
+
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r src/requirements.txt
 python src/chat.py
 ```
 
-### Käivita testid
+PowerShellis aktiveerige `.\.venv\Scripts\Activate.ps1` ja määrake keskkonnamuutujad
+`$env:AZURE_OPENAI_ENDPOINT = azd env get-value AZURE_OPENAI_ENDPOINT` abil
+(ja sarnaselt mudelile). API võtme hankimiseks kasutage
+`$env:AZURE_OPENAI_API_KEY = az keyvault secret show --vault-name $KV_NAME --name openai-api-key --query value -o tsv`.
+Määrake esmalt `$KV_NAME = azd env get-value AZURE_KEY_VAULT_NAME`.
 
-```bash
-# Paigalda testimissõltuvused
-pip install pytest pytest-cov
+Ärge trükkige, komiteerige ega kleepige API võtit probleemiaruannetesse. CLI loeb protsessi
+keskkonnamuutujaid; see **ei** kogu Key Vault saladusi ega laadi `.env` faile.
+`config.py` kontrollib käivitamisel lõpp-punkti, tokeni piiri ja temperatuuri.
 
-# Käivita testid
-pytest tests/ -v
+Oodatav väljund (sisu ja kasutus võivad erineda):
 
-# Kaasatusega
-pytest tests/ --cov=src --cov-report=html
+```text
+Azure OpenAI Chat Application
+Model: gpt-4.1
+...
+You: Say hello in one sentence.
+Assistant: Hello! How can I help you today?
+[Tokens: ... | Cost: $...]
 ```
 
-### Uuenda mudeli juurutust
+Käsklused: `stats` näitab kokkuvõtteid, `clear` kustutab vestluseajaloo ning
+`quit`/`exit` lõpetab sessiooni. Pole olemas `--stream`, `--show-tokens`, `tokens`,
+ega `cost` käske.
+
+## Kontrolli juurutust
+
+Pärast ülaltoodud shelli muutujate laadimist:
 
 ```bash
-# Käivita erinev mudeliversioon
-az cognitiveservices account deployment create \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-35-turbo \
-  --model-name gpt-35-turbo \
-  --model-version "0613" \
-  --model-format OpenAI \
-  --sku-capacity 20 \
-  --sku-name "Standard"
+curl --fail-with-body \
+  "${AZURE_OPENAI_ENDPOINT%/}/openai/deployments/${AZURE_OPENAI_MODEL}/chat/completions?api-version=2024-10-21" \
+  -H "Content-Type: application/json" \
+  -H "api-key: $AZURE_OPENAI_API_KEY" \
+  -d '{"messages":[{"role":"user","content":"Say hello!"}],"max_tokens":50}'
+
+az keyvault secret list --vault-name "$KV_NAME" --query "[].name" -o table
 ```
 
-## Puhasta
+Edukas: API tagastab HTTP 200 koos `choices[0].message.content` ja `usage`;
+vault kuvab `openai-api-key` ja `openai-endpoint`. Üks ARM-i edukas juurutamine
+ise ei kinnita järeldust.
+
+## Failid ja konfiguratsioon
+
+```text
+azure.yaml                         # Infrastructure-only AZD project
+infra/main.bicep                   # Subscription deployment
+infra/main.parameters.json         # Environment, location, principal ID
+infra/resources/openai.bicep       # Account + model
+infra/resources/keyvault.bicep     # Vault + deploying user's secret access policy
+infra/resources/secrets.bicep      # Writes secrets, no key output
+src/chat.py                        # Interactive CLI
+src/config.py                      # Environment validation
+src/requirements.txt               # Python packages
+```
+
+Muutmaks etteantud mudelit/versiooni/mahtu, redigeeri vaikimisi seadeid failis
+`infra/main.bicep` ja käivita `azd provision`. Sätte `AZURE_OPENAI_MODEL` määramine oma
+terminalis valib ainult **olemasoleva juurutamise nime**; see ei juuruta uut mudelit.
+
+| Käitumismuutuja | Vaikimisi / allikas |
+|---|---|
+| `AZURE_OPENAI_ENDPOINT` | Nõutav; azd mitte-salajane väljund |
+| `AZURE_OPENAI_API_KEY` | Nõutav; toob välja Key Vault-ist |
+| `AZURE_OPENAI_MODEL` | `gpt-4.1`; Azure juurutamise nimi |
+| `AZURE_OPENAI_MAX_TOKENS` | 800 (valideerimisvahemik 1–4096) |
+| `AZURE_OPENAI_TEMPERATURE` | 0.7 (vahemik 0–2) |
+| `AZURE_OPENAI_INPUT_PRICE_PER_1K` | 0.002 USD; illustratiivne vahemäluta sissepääsu hind |
+| `AZURE_OPENAI_OUTPUT_PRICE_PER_1K` | 0.008 USD; illustratiivne väljundi hind |
+
+## Kulud ja turvapiirangud
+
+Kulunäidik on **hinnanguline**, mitte Azure arvelduse alus. See korrutab API tegevuse tokeni
+kasutamise määratud hindadega ja ei arvesta vahemälus oleva sisendi allahindlusi,
+piirkondlikke/SKU erinevusi, makse, hinnamuutusi või ebaõnnestunud/korratud kõnesid.
+Üle kirjuta **mõlemad hinnad**, kui kasutad teist mudelit või SKU-d, ja kontrolli värsket
+[Azure OpenAI hinnastust](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/).
+
+Näitena maksavad 100 päringut, millest igaühes on 500 vahemäluta sisenditokenit ja 200 väljundtokenit
+vaikimisi hindadel kokku `100 × (500/1000 × .002 + 200/1000 × .008) = $0.26`.
+Key Vault toimingute/halduse eest võetakse eraldi tasu. Selle kohaliku CLI kasutamine ei maksa fikseeritud 50 $/kuus
+ega käivitata malli kaudu hostitud arvutusressursse.
+
+Vault kasutab juurutava isiku pääsupoliitikat; see ei ole RBAC või
+hallatava identiteediga rakenduse näide. Õpetamise eesmärgil kasutatakse avalikke otspunktide ja API-võtme autentimist.
+Piira õigusi ja lisa sobivad identiteedi/võrgu kontrollid enne tootmiskeskkonda kohandamist.
+
+
+## Praktilised harjutused
+
+### 1. Kinnita kontekst ja lähtesta see
+
+**Alusta:** käivita CLI. **Eesmärk:** vaata ajalugu.
+Ütle "Mäleta sõna seedripuu," siis küsi "Mis sõna palusin sul meelde jätta?"
+Käivita `stats`; kaks edukat sammu peaksid kokku käivitama kaks sõnumit.
+Käivita `clear` ja `stats`; vahetatud sõnumeid peaks olema null (tokenite arv jääb samaks).
+Mudeli täpne väljend ei ole deterministlik.
+
+### 2. Muuda vastuse limiiti
+
+**Alusta:** sulge CLI, jätkates samas terminalis.
+Käivita `export AZURE_OPENAI_MAX_TOKENS=100`, taaskäivita `python src/chat.py` ja küsi
+lühikest selgitust azd kohta. Kontrolli, et päis näitab 100.
+Taasta käivitades `unset AZURE_OPENAI_MAX_TOKENS`. Väiksem vastuse limiit ei
+vähenda juba saadetud ajaloo tokeneid.
+
+### Levinud probleemid
+
+- **Keskkonnamuutujad puuduvad:** juurutamine ei ekspordi keskkonna muutujaid;
+  korda ekspordimeetmeid. Uues terminalis tuleb neid taas määrata.
+- **403 tõrge Key Vault lugemisel:** kontrolli Azure CLI tellimust/sisselogimist ja juurdepääsu poliitikasse
+  lisatud isikut. Poliitika muudatuste jõustumiseks võib kuluda aega.
+- **404 tõlgendus:** kontrolli juurutuse nime, otsapunkti ja juurutuse olekut.
+- **429 tõlgendus:** oota, kuni kiirusepiirangud lähtestatakse; kontrolli piirkondlikku mudeli kvooti.
+  CLI eemaldab ebaõnnestunud pöörded ajaloost, nii et kordamine ei dubleeri neid.
+- **Konteksti pikkus:** näidis ei lühenda pikki vestlusi; kasuta `clear`.
+- **Mudelit pole saadaval/pensionil:** vaata jooksvat mudeli kättesaadavust ja uuenda
+  mudel/versioon/SKU koos; API versioon ja mudeli versioon on erinevad seaded.
+
+## Puhastamine ja järgmised sammud
 
 ```bash
-# Kustuta kõik Azure ressursid
-azd down --force --purge
-
-# See eemaldab:
-# - OpenAI teenuse
-# - Võtmekogu (90-päevase pehme kustutusega)
-# - Ressursigrupi
-# - Kõik paigaldused ja konfiguratsioonid
+azd down
+unset AZURE_OPENAI_API_KEY
 ```
 
-## Järgmised sammud
+Key Vaulti pehme kustutamise säilitusaeg on seitse päeva; puhastamine nõuab eraldi õigusi.
+Püsivat testikomplekti pole; ära käivita mitteolemasolevat `pytest tests/` käsku.
+Lisa simuleeritud API testid enne koodi laiendamist.
 
-### Laienda seda näidet
-
-1. **Lisa veebiliides** - Ehita React/Vue esipaneel  
-   ```bash
-   # Lisa frontend teenus faili azure.yaml
-   # Paiguta Azure Static Web Apps teenusesse
-   ```
-
-2. **Rakenda RAG** - Lisa dokumentide otsing Azure AI Search abil  
-   ```python
-   # Integreeri Azure AI otsing
-   # Laadi üles dokumendid ja loo vektoriindeks
-   ```
-
-3. **Lisa funktsioonikõned** - Võimalda tööriistade kasutus  
-   ```python
-   # Määratle funktsioonid failis chat.py
-   # Luba gpt-4.1-l kutsuda välishalduseid
-   ```
-
-4. **Mitme mudeli tugi** - Juuruta mitu mudelit  
-   ```bash
-   # Lisa gpt-35-turbo, sisendmudelid
-   # Rakenda mudeli marsruutimise loogikat
-   ```
-
-### Seotud näited
-
-- **[Jaemüük mitme agendiga](../retail-scenario.md)** - Täiustatud mitmeagendi arhitektuur  
-- **[Andmebaasirakendus](../../../../examples/database-app)** - Lisa püsiv salvestus  
-- **[Konteinerirakendused](../../../../examples/container-app)** - Juuruta konteineriteenuseks  
-
-### Õppematerjalid
-
-- 📚 [AZD algajatele kursus](../../README.md) - Peamine kursuse kodu  
-- 📚 [Microsoft Foundry mudelite dokumentatsioon](https://learn.microsoft.com/azure/ai-services/openai/) - Ametlikud juhendid  
-- 📚 [OpenAI API viide](https://platform.openai.com/docs/api-reference) - API üksikasjad  
-- 📚 [Vastutustundlik AI](https://www.microsoft.com/ai/responsible-ai) - Parimad praktikad  
-
-## Täiendavad ressursid
-
-### Dokumentatsioon
-- **[Microsoft Foundry mudelite teenus](https://learn.microsoft.com/azure/ai-services/openai/)** - Täielik juhend  
-- **[gpt-4.1 mudelid](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Mudeli võimekused  
-- **[Sisu filtreerimine](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Turvafunktsioonid  
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd viide  
-
-### Õpetused
-- **[OpenAI kiire algus](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Esimene juurutus  
-- **[Vestlus lõpetused](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Vestlusrakenduste ehitamine  
-- **[Funktsioonikõned](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Täiustatud funktsioonid  
-
-### Tööriistad
-- **[Microsoft Foundry mudelite stuudio](https://oai.azure.com/)** - Veebipõhine proovimisvõimalus  
-- **[Promptide inseneri juhend](https://platform.openai.com/docs/guides/prompt-engineering)** - Paremate küsimuste koostamine  
-- **[Tokeni kalkulaator](https://platform.openai.com/tokenizer)** - Hinda tokeni kasutust  
-
-### Kogukond
-- **[Azure AI Discord](https://discord.gg/azure)** - Kogukonna abi  
-- **[GitHub arutelud](https://github.com/Azure-Samples/openai/discussions)** - KKK ja foorum  
-- **[Azure blogi](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Viimased uuendused  
-
----
-
-**🎉 Edu!** Sa oled juurutanud Microsoft Foundry mudelid ja loonud töökorras vestlusrakenduse. Alusta gpt-4.1 võimekuse avastamist ning katsetamist erinevate küsimuste ja kasutusjuhtudega.
-
-**Küsimused?** [Ava probleem](https://github.com/microsoft/AZD-for-beginners/issues) või vaata [KKK](../../resources/faq.md)
-
-**Kuluhoiatus:** Ära unusta pärast testimist käivitada `azd down`, et vältida pidevaid kulusid (~$50-100/kuus aktiivse kasutuse korral).
+[Konteineri näited](../../../../examples/container-app) · [Jaemüügi arhitektuuri juhend](../retail-scenario.md) ·
+[Kursuse avaleht](../../README.md) · [Teata probleemist](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

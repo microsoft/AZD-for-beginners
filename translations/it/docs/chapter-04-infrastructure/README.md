@@ -1,21 +1,21 @@
 # Capitolo 4: Infrastructure as Code & Deployment
 
-**📚 Corso**: [AZD For Beginners](../../README.md) | **⏱️ Durata**: 1-1,5 ore | **⭐ Complessità**: Intermedio
+**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 2-3 ore di lettura; prevedere tempo extra per gli esercizi di deployment | **⭐ Complessità**: Intermedio
 
 ---
 
 ## Panoramica
 
-Questo capitolo copre i modelli Infrastructure as Code (IaC) con template Bicep, il provisioning delle risorse e le strategie di deployment usando Azure Developer CLI.
+Questo capitolo tratta i modelli di Infrastructure as Code (IaC) con template Bicep, il provisioning delle risorse e le strategie di deployment usando Azure Developer CLI.
 
-> Validato con `azd 1.27.1` a luglio 2026.
+> Obiettivo di revisione di comandi e configurazioni: `azd 1.37.2` (Novembre 2026). Il provisioning Azure in tempo reale non è stato eseguito durante la revisione.
 
 ## Obiettivi di Apprendimento
 
 Completando questo capitolo, imparerai a:
 - Comprendere la struttura e la sintassi dei template Bicep
 - Effettuare il provisioning delle risorse Azure con `azd provision`
-- Distribuire applicazioni con `azd deploy`
+- Eseguire il deployment delle applicazioni con `azd deploy`
 - Implementare strategie di deployment blue-green e rolling
 
 ---
@@ -24,28 +24,31 @@ Completando questo capitolo, imparerai a:
 
 | # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Provisioning delle Risorse](provisioning.md) | Gestione delle risorse Azure con AZD | 45 min |
-| 2 | [Guida al Deployment](deployment-guide.md) | Strategie di distribuzione dell'applicazione | 45 min |
-| 3 | [Creare il Tuo Template](custom-templates.md) | Costruire e pubblicare template azd riutilizzabili | 30 min |
+| 1 | [Provisioning Risorse](provisioning.md) | Gestione risorse Azure con AZD | 45 min |
+| 2 | [Guida al Deployment](deployment-guide.md) | Strategie di deployment applicazioni | 45 min |
+| 3 | [Creazione del Tuo Template](custom-templates.md) | Costruisci e pubblica template azd riutilizzabili | 30 min |
 
 ---
 
 ## 🚀 Avvio Rapido
 
 ```bash
-# Inizializza dal modello
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Anteprima di ciò che verrà creato
+# Preview what will be created
 azd provision --preview
 
-# Provisiona solo l'infrastruttura
+# Provision infrastructure only
 azd provision
 
-# Distribuisci solo il codice
+# Deploy code only
 azd deploy
 
-# O entrambi insieme
+# Or both together
 azd up
 ```
 
@@ -74,7 +77,7 @@ my-project/
 |---------|-------------|
 | `azd init` | Inizializza progetto |
 | `azd provision` | Crea risorse Azure |
-| `azd deploy` | Distribuisci il codice dell'applicazione |
+| `azd deploy` | Esegui il deployment del codice applicativo |
 | `azd up` | provisioning + deployment |
 | `azd down` | Elimina tutte le risorse |
 
@@ -92,8 +95,8 @@ my-project/
 ## 📖 Risorse Correlate
 
 - [Controlli Pre-Deployment](../chapter-06-pre-deployment/README.md)
-- [Esempi Container App](../../examples/container-app/README.md)
-- [Esempio Database App](../../examples/database-app/README.md)
+- [Esempi di Container App](../../examples/container-app/README.md)
+- [Esempio di Database App](../../examples/database-app/README.md)
 
 ---
 

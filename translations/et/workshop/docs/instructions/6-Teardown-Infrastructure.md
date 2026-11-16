@@ -1,60 +1,58 @@
-# 6. Infra struktuuri eemaldamine
+# 6. Tõrke infrastruktuur maha
 
-!!! tip "SELLE MÄLUMOODULI LÕPUS SAAD OMAOSAKS"
+!!! tip "SELLE MODUULI LÕPUS OLED SA VÕimeline"
 
-    - [ ] Mõista ressursi puhastamise ja kulude juhtimise olulisust
-    - [ ] Kasutada `azd down` infrastruktuuri turvaliseks eemaldamiseks
-    - [ ] Vajadusel taastada pehmelt kustutatud Azure AI teenused
-    - [ ] **Lab 6:** Azure ressursside puhastamine ja eemaldamise kinnitamine
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Boonusülesanded
 
-Enne projekti eemaldamist võta mõned minutid avastuslikuks uurimiseks.
+Enne projekti lammutamist võta paar minutit, et teha mõningaid avatud uurimisi.
 
-!!! info "Proovi neid uurimisküsimusi"
+!!! info "Proovi neid uurimiskomplekte"
 
-    **Katseta GitHub Copilotiga:**
+    **Experiment with GitHub Copilot:**
     
-    1. Küsi: `Milliseid teisi AZD malle võiksin proovida mitme agendi stsenaariumite jaoks?`
-    2. Küsi: `Kuidas kohandada agendi juhiseid tervishoiu kasutusjuhtumi jaoks?`
-    3. Küsi: `Millised keskkonnamuutujad kontrollivad kulude optimeerimist?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Uuri Azure portaali:**
+    **Explore the Azure Portal:**
     
-    1. Vaata üle oma juurutuse Application Insights mõõdikud
-    2. Kontrolli provisjoneeritud ressursside kulude analüüsi
-    3. Uuri Microsoft Foundry portaali agendi mänguväljakut veel kord
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Infra eemaldamine
+## Infrastruktuuri eemaldamine
 
-1. Infrastruktuuri eemaldamine on sama lihtne kui:
+1. Infrastruktuuri maha võtmine on sama lihtne kui:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. Lipp `--purge` tagab, et see ka puhastab pehmelt kustutatud Kognitiivsete teenuste ressursid, vabastades nende ressursside poolt hoitud mahupiirangud. Kui see on lõpetatud, näed midagi sellist:
+1. Kinnita valitud keskkond ja vaata üle kustutatavad ressursid. See eemaldab Azure'i ressursid ja võib andmeid hävitada. Hoia selle õppimise töövoo jaoks kinnituskutse. Kui lõpetad, näed väljundit, mis näeb välja nagu:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Valikuline) Kui nüüd jooksutad uuesti `azd up` käsku, märkad, et gpt-4.1 mudel paigaldatakse, sest keskkonnamuutuja muudeti (ja salvestati) kohalikus `.azure` kaustas. 
+1. Kontrolli portaalis kustutamist ja otsi üles ressursid, mis jäävad väljapoole juurutuspiirkonda. Kulude aruandlus ja limiidi uuendused võivad hilineda. Kohalik `.azure` konfiguratsioon püsib alles, kui sa seda ekspliciitselt ei eemalda.
 
-      Siin on mudeli juurutused **enne**:
+1. `azd down --purge` nõuab lisaks toetatud pehmeta kustutatud ressursside jäädavat kustutamist. Kasuta seda ainult siis, kui taastamine pole vajalik ning sa mõistad säilitamis- ja puhastus-kaitse poliitikaid. See ei taga kohest limiidi vabastamist.
 
-      ![Initial](../../../../../translated_images/et/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      Ja siin on see **pärast**:
-      ![New](../../../../../translated_images/et/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Ära juuruta uuesti lihtsalt puhastuse kontrollimiseks. Hilisem tahtlik `azd up` võib järelejäänud kohalike sisendite abil ressursid uuesti luua ja see põhjustab taas tasusid. Mudeli uuendused kasutavad tavaliselt toetatud juurutusmuudatusi, mitte lammutamist.
 
 ---
 

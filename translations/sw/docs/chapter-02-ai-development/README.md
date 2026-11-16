@@ -1,22 +1,22 @@
 # Sura ya 2: Maendeleo ya AI-Kwanza
 
-**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: Masaa 1-2 | **⭐ Ugumu**: Kiwango cha Kati
+**📚 Kozi**: [AZD Kwa Komo](../../README.md) | **⏱️ Muda**: Masaa 4-5 ikijumuisha warsha | **⭐ Ugumu**: Kiwango cha Kati
 
 ---
 
 ## Muhtasari
 
-Sura hii inalenga katika kuanzisha programu zinazotumia AI kwa kutumia Azure Developer CLI na huduma za Microsoft Foundry. Kuanzia programu rahisi za AI za mazungumzo hadi maajenti werevu wenye zana.
+Sura hii inalenga katika kutekeleza programu zilizoendeshwa na AI kwa kutumia Azure Developer CLI na huduma za Microsoft Foundry. Kuanzia programu rahisi za mazungumzo ya AI hadi mawakala wenye akili na zana.
 
-> **Kumbuka ya uthibitisho (2026-07-13):** Mtiririko wa amri na mwongozo wa nyongeza katika sura hii ulipitiwa dhidi ya `azd` `1.27.1` na toleo la sasa la nyongeza ya maajenti wa AI la awali `azure.ai.agents` `1.0.0-beta.5`. Ikiwa uko katika toleo la zamani la AZD, sasisha kwanza kisha endelea na mazoezi.
+> **Mapitio ya toleo (2026-11-04):** Mwongozo wa AI CLI ulichunguzwa dhidi ya hati/chanzo zilizochapishwa za `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, na `azure.ai.evaluations` `1.0.0-beta.2`. Tumia `azd >= 1.37.0` kwa mchakato wa kazi uliounganishwa. Tathmini sasa zinatumia hifadhi ya pekee ya majina ya `azd ai eval`; ona [mabadiliko ya toleo na mwongozo wa uhamaji](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Hii si uthibitisho wa utekelezaji wa moja kwa moja.
 
 ## Malengo ya Kujifunza
 
-Kwa kumaliza sura hii, utakuwa umejifunza:
-- Kuanzisha programu za AI kwa kutumia templeti za AZD zilizojengwa awali
-- Kuelewa ujumuishaji wa Microsoft Foundry na AZD
-- Kusanidi na kubinafsisha maajenti wa AI wenye zana
-- Kuanzisha programu za RAG (Retrieval-Augmented Generation)
+Kwa kumaliza sura hii, utaweza:
+- Tekeleza programu za AI kwa kutumia templeti za AZD zilizotengenezwa awali
+- Kuelewa ushirikiano wa Microsoft Foundry na AZD
+- Kusanidi na kubinafsisha mawakala wa AI kwa kutumia zana
+- Tekeleza programu za RAG (Uzalishaji Ulioboreshwa kwa Upataji)
 
 ---
 
@@ -24,68 +24,72 @@ Kwa kumaliza sura hii, utakuwa umejifunza:
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Ujumuishaji wa Microsoft Foundry](microsoft-foundry-integration.md) | Kuunganisha AZD na huduma za Foundry | 30 min |
-| 2 | [Mwongozo wa Maajenti wa AI](agents.md) | Kuanzisha maajenti werevu wenye zana | 45 min |
-| 3 | [Uanzishaji wa Mfano wa AI](ai-model-deployment.md) | Kuanzisha na kusanidi mifano ya AI | 30 min |
-| 4 | [Warsha ya AI](ai-workshop-lab.md) | Vitendo: Tengeneza suluhisho lako la AI lisiwe tayari kwa AZD | 60 min |
+| 1 | [Ushirikiano wa Microsoft Foundry](microsoft-foundry-integration.md) | Unganisha AZD na huduma za Foundry | Dakika 30 |
+| 2 | [Mwongozo wa Mawakala wa AI](agents.md) | Tekeleza mawakala wa akili kwa zana | Dakika 45 |
+| 3 | [Utekelezaji wa Mfano wa AI](ai-model-deployment.md) | Tekeleza na usanidi wa mifano ya AI | Dakika 30 |
+| 4 | [Maabara ya Warsha ya AI](ai-workshop-lab.md) | Vitendo: Chunguza templeti na panga mabadiliko yako | Masaa 2-3 |
 
 ---
 
 ## 🚀 Anza Haraka
 
+Chagua chaguo moja katika saraka mpya tupu. `.` ya mwisho huanzisha saraka ya sasa; vinginevyo AZD inaweza kuunda saraka ndogo bila kubadilisha saraka ya kazi ya shell yako.
+
 ```bash
-# Chaguo 1: Programu ya Mazungumzo ya RAG
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# Chaguo 2: Wakala wa AI
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# Chaguo 3: Programu ya Mazungumzo ya Haraka
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
 ---
 
-## 🤖 Templeti Maarufu za AI
+## 🤖 Templeti Bora za AI
 
 | Templeti | Maelezo | Huduma |
 |----------|-------------|----------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Mazungumzo ya RAG yenye marejeo | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Maajenti wa AI wenye zana | Huduma ya Maajenti wa AI |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Mazungumzo ya AI ya Msingi | OpenAI + Container Apps |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Wakili wa AI kwa zana | Huduma ya Wakili wa AI |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Mazungumzo ya AI ya msingi | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Uelewa wa Gharama
 
-| Mazingira | Gharama Inakadiriwa Kila Mwezi |
+Hizi ni viwango vya mfano, sio nukuu au viwango vya juu; trafiki ya mfano, SKU za Utafutaji/hisabati, eneo, na vipengele hiari vinaweza kuzidi. Pitia mwongozo wa bei wa sampuli uliyochagua kabla ya kuandaa.
+
+| Mazingira | Gharama ya Kila Mwezi |
 |-------------|----------------------|
 | Maendeleo | $80-150 |
-| Maandalizi | $150-300 |
+| Uandaaji | $150-300 |
 | Uzalishaji | $300-3,500+ |
 
-**Ushauri:** Endesha `azd down` baada ya majaribio ili kuepuka malipo.
+**Ushauri:** Endesha `azd down` baada ya majaribio ili kuzuia malipo.
 
 ---
 
-## 🔗 Urambazaji
+## 🔗 Uelekezaji
 
-| Mwanga | Sura |
+| Mwelekeo | Sura |
 |-----------|---------|
-| **Iliyopita** | [Sura ya 1: Msingi](../chapter-01-foundation/README.md) |
-| **Inayofuata** | [Sura ya 3: Usanidi](../chapter-03-configuration/README.md) |
-| **Ruka hadi** | [Sura ya 8: Mifumo ya Uzalishaji](../chapter-08-production/README.md) |
+| **Iliyotangulia** | [Sura 1: Msingi](../chapter-01-foundation/README.md) |
+| **Ifuatayo** | [Sura 3: Usanidi](../chapter-03-configuration/README.md) |
+| **Ruka kwenda** | [Sura 8: Mifumo ya Uzalishaji](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Rasilimali Zinazohusiana
 
-- [Utatuzi wa Matatizo ya AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Mazoezi ya AI kwa Uzalishaji](../chapter-08-production/production-ai-practices.md)
-- [Maarifa ya Programu](../chapter-06-pre-deployment/application-insights.md)
+- [Ushughulikiaji wa Masuala ya AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Mazoea ya AI Kwenye Uzalishaji](../chapter-08-production/production-ai-practices.md)
+- [Uchambuzi wa Maombi](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

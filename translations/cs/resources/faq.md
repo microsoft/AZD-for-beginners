@@ -1,65 +1,65 @@
 # Často kladené otázky (FAQ)
 
-**Získejte pomoc podle kapitoly**
-- **📚 Domov kurzu**: [AZD pro začátečníky](../README.md)
-- **🚆 Problémy s instalací**: [Chapter 1: Installation & Setup](../docs/getting-started/installation.md)
-- **🤖 Otázky týkající se AI**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **🔧 Řešení problémů**: [Chapter 7: Troubleshooting & Debugging](../docs/troubleshooting/common-issues.md)
+**Získat pomoc podle kapitol**
+- **📚 Domovská stránka kurzu**: [AZD Pro začátečníky](../README.md)
+- **🚆 Problémy s instalací**: [Kapitola 1: Instalace a nastavení](../docs/chapter-01-foundation/installation.md)
+- **🤖 Otázky týkající se AI**: [Kapitola 2: Vývoj zaměřený na AI](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🔧 Řešení problémů**: [Kapitola 7: Řešení problémů a ladění](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ## Úvod
 
-Tento komplexní FAQ poskytuje odpovědi na nejčastější otázky týkající se Azure Developer CLI (azd) a nasazení do Azure. Najdete zde rychlá řešení běžných problémů, pochopení osvědčených postupů a objasnění konceptů a pracovních postupů azd.
+Tento komplexní FAQ poskytuje odpovědi na nejčastější otázky týkající se Azure Developer CLI (azd) a nasazování na Azure. Najděte rychlá řešení běžných problémů, pochopte osvědčené postupy a získejte vysvětlení konceptů a pracovních postupů azd.
 
-## Cíle učení
+## Výukové cíle
 
-Při prostudování tohoto FAQ budete:
-- Nalézat rychlé odpovědi na běžné dotazy a problémy s Azure Developer CLI
-- Rozumět klíčovým pojmům a terminologii prostřednictvím praktického formátu otázek a odpovědí
-- Získat přístup k řešením při odstraňování problémů pro časté chyby a scénáře
-- Naučit se osvědčené postupy týkající se optimalizace
-- Objevovat pokročilé funkce a schopnosti prostřednictvím otázek na úrovni expertů
-- Efektivně získávat doporučení ohledně nákladů, zabezpečení a strategie nasazení
+Prostřednictvím tohoto FAQ:
+- Najdete rychlé odpovědi na běžné otázky a problémy Azure Developer CLI
+- Pochopíte klíčové koncepty a terminologii prostřednictvím praktického formátu otázek a odpovědí
+- Získáte přístup k řešením problémů pro časté situace a chyby
+- Naučíte se osvědčené postupy díky často kladeným otázkám o optimalizaci
+- Objevíte pokročilé funkce a možnosti díky otázkám na expertní úrovni
+- Efektivně najdete informace o nákladech, bezpečnosti a strategiích nasazení
 
-## Výsledky učení
+## Výstupy učení
 
-Při pravidelném využívání tohoto FAQ budete schopni:
-- Samostatně řešit běžné problémy s Azure Developer CLI pomocí poskytnutých řešení
-- Dělat informovaná rozhodnutí o strategiích nasazení a konfiguracích
-- Chápat vztah mezi azd a dalšími nástroji a službami Azure
-- Aplikovat osvědčené postupy na základě zkušeností komunity a doporučení odborníků
-- Efektivně řešit problémy s autentizací, nasazením a konfigurací
+Pravidelným odkazováním na toto FAQ budete schopni:
+- Samostatně řešit běžné problémy Azure Developer CLI pomocí poskytnutých řešení
+- Dělat informovaná rozhodnutí o strategiích a konfiguracích nasazení
+- Pochopit vztah mezi azd a dalšími nástroji a službami Azure
+- Používat osvědčené postupy založené na zkušenostech komunity a doporučeních expertů
+- Efektivně řešit problémy s autentikací, nasazením a konfigurací
 - Optimalizovat náklady a výkon pomocí poznatků a doporučení z FAQ
 
 ## Obsah
 
-- [Getting Started](../../../resources)
-- [Authentication & Access](../../../resources)
-- [Templates & Projects](../../../resources)
-- [Deployment & Infrastructure](../../../resources)
-- [Configuration & Environments](../../../resources)
-- [Troubleshooting](../../../resources)
-- [Cost & Billing](../../../resources)
-- [Best Practices](../../../resources)
-- [Advanced Topics](../../../resources)
+- [Začínáme](#getting-started)
+- [Autentikace & přístup](#authentication--access)
+- [Šablony & projekty](#templates--projects)
+- [Nasazení & infrastruktura](#deployment--infrastructure)
+- [Konfigurace & prostředí](#configuration--environments)
+- [Řešení problémů](#troubleshooting)
+- [Náklady & fakturace](#cost--billing)
+- [Osvědčené postupy](#best-practices)
+- [Pokročilá témata](#advanced-topics)
 
 ---
 
-## Getting Started
+## Začínáme
 
-### Q: What is Azure Developer CLI (azd)?
-**A**: Azure Developer CLI (azd) je nástroj příkazového řádku zaměřený na vývojáře, který zrychluje dobu potřebnou k tomu, aby vaše aplikace přešla z lokálního vývojového prostředí do Azure. Poskytuje osvědčené postupy prostřednictvím šablon a pomáhá v celém životním cyklu nasazení.
+### Q: Co je Azure Developer CLI (azd)?
+**A**: Azure Developer CLI (azd) je příkazový nástroj zaměřený na vývojáře, který urychluje dobu, za kterou dostanete svou aplikaci z lokálního vývojového prostředí na Azure. Poskytuje osvědčené postupy prostřednictvím šablon a pomáhá během celého životního cyklu nasazení.
 
-### Q: How is azd different from Azure CLI?
+### Q: Čím se azd liší od Azure CLI?
 **A**: 
-- **Azure CLI**: Nástroj obecného určení pro správu prostředků Azure
+- **Azure CLI**: Nástroj obecného zaměření pro správu Azure zdrojů
 - **azd**: Nástroj zaměřený na vývojáře pro pracovní postupy nasazení aplikací
-- azd používá interně Azure CLI, ale poskytuje vyšší úroveň abstrakcí pro běžné vývojové scénáře
+- azd má vlastní autentizační a nasazovací workflow; Azure CLI je samostatný, doplňkový nástroj
 - azd zahrnuje šablony, správu prostředí a automatizaci nasazení
 
-### Q: Do I need Azure CLI installed to use azd?
-**A**: Ano, azd vyžaduje Azure CLI pro autentizaci a některé operace. Nejprve nainstalujte Azure CLI a poté nainstalujte azd.
+### Q: Potřebuji mít nainstalovaný Azure CLI pro použití azd?
+**A**: Ne pro základní workflow AZD. Autentizujte se pomocí `azd auth login`. Azure CLI nainstalujte samostatně, pokud šablonový háček nebo cvičení explicitně spouští příkazy `az`.
 
-### Q: What programming languages does azd support?
+### Q: Jaké programovací jazyky azd podporuje?
 **A**: azd je nezávislý na jazyce. Funguje s:
 - Node.js/JavaScript/TypeScript
 - Python
@@ -67,90 +67,99 @@ Při pravidelném využívání tohoto FAQ budete schopni:
 - Java
 - Go
 - PHP
-- Statické weby
-- Kontejnerizované aplikace
+- Statické webové stránky
+- Aplikace v kontejnerech
 
-### Q: Can I use azd with existing projects?
-**A**: Ano! Můžete buď:
+### Q: Mohu použít azd s existujícími projekty?
+**A**: Ano! Můžete:
 1. Použít `azd init` k přidání konfigurace azd do existujících projektů
-2. Přizpůsobit existující projekty tak, aby odpovídaly struktuře šablon azd
+2. Přizpůsobit stávající projekty tak, aby odpovídaly struktuře šablony azd
 3. Vytvořit vlastní šablony založené na vaší stávající architektuře
 
 ---
 
-## Authentication & Access
+## Autentikace & přístup
 
-### Q: How do I authenticate with Azure using azd?
-**A**: Použijte `azd auth login`, které otevře okno prohlížeče pro autentizaci do Azure. Pro scénáře CI/CD použijte servisní principaly nebo spravované identity.
+### Q: Jak se autentizuji do Azure pomocí azd?
+**A**: Použijte `azd auth login`, který otevře okno prohlížeče pro autentikaci do Azure. Pro scénáře CI/CD používejte servisní identity nebo spravované identity.
 
-### Q: Can I use azd with multiple Azure subscriptions?
-**A**: Ano. Použijte `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` k určení, kterou předplatné použít pro každé prostředí.
+### Q: Mohu použít azd s více Azure předplatnými?
+**A**: Ano. Použijte `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` pro určení, které předplatné se má použít pro každé prostředí.
 
-### Q: What permissions do I need to deploy with azd?
-**A**: Typicky potřebujete:
-- **Contributor** roli na resource group nebo subscription
-- **User Access Administrator**, pokud nasazujete prostředky, které vyžadují přiřazení rolí
-- Specifická oprávnění se liší podle šablony a nasazovaných prostředků
+### Q: Jaká oprávnění potřebuji pro nasazení s azd?
+**A**: Obvykle potřebujete:
+- roli **Contributor** na skupině prostředků nebo předplatném
+- roli **User Access Administrator** pokud nasazujete zdroje vyžadující přiřazení rolí
+- Specifická oprávnění závisí na šabloně a nasazovaných zdrojích
 
-### Q: Can I use azd in CI/CD pipelines?
-**A**: Rozhodně! azd je navržen pro integraci do CI/CD. Použijte servisní principaly pro autentizaci a nastavte proměnné prostředí pro konfiguraci.
+### Q: Mohu použít azd v CI/CD pipelinech?
+**A**: Rozhodně! azd je navržen pro integraci do CI/CD. Pro autentikaci používejte servisní identity a pro konfiguraci nastavte proměnné prostředí.
 
-### Q: How do I handle authentication in GitHub Actions?
-**A**: Použijte akci Azure Login s přihlašovacími údaji servisního principala:
+### Q: Jak řešit autentikaci v GitHub Actions?
+**A**: Preferujte federaci identity (OIDC), nakonfigurovanou pomocí `azd pipeline config`. Generovaný workflow instaluje AZD a autentizuje AZD přímo s federovanou identitou. Samotný krok `azure/login` nezajišťuje přihlášení AZD. Přihlašovací krok uvnitř existujícího jobu je:
 ```yaml
-- uses: azure/login@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-- run: azd deploy --no-prompt
+permissions:
+  contents: read
+  id-token: write
+steps:
+  - uses: actions/checkout@v7
+  - uses: Azure/setup-azd@v2
+  - run: >-
+      azd auth login
+      --client-id "${{ vars.AZURE_CLIENT_ID }}"
+      --tenant-id "${{ vars.AZURE_TENANT_ID }}"
+      --federated-credential-provider github
 ```
+
+Proveďte provisioning nebo nasazení po přihlášení, s nakonfigurovaným cílovým prostředím AZD, předplatným a umístěním. Federované pověření identity musí důvěřovat repozitáři/referenci workflow nebo GitHub prostředí a její Azure role musí povolovat požadované operace.
 
 ---
 
-## Templates & Projects
+## Šablony & projekty
 
-### Q: Where can I find azd templates?
+### Q: Kde najdu šablony azd?
 **A**: 
-- Oficiální šablony: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- Šablony komunity: Vyhledávání na GitHubu pro "azd-template"
-- Použijte `azd template list` pro prohlížení dostupných šablon
+- Oficiální a komunitní šablony: [Awesome AZD](https://azure.github.io/awesome-azd/)
+- Komunitní šablony: vyhledávání na GitHubu pro "azd-template"
+- Použijte `azd template list` k prohlížení dostupných šablon
 
-### Q: How do I create a custom template?
+### Q: Jak vytvořit vlastní šablonu?
 **A**: 
 1. Začněte se strukturou existující šablony
 2. Upravte `azure.yaml`, infrastrukturní soubory a aplikační kód
-3. Důkladně otestujte pomocí `azd up`
-4. Publikujte na GitHub s vhodnými štítky
+3. Důkladně testujte pomocí `azd up`
+4. Publikujte na GitHub s odpovídajícími tagy
 
-### Q: Can I use azd without a template?
-**A**: Ano, použijte `azd init` v existujícím projektu k vytvoření nezbytných konfiguračních souborů. Budete muset ručně nakonfigurovat `azure.yaml` a infrastrukturní soubory.
+### Q: Mohu použít azd bez šablony?
+**A**: Ano, použijte `azd init` v existujícím projektu k vytvoření potřebných konfiguračních souborů. Konfiguraci `azure.yaml` a infrastrukturních souborů je nutné nastavit ručně.
 
-### Q: What's the difference between official and community templates?
+### Q: Jaký je rozdíl mezi oficiálními a komunitními šablonami?
 **A**: 
-- **Oficiální šablony**: Udržované společností Microsoft, pravidelně aktualizované, s rozsáhlou dokumentací
-- **Šablony komunity**: Vytvořené vývojáři, mohou mít specializované použití, různá kvalita a údržba
+- **Oficiální šablony**: Spravované Microsoftem, pravidelně aktualizované, s komplexní dokumentací
+- **Komunitní šablony**: Vytvořené vývojáři, mohou mít specializované případy použití, různé kvality a údržbu
 
-### Q: How do I update a template in my project?
+### Q: Jak aktualizovat šablonu v mém projektu?
 **A**: Šablony se neaktualizují automaticky. Můžete:
 1. Ručně porovnat a sloučit změny ze zdrojové šablony
-2. Začít znovu pomocí `azd init` s aktualizovanou šablonou
-3. Cherry-pickovat konkrétní vylepšení z aktualizovaných šablon
+2. Začít znovu s `azd init` s použitím aktualizované šablony
+3. Vybrat konkrétní vylepšení z aktualizovaných šablon
 
 ---
 
-## Deployment & Infrastructure
+## Nasazení & infrastruktura
 
-### Q: What Azure services can azd deploy?
-**A**: azd může nasadit jakoukoli službu Azure prostřednictvím Bicep/ARM šablon, včetně:
+### Q: Jaké Azure služby může azd nasadit?
+**A**: azd může nasadit jakoukoli službu Azure přes Bicep/ARM šablony, včetně:
 - App Services, Container Apps, Functions
-- Databází (SQL, PostgreSQL, Cosmos DB)
-- Úložiště, Key Vault, Application Insights
-- Síťování, zabezpečení a monitorovací prostředky
+- Databázových služeb (SQL, PostgreSQL, Cosmos DB)
+- Storage, Key Vault, Application Insights
+- Síťových, bezpečnostních a monitorovacích zdrojů
 
-### Q: Can I deploy to multiple regions?
-**A**: Ano, nakonfigurujte více regionů ve svých Bicep šablonách a nastavte parametr location odpovídajícím způsobem pro každé prostředí.
+### Q: Mohu nasadit do více regionů?
+**A**: Ano, nastavte více regionů ve vašich Bicep šablonách a podle potřeby nastavte parametr umístění pro každé prostředí.
 
-### Q: How do I handle database schema migrations?
-**A**: Použijte deployment hooks v `azure.yaml`:
+### Q: Jak řešit migrace schématu databáze?
+**A**: Použijte deployment hooky v `azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -160,143 +169,136 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### Q: Can I deploy only infrastructure without applications?
-**A**: Ano, použijte `azd provision` k nasazení pouze infrastrukturních komponent definovaných ve vašich šablonách.
+### Q: Mohu nasadit pouze infrastrukturu bez aplikací?
+**A**: Ano, použijte `azd provision` pro nasazení pouze infrastrukturních komponent definovaných ve vašich šablonách.
 
-### Q: How do I deploy to existing Azure resources?
-**A**: To je složité a není přímo podporováno. Můžete:
-1. Importovat existující prostředky do vašich Bicep šablon
-2. Použít reference na existující prostředky v šablonách
-3. Upravit šablony tak, aby podmíněně vytvářely nebo odkazovaly prostředky
+### Q: Jak nasadit do existujících Azure zdrojů?
+**A**: Ano, pokud to šablona podporuje. Referencujte existující zdroje přes deklarace `existing` v Bicep nebo parametry pro existující zdroje v šabloně a mapujte aplikační služby na zamýšlené cíle. Toto nepřenáší vlastnictví ani nevytváří automaticky chybějící oprávnění. Před nasazením zkontrolujte šablonu.
 
-### Q: Can I use Terraform instead of Bicep?
-**A**: V současnosti azd primárně podporuje Bicep/ARM šablony. Podpora Terraformu není oficiálně dostupná, i když mohou existovat komunitní řešení.
+### Q: Mohu použít Terraform místo Bicep?
+**A**: Ano. AZD podporuje Terraform i Bicep. Vyberte šablonu založenou na Terraformu nebo nakonfigurujte `infra.provider: terraform` v `azure.yaml`, s odpovídajícími Terraform soubory a konfigurací stavu/backendu. Viz [Terraform workflow](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
 ---
 
-## Configuration & Environments
+## Konfigurace & prostředí
 
-### Q: How do I manage different environments (dev, staging, prod)?
-**A**: Vytvořte samostatná prostředí pomocí `azd env new <environment-name>` a nakonfigurujte odlišná nastavení pro každé:
+### Q: Jak spravovat různá prostředí (dev, staging, prod)?
+**A**: Vytvořte samostatná prostředí pomocí `azd env new <environment-name>` a konfigurujte pro každé různé nastavení:
 ```bash
 azd env new development
 azd env new staging  
 azd env new production
 ```
 
-### Q: Where are environment configurations stored?
-**A**: V složce `.azure` ve vašem adresáři projektu. Každé prostředí má svou vlastní složku s konfiguračními soubory.
+### Q: Kde jsou uloženy konfigurace prostředí?
+**A**: Ve složce `.azure` uvnitř vašeho projektového adresáře. Každé prostředí má vlastní složku s konfiguračními soubory.
 
-### Q: How do I set environment-specific configuration?
-**A**: Použijte `azd env set` pro konfiguraci proměnných prostředí:
+### Q: Jak nastavit konfiguraci specifickou pro prostředí?
+**A**: Použijte `azd env set` pro nastavení proměnných prostředí:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### Q: Can I share environment configurations across team members?
-**A**: Složka `.azure` obsahuje citlivé informace a neměla by být commitována do verzovacího systému. Místo toho:
-1. Zdokumentujte požadované proměnné prostředí
-2. Použijte skripty pro nasazení k nastavení prostředí
-3. Použijte Azure Key Vault pro citlivou konfiguraci
+### Q: Mohu sdílet konfiguraci prostředí mezi členy týmu?
+**A**: Složka `.azure` obsahuje citlivé informace a neměla by být vkládána do verzovacího systému. Místo toho:
+1. Dokumentujte potřebné proměnné prostředí
+2. Použijte skripty nasazení k nastavení prostředí
+3. Použijte Azure Key Vault pro citlivé konfigurace
 
-### Q: How do I override template defaults?
-**A**: Nastavte proměnné prostředí, které odpovídají parametrům šablony:
+### Q: Jak přepsat výchozí hodnoty šablony?
+**A**: Nastavte proměnné prostředí odpovídající parametrům šablony:
 ```bash
-azd env set LOCATION "West US 2"
+azd env set AZURE_LOCATION westus2
 azd env set SKU_NAME "B1"
 ```
 
+Pouze proměnné použití šablonou mají vliv na nasazení. `SKU_NAME` výše je příklad vlastního vstupu, nikoli univerzálního nastavení AZD.
+
 ---
 
-## Troubleshooting
+## Řešení problémů
 
-### Q: Why is `azd up` failing?
+### Q: Proč `azd up` selhává?
 **A**: Běžné příčiny:
-1. **Authentication issues**: Spusťte `azd auth login`
-2. **Insufficient permissions**: Zkontrolujte přiřazení rolí v Azure
-3. **Resource naming conflicts**: Změňte AZURE_ENV_NAME
-4. **Quota/capacity issues**: Zkontrolujte dostupnost v regionu
-5. **Template errors**: Validujte Bicep šablony
+1. **Problémy s autentizací**: Spusťte `azd auth login`
+2. **Nedostatečná oprávnění**: Zkontrolujte přiřazení rolí v Azure
+3. **Konflikty názvů zdrojů**: Zkontrolujte konfliktní zdroj a vstupy názvů ve šabloně; pokud je potřeba izolace, vytvořte samostatné prostředí pomocí `azd env new`
+4. **Problémy s kvótami/kapacitami**: Zkontrolujte dostupnost v regionech
+5. **Chyby ve šabloně**: Validujte Bicep šablony
 
-### Q: How do I debug deployment failures?
+### Q: Jak ladit chyby nasazení?
 **A**: 
 1. Použijte `azd deploy --debug` pro podrobné výstupy
 2. Zkontrolujte historii nasazení v Azure portálu
-3. Prohlédněte Aktivní logy (Activity Log) v Azure portálu
-4. Použijte `azd show` pro zobrazení stavu aktuálního prostředí
+3. Přehodnoťte Aktivitu v Azure portálu
+4. Použijte `azd show` k zobrazení aktuálního stavu prostředí
 
-### Q: Why are my environment variables not working?
+### Q: Proč nefungují mé proměnné prostředí?
 **A**: Zkontrolujte:
-1. Že názvy proměnných přesně odpovídají parametrům šablony
-2. Že hodnoty jsou správně uzavřeny v uvozovkách, pokud obsahují mezery
-3. Že je vybráno správné prostředí: `azd env select <environment>`
-4. Že jsou proměnné nastaveny ve správném prostředí
+1. Název proměnných přesně odpovídá parametrům šablony
+2. Hodnoty jsou správně uzavřeny v uvozovkách, pokud obsahují mezery
+3. Prostředí je vybráno: `azd env select <environment>`
+4. Proměnné jsou nastaveny ve správném prostředí
 
-### Q: How do I clean up failed deployments?
+### Q: Jak vyčistit neúspěšná nasazení?
 **A**: 
 ```bash
-azd down --force --purge
+azd down
 ```
-Toto odstraní všechny prostředky a konfiguraci prostředí.
+ Nejprve zkontrolujte vybrané prostředí a potvrzení odstranění. Tento příkaz odstraní nasazené Azure zdroje, nikoli lokální konfiguraci prostředí `.azure`. Příkaz `--purge` žádá dodatečně trvalé odstranění podporovaných zdrojů se soft-delete a může být blokován ochranou proti odstranění; není to rutinní krok pro obnovu.
 
-### Q: Why is my application not accessible after deployment?
+### Q: Proč není moje aplikace po nasazení dostupná?
 **A**: Zkontrolujte:
-1. Že nasazení bylo úspěšně dokončeno
-2. Že aplikace běží (zkontrolujte logy v Azure portálu)
-3. Že síťové bezpečnostní skupiny povolují provoz
-4. Že DNS/vlastní domény jsou správně nakonfigurovány
+1. Nasazení bylo úspěšně dokončeno
+2. Aplikace běží (zkontrolujte logy v Azure portálu)
+3. Síťové bezpečnostní skupiny povolují provoz
+4. DNS/vlastní domény jsou správně nastaveny
 
 ---
 
-## Cost & Billing
+## Náklady & fakturace
 
-### Q: How much will azd deployments cost?
+### Q: Kolik budou nasazení azd stát?
 **A**: Náklady závisí na:
 - Nasazených službách Azure
 - Vybraných úrovních služeb/SKU
-- Regionálních rozdílech v cenách
-- Vzorcích používání
+- Regionálních cenových rozdílech
+- Vzorcích využití
 
 Použijte [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) pro odhady.
 
-### Q: How do I control costs in azd deployments?
+### Q: Jak kontrolovat náklady při nasazování azd?
 **A**: 
-1. Používejte nižší SKU pro vývojová prostředí
+1. Používejte nižší úrovně SKU pro vývojová prostředí
 2. Nastavte rozpočty a upozornění v Azure
-3. Používejte `azd down` k odstranění prostředků, když nejsou potřeba
-4. Vyberte vhodné regiony (ceny se liší podle lokality)
+3. Používejte `azd down` k odstranění zdrojů, když nejsou potřeba
+4. Vyberte vhodné regiony (náklady se liší podle lokality)
 5. Používejte nástroje Azure Cost Management
 
-### Q: Are there free tier options for azd templates?
-**A**: Mnoho služeb Azure nabízí bezplatné vrstvy:
-- App Service: K dispozici bezplatná úroveň
-- Azure Functions: 1M bezplatných spuštění/měsíc
-- Cosmos DB: Bezplatná vrstva s 400 RU/s
-- Application Insights: Prvních 5GB/měsíc zdarma
+### Q: Existují bezplatné úrovně pro šablony azd?
+**A**: Některé služby mají bezplatné SKU nebo měsíční příděly, závislé na způsobilosti, plánu hostingu, regionu a omezeních předplatného. Neznamená to, že celá šablona je zdarma: databáze, hledání, síťování, registry, telemetrie a inferenční modely mohou samostatně účtovat poplatky. Před nasazením si ověřte [seznam bezplatných služeb Azure](https://azure.microsoft.com/free/) a aktuální ceny za každý zdroj.
 
-Konfigurujte šablony tak, aby používaly bezplatné úrovně, kde jsou dostupné.
-
-### Q: How do I estimate costs before deployment?
+### Q: Jak odhadnout náklady před nasazením?
 **A**: 
-1. Prohlédněte si `main.bicep` šablony, abyste viděli, jaké prostředky jsou vytvořeny
+1. Prohlédněte si `main.bicep` šablony, abyste zjistili, jaké zdroje jsou vytvořeny
 2. Použijte Azure Pricing Calculator s konkrétními SKU
-3. Nasajte do vývojového prostředí nejprve, abyste sledovali skutečné náklady
-4. Použijte Azure Cost Management pro detailní analýzu nákladů
+3. Nejprve nasadťe do vývojového prostředí a sledujte skutečné náklady
+4. Použijte Azure Cost Management pro podrobnou analýzu nákladů
 
 ---
 
-## Best Practices
+## Osvědčené postupy
 
-### Q: What are the best practices for azd project structure?
+### Q: Jaké jsou osvědčené postupy pro strukturu projektu azd?
 **A**: 
-1. Držte aplikační kód odděleně od infrastruktury
+1. Udržujte aplikační kód oddělený od infrastruktury
 2. Používejte smysluplné názvy služeb v `azure.yaml`
-3. Implementujte správné zpracování chyb v build skriptech
+3. Implementujte správné zpracování chyb ve skriptech sestavení
 4. Používejte konfiguraci specifickou pro prostředí
 5. Zahrňte komplexní dokumentaci
 
-### Q: How should I organize multiple services in azd?
+### Q: Jak mám organizovat více služeb v azd?
 **A**: Použijte doporučenou strukturu:
 ```
 ├── src/
@@ -308,33 +310,33 @@ Konfigurujte šablony tak, aby používaly bezplatné úrovně, kde jsou dostupn
 └── README.md         # Project documentation
 ```
 
-### Q: Should I commit the `.azure` folder to version control?
+### Q: Měl bych commitovat složku `.azure` do verzovacího systému?
 **A**: **Ne!** Složka `.azure` obsahuje citlivé informace. Přidejte ji do `.gitignore`:
 ```gitignore
 .azure/
 ```
 
-### Q: How do I handle secrets and sensitive configuration?
-**A**: 
-1. Používejte Azure Key Vault pro tajemství
-2. Odkazujte na tajemství Key Vault v konfiguraci aplikace
-3. Nikdy necommitujte tajemství do verzovacího systému
-4. Používejte spravované identity pro autentizaci mezi službami
+### Otázka: Jak mám zacházet s tajnými údaji a citlivou konfigurací?
+**Odpověď**: 
+1. Používejte Azure Key Vault pro tajné údaje
+2. Odkazujte se na tajné údaje v Key Vault v konfiguraci aplikace
+3. Nikdy nezavádějte tajné údaje do verzovacího řízení
+4. Používejte spravované identity pro autentizaci služba ke službě
 
-### Q: What's the recommended approach for CI/CD with azd?
-**A**: 
-1. Používejte samostatná prostředí pro každé stupně (dev/staging/prod)
-2. Implementujte automatizované testování před nasazením
-3. Používejte servisní principaly pro autentizaci
-4. Ukládejte citlivou konfiguraci do tajemství/promených pipeline
-5. Zaveďte schvalovací brány pro produkční nasazení
+### Otázka: Jaký je doporučený přístup k CI/CD s azd?
+**Odpověď**: 
+1. Používejte oddělená prostředí pro každou fázi (vývoj/test/prod)
+2. Implementujte automatické testování před nasazením
+3. Používejte servisní principály pro autentizaci
+4. Ukládejte citlivou konfiguraci do tajných proměnných pipeline
+5. Zavádějte schvalovací brány pro produkční nasazení
 
 ---
 
-## Advanced Topics
+## Pokročilá témata
 
-### Q: Can I extend azd with custom functionality?
-**A**: Ano, prostřednictvím deployment hooks v `azure.yaml`:
+### Otázka: Mohu rozšířit azd o vlastní funkčnost?
+**Odpověď**: Ano, pomocí nasazovacích hooků v `azure.yaml`:
 ```yaml
 hooks:
   predeploy:
@@ -343,31 +345,31 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### Q: How do I integrate azd with existing DevOps processes?
-**A**: 
-1. Použijte příkazy azd v existujících skriptech pipeline
-2. Standardizujte šablony azd napříč týmy
-3. Integrujte s existujícím monitorováním a alertováním
-4. Používejte JSON výstup azd pro integraci do pipeline
+### Otázka: Jak integrovat azd s existujícími DevOps procesy?
+**Odpověď**: 
+1. Používejte příkazy azd v existujících pipeline skriptech
+2. Standardizujte šablony azd mezi týmy
+3. Integrujte s existujícím monitoringem a upozorněními
+4. Používejte JSON výstup azd pro integraci pipeline
 
-### Q: Can I use azd with Azure DevOps?
-**A**: Ano, azd funguje s jakýmkoli CI/CD systémem. Vytvořte Azure DevOps pipeline, které používají příkazy azd.
+### Otázka: Mohu použít azd s Azure DevOps?
+**Odpověď**: Ano, azd funguje s jakýmkoli CI/CD systémem. Vytvořte Azure DevOps pipeline, které používají příkazy azd.
 
-### Q: How do I contribute to azd or create community templates?
-**A**:
-1. **nástroj azd**: Přispějte do [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Šablony**: Vytvořte šablony podle [pokynů pro šablony](https://github.com/Azure-Samples/awesome-azd)
+### Otázka: Jak přispět do azd nebo vytvořit komunitní šablony?
+**Odpověď**: 
+1. **azd nástroj**: Přispějte do [Azure/azure-dev](https://github.com/Azure/azure-dev)
+2. **Šablony**: Řiďte se [pokyny pro přispění do galerie Awesome AZD](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
 3. **Dokumentace**: Přispějte do dokumentace na [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
 
-### Otázka: Jaký je plán vývoje pro azd?
-**Odpověď**: Zkontrolujte [oficiální plán](https://github.com/Azure/azure-dev/projects) pro plánované funkce a vylepšení.
+### Otázka: Jaká je roadmapa pro azd?
+**Odpověď**: Podívejte se na [oficiální roadmapu](https://github.com/Azure/azure-dev/projects) plánovaných funkcí a vylepšení.
 
-### Otázka: Jak migrovat z jiných nástrojů nasazení na azd?
+### Otázka: Jak migrovat z jiných nasazovacích nástrojů na azd?
 **Odpověď**: 
-1. Analyzujte současnou architekturu nasazení
-2. Vytvořte ekvivalentní Bicep šablony
-3. Konfigurujte `azure.yaml` tak, aby odpovídal současným službám
-4. Důkladně otestujte ve vývojovém prostředí
+1. Analyzujte aktuální architekturu nasazení
+2. Vytvořte odpovídající Bicep šablony
+3. Nakonfigurujte `azure.yaml` tak, aby odpovídal současným službám
+4. Pečlivě testujte ve vývojovém prostředí
 5. Postupně migrujte prostředí
 
 ---
@@ -375,36 +377,36 @@ hooks:
 ## Stále máte otázky?
 
 ### **Nejprve vyhledejte**
-- Zkontrolujte [oficiální dokumentaci](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- Vyhledejte [GitHub issues](https://github.com/Azure/azure-dev/issues) pro podobné problémy
+- Podívejte se do [oficiální dokumentace](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- Prohledejte [GitHub issues](https://github.com/Azure/azure-dev/issues) pro podobné problémy
 
 ### **Získejte pomoc**
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Podpora komunity
+- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Podpora od komunity
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Technické dotazy
-- [Azure Discord](https://discord.gg/azure) - Komunitní chat v reálném čase
+- [Azure Discord](https://discord.gg/azure) - Chat v reálném čase s komunitou
 
-### **Nahlásit problémy**
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Nahlášení chyb a požadavků na funkce
-- Přiložte příslušné logy, chybové zprávy a kroky k reprodukci
+### **Nahlaste problémy**
+- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Hlásení chyb a žádosti o funkce
+- Přiložte relevantní logy, chybové zprávy a kroky pro reprodukci
 
-### **Další informace**
-- [Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+### **Zjistěte více**
+- [Dokumentace Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-*Tato častá otázka (FAQ) je pravidelně aktualizována. Poslední aktualizace: September 9, 2025*
+*Technické pokyny revidovány: 4. listopadu 2026. Dostupnost cloudu a ceny je nutné ověřit pro vaše předplatné a oblast.*
 
 ---
 
 **Navigace**
-- **Předchozí lekce**: [Glossary](glossary.md)
-- **Další lekce**: [Studijní průvodce](study-guide.md)
+- **Předchozí lekce**: [Glosář](glossary.md)
+- **Následující lekce**: [Studijní průvodce](study-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Prohlášení o vyloučení odpovědnosti:
-Tento dokument byl přeložen pomocí služby pro překlad založené na umělé inteligenci [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro zásadní informace se doporučuje profesionální lidský překlad. Nezodpovídáme za jakákoliv nedorozumění nebo mylné výklady vzniklé v důsledku použití tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

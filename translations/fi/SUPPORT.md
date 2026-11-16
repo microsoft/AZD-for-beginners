@@ -1,30 +1,26 @@
-# TODO: Tämän repositorion ylläpitäjä ei ole vielä muokannut tätä tiedostoa
-
-**REPOSITORION OMISTAJA**: Haluatko asiakaspalvelu- ja tukipalveluita (CSS) tälle tuotteelle/projektille?
-
-- **Ei CSS-tukea:** Täytä tämä malli tiedoilla siitä, miten raportoida ongelmia ja saada apua.
-- **Kyllä CSS-tukea:** Täytä lomake osoitteessa [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS auttaa sinua määrittämään seuraavat askeleet.
-- **Etkö ole varma?** Täytä lomake ikään kuin vastaus olisi "Kyllä". CSS auttaa sinua päättämään.
-
-*Poista sitten tämä ensimmäinen otsikko tästä SUPPORT.MD-tiedostosta ennen kuin julkaiset repositorion.*
-
 # Tuki
 
-## Miten raportoida ongelmia ja saada apua  
+## Kurssin ongelmat ja kysymykset
 
-Tämä projekti käyttää GitHub Issues -toimintoa virheiden ja ominaisuuspyyntöjen seurantaan. Etsi olemassa olevia 
-ongelmia ennen kuin luot uusia, jotta vältät päällekkäisyyksiä. Uusien ongelmien kohdalla, raportoi virheesi tai 
-ominaisuuspyyntösi uutena Issue-merkintänä.
+Etsi [kurssiongelmista](https://github.com/microsoft/AZD-for-beginners/issues) ennen ongelman raportoimista. Mainitse siihen vaikuttava englanninkielinen oppitunti, suorittamasi komento, AZD-/laajennusversiosi sekä virheilmoitus. Poista tunnukset, tokenit, tilauksen tiedot ja henkilökohtaiset tiedot lokitiedoista ja kuvakaappauksista.
 
-Apua ja kysymyksiä tämän projektin käytöstä varten, ole hyvä ja **REPOSITORION YLLÄPITÄJÄ: LISÄÄ OHJEET TÄHÄN 
-SIITÄ, MITEN OTTAA YHTEYTTÄ REPOSITORION OMISTAJIIN TAI YHTEISÖÖN SAADAKSESI APUA. VOI OLLA STACK OVERFLOW -TUNNISTE TAI MUU 
-KANAVA. MISSÄ AUTAT IHMISIÄ?**.
+Yleisiä oppimiskysymyksiä varten käytä [Azure-kehittäjäyhteisöä](https://discord.gg/microsoft-azure). Yhteisön vastaukset eivät ole takuuvarmaa tukipalvelua.
 
-## Microsoftin tukikäytäntö  
+## Työkalu- ja palveluongelmat
 
-Tuki tälle **PROJEKTILLE tai TUOTTEELLE** rajoittuu yllä mainittuihin resursseihin.
+Ilmoita toistettavissa olevat AZD CLI -bugit osoitteessa [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). Azuren palvelukatkojen tai tilauskohtaisen tuen osalta käytä tukivaihtoehtoja, jotka löytyvät [Azure-portaalista](https://portal.azure.com/).
+
+## Turvaraportit
+
+Noudata ohjeita tiedostossa [SECURITY.md](SECURITY.md) yksityisiin haavoittuvuuksien ilmoituksiin. Älä julkaise salaisuuksia tai hyödyntämistietoja julkisessa kurssiongelmassa.
+
+## Microsoftin tukikäytäntö
+
+Tästä opetusprojektista annettava tuki rajoittuu yllä lueteltuihin resursseihin. Kurssien esimerkeillä ei ole tuotantotukea koskevaa sitoumusta.
 
 ---
 
-**Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

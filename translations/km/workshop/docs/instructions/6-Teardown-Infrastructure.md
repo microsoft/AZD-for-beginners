@@ -1,60 +1,58 @@
-# 6. បំបាក់ហេដ្ឋារចនាសម្ព័ន្ធ
+# 6. បំលែងបច្ចេកវិទ្យា
 
-!!! tip "នៅចុងម៉ូឌុលនេះ អ្នកនឹងអាច"
+!!! tip "នៅចុង Module នេះ អ្នកនឹងអាចធ្វើបាន"
 
-    - [ ] យល់ពីសារៈសំខាន់នៃការសម្អាតធនធាន និងការគ្រប់គ្រងថ្លៃចំណាយ
-    - [ ] ប្រើ `azd down` ដើម្បីដកធនធានហេដ្ឋារចនាសម្ព័ន្ធយ៉ាងปลอดภัย
-    - [ ] ស្តារឡើងវិញសេវា Azure AI ដែលបានលុបជាស្រាល (soft-deleted) ប្រសិនបើចាំបាច់
-    - [ ] **Lab 6:** សម្អាតធនធាន Azure និងផ្ទៀងផ្ទាត់ការដកចេញ
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## លំហាត់បន្ថែម
 
-មុនពេលយើងបំបាក់គម្រោង សូមចំណាយពេលប៉ុន្មាននាទីសម្រាប់ការស្រាវជ្រាវផ្នែកទូលំទូលាយ។
+មុនពេលយើងបំលែងគំរោង សូមចំណាយពេលប៉ុន្មាននាទី ដើម្បីធ្វើការស្វែងយល់បើកចំហ។
 
-!!! info "សាកល្បងសំណើស្វែងយល់ទាំងនេះ"
+!!! info "សាកល្បងសំណួរស្វែងរកទាំងនេះ"
 
-    **សូម្បីសាកល្បងជាមួយ GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. សួរ: `What other AZD templates could I try for multi-agent scenarios?`
-    2. សួរ: `How can I customize the agent instructions for a healthcare use case?`
-    3. សួរ: `What environment variables control cost optimization?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **ស្វែងរកផតថល Azure:**
+    **Explore the Azure Portal:**
     
-    1. ពិនិត្យមើលគន្លងម៉េត្រីក Application Insights សម្រាប់ការដាក់បញ្ចូលរបស់អ្នក
-    2. ពិនិត្យវិភាគថ្លៃចំណាយសម្រាប់ធនធានដែលបានផ្តល់
-    3. ស្វែងយល់កន្លែងលេង agent នៅក្នុងផតថល Microsoft Foundry ម្តងទៀត
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## ដកចេញហេដ្ឋារចនាសម្ព័ន្ធ
+## បំលែងបច្ចេកវិទ្យា Infra
 
-1. ការដកចេញហេដ្ឋារចនាសម្ព័ន្ធងាយដូចជា៖
+1. ការបំលែងបច្ចេកវិទ្យាគឺងាយដូចជា ៖
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. ទង់ហូប `--purge` ធានាថាវាក៏នឹងលុបធនធាន Cognitive Service ដែលបានលុបប្រភេទស្រាល (soft-deleted) ផងដែរ ដើម្បីដោះលែង quota ដែលត្រូវបានកាន់ដោយធនធានទាំងនេះ។ បន្ទាប់ពីបញ្ចប់ អ្នកនឹងឃើញអ្វីមួយដូចខាងក្រោម៖
+1. បញ្ជាក់បរិយាកាសដែលបានជ្រើសរើស ហើយពិនិត្យមើលធនធានដែលត្រូវលុបចោល។ វាប្រមូលលុបធនធាន Azure ហើយអាចបំផ្លាញទិន្នន័យ។ រក្សាទុកសំណើបញ្ជាក់នេះសម្រាប់ដំណើរការសិក្សានេះ។ បន្ទាប់ពីបញ្ចប់ អ្នកនឹងឃើញចេញតួអក្សរដូចជា៖
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (ជាជម្រើស) ប្រសិនបើអ្នកឥឡូវនេះរត់ `azd up` ម្តងទៀត អ្នកនឹងសង្កេតឃើញម៉ូឌែល gpt-4.1 ត្រូវបានដាក់បញ្ចូល ព្រោះអថេរស្ថាប័នបរិយាកាសត្រូវបានផ្លាស់ប្តូរ (និងបានរក្សាទុក) នៅក្នុងថត `.azure` មូលដ្ឋាន។ 
+1. បញ្ជាក់ការលុបនៅក្នុងកំពូលហើយពិនិត្យធនធាននៅក្រៅដែនកំណត់នៃការដំឡើង។ ការរាយការណ៍ថ្លៃឈប់ក្រោយ និងបច្ចុប្បន្នភាពទំហំសមាសភាគអាចយឺតយ៉ាវ។ ការកំណត់រចនាសម្ព័ន្ធក្នុងស្រុក `.azure` នៅតែមានរហូត មិនថាអ្នកលុបវាឱ្យប្រាកដ។
 
-      នេះគឺជា​ការ​ដាក់បញ្ចូល​ម៉ូឌែល **មុន**:
+1. `azd down --purge` សូមស្នើរសុំការលុបឯកត្តិរឹតតែធនធានដែលបានស្នើសុំលុបភាគច្រើន។ ប្រើវា តែប៉ុណ្ណោះ នៅពេលដែលមិនត្រូវការសម្រាប់ការស្ដារឡើងវិញ ហើយអ្នកយល់ពីគោលការណ៍រក្សាទុក/ការការពារការលុប។ វាមិនធានាថាទំហំសមាសភាគនឹងបានបញ្ចេញភ្លាមភ្លោះឡើយ។
 
-      ![ដំបូង](../../../../../translated_images/km/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      ហើយនេះ​គឺ **បន្ទាប់**:
-      ![ថ្មី](../../../../../translated_images/km/14-deploy-new.f7f3c355a3cf7299.webp)
+1. កុំបញ្ចូលឡើងវិញត្រឹមតែដើម្បីពិនិត្យការបរិភាពបរិសុទ្ធ។ នៅពេលក្រោយ ផ្នែក `azd up` មានគោលបំណង អាចបង្កើតធនធានឡើងវិញដោយប្រើការបញ្ចូលសំណូលនៅក្នុងស្រុកដែលនៅសល់ ហើយបង្ករប្រាក់ចំណាយម្តងទៀត។ ការអាប់ដេតគំរូធម្មតាមានការប្រែប្រួលក្នុងការផ្គត់ផ្គង់ដែលគាំទ្រ មិនមែនការបំលែងបច្ចេកវិទ្យានោះទេ។
 
 ---
 

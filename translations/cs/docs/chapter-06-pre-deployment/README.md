@@ -1,23 +1,23 @@
 # Kapitola 6: Plánování a ověřování před nasazením
 
-**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Délka**: 1 hodina | **⭐ Složitost**: Středně pokročilý
+**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Délka**: 2-4 hodiny čtení; další čas pro upravené laboratoře | **⭐ Složitost**: Středně pokročilý–pokročilý
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá zásadní kroky plánování a ověřování před nasazením vaší aplikace. Naučte se vyhnout nákladným chybám správným plánováním kapacity, výběrem SKU a kontrolami před nasazením.
+Tato kapitola pokrývá nezbytné kroky plánování a ověřování před nasazením vaší aplikace. Naučte se vyhnout nákladným chybám správným plánováním kapacity, výběrem SKU a kontrolami před nasazením.
 
-> Ověřeno proti `azd 1.27.1` v červenci 2026.
+> Příkazová doporučení byla ověřena s vydanou referencí `azd 1.37.2`. Nasazení v cloudu nebyla provedena. Delší lekce obsahují ilustrační úryvky, ne kompletní lokální projekty nasazení.
 
-## Cíle učení
+## Výukové cíle
 
 Po dokončení této kapitoly budete:
 - Provádět kontroly před nasazením
-- Plánovat kapacitu a odhadovat požadavky na prostředky
+- Plánovat kapacitu a odhadovat požadavky na zdroje
 - Vybrat vhodné SKU pro optimalizaci nákladů
 - Konfigurovat Application Insights pro monitorování
-- Rozumět vzorům koordinace v týmu
+- Pochopit vzory koordinace více agentů a jejich požadavky na nasazení
 
 ---
 
@@ -26,26 +26,26 @@ Po dokončení této kapitoly budete:
 | # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
 | 1 | [Kontroly před nasazením](preflight-checks.md) | Ověření konfigurace před nasazením | 15 min |
-| 2 | [Plánování kapacity](capacity-planning.md) | Odhad požadavků na prostředky | 20 min |
+| 2 | [Plánování kapacity](capacity-planning.md) | Odhad požadavků na zdroje | 20 min |
 | 3 | [Výběr SKU](sku-selection.md) | Výběr vhodných cenových úrovní | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfigurace monitorování | 20 min |
-| 5 | [Vzor koordinace](coordination-patterns.md) | Pracovní postupy nasazení týmu | 15 min |
+| 5 | [Vzory koordinace](coordination-patterns.md) | Pokročilý návrh orchestrace více agentů | 60-75 min |
 
 ---
 
 ## 🚀 Rychlý start
 
 ```bash
-# Zkontrolovat limity předplatného
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Náhled nasazení (žádné zdroje nejsou vytvořeny)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Ověřit syntaxi Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Zkontrolovat konfiguraci prostředí
+# Check environment configuration
 azd env get-values
 ```
 
@@ -55,29 +55,29 @@ azd env get-values
 
 ### Před `azd provision`
 
-- [ ] Kvóta ověřena pro daný region
-- [ ] Vhodný výběr SKU
-- [ ] Přehled odhadu nákladů
-- [ ] Konzistentní pojmenování
-- [ ] Nastavení zabezpečení/RBAC
+- [ ] Ověřená kvóta pro region
+- [ ] Vhodně vybrané SKU
+- [ ] Přezkoumaný odhad nákladů
+- [ ] Konzistentní pojmenovací konvence
+- [ ] Konfigurované zabezpečení/RBAC
 
 ### Před `azd deploy`
 
 - [ ] Nastavené proměnné prostředí
-- [ ] Tajemství v Key Vault
+- [ ] Tajemství ve Key Vault
 - [ ] Ověřené připojovací řetězce
-- [ ] Konfigurované kontrolní sondy stavu
+- [ ] Konfigurované kontroly stavu
 
 ---
 
 ## 💰 Průvodce výběrem SKU
 
-| Pracovní zátěž | Vývoj | Produkce |
+| Zátěž | Vývoj | Produkce |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Spotřeba | Spotřeba nebo dedikovaný profil zátěže, na základě změřené zátěže |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Azure OpenAI modely | Podporovaný typ nasazení pay-as-you-go | Pay-as-you-go nebo rezervovaný průchod; závislé na modelu/regionu |
+| AI Search | Zdarma/Základní v rámci limitů | Základní nebo Standardní úroveň velikosti podle indexu, replik a dotazové zátěže |
 
 ---
 
@@ -85,8 +85,8 @@ azd env get-values
 
 | Směr | Kapitola |
 |-----------|---------|
-| **Předchozí** | [Kapitola 5: Více agentů](../chapter-05-multi-agent/README.md) |
-| **Další** | [Kapitola 7: Řešení problémů](../chapter-07-troubleshooting/README.md) |
+| **Předchozí** | [Kapitola 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Další** | [Kapitola 7: Odstraňování problémů](../chapter-07-troubleshooting/README.md) |
 
 ---
 
