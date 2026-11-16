@@ -39,15 +39,15 @@ By completing this chapter, you will:
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
 > **Which approach?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` interactively, or `azd ai agent init --template <path-to-azure.yaml>` to adopt a current agent project. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for version requirements and evaluation migration.
 
-Run these alternatives in separate empty folders. Agents extension `1.0.0-beta.23` requires `azd >= 1.37.0`; its interactive flow does not generate the custom Service Bus pipeline in the coordination lesson.
+Run these alternatives in separate empty folders. The GA Foundry workflow requires `azd >= 1.37.0`; its interactive flow does not generate the custom Service Bus pipeline in the coordination lesson. For local testing, code deployment, and new-versus-reused-project cleanup, follow the [hosted-agent walkthrough](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 

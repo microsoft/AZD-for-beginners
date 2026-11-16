@@ -39,16 +39,16 @@
 
 ## 🆕 What's New in azd Today
 
-> 📌 **AI CLI release review (2026-11-04):** Guidance was checked against published **`azd 1.37.2`**, **agents `1.0.0-beta.23`**, and **evaluations `1.0.0-beta.2`** documentation/source. Use `azd >= 1.37.0` for the combined workflow. Run `azd version` and [update the core CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) before extensions. See [release changes and fixes](docs/chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). This is not a live deployment validation of the whole course.
+> 📌 **Foundry GA update (2026-11-09):** The **`microsoft.foundry` 1.0 bundle is generally available**, announced on [November 5, 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Use **`azd >= 1.37.0`** and install it with `azd ext install microsoft.foundry`. Follow the [hosted-agent walkthrough](docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) for setup, local testing, and deployment. This update is based on published guidance, not a live Azure deployment; bundle GA does not make every optional feature, extension, or SDK generally available.
 
 Azure Developer CLI supports many application types, including web apps, APIs, and AI agents, through supported hosts, templates, and extensions.
 
 Here's what that means for you:
 
-- **AI agents are now first-class azd workloads.** You can initialize, deploy, and manage AI agent projects using the same `azd init` → `azd up` workflow you already know.
-- **An agent lifecycle across two extensions.** Use `azure.ai.agents` to initialize, invoke, optimize, and retire agents. Install **`azure.ai.evaluations`** separately for `azd ai eval init`, `generate`, and `run start`. Agents beta.22 replaced the legacy evaluation workflow and changed optimization configuration; follow the [migration guide](docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks).
-- **More AI building blocks.** New preview extensions—`azure.ai.skills` and `azure.ai.connections`—let you manage reusable agent skills and Foundry connections directly with azd.
-- **Microsoft Foundry integration** brings model deployment, agent hosting, and AI service configuration directly into the azd template ecosystem.
+- **A GA bundle for Foundry development.** `microsoft.foundry` installs seven core extensions, including agents, projects, and Agent Inspector. Agent code and deployment settings stay together in `azure.yaml`.
+- **Test locally, then deploy your code.** Use `azd ai agent init --deploy-mode code`, `azd provision`, and `azd ai agent run` to inspect local requests and responses. Then use `azd deploy` for a remote build in Foundry, without a local container build.
+- **Measure quality separately.** Install **`azure.ai.evaluations`** for `azd ai eval generate`, `init`, and `run start`; it is not included in the bundle. Keep reviewed datasets and rubrics with your code. Older projects should follow the [evaluation and optimization migration guide](docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks).
+- **Reuse configuration in CI/CD.** After a successful `azd up`, configure a pipeline with `azd pipeline config`. Install the bundle on the runner and retain the generated authentication and environment settings.
 - **Smoother day-to-day basics.** Recent releases made `azd init` idempotent (safe to re-run), made `azd auth login` clear stale tokens automatically, and added a friendly `azd tool` first-run setup prompt.
 - **The core workflow hasn't changed.** Whether you're deploying a todo app, a microservice, or a multi-agent AI solution, the commands are the same.
 

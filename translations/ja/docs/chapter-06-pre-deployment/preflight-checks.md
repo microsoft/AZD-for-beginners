@@ -1,7 +1,7 @@
 # AZD デプロイの事前チェック
 
 **Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📚 Course Home**: [AZD入門](../../README.md)
 - **📖 Current Chapter**: 第6章 - デプロイ前の検証と計画
 - **⬅️ Previous**: [SKU の選択](sku-selection.md)
 - **➡️ Next Chapter**: [第7章: トラブルシューティング](../chapter-07-troubleshooting/common-issues.md)
@@ -33,18 +33,18 @@
 
 ## 目次
 
-- [Overview](#overview)
-- [Automated Pre-flight Script](#automated-pre-flight-script)
-- [Manual Validation Checklist](#codeblock1)
-- [Environment Validation](#✅-backup-recovery)
-- [Resource Validation](#production-environment-validation)
-- [Security & Compliance Checks](#security--compliance-checks)
-- [Performance & Capacity Planning](#performance--capacity-planning)
-- [Troubleshooting Common Issues](#troubleshooting-common-issues)
+- [概要](#overview)
+- [自動化された事前確認スクリプト](#automated-pre-flight-script)
+- [手動検証チェックリスト](#codeblock1)
+- [環境の検証](#✅-backup-recovery)
+- [リソースの検証](#production-environment-validation)
+- [セキュリティおよびコンプライアンスの確認](#security--compliance-checks)
+- [パフォーマンスおよびキャパシティの計画](#performance--capacity-planning)
+- [一般的な問題のトラブルシューティング](#troubleshooting-common-issues)
 
 ---
 
-## Overview
+## 概要
 
 事前チェックは、デプロイ前に実行される重要な検証で、以下を確認します:
 
@@ -65,9 +65,9 @@
 
 ---
 
-## Automated Pre-flight Script
+## 自動化された事前チェック用スクリプト
 
-### PowerShell Pre-flight Checker
+### PowerShell 事前チェックツール
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -561,7 +561,7 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash Pre-flight Checker
+### Bash実行前チェックツール
 
 ```bash
 #!/bin/bash
@@ -796,26 +796,26 @@ main "$@"
 
 ---
 
-## Manual Validation Checklist
+## 手動検証チェックリスト
 
-### Pre-Deployment Checklist
+### デプロイ前チェックリスト
 
 このチェックリストを印刷し、デプロイ前に各項目を確認してください:
 
-#### ✅ Environment Setup
+#### ✅ 環境構築
 - [ ] AZD CLI がインストールされ、最新バージョンに更新されている
 - [ ] Azure CLI がインストールされ、認証済みである
 - [ ] 正しい Azure サブスクリプションが選択されている
 - [ ] 環境名が一意で、命名規則に従っている
 - [ ] ターゲットのリソースグループが特定されている、または作成可能である
 
-#### ✅ Authentication & Permissions
+#### ✅ 認証と権限
 - [ ] 成功裏に `azd auth login` で認証されている
 - [ ] ユーザーがターゲットのサブスクリプション/リソースグループに対して Contributor ロールを持っている
 - [ ] CI/CD 用にサービスプリンシパルが構成されている（該当する場合）
 - [ ] 期限切れの証明書や資格情報がない
 
-#### ✅ Template Validation
+#### ✅ テンプレートの検証
 - [ ] `azure.yaml` が存在し、有効な YAML である
 - [ ] azure.yaml に定義されたすべてのサービスに対応するソースコードがある
 - [ ] `infra/` ディレクトリ内の Bicep テンプレートが存在する
@@ -824,33 +824,33 @@ main "$@"
 - [ ] 必要なすべてのパラメーターにデフォルト値があるか、提供される予定である
 - [ ] テンプレート内にハードコードされたシークレットがない
 
-#### ✅ Resource Planning
+#### ✅ リソース計画
 - [ ] ターゲット Azure リージョンが選択され、検証されている
 - [ ] 必要な Azure サービスがターゲットリージョンで利用可能である
 - [ ] 計画したリソースに対して十分なクォータが利用可能である
 - [ ] リソース名の競合がチェックされている
 - [ ] リソース間の依存関係が理解されている
 
-#### ✅ Network & Security
+#### ✅ ネットワーク＆セキュリティ
 - [ ] Azure エンドポイントへのネットワーク接続が検証されている
 - [ ] 必要に応じてファイアウォール/プロキシ設定が構成されている
 - [ ] シークレット管理のために Key Vault が構成されている
 - [ ] 可能な場合はマネージド ID が使用されている
 - [ ] Web アプリケーションに対して HTTPS 強制が有効になっている
 
-#### ✅ Cost Management
+#### ✅ コスト管理
 - [ ] Azure Pricing Calculator を使用してコスト見積りが計算されている
 - [ ] 必要に応じて予算アラートが構成されている
 - [ ] 環境タイプに適した SKU が選択されている
 - [ ] 本番ワークロードに対してリザーブドキャパシティが検討されている
 
-#### ✅ Monitoring & Observability
+#### ✅ モニタリングと可観測性
 - [ ] テンプレートに Application Insights が構成されている
 - [ ] Log Analytics ワークスペースが計画されている
 - [ ] 重要なメトリクスに対するアラートルールが定義されている
 - [ ] アプリケーションにヘルスチェックエンドポイントが実装されている
 
-#### ✅ Backup & Recovery
+#### ✅ バックアップと復元
 - [ ] データリソースのバックアップ戦略が定義されている
 - [ ] 復旧目標時間 (RTO) が文書化されている
 - [ ] 復旧目標点 (RPO) が文書化されている
@@ -858,9 +858,9 @@ main "$@"
 
 ---
 
-## Environment Validation
+## 環境の検証
 
-### Development Environment Validation
+### 開発環境の検証
 
 ```bash
 #!/bin/bash
@@ -892,7 +892,7 @@ validate_dev_environment() {
 }
 ```
 
-### Production Environment Validation
+### 本番環境の検証
 
 ```bash
 #!/bin/bash
@@ -933,9 +933,9 @@ validate_prod_environment() {
 
 ---
 
-## Resource Validation
+## リソース検証
 
-### Quota Validation Script
+### クォータ検証スクリプト
 
 ```python
 #!/usr/bin/env python3
@@ -1058,9 +1058,9 @@ if __name__ == "__main__":
 
 ---
 
-## Security & Compliance Checks
+## セキュリティおよびコンプライアンスのチェック
 
-### Security Validation Script
+### セキュリティ検証スクリプト
 
 ```bash
 #!/bin/bash
@@ -1177,9 +1177,9 @@ main "$@"
 
 ---
 
-## Integration with CI/CD
+## CI/CDとの統合
 
-### GitHub Actions Integration
+### GitHub Actionsとの統合
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Azure DevOps Integration
+### Azure DevOps 統合
 
 ```yaml
 trigger: none
@@ -1290,7 +1290,7 @@ steps:
 
 ---
 
-## Best Practices Summary
+## ベストプラクティスのまとめ
 
 ### ✅ 事前チェックのベストプラクティス
 
@@ -1315,7 +1315,7 @@ steps:
    - 是正手順を含む詳細なエラーメッセージ
    - 迅速な評価のためのサマリーレポート
 
-5. **Fail Fast**
+5. **Fail Fast（フェイルファスト）**
    - 重要なチェックが失敗した場合はデプロイを停止する
    - 解決のための明確なガイダンスを提供する
    - チェックを簡単に再実行できるようにする
@@ -1335,9 +1335,9 @@ steps:
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [SKU の選択](sku-selection.md)
-- **Next Lesson**: [Cheat Sheet](../../resources/cheat-sheet.md)
+**ナビゲーション**
+- **前のレッスン**: [SKU の選択](sku-selection.md)
+- **次のレッスン**: [チートシート](../../resources/cheat-sheet.md)
 
 ---
 

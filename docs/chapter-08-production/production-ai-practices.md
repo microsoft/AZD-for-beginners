@@ -893,7 +893,7 @@ Based on Microsoft Foundry Discord community feedback:
 
 AZD includes a growing set of AI-specific commands and extensions that streamline production AI workflows. These tools bridge the gap between local development and production deployment for AI workloads.
 
-> **Release review (2026-11-04):** The CLI guidance below was checked against the published releases of `azd` **1.37.2**, `azure.ai.agents` **1.0.0-beta.23**, and `azure.ai.evaluations` **1.0.0-beta.2**. Agents beta.23 requires `azd >= 1.37.0`; evaluations beta.2 requires `azd >= 1.33.0`. Use at least 1.37.0 for the combined workflow. This is a documentation/source review, not a live Azure deployment validation.
+> **Foundry GA update (2026-11-09):** The `microsoft.foundry` bundle reached **1.0 / general availability** on [November 5, 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Use **`azd >= 1.37.0`** for this workflow. The earlier `azd 1.37.2`, agents beta.23, and evaluations beta.2 review is retained below as migration history, not the current bundle version. This is a documentation/source review, not a live deployment validation or a claim that every optional extension, API, or preview feature is GA.
 
 ### AZD Extensions for AI
 
@@ -903,12 +903,12 @@ AZD uses an extension system to add AI-specific capabilities. Install and manage
 # List all available extensions (including AI)
 azd extension list
 
-# Inspect installed extension details
+# Inspect installed versions
 azd version
-azd extension show azure.ai.agents
+azd ext list --installed
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle
+azd ext install microsoft.foundry
 
 # Install the separate Foundry evaluations extension
 azd extension install azure.ai.evaluations
@@ -919,28 +919,36 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Upgrade the Foundry bundle
+azd ext upgrade microsoft.foundry
 ```
 
 **Available AI extensions:**
 
 | Extension | Purpose | Status |
 |-----------|---------|--------|
-| `azure.ai.agents` | Foundry Agent Service management | Preview |
-| `azure.ai.evaluations` | Evaluation datasets, evaluators, eval groups, and runs | Preview |
-| `azure.ai.skills` | Reusable agent skills | Preview |
-| `azure.ai.connections` | Foundry connections (data sources, tools) | Preview |
-| `azure.ai.finetune` | Foundry model fine-tuning | Preview |
-| `azure.ai.models` | Foundry custom models | Preview |
-| `azure.coding-agent` | Coding agent configuration | Available |
+| `microsoft.foundry` | Meta-package installing the seven core extensions below; no command group of its own | GA bundle 1.0 |
+| `azure.ai.agents` | `azd ai agent`: agent setup, local execution, and operations | Included; independently versioned |
+| `azure.ai.connections` | `azd ai connection`: project connections | Included; independently versioned |
+| `azure.ai.inspector` | `azd ai inspector`: local Agent Inspector UI | Included; independently versioned |
+| `azure.ai.projects` | `azd ai project`: project resources and model deployments | Included; independently versioned |
+| `azure.ai.routines` | `azd ai routine`: schedules and triggers | Included; independently versioned |
+| `azure.ai.skills` | `azd ai skill`: reusable behavioral guidelines | Included; independently versioned |
+| `azure.ai.toolboxes` | `azd ai toolbox`: versioned tool collections | Included; independently versioned |
+| `azure.ai.evaluations` | Evaluation datasets, evaluators, eval groups, and runs | Separate installation/release |
+| `azure.ai.dataset` | Dataset registration and versioning | Separate installation/release |
+| `azure.ai.finetune` | Foundry model fine-tuning | Separate installation/release |
+| `azure.ai.models` | Foundry custom models | Separate installation/release |
 
-> Run `azd extension list --installed` and `azd extension show azure.ai.evaluations` to inspect installed versions. Upgrade the core CLI first using the [installation/update instructions](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) (for a Windows winget installation: `winget upgrade Microsoft.Azd`), then run `azd extension upgrade --all`. There is no core `azd upgrade` command. Review breaking changes before upgrading production automation; do not assume an extension upgrade preserves old command or configuration formats.
+Installing `azure.ai.agents` individually remains supported and installs its dependencies; the bundle is the course's default for the GA workflow. Bundle GA is not a blanket release-status guarantee for its components' optional features. See [extension packaging and verification](https://learn.microsoft.com/azure/foundry/agents/how-to/install-cli-foundry-extensions) and inspect installed command help before using them.
+
+> Upgrade the core CLI first with `azd update` or the appropriate [installation/update method](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd), then run `azd ext upgrade microsoft.foundry`. Update separately installed evaluations as needed with `azd ext upgrade azure.ai.evaluations`. There is no core `azd upgrade` command. Record and review independently versioned extensions in production automation; an upgrade does not automatically migrate old configuration.
 
 ### Recent Release Changes and Fixes
 
 | Release | What changes for this course |
 |---------|------------------------------|
+| `microsoft.foundry` 1.0 GA (2026-11-05) | Default to the seven-extension bundle, keep agent/deployment settings in `azure.yaml`, test locally with Agent Inspector, and upload code for a remote Foundry build. Install evaluations separately and install required extensions again on CI runners. |
 | `azd 1.37.0` | Adds stable deployment-preview APIs and fixes extension edits rewriting unrelated `azure.yaml` settings. |
 | `azd 1.37.1` | Fixes Ctrl+C propagation across extensions and distinguishes cancellation/timeouts from generic failures. |
 | `azd 1.37.2` | Improves provisioning validation: critical warnings default to **No**, fail without confirmation in unattended runs, and cancellation skips post-provision hooks. Also fixes unresolved environment values in Deployment Stacks deny lists when that alpha feature is enabled. |
@@ -950,20 +958,22 @@ azd extension upgrade --all
 
 An agent activation timeout does **not** prove deployment failure: inspect the attempted version and its state before retrying. Developer RBAC warnings can remain even when provisioning succeeds; resolve the missing access before invoking as that developer.
 
-Sources: [AZD releases](https://github.com/Azure/azure-dev/releases), [agents beta.23 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [agents beta.22 migration](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), and [evaluations beta.2 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
+The beta rows above describe earlier fixes and migration boundaries, not a requirement to pin new projects to those versions.
 
-**What are the newer `skills` and `connections` extensions?**
+Sources: [Foundry GA announcement](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/), [AZD releases](https://github.com/Azure/azure-dev/releases), [agents beta.23 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [agents beta.22 migration](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), and [evaluations beta.2 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
 
-Two preview extensions appeared alongside the agent tooling and are worth understanding even as a beginner:
+**What are the bundled `skills` and `connections` extensions?**
 
-- **`azure.ai.skills`** — A **skill** is a reusable capability (a packaged tool or behavior) you can attach to one or more agents instead of re-implementing it each time. Think of it as a shared building block: define a "search the docs" or "look up an order" skill once, then reuse it across agents. This keeps multi-agent systems (Chapter 5) consistent and avoids copy-paste.
+These are installed with the core bundle but serve different purposes:
+
+- **`azure.ai.skills`** — A **skill** packages reusable behavioral guidelines for agents. Share reviewed instructions across agents rather than copying them. A skill does not itself implement a tool or grant access to data; use toolboxes and application code for tool execution.
 - **`azure.ai.connections`** — A **connection** is a managed link from your Foundry project to an external resource your agents need—a data source (like Azure AI Search), a tool endpoint, or another service. Connections centralize *where* and *how* agents access data, so credentials and endpoints live in one governed place rather than scattered through code.
 
-You don't need these to deploy your first agents—stick with `azure.ai.agents` while learning. Reach for `skills` when you find yourself duplicating the same tool across agents, and `connections` when several agents share the same data source.
+You do not need to configure every bundled capability to deploy your first agent. Reach for skills when agents share behavioral guidelines and connections when they share external resources.
 
 ### Initializing Agent Projects with `azd ai agent init`
 
-The `azd ai agent init` command scaffolds a Microsoft Foundry agent project. Use a current `azure.yaml` project template, not an implicit legacy agent manifest:
+The `azd ai agent init` command scaffolds a Microsoft Foundry agent project. For a runnable code-deployment example with Python 3.13+ and current uv, follow the [GA hosted-agent walkthrough](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). The commands below instead illustrate adopting **your own** current `azure.yaml` project template; the named local template is not supplied by this course:
 
 ```bash
 # Initialize a new agent project from a local project template
@@ -983,6 +993,8 @@ azd ai agent init --template ./templates/support-agent/azure.yaml --src ./agents
 | `-t, --template` | Path or supported GitHub URI to an `azure.yaml` project document |
 | `-p, --project-id` | Existing Microsoft Foundry Project ID for your azd environment |
 | `-s, --src` | Source directory for generated agents, or target directory when adopting a project |
+| `--deploy-mode code` | Upload source for a remote Foundry build rather than building a local container |
+| `--model-deployment` | Reuse a named existing model deployment during initialization |
 | `--kind` | Initialize a `hosted`, `prompt`, or preview `prompt-voice` agent |
 | `--harness` | Optional execution harness for `--kind prompt`; requires its preview opt-in |
 | `-e, --environment` | The azd environment to use |
@@ -1007,9 +1019,15 @@ For example, use `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` in Bash o
 
 ### Managing the Agent Lifecycle
 
-Use `azure.ai.agents` to test, inspect, optimize, and retire agents, and the separate `azure.ai.evaluations` extension to measure quality:
+The bundle's `azure.ai.agents` extension supports local testing and deployed-agent operations. Install `azure.ai.evaluations` separately to measure quality:
 
 ```bash
+# Start the local agent and Agent Inspector (leave running)
+azd ai agent run
+
+# From a second terminal in the project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
 # Invoke a deployed agent and view server response timing
 # (total latency and time to first byte)
 azd ai agent invoke
@@ -1030,14 +1048,17 @@ azd ai agent delete --force
 
 | Stage | Command | Production use |
 |-------|---------|----------------|
+| Local test | `azd ai agent run`, then `azd ai agent invoke --local "Test prompt"` | Inspect requests and responses before deployment; Azure model calls still incur charges |
+| Deploy | `azd deploy` | In code mode, build the uploaded source remotely in Foundry |
 | Test | `azd ai agent invoke` | Validate responses and measure latency before release |
+| Diagnose | `azd ai agent doctor`, `azd ai agent monitor --follow` | Check setup/permissions and stream agent logs |
 | Inspect | `azd ai agent endpoint show` | Review endpoint auth/config; spot breaking changes early |
 | Measure | `azd ai eval init`, `generate`, `run start` | Define, deploy, and execute repeatable evaluations |
 | Improve | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Reuse a compatible evaluation to optimize the agent |
 | Recover | `azd ai agent code download` | Retrieve the exact deployed source for audit/rollback |
 | Retire | `azd ai agent delete --force` | Tear down an agent and its versions cleanly |
 
-> These are preview commands and may change between extension releases. Run `azd ai agent --help` to see the exact subcommands available in your installed version.
+> Run `azd ai agent --help` to inspect commands in your installed version. The bundle is GA; independently gated preview features are still opt-in. Before cleanup, distinguish agent deletion from project deletion: `azd down` deletes a newly created project's resource group, but leaves reused-project resources in place. Follow the [cleanup guidance](../chapter-02-ai-development/microsoft-foundry-integration.md#7-clean-up-deliberately).
 
 `endpoint show` supports hosted, prompt, and voice agents, but endpoint updates are hosted-only; workflow agents are unsupported. Code download and the hosted-agent retirement example above are not generic operations for every agent kind.
 
@@ -1048,17 +1069,17 @@ Starting with agents **1.0.0-beta.22 (2026-10-23)**, legacy `azd ai agent eval` 
 In an initialized agent project, authenticate with `azd auth login`, confirm the selected environment/Foundry project, and install `azure.ai.evaluations`. A judge model deployment is needed for model-based scoring; generation and conversation simulation can require their own model selections and incur additional charges.
 
 ```bash
-# Scaffold evals/ and wire an azure.ai.eval service into azure.yaml
-azd ai eval init
-
-# Optionally synthesize a rubric and dataset from the agent
+# Generate a draft rubric and dataset from the deployed agent
 azd ai eval generate
+
+# After reviewing the assets, configure a named evaluation
+azd ai eval init --name quality
 
 # Review generated files, then register datasets, evaluators, and eval groups
 azd up
 
 # Start an evaluation and wait for its results
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 
 # Inspect runs and available test-case output
 azd ai eval run list
@@ -1066,7 +1087,7 @@ azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
 ```
 
-Follow the interactive selections and printed next steps rather than assuming generated assets are already registered. Evaluation configuration normally lives in `evals/azure.eval.yaml`, referenced by the `azure.ai.eval` service in `azure.yaml`. Keys are **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); old snake_case configuration keys are rejected. Paths inside a referenced configuration resolve relative to that file, not the repository root.
+For the GA announcement's example, select **Dataset and evaluator** and **Turn** during generation, then select those reviewed assets and a judge model during initialization. Follow printed next steps rather than assuming generated assets are already registered. You can also initialize against an existing reviewed dataset/rubric without generating new data. Evaluation configuration normally lives in `evals/azure.eval.yaml`, referenced by the `azure.ai.eval` service in `azure.yaml`. Keys are **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); old snake_case configuration keys are rejected. Paths inside a referenced configuration resolve relative to that file, not the repository root.
 
 For conversation evaluations, choose **static** to score completed transcripts without invoking an agent, or **simulation** to generate conversations from scenario seeds. Simulation needs an agent target, a simulator model, and a separate judge-model selection. For unattended commands, supply the inputs listed by `azd ai eval init --help` and `azd ai eval generate --help`; do not assume the generation model is also the judge or simulator.
 
@@ -1074,7 +1095,7 @@ For CI, configure an explicit quality policy using `azd ai eval run start --help
 
 ```bash
 # Example CI policy: at least 90% of all test cases must pass
-azd ai eval run start --wait --fail-on "pass-rate=0.9"
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
 ```
 
 The pass-rate gate uses passed test cases divided by total test cases; failed, errored, skipped, and otherwise unpassed rows count against it. Do not combine a gate with `--no-wait`, which returns before a verdict is available.
@@ -1181,7 +1202,7 @@ azd hooks run predeploy
 
 ### CI/CD Pipeline Configuration
 
-Use `azd pipeline config` to connect your project to GitHub Actions or Azure Pipelines with secure Azure authentication:
+First validate the project locally and complete a successful `azd up`. Then use `azd pipeline config` to connect it to GitHub Actions or Azure Pipelines with secure Azure authentication:
 
 ```bash
 # Configure CI/CD pipeline (interactive)
@@ -1224,7 +1245,7 @@ azd will, interactively:
 
 **3. Understand the generated workflow**
 
-For a supported template, configure/review `.github/workflows/azure-dev.yml`. The key parts look like this (the template must supply the app's toolchain and environment parameters):
+For a supported template, configure/review `.github/workflows/azure-dev.yml`. The following Foundry example retains checkout, OIDC sign-in, and target environment settings and installs the GA bundle plus evaluations on the runner. Add your app's toolchain and infrastructure-provider requirements; for Terraform, retain its generated setup, remote-state, and authentication steps. Choose and pin a reviewed AZD version at or above 1.37.0; this excerpt uses the announcement's minimum.
 
 ```yaml
 # .github/workflows/azure-dev.yml
@@ -1236,6 +1257,10 @@ on:
 permissions:
   id-token: write           # required for OIDC federated login
   contents: read
+
+concurrency:
+  group: foundry-production-deployment
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -1250,13 +1275,23 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install azd
         uses: Azure/setup-azd@v2
+        with:
+          version: 1.37.0
+      - name: Install Foundry extensions
+        run: azd ext install microsoft.foundry azure.ai.evaluations
       - name: Log in with OIDC
         run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
       - name: Provision infrastructure
         run: azd provision --no-prompt
       - name: Deploy application
         run: azd deploy --no-prompt
+      - name: Evaluate deployed agent
+        run: azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
 ```
+
+The evaluation step requires a committed `evals/azure.eval.yaml`, its service reference in `azure.yaml`, reviewed nonsecret test assets, and pipeline access to referenced datasets, evaluators, and model deployments. Configure the `quality` evaluation before enabling this step; omit both the step and evaluations installation if your project does not use it. A completed run alone is not a quality gate: this example requires at least 90% of all cases to pass.
+
+Use a separate AZD environment and appropriate approvals for each stage. The concurrency group serializes this workflow only, not other tools or repositories updating the same agent. Grant required resource and Foundry permissions to the pipeline identity and store any necessary runtime credentials in secrets, not committed configuration. See the [complete Foundry CI/CD guide](https://learn.microsoft.com/azure/foundry/agents/how-to/set-up-ci-cd-cli) for provider-specific requirements.
 
 **4. Verify it works**
 
@@ -1322,7 +1357,7 @@ steps:
     displayName: Install azd
 ```
 
-Install the AZD Azure DevOps extension if that task is not available in your organization. Do not copy bare `azd provision`/`azd deploy` shell steps without authentication: having a service connection configured does not automatically log every process into AZD. Follow the generated template's OIDC login and authorized task context, and supply the selected environment/subscription/location.
+Install the AZD Azure DevOps extension if that task is not available in your organization. For Foundry jobs, verify AZD 1.37.0+ and install `microsoft.foundry` on the runner, plus `azure.ai.evaluations` when evaluations are required. Do not copy bare `azd provision`/`azd deploy` shell steps without authentication: having a service connection configured does not automatically log every process into AZD. Follow the generated template's OIDC login and authorized task context, and supply the selected environment/subscription/location.
 
 **4. Where the variables come from**
 

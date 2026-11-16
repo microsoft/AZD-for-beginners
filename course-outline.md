@@ -174,18 +174,22 @@ Successfully deploy a simple web application to Azure using AZD
 
 ---
 
-### Chapter 2: AI-First Development (1-2 hours) 🤖
+### Chapter 2: AI-First Development (4-5 hours including the workshop) 🤖
 **Prerequisites**: Chapter 1 completed  
 **Complexity**: ⭐⭐
 
 #### What You'll Learn
 - Microsoft Foundry integration with AZD
+- GA `microsoft.foundry` bundle installation and hosted-agent code deployment
+- Local Agent Inspector testing and separate evaluation datasets/rubrics
 - Deploying AI-powered applications
 - Understanding AI service configurations
 - RAG (Retrieval-Augmented Generation) patterns
 
 #### Learning Resources
 - [Microsoft Foundry Integration](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- [Hosted-Agent Walkthrough (GA)](docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) - Initialize, review `azure.yaml`, provision, test locally, deploy, evaluate, and clean up
+- [AI Agents Guide](docs/chapter-02-ai-development/agents.md)
 - [AI Model Deployment](docs/chapter-02-ai-development/ai-model-deployment.md)
 - [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - **NEW**: Comprehensive 2-3 hour hands-on lab
 - [Interactive Workshop Guide](workshop/README.md) - **NEW**: Browser-based workshop with MkDocs preview
@@ -193,7 +197,7 @@ Successfully deploy a simple web application to Azure using AZD
 - [Workshop Instructions](workshop/docs/instructions/) - **NEW**: Step-by-step guided exercises
 
 #### Practical Outcome
-Deploy and configure an AI-powered chat application with RAG capabilities
+Test a hosted agent locally and in Foundry using the GA bundle, review an evaluation result, and distinguish cleanup of new and reused projects. The separate RAG/workshop path covers configuring an AI-powered chat application.
 
 #### Workshop Learning Path (Optional Enhancement)
 **NEW Interactive Experience**: [Complete Workshop Guide](workshop/README.md)
