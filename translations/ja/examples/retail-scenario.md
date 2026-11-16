@@ -200,7 +200,7 @@ graph TB
 
 ### コンポーネント概要
 
-| Component | Purpose | Technology | Region |
+| コンポーネント | 目的 | 技術 | 地域 |
 |-----------|---------|------------|---------|
 | **Web Frontend** | ユーザーと顧客の対話用インターフェース | Container Apps | Primary Region |
 | **Agent Router** | リクエストを適切なエージェントにルーティング | Container Apps | Primary Region |
@@ -1912,11 +1912,11 @@ class CostOptimizer:
 
 ### このテンプレートが実際に行うこと
 
-The ARM template at [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) provisions **all Azure infrastructure** needed for the multi-agent system. This is the **only ready-to-run component** - everything else requires development.
+[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) にある ARM テンプレートは、マルチエージェントシステムに必要な **Azure インフラストラクチャ一式**をプロビジョニングします。これは**すぐに実行可能な唯一のコンポーネント**であり、それ以外の要素についてはすべて開発が必要です。
 
 ### ARM テンプレートに含まれるもの
 
-The ARM template located in [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) includes:
+[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) にある ARM テンプレートには、以下が含まれています。
 
 #### <strong>完全なインフラストラクチャ</strong>
 - ✅ **Multi-region Microsoft Foundry Models** のデプロイ（gpt-4.1、gpt-4.1-mini、embeddings、grader）
