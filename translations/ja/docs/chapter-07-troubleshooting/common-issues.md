@@ -1,7 +1,7 @@
 # 一般的な問題と解決策
 
 **チャプター ナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📚 コースホーム**: [AZD 入門](../../README.md)
 - **📖 現在の章**: 第7章 - トラブルシューティングとデバッグ
 - **⬅️ 前の章**: [第6章: 事前チェック](../chapter-06-pre-deployment/preflight-checks.md)
 - **➡️ 次へ**: [デバッグガイド](debugging.md)
