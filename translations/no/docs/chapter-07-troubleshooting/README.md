@@ -1,18 +1,18 @@
 # Kapittel 7: Feilsøking og Debugging
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 1-1.5 timer | **⭐ Vanskelighetsgrad**: Middels
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 1-1,5 timer | **⭐ Vanskelighetsgrad**: Middels
 
 ---
 
 ## Oversikt
 
-Dette kapittelet hjelper deg å diagnostisere og løse vanlige problemer når du jobber med Azure Developer CLI. Fra distribusjonsfeil til AI-spesifikke problemer.
+Dette kapittelet hjelper deg med å diagnostisere og løse vanlige problemer ved bruk av Azure Developer CLI. Fra distribusjonsfeil til AI-spesifikke problemer.
 
-> Validert mot `azd 1.27.1` i juli 2026.
+> Kommando-veiledning gjennomgått mot den utgitte `azd 1.37.2` referansen. Sky-distribusjoner ble ikke utført. Bytt ut eksempelressursnavn og IDer før du bruker kommandoene.
 
 ## Læringsmål
 
-Ved å fullføre dette kapittelet vil du:
+Ved å fullføre dette kapitlet vil du:
 - Diagnostisere vanlige AZD distribusjonsfeil
 - Feilsøke autentiserings- og tillatelsesproblemer
 - Løse AI-tjeneste tilkoblingsproblemer
@@ -20,30 +20,30 @@ Ved å fullføre dette kapittelet vil du:
 
 ---
 
-## 📚 Leksjoner
+## 📚 Lekser
 
 | # | Leksjon | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Vanlige problemer](common-issues.md) | Ofte forekommende problemer | 30 min |
-| 2 | [Debugging guide](debugging.md) | Trinnvise feilsøkingsstrategier | 45 min |
-| 3 | [AI feilsøking](ai-troubleshooting.md) | AI-spesifikke problemer | 30 min |
+| 1 | [Vanlige Problemer](common-issues.md) | Ofte møtte problemer | 30 min |
+| 2 | [Debuggingguide](debugging.md) | Trinn-for-trinn feilsøking | 45 min |
+| 3 | [AI Feilsøking](ai-troubleshooting.md) | AI-spesifikke problemer | 30 min |
 
 ---
 
-## 🚨 Rask løsning
+## 🚨 Rask Løsning
 
 ### Autentiseringsproblemer
 ```bash
-# Påkrevd for AZD-arbeidsflyter
+# Required for AZD workflows
 azd auth login
 
-# Valgfritt hvis du også bruker Azure CLI-kommandoer direkte
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Distribusjonsfeil
+### Problemer med Tilordning
 ```bash
 azd show
 azd monitor --logs
@@ -51,44 +51,49 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Ressurskonflikter
+Undersøk først eksisterende ressurs- og distribusjonsfeil. Ikke slett et delt eller produksjonsmiljø for å løse en navnekonflikt. For et **nytt disponibelt miljø**, bruk et unikt navn:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Kvote overskredet
+### Kvotebegrensning overskredet
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Endring av `AZURE_LOCATION` flytter ikke eksisterende ressurser og kan forårsake lokasjonskonflikter ved redistribusjon.
 
 ---
 
-## 📋 Feilkodeoversikt
+## 📋 Feilkode Referanse
 
 | Feil | Årsak | Løsning |
 |-------|-------|----------|
-| `AuthenticationError` | Ikke innlogget | `azd auth login` |
+| `AuthenticationError` | Ikke pålogget | `azd auth login` |
 | `ResourceNotFound` | Manglende ressurs | Sjekk ressursnavn |
-| `QuotaExceeded` | Abonnementsgrenser | Be om økning av kvote |
+| `QuotaExceeded` | Abonnementsgrenser | Be om kvoteøkning |
 | `InvalidTemplate` | Bicep syntaksfeil | `az bicep build` |
 | `Conflict` | Ressurs eksisterer | Bruk nytt navn eller slett |
-| `Forbidden` | Utilstrekkelige rettigheter | Sjekk RBAC roller |
+| `Forbidden` | Utilstrekkelige tillatelser | Sjekk RBAC roller |
 
 ---
 
-## 🔄 Tilbakestilling og gjenoppretting
+## 🔄 Tilbakestilling og Gjenoppretting
 
 ```bash
-# Myk tilbakestilling (behold ressurser, distribuer kode på nytt)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Hard tilbakestilling (slett alt, start på nytt)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Hard tilbakestilling sletter data og kan endre endepunkter. Ta sikkerhetskopi først og gå gjennom interaktive sletteforespørsler. `--force --purge` er kun egnet for disponibelt miljø når irreversibel sletting er ønsket.
 
 ---
 
@@ -96,15 +101,15 @@ azd up
 
 | Retning | Kapittel |
 |-----------|---------|
-| **Forrige** | [Kapittel 6: Forberedelse før distribusjon](../chapter-06-pre-deployment/README.md) |
+| **Forrige** | [Kapittel 6: Forutsatt distribusjon](../chapter-06-pre-deployment/README.md) |
 | **Neste** | [Kapittel 8: Produksjon](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Relaterte ressurser
+## 📖 Relaterte Ressurser
 
 - [Forhåndssjekker før distribusjon](../chapter-06-pre-deployment/preflight-checks.md)
-- [Konfigurasjonsguide](../chapter-03-configuration/configuration.md)
+- [Konfigurasjonsveiledning](../chapter-03-configuration/configuration.md)
 - [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 
 ---

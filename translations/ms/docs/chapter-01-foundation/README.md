@@ -1,21 +1,21 @@
-# Bab 1: Asas & Mula Pantas
+# Bab 1: Asas & Permulaan Pantas
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 30-45 minit | **⭐ Kerumitan**: Pemula
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 75-120 minit termasuk pelancaran pertama; latihan tambahan mengambil masa lebih lama | **⭐ Kesukaran**: Pemula
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini memperkenalkan asas Azure Developer CLI (azd). Anda akan belajar konsep utama, memasang alat, dan menghantar aplikasi pertama anda ke Azure.
+Bab ini memperkenalkan asas Azure Developer CLI (azd). Anda akan mempelajari konsep teras, memasang alat, dan melancarkan aplikasi pertama anda ke Azure.
 
-> Disahkan dengan `azd 1.27.1` pada Julai 2026.
+> Sasaran semakan arahan dan konfigurasi: `azd 1.37.2` (November 2026). Penyediaan Azure secara langsung tidak dijalankan semasa semakan.
 
 ## Objektif Pembelajaran
 
-Dengan menamatkan bab ini, anda akan:
-- Memahami apa itu Azure Developer CLI dan bagaimana ia berbeza dari Azure CLI
+Dengan menyelesaikan bab ini, anda akan:
+- Memahami apa itu Azure Developer CLI dan bagaimana ia berbeza daripada Azure CLI
 - Memasang dan mengkonfigurasi AZD pada platform anda
-- Menghantar aplikasi pertama anda ke Azure dengan `azd up`
+- Melancarkan aplikasi pertama anda ke Azure dengan `azd up`
 - Membersihkan sumber dengan `azd down`
 
 ---
@@ -24,17 +24,17 @@ Dengan menamatkan bab ini, anda akan:
 
 | # | Pelajaran | Penerangan | Masa |
 |---|--------|-------------|------|
-| 1 | [Asas AZD](azd-basics.md) | Konsep teras, terminologi, dan struktur projek | 15 minit |
-| 2 | [Pemasangan & Persediaan](installation.md) | Panduan pemasangan spesifik platform | 10 minit |
-| 3 | [Projek Pertama Anda](first-project.md) | Latihan praktikal: Hantar aplikasi web ke Azure | 20 minit |
-| 4 | [Bawa Aplikasi Anda Sendiri](bring-your-own-app.md) | Tambah azd ke projek sedia ada anda | 15 minit |
-| 5 | [Kontena Pembangun & Codespaces](dev-containers.md) | Persekitaran azd yang boleh diulang dengan kontena pembangun | 15 minit |
+| 1 | [Asas AZD](azd-basics.md) | Konsep utama, istilah, dan struktur projek | 15 min |
+| 2 | [Pemasangan & Persediaan](installation.md) | Panduan pemasangan khusus platform | 10 min |
+| 3 | [Projek Pertama Anda](first-project.md) | Praktikal: Lancarkan aplikasi web ke Azure | 20 min |
+| 4 | [Bawa Aplikasi Anda Sendiri](bring-your-own-app.md) | Tambah azd ke projek sedia ada yang anda miliki | 15 min |
+| 5 | [Kontena Dev & Codespaces](dev-containers.md) | Persekitaran azd boleh ulang dengan kontena dev | 15 min |
 
 ---
 
-## ✅ Mulakan Di Sini: Sahkan Persediaan Anda
+## ✅ Mula Di Sini: Sahkan Persediaan Anda
 
-Sebelum memulakan, pastikan mesin tempatan anda sudah siap untuk templat Bab 1:
+Sebelum bermula, sahkan bahawa mesin tempatan anda sedia untuk templat Bab 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Sebelum memulakan, pastikan mesin tempatan anda sudah siap untuk templat Bab 1:
 bash ./validate-setup.sh
 ```
 
-Jika skrip melaporkan alat yang hilang, betulkan dahulu sebelum meneruskan bab ini.
+Jika skrip melaporkan alat yang hilang, baiki dulu dan kemudian teruskan dengan bab ini.
 
 ---
 
-## 🚀 Mula Pantas
+## 🚀 Permulaan Pantas
 
 ```bash
-# Semak pemasangan
+# Check installation
 azd version
 
-# Sahkan untuk AZD
-# Pilihan: az login jika anda merancang untuk menjalankan perintah Azure CLI secara langsung
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Lancarkan aplikasi pertama anda
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Bersihkan apabila selesai
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,14 +74,14 @@ azd down --force --purge
 
 ## ✅ Kriteria Kejayaan
 
-Selepas menamatkan bab ini, anda harus boleh:
+Selepas menyelesaikan bab ini, anda sepatutnya dapat:
 
 ```bash
-azd version              # Menunjukkan versi yang dipasang
-azd init --template todo-nodejs-mongo  # Memulakan projek
-azd up                   # Melaksanakan ke Azure
-azd show                 # Memaparkan URL aplikasi yang berjalan
-azd down --force --purge # Membersihkan sumber
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -95,7 +97,7 @@ azd down --force --purge # Membersihkan sumber
 
 ## 📖 Sumber Berkaitan
 
-- [Lembaran Singkatan Perintah](../../resources/cheat-sheet.md)
+- [Lembaran Cheat Arahan](../../resources/cheat-sheet.md)
 - [Soalan Lazim](../../resources/faq.md)
 - [Glosari](../../resources/glossary.md)
 

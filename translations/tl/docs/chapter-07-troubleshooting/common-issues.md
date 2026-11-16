@@ -1,509 +1,522 @@
-# Common Issues and Solutions
+# Mga Karaniwang Isyu at Solusyon
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Para sa mga Nagsisimula](../../README.md)
-- **📖 Current Chapter**: Kabanata 7 - Troubleshooting & Debugging
-- **⬅️ Previous Chapter**: [Kabanata 6: Pre-flight Checks](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ Next**: [Gabay sa Pag-debug](debugging.md)
-- **🚀 Next Chapter**: [Kabanata 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Bahay ng Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 7 - Pag-troubleshoot at Pag-debug
+- **⬅️ Nakaraang Kabanata**: [Kabanata 6: Mga Pre-flight Check](../chapter-06-pre-deployment/preflight-checks.md)
+- **➡️ Susunod**: [Gabayan sa Pag-debug](debugging.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 8: Mga Pattern sa Produksyon at Enterprise](../chapter-08-production/production-ai-practices.md)
 
 ## Panimula
 
-Ang komprehensibong gabay sa troubleshooting na ito ay sumasaklaw sa mga pinaka-karaniwang isyu kapag ginagamit ang Azure Developer CLI. Matutunan kung paano mag-diagnose, mag-troubleshoot, at lutasin ang mga karaniwang problema sa autentikasyon, deployment, pag-provision ng imprastruktura, at konfigurasyon ng aplikasyon. Bawat isyu ay may kasamang detalyadong sintomas, ugat ng sanhi, at hakbang-hakbang na mga pamamaraan ng paglutas.
+Saklaw ng komprehensibong gabay na ito sa pag-troubleshoot ang mga madalas na nararanasang isyu sa paggamit ng Azure Developer CLI. Matutunan kung paano mag-diagnose, mag-troubleshoot, at magresolba ng mga karaniwang problema sa authentication, deployment, provisioning ng imprastraktura, at konfigurasyon ng aplikasyon. Ang bawat isyu ay may kasamang detalyadong mga sintomas, pangunahing sanhi, at mga hakbang sa pagresolba.
 
-## Mga Layunin sa Pagkatuto
+## Mga Layunin sa Pag-aaral
 
-Sa pagtatapos ng gabay na ito, ikaw ay:
-- Magsanay ng mga teknik sa diagnosis para sa mga isyu ng Azure Developer CLI
-- Maintindihan ang mga karaniwang problema sa autentikasyon at permiso at ang kanilang mga solusyon
-- Makalutas ng mga pagkabigo sa deployment, mga error sa pag-provision ng imprastruktura, at mga isyu sa konfigurasyon
-- Magpatupad ng proaktibong pagmo-monitor at mga estratehiya sa pag-debug
-- Mag-apply ng sistematikong mga metodolohiya ng troubleshooting para sa mga kumplikadong problema
-- I-configure ang tamang logging at monitoring upang maiwasan ang mga hinaharap na isyu
+Sa pagkumpleto ng gabay na ito, ikaw ay:
+- Mamahasa sa mga teknik sa pag-diagnose ng mga isyu sa Azure Developer CLI
+- Maiintindihan ang mga karaniwang problema sa authentication at permiso pati ang mga solusyon nito
+- Masosolusyunan ang mga pagkabigo sa deployment, pagkakamali sa provisioning ng imprastraktura, at mga isyu sa konfigurasyon
+- Maipatutupad ang mga proaktibong estratehiya sa pagmamanman at pag-debug
+- Magagamit ang sistematikong mga metodolohiya sa pag-troubleshoot para sa mas kumplikadong mga problema
+- Makonpigura ang tamang paglo-log at pagmamanman para maiwasan ang mga susunod na isyu
 
 ## Mga Kinalabasan ng Pagkatuto
 
-Pagkatapos makumpleto, magagawa mong:
-- Mag-diagnose ng mga isyu ng Azure Developer CLI gamit ang mga built-in na diagnostic tools
-- Lutasin nang mag-isa ang mga problema na may kinalaman sa autentikasyon, subscription, at permiso
-- Mag-troubleshoot nang epektibo ng mga pagkabigo sa deployment at mga error sa pag-provision ng imprastruktura
-- I-debug ang mga isyu sa konfigurasyon ng aplikasyon at mga problema na partikular sa kapaligiran
-- Magpatupad ng monitoring at alerting upang proaktibong matukoy ang mga potensyal na isyu
-- Mag-apply ng pinakamahusay na kasanayan para sa logging, debugging, at mga workflow sa paglutas ng problema
+Kapag natapos mo ito, magkakaroon ka ng kakayahang:
+- Mag-diagnose ng mga isyu ng Azure Developer CLI gamit ang mga built-in na diagnostic tool
+- Solusyunan nang mag-isa ang mga isyu sa authentication, subscription, at permiso
+- Magsagawa ng epektibong pag-troubleshoot sa mga pagkabigo sa deployment at mga pagkakamali sa provisioning ng imprastraktura
+- Mag-debug ng mga isyu sa konfigurasyon ng aplikasyon at mga problema sa environment na tiyak
+- Magpatupad ng pagmamanman at alerto upang proaktibong matukoy ang mga posibleng isyu
+- Gumamit ng mga pinakamahusay na kasanayan sa paglo-log, pag-debug, at mga workflow ng paglutas ng problema
 
-## Mabilis na Diagnostiko
+## Mabilis na Diagnostics
 
-Bago tumalon sa mga partikular na isyu, patakbuhin ang mga utos na ito upang mangalap ng impormasyon sa diagnosis:
+> Palitan ang mga halimbawa ng pangalan/ID ng mga halaga ng iyong kapaligiran. Ang mga fragment ng Bash, Bicep, JavaScript, at parameter-file ay hiwalay na nilagyan ng label sa ibaba; hindi ito isang execuatable na script. Suriin ang mga destruktibong operasyon at itago ang mga sikreto bago ibahagi ang mga diagnostics. `azd monitor --logs` ay magbubukas ng browser; hindi nito isinesend ang mga log ng terminal.
+
+Bago sumabak sa mga partikular na isyu, patakbuhin ang mga utos na ito para mangalap ng impormasyon sa diagnostics:
 
 ```bash
-# Suriin ang bersyon at kalusugan ng azd
+# Check azd version and health
 azd version
 azd config show
 
-# Suriin ang pagpapatotoo ng Azure
+# Verify Azure authentication
 az account show
 az account list
 
-# Suriin ang kasalukuyang kapaligiran
+# Check current environment
 azd env list
 azd env get-values
 
-# Paganahin ang pag-log ng debug
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
-## Mga Isyu sa Autentikasyon
+## Mga Isyu sa Authentication
 
-### Isyu: "Failed to get access token"
-**Sintomas:**
-- `azd up` ay nabibigo na may mga error sa autentikasyon
-- Ang mga utos ay nagbabalik ng "unauthorized" o "access denied"
+### Isyu: "Nabigong kunin ang access token"
+**Mga Sintomas:**
+- Nabibigo ang `azd up` na may mga error sa authentication
+- Nagbabalik ang mga utos ng "hindi awtorisado" o "access denied"
 
 **Mga Solusyon:**
 ```bash
-# 1. Muling mag-authenticate gamit ang Azure CLI
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# 2. I-clear ang naka-cache na mga kredensyal
+# 2. Clear cached credentials
 az account clear
 az login
 
-# 3. Gumamit ng device code flow (para sa mga headless na sistema)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# 4. Itakda ang tiyak na subscription
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
-### Isyu: "Insufficient privileges" during deployment
-**Sintomas:**
-- Nabibigo ang deployment na may mga error sa permiso
-- Hindi makalikha ng ilang Azure resources
+### Isyu: "Kulang sa mga pribilehiyo" habang nagdedeposito
+**Mga Sintomas:**
+- Nabibigo ang deployment dahil sa mga error sa permiso
+- Hindi makalikha ng ilang Azure na mga resource
 
 **Mga Solusyon:**
 ```bash
-# 1. Suriin ang iyong mga pagtatalaga ng papel sa Azure
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Tiyakin na mayroon kang mga kinakailangang papel
-# - Contributor (para sa paglikha ng mga resource)
-# - User Access Administrator (para sa mga pagtatalaga ng papel)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. Makipag-ugnayan sa iyong Azure administrator para sa wastong mga pahintulot
+# 3. Contact your Azure administrator for proper permissions
 ```
 
-### Isyu: Multi-tenant authentication problems
+### Isyu: Mga problema sa multi-tenant authentication
 **Mga Solusyon:**
 ```bash
-# 1. Mag-login sa isang partikular na tenant
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. Itakda ang tenant sa konfigurasyon
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. Linisin ang cache ng tenant kapag lumilipat sa ibang tenant
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
-## 🏗️ Mga Error sa Pag-provision ng Imprastruktura
+## 🏗️ Mga Error sa Provisioning ng Imprastraktura
 
-### Isyu: Resource name conflicts
-**Sintomas:**
-- "The resource name already exists" errors
-- Nabibigo ang deployment habang lumilikha ng resource
+### Isyu: Hindi pagkakatugma sa pangalan ng resource
+**Mga Sintomas:**
+- Mga error na "Ang pangalan ng resource ay mayroon na"
+- Nabibigo ang deployment habang nililikha ang resource
 
 **Mga Solusyon:**
-```bash
-# 1. Gumamit ng natatanging mga pangalan ng resource na may mga token
-# Sa iyong Bicep template:
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
+```
 
-# 2. Palitan ang pangalan ng environment
+```bash
+# 2. Change environment name
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Linisin ang mga umiiral na resource
-azd down --force --purge
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
 ```
 
-### Isyu: Location/Region not available
-**Sintomas:**
-- "The location 'xyz' is not available for resource type"
-- Ang ilang SKUs ay hindi magagamit sa napiling rehiyon
+### Isyu: Lokasyon/Rehiyon hindi magagamit
+**Mga Sintomas:**
+- "Ang lokasyon 'xyz' ay hindi magagamit para sa uri ng resource"
+- Hindi magagamit ang ilang SKU sa napiling rehiyon
 
 **Mga Solusyon:**
 ```bash
-# 1. Suriin ang mga magagamit na lokasyon para sa mga uri ng resource
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Gumamit ng mga rehiyong karaniwang magagamit
-azd config set defaults.location eastus2
-# o
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. Suriin ang pagiging magagamit ng serbisyo sa bawat rehiyon
-# Bisitahin: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Isyu: Quota exceeded errors
-**Sintomas:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+Ang pagbabago ng lokasyon na variable ay hindi naglalipat ng umiiral na mga resource. Maaaring tanggihan ng umiiral na resource group o resource ang pagbabago ng lokasyon; gumamit ng hiwalay na environment para sa regional redeployment.
+
+### Isyu: Mga error sa labis na quota
+**Mga Sintomas:**
+- "Labis ang quota para sa uri ng resource"
+- "Naabot ang pinakamataas na bilang ng mga resource"
 
 **Mga Solusyon:**
 ```bash
-# 1. Suriin ang kasalukuyang paggamit ng quota
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# 2. Humiling ng pagtaas ng quota sa pamamagitan ng Azure portal
-# Pumunta sa: Subscriptions > Usage + quotas
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# 3. Gumamit ng mas maliliit na mga SKU para sa development
-# Sa main.parameters.json:
+```
+
+Para sa development, pumili ng suportadong mas maliit na SKU sa `infra/main.parameters.json`:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# 4. Linisin ang mga hindi nagagamit na resources
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Isyu: Bicep template errors
-**Sintomas:**
-- Mga pagkabigo sa validation ng template
-- Mga syntax error sa mga Bicep file
+### Isyu: Mga error sa template ng Bicep
+**Mga Sintomas:**
+- Nabibigo ang validation ng template
+- Mga error sa syntax ng mga Bicep file
 
 **Mga Solusyon:**
 ```bash
-# 1. Suriin ang sintaks ng Bicep
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Gamitin ang linter ng Bicep
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Suriin ang sintaks ng file ng parameter
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. Paunang tingnan ang mga pagbabago sa pag-deploy
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
-## 🚀 Mga Kabiguan sa Deployment
+## 🚀 Mga Pagkabigo sa Deployment
 
-### Isyu: Build failures
-**Sintomas:**
-- Nabibigo ang aplikasyon na mag-build habang nagde-deploy
+### Isyu: Mga pagkabigo sa build
+**Mga Sintomas:**
+- Nabibigo ang aplikasyon na mabuo habang nagdedeposito
 - Mga error sa pag-install ng package
 
 **Mga Solusyon:**
 ```bash
-# 1. Suriin ang output ng build gamit ang debug flag
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. Tingnan ang katayuan ng na-deploy na serbisyo
+# 2. View deployed service status
 azd show
 
-# 3. Subukan ang build nang lokal
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Suriin ang pagkakatugma ng bersyon ng Node.js/Python
-node --version  # Dapat tumugma sa mga setting ng azure.yaml
+# 3. Check Node.js/Python version compatibility
+node --version  # Should match azure.yaml settings
 python --version
 
-# 4. Linisin ang cache ng build
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. Suriin ang Dockerfile kung gumagamit ng mga container
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Isyu: Container deployment failures
-**Sintomas:**
-- Nabibigo ang mga container app na magsimula
-- Mga error sa paghila ng imahe
+### Isyu: Mga pagkabigo sa deployment ng container
+**Mga Sintomas:**
+- Nabibigo ang pagsisimula ng mga container apps
+- Mga error sa pag-pull ng image
 
 **Mga Solusyon:**
 ```bash
-# 1. Subukan ang lokal na pagbuo ng Docker
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Suriin ang mga log ng container gamit ang Azure CLI
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. Subaybayan ang aplikasyon gamit ang azd
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. Tiyakin ang pag-access sa container registry
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. Suriin ang konfigurasyon ng container app
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Isyu: Database connection failures
-**Sintomas:**
+### Isyu: Mga pagkabigo sa koneksyon sa database
+**Mga Sintomas:**
 - Hindi makakonekta ang aplikasyon sa database
-- Mga timeout sa koneksyon
+- Mga error sa timeout ng koneksyon
 
 **Mga Solusyon:**
 ```bash
-# 1. Suriin ang mga patakaran ng firewall ng database
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Subukan ang koneksyon mula sa aplikasyon
-# Idagdag sa iyong app pansamantala:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Suriin ang format ng string ng koneksyon
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# 4. Suriin ang status ng server ng database
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
 ## 🔧 Mga Isyu sa Konfigurasyon
 
-### Isyu: Environment variables not working
-**Sintomas:**
+### Isyu: Hindi gumagana ang mga environment variable
+**Mga Sintomas:**
 - Hindi mabasa ng app ang mga halaga ng konfigurasyon
 - Mukhang walang laman ang mga environment variable
 
 **Mga Solusyon:**
 ```bash
-# 1. Tiyakin na naka-set ang mga environment variable
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. Suriin ang mga pangalan ng variable sa azure.yaml
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. I-restart ang aplikasyon
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. Suriin ang konfigurasyon ng app service
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### Isyu: SSL/TLS certificate problems
-**Sintomas:**
+### Isyu: Mga problema sa SSL/TLS certificate
+**Mga Sintomas:**
 - Hindi gumagana ang HTTPS
-- Mga error sa pag-validate ng sertipiko
+- Mga error sa pag-validate ng certificate
 
 **Mga Solusyon:**
 ```bash
-# 1. Suriin ang katayuan ng sertipiko ng SSL
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# 2. Paganahin ang HTTPS lamang
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Magdagdag ng pasadyang domain (kung kinakailangan)
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### Isyu: CORS configuration problems
-**Sintomas:**
-- Hindi makatawag ang frontend sa API
+### Isyu: Mga problema sa konfigurasyon ng CORS
+**Mga Sintomas:**
+- Hindi makatawag ng API ang frontend
 - Na-block ang cross-origin request
 
 **Mga Solusyon:**
 ```bash
-# 1. I-configure ang CORS para sa App Service
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. I-update ang API upang pangasiwaan ang CORS
-# Sa Express.js:
+```
+
+2. I-update ang iyong umiiral na Express application (kasama ang `cors` na na-import):
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# 3. Suriin kung tumatakbo sa tamang mga URL
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
-## 🌍 Mga Isyu sa Pamamahala ng Kapaligiran
+## 🌍 Mga Isyu sa Pamamahala ng Environment
 
-### Isyu: Environment switching problems
-**Sintomas:**
-- Mali ang kapaligiran na ginagamit
-- Hindi tama ang paglipat ng konfigurasyon
+### Isyu: Mga problema sa pagpapalit ng environment
+**Mga Sintomas:**
+- Nabibigay ang maling environment
+- Hindi maayos na nagpapalit ang konfigurasyon
 
 **Mga Solusyon:**
 ```bash
-# 1. Ilista ang lahat ng mga kapaligiran
+# 1. List all environments
 azd env list
 
-# 2. Hayagang piliin ang kapaligiran
+# 2. Explicitly select environment
 azd env select production
 
-# 3. Suriin ang kasalukuyang kapaligiran
+# 3. Verify current environment
 azd env list
 
-# 4. Gumawa ng bagong kapaligiran kung ito ay nasira
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
-### Isyu: Environment corruption
-**Sintomas:**
-- Ipinapakita ng kapaligiran ang hindi wastong estado
-- Hindi tumutugma ang mga resources sa konfigurasyon
+### Isyu: Pagkakasira ng environment
+**Mga Sintomas:**
+- Ipinapakita ng environment ang hindi wastong estado
+- Hindi tugma ang mga resource sa konfigurasyon
 
 **Mga Solusyon:**
 ```bash
-# 1. I-refresh ang estado ng kapaligiran
+# 1. Refresh environment state
 azd env refresh
 
-# 2. I-reset ang konfigurasyon ng kapaligiran
+# 2. Reset environment configuration
 azd env new production-reset
-# Kopyahin ang mga kinakailangang variable ng kapaligiran
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. I-import ang mga umiiral na resources (kung maaari)
-# Manu-manong i-update ang .azure/production/config.json gamit ang mga ID ng resource
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
 ## 🔍 Mga Isyu sa Pagganap
 
-### Isyu: Slow deployment times
-**Sintomas:**
-- Masyadong matagal ang mga deployment
-- Mga timeout habang nagde-deploy
+### Isyu: Mabagal na oras ng deployment
+**Mga Sintomas:**
+- Sobrang tagal ng deployment
+- Mga timeout habang nagdedeposito
 
 **Mga Solusyon:**
 ```bash
-# 1. Ilunsad ang mga partikular na serbisyo para sa mas mabilis na iterasyon
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. Gamitin ang pag-deploy na puro code kapag hindi nagbago ang imprastruktura
-azd deploy  # Mas mabilis kaysa sa azd up
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. I-optimize ang proseso ng build
-# Sa package.json:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. Suriin ang lokasyon ng mga resource (gamitin ang parehong rehiyon)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
-### Isyu: Application performance problems
-**Sintomas:**
-- Mabagal ang oras ng pagtugon
-- Mataas ang paggamit ng resources
+### Isyu: Mga problema sa pagganap ng aplikasyon
+**Mga Sintomas:**
+- Mabagal na pagresponde
+- Mataas na paggamit ng resource
 
 **Mga Solusyon:**
 ```bash
-# 1. Palakihin ang mga mapagkukunan
-# I-update ang SKU sa main.parameters.json:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# 2. Paganahin ang monitoring ng Application Insights
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# 3. Suriin ang mga log ng application sa Azure
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# o para sa Container Apps:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. Ipatupad ang caching
-# Magdagdag ng Redis cache sa iyong imprastruktura
+# 4. Implement caching
+# Add Redis cache to your infrastructure
 ```
 
 ## 🛠️ Mga Kasangkapan at Utos para sa Pag-troubleshoot
 
-### Debug Commands
+### Mga Utos sa Pag-debug
 ```bash
-# Komprehensibong pag-debug
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# Suriin ang bersyon ng azd
+# Check azd version
 azd version
 
-# Tingnan ang kasalukuyang konfigurasyon
+# View current configuration
 azd config show
 
-# Subukan ang koneksyon
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
-### Log Analysis
+### Pagsusuri ng Log
 ```bash
-# Mga log ng aplikasyon gamit ang Azure CLI
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# Subaybayan ang aplikasyon gamit ang azd
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Mga log ng resource ng Azure
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
-# Mga log ng container (para sa Container Apps)
+# Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### Resource Investigation
+### Pagsisiyasat ng Resource
 ```bash
-# Ilista ang lahat ng mga mapagkukunan
+# List all resources
 az resource list --resource-group myrg -o table
 
-# Suriin ang katayuan ng mapagkukunan
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# Pagsusuri ng network
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 Pagkuha ng Karagdagang Tulong
 
-### Kailan i-eskalate
-- Patuloy ang mga isyu sa autentikasyon kahit sinubukan na ang lahat ng solusyon
-- Mga problema sa imprastruktura na may kinalaman sa mga serbisyo ng Azure
-- Mga isyu na may kinalaman sa billing o subscription
+### Kailan Mag-eskala
+- Patuloy ang mga isyu sa authentication pagkatapos subukan ang lahat ng solusyon
+- Mga problema sa imprastraktura ng mga serbisyo ng Azure
+- Mga isyu tungkol sa billing o subscription
 - Mga alalahanin o insidente sa seguridad
 
 ### Mga Channel ng Suporta
 ```bash
-# 1. Suriin ang Azure Service Health
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Gumawa ng ticket sa suporta ng Azure
-# Pumunta sa: https://portal.azure.com -> Tulong + suporta
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. Mga mapagkukunan ng komunidad
-# - Stack Overflow: tag na azure-developer-cli
-# - Mga Isyu sa GitHub: https://github.com/Azure/azure-dev/issues
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
+# - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Impormasyon na Dapat Kolektahin
-Bago makipag-ugnayan sa suporta, kolektahin ang:
-- `azd version` output
-- `azd config show` output
-- `azd show` output (kasalukuyang status ng deployment)
+### Impormasyon na Hahanapin
+Bago makipag-ugnayan sa suporta, mangalap ng:
+- Output ng `azd version`
+- Output ng `azd config show`
+- Output ng `azd show` (kasalukuyang status ng deployment)
 - Mga mensahe ng error (buong teksto)
-- Mga hakbang para ma-reproduce ang isyu
-- Detalye ng kapaligiran (`azd env get-values`)
-- Timeline kung kailan nagsimula ang isyu
+- Mga hakbang upang ulitin ang isyu
+- Tinanggal na detalye ng environment (huwag kailanman ibahagi ang raw `azd env get-values`, na maaaring naglalaman ng mga sikreto)
+- Takdang oras kung kailan nagsimula ang isyu
 
-### Script para sa Pangangalap ng Log
+### Script sa Pagkolekta ng Log
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -526,75 +539,77 @@ azd show >> debug-logs/status.txt
 echo "Debug information collected in debug-logs/"
 ```
 
-## 📊 Pag-iwas sa Mga Isyu
+## 📊 Pag-iwas sa Isyu
 
 ### Checklist bago mag-deploy
 ```bash
-# Suriin ang awtentikasyon
+# 1. Validate authentication
 az account show
 
-# Suriin ang mga quota at limitasyon
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# Suriin ang mga template
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# Subukan muna nang lokal
+# 4. Test locally first
 npm run build
 npm run test
 
-# Gumamit ng dry-run na mga pag-deploy
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
-### Pag-set up ng Monitoring
-```bash
-# Paganahin ang Application Insights
-# Idagdag sa main.bicep:
+### Pagsasaayos ng Monitoring
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# Mag-set up ng mga alerto
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
-### Regular na Pagpapanatili
+### Regular na Maintenance
 ```bash
-# Lingguhang pagsusuri ng kalusugan
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# Buwanang pagsusuri ng gastos
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# Kuwarteral na pagsusuri ng seguridad
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
 ## Mga Kaugnay na Mapagkukunan
 
-- [Gabay sa Pag-debug](debugging.md) - Advanced debugging techniques
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Infrastructure troubleshooting
-- [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - Resource planning guidance
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Service tier recommendations
+- [Gabayan sa Pag-debug](debugging.md) - Mga advanced na teknik sa pag-debug
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Pag-troubleshoot sa imprastraktura
+- [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - Gabay sa pagpaplano ng resource
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Mga rekomendasyon sa tier ng serbisyo
 
 ---
 
-**Payo**: I-bookmark ang gabay na ito at balik-balikan kapag nakatagpo ka ng mga isyu. Karamihan sa mga problema ay dati nang na-encounter at may umiiral na mga solusyon!
+**Tip**: Panatilihing naka-bookmark ang gabay na ito at balikan ito kapag nakatagpo ng mga isyu. Karamihan sa mga problema ay dati nang nasaksihan at may mga naitatag na solusyon!
 
 ---
 
-**Nawigasyon**
-- **Naunang Aralin**: [Provisioning Resources](../chapter-04-infrastructure/provisioning.md)
-- **Susunod na Aralin**: [Gabay sa Pag-debug](debugging.md)
+**Pag-navigate**
+- **Nakaraang Aralin**: [Provisioning Resources](../chapter-04-infrastructure/provisioning.md)
+- **Susunod na Aralin**: [Gabayan sa Pag-debug](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Ang dokumentong ito ay isinalin gamit ang serbisyong AI para sa pagsasalin na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang awtomatikong mga pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mga kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na magmumula sa paggamit ng pagsasaling ito.
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

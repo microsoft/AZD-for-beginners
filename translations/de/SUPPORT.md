@@ -1,30 +1,26 @@
-# TODO: Der Verantwortliche für dieses Repository hat diese Datei noch nicht bearbeitet
+# Unterstützung
 
-**REPO-BESITZER**: Möchten Sie Unterstützung durch den Kundenservice und Support (CSS) für dieses Produkt/Projekt?
+## Kursprobleme und Fragen
 
-- **Kein CSS-Support:** Füllen Sie diese Vorlage mit Informationen darüber aus, wie man Probleme meldet und Hilfe erhält.
-- **Ja, CSS-Support:** Füllen Sie ein Aufnahmeformular unter [aka.ms/onboardsupport](https://aka.ms/onboardsupport) aus. CSS wird mit Ihnen zusammenarbeiten/helfen, um die nächsten Schritte zu bestimmen.
-- **Nicht sicher?** Füllen Sie ein Aufnahmeformular aus, als ob die Antwort "Ja" wäre. CSS wird Ihnen bei der Entscheidung helfen.
+Durchsuchen Sie die [Kursprobleme](https://github.com/microsoft/AZD-for-beginners/issues), bevor Sie ein Problem melden. Geben Sie die betroffene englische Lektion, den ausgeführten Befehl, Ihre AZD-/Erweiterungsversionen und die Fehlermeldung an. Entfernen Sie Zugangsdaten, Tokens, Abonnementdetails und persönliche Daten aus Protokollen und Screenshots.
 
-*Entfernen Sie dann diese erste Überschrift aus dieser SUPPORT.MD-Datei, bevor Sie Ihr Repository veröffentlichen.*
+Für allgemeine Lernfragen verwenden Sie die [Azure-Entwickler-Community](https://discord.gg/microsoft-azure). Community-Antworten sind kein garantierter Support-Service.
 
-# Support
+## Probleme mit Tools und Diensten
 
-## Wie man Probleme meldet und Hilfe erhält  
+Melden Sie reproduzierbare AZD CLI-Fehler in [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). Für Azure-Dienstvorfälle oder abonnementspezifische Unterstützung nutzen Sie die Support-Optionen im [Azure-Portal](https://portal.azure.com/).
 
-Dieses Projekt verwendet GitHub Issues, um Fehler und Funktionsanfragen zu verfolgen. Bitte durchsuchen Sie die vorhandenen 
-Issues, bevor Sie neue erstellen, um Duplikate zu vermeiden. Für neue Issues melden Sie Ihren Fehler oder 
-Ihre Funktionsanfrage als neues Issue.
+## Sicherheitsmeldungen
 
-Für Hilfe und Fragen zur Nutzung dieses Projekts, bitte **REPO-VERANTWORTLICHER: FÜGEN SIE HIER ANWEISUNGEN EIN, 
-WIE MAN SICH AN DIE REPO-BESITZER ODER DIE COMMUNITY WENDEN KANN, UM HILFE ZU ERHALTEN. DAS KÖNNTE EIN STACK OVERFLOW-TAG ODER EIN ANDERER 
-KANAL SEIN. WO WERDEN SIE DEN LEUTEN HELFEN?**.
+Folgen Sie [SECURITY.md](SECURITY.md) für private Meldungen von Sicherheitslücken. Veröffentlichen Sie keine Geheimnisse oder Exploit-Details in einem öffentlichen Kursproblem.
 
-## Microsoft-Support-Richtlinie  
+## Microsoft Support-Richtlinie
 
-Der Support für dieses **PROJEKT oder PRODUKT** ist auf die oben aufgeführten Ressourcen beschränkt.
+Der Support für dieses Bildungsprojekt beschränkt sich auf die oben aufgeführten Ressourcen. Kursbeispiele beinhalten keine Verpflichtung zur Produktionsunterstützung.
 
 ---
 
-**Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Haftungsausschluss**:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache gilt als maßgebliche Quelle. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

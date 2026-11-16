@@ -1,53 +1,54 @@
-# Mẫu phối hợp đa tác nhân
+# Mẫu Điều phối Đa Tác nhân
 
-⏱️ **Thời gian ước tính**: 60-75 phút | 💰 **Chi phí ước tính**: ~$100-300/tháng | ⭐ **Độ phức tạp**: Nâng cao
+⏱️ **Thời gian ước tính**: 60-75 phút đọc; vài giờ để triển khai | 💰 **Chi phí ước tính**: phụ thuộc khối lượng công việc | ⭐ **Độ phức tạp**: Nâng cao
 
 **📚 Lộ trình học:**
-- ← Trước đó: [Lập kế hoạch công suất](capacity-planning.md) - Định cỡ tài nguyên và chiến lược mở rộng
-- 🎯 **Bạn đang ở đây**: Mẫu phối hợp đa tác nhân (Điều phối, giao tiếp, quản lý trạng thái)
-- → Tiếp theo: [Lựa chọn SKU](sku-selection.md) - Chọn dịch vụ Azure phù hợp
-- 🏠 [Trang khóa học](../../README.md)
+- ← Trước: [Capacity Planning](capacity-planning.md) - Chiến lược định cỡ và mở rộng tài nguyên
+- 🎯 **Bạn đang ở đây**: Mẫu Điều phối Đa Tác nhân (Điều phối, giao tiếp, quản lý trạng thái)
+- → Tiếp theo: [SKU Selection](sku-selection.md) - Lựa chọn dịch vụ Azure phù hợp
+- 🏠 [Trang chủ Khóa học](../../README.md)
 
 ---
 
-## Những gì bạn sẽ học
+## Bạn sẽ học gì
 
-Hoàn thành bài học này, bạn sẽ:
-- Hiểu các mẫu **kiến trúc đa tác nhân** và khi nào nên sử dụng chúng
-- Triển khai **mẫu điều phối** (tập trung, phi tập trung, phân cấp)
-- Thiết kế chiến lược **giao tiếp giữa các tác nhân** (đồng bộ, bất đồng bộ, dựa trên sự kiện)
+Sau khi hoàn thành bài học này, bạn sẽ:
+- Hiểu các mẫu **kiến trúc đa tác nhân** và khi nào sử dụng chúng
+- Triển khai các **mẫu điều phối** (tập trung, phân tán, phân cấp)
+- Thiết kế các chiến lược **giao tiếp tác nhân** (đồng bộ, bất đồng bộ, theo sự kiện)
 - Quản lý **trạng thái chia sẻ** giữa các tác nhân phân tán
-- Triển khai **hệ thống đa tác nhân** trên Azure bằng AZD
-- Áp dụng **mẫu phối hợp** cho các tình huống AI thực tế
+- Triển khai **hệ thống đa tác nhân** trên Azure với AZD
+- Áp dụng các **mẫu điều phối** cho các kịch bản AI thực tế
 - Giám sát và gỡ lỗi hệ thống tác nhân phân tán
 
-## Tại sao điều phối đa tác nhân quan trọng
+## Tại sao Điều phối Đa Tác nhân quan trọng
 
-### Sự tiến hóa: Từ tác nhân đơn đến đa tác nhân
+### Sự tiến hóa: Từ Tác nhân đơn đến Đa Tác nhân
 
 **Tác nhân đơn (Đơn giản):**
 ```
 User → Agent → Response
 ```
 - ✅ Dễ hiểu và triển khai
-- ✅ Nhanh cho các tác vụ đơn giản
-- ❌ Bị giới hạn bởi khả năng của một mô hình duy nhất
+- ✅ Nhanh với các tác vụ đơn giản
+- ❌ Bị giới hạn bởi khả năng mô hình đơn
 - ❌ Không thể song song hóa các tác vụ phức tạp
 - ❌ Không có sự chuyên môn hóa
 
-**Hệ thống đa tác nhân (Nâng cao):**
+**Hệ thống Đa Tác nhân (Nâng cao):**
 ```mermaid
 graph TD
-    Orchestrator[Điều phối viên] --> Agent1[Agent1<br/>Kế hoạch]
-    Orchestrator --> Agent2[Agent2<br/>Mã]
-    Orchestrator --> Agent3[Agent3<br/>Đánh giá]
-```- ✅ Các tác nhân chuyên biệt cho các nhiệm vụ cụ thể
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```
+- ✅ Tác nhân chuyên môn hóa cho các nhiệm vụ cụ thể
 - ✅ Thực thi song song để tăng tốc
-- ✅ Mô-đun và dễ bảo trì
-- ✅ Tốt hơn cho các luồng công việc phức tạp
-- ⚠️ Yêu cầu logic điều phối
+- ✅ Modular và dễ bảo trì
+- ✅ Tốt hơn với các luồng công việc phức tạp
+- ⚠️ Cần logic điều phối
 
-**Tương tự**: Tác nhân đơn giống như một người làm tất cả công việc. Hệ thống đa tác nhân giống như một đội, nơi mỗi thành viên có kỹ năng chuyên môn (nhà nghiên cứu, lập trình viên, người đánh giá, người viết) làm việc cùng nhau.
+**Tương tự**: Tác nhân đơn giống như một người thực hiện tất cả các công việc. Đa tác nhân giống như một đội nhóm, mỗi thành viên có kỹ năng chuyên môn riêng (nhà nghiên cứu, lập trình viên, người duyệt, người viết) làm việc cùng nhau.
 
 ---
 
@@ -55,57 +56,58 @@ graph TD
 
 ### Mẫu 1: Điều phối tuần tự (Chuỗi trách nhiệm)
 
-**Khi nên sử dụng**: Các nhiệm vụ phải hoàn thành theo thứ tự cụ thể, mỗi tác nhân xây dựng trên đầu ra trước đó.
+**Khi nào sử dụng**: Các tác vụ phải hoàn thành theo thứ tự cụ thể, mỗi tác nhân xây dựng dựa trên đầu ra trước đó.
 
 ```mermaid
 sequenceDiagram
-    participant User as Người dùng
-    participant Orchestrator as Điều phối viên
-    participant Agent1 as Tác nhân nghiên cứu
-    participant Agent2 as Tác nhân viết
-    participant Agent3 as Tác nhân biên tập
+    participant User
+    participant Orchestrator
+    participant Agent1 as Research Agent
+    participant Agent2 as Writer Agent
+    participant Agent3 as Editor Agent
     
-    User->>Orchestrator: "Viết bài về AI"
-    Orchestrator->>Agent1: Nghiên cứu chủ đề
-    Agent1-->>Orchestrator: Kết quả nghiên cứu
-    Orchestrator->>Agent2: Viết bản nháp (dựa trên nghiên cứu)
-    Agent2-->>Orchestrator: Bản nháp bài viết
-    Orchestrator->>Agent3: Chỉnh sửa và cải thiện
-    Agent3-->>Orchestrator: Bài viết hoàn chỉnh
-    Orchestrator-->>User: Bài viết hoàn thiện
+    User->>Orchestrator: "Write article about AI"
+    Orchestrator->>Agent1: Research topic
+    Agent1-->>Orchestrator: Research results
+    Orchestrator->>Agent2: Write draft (using research)
+    Agent2-->>Orchestrator: Draft article
+    Orchestrator->>Agent3: Edit and improve
+    Agent3-->>Orchestrator: Final article
+    Orchestrator-->>User: Polished article
     
-    Note over User,Agent3: Tuần tự: Mỗi bước chờ bước trước
+    Note over User,Agent3: Sequential: Each step waits for previous
 ```
+
 **Lợi ích:**
-- ✅ Dòng dữ liệu rõ ràng
+- ✅ Luồng dữ liệu rõ ràng
 - ✅ Dễ gỡ lỗi
-- ✅ Thứ tự thực thi có thể dự đoán
+- ✅ Thứ tự thực thi dự đoán được
 
 **Hạn chế:**
 - ❌ Chậm hơn (không có song song)
-- ❌ Một lỗi có thể chặn toàn bộ chuỗi
-- ❌ Không thể xử lý các nhiệm vụ phụ thuộc lẫn nhau
+- ❌ Một lỗi làm tắc toàn bộ chuỗi
+- ❌ Không thể xử lý tác vụ phụ thuộc lẫn nhau
 
-**Ví dụ áp dụng:**
+**Ví dụ sử dụng:**
 - Quy trình tạo nội dung (nghiên cứu → viết → chỉnh sửa → xuất bản)
-- Sinh mã (lập kế hoạch → triển khai → kiểm thử → triển khai)
+- Tạo mã (lập kế hoạch → triển khai → kiểm thử → triển khai)
 - Tạo báo cáo (thu thập dữ liệu → phân tích → trực quan hóa → tóm tắt)
 
 ---
 
 ### Mẫu 2: Điều phối song song (Fan-Out/Fan-In)
 
-**Khi nên sử dụng**: Các nhiệm vụ độc lập có thể chạy đồng thời, kết quả được kết hợp ở cuối.
+**Khi nào sử dụng**: Các tác vụ độc lập có thể chạy đồng thời, kết quả được kết hợp ở cuối.
 
 ```mermaid
 graph TB
-    User[Yêu cầu người dùng]
-    Orchestrator[Điều phối viên]
-    Agent1[Tác nhân phân tích]
-    Agent2[Tác nhân nghiên cứu]
-    Agent3[Tác nhân dữ liệu]
-    Aggregator[Bộ tổng hợp kết quả]
-    Response[Phản hồi kết hợp]
+    User[User Request]
+    Orchestrator[Orchestrator]
+    Agent1[Analysis Agent]
+    Agent2[Research Agent]
+    Agent3[Data Agent]
+    Aggregator[Result Aggregator]
+    Response[Combined Response]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -119,9 +121,10 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Lợi ích:**
 - ✅ Nhanh (thực thi song song)
-- ✅ Chịu lỗi (chấp nhận kết quả một phần)
+- ✅ Chịu lỗi tốt (chấp nhận kết quả một phần)
 - ✅ Mở rộng theo chiều ngang
 
 **Hạn chế:**
@@ -129,26 +132,26 @@ graph TB
 - ⚠️ Cần logic tổng hợp
 - ⚠️ Quản lý trạng thái phức tạp
 
-**Ví dụ áp dụng:**
-- Thu thập dữ liệu từ nhiều nguồn (API + cơ sở dữ liệu + thu thập web)
-- Phân tích cạnh tranh (nhiều mô hình sinh giải pháp, chọn giải pháp tốt nhất)
-- Dịch vụ dịch thuật (dịch sang nhiều ngôn ngữ đồng thời)
+**Ví dụ sử dụng:**
+- Thu thập dữ liệu đa nguồn (API + cơ sở dữ liệu + thu thập web)
+- Phân tích cạnh tranh (nhiều mô hình tạo giải pháp, chọn giải pháp tốt nhất)
+- Dịch vụ dịch thuật (dịch sang nhiều ngôn ngữ cùng lúc)
 
 ---
 
-### Mẫu 3: Điều phối phân cấp (Quản lý-Nhân viên)
+### Mẫu 3: Điều phối phân cấp (Quản lý - Người làm)
 
-**Khi nên sử dụng**: Luồng công việc phức tạp với các nhiệm vụ con, cần phân công.
+**Khi nào sử dụng**: Luồng công việc phức tạp với các tác vụ con, cần ủy quyền.
 
 ```mermaid
 graph TB
-    Master[Trình điều phối chính]
-    Manager1[Quản lý Nghiên cứu]
-    Manager2[Quản lý Nội dung]
-    W1[Trình thu thập web]
-    W2[Trình phân tích bài báo]
-    W3[Người viết]
-    W4[Biên tập viên]
+    Master[Master Orchestrator]
+    Manager1[Research Manager]
+    Manager2[Content Manager]
+    W1[Web Scraper]
+    W2[Paper Analyzer]
+    W3[Writer]
+    W4[Editor]
     
     Master --> Manager1
     Master --> Manager2
@@ -161,75 +164,77 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
+
 **Lợi ích:**
-- ✅ Xử lý được các luồng công việc phức tạp
-- ✅ Mô-đun và dễ bảo trì
+- ✅ Xử lý luồng công việc phức tạp
+- ✅ Modular và dễ bảo trì
 - ✅ Ranh giới trách nhiệm rõ ràng
 
 **Hạn chế:**
 - ⚠️ Kiến trúc phức tạp hơn
 - ⚠️ Độ trễ cao hơn (nhiều lớp điều phối)
-- ⚠️ Yêu cầu điều phối tinh vi
+- ⚠️ Cần điều phối tinh vi
 
-**Ví dụ áp dụng:**
-- Xử lý tài liệu doanh nghiệp (phân loại → chuyển hướng → xử lý → lưu trữ)
-- Pipeline dữ liệu nhiều giai đoạn (nhập → làm sạch → biến đổi → phân tích → báo cáo)
-- Luồng công việc tự động phức tạp (lập kế hoạch → phân bổ tài nguyên → thực thi → giám sát)
+**Ví dụ sử dụng:**
+- Xử lý tài liệu doanh nghiệp (phân loại → chuyển tiếp → xử lý → lưu trữ)
+- Pipeline dữ liệu đa giai đoạn (nhập → làm sạch → biến đổi → phân tích → báo cáo)
+- Các luồng tự động hóa phức tạp (lập kế hoạch → phân bổ tài nguyên → thực thi → giám sát)
 
 ---
 
-### Mẫu 4: Điều phối dựa trên sự kiện (Xuất bản-Đăng ký)
+### Mẫu 4: Điều phối dựa trên sự kiện (Publish-Subscribe)
 
-**Khi nên sử dụng**: Các tác nhân cần phản ứng với sự kiện, mong muốn liên kết lỏng.
+**Khi nào sử dụng**: Các tác nhân cần phản ứng theo sự kiện, mong muốn kết nối lỏng lẻo.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as Trình thu thập dữ liệu
+    participant Agent1 as Data Collector
     participant EventBus as Azure Service Bus
-    participant Agent2 as Trình phân tích
-    participant Agent3 as Trình thông báo
-    participant Agent4 as Trình lưu trữ
+    participant Agent2 as Analyzer
+    participant Agent3 as Notifier
+    participant Agent4 as Archiver
     
-    Agent1->>EventBus: Phát sự kiện "Dữ liệu nhận được"
-    EventBus->>Agent2: Đăng ký: Phân tích dữ liệu
-    EventBus->>Agent3: Đăng ký: Gửi thông báo
-    EventBus->>Agent4: Đăng ký: Lưu trữ dữ liệu
+    Agent1->>EventBus: Publish "DataReceived" event
+    EventBus->>Agent2: Subscribe: Analyze data
+    EventBus->>Agent3: Subscribe: Send notification
+    EventBus->>Agent4: Subscribe: Archive data
     
-    Note over Agent1,Agent4: Tất cả các người đăng ký xử lý độc lập
+    Note over Agent1,Agent4: All subscribers process independently
     
-    Agent2->>EventBus: Phát sự kiện "Phân tích hoàn tất"
-    EventBus->>Agent3: Đăng ký: Gửi báo cáo phân tích
+    Agent2->>EventBus: Publish "AnalysisComplete" event
+    EventBus->>Agent3: Subscribe: Send analysis report
 ```
+
 **Lợi ích:**
-- ✅ Liên kết lỏng giữa các tác nhân
-- ✅ Dễ thêm tác nhân mới (chỉ cần đăng ký)
+- ✅ Kết nối lỏng lẻo giữa các tác nhân
+- ✅ Dễ dàng thêm tác nhân mới (chỉ cần đăng ký)
 - ✅ Xử lý bất đồng bộ
-- ✅ Khả năng chịu lỗi (tin nhắn được lưu trữ)
+- ✅ Đáng tin cậy (lưu trữ tin nhắn)
 
 **Hạn chế:**
-- ⚠️ Tính nhất quán cuối cùng
-- ⚠️ Gỡ lỗi phức tạp
+- ⚠️ Tính nhất quán có thể bị trì hoãn
+- ⚠️ Khó khăn khi gỡ lỗi
 - ⚠️ Thách thức về thứ tự tin nhắn
 
-**Ví dụ áp dụng:**
+**Ví dụ sử dụng:**
 - Hệ thống giám sát thời gian thực (cảnh báo, bảng điều khiển, nhật ký)
-- Thông báo đa kênh (email, SMS, push, Slack)
+- Thông báo đa kênh (email, SMS, thông báo đẩy, Slack)
 - Pipeline xử lý dữ liệu (nhiều người tiêu thụ cùng dữ liệu)
 
 ---
 
 ### Mẫu 5: Điều phối dựa trên đồng thuận (Bỏ phiếu/Quorum)
 
-**Khi nên sử dụng**: Cần thỏa thuận từ nhiều tác nhân trước khi tiến hành.
+**Khi nào sử dụng**: Cần sự đồng thuận của nhiều tác nhân trước khi tiến hành.
 
 ```mermaid
 graph TB
-    Input[Nhiệm vụ đầu vào]
-    Agent1[Tác nhân 1: gpt-4.1]
-    Agent2[Tác nhân 2: Claude]
-    Agent3[Tác nhân 3: Gemini]
-    Voter[Người bỏ phiếu đồng thuận]
-    Output[Kết quả đồng thuận]
+    Input[Input Task]
+    Agent1[Agent 1: gpt-4.1]
+    Agent2[Agent 2: Claude]
+    Agent3[Agent 3: Gemini]
+    Voter[Consensus Voter]
+    Output[Agreed Output]
     
     Input --> Agent1
     Input --> Agent2
@@ -241,42 +246,43 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
+
 **Lợi ích:**
 - ✅ Độ chính xác cao hơn (nhiều ý kiến)
-- ✅ Chịu lỗi (lỗi của thiểu số chấp nhận được)
-- ✅ Đảm bảo chất lượng tích hợp sẵn
+- ✅ Chịu lỗi tốt (chấp nhận lỗi thiểu số)
+- ✅ Đảm bảo chất lượng tích hợp
 
 **Hạn chế:**
-- ❌ Tốn kém (nhiều lần gọi mô hình)
-- ❌ Chậm hơn (chờ tất cả tác nhân)
-- ⚠️ Cần cơ chế giải quyết xung đột
+- ❌ Tốn kém (gọi nhiều mô hình)
+- ❌ Chậm hơn (phải đợi tất cả tác nhân)
+- ⚠️ Cần giải quyết xung đột
 
-**Ví dụ áp dụng:**
-- Kiểm duyệt nội dung (nhiều mô hình xem xét nội dung)
-- Đánh giá mã (nhiều linter/bộ phân tích)
-- Chẩn đoán y tế (nhiều mô hình AI, xác nhận chuyên gia)
+**Ví dụ sử dụng:**
+- Kiểm duyệt nội dung (nhiều mô hình xét duyệt nội dung)
+- Đánh giá mã nguồn (nhiều công cụ phân tích)
+- Chuẩn đoán y khoa (nhiều mô hình AI, xác nhận chuyên gia)
 
 ---
 
-## Tổng quan kiến trúc
+## Tổng quan Kiến trúc
 
-### Hệ thống đa tác nhân hoàn chỉnh trên Azure
+### Hệ thống Đa Tác nhân hoàn chỉnh trên Azure
 
 ```mermaid
 graph TB
-    User[Người dùng/API Client]
-    APIM[Quản lý API Azure]
-    Orchestrator[Dịch vụ Orchestrator<br/>Ứng dụng Container]
-    ServiceBus[Azure Service Bus<br/>Event Hub]
+    User[User/API Client]
+    APIM[Azure API Management]
+    Orchestrator[Orchestrator Service<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Queues / Topics]
     
-    Agent1[Tác nhân Nghiên cứu<br/>Ứng dụng Container]
-    Agent2[Tác nhân Viết<br/>Ứng dụng Container]
-    Agent3[Tác nhân Phân tích<br/>Ứng dụng Container]
-    Agent4[Tác nhân Đánh giá<br/>Ứng dụng Container]
+    Agent1[Research Agent<br/>Container App]
+    Agent2[Writer Agent<br/>Container App]
+    Agent3[Analyst Agent<br/>Container App]
+    Agent4[Reviewer Agent<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>Trạng thái dùng chung)]
-    Storage[Azure Storage<br/>Tài nguyên]
-    AppInsights[Application Insights<br/>Giám sát]
+    CosmosDB[(Cosmos DB<br/>Shared State)]
+    Storage[Azure Storage<br/>Artifacts]
+    AppInsights[Application Insights<br/>Monitoring]
     
     User --> APIM
     APIM --> Orchestrator
@@ -307,51 +313,54 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Các thành phần chính:**
 
 | Thành phần | Mục đích | Dịch vụ Azure |
 |-----------|---------|---------------|
-| **Cổng API** | Điểm vào, giới hạn tần suất, xác thực | API Management |
-| **Orchestrator** | Điều phối luồng công việc của tác nhân | Container Apps |
+| **API Gateway** | Điểm vào, giới hạn tần suất, xác thực | API Management |
+| **Orchestrator** | Điều phối luồng tác nhân | Container Apps |
 | **Message Queue** | Giao tiếp bất đồng bộ | Service Bus / Event Hubs |
-| **Tác nhân** | Các công nhân AI chuyên biệt | Container Apps / Functions |
-| **Kho trạng thái** | Trạng thái chia sẻ, theo dõi nhiệm vụ | Cosmos DB |
-| **Kho lưu trữ tài liệu** | Tài liệu, kết quả, nhật ký | Blob Storage |
-| **Giám sát** | Tracing phân tán, nhật ký | Application Insights |
+| **Agents** | Tác nhân AI chuyên biệt | Container Apps / Functions |
+| **State Store** | Trạng thái chia sẻ, theo dõi tác vụ | Cosmos DB |
+| **Artifact Storage** | Tài liệu, kết quả, nhật ký | Blob Storage |
+| **Monitoring** | Theo dõi phân tán, nhật ký | Application Insights |
+
+Hàng đợi/bảng chủ đề Service Bus và Event Hubs là các dịch vụ khác nhau với mô hình phân phối/tiêu thụ khác nhau; Event Hubs không phải là thay thế trực tiếp cho mã worker Service Bus dưới đây. Song song hóa, tin nhắn được lưu trữ và bỏ phiếu mô hình không tự đảm bảo chịu lỗi hoặc độ chính xác cao hơn.
 
 ---
 
-## Yêu cầu tiên quyết
+## Yêu cầu trước
 
-### Công cụ yêu cầu
+### Công cụ cần thiết
 
 ```bash
-# Xác minh Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Mong đợi: azd phiên bản 1.0.0 hoặc cao hơn
+# Command reference baseline: azd 1.37.2
 
-# Xác minh Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Mong đợi: azure-cli 2.50.0 hoặc cao hơn
+# ✅ Expected: azure-cli 2.50.0 or higher
 
-# Xác minh Docker (cho kiểm thử cục bộ)
+# Verify Docker (for local testing)
 docker --version
-# ✅ Mong đợi: Phiên bản Docker 20.10 hoặc cao hơn
+# ✅ Expected: Docker version 20.10 or higher
 ```
 
 ### Yêu cầu Azure
 
-- Có đăng ký Azure đang hoạt động
-- Quyền để tạo:
+- Có thuê bao Azure hoạt động
+- Quyền tạo:
   - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
+  - Không gian tên Service Bus
+  - Tài khoản Cosmos DB
+  - Tài khoản lưu trữ
   - Application Insights
 
-### Kiến thức yêu cầu trước
+### Kiến thức nền tảng
 
-Bạn nên đã hoàn thành:
+Bạn nên hoàn thành:
 - [Quản lý Cấu hình](../chapter-03-configuration/configuration.md)
 - [Xác thực & Bảo mật](../chapter-03-configuration/authsecurity.md)
 - [Ví dụ Microservices](../../../../examples/microservices)
@@ -359,6 +368,12 @@ Bạn nên đã hoàn thành:
 ---
 
 ## Hướng dẫn triển khai
+
+> **Mảnh ghép thiết kế, không phải đoạn mã triển khai:** Cây dự án và các nhãn `File:` bên dưới mô tả các tệp cần tạo trong dự án của bạn; kho này không chứa ứng dụng `multi-agent-system` hoàn chỉnh. Các phần thiếu bao gồm mẫu chính/tham số, môi trường/đăng ký Container Apps, Dockerfile và khóa phụ thuộc, thiết lập database/container Cosmos, triển khai mô hình, cấu hình nhận dạng/role, quy tắc mở rộng, và worker/hàng đợi song song. Đừng mong `azd init` tạo các tệp này hay `azd up` triển khai đoạn mã nguyên bản. Để có điểm bắt đầu thực thi, hoàn thành [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
+
+**Giả định thời gian chạy:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask và (cho giám sát) `azure-monitor-opentelemetry`; đặt `shared` trên đường dẫn import Python trong mỗi ảnh dịch vụ. Container `agent-state/tasks` của Cosmos phải tồn tại với khóa phân vùng `/id`. Kết nối dựa trên khóa đơn giản hóa các mảnh ghép này, không phải hướng dẫn sản xuất: ưu tiên dùng managed identities với role dịch vụ có phạm vi Service Bus/Cosmos/OpenAI. Không tiết lộ khóa trong output hoặc nhật ký.
+
+Giao hàng Service Bus là **ít nhất một lần**. Ghi nhận idempotency theo từng tác vụ **và bước**, dùng đồng bộ lạc quan (ETags) cho đọc/sửa/ghi trạng thái, và gia hạn khóa tin nhắn khi xử lý lâu. Bộ quản lý trạng thái đơn giản dưới đây chỉ tuần tự và không đảm bảo các tính năng sản xuất này.
 
 ### Cấu trúc dự án
 
@@ -392,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## Bài học 1: Mẫu điều phối tuần tự
+## Bài học 1: Mẫu Điều phối Tuần tự
 
 ### Triển khai: Quy trình tạo nội dung
 
-Hãy xây dựng một quy trình tuần tự: Nghiên cứu → Viết → Chỉnh sửa → Xuất bản
+Hãy thiết kế quy trình tuần tự: Nghiên cứu → Viết → Chỉnh sửa. Xuất bản nằm ngoài ví dụ này.
 
 ### 1. Cấu hình AZD
 
@@ -429,7 +444,7 @@ services:
     host: containerapp
 ```
 
-### 2. Hạ tầng: Service Bus cho điều phối
+### 2. Cơ sở hạ tầng: Service Bus cho Điều phối
 
 **Tệp: `infra/core/servicebus.bicep`**
 
@@ -483,16 +498,17 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 }
 
 output namespace string = serviceBusNamespace.name
-output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+// Do not output RootManageSharedAccessKey. Resolve scoped credentials
+// securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Trình quản lý trạng thái chia sẻ
+### 3. Bộ quản lý trạng thái chia sẻ
 
 **Tệp: `src/shared/state_manager.py`**
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 class StateManager:
@@ -513,7 +529,7 @@ class StateManager:
             'type': task_type,
             'status': 'pending',
             'input': input_data,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'steps': []
         }
         self.container.create_item(task)
@@ -525,7 +541,7 @@ class StateManager:
         
         task['steps'].append({
             'name': step_name,
-            'completed_at': datetime.utcnow().isoformat(),
+            'completed_at': datetime.now(timezone.utc).isoformat(),
             'result': result
         })
         
@@ -537,7 +553,7 @@ class StateManager:
         task = self.container.read_item(task_id, partition_key=task_id)
         task['status'] = 'completed'
         task['result'] = final_result
-        task['completed_at'] = datetime.utcnow().isoformat()
+        task['completed_at'] = datetime.now(timezone.utc).isoformat()
         self.container.replace_item(task_id, task)
         return task
     
@@ -546,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Dịch vụ điều phối
+### 4. Dịch vụ Orchestrator
 
 **Tệp: `src/orchestrator/app.py`**
 
@@ -561,7 +577,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Kết nối Service Bus
+# Service Bus connection
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -572,15 +588,15 @@ def health():
 @app.route('/create-content', methods=['POST'])
 def create_content():
     """
-    Sequential workflow: Research → Write → Edit → Publish
+    Sequential workflow: Research → Write → Edit (returns a draft; no publishing)
     """
-    data = request.json
+    data = request.get_json(silent=True) or {}
     topic = data.get('topic')
     
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Tạo tác vụ trong kho trạng thái
+    # Create task in state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -588,13 +604,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # Gửi tin nhắn tới tác nhân nghiên cứu (bước đầu tiên)
+    # Send message to research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Gửi kết quả tới đâu
+            'next_queue': 'writer-tasks'  # Where to send results
         }),
         content_type='application/json'
     )
@@ -606,7 +622,7 @@ def create_content():
         'task_id': task_id,
         'status': 'started',
         'workflow': 'sequential',
-        'steps': ['research', 'write', 'edit', 'publish'],
+        'steps': ['research', 'write', 'edit'],
         'message': 'Content creation pipeline initiated'
     }), 202
 
@@ -635,7 +651,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# Khởi tạo các client
+# Initialize clients
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -643,7 +659,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -655,9 +671,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Gọi các mô hình Microsoft Foundry cho nghiên cứu
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -667,14 +683,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # Cập nhật trạng thái
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # Gửi tới tác nhân tiếp theo (người viết)
+    # Send to next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -731,7 +747,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -744,9 +760,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Gọi Microsoft Foundry Models để viết bài
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -756,14 +772,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # Cập nhật trạng thái
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # Gửi cho biên tập viên
+    # Send to editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -801,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Tác nhân Chỉnh sửa
+### 7. Tác nhân Biên tập
 
 **Tệp: `src/agents/editor/app.py`**
 
@@ -819,7 +835,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -831,9 +847,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Gọi Microsoft Foundry Models để chỉnh sửa
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -843,7 +859,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Đánh dấu nhiệm vụ là hoàn thành
+    # Mark task as complete
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -877,26 +893,27 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Triển khai và Kiểm tra
+### 8. Triển khai và Kiểm thử
+
+Các lệnh này áp dụng **chỉ sau khi bạn đã triển khai các tệp dự án còn thiếu**. Khởi tạo tác nhân Foundry tương tác là quy trình riêng; nó không tạo mẫu thiết kế Service Bus này.
 
 ```bash
-# Tùy chọn A: Triển khai theo mẫu
-azd init
+# In your completed custom project
 azd up
 
-# Tùy chọn B: Triển khai bằng manifest agent (yêu cầu phần mở rộng)
+# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> Xem [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) cho tất cả các cờ và tuỳ chọn `azd ai`.
+> Xem [Lệnh AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) cho tất cả cờ và tùy chọn `azd ai`.
 
 ```bash
-# Lấy URL của orchestrator
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# Tạo nội dung
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
@@ -908,12 +925,12 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "status": "started",
   "workflow": "sequential",
-  "steps": ["research", "write", "edit", "publish"],
+  "steps": ["research", "write", "edit"],
   "message": "Content creation pipeline initiated"
 }
 ```
 
-**Kiểm tra tiến trình nhiệm vụ:**
+**Kiểm tra tiến trình tác vụ:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -947,13 +964,13 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Bài học 2: Mẫu điều phối song song
+## Bài học 2: Mẫu Điều phối Song song
 
-### Triển khai: Bộ tổng hợp nghiên cứu đa nguồn
+### Triển khai: Bộ tổng hợp Nghiên cứu đa nguồn
 
-Hãy xây dựng một hệ thống song song thu thập thông tin từ nhiều nguồn cùng lúc.
+Hãy xây dựng hệ thống song song thu thập thông tin từ nhiều nguồn cùng lúc.
 
-### Orchestrator song song
+### Orchestrator Song song
 
 **Tệp: `src/orchestrator/parallel_workflow.py`**
 
@@ -990,7 +1007,7 @@ def research_parallel():
         }
     )
     
-    # Phân tán: Gửi đến tất cả các tác nhân cùng lúc
+    # Fan-out: publish sequentially; workers may process concurrently.
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1025,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Logic tổng hợp
+### Logic Tổng hợp
 
 **Tệp: `src/agents/aggregator/app.py`**
 
@@ -1041,9 +1058,10 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# Theo dõi kết quả cho mỗi tác vụ
-task_results = defaultdict(list)
-expected_agents = 4  # web, học thuật, tin tức, mạng xã hội
+# Single-process demo only: not durable or shared across replicas.
+# Production: use durable unique (task_id, agent_type) result records.
+task_results = defaultdict(dict)
+expected_agents = 4  # web, academic, news, social
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1051,29 +1069,29 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # Lưu kết quả
-    task_results[task_id].append({
+    # Store result
+    task_results[task_id][agent_type] = {
         'agent': agent_type,
         'data': result
-    })
+    }
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Kiểm tra xem tất cả các tác nhân đã hoàn thành chưa (fan-in)
+    # Check if all agents completed (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # Kết hợp kết quả
+        # Combine results
         aggregated = {
             'query': message_data['query'],
-            'sources': task_results[task_id],
-            'summary': generate_summary(task_results[task_id])
+            'sources': list(task_results[task_id].values()),
+            'summary': generate_summary(list(task_results[task_id].values()))
         }
         
-        # Đánh dấu hoàn thành
+        # Mark complete
         state_manager.complete_task(task_id, aggregated)
         
-        # Dọn dẹp
+        # Clean up
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1106,128 +1124,93 @@ if __name__ == '__main__':
 ```
 
 **Lợi ích của Mẫu Song song:**
-- ⚡ **Nhanh hơn 4x** (các tác nhân chạy đồng thời)
-- 🔄 **Chịu lỗi** (chấp nhận kết quả một phần)
-- 📈 **Có thể mở rộng** (dễ dàng thêm nhiều tác nhân)
+- ⚡ **Có thể giảm độ trễ** (bị giới hạn bởi tác nhân chậm nhất cộng chi phí điều phối)
+- 🔄 **Hỗ trợ kết quả một phần** với deadline rõ ràng và chính sách lỗi (chưa hiện thực ở bộ tổng hợp cơ bản)
+- 📈 **Dễ mở rộng** (dễ dàng thêm tác nhân)
 
 ---
 
-## Bài tập thực hành
+## Bài tập Thực hành
 
-### Bài tập 1: Thêm xử lý thời gian chờ ⭐⭐ (Trung bình)
+### Bài tập 1: Thêm Xử lý Hết thời gian ⭐⭐ (Trung bình)
 
-**Mục tiêu**: Triển khai logic thời gian chờ để bộ tổng hợp không chờ vô thời hạn cho các tác nhân chậm.
+**Mục tiêu**: Triển khai logic hết thời gian để bộ tổng hợp không chờ mãi các tác nhân chậm.
+
+**Điểm bắt đầu:** Chạy mô phỏng deadline địa phương này trước khi tích hợp vào worker hàng đợi. Kiểm tra hết thời gian chỉ khi có tin nhắn mới không bao giờ khởi tạo nếu tác nhân thiếu không gửi gì.
 
 **Các bước**:
 
-1. **Thêm theo dõi thời gian chờ vào bộ tổng hợp:**
+1. **Thêm theo dõi hết thời gian vào bộ tổng hợp:**
 
 ```python
-from datetime import datetime, timedelta
+import asyncio
 
-task_timeouts = {}  # task_id -> expiration_time
+async def simulated_agent(name, delay):
+    await asyncio.sleep(delay)
+    return {'agent': name, 'result': 'done'}
 
-def process_result(message_data):
-    task_id = message_data['task_id']
-    
-    # Đặt thời gian chờ cho kết quả đầu tiên
-    if task_id not in task_timeouts:
-        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
-    
-    task_results[task_id].append({
-        'agent': message_data['agent_type'],
-        'data': message_data['result']
-    })
-    
-    # Kiểm tra xem đã hoàn thành hay đã hết thời gian chờ
-    if len(task_results[task_id]) == expected_agents or \
-       datetime.utcnow() > task_timeouts[task_id]:
-        
-        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
-        
-        aggregated = {
-            'query': message_data['query'],
-            'sources': task_results[task_id],
-            'completed_agents': len(task_results[task_id]),
-            'timed_out': len(task_results[task_id]) < expected_agents
-        }
-        
-        state_manager.complete_task(task_id, aggregated)
-        
-        # Dọn dẹp
-        del task_results[task_id]
-        del task_timeouts[task_id]
+async def main():
+    tasks = [asyncio.create_task(simulated_agent(name, delay))
+             for name, delay in [('web', 0.1), ('academic', 0.2),
+                                 ('news', 0.3), ('social', 3)]]
+    done, pending = await asyncio.wait(tasks, timeout=1)
+    results = [task.result() for task in done]
+    for task in pending:
+        task.cancel()
+    await asyncio.gather(*pending, return_exceptions=True)
+    print({'completed_agents': len(results), 'timed_out': bool(pending)})
+    assert len(results) == 3 and pending
+
+asyncio.run(main())
 ```
 
-2. **Kiểm tra với độ trễ giả lập:**
+2. **Kết quả mong đợi:**
 
-```python
-# Trong một tác nhân, thêm độ trễ để mô phỏng xử lý chậm
-import time
-time.sleep(35)  # Vượt quá thời gian chờ 30 giây
+```text
+{'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Triển khai và xác minh:**
+3. **Tích hợp hệ thống hàng đợi (tác vụ thiết kế):** Lưu deadline dispatch và danh sách tác nhân kỳ vọng khi tạo tác vụ, chạy quét deadline định kỳ độc lập với kết quả đến, hoàn tất kết quả một cách nguyên tử, và bỏ qua tin nhắn đến muộn/trùng cho tác vụ đã hoàn tất. Timeout địa phương không huỷ worker từ xa.
+
+Chỉ cho dự án bạn đã triển khai:
 
 ```bash
 azd deploy aggregator
 
-# Gửi tác vụ
+# Submit task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# Kiểm tra kết quả sau 30 giây
+# Check results after 30 seconds
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Tiêu chí thành công:**
-- ✅ Nhiệm vụ hoàn thành sau 30 giây ngay cả khi các tác nhân chưa hoàn tất
-- ✅ Phản hồi chỉ ra kết quả một phần (`"timed_out": true`)
-- ✅ Trả về các kết quả có sẵn (3 trong số 4 tác nhân)
+- ✅ Kiểm tra địa phương trả về sau deadline một giây ngay cả khi tác nhân chưa hoàn thành
+- ✅ Phản hồi cho biết kết quả một phần (`"timed_out": true`)
+- ✅ Kết quả sẵn có được trả về (3 trong 4 tác nhân)
 
 **Thời gian**: 20-25 phút
 
 ---
 
-### Bài tập 2: Triển khai logic thử lại ⭐⭐⭐ (Nâng cao)
+### Bài tập 2: Triển khai Logic Thử lại ⭐⭐⭐ (Nâng cao)
 
-**Mục tiêu**: Tự động thử lại các nhiệm vụ tác nhân thất bại trước khi bỏ cuộc.
+**Mục tiêu**: Tự động thử lại các tác vụ tác nhân thất bại trước khi từ bỏ.
 
 **Các bước**:
 
-1. **Thêm theo dõi thử lại vào orchestrator:**
+1. **Dùng số lần giao hàng Service Bus thay vì bộ đếm thử lại tùy chỉnh:**
 
 ```python
-from dataclasses import dataclass
-from typing import Dict
-
-@dataclass
-class RetryConfig:
-    max_retries: int = 3
-    backoff_seconds: int = 5
-
-retry_counts: Dict[str, int] = {}  # message_id -> số lần thử lại
-
-def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
-    """Send message with retry metadata"""
-    message_id = message_data.get('message_id', str(uuid.uuid4()))
-    message_data['message_id'] = message_id
-    message_data['retry_count'] = retry_counts.get(message_id, 0)
-    message_data['max_retries'] = retry_config.max_retries
-    
-    sender = servicebus_client.get_queue_sender(queue_name)
-    message = ServiceBusMessage(
-        body=json.dumps(message_data),
-        content_type='application/json',
-        message_id=message_id
-    )
-    
-    with sender:
-        sender.send_messages(message)
+import json
+import time
+# Integration fragment: use a live peek-lock ServiceBusReceiver.
+# Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Thêm trình xử lý thử lại vào các tác nhân:**
+2. **Thêm bộ xử lý thử lại vào các tác nhân:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,31 +1218,21 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # Xử lý tin nhắn
+        # Process the message
         process_func(message_data)
         
-        # Thành công - hoàn tất
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
-        message_id = message.message_id
-        retry_count = message_data.get('retry_count', 0)
-        max_retries = message_data.get('max_retries', 3)
-        
-        if retry_count < max_retries:
-            # Thử lại: hủy và đưa lại vào hàng đợi với số lần thử tăng lên
-            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
-            
-            message_data['retry_count'] = retry_count + 1
-            
-            # Gửi trả về cùng hàng đợi với độ trễ
-            time.sleep(5 * (retry_count + 1))  # Tăng thời gian chờ theo hàm mũ
-            send_with_retry(queue_name, message_data, RetryConfig())
-            
-            receiver.complete_message(message)  # Xóa bản gốc
+        if message.delivery_count < 4:
+            # Bounded exponential delay: 5s, 10s, 20s.
+            # Renew the lock if processing + waiting can exceed its duration.
+            time.sleep(5 * 2 ** (message.delivery_count - 1))
+            receiver.abandon_message(message)
         else:
-            # Vượt quá số lần thử tối đa - chuyển đến hàng đợi thư chết
-            print(f"❌ Max retries exceeded for message {message_id}")
+            # Max retries exceeded - move to dead letter queue
+            print(f"❌ Max attempts exceeded for message {message.message_id}")
             receiver.dead_letter_message(
                 message,
                 reason="MaxRetriesExceeded",
@@ -1267,13 +1240,13 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Giám sát hàng đợi dead letter:**
+3. **Giám sát hàng đợi thư chết:**
 
 ```python
 def monitor_dead_letters():
     """Check dead letter queue for failed messages"""
     receiver = servicebus_client.get_queue_receiver(
-        'research-queue',
+        'research-tasks',
         sub_queue='deadletter'
     )
     
@@ -1286,18 +1259,18 @@ def monitor_dead_letters():
 ```
 
 **✅ Tiêu chí thành công:**
-- ✅ Các nhiệm vụ thất bại được thử lại tự động (tối đa 3 lần)
-- ✅ Backoff theo cấp số nhân giữa các lần thử (5s, 10s, 15s)
-- ✅ Sau tối đa lần thử, tin nhắn chuyển sang hàng đợi dead letter
-- ✅ Hàng đợi dead letter có thể được giám sát và phát lại
+- ✅ Tác vụ thất bại tự động thử lại (tối đa 3 lần)
+- ✅ Nghỉ giữa các lần thử lại theo hàm mũ (5s, 10s, 20s), gia hạn khóa tin nhắn khi cần
+- ✅ Sau tối đa thử lại, tin nhắn chuyển vào hàng đợi thư chết
+- ✅ Tin nhắn thư chết có thể được kiểm tra; phát lại cần quy trình phục hồi idempotent riêng biệt
 
 **Thời gian**: 30-40 phút
 
 ---
 
-### Bài tập 3: Triển khai Circuit Breaker ⭐⭐⭐ (Nâng cao)
+### Bài tập 3: Triển khai Bộ ngắt mạch (Circuit Breaker) ⭐⭐⭐ (Nâng cao)
 
-**Mục tiêu**: Ngăn chặn sự cố lan truyền bằng cách dừng các yêu cầu tới các tác nhân đang gặp sự cố.
+**Mục tiêu**: Ngăn chặn lỗi lan truyền bằng cách dừng yêu cầu đến các tác nhân đang lỗi.
 
 **Các bước**:
 
@@ -1305,12 +1278,12 @@ def monitor_dead_letters():
 
 ```python
 from enum import Enum
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # Hoạt động bình thường
-    OPEN = "open"          # Gặp lỗi, từ chối các yêu cầu
-    HALF_OPEN = "half_open"  # Đang kiểm tra xem đã phục hồi chưa
+    CLOSED = "closed"      # Normal operation
+    OPEN = "open"          # Failing, reject requests
+    HALF_OPEN = "half_open"  # Testing if recovered
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1323,8 +1296,8 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Kiểm tra xem thời gian chờ đã hết hay chưa
-            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+            # Check if timeout expired
+            if datetime.now(timezone.utc) - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
             else:
@@ -1333,7 +1306,8 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # Thành công
+            # Success
+            self.failure_count = 0 # Count consecutive failures only
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1343,19 +1317,19 @@ class CircuitBreaker:
             
         except Exception as e:
             self.failure_count += 1
-            self.last_failure_time = datetime.utcnow()
+            self.last_failure_time = datetime.now(timezone.utc)
             
             if self.failure_count >= self.failure_threshold:
                 self.state = CircuitState.OPEN
                 print(f"🔴 Circuit breaker: OPEN (too many failures)")
             
-            raise e
+            raise
 ```
 
-2. **Áp dụng cho các cuộc gọi tới tác nhân:**
+2. **Áp dụng cho các cuộc gọi tác nhân:**
 
 ```python
-# Trong bộ điều phối
+# In orchestrator
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,32 +1345,33 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Tiếp tục với các tác nhân khác
+        # Continue with other agents
 ```
 
-3. **Kiểm tra circuit breaker:**
+Mạch này bảo vệ **hoạt động gửi**, không phải hoàn thành bởi công nhân từ xa: việc đưa một tin nhắn thành công vào hàng đợi không nói lên điều gì về việc liệu một tác nhân có còn hoạt động hay không. `send_message` là hàm gửi của ứng dụng bạn. Đối với các mạch thực thi, cung cấp các lỗi/timeout tác vụ quan sát được vào một điều phối viên bền vững. Lớp trong bộ nhớ này là một minh hoạ đơn luồng, không phải là một mạch phá vỡ phân tán.
 
-```bash
-# Mô phỏng các lỗi lặp đi lặp lại (dừng một tác nhân)
-az containerapp stop --name web-research-agent --resource-group rg-agents
+3. **Kiểm tra mạch ngắt cục bộ:**
 
-# Gửi nhiều yêu cầu
-for i in {1..10}; do
-  curl -X POST $ORCHESTRATOR_URL/research-parallel \
-    -H "Content-Type: application/json" \
-    -d '{"query": "test query '$i'"}'
-  sleep 2
-done
-
-# Kiểm tra nhật ký - nên thấy bộ ngắt mạch chuyển sang trạng thái mở sau 5 lần thất bại
-# Sử dụng Azure CLI để xem nhật ký Container App:
-az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```python
+# Run after the class definition; no Azure changes required.
+circuit = CircuitBreaker(failure_threshold=5, timeout_seconds=0)
+def fail():
+    raise RuntimeError("simulated failure")
+for _ in range(5):
+    try:
+        circuit.call(fail)
+    except RuntimeError:
+        pass
+assert circuit.state == CircuitState.OPEN
+assert circuit.call(lambda: "recovered") == "recovered"
+assert circuit.state == CircuitState.CLOSED
+print("Circuit breaker recovery verified")
 ```
 
 **✅ Tiêu chí thành công:**
 - ✅ Sau 5 lần thất bại, mạch mở (từ chối yêu cầu)
-- ✅ Sau 60 giây, mạch chuyển nửa mở (thử nghiệm phục hồi)
-- ✅ Các tác nhân khác tiếp tục hoạt động bình thường
+- ✅ Sau 60 giây, mạch chuyển sang trạng thái bán mở (kiểm tra phục hồi)
+- ✅ Các tác nhân khác tiếp tục làm việc bình thường
 - ✅ Mạch tự đóng khi tác nhân phục hồi
 
 **Thời gian**: 40-50 phút
@@ -1405,55 +1380,54 @@ az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 5
 
 ## Giám sát và Gỡ lỗi
 
-### Theo dõi phân tán với Application Insights
+### Phân tích phân tán với Application Insights
 
 **Tệp: `src/shared/tracing.py`**
 
 ```python
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.samplers import AlwaysOnSampler
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
-# Cấu hình theo dõi
-config_integration.trace_integrations(['requests', 'logging'])
-
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# Tạo bộ theo dõi
-tracer = Tracer(
-    exporter=AzureExporter(connection_string=connection_string),
-    sampler=AlwaysOnSampler()
-)
+# Configure once per process. Message send/receive trace-context propagation
+# and agent attributes on exceptions need explicit instrumentation.
+if connection_string:
+    configure_azure_monitor(connection_string=connection_string, logger_name=__name__)
+tracer = trace.get_tracer(__name__)
 
-# Cấu hình ghi nhật ký
+# Configure logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
 
-def trace_agent_call(agent_name, task_id, operation):
+def trace_agent_call(agent_name, task_id, operation_name, operation):
     """Trace agent operations"""
-    with tracer.span(name=f'{agent_name}.{operation}') as span:
-        span.add_attribute('agent', agent_name)
-        span.add_attribute('task_id', task_id)
-        span.add_attribute('operation', operation)
+    with tracer.start_as_current_span(f'agent.{agent_name}.{operation_name}', kind=SpanKind.CLIENT) as span:
+        span.set_attribute('agent', agent_name)
+        span.set_attribute('task_id', task_id)
+        span.set_attribute('operation', operation_name)
         
         try:
             result = operation()
-            span.add_attribute('status', 'success')
+            span.set_attribute('status', 'success')
+            logger.info('Agent operation completed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             return result
         except Exception as e:
-            span.add_attribute('status', 'error')
-            span.add_attribute('error', str(e))
+            span.set_attribute('status', 'error')
+            logger.exception('Agent operation failed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             raise
 ```
 
 ### Truy vấn Application Insights
 
-**Theo dõi các luồng công việc đa tác nhân:**
+**Theo dõi luồng công việc đa tác nhân:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1463,7 +1437,7 @@ traces
 | order by timestamp asc
 ```
 
-**So sánh hiệu năng tác nhân:**
+**So sánh hiệu suất tác nhân:**
 
 ```kusto
 // Compare agent execution times
@@ -1492,22 +1466,24 @@ exceptions
 
 ---
 
-## Phân tích chi phí
+## Phân tích Chi phí
 
-### Chi phí hệ thống đa tác nhân (ước tính hàng tháng)
+### Chi phí Hệ thống đa tác nhân (Ước tính hàng tháng)
+
+Các con số kế hoạch minh hoạ, không phải báo giá: tổng cộng dưới đây là **$240-565/tháng**. Xác minh các mức giá vùng hiện tại, giờ hoạt động/nhàn rỗi của bản sao, tỷ lệ token nhập/xuất, lưu trữ và dữ liệu giám sát. Serverless không có mức tối thiểu băng thông được cấp nhưng vẫn tính phí cho yêu cầu và lưu trữ.
 
 | Thành phần | Cấu hình | Chi phí |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **Điều phối viên** | 1 Container App (1 vCPU, 2GB) | $30-50 |
 | **4 Tác nhân** | 4 Container Apps (0.5 vCPU, 1GB mỗi cái) | $60-120 |
-| **Service Bus** | Standard tier, 10M messages | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
-| **Tổng cộng** | | **$240-565/month** |
+| **Service Bus** | Mức tiêu chuẩn, 10M tin nhắn | $10-20 |
+| **Cosmos DB** | Serverless, 5GB lưu trữ, 1M RUs | $25-50 |
+| **Blob Storage** | 10GB lưu trữ, 100K thao tác | $5-10 |
+| **Application Insights** | 5GB nhập liệu | $10-15 |
+| **Microsoft Foundry Models** | gpt-4.1, 10M token | $100-300 |
+| **Tổng cộng** | | **$240-565/tháng** |
 
-### Chiến lược tối ưu hóa chi phí
+### Chiến lược Tối ưu chi phí
 
 1. **Sử dụng serverless khi có thể:**
    ```bicep
@@ -1518,67 +1494,64 @@ exceptions
    }
    ```
 
-2. **Tự động scale về zero khi các tác nhân nhàn rỗi:**
+2. **Thu nhỏ tác nhân về zero khi nhàn rỗi:**
    ```bicep
    scale: {
-     minReplicas: 0  // Scale to zero when no messages
+     minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
      maxReplicas: 10
    }
    ```
 
-3. **Sử dụng batch cho Service Bus:**
+3. **Sử dụng gom lô cho Service Bus:**
    ```python
-   # Gửi tin nhắn theo lô (rẻ hơn)
+   # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Cache các kết quả sử dụng thường xuyên:**
+4. **Bộ nhớ đệm kết quả sử dụng thường xuyên:**
    ```python
-   # Sử dụng Azure Cache cho Redis
+   # Use Azure Cache for Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
 
 ---
 
-## Thực tiễn tốt nhất
+## Thực hành Tốt nhất
 
-### ✅ NÊN LÀM:
+### ✅ NÊN làm:
 
-1. **Sử dụng các phép toán idempotent**
+1. **Sử dụng các hoạt động lặp lại được (idempotent)**
    ```python
-   # Tác nhân có thể xử lý an toàn cùng một tin nhắn nhiều lần
+   # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
-       if state_manager.task_exists(task_id):
-           print(f"Task {task_id} already processed, skipping")
-           return
-       # Đang xử lý tác vụ...
+       raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Triển khai logging toàn diện**
+2. **Thực hiện ghi log toàn diện**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Sử dụng correlation IDs**
+3. **Sử dụng ID tương quan**
    ```python
-   # Truyền task_id qua toàn bộ luồng công việc
+   # Pass task_id through entire workflow
    message_data = {
-       'task_id': task_id,  # ID tương quan
+       'task_id': task_id,  # Correlation ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **Đặt TTL cho tin nhắn (time-to-live)**
+4. **Đặt thời gian tồn tại tin nhắn (TTL)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Giám sát hàng đợi dead letter**
+5. **Giám sát hàng đợi thư chết**
    ```python
-   # Theo dõi định kỳ các tin nhắn thất bại
+   # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
@@ -1586,67 +1559,70 @@ exceptions
 
 1. **Không tạo phụ thuộc vòng**
    ```python
-   # ❌ KHÔNG TỐT: Agent A → Agent B → Agent A (vòng lặp vô hạn)
-   # ✅ TỐT: Xác định rõ ràng một đồ thị có hướng vô chu trình (DAG)
+   # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
+   # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Không chặn các luồng của tác nhân**
+2. **Không khóa luồng tác nhân**
    ```python
-   # ❌ KHÔNG TỐT: Chờ đồng bộ
+   # ❌ BAD: Synchronous wait
    while not task_complete:
        time.sleep(1)
    
-   # ✅ TỐT: Sử dụng callback của hàng đợi tin nhắn
+   # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **Không bỏ qua các lỗi một phần**
+3. **Không bỏ qua lỗi một phần**
    ```python
-   # ❌ XẤU: Dừng toàn bộ quy trình nếu một tác nhân bị lỗi
-   # ✅ TỐT: Trả về kết quả một phần kèm các chỉ báo lỗi
+   # ❌ BAD: Fail entire workflow if one agent fails
+   # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Không sử dụng thử lại vô hạn**
+4. **Không dùng số lần thử vô hạn**
    ```python
-   # ❌ KHÔNG TỐT: thử lại mãi mãi
-   # ✅ TỐT: max_retries = 3, sau đó chuyển vào dead letter
+   # ❌ BAD: retry forever
+   # ✅ GOOD: max_retries = 3, then dead letter
    ```
 
 ---
 
-## Hướng dẫn khắc phục sự cố
+## Hướng dẫn Khắc phục sự cố
 
-### Vấn đề: Tin nhắn bị kẹt trong hàng đợi
+### Vấn đề: Tin nhắn kẹt trong hàng đợi
 
 **Triệu chứng:**
 - Tin nhắn tích tụ trong hàng đợi
-- Các agent không xử lý
-- Trạng thái tác vụ bị kẹt ở "pending"
+- Tác nhân không xử lý
+- Trạng thái tác vụ bị kẹt ở "đang chờ"
 
 **Chẩn đoán:**
 ```bash
-# Kiểm tra độ sâu hàng đợi
+# Check queue depth
 az servicebus queue show \
+  --resource-group "$RG_NAME" \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Kiểm tra nhật ký của agent bằng Azure CLI
+# Check agent logs using Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Giải pháp:**
 
-1. **Tăng số bản sao của agent:**
+1. **Tăng số bản sao tác nhân:**
    ```bash
    az containerapp update \
+     --resource-group "$RG_NAME" \
      --name research-agent \
      --min-replicas 3 \
      --max-replicas 10
    ```
 
-2. **Kiểm tra dead letter queue:**
+2. **Kiểm tra hàng đợi thư chết:**
    ```bash
    az servicebus queue show \
+     --resource-group "$RG_NAME" \
      --namespace-name mybus \
      --name research-tasks \
      --query "countDetails.deadLetterMessageCount"
@@ -1654,36 +1630,36 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Vấn đề: Tác vụ hết thời gian/không bao giờ hoàn thành
+### Vấn đề: Tác vụ timeout/không hoàn thành
 
 **Triệu chứng:**
-- Trạng thái tác vụ vẫn là "in_progress"
-- Một số agent hoàn thành, số khác thì không
+- Trạng thái tác vụ giữ "đang tiến hành"
+- Một số tác nhân hoàn thành, số khác không
 - Không có thông báo lỗi
 
 **Chẩn đoán:**
 ```bash
-# Kiểm tra trạng thái tác vụ
+# Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# Kiểm tra Application Insights
-# Chạy truy vấn: traces | where customDimensions.task_id == "..."
+# Check Application Insights
+# Run query: traces | where customDimensions.task_id == "..."
 ```
 
 **Giải pháp:**
 
-1. **Thực hiện timeout trong bộ tổng hợp (Bài tập 1)**
+1. **Áp dụng timeout trong bộ tổng hợp (Bài tập 1)**
 
-2. **Kiểm tra lỗi agent bằng Azure Monitor:**
+2. **Kiểm tra lỗi tác nhân bằng Azure Monitor:**
    ```bash
-   # Xem nhật ký bằng azd monitor
+   # View logs via azd monitor
    azd monitor --logs
    
-   # Hoặc sử dụng Azure CLI để kiểm tra nhật ký của ứng dụng container cụ thể
+   # Or use Azure CLI to check specific container app logs
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Xác minh tất cả các agent đang chạy:**
+3. **Xác minh tất cả tác nhân đang chạy:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1694,48 +1670,48 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## Tìm hiểu thêm
 
-### Tài liệu chính thức
+### Tài liệu Chính thức
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [Mẫu Điều phối AI](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### Bước tiếp theo trong khóa học này
-- ← Trước: [Capacity Planning](capacity-planning.md)
-- → Tiếp theo: [Lựa chọn SKU](sku-selection.md)
-- 🏠 [Trang chính khoá học](../../README.md)
+### Bước tiếp theo trong khoá học này
+- ← Trước: [Lập kế hoạch Công suất](capacity-planning.md)
+- → Tiếp: [Chọn SKU](sku-selection.md)
+- 🏠 [Trang chủ khoá học](../../README.md)
 
-### Ví dụ liên quan
-- [Microservices Example](../../../../examples/microservices) - Mô hình giao tiếp giữa các dịch vụ
-- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - Tích hợp AI
+### Ví dụ Liên quan
+- [Ví dụ Microservices](../../../../examples/microservices) - Mô hình giao tiếp dịch vụ
+- [Ví dụ Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Tích hợp AI
 
 ---
 
 ## Tóm tắt
 
 **Bạn đã học:**
-- ✅ Năm mô hình phối hợp (tuần tự, song song, phân cấp, hướng sự kiện, đồng thuận)
-- ✅ Kiến trúc đa-agent trên Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Quản lý trạng thái giữa các agent phân tán
-- ✅ Xử lý timeout, thử lại và circuit breakers
+- ✅ Năm mẫu điều phối (tuần tự, song song, phân cấp, sự kiện, đồng thuận)
+- ✅ Kiến trúc đa tác nhân trên Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Quản lý trạng thái trên các tác nhân phân tán
+- ✅ Xử lý timeout, thử lại và mạch ngắt
 - ✅ Giám sát và gỡ lỗi hệ thống phân tán
 - ✅ Chiến lược tối ưu chi phí
 
 **Những điểm chính:**
-1. **Chọn mô hình phù hợp** - Tuần tự cho luồng công việc có thứ tự, song song cho tốc độ, hướng sự kiện cho tính linh hoạt
-2. **Quản lý trạng thái cẩn thận** - Sử dụng Cosmos DB hoặc tương tự cho trạng thái chia sẻ
-3. **Xử lý lỗi một cách hợp lý** - Timeouts, retries, circuit breakers, dead letter queues
-4. **Giám sát mọi thứ** - Truy vết phân tán là cần thiết để gỡ lỗi
-5. **Tối ưu chi phí** - Thu nhỏ xuống 0, sử dụng serverless, triển khai caching
+1. **Chọn mẫu phù hợp** - Tuần tự cho luồng công việc có thứ tự, song song để nhanh, sự kiện để linh hoạt
+2. **Quản lý trạng thái cẩn thận** - Dùng Cosmos DB hoặc tương tự cho trạng thái chung
+3. **Xử lý lỗi khéo léo** - Timeout, retry, mạch ngắt, hàng đợi thư chết
+4. **Giám sát mọi thứ** - Phân tích phân tán thiết yếu cho gỡ lỗi
+5. **Tối ưu chi phí** - Thu nhỏ về zero, dùng serverless, thực hiện bộ nhớ đệm
 
 **Bước tiếp theo:**
 1. Hoàn thành các bài tập thực hành
-2. Xây dựng một hệ thống đa-agent cho trường hợp sử dụng của bạn
-3. Nghiên cứu [Lựa chọn SKU](sku-selection.md) để tối ưu hiệu năng và chi phí
+2. Xây dựng hệ thống đa tác nhân cho trường hợp của bạn
+3. Nghiên cứu [Chọn SKU](sku-selection.md) để tối ưu hiệu suất và chi phí
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Tuyên bố miễn trừ trách nhiệm**:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực để đạt độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc sai sót. Văn bản gốc bằng ngôn ngữ bản địa của tài liệu nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

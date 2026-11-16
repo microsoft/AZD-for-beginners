@@ -1,60 +1,58 @@
-# 6. Odstranění infrastruktury
+# 6. Demontáž infrastruktury
 
 !!! tip "NA KONCI TOHOTO MODULU BUDETE SCHOPNI"
 
-    - [ ] Porozumět důležitosti úklidu prostředků a řízení nákladů
-    - [ ] Použít `azd down` k bezpečnému odstranění infrastruktury
-    - [ ] Obnovit dočasně smazané služby Azure AI, pokud je to potřeba
-    - [ ] **Cvičení 6:** Vyčistit prostředky Azure a ověřit jejich odstranění
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## Bonusová cvičení
+## Bonusové cvičení
 
-Než projekt ukončíme, věnujte pár minut otevřenému průzkumu.
+Než projekt rozebereš, věnuj pár minut otevřenému průzkumu.
 
-!!! info "Vyzkoušejte tyto průzkumné podněty"
+!!! info "Vyzkoušejte tyto podněty pro průzkum"
 
-    **Experimentujte s GitHub Copilotem:**
+    **Experiment with GitHub Copilot:**
     
-    1. Zeptejte se: `Jaké další šablony AZD bych mohl vyzkoušet pro scénáře s více agenty?`
-    2. Zeptejte se: `Jak mohu přizpůsobit instrukce agenta pro použití ve zdravotnictví?`
-    3. Zeptejte se: `Které proměnné prostředí ovlivňují optimalizaci nákladů?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Prozkoumejte Azure Portal:**
+    **Explore the Azure Portal:**
     
-    1. Zkontrolujte metriky Application Insights pro vaše nasazení
-    2. Zkontrolujte analýzu nákladů pro nasazené prostředky
-    3. Ještě jednou prozkoumejte playground pro agenty v portálu Microsoft Foundry
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Zrušení infrastruktury
+## Ukončení infrastruktury
 
-1. Zrušení infrastruktury je tak jednoduché jako:
+1. Demontáž infrastruktury je tak jednoduchá jako:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. Přepínač `--purge` zajistí také vyčištění dočasně smazaných prostředků Cognitive Service, čímž uvolní kvóty držené těmito prostředky. Po dokončení uvidíte něco takového:
+1. Potvrďte vybrané prostředí a zkontrolujte zdroje, které mají být smazány. Tím odstraníte Azure zdroje a může dojít ke ztrátě dat. V tomto učebním pracovním postupu ponechte výzvu k potvrzení. Po dokončení uvidíte podobný výstup:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Volitelné) Pokud nyní znovu spustíte `azd up`, všimnete si, že se nasadí model gpt-4.1, protože proměnná prostředí byla změněna (a uložena) v místní složce `.azure`. 
+1. Ověřte smazání v portálu a zkontrolujte zdroje mimo rozsah nasazení. Reportování nákladů a aktualizace kvót mohou mít zpoždění. Lokální `.azure` konfigurace zůstává, pokud ji explicitně neodstraníte.
 
-      Here is the model deployments **before**:
+1. `azd down --purge` dále požaduje trvalé smazání podporovaných zdrojů, které jsou označeny jako měkké smazané. Použijte jej pouze, pokud není potřeba obnovit data a rozumíte zásadám uchovávání/ochrany před vymazáním. Nezaručuje okamžité uvolnění kvóty.
 
-      ![Původní](../../../../../translated_images/cs/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      And here it is **after**:
-      ![Nové](../../../../../translated_images/cs/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Nepřenasazujte jen kvůli ověření vyčištění. Pozdější záměrná `azd up` může znovu vytvořit zdroje pomocí zbývajících lokálních vstupů a opět vyvolá poplatky. Aktualizace modelu obvykle využívají podporované změny zajištění, ne demontáž.
 
 ---
 

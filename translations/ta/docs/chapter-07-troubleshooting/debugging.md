@@ -1,77 +1,72 @@
-# AZD ஒதுக்கீடுகளுக்கான பிழைத் தொலைபார்க்கும் வழிகாட்டி
+# AZD பயன்பாடுகளுக்கான பிழைதிருத்தும் வழிகாட்டி
 
-**அத்தியாயத் வழிசெலுத்தல்:**
-- **📚 பாடநெறி முகப்பு**: [ஆரம்பிகளுக்கான AZD](../../README.md)
-- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 7 - பிழைத் தீர்வு மற்றும் பிழை ஆய்வு
-- **⬅️ முந்தையது**: [பொதுவான பிரச்சினைகள்](common-issues.md)
-- **➡️ அடுத்தது**: [AI-சார்ந்த பிழைத் தீர்வு](ai-troubleshooting.md)
-- **🚀 அடுத்த அத்தியாயம்**: [அத்தியாயம் 8: உற்பத்தி மற்றும் நிறுவன வடிவமைப்புகள்](../chapter-08-production/production-ai-practices.md)
+**அத்தியாயச் சருகல்:**
+- **📚 பாடநூல் முகப்பு**: [ஆரம்ப பயனர்களுக்கான AZD](../../README.md)
+- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 7 - பிழைபடையல் மற்றும் பிழைத்திருத்தல்
+- **⬅️ முந்தைய**: [பொதுவான பிரச்சினைகள்](common-issues.md)
+- **➡️ அடுத்தது**: [புலமை இயற்கை தொடர்பான பிழைத்திருத்தல்](ai-troubleshooting.md)
+- **🚀 அடுத்த அத்தியாயம்**: [அத்தியாயம் 8: உற்பத்தி மற்றும் நிறுவன வடிவுகள்](../chapter-08-production/production-ai-practices.md)
 
 ## அறிமுகம்
 
-இந்த விரிவான வழிகாட்டி Azure Developer CLI ஒதுக்கீடுகளோடு தொடர்புடைய சிக்கலான பிரச்சினைகளை கண்டறிந்து தீர்க்க மேம்பட்ட பிழைத் தொலைபார்ப்பு நுணுக்கங்கள், கருவிகள் மற்றும் தொழில்நுட்பங்களை வழங்குகிறது. ஒழுங்கமைக்கப்பட்ட பிழைத் தீர்வு முறைமைகள், பதிவு பகுப்பாய்வு முறைகள், செயல்திறன் சுயவிவரிப்பு, மற்றும் மேம்பட்ட கண்டறிதல் கருவிகளை கற்று ஒதுக்கீடு மற்றும் ரன்டைம் பிரச்சினைகளை திறமையாக தீர்க்க உதவுங்கள்.
+இந்த விரிவான வழிகாட்டி Azure Developer CLI பயன்பாடுக்களில் உள்ள சிக்கலான பிரச்சினைகளை கண்டறிந்து தீர்ப்பதற்கான மேம்பட்ட பிழைத்திருத்து நுட்பங்கள், கருவிகள் மற்றும் முறைகளை வழங்குகிறது. கட்டமைக்கப்பட்ட பிழைத்திருத்து முறைமைகள், பதிவு பகுப்பாய்வு நுட்பங்கள், செயல்திறன் கண்காணித்தல் மற்றும் மேம்பட்ட உளாங்கல் கருவிகளை கற்கவும்.
 
-## கற்பதன் இலக்குகள்
+## கற்கும் இலக்குகள்
 
-By completing this guide, you will:
-- Azure Developer CLI பிரச்சினைகளுக்கான ஒழுங்கமைக்கப்பட்ட பிழைத் தொலைபார்ப்பு முறைமைகளில் நிபுணராக வேண்டும்
-- மேம்பட்ட பதிவு தொடர்பான கட்டமைப்பு மற்றும் பதிவு பகுப்பாய்வு தொழில்நுட்பங்களை புரிந்துகொள்வது
-- செயல்திறன் சுயவிவரிப்பு மற்றும் கண்காணிப்பு முறைமைகளை செயல்படுத்துவது
-- சிக்கலான பிரச்சினை தீர்விற்காக Azure கண்டறிதல் கருவிகள் மற்றும் சேவைகளை பயன்படுத்துவது
-- நெட்வொர்க் பிழைத் தொலைபார்ப்பு மற்றும் பாதுகாப்பு பிரச்சினை தீர்வு தொழில்நுட்பங்களை பயன்படுத்துவது
-- முன்னறிவிப்பு பிரச்சினைகள் கண்டறிதலிற்கான விரிவான கண்காணிப்பு மற்றும் அலெர்ட்டிங் உருவாக்குவது
+இந்த வழிகாட்டியை முடித்தவுடன் நீங்கள்:
+- Azure Developer CLI பிரச்சினைகளுக்கு கட்டமைக்கப்பட்ட பிழைத்திருத்து முறைகளை கற்று கொள்ளுவீர்கள்
+- மேம்பட்ட பதிவு கட்டமைப்பு மற்றும் பதிவு பகுப்பாய்வு நுட்பங்களை புரிந்துகொள்ளுவீர்கள்
+- செயல்திறன் கண்காணித்தல் மற்றும் மேம்பாட்டு திட்டங்களை அமல்படுத்துவீர்கள்
+- சிக்கலான பிரச்சினைகளை தீர்க்க Azure உளாங்கல் கருவிகள் மற்றும் சேவைகளை பயன்படுத்துவீர்கள்
+- நெட்வொர்க் பிழைத்திருத்தல் மற்றும் பாதுகாப்பு சம்பந்தமான நுட்பங்களை பயன்படுத்துவீர்கள்
+- குறிக்கால சிரமங்களை முன்கூட்டியே கண்டறிவதற்கான கண்காணிப்பு மற்றும் முன்கூட்டும் அறிவிப்பு அமைப்புகளை அமைப்பீர்கள்
 
-## கற்றலின் முடிவுகள்
+## கற்கும் முடிவுகள்
 
-Upon completion, you will be able to:
-- TRIAGE முறைமையைப் பயன்படுத்தி சிக்கலான ஒதுக்கீடு பிரச்சினைகளைக் ஒழுங்குபடுத்திக் கையாள்வது
-- விரிவான பதிவு மற்றும் ட்ரேசிங் தகவல்களை கட்டமைத்து பகுப்பாய்வு செய்வது
-- Azure Monitor, Application Insights மற்றும் கண்டறிதல் கருவிகளை பயனுள்ள முறையில் பயன்படுத்துவது
-- நெட்வொர்க் இணைப்பு, அங்கீகாரம் மற்றும் அனுமதி பிரச்சினைகளை தனிப்பட்ட முறையில் பிழைத் தொலைபார்ப்பு செய்வது
-- செயல்திறன் கண்காணிப்பு மற்றும் ஒప్టிமைசேஷன் நுணுக்கங்களை அமல்படுத்துவது
-- முறையாக திரும்ப வாழ்க்கைக்கு வரக்கூடிய பிரச்சினைகளுக்கான தனிப்பயன் பிழைத் ஸ்கிரிப்ட்கள் மற்றும் தானியக்கத்தை உருவாக்குவது
+முடிந்ததும் நீங்கள் முடியும்:
+- சிக்கலான பயன்பாட்டுப் பிரச்சினைகளை கட்டமைக்கப்பட்ட முறையில் TRIAGE முறையை பயன்படுத்தி பிழைத்திருத்து செய்ய
+- முழுமையான பதிவு மற்றும் தடம் தகவல்களை அமைத்து பகுப்பாய்வு செய்ய
+- Azure Monitor, Application Insights மற்றும் உளாங்கல் கருவிகளை சிறப்பாகப் பயன்படுத்த
+- நெட்வொர்க் இணைப்பு, அங்கீகாரம் மற்றும் அனுமதி பிரச்சினைகளை தனியாக பிழைத்திருத்து செய்ய
+- செயல்திறன் கண்காணித்தல் மற்றும் யோசனைகளை அமல்படுத்த
+- மறு நிகழும் பிரச்சினைகளுக்கு தனிப்பயனான பிழைத்திருத்து ஸ்கிரிப்ட்கள் மற்றும் தானியங்கி முறைகள் உருவாக்க
 
-## Debugging Methodology
+## பிழைத்திருத்து முறைமைகள்
 
-### The TRIAGE Approach
-- **T**காலம்: பிரச்சனை எப்போது தொடங்கியது?
-- **R**மீண்டும் உருவாக்கம்: நீங்கள் அதை தொடர்ச்சியாக மீண்டும் உருவாக்க முடிக்கிறீர்களா?
-- **I**ஒதுக்குதல்: எந்த கூறு தோல்வியடைந்துள்ளது?
-- **A**பகுப்பாய்வு: பதிவுகள் எதை கூறுகின்றன?
-- **G**சேர்க்க: தொடர்புடைய அனைத்து தகவல்களையும் சேகரிக்கவும்
-- **E**மேலோக்கி: எப்போது கூடுதல் உதவி கேட்க வேண்டும்
+### TRIAGE அணுகுமுறை
+- **T**ime (நேரம்): பிரச்சினை எப்போது தொடங்கியது?
+- **R**eproduce (மறு நிகழ்த்தல்): இதை தொடர்ச்சியாக உருவாக்க முடியுமா?
+- **I**solate (பிரிவாகேடுத்து): எந்த கூறு தோல்வியடைகிறது?
+- **A**nalyze (பகுப்பாய்வு): பதிவுகள் என்ன கூறுகின்றன?
+- **G**ather (இணைத்தல்): அனைத்து தொடர்புடைய தகவலையும் சேகரிக்கவும்
+- **E**scalate (மேலிடுதல்): எப்போது மேலதிக உதவி தேவை
 
-## Enabling Debug Mode
+## பிழைத்திருத்து நிலையில் செலுத்துதல்
 
-### சூழல் மாறிகள்
+> **பரப்பு:** இவை பயன்படுத்த தகுந்த உளாங்கல் உதாரணங்கள்; வழக்கமாக வழங்கப்படும் ஸ்கிரிப்ட்கள் அல்ல. வளத்தினை பெயர்கள்/IDs மாற்றவும்; ஷெல் தொகுக்கைக்காக பாஷ் பயன்படுத்தவும். `--debug` வெளியீடு மற்றும் சுற்றுச்சூழல் மதிப்புகள் உணர்வு தகவல்களை கொண்டிருக்கலாம்—பகிர்வதற்கு முன் அவற்றை சரிபார்த்து/அதிரவியுங்கள். குறியீடு இயக்கு, மீண்டும் திருப்புக அல்லது கட்டமைப்பை மாற்றக்கூடிய உதாரணங்கள் இயக்குனர் அனுமதியைத் தேவைபடுத்தும்.
+
+### சுற்றுச்சூழல் மாறிலிகள்
 ```bash
-# விரிவான பிழைத்திருத்தத்தை செயல்படுத்தவும்
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Azure CLI பிழைத்திருத்தம்
-export AZURE_CLI_DIAGNOSTICS=true
-
-# வெளியீடு சுத்தமாக இருக்க டெலிமெட்ரியை முடக்கவும்
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### பிழை அமைப்புகள்
+### பிழைத்திருத்து அமைப்பு
 ```bash
-# டீபக் கட்டமைப்பை உலகளாவியமாக அமைக்கவும்
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# ட்ரேஸ் பதிவை செயல்படுத்தவும்
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
 
-## 📊 பதிவு பகுப்பாய்வு தொழில்நுட்பங்கள்
+`azd config set` யில் எச்சிலமான விசைகளை சேமிக்கலாம்; இது `debug.enabled`, `debug.logLevel`, அல்லது `trace.outputPath` ஆதரவு அமைப்புகள் என்பது அல்ல. வெளியிடப்பட்ட கட்டளையின் `--debug` காட்டு சின்னியைப் பயன்படுத்தவும்.
 
-### பதிவு நிலைகளின் புரிதல்
+## 📊 பதிவு பகுப்பாய்வு நுட்பங்கள்
+
+### பதிவு மட்டங்கள் புரிதல்
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -83,66 +78,67 @@ FATAL   - Critical errors that cause application termination
 
 ### கட்டமைக்கப்பட்ட பதிவு பகுப்பாய்வு
 ```bash
-# azd monitor மூலம் Azure Monitor இல் பதிவுகளைப் பார்க்கவும்
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# பயன்பாட்டு பதிவுகளை நேரடியாகப் பார்க்கவும்
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# விரிவான பதிவு பகுப்பாய்விற்காக, உங்கள் App Service அல்லது Container App உடன் Azure CLI-ஐ பயன்படுத்தவும்:
-# App Service பதிவுகள்
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Container App பதிவுகள்
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# பகுப்பாய்விற்காக Application Insights பதிவுகளை ஏற்றுமதி செய்யவும்
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
-### பதிவுகளின் தொடர்பு
+### பதிவு தொடர்பு
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Azure Monitor ஐப் பயன்படுத்தி சேவைகள் இடையே பதிவுகளை தொடர்புபடுத்துதல்
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Application Insights இல் தொடர்புடைய பதிவுகளைத் தேடுதல்
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Azure செயல்பாட்டு பதிவுகளைத் தேடுதல்
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ மேம்பட்ட பிழைத் தொலைபார்ப்பு கருவிகள்
+## 🛠️ மேம்பட்ட பிழைத்திருத்து கருவிகள்
 
-### Azure Resource Graph விசாரணைகள்
+### Azure வள வரைவுப் பட்டியல் கேள்விகள்
 ```bash
-# குறிச்சொற்களின்படி வளங்களை விசாரிக்கவும்
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# தோல்வியடைந்த டெப்ளாய்மெண்ட்களை கண்டறியவும்
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# வளத்தின் நிலையைச் சரிபார்க்கவும்
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### பிணைய பிழைத் தொலைபார்ப்பு
+### நெட்வொர்க் பிழைத்திருத்தல்
 ```bash
-# சேவைகள் இடையிலான இணைப்பை சோதிக்கவும்
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# பயன்பாடு
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
-### கன்டெய்னர் பிழைத் தொலைபார்ப்பு
+### கொண்டெய்னர் பிழைத்திருத்தல்
 ```bash
-# கண்டெய்னர் பயன்பாட்டில் தோன்றும் பிழைகளை பிழைதிருத்துதல்
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -181,12 +178,12 @@ debug_container() {
 }
 ```
 
-### தரவுத்தளம் இணைப்பு பிழைத் தொலைபார்ப்பு
+### தரவுத்தளம் இணைப்பு பிழைத்திருத்தல்
 ```bash
-# தரவுத்தள இணைப்பை பிழைதிருத்துதல்
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -200,26 +197,15 @@ debug_database() {
 }
 ```
 
-## 🔬 செயல்திறன் பிழைத் தொலைபார்ப்பு
+## 🔬 செயல்திறன் பிழைத்திருத்தல்
 
-### பயன்பாட்டு செயல்திறன் கண்காணிப்பு
+### பயன்பாட்டு செயல்திறன் கண்காணித்தல்
 ```bash
-# Application Insights பிழைதிருத்தத்தை செயல்படுத்தவும்
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# தனிப்பயன் செயல்திறன் கண்காணிப்பு
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -238,31 +226,29 @@ monitor_performance() {
 
 ### வள பயன்பாடு பகுப்பாய்வு
 ```bash
-# வள பயன்பாட்டை கண்காணி
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
 ```
 
-## 🧪 சோதனை மற்றும் சரிபார்த்தல்
+## 🧪 சோதனை மற்றும் சரிபார்ப்பு
 
-### ஒருங்கிணைப்பு சோதனை பிழைத் தொலைபார்ப்பு
+### ஒருங்கிணைப்பு சோதனை பிழைத்திருத்தல்
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# டீபக் சூழலை அமைக்க
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# சேவையின் எண்ட்பாயின்டுகளை பெற
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# ஹெல்த் எண்ட்பாயின்டுகளை சோதிக்க
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# டெஸ்டுகளை இயக்க
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# தனிப்பயன் ஒருங்கிணைப்பு சோதனைகளை இயக்க
+# Run custom integration tests
 npm run test:integration
 ```
 
-### பிழைத் தொலைபார்ப்புக்கான சுமை சோதனை
+### ஓட்டம் சோதனை பிழைத்திருத்தல்
 ```bash
-# எளிய சுமை சோதனை மூலம் செயல்திறன் தடைப் பகுதிகளை கண்டறிதல்
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Apache Bench ஐப் பயன்படுத்துதல் (நிறுவ: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # முக்கிய அளவுகோல்களைப் பெற்றெடுக்கவும்
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # தோல்விகளைச் சரிபார்க்கவும்
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 அடித்தடை பிழைத் தொலைபார்ப்பு
+## 🔧 கட்டமைப்பு பிழைத்திருத்தல்
 
-### Bicep வார்ப்புரு பிழைத் தொலைபார்ப்பு
+### பைசெப் டெம்பிளேட் பிழைத்திருத்தல்
 ```bash
-# விரிவான வெளியீட்டுடன் Bicep வார்ப்புருக்களைச் சரிபார்க்க
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # வாக்கியவியல் சரிபார்த்தல்
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint சரிபார்த்தல்
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # என்ன என்றால் (What-if) விநியோகம்
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# வார்ப்புரு விநியோகத்தின் பிழைச் சோதனை
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -375,54 +359,46 @@ debug_deployment() {
 }
 ```
 
-### வள நிலை பகுப்பாய்வு
+### வள நிலைமை பகுப்பாய்வு
 ```bash
-# வள நிலைகளில் முரண்பாடுகள் உள்ளதா என்று பகுப்பாய்வு செய்
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # அனைத்து வளங்களையும் அவற்றின் நிலைகளுடன் பட்டியலிடு
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # தோல்வியடைந்த வளங்களை சரிபார்
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
-## 🔒 பாதுகாப்பு பிழைத் தொலைபார்ப்பு
+## 🔒 பாதுகாப்பு பிழைத்திருத்தல்
 
-### அங்கீகார ஓட்டம் பிழைத் தொலைபார்ப்பு
+### அங்கீகாரரோடு தொடர்பான பிழைத்திருத்தல்
 ```bash
-# Azure அங்கீகாரத்தை பிழைதிருத்து
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # JWT டோக்கனை டிகோடு செய் (jq மற்றும் base64 தேவை)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Key Vault அணுகலை பிழைதிருத்து
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -438,16 +414,16 @@ debug_keyvault() {
 }
 ```
 
-### பிணைய பாதுகாப்பு பிழைத் தொலைபார்ப்பு
+### நெட்வொர்க் பாதுகாப்பு பிழைத்திருத்தல்
 ```bash
-# நெட்வொர்க் பாதுகாப்பு குழுக்களை பிழைதிருத்தவும்
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # பாதுகாப்பு விதிகளை சரிபார்க்கவும்
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 பயன்பாட்டு-சார்ந்த பிழைத் தொலைபார்ப்பு
+## 📱 பயன்பாட்டுப் தனிப்பட்ட பிழைத்திருத்தல்
 
-### Node.js பயன்பாட்டு பிழைத் தொலைபார்ப்பு
+### Node.js பயன்பாட்டு பிழைத்திருத்தல்
 ```javascript
-// debug-middleware.js - Express பிழைதிருத்தும் மிடில்வேர்
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // கோரிக்கை விவரங்களை பதிவு செய்
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // res.json ஐ மீறி பதில்களை பதிவு செய்
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### தரவுத்தள வினவல் பிழைத் தொலைபார்ப்பு
+### தரவுத்தளம் கேள்வி பிழைத்திருத்தல்
 ```javascript
-// database-debug.js - தரவுத்தள பிழை பரிசோதனை உதவித் கருவிகள்
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 அவசர பிழைத் தொலைபார்ப்பு செயல்முறை
+## 🚨 அவசர பிழைத்திருத்தல் செயல்முறைகள்
 
-### உற்பத்தி பிரச்சனை பதில்
+### உற்பத்தி பிரச்சினை பதிலளிப்பு
 ```bash
 #!/bin/bash
-# emergency-debug.sh - அவசர உற்பத்தி பிழைத்திருத்தம்
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# சரியான சூழலுக்கு மாறவும்
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# முக்கிய தகவல்களை சேகரிக்கவும்
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# பிழை பதிவுகளுக்கு Azure Monitor ஐப் பயன்படுத்தவும்
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### மீள்நிர்வாக (Rollback) செயல்முறைகள்
+### மீளுருவாக்கும் செயல்முறைகள்
 ```bash
-# விரைவு பின்தள்ளல் ஸ்கிரிப்ட்
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # சூழலை மாற்று
+    # Switch environment
     azd env select "$environment"
     
-    # Git-ஐ பயன்படுத்தி பின்தள்ளல் (AZD-இல் உள்ளடக்கப்பட்ட பின்தள்ளல் இல்லை)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # பின்தள்ளலை சரிபார்க்க
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # முக்கிய எண்ட்பாயின்ட்களை சோதிக்க
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 பிழைத் தொலைபார்ப்பு டாஷ்போர்ட்கள்
+இந்த குறியீடு மட்டுமே மீளுருவாக்கல் கட்டமைப்புக்களை, தரவுத்தள மாற்றங்களை அல்லது இரகசியங்களை மாற்றாது. சுத்தமான வேலைதோட்டம் பயன்படுத்தவும், தொடக்க கமிட்டைப் பதிவு செய்து அப்படியே மீட்டமைக்கவும்; கட்டளை தற்போதைய சேமிப்பகத்தில் தேர்ந்தெடுத்த கமிட்டை எடுக்கிறது.
 
-### தனிப்பயன் கண்காணிப்பு டாஷ்போர்டு
+## 📊 பிழைத்திருத்து அறைகள்
+
+### தனிப்பயன் கண்காணிப்பு அறை
 ```bash
-# பிழைத்திருத்தத்திற்கான Application Insights கேள்விகளை உருவாக்கவும்
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # பிழைகளுக்கான கேள்வி
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # செயல்திறன் பிரச்சினைகளுக்கான கேள்வி
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # இணைப்பு தோல்விகளுக்கான கேள்வி
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### பதிவுகள் ஒருங்கிணைப்பு
+### பதிவு ஒன்றிணைப்பு
 ```bash
-# பல Azure மூலங்களிலிருந்து பதிவுகளை ஒருங்கிணைத்தல்
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,6 +630,7 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
@@ -662,12 +639,12 @@ aggregate_logs() {
 
 ## 🔗 மேம்பட்ட வளங்கள்
 
-### தனிப்பயன் பிழைத் ஸ்கிரிப்ட்கள்
-பின்வரும் கோப்புகளை கொண்ட `scripts/debug/` அடைவைக் உருவாக்கவும்:
-- `health-check.sh` - முழுமையான நலன் சோதனை
-- `performance-test.sh` - தானியங்கி செயல்திறன் சோதனை
-- `log-analyzer.py` - மேம்பட்ட பதிவு பார்சிங் மற்றும் பகுப்பாய்வு
-- `resource-validator.sh` - அடித்தடை சரிபார்த்தல்
+### தனிப்பயன் பிழைத்திருத்து ஸ்கிரிப்ட்கள்
+ஒரு `scripts/debug/` அடைவு உருவாக்கவும்:
+- `health-check.sh` - முழுமையான ஆரோக்கியச் சோதனைகள்
+- `performance-test.sh` - தானியங்கி செயல்திறன் சோதனை
+- `log-analyzer.py` - மேம்பட்ட பதிவு பகுப்பாய்வு மற்றும் பகுப்பாய்வு
+- `resource-validator.sh` - கட்டமைப்பு சரிபார்ப்பு
 
 ### கண்காணிப்பு ஒருங்கிணைப்பு
 ```yaml
@@ -676,6 +653,7 @@ hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -686,36 +664,36 @@ hooks:
       fi
 ```
 
-## சிறந்த நடைமுறைகள்
+## சிறந்த பழக்கவழக்கங்கள்
 
-1. **உற்பத்தியாகாத சூழல்களில் எப்போதும் டெபக் பதிவு (debug logging) ஐ இயக்கவும்**
-2. **பிரச்சினைகளுக்கு மறுபடியே உருவாக்கத்தக்க சோதனை வழக்குகளைக் உருவாக்கவும்**
-3. **உங்கள் குழுவிற்கான பிழைத் தொலைபார்ப்பு செயல்முறைகளை ஆவணப்படுத்தவும்**
-4. **நலன் சோதனைகள் மற்றும் கண்காணிப்புகளை தானியக்கமாக்கவும்**
-5. **பயன்பாட்டு மாற்றங்களுடன் உங்கள் பிழைத் கருவிகளை புதுப்பித்து வைத்திருங்கள்**
-6. **சம்பவமற்ற நேரங்களில் பிழைத் தொலைபார்ப்பு செயல்முறைகளை பயிற்சி செய்யுங்கள்**
+1. **பயன்பாட்டுக்கு வெளியான சூழல்களில் பிழைத்திருத்து பதிவுகளை நிச்சயமாக இயக்கவும்**
+2. **பிரச்சினைகளுக்கான மறுபடியும் உருவாக்கக்கூடிய சோதனை வழக்குகள் உருவாக்கவும்**
+3. **உங்கள் குழுவிற்கான பிழைத்திருத்து செயல்முறைகளை ஆவணப்படுத்தவும்**
+4. **ஆரோக்கியச் சோதனைகள் மற்றும் கண்காணிப்புகளை தானியக்கமாக்கவும்**
+5. **உங்கள் பயன்பாட்டுத் திருத்தங்களுடன் பிழைத்திருத்து கருவிகளை புதுப்பித்து வைத்திருங்கள்**
+6. **சிக்கல்கள் இல்லாத நேரங்களில் பிழைத்திருத்து செயல்முறைகளைப் பயிற்சி செய்யவும்**
 
 ## அடுத்த படிகள்
 
-- [திறன் திட்டமிடல்](../chapter-06-pre-deployment/capacity-planning.md) - வள தேவைகளை திட்டமிடவும்
-- [SKU தேர்வு](../chapter-06-pre-deployment/sku-selection.md) - சரியான சேவை நிலைகளை தேர்வு செய்க
-- [முன்-ஒதுக்கீடு சோதனைகள்](../chapter-06-pre-deployment/preflight-checks.md) - ஒதுக்கீடு முன் சரிபார்த்தல்
-- [சுருக்கக் குறிப்புகள்](../../resources/cheat-sheet.md) - விரைவு குறிப்பு கட்டளைகள்
+- [மிகுவை திட்டமிடல்](../chapter-06-pre-deployment/capacity-planning.md) - வள தேவைகளை திட்டமிடல்
+- [SKU தேர்வு](../chapter-06-pre-deployment/sku-selection.md) - ஏற்ற சேவை நிலைகளைத் தேர்வு செய்யவும்
+- [முந்தைய பரிசோதனைகள்](../chapter-06-pre-deployment/preflight-checks.md) - முந்தைய பயன்பாட்டு மதிப்பீடு
+- [சீட் சுருக்கம்](../../resources/cheat-sheet.md) - அதிவேக குறிப்பு கட்டளைகள்
 
 ---
 
-**நினைவில் வைக்கவும்**: சிறந்த பிழைத் தொலைபார்ப்பு என்பது முறையாக, விரிவாகவும், பொறுமையாகவும் செயல்படுவது பற்றியது. இந்த கருவிகள் மற்றும் தொழில்நுட்பங்கள் உங்கள் பிரச்சினைகளை வேகமாகவும் குறைந்த முயற்சியுடன் கண்டறிய உதவும்.
+**கூடுதலாக நினைவில் வைத்துக் கொள்ளவும்**: நல்ல பிழைத்திருத்து என்பது கட்டமைக்கப்பட்ட, முழுமையான மற்றும் பொறுமையானது ஆகும். இந்த கருவிகள் மற்றும் நுட்பங்கள் உங்களுக்கு பிரச்சினைகளை வேகமாகவும் சிறப்பாகவும் கண்டறிவதில் உதவும்.
 
 ---
 
-**வழிசெலுத்தல்**
+**சருகல்**
 - **முந்தைய பாடம்**: [பொதுவான பிரச்சினைகள்](common-issues.md)
 
-- **அடுத்த பாடம்**: [திறன் திட்டமிடல்](../chapter-06-pre-deployment/capacity-planning.md)
+- **அடுத்த பாடம்**: [மிகுவை திட்டமிடல்](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-மறுப்பு அறிவிப்பு:
-இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை Co-op Translator (https://github.com/Azure/co-op-translator) பயன்படுத்தி மொழிபெயர்க்கப்பட்டது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறான பொருள்படுத்தல்கள் இருக்கக்கூடும் என்று தயவுசெய்து கவனிக்கவும். மூல ஆவணம் அதன் சொந்த மொழியிலேயே அதிகாரப்பூர்வ மூலமாகக் கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பை பரிந்துரைக்கிறோம். இம்மொழிபெயர்ப்பின் பயன்பாட்டினால் ஏற்படும் எந்தப் புரிதல்களுக்கோ அல்லது தவறான பொருள் விளக்கங்களுக்கோ நாங்கள் பொறுப்பேற்கமாட்டோம்.
+**மறுப்பு**:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை [Co-op Translator](https://github.com/Azure/co-op-translator) பயன்படுத்தி மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சி செய்துள்ளோம், ஆனால் தானாக செய்யப்படும் மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கலாம் என்பதை கவனத்தில் கொள்ளவும். அசல் ஆவணம் அதன் தாய்மொழியில் அதிகாரப்பூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்நுட்பமான மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்த தவறான புரிதல்கள் அல்லது தவறான விளக்கத்திற்கும் நாங்கள் பொறுப்பில்வில்லை.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

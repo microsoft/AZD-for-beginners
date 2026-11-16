@@ -1,22 +1,22 @@
 # Kapitel 5: Multi-Agent AI-lösningar
 
-**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Komplext**: Avancerat
+**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Komplexitet**: Avancerad
 
 ---
 
 ## Översikt
 
-Detta kapitel behandlar avancerade multi-agent arkitekturmodeller, agentorkestrering och produktionsklara AI-distributioner för komplexa scenarier.
+Detta kapitel behandlar avancerade fleragentarkitekturmönster, agentorkestrering och produktionsfärdiga AI-distributioner för komplexa scenarier.
 
-> Validerat mot `azd 1.27.1` i juli 2026.
+> Kommandovägledning granskad mot den släppta `azd 1.37.2` referensen. Molndistributioner kördes inte.
 
 ## Lärandemål
 
 Genom att slutföra detta kapitel kommer du att:
-- Förstå multi-agent arkitekturmodeller
+- Förstå fleragentarkitekturmönster
 - Distribuera koordinerade AI-agentssystem
-- Implementera agent-till-agent kommunikation
-- Bygga produktionsklara multi-agentlösningar
+- Implementera agent-till-agent-kommunikation
+- Bygga produktionsfärdiga fleragentlösningar
 
 ---
 
@@ -24,58 +24,60 @@ Genom att slutföra detta kapitel kommer du att:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Multi-Agent Grundläggande](multi-agent-basics.md) | Praktiskt: driftsätt en fungerande multi-agent-app med `azd up` | 45 min |
-| 2 | [Koordineringsmönster](../chapter-06-pre-deployment/coordination-patterns.md) | Agentorkestreringsstrategier (fortsätter i Kapitel 6) | 30 min |
-| 3 | [ARM-mall Distribution](../../examples/retail-multiagent-arm-template/README.md) | Exempel på distribution med ett klick | 30 min |
+| 1 | [Multi-Agent Grunder](multi-agent-basics.md) | Praktiskt: distribuera en fungerande fleragentapp med `azd up` | 45 min |
+| 2 | [Koordinationsmönster](../chapter-06-pre-deployment/coordination-patterns.md) | Agentorkestreringsstrategier (fortsätter i Kapitel 6) | 30 min |
+| 3 | [ARM Template Distribution](../../examples/retail-multiagent-arm-template/README.md) | Exempel på distribution med ett klick | 30 min |
 
-> **Börja med Lektion 1.** Det är den enda helt praktiska och driftsättbara lektionen i detta kapitel. Lektion 2 finns i Kapitel 6 (den delas med fördistributionplanering), och [Retail Multi-Agent-lösningen](../../examples/retail-scenario.md) är en arkitektur blueprint—en designreferens, inte en mall med ett enda kommando.
+> **Börja med Lektion 1.** Det är den enda helt praktiska och distribuerbara lektionen i detta kapitel. Lektion 2 finns i Kapitel 6 (den delas med planering inför distribution), och [Retail Multi-Agent Solution](../../examples/retail-scenario.md) är en arkitektur-mall—en designreferens, inte en mall med ett enda kommando.
 
 ---
 
 ## 🚀 Snabbstart
 
 ```bash
-# Alternativ 1: Distribuera från en mall
-azd init --template agent-openai-python-prompty
+# Option 1: Deploy the multi-agent template used in Lesson 1
+azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Alternativ 2: Distribuera från ett agentmanifest (kräver azure.ai.agents-tillägg)
+# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> **Vilket tillvägagångssätt?** Använd `azd init --template` för att börja från ett fungerande exempel. Använd `azd ai agent init` när du har din egen agentmanifest. Se [AZD AI CLI-referensen](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) för fullständiga detaljer.
+> **Vilken metod?** Använd `azd init --template` för att börja från ett fungerande exempel. Använd `azd ai agent init` interaktivt, eller `azd ai agent init --template <path-to-azure.yaml>` för att ta över ett aktuellt agentprojekt. Se [AZD AI CLI-referensen](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) för versionskrav och migrering av utvärdering.
+
+Kör dessa alternativ i separata tomma mappar. Agentförlängningen `1.0.0-beta.23` kräver `azd >= 1.37.0`; dess interaktiva flöde genererar inte den anpassade Service Bus-pipelinen i koordineringslektionen.
 
 ---
 
-## 🤖 Multi-Agent Arkitektur
+## 🤖 Fleragentarkitektur
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrator Agent<br/>Dirigerar förfrågningar, hanterar arbetsflöde] --> Customer[Customer Agent<br/>Användarförfrågningar, preferenser]
-    Orchestrator --> Inventory[Inventory Agent<br/>Lagerstatus, beställningar]
+    Orchestrator[Orchestrator Agent<br/>Routes requests, manages workflow] --> Customer[Customer Agent<br/>User queries, preferences]
+    Orchestrator --> Inventory[Inventory Agent<br/>Stock levels, orders]
 ```
 
 ---
 
-## 🎯 Utvald Lösning: Retail Multi-Agent
+## 🎯 Utvald lösning: Retail Multi-Agent
 
-[Retail Multi-Agent-lösningen](../../examples/retail-scenario.md) demonstrerar:
+Lösningen [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrerar:
 
 - **Kundagent**: Hanterar användarinteraktioner och preferenser
-- **Lageragent**: Hanterar lagersaldo och orderhantering
+- **Lageragent**: Hanterar lager och orderprocessering
 - **Orkestrator**: Koordinerar mellan agenter
-- **Delat minne**: Kontexthantering över agenter
+- **Delat minne**: Kontextledning över agenter
 
-### Använda Tjänster
+### Använda tjänster
 
 | Tjänst | Syfte |
 |---------|---------|
 | Microsoft Foundry Models | Språkförståelse |
 | Azure AI Search | Produktkatalog |
-| Cosmos DB | Agentstatus och minne |
-| Container Apps | Agentvärd |
+| Cosmos DB | Agenttillstånd och minne |
+| Container Apps | Agenthosting |
 | Application Insights | Övervakning |
 
 ---
@@ -89,10 +91,10 @@ graph TD
 
 ---
 
-## 📖 Relaterade Resurser
+## 📖 Relaterade resurser
 
-- [AI-Agentguide](../chapter-02-ai-development/agents.md)
-- [Produktionspraxis för AI](../chapter-08-production/production-ai-practices.md)
+- [AI-agenter Guide](../chapter-02-ai-development/agents.md)
+- [Produktion AI-praxis](../chapter-08-production/production-ai-practices.md)
 - [AI Felsökning](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

@@ -1,73 +1,77 @@
 # अध्याय 2: AI-प्रथम विकास
 
-**📚 कोर्स**: [AZD शुरुआत के लिए](../../README.md) | **⏱️ अवधि**: 1-2 घंटे | **⭐ जटिलता**: मध्यम
+**📚 कोर्स**: [AZD शुरुआती के लिए](../../README.md) | **⏱️ अवधि**: 4-5 घंटे जिसमें कार्यशाला शामिल है | **⭐ जटिलता**: मध्यवर्ती
 
 ---
 
 ## अवलोकन
 
-यह अध्याय Azure Developer CLI और Microsoft Foundry सेवाओं का उपयोग करके AI-संचालित अनुप्रयोगों को तैनात करने पर केंद्रित है। सरल AI चैट ऐप्स से लेकर टूल्स के साथ बुद्धिमान एजेंटों तक।
+यह अध्याय Azure Developer CLI और Microsoft Foundry सेवाओं का उपयोग करके AI-संचालित एप्लिकेशन तैनात करने पर केंद्रित है। साधारण AI चैट ऐप्स से लेकर उपकरणों के साथ बुद्धिमान एजेंट तक।
 
-> **सत्यापन नोट (2026-07-13):** इस अध्याय में कमांड प्रवाह और विस्तार मार्गदर्शन की समीक्षा `azd` `1.27.1` और चालू प्रीव्यू AI एजेंट विस्तार रिलीज़ `azure.ai.agents` `1.0.0-beta.5` के खिलाफ की गई थी। यदि आप पुराने AZD बिल्ड पर हैं, तो पहले अपडेट करें और फिर अभ्यास जारी रखें।
+> **रिलीज़ समीक्षा (2026-11-04):** AI CLI मार्गदर्शन को प्रकाशित `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, और `azure.ai.evaluations` `1.0.0-beta.2` दस्तावेज़/स्रोत के खिलाफ जांचा गया। संयुक्त वर्कफ़्लो के लिए `azd >= 1.37.0` का उपयोग करें। मूल्यांकन अब अलग `azd ai eval` नामस्थान का उपयोग करते हैं; देखें [रिलीज़ परिवर्तन और माइग्रेशन मार्गदर्शन](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes)। यह लाइव तैनाती सत्यापन नहीं है।
 
 ## सीखने के उद्देश्य
 
 इस अध्याय को पूरा करके, आप:
-- प्री-बिल्ट AZD टेम्प्लेट्स का उपयोग करके AI अनुप्रयोगों को तैनात करना सीखेंगे
-- AZD के साथ Microsoft Foundry एकीकरण समझेंगे
-- टूल्स के साथ AI एजेंटों को कॉन्फ़िगर और कस्टमाइज़ करना सीखेंगे
-- RAG (रिकवरी-आग्मेंटेड जनरेशन) अनुप्रयोगों को तैनात करना सीखेंगे
+- प्री-बिल्ट AZD टेम्पलेट्स का उपयोग करके AI एप्लिकेशन तैनात करेंगे
+- Microsoft Foundry के साथ AZD एकीकरण को समझेंगे
+- उपकरणों के साथ AI एजेंटों को कॉन्फ़िगर और अनुकूलित करेंगे
+- RAG (रिकवरी-अग्मेंटेड जनरेशन) एप्लिकेशन तैनात करेंगे
 
 ---
 
-## 📚 पाठ्यक्रम
+## 📚 पाठ
 
 | # | पाठ | विवरण | समय |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry एकीकरण](microsoft-foundry-integration.md) | Foundry सेवाओं के साथ AZD को जोड़ना | 30 मिनट |
-| 2 | [AI एजेंट गाइड](agents.md) | टूल्स के साथ बुद्धिमान एजेंट तैनात करना | 45 मिनट |
-| 3 | [AI मॉडल तैनाती](ai-model-deployment.md) | AI मॉडल तैनात और कॉन्फ़िगर करना | 30 मिनट |
-| 4 | [AI कार्यशाला प्रयोगशाला](ai-workshop-lab.md) | व्यावहारिक: अपनी AI समाधान को AZD-तैयार बनाएं | 60 मिनट |
+| 1 | [Microsoft Foundry एकीकरण](microsoft-foundry-integration.md) | AZD को Foundry सेवाओं से जोड़ें | 30 मिनट |
+| 2 | [AI एजेंट गाइड](agents.md) | उपकरणों के साथ बुद्धिमान एजेंट तैनात करें | 45 मिनट |
+| 3 | [AI मॉडल तैनाती](ai-model-deployment.md) | AI मॉडल तैनात और कॉन्फ़िगर करें | 30 मिनट |
+| 4 | [AI कार्यशाला प्रयोगशाला](ai-workshop-lab.md) | व्यावहारिक: एक टेम्पलेट की खोज करें और अपनी रूपांतरण योजना बनाएं | 2-3 घंटे |
 
 ---
 
 ## 🚀 त्वरित शुरुआत
 
+एक नए खाली निर्देशिका में एक विकल्प चुनें। अंत में `.` वर्तमान निर्देशिका को आरंभ करता है; अन्यथा AZD आपके शेल के कार्य निर्देशिका को बदले बिना एक सबडायरेक्टरी बना सकता है।
+
 ```bash
-# विकल्प 1: RAG चैट एप्लिकेशन
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# विकल्प 2: एआई एजेंट
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# विकल्प 3: त्वरित चैट ऐप
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
 ---
 
-## 🤖 प्रमुख AI टेम्प्लेट्स
+## 🤖 प्रमुख AI टेम्पलेट्स
 
-| टेम्प्लेट | विवरण | सेवाएं |
+| टेम्पलेट | विवरण | सेवाएँ |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | संदर्भों के साथ RAG चैट | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | टूल्स के साथ AI एजेंट | AI एजेंट सेवा |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | उद्धरणों के साथ RAG चैट | OpenAI + AI खोज |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | उपकरणों के साथ AI एजेंट | AI एजेंट सेवा |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | बुनियादी AI चैट | OpenAI + कंटेनर ऐप्स |
 
 ---
 
-## 💰 लागत जागरूकता
+## 💰 लागत अवगाहना
 
-| परिवेश | अनुमानित मासिक लागत |
+ये संकेतात्मक सीमा हैं, न कि उद्धरण या सीमा; मॉडल ट्रैफिक, खोज/गणना SKU, क्षेत्र, और वैकल्पिक फीचर्स इनके ऊपर जा सकते हैं। प्रोविजनिंग से पहले अपने चुने हुए नमूने की वर्तमान मूल्य निर्धारण मार्गदर्शन देखें।
+
+| पर्यावरण | अनुमानित मासिक लागत |
 |-------------|----------------------|
 | विकास | $80-150 |
 | स्टेजिंग | $150-300 |
 | उत्पादन | $300-3,500+ |
 
-**सुझाव:** परीक्षण के बाद `azd down` चलाएं ताकि शुल्क से बचा जा सके।
+**सुझाव:** परीक्षण के बाद चार्ज बचाने के लिए `azd down` चलाएं।
 
 ---
 
@@ -75,17 +79,17 @@ azd up
 
 | दिशा | अध्याय |
 |-----------|---------|
-| **पिछला** | [अध्याय 1: आधार](../chapter-01-foundation/README.md) |
-| **आगला** | [अध्याय 3: कॉन्फ़िगरेशन](../chapter-03-configuration/README.md) |
-| **कूदें** | [अध्याय 8: उत्पादन पैटर्न](../chapter-08-production/README.md) |
+| **पिछला** | [अध्याय 1: नींव](../chapter-01-foundation/README.md) |
+| **अगला** | [अध्याय 3: कॉन्फ़िगरेशन](../chapter-03-configuration/README.md) |
+| **स्किप करें** | [अध्याय 8: उत्पादन पैटर्न](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 संबंधित संसाधन
 
-- [AI समस्या समाधान](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [उत्पादन AI अभ्यास](../chapter-08-production/production-ai-practices.md)
-- [एप्लिकेशन अंतर्दृष्टि](../chapter-06-pre-deployment/application-insights.md)
+- [AI समस्या निवारण](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [उत्पादन AI प्रथाएं](../chapter-08-production/production-ai-practices.md)
+- [एप्लिकेशन इन्साइट्स](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

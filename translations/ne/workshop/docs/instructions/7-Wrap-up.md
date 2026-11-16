@@ -1,110 +1,110 @@
 # 7. Wrap-Up & Next Steps
 
-!!! tip "मुख्य निष्कर्षहरू"
+!!! tip "मुख्य सन्देशहरू यस्ता छन्"
 
-    - [ ] AZD टेम्पलेटहरूले AI अनुप्रयोग विकास दिनहरूबाट घण्टामा छिटो बनाउँछन्
-    - [ ] Discovery → Deployment → Customization विधिले संरचित सिकाइ मार्ग प्रदान गर्छ
-    - [ ] GitHub Copilot सँग MCP सर्भरहरूले जटिल कोडबेसहरूको प्राकृतिक भाषा अन्वेषण सक्षम पार्छ
-    - [ ] Microsoft Foundry ले बिल्ट-इन अवलोकनयोग्यता, मूल्याङ्कन, र सुरक्षा परीक्षण प्रदान गर्छ
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. What You Accomplished
+## 1. तपाईंले के उपलब्धि हासिल गर्नुभयो
 
-Congratulations! In this workshop, you have successfully:
+बधाई छ! यस कार्यशालामा, तपाईंले सफलतापूर्वक:
 
-| Module | Accomplishment |
+| मोड्युल | उपलब्धि |
 |:---|:---|
-| **Module 1** | Azure Developer CLI पत्ता लगाउनुभयो र एउटा AI टेम्पलेट चयन गर्नुभयो |
-| **Module 2** | पूर्ण AI एजेन्ट समाधान तैनाथ र प्रमाणीकरण गर्नुभयो |
-| **Module 3** | टेम्पलेटलाई विखण्डन गरेर यसको आर्किटेक्चर बुझ्नुभयो |
-| **Module 4** | `azure.yaml` कन्फिगरेसन र लाइफसाइकल हुकहरू अन्वेषण गर्नुभयो |
-| **Module 5** | आफ्नो परिदृश्यका लागि टेम्पलेट अनुकूलन गर्नुभयो |
-| **Module 6** | पूर्वाधार सुरक्षित रूपमा हटाउनुभयो र स्रोतहरू व्यवस्थापन गर्नुभयो |
+| **मोड्युल 1** | Azure Developer CLI पत्ता लगाउनुभयो र AI टेम्प्लेट चयन गर्नुभयो |
+| **मोड्युल 2** | एक पूर्ण AI एजेन्ट समाधान डिप्लॉय र प्रमाणित गर्नुभयो |
+| **मोड्युल 3** | यसको आर्किटेक्चर बुझ्न टेम्प्लेट तोड्नुभयो |
+| **मोड्युल 4** | `azure.yaml` कन्फिगरेसन र लाइफसाइकल हुकहरू अन्वेषण गर्नुभयो |
+| **मोड्युल 5** | आफ्नै परिदृश्यका लागि टेम्प्लेट अनुकूलन गर्नुभयो |
+| **मोड्युल 6** | सुरक्षित रूपमा पूर्वाधार हटाउनुभयो र स्रोतहरू व्यवस्थापन गर्नुभयो |
 
 ---
 
-## 2. Key Concepts Mastered
+## 2. मास्टर गरेका प्रमुख अवधारणाहरू
 
 ### Azure Developer CLI (azd)
-- `azd init` - टेम्पलेटबाट प्रोजेक्टहरू आरम्भ गर्नुहोस्
-- `azd up` - प्रावधान र डिप्लॉय एउटै आदेशमा गर्नुहोस्
-- `azd env` - वातावरण भेरिएबलहरू व्यवस्थापन गर्नुहोस्
-- `azd down` - स्रोतहरू सुरक्षित रूपमा हटाउनुहोस्
+- `azd init` - टेम्प्लेटबाट प्रोजेक्टहरू सुरूवात गर्नुहोस्
+- `azd up` - एकै आदेशमा प्रावधान र डिप्लॉय गर्नुहोस्
+- `azd env` - वातावरण चरहरू व्यवस्थापन गर्नुहोस्
+- `azd down` - स्रोतहरू सुरक्षित रूपमा सफा गर्नुहोस्
 
-### AZD Template Structure
+### AZD टेम्प्लेट संरचना
 - `azure.yaml` - कन्फिगरेसन र डिप्लॉयमेन्ट हुकहरू
-- `infra/` - Bicep इन्फ्रास्ट्रक्चर-ए-कोड
-- `src/` - एप्लिकेसन स्रोत कोड
+- `infra/` - बाइसप पूर्वाधार-कोडको रूपमा
+- `src/` - अनुप्रयोग स्रोत कोड
 - `scripts/` - स्वचालन र सेटअप स्क्रिप्टहरू
 
-### Microsoft Foundry Capabilities
-- बुद्धिमान सहायकहरूको लागि AI एजेन्ट सेवा
-- ज्ञान पुन:प्राप्तिका लागि File Search र Azure AI Search
-- बिल्ट-इन ट्रेसिङ, मनिटरिङ, र मूल्याङ्कन
-- AI सुरक्षा प्रमाणिकरणका लागि रेड टिमिङ
+### Microsoft Foundry क्षमताहरू
+- बुद्धिमानी सहायकहरूको लागि AI एजेन्ट सेवा
+- ज्ञान पुनःप्राप्तिका लागि फाइल खोज र Azure AI खोज
+- बनाइएको ट्रेसिङ, निगरानी, र मूल्यांकन
+- AI सुरक्षा प्रमाणीकरणका लागि रेड टीमिङ
 
 ---
 
-## 3. Continue Your Learning Journey
+## 3. आफ्नो सिकाइ यात्रालाई जारी राख्नुहोस्
 
-### Recommended Next Steps
+### सिफारिस गरिएका अर्को कदमहरू
 
-| Path | Resource | Time |
+| मार्ग | स्रोत | समय |
 |:---|:---|:---|
-| **Complete Course** | [AZD for Beginners Curriculum](../../README.md) | 8-12 hours |
-| **Try Another Template** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 hours |
-| **Deep Dive** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Ongoing |
-| **Community** | [Azure Discord](https://aka.ms/foundry/discord) | Join today! |
+| **पूरा कोर्स** | [AZD for Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | आफैंको गति अनुसार |
+| **अर्को टेम्प्लेट प्रयास गर्नुहोस्** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 घण्टा |
+| **गहिराइमा जानुहोस्** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | जारी छ |
+| **समुदाय** | [Azure Discord](https://aka.ms/foundry/discord) | आजै सामेल हुनुहोस्! |
 
-### Suggested Templates to Try Next
+### आगामी प्रयासका लागि सुझाइएको टेम्प्लेटहरू
 
-1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - तपाईंको डाटासँग आधारभूत च्याट
+1. **[AI Chat सँग सुरु गर्नुहोस्](https://github.com/Azure-Samples/get-started-with-ai-chat)** - तपाईंको डेटा सँग आधारभूत कुराकानी
 2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - उन्नत RAG ढाँचाहरू
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - एंटरप्राइज खुद्रा परिदृश्यहरू
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - उद्यम खुद्रा परिदृश्यहरू
 
 ---
 
-## 4. Workshop Challenge
+## 4. कार्यशाला चुनौती
 
-Ready to test your skills? Try these challenges:
+तपाईंको क्षमता परीक्षण गर्न तयार हुनुहुन्छ? यी चुनौतिहरू प्रयास गर्नुहोस्:
 
-| Challenge | Description | Difficulty |
+| चुनौती | वर्णन | कठिनाइ |
 |:---|:---|:---|
-| **1. Multi-Agent Scenario** | विभिन्न उद्योगको लागि तैनाथ र अनुकूलन गर्नुहोस् (जस्तै, स्वास्थ्य सेवा, वित्त) | ⭐⭐ |
-| **2. Custom Knowledge Base** | आफ्नै डेटा फाइलहरू थप्नुहोस् र अनुकूलित खोज सूचक बनाउनुहोस् | ⭐⭐⭐ |
-| **3. Production Deployment** | GitHub Actions प्रयोग गरी CI/CD सेटअप गर्नुहोस् using `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. बहु-एजेन्ट परिदृश्य** | अन्य उद्योग (जस्तै, स्वास्थ्य सेवा, वित्त) का लागि डिप्लॉय र अनुकूलन गर्नुहोस् | ⭐⭐ |
+| **2. अनुकूलित ज्ञान भण्डार** | आफ्नै डेटा फाइलहरू थप्नुहोस् र अनुकूलित खोज अनुक्रमणिका बनाउनुस् | ⭐⭐⭐ |
+| **3. उत्पादन डिप्लोयमेन्ट** | GitHub Actions सँग CI/CD सेट अप गर्नुहोस् `azd pipeline config` प्रयोग गरेर | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. Share Your Feedback
+## 5. तपाईंको प्रतिक्रिया साझा गर्नुहोस्
 
-Your feedback helps us improve this workshop!
+तपाईंको प्रतिक्रिया यस कार्यशालालाई सुधार गर्न मद्दत गर्दछ!
 
-- **GitHub Issues**: [Post feedback](https://github.com/microsoft/azd-for-beginners/issues) - `Workshop` ट्याग संग पोस्ट गर्नुहोस्
-- **Discord**: Join [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - `#get-help` मा पोस्ट गर्नुहोस्
-- **Contributions**: पुल अनुरोधहरू सबमिट गरेर कार्यशाला सुधार गर्न मद्दत गर्नुहोस्!
+- **GitHub Issues**: [प्रतिक्रिया पोस्ट गर्नुहोस्](https://github.com/microsoft/azd-for-beginners/issues) - ट्याग गर्नुहोस् `Workshop`
+- **Discord**: सामेल हुनुहोस् [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - पोस्ट गर्नुहोस् `#get-help`
+- **योगदानहरू**: पुल अनुरोधहरू पठाएर कार्यशाला सुधार गर्न मद्दत गर्नुहोस्!
 
 ---
 
-## Thank You! 🎉
+## धन्यवाद! 🎉
 
-AZD for AI Developers कार्यशाला पूरा गर्नु भएकोमा धन्यवाद। हामी आशा गर्छौं यो अनुभवले तपाईंलाई Azure मा AI अनुप्रयोगहरू निर्माण र तैनाथ गर्न आवश्यक सीप र आत्मविश्वास प्रदान गरेको छ।
+AZD फर AI विकासकर्ताहरूका लागि कार्यशाला पूरा गरेकोमा धन्यवाद। हामीलाई आशा छ कि यस अनुभवले तपाईंलाई Azure मा AI अनुप्रयोगहरू निर्माण र तैनाथ गर्न सीप र आत्मविश्वास प्रदान गरेको छ।
 
-Keep building, keep learning, and welcome to the Azure AI developer community!
+**निर्माण जारी राख्नुहोस्, सिकाइ जारी राख्नुहोस्, र Azure AI विकासकर्ता समुदायमा स्वागत छ!**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 पाठ्यक्रम होम** | [AZD For Beginners](../../README.md) |
-| **📖 प्रलेखन** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ AI टेम्पलेटहरू** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+| **📚 कोर्स होम** | [शुरुआतीहरूका लागि AZD](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
+| **📖 कागजातहरू** | [Azure Developer CLI कागजातहरू](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
+| **🛠️ AI टेम्प्लेटहरू** | [Microsoft Foundry टेम्प्लेटहरू](https://ai.azure.com/templates) |
 | **💬 समुदाय** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-यस दस्तावेजलाई कृत्रिम बुद्धिमत्ता (एआई) अनुवाद सेवा Co-op Translator (https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी शुद्धताको लागि प्रयास गर्छौं, तर कृपया जानकार हुनुस् कि स्वचालित अनुवादमा त्रुटि वा असङ्गतताहरू हुन सक्छन्। मूल भाषामा रहेको दस्तावेजलाई आधिकारिक स्रोत मान्नुपर्छ। महत्त्वपूर्ण जानकारीका लागि व्यावसायिक मानवीय अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्याका लागि हामी जिम्मेवार छैनौं।
+**अस्वीकरण**:
+यो दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी सही हुन प्रयास गर्छौं, तर कृपया जानकार हुनुस् कि स्वचालित अनुवादमा त्रुटिहरू वा अशुद्धताहरू हुन सक्छन्। मूल दस्तावेज़ यसको मूल भाषामा आधिकारिक स्रोत मानिनुपर्छ। महत्वपूर्ण जानकारीका लागि व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलत बुझाइ वा त्रुटिको लागि हामी जिम्मेवार छैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

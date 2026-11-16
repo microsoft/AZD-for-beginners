@@ -1,27 +1,27 @@
-# 6. Tear down di infrastructure
+# 6. Teardown Infrastructure
 
-!!! tip "BY THE END OF THIS MODULE YOU GO FIT"
+!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
-    - [ ] Understand why e important to clean up resources and manage cost
-    - [ ] Use `azd down` to comot infrastructure safely
-    - [ ] Recover soft-deleted Azure AI Services if e necessary
-    - [ ] **Lab 6:** Comot Azure resources and confirm dem don remove
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Bonus Exercises
 
-Before we tear down the project, spend small time to do some open-ended exploration.
+Before we tear down the project, take a few minutes to do some open-ended exploration.
 
-!!! info "Try Dis Prompts Wey You Fit Try"
+!!! info "Try These Exploration Prompts"
 
-    **Experiment wit GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
     1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
     2. Ask: `How can I customize the agent instructions for a healthcare use case?`
     3. Ask: `What environment variables control cost optimization?`
     
-    **Explore di Azure Portal:**
+    **Explore the Azure Portal:**
     
     1. Review Application Insights metrics for your deployment
     2. Check the cost analysis for resources provisioned
@@ -31,30 +31,28 @@ Before we tear down the project, spend small time to do some open-ended explorat
 
 ## Deprovision Infra
 
-1. Tearing down infrastructure easy like dis:
+1. Tearing down infrastructure na ez like:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. Confirm di selected environment and check di resources wey you wan delete. Dis one go comot Azure resources and fit destroy data. Keep di confirmation prompt for dis learning workflow. When e finish, u go see output wey be like:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optional) If you now run `azd up` again, you will notice the gpt-4.1 model gets deployed since the environment variable was changed (and saved) in the local `.azure` folder. 
+1. Make sure say di deletion happen for portal and check for resources wey dey outside di deployment scope. Cost reporting and quota updates fit dey slow. Local `.azure` configuration go still dey unless you clear am well-well.
 
-      Dis na di model deployments **before**:
+1. `azd down --purge` still dey ask make dem delete permanent all di soft-deleted resources wey e fit handle. Use am only if you no need to recover anything and you sabi di retention/purge-protection policies. E no mean say e go free quota quick-quick.
 
-      ![Initial](../../../../../translated_images/pcm/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      And here e be **after**:
-      ![New](../../../../../translated_images/pcm/14-deploy-new.f7f3c355a3cf7299.webp)
+1. No redo deploy just to check cleanup. Later wey you wan, you fit do intentional `azd up` to create resources again with the local inputs wey remain, but e go still charge you. Model updates normally dey use supported provisioning changes, no teardown.
 
 ---
 

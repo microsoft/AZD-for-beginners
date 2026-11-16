@@ -1,49 +1,49 @@
 # Poglavje 7: Odpravljanje težav in razhroščevanje
 
-**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 1-1,5 ure | **⭐ Kompleksnost**: Srednje
+**📚 Tečaj**: [AZD Za začetnike](../../README.md) | **⏱️ Trajanje**: 1-1,5 ure | **⭐ Kompleksnost**: Vmesno
 
 ---
 
 ## Pregled
 
-To poglavje vam pomaga diagnosticirati in rešiti pogoste težave pri delu z Azure Developer CLI. Od neuspehov pri uvajanju do težav, specifičnih za AI.
+To poglavje vam pomaga diagnosticirati in rešiti pogoste težave pri delu z Azure Developer CLI. Od napak pri nameščanju do specifičnih težav z umetno inteligenco.
 
-> Preverjeno z `azd 1.27.1` v juliju 2026.
+> Navodila za ukaze so preverjena glede na izdano referenco `azd 1.37.2`. Cloud nameščanja niso bila izvedena. Pred uporabo ukazov zamenjajte primere imen virov in ID-jev.
 
 ## Cilji učenja
 
 Z dokončanjem tega poglavja boste:
-- Diagnosticirali pogoste neuspehe UVODANJA AZD
-- Razhroščevali težave z avtorizacijo in dovoljenji
-- Rešili težave s povezljivostjo AI storitev
-- Uporabili Azure Portal in CLI za odpravljanje težav
+- Diagnosticirali pogoste napake pri nameščanju AZD
+- Odpravljali težave z avtentikacijo in dovoljenji
+- Reševali težave s povezljivostjo AI storitev
+- Uporabljali Azure Portal in CLI za odpravljanje težav
 
 ---
 
 ## 📚 Lekcije
 
 | # | Lekcija | Opis | Čas |
-|---|--------|-------------|------|
+|---|---------|-------|-----|
 | 1 | [Pogoste težave](common-issues.md) | Pogosto srečane težave | 30 min |
-| 2 | [Vodič za razhroščevanje](debugging.md) | Strategije razhroščevanja po korakih | 45 min |
-| 3 | [Odpravljanje težav AI](ai-troubleshooting.md) | Težave specifične za AI | 30 min |
+| 2 | [Vodnik za razhroščevanje](debugging.md) | Strategije razhroščevanja korak za korakom | 45 min |
+| 3 | [Odpravljanje težav z AI](ai-troubleshooting.md) | Težave specifične za AI | 30 min |
 
 ---
 
 ## 🚨 Hitre rešitve
 
-### Težave z avtorizacijo
+### Težave z avtentikacijo
 ```bash
-# Zahtevano za delovne tokove AZD
+# Required for AZD workflows
 azd auth login
 
-# Neobvezno, če neposredno uporabljate tudi ukaze Azure CLI
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Neuspehi pri uvajanju
+### Napake pri nameščanju
 ```bash
 azd show
 azd monitor --logs
@@ -51,8 +51,9 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Konflikti virov
+Najprej preglejte obstoječe vire in napake nameščanja. Za rešitev konflikta imen ne brišite skupnega ali produkcijskega okolja. Za **novo začasno okolje** uporabite edinstveno ime:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
@@ -60,51 +61,55 @@ azd up
 ### Presežena kvota
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Spreminjanje `AZURE_LOCATION` ne premakne obstoječih virov in lahko povzroči konflikte lokacije pri ponovni namestitvi.
 
 ---
 
 ## 📋 Referenca kod napak
 
 | Napaka | Vzrok | Rešitev |
-|-------|-------|----------|
+|--------|--------|---------|
 | `AuthenticationError` | Niste prijavljeni | `azd auth login` |
 | `ResourceNotFound` | Manjka vir | Preverite imena virov |
 | `QuotaExceeded` | Omejitve naročnine | Zahtevajte povečanje kvote |
 | `InvalidTemplate` | Napaka v sintaksi Bicep | `az bicep build` |
 | `Conflict` | Vir že obstaja | Uporabite novo ime ali izbrišite |
-| `Forbidden` | Premalo dovoljenj | Preverite RBAC vloge |
+| `Forbidden` | Nezadostne pravice | Preverite vloge RBAC |
 
 ---
 
-## 🔄 Ponastavitev in okrevanje
+## 🔄 Ponastavitev in Obnova
 
 ```bash
-# Mehka ponastavitev (ohrani vire, ponovno namesti kodo)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Trda ponastavitev (izbriši vse, začni znova)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Trdi ponastavitev izbriše podatke in lahko spremeni končne točke. Najprej naredite varnostno kopijo in preglejte interaktivne pozive za brisanje. `--force --purge` je primeren samo za začasna okolja, ko je namenjena nepovratna izbris.
 
 ---
 
 ## 🔗 Navigacija
 
 | Smer | Poglavje |
-|-----------|---------|
-| **Prejšnje** | [Poglavje 6: Pred uvajanjem](../chapter-06-pre-deployment/README.md) |
+|-------|---------|
+| **Prejšnje** | [Poglavje 6: Pred nameščanjem](../chapter-06-pre-deployment/README.md) |
 | **Naslednje** | [Poglavje 8: Produkcija](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Sorodni viri
 
-- [Preverjanja pred uvajanjem](../chapter-06-pre-deployment/preflight-checks.md)
-- [Vodič za konfiguracijo](../chapter-03-configuration/configuration.md)
+- [Preverjanje pred nameščanjem](../chapter-06-pre-deployment/preflight-checks.md)
+- [Vodnik za konfiguracijo](../chapter-03-configuration/configuration.md)
 - [AZD GitHub težave](https://github.com/Azure/azure-dev/issues)
 
 ---

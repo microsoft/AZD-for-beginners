@@ -33,17 +33,19 @@ Upon completion, you will be able to:
 
 ## Table of Contents
 
-- [Understanding SKUs](../../../../docs/chapter-06-pre-deployment)
-- [Environment-Based Selection](../../../../docs/chapter-06-pre-deployment)
-- [Service-Specific Guidelines](../../../../docs/chapter-06-pre-deployment)
-- [Cost Optimization Strategies](../../../../docs/chapter-06-pre-deployment)
-- [Performance Considerations](../../../../docs/chapter-06-pre-deployment)
-- [Quick Reference Tables](../../../../docs/chapter-06-pre-deployment)
-- [Validation Tools](../../../../docs/chapter-06-pre-deployment)
+- [Understanding SKUs](#understanding-skus)
+- [Environment-Based Selection](#environment-based-selection)
+- [Service-Specific Guidelines](#service-specific-guidelines)
+- [Cost Optimization Strategies](#cost-optimization-strategies)
+- [Performance Considerations](#performance-considerations)
+- [Quick Reference Tables](#quick-reference-tables)
+- [Validation Tools](#validation-tools)
 
 ---
 
 ## Understanding SKUs
+
+> **Example scope:** YAML SKU maps and performance configurations below are design notes, not an `azure.yaml` schema or a load-tool configuration. Bicep blocks are alternatives/fragments: declare their parameters and parent resources, use unique symbolic names when combining them, and wire modules into a working project. Prices, limits, and region/SKU availability must be checked for your subscription before deployment.
 
 ### What are SKUs?
 
@@ -92,9 +94,9 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### Characteristics
@@ -138,7 +140,7 @@ environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
@@ -213,7 +215,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 2. **vCore-based** (Recommended for production)
    - **General Purpose**: Balanced compute and storage
    - **Business Critical**: Low latency, high IOPS
-   - **Hyperscale**: Highly scalable storage (up to 100TB)
+   - **Hyperscale**: Highly scalable storage; verify current size limits and regional support
 
 #### Example Configurations
 
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -307,7 +309,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 
 **Production (Dedicated)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,12 +317,14 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
+
+Zone redundancy also requires supported-region infrastructure and suitable VNet/subnet configuration, omitted here. This example budgets three dedicated nodes; configure at least two app replicas for cross-zone distribution and size both replicas and nodes for zone failure. See [Container Apps reliability guidance](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). To place an app on this profile, set its `workloadProfileName: 'production-profile'`; creating the profile alone does not move apps to it.
 
 ### Azure Cosmos DB
 
@@ -456,10 +460,13 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 Reserve resources for 1-3 years for significant discounts:
 
 ```bash
-# Check reservation options
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
+
+Reservation offerings and eligible resource types vary; inspect the catalog and purchase terms instead of assuming every service/SKU supports a reservation.
 
 ### 2. Right-Sizing
 
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -608,11 +617,13 @@ performance_requirements:
 Test different SKUs to validate performance:
 
 ```bash
-# Azure Load Testing service
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
 ### Monitoring and Optimization
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -670,9 +682,9 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 | Model | Pricing | CPU/Memory | Use Case |
 |-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | Development, variable load |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | Production |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | High performance |
+| Consumption | Pay-per-use | Supported CPU/memory combinations depend on environment/profile | Development or production, variable load |
+| Dedicated D4 | Dedicated node billing | 4 vCPU, 16GiB per node | Sustained load/isolation needs |
+| Dedicated D8 | Dedicated node billing | 8 vCPU, 32GiB per node | Higher sustained load |
 
 ---
 
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -712,6 +725,8 @@ check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
 ### Cost Estimation Script
+
+**Pseudocode only:** `Get-ResourceCost` below is a project-specific function you must implement using current regional/contract pricing and usage assumptions. It is not a PowerShell or Azure cmdlet.
 
 ```powershell
 # PowerShell script for cost estimation
@@ -749,6 +764,8 @@ Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
 ### Performance Validation
+
+The following YAML is a requirements sketch, **not** an Azure Load Testing, JMeter, Locust, or k6 input schema. Translate it into your chosen tool's real configuration before using the load-test command above.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -820,6 +837,6 @@ test_configuration:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,90 +1,92 @@
-# Hướng dẫn chọn SKU - Lựa chọn các cấp dịch vụ Azure phù hợp
+# Hướng Dẫn Chọn SKU - Lựa Chọn Các Cấp Dịch Vụ Azure Phù Hợp
 
-**Điều hướng chương:**
-- **📚 Trang khóa học**: [AZD For Beginners](../../README.md)
-- **📖 Chương hiện tại**: Chương 6 - Xác thực & Lập kế hoạch trước khi triển khai
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD For Beginners](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 6 - Kiểm Tra & Lập Kế Hoạch Trước Triển Khai
 - **⬅️ Trước**: [Capacity Planning](capacity-planning.md)
-- **➡️ Tiếp theo**: [Preflight Checks](preflight-checks.md)
-- **🚀 Chương tiếp theo**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
+- **➡️ Tiếp**: [Pre-flight Checks](preflight-checks.md)
+- **🚀 Chương Tiếp Theo**: [Chương 7: Khắc Phục Sự Cố](../chapter-07-troubleshooting/common-issues.md)
 
-## Giới thiệu
+## Giới Thiệu
 
-Hướng dẫn toàn diện này giúp bạn lựa chọn các SKU dịch vụ Azure (Stock Keeping Units) tối ưu cho các môi trường, khối lượng công việc và yêu cầu khác nhau. Tìm hiểu cách phân tích nhu cầu hiệu năng, yếu tố chi phí và yêu cầu mở rộng để chọn các cấp dịch vụ phù hợp nhất cho các triển khai Azure Developer CLI của bạn.
+Hướng dẫn toàn diện này giúp bạn lựa chọn các SKU dịch vụ Azure tối ưu cho các môi trường, khối lượng công việc và yêu cầu khác nhau. Tìm hiểu cách phân tích nhu cầu hiệu năng, cân nhắc chi phí và yêu cầu mở rộng để chọn các cấp dịch vụ phù hợp nhất cho các triển khai Azure Developer CLI của bạn.
 
-## Mục tiêu học tập
+## Mục Tiêu Học Tập
 
-Hoàn thành hướng dẫn này, bạn sẽ:
-- Hiểu các khái niệm SKU của Azure, mô hình định giá và khác biệt về tính năng
-- Nắm vững chiến lược lựa chọn SKU theo môi trường cho phát triển, staging và sản xuất
-- Phân tích yêu cầu khối lượng công việc và ghép chúng với các cấp dịch vụ phù hợp
-- Triển khai các chiến lược tối ưu chi phí qua lựa chọn SKU thông minh
-- Áp dụng các kỹ thuật kiểm tra hiệu năng và xác thực cho các lựa chọn SKU
+Khi hoàn thành hướng dẫn này, bạn sẽ:
+- Hiểu các khái niệm SKU Azure, mô hình giá, và khác biệt tính năng
+- Làm chủ chiến lược lựa chọn SKU theo môi trường cho phát triển, giai đoạn thử nghiệm, và sản xuất
+- Phân tích yêu cầu khối lượng công việc và đối chiếu với các cấp dịch vụ phù hợp
+- Áp dụng chiến lược tối ưu chi phí thông qua lựa chọn SKU thông minh
+- Thực hiện kiểm thử và xác thực hiệu năng cho lựa chọn SKU
 - Cấu hình đề xuất SKU tự động và giám sát
 
-## Kết quả học tập
+## Kết Quả Học Tập
 
 Sau khi hoàn thành, bạn sẽ có khả năng:
-- Chọn các SKU dịch vụ Azure phù hợp dựa trên yêu cầu và ràng buộc của khối lượng công việc
-- Thiết kế kiến trúc nhiều môi trường tiết kiệm chi phí với việc chọn cấp phù hợp
-- Triển khai đánh giá hiệu năng và xác thực cho các lựa chọn SKU
+- Chọn SKU dịch vụ Azure phù hợp dựa trên yêu cầu và giới hạn khối lượng công việc
+- Thiết kế kiến trúc đa môi trường với chi phí hiệu quả thông qua lựa chọn cấp phù hợp
+- Thực hiện đánh giá hiệu năng và xác thực lựa chọn SKU
 - Tạo công cụ tự động đề xuất SKU và tối ưu chi phí
-- Lập kế hoạch di chuyển SKU và chiến lược mở rộng khi yêu cầu thay đổi
-- Áp dụng các nguyên tắc của Azure Well-Architected Framework cho việc lựa chọn cấp dịch vụ
+- Lập kế hoạch di cư SKU và chiến lược mở rộng khi yêu cầu thay đổi
+- Áp dụng các nguyên tắc của Azure Well-Architected Framework cho lựa chọn cấp dịch vụ
 
-## Mục lục
+## Mục Lục
 
-- [Hiểu về SKUs](../../../../docs/chapter-06-pre-deployment)
-- [Lựa chọn theo môi trường](../../../../docs/chapter-06-pre-deployment)
-- [Hướng dẫn theo dịch vụ](../../../../docs/chapter-06-pre-deployment)
-- [Chiến lược tối ưu chi phí](../../../../docs/chapter-06-pre-deployment)
-- [Các lưu ý về hiệu năng](../../../../docs/chapter-06-pre-deployment)
-- [Bảng tham khảo nhanh](../../../../docs/chapter-06-pre-deployment)
-- [Công cụ xác thực](../../../../docs/chapter-06-pre-deployment)
+- [Hiểu Về SKU](#understanding-skus)
+- [Lựa Chọn Theo Môi Trường](#environment-based-selection)
+- [Hướng Dẫn Theo Dịch Vụ](#service-specific-guidelines)
+- [Chiến Lược Tối Ưu Chi Phí](#cost-optimization-strategies)
+- [Cân Nhắc Hiệu Năng](#performance-considerations)
+- [Bảng Tham Chiếu Nhanh](#quick-reference-tables)
+- [Công Cụ Xác Thực](#validation-tools)
 
 ---
 
-## Hiểu về SKUs
+## Hiểu Về SKU
 
-### SKUs là gì?
+> **Phạm vi ví dụ:** Các bản đồ SKU YAML và cấu hình hiệu năng dưới đây là ghi chú thiết kế, không phải `azure.yaml` schema hoặc cấu hình công cụ tải. Các khối Bicep là các lựa chọn/mảnh mã: khai báo tham số và tài nguyên cha, dùng tên ký hiệu duy nhất khi kết hợp, và nối các module thành dự án hoạt động. Giá cả, giới hạn và khả năng có mặt theo vùng/cấp SKU phải được kiểm tra trên đăng ký của bạn trước triển khai.
 
-SKUs (Stock Keeping Units) đại diện cho các cấp dịch vụ khác nhau và mức hiệu năng cho các tài nguyên Azure. Mỗi SKU cung cấp khác nhau:
+### SKU là gì?
+
+SKU (Stock Keeping Units) đại diện cho các cấp dịch vụ và mức hiệu năng khác nhau cho tài nguyên Azure. Mỗi SKU cung cấp sự khác biệt về:
 
 - **Đặc tính hiệu năng** (CPU, bộ nhớ, thông lượng)
 - **Khả năng tính năng** (tùy chọn mở rộng, mức SLA)
-- **Mô hình định giá** (theo mức tiêu thụ, đặt trước dung lượng)
-- **Khả dụng theo khu vực** (không phải SKU nào cũng có ở mọi khu vực)
+- **Mô hình giá** (theo mức tiêu thụ, dung lượng đặt trước)
+- **Khả năng hỗ trợ vùng miền** (không phải SKU nào cũng có ở mọi vùng)
 
-### Các yếu tố chính khi chọn SKU
+### Các Yếu Tố Chính Trong Việc Chọn SKU
 
 1. **Yêu cầu khối lượng công việc**
-   - Lưu lượng/mô hình tải dự kiến
+   - Mô hình lưu lượng/dòng dữ liệu dự kiến
    - Yêu cầu hiệu năng (CPU, bộ nhớ, I/O)
-   - Nhu cầu lưu trữ và mô hình truy cập
+   - Nhu cầu lưu trữ và mẫu truy cập
 
 2. **Loại môi trường**
    - Phát triển/kiểm thử so với sản xuất
-   - Yêu cầu khả dụng
+   - Yêu cầu sẵn sàng
    - Nhu cầu bảo mật và tuân thủ
 
-3. **Ràng buộc ngân sách**
+3. **Giới hạn ngân sách**
    - Chi phí ban đầu so với chi phí vận hành
-   - Chiết khấu đặt trước dung lượng
-   - Ảnh hưởng chi phí của auto-scaling
+   - Giảm giá khi đặt trước dung lượng
+   - Hệ quả chi phí do tự động mở rộng
 
 4. **Dự báo tăng trưởng**
    - Yêu cầu khả năng mở rộng
-   - Nhu cầu tính năng trong tương lai
-   - Độ phức tạp khi di chuyển
+   - Nhu cầu tính năng tương lai
+   - Độ phức tạp trong di cư
 
 ---
 
-## Lựa chọn theo môi trường
+## Lựa Chọn Theo Môi Trường
 
-### Môi trường Phát triển
+### Môi Trường Phát Triển
 
-**Ưu tiên**: Tối ưu chi phí, chức năng cơ bản, dễ cấp phát/hủy bỏ
+**Ưu Tiên**: Tối ưu chi phí, chức năng cơ bản, dễ dàng cấp/tước tài nguyên
 
-#### Recommended SKUs
+#### SKU Được Khuyên Dùng
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
-#### Đặc điểm
-- **App Service**: F1 (Free) or B1 (Basic) for simple testing
-- **Databases**: Basic tier with minimal resources
-- **Storage**: Standard with local redundancy only
-- **Compute**: Shared resources acceptable
-- **Networking**: Basic configurations
+#### Đặc Điểm
+- **App Service**: F1 (Miễn phí) hoặc B1 (Cơ bản) cho thử nghiệm đơn giản
+- **Cơ sở dữ liệu**: cấp Basic với tài nguyên tối thiểu
+- **Lưu trữ**: Standard chỉ với độ dự phòng cục bộ
+- **Tính toán**: Chấp nhận sử dụng tài nguyên chia sẻ
+- **Mạng**: Cấu hình cơ bản
 
-### Staging/Testing Environment
+### Môi Trường Giai Đoạn/Thử Nghiệm
 
-**Ưu tiên**: Cấu hình giống sản xuất, cân bằng chi phí, khả năng kiểm tra hiệu năng
+**Ưu Tiên**: Cấu hình giống sản xuất, cân bằng chi phí, khả năng kiểm thử hiệu năng
 
-#### Recommended SKUs
+#### SKU Được Khuyên Dùng
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -120,56 +122,56 @@ skus:
   container_apps: "Consumption" # Pay-per-use
 ```
 
-#### Đặc điểm
-- **Performance**: 70-80% of production capacity
-- **Features**: Most production features enabled
-- **Redundancy**: Some geographic redundancy
-- **Scaling**: Limited auto-scaling for testing
-- **Monitoring**: Full monitoring stack
+#### Đặc Điểm
+- **Hiệu năng**: 70-80% công suất sản xuất
+- **Tính năng**: Hầu hết các tính năng sản xuất được bật
+- **Dự phòng**: Một số dự phòng theo vùng địa lý
+- **Mở rộng**: Tự động mở rộng có giới hạn cho thử nghiệm
+- **Giám sát**: Toàn bộ tính năng giám sát
 
-### Production Environment
+### Môi Trường Sản Xuất
 
-**Ưu tiên**: Hiệu năng, khả dụng, bảo mật, tuân thủ, khả năng mở rộng
+**Ưu Tiên**: Hiệu năng, tính sẵn sàng, bảo mật, tuân thủ, khả năng mở rộng
 
-#### Recommended SKUs
+#### SKU Được Khuyên Dùng
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
-#### Đặc điểm
-- **High availability**: 99.9%+ SLA requirements
-- **Performance**: Dedicated resources, high throughput
-- **Security**: Premium security features
-- **Scaling**: Full auto-scaling capabilities
-- **Monitoring**: Comprehensive observability
+#### Đặc Điểm
+- **Tính khả dụng cao**: Yêu cầu SLA 99.9%+
+- **Hiệu năng**: Tài nguyên chuyên dụng, thông lượng cao
+- **Bảo mật**: Tính năng bảo mật cao cấp
+- **Mở rộng**: Khả năng tự động mở rộng đầy đủ
+- **Giám sát**: Quan sát toàn diện
 
 ---
 
-## Hướng dẫn theo dịch vụ
+## Hướng Dẫn Theo Dịch Vụ
 
 ### Azure App Service
 
-#### Ma trận quyết định SKU
+#### Ma Trận Quyết Định SKU
 
-| Trường hợp sử dụng | SKU được khuyến nghị | Lý do |
-|-------------------|----------------------|-------|
-| Development/Testing | F1 (Free) or B1 (Basic) | Tiết kiệm chi phí, đủ cho thử nghiệm |
-| Small production apps | S1 (Standard) | Custom domains, SSL, auto-scaling |
-| Medium production apps | P1V3 (Premium V3) | Better performance, more features |
-| High-traffic apps | P2V3 or P3V3 | Dedicated resources, high performance |
-| Mission-critical apps | I1V2 (Isolated V2) | Network isolation, dedicated hardware |
+| Trường Hợp Sử Dụng | SKU Khuyên Dùng | Lý Do |
+|----------|----------------|-----------|
+| Phát triển/Thử nghiệm | F1 (Miễn phí) hoặc B1 (Cơ bản) | Hiệu quả về chi phí, đủ cho thử nghiệm |
+| Ứng dụng nhỏ sản xuất | S1 (Standard) | Tên miền tùy chỉnh, SSL, tự động mở rộng |
+| Ứng dụng trung bình sản xuất | P1V3 (Premium V3) | Hiệu năng tốt hơn, nhiều tính năng hơn |
+| Ứng dụng lưu lượng cao | P2V3 hoặc P3V3 | Tài nguyên chuyên dụng, hiệu năng cao |
+| Ứng dụng quan trọng đặc biệt | I1V2 (Isolated V2) | Cô lập mạng, phần cứng chuyên dụng |
 
-#### Ví dụ cấu hình
+#### Ví Dụ Cấu Hình
 
-**Development**
+**Phát Triển**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-dev'
@@ -185,7 +187,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-**Production**
+**Sản Xuất**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-prod'
@@ -203,19 +205,19 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### Khung lựa chọn SKU
+#### Khung Lựa Chọn SKU
 
-1. **Dựa trên DTU (Database Transaction Units)**
+1. **Dựa trên DTU (Đơn vị Giao dịch Cơ sở dữ liệu)**
    - **Basic**: 5 DTU - Phát triển/kiểm thử
    - **Standard**: S0-S12 (10-3000 DTU) - Mục đích chung
-   - **Premium**: P1-P15 (125-4000 DTU) - Hiệu năng quan trọng
+   - **Premium**: P1-P15 (125-4000 DTU) - Yêu cầu hiệu năng cao
 
 2. **Dựa trên vCore** (Khuyến nghị cho sản xuất)
-   - **General Purpose**: Cân bằng compute và lưu trữ
+   - **General Purpose**: Cân bằng giữa tính toán và lưu trữ
    - **Business Critical**: Độ trễ thấp, IOPS cao
-   - **Hyperscale**: Lưu trữ có thể mở rộng lớn (lên tới 100TB)
+   - **Hyperscale**: Lưu trữ mở rộng cao; kiểm tra giới hạn kích thước hiện tại và hỗ trợ vùng
 
-#### Ví dụ cấu hình
+#### Ví Dụ Cấu Hình
 
 ```bicep
 // Development
@@ -252,21 +254,21 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 ### Azure Container Apps
 
-#### Loại môi trường
+#### Loại Môi Trường
 
-1. **Consumption-based**
-   - Pay-per-use pricing
-   - Suitable for development and variable workloads
-   - Shared infrastructure
+1. **Dựa trên tiêu thụ**
+   - Thanh toán theo mức sử dụng
+   - Phù hợp phát triển và khối lượng biến động
+   - Cơ sở hạ tầng dùng chung
 
-2. **Dedicated (Workload Profiles)**
-   - Dedicated compute resources
-   - Predictable performance
-   - Better for production workloads
+2. **Chuyên Dụng (Hồ Sơ Khối Lượng Công Việc)**
+   - Tài nguyên tính toán chuyên dụng
+   - Hiệu năng ổn định
+   - Phù hợp cho khối lượng sản xuất
 
-#### Ví dụ cấu hình
+#### Ví Dụ Cấu Hình
 
-**Development (Consumption)**
+**Phát Triển (Tiêu thụ)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Production (Dedicated)**
+**Sản Xuất (Chuyên Dụng)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,33 +317,35 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+Dự phòng vùng cũng đòi hỏi hạ tầng vùng hỗ trợ và cấu hình VNet/subnet phù hợp, không trình bày ở đây. Ví dụ này dự trù ba nút chuyên dụng; cấu hình ít nhất hai bản sao app để phân phối qua vùng và kích thước cả bản sao và nút để xử lý sự cố vùng. Xem [Hướng dẫn độ tin cậy Container Apps](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). Để đặt app trên hồ sơ này, cần thiết lập `workloadProfileName: 'production-profile'` của nó; tạo hồ sơ không tự động chuyển app sang đó.
+
 ### Azure Cosmos DB
 
-#### Mô hình thông lượng
+#### Mô Hình Thông Lượng
 
-1. **Manual Provisioned Throughput**
-   - Predictable performance
-   - Reserved capacity discounts
-   - Best for steady workloads
+1. **Thông lượng đặt trước thủ công**
+   - Hiệu năng dự đoán được
+   - Giảm giá dung lượng đặt trước
+   - Phù hợp cho khối lượng ổn định
 
-2. **Autoscale Provisioned Throughput**
-   - Automatic scaling based on usage
-   - Pay for what you use (with minimum)
-   - Good for variable workloads
+2. **Thông lượng đặt trước tự động mở rộng**
+   - Tự động mở rộng dựa trên sử dụng
+   - Thanh toán theo mức dùng thực tế (có mức tối thiểu)
+   - Phù hợp khối lượng biến động
 
 3. **Serverless**
-   - Pay-per-request
-   - No provisioned throughput
-   - Ideal for development and intermittent workloads
+   - Thanh toán theo số yêu cầu
+   - Không có thông lượng đặt trước
+   - Lý tưởng cho phát triển và khối lượng không liên tục
 
-#### SKU Examples
+#### Ví Dụ SKU
 
 ```bicep
 // Development - Serverless
@@ -398,17 +402,17 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 ### Azure Storage Account
 
-#### Các loại tài khoản lưu trữ
+#### Loại Tài Khoản Lưu Trữ
 
 1. **Standard_LRS** - Phát triển, dữ liệu không quan trọng
-2. **Standard_GRS** - Sản xuất, cần sao lưu địa lý
-3. **Premium_LRS** - Ứng dụng cần hiệu năng cao
-4. **Premium_ZRS** - Khả dụng cao với dự phòng theo zone
+2. **Standard_GRS** - Sản xuất, cần dự phòng địa lý
+3. **Premium_LRS** - Ứng dụng hiệu năng cao
+4. **Premium_ZRS** - Tính khả dụng cao với dự phòng vùng
 
-#### Các cấp hiệu năng
+#### Cấp Hiệu Năng
 
-- **Standard**: Mục đích chung, tiết kiệm chi phí
-- **Premium**: Hiệu năng cao, kịch bản độ trễ thấp
+- **Standard**: Mục đích chung, chi phí hiệu quả
+- **Premium**: Hiệu năng cao, độ trễ thấp
 
 ```bicep
 // Development
@@ -449,21 +453,24 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ---
 
-## Chiến lược tối ưu chi phí
+## Chiến Lược Tối Ưu Chi Phí
 
 ### 1. Đặt trước dung lượng
 
-Reserve resources for 1-3 years for significant discounts:
+Đặt trước tài nguyên 1-3 năm để nhận giảm giá lớn:
 
 ```bash
-# Kiểm tra các tùy chọn đặt chỗ
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. Chọn kích thước phù hợp
+Các loại đặt trước và loại tài nguyên đủ điều kiện thay đổi; kiểm tra catalog và điều khoản mua hàng thay vì giả định mọi dịch vụ/SKU đều hỗ trợ đặt trước.
 
-Start with smaller SKUs and scale up based on actual usage:
+### 2. Lựa chọn kích thước phù hợp
+
+Bắt đầu với SKU nhỏ hơn và mở rộng dựa trên sử dụng thực tế:
 
 ```yaml
 # Progressive scaling approach
@@ -479,7 +486,7 @@ production:
 
 ### 3. Cấu hình tự động mở rộng
 
-Implement intelligent scaling to optimize costs:
+Thực hiện mở rộng thông minh để tối ưu chi phí:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -536,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. Lên lịch mở rộng
+### 4. Mở rộng theo lịch trình
 
-Scale down during off-hours:
+Giảm quy mô trong giờ nghỉ:
 
 ```json
 {
@@ -583,11 +592,11 @@ Scale down during off-hours:
 
 ---
 
-## Các lưu ý về hiệu năng
+## Cân Nhắc Hiệu Năng
 
-### Yêu cầu hiệu năng cơ bản
+### Yêu Cầu Hiệu Năng Cơ Bản
 
-Define clear performance requirements before SKU selection:
+Định nghĩa yêu cầu hiệu năng rõ ràng trước khi chọn SKU:
 
 ```yaml
 performance_requirements:
@@ -603,21 +612,23 @@ performance_requirements:
     rto: "30 minutes"
 ```
 
-### Kiểm tra tải
+### Kiểm Tra Tải
 
-Test different SKUs to validate performance:
+Kiểm tra các SKU khác nhau để xác thực hiệu năng:
 
 ```bash
-# Dịch vụ kiểm thử tải Azure
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
-### Giám sát và tối ưu hóa
+### Giám Sát và Tối Ưu
 
-Set up comprehensive monitoring:
+Thiết lập giám sát toàn diện:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -644,45 +656,45 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## Bảng tham khảo nhanh
+## Bảng Tham Chiếu Nhanh
 
-### Tham chiếu nhanh SKU App Service
+### Tham Chiếu Nhanh App Service SKU
 
-| SKU | Cấp | vCPU | RAM | Storage | Price Range | Trường hợp sử dụng |
-|-----|------|------|-----|---------|-------------|--------------------|
-| F1 | Free | Shared | 1GB | 1GB | Free | Development |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | Small apps |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Production |
-| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | High performance |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Enterprise |
+| SKU | Cấp | vCPU | RAM | Lưu Trữ | Khoảng Giá | Trường Hợp Sử Dụng |
+|-----|------|------|-----|---------|-------------|----------|
+| F1 | Miễn phí | Chia sẻ | 1GB | 1GB | Miễn phí | Phát triển |
+| B1 | Cơ bản | 1 | 1.75GB | 10GB | $ | Ứng dụng nhỏ |
+| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Sản xuất |
+| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Hiệu năng cao |
+| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Doanh nghiệp |
 
-### Tham chiếu nhanh SKU SQL Database
+### Tham Chiếu Nhanh SQL Database SKU
 
-| SKU | Cấp | DTU/vCore | Storage | Price Range | Trường hợp sử dụng |
-|-----|------|-----------|---------|-------------|--------------------|
-| Basic | Basic | 5 DTU | 2GB | $ | Development |
-| S2 | Standard | 50 DTU | 250GB | $$ | Small production |
-| P2 | Premium | 250 DTU | 1TB | $$$ | High performance |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Balanced |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Mission critical |
+| SKU | Cấp | DTU/vCore | Lưu Trữ | Khoảng Giá | Trường Hợp Sử Dụng |
+|-----|------|-----------|---------|-------------|----------|
+| Basic | Cơ bản | 5 DTU | 2GB | $ | Phát triển |
+| S2 | Standard | 50 DTU | 250GB | $$ | Sản xuất nhỏ |
+| P2 | Premium | 250 DTU | 1TB | $$$ | Hiệu năng cao |
+| GP_Gen5_4 | Mục đích chung | 4 vCore | 4TB | $$$ | Cân bằng |
+| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Quan trọng thiết yếu |
 
-### Tham chiếu nhanh SKU Container Apps
+### Tham Chiếu Nhanh Container Apps SKU
 
-| Model | Pricing | CPU/Memory | Trường hợp sử dụng |
-|-------|---------|------------|-------------------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | Development, variable load |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | Production |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | High performance |
+| Mô Hình | Giá | CPU/Bộ Nhớ | Trường Hợp Sử Dụng |
+|-------|---------|------------|----------|
+| Tiêu Thụ | Thanh toán theo dùng | Các kết hợp CPU/bộ nhớ tùy môi trường/hồ sơ | Phát triển hoặc sản xuất, tải biến đổi |
+| D4 Chuyên Dụng | Tính phí nút chuyên dụng | 4 vCPU, 16GiB mỗi nút | Tải duy trì/cô lập cần thiết |
+| D8 Chuyên Dụng | Tính phí nút chuyên dụng | 8 vCPU, 32GiB mỗi nút | Tải cao hơn duy trì |
 
 ---
 
-## Công cụ xác thực
+## Công Cụ Xác Thực
 
-### SKU Availability Checker
+### Công Cụ Kiểm Tra Khả Dụng SKU
 
 ```bash
 #!/bin/bash
-# Kiểm tra tính khả dụng của SKU trong khu vực đích
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# Cách sử dụng
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### Cost Estimation Script
+### Kịch Bản Ước Tính Chi Phí
+
+**Chỉ giả mã:** `Get-ResourceCost` dưới đây là hàm cụ thể dự án bạn cần hiện thực dựa vào giá vùng/hợp đồng hiện hành và giả định sử dụng. Không phải cmdlet PowerShell hay Azure.
 
 ```powershell
-# Tập lệnh PowerShell để ước tính chi phí
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Sử dụng Azure Pricing API hoặc trình tính toán
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# Cách sử dụng
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -748,7 +763,9 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### Performance Validation
+### Xác Thực Hiệu Năng
+
+YAML sau là bản phác thảo yêu cầu, **không phải** schema đầu vào của Azure Load Testing, JMeter, Locust, hoặc k6. Dịch nó sang cấu hình công cụ bạn chọn trước khi dùng lệnh kiểm thử tải phía trên.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,43 +800,43 @@ test_configuration:
 
 ---
 
-## Tóm tắt các thực hành tốt nhất
+## Tóm Tắt Thực Hành Tốt Nhất
 
-### Nên làm
+### Nên Làm
 
 1. **Bắt đầu nhỏ và mở rộng** dựa trên sử dụng thực tế
-2. **Sử dụng các SKU khác nhau cho các môi trường khác nhau**
+2. **Dùng SKU khác nhau cho môi trường khác nhau**
 3. **Giám sát hiệu năng và chi phí liên tục**
-4. **Tận dụng đặt trước dung lượng cho khối lượng sản xuất**
-5. **Triển khai auto-scaling khi phù hợp**
-6. **Kiểm tra hiệu năng với khối lượng công việc thực tế**
-7. **Lập kế hoạch cho tăng trưởng nhưng tránh cấp quá mức**
-8. **Sử dụng các cấp miễn phí cho phát triển khi có thể**
+4. **Tận dụng dung lượng đặt trước cho khối lượng sản xuất**
+5. **Triển khai tự động mở rộng khi thích hợp**
+6. **Kiểm thử hiệu năng với khối lượng thực tế**
+7. **Lập kế hoạch tăng trưởng nhưng tránh cấp phát thừa**
+8. **Dùng cấp miễn phí cho phát triển khi có thể**
 
-### Không nên
+### Không Nên Làm
 
-1. **Không sử dụng SKU sản xuất cho phát triển**
-2. **Không bỏ qua khả dụng theo khu vực của SKU**
+1. **Không dùng SKU sản xuất cho phát triển**
+2. **Không bỏ qua khả năng có mặt SKU theo vùng**
 3. **Không quên chi phí truyền dữ liệu**
-4. **Không cấp quá mức mà không có lý do**
-5. **Không bỏ qua ảnh hưởng của các phụ thuộc**
-6. **Không đặt giới hạn auto-scaling quá cao**
+4. **Không cấp phát thừa mà không có lý do**
+5. **Không bỏ qua ảnh hưởng của phụ thuộc**
+6. **Không đặt giới hạn tự động mở rộng quá cao**
 7. **Không quên các yêu cầu tuân thủ**
-8. **Không đưa ra quyết định chỉ dựa trên giá**
+8. **Không quyết định chỉ dựa trên giá**
 
 ---
 
-**Mẹo chuyên nghiệp**: Sử dụng Azure Cost Management và Advisor để nhận các khuyến nghị cá nhân hóa nhằm tối ưu lựa chọn SKU của bạn dựa trên mẫu sử dụng thực tế.
+**Mẹo Chuyên Sâu**: Dùng Azure Cost Management và Advisor để nhận đề xuất cá nhân hoá tối ưu lựa chọn SKU dựa trên mẫu sử dụng thực tế.
 
 ---
 
-**Điều hướng**
-- **Bài trước**: [Capacity Planning](capacity-planning.md)
-- **Bài tiếp theo**: [Preflight Checks](preflight-checks.md)
+**Điều Hướng**
+- **Bài Trước**: [Capacity Planning](capacity-planning.md)
+- **Bài Tiếp**: [Preflight Checks](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Miễn trừ trách nhiệm:
-Văn bản này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Văn bản gốc bằng ngôn ngữ ban đầu nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu nhầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

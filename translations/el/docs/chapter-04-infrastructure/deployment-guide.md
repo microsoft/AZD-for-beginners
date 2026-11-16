@@ -1,135 +1,140 @@
-# Οδηγός Ανάπτυξης - Εμπέδωση των Αναπτύξεων με το AZD
+# Οδηγός Ανάπτυξης - Μαθαίνοντας τις Αναπτύξεις AZD
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Αρχική Μαθήματος**: [AZD For Beginners](../../README.md)
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
 - **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 4 - Υποδομή ως Κώδικας & Ανάπτυξη
 - **⬅️ Προηγούμενο Κεφάλαιο**: [Κεφάλαιο 3: Διαμόρφωση](../chapter-03-configuration/configuration.md)
-- **➡️ Επόμενο**: [Provisioning Resources](provisioning.md)
-- **🧩 Επίσης σε αυτό το κεφάλαιο**: [Σύνταξη του δικού σας προτύπου](custom-templates.md)
-- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 5: Λύσεις AI με πολλούς πράκτορες](../../examples/retail-scenario.md)
+- **➡️ Επόμενο**: [Provisioning Πόρων](provisioning.md)
+- **🧩 Επίσης σε αυτό το κεφάλαιο**: [Δημιουργία του δικού σας Προτύπου](custom-templates.md)
+- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 5: Πολυ-Πράκτορες Λύσεις AI](../../examples/retail-scenario.md)
 
 ## Εισαγωγή
 
-Αυτός ο περιεκτικός οδηγός καλύπτει ό,τι χρειάζεται να γνωρίζετε για την ανάπτυξη εφαρμογών χρησιμοποιώντας το Azure Developer CLI, από βασικές αναπτύξεις με μία εντολή έως προχωρημένα σενάρια παραγωγής με προσαρμοσμένα hooks, πολλαπλά περιβάλλοντα και ενσωμάτωση CI/CD. Εμπεδώστε ολόκληρο τον κύκλο ζωής ανάπτυξης με πρακτικά παραδείγματα και βέλτιστες πρακτικές.
+> Εξετάστηκε με βάση `azd 1.37.2` (Νοέμβριος 2026). Οι εντολές χρησιμοποιούν Bash· παραδείγματα JSON απαιτούν `jq`. Εκτός από την ρητά αρχικοποιημένη άσκηση todo, τα προηγμένα παραδείγματα είναι **θραύσματα ενσωμάτωσης**: παρέχετε τη δική σας πηγή, υποδομή, δοκιμές και σενάρια. Καμία ανάπτυξη Azure δεν εκτελέστηκε σε αυτήν την αναθεώρηση.
+
+Αυτός ο ολοκληρωμένος οδηγός καλύπτει ό,τι χρειάζεστε για την ανάπτυξη εφαρμογών χρησιμοποιώντας το Azure Developer CLI, από βασικές αναπτύξεις με μια εντολή έως προχωρημένα σενάρια παραγωγής με προσαρμοσμένα hooks, πολλαπλά περιβάλλοντα και ενσωμάτωση CI/CD. Κατακτήστε ολόκληρο τον κύκλο ζωής ανάπτυξης με πρακτικά παραδείγματα και βέλτιστες πρακτικές.
 
 ## Στόχοι Μάθησης
 
-Με την ολοκλήρωση αυτού του οδηγού θα:
+Ολοκληρώνοντας αυτόν τον οδηγό, θα:
 - Κατακτήσετε όλες τις εντολές και ροές εργασίας ανάπτυξης του Azure Developer CLI
-- Κατανοήσετε τον πλήρη κύκλο ζωής ανάπτυξης από την παροχή πόρων έως την παρακολούθηση
-- Υλοποιήσετε προσαρμοσμένα hooks ανάπτυξης για αυτοματοποίηση πριν και μετά την ανάπτυξη
-- Διαμορφώσετε πολλαπλά περιβάλλοντα με παραμέτρους ειδικές σε κάθε περιβάλλον
-- Ρυθμίσετε προχωρημένες στρατηγικές ανάπτυξης όπως blue-green και canary
-- Ενσωματώσετε τις αναπτύξεις azd με σωληνώσεις CI/CD και ροές εργασίας DevOps
+- Κατανοήσετε τον πλήρη κύκλο ζωής ανάπτυξης από το provisioning έως την παρακολούθηση
+- Εφαρμόσετε προσαρμοσμένα hooks ανάπτυξης για αυτοματοποίηση πριν και μετά την ανάπτυξη
+- Διαμορφώσετε πολλαπλά περιβάλλοντα με παραμέτρους ειδικές για κάθε περιβάλλον
+- Ρυθμίσετε προχωρημένες στρατηγικές ανάπτυξης όπως blue-green και canary deployments
+- Ενσωματώσετε τις αναπτύξεις azd σε pipelines CI/CD και ροές εργασίας DevOps
 
 ## Αποτελέσματα Μάθησης
 
-Μετά την ολοκλήρωση, θα μπορείτε να:
+Με την ολοκλήρωση, θα μπορείτε να:
 - Εκτελείτε και αντιμετωπίζετε προβλήματα σε όλες τις ροές εργασίας ανάπτυξης azd ανεξάρτητα
 - Σχεδιάζετε και υλοποιείτε προσαρμοσμένη αυτοματοποίηση ανάπτυξης χρησιμοποιώντας hooks
-- Διαμορφώνετε αναπτύξεις έτοιμες για παραγωγή με σωστή ασφάλεια και παρακολούθηση
-- Διαχειρίζεστε σύνθετα σενάρια ανάπτυξης με πολλαπλά περιβάλλοντα
-- Βελτιστοποιείτε την απόδοση ανάπτυξης και υλοποιείτε στρατηγικές επαναφοράς
-- Ενσωματώνετε τις αναπτύξεις azd στις πρακτικές DevOps του οργανισμού
+- Διαμορφώνετε ανάπτυξη έτοιμη για παραγωγή με κατάλληλη ασφάλεια και παρακολούθηση
+- Διαχειρίζεστε πολύπλοκα σενάρια ανάπτυξης πολλαπλών περιβαλλόντων
+- Βελτιστοποιείτε την απόδοση ανάπτυξης και εφαρμόζετε στρατηγικές επαναφοράς
+- Ενσωματώνετε τις αναπτύξεις azd σε επιχειρησιακές πρακτικές DevOps
 
 ## Επισκόπηση Ανάπτυξης
 
 Το Azure Developer CLI παρέχει αρκετές εντολές ανάπτυξης:
-- `azd up` - Ολοκληρωμένη ροή εργασίας (παροχή + ανάπτυξη)
+- `azd up` - Πλήρης ροή εργασίας (provision + deploy)
 - `azd provision` - Δημιουργία/ενημέρωση μόνο πόρων Azure
-- `azd deploy` - Ανάπτυξη μόνο του κώδικα εφαρμογής
-- `azd package` - Κατασκευή και συσκευασία εφαρμογών
+- `azd deploy` - Ανάπτυξη μόνο κώδικα εφαρμογής
+- `azd package` - Δημιουργία και πακετάρισμα εφαρμογών
 
-## Βασικές Ροές Ανάπτυξης
+## Βασικές Ροές Εργασίας Ανάπτυξης
 
 ### Πλήρης Ανάπτυξη (azd up)
-Η πιο κοινή ροή εργασιών για νέα έργα:
+Η πιο κοινή ροή εργασίας για νέα έργα:
 ```bash
-# Ανάπτυξη όλων από την αρχή
+# Deploy everything from scratch
 azd up
 
-# Ανάπτυξη με συγκεκριμένο περιβάλλον
+# Deploy with specific environment
 azd up --environment production
 
-# Ανάπτυξη με προσαρμοσμένες παραμέτρους
-azd up --parameter location=westus2 --parameter sku=P1v2
+# Configure a location for the selected environment before first provisioning
+azd env set AZURE_LOCATION westus2
+# SKU changes must be wired into your template's parameter file/Bicep.
+azd up
 ```
 
 ### Ανάπτυξη Μόνο Υποδομής
 Όταν χρειάζεται να ενημερώσετε μόνο πόρους Azure:
 ```bash
-# Παροχή/ενημέρωση υποδομής
+# Provision/update infrastructure
 azd provision
 
-# Παροχή με δοκιμαστική εκτέλεση για προεπισκόπηση αλλαγών
+# Provision with dry-run to preview changes
 azd provision --preview
 
-# Παροχή συγκεκριμένων υπηρεσιών
-azd provision --service database
+# Provisioning applies infrastructure, not an azure.yaml service selection.
+# In a configured layered project, use: azd provision <layer-name>
 ```
 
 ### Ανάπτυξη Μόνο Κώδικα
 Για γρήγορες ενημερώσεις εφαρμογής:
 ```bash
-# Ανάπτυξη όλων των υπηρεσιών
+# Deploy all services
 azd deploy
 
-# Αναμενόμενη έξοδος:
-# Ανάπτυξη υπηρεσιών (azd deploy)
-# - web: Ανάπτυξη... Ολοκληρώθηκε
-# - api: Ανάπτυξη... Ολοκληρώθηκε
-# ΕΠΙΤΥΧΙΑ: Η ανάπτυξή σας ολοκληρώθηκε σε 2 λεπτά 15 δευτερόλεπτα
+# Expected output:
+# Deploying services (azd deploy)
+# - web: Deploying... Done
+# - api: Deploying... Done
+# SUCCESS: Your deployment completed in 2 minutes 15 seconds
 
-# Ανάπτυξη συγκεκριμένης υπηρεσίας
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Ανάπτυξη με προσαρμοσμένες παραμέτρους κατασκευής
-azd deploy --service api --build-arg NODE_ENV=production
+# Docker build arguments belong in azure.yaml: services.api.docker.buildArgs
+# They are not an azd deploy --build-arg flag.
 
-# Επαλήθευση ανάπτυξης
+# Verify deployment
 azd show --output json | jq '.services'
 ```
 
 ### ✅ Επαλήθευση Ανάπτυξης
 
-Μετά από κάθε ανάπτυξη, επαληθεύστε την επιτυχία:
+Μετά από οποιαδήποτε ανάπτυξη, επαληθεύστε την επιτυχία:
 
 ```bash
-# Ελέγξτε ότι όλες οι υπηρεσίες λειτουργούν
+# Inspect configured service targets and ingress URLs (not a health check)
 azd show
 
-# Δοκιμάστε τα endpoints υγείας
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Test health endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
-curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
-curl -f "$API_URL/health" || echo "❌ API health check failed"
+curl -f "$WEB_URL" || { echo "❌ Web request failed"; exit 1; }
+# For the todo-nodejs-mongo template, /lists exists; /health does not.
+curl -f "$API_URL/lists" || { echo "❌ API request failed"; exit 1; }
 
-# Παρακολουθήστε για σφάλματα (ανοίγει στο πρόγραμμα περιήγησης από προεπιλογή)
+# Monitor for errors (opens in browser by default)
 azd monitor --logs
 ```
 
 **Κριτήρια Επιτυχίας:**
-- ✅ Όλες οι υπηρεσίες εμφανίζουν κατάσταση "Running"
-- ✅ Τα endpoints υγείας επιστρέφουν HTTP 200
-- ✅ Δεν υπάρχουν αρχεία καταγραφής σφαλμάτων στα τελευταία 5 λεπτά
+- ✅ `azd show` επιλύει αναμενόμενους στόχους/URL υπηρεσιών
+- ✅ Τα αιτήματα προς τις πραγματικές διαδρομές της εφαρμογής επιστρέφουν την αναμενόμενη κατάσταση και σώμα
+- ✅ Καμία καταχώρηση σφάλματος κατά τα τελευταία 5 λεπτά
 - ✅ Η εφαρμογή ανταποκρίνεται σε δοκιμαστικά αιτήματα
 
 ## 🏗️ Κατανόηση της Διαδικασίας Ανάπτυξης
 
 ### Νέος στα hooks; Ξεκινήστε εδώ
 
-Ένα **hook** είναι μια εντολή που εκτελεί το azd αυτόματα σε μια συγκεκριμένη στιγμή της διαδικασίας ανάπτυξης—πριν ή μετά την παροχή πόρων, και πριν ή μετά την ανάπτυξη του κώδικά σας. Σας επιτρέπουν να αυτοματοποιήσετε τις μικρές εργασίες που πάντα συνοδεύουν μια ανάπτυξη: σπορά βάσης δεδομένων, εκτέλεση μεταναστεύσεων, κατασκευή assets ή smoke-testing της ζωντανής εφαρμογής.
+Ένα **hook** είναι μια εντολή που τρέχει αυτόματα το azd σε συγκεκριμένη στιγμή της διαδικασίας ανάπτυξης—πριν ή μετά το provisioning, και πριν ή μετά την ανάπτυξη του κώδικα σας. Σας επιτρέπουν να αυτοματοποιείτε τις μικρές δουλειές που πάντα συνοδεύουν μια ανάπτυξη: γέμισμα βάσης δεδομένων, εκτέλεση μεταναστεύσεων, δημιουργία assets ή smoke-testing της ζωντανής εφαρμογής.
 
-| Hook | Εκτελείται… | Συνηθισμένη χρήση |
+| Hook | Τρέχει… | Συνήθης χρήση |
 |------|-------|------------|
-| `preprovision` | Πριν δημιουργηθούν οι πόροι | Επικύρωση προαπαιτούμενων, είσοδος σε registry |
-| `postprovision` | Μετά που υπάρχουν οι πόροι | Διαμόρφωση πόρων, ρύθμιση της βάσης δεδομένων |
-| `predeploy` | Πριν αναπτυχθεί ο κώδικας | Κατασκευή front-end assets, εκτέλεση unit tests |
-| `postdeploy` | Μετά που ο κώδικας είναι ζωντανός | Εκτέλεση μεταναστεύσεων βάσης, smoke-test του endpoint |
+| `preprovision` | Πριν δημιουργηθούν πόροι | Επικύρωση προϋποθέσεων, είσοδος σε registry |
+| `postprovision` | Μετά την ύπαρξη πόρων | Διαμόρφωση πόρων, ρύθμιση βάσης δεδομένων |
+| `predeploy` | Πριν από την ανάπτυξη κώδικα | Δημιουργία front-end assets, εκτέλεση unit tests |
+| `postdeploy` | Μετά την ανάδυση κώδικα live | Εκτέλεση μεταναστεύσεων DB, smoke-test του endpoint |
 
-Τα hooks βρίσκονται στο `azure.yaml` σας. Εδώ είναι το μικρότερο δυνατό παράδειγμα—απλώς εκτυπώνει ένα μήνυμα μετά την ανάπτυξη:
+Τα hooks ζουν στο `azure.yaml` σας. Να ένα μικρότερο παράδειγμα—τυπώνει απλά ένα μήνυμα μετά την ανάπτυξη:
 
 ```yaml
 # azure.yaml
@@ -139,15 +144,15 @@ hooks:
     run: echo "Deployment finished! 🎉"
 ```
 
-Αυτό είναι—την επόμενη φορά που θα εκτελέσετε `azd up`, το μήνυμα εκτυπώνεται αυτόματα. Μπορείτε επίσης να εκτελέσετε ένα hook μόνο του, χωρίς πλήρη ανάπτυξη, κάτι που είναι ιδανικό για δοκιμές:
+Αυτό ήταν—την επόμενη φορά που θα τρέξετε `azd up`, το μήνυμα εκτυπώνεται αυτόματα. Μπορείτε επίσης να τρέξετε ένα hook μόνο του, χωρίς πλήρη ανάπτυξη, που είναι ιδανικό για δοκιμές:
 
 ```bash
 azd hooks run postdeploy
 ```
 
-Οι παρακάτω φάσεις δείχνουν πραγματικά hooks (μεταναστεύσεις, δοκιμές, επικύρωση) για κάθε στάδιο.
+Οι παρακάτω φάσεις δείχνουν hooks πραγματικού κόσμου (μεταναστεύσεις, δοκιμές, επικύρωση) για κάθε στάδιο.
 
-### Φάση 1: Hooks πριν την παροχή
+### Φάση 1: Hooks πριν το Provision
 ```yaml
 # azure.yaml
 hooks:
@@ -161,13 +166,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Φάση 2: Παροχή Υποδομής
+### Φάση 2: Provision Υποδομής
 - Διαβάζει πρότυπα υποδομής (Bicep/Terraform)
 - Δημιουργεί ή ενημερώνει πόρους Azure
-- Διαμορφώνει δικτύωση και ασφάλεια
+- Ρυθμίζει δικτύωση και ασφάλεια
 - Ρυθμίζει παρακολούθηση και καταγραφή
 
-### Φάση 3: Hooks μετά την παροχή
+### Φάση 3: Hooks μετά το Provision
 ```yaml
 hooks:
   postprovision:
@@ -180,12 +185,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Φάση 4: Συσκευασία Εφαρμογής
-- Κατασκευάζει τον κώδικα εφαρμογής
+### Φάση 4: Πακέτα Εφαρμογής
+- Δημιουργεί κώδικα εφαρμογής
 - Δημιουργεί αντικείμενα ανάπτυξης
-- Συσκευάζει για την πλατφόρμα στόχο (containers, ZIP αρχεία, κ.λπ.)
+- Πακετάρει για στοχευμένη πλατφόρμα (containers, αρχεία ZIP, κλπ.)
 
-### Φάση 5: Hooks πριν την ανάπτυξη
+### Φάση 5: Hooks πριν την Ανάπτυξη
 ```yaml
 hooks:
   predeploy:
@@ -199,11 +204,11 @@ hooks:
 ```
 
 ### Φάση 6: Ανάπτυξη Εφαρμογής
-- Αναπτύσσει τα συσκευασμένα πακέτα εφαρμογών στις υπηρεσίες Azure
+- Αναπτύσσει πακεταρισμένες εφαρμογές σε υπηρεσίες Azure
 - Ενημερώνει ρυθμίσεις διαμόρφωσης
-- Εκκινεί/επανεκκινεί υπηρεσίες
+- Ξεκινά/επαναφέρει υπηρεσίες
 
-### Φάση 7: Hooks μετά την ανάπτυξη
+### Φάση 7: Hooks μετά την Ανάπτυξη
 ```yaml
 hooks:
   postdeploy:
@@ -213,14 +218,14 @@ hooks:
       npm run test:integration
       
       echo "Warming up applications..."
-      curl https://${WEB_URL}/health
+      curl --fail "$WEB_URL/health"
 ```
 
-### Διαχείριση Σφαλμάτων Hook
+### Διαχείριση Σφαλμάτων Hooks
 
-Από προεπιλογή, **αν μια εντολή hook τερματίσει με κωδικό διαφορετικό του μηδενός, το azd σταματά όλη τη λειτουργία.** Αυτό συνήθως είναι το επιθυμητό—μια αποτυχημένη μετανάστευση πρέπει να διακόψει την ανάπτυξη, όχι να παραδώσει μια σπασμένη εφαρμογή. Αλλά αυτό σημαίνει ότι τα hooks πρέπει να γράφονται προσεκτικά.
+Από προεπιλογή, **αν μια εντολή hook τερματίσει με μη μηδενικό κωδικό, το azd σταματά όλη την λειτουργία.** Αυτό συνήθως είναι το επιθυμητό—μια αποτυχημένη μετανάστευση πρέπει να σταματά την ανάπτυξη, όχι να αποστέλλει μια σπασμένη εφαρμογή. Αλλά σημαίνει ότι τα hooks πρέπει να γράφονται προσεκτικά.
 
-**1. Κάντε τις αποτυχίες δυνατές και εκ προθέσεως.** Ένα hook αποτυγχάνει όταν η τελευταία του εντολή επιστρέφει κωδικό εξόδου διαφορετικό του 0. Σε shell scripts, προσθέστε `set -e` ώστε το hook να σταματά στην πρώτη αποτυχημένη εντολή αντί να συνεχίζει αθόρυβα:
+**1. Κάντε τις αποτυχίες ηχηρές και σκόπιμες.** Ένα hook αποτυγχάνει όταν η τελευταία εντολή του επιστρέφει μη μηδενικό κωδικό εξόδου. Στα shell scripts, προσθέστε `set -e` ώστε το hook να σταματά στην πρώτη αποτυχημένη εντολή αντί να συνεχίζει αθόρυβα:
 
 ```yaml
 hooks:
@@ -232,24 +237,24 @@ hooks:
       npm run db:migrate
 ```
 
-**2. Επιτρέψτε σε ένα hook να αποτύχει χωρίς να σταματήσει το azd.** Για μη κρίσιμα βήματα (προαιρετική προθέρμανση cache, ειδοποίηση με προσπάθεια), ορίστε `continueOnError: true`. Το azd καταγράφει την αποτυχία αλλά συνεχίζει:
+**2. Επιτρέψτε σε ένα hook να αποτύχει χωρίς να σταματήσει το azd.** Για μη κρίσιμα βήματα (προαιρετική ζεστασιά cache, ενημέρωση με καλύτερη προσπάθεια), ορίστε `continueOnError: true`. Το azd καταγράφει την αποτυχία αλλά συνεχίζει:
 
 ```yaml
 hooks:
   postdeploy:
     shell: sh
     continueOnError: true         # a failure here won't fail 'azd up'
-    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+    run: curl -f "$WEB_URL/warmup"
 ```
 
-**3. Δοκιμάστε τα hooks απομονωμένα πριν από πλήρη εκτέλεση.** Δεν χρειάζεται να τρέξετε `azd up` για να αποσφαλματώσετε ένα hook—εκτελέστε το μόνο του και επαναλάβετε γρήγορα:
+**3. Δοκιμάστε hooks απομονωμένα πριν από πλήρη εκτέλεση.** Δεν χρειάζεται να τρέξετε `azd up` για να διορθώσετε ένα hook—τρέξτε το μόνο του και κάντε γρήγορες επαναλήψεις:
 
 ```bash
-azd hooks run predeploy          # εκτελεί μόνο το predeploy hook
+azd hooks run predeploy          # runs the matching project/service hooks
 azd hooks run postdeploy --service api
 ```
 
-**4. Προσέξτε για shells ειδικά σε λειτουργικά συστήματα.** Ένα hook που χρησιμοποιεί `shell: pwsh` απαιτεί PowerShell εγκατεστημένο στο μηχάνημα που το εκτελεί (συμπεριλαμβανομένων των CI agents). Χρησιμοποιήστε `shell: sh` για τη μεγαλύτερη φορητότητα, ή παρέχετε και τις δύο παραλλαγές `windows` και `posix`:
+**4. Προσέξτε για κέλυφη ειδικά λειτουργικού συστήματος.** Ένα hook που χρησιμοποιεί `shell: pwsh` χρειάζεται το PowerShell εγκατεστημένο στο μηχάνημα που το τρέχει (συμπεριλαμβανομένων των agents CI). Χρησιμοποιήστε `shell: sh` για τη μεγαλύτερη φορητότητα, ή παρέχετε και τις παραλλαγές `windows` και `posix`:
 
 ```yaml
 hooks:
@@ -262,61 +267,61 @@ hooks:
       run: ./scripts/setup.ps1
 ```
 
-> **Συμβουλή αποσφαλμάτωσης:** εκτελέστε οποιαδήποτε εντολή azd με `--debug` για να δείτε την ακριβή γραμμή εντολής του hook και την πλήρη έξοδό της—απαραίτητο όταν ένα hook λειτουργεί τοπικά αλλά αποτυγχάνει στο CI.
+> **Συμβουλή αποσφαλμάτωσης:** τρέξτε οποιαδήποτε εντολή azd με `--debug` για να δείτε την ακριβή γραμμή εντολής hook και την πλήρη έξοδό της—ανεκτίμητο όταν ένα hook δουλεύει τοπικά αλλά αποτυγχάνει στο CI.
 
 ## 🎛️ Διαμόρφωση Ανάπτυξης
 
-### Ρυθμίσεις Ανάπτυξης ανά Υπηρεσία
+### Ρυθμίσεις Ανάπτυξης Ειδικές Υπηρεσίας
 ```yaml
 # azure.yaml
 services:
   web:
     project: ./src/web
     host: staticwebapp
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    dist: dist
     
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
     env:
-      - name: NODE_ENV
-        value: production
-      - name: API_VERSION
-        value: "1.0.0"
+      NODE_ENV: production
+      API_VERSION: "1.0.0"
         
   worker:
     project: ./src/worker
     host: function
-    runtime: node
-    buildCommand: npm install --production
+    language: js
 ```
 
-### Διαμορφώσεις ειδικές για το Περιβάλλον
+### Περιβαλλοντικές Διαμορφώσεις
+
+Αυτές είναι μόνο τοπικές τιμές azd. Χαρτογραφήστε τις ρητά σε υποδομή/διαμόρφωση runtime. Το `NODE_ENV` είναι συνήθως `production` για εφαρμογή Node που έχει αναπτυχθεί, συμπεριλαμβανομένης ανάπτυξης staging· χρησιμοποιήστε ξεχωριστή μεταβλητή φίλου εφαρμογής για να διακρίνετε τα στάδια ανάπτυξης.
+
 ```bash
-# Περιβάλλον ανάπτυξης
+# Development environment
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Περιβάλλον προ-παραγωγής
+# Staging environment
 azd env new staging
-azd env set NODE_ENV staging
+azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Περιβάλλον παραγωγής
+# Production environment
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Προηγμένα Σενάρια Ανάπτυξης
+## 🔧 Προχωρημένα Σενάρια Ανάπτυξης
 
 ### Εφαρμογές Πολλών Υπηρεσιών
 ```yaml
@@ -355,51 +360,52 @@ services:
 ```
 
 ### Blue-Green Αναπτύξεις
+
+**Εικονογραφημένο επιχειρησιακό σκίτσο:** πρέπει να παρέχετε και τα δύο περιβάλλοντα, μια κοινή στρώση δρομολόγησης κυκλοφορίας και τα δύο παρακάτω σενάρια. Το azd δεν αλλάζει αυτόματα την κυκλοφορία ή επικυρώνει την ετοιμότητα επαναφοράς. Κρατήστε πράσινο μέχρι το μπλε να περάσει δοκιμές και να μην χρειάζεται πια επαναφορά.
+
 ```bash
-# Δημιουργήστε το μπλε περιβάλλον
+# Create blue environment
 azd env new production-blue
 azd up --environment production-blue
 
-# Δοκιμάστε το μπλε περιβάλλον
+# Test blue environment
 ./scripts/test-environment.sh production-blue
 
-# Κατευθύνετε την κυκλοφορία στο μπλε (χειροκίνητη ενημέρωση DNS/εξισορροπιστή φορτίου)
+# Switch traffic to blue (manual DNS/load balancer update)
 ./scripts/switch-traffic.sh production-blue
 
-# Καθαρίστε το πράσινο περιβάλλον
+# Clean up green environment
 azd env select production-green
 azd down --force
 ```
 
 ### Canary Αναπτύξεις
-```yaml
-# azure.yaml - Configure traffic splitting
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    trafficSplit:
-      - revision: stable
-        percentage: 90
-      - revision: canary
-        percentage: 10
+```bash
+# Requires an existing Container App in multiple-revision mode and two
+# ready revisions. Replace placeholders with actual revision names.
+az containerapp ingress traffic set \
+  --name "<app-name>" --resource-group "<rg-name>" \
+  --revision-weight "<stable-revision>=90" "<canary-revision>=10"
 ```
+
+Ο διαχωρισμός κυκλοφορίας ανήκει στη διαμόρφωση Container Apps (Bicep ή Azure CLI), όχι σε `azure.yaml` `trafficSplit` ιδιότητα. Η προεπισκόπηση/provisioning και οι επόμενες αναπτύξεις πρέπει να διατηρούν τον επιλεγμένο τρόπο αναθεώρησης και τους κανόνες δρομολόγησης.
 
 ### Σταδιακές Αναπτύξεις
 ```bash
 #!/bin/bash
 # deploy-staged.sh
+set -e
 
 echo "Deploying to development..."
 azd env select dev
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running dev tests..."
 ./scripts/test-environment.sh dev
 
 echo "Deploying to staging..."
 azd env select staging
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running staging tests..."
 ./scripts/test-environment.sh staging
@@ -409,43 +415,38 @@ read -p "Deploy to production? (y/N): " confirm
 if [[ $confirm == [yY] ]]; then
     echo "Deploying to production..."
     azd env select production
-    azd up --confirm-with-no-prompt
+    azd up --no-prompt
     
     echo "Running production smoke tests..."
     ./scripts/test-environment.sh production
 fi
 ```
 
-## 🐳 Αναπτύξεις Κοντέινερ
+## 🐳 Αναπτύξεις Container
 
-### Αναπτύξεις εφαρμογών κοντέινερ
+### Αναπτύξεις Container App
 ```yaml
 services:
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        BUILD_VERSION: ${BUILD_VERSION}
-        NODE_ENV: production
+        - BUILD_VERSION=${BUILD_VERSION}
+        - NODE_ENV=production
     env:
-      - name: DATABASE_URL
-        value: ${DATABASE_URL}
-    secrets:
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-    scale:
-      minReplicas: 1
-      maxReplicas: 10
+      NODE_ENV: production
 ```
 
-### Βελτιστοποίηση Dockerfile πολλαπλών σταδίων
+Διαμορφώστε μυστικά runtime με `configuration.secrets`/`secretRef` (ή αναφορές Key Vault) και κλιμάκωση με `template.scale` στην υποδομή Container App. Μην εφευρίσκετε υπηρεσιακές ιδιότητες `secrets` ή `scale` στο `azure.yaml`.
+
+### Βελτιστοποίηση Dockerfile Πολλαπλών Σταδίων
 ```dockerfile
 # Dockerfile
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 WORKDIR /app
 COPY package*.json ./
 
@@ -455,11 +456,12 @@ COPY . .
 CMD ["npm", "run", "dev"]
 
 FROM base AS build
-RUN npm ci --only=production
+RUN npm ci
 COPY . .
 RUN npm run build
+RUN npm prune --omit=dev
 
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
@@ -470,77 +472,89 @@ CMD ["npm", "start"]
 
 ## ⚡ Βελτιστοποίηση Απόδοσης
 
-### Αναπτύξεις ανά Υπηρεσία
+### Αναπτύξεις Ειδικές Υπηρεσίας
 ```bash
-# Αναπτύξτε μια συγκεκριμένη υπηρεσία για ταχύτερη επανάληψη
-azd deploy --service web
-azd deploy --service api
+# Deploy a specific service for faster iteration
+azd deploy web
+azd deploy api
 
-# Αναπτύξτε όλες τις υπηρεσίες
+# Deploy all services
 azd deploy
 ```
 
-### Caching κατασκευής
+### Cache της Δομής
 ```yaml
-# azure.yaml - Configure build commands
+# azure.yaml fragment - assumes package.json has a build script
 services:
   web:
     project: ./src/web
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    host: appservice
+    dist: dist
 ```
+
+Η τυπική ροή εργασίας Node χρησιμοποιεί script πακέτων· τα hooks υπηρεσίας `prepackage` μπορούν να προσθέσουν απαραίτητα βήματα. Το caching επιπέδου Docker είναι ξεχωριστό από τον ορισμό εντολής δομής υπηρεσίας.
 
 ### Αποδοτικές Αναπτύξεις Κώδικα
 ```bash
-# Χρησιμοποιήστε azd deploy (όχι azd up) για αλλαγές μόνο στον κώδικα
-# Αυτό παρακάμπτει την παροχή υποδομής και είναι πολύ πιο γρήγορο
+# Use azd deploy (not azd up) for code-only changes
+# This skips infrastructure provisioning and is much faster
 azd deploy
 
-# Αναπτύξτε μια συγκεκριμένη υπηρεσία για ταχύτερη επανάληψη
-azd deploy --service api
+# Deploy specific service for fastest iteration
+azd deploy api
 ```
 
 ## 🔍 Παρακολούθηση Ανάπτυξης
 
-### Παρακολούθηση ανάπτυξης σε πραγματικό χρόνο
+### Παρακολούθηση Ανάπτυξης σε Πραγματικό Χρόνο
 ```bash
-# Παρακολούθηση της εφαρμογής σε πραγματικό χρόνο
+# Monitor application in real-time
 azd monitor --live
 
-# Προβολή αρχείων καταγραφής της εφαρμογής
+# View application logs
 azd monitor --logs
 
-# Έλεγχος κατάστασης ανάπτυξης
+# Check deployment status
 azd show
 ```
 
-### Έλεγχοι υγείας
-```yaml
-# azure.yaml - Configure health checks
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    healthCheck:
-      path: /health
-      interval: 30s
-      timeout: 10s
-      retries: 3
+### Έλεγχοι Υγείας
+```bicep
+// Partial Container App container definition:
+// merge into properties.template.containers[] in your Bicep resource.
+probes: [
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 3000
+      scheme: 'HTTP'
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+    timeoutSeconds: 10
+    failureThreshold: 3
+  }
+]
 ```
 
-### Επικύρωση μετά την ανάπτυξη
+Η εφαρμογή σας πρέπει να υλοποιεί `/health`· δεν παρέχεται αυτόματα από το azd. Δεν υπάρχει γενική ιδιότητα υπηρεσίας `azure.yaml` `healthCheck`.
+
+### Επικύρωση Μετά την Ανάπτυξη
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
+set -e
 
 echo "Validating deployment..."
 
-# Έλεγχος υγείας της εφαρμογής
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Check application health
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
 echo "Testing web application..."
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Web application is healthy"
 else
     echo "❌ Web application health check failed"
@@ -548,7 +562,7 @@ else
 fi
 
 echo "Testing API..."
-if curl -f "$API_URL/health"; then
+if curl -f "$API_URL/lists"; then
     echo "✅ API is healthy"
 else
     echo "❌ API health check failed"
@@ -565,78 +579,48 @@ echo "✅ Deployment validation completed successfully"
 
 ### Διαχείριση Μυστικών
 ```bash
-# Αποθηκεύστε τα μυστικά με ασφάλεια
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
-azd env set API_KEY "your-api-key" --secret
-
-# Αναφέρετε τα μυστικά στο azure.yaml
+# Interactive Key Vault reference setup; requires appropriate vault permissions
+azd env set-secret DATABASE_PASSWORD
+azd env set-secret JWT_SECRET
+azd env set-secret API_KEY
 ```
 
-```yaml
-services:
-  api:
-    secrets:
-      - name: database-password
-        value: ${DATABASE_PASSWORD}
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-```
+Το `azd env set ... --secret` είναι άκυρο. Οι απλές τιμές περιβάλλοντος είναι τοπικό απλό κείμενο· μην υποθέτετε ότι οι εντολές ανάγνωσης τις αποκρύπτουν. Οι παραπάνω εντολές αποθηκεύουν αναφορές Key Vault, αλλά η υποδομή/εφαρμογή σας πρέπει ακόμα να καταναλώνει τα μυστικά και να χορηγεί πρόσβαση runtime identity.
 
-### Ασφάλεια Δικτύου
-```yaml
-# azure.yaml - Configure network security
-infra:
-  parameters:
-    enablePrivateEndpoints: true
-    allowedIPs:
-      - "203.0.113.0/24"  # Office IP range
-      - "198.51.100.0/24" # VPN IP range
-```
+### Δικτυακή Ασφάλεια
+Δηλώστε και καταναλώστε δικτυακές παραμέτρους σε Bicep, και χαρτογραφήστε τις στο `infra/main.parameters.json`. Δεν υπάρχει γενική επικάλυψη `infra.parameters` στο `azure.yaml`. Τα παραδείγματα τεκμηρίωσης `203.0.113.0/24` και `198.51.100.0/24` δεν είναι πραγματικά δίκτυα γραφείων/VPN· αντικαταστήστε τα με εξουσιοδοτημένα εύρη δικτύων.
 
 ### Διαχείριση Ταυτότητας και Πρόσβασης
-```yaml
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    identity:
-      type: systemAssigned
-    keyVault:
-      - name: app-secrets
-        secrets:
-          - database-connection
-          - external-api-key
-```
+Ενεργοποιήστε το `identity` του Container App σε Bicep και αναθέστε το απαραίτητο ρόλο επίπεδου δεδομένων Key Vault στο εύρος του Vault. Διαμορφώστε ονομασμένα μυστικά βασισμένα σε Key Vault και αναφορές runtime σε αυτόν τον πόρο· το `identity` και `keyVault` δεν είναι γενικές ιδιότητες υπηρεσίας azd. Δείτε [Authentication & Managed Identity](../chapter-03-configuration/authsecurity.md).
 
 ## 🚨 Στρατηγικές Επαναφοράς
 
 ### Γρήγορη Επαναφορά
 ```bash
-# Το AZD δεν διαθέτει ενσωματωμένο μηχανισμό επαναφοράς. Συνιστώμενες προσεγγίσεις:
+# AZD doesn't have built-in rollback. Recommended approaches:
 
-# Επιλογή 1: Επαναανάπτυξη από το Git (συνιστάται)
-git revert HEAD  # Αναίρεση του προβληματικού commit
+# Option 1: Redeploy from Git (recommended)
+git revert HEAD  # Revert the problematic commit
 git push
 azd deploy
 
-# Επιλογή 2: Επαναανάπτυξη συγκεκριμένου commit
-git checkout <previous-commit-hash>
+# Option 2: Redeploy specific commit
+git checkout "<previous-commit-hash>"
 azd deploy
 git checkout main
 ```
 
 ### Επαναφορά Υποδομής
 ```bash
-# Προεπισκόπηση των αλλαγών στην υποδομή πριν από την εφαρμογή τους
+# Preview infrastructure changes before applying
 azd provision --preview
 
-# Για επαναφορά της υποδομής, χρησιμοποιήστε έλεγχο εκδόσεων:
-git revert HEAD  # Επαναφορά αλλαγών στην υποδομή
-azd provision    # Εφαρμογή προηγούμενης κατάστασης της υποδομής
+# For infrastructure rollback, use version control:
+git revert HEAD  # Revert infrastructure changes
+azd provision    # Apply previous infrastructure state
 ```
 
-### Επαναφορά Μεταναστεύσεων Βάσης Δεδομένων
+### Επαναφορά Μετανάστευσης Βάσης Δεδομένων
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -652,15 +636,15 @@ echo "Database rollback completed"
 
 ## 📊 Μετρικές Ανάπτυξης
 
-### Παρακολουθήστε την Απόδοση της Ανάπτυξης
+### Παρακολούθηση Απόδοσης Ανάπτυξης
 ```bash
-# Προβολή τρέχουσας κατάστασης ανάπτυξης
+# View current deployment status
 azd show
 
-# Παρακολούθηση εφαρμογής με το Application Insights
+# Monitor application with Application Insights
 azd monitor --overview
 
-# Προβολή ζωντανών μετρήσεων
+# View live metrics
 azd monitor --live
 ```
 
@@ -681,28 +665,28 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Καλές Πρακτικές
+## 🎯 Βέλτιστες Πρακτικές
 
 ### 1. Συνοχή Περιβάλλοντος
 ```bash
-# Χρησιμοποιήστε συνεπή ονοματοδοσία
+# Use consistent naming
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Διατηρήστε τη συνέπεια μεταξύ των περιβαλλόντων
+# Maintain environment parity
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Επικύρωση Υποδομής
 ```bash
-# Προεπισκόπηση αλλαγών στην υποδομή πριν από την ανάπτυξη
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Χρησιμοποιήστε linting για ARM/Bicep
+# Use ARM/Bicep linting
 az bicep lint --file infra/main.bicep
 
-# Επικυρώστε τη σύνταξη του Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 ```
 
@@ -737,7 +721,7 @@ hooks:
 
 ### 4. Τεκμηρίωση και Καταγραφή
 ```bash
-# Τεκμηριώστε τις διαδικασίες ανάπτυξης
+# Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -745,64 +729,70 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Επόμενα Βήματα
 
-- [Provisioning Resources](provisioning.md) - Εμβάθυνση στη διαχείριση υποδομής
-- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Σχεδιάστε τη στρατηγική ανάπτυξής σας
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Επίλυση προβλημάτων ανάπτυξης
-- [Best Practices](../chapter-07-troubleshooting/debugging.md) - Στρατηγικές ανάπτυξης έτοιμες για παραγωγή
+- [Provisioning Πόρων](provisioning.md) - Εκτενής εισαγωγή στη διαχείριση υποδομής
+- [Σχεδιασμός πριν την Ανάπτυξη](../chapter-06-pre-deployment/capacity-planning.md) - Προγραμματίστε τη στρατηγική ανάπτυξής σας
+- [Συνηθισμένα Προβλήματα](../chapter-07-troubleshooting/common-issues.md) - Επίλυση προβλημάτων ανάπτυξης
+- [Βέλτιστες Πρακτικές](../chapter-07-troubleshooting/debugging.md) - Στρατηγικές ανάπτυξης έτοιμες για παραγωγή
 
 ## 🎯 Πρακτικές Ασκήσεις Ανάπτυξης
 
-### Άσκηση 1: Σταδιακή ροή ανάπτυξης (20 λεπτά)
-**Στόχος**: Κατανοήστε τη διαφορά μεταξύ πλήρων και σταδιακών αναπτύξεων
+### Άσκηση 1: Ροή Εργασίας Αύξησης Ανάπτυξης (20 λεπτά)
+**Στόχος**: Κατακτήστε τη διαφορά μεταξύ πλήρους και αύξησης αναπτύξεων
+
+**Αρχικό σημείο:** Bash, Node.js 22, Git, σύνδεση azd και συνδρομή Azure με δικαιώματα ανάπτυξης. Τρέξτε σε νέο φάκελο· αναμένονται χρεώσιμες υπηρεσίες App Service/Cosmos DB. Οι χρόνοι εξαρτώνται από την περιοχή και το πρότυπο.
 
 ```bash
-# Αρχική ανάπτυξη
+# Initial deployment
 mkdir deployment-practice && cd deployment-practice
-azd init --template todo-nodejs-mongo
-azd up
+azd init --template todo-nodejs-mongo .
+time azd up
 
-# Καταγράψτε τον αρχικό χρόνο ανάπτυξης
+# Record initial deployment time
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# Κάντε μια αλλαγή στον κώδικα
-echo "// Updated $(date)" >> src/api/src/server.js
+# Make a code change
+echo "// Updated $(date)" >> src/api/src/index.ts
 
-# Αναπτύξτε μόνο τον κώδικα (γρήγορα)
+# Deploy only code (fast)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# Συγκρίνετε τους χρόνους
+# Compare times
 cat deployment-log.txt
 
-# Καθαρίστε
+# Clean up
 azd down --force --purge
 ```
 
 **Κριτήρια Επιτυχίας:**
-- [ ] Η πλήρης ανάπτυξη διαρκεί 5-15 λεπτά
-- [ ] Η ανάπτυξη μόνο του κώδικα διαρκεί 2-5 λεπτά
-- [ ] Οι αλλαγές στον κώδικα εμφανίζονται στην αναπτυγμένη εφαρμογή
-- [ ] Η υποδομή παραμένει αμετάβλητη μετά από `azd deploy`
+- [ ] Καταγράψτε τον χρόνο εκτέλεσης και για τις δύο εντολές (δεν υπάρχει εγγυημένη διάρκεια)
+- [ ] Οι δύο εντολές ολοκληρώνονται επιτυχώς
+- [ ] Το API παραμένει λειτουργικό· η επεξεργασία μόνο σχολίων δεν αλλάζει το UI ορατά
+- [ ] Η υποδομή παραμένει αμετάβλητη μετά το `azd deploy`
 
-**Αποτέλεσμα Μάθησης**: `azd deploy` είναι 50-70% ταχύτερο από `azd up` για αλλαγές κώδικα
+**Αποτέλεσμα Μάθησης**: Το `azd deploy` παρακάμπτει το provisioning υποδομής. Συγκρίνετε τους μετρημένους χρόνους αντί να υποθέτετε σταθερή επιτάχυνση ποσοστού.
 
-### Άσκηση 2: Προσαρμοσμένα hooks ανάπτυξης (30 λεπτά)
+### Άσκηση 2: Προσαρμοσμένα Hooks Ανάπτυξης (30 λεπτά)
 **Στόχος**: Υλοποιήστε αυτοματοποίηση πριν και μετά την ανάπτυξη
 
+**Αρχικό σημείο:** το αρχικοποιημένο `deployment-practice` έργο παραπάνω. Αν το καθαρίσατε, τρέξτε ξανά `azd up` πριν δοκιμάσετε ανάπτυξη μόνο κώδικα. Η παρακάτω επικύρωση χρησιμοποιεί το πραγματικό build script του API, όχι ένα ανύπαρκτο root `test:unit` script. Οι δοκιμές API του προτύπου χρειάζονται διαμορφωμένη πρόσβαση βάσης δεδομένων· δεν είναι απομονωμένες unit tests.
+
 ```bash
-# Δημιουργία σεναρίου επικύρωσης πριν την ανάπτυξη
+# Create pre-deploy validation script
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "⚠️ Running pre-deployment checks..."
 
-# Έλεγχος αν οι δοκιμές περνούν
-if ! npm run test:unit; then
-    echo "❌ Tests failed! Aborting deployment."
+# Install API dependencies and check its actual lint/TypeScript build
+npm --prefix src/api ci
+if ! npm --prefix src/api run build; then
+    echo "❌ Build validation failed! Aborting deployment."
     exit 1
 fi
 
-# Έλεγχος για μη δεσμευμένες αλλαγές
+# Check for uncommitted changes
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -812,14 +802,15 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Δημιουργία δοκιμής smoke μετά την ανάπτυξη
+# Create post-deploy smoke test
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "💨 Running smoke tests..."
 
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Health check passed!"
 else
     echo "❌ Health check failed!"
@@ -831,8 +822,11 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Προσθήκη hooks στο azure.yaml
-cat >> azure.yaml << 'EOF'
+# Merge the following into the EXISTING azure.yaml using your editor.
+# If hooks already exists, merge its children; never append a duplicate YAML key.
+```
+
+```yaml
 
 hooks:
   predeploy:
@@ -842,23 +836,26 @@ hooks:
   postdeploy:
     shell: sh
     run: ./scripts/post-deploy-test.sh
-EOF
+```
 
-# Δοκιμή ανάπτυξης με hooks
+```bash
+# Test deployment with hooks
 azd deploy
 ```
 
 **Κριτήρια Επιτυχίας:**
-- [ ] Το script πριν την ανάπτυξη εκτελείται πριν την ανάπτυξη
-- [ ] Η ανάπτυξη ακυρώνεται εάν οι δοκιμές αποτύχουν
-- [ ] Το smoke test μετά την ανάπτυξη επικυρώνει την υγεία
-- [ ] Τα hooks εκτελούνται με τη σωστή σειρά
+- [ ] Το pre-deploy script τρέχει πριν την ανάπτυξη
+- [ ] Η ανάπτυξη ακυρώνεται αν η επικύρωση build αποτύχει
+- [ ] Το post-deploy smoke test επικυρώνει την υγεία
+- [ ] Τα hooks εκτελούνται στη σωστή σειρά
 
-### Άσκηση 3: Στρατηγική ανάπτυξης πολλαπλών περιβαλλόντων (45 λεπτά)
-**Στόχος**: Υλοποιήστε σταδιακή ροή ανάπτυξης (dev → staging → production)
+### Άσκηση 3: Στρατηγική Ανάπτυξης Πολλαπλών Περιβαλλόντων (45 λεπτά)
+**Στόχος**: Υλοποιήστε ροή εργασίας σκαλοπατωτής ανάπτυξης (dev → staging → παραγωγή)
+
+**Σημείο εκκίνησης:** το ίδιο αρχικοποιημένο έργο todo με `jq`. Δημιουργήστε τα παρακάτω περιβάλλοντα με πραγματικές τιμές συνδρομής/τοποθεσίας (ή ορίστε `AZURE_SUBSCRIPTION_ID`/`AZURE_LOCATION` σε καθένα) **πριν** εκτελέσετε τη ροή εργασίας χωρίς προτροπή. Αποτυγχάνει σκοπίμως αντί να εφεύρει τις ελλείπουσες τιμές. Χρησιμοποιήστε μόνο προσωρινά περιβάλλοντα εκπαίδευσης, όχι μια πραγματική συνδρομή παραγωγής.
 
 ```bash
-# Δημιουργία σεναρίου ανάπτυξης
+# Create deployment script
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -866,25 +863,25 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Βήμα 1: Ανάπτυξη στο dev
+# Step 1: Deploy to dev
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
 azd up --no-prompt
 
 echo "Running dev tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Βήμα 2: Ανάπτυξη στο staging
+# Step 2: Deploy to staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
 azd up --no-prompt
 
 echo "Running staging tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Βήμα 3: Χειροκίνητη έγκριση για την παραγωγή
+# Step 3: Manual approval for production
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -896,7 +893,7 @@ if [[ $confirm == "yes" ]]; then
     azd up --no-prompt
     
     echo "Running production smoke tests..."
-    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
     
     echo "
 ✅ Production deployment completed!"
@@ -907,61 +904,76 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# Δημιουργία περιβαλλόντων
-azd env new dev
-azd env new staging
-azd env new production
+# Create environments
+# Reuse existing dev if you completed Exercise 1; create unused environments
+azd env select dev
+azd env new staging --subscription "<subscription-id>" --location eastus2
+azd env new production --subscription "<subscription-id>" --location eastus2
 
-# Εκτέλεση σταδιακής ανάπτυξης
+# Run staged deployment
 ./deploy-staged.sh
+
+# After verification, delete each disposable deployment (review prompts)
+azd down --environment dev
+azd down --environment staging
+azd down --environment production
 ```
 
 **Κριτήρια Επιτυχίας:**
-- [ ] Το περιβάλλον dev αναπτύσσεται επιτυχώς
-- [ ] Το περιβάλλον staging αναπτύσσεται επιτυχώς
-- [ ] Απαιτείται χειροκίνητη έγκριση για παραγωγή
+- [ ] Το περιβάλλον ανάπτυξης υλοποιείται με επιτυχία
+- [ ] Το περιβάλλον σταδιακής ανάπτυξης υλοποιείται με επιτυχία
+- [ ] Απαιτείται χειροκίνητη έγκριση για την παραγωγή
 - [ ] Όλα τα περιβάλλοντα έχουν λειτουργικούς ελέγχους υγείας
 - [ ] Μπορεί να γίνει επαναφορά αν χρειαστεί
 
 ### Άσκηση 4: Στρατηγική Επαναφοράς (25 λεπτά)
-**Στόχος**: Υλοποιήστε και δοκιμάστε επαναφορά ανάπτυξης χρησιμοποιώντας Git
+**Στόχος**: Εφαρμόστε και δοκιμάστε την επαναφορά ανάπτυξης χρησιμοποιώντας Git
+
+**Σημείο εκκίνησης:** μια απομονωμένη εκπαιδευτική αντιγραφή του προτύπου todo με όλο τον βασικό κώδικα δεσμευμένο, ένα καθαρό δέντρο εργασίας Git και ένα προσωρινά ρυθμισμένο περιβάλλον. Μην εισάγετε σκόπιμα αποτυχίες σε ένα πραγματικό έργο παραγωγής. `APP_VERSION` παρακάτω είναι μόνο για λογιστική εκτός εάν το συνδέσετε ρητά στην εφαρμογή.
 
 ```bash
-# Ανάπτυξη v1
+# Deploy v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Αποθήκευση hash του commit v1
+# Save v1 commit hash
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Ανάπτυξη v2 με ασύμβατη αλλαγή
-echo "throw new Error('Intentional break')" >> src/api/src/server.js
-git add . && git commit -m "v2 with intentional break"
+# Deploy v2 with breaking change
+echo "throw new Error('Intentional break');" >> src/api/src/index.ts
+git add src/api/src/index.ts
+git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
-azd deploy
+DEPLOY_FAILED=false
+azd deploy api || DEPLOY_FAILED=true
 
-# Ανίχνευση αποτυχίας και επαναφορά
-if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+# Detect failure and rollback
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+if [ "$DEPLOY_FAILED" = true ] || ! curl -f "$API_URL/lists"; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Επαναφορά με χρήση του git
+    # Rollback using git
     git revert HEAD --no-edit
     
-    # Επαναφορά περιβάλλοντος
+    # Rollback environment
     azd env set APP_VERSION "1.0.0"
     
-    # Επανανάπτυξη v1
-    azd deploy
+    # Redeploy v1
+    azd deploy api
+    curl --fail "$API_URL/lists"
     
     echo "✅ Rolled back to v1.0.0"
 fi
+
+# Clean up the disposable deployment when finished
+azd down
 ```
 
 **Κριτήρια Επιτυχίας:**
-- [ ] Μπορεί να ανιχνευθεί αποτυχία ανάπτυξης
-- [ ] Το script επαναφοράς εκτελείται αυτόματα
-- [ ] Η εφαρμογή επιστρέφει σε λειτουργική κατάσταση
+- [ ] Μπορεί να ανιχνεύσει αποτυχίες ανάπτυξης
+- [ ] Το σενάριο επαναφοράς εκτελείται αυτόματα
+- [ ] Η εφαρμογή επανέρχεται σε λειτουργική κατάσταση
 - [ ] Οι έλεγχοι υγείας περνούν μετά την επαναφορά
 
 ## 📊 Παρακολούθηση Μετρικών Ανάπτυξης
@@ -969,12 +981,13 @@ fi
 ### Παρακολουθήστε την Απόδοση της Ανάπτυξής σας
 
 ```bash
-# Δημιουργία σεναρίου μετρήσεων ανάπτυξης
+# Create deployment metrics script
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
 
 azd deploy "$@"
+DEPLOY_STATUS=$?
 
 END_TIME=$(date +%s)
 DURATION=$((END_TIME - START_TIME))
@@ -986,37 +999,38 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# Καταγραφή σε αρχείο
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+# Log to file
+echo "$(date +%Y-%m-%dT%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+exit "$DEPLOY_STATUS"
 EOF
 
 chmod +x track-deployment.sh
 
-# Χρησιμοποίησέ το
+# Use it
 ./track-deployment.sh
 ```
 
 **Αναλύστε τις μετρικές σας:**
 ```bash
-# Προβολή ιστορικού ανάπτυξης
+# View deployment history
 cat deployment-metrics.csv
 
-# Υπολογισμός μέσου χρόνου ανάπτυξης
+# Calculate average deployment time
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
-## Πρόσθετοι Πόροι
+## Επιπλέον Πόροι
 
-- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Αναφορά ανάπτυξης Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Ανάπτυξη Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Ανάπτυξη Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Ανάπτυξη Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Πλοήγηση**
-- **Προηγούμενο Μάθημα**: [Το πρώτο σας έργο](../chapter-01-foundation/first-project.md)
-- **Επόμενο Μάθημα**: [Provisioning Resources](provisioning.md)
+- **Προηγούμενο Μάθημα**: [Το Πρώτο σας Έργο](../chapter-01-foundation/first-project.md)
+- **Επόμενο Μάθημα**: [Παροχή Πόρων](provisioning.md)
 
 ---
 

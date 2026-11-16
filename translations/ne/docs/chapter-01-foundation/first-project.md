@@ -1,113 +1,114 @@
-# तपाईंको पहिलो परियोजना - अभ्यासात्मक ट्यूटोरियल
+# तपाईंको पहिलो परियोजना - व्यावहारिक ट्युटोरियल
 
-**Chapter Navigation:**
-- **📚 पाठ्यक्रम गृह**: [AZD शुरुआतीहरूको लागि](../../README.md)
-- **📖 Current Chapter**: अध्याय 1 - आधार र छिटो सुरु
-- **⬅️ Previous**: [इन्स्टलेसन र सेटअप](installation.md)
-- **➡️ Next**: [कन्फिगरेसन](configuration.md)
-- **🚀 Next Chapter**: [अध्याय 2: AI-प्रथम विकास](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**अध्याय नेभिगेशन:**
+- **📚 कोर्स होम**: [AZD नयाँ सुरु गर्नेका लागि](../../README.md)
+- **📖 वर्तमान अध्याय**: अध्याय 1 - आधार र छिटो सुरु
+- **⬅️ अघिल्लो**: [इन्स्टलेशन र सेटअप](installation.md)
+- **➡️ अर्को**: [आफ्नो एप ल्याउनुहोस्](bring-your-own-app.md)
+- **🚀 अर्को अध्याय**: [अध्याय 2: AI-प्रथम विकास](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## परिचय
 
-तपाईंको पहिलो Azure Developer CLI परियोजनामा स्वागत छ! यो व्यापक अभ्यासात्मक ट्यूटोरियलले azd प्रयोग गरेर Azure मा पूर्ण-स्ट्याक अनुप्रयोग सिर्जना, डिप्लोय र व्यवस्थापन गर्ने पूर्ण मार्गदर्शन प्रदान गर्दछ। तपाईंले एक वास्तविक todo अनुप्रयोगसँग काम गर्नुहुनेछ जसले React फ्रन्टएन्ड, Node.js API ब्याकएन्ड, र MongoDB डाटाबेस समावेश गर्छ।
+तपाईंको पहिलो Azure Developer CLI परियोजनामा स्वागत छ! तपाईंले React फ्रन्टएन्ड, Node.js API, र Azure Cosmos DB सहितको todo अनुप्रयोग तैनाथ गर्नुहुनेछ। टेम्प्लेटले ऐतिहासिक नाम `todo-nodejs-mongo` राखेको छ; यसको वर्तमान पूर्वाधार Cosmos DB नोSQL का लागि प्रयोग गर्छ, त्यसैले नामबाट डेटाबेस API अनुमान गर्नु भन्दा डाउनलोड गरिएको README र `infra/` हेर्नुहोस्।
+
+> नोभेम्बर 2026 मा `azd 1.37.2` र सार्वजनिक टेम्प्लेट विरुद्ध समीक्षा गरियो। तलको उदाहरणहरू Bash प्रयोग गर्छन्; JSON निकासका लागि पनि `jq` आवश्यक छ। Azure तैनाथीकरण शुल्क लाग्छ र यस समीक्षा समयमा कार्यान्वयन गरिएन।
 
 ## सिकाइ लक्ष्यहरू
 
-यस ट्यूटोरियल पूरा गरेपछि, तपाईं:
-- टेम्प्लेटहरू प्रयोग गरेर azd परियोजना प्रारम्भ गर्ने कार्यप्रवाहमा निपुण हुनुहुनेछ
-- Azure Developer CLI परियोजना संरचना र कन्फिगरेसन फाइलहरू बुझ्नुहुनेछ
-- पूर्वाधार प्रावधानसहित Azure मा सम्पूर्ण अनुप्रयोग डिप्लोय गर्न सक्नुहुनेछ
-- अनुप्रयोग अपडेट र पुन:डिप्लोय रणनीतिहरू कार्यान्वयन गर्न सक्नुहुनेछ
-- विकास र स्टेजिङका लागि बहु वातावरणहरू व्यवस्थापन गर्न सक्नुहुनेछ
-- स्रोतहरू सफा गर्ने र लागत व्यवस्थापन अभ्यासहरू लागू गर्न सक्नुहुनेछ
+यस ट्युटोरियल सम्पन्न गर्दा, तपाईंले:
+- टेम्प्लेटहरू प्रयोग गरेर azd परियोजना आरम्भ गर्ने कार्यप्रवाहमा मास्टरी हासिल गर्नुहोस्
+- Azure Developer CLI परियोजना संरचना र कन्फिगरेसन फाइलहरू बुझ्नुहोस्
+- पूर्वाधार प्रावधान सहित Azure मा सम्पूर्ण अनुप्रयोग तैनाथ गर्नुहोस्
+- अनुप्रयोग अद्यावधिक र पुन: तैनाथीकरण रणनीतिहरू कार्यान्वयन गर्नुहोस्
+- विकास र स्टेजिङका लागि बहु वातावरण व्यवस्थापन गर्नुहोस्
+- स्रोत सफाई र लागत व्यवस्थापन अभ्यासहरूको प्रयोग गर्नुहोस्
 
-## सिकाइ नतिजाहरू
+## सिकाइ उपलब्धिहरू
 
-पूरा गरेपछि, तपाईं सक्षम हुनुहुनेछ:
-- टेम्प्लेटहरूबाट स्वतन्त्र रूपमा azd परियोजनाहरू प्रारम्भ र कन्फिगर गर्न
+समाप्त भएपछि, तपाईंले सक्षम हुनुहुनेछ:
+- स्वतन्त्र रूपमा टेम्प्लेटबाट azd परियोजना आरम्भ र कन्फिगर गर्न
 - azd परियोजना संरचनाहरू प्रभावकारी रूपमा नेभिगेट र परिमार्जन गर्न
-- एकै कमाण्डबाट Azure मा पूर्ण-स्ट्याक अनुप्रयोगहरू डिप्लोय गर्न
-- सामान्य डिप्लोय समस्या र प्रमाणीकरण समस्याहरू ट्रबलशुट गर्न
-- विभिन्न डिप्लोय चरणहरूका लागि बहु Azure वातावरणहरू व्यवस्थापन गर्न
-- अनुप्रयोग अपडेटका लागि निरन्तर डिप्लोयमेन्ट कार्यप्रवाहहरू कार्यान्वयन गर्न
+- एकल आदेश प्रयोग गरी Azure मा पूर्ण स्ट्याक अनुप्रयोग तैनाथ गर्न
+- सामान्य तैनाथीकरण समस्याहरू र प्रमाणीकरण समस्याहरू समाधान गर्न
+- विभिन्न तैनाथ चरणहरूको लागि बहु Azure वातावरणहरू व्यवस्थापन गर्न
+- अनुप्रयोग अद्यावधिकहरूको लागि निरन्तर तैनाथीकरण कार्यप्रवाहहरू कार्यान्वयन गर्न
 
-## सुरु गर्ने
+## सुरु गर्दै
 
-### पूर्व आवश्यकताहरू चेकलिस्ट
-- ✅ Azure Developer CLI इन्स्टल गरिएको ([इन्स्टलेसन मार्गदर्शक](installation.md))
-- ✅ AZD प्रमाणीकरण पूर्ण गरिएको `azd auth login`
-- ✅ Git तपाइँको सिस्टममा इन्स्टल गरिएको
-- ✅ Node.js 16+ (यस ट्यूटोरियलका लागि)
+### आवश्यकताहरू जाँच सूची
+- ✅ Azure Developer CLI इन्स्टल भएको ([इन्स्टलेशन गाइड](installation.md))
+- ✅ AZD प्रमाणीकरण `azd auth login` प्रयोग गरेर सम्पन्न गरिएको
+- ✅ तपाईँको प्रणालीमा Git इन्स्टल भएको
+- ✅ Node.js 22 LTS (वा डाउनलोड गरिएको टेम्प्लेटले आवश्यक पर्ने समर्थित संस्करण)
 - ✅ Visual Studio Code (सिफारिस गरिएको)
 
-अगाडि बढ्नु अघि, रिपोजिटरी रुटबाट सेटअप भ्यालिडेटर चलाउनुहोस्:
+अघि बढ्नु अघि, रिपोजिटरी रुटबाट सेटअप भ्यालिडेटर चलाउनुहोस्:
 
 **Windows:** `./validate-setup.ps1`
 
 **macOS / Linux:** `bash ./validate-setup.sh`
 
-### आफ्नो सेटअप जाँच गर्नुहोस्
+### तपाईंको सेटअप जाँच गर्नुहोस्
 ```bash
-# azd स्थापना जाँच गर्नुहोस्
+# Check azd installation
 azd version
 
-# AZD प्रमाणीकरण जाँच गर्नुहोस्
+# Check AZD authentication
 azd auth login --check-status
 ```
 
-### वैकल्पिक Azure CLI प्रमाणीकरण जाँच्नुहोस्
+### वैकल्पिक Azure CLI प्रमाणीकरण जाँच गर्नुहोस्
 
 ```bash
 az account show
 ```
 
-### Node.js संस्करण जाँच्नुहोस्
+### Node.js संस्करण जाँच गर्नुहोस्
 ```bash
 node --version
 ```
 
-## चरण 1: टेम्पलेट चयन र प्रारम्भ गर्नुहोस्
+## चरण 1: टेम्प्लेट छान्नुहोस् र आरम्भ गर्नुहोस्
 
-हामी React फ्रन्टएन्ड र Node.js API ब्याकएन्ड समावेश गर्ने लोकप्रिय todo अनुप्रयोग टेम्पलेटबाट सुरु गरौं।
+आउनुहोस् लोकप्रिय todo अनुप्रयोग टेम्प्लेटबाट सुरु गरौँ जसमा React फ्रन्टएन्ड र Node.js API ब्याकएन्ड छ।
 
 ```bash
-# उपलब्ध टेम्पलेटहरू ब्राउज़ गर्नुहोस्
+# Browse available templates
 azd template list
 
-# todo एप टेम्पलेट आरम्भ गर्नुहोस्
+# Initialize the todo app template
 mkdir my-first-azd-app
 cd my-first-azd-app
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
-# प्रम्प्टहरू पालना गर्नुहोस्:
-# - वातावरणको नाम प्रविष्ट गर्नुहोस्: "dev"
-# - एक सदस्यता छान्नुहोस् (यदि तपाइँसँग धेरै छन् भने)
-# - क्षेत्र छान्नुहोस्: "East US 2" (वा आफ्नो रोजेको क्षेत्र)
+# Follow the prompts:
+# - Enter an environment name: "dev"
+# - Choose a subscription (if you have multiple)
+# - Choose a region: "East US 2" (or your preferred region)
 ```
 
 ### के भयो?
-- टेम्पलेट कोड तपाइँको स्थानीय डिरेक्टरीमा डाउनलोड गरियो
-- `azure.yaml` फाइल सिर्जना गरियो
-- `infra/` डाइरेक्टरीमा पूर्वाधार कोड सेटअप गरियो
-- एउटा वातावरण कन्फिगरेसन सिर्जना गरियो
+- टेम्प्लेट कोड स्थानीय डाइरेक्टरीमा डाउनलोड गरियो
+- सेवा परिभाषासहित `azure.yaml` फाइल बनाएँ
+- पूर्वाधार कोड `infra/` डाइरेक्टरीमा सेट अप गरियो
+- वातावरण कन्फिगरेसन सिर्जना गरियो
 
 ## चरण 2: परियोजना संरचना अन्वेषण गर्नुहोस्
 
-azd ले हामीका लागि के बनायो भन्ने जाँच गरौं:
+आउनुहोस् हेर्ने के azd ले हामीलाई बनाएको छ:
 
 ```bash
-# परियोजना संरचना हेर्नुहोस्
-tree /f   # विन्डोज
-# वा
-find . -type f | head -20   # म्याकओएस/लिनक्स
+# View the project structure
+tree /f   # Windows
+# or
+find . -type f | head -20   # macOS/Linux
 ```
 
-तपाईंले हेर्नुहुनेछ:
+तपाईँले देख्नु पर्नेछ:
 ```
 my-first-azd-app/
-├── .azd/
-│   └── config.json              # Project configuration
 ├── .azure/
+│   ├── config.json              # Selected local environment
 │   └── dev/                     # Environment-specific files
 ├── .devcontainer/               # Development container config
 ├── .github/workflows/           # GitHub Actions CI/CD
@@ -115,82 +116,79 @@ my-first-azd-app/
 ├── infra/                       # Infrastructure as code (Bicep)
 │   ├── main.bicep              # Main infrastructure template
 │   ├── main.parameters.json     # Parameters for deployment
-│   └── modules/                # Reusable infrastructure modules
+│   └── app/                    # Application infrastructure modules
 ├── src/
 │   ├── api/                    # Node.js backend API
 │   │   ├── src/               # API source code
-│   │   ├── package.json       # Node.js dependencies
-│   │   └── Dockerfile         # Container configuration
+│   │   └── package.json       # Node.js dependencies
 │   └── web/                   # React frontend
 │       ├── src/               # React source code
-│       ├── package.json       # React dependencies
-│       └── Dockerfile         # Container configuration
+│       └── package.json       # React dependencies
 ├── azure.yaml                  # azd project configuration
 └── README.md                   # Project documentation
 ```
 
-### बुझ्नुपर्ने मुख्य फाइलहरू
+### बुझ्न महत्वपूर्ण फाइलहरू
 
 **azure.yaml** - तपाईंको azd परियोजनाको मुटु:
 ```bash
-# परियोजनाको कन्फिगरेसन हेर्नुहोस्
+# View the project configuration
 cat azure.yaml
 ```
 
 **infra/main.bicep** - पूर्वाधार परिभाषा:
 ```bash
-# पूर्वाधारको कोड हेर्नुहोस्
+# View the infrastructure code
 head -30 infra/main.bicep
 ```
 
-## चरण 3: तपाईंको परियोजना अनुकूलित गर्नुहोस् (वैकल्पिक)
+## चरण 3: तपाईंको परियोजना अनुकूलन गर्नुहोस् (वैकल्पिक)
 
-डिप्लोय गर्नु अघि, तपाईं अनुप्रयोग अनुकूलन गर्न सक्नुहुन्छ:
+तैनाथीकरण अघि, तपाईं अनुप्रयोग अनुकूलन गर्न सक्नुहुन्छ:
 
-### फ्रन्टेन्ड परिमार्जन गर्नुहोस्
+### फ्रन्टएन्ड परिमार्जन गर्नुहोस्
 ```bash
-# React एप कम्पोनेंट खोल्नुहोस्
-code src/web/src/App.tsx
+# Open the React app component
+code src/web/src/layout/header.tsx
 ```
 
-साधारण परिवर्तन गर्नुहोस्:
-```typescript
-// शीर्षक फेला पार्नुहोस् र परिवर्तन गर्नुहोस्
-<h1>My Awesome Todo App</h1>
+एउटा साधारण परिवर्तन गर्नुहोस्:
+```tsx
+// Replace the existing <Text variant="xLarge">ToDo</Text> element
+<Text variant="xLarge">My Awesome Todo App</Text>
 ```
 
 ### वातावरण चरहरू कन्फिगर गर्नुहोस्
 ```bash
-# कस्टम वातावरण चरहरू सेट गर्नुहोस्
+# Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# सबै वातावरण चरहरू हेर्नुहोस्
+# View all environment variables
 azd env get-values
 ```
 
-## चरण 4: Azure मा डिप्लोय गर्नुहोस्
+यी दुई अनुकूलन मानहरूले स्थानीय भण्डारण मात्र देखाउँछन्। स्टक टेम्प्लेटले `WEBSITE_TITLE` वा `API_VERSION` प्रयोग गर्दैन, त्योैले एप परिवर्तन हुँदैन। माथिको स्पष्ट स्रोत सम्पादनले प्रदर्शन गरिएको शीर्षक परिवर्तन गर्छ।
 
-अब उत्साहजनक हिस्सा - सबै कुरा Azure मा डिप्लोय गर्नुहोस्!
+## चरण 4: Azure मा तैनाथ गर्नुहोस्
+
+अब रोचक भाग - सबै कुरा Azure मा तैनाथ गर्नुहोस्!
 
 ```bash
-# पूर्वाधार र अनुप्रयोग तैनाथ गर्नुहोस्
+# Deploy infrastructure and application
 azd up
 
-# यो आदेशले:
-# 1. Azure स्रोतहरू प्रावधान गर्नुहोस् (App Service, Cosmos DB, आदि)
-# 2. तपाईंको अनुप्रयोग निर्माण गर्नुहोस्
-# 3. प्रावधान गरिएका स्रोतहरूमा तैनाथ गर्नुहोस्
-# 4. अनुप्रयोगको URL देखाउनुहोस्
+# This command will:
+# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
+# 2. Build your application
+# 3. Deploy to the provisioned resources
+# 4. Display the application URL
 ```
 
-### डिप्लोय गर्दा के हुँदैछ?
+### तैनाथीकरणको क्रममा के भइरहेको छ?
 
-`azd up` कमाण्डले यी चरणहरू प्रदर्शन गर्छ:
-1. **Provision** (`azd provision`) - Azure स्रोतहरू सिर्जना गर्छ
-2. **Package** - तपाईंको अनुप्रयोग कोड बनाउँछ
-3. **Deploy** (`azd deploy`) - कोडलाई Azure स्रोतहरूमा डिप्लोय गर्छ
+कार्यप्रवाहले पूर्वाधार प्रावधान गर्दछ र प्याकेज/कोड तैनाथ गर्दछ। ठ्याक्कै अर्डरिङ्ग `workflows.up` मा `azure.yaml` मार्फत अनुकूल गर्न सकिन्छ; यस टेम्प्लेटले provision पछि deploy निर्दिष्ट गरेको छ। हरेक टेम्प्लेटका लागि एक सार्वभौम चरण अर्डरमा निर्भर नगर्नुहोस्।
 
-### अपेक्षित आउटपुट
+### अपेक्षित परिणाम
 ```
 Packaging services (azd package)
 
@@ -203,359 +201,359 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## चरण 5: तपाईंको एप्लिकेशन परीक्षण गर्नुहोस्
+## चरण 5: तपाईंको अनुप्रयोग परीक्षण गर्नुहोस्
 
-### आफ्नो एप्लिकेशन पहुँच गर्नुहोस्
-डिप्लोय आउटपुटमा दिइएको URL मा क्लिक गर्नुहोस्, वा यो जुनसुकै समयमा प्राप्त गर्नुहोस्:
+### तपाईंको अनुप्रयोग पहुँच गर्नुहोस्
+तैनाथीकरण आउटपुटमा दिइएको URL मा क्लिक गर्नुहोस्, वा कहिले पनि प्राप्त गर्नुहोस्:
 ```bash
-# अनुप्रयोगका अन्तबिन्दुहरू प्राप्त गर्नुहोस्
+# Get application endpoints
 azd show
 
-# तपाईंको ब्राउजरमा अनुप्रयोग खोल्नुहोस्
-azd show --output json | jq -r '.services.web.endpoint'
+# Open the application in your browser
+azd show --output json | jq -er '.services.web.ingressUrl'
 ```
 
-### Todo एप्लिकेशन परीक्षण गर्नुहोस्
-1. **Todo वस्तु थप्नुहोस्** - "Add Todo" क्लिक गरी कार्य प्रविष्ट गर्नुहोस्
-2. **पूरा भएको रूपमा मार्क गर्नुहोस्** - सम्पन्न आइटमहरूमा चिन्ह लगाउनुहोस्
-3. **आइटमहरू मेटाउनुहोस्** - अब आवश्यक नहुने todo हरू हटाउनुहोस्
+### Todo अनुप्रयोग परीक्षण गर्नुहोस्
+1. **Todo आइटम थप्नुहोस्** - "Add Todo" क्लिक गरी काम प्रविष्ट गर्नुहोस्
+2. **सम्पन्न मार्क गर्नुहोस्** - पूरा भएका आइटमहरू चेक गर्नुहोस्
+3. **आइटमहरू मेटाउनुहोस्** - आवश्यक नपरेका todo हटाउनुहोस्
 
-### आफ्नो एप्लिकेशन अनुगमन गर्नुहोस्
+### तपाईंको अनुप्रयोग अनुगमन गर्नुहोस्
 ```bash
-# आफ्ना स्रोतहरूका लागि Azure पोर्टल खोल्नुहोस्
+# Open Azure portal for your resources
 azd monitor
 
-# अनुप्रयोगको लगहरू हेर्नुहोस्
+# View application logs
 azd monitor --logs
 
-# प्रत्यक्ष मेट्रिक्स हेर्नुहोस्
+# View live metrics
 azd monitor --live
 ```
 
-### ✅ तपाइँको डिप्लोयमेन्ट पुष्टि गर्नुहोस्
+### ✅ तपाईंको तैनाथीकरण जाँच्नुहोस्
 
-अगाडि बढ्नु अघि, सबै कुरा साँच्चिकै काम गरिरहेको छ भनी सुनिश्चित गर्न यो छोटो चेकलिस्ट चलाउनुहोस्—"डिप्लोय सफल भयो" भनेको "एप काम गर्छ" भन्ने नलिनुहोस्:
+अघि बढ्नु अघि, छिटो जाँच सूचीबाट सबै वास्तविक रूपमा काम गर्छ भनी पुष्टि गर्नुहोस् — "deploy succeeded" को अर्थ "app works" होइन:
 
 ```bash
-# 1. एन्डपोइन्ट अस्तित्वमा छ र पहुँचयोग्य छ भन्ने पुष्टि गर्नुहोस्
+# 1. Confirm the endpoint exists and is reachable
 azd show
 
-# 2. एन्डपोइन्टमा स्मोक-टेस्ट गर्नुहोस् (HTTP 200 अपेक्षित)
-curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+# 2. Smoke-test the endpoint (expects HTTP 200)
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error --location "$WEB_URL"
 
-# 3. यदि तपाईंको एपले स्वास्थ्य एन्डपोइन्ट उपलब्ध गराउँछ भने त्यसलाई जाँच गर्नुहोस्
-curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+# 3. Test the API's actual list route (the template has no /health route)
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail --show-error "$API_URL/lists"
 ```
 
-**डिप्लोय पुष्टि हुन्छ जब:**
-- ✅ `azd show` ले पहुँचयोग्य एन्डपोइन्ट URL सूचीबद्ध गर्छ
+**तैनाथीकरण जाँच भएको छ जब:**
+- ✅ `azd show` ले पहुँचयोग्य अन्तबिन्दु URL देखाउँछ
 - ✅ URL तपाईंको ब्राउजरमा त्रुटि बिना खुल्छ
-- ✅ मुख्य सुविधाहरू काम गर्छन् (todo थप्न/सम्पन्न/हटाउन)
-- ✅ `azd monitor --logs` ले अनपेक्षित त्रुटि बिना अनुरोधहरू आइरहेको देखाउँछ
+- ✅ मुख्य सुविधाहरू काम गर्छन् (todo थप्नुहोस्/पूरा गर्नुहोस्/मेटाउनुहोस्)
+- ✅ `azd monitor --logs` ले अनुरोधहरू बिना अप्रत्याशित त्रुटिहरू देखाउँछ
 
-यदि कुनै पनि जाँच असफल भएमा, जानुहोस् [अध्याय 7: समस्या समाधान](../chapter-07-troubleshooting/README.md) मा।
+कुनै पनि जाँच असफल भएमा, [अध्याय 7: समस्या समाधान](../chapter-07-troubleshooting/README.md) मा जानुहोस्।
 
-## चरण 6: परिवर्तनहरू गर्नुहोस् र पुन:डिप्लोय गर्नुहोस्
+## चरण 6: परिवर्तनहरू गर्नुहोस् र पुन: तैनाथ गर्नुहोस्
 
-एक परिवर्तन गरौं र अपडेट कति सजिलो छ जाँचौं:
+आउनुहोस् एउटा परिवर्तन गरौं र अद्यावधिक गर्न कति सजिलो छ हेर्नुहोस्:
 
 ### API परिमार्जन गर्नुहोस्
 ```bash
-# API कोड सम्पादन गर्नुहोस्
-code src/api/src/routes/lists.js
+# Edit the API code
+code src/api/src/routes/lists.ts
 ```
 
-कस्टम रिस्पोन्स हेडर थप्नुहोस्:
+एउटा कस्टम प्रतिक्रिया हेडर थप्नुहोस्:
 ```javascript
-// रूट ह्यान्डलर खोज्नुहोस् र थप्नुहोस्:
+// Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### केवल कोड परिवर्तनहरू डिप्लोय गर्नुहोस्
+### केवल कोड परिवर्तनहरू तैनाथ गर्नुहोस्
 ```bash
-# केवल एप्लिकेशन कोड तैनाथ गर्नुहोस् (पूर्वाधार छोड्नुहोस्)
+# Deploy only the application code (skip infrastructure)
 azd deploy
 
-# पूर्वाधार पहिले नै रहेको हुँदा यो 'azd up' भन्दा धेरै छिटो हुन्छ
+# This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## चरण 7: बहु वातावरणहरू व्यवस्थापन गर्नुहोस्
+## चरण 7: बहु वातावरण व्यवस्थापन गर्नुहोस्
 
-उत्पादन अगाडि परिवर्तनहरू परीक्षण गर्न स्टेजिङ वातावरण सिर्जना गर्नुहोस्:
+उत्पादन पहिले परिवर्तनहरू परीक्षण गर्न एक स्टेजिङ वातावरण बनाएँ:
 
 ```bash
-# नयाँ स्टेजिङ वातावरण सिर्जना गर्नुहोस्
+# Create a new staging environment
 azd env new staging
 
-# स्टेजिङमा तैनाथ गर्नुहोस्
+# Deploy to staging
 azd up
 
-# डेभ वातावरणमा फर्कनुहोस्
+# Switch back to dev environment
 azd env select dev
 
-# सबै वातावरणहरू सूचीबद्ध गर्नुहोस्
+# List all environments
 azd env list
 ```
 
 ### वातावरण तुलना
 ```bash
-# विकास वातावरण हेर्नुहोस्
+# View dev environment
 azd env select dev
 azd show
 
-# स्टेजिङ वातावरण हेर्नुहोस्
+# View staging environment  
 azd env select staging
 azd show
 ```
 
 ## चरण 8: स्रोतहरू सफा गर्नुहोस्
 
-अनुभव गर्दा सकेपछि, चलिरहेको चार्जबाट बच्न स्रोतहरू सफा गर्नुहोस्:
+परीक्षण समाप्त भएपछि, लागत बचत गर्न सफा गर्नुहोस्:
 
 ```bash
-# वर्तमान वातावरणका लागि सबै Azure स्रोतहरू मेटाउनुहोस्
-azd down
+# Review and delete BOTH environments created in this tutorial
+azd down --environment dev
+azd down --environment staging
 
-# पुष्टिकरण बिना बलपूर्वक मेटाउनुहोस् र सफ्ट-डिलिट गरिएका स्रोतहरूलाई स्थायी रूपमा हटाउनुहोस्
-azd down --force --purge
-
-# विशिष्ट वातावरण मेटाउनुहोस्
-azd env select staging
-azd down --force --purge
+# Automation alternative for a selected disposable environment:
+# azd down --environment dev --force --purge
+# --purge affects supported soft-deleted Azure resources, not local .azure files.
 ```
 
-## क्लासिक एप बनाम AI-संचालित एप: एउटै कार्यप्रवाह
+## क्लासिक एप विरुद्ध AI-संचालित एप: एउटै कार्यप्रवाह
 
-तपाईंले भर्खरै परम्परागत वेब अनुप्रयोग डिप्लोय गर्नुभयो। तर यदि तपाईंले AI-संचालित एप—जस्तो कि Microsoft Foundry Models द्वारा समर्थित च्याट एप—डिप्लोय गर्न चाहनुहुन्छ भने के हुन्छ?
+तपाईंले एउटा पारम्परिक वेब अनुप्रयोग तैनाथ गर्नुभयो। तर तपाईं AI-सञ्चालित एप जस्तै Microsoft Foundry Models द्वारा समर्थित च्याट अनुप्रयोग तैनाथ गर्न चाहनुहुन्छ भने?
 
-राम्रो खबर: **कार्यप्रवाह एउटै हो।**
+राम्रो खबर: **कार्यप्रवाह उस्तै छ।**
 
-| Step | क्लासिक Todo एप | AI च्याट एप |
+| चरण | क्लासिक Todo एप | AI च्याट एप |
 |------|-----------------|-------------|
-| प्रारम्भ गर्नुहोस् | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| आरम्भ (रिक्त डाइरेक्टरी) | `azd init --template todo-nodejs-mongo .` | `azd init --template azure-search-openai-demo .` |
 | प्रमाणीकरण | `azd auth login` | `azd auth login` |
-| डिप्लोय | `azd up` | `azd up` |
+| तैनाथ | `azd up` | `azd up` |
 | अनुगमन | `azd monitor` | `azd monitor` |
 | सफा गर्नुहोस् | `azd down --force --purge` | `azd down --force --purge` |
 
-एकमात्र फरक तपाईँले सुरु गर्ने **टेम्पलेट** हो। AI टेम्पलेटमा अतिरिक्त पूर्वाधार समावेश हुन सक्छ (जस्तै Microsoft Foundry Models स्रोत वा AI Search इन्डेक्स), तर azd ले यी सबै तपाईंका लागि व्यवस्थापन गर्छ। तपाईंले नयाँ कमाण्ड सिक्न, फरक उपकरण अपनाउन, वा डिप्लोयबारे आफ्नो सोच परिवर्तन गर्न आवश्यक पर्दैन।
+जीवनचक्र आदेश उस्तै हुन्छन्, तर आवश्यकताहरू फरक पर्न सक्छन्। AI टेम्प्लेटले मोडेल पहुँच, क्षेत्रीय कोटा, डेटा सेवन, र थप कन्फिगरेसन आवश्यक पर्न सक्छ। यसको README पढ्नुहोस्; `azd up` ले हराइरहेका अनुमति वा कोटा दिन सक्दैन।
 
-यो azd को मूल सिद्घान्त हो: **एकै कार्यप्रवाह, कुनै पनि कार्यभार।** यस ट्यूटोरियलमा तपाईंले अभ्यास गरेका सीपहरू — प्रारम्भ गर्ने, डिप्लोय गर्ने, अनुगमन गर्ने, पुन:डिप्लोय गर्ने, र सफा गर्ने — AI अनुप्रयोगहरू र एजेण्टहरूमा पनि समान रूपले लागू हुन्छन्।
+यो azd को मुख्य सिद्धान्त हो: **एउटा कार्यप्रवाह, कुनै पनि भार।** तपाईंले यो ट्युटोरियलमा अभ्यास गरेका सीपहरू — आरम्भ, तैनाथ, अनुगमन, पुनः तैनाथ, र सफा गर्ने — AI अनुप्रयोग र एजेन्टहरूमा समान रूपमा प्रयोग हुन्छन्।
 
 ---
 
 ## तपाईंले के सिक्नुभयो
 
-बधाई! तपाईंले सफलतापूर्वक:
-- ✅ टेम्पलेटबाट azd परियोजना प्रारम्भ गर्नुभयो
+बधाई छ! तपाईं सफलतापूर्वक:
+- ✅ टेम्प्लेटबाट azd परियोजना आरम्भ गर्नुभयो
 - ✅ परियोजना संरचना र मुख्य फाइलहरू अन्वेषण गर्नुभयो
-- ✅ Azure मा पूर्ण-स्ट्याक अनुप्रयोग डिप्लोय गर्नुभयो
-- ✅ कोड परिवर्तनहरू गरी पुन:डिप्लोय गर्नुभयो
+- ✅ azure मा पूर्ण-स्ट्याक अनुप्रयोग तैनाथ गर्नुभयो
+- ✅ कोड परिवर्तन गरी पुनः तैनाथ गर्नुभयो
 - ✅ बहु वातावरणहरू व्यवस्थापन गर्नुभयो
 - ✅ स्रोतहरू सफा गर्नुभयो
 
-## 🎯 सीप प्रमाणीकरण अभ्यासहरू
+## 🎯 कौशल सुनिश्चित अभ्यासहरू
 
-### अभ्यास 1: फरक टेम्पलेट डिप्लोय गर्नुहोस् (15 मिनेट)
-**लक्ष्य**: azd init र डिप्लोयमेन्ट कार्यप्रवाहमा निपुणता प्रदर्शन गर्नुहोस्
+### अभ्यास 1: फरक टेम्प्लेट तैनाथ गर्नुहोस् (१५ मिनेट)
+**लक्ष्य**: azd init र तैनाथीकरण कार्यप्रवाहको मास्टरी देखाउनुहोस्
 
 ```bash
-# Python + MongoDB स्ट्याक प्रयास गर्नुहोस्
+# Try Python + MongoDB stack
 mkdir todo-python && cd todo-python
-azd init --template todo-python-mongo
+azd init --template todo-python-mongo .
 azd up
 
-# परिनियोजन सत्यापित गर्नुहोस्
+# Verify deployment
 azd show
-curl $(azd show --output json | jq -r '.services.web.endpoint')
+curl --fail "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# सफा गर्नुहोस्
+# Clean up
 azd down --force --purge
 ```
 
-**सफलता मापदण्ड:**
-- [ ] अनुप्रयोग बिना त्रुटि डिप्लोय हुन्छ
-- [ ] ब्राउजरमा अनुप्रयोग URL पहुँच गर्न सकिन्छ
-- [ ] अनुप्रयोग ठीकसँग काम गर्छ (थप/हटाउने todo हरू)
-- [ ] सबै स्रोतहरू सफलतापूर्वक सफा गरियो
+**सफलता मापदण्डहरू:**
+- [ ] अनुप्रयोग त्रुटिबिना तैनाथ हुन्छ
+- [ ] अनुप्रयोग URL ब्राउजरमा पहुँचयोग्य हुन्छ
+- [ ] अनुप्रयोग ठीकसँग काम गर्छ (todos थप/मेटाउन)
+- [ ] सफलतापूर्वक सबै स्रोतहरू सफा गरियो
 
-### अभ्यास 2: कन्फिगरेसन अनुकूलन गर्नुहोस् (20 मिनेट)
-**लक्ष्य**: वातावरण चर कन्फिगरेसन अभ्यास गर्नुहोस्
+### अभ्यास 2: कन्फिगरेसन अनुकूलन गर्नुहोस् (२० मिनेट)
+**लक्ष्य**: रनटाइम कन्फिगरेसन होइन, स्थानीय वातावरण मान भण्डारण अभ्यास गर्नुहोस्
 
 ```bash
-cd my-first-azd-app
+# Return to your original my-first-azd-app directory first
 
-# अनुकूलित वातावरण सिर्जना गर्नुहोस्
+# Create custom environment
 azd env new custom-config
 
-# अनुकूलित भेरिएबलहरू सेट गर्नुहोस्
+# Set custom variables
 azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
 
-# भेरिएबलहरू जाँच गर्नुहोस्
+# Verify variables
 azd env get-values | grep APP_TITLE
 
-# अनुकूलित कन्फिगसँग तैनाथ गर्नुहोस्
-azd up
+# Check one value exactly; expected: My Custom Todo App
+azd env get-value APP_TITLE
 ```
 
-**सफलता मापदण्ड:**
-- [ ] कस्टम वातावरण सफलतापूर्वक सिर्जना भयो
-- [ ] वातावरण चरहरू सेट गरिए र प्राप्त गर्न सकिन्छ
-- [ ] अनुप्रयोग कस्टम कन्फिगरेसनसहित डिप्लोय हुन्छ
-- [ ] डिप्लोय गरिएको एपमा कस्टम सेटिङहरू सत्यापित गर्न सकिन्छ
+**सफलता मापदण्डहरू:**
+- [ ] अनुकूलित वातावरण सफलतापूर्वक सिर्जना गरियो
+- [ ] वातावरण चरहरू सेट गरी प्राप्त गर्न सकिन्छ
+- [ ] `azd env get-value APP_TITLE` ले `My Custom Todo App` छाप्छ
+- [ ] स्पष्ट पार्न सक्नुहुन्छ यी मानहरूले स्टक एप परिवर्तन गर्दैन जबसम्म कोड/पूर्वाधारले प्रयोग गर्दैन
 
-### अभ्यास 3: बहु-वातावरण कार्यप्रवाह (25 मिनेट)
-**लक्ष्य**: वातावरण व्यवस्थापन र डिप्लोय रणनीतिहरूमा निपुण हुनुहोस्
+### अभ्यास 3: बहु-परिवेश कार्यप्रवाह (२५ मिनेट)
+**लक्ष्य**: वातावरण व्यवस्थापन र तैनाथीकरण रणनीतिमा मास्टरी पाउनुहोस्
 
 ```bash
-# डेभ वातावरण सिर्जना गर्नुहोस्
+# Create dev environment
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# डेभ URL नोट गर्नुहोस्
-DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Dev: $DEV_URL"
 
-# स्टेजिङ वातावरण सिर्जना गर्नुहोस्
+# Create staging environment
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# स्टेजिङ URL नोट गर्नुहोस्
-STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Staging: $STAGING_URL"
 
-# वातावरणहरू तुलना गर्नुहोस्
+# Compare environments
 azd env list
 
-# दुबै वातावरणहरू परीक्षण गर्नुहोस्
-curl "$DEV_URL/health"
-curl "$STAGING_URL/health"
+# Test both environments
+curl --fail "$DEV_URL"
+curl --fail "$STAGING_URL"
 
-# दुबै सफा गर्नुहोस्
+# Clean up both
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
-**सफलता मापदण्ड:**
-- [ ] फरक कन्फिगरेसन सहित दुई वातावरण सिर्जना गरिएको छ
-- [ ] दुबै वातावरण सफलतापूर्वक डिप्लोय भएका छन्
+**सफलता मापदण्डहरू:**
+- [ ] दुई वातावरण फरक कन्फिगरेसनसहित सिर्जना गरियो
+- [ ] दुवै वातावरण सफलतापूर्वक तैनाथ गरियो
 - [ ] `azd env select` प्रयोग गरी वातावरणहरू बीच स्विच गर्न सकिन्छ
-- [ ] वातावरणहरू बीच वातावरण चरहरू फरक छन्
-- [ ] दुबै वातावरण सफलतापूर्वक सफा गरियो
+- [ ] वातावरण चरहरू वातावरणहरूबीच फरक छन्
+- [ ] दुवै वातावरण सफा गर्न सफल भयो
 
 ## 📊 तपाईंको प्रगति
 
-**खर्च गरिएको समय**: ~60-90 मिनेट  
-**आर्जित सीपहरू**:
-- ✅ टेम्पलेट-आधारित परियोजना प्रारम्भ
+**लाग्न गएको समय**: ~६०-९० मिनेट  
+**अर्जित कौशलहरू**:
+- ✅ टेम्प्लेट आधारित परियोजना आरम्भ
 - ✅ Azure स्रोत प्रावधान
-- ✅ अनुप्रयोग डिप्लोयमेन्ट कार्यप्रवाहहरू
+- ✅ अनुप्रयोग तैनाथ कार्यप्रवाहहरू
 - ✅ वातावरण व्यवस्थापन
 - ✅ कन्फिगरेसन व्यवस्थापन
-- ✅ स्रोत सफा र लागत व्यवस्थापन
+- ✅ स्रोत सफाई र लागत व्यवस्थापन
 
-**अर्को स्तर**: तपाईं अब उन्नत कन्फिगरेसन ढाँचाहरू सिक्न [कन्फिगरेसन मार्गदर्शक](configuration.md) का लागि तयार हुनुहुन्छ!
+**अर्को स्तर**: तपाईं तयार हुनुहुन्छ [कन्फिगरेसन गाइड](../chapter-03-configuration/configuration.md) अन्तर्गत उन्नत कन्फिगरेसन ढाँचाहरू सिक्न!
 
-## सामान्य समस्याहरू समाधान
+## सामान्य समस्या समाधान
 
-### प्रमाणीकरण त्रुटि
+### प्रमाणीकरण त्रुटिहरू
 ```bash
-# Azure सँग पुनः प्रमाणीकरण गर्नुहोस्
-az login
+# Re-authenticate with azd (az login does not refresh azd's default credentials)
+azd auth login
 
-# सदस्यता पहुँच जाँच गर्नुहोस्
-az account show
+# Verify the selected environment's subscription
+azd env get-value AZURE_SUBSCRIPTION_ID
 ```
 
-### डिप्लोय विफलताहरू
+### तैनाथीकरण असफलताहरू
 ```bash
-# डिबग लॉगिङ सक्षम गर्नुहोस्
-export AZD_DEBUG=true
+# Enable debug logging
 azd up --debug
 
-# Azure मा अनुप्रयोग लॉगहरू हेर्नुहोस्
+# View application logs in Azure
 azd monitor --logs
 
-# Container Apps का लागि, Azure CLI प्रयोग गर्नुहोस्:
+# For Container Apps, use Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
 ### स्रोत नाम द्वन्द्वहरू
 ```bash
-# अद्वितीय वातावरण नाम प्रयोग गर्नुहोस्
+# Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### पोर्ट/नेटवर्क समस्या
+### पोर्ट/नेटवर्क समस्याहरू
 ```bash
-# पोर्टहरू उपलब्ध छन् कि छैनन् जाँच गर्नुहोस्
+# Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
 ## अर्को कदमहरू
 
-अब जब तपाईंले आफ्नो पहिलो परियोजना पूरा गर्नुभयो, यी उन्नत विषयहरू अन्वेषण गर्नुहोस्:
+अब तपाईंले पहिलो परियोजना सम्पूर्ण गर्नुभएकोले, यी उन्नत विषयहरू अन्वेषण गर्नुहोस्:
 
 ### 1. पूर्वाधार अनुकूलन गर्नुहोस्
-- [पूर्वाधारलाई कोडको रूपमा](../chapter-04-infrastructure/provisioning.md)
-- [डाटाबेस, स्टोरेज, र अन्य सेवाहरू थप्नुहोस्](../chapter-04-infrastructure/provisioning.md#adding-services)
+- [पूर्वाधार कोडको रूपमा](../chapter-04-infrastructure/provisioning.md)
+- [डाटाबेस पूर्वाधार थप्नुहोस्](../chapter-04-infrastructure/provisioning.md#%EF%B8%8F-database-provisioning)
 
-### 2. CI/CD सेट अप गर्नुहोस्
-- [डिप्लोयमेन्ट मार्गदर्शक](../chapter-04-infrastructure/deployment-guide.md) - पूर्ण CI/CD कार्यप्रवाहहरू
-- [Azure Developer CLI डक्युमेन्टेशन](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - पाइपलाइन कन्फिगरेसन
+### 2. CI/CD सेटअप गर्नुहोस्
+- [तैनाथीकरण मार्गदर्शिका](../chapter-04-infrastructure/deployment-guide.md) - पूर्ण CI/CD कार्यप्रवाहहरू
+- [Azure Developer CLI दस्तावेज](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - पाइपलाइन कन्फिगरेसन
 
 ### 3. उत्पादन उत्तम अभ्यासहरू
-- [डिप्लोयमेन्ट मार्गदर्शक](../chapter-04-infrastructure/deployment-guide.md) - सुरक्षा, प्रदर्शन, र अनुगमन
+- [तैनाथीकरण मार्गदर्शिका](../chapter-04-infrastructure/deployment-guide.md) - सुरक्षा, प्रदर्शन, र अनुगमन
 
 ### 4. थप टेम्प्लेटहरू अन्वेषण गर्नुहोस्
 ```bash
-# श्रेणीअनुसार टेम्पलेटहरू ब्राउज़ गर्नुहोस्
+# Browse templates by category
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# विभिन्न प्रविधि स्ट्याकहरू प्रयास गर्नुहोस्
-azd init --template todo-python-mongo
-azd init --template todo-csharp-sql
-azd init --template todo-java-mongo
+# Try different technology stacks
+# Choose ONE in a new empty directory, not all three in the same project
+azd init --template todo-python-mongo .
+# azd init --template todo-csharp-sql .
+# azd init --template todo-java-mongo .
 ```
 
 ## थप स्रोतहरू
 
-### सिकाइ सामग्रीहरू
-- [Azure Developer CLI डक्युमेन्टेशन](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+### सिक्ने सामग्री
+- [Azure Developer CLI दस्तावेज](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure आर्किटेक्चर सेन्टर](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure अत्यन्त संरचित फ्रेमवर्क](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### समुदाय र समर्थन
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer समुदाय](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
-### टेम्प्लेट र उदाहरणहरू
-- [Official Template Gallery](https://azure.github.io/awesome-azd/)
-- [Community Templates](https://github.com/Azure-Samples/azd-templates)
-- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
+### टेम्प्लेटहरू र उदाहरणहरू
+- [सरकारी टेम्प्लेट ग्यालरी](https://azure.github.io/awesome-azd/)
+- [समुदाय टेम्प्लेट योगदानहरू](https://github.com/Azure/awesome-azd)
+- [Todo टेम्प्लेट स्रोत](https://github.com/Azure-Samples/todo-nodejs-mongo)
 
 ---
 
-**तपाईंको पहिलो azd परियोजना पूरा गरेकोमा बधाई!** अब तपाईं विश्वस्ततासाथ Azure मा शानदार अनुप्रयोगहरू निर्माण र डिप्लोय गर्न तयार हुनुहुन्छ।
+**तपाईंको पहिलो azd परियोजना पूरा गर्नुभएकोमा बधाई छ!** अब तपाईं Azure मा आत्मविश्वासका साथ अद्भुत अनुप्रयोगहरू निर्माण र तैनाथ गर्न तयार हुनुहुन्छ।
 
 ---
 
-**Chapter Navigation:**
-- **📚 पाठ्यक्रम गृह**: [AZD शुरुआतीहरूको लागि](../../README.md)
-- **📖 Current Chapter**: अध्याय 1 - आधार र छिटो सुरु
-- **⬅️ Previous**: [इन्स्टलेसन र सेटअप](installation.md)
-- **➡️ Next**: [Bring Your Own App](bring-your-own-app.md)
-- **🚀 Next Chapter**: [अध्याय 2: AI-प्रथम विकास](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**अध्याय नेभिगेशन:**
+- **📚 कोर्स होम**: [AZD नयाँ सुरु गर्नेका लागि](../../README.md)
+- **📖 वर्तमान अध्याय**: अध्याय 1 - आधार र छिटो सुरु
+- **⬅️ अघिल्लो**: [इन्स्टलेशन र सेटअप](installation.md)
+- **➡️ अर्को**: [आफ्नो एप ल्याउनुहोस्](bring-your-own-app.md)
+- **🚀 अर्को अध्याय**: [अध्याय 2: AI-प्रथम विकास](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 

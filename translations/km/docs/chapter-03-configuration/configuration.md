@@ -1,118 +1,118 @@
-# មគ្គុទេសក៍ការកំណត់
+# មគ្គុទេសក៍ការកំណត់កំណត់រចនា
 
-**ការរុករកជំពូក:**
-- **📚 ផ្ទះវគ្គ**: [AZD សម្រាប់អ្នកចាប់ផ្ដើម](../../README.md)
-- **📖 ជំពូក​បច្ចុប្បន្ន**: ជំពូក 3 - ការកំណត់រចនា និង ការផ្ទៀងផ្ទាត់
-- **⬅️ មុន**: [គម្រោងដំបូងរបស់អ្នក](first-project.md)
-- **➡️ បន្ទាប់**: [មគ្គុទេសក៍ការបញ្ជូន](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 ជំពូកបន្ទាប់**: [ជំពូក 4: រចនាសម្ព័ន្ធជា​កូដ](../chapter-04-infrastructure/deployment-guide.md)
+**ការមានផ្លូវសម្រាប់ជំពូក:**
+- **📚 ផ្ទះវគ្គ**៖ [AZD សម្រាប់អ្នកដំបូង](../../README.md)
+- **📖 ជំពូកបច្ចុប្បន្ន**៖ ជំពូក 3 - កំណត់រចនា និងការផ្ទៀងផ្ទាត់អត្តសញ្ញាណ
+- **⬅️ មុននេះ**៖ [គម្រោងទីមួយរបស់អ្នក](../chapter-01-foundation/first-project.md)
+- **➡️ បន្ទាប់**៖ [មគ្គុទេសក៍ការដាក់បញ្ចូល](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 ជំពូកបន្ទាប់**៖ [ជំពូក 4៖ រចនាសម្ព័ន្ធជារចនាសម្ព័ន្ធកូដ](../chapter-04-infrastructure/deployment-guide.md)
 
 ## ការណែនាំ
 
-មគ្គុទេសក៍ទូលំទូលាយនេះគ្របដណ្តប់ទាំងអស់ចំពោះមុខវិជ្ជាក្នុងការកំណត់ Azure Developer CLI សម្រាប់ដំណើរការ ανάπτυξη និងការដាក់ឲ្យដំណើរការ។ អ្នកនឹងរៀនអំពីលំដាប់អាទិភាពនៃការកំណត់ របៀបគ្រប់គ្រងបរិយាកាស វិធីសាស្ត្រផ្ទៀងផ្ទាត់ និងរបៀបកំណត់ខ្ពស់ដែលអនុញ្ញាតឲ្យដាក់បញ្ចូលទៅ Azure បានយ៉ាងមានប្រសិទ្ធភាព និងសុវត្ថិភាព។
+> បានពិនិត្យឡើងវិញប្រឆាំងនឹង `azd 1.37.2` (វិច្ឆិកា 2026)។ ពាក្យបញ្ជារ Bash លក្ខណៈគោរពថាគម្រោង azd ត្រូវបានបង្កើតរួចហើយ។ លុះត្រាតែបានពិពណ៌នា​ពិសេសថាជាឯកសារពេញលេញ ប្លុក YAML/Bicep គឺជាផ្នែកតូចៗ សម្រាប់បញ្ចូលទៅក្នុងឯកសារគម្រោងដែលសម្របសម្រួលគ្នា មិនមែនជាគម្រោងរត់ដោយខ្លួនឯងទេ។
 
-## គោលដៅការសិក្សា
+មគ្គុទេសក៍បូកសរុបនេះគ្របដណ្តប់គ្រប់ជ្រុងជ្រោយនៃការកំណត់រចនាសម្ព័ន្ធ Azure Developer CLI សម្រាប់ដំណើរការអភិវឌ្ឍ និងដាក់បញ្ចូលតាមរយៈវិធីសាស្រ្តល្អឥតខ្ចោះ។ អ្នកនឹងរៀនអំពីលំដាប់កំណត់រចនា ការគ្រប់គ្រងបរិយាកាស វិធីAuthentication និងគំរូកំណត់រចនាសម្ព័ន្ធកម្រិតខ្ពស់ ដែលអនុញ្ញាតឱ្យមានការដាក់បញ្ចូល Azure ដោយមានប្រសិទ្ធភាពនិងសុវត្ថិភាព។
 
-នៅចុងបញ្ចប់មេរៀននេះ អ្នកនឹងអាច:
-- ជាន់ចំណេះដឹងលំដាប់កំណត់រចនានៃ azd និងយល់ពីរបៀបដាក់ជាអាទិភាពនៃការកំណត់
-- កំណត់ការកំណត់សកល និងសម្រាប់គម្រោងយ៉ាងមានប្រសិទ្ធភាព
-- គ្រប់គ្រងបរិយាកាសច្រើនជាមួយការកំណត់ខុសគ្នា
-- អនុវត្តវិធីសាស្ត្រផ្ទៀងផ្ទាត់ និងអនុញ្ញាតយ៉ាងសុវត្ថិភាព
-- យល់ពីបែបផែនកំណត់ខ្ពស់សម្រាប់សถานการณ์ស្មុគស្មាញ
+## គោលដៅរៀន
 
-## លទ្ធផលការសិក្សា
+នៅចុងបញ្ចប់មេរៀននេះ អ្នកនឹង:
+- ស្គាល់លំដាប់កំណត់រចនាសម្ព័ន្ធ azd និងយល់ពីរបៀបដែលការកំណត់ត្រូវបានអាទិភាព
+- កំណត់ការកំណត់ទូទៅ និងសម្រាប់គម្រោងជាដំណើរការល្អឥតខ្ចោះ
+- គ្រប់គ្រងបរិយាកាសច្រើនជាមួយនឹងកំណត់រចនាសម្ព័ន្ធខុសគ្នា
+- អនុវត្តវិធីបញ្ជាក់អត្តសញ្ញាណនិងអំណាចក្រោមសុវត្ថិភាព
+- យល់ដឹងពីគំរូកំណត់រចនាសម្ព័ន្ធកម្រិតខ្ពស់សម្រាប់ស្ថានភាពស្មុគស្មាញ
+
+## លទ្ធផលរៀន
 
 បន្ទាប់ពីបញ្ចប់មេរៀននេះ អ្នកនឹងអាច:
-- កំណត់ azd សម្រាប់លំហប្រុងប្រយ័ត្នអភិវឌ្ឍន៍
-- រៀបចំ និងគ្រប់គ្រងបរិយាកាសច្រើនសម្រាប់ដាក់ឲ្យដំណើរការ
-- អនុវត្តការគ្រប់គ្រងការកំណត់យ៉ាងសុវត្ថិភាព
-- ដោះស្រាយបញ្ហាទាក់ទងនឹងការកំណត់
-- ប្តូរទម្រង់ឲ្យ azd សមរម្យសម្រាប់តម្រូវការរបស់អង្គភាព
+- កំណត់ azd សម្រាប់ដំណើរការអភិវឌ្ឍល្អបំផុត
+- បង្កើត និងគ្រប់គ្រងបរិយាកាសដាក់បញ្ចូលច្រើន
+- អនុវត្តន៍ការគ្រប់គ្រងកំណត់រចនាសម្ព័ន្ធយ៉ាងមានសុវត្ថិភាព
+- គ្រប់គ្រងបញ្ហាដែលពាក់ព័ន្ធនឹងការកំណត់រចនា
+- ប្ដូរប្រព័ន្ធបន្តការរបស់ azd សម្រាប់តម្រូវការស្ថាប័នជាក់លាក់
 
-មគ្គុទេសក៍ទូលំទូលាយនេះគ្របដណ្តប់ទាំងអស់ចំពោះមុខវិជ្ជាក្នុងការកំណត់ Azure Developer CLI សម្រាប់ដំណើរការ ανάπτυξη និងការដាក់ឲ្យដំណើរការ។
+មគ្គុទេសក៍បូកសរុបនេះគ្របដណ្តប់គ្រប់ជ្រុងជ្រោយនៃការកំណត់រចនា Azure Developer CLI សម្រាប់ដំណើរការអភិវឌ្ឍ និងដាក់បញ្ចូលតាមរយៈវិធីសាស្រ្តល្អឥតខ្ចោះ។
 
-## ការយល់ដឹងអំពីភ្នាក់ងារ AI ក្នុងគម្រោង azd
+## ការយល់ដឹងអំពី AI Agents ក្នុងគម្រោង azd
 
-បើអ្នកថ្មីចំពោះភ្នាក់ងារ AI នេះជាវិធីសាមញ្ញក្នុងការគិតអំពីពួកវាក្នុងពិភព azd។
+ប្រសិនបើអ្នកនៅថ្មីទៅនឹង AI agents នេះជាវិធីងាយស្រួលក្នុងការយល់អំពីពួកវាក្នុងលោក azd។
 
-### ភ្នាក់ងារ (Agent) ជាអ្វី?
+### តើ Agent ជាអ្វី?
 
-ភ្នាក់ងារ គឺជាកម្មវិធីមួយដែលអាចទទួលសំណើ កាយវិការអំពីវា និងចាត់វិធានការណ៍—ភាគច្រើនដោយហៅទៅម៉ូដែល AI មួយ ស្វែងរកទិន្នន័យ ឬអំពើសេវាពីក្រៅ។ ក្នុងគម្រោង azd ភ្នាក់ងារជាសេវាកម្មមួយទៀតគួរត្រូវដូចសេវាកម្មវេបផែនអោយឬ API ប្រាក់ក្រោយ។
+Agent គឺជាកម្មវិធីមួយដែលអាចទទួលសំណើ សម្រេចចិត្តលើវា ហើយអនុវត្តចំពោះសកម្មភាព—ជាញឹកញាប់តាមរយៈការហៅម៉ូដែល AI មួយ ស្វែងរកទិន្នន័យ ឬហៅសេវាកម្មផ្សេងៗ។ ក្នុងគម្រោង azd, agent គ្រាន់តែជាសេវាកម្មមួយទៀត អ្នកថាតែ ដូចជា frontend គេហទំព័រ ឬ API backend។
 
-### ភ្នាក់ងារភ្ជាប់យ៉ាងដូចម្តេចទៅនឹងរចនាសម្ព័ន្ធគម្រោង azd
+### របៀបAgent ត្រូវបានបញ្ចូលក្នុងរចនាសម្ព័ន្ធគម្រោង azd
 
-គម្រោង azd សមាសមកពីបីស្រទាប់៖ **រចនាសម្ព័ន្ធ**, **កូដ**, និង **ការកំណត់**។ ភ្នាក់ងារចូលរួមក្នុងស្រទាប់ទាំងនេះដូចជា​សេវាកម្មផ្សេងទៀត:
+គម្រោង azd ត្រូវបានបង្កើតពីបីស្រទាប់៖ **រចនាសម្ព័ន្ធ**, **កូដ** និង **កំណត់រចនា**។ Agent ត្រូវបានភ្ជាប់ទៅកាន់ស្រទាប់ទាំងនេះ ដូចសេវាកម្មផ្សេងៗ:
 
-| Layer | អ្វីដែលវាធ្វើសម្រាប់កម្មវិធីប្រពៃណី | អ្វីដែលវាធ្វើសម្រាប់ភ្នាក់ងារ |
+| ស្រទាប់ | តើវាធ្វើអ្វីសម្រាប់កម្មវិធីបុរាណ | តើវាធ្វើអ្វីសម្រាប់Agent |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | ផ្តល់សេវាវេប និងទិន្នន័យតារាង | ផ្តល់ចុងក្រឡាចុងម៉ូដែល AI ឬសន្ទស្សន៍ស្វែងរក ឬម៉ាស៊ីនផ្ទុកភ្នាក់ងារ |
-| **Code** (`src/`) | រួមមានកូដផ្នែកមុខ និង API របស់អ្នក | រួមមានតុល្យភាពភ្នាក់ងារ និងកំណត់សំណួរ (prompts) |
-| **Configuration** (`azure.yaml`) | បញ្ជីសេវាកម្ម និងគោលដៅបម្រើ | បញ្ជីភ្នាក់ងារជាសេវាកម្ម ស្នើឲ្យចង្អុលទៅកូដ និងម៉ាស៊ីនផ្ទុករបស់វា |
+| **រចនាសម្ព័ន្ធ** (`infra/`) | បង្កើតកម្មវិធីបណ្តាញ និងមូលដ្ឋានទិន្នន័យ | បង្កើតចំណុចចេញម៉ូដែល AI, សន្ទស្សន៍ស្វែងរក ឬម៉ាស៊ីនផ្ទះអ្នកភ្ជាប់Agent |
+| **កូដ** (`src/`) | មានកូដមុខងារនិង API របស់អ្នក | មានលូហ្ស៊ីក Agent និងកំណត់លក្ខណៈ prompt |
+| **កំណត់រចនា** (`azure.yaml`) | បញ្ជីសេវាកម្ម និងគោលដៅម៉ាស៊ីនបម្រើ | បញ្ជី Agent ជាសេវាកម្ម មើលទៅកូដ និងម៉ាស៊ីនបម្រើរបស់វា |
 
 ### តួនាទីរបស់ `azure.yaml`
 
-អ្នកមិនចាំបាច់ចាំបាច់យកវា​ទុកក្នុងចិត្តឥលូវនេះទេ។ នៅលើកម្រិតយោល `azure.yaml` ជាឯកសារដែលអ្នកប្រាប់ azd ថា: "នេះជាសេវាកម្មដែលបង្កើតកម្មវិធីរបស់ខ្ញុំ ហើយនេះជាទីកន្លែងដែលអាចរកកូដបាន។"
+អ្នកមិនចាំបាច់ចង់ចងចាំវា ពីព្រោះ `azure.yaml` គឺជា ឯកសារដែលអ្នកប្រាប់ azd ថា: *"នេះជាសេវាកម្មជាចម្បងក្នុងកម្មវិធីរបស់ខ្ញុំ ហើយនេះជាទីតាំងកូដរបស់ពួកវា។"*
 
-ពេលគម្រោងរបស់អ្នកមានភ្នាក់ងារ AI `azure.yaml` នឹងបញ្ជីភ្នាក់ងារនោះជា​សេវាកម្មមួយ។ azd នឹងដឹងធ្វើការផ្តល់រចនាសម្ព័ន្ធត្រឹមត្រូវ (ឧ. ចុងម៉ូដែល Microsoft Foundry Models ឬ Container App សម្រាប់ផ្ទុកភ្នាក់ងារ) និងដាក់កូដភ្នាក់ងាររបស់អ្នក—ដូចជា​វានឹងធ្វើសម្រាប់កម្មវិធីវេប ឬ API។
+នៅពេលគម្រោងរបស់អ្នកមាន AI agent, `azure.yaml` គ្រាន់តែបញ្ជីបន្ថែមAgent នោះជាសេវាកម្មមួយ។ azd នឹងដឹងថាត្រូវបង្កើតរចនាសម្ព័ន្ធត្រឹមត្រូវ (ដូចជា Microsoft Foundry Models endpoint ឬ Container App សម្រាប់ផ្ទុកAgent) និងដាក់កូដAgent ដូចការប្រើប្រាស់សម្រាប់កម្មវិធីបណ្តាញ ឬ API។
 
-នេះមានន័យថាមិនមានអ្វីចាំបាច់ថ្មីជាចម្បងក្នុងការរៀន។ ប្រសិនបើអ្នកយល់ពីរបៀប azd គ្រប់គ្រងសេវាកម្មវេប អ្នកបានយល់ពីរបៀបវាគ្រប់គ្រងភ្នាក់ងារហើយ។
+នេះមានន័យថា មិនមានអ្វីថ្មីឆ្ពោះម្ដងទេ។ ប្រសិនបើអ្នកយល់ដឹងពីរបៀបដែល azd គ្រប់គ្រងសេវាកម្មបណ្តាញ អ្នកប្រាកដជាយល់ដឹងពីរបៀបដែលវាគ្រប់គ្រង Agent ផងដែរ។
 
-## លំដាប់អាទិភាពនៃការកំណត់
+## លំដាប់កំណត់រចនា
 
-azd ប្រើប្រព័ន្ធកំណត់ដែលមានលំដាប់អាទិភាព:
-1. **ពាក្យបញ្ជាច្រើនបន្ទាត់** (Command-line flags) (អាទិភាពខ្ពស់បំផុត)
-2. **អថេរបរិយាកាស**
-3. **ការកំណត់គម្រោងក្នុងស្រុក** (`.azd/config.json`)
-4. **ការកំណត់អ្នកប្រើសកល** (`~/.azd/config.json`)
-5. **តម្លៃលំនាំដើម** (អាទិភាពទាបបំផុត)
+azd មានផ្ទៃកំណត់រចនាសម្ព័ន្ធដែលចម្ងាយគ្នា មិនមែនការកំណត់រចនាសម្ព័ន្ធគ្រប់គ្រាន់មួយទេ:
+- **ចំណូលចិត្តអ្នកប្រើទូទៅ**៖ `~/.azd/config.json`, គ្រប់គ្រងដោយ `azd config`។
+- **សេចក្ដីកំណត់គម្រោង**៖ `azure.yaml` បញ្ជាក់ពីសេវាកម្ម រចនាសម្ព័ន្ធ និង ខ្សែស្រឡាយ។
+- **ជ្រើសរើសបរិយាកាសមូលដ្ឋាន**៖ `.azure/config.json`។
+- **តម្លៃសម្រាប់បរិយាកាសនីមួយៗ**៖ `.azure/<name>/.env` គ្រប់គ្រងដោយ `azd env`; ការកំណត់បន្ថែមស្ថិតក្នុង `config.json` នៃបរិយាកាសនោះ។
+- **ទង់សញ្ញានិងអថេររបៀបដំណើរការ**៖ ធ្វើការបដិសេធតែការកំណត់ដែលគាំទ្រដោយពាក្យបញ្ជាឬអ្នកផ្គត់ផ្គង់ណាមួយ។
 
-## ការកំណត់សកល
+តម្លៃ `azd env set` មួយដែលចៃដន្យ មិនបានបម្លែងជាការបញ្ជាផ្ទៃខាងក្នុង ឬការកំណត់កម្មវិធីដែលបានដាក់បញ្ចូលឡើយ។ ត្រូវយោងវាយ៉ាងច្បាស់ក្នុងឯកសារពាម៉ែត្រ ការកំណត់សេវាកម្មដែលគាំទ្រ ឬខ្សែស្រឡាយ។
 
-### ការកំណត់តម្លៃលំនាំដើមសកល
+## កំណត់រចនាសម្ព័ន្ធទូទៅ
+
+### កំណត់ការលំនាំដើមទូទៅ
 ```bash
-# កំណត់ការជាវលំនាំដើម
+# Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# កំណត់ទីតាំងលំនាំដើម
+# Set default location
 azd config set defaults.location "eastus2"
 
-# កំណត់គោលការណ៍កំណត់ឈ្មោះក្រុមធនធានលំនាំដើម
-azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
-
-# មើលការកំណត់សកលទាំងអស់
+# View all global configuration
 azd config show
 
-# លុបការកំណត់មួយ
+# Remove a configuration
 azd config unset defaults.location
 ```
 
-### ការកំណត់សកលដែលទូទៅ
+### ការកំណត់ទូទៅទូទៅដែលត្រូវបានប្រើ
 ```bash
-# ចំណូលចិត្តសម្រាប់ការអភិវឌ្ឍន៍
-azd config set alpha.enable true                    # បើកមុខងារ អាល់ហ្វា
-azd config set telemetry.enabled false             # បិទការតាមដានតេលេមេត្រី
-azd config set output.format json                  # កំណត់ទ្រង់ទ្រាយលទ្ធផល
+# Discover supported settings instead of inventing configuration keys
+azd config options
+azd config list-alpha
 
-# ការកំណត់សុវត្ថិភាព
-azd config set auth.useAzureCliCredential true     # ប្រើ Azure CLI សម្រាប់ការផ្ទៀងផ្ទាត់
-azd config set tls.insecure false                  # អនុវត្តការផ្ទៀងផ្ទាត់ TLS
+# Explicit opt-in only: use Azure CLI credentials rather than azd's default login
+azd config set auth.useAzCliAuth true
+# Restore azd's default credential behavior
+azd config unset auth.useAzCliAuth
 
-# កែលម្អសមត្ថភាព
-azd config set provision.parallelism 5             # ការបង្កើតធនធានស្របពេល
-azd config set deploy.timeout 30m                  # ពេលកំណត់សម្រាប់ការដាក់ឱ្យដំណើរការ
+# Use per-command flags for supported behavior
+azd show --output json
+azd deploy --timeout 1800   # seconds; stops waiting, not the Azure-side deployment
 ```
 
-## 🏗️ ការកំណត់គម្រោង
+## 🏗️ កំណត់រចនាសម្ព័ន្ធគម្រោង
 
 ### រចនាសម្ព័ន្ធ azure.yaml
-ឯកសារ `azure.yaml` គឺជារឿងសំខាន់នៅក្នុងគម្រោង azd របស់អ្នក៖
+ឯកសារ `azure.yaml` គឺជាចិត្តដួងនៃគម្រោង azd របស់អ្នក៖
 
 ```yaml
 # Minimum configuration
 name: my-awesome-app
 metadata:
   template: my-template@1.0.0
-  templateBranch: main
 
 # Service definitions
 services:
@@ -129,21 +129,13 @@ services:
     language: python
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-    
-  # Database service
-  database:
-    project: ./src/db
-    host: postgres
+      context: .
+      path: Dockerfile
     
 # Infrastructure configuration
 infra:
   provider: bicep                   # Infrastructure provider
   path: ./infra                    # Infrastructure code location
-  parameters:
-    environmentName: ${AZURE_ENV_NAME}
-    location: ${AZURE_LOCATION}
 
 # Deployment hooks
 hooks:
@@ -181,9 +173,11 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### ជម្រើសកំណត់សេវាកម្ម
+នេះគឺជា **ឧទាហរណ៍កំណត់គម្រោង** មិនមែនជារូបមន្តចាប់ផ្តើម។ បង្កើតថតប្រភពដែលបានយោង ស្គ្រីបខ្សែស្រឡាយ ស្គ្រីបកញ្ចប់ និងប្រភេទ `infra/main.bicep`/`main.parameters.json` មុនពេលរត់វា។ មូលដ្ឋានទិន្នន័យស្ថិតក្នុងរចនាសម្ព័ន្ធ; `postgres` មិនមែនជាម៉ាស៊ីនផ្ទះសេវាកម្មបញ្ចូលមួយ។ ពាម៉ែត្ររចនាសម្ព័ន្ធដាក់នៅក្នុងឯកសារពាម៉ែត្រអ្នកផ្គត់ផ្គង់មិនមែននៅក្នុង `infra.parameters`។
 
-#### ប្រភេទម៉ាស៊ីនបម្រើ
+### ជម្រើសកំណត់រចនាសម្ព័ន្ធសេវាកម្ម
+
+#### ប្រភេទម៉ាស៊ីនផ្ទះ
 ```yaml
 services:
   web-static:
@@ -202,46 +196,53 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### ការកំណត់ពិសេសសម្រាប់ភាសា
+#### ខ្សែស្រឡាយសម្រាប់ភាសារពិសេស
+
+ផ្នែកសេវាកម្មខាងក្រោមបង្ហាញខ្សែស្រឡាយ; បញ្ចូលវាជាមួយ `project` និង `host` ពិតប្រាកដនៃសេវាកម្មនីមួយៗ។ `buildCommand` និង `startCommand` មិនមែនជាគុណលក្ខណៈសេវាកម្ម azd ជាទូទៅទេ។ កំណត់ការចាប់ផ្តើមប្រតិបត្តិការនៅក្នុងកម្មវិធី Dockerfile ឬរចនាសម្ព័ន្ធម៉ាស៊ីនផ្ទះ។
+
 ```yaml
 services:
   node-app:
+    project: ./src/node
+    host: appservice
     language: js
-    buildCommand: npm run build
-    startCommand: npm start
+    hooks:
+      prepackage:
+        shell: sh
+        run: npm run build
     
   python-app:
+    project: ./src/python
+    host: appservice
     language: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
     
   dotnet-app:
+    project: ./src/dotnet
+    host: appservice
     language: csharp
-    buildCommand: dotnet build
-    startCommand: dotnet run
     
   java-app:
+    project: ./src/java
+    host: appservice
     language: java
-    buildCommand: mvn clean package
-    startCommand: java -jar target/app.jar
 ```
 
 ## 🌟 ការគ្រប់គ្រងបរិយាកាស
 
 ### បង្កើតបរិយាកាស
 ```bash
-# បង្កើតបរិយាកាសថ្មី
+# Create a new environment
 azd env new development
 
-# បង្កើតដោយមានទីតាំងជាក់លាក់
+# Create with specific location
 azd env new staging --location "westus2"
 
-# បង្កើតពីគំរូ
+# Create from template
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### ការកំណត់បរិយាកាស
-រាល់បរិយាកាសនីមួយៗមានការកំណត់ផ្ទាល់ខ្លួននៅក្នុង `.azure/<env-name>/config.json`:
+### កំណត់រចនាសម្ព័ន្ធបរិយាកាស
+តម្លៃបរិស្ថានមូលដ្ឋាននៅក្នុង `.azure/<env-name>/.env` រួមមាន `AZURE_ENV_NAME`, `AZURE_SUBSCRIPTION_ID`, និង `AZURE_LOCATION`។ ប្រើ `azd env config get/set` សម្រាប់ការកំណត់បរិស្ថាន JSON បន្ថែម។ JSON ខាងក្រោមគឺ​ជា **ស្ថានភាពកម្មវិធីគំនិត**, មិនមែនស្គីម៉ាផ្គុំ azd ទេ; កុំចម្លងវា​ទៅក្នុងគេហទំព័រ azd:
 
 ```json
 {
@@ -263,130 +264,134 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### អថេរបរិយាកាស
+### ឧបករណ៍បរិស្ថាន
+
+**ការបង្ហាញតែអក្សរធម្មតា។** តម្លៃ `azd env set` មានស្រាប់ត្រូវបានសរសេរទៅគោលដៅ `.azure/<name>/.env` ហើយអាចបង្ហាញបានដោយពាក្យបញ្ជាពិសេស។ កុំប្រើកូនសោ API ឧទាហរណ៍ជាការផ្ទៀងផ្ទាត់ពិត។ សម្រាប់សម្ងាត់ ប្រើ `azd env set-secret` និងការតភ្ជាប់រយៈពេលរត់យ៉ាងច្បាស់។
+
 ```bash
-# កំណត់អថេរសម្រាប់បរិស្ថានជាក់លាក់
+# Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# មើលអថេរបរិស្ថាន
+# View environment variables
 azd env get-values
 
-# លទ្ធផលដែលរំពឹងទុក:
+# Expected output:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# លុបអថេរបរិស្ថាន
+# Remove environment variable
 azd env unset DEBUG
 
-# ផ្ទៀងផ្ទាត់ការលុប
+# Verify removal
 azd env get-values | grep DEBUG
-# (គួរតែ​មិនបង្ហាញអ្វី)
+# (should return nothing)
 ```
 
-### គំរូបរិយាកាស
-បង្កើត `.azure/env.template` សម្រាប់ការកំណត់បរិយាកាសប្រកបដោយភាពជាប់លាប់៖
+### រចនាប័ទ្មបរិស្ថាន
+បង្កើត **ឯកសារមិនសម្ងាត់ ដែលគ្រប់គ្រងដោយដៃ** `.env.example` នៅធ្មេញគម្រោងសម្រាប់ការតំឡើងរសជាតិដូចគ្នា។ azd មិនទាញយកឯកសារដែលមានឈ្មោះ `env.template` ដោយស្វ័យប្រវត្តិទេ:
 ```bash
-# អថេរត្រូវការ
+# Required variables
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# ការកំណត់កម្មវិធី
+# Application settings
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# ការកំណត់អភិវឌ្ឍន៍ដែលជាជម្រើស
+# Optional development settings
 DEBUG=false
 LOG_LEVEL=info
 ```
 
-### ការចែករំលែកបរិយាកាសក្នុងក្រុម
+### ការចែករំលែកបរិស្ថាននៅក្នុងក្រុម
 
-ពេលមានអ្នកច្រើនធ្វើការលើគម្រោងមួយ អ្នកត្រូវយល់ព្រមគ្នាអំពី **អ្វីដែលត្រូវទព្យាយជាមួយ repo ហើយអ្វីដែលនៅក្នុងស្រុក**។ azd រក្សាបរិយាកាសនីមួយៗនៅក្រោមថត `.azure/` និងមិនគ្រប់មាតិកាទាំងអស់ត្រូវបន្ថែមទៅ commit ទេ។
+នៅពេលមានមនុស្សច្រើនធ្វើការលើគម្រោង មនុស្សទាំងអស់ត្រូវព្រមព្រៀងអំពី **អ្វីដែលត្រូវផ្ទុកជាមួយ repo និងអ្វីដែលនៅក្នុងតំបន់ជាលokal**។ azd រក្សាបរិស្ថាននីមួយៗនៅក្នុងថត `.azure/` ហើយមិនគ្រប់យ៉ាងគួរជាប់ commit ទៅ។
 
-**អ្វីដែលមាននៅក្នុង `.azure/`:**
+**អ្វីដែលនៅក្នុង `.azure/`៖**
 
 ```
 .azure/
 ├── config.json              # which env is currently selected (local)
 └── <env-name>/
-    ├── config.json          # subscription, location, resource IDs
-    └── .env                 # environment variables (may contain secrets!)
+    ├── config.json          # additional environment settings
+    └── .env                 # subscription, location, outputs; may contain secrets!
 ```
 
-**អ្វីដែលត្រូវ gitignore.** `.gitignore` លំនាំដើមរបស់ azd បានដក `.azure/`ហើយ។ សូមរក្សាឲ្យដូច្នោះ—ឯកសារ `.env` អាចមានអាថ៌កំបាំង ហើយ ID របស់ធនធានមានលក្ខណៈពិសេសចំពោះអ្នកដែលបានផ្តល់វា។ ម៉ិត្តក្រុមនីមួយៗបង្កើតបរិយាកាស **ផ្ទាល់ខ្លួន** នៅក្នុងស្រុករបស់ខ្លួន៖
+**អ្វីដែលគួរត្រូវ gitignore។** ជូនការកំណត់លំនាំដោយស្វ័យប្រវត្តិរបស់ azd រួចហើយក្នុង `.gitignore` បានរារាំង `.azure/`។ រក្សាវា�អោយដដែល—ឯកសារ `.env` អាចមានសម្ងាត់ ហើយអត្តសញ្ញាណ resource គឺជារបស់អ្នកដែលបាន Provision ផ្ទាល់។ មិត្តប្រដាល់រៀបចំបរិស្ថាន **ផ្ទាល់ខ្លួន** របស់ពួកគេនៅក្នុងតំបន់ជាលokal៖
 
 ```bash
-# អ្នកអភិវឌ្ឍន៍និមួយៗរត់វាម្តង ដើម្បីទទួលបានបរិយាកាសដែលផ្តាច់ខ្លួន
+# Every developer runs this once to get their own isolated environment
 azd env new dev-alice
 azd up
 ```
 
-**ប្តូរវិញរវាងបរិយាកាស.** អ្នកអភិវឌ្ឍដែលគ្រប់គ្រងបរិយាកាសច្រើននោះជ្រើសបរិយាកាសសកម្ម មុនពេលរៀបចំបញ្ជា:
+**ការប្តូរវិញរវាងបរិស្ថាន។** អ្នកអភិវឌ្ឍដែលគ្រប់គ្រងបរិស្ថានច្រើនជ្រើសរើសប្រើបរិស្ថានសកម្មមុនបញ្ជារ:
 
 ```bash
-azd env list                 # មើលបរិយាកាសក្នុងស្រុកទាំងអស់ និងបង្ហាញថាមួយណាជាលំនាំដើម
-azd env select staging       # ធ្វើឱ្យ 'staging' ជាបរិយាកាសសកម្ម
-azd env get-values           # បញ្ជាក់ថាអ្នកកំណត់ទៅកាន់បរិយាកាសដែលត្រឹមត្រូវ
+azd env list                 # see all local environments and which is default
+azd env select staging       # make 'staging' the active environment
+azd env get-values           # confirm you're pointed at the right one
 ```
 
-**ផ្តល់តម្លៃលំនាំដើមដែលមិនមែនអាថ៌កំបាំងទៅក្រុម។** ធ្វើ commit គំរូ (បែប `.azure/env.template` ខាងលើ) ដើម្បីឲ្យគ្រប់គ្នាច្បាស់ថាត្រូវដាក់អថេរណាមួយ—ប៉ុន្តែមិនធ្វើ commit តម្លៃដែលបានបំពេញ។ គូសថ្មីនឹងចម្លងគំរូនិងបញ្ចូលតម្លៃរបស់ខ្លួន។
+**ការផ្តល់ទិន្នន័យលំនាំមិនសម្ងាត់ដល់ក្រុម។** Commit `.env.example` ខាងក្រៅថត ignore `.azure/`។ មិត្តថ្មីចម្លងវាទៅឯកសារគំរូមិនគិតសោះ បញ្ចូលតម្លៃ ហើយនាំចូលយ៉ាងច្បាស់ជាមួយ `azd env set --file <local-file>`។ កុំដែលនាំចូលពន្លឺទំនេរក្នុងបរិស្ថានធ្វើការ។
 
-**បរិយាកាសក្នុង CI/CD.** បណ្ដាញឧបករណ៌ (pipelines) មិនអានថត `.azure/` ក្នុងស្រុករបស់អ្នកទេ។ ជំនួសមក ជូនតម្លៃបរិយាកាសជាតម្លៃ/អាថ៌កំបាំង pipeline ហើយ azd អានពីបរិយាកាសរបស់ដំណើរការ៖
+**បរិស្ថានក្នុង CI/CD។** ប្រព័ន្ធ Pipeline មិនអានថត `.azure/` នៅក្នុងតំបន់ជាលokal របស់អ្នកទេ។ ជំនួស ប្រគល់តម្លៃបរិស្ថានជាផលិតផល/សម្ងាត់ pipeline ហើយ azd អានវាពីបរិស្ថានដំណើរការ:
 
 ```bash
-# នៅក្នុង CI, azd អានព័ត៌មានទាំងនេះពីបរិយាកាស មិនមែនពី .azure/ ទេ
+# In CI, azd reads these from the environment, not from .azure/
 export AZURE_ENV_NAME=production
 export AZURE_LOCATION=eastus2
-export AZURE_SUBSCRIPTION_ID=<sub-id>
+export AZURE_SUBSCRIPTION_ID="<sub-id>"
 azd provision --no-prompt
 azd deploy --no-prompt
 ```
 
-> **Rule of thumb:** infrastructure code (`infra/`, `azure.yaml`) is shared in Git; environment *state and secrets* (`.azure/`) are per-developer and per-pipeline. `azd pipeline config` sets the pipeline variables up for you automatically.
+> **ច្បាប់បំភ្លឺដៃ:** កូដហេដ្ឋារចនាសម្ព័ន្ធ (`infra/`, `azure.yaml`) ត្រូវបានចែករំលែកក្នុង Git; *ស្ថានភាពបរិស្ថាន និងសម្ងាត់* (`.azure/`) ជាបរដ្ឋបុគ្គលនិងpipeline។ `azd pipeline config` កំណត់អថេរពេលបើក pipeline ដោយស្វ័យប្រវត្តិ។
 
 ## 🔐 ការកំណត់ការផ្ទៀងផ្ទាត់
 
-### ការរួមបញ្ចូល Azure CLI
+### ស៊េរី CLI Azure
 ```bash
-# ប្រើព័ត៌មានអត្តសញ្ញាណរបស់ Azure CLI (លំនាំដើម)
-azd config set auth.useAzureCliCredential true
+# Explicit opt-in; NOT the default
+azd config set auth.useAzCliAuth true
 
-# ចូលជាមួយ tenant ជាក់លាក់
-az login --tenant <tenant-id>
+# Login with specific tenant
+az login --tenant "<tenant-id>"
 
-# កំណត់ការជាវលំនាំដើម
-az account set --subscription <subscription-id>
+# Set default subscription
+az account set --subscription "<subscription-id>"
 ```
 
-### ការផ្ទៀងផ្ទាត់ដោយ Service Principal
-សម្រាប់បណ្ដាញ CI/CD:
+### ការផ្ទៀងផ្ទាត់សេវារដ្ឋបាល
+សម្រាប់ pipelines CI/CD:
 ```bash
-# កំណត់អថេរបរិស្ថាន
+# Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# ឬកំណត់ដោយផ្ទាល់
-azd config set auth.clientId "your-client-id"
-azd config set auth.tenantId "your-tenant-id"
+# Authenticate azd explicitly (prefer pipeline federation over a long-lived secret)
+azd auth login --client-id "$AZURE_CLIENT_ID" \
+  --client-secret "$AZURE_CLIENT_SECRET" --tenant-id "$AZURE_TENANT_ID"
 ```
 
-### Managed Identity
-សម្រាប់បរិយាកាសដែលបម្រើលើ Azure:
+### អត្តសញ្ញាណគ្រប់គ្រង
+សម្រាប់បរិស្ថានដែលបម្រើនៅ Azure:
 ```bash
-# បើកការផ្ទៀងផ្ទាត់ដោយអត្តសញ្ញាណដែលគ្រប់គ្រង
-azd config set auth.useMsi true
-azd config set auth.msiClientId "your-managed-identity-client-id"
+# Enable managed identity authentication
+azd auth login --managed-identity
+# Alternative: choose an identity assigned to the host by client ID
+azd auth login --managed-identity --client-id "<managed-identity-client-id>"
 ```
 
-## 🏗️ ការកំណត់រចនាសម្ព័ន្ធ
+## 🏗️ ការកំណត់បរិស្ថានហេដ្ឋារចនាសម្ព័ន្ធ
 
 ### ប៉ារ៉ាម៉ែត្រ Bicep
-កំណត់ប៉ារ៉ាម៉ែត្ររចនាសម្ព័ន្ធនៅក្នុង `infra/main.parameters.json`:
+កំណត់ប៉ារ៉ាម៉ែត្រហេដ្ឋារចនាសម្ព័ន្ធនៅក្នុង `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -409,37 +414,44 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
 ### ការកំណត់ Terraform
-សម្រាប់គម្រោង Terraform កំណត់នៅក្នុង `infra/terraform.tfvars`:
-```hcl
-environment_name = "${AZURE_ENV_NAME}"
-location = "${AZURE_LOCATION}"
-app_service_sku = "B1"
-database_sku = "GP_Gen5_2"
+សម្រាប់គម្រោង Terraform, azd ជំនួសភាសាថតបែប `infra/main.tfvars.json`។ ឈ្មោះទាំងនេះត្រូវតែសមនឹងអថេរចូលដំណើរការ Terraform ដែលបានប្រាប់:
+```json
+{
+  "environment_name": "${AZURE_ENV_NAME}",
+  "location": "${AZURE_LOCATION}",
+  "app_service_sku": "B1"
+}
 ```
 
-## 🚀 ការកំណត់ការដាក់ឲ្យដំណើរការ
+## 🚀 ការកំណត់ការចេញផ្សាយ
 
-### ការកំណត់ការបង្កើត (Build)
+### ការកំណត់ការសាងសង់
 ```yaml
 # In azure.yaml
 services:
   web:
     project: ./src/web
+    host: appservice
     language: js
-    buildCommand: npm run build:prod
-    buildEnvironment:
-      NODE_ENV: production
-      REACT_APP_API_URL: ${API_URL}
     dist: build
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          NODE_ENV=production REACT_APP_API_URL="$API_URL" npm run build:prod
     
   api:
     project: ./src/api
+    host: appservice
     language: python
-    buildCommand: |
-      pip install -r requirements.txt
-      python -m pytest tests/
-    buildEnvironment:
-      PYTHONPATH: src
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          python -m pip install -r requirements.txt
+          PYTHONPATH=src python -m pytest tests/
 ```
 
 ### ការកំណត់ Docker
@@ -449,60 +461,50 @@ services:
     project: ./src/api
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        NODE_ENV: production
-        API_VERSION: v1.0.0
+        - NODE_ENV=production
+        - API_VERSION=v1.0.0
 ```
-ឧទាហរណ៍ `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+ ផ្លូវគឺជាចំនួនសម្គាល់ទៅកាន់គម្រោងសេវាកម្ម។ Dockerfile ត្រូវតែប្រកាសតម្លៃ `ARG` មួយចំនួនដែលវារួមបញ្ចូល។ សម្រាប់ការសាងសង់ច្រើនជំហាន, ដាក់ជំហាន់ចុងក្រោយដែលអាចចេញផ្សាយបាន ឬប្រើវិធីសាស្ត្រវេចកបំណះផ្ទាល់ខ្លួន; `docker.target` មិនមែនជាគុណលក្ខណៈគាំទ្រនៅក្នុងស្គីម៉ា​ដែលបានពិនិត្យទេ។
 
 ## 🔧 ការកំណត់កម្រិតខ្ពស់
 
-### ការកំណត់ឈ្មោះធនធានផ្ទាល់ខ្លួន
-```bash
-# កំណត់ទំរង់នៃការផ្តល់ឈ្មោះ
-azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
-azd config set naming.storageAccount "{project}{env}sa"
-azd config set naming.keyVault "kv-{project}-{env}"
+### ការហៅឈ្មោះធនធានផ្ទាល់ខ្លួន
+```yaml
+# azure.yaml fragment: override resource-group discovery where appropriate
+resourceGroup: rg-${AZURE_ENV_NAME}
 ```
+
+កំណត់ឈ្មោះធនធានពិតប្រាកដនៅក្នុង Bicep/Terraform ហើយរក្សាការបង្កើត resource-group ស្របតាមការកំណត់នេះ។ គ្មានគណៈកម្មការបញ្ចូល `naming.storageAccount` ឬ `naming.keyVault` ទូទៅទេ។
 
 ### ការកំណត់បណ្តាញ
-```yaml
-# In azure.yaml
-infra:
-  provider: bicep
-  parameters:
-    vnetAddressPrefix: "10.0.0.0/16"
-    subnetAddressPrefix: "10.0.1.0/24"
-    enablePrivateEndpoints: true
+```json
+{
+  "vnetAddressPrefix": { "value": "10.0.0.0/16" },
+  "subnetAddressPrefix": { "value": "10.0.1.0/24" },
+  "enablePrivateEndpoints": { "value": true }
+}
 ```
 
-### ការកំណត់មីត្រិក
-```yaml
-# In azure.yaml
-monitoring:
-  applicationInsights:
-    enabled: true
-    samplingPercentage: 100
-  logAnalytics:
-    enabled: true
-    retentionDays: 30
-```
+បញ្ចូលចូលនូវ **ប៉ារ៉ាម៉ែត្របង្ហាញនេះ** ទៅក្នុង `infra/main.parameters.json` ខណៈក្រោម `parameters` ហើយប្រកាសនិងប្រើប៉ារ៉ាម៉ែត្រដែលផ្គូរផ្គងនៅក្នុង Bicep។ វាមិនធ្វើអ្វីដោយខ្លួនវាទេ។
 
-## 🎯 ការកំណត់លក្ខខណ្ឌដោយបរិយាកាស
+### ការកំណត់ការត្រួតពិនិត្យ
+ផ្គត់ផ្គង់ Application Insights និង Log Analytics ក្នុង Bicep/Terraform ហើយកំណត់ការត្រួតពិនិត្យកម្មវិធីនៅក្នុង SDK របស់អ្នក។ គ្មាន `monitoring` កំហែងកំពូលទូទៅនៅក្នុង `azure.yaml` ដែលបង្កើតធនធានទាំងនេះទេ។ មើល [ហេដ្ឋារចនាសម្ព័ន្ធត្រួតពិនិត្យ](../chapter-04-infrastructure/provisioning.md#-monitoring-and-observability)។
 
-### បរិយាកាសអភិវឌ្ឍន៍
+## 🎯 ការកំណត់ពិសេសបរិស្ថាន
+
+### បរិស្ថានអភិវឌ្ឍន៍
 ```bash
-# .azure/អភិវឌ្ឍន៍/.env
+# .azure/development/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### បរិយាកាសសាកល្បង
+### បរិស្ថានស្ទើយ
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -511,31 +513,32 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### បរិយាកាសផលិតផល
+### បរិស្ថានផលិត
 ```bash
-# .azure/ផលិតកម្ម/.env
+# .azure/production/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 ផ្ទៀងផ្ទាត់ការកំណត់
+## 🔍 ការត្រួតពិនិត្យការកំណត់
 
-### ផ្ទៀងផ្ទាត់ការកំណត់
+### ពិនិត្យការកំណត់
 ```bash
-# ពិនិត្យវេយ្យាករណ៍នៃការកំណត់រចនាសម្ព័ន្ធ
-azd config validate
+# Inspect supported global settings and current project
+azd config options
+azd show
 
-# សាកល្បងអថេរបរិយាកាស
+# Test environment variables
 azd env get-values
 
-# ផ្ទៀងផ្ទាត់ហេដ្ឋារចនាសម្ព័ន្ធ
-azd provision --dry-run
+# Validate infrastructure
+azd provision --preview
 ```
 
-### ស្គ្រីបកំណត់
-បង្កើតស្គ្រីបផ្ទៀងផ្ទាត់នៅក្នុង `scripts/`:
+### ស្ក្រីបកំណត់
+បង្កើតស្ក្រីបត្រួតពិនិត្យនៅក្នុង `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -543,39 +546,43 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# ពិនិត្ដអថេរបរិស្ថានដែលត្រូវការ
+# Check required environment variables
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# ត្រួតពិនិត្យវេយ្យាករណ៍របស់ azure.yaml
-if ! azd config validate; then
-  echo "Error: Invalid azure.yaml configuration"
+# Ask azd to load the project (not full schema or infrastructure validation)
+if ! azd show --output json; then
+  echo "Error: Could not load the azd project"
   exit 1
 fi
 
 echo "Configuration validation passed!"
 ```
 
-## 🎓 អនុវត្តល្អបំផុត
+## 🎓 អនុវត្តការអនុវត្តល្អបំផុត
 
-### 1. ប្រើអថេរបរិយាកាស
+### 1. ប្រើអថេរបរិស្ថាន
 ```yaml
 # Good: Use environment variables
 database:
   connectionString: ${DATABASE_CONNECTION_STRING}
 
+```
+
+ជៀសវាងការបញ្ចូលតម្លៃដែលមានសម្ងាត់ដោយផ្ទាល់ (ចែកគ្នាការកំណត់ពិរុទ្ធិ, មិនមែនជាសោរ `database` ទី២ ក្នុងឯកសារដូចគ្នា):
+
+```yaml
 # Avoid: Hardcode sensitive values
 database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. រៀបចំឯកសារការកំណត់
+### 2. រៀបចំឯកសារកំណត់
 ```
 .azure/
 ├── config.json              # Global project config
-├── env.template             # Environment template
 ├── development/
 │   ├── config.json         # Dev environment config
 │   └── .env                # Dev environment variables
@@ -587,16 +594,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. ការពិចារណាអំពីការគ្រប់គ្រងកំណែ
+### 3. ការពិចារណាលើការគ្រប់គ្រងកំណែ
 ```bash
 # .gitignore
-.azure/*/config.json         # ការ​កំណត់​បរិយាកាស (មាន​អត្តសញ្ញាណ​របស់​ធនធាន)
-.azure/*/.env               # អថេរ​បរិយាកាស (អាច​មាន​ព័ត៌មាន​សម្ងាត់)
-.env                        # ឯកសារ​បរិយាកាស​ក្នុង​តំបន់
+.azure/*/config.json         # Environment configs (contain resource IDs)
+.azure/*/.env               # Environment variables (may contain secrets)
+.env                        # Local environment file
 ```
 
-### 4. ឯកសារពីការកំណត់
-សរសេរឯកសារពីការកំណត់របស់អ្នកនៅក្នុង `CONFIG.md`:
+### 4. ឯកសារកំណត់ឯកសារ
+ចុះបញ្ជីកំណត់ឯកសាររបស់អ្នកនៅក្នុង `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -611,88 +618,87 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 លំហាត់អនុវត្ត
+## 🎯 ការអនុវត្តដៃក្នុង
 
-### លំហាត់ 1: ការកំណត់ពហុបរិយាកាស (15 នាទី)
+### លំហាត់៖ ការកំណត់បរិស្ថានច្រើន (១៥ នាទី)
 
-**គោលបំណង**: បង្កើត និងកំណត់បរិយាកាសបីមានការកំណត់ខុសគ្នា
+**គោលបំណង**: បង្កើតនិងកំណត់បរិស្ថានទាំងបីក្នុងតំបន់ជាលokal ជាមួយតម្លៃផ្សេងៗគ្នា។ ចាប់ផ្តើមពីគម្រោងដែលបានចាប់ផ្តើមដោយ initialize; ប្រើឈ្មោះដែលមិនបានប្រើប្រសិនបើមានរួច។ តម្លៃទាំងនេះជារបស់កម្មវិធីពិសេស មិនផ្លាស់ប្តូរការត្រួតពិនិត្យសញ្ញា/រដ្ឋបាលរត់រួចទេ រហូតដល់រចនាប័ទ្មរបស់អ្នកប្រើវា។
 
 ```bash
-# បង្កើតបរិយាកាសអភិវឌ្ឍន៍
+# Create development environment
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# បង្កើតបរិយាកាសសម្រាប់ការសាកល្បង
+# Create staging environment
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# បង្កើតបរិយាកាសផលិតកម្ម
+# Create production environment
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# ផ្ទៀងផ្ទាត់បរិយាកាសនីមួយៗ
+# Verify each environment
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
 **លក្ខខណ្ឌជោគជ័យ:**
-- [ ] បង្កើតបរិយាកាសបីដោយជោគជ័យ
-- [ ] រាល់បរិយាកាសមានការកំណត់ផ្សេងគ្នា
-- [ ] អាចប្តូរវិញរវាងបរិយាកាសដោយគ្មានកំហុស
-- [ ] `azd env list` បង្ហាញបរិយាកាសទាំងបី
+- [ ] បរិស្ថានបីត្រូវបានបង្កើតដោយជោគជ័យ
+- [ ] បរិស្ថាននីមួយៗមានការកំណត់តែមួយ
+- [ ] អាចប្តូរវិញរវាងបរិស្ថានដោយគ្មានកំហុស
+- [ ] `azd env list` បង្ហាញបរិស្ថានទាំងបី
 
-### លំហាត់ 2: ការ​គ្រប់គ្រងអាថ៌កំបាំង (10 នាទី)
+### លំហាត់ ២៖ ឯកសារសម្ងាត់ Key Vault (១០-២០ នាទី)
 
-**គោលបំណង**: អនុវត្តការកំណត់ដែលមានសុវត្ថិភាពជាមួយទិន្នន័យដែលមានភាពងាយឱ្យហេតុ
+**គោលបំណង**: រក្សាទុកយោង Key Vault ជំនួសវត្ថុអក្សរធម្មតា។ **ចំណុចចាប់ផ្តើម:** បរិស្ថានបាន initialize, បានចូលរួម Azure, និងមានការចូលដំណើរការទៅកាន់ Key Vault ជាមួយសិទ្ធិបង្កើត/អានឯកសារសម្ងាត់កំណត់មួយ។ ប្រតិបត្ដិប្រព័ន្ធ Vault អាចធ្វើឱ្យមានការចំណាយ។
 
 ```bash
-# កំណត់សម្ងាត់ (មិនបង្ហាញនៅក្នុងលទ្ធផល)
-azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+# Follow the interactive prompts; use a dummy training value, not a production key
+azd env set-secret TRAINING_API_KEY
 
-# កំណត់ការកំណត់ដែលមិនមែនជាសម្ងាត់
+# Set non-secret config
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# មើលបរិយាកាស (សម្ងាត់គួរត្រូវបានលាក់)
-azd env get-values
-
-# ផ្ទៀងផ្ទាត់ថាសម្ងាប់ត្រូវបានរក្សាទុក
-azd env get DB_PASSWORD  # គួរតែបង្ហាញតម្លៃពិត
+# Inspect .azure/<environment>/.env locally: TRAINING_API_KEY should
+# contain an azd Key Vault reference, not the dummy secret text.
+# Do not print resolved values in CI or shared terminal logs.
 ```
 
 **លក្ខខណ្ឌជោគជ័យ:**
-- [ ] អាថ៌កំបាំងបានរក្សាទុកដោយមិនបង្ហាញនៅក្នុងទូរសព្ទ
-- [ ] `azd env get-values` បង្ហាញអាថ៌កំបាំងដែលបានលុបចេញ (redacted)
-- [ ] `azd env get <SECRET_NAME>` រាល់ម្នាក់អាចទាញយកតម្លៃពិតប្រាកដ
+- [ ] ពាក្យបញ្ជាផ្សារពាណិជ្ជកម្មបង្ហាញឲ្យដឹងពី Vault និងឯកសារសម្ងាត់ដែលបានជ្រើស
+- [ ] បរិស្ថានផ្ទាល់ខ្លួន `.env` មានយោង ខុសពីឯកសារសម្ងាត់កំណត់
+- [ ] អាចពណ៌នាបានថា identité runtime / RBAC និងការប្រើប្រាស់ ត្រូវតែត្រូវបានកំណត់បន្ថែម
 
-## ជំហ៊ានបន្ទាប់
+**បញ្ហាទូទៅ៖** កូដ ៤០៣ តម្រូវឱ្យមានតួនាទី data-plane vault ត្រឹមត្រូវ និងពេលវេលាបណ្តូលលក្ខណៈ; `azd env set ... --secret` មិនមែនជាពាក្យបញ្ជាដែលត្រឹមត្រូវទេ។ ការចេញផល Ordinary `get-values`/`get-value` មិនគួររក្សាបានថាសកម្ម។ ប្រើ `azd env unset TRAINING_API_KEY` ដើម្បីដកយោងហាត់ប្រាណនេះចេញ; នេះមិនជាលុបឯកសារសម្ងាត់ vault ទេ ដែលអ្នកត្រូវរៀបចំសម្អាតវាផ្ទាល់ខ្លួនបើអ្នកបានបង្កើតវា។
 
-- [គម្រោងដំបូងរបស់អ្នក](first-project.md) - អនុវត្តការកំណត់ក្នុងការអនុវត្ត
-- [មគ្គុទេសក៍ការបញ្ជូន](../chapter-04-infrastructure/deployment-guide.md) - ប្រើការកំណត់សម្រាប់ការដាក់
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - ការកំណត់សម្រាប់ផលិតផល
+## ជំហានបន្ទាប់
 
-## ធនធាន
+- [គម្រោងដំបូងរបស់អ្នក](../chapter-01-foundation/first-project.md) - អនុវត្តការកំណត់ក្នុងការប្រតិបត្តិ
+- [មើលមាគ៌ាចេញផ្សាយ](../chapter-04-infrastructure/deployment-guide.md) - ប្រើការកំណត់សម្រាប់ចេញផ្សាយ
+- [កំណត់ធនធាន](../chapter-04-infrastructure/provisioning.md) - ការកំណត់រួចរាល់សម្រាប់ផលិតកម្ម
+
+## ឯកសារយោង
 
 - [យោងការកំណត់ azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [រចនាសម្ព័ន្ធ azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [អថេរបរិយាកាស](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [ស្គីម៉ា azure.yaml](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-schema)
+- [អថេរបរិស្ថាន](https://learn.microsoft.com/azure/developer/azure-developer-cli/manage-environment-variables)
 
 ---
 
-**ការរុករកជំពូក:**
-- **📚 ផ្ទះវគ្គ**: [AZD សម្រាប់អ្នកចាប់ផ្ដើម](../../README.md)
-- **📖 ជំពូក​បច្ចុប្បន្ន**: ជំពូក 3 - ការកំណត់រចនា និង ការផ្ទៀងផ្ទាត់
-- **⬅️ មុន**: [គម្រោងដំបូងរបស់អ្នក](first-project.md)
-- **➡️ ជំពូកបន្ទាប់**: [ជំពូក 4: រចនាសម្ព័ន្ធជា​កូដ](../chapter-04-infrastructure/deployment-guide.md)
-- **មេរៀនបន្ទាប់**: [គម្រោងដំបូងរបស់អ្នក](first-project.md)
+**ការរុករកជាផ្នែក៖**
+- **📚 ទំព័រមុខវគ្គ**: [AZD សម្រាប់អ្នកចាប់ផ្តើម](../../README.md)
+- **📖 មុខវិជ្ជាបច្ចុប្បន្ន**: មុខវិជ្ជា 3 - ការកំណត់រចនា & ការផ្ទៀងផ្ទាត់​អត្តសញ្ញាណ
+- **⬅️ មុន**: [គម្រោងដំបូងរបស់អ្នក](../chapter-01-foundation/first-project.md)
+- **➡️ មុខវិជ្ជាបន្ទាប់**: [មុខវិជ្ជា 4: មូលដ្ឋានរចនាសម្ព័ន្ធជា​កូដ](../chapter-04-infrastructure/deployment-guide.md)
+- **មុខវិជ្ជាបន្ទាប់**: [ការផ្ទៀងផ្ទាត់​អត្តសញ្ញាណ & សន្តិសុខ](authsecurity.md)
 
 ---
 

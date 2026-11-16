@@ -1,75 +1,70 @@
 # AZD Dağıtımları için Hata Ayıklama Rehberi
 
 **Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
+- **📚 Kurs Anasayfası**: [Başlayanlar için AZD](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 7 - Sorun Giderme ve Hata Ayıklama
 - **⬅️ Önceki**: [Yaygın Sorunlar](common-issues.md)
-- **➡️ Sonraki**: [Yapay Zekâya Özel Sorun Giderme](ai-troubleshooting.md)
-- **🚀 Sonraki Bölüm**: [Bölüm 8: Üretim ve Kurumsal Desenler](../chapter-08-production/production-ai-practices.md)
+- **➡️ Sonraki**: [AI'ye Özel Sorun Giderme](ai-troubleshooting.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 8: Üretim ve Kurumsal Kalıplar](../chapter-08-production/production-ai-practices.md)
 
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI dağıtımlarıyla ilgili karmaşık sorunları teşhis etmek ve çözmek için gelişmiş hata ayıklama stratejileri, araçlar ve teknikler sunar. Sistematik sorun giderme metodolojilerini, günlük analiz tekniklerini, performans profilini ve gelişmiş tanılama araçlarını öğrenerek dağıtım ve çalışma zamanı sorunlarını verimli şekilde çözün.
+Bu kapsamlı rehber, Azure Developer CLI dağıtımlarıyla ilgili karmaşık sorunları teşhis etmek ve çözmek için gelişmiş hata ayıklama stratejileri, araçları ve teknikleri sunar. Sistematik sorun giderme metodolojilerini, günlük analizi tekniklerini, performans profillemeyi ve gelişmiş tanı araçlarını öğrenerek dağıtım ve çalışma zamanı sorunlarını verimli şekilde çözün.
 
 ## Öğrenme Hedefleri
 
-Bu kılavuzu tamamlayarak:
-- Azure Developer CLI sorunları için sistematik hata ayıklama metodolojilerini ustalıkla uygulayacaksınız
+Bu rehberi tamamlayarak:
+- Azure Developer CLI sorunları için sistematik hata ayıklama metodolojilerini ustalıkla kullanacaksınız
 - Gelişmiş günlük yapılandırması ve günlük analiz tekniklerini anlayacaksınız
-- Performans profil oluşturma ve izleme stratejilerini uygulayacaksınız
-- Karmaşık sorun çözümü için Azure tanılama araçlarını ve hizmetlerini kullanacaksınız
+- Performans profilleme ve izleme stratejilerini uygulayacaksınız
+- Karmaşık problem çözümü için Azure tanılama araçları ve hizmetlerini kullanacaksınız
 - Ağ hata ayıklama ve güvenlik sorun giderme tekniklerini uygulayacaksınız
 - Proaktif sorun tespiti için kapsamlı izleme ve uyarı yapılandıracaksınız
 
 ## Öğrenme Çıktıları
 
-Tamamladıktan sonra şunları yapabileceksiniz:
-- Karmaşık dağıtım sorunlarını sistematik olarak hata ayıklamak için TRIAGE metodolojisini uygulamak
-- Kapsamlı günlükleme ve izleme bilgilerini yapılandırmak ve analiz etmek
+Tamamlandığında, şunları yapabileceksiniz:
+- Karmaşık dağıtım sorunlarını sistematik olarak ayıklamak için TRIAGE metodolojisini uygulamak
+- Kapsamlı günlük ve izleme bilgilerinin yapılandırılması ve analiz edilmesi
 - Azure Monitor, Application Insights ve tanılama araçlarını etkili kullanmak
 - Ağ bağlantısı, kimlik doğrulama ve izin sorunlarını bağımsız olarak hata ayıklamak
 - Performans izleme ve optimizasyon stratejilerini uygulamak
-- Tekrarlayan sorunlar için özel hata ayıklama betikleri ve otomasyon oluşturmak
+- Yinelenen sorunlar için özel hata ayıklama betikleri ve otomasyon oluşturmak
 
 ## Hata Ayıklama Metodolojisi
 
 ### TRIAGE Yaklaşımı
 - **T**ime: Sorun ne zaman başladı?
-- **R**eproduce: Bunu tutarlı şekilde yeniden üretebiliyor musunuz?
+- **R**eproduce: Sorunu tutarlı şekilde yeniden oluşturabiliyor musunuz?
 - **I**solate: Hangi bileşen başarısız oluyor?
 - **A**nalyze: Günlükler bize ne söylüyor?
-- **G**ather: Tüm ilgili bilgileri toplayın
-- **E**scalate: Ne zaman ek yardım aramalısınız
+- **G**ather: Tüm ilgili bilgileri topla
+- **E**scalate: Ne zaman ek yardım istenmeli
 
 ## Hata Ayıklama Modunu Etkinleştirme
 
+> **Kapsam:** Bunlar uyarlamak için tanılama örnekleridir, sağlanan bir betik paketi değildir. Kaynak isimlerini/ID'lerini değiştirin; shell blokları için Bash kullanın. `--debug` çıktısı ve ortam değerleri hassas bilgi içerebilir—paylaşmadan önce gözden geçirin/gizleyin. Dağıtım, geri alma veya yapılandırma değiştiren örnekler açık operatör onayı gerektirir.
+
 ### Ortam Değişkenleri
 ```bash
-# Kapsamlı hata ayıklamayı etkinleştir
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Azure CLI hata ayıklaması
-export AZURE_CLI_DIAGNOSTICS=true
-
-# Daha temiz çıktı için telemetriyi devre dışı bırak
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Hata Ayıklama Yapılandırması
 ```bash
-# Hata ayıklama yapılandırmasını küresel olarak ayarla
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# İzleme günlük kaydını etkinleştir
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
 
-## 📊 Günlük Analizi Teknikleri
+`azd config set` rastgele anahtarlar depolayabilir; bu `debug.enabled`, `debug.logLevel` veya `trace.outputPath` desteklenen ayarlar yapmaz. Yayınlanan komutun `--debug` bayrağını kullanın.
+
+## 📊 Günlük Analiz Teknikleri
 
 ### Günlük Seviyelerini Anlama
 ```
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Yapısal Günlük Analizi
+### Yapılandırılmış Günlük Analizi
 ```bash
-# Azure Monitor ile günlükleri görüntüleyin (azd monitor aracılığıyla)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# Uygulama günlüklerini gerçek zamanlı olarak görüntüleyin
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# Ayrıntılı günlük analizi için App Service'iniz veya Container App'iniz ile Azure CLI'yi kullanın:
-# App Service günlükleri
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Container App günlükleri
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# Analiz için Application Insights günlüklerini dışa aktarın
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
-### Günlük İlişkilendirmesi
+### Günlük Korelasyonu
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Azure Monitor kullanarak hizmetler arasındaki günlükleri ilişkilendir
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# İlişkili günlükleri Application Insights'ta ara
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Azure etkinlik günlüklerini ara
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
 ## 🛠️ Gelişmiş Hata Ayıklama Araçları
 
-### Azure Kaynak Grafiği Sorguları
+### Azure Resource Graph Sorguları
 ```bash
-# Etiketlere göre kaynakları sorgula
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Başarısız dağıtımları bul
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Kaynak sağlığını kontrol et
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Ağ Hata Ayıklama
 ```bash
-# Hizmetler arasındaki bağlantıyı test et
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# Kullanım
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Konteyner Hata Ayıklama
 ```bash
-# Konteyner uygulama sorunlarını hata ayıkla
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -181,12 +178,12 @@ debug_container() {
 }
 ```
 
-### Veritabanı Bağlantı Hata Ayıklama
+### Veritabanı Bağlantısı Hata Ayıklama
 ```bash
-# Veritabanı bağlantısını hata ayıkla
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -202,24 +199,13 @@ debug_database() {
 
 ## 🔬 Performans Hata Ayıklama
 
-### Uygulama Performansı İzleme
+### Uygulama Performans İzleme
 ```bash
-# Application Insights için hata ayıklamayı etkinleştir
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# Özel performans izleme
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -236,25 +224,23 @@ monitor_performance() {
 }
 ```
 
-### Kaynak Kullanımı Analizi
+### Kaynak Kullanım Analizi
 ```bash
-# Kaynak kullanımını izleyin
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Hata ayıklama ortamını ayarla
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# Servis uç noktalarını al
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Sağlık uç noktalarını test et
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# Testleri çalıştır
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Özel entegrasyon testlerini çalıştır
+# Run custom integration tests
 npm run test:integration
 ```
 
-### Hata Ayıklama İçin Yük Testi
+### Yük Testi ile Hata Ayıklama
 ```bash
-# Performans darboğazlarını belirlemek için basit yük testi
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Apache Bench kullanımı (kurulum: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Anahtar metrikleri çıkar
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Hataları kontrol et
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
 ## 🔧 Altyapı Hata Ayıklama
 
-### Bicep Şablon Hata Ayıklama
+### Bicep Şablonu Hata Ayıklama
 ```bash
-# Ayrıntılı çıktı ile Bicep şablonlarını doğrula
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Sözdizimi doğrulaması
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint doğrulaması
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # What-if dağıtımı
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# Şablon dağıtımını hata ayıkla
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,28 +361,22 @@ debug_deployment() {
 
 ### Kaynak Durumu Analizi
 ```bash
-# Kaynak durumlarını tutarsızlıklar için analiz et
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # Tüm kaynakları durumlarıyla birlikte listele
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Başarısız kaynakları kontrol et
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
@@ -406,23 +384,21 @@ analyze_resources() {
 
 ### Kimlik Doğrulama Akışı Hata Ayıklama
 ```bash
-# Azure kimlik doğrulamasını hata ayıkla
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # JWT belirtecini çöz (jq ve base64 gerektirir)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Key Vault erişimini hata ayıkla
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,14 +416,14 @@ debug_keyvault() {
 
 ### Ağ Güvenliği Hata Ayıklama
 ```bash
-# Ağ güvenlik gruplarını hata ayıkla
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Güvenlik kurallarını kontrol et
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -460,26 +436,23 @@ debug_network_security() {
 
 ### Node.js Uygulama Hata Ayıklama
 ```javascript
-// debug-middleware.js - Express hata ayıklama ara yazılımı
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // İstek ayrıntılarını günlüğe kaydet
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // Yanıtları günlüğe kaydetmek için res.json'i geçersiz kıl
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -489,14 +462,16 @@ module.exports = (req, res, next) => {
 
 ### Veritabanı Sorgusu Hata Ayıklama
 ```javascript
-// database-debug.js - Veritabanı hata ayıklama araçları
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -519,10 +494,10 @@ module.exports = DebuggingPool;
 
 ## 🚨 Acil Hata Ayıklama Prosedürleri
 
-### Prodüksiyon Sorunlarına Müdahale
+### Üretim Sorunlarına Yanıt
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Acil üretim hata ayıklama
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Doğru ortama geç
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# Kritik bilgileri topla
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# Hata günlükleri için Azure Monitor'ü kullan
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,58 +551,59 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Geri Alma (Rollback) Prosedürleri
+### Geri Alma Prosedürleri
 ```bash
-# Hızlı geri alma betiği
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # Ortamı değiştir
+    # Switch environment
     azd env select "$environment"
     
-    # Git kullanarak geri alma (AZD'nin yerleşik geri alma özelliği yok)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # Geri almayı doğrula
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # Kritik uç noktaları test et
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 Hata Ayıklama Panoları
+Bu yalnızca kod geri alımı altyapıyı, veritabanı göçlerini veya gizli bilgileri geri almaz. Temiz bir çalışma dizini kullanın, başlangıç commit'ini kaydedin ve sonrasında geri yükleyin; komut seçilen commit'i mevcut depo içinde çıkartır.
 
-### Özel İzleme Panosu
+## 📊 Hata Ayıklama Panelleri
+
+### Özel İzleme Paneli
 ```bash
-# Hata ayıklama için Application Insights sorguları oluşturun
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # Hatalar için sorgu
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Performans sorunları için sorgu
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Bağımlılık hataları için sorgu
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,15 +612,15 @@ create_debug_queries() {
 
 ### Günlük Toplama
 ```bash
-# Birden çok Azure kaynağından günlükleri topla
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,6 +630,7 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
@@ -663,11 +640,11 @@ aggregate_logs() {
 ## 🔗 Gelişmiş Kaynaklar
 
 ### Özel Hata Ayıklama Betikleri
-Aşağıdakilerle birlikte `scripts/debug/` dizini oluşturun:
-- `health-check.sh` - Kapsamlı sağlık kontrolleri
+Bir `scripts/debug/` dizini oluşturun:
+- `health-check.sh` - Kapsamlı sağlık kontrolü
 - `performance-test.sh` - Otomatik performans testi
 - `log-analyzer.py` - Gelişmiş günlük ayrıştırma ve analiz
-- `resource-validator.sh` - Altyapı doğrulama
+- `resource-validator.sh` - Altyapı doğrulaması
 
 ### İzleme Entegrasyonu
 ```yaml
@@ -676,6 +653,7 @@ hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -688,27 +666,27 @@ hooks:
 
 ## En İyi Uygulamalar
 
-1. **Her zaman hata ayıklama günlüklemesini etkinleştirin** üretim dışı ortamlarda
-2. **Sorunlar için yeniden üretilebilir test durumları oluşturun**
-3. **Ekip için hata ayıklama prosedürlerini belgelendirin**
-4. **Sağlık kontrollerini otomatikleştirin** ve izlemeyi uygulayın
-5. **Hata ayıklama araçlarını güncel tutun** uygulama değişiklikleriyle
-6. **Hata ayıklama prosedürlerini uygulayın** olay olmayan zamanlarda
+1. **Üretim dışı ortamlarda her zaman hata ayıklama günlüklerini etkinleştirin**
+2. **Sorunlar için tekrar üretilebilir test vakaları oluşturun**
+3. **Ekip için hata ayıklama prosedürlerini dokümante edin**
+4. **Sağlık kontrollerini ve izlemeyi otomatikleştirin**
+5. **Hata ayıklama araçlarını uygulama değişiklikleriyle güncel tutun**
+6. **Olay olmayan zamanlarda hata ayıklama prosedürlerini uygulayın**
 
 ## Sonraki Adımlar
 
 - [Kapasite Planlaması](../chapter-06-pre-deployment/capacity-planning.md) - Kaynak gereksinimlerini planlayın
 - [SKU Seçimi](../chapter-06-pre-deployment/sku-selection.md) - Uygun hizmet katmanlarını seçin
-- [Hazırlık Kontrolleri](../chapter-06-pre-deployment/preflight-checks.md) - Dağıtımdan önce doğrulama
-- [Hızlı Başvuru](../../resources/cheat-sheet.md) - Hızlı başvuru komutları
+- [Preflight Kontrolleri](../chapter-06-pre-deployment/preflight-checks.md) - Dağıtımdan önce doğrulama
+- [Hızlı Başvuru Kılavuzu](../../resources/cheat-sheet.md) - Hızlı referans komutları
 
 ---
 
-**Unutmayın**: İyi hata ayıklama sistematik, titiz ve sabırlıdır. Bu araçlar ve teknikler sorunları daha hızlı ve daha etkili bir şekilde tanımanıza yardımcı olacaktır.
+**Unutmayın**: İyi hata ayıklama sistematik, kapsamlı ve sabırlı olmaktır. Bu araçlar ve teknikler sorunları daha hızlı ve etkili teşhis etmenize yardımcı olacaktır.
 
 ---
 
-**Gezinme**
+**Navigasyon**
 - **Önceki Ders**: [Yaygın Sorunlar](common-issues.md)
 
 - **Sonraki Ders**: [Kapasite Planlaması](../chapter-06-pre-deployment/capacity-planning.md)
@@ -716,6 +694,6 @@ hooks:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Feragatname:
-Bu belge, AI çeviri servisi [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için özen göstermemize rağmen otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Orijinal belge kendi diliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılması sonucu oluşabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

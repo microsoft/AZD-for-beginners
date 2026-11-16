@@ -1,14 +1,14 @@
-# Capítulo 3: Configuração & Autenticação
+# Capítulo 3: Configuração e Autenticação
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 45-60 minutos | **⭐ Complexidade**: Intermediário
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 90-150 minutos incluindo prática de integração | **⭐ Complexidade**: Intermediário
 
 ---
 
 ## Visão Geral
 
-Este capítulo aborda configuração de ambiente, padrões de autenticação e melhores práticas de segurança para implantações com Azure Developer CLI.
+Este capítulo cobre configuração de ambiente, padrões de autenticação e melhores práticas de segurança para implantações Azure Developer CLI.
 
-> Validado com `azd 1.27.1` em julho de 2026.
+> Alvo da revisão de comando e configuração: `azd 1.37.2` (novembro de 2026). O provisionamento Azure ao vivo não foi executado durante a revisão.
 
 ## Objetivos de Aprendizagem
 
@@ -16,7 +16,7 @@ Ao concluir este capítulo, você irá:
 - Dominar a hierarquia de configuração do AZD
 - Gerenciar múltiplos ambientes (dev, staging, prod)
 - Implementar autenticação segura com identidades gerenciadas
-- Configurar definições específicas por ambiente
+- Configurar definições específicas do ambiente
 
 ---
 
@@ -25,58 +25,58 @@ Ao concluir este capítulo, você irá:
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
 | 1 | [Guia de Configuração](configuration.md) | Configuração e gerenciamento do ambiente | 30 min |
-| 2 | [Autenticação & Segurança](authsecurity.md) | Padrões de identidade gerenciada e RBAC | 30 min |
+| 2 | [Autenticação e Segurança](authsecurity.md) | Padrões de identidade gerenciada e RBAC | 30 min |
 
 ---
 
 ## 🚀 Início Rápido
 
+Execute a partir da raiz de uma **aplicação azd já inicializada**, não do repositório do curso. Use nomes de ambiente não usados caso estes já existam.
+
 ```bash
-# Criar múltiplos ambientes
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Alternar ambientes
+# Switch environments
 azd env select prod
 
-# Definir variáveis de ambiente
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Ver configuração
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` é ilustrativo: afeta infraestrutura apenas se seu template explicitamente o consumir. Valores comuns `azd env set` são salvos localmente em texto sem formatação; não são armazenamento seguro de segredos.
 
 ---
 
 ## 🔧 Hierarquia de Configuração
 
-O AZD aplica as definições nesta ordem (as posteriores sobrescrevem as anteriores):
-
-1. **Valores padrão** (incorporados nos templates)
-2. **azure.yaml** (configuração do projeto)
-3. **Variáveis de ambiente** (`azd env set`)
-4. **Flags de linha de comando** (`--location eastus`)
+Mantenha três superfícies de configuração separadas: preferências globais (`azd config`), estrutura do projeto (`azure.yaml`) e valores por ambiente (`azd env`). Flags substituem apenas as configurações que realmente suportam; não há sobreposição universal arbitrária de variáveis de ambiente no `azure.yaml` ou Bicep.
 
 ---
 
 ## 🔐 Melhores Práticas de Segurança
 
 ```bash
-# Use identidade gerenciada (recomendado)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Verifique o status da autenticação AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Opcional: verifique o contexto do Azure CLI se você planeja executar comandos az
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Reautentique-se se necessário
+# Re-authenticate if needed
 azd auth login
 
-# Opcional: atualize a autenticação do Azure CLI para comandos az
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -94,7 +94,7 @@ az login
 ## 📖 Recursos Relacionados
 
 - [Verificações Pré-Implantação](../chapter-06-pre-deployment/README.md)
-- [Solução de Problemas](../chapter-07-troubleshooting/common-issues.md)
+- [Resolução de Problemas](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

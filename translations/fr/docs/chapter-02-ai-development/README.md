@@ -1,22 +1,22 @@
 # Chapitre 2 : Développement AI-First
 
-**📚 Cours** : [AZD Pour Débutants](../../README.md) | **⏱️ Durée** : 1-2 heures | **⭐ Complexité** : Intermédiaire
+**📚 Cours** : [AZD Pour Débutants](../../README.md) | **⏱️ Durée** : 4-5 heures incluant l'atelier | **⭐ Complexité** : Intermédiaire
 
 ---
 
-## Aperçu
+## Vue d’ensemble
 
-Ce chapitre se concentre sur le déploiement d'applications alimentées par l'IA en utilisant Azure Developer CLI et les services Microsoft Foundry. Des applications de chat IA simples aux agents intelligents avec outils.
+Ce chapitre se concentre sur le déploiement d'applications alimentées par l'IA en utilisant Azure Developer CLI et les services Microsoft Foundry. Des applications simples de chat IA aux agents intelligents avec outils.
 
-> **Note de validation (2026-07-13) :** Le flux de commandes et les indications d'extension dans ce chapitre ont été revus avec `azd` `1.27.1` et la version actuelle preview de l’extension agent IA `azure.ai.agents` `1.0.0-beta.5`. Si vous utilisez une version plus ancienne d'AZD, mettez-la à jour avant de continuer les exercices.
+> **Revue de la version (2026-11-04) :** Les directives AI CLI ont été vérifiées par rapport à la documentation/source publiée `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, et `azure.ai.evaluations` `1.0.0-beta.2`. Utilisez `azd >= 1.37.0` pour le flux de travail combiné. Les évaluations utilisent désormais l’espace de noms distinct `azd ai eval` ; voir [changements de version et guide de migration](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Ceci n’est pas une validation de déploiement en direct.
 
-## Objectifs d'apprentissage
+## Objectifs d’apprentissage
 
-En terminant ce chapitre, vous serez capable de :
+En complétant ce chapitre, vous serez capable de :
 - Déployer des applications IA en utilisant des modèles AZD préconstruits
 - Comprendre l’intégration Microsoft Foundry avec AZD
 - Configurer et personnaliser des agents IA avec des outils
-- Déployer des applications RAG (Retrieval-Augmented Generation)
+- Déployer des applications RAG (Génération augmentée par récupération)
 
 ---
 
@@ -24,26 +24,28 @@ En terminant ce chapitre, vous serez capable de :
 
 | # | Leçon | Description | Durée |
 |---|--------|-------------|------|
-| 1 | [Intégration Microsoft Foundry](microsoft-foundry-integration.md) | Connecter AZD avec les services Foundry | 30 min |
-| 2 | [Guide des agents IA](agents.md) | Déployer des agents intelligents avec outils | 45 min |
-| 3 | [Déploiement de modèles IA](ai-model-deployment.md) | Déployer et configurer des modèles IA | 30 min |
-| 4 | [Atelier AI en laboratoire](ai-workshop-lab.md) | Pratique : Préparez votre solution IA avec AZD | 60 min |
+| 1 | [Intégration Microsoft Foundry](microsoft-foundry-integration.md) | Connecter AZD aux services Foundry | 30 min |
+| 2 | [Guide des Agents IA](agents.md) | Déployer des agents intelligents avec outils | 45 min |
+| 3 | [Déploiement de Modèle IA](ai-model-deployment.md) | Déployer et configurer des modèles IA | 30 min |
+| 4 | [Atelier Laboratoire IA](ai-workshop-lab.md) | Pratique : Explorer un modèle et planifier votre conversion | 2-3 heures |
 
 ---
 
 ## 🚀 Démarrage rapide
 
+Choisissez une option dans un nouveau répertoire vide. Le `.` final initialise le répertoire actuel ; sinon AZD peut créer un sous-répertoire sans changer le répertoire de travail du shell.
+
 ```bash
-# Option 1 : Application de chat RAG
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# Option 2 : Agents IA
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# Option 3 : Application de chat rapide
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
@@ -53,21 +55,23 @@ azd up
 
 | Modèle | Description | Services |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG avec citations | OpenAI + Recherche IA |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent IA avec outils | Service Agent IA |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG avec citations | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent IA avec outils | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat IA basique | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Sensibilisation aux coûts
 
+Ce sont des fourchettes indicatives, pas des devis ou plafonds ; le trafic du modèle, les SKU Search/Compute, la région et les fonctionnalités optionnelles peuvent les dépasser. Consultez la tarification actuelle de l’exemple choisi avant le provisionnement.
+
 | Environnement | Coût mensuel estimé |
 |-------------|----------------------|
 | Développement | 80-150 $ |
-| Pré-production | 150-300 $ |
-| Production | 300-3 500 $+ |
+| Mise en scène | 150-300 $ |
+| Production | 300-3 500+ $ |
 
-**Conseil :** Exécutez `azd down` après les tests pour éviter les frais.
+**Astuce :** Lancez `azd down` après les tests pour éviter des frais.
 
 ---
 
@@ -75,16 +79,16 @@ azd up
 
 | Direction | Chapitre |
 |-----------|---------|
-| **Précédent** | [Chapitre 1 : Fondements](../chapter-01-foundation/README.md) |
+| **Précédent** | [Chapitre 1 : Fondations](../chapter-01-foundation/README.md) |
 | **Suivant** | [Chapitre 3 : Configuration](../chapter-03-configuration/README.md) |
-| **Aller à** | [Chapitre 8 : Modèles de production](../chapter-08-production/README.md) |
+| **Aller à** | [Chapitre 8 : Modèles de Production](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Ressources associées
+## 📖 Ressources Associées
 
 - [Dépannage IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Pratiques IA en production](../chapter-08-production/production-ai-practices.md)
+- [Pratiques IA en Production](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

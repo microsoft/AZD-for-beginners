@@ -1,74 +1,57 @@
-# نشر نماذج الذكاء الاصطناعي باستخدام Azure Developer CLI  
+# نشر نموذج الذكاء الاصطناعي باستخدام Azure Developer CLI
 
-**تنقل الفصل:**  
-- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)  
-- **📖 الفصل الحالي**: الفصل 2 - تطوير يركز على الذكاء الاصطناعي  
-- **⬅️ السابق**: [تكامل Microsoft Foundry](microsoft-foundry-integration.md)  
-- **➡️ التالي**: [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)  
-- **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)  
+**التنقل في الفصل:**
+- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
+- **📖 الفصل الحالي**: الفصل 2 - التطوير المعتمد على الذكاء الاصطناعي أولاً
+- **⬅️ السابق**: [وكلاء الذكاء الاصطناعي](agents.md)
+- **➡️ التالي**: [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)
+- **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)
 
-يقدم هذا الدليل تعليمات شاملة لنشر نماذج الذكاء الاصطناعي باستخدام قوالب AZD، يغطي كل شيء من اختيار النموذج إلى أنماط النشر في الإنتاج.  
+يقدم هذا الدليل تعليمات شاملة لنشر نماذج الذكاء الاصطناعي باستخدام قوالب AZD، بدءًا من اختيار النموذج وصولاً إلى أنماط النشر للإنتاج.
 
-> **ملاحظة التحقق (2026-07-13):** تم التحقق من سير عمل AZD في هذا الدليل باستخدام `azd` `1.27.1`. لنشرات الذكاء الاصطناعي التي تستغرق وقتًا أطول من نافذة نشر الخدمة الافتراضية، تدعم إصدارات AZD الحالية الأمر `azd deploy --timeout <seconds>`.  
+> **مراجعة الإصدار (2026-11-04):** تم مراجعة التغييرات المتعلقة بـ CLI مقابل `azd` `1.37.2`؛ تظل توافر النماذج والإصدارات والحصص معتمدة على المنطقة والاشتراك. `azd deploy --timeout <seconds>` يتحكم في نافذة نشر الخدمة، وليس ضمان تنشيط الوكيل. راجع [ملاحظات الإصدار الحالية وإرشادات ترحيل الذكاء الاصطناعي](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
-## جدول المحتويات  
+## جدول المحتويات
 
-- [استراتيجية اختيار النموذج](#استراتيجية-اختيار-النموذج)  
-- [تكوين AZD لنماذج الذكاء الاصطناعي](#تكوين-azd-لنماذج-الذكاء-الاصطناعي)  
-- [أنماط النشر](#أنماط-النشر)  
-- [إدارة النموذج](#إدارة-النموذج)  
-- [الاعتبارات المتعلقة بالإنتاج](#اعتبارات-الإنتاج)  
-- [المراقبة والملاحظة](#المراقبة-والرصد)  
+- [استراتيجية اختيار النموذج](#model-selection-strategy)
+- [تكوين AZD لنماذج الذكاء الاصطناعي](#azd-configuration-for-ai-models)
+- [أنماط النشر](#deployment-patterns)
+- [إدارة النموذج](#model-management)
+- [الاعتبارات الإنتاجية](#production-considerations)
+- [المراقبة والقابلية للملاحظة](#monitoring-and-observability)
 
-## استراتيجية اختيار النموذج  
+## استراتيجية اختيار النموذج
 
-### نماذج Microsoft Foundry  
+### نماذج Azure OpenAI في Microsoft Foundry
 
-اختر النموذج المناسب لحالتك الاستخدامية:  
+اختر النموذج المناسب لحالتك:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
-  
-### تخطيط سعة النموذج  
+أعلن عن نشر النماذج في Bicep (أدناه)، وليس في إعدادات `services.*.config.AZURE_OPENAI_MODELS` عشوائية. لا يفسر AZD مثل هذا الإعداد كقائمة موارد نموذج. يشير `project` لخدمة إلى مصدر التطبيق، وليس إلى دليل `infra/` الخاص بها.
 
-| نوع النموذج | حالة الاستخدام | السعة الموصى بها | اعتبارات التكلفة |  
-|------------|----------|---------------------|-------------------|  
-| gpt-4.1-mini | دردشة، أسئلة وأجوبة | 10-50 TPM | فعالة من حيث التكلفة لمعظم الأحمال |  
-| gpt-4.1 | استدلال معقد | 20-100 TPM | تكلفة أعلى، استخدم للميزات المتميزة |  
-| text-embedding-3-large | البحث، RAG | 30-120 TPM | خيار قوي افتراضي للبحث الدلالي والاسترجاع |  
-| Whisper | تحويل الكلام إلى نص | 10-50 TPM | أحمال معالجة الصوت |  
+تستخدم الأمثلة نسخة `gpt-4.1-mini` المنشورة **`2025-04-14`** وإصدار التضمين **`1`**. تحقق من أن إصدار النموذج وحزمة النشر مدعومان في منطقتك/حسابك الهدف قبل التجهيز.
 
-## تكوين AZD لنماذج الذكاء الاصطناعي  
+### تخطيط سعة النموذج
 
-### تكوين قالب Bicep  
+| نوع النموذج | حالة الاستخدام | الطلب التوضيحي على الرموز | اعتبارات التكلفة |
+|------------|----------|---------------------|-------------------|
+| gpt-4.1-mini | الدردشة، الأسئلة والأجوبة | 10,000-50,000 رمز/دقيقة | الموازنة بين التكلفة والجودة لحمل العمل الخاص بك |
+| gpt-4.1 | المهام المعقدة | 20,000-100,000 رمز/دقيقة | تقييم مكاسب الجودة مقابل تكلفة الرموز |
+| text-embedding-3-large | البحث، RAG | 30,000-120,000 رمز/دقيقة | احتسب الإدخال بالإضافة إلى حركة المرور الاستعلامية |
+| Whisper | تحويل الكلام إلى نص | خطط باستخدام مدة الصوت وحدود الطلب | لا تطبق صيغة سعة رمز TPM لنموذج نصي |
 
-أنشئ توزيعات النموذج عبر قوالب Bicep:  
+TPM تعني الرموز لكل دقيقة. لهذه النشرات النصية القياسية، يكون ARM `sku.capacity` بوحدات **1,000 رمز/دقيقة** وليس TPM فردية (السعة `10` تعني 10,000 رمز/دقيقة). تختلف نسب RPM إلى TPM بحسب نوع النموذج/النشر؛ تحقق من كلا الحدين مقابل [وثائق الحصة](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic). هذه النطاقات أمثلة فقط وليست توصيات للحجم.
+
+## تكوين AZD لنماذج الذكاء الاصطناعي
+
+### تكوين قالب Bicep
+
+أنشئ نشرات النموذج عبر قوالب Bicep:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -123,22 +107,25 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
   sku: deployment.sku
 }]
 ```
-  
-### متغيرات البيئة  
 
-قم بتكوين بيئة تطبيقك:  
+هذا مثال **للبنية التحتية للتطوير** محدود بمجموعة الموارد، وليس قالب تطبيق AZD كامل. الحساب يسمح بالوصول الشبكي العام ويتطلب مصادقة Entra ID/RBAC (`Cognitive Services OpenAI User` للمتصلين). يحتاج الإنتاج إلى نقطة نهاية خاصة وDNS واتصال التطبيق كما هو موضح في الفصل 8. يحتاج AZD أيضًا إلى قالب رئيسي / تعيين معلمات وموارد مضيف التطبيق؛ استخدم عينة عملية للنشر الكامل.
+
+### متغيرات البيئة
+
+قم بتكوين بيئة تطبيقك:
 
 ```bash
-# تكوين .env
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
-  
-## أنماط النشر  
 
-### النمط 1: النشر في منطقة واحدة  
+هذه أسماء معرفة من التطبيق؛ قم بربطها في تكوين المضيف الخاص بك. نقطة نهاية Azure OpenAI v1 المستخدمة في فحص الصحة أدناه لا تتطلب معامل استعلام `api-version` المؤرخ؛ يحتاج العملاء الأقدم `AzureOpenAI` لذلك، فاتبع توليد API المستخدم في تطبيقك.
+
+## أنماط النشر
+
+### النمط 1: النشر في منطقة واحدة
 
 ```yaml
 # azure.yaml - Single region
@@ -146,20 +133,21 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
-  
-الأفضل لـ:  
-- التطوير والاختبار  
-- التطبيقات ذات السوق الواحدة  
-- تحسين التكلفة  
 
-### النمط 2: النشر متعدد المناطق  
+الأفضل لـ:
+- التطوير والاختبار
+- التطبيقات ذات السوق الواحد
+- تحسين التكلفة
+
+### النمط 2: النشر في مناطق متعددة
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -168,15 +156,19 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
   // ... configuration
 }]
 ```
-  
-الأفضل لـ:  
-- التطبيقات العالمية  
-- متطلبات توفر عالي  
-- توزيع الحمل  
 
-### النمط 3: النشر الهجين  
+يجب توفير الخصائص / SKU للحساب المهملة؛ هذا المقطع لا يمكن نشره كما هو مكتوب. انشر النماذج في كل حساب وطبق التوجيه / الفشل والتحكم في مقيم البيانات بشكل منفصل.
 
-دمج نماذج Microsoft Foundry مع خدمات الذكاء الاصطناعي الأخرى:  
+الأفضل لـ:
+- التطبيقات العالمية
+- متطلبات التوفر العالي
+- توزيع الحِمل
+
+### النمط 3: النشر الهجين
+
+دمج نماذج Microsoft Foundry مع خدمات الذكاء الاصطناعي الأخرى:
+
+تفترض المقاطع التالية أن الأسماء و `location` تم توفيرها بالقالب المحتوي.
 
 ```bicep
 // Hybrid AI services
@@ -204,19 +196,19 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
   }
 }
 ```
-  
-## إدارة النموذج  
 
-### التحكم في الإصدار  
+## إدارة النموذج
 
-تتبع إصدارات النموذج في تكوين AZD الخاص بك:  
+### التحكم في الإصدارات
+
+تتبع إصدارات النموذج في تكوين تطبيقك أو IaC. هذا JSON هو **مثال معرف بواسطة التطبيق**، وليس مخطط نموذج مدمج بـ AZD؛ يجب تنفيذ خطة احتياطية ونشرها صراحة:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -226,28 +218,28 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
   }
 }
 ```
-  
-### تحديثات النموذج  
 
-استخدم روابط AZD لتحديثات النموذج:  
+### تحديثات النموذج
+
+استخدم خطاف AZD لفحص التوفر للقراءة فقط، ثم حدّث IaC وجهزها:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# إذا استغرق النشر وقتًا أطول من المهلة الافتراضية
-azd deploy --timeout 1800
 ```
-  
-### اختبار A/B  
 
-انشر نسخاً متعددة من النموذج:  
+نفّذ `azd up` **خارج** الخطاف لتطبيق تغييرات البنية التحتية للنموذج ونشر الكود. لا تستدعي أبدًا `azd deploy` من خطاف `predeploy`: فإنه يؤدي إلى تكرار نفس الخطاف. `azd deploy --timeout 1800` يمدد مهلة نشر التطبيق؛ ولا يحدث موارد Bicep.
+
+### اختبار A/B
+
+المورد التوضيحي أدناه يختار اسم نشر وسعة؛ ينشئ **نشرًا واحدًا**، وليس اختبار A/B. للتجربة الحقيقية، جهز موردين نشر مميزين، ووجه جزءًا محكمًا من الطلبات لكل منهما، وقارن الجودة والزمن والتكلفة. يفترض `openAi` من مثال الحساب:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -268,15 +260,16 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
   }
 }
 ```
-  
-## اعتبارات الإنتاج  
 
-### تخطيط السعة  
+## اعتبارات الإنتاج
 
-احسب السعة المطلوبة بناءً على أنماط الاستخدام:  
+### تخطيط السعة
+
+احسب السعة المطلوبة بناءً على أنماط الاستخدام:
 
 ```python
-# مثال على حساب السعة
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# مثال على الاستخدام
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -297,10 +290,14 @@ required_capacity = calculate_required_capacity(
 )
 print(f"Required capacity: {required_capacity} TPM")
 ```
-  
-### تكوين التحجيم التلقائي  
 
-قم بتكوين التحجيم التلقائي لتطبيقات الحاويات:  
+الناتج المتوقع: `Required capacity: 9100 TPM`. مع وحدات سعة 1,000 رمز/دقيقة، قرّب إلى الأعلى على الأقل إلى `10`، ثم تحقق من تقدير RPM والحدود الخاصة بالنموذج (بما في ذلك ميزانية الإخراج المطلوبة). هذا التقدير للطلب على الرموز ليس ضمانًا ضد التقييد.
+
+### تكوين التوسع التلقائي
+
+قم بتكوين التوسع التلقائي لتطبيقات الحاويات:
+
+**مورد جزئي:** دمج إعدادات `template.scale` في تطبيق حاويات كامل مع الموقع، البيئة المُدارة، صورة الحاوية، الموارد، والوصول. زيادة النسخ لا تزيد حصة النموذج.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -335,21 +332,24 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   }
 }
 ```
-  
-### تحسين التكلفة  
 
-نفذ ضوابط التكلفة:  
+### تحسين التكاليف
+
+نفذ ضوابط التكلفة:
+
+**مورد الميزانية التوضيحي:** عرّف `budgetStartDate` كأول يوم في الشهر الحالي بالتوقيت العالمي (مثلاً `2026-11-01T00:00:00Z` لهذه المراجعة)، واستبدل عنوان الاتصال. يجب أن يلبي البداية قيود تاريخ الخدمة الحالية. تنبه الميزانيات على تأخر بيانات الفوترة؛ لكنها لا توقف الإنفاق.
 
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -367,12 +367,12 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
   }
 }
 ```
-  
-## المراقبة والرصد  
 
-### تكامل Application Insights  
+## المراقبة والقابلية للملاحظة
 
-قم بتكوين المراقبة لأحمال عمل الذكاء الاصطناعي:  
+### تكامل Application Insights
+
+قم بتكوين المراقبة لأعباء عمل الذكاء الاصطناعي:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
-  
-### مقاييس مخصصة  
 
-تتبع مقاييس خاصة بالذكاء الاصطناعي:  
+يفترض المقطع المورد `applicationInsightsName`، `location`، و `logAnalyticsWorkspace` موجودًا. يقوم بتوفير المراقبة، لكنه لا يجهز التطبيق أو ينشئ مقاييس مخصصة.
+
+### المقاييس المخصصة
+
+تتبع المقاييس الخاصة بالذكاء الاصطناعي:
+
+استخدم [توزيع Azure Monitor OpenTelemetry المدعوم](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)، وليس SDK بايثون القديم `applicationinsights`. ثبت `azure-monitor-opentelemetry`، وقم بتكوين `APPLICATIONINSIGHTS_CONNECTION_STRING`، وابدأ مرة واحدة عند التشغيل:
 
 ```python
-# قياسات مخصصة لنماذج الذكاء الاصطناعي
-import logging
-from applicationinsights import TelemetryClient
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
-  
-### فحوصات الصحة  
 
-نفذ مراقبة صحة خدمة الذكاء الاصطناعي:  
+يوضح هذا إصدار السمات، وليس تجهيز استدعاء النموذج الفعلي. غلف الطلب الحقيقي في فترة قياس لقياس مدته؛ افحص `dependencies`/`traces` في Application Insights. لا ترسل موجهات، ردود، مفاتيح، أو رسائل استثناءات خام تحتوي على بيانات حساسة.
+
+### فحوصات الصحة
+
+طبق مراقبة صحة خدمة الذكاء الاصطناعي:
+
+ثبت `fastapi`، `uvicorn`، `httpx`، و `azure-identity`. عيّن متغيرات نقطة النهاية/النشر أعلاه وامنح المتصل `Cognitive Services OpenAI User`. يستخدم هذا **فحص الجاهزية** طائرة بيانات Azure OpenAI v1 مع Entra ID؛ يقوم باستدعاء نموذج يمكن فوترته. شغّل مع `uvicorn health:app` بعد الحفظ كـ `health.py`. استخدم فحص خفة وزن منفصل للحيوية، قيد الحد/خزن نتائج الجاهزية، ولا تكشف هذا المسار علنًا بدون ضوابط وصول.
 
 ```python
-# نقاط نهاية فحص الصحة
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,44 +431,50 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # اختبار اتصال OpenAI
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
-  
-## الخطوات التالية  
 
-1. **راجع [دليل تكامل Microsoft Foundry](microsoft-foundry-integration.md)** لأنماط تكامل الخدمة  
-2. **أكمل [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)** للحصول على تجربة عملية  
-3. **نفذ [ممارسات الذكاء الاصطناعي في الإنتاج](production-ai-practices.md)** للنشرات المؤسسية  
-4. **استكشف [دليل استكشاف مشكلات الذكاء الاصطناعي](../chapter-07-troubleshooting/ai-troubleshooting.md)** للمشاكل الشائعة  
+المتوقع: `GET /health/ai-models` ترجع `200 {"status":"healthy"}` عند قابلية استخدام نشر الدردشة المكوّن، أو `503` دون الإفصاح عن التفاصيل العليا. سرد النشرات هو عملية على مستوى الإدارة وليس فحص صحة صالحة على مستوى البيانات.
 
-## الموارد  
+## الخطوات التالية
 
-- [توفر نماذج Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)  
-- [توثيق Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
-- [تحجيم تطبيقات الحاويات](https://learn.microsoft.com/azure/container-apps/scale-app)  
-- [تحسين تكلفة نماذج الذكاء الاصطناعي](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)  
+1. **راجع [دليل تكامل Microsoft Foundry](microsoft-foundry-integration.md)** لأنماط دمج الخدمة  
+2. **أكمل [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)** للتجربة العملية  
+3. **طبق [ممارسات الذكاء الاصطناعي للإنتاج](../chapter-08-production/production-ai-practices.md)** لنشرات المؤسسات  
+4. **استكشف [دليل استكشاف مشكلات الذكاء الاصطناعي](../chapter-07-troubleshooting/ai-troubleshooting.md)** للقضايا الشائعة  
 
----  
+## الموارد
 
-**تنقل الفصل:**  
-- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)  
-- **📖 الفصل الحالي**: الفصل 2 - تطوير يركز على الذكاء الاصطناعي  
-- **⬅️ السابق**: [تكامل Microsoft Foundry](microsoft-foundry-integration.md)  
-- **➡️ التالي**: [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)  
-- **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)  
+- [توفر نموذج Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [توثيق Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [توسع تطبيقات الحاويات](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [تحسين تكلفة نموذج الذكاء الاصطناعي](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+
+---
+
+**التنقل في الفصل:**
+- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
+- **📖 الفصل الحالي**: الفصل 2 - التطوير المعتمد على الذكاء الاصطناعي أولاً
+- **⬅️ السابق**: [وكلاء الذكاء الاصطناعي](agents.md)
+- **➡️ التالي**: [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)
+- **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)
 
 ---
 

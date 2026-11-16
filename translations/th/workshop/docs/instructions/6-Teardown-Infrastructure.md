@@ -1,60 +1,58 @@
 # 6. การรื้อถอนโครงสร้างพื้นฐาน
 
-!!! tip "เมื่อสิ้นสุดโมดูลนี้ คุณจะสามารถ"
+!!! tip "เมื่อจบโมดูลนี้คุณจะสามารถ"
 
-    - [ ] เข้าใจความสำคัญของการล้างทรัพยากรและการจัดการค่าใช้จ่าย
-    - [ ] ใช้ `azd down` เพื่อลบโครงสร้างพื้นฐานอย่างปลอดภัย
-    - [ ] กู้คืนบริการ AI ของ Azure ที่ถูกลบแบบซอฟต์ถ้าจำเป็น
-    - [ ] **ปฏิบัติการ 6:** ล้างทรัพยากร Azure และตรวจสอบการลบ
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## แบบฝึกหัดเสริม
 
-ก่อนที่เราจะรื้อถอนโปรเจกต์ ให้ใช้เวลาสักครู่เพื่อทำการสำรวจแบบเปิดกว้าง
+ก่อนที่เราจะรื้อถอนโปรเจกต์ ใช้เวลาสักครู่เพื่อสำรวจแบบเปิดกว้าง
 
-!!! info "ลองใช้คำสั่งสำรวจเหล่านี้"
+!!! info "ลองใช้คำถามเหล่านี้เพื่อสำรวจ"
 
-    **ทดลองกับ GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. ถามว่า: `มีเทมเพลต AZD อื่น ๆ ที่ฉันสามารถลองสำหรับสถานการณ์ตัวแทนหลายคนได้ไหม?`
-    2. ถามว่า: `ฉันจะปรับแต่งคำสั่งตัวแทนสำหรับกรณีการใช้งานด้านสุขภาพอย่างไร?`
-    3. ถามว่า: `มีตัวแปรสภาพแวดล้อมใดควบคุมการเพิ่มประสิทธิภาพค่าใช้จ่าย?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **สำรวจ Azure Portal:**
+    **Explore the Azure Portal:**
     
-    1. ตรวจสอบเมตริก Application Insights สำหรับการปรับใช้ของคุณ
-    2. ตรวจสอบการวิเคราะห์ค่าใช้จ่ายของทรัพยากรที่จัดเตรียมไว้
-    3. สำรวจสนามเล่นตัวแทนใน Microsoft Foundry portal อีกครั้ง
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## การลบโครงสร้างพื้นฐาน
+## การถอนการจัดสรรโครงสร้างพื้นฐาน
 
-1. การรื้อถอนโครงสร้างพื้นฐานนั้นง่ายดังนี้:
+1. การรื้อถอนโครงสร้างพื้นฐานง่ายเหมือนกับ:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. ธง `--purge` จะทำให้มั่นใจว่ามันจะลบทรัพยากร Cognitive Service ที่ถูกลบแบบซอฟต์ด้วย จึงช่วยปล่อยโควต้าที่ถูกถือโดยทรัพยากรเหล่านี้ เมื่อเสร็จสิ้น คุณจะเห็นบางอย่างเช่นนี้:
+1. ยืนยันสภาพแวดล้อมที่เลือกและตรวจสอบทรัพยากรที่จะถูกลบ การดำเนินการนี้จะลบทรัพยากร Azure และอาจทำลายข้อมูล โปรดเก็บคำยืนยันนี้สำหรับกระบวนการเรียนรู้นี้ เมื่อเสร็จแล้วคุณจะเห็นผลลัพธ์คล้ายกับ:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (ไม่บังคับ) หากคุณรัน `azd up` อีกครั้ง ตอนนี้คุณจะสังเกตได้ว่าโมเดล gpt-4.1 จะถูกปรับใช้ เนื่องจากตัวแปรสภาพแวดล้อมถูกเปลี่ยนแปลง (และบันทึก) ในโฟลเดอร์ `.azure` ในเครื่อง 
+1. ตรวจสอบการลบในพอร์ทัลและตรวจดูทรัพยากรที่อยู่นอกขอบเขตการปรับใช้ รายงานค่าใช้จ่ายและการอัปเดตโควต้าอาจล่าช้า การตั้งค่า `.azure` ภายในเครื่องยังคงอยู่เว้นแต่คุณจะลบออกอย่างชัดเจน
 
-      นี่คือตัวอย่างการปรับใช้โมเดล **ก่อนหน้า**:
+1. `azd down --purge` ยังขอการลบถาวรของทรัพยากรที่ถูกลบแบบอ่อนที่รองรับด้วย ใช้เฉพาะเมื่อไม่ต้องการกู้คืนและคุณเข้าใจนโยบายการเก็บรักษา/ป้องกันการล้างข้อมูล มันไม่ได้รับประกันว่าจะปล่อยโควต้าทันที
 
-      ![เริ่มต้น](../../../../../translated_images/th/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      และนี่คือตัวอย่าง **หลังจากนั้น**:
-      ![ใหม่](../../../../../translated_images/th/14-deploy-new.f7f3c355a3cf7299.webp)
+1. อย่าปรับใช้ใหม่เพื่อแค่ตรวจสอบการล้างข้อมูล `azd up` ที่ตั้งใจใช้ภายหลังสามารถสร้างทรัพยากรขึ้นมาใหม่โดยใช้ข้อมูลป้อนเข้าภายในเครื่องที่เหลืออยู่ และจะเสียค่าใช้จ่ายอีก การอัปเดตรูปแบบโดยทั่วไปใช้การเปลี่ยนแปลงการจัดสรรที่รองรับ ไม่ใช่การรื้อถอน
 
 ---
 

@@ -1,110 +1,110 @@
-# 7. Opsummering & Næste skridt
+# 7. Afslutning & Næste Skridt
 
 !!! tip "DE VIGTIGSTE BUDSKABER ER"
 
-    - [ ] AZD-skabeloner accelererer udviklingen af AI-applikationer fra dage til timer
-    - [ ] Discovery → Deployment → Customization-metodologien giver en struktureret læringsvej
-    - [ ] GitHub Copilot med MCP-servere muliggør udforskning af komplekse kodebaser med naturligt sprog
-    - [ ] Microsoft Foundry tilbyder indbygget observabilitet, evaluering og sikkerhedstest
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. Hvad du har opnået
+## 1. Hvad Du Har Opnået
 
 Tillykke! I denne workshop har du med succes:
 
-| Modul | Resultat |
+| Modul | Præstation |
 |:---|:---|
 | **Modul 1** | Opdagede Azure Developer CLI og valgte en AI-skabelon |
-| **Modul 2** | Nedrullede og validerede en komplet AI-agentløsning |
-| **Modul 3** | Nedbrød skabelonen for at forstå dens arkitektur |
-| **Modul 4** | Udforskede `azure.yaml`-konfiguration og livscyklus hooks |
+| **Modul 2** | Udrullede og validerede en komplet AI-agentløsning |
+| **Modul 3** | De-konstruerede skabelonen for at forstå dens arkitektur |
+| **Modul 4** | Udforskede `azure.yaml` konfiguration og livscyklus hooks |
 | **Modul 5** | Tilpassede skabelonen til dit eget scenarie |
-| **Modul 6** | Nedtog sikkert infrastrukturen og håndterede ressourcer |
+| **Modul 6** | Sikker nedtagning af infrastruktur og håndtering af ressourcer |
 
 ---
 
-## 2. Centrale koncepter du har mestret
+## 2. Centrale Begreber Mestrede
 
 ### Azure Developer CLI (azd)
 - `azd init` - Initialiser projekter fra skabeloner
-- `azd up` - Provisionér og udrul i én kommando
-- `azd env` - Administrer miljøvariabler
+- `azd up` - Provisioner og deployér med én kommando
+- `azd env` - Håndter miljøvariabler
 - `azd down` - Ryd sikkert op i ressourcer
 
-### AZD-skabelonstruktur
-- `azure.yaml` - Konfiguration og udrulningshooks
+### AZD Skabelonstruktur
+- `azure.yaml` - Konfigurations- og deploy hooks
 - `infra/` - Bicep infrastruktur-som-kode
 - `src/` - Applikationskildekode
 - `scripts/` - Automatiserings- og opsætningsscripts
 
-### Microsoft Foundry-funktioner
-- AI Agent Service til intelligente assistenter
-- File Search og Azure AI Search til vidensøgning
-- Indbygget tracing, overvågning og evaluering
-- Red teaming til validering af AI-sikkerhed
+### Microsoft Foundry Funktionaliteter
+- AI-agentservice til intelligente assistenter
+- Fil-søgning og Azure AI Search til videnssøgning
+- Indbygget sporing, overvågning og evaluering
+- Red teaming til AI-sikkerhedsvalidering
 
 ---
 
-## 3. Fortsæt din læringsrejse
+## 3. Fortsæt Din Læringsrejse
 
-### Anbefalede næste skridt
+### Anbefalede Næste Skridt
 
-| Vej | Ressource | Tid |
+| Sti | Ressource | Tid |
 |:---|:---|:---|
-| **Fuldfør kursus** | [AZD for Beginners Curriculum](../../README.md) | 8-12 timer |
-| **Prøv en anden skabelon** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 timer |
-| **Dyk dybere** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Løbende |
+| **Færdiggør Kursus** | [AZD for Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Selvstyret |
+| **Prøv En Anden Skabelon** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 timer |
+| **Dyk Dybere** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Løbende |
 | **Fællesskab** | [Azure Discord](https://aka.ms/foundry/discord) | Deltag i dag! |
 
-### Foreslåede skabeloner at prøve
+### Forslåede Skabeloner at Prøve Næste
 
-1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Grundlæggende chat med dine data
-2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Avancerede RAG-mønstre
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Virksomheds detailhandelsscenarier
+1. **[Kom i gang med AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Grundlæggende chat med dine data
+2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Avancerede RAG mønstre
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Erhvervsdetail-scenarier
 
 ---
 
-## 4. Workshop-udfordring
+## 4. Workshop Udfordring
 
 Klar til at teste dine færdigheder? Prøv disse udfordringer:
 
 | Udfordring | Beskrivelse | Sværhedsgrad |
 |:---|:---|:---|
-| **1. Multi-Agent Scenario** | Udrul og tilpas til en anden branche (f.eks. sundhedsvæsen, finans) | ⭐⭐ |
-| **2. Custom Knowledge Base** | Tilføj dine egne datafiler og opret et tilpasset søgeindeks | ⭐⭐⭐ |
-| **3. Production Deployment** | Opsæt CI/CD med GitHub Actions ved hjælp af `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. Multi-Agent Scenarie** | Udrul og tilpas til en anden branche (fx sundhedsvæsen, finans) | ⭐⭐ |
+| **2. Tilpasset Vidensbase** | Tilføj dine egne datafiler og opret et tilpasset søgeindeks | ⭐⭐⭐ |
+| **3. Produktionsudrulning** | Opsæt CI/CD med GitHub Actions ved brug af `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. Del din feedback
+## 5. Del Din Feedback
 
 Din feedback hjælper os med at forbedre denne workshop!
 
 - **GitHub Issues**: [Indsend feedback](https://github.com/microsoft/azd-for-beginners/issues) - tag med `Workshop`
-- **Discord**: Deltag i [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - skriv i `#get-help`
+- **Discord**: Deltag i [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - post i `#get-help`
 - **Bidrag**: Hjælp med at forbedre workshoppen ved at indsende pull requests!
 
 ---
 
 ## Tak! 🎉
 
-Tak for at du gennemførte AZD for AI Developers Workshop. Vi håber, at denne oplevelse har givet dig færdighederne og selvtilliden til at bygge og udrulle AI-applikationer på Azure.
+Tak fordi du gennemførte AZD for AI Developers Workshop. Vi håber, at denne oplevelse har udstyret dig med færdigheder og selvtillid til at bygge og udrulle AI-applikationer på Azure.
 
-Bliv ved med at bygge, bliv ved med at lære, og velkommen til Azure AI-udviklerfællesskabet!
+**Bliv ved med at bygge, bliv ved med at lære, og velkommen til Azure AI udviklerfællesskabet!**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 Kursusside** | [AZD For Beginners](../../README.md) |
+| **📚 Kursushjem** | [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
 | **📖 Dokumentation** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ AI-skabeloner** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+| **🛠️ AI Skabeloner** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
 | **💬 Fællesskab** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritisk information anbefales en professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+**Ansvarsfraskrivelse**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

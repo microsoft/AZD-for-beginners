@@ -1,30 +1,26 @@
-# TODO: Di pesin we dey maintain dis repo never edit dis file
-
-**REPO OWNER**: You wan make Customer Service & Support (CSS) dey support dis product/project?
-
-- **No CSS support:** Use dis template take put info about how pesin go fit report issues and get help.
-- **Yes CSS support:** Fill intake form for [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS go work wit you/help you decide wetin to do next.
-- **You no sure?** Fill intake form like say di answer na "Yes". CSS go help you decide.
-
-*After dat, commot dis first heading from dis SUPPORT.MD file before you publish your repo.*
-
 # Support
 
-## How pesin go fit report issues and get help  
+## Course mata dem and questions
 
-Dis project dey use GitHub Issues to track bugs and feature requests. Abeg check di issues wey don dey already before you report new one so you no go repeat am. For new issues, report your bug or feature request as new Issue.
+Search for the [course mata dem](https://github.com/microsoft/AZD-for-beginners/issues) before you report any wahala. Make sure say you include the English lesson wey get problem, the command wey you run, your AZD/extension versions, plus the error message. Comot credentials, tokens, subscription details, and personal data from logs and screenshots.
 
-For help and questions about how to use dis project, abeg **REPO MAINTAINER: PUT INSTRUCTIONS HERE 
-ABOUT HOW PEOPLE GO FIT REACH REPO OWNERS OR COMMUNITY FOR HELP. E FIT BE STACK OVERFLOW TAG OR ANY OTHER
-PLACE. WHERE YOU GO DEY HELP PEOPLE?**.
+For general learning questions, use the [Azure developer community](https://discord.gg/microsoft-azure). Community dem no dey guarantee say dem go support you.
 
-## Microsoft Support Policy  
+## Tool and service mata dem
 
-Support for dis **PROJECT or PRODUCT** na only di resources wey dey listed above.
+Report reproducible AZD CLI bugs for [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). For Azure service wahala or subscription-specific help, use the support options wey dey for [Azure portal](https://portal.azure.com/).
+
+## Security reports
+
+Follow [SECURITY.md](SECURITY.md) if you wan report private vulnerability. No post secrets or exploit details for public course issue.
+
+## Microsoft support policy
+
+Support for dis educational project nah only di resources wey dem list for top. Course examples no get production support commitment.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even as we dey try make am accurate, abeg sabi say machine translation fit get mistake or no dey correct well. Di original dokyument for im native language na di main source wey you go trust. For important mata, e good make professional human translator check am. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+**Disclaimer**:
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

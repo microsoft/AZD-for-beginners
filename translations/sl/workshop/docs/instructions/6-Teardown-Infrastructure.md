@@ -1,60 +1,58 @@
-# 6. Odstranitev infrastrukture
+# 6. Razstavljanje infrastrukture
 
 !!! tip "NA KONCU TEGA MODULA BOSTE ZMOGLI"
 
-    - [ ] Razumeti pomen čiščenja virov in upravljanja stroškov
-    - [ ] Uporabiti `azd down` za varno odstranitev infrastrukture
-    - [ ] Po potrebi obnoviti mehko izbrisane Azure AI Services
-    - [ ] **Laboratorij 6:** Očistiti Azure vire in preveriti odstranitev
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## Bonus Exercises
+## Dodatne vaje
 
-Preden odstranimo projekt, si vzemite nekaj minut za odprto raziskovanje.
+Preden razstavite projekt, si vzemite nekaj minut za odprto raziskovanje.
 
-!!! info "Preizkusite te raziskovalne pozive"
+!!! info "Poskusite te raziskovalne iztočnice"
 
-    **Eksperimentirajte z GitHub Copilotom:**
+    **Experiment with GitHub Copilot:**
     
-    1. Ask: `Katere druge AZD predloge bi lahko preizkusil za večagentne scenarije?`
-    2. Ask: `Kako lahko prilagodim navodila agenta za zdravstveno uporabo?`
-    3. Ask: `Katere okoljske spremenljivke nadzirajo optimizacijo stroškov?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Raziščite Azure Portal:**
+    **Explore the Azure Portal:**
     
-    1. Preglejte metrike Application Insights za vašo namestitev
-    2. Preverite analizo stroškov za zagotovljene vire
-    3. Raziskujte igrišče agentov v portalu Microsoft Foundry še enkrat
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
 ## Odstranitev infrastrukture
 
-1. Odstranitev infrastrukture je preprosta:
+1. Razstavljanje infrastrukture je enostavno:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. Potrdite izbrano okolje in preglejte vire, ki jih je treba izbrisati. To odstrani Azure vire in lahko uniči podatke. Obdržite potrditveni poziv za ta učni potek. Ko je končano, boste videli izhod, podoben temu:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Neobvezno) Če zdaj ponovno zaženete `azd up`, boste opazili, da se model `gpt-4.1` namesti, ker je bila spremenjena okoljska spremenljivka (in shranjena) v lokalni mapi `.azure`. 
+1. Preverite izbris v portalu in preverite vire zunaj obsega namestitve. Poročanje stroškov in posodobitve kvot lahko zamujajo. Lokalna konfiguracija `.azure` ostane, razen če jo izrecno odstranite.
 
-      Tukaj so namestitve modelov **pred**:
+1. `azd down --purge` dodatno zahteva trajni izbris podprtih mehko izbrisanih virov. Uporabite ga samo, ko ni potrebna obnovitev in ko razumete politike shranjevanja/zaščite pred čiščenjem. Ne zagotavlja takojšnje sprostitve kvote.
 
-      ![Začetno](../../../../../translated_images/sl/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      In tukaj so **po**:
-      ![Novo](../../../../../translated_images/sl/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Ne ponovno uvajajte samo za preverjanje čiščenja. Kasnejši namerni `azd up` lahko znova ustvari vire z uporabo preostalih lokalnih vhodov in spet povzroči stroške. Posodobitve modela običajno uporabljajo podprte spremembe namestitve, ne razstavljanja.
 
 ---
 

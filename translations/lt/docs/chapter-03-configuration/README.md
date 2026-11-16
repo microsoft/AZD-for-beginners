@@ -1,22 +1,22 @@
-# 3 skyrius: Konfigūravimas ir autentifikacija
+# 3 skyrius: Konfigūracija ir autentifikacija
 
-**📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 45-60 minučių | **⭐ Sudėtingumas**: Vidutinis
+**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 90-150 minučių įskaitant integracijos praktiką | **⭐ Sudėtingumas**: Vidutinis
 
 ---
 
 ## Apžvalga
 
-Šiame skyriuje aptariamas aplinkos konfigūravimas, autentifikacijos modeliai ir saugumo geriausios praktikos Azure Developer CLI diegimams.
+Šiame skyriuje aptariama aplinkos konfigūracija, autentifikacijos modeliai ir geriausios saugumo praktikos Azure Developer CLI diegimams.
 
-> Patikrinta su `azd 1.27.1` 2026 m. liepos mėn.
+> Komandų ir konfigūracijos peržiūros tikslas: `azd 1.37.2` (2026 m. lapkritis). Veikianti Azure tiekimo sistema peržiūros metu nebuvo paleista.
 
 ## Mokymosi tikslai
 
-Baigę šį skyrių jūs:
-- Gebėsite valdyti AZD konfigūracijos hierarchiją
-- Valdyti kelias aplinkas (dev, staging, prod)
-- Įgyvendinti saugią autentifikaciją naudojant valdomas tapatybes
-- Konfigūruoti aplinkai specifinius nustatymus
+Užbaigę šį skyrių jūs:
+- Įvaldysite AZD konfigūracijos hierarchiją
+- Valdysite kelias aplinkas (dev, staging, prod)
+- Įgyvendinsite saugią autentifikaciją su valdomais identitetais
+- Sukonfigūruosite aplinkai specifinius nustatymus
 
 ---
 
@@ -24,59 +24,59 @@ Baigę šį skyrių jūs:
 
 | # | Pamoka | Aprašymas | Trukmė |
 |---|--------|-------------|------|
-| 1 | [Konfigūravimo vadovas](configuration.md) | Aplinkos nustatymas ir valdymas | 30 min |
-| 2 | [Autentifikacija ir saugumas](authsecurity.md) | Valdomos tapatybės ir RBAC modeliai | 30 min |
+| 1 | [Konfigūracijos vadovas](configuration.md) | Aplinkos nustatymas ir valdymas | 30 min |
+| 2 | [Autentifikacija ir saugumas](authsecurity.md) | Valdomo identiteto ir RBAC modeliai | 30 min |
 
 ---
 
-## 🚀 Greitas paleidimas
+## 🚀 Greitas pradžia
+
+Vykdykite iš **jau inicializuotos azd programos** šaknies, o ne iš kurso saugyklos. Jei tokios aplinkos jau egzistuoja, naudokite nenaudojamus aplinkų pavadinimus.
 
 ```bash
-# Kurti kelias aplinkas
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Pereiti tarp aplinkų
+# Switch environments
 azd env select prod
 
-# Nustatyti aplinkos kintamuosius
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Peržiūrėti konfigūraciją
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` yra iliustracinis: jis daro įtaką infrastruktūrai tik tuomet, kai jūsų šablonas jį tiesiogiai naudoja. Paprasti `azd env set` reikšmės saugomos lokaliai paprastu tekstu; jos nėra saugi slapta saugykla.
 
 ---
 
 ## 🔧 Konfigūracijos hierarchija
 
-AZD taiko nustatymus šia tvarka (vėlesni pakeitimai nustato ankstesnius):
-
-1. **Numatytosios reikšmės** (įmontuotos šablonuose)
-2. **azure.yaml** (projekto konfigūracija)
-3. **Aplinkos kintamieji** (`azd env set`)
-4. **Komandų eilutės parametrai** (`--location eastus`)
+Palaikykite tris skirtingas konfigūracijos sritis atskirtas: globalius nustatymus (`azd config`), projekto struktūrą (`azure.yaml`) ir aplinkos reikšmes (`azd env`). Flagai perrašo tik tuos nustatymus, kuriuos jie palaiko; nėra universalaus atsitiktinių aplinkos kintamųjų persidengimo `azure.yaml` ar Bicep.
 
 ---
 
-## 🔐 Saugumo geriausios praktikos
+## 🔐 Geriausios saugumo praktikos
 
 ```bash
-# Naudokite valdomą tapatybę (rekomenduojama)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Patikrinkite AZD autentifikacijos būseną
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Pasirinktinai: patikrinkite Azure CLI kontekstą, jei planuojate vykdyti az komandas
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Autentifikuokitės iš naujo, jei reikia
+# Re-authenticate if needed
 azd auth login
 
-# Pasirinktinai: atnaujinkite Azure CLI autentifikaciją az komandoms
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -86,15 +86,15 @@ az login
 
 | Kryptis | Skyrius |
 |-----------|---------|
-| **Ankstesnis** | [2 skyrius: DI kūrimas](../chapter-02-ai-development/README.md) |
+| **Ankstesnis** | [2 skyrius: DI vystymas](../chapter-02-ai-development/README.md) |
 | **Kitas** | [4 skyrius: Infrastruktūra](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 Susiję ištekliai
 
-- [Patikros prieš diegimą](../chapter-06-pre-deployment/README.md)
-- [Gedimų šalinimas](../chapter-07-troubleshooting/common-issues.md)
+- [Patikrinimai prieš diegimą](../chapter-06-pre-deployment/README.md)
+- [Klaidų šalinimas](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

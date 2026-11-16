@@ -1,237 +1,246 @@
-# Asas Multi-Ejen - Deploy Sistem AI Berkoordinasi Pertama Anda
+# Asas Multi-Ejen - Lancarkan Sistem AI Berkoordinasi Pertama Anda
 
 **Navigasi Bab:**
-- **📚 Laman Kursus**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Semasa**: Bab 5 - Penyelesaian AI Multi-Ejen
+- **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 5 - Penyelesaian Multi-Ejen AI
 - **⬅️ Sebelumnya**: [Bab 4: Infrastruktur](../chapter-04-infrastructure/README.md)
 - **➡️ Seterusnya**: [Corak Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Disahkan dengan `azd 1.27.1` pada Julai 2026.
+> Panduan arahan disemak mengikut rujukan `azd 1.37.2` yang dikeluarkan. Penempatan awan tidak dilaksanakan.
 
 ## Pengenalan
 
-Dalam bab-bab sebelum ini anda telah deploy satu aplikasi—dan dalam Bab 2 anda deploy satu ejen AI. Pelajaran ini mengambil langkah seterusnya: deploy **sistem multi-ejen**, di mana beberapa ejen pakar bekerja bersama menyelesaikan masalah yang tidak dapat diatasi oleh satu ejen sahaja dengan baik.
+Dalam bab-bab awal, anda melancarkan satu aplikasi—dan dalam Bab 2 anda melancarkan satu ejen AI. Pelajaran ini membawa langkah seterusnya: melancarkan **sistem multi-ejen**, di mana beberapa ejen khusus bekerja bersama untuk menyelesaikan masalah yang tidak dapat diuruskan dengan baik oleh satu ejen sahaja.
 
-Berita baik untuk pemula: **anda tidak memerlukan arahan baru.** Penyelesaian multi-ejen masih merupakan projek azd. Anda akan `azd init`, `azd up`, uji, dan `azd down`—tepat seperti aliran kerja yang sudah anda tahu. Apa yang berubah adalah *bentuk* aplikasi di dalamnya.
+Berita baik untuk pemula: **anda tidak memerlukan arahan baru.** Penyelesaian multi-ejen masih merupakan projek azd. Anda akan `azd init`, `azd up`, menguji, dan `azd down`—tepat seperti aliran kerja yang sudah anda ketahui. Apa yang berubah adalah *bentuk* aplikasi di dalamnya.
 
 ## Matlamat Pembelajaran
 
 Pada akhir pelajaran ini, anda akan:
-- Faham maksud "multi-ejen" dan bila ia berbaloi dengan kerumitan tambahan
-- Kenali peranan biasa dalam sistem multi-ejen (pengarah + pakar)
-- Deploy templat multi-ejen sebenar yang berfungsi dengan `azd up`
-- Faham sumber Azure yang menyokong aplikasi multi-ejen
-- Tahu cara mengesahkan, menyesuaikan, dan membongkar penyelesaian dengan selamat
+- Memahami maksud "multi-ejen" dan bila ianya berbaloi dengan kerumitan tambahan
+- Mengenal pasti peranan biasa dalam sistem multi-ejen (pengarah + pakar)
+- Melancarkan templat multi-ejen sebenar dengan `azd up`
+- Memahami sumber Azure yang menyokong aplikasi multi-ejen
+- Tahu bagaimana untuk mengesahkan, menyesuaikan, dan membongkar penyelesaian dengan selamat
 
 ## Hasil Pembelajaran
 
-Selepas menamatkan pelajaran ini, anda akan mampu:
-- Terangkan perbezaan antara ejen tunggal dan sistem multi-ejen
-- Pilih antara ejen tunggal dengan alat dan reka bentuk multi-ejen yang sebenar
-- Deploy dan uji templat multi-ejen dari awal ke akhir dengan azd
-- Kenal pasti di mana setiap ejen berjalan dan bagaimana mereka berkomunikasi
-- Bersihkan semua sumber untuk elakkan caj berterusan
+Selepas melengkapkan pelajaran ini, anda akan dapat:
+- Menerangkan perbezaan antara satu ejen dan sistem multi-ejen
+- Memilih antara ejen tunggal dengan alat dan reka bentuk multi-ejen sebenar
+- Melancarkan dan menguji templat multi-ejen dari mula hingga akhir dengan azd
+- Mengenal pasti di mana setiap ejen berjalan dan bagaimana mereka berkomunikasi
+- Membersihkan semua sumber untuk mengelakkan caj berterusan
 
 ---
 
-## Apa Itu Sistem Multi-Ejen?
+## Apakah Sistem Multi-Ejen?
 
-Satu ejen AI tunggal adalah satu model dengan satu set arahan dan (pilihan) beberapa alat. Itu berfungsi dengan baik untuk tugas yang fokus. Tetapi apabila tugas membesar—penyelidikan, kemudian menulis, kemudian menyunting, kemudian penyemakan fakta—memadatkan semuanya dalam satu prompt membuat ejen jadi lebih perlahan, kurang boleh diharap, dan lebih sukar untuk debug.
+Satu ejen AI adalah satu model dengan set arahan dan (secara pilihan) beberapa alat. Ia berfungsi dengan baik untuk tugas terfokus. Tetapi apabila tugas berkembang—penyelidikan, kemudian penulisan, kemudian penyuntingan, kemudian pemeriksaan fakta—memasukkan semuanya ke dalam satu arahan membuat ejen menjadi lebih perlahan, kurang boleh dipercayai, dan sukar untuk dibaiki.
 
-Sistem **multi-ejen** memecahkan kerja kepada pakar yang setiap satu buat satu kerja dengan baik, dikordinasi oleh seorang pengarah:
+Sistem **multi-ejen** membahagikan kerja kepada pakar yang masing-masing melakukan satu kerja dengan baik, diselaraskan oleh seorang pengarah:
 
 ```mermaid
 graph TD
-    User([Permintaan pengguna]) --> Orchestrator[Ejen Orchestrator<br/>Merancang dan mengarahkan kerja]
-    Orchestrator --> Researcher[Ejen Penyelidik<br/>Mengumpul fakta]
-    Orchestrator --> Writer[Ejen Penulis<br/>Mencipta draf kandungan]
-    Orchestrator --> Editor[Ejen Editor<br/>Menyemak dan memperbaiki]
+    User([User request]) --> Orchestrator[Orchestrator Agent<br/>Plans and routes the work]
+    Orchestrator --> Researcher[Researcher Agent<br/>Gathers facts]
+    Orchestrator --> Writer[Writer Agent<br/>Drafts content]
+    Orchestrator --> Editor[Editor Agent<br/>Reviews and refines]
     Researcher --> Orchestrator
     Writer --> Orchestrator
     Editor --> Orchestrator
-    Orchestrator --> Result([Jawapan akhir])
+    Orchestrator --> Result([Final answer])
 ```
 
-### Dua peranan yang anda selalu lihat
+### Dua peranan yang sentiasa anda lihat
 
 | Peranan | Kerja | Contoh |
 |------|-----|---------|
-| **Pengarah** | Memutuskan *apa yang terjadi seterusnya* dan mengarahkan kerja antara ejen | "Pertama kaji, kemudian tulis, kemudian sunting" |
-| **Pakar** | Buat satu kerja fokus dan pulangkan hasil | Seorang "penyelidik" yang hanya kumpul fakta |
+| **Pengarah** | Memutuskan *apa yang berlaku seterusnya* dan mengarahkan kerja antara ejen | "Mula dengan penyelidikan, kemudian tulis, kemudian sunting" |
+| **Pakar** | Melakukan satu kerja khusus dan mengembalikan hasil | Seorang "penyelidik" yang hanya mengumpul fakta |
 
-### Adakah anda benar-benar perlukan banyak ejen?
+### Adakah anda benar-benar memerlukan berbilang ejen?
 
-Mula dengan mudah. Gunakan multi-ejen **hanya** bila salah satu yang berikut benar:
+Mulakan dengan mudah. Rujuk multi-ejen **hanya** apabila salah satu daripada ini benar:
 
-- ✅ Tugasan mempunyai **peringkat berbeza** yang memerlukan arahan berbeza (penyelidikan vs. tulis vs. semak)
-- ✅ Anda mahu pakar berjalan **selari** untuk jimat masa
-- ✅ Langkah-langkah berbeza perlu **alat atau sumber data berbeza**
-- ✅ Anda mahu setiap langkah boleh diuji dan debug secara bebas
+- ✅ Tugasan mempunyai **peringkat berbeza** yang mendapat manfaat daripada arahan berlainan (penyelidikan vs tulis vs semak)
+- ✅ Anda mahu pakar berjalan **secara selari** untuk menjimatkan masa
+- ✅ Langkah berbeza memerlukan **alat atau sumber data berlainan**
+- ✅ Anda mahu setiap langkah boleh diuji dan diperbetulkan secara **bersendirian**
 
-Jika tugasan anda hanyalah soal jawab atau panggilan alat ringkas, **ejen tunggal dengan alat** (Bab 2) lebih mudah, murah, dan senang dioperasi.
+Jika tugasan anda ialah satu soalan dan jawapan atau panggilan alat mudah, **ejen tunggal dengan alat** (Bab 2) lebih mudah, murah, dan senang dioperasikan.
 
-> **Petua untuk pemula:** "Lebih banyak ejen" bukan bermakna "lebih baik." Setiap ejen tambah kelewatan, kos, dan sesuatu baru yang perlu dipantau. Tambah ejen hanya bila masalah jelas berpecah kepada bahagian.
+> **Tip pemula:** "Lebih banyak ejen" bukan bermakna "lebih baik." Setiap ejen menambah kelewatan, kos, dan satu perkara baru untuk dipantau. Tambah ejen hanya apabila masalah jelas terbahagi kepada beberapa bahagian.
 
 ---
 
-## Dua Cara Membina Multi-Ejen di Azure
+## Dua Cara Membina Multi-Ejen pada Azure
 
-| Pendekatan | Apa dia | Sesuai untuk |
+| Pendekatan | Apa itu | Terbaik untuk |
 |----------|-----------|----------|
-| **Ejen tunggal + alat** | Satu ejen Foundry yang panggil fungsi/alat | Aliran kerja mudah, permulaan |
-| **Beberapa ejen berkoordinasi** | Beberapa ejen dengan seorang pengarah | Peringkat berbeza, kerja selari, kepakaran |
+| **Ejen tunggal + alat** | Satu ejen Foundry yang memanggil fungsi/alat | Aliran kerja sederhana, permulaan |
+| **Beberapa ejen berkoordinasi** | Beberapa ejen dengan pengarah | Peringkat berbeza, kerja selari, kepakaran |
 
-Pelajaran ini fokus pada pendekatan kedua menggunakan **templat sedia ada**, supaya anda dapat melihat sistem multi-ejen sebenar berjalan sebelum bina sendiri.
+Pelajaran ini menumpukan pada pendekatan kedua menggunakan **templat sedia ada**, supaya anda dapat melihat sistem multi-ejen sebenar berjalan sebelum membina sendiri.
 
 ---
 
-## Amali: Deploy Aplikasi Multi-Ejen Yang Berfungsi
+## Praktikal: Lancarkan Aplikasi Multi-Ejen Berfungsi
 
-Kita akan deploy **Penulis Kreatif Contoso**, contoh rasmi Azure yang menggunakan pelbagai ejen (penyelidik, penulis, penyunting) yang diatur bagi menghasilkan artikel. Ia adalah aplikasi multi-ejen pertama yang bagus kerana peranannya mudah difahami.
+Kami akan melancarkan **Penulis Kreatif Contoso**, sampel rasmi Azure yang mengkoordinasi ejen penyelidikan, produk, penulisan, dan penyuntingan untuk menghasilkan artikel. Sebelum meneruskan, periksa [prasyarat dan kos sampel](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): ia memerlukan kuota model, Azure AI Search, akses Bing Grounding, Python, Docker, dan hooks serasi Bash. Ketersediaan model dan rantau bergantung pada langganan anda; penempatan tidak dijamin hanya dengan memilih rantau tertentu.
 
 ### Langkah 1: Inisialisasi templat
 
 ```bash
-# Cipta folder kerja
+# Create a working folder
 mkdir creative-writer && cd creative-writer
 
-# Inisialisasi dari templat multi-ejen rasmi
-azd init --template contoso-creative-writer
+# Initialize from the official multi-agent template
+azd init --template Azure-Samples/contoso-creative-writer .
 ```
 
-> Layari lebih banyak templat multi-ejen bila-bila masa di [Galeri Awesome AZD AI](https://azure.github.io/awesome-azd/?tags=ai). Pilihan mesra pemula lain termasuk `get-started-with-ai-agents` dan `azure-ai-travel-agents`.
+> Layari lebih banyak templat multi-ejen bila-bila masa dalam [galeri Hebat AZD AI](https://azure.github.io/awesome-azd/?tags=ai). Pilihan mesra pemula lain termasuk `get-started-with-ai-agents` dan `azure-ai-travel-agents`.
 
-### Langkah 2: Autentikasi
+### Langkah 2: Sahkan identiti
 
 ```bash
-# Diperlukan untuk aliran kerja azd
+# Required for azd workflows
 azd auth login
+
+# Also required by this sample's Azure CLI hooks
+az login
 ```
 
-### Langkah 3: Cipta persekitaran
+### Langkah 3: Periksa persekitaran
 
 ```bash
-azd env new dev
+# init normally creates/selects an environment; confirm it before proceeding
+azd env list
+# Only if you need an additional environment:
+# azd env new dev
 ```
 
-### Langkah 4: Pratonton, kemudian deploy
+### Langkah 4: Pratonton, kemudian lancarkan
 
 ```bash
-# Lihat apa yang akan dibuat sebelum membelanjakan apa-apa (disyorkan)
+# See what will be created before spending anything (recommended)
 azd provision --preview
 
-# Sediakan infrastruktur dan pasang semua ejen dalam satu langkah
+# Provision infrastructure and deploy all agents in one step
 azd up
 ```
 
-`azd up` akan minta langganan dan rantau, kemudian sediakan sumber Azure dan deploy aplikasi. Deploy AI mungkin ambil masa lebih lama daripada app web ringkas—jika anda deploy model besar, boleh tambah masa timeout deploy:
+`azd up` akan meminta tetapan langganan dan rantau yang hilang, kemudian menyediakan sumber dan melancarkan aplikasi. Pratonton tidak menempah kuota atau menjamin kejayaan; hooks templat mungkin masih berjalan semasa pratonton penyediaan, jadi periksalah dahulu. Untuk melanjutkan masa azd menunggu setiap **penempatan perkhidmatan** (bukan penyediaan model):
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Berhati-hati tentang kos dan kapasiti:** Aplikasi multi-ejen deploy model AI yang menggunakan kuota dan menimbulkan kos. Jika `azd up` gagal kerana kuota model, lihat [Penyelesaian Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md) untuk pembaikan rantau dan kuota, dan Bab 6 [Perancangan Kapasiti](../chapter-06-pre-deployment/capacity-planning.md).
+Masa tamat henti menghentikan azd menunggu; ia tidak membatalkan penempatan dalam Azure. Periksa status sumber sebelum mencuba semula.
+
+> **Perhatian tentang kos dan kapasiti:** Aplikasi multi-ejen melancarkan model AI yang menggunakan kuota dan menimbulkan kos. Jika `azd up` gagal pada kuota model, rujuk [Selesaikan Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md) untuk pembetulan rantau dan kuota, serta Bab 6 [Perancangan Kapasiti](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Fahami Apa Yang Anda Deploy
+## Memahami Apa yang Anda Lancarkan
 
-Aplikasi multi-ejen biasa seperti ini sediakan satu set sumber Azure yang memetakan terus ke tanggungjawab dalam rajah di atas:
+Aplikasi multi-ejen tipikal seperti ini menyediakan satu set sumber Azure yang berkaitan secara langsung dengan tanggungjawab dalam rajah di atas:
 
-| Sumber | Kenapa ia ada |
+| Sumber | Sebab ia ada |
 |----------|----------------|
-| **Microsoft Foundry / Model** | Menghos model bahasa yang digunakan setiap ejen |
-| **Azure AI Search** | Memberi data berpijak kepada ejen penyelidik untuk carian |
-| **Container Apps** (atau App Service) | Menghos pengarah dan kod ejen |
-| **Cosmos DB** (dalam beberapa contoh) | Simpan state/memori bersama yang dikongsi antara ejen |
+| **Microsoft Foundry / Model** | Menempatkan model bahasa yang digunakan setiap ejen |
+| **Azure AI Search** | Memberi ejen penyelidik data berasas untuk mencari |
+| **Container Apps** (atau App Service) | Menempatkan pengarah dan kod ejen |
+| **Cosmos DB** (dalam beberapa sampel) | Menyimpan keadaan/memori berkongsi yang dipindahkan antara ejen |
 | **Application Insights** | Jejak permintaan *merentasi* ejen supaya anda boleh debug aliran |
 
 ### Bagaimana ejen berkomunikasi antara satu sama lain
 
-Dalam kebanyakan contoh multi-ejen azd, **pengarah dijalankan dalam kod aplikasi anda** (contoh, menggunakan kerangka seperti Semantic Kernel atau Microsoft Agent Framework). Pengarah memanggil setiap ejen pakar secara berturutan, menghantar hasil, dan menyusun jawapan akhir. Ejen berkongsi konteks melalui:
+Dalam kebanyakan sampel azd multi-ejen, **pengarah berjalan dalam kod aplikasi anda** (contohnya, menggunakan rangka kerja seperti Semantic Kernel atau Microsoft Agent Framework). Pengarah memanggil setiap ejen pakar satu persatu, menyampaikan keputusan, dan menyusun jawapan akhir. Ejen berkongsi konteks melalui:
 
-- **Panggilan fungsi/alat** — pengarah panggil pakar dan dapatkan hasil balik
-- **Memori kongsi** — pangkalan data (biasanya Cosmos DB) memegang state yang boleh dibaca oleh kedua-dua ejen
-- **Mesej/acara** — untuk pengkaitan longgar, ejen berkomunikasi melalui antrian atau Service Bus
+- **Panggilan fungsi/alat** — pengarah memanggil pakar dan mendapat keputusan kembali
+- **Memori berkongsi** — pangkalan data (sering Cosmos DB) menyimpan keadaan yang boleh dibaca kedua-dua ejen
+- **Mesej/acara** — untuk kopling yang lebih longgar, ejen berkomunikasi melalui barisan atau Service Bus
 
-> **Kenapa ini penting untuk debug:** kerana setiap langkah berasingan, Application Insights tunjukkan *ejen mana* yang lambat atau gagal. Itu sebab utama untuk pecahkan kerja antara ejen dari awal.
+> **Mengapa ini penting untuk debugging:** kerana setiap langkah adalah berasingan, Application Insights menunjukkan kepada anda *ejen* mana yang lambat atau gagal. Itu sebab utama membahagi kerja melalui ejen sejak awal lagi.
 
 ---
 
-## Sahkan Deploy
+## Sahkan Penempatan
 
-Pastikan sistem sebenarnya berfungsi sebelum teruskan:
+Sahkan sistem berfungsi sebelum meneruskan:
 
 ```bash
-# Paparkan titik akhir yang telah digunakan
+# Show the deployed endpoints
 azd show
 
-# Buka papan pemuka pemantauan aplikasi
+# Open the app's monitoring dashboard
 azd monitor
 
-# Jejak log jika ada sesuatu yang kelihatan tidak kena
+# Open Application Insights Logs (not a terminal log stream)
 azd monitor --logs
 ```
 
-Kemudian buka URL app dari `azd show` dan cuba permintaan yang menguji semua ejen (untuk Penulis Kreatif, minta tulis artikel pendek pada topik). Dalam carian transaksi Application Insights, anda harus lihat permintaan tersebar ke langkah penyelidik, penulis, dan penyunting.
+Kemudian buka URL aplikasi dari `azd show` dan minta artikel ringkas. Gunakan pandangan debug sampel untuk memeriksa aliran kerja ejen. Carian transaksi Application Insights boleh menunjukkan langkah individu hanya jika sampel menginstrument dan memautkannya; azd tidak menambah span ejen secara automatik.
 
 **Kriteria kejayaan:**
-- ✅ `azd show` senaraikan titik akhir yang boleh dicapai
-- ✅ Permintaan hasilkan keputusan yang jelas melalui pelbagai peringkat
-- ✅ Application Insights tunjuk jejak untuk lebih dari satu langkah ejen
+- ✅ `azd show` menyenaraikan endpoint yang boleh dicapai
+- ✅ Satu permintaan menghasilkan keputusan yang jelas melalui beberapa peringkat
+- ✅ Pandangan debug menunjukkan beberapa langkah ejen; jika penjejakan diaktifkan, sahkan telemetri yang sepadan selepas pencernaan
 
 ---
 
-## Sesuaikan: Tambah atau Laras Ejen
+## Sesuaikan: Tambah atau Laraskan Ejen
 
-Kerana setiap ejen hanya arahan plus alat, penyesuaian mudah:
+Kerana setiap ejen hanyalah arahan ditambah alat, penyesuaian boleh dicapai:
 
-1. **Cari takrif ejen** dalam templat (biasanya satu set fail dalam `prompts/`, `agents/`, atau `*.prompty`).
-2. **Laraskan arahan ejen** — contoh, suruh ejen penyunting patuhi nada atau jumlah perkataan tertentu.
-3. **Deploy semula hanya kod** (infrastruktur tidak berubah):
+1. **Cari definisi ejen** dalam templat (sering satu set fail `prompts/`, `agents/`, atau `*.prompty`).
+2. **Laraskan arahan ejen** — contohnya, beritahu ejen penyunting untuk menguatkuasakan nada atau bilangan perkataan tertentu.
+3. **Lancarkan semula hanya kod** (infrastruktur tidak berubah):
 
    ```bash
    azd deploy
    ```
 
-Untuk maju lagi dan bina ejen dari manifesto *anda sendiri*, guna sambungan ejen dan kitar hayat lengkapnya:
+Untuk melangkah lebih jauh dengan projek ejen Foundry *anda sendiri*, gunakan inisialisasi interaktif sambungan ejen:
 
 ```bash
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
-azd ai agent invoke      # ujian, dengan masa tindak balas
+azd ai agent invoke      # test, with response timing
 ```
 
-Lihat [Bab 2: Ejen](../chapter-02-ai-development/agents.md) dan [rujukan AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk kitar hayat penuh ejen (`invoke`, `eval generate`, `optimize`, `delete`).
+Lihat [Bab 2: Ejen](../chapter-02-ai-development/agents.md) dan [rujukan AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk kitar hayat lengkap: ejen `invoke`, aliran kerja sambungan penilaian berasingan `azd ai eval`, ejen `optimize`, dan ejen `delete`.
 
 ---
 
 ## Bersihkan
 
-Aplikasi multi-ejen jalankan beberapa perkhidmatan berbayar. Bongkar semuanya bila sudah selesai:
+Aplikasi multi-ejen menjalankan beberapa perkhidmatan yang dikenakan bayaran. Bongkar semuanya apabila selesai:
 
 ```bash
-azd down --force --purge
+# Review the resources and confirm deletion interactively
+azd down
 ```
 
-Bendera `--purge` juga membuang sumber AI yang dipadam lembut (contoh Foundry/Azure AI Services account) supaya tidak menghalang deploy masa depan atau terus menimbulkan kos.
+Pemadaman adalah merosakkan. Untuk makmal sekali guna, `azd down --force --purge` melangkau pemadaman dan pengesahan penghapusan lembut yang disokong; penghapusan tidak boleh dipulihkan di mana disokong dan boleh disekat oleh perlindungan penghapusan. Pemadaman lembut adalah kebimbangan pemulihan/penamaan semula, bukan bukti caj berterusan. Periksa sumber tertahan dan bil selepas pembersihan.
 
 ---
 
-## Nota tentang Sistem Multi-Ejen Produksi
+## Nota Tentang Sistem Multi-Ejen Dalam Produksi
 
-[Penyelesaian Multi-Ejen Runcit](../../examples/retail-scenario.md) dalam repo ini adalah **cetakan seni bina**, bukan templat satu arahan—ia mendokumentasi bagaimana sistem runcit produksi *boleh* dibina (dan secara jelas mengatakan binaan penuh adalah usaha besar). Gunakan ia sebagai rujukan reka bentuk *selepas* anda deploy contoh yang berfungsi di sini. Untuk kebimbangan produksi (ketahanan, kos, pemantauan, tadbir urus), terus ke [Bab 8: Amalan AI Produksi](../chapter-08-production/production-ai-practices.md).
+Penyelesaian [Retail Multi-Agent](../../examples/retail-scenario.md) dalam repo ini adalah **rangka seni bina**, bukan templat satu perintah—ia mendokumentasikan bagaimana sistem runcit produksi *akan* dibina (dan dengan jelas bahawa binaan penuh adalah usaha yang besar). Gunakannya sebagai rujukan reka bentuk *selepas* anda melancarkan contoh yang berfungsi di sini. Untuk kebimbangan produksi (ketahanan, kos, pemantauan, tadbir urus), teruskan ke [Bab 8: Amalan AI Produksi](../chapter-08-production/production-ai-practices.md).
 
 ---
 
-## Rumusan
+## Ringkasan
 
-- Sistem multi-ejen pecahkan kerja antara pakar yang dikordinasi oleh pengarah.
-- Gunakannya hanya bila tugasan ada peringkat berbeza, kerja selari, atau alat berbeza setiap langkah—jika tidak, pilih ejen tunggal.
-- Aliran kerja azd tidak berubah: `azd init` → `azd up` → uji → `azd down`.
-- Templat sebenar seperti `contoso-creative-writer` membolehkan anda lihat dan sesuaikan aplikasi multi-ejen yang berfungsi hari ini.
-- Jejak Application Insights merentasi ejen adalah antara manfaat praktikal terbesar reka bentuk multi-ejen.
+- Sistem pelbagai ejen membahagikan kerja antara pakar yang diatur oleh seorang pengatur cara.
+- Gunakannya hanya apabila tugasan mempunyai peringkat yang berbeza, keparalelan, atau alat yang berbeza bagi setiap langkah—jika tidak, lebih baik guna satu ejen sahaja.
+- Aliran kerja azd tidak berubah: `azd init` → `azd up` → ujian → `azd down`.
+- Templat sebenar seperti `contoso-creative-writer` membolehkan anda melihat dan menyesuaikan aplikasi pelbagai ejen yang berfungsi hari ini.
+- Penjejakan Application Insights merentas ejen adalah salah satu manfaat praktikal terbesar reka bentuk pelbagai ejen.
 
 ---
 
@@ -240,13 +249,13 @@ Bendera `--purge` juga membuang sumber AI yang dipadam lembut (contoh Foundry/Az
 | Arah | Pelajaran |
 |-----------|--------|
 | **Sebelumnya** | [Bab 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
-| **Seterusnya** | [Corak Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Seterusnya** | [Corak Penyelarasan](../chapter-06-pre-deployment/coordination-patterns.md) |
 
 ## 📖 Sumber Berkaitan
 
 - [Panduan Ejen AI](../chapter-02-ai-development/agents.md)
-- [Corak Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md)
-- [Amalan AI Produksi](../chapter-08-production/production-ai-practices.md)
+- [Corak Penyelarasan](../chapter-06-pre-deployment/coordination-patterns.md)
+- [Amalan AI Pengeluaran](../chapter-08-production/production-ai-practices.md)
 - [Penyelesaian Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

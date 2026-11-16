@@ -1,22 +1,22 @@
 # Kapitola 2: Vývoj s prioritou AI
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1-2 hodiny | **⭐ Zložitosť**: Stredne pokročilý
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 4-5 hodín vrátane workshopu | **⭐ Zložitosť**: Stredne pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola sa zameriava na nasadzovanie aplikácií poháňaných AI pomocou Azure Developer CLI a služieb Microsoft Foundry. Od jednoduchých AI chat aplikácií po inteligentných agentov s nástrojmi.
+Táto kapitola sa zameriava na nasadzovanie aplikácií poháňaných AI pomocou nástroja Azure Developer CLI a služieb Microsoft Foundry. Od jednoduchých AI chatovacích aplikácií po inteligentných agentov s nástrojmi.
 
-> **Poznámka k overeniu (2026-07-13):** Tok príkazov a návody k rozšíreniam v tejto kapitole boli preskúmané vzhľadom na `azd` `1.27.1` a aktuálne vydanie rozšírenia AI agentov v preview `azure.ai.agents` `1.0.0-beta.5`. Ak používate staršiu verziu AZD, najprv ju aktualizujte a potom pokračujte v cvičeniach.
+> **Revizia vydania (2026-11-04):** AI CLI návod bol overený v publikovanej dokumentácii/zdrojoch `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23` a `azure.ai.evaluations` `1.0.0-beta.2`. Použite `azd >= 1.37.0` pre kombinovaný pracovný tok. Hodnotenia teraz používajú samostatný namespace `azd ai eval`; pozrite si [zmeny v vydaní a pokyny na migráciu](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Toto nie je validácia živého nasadenia.
 
-## Ciele učenia
+## Výukové ciele
 
 Po dokončení tejto kapitoly budete:
-- Nasadzovať AI aplikácie pomocou predpripravených AZD šablón
-- Rozumieť integrácii Microsoft Foundry s AZD
-- Konfigurovať a prispôsobovať AI agentov s nástrojmi
-- Nasadzovať RAG (Retrieval-Augmented Generation) aplikácie
+- Nasadzovať AI aplikácie pomocou predpripravených šablón AZD
+- Pochopiť integráciu Microsoft Foundry s AZD
+- Konfigurovať a prispôsobiť AI agentov s nástrojmi
+- Nasadzovať aplikácie RAG (Retrieval-Augmented Generation)
 
 ---
 
@@ -25,25 +25,27 @@ Po dokončení tejto kapitoly budete:
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
 | 1 | [Integrácia Microsoft Foundry](microsoft-foundry-integration.md) | Prepojenie AZD so službami Foundry | 30 min |
-| 2 | [Sprievodca AI agentmi](agents.md) | Nasadenie inteligentných agentov s nástrojmi | 45 min |
-| 3 | [Nasadenie AI modelov](ai-model-deployment.md) | Nasadenie a konfigurácia AI modelov | 30 min |
-| 4 | [AI workshop laboratórium](ai-workshop-lab.md) | Prakticky: Pripravte vaše AI riešenie pre AZD | 60 min |
+| 2 | [Sprievodca AI agentmi](agents.md) | Nasadzovanie inteligentných agentov s nástrojmi | 45 min |
+| 3 | [Nasadenie AI modelu](ai-model-deployment.md) | Nasadenie a konfigurácia AI modelov | 30 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Prakticky: Preskúmajte šablónu a naplánujte konverziu | 2-3 hodiny |
 
 ---
 
 ## 🚀 Rýchly štart
 
+Vyberte si jednu možnosť v novom prázdnom adresári. Koncový `.` inicializuje aktuálny adresár; inak AZD môže vytvoriť podadresár bez zmeny pracovného adresára shellu.
+
 ```bash
-# Možnosť 1: RAG Chat aplikácia
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# Možnosť 2: AI agenti
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# Možnosť 3: Rýchla chat aplikácia
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
@@ -53,21 +55,23 @@ azd up
 
 | Šablóna | Popis | Služby |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat s citáciami | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent s nástrojmi | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Základný AI chat | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat s citáciami | OpenAI + AI Vyhľadávanie |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent s nástrojmi | Služba AI agentov |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Základný AI chat | OpenAI + Kontajnerové aplikácie |
 
 ---
 
-## 💰 Informácie o nákladoch
+## 💰 Povšimnutie nákladov
+
+Toto sú orientačné rozsahy, nie ceny alebo limity; objem modelu, SKU vyhľadávania/výpočtu, región a voliteľné funkcie môžu tieto hodnoty prekročiť. Pred poskytnutím si skontrolujte aktuálne cenové pokyny zvoleného príkladu.
 
 | Prostredie | Odhadované mesačné náklady |
-|-------------|--------------------------|
-| Vývoj | 80-150 $ |
-| Testovacie prostredie | 150-300 $ |
-| Produkcia | 300-3 500+ $ |
+|-------------|----------------------|
+| Vývoj | $80-150 |
+| Testovanie | $150-300 |
+| Produkcia | $300-3,500+ |
 
-**Tip:** Po testovaní spustite `azd down`, aby ste sa vyhli poplatkom.
+**Tip:** Spustite `azd down` po testovaní, aby ste sa vyhli poplatkom.
 
 ---
 

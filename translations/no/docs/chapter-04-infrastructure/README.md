@@ -1,20 +1,20 @@
 # Kapittel 4: Infrastruktur som kode og utrulling
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 1-1.5 timer | **⭐ Vanskelighetsgrad**: Middels
+**📚 Kurs**: [AZD For Nybegynnere](../../README.md) | **⏱️ Varighet**: 2-3 timer lesing; beregn ekstra tid til utrullingsøvelser | **⭐ Vanskelighetsgrad**: Middels
 
 ---
 
 ## Oversikt
 
-Dette kapittelet dekker Infrastruktur som kode (IaC)-mønstre med Bicep-maler, ressursprovisjonering og utrullingsstrategier ved bruk av Azure Developer CLI.
+Dette kapittelet dekker mønstre for Infrastruktur som kode (IaC) med Bicep-maler, ressursprovisjonering og utrullingsstrategier med Azure Developer CLI.
 
-> Validert mot `azd 1.27.1` i juli 2026.
+> Mål for gjennomgang av kommandoer og konfigurasjon: `azd 1.37.2` (November 2026). Live Azure-provisjonering ble ikke kjørt under gjennomgangen.
 
 ## Læringsmål
 
 Ved å fullføre dette kapittelet vil du:
-- Forstå Bicep-malens struktur og syntaks
-- Provisjonere Azure-ressurser med `azd provision`
+- Forstå Bicep-malenes struktur og syntaks
+- Provisionere Azure-ressurser med `azd provision`
 - Rulle ut applikasjoner med `azd deploy`
 - Implementere blue-green og rullerende utrullingsstrategier
 
@@ -24,28 +24,31 @@ Ved å fullføre dette kapittelet vil du:
 
 | # | Leksjon | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Azure ressursstyring med AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Applikasjonsutrullingsstrategier | 45 min |
-| 3 | [Authoring Your Own Template](custom-templates.md) | Bygg og publiser gjenbrukbare azd-maler | 30 min |
+| 1 | [Provisionering av ressurser](provisioning.md) | Azure ressursadministrasjon med AZD | 45 min |
+| 2 | [Utrullingsguide](deployment-guide.md) | Applikasjonsutrullingsstrategier | 45 min |
+| 3 | [Skrive din egen mal](custom-templates.md) | Bygg og publiser gjenbrukbare azd-maler | 30 min |
 
 ---
 
-## 🚀 Kom i gang raskt
+## 🚀 Komme i gang raskt
 
 ```bash
-# Initialiser fra mal
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Forhåndsvis hva som vil bli opprettet
+# Preview what will be created
 azd provision --preview
 
-# Tilrettelegg kun infrastruktur
+# Provision infrastructure only
 azd provision
 
-# Distribuer kun kode
+# Deploy code only
 azd deploy
 
-# Eller begge sammen
+# Or both together
 azd up
 ```
 
@@ -68,14 +71,14 @@ my-project/
 
 ---
 
-## 🔧 Viktige kommandoer
+## 🔧 Essensielle kommandoer
 
 | Kommando | Beskrivelse |
 |---------|-------------|
 | `azd init` | Initialiser prosjekt |
 | `azd provision` | Opprett Azure-ressurser |
 | `azd deploy` | Rull ut applikasjonskode |
-| `azd up` | provisjoner + rull ut |
+| `azd up` | provisjonér + deployer |
 | `azd down` | Slett alle ressurser |
 
 ---
@@ -91,9 +94,9 @@ my-project/
 
 ## 📖 Relaterte ressurser
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
-- [Container App Examples](../../examples/container-app/README.md)
-- [Database App Example](../../examples/database-app/README.md)
+- [Sjekkliste før utrulling](../chapter-06-pre-deployment/README.md)
+- [Container app-eksempler](../../examples/container-app/README.md)
+- [Database app-eksempel](../../examples/database-app/README.md)
 
 ---
 

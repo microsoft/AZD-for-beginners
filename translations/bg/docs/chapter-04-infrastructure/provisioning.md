@@ -1,43 +1,45 @@
-# Въвеждане на Azure ресурси с AZD
+# Осигуряване на ресурси в Azure с AZD
 
-**Навигация в глава:**
-- **📚 Начало на курса**: [AZD For Beginners](../../README.md)
-- **📖 Текуща глава**: Глава 4 - Infrastructure as Code & Deployment
-- **⬅️ Предишна**: [Deployment Guide](deployment-guide.md)
-- **➡️ Следваща глава**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
-- **🔧 Свързани**: [Chapter 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
+**Навигация в главата:**
+- **📚 Начало на курса**: [AZD за начинаещи](../../README.md)
+- **📖 Текуща глава**: Глава 4 - Инфраструктура като код и разгръщане
+- **⬅️ Предишна**: [Ръководство за разгръщане](deployment-guide.md)
+- **➡️ Следваща глава**: [Глава 5: Мулти-агентни AI решения](../../examples/retail-scenario.md)
+- **🔧 Свързани**: [Глава 6: Предварителна валидация преди разгръщане](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Въведение
 
-Това изчерпателно ръководство покрива всичко, което трябва да знаете за предоставянето и управлението на Azure ресурси с помощта на Azure Developer CLI. Научете как да прилагате модели Infrastructure as Code (IaC) от създаване на основни ресурси до напреднали корпоративни архитектури, използвайки Bicep, ARM templates, Terraform и Pulumi.
+Това ръководство обхваща осигуряване и управление на ресурси в Azure с помощта на Azure Developer CLI и вградените му провайдъри Bicep и Terraform.
 
-## Учебни цели
+> Прегледано спрямо `azd 1.37.2` (ноември 2026). Ако не е посочено друго, примерите с Bicep, Terraform и скриптове са **илюстративни фрагменти**, а не пълен шаблон. Обединете ги в проект, който предоставя посочените параметри, модули, идентичности, мрежова конфигурация и код на приложението. В този преглед разполагането в Azure не е изпълнено.
 
-След завършване на това ръководство вие ще:
-- Овладеете принципите на Infrastructure as Code и предоставянето на Azure ресурси
-- Разберете множество доставчици на IaC, поддържани от Azure Developer CLI
-- Проектирате и прилагате Bicep шаблони за общи архитектури на приложения
-- Конфигурирате параметри на ресурси, променливи и настройки специфични за среди
-- Прилагате напреднали инфраструктурни модели, включително мрежи и сигурност
-- Управлявате жизнения цикъл на ресурсите, актуализации и разрешаване на зависимости
+## Цели за обучение
+
+След завършване на това ръководство ще можете:
+- Да овладеете принципите на Infrastructure as Code и осигуряването на ресурси в Azure
+- Да разберете няколко IaC провайдъра, поддържани от Azure Developer CLI
+- Да проектирате и имплементирате Bicep шаблони за често срещани архитектури на приложения
+- Да конфигурирате параметри, променливи и настройки специфични за околната среда
+- Да приложите напреднали инфраструктурни модели, включително мрежи и сигурност
+- Да управлявате жизнения цикъл на ресурсите, актуализации и разрешаване на зависимости
 
 ## Резултати от обучението
 
-След завършване ще можете да:
-- Проектирате и предоставяте Azure инфраструктура, използвайки Bicep и ARM шаблони
-- Конфигурирате сложни многослойни архитектури с правилни зависимости между ресурсите
-- Прилагате параметризирани шаблони за множество среди и конфигурации
-- Отстранявате проблеми при предоставянето на инфраструктура и разрешавате неуспешни деплойменти
-- Прилагате принципите на Azure Well-Architected Framework при проектиране на инфраструктура
-- Управлявате актуализации на инфраструктурата и прилагате стратегии за версиониране на инфраструктурата
+След завършване ще можете:
+- Да проектирате и осигурявате инфраструктура в Azure с Bicep и ARM шаблони
+- Да конфигурирате сложни многослойни архитектури с правилни зависимости между ресурсите
+- Да имплементирате параметризирани шаблони за различни среди и конфигурации
+- Да отстранявате проблеми с осигуряването на инфраструктура и да разрешавате неуспешни разгръщания
+- Да прилагате принципите на Azure Well-Architected Framework при проектиране на инфраструктура
+- Да управлявате актуализации на инфраструктурата и да прилагате стратегии за версиониране
 
-## Преглед на предоставяне на инфраструктура
+## Обзор на осигуряването на инфраструктура
 
-Azure Developer CLI поддържа множество доставчици на Infrastructure as Code (IaC):
-- **Bicep** (препоръчително) - домейн-специфичен език на Azure
-- **ARM Templates** - JSON-базирани шаблони на Azure Resource Manager
-- **Terraform** - инструмент за инфраструктура за множество облаци
-- **Pulumi** - модерна инфраструктура като код с програмни езици
+Azure Developer CLI поддържа няколко провайдъра за Infrastructure as Code (IaC):
+- **Bicep** (препоръчително) - специфичен език за Azure
+- **ARM шаблони** - Bicep се компилира в ARM; суров ARM JSON не е отделен вграден `infra.provider`
+- **Terraform** - инструмент за инфраструктура в множество облаци
+- **Разширителни провайдъри** - изискват отделно инсталиране на разширение и документирана конфигурация; не приемайте, че всеки низ на провайдър е поддържан
 
 ## Разбиране на Azure ресурсите
 
@@ -49,18 +51,19 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Чести Azure услуги за приложения
-- **Compute**: App Service, Container Apps, Functions, Virtual Machines
-- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
+### Често използвани Azure услуги за приложения
+- **Изчисления**: App Service, Container Apps, Functions, Виртуални машини
+- **Съхранение**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Мрежи**: Virtual Network, Application Gateway, CDN
+- **Сигурност**: Key Vault, Application Insights, Log Analytics
+- **AI/ML**: Azure AI услуги, Azure OpenAI, Azure Machine Learning
 
 ## Bicep инфраструктурни шаблони
 
 ### Основна структура на Bicep шаблон
 ```bicep
-// infra/main.bicep
+// infra/modules/web.bicep - resource-group-scoped module fragment
+targetScope = 'resourceGroup'
 @description('The name of the environment')
 param environmentName string
 
@@ -75,11 +78,6 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var tags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
-}
-
-// Resource Group (created automatically by azd)
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
-  name: '${applicationName}-${environmentName}-rg'
 }
 
 // App Service Plan
@@ -100,11 +98,14 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'web' })
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
@@ -128,6 +129,8 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
+За пълен azd проект, извикайте този модул от `infra/main.bicep` с обхват на абонамент, който създава етикетирана ресурсна група и предава обхвата й. Съответствайте с `environmentName`/`location` в `main.parameters.json`. Етикетът `azd-service-name: web` свързва ресурса с `services.web`; произволните имена на изходи сами по себе си не конфигурират откриване на услуги.
+
 ### Напреднали Bicep модели
 
 #### Модулна инфраструктура
@@ -142,11 +145,14 @@ param appSettings array = []
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: name
   location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: planId
     siteConfig: {
       appSettings: appSettings
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
     }
     httpsOnly: true
@@ -179,7 +185,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Условно създаване на ресурси
+#### Условно създаване на ресурс
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -202,11 +208,11 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 
 ## 🌐 Използване на Terraform с azd
 
-Bicep е по подразбиране за azd, но azd също поддържа **Terraform** — полезно, ако вашият екип вече го използва или управлявате мултиоблачна инфраструктура. Работният поток на azd (`azd up`, `azd provision`, `azd down`) е идентичен; единствено езикът за инфраструктура и структурата на папките се променят.
+Bicep е по подразбиране в azd, но azd също поддържа **Terraform** – полезен, ако вашият екип вече го стандартизира или управлявате мултиоблачна инфраструктура. Работният процес на azd (`azd up`, `azd provision`, `azd down`) е идентичен; променят се само езикът на инфраструктура и структурата на папките.
 
-### Как да укажете на azd да използва Terraform
+### Кажете на azd да използва Terraform
 
-Добавете секция `infra` в `azure.yaml`, сочеща към Terraform доставчика:
+Добавете секция `infra` към `azure.yaml`, сочеща към Terraform провайдъра:
 
 ```yaml
 # azure.yaml
@@ -221,9 +227,9 @@ services:
     host: containerapp
 ```
 
-### Структура на папките за Terraform
+### Структура на папката за Terraform
 
-С Terraform доставчика вашата папка `infra/` използва `.tf` файлове вместо Bicep:
+С Terraform провайдър, папката `infra/` използва `.tf` файлове вместо Bicep:
 
 ```
 infra/
@@ -234,7 +240,9 @@ infra/
 └── main.tfvars.json   # values azd injects per environment
 ```
 
-### Минимален `main.tf`
+### `main.tf` фрагмент
+
+Това създава само ресурсна група и план, а не разгръщаема услуга. Трябва също да декларирате входни променливи, съвместим `azurerm` провайдър, уеб приложението и съответствия на тагове/имена на ресурсите.
 
 ```hcl
 # infra/main.tf
@@ -253,9 +261,9 @@ resource "azurerm_service_plan" "plan" {
 }
 ```
 
-### Как azd се свързва с вашите Terraform outputs
+### Как azd се свързва с изходите на Terraform
 
-azd чете Terraform **outputs**, за да научи вашите крайни точки и да подаде стойности на средата обратно в приложението ви. Имената на output-ите имат значение — azd търси специфични:
+azd чете Terraform **outputs** като стойности на околната среда. Този фрагмент предполага, че сте дефинирали `azurerm_linux_web_app.web`; откриването на услуги още изисква съответстващо име или таг `azd-service-name`:
 
 ```hcl
 # infra/outputs.tf
@@ -264,111 +272,48 @@ output "AZURE_LOCATION" {
 }
 
 output "SERVICE_WEB_ENDPOINT_URL" {
-  value = azurerm_linux_web_app.web.default_hostname
+  value = "https://${azurerm_linux_web_app.web.default_hostname}"
 }
 ```
 
-> **Важно:** azd използва таг `azd-env-name` и `AZURE_*` outputs, за да проследява ресурсите по среди. Винаги тагвайте вашата resource group с `"azd-env-name" = var.environment_name`, за да може `azd down` да намери и премахне всичко.
+> **Важно:** azd използва тага `azd-env-name` и изходите `AZURE_*`, за да проследява ресурсите на среда. Винаги маркирайте вашата ресурсна група с `"azd-env-name" = var.environment_name`, за да може `azd down` да намери и премахне всичко.
 
-### Деплой с Terraform
+### Разгръщане с Terraform
 
-Командите са точно същите като при Bicep:
-
-```bash
-azd auth login
-azd env new dev
-azd provision --preview   # azd изпълнява 'terraform plan' под капака
-azd up                    # осигуряване + внедряване
-azd down --force          # унищожава ресурсите, управлявани от Terraform
-```
-
-> **Предварително условие:** Terraform трябва да е инсталиран и в `PATH`. azd управлява Terraform *workflow*, но не инсталира Terraform вместо вас. За състоянието, azd по подразбиране използва локално състояние; за екипи конфигурирайте отдалечен backend (например Azure Storage backend) в `provider.tf`.
-
-За пълни, изпълними стартери базирани на Terraform, разгледайте [Awesome AZD gallery](https://azure.github.io/awesome-azd/) и филтрирайте за Terraform, или вижте официалната [azd Terraform документация](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
-
-## 🧩 Използване на Pulumi с azd
-
-Ако вашият екип пише инфраструктура на общо-практически език (TypeScript, Python, Go или C#) вместо DSL, azd също поддържа **Pulumi**. Както при Terraform, работният поток `azd up` / `azd provision` / `azd down` остава непроменен — само инструментите за инфраструктура и структурата на папките се различават.
-
-### Как да укажете на azd да използва Pulumi
-
-```yaml
-# azure.yaml
-name: my-pulumi-app
-infra:
-  provider: pulumi      # default is "bicep"
-  path: infra           # folder containing your Pulumi program
-services:
-  web:
-    project: ./src
-    language: js
-    host: containerapp
-```
-
-### Структура на папките за Pulumi
-
-```
-infra/
-├── Pulumi.yaml          # project definition
-├── Pulumi.dev.yaml      # stack config (one per environment)
-├── index.ts             # your resource program (or __main__.py, main.go, etc.)
-├── package.json         # dependencies (for TypeScript)
-└── tsconfig.json
-```
-
-### Минимален `index.ts`
-
-```typescript
-import * as azure from "@pulumi/azure-native";
-import * as pulumi from "@pulumi/pulumi";
-
-const environmentName = pulumi.getStack();
-
-// Маркирайте всеки ресурс, така че azd да може да го проследява и да го премахва
-const tags = { "azd-env-name": environmentName };
-
-const rg = new azure.resources.ResourceGroup("rg", {
-  resourceGroupName: `rg-${environmentName}`,
-  tags,
-});
-
-// azd чете тези изходни данни обратно във вашата среда
-export const AZURE_LOCATION = rg.location;
-export const SERVICE_WEB_ENDPOINT_URL = "https://...";
-```
-
-### Stacks съответстват на azd среди
-
-Pulumi организира деплойментите в **stacks**, а azd съпоставя всяка azd среда със Pulumi stack със същото име. Когато изпълните `azd env new staging`, azd избира (или създава) Pulumi stack `staging`. Същите правила за тагване `azd-env-name` и `AZURE_*` outputs важат, така че `azd down` може да намери и премахне всичко.
-
-### Деплой с Pulumi
+Командите са същите като при Bicep:
 
 ```bash
 azd auth login
 azd env new dev
-azd provision --preview   # azd изпълнява 'pulumi preview' под капака
-azd up                    # осигуряване + внедряване
-azd down --force          # изпълнява 'pulumi destroy'
+azd provision --preview   # azd runs 'terraform plan' under the hood
+azd up                    # provision + deploy
+azd down --force          # destroys the Terraform-managed resources
 ```
 
-> **Предварително условие:** Pulumi трябва да е инсталиран и в `PATH`, и ще ви трябва бекенд за състоянието (Pulumi Cloud или самоуправляем бекенд като Azure Blob Storage). azd управлява Pulumi *workflow*, а не инсталацията. Вижте официалната [azd Pulumi документация](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+> **Изискване:** Terraform трябва да е инсталиран и в `PATH`. azd управлява *работния процес* на Terraform, но не го инсталира вместо вас. По подразбиране azd използва локално състояние; за екипи настройте отдалечен бекенд (напр. Azure Storage бекенд) в `provider.tf`.
+
+За пълни, работещи Terraform стартъри, разгледайте [Awesome AZD галерията](https://azure.github.io/awesome-azd/) с филтър за Terraform, или вижте официалната [azd документация за Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+
+## 🧩 Други инфраструктурни инструменти
+
+Pulumi не е вграден провайдър за осигуряване в azd 1.37.2. Самото задаване на `infra.provider: pulumi` не установява работеща интеграция, а `azd env new` не създава или избира Pulumi стек автоматично. Ако използвате друг IaC инструмент, следвайте документацията на проверен разширителен провайдър или управлявайте жизнения му цикъл изрично във вашия работен процес. Този курс не предоставя и не валидира Pulumi провайдър.
 
 ## 🎯 Избор на хост за вашата услуга
 
-Полето `host` в `azure.yaml` решава къде ще се изпълнява вашият код. azd поддържа няколко хоста — изборът на правилния е по-важен от езика за инфраструктура. Ето едно подходящо за начинаещи сравнение:
+Полето `host` в `azure.yaml` определя къде ще се изпълнява кода ви. azd поддържа няколко хоста — изборът му е по-важен от езика на инфраструктурата. Ето сравнение, подходящо за начинаещи:
 
-| `host` value | Best for | Why |
+| Стойност `host` | Най-подходящо за | Защо |
 |--------------|----------|-----|
-| `appservice` | Traditional web apps and APIs | Simplest PaaS; no containers required |
-| `staticwebapp` | Front-end SPAs (React, Vue, Angular) | Global CDN + free SSL, built-in API support |
-| `function` | Event-driven and serverless workloads | Scale-to-zero, pay-per-execution |
-| `containerapp` | Containerized microservices | Serverless containers, scale-to-zero, built-in ingress |
-| `aks` | Complex orchestration needs | Full Kubernetes control when you truly need it |
-| `springapp` | Java Spring Boot apps | Managed Azure Spring Apps runtime tuned for Spring |
+| `appservice` | Традиционни уеб приложения и API-та | Най-простият PaaS; не са необходими контейнери |
+| `staticwebapp` | Front-end SPA (React, Vue, Angular) | Глобален CDN + безплатен SSL, вградена поддръжка на API |
+| `function` | Събитийно-управлявани и безсървърни задачи | Автоматично скалиране до нула, плащане на изпълнение |
+| `containerapp` | Контейнеризирани микросервизи | Безсървърни контейнери, автоматично скалиране до нула, вграден вход |
+| `aks` | Сложни оркестрационни нужди | Пълен контрол върху Kubernetes при реална необходимост |
+| `springapp` | Съществуващи разгръщания на Azure Spring Apps | Стари цели; услугата се прекратява на 31 март 2028 и е затворена за нови клиенти |
 
 ### Кога да изберете AKS
 
-**Azure Kubernetes Service (`host: aks`)** ви дава пълната мощ на Kubernetes — персонализирани контролери, service mesh, сложни мрежови конфигурации и фино управление на планирането. Тази мощ идва с оперативни разходи: вие управлявате node пулове, ъпгрейди и мрежата на клъстера.
+**Azure Kubernetes Service (`host: aks`)** ви дава пълната мощ на Kubernetes — персонализирани контролери, service mesh, сложни мрежи и прецизно планиране. Тази мощ е придружена от оперативна сложност: вие управлявате node pool-ове, ъпгрейди и мрежи в кластера.
 
 ```yaml
 services:
@@ -378,11 +323,11 @@ services:
     host: aks          # deploys to an existing AKS cluster
 ```
 
-> **Започнете по-просто, ако можете.** За повечето микроуслуги, **Container Apps** ви дава контейнери, авто-скалиране и scale-to-zero без управление на клъстер. Изберете AKS само когато имате нужда от Kubernetes-специфични функции.
+> **Започнете по-просто ако можете.** За повечето микросервизи, **Container Apps** предоставя контейнери, авто-скалиране и скалиране до нула без нужда от управление на клъстър. Изберете AKS само ако имате нужда от специфични Kubernetes функции.
 
 ### Кога да използвате Azure Spring Apps
 
-**Azure Spring Apps (`host: springapp`)** е управляван runtime, специално създаден за Spring Boot. Той обработва service discovery, config server и blue-green деплойменти, така че Java екипите да не управляват собствена инфраструктура.
+**Azure Spring Apps (`host: springapp`)** е управлявана среда, специално създадена за Spring Boot. Тя осигурява service discovery, конфигурационен сървър и blue-green разгръщане, така че Java екипите не трябва да управляват своята инфраструктура.
 
 ```yaml
 services:
@@ -392,9 +337,9 @@ services:
     host: springapp
 ```
 
-> Използвайте `springapp`, когато имате съществуващи Spring Boot приложения и искате runtime, оптимизиран за тях. За нови контейнеризирани Java приложения без Spring-специфични нужди, `containerapp` често е по-простият избор.
+> Не избирайте Azure Spring Apps за нов проект за начинаещи: услугата е затворена за нови клиенти и [се прекратява на 31 март 2028](https://learn.microsoft.com/azure/spring-apps/basic-standard/retirement-announcement). Предпочитайте поддържани алтернативи като Container Apps и планирайте миграция за съществуващите разгръщания.
 
-## 🗃️ Предоставяне на бази данни
+## 🗃️ Осигуряване на бази данни
 
 ### Cosmos DB
 ```bicep
@@ -446,6 +391,8 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 ```
 
 ### PostgreSQL
+**Изисквания към фрагмента:** декларирайте `@secure() param databasePassword string` и използвайте силно подадена стойност. Изберете публичен достъп **или** интегрирайте делегирана подсекция/частен DNS по-долу; двата фрагмента не се свързват автоматично помежду си.
+
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -492,6 +439,8 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
+Правилото `0.0.0.0` позволява връзки от Azure услуги извън вашия абонамент. Това не е частна мрежа; предпочитайте ограничен мрежов дизайн за реални натоварвания.
+
 ## 🔒 Сигурност и управление на тайни
 
 ### Интеграция с Key Vault
@@ -536,7 +485,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Конфигурация на Managed Identity
+### Конфигурация на управлявана идентичност
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -553,14 +502,16 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
           value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
         }
         {
-          name: 'AZURE_CLIENT_ID'
-          value: webApp.identity.principalId
+          name: 'NODE_ENV'
+          value: 'production'
         }
       ]
     }
   }
 }
 ```
+
+За системно присвоена идентичност не задавайте `AZURE_CLIENT_ID` на нейния principal ID. Потребителската идентичност използва **client ID**, а не object/principal ID. Препратката към Key Vault също изисква роля и достъп до мрежата за идентичността на приложението.
 
 ## 🌍 Мрежи и свързаност
 
@@ -628,6 +579,8 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 ```
 
 ### Application Gateway с SSL
+**Незавършен архитектурен фрагмент, не разгръщаем gateway:** добавете посветен `gateway-subnet` към VNet плюс backend пулове, HTTP настройки, слушатели, правила за маршрутизиране с приоритети и TLS сертификат (или упълномощена референция към Key Vault). Само отваряне на порт 443 не конфигурира HTTPS.
+
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -721,7 +674,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Персонализирани метрики и аларми
+### Потребителски метрики и аларми
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -731,7 +684,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
     description: 'Alert when CPU usage is high'
     severity: 2
     enabled: true
-    scopes: [webApp.id]
+    scopes: [appServicePlan.id]
     evaluationFrequency: 'PT5M'
     windowSize: 'PT5M'
     criteria: {
@@ -740,6 +693,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
         {
           name: 'CPU Usage'
           metricName: 'CpuPercentage'
+          metricNamespace: 'Microsoft.Web/serverfarms'
           operator: 'GreaterThan'
           threshold: 80
           timeAggregation: 'Average'
@@ -755,11 +709,14 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Конфигурации специфични за среди
+## 🔧 Конфигурации, специфични за околната среда
 
 ### Файлове с параметри за различни среди
+Двата файла по-долу са **примери за алтернативни параметърни файлове**. azd не избира автоматично `main.parameters.dev.json` или `main.parameters.prod.json` според името на средата. Използвайте реалния `main.parameters.json` с подмяна на променливи за средата (напр. `${APP_SERVICE_SKU=B1}`) и декларирайте/консумирайте всеки параметър в Bicep.
+
+Примерно съдържание за `infra/main.parameters.dev.json`:
+
 ```json
-// infra/main.parameters.dev.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -783,8 +740,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
+Примерно съдържание за `infra/main.parameters.prod.json`:
+
 ```json
-// infra/main.parameters.prod.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -811,7 +769,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Условно предоставяне на ресурси
+### Условно осигуряване на ресурси
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -819,7 +777,7 @@ param environmentType string = 'dev'
 
 // Development resources
 resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'dev') {
-  name: '${applicationName}devstorage${resourceToken}'
+  name: 'stdev${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -829,7 +787,7 @@ resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environ
 
 // Production resources with geo-redundancy
 resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'prod') {
-  name: '${applicationName}prodstorage${resourceToken}'
+  name: 'stprod${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -843,9 +801,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Напреднали модели за предоставяне
+## 🚀 Напреднали модели за осигуряване
 
-### Деплой в множество региони
+### Много-регионално разгръщане
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -914,77 +872,53 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 ```
 
 ### Тестване на инфраструктурата
-```bicep
-// infra/test/main.test.bicep
-param location string = resourceGroup().location
+```bash
+# Local compilation checks syntax/types; this does not provision infrastructure
+az bicep build --file infra/main.bicep --stdout
 
-module mainTemplate '../main.bicep' = {
-  name: 'main-template-test'
-  params: {
-    environmentName: 'test'
-    location: location
-    applicationName: 'testapp'
-  }
-}
-
-// Test assertions
-resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'test-deployment'
-  location: location
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '8.0'
-    scriptContent: '''
-      $webAppName = "${mainTemplate.outputs.WEB_NAME}"
-      $response = Invoke-WebRequest -Uri "https://${mainTemplate.outputs.WEB_URL}/health" -UseBasicParsing
-      if ($response.StatusCode -ne 200) {
-        throw "Health check failed"
-      }
-      Write-Output "All tests passed!"
-    '''
-    timeout: 'PT10M'
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'P1D'
-  }
-}
+# After deploying your own complete app, test an actual application route
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error "$WEB_URL"
 ```
 
-## 🧪 Преглед и валидация на инфраструктурата (НОВО)
+Осигуряването на инфраструктура не разгръща вашия приложен код. Изпълнявайте проверки на приложението само след `azd deploy`/`azd up` и използвайте `/health` само ако приложението ви го поддържа. ARM скриптовете за разгръщане създават Azure ресурси и изискват допълнителни идентичности, поддържани версии на runtime и права; те не са локални unit тестове.
 
-### Прегледайте промените в инфраструктурата преди деплой
+## 🧪 Преглед и валидация на инфраструктура (НОВО)
 
-Функцията `azd provision --preview` ви позволява да **симулирате предоставянето на инфраструктура** преди действително да деплойнете ресурси. Тя е в духа на `terraform plan` или `bicep what-if`, давайки ви **dry-run преглед** на това какви промени биха били направени във вашата Azure среда.
+### Прегледайте инфраструктурните промени преди разгръщане
+
+Функцията `azd provision --preview` ви позволява да **симулирате осигуряването на инфраструктура** преди да разположите ресурсите физически. Тя е подобна на `terraform plan` или `bicep what-if` и ви дава **поглед преди действията**, за да видите какви промени ще бъдат направени във вашата Azure среда.
 
 #### 🛠️ Какво прави
 - **Анализира вашите IaC шаблони** (Bicep или Terraform)
-- **Показва преглед на промените по ресурсите**: добавяния, изтривания, актуализации
-- **Не прилага промените** — това е само за четене и е безопасно за изпълнение
+- **Показва преглед на промените в ресурсите**: добавяния, изтривания, актуализации
+- **Не прилага предложените инфраструктурни промени от провайдъра** — прегледайте hooks на проекта първо; скриптовете могат да имат странични ефекти и прегледът въпреки това изисква права в Azure
 
-#### Сценарии за използване
+#### Сценарии на употреба
 ```bash
-# Преглед на промените в инфраструктурата преди внедряване
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Преглед за конкретна среда
+# Preview for specific environment
 azd provision --preview -e production
 ```
 
-Тази команда ви помага да:
-- **Валидирате промените в инфраструктурата** преди да предоставите ресурси
-- **Откриете неправилни конфигурации рано** в процеса на разработка
-- **Сътрудничите безопасно** в екипни среди
-- **Осигурите least-privilege деплойменти** без изненади
+Тази команда ви помага:
+- **Да валидирате инфраструктурни промени** преди да ангажирате ресурси
+- **Да хванете ранни грешни конфигурации** в цикъла на разработка
+- **Да си сътрудничите безопасно** в екипни среди
+- **Да осигурите разгръщане с минимални права** без изненади
 
-Особено полезно е, когато:
+Особено полезно, когато:
 - Работите със сложни многослойни среди
 - Правите промени в продукционна инфраструктура
-- Валидирате модификации на шаблони преди одобрение на PR
-- Обучавате нови членове на екипа за инфраструктурни модели
+- Валидирате модификации на шаблони преди одобрение на pull request
+- Обучавате нови членове на екип на инфраструктурни модели
 
-### Примерен изход от преглед
-Точният изход от прегледа варира в зависимост от доставчика и структурата на проекта, но резултатът трябва ясно да идентифицира предложените промени преди да бъде приложено каквото и да е.
+### Примерен изход от прегледа
+Точният изход зависи от провайдъра и структурата на проекта, но резултатът трябва ясно да посочи предложените промени преди прилагане.
 
-```bash
+```text
 $ azd provision --preview
 
 🔍 Previewing infrastructure changes...
@@ -1011,18 +945,22 @@ The following resources will be destroyed:
 
 ### Безопасни актуализации на ресурси
 ```bash
-# Първо прегледайте промените в инфраструктурата (ПРЕПОРЪЧВА СЕ)
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Прилагайте промените след потвърждение на прегледа
-azd provision --confirm-with-no-prompt
+# Apply changes after preview confirmation
+azd provision
+# In automation, --no-prompt uses known values and fails on unresolved decisions;
+# it is not an approval bypass.
 
-# За откат използвайте Git за връщане на промените в инфраструктурата:
-git revert HEAD  # Отменете последния комит в инфраструктурата
-azd provision    # Приложете предишното състояние на инфраструктурата
+# For rollback, use Git to revert infrastructure changes:
+git revert HEAD  # Revert last infrastructure commit
+azd provision    # Apply previous infrastructure state
 ```
 
-### Миграции на бази данни
+### Миграции на база данни
+**Незавършен модел на скрипт за разгръщане:** изисква конфигурирана потребителска идентичност там където е нужна, поддържан Azure CLI runtime, налични миграционни инструменти, подадена миграционна директория/конфигурация и връзка с базата данни. Не може да се изпълни само чрез поставяне на този ресурс в шаблон.
+
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -1047,11 +985,12 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
     ]
     timeout: 'PT30M'
     cleanupPreference: 'OnSuccess'
+    retentionInterval: 'P1D'
   }
 }
 ```
 
-## 🎯 Добри практики
+## 🎯 Най-добри практики
 
 ### 1. Конвенции за именуване на ресурси
 ```bicep
@@ -1059,13 +998,16 @@ var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
   appService: '${applicationName}-web-${resourceToken}'
   database: '${applicationName}-db-${resourceToken}'
-  storage: '${take(replace(applicationName, '-', ''), 15)}${environmentName}sa${take(resourceToken, 8)}'
-  keyVault: '${take(applicationName, 15)}-kv-${take(resourceToken, 8)}'
+  storage: 'st${resourceToken}' // lowercase alphanumeric, <=24 characters
+  keyVault: 'kv-${resourceToken}' // <=24 characters
 }
 ```
 
-### 2. Стратегия за тагване
+### 2. Система за тагване
 ```bicep
+// utcNow is only allowed in a parameter default, not directly in a variable.
+param deploymentDate string = utcNow('yyyy-MM-dd')
+
 var commonTags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
@@ -1073,7 +1015,7 @@ var commonTags = {
   'cost-center': 'engineering'
   'owner': 'platform-team'
   'project': applicationName
-  'created-date': utcNow('yyyy-MM-dd')
+  'deployment-date': deploymentDate
 }
 ```
 
@@ -1093,7 +1035,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Организация на outputs
+### 4. Организация на изходите
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -1110,23 +1052,23 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Следващи стъпки
 
-- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Валидирайте наличността на ресурси
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Отстранявайте проблеми с инфраструктурата
-- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - Отстраняване на проблеми при предоставяне
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Изберете подходящи нива на услуги
+- [Планиране преди разгръщане](../chapter-06-pre-deployment/capacity-planning.md) - Валидация на наличност на ресурси
+- [Чести проблеми](../chapter-07-troubleshooting/common-issues.md) - Отстраняване на инфраструктурни проблеми
+- [Ръководство за отстраняване на грешки](../chapter-07-troubleshooting/debugging.md) - Отстраняване на проблеми с доставката
+- [Избор на SKU](../chapter-06-pre-deployment/sku-selection.md) - Изберете подходящи нива на услугата
 
 ## Допълнителни ресурси
 
-- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Документация за Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Шаблони на Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Център за архитектура на Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Добре проектирана рамка на Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Навигация**
-- **Предишен урок**: [Deployment Guide](deployment-guide.md)
-- **Следващ урок**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+- **Предишен урок**: [Ръководство за внедряване](deployment-guide.md)
+- **Следващ урок**: [Планиране на капацитета](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 

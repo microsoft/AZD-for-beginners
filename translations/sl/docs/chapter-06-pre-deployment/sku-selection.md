@@ -1,80 +1,82 @@
-# SKU Selection Guide - Choosing the Right Azure Service Tiers
+# Vodnik za izbiro SKU - Izbira pravih ravni storitev Azure
 
-**Chapter Navigation:**
-- **📚 Domov tečaja**: [AZD za začetnike](../../README.md)
-- **📖 Trenutno poglavje**: Chapter 6 - Pre-Deployment Validation & Planning
-- **⬅️ Prejšnje**: [Capacity Planning](capacity-planning.md)
-- **➡️ Naslednje**: [Pre-flight Checks](preflight-checks.md)
-- **🚀 Naslednje poglavje**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
+**Navigacija po poglavjih:**
+- **📚 Domov za tečaj**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 6 - Preverjanje in načrtovanje pred začetkom namestitve
+- **⬅️ Prejšnje**: [Načrtovanje zmogljivosti](capacity-planning.md)
+- **➡️ Naslednje**: [Preverjanja pred zagonom](preflight-checks.md)
+- **🚀 Naslednje poglavje**: [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/common-issues.md)
 
 ## Uvod
 
-Ta celovit vodič vam pomaga izbrati optimalne SKU-je (Stock Keeping Units) za različna Azure okolja, delovne obremenitve in zahteve. Naučite se analizirati potrebe glede zmogljivosti, stroškovne vidike in zahteve po razširljivosti, da izberete najprimernejše storitvene ravni za vaše Azure Developer CLI namestitve.
+Ta obsežen vodnik vam pomaga izbrati optimalne Azure storitvene SKU-je (enote za sledenje zalogi) za različna okolja, delovne obremenitve in zahteve. Naučite se analizirati potrebe po zmogljivosti, stroške in zahteve po razširljivosti, da izberete najbolj primerne ravni storitev za vaše namestitve Azure Developer CLI.
 
 ## Cilji učenja
 
-Z dokončanjem tega vodiča boste:
-- Razumeli koncepte SKU-jev v Azure, modele določanja cen in razlike v funkcijah
-- Obvladali strategije izbire SKU-jev glede na okolje (razvoj, staging, produkcija)
-- Analizirali zahteve delovnih obremenitev in jih uskladili s primernimi storitvenimi ravnmi
-- Uvedli strategije optimizacije stroškov s pametno izbiro SKU-jev
-- Uporabljali tehnike testiranja zmogljivosti in validacije za izbiro SKU-jev
-- Konfigurirali avtomatizirane priporočila za SKU-je in nadzor
+Po zaključku tega vodnika boste:
+- Razumeli koncepte Azure SKU-jev, modele cen in razlike med funkcijami
+- Obvladali strategije izbire SKU-jev, prilagojene okolju za razvoj, testiranje in produkcijo
+- Analizirali zahteve delovnih obremenitev in jih uskladili z ustreznimi ravnmi storitev
+- Uvedli strategije optimizacije stroškov z inteligentno izbiro SKU-jev
+- Uporabili tehnike testiranja zmogljivosti za preverjanje izbire SKU-jev
+- Konfigurirali avtomatizirana priporočila in spremljanje SKU-jev
 
 ## Rezultati učenja
 
-Po končani vsebini boste sposobni:
-- Izbrati ustrezne SKU-je Azure storitev glede na zahteve in omejitve delovne obremenitve
-- Načrtovati stroškovno učinkovite arhitekture z več okolji z ustrezno izbiro stopenj
-- Izvesti merjenje zmogljivosti in validacijo za izbiro SKU-jev
+Po zaključku boste znali:
+- Izbrati ustrezne Azure storitvene SKU-je glede na zahteve delovnih obremenitev in omejitve
+- Načrtovati stroškovno učinkovite arhitekture za več okolij s pravilno izbiro ravni
+- Izvesti merjenje zmogljivosti in preverjanje za izbiro SKU-jev
 - Ustvariti avtomatizirana orodja za priporočila SKU-jev in optimizacijo stroškov
-- Načrtovati migracije SKU-jev in strategije skaliranja za spreminjajoče se zahteve
-- Uporabljati načela Azure Well-Architected Framework pri izbiri storitvenih stopenj
+- Načrtovati migracije SKU-jev in strategije skaliranja glede na spreminjajoče se zahteve
+- Uporabiti principe Azure Well-Architected Framework pri izbiri ravni storitev
 
-## Kazalo
+## Kazalo vsebine
 
-- [Razumevanje SKU-jev](../../../../docs/chapter-06-pre-deployment)
-- [Izbira glede na okolje](../../../../docs/chapter-06-pre-deployment)
-- [Smernice za posamezne storitve](../../../../docs/chapter-06-pre-deployment)
-- [Strategije optimizacije stroškov](../../../../docs/chapter-06-pre-deployment)
-- [Vidiki zmogljivosti](../../../../docs/chapter-06-pre-deployment)
-- [Hitre referenčne tabele](../../../../docs/chapter-06-pre-deployment)
-- [Orodja za preverjanje](../../../../docs/chapter-06-pre-deployment)
+- [Razumevanje SKU-jev](#understanding-skus)
+- [Izbira glede na okolje](#environment-based-selection)
+- [Smernice za posamezne storitve](#service-specific-guidelines)
+- [Strategije optimizacije stroškov](#cost-optimization-strategies)
+- [Razmisleki o zmogljivosti](#performance-considerations)
+- [Hitra referenčna poglavja](#quick-reference-tables)
+- [Orodja za preverjanje](#validation-tools)
 
 ---
 
 ## Razumevanje SKU-jev
 
+> **Primer obsega:** YAML zemljevidi SKU-jev in konfiguracije zmogljivosti spodaj so oblikovalske opombe, ne shema `azure.yaml` ali konfiguracija orodja za obremenitev. Bloki Bicep so alternative/fragmente: razglasite njihove parametre in nadrejene vire, uporabljajte unikatna simbolna imena pri kombiniranju in povežite module v delujoč projekt. Cene, omejitve in regionalna/dostopnost SKU-jev je treba preveriti za vaš naročniški načrt pred namestitvijo.
+
 ### Kaj so SKU-ji?
 
-SKU-ji (Stock Keeping Units) predstavljajo različne storitvene ravni in stopnje zmogljivosti za Azure vire. Vsak SKU ponuja različne:
+SKU-ji (enote za sledenje zalogi) predstavljajo različne ravni storitev in zmogljivostne stopnje za vire Azure. Vsak SKU ponuja različne:
 
-- **Značilnosti zmogljivosti** (CPU, pomnilnik, prepustnost)
+- **Zmogljivostne značilnosti** (CPU, pomnilnik, prepustnost)
 - **Razpoložljivost funkcij** (možnosti skaliranja, ravni SLA)
-- **Modele cen** (na porabo, rezervirana zmogljivost)
-- **Regionalno razpoložljivost** (ne vsi SKU-ji so na voljo v vseh regijah)
+- **Modeli cen** (poraba, rezervirana zmogljivost)
+- **Regionalna razpoložljivost** (vsi SKU-ji niso na voljo v vseh regijah)
 
 ### Ključni dejavniki pri izbiri SKU-jev
 
 1. **Zahteve delovne obremenitve**
-   - Pričakovani vzorci prometa/obremenitve
+   - Pričakovani promet/obremenitve
    - Zahteve glede zmogljivosti (CPU, pomnilnik, I/O)
-   - Potrebe po shrambi in vzorci dostopa
+   - Potrebe po shranjevanju in vzorci dostopa
 
 2. **Vrsta okolja**
-   - Razvoj/testiranje proti produkciji
+   - Razvoj/testiranje v primerjavi s produkcijo
    - Zahteve glede razpoložljivosti
-   - Varnostne in skladnostne potrebe
+   - Varnostne in skladnostne zahteve
 
-3. **Omejitve proračuna**
+3. **Proračunske omejitve**
    - Začetni stroški proti obratovalnim stroškom
-   - Popusti za rezervirano zmogljivost
-   - Posledice stroškov avtomatskega skaliranja
+   - Popusti za rezervirano kapaciteto
+   - Stroški avtomatskega skaliranja
 
-4. **Projekcije rasti**
-   - Zahteve po skalabilnosti
+4. **Napovedi rasti**
+   - Zahteve glede skalabilnosti
    - Prihodnje potrebe po funkcijah
-   - Kompleksnost migracij
+   - Kompleksnost migracije
 
 ---
 
@@ -92,21 +94,21 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### Značilnosti
-- **App Service**: F1 (Free) ali B1 (Basic) za enostavno testiranje
-- **Databases**: Basic raven z minimalnimi viri
-- **Storage**: Standard z le lokalno redundantnostjo
-- **Compute**: Deljeni viri so sprejemljivi
-- **Networking**: Osnovne konfiguracije
+- **App Service**: F1 (brezplačno) ali B1 (osnovno) za preprosto testiranje
+- **Podatkovne baze**: Osnovna raven z minimalnimi viri
+- **Shranjevanje**: Standardno z le lokalno redundanco
+- **Računalništvo**: Dovoljeni skupni viri
+- **Omrežje**: Osnovne konfiguracije
 
-### Predprodukcijsko/testno okolje
+### Preizkusno/testno okolje
 
-**Prioritete**: Konfiguracija podobna produkciji, ravnotežje stroškov, zmogljivost za testiranje
+**Prioritete**: Konfiguracija podobna produkciji, uravnoteženost stroškov, zmogljivosti za testiranje
 
 #### Priporočeni SKU-ji
 ```yaml
@@ -121,15 +123,15 @@ skus:
 ```
 
 #### Značilnosti
-- **Zmogljivost**: 70–80% proizvodne kapacitete
+- **Zmogljivost**: 70-80 % produkcijske zmogljivosti
 - **Funkcije**: Večina produkcijskih funkcij omogočena
-- **Redundantnost**: Nekaj geografske redundantnosti
-- **Skaliranje**: Omejeno samodejno skaliranje za testiranje
-- **Nadzor**: Celoten sklop nadzora
+- **Redundanca**: Nekaj geografske redundance
+- **Skaliranje**: Omejeno avtomatsko skaliranje za testiranje
+- **Spremljanje**: Popoln paket za spremljanje
 
 ### Produkcijsko okolje
 
-**Prioritete**: Zmogljivost, razpoložljivost, varnost, skladnost, skalabilnost
+**Prioritete**: Zmogljivost, razpoložljivost, varnost, skladnost, razširljivost
 
 #### Priporočeni SKU-ji
 ```yaml
@@ -138,18 +140,18 @@ environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
 #### Značilnosti
-- **Visoka razpoložljivost**: Zahteve SLA 99,9%+
+- **Visoka razpoložljivost**: Zahteve SLA nad 99,9 %
 - **Zmogljivost**: Namenjeni viri, visoka prepustnost
 - **Varnost**: Premium varnostne funkcije
-- **Skaliranje**: Polne zmogljivosti samodejnega skaliranja
-- **Nadzor**: Celovita opaznost
+- **Skaliranje**: Polne zmogljivosti avtomatskega skaliranja
+- **Spremljanje**: Celovita opaznost
 
 ---
 
@@ -157,15 +159,15 @@ skus:
 
 ### Azure App Service
 
-#### Odločitvena matrika SKU-jev
+#### Matrika odločitev za SKU-je
 
-| Use Case | Recommended SKU | Rationale |
+| Primer uporabe | Priporočeni SKU | Razlog |
 |----------|----------------|-----------|
-| Development/Testing | F1 (Free) or B1 (Basic) | Cost-effective, sufficient for testing |
-| Small production apps | S1 (Standard) | Custom domains, SSL, auto-scaling |
-| Medium production apps | P1V3 (Premium V3) | Better performance, more features |
-| High-traffic apps | P2V3 or P3V3 | Dedicated resources, high performance |
-| Mission-critical apps | I1V2 (Isolated V2) | Network isolation, dedicated hardware |
+| Razvoj/testiranje | F1 (brezplačno) ali B1 (osnovno) | Stroškovno učinkovito, zadostno za testiranje |
+| Majhne produkcijske aplikacije | S1 (standardno) | Prilagojene domene, SSL, avtomatsko skaliranje |
+| Srednje produkcijske aplikacije | P1V3 (Premium V3) | Boljša zmogljivost, več funkcij |
+| Aplikacije z velikim prometom | P2V3 ali P3V3 | Namenjeni viri, visoka zmogljivost |
+| Kritične aplikacije | I1V2 (izolirano V2) | Omrežna izolacija, namenski strojni viri |
 
 #### Primeri konfiguracij
 
@@ -205,15 +207,15 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 #### Okvir za izbiro SKU-jev
 
-1. **Na osnovi DTU (Database Transaction Units)**
-   - **Basic**: 5 DTU - Razvoj/testiranje
-   - **Standard**: S0-S12 (10-3000 DTU) - Splošna raba
-   - **Premium**: P1-P15 (125-4000 DTU) - Kritično za zmogljivost
+1. **Na osnovi DTU (enote za transakcije v podatkovnih bazah)**
+   - **Basic (osnovni)**: 5 DTU - razvoj/testiranje
+   - **Standard**: S0-S12 (10-3000 DTU) - splošna raba
+   - **Premium**: P1-P15 (125-4000 DTU) - zmogljivostno kritično
 
 2. **Na osnovi vCore** (priporočeno za produkcijo)
-   - **General Purpose**: Uravnotežena računalniška moč in shramba
-   - **Business Critical**: Nizek zakasnitev, visoki IOPS
-   - **Hyperscale**: Zelo razširljiva shramba (do 100TB)
+   - **General Purpose (splošna raba)**: Uravnoteženi računalniški viri in shranjevanje
+   - **Business Critical (poslovno kritično)**: Nizka zakasnitev, visoki IOPS
+   - **Hyperscale**: Zelo razširljivo shranjevanje; preverite trenutne omejitve velikosti in podporo regije
 
 #### Primeri konfiguracij
 
@@ -252,21 +254,21 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 ### Azure Container Apps
 
-#### Vrste okolij
+#### Vrste okolja
 
-1. **Na osnovi porabe (Consumption-based)**
-   - Plačilo po uporabi
-   - Primerno za razvoj in spremenljive delovne obremenitve
-   - Deljena infrastruktura
+1. **Na osnovi porabe**
+   - Plačilo glede na uporabo
+   - Primeren za razvoj in spremenljive delovne obremenitve
+   - Skupna infrastruktura
 
-2. **Dodeljeno (Dedicated)**
+2. **Namenjeni (delovni profili)**
    - Namenjeni računalniški viri
    - Predvidljiva zmogljivost
-   - Primerneje za produkcijske delovne obremenitve
+   - Boljši za produkcijske delovne obremenitve
 
 #### Primeri konfiguracij
 
-**Razvoj (Consumption)**
+**Razvoj (poraba)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Produkcija (Dedicated)**
+**Produkcija (namenjeno)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,31 +317,33 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+Zona redundanca zahteva tudi infrastrukturo v podpornih regijah in ustrezno konfiguracijo VNet/podomrežja, ki je tukaj izpuščena. Ta primer predvideva tri namenski vozli; konfigurirajte vsaj dve repliki aplikacije za porazdelitev preko con in velikost obeh repliki in vozli za odpoved cone. Oglejte si [navodila za zanesljivost Container Apps](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). Če želite aplikacijo postaviti na ta profil, nastavite njen `workloadProfileName: 'production-profile'`; ustvarjanje profila samo po sebi ne premakne aplikacij nanj.
+
 ### Azure Cosmos DB
 
 #### Modeli prepustnosti
 
-1. **Ročno predvidena prepustnost**
+1. **Ročno določena prepustnost**
    - Predvidljiva zmogljivost
    - Popusti za rezervirano zmogljivost
-   - Najbolje za stalne obremenitve
+   - Najboljše za stalne delovne obremenitve
 
-2. **Autoscale predvidena prepustnost**
+2. **Avtomatsko skalirana prepustnost**
    - Samodejno skaliranje glede na uporabo
-   - Plačate glede na porabo (z minimalno ravnjo)
-   - Dobro za spremenljive obremenitve
+   - Plačilo za dejansko uporabo (z minimalno vrednostjo)
+   - Dobro za spremenljive delovne obremenitve
 
-3. **Serverless**
+3. **Brez strežnika (serverless)**
    - Plačilo na zahtevo
-   - Brez predvidene prepustnosti
-   - Idealno za razvoj in občasne obremenitve
+   - Brez vnaprej določene prepustnosti
+   - Idealno za razvoj in občasne delovne obremenitve
 
 #### Primeri SKU-jev
 
@@ -400,15 +404,15 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 #### Vrste računov za shranjevanje
 
-1. **Standard_LRS** - Razvoj, neneodločilni podatki
-2. **Standard_GRS** - Producent, potrebna geo-redundantnost
-3. **Premium_LRS** - Visoko zmogljive aplikacije
-4. **Premium_ZRS** - Visoka razpoložljivost z zonalno redundantnostjo
+1. **Standard_LRS** - razvoj, manj kritični podatki
+2. **Standard_GRS** - produkcija, potrebna geo-redundanca
+3. **Premium_LRS** - aplikacije z visoko zmogljivostjo
+4. **Premium_ZRS** - visoka razpoložljivost z redundanco con
 
-#### Raven zmogljivosti
+#### Razine zmogljivosti
 
-- **Standard**: Splošna raba, stroškovno učinkovito
-- **Premium**: Visoke zmogljivosti, scenariji z nizko zakasnitvijo
+- **Standardna**: Splošna raba, stroškovno učinkovito
+- **Premium**: Visoka zmogljivost, nizke zakasnitve
 
 ```bicep
 // Development
@@ -451,19 +455,22 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## Strategije optimizacije stroškov
 
-### 1. Rezervirana zmogljivost
+### 1. Rezervirana kapaciteta
 
-Rezervirajte vire za 1–3 let za znatne popuste:
+Rezervirajte vire za 1-3 leta za znatne popuste:
 
 ```bash
-# Preverite možnosti rezervacije
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. Pravilna dimenzionacija
+Ponudbe rezervacij in upravičeni tipi virov se razlikujejo; namesto predpostavke, da vsaka storitev/SKU podpira rezervacijo, preglejte katalog in pogoje nakupa.
 
-Začnite z manjšimi SKU-ji in povečujte glede na dejansko uporabo:
+### 2. Prava velikost
+
+Začnite z manjšimi SKU-ji in skalirajte glede na dejansko uporabo:
 
 ```yaml
 # Progressive scaling approach
@@ -477,7 +484,7 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. Konfiguracija samodejnega skaliranja
+### 3. Konfiguracija avtomatskega skaliranja
 
 Uvedite inteligentno skaliranje za optimizacijo stroškov:
 
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -538,7 +547,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ### 4. Načrtovano skaliranje
 
-Zmanjšajte zmogljivost med neaktivnimi urami:
+Zmanjšajte obremenitev izven delovnega časa:
 
 ```json
 {
@@ -583,11 +592,11 @@ Zmanjšajte zmogljivost med neaktivnimi urami:
 
 ---
 
-## Vidiki zmogljivosti
+## Razmisleki o zmogljivosti
 
-### Osnovne zahteve za zmogljivost
+### Osnovne zahteve glede zmogljivosti
 
-Določite jasne zahteve za zmogljivost pred izbiro SKU-jev:
+Določite jasne zahteve glede zmogljivosti pred izbiro SKU-ja:
 
 ```yaml
 performance_requirements:
@@ -603,21 +612,23 @@ performance_requirements:
     rto: "30 minutes"
 ```
 
-### Obremenitveno testiranje
+### Testiranje obremenitve
 
-Testirajte različne SKU-je za validacijo zmogljivosti:
+Testirajte različne SKU-je za preverjanje zmogljivosti:
 
 ```bash
-# Azure storitev za testiranje obremenitve
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
-### Nadzor in optimizacija
+### Spremljanje in optimizacija
 
-Vzpostavite celovit nadzor:
+Nastavite celovito spremljanje:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -644,45 +656,45 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## Hitre referenčne tabele
+## Hitra referenčna poglavja
 
-### Hitra referenca SKU-jev za App Service
+### Hitro referenčno poglavje za App Service SKU
 
-| SKU | Tier | vCPU | RAM | Storage | Price Range | Use Case |
+| SKU | Raven | vCPU | RAM | Shramba | Cenovni razpon | Primer uporabe |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | Free | Shared | 1GB | 1GB | Free | Development |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | Small apps |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Production |
-| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | High performance |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Enterprise |
+| F1 | Brezplačno | Deljeno | 1GB | 1GB | Brezplačno | Razvoj |
+| B1 | Osnovno | 1 | 1,75GB | 10GB | $ | Majhne aplikacije |
+| S1 | Standardno | 1 | 1,75GB | 50GB | $$ | Produkcija |
+| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Visoka zmogljivost |
+| I1V2 | Izolirano V2 | 2 | 8GB | 1TB | $$$$ | Podjetja |
 
-### Hitra referenca SKU-jev za SQL Database
+### Hitro referenčno poglavje za SQL Database SKU
 
-| SKU | Tier | DTU/vCore | Storage | Price Range | Use Case |
+| SKU | Raven | DTU/vCore | Shramba | Cenovni razpon | Primer uporabe |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Development |
-| S2 | Standard | 50 DTU | 250GB | $$ | Small production |
-| P2 | Premium | 250 DTU | 1TB | $$$ | High performance |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Balanced |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Mission critical |
+| Basic | Osnovno | 5 DTU | 2GB | $ | Razvoj |
+| S2 | Standardno | 50 DTU | 250GB | $$ | Majhna produkcija |
+| P2 | Premium | 250 DTU | 1TB | $$$ | Visoka zmogljivost |
+| GP_Gen5_4 | Splošna raba | 4 vCore | 4TB | $$$ | Uravnoteženo |
+| BC_Gen5_8 | Poslovno kritično | 8 vCore | 4TB | $$$$ | Misijska kritičnost |
 
-### Hitra referenca za Container Apps
+### Hitro referenčno poglavje za Container Apps SKU
 
-| Model | Pricing | CPU/Memory | Use Case |
+| Model | Cenitev | CPU/Pomnilnik | Primer uporabe |
 |-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | Development, variable load |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | Production |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | High performance |
+| Poraba | Plačilo glede na uporabo | Podprte kombinacije CPU/pomnilnika so odvisne od okolja/profila | Razvoj ali produkcija, spremenljiva obremenitev |
+| Namenjeno D4 | Zaračunavanje namenjenih vozlišč | 4 vCPU, 16GiB na vozlišče | Trajna obremenitev/izolacija |
+| Namenjeno D8 | Zaračunavanje namenjenih vozlišč | 8 vCPU, 32GiB na vozlišče | Višja trajna obremenitev |
 
 ---
 
 ## Orodja za preverjanje
 
-### SKU Availability Checker
+### Preverjevalnik razpoložljivosti SKU-jev
 
 ```bash
 #!/bin/bash
-# Preveri razpoložljivost SKU v ciljni regiji
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# Uporaba
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### Cost Estimation Script
+### Skripta za oceno stroškov
+
+**Samo psevdokoda:** `Get-ResourceCost` spodaj je projektno specifična funkcija, ki jo morate implementirati z aktualnimi regionalnimi/oglednimi cenami in predpostavkami o uporabi. Ni PowerShell ukaz ali Azure cmdlet.
 
 ```powershell
-# PowerShell skripta za oceno stroškov
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Uporabi Azure Pricing API ali kalkulator
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# Uporaba
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -748,7 +763,9 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### Performance Validation
+### Preverjanje zmogljivosti
+
+Spodnji YAML je osnutek zahtev, **ne** je vhodna shema za Azure Load Testing, JMeter, Locust ali k6. Pred uporabo zgornjega ukaza za testiranje obremenitve ga pretvorite v resnično konfiguracijo izbranega orodja.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,43 +800,43 @@ test_configuration:
 
 ---
 
-## Povzetek dobrih praks
+## Povzetek najboljših praks
 
-### Priporočila
+### Kaj storiti
 
-1. **Začnite majhno in povečujte** glede na dejansko uporabo
-2. **Uporabite različne SKU-je za različna okolja**
+1. **Začnite z malim in skalirajte navzgor** glede na dejansko uporabo
+2. **Uporabljajte različne SKU-je za različna okolja**
 3. **Neprestano spremljajte zmogljivost in stroške**
-4. **Izkoristite rezervirano zmogljivost za produkcijska delovna obremenitve**
-5. **Uvedite samodejno skaliranje, kjer je primerno**
+4. **Izkoristite rezervirano kapaciteto za produkcijske obremenitve**
+5. **Uvedite avtomatsko skaliranje, kjer je smiselno**
 6. **Testirajte zmogljivost z realističnimi obremenitvami**
-7. **Načrtujte rast, vendar se izogibajte prekomerni dodelitvi virov**
-8. **Za razvoj, kjer je mogoče, uporabite brezplačne ravni**
+7. **Načrtujte rast, a se izogibajte prekomernemu rezerviranju**
+8. **Uporabljajte brezplačne ravni za razvoj, kjer je mogoče**
 
-### Kaj ne delati
+### Česa ne delati
 
 1. **Ne uporabljajte produkcijskih SKU-jev za razvoj**
-2. **Ne prezrite regionalne razpoložljivosti SKU-jev**
+2. **Ne ignorirajte regionalne razpoložljivosti SKU-jev**
 3. **Ne pozabite na stroške prenosa podatkov**
-4. **Ne dodeljujte preveč virov brez utemeljitve**
-5. **Ne zanemarite vpliva odvisnosti**
-6. **Ne nastavite omejitev samodejnega skaliranja previsoko**
-7. **Ne pozabite na zahteve glede skladnosti**
-8. **Ne sprejemajte odločitev samo na podlagi cene**
+4. **Ne rezervirajte preveč brez utemeljitve**
+5. **Ne ignorirajte vpliva odvisnosti**
+6. **Ne nastavite meja avtomatskega skaliranja previsoko**
+7. **Ne pozabite na zahteve skladnosti**
+8. **Ne odločajte samo na podlagi cene**
 
 ---
 
-**Namig strokovnjaka**: Uporabite Azure Cost Management in Advisor za pridobitev osebnih priporočil za optimizacijo izbire SKU-jev glede na dejanske vzorce uporabe.
+**Nasvet strokovnjaka**: Uporabljajte Azure Cost Management in Advisor za osebna priporočila za optimizacijo izbire SKU-jev glede na dejanske vzorce uporabe.
 
 ---
 
 **Navigacija**
-- **Prejšnja lekcija**: [Capacity Planning](capacity-planning.md)
-- **Naslednja lekcija**: [Preflight Checks](preflight-checks.md)
+- **Prejšnja lekcija**: [Načrtovanje zmogljivosti](capacity-planning.md)
+- **Naslednja lekcija**: [Preverjanja pred zagonom](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Izjava o omejitvi odgovornosti**:
-Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku velja za uradni vir. Za kritične informacije priporočamo strokovni človeški prevod. Za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda, ne sprejemamo odgovornosti.
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

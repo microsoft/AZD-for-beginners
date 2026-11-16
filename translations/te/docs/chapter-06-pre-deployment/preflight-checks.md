@@ -1,71 +1,73 @@
-# AZD డిప్లాయ్‌మెంట్ల కోసం ప్రీ-ఫ్లైట్ తనిఖీలు
+# AZD పంపిణీ కోసం ప్రీ-ఫ్లైట్ తనిఖీలు
 
 **అధ్యాయం నావిగేషన్:**
-- **📚 కోర్సు హోమ్**: [ప్రారంభికులకు AZD](../../README.md)
-- **📖 ప్రస్తుత అధ్యాయం**: అధ్యాయం 6 - ముందుగా-డిప్లాయ్ ధృవీకరణ & ప్రణాళిక
-- **⬅️ మునుపటి**: [SKU ఎంపిక](sku-selection.md)
-- **➡️ తదుపరి అధ్యాయం**: [అధ్యాయం 7: ట్రబుల్షూటింగ్](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 సంబంధిత**: [అధ్యాయం 4: డిప్లాయ్ గైడ్](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 కోర్సు హోమ్**: [AZD For Beginners](../../README.md)
+- **📖 ప్రస్తుత అధ్యాయం**: అధ్యాయం 6 - ప్రీ-డిప్లాయ్‌మెంట్ ధృవీకరణ & ప్లానింగ్
+- **⬅️ ముందు**: [SKU Selection](sku-selection.md)
+- **➡️ తదుపరి అధ్యాయం**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 సంబంధించినది**: [Chapter 4: Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 
 ## పరిచయం
 
-ఈ సమగ్ర గైడ్ డిప్లాయ్‌మెంట్లు ప్రారంభమయ్యే ముందు విజయవంతంగా Azure Developer CLI డిప్లాయ్‌మెంట్లను నిర్ధారించడానికి ప్రీ-డిప్లాయ్ ధృవీకరణ స్క్రిప్టులు మరియు ప్రొసీజర్లు అందిస్తుంది. ప్రామాణీకరణ, వనరు లభ్యత, క్వోటాలు, భద్రతా కంప్లయెన్స్ మరియు పనితీరు అవసరాల కోసం ఆటోమేటెడ్ చెక్స్ను ఎలా అమలు చేయాలో నేర్చుకోండి, తద్వారా డిప్లాయ్ విఫలమయ్యే అవకాశాలను తగ్గించి విజయాలు పెంపొందించగలరు.
+ఈ సమగ్ర గైడ్ ప్రీ-డిప్లాయ్‌మెంట్ ధృవీకరణ స్క్రిప్ట్‌లు మరియు విధానాలను అందిస్తుంది, Azure Developer CLI పంపిణీలు ప్రారంభమవడాన్ని నిర్ధారించేందుకు ముందే విజయవంతమైన డిప్లాయ్‌మెంట్ కోసం. ఆటోమేటెడ్ తనిఖీలను అమలు చేయడం నేర్చుకోండి, అవి యాజమాన్యం, వనరుల అందుబాటు, కోటాలు, సెక్యూరిటీ అనుగుణ్యత మరియు పనితీరు అవసరాలను నిర్దేశిస్తాయి, తద్వారా పంపిణీ విఫలమయ్యే ప్రమాదం నివారించి పంపిణీ విజయపు రేట్లను మెరుగుపరుస్తాయి.
 
-## అధ్యయన లక్ష్యాలు
+## నేర్చేందుకు లక్ష్యాలు
 
-ఈ గైడ్‌ను పూర్తి చేసి మీరు:
-- ఆటోమేటెడ్ ప్రీ-డిప్లాయ్ ధృవీకరణ సాంకేతికతలు మరియు స్క్రిప్టులను అలవరిస్తారు
-- ప్రామాణీకరణ, అనుమతులు మరియు క్వోటాలకు సంబంధించిన సమగ్ర చెక్ స్ట్రాటజీలను అవగాహన చేసుకుంటారు
-- వనరు లభ్యత మరియు సామర్థ్య ధృవీకరణ ప్రొసీజర్లు అమలు చేస్తారు
-- సంస్థా విధానాలకు అనుగుణంగా భద్రతా మరియు కంప్లయెన్స్ చెక్స్ కాన్ఫిగర్ చేస్తారు
-- ఖర్చు అంచనా మరియు బడ్జెట్ ధృవీకరణ వర్క్‌ఫ్లోలను డిజైన్ చేస్తారు
-- CI/CD పైప్‌లైన్ల కోసం కస్టమ్ ప్రీ-ఫ్లైట్ చెక్ ఆటోమేషన్ సృష్టిస్తారు
+ఈ గైడ్ పూర్తి చేసిన తర్వాత, మీరు:
+- ఆటోమేటెడ్ ప్రీ-డిప్లాయ్‌మెంట్ ధృవీకరణ సాంకేతికతలు మరియు స్క్రిప్ట్‌లలో ప్రావీణ్యం పొందగలరు
+- యాజమాన్యం, అనుమతులు మరియు కోటాల కోసం సమగ్రమైన తనిఖీ వ్యూహాలు అర్థం చేసుకోగలరు
+- వనరు అందుబాటు మరియు సామర్థ్య ధృవీకరణ విధానాలను అమలు చేయగలరు
+- సంస్థా విధానాలకు అనుగుణంగా భద్రత మరియు అనుగుణ్యత తనిఖీలను ఆకృతీకరించగలరు
+- ఖర్చు అంచనాలు మరియు బడ్జెట్ ధృవీకరణ వర్క్‌ఫ్లోలను రూపొందించగలరు
+- CI/CD పైప్‌లైన్ల కోసం కస్టమ్ ప్రీ-ఫ్లైట్ తనిఖీ ఆటోమెషన్‌ను సృష్టించగలరు
 
-## అభ్యాస ఫలితాలు
+## నేర్చుకున్న ఫలితాలు
 
-పూర్తి చేసిన తర్వాత మీరు చేయగలుగుతారు:
-- సమగ్ర ప్రీ-ఫ్లైట్ ధృవీకరణ స్క్రిప్టులను సృష్టించి అమలు చేయడం
-- వివిధ డిప్లాయ్ సన్నివేశాల కోసం ఆటోమేటెడ్ చెకింగ్ వర్క్‌ఫ్లోలను డిజైన్ చేయడం
-- పరిసరానికి ప్రత్యేక ధృవీకరణ ప్రొసీజర్లు మరియు పాలసీలను అమలు చేయడం
-- డిప్లాయ్ సిద్ధత కోసం ప్రోఅక్టివ్ మానిటరింగ్ మరియు అలర్టింగ్ కన్ఫిగర్ చేయడం
-- ప్రీ-డిప్లాయ్ సమస్యలను ట్రబుల్షూట్ చేసి సరిదిద్దే చర్యలు అమలు చేయడం
-- ప్రీ-ఫ్లైట్ చెక్స్‌ను డెవ్‌ఓప్స్ పైప్‌లైన్లు మరియు ఆటోమేషన్ వర్క్‌ఫ్లోలలో సమీకరించడం
+పూర్తి చేసిన తర్వాత, మీరు చేయగలరు:
+- సమగ్ర ప్రీ-ఫ్లైట్ ధృవీకరణ స్క్రిప్ట్‌లు సృష్టించి అమలు చేయండి
+- వివిధ డిప్లాయ్‌మెంట్ సన్నివేశాలకు ఆటోమేటెడ్ తనిఖీ వర్క్‌ఫ్లోలను రూపకల్పన చేయండి
+- వాతావరణ నిర్దిష్ట ధృవీకరణ విధానాలు మరియు విధానాలను అమలు చేయండి
+- డిప్లాయ్‌మెంట్ సిద్ధత కోసం సందర్భరహిత మానిటరింగ్ మరియు అలర్టింగ్‌ను ఆకృతీకరించండి
+- ప్రీ-డిప్లాయ్‌మెంట్ సమస్యలను పరిష్కరించగలరు మరియు సరిదిద్దట చర్యలను అమలు చేయండి
+- ప్రీ-ఫ్లైట్ తనిఖీలను DevOps పైప్‌లైన్‌లు మరియు ఆటోమెషన్ వర్క్‌ఫ్లోలలో సమ్మిళితం చేయండి
 
-## అంశాల జాబితా
+## విషయ సూచిక
 
-- [సారాంశం](#సారాంశం)
-- [ఆటోమేటెడ్ ప్రీ-ఫ్లైట్ స్క్రిప్ట్](#ఆటోమేటెడ్-ప్రీ-ఫ్లైట్-స్క్రిప్ట్)
-- [మాన్యువల్ ధృవీకరణ చెక్లిస్ట్](#codeblock1)
-- [పర్యావరణ ధృవీకరణ](#✅-బ్యాకప్-రికవరీ)
-- [వనరు ధృవీకరణ](#ప్రొడక్షన్-పర్యావరణ-ధృవీకరణ)
-- [సెక్యూరిటీ & కంప్లయెన్స్ తనిఖీలు](#security--compliance-checks)
-- [పనితీరు & సామర్థ్య ప్రణాళిక](#performance--capacity-planning)
-- [సాధారణ సమస్యలను పరిష్కరించడం](#troubleshooting-common-issues)
+- [అవలోకనం](#overview)
+- [ఆటోమేటెడ్ ప్రీ-ఫ్లైట్ స్క్రిప్ట్](#automated-pre-flight-script)
+- [మాన్యువల్ ధృవీకరణ తనిఖీ జాబితా](#manual-validation-checklist)
+- [పరిసరాల ధృవీకరణ](#environment-validation)
+- [వనరు ధృవీకరణ](#resource-validation)
+- [భద్రత & అనుగుణ్యత తనిఖీలు](#security--compliance-checks)
+- [పనితీరు & సామర్థ్య ప్రణాళిక](capacity-planning.md)
+- [సాధారణ సమస్యల పరిష్కారం](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-## సారాంశం
+## అవలోకనం
 
-ప్రీ-ఫ్లైట్ తనిఖీలు డిప్లాయ్ చేయడానికి ముందు అమలు చేయబడే కీలక ధృవీకరణలు, ఇవి నిర్ధారిస్తాయి:
+ప్రీ-ఫ్లైట్ తనిఖీలు అవసరమైన ధృవీకరణలు, ఇవి పంపిణీకి ముందే నిర్వహించబడతాయి, క్రింది విషయాలను నిర్ధారించడానికి:
 
-- **లక్ష్య ప్రాంతాలలో వనరుల లభ్యత** మరియు క్వోటాలు
-- **ప్రామాణీకరణ మరియు అనుమతులు** సరైనగా కాన్ఫిగర్ చేయబడ్డాయా
-- **టెంప్లేట్ చెల్లుబాటు తత్వం** మరియు పారామితుల సరైనత
-- **నెట్‌వర్క్ కనెక్టివిటీ** మరియు ఆధార్యతలు
-- **సంస్థా విధానాలతో భద్రతా అనుగుణత**
-- **ఖర్చు అంచనా** బడ్జెట్ పరిమితులలో ఉందా
+- **లక్ష్య ప్రాంతాల్లో వనరు అందుబాటు** మరియు కోటాలు
+- **యాజమాన్యం మరియు అనుమతులు** సరైనవిగా ఏర్పాటుచేయబడ్డాయా
+- **టెంప్లేట్ చెలామణి** మరియు పారామీటర్ సరైనత
+- **నెట్‌వర్క్ కనెక్టివిటీ** మరియు ఆధారాలు
+- **సంస్థా విధానాలతో భద్రతా అనుగుణ్యత**
+- **బడ్జెట్ పరిమితులలో ఖర్చు అంచనాలు**
 
-### ప్రీ-ఫ్లైట్ చెక్స్ను ఎప్పుడు నిర్వహించాలి
+### ఎప్పుడు ప్రీ-ఫ్లైట్ తనిఖీలు నిర్వహించాలి
 
-- **కొత్త పరిసరానికి మొదటి డిప్లాయ్ ముందు**
-- **ప్రముఖ టెంప్లేట్ మార్పుల తర్వాత**
-- **ప్రొడక్షన్ డిప్లాయ్‌ల ముందు**
-- **Azure ప్రాంతాలను మార్చేప్పుడు**
-- **CI/CD పైప్‌లైన్ల భాగంగా**
+- **కొత్త వాతావరణానికి మొదటి పంపిణీ ముందు**
+- **ప్రభావవంతమైన టెంప్లెట్ మార్పులకు తర్వాత**
+- **ఉత్పత్తి పంపిణీల ముందు**
+- **Azure ప్రాంతాలు మార్చినప్పుడు**
+- **CI/CD పైప్‌లైన్‌ల భాగంగా**
 
 ---
 
 ## ఆటోమేటెడ్ ప్రీ-ఫ్లైట్ స్క్రిప్ట్
+
+> **వ్యాప్తి మరియు ముందు జాగ్రత్తలు:** ఇవి మీ స్వంత ప్రాజెక్ట్‌లో సేవ్ చేయడానికి ప్రారంభ పాయింట్ స్క్రిప్ట్‌లు, ఈ అధ్యాయం అందించే స్థానిక ఫైళ్లు కాదు. PowerShell వెర్షన్ PowerShell **7.3+** (స్ధానిక కమాండ్ error propagation) మరియు `powershell-yaml` మాడ్యూల్‌ని ఉపయోగిస్తుంది `ConvertFrom-Yaml` కోసం. Bash వెర్షన్ Bash, `jq`, Python 3.10+, మరియు PyYAML అవసరం. రెండూ Azure CLI, azd, మరియు పనిచేస్తున్న Bicep ప్రాజెక్ట్‌ను అవసరం. ఇవి డయాగ్నస్టిక్స్ మాత్రమే, పంపిణీ సిద్ధత, సామర్థ్యం, లేదా అనుగుణ్యత కు సాక్ష్యాలు కాదు. `azd provision --preview` కు ముందు టెంప్లేట్ హుక్స్‌ను పరిశీలించండి; హుక్స్ అనూహ్య ప్రాజెక్ట్ ఆదేశాలను అమలు చేయవచ్చు.
 
 ### PowerShell ప్రీ-ఫ్లైట్ చెకర్
 
@@ -100,7 +102,14 @@ param(
     [switch]$Detailed
 )
 
-# అవుట్పుట్ కోసం రంగుల కోడింగ్
+# Fail native commands into catch blocks instead of reporting false successes.
+$ErrorActionPreference = 'Stop'
+if ($PSVersionTable.PSVersion -lt [version]'7.3') {
+    throw 'PowerShell 7.3+ is required for this script.'
+}
+$PSNativeCommandUseErrorActionPreference = $true
+
+# Color coding for output
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +137,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # AZD ఇన్‌స్టాలేషన్‌ను తనిఖీ చేయండి
+    # Check AZD installation
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +147,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Azure CLI ఇన్‌స్టాలేషన్‌ను తనిఖీ చేయండి
+    # Check Azure CLI installation
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +157,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # PowerShell వెర్షన్‌ను తనిఖీ చేయండి
+    # Check PowerShell version
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,23 +172,23 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # AZD ప్రమాణీకరణను తనిఖీ చేయండి
+        # Check AZD authentication
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
-        if ($azdAuth.status -eq "Logged-in") {
-            Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
+        if ($azdAuth.status -eq "success") {
+            Write-Status "AZD authentication" "Success" "Token available; expires $($azdAuth.expiresOn)"
         }
         else {
             Write-Status "AZD authentication" "Error" "Run 'azd auth login'"
             return $false
         }
         
-        # Azure CLI ప్రమాణీకరణను తనిఖీ చేయండి
+        # Check Azure CLI authentication
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # సబ్‌స్క్రిప్షన్ యాక్సెస్‌ను ధృవీకరించండి
+        # Validate subscription access
         $subscriptionId = $azAccount.id
-        $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
+        $subscription = az account show --subscription $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
         
         return $true
@@ -194,39 +203,29 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # ప్రస్తుత వినియోగదారుడి పాత్ర కేటాయింపులను పొందండి
+        # Get current user's role assignments
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
             $_.roleDefinitionName -eq "Contributor" -or 
-            $_.roleDefinitionName -eq "Owner" -or
-            $_.roleDefinitionName -eq "User Access Administrator"
+            $_.roleDefinitionName -eq "Owner"
         }
         
         if ($hasContributor) {
-            Write-Status "Required permissions" "Success" "Contributor or higher role found"
+            Write-Status "Role assignment inventory" "Info" "Contributor/Owner found; verify effective scope, policy and any role-assignment permissions separately"
         }
         else {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # రిసోర్స్ గ్రూప్ సృష్టిని పరీక్షించండి (నిర్దేశించబడితే)
+        # Test resource group creation (if specified)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # రిసోర్స్ గ్రూప్‌ను సృష్టించే సామర్థ్యాన్ని పరీక్షించండి
-                try {
-                    az group create --name "preflight-test-rg" --location $Location --output none
-                    az group delete --name "preflight-test-rg" --yes --output none
-                    Write-Status "Resource group creation" "Success" "Can create resource groups"
-                }
-                catch {
-                    Write-Status "Resource group creation" "Error" "Cannot create resource groups"
-                    return $false
-                }
+                Write-Status "Resource group creation" "Warning" "Group does not exist. Review subscription-scope permissions; this diagnostic does not create/delete test groups."
             }
         }
         
@@ -242,25 +241,28 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # కంప్యూట్ కోటాలను తనిఖీ చేయండి
+        # Check compute quotas
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # నిర్దిష్ట కోటాలను తనిఖీ చేయండి
+        # Check specific quotas
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
-        if ($coreQuota) {
+        if ($coreQuota -and $coreQuota.limit -gt 0) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
             if ($usagePercent -lt 80) {
                 Write-Status "Compute cores quota" "Success" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
+            } else {
+                Write-Status "Compute cores quota" "Warning" "Missing or zero quota; verify service requirements"
             }
             else {
                 Write-Status "Compute cores quota" "Warning" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
             }
         }
         
-        # App Service పరిమితులను తనిఖీ చేయండి
+        # Check App Service limits
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
-            if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
+            $displayLocation = az account list-locations --query "[?name=='$Location'].displayName | [0]" -o tsv
+            if ($appServiceUsage | Where-Object { $_.name -eq $Location -or $_.name -eq $displayLocation }) {
                 Write-Status "App Service availability" "Success" "Available in $Location"
             }
             else {
@@ -271,28 +273,27 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # స్టోరేజ్ అకౌంట్ పరిమితులను తనిఖీ చేయండి
-        $storageAccounts = az storage account list --output json | ConvertFrom-Json
-        $accountCount = ($storageAccounts | Measure-Object).Count
-        if ($accountCount -lt 200) {
-            Write-Status "Storage account limit" "Success" "$accountCount/250 storage accounts"
+        # Check storage account limits
+        $storageUsage = @(az storage account show-usage --location $Location --output json | ConvertFrom-Json)[0]
+        if ($storageUsage -and $storageUsage.limit -gt 0 -and $storageUsage.currentValue -lt $storageUsage.limit) {
+            Write-Status "Storage account quota" "Info" "$($storageUsage.currentValue)/$($storageUsage.limit) in $Location"
         }
         else {
-            Write-Status "Storage account limit" "Warning" "$accountCount/250 storage accounts"
+            Write-Status "Storage account quota" "Warning" "No headroom or missing quota data"
         }
         
         return $true
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # అడ్డంకి కలిగించదు
+        return $true # Non-blocking
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Azure ఎండ్పాయింట్‌లను పరీక్షించండి
+    # Test Azure endpoints
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -306,13 +307,19 @@ function Test-NetworkConnectivity {
             Write-Status "Connectivity to $endpoint" "Success" "Status: $($response.StatusCode)"
         }
         catch {
-            Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+            # A 401/403/404 response may still prove HTTP reachability.
+            if ($_.Exception.Response) {
+                Write-Status "Connectivity to $endpoint" "Info" "HTTP response received; this is not an authorization test"
+            } else {
+                Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+                return $false
+            }
         }
     }
     
-    # DNS రిజల్యూషన్‌ను పరీక్షించండి
+    # Test DNS resolution
     try {
-        $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
+        $dnsResult = [System.Net.Dns]::GetHostAddresses("management.azure.com")
         Write-Status "DNS resolution" "Success" "Resolved successfully"
     }
     catch {
@@ -326,18 +333,21 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # azure.yaml ఉందో లేదో తనిఖీ చేయండి
+    # Check if azure.yaml exists
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # azure.yaml‌ని పార్స్ చేయండి
+        # Parse azure.yaml
         try {
+            if (-not (Get-Command ConvertFrom-Yaml -ErrorAction SilentlyContinue)) {
+                throw 'ConvertFrom-Yaml requires the powershell-yaml module.'
+            }
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # సేవలను ధృవీకరించండి
+            # Validate services
             if ($azureYaml.services) {
-                $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
+                $serviceCount = $azureYaml.services.Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
             }
             else {
@@ -345,7 +355,7 @@ function Test-TemplateValidation {
             }
         }
         catch {
-            Write-Status "azure.yaml parsing" "Error" "Invalid YAML format"
+            Write-Status "azure.yaml parsing" "Error" $_.Exception.Message
             return $false
         }
     }
@@ -354,13 +364,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # ఇన్‌ఫ్రాస్ట్రక్చర్ ఫైళ్లను తనిఖీ చేయండి
+    # Check for infrastructure files
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # main.bicep ఉంటే దానిని ధృవీకరించండి
+            # Validate main.bicep if it exists
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,12 +391,12 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 కొత్త: ఇన్‌ఫ్రాస్ట్రక్చర్ ప్రివ్యూను పరీక్షించండి (సురక్షిత డ్రై-రన్)
+    # Preview ARM changes only after reviewing the project's hooks.
     try {
-        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        Write-Status "Infrastructure preview test" "Info" "Previewing proposed changes (not a capacity or deployment guarantee)..."
         $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
-            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+            Write-Status "Infrastructure preview" "Success" "Preview completed; review changes and remaining diagnostics"
         }
         else {
             Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
@@ -403,7 +413,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # లోకేషన్ చెల్లుబాటులో ఉందో తనిఖీ చేయండి
+        # Check if location is valid
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,13 +425,13 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # ప్రాంతంలో సేవుల అందుబాటును తనిఖీ చేయండి
+        # Check service availability in region
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
             try {
                 $providers = az provider show --namespace $service --output json | ConvertFrom-Json
-                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $Location }
+                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $validLocation.displayName }
                 
                 if ($resourceTypes) {
                     Write-Status "$service availability" "Success" "Available in $Location"
@@ -446,11 +456,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # మూలభూత ఖర్చు అంచనా (ఖచ్చితమైన అంచనాలకు Azure Pricing API అవసరం)
+    # Basic cost estimation (would need Azure Pricing API for accurate estimates)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # బడ్జెట్ ఉందో లేదో తనిఖీ చేయండి
+    # Check if budget exists
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +480,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # సాధారణ భద్రతా పద్ధతులను తనిఖీ చేయండి
+    # Text-search heuristics only: presence of keywords is not compliance proof.
     try {
-        # Key Vault కాన్ఫిగర్ చేయబడిందా తనిఖీ చేయండి
+        # Check if Key Vault is configured
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +490,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # మెనేజ్డ్ ఐడెంటిటీ వినియోగాన్ని తనిఖీ చేయండి
+        # Check for managed identity usage
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +498,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # HTTPS అమలును తనిఖీ చేయండి
+        # Check for HTTPS enforcement
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +514,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# ప్రధాన అమలు
+# Main execution
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +526,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # అన్ని తనిఖీలను నడపండి
+    # Run all checks
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -527,7 +537,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # సారాంశం
+    # Summary
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -547,7 +557,7 @@ function Invoke-PreflightCheck {
     Write-Host ""
     if ($allPassed) {
         Write-Host "${Green}✓ All pre-flight checks passed ($passedCount/$totalCount)${Reset}"
-        Write-Host "${Green}✓ Ready for deployment!${Reset}"
+        Write-Host "${Green}✓ Implemented checks passed; review warnings and untested requirements.${Reset}"
         exit 0
     }
     else {
@@ -557,7 +567,8 @@ function Invoke-PreflightCheck {
     }
 }
 
-# ప్రీ-ఫ్లైట్ తనిఖీని నడపండి
+# Run the pre-flight check
+azd env select $EnvironmentName
 Invoke-PreflightCheck
 ```
 
@@ -565,18 +576,18 @@ Invoke-PreflightCheck
 
 ```bash
 #!/bin/bash
-# Unix/Linux వ్యవస్థల కోసం ముందస్తు తనిఖీల యొక్క Bash సంస్కరణ
+# Bash version of pre-flight checks for Unix/Linux systems
 
 set -euo pipefail
 
-# రంగు కోడ్లు
+# Color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # రంగు లేదు
+NC='\033[0m' # No Color
 
-# గ్లోబల్ వేరియబుల్స్
+# Global variables
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -606,7 +617,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # AZD సంస్థాపనను తనిఖీ చేయండి
+    # Check AZD installation
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +626,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Azure CLI సంస్థాపనను తనిఖీ చేయండి
+    # Check Azure CLI installation
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,12 +635,16 @@ check_prerequisites() {
         return 1
     fi
     
-    # jq సంస్థాపనను తనిఖీ చేయండి
+    # Check jq installation
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
-        print_status "jq not found" "warning" "Install jq for better JSON parsing"
+        print_status "jq not found" "error" "jq is required"
+        return 1
     fi
+    python3 -c "import yaml" >/dev/null 2>&1 || {
+        print_status "Python/PyYAML not found" "error" "Python 3 and PyYAML are required"; return 1;
+    }
     
     return 0
 }
@@ -637,16 +652,16 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # AZD ప్రమాణీకరణను తనిఖీ చేయండి
-    if azd auth login --check-status >/dev/null 2>&1; then
-        local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
-        print_status "AZD authentication" "success" "User: $principal_name"
+    # Check AZD authentication
+    # --check-status returns exit code 0 even when unauthenticated; inspect JSON.
+    if azd auth login --check-status --output json | jq -e '.status == "success"' >/dev/null; then
+        print_status "AZD authentication" "success" "Token available"
     else
         print_status "AZD authentication" "error" "Run 'azd auth login'"
         return 1
     fi
     
-    # Azure CLI ప్రమాణీకరణను తనిఖీ చేయండి
+    # Check Azure CLI authentication
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,11 +676,11 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # azure.yamlను తనిఖీ చేయండి
+    # Check azure.yaml
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # ప్రాథమిక YAML ధృవీకరణ
+        # Basic YAML validation
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -677,13 +692,13 @@ check_template_validation() {
         return 1
     fi
     
-    # ఇన్ఫ్రాస్ట్రక్చర్ ఫైళ్లను తనిఖీ చేయండి
+    # Check infrastructure files
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # main.bicep ఉంటే దాన్ని ధృవీకరించండి
+            # Validate main.bicep if exists
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +721,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # స్థానం చెల్లుబాటు ఉందా అని తనిఖీ చేయండి
+    # Check if location is valid
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,11 +729,13 @@ check_regional_availability() {
         return 1
     fi
     
-    # సేవా అందుబాటును తనిఖీ చేయండి
+    # Check service availability
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
+    local display_location
+    display_location=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
     for service in "${services[@]}"; do
-        if az provider show --namespace "$service" --query "resourceTypes[?locations[?contains(@, '$LOCATION')]]" --output tsv | grep -q .; then
+        if az provider show --namespace "$service" --query "resourceTypes[?contains(locations, '$display_location')]" --output tsv | grep -q .; then
             print_status "$service availability" "success" "Available in $LOCATION"
         else
             print_status "$service availability" "warning" "May not be available in $LOCATION"
@@ -729,7 +746,7 @@ check_regional_availability() {
 }
 
 main() {
-    # కమాండ్ లైన్ ఆర్గ్యుమెంట్లను పార్స్ చేయండి
+    # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +772,7 @@ main() {
         esac
     done
     
-    # అవసరమైన పరామితులను ధృవీకరించండి
+    # Validate required parameters
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,20 +785,22 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # తనిఖీలు నడపండి
+    # Run checks
     local all_passed=true
     
     check_prerequisites || all_passed=false
+    if ! $all_passed; then exit 1; fi
+    azd env select "$ENVIRONMENT_NAME" || exit 1
     check_authentication || all_passed=false
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # సారాంశం
+    # Summary
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
         echo -e "${GREEN}✓ All pre-flight checks passed${NC}"
-        echo -e "${GREEN}✓ Ready for deployment!${NC}"
+        echo -e "${GREEN}✓ Implemented checks passed; review warnings and untested requirements.${NC}"
         exit 0
     else
         echo -e "${RED}✗ Some pre-flight checks failed${NC}"
@@ -790,100 +809,103 @@ main() {
     fi
 }
 
-# ప్రధాన ఫంక్షన్‌ను నడపండి
+# Run main function
 main "$@"
 ```
 
 ---
 
-## మాన్యువల్ ధృవీకరణ చెక్లిస్ట్
+## మాన్యువల్ ధృవీకరణ తనిఖీ జాబితా
 
-### ప్రీ-డిప్లాయ్ చెక్లిస్ట్
+### ప్రీ-డిప్లాయ్‌మెంట్ తనిఖీ జాబితా
 
-ఈ చెక్లిస్ట్‌ను ప్రింట్ చేసి ప్రతి అంశాన్ని డిప్లాయ్ ముందు నిర్ధారించండి:
+ఈ తనిఖీ జాబితాను ముద్రించి, ప్రతి అంశాన్ని పంపిణీకి ముందు నిర్ధారించండి:
 
-#### ✅ పర్యావరణ ఏర్పాట్లు
-- [ ] AZD CLI ఇన్‌స్టాల్ చేయబడింది మరియు తాజా వెర్షన్‌కు అప్‌డేట్ చేయబడింది
-- [ ] Azure CLI ఇన్‌స్టాల్ చేయబడినది మరియు ప్రామాణీకరించబడింది
-- [ ] సరైన Azure subscription ఎంపిక చేయబడింది
-- [ ] పర్యావరణ పేరు ప్రత్యేకంగా ఉంది మరియు నామకరణ నియమాలను అనుసరిస్తుంది
-- [ ] లక్ష్య resource group గుర్తించబడింది లేదా సృష్టించబడగలదు
+#### ✅ వాతావరణ ఏర్పాట్లు
+- [ ] AZD CLI ఇన్‌స్టాల్ చేసి అప్‌డేట్ చేసిన తాజా వెర్షన్
+- [ ] Azure CLI ఇన్‌స్టాల్ చేసి ధృవీకరించబడింది
+- [ ] సరైన Azure సబ్స్క్రిప్షన్ ఎంపిక చేయబడింది
+- [ ] వాతావరణ పేరు ప్రత్యేకంగా ఉండి పేరు నిబంధనలను అనుసరిస్తుంది
+- [ ] లక్ష్య వనరు గ్రూప్ గుర్తించబడింది లేదా సృష్టించబడవచ్చు
 
-#### ✅ ప్రామాణీకరణ & అనుమతులు
-- [ ] విజయవంతంగా `azd auth login` తో ప్రామాణీకరించబడింది
-- [ ] యూజర్‌కు లక్ష్య subscription/resource group పై Contributor role ఉంది
-- [ ] CI/CD కోసం service principal కాన్ఫిగర్ చేయబడినది (ఆవశ్యకమైనప్పుడు)
-- [ ] కాలపరిమితి ముగిసిన సర్టిఫికేట్లు లేదా క్రెడెన్షియల్స్ ఉండవు
+#### ✅ యాజమాన్యం & అనుమతులు
+- [ ] `azd auth login` తో విజయవంతంగా ధృవీకరించబడ్డారు
+- [ ] యూజర్ లక్ష్య సబ్స్క్రిప్షన్/వనరు సమూహంపై కాంట్రిబ్యూటర్ పాత్ర కలిగి ఉన్నారు
+- [ ] టెంప్లెట్లుగా పాత్ర కేటాయింపులు ఉంటే, పంపిణీ చేసే గుర్తింపు కూడా స్కోప్ చేయబడిన పాత్ర కేటాయింపు అనుమతులు కలిగి ఉండాలి (కాంట్రిబ్యూటర్ మాత్రమే ఈ అనుమతులు ఇవ్వదు)
+- [ ] CI/CD కోసం సర్వీస్ ప్రిన్సిపల్ ఆర్గనైజ్ చేయబడింది (పనిచేస్తే)
+- [ ] గడువు ముగిసిన సర్టిఫికెట్లు లేదా ప్రమాణపత్రాలు లేవు
 
 #### ✅ టెంప్లేట్ ధృవీకరణ
-- [ ] `azure.yaml` ఉనికిలో ఉంది మరియు చెల్లుబాటు అయ్యే YAML
-- [ ] azure.yamlలో నిర్వచించబడిన అన్ని సేవలకు అనుగుణమైన సోర్సు కోడ్ ఉంది
-- [ ] `infra/` డైరెక్టరీలో Bicep టెంప్లేట్లు ఉన్నాయని నిర్ధారించండి
-- [ ] `main.bicep` లో ఎర్రర్లు లేకుండా కంపైల్ అవుతుంది (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastructure preview విజయవంతంగా రన్ అవుతుంది (`azd provision --preview`)
-- [ ] అవసరమైన అన్ని పారామితులకు డిఫాల్ట్ విలువలు ఉన్నాయి లేదా అందిస్తారు
-- [ ] టెంప్లేట్‌లలో హార్డ్‌కోడ్ చేసిన రహస్యాలు ఉండవు
+- [ ] `azure.yaml` ఉంది మరియు సరైన YAML
+- [ ] azure.yaml లో నిర్వచించిన అన్ని సేవలకు సరైన సోర్స్ కోడ్ ఉంది
+- [ ] `infra/` డైరెక్టరీలో Bicep టెంప్లెట్లు ఉన్నాయి
+- [ ] `main.bicep` లో తప్పుల్లేకుండా కంపైల్ అవుతుంది (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 ఇన్‌ఫ్రా వీవ్ విజయవంతంగా నడుస్తుంది (`azd provision --preview`)
+- [ ] అవసరమైన అన్ని పారామీటర్లు డిఫాల్ట్ విలువలు కలిగి లేదా అందించబడ్డాయి
+- [ ] టెంప్లెట్లలో హార్డ్‌కోడ్ చేసిన రహస్యాలు లేవు
 
 #### ✅ వనరు ప్రణాళిక
-- [ ] లక్ష్య Azure region ఎంచుకోబడింది మరియు ధృవీకరించబడింది
+- [ ] లక్ష్య Azure ప్రాంతం ఎంచుకుని ధృవీకరించబడింది
 - [ ] లక్ష్య ప్రాంతంలో అవసరమైన Azure సేవలు అందుబాటులో ఉన్నాయి
-- [ ] ప్లాన్ చేసిన వనరులకు సరిపడా క్వాటాలు అందుబాటులో ఉన్నాయి
-- [ ] వనరు నామకరణ تضాదాలు తనిఖీ చేయబడ్డాయి
-- [ ] వనరుల మధ్య ఆధార్యతలు అర్థం చేసుకోబడ్డాయి
+- [ ] ప్రణాళిక చేసిన వనరులకు తగినంత కోటా లభ్యం
+- [ ] వనరు పేరు పొరపాట్లు తనిఖీ చేయబడ్డాయి
+- [ ] వనర్ల మధ్య ఆధారాలు అర్థం చేసుకోబడ్డాయి
 
-#### ✅ నెట్‌వర్క్ & సెక్యూరిటీ
-- [ ] Azure ఎండ్‌పాయింట్‌లకు నెట్‌వర్క్ కనెక్టివిటీ ధృవీకరించబడింది
-- [ ] అవసరమైతే ఫైర్‌వాల్/ప్రాక్సీ సెట్టింగ్స్ కాన్ఫిగర్ చేయబడ్డాయి
-- [ ] రహస్యాలు నిర్వహణ కోసం Key Vault కాన్ఫిగర్ చేయబడింది
-- [ ] సాధ్యమైన చోట Managed identities ఉపయోగించబడ్డాయి
-- [ ] వెబ్ అప్లికేషన్ల కోసం HTTPS బలవంతం చేయబడింది
+#### ✅ నెట్‌వర్క్ & భద్రత
+- [ ] Azure ఎండ్‌పాయింట్లకు నెట్‌వర్క్ కనెక్టివిటి ధృవీకరించబడింది
+- [ ] అవసరమైతే ఫైర్వాల్/ప్రాక్సీ అమరికలు ఏర్పాటుచేయబడినవి
+- [ ] రహస్య నిర్వహణ కోసం కీ వాల్ట్ ఆకృతీకరించబడింది
+- [ ] సాధ్యమైన చోట్ల నిర్వహణ గుర్తింపులు ఉపయోగించబడ్డాయి
+- [ ] వెబ్ అప్లికేషన్ల కోసం HTTPS అమలు చేయబడింది
 
 #### ✅ ఖర్చు నిర్వహణ
-- [ ] ఖర్చుల అంచనాలు Azure Pricing Calculator ఉపయోగించి లెక్కించబడ్డాయి
-- [ ] అవసరమైతే బడ్జెట్ అలర్ట్స్ కాన్ఫిగర్ చేయబడ్డాయి
-- [ ] పరిసర రకానికి సరిపోయే SKUs ఎంపిక చేయబడ్డాయి
-- [ ] ప్రొడక్షన్ వర్క్లోడ్‌ల కోసం రిజర్వ్డ్ వ్యాసమును పరిగణనలోకి తీసుకున్నారు
+- [ ] Azure ప్రైసింగ్ క్యాల్క్యులేటర్ ఉపయోగించి ఖర్చు అంచనాలు లెక్కించబడ్డాయి
+- [ ] అవసరమైతే బడ్జెట్ అలర్ట్లు ఏర్పాటు చేయబడ్డాయి
+- [ ] వాతావరణ రకానికి తగిన SKUs ఎంపిక చేయబడ్డాయి
+- [ ] ఉత్పత్తి వర్క్‌లోడ్‌ల కోసం రిజర్వ్డ్ సామర్థ్యం పరిశీలించబడింది
 
-#### ✅ మానిటరింగ్ & ఆబ్జర్వబిలిటీ
-- [ ] టెంప్లేట్‌లలో Application Insights కాన్ఫిగర్ చేయబడ్డాయి
-- [ ] Log Analytics workspace ప్లాన్ చేయబడింది
-- [ ] కీలక మెట్రిక్‌ల కోసం అలర్ట్ రూల్స్ నిర్వచించబడ్డాయి
-- [ ] అప్లికేషన్లలో హెల్త్ చెక్ ఎండ్‌పాయింట్‌లు అమలు చేయబడ్డాయి
+#### ✅ మానిటరింగ్ & పరిశీలన
+- [ ] టెంప్లెట్లలో అప్లికేషన్ ఇన్సైట్స్ ఆకృతీకరించబడింది
+- [ ] లాగ్ అనలిటిక్స్ వర్క్‌స్పేస్ ప్రణాళిక చేయబడింది
+- [ ] కీలక మెట్రిక్స్ కోసం అలర్ట్ నియమాలు నిర్వచించబడ్డాయి
+- [ ] అప్లికేషన్లలో హెల్త్ చెక్ ఎండ్‌పాయింట్లు అమలు చేయబడ్డాయి
 
-#### ✅ బ్యాకప్ & రికవరీ
+#### ✅ బ్యాకప్ & పునఃప్రాప్తి
 - [ ] డేటా వనరుల కోసం బ్యాకప్ వ్యూహం నిర్వచించబడింది
-- [ ] Recovery Time Objectives (RTO) డాక్యుమెంట్ చేయబడ్డాయి
-- [ ] Recovery Point Objectives (RPO) డాక్యుమెంట్ చేయబడ్డాయి
-- [ ] ప్రొడక్షన్ కోసం డిజాస్టర్ రికవరీ ప్లాన్ సిద్ధంగా ఉంది
+- [ ] పునరుద్ధరణ సమయం లక్ష్యాలు (RTO) డాక్యుమెంట్ చేయబడ్డాయి
+- [ ] పునరుద్ధరణ పాయింట్ లక్ష్యాలు (RPO) డాక్యుమెంట్ చేయబడ్డాయి
+- [ ] ఉత్పత్తి కోసం విపత్తు పునరుద్ధరణ ప్రణాళిక ఉంది
 
 ---
 
-## పర్యావరణ ధృవీకరణ
+## వాతావరణ ధృవీకరణ
 
-### డెవలప్మెంట్ పర్యావరణ ధృవీకరణ
+క్రింది `grep` తనిఖీలు మాత్రమే చైతన్య గుర్తుదారికలో ఉపయోగించుకోదగినవి. ఒక సరిపోయే పదం కనుగొనడం తప్పకుండా ఒక లక్షణం సరైన వనరులో ఏర్పాటయిందని నిరూపించదు, మరియు ఒక పదం లేకపోవడం అప్పుడు అది లేనట్టే అని నిరూపించదు (మాడ్యూల్స్/డిఫాల్ట్స్ కలిగి ఉండొచ్చు). వీటిని ఉత్పత్తి అనుగుణ్యత గేట్లుగా ఉపయోగించవద్దు.
+
+### అభివృద్ధి వాతావరణ ధృవీకరణ
 
 ```bash
 #!/bin/bash
-# డెవలప్‌మెంట్ వాతావరణానికి ప్రత్యేక ధృవీకరణలు
+# Development environment specific validations
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # డెవలప్‌మెంట్‌కు అనుకూలంగా ఉన్న కాన్ఫిగరేషన్లను తనిఖీ చేయండి
+    # Check for development-friendly configurations
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # ఆటో-షట్‌డౌన్ కాన్ఫిగరेषన్ల కోసం తనిఖీ చేయండి
+    # Check for auto-shutdown configurations
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # డెవలప్‌మెంట్ డేటాబేస్ కాన్ఫిగరేషన్లను ధృవీకరించండి
+    # Validate development database configurations
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,37 +914,37 @@ validate_dev_environment() {
 }
 ```
 
-### ప్రొడక్షన్ పర్యావరణ ధృవీకరణ
+### ఉత్పత్తి వాతావరణ ధృవీకరణ
 
 ```bash
 #!/bin/bash
-# ప్రొడక్షన్ పర్యావరణానికి సంబంధించిన ప్రత్యేక ధృవీకరణలు
+# Production environment specific validations
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # అధిక లభ్యత కాన్ఫిగరేషన్లను తనిఖీ చేయండి
+    # Check for high availability configurations
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # బ్యాకప్ కాన్ఫిగరేషన్లను తనిఖీ చేయండి
+    # Check for backup configurations
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # మానిటరింగ్ సెటప్‌ను ధృవీకరించండి
+    # Validate monitoring setup
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # భద్రత కాన్ఫిగరేషన్లను తనిఖీ చేయండి
+    # Check for security configurations
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -935,7 +957,7 @@ validate_prod_environment() {
 
 ## వనరు ధృవీకరణ
 
-### క్వోటా ధృవీకరణ స్క్రిప్ట్
+### కోటా ధృవీకరణ స్క్రిప్ట్
 
 ```python
 #!/usr/bin/env python3
@@ -948,17 +970,17 @@ import subprocess
 import sys
 from typing import Dict, List, Tuple
 
-def run_command(command: List[str]) -> Dict:
+def run_command(command: List[str]) -> dict | list | None:
     """Run Azure CLI command and return JSON result"""
     try:
         result = subprocess.run(command, capture_output=True, text=True, check=True)
         return json.loads(result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error running command {' '.join(command)}: {e}")
-        return {}
+        return None
     except json.JSONDecodeError as e:
         print(f"Error parsing JSON: {e}")
-        return {}
+        return None
 
 def check_compute_quotas(location: str) -> bool:
     """Check compute quotas in specified location"""
@@ -976,7 +998,10 @@ def check_compute_quotas(location: str) -> bool:
         if quota_item['name']['value'] in critical_quotas:
             current = quota_item['currentValue']
             limit = quota_item['limit']
-            usage_percent = (current / limit) * 100 if limit > 0 else 0
+            if limit <= 0:
+                print(f"❌ No quota for {quota_item['name']['value']}")
+                return False
+            usage_percent = (current / limit) * 100
             
             status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
             print(f"{status} {quota_item['name']['localizedValue']}: {current}/{limit} ({usage_percent:.1f}%)")
@@ -990,15 +1015,17 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # సబ్‌స్క్రిప్షన్‌లో స్టోరేజ్ అకౌంట్లను పొందండి
-    accounts = run_command(['az', 'storage', 'account', 'list'])
+    # Retrieve regional quota rather than assuming a subscription-wide constant.
+    usages = run_command(['az', 'storage', 'account', 'show-usage', '--location', location])
     
-    if accounts is None:
+    if not usages:
         print("❌ Could not retrieve storage account information")
         return False
     
-    account_count = len(accounts)
-    max_accounts = 250  # డిఫాల్ట్ Azure పరిమితి
+    account_count = usages['currentValue']
+    max_accounts = usages['limit']
+    if max_accounts <= 0:
+        return False
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,18 +1038,14 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # వర్చువల్ నెట్‌వర్క్‌లను తనిఖీ చేయండి
-    vnets = run_command(['az', 'network', 'vnet', 'list'])
-    if vnets is not None:
-        vnet_count = len(vnets)
-        print(f"✅ Virtual Networks: {vnet_count}/1000")
-    
-    # పబ్లిక్ IP చిరునామాలను తనిఖీ చేయండి
-    public_ips = run_command(['az', 'network', 'public-ip', 'list'])
-    if public_ips is not None:
-        ip_count = len(public_ips)
-        print(f"✅ Public IP Addresses: {ip_count}/1000")
-    
+    usages = run_command(['az', 'network', 'list-usages', '--location', location])
+    if not usages:
+        return False
+    for item in usages:
+        current, limit = item['currentValue'], item['limit']
+        print(f"{item['name']['value']}: {current}/{limit}")
+        if limit <= 0 or current >= limit:
+            return False
     return True
 
 def main():
@@ -1034,19 +1057,20 @@ def main():
     
     print("🔍 Azure Quota and Limits Validation")
     print(f"📍 Location: {location}")
-    print(f"⏰ Time: {subprocess.run(['date'], capture_output=True, text=True).stdout.strip()}")
+    from datetime import datetime, timezone
+    print(f"⏰ Time: {datetime.now(timezone.utc).isoformat()}")
     
     all_passed = True
     
-    # తనిఖీలు నిర్వహించండి
+    # Run checks
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # సారాంశం
+    # Summary
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
-        print("✅ All quota checks passed - sufficient capacity available")
+        print("✅ Implemented quota thresholds passed; not a capacity reservation")
         sys.exit(0)
     else:
         print("❌ Some quota limits are near capacity - consider requesting increases")
@@ -1058,20 +1082,20 @@ if __name__ == "__main__":
 
 ---
 
-## సెక్యూరిటీ & కంప్లయెన్స్ తనిఖీలు
+## భద్రత & అనుగుణ్యత తనిఖీలు
 
-### సెక్యూరిటీ ధృవీకరణ స్క్రిప్ట్
+### భద్రత ధృవీకరణ స్క్రిప్ట్
 
 ```bash
 #!/bin/bash
-# AZD పంపిణీల కోసం భద్రత మరియు అనుగుణత ధృవీకరణ
+# Security and compliance validation for AZD deployments
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # కీ వాల్ట్ వినియోగాన్ని తనిఖీ చేయండి
+    # Check for Key Vault usage
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # మేనేజ్డ్ ఐడెంటిటీ వినియోగాన్ని తనిఖీ చేయండి
+    # Check for managed identity usage
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # HTTPS అమలును తనిఖీ చేయండి
+    # Check for HTTPS enforcement
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1119,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # కనిష్ట TLS సంచిక కోసం తనిఖీ చేయండి
+    # Check for minimum TLS version
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1127,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # సార్వజనిక ప్రవేశ పరిమితుల కోసం తనిఖీ చేయండి
+    # Check for public access restrictions
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1135,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # నెట్‌వర్క్ సెక్యూరిటీ గ్రూప్‌ల కోసం తనిఖీ చేయండి
+    # Check for network security groups
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1148,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # డేటా ఎన్‌క్రిప్షన్ కోసం తనిఖీ చేయండి
+    # Check for data encryption
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # ఆడిట్ లాగింగ్ కోసం తనిఖీ చేయండి
+    # Check for audit logging
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # బ్యాకప్ మరియు నిల్వ విధానాలను తనిఖీ చేయండి
+    # Check for backup and retention policies
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1170,7 @@ check_compliance_requirements() {
     fi
 }
 
-# ప్రధాన అమలు
+# Main execution
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1157,13 +1181,13 @@ main() {
         exit 1
     fi
     
-    local security_issues
-    security_issues=$(check_security_practices)
+    local security_issues=0
+    check_security_practices || security_issues=$?
     check_compliance_requirements
     
     echo -e "\n=== Security Check Summary ==="
     if [[ $security_issues -eq 0 ]]; then
-        echo "✅ All security checks passed"
+        echo "✅ Text-search reminders passed; this is not a security/compliance assessment"
         exit 0
     else
         echo "⚠️  $security_issues security recommendations found"
@@ -1177,9 +1201,9 @@ main "$@"
 
 ---
 
-## CI/CD తో సమీకరణ
+## CI/CDతో ఏకీకరణ
 
-### GitHub Actions సమీకరణ
+### GitHub చర్యల ఏకీకరణ
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1203,20 +1227,36 @@ on:
 
 jobs:
   preflight:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
     - name: Install AZD
       uses: Azure/setup-azd@v0.1.0
+      with:
+        version: 1.37.2
     
-    - name: Install Azure CLI
-      uses: azure/setup-azure@v3
+    - name: Verify prerequisites
+      run: |
+        az version
+        jq --version
+        python3 -c "import yaml"
     
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+    - name: AZD Login
+      run: |
+        azd auth login --client-id "${{ vars.AZURE_CLIENT_ID }}" \
+          --tenant-id "${{ vars.AZURE_TENANT_ID }}" \
+          --federated-credential-provider github
     
     - name: Run Pre-flight Checks
       run: |
@@ -1230,15 +1270,11 @@ jobs:
         chmod +x ./scripts/security-check.sh
         ./scripts/security-check.sh
     
-    - name: Upload Results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: preflight-results
-        path: preflight-results.json
 ```
 
-### Azure DevOps సమీకరణ
+ఈ వర్క్‌ఫ్లో కోసం ఫెడరేటెడ్ క్రెడెన్షియల్స్‌ను ఆకృతీకరించండి మరియు సేవ్ చేసిన స్క్రిప్ట్‌లను నడిపించే ముందు ఎంపిక చేసిన azd వాతావరణాన్ని సృష్టించండి/పునరుద్ధరించండి. ఈ ఉదాహరణలు కన్సోల్ అవుట్పుట్‌ను మాత్రమే రాసి, `preflight-results.json` లేదా JUnit ఫైల్‌ను ఉత్పత్తి చేయవు.
+
+### Azure DevOps ఏకీకరణ
 
 ```yaml
 trigger: none
@@ -1272,76 +1308,80 @@ steps:
       curl -fsSL https://aka.ms/install-azd.sh | bash
       export PATH=$PATH:~/.azd/bin
 
-- task: Bash@3
+- task: AzureCLI@2
   displayName: 'Run Pre-flight Checks'
   inputs:
-    targetType: filePath
-    filePath: './scripts/preflight-check.sh'
-    arguments: '--environment-name ${{ parameters.environment }} --location ${{ parameters.location }}'
-
-- task: PublishTestResults@2
-  displayName: 'Publish Pre-flight Results'
-  condition: always()
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: 'preflight-results.xml'
-    testRunTitle: 'Pre-flight Validation'
+    azureSubscription: $(serviceConnection)
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      set -e
+      # Requires a workload-identity-federated service connection.
+      # AzureCLI@2 supplies AZURESUBSCRIPTION_* for the azd provider.
+      azd auth login --federated-credential-provider azure-pipelines
+      bash ./scripts/preflight-check.sh \
+        --environment-name "${{ parameters.environment }}" \
+        --location "${{ parameters.location }}"
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 ```
+
+పైప్‌లైన్ తన azd వాతావరణాన్ని పునరుద్ధరించాలి/సృష్టించాలి మరియు ఈ పాఠంలో చూపించిన స్క్రిప్ట్‌లను ఈ టాస్క్‍ ముందు సేవ్ చేయాలి. ఫెడరేటెడ్ సర్వీస్ కనెక్షన్‌ను కాన్ఫిగర్ చేసి పైప్‌లైన్‌కు అవసరమైన టోకెన్ అనుమతులు ఇవ్వండి. ఒక poprior `AzureCLI@2` టాస్క్ Azure CLI లాగిన్‌కు ఆధారంగా తర్వాతి సాధారణ Bash టాస్క్ ధృవీకరణ తీసుకోదని ఆశించవద్దు.
 
 ---
 
-## ఉత్తమ పద్ధతుల సారాంశం
+## ఉత్తమ అభ్యాసాల సారాంశం
 
-### ✅ ప్రీ-ఫ్లైట్ చెక్ ఉత్తమ పద్ధతులు
+### ✅ ప్రీ-ఫ్లైట్ తనిఖీ ఉత్తమ అభ్యాసాలు
 
-1. **సాధ్యమైనంత వరకు ఆటోమేట్ చేయండి**
-   - చెక్స్‌ను CI/CD పైప్‌లైన్లలో ఇంటిగ్రేట్ చేయండి
-   - పునరావృత ధృవీకరణల కోసం స్క్రిప్టులను ఉపయోగించండి
-   - ఆడిట్ ట్రెయిల్స్ కోసం ఫలితాలను నిల్వ చేయండి
+1. **సాధ్యమైనన్ని ఆటోమేట్ చేయండి**
+   - CI/CD పైప్‌లైన్‌లలో తనిఖీలు ఏకీకరించండి
+   - పునరావృత ధృవీకరణలకు స్క్రిప్ట్‌లను ఉపయోగించండి
+   - ఆడిట్ ట్రైల్స్ కోసం ఫలితాలను నిల్వ చేయండి
 
-2. **పర్యావరణ-ఆధారిత ధృవీకరణ**
-   - dev/staging/prod కోసం వేర్వేరు చెక్సు అమలు చేయండి
-   - ప్రతి పరిసరానికి తగిన భద్రతా అవసరాలు నిర్ధారించండి
-   - కానని-ప్రొడక్షన్ పరిసరాలకు ఖర్చు ఆప్టిమైజేషన్ చేయండి
+2. **వాతావరణ-ప్రత్యక్ష ధృవీకరణ**
+   - dev/staging/prod కోసం వేర్వేరు తనిఖీలు
+   - ప్రతి వాతావరణం కోసం సరైన భద్రత అవసరాలు
+   - ఉత్పత్తి కాని వాతావరణాల కోసం ఖర్చు ఆప్టిమైజేషన్
 
 3. **సమగ్ర కవరేజ్**
-   - ప్రామాణీకరణ మరియు అనుమతులు
-   - వనరు క్వోటాలు మరియు లభ్యత
-   - టెంప్లేట్ ధృవీకరణ మరియు సింటాక్స్
-   - సెక్యూరిటీ మరియు కంప్లయెన్స్ అవసరాలు
+   - యాజమాన్యం మరియు అనుమతులు
+   - వనరు కోటాలు మరియు అందుబాటు
+   - టెంప్లేట్ ధృవీకరణ మరియు వాక్యరచన
+   - భద్రత మరియు అనుగుణ్యత అవసరాలు
 
-4. **స్పష్ట నివేదిక**
-   - రంగు-కోడ్ చేసిన స్థితి సూచనలు
-   - పరిమర్శనాత్మక సందేశాలు మరియు పరిష్కార చర్యల వివరణ
-   - వేగమైన తనిఖీ కోసం సారాంశ నివేదికలు
+4. **స్పష్టమైన రిపోర్టింగ్**
+   - రంగు-కోడెడ్ స్థితి సూచికలు
+   - పరిష్కార చర్యలతో సమగ్ర తప్పిద సందేశాలు
+   - త్వరిత అంచనాకు సారాంశ నివేదికలు
 
-5. **త్వరగా విఫలమవ్వండి (Fail Fast)**
-   - కీలక చెక్స్ విఫలైతే డిప్లాయ్‌ను నిలిపివేయండి
-   - పరిష్కారానికి స్పష్టమైన మార్గదర్శకత ఇవ్వండి
-   - చెక్స్ మళ్లీ రన్ చేయడానికి సులభతర మార్గాలు అందించండి
+5. **త్వరగా విఫలమయ్యేలా ఉండండి**
+   - నిస్సహాయ ఉన్నత తనిఖీలు విఫలమైతే పంపిణీ ఆపు
+   - పరిష్కారం కోసం స్పష్టమైన మార్గదర్శన ఇవ్వండి
+   - తనిఖీలను సులభంగా మళ్ళీ నిర్వహించండి
 
 ### సాధారణ ప్రీ-ఫ్లైట్ లోపాలు
 
-1. **"వేగంగా" డిప్లాయ్‌మెంట్‌ల కోసం ధృవీకరణను వదులుకోవడం**
-2. **డిప్లాయ్ ముందు అనుమతుల సరిపోని తనిఖీలు**
-3. **డిప్లాయ్ విఫలమైన తర్వాతే క్వోటా పరిమితులను గమనించడం**
-4. **CI/CD పైప్‌లైన్లలో టెంప్లేట్లను ధృవీకరించకపోవడం**
-5. **ప్రొడక్షన్ పరిసరాల కోసం భద్రతా ధృవీకరణ మిస్ అవడం**
-6. **అప్రాప్రియేట్ ఖర్చు అంచనాలు, బడ్జెట్ ఆశ్చర్యాలను కలిగించడం**
+1. **"త్వరిత" పంపిణీలు కోసం ధృవీకరణ మిస్ అవడం**
+2. **పంపిణీ కి ముందు అనుమతులు సరిపోకపోవడం**
+3. **కోటా పరిమితులు నిర్లక్ష్యం చేయడం పంపిణీ విఫలం అయ్యేవరకు**
+4. **CI/CD పైప్‌లైన్‌లో టెంప్లెట్‌ల ధృవీకరణ చేయకపోవడం**
+5. **ఉత్పత్తి వాతావరణాల కోసం భద్రత ధృవీకరణ మిస్ అవడం**
+6. **అసమతుల ఖర్చు అంచనాల కారణంగా బడ్జెట్ ఆశ్చర్యాలు**
 
 ---
 
-**సూచన**: అసలు డిప్లాయ్ జాబ్ మొదలు పెట్టేముందు మీ CI/CD పైప్‌లైన్‌లో ప్రీ-ఫ్లైట్ చెక్సును వేర్వేరు జాబ్‌గా రన్ చేయండి. ఇది సమస్యలను ముందుగా పట్టుకోవడానికి సహాయపడుతుంది మరియు డెవలపర్లకు వేగవంతమైన ఫీడ్‌బ్యాక్ అందిస్తుంది.
+**ప్రో టిప్**: ప్రీ-ఫ్లైట్ తనిఖీలను మీ CI/CD పైప్‌లైన్‌లో నిజమైన పంపిణీ ఉద్యోగానికి ముందు వేరే ఉద్యోగంగా నిర్వహించండి. ఇది సమస్యలను తొందరగా గుర్తించడానికి మరియు అభివృద్ధి దారులకు వేగమైన ఫీడ്ബ్యాక్ ఇవ్వడానికి సహాయపడుతుంది.
 
 ---
 
 **నావిగేషన్**
-- **మునుపటి పాఠం**: [SKU ఎంపిక](sku-selection.md)
-- **తదుపరి పాఠం**: [చీట్ షీట్](../../resources/cheat-sheet.md)
+- **క్రితం పాఠం**: [SKU Selection](sku-selection.md)
+- **తరువాత పాఠం**: [Cheat Sheet](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, స్వయంచాలక అనువాదాలలో పొరపాట్లు లేదా తప్పిదాలు ఉండొచ్చు అని దయచేసి గమనించండి. మూల పత్రాన్ని దాని స్థానిక భాషలో అధికారిక మూలంగా పరిగణించాలి. కీలకమైన సమాచారానికి వృత్తిపరులైన మానవ అనువాదాన్ని సిఫార్సు చేయబడుతోంది. ఈ అనువాదాన్ని ఉపయోగించడం వల్ల కలిగిన ఏ అపార్థాలు లేదా తప్పుదోషాలకు మేము బాధ్యులు కాదాము.
+**అస్వీకరణ**:
+ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నిస్తున్నప్పటికీ, ఆటోమేటెడ్ అనువాదాలు తప్పులు లేదా అసమగ్రతలను కలిగి ఉండవచ్చు. దాని స్వదేశ భాషలో ఉన్న అసలు పత్రాన్ని అధికారం కలిగిన మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, ప్రొఫెషనల్ మానవ అనువాదాన్ని సిఫారసు చేస్తాము. ఈ అనువాదం ఉపయోగం వల్ల కలిగే ఏవైనా అపార్థాలు లేదా తప్పుదారులు కోసం మేము బాధ్యత వహించము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -9,7 +9,7 @@
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Last Updated: March 2026
+        📅 Source guidance reviewed: November 2026
       </span>
     </div>
   </div>
@@ -38,8 +38,11 @@ To use this option - fork the repository to your profile, and launch GitHub Code
 This browser preview works in GitHub Codespaces, dev containers, or a local clone with Python and MkDocs installed.
 
 ```bash title="" linenums="0"
-mkdocs serve > /dev/null 2>&1 &
+python -m pip install -r requirements-dev.txt
+python -m mkdocs serve --config-file workshop/mkdocs.yml
 ```
+
+Run these commands from the **course repository root**, not the separately initialized AI sample. Keep the preview in the foreground so errors remain visible; stop it with Ctrl+C. To check the site without serving it, run `python -m mkdocs build --strict --config-file workshop/mkdocs.yml`.
 
 In a few seconds, you will see a pop-up dialog. Select the option to `Open in browser`. The web-based guide will now open in a new browser tab. Some benefits of this preview:
 

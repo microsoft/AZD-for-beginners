@@ -1,433 +1,227 @@
-# Simple Flask API - Container App Example
+# واجهة برمجة تطبيقات Flask بسيطة — تطبيقات حاويات Azure
 
-**مسار التعلم:** مبتدئ ⭐ | **الوقت:** 25-35 دقيقة | **التكلفة:** $0-15/شهر
+**المستوى:** مبتدئ · **الوقت:** 30–45 دقيقة بما في ذلك الإعداد
 
-تطبيق Python Flask REST API كامل وعامل مُعبأ في حاوية ومُشغَّل على Azure Container Apps باستخدام Azure Developer CLI (azd). يوضح هذا المثال نشر الحاويات، التحجيم التلقائي، وأساسيات المراقبة.
+انشر واجهة برمجة تطبيقات CRUD باستخدام Python Flask مع Azure Developer CLI (azd). الشفرة المصدرية، Dockerfile،
+Bicep، ومعلمات النشر مضمنة. هذا **نموذج تعليمي** وليس
+واجهة API جاهزة للإنتاج.
 
-## 🎯 ما ستتعلمونه
+## ما سوف تتعلمه
 
-- نشر تطبيق Python مُحوَّل إلى حاوية على Azure
-- تكوين التحجيم التلقائي مع التحجيم إلى الصفر
-- تنفيذ فحوصات الصحة وفحوصات الجاهزية
-- مراقبة سجلات التطبيق والمقاييس
-- استخدام Azure Developer CLI للنشر السريع
-
-## 📦 ما هو مدرج
-
-✅ **Flask Application** - REST API كامل مع عمليات CRUD (`src/app.py`)  
-✅ **Dockerfile** - تكوين الحاوية جاهز للإنتاج  
-✅ **Bicep Infrastructure** - بيئة Container Apps ونشر API  
-✅ **AZD Configuration** - إعداد نشر بأمر واحد  
-✅ **Health Probes** - تم تكوين فحوصات liveness وreadiness  
-✅ **Auto-scaling** - 0-10 نسخ بناءً على حمل HTTP  
-
-## البنية
+- بناء ونشر حاوية من خلال azd.
+- تكوين الدخول وفحوصات الحياة / الجاهزية.
+- التحقق من استجابات CRUD وفحص سجلات التطبيق.
+- فهم سبب كون البيانات المحفوظة في الذاكرة غير مناسبة للتطبيقات الدائمة.
 
 ```mermaid
-graph TD
-    subgraph ACA[بيئة تطبيقات الحاويات على Azure]
-        Flask[حاوية واجهة برمجة تطبيقات Flask<br/>نقاط نهاية الحالة الصحية<br/>واجهة برمجة تطبيقات REST<br/>التحجيم التلقائي من 0 إلى 10 نسخ]
-        AppInsights[رؤى التطبيق]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
 
-## المتطلبات المسبقة
+**مهم:** العناصر محفوظة في عملية واحدة. الافتراضي هو **عامل Gunicorn واحد،
+0–1 نسخ**، لتجنب تعارض البيانات عبر العمال/النسخ عمداً.
+تُفقد العناصر عند إعادة التشغيل أو تغيير النسخة أو التوسع إلى الصفر. زيادة عدد النسخ
+تتطلب تخزينًا دائمًا مشتركًا. لا تحتوي الواجهة على مصادقة أو ترخيص.
 
-### مطلوب
-- **Azure Developer CLI (azd)** - [دليل التثبيت](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **اشتراك Azure** - [حساب مجاني](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (لاختبار محلي)
+## المتطلبات الأساسية
 
-### التحقق من المتطلبات المسبقة
+- [azd المستقر الحالي](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (الإصدار المنشور عند وقت المراجعة: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) للتحقق.
+- Docker مع تشغيل الخادم الخاص به؛ مطلوب لبناء الصورة المحلية الافتراضية.
+- اشتراك Azure، أذونات إنشاء الموارد، وحصة إقليمية لتطبيقات الحاويات.
+- Bash للأوامر أدناه (أو PowerShell مكافئ).
+- Python 3.11 للتطوير المحلي الاختياري.
 
 ```bash
-# تحقق من إصدار azd (يتطلب 1.5.0 أو أعلى)
 azd version
-
-# تحقق من تسجيل الدخول إلى Azure
+az version
+docker info
 azd auth login
-
-# تحقق من Docker (اختياري، للاختبار المحلي)
-docker --version
+az login
 ```
 
-## ⏱️ الجدول الزمني للنشر
+أدوات CLI لها جلسات تسجيل دخول منفصلة. استخدم نفس الاشتراك في كليهما.
 
-| المرحلة | المدة | ما الذي يحدث |
-|-------|----------|--------------||
-| إعداد البيئة | 30 ثانية | إنشاء azd environment |
-| بناء الحاوية | 2-3 دقائق | Docker build تطبيق Flask |
-| توفير البنية التحتية | 3-5 دقائق | إنشاء Container Apps، registry، المراقبة |
-| نشر التطبيق | 2-3 دقائق | دفع الصورة ونشرها على Container Apps |
-| **الإجمالي** | **8-12 دقائق** | نشر مكتمل وجاهز |
+## بدء سريع
 
-## البدء السريع
+من الجذر الخاص بالمستودع:
 
 ```bash
-# انتقل إلى المثال
 cd examples/container-app/simple-flask-api
-
-# تهيئة البيئة (اختر اسمًا فريدًا)
-azd env new myflaskapi
-
-# انشر كل شيء (البنية التحتية + التطبيق)
+azd env new flask-demo
 azd up
-# سيُطلب منك:
-# 1. اختر اشتراك Azure
-# 2. اختر الموقع (مثل eastus2)
-# 3. انتظر 8-12 دقيقة لإتمام النشر
-
-# احصل على نقطة النهاية لواجهة برمجة التطبيقات الخاصة بك
-azd env get-values
-
-# اختبر واجهة برمجة التطبيقات
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**المخرجات المتوقعة:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ التحقق من النشر
-
-### الخطوة 1: التحقق من حالة النشر
-
-```bash
-# عرض الخدمات المنشورة
-azd show
-
-# الإخراج المتوقع يظهر:
-# - الخدمة: api
-# - نقطة النهاية: https://ca-api-[env].xxx.azurecontainerapps.io
-# - الحالة: قيد التشغيل
-```
-
-### الخطوة 2: اختبار نقاط نهاية API
-
-```bash
-# الحصول على نقطة نهاية واجهة برمجة التطبيقات
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# اختبار الصحة
-curl $API_URL/health
+المتوقع: HTTP 200 و JSON مع `"status":"healthy"`،
+`"service":"simple-flask-api"`، ووقت توقيع UTC الحالي.
+عادةً ما يستغرق إعداد النشر وبناء الصورة عدة دقائق؛ تختلف الأوقات.
 
-# اختبار نقطة نهاية الجذر
-curl $API_URL/
+يستخدم الإعداد الأولي صورة عامة hello-world تستمع على المنفذ 80.
+`azure.yaml` يختار `infra/app/api.bicep` وملف المعلمات المطابق لها
+لنشر الخدمة، والذي يبدل الصورة، الدخول، والفحوصات إلى المنفذ 8000.
+لا تحذف معلمات النشر تلك.
 
-# إنشاء عنصر
-curl -X POST $API_URL/api/items \
+## تحقق من CRUD
+
+شغّل ما يلي بالتسلسل بينما يكون نفس النسخ نشطًا:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# الحصول على جميع العناصر
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**معايير النجاح:**
-- ✅ نقطة نهاية الصحة تُرجع HTTP 200
-- ✅ نقطة النهاية الجذرية تعرض معلومات عن API
-- ✅ عملية POST تنشئ عنصرًا وتُرجع HTTP 201
-- ✅ عملية GET تُرجع العناصر التي تم إنشاؤها
+النجاح: POST 201، القراءة/PUT 200، DELETE 204 بدون جسم، ثم عنصر مفقود 404.
+JSON معطوب / غير كائن أو اسم فارغ يعيد 400.
+إذا اختفى عنصر بين الطلبات، تحقق من إعادة التشغيل أو التوسع إلى الصفر؛
+هذا قيد متعمد في الذاكرة وليس تخزينًا دائمًا.
 
-### الخطوة 3: عرض السجلات
+| نقطة النهاية | الطرق |
+|---|---|
+| `/` | GET — معلومات الخدمة |
+| `/health` | GET — حياة / جاهزية |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## السجلات والتكوين
 
 ```bash
-# بث السجلات الحية باستخدام azd monitor
-azd monitor --logs
-
-# أو استخدم Azure CLI:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# يجب أن ترى:
-# - رسائل بدء تشغيل Gunicorn
-# - سجلات طلبات HTTP
-# - سجلات معلومات التطبيق
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## هيكل المشروع
+المتوقع: بدء Gunicorn، سجلات وصول الطلبات، ورسائل التطبيق.
+`azd monitor --logs` يفتح عرض بوابة؛ لا يبث إلى الطرفية.
+تم توفير Application Insights لكنه **غير مزود بالأدوات من خلال شفرة Flask هذه**؛
+استخدم Container Apps/Log Analytics لسجلات stdout.
 
+حرر `infra/app/api.bicep` لوحدة المعالجة المركزية/الذاكرة، حدود النسخ، أو قواعد التوسع، ثم
+شغل `azd up`. القيم الافتراضية هي 0.5 vCPU، 1 جيجابايت، الحد الأدنى 0 / الحد الأقصى 1 نسخة،
+وحاجز HTTP بـ 50 طلب متزامن. التوسع إلى الصفر قد يضيف زمن استجابة بداية باردة.
+
+قيم `azd env set MAX_REPLICAS`، `API_KEY`، `LOG_LEVEL`، أو
+`SCALE_TO_ZERO_TIMEOUT` العشوائية ليست **موصولة إلى هذا القالب أو التطبيق**.
+تعيين قيمة لا يجعلها تلقائيًا متغير بيئة وقت التشغيل.
+الصورة تربط المنفذ 8000 صراحة؛ حدث Dockerfile، Bicep للدخول، والفحوص
+معًا إذا غيّرت المنفذ.
+
+## الملفات
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## نقاط نهاية API
+## التطوير المحلي
 
-| نقطة النهاية | الطريقة | الوصف |
-|----------|--------|-------------|
-| `/health` | GET | فحص الصحة |
-| `/api/items` | GET | قائمة بكل العناصر |
-| `/api/items` | POST | إنشاء عنصر جديد |
-| `/api/items/{id}` | GET | الحصول على عنصر محدد |
-| `/api/items/{id}` | PUT | تحديث العنصر |
-| `/api/items/{id}` | DELETE | حذف العنصر |
-
-## التكوين
-
-### متغيرات البيئة
+من دليل المثال هذا:
 
 ```bash
-# اضبط التكوين المخصص
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### تكوين التحجيم
-
-يتوسع API تلقائيًا بناءً على حركة مرور HTTP:
-- **الحد الأدنى لنسخ**: 0 (يتوسع إلى الصفر عند الخمول)
-- **الحد الأقصى لنسخ**: 10
-- **الطلبات المتزامنة لكل نسخة**: 50
-
-## التطوير
-
-### التشغيل محليًا
+في نافذة طرفية أخرى، اختبر `http://localhost:8000/health` ونقاط نهاية CRUD.
+أو انشئ وشغّل الصورة الفعلية:
 
 ```bash
-# تثبيت التبعيات
-cd src
-pip install -r requirements.txt
-
-# تشغيل التطبيق
-python app.py
-
-# اختبار محليًا
-curl http://localhost:8000/health
-```
-
-### بناء الحاوية واختبارها
-
-```bash
-# بناء صورة Docker
 docker build -t flask-api:local ./src
-
-# تشغيل الحاوية محليًا
-docker run -p 8000:8000 flask-api:local
-
-# اختبار الحاوية
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## النشر
+لتغييرات الشفرة فقط بعد النشر الأول، شغل `azd deploy api`.
+لتغييرات Bicep، شغل `azd up` لإعادة الإعداد والنشر.
 
-### نشر كامل
+## تمارين عملية
+
+### 1. التحقق من رفض الإدخال
+
+**نقطة البداية:** الواجهة المنشورة، `API_URL` أعلاه.
+**الهدف:** التحقق من أن الواجهة ترفض أشكال JSON غير الصالحة والأسماء المفقودة.
 
 ```bash
-# نشر البنية التحتية والتطبيق
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### نشر الكود فقط
+**معايير النجاح / الحل:** كلاهما يعيد 400 مع خطأ JSON، وليس 500.
+**المشكلة الشائعة:** إغفال رأس content-type لـ JSON.
+
+### 2. إضافة نقطة نهاية للقراءة فقط
+
+**نقطة البداية:** `src/app.py`. **الهدف:** تمديد وإعادة نشر الواجهة.
+أضف هذا قبل كتلة `if __name__ == '__main__':`:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+شغّل `azd deploy api`، ثم `curl --fail-with-body "${API_URL}/version"`.
+**معايير النجاح:** HTTP 200 و `{"version":"1.0.0"}`.
+**المشكلة الشائعة:** وضع المسار بعد استدعاء الحجب `app.run()` عند
+الاختبار باستخدام `python src/app.py`.
+
+### نقطة تحقق المعرفة
+
+لماذا عامل واحد غير كافٍ للبيانات الدائمة؟ لأن حتى العملية الواحدة تفقد
+قاموسها عند إعادة التشغيل. نسخة الإنتاج تحتاج تخزينًا دائمًا مشتركًا،
+مصادقة، تفويض، ترحيل، اختبارات، ومراقبة تشغيلية.
+
+## التكاليف واستكشاف الأخطاء وإصلاحها
+
+هذا ليس نشرًا مضمونًا بمبلغ $0: سجل Basic وتخزين السجل / الاستيعاب
+يمكن أن يتكبد تكاليف حتى عندما يكون حوسبة التطبيق صفراً. استخدم
+[حاسبة التسعير](https://azure.microsoft.com/pricing/calculator/) لمنطقتك.
+
+- **فشل بناء Docker:** تأكد من `docker info`، الوصول إلى الشبكة، والاعتمادات.
+- **تطبيق غير صحي:** افحص سجلات الكونسول / النظام وتحقق من توافق منفذ الصورة، الدخول،
+  والفحوص. يجب ألا يُفحَص عنصر نائب على منفذ Flask.
+- **403 / أذونات:** تحقق من الاشتراك وأذونات إنشاء الموارد.
+- **اختفاء العناصر:** تعيد حالة الذاكرة المؤقتة تعيينها عند إعادة التشغيل/التوسع إلى الصفر؛ أضف قاعدة بيانات
+  للسلوك الدائم.
+
+## التنظيف والخطوات التالية
 
 ```bash
-# نشر كود التطبيق فقط (البنية التحتية دون تغيير)
-azd deploy api
+azd down
 ```
 
-### تحديث التكوين
+راجع طلب الحذف وتأكد من إزالة مجموعة الموارد المخصصة.
+لا تستخدم التنظيف المدمر على مجموعة موارد تحتوي على بيانات غير مرتبطة.
 
-```bash
-# تحديث متغيرات البيئة
-azd env set API_KEY "new-api-key"
-
-# إعادة النشر باستخدام التكوين الجديد
-azd deploy api
-```
-
-## المراقبة
-
-### عرض السجلات
-
-```bash
-# بث السجلات الحية باستخدام azd monitor
-azd monitor --logs
-
-# أو استخدم Azure CLI لتطبيقات الحاويات:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# عرض آخر 100 سطر
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### مراقبة المقاييس
-
-```bash
-# افتح لوحة معلومات Azure Monitor
-azd monitor --overview
-
-# عرض مقاييس محددة
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## الاختبار
-
-### فحص الصحة
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-الاستجابة المتوقعة:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### إنشاء عنصر
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### الحصول على كل العناصر
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## تحسين التكلفة
-
-يستخدم هذا النشر ميزة التحجيم إلى الصفر، لذا تدفع فقط عندما يعالج API الطلبات:
-
-- **تكلفة الخمول**: ~$0/الشهر (يتم التحجيم إلى الصفر)
-- **تكلفة النشاط**: ~$0.000024/ثانية لكل نسخة
-- **التكلفة الشهرية المتوقعة** (استخدام خفيف): $5-15
-
-### تقليل التكاليف أكثر
-
-```bash
-# خفض الحد الأقصى لعدد النسخ لبيئة التطوير
-azd env set MAX_REPLICAS 3
-
-# استخدم مهلة الخمول الأقصر
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # ٥ دقائق
-```
-
-## استكشاف الأخطاء وإصلاحها
-
-### الحاوية لا تبدأ
-
-```bash
-# تحقق من سجلات الحاوية باستخدام Azure CLI
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# تحقق من بناء صور Docker محليًا
-docker build -t test ./src
-```
-
-### API غير متاح
-
-```bash
-# تحقق من أن نقطة الدخول خارجية
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### أوقات استجابة مرتفعة
-
-```bash
-# تحقق من استخدام وحدة المعالجة المركزية/الذاكرة
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# قم بزيادة الموارد عند الحاجة
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## تنظيف الموارد
-
-```bash
-# احذف جميع الموارد
-azd down --force --purge
-```
-
-## الخطوات التالية
-
-### توسيع هذا المثال
-
-1. **إضافة قاعدة بيانات** - دمج Azure Cosmos DB أو SQL Database
-   ```bash
-   # إضافة وحدة Cosmos DB إلى infra/main.bicep
-   # تحديث app.py لإضافة اتصال بقاعدة البيانات
-   ```
-
-2. **إضافة المصادقة** - تنفيذ Microsoft Entra ID أو مفاتيح API
-   ```python
-   # أضف وسيط المصادقة إلى app.py
-   from functools import wraps
-   ```
-
-3. **إعداد CI/CD** - سير عمل GitHub Actions
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **إضافة Managed Identity** - تأمين الوصول إلى خدمات Azure
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### أمثلة ذات صلة
-
-- **[تطبيق قاعدة البيانات](../../../../../examples/database-app)** - مثال كامل مع SQL Database
-- **[الخدمات المصغرة](../../../../../examples/container-app/microservices)** - بنية متعددة الخدمات
-- **[دليل Container Apps الرئيسي](../README.md)** - جميع أنماط الحاويات
-
-### مصادر التعلم
-
-- 📚 [دورة AZD للمبتدئين](../../../README.md) - الصفحة الرئيسية للدورة
-- 📚 [أنماط Container Apps](../README.md) - المزيد من أنماط النشر
-- 📚 [معرض قوالب AZD](https://azure.github.io/awesome-azd/) - قوالب المجتمع
-
-## موارد إضافية
-
-### التوثيق
-- **[توثيق Flask](https://flask.palletsprojects.com/)** - دليل إطار عمل Flask
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - وثائق Azure الرسمية
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - مرجع أوامر azd
-
-### دروس
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - انشر تطبيقك الأول
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - دليل تطوير Python
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - البنية التحتية ككود
-
-### الأدوات
-- **[Azure Portal](https://portal.azure.com)** - إدارة الموارد بصريًا
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - تكامل IDE
-
----
-
-**🎉 تهانينا!** لقد قمت بنشر API Flask جاهز للإنتاج على Azure Container Apps مع التحجيم التلقائي والمراقبة.
-
-**أسئلة؟** [افتح مشكلة](https://github.com/microsoft/AZD-for-beginners/issues) أو راجع [الأسئلة الشائعة](../../../resources/faq.md)
+[التالي: تطبيق قاعدة بيانات](../../../../../examples/database-app) · [الخدمات المصغرة](../../../../../examples/container-app/microservices) ·
+[نظرة عامة على الحاويات](../README.md) · [الصفحة الرئيسية للدورة](../../../README.md) ·
+[الإبلاغ عن مشكلة](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

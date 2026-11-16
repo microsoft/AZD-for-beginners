@@ -1,470 +1,133 @@
-# 5. Personalizați un șablon
+# 5. Personalizează un șablon
 
-!!! tip "LA SFÂRȘITUL ACESTUI MODUL VEȚI PUTEA"
+!!! tip "LA FINALUL ACESTUI MODUL VEI FI CAPABIL SĂ"
 
-    - [ ] Explorați capabilitățile implicite ale agenților AI
-    - [ ] Adăugați AI Search cu propriul index
-    - [ ] Activați și analizați metricile de trasare
-    - [ ] Executați o rulare de evaluare
-    - [ ] Executați o scanare de red-teaming
-    - [ ] **Laboratorul 5: Elaborat un plan de personalizare** 
-
----
-
-## 5.1 Capacitățile agenților AI
-
-!!! success "Am finalizat acest lucru în Laboratorul 01"
-
-- **Căutare fișiere**: Căutare de fișiere încorporată de OpenAI pentru extragerea cunoștințelor
-- **Citări**: Atribuire automată a surselor în răspunsuri
-- **Instrucțiuni personalizabile**: Modificați comportamentul și personalitatea agentului
-- **Integrare de instrumente**: Sistem extensibil de instrumente pentru capabilități personalizate
+    - [ ] Distinguish configuration changes from application implementation
+    - [ ] Plan a grounded retrieval customization
+    - [ ] Enable and inspect tracing without unnecessarily capturing sensitive content
+    - [ ] Locate and run the sample's current evaluation and red-teaming tests
+    - [ ] **Lab 5:** Build a customization and validation plan
 
 ---
 
-## 5.2 Opțiuni de recuperare a cunoștințelor
+## 5.1 Stabilește o bază de referință
 
-!!! task "Pentru a finaliza acest lucru trebuie să facem modificări și să redeployăm"    
-    
-    ```bash title=""
-    # Set environment variables
-    azd env set USE_AZURE_AI_SEARCH_SERVICE true
-    azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
-    azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
-    azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
-    azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
+Folosește depozitul [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) inițializat din modulele anterioare. Înregistrează revizia șablonului, versiunea AZD, mediul selectat, implementarea modelului și întrebările exemplu funcționale înainte de a face modificări.
 
-    # Upload data and create my index
+Exemplul implementează o aplicație de chat susținută de un agent. Nu devine **automat** un sistem cu doi agenți pentru retail doar prin setarea variabilelor de mediu sau salvarea unor fișiere suplimentare cu instrucțiuni. Agenții suplimentari, gestionarea instrumentelor, rutarea, autorizarea și accesul la date necesită cod de aplicație.
 
-    ```
+Examinează instrucțiunile și instrumentele agentului implementat în Foundry. Testează o întrebare factuala, o întrebare de recuperare și o întrebare la care datele exemplu nu pot răspunde. Verifică citările față de documentele sursă reale în loc să presupui că un răspuns fluent este corect.
 
----
+## 5.2 Personalizează recuperarea cunoștințelor
 
-**Căutare fișiere OpenAI (Implicit):**
+Șablonul suportă recuperarea bazată pe fișiere și integrarea opțională cu Azure AI Search. Urmează [ghidul curent AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) pentru indexare și configurarea instrumentului.
 
-- Încorporată în agenții Foundry
-- Procesare automată a documentelor și indexare
-- Nu este necesară nicio configurare suplimentară
-
-**Azure AI Search (Opțional):**
-
-- Căutare hibridă semantică și vectorială
-- Gestionare personalizată a indexului
-- Capabilități avansate de căutare
-- Necesită `USE_AZURE_AI_SEARCH_SERVICE=true`
-
----
-
-## 5.3 [Trasare și monitorizare](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
-
-!!! task "Pentru a finaliza acest lucru trebuie să facem modificări și să redeployăm"    
-    
-    ```bash title=""
-    azd env set ENABLE_AZURE_MONITOR_TRACING true
-    azd deploy
-    ```
-
-**Trasare:**
-
-- Integrare OpenTelemetry
-- Urmărirea cererilor și răspunsurilor
-- Metrici de performanță
-- Disponibil în portalul Microsoft Foundry
-
-**Jurnalizare:**
-
-- Jurnale ale aplicației în Container Apps
-- Jurnalizare structurată cu ID-uri de corelare
-- Vizualizare în timp real și istorică a jurnalelor
-
----
-
-## 5.4 [Evaluarea agenților](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
-
-**Evaluare locală:**
-
-- Evaluatori încorporați pentru evaluarea calității
-- Scripturi de evaluare personalizate
-- Benchmarking de performanță
-
-**Monitorizare continuă:**
-
-- Evaluare automată a interacțiunilor live
-- Monitorizarea metricilor de calitate
-- Detectarea regresiilor de performanță
-
-**Integrere CI/CD:**
-
-- Flux de lucru GitHub Actions
-- Testare și evaluare automatizate
-- Testare prin comparații statistice
-
----
-
-## 5.5 [Agent de red-teaming AI](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
-
-**Red teaming pentru AI:**
-
-- Scanare de securitate automatizată
-- Evaluare a riscurilor pentru sistemele AI
-- Evaluare a securității pe mai multe categorii
-
-**Autentificare:**
-
-- Managed Identity pentru serviciile Azure
-- Autentificare Azure App Service opțională
-- Autentificare basic ca soluție de rezervă pentru dezvoltare
-
-
-
-!!! quote "LA SFÂRȘITUL ACESTUI LAB AR TREBUI SĂ AVEȚI"
-    - [ ] Definiți cerințele scenariului
-    - [ ] Variabile de mediu personalizate (config)
-    - [ ] Instrucțiuni ale agentului personalizate (task)
-    - [ ] Implementat șablonul personalizat (app)
-    - [ ] Finalizat sarcinile post-implementare (manual)
-    - [ ] Rulat o evaluare de test
-
-This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
-
----
-
-## 5.6 Personalizați-l pentru dvs.!
-
-### 5.6.1. Cerințele scenariului
-
-#### **Implementări ale agenților:** 
-
-   - Agent Shopper: Ajută clienții să găsească și să compare produse
-   - Agent Loyalty: Gestionează recompensele și promoțiile pentru clienți
-
-#### **Implementări de modele:**
-
-   - `gpt-4.1`: Modelul principal pentru chat
-   - `o3`: Model de raționament pentru interogări complexe
-   - `gpt-4.1-nano`: Model ușor pentru interacțiuni simple
-   - `text-embedding-3-large`: Embeddings de înaltă calitate pentru căutare
-
-#### **Funcționalități:**
-
-   - Trasare și monitorizare activate
-   - AI Search pentru catalogul de produse
-   - Cadru de evaluare pentru asigurarea calității
-   - Red teaming pentru validarea securității
-
----
-
-### 5.6.2 Implementarea scenariului
-
-
-#### 5.6.2.1. Configurare pre-implementare
-
-Create a setup script (`setup-retail.sh`)
-
-```bash title="" linenums="0"
-#!/bin/bash
-
-# Setează numele mediului
-azd env set AZURE_ENV_NAME "retail-ai-agents"
-
-# Configurează regiunea (alege în funcție de disponibilitatea modelului)
-azd env set AZURE_LOCATION "eastus2"
-
-# Activează toate serviciile opționale
-azd env set USE_APPLICATION_INSIGHTS true
+```bash
+# Infrastructure settings; these can add charges
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
-azd env set ENABLE_AZURE_MONITOR_TRACING true
-
-# Configurează modelul principal de chat (gpt-4.1 ca cel mai apropiat disponibil de gpt-4.1)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
-azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
-azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
-azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
-
-# Configurează modelul de embedding pentru căutare îmbunătățită
-azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
-azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
-azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
-
-# Setează numele agentului (va crea primul agent)
-azd env set AZURE_AI_AGENT_NAME "shopper-agent"
-
-# Configurează indexul de căutare
-azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
-
-echo "Environment configured for retail deployment"
-echo "Recommended quota: 300,000+ TPM across all models"
-```
-
----
-
-#### 5.6.2.2: Instrucțiuni pentru agenți
-
-Create `custom-agents/shopper-agent-instructions.md`:
-
-```markdown
-# Shopper Agent Instructions
-
-You are a helpful shopping assistant for an enterprise retail company. Your role is to:
-
-1. **Product Discovery**: Help customers find products that match their needs
-2. **Comparison**: Provide detailed product comparisons with pros/cons
-3. **Recommendations**: Suggest complementary products and alternatives
-4. **Inventory**: Check product availability and delivery options
-
-## Guidelines:
-- Always provide citations from the product catalog
-- Be conversational and helpful
-- Ask clarifying questions to understand customer needs
-- Mention relevant promotions when appropriate
-- Escalate complex warranty or return questions to human agents
-
-## Knowledge Base:
-You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
-```
-
-Create `custom-agents/loyalty-agent-instructions.md`:
-
-```markdown
-# Loyalty Agent Instructions
-
-You are a customer loyalty specialist focused on maximizing customer satisfaction and retention. Your responsibilities include:
-
-1. **Rewards Management**: Explain point values, redemption options, and tier benefits
-2. **Promotions**: Identify applicable discounts and special offers
-3. **Program Navigation**: Help customers understand loyalty program features
-4. **Account Support**: Assist with account-related questions and updates
-
-## Guidelines:
-- Prioritize customer satisfaction and retention
-- Explain complex program rules in simple terms
-- Proactively identify opportunities for customers to save money
-- Celebrate customer milestones and achievements
-- Connect customers with shopper agent for product questions
-
-## Knowledge Base:
-You have access to loyalty program rules, current promotions, customer tier information, and reward catalogs.
-```
-
----
-
-#### 5.6.2.3: Script de implementare
-
-Create `deploy-retail.sh`:
-
-```bash title="" linenums="0"
-#!/bin/bash
-set -e
-
-echo "🚀 Starting Enterprise Retail AI Agents deployment..."
-
-# Validează prerechizitele
-echo "📋 Validating prerequisites..."
-if ! command -v azd &> /dev/null; then
-    echo "❌ Azure Developer CLI (azd) is required"
-    exit 1
-fi
-
-if ! az account show &> /dev/null; then
-    echo "❌ Please login to Azure CLI: az login"
-    exit 1
-fi
-
-# Configurează mediul
-echo "🔧 Configuring deployment environment..."
-chmod +x setup-retail.sh
-./setup-retail.sh
-
-# Verifică cota în regiunea selectată
-echo "📊 Checking quota availability..."
-LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
-echo "Deploying to region: $LOCATION"
-echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4.1: 150,000 TPM"
-echo "   - text-embedding-3-large: 75,000 TPM"
-echo "   - Additional models: 75,000+ TPM"
-
-read -p "Continue with deployment? (y/N): " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Deployment cancelled"
-    exit 1
-fi
-
-# Implementează infrastructura și aplicația
-echo "🏗️  Deploying Azure infrastructure..."
+azd provision --preview
 azd up
-
-# Capturează ieșirile implementării
-echo "📝 Capturing deployment information..."
-azd show > deployment-info.txt
-
-# Obține URL-ul aplicației web
-APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
-
-if [ ! -z "$APP_URL" ]; then
-    echo "✅ Deployment completed successfully!"
-    echo "🌐 Web Application: $APP_URL"
-    echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
-else
-    echo "⚠️  Deployment completed but unable to retrieve URL"
-    echo "Run 'azd show' for deployment details"
-fi
-
-echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
-echo "2. Upload product catalog to search index"
-echo "3. Configure custom agent instructions"
-echo "4. Test both agents with sample queries"
 ```
 
----
+Activarea serviciului este doar o parte a recuperării. Înainte de a încărca propriile date:
 
-#### 5.6.2.4: Configurare post-implementare
+1. Confirmă că ai permisiunea de a folosi documentele și elimină informațiile sensibile.
+2. Selectează un model de embedding sprijinit în regiunea ta și setează versiunea compatibilă, tipul de implementare și dimensiunile vectorilor.
+3. Creează/populează indexul folosind procesul documentat al exemplului.
+4. Configurează instrumentul de recuperare al agentului să folosească acel index.
+5. Testează recuperarea, citările, autorizarea și comportamentul când nu există un document relevant.
 
-Create `configure-retail-agents.sh`:
+Nu schimba de la `text-embedding-3-small` la un alt model de embedding fără a verifica dimensiunile și eventual a reconstrui/reindexa vectorii. Un nume precum `retail-products` nu este un catalog implementat sau o politică de control al accesului.
 
-```bash title="" linenums="0"
-#!/bin/bash
+## 5.3 Urmărire și monitorizare
 
-echo "🔧 Configuring retail agents..."
+Urmează [ghidul de observabilitate al exemplului](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#tracing-and-monitoring). Asigură-te că resursa necesară Application Insights și conexiunea există deja; în cazul schimbărilor în setările infrastructurii, folosește `azd up`.
 
-# Obține informații despre implementare
-PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
-AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
-
-echo "Project Endpoint: $PROJECT_ENDPOINT"
-echo "Primary Agent ID: $AGENT_ID"
-
-# Instrucțiuni pentru configurare manuală
-echo "
-🤖 Agent Configuration:
-
-1. **Update Shopper Agent Instructions:**
-   - Go to Microsoft Foundry portal: https://ai.azure.com
-   - Navigate to your project
-   - Select Agents tab
-   - Edit the existing agent
-   - Update instructions with content from custom-agents/shopper-agent-instructions.md
-
-2. **Create Loyalty Agent:**
-   - In Agents tab, click 'Create Agent'
-   - Name: 'loyalty-agent'
-   - Model: Use same deployment as shopper agent
-   - Instructions: Use content from custom-agents/loyalty-agent-instructions.md
-   - Enable file search tool
-   - Save and note the Agent ID
-
-3. **Upload Knowledge Base:**
-   - Prepare product catalog files (JSON/CSV format)
-   - Upload to both agents' file search
-   - Or configure Azure AI Search index
-
-4. **Test Configuration:**
-   - Test shopper agent with product queries
-   - Test loyalty agent with rewards questions
-   - Verify citations and search functionality
-
-📊 Monitoring Setup:
-- Tracing: Available in Microsoft Foundry > Tracing tab
-- Logs: Azure Portal > Container Apps > Monitoring > Log Stream
-- Evaluation: Run python evals/evaluate.py
-
-🔒 Security Validation:
-- Run red teaming: python airedteaming/ai_redteaming.py
-- Review security recommendations
-- Configure authentication if needed
-"
+```bash
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+azd up
 ```
 
-### 5.6.3: Testare și validare
+Trimite o cerere de test, apoi inspectează jurnalele aplicației Container App și vizualizarea urmăririi agentului în Foundry. Verifică latența, apelurile la instrumente, erorile și corelația dintre cerere și urmă. Nu presupune că telemetria este conectată doar pentru că implementarea a reușit.
 
-Create `test-retail-deployment.sh`:
+Lasă `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` dezactivat dacă nu ai revizuit explicit consimțământul, redactarea, păstrarea și controalele de acces. Urmăririle pot conține argumente sensibile ale instrumentelor sau conținut al documentelor, chiar și atunci când jurnalele obișnuite ale aplicației par inofensive.
 
-```bash title="" linenums="0"
-#!/bin/bash
+## 5.4 Evaluarea agentului
 
-echo "🧪 Testing retail deployment..."
+Punctul de intrare pentru evaluarea exemplului este acum [`tests/test_evaluation.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_evaluation.py), nu un director `evals/`. Din rădăcina exemplului, folosește un mediu Python care îndeplinește cerințele documentate:
 
-# Verifică dacă variabilele de mediu sunt setate
-echo "📋 Checking environment configuration..."
-azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
-
-# Testează disponibilitatea aplicației web
-APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
-if [ ! -z "$APP_URL" ]; then
-    echo "🌐 Testing web application at: $APP_URL"
-    HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
-    if [ "$HTTP_STATUS" = "200" ]; then
-        echo "✅ Web application is responding"
-    else
-        echo "❌ Web application returned status: $HTTP_STATUS"
-    fi
-else
-    echo "❌ Could not retrieve web application URL"
-fi
-
-# Rulează evaluarea dacă este configurată
-if [ -f "evals/evaluate.py" ]; then
-    echo "📊 Running agent evaluation..."
-    cd evals
-    python -m pip install -r ../src/requirements.txt
-    python -m pip install azure-ai-evaluation
-    python evaluate.py
-    cd ..
-fi
-
-echo "
-🎯 Deployment validation complete!
-
-Next steps:
-1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
-3. Upload your product catalog and loyalty program data
-4. Configure agent instructions for your specific use case
-5. Run comprehensive testing with your retail scenarios
-"
+```bash
+python -m pip install -r src/requirements.txt
+pytest tests/test_evaluation.py -s
 ```
 
----
+Înainte de rulare, finalizează [prerechizitele evaluării](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md). Testele încarcă configurația din `.azure/<environment>/.env` selectat; confirmă că mediul intenționat este selectat. Intrările importante includ:
 
-### 5.6.4 Rezultate așteptate
+- `AZURE_EXISTING_AIPROJECT_ENDPOINT`
+- `AZURE_EXISTING_AGENT_ID`, folosind formatul cerut de exemplul curent (versiunea revizuită folosește `agent_name:agent_version`)
+- `AZURE_AI_AGENT_DEPLOYMENT_NAME`, folosită ca implementare pentru modelul judecător
 
-După urmarea acestui ghid de implementare, veți avea:
+Examinează testele pentru a înțelege alegerea evaluatorului, pragurile, rolurile necesare și costurile modelului. O rulare completă nu este automat o poartă de calitate trecută; inspectează scorurile, cazurile eșuate/eroare și rezultatele legate în Foundry.
 
-1. **Infrastructură implementată:**
+### Extensia separată pentru evaluările AZD
 
-      - Proiect Microsoft Foundry cu implementări de modele
-      - Container Apps care găzduiesc aplicația web
-      - Serviciu AI Search pentru catalogul de produse
-      - Application Insights pentru monitorizare
+Testul Python de mai sus este un **flux de lucru specific exemplului**. Extensia opțională `azure.ai.evaluations` este un flux de lucru diferit, cu propria configurație `evals/azure.eval.yaml`:
 
-2. **Agent inițial:**
+```bash
+azd extension install azure.ai.evaluations
+azd ai eval --help
+```
 
-      - Agent Shopper configurat cu instrucțiuni de bază
-      - Capacitate de căutare în fișiere activată
-      - Trasare și monitorizare configurate
+Pentru o configurare completă a extensiei, vezi [fluxuri de lucru de evaluare și migrare](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-08-production/production-ai-practices.md). Din beta.22 a extensiei agenților, nu folosi comenzile eliminate `azd ai agent eval`. Instalarea extensiei de evaluări nu convertește testele Python ale exemplului și nu creează automat o configurație de evaluare.
 
-3. **Pregătit pentru personalizare:**
+## 5.5 Testarea echipei roșii AI și evaluare continuă
 
-      - Cadru pentru adăugarea Agentului Loyalty
-      - Șabloane pentru instrucțiuni personalizate
-      - Scripturi de testare și validare
-      - Configurare pentru monitorizare și evaluare
+Exemplul curent oferă [`tests/test_red_teaming.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_red_teaming.py). Finalizează prerechizitele și revizuiește ținta și costurile înainte de rulare:
 
-4. **Pregătit pentru producție:**
+```bash
+pytest tests/test_red_teaming.py -s
+```
 
-      - Scanare de securitate cu red teaming
-      - Monitorizare a performanței
-      - Cadru pentru evaluarea calității
-      - Arhitectură scalabilă
+Folosește o implementare de test autorizată și date sintetice. Revizuiește atacurile și rezultatele generate; această scanare nu stabilește că o aplicație este sigură sau conformă.
 
-This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
+Ghidul de [observabilitate](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#continuous-evaluation) descrie, de asemenea, evaluarea continuă configurată la pornirea containerului. Ea evaluează interacțiunile reale ale utilizatorilor, nu traficul de test generat, iar suportul evaluatorului variază în funcție de regiune. Lipsa interacțiunilor înseamnă lipsa intrărilor de evaluare. Verifică versiunea instalată a eșantionului și configurația evaluatorului în loc să presupui că fiecare implementare are aceleași setări implicite.
+
+Autentificarea este separată de evaluare. Urmează configurarea de identitate/acces documentată a eșantionului. Nu există o „cădere” documentată cu autentificare de bază pe care să te bazezi pentru protejarea unui punct final public.
+
+## 5.6 Exercițiu de proiectare: personalizare retail
+
+!!! warning "Exercițiu de proiectare, nu o implementare completă"
+
+    The workshop does not provide a complete Shopper/Loyalty multi-agent implementation. Do not claim that additional agents, models, catalogs, or policies exist until you have implemented and verified them.
+
+Scrie un plan scurt care abordează:
+
+| Zonă | Decizie și dovezi de colectat |
+|------|----------------------------------|
+| Responsabilități agent | Pornește cu un singur agent sau justifică agenți separați pentru Cumpărător și Loialitate și logica de rutare |
+| Date | Definește un set de date sintetic pentru catalog/recompense și responsabilitatea actualizărilor |
+| Unelte | Implementează mai întâi handleri doar pentru citire; specifică autorizarea și validarea pentru orice scriere |
+| Modele | Alege combinațiile disponibile model/versiune/SKU și verifică cota; evită alocarea modelelor neutilizate |
+| Recuperare | Definește indexarea, dimensiunile embedding, citările și controalele de acces la nivel de document |
+| Evaluare | Adaugă cazuri cu răspuns așteptat, întrebări nesuportate, utilizare unelte și siguranță cu praguri explicite |
+| Operațiuni | Definește telemetria, bugetele de latență/eroare, limitele de cost și responsabilitatea curățeniei |
+
+Salvarea `custom-agents/shopper-agent-instructions.md` nu determină eșantionul să îl încarce. Găsește codul aplicației care creează/actualizează agentul, conectează instrucțiunile revizuite acolo și verifică versiunea agentului rezultat înainte de testare. Instrucțiunile nu pot acorda acces la date sau unelte pe care nu le-ai implementat.
+
+Aplică câte o modificare odată, reimplementează componentele afectate și reexecută întrebările și evaluările de bază. Păstrează o versiune funcțională pentru comparație. Pentru inspirație de arhitectură, vezi [scheletul pentru retail](https://github.com/microsoft/AZD-for-beginners/blob/main/examples/retail-scenario.md), care nici el nu este o aplicație retail completă.
+
+!!! quote "LA FINALUL ACESTUI LAB AR TREBUI SĂ AI"
+
+    - [ ] A documented customization scope and cost/region checks
+    - [ ] Evidence that retrieval and tracing work for your selected environment
+    - [ ] Reviewed evaluation/red-teaming results, or a clear explanation of unmet prerequisites
+    - [ ] A list of missing implementation work rather than a claim of automatic production readiness
+
+Continuă la [Demontarea infrastructurii](6-Teardown-Infrastructure.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare de responsabilitate**:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, ar trebui considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu suntem răspunzători pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

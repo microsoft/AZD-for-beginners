@@ -1,30 +1,30 @@
-# Application Insights интеграција са AZD
+# Интеграција Application Insights са AZD
 
-⏱️ **Процењено време**: 40-50 минута | 💰 **Утицај на трошкове**: ~$5-15/месечно | ⭐ **Комплексност**: Средњи
+⏱️ **Процењено време**: 40-50 минута | 💰 **Утицај на трошкове**: ~$5-15/месечно | ⭐ **Сложеност**: Средњи ниво
 
 **📚 Пут учења:**
-- ← Претходно: [Провере пре лета](preflight-checks.md) - Валидација пре деплоyмента
-- 🎯 **Налазите се овде**: Application Insights интеграција (Надгледање, телеметрија, дебаговање)
-- → Следеће: [Водич за деплоyмент](../chapter-04-infrastructure/deployment-guide.md) - Деплоy на Azure
-- 🏠 [Почетна курса](../../README.md)
+- ← Претходно: [Прелиминарне провере](preflight-checks.md) - Валидација пре примене
+- 🎯 **Тренутно сте овде**: Интеграција Application Insights (Надгледање, телеметрија, отклањање грешака)
+- → Следеће: [Водич за примену](../chapter-04-infrastructure/deployment-guide.md) - Примена на Azure
+- 🏠 [Почетна страница курса](../../README.md)
 
 ---
 
 ## Шта ћете научити
 
-Завршетком ове лекције, научићете:
-- Интегрисати **Application Insights** у AZD пројекте аутоматски
-- Конфигурисати **дистрибутовано трасирање** за микросервисе
+Завршетком ове лекције ћете:
+- Декларисати **Application Insights** у AZD инфраструктури и конфигурисати SDK инструментализацију
+- Конфигурисати **дистрибуирано праћење** за микросервисе
 - Имплементирати **прилагођену телеметрију** (метрике, догађаје, зависности)
-- Подесити **Live Metrics** за праћење у реалном времену
-- Креирати **аларме и контролне табле** из AZD деплоyмента
-- Дебаговати проблеме у продукцији помоћу **телеметријских упита**
+- Подесити **метрике у реалном времену** за надгледање уживо
+- Креирати **аларме и контролне таблице** из AZD примене
+- Отклањати проблеме у продукцији помоћу **телеметријских упита**
 - Оптимизовати **трошкове и стратегије узорковања**
-- Надгледати **AI/LLM апликације** (токени, латенција, трошкови)
+- Надгледати **AI/LLM апликације** (токене, латенцију, трошкове)
 
 ## Зашто је Application Insights са AZD важан
 
-### Изазов: Посматрање у продукцији
+### Изазов: Производна посматрање
 
 **Без Application Insights:**
 ```
@@ -36,7 +36,7 @@
 ❌ Unknown failure rates and bottlenecks
 ```
 
-**С Application Insights + AZD:**
+**Са Application Insights + AZD:**
 ```
 ✅ Automatic telemetry collection
 ✅ Centralized logs from all services
@@ -44,10 +44,10 @@
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**Аналогија**: Application Insights је као црна кутија летачког сниматеља + инструмент табла у кокпиту за вашу апликацију. Видите све што се дешава у реалном времену и можете репродуковати било који инцидент.
+**Аналогија**: Application Insights је као да имате „црну кутију“ летачког сниматеља + инструмент таблу у пилотској кабини за вашу апликацију. Видите све што се дешава у реалном времену и можете репродуковати било који инцидент.
 
 ---
 
@@ -57,24 +57,24 @@
 
 ```mermaid
 graph TB
-    User[Корисник/Клијент]
-    App1[Апликација у контејнеру 1<br/>API гејтвеј]
-    App2[Апликација у контејнеру 2<br/>Сервис производа]
-    App3[Апликација у контејнеру 3<br/>Сервис поруџбина]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[Апликациони увиди<br/>Телеметријски хаб]
-    LogAnalytics[(Лог аналитика<br/>Радни простор)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Azure портал<br/>Контролне табле & Упозорења]
-    Query[Kusto упити<br/>Прилагођена анализа]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Аутоматска инструментација| AppInsights
-    App2 -.->|Аутоматска инструментација| AppInsights
-    App3 -.->|Аутоматска инструментација| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,17 +83,20 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-### Шта се аутоматски прати
 
-| Тип телеметрије | Шта бележи | Примена |
+### Шта се аутоматски надгледа
+
+Подржана аутоматска инструментализација бележи захтеве/зависности за инструменталне библиотеке. Прилагођени догађаји и метрике захтевају код апликације; тестове доступности треба посебно подесити. Не сакупља сваки ред испод само зато што ресурс постоји.
+
+| Тип телеметрије | Шта бележи | Коришћење |
 |----------------|------------------|----------|
-| **Requests** | HTTP захтеви, статусни кодови, трајање | Праћење перформанси API-ја |
-| **Dependencies** | Спољашњи позиви (DB, API-ји, складиште) | Идентфиковање юрњака |
-| **Exceptions** | Нехендловане грешке са stack трасама | Дебаговање неуспеха |
-| **Custom Events** | Бизнис догађаји (регистрација, куповина) | Аналитика и фанови |
-| **Metrics** | Перформансни бројаћи, прилагођене метрике | Планирање капацитета |
-| **Traces** | Поруке дневника са тежином | Дебаговање и ревизија |
-| **Availability** | Тестови доступности и времена одговора | Праћење SLA-а |
+| **Захтеви** | HTTP захтеви, статус кодови, трајање | Надгледање перформанси API-ја |
+| **Зависности** | Спољашњи позиви (БД, API-ји, складиште) | Идентификовање грла боце |
+| **Изузеци** | Неразрешене грешке са праћењем стек трага | Откривање квара |
+| **Прилагођени догађаји** | Пословни догађаји (пријава, куповина) | Аналитика и левци |
+| **Метрике** | Бројачи перформанси, прилагођене метрике | Планирање капацитета |
+| **Трагови** | Лог поруке са ознакама важности | Откривање грешака и ревизија |
+| **Доступност** | Тестови времена рада и одговора | Надгледање SLA |
 
 ---
 
@@ -102,38 +105,40 @@ graph TB
 ### Потребни алати
 
 ```bash
-# Проверите Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Очекује се: azd верзија 1.0.0 или новија
+# Command reference baseline: azd 1.37.2
 
-# Проверите Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Очекује се: azure-cli 2.50.0 или новија
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Захтеви за Azure
 
 - Активна Azure претплата
 - Дозволе за креирање:
-  - Application Insights ресурса
-  - Log Analytics радних простора
+  - Application Insights ресурси
+  - Log Analytics радни простори
   - Container Apps
-  - Resource група
+  - Ресурсне групе
 
-### Предусловно знање
+### Предзнање
 
 Требало би да сте завршили:
-- [AZD основе](../chapter-01-foundation/azd-basics.md) - Основни AZD појмови
+- [AZD Основе](../chapter-01-foundation/azd-basics.md) - Основни AZD појмови
 - [Конфигурација](../chapter-03-configuration/configuration.md) - Подешавање окружења
-- [Први пројекат](../chapter-01-foundation/first-project.md) - Основни деплоyмент
+- [Први пројекат](../chapter-01-foundation/first-project.md) - Основна примена
 
 ---
 
 ## Лекција 1: Аутоматски Application Insights са AZD
 
-### Како AZD провизионише Application Insights
+### Како AZD обезбеђује Application Insights
 
-AZD аутоматски креира и конфигурише Application Insights када деплоy-ујете. Хајде да видимо како то ради.
+AZD обезбеђује Application Insights **само када пројектна инфраструктура то декларише**. `azure.yaml` сам по себи не креира надзор нити инструментализује апликациони код.
+
+> **Пример обима:** Ова лекција садржи фрагменте интеграције, а не комплетан `monitored-app` пројекат у овом репозиторијуму. Потребни су главни темплејт и мапирање параметара, Container Apps окружење, регистар/слика и конфигурација идентитета, Dockerfile, и ознаке сервиса пре примене. Накнадне лекције показују алтернативне/проширене фрагменте, а не фајлове које све можете налепити непромењене. Почните са радиони од [пример микросервиса](../../../../examples/microservices) ако вам је потребна покретна основа.
 
 ### Структура пројекта
 
@@ -169,10 +174,10 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**То је то!** AZD ће по дефолту креирати Application Insights. Није потребна додатна конфигурација за основно надгледање.
+Ово декларише сервис који се примењује. Следећи Bicep и SDK конфигурације обезбеђују надзор; azd их не додаје имплицитно.
 
 ---
 
@@ -223,6 +228,7 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
@@ -235,7 +241,8 @@ output applicationInsightsName string = applicationInsights.name
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -291,29 +299,23 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Добијте Application Insights низ за повезивање
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Конфигуришите расподељено праћење
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # 100% узорковање за развој
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # Конфигуришите логовање
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # Симулирајте позив базе података (аутоматски праћено као зависност)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Симулирајте спору операцију
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -367,34 +369,34 @@ if __name__ == '__main__':
 **Фајл: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+Решите ове зависности у вашем пројекту, тестирајте их заједно и закључајте добијене верзије. Нови пројекти треба да користе Azure Monitor OpenTelemetry, а не обустављене OpenCensus Python експортере.
 
 ---
 
-### Корак 5: Деплоy и верификација
+### Корак 5: Примена и провера
 
 ```bash
-# Иницијализуј AZD
-azd init
-
-# Размешти (аутоматски обезбеђује Application Insights)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# Добиј URL апликације
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# Генериши телеметрију
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
 curl $APP_URL/api/slow
 ```
 
-**✅ Очекивани излаз:**
+**✅ Очекује се излаз:**
 ```json
 {
   "status": "healthy",
@@ -407,44 +409,39 @@ curl $APP_URL/api/slow
 ### Корак 6: Погледајте телеметрију у Azure порталу
 
 ```bash
-# Добијте детаље о Application Insights-у
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Отворите у Azure порталу
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Навигирајте до Azure Portal → Application Insights → Transaction Search**
+**Навигирајте у Azure Portal → Application Insights → Transaction Search**
 
 Требало би да видите:
-- ✅ HTTP захтеве са статусним кодовима
+- ✅ HTTP захтеве са статус кодовима
 - ✅ Трајање захтева (3+ секунде за `/api/slow`)
-- ✅ Детаље о изузецима са `/api/error-test`
-- ✅ Прилагођене поруке дневника
+- ✅ Детаљи изузетака из `/api/error-test`
+- ✅ Прилагођене лог поруке
 
 ---
 
 ## Лекција 2: Прилагођена телеметрија и догађаји
 
-### Праћење бизнис догађаја
+### Праћење пословних догађаја
 
-Додајмо прилагођену телеметрију за бизнис-критичне догађаје.
+Додајмо прилагођену телеметрију за пословно критичне догађаје.
 
 **Фајл: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # Подешавање логера
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # Подешавање экспортера метрика
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # Подешавање трацера
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# Глобални клијент телеметрије
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### Ажурирајте апликацију са прилагођеним догађајима
+### Ажурирање апликације са прилагођеним догађајима
 
-**Фајл: `src/app.py` (побољшан)**
+**Фајл: `src/app.py` (побољшано)**
+
+Додајте ове руте у постојећу Flask апликацију; задржите раније health/test руте. Скроћени блок испод показује посебну апликацију за јасноћу. Иницијализација телеметрије сада живи у `telemetry.py` — не иницијализујте извознике два пута.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # Пратите пословни догађај
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Пратите метрику прихода
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # Симулирајте претрагу (ово би био прави упит у базу података)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Конвертујте у мс
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # Пратите догађај претраге
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Пратите метрику перформанси претраге
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # Симулирајте позив спољашњег АПИ-ја
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # Пратите зависност
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -616,23 +586,23 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### Тестирајте прилагођену телеметрију
+### Тестирање прилагођене телеметрије
 
 ```bash
-# Прати догађај куповине
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# Прати догађај претраге
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# Прати спољну зависност
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
-**Поглед у Azure порталу:**
+**Погледајте у Azure Portalu:**
 
 Навигирајте до Application Insights → Logs, затим покрените:
 
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -665,11 +635,11 @@ traces
 
 ---
 
-## Лекција 3: Дистрибутовано трасирање за микросервисе
+## Лекција 3: Дистрибуирано праћење за микросервисе
 
-### Омогућите трасирање преко сервиса
+### Омогућите праћење између сервиса
 
-За микросервисе, Application Insights аутоматски корелира захтеве између сервиса.
+Са компатибилном инструментализацијом и W3C trace-context пропагацијом, Application Insights корелира захтеве кроз сервисе. Само дељење конекционог низа не успоставља родитељ-дете праћење. Следећи архитектонски фрагмент се односи на модуле које морате имплементирати.
 
 **Фајл: `infra/main.bicep`**
 
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### Погледајте крај-до-краја транзакцију
+### Погледајте енд-то-енд трансакцију
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API гејтвеј<br/>(ID трага: abc123)
-    participant Product as Сервис производа<br/>(ID родитеља: abc123)
-    participant Order as Сервис наруџбина<br/>(ID родитеља: abc123)
-    participant AppInsights as Апликациони увид
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
+    participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Почетак трага: abc123
-    Gateway->>AppInsights: Запиши захтев (ID трага: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: ID родитеља: abc123
-    Product->>AppInsights: Запиши позив зависности
-    Product-->>Gateway: Детаљи производа
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: ID родитеља: abc123
-    Order->>AppInsights: Запиши позив зависности
-    Order-->>Gateway: Наруџбина креирана
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: Наплата завршена
-    Gateway->>AppInsights: Запиши одговор (Трајање: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: Корелација по ID трага
+    Note over AppInsights: Correlation by Trace ID
 ```
-**Упит за крај-до-краја трасу:**
+
+**Упит за целокупни траг:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,65 +759,65 @@ dependencies
 
 ---
 
-## Лекција 4: Live Metrics и праћење у реалном времену
+## Лекција 4: Метрике уживо и надгледање у реалном времену
 
-### Омогућите Live Metrics Stream
+### Омогућите струју метрика уживо
 
-Live Metrics пружа телеметрију у реалном времену са латенцијом <1 секунде.
+Live Metrics пружа телеметрију у готово реалном времену када је подржано и омогућено од стране SDK. Није СЛА за латенцију. Подешавање OpenTelemetry Python изнад укључује `enable_live_metrics=True`.
 
-**Приступ Live Metrics:**
+**Приступите Live Metrics:**
 
 ```bash
-# Добијте ресурс Application Insights
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Добијте групу ресурса
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
 **Шта видите у реалном времену:**
-- ✅ Стопа улазећих захтева (requests/sec)
-- ✅ Одлазећи позиви зависности
+- ✅ Број долазних захтева (захтеви/сек)
+- ✅ Одлазни позиви зависности
 - ✅ Број изузетака
-- ✅ Кориšћење CPU-а и меморије
+- ✅ Користење CPU и меморије
 - ✅ Број активних сервера
-- ✅ Примерци телеметрије
+- ✅ Узорак телеметрије
 
 ### Генеришите оптерећење за тестирање
 
 ```bash
-# Генеришите оптерећење да бисте видели метрике уживо
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Пратите метрике уживо у Azure порталу
-# Требало би да видите скок стопе захтева
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
 
-## Практични задаци
+## Практичне вежбе
 
-### Задатак 1: Подесите аларме ⭐⭐ (Средњи)
+### Вежба 1: Поставите аларме ⭐⭐ (Средњи ниво)
 
-**Циљ**: Креирати аларме за високе стопе грешака и споре одговоре.
+**Циљ**: Креирајте аларме за висок ниво грешака и споре одговоре.
 
 **Кораци:**
 
 1. **Креирајте аларм за стопу грешака:**
 
 ```bash
-# Добијте ID ресурса Application Insights
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Креирајте метрички аларм за неуспеле захтеве
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,7 +825,7 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
 2. **Креирајте аларм за споре одговоре:**
@@ -870,7 +841,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Креирајте аларм преко Bicep-а (препоручено за AZD):**
+3. **Креирајте аларм преко Bicep-а (преферирано за AZD):**
 
 **Фајл: `infra/core/alerts.bicep`**
 
@@ -947,42 +918,42 @@ output slowResponseAlertId string = slowResponseAlert.id
 4. **Тестирајте аларме:**
 
 ```bash
-# Генериши грешке
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Генериши споре одговоре
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Провери статус упозорења (сачекај 5-10 минута)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
-**✅ Критеријуми успешности:**
-- ✅ Аларми успешно креирани
-- ✅ Аларми се активирају када се прекораче прагови
-- ✅ Можете видети историју аларма у Azure порталу
-- ✅ Интегрисано са AZD деплоyментом
+**✅ Критеријуми успеха:**
+- ✅ Аларми су успешно креирани
+- ✅ Аларми се активирају када се пређу праг
+- ✅ Историја аларма је видљива у Azure порталу
+- ✅ Интегрисано са AZD применом
 
 **Време**: 20-25 минута
 
 ---
 
-### Задатак 2: Креирајте прилагођену контролну таблу ⭐⭐ (Средњи)
+### Вежба 2: Креирајте прилагођену контролну таблу ⭐⭐ (Средњи ниво)
 
-**Циљ**: Направити таблу која приказује кључне метрике апликације.
+**Циљ**: Направите контролну таблу која приказује кључне метрике апликације.
 
 **Кораци:**
 
-1. **Креирајте контролну таблу преко Azure портала:**
+1. **Креирајте таблу преко Azure портала:**
 
-Навигирајте до: Azure Portal → Dashboards → New Dashboard
+Навигирајте у: Azure портал → Контролне табле → Нова контрола табла
 
 2. **Додајте плочице за кључне метрике:**
 
@@ -990,7 +961,7 @@ az monitor metrics alert list \
 - Просечно време одговора
 - Стопа грешака
 - Топ 5 најспоријих операција
-- Географска расподела корисника
+- Географска дистрибуција корисника
 
 3. **Креирајте контролну таблу преко Bicep-а:**
 
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1063,10 +1044,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **Деплоy контролну таблу:**
+4. **Примените контролну таблу:**
 
-```bash
-# Додајте у main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,28 +1057,30 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# Разместите
+```bash
+# Deploy
 azd up
 ```
 
-**✅ Критеријуми успешности:**
+**✅ Критеријуми успеха:**
 - ✅ Контролна табла приказује кључне метрике
-- ✅ Може се причврстити на почетну страну Azure портала
-- ✅ Ажурира се у реалном времену
-- ✅ Деплоy-ује се преко AZD
+- ✅ Може се прикачити на почетну страницу Azure портала
+- ✅ Ажурирања у реалном времену
+- ✅ Доступна за примену преко AZD
 
 **Време**: 25-30 минута
 
 ---
 
-### Задатак 3: Надгледање AI/LLM апликације ⭐⭐⭐ (Напредни)
+### Вежба 3: Надгледање AI/LLM апликације ⭐⭐⭐ (Напредни ниво)
 
-**Циљ**: Пратити коришћење Microsoft Foundry модела (токени, трошкови, латенција).
+**Циљ**: Праћење коришћења Microsoft Foundry модела (токени, трошкови, латенција).
 
 **Кораци:**
 
-1. **Креирајте AI мониторинг омотач:**
+1. **Креирајте омотач за AI надзор:**
 
 **Фајл: `src/ai_telemetry.py`**
 
@@ -1109,39 +1092,43 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # Позови Microsoft Foundry моделе
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
                 **kwargs
             )
             
-            duration = (time.time() - start_time) * 1000  # мс
+            duration = (time.time() - start_time) * 1000  # ms
             
-            # Извучи коришћење
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Израчунај трошкове (цена gpt-4.1)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 по 1K токена
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 по 1K токена
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # Прати прилагођени догађај
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # Прати метрике
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# Иницијализуј надгледаног OpenAI клијента
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Позив са аутоматским праћењем
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,13 +1205,13 @@ def chat():
     })
 ```
 
-3. **Упити AI метрике:**
+3. **Извршите упите AI метрика:**
 
 ```kusto
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1250,10 +1239,10 @@ traces
     AvgCostPerRequest = avg(Cost)
 ```
 
-**✅ Критеријуми успешности:**
-- ✅ Сваки OpenAI позив праћен аутоматски
-- ✅ Потрошња токена и трошкови видљиви
-- ✅ Латенција праћена
+**✅ Критеријуми успеха:**
+- ✅ Сваки OpenAI позив аутоматски праћен
+- ✅ Видљиво коришћење токена и трошкови
+- ✅ Надгледана латенција
 - ✅ Могуће подесити аларме за буџет
 
 **Време**: 35-45 минута
@@ -1267,29 +1256,16 @@ traces
 Контролишите трошкове узорковањем телеметрије:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# Развој: узорковање 100%
-sampler = ProbabilitySampler(rate=1.0)
-
-# Производња: узорковање 10% (смањити трошкове за 90%)
-sampler = ProbabilitySampler(rate=0.1)
-
-# Адаптивно узорковање (аутоматски се прилагођава)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**У Bicep-у:**
+Узорковање трагова не смањује сваки тип телеметрије за 90%. Метрике и независно емитовани лoгови захтевају своје контроле обима. Изаберите стопу према потребама посматрања, не општом забраном за производњу.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+Подесите узорковање у SDK експлицитно; својство `SamplingPercentage` компоненте није замена за конфигурацију узорковања у Python OpenTelemetry.
 
 ### Чување података
 
@@ -1305,38 +1281,38 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 ### Месечне процене трошкова
 
-| Обим података | Задржавање | Месечни трошак |
+| Обим података | Чување | Месечни трошак |
 |-------------|-----------|--------------|
 | 1 GB/месечно | 30 дана | ~$2-5 |
 | 5 GB/месечно | 30 дана | ~$10-15 |
 | 10 GB/месечно | 90 дана | ~$25-40 |
 | 50 GB/месечно | 90 дана | ~$100-150 |
 
-**Бесплатни ниво**: 5 GB/месечно укључено
+Ове бројке су илустративне, не понуде. Проверите цене у вашој регији и уговору за унос, чување, аларме и тестирања; бесплатне квоте су заједничке/ограничене према цени Azure Monitor-а, а не загарантовани бесплатни СКУ по једном Application Insights ресурсу.
 
 ---
 
-## Контролна тачка знања
+## Провера знања
 
 ### 1. Основна интеграција ✓
 
-Тестирајте своје разумевање:
+Тестирајте ваше разумевање:
 
-- [ ] **Q1**: Како AZD провизионише Application Insights?
-  - **A**: Аутоматски преко Bicep шаблона у `infra/core/monitoring.bicep`
+- [ ] **П1**: Како AZD обезбеђује Application Insights?
+  - **О**: Распоређује мониторинг ресурсе који су експлицитно декларисани у Bicep/Terraform темплејтима пројекта.
 
-- [ ] **Q2**: Која средина променљива омогућава Application Insights?
-  - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [ ] **П2**: Која срединаска променљива омогућава Application Insights?
+  - **О**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: Која су три главна типа телеметрије?
-  - **A**: Requests (HTTP позиви), Dependencies (спољни позиви), Exceptions (грешке)
+- [ ] **П3**: Која су три главна типа телеметрије?
+  - **О**: Захтеви (HTTP позиви), Зависности (спољашњи позиви), Изузеци (грешека)
 
-**Практична верификација:**
+**Практична провера:**
 ```bash
-# Проверите да ли је Application Insights конфигурисан
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Проверите да ли телеметрија стиже
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1347,18 +1323,18 @@ az monitor app-insights metrics show \
 
 ### 2. Прилагођена телеметрија ✓
 
-Тестирајте своје разумевање:
+Тестирајте ваше разумевање:
 
-- [ ] **Q1**: Како пратите прилагођене бизнис догађаје?
-  - **A**: Користите логер са `custom_dimensions` или `TelemetryClient.track_event()`
+- [ ] **П1**: Како пратите прилагођене пословне догађаје?
+  - **О**: Омотач из ове лекције пише структуриране OTel логове са `event_name` атрибутима, који се могу упитати у `traces`; ово се не бележи аутоматски као `customEvents`.
 
-- [ ] **Q2**: Која је разлика између догађаја и метрика?
-  - **A**: Догађаји су појединачни настанци, метрике су нумеричка мерења
+- [ ] **П2**: Која је разлика између догађаја и метрика?
+  - **О**: Догађаји су дискретна дешавања, метрике су нумеричка мерења
 
-- [ ] **Q3**: Како корелирате телеметрију између сервиса?
-  - **A**: Application Insights аутоматски користи `operation_Id` за корелацију
+- [ ] **П3**: Како се корелира телеметрија између сервиса?
+  - **О**: Application Insights аутоматски користи `operation_Id` за корелацију
 
-**Практична верификација:**
+**Практична провера:**
 ```kusto
 // Verify custom events
 traces
@@ -1368,110 +1344,106 @@ traces
 
 ---
 
-### 3. Праћење у продукцији ✓
+### 3. Производно надгледање ✓
 
-Тестирајте своје разумевање:
+Тестирајте ваше разумевање:
 
-- [ ] **Q1**: Шта је узорковање и зашто га користити?
-  - **A**: Узорковање смањује обим података (и трошкове) тако што бележи само проценат телеметрије
+- [ ] **П1**: Шта је узорковање и зашто га користити?
+  - **О**: Узорковање смањује обим података (и трошкове) бележењем само процента телеметрије
 
-- [ ] **Q2**: Како подесити аларме?
-  - **A**: Користите метричке аларме у Bicep-у или Azure порталу на основу Application Insights метрика
+- [ ] **П2**: Како се постављају аларми?
+  - **О**: Користите метрике аларме у Bicep-у или Azure Порталу на основу Application Insights метрика
 
-- [ ] **Q3**: Која је разлика између Log Analytics и Application Insights?
-  - **A**: Application Insights чува податке у Log Analytics радном простору; App Insights пружа апликационо-специфичне приказе
+- [ ] **П3**: Која је разлика између Log Analytics и Application Insights?
+  - **О**: Application Insights чува податке у Log Analytics радном простору; App Insights пружа апликационо специфичне приказе
 
-**Практична верификација:**
+**Практична провера:**
 ```bash
-# Проверите конфигурацију узорковања
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
 
 ## Најбоље праксе
 
-### ✅ РАДИТЕ ОВО:
+### ✅ РАДИ:
 
-1. **Користите идентификатор корелације**
+1. **Користите ИД корелације**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. **Подесите аларме за критичне метрике**
+2. **Поставите аларме за критичне метрике**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
 3. **Користите структурирано логовање**
    ```python
-   # ✅ ДОБРО: Структурисано
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ ЛОШЕ: Неструктурисано
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
 4. **Надгледајте зависности**
    ```python
-   # Аутоматски прати позиве базе података, HTTP захтеве и слично.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
-5. **Користите Live Metrics током деплоyмента**
+5. **Користите Live Metrics током имплементација**
 
-### ❌ НЕ РАДИТЕ ОВО:
+### ❌ НЕ РАДИ:
 
-1. **Не логовујте осетљиве податке**
+1. **Не бележите осетљиве податке**
    ```python
-   # ❌ ЛОШЕ
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ ДОБРО
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **Не користите 100% узорковање у продукцији**
+2. **Не бирајте узорковање без мерења волумена и дијагностичких потреба**
    ```python
-   # ❌ Скуп
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ Исплативо
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **Не игноришите dead letter редове**
+3. **Не игноришите редове мртвих порука**
 
-4. **Не заборавите да подесите лимите за задржавање података**
+4. **Не заборавите да поставите ограничења задржавања података**
 
 ---
 
 ## Решавање проблема
 
-### Проблем: Нема појављене телеметрије
+### Проблем: Телеметрија се не приказује
 
 **Дијагноза:**
 ```bash
-# Проверите да ли је конекцијски низ подешен
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Проверите логове апликације преко Azure Monitor-а
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# Или користите Azure CLI за Container Apps:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Решење:**
 ```bash
-# Проверите конекциони низ у Container App
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1485,67 +1457,66 @@ az containerapp show \
 
 **Дијагноза:**
 ```bash
-# Провери пријем података
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **Решење:**
 - Смањите стопу узорковања
-- Скраћите период задржавања
-- Уклоните детаљно логовање
+- Скратите период задржавања
+- Уклоните детаљно бележење
 
 ---
 
 ## Сазнајте више
 
 ### Званична документација
-- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [Преглед Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Azure Monitor OpenTelemetry подешавање](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
+- [Језик упита Кусто](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [АЗД Мониторинг](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
 ### Следећи кораци у овом курсу
-- ← Претходно: [Провере пре лета](preflight-checks.md)
-- → Следеће: [Водич за деплоyмент](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Почетна курса](../../README.md)
+- ← Претходно: [Провере пре лансирања](preflight-checks.md)
+- → Следеће: [Водич за распоређивање](../chapter-04-infrastructure/deployment-guide.md)
+- 🏠 [Почетна страница курса](../../README.md)
 
 ### Повезани примери
-- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI телеметрија
-- [Microservices Example](../../../../examples/microservices) - Дистрибутовано трасирање
+- [Пример Microsoft Foundry модела](../../../../examples/azure-openai-chat) - AI телеметрија
+- [Пример микросервиса](../../../../examples/microservices) - Расподељено праћење
 
 ---
 
 ## Резиме
 
-**Науčili сте:**
-- ✅ Аутоматско провизионовање Application Insights-а са AZD
+**Научили сте:**
+- ✅ Аутоматско додељивање Application Insights преко AZD-а
 - ✅ Прилагођена телеметрија (догађаји, метрике, зависности)
-- ✅ Дистрибутовано трасирање кроз микросервисе
-- ✅ Live Metrics и праћење у реалном времену
+- ✅ Расподељено праћење кроз микросервисе
+- ✅ Метрике у реалном времену и мониторинг уживо
 - ✅ Аларми и контролне табле
-- ✅ Надгледање AI/LLM апликација
+- ✅ Мониторинг AI/LLM апликација
 - ✅ Стратегије оптимизације трошкова
 
 **Кључне поуке:**
-1. **AZD аутоматски обезбеђује мониторинг** - Без ручног подешавања
-2. **Користите структурисано логовање** - Олакшава извођење упита
+1. **Декларишите мониторинг експлицитно** - AZD примењује ваше шаблоне; SDK инструментација шаље телеметрију
+2. **Користите структурирано бележење** - Олакшава упите
 3. **Пратите пословне догађаје** - Не само техничке метрике
-4. **Пратите трошкове AI** - Пратите токене и потрошњу
-5. **Подесите упозорења** - Будите проактивни, не реактивни
+4. **Пратите трошкове AI** - Пратите тагове и расходе
+5. **Поставите аларме** - Бодите проактивни, не реактивни
 6. **Оптимизујте трошкове** - Користите узорковање и ограничења задржавања
 
 **Следећи кораци:**
 1. Завршите практичне вежбе
 2. Додајте Application Insights у ваше AZD пројекте
 3. Креирајте прилагођене контролне табле за ваш тим
-4. Погледајте [Водич за постављање](../chapter-04-infrastructure/deployment-guide.md)
+4. Научите [Водич за распоређивање](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ограничење одговорности**:
-Овај документ је преведен помоћу сервиса за превођење базираног на вештачкој интелигенцији [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да обезбедимо тачност, имајте у виду да аутоматизовани преводи могу садржати грешке или нетачности. Оригинални документ на свом изворном језику треба сматрати меродавним извором. За критичне информације препоручује се професионални превод обављен од стране људског преводиоца. Не сносимо одговорност за било какве неспоразуме или погрешна тумачења која произилазе из употребе овог превода.
+**Изјава о одрицању одговорности**:
+Овај документ је преведен коришћењем услуге за аутоматски превод [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо тачности, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква неспоразума или погрешна тумачења која произилазе из коришћења овог превода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

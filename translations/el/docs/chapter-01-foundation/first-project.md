@@ -1,113 +1,114 @@
 # Το Πρώτο σας Έργο - Πρακτικό Σεμινάριο
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Course Home**: [AZD για Αρχάριους](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 1 - Βάσεις & Γρήγορη Εκκίνηση
-- **⬅️ Previous**: [Εγκατάσταση & Ρύθμιση](installation.md)
-- **➡️ Next**: [Διαμόρφωση](configuration.md)
-- **🚀 Next Chapter**: [Κεφάλαιο 2: Ανάπτυξη με προτεραιότητα στην ΤΝ](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 1 - Εγκαθίδρυση & Γρήγορη Εκκίνηση
+- **⬅️ Προηγούμενο**: [Εγκατάσταση & Ρύθμιση](installation.md)
+- **➡️ Επόμενο**: [Φέρε τη Δική σου Εφαρμογή](bring-your-own-app.md)
+- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 2: AI-Πρώτη Ανάπτυξη](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Εισαγωγή
 
-Καλώς ήρθατε στο πρώτο σας έργο με το Azure Developer CLI! Αυτό το ολοκληρωμένο πρακτικό σεμινάριο παρέχει πλήρη βήμα-βήμα οδηγό για τη δημιουργία, ανάπτυξη και διαχείριση μιας πλήρους στοίβας εφαρμογής στο Azure χρησιμοποιώντας azd. Θα εργαστείτε με μια πραγματική εφαρμογή todo που περιλαμβάνει React frontend, Node.js API backend και MongoDB βάση δεδομένων.
+Καλώς ήλθατε στο πρώτο σας έργο Azure Developer CLI! Θα αναπτύξετε μια εφαρμογή todo με React frontend, Node.js API και Azure Cosmos DB. Το πρότυπο διατηρεί το ιστορικό όνομα `todo-nodejs-mongo`· η τρέχουσα υποδομή του χρησιμοποιεί το Cosmos DB για NoSQL, οπότε ελέγξτε το κατεβασμένο README και `infra/` αντί να συμπεράνετε το API βάσης δεδομένων από το όνομα.
+
+> Εξετάστηκε σε σύγκριση με `azd 1.37.2` και το δημόσιο πρότυπο τον Νοέμβριο 2026. Τα παραδείγματα παρακάτω χρησιμοποιούν Bash∙ η εξαγωγή JSON απαιτεί επίσης `jq`. Οι αναπτύξεις Azure επιφέρουν χρεώσεις και δεν εκτελέστηκαν κατά την ανασκόπηση.
 
 ## Στόχοι Μάθησης
 
 Ολοκληρώνοντας αυτό το σεμινάριο, θα:
-- Κατακτήσετε τη ροή εργασίας αρχικοποίησης έργου azd χρησιμοποιώντας πρότυπα
-- Κατανοήσετε τη δομή του έργου Azure Developer CLI και τα αρχεία ρύθμισης
+- Κατανοήσετε τη ροή εργασιών αρχικοποίησης έργου azd χρησιμοποιώντας πρότυπα
+- Καταλάβετε τη δομή έργου Azure Developer CLI και τα αρχεία διαμόρφωσης
 - Εκτελέσετε πλήρη ανάπτυξη εφαρμογής στο Azure με παροχή υποδομής
-- Υλοποιήσετε στρατηγικές ενημέρωσης εφαρμογής και επανα-ανάπτυξης
-- Διαχειριστείτε πολλαπλά περιβάλλοντα για ανάπτυξη και staging
+- Εφαρμόσετε ενημερώσεις εφαρμογής και στρατηγικές επανανάπτυξης
+- Διαχειριστείτε πολλαπλά περιβάλλοντα για ανάπτυξη και σταδιοποίηση
 - Εφαρμόσετε πρακτικές καθαρισμού πόρων και διαχείρισης κόστους
 
-## Μαθησιακά Αποτελέσματα
+## Αποτελέσματα Μάθησης
 
-Με την ολοκλήρωση, θα μπορείτε να:
-- Αρχικοποιείτε και να ρυθμίζετε έργα azd από πρότυπα αυτόνομα
-- Πλοηγείστε και να τροποποιείτε δομές έργων azd αποτελεσματικά
-- Αναπτύσσετε πλήρεις στοίβες εφαρμογών στο Azure με εντολές ενός βήματος
-- Εντοπίζετε και να επιλύετε κοινά προβλήματα ανάπτυξης και πιστοποίησης
-- Διαχειρίζεστε πολλαπλά περιβάλλοντα Azure για διαφορετικά στάδια ανάπτυξης
-- Υλοποιείτε ροές συνεχούς ανάπτυξης για ενημερώσεις εφαρμογής
+Μετά την ολοκλήρωση, θα μπορείτε να:
+- Αρχικοποιήσετε και να διαμορφώσετε έργα azd από πρότυπα ανεξάρτητα
+- Πλοηγηθείτε και να τροποποιήσετε δομές έργων azd αποτελεσματικά
+- Αναπτύξετε πλήρεις εφαρμογές στο Azure με μεμονωμένες εντολές
+- Εντοπίσετε κοινά προβλήματα ανάπτυξης και θέματα πιστοποίησης
+- Διαχειριστείτε πολλαπλά περιβάλλοντα Azure για διαφορετικά στάδια ανάπτυξης
+- Εφαρμόσετε ροές εργασιών συνεχούς ανάπτυξης για ενημερώσεις εφαρμογής
 
 ## Ξεκινώντας
 
 ### Λίστα Ελέγχου Προαπαιτούμενων
-- ✅ Azure Developer CLI installed ([Οδηγός Εγκατάστασης](installation.md))
-- ✅ Ολοκληρώθηκε η πιστοποίηση AZD με `azd auth login`
-- ✅ Το Git είναι εγκατεστημένο στο σύστημά σας
-- ✅ Node.js 16+ (για αυτό το σεμινάριο)
-- ✅ Visual Studio Code (συνιστάται)
+- ✅ Azure Developer CLI εγκατεστημένο ([Οδηγός Εγκατάστασης](installation.md))
+- ✅ Πιστοποίηση AZD ολοκληρωμένη με `azd auth login`
+- ✅ Git εγκατεστημένο στο σύστημά σας
+- ✅ Node.js 22 LTS (ή υποστηριζόμενη έκδοση απαιτούμενη από το κατεβασμένο πρότυπο)
+- ✅ Visual Studio Code (προτεινόμενο)
 
-Πριν συνεχίσετε, εκτελέστε τον validator εγκατάστασης από τη ρίζα του αποθετηρίου:
+Πριν προχωρήσετε, εκτελέστε τον ελεγκτή ρύθμισης από τη ρίζα του αποθετηρίου:
 
 **Windows:** `./validate-setup.ps1`
 
 **macOS / Linux:** `bash ./validate-setup.sh`
 
-### Επαλήθευση της Ρύθμισης σας
+### Επιβεβαιώστε τη Ρύθμισή σας
 ```bash
-# Ελέγξτε την εγκατάσταση του azd
+# Check azd installation
 azd version
 
-# Ελέγξτε την επαλήθευση ταυτότητας του AZD
+# Check AZD authentication
 azd auth login --check-status
 ```
 
-### Επαλήθευση προαιρετικής πιστοποίησης Azure CLI
+### Επιβεβαιώστε προαιρετική πιστοποίηση Azure CLI
 
 ```bash
 az account show
 ```
 
-### Έλεγχος έκδοσης Node.js
+### Ελέγξτε την έκδοση Node.js
 ```bash
 node --version
 ```
 
 ## Βήμα 1: Επιλέξτε και Αρχικοποιήστε ένα Πρότυπο
 
-Ας ξεκινήσουμε με ένα δημοφιλές πρότυπο εφαρμογής todo που περιλαμβάνει React frontend και Node.js API backend.
+Ας ξεκινήσουμε με ένα δημοφιλές πρότυπο εφαρμογής todo που περιλαμβάνει frontend React και backend Node.js API.
 
 ```bash
-# Περιηγηθείτε στα διαθέσιμα πρότυπα
+# Browse available templates
 azd template list
 
-# Αρχικοποιήστε το πρότυπο της εφαρμογής todo
+# Initialize the todo app template
 mkdir my-first-azd-app
 cd my-first-azd-app
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
-# Ακολουθήστε τις οδηγίες:
-# - Εισάγετε ένα όνομα περιβάλλοντος: "dev"
-# - Επιλέξτε μια συνδρομή (αν έχετε πολλές)
-# - Επιλέξτε μια περιοχή: "East US 2" (ή την προτιμώμενη περιοχή σας)
+# Follow the prompts:
+# - Enter an environment name: "dev"
+# - Choose a subscription (if you have multiple)
+# - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### Τι Μόλις Συνέβη;
-- Λήφθηκε ο κώδικας του προτύπου στον τοπικό σας φάκελο
-- Δημιουργήθηκε το αρχείο `azure.yaml` με ορισμούς υπηρεσιών
-- Οργανώθηκε ο κώδικας υποδομής στον κατάλογο `infra/`
-- Δημιουργήθηκε μια ρύθμιση περιβάλλοντος
+### Τι Μόλις Συμβαίνει;
+- Κατεβάστηκε ο κώδικας προτύπου στον τοπικό σας φάκελο
+- Δημιουργήθηκε αρχείο `azure.yaml` με ορισμούς υπηρεσιών
+- Ρυθμίστηκε κώδικας υποδομής στον φάκελο `infra/`
+- Δημιουργήθηκε περιβάλλον διαμόρφωσης
 
 ## Βήμα 2: Εξερευνήστε τη Δομή του Έργου
 
-Ας εξετάσουμε τι δημιούργησε το azd για εμάς:
+Ας δούμε τι δημιούργησε για εμάς azd:
 
 ```bash
-# Προβολή της δομής του έργου
+# View the project structure
 tree /f   # Windows
-# ή
+# or
 find . -type f | head -20   # macOS/Linux
 ```
 
-Θα πρέπει να δείτε:
+Θα δείτε:
 ```
 my-first-azd-app/
-├── .azd/
-│   └── config.json              # Project configuration
 ├── .azure/
+│   ├── config.json              # Selected local environment
 │   └── dev/                     # Environment-specific files
 ├── .devcontainer/               # Development container config
 ├── .github/workflows/           # GitHub Actions CI/CD
@@ -115,80 +116,77 @@ my-first-azd-app/
 ├── infra/                       # Infrastructure as code (Bicep)
 │   ├── main.bicep              # Main infrastructure template
 │   ├── main.parameters.json     # Parameters for deployment
-│   └── modules/                # Reusable infrastructure modules
+│   └── app/                    # Application infrastructure modules
 ├── src/
 │   ├── api/                    # Node.js backend API
 │   │   ├── src/               # API source code
-│   │   ├── package.json       # Node.js dependencies
-│   │   └── Dockerfile         # Container configuration
+│   │   └── package.json       # Node.js dependencies
 │   └── web/                   # React frontend
 │       ├── src/               # React source code
-│       ├── package.json       # React dependencies
-│       └── Dockerfile         # Container configuration
+│       └── package.json       # React dependencies
 ├── azure.yaml                  # azd project configuration
 └── README.md                   # Project documentation
 ```
 
 ### Βασικά Αρχεία για Κατανόηση
 
-**azure.yaml** - Η καρδιά του έργου azd σας:
+**azure.yaml** - Η καρδιά του έργου azd:
 ```bash
-# Προβολή της διαμόρφωσης του έργου
+# View the project configuration
 cat azure.yaml
 ```
 
 **infra/main.bicep** - Ορισμός υποδομής:
 ```bash
-# Προβολή του κώδικα υποδομής
+# View the infrastructure code
 head -30 infra/main.bicep
 ```
 
-## Βήμα 3: Προσαρμόστε το Έργο σας (Προαιρετικό)
+## Βήμα 3: Εξατομικεύστε το Έργο σας (Προαιρετικό)
 
-Πριν την ανάπτυξη, μπορείτε να προσαρμόσετε την εφαρμογή:
+Πριν την ανάπτυξη, μπορείτε να εξατομικεύσετε την εφαρμογή:
 
 ### Τροποποιήστε το Frontend
 ```bash
-# Άνοιξε το συστατικό της εφαρμογής React
-code src/web/src/App.tsx
+# Open the React app component
+code src/web/src/layout/header.tsx
 ```
 
 Κάντε μια απλή αλλαγή:
-```typescript
-// Βρείτε τον τίτλο και αλλάξτε τον
-<h1>My Awesome Todo App</h1>
+```tsx
+// Replace the existing <Text variant="xLarge">ToDo</Text> element
+<Text variant="xLarge">My Awesome Todo App</Text>
 ```
 
-### Διαμόρφωση Μεταβλητών Περιβάλλοντος
+### Διαμορφώστε Μεταβλητές Περιβάλλοντος
 ```bash
-# Ορίστε προσαρμοσμένες μεταβλητές περιβάλλοντος
+# Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# Προβολή όλων των μεταβλητών περιβάλλοντος
+# View all environment variables
 azd env get-values
 ```
 
+Αυτές οι δύο προσαρμοσμένες τιμές δείχνουν μόνο τοπική αποθήκευση. Το αρχικό πρότυπο δεν χρησιμοποιεί `WEBSITE_TITLE` ή `API_VERSION`, οπότε δεν αλλάζουν την εφαρμογή. Η σαφής επεξεργασία πηγής πιο πάνω αλλάζει τον εμφανιζόμενο τίτλο.
+
 ## Βήμα 4: Αναπτύξτε στο Azure
 
-Ώρα για το συναρπαστικό μέρος - αναπτύξτε τα πάντα στο Azure!
+Τώρα το συναρπαστικό κομμάτι - αναπτύξτε τα πάντα στο Azure!
 
 ```bash
-# Ανάπτυξη υποδομής και εφαρμογής
+# Deploy infrastructure and application
 azd up
 
-# Αυτή η εντολή θα:
-# 1. Παρέχει πόρους Azure (App Service, Cosmos DB κ.λπ.)
-# 2. Δημιουργεί την εφαρμογή σας
-# 3. Αναπτύσσει στους παρεχθέντες πόρους
-# 4. Εμφανίζει τη διεύθυνση URL της εφαρμογής
+# This command will:
+# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
+# 2. Build your application
+# 3. Deploy to the provisioned resources
+# 4. Display the application URL
 ```
 
-### Τι Συμβαίνει Κατά τη Διάρκεια της Ανάπτυξης;
+### Τι Συμβαίνει Κατά την Ανάπτυξη;
 
-Η εντολή `azd up` εκτελεί τα παρακάτω βήματα:
-1. **Provision** (`azd provision`) - Δημιουργεί πόρους Azure
-2. **Package** - Χτίζει τον κώδικα της εφαρμογής σας
-3. **Deploy** (`azd deploy`) - Αναπτύσσει τον κώδικα στους πόρους Azure
+Η ροή εργασιών παρέχει υποδομή και πακετάρει/αναπτύσσει κώδικα. Η ακριβής σειρά μπορεί να προσαρμοστεί μέσω `workflows.up` στο `azure.yaml`· αυτό το πρότυπο καθορίζει πρώτα την παροχή και μετά την ανάπτυξη. Μην βασίζεστε σε μια καθολική σειρά φάσεων για κάθε πρότυπο.
 
 ### Αναμενόμενη Έξοδος
 ```
@@ -206,295 +204,294 @@ https://app-web-abc123def.azurewebsites.net
 ## Βήμα 5: Δοκιμάστε την Εφαρμογή σας
 
 ### Πρόσβαση στην Εφαρμογή σας
-Κάντε κλικ στο URL που παρέχεται στην έξοδο της ανάπτυξης, ή αποκτήστε το οποιαδήποτε στιγμή:
+Κάντε κλικ στο URL που δίνεται στην έξοδο ανάπτυξης ή αποκτήστε το οποτεδήποτε:
 ```bash
-# Λήψη τελικών σημείων της εφαρμογής
+# Get application endpoints
 azd show
 
-# Ανοίξτε την εφαρμογή στον περιηγητή σας
-azd show --output json | jq -r '.services.web.endpoint'
+# Open the application in your browser
+azd show --output json | jq -er '.services.web.ingressUrl'
 ```
 
-### Δοκιμάστε την Εφαρμογή Todo
-1. **Προσθήκη ενός todo** - Κάντε κλικ στο κουμπί "Προσθήκη Todo" και εισάγετε μια εργασία
-2. **Σήμανση ως ολοκληρωμένο** - Επισημάνετε τα ολοκληρωμένα στοιχεία
-3. **Διαγραφή στοιχείων** - Αφαιρέστε todos που δεν χρειάζεστε πλέον
+### Δοκιμή Εφαρμογής Todo
+1. **Προσθέστε μια εργασία** - Κάντε κλικ στο "Προσθήκη Todo" και εισάγετε εργασία
+2. **Σημειώστε ως ολοκληρωμένη** - Επιλέξτε ολοκληρωμένες εργασίες
+3. **Διαγράψτε εργασίες** - Αφαιρέστε todos που δεν χρειάζεστε πια
 
-### Παρακολούθηση της Εφαρμογής σας
+### Παρακολουθήστε την Εφαρμογή σας
 ```bash
-# Άνοιγμα του portal του Azure για τους πόρους σας
+# Open Azure portal for your resources
 azd monitor
 
-# Προβολή αρχείων καταγραφής εφαρμογής
+# View application logs
 azd monitor --logs
 
-# Προβολή ζωντανών μετρικών
+# View live metrics
 azd monitor --live
 ```
 
-### ✅ Επαληθεύστε την Ανάπτυξή σας
+### ✅ Επιβεβαιώστε την Ανάπτυξή σας
 
-Πριν προχωρήσετε, ακολουθήστε αυτό το γρήγορο cheklist για να επιβεβαιώσετε ότι όλα πράγματι λειτουργούν — μην υποθέσετε ότι "η ανάπτυξη πέτυχε" σημαίνει "η εφαρμογή λειτουργεί":
+Πριν συνεχίσετε, κάντε αυτή τη γρήγορη λίστα ελέγχου για να επιβεβαιώσετε ότι όλα λειτουργούν — μην υποθέσετε ότι το "ανάπτυξη επιτυχής" σημαίνει "η εφαρμογή δουλεύει":
 
 ```bash
-# 1. Επιβεβαιώστε ότι το σημείο τερματισμού υπάρχει και είναι προσβάσιμο
+# 1. Confirm the endpoint exists and is reachable
 azd show
 
-# 2. Εκτελέστε ένα σύντομο τεστ στο σημείο τερματισμού (αναμένει HTTP 200)
-curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+# 2. Smoke-test the endpoint (expects HTTP 200)
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error --location "$WEB_URL"
 
-# 3. Ελέγξτε το σημείο τερματισμού υγείας αν η εφαρμογή σας εκθέτει ένα
-curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+# 3. Test the API's actual list route (the template has no /health route)
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail --show-error "$API_URL/lists"
 ```
 
-**Η ανάπτυξη επαληθεύεται όταν:**
-- ✅ `azd show` παραθέτει ένα προσβάσιμο URL endpoint
-- ✅ Το URL ανοίγει στον browser σας χωρίς σφάλματα
-- ✅ Οι βασικές λειτουργίες λειτουργούν (προσθήκη/ολοκλήρωση/διαγραφή ενός todo)
-- ✅ `azd monitor --logs` εμφανίζει αιτήματα που φτάνουν χωρίς απρόσμενα σφάλματα
+**Η ανάπτυξη επιβεβαιώνεται όταν:**
+- ✅ `azd show` καταγράφει ένα προσβάσιμο URL τελικού σημείου
+- ✅ Το URL ανοίγει στον περιηγητή χωρίς λάθη
+- ✅ Οι βασικές λειτουργίες δουλεύουν (προσθήκη/ολοκλήρωση/διαγραφή todo)
+- ✅ `azd monitor --logs` εμφανίζει αιτήματα χωρίς απρόβλεπτα σφάλματα
 
-Αν κάποιος έλεγχος αποτύχει, μεταβείτε στο [Κεφάλαιο 7: Επίλυση Προβλημάτων](../chapter-07-troubleshooting/README.md).
+Αν κάποιος έλεγχος αποτύχει, μεταβείτε στο [Κεφάλαιο 7: Αντιμετώπιση Προβλημάτων](../chapter-07-troubleshooting/README.md).
 
-## Βήμα 6: Κάντε Αλλαγές και Επανααναπτύξτε
+## Βήμα 6: Κάντε Αλλαγές και Επαναναπτύξτε
 
-Ας κάνουμε μια αλλαγή και να δούμε πόσο εύκολο είναι να ενημερώσετε:
+Ας κάνουμε μια αλλαγή και να δούμε πόσο εύκολο είναι να ενημερώσουμε:
 
 ### Τροποποιήστε το API
 ```bash
-# Επεξεργαστείτε τον κώδικα του API
-code src/api/src/routes/lists.js
+# Edit the API code
+code src/api/src/routes/lists.ts
 ```
 
 Προσθέστε μια προσαρμοσμένη κεφαλίδα απάντησης:
 ```javascript
-// Βρείτε έναν χειριστή διαδρομής και προσθέστε:
+// Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
 ### Αναπτύξτε Μόνο τις Αλλαγές Κώδικα
 ```bash
-# Αναπτύξτε μόνο τον κώδικα της εφαρμογής (παραλείποντας την υποδομή)
+# Deploy only the application code (skip infrastructure)
 azd deploy
 
-# Αυτό είναι πολύ πιο γρήγορο από το 'azd up' αφού η υποδομή υπάρχει ήδη
+# This is much faster than 'azd up' since infrastructure already exists
 ```
 
 ## Βήμα 7: Διαχείριση Πολλαπλών Περιβαλλόντων
 
-Δημιουργήστε ένα staging περιβάλλον για να δοκιμάζετε αλλαγές πριν την παραγωγή:
+Δημιουργήστε περιβάλλον σταδιοποίησης για να δοκιμάσετε αλλαγές πριν την παραγωγή:
 
 ```bash
-# Δημιουργήστε ένα νέο περιβάλλον προπαραγωγής
+# Create a new staging environment
 azd env new staging
 
-# Αναπτύξτε στο περιβάλλον προπαραγωγής
+# Deploy to staging
 azd up
 
-# Επιστρέψτε στο περιβάλλον ανάπτυξης
+# Switch back to dev environment
 azd env select dev
 
-# Εμφανίστε όλα τα περιβάλλοντα
+# List all environments
 azd env list
 ```
 
-### Σύγκριση Περιβαλλόντων
+### Σύγκριση Περιβάλλοντος
 ```bash
-# Προβολή περιβάλλοντος ανάπτυξης
+# View dev environment
 azd env select dev
 azd show
 
-# Προβολή περιβάλλοντος ενδιάμεσης δοκιμής
+# View staging environment  
 azd env select staging
 azd show
 ```
 
 ## Βήμα 8: Καθαρισμός Πόρων
 
-Όταν τελειώσετε τα πειράματα, καθαρίστε για να αποφύγετε συνεχιζόμενες χρεώσεις:
+Όταν τελειώσετε με τα πειράματα, καθαρίστε για να αποφύγετε συνεχιζόμενες χρεώσεις:
 
 ```bash
-# Διαγραφή όλων των πόρων Azure για το τρέχον περιβάλλον
-azd down
+# Review and delete BOTH environments created in this tutorial
+azd down --environment dev
+azd down --environment staging
 
-# Διαγραφή με εξαναγκασμό χωρίς επιβεβαίωση και μόνιμη απομάκρυνση των προσωρινά διαγραμμένων πόρων
-azd down --force --purge
-
-# Διαγραφή συγκεκριμένου περιβάλλοντος
-azd env select staging
-azd down --force --purge
+# Automation alternative for a selected disposable environment:
+# azd down --environment dev --force --purge
+# --purge affects supported soft-deleted Azure resources, not local .azure files.
 ```
 
-## Κλασική Εφαρμογή vs. Εφαρμογή με ΤΝ: Ίδια Ροή Εργασίας
+## Παραδοσιακή Εφαρμογή vs. Εφαρμογή με Τεχνητή Νοημοσύνη: Ίδια Ροή Εργασιών
 
-Μόλις αναπτύξατε μια παραδοσιακή web εφαρμογή. Αλλά τι γίνεται αν θέλετε να αναπτύξετε μια εφαρμογή με ΤΝ — για παράδειγμα, μια εφαρμογή συνομιλίας υποστηριζόμενη από Microsoft Foundry Models;
+Μόλις αναπτύξατε μια παραδοσιακή διαδικτυακή εφαρμογή. Αλλά τι θα γινόταν αν θέλατε να αναπτύξετε μια εφαρμογή με τεχνητή νοημοσύνη — όπως μια εφαρμογή συνομιλίας υποστηριζόμενη από Microsoft Foundry Models;
 
-Τα καλά νέα: **η ροή εργασίας είναι ίδια.**
+Τα καλά νέα: **η ροή εργασιών είναι η ίδια.**
 
-| Βήμα | Κλασική Εφαρμογή Todo | Εφαρμογή Συνομιλίας ΤΝ |
-|------|-----------------------|------------------------|
-| Αρχικοποίηση | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Βήμα | Παραδοσιακή Εφαρμογή Todo | Εφαρμογή Συνομιλίας AI |
+|------|-------------------------|-------------------------|
+| Αρχικοποίηση (κενός φάκελος) | `azd init --template todo-nodejs-mongo .` | `azd init --template azure-search-openai-demo .` |
 | Πιστοποίηση | `azd auth login` | `azd auth login` |
 | Ανάπτυξη | `azd up` | `azd up` |
 | Παρακολούθηση | `azd monitor` | `azd monitor` |
 | Καθαρισμός | `azd down --force --purge` | `azd down --force --purge` |
 
-Η μόνη διαφορά είναι το **πρότυπο** από το οποίο ξεκινάτε. Ένα πρότυπο ΤΝ περιλαμβάνει επιπλέον υποδομή (όπως έναν πόρο Microsoft Foundry Models ή έναν δείκτη AI Search), αλλά το azd διαχειρίζεται όλο αυτό για εσάς. Δεν χρειάζεται να μάθετε νέες εντολές, να υιοθετήσετε διαφορετικό εργαλείο ή να αλλάξετε τον τρόπο που σκέφτεστε για την ανάπτυξη.
+Οι εντολές κύκλου ζωής είναι ίδιες, αλλά τα προαπαιτούμενα διαφέρουν. Ένα πρότυπο AI μπορεί να απαιτεί πρόσβαση σε μοντέλο, περιφερειακό όριο, εισαγωγή δεδομένων και επιπλέον διαμόρφωση. Διαβάστε το README πριν την ανάπτυξη· το `azd up` δεν μπορεί να παράσχει λείπουσες άδειες ή όρια.
 
-Αυτή είναι η βασική αρχή του azd: **μία ροή εργασίας, οποιοδήποτε φορτίο εργασίας.** Οι δεξιότητες που εξασκήσατε σε αυτό το σεμινάριο—αρχικοποίηση, ανάπτυξη, παρακολούθηση, επανα-ανάπτυξη και καθαρισμός—ισχύουν εξίσου για εφαρμογές ΤΝ και agents.
+Αυτός είναι ο βασικός κανόνας του azd: **μία ροή εργασιών, κάθε φόρτο εργασίας.** Οι δεξιότητες που εξασκηθήκατε σε αυτό το σεμινάριο — αρχικοποίηση, ανάπτυξη, παρακολούθηση, επανανάπτυξη και καθαρισμός — ισχύουν εξίσου για εφαρμογές AI και πράκτορες.
 
 ---
 
 ## Τι Μάθατε
 
-Συγχαρητήρια! Έχετε επιτυχώς:
-- ✅ Αρχικοποιήσει ένα έργο azd από ένα πρότυπο
-- ✅ Εξερευνήσει τη δομή του έργου και τα βασικά αρχεία
-- ✅ Αναπτύξει μια πλήρη στοίβα εφαρμογής στο Azure
-- ✅ Κάνει αλλαγές κώδικα και επανα-ανάπτυξη
-- ✅ Διαχειριστεί πολλαπλά περιβάλλοντα
-- ✅ Καθάρισε πόρους
+Συγχαρητήρια! Επιτυχώς:
+- ✅ Αρχικοποιήσατε ένα έργο azd από πρότυπο
+- ✅ Εξερευνήσατε τη δομή του έργου και βασικά αρχεία
+- ✅ Αναπτύξατε μια πλήρη εφαρμογή στο Azure
+- ✅ Κάνατε αλλαγές κώδικα και επανεγκαταστήσατε
+- ✅ Διαχειριστήκατε πολλαπλά περιβάλλοντα
+- ✅ Καθαρίσατε πόρους
 
-## 🎯 Ασκήσεις Επικύρωσης Δεξιοτήτων
+## 🎯 Ασκήσεις Επιβεβαίωσης Δεξιοτήτων
 
 ### Άσκηση 1: Αναπτύξτε Ένα Διαφορετικό Πρότυπο (15 λεπτά)
-**Στόχος**: Επιδείξτε επάρκεια στην εντολή azd init και στη ροή ανάπτυξης
+**Στόχος**: Επίδειξη δεξιότητας στην αρχικοποίηση azd init και στη ροή εργασιών ανάπτυξης
 
 ```bash
-# Δοκίμασε τη στοίβα Python + MongoDB
+# Try Python + MongoDB stack
 mkdir todo-python && cd todo-python
-azd init --template todo-python-mongo
+azd init --template todo-python-mongo .
 azd up
 
-# Επαλήθευσε την ανάπτυξη
+# Verify deployment
 azd show
-curl $(azd show --output json | jq -r '.services.web.endpoint')
+curl --fail "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Καθάρισε
+# Clean up
 azd down --force --purge
 ```
 
 **Κριτήρια Επιτυχίας:**
 - [ ] Η εφαρμογή αναπτύσσεται χωρίς σφάλματα
-- [ ] Μπορείτε να αποκτήσετε πρόσβαση στο URL της εφαρμογής στον browser
+- [ ] Υπάρχει πρόσβαση στο URL της εφαρμογής σε περιηγητή
 - [ ] Η εφαρμογή λειτουργεί σωστά (προσθήκη/αφαίρεση todos)
-- [ ] Έγινε επιτυχής καθαρισμός όλων των πόρων
+- [ ] Όλοι οι πόροι καθαρίστηκαν επιτυχώς
 
-### Άσκηση 2: Προσαρμόστε τη Διαμόρφωση (20 λεπτά)
-**Στόχος**: Εξασκηθείτε στη διαμόρφωση μεταβλητών περιβάλλοντος
+### Άσκηση 2: Εξατομίκευση Διαμόρφωσης (20 λεπτά)
+**Στόχος**: Εκπαίδευση στην τοπική αποθήκευση τιμών περιβάλλοντος χωρίς να τη μπερδεύουμε με εκτέλεση διαμόρφωσης
 
 ```bash
-cd my-first-azd-app
+# Return to your original my-first-azd-app directory first
 
-# Δημιουργήστε προσαρμοσμένο περιβάλλον
+# Create custom environment
 azd env new custom-config
 
-# Ορίστε προσαρμοσμένες μεταβλητές
+# Set custom variables
 azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
 
-# Επαληθεύστε τις μεταβλητές
+# Verify variables
 azd env get-values | grep APP_TITLE
 
-# Αναπτύξτε με προσαρμοσμένη διαμόρφωση
-azd up
+# Check one value exactly; expected: My Custom Todo App
+azd env get-value APP_TITLE
 ```
 
 **Κριτήρια Επιτυχίας:**
-- [ ] Το προσαρμοσμένο περιβάλλον δημιουργήθηκε επιτυχώς
-- [ ] Οι μεταβλητές περιβάλλοντος ορίστηκαν και ανακτώνται
-- [ ] Η εφαρμογή αναπτύχθηκε με προσαρμοσμένη ρύθμιση
-- [ ] Μπορείτε να επαληθεύσετε τις προσαρμοσμένες ρυθμίσεις στην αναπτυγμένη εφαρμογή
+- [ ] Δημιουργήθηκε επιτυχώς προσαρμοσμένο περιβάλλον
+- [ ] Ορίστηκαν και ανακτώνται μεταβλητές περιβάλλοντος
+- [ ] `azd env get-value APP_TITLE` εκτυπώνει `My Custom Todo App`
+- [ ] Μπορεί να εξηγηθεί γιατί αυτές οι τιμές δεν αλλάζουν την αρχική εφαρμογή εκτός αν τις χρησιμοποιεί ο κώδικας/υποδομή
 
-### Άσκηση 3: Ροή Εργασίας Πολλαπλών Περιβαλλόντων (25 λεπτά)
-**Στόχος**: Κατακτήστε τη διαχείριση περιβαλλόντων και στρατηγικές ανάπτυξης
+### Άσκηση 3: Ροή Εργασιών Πολλαπλών Περιβαλλόντων (25 λεπτά)
+**Στόχος**: Εξειδίκευση στη διαχείριση περιβαλλόντων και στρατηγικές ανάπτυξης
 
 ```bash
-# Δημιουργήστε περιβάλλον ανάπτυξης
+# Create dev environment
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# Σημειώστε το URL ανάπτυξης
-DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Dev: $DEV_URL"
 
-# Δημιουργήστε περιβάλλον προ-παραγωγής
+# Create staging environment
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# Σημειώστε το URL του περιβάλλοντος προ-παραγωγής
-STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Staging: $STAGING_URL"
 
-# Συγκρίνετε τα περιβάλλοντα
+# Compare environments
 azd env list
 
-# Δοκιμάστε και τα δύο περιβάλλοντα
-curl "$DEV_URL/health"
-curl "$STAGING_URL/health"
+# Test both environments
+curl --fail "$DEV_URL"
+curl --fail "$STAGING_URL"
 
-# Καθαρίστε και τα δύο περιβάλλοντα
+# Clean up both
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
 **Κριτήρια Επιτυχίας:**
-- [ ] Δημιουργήθηκαν δύο περιβάλλοντα με διαφορετικές ρυθμίσεις
-- [ ] Και τα δύο περιβάλλοντα αναπτύχθηκαν επιτυχώς
-- [ ] Μπορείτε να μεταβαίνετε μεταξύ περιβαλλόντων με `azd env select`
-- [ ] Οι μεταβλητές περιβάλλοντος διαφέρουν μεταξύ των περιβαλλόντων
-- [ ] Έγινε επιτυχής καθαρισμός και των δύο περιβαλλόντων
+- [ ] Δημιουργήθηκαν δύο περιβάλλοντα με διαφορετικές διαμορφώσεις
+- [ ] Και τα δύο περιβάλλοντα αναπτύχτηκαν επιτυχώς
+- [ ] Υπάρχει δυνατότητα εναλλαγής μεταξύ περιβαλλόντων με `azd env select`
+- [ ] Οι μεταβλητές περιβάλλοντος διαφέρουν μεταξύ περιβαλλόντων
+- [ ] Και τα δύο περιβάλλοντα καθαρίστηκαν επιτυχώς
 
 ## 📊 Η Πρόοδός σας
 
-**Επενδεδυμένος Χρόνος**: ~60-90 λεπτά  
-**Δεξιότητες που αποκτήθηκαν**:
-- ✅ Αρχικοποίηση έργου με βάση πρότυπο
+**Επενδυμένος Χρόνος**: ~60-90 λεπτά  
+**Αποκτηθείσες Δεξιότητες**:
+- ✅ Αρχικοποίηση έργου από πρότυπο
 - ✅ Παροχή πόρων Azure
-- ✅ Ροές εργασίας ανάπτυξης εφαρμογών
+- ✅ Ροές εργασιών ανάπτυξης εφαρμογών
 - ✅ Διαχείριση περιβαλλόντων
 - ✅ Διαχείριση διαμόρφωσης
 - ✅ Καθαρισμός πόρων και διαχείριση κόστους
 
-**Επόμενο Επίπεδο**: Είστε έτοιμοι για τον [Οδηγό Διαμόρφωσης](configuration.md) για να μάθετε προχωρημένα πρότυπα διαμόρφωσης!
+**Επόμενο Επίπεδο**: Είστε έτοιμοι για τον [Οδηγό Διαμόρφωσης](../chapter-03-configuration/configuration.md) για να μάθετε προχωρημένα μοτίβα διαμόρφωσης!
 
-## Επίλυση Συνηθισμένων Προβλημάτων
+## Αντιμετώπιση Συχνών Προβλημάτων
 
 ### Σφάλματα Πιστοποίησης
 ```bash
-# Επαναεπαλήθευση ταυτότητας με το Azure
-az login
+# Re-authenticate with azd (az login does not refresh azd's default credentials)
+azd auth login
 
-# Επαλήθευση πρόσβασης στη συνδρομή
-az account show
+# Verify the selected environment's subscription
+azd env get-value AZURE_SUBSCRIPTION_ID
 ```
 
 ### Αποτυχίες Ανάπτυξης
 ```bash
-# Ενεργοποίηση καταγραφής εντοπισμού σφαλμάτων
-export AZD_DEBUG=true
+# Enable debug logging
 azd up --debug
 
-# Προβολή καταγραφών εφαρμογής στο Azure
+# View application logs in Azure
 azd monitor --logs
 
-# Για τα Container Apps, χρησιμοποιήστε το Azure CLI:
+# For Container Apps, use Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
 ### Συγκρούσεις Ονομάτων Πόρων
 ```bash
-# Χρησιμοποιήστε ένα μοναδικό όνομα περιβάλλοντος
+# Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Θέματα Θύρας/Δικτύου
+### Προβλήματα Θύρας/Δικτύου
 ```bash
-# Ελέγξτε αν οι θύρες είναι διαθέσιμες
+# Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
@@ -503,46 +500,47 @@ netstat -an | grep :3100
 
 Τώρα που ολοκληρώσατε το πρώτο σας έργο, εξερευνήστε αυτά τα προχωρημένα θέματα:
 
-### 1. Προσαρμόστε την Υποδομή
+### 1. Εξατομίκευση Υποδομής
 - [Υποδομή ως Κώδικας](../chapter-04-infrastructure/provisioning.md)
-- [Προσθέστε βάσεις δεδομένων, αποθήκευση και άλλες υπηρεσίες](../chapter-04-infrastructure/provisioning.md#adding-services)
+- [Προσθήκη υποδομής βάσης δεδομένων](../chapter-04-infrastructure/provisioning.md#%EF%B8%8F-database-provisioning)
 
 ### 2. Ρύθμιση CI/CD
-- [Οδηγός Ανάπτυξης](../chapter-04-infrastructure/deployment-guide.md) - Πλήρεις ροές εργασίας CI/CD
-- [Τεκμηρίωση Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Διαμόρφωση pipelines
+- [Οδηγός Ανάπτυξης](../chapter-04-infrastructure/deployment-guide.md) - Πλήρεις ροές εργασιών CI/CD
+- [Τεκμηρίωση Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Διαμόρφωση pipeline
 
-### 3. Βέλτιστες Πρακτικές για Παραγωγή
-- [Οδηγός Ανάπτυξης](../chapter-04-infrastructure/deployment-guide.md) - Ασφάλεια, απόδοση και παρακολούθηση
+### 3. Καλές Πρακτικές Παραγωγής
+- [Οδηγός Ανάπτυξης](../chapter-04-infrastructure/deployment-guide.md) - Ασφάλεια, απόδοση, και παρακολούθηση
 
 ### 4. Εξερευνήστε Περισσότερα Πρότυπα
 ```bash
-# Περιηγηθείτε σε πρότυπα ανά κατηγορία
+# Browse templates by category
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Δοκιμάστε διαφορετικές τεχνολογικές στοίβες
-azd init --template todo-python-mongo
-azd init --template todo-csharp-sql
-azd init --template todo-java-mongo
+# Try different technology stacks
+# Choose ONE in a new empty directory, not all three in the same project
+azd init --template todo-python-mongo .
+# azd init --template todo-csharp-sql .
+# azd init --template todo-java-mongo .
 ```
 
 ## Πρόσθετοι Πόροι
 
-### Εκπαιδευτικό Υλικό
+### Υλικό Εκμάθησης
 - [Τεκμηρίωση Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Κέντρο Αρχιτεκτονικής Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Πλαίσιο Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Κοινότητα & Υποστήριξη
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
+- [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
 - [Κοινότητα Azure Developer](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Πρότυπα & Παραδείγματα
 - [Επίσημη Συλλογή Προτύπων](https://azure.github.io/awesome-azd/)
-- [Πρότυπα της Κοινότητας](https://github.com/Azure-Samples/azd-templates)
-- [Εταιρικά Πρότυπα](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Συνεισφορές Κοινοτικού Προτύπου](https://github.com/Azure/awesome-azd)
+- [Πηγή Προτύπου Todo](https://github.com/Azure-Samples/todo-nodejs-mongo)
 
 ---
 
@@ -551,11 +549,11 @@ azd init --template todo-java-mongo
 ---
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Course Home**: [AZD για Αρχάριους](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 1 - Βάσεις & Γρήγορη Εκκίνηση
-- **⬅️ Previous**: [Εγκατάσταση & Ρύθμιση](installation.md)
-- **➡️ Next**: [Χρησιμοποιήστε τη Δική σας Εφαρμογή](bring-your-own-app.md)
-- **🚀 Next Chapter**: [Κεφάλαιο 2: Ανάπτυξη με προτεραιότητα στην ΤΝ](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 1 - Εγκαθίδρυση & Γρήγορη Εκκίνηση
+- **⬅️ Προηγούμενο**: [Εγκατάσταση & Ρύθμιση](installation.md)
+- **➡️ Επόμενο**: [Φέρε τη Δική σου Εφαρμογή](bring-your-own-app.md)
+- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 2: AI-Πρώτη Ανάπτυξη](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 

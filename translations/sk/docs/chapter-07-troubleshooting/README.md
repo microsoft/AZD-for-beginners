@@ -1,6 +1,6 @@
 # Kapitola 7: Riešenie problémov a ladenie
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1-1,5 hodiny | **⭐ Zložitosť**: Stredne pokročilý
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 1-1,5 hodiny | **⭐ Zložitosť**: Stredná
 
 ---
 
@@ -8,14 +8,14 @@
 
 Táto kapitola vám pomôže diagnostikovať a vyriešiť bežné problémy pri práci s Azure Developer CLI. Od zlyhaní nasadenia až po problémy špecifické pre AI.
 
-> Overené na `azd 1.27.1` v júli 2026.
+> Návod na príkazy overený voči vydanému referenčnému `azd 1.37.2`. Nasadenia do cloudu neboli vykonané. Pred použitím príkazov nahraďte príkladové názvy zdrojov a ID.
 
 ## Ciele učenia
 
-Po dokončení tejto kapitoly budete vedieť:
+Po dokončení tejto kapitoly budete:
 - Diagnostikovať bežné zlyhania nasadenia AZD
-- Ladiť problémy s autentifikáciou a oprávneniami
-- Riešiť problémy s konektivitou AI služieb
+- Ladiť problémy s overovaním a povoleniami
+- Riešiť problémy s konektivitou služieb AI
 - Používať Azure Portal a CLI na riešenie problémov
 
 ---
@@ -25,22 +25,22 @@ Po dokončení tejto kapitoly budete vedieť:
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
 | 1 | [Bežné problémy](common-issues.md) | Často sa vyskytujúce problémy | 30 min |
-| 2 | [Sprievodca ladením](debugging.md) | Krok za krokom stratégie ladenia | 45 min |
+| 2 | [Sprievodca ladením](debugging.md) | Postupné stratégie ladenia | 45 min |
 | 3 | [Riešenie problémov AI](ai-troubleshooting.md) | Problémy špecifické pre AI | 30 min |
 
 ---
 
 ## 🚨 Rýchle opravy
 
-### Problémy s autentifikáciou
+### Problémy s overovaním
 ```bash
-# Vyžaduje sa pre pracovné toky AZD
+# Required for AZD workflows
 azd auth login
 
-# Nepovinné, ak priamo používate aj príkazy Azure CLI
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
 ### Zlyhania pri poskytovaní
@@ -51,8 +51,9 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Konflikty zdrojov
+Najprv skontrolujte existujúci zdroj a chyby nasadenia. Neodstraňujte zdieľané alebo produkčné prostredie na vyriešenie konfliktu názvov. Pre **nové jednorazové prostredie** použite jedinečný názov:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
@@ -60,35 +61,39 @@ azd up
 ### Prekročenie kvóty
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Zmena `AZURE_LOCATION` nepremiestni existujúce zdroje a môže spôsobiť konflikty miest na opätovnom nasadení.
 
 ---
 
-## 📋 Referencia chybových kódov
+## 📋 Referencia kódu chyby
 
 | Chyba | Príčina | Riešenie |
 |-------|-------|----------|
 | `AuthenticationError` | Nie ste prihlásený | `azd auth login` |
 | `ResourceNotFound` | Chýbajúci zdroj | Skontrolujte názvy zdrojov |
 | `QuotaExceeded` | Limity predplatného | Požiadajte o zvýšenie kvóty |
-| `InvalidTemplate` | Chyba syntaxe Bicep | `az bicep build` |
-| `Conflict` | Zdroj už existuje | Použite nový názov alebo vymažte |
-| `Forbidden` | Nedostatočné oprávnenia | Skontrolujte RBAC roly |
+| `InvalidTemplate` | Syntaxová chyba Bicep | `az bicep build` |
+| `Conflict` | Zdroj existuje | Použite nový názov alebo odstráňte |
+| `Forbidden` | Nedostatočné povolenia | Skontrolujte RBAC roly |
 
 ---
 
-## 🔄 Resetovanie a obnova
+## 🔄 Reset a obnovenie
 
 ```bash
-# Mäký reset (ponechať zdroje, znovu nasadiť kód)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Tvrdý reset (vymazať všetko, začať odznova)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Tvrdý reset vymaže dáta a môže zmeniť koncové body. Najskôr si zálohujte a prečítajte si interaktívne výzvy na odstránenie. `--force --purge` je vhodný iba pre jednorazové prostredia, keď je zamýšľané nevratné vymazanie.
 
 ---
 
@@ -96,7 +101,7 @@ azd up
 
 | Smer | Kapitola |
 |-----------|---------|
-| **Predchádzajúca** | [Kapitola 6: Pred nasadením](../chapter-06-pre-deployment/README.md) |
+| **Predchádzajúca** | [Kapitola 6: Pred-Deployment](../chapter-06-pre-deployment/README.md) |
 | **Nasledujúca** | [Kapitola 8: Produkcia](../chapter-08-production/README.md) |
 
 ---
@@ -105,7 +110,7 @@ azd up
 
 - [Kontroly pred nasadením](../chapter-06-pre-deployment/preflight-checks.md)
 - [Sprievodca konfiguráciou](../chapter-03-configuration/configuration.md)
-- [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
+- [Problémy AZD na GitHub](https://github.com/Azure/azure-dev/issues)
 
 ---
 

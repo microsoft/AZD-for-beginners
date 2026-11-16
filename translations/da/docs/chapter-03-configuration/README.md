@@ -1,21 +1,21 @@
 # Kapitel 3: Konfiguration & Autentificering
 
-**📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Varighed**: 45-60 minutter | **⭐ Sværhedsgrad**: Mellemtrin
+**📚 Kursus**: [AZD For Begyndere](../../README.md) | **⏱️ Varighed**: 90-150 minutter inklusiv integrationsøvelser | **⭐ Sværhedsgrad**: Mellem
 
 ---
 
 ## Oversigt
 
-Dette kapitel dækker miljøkonfiguration, autentificeringsmønstre og sikkerhedsbest practices for Azure Developer CLI-udrulninger.
+Dette kapitel dækker miljøkonfiguration, autentificeringsmønstre og sikkerheds bedste praksis for Azure Developer CLI-implementeringer.
 
-> Valideret mod `azd 1.27.1` i juli 2026.
+> Kommando- og konfigurationsgennemgang mål: `azd 1.37.2` (November 2026). Live Azure-provisionering blev ikke kørt under gennemgangen.
 
 ## Læringsmål
 
-Når du har gennemført dette kapitel, vil du:
-- Mestre AZD konfigurationshierarki
-- Administrere flere miljøer (dev, staging, prod)
-- Implementere sikker autentificering med managed identities
+Ved at gennemføre dette kapitel vil du:
+- Mestre AZD konfigurationshierarkiet
+- Administrere flere miljøer (udvikling, staging, produktion)
+- Implementere sikker autentificering med administrerede identiteter
 - Konfigurere miljøspecifikke indstillinger
 
 ---
@@ -25,58 +25,58 @@ Når du har gennemført dette kapitel, vil du:
 | # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
 | 1 | [Konfigurationsguide](configuration.md) | Miljøopsætning og administration | 30 min |
-| 2 | [Autentificering & Sikkerhed](authsecurity.md) | Managed identity og RBAC-mønstre | 30 min |
+| 2 | [Autentificering & Sikkerhed](authsecurity.md) | Administrerede identitets- og RBAC-mønstre | 30 min |
 
 ---
 
-## 🚀 Kom godt i gang
+## 🚀 Kom hurtigt i gang
+
+Kør fra roden af en **allerede initialiseret azd-applikation**, ikke kursus-repositoriet. Brug ikke-brugte miljønavne, hvis disse allerede findes.
 
 ```bash
-# Opret flere miljøer
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Skift miljøer
+# Switch environments
 azd env select prod
 
-# Indstil miljøvariabler
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Se konfiguration
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` er illustrativ: den påvirker kun infrastrukturen, hvis din skabelon eksplicit bruger den. Almindelige `azd env set` værdier gemmes lokalt i klartekst; de er ikke sikker hemmelig opbevaring.
 
 ---
 
 ## 🔧 Konfigurationshierarki
 
-AZD anvender indstillinger i denne rækkefølge (senere overskriver tidligere):
-
-1. **Standardværdier** (indbyggede i skabeloner)
-2. **azure.yaml** (projektkonfiguration)
-3. **Miljøvariabler** (`azd env set`)
-4. **Kommandolinjeflag** (`--location eastus`)
+Hold tre forskellige konfigurationsflader adskilte: globale præferencer (`azd config`), projektstruktur (`azure.yaml`) og værdier per miljø (`azd env`). Flag tilsidesætter kun de indstillinger, de faktisk understøtter; der findes ingen universel overlejring af vilkårlige miljøvariabler på `azure.yaml` eller Bicep.
 
 ---
 
-## 🔐 Sikkerhed bedste praksis
+## 🔐 Bedste praksis for sikkerhed
 
 ```bash
-# Brug administreret identitet (anbefales)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Tjek AZD autentificeringsstatus
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Valgfrit: verificer Azure CLI-kontekst, hvis du planlægger at køre az kommandoer
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Autentificer igen, hvis nødvendigt
+# Re-authenticate if needed
 azd auth login
 
-# Valgfrit: opdater Azure CLI-autentificering for az kommandoer
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -86,14 +86,14 @@ az login
 
 | Retning | Kapitel |
 |-----------|---------|
-| **Forrige** | [Kapitel 2: AI-udvikling](../chapter-02-ai-development/README.md) |
+| **Forrige** | [Kapitel 2: AI Udvikling](../chapter-02-ai-development/README.md) |
 | **Næste** | [Kapitel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Relaterede ressourcer
+## 📖 Relaterede Ressourcer
 
-- [Forudgående udrulningskontroller](../chapter-06-pre-deployment/README.md)
+- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
 - [Fejlfinding](../chapter-07-troubleshooting/common-issues.md)
 
 ---

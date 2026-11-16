@@ -1,365 +1,367 @@
-# Sõnastik - Azure ja AZD terminoloogia
+# Sõnastik - Azure ja AZD Terminoloogia
 
 **Viide kõigile peatükkidele**
-- **📚 Kursuse avaleht**: [AZD algajatele](../README.md)
-- **📖 Õpi põhialuseid**: [Peatükk 1: AZD põhialused](../docs/getting-started/azd-basics.md)
-- **🤖 Tehisintellekti terminid**: [Peatükk 2: AI-esimene arendus](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **📚 Kursuse avaleht**: [AZD Algajatele](../README.md)
+- **📖 Õpi aluseid**: [Peatükk 1: AZD alused](../docs/chapter-01-foundation/azd-basics.md)
+- **🤖 tehisintellekti terminid**: [Peatükk 2: AI-Esimene arendus](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Sissejuhatus
 
-See põhjalik sõnastik annab määratlused Azure Developer CLI ja Azure pilve arenduses kasutatavatele terminitele, mõistetele ja lühenditele. Oluline allikas tehnilise dokumentatsiooni mõistmiseks, vigade lahendamiseks ja tõhusa suhtlemise jaoks azd projektide ja Azure teenuste osas.
+See põhjalik sõnastik annab määratlused Azure Developer CLI ja Azure pilve arenduses kasutatavatele terminitele, mõistetele ja akronüümidele. Oluline viide tehnilise dokumentatsiooni mõistmiseks, probleemide lahendamiseks ja tõhusa suhtluse tagamiseks azd projektide ja Azure teenuste kohta.
 
 ## Õpieesmärgid
 
-Selle sõnastiku kasutamisel:
-- Mõistad olulisemaid Azure Developer CLI termineid ja mõisteid
+Selle sõnastiku kasutamisel sa:
+- Mõistad olulisi Azure Developer CLI terminoloogiat ja mõisteid
 - Valdad Azure pilve arenduse sõnavara ja tehnilisi termineid
-- Kasutad efektiivselt infrastruktuuri koodi ja juurutusterminitikat
-- Saad aru Azure teenuste nimedest, lühenditest ja nende eesmärkidest
-- Ligipääs vigade otsimise ja silumise terminite määratlustele
-- Õpid edasijõudnuid Azure arhitektuuri ja arenduse mõisteid
+- Kasutad tõhusalt Infrastructure as Code ja juurutamise terminoloogiat
+- Mõistad Azure teenuste nimesid, akronüüme ja nende otstarvet
+- Saad ligi määratlustele vigade otsimiseks ja silumiseks kasutatava terminoloogia kohta
+- Õpid edasijõudnud Azure arhitektuuri ja arendusmõisteid
 
 ## Õpitulemused
 
-Regulaarse viitamisega sellele sõnastikule saad:
-- Suhelda tõhusalt, kasutades korrektset Azure Developer CLI terminoloogiat
+Regulaarse viitega sellele sõnastikule suudad sa:
+- Suhelda tõhusalt kasutades õiget Azure Developer CLI terminoloogiat
 - Mõista tehnilist dokumentatsiooni ja veateateid selgemalt
-- Navigeerida Azure teenuste ja mõistetega kindlalt
-- Lahendada probleeme sobiva tehnilise sõnavara abil
-- Panustada meeskonna aruteludesse täpse tehnilise keelega
-- Laiendada süsteemselt oma Azure pilve arenduse teadmisi
+- Liikuda Azure teenuste ja kontseptsioonide vahel kindlalt
+- Lahendada probleeme kasutades sobivat tehnilist sõnavara
+- Panustada meeskonnaruteludesse täpse tehnilise keelega
+- Laiendada oma Azure pilve arendusalaseid teadmisi süsteemselt
 
 ## A
 
 **ARM mall**  
-Azure Resource Manageri mall. JSON-põhine infrastruktuuri koodi formaat, mida kasutatakse Azure ressursside deklaratiivseks määratlemiseks ja juurutamiseks.
+Azure Resource Manager mall. JSON-põhine Infrastructure as Code formaat, mida kasutatakse Azure ressursside defineerimiseks ja deklaratiivseks juurutamiseks.
 
 **App Service**  
-Azure platvorm teenusena (PaaS) veebirakenduste, REST API-de ja mobiilitaustade majutamiseks ilma infrastruktuuri haldamata.
+Azure platvormi teenusena (PaaS) pakutav keskkond veebi rakenduste, REST API-de ja mobiilsetel taustal töötavate teenuste majutamiseks, ilma infrastruktuuri haldamata.
 
 **Application Insights**  
-Azure rakenduse jõudluse jälgimise (APM) teenus, mis pakub sügavaid teadmisi rakenduse jõudluse, saadavuse ja kasutamise kohta.
+Azure rakenduse jõudluse jälgimise teenus (APM), mis annab sügavaid teadmisi rakenduse jõudluse, kättesaadavuse ja kasutuse kohta.
 
 **Azure CLI**  
-Käsurealiides Azure ressursside haldamiseks. Kasutatakse azd poolt autentimiseks ja mõningate toimingute jaoks.
+Käskude liides Azure ressursside haldamiseks. Täiendav AZD-le, kuid logimise jaoks eraldiseisev; AZD põhauthentimine kasutab `azd auth login`.
 
 **Azure Developer CLI (azd)**  
-Arendajakeskne käsureatööriist, mis kiirendab rakenduste loomise ja Azure´le juurutamise protsessi, kasutades malle ja infrastruktuuri koodi.
+Arendajale suunatud käsureatööriist, mis kiirendab rakenduste ülesehitamise ja juurutamise protsessi Azure'i mallide ja Infrastructure as Code abil.
 
 **azure.yaml**  
-Põhiline konfiguratsioonifail azd projekti jaoks, mis määratleb teenused, infrastruktuuri ja juurutuse konksud.
+Peamine konfiguratsioonifail azd projektis, mis määratleb teenused, infrastruktuuri ja juurutamise konksud.
 
 **Azure Resource Manager (ARM)**  
-Azure juurutus- ja haldusteenus, mis pakub halduskihi ressursside loomiseks, uuendamiseks ja kustutamiseks.
+Azure juurutamise ja haldusteenus, mis pakub halduskihti ressursside loomise, uuendamise ja kustutamise jaoks.
 
 ## B
 
 **Bicep**  
-Microsofti loodud domeenispetsiifiline keel (DSL) Azure ressursside juurutamiseks. Pakub lihtsamat süntaksit kui ARM mallid, kompileerides ARM-iks.
+Microsofti loodud domeenispetsiifiline keel (DSL) Azure ressursside juurutamiseks. Pakub lihtsamat süntaksit kui ARM mallid, samas kompileerub ARM-iks.
 
-**Build**  
-Allikakoodi kompileerimise, sõltuvuste paigaldamise ja rakenduse juurutuseks ettevalmistamise protsess.
+**Build (Kompileerimine)**  
+Protsess, mille käigus kompileeritakse lähtekood, paigaldatakse sõltuvused ja valmistatakse rakendused juurutamiseks ette.
 
-**Blue-Green Deployment**  
-Juurutusstrateegia, mis kasutab kahte identselt tootmiskeskkonda (sinine ja roheline) seisakute ja riskide vähendamiseks.
+**Blue-Green Juurutamine**  
+Juurutamisstrateegia, kus kasutatakse kahte identselt tootmiskeskkonda (sinine ja roheline), et minimeerida seisakuid ja riske.
 
 ## C
 
 **Container Apps**  
-Azure serverita konteineriteenus, mis võimaldab konteinerirakendusi käitada ilma keerukat infrastruktuuri haldamata.
+Azure serverita konteineriteenus, mis lubab konteineriseeritud rakendusi käivitada ilma keerukat infrastruktuuri haldamata.
 
 **CI/CD**  
-Jooksvalt integreerimine/jooksev juurutamine. Automatiseeritud praktika koodimuudatuste liitmiseks ja rakenduste juurutamiseks.
+Jätkuv integreerimine ja jätkuv juurutamine. Automatiseeritud praktika koodimuudatuste integreerimiseks ja rakenduste juurutanadmiseks.
 
 **Cosmos DB**  
-Azure globaalne ja mitmemudeline andmebaasiteenus, mis pakub ulatuslikke teenusetaseme kokkuleppeid (SLA) läbilaskevõime, latentsuse, saadavuse ja järjepidevuse osas.
+Azure globaalselt hajutatud mitmemudeline andmebaasiteenus, mis pakub ulatuslikke SLA-sid läbilaskevõime, latentsuse, kättesaadavuse ja järjepidevuse osas.
 
-**Configuration**  
+**Konfiguratsioon**  
 Seaded ja parameetrid, mis kontrollivad rakenduse käitumist ja juurutuse valikuid.
 
 ## D
 
-**Deployment**  
-Rakenduste ja nende sõltuvuste paigaldamise ja konfigureerimise protsess sihtinfrastruktuuril.
+**Juurutamine**  
+Protsess, mille käigus paigaldatakse ja konfigureeritakse rakendused ning nende sõltuvused sihtarhitektuuril.
 
 **Docker**  
-Platvorm rakenduste arenduseks, tarnimiseks ja käitamiseks konteinertehnoloogiat kasutades.
+Platvorm rakenduste arendamiseks, saatmiseks ja käivitamiseks konteineritehnoloogia abil.
 
 **Dockerfile**  
 Tekstifail, mis sisaldab juhiseid Docker konteineripildi ehitamiseks.
 
 ## E
 
-**Environment**  
-Juurutuse sihtkoht, mis esindab konkreetset rakenduse instantsi (nt arendus-, eeltootmise või tootmine).
+**Keskkond**  
+Juurutus sihtkoht, mis esindab konkreetset sinu rakenduse eksemplari (nt arendus, testimine, tootmine).
 
-**Environment Variables**  
-Konfiguratsiooniväärtused, mis on salvestatud võtme-väärtuse paaridena ja millele rakendused ligi pääsevad jooksutamise ajal.
+**Keskkonnamuutujad**  
+Konfiguratsiooni väärtused, mis on salvestatud võtme-väärtuse paaridena ja mida rakendused saavad käituse ajal kasutada.
 
-**Endpoint**  
-URL või võrguaadress, kust rakendust või teenust saab kasutada.
+**Lõpp-punkt**  
+URL või võrguaadress, kus rakendus või teenus on ligipääsetav.
 
 ## F
 
 **Function App**  
-Azure serverita arvutus teenus, mis võimaldab sündmuspõhise koodi käivitamist ilma infrastruktuuri haldamata.
+Azure serverita arvutusressurss, mis lubab sündmuspõhist koodi käivitada ilma infrastruktuuri haldamata.
 
 ## G
 
 **GitHub Actions**  
-CI/CD platvorm, mis on integreeritud GitHub hoidlatega töövoogude automatiseerimiseks.
+CI/CD platvorm, mis on integreeritud GitHubi repositoriumitega töövoogude automatiseerimiseks.
 
 **Git**  
-Hajutatud versioonihaldussüsteem, mida kasutatakse allikakoodi muutuste jälgimiseks.
+Hajutatud versioonihaldussüsteem, mida kasutatakse lähtekoodi muudatuste jälgimiseks.
 
 ## H
 
-**Hooks**  
-Kohandatud skriptid või käsud, mis jooksevad juurutustsükli kindlatel hetkedel (eelprovisioon, järelprovisioon, eeljuurutus, järeljuurutus).
+**Hooks (Konksud)**  
+Kohandatud skriptid või käsud, mis käivituvad juurutustsükli kindlates punktides (nt preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-Azure teenuse tüüp, kus rakendus juurutatakse (nt appservice, containerapp, function).
+Azure teenuse tüüp, kuhu rakendus juurutatakse (nt appservice, containerapp, function).
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Praktika infrastruktuuri määratlemiseks ja haldamiseks koodi kaudu, mitte käsitsi.
+Praktika infrastruktuuri defineerimiseks ja haldamiseks läbi koodi, mitte käsitsi protsesside abil.
 
 **Init**  
-Uue azd projekti algatamise protsess, tavaliselt mallist.
+Protsess uue azd projekti algatamiseks, tavaliselt mallist.
 
 ## J
 
 **JSON**  
-JavaScripti objektide märgendussüsteem. Andmevahetuse formaat, mida sageli kasutatakse konfiguratsioonifailides ja API vastustes.
+JavaScript Object Notation. Andmevahetuse formaat, mida tavaliselt kasutatakse konfiguratsioonifailides ja API vastustes.
 
 **JWT**  
-JSON Web Token. Standard turvaliseks info edastamiseks osapoolte vahel JSON objektina.
+JSON Web Token. Standard turvaliseks info edastamiseks kahe poole vahel JSON objektina.
 
 ## K
 
 **Key Vault**  
-Azure teenus saladuste, võtmete ja sertifikaatide turvaliseks hoimiseks ja haldamiseks.
+Azure teenus saladuste, võtmete ja sertifikaatide turvaliseks hoidmiseks ja haldamiseks.
 
 **Kusto Query Language (KQL)**  
-Päringukeel Azure Monitori, Application Insightsi ja teiste Azure teenuste andmete analüüsimiseks.
+Päringukeel, mida kasutatakse andmete analüüsimiseks Azure Monitoris, Application Insightsis ja teistes Azure teenustes.
 
 ## L
 
-**Load Balancer**  
-Teenusekomponent, mis jaotab sissetuleva võrguliikluse mitme serveri või instantsi vahel.
+**Load Balancer (koormuse tasandaja)**  
+Teenus, mis jaotab sissetuleva võrguliikluse mitme serveri või eksemplari vahel.
 
 **Log Analytics**  
-Azure teenus telemeetriandmete kogumiseks, analüüsimiseks ja põhjalikuks käsitlemiseks pilvest ja kohalikest keskkondadest.
+Azure teenus telemeetria andmete kogumiseks, analüüsiks ja toiminguteks pilve- ja kohapealsetes keskkondades.
 
 ## M
 
 **Managed Identity**  
-Azure omadus, mis pakub Azure teenustele automaatselt hallatud identiteeti teiste Azure teenustega autentimiseks.
+Azure funktsioon, mis annab Azure teenustele automaatselt hallatava identiteedi identifitseerimiseks teistele Azure teenustele.
 
-**Microservices**  
-Arhitektuuriline lähenemine, kus rakendused koosnevad väikestest, sõltumatutest teenustest.
+**Microservices (mikroteenused)**  
+Arhitektuuriline lähenemine, kus rakendused on ehitatud väikeste, iseseisvate teenuste kogumikuna.
 
 **Monitor**  
-Azure ühtne jälgimislahendus, mis tagab põhjaliku jälgitavuse rakenduste ja infrastruktuuri kõigil tasanditel.
+Azure ühtne jälgimislahendus, mis pakub täielikku observatsiooni rakenduste ja infrastruktuuri kohta.
 
 ## N
 
 **Node.js**  
-JavaScripti töötluskeskkond, mis põhineb Chrome V8 mootoril ja sobib serveripoolsete rakenduste loomiseks.
+JavaScripti käitusaeg, mis põhineb Chrome'i V8 mootoril serveripoolsete rakenduste loomiseks.
 
 **npm**  
-Node.js pakettide haldur, mis haldab sõltuvusi ja pakette.
+Node.js pakihaldur, mis haldab sõltuvusi ja pakette.
 
 ## O
 
-**Output**  
-Väärtused, mis tagastatakse infrastruktuuri juurutusest ja mida saab kasutada rakendused või muud ressursid.
+**Output (väljund)**  
+Väärtused, mis tagastatakse infrastruktuuri juurutamise käigus ning mida rakendused või muud ressursid saavad kasutada.
 
 ## P
 
-**Package**  
-Rakenduse koodi ja sõltuvuste juurutuseks ettevalmistamise protsess.
+**Package (pakettimine)**  
+Protsess, mille käigus valmistatakse rakenduse kood ja sõltuvused juurutamiseks ette.
 
-**Parameters**  
-Sisendväärtused, mida antakse infrastruktuuri mallidele juurutuste kohandamiseks.
+**Parameetrid**  
+Sisendväärtused, mis antakse infrastruktuuri mallidele juurutuste kohandamiseks.
 
 **PostgreSQL**  
-Avatud lähtekoodiga relatsioonandmebaasisüsteem, mida Azure toetab hallatud teenusena.
+Avatud lähtekoodiga relaandmebaasisüsteem, mida Azure toetab hallatud teenusena.
 
-**Provisioning**  
-Azure ressursside loomise ja konfigureerimise protsess, mis on määratletud infrastruktuuri mallides.
+**Provisioning (provisioneerimine)**  
+Protsess, mille käigus luuakse ja konfigureeritakse Azure ressursid, mis on defineeritud infrastruktuuri mallides.
 
 ## Q
 
-**Quota**  
-Piirangud ressursside loomise mahule Azure tellimuse või piirkonna piires.
+**Quota (kvoot)**  
+Piirangud ressursside hulga kohta, mida saab luua Azure tellimuses või regioonis.
 
 ## R
 
-**Resource Group**  
+**Resource Group (ressursigrupp)**  
 Loogiline konteiner Azure ressurssidele, mis jagavad sama elutsüklit, õiguseid ja poliitikaid.
 
 **Resource Token**  
-Ainulaadne string, mille genereerib azd ressursside nimede ainulaadsuse tagamiseks juurutuste vahel.
+Unikaalne string, mille azd genereerib, et tagada ressursside nimede unikaalsus juurutuste vahel.
 
 **REST API**  
-Võrgurakenduste arhitektuuristiil, mis kasutab HTTP meetodeid.
+Võrkudega rakenduste projekteerimise arhitektuuristiil, kasutades HTTP meetodeid.
 
-**Rollback**  
-Rakenduse või infrastruktuuri konfiguratsiooni varasema versiooni taastamise protsess.
+**Rollback (tagasipööre)**  
+Protsess, mille käigus taastatakse rakenduse või infrastruktuuri konfiguratsiooni eelmise versiooni seisund.
 
 ## S
 
-**Service**  
-Sinu rakenduse komponent, mis on määratletud azure.yaml failis (nt veebiliides, API taust, andmebaas).
+**Service (teenus)**  
+Komponent sinu rakendusest, mis on defineeritud azure.yaml failis (nt veebiliides, API tagapool, andmebaas).
 
 **SKU**  
-Stock Keeping Unit. Azure ressursside teenustaseme või jõudlustaseme nüanss.
+Lao säilitamise ühik. Esindab erinevaid teenuse tasemeid või jõudlustasemeid Azure ressurssidele.
 
 **SQL Database**  
-Azure hallatud relatsioonandmebaasi teenus, mis põhineb Microsoft SQL Serveril.
+Azure hallatud relaandmebaasi teenus, mis põhineb Microsoft SQL Serveril.
 
 **Static Web Apps**  
-Azure teenus täisvirna veebirakenduste loomiseks ja juurutamiseks lähtekoodihaldusteenustest.
+Azure teenus täielike veebirakenduste ehitamiseks ja juurutamiseks lähtekoodide repositoriumitest.
 
-**Storage Account**  
-Azure teenus, mis pakub pilvesalvestust andmeobjektidele nagu blobid, failid, järjekorrad ja tabelid.
+**Storage Account (salvestuskonto)**  
+Azure teenus, mis pakub pilvesalvestust andmeobjektidele, sh blobid, failid, järjekorrad ja tabelid.
 
-**Subscription**  
-Azure konto konteiner, mis sisaldab ressursside gruppe ja ressursse koos arvelduse ja juurdepääsuhaldusega.
+**Subscription (tellimus)**  
+Azure konto konteiner, mis sisaldab ressursigruppe ja ressursse koos arveldus- ja juurdepääsuhaldusega.
 
 ## T
 
-**Template**  
-Eelmääratletud projekti struktuur, mis sisaldab rakenduse koodi, infrastruktuuri määratlusi ja konfiguratsiooni tüüpilisteks stsenaariumiteks.
+**Template (mall)**  
+Ettevalmistatud projekti struktuur, mis sisaldab rakenduse koodi, infrastruktuuri määratlusi ja konfiguratsiooni tavapäraste stsenaariumite jaoks.
 
 **Terraform**  
-Avatud lähtekoodiga infrastruktuuri koodi tööriist, mis toetab mitut pilveteenuse pakkujat, sealhulgas Azure.
+Avatud lähtekoodiga Infrastructure as Code tööriist, mis toetab mitut pilveteenuse pakkujat, sealhulgas Azure.
 
 **Traffic Manager**  
-Azure DNS-põhine koormuse tasakaalustaja, mis jaotab liiklust üle globaalsete Azure piirkondade.
+Azure'i DNS-põhine liikluse koormuse tasandaja, mis suunab liiklust üle globaalse Azure regioonide.
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. String, mis identifitseerib konkreetset ressurssi.
+Uniform Resource Identifier. String, mis identifitseerib konkreetse ressursi.
 
 **URL**  
-Uniform Resource Locator. URI tüüp, mis määrab ressursi asukoha ja leidmise viisi.
+Uniform Resource Locator. URI tüüp, mis määrab, kus ressurss asub ja kuidas seda kätte saada.
 
 ## V
 
 **Virtual Network (VNet)**  
-Azure privaatvõrkude põhielement, mis pakub isolatsiooni ja segmentatsiooni.
+Põhiline ehitusplokk Azure privaatvõrkude jaoks, mis pakub isolatsiooni ja segmentatsiooni.
 
 **VS Code**  
-Visual Studio Code. Populaarne koodiredaktor, millel on suurepärane Azure ja azd integratsioon.
+Visual Studio Code. Populaarne koodiredaktor, millel on suurepärane Azure ja azd integreeritus.
 
 ## W
 
 **Webhook**  
-HTTP tagasikõne, mis käivitatakse kindlate sündmuste puhul ja mida sageli kasutatakse CI/CD torudes.
+HTTP tagasikutse, mis käivitatakse kindlate sündmuste puhul, sageli kasutatuna CI/CD torudes.
 
-**What-if**  
-Azure funktsioon, mis näitab, milliseid muudatusi juurutus teeks, ilma et seda tegelikult täidaks.
+**What-if (Mis siis kui)**  
+Azure funktsioon, mis näitab, millised muudatused juurutamisega tehtaks, ilma seda tegelikult täide viimata.
 
 ## Y
 
 **YAML**  
-YAML ei ole märgendikeel. Inimloetav andmeseriaalimise standard, mida kasutatakse konfiguratsioonifailides nagu azure.yaml.
+YAML ei ole märgistuskeel. Inimloetav andmete serialiseerimise standard, mida kasutatakse näiteks konfiguratsioonifailides nagu azure.yaml.
 
 ## Z
 
 **Zone**  
-Füüsiliselt eraldatud asukohad Azure piirkonnas, mis tagavad redundantsuse ja kõrge kättesaadavuse.
+Füüsiliselt eraldatud asukohad Azure regiooni piires, mis pakuvad kõrget kättesaadavust ja varundust.
 
 ---
 
-## Levinumad lühendid
+## Levinumad akronüümid
 
-| Lühend | Täisvorm | Kirjeldus |
+| Akronüüm | Täisvorm | Kirjeldus |
 |---------|-----------|-------------|
-| AAD | Azure Active Directory (nüüdsest Microsoft Entra ID) | Identiteedi- ja juurdepääsuhalduse teenus |
-| ACR | Azure Container Registry | Konteineripiltide registriteenus |
-| AKS | Azure Kubernetes Service | Hallatud Kubernetes teenus |
-| API | Application Programming Interface | Tarkvaraehituse protokollide komplekt |
-| ARM | Azure Resource Manager | Azure juurutus- ja haldusteenus |
+| AAD | Azure Active Directory (nüüd Microsoft Entra ID) | Identiteedi ja juurdepääsu haldusteenus |
+| ACR | Azure Container Registry | Konteineripiltide registreerimisteenus |
+| AKS | Azure Kubernetes Service | Hallatav Kubernetes teenus |
+| API | Application Programming Interface | Tarkvara loomise protokollid |
+| ARM | Azure Resource Manager | Azure juurutamise ja haldusteenus |
 | CDN | Content Delivery Network | Hajutatud serverite võrk |
-| CI/CD | Continuous Integration/Continuous Deployment | Automatiseeritud arendustavad |
+| CI/CD | Continuous Integration/Continuous Deployment | Automatiseeritud arenduspraktikad |
 | CLI | Command Line Interface | Tekstipõhine kasutajaliides |
-| DNS | Domain Name System | Domeeninimede IP aadressideks tõlkimise süsteem |
+| DNS | Domain Name System | Domeeninimede IP-aadressideks tõlkimise süsteem |
 | HTTPS | Hypertext Transfer Protocol Secure | HTTP turvaline versioon |
-| IaC | Infrastructure as Code | Infrastruktuuri haldamine koodi abil |
+| IaC | Infrastructure as Code | Infrastruktuuri haldamine läbi koodi |
 | JSON | JavaScript Object Notation | Andmevahetuse formaat |
-| JWT | JSON Web Token | Tokeni formaat turvaliseks infosideks |
+| JWT | JSON Web Token | Turvalise info edastuse tokeni formaat |
 | KQL | Kusto Query Language | Azure andmeteenuste päringukeel |
-| RBAC | Role-Based Access Control | Rollipõhine ligipääsukontrollimeetod |
+| RBAC | Role-Based Access Control | Juurdepääsu kontrolli meetod kasutajarollide alusel |
 | REST | Representational State Transfer | Veebiteenuste arhitektuuristiil |
 | SDK | Software Development Kit | Arendustööriistade komplekt |
-| SLA | Service Level Agreement | Lepitus teenuse saadavusele ja jõudlusele |
-| SQL | Structured Query Language | Relatsioonandmebaaside halduskieli keel |
+| SLA | Service Level Agreement | Kohustus teenuse kättesaadavuse/jõudluse osas |
+| SQL | Structured Query Language | Keel relaandmebaaside haldamiseks |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Krüptograafilised protokollid |
-| URI | Uniform Resource Identifier | Ressursi identifitseeriv string |
-| URL | Uniform Resource Locator | URI tüüp ressursi asukoha määramiseks |
+| URI | Uniform Resource Identifier | Ressiursi identifitseeriv string |
+| URL | Uniform Resource Locator | URI tüüp, mis määrab ressursi asukoha |
 | VM | Virtual Machine | Arvutisüsteemi emulatsioon |
-| VNet | Virtual Network | Azure privaatvõrk |
-| YAML | YAML ei ole märgendikeel | Andmeseriaalimise standard |
+| VNet | Virtual Network | Privaatvõrk Azure'is |
+| YAML | YAML ei ole märgistuskeel | Andmete serialiseerimise standard |
 
 ---
 
 ## Azure teenuste nimede vasted
 
-| Levinud nimi | Azure ametlik teenuse nimi | azd Host tüüp |
+| Levinud nimi | Ametlik Azure teenuse nimi | azd hosti tüüp |
 |-------------|------------------------------|---------------|
 | Web App | Azure App Service | `appservice` |
 | API App | Azure App Service | `appservice` |
 | Container App | Azure Container Apps | `containerapp` |
 | Function | Azure Functions | `function` |
 | Static Site | Azure Static Web Apps | `staticwebapp` |
-| Database | Azure Database for PostgreSQL | `postgres` |
-| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Storage | Azure Storage Account | `storage` |
-| Cache | Azure Cache for Redis | `redis` |
-| Search | Azure AI Search | `search` |
-| Messaging | Azure Service Bus | `servicebus` |
+| Database | Azure Database for PostgreSQL | Infrastruktuuriresurss, mitte rakendus `host` |
+| NoSQL DB | Azure Cosmos DB | Infrastruktuuriresurss, mitte rakendus `host` |
+| Storage | Azure Storage Account | Infrastruktuuriresurss, mitte sisseehitatud rakendus `host` |
+| Cache | Azure Managed Redis | Infrastruktuuriresurss, mitte rakendus `host` |
+| Search | Azure AI Search | Infrastruktuuriresurss, mitte rakendus `host` |
+| Messaging | Azure Service Bus | Infrastruktuuriresurss, mitte rakendus `host` |
+
+`services.<name>.host` valib rakenduse juurutamise sihtkoha; see ei ole lühend ühelegi Azure ressursi tüübile. Andmebaasid, vahemälud, otsinguteenused ja järjekorrad juurutatakse tavaliselt infrastruktuuri pakkuja kaudu ning ühendatakse rakendusega väljundite/konfiguratsiooni kaudu.
 
 ---
 
-## Kontekstispetsiifilised terminid
+## Kontekstitundlikud terminid
 
 ### Arenduse terminid
-- **Hot Reload**: Rakenduste automaatne värskendamine arendamise ajal ilma taaskäivitamiseta
+- **Hot Reload**: Rakenduse automaatne värskendamine arenduse ajal ilma taaskäivituseta
 - **Build Pipeline**: Automatiseeritud protsess koodi ehitamiseks ja testimiseks
-- **Deployment Slot**: Eeltootmiskeskkond App Service’is
-- **Environment Parity**: Arendus-, eeltootmise ja tootmiskeskkondade sarnasus
+- **Deployment Slot**: Testkeskkond App Service sees
+- **Environment Parity**: Arendus-, testimis- ja tootmiskeskkondade omavahelise sarnasuse hoidmine
 
-### Turvalisuse terminid
-- **Managed Identity**: Azure omadus, mis tagab automaatse tunnustushaldamise
-- **Key Vault**: Saladuste, võtmete ja sertifikaatide turvaline hoiustamine
-- **RBAC**: Rollipõhine ligipääsukontroll Azure ressurssidele
+### Turvaterminid
+- **Managed Identity**: Azure funktsioon, mis pakub automaatset tunnistuse haldamist
+- **Key Vault**: Turvaline hoidla saladuste, võtmete ja sertifikaatide jaoks
+- **RBAC**: Rollipõhine juurdepääsukontroll Azure ressurssidele
 - **Network Security Group**: Virtuaalne tulemüür võrguliikluse kontrollimiseks
 
 ### Jälgimise terminid
-- **Telemetry**: Mõõtmiste ja andmete automatiseeritud kogumine
+- **Telemetry**: Automatiseeritud mõõtmiste ja andmete kogumine
 - **Application Performance Monitoring (APM)**: Tarkvara jõudluse jälgimine
-- **Log Analytics**: Teenus logiandmete kogumiseks ja analüüsimiseks
-- **Alert Rules**: Automatiseeritud teavitused põhinedes mõõdikutel või tingimustel
+- **Log Analytics**: Teenus logiandmete kogumiseks ja analüüsiks
+- **Alert Rules**: Automatiseeritud teavitused mõõdikute või tingimuste alusel
 
-### Juurutusterminid
-- **Blue-Green Deployment**: Seisakuta juurutusstrateegia
-- **Canary Deployment**: Juurutuse järkjärguline avamine väiksele kasutajate grupile
-- **Rolling Update**: Rakenduse instantside järkjärguline asendamine
-- **Rollback**: Eelmise rakendusversiooni taastamine
-
----
-
-**Kasutusnõuanne**: Kasuta `Ctrl+F`, et kiiresti otsida sõnastiku konkreetseid termineid. Terminite vahel on vajadusel ristviited.
+### Juurutamise terminid
+- **Blue-Green Deployment**: Seisakuid mittetoksuv juurutamisstrateegia
+- **Canary Deployment**: Juurutuse järkjärguline esitamine kasutajate alamhulgale
+- **Rolling Update**: Rakenduse eksemplaride järjestikune asendamine
+- **Rollback**: Tagasipöördumine eelmise rakendusversiooni juurde
 
 ---
 
-**Navigeerimine**
-- **Eelmine õppetükk**: [Kiirjuhend](cheat-sheet.md)
+**Kasutusnõuanne**: Kasuta `Ctrl+F`, et kiiresti otsida konkreetseid termineid selles sõnastikus. Terminid on vajadusel ristviidatud.
+
+---
+
+**Navigatsioon**
+- **Eelmine õppetükk**: [Petturlusleht](cheat-sheet.md)
 - **Järgmine õppetükk**: [KKK](faq.md)
 
 ---

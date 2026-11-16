@@ -1,47 +1,49 @@
 # פריסת משאבי Azure עם AZD
 
 **ניווט בפרק:**
-- **📚 דף הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 4 - תשתית כקוד ופריסה
+- **📚 דף הקורס הראשי**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 4 - תשתית כקוד ופריסה
 - **⬅️ קודם**: [מדריך פריסה](deployment-guide.md)
-- **➡️ הפרק הבא**: [פרק 5: פתרונות AI מרובי סוכנים](../../examples/retail-scenario.md)
+- **➡️ פרק הבא**: [פרק 5: פתרונות AI מרובי-סוכנים](../../examples/retail-scenario.md)
 - **🔧 קשור**: [פרק 6: אימות לפני פריסה](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## מבוא
 
-מדריך מקיף זה מכסה את כל מה שעליך לדעת לגבי פריסת וניהול משאבי Azure באמצעות Azure Developer CLI. למד ליישם תבניות תשתית כקוד (IaC) החל ביצירת משאבים בסיסית ועד לארכיטקטורות תשתית מתקדמות ברמת ארגונים באמצעות Bicep, תבניות ARM, Terraform ו-Pulumi.
+מדריך זה עוסק בפריסת וניהול משאבי Azure באמצעות Azure Developer CLI עם ספקי Bicep ו-Terraform המובנים בו.
+
+> נבדק מול `azd 1.37.2` (נובמבר 2026). אלא אם צוין אחרת, דוגמאות Bicep, Terraform והסקריפטים הן **קטעי המחשה**, לא תבנית מלאה. שלבו אותם בפרויקט המספק את הפרמטרים, המודולים, הזהויות, הרשתות וקוד האפליקציה המוזכרים. במהלך הסקירה לא בוצעה פריסת Azure.
 
 ## מטרות הלמידה
 
-בסיום מדריך זה, תוכל:
+בסיום המדריך תוכלו:
 - לשלוט בעקרונות תשתית כקוד ופריסת משאבי Azure
-- להבין מגוון ספקי IaC הנתמכים על ידי Azure Developer CLI
-- לתכנן וליישם תבניות Bicep לארכיטקטורות יישומים נפוצות
-- להגדיר פרמטרים, משתנים והגדרות ייחודיות לסביבה עבור משאבים
-- ליישם דפוסי תשתית מתקדמים כולל רשת ואבטחה
-- לנהל מחזור חיים של משאבים, עדכונים ופתרון תלותיות
+- להבין ספקי IaC מרובים הנתמכים על ידי Azure Developer CLI
+- לעצב וליישם תבניות Bicep לארכיטקטורות אפליקציה נפוצות
+- להגדיר פרמטרים, משתנים והגדרות סביבתיות למשאבים
+- ליישם דפוסי תשתית מתקדמים כולל רשתות ואבטחה
+- לנהל מחזור חיים של משאבים, עדכונים ופתרון תלות
 
-## תוצאות הלמידה
+## תוצאות למידה
 
-בסיום, תוכל:
-- לתכנן ולפרוס תשתית Azure באמצעות תבניות Bicep ו-ARM
-- להגדיר ארכיטקטורות מרובת שירותים מורכבות עם תלותיות נכונות בין משאבים
-- ליישם תבניות עם פרמטרים לסביבות והגדרות שונות
-- לטפל בבעיות פריסת תשתית ולפתור כשלונות בפריסה
-- ליישם עקרונות של Azure Well-Architected Framework בעיצוב התשתית
-- לנהל עדכוני תשתית וליישם אסטרטגיות גרסאות לתשתית
+עם סיום, תוכלו:
+- לעצב ולפרוס תשתית Azure באמצעות תבניות Bicep ו-ARM
+- להגדיר ארכיטקטורות מרובות שירותים מורכבות עם תלות במשאבים
+- ליישם תבניות פרמטריות לסביבות והגדרות שונות
+- לפתור בעיות בפריסת התשתית ולפתור כשלים בפריסה
+- ליישם עקרונות מסגרת Azure Well-Architected בעיצוב התשתית
+- לנהל עדכוני תשתית וליישם אסטרטגיות גרסאות תשתית
 
 ## סקירת פריסת תשתית
 
-Azure Developer CLI תומך במגוון ספקי תשתית כקוד (IaC):
-- **Bicep** (מומלץ) - שפת תחום ספציפית ל-Azure
-- **תבניות ARM** - תבניות Azure Resource Manager מבוססות JSON
-- **Terraform** - כלי תשתית רב-ענני
-- **Pulumi** - תשתית כקוד מודרנית בשפות תכנות
+Azure Developer CLI תומך בספקי תשתית כקוד (IaC) מרובים:
+- **Bicep** (מומלץ) - שפת דומיין ספציפית ל-Azure
+- **תבניות ARM** - Bicep מתרגם ל-ARM; JSON של ARM גלמי אינו ספק מובנה נפרד `infra.provider`
+- **Terraform** - כלי תשתית בין-ענני
+- **ספקי הרחבה** - דורשים הרחבת ספק מותקנת בנפרד והגדרתה המתועדת; אין להניח שכל מחרוזת ספק נתמכת
 
 ## הבנת משאבי Azure
 
-### היררכיה של משאבים
+### היררכיית המשאבים
 ```
 Azure Account
 └── Subscriptions
@@ -49,18 +51,19 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### שירותי Azure נפוצים ליישומים
-- **חישוב**: App Service, Container Apps, Functions, מכונות וירטואליות
-- **אחסון**: חשבון אחסון, Cosmos DB, מסד נתונים SQL, PostgreSQL
-- **רשת**: רשת וירטואלית, שער יישומים, CDN
+### שירותי Azure נפוצים לאפליקציות
+- **חשבוניות**: App Service, Container Apps, Functions, מכונות וירטואליות
+- **אחסון**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **רשתות**: רשת וירטואלית, Application Gateway, CDN
 - **אבטחה**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: שירותי Azure AI, Azure OpenAI, Azure Machine Learning
+- **AI/ML**: שירותי AI של Azure, Azure OpenAI, Azure Machine Learning
 
 ## תבניות תשתית Bicep
 
-### מבנה בסיסי של תבנית Bicep
+### מבנה תבנית Bicep בסיסית
 ```bicep
-// infra/main.bicep
+// infra/modules/web.bicep - resource-group-scoped module fragment
+targetScope = 'resourceGroup'
 @description('The name of the environment')
 param environmentName string
 
@@ -75,11 +78,6 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var tags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
-}
-
-// Resource Group (created automatically by azd)
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
-  name: '${applicationName}-${environmentName}-rg'
 }
 
 // App Service Plan
@@ -100,11 +98,14 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'web' })
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
@@ -128,6 +129,8 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
+עבור פרויקט azd מלא, קראו למודול זה מ`infra/main.bicep` בטווח מנוי שיוצר Resource Group מתויג ומעביר את הטווח. התאם את `environmentName`/`location` ב-`main.parameters.json`. תג `azd-service-name: web` מקשר את המשאב ל-`services.web`; שמות פלט שרירותיים לבדם אינם מגדירים גילוי שירות.
+
 ### דפוסי Bicep מתקדמים
 
 #### תשתית מודולרית
@@ -142,11 +145,14 @@ param appSettings array = []
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: name
   location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: planId
     siteConfig: {
       appSettings: appSettings
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
     }
     httpsOnly: true
@@ -179,7 +185,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### יצירת משאבים מותנית
+#### יצירת משאב מותנית
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -202,11 +208,11 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 
 ## 🌐 שימוש ב-Terraform עם azd
 
-Bicep היא ברירת המחדל של azd, אך azd גם תומך ב-**Terraform**—שימושי אם הצוות שלך כבר משתמש בו או אם אתה מנהל תשתית רב-עננית. תהליך העבודה של azd (`azd up`, `azd provision`, `azd down`) זהה; רק שפת התשתית ומבנה התיקיות משתנים.
+Bicep הוא ברירת המחדל של azd, אך azd גם תומך ב**Terraform**—יעיל אם הצוות שלך כבר משתמש בו או אם אתה מנהל תשתית בין-עננית. זרימת העבודה של azd (`azd up`, `azd provision`, `azd down`) זהה; רק שפת התשתית ומבנה התיקיות משתנים.
 
-### הגדר ל-azd להשתמש ב-Terraform
+### לומר ל-azd להשתמש ב-Terraform
 
-הוסף סעיף `infra` בקובץ `azure.yaml` שמפנה לספק Terraform:
+הוסף חלק `infra` ל-`azure.yaml` שמצביע על ספק Terraform:
 
 ```yaml
 # azure.yaml
@@ -221,7 +227,7 @@ services:
     host: containerapp
 ```
 
-### מבנה תיקיות Terraform
+### מבנה תיקיית Terraform
 
 עם ספק Terraform, תיקיית `infra/` שלך משתמשת בקבצי `.tf` במקום Bicep:
 
@@ -234,7 +240,9 @@ infra/
 └── main.tfvars.json   # values azd injects per environment
 ```
 
-### קובץ `main.tf` מינימלי
+### קטע `main.tf`
+
+זה יוצר רק קבוצת משאבים ותוכנית, לא שירות פרוס. עליך גם להצהיר על משתני קלט, ספק `azurerm` תואם, אפליקציית ווב, ומיפוי תג/שם שירות.
 
 ```hcl
 # infra/main.tf
@@ -253,9 +261,9 @@ resource "azurerm_service_plan" "plan" {
 }
 ```
 
-### איך azd מתחבר לפלט של Terraform
+### איך azd מתחבר לפלט Terraform שלך
 
-azd קורא את **פלטי** Terraform כדי ללמוד את נקודות הקצה ולהחזיר ערכי סביבה ליישום שלך. השמות בפלט חשובים—azd מחפש ספציפיים:
+azd קורא **פלטים** של Terraform לערכי סביבה. קטע זה מניח שהגדרת `azurerm_linux_web_app.web`; גילוי שירות עדיין דורש שם משאב תואם או תג `azd-service-name`:
 
 ```hcl
 # infra/outputs.tf
@@ -264,111 +272,48 @@ output "AZURE_LOCATION" {
 }
 
 output "SERVICE_WEB_ENDPOINT_URL" {
-  value = azurerm_linux_web_app.web.default_hostname
+  value = "https://${azurerm_linux_web_app.web.default_hostname}"
 }
 ```
 
-> **חשוב:** azd משתמש בתג `azd-env-name` וביציאות `AZURE_*` למעקב משאבים לפי סביבה. תמיד תתג את קבוצת המשאבים שלך עם `"azd-env-name" = var.environment_name` כדי ש-`azd down` יוכל למצוא ולהסיר הכל.
+> **חשוב:** azd משתמש בתג `azd-env-name` ובפלטים של `AZURE_*` למעקב אחרי משאבים לפי סביבה. תמיד תתייג את קבוצת המשאבים שלך עם `"azd-env-name" = var.environment_name` כדי ש-`azd down` יוכל למצוא ולהסיר הכול.
 
 ### פריסה עם Terraform
 
-הפקודות זהות לאלו של Bicep:
+הפקודות זהות לאלה של Bicep:
 
 ```bash
 azd auth login
 azd env new dev
-azd provision --preview   # azd מריץ 'terraform plan' מתחת למכסה המנוע
-azd up                    # פריסה + פרוש
-azd down --force          # הורס את המשאבים המנוהלים על ידי Terraform
+azd provision --preview   # azd runs 'terraform plan' under the hood
+azd up                    # provision + deploy
+azd down --force          # destroys the Terraform-managed resources
 ```
 
-> **תנאי מוקדם:** יש להתקין את Terraform ולהיות ב-`PATH`. azd מנהל את *זרימת העבודה* של Terraform אך לא מתקין אותו עבורך. למצב, ברירת המחדל היא מצב מקומי; לצוותים יש להגדיר backend מרוחק (למשל Azure Storage) בקובץ `provider.tf`.
+> **דרישה מוקדמת:** על Terraform להיות מותקן ועל `PATH` שלך. azd מנהל את *זרימת העבודה* של Terraform אך אינו מתקין Terraform עבורך. עבור מצב, ברירת המחדל של azd היא מצב מקומי; עבור צוותים, הגדר backend מרוחק (למשל, backend של אחסון Azure) ב-`provider.tf`.
 
-למתחילים המבוססים על Terraform ניתן לגלוש ל[גלריית Awesome AZD](https://azure.github.io/awesome-azd/) ולסנן לפי Terraform, או לעיין בתיעוד הרשמי של [azd Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+עבור סטארטרים מבוססי Terraform מלאים וניתנים להרצה, עיין בגלריית [Awesome AZD](https://azure.github.io/awesome-azd/) וסנן עבור Terraform, או עיין בתיעוד הרשמי של [azd Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
-## 🧩 שימוש ב-Pulumi עם azd
+## 🧩 כלים נוספים לתשתית
 
-אם הצוות שלך כותב תשתית בשפת תכנות כללית (TypeScript, Python, Go או C#) ולא DSL, azd גם תומך ב-**Pulumi**. כפי ב-Terraform, תהליך העבודה `azd up` / `azd provision` / `azd down` לא משתנה—רק כלי התשתית ומבנה התיקיות שונים.
-
-### הגדר ל-azd להשתמש ב-Pulumi
-
-```yaml
-# azure.yaml
-name: my-pulumi-app
-infra:
-  provider: pulumi      # default is "bicep"
-  path: infra           # folder containing your Pulumi program
-services:
-  web:
-    project: ./src
-    language: js
-    host: containerapp
-```
-
-### מבנה תיקיות Pulumi
-
-```
-infra/
-├── Pulumi.yaml          # project definition
-├── Pulumi.dev.yaml      # stack config (one per environment)
-├── index.ts             # your resource program (or __main__.py, main.go, etc.)
-├── package.json         # dependencies (for TypeScript)
-└── tsconfig.json
-```
-
-### קובץ `index.ts` מינימלי
-
-```typescript
-import * as azure from "@pulumi/azure-native";
-import * as pulumi from "@pulumi/pulumi";
-
-const environmentName = pulumi.getStack();
-
-// תייג כל משאב כדי ש-azd יוכל לעקוב ולנקות אותם
-const tags = { "azd-env-name": environmentName };
-
-const rg = new azure.resources.ResourceGroup("rg", {
-  resourceGroupName: `rg-${environmentName}`,
-  tags,
-});
-
-// azd קורא את הפלטים האלה בחזרה לסביבתך
-export const AZURE_LOCATION = rg.location;
-export const SERVICE_WEB_ENDPOINT_URL = "https://...";
-```
-
-### סטאקים תואמים לסביבות azd
-
-Pulumi מארגן פריסות ל**סטאקים**, ו-azd מפעיל מיפוי בין כל סביבה לסטאק Pulumi בעל שם זהה. בעת הרצת `azd env new staging`, azd בוחר (או יוצר) את סטאק `staging`. אותם כללי תגיות `azd-env-name` ופלטי `AZURE_*` תקפים, כך ש-`azd down` יוכל למצוא ולהסיר הכל.
-
-### פריסה עם Pulumi
-
-```bash
-azd auth login
-azd env new dev
-azd provision --preview   # azd מריץ 'pulumi preview' מתחת למכסה המנוע
-azd up                    # פריסה + הטמעה
-azd down --force          # מריץ 'pulumi destroy'
-```
-
-> **תנאי מוקדם:** יש להתקין את Pulumi ולהיות ב-`PATH`, ותצטרך backend למצב (Pulumi Cloud או backend מנוהל עצמאית כמו Azure Blob Storage). azd מנהל את *זרימת העבודה* של Pulumi, לא את ההתקנה. ראה את התיעוד הרשמי של [azd Pulumi](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+Pulumi אינו ספק פריסה מובנה ב-azd 1.37.2. הגדרת `infra.provider: pulumi` לבדה אינה יוצרת אינטגרציה עובדת, ו-`azd env new` אינו יוצר/בוחר אוטומטית ערמת Pulumi. אם אתה משתמש בכלי IaC אחר, עקוב אחרי תיעוד הרחבת ספק מאומתת או נהל את מחזור החיים במפורש בזרימת העבודה שלך. קורס זה לא מספק או מאמת ספק Pulumi.
 
 ## 🎯 בחירת מארח לשירות שלך
 
-שדה `host` ב-`azure.yaml` קובע היכן הקוד שלך יפעל. azd תומך בכמה מארחים—בחירה נכונה חשובה יותר משפת התשתית. הנה השוואה ידידותית למתחילים:
+השדה `host` ב-`azure.yaml` מחליט היכן הקוד שלך פועל. azd תומך בכמה מארחים—בחירה נכונה חשובה יותר משפת תשתית. הנה השוואה ידידותית למתחילים:
 
-| ערך `host` | מתאים ל- | למה |
-|------------|----------|-----|
-| `appservice` | אפליקציות ואפיאי ווב מסורתיים | פלטפורמת PaaS הפשוטה ביותר; ללא מכולות נדרשות |
-| `staticwebapp` | SPA חזיתיים (React, Vue, Angular) | CDN גלובלי + SSL חינמי, תמיכה ב-API מובנית |
-| `function` | עבודות אימפקט ואירועים ללא שרת | סקייל לטווח אפס, תשלום לפי ביצוע |
-| `containerapp` | מיקרו-שירותים במכולות | מכולות ללא שרת, סקייל לטווח אפס, כניסה מובנית |
-| `aks` | צרכי תזמור מורכבים | שליטה מלאה בקוברנטיס כשאתה באמת צריך |
-| `springapp` | אפליקציות Java Spring Boot | סביבת ריצה מנוהלת ל-Azure Spring Apps מותאמת ל-Spring |
+| ערך `host` | הטוב ביותר ל | למה |
+|--------------|----------|-----|
+| `appservice` | אפליקציות ווב ו-API מסורתיים | שירות PaaS הפשוט ביותר; לא דורש מכולות |
+| `staticwebapp` | SPA בקצה-לקוח (React, Vue, Angular) | CDN גלובלי + SSL חינמי, תמיכה מובנית ב-API |
+| `function` | עומסים מבוססי אירועים וללא שרת | קנה מידה לאפס, תשלום לפי ביצוע |
+| `containerapp` | מיקרו-שירותים במכולות | מכולות ללא שרת, קנה מידה לאפס, כניסה מובנית |
+| `aks` | צרכי תזמור מורכבים | שליטה מלאה ב-Kubernetes כשצריך באמת |
+| `springapp` | פריסות קיימות ב-Azure Spring Apps | יעד ישן; השירות צפוי להסגר ב-31 במרץ 2028 ונחסם ללקוחות חדשים |
 
-### מתי להשתמש ב-AKS
+### מתי לבחור AKS
 
-**Azure Kubernetes Service (`host: aks`)** נותן לך את כל כוח הקוברנטיס—בקרים מותאמים אישית, רשת שירותים, רשת מורכבת ותזמון מדויק. הכוח הזה מלווה במורכבות תפעולית: אתה מנהל מאגרי צמתים, שדרוגים ורשת האשכול.
+**Azure Kubernetes Service (`host: aks`)** מעניק לך את כל עוצמת Kubernetes—בקרים מותאמים, רשתות שירות, רשתות מורכבות, ותזמון מדויק. הכוח בא עם נטל תפעולי: אתה מנהל קבוצות צמתים, שדרוגים ורשתות אשכול.
 
 ```yaml
 services:
@@ -378,11 +323,11 @@ services:
     host: aks          # deploys to an existing AKS cluster
 ```
 
-> **התחל מהפשוט אם אפשר.** ברוב המיקרו-שירותים, **Container Apps** מספק מכולות, אוטוסקייל וסקייל לטווח אפס ללא ניהול אשכול. בחר ב-AKS רק כשאתה צריך תכונות ספציפיות לקוברנטיס.
+> **התחל בפשטות אם אפשר.** עבור רוב מיקרו-שירותים, **Container Apps** מספק מכולות, קנה מידה אוטומטי, וקנה מידה לאפס ללא צורך בניהול אשכול. בחר ב-AKS רק כשאתה זקוק לתכונות ספציפיות ל-Kubernetes.
 
 ### מתי להשתמש ב-Azure Spring Apps
 
-**Azure Spring Apps (`host: springapp`)** היא סביבת ריצה מנוהלת המותאמת במיוחד ל-Spring Boot. היא מטפלת בגילוי שירותים, שרת קונפיגורציה, ופריסה בלו-גרין כך שצוותי Java לא יצטרכו לנהל תשתית בעצמם.
+**Azure Spring Apps (`host: springapp`)** היא ריצה מנוהלת שנבנתה במיוחד עבור Spring Boot. היא מטפלת בגילוי שירות, שרת קונפיגורציה, ופריסה כחול-ירוק כך שצוותי Java לא יצטרכו לנהל תשתית בעצמם.
 
 ```yaml
 services:
@@ -392,7 +337,7 @@ services:
     host: springapp
 ```
 
-> השתמש ב-`springapp` כאשר יש לך אפליקציות Spring Boot קיימות ואתה רוצה סביבת ריצה מותאמת להן. לאפליקציות Java מכולתיות חדשות ללא צרכים ספציפיים ל-Spring, `containerapp` לרוב בחירה פשוטה יותר.
+> אל תבחר Azure Spring Apps לפרויקט מתחיל חדש: הוא סגור ללקוחות חדשים ו[נסגר ב-31 במרץ 2028](https://learn.microsoft.com/azure/spring-apps/basic-standard/retirement-announcement). העדף חלופות נתמכות כמו Container Apps ותכנן מעבר לפריסות קיימות.
 
 ## 🗃️ פריסת מסדי נתונים
 
@@ -446,6 +391,8 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 ```
 
 ### PostgreSQL
+**דרישות מוקדמות לקטע:** הצג `@secure() param databasePassword string` והשתמש בערך חזק מסופק. בחר גישה ציבורית **או** שלב את הרשת המתווכת/DNS פרטי מטה; שני הקטעים אינם מתחברים אוטומטית.
+
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -492,7 +439,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 אבטחה וניהול סודות
+כלל `0.0.0.0` מאפשר חיבורים משירותי Azure מעבר למנוי שלך. זו אינה רשת פרטית; העדף עיצוב רשת מוגבל לעומסי עבודה אמיתיים.
+
+## 🔒 ניהול אבטחה וסודות
 
 ### אינטגרציה עם Key Vault
 ```bicep
@@ -536,7 +485,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### הגדרת Managed Identity
+### הגדרת זהות מנוהלת
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -553,8 +502,8 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
           value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
         }
         {
-          name: 'AZURE_CLIENT_ID'
-          value: webApp.identity.principalId
+          name: 'NODE_ENV'
+          value: 'production'
         }
       ]
     }
@@ -562,7 +511,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 רשת וקישוריות
+זהות מוקצית מערכת לא תגדיר `AZURE_CLIENT_ID` ל-ID הראשי שלה. זהות מוקצית משתמש משתמשת ב**Client ID**, לא ב-ID אובייקט/ראשי. הפנייה ל-Key Vault גם זקוקה להקצאת תפקיד אובייקט האפליקציה וגישה לרשת.
+
+## 🌍 רשתות וקישוריות
 
 ### הגדרת רשת וירטואלית
 ```bicep
@@ -628,6 +579,8 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 ```
 
 ### שער יישומים עם SSL
+**קטע ארכיטקטורה לא שלם, לא שער ניתן לפרוס:** הוסף `gateway-subnet` ייעודי ל-VNet בתוספת מאגרי Backend, הגדרות HTTP, מאזינים, חוקים עם עדיפויות, ותעודת TLS (או הפניה מורשית ל-Key Vault). פתיחת פורט 443 בלבד אינה מגדירה HTTPS.
+
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -721,7 +674,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### מדדים והתראות מותאמות
+### מדדים והתראות מותאמות אישית
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -731,7 +684,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
     description: 'Alert when CPU usage is high'
     severity: 2
     enabled: true
-    scopes: [webApp.id]
+    scopes: [appServicePlan.id]
     evaluationFrequency: 'PT5M'
     windowSize: 'PT5M'
     criteria: {
@@ -740,6 +693,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
         {
           name: 'CPU Usage'
           metricName: 'CpuPercentage'
+          metricNamespace: 'Microsoft.Web/serverfarms'
           operator: 'GreaterThan'
           threshold: 80
           timeAggregation: 'Average'
@@ -755,11 +709,14 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 הגדרות סביבתיות ייחודיות
+## 🔧 הגדרות ספציפיות לסביבה
 
-### קבצי פרמטר לסביבות שונות
+### קבצי פרמטרים לסביבות שונות
+שני הקבצים למטה הם **דוגמאות חלופיות לקובצי פרמטרים**. azd אינו בוחר אוטומטית `main.parameters.dev.json` או `main.parameters.prod.json` לפי שם הסביבה. השתמש ב-`main.parameters.json` ממש עם החלפות סביבה (למשל `${APP_SERVICE_SKU=B1}`), והצהר/צרוך כל פרמטר ב-Bicep.
+
+דוגמת תוכן ל-`infra/main.parameters.dev.json`:
+
 ```json
-// infra/main.parameters.dev.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -783,8 +740,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
+דוגמת תוכן ל-`infra/main.parameters.prod.json`:
+
 ```json
-// infra/main.parameters.prod.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -819,7 +777,7 @@ param environmentType string = 'dev'
 
 // Development resources
 resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'dev') {
-  name: '${applicationName}devstorage${resourceToken}'
+  name: 'stdev${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -829,7 +787,7 @@ resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environ
 
 // Production resources with geo-redundancy
 resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'prod') {
-  name: '${applicationName}prodstorage${resourceToken}'
+  name: 'stprod${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -913,78 +871,54 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### בדיקות תשתית
-```bicep
-// infra/test/main.test.bicep
-param location string = resourceGroup().location
+### בדיקת תשתית
+```bash
+# Local compilation checks syntax/types; this does not provision infrastructure
+az bicep build --file infra/main.bicep --stdout
 
-module mainTemplate '../main.bicep' = {
-  name: 'main-template-test'
-  params: {
-    environmentName: 'test'
-    location: location
-    applicationName: 'testapp'
-  }
-}
-
-// Test assertions
-resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'test-deployment'
-  location: location
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '8.0'
-    scriptContent: '''
-      $webAppName = "${mainTemplate.outputs.WEB_NAME}"
-      $response = Invoke-WebRequest -Uri "https://${mainTemplate.outputs.WEB_URL}/health" -UseBasicParsing
-      if ($response.StatusCode -ne 200) {
-        throw "Health check failed"
-      }
-      Write-Output "All tests passed!"
-    '''
-    timeout: 'PT10M'
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'P1D'
-  }
-}
+# After deploying your own complete app, test an actual application route
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error "$WEB_URL"
 ```
 
-## 🧪 תצוגה מקדימה ואימות תשתית (חדש)
+פריסת תשתית אינה מפעילה את קוד האפליקציה שלך. הפעל בדיקות אפליקציה רק לאחר `azd deploy`/`azd up`, והשתמש ב-`/health` רק אם האפליקציה שלך מיישמת אותו. סקריפטים לפריסת ARM יוצרים משאבי Azure וזקוקים לזהויות נוספות, גרסאות ריצה נתמכות והרשאות; אינם בדיקות יחידה מקומיות.
 
-### תצוגה מקדימה של שינויים בתשתית לפני פריסה
+## 🧪 תצוגה מוקדמת ואימות תשתית (חדש)
 
-פיצ’ר `azd provision --preview` מאפשר לך **לדמות פריסת תשתית** לפני פריסת משאבים בפועל. זה דומה ל-`terraform plan` או ל-`bicep what-if`, ומספק לך **תצוגה יבשית** של השינויים שייעשו לסביבת Azure שלך.
+### הצגת שינויים בתשתית לפני פריסה
 
-#### 🛠️ מה זה עושה
-- **מנתח את תבניות ה-IaC שלך** (Bicep או Terraform)
-- **מציג תצוגה מקדימה של שינויים במשאבים**: הוספות, מחיקות, עדכונים
-- **לא מיישם שינויים** — מצב קריאה בלבד ובטוח להרצה
+תכונת `azd provision --preview` מאפשרת לך **לסמלץ פריסת תשתית** לפני שפריסת משאבים מתבצעת בפועל. היא דומה ברוחה ל-`terraform plan` או `bicep what-if`, ומציעה **תצוגת ריצה יבשה** של מה השינויים שייכנסו לסביבת Azure שלך.
 
-#### מקרים לשימוש
+#### 🛠️ מה היא עושה
+- **מנתחת את תבניות IaC שלך** (Bicep או Terraform)
+- **מציגה תצוגה מוקדמת של שינויים במשאבים**: תוספות, מחיקות, עדכונים
+- **אינה מיישמת את השינויים המוצעים בתשתית של הספק** — בדוק תחילה את ווית הפרויקט; לסקריפטים עשויים להיות השפעות צדדיות ותצוגה מוקדמת עדיין דורשת הרשאות Azure
+
+#### מקרי שימוש
 ```bash
-# תצוגה מקדימה של שינויים בתשתית לפני הפריסה
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# תצוגה מקדימה לסביבת יעד ספציפית
+# Preview for specific environment
 azd provision --preview -e production
 ```
 
 פקודה זו עוזרת לך:
-- **לבדוק את שינויים בתשתית** לפני התקנת משאבים
-- **לזהות הטעויות בזמן מוקדם** במחזור הפיתוח
-- **לעבוד בשיתוף פעולה בטוח** בסביבות צוות
-- **להבטיח פריסות עם הרשאות מינימליות** וללא הפתעות
+- **לאמת שינויים בתשתית** לפני המחויבות למשאבים
+- **לזהות תצורות שגויות מוקדם** במחזור הפיתוח
+- **לעבוד בשיתוף בטוח** בסביבות צוות
+- **להבטיח פריסות עם מינימום הרשאות** ללא הפתעות
 
-השימוש יעיל במיוחד כש:
-- עובדים עם סביבות מרובות שירותים מורכבות
-- עורכים שינויים בתשתית ייצור
-- מאמתים שינויים בתבניות לפני אישור משיכה (PR)
+שימושית במיוחד כאשר:
+- עובדים עם סביבות שירות מרובות מורכבות
+- מבצעים שינויים בתשתית הפקה
+- מאמתים שינויים בתבנית לפני אישור PR
 - מאמנים חברי צוות חדשים על דפוסי תשתית
 
-### דוגמת פלט תצוגה מקדימה
-הפלט המדויק משתנה לפי ספק ומבנה פרויקט, אך התוצאה אמורה לזהות בבירור את השינויים המוצעים לפני שינוי כלשהו.
+### דוגמת פלט תצוגה מוקדמת
+פלט תצוגה מוקדמת משתנה לפי ספק ומבנה פרויקט, אך התוצאה אמורה לזהות בבירור שינויים מוצעים לפני יישומם.
 
-```bash
+```text
 $ azd provision --preview
 
 🔍 Previewing infrastructure changes...
@@ -1007,22 +941,26 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## 🔄 עדכוני משאבים והגירות
+## �🔄 עדכוני ומעברי משאבים
 
 ### עדכוני משאבים בטוחים
 ```bash
-# צפה בשינויים בתשתית לפני הכל (מומלץ)
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# החל שינויים לאחר אישור התצוגה המקדימה
-azd provision --confirm-with-no-prompt
+# Apply changes after preview confirmation
+azd provision
+# In automation, --no-prompt uses known values and fails on unresolved decisions;
+# it is not an approval bypass.
 
-# לביצוע חזרה, השתמש ב-Git כדי לבטל שינויים בתשתית:
-git revert HEAD  # בטל את הקומיט האחרון של התשתית
-azd provision    # החל את מצב התשתית הקודם
+# For rollback, use Git to revert infrastructure changes:
+git revert HEAD  # Revert last infrastructure commit
+azd provision    # Apply previous infrastructure state
 ```
 
-### הגירות מסד נתונים
+### מעברי מסד נתונים
+**דפוס סקריפט פריסה לא שלם:** דורש זהות מוקצית משתמש מוּגדֶרֶת היכן שצריך, סביבת CLI נתמכת, כלי מעבר זמינים, ספריית מעבר/הגדרה שסופקה וקישוריות מסד נתונים. אינו ניתן לביצוע רק בהדבקת משאב זה בתבנית.
+
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -1047,25 +985,29 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
     ]
     timeout: 'PT30M'
     cleanupPreference: 'OnSuccess'
+    retentionInterval: 'P1D'
   }
 }
 ```
 
-## 🎯 פרקטיקות מומלצות
+## 🎯 שיטות עבודה מומלצות
 
-### 1. קונבנציות שמות משאבים
+### 1. קונבנציות שמות למשאבים
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
   appService: '${applicationName}-web-${resourceToken}'
   database: '${applicationName}-db-${resourceToken}'
-  storage: '${take(replace(applicationName, '-', ''), 15)}${environmentName}sa${take(resourceToken, 8)}'
-  keyVault: '${take(applicationName, 15)}-kv-${take(resourceToken, 8)}'
+  storage: 'st${resourceToken}' // lowercase alphanumeric, <=24 characters
+  keyVault: 'kv-${resourceToken}' // <=24 characters
 }
 ```
 
-### 2. אסטרטגיית תגיות
+### 2. אסטרטגיית תיוג
 ```bicep
+// utcNow is only allowed in a parameter default, not directly in a variable.
+param deploymentDate string = utcNow('yyyy-MM-dd')
+
 var commonTags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
@@ -1073,7 +1015,7 @@ var commonTags = {
   'cost-center': 'engineering'
   'owner': 'platform-team'
   'project': applicationName
-  'created-date': utcNow('yyyy-MM-dd')
+  'deployment-date': deploymentDate
 }
 ```
 
@@ -1093,7 +1035,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. ארגון פלטים
+### 4. ארגון פלט
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -1108,12 +1050,12 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## השלבים הבאים
+## הצעדים הבאים
 
 - [תכנון לפני פריסה](../chapter-06-pre-deployment/capacity-planning.md) - אימות זמינות משאבים
-- [בעיות נפוצות](../chapter-07-troubleshooting/common-issues.md) - טיפול בתקלות תשתית
-- [מדריך למעקב ותיקון](../chapter-07-troubleshooting/debugging.md) - איתור תקלות בפריסה
-- [בחירת SKU](../chapter-06-pre-deployment/sku-selection.md) - בחירה בשכבות שירות מתאימות
+- [בעיות נפוצות](../chapter-07-troubleshooting/common-issues.md) - פתרון בעיות תשתית
+- [מדריך ניפוי שגיאות](../chapter-07-troubleshooting/debugging.md) - פתרון בעיות פרוביז׳נינג
+- [בחירת SKU](../chapter-06-pre-deployment/sku-selection.md) - בחר שכבות שירות מתאימות
 
 ## משאבים נוספים
 
@@ -1125,8 +1067,8 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **ניווט**
-- **שיעור קודם**: [מדריך פריסה](deployment-guide.md)
-- **שיעור הבא**: [תכנון קיבולת](../chapter-06-pre-deployment/capacity-planning.md)
+- **השיעור הקודם**: [מדריך לפריסה](deployment-guide.md)
+- **השיעור הבא**: [תכנון קיבולת](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 

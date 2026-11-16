@@ -1,282 +1,133 @@
-# 3. ٹیمپلیٹ کو تجزیہ کریں
+# 3. ایک ٹیمپلیٹ کو توڑنا
 
-!!! tip "اس ماڈیول کے اختتام تک آپ کو یہ قابل ہونا چاہیے"
+!!! tip "اس ماڈیول کے آخر تک آپ قابل ہو جائیں گے"
 
-    - [ ] Azure معاونت کے لیے MCP سرورز کے ساتھ GitHub Copilot کو فعال کریں
-    - [ ] AZD ٹیمپلیٹ فولڈر کی ساخت اور اجزاء کو سمجھیں
-    - [ ] انفراسٹرکچر ایز کوڈ (بائسپ) تنظیمی نمونوں کو دریافت کریں
-    - [ ] **لیب 3:** GitHub Copilot کا استعمال کرتے ہوئے ریپوزیٹری کے فن تعمیر کو دریافت اور سمجھیں
-
----
-
-AZD ٹیمپلیٹس اور Azure Developer CLI (`azd`) کے ساتھ، ہم معیاری ریپوزیٹریز کے ذریعے اپنی AI ترقیاتی سفر کو جلد شروع کر سکتے ہیں جو نمونہ کوڈ، انفراسٹرکچر، اور ترتیب فائلز فراہم کرتی ہیں — ایک تیار استعمال کے قابل _شروع کنندہ_ پروجیکٹ کی شکل میں۔
-
-**لیکن اب، ہمیں پروجیکٹ کی ساخت اور کوڈ بیس کو سمجھنا ہوگا — اور AZD ٹیمپلیٹ کو بغیر کسی سابقہ تجربے یا AZD کی تفہیم کے اپنی مرضی کے مطابق بنانے کے قابل ہونا ہوگا!**
+    - [ ] Use GitHub Copilot and optional MCP tools for Azure documentation and read-only exploration
+    - [ ] Identify the template's application, infrastructure, configuration, and test entry points
+    - [ ] Verify generated explanations against actual repository files
+    - [ ] **Lab 3:** Trace one request and one configuration input through the project
 
 ---
 
 ## 1. GitHub Copilot کو فعال کریں
 
-### 1.1 GitHub Copilot Chat انسٹال کریں
+VS Code میں شروع کیا گیا AI نمونہ کھولیں اور [GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) کو فعال کریں۔ اس اکاؤنٹ سے سائن ان کریں جس کے پاس اہل منصوبہ ہو؛ استعمال کی حدود مختلف ہو سکتی ہیں۔ تبدیلیوں کی اجازت دینے سے پہلے Copilot سے ذخیرہ کو سمجھنے کو کہیں۔
 
-اب وقت ہے کہ [GitHub Copilot Agent Mode کے ساتھ](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) کو دریافت کریں۔ اب، ہم قدرتی زبان میں اپنے کام کو اعلی سطح پر بیان کر سکتے ہیں، اور اجرا میں مدد حاصل کر سکتے ہیں۔ اس لیب کے لیے، ہم [Copilot مفت منصوبہ](https://github.com/github-copilot/signup) استعمال کریں گے جس میں ماہانہ تکمیل اور چیٹ معاملات کی حد ہوتی ہے۔
+### اختیاری MCP سرورز
 
-ایکسٹینشن کو مارکیٹ پلیس سے انسٹال کیا جا سکتا ہے، اور یہ اکثر Codespaces یا dev container ماحول میں پہلے ہی موجود ہوتا ہے۔ _Copilot آئیکن کے ڈراپ ڈاؤن سے `Open Chat` پر کلک کریں - اور `What can you do?` جیسا پرامپٹ ٹائپ کریں_ - آپ کو لاگ ان کرنے کے لیے کہا جا سکتا ہے۔ **GitHub Copilot Chat تیار ہے**۔
+یہ خدمات اضافی اوزار فراہم کر سکتی ہیں:
 
-### 1.2 MCP سرورز انسٹال کریں
+- [Azure MCP Server](https://learn.microsoft.com/azure/developer/azure-mcp-server/overview)
+- [Microsoft Learn MCP Server](https://learn.microsoft.com/training/support/mcp)
 
-ایجنٹ موڈ مؤثر ہونے کے لیے، اسے صحیح آلات تک رسائی کی ضرورت ہوتی ہے تاکہ وہ معلومات حاصل کر سکے یا کارروائیاں انجام دے سکے۔ یہاں MCP سرورز مدد کر سکتے ہیں۔ ہم درج ذیل سرورز کو ترتیب دیں گے:
+VS Code میں، [MCP کنفیگریشن ہدایت](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) کا جائزہ لیں اور اگر ضرورت ہو تو `.vscode/mcp.json` بنائیں:
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+```json
+{
+  "servers": {
+    "Azure MCP Server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"]
+    },
+    "microsoft.docs.mcp": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
 
-ان کو فعال کرنے کے لیے:
+`npx` کمانڈ کے لیے Node.js/npm نصب شدہ ہونا ضروری ہے اور یہ قابل عمل کوڈ ڈاؤن لوڈ کرتی ہے۔ پیکیج کا جائزہ لیں اور ایک منظور شدہ ورژن مقرر کریں تاکہ ٹیم کا ترتیب قابل تکرار ہو۔ VS Code کے MCP کنٹرولز استعمال کر کے سرورز کو شروع کریں اور دستیاب اوزار کا معائنہ کریں؛ نام ورژن کے ساتھ بدل سکتے ہیں۔
 
-1. اگر `.vscode/mcp.json` فائل موجود نہیں ہے تو اسے بنائیں
-1. اس فائل میں درج ذیل مواد کاپی کریں — اور سرورز شروع کریں!
-   ```json title=".vscode/mcp.json"
-   {
-      "servers": {
-         "Azure MCP Server": {
-            "command": "npx",
-            "args": [
-            "-y",
-            "@azure/mcp@latest",
-            "server",
-            "start"
-            ]
-         },
-         "microsoft.docs.mcp": {
-            "type": "http",
-            "url": "https://learn.microsoft.com/api/mcp"
-         }
-      }
-   }
-   ```
+**تصدیق الگ ہے۔** AZD کے لیے `azd auth login` استعمال کریں۔ Azure MCP کی دستاویزات میں تصدیقی عمل کی پیروی کریں؛ صرف AZD لاگ ان کرنے سے MCP سیشن قائم نہیں ہوتا۔ جب کوئی مشق یا ہک Azure CLI کو کال کرے تو الگ سے `az login` استعمال کریں۔
 
-??? warning "آپ کو`npx` انسٹال نہ ہونے کی غلطی مل سکتی ہے (حل کے لیے کلک کریں)"
+صرف پڑھنے کے لیے ہدایات آزما کر دیکھیں:
 
-      اسے درست کرنے کے لیے، `.devcontainer/devcontainer.json` فائل کھولیں اور features سیکشن میں یہ لائن شامل کریں۔ پھر کنٹینر کو دوبارہ بنائیں۔ اب آپ کے پاس `npx` انسٹال ہونا چاہیے۔
+1. "Microsoft Learn MCP استعمال کریں تاکہ Azure Developer CLI کی کنفیگریشن دستاویزات تلاش کی جا سکیں۔"
+2. "اس ذخیرے کے `azure.yaml` کی وضاحت کریں؛ ان فائلوں کا حوالہ دیں جو ہر ہک کا نفاذ کرتی ہیں۔"
+3. "دستیاب Azure MCP آلات استعمال کرتے ہوئے، میری تعینات شدہ وسائل کی فہرست بنائیں بغیر کسی تبدیلی کے۔"
 
-      ```title="" linenums="0"
-         "features": {
-            "ghcr.io/devcontainers/features/node:1": {},
-            ...
-         },
-      ```
+منتخب کردہ ٹیننٹ/سبسکرپشن اور ہر مجوزہ اوزار کی کال کا جائزہ لیں۔ صرف فن تعمیر کو سمجھنے کے لیے وسائل کی تخلیق، حذف یا رسائی کی تبدیلیوں کی اجازت نہ دیں۔
 
----
+## 2. فن تعمیر کو سمجھیں
 
-### 1.3 GitHub Copilot Chat کا تجربہ کریں
+یہ نمونہ Python FastAPI بیک اینڈ اور React/TypeScript فرنٹ اینڈ کو Azure Container Apps میں ہوسٹ کرتا ہے۔ بیک اینڈ Microsoft Foundry پروجیکٹ کے ایجنٹ کے ساتھ بات چیت کرتا ہے۔ بازیافت اور مشاہدہ ٹیمپلیٹ خصوصیات کی فعال حالت اور کامیاب ترتیب پر منحصر ہے؛ صرف ایپلیکیشن کی تعیناتی سے یہ یقینی نہیں ہوتا۔
 
-**پہلے `azd auth login` استعمال کریں تاکہ Azure سے VS Code کمانڈ لائن سے تصدیق ہو جائے۔ اگر آپ براہ راست Azure CLI کمانڈز چلانا چاہتے ہیں تو `az login` بھی استعمال کریں۔**
+![تشریحی فن تعمیر](../../../../../translated_images/ur/architecture.8cec470ec15c65c7.webp)
 
-اب آپ اپنی Azure سبسکرپشن کی حیثیت کو جانچنے اور تعینات کردہ وسائل یا ترتیب کے بارے میں سوالات کرنے کے قابل ہو جائیں گے۔ یہ پرامپٹ آزما کر دیکھیں:
+اس خاکے کا موازنہ [موجودہ اپ اسٹریم تعیناتی گائیڈ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) اور آپ کے اصل وسائل سے کریں۔ ترتیب شدہ ماڈل تعیناتی، ایجنٹ کے اوزار، منیجڈ شناخت، رول اسائنمنٹس، اور اختیاری AI Search/Application Insights وسائل چیک کریں۔
 
-1. `List my Azure resource groups`
-1. `#foundry list my current deployments`
+**مشق:** Copilot سے کہیں کہ فرنٹ اینڈ سے API کے ذریعے Foundry تک چیٹ درخواست کو فایل اور فنکشن حوالہ جات کے ساتھ ٹریس کرے۔ ان حوالہ جات کو کھولیں اور وضاحت کی تصدیق کریں۔ صرف ایک خاکہ کی بنیاد پر نفاذ شدہ تصدیق، راستہ سازی، یا اجازت کا اندازہ نہ لگائیں۔
 
-آپ Azure دستاویزات کے بارے میں سوالات بھی پوچھ سکتے ہیں اور Microsoft Docs MCP سرور کی بنیاد پر جوابات حاصل کر سکتے ہیں۔ یہ پرامپٹ آزمائیں:
+## 3. ذخیرہ ساخت
 
-1. `#microsoft_docs_search What is Azure Developer CLI?`
-1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
+منتخب کردہ راستوں کو 4 نومبر، 2026 کو نمونہ کے ساتھ چیک کیا گیا تھا۔ آپ کی شروع شدہ نظرثانی حقیقت کا ماخذ ہے:
 
-یا آپ کوڈ کے چھوٹے حصے بھی طلب کر سکتے ہیں تاکہ کوئی کام مکمل ہو۔ یہ پرامپٹ آزمائیں:
+```text
+get-started-with-ai-agents/
+  azure.yaml
+  docker-compose.yaml
+  requirements-dev.txt
+  .devcontainer/
+  infra/
+    main.bicep
+    main.parameters.json
+    api.bicep
+    core/
+  src/
+    Dockerfile
+    pyproject.toml
+    requirements.txt
+    api/
+      main.py
+      routes.py
+      search_index_manager.py
+    frontend/
+      package.json
+      src/
+    files/
+  scripts/
+    validate_env_vars.sh
+    validate_env_vars.ps1
+    postdeploy.sh
+    postdeploy.ps1
+  tests/
+    test_evaluation.py
+    test_red_teaming.py
+  docs/
+    deployment.md
+    deploy_customization.md
+    ai_search.md
+    observability.md
+    local_development.md
+    troubleshooting.md
+```
 
-1. `Give me a Python code example that uses AAD for an interactive chat client`
+### انفراسٹرکچر اور کنفیگریشن
 
-`Ask` موڈ میں، یہ آپ کو کوڈ فراہم کرے گا جسے آپ کاپی پیسٹ کر کے آزما سکتے ہیں۔ `Agent` موڈ میں، یہ ایک قدم آگے جا کر متعلقہ وسائل تخلیق کر سکتا ہے — بشمول ترتیبی اسکرپٹس اور دستاویزات — تاکہ آپ اس کام کو انجام دے سکیں۔
+`infra/main.bicep` وسائل کا انتظام کرتا ہے؛ `main.parameters.json` ٹیمپلیٹ ان پٹ کو AZD کے ماحول کی قدروں سے جوڑتا ہے۔ `azure.yaml` ایپلیکیشن سروس اور لائف سائیکل ہکس کا انتخاب کرتا ہے۔ `USE_AZURE_AI_SEARCH_SERVICE` جیسے ان پٹ کو ان فائلوں میں ٹریس کریں تاکہ معلوم ہو کہ اصل میں کیا تبدیل ہوتا ہے۔
 
-**اب آپ ٹیمپلیٹ ریپوزیٹری کو دریافت کرنے کے لیے تیار ہیں**
+### ایپلیکیشن اور شناخت
 
----
+`src/api/` اور `src/frontend/` کو ساتھ پڑھیں۔ جہاں ایجنٹ بنایا یا بازیافت ہوتا ہے، ہدایات/اوزار ترتیب دیے جاتے ہیں، اور ہر Azure کال کون سی شناخت استعمال کرتی ہے، شناخت کریں۔ `src/files/` کے تحت نمونہ فائلیں ڈیموسٹریشن ڈیٹا ہیں، پروڈکشن کیٹلاگ یا اجازت نامہ ماڈل نہیں۔
 
-## 2. فن تعمیر کا تجزیہ کریں
+### ٹیسٹس اور مشاہدہ
 
-??? prompt "پو چھیں: docs/images/architecture.png میں دی گئی ایپلیکیشن فن تعمیر کو 1 پیراگراف میں بیان کریں"
+موجودہ جائزہ اور ریڈ ٹیم کے داخلہ پوائنٹس `tests/` کے تحت ہیں؛ پرانے `evals/` اور `airedteaming/` ڈائریکٹری حوالے اس نمونے کے لیے فرسودہ ہیں۔ کلاؤڈ ٹیسٹس چلانے سے پہلے `docs/observability.md` کو پڑھیں تاکہ تقاضے اور لاگت معلوم ہو سکے۔ یہ Python ٹیسٹس اختیاری `azure.ai.evaluations` AZD ایکسٹینشن سے الگ ہیں۔
 
-      یہ ایپلیکیشن ایک AI سے منسلک چیٹ ایپلیکیشن ہے جو Azure پر مبنی ہے اور جدید ایجنٹ پر مبنی فن تعمیر کی نمائش کرتی ہے۔ حل کا مرکز ایک Azure Container App ہے جو مرکزی ایپلیکیشن کوڈ کی میزبانی کرتا ہے، جو صارف کے ان پٹ کو پروسیس کرتا ہے اور AI ایجنٹ کے ذریعے ذہین جوابات جنریٹ کرتا ہے۔
-      
-      یہ فن تعمیر Microsoft Foundry Project کو AI صلاحیتوں کے لیے بنیاد کے طور پر استعمال کرتا ہے، جو Azure AI Services سے جڑتا ہے جو بنیادی زبان ماڈلز (جیسے gpt-4.1-mini) اور ایجنٹ کی فعالیت فراہم کرتے ہیں۔ صارف کے تعاملات React پر مبنی فرنٹ اینڈ سے FastAPI بیک اینڈ تک چلتے ہیں جو AI ایجنٹ سروس کے ساتھ بات چیت کرتا ہے تاکہ سیاق و سباق پر مبنی جوابات پیدا کر سکے۔
-      
-      نظام فائل سرچ یا Azure AI Search سروس کے ذریعے علم حاصل کرنے کی صلاحیتیں شامل کرتا ہے، تاکہ ایجنٹ اپ لوڈ کردہ دستاویزات سے معلومات تک رسائی حاصل کر سکے اور حوالہ دے سکے۔
-      
-      آپریشنل عمدگی کے لیے، فن تعمیر Application Insights اور Log Analytics Workspace کے ذریعے نگرانی، لاگنگ، اور کارکردگی کی بہتر کاری فراہم کرتا ہے۔
-      
-      Azure Storage ایپلیکیشن ڈیٹا اور فائل اپ لوڈز کے لیے بلب ذخیرہ فراہم کرتا ہے، جبکہ Managed Identity Azure وسائل کے درمیان محفوظ رسائی کو یقینی بناتی ہے بغیر اسناد کو ذخیرہ کیے۔
-      
-      پورا حل اسکیل ایبل اور قابل بحالی کے لیے ڈیزائن کیا گیا ہے، جس میں کنٹینر شدہ ایپلیکیشن مانگ کی بنیاد پر خود بخود اسکیل کرتا ہے جبکہ بلٹ ان سیکیورٹی، مانیٹرنگ، اور CI/CD صلاحیتیں Azure کے مینجڈ سروسز ماحولیاتی نظام کے ذریعے فراہم کرتا ہے۔
+## 4. اپنی دریافتوں کی تصدیق کریں
 
-![Architecture](../../../../../translated_images/ur/architecture.48d94861e6e6cdc0.webp)
+- ایک نمونہ سوال کے لیے API روٹ، ایجنٹ تعامل، اور بازیافت کوڈ کی شناخت کریں۔
+- وضاحت کریں کہ کون سی شناخت Foundry تک رسائی حاصل کرتی ہے اور کون سی ترتیب اس کا اینڈ پوائنٹ منتخب کرتی ہے۔
+- اصل پری اپ اور پوسٹ ڈپلائے اسکرپٹ تلاش کریں اور ان کی غلطی سنبھالنے کے رویے کو دیکھیں۔
+- آپ کی تعیناتی میں موجود کسی بھی انحصار یا اختیاری خصوصیات کی فہرست بنائیں جن کا فقدان ہو۔
 
----
-
-## 3. ریپوزیٹری کی ساخت
-
-!!! prompt "پو چھیں: ٹیمپلیٹ فولڈر کی ساخت کی وضاحت کریں۔ بصری درجہ بندی والے خاکے سے شروع کریں۔"
-
-??? info "جواب: بصری درجہ بندی والا خاکہ"
-
-      ```bash title="" 
-      get-started-with-ai-agents/
-      ├── 📋 Configuration & Setup
-      │   ├── azure.yaml                    # Azure Developer CLI کی ترتیب
-      │   ├── docker-compose.yaml           # مقامی ترقی کے کنٹینرز
-      │   ├── pyproject.toml                # پائیتھون پروجیکٹ کی ترتیب
-      │   ├── requirements-dev.txt          # ترقیاتی انحصاریاں
-      │   └── .devcontainer/                # VS Code dev container کی ترتیب
-      │
-      ├── 🏗️ Infrastructure (infra/)
-      │   ├── main.bicep                    # مرکزی انفراسٹرکچر ٹیمپلیٹ
-      │   ├── api.bicep                     # API مخصوص وسائل
-      │   ├── main.parameters.json          # انفراسٹرکچر کے پیرامیٹرز
-      │   └── core/                         # ماڈیولر انفراسٹرکچر کے اجزاء
-      │       ├── ai/                       # AI سروس کی ترتیبات
-      │       ├── host/                     # ہوسٹنگ انفراسٹرکچر
-      │       ├── monitor/                  # نگرانی اور لاگنگ
-      │       ├── search/                   # Azure AI سرچ سیٹ اپ
-      │       ├── security/                 # سیکیورٹی اور شناخت
-      │       └── storage/                  # اسٹوریج اکاؤنٹ کی ترتیبات
-      │
-      ├── 💻 Application Source (src/)
-      │   ├── api/                          # بیک اینڈ API
-      │   │   ├── main.py                   # FastAPI ایپلیکیشن کی شروعات
-      │   │   ├── routes.py                 # API کے راستے کی تعریف
-      │   │   ├── search_index_manager.py   # سرچ فنکشنالٹی
-      │   │   ├── data/                     # API ڈیٹا ہینڈلنگ
-      │   │   ├── static/                   # جامد ویب اثاثے
-      │   │   └── templates/                # HTML ٹیمپلیٹس
-      │   ├── frontend/                     # React/TypeScript فرنٹ اینڈ
-      │   │   ├── package.json              # Node.js انحصاریاں
-      │   │   ├── vite.config.ts            # Vite بلڈ کی ترتیب
-      │   │   └── src/                      # فرنٹ اینڈ ماخذ کوڈ
-      │   ├── data/                         # نمونہ ڈیٹا فائلیں
-      │   │   └── embeddings.csv            # پہلے سے حساب شدہ embeddings
-      │   ├── files/                        # نالج بیس فائلیں
-      │   │   ├── customer_info_*.json      # صارف ڈیٹا کے نمونے
-      │   │   └── product_info_*.md         # مصنوعات کی دستاویزات
-      │   ├── Dockerfile                    # کنٹینر کی ترتیب
-      │   └── requirements.txt              # پائیتھون انحصاریاں
-      │
-      ├── 🔧 Automation & Scripts (scripts/)
-      │   ├── postdeploy.sh/.ps1           # تعیناتی کے بعد سیٹ اپ
-      │   ├── setup_credential.sh/.ps1     # اسناد کی ترتیب
-      │   ├── validate_env_vars.sh/.ps1    # ماحول کی تصدیق
-      │   └── resolve_model_quota.sh/.ps1  # ماڈل کوٹا مینجمنٹ
-      │
-      ├── 🧪 Testing & Evaluation
-      │   ├── tests/                        # یونٹ اور انٹیگریشن ٹیسٹ
-      │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # ایجنٹ کے جانچنے کا فریم ورک
-      │   │   ├── evaluate.py               # جانچنے کا رنر
-      │   │   ├── eval-queries.json         # ٹیسٹ کوریز
-      │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # ترقیاتی پلے گراؤنڈ
-      │   │   ├── 1-quickstart.py           # شروع کرنے کی مثالیں
-      │   │   └── aad-interactive-chat.py   # تصدیقی مثالیں
-      │   └── airedteaming/                 # AI حفاظت کی جانچ
-      │       └── ai_redteaming.py          # ریڈ ٹیم ٹیسٹنگ
-      │
-      ├── 📚 Documentation (docs/)
-      │   ├── deployment.md                 # تعیناتی کی رہنما
-      │   ├── local_development.md          # مقامی سیٹ اپ کی ہدایات
-      │   ├── troubleshooting.md            # عام مسائل اور حل
-      │   ├── azure_account_setup.md        # Azure کے پیشگی تقاضے
-      │   └── images/                       # دستاویزی اثاثے
-      │
-      └── 📄 Project Metadata
-         ├── README.md                     # پروجیکٹ کا جائزہ
-         ├── CODE_OF_CONDUCT.md           # کمیونٹی رہنما اصول
-         ├── CONTRIBUTING.md              # تعاون کی رہنما
-         ├── LICENSE                      # لائسنس کی شرائط
-         └── next-steps.md                # تعیناتی کے بعد کی رہنمائی
-      ```
-
-### 3.1 کور ایپ فن تعمیر
-
-یہ ٹیمپلیٹ ایک **فول اسٹیک ویب ایپلیکیشن** نمونہ پر عمل کرتا ہے:
-
-- **بیک اینڈ**: Python FastAPI کے ساتھ Azure AI انضمام
-- **فرنٹ اینڈ**: TypeScript/React اور Vite بلڈ سسٹم
-- **انفراسٹرکچر**: کلاؤڈ وسائل کے لیے Azure Bicep ٹیمپلیٹس
-- **کنٹینرائزیشن**: مسلسل تعیناتی کے لیے Docker
-
-### 3.2 انفراسٹرکچر ایز کوڈ (بائسپ)
-
-انفراسٹرکچر کی سطح پر **Azure Bicep** ٹیمپلیٹس کو ماڈیولر انداز میں منظم کیا گیا ہے:
-
-   - **`main.bicep`**: تمام Azure وسائل کو منظم کرتا ہے
-   - **`core/` ماڈیولز**: مختلف خدمات کے لیے دوبارہ قابل استعمال اجزاء
-      - AI سروسز (Microsoft Foundry ماڈلز، AI سرچ)
-      - کنٹینر ہوسٹنگ (Azure Container Apps)
-      - نگرانی (Application Insights، Log Analytics)
-      - سیکیورٹی (Key Vault، Managed Identity)
-
-### 3.3 ایپلیکیشن ماخذ (`src/`)
-
-**بیک اینڈ API (`src/api/`)**:
-
-- FastAPI پر مبنی REST API
-- Foundry Agents انضمام
-- علم حاصل کرنے کے لیے سرچ انڈیکس مینجمنٹ
-- فائل اپ لوڈ اور پراسیسنگ کی صلاحیتیں
-
-**فرنٹ اینڈ (`src/frontend/`)**:
-
-- جدید React/TypeScript SPA
-- فوری ترقی اور بہتر بلڈ کے لیے Vite
-- ایجنٹ تعاملات کے لیے چیٹ انٹرفیس
-
-**نالج بیس (`src/files/`)**:
-
-- صارف اور مصنوعات کے نمونہ ڈیٹا
-- فائل کی بنیاد پر علم کی بازیابی کی مثال
-- JSON اور Markdown فارمیٹ کی مثالیں
-
-### 3.4 ڈیو اوپس اور آٹومیشن
-
-**اسکرپٹس (`scripts/`)**:
-
-- کراس پلیٹ فارم پاور شیل اور باش اسکرپٹس
-- ماحول کی تصدیق اور سیٹ اپ
-- تعیناتی کے بعد کی ترتیب
-- ماڈل کوٹا مینجمنٹ
-
-**Azure Developer CLI انضمام**:
-
-- `azd` ورک فلو کے لیے `azure.yaml` ترتیب
-- خودکار پروویژنگ اور تعیناتی
-- ماحول کے متغیرات کا انتظام
-
-### 3.5 جانچ اور معیار کی یقین دہانی
-
-**جانچ کے فریم ورک (`evals/`)**:
-
-- ایجنٹ کی کارکردگی کا جائزہ
-- سوال و جواب کی کوالٹی ٹیسٹنگ
-- خودکار تشخیصی پائپ لائن
-
-**AI سیفٹی (`airedteaming/`)**:
-
-- AI حفاظت کے لیے ریڈ ٹیم ٹیسٹنگ
-- سیکیورٹی کی کمزوریوں کی سکیننگ
-- ذمہ دار AI کی مشقیں
-
----
-
-## 4. مبارک ہو 🏆
-
-آپ نے کامیابی سے GitHub Copilot Chat کو MCP سرورز کے ساتھ استعمال کیا ہے تاکہ ریپوزیٹری کو دریافت کیا جا سکے۔
-
-- [X] Azure کے لیے GitHub Copilot کو فعال کیا
-- [X] ایپلیکیشن فن تعمیر کو سمجھا
-- [X] AZD ٹیمپلیٹ کی ساخت کو دریافت کیا
-
-یہ آپ کو اس ٹیمپلیٹ کے لیے _انفراسٹرکچر ایز کوڈ_ اثاثوں کا ایک احساس دیتا ہے۔ اگلی بار، ہم AZD کی ترتیب فائل کو دیکھیں گے۔
+جاری رکھیں [ایک ٹیمپلیٹ کو ترتیب دیں](4-Configure-AI-Template.md)۔
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**بیانِ احتیاط**:  
-اس دستاویز کا ترجمہ AI ترجمہ خدمت [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے کیا گیا ہے۔ اگرچہ ہم درستگی کے لیے کوشش کرتے ہیں، براہ کرم اس بات سے آگاہ رہیں کہ خودکار ترجموں میں غلطیاں یا کمی بیشی ہو سکتی ہے۔ اصل دستاویز اپنی مادری زبان میں مستند ماخذ سمجھی جائے گی۔ اہم معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے ہونے والی کسی بھی غلط فہمی یا غلط تشریح کی ذمہ داری ہم پر عائد نہیں ہوگی۔
+**ڈس کلیمر**:
+یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے ترجمہ کی گئی ہے۔ جبکہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم اس بات سے آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا عدم درستیاں ہو سکتی ہیں۔ اصل دستاویز اپنے مادری زبان میں مستند ماخذ سمجھی جائے گی۔ حساس معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کی ذمہ داری ہم قبول نہیں کرتے۔
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -34,27 +34,25 @@ Before we tear down the project, take a few minutes to do some open-ended explor
 1. Tearing down infrastructure is as easy as:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. Confirm the selected environment and review the resources to be deleted. This removes Azure resources and can destroy data. Keep the confirmation prompt for this learning workflow. Once complete you will see output similar to:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optional) If you now run `azd up` again, you will notice the gpt-4.1 model gets deployed since the environment variable was changed (and saved) in the local `.azure` folder. 
+1. Verify deletion in the portal and check for resources outside the deployment's scope. Cost reporting and quota updates can lag. Local `.azure` configuration remains unless you explicitly remove it.
 
-      Here is the model deployments **before**:
+1. `azd down --purge` additionally requests permanent deletion of supported soft-deleted resources. Use it only when recovery is not required and you understand retention/purge-protection policies. It does not guarantee immediate quota release.
 
-      ![Initial](../../../../../translated_images/en/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      And here it is **after**:
-      ![New](../../../../../translated_images/en/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Do not redeploy just to verify cleanup. A later intentional `azd up` can recreate resources using the remaining local inputs, and incurs charges again. Model updates normally use supported provisioning changes, not teardown.
 
 ---
 

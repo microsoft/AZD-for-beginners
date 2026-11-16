@@ -1,73 +1,75 @@
-# การตรวจสอบก่อนบินสำหรับการติดตั้ง AZD
+# การตรวจสอบก่อนการบินสำหรับการปรับใช้ AZD
 
-**เมนูบทเรียน:**
-- **📚 หน้าแรกคอร์ส**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
-- **📖 บทปัจจุบัน**: บทที่ 6 - การตรวจสอบและวางแผนก่อนติดตั้ง
+**การนำทางบทเรียน:**
+- **📚 หน้าแรกของหลักสูตร**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
+- **📖 บทปัจจุบัน**: บทที่ 6 - การตรวจสอบและวางแผนก่อนการปรับใช้
 - **⬅️ ก่อนหน้า**: [การเลือก SKU](sku-selection.md)
 - **➡️ บทถัดไป**: [บทที่ 7: การแก้ไขปัญหา](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 ที่เกี่ยวข้อง**: [บทที่ 4: คู่มือการติดตั้ง](../chapter-04-infrastructure/deployment-guide.md)
+- **🔧 ที่เกี่ยวข้อง**: [บทที่ 4: คู่มือการปรับใช้](../chapter-04-infrastructure/deployment-guide.md)
 
 ## บทนำ
 
-คู่มือที่ครอบคลุมนี้ให้สคริปต์และขั้นตอนการตรวจสอบก่อนการติดตั้งเพื่อให้แน่ใจว่าการติดตั้ง Azure Developer CLI เป็นไปอย่างสำเร็จก่อนเริ่ม Learn how to implement automated checks for authentication, resource availability, quotas, security compliance, and performance requirements เพื่อป้องกันความล้มเหลวในการติดตั้งและเพิ่มอัตราความสำเร็จของการติดตั้ง
+คู่มือครอบคลุมนี้นำเสนอสคริปต์และขั้นตอนการตรวจสอบก่อนการปรับใช้เพื่อให้แน่ใจว่าการปรับใช้ Azure Developer CLI ประสบความสำเร็จก่อนเริ่มต้น เรียนรู้วิธีการใช้การตรวจสอบอัตโนมัติสำหรับการตรวจสอบสิทธิ์ การมีทรัพยากร ปริมาณที่กำหนด การปฏิบัติตามด้านความปลอดภัย และข้อกำหนดด้านประสิทธิภาพ เพื่อป้องกันความล้มเหลวในการปรับใช้และเพิ่มอัตราความสำเร็จในการปรับใช้
 
 ## เป้าหมายการเรียนรู้
 
-โดยทำตามคู่มือนี้ คุณจะได้:
-- เชี่ยวชาญเทคนิคและสคริปต์การตรวจสอบอัตโนมัติก่อนติดตั้ง
-- เข้าใจกลยุทธ์การตรวจสอบครอบคลุมการรับรองความถูกต้อง สิทธิ์ และโควต้า
-- นำขั้นตอนการตรวจสอบความพร้อมใช้งานและความจุของทรัพยากรไปใช้
-- ตั้งค่าการตรวจสอบความปลอดภัยและความสอดคล้องกับนโยบายองค์กร
-- ออกแบบการประมาณค่าใช้จ่ายและการตรวจสอบงบประมาณ
-- สร้างระบบตรวจสอบก่อนบินแบบอัตโนมัติสำหรับสายงาน CI/CD
+เมื่อคุณทำคู่มือนี้เสร็จสิ้น คุณจะสามารถ:
+- เชี่ยวชาญเทคนิคและสคริปต์การตรวจสอบก่อนการปรับใช้อัตโนมัติ
+- เข้าใจกลยุทธ์การตรวจสอบอย่างครบถ้วนสำหรับการตรวจสอบสิทธิ์, สิทธิ์อนุญาต และปริมาณที่กำหนด
+- ใช้ขั้นตอนการตรวจสอบความพร้อมใช้งานและความสามารถของทรัพยากร
+- กำหนดค่าการตรวจสอบความปลอดภัยและการปฏิบัติตามนโยบายองค์กร
+- วางแผนการประมาณค่าใช้จ่ายและการตรวจสอบงบประมาณ
+- สร้างระบบตรวจสอบก่อนการบินแบบอัตโนมัติสำหรับสายงาน CI/CD
 
 ## ผลลัพธ์การเรียนรู้
 
-เมื่อสำเร็จ คุณจะสามารถ:
-- สร้างและใช้งานสคริปต์ตรวจสอบก่อนบินที่ครอบคลุม
-- ออกแบบเวิร์คโฟลว์ตรวจสอบอัตโนมัติสำหรับสถานการณ์การติดตั้งต่างๆ
-- นำขั้นตอนและนโยบายการตรวจสอบเฉพาะสภาพแวดล้อมไปใช้
-- ตั้งค่าการตรวจสอบและแจ้งเตือนล่วงหน้าสำหรับความพร้อมติดตั้ง
-- แก้ไขปัญหาก่อนติดตั้งและดำเนินการแก้ไขที่เหมาะสม
-- ผสานการตรวจสอบก่อนบินเข้ากับสายงาน DevOps และเวิร์คโฟลว์อัตโนมัติ
+เมื่อเสร็จสิ้นแล้ว คุณจะสามารถ:
+- สร้างและรันสคริปต์ตรวจสอบก่อนการบินอย่างครอบคลุม
+- ออกแบบเวิร์กโฟลว์การตรวจสอบอัตโนมัติสำหรับสถานการณ์การปรับใช้ต่างๆ
+- ใช้ขั้นตอนและนโยบายการตรวจสอบเฉพาะสำหรับแต่ละสภาพแวดล้อม
+- ตั้งค่าการเฝ้าระวังและแจ้งเตือนเพื่อเตรียมพร้อมสำหรับการปรับใช้
+- แก้ไขปัญหาก่อนการปรับใช้และใช้มาตรการแก้ไข
+- รวมการตรวจสอบก่อนการบินเข้ากับสายงาน DevOps และเวิร์กโฟลว์อัตโนมัติ
 
 ## สารบัญ
 
-- [ภาพรวม](#ภาพรวม)
-- [สคริปต์ตรวจสอบก่อนบินอัตโนมัติ](#สคริปต์ตรวจสอบก่อนบินอัตโนมัติ)
-- [รายการตรวจสอบด้วยตนเอง](#codeblock1)
-- [การตรวจสอบสภาพแวดล้อม](#✅-การสำรองข้อมูลและการกู้คืน)
-- [การตรวจสอบทรัพยากร](#การตรวจสอบสภาพแวดล้อม-production)
-- [การตรวจสอบความปลอดภัยและความสอดคล้อง](#security--compliance-checks)
-- [การวางแผนประสิทธิภาพและความจุ](#performance--capacity-planning)
-- [การแก้ปัญหาปัญหาทั่วไป](#troubleshooting-common-issues)
+- [ภาพรวม](#overview)
+- [สคริปต์ตรวจสอบก่อนการบินอัตโนมัติ](#automated-pre-flight-script)
+- [รายการตรวจสอบด้วยมือ](#manual-validation-checklist)
+- [การตรวจสอบสภาพแวดล้อม](#environment-validation)
+- [การตรวจสอบทรัพยากร](#resource-validation)
+- [การตรวจสอบความปลอดภัยและการปฏิบัติตาม](#security--compliance-checks)
+- [การวางแผนประสิทธิภาพและความจุ](capacity-planning.md)
+- [การแก้ไขปัญหาทั่วไป](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 ## ภาพรวม
 
-การตรวจสอบก่อนบินเป็นการตรวจสอบที่จำเป็นซึ่งดำเนินการก่อนการติดตั้งเพื่อให้แน่ใจว่า:
+การตรวจสอบก่อนการบินเป็นการตรวจสอบที่สำคัญซึ่งดำเนินการก่อนการปรับใช้เพื่อให้แน่ใจว่า:
 
-- **ความพร้อมใช้งานของทรัพยากร** และโควต้าในภูมิภาคเป้าหมาย
-- **การรับรองตัวตนและสิทธิ์** ถูกตั้งค่าอย่างถูกต้อง
-- **ความถูกต้องของเทมเพลต** และพารามิเตอร์
-- **การเชื่อมต่อเครือข่าย** และการพึ่งพา
-- **ความสอดคล้องด้านความปลอดภัย** กับนโยบายองค์กร
-- **การประมาณค่าใช้จ่าย** อยู่ในข้อจำกัดงบประมาณ
+- **การมีทรัพยากร** และปริมาณที่กำหนดในภูมิภาคเป้าหมาย
+- **การตรวจสอบสิทธิ์และสิทธิ์อนุญาต** ได้รับการตั้งค่าอย่างถูกต้อง
+- **ความถูกต้องของแม่แบบ** และพารามิเตอร์
+- **การเชื่อมต่อเครือข่าย** และการพึ่งพิง
+- **การปฏิบัติตามข้อกำหนดด้านความปลอดภัย** ตามนโยบายองค์กร
+- **การประมาณค่าใช้จ่าย** ให้อยู่ในงบประมาณที่กำหนด
 
-### เมื่อใดควรเรียกใช้การตรวจสอบก่อนบิน
+### เมื่อใดควรดำเนินการตรวจสอบก่อนการบิน
 
-- **ก่อนติดตั้งครั้งแรก** ในสภาพแวดล้อมใหม่
-- **หลังมีการเปลี่ยนแปลงเทมเพลตครั้งสำคัญ**
-- **ก่อนติดตั้งในสภาพแวดล้อมจริง (production)**
-- **เมื่อเปลี่ยนภูมิภาค Azure**
+- **ก่อนการปรับใช้ครั้งแรก** ในสภาพแวดล้อมใหม่
+- **หลังจากการเปลี่ยนแปลงแม่แบบครั้งใหญ่**
+- **ก่อนการปรับใช้ในระบบผลิต**
+- **เมื่อเปลี่ยนภูมิภาคของ Azure**
 - **เป็นส่วนหนึ่งของสายงาน CI/CD**
 
 ---
 
-## สคริปต์ตรวจสอบก่อนบินอัตโนมัติ
+## สคริปต์ตรวจสอบก่อนการบินแบบอัตโนมัติ
 
-### เครื่องมือตรวจสอบก่อนบินบน PowerShell
+> **ขอบเขตและข้อกำหนดเบื้องต้น:** นี่เป็นสคริปต์เริ่มต้นให้อัปโหลดไว้ในโปรเจคของคุณเอง ไม่ใช่ไฟล์ท้องถิ่นที่มาพร้อมกับบทนี้ เวอร์ชัน PowerShell ต้องการ PowerShell **7.3+** (รองรับการแจ้งข้อผิดพลาดคำสั่งเนทีฟ) และโมดูล `powershell-yaml` สำหรับ `ConvertFrom-Yaml` เวอร์ชัน Bash ต้องการ Bash, `jq`, Python 3.10+ และ PyYAML ทั้งสองเวอร์ชันต้องใช้ Azure CLI, azd และโปรเจค Bicep ที่ทำงานได้ เป็นการวินิจฉัย ไม่ใช่การพิสูจน์ความพร้อมใช้งาน ความสามารถ หรือการปฏิบัติตาม ตรวจสอบฮุกแม่แบบก่อน `azd provision --preview`; ฮุกเหล่านี้สามารถรันคำสั่งโปรเจคตามอำเภอใจได้
+
+### ตัวตรวจสอบก่อนการบิน PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +102,14 @@ param(
     [switch]$Detailed
 )
 
-# การใส่สีสำหรับผลลัพธ์
+# Fail native commands into catch blocks instead of reporting false successes.
+$ErrorActionPreference = 'Stop'
+if ($PSVersionTable.PSVersion -lt [version]'7.3') {
+    throw 'PowerShell 7.3+ is required for this script.'
+}
+$PSNativeCommandUseErrorActionPreference = $true
+
+# Color coding for output
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +137,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # ตรวจสอบการติดตั้ง AZD
+    # Check AZD installation
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +147,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # ตรวจสอบการติดตั้ง Azure CLI
+    # Check Azure CLI installation
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +157,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # ตรวจสอบเวอร์ชัน PowerShell
+    # Check PowerShell version
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,23 +172,23 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # ตรวจสอบการยืนยันตัวตน AZD
+        # Check AZD authentication
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
-        if ($azdAuth.status -eq "Logged-in") {
-            Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
+        if ($azdAuth.status -eq "success") {
+            Write-Status "AZD authentication" "Success" "Token available; expires $($azdAuth.expiresOn)"
         }
         else {
             Write-Status "AZD authentication" "Error" "Run 'azd auth login'"
             return $false
         }
         
-        # ตรวจสอบการยืนยันตัวตน Azure CLI
+        # Check Azure CLI authentication
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # ตรวจสอบการเข้าถึงสมัครสมาชิก
+        # Validate subscription access
         $subscriptionId = $azAccount.id
-        $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
+        $subscription = az account show --subscription $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
         
         return $true
@@ -194,39 +203,29 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # รับการมอบหมายบทบาทของผู้ใช้ปัจจุบัน
+        # Get current user's role assignments
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
             $_.roleDefinitionName -eq "Contributor" -or 
-            $_.roleDefinitionName -eq "Owner" -or
-            $_.roleDefinitionName -eq "User Access Administrator"
+            $_.roleDefinitionName -eq "Owner"
         }
         
         if ($hasContributor) {
-            Write-Status "Required permissions" "Success" "Contributor or higher role found"
+            Write-Status "Role assignment inventory" "Info" "Contributor/Owner found; verify effective scope, policy and any role-assignment permissions separately"
         }
         else {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # ทดสอบการสร้างกลุ่มทรัพยากร (ถ้ามีการระบุ)
+        # Test resource group creation (if specified)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # ทดสอบความสามารถในการสร้างกลุ่มทรัพยากร
-                try {
-                    az group create --name "preflight-test-rg" --location $Location --output none
-                    az group delete --name "preflight-test-rg" --yes --output none
-                    Write-Status "Resource group creation" "Success" "Can create resource groups"
-                }
-                catch {
-                    Write-Status "Resource group creation" "Error" "Cannot create resource groups"
-                    return $false
-                }
+                Write-Status "Resource group creation" "Warning" "Group does not exist. Review subscription-scope permissions; this diagnostic does not create/delete test groups."
             }
         }
         
@@ -242,25 +241,28 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # ตรวจสอบโควตาคอมพิวต์
+        # Check compute quotas
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # ตรวจสอบโควตาเฉพาะ
+        # Check specific quotas
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
-        if ($coreQuota) {
+        if ($coreQuota -and $coreQuota.limit -gt 0) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
             if ($usagePercent -lt 80) {
                 Write-Status "Compute cores quota" "Success" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
+            } else {
+                Write-Status "Compute cores quota" "Warning" "Missing or zero quota; verify service requirements"
             }
             else {
                 Write-Status "Compute cores quota" "Warning" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
             }
         }
         
-        # ตรวจสอบขีดจำกัดบริการแอป
+        # Check App Service limits
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
-            if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
+            $displayLocation = az account list-locations --query "[?name=='$Location'].displayName | [0]" -o tsv
+            if ($appServiceUsage | Where-Object { $_.name -eq $Location -or $_.name -eq $displayLocation }) {
                 Write-Status "App Service availability" "Success" "Available in $Location"
             }
             else {
@@ -271,28 +273,27 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # ตรวจสอบขีดจำกัดบัญชีเก็บข้อมูล
-        $storageAccounts = az storage account list --output json | ConvertFrom-Json
-        $accountCount = ($storageAccounts | Measure-Object).Count
-        if ($accountCount -lt 200) {
-            Write-Status "Storage account limit" "Success" "$accountCount/250 storage accounts"
+        # Check storage account limits
+        $storageUsage = @(az storage account show-usage --location $Location --output json | ConvertFrom-Json)[0]
+        if ($storageUsage -and $storageUsage.limit -gt 0 -and $storageUsage.currentValue -lt $storageUsage.limit) {
+            Write-Status "Storage account quota" "Info" "$($storageUsage.currentValue)/$($storageUsage.limit) in $Location"
         }
         else {
-            Write-Status "Storage account limit" "Warning" "$accountCount/250 storage accounts"
+            Write-Status "Storage account quota" "Warning" "No headroom or missing quota data"
         }
         
         return $true
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # ไม่บล็อก
+        return $true # Non-blocking
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # ทดสอบจุดเชื่อมต่อ Azure
+    # Test Azure endpoints
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -306,13 +307,19 @@ function Test-NetworkConnectivity {
             Write-Status "Connectivity to $endpoint" "Success" "Status: $($response.StatusCode)"
         }
         catch {
-            Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+            # A 401/403/404 response may still prove HTTP reachability.
+            if ($_.Exception.Response) {
+                Write-Status "Connectivity to $endpoint" "Info" "HTTP response received; this is not an authorization test"
+            } else {
+                Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+                return $false
+            }
         }
     }
     
-    # ทดสอบการแก้ไข DNS
+    # Test DNS resolution
     try {
-        $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
+        $dnsResult = [System.Net.Dns]::GetHostAddresses("management.azure.com")
         Write-Status "DNS resolution" "Success" "Resolved successfully"
     }
     catch {
@@ -326,18 +333,21 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # ตรวจสอบว่า azure.yaml มีอยู่หรือไม่
+    # Check if azure.yaml exists
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # วิเคราะห์ azure.yaml
+        # Parse azure.yaml
         try {
+            if (-not (Get-Command ConvertFrom-Yaml -ErrorAction SilentlyContinue)) {
+                throw 'ConvertFrom-Yaml requires the powershell-yaml module.'
+            }
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # ตรวจสอบบริการ
+            # Validate services
             if ($azureYaml.services) {
-                $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
+                $serviceCount = $azureYaml.services.Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
             }
             else {
@@ -345,7 +355,7 @@ function Test-TemplateValidation {
             }
         }
         catch {
-            Write-Status "azure.yaml parsing" "Error" "Invalid YAML format"
+            Write-Status "azure.yaml parsing" "Error" $_.Exception.Message
             return $false
         }
     }
@@ -354,13 +364,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # ตรวจสอบไฟล์โครงสร้างพื้นฐาน
+    # Check for infrastructure files
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # ตรวจสอบ main.bicep ถ้ามีอยู่
+            # Validate main.bicep if it exists
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,12 +391,12 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 ใหม่: ทดสอบการแสดงตัวอย่างโครงสร้างพื้นฐาน (ลองรันแบบปลอดภัย)
+    # Preview ARM changes only after reviewing the project's hooks.
     try {
-        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        Write-Status "Infrastructure preview test" "Info" "Previewing proposed changes (not a capacity or deployment guarantee)..."
         $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
-            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+            Write-Status "Infrastructure preview" "Success" "Preview completed; review changes and remaining diagnostics"
         }
         else {
             Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
@@ -403,7 +413,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # ตรวจสอบว่าตำแหน่งถูกต้องหรือไม่
+        # Check if location is valid
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,13 +425,13 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # ตรวจสอบการมีบริการในภูมิภาค
+        # Check service availability in region
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
             try {
                 $providers = az provider show --namespace $service --output json | ConvertFrom-Json
-                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $Location }
+                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $validLocation.displayName }
                 
                 if ($resourceTypes) {
                     Write-Status "$service availability" "Success" "Available in $Location"
@@ -446,11 +456,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # การประมาณค่าใช้จ่ายพื้นฐาน (จะต้องใช้ Azure Pricing API สำหรับการประมาณที่แม่นยำ)
+    # Basic cost estimation (would need Azure Pricing API for accurate estimates)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # ตรวจสอบว่ามีงบประมาณหรือไม่
+    # Check if budget exists
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +480,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # ตรวจสอบแนวปฏิบัติด้านความปลอดภัยทั่วไป
+    # Text-search heuristics only: presence of keywords is not compliance proof.
     try {
-        # ตรวจสอบว่าตั้งค่า Key Vault หรือไม่
+        # Check if Key Vault is configured
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +490,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # ตรวจสอบการใช้ตัวตนที่จัดการ
+        # Check for managed identity usage
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +498,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # ตรวจสอบการบังคับใช้ HTTPS
+        # Check for HTTPS enforcement
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +514,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# การดำเนินการหลัก
+# Main execution
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +526,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # รันการตรวจสอบทั้งหมด
+    # Run all checks
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -527,7 +537,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # สรุปผล
+    # Summary
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -547,7 +557,7 @@ function Invoke-PreflightCheck {
     Write-Host ""
     if ($allPassed) {
         Write-Host "${Green}✓ All pre-flight checks passed ($passedCount/$totalCount)${Reset}"
-        Write-Host "${Green}✓ Ready for deployment!${Reset}"
+        Write-Host "${Green}✓ Implemented checks passed; review warnings and untested requirements.${Reset}"
         exit 0
     }
     else {
@@ -557,26 +567,27 @@ function Invoke-PreflightCheck {
     }
 }
 
-# รันการตรวจสอบก่อนบิน
+# Run the pre-flight check
+azd env select $EnvironmentName
 Invoke-PreflightCheck
 ```
 
-### เครื่องมือตรวจสอบก่อนบินบน Bash
+### ตัวตรวจสอบก่อนการบิน Bash
 
 ```bash
 #!/bin/bash
-# เวอร์ชัน Bash ของการตรวจสอบก่อนบินสำหรับระบบ Unix/Linux
+# Bash version of pre-flight checks for Unix/Linux systems
 
 set -euo pipefail
 
-# รหัสสี
+# Color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # ไม่มีสี
+NC='\033[0m' # No Color
 
-# ตัวแปรทั่วโลก
+# Global variables
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -606,7 +617,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # ตรวจสอบการติดตั้ง AZD
+    # Check AZD installation
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +626,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # ตรวจสอบการติดตั้ง Azure CLI
+    # Check Azure CLI installation
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,12 +635,16 @@ check_prerequisites() {
         return 1
     fi
     
-    # ตรวจสอบการติดตั้ง jq
+    # Check jq installation
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
-        print_status "jq not found" "warning" "Install jq for better JSON parsing"
+        print_status "jq not found" "error" "jq is required"
+        return 1
     fi
+    python3 -c "import yaml" >/dev/null 2>&1 || {
+        print_status "Python/PyYAML not found" "error" "Python 3 and PyYAML are required"; return 1;
+    }
     
     return 0
 }
@@ -637,16 +652,16 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # ตรวจสอบการยืนยันตัวตนของ AZD
-    if azd auth login --check-status >/dev/null 2>&1; then
-        local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
-        print_status "AZD authentication" "success" "User: $principal_name"
+    # Check AZD authentication
+    # --check-status returns exit code 0 even when unauthenticated; inspect JSON.
+    if azd auth login --check-status --output json | jq -e '.status == "success"' >/dev/null; then
+        print_status "AZD authentication" "success" "Token available"
     else
         print_status "AZD authentication" "error" "Run 'azd auth login'"
         return 1
     fi
     
-    # ตรวจสอบการยืนยันตัวตนของ Azure CLI
+    # Check Azure CLI authentication
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,11 +676,11 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # ตรวจสอบ azure.yaml
+    # Check azure.yaml
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # การตรวจสอบความถูกต้องพื้นฐานของ YAML
+        # Basic YAML validation
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -677,13 +692,13 @@ check_template_validation() {
         return 1
     fi
     
-    # ตรวจสอบไฟล์โครงสร้างพื้นฐาน
+    # Check infrastructure files
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # ตรวจสอบความถูกต้องของ main.bicep หากมี
+            # Validate main.bicep if exists
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +721,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # ตรวจสอบว่าตำแหน่งถูกต้องหรือไม่
+    # Check if location is valid
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,11 +729,13 @@ check_regional_availability() {
         return 1
     fi
     
-    # ตรวจสอบความพร้อมใช้งานของบริการ
+    # Check service availability
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
+    local display_location
+    display_location=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
     for service in "${services[@]}"; do
-        if az provider show --namespace "$service" --query "resourceTypes[?locations[?contains(@, '$LOCATION')]]" --output tsv | grep -q .; then
+        if az provider show --namespace "$service" --query "resourceTypes[?contains(locations, '$display_location')]" --output tsv | grep -q .; then
             print_status "$service availability" "success" "Available in $LOCATION"
         else
             print_status "$service availability" "warning" "May not be available in $LOCATION"
@@ -729,8 +746,8 @@ check_regional_availability() {
 }
 
 main() {
-    # วิเคราะห์อาร์กิวเมนต์บรรทัดคำสั่ง
-    while [[ $# -gt 0 ]]; ทำ
+    # Parse command line arguments
+    while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
                 ENVIRONMENT_NAME="$2"
@@ -755,7 +772,7 @@ main() {
         esac
     done
     
-    # ตรวจสอบความถูกต้องของพารามิเตอร์ที่จำเป็น
+    # Validate required parameters
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,20 +785,22 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # รันการตรวจสอบ
+    # Run checks
     local all_passed=true
     
     check_prerequisites || all_passed=false
+    if ! $all_passed; then exit 1; fi
+    azd env select "$ENVIRONMENT_NAME" || exit 1
     check_authentication || all_passed=false
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # สรุป
+    # Summary
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
         echo -e "${GREEN}✓ All pre-flight checks passed${NC}"
-        echo -e "${GREEN}✓ Ready for deployment!${NC}"
+        echo -e "${GREEN}✓ Implemented checks passed; review warnings and untested requirements.${NC}"
         exit 0
     else
         echo -e "${RED}✗ Some pre-flight checks failed${NC}"
@@ -790,100 +809,103 @@ main() {
     fi
 }
 
-# รันฟังก์ชันหลัก
+# Run main function
 main "$@"
 ```
 
 ---
 
-## รายการตรวจสอบด้วยตนเอง
+## รายการตรวจสอบด้วยมือ
 
-### รายการตรวจสอบก่อนติดตั้ง
+### รายการตรวจสอบก่อนการปรับใช้
 
-พิมพ์รายการนี้ออกและตรวจสอบแต่ละข้อก่อนติดตั้ง:
+พิมพ์รายการนี้และตรวจสอบแต่ละรายการก่อนการปรับใช้:
 
 #### ✅ การตั้งค่าสภาพแวดล้อม
-- [ ] ติดตั้ง AZD CLI และอัปเดตเป็นเวอร์ชันล่าสุด
-- [ ] ติดตั้ง Azure CLI และเข้าสู่ระบบเรียบร้อยแล้ว
-- [ ] เลือก subscription Azure ที่ถูกต้อง
-- [ ] ชื่อสภาพแวดล้อมไม่ซ้ำและเป็นไปตามมาตรฐานการตั้งชื่อ
-- [ ] ระบุหรือสามารถสร้าง resource group เป้าหมายได้
+- [ ] ติดตั้ง AZD CLI และอัปเดตเป็นเวอร์ชันล่าสุดแล้ว
+- [ ] ติดตั้ง Azure CLI และเข้าสู่ระบบสำเร็จแล้ว
+- [ ] เลือกการสมัครใช้งาน Azure ถูกต้อง
+- [ ] ชื่อสภาพแวดล้อมไม่ซ้ำและเป็นไปตามข้อกำหนดการตั้งชื่อ
+- [ ] ระบุหรือตั้งค่ากลุ่มทรัพยากรเป้าหมายได้
 
-#### ✅ การรับรองตัวตนและสิทธิ์
-- [ ] เข้าสู่ระบบสำเร็จด้วย `azd auth login`
-- [ ] ผู้ใช้มีบทบาท Contributor บน subscription/resource group เป้าหมาย
-- [ ] ตั้งค่า service principal สำหรับ CI/CD (ถ้ามี)
-- [ ] ไม่มีใบรับรองหรือข้อมูลรับรองหมดอายุ
+#### ✅ การตรวจสอบสิทธิ์และสิทธิ์อนุญาต
+- [ ] เข้าสู่ระบบด้วย `azd auth login` สำเร็จแล้ว
+- [ ] ผู้ใช้มีบทบาท Contributor ในการสมัครใช้งาน/กลุ่มทรัพยากรเป้าหมาย
+- [ ] ถ้าแม่แบบสร้างการกำหนดบทบาท ตัวตนที่ทำการปรับใช้ต้องมีสิทธิ์กำหนดบทบาทเฉพาะลำดับ (Contributor เพียงอย่างเดียวไม่เพียงพอ)
+- [ ] กำหนดค่าบริการ principal สำหรับ CI/CD (ถ้ามี)
+- [ ] ไม่มีใบรับรองหรือข้อมูลรับรองที่หมดอายุ
 
-#### ✅ การตรวจสอบเทมเพลต
-- [ ] ไฟล์ `azure.yaml` มีอยู่และเป็น YAML ที่ถูกต้อง
-- [ ] บริการทั้งหมดใน azure.yaml มีซอร์สโค้ดที่สอดคล้อง
-- [ ] เทมเพลต Bicep ในไดเรกทอรี `infra/` มีพร้อมใช้งาน
-- [ ] ไฟล์ `main.bicep` คอมไพล์ไม่มีข้อผิดพลาด (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 แบบจำลองโครงสร้างพื้นฐาน preview รันสำเร็จ (`azd provision --preview`)
-- [ ] พารามิเตอร์ที่จำเป็นทั้งหมดมีค่าเริ่มต้นหรือจะถูกกำหนด
-- [ ] ไม่มีข้อมูลลับที่ฝังอยู่ในเทมเพลต
+#### ✅ การตรวจสอบแม่แบบ
+- [ ] `azure.yaml` มีอยู่และเป็น YAML ที่ถูกต้อง
+- [ ] บริการทั้งหมดใน azure.yaml มีซอร์สโค้ดที่สอดคล้องกัน
+- [ ] แม่แบบ Bicep ในไดเรกทอรี `infra/` มีอยู่ครบ
+- [ ] `main.bicep` คอมไพล์โดยไม่มีข้อผิดพลาด (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 รีวิวโครงสร้างพื้นฐานรันสำเร็จ (`azd provision --preview`)
+- [ ] พารามิเตอร์ที่จำเป็นทั้งหมดมีค่าเริ่มต้นหรือจะถูกกำหนดในภายหลัง
+- [ ] ไม่มีความลับที่ฝังตัวในแม่แบบ
 
 #### ✅ การวางแผนทรัพยากร
 - [ ] เลือกและตรวจสอบภูมิภาค Azure เป้าหมายแล้ว
-- [ ] บริการ Azure ที่ต้องการพร้อมใช้งานในภูมิภาคนั้น
-- [ ] มีโควต้าที่เพียงพอสำหรับทรัพยากรที่วางแผน
-- [ ] ตรวจสอบความขัดแย้งของชื่อทรัพยากร
-- [ ] เข้าใจความสัมพันธ์การพึ่งพาระหว่างทรัพยากร
+- [ ] มีบริการ Azure ที่จำเป็นในภูมิภาคเป้าหมาย
+- [ ] มีปริมาณที่เพียงพอสำหรับทรัพยากรที่วางแผนไว้
+- [ ] ตรวจสอบความขัดแย้งของชื่อทรัพยากรแล้ว
+- [ ] เข้าใจความพึ่งพาระหว่างทรัพยากร
 
 #### ✅ เครือข่ายและความปลอดภัย
-- [ ] ตรวจสอบการเชื่อมต่อเครือข่ายไปยังจุดเชื่อมต่อ Azure
-- [ ] ตั้งค่ากำแพงไฟร์วอลล์/พร็อกซีถ้าจำเป็น
+- [ ] ตรวจสอบการเชื่อมต่อเครือข่ายกับปลายทาง Azure แล้ว
+- [ ] ตั้งค่ากำแพงไฟร์วอลล์/พร็อกซีหากจำเป็น
 - [ ] ตั้งค่า Key Vault สำหรับการจัดการความลับ
-- [ ] ใช้ managed identities เท่าที่ทำได้
-- [ ] เปิดใช้งาน HTTPS สำหรับเว็บแอปพลิเคชัน
+- [ ] ใช้ตัวตนที่จัดการได้เมื่อเป็นไปได้
+- [ ] เปิดบังคับใช้ HTTPS สำหรับเว็บแอปพลิเคชัน
 
 #### ✅ การจัดการค่าใช้จ่าย
-- [ ] ประมาณค่าใช้จ่ายโดยใช้ Azure Pricing Calculator
-- [ ] ตั้งค่าการแจ้งเตืองบประมาณถ้าจำเป็น
-- [ ] เลือก SKU ที่เหมาะสมกับประเภทสภาพแวดล้อม
-- [ ] พิจารณาความจุสำรองสำหรับงานใน production
+- [ ] คำนวณประมาณค่าโดยใช้เครื่องมือ Azure Pricing Calculator
+- [ ] ตั้งค่าการแจ้งเตือนงบประมาณหากจำเป็น
+- [ ] เลือก SKU ที่เหมาะสมสำหรับประเภทสภาพแวดล้อม
+- [ ] พิจารณาความจุสำรองสำหรับงานในระบบผลิต
 
-#### ✅ การตรวจสอบและความสามารถสังเกต
-- [ ] ตั้งค่า Application Insights ในเทมเพลต
-- [ ] วางแผนพื้นที่ Log Analytics
+#### ✅ การเฝ้าระวังและการตรวจสอบ
+- [ ] ตั้งค่า Application Insights ในแม่แบบแล้ว
+- [ ] วางแผน Log Analytics workspace
 - [ ] กำหนดกฎแจ้งเตือนสำหรับเมตริกที่สำคัญ
-- [ ] มี endpoint ตรวจสุขภาพในแอปพลิเคชัน
+- [ ] ติดตั้ง endpoints สำหรับตรวจสอบสุขภาพในแอปพลิเคชัน
 
-#### ✅ การสำรองข้อมูลและการกู้คืน
+#### ✅ การสำรองและการกู้คืน
 - [ ] กำหนดกลยุทธ์การสำรองข้อมูลสำหรับทรัพยากรข้อมูล
-- [ ] ระบุ Recovery Time Objectives (RTO)
-- [ ] ระบุ Recovery Point Objectives (RPO)
-- [ ] มีแผน disaster recovery สำหรับ production
+- [ ] บันทึกวัตถุประสงค์เวลาการกู้คืน (RTO)
+- [ ] บันทึกวัตถุประสงค์จุดกู้คืน (RPO)
+- [ ] มีแผนกู้คืนเหตุภัยพิบัติสำหรับระบบผลิต
 
 ---
 
 ## การตรวจสอบสภาพแวดล้อม
 
-### การตรวจสอบสภาพแวดล้อมการพัฒนา
+การตรวจสอบ `grep` ต่อไปนี้เป็นเพียงคำเตือนประกอบเท่านั้น คำที่ตรงกันไม่ได้หมายความว่าคุณสมบัตินั้นตั้งค่าสำหรับทรัพยากรถูกต้อง และการขาดคำไม่ได้หมายความว่าไม่มี (โมดูล/ค่าเริ่มต้นอาจให้คุณสมบัตินั้น) อย่าใช้สิ่งเหล่านี้เป็นเกณฑ์การปฏิบัติตามของระบบผลิต
+
+### การตรวจสอบสภาพแวดล้อมสำหรับการพัฒนา
 
 ```bash
 #!/bin/bash
-# การตรวจสอบเฉพาะสำหรับสภาพแวดล้อมการพัฒนา
+# Development environment specific validations
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # ตรวจสอบการตั้งค่าที่เหมาะสำหรับการพัฒนา
+    # Check for development-friendly configurations
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # ตรวจสอบการตั้งค่าการปิดเครื่องอัตโนมัติ
+    # Check for auto-shutdown configurations
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # ตรวจสอบความถูกต้องของการตั้งค่าฐานข้อมูลสำหรับการพัฒนา
+    # Validate development database configurations
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,37 +914,37 @@ validate_dev_environment() {
 }
 ```
 
-### การตรวจสอบสภาพแวดล้อม production
+### การตรวจสอบสภาพแวดล้อมสำหรับระบบผลิต
 
 ```bash
 #!/bin/bash
-# การตรวจสอบเฉพาะสภาพแวดล้อมการผลิต
+# Production environment specific validations
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # ตรวจสอบการตั้งค่าความพร้อมใช้งานสูง
+    # Check for high availability configurations
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # ตรวจสอบการตั้งค่าการสำรองข้อมูล
+    # Check for backup configurations
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # ตรวจสอบการตั้งค่าการเฝ้าติดตาม
+    # Validate monitoring setup
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # ตรวจสอบการตั้งค่าความปลอดภัย
+    # Check for security configurations
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -935,7 +957,7 @@ validate_prod_environment() {
 
 ## การตรวจสอบทรัพยากร
 
-### สคริปต์ตรวจสอบโควต้า
+### สคริปต์ตรวจสอบปริมาณที่กำหนด
 
 ```python
 #!/usr/bin/env python3
@@ -948,17 +970,17 @@ import subprocess
 import sys
 from typing import Dict, List, Tuple
 
-def run_command(command: List[str]) -> Dict:
+def run_command(command: List[str]) -> dict | list | None:
     """Run Azure CLI command and return JSON result"""
     try:
         result = subprocess.run(command, capture_output=True, text=True, check=True)
         return json.loads(result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error running command {' '.join(command)}: {e}")
-        return {}
+        return None
     except json.JSONDecodeError as e:
         print(f"Error parsing JSON: {e}")
-        return {}
+        return None
 
 def check_compute_quotas(location: str) -> bool:
     """Check compute quotas in specified location"""
@@ -976,7 +998,10 @@ def check_compute_quotas(location: str) -> bool:
         if quota_item['name']['value'] in critical_quotas:
             current = quota_item['currentValue']
             limit = quota_item['limit']
-            usage_percent = (current / limit) * 100 if limit > 0 else 0
+            if limit <= 0:
+                print(f"❌ No quota for {quota_item['name']['value']}")
+                return False
+            usage_percent = (current / limit) * 100
             
             status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
             print(f"{status} {quota_item['name']['localizedValue']}: {current}/{limit} ({usage_percent:.1f}%)")
@@ -990,15 +1015,17 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # ดึงบัญชีเก็บข้อมูลในสมัครสมาชิก
-    accounts = run_command(['az', 'storage', 'account', 'list'])
+    # Retrieve regional quota rather than assuming a subscription-wide constant.
+    usages = run_command(['az', 'storage', 'account', 'show-usage', '--location', location])
     
-    if accounts is None:
+    if not usages:
         print("❌ Could not retrieve storage account information")
         return False
     
-    account_count = len(accounts)
-    max_accounts = 250  # ขีดจำกัด Azure เริ่มต้น
+    account_count = usages['currentValue']
+    max_accounts = usages['limit']
+    if max_accounts <= 0:
+        return False
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,18 +1038,14 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # ตรวจสอบเครือข่ายเสมือน
-    vnets = run_command(['az', 'network', 'vnet', 'list'])
-    if vnets is not None:
-        vnet_count = len(vnets)
-        print(f"✅ Virtual Networks: {vnet_count}/1000")
-    
-    # ตรวจสอบที่อยู่ IP สาธารณะ
-    public_ips = run_command(['az', 'network', 'public-ip', 'list'])
-    if public_ips is not None:
-        ip_count = len(public_ips)
-        print(f"✅ Public IP Addresses: {ip_count}/1000")
-    
+    usages = run_command(['az', 'network', 'list-usages', '--location', location])
+    if not usages:
+        return False
+    for item in usages:
+        current, limit = item['currentValue'], item['limit']
+        print(f"{item['name']['value']}: {current}/{limit}")
+        if limit <= 0 or current >= limit:
+            return False
     return True
 
 def main():
@@ -1034,19 +1057,20 @@ def main():
     
     print("🔍 Azure Quota and Limits Validation")
     print(f"📍 Location: {location}")
-    print(f"⏰ Time: {subprocess.run(['date'], capture_output=True, text=True).stdout.strip()}")
+    from datetime import datetime, timezone
+    print(f"⏰ Time: {datetime.now(timezone.utc).isoformat()}")
     
     all_passed = True
     
-    # รันการตรวจสอบ
+    # Run checks
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # สรุปผล
+    # Summary
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
-        print("✅ All quota checks passed - sufficient capacity available")
+        print("✅ Implemented quota thresholds passed; not a capacity reservation")
         sys.exit(0)
     else:
         print("❌ Some quota limits are near capacity - consider requesting increases")
@@ -1058,20 +1082,20 @@ if __name__ == "__main__":
 
 ---
 
-## การตรวจสอบความปลอดภัยและความสอดคล้อง
+## การตรวจสอบความปลอดภัยและการปฏิบัติตาม
 
 ### สคริปต์ตรวจสอบความปลอดภัย
 
 ```bash
 #!/bin/bash
-# การตรวจสอบความปลอดภัยและการปฏิบัติตามสำหรับการปรับใช้ AZD
+# Security and compliance validation for AZD deployments
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # ตรวจสอบการใช้งาน Key Vault
+    # Check for Key Vault usage
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # ตรวจสอบการใช้งาน managed identity
+    # Check for managed identity usage
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # ตรวจสอบการบังคับใช้ HTTPS
+    # Check for HTTPS enforcement
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1119,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # ตรวจสอบเวอร์ชัน TLS ขั้นต่ำ
+    # Check for minimum TLS version
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1127,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # ตรวจสอบข้อจำกัดการเข้าถึงสาธารณะ
+    # Check for public access restrictions
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1135,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # ตรวจสอบกลุ่มความปลอดภัยเครือข่าย
+    # Check for network security groups
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1148,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # ตรวจสอบการเข้ารหัสข้อมูล
+    # Check for data encryption
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # ตรวจสอบการบันทึกการตรวจสอบ
+    # Check for audit logging
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # ตรวจสอบนโยบายการสำรองข้อมูลและการเก็บรักษา
+    # Check for backup and retention policies
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1170,7 @@ check_compliance_requirements() {
     fi
 }
 
-# การดำเนินการหลัก
+# Main execution
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1157,13 +1181,13 @@ main() {
         exit 1
     fi
     
-    local security_issues
-    security_issues=$(check_security_practices)
+    local security_issues=0
+    check_security_practices || security_issues=$?
     check_compliance_requirements
     
     echo -e "\n=== Security Check Summary ==="
     if [[ $security_issues -eq 0 ]]; then
-        echo "✅ All security checks passed"
+        echo "✅ Text-search reminders passed; this is not a security/compliance assessment"
         exit 0
     else
         echo "⚠️  $security_issues security recommendations found"
@@ -1177,9 +1201,9 @@ main "$@"
 
 ---
 
-## การผสานรวมกับ CI/CD
+## การรวมเข้ากับ CI/CD
 
-### การผสานรวมกับ GitHub Actions
+### การรวม GitHub Actions
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1203,20 +1227,36 @@ on:
 
 jobs:
   preflight:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
     - name: Install AZD
       uses: Azure/setup-azd@v0.1.0
+      with:
+        version: 1.37.2
     
-    - name: Install Azure CLI
-      uses: azure/setup-azure@v3
+    - name: Verify prerequisites
+      run: |
+        az version
+        jq --version
+        python3 -c "import yaml"
     
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+    - name: AZD Login
+      run: |
+        azd auth login --client-id "${{ vars.AZURE_CLIENT_ID }}" \
+          --tenant-id "${{ vars.AZURE_TENANT_ID }}" \
+          --federated-credential-provider github
     
     - name: Run Pre-flight Checks
       run: |
@@ -1230,15 +1270,11 @@ jobs:
         chmod +x ./scripts/security-check.sh
         ./scripts/security-check.sh
     
-    - name: Upload Results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: preflight-results
-        path: preflight-results.json
 ```
 
-### การผสานรวมกับ Azure DevOps
+กำหนดค่าสมาชิกประสานการรับรองความถูกต้องสำหรับเวิร์กโฟลว์นี้และสร้าง/กู้คืนสภาพแวดล้อม azd ที่เลือกก่อนรันสคริปต์ที่บันทึกไว้ ตัวอย่างเหล่านี้แสดงผลลัพธ์บนคอนโซลเท่านั้น; ไม่มีการสร้างไฟล์ `preflight-results.json` หรือ JUnit
+
+### การรวม Azure DevOps
 
 ```yaml
 trigger: none
@@ -1272,76 +1308,80 @@ steps:
       curl -fsSL https://aka.ms/install-azd.sh | bash
       export PATH=$PATH:~/.azd/bin
 
-- task: Bash@3
+- task: AzureCLI@2
   displayName: 'Run Pre-flight Checks'
   inputs:
-    targetType: filePath
-    filePath: './scripts/preflight-check.sh'
-    arguments: '--environment-name ${{ parameters.environment }} --location ${{ parameters.location }}'
-
-- task: PublishTestResults@2
-  displayName: 'Publish Pre-flight Results'
-  condition: always()
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: 'preflight-results.xml'
-    testRunTitle: 'Pre-flight Validation'
+    azureSubscription: $(serviceConnection)
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      set -e
+      # Requires a workload-identity-federated service connection.
+      # AzureCLI@2 supplies AZURESUBSCRIPTION_* for the azd provider.
+      azd auth login --federated-credential-provider azure-pipelines
+      bash ./scripts/preflight-check.sh \
+        --environment-name "${{ parameters.environment }}" \
+        --location "${{ parameters.location }}"
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 ```
+
+สายงานต้องกู้คืน/สร้างสภาพแวดล้อม azd และบันทึกสคริปต์ที่แสดงในบทเรียนนี้ก่อนงานนี้ กำหนดค่าการเชื่อมต่อบริการแบบ federated และมอบสิทธิ์โทเค็นที่จำเป็นแก่สายงาน อย่าคาดหวังว่าการล็อกอิน Azure CLI ของงาน `AzureCLI@2` ก่อนหน้าจะทำให้การตรวจสอบตัวตนของงาน Bash ธรรมดาภายหลังสำเร็จ
 
 ---
 
 ## สรุปแนวทางปฏิบัติที่ดีที่สุด
 
-### ✅ แนวทางปฏิบัติที่ดีที่สุดสำหรับการตรวจสอบก่อนบิน
+### ✅ แนวทางปฏิบัติที่ดีที่สุดสำหรับการตรวจสอบก่อนการบิน
 
-1. **ทำให้อัตโนมัติโดยที่เป็นไปได้**
-   - ผสานการตรวจสอบเข้าในสายงาน CI/CD
-   - ใช้สคริปต์สำหรับการตรวจสอบซ้ำได้
-   - เก็บผลลัพธ์เพื่อการตรวจสอบย้อนหลัง
+1. **ทำให้อัตโนมัติเพื่อความสะดวก**
+   - รวมการตรวจสอบเข้ากับสายงาน CI/CD
+   - ใช้สคริปต์สำหรับการตรวจสอบที่ทำซ้ำได้
+   - เก็บผลลัพธ์สำหรับการตรวจสอบย้อนหลัง
 
-2. **การตรวจสอบเฉพาะสภาพแวดล้อม**
+2. **การตรวจสอบเฉพาะสำหรับแต่ละสภาพแวดล้อม**
    - การตรวจสอบแตกต่างกันสำหรับ dev/staging/prod
-   - ข้อกำหนดความปลอดภัยที่เหมาะสมสำหรับแต่ละสภาพแวดล้อม
-   - การเพิ่มประสิทธิภาพค่าใช้จ่ายสำหรับสภาพแวดล้อมที่ไม่ใช่ production
+   - ข้อกำหนดความปลอดภัยที่เหมาะสมตามสภาพแวดล้อม
+   - การเพิ่มประสิทธิภาพค่าใช้จ่ายสำหรับสภาพแวดล้อมที่ไม่ใช่ผลิต
 
-3. **ครอบคลุมอย่างครบถ้วน**
-   - การรับรองตัวตนและสิทธิ์
-   - โควต้าและความพร้อมใช้งานของทรัพยากร
-   - การตรวจสอบและไวยากรณ์เทมเพลต
-   - ข้อกำหนดความปลอดภัยและความสอดคล้อง
+3. **ความครอบคลุมครบถ้วน**
+   - การตรวจสอบสิทธิ์และสิทธิ์อนุญาต
+   - ข้อจำกัดปริมาณและความพร้อมใช้งานของทรัพยากร
+   - การตรวจสอบแม่แบบและไวยากรณ์
+   - ข้อกำหนดความปลอดภัยและการปฏิบัติตาม
 
 4. **รายงานที่ชัดเจน**
-   - ใช้สีแสดงสถานะ
-   - ข้อความแสดงข้อผิดพลาดที่มีรายละเอียดพร้อมวิธีแก้ไข
-   - รายงานสรุปเพื่อประเมินอย่างรวดเร็ว
+   - ตัวบ่งชี้สถานะสี
+   - ข้อความข้อผิดพลาดละเอียดพร้อมขั้นตอนแก้ไข
+   - รายงานสรุปสำหรับการประเมินอย่างรวดเร็ว
 
-5. **ล้มเหลวอย่างรวดเร็ว**
-   - หยุดการติดตั้งหากตรวจสอบที่สำคัญล้มเหลว
-   - ให้คำแนะนำชัดเจนในการแก้ไข
-   - อำนวยความสะดวกในการรันตรวจสอบซ้ำง่าย
+5. **หยุดล้มเหลวอย่างรวดเร็ว**
+   - หยุดการปรับใช้หากการตรวจสอบสำคัญล้มเหลว
+   - ให้คำแนะนำที่ชัดเจนสำหรับการแก้ไข
+   - อำนวยความสะดวกในการรันตรวจสอบซ้ำได้ง่าย
 
-### กับดักทั่วไปของการตรวจสอบก่อนบิน
+### อุปสรรคทั่วไปในการตรวจสอบก่อนการบิน
 
-1. **ข้ามการตรวจสอบ** เพื่อการติดตั้งที่ "รวดเร็ว"
-2. **ตรวจสอบสิทธิ์ไม่เพียงพอ** ก่อนติดตั้ง
-3. **ไม่สนใจข้อจำกัดโควต้า** จนกว่าการติดตั้งจะล้มเหลว
-4. **ไม่ตรวจสอบเทมเพลต** ในสายงาน CI/CD
-5. **ขาดการตรวจสอบความปลอดภัย** สำหรับสภาพแวดล้อม production
-6. **การประมาณค่าใช้จ่ายไม่เพียงพอ** นำไปสู่การเกินงบประมาณโดยไม่คาดคิด
-
----
-
-**เคล็ดลับมือโปร**: เรียกใช้การตรวจสอบก่อนบินเป็นงานแยกในสายงาน CI/CD ของคุณก่อนงานติดตั้งจริง เพื่อจับปัญหาได้ตั้งแต่เนิ่นๆ และให้ข้อมูลย้อนกลับที่รวดเร็วแก่ผู้พัฒนา
+1. **ข้ามการตรวจสอบ** เพื่อการปรับใช้ที่ "รวดเร็ว"
+2. **ตรวจสอบสิทธิ์ไม่เพียงพอ** ก่อนการปรับใช้
+3. **มองข้ามข้อจำกัดปริมาณ** จนกว่าจะเกิดความล้มเหลวในการปรับใช้
+4. **ไม่ตรวจสอบแม่แบบ** ในสายงาน CI/CD
+5. **ขาดการตรวจสอบความปลอดภัย** สำหรับสภาพแวดล้อมผลิต
+6. **การประมาณค่าใช้จ่ายไม่เพียงพอ** นำไปสู่ปัญหางบประมาณที่ไม่คาดคิด
 
 ---
 
-**เมนูนำทาง**
+**เคล็ดลับมืออาชีพ**: รันการตรวจสอบก่อนการบินเป็นงานแยกในสายงาน CI/CD ของคุณก่อนงานปรับใช้จริง วิธีนี้ช่วยให้คุณพบปัญหาได้เร็วและให้คำติชมที่รวดเร็วแก่ผู้พัฒนา
+
+---
+
+**การนำทาง**
 - **บทเรียนก่อนหน้า**: [การเลือก SKU](sku-selection.md)
-- **บทเรียนถัดไป**: [ใบสรุปสูตรลัด](../../resources/cheat-sheet.md)
+- **บทเรียนถัดไป**: [ชีทช่วยจำ](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิดชอบ**:  
-เอกสารฉบับนี้ได้รับการแปลโดยใช้บริการแปลภาษาด้วย AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้มีความถูกต้อง โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความคลาดเคลื่อน เอกสารต้นฉบับในภาษาต้นฉบับควรถูกพิจารณาเป็นแหล่งข้อมูลที่น่าเชื่อถือ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมืออาชีพที่เป็นมนุษย์ เราจะไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดจากการใช้การแปลนี้
+**ปฏิเสธความรับผิดชอบ**:
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) ขณะที่เราพยายามให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดขึ้นจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,221 +1,25 @@
-# 4. Konfigurer en skabelon
+# 4. Konfigurer en Skabelon
 
-!!! tip "I SLUTNINGEN AF DETTE MODUL VIL DU VÆRE I STAND TIL"
+!!! tip "SIDEN AFSLUTNINGEN AF DETTE MODUL VIL DU KUNNE"
 
-    - [ ] Forstå formålet med `azure.yaml`
-    - [ ] Forstå strukturen i `azure.yaml`
-    - [ ] Forstå værdien af azd livscyklus `hooks`
-    - [ ] **Lab 4:** Undersøg og rediger miljøvariabler
-
----
-
-!!! prompt "Hvad gør `azure.yaml`-filen? Brug en kodeblok og forklar den linje for linje"
-
-      `azure.yaml`-filen er **konfigurationsfilen for Azure Developer CLI (azd)**. Den definerer, hvordan din applikation skal deployeres til Azure, herunder infrastruktur, tjenester, deployment hooks og miljøvariabler.
+    - [ ] Explain the purpose and structure of `azure.yaml`
+    - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
+    - [ ] Configure the selected environment using inputs supported by the template
+    - [ ] **Lab 4:** Review a configuration change before provisioning it
 
 ---
 
-## 1. Formål og funktionalitet
+## 1. Start med den faktiske skabelon
 
-Denne `azure.yaml`-fil fungerer som **udrulningsplan** for en AI-agent-applikation, der:
+Åbn [`azure.yaml` i Kom Igang med AI-agenter](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/azure.yaml) i det repository, du initialiserede. Den oprindelige skabelon kan ændre sig uafhængigt af denne workshop. Følgende **uddrag** blev kontrolleret den 4. november 2026; det er ikke en erstatning for den komplette fil:
 
-1. **Validerer miljøet** før udrulning
-2. **Provisionerer Azure AI-tjenester** (AI Hub, AI Project, Search osv.)
-3. **Deployerer en Python-applikation** til Azure Container Apps
-4. **Konfigurerer AI-modeller** til både chat- og embedding-funktionalitet
-5. **Opsætter overvågning og tracing** for AI-applikationen
-6. **Håndterer både nye og eksisterende** Azure AI-projekt-scenarier
-
-Filen muliggør **en-kommandos udrulning** (`azd up`) af en komplet AI-agentløsning med korrekt validering, provisionering og post-udrulningskonfiguration.
-
-??? info "Udvid for at se: `azure.yaml`"
-
-      `azure.yaml`-filen definerer, hvordan Azure Developer CLI skal deployere og administrere denne AI Agent-applikation i Azure. Lad os gennemgå den linje for linje.
-
-      ```yaml title="" linenums="0"
-
-      # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: har vi brug for hooks? 
-      # TODO: har vi brug for alle variablerne?
-
-      name: azd-get-started-with-ai-agents
-      metadata:
-      template: azd-get-started-with-ai-agents@1.0.2
-      requiredVersions:
-      azd: ">=1.14.0"
-
-      hooks:
-      preup:
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-            interactive: true
-            continueOnError: false
-      windows:
-            shell: pwsh
-            run: ./scripts/validate_env_vars.ps1
-            interactive: true
-            continueOnError: false      
-      postprovision:
-      windows:
-            shell: pwsh
-            run: ./scripts/write_env.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-            continueOnError: true
-            interactive: true
-      postdeploy:
-      windows:
-            shell: pwsh
-            run: ./scripts/postdeploy.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-            continueOnError: true
-            interactive: true
-      services:
-      api_and_frontend:
-      project: ./src
-      language: py
-      host: containerapp
-      docker:
-            image: api_and_frontend
-            remoteBuild: true
-      pipeline:
-      variables:
-      - AZURE_RESOURCE_GROUP
-      - AZURE_AIHUB_NAME
-      - AZURE_AIPROJECT_NAME
-      - AZURE_AISERVICES_NAME
-      - AZURE_SEARCH_SERVICE_NAME
-      - AZURE_APPLICATION_INSIGHTS_NAME
-      - AZURE_CONTAINER_REGISTRY_NAME
-      - AZURE_KEYVAULT_NAME
-      - AZURE_STORAGE_ACCOUNT_NAME
-      - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-      - USE_CONTAINER_REGISTRY
-      - USE_APPLICATION_INSIGHTS
-      - USE_AZURE_AI_SEARCH_SERVICE
-      - AZURE_AI_AGENT_NAME
-      - AZURE_AI_AGENT_ID
-      - AZURE_AI_AGENT_DEPLOYMENT_NAME
-      - AZURE_AI_AGENT_DEPLOYMENT_SKU
-      - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-      - AZURE_AI_AGENT_MODEL_NAME
-      - AZURE_AI_AGENT_MODEL_FORMAT
-      - AZURE_AI_AGENT_MODEL_VERSION
-      - AZURE_AI_EMBED_DEPLOYMENT_NAME
-      - AZURE_AI_EMBED_DEPLOYMENT_SKU
-      - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-      - AZURE_AI_EMBED_MODEL_NAME
-      - AZURE_AI_EMBED_MODEL_FORMAT
-      - AZURE_AI_EMBED_MODEL_VERSION
-      - AZURE_AI_EMBED_DIMENSIONS
-      - AZURE_AI_SEARCH_INDEX_NAME
-      - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-      - AZURE_EXISTING_AIPROJECT_ENDPOINT
-      - AZURE_EXISTING_AGENT_ID
-      - ENABLE_AZURE_MONITOR_TRACING
-      - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-      ```
-
----
-
-## 2. Gennemgang af filen
-
-Lad os gennemgå filen sektion for sektion for at forstå, hvad den gør - og hvorfor.
-
-### 2.1 **Header og skema (1-3)**
-
-```yaml title="" linenums="0"
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-```
-
-- **Linje 1**: Giver YAML language server schema-validering til IDE-understøttelse og IntelliSense
-
-### 2.2 Projektmetadata (5-10)
-
-```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@1.0.2
+  template: azd-get-started-with-ai-agents@2.5.0
 requiredVersions:
   azd: ">=1.14.0"
-```
-
-- **Linje 5**: Definerer projektets navn, som bruges af Azure Developer CLI
-- **Linjerne 6-7**: Angiver, at dette er baseret på en skabelon version 1.0.2
-- **Linjerne 8-9**: Kræver Azure Developer CLI version 1.14.0 eller nyere
-
-### 2.3 Deploy-hooks (11-40)
-
-```yaml title="" linenums="0"
-hooks:
-  preup:
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-      interactive: true
-      continueOnError: false
-    windows:
-      shell: pwsh
-      run: ./scripts/validate_env_vars.ps1
-      interactive: true
-      continueOnError: false      
-```
-
-- **Linjerne 11-20**: **Forud-udrulnings-hook** - kører før `azd up`
-
-      - På Unix/Linux: Gør valideringsscriptet eksekverbart og kører det
-      - På Windows: Kører PowerShell-valideringsscriptet
-      - Begge er interaktive og vil stoppe udrulningen, hvis de fejler
-
-```yaml  title="" linenums="0"
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Linjerne 21-30**: **Post-provision-hook** - kører efter Azure-ressourcer er oprettet
-
-  - Kører scripts til at skrive miljøvariabler
-  - Fortsætter udrulningen, selv hvis disse scripts fejler (`continueOnError: true`)
-
-```yaml title="" linenums="0"
-  postdeploy:
-    windows:
-      shell: pwsh
-      run: ./scripts/postdeploy.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Linjerne 31-40**: **Post-deploy-hook** - kører efter applikationsudrulning
-
-  - Kører de afsluttende opsætningsscripts
-  - Fortsætter, selv hvis scripts fejler
-
-### 2.4 Servicekonfiguration (41-48)
-
-Dette konfigurerer den applikationsservice, du deployerer.
-
-```yaml title="" linenums="0"
 services:
   api_and_frontend:
     project: ./src
@@ -226,162 +30,109 @@ services:
       remoteBuild: true
 ```
 
-- **Linje 42**: Definerer en service kaldet "api_and_frontend"
-- **Linje 43**: Peger på `./src`-mappen for kildekoden
-- **Linje 44**: Angiver Python som programmeringssprog
-- **Linje 45**: Bruger Azure Container Apps som hostingplatform
-- **Linjerne 46-48**: Docker-konfiguration
+- `name` identificerer AZD-projektet; `metadata.template` registrerer skabelonversionen.
+- `requiredVersions.azd` er skabelonens minimum, ikke en anbefaling om at blive på en gammel CLI. Brug en nuværende understøttet AZD-udgave.
+- `services` definerer applikationsdistributionsmål. Denne skabelon distribuerer sin Python API og frontend som en enkelt Container Apps-tjeneste.
+- `project` er relativ til `azure.yaml`.
+- `remoteBuild` anmoder om en fjern containerbygning. Din identitet har stadig brug for de nødvendige Azure-tilladelser.
 
-      - Bruger "api_and_frontend" som image-navn
-      - Bygger Docker-image'et eksternt i Azure (ikke lokalt)
+Skabelonens Bicep-filer under `infra/`, ikke kun listen `services`, erklærer ressourcer såsom Microsoft Foundry, modeldistributioner, lagring og valgfri AI Search.
 
-### 2.5 Pipeline-variabler (49-76)
+## 2. Forstå livscyklus-hooks
 
-Disse er variabler til at hjælpe dig med at køre `azd` i CI/CD-pipelines til automatisering
+Undersøg `hooks`-afsnittet og dets refererede scripts, før du kører skabelonen. Den gennemgåede version indeholder:
 
-```yaml title="" linenums="0"
-pipeline:
-  variables:
-    - AZURE_RESOURCE_GROUP
-    - AZURE_AIHUB_NAME
-    - AZURE_AIPROJECT_NAME
-    - AZURE_AISERVICES_NAME
-    - AZURE_SEARCH_SERVICE_NAME
-    - AZURE_APPLICATION_INSIGHTS_NAME
-    - AZURE_CONTAINER_REGISTRY_NAME
-    - AZURE_KEYVAULT_NAME
-    - AZURE_STORAGE_ACCOUNT_NAME
-    - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-    - USE_CONTAINER_REGISTRY
-    - USE_APPLICATION_INSIGHTS
-    - USE_AZURE_AI_SEARCH_SERVICE
-    - AZURE_AI_AGENT_NAME
-    - AZURE_AI_AGENT_ID
-    - AZURE_AI_AGENT_DEPLOYMENT_NAME
-    - AZURE_AI_AGENT_DEPLOYMENT_SKU
-    - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-    - AZURE_AI_AGENT_MODEL_NAME
-    - AZURE_AI_AGENT_MODEL_FORMAT
-    - AZURE_AI_AGENT_MODEL_VERSION
-    - AZURE_AI_EMBED_DEPLOYMENT_NAME
-    - AZURE_AI_EMBED_DEPLOYMENT_SKU
-    - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-    - AZURE_AI_EMBED_MODEL_NAME
-    - AZURE_AI_EMBED_MODEL_FORMAT
-    - AZURE_AI_EMBED_MODEL_VERSION
-    - AZURE_AI_EMBED_DIMENSIONS
-    - AZURE_AI_SEARCH_INDEX_NAME
-    - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-    - AZURE_EXISTING_AIPROJECT_ENDPOINT
-    - AZURE_EXISTING_AGENT_ID
-    - ENABLE_AZURE_MONITOR_TRACING
-    - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-```
+| Hook | Formål | Vigtig adfærd |
+|------|---------|--------------------|
+| `preup` | Valider skabelonens miljøinput før `up`-arbejdsgangen | Platformsspecifikke shell-scripts kan stoppe arbejdsgangen ved fejl |
+| `postdeploy` | Kør skabelonspecifik opsætning efter applikationsdistribuering | Undersøg `continueOnError` og scriptoutput; en vellykket deployment beviser ikke, at alle opsætningsopgaver lykkedes |
 
-Denne sektion definerer miljøvariabler, der bruges **under udrulning**, organiseret efter kategori:
+Denne version indeholder **ikke** den ældre `postprovision` / `write_env` hook vist i tidligere workshopmateriale. Kopiér ikke hook-referencer til scripts, der ikke længere findes.
 
-- **Azure-ressourcenavne (Linjerne 51-60)**:
-      - Kernens Azure-tjeneste ressourcenavne, f.eks. Resource Group, AI Hub, AI Project osv.- 
-- **Funktionsflag (Linjerne 61-63)**:
-      - Boolske variabler til at aktivere/deaktivere specifikke Azure-tjenester
-- **AI-agentkonfiguration (Linjerne 64-71)**:
-      - Konfiguration for hoved-AI-agenten inklusive navn, ID, udrulningsindstillinger og modeloplysninger- 
-- **AI-embedding-konfiguration (Linjerne 72-79)**:
-      - Konfiguration for embedding-modellen, der bruges til vektorsøgning
-- **Søgning og overvågning (Linjerne 80-84)**:
-      - Navn på søgeindeks, eksisterende resource-IDs og indstillinger for overvågning/tracing
+Hook-nøgler vælger livscyklusbegivenheder; `posix` og `windows` vælger platformimplementeringer. `shell`, `run`, `interactive`, og `continueOnError` styrer udførelsen. Dette er eksekverbare scripts med dine tilladelser, så gennemse dem lige som applikationskode.
 
----
+Se [AZD hooks dokumentationen](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-extensibility) for hele livscyklussen.
 
-## 3. Kend miljøvariablerne
-Følgende miljøvariabler styrer din udrulnings konfiguration og adfærd, organiseret efter deres primære formål. De fleste variabler har fornuftige standardværdier, men du kan tilpasse dem til dine specifikke krav eller eksisterende Azure-ressourcer.
+## 3. Spor miljøinput til infrastruktur
 
-### 3.1 Påkrævede variabler 
+Kør disse kommandoer fra det initialiserede eksemperepository:
 
-```bash title="" linenums="0"
-# Kernekonfiguration for Azure
-AZURE_ENV_NAME                    # Miljønavn (bruges i navngivning af ressourcer)
-AZURE_LOCATION                    # Udrulningsregion
-AZURE_SUBSCRIPTION_ID             # Målabonnement
-AZURE_RESOURCE_GROUP              # Navn på ressourcegruppe
-AZURE_PRINCIPAL_ID                # Brugerprincipal til RBAC
-
-# Ressourcenavne (genereres automatisk, hvis ikke angivet)
-AZURE_AIHUB_NAME                  # Microsoft Foundry-hubnavn
-AZURE_AIPROJECT_NAME              # AI-projektnavn
-AZURE_AISERVICES_NAME             # Navn på AI-tjenestekonto
-AZURE_STORAGE_ACCOUNT_NAME        # Navn på Storage-konto
-AZURE_CONTAINER_REGISTRY_NAME     # Navn på containerregister
-AZURE_KEYVAULT_NAME               # Key Vault-navn (hvis brugt)
-```
-
-### 3.2 Modelkonfiguration 
-```bash title="" linenums="0"
-# Konfiguration af chatmodel
-AZURE_AI_AGENT_MODEL_NAME         # Standard: gpt-4.1-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Standard: OpenAI (eller Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Standard: senest tilgængelig
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Udrulningsnavn for chatmodel
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Standard: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Standard: 80 (tusinder af TPM)
-
-# Konfiguration af embeddingsmodel
-AZURE_AI_EMBED_MODEL_NAME         # Standard: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Standard: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Standard: senest tilgængelig
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Udrulningsnavn for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Standard: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Standard: 50 (tusinder af TPM)
-
-# Agentkonfiguration
-AZURE_AI_AGENT_NAME               # Agentens visningsnavn
-AZURE_EXISTING_AGENT_ID           # Brug eksisterende agent (valgfrit)
-```
-
-### 3.3 Funktionsflag
-```bash title="" linenums="0"
-# Valgfrie tjenester
-USE_APPLICATION_INSIGHTS         # Standard: sand
-USE_AZURE_AI_SEARCH_SERVICE      # Standard: falsk
-USE_CONTAINER_REGISTRY           # Standard: sand
-
-# Overvågning og sporing
-ENABLE_AZURE_MONITOR_TRACING     # Standard: falsk
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Standard: falsk
-
-# Søgekonfiguration
-AZURE_AI_SEARCH_INDEX_NAME       # Navn på søgeindeks
-AZURE_SEARCH_SERVICE_NAME        # Navn på søgetjeneste
-```
-
-### 3.4 AI-projektkonfiguration 
-```bash title="" linenums="0"
-# Brug eksisterende ressourcer
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Fuld ressource-id for eksisterende AI-projekt
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endepunkt-URL for eksisterende projekt
-```
-
-### 3.5 Tjek dine variabler
-
-Brug Azure Developer CLI til at vise og administrere dine miljøvariabler:
-
-```bash title="" linenums="0"
-# Vis alle miljøvariabler for det aktuelle miljø
-azd env get-values
-
-# Hent en specifik miljøvariabel
+```bash
+azd env list
 azd env get-value AZURE_ENV_NAME
-
-# Sæt en miljøvariabel
-azd env set AZURE_LOCATION eastus
-
-# Sæt flere miljøvariabler fra en .env-fil
-azd env set --from-file .env
+azd env get-value AZURE_LOCATION
 ```
+
+Undersøg `infra/main.parameters.json` for at se, hvilke miljøvariabler skabelonen faktisk bruger. At sætte et vilkårligt navn med `azd env set` ændrer ikke automatisk en Azure-ressource.
+
+Gennemgåede standarder inkluderer:
+
+| Input | Standard / formål |
+|-------|-------------------|
+| `AZURE_AI_AGENT_MODEL_NAME` | `gpt-5-mini` |
+| `AZURE_AI_AGENT_MODEL_VERSION` | `2025-08-07` |
+| `AZURE_AI_AGENT_DEPLOYMENT_SKU` | `GlobalStandard` |
+| `AZURE_AI_AGENT_DEPLOYMENT_CAPACITY` | `80`; kvotaenheder afhænger af modellen og distributionstype |
+| `AZURE_AI_EMBED_MODEL_NAME` | `text-embedding-3-small` |
+| `AZURE_AI_EMBED_DIMENSIONS` | `1536` |
+| `USE_APPLICATION_INSIGHTS` | `true` |
+| `USE_AZURE_AI_SEARCH_SERVICE` | `false` |
+| `ENABLE_AZURE_MONITOR_TRACING` | `false` |
+| `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` | `false`; lad være med at aktivere medmindre databehandling er gennemgået |
+
+Dette er eksempelspecifikke input, ikke globale AZD-indstillinger. Tjek [modellen og regionsunderstøttelsesdokumentationen](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) og dit abonnementets kvota, før du vælger model, SKU, kapacitet eller placering. Fortolk ikke hver kapacitet som 1.000 tokens per minut.
+
+For at vælge en anden chatmodel, opdater dens kompatible **navn, version, format, SKU og kapacitet sammen**, i henhold til [eksemplets tilpasningsvejledning](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md). Det at ændre kun navnet kan efterlade en inkompatibel version eller distributionstype.
+
+## 4. Lab: aktiver valgfri søgning og sporing
+
+!!! warning "Disse indstillinger kan tilføje fakturerbare ressourcer"
+
+    Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
+
+```bash
+azd env set USE_AZURE_AI_SEARCH_SERVICE true
+azd env set USE_APPLICATION_INSIGHTS true
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+
+# Inspect the infrastructure changes and any configured preview hooks
+azd provision --preview
+
+# Apply the resource changes and deploy the application
+azd up
+```
+
+Infrastrukturændringer kræver levering; `azd deploy` alene deployer kun applikationstjenester. For søgeindeksering og understøttede hentningsmuligheder, følg [AI Search-guiden](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md). For overvågning, følg [observabilitetsguiden](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md).
+
+Aktivér ikke optagelse af prompt-/svarindhold på rigtige kundedata uden den nødvendige samtykke, adgangskontrol, opbevaringspolitik og udredning.
+
+## 5. Eksisterende ressourcer og CI/CD
+
+For at genbruge et Foundry-projekt, følg eksemplets [instruktioner for eksisterende ressourcer](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md#use-existing-resources). At sætte `AZURE_EXISTING_AIPROJECT_RESOURCE_ID` ændrer distributionsstien; i det scenarie opretter skabelonen ikke Application Insights eller AI Search for dig. Bekræft eksplicit afhængigheder, rollefordelinger og modeldistributioner.
+
+`pipeline.variables`-afsnittet styrer værdier, der gives ind i en genereret pipeline; det er ikke en hemmelighedsføler og opretter ikke Azure-ressourcer. Foretræk managed identity i appen og OIDC til CI/CD. AZD-miljøfiler er i klartekst og bør ikke committes.
+
+AZD understøtter import af en betroet, lokalt forberedt dotenv-fil:
+
+```bash
+azd env set --file .env
+```
+
+Gennemse den fil, før du importerer den, og udskriv ikke miljøfiler med hemmeligheder i delte terminaler eller CI-logs.
+
+## 6. Tjek din forståelse
+
+- Hvilken `azure.yaml`-tjeneste deployer applikationen?
+- Hvilket infrastrukturparameter bruger hver værdi, du ændrede?
+- Hvilke ændringer kræver levering fremfor blot deployment?
+- Støttede den valgte region og abonnement modellen og kvotaen?
+- Lykkedes alle opsætningshooks, og kan du bekræfte den deployerede applikations adfærd?
+
+Fortsæt til [Tilpas en Skabelon](5-Customize-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

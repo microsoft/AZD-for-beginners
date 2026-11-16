@@ -1,69 +1,71 @@
-# Laborator AI Workshop: Cum să faci soluțiile tale AI deploabile cu AZD
+# Laborator AI Workshop: Cum să faci soluțiile tale AI să fie implementabile cu AZD  
 
-**Navigare în capitole:**
-- **📚 Acasă curs**: [AZD pentru începători](../../README.md)
-- **📖 Capitol curent**: Capitolul 2 - Dezvoltare AI-First
-- **⬅️ Anterior**: [Deplasarea modelului AI](ai-model-deployment.md)
-- **➡️ Următor**: [Cele mai bune practici pentru AI în producție](production-ai-practices.md)
-- **🚀 Capitol următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
+**Navigare capitole:**  
+- **📚 Pagina cursului**: [AZD Pentru Începători](../../README.md)  
+- **📖 Capitolul curent**: Capitolul 2 - Dezvoltare AI-First  
+- **⬅️ Anterior**: [Implementarea modelului AI](ai-model-deployment.md)  
+- **➡️ Următor**: [Cele mai bune practici AI pentru producție](../chapter-08-production/production-ai-practices.md)  
+- **🚀 Capitolul următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)  
 
-## Prezentare generală a laboratorului
+## Prezentare generală a laboratorului  
 
-Acest laborator practic ghidează dezvoltatorii prin procesul de a lua un șablon AI existent și a-l deploya folosind Azure Developer CLI (AZD). Veți învăța modele esențiale pentru deplasările AI în producție folosind serviciile Microsoft Foundry.
+Acest laborator practic ghidează dezvoltatorii prin procesul de preluare a unui șablon AI existent și implementarea acestuia folosind Azure Developer CLI (AZD). Veți învăța modele esențiale pentru implementările AI în producție folosind serviciile Microsoft Foundry.  
 
-> **Notă de validare (2026-07-13):** Acest atelier a fost revizuit cu `azd` `1.27.1`. Dacă instalarea locală este mai veche, actualizați AZD înainte de a începe pentru a vă asigura că autentificarea, șablonul și fluxul de lucru pentru deploy sunt conforme cu pașii de mai jos.
+> **Revizuire versiune (2026-11-04):** Ghidul comenzilor AZD și numele de configurare exemplu au fost verificate cu versiunea `azd` `1.37.2` și cu configurația curentă a exemplului legat. Aceasta este o revizuire a documentației, nu o validare a unei implementări live. Laboratorul RAG nu necesită extensia agent; pentru evaluările agent, folosiți extensia separată `azure.ai.evaluations` și [fluxul de evaluare curent](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks), nu comenzile legacy de evaluare a agentului.  
 
 **Durată:** 2-3 ore  
 **Nivel:** Intermediar  
-**Prerechizite:** Cunoștințe de bază Azure, familiaritate cu conceptele AI/ML
+**Prerechizite:** Cunoștințe de bază Azure, familiaritate cu conceptele AI/ML  
 
-## 🎓 Obiective de învățare
+## 🎓 Obiective de învățare  
 
-La finalul acestui atelier, vei putea să:
-- ✅ Convertești o aplicație AI existentă să folosească șabloane AZD
-- ✅ Configurezi serviciile Microsoft Foundry cu AZD
-- ✅ Implementezi gestionarea securizată a acreditărilor pentru serviciile AI
-- ✅ Deploiezi aplicații AI gata pentru producție cu monitorizare
-- ✅ Depistezi probleme comune de deploy AI
+La finalul acestui workshop, veți putea:  
+- ✅ Explora un șablon AI AZD existent și planifica conversia propriei aplicații  
+- ✅ Configura serviciile Microsoft Foundry cu AZD  
+- ✅ Implementa gestionarea sigură a credențialelor pentru serviciile AI  
+- ✅ Implementa o aplicație de referință AI cu monitorizare  
+- ✅ Depana problemele comune de implementare AI  
 
-## Prerechizite
+## Prerechizite  
 
-### Unelte necesare
+### Instrumente necesare  
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) instalat
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) instalat
 - [Git](https://git-scm.com/) instalat
 - Editor de cod (VS Code recomandat)
 
-### Resurse Azure
-- Abonament Azure cu acces de contributor
-- Acces la serviciile Microsoft Foundry Models (sau posibilitatea de a-l solicita)
-- Permisiuni de creare grup de resurse
+Aceste blocuri de comenzi folosesc sintaxa Bash (inclusiv continuări pe linii și `grep`). Pe Windows, folosește Git Bash/WSL sau traduce-le în PowerShell. De asemenea, instalează instrumentele pentru limbaj, manager de pachete și containere listate în [configurarea mediului local a exemplului](https://github.com/Azure-Samples/azure-search-openai-demo#local-environment).
 
-### Cunoștințe necesare
+### Resurse Azure
+- Abonament Azure cu permisiuni pentru aprovizionarea resurselor și atribuirea rolurilor (Contributor singur nu poate crea atribuiri RBAC; folosește un administrator de rol autorizat sau echivalentul documentat al exemplului)
+- Acces la serviciile Microsoft Foundry Models (sau posibilitatea de a solicita acces)
+- Permisiuni pentru crearea grupurilor de resurse
+
+### Cunoștințe prealabile
 - Înțelegere de bază a serviciilor Azure
-- Familiaritate cu interfețe de linie de comandă
+- Familiaritate cu interfețele de linie de comandă
 - Concepte de bază AI/ML (API-uri, modele, prompturi)
 
 ## Configurarea laboratorului
 
 ### Pasul 1: Pregătirea mediului
 
-1. **Verifică instalarea uneltelor:**
+1. **Verifică instalările instrumentelor:**
 ```bash
-# Verificați instalarea AZD
+# Check AZD installation
 azd version
 
-# Verificați Azure CLI
+# Check Azure CLI
 az --version
 
-# Autentificare în Azure pentru fluxurile de lucru AZD
+# Login to Azure for AZD workflows
 azd auth login
 
-# Autentificare în Azure CLI doar dacă intenționați să rulați comenzi az în timpul diagnosticării
+# Login to Azure CLI only if you plan to run az commands during diagnostics
 az login
 ```
 
-Dacă lucrezi în mai mulți clienți (tenants) sau abonamentul tău nu este detectat automat, încearcă din nou cu `azd auth login --tenant-id <tenant-id>`.
+Dacă lucrezi pe mai mulți chiriași sau abonamentul tău nu este detectat automat, încearcă din nou cu `azd auth login --tenant-id <tenant-id>`.
 
 2. **Clonează depozitul atelierului:**
 ```bash
@@ -71,9 +73,9 @@ git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-## Modulul 1: Înțelegerea structurii AZD pentru aplicații AI
+## Modul 1: Înțelegerea structurii AZD pentru aplicații AI
 
-### Anatomia unui șablon AZD pregătit pentru AI
+### Anatomia unui șablon AZD pentru AI
 
 Explorează fișierele cheie dintr-un șablon AZD pregătit pentru AI:
 
@@ -83,16 +85,16 @@ azure-search-openai-demo/
 ├── infra/                   # Infrastructure as Code
 │   ├── main.bicep          # Main infrastructure template
 │   ├── main.parameters.json # Environment parameters
-│   └── modules/            # Reusable Bicep modules
-│       ├── openai.bicep    # Microsoft Foundry Models configuration
-│       ├── search.bicep    # Azure AI Search setup
-│       └── webapp.bicep    # Web app configuration
-├── app/                    # Application code
+│   ├── core/               # Shared infrastructure modules
+│   └── app/                # Application-specific infrastructure
+├── app/                    # Backend, frontend, and optional ingestion functions
 ├── scripts/               # Deployment scripts
 └── .azure/               # AZD environment files
 ```
 
-### **Exercițiu laborator 1.1: Explorează configurația**
+Exemplarul extras poate varia; `.azure/` apare după inițializarea mediului, nu neapărat într-un clone proaspăt. Examinează checkout-ul real în loc să creezi directoare lipsă pentru a corespunde acestui schematic.
+
+### **Exercițiul de laborator 1.1: Explorează configurația**
 
 1. **Examinează fișierul azure.yaml:**
 ```bash
@@ -100,120 +102,122 @@ cat azure.yaml
 ```
 
 **Ce să cauți:**
-- Definiții de servicii pentru componente AI
+- Definiții de servicii pentru componentele AI
 - Mapări ale variabilelor de mediu
-- Configurații pentru gazde
+- Configurații de gazdă
 
 2. **Revizuiește infrastructura main.bicep:**
 ```bash
 cat infra/main.bicep
 ```
 
-**Modele cheie AI de identificat:**
-- Provisionarea serviciului Microsoft Foundry Models
-- Integrare Azure AI Search
-- Management securizat chei
-- Configurări securitate rețea
+**Tipare cheie AI de identificat:**
+- Aprovizionarea serviciului Microsoft Foundry Models
+- Integrarea Azure AI Search
+- Management securizat al cheilor
+- Configurații de securitate a rețelei
 
-### **Punct de discuție:** De ce contează aceste modele pentru AI
+### **Punct de discuție:** De ce aceste tipare sunt importante pentru AI
 
-- **Dependențe de servicii**: Aplicațiile AI necesită adesea servicii multiple coordonate
-- **Securitate**: Cheile API și punctele finale necesită gestionare securizată
-- **Scalabilitate**: Sarcinile AI au cerințe unice de scalare
-- **Gestionare costuri**: Serviciile AI pot fi costisitoare dacă nu sunt configurate corect
+- **Dependențe de servicii**: aplicațiile AI necesită adesea servicii multiple coordonate
+- **Securitate**: Cheile API și punctele finale trebuie gestionate securizat
+- **Scalabilitate**: încărcările AI au cerințe unice de scalare
+- **Managementul costurilor**: serviciile AI pot fi costisitoare dacă nu sunt configurate corect
 
-## Modulul 2: Deploiează prima ta aplicație AI
+## Modul 2: Desfășoară prima ta aplicație AI
 
 ### Pasul 2.1: Inițializează mediul
 
-1. **Creează un mediu nou AZD:**
+1. **Creează un mediu AZD nou:**
 ```bash
 azd env new myai-workshop
 ```
 
-2. **Setează parametrii solicitați:**
+2. **Setează parametrii necesari:**
 ```bash
-# Setează regiunea Azure preferată
+# Set your preferred Azure region
 azd env set AZURE_LOCATION eastus
 
-# Opțional: Setează un model OpenAI specific
-azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
+# Optional: select a chat model supported by your region and quota
+azd env set AZURE_OPENAI_CHATGPT_MODEL gpt-4.1-mini
 ```
 
-### Pasul 2.2: Deploiează infrastructura și aplicația
+### Pasul 2.2: Desfășoară infrastructura și aplicația
 
-1. **Deploiează cu AZD:**
+1. **Desfășoară cu AZD:**
 ```bash
 azd up
 ```
 
 **Ce se întâmplă în timpul `azd up`:**
-- ✅ Provisionarea serviciului Microsoft Foundry Models
-- ✅ Crearea serviciului Azure AI Search
-- ✅ Configurarea App Service pentru aplicația web
-- ✅ Configurarea rețelei și securității
-- ✅ Deploy cod aplicație
-- ✅ Setup monitorizare și logare
+- ✅ Aprovizionează serviciul Microsoft Foundry Models
+- ✅ Creează serviciul Azure AI Search
+- ✅ Configurează Azure Container Apps pentru backend și frontend inclus (configurația implicită a exemplului curent)
+- ✅ Configurează rețeaua și securitatea
+- ✅ Desfășoară codul aplicației
+- ✅ Configurează monitorizarea și înregistrarea jurnalelor
 
-2. **Monitorizează progresul deploy-ului** și observă resursele create.
+2. **Monitorizează progresul desfășurării** și observă resursele create.
 
-### Pasul 2.3: Verifică deploy-ul
+### Pasul 2.3: Verifică implementarea ta
 
-1. **Verifică resursele deployate:**
+1. **Verifică resursele desfășurate:**
 ```bash
 azd show
 ```
 
-2. **Deschide aplicația deployată:**
+2. **Deschide aplicația desfășurată:**
 ```bash
 azd show
 ```
 
-Deschide endpoint-ul web afișat în ieșirea `azd show`.
+Deschide punctul final web afișat în ieșirea `azd show`.
 
 3. **Testează funcționalitatea AI:**
    - Navighează la aplicația web
    - Încearcă interogări exemplu
    - Verifică dacă răspunsurile AI funcționează
 
-### **Exercițiu laborator 2.1: Practica depanării**
+### **Exercițiul de laborator 2.1: Practică depanare**
 
-**Scenariu:** Deploy-ul a reușit, dar AI nu răspunde.
+**Scenariu**: Implementarea ta a reușit, dar AI nu răspunde.
 
-**Probleme comune pentru verificare:**
-1. **Cheile API OpenAI**: Verifică dacă sunt configurate corect
+**Probleme comune de verificat:**
+1. **Autentificare**: Verifică identitatea gestionată și atribuțiile rolurilor; verifică cheile API doar dacă ai activat intenționat autentificarea pe bază de chei
 2. **Disponibilitatea modelului**: Verifică dacă regiunea ta suportă modelul
 3. **Conectivitate rețea**: Asigură-te că serviciile pot comunica
-4. **Permisiuni RBAC**: Verifică dacă aplicația are acces la OpenAI
+4. **Permisiuni RBAC**: Verifică dacă aplicația poate accesa OpenAI
 
-**Comenzi pentru depanare:**
+**Comenzi de depanare:**
 ```bash
-# Verifică variabilele de mediu
+# Check environment variables
 azd env get-values
 
-# Vizualizează jurnalele de implementare
-az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
+# Open the selected environment's logging view
+azd monitor --logs
 
-# Verifică starea implementării OpenAI
+# Check OpenAI deployment status
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Modulul 3: Personalizarea aplicațiilor AI pentru nevoile tale
+## Modul 3: Personalizează aplicațiile AI pentru nevoile tale
 
 ### Pasul 3.1: Modifică configurația AI
 
 1. **Actualizează modelul OpenAI:**
 ```bash
-# Schimbă la un alt model (dacă este disponibil în regiunea ta)
-azd env set AZURE_OPENAI_MODEL gpt-4.1
+# Change to a different model (if available in your region)
+azd env set AZURE_OPENAI_CHATGPT_MODEL gpt-4.1
 
-# Redeploiați cu noua configurație
-azd deploy
+# Apply the model infrastructure change, then deploy the application
+azd up
 ```
 
 2. **Adaugă servicii AI suplimentare:**
 
 Editează `infra/main.bicep` pentru a adăuga Document Intelligence:
+
+Următorul fragment este ilustrativ, nu un șablon complet. Exemplarul poate aproviziona deja servicii de procesare documente: examinează infrastructura curentă înainte de a adăuga resurse duplicate. Adăugările personalizate necesită conectarea ieșirilor, a identităților și configurației aplicației.
 
 ```bicep
 // Add to main.bicep
@@ -230,64 +234,68 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Pasul 3.2: Configurări specifice mediului
+### Pasul 3.2: Configurații specifice mediului
 
-**Cea mai bună practică**: Configurații diferite pentru dezvoltare vs producție.
+**Practica recomandată**: Configurații diferite pentru dezvoltare față de producție.
 
 1. **Creează un mediu de producție:**
 ```bash
 azd env new myai-production
 ```
 
-2. **Setează parametrii specifici producției:**
+2. **Setează parametri specifici producției:**
 ```bash
-# Producția utilizează de obicei SKU-uri mai mari
-azd env set AZURE_OPENAI_SKU S0
-azd env set AZURE_SEARCH_SKU standard
+# Use the sample's actual Search SKU parameter
+azd env set AZURE_SEARCH_SERVICE_SKU standard
 
-# Activează funcții suplimentare de securitate
-azd env set ENABLE_PRIVATE_ENDPOINTS true
+# Enable private endpoints using the sample's parameter
+azd env set AZURE_USE_PRIVATE_ENDPOINT true
 ```
 
-### **Exercițiu laborator 3.1: Optimizare costuri**
+Aceste nume provin din [main.parameters.json](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/infra/main.parameters.json) al exemplului. `azd env set` stochează o valoare, dar nu o face efectivă dacă șablonul nu o consumă. Revizuiește [ghidul de izolare a rețelei](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/docs/deploy_private.md) al exemplului înainte de a dezactiva accesul public și folosește `azd up` pentru a aplica modificările infrastructurii. SKU-ul OpenAI `S0` singur nu determină debitul modelului; contează și tipul de implementare și capacitatea modelului.
 
-**Provocare:** Configurează șablonul pentru dezvoltare economică.
+### **Exercițiul de laborator 3.1: Optimizarea costurilor**
+
+**Provocare**: Configurează șablonul pentru dezvoltare eficientă din punct de vedere al costurilor.
 
 **Sarcini:**
-1. Identifică care SKU-uri pot fi setate la nivel gratuit/de bază
-2. Configurează variabilele de mediu pentru cost minim
-3. Deploiează și compară costurile cu configurația de producție
+1. Selectează mediul de atelier de unica folosință: `azd env select myai-workshop`.
+2. Înregistrează SKU-ul Search curent și capacitatea modelului din `infra/main.parameters.json` și mediul selectat.
+3. Folosește intrările suportate de mai jos, după confirmarea cotei pentru model/regiune:
+   ```bash
+   azd env set AZURE_SEARCH_SERVICE_SKU basic
+   azd env set AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY 10
+   azd up
+   ```
+4. Verifică SKU-ul Search și capacitatea de implementare în portal și estimează diferența cu calculatorul de prețuri. Nu te aștepta ca datele de facturare să se actualizeze imediat.
 
-**Sugestii pentru soluții:**
-- Folosește nivelul F0 (gratuit) pentru serviciile Azure AI când este posibil
-- Folosește nivelul Basic pentru Search Service în dezvoltare
-- Ia în considerare planul Consumption pentru Functions
+**Criterii de succes:** Search folosește Basic, implementarea de chat are capacitatea suportată solicitată, iar aplicația răspunde totuși la o întrebare exemplu. Capacitatea `10` este o alocare de limită de rată, nu un discount la prețul tokenului. Modificările nivelului Search pot fi restricționate sau necesită refacere; nu experimenta pe resurse de producție. F0 este specific serviciului și nu este un SKU de model Azure OpenAI.
 
-## Modulul 4: Securitate și bune practici de producție
+## Modul 4: Securitate și bune practici de producție
 
-### Pasul 4.1: Gestionarea securizată a acreditărilor
+### Pasul 4.1: Management securizat al acreditărilor
 
-**Provocare actuală:** Multe aplicații AI scriu cheile API direct în cod sau folosesc stocare nesigură.
+**Provocarea curentă**: Multe aplicații AI încorporează chei API în cod sau folosesc stocare nesigură.
 
-**Soluția AZD:** Identitate gestionată + integrare Key Vault.
+**Soluția AZD**: Identitate gestionată + integrare Key Vault.
 
-1. **Revizuiește configurația de securitate în șablonul tău:**
+1. **Revizuiește configurația de securitate din șablonul tău:**
 ```bash
-# Caută configurația pentru Key Vault și Identitate Gestionată
+# Look for Key Vault and Managed Identity configuration
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
 2. **Verifică dacă Identitatea Gestionată funcționează:**
 ```bash
-# Verifică dacă aplicația web are configurația corectă a identității
-az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
+# For the sample's default Container Apps host
+az containerapp identity show --name YOUR_CONTAINER_APP_NAME --resource-group YOUR_RG
 ```
 
 ### Pasul 4.2: Securitatea rețelei
 
-1. **Activează endpoint-urile private** (dacă nu sunt deja configurate):
+1. **Activează endpoint-uri private** folosind configurația de rețea suportată a exemplului (dacă nu este deja configurată).
 
-Adaugă în șablonul bicep:
+Pentru propriul tău șablon, acest fragment ilustrativ arată conexiunea punctului final OpenAI. Este nevoie și de VNet, configurație DNS privată și conectivitate aplicație; nu-l lipi neschimbat în exemplu, care deja are module de endpoint privat:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -314,78 +322,66 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 1. **Configurează Application Insights:**
 ```bash
-# Application Insights ar trebui configurat automat
-# Verifică configurația:
-az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
+# Application Insights should be automatically configured
+# Check the configuration:
+az monitor app-insights component show --app YOUR_APP_INSIGHTS_NAME --resource-group YOUR_RG
 ```
 
-2. **Setează monitorizare specifică AI:**
-
-Adaugă metrici personalizate pentru operațiuni AI:
-```bicep
-// In your web app configuration
-resource webApp 'Microsoft.Web/sites@2023-01-01' = {
-  properties: {
-    siteConfig: {
-      appSettings: [
-        {
-          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
-          value: applicationInsights.properties.ConnectionString
-        }
-        {
-          name: 'OPENAI_MONITOR_ENABLED'
-          value: 'true'
-        }
-      ]
-    }
-  }
-}
+2. **Activează integrarea Application Insights a exemplului:**
+```bash
+azd env set AZURE_USE_APPLICATION_INSIGHTS true
+azd up
+azd monitor --overview
 ```
 
-### **Exercițiu laborator 4.1: Audit de securitate**
+Instrumentarea exemplului emite telemetrie; o setare arbitrară `OPENAI_MONITOR_ENABLED` nu activează metrici AI. Revizuiește urmăririle pentru apelurile modelului, latență, eșecuri și utilizarea tokenilor, evitând înregistrarea prompturilor sau răspunsurilor sensibile.
 
-**Sarcină:** Revizuiește deploy-ul pentru bune practici de securitate.
+### **Exercițiul de laborator 4.1: Audit de securitate**
 
-**Checklist:**
-- [ ] Nu există secrete hardcodate în cod sau configurație
-- [ ] Se utilizează Identitate Gestionată pentru autentificarea serviciu-la-serviciu
-- [ ] Key Vault stochează configurări sensibile
-- [ ] Accesul la rețea este corespunzător restricționat
-- [ ] Monitorizarea și logarea sunt activate
+**Sarcină**: Revizuiește implementarea ta pentru cele mai bune practici de securitate.
 
-## Modulul 5: Conversia propriei aplicații AI
+**Listă de verificare:**
+- [ ] Fără secrete codificate în cod sau configurație
+- [ ] Identitate Gestionată folosită pentru autentificarea serviciu-la-serviciu
+- [ ] Key Vault stochează configurația sensibilă
+- [ ] Accesul la rețea este restricționat corespunzător
+- [ ] Monitorizarea și înregistrarea sunt activate
 
-### Pasul 5.1: Fișă de evaluare
+## Modul 5: Convertirea aplicației tale AI
 
-**Înainte de a converti aplicația**, răspunde la aceste întrebări:
+### Pasul 5.1: Foaie de evaluare
+
+**Înainte de a converti aplicația ta**, răspunde la aceste întrebări:
 
 1. **Arhitectura aplicației:**
    - Ce servicii AI folosește aplicația ta?
    - Ce resurse de calcul necesită?
-   - Necesită o bază de date?
-   - Care sunt dependențele dintre servicii?
+   - Are nevoie de o bază de date?
+   - Care sunt dependențele între servicii?
 
-2. **Cerinte de securitate:**
+2. **Cerințe de securitate:**
    - Ce date sensibile gestionează aplicația ta?
    - Ce cerințe de conformitate ai?
    - Ai nevoie de rețea privată?
 
-3. **Cerinte de scalare:**
-   - Care este traficul estimat?
-   - Ai nevoie de auto-scalare?
-   - Există cerințe regionale?
+3. **Cerințe de scalare:**
+   - Care este încărcarea așteptată?
+   - Ai nevoie de scalare automată?
+   - Sunt cerințe regionale?
 
 ### Pasul 5.2: Creează-ți șablonul AZD
 
-**Urmează acest model pentru a-ți converti aplicația:**
+**Urmează acest tipar pentru a-ți converti aplicația:**
+
+**Doar schelet:** Această secțiune nu oferă sursa API/aplicație web, infrastructura gazdă, implementările modelului, identitate/RBAC sau un `main.parameters.json` finalizat. Bicep la nivel de grup de resurse ilustrează compoziția modulelor; un punct de intrare tipic la nivel de abonament AZD trebuie să creeze un grup de resurse și să-l invoce la acel nivel. Nu te aștepta ca `azd up` să desfășoare o aplicație completă după copierea doar a acestor fragmente. Pentru o bază funcțională, continuă să folosești șablonul RAG din Modulul 1.
 
 1. **Creează structura de bază:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# Inițializează șablonul AZD
-azd init --template minimal
+# Initialize AZD template
+azd init --template minimal .
 ```
 
 2. **Creează azure.yaml:**
@@ -411,7 +407,7 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Creează șabloane de infrastructură:**
+3. **Creează șabloanele de infrastructură:**
 
 **infra/main.bicep** - Șablon principal:
 ```bicep
@@ -448,6 +444,7 @@ resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   }
   properties: {
     customSubDomainName: name
+    disableLocalAuth: true
   }
 }
 
@@ -455,58 +452,60 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Exercițiu laborator 5.1: Provocare creare șablon**
+### **Exercițiul de laborator 5.1: Provocare creare șablon**
 
-**Provocare:** Creează un șablon AZD pentru o aplicație AI de procesare documente.
+**Provocare**: Creează un șablon AZD pentru o aplicație AI de procesare documente.
 
 **Cerințe:**
-- Microsoft Foundry Models pentru analiză conținut
+- Microsoft Foundry Models pentru analiză de conținut
 - Document Intelligence pentru OCR
-- Cont de stocare pentru încărcări documente
+- Cont de stocare pentru încărcarea documentelor
 - Function App pentru logica de procesare
-- Aplicație web pentru interfața utilizator
+- Aplicație web pentru interfață utilizator
 
 **Puncte bonus:**
-- Adaugă gestionare corectă a erorilor
-- Include estimare costuri
-- Configurează tablouri de bord pentru monitorizare
+- Adaugă gestionarea corectă a erorilor
+- Include estimare de cost
+- Configurează panouri de monitorizare
 
-## Modulul 6: Depanarea problemelor comune
+## Modul 6: Depanarea problemelor comune
 
-### Probleme comune la deplasare
+### Probleme comune la implementare
 
 #### Problema 1: Cota serviciului OpenAI depășită
-**Simptome:** Deploy eșuează cu eroare de cotă
+**Simptome:** Implementare eșuează cu eroare de cotă
 **Soluții:**
 ```bash
-# Verifică cotele curente
+# Check current quotas
 az cognitiveservices usage list --location eastus
 
-# Solicită creșterea cotei sau încearcă o regiune diferită
+# Request quota increase, OR try a new disposable environment in another region.
+# Azure resources cannot be relocated merely by changing AZURE_LOCATION.
+azd env new myai-quota-test
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-#### Problema 2: Model indisponibil în regiune
-**Simptome:** Răspunsuri AI eșuează sau erori la deploy model
+#### Problema 2: Modelul nu este disponibil în regiune
+**Simptome:** Răspunsurile AI eșuează sau apar erori de implementare model
 **Soluții:**
 ```bash
-# Verifică disponibilitatea modelului pe regiuni
+# Check model availability by region
 az cognitiveservices model list --location eastus
 
-# Actualizează la modelul disponibil
-azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
-azd deploy
+# Update to available model
+azd env set AZURE_OPENAI_CHATGPT_MODEL gpt-4.1-mini
+azd up
 ```
 
 #### Problema 3: Probleme de permisiuni
-**Simptome:** Erori 403 Forbidden când se cheamă serviciile AI
+**Simptome:** Eroare 403 Forbidden când apelezi serviciile AI
 **Soluții:**
 ```bash
-# Verifică atribuirea rolurilor
+# Check role assignments
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Adaugă rolurile lipsă
+# Add missing roles
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
@@ -517,87 +516,93 @@ az role assignment create \
 
 #### Problema 4: Răspunsuri AI lente
 **Pași de investigație:**
-1. Verifică Application Insights pentru metrici performanță
-2. Revizuiește metricile serviciului OpenAI în portalul Azure
-3. Verifică conectivitatea și latența rețelei
+1. Verifică metricele de performanță în Application Insights
+2. Revizuiește metricele serviciului OpenAI în portalul Azure
+3. Verifică conectivitatea rețelei și latența
 
 **Soluții:**
-- Implementează cache pentru interogări comune
-- Folosește model OpenAI potrivit pentru cazul tău
-- Ia în considerare replici de citire pentru scenarii cu trafic mare
+- Implementează caching pentru interogări comune
+- Folosește modelul OpenAI adecvat pentru cazul tău de utilizare
+- Scalează replicile aplicației doar după verificarea limitelor RPM/TPM ale modelului; implementările Azure OpenAI nu expun o setare generică „read replica” asemănătoare bazelor de date
 
-### **Exercițiu laborator 6.1: Provocare depanare**
+### **Exercițiul de laborator 6.1: Provocare de depanare**
 
-**Scenariu:** Deploy-ul a reușit, dar aplicația întoarce erori 500.
+**Scenariu**: Implementarea a reușit, dar aplicația returnează erori 500.
 
 **Sarcini de depanare:**
 1. Verifică jurnalele aplicației
 2. Verifică conectivitatea serviciului
-3. Testează autentificarea
-4. Revizuiește configurația
+3. Testarea autentificării
+4. Revizuirea configurației
 
 **Unelte de folosit:**
-- `azd show` pentru vedere de ansamblu a deploy-ului
-- Portal Azure pentru jurnale detaliate de serviciu
-- Application Insights pentru telemetrie aplicație
+- `azd show` pentru o privire de ansamblu asupra implementării
+- Portalul Azure pentru jurnale detaliate ale serviciului
+- Application Insights pentru telemetria aplicației
 
-## Modulul 7: Monitorizare și optimizare
+## Modulul 7: Monitorizare și Optimizare
 
-### Pasul 7.1: Setează monitorizare cuprinzătoare
+### Pasul 7.1: Configurarea unei monitorizări cuprinzătoare
 
 1. **Creează tablouri de bord personalizate:**
 
 Navighează în portalul Azure și creează un tablou cu:
-- Număr și latență a cererilor OpenAI
-- Rate de erori ale aplicației
-- Utilizare resurse
-- Urmărire costuri
+- Numărul și latența cererilor OpenAI
+- Rata erorilor aplicației
+- Utilizarea resurselor
+- Urmărirea costurilor
 
 2. **Configurează alerte:**
 ```bash
-# Alertă pentru rata mare de erori
+# Failed-request count on the Application Insights component (not a percentage)
 az monitor metrics alert create \
-  --name "AI-App-High-Error-Rate" \
+  --name "AI-App-Failed-Requests" \
   --resource-group YOUR_RG \
-  --target-resource-id YOUR_APP_ID \
-  --condition "avg Http5xx greater than 10" \
-  --description "Alert when error rate is high"
+  --scopes YOUR_APPLICATION_INSIGHTS_RESOURCE_ID \
+  --condition "count requests/failed > 10" \
+  --window-size 5m \
+  --evaluation-frequency 1m \
+  --description "More than 10 failed requests in five minutes"
 ```
+
+Verifică dacă componenta emite telemetrie pentru cereri și adaugă un grup de acțiune dacă sunt necesare notificări. Metriicul este un contor, nu un procent de eșec; o alertă de rată necesită o interogare adecvată și un numitor.
 
 ### Pasul 7.2: Optimizarea costurilor
 
 1. **Analizează costurile curente:**
 ```bash
-# Folosește Azure CLI pentru a obține date despre costuri
-az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
+# Set a recent reporting window supported by your billing account.
+az consumption usage list --start-date YYYY-MM-DD --end-date YYYY-MM-DD
 ```
 
-2. **Implementează controale de cost:**
-- Setează alerte de buget
+Înlocuiește marcajele de dată. Suportul API de consum variază în funcție de acordul de facturare; folosește Cost Management în portal dacă detaliile de utilizare nu sunt disponibile. Costurile sunt întârziate, nu un oracol de testare în timp real.
+
+2. **Implementarea controalelor asupra costurilor:**
+- Configurează alerte pentru bugete
 - Folosește politici de autoscalare
-- Implementează caching pe cereri
-- Monitorizează utilizarea tokenilor OpenAI
+- Implementează cache pentru cereri
+- Monitorizează utilizarea tokenilor pentru OpenAI
 
-### **Exercițiu laborator 7.1: Optimizare performanță**
+### **Exercițiu de laborator 7.1: Optimizarea performanței**
 
-**Sarcină:** Optimizează aplicația ta AI pentru performanță și cost.
+**Sarcină**: Optimizează-ți aplicația AI atât pentru performanță, cât și pentru cost.
 
-**Metrici de îmbunătățit:**
+**Metrice de îmbunătățit:**
 - Redu timpul mediu de răspuns cu 20%
-- Scade costurile lunare cu 15%
-- Menține o disponibilitate de 99.9%
+- Redu costurile lunare cu 15%
+- Definește un SLO de disponibilitate 99,9% și o fereastră de măsurare (un laborator scurt nu poate demonstra timpul de funcționare lunar)
 
 **Strategii de încercat:**
-- Implementează caching pentru răspunsuri
-- Optimizează prompturile pentru eficiența tokenilor
+- Implementează cache pentru răspunsuri
+- Optimizează prompturile pentru eficiență token
 - Folosește SKU-uri de calcul potrivite
-- Setează autoscalare corectă
+- Configurează autoscalarea corespunzătoare
 
-## Provocare finală: Implementare completă end-to-end
+## Provocarea finală: Implementare end-to-end
 
-### Scenariu provocare
+### Scenariul provocării
 
-Ai sarcina de a crea un chatbot pentru serviciu clienți AI gata pentru producție cu următoarele cerințe:
+Aceasta este o **provocare opțională de arhitectură/design**, nu un exercițiu executabil furnizat sau o certificare de producție. Propune un chatbot pentru serviciul clienți alimentat de AI și documentează care cerințe necesită implementare suplimentară și dovezi:
 
 **Cerințe funcționale:**
 - Interfață web pentru interacțiuni cu clienții
@@ -607,27 +612,29 @@ Ai sarcina de a crea un chatbot pentru serviciu clienți AI gata pentru producț
 - Suport multi-limbă
 
 **Cerințe non-funcționale:**
-- Gestionează 1000 utilizatori concurenți
-- SLA cu disponibilitate 99.9%
+- Suport pentru 1000 utilizatori concurenți
+- SLA de uptime 99,9%
 - Conformitate SOC 2
-- Cost sub 500$/lună
-- Deploy în mai multe medii (dev, staging, prod)
+- Cost sub 500 $/lună
+- Implementare în medii multiple (dev, staging, prod)
 
-### Pași implementare
+Acestea sunt constrângeri ipotetice ale părților interesate, nu rezultate garantate simultan. Definește rata cererilor, dimensiunile prompturilor/ieșirilor și durata sesiunii înainte de a estima costurile; 1000 de utilizatori concurenți nu stabilesc o încărcare sau nu demonstrează fezabilitatea unui buget de 500 $. SOC 2 este un rezultat al auditului organizațional, nu un comutator activat de un șablon AZD. Identifică compromisuri și respinge constrângerile nefezabile cu dovezi.
 
-1. **Desenează arhitectura**
+### Pași de implementare
+
+1. **Proiectează arhitectura**
 2. **Creează șablonul AZD**
-3. **Implementează măsuri de securitate**
-4. **Configurează monitorizarea și alertele**
-5. **Creează pipeline-uri de deploy**
+3. **Implementarea măsurilor de securitate**
+4. **Configurează monitorizarea și alertarea**
+5. **Creează pipeline-uri de implementare**
 6. **Documentează soluția**
 
 ### Criterii de evaluare
 
-- ✅ **Funcționalitate**: Îndeplinește toate cerințele?
-- ✅ **Securitate**: Sunt implementate bune practici?
-- ✅ **Scalabilitate**: Poate gestiona traficul?
-- ✅ **Ușurință de întreținere**: Codul și infrastructura sunt bine organizate?
+- ✅ **Funcționalitate**: Sunt capabilitățile implementate demonstrate și lacunele rămase explicite?
+- ✅ **Securitate**: Sunt bunele practici implementate?
+- ✅ **Scalabilitate**: Poate gestiona sarcina?
+- ✅ **Mentenabilitate**: Este codul și infrastructura bine organizate?
 - ✅ **Cost**: Se încadrează în buget?
 
 ## Resurse suplimentare
@@ -640,44 +647,45 @@ Ai sarcina de a crea un chatbot pentru serviciu clienți AI gata pentru producț
 ### Șabloane exemplu
 - [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
-
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
-### Resurse Comunitare
+### Resurse comunitare
 - [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Template AZD Grozave](https://azure.github.io/awesome-azd/)
+- [Șabloane AZD uimitoare](https://azure.github.io/awesome-azd/)
 
-## 🎓 Certificat de finalizare
+## 🎓 Punct de verificare a finalizării
 
-Felicitări! Ai finalizat Laboratorul AI Workshop. Acum ar trebui să poți:
+Felicitări! Ai finalizat laboratorul AI Workshop. Acum ar trebui să poți:
 
-- ✅ Să convertești aplicații AI existente în template-uri AZD
-- ✅ Să implementezi aplicații AI pregătite pentru producție
-- ✅ Să implementezi cele mai bune practici de securitate pentru sarcinile AI
-- ✅ Să monitorizezi și să optimizezi performanța aplicațiilor AI
-- ✅ Să depanezi probleme comune de implementare
+- ✅ Explica cum să adaptezi o aplicație AI existentă la un șablon AZD
+- ✅ Rulează și testează o aplicație AI de referință
+- ✅ Implementează cele mai bune practici de securitate pentru sarcini AI
+- ✅ Monitorizează și optimizează performanța aplicației AI
+- ✅ Depanează probleme comune de implementare
+
+**Curățare:** Rulează `azd env list`, selectează fiecare mediu disposable creat în acest laborator (`myai-workshop`, și dacă a fost implementat `myai-production`/`myai-quota-test`), și rulează `azd down` în fiecare. Revizuiește planul de ștergere; ștergerea doar a configurației locale a unui mediu nu șterge resursele Azure. Evită `--purge` dacă nu înțelegi eliminarea irevocabilă a resurselor soft-șterse.
 
 ### Pașii următori
-1. Aplică aceste modele în propriile tale proiecte AI
-2. Contribuie cu template-uri către comunitate
-3. Alătură-te Discord-ului Microsoft Foundry pentru suport continuu
-4. Explorează subiecte avansate precum implementările multi-regiune
+1. Aplică aceste modele proiectelor tale AI
+2. Contribuie cu șabloane înapoi comunității
+3. Alătură-te Microsoft Foundry Discord pentru suport continuu
+4. Explorează subiecte avansate ca implementările multi-regiune
 
 ---
 
-**Feedback pentru Workshop**: Ajută-ne să îmbunătățim acest workshop împărtășindu-ne experiența ta în [canalul #Azure Discord Microsoft Foundry](https://discord.gg/microsoft-azure).
+**Feedback despre atelier**: Ajută-ne să îmbunătățim acest atelier împărtășind experiența ta în [canalul #Azure Microsoft Foundry Discord](https://discord.gg/microsoft-azure).
 
 ---
 
-**Navigare Capitol:**
-- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul Curent**: Capitolul 2 - Dezvoltare axată pe AI
-- **⬅️ Anterior**: [Implementarea Modelului AI](ai-model-deployment.md)
-- **➡️ Următor**: [Cele mai bune practici AI pentru producție](production-ai-practices.md)
-- **🚀 Capitolul Următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
+**Navigarea capitolelor:**
+- **📚 Pagina principală a cursului**: [AZD pentru Începători](../../README.md)
+- **📖 Capitolul curent**: Capitolul 2 - Dezvoltare AI-First
+- **⬅️ Anterior**: [Implementarea modelului AI](ai-model-deployment.md)
+- **➡️ Următor**: [Cele mai bune practici AI în producție](../chapter-08-production/production-ai-practices.md)
+- **🚀 Capitolul următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
 
-**Ai nevoie de ajutor?** Alătură-te comunității noastre pentru suport și discuții despre AZD și implementările AI.
+**Ai nevoie de ajutor?** Alătură-te comunității noastre pentru suport și discuții despre implementările AZD și AI.
 
 ---
 

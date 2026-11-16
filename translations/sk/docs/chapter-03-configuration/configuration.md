@@ -1,118 +1,118 @@
-# Configuration Guide
+# Príručka konfigurácie
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+**Navigácia kapitolou:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 3 - Konfigurácia a autentifikácia
+- **⬅️ Predchádzajúca**: [Váš prvý projekt](../chapter-01-foundation/first-project.md)
+- **➡️ Ďalšia**: [Príručka nasadenia](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Nasledujúca kapitola**: [Kapitola 4: Infraštruktúra ako kód](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introduction
+## Úvod
 
-This comprehensive guide covers all aspects of configuring Azure Developer CLI for optimal development and deployment workflows. You'll learn about the configuration hierarchy, environment management, authentication methods, and advanced configuration patterns that enable efficient and secure Azure deployments.
+> Overené voči `azd 1.37.2` (november 2026). Bash príkazy predpokladajú inicializovaný azd projekt. Pokiaľ nie je výslovne uvedené, že ide o kompletný súbor, YAML/Bicep útržky sú fragmenty určené na zlúčenie do zodpovedajúcich projektových súborov, nie samostatné spustiteľné projekty.
 
-## Learning Goals
+Tento komplexný sprievodca pokrýva všetky aspekty konfigurácie Azure Developer CLI pre optimálne vývojové a nasadzovacie pracovné postupy. Naučíte sa o hierarchii konfigurácie, správe prostredí, autentifikačných metódach a pokročilých konfiguračných vzoroch, ktoré umožňujú efektívne a bezpečné nasadenia v Azure.
 
-By the end of this lesson, you will:
-- Master the azd configuration hierarchy and understand how settings are prioritized
-- Configure global and project-specific settings effectively
-- Manage multiple environments with different configurations
-- Implement secure authentication and authorization patterns
-- Understand advanced configuration patterns for complex scenarios
+## Ciele učenia
 
-## Learning Outcomes
+Na konci tejto lekcie budete:
+- Ovládať hierarchiu konfigurácie azd a rozumieť tomu, ako sú nastavenia priorizované
+- Efektívne nakonfigurovať globálne a projektovo špecifické nastavenia
+- Spravovať viacero prostredí s rôznymi konfiguráciami
+- Implementovať bezpečné vzory autentifikácie a autorizácie
+- Rozumieť pokročilým konfiguračným vzorcom pre zložité scenáre
 
-After completing this lesson, you will be able to:
-- Configure azd for optimal development workflows
-- Set up and manage multiple deployment environments
-- Implement secure configuration management practices
-- Troubleshoot configuration-related issues
-- Customize azd behavior for specific organizational requirements
+## Výsledky učenia
 
-This comprehensive guide covers all aspects of configuring Azure Developer CLI for optimal development and deployment workflows.
+Po dokončení tejto lekcie budete vedieť:
+- Konfigurovať azd pre optimálne vývojové pracovné postupy
+- Nastaviť a spravovať viacero nasadzovacích prostredí
+- Implementovať bezpečné praktiky správy konfigurácie
+- Riešiť problémy týkajúce sa konfigurácie
+- Prispôsobiť správanie azd pre špecifické organizačné požiadavky
 
-## Understanding AI Agents in an azd Project
+Tento komplexný sprievodca pokrýva všetky aspekty konfigurácie Azure Developer CLI pre optimálne vývojové a nasadzovacie pracovné postupy.
 
-If you're new to AI agents, here's a simple way to think about them within the azd world.
+## Pochopenie AI agentov v azd projekte
 
-### What Is an Agent?
+Ak ste noví v AI agentoch, tu je jednoduchý spôsob, ako ich pochopiť v rámci azd sveta.
 
-An agent is a piece of software that can receive a request, reason about it, and take actions—often by calling an AI model, looking up data, or invoking other services. In an azd project, an agent is just another **service** alongside your web frontend or API backend.
+### Čo je agent?
 
-### How Agents Fit Into the azd Project Structure
+Agent je časť softvéru, ktorá dokáže prijímať požiadavku, premýšľať o nej a vykonávať akcie – často volaním AI modelu, vyhľadávaním dát alebo spustením iných služieb. V azd projekte je agent len ďalšou **službou** popri vašom webovom fronte alebo API backende.
 
-An azd project is made up of three layers: **infrastructure**, **code**, and **configuration**. Agents plug into these layers the same way any other service does:
+### Ako agenti zapadajú do štruktúry azd projektu
 
-| Layer | What It Does for a Traditional App | What It Does for an Agent |
+azd projekt sa skladá z troch vrstiev: **infraštuktúra**, **kód** a **konfigurácia**. Agenti sa pripájajú do týchto vrstiev rovnako ako akákoľvek iná služba:
+
+| Vrstva | Čo robí pre tradičnú aplikáciu | Čo robí pre agenta |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Provisions a web app and database | Provisions an AI model endpoint, search index, or agent host |
-| **Code** (`src/`) | Contains your frontend and API source code | Contains your agent logic and prompt definitions |
-| **Configuration** (`azure.yaml`) | Lists your services and their hosting targets | Lists your agent as a service, pointing to its code and host |
+| **Infraštuktúra** (`infra/`) | Poskytuje webovú aplikáciu a databázu | Poskytuje endpoint modelu AI, index vyhľadávania alebo hostiteľa agenta |
+| **Kód** (`src/`) | Obsahuje váš frontend a API zdrojový kód | Obsahuje logiku agenta a definície promptov |
+| **Konfigurácia** (`azure.yaml`) | Zoznam služieb a ich hosťovacie ciele | Zoznam vášho agenta ako služby, odkazujúci na jeho kód a hostiteľa |
 
-### The Role of `azure.yaml`
+### Úloha `azure.yaml`
 
-You don't need to memorize the syntax right now. Conceptually, `azure.yaml` is the file where you tell azd: *"Here are the services that make up my application, and here's where to find their code."*
+Nemusíte si práve teraz pamätať syntax. Konceptuálne je `azure.yaml` súbor, kde poviete azd: *"Tu sú služby, ktoré tvoria moju aplikáciu, a tu nájdete ich kód."*
 
-When your project includes an AI agent, `azure.yaml` simply lists that agent as one of the services. azd then knows to provision the right infrastructure (like an Microsoft Foundry Models endpoint or a Container App to host the agent) and deploy your agent code—just as it would for a web app or API.
+Keď váš projekt obsahuje AI agenta, `azure.yaml` jednoducho uvedie toho agenta ako jednu zo služieb. azd potom vie poskytnúť správnu infraštruktúru (ako napríklad Microsoft Foundry Models endpoint alebo Container App na hosťovanie agenta) a nasadiť váš kód agenta – rovnako ako by to urobil pre webovú aplikáciu alebo API.
 
-This means there's nothing fundamentally new to learn. If you understand how azd manages a web service, you already understand how it manages an agent.
+To znamená, že nie je potrebné učiť sa nič úplne nové. Ak chápete, ako azd spravuje webovú službu, už rozumiete tomu, ako spravuje agenta.
 
-## Configuration Hierarchy
+## Hierarchia konfigurácie
 
-azd uses a hierarchical configuration system:
-1. **Command-line flags** (highest priority)
-2. **Environment variables**
-3. **Local project configuration** (`.azd/config.json`)
-4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (lowest priority)
+azd má odlišné konfiguračné úrovne, nie jeden univerzálny prekryv:
+- **Globálne používateľské preferencie**: `~/.azd/config.json`, spravované `azd config`.
+- **Definícia projektu**: `azure.yaml` špecifikuje služby, infraštruktúru a háky.
+- **Výber lokálneho prostredia**: `.azure/config.json`.
+- **Hodnoty pre jednotlivé prostredia**: `.azure/<name>/.env`, spravované `azd env`; ďalšie nastavenia sú v `config.json` daného prostredia.
+- **Prekrytie príznakmi a premennými procesu**: prepíšu iba nastavenia podporované konkrétnym príkazom/providerom.
 
-## Global Configuration
+Hodnota `azd env set` sa automaticky nestane infraštruktúrnym parametrom alebo nastavením nasadenej aplikácie. Výslovne ju odkazujte v súbore parametrov, podporovanej konfiguračnej službe alebo háku.
 
-### Setting Global Defaults
+## Globálna konfigurácia
+
+### Nastavenie globálnych predvolieb
 ```bash
-# Nastaviť predvolené predplatné
+# Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Nastaviť predvolenú lokalitu
+# Set default location
 azd config set defaults.location "eastus2"
 
-# Nastaviť predvolenú konvenciu pomenovania skupiny prostriedkov
-azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
-
-# Zobraziť všetku globálnu konfiguráciu
+# View all global configuration
 azd config show
 
-# Odstrániť konfiguráciu
+# Remove a configuration
 azd config unset defaults.location
 ```
 
-### Common Global Settings
+### Bežné globálne nastavenia
 ```bash
-# Vývojové preferencie
-azd config set alpha.enable true                    # Povoliť alfa funkcie
-azd config set telemetry.enabled false             # Vypnúť telemetriu
-azd config set output.format json                  # Nastaviť formát výstupu
+# Discover supported settings instead of inventing configuration keys
+azd config options
+azd config list-alpha
 
-# Nastavenia zabezpečenia
-azd config set auth.useAzureCliCredential true     # Použiť Azure CLI na autentifikáciu
-azd config set tls.insecure false                  # Vynútiť overenie TLS
+# Explicit opt-in only: use Azure CLI credentials rather than azd's default login
+azd config set auth.useAzCliAuth true
+# Restore azd's default credential behavior
+azd config unset auth.useAzCliAuth
 
-# Ladenie výkonu
-azd config set provision.parallelism 5             # Paralelné vytváranie zdrojov
-azd config set deploy.timeout 30m                  # Časový limit nasadenia
+# Use per-command flags for supported behavior
+azd show --output json
+azd deploy --timeout 1800   # seconds; stops waiting, not the Azure-side deployment
 ```
 
-## 🏗️ Project Configuration
+## 🏗️ Konfigurácia projektu
 
-### azure.yaml Structure
-The `azure.yaml` file is the heart of your azd project:
+### Štruktúra azure.yaml
+Súbor `azure.yaml` je srdcom vášho azd projektu:
 
 ```yaml
 # Minimum configuration
 name: my-awesome-app
 metadata:
   template: my-template@1.0.0
-  templateBranch: main
 
 # Service definitions
 services:
@@ -129,21 +129,13 @@ services:
     language: python
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-    
-  # Database service
-  database:
-    project: ./src/db
-    host: postgres
+      context: .
+      path: Dockerfile
     
 # Infrastructure configuration
 infra:
   provider: bicep                   # Infrastructure provider
   path: ./infra                    # Infrastructure code location
-  parameters:
-    environmentName: ${AZURE_ENV_NAME}
-    location: ${AZURE_LOCATION}
 
 # Deployment hooks
 hooks:
@@ -181,9 +173,11 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Service Configuration Options
+Toto je **príklad definície projektu**, nie dodávaný štartér. Vytvorte referencované zdrojové adresáre, skripty hákov, skripty balíčkov a zodpovedajúce `infra/main.bicep`/`main.parameters.json` pred jeho spustením. Databázy patria do infraštruktúry; `postgres` nie je vstavaný hostiteľ služby. Parametre infraštruktúry vkladajte do súboru parametrov providera, nie do `infra.parameters`.
 
-#### Host Types
+### Konfiguračné možnosti služby
+
+#### Typy hostiteľov
 ```yaml
 services:
   web-static:
@@ -202,46 +196,53 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Language-Specific Settings
+#### Výstavbové háky špecifické pre jazyk
+
+Nasledujúce útržky služby ilustrujú háky; zlúčte ich s reálnym `project` a `host` každej služby. `buildCommand` a `startCommand` nie sú generické vlastnosti azd služby. Štart konfigurujte v aplikácii, Dockerfile alebo infraštruktúre hostiteľa.
+
 ```yaml
 services:
   node-app:
+    project: ./src/node
+    host: appservice
     language: js
-    buildCommand: npm run build
-    startCommand: npm start
+    hooks:
+      prepackage:
+        shell: sh
+        run: npm run build
     
   python-app:
+    project: ./src/python
+    host: appservice
     language: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
     
   dotnet-app:
+    project: ./src/dotnet
+    host: appservice
     language: csharp
-    buildCommand: dotnet build
-    startCommand: dotnet run
     
   java-app:
+    project: ./src/java
+    host: appservice
     language: java
-    buildCommand: mvn clean package
-    startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Environment Management
+## 🌟 Správa prostredí
 
-### Creating Environments
+### Vytváranie prostredí
 ```bash
-# Vytvoriť nové prostredie
+# Create a new environment
 azd env new development
 
-# Vytvoriť s konkrétnym umiestnením
+# Create with specific location
 azd env new staging --location "westus2"
 
-# Vytvoriť z šablóny
+# Create from template
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Environment Configuration
-Each environment has its own configuration in `.azure/<env-name>/config.json`:
+### Konfigurácia prostredia
+Hlavné hodnoty prostredia sú v `.azure/<env-name>/.env`, vrátane `AZURE_ENV_NAME`, `AZURE_SUBSCRIPTION_ID` a `AZURE_LOCATION`. Použite `azd env config get/set` pre dodatočné nastavenia prostredia v JSON formáte. Nasledujúci JSON je **konceptuálny stav aplikácie**, nie azd konfiguračné schéma; nekopírujte ho do azd súborov:
 
 ```json
 {
@@ -263,130 +264,134 @@ Each environment has its own configuration in `.azure/<env-name>/config.json`:
 }
 ```
 
-### Environment Variables
+### Premenné prostredia
+
+**Iba ukážka v čistej forme.** Bežné hodnoty `azd env set` sa zapisujú do `.azure/<name>/.env` a môžu byť vypísané príkazmi na čítanie. Nepoužívajte príkladový API kľúč ako reálnu poverenosť. Pre tajomstvá používajte `azd env set-secret` a explicitné runtime prepojenie.
+
 ```bash
-# Nastaviť premenné špecifické pre prostredie
+# Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# Zobraziť premenné prostredia
+# View environment variables
 azd env get-values
 
-# Očakávaný výstup:
+# Expected output:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# Odstrániť premennú prostredia
+# Remove environment variable
 azd env unset DEBUG
 
-# Overiť odstránenie
+# Verify removal
 azd env get-values | grep DEBUG
-# (nemalo by vrátiť nič)
+# (should return nothing)
 ```
 
-### Environment Templates
-Create `.azure/env.template` for consistent environment setup:
+### Šablóny prostredia
+Vytvorte **netajný, manuálne udržiavaný** `.env.example` v koreňovom adresári projektu pre konzistentné nastavenie. azd automaticky nenahadzuje súbor s názvom `env.template`:
 ```bash
-# Povinné premenné
+# Required variables
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Nastavenia aplikácie
+# Application settings
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Voliteľné nastavenia vývoja
+# Optional development settings
 DEBUG=false
 LOG_LEVEL=info
 ```
 
-### Sharing Environments Across a Team
+### Zdieľanie prostredí v tíme
 
-When more than one person works on a project, you need to agree on **what travels with the repo and what stays local**. azd keeps each environment under a `.azure/` folder, and not all of it should be committed.
+Keď na projekte pracuje viac ľudí, musíte sa dohodnúť na tom, **čo sa zdieľa s repozitárom a čo zostáva lokálne**. azd udržiava každé prostredie v adresári `.azure/`, a nie všetko by sa malo commitovať.
 
-**What's in `.azure/`:**
+**Čo je v `.azure/`:**
 
 ```
 .azure/
 ├── config.json              # which env is currently selected (local)
 └── <env-name>/
-    ├── config.json          # subscription, location, resource IDs
-    └── .env                 # environment variables (may contain secrets!)
+    ├── config.json          # additional environment settings
+    └── .env                 # subscription, location, outputs; may contain secrets!
 ```
 
-**What to gitignore.** azd's default `.gitignore` already excludes `.azure/`. Keep it that way—the `.env` files can contain secrets, and resource IDs are specific to whoever provisioned them. Each teammate creates their **own** environment locally:
+**Čo ignorovať v gite.** Predvolený `.gitignore` azd už vylučuje `.azure/`. Zachovajte to takto – súbory `.env` môžu obsahovať tajomstvá a ID zdrojov sú špecifické pre toho, kto ich poskytol. Každý člen tímu vytvorí **vlastné** lokálne prostredie:
 
 ```bash
-# Každý vývojár to spustí raz, aby získal svoje izolované prostredie
+# Every developer runs this once to get their own isolated environment
 azd env new dev-alice
 azd up
 ```
 
-**Switching between environments.** A developer who manages several environments selects the active one before running commands:
+**Prepinanie medzi prostrediami.** Vývojár s viacerými prostrediami pred spustením príkazov vyberie aktívne prostredie:
 
 ```bash
-azd env list                 # zobraziť všetky lokálne prostredia a ktoré z nich je predvolené
-azd env select staging       # nastaviť 'staging' ako aktívne prostredie
-azd env get-values           # overiť, že máte nasmerované správne prostredie
+azd env list                 # see all local environments and which is default
+azd env select staging       # make 'staging' the active environment
+azd env get-values           # confirm you're pointed at the right one
 ```
 
-**Providing non-secret defaults to the team.** Commit a template (like the `.azure/env.template` above) so everyone knows which variables to set—but never commit the filled-in values. New teammates copy the template and fill in their own.
+**Poskytovanie netajných predvolieb tímu.** Commitnite `.env.example` mimo ignorovaného adresára `.azure/`. Noví členovia si ho skopírujú do lokálne ignorovaného súboru, vyplnia hodnoty a výslovne ho naimportujú pomocou `azd env set --file <local-file>`. Nikdy neimportujte prázdne zástupné symboly cez funkčné prostredie.
 
-**Environments in CI/CD.** Pipelines don't read your local `.azure/` folder. Instead, provide the environment values as pipeline variables/secrets, and azd reads them from the process environment:
+**Prostredia v CI/CD.** Pipeline nečíta váš lokálny adresár `.azure/`. Namiesto toho poskytujte hodnoty prostredia ako premenné/tajomstvá pipeline a azd ich načíta z prostredia procesu:
 
 ```bash
-# V CI azd tieto načítava z prostredia, nie z .azure/
+# In CI, azd reads these from the environment, not from .azure/
 export AZURE_ENV_NAME=production
 export AZURE_LOCATION=eastus2
-export AZURE_SUBSCRIPTION_ID=<sub-id>
+export AZURE_SUBSCRIPTION_ID="<sub-id>"
 azd provision --no-prompt
 azd deploy --no-prompt
 ```
 
-> **Rule of thumb:** infrastructure code (`infra/`, `azure.yaml`) is shared in Git; environment *state and secrets* (`.azure/`) are per-developer and per-pipeline. `azd pipeline config` sets the pipeline variables up for you automatically.
+> **Pravidlo palca:** kód infraštruktúry (`infra/`, `azure.yaml`) sa zdieľa v Gite; *stav prostredia a tajomstvá* (`.azure/`) sú pre každého vývojára a pre každý pipeline. `azd pipeline config` automaticky nastavuje premenné pipeline za vás.
 
-## 🔐 Authentication Configuration
+## 🔐 Konfigurácia overovania
 
-### Azure CLI Integration
+### Integrácia Azure CLI
 ```bash
-# Použiť prihlasovacie údaje Azure CLI (predvolené)
-azd config set auth.useAzureCliCredential true
+# Explicit opt-in; NOT the default
+azd config set auth.useAzCliAuth true
 
-# Prihlásiť sa s konkrétnym nájomcom
-az login --tenant <tenant-id>
+# Login with specific tenant
+az login --tenant "<tenant-id>"
 
-# Nastaviť predvolené predplatné
-az account set --subscription <subscription-id>
+# Set default subscription
+az account set --subscription "<subscription-id>"
 ```
 
-### Service Principal Authentication
-For CI/CD pipelines:
+### Overovanie pomocou Service Principal
+Pre CI/CD pipelines:
 ```bash
-# Nastavte premenné prostredia
+# Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Alebo nakonfigurujte priamo
-azd config set auth.clientId "your-client-id"
-azd config set auth.tenantId "your-tenant-id"
+# Authenticate azd explicitly (prefer pipeline federation over a long-lived secret)
+azd auth login --client-id "$AZURE_CLIENT_ID" \
+  --client-secret "$AZURE_CLIENT_SECRET" --tenant-id "$AZURE_TENANT_ID"
 ```
 
 ### Managed Identity
-For Azure-hosted environments:
+Pre prostredia hosťované v Azure:
 ```bash
-# Povoliť autentifikáciu spravovanej identity
-azd config set auth.useMsi true
-azd config set auth.msiClientId "your-managed-identity-client-id"
+# Enable managed identity authentication
+azd auth login --managed-identity
+# Alternative: choose an identity assigned to the host by client ID
+azd auth login --managed-identity --client-id "<managed-identity-client-id>"
 ```
 
-## 🏗️ Infrastructure Configuration
+## 🏗️ Konfigurácia infraštruktúry
 
-### Bicep Parameters
-Configure infrastructure parameters in `infra/main.parameters.json`:
+### Bicep parametre
+Konfigurujte parametre infraštruktúry v `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -408,101 +413,98 @@ Configure infrastructure parameters in `infra/main.parameters.json`:
 }
 ```
 
-### Terraform Configuration
-For Terraform projects, configure in `infra/terraform.tfvars`:
-```hcl
-environment_name = "${AZURE_ENV_NAME}"
-location = "${AZURE_LOCATION}"
-app_service_sku = "B1"
-database_sku = "GP_Gen5_2"
+### Konfigurácia Terraform
+Pre projekty Terraform azd nahrádza zástupné symboly v `infra/main.tfvars.json`. Tieto názvy musia zodpovedať deklarovaným vstupným premenným Terraformu:
+```json
+{
+  "environment_name": "${AZURE_ENV_NAME}",
+  "location": "${AZURE_LOCATION}",
+  "app_service_sku": "B1"
+}
 ```
 
-## 🚀 Deployment Configuration
+## 🚀 Konfigurácia nasadenia
 
-### Build Configuration
+### Konfigurácia buildu
 ```yaml
 # In azure.yaml
 services:
   web:
     project: ./src/web
+    host: appservice
     language: js
-    buildCommand: npm run build:prod
-    buildEnvironment:
-      NODE_ENV: production
-      REACT_APP_API_URL: ${API_URL}
     dist: build
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          NODE_ENV=production REACT_APP_API_URL="$API_URL" npm run build:prod
     
   api:
     project: ./src/api
+    host: appservice
     language: python
-    buildCommand: |
-      pip install -r requirements.txt
-      python -m pytest tests/
-    buildEnvironment:
-      PYTHONPATH: src
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          python -m pip install -r requirements.txt
+          PYTHONPATH=src python -m pytest tests/
 ```
 
-### Docker Configuration
+### Konfigurácia Dockeru
 ```yaml
 services:
   api:
     project: ./src/api
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        NODE_ENV: production
-        API_VERSION: v1.0.0
+        - NODE_ENV=production
+        - API_VERSION=v1.0.0
 ```
-Príklad `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+ Cesty sú relatívne k projektu služby. Dockerfile musí deklarovať všetky spotrebované hodnoty `ARG`. Pri multi-stage buildu dajte deployovaciu fázu na koniec alebo použite vlastný balíčkovací workflow; `docker.target` nie je podporovanou vlastnosťou v kontrolovanej schéme.
 
-## 🔧 Advanced Configuration
+## 🔧 Pokročilá konfigurácia
 
-### Custom Resource Naming
-```bash
-# Nastaviť konvencie pomenovávania
-azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
-azd config set naming.storageAccount "{project}{env}sa"
-azd config set naming.keyVault "kv-{project}-{env}"
-```
-
-### Network Configuration
+### Vlastné pomenovanie zdrojov
 ```yaml
-# In azure.yaml
-infra:
-  provider: bicep
-  parameters:
-    vnetAddressPrefix: "10.0.0.0/16"
-    subnetAddressPrefix: "10.0.1.0/24"
-    enablePrivateEndpoints: true
+# azure.yaml fragment: override resource-group discovery where appropriate
+resourceGroup: rg-${AZURE_ENV_NAME}
 ```
 
-### Monitoring Configuration
-```yaml
-# In azure.yaml
-monitoring:
-  applicationInsights:
-    enabled: true
-    samplingPercentage: 100
-  logAnalytics:
-    enabled: true
-    retentionDays: 30
+Definujte skutočné názvy zdrojov v Bicep/Terraform a zabezpečte konzistenciu vytvárania skupín zdrojov podľa tohto nastavenia. Neexistujú generické kľúče konfigurácie `naming.storageAccount` alebo `naming.keyVault`.
+
+### Sieťová konfigurácia
+```json
+{
+  "vnetAddressPrefix": { "value": "10.0.0.0/16" },
+  "subnetAddressPrefix": { "value": "10.0.1.0/24" },
+  "enablePrivateEndpoints": { "value": true }
+}
 ```
 
-## 🎯 Environment-Specific Configurations
+Zlúčte tieto **ilustratívne položky parametrov** do `infra/main.parameters.json` pod `parameters`, a deklarujte a použite príslušné parametre v Bicep. Sami o sebe nič nerobia.
 
-### Development Environment
+### Konfigurácia monitorovania
+Zriaďte Application Insights a Log Analytics v Bicep/Terraform a nakonfigurujte telemetriu aplikácie vo vašom SDK. Neblokuje sa vytvorenie týchto zdrojov cez žiadny generický vrcholový blok `monitoring` v `azure.yaml`. Pozrite si [monitorovaciu infraštruktúru](../chapter-04-infrastructure/provisioning.md#-monitoring-and-observability).
+
+## 🎯 Konfigurácie špecifické pre prostredia
+
+### Vývojové prostredie
 ```bash
-# .azure/vývoj/.env
+# .azure/development/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging Environment
+### Staging prostredie
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -511,7 +513,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Production Environment
+### Produkčné prostredie
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -520,22 +522,23 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Configuration Validation
+## 🔍 Validácia konfigurácie
 
-### Validate Configuration
+### Validácia konfigurácie
 ```bash
-# Skontrolovať syntax konfigurácie
-azd config validate
+# Inspect supported global settings and current project
+azd config options
+azd show
 
-# Otestovať premenné prostredia
+# Test environment variables
 azd env get-values
 
-# Overiť infraštruktúru
-azd provision --dry-run
+# Validate infrastructure
+azd provision --preview
 ```
 
-### Configuration Scripts
-Create validation scripts in `scripts/`:
+### Konfiguračné skripty
+Vytvorte validačné skripty v `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -543,39 +546,43 @@ Create validation scripts in `scripts/`:
 
 echo "Validating configuration..."
 
-# Skontrolovať požadované premenné prostredia
+# Check required environment variables
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Overiť syntaktickú správnosť azure.yaml
-if ! azd config validate; then
-  echo "Error: Invalid azure.yaml configuration"
+# Ask azd to load the project (not full schema or infrastructure validation)
+if ! azd show --output json; then
+  echo "Error: Could not load the azd project"
   exit 1
 fi
 
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Best Practices
+## 🎓 Najlepšie praktiky
 
-### 1. Use Environment Variables
+### 1. Používajte premenné prostredia
 ```yaml
 # Good: Use environment variables
 database:
   connectionString: ${DATABASE_CONNECTION_STRING}
 
+```
+
+Vyhnite sa tvrdému zakódovaniu citlivých hodnôt (ilustratívna samostatná konfigurácia, nie druhý kľúč `database` v rovnakom súbore):
+
+```yaml
 # Avoid: Hardcode sensitive values
 database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize Configuration Files
+### 2. Organizujte konfiguračné súbory
 ```
 .azure/
 ├── config.json              # Global project config
-├── env.template             # Environment template
 ├── development/
 │   ├── config.json         # Dev environment config
 │   └── .env                # Dev environment variables
@@ -587,16 +594,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Version Control Considerations
+### 3. Premýšľajte o verziovacom riadení
 ```bash
 # .gitignore
-.azure/*/config.json         # Konfigurácie prostredia (obsahujú identifikátory zdrojov)
-.azure/*/.env               # Premenné prostredia (môžu obsahovať citlivé údaje)
-.env                        # Lokálny súbor prostredia
+.azure/*/config.json         # Environment configs (contain resource IDs)
+.azure/*/.env               # Environment variables (may contain secrets)
+.env                        # Local environment file
 ```
 
-### 4. Configuration Documentation
-Document your configuration in `CONFIG.md`:
+### 4. Dokumentácia konfigurácie
+Dokumentujte vašu konfiguráciu v `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -611,88 +618,87 @@ Document your configuration in `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Hands-On Practice Exercises
+## 🎯 Praktické cvičenia
 
-### Exercise 1: Multi-Environment Configuration (15 minutes)
+### Cvičenie 1: Konfigurácia viacerých prostredí (15 minút)
 
-**Goal**: Create and configure three environments with different settings
+**Cieľ**: Vytvorte a nakonfigurujte tri lokálne prostredia s rôznymi hodnotami. Začnite v inicializovanom projekte; použite nepoužité mená, ak už existujú. Tieto hodnoty špecifické pre aplikáciu nemenia nastavenia telemetrie/spustenia, kým ich váš šablóna nevyužije.
 
 ```bash
-# Vytvorte vývojové prostredie
+# Create development environment
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Vytvorte predprodukčné prostredie
+# Create staging environment
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# Vytvorte produkčné prostredie
+# Create production environment
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# Overte každé prostredie
+# Verify each environment
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**Success Criteria:**
-- [ ] Three environments created successfully
-- [ ] Each environment has unique configuration
-- [ ] Can switch between environments without errors
-- [ ] `azd env list` shows all three environments
+**Kritériá úspechu:**
+- [ ] Tri prostredia úspešne vytvorené
+- [ ] Každé prostredie má jedinečnú konfiguráciu
+- [ ] Možnosť prepínať medzi prostrediami bez chýb
+- [ ] `azd env list` zobrazuje všetky tri prostredia
 
-### Exercise 2: Secret Management (10 minutes)
+### Cvičenie 2: Odkazy na tajomstvá v Key Vault (10-20 minút)
 
-**Goal**: Practice secure configuration with sensitive data
+**Cieľ**: Uložte odkaz na Key Vault namiesto čistého textu. **Začiatočný stav:** inicializované prostredie, prihlásenie do Azure a prístup k Key Vault so zásadami na vytvorenie/čítanie testovacieho tajomstva. Operácie so zásobníkom môžu byť spoplatnené.
 
 ```bash
-# Nastaviť tajomstvá (nebudú zobrazené vo výstupe)
-azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+# Follow the interactive prompts; use a dummy training value, not a production key
+azd env set-secret TRAINING_API_KEY
 
-# Nastaviť konfiguráciu bez tajných údajov
+# Set non-secret config
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Zobraziť prostredie (tajomstvá by mali byť zacenzurované)
-azd env get-values
-
-# Overiť, že tajomstvá sú uložené
-azd env get DB_PASSWORD  # Malo by zobraziť skutočnú hodnotu
+# Inspect .azure/<environment>/.env locally: TRAINING_API_KEY should
+# contain an azd Key Vault reference, not the dummy secret text.
+# Do not print resolved values in CI or shared terminal logs.
 ```
 
-**Success Criteria:**
-- [ ] Secrets stored without displaying in terminal
-- [ ] `azd env get-values` shows redacted secrets
-- [ ] Individual `azd env get <SECRET_NAME>` retrieves actual value
+**Kritériá úspechu:**
+- [ ] Interaktívny príkaz hlási vybraný zásobník a odkaz na tajomstvo
+- [ ] Lokálny `.env` obsahuje odkaz namiesto testovacieho tajomstva
+- [ ] Vie sa vysvetliť, že runtime identita/RBAC a spotreba musia byť ešte nakonfigurované
 
-## Next Steps
+**Bežné problémy:** 403 vyžaduje správnu rolu pre dátovú rovinu zásobníka a čas na propagáciu; `azd env set ... --secret` nie je platný príkaz. Bežné výstupy `get-values`/`get-value` nemožno považovať za skryté. Odstráňte referenciu na školenie pomocou `azd env unset TRAINING_API_KEY`; tým sa neodstráni tajomstvo zo zásobníka, ktoré musíte vyčistiť samostatne, ak ste ho vytvorili.
 
-- [Your First Project](first-project.md) - Apply configuration in practice
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Use configuration for deployment
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Production-ready configurations
+## Ďalšie kroky
 
-## References
+- [Váš prvý projekt](../chapter-01-foundation/first-project.md) - Využitie konfigurácie v praxi
+- [Sprievodca nasadením](../chapter-04-infrastructure/deployment-guide.md) - Použitie konfigurácie pre nasadenie
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Konfigurácie pripravené na produkciu
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+## Referencie
+
+- [azd Konfiguračná referencia](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml Schéma](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-schema)
+- [Premenné prostredia](https://learn.microsoft.com/azure/developer/azure-developer-cli/manage-environment-variables)
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Your First Project](first-project.md)
+**Navigácia kapitolou:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 3 - Konfigurácia a overovanie
+- **⬅️ Predchádzajúca**: [Váš prvý projekt](../chapter-01-foundation/first-project.md)
+- **➡️ Ďalšia kapitola**: [Kapitola 4: Infraštruktúra ako kód](../chapter-04-infrastructure/deployment-guide.md)
+- **Ďalšia lekcia**: [Overovanie a bezpečnosť](authsecurity.md)
 
 ---
 

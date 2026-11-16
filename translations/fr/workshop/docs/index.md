@@ -1,11 +1,11 @@
 # Atelier AZD pour développeurs IA
 
-> Validé avec `azd 1.27.1` en juillet 2026.
+> Directives sources vérifiées avec AZD 1.37.2 le 4 novembre 2026. Les captures d'écran sont à titre illustratif ; la disponibilité du service, les libellés du portail et les paramètres par défaut des modèles peuvent changer.
 
 > [!IMPORTANT]  
-> **Cet atelier est accompagné d'un guide que vous pouvez prévisualiser dans votre navigateur local. Pour commencer, ouvrez le dépôt dans GitHub Codespaces, un conteneur de développement, ou un clone local avec MkDocs installé—puis attendez de voir un terminal VS Code actif et tapez :**  
-> `mkdocs serve > /dev/null 2>&1 &`  
-> **Vous devriez voir une fenêtre contextuelle vous invitant à ouvrir la page de prévisualisation dans un navigateur.**
+> **Cet atelier est équipé d'un guide atelier que vous pouvez prévisualiser dans votre navigateur local. Pour commencer, ouvrez le dépôt dans GitHub Codespaces, un conteneur de développement, ou un clone local avec MkDocs installé — puis attendez de voir un terminal VS Code actif et tapez :**  
+> Depuis la racine du dépôt du cours, installez `requirements-dev.txt`, puis lancez `python -m mkdocs serve --config-file workshop/mkdocs.yml` au premier plan.  
+> **Vous devriez voir une boîte de dialogue contextuelle pour ouvrir la page de prévisualisation dans un navigateur.**
 
 Bienvenue à cet atelier pratique pour apprendre l’Azure Developer CLI (AZD) avec un focus sur le déploiement d’applications IA. Cet atelier vous aide à acquérir une compréhension pratique des modèles AZD en 3 étapes :
 
@@ -17,10 +17,10 @@ Au cours de cet atelier, vous serez également initié aux outils et flux de tra
 
 | | | 
 |:---|:---|
-| **📚 Accueil du cours**| [AZD Pour Débutants](../README.md)|
-| **📖 Documentation** | [Commencer avec les modèles IA](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **📚 Accueil du Cours**| [AZD pour Débutants](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md)|
+| **📖 Documentation** | [Commencez avec les modèles IA](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
 | **🛠️Modèles IA** | [Modèles Microsoft Foundry](https://ai.azure.com/templates) |
-|**🚀 Prochaines étapes** | [Relevez le défi](#workshop-challenge) |
+|**🚀 Étapes Suivantes** | [Relevez le Défi](instructions/7-Wrap-up.md#4-workshop-challenge) |
 | | |
 
 ## Vue d’ensemble de l’atelier

@@ -1,434 +1,227 @@
-# Simple Flask API - കണ്ടെയ്‌നർ ആപ്പ് ഉദാഹരണം
+# സിമ്പിൾ ഫ്ലാസ്‌ക് API — അസ്യൂർ കണ്ടെയ്‌നർ ആപ്സ്
 
-**Learning Path:** തുടക്കക്കാർ ⭐ | **സമയം:** 25-35 മിനിറ്റ് | **ചെലവ്:** $0-15/മാസം
+**നിലവാരം:** തുടക്കക്കാരൻ · **സമയം:** സെറ്റപ്പ് ഉൾപ്പെടെ 30–45 മിനിറ്റ്
 
-Azure Developer CLI (azd) ഉപയോഗിച്ച് Azure Container Apps-ൽ ഡിപ്ലോയ് ചെയ്ത ഒരു പൂര്‍ണ്ണമായ, പ്രവർത്തനക്ഷമമായ Python Flask REST API. ഈ ഉദാഹരണം കണ്ടെയ്‌നർ ഡിപ്ലോയ്മെന്റ്, ഓട്ടോ-സ്‌കെയ്‌ലിംഗ്, നിരീക്ഷണം അടിസ്ഥാനങ്ങൾ വിവരിക്കുന്നു.
+അസ്യൂർ ഡെവലപ്പർ CLI (azd) ഉപയോഗിച്ച് ഒരു Python Flask CRUD API വിന്യസിക്കുക. സോഴ്‌സ്, Dockerfile,
+Bicep,യും വിന്യസിക്കൽ പാരാമീറ്ററുകളും ഉൾപ്പെടുന്നു. ഇത് ഒരു **അറിയുന്നതിനുള്ള സാമ്പിൾ** മാത്രമാണ്,
+ഉത്പാദനത്തിനായി സജ്ജമാക്കിയ API അല്ല.
 
-## 🎯 നിങ്ങൾക്ക് ലഭിക്കാനിരിക്കുന്നത്
+## നിങ്ങൾ പഠിക്കുന്നതു
 
-- Azure-ലേക്ക് കണ്ടെയ്‌നർ ചെയ്ത് Python അപ്ലിക്കേഷന് ഡിപ്ലോയ് ചെയ്യുക
-- സ്കെയിൽ-ടു-സീറോ ഉപയോഗിച്ച് ഓട്ടോ-സ്കെയിലിംഗ് ഘടിപ്പിക്കുക
-- ഹെൽത്ത് പ്രോബ്‌സും റെഡിനസ് ചെക്കുകളും നടപ്പിലാക്കുക
-- അപ്ലിക്കേഷൻ ലോഗുകളും മെട്രിക്‌സും നിരീക്ഷിക്കുക
-- Azure Developer CLI ഉപയോഗിച്ച് വേഗത്തിലുള്ള ഡിപ്ലോയ്മെന്റ്
-
-## 📦 ഉൾപ്പെടുത്തിയിരിക്കുന്നത്
-
-✅ **Flask അപ്ലിക്കേഷൻ** - CRUD പ്രവർത്തനങ്ങളുള്ള പൂര്‍ണ്ണ REST API (`src/app.py`)  
-✅ **Dockerfile** - പ്രൊഡക്ഷൻ റെഡിയായ കണ്ടെയ്‌നർ കോൺഫിഗറേഷൻ  
-✅ **Bicep ഇൻഫ്രാസ്ട്രക്ചർ** - കണ്ടെയ്‌നർ ആപ്സ് പരിസ്ഥിതി, API ഡിപ്ലോയ്മെന്റ്  
-✅ **AZD കോൺഫിഗറേഷൻ** - ഒറ്റ കമാൻഡ് ഡിപ്ലോയ്മെന്റ് സെറ്റപ്പ്  
-✅ **ഹെൽത്ത് പ്രോബ്‌സ്** - ലൈവ്‌നസ്, റെഡിനസ് ചെക്കുകൾ കോൺഫിഗർ ചെയ്തിരിക്കുന്നത്  
-✅ **ഓട്ടോ-സ്കെയിലിംഗ്** - HTTP ലോഡിന്റെ അടിസ്ഥാനത്തിൽ 0-10 റിപ്ലിക്കാസ്  
-
-## ആർക്കിടെക്ചർ
+- azd വഴിയുള്ള കൺടെയ്‌നർ നിർമ്മിക്കുകയും പ്രസിദ്ധീകരിക്കുകയും ചെയ്യുക.
+- ഇൻ‌ഗ്രസ്, ലിവ്‌നെസ്സ്/റെഡിയ്നസ് പ്രോബുകൾ ക്രമീകരിക്കുക.
+- CRUD പ്രതികരണങ്ങൾ പരിശോധിക്കുകയും ആപ്ലിക്കേഷൻ ലോഗുകൾ നിരീക്ഷിക്കുകയും ചെയ്യുക.
+- സ്ഥിരം ആപ്ലിക്കേഷനുകൾക്ക് in-memory ഡേറ്റ യോജിച്ചിട്ടില്ലാത്തതിന്റെ കാരണം മനസ്സിലാക്കുക.
 
 ```mermaid
-graph TD
-    subgraph ACA[അസ്യൂര്‍ കണ്ടെയ്്നര്‍ ആപ്ലിക്കേഷന്‍സ് പരിസരം]
-        Flask[ഫ്ലാസ്ക് API കണ്ടെയ്്നര്‍<br/>ആരോഗ്യ എന്റ്പോയിന്റുകള്‍<br/>REST API<br/>ഓട്ടോ-സ്കെയിലിംഗ് 0-10 റെപ്ലിക്കാസ്]
-        AppInsights[അപ്ലിക്കേഷൻ ഇൻസൈറ്റ്‌സ്]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
 
-## മുൻഅവശ്യങ്ങൾ
+**മഹത്തരമാണ്:** ഇനം ഐറ്റങ്ങൾ ഒറ്റ പ്രോസസിൽ സൂക്ഷിച്ചിരിക്കുന്നു. ഡിഫോൾട്ട് **ഒറ്റ Gunicorn വർക്കർ,
+0–1 നകൽ** എന്നതാണ്, വർക്കർമാർ/നകലുകൾ തമ്മിൽ അസമ്മത ഡേറ്റ ഒഴിവാക്കാൻ ഉദ്ദേശിച്ചുള്ളത്.
+റീസ്റ്റാർട്ടിന്, പതിപ്പുതീർക്കലിനോ, സ്കെയിൽ-ടു-സീറോയ്ക്ക് ഐറ്റങ്ങൾ ഹാനിയാക്കപ്പെടും. നകൽ সংখ্যা വർദ്ധിപ്പിക്കുന്നതിന്
+പങ്കുവെക്കുന്ന നിലനിർത്തൽ സംഭരണം ആവശ്യമാണ്. API യ്ക്ക് അംഗീകാരം അല്ലെങ്കിൽ അനുമതിയില്ല.
 
-### ആവശ്യമായവ
-- **Azure Developer CLI (azd)** - [ഇൻസ്റ്റാൾ ഗൈഡ്](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure സബ്സ്ക്രിപ്ഷൻ** - [സൗജന്യ അക്കاؤن്റ്](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Docker ഇൻസ്റ്റാൾ ചെയ്യുക](https://www.docker.com/products/docker-desktop/) (ലൊക്കൽ ടെസ്റ്റിംഗിന്)
+## മുൻകൂട്ടി ആവശ്യം
 
-### മുൻഅവശ്യങ്ങൾ പരിശോധിക്കുക
+- [ഇപ്പോഴത്തെ സ്ഥിര azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (പരിശോധന സമയത്ത് പ്രസിദ്ധീകരിച്ച റിലീസ്: 1.37.2).
+- പരിശോദിക്കാനായി [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- Docker അതിന്റെ ഡെയ്‍മൺ പ്രവർത്തിക്കുന്ന നിലയിൽ; ഡിഫോൾട്ട് ലോക്കൽ ഇമേജ് നിർമ്മാണത്തിന് ആവശ്യമാണ്.
+- അസ്യൂർ സബ്‌സ്‌ക്രിപ്ഷൻ, റിസോഴ്സ് സൃഷ്ടി അനുവാദങ്ങൾ, കൺടെയ്‌നർ ആപ്സ് പ്രാദേശിക പരിമിതി.
+- താഴെയുള്ള കമാൻഡുകൾക്കായി ബാഷ് (അഥവാ സമാനമായ PowerShell).
+- ഓപ്ഷണൽ ലോക്കൽ ഡെവലപ്മെന്റിനായി Python 3.11.
 
 ```bash
-# azd പതിപ്പ് പരിശോധിക്കുക (1.5.0 അല്ലെങ്കിൽ അതിലധികം വേണം)
 azd version
-
-# Azure ലോഗിൻ സ്ഥിരീകരിക്കുക
+az version
+docker info
 azd auth login
-
-# Docker പരിശോധിക്കുക (ഐച്ഛികം, പ്രാദേശിക പരിശോധനയ്ക്കായി)
-docker --version
+az login
 ```
 
-## ⏱️ ഡിപ്ലോയ്മെന്റ് ടൈംലൈൻ
+CLI ടൂളുകൾക്ക് വേറെ ലോഗിൻ സെഷനുകൾ ഉണ്ട്. ഇരട്ടിലും ആ സബ്‌സ്‌ക്രിപ്ഷൻ ഉപയോഗിക്കുക.
 
-| ഘട്ടം | ദൈർഘ്യം | സംഭവിക്കുന്നത് |
-|-------|----------|---------------|
-| പരിസ്ഥിതി ക്രമീകരണം | 30 സെക്കൻഡ് | azd പരിസ്ഥിതി സൃഷ്ടിക്കുക |
-| കണ്ടെയ്‌നർ നിർമ്മാണം | 2-3 മിനിറ്റ് | Docker ഉപയോഗിച്ച് Flask അപ്ലിക്കേഷൻ നിർമ്മിക്കുക |
-| ഇൻഫ്രാസ്ട്രക്ചർ സജ്ജമാക്കൽ | 3-5 മിനിറ്റ് | കണ്ടെയ്‌നർ ആപ്സ്, റെജിസ്ട്രി, മോണിറ്ററിങ് സൃഷ്ടിക്കുക |
-| അപ്ലിക്കേഷൻ ഡിപ്ലോയ് ചെയ്യുക | 2-3 മിനിറ്റ് | ഇമേജ് പുഷ് ചെയ്ത് കണ്ടെയ്‌നർ ആപ്സിലേക്ക് ഡിപ്ലോയ് ചെയ്യുക |
-| **മൊത്തം** | **8-12 മിനിറ്റ്** | പരിപൂർണ്ണ ഡിപ്ലോയ്മെന്റ് സുചിതമായ നിലയില്‍ |
+## വേഗത്തിലുള്ള ആരംഭം
 
-
-## വേഗത്തിലുള്ള തുടക്കം
+റിപ്പോസിറ്ററി റൂട്ടിൽ നിന്ന്:
 
 ```bash
-# ഉദാഹരണത്തിലേക്ക് നാവിഗേറ്റ് ചെയ്യുക
 cd examples/container-app/simple-flask-api
-
-# പരിസ്ഥിതി തുടങ്ങിയിക്കുക (അന്യമായ പേര് തിരഞ്ഞെടുക്കുക)
-azd env new myflaskapi
-
-# എല്ലാം വിനിയോഗിക്കുക (അടിസ്ഥാനഘടന + അപേക്ഷ)
+azd env new flask-demo
 azd up
-# നിങ്ങൾക്ക് യാതൊരു പ്രേരണയും ഉണ്ടാകും:
-# 1. ആസ്യൂർ സബ്സ്ക്രിപ്ഷൻ തിരഞ്ഞെടുക്കുക
-# 2. സ്ഥലം തിരഞ്ഞെടുക്കുക (ഉദാഹരണം, eastus2)
-# 3. വിനിയോഗത്തിനായി 8-12 മിനിറ്റുകൾ കാത്തിരിക്കുക
-
-# നിങ്ങളുടെ API എന്റ്പോയിന്റ് നേടുക
-azd env get-values
-
-# API പരിശോധന നടത്തുക
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**പ്രതീക്ഷിക്കാവുന്ന output:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ ഡിപ്ലോയ്മെന്റ് സ്ഥിരീകരിക്കുക
-
-### ഘട്ടം 1: ഡിപ്ലോയ്മെന്റ് സ്റ്റാറ്റസ് പരിശോധിക്കുക
-
-```bash
-# വിന്യസിച്ച സേവനങ്ങൾ കാണുക
-azd show
-
-# പ്രതീക്ഷിക്കപ്പെട്ട ഔട്ട്‌പുട്ട് കാണിക്കുന്നു:
-# - സേവനം: api
-# - എന്റ്പോയിന്റ്: https://ca-api-[env].xxx.azurecontainerapps.io
-# - നില: പ്രവർത്തനത്തിലുണ്ട്
-```
-
-### ഘട്ടം 2: API എൻഡ്‌പോയിന്റുകൾ പരീക്ഷിക്കുക
-
-```bash
-# API എന്ഡ്പോയിന്റ് നേടുക
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# ാരോഗ്യ പരിശോധന
-curl $API_URL/health
+പ്രതീക്ഷിക്കുന്നത്: HTTP 200 കൂടാതെ `"status":"healthy"` അടങ്ങുന്ന JSON,
+`"service":"simple-flask-api"`, കൂടാതെ ഒരു നിലവിലെ UTC ടൈംസ്റ്റാമ്പ്.
+പ്രൊവിഷനിംഗ് ಮತ್ತು ഇമേജ് നിർമ്മാണം സാധാരണയായി കുറെ മിനിറ്റുകൾ എടുക്കുന്നു; സമയം വ്യത്യാസപ്പെടാം.
 
-# റൂട്ട് എന്ഡ്പോയിന്റ് പരിശോധിക്കുക
-curl $API_URL/
+പ്രാഥമിക പ്രൊവിഷനിംഗ് പോർട്ട് 80ൽ കേൾക്കുന്ന ഒരു പൊതു ഹെല്ലോ-വേൾഡ് ഇമേജ് ഉപയോഗിക്കുന്നു.
+`azure.yaml` സേവന ഡിപ്പ്ലോയ്മെന്റിനായി `infra/app/api.bicep` ഒപ്പം അതിന്റെ പൊരുത്തമുള്ള പാരാമീറ്റർ ഫയൽ തിരഞ്ഞെടുക്കുന്നു,
+ഇത് ഇമേജ്, ഇൻഗ്രസ്, പ്രോബുകൾ പോർട്ട് 8000 ലേക്ക് മാറ്റുന്നു.
+ആ ഡിപ്പ്ലോയ്മെന്റ് പാരാമീറ്ററുകൾ ഇല്ലാതാക്കരുത്.
 
-# ഒരു ഐറ്റം സൃഷ്ടിക്കുക
-curl -X POST $API_URL/api/items \
+## CRUD സ്ഥിരീകരിക്കുക
+
+തുടർച്ചയായി താഴെയുള്ളവ നടത്തുക, ഒരേ റെപ്ലിക്ക എക്റ്റീവ് ആയിരിക്കുന്നത് തുടരുമ്പോൾ:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# എല്ലാ ഐറ്റങ്ങളും നേടുക
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**വിജയത്തിനുള്ള മാനദണ്ഡങ്ങൾ:**
-- ✅ ഹെൽത്ത് എൻഡ്‌പോയിന്റ് HTTP 200 തിരിച്ചറുക്കുന്നു
-- ✅ റൂട്ട് എൻഡ്‌പോയിന്റ് API വിവരങ്ങൾ കാണിക്കുന്നു
-- ✅ POST പുതിയ ഐറ്റം സൃഷ്ടിക്കുകയും HTTP 201 തിരിച്ചറുക്കുകയും ചെയ്യുന്നു
-- ✅ GET സൃഷ്ടിച്ച എല്ലാ ഐറ്റങ്ങളും തിരികെ നൽകുന്നു
+വിജയകരം: POST 201, reads/PUT 200, DELETE 204 ബോഡിയില്ലാതെ, തുടർന്ന് മിസ്റ്റിങ്ങായ ഐറ്റം 404.
+തെറ്റായ/അബ്ജക്ട് അല്ലാത്ത JSON അല്ലെങ്കിൽ ഒരു ശൂന്യമുള്ള പേര് 400 തിരികെ നൽകും.
+ഒരു ഐറ്റം അഭ്യർത്ഥനകൾക്കിടയിൽ കാണാതായാൽ, റീസ്റ്റാർട്ട് അല്ലെങ്കിൽ സ്കെയിൽ-ടു-സീറോ പരിശോധിക്കുക;
+ഇത് സൂക്ഷിപ്പിന് അല്ല,意図പൂർവ്വമായ ഒരു ഇൻ-മെമ്മറി പരിമിതിയാണ്.
 
-### ഘട്ടം 3: ല日志ുകൾ കാണുക
+| എൻഡ്‌പോയിൻറ് | മേധഡുകൾ |
+|---|---|
+| `/` | GET — സേവന വിവരങ്ങൾ |
+| `/health` | GET — ലൈവ്നസ്/റീഡിനസ് |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## ലോഗുകൾയും കോൺഫിഗറേഷനും
 
 ```bash
-# azd monitor ഉപയോഗിച്ച് ലൈവ്日志്യുകൾ പ്രക്ഷേപണം ചെയ്യുക
-azd monitor --logs
-
-# അല്ലെങ്കിൽ Azure CLI ഉപയോഗിക്കുക:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# നിങ്ങൾ കാണാൻ സാധിക്കണം:
-# - ഗുണികോൺ സ്റ്റാർട്ടപ്പ് സന്ദേശങ്ങൾ
-# - HTTP അഭ്യർത്ഥന ലോഗുകൾ
-# - അപ്ലിക്കേഷൻ വിവര ലോഗുകൾ
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## പ്രോജക്‌റ് ഘടന
+പ്രതീക്ഷിക്കുന്നത്: ഗണിക്കോൺ സ്റ്റാർട്ടപ്പ്, അഭ്യർത്ഥന ആക്സസ് ലോഗുകൾ, ആപ്ലിക്കേഷൻ സന്ദേശങ്ങൾ.
+`azd monitor --logs` ഒരു പോർട്ടൽ വ്യൂ തുറക്കുന്നു; ഇത് ടെർമിനലിലേക്ക് സ്ട്രീം ചെയ്യാറില്ല.
+അപ്ലിക്കേഷൻ ഇൻസൈറ്റ്സ് പ്രൊവിഷനാണ് ചെയ്തിട്ടുള്ളത്, പക്ഷേ **ഈ ഫ്ലാസ്ക് കോഡ് ഇതിന്റെ ഇൻസ്ട്രുമെന്റേഷൻ ചെയ്യാറില്ല**;
+സ്റ്റ്ഡൗട്ട് ലോഗുകൾക്ക് കൺറ്റെയ്‌നർ ആപ്സ്/ലോഗ് അനലിറ്റിക്സ് ഉപയോഗിക്കുക.
 
+CPU/മെമ്മറി, റെപ്ലിക്ക പരിധികൾ, അല്ലെങ്കിൽ സ്കെയിൽ നിയമങ്ങൾക്കായി `infra/app/api.bicep` എഡിറ്റ് ചെയ്യുക, തുടർന്ന്
+ഓടിക്കുക `azd up`. ഡിഫോള्टുകള്‍ 0.5 vCPU, 1 GiB, കുറഞ്ഞത് 0 / പരമാവധി 1 റിപ്പ്ലിക്ക, കൂടാതെ ഒരു
+HTTP അളവ് 50 സമകാലിക അഭ്യര്‍ഥനകള്‍. സ്‌കെയില്‍-ടു-സീറോ കോള്ട്-സ്റ്റാര്‍ട്ട് ലാറ്റന്‍സി കൂട്ടിയേക്കാം.
+
+മനസ്സിലാക്കിയ `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL`, അല്ലെങ്കില്‍
+`SCALE_TO_ZERO_TIMEOUT` മൂല്യങ്ങള്‍ **ഈ ടെംപ്ലേറ്റ് അല്ലെങ്കില്‍ ആപ്പുമായി ബന്ധിപ്പിച്ചിട്ടില്ല**.
+ഒരു മൂല്യം സജ്ജീകരിക്കുന്നത് സ്വയം അത് ഒരു റണ്‍ടൈവും പരിതസ്ഥിതി വ്യത്യാസമാക്കുകയില്ല.
+ഇമേജ് തുറമുഖം 8000 നു വ്യക്തമായി ബൈന്‍ഡ് ചെയ്യുന്നു; തുറമുഖം മാറ്റുമ്പോള്‍ ഡോക്കര്‍ഫൈല്‍, ബൈസിപ് ഇന്‍ഗ്രസ്, പ്രോബുകള്‍
+ചേര്‍ന്ന് അപ്ഡേറ്റ് ചെയ്യുക.
+
+## ഫയലുകള്‍
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API എൻഡ്‌പോയിന്റുകൾ
+## പ്രാദേശിക വികസനം
 
-| എൻഡ്‌പോയിന്റ് | മേധോഡ് | വിശദീകരണം |
-|--------------|---------|------------|
-| `/health` | GET | ഹെൽത്ത് ചെക്ക് |
-| `/api/items` | GET | എല്ലാ ഐറ്റങ്ങളുടെയും ലിസ്റ്റ് |
-| `/api/items` | POST | പുതിയ ഐറ്റം സൃഷ്ടിക്കുക |
-| `/api/items/{id}` | GET | പ്രത്യേക ഐറ്റം ലഭിക്കുക |
-| `/api/items/{id}` | PUT | ഐറ്റം അപ്ഡേറ്റ് ചെയ്യുക |
-| `/api/items/{id}` | DELETE | ഐറ്റം ഡിലീറ്റ് ചെയ്യുക |
-
-## കോൺഫിഗറേഷൻ
-
-### പരിസ്ഥിതി വ്യവസായങ്ങൾ
+ഈ ഉദാഹരണ ഡയറക്ടറിയില്‍ നിന്നാണ്:
 
 ```bash
-# ഇഷ്ടാനുസൃതമായ കോൺഫിഗറേഷൻ സജ്ജീകരിക്കുക
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### സ്കെയിലിംഗ് കോൺഫിഗറേഷൻ
-
-API HTTP ട്രാഫിക്ക് അടിസ്ഥാനമാക്കിയുള്ള ഓട്ടോമാറ്റിക് സ്കെയിൽ ചെയ്യുന്നു:
-- **കുറഞ്ഞ റിപ്ലിക്കാസുകൾ**: 0 (ഇഡിൽ ആയാൽ സ്കെയിൽ-ടു-സീറോ)
-- **കൂടുതൽ റിപ്ലിക്കാസുകൾ**: 10
-- **ഓരോ റിപ്ലിക്കാ concurrents അഭ്യർത്ഥനകൾ**: 50
-
-## ഡെവലപ്പ്മെന്റ്
-
-### ലൊക്കലായി ഓടിക്കുക
+മറ്റൊരു ടെര്‍മിനലില്‍, `http://localhost:8000/health` നെയും CRUD എന്റ്പോയിന്റുകളും പരിശോദിക്കുക.
+അല്ലെങ്കില്‍ യഥാർത്ഥ ഇമേജ് നിര്‍മ്മിച്ചു ഓടിക്കുക:
 
 ```bash
-# ആശ്രിത സംവിധാനങ്ങൾ ഇൻസ്റ്റാൾ ചെയ്യുക
-cd src
-pip install -r requirements.txt
-
-# ആപ്പ് പ്രവർത്തിപ്പിക്കുക
-python app.py
-
-# ലൊക്കലായി പരീക്ഷിക്കുക
-curl http://localhost:8000/health
-```
-
-### കണ്ടെയ്‌നർ നിർമ്മിച്ച് പരീക്ഷിക്കുക
-
-```bash
-# ഡോക്കർ ഇമേജ് നിർമ്മിക്കുക
 docker build -t flask-api:local ./src
-
-# കണ്ടെയ്‌നർ ലോക്കലായി ഓടിക്കുക
-docker run -p 8000:8000 flask-api:local
-
-# കണ്ടെയ്‌നർ പരീക്ഷിക്കുക
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## ഡിപ്ലോയ്മെന്റ്
+ആദ്യ വിന്യാസത്തിനു ശേഷമുള്ള കോഡ് മാത്രം മാറ്റങ്ങള്‍ക്കായി, ഓടിക്കുക `azd deploy api`.
+ബൈസിപ്പിലെ മാറ്റങ്ങള്‍ക്ക്, ഓടിക്കുക `azd up` വീണ്ടും പ്രൊവിഷന്‍ ചെയ്തു വിന്യസിക്കാനായി.
 
-### സമ്പൂർണ്ണ ഡിപ്ലോയ്മെന്റ്
+## പ്രായോഗിക പഠനങ്ങള്‍
+
+### 1. ഇന്‍പ്പുട്ട് നിരസിക്കല്‍ പരിശോദിക്കുക
+
+**ആരംഭ സ്തലം:** വിന്യസിച്ച API, മുകളില്‍ `API_URL`.
+**ലക്ഷ്യം:** API തെറ്റായ JSON രൂപങ്ങളും നഷ്ടപ്പെട്ട പേര്‍ പോലുള്ളവ നിരസിക്കുന്നുണ്ടോ എന്ന് പരിശോധിക്കുക.
 
 ```bash
-# ഉൾഘടനയും ആപ്ലിക്കേഷനും വിന്യസിക്കുക
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### കോഡ്-ഒന്ന് ഡിപ്ലോയ്മെന്റ്
+**വിജയ മാനദണ്ഡം / പരിഹാരം:** ഇരുവരും 400 JSON പിഴച്ചു ബന്ധമില്ലാതെ, 500 അല്ല.
+**സാധാരണ പ്രശ്നം:** JSON content-type ഹെഡര്‍ ഒഴിവാക്കുന്നു.
+
+### 2. വായന മാത്രം പതിപ്പ് എന്റ്പോയിന്റ് ചേർക്കുക
+
+**ആരംഭ സ്തലം:** `src/app.py`. **ലക്ഷ്യം:** API വികസിപ്പിച്ച് വീണ്ടും വിന്യസിക്കുക.
+`if __name__ == '__main__':` ബ്ലോക്കിന് മുൻപ് ഇത് ചേർക്കുക:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+`azd deploy api` പ്രവർത്തിപ്പിക്കുക, പിന്നെ `curl --fail-with-body "${API_URL}/version"`.
+**വിജയ മാനദണ്ഡങ്ങൾ:** HTTP 200 കൂടാതെ `{"version":"1.0.0"}`.
+**പൊതുവായ പ്രശ്നം:** ടെസ്റ്റിങ് ചെയ്യുമ്പോൾ ബ്ലോക്കിംഗ് `app.run()` കോളിന് ശേഷം റൂട്ടു ചേർക്കുക
+`python src/app.py` ഉപയോഗിച്ച്.
+
+### അറിവിന്റെ പരിശോധനാബിന്ദു
+
+ദീർഘകാല ഡാറ്റയ്ക്കായി ഒരാൾ മാത്രം വർക്കർ为什么 പര്യാപ്തമല്ല? കാരണം ഒരേ പ്രോസസും പുനരാരംഭിക്കുമ്പോൾ അതിന്റെ നിഘണ്ടു നഷ്ടപ്പെടുന്നു. പ്രൊഡക്ഷൻ പതിപ്പിന് സ്ഥിരതയുള്ള പങ്കുവെക്കുന്ന സંગ્રഹണവും,
+പ്രാമാണീകരണവും, അധികാരപത്രവും, മൈഗ്രേഷനുകളും, പരീക്ഷണങ്ങളും, പ്രവർത്തന നിയന്ത്രണങ്ങളും ആവശ്യമുണ്ട്.
+
+
+## ചെലവുകളും പിശകു പരിഹാരങ്ങളും
+
+ഇത് $0 ഡീപ്ലോയ്മെന്റ് എന്ന ഉറപ്പില്ല: അടിസ്ഥാന രജിസ്ട്രിയും ലോക്ക് സഞ്ചയവും/ഇൻജഷനും
+അപ്ലിക്കേഷൻ കംപ്യൂട്ട് പൂജ്യം ആണെങ്കിലും ചിലവ് ഉണ്ടാകാം. നിങ്ങളുടെ പ്രദേശത്തിന്
+[വില കാൽക്കുലേറ്റർ](https://azure.microsoft.com/pricing/calculator/) ഉപയോഗിക്കുക.
+
+- **ഡോക്കർ ബിൽഡ് പരാജയം:** `docker info`, നെറ്റ്‌വർക്കിലേക്ക് പ്രവേശനം, ആശ്രിതങ്ങൾ സ്ഥിരീകരിക്കുക.
+- **അസുഖകരമായ ആപ്പ്:** കൺസോളിന്റെ/സിസ്റ്റത്തിന്റെ ലോഗുകൾ പരിശോധിച്ച് ഇമേജിന്റെ പോർട്ട്, ഇൻഗ്രസ്,
+  പ്രോബ്‌സ് എന്നിവ ഓർത്തുവെക്കുക. ഫ്‌ലാസ്ക് പോർട്ടിൽ ഒരു പ്ലേസ്‌ഹോൾഡർ പ്രോബ്ബ് ചെയ്യരുത്.
+- **403/അധികാരം:** സബ്സ്ക്രിപ്ഷനും റിസോഴ്‌സ് സൃഷ്ടി അധികാരങ്ങളും സ്ഥിരീകരിക്കുക.
+- **ഐറ്റങ്ങൾ അകത്താക്കുന്നു:** റീസ്റ്റാർട്ടിലും സ്‌കെയിൽ-ടു-പൂജ്യത്തിലുമുള്ള ഓർമ്മയിൽ സ്ഥിതിവിവരക്കണക്കുകൾ പുന:ക്രമീകരിക്കുന്നു; ദീർഘകാല പ്രവർത്തനത്തിനായി ഒരു ഡാറ്റാബേസ് ചേർക്കുക.
+
+
+## സാഫായും അടുത്ത ചുവടുകളും
 
 ```bash
-# ആപ്ലിക്കേഷൻ കോഡ് മാത്രം വിന്യസിക്കുക (സൗകര്യസWonീയം മാറാതെ)
-azd deploy api
+azd down
 ```
 
-### കോൺഫിഗറേഷൻ അപ്ഡേറ്റ് ചെയ്യുക
+ഇല്ലാതാക്കൽ പ്രോംപ്റ്റ് പരിശോധിച്ച് സമർപ്പിത റിസോഴ്‌സ് ഗ്രൂപ്പ് നീക്കപ്പെട്ടതാണോ എന്ന് സ്ഥിരീകരിക്കുക.
+ബന്ധപ്പെട്ടിട്ടില്ലാത്ത ഡാറ്റ ഉള്ള റിസോഴ്‌സ് ഗ്രൂപ്പിൽ നാശകരമായ ക്ലീനപ്പ് ഉപയോഗിക്കരുത്.
 
-```bash
-# പരിസ്ഥിതി ചേരുവകൾ പുതുക്കുക
-azd env set API_KEY "new-api-key"
-
-# പുതിയ കോൺഫിഗറേഷൻ ഉപയോഗിച്ച് വീണ്ടും വിന്യസിക്കുക
-azd deploy api
-```
-
-## നിരീക്ഷണം
-
-### ല日志ുകൾ കാണുക
-
-```bash
-# azd monitor ഉപയോഗിച്ച് ലൈവ് ലോഗുകൾ സ്ട്രീം ചെയ്യുക
-azd monitor --logs
-
-# അല്ലെങ്കിൽ Container Apps සඳහා Azure CLI ഉപയോഗിക്കുക:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# അവസാനത്തെ 100 വരികൾ കാണുക
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### മെട്രിക്‌സ് നിരീക്ഷിക്കുക
-
-```bash
-# അസ്യൂർ മോണിറ്റർ ഡാഷ്ബോർഡ് തുറക്കുക
-azd monitor --overview
-
-# പ്രത്യേക മെട്രിക്കുകൾ കാണുക
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## പരിശോധന
-
-### ഹെൽത്ത് ചെക്ക്
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-പ്രതീക്ഷിച്ച പ്രതികരണം:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### ഐറ്റം സൃഷ്ടിക്കുക
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### എല്ലാ ഐറ്റങ്ങളും ലഭിക്കുക
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## ചെലവ് ലഘൂകരണo
-
-ഈ ഡിപ്ലോയ്മെന്റ് സ്കെയിൽ-ടു-സീറോ ഉപയോഗിക്കുന്നു, അതിനാൽ API അഭ്യർത്ഥനകൾ പ്രോസസ് ചെയ്യുന്ന സമയത്ത് മാത്രമേ നിങ്ങള്‍ പണമടയ്ക്കൂ:
-
-- **ഇഡിൽ ചെലവ്**: ~$0/മാസം (സ്കെയില്ട് ടു സീറോ)
-- **സജീവ ചെലവ്**: ~$0.000024/സെക്കൻഡ് പര്‍ റിപ്ലിക്ക
-- **പ്രതീക്ഷിക്കുന്ന മാസത്തെ ചെലവ്** (ലഘു ഉപയോഗം): $5-15
-
-### ചെലവു കുറയ്ക്കുന്നത്
-
-```bash
-# ഡെവ്‌ için പരമാവധി പ്രിതികൾ ചെറുക്കുക
-azd env set MAX_REPLICAS 3
-
-# കുറഞ്ഞ ഐഡിൽ ടൈമൗട്ട് ഉപയോഗിക്കുക
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 മിനിറ്റ്
-```
-
-## പ്രശ്ന പരിഹാരം
-
-### കണ്ടെയ്‌നർ ആരംഭിക്കുന്നില്ല
-
-```bash
-# Azure CLI ഉപയോഗിച്ച് കണ്ടെയ്‌നർ ലോഗുകൾ പരിശോധിക്കുക
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Docker ഇമേജ് ലൊക്കൽ ആയി ബിൽഡുകൾ പരിശോധന നടത്തുക
-docker build -t test ./src
-```
-
-### API inaccesible ആണ്
-
-```bash
-# ഇൻഗ്രസ് ബാഹ്യമാണ് എന്ന് പരിശോധിക്കുക
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### ഉയർന്ന പ്രതികരണ സമയം
-
-```bash
-# CPU/മെമ്മറി ഉപയോഗം പരിശോധിക്കുക
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# ആവശ്യമെങ്കിൽ റിസോഴ്സുകൾ വർദ്ധിപ്പിക്കുക
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## ക്ലീൻ അപ്പ്
-
-```bash
-# എല്ലാ വിഭവങ്ങളും ഇല്ലാതാക്കുക
-azd down --force --purge
-```
-
-## അടുത്ത ഘട്ടങ്ങൾ
-
-### ഈ ഉദാഹരണം വികസിപ്പിക്കുക
-
-1. **ഡാറ്റാബേസ് ചേര്‍ക്കുക** - Azure Cosmos DB അല്ലെങ്കിൽ SQL ഡാറ്റാബേസ് സംയോജിപ്പിക്കുക  
-   ```bash
-   # infra/main.bicep ൽ Cosmos DB മോഡ്യൂൾ ചേർക്കുക
-   # ഡാറ്റാബേസ് കണക്ഷനോടെ app.py അപ്ഡേറ്റ് ചെയ്യുക
-   ```
-  
-2. **ഒത്തുലക്കുക ചേർക്കുക** - Microsoft Entra ID അല്ലെങ്കിൽ API കീകൾ നടപ്പാക്കുക  
-   ```python
-   # app.py-ല്‍ ഓതന്റിക്കേഷന്‍ മിഡില്‍വെയര്‍ ചേർക്കുക
-   from functools import wraps
-   ```
-  
-3. **CI/CD സജ്ജമാക്കുക** - GitHub Actions പ്രവർത്തനപ്രവാഹം  
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-  
-4. **Managed Identity ചേർക്കുക** - Azure സർവീസുകൾക്ക് സുരക്ഷിതമായ ആക്സസ്  
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-  
-### ബന്ധപ്പെട്ട ഉദാഹരണങ്ങൾ
-
-- **[Database App](../../../../../examples/database-app)** - SQL ഡാറ്റാബേസോടുകൂടിയ പൂര്‍ണ്ണ ഉദാഹരണം  
-- **[Microservices](../../../../../examples/container-app/microservices)** - ബഹുസഞ്ചാര സേവനങ്ങൾ  
-- **[Container Apps Master Guide](../README.md)** - എല്ലാ കണ്ടെയ്‌നർ മാതൃകകളും
-
-### പഠന വിഭവങ്ങൾ
-
-- 📚 [AZD For Beginners Course](../../../README.md) - പ്രധാന കോഴ്സ് ഹോം  
-- 📚 [Container Apps Patterns](../README.md) - കൂടുതൽ ഡിപ്ലോയ്മെന്റ് മാതൃകകൾ  
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - കമ്മ്യൂണിറ്റി ടെംപ്ലേറ്റുകൾ
-
-## അധിക വിഭവങ്ങൾ
-
-### ഡോക്യുമെന്റേഷൻ
-- **[Flask ഡോക്യുമെന്റേഷൻ](https://flask.palletsprojects.com/)** - Flask ഫ്രെയിംവർക്കിൻറെ ഗൈഡ്  
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - ഔദ്യോഗിക Azure ഡോക്സ്  
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd കമാൻഡ് റഫറൻസ്  
-
-### ട്യൂട്ടോറിയലുകൾ
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - നിങ്ങളുടെ ആദ്യ ആപ്പ് ഡിപ്ലോയ്സ് ചെയ്യുക  
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - പൈത്തൺ ഡെവലപ്പ്മെന്റ് ഗൈഡ്  
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** -Infrastructure as code  
-
-### ടൂളുകൾ
-- **[Azure പോർട്ടൽ](https://portal.azure.com)** - visually ഉപകരണങ്ങൾ നിയന്ത്രിക്കുക  
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE ഇന്റഗ്രേഷൻ
-
----
-
-**🎉 അഭിനന്ദനങ്ങൾ!** നിങ്ങൾ Azure Container Apps-ൽ ഓട്ടോ-സ്കെയ്ലിംഗ്, നിരീക്ഷണത്തോടുകൂടെ പ്രൊഡക്ഷൻ റെഡിയായ Flask API ഡിപ്ലോയ് ചെയ്തു.
-
-**ചോദ്യങ്ങളുണ്ടോ?** [ഒരു ഇഷ്യൂ തുറക്കുക](https://github.com/microsoft/AZD-for-beginners/issues) അല്ലെങ്കിൽ [FAQ](../../../resources/faq.md) പരിശോധിക്കുക.
+[അടുത്തത്: ഡാറ്റാബേസ് ആപ്പ്](../../../../../examples/database-app) · [മൈക്രോസർവീസുകൾ](../../../../../examples/container-app/microservices) ·
+[കോണ്ടെയ്‌നർ അവലോകനം](../README.md) · [കോഴ്‌സ് ഹോം](../../../README.md) ·
+[പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

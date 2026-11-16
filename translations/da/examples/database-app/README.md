@@ -1,920 +1,284 @@
-# Deploying a Microsoft SQL Database and Web App with AZD
+# Flask og Azure SQL på App Service
 
-⏱️ **Anslået tid**: 20-30 minutter | 💰 **Anslået pris**: ~$15-25/måned | ⭐ **Kompleksitet**: Mellem
+**Niveau:** Mellem · **Tid:** 30–60 minutter inklusive forudsætninger
 
-Dette **fuldstændige, fungerende eksempel** viser, hvordan du bruger [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) til at deploye en Python Flask webapplikation med en Microsoft SQL-database til Azure. Al kode er inkluderet og testet—ingen eksterne afhængigheder kræves.
+Dette eksempel implementerer en Python Flask read API til **Linux App Service** og en Basic
+Azure SQL-database. Kildekode, Bicep og azd-konfiguration er inkluderet. Det er en
+læringsapplikation, ikke en produktsklar databasearkitektur.
 
-## Hvad du lærer
+## Det lærer du
 
-Ved at gennemføre dette eksempel vil du:
-- Deploye en multi-tier applikation (webapp + database) ved hjælp af infrastructure-as-code
-- Konfigurere sikre databaseforbindelser uden at hardkode hemmeligheder
-- Overvåge applikationens sundhed med Application Insights
-- Administrere Azure-ressourcer effektivt med AZD CLI
-- Følge Azures bedste praksis for sikkerhed, omkostningsoptimering og observability
+- Provisioner App Service, SQL og overvågningsressourcer med Bicep.
+- Konfigurer krypteret SQL-forbindelse uden at gemme legitimationsoplysninger.
+- Initialiser et skema inden start af Gunicorn workers.
+- Bekræft seedede data, responses ved ikke fundet, og databasehelbred.
 
-## Scenarieoversigt
-- **Web App**: Python Flask REST API med databaseforbindelse
-- **Database**: Azure SQL Database med eksempeldata
-- **Infrastruktur**: Provisioneret ved hjælp af Bicep (modulært, genanvendelige skabeloner)
-- **Deployment**: Fuldautomatisk med `azd`-kommandoer
-- **Overvågning**: Application Insights til logs og telemetri
+```mermaid
+flowchart LR
+    User -->|HTTPS| Web[App Service — Flask]
+    Web -->|ODBC + encrypted SQL connection| SQL[Azure SQL — products table]
+    Web -. application log traces .-> AI[Application Insights]
+```
+
+Ressourcer: dedikeret ressourcegruppe, B1 Linux App Service-plan, Python 3.11 Web
+App, SQL-server og Basic 2-GB database, Application Insights og Log Analytics.
+Web App bruger **source/ZIP-deployment og Oryx afhængighedsinstallation**;
+`azd deploy` bygger eller deployer ikke den valgfrie Dockerfile.
 
 ## Forudsætninger
 
-### Påkrævede værktøjer
+- Aktuel stabil [azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (udgivet version ved gennemgangstidspunkt: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) til verifikation.
+- Azure-abonnement, tilladelser til at oprette de listede ressourcer og regional kvote.
+- Python **3.11** til lokal udvikling; den committed `pyodbc==5.0.1` kan kræve
+  native build-værktøjer på nyere Python-versioner.
+- Microsoft ODBC Driver 18 (eller 17) til SQL Server på lokale maskiner. `pip install
+  pyodbc` installerer ikke systemdriveren. Se
+  [ODBC-installation](https://learn.microsoft.com/sql/connect/odbc/download-odbc-driver-for-sql-server).
+- Docker kun ved test af den valgfrie container lokalt.
 
-Før du går i gang, bekræft at du har disse værktøjer installeret:
-
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 eller nyere)
-   ```sh
-   az --version
-   # Forventet output: azure-cli 2.50.0 eller nyere
-   ```
-
-2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 eller nyere)
-   ```sh
-   azd version
-   # Forventet output: azd version 1.0.0 eller højere
-   ```
-
-3. **[Python 3.8+](https://www.python.org/downloads/)** (til lokal udvikling)
-   ```sh
-   python --version
-   # Forventet output: Python 3.8 eller nyere
-   ```
-
-4. **[Docker](https://www.docker.com/get-started)** (valgfrit, til lokal containeriseret udvikling)
-   ```sh
-   docker --version
-   # Forventet output: Docker-version 20.10 eller nyere
-   ```
-
-### Azure-krav
-
-- En aktiv **Azure-abonnement** ([create a free account](https://azure.microsoft.com/free/))
-- Rettigheder til at oprette ressourcer i dit abonnement
-- **Owner** eller **Contributor** rolle på abonnementet eller ressourcegruppen
-
-### Forudgående viden
-
-Dette er et **mellem-niveau** eksempel. Du bør være fortrolig med:
-- Grundlæggende kommando-linje operationer
-- Grundlæggende cloud-koncepter (ressourcer, ressourcegrupper)
-- Grundlæggende forståelse af webapplikationer og databaser
-
-**Ny til AZD?** Start med [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) først.
-
-## Arkitektur
-
-Dette eksempel deployer en to-tier arkitektur med en webapplikation og SQL-database:
-
-```mermaid
-graph TD
-    Browser[Brugerens browser] <--> WebApp[Azure Web App<br/>Flask API<br/>/health<br/>/products]
-    WebApp -- Sikker forbindelse<br/>Krypteret --> SQL[Azure SQL Database<br/>Produkter-tabel<br/>Eksempeldata]
-```
-
-**Ressource-udrulning:**
-- **Resource Group**: Beholder for alle ressourcer
-- **App Service Plan**: Linux-baseret hosting (B1-tier for omkostningseffektivitet)
-- **Web App**: Python 3.11 runtime med Flask-applikation
-- **SQL Server**: Administreret databaseserver med TLS 1.2 som minimum
-- **SQL Database**: Basic tier (2GB, egnet til udvikling/test)
-- **Application Insights**: Overvågning og logging
-- **Log Analytics Workspace**: Centraliseret loglagring
-
-**Analogi**: Tænk på dette som en restaurant (webapp) med et fryserum (database). Kunder bestiller fra menuen (API-endpoints), og køkkenet (Flask-app) henter ingredienserne (data) fra fryserummet. Restaurantchefen (Application Insights) holder øje med alt, hvad der sker.
-
-## Mappestruktur
-
-Alle filer er inkluderet i dette eksempel—ingen eksterne afhængigheder kræves:
-
-```
-examples/database-app/
-│
-├── README.md                    # This file
-├── azure.yaml                   # AZD configuration file
-├── .env.sample                  # Sample environment variables
-├── .gitignore                   # Git ignore patterns
-│
-├── infra/                       # Infrastructure as Code (Bicep)
-│   ├── main.bicep              # Main orchestration template
-│   ├── abbreviations.json      # Azure naming conventions
-│   └── resources/              # Modular resource templates
-│       ├── sql-server.bicep    # SQL Server configuration
-│       ├── sql-database.bicep  # Database configuration
-│       ├── app-service-plan.bicep  # Hosting plan
-│       ├── app-insights.bicep  # Monitoring setup
-│       └── web-app.bicep       # Web application
-│
-└── src/
-    └── web/                    # Application source code
-        ├── app.py              # Flask REST API
-        ├── requirements.txt    # Python dependencies
-        └── Dockerfile          # Container definition
-```
-
-**Hvad hver fil gør:**
-- **azure.yaml**: Fortæller AZD hvad der skal deployes og hvor
-- **infra/main.bicep**: Orkestrerer alle Azure-ressourcer
-- **infra/resources/*.bicep**: Individuelle ressource-definitioner (modulære til genbrug)
-- **src/web/app.py**: Flask-applikation med databaselogik
-- **requirements.txt**: Python pakkebehov
-- **Dockerfile**: Containeriseringsinstruktioner til deployment
-
-## Quickstart (trin-for-trin)
-
-### Trin 1: Clone og naviger
-
-```sh
-git clone https://github.com/microsoft/AZD-for-beginners.git
-cd AZD-for-beginners/examples/database-app
-```
-
-**✓ Succes‑kontrol**: Bekræft at du ser `azure.yaml` og mappen `infra/`:
-```sh
-ls
-# Forventet: README.md, azure.yaml, infra/, src/
-```
-
-### Trin 2: Autentificer med Azure
-
-```sh
+```bash
+azd version
+az version
 azd auth login
-```
-
-Dette åbner din browser for Azure-autentificering. Log ind med dine Azure-legitimationsoplysninger.
-
-**✓ Succes‑kontrol**: Du bør se:
-```
-Logged in to Azure.
-```
-
-### Trin 3: Initialiser miljøet
-
-```sh
-azd init
-```
-
-**Hvad sker der**: AZD opretter en lokal konfiguration til din deployment.
-
-**Prompter du vil se**:
-- **Environment name**: Indtast et kort navn (f.eks. `dev`, `myapp`)
-- **Azure subscription**: Vælg dit abonnement fra listen
-- **Azure location**: Vælg en region (f.eks. `eastus`, `westeurope`)
-
-**✓ Succes‑kontrol**: Du bør se:
-```
-SUCCESS: New project initialized!
-```
-
-### Trin 4: Provisioner Azure-ressourcer
-
-```sh
-azd provision
-```
-
-**Hvad sker der**: AZD deployer al infrastruktur (tager 5-8 minutter):
-1. Opretter ressourcegruppe
-2. Opretter SQL Server og Database
-3. Opretter App Service Plan
-4. Opretter Web App
-5. Opretter Application Insights
-6. Konfigurerer netværk og sikkerhed
-
-**Du vil blive prompted for**:
-- **SQL admin username**: Indtast et brugernavn (f.eks. `sqladmin`)
-- **SQL admin password**: Indtast et stærkt password (gem dette!)
-
-**✓ Succes‑kontrol**: Du bør se:
-```
-SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
-You can view the resources created under the resource group rg-<env-name> in Azure Portal:
-https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
-```
-
-**⏱️ Tid**: 5-8 minutter
-
-### Trin 5: Deploy applikationen
-
-```sh
-azd deploy
-```
-
-**Hvad sker der**: AZD bygger og deployer din Flask-applikation:
-1. Pakker Python-applikationen
-2. Bygger Docker-containeren
-3. Pusher til Azure Web App
-4. Initialiserer databasen med eksemplerdata
-5. Starter applikationen
-
-**✓ Succes‑kontrol**: Du bør se:
-```
-SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
-You can view the resources created under the resource group rg-<env-name> in Azure Portal:
-https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
-```
-
-**⏱️ Tid**: 3-5 minutter
-
-### Trin 6: Gennemse applikationen
-
-```sh
-azd browse
-```
-
-Dette åbner din deployede webapp i browseren på `https://app-<unique-id>.azurewebsites.net`
-
-**✓ Succes‑kontrol**: Du bør se JSON-output:
-```json
-{
-  "message": "Welcome to the Database App API",
-  "endpoints": {
-    "/": "This help message",
-    "/health": "Health check endpoint",
-    "/products": "List all products",
-    "/products/<id>": "Get product by ID"
-  }
-}
-```
-
-### Trin 7: Test API-endpoints
-
-**Health Check** (bekræft databaseforbindelse):
-```sh
-curl https://app-<your-id>.azurewebsites.net/health
-```
-
-**Forventet svar**:
-```json
-{
-  "status": "healthy",
-  "database": "connected"
-}
-```
-
-**List Products** (eksempeldata):
-```sh
-curl https://app-<your-id>.azurewebsites.net/products
-```
-
-**Forventet svar**:
-```json
-[
-  {
-    "id": 1,
-    "name": "Laptop",
-    "description": "High-performance laptop",
-    "price": 1299.99,
-    "created_at": "2025-11-19T10:30:00"
-  },
-  ...
-]
-```
-
-**Get Single Product**:
-```sh
-curl https://app-<your-id>.azurewebsites.net/products/1
-```
-
-**✓ Succes‑kontrol**: Alle endpoints returnerer JSON-data uden fejl.
-
----
-
-**🎉 Tillykke!** Du har med succes deployet en webapplikation med en database til Azure ved hjælp af AZD.
-
-## Konfigurationsdetaljer
-
-### Miljøvariabler
-
-Hemmeligheder håndteres sikkert via Azure App Service konfiguration—**aldrig hardcodet i kildekoden**.
-
-**Konfigureret automatisk af AZD**:
-- `SQL_CONNECTION_STRING`: Databaseforbindelse med krypterede legitimationsoplysninger
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Overvågnings-telemetri endpoint
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Muliggør automatisk installation af afhængigheder
-
-**Hvor hemmeligheder gemmes**:
-1. Under `azd provision` angiver du SQL-legitimationsoplysninger via sikre prompts
-2. AZD gemmer disse i din lokale `.azure/<env-name>/.env` fil (git-ignored)
-3. AZD injicerer dem i Azure App Service konfiguration (krypteret i hvile)
-4. Applikationen læser dem via `os.getenv()` ved runtime
-
-### Lokal udvikling
-
-Til lokal test, opret en `.env` fil fra eksemplet:
-
-```sh
-cp .env.sample .env
-# Rediger .env med din lokale databaseforbindelse
-```
-
-**Lokal udviklingsworkflow**:
-```sh
-# Installer afhængigheder
-cd src/web
-pip install -r requirements.txt
-
-# Indstil miljøvariabler
-export SQL_CONNECTION_STRING="your-local-connection-string"
-
-# Kør applikationen
-python app.py
-```
-
-**Test lokalt**:
-```sh
-curl http://localhost:8000/health
-# Forventet: {"status": "healthy", "database": "connected"}
-```
-
-### Infrastruktur som kode
-
-Alle Azure-ressourcer er defineret i **Bicep-skabeloner** (`infra/` mappe):
-
-- **Modulært design**: Hver ressource-type har sin egen fil for genanvendelighed
-- **Parameteriseret**: Tilpas SKUs, regioner, navngivningskonventioner
-- **Bedste praksis**: Følger Azures navngivningsstandarder og sikkerhedsstandarder
-- **Versionsstyret**: Infrastrukturændringer spores i Git
-
-**Tilpasningseksempel**:
-For at ændre databasetier, rediger `infra/resources/sql-database.bicep`:
-```bicep
-sku: {
-  name: 'Standard'  // Changed from 'Basic'
-  tier: 'Standard'
-  capacity: 10
-}
-```
-
-## Sikkerheds bedste praksis
-
-Dette eksempel følger Azures sikkerheds bedste praksis:
-
-### 1. **Ingen hemmeligheder i kildekoden**
-- ✅ Legitimationsoplysninger gemmes i Azure App Service konfiguration (krypteret)
-- ✅ `.env` filer ekskluderes fra Git via `.gitignore`
-- ✅ Hemmeligheder sendes via sikre parametre under provisioning
-
-### 2. **Krypterede forbindelser**
-- ✅ TLS 1.2 som minimum for SQL Server
-- ✅ HTTPS-only håndhævet for Web App
-- ✅ Databaseforbindelser bruger krypterede kanaler
-
-### 3. **Netværkssikkerhed**
-- ✅ SQL Server firewall konfigureret til kun at tillade Azure-tjenester
-- ✅ Offentlig netværksadgang begrænset (kan yderligere låses med Private Endpoints)
-- ✅ FTPS deaktiveret på Web App
-
-### 4. **Autentificering & Autorisation**
-- ⚠️ **Aktuelt**: SQL-autentificering (brugernavn/password)
-- ✅ **Produktion anbefaling**: Brug Azure Managed Identity for passwordless autentificering
-
-**For at opgradere til Managed Identity** (til produktion):
-1. Aktiver managed identity på Web App
-2. Giv identity SQL-tilladelser
-3. Opdater forbindelsesstrengen til at bruge managed identity
-4. Fjern password-baseret autentificering
-
-### 5. **Revision & Compliance**
-- ✅ Application Insights logger alle forespørgsler og fejl
-- ✅ SQL Database auditing aktiveret (kan konfigureres for compliance)
-- ✅ Alle ressourcer tagget til governance
-
-**Sikkerhedscheckliste før produktion**:
-- [ ] Aktiver Azure Defender for SQL
-- [ ] Konfigurer Private Endpoints for SQL Database
-- [ ] Aktiver Web Application Firewall (WAF)
-- [ ] Implementer Azure Key Vault til rotation af hemmeligheder
-- [ ] Konfigurer Microsoft Entra ID-autentificering
-- [ ] Aktiver diagnostisk logging for alle ressourcer
-
-## Omkostningsoptimering
-
-**Anslåede månedlige omkostninger** (pr. november 2025):
-
-| Resource | SKU/Tier | Estimated Cost |
-|----------|----------|----------------|
-| App Service Plan | B1 (Basic) | ~$13/month |
-| SQL Database | Basic (2GB) | ~$5/month |
-| Application Insights | Pay-as-you-go | ~$2/month (lav trafik) |
-| **Total** | | **~$20/month** |
-
-**💡 Sparetips**:
-
-1. **Brug gratis tier til læring**:
-   - App Service: F1 tier (gratis, begrænsede timer)
-   - SQL Database: Brug Azure SQL Database serverless
-   - Application Insights: 5GB/måned gratis ingestion
-
-2. **Stop ressourcer når de ikke er i brug**:
-   ```sh
-   # Stop webappen (databasen opkræver stadig gebyrer)
-   az webapp stop --name <app-name> --resource-group <rg-name>
-   
-   # Genstart ved behov
-   az webapp start --name <app-name> --resource-group <rg-name>
-   ```
-
-3. **Slet alt efter test**:
-   ```sh
-   azd down
-   ```
-   Dette fjerner ALLE ressourcer og stopper omkostninger.
-
-4. **Udvikling vs. Produktion SKUs**:
-   - **Udvikling**: Basic tier (brugt i dette eksempel)
-   - **Produktion**: Standard/Premium tier med redundans
-
-**Omkostningsovervågning**:
-- Se omkostninger i [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Opsæt omkostningsalarmer for at undgå overraskelser
-- Tag alle ressourcer med `azd-env-name` for sporing
-
-**Gratis tier-alternativ**:
-Til læringsformål kan du ændre `infra/resources/app-service-plan.bicep`:
-```bicep
-sku: {
-  name: 'F1'  // Free tier
-  tier: 'Free'
-}
-```
-**Bemærk**: Gratis tier har begrænsninger (60 min/dag CPU, ingen always-on).
-
-## Overvågning & Observability
-
-### Application Insights-integration
-
-Dette eksempel inkluderer **Application Insights** for omfattende overvågning:
-
-**Hvad der overvåges**:
-- ✅ HTTP-forespørgsler (latens, statuskoder, endpoints)
-- ✅ Applikationsfejl og undtagelser
-- ✅ Egen logging fra Flask-app
-- ✅ Databaseforbindelsessundhed
-- ✅ Performance-metrikker (CPU, hukommelse)
-
-**Få adgang til Application Insights**:
-1. Åbn [Azure Portal](https://portal.azure.com)
-2. Naviger til din ressourcegruppe (`rg-<env-name>`)
-3. Klik på Application Insights-ressourcen (`appi-<unique-id>`)
-
-**Nyttige forespørgsler** (Application Insights → Logs):
-
-**Vis alle forespørgsler**:
-```kusto
-requests
-| where timestamp > ago(1h)
-| order by timestamp desc
-| project timestamp, name, url, resultCode, duration
-```
-
-**Find fejl**:
-```kusto
-exceptions
-| where timestamp > ago(24h)
-| order by timestamp desc
-| project timestamp, type, outerMessage, operation_Name
-```
-
-**Tjek health endpoint**:
-```kusto
-requests
-| where name contains "health"
-| summarize count() by resultCode, bin(timestamp, 1h)
-```
-
-### SQL Database-auditing
-
-**SQL Database auditing er aktiveret** for at spore:
-- Databaseadgangsmønstre
-- Mislykkede loginforsøg
-- Skemændringer
-- Dataadgang (til compliance)
-
-**Få adgang til audit logs**:
-1. Azure Portal → SQL Database → Auditing
-2. Se logs i Log Analytics workspace
-
-### Realtids-overvågning
-
-**Se live-metrikker**:
-1. Application Insights → Live Metrics
-2. Se forespørgsler, fejl og performance i realtid
-
-**Opsæt alarmer**:
-Opret advarsler for kritiske hændelser:
-- HTTP 500-fejl > 5 på 5 minutter
-- Databaseforbindelsesfejl
-- Høje svartider (>2 sekunder)
-
-**Eksempel på oprettelse af alarm**:
-```sh
-az monitor metrics alert create \
-  --name "High-Response-Time" \
-  --resource-group <rg-name> \
-  --scopes <app-insights-resource-id> \
-  --condition "avg requests/duration > 2000" \
-  --description "Alert when response time exceeds 2 seconds"
-```
-
-## Fejlfinding
-### Almindelige problemer og løsninger
-
-#### 1. `azd provision` fejler med "Location not available"
-
-**Symptom**:
-```
-Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
-```
-
-**Løsning**:
-Vælg en anden Azure-region eller registrer resource provideren:
-```sh
-az provider register --namespace Microsoft.Insights
-```
-
-#### 2. SQL-forbindelse fejler under udrulning
-
-**Symptom**:
-```
-pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
-```
-
-**Løsning**:
-- Bekræft at SQL Server-firewallen tillader Azure-tjenester (konfigureres automatisk)
-- Tjek at SQL-admin-adgangskoden blev indtastet korrekt under `azd provision`
-- Sørg for at SQL Server er fuldt provisioneret (kan tage 2-3 minutter)
-
-**Bekræft forbindelse**:
-```sh
-# Fra Azure-portalen skal du gå til SQL Database → Forespørgselseditor
-# Prøv at oprette forbindelse med dine legitimationsoplysninger
-```
-
-#### 3. Webapp viser "Application Error"
-
-**Symptom**:
-Browseren viser en generisk fejlside.
-
-**Løsning**:
-Tjek applikationslogs:
-```sh
-# Vis nylige logfiler
-az webapp log tail --name <app-name> --resource-group <rg-name>
-```
-
-**Almindelige årsager**:
-- Manglende miljøvariabler (tjek App Service → Configuration)
-- Installation af Python-pakker mislykkedes (tjek udrulningslogs)
-- Fejl ved databaseinitialisering (tjek SQL-forbindelsen)
-
-#### 4. `azd deploy` fejler med "Build Error"
-
-**Symptom**:
-```
-Error: Failed to build project
-```
-
-**Løsning**:
-- Sørg for at `requirements.txt` ikke har syntaksfejl
-- Tjek at Python 3.11 er angivet i `infra/resources/web-app.bicep`
-- Bekræft at Dockerfile har korrekt base image
-
-**Debug lokalt**:
-```sh
-cd src/web
-docker build -t test-app .
-docker run -p 8000:8000 test-app
-```
-
-#### 5. "Unauthorized" når du kører AZD-kommandoer
-
-**Symptom**:
-```
-ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
-```
-
-**Løsning**:
-Re-autentificer med Azure:
-```sh
-# Påkrævet for AZD-arbejdsgange
-azd auth login
-
-# Valgfrit, hvis du også bruger Azure CLI-kommandoer direkte
 az login
 ```
 
-Bekræft at du har de korrekte rettigheder (Contributor-rollen) på abonnementet.
+Brug samme abonnement i begge værktøjer. Kommandoer nedenfor bruger Bash.
 
-#### 6. Høje databaseomkostninger
+## Deploy
 
-**Symptom**:
-Uventet Azure-regning.
+Fra repository-rodmappen:
 
-**Løsning**:
-- Tjek om du glemte at køre `azd down` efter test
-- Bekræft at SQL Database bruger Basic-tier (ikke Premium)
-- Gennemse omkostninger i Azure Cost Management
-- Opsæt omkostningsalarmer
-
-### Få hjælp
-
-**Vis alle AZD-miljøvariabler**:
-```sh
-azd env get-values
+```bash
+cd examples/database-app
+azd env new sql-demo
+azd provision
+azd deploy
+WEB_URL=$(azd env get-value WEB_APP_URI)
+WEB_NAME=$(azd env get-value WEB_APP_NAME)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
 ```
 
-**Tjek udrulningsstatus**:
-```sh
-az webapp show --name <app-name> --resource-group <rg-name> --query state
+Vælg en understøttet region. `sqlAdminLogin` er sat til standard til `sqladmin`; det krævede
+`sqlAdminPassword` er en sikker parameter. Angiv en stærk adgangskode, når du bliver bedt om det.
+Hold deployments-legitimationsoplysninger ude af Git og fejlrapporter. Den aktuelle interpolering
+af forbindelsesstrengen forventer en adgangskode uden forbindelsesstreng-afgrænsere såsom
+`;`; tilpas escaping før brug af sådanne værdier.
+
+Bicep sætter en startkommando, der kører `init_database()` **før** Gunicorn
+workers starter. Dette er nødvendigt, fordi import af `app:app` ikke udfører
+Pythons `if __name__ == '__main__'` blok. På en frisk database
+oprettes `products` og indsættes fem rækker. Det er et simpelt undervisnings-seed, ikke en
+samtidigheds-migrationsramme; brug korrekte migrationer før skalering af instanser.
+
+App'en vælger installeret Microsoft ODBC Driver 18, derefter 17, hvis forbindelsesstrengen
+ikke eksplicit navngiver en driver. Hvis ingen findes, mislykkes opstart med en
+håndterbar installationsfejl. Bekræft driver-tilgængelighed i din valgte
+App Service runtime i stedet for at antage den.
+
+## Verificer
+
+```bash
+curl --fail-with-body "${WEB_URL}/"
+curl --fail-with-body "${WEB_URL}/health"
+curl --fail-with-body "${WEB_URL}/products"
+curl --fail-with-body "${WEB_URL}/products/1"
+curl -i "${WEB_URL}/products/999"
 ```
 
-**Adgang til applikationslogs**:
-```sh
-az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
+Forventet:
+
+- `/` returnerer endpoint-oplysninger.
+- `/health` returnerer 200 med `{"status":"healthy","database":"connected"}`.
+- `/products` returnerer fem seedede produkter på en frisk database.
+- `/products/1` returnerer Laptop med pris 1299,99.
+- Et ikke-eksisterende produkt returnerer 404 med `{"error":"Product not found"}`.
+
+API'en er read-only. Der er ingen POST/PUT/DELETE-route eller browser UI.
+Databaseforbindelsesfejl returnerer 503 fra `/health`; det er ikke succes.
+
+## Filer og konfiguration
+
+```text
+azure.yaml                         # Python App Service source deployment
+infra/main.bicep
+infra/main.parameters.json
+infra/abbreviations.json
+infra/resources/sql-server.bicep
+infra/resources/sql-database.bicep
+infra/resources/app-service-plan.bicep
+infra/resources/web-app.bicep       # Settings + initialization/startup command
+infra/resources/app-insights.bicep
+src/web/app.py
+src/web/requirements.txt
+src/web/Dockerfile                 # Optional local container, not the azd target
+.env.sample
 ```
 
-**Brug for mere hjælp?**
-- [AZD-fejlfinding guide](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Azure App Service fejlfinding](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Azure SQL fejlfinding](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+`SQL_CONNECTION_STRING` sendes som en sikker Bicep-parameter til Web App-modulet
+og gemmes i App Service-indstillinger, ikke som deployments-outputs.
+`APPLICATIONINSIGHTS_CONNECTION_STRING` konfigurerer logeksport.
+`SCM_DO_BUILD_DURING_DEPLOYMENT=true` aktiverer server-side afhængighedsinstallation.
+At sætte arbitrære `azd env` værdier ændrer ikke automatisk app-indstillinger.
+
+SQL-firewallens `0.0.0.0` regel tillader forbindelse fra **Azure services,
+inklusive andre kunders abonnementer**, med forbehold for SQL-godkendelse. Den er
+ikke begrænset til denne app eller abonnement. SQL offentlig netværksadgang er aktiveret.
+Brug scopes networking og en ikke-admin applikationsidentitet før produktion.
+
+## Lokal udvikling
+
+Brug Python 3.11 og en installeret Microsoft SQL ODBC-driver:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/web/requirements.txt
+export SQL_CONNECTION_STRING='Server=tcp:YOUR_SERVER.database.windows.net,1433;Database=YOUR_DATABASE;UID=YOUR_USER;PWD=YOUR_PASSWORD;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+python src/web/app.py
+```
+
+Erstat pladsholdere sikkert. En kopieret `.env`-fil bliver **ikke automatisk loaded**
+af denne applikation. Eksporter variabler i din nuværende shell i stedet.
+For Azure SQL fra en bærbar computer, tillad midlertidigt kun din egen offentlige IP:
+
+```bash
+SQL_SERVER=$(azd env get-value SQL_SERVER_NAME)
+MY_IP=YOUR_PUBLIC_IP
+az sql server firewall-rule create -g "$RG_NAME" -s "$SQL_SERVER" \
+  -n AllowMyLearningIP --start-ip-address "$MY_IP" --end-ip-address "$MY_IP"
+```
+
+Fjern reglen efter test:
+
+```bash
+az sql server firewall-rule delete -g "$RG_NAME" -s "$SQL_SERVER" -n AllowMyLearningIP
+```
+
+Valgfri container-test fra dette eksempelbibliotek:
+
+```bash
+docker build -t sql-flask:local src/web
+docker run --rm -p 8000:8000 -e SQL_CONNECTION_STRING sql-flask:local
+```
+
+Dette image installerer Driver 18 ved hjælp af Debian 12-pakkerepositoriet, der matcher dens
+Bookworm-base, initialiserer databasen én gang og starter derefter Gunicorn.
+
+## Overvågning og fejlfinding
+
+Aktivér/følg App Service filesystem applikationslogs, når du fejlsøger opstart:
+
+```bash
+az webapp log config --name "$WEB_NAME" --resource-group "$RG_NAME" \
+  --application-logging filesystem --level information
+az webapp log tail --name "$WEB_NAME" --resource-group "$RG_NAME"
+```
+
+Denne kode eksporterer applikations **logspor** gennem en legacy OpenCensus-handler.
+Den konfigurerer ikke automatisk Flask request/dependency tracing, Live Metrics,
+SQL auditing, diagnostic settings eller alerts. Disse kræver separat opsætning.
+For ny instrumentering, foretræk Azure Monitor OpenTelemetry.
+
+I Application Insights Logs, efter at have sendt API-forespørgsler:
+
+```kusto
+traces
+| where timestamp > ago(1h)
+| where message contains "products" or message contains "Health check"
+| project timestamp, message, severityLevel
+```
+
+Tillad indtagelsesforsinkelse. Request-table eller Live Metrics aktivitet er ikke et færdighedskriterium
+for denne log-only instrumentering.
+
+- **Mangler driver:** inspicer `pyodbc.drivers()` i runtime og installer en
+  understøttet Microsoft ODBC-driver. En Python-pakke alene er utilstrækkelig.
+- **Forbindelsesfejl:** tjek SQL-indstillinger, legitimationsoplysninger, firewall og valgte
+  abonnement. Deaktivér ikke kryptering for at omgå en fejl.
+- **Mangler produktstabel:** bekræft at Bicep startkommando blev implementeret;
+  alene start af `gunicorn app:app` springer initialisering over.
+- **Pakkebyggefejl:** brug Python 3.11 eller lever native build-forudsætninger.
+- **Data med nulpris:** nul er en gyldig decimalpris; den skal serialiseres som 0.0,
+  ikke `null`.
 
 ## Praktiske øvelser
 
-### Øvelse 1: Bekræft din udrulning (Begynder)
+### Øvelse 1: Verificer adfærd ved manglende produkt
 
-**Mål**: Bekræft at alle ressourcer er udrullet og at applikationen fungerer.
+**Udgangspunkt:** implementeret API og `WEB_URL` ovenfor.
+**Mål:** skelne en manglende række fra en brudt database.
+Forespørg `/health` og `/products/999` med kommandoerne ovenfor.
+**Succeskriterier / svar:** helbred 200, ikke-eksisterende produkt 404 (ikke 500 eller 503).
+**Almindeligt problem:** antage at et ikke-fundet svar beviser, at SQL-forbindelsen er brudt.
 
-**Trin**:
-1. List alle ressourcer i din resource group:
-   ```sh
-   az resource list --resource-group rg-<env-name> --output table
-   ```
-   **Forventet**: 6-7 ressourcer (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+### Øvelse 2: Ændr en seedet værdi
 
-2. Test alle API-endpoints:
-   ```sh
-   curl https://app-<your-id>.azurewebsites.net/
-   curl https://app-<your-id>.azurewebsites.net/health
-   curl https://app-<your-id>.azurewebsites.net/products
-   curl https://app-<your-id>.azurewebsites.net/products/1
-   ```
-   **Forventet**: Alle returnerer gyldig JSON uden fejl
+**Udgangspunkt:** Azure SQL Query Editor, forbundet til prøve-databasen.
+**Mål:** vis at API-data gemmes i SQL og ikke i proceshukommelse.
 
-3. Tjek Application Insights:
-   - Naviger til Application Insights i Azure Portal
-   - Gå til "Live Metrics"
-   - Opdater din browser på webappen
-   **Forventet**: Se requests der dukker op i realtid
+```sql
+UPDATE products SET price = 0 WHERE id = 1;
+SELECT id, name, price FROM products WHERE id = 1;
+```
 
-**Succeskriterier**: Alle 6-7 ressourcer eksisterer, alle endpoints returnerer data, Live Metrics viser aktivitet.
+Forespørg `${WEB_URL}/products/1`. **Succeskriterier:** pris er `0.0`, ikke `null`.
+Gendan værdien:
 
----
+```sql
+UPDATE products SET price = 1299.99 WHERE id = 1;
+```
 
-### Øvelse 2: Tilføj et nyt API-endpoint (Mellem)
+**Almindeligt problem:** at redigere Python seed-listen opdaterer ikke allerede eksisterende rækker i SQL.
+Kør ikke skema-/dataøvelser mod en produktionsdatabase.
 
-**Mål**: Udvid Flask-applikationen med et nyt endpoint.
+### Øvelse 3: Tilføj et read-only count endpoint
 
-**Startkode**: Nuværende endpoints i `src/web/app.py`
+**Udgangspunkt:** `src/web/app.py`.
+**Mål:** udvid API'en med en parameterfri aggregatforespørgsel.
+Tilføj dette før `if __name__ == '__main__':`-blokken:
 
-**Trin**:
-1. Rediger `src/web/app.py` og tilføj et nyt endpoint efter `get_product()`-funktionen:
-   ```python
-   @app.route('/products/search/<keyword>')
-   def search_products(keyword):
-       """Search products by name or description."""
-       try:
-           conn = get_db_connection()
-           cursor = conn.cursor()
-           cursor.execute(
-               "SELECT id, name, description, price, created_at FROM products WHERE name LIKE ? OR description LIKE ?",
-               (f'%{keyword}%', f'%{keyword}%')
-           )
-           
-           products = []
-           for row in cursor.fetchall():
-               products.append({
-                   'id': row[0],
-                   'name': row[1],
-                   'description': row[2],
-                   'price': float(row[3]) if row[3] else None,
-                   'created_at': row[4].isoformat() if row[4] else None
-               })
-           
-           cursor.close()
-           conn.close()
-           
-           logger.info(f"Search for '{keyword}' returned {len(products)} results")
-           return jsonify(products), 200
-           
-       except Exception as e:
-           logger.error(f"Error searching products: {str(e)}")
-           return jsonify({'error': str(e)}), 500
-   ```
+```python
+@app.route('/product-count')
+def product_count():
+    from contextlib import closing
+    with closing(get_db_connection()) as conn, closing(conn.cursor()) as cursor:
+        cursor.execute("SELECT COUNT(*) FROM products")
+        return jsonify({'count': cursor.fetchone()[0]})
+```
 
-2. Deploy den opdaterede applikation:
-   ```sh
-   azd deploy
-   ```
+Kør `azd deploy web`, og forespørg derefter `${WEB_URL}/product-count`.
+**Succeskriterier:** 200 med `{"count":5}` på den uberørte seedede database.
+**Almindeligt problem:** ændring af ruten, men glem at deploye igen.
+Til produktion, tilføj fejlhåndtering/tests; denne korte øvelse fokuserer på forespørgslen.
 
-3. Test det nye endpoint:
-   ```sh
-   curl https://app-<your-id>.azurewebsites.net/products/search/laptop
-   ```
-   **Forventet**: Returnerer produkter der matcher "laptop"
+## Omkostninger, produktionsmangler og oprydning
 
-**Succeskriterier**: Nyt endpoint virker, returnerer filtrerede resultater, vises i Application Insights-logs.
+B1 App Service og Basic-databasen faktureres, mens de er provisioneret. At stoppe
+Web App'en stopper **ikke** fakturering af App Service-planen. Logs og lagring kan tilføje omkostninger.
+Brug [Azure prisberegneren](https://azure.microsoft.com/pricing/calculator/)
+for aktuel regional prissætning. Skift til F1 kræver også deaktivering af `alwaysOn`;
+det er ikke en one-line drop-in erstatning. SQL serverless er ikke automatisk gratis.
 
----
+Produktionsarbejde omfatter en mindst-privilegeret app-identitet (ikke SQL admin),
+autentifikation/autorisation, privat netværk, sikre migrationer, gennemgang af
+forbindelse pooling/livscyklus, telemetri, auditing, alerts, tests og genopretningsprocedurer.
+Redis caching og ekstra tabeller er udviklingsidéer, ikke implementerede øvelser.
 
-### Øvelse 3: Tilføj overvågning og alarmer (Avanceret)
+Fra dette eksempelbibliotek:
 
-**Mål**: Opsæt proaktiv overvågning med alarmer.
-
-**Trin**:
-1. Opret en alarm for HTTP 500-fejl:
-   ```sh
-   # Hent Application Insights-ressource-id
-   AI_ID=$(az monitor app-insights component show \
-     --app appi-<your-id> \
-     --resource-group rg-<env-name> \
-     --query id -o tsv)
-   
-   # Opret alarm
-   az monitor metrics alert create \
-     --name "High-Error-Rate" \
-     --resource-group rg-<env-name> \
-     --scopes $AI_ID \
-     --condition "count requests/failed > 5" \
-     --window-size 5m \
-     --evaluation-frequency 1m \
-     --description "Alert when >5 failed requests in 5 minutes"
-   ```
-
-2. Trigger alarmen ved at fremkalde fejl:
-   ```sh
-   # Anmod om et ikke-eksisterende produkt
-   for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
-   ```
-
-3. Tjek om alarmen udløste:
-   - Azure Portal → Alerts → Alert Rules
-   - Tjek din e-mail (hvis konfigureret)
-
-**Succeskriterier**: Alarmregel er oprettet, udløser ved fejl, notifikationer modtages.
-
----
-
-### Øvelse 4: Ændringer i databaseskema (Avanceret)
-
-**Mål**: Tilføj en ny tabel og opdater applikationen til at bruge den.
-
-**Trin**:
-1. Forbind til SQL Database via Query Editor i Azure Portal
-
-2. Opret en ny `categories`-tabel:
-   ```sql
-   CREATE TABLE categories (
-       id INT PRIMARY KEY IDENTITY(1,1),
-       name NVARCHAR(50) NOT NULL,
-       description NVARCHAR(200)
-   );
-   
-   INSERT INTO categories (name, description) VALUES
-   ('Electronics', 'Electronic devices and accessories'),
-   ('Office Supplies', 'Office equipment and supplies');
-   
-   -- Add category to products table
-   ALTER TABLE products ADD category_id INT;
-   UPDATE products SET category_id = 1; -- Set all to Electronics
-   ```
-
-3. Opdater `src/web/app.py` for at inkludere kategorioplysninger i svarene
-
-4. Deploy og test
-
-**Succeskriterier**: Ny tabel eksisterer, produkter viser kategorioplysninger, applikationen virker stadig.
-
----
-
-### Øvelse 5: Implementer caching (Ekspert)
-
-**Mål**: Tilføj Azure Redis Cache for at forbedre ydeevnen.
-
-**Trin**:
-1. Tilføj Redis Cache til `infra/main.bicep`
-2. Opdater `src/web/app.py` til at cache produktforespørgsler
-3. Mål forbedring i ydeevne med Application Insights
-4. Sammenlign svartider før/efter caching
-
-**Succeskriterier**: Redis er udrullet, caching virker, svartider forbedres med >50%.
-
-**Tip**: Start med [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/).
-
----
-
-## Oprydning
-
-For at undgå løbende omkostninger, slet alle ressourcer når du er færdig:
-
-```sh
+```bash
 azd down
 ```
 
-**Bekræftelsesprompt**:
-```
-? Total resources to delete: 7, are you sure you want to continue? (y/N)
-```
+Gennemgå sletteprompten og bekræft, at den dedikerede ressourcegruppe fjernes.
+Slet ikke grupper med ikke-relaterede data.
 
-Skriv `y` for at bekræfte.
-
-**✓ Succeskontrol**: 
-- Alle ressourcer er slettet fra Azure Portal
-- Ingen løbende omkostninger
-- Lokal `.azure/<env-name>`-mappe kan slettes
-
-**Alternativ** (behold infrastruktur, slet data):
-```sh
-# Slet kun ressourcegruppen (behold AZD-konfigurationen)
-az group delete --name rg-<env-name> --yes
-```
-## Lær mere
-
-### Relateret dokumentation
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
-- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
-
-### Næste trin i dette kursus
-- **[Container Apps Example](../../../../examples/container-app)**: Deploy microservices med Azure Container Apps
-- **[AI Integration Guide](../../../../docs/ai-foundry)**: Tilføj AI-funktioner til din app
-- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Produktionsudrulningsmønstre
-
-### Avancerede emner
-- **Managed Identity**: Fjern passwords og brug Microsoft Entra ID-godkendelse
-- **Private Endpoints**: Sikr databaseforbindelser inden for et virtuelt netværk
-- **CI/CD-integration**: Automatiser udrulninger med GitHub Actions eller Azure DevOps
-- **Multi-Environment**: Opsæt dev, staging og production miljøer
-- **Database-migrationer**: Brug Alembic eller Entity Framework til versionsstyring af skema
-
-### Sammenligning med andre tilgange
-
-**AZD vs. ARM Templates**:
-- ✅ AZD: Abstraktion på højere niveau, simplere kommandoer
-- ⚠️ ARM: Mere ordrigt, detaljeret kontrol
-
-**AZD vs. Terraform**:
-- ✅ AZD: Azure-native, integreret med Azure-tjenester
-- ⚠️ Terraform: Multi-cloud support, større økosystem
-
-**AZD vs. Azure Portal**:
-- ✅ AZD: Gentagelig, versionsstyret, automatiserbar
-- ⚠️ Portal: Manuelle klik, svært at reproducere
-
-**Tænk på AZD som**: Docker Compose for Azure—forenklet konfiguration til komplekse udrulninger.
-
----
-
-## Ofte stillede spørgsmål
-
-**Spørgsmål: Kan jeg bruge et andet programmeringssprog?**  
-**Svar:** Ja! Erstat `src/web/` med Node.js, C#, Go eller et andet sprog. Opdater `azure.yaml` og Bicep tilsvarende.
-
-**Spørgsmål: Hvordan tilføjer jeg flere databaser?**  
-**Svar:** Tilføj en ekstra SQL Database-module i `infra/main.bicep` eller brug PostgreSQL/MySQL fra Azure Database-tjenester.
-
-**Spørgsmål: Kan jeg bruge dette til produktion?**  
-**Svar:** Dette er et udgangspunkt. Til produktion tilføj: managed identity, private endpoints, redundans, backup-strategi, WAF, og forbedret overvågning.
-
-**Spørgsmål: Hvad hvis jeg vil bruge containere i stedet for kodeudrulning?**  
-**Svar:** Se [Container Apps Example](../../../../examples/container-app), som bruger Docker-containere gennemgående.
-
-**Spørgsmål: Hvordan forbinder jeg til databasen fra min lokale maskine?**  
-**Svar:** Tilføj din IP til SQL Server-firewallen:
-```sh
-az sql server firewall-rule create \
-  --resource-group rg-<env-name> \
-  --server sql-<unique-id> \
-  --name AllowMyIP \
-  --start-ip-address <your-ip> \
-  --end-ip-address <your-ip>
-```
-
-**Spørgsmål: Kan jeg bruge en eksisterende database i stedet for at oprette en ny?**  
-**Svar:** Ja, modificer `infra/main.bicep` til at referere en eksisterende SQL Server og opdater connection string-parametrene.
-
----
-
-> **Bemærk:** Dette eksempel demonstrerer bedste praksis for at udrulle en webapp med en database ved hjælp af AZD. Det inkluderer fungerende kode, omfattende dokumentation og praktiske øvelser til at styrke læringen. Til produktionsudrulninger, gennemgå sikkerhed, skalering, compliance og omkostningskrav specifikke for din organisation.
-
-**📚 Kursusnavigation:**
-- ← Forrige: [Container Apps Example](../../../../examples/container-app)
-- → Næste: [AI Integration Guide](../../../../docs/ai-foundry)
-- 🏠 [Kursusforside](../../README.md)
+[Container eksempler](../../../../examples/container-app) ·
+[AI udvikling](../../docs/chapter-02-ai-development/README.md) ·
+[Kursusstart](../../README.md) · [Rapporter et problem](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

@@ -1,507 +1,520 @@
-# Чести проблеми и решења
+# Уобичајени проблеми и решења
 
-**Навигација поглављем:**
-- **📚 Почетна страница курса**: [AZD For Beginners](../../README.md)
+**Навигација кроз поглавља:**
+- **📚 Почетна страница курса**: [AZD за почетнике](../../README.md)
 - **📖 Тренутно поглавље**: Поглавље 7 - Решавање проблема и отклањање грешака
-- **⬅️ Претходно поглавље**: [Поглавље 6: Прелиминарне провере](../chapter-06-pre-deployment/preflight-checks.md)
+- **⬅️ Претходно поглавље**: [Поглавље 6: Провере пре полетања](../chapter-06-pre-deployment/preflight-checks.md)
 - **➡️ Следеће**: [Водич за отклањање грешака](debugging.md)
-- **🚀 Следеће поглавље**: [Поглавље 8: Обрасци за продукцију и предузећа](../chapter-08-production/production-ai-practices.md)
+- **🚀 Следеће поглавље**: [Поглавље 8: Обрасци за производњу и предузећа](../chapter-08-production/production-ai-practices.md)
 
 ## Увод
 
-Овај опсежни водич за решавање проблема покрива најчешће проблеме који се јављају приликом коришћења Azure Developer CLI. Научите како да дијагностикујете, решите и отклоните уобичајене проблеме са аутентикацијом, деплоя, провизионисањем инфраструктуре и конфигурацијом апликације. За сваки проблем дати су детаљни симптоми, коренски узроци и кораци за решавање.
+Овај свеобухватни водич за решавање проблема покрива најчешће сусретнуте проблеме приликом коришћења Azure Developer CLI. Научите како да дијагностикујете, решавате и отклоните уобичајене проблеме са аутентикацијом, објављивањем, обезбеђивањем инфраструктуре и конфигурацијом апликација. За сваки проблем су дати детаљни симптоми, основни узроци и кораци за решавање.
 
 ## Циљеви учења
 
-Завршетком овог водича, бићете у стању да:
-- Савладате технике дијагностике за проблеме у Azure Developer CLI
+Након завршетка овог водича, моћи ћете да:
+- Савладате технике дијагностиковања проблема са Azure Developer CLI
 - Разумете уобичајене проблеме са аутентикацијом и дозволама и њихова решења
-- Решавате неуспехе деплоя, грешке у провизионисању инфраструктуре и проблеме конфигурације
-- Имплементирате проактивни мониторинг и стратегије за дебаговање
-- Примeните систематске методологије за решавање сложених проблема
-- Конфигуришете правилно логовање и мониторинг како бисте спречили будуће проблеме
+- Решавате неуспехе у објављивању, грешке у обезбеђивању инфраструктуре и проблеме са конфигурацијом
+- Спроведете проактивно праћење и стратегије отклањања грешака
+- Примјењујете систематске методологије решавања сложених проблема
+- Конфигуришете правилно евидентирање и праћење како бисте спречили будуће проблеме
 
 ## Резултати учења
 
-По завршетку, моћи ћете да:
-- Дијагностикујете проблеме Azure Developer CLI користећи уграђене дијагностичке алате
-- Самостално решавате проблеме везане за аутентикацију, претплате и дозволе
-- Ефективно решавате неуспехе деплоя и грешке у провизионисању инфраструктуре
-- Дебагујете проблеме са конфигурацијом апликације и проблеме специфичне за окружење
-- Имплементирате мониторинг и аларме да бисте проактивно идентификовали потенцијалне проблеме
-- Примените најбоље праксе за логовање, дебаговање и ток рада за решавање проблема
+По завршетку, бићете у стању да:
+- Дијагностикујете проблеме са Azure Developer CLI коришћењем уграђених алата за дијагностику
+- Самостално решавате проблеме везане за аутентикацију, претплату и дозволе
+- Ефикасно решавате неуспехе у објављивању и грешке у обезбеђивању инфраструктуре
+- Отклањате проблеме са конфигурацијом апликација и проблеме специфичне за окружење
+- Имплементирате праћење и алармирање како бисте проактивно идентификовали потенцијалне проблеме
+- Примјењујете најбоље праксе за евидентирање, отклањање грешака и протоколе за решавање проблема
 
 ## Брза дијагностика
 
-Пре него што пређете на специфичне проблеме, покрените ове команде да бисте прикупили дијагностичке информације:
+> Замените примерне називе/ИД-ове вредностима из вашег окружења. Bash, Bicep, JavaScript и делови параметарских фајлова су посебно обележени испод; они нису један извршни скрипт. Прегледајте уништавајуће операције и цензуришите тајне пре дељења дијагностицираних података. `azd monitor --logs` отвара прегледач; не преноси логове терминала.
+
+Пре него што пређете на конкретне проблеме, покрените ове команде да бисте сакупили дијагностичке информације:
 
 ```bash
-# Провери верзију и здравље azd
+# Check azd version and health
 azd version
 azd config show
 
-# Провери Azure аутентификацију
+# Verify Azure authentication
 az account show
 az account list
 
-# Провери тренутно окружење
+# Check current environment
 azd env list
 azd env get-values
 
-# Омогући логовање за отклањање грешака
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
 ## Проблеми са аутентикацијом
 
-### Проблем: "Failed to get access token"
+### Проблем: "Неуспех у добијању приступног токена"
 **Симптоми:**
-- `azd up` не успева због грешака у аутентикацији
+- `azd up` не успева са грешкама аутентикације
 - Команде враћају "неовлашћено" или "приступ одбијен"
 
 **Решења:**
 ```bash
-# 1. Поново се аутентификујте помоћу Azure CLI
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# 2. Обришите кеширане акредитиве
+# 2. Clear cached credentials
 az account clear
 az login
 
-# 3. Користите ток аутентификације помоћу кода уређаја (за системе без графичког интерфејса)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# 4. Поставите експлицитну претплату
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
-### Проблем: "Insufficient privileges" током деплоя
+### Проблем: "Недовољна привилегија" током објављивања
 **Симптоми:**
-- Деплој не успева због грешака у дозволама
+- Објављивање не успева због грешака у дозволама
 - Није могуће креирати одређене Azure ресурсе
 
 **Решења:**
 ```bash
-# 1. Проверите доделе улога у Azure
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Уверите се да имате потребне улоге
-# - Contributor (за креирање ресурса)
-# - User Access Administrator (за додељивање улога)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. Контактирајте свог Azure администратора за одговарајуће дозволе
+# 3. Contact your Azure administrator for proper permissions
 ```
 
 ### Проблем: Проблеми са мулти-тенант аутентикацијом
 **Решења:**
 ```bash
-# 1. Пријавити се са одређеним тенантом
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. Подесити тенант у конфигурацији
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. Избрисати кеш повезан са тенантом ако се мењају тенанти
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
-## 🏗️ Грешке у провизионисању инфраструктуре
+## 🏗️ Грешке у обезбеђивању инфраструктуре
 
-### Проблем: Сукоб имена ресурса
+### Проблем: Конфликти имена ресурса
 **Симптоми:**
-- Грешке "The resource name already exists"
-- Деплој не успева током креирања ресурса
+- Грешке "Име ресурса већ постоји"
+- Објављивање не успева током креирања ресурса
 
 **Решења:**
-```bash
-# 1. Користите јединствена имена ресурса са токенима
-# У вашем Bicep шаблону:
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
+```
 
-# 2. Промените име окружења
+```bash
+# 2. Change environment name
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Очистите постојеће ресурсе
-azd down --force --purge
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
 ```
 
-### Проблем: Локација/регион није доступан
+### Проблем: Локација/регија није доступна
 **Симптоми:**
-- "The location 'xyz' is not available for resource type"
-- Поједине SKU-ове нису доступне у изабраном региону
+- "Локација 'xyz' није доступна за тип ресурса"
+- Одређени SKU-ови нису доступни у одабраној регији
 
 **Решења:**
 ```bash
-# 1. Проверите доступне локације за типове ресурса
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Користите уобичајено доступне регионе
-azd config set defaults.location eastus2
-# или
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. Проверите доступност услуге по региону
-# Посетите: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Проблем: Прекорачење квоте
+Промена променљиве локације не мигрира постојеће ресурсе. Постојећа група ресурса или ресурс могу одбити промену локације; користите засебно окружење за регионалну реобјаву.
+
+### Проблем: Грешке прекорачења квоте
 **Симптоми:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+- "Квота прекорачена за тип ресурса"
+- "Достигнут максималан број ресурса"
 
 **Решења:**
 ```bash
-# 1. Проверите тренутну употребу квоте
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# 2. Затражите повећање квоте преко Azure портала
-# Идите на: Претплате > Употреба и квоте
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# 3. Користите мање SKU-ове за развој
-# У main.parameters.json:
+```
+
+За развој одаберите мањи SKU који је подржан у `infra/main.parameters.json`:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# 4. Уклоните неискоришћене ресурсе
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
 ### Проблем: Грешке у Bicep шаблонима
 **Симптоми:**
-- Неуспех валидaције шаблона
+- Неуспех валидације шаблона
 - Синтаксне грешке у Bicep фајловима
 
 **Решења:**
 ```bash
-# 1. Проверити синтаксу Bicep-а
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Користити Bicep линтер
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Проверити синтаксу датотеке параметара
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. Прегледати промене при размештању
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
-## 🚀 Неуспеси деплоя
+## 🚀 Неуспеси објављивања
 
-### Проблем: Грешке при изградњи
+### Проблем: Неуспеси током израде
 **Симптоми:**
-- Апликација не успева да се изгради током деплоя
+- Апликација не успева да се изгради током објављивања
 - Грешке приликом инсталације пакета
 
 **Решења:**
 ```bash
-# 1. Проверите излаз изградње са заставицом за отклањање грешака
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. Погледајте статус распоређене услуге
+# 2. View deployed service status
 azd show
 
-# 3. Тестирајте изградњу локално
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Проверите компатибилност верзија Node.js и Python-а
-node --version  # Треба да се поклапа са подешавањима у azure.yaml
+# 3. Check Node.js/Python version compatibility
+node --version  # Should match azure.yaml settings
 python --version
 
-# 4. Обришите кеш изградње
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. Проверите Dockerfile ако користите контејнере
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Проблем: Грешке при деплоирању контејнера
+### Проблем: Неуспеси током објављивања контејнера
 **Симптоми:**
-- Контејнер апликације не успевају да се покрену
-- Грешке при повлачењу имиџа
+- Контејнер апликације не успевају да стартују
+- Грешке приликом претварања слика
 
 **Решења:**
 ```bash
-# 1. Тестирај Docker изградњу локално
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Провери логове контејнера помоћу Azure CLI
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. Надгледај апликацију помоћу azd
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. Провери приступ регистру контејнера
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. Провери конфигурацију апликације у контејнеру
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Проблем: Грешке при повезивању са базом података
+### Проблем: Неуспех повезивања са базом података
 **Симптоми:**
-- Апликација не може да се повеже са базом података
-- Грешке временског ограничења везе
+- Апликација се не може повезати са базом података
+- Грешке за време истека везе (timeout)
 
 **Решења:**
 ```bash
-# 1. Проверите правила заштитног зида базе података
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Тестирајте повезаност из апликације
-# Привремено додајте у вашу апликацију:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Проверите формат низа за повезивање
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# 4. Проверите статус сервера базе података
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
 ## 🔧 Проблеми са конфигурацијом
 
-### Проблем: Променљиве окружења не функционишу
+### Проблем: Променљиве окружења не раде
 **Симптоми:**
-- Апликација не може да прочита вредности конфигурације
-- Променљиве окружења изгледају празне
+- Апликација не може да учита вредности конфигурације
+- Променљиве окружења изгледају празно
 
 **Решења:**
 ```bash
-# 1. Проверите да ли су променљиве окружења постављене
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. Проверите имена променљивих у azure.yaml
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. Поново покрените апликацију
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. Проверите конфигурацију App Service-а
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
 ### Проблем: Проблеми са SSL/TLS сертификатима
 **Симптоми:**
 - HTTPS не ради
-- Грешке при валидацији сертификата
+- Грешке приликом валидације сертификата
 
 **Решења:**
 ```bash
-# 1. Проверите статус SSL сертификата
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# 2. Омогућите само HTTPS
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Додајте прилагођени домен (ако је потребно)
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
 ### Проблем: Проблеми са CORS конфигурацијом
 **Симптоми:**
 - Фронтенд не може да позове API
-- Захтев из друге домене блокиран
+- Захтеви са различитих порекла блокирани
 
 **Решења:**
 ```bash
-# 1. Конфигуришите CORS за App Service
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Ажурирајте API да обрађује CORS
-# У Express.js:
+```
+
+2. Ажурирајте постојећу Express апликацију (са увезеним `cors`):
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# 3. Проверите да ли ради на исправним URL адресама
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
-## 🌍 Проблеми у управљању окружењима
+## 🌍 Проблеми у управљању окружењем
 
-### Проблем: Проблеми при мењању окружења
+### Проблем: Проблеми са пребацивањем окружења
 **Симптоми:**
-- Погрешно окружење се користи
-- Конфигурација се не мења како треба
+- Корисник користи погрешно окружење
+- Конфигурација се не мења исправно
 
 **Решења:**
 ```bash
-# 1. Прикажи сва окружења
+# 1. List all environments
 azd env list
 
-# 2. Експлицитно одабери окружење
+# 2. Explicitly select environment
 azd env select production
 
-# 3. Провери тренутно окружење
+# 3. Verify current environment
 azd env list
 
-# 4. Креирај ново окружење ако је корумпирано
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
 ### Проблем: Корупција окружења
 **Симптоми:**
-- Окружење приказује невалидно стање
-- Ресурси се не поклапају са конфигурацијом
+- Окружење приказује неважеће стање
+- Ресурси не одговарају конфигурацији
 
 **Решења:**
 ```bash
-# 1. Освежите стање окружења
+# 1. Refresh environment state
 azd env refresh
 
-# 2. Ресетујте конфигурацију окружења
+# 2. Reset environment configuration
 azd env new production-reset
-# Копирајте потребне променљиве окружења
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. Увезите постојеће ресурсе (ако је могуће)
-# Ручно ажурирајте .azure/production/config.json са идентификаторима ресурса
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
 ## 🔍 Проблеми са перформансама
 
-### Проблем: Споро трајање деплoја
+### Проблем: Споро време објављивања
 **Симптоми:**
-- Деплоања трају предуго
-- Тайм-аути током деплоя
+- Објављивања трају предуго
+- Истеци времена (timeout) током објављивања
 
 **Решења:**
 ```bash
-# 1. Деплојујте специфичне сервисе за бржу итерацију
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. Користите само деплој кода када инфраструктура није промењена
-azd deploy  # Брже од azd up
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. Оптимизујте процес изградње
-# У package.json:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. Проверите локације ресурса (користите исту регију)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
-### Проблем: Проблеми са перформансом апликације
+### Проблем: Проблеми са перформансама апликације
 **Симптоми:**
-- Спори одговори
+- Спори одзиви
 - Висока потрошња ресурса
 
 **Решења:**
 ```bash
-# 1. Повећајте ресурсе
-# Ажурирајте SKU у main.parameters.json:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# 2. Омогућите надгледање у Application Insights
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# 3. Проверите логове апликације у Azure
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# или за Container Apps:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. Успоставите кеширање
-# Додајте Redis кеш у вашу инфраструктуру
+# 4. Implement caching
+# Add Redis cache to your infrastructure
 ```
 
 ## 🛠️ Алати и команде за решавање проблема
 
-### Команде за дебаговање
+### Команде за отклањање грешака
 ```bash
-# Свеобухватно отклањање грешака
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# Провери azd верзију
+# Check azd version
 azd version
 
-# Прикажи тренутну конфигурацију
+# View current configuration
 azd config show
 
-# Тестирај повезаност
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### Анализа логова
 ```bash
-# Логови апликације преко Azure CLI
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# Надгледајте апликацију помоћу azd
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Логови Azure ресурса
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
-# Логови контејнера (за Container Apps)
+# Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### Истраживање ресурса
+### Испитивање ресурса
 ```bash
-# Прикажи све ресурсе
+# List all resources
 az resource list --resource-group myrg -o table
 
-# Провери статус ресурса
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# Мрежна дијагностика
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Добијање додатне помоћи
+## 🆘 Како добити додатну помоћ
 
-### Када ескалирати
-- Проблеми са аутентикацијом који и даље остају након примене свих решења
-- Проблеми са инфраструктуром у Azure сервисима
-- Питања везана за наплатe или претплате
-- Безбедносне бриге или инциденти
+### Када надоградити захтев
+- Проблеми са аутентикацијом настављају након свих покушаја решења
+- Проблеми са инфраструктуром Azure сервиса
+- Проблеми у вези са наплатом или претплатом
+- Безбедносне забринутости или инциденти
 
 ### Канали подршке
 ```bash
-# 1. Проверите Azure Service Health
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Креирајте захтев за подршку у Azure-у
-# Идите на: https://portal.azure.com -> Помоћ и подршка
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. Ресурси за заједницу
-# - Stack Overflow: ознака azure-developer-cli
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Информације које треба прикупити
-Пре контактирања подршке, прикупите:
-- `azd version` output
-- `azd config show` output
-- `azd show` output (тренутни статус деплоя)
-- Поруке о грешци (пуни текст)
+### Подаци које треба сакупити
+Пре контактирања подршке, сакупите:
+- Излаз `azd version`
+- Излаз `azd config show`
+- Излаз `azd show` (тренутни статус објављивања)
+- Поруке о грешкама (пун текст)
 - Кораци за репродукцију проблема
-- Детаљи о окружењу (`azd env get-values`)
-- Временски ток када је проблем почео
+- Цензурисани детаљи окружења (никад не делите сирови `azd env get-values`, јер може садржати тајне)
+- Хронологија почетка проблема
 
 ### Скрипта за прикупљање логова
 ```bash
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -528,73 +541,75 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Превенција проблема
 
-### Контролна листа пре деплoја
+### Контролна листа пре објављивања
 ```bash
-# 1. Проверити аутентификацију
+# 1. Validate authentication
 az account show
 
-# 2. Проверити квоте и ограничења
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# 3. Проверити шаблоне
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# 4. Прво тестирати локално
+# 4. Test locally first
 npm run build
 npm run test
 
-# 5. Користити dry-run распоређивања
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
-### Подешавање мониторинга
-```bash
-# Омогући Application Insights
-# Додај у main.bicep:
+### Подешавање мониториња
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# Подеси упозорења
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
 ### Редовно одржавање
 ```bash
-# Недељне провере здравља
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# Месечни преглед трошкова
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# Тримесечни безбедносни преглед
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
 ## Повезани ресурси
 
-- [Водич за отклањање грешака](debugging.md) - Напредне технике дебаговања
-- [Провизионисање ресурса](../chapter-04-infrastructure/provisioning.md) - Решавање проблема инфраструктуре
-- [Планирање капацитета](../chapter-06-pre-deployment/capacity-planning.md) - Упутства за планирање ресурса
-- [Избор SKU-а](../chapter-06-pre-deployment/sku-selection.md) - Препоруке за нивое услуга
+- [Водич за отклањање грешака](debugging.md) - Напредне технике отклањања грешака
+- [Обезбеђивање ресурса](../chapter-04-infrastructure/provisioning.md) - Решавање проблема инфраструктуре
+- [Планирање капацитета](../chapter-06-pre-deployment/capacity-planning.md) - Водич за планирање ресурса
+- [Избор SKU](../chapter-06-pre-deployment/sku-selection.md) - Препоруке за ниво услуге
 
 ---
 
-**Савет**: Сачувајте овај водич у обележивачима и консултујте га кад год наиђете на проблеме. Већина проблема је већ виђена раније и има утврђена решења!
+**Савет**: Задржите овај водич у обележивачима и консултујте га кад год наиђете на проблеме. Већина проблема је већ виђена и има утврђена решења!
 
 ---
 
 **Навигација**
-- **Претходна лекција**: [Провизионисање ресурса](../chapter-04-infrastructure/provisioning.md)
+- **Претходна лекција**: [Обезбеђивање ресурса](../chapter-04-infrastructure/provisioning.md)
 - **Следећа лекција**: [Водич за отклањање грешака](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Одрицање одговорности**:
-Овај документ је преведен уз помоћ услуге за превођење помоћу вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да будемо прецизни, молимо вас имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитетним извором. За критичне информације препоручује се професионални људски превод. Не сносимо одговорност за било какве неспоразуме или погрешна тумачења која произилазе из коришћења овог превода.
+**Изјава о одрицању одговорности**:
+Овај документ је преведен коришћењем услуге за аутоматски превод [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо тачности, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква неспоразума или погрешна тумачења која произилазе из коришћења овог превода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,6 +1,6 @@
-# Capítulo 6: Planejamento & Validação Pré-Implantação
+# Capítulo 6: Planejamento e Validação Pré-Implantação
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1 hora | **⭐ Complexidade**: Intermediário
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-4 horas de leitura; tempo adicional para laboratórios adaptados | **⭐ Complexidade**: Intermediário–Avançado
 
 ---
 
@@ -8,44 +8,44 @@
 
 Este capítulo cobre etapas essenciais de planejamento e validação antes de implantar sua aplicação. Aprenda a evitar erros custosos com planejamento adequado de capacidade, seleção de SKU e verificações prévias.
 
-> Validado contra `azd 1.27.1` em julho de 2026.
+> Orientação de comandos revisada com base na referência `azd 1.37.2` lançada. Implantações na nuvem não foram executadas. As lições mais longas incluem fragmentos ilustrativos, não projetos completos de implantação local.
 
 ## Objetivos de Aprendizagem
 
 Ao concluir este capítulo, você irá:
 - Executar verificações prévias antes da implantação
 - Planejar capacidade e estimar requisitos de recursos
-- Selecionar SKUs apropriados para otimização de custos
+- Selecionar SKUs apropriados para otimização de custo
 - Configurar Application Insights para monitoramento
-- Entender padrões de coordenação de equipe
+- Compreender padrões de coordenação multiagente e seus requisitos de implantação
 
 ---
 
 ## 📚 Lições
 
-| # | Lição | Descrição | Duração |
-|---|--------|-------------|---------|
+| # | Lição | Descrição | Tempo |
+|---|--------|-------------|------|
 | 1 | [Verificações Prévias](preflight-checks.md) | Validar configuração antes da implantação | 15 min |
 | 2 | [Planejamento de Capacidade](capacity-planning.md) | Estimar requisitos de recursos | 20 min |
-| 3 | [Seleção de SKU](sku-selection.md) | Escolher faixas de preço adequadas | 15 min |
+| 3 | [Seleção de SKU](sku-selection.md) | Escolher níveis de preço apropriados | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configurar monitoramento | 20 min |
-| 5 | [Padrões de Coordenação](coordination-patterns.md) | Fluxos de trabalho de equipe na implantação | 15 min |
+| 5 | [Padrões de Coordenação](coordination-patterns.md) | Design avançado de orquestração multiagente | 60-75 min |
 
 ---
 
-## 🚀 Início Rápido
+## 🚀 Começo Rápido
 
 ```bash
-# Verificar cotas da assinatura
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Visualizar implantação (nenhum recurso criado)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Validar sintaxe Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Verificar configuração do ambiente
+# Check environment configuration
 azd env get-values
 ```
 
@@ -55,17 +55,17 @@ azd env get-values
 
 ### Antes do `azd provision`
 
-- [ ] Cotas verificadas para a região
+- [ ] Cota verificada para a região
 - [ ] SKUs selecionados apropriadamente
 - [ ] Estimativa de custo revisada
 - [ ] Convenção de nomenclatura consistente
-- [ ] Segurança/RBAC configurada
+- [ ] Segurança/RBAC configurados
 
 ### Antes do `azd deploy`
 
 - [ ] Variáveis de ambiente definidas
 - [ ] Segredos no Key Vault
-- [ ] Strings de conexão verificadas
+- [ ] Cadeias de conexão verificadas
 - [ ] Verificações de integridade configuradas
 
 ---
@@ -73,19 +73,19 @@ azd env get-values
 ## 💰 Guia de Seleção de SKU
 
 | Carga de Trabalho | Desenvolvimento | Produção |
-|------------------|---------------|-----------|
-| Container Apps | Consumo | Dedicado D4 |
+|----------|-------------|------------|
+| Container Apps | Consumo | Consumo ou perfil dedicado, baseado na carga medida |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Padrão | Padrão + PTU |
-| AI Search | Básico | Padrão S2+ |
+| Modelos Azure OpenAI | Tipo de implantação pay-as-you-go suportada | Pay-as-you-go ou throughput provisionado; depende do modelo/região |
+| AI Search | Gratuito/Básico dentro dos limites | Nível Básico ou Standard dimensionado para índice, réplicas e carga de consulta |
 
 ---
 
 ## 🔗 Navegação
 
 | Direção | Capítulo |
-|---------|----------|
-| **Anterior** | [Capítulo 5: Multi-Agente](../chapter-05-multi-agent/README.md) |
+|-----------|---------|
+| **Anterior** | [Capítulo 5: Multiagente](../chapter-05-multi-agent/README.md) |
 | **Próximo** | [Capítulo 7: Solução de Problemas](../chapter-07-troubleshooting/README.md) |
 
 ---

@@ -1,110 +1,110 @@
 # 7. Kokkuvõte ja järgmised sammud
 
-!!! tip "PEAMISED SÕNUMID ON"
+!!! tip "PEAMISED ÕPITULEMUSED ON"
 
-    - [ ] AZD mallid kiirendavad tehisintellekti rakenduste arendamist päevadest tundideks
-    - [ ] Avastamise → Juhtimise → Kohandamise metoodika pakub struktureeritud õppeteed
-    - [ ] GitHub Copilot koos MCP serveritega võimaldab keerukate koodibaaside loomuliku keele abil uurimist
-    - [ ] Microsoft Foundry pakub sisse ehitatud jälgitavust, hindamist ja turbetestimist
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
-## 1. Mida Sa Saavutad
+## 1. Mida sa saavutasid
 
-Palju õnne! Selles töötubades oled edukalt:
+Palju õnne! Selles töötuba oled sa edukalt:
 
 | Moodul | Saavutus |
 |:---|:---|
-| **Moodul 1** | Avastanud Azure Developer CLI ja valinud AI malli |
-| **Moodul 2** | Värvanud ja valideerinud täisväärtusliku AI agendi lahenduse |
-| **Moodul 3** | Analüüsinud malli arhitektuuri mõistmiseks |
+| **Moodul 1** | Avastanud Azure Developer CLI ja valinud tehisintellekti malli |
+| **Moodul 2** | Rakendanud ja valideerinud täieliku tehisintellekti agentide lahenduse |
+| **Moodul 3** | Analüüsinud malli, et mõista selle arhitektuuri |
 | **Moodul 4** | Uurinud `azure.yaml` konfiguratsiooni ja elutsükli konksusid |
 | **Moodul 5** | Kohandanud malli omaenda stsenaariumi jaoks |
-| **Moodul 6** | Turvaliselt lammutanud infrastruktuuri ja haldanud ressursse |
+| **Moodul 6** | Ohutult lammutanud infrastruktuuri ja haldanud ressursse |
 
 ---
 
-## 2. Võtmekontseptsioonid Valdavad
+## 2. Peamised valdkonnad, mida omandasid
 
 ### Azure Developer CLI (azd)
-- `azd init` - Algatada projekte mallidest
-- `azd up` - Ühe käsuga varustada ja paigaldada
+- `azd init` - Projekti alustamine mallidest
+- `azd up` - Ühekordne varustamine ja juurutamine
 - `azd env` - Keskkonnamuutujate haldamine
-- `azd down` - Ressursside turvaline koristamine
+- `azd down` - Ressursside ohutu puhastamine
 
 ### AZD malli struktuur
-- `azure.yaml` - Konfiguratsioon ja juurutamise konksud
+- `azure.yaml` - Konfiguratsiooni ja juurutamise konksud
 - `infra/` - Bicep infrastruktuur kui kood
 - `src/` - Rakenduse lähtekood
 - `scripts/` - Automatiseerimise ja seadistamise skriptid
 
-### Microsoft Foundry võimalused
-- AI agendi teenus intelligentsete assistentide jaoks
-- Failiotsing ja Azure AI otsing teadmiste leidmiseks
-- Sisse ehitatud jälgimine, monitooring ja hindamine
-- Punase meeskonna testimine AI ohutuse tagamiseks
+### Microsoft Foundry võimekused
+- Tehisintellekti agendi teenus intelligentsete assistentide jaoks
+- Failide otsing ja Azure AI otsing teadmiste leidmiseks
+- Sisseehitatud jälgimine, monitooring ja hinnang
+- Punase meeskonna testimine AI turvalisuse valideerimiseks
 
 ---
 
-## 3. Jätka Oma Õppimisteed
+## 3. Jätka oma õppeteekonda
 
-### Soovitatud järgmised sammud
+### Soovitatavad järgmised sammud
 
 | Tee | Ressurss | Aeg |
 |:---|:---|:---|
-| **Lõpeta kursus** | [AZD algajatele õppekava](../../README.md) | 8-12 tundi |
-| **Proovi uut malli** | [Microsoft Foundry mallid](https://ai.azure.com/templates) | 1-2 tundi |
-| **Sügavam sukeldumine** | [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Jooksev |
-| **Kogukond** | [Azure Discord](https://aka.ms/foundry/discord) | Liitu juba täna! |
+| **Täielik kursus** | [AZD algajatele õppekava](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Enda tempos |
+| **Proovi teist malli** | [Microsoft Foundry mallid](https://ai.azure.com/templates) | 1-2 tundi |
+| **Sügav sukeldumine** | [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Jätkuv |
+| **Kogukond** | [Azure Discord](https://aka.ms/foundry/discord) | Liitu kohe! |
 
-### Järgmised soovitatud mallid proovimiseks
+### Soovitatud mallid, mida järgmisena proovida
 
-1. **[Alusta AI vestlusega](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Lihtne vestlus sinu andmetega
-2. **[Azure Search OpenAI demonstratsioon](https://github.com/Azure-Samples/azure-search-openai-demo)** - Täiustatud RAG-mustrid
-3. **[Contoso vestlus](https://github.com/Azure-Samples/contoso-chat)** - Ettevõtte jaemüügi stsenaariumid
+1. **[Alusta AI-chattiga](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Põhichat sinu andmetega
+2. **[Azure Search OpenAI demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Täiustatud RAG-mustrid
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Ettevõtluse jae-ettevõtte stsenaariumid
 
 ---
 
 ## 4. Töötuba väljakutse
 
-Valmis oma oskusi testima? Proovi neid väljakutseid:
+Valmis oma oskuste proovilepanekuks? Proovi neid väljakutseid:
 
 | Väljakutse | Kirjeldus | Raskusaste |
 |:---|:---|:---|
-| **1. Mitme agendi stsenaarium** | Juuruta ja kohanda erineva tööstusharu jaoks (nt tervishoid, rahandus) | ⭐⭐ |
-| **2. Kohandatud teadmiste baas** | Lisa oma andmefailid ja loo kohandatud otsingulindil | ⭐⭐⭐ |
-| **3. Tootmisjuurutus** | Sea üles CI/CD GitHub Actions abil, kasutades `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. Mitme agendi stsenaarium** | Juhi ja kohanda erinevale tööstusharule (nt tervishoid, rahandus) | ⭐⭐ |
+| **2. Kohandatud teadmistebaas** | Lisa oma andmefailid ja loo kohandatud otsinguindeks | ⭐⭐⭐ |
+| **3. Tootmisjuurutus** | Sea üles CI/CD GitHub Actionsiga kasutades `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. Anna Tagasisidet
+## 5. Jaga oma tagasisidet
 
-Sinu tagasiside aitab meil seda töötuba paremaks muuta!
+Sinu tagasiside aitab meil seda töötuba parandada!
 
-- **GitHubi probleemid**: [Jäta tagasiside](https://github.com/microsoft/azd-for-beginners/issues) - märgi `Workshop`
-- **Discord**: Liitu [Microsoft Foundry Discordiga](https://aka.ms/foundry/discord) - postita #get-help kanalisse
-- **Panused**: Aita töötuba paremaks muuta, esita pull request’e!
+- **GitHub Issues**: [Postita tagasiside](https://github.com/microsoft/azd-for-beginners/issues) - märgi `Workshop`
+- **Discord**: Liitu [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - postita `#get-help`
+- **Panused**: Aita töötuba parandada, esitades pull-päringuid!
 
 ---
 
 ## Aitäh! 🎉
 
-Täname, et lõpetasid AZD tehisintellekti arendajate töötuba. Loodame, et see kogemus on varustanud sind oskuste ja kindlusega ehitada ja juurutada AI rakendusi Azure platvormil.
+Täname, et osalesid AZD for AI Developers töötubas. Loodame, et see kogemus on andnud sulle oskused ja kindluse ehitada ja juurutada tehisintellekti rakendusi Azure'is.
 
-**Jätka loomist, jätka õppimist ja tere tulemast Azure AI arendajate kogukonda!**
+**Jätka ehitamist, jätka õppimist ja tere tulemast Azure AI arendajate kogukonda!**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 Kursuse avaleht** | [AZD algajatele](../../README.md) |
-| **📖 Dokumentatsioon** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
+| **📚 Kursuse avaleht** | [AZD algajatele](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
+| **📖 Dokumentatsioon** | [Azure Developer CLI dokumendid](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
 | **🛠️ AI mallid** | [Microsoft Foundry mallid](https://ai.azure.com/templates) |
 | **💬 Kogukond** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest loobumine**:
-See dokument on tõlgitud kasutades tehisintellekti tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame tagada täpsust, olge teadlikud, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Kriitilise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud väärarusaamade või valesti tõlgendamise eest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

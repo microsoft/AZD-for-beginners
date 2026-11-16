@@ -1,20 +1,20 @@
-# الفصل ٥: حلول الذكاء الاصطناعي متعددة الوكلاء
+# الفصل 5: حلول الذكاء الاصطناعي متعددة الوكلاء
 
-**📚 الدورة**: [مبتدئين في AZD](../../README.md) | **⏱️ المدة**: ٢-٣ ساعات | **⭐ التعقيد**: متقدم
+**📚 الدورة**: [AZD للمبتدئين](../../README.md) | **⏱️ المدة**: 2-3 ساعات | **⭐ التعقيد**: متقدم
 
 ---
 
 ## نظرة عامة
 
-يتناول هذا الفصل أنماط البنية المتقدمة متعددة الوكلاء، تنسيق الوكلاء، ونشر الذكاء الاصطناعي الجاهز للإنتاج للسيناريوهات المعقدة.
+يغطي هذا الفصل أنماط معمارية متقدمة متعددة الوكلاء، تنسيق الوكلاء، والنشر الجاهز للإنتاج للذكاء الاصطناعي في السيناريوهات المعقدة.
 
-> تم التحقق عليه باستخدام `azd 1.27.1` في يوليو ٢٠٢٦.
+> تم مراجعة إرشادات الأوامر مقابل المرجع الصادر `azd 1.37.2`. لم يتم تنفيذ النشر السحابي.
 
 ## أهداف التعلم
 
-عند إتمام هذا الفصل، ستتمكن من:
-- فهم أنماط بنية متعددة الوكلاء
-- نشر أنظمة الذكاء الاصطناعي المنسقة لوكلاء متعددين
+عند إكمال هذا الفصل، ستتمكن من:
+- فهم أنماط معمارية متعددة الوكلاء
+- نشر أنظمة وكلاء ذكاء اصطناعي منسقة
 - تنفيذ الاتصال بين الوكلاء
 - بناء حلول متعددة الوكلاء جاهزة للإنتاج
 
@@ -24,46 +24,48 @@
 
 | # | الدرس | الوصف | الوقت |
 |---|--------|-------------|------|
-| 1 | [أساسيات متعددة الوكلاء](multi-agent-basics.md) | عملي: نشر تطبيق متعدد وكلاء يعمل باستخدام `azd up` | ٤٥ دقيقة |
-| 2 | [أنماط التنسيق](../chapter-06-pre-deployment/coordination-patterns.md) | استراتيجيات تنسيق الوكلاء (تستمر في الفصل ٦) | ٣٠ دقيقة |
-| 3 | [نشر قالب ARM](../../examples/retail-multiagent-arm-template/README.md) | مثال للنشر بنقرة واحدة | ٣٠ دقيقة |
+| 1 | [أساسيات متعددة الوكلاء](multi-agent-basics.md) | عملي: نشر تطبيق متعدد الوكلاء يعمل باستخدام `azd up` | 45 دقيقة |
+| 2 | [أنماط التنسيق](../chapter-06-pre-deployment/coordination-patterns.md) | استراتيجيات تنسيق الوكلاء (يستمر في الفصل 6) | 30 دقيقة |
+| 3 | [نشر قالب ARM](../../examples/retail-multiagent-arm-template/README.md) | مثال للنشر بضغطه واحدة | 30 دقيقة |
 
-> **ابدأ بالدرس ١.** إنه الدرس العملي الوحيد القابل للنشر الكامل في هذا الفصل. الدرس ٢ موجود في الفصل ٦ (مشترك مع تخطيط ما قبل النشر)، و[حل التجزئة متعدد الوكلاء](../../examples/retail-scenario.md) هو مخطط معماري—مرجع تصميم، وليس قالب أمر واحد.
+> **ابدأ بالدرس 1.** هو الدرس الوحيد العملي بالكامل والقابل للنشر في هذا الفصل. الدرس 2 موجود في الفصل 6 (مشترك مع تخطيط ما قبل النشر)، و[حل التجزئة متعددة الوكلاء](../../examples/retail-scenario.md) هو مخطط معماري — مرجع تصميم، وليس قالب أمر واحد.
 
 ---
 
 ## 🚀 بداية سريعة
 
 ```bash
-# الخيار 1: النشر من قالب
-azd init --template agent-openai-python-prompty
+# Option 1: Deploy the multi-agent template used in Lesson 1
+azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# الخيار 2: النشر من ملف تعريف وكيل (يتطلب امتداد azure.ai.agents)
+# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> **أي نهج؟** استخدم `azd init --template` للبدء من نموذج عملي. استخدم `azd ai agent init` عندما يكون لديك بيان وكيل خاص بك. راجع [مرجع CLI الذكاء الاصطناعي لـ AZD](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) للتفاصيل الكاملة.
+> **أي نهج؟** استخدم `azd init --template` للبدء من نموذج يعمل. استخدم `azd ai agent init` تفاعليًا، أو `azd ai agent init --template <path-to-azure.yaml>` لتبني مشروع وكيل قائم. راجع [مرجع AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) لمتطلبات الإصدار وترحيل التقييم.
+
+شغّل هذه البدائل في مجلدات فارغة منفصلة. إضافة الوكلاء `1.0.0-beta.23` تتطلب `azd >= 1.37.0`؛ تدفقها التفاعلي لا ينشئ خط أنابيب خدمة مخصصة في درس التنسيق.
 
 ---
 
-## 🤖 بنية متعددة الوكلاء
+## 🤖 معمارية متعددة الوكلاء
 
 ```mermaid
 graph TD
-    Orchestrator[وكيل المنسق<br/>يوجه الطلبات، يدير سير العمل] --> Customer[وكيل العميل<br/>استفسارات المستخدم، التفضيلات]
-    Orchestrator --> Inventory[وكيل المخزون<br/>مستويات المخزون، الطلبات]
+    Orchestrator[Orchestrator Agent<br/>Routes requests, manages workflow] --> Customer[Customer Agent<br/>User queries, preferences]
+    Orchestrator --> Inventory[Inventory Agent<br/>Stock levels, orders]
 ```
 
 ---
 
 ## 🎯 الحل المميز: التجزئة متعددة الوكلاء
 
-يوضح [حل التجزئة متعدد الوكلاء](../../examples/retail-scenario.md):
+يوضح [حل التجزئة متعددة الوكلاء](../../examples/retail-scenario.md):
 
-- **وكيل العميل**: يتعامل مع تفاعلات المستخدم والتفضيلات
+- **وكيل العميل**: يدير تفاعلات وتفضيلات المستخدم
 - **وكيل المخزون**: يدير المخزون ومعالجة الطلبات
 - **المنسق**: ينسق بين الوكلاء
 - **الذاكرة المشتركة**: إدارة السياق عبر الوكلاء
@@ -72,9 +74,9 @@ graph TD
 
 | الخدمة | الغرض |
 |---------|---------|
-| Microsoft Foundry Models | فهم اللغة |
+| نماذج Microsoft Foundry | فهم اللغة |
 | Azure AI Search | كتالوج المنتجات |
-| Cosmos DB | حالة الذاكرة والوكلاء |
+| Cosmos DB | حالة الوكيل والذاكرة |
 | Container Apps | استضافة الوكلاء |
 | Application Insights | المراقبة |
 
@@ -84,8 +86,8 @@ graph TD
 
 | الاتجاه | الفصل |
 |-----------|---------|
-| **السابق** | [الفصل ٤: البنية التحتية](../chapter-04-infrastructure/README.md) |
-| **التالي** | [الفصل ٦: ما قبل النشر](../chapter-06-pre-deployment/README.md) |
+| **السابق** | [الفصل 4: البنية التحتية](../chapter-04-infrastructure/README.md) |
+| **التالي** | [الفصل 6: قبل النشر](../chapter-06-pre-deployment/README.md) |
 
 ---
 
@@ -93,7 +95,7 @@ graph TD
 
 - [دليل وكلاء الذكاء الاصطناعي](../chapter-02-ai-development/agents.md)
 - [ممارسات الذكاء الاصطناعي للإنتاج](../chapter-08-production/production-ai-practices.md)
-- [استكشاف أخطاء الذكاء الاصطناعي وإصلاحها](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [تحرّي مشكلات الذكاء الاصطناعي](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

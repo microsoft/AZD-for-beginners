@@ -1,65 +1,65 @@
-# Frequently Asked Questions (FAQ)
+# Häufig gestellte Fragen (FAQ)
 
-**Get Help by Chapter**
-- **📚 Course Home**: [AZD For Beginners](../README.md)
-- **🚆 Installation Issues**: [Chapter 1: Installation & Setup](../docs/getting-started/installation.md)
-- **🤖 AI Questions**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **🔧 Troubleshooting**: [Chapter 7: Troubleshooting & Debugging](../docs/troubleshooting/common-issues.md)
+**Hilfe nach Kapitel erhalten**
+- **📚 Kursstartseite**: [AZD für Anfänger](../README.md)
+- **🚆 Installationsprobleme**: [Kapitel 1: Installation & Einrichtung](../docs/chapter-01-foundation/installation.md)
+- **🤖 KI-Fragen**: [Kapitel 2: KI-First-Entwicklung](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🔧 Fehlerbehebung**: [Kapitel 7: Fehlerbehebung & Debugging](../docs/chapter-07-troubleshooting/common-issues.md)
 
-## Introduction
+## Einführung
 
-Diese umfassende FAQ bietet Antworten auf die häufigsten Fragen zur Azure Developer CLI (azd) und zu Azure-Bereitstellungen. Finden Sie schnelle Lösungen für häufige Probleme, verstehen Sie Best Practices und erhalten Sie Klärungen zu azd-Konzepten und Workflows.
+Dieses umfassende FAQ bietet Antworten auf die häufigsten Fragen zu Azure Developer CLI (azd) und Azure-Bereitstellungen. Finden Sie schnelle Lösungen für gängige Probleme, verstehen Sie bewährte Verfahren und erhalten Sie Klarheit zu azd-Konzepten und Arbeitsabläufen.
 
-## Learning Goals
+## Lernziele
 
-Durch das Durcharbeiten dieser FAQ werden Sie:
-- Schnelle Antworten auf häufige Fragen und Probleme zur Azure Developer CLI finden
-- Wichtige Konzepte und Terminologie durch praktisches Frage-und-Antwort-Format verstehen
-- Zugriff auf Fehlerbehebungsansätze für häufige Probleme und Fehlerszenarien erhalten
-- Best Practices durch häufig gestellte Fragen zur Optimierung erlernen
-- Erweiterte Funktionen und Möglichkeiten durch Fragen auf Expertenniveau entdecken
-- Anleitung zu Kosten, Sicherheit und Bereitstellungsstrategien effizient nachschlagen können
+Durch das Durcharbeiten dieses FAQs werden Sie:
+- Schnelle Antworten auf häufige Fragen und Probleme mit Azure Developer CLI finden
+- Wichtige Konzepte und Terminologie durch praktisches Q&A-Format verstehen
+- Lösungen zur Fehlerbehebung bei häufigen Problemen und Fehlerszenarien finden
+- Best Practices durch häufig gestellte Fragen zur Optimierung kennenlernen
+- Fortgeschrittene Funktionen und Möglichkeiten durch Expertenfragen entdecken
+- Kosten-, Sicherheits- und Bereitstellungsstrategien effizient nachschlagen
 
-## Learning Outcomes
+## Lernergebnisse
 
-Bei regelmäßiger Bezugnahme auf diese FAQ werden Sie in der Lage sein:
-- Häufige Azure Developer CLI-Probleme eigenständig mit den bereitgestellten Lösungen zu lösen
-- Informierte Entscheidungen zu Bereitstellungsstrategien und Konfigurationen zu treffen
+Mit regelmäßigem Nachschlagen dieses FAQs werden Sie in der Lage sein:
+- Häufige Probleme mit Azure Developer CLI eigenständig anhand der bereitgestellten Lösungen zu beheben
+- Informierte Entscheidungen über Bereitstellungsstrategien und Konfigurationen zu treffen
 - Die Beziehung zwischen azd und anderen Azure-Tools und -Diensten zu verstehen
 - Best Practices basierend auf Community-Erfahrungen und Expertenempfehlungen anzuwenden
 - Authentifizierungs-, Bereitstellungs- und Konfigurationsprobleme effektiv zu beheben
-- Kosten und Leistung mithilfe der Erkenntnisse und Empfehlungen aus der FAQ zu optimieren
+- Kosten und Leistung unter Nutzung der FAQ-Erkenntnisse und Empfehlungen zu optimieren
 
-## Table of Contents
+## Inhaltsverzeichnis
 
-- [Getting Started](../../../resources)
-- [Authentication & Access](../../../resources)
-- [Templates & Projects](../../../resources)
-- [Deployment & Infrastructure](../../../resources)
-- [Configuration & Environments](../../../resources)
-- [Troubleshooting](../../../resources)
-- [Cost & Billing](../../../resources)
-- [Best Practices](../../../resources)
-- [Advanced Topics](../../../resources)
+- [Erste Schritte](#getting-started)
+- [Authentifizierung & Zugriff](#authentication--access)
+- [Vorlagen & Projekte](#templates--projects)
+- [Bereitstellung & Infrastruktur](#deployment--infrastructure)
+- [Konfiguration & Umgebungen](#configuration--environments)
+- [Fehlerbehebung](#troubleshooting)
+- [Kosten & Abrechnung](#cost--billing)
+- [Best Practices](#best-practices)
+- [Fortgeschrittene Themen](#advanced-topics)
 
 ---
 
-## Getting Started
+## Erste Schritte
 
-### Q: What is Azure Developer CLI (azd)?
-**A**: Azure Developer CLI (azd) ist ein entwicklerzentriertes Kommandozeilentool, das die Zeit verkürzt, die benötigt wird, um Ihre Anwendung von der lokalen Entwicklungsumgebung nach Azure zu bringen. Es bietet Best Practices durch Vorlagen und unterstützt den gesamten Bereitstellungslebenszyklus.
+### F: Was ist Azure Developer CLI (azd)?
+**A**: Azure Developer CLI (azd) ist ein entwicklerorientiertes Kommandozeilenwerkzeug, das die Zeit verkürzt, die benötigt wird, um Ihre Anwendung von der lokalen Entwicklungsumgebung bis zu Azure zu bringen. Es bietet Best Practices durch Vorlagen und unterstützt den gesamten Bereitstellungszyklus.
 
-### Q: How is azd different from Azure CLI?
+### F: Wodurch unterscheidet sich azd von Azure CLI?
 **A**: 
 - **Azure CLI**: Allgemeines Werkzeug zur Verwaltung von Azure-Ressourcen
-- **azd**: Auf Entwickler fokussiertes Tool für Anwendungsbereitstellungs-Workflows
-- azd verwendet Azure CLI intern, bietet aber höherstufige Abstraktionen für gängige Entwicklungsszenarien
-- azd umfasst Vorlagen, Umgebungsverwaltung und Bereitstellungsautomatisierung
+- **azd**: Entwicklerfokussiertes Werkzeug für Anwendungsbereitstellungs-Workflows
+- azd hat eigene Authentifizierungs- und Bereitstellungsabläufe; Azure CLI ist ein separates, ergänzendes Werkzeug
+- azd beinhaltet Vorlagen, Umweltverwaltung und Automatisierung der Bereitstellung
 
-### Q: Do I need Azure CLI installed to use azd?
-**A**: Ja, azd benötigt Azure CLI für die Authentifizierung und einige Vorgänge. Installieren Sie zuerst Azure CLI und dann azd.
+### F: Brauche ich Azure CLI, um azd zu verwenden?
+**A**: Nicht für den Kern-AZD-Workflow. Authentifizieren Sie sich mit `azd auth login`. Installieren Sie Azure CLI separat, wenn eine Vorlagen-Hook oder eine Übung explizit `az`-Befehle ausführt.
 
-### Q: What programming languages does azd support?
+### F: Welche Programmiersprachen unterstützt azd?
 **A**: azd ist sprachunabhängig. Es funktioniert mit:
 - Node.js/JavaScript/TypeScript
 - Python
@@ -70,86 +70,95 @@ Bei regelmäßiger Bezugnahme auf diese FAQ werden Sie in der Lage sein:
 - Statischen Websites
 - Containerisierten Anwendungen
 
-### Q: Can I use azd with existing projects?
+### F: Kann ich azd mit bestehenden Projekten verwenden?
 **A**: Ja! Sie können entweder:
-1. Verwenden Sie `azd init`, um azd-Konfiguration zu bestehenden Projekten hinzuzufügen
-2. Passen Sie bestehende Projekte an, um der azd-Vorlagenstruktur zu entsprechen
-3. Erstellen Sie benutzerdefinierte Vorlagen basierend auf Ihrer vorhandenen Architektur
+1. `azd init` verwenden, um azd-Konfigurationen zu bestehenden Projekten hinzuzufügen
+2. Bestehende Projekte an die Struktur der azd-Vorlagen anpassen
+3. Eigene Vorlagen basierend auf Ihrer bestehenden Architektur erstellen
 
 ---
 
-## Authentication & Access
+## Authentifizierung & Zugriff
 
-### Q: How do I authenticate with Azure using azd?
-**A**: Verwenden Sie `azd auth login`, das ein Browserfenster zur Azure-Authentifizierung öffnet. Für CI/CD-Szenarien verwenden Sie Dienstprinzipale oder verwaltete Identitäten.
+### F: Wie authentifiziere ich mich mit Azure über azd?
+**A**: Verwenden Sie `azd auth login`, welches ein Browserfenster zur Azure-Authentifizierung öffnet. Für CI/CD-Szenarien verwenden Sie Dienstprinzipale oder verwaltete Identitäten.
 
-### Q: Can I use azd with multiple Azure subscriptions?
-**A**: Ja. Verwenden Sie `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>`, um anzugeben, welches Abonnement für jede Umgebung verwendet werden soll.
+### F: Kann ich azd mit mehreren Azure-Abonnements verwenden?
+**A**: Ja. Nutzen Sie `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>`, um anzugeben, welches Abonnement für jede Umgebung verwendet werden soll.
 
-### Q: What permissions do I need to deploy with azd?
-**A**: Typischerweise benötigen Sie:
-- Die Rolle **Contributor** auf der Ressourcengruppe oder dem Abonnement
-- **User Access Administrator**, wenn Ressourcen bereitgestellt werden, die Rollenzuweisungen erfordern
+### F: Welche Berechtigungen brauche ich, um mit azd bereitzustellen?
+**A**: Normalerweise benötigen Sie:
+- **Contributor**-Rolle auf der Ressourcengruppe oder im Abonnement
+- **Benutzerzugriffsadministrator**, wenn Ressourcen bereitgestellt werden, die Rollen-Zuweisungen erfordern
 - Spezifische Berechtigungen variieren je nach Vorlage und bereitgestellten Ressourcen
 
-### Q: Can I use azd in CI/CD pipelines?
-**A**: Absolut! azd ist für die Integration in CI/CD konzipiert. Verwenden Sie Dienstprinzipale für die Authentifizierung und setzen Sie Umgebungsvariablen für die Konfiguration.
+### F: Kann ich azd in CI/CD-Pipelines verwenden?
+**A**: Absolut! azd ist für die CI/CD-Integration ausgelegt. Verwenden Sie Dienstprinzipale zur Authentifizierung und setzen Sie Umgebungsvariablen für die Konfiguration.
 
-### Q: How do I handle authentication in GitHub Actions?
-**A**: Verwenden Sie die Azure Login Action mit Dienstprinzipal-Anmeldeinformationen:
+### F: Wie handle ich die Authentifizierung in GitHub Actions?
+**A**: Bevorzugen Sie Workload-Identitätsföderation (OIDC), konfiguriert mit `azd pipeline config`. Der generierte Workflow installiert AZD und authentifiziert AZD direkt mit einer föderierten Identität. Ein alleiniger `azure/login`-Schritt stellt keinen AZD-Login her. Ein Login-Schritt innerhalb eines bestehenden Jobs ist:
 ```yaml
-- uses: azure/login@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-- run: azd deploy --no-prompt
+permissions:
+  contents: read
+  id-token: write
+steps:
+  - uses: actions/checkout@v7
+  - uses: Azure/setup-azd@v2
+  - run: >-
+      azd auth login
+      --client-id "${{ vars.AZURE_CLIENT_ID }}"
+      --tenant-id "${{ vars.AZURE_TENANT_ID }}"
+      --federated-credential-provider github
 ```
+
+Stellen Sie Provisionierung oder Bereitstellung nach dem Login sicher, mit der konfigurierten AZD-Umgebung, dem Abonnement und dem Standort. Die föderierte Anmeldeinformation der Identität muss dem Repository/Ref oder der GitHub-Umgebung des Workflows vertrauen, und ihre Azure-Rollen müssen die angeforderten Operationen erlauben.
 
 ---
 
-## Templates & Projects
+## Vorlagen & Projekte
 
-### Q: Where can I find azd templates?
+### F: Wo finde ich azd-Vorlagen?
 **A**: 
-- Offizielle Vorlagen: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- Offizielle und Community-Vorlagen: [Awesome AZD](https://azure.github.io/awesome-azd/)
 - Community-Vorlagen: GitHub-Suche nach "azd-template"
 - Verwenden Sie `azd template list`, um verfügbare Vorlagen zu durchsuchen
 
-### Q: How do I create a custom template?
+### F: Wie erstelle ich eine benutzerdefinierte Vorlage?
 **A**: 
-1. Beginnen Sie mit einer vorhandenen Vorlagenstruktur
-2. Ändern Sie `azure.yaml`, Infrastrukturdateien und Anwendungscode
+1. Beginnen Sie mit einer bestehenden Vorlagenstruktur
+2. Ändern Sie `azure.yaml`, Infrastrukturdokumente und Anwendungscode
 3. Testen Sie gründlich mit `azd up`
-4. Veröffentlichen Sie auf GitHub mit geeigneten Tags
+4. Veröffentlichen Sie die Vorlage auf GitHub mit geeigneten Tags
 
-### Q: Can I use azd without a template?
-**A**: Ja, verwenden Sie `azd init` in einem bestehenden Projekt, um die erforderlichen Konfigurationsdateien zu erstellen. Sie müssen `azure.yaml` und Infrastrukturdateien manuell konfigurieren.
+### F: Kann ich azd ohne Vorlage verwenden?
+**A**: Ja, verwenden Sie `azd init` in einem bestehenden Projekt, um die notwendigen Konfigurationsdateien zu erstellen. Sie müssen `azure.yaml` und Infrastrukturdateien manuell konfigurieren.
 
-### Q: What's the difference between official and community templates?
+### F: Was ist der Unterschied zwischen offiziellen und Community-Vorlagen?
 **A**: 
-- **Offizielle Vorlagen**: Von Microsoft gepflegt, regelmäßig aktualisiert, umfassende Dokumentation
-- **Community-Vorlagen**: Von Entwicklern erstellt, können spezielle Anwendungsfälle haben, unterschiedliche Qualität und Wartung
+- **Offizielle Vorlagen**: Werden von Microsoft gepflegt, regelmäßig aktualisiert, mit umfassender Dokumentation
+- **Community-Vorlagen**: Werden von Entwicklern erstellt, können spezialisierte Anwendungsfälle haben, unterschiedliche Qualität und Wartung
 
-### Q: How do I update a template in my project?
+### F: Wie aktualisiere ich eine Vorlage in meinem Projekt?
 **A**: Vorlagen werden nicht automatisch aktualisiert. Sie können:
-1. Änderungen aus der Quellvorlage manuell vergleichen und zusammenführen
-2. Mit `azd init` neu starten und die aktualisierte Vorlage verwenden
-3. Bestimmte Verbesserungen aus aktualisierten Vorlagen per Cherry-Pick übernehmen
+1. Manuell Änderungen aus der Quellvorlage vergleichen und zusammenführen
+2. Mit `azd init` neu beginnen unter Verwendung der aktualisierten Vorlage
+3. Spezifische Verbesserungen aus aktualisierten Vorlagen selektiv übernehmen
 
 ---
 
-## Deployment & Infrastructure
+## Bereitstellung & Infrastruktur
 
-### Q: What Azure services can azd deploy?
+### F: Welche Azure-Dienste kann azd bereitstellen?
 **A**: azd kann jeden Azure-Dienst über Bicep/ARM-Vorlagen bereitstellen, einschließlich:
 - App Services, Container Apps, Functions
 - Datenbanken (SQL, PostgreSQL, Cosmos DB)
-- Storage, Key Vault, Application Insights
+- Speicher, Key Vault, Application Insights
 - Netzwerk-, Sicherheits- und Überwachungsressourcen
 
-### Q: Can I deploy to multiple regions?
-**A**: Ja, konfigurieren Sie mehrere Regionen in Ihren Bicep-Vorlagen und setzen Sie den Standortparameter entsprechend für jede Umgebung.
+### F: Kann ich in mehrere Regionen bereitstellen?
+**A**: Ja, konfigurieren Sie mehrere Regionen in Ihren Bicep-Vorlagen und setzen Sie den Ortsparameter für jede Umgebung entsprechend.
 
-### Q: How do I handle database schema migrations?
+### F: Wie handhabe ich Datenbankschema-Migrationen?
 **A**: Verwenden Sie Bereitstellungshooks in `azure.yaml`:
 ```yaml
 hooks:
@@ -160,23 +169,20 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### Q: Can I deploy only infrastructure without applications?
+### F: Kann ich nur Infrastruktur ohne Anwendungen bereitstellen?
 **A**: Ja, verwenden Sie `azd provision`, um nur die in Ihren Vorlagen definierten Infrastrukturkomponenten bereitzustellen.
 
-### Q: How do I deploy to existing Azure resources?
-**A**: Das ist komplex und nicht direkt unterstützt. Sie können:
-1. Bestehende Ressourcen in Ihre Bicep-Vorlagen importieren
-2. Referenzen auf vorhandene Ressourcen in Vorlagen verwenden
-3. Vorlagen so anpassen, dass Ressourcen bedingt erstellt oder referenziert werden
+### F: Wie stelle ich auf bestehende Azure-Ressourcen bereit?
+**A**: Ja, wenn die Vorlage es unterstützt. Verweisen Sie auf bestehende Ressourcen mit Bicep's `existing`-Deklarationen oder den dokumentierten bestehenden Ressourcenparametern der Vorlage und ordnen Sie Anwendungsdienste ihren Zielobjekten zu. Dies übernimmt kein Eigentum und erstellt nicht automatisch fehlende Berechtigungen. Überprüfen Sie die Vorlage vor der Bereitstellung.
 
-### Q: Can I use Terraform instead of Bicep?
-**A**: Derzeit unterstützt azd hauptsächlich Bicep/ARM-Vorlagen. Terraform-Unterstützung ist nicht offiziell verfügbar, obwohl Community-Lösungen existieren können.
+### F: Kann ich Terraform statt Bicep verwenden?
+**A**: Ja. AZD unterstützt sowohl Terraform als auch Bicep. Wählen Sie eine Terraform-basierte Vorlage oder konfigurieren Sie `infra.provider: terraform` in `azure.yaml` mit den passenden Terraform-Dateien und State/Backend-Konfiguration. Siehe den [Terraform-Workflow](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
 ---
 
-## Configuration & Environments
+## Konfiguration & Umgebungen
 
-### Q: How do I manage different environments (dev, staging, prod)?
+### F: Wie verwalte ich verschiedene Umgebungen (dev, staging, prod)?
 **A**: Erstellen Sie separate Umgebungen mit `azd env new <environment-name>` und konfigurieren Sie unterschiedliche Einstellungen für jede:
 ```bash
 azd env new development
@@ -184,119 +190,115 @@ azd env new staging
 azd env new production
 ```
 
-### Q: Where are environment configurations stored?
-**A**: Im `.azure`-Ordner innerhalb Ihres Projektverzeichnisses. Jede Umgebung hat ihren eigenen Ordner mit Konfigurationsdateien.
+### F: Wo werden Umgebungs-Konfigurationen gespeichert?
+**A**: Im Ordner `.azure` innerhalb Ihres Projektverzeichnisses. Jede Umgebung hat einen eigenen Ordner mit Konfigurationsdateien.
 
-### Q: How do I set environment-specific configuration?
-**A**: Verwenden Sie `azd env set`, um Umgebungsvariablen zu konfigurieren:
+### F: Wie setze ich umgebungsspezifische Konfigurationen?
+**A**: Verwenden Sie `azd env set` zur Konfiguration von Umgebungsvariablen:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### Q: Can I share environment configurations across team members?
-**A**: Der `.azure`-Ordner enthält sensible Informationen und sollte nicht in die Versionskontrolle committet werden. Stattdessen:
-1. Dokumentieren Sie die erforderlichen Umgebungsvariablen
-2. Verwenden Sie Bereitstellungsskripte, um Umgebungen einzurichten
-3. Verwenden Sie Azure Key Vault für sensible Konfiguration
+### F: Kann ich Umgebungs-Konfigurationen mit Teammitgliedern teilen?
+**A**: Der Ordner `.azure` enthält sensible Informationen und sollte nicht in die Versionskontrolle übernommen werden. Stattdessen:
+1. Dokumentieren Sie erforderliche Umgebungsvariablen
+2. Verwenden Sie Bereitstellungsskripte zum Einrichten der Umgebungen
+3. Verwenden Sie Azure Key Vault für sensible Konfigurationen
 
-### Q: How do I override template defaults?
+### F: Wie überschreibe ich Standardwerte der Vorlage?
 **A**: Setzen Sie Umgebungsvariablen, die den Vorlagenparametern entsprechen:
 ```bash
-azd env set LOCATION "West US 2"
+azd env set AZURE_LOCATION westus2
 azd env set SKU_NAME "B1"
 ```
 
+Nur Variablen, die von der Vorlage verwendet werden, beeinflussen die Bereitstellung. `SKU_NAME` oben ist ein Beispiel für eine benutzerdefinierte Eingabe, kein universelles AZD-Setting.
+
 ---
 
-## Troubleshooting
+## Fehlerbehebung
 
-### Q: Why is `azd up` failing?
+### F: Warum schlägt `azd up` fehl?
 **A**: Häufige Ursachen:
 1. **Authentifizierungsprobleme**: Führen Sie `azd auth login` aus
-2. **Unzureichende Berechtigungen**: Überprüfen Sie Ihre Azure-Rollen
-3. **Ressourcennamenskonflikte**: Ändern Sie AZURE_ENV_NAME
-4. **Quota-/Kapazitätsprobleme**: Überprüfen Sie die regionale Verfügbarkeit
+2. **Unzureichende Berechtigungen**: Prüfen Sie Ihre Azure-Rollen-Zuweisungen
+3. **Namenskonflikte bei Ressourcen**: Überprüfen Sie die konfliktbehaftete Ressource und die Namenseingaben der Vorlage; wenn Isolation nötig ist, erstellen Sie eine separate Umgebung mit `azd env new`
+4. **Quota-/Kapazitätsprobleme**: Prüfen Sie regionale Verfügbarkeit
 5. **Vorlagenfehler**: Validieren Sie Bicep-Vorlagen
 
-### Q: How do I debug deployment failures?
+### F: Wie debugge ich Bereitstellungsfehler?
 **A**: 
 1. Verwenden Sie `azd deploy --debug` für ausführliche Ausgabe
 2. Prüfen Sie die Bereitstellungshistorie im Azure-Portal
 3. Überprüfen Sie das Aktivitätsprotokoll im Azure-Portal
 4. Verwenden Sie `azd show`, um den aktuellen Umgebungszustand anzuzeigen
 
-### Q: Why are my environment variables not working?
-**A**: Überprüfen Sie:
-1. Die Variablennamen stimmen exakt mit den Vorlagenparametern überein
-2. Werte sind korrekt in Anführungszeichen gesetzt, wenn sie Leerzeichen enthalten
+### F: Warum funktionieren meine Umgebungsvariablen nicht?
+**A**: Prüfen Sie:
+1. Variablennamen stimmen exakt mit Vorlagenparametern überein
+2. Werte sind richtig zitiert, wenn sie Leerzeichen enthalten
 3. Die Umgebung ist ausgewählt: `azd env select <environment>`
 4. Variablen sind in der richtigen Umgebung gesetzt
 
-### Q: How do I clean up failed deployments?
+### F: Wie räume ich fehlgeschlagene Bereitstellungen auf?
 **A**: 
 ```bash
-azd down --force --purge
+azd down
 ```
-Dies entfernt alle Ressourcen und die Umgebungs-Konfiguration.
+Überprüfen Sie zuerst die ausgewählte Umgebung und die Löschbestätigung. Dies löscht bereitgestellte Azure-Ressourcen, nicht die lokale `.azure`-Umgebungskonfiguration. `--purge` fordert zusätzlich die dauerhafte Löschung von unterstützten soft-gelöschten Ressourcen an und kann durch Aufbewahrungs-/Löschschutz blockiert werden; es ist kein routinemäßiger Wiederherstellungsschritt.
 
-### Q: Why is my application not accessible after deployment?
-**A**: Überprüfen Sie:
+### F: Warum ist meine Anwendung nach der Bereitstellung nicht erreichbar?
+**A**: Prüfen Sie:
 1. Die Bereitstellung wurde erfolgreich abgeschlossen
-2. Die Anwendung läuft (Protokolle im Azure-Portal prüfen)
-3. Network Security Groups erlauben den Verkehr
+2. Die Anwendung läuft (prüfen Sie die Protokolle im Azure-Portal)
+3. Die Netzwerksicherheitsgruppen erlauben den Verkehr
 4. DNS/benutzerdefinierte Domains sind korrekt konfiguriert
 
 ---
 
-## Cost & Billing
+## Kosten & Abrechnung
 
-### Q: How much will azd deployments cost?
+### F: Wie viel kosten azd-Bereitstellungen?
 **A**: Die Kosten hängen ab von:
-- Den bereitgestellten Azure-Diensten
-- Ausgewählten Service-Tiers/SKUs
-- Regionalen Preisunterschieden
-- Nutzungsmustern
+- Bereitgestellte Azure-Dienste
+- Ausgewählte Service-Tiers/SKUs
+- Regionale Preisunterschiede
+- Nutzungsmuster
 
 Verwenden Sie den [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) für Schätzungen.
 
-### Q: How do I control costs in azd deployments?
+### F: Wie kontrolliere ich Kosten bei azd-Bereitstellungen?
 **A**: 
-1. Verwenden Sie niedrigere SKUs für Entwicklungsumgebungen
+1. Verwenden Sie niedrigpreisige SKUs für Entwicklungsumgebungen
 2. Richten Sie Azure-Budgets und Warnungen ein
-3. Verwenden Sie `azd down`, um Ressourcen zu entfernen, wenn sie nicht benötigt werden
+3. Nutzen Sie `azd down`, um Ressourcen zu entfernen, wenn sie nicht benötigt werden
 4. Wählen Sie geeignete Regionen (Kosten variieren je nach Standort)
-5. Nutzen Sie Azure Cost Management-Tools
+5. Verwenden Sie Azure Cost Management-Tools
 
-### Q: Are there free tier options for azd templates?
-**A**: Viele Azure-Dienste bieten Free Tiers:
-- App Service: Free-Tier verfügbar
-- Azure Functions: 1M freie Ausführungen/Monat
-- Cosmos DB: Free Tier mit 400 RU/s
-- Application Insights: Erste 5GB/Monat kostenlos
+### F: Gibt es kostenlose Stufenoptionen für azd-Vorlagen?
+**A**: Einige Dienste bieten kostenlose SKUs oder monatliche Kontingente, abhängig von Anspruchsberechtigung, Hosting-Plan, Region und Abonnementlimits. Dadurch wird nicht die gesamte Vorlage kostenlos: Datenbanken, Suche, Netzwerk, Registry, Telemetrie und Modellinferenz können unabhängig Kosten verursachen. Prüfen Sie die [Liste der kostenlosen Azure-Dienste](https://azure.microsoft.com/free/) und die aktuellen Preise für jede Ressource vor der Bereitstellung.
 
-Konfigurieren Sie Vorlagen so, dass freie Stufen verwendet werden, wo verfügbar.
-
-### Q: How do I estimate costs before deployment?
+### F: Wie kann ich Kosten vor der Bereitstellung abschätzen?
 **A**: 
-1. Überprüfen Sie die `main.bicep` der Vorlage, um zu sehen, welche Ressourcen erstellt werden
-2. Verwenden Sie den Azure Pricing Calculator mit spezifischen SKUs
-3. Bereitstellen in einer Entwicklungsumgebung, um die tatsächlichen Kosten zu überwachen
+1. Prüfen Sie die `main.bicep` der Vorlage, um zu sehen, welche Ressourcen erstellt werden
+2. Nutzen Sie den Azure Pricing Calculator mit spezifischen SKUs
+3. Stellen Sie zuerst in einer Entwicklungsumgebung bereit, um tatsächliche Kosten zu überwachen
 4. Verwenden Sie Azure Cost Management für detaillierte Kostenanalyse
 
 ---
 
 ## Best Practices
 
-### Q: What are the best practices for azd project structure?
+### F: Was sind Best Practices für die Projektstruktur in azd?
 **A**: 
-1. Trennen Sie Anwendungs-Code von der Infrastruktur
-2. Verwenden Sie aussagekräftige Servicenamen in `azure.yaml`
-3. Implementieren Sie ordnungsgemäße Fehlerbehandlung in Build-Skripten
+1. Halten Sie Anwendungscode getrennt von Infrastruktur
+2. Verwenden Sie aussagekräftige Dienstnamen in `azure.yaml`
+3. Implementieren Sie richtige Fehlerbehandlung in Build-Skripten
 4. Verwenden Sie umgebungsspezifische Konfiguration
 5. Fügen Sie umfassende Dokumentation hinzu
 
-### Q: How should I organize multiple services in azd?
+### F: Wie organisiere ich mehrere Dienste in azd?
 **A**: Verwenden Sie die empfohlene Struktur:
 ```
 ├── src/
@@ -308,32 +310,32 @@ Konfigurieren Sie Vorlagen so, dass freie Stufen verwendet werden, wo verfügbar
 └── README.md         # Project documentation
 ```
 
-### Q: Should I commit the `.azure` folder to version control?
-**A**: **No!** Der `.azure`-Ordner enthält sensible Informationen. Fügen Sie ihn zu `.gitignore` hinzu:
+### F: Sollte ich den `.azure`-Ordner in die Versionskontrolle aufnehmen?
+**A**: **Nein!** Der `.azure`-Ordner enthält sensible Informationen. Fügen Sie ihn zu `.gitignore` hinzu:
 ```gitignore
 .azure/
 ```
 
-### Q: How do I handle secrets and sensitive configuration?
+### F: Wie gehe ich mit Geheimnissen und sensiblen Konfigurationen um?
 **A**: 
 1. Verwenden Sie Azure Key Vault für Geheimnisse
-2. Referenzieren Sie Key Vault-Geheimnisse in der Anwendungs-Konfiguration
-3. Kommittieren Sie niemals Geheimnisse in die Versionskontrolle
-4. Verwenden Sie Managed Identities für die Authentifizierung zwischen Diensten
+2. Verweisen Sie auf Key Vault-Geheimnisse in der Anwendungs konfiguraton
+3. Geben Sie Geheimnisse niemals im Versionskontrollsystem frei
+4. Verwenden Sie verwaltete Identitäten für die Authentifizierung zwischen Diensten
 
-### Q: What's the recommended approach for CI/CD with azd?
+### F: Was ist der empfohlene Ansatz für CI/CD mit azd?
 **A**: 
-1. Verwenden Sie separate Umgebungen für jede Stufe (dev/staging/prod)
+1. Verwenden Sie separate Umgebungen für jede Stufe (Entwicklung/Staging/Produktion)
 2. Implementieren Sie automatisierte Tests vor der Bereitstellung
 3. Verwenden Sie Dienstprinzipale für die Authentifizierung
-4. Speichern Sie sensible Konfiguration in Pipeline-Geheimnissen/-Variablen
-5. Implementieren Sie Freigabeschleusen für Produktionsbereitstellungen
+4. Speichern Sie sensible Konfigurationen in Pipeline-Geheimnissen/-Variablen
+5. Implementieren Sie Freigabe-Gates für Produktionsbereitstellungen
 
 ---
 
-## Advanced Topics
+## Fortgeschrittene Themen
 
-### Q: Can I extend azd with custom functionality?
+### F: Kann ich azd mit benutzerdefinierter Funktionalität erweitern?
 **A**: Ja, über Bereitstellungshooks in `azure.yaml`:
 ```yaml
 hooks:
@@ -343,68 +345,68 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### Q: How do I integrate azd with existing DevOps processes?
+### F: Wie integriere ich azd in bestehende DevOps-Prozesse?
 **A**: 
-1. Verwenden Sie azd-Befehle in vorhandenen Pipeline-Skripten
-2. Standardisieren Sie azd-Vorlagen über Teams hinweg
-3. Integrieren Sie mit bestehender Überwachung und Alarmierung
-4. Verwenden Sie azd-JSON-Ausgabe für Pipeline-Integration
+1. Verwenden Sie azd-Befehle in bestehenden Pipeline-Skripten
+2. Standardisieren Sie azd-Vorlagen teamsübergreifend
+3. Integrieren Sie bestehendes Monitoring und Alerts
+4. Verwenden Sie azd JSON-Ausgabe für Pipeline-Integration
 
-### Q: Can I use azd with Azure DevOps?
+### F: Kann ich azd mit Azure DevOps verwenden?
 **A**: Ja, azd funktioniert mit jedem CI/CD-System. Erstellen Sie Azure DevOps-Pipelines, die azd-Befehle verwenden.
 
-### Q: How do I contribute to azd or create community templates?
-**A**:
-1. **azd-Tool**: Zu [Azure/azure-dev](https://github.com/Azure/azure-dev) beitragen
-2. **Vorlagen**: Erstellen Sie Vorlagen gemäß den [Vorlagenrichtlinien](https://github.com/Azure-Samples/awesome-azd)
-3. **Dokumentation**: Zur Dokumentation beitragen unter [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+### F: Wie kann ich zu azd beitragen oder Community-Vorlagen erstellen?
+**A**: 
+1. **azd tool**: Beitrag zu [Azure/azure-dev](https://github.com/Azure/azure-dev)
+2. **Vorlagen**: Folgen Sie den [Anweisungen zur Beitragserstellung in der Awesome AZD-Galerie](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
+3. **Dokumentation**: Beitrag zur Dokumentation bei [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
 
-### Q: Wie sieht die Roadmap für azd aus?
-**A**: Siehe die [offizielle Roadmap](https://github.com/Azure/azure-dev/projects) für geplante Funktionen und Verbesserungen.
+### F: Wie sieht die Roadmap für azd aus?
+**A**: Sehen Sie sich die [offizielle Roadmap](https://github.com/Azure/azure-dev/projects) für geplante Funktionen und Verbesserungen an.
 
-### Q: Wie migriere ich von anderen Bereitstellungstools zu azd?
+### F: Wie kann ich von anderen Bereitstellungstools auf azd migrieren?
 **A**: 
 1. Analysieren Sie die aktuelle Bereitstellungsarchitektur
-2. Erstellen Sie entsprechende Bicep-Vorlagen
-3. Konfigurieren Sie `azure.yaml`, damit es den aktuellen Diensten entspricht
+2. Erstellen Sie äquivalente Bicep-Vorlagen
+3. Konfigurieren Sie `azure.yaml` entsprechend den aktuellen Diensten
 4. Testen Sie gründlich in der Entwicklungsumgebung
-5. Migrieren Sie die Umgebungen schrittweise
+5. Migrieren Sie Umgebungen schrittweise
 
 ---
 
-## Still Have Questions?
+## Haben Sie noch Fragen?
 
 ### **Zuerst suchen**
 - Überprüfen Sie die [offizielle Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- Durchsuchen Sie [GitHub-Issues](https://github.com/Azure/azure-dev/issues) nach ähnlichen Problemen
+- Durchsuchen Sie [GitHub Issues](https://github.com/Azure/azure-dev/issues) nach ähnlichen Problemen
 
 ### **Hilfe erhalten**
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Community-Unterstützung
+- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Community-Support
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Technische Fragen
 - [Azure Discord](https://discord.gg/azure) - Echtzeit-Community-Chat
 
 ### **Probleme melden**
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Fehlerberichte und Funktionswünsche
+- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Fehlerberichte und Funktionsanforderungen
 - Fügen Sie relevante Protokolle, Fehlermeldungen und Reproduktionsschritte bei
 
 ### **Mehr erfahren**
-- [Dokumentation der Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure-Architekturzentrum](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Developer CLI Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architektur Zentrum](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-*Diese FAQ wird regelmäßig aktualisiert. Zuletzt aktualisiert: 9. September 2025*
+*Technische Anleitung geprüft: 4. November 2026. Cloud-Verfügbarkeit und Preise müssen für Ihr Abonnement und Ihre Region überprüft werden.*
 
 ---
 
 **Navigation**
-- **Previous Lesson**: [Glossar](glossary.md)
-- **Next Lesson**: [Lernleitfaden](study-guide.md)
+- **Vorherige Lektion**: [Glossar](glossary.md)
+- **Nächste Lektion**: [Studienführer](study-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Haftungsausschluss:
-Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir um Genauigkeit bemüht sind, weisen wir darauf hin, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ausgangssprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle, menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+**Haftungsausschluss**:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache gilt als maßgebliche Quelle. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

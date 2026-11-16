@@ -1,22 +1,22 @@
-# Bab 4: Infrastruktur sebagai Kod & Penyebaran
+# Bab 4: Infrastruktur sebagai Kod & Penghantaran
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1-1.5 jam | **⭐ Kerumitan**: Pertengahan
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 2-3 jam bacaan; beri masa tambahan untuk latihan penghantaran | **⭐ Kerumitan**: Pertengahan
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi corak Infrastruktur sebagai Kod (IaC) dengan templat Bicep, penyediaan sumber, dan strategi penyebaran menggunakan Azure Developer CLI.
+Bab ini merangkumi corak Infrastruktur sebagai Kod (IaC) dengan templat Bicep, penyediaan sumber, dan strategi penghantaran menggunakan Azure Developer CLI.
 
-> Disahkan menggunakan `azd 1.27.1` pada Julai 2026.
+> Sasaran semakan arahan dan konfigurasi: `azd 1.37.2` (November 2026). Penyediaan Azure secara langsung tidak dijalankan semasa semakan.
 
 ## Objektif Pembelajaran
 
 Dengan menyelesaikan bab ini, anda akan:
 - Memahami struktur dan sintaks templat Bicep
 - Menyediakan sumber Azure dengan `azd provision`
-- Menyebarkan aplikasi dengan `azd deploy`
-- Melaksanakan strategi penyebaran biru-hijau dan bergulung
+- Menghantar aplikasi dengan `azd deploy`
+- Melaksanakan strategi penghantaran hijau-biru dan berperingkat
 
 ---
 
@@ -25,27 +25,30 @@ Dengan menyelesaikan bab ini, anda akan:
 | # | Pelajaran | Penerangan | Masa |
 |---|--------|-------------|------|
 | 1 | [Penyediaan Sumber](provisioning.md) | Pengurusan sumber Azure dengan AZD | 45 min |
-| 2 | [Panduan Penyebaran](deployment-guide.md) | Strategi penyebaran aplikasi | 45 min |
-| 3 | [Menulis Templat Anda Sendiri](custom-templates.md) | Membangun dan menerbitkan templat azd yang boleh digunakan semula | 30 min |
+| 2 | [Panduan Penghantaran](deployment-guide.md) | Strategi penghantaran aplikasi | 45 min |
+| 3 | [Membuat Templat Sendiri](custom-templates.md) | Membina dan menerbitkan templat azd yang boleh digunakan semula | 30 min |
 
 ---
 
-## 🚀 Mula Dengan Cepat
+## 🚀 Mula Pantas
 
 ```bash
-# Mulakan dari templat
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Pratonton apa yang akan dibuat
+# Preview what will be created
 azd provision --preview
 
-# Sediakan infrastruktur sahaja
+# Provision infrastructure only
 azd provision
 
-# Pasang kod sahaja
+# Deploy code only
 azd deploy
 
-# Atau kedua-duanya bersama-sama
+# Or both together
 azd up
 ```
 
@@ -72,11 +75,11 @@ my-project/
 
 | Arahan | Penerangan |
 |---------|-------------|
-| `azd init` | Memulakan projek |
-| `azd provision` | Membuat sumber Azure |
-| `azd deploy` | Menyebarkan kod aplikasi |
-| `azd up` | menyediakan + menyebar |
-| `azd down` | Memadam semua sumber |
+| `azd init` | Inisialisasi projek |
+| `azd provision` | Cipta sumber Azure |
+| `azd deploy` | Hantar kod aplikasi |
+| `azd up` | sediakan + hantar |
+| `azd down` | Padam semua sumber |
 
 ---
 
@@ -84,16 +87,16 @@ my-project/
 
 | Arah | Bab |
 |-----------|---------|
-| **Sebelumnya** | [Bab 3: Konfigurasi](../chapter-03-configuration/README.md) |
-| **Seterusnya** | [Bab 5: Penyelesaian Multi-Ejen](../chapter-05-multi-agent/README.md) |
+| **Sebelum** | [Bab 3: Konfigurasi](../chapter-03-configuration/README.md) |
+| **Seterusnya** | [Bab 5: Penyelesaian Pelbagai Ejen](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Sumber Berkaitan
 
-- [Semakan Pra-Penyebaran](../chapter-06-pre-deployment/README.md)
-- [Contoh Apl Kontena](../../examples/container-app/README.md)
-- [Contoh Apl Pangkalan Data](../../examples/database-app/README.md)
+- [Pemeriksaan Pra-Penghantaran](../chapter-06-pre-deployment/README.md)
+- [Contoh Aplikasi Kontena](../../examples/container-app/README.md)
+- [Contoh Aplikasi Pangkalan Data](../../examples/database-app/README.md)
 
 ---
 

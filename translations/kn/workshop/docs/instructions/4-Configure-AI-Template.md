@@ -1,221 +1,25 @@
-# 4. ಟೆಂಪ್ಲೇಟ್ ಅನ್ನು ಸಂರಚಿಸಿ
+# 4. ಟೆಂಪ್ಲೇಟ್ ಸಂರಚಿಸಿ
 
-!!! tip "ಈ ಮಾಪ್ಡಿಯ ಅಂತ್ಯಕ್ಕೆ ನೀವು ಸಾಧ್ಯವಾಗುವುದು"
+!!! tip "ಈ ಮೊದಲಿನ ಅಧ್ಯಾಯದ ಕೊನೆಯಲ್ಲಿ ನೀವು ಸಾಧ್ಯವಾಗುವುದು"
 
-    - [ ] `azure.yaml` ನ ಉದ್ದೇಶವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ
-    - [ ] `azure.yaml` ನ ರಚನೆಯನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ
-    - [ ] azd ಜೀವನಚಕ್ರ `hooks` ಗಳ ಮೌಲ್ಯವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ
-    - [ ] **ಲ್ಯಾಬ್ 4:** ಪರಿಸರ ಚರಗಳನ್ನು ಅನ್ವೇಷಿಸಿ ಮತ್ತು ತಿದ್ದುಪಡಿಮಾಡಿ
-
----
-
-!!! prompt "`azure.yaml` ಕಡತ 무엇 ಮಾಡುತ್ತದೆ? ಕೋಡ್‌ಫೆನ್ಸ್ ಬಳಸಿ ಮತ್ತು ಅದನ್ನು ಸಾಲುಬದ್ದವಾಗಿ ವಿವರಿಸಿ"
-
-      `azure.yaml` ಫೈಲ್ ಅನ್ನು **Azure Developer CLI (azd) ಗಾಗಿ ಸಂರಚನಾ ಫೈಲ್** ಆಗಿ ಪರಿಗಣಿಸಲಾಗಿದೆ. ಇದು ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು Azure ಗೆ ಹೇಗೆ ನಿಯೋಜಿಸಲು ಬೇಕೋ ಅದರ ಬಗ್ಗೆ, ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್, ಸೇವೆಗಳು, ನಿಯೋಜನೆ ಹೂಕ್‌ಗಳು ಮತ್ತು ಪರಿಸರ ಚರಗಳನ್ನು ಸೇರಿಸಿ ವ್ಯಾಖ್ಯಾನಿಸುತ್ತದೆ.
+    - [ ] Explain the purpose and structure of `azure.yaml`
+    - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
+    - [ ] Configure the selected environment using inputs supported by the template
+    - [ ] **Lab 4:** Review a configuration change before provisioning it
 
 ---
 
-## 1. ಉದ್ದೇಶ ಮತ್ತು ಕಾರ್ಯಕ್ಷಮತೆ
+## 1. ನಿಜವಾದ ಟೆಂಪ್ಲೇಟ್‌ನಿಂದ ಪ್ರಾರಂಭಿಸಿ
 
-ಈ `azure.yaml` ಫೈಲ್ ಒಂದು AI ಏಜೆಂಟ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಾಗಿ **ನಿಯೋಜನೆ ಯೋಜನೆಯ ರೂಪುರೇಖೆ** ಆಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ, ಅದು:
+ನೀವು ಪ್ರಾರಂಭಿಸಿದ ರೆಪೊಸಿಟರಿಯಲ್ಲಿ [`azure.yaml` ಅನ್ನು Get Started with AI Agents ನಲ್ಲಿ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/azure.yaml) ತೆರೆಯಿರಿ. ಮೇಲ್ಭಾಗದ ಟೆಂಪ್ಲೇಟ್ ಈ ಕಾರ್ಯಾಗಾರದಿಂದ ಪ್ರತ್ಯೇಕವಾಗಿ ಬದಲಾಗಬಹುದು. ಕೆಳಗಿನ **ಉದಾಹರಣೆ** ನವೆಂಬರ್ 4, 2026 ರಂದು ಪರಿಶೀಲಿಸಲಾಗಿದೆ; ಇದು ಪೂರ್ಣ ಫೈಲ್‌ಗೆ ಬದಲಿ ಅಲ್ಲ:
 
-1. ನಿಯೋಜನೆಯ ಮೊದಲು ಪರಿಸರವನ್ನು ಪರಿಶೀಲಿಸುತ್ತದೆ
-2. Azure AI ಸೇವೆಗಳನ್ನು ಪೃಥ್ವೀಕರಿಸುತ್ತದೆ (AI Hub, AI Project, Search, ಇತ್ಯಾದಿ)
-3. Python ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು Azure Container Apps ಗೆ ನಿಯೋಜಿಸುತ್ತದೆ
-4. ಚಾಟ್ ಮತ್ತು ಎಂಬೆಡ್ಡಿಂಗ್ ಕಾರ್ಯಕ್ಷಮತೆಗೆ AI ಮಾದರಿಗಳನ್ನು ಸಂರಚಿಸುತ್ತದೆ
-5. AI ಅಪ್ಲಿಕೇಶನ್‌ಗಾಗಿ ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ಟ್ರೇಸಿಂಗ್ ಅನ್ನು ಸೆಟ್‌ಅಪ್ ಮಾಡುತ್ತದೆ
-6. ಹೊಸ ಮತ್ತು ಇದ್ದಂತೆಯೇ ಇರುವ Azure AI ಪ್ರಾಜೆಕ್ಟ್ ಸನ್ನಿವೇಶಗಳನ್ನು ನಿರ್ವಹಿಸುತ್ತದೆ
-
-ಫೈಲ್ ಸಮರ್ಪಕ ವಾಲಿಡೇಶನ್, ಪ್ರೋವಿಷನಿಂಗ್ ಮತ್ತು ಪೋಸ್ಟ್-ಡಿಪ್ಲಾಯ್ ಸಂರಚನೆಯೊಂದಿಗೆ ಸಂಪೂರ್ಣ AI ಏಜೆಂಟ್ լուծನೆಯನ್ನು ಒಂದು-комಾಂಡ್‌ನ ನಿಯೋಜನೆ (`azd up`) ಮೂಲಕ ಸಾಧ್ಯವಾಗಿಸುತ್ತದೆ.
-
-??? info "ವಿಸ್ತರಿಸಿ ನೋಡಿ: `azure.yaml`"
-
-      ಈ `azure.yaml` ಫೈಲ್ Azure Developer CLI ಈ AI ಏಜೆಂಟ್ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು Azure ನಲ್ಲಿ ಹೇಗೆ ನಿಯೋಜಿಸಬೇಕು ಮತ್ತು ನಿರ್ವಹಿಸಬೇಕು ಎಂಬುದನ್ನು ವ್ಯಾಖ್ಯಾನಿಸುತ್ತದೆ. ಬನ್ನಿ, ಅದನ್ನು ಸಾಲುಬದ್ದವಾಗಿ ಅವಲೋಕಿಸೋಣ.
-
-      ```yaml title="" linenums="0"
-
-      # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: do we need hooks? 
-      # TODO: do we need all of the variables?
-
-      name: azd-get-started-with-ai-agents
-      metadata:
-      template: azd-get-started-with-ai-agents@1.0.2
-      requiredVersions:
-      azd: ">=1.14.0"
-
-      hooks:
-      preup:
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-            interactive: true
-            continueOnError: false
-      windows:
-            shell: pwsh
-            run: ./scripts/validate_env_vars.ps1
-            interactive: true
-            continueOnError: false      
-      postprovision:
-      windows:
-            shell: pwsh
-            run: ./scripts/write_env.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-            continueOnError: true
-            interactive: true
-      postdeploy:
-      windows:
-            shell: pwsh
-            run: ./scripts/postdeploy.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-            continueOnError: true
-            interactive: true
-      services:
-      api_and_frontend:
-      project: ./src
-      language: py
-      host: containerapp
-      docker:
-            image: api_and_frontend
-            remoteBuild: true
-      pipeline:
-      variables:
-      - AZURE_RESOURCE_GROUP
-      - AZURE_AIHUB_NAME
-      - AZURE_AIPROJECT_NAME
-      - AZURE_AISERVICES_NAME
-      - AZURE_SEARCH_SERVICE_NAME
-      - AZURE_APPLICATION_INSIGHTS_NAME
-      - AZURE_CONTAINER_REGISTRY_NAME
-      - AZURE_KEYVAULT_NAME
-      - AZURE_STORAGE_ACCOUNT_NAME
-      - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-      - USE_CONTAINER_REGISTRY
-      - USE_APPLICATION_INSIGHTS
-      - USE_AZURE_AI_SEARCH_SERVICE
-      - AZURE_AI_AGENT_NAME
-      - AZURE_AI_AGENT_ID
-      - AZURE_AI_AGENT_DEPLOYMENT_NAME
-      - AZURE_AI_AGENT_DEPLOYMENT_SKU
-      - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-      - AZURE_AI_AGENT_MODEL_NAME
-      - AZURE_AI_AGENT_MODEL_FORMAT
-      - AZURE_AI_AGENT_MODEL_VERSION
-      - AZURE_AI_EMBED_DEPLOYMENT_NAME
-      - AZURE_AI_EMBED_DEPLOYMENT_SKU
-      - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-      - AZURE_AI_EMBED_MODEL_NAME
-      - AZURE_AI_EMBED_MODEL_FORMAT
-      - AZURE_AI_EMBED_MODEL_VERSION
-      - AZURE_AI_EMBED_DIMENSIONS
-      - AZURE_AI_SEARCH_INDEX_NAME
-      - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-      - AZURE_EXISTING_AIPROJECT_ENDPOINT
-      - AZURE_EXISTING_AGENT_ID
-      - ENABLE_AZURE_MONITOR_TRACING
-      - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-      ```
-
----
-
-## 2. ಫೈಲ್ ಅನ್ನು ವಿಭಜಿಸುವಿಕೆ
-
-ನಾವು ಫೈಲ್ ಅನ್ನು ವಿಭಾಗವಾಗಿ ನೋಡೋಣ, ಅದು ಏನು ಮಾಡುತ್ತದೆ ಮತ್ತು ಏಕೆ ಎಂಬುದನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು.
-
-### 2.1 **ಶೀರ್ಷಿಕೆ ಮತ್ತು ಸ್ಕೆಮಾ (1-3)**
-
-```yaml title="" linenums="0"
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-```
-
-- **ಸಾಲು 1**: IDE ಬೆಂಬಲ ಮತ್ತು IntelliSense ಗಾಗಿ YAML ಲ್ಯಾಂಗ್ವೇಜ್ ಸರ್ವರ್ ಸ್ಕೆಮಾ ವಾಲಿಡೇಶನ್ ಅನ್ನು ಒದಗಿಸುತ್ತದೆ
-
-### 2.2 ಪ್ರಾಜೆಕ್ಟ್ ಮೆಟಾಡೇಟಾ (5-10)
-
-```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@1.0.2
+  template: azd-get-started-with-ai-agents@2.5.0
 requiredVersions:
   azd: ">=1.14.0"
-```
-
-- **ಸಾಲು 5**: Azure Developer CLI پاران ಬಳಸಲು ಪ್ರಾಜೆಕ್ಟ್ ಹೆಸರು ಅನ್ನು ನಿಗದಿಪಡಿಸುತ್ತದೆ
-- **ಸಾಲುಗಳು 6-7**: ಇದು ಟೆಂಪ್ಲೇಟ್ ಆಗಿ ಆಧಾರಿತವಾಗಿದೆ, ಆದಲ್ಲಿ ಸಂಸ್ಕರಣಾ ಆವೃತ್ತಿ 1.0.2 ಅನ್ನು ಸೂಚಿಸುತ್ತದೆ
-- **ಸಾಲುಗಳು 8-9**: Azure Developer CLI ಆವೃತ್ತಿ 1.14.0 ಅಥವಾ ಹೆಚ್ಚು ಅಗತ್ಯವಿದೆ
-
-### 2.3 ಡಿಪ್ಲಾಯ್ ಹೂಕ್ಗಳು (11-40)
-
-```yaml title="" linenums="0"
-hooks:
-  preup:
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-      interactive: true
-      continueOnError: false
-    windows:
-      shell: pwsh
-      run: ./scripts/validate_env_vars.ps1
-      interactive: true
-      continueOnError: false      
-```
-
-- **ಸಾಲುಗಳು 11-20**: **ಮೊದಲು-ನಿಯೋಜನೆ ಹೂಕ್** - `azd up` ನಿರ್ವಹಣೆಯ ಮೊದಲು ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ
-
-      - Unix/Linux ಮೇಲೆ: ವಾಲಿಡೇಶನ್ ಸ್ಕ್ರಿಪ್ಟ್ ಅನ್ನು ನಿರ್ವಹಣಾ ಅನುಮತಿ ನೀಡುತ್ತದೆ ಮತ್ತು ಅದನ್ನು 실행ಗೊಳಿಸುತ್ತದೆ
-      - Windows ಮೇಲೆ: PowerShell ವಾಲಿಡೇಶನ್ ಸ್ಕ್ರಿಪ್ಟ್ ಅನ್ನು ರನ್ ಮಾಡುತ್ತದೆ
-      - ಎರಡೂ ಪರ್ಯಾಯಗಳು ಇಂಟರ್ಯಾಕ್ಟಿವ್ ಆಗಿವೆ ಮತ್ತು ವೈಫಲ್ಯವಾದಲ್ಲಿ ನಿಯೋಜನೆಯನ್ನು ನಿಲ್ಲಿಸುತ್ತವೆ
-
-```yaml  title="" linenums="0"
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-      continueOnError: true
-      interactive: true
-```
-- **ಸಾಲುಗಳು 21-30**: **ಪೋಸ್ಟ್-ಪ್ರಾವಿಷನ್ ಹೂಕ್** - Azure ಸಂಪನ್ಮೂಲಗಳು ರಚಿಸಿದ ನಂತರ ಚಾಲನೆ ಮಾಡುತ್ತದೆ
-
-  - ಪರಿಸರ ಚರಗಳನ್ನು ಬರೆಯುವ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ಕಾರ್ಯಗೊಳಿಸುತ್ತದೆ
-  - ಇವುಗಳ ವೈಫಲ್ಯವಾದರೂ ನಿಯೋಜನೆ ಮುಂದುವರಿಯುತ್ತದೆ (`continueOnError: true`)
-
-```yaml title="" linenums="0"
-  postdeploy:
-    windows:
-      shell: pwsh
-      run: ./scripts/postdeploy.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-      continueOnError: true
-      interactive: true
-```
-- **ಸಾಲುಗಳು 31-40**: **ಪೋಸ್ಟ್-ಡಿಪ್ಲಾಯ್ ಹೂಕ್** - ಅಪ್ಲಿಕೇಶನ್ ನಿಯೋಜನೆಯ ನಂತರ ಚಾಲನೆ ಮಾಡುತ್ತದೆ
-
-  - ಅಂತಿಮ ಸೆಟ್‌ಅಪ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ಕಾರ್ಯಗೊಳಿಸುತ್ತದೆ
-  - ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು ವೈಫಲ್ಯವಾದರೂ ಮುಂದುವರಿಯುತ್ತದೆ
-
-### 2.4 ಸೇವೆ ಸಂರಚನೆ (41-48)
-
-ಇದು ನೀವು ನಿಯೋಜಿಸುತ್ತಿರುವ ಅಪ್ಲಿಕೇಶನ್ ಸೇವೆಯನ್ನು ಸಂರಚಿಸುತ್ತದೆ.
-
-```yaml title="" linenums="0"
 services:
   api_and_frontend:
     project: ./src
@@ -226,162 +30,109 @@ services:
       remoteBuild: true
 ```
 
-- **ಸಾಲು 42**: "api_and_frontend" ಎಂಬ ಸೇವೆಯನ್ನು განსೂಚಿಸುತ್ತದೆ
-- **ಸಾಲು 43**: ಮೂಲ ಕೋಡ್‌ಗೆ `./src` ಡೈಸ್ಟ್ರೈಕ್ಟರಿಗೆ ಸೂಚಿಸುತ್ತದೆ
-- **ಸಾಲು 44**: ಪ್ರೋಗ್ರಾಮಿಂಗ್ ಭಾಷೆಯಾಗಿಯಾಗಿ Python ಅನ್ನು ನಿಗದಿಸಿತ್ತೆ
-- **ಸಾಲು 45**: ಹೋಸ್ಟಿಂಗ್ ವೇದಿಕೆಗಾಗಿ Azure Container Apps ಅನ್ನು ಬಳಕೆಮಾಡುತ್ತದೆ
-- **ಸಾಲುಗಳು 46-48**: ಡೊಕರ್ ಸಂರಚನೆ
+- `name` AZD ಯೋಜನೆಯನ್ನು ಸೂಚಿಸುತ್ತದೆ; `metadata.template` ಟೆಂಪ್ಲೇಟ್ ಆವೃತ್ತಿಯನ್ನು ದಾಖಲಿಸುತ್ತದೆ.
+- `requiredVersions.azd` ಟೆಂಪ್ಲೇಟ್ ಕನಿಷ್ಟ ಮಟ್ಟ, ಹಳೆಯ CLI ಮೇಲೆ ಉಳಿಯಲು ಶಿಫಾರಸು ಅಲ್ಲ. ಪ್ರಸ್ತುತ ಬೆಂಬಲಿತ AZD ಬಿಡುಗಡೆ ಬಳಸಿ.
+- `services` ಆಪ್ಲಿಕೇಶನ್ ನಿಯೋಜನೆ ಗುರಿಗಳನ್ನು ವ್ಯಾಖ್ಯಾನಿಸುತ್ತದೆ. ಈ ಟೆಂಪ್ಲೇಟ್ ತನ್ನ Python API ಮತ್ತು ಮುಂಭಾಗವನ್ನು ಒಂದು Container Apps ಸೇವೆಯಾಗಿ ನಿಯೋಜಿಸುತ್ತದೆ.
+- `project` `azure.yaml` ಗೆ ಸಂಬಂಧಿತ.
+- `remoteBuild` ದೂರಸ್ಥ ಕಂಟೈನರ್ ನಿರ್ಮಾಣವನ್ನು ವಿನಂತಿಸುತ್ತದೆ. ನಿಮ್ಮ ಅನ್ವಯಿಕತೆಗೆ ಅಗತ್ಯವಾದ ಅಜೂರ್ ಅನುಮತಿಗಳು ಇನ್ನೂ ಬೇಕಾಗಿವೆ.
 
-      - "api_and_frontend" ಅನ್ನು ಚಿತ್ರದ (image) ಹೆಸರಾಗಿ ಬಳಸುತ್ತದೆ
-      - ಡೊಕರ್ ಇಮೇಜ್ ಅನ್ನು ಸ್ಥಳೀಯವಾಗಿ ಅಲ್ಲದೆ Azure ನಲ್ಲಿ ದೂರದಿಂದ ಬಿಲ್ಡ್ ಮಾಡುತ್ತದೆ
+`infra/` ಅಡಿಯಲ್ಲಿ ಟೆಂಪ್ಲೇಟಿನ Bicep ಫೈಲ್ಗಳು, `services` ಪಟ್ಟಿ ಮಾತ್ರವಲ್ಲ, Microsoft Foundry, ಮಾದರಿ ನಿಯೋಜನೆಗಳು, ಸಂಗ್ರಹಣೆ ಮತ್ತು ಐಚ್ಛಿಕ AI Search ಮುಂತಾದ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಘೋಷಿಸುತ್ತವೆ.
 
-### 2.5 ಪೈಪ್‌ಲೈನ್ ಚರಗಳು (49-76)
+## 2. ಜೀವಚಕ್ರ ಕೂಕ್ಗಳು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ
 
-ಇವು CI/CD ಪೈಪ್‌ಲೈನ್‌ಗಳಲ್ಲಿ automation ಉದ್ದೇಶಕ್ಕಾಗಿ `azd` ಅನ್ನು ಚಲಾಯಿಸಲು ಸಹಾಯ ಮಾಡುವ ಚರಗಳು
+ಟೆಂಪ್ಲೇಟು ಚಲಾಯಿಸುವ ಮೊದಲು `hooks` ವಿಭಾಗ ಮತ್ತು ಇದರ ಉಲ್ಲೇಖಿತ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ. ಪರಿಶೀಲಿಸಿದ ಆವೃತ್ತಿಯಲ್ಲಿ ಇವುಗಳಿವೆ:
 
-```yaml title="" linenums="0"
-pipeline:
-  variables:
-    - AZURE_RESOURCE_GROUP
-    - AZURE_AIHUB_NAME
-    - AZURE_AIPROJECT_NAME
-    - AZURE_AISERVICES_NAME
-    - AZURE_SEARCH_SERVICE_NAME
-    - AZURE_APPLICATION_INSIGHTS_NAME
-    - AZURE_CONTAINER_REGISTRY_NAME
-    - AZURE_KEYVAULT_NAME
-    - AZURE_STORAGE_ACCOUNT_NAME
-    - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-    - USE_CONTAINER_REGISTRY
-    - USE_APPLICATION_INSIGHTS
-    - USE_AZURE_AI_SEARCH_SERVICE
-    - AZURE_AI_AGENT_NAME
-    - AZURE_AI_AGENT_ID
-    - AZURE_AI_AGENT_DEPLOYMENT_NAME
-    - AZURE_AI_AGENT_DEPLOYMENT_SKU
-    - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-    - AZURE_AI_AGENT_MODEL_NAME
-    - AZURE_AI_AGENT_MODEL_FORMAT
-    - AZURE_AI_AGENT_MODEL_VERSION
-    - AZURE_AI_EMBED_DEPLOYMENT_NAME
-    - AZURE_AI_EMBED_DEPLOYMENT_SKU
-    - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-    - AZURE_AI_EMBED_MODEL_NAME
-    - AZURE_AI_EMBED_MODEL_FORMAT
-    - AZURE_AI_EMBED_MODEL_VERSION
-    - AZURE_AI_EMBED_DIMENSIONS
-    - AZURE_AI_SEARCH_INDEX_NAME
-    - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-    - AZURE_EXISTING_AIPROJECT_ENDPOINT
-    - AZURE_EXISTING_AGENT_ID
-    - ENABLE_AZURE_MONITOR_TRACING
-    - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-```
+| ಕೂಕು | ಉದ್ದೇಶ | ಪ್ರಮುಖ ವರ್ತನೆ |
+|------|---------|--------------------|
+| `preup` | `up` ಕಾರ್ಯಪ್ರವಾಹಕ್ಕಿಂತ ಮುಂಚೆ ಟೆಂಪ್ಲೇಟ್ ಪರಿಸರ ಇನ್‌ಪುಟ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ | ಪ್ಲಾಟ್‌ಫಾರಂ-ನಿರ್ದಿಷ್ಟ ಶೆಲ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು ವೈಫಲ್ಯದಲ್ಲಿ ಕಾರ್ಯಪ್ರವಾಹ ನಿಲ್ಲಿಸಬಹುದು |
+| `postdeploy` | ಅಪ್ಲಿಕೇಶನ್ ನಿಯೋಜನೆಯ ನಂತರ ಟೆಂಪ್ಲೇಟ್-ನಿರ್ದಿಷ್ಟ ಸೆಟಪ್ ನಡೆಸಿ | `continueOnError` ಮತ್ತು ಸ್ಕ್ರಿಪ್ಟ್ ಔಟ್‌ಪುಟ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ; ಯಶಸ್ವಿ ನಿಯೋಜನೆ ಎಲ್ಲ ಸೆಟಪ್ ಕಾರ್ಯಗಳು ಯಶಸ್ವಿಯಾಗಿವೆ ಎಂದು ವಾದಿಸುವುದು ಅಲ್ಲ |
 
-ಈ ವಿಭಾಗವು ನಿಯೋಜನೆಯ ವೇಳೆ ಬಳಸುವ ಪರಿಸರ ಚರಗಳನ್ನು ವಿವರಣೆಯೊಂದಿಗೆ ನಿರ್ದಿಷ್ಟಪಡಿಸುತ್ತದೆ:
+ಈ ಸಂಸ್ಕರಣೆಯಲ್ಲಿ **ಹಳೆಯ** `postprovision` / `write_env` ಹುಕ್ ಇರುವುದು ಇಲ್ಲ, ಹಳೆಯ ಕಾರ್ಯಾಗಾರದ ಸಾಮಗ್ರಿಯಲ್ಲಿ ತೋರಿಸಿರುವುದು. ಈಗ ಯಾವುದೇ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳಲ್ಲಿ ಇರುವ ಹುಕ್ ಉಲ್ಲೇಖಗಳನ್ನು ನಕಲಿಸುವುದಿಲ್ಲ.
 
-- **Azure ಸಂಪನ್ಮೂಲ ಹೆಸರುಗಳು (ಸಾಲುಗಳು 51-60)**:
-      - ಮೂಲ Azure ಸೇವೆ ಸಂಪನ್ಮೂಲ ಹೆಸರುಗಳು ಉದಾಹರಣೆಗೆ Resource Group, AI Hub, AI Project, ಇತ್ಯಾದಿ
-- **ಫೀಚರ್ ಫ್ಲಾಗ್ಗಳು (ಸಾಲುಗಳು 61-63)**:
-      - ನಿರ್ದಿಷ್ಟ Azure ಸೇವೆಗಳನ್ನು ಎನೆಬಲ್/ಡಿಸೇಬಲ್ ಮಾಡಲು ಬೂಲಿಯನ್ ಚರಗಳು
-- **AI ಏಜೆಂಟ್ ಸಂರಚನೆ (ಸಾಲುಗಳು 64-71)**:
-      - ಮುಖ್ಯ AI ಏಜೆಂಟ್ ಗಾಗಿ ಹೆಸರು, ID, ನಿಯೋಜನೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು, ಮಾದರಿ ವಿವರಗಳು ಮುಂತಾದವುಗಳ ಸಂರಚನೆ
-- **AI ಎಂಬೆಡ್ ಸಂರಚನೆ (ಸಾಲುಗಳು 72-79)**:
-      - ವೆಕ್ಟರ್ ಸರ್ಚ್‌ಗಾಗಿ ಬಳಸುವ ಎಂಬೆಡ್ಡಿಂಗ್ ಮಾದರಿಯ ಸಂರಚನೆ
-- **ಸರ್ಚ್ ಮತ್ತು ಮಾನಿಟರಿಂಗ್ (ಸಾಲುಗಳು 80-84)**:
-      - ಸರ್ಚ್ ಇಂಟೆಕ್ಸಲ್ ಹೆಸರು, ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಸಂಪನ್ಮೂಲ ID ಗಳು ಮತ್ತು ಮಾನಿಟರಿಂಗ್/ಟ್ರೆಸುಗಳ ಸೆಟ್ಟಿಂಗ್ಗಳು
+ಹುಕ್ ಕೀಲಿಗಳು ಜೀವನಚಕ್ರ ಘಟನೆಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡುತ್ತವೆ; `posix` ಮತ್ತು `windows` ವೇದಿಕೆ ಆಮ್ಲೇಜನಗಳನ್ನು ಆಯ್ಕೆಮಾಡುತ್ತವೆ. `shell`, `run`, `interactive`, ಮತ್ತು `continueOnError` ನಿರ್ವಹಣೆ ನಡೆಸುತ್ತಾರೆ. ಇವು ನಿಮ್ಮ ಅನುಮತಿಗಳೊಂದಿಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳಾಗಿವೆ, ಆದ್ದರಿಂದ ಅವುಗಳನ್ನು ಅಪ್ಲಿಕೇಶನ್ ಕೋಡ್‌ಗಳಂತೆ ಪರಿಶೀಲಿಸಿ.
 
----
+ಸಂಪೂರ್ಣ ಜೀವಚಕ್ರಕ್ಕಾಗಿ [AZD ಹುಕ್‌ಗಳ ದಾಖಲೆ](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-extensibility) ನೋಡಿ.
 
-## 3. ಪರಿಸರ ಚರಗಳನ್ನು ತಿಳಿಯಿರಿ
-ಈ ಕೆಳಗಿನ ಪರಿಸರ ಚರಗಳು ನಿಮ್ಮ ನಿಯೋಜನೆಯ ಸಂರಚನೆ ಮತ್ತು ಕಾರ್ಯಾಚರಣೆಯನ್ನು ನಿಯಂತ್ರಿಸುತ್ತವೆ, ಅವುಗಳನ್ನು ಅವರ ಪ್ರಾಥಮಿಕ ಉದ್ದೇಶದಿಂದ ವರ್ಗೀಕರಿಸಲಾಗಿದೆ. ಬಹುತೇಕ ಚರಗಳಿಗೆ ನಿರರ್ಥಕ ಡಿಫಾಲ್ಟ್‌ಗಳು ಇರುತ್ತವೆ, ಆದರೆ ನೀವು ಅವುಗಳನ್ನು ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ಅವಶ್ಯಕತೆಗಳು ಅಥವಾ ಇತ್ತೀಚಿನ Azure ಸಂಪನ್ಮೂಲಗಳಿಗೆ ಹೊಂದಿಸಬಹುದು.
+## 3. ಪರಿಸರ ಇನ್‌ಪುಟ್‌ಗಳನ್ನು ಮೂಲಸೌಕರ್ಯದಲ್ಲಿ ಕಂಡುಹಿಡಿಯಿರಿ
 
-### 3.1 ಅಗತ್ಯವಿರುವ ಚರಗಳು 
+ಹೀಗಿನ ಆರ್‌ಎಸ್ಸು ಸಂಗ್ರಹದಿಂದ ಈ ಆಜ್ಞೆಗಳನ್ನು ಚಲಾಯಿಸಿ:
 
-```bash title="" linenums="0"
-# ಅಜೂರ್ ಮೂಲ ಸಂರಚನೆ
-AZURE_ENV_NAME                    # ವಾತಾವರಣದ ಹೆಸರು (ಸಂಪನ್ಮೂಲಗಳ ಹೆಸರಿಗಾಗಿ ಬಳಸಲಾಗುತ್ತದೆ)
-AZURE_LOCATION                    # ಡಿಪ್ಲಾಯ್ ಮಾಡಲಿರುವ ಪ್ರದೇಶ
-AZURE_SUBSCRIPTION_ID             # ಲಕ್ಷ್ಯ ಸಬ್‌ಸ್ಕ್ರಿಪ್ಷನ್
-AZURE_RESOURCE_GROUP              # ಸಂಪನ್ಮೂಲ ಗುಂಪಿನ ಹೆಸರು
-AZURE_PRINCIPAL_ID                # RBAC ಗಾಗಿ ಬಳಕೆದಾರ ಪ್ರಿನ್ಸಿಪಲ್
-
-# ಸಂಪನ್ಮೂಲಗಳ ಹೆಸರുകൾ (ನಿರ್ದಿಷ್ಟವಾಗಿ ನೀಡದಿದ್ದರೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ರಚಿಸಲಾಗುತ್ತದೆ)
-AZURE_AIHUB_NAME                  # Microsoft Foundry ಹಬ್ ಹೆಸರು
-AZURE_AIPROJECT_NAME              # ಎಐ ಯೋಜನೆಯ ಹೆಸರು
-AZURE_AISERVICES_NAME             # ಎಐ ಸೇವೆಗಳ ಖಾತೆಯ ಹೆಸರು
-AZURE_STORAGE_ACCOUNT_NAME        # ಸಂಗ್ರಹ ಖಾತೆಯ ಹೆಸರು
-AZURE_CONTAINER_REGISTRY_NAME     # ಕಂಟೇನರ್ ರೆಜಿಸ್ಟ್ರಿ ಹೆಸರು
-AZURE_KEYVAULT_NAME               # ಕೀ ವಾಲ್ಟ್ ಹೆಸರು (ಬಳಸದಿದ್ದರೆ)
-```
-
-### 3.2 ಮಾದರಿ ಸಂರಚನೆ 
-```bash title="" linenums="0"
-# ಚಾಟ್ ಮಾದರಿ ಸಂರಚನೆ
-AZURE_AI_AGENT_MODEL_NAME         # ನಿರ್ಧಾರಿತ: gpt-4.1-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # ನಿರ್ಧಾರಿತ: OpenAI (ಅಥವಾ Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # ನಿರ್ಧಾರಿತ: ಇತ್ತೀಚಿನ ಲಭ್ಯವಿರುವ
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # ಚಾಟ್ ಮಾದರಿಗಾಗಿ ನಿಯೋಜನೆ ಹೆಸರು
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # ನಿರ್ಧಾರಿತ: ಮಾನಕ
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # ನಿರ್ಧಾರಿತ: 80 (TPMನ ಸಾವಿರಗಳು)
-
-# ಎಂಬೆಡಿಂಗ್ ಮಾದರಿ ಸಂರಚನೆ
-AZURE_AI_EMBED_MODEL_NAME         # ನಿರ್ಧಾರಿತ: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # ನಿರ್ಧಾರಿತ: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # ನಿರ್ಧಾರಿತ: ಇತ್ತೀಚಿನ ಲಭ್ಯವಿರುವ
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # ಎಂಬೆಡಿಂಗ್‌ಗಳಿಗೆ ನಿಯೋಜನೆ ಹೆಸರು
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # ನಿರ್ಧಾರಿತ: ಮಾನಕ
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # ನಿರ್ಧಾರಿತ: 50 (TPMನ ಸಾವಿರಗಳು)
-
-# ಏಜೆಂಟ್ ಸಂರಚನೆ
-AZURE_AI_AGENT_NAME               # ಏಜೆಂಟ್ ಪ್ರದರ್ಶನ ಹೆಸರು
-AZURE_EXISTING_AGENT_ID           # ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಏಜೆಂಟ್ ಬಳಸಿ (ಐಚ್ಛಿಕ)
-```
-
-### 3.3 ವೈಶಿಷ್ಟ್ಯ ಟಾಗಲ್
-```bash title="" linenums="0"
-# ಐಚ್ಛಿಕ ಸೇವೆಗಳು
-USE_APPLICATION_INSIGHTS         # ಡೀಫಾಲ್ಡ್: ನಿಜ
-USE_AZURE_AI_SEARCH_SERVICE      # ಡೀಫಾಲ್ಟ್: ಅಸತ್ಯ
-USE_CONTAINER_REGISTRY           # ಡೀಫಾಲ್ಟ್: ನಿಜ
-
-# ನಿರೀಕ್ಷಣೆ ಮತ್ತು ಟ್ರೇಸಿಂಗ್
-ENABLE_AZURE_MONITOR_TRACING     # ಡೀಫಾಲ್ಟ್: ಅಸತ್ಯ
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # ಡೀಫಾಲ್ಟ್: ಅಸತ್ಯ
-
-# ಶೋಧನೆ ಸಂರಚನೆ
-AZURE_AI_SEARCH_INDEX_NAME       # ಶೋಧನಾ ಸೂಚ್ಯಂಕದ ಹೆಸರು
-AZURE_SEARCH_SERVICE_NAME        # ಶೋಧನಾ ಸೇವೆಯ ಹೆಸರು
-```
-
-### 3.4 AI ಪ್ರಾಜೆಕ್ಟ್ ಸಂರಚನೆ 
-```bash title="" linenums="0"
-# ಈಗಾಗಲೇ ಇರುವ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಬಳಸಿ
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # ಈಗಾಗಲೇ ಇರುವ AI ಯೋಜನೆಯ ಸಂಪೂರ್ಣ ಸಂಪನ್ಮೂಲ ID
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # ಈಗಾಗಲೇ ಇರುವ ಯೋಜನೆಯ ಎಂಡ್ಪಾಯಿಂಟ್ URL
-```
-
-### 3.5 ನಿಮ್ಮ ಚರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
-
-Azure Developer CLI ಬಳಸಿಕೊಂಡು ನಿಮ್ಮ ಪರಿಸರ ಚರಗಳನ್ನು ವೀಕ್ಷಿಸಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ:
-
-```bash title="" linenums="0"
-# ಪ್ರಸಕ್ತ ಪರಿಸರದ ಎಲ್ಲಾ ಪರಿಸರ ಚರಗಳನ್ನು ವೀಕ್ಷಿಸಿ
-azd env get-values
-
-# ನಿರ್ದಿಷ್ಟ ಪರಿಸರ ಚರವನ್ನು ಪಡೆಯಿರಿ
+```bash
+azd env list
 azd env get-value AZURE_ENV_NAME
-
-# ಒಂದು ಪರಿಸರ ಚರವನ್ನು ಹೊಂದಿಸಿ
-azd env set AZURE_LOCATION eastus
-
-# .env ಫೈಲ್‌ನಿಂದ ಹಲವಾರು ಚರಗಳನ್ನು ಹೊಂದಿಸಿ
-azd env set --from-file .env
+azd env get-value AZURE_LOCATION
 ```
+
+ಟೆಂಪ್ಲೇಟ್ ಯಾವ ಪರಿಸರ ಚರಗಳನ್ನು ಬಳಕೆ ಮಾಡುತ್ತದೆ ಎಂದು ನೋಡಲು `infra/main.parameters.json` ಪರಿಶೀಲಿಸಿ. `azd env set` ಜೊತೆಗೆ ಯಾವುದೇ ಯಾದೃಚ್ಛಿಕ ಹೆಸರನ್ನು ನಿಗದಿಪಡಿಸುವುದು ಸ್ವತಃ ಆಜರ್ ಸಂಪನ್ಮೂಲವನ್ನು ಬದಲಾಯಿಸುವುದಿಲ್ಲ.
+
+ಪರಿಶೀಲಿಸಿದ ಡೀಫಾಲ್ಟ್‌ಗಳಿಗೆ ಸೇರಿವೆ:
+
+| ಇನ್‌ಪುಟ್ | ಡೀಫಾಲ್ಟ್ / ಉದ್ದೇಶ |
+|-------|-------------------|
+| `AZURE_AI_AGENT_MODEL_NAME` | `gpt-5-mini` |
+| `AZURE_AI_AGENT_MODEL_VERSION` | `2025-08-07` |
+| `AZURE_AI_AGENT_DEPLOYMENT_SKU` | `GlobalStandard` |
+| `AZURE_AI_AGENT_DEPLOYMENT_CAPACITY` | `80`; ಸಂಖ್ಯಾಪ್ರಮಾಣಕ ಘಟಕಗಳು ಮಾದರಿ ಮತ್ತು ಜಾಗೃತಪಡಿಸುವ ವಿಧಾನದ ಮೇಲೆ ಅವಲಂಬಿತವಾಗಿವೆ |
+| `AZURE_AI_EMBED_MODEL_NAME` | `text-embedding-3-small` |
+| `AZURE_AI_EMBED_DIMENSIONS` | `1536` |
+| `USE_APPLICATION_INSIGHTS` | `true` |
+| `USE_AZURE_AI_SEARCH_SERVICE` | `false` |
+| `ENABLE_AZURE_MONITOR_TRACING` | `false` |
+| `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` | `false`; ಡೇಟಾ ನಿರ್ವಹಣೆಯನ್ನು ಪರಿಶೀಲಿಸಿದ್ದರೆ ಮಾತ್ರ ಅಟೋ ನಡೆಸಿಕೊಳ್ಳದಿರಿ |
+
+ಇವು ಮಾದರಿ-ವಿಶಿಷ್ಟ ಇನ್‌ಪುಟ್‌ಗಳು, ಜಾಗತಿಕ AZD ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಅಲ್ಲ. ಮಾದರಿ, SKU, ಸಾಮರ್ಥ್ಯ ಅಥವಾ ಸ್ಥಳವನ್ನು ಆಯ್ಕೆಮಾಡುವುದರ ಮೊದಲು [ಮಾದರಿ ಮತ್ತು ಪ್ರದೇಶ ಬೆಂಬಲದ ಡಾಕ್ಯುಮೆಂಟ್‌](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) ಮತ್ತು ನಿಮ್ಮ ಚಂದಾದಾರರ ಕ್ವೋಟಾವನ್ನು ಪರಿಶೀಲಿಸಿ. ಪ್ರತಿ ಸಾಮರ್ಥ್ಯ ಘಟಕವನ್ನು ಪ್ರತಿ ನಿಮಿಷಕ್ಕೆ 1,000 ಟೋಕನ್ ಎಂದು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಬೇಡಿ.
+
+ಬೇರೆ ಚಾಟ್ ಮಾದರಿಯನ್ನು ಆಯ್ಕೆಮಾಡಲು, ಅದರ ಹೊಂದಾಣಿಕೆಯ **ಹೆಸರು, ಆವೃತ್ತಿ, ಸ್ವರೂಪ, SKU, ಮತ್ತು ಸಾಮರ್ಥ್ಯವನ್ನು ಒಟ್ಟಿಗೆ** ನವೀಕರಿಸಿ, [ನಮೂನೆಯ ಕಸ್ಟಮೈಜೆಷನ್ ಮಾರ್ಗದರ್ಶಿ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md) ಅನ್ನು ಅನುಸರಿಸಿ. ಕೇವలం ಹೆಸರನ್ನು ಮಾತ್ರ ಬದಲಾಯಿಸಿದರೆ ಅಸಂಗತ ಆವೃತ್ತಿ ಅಥವಾ ನಿಯೋಜನಾ ಪ್ರಕಾರ ಉಳಿದಿರಬಹುದು.
+
+## 4. ಪ್ರಯೋಗಾಗಾರ: ಆಯ್ಕೆಮಾಡಬಹುದಾದ ಹುಡುಕಾಟ ಮತ್ತು ಟ್ರೇಸಿಂಗ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ
+
+!!! warning "ಈ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಬಿಲ್ ಮಾಡಬಹುದಾದ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಸೇರ್ಪಡೆ ಮಾಡಬಹುದು"
+
+    Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
+
+```bash
+azd env set USE_AZURE_AI_SEARCH_SERVICE true
+azd env set USE_APPLICATION_INSIGHTS true
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+
+# Inspect the infrastructure changes and any configured preview hooks
+azd provision --preview
+
+# Apply the resource changes and deploy the application
+azd up
+```
+
+ಮೂಲಸೌಕರ್ಯ ಬದಲಾವಣೆಗಳಿಗೆ ಪ್ರೊವಿಷನಿಂಗ್ ಅಗತ್ಯವಿದೆ; `azd deploy` ಮಾತ್ರ ಅಪ್ಲಿಕೇಶನ್ ಸೇವೆಗಳನ್ನು ನಿಯೋಜಿಸುತ್ತದೆ. ಹುಡುಕಾಟ ಸೂಚ್ಯಂಕ ಮತ್ತು ಬೆಂಬಲಿತ ಪ್ರಾಪ್ತಿ ಆಯ್ಕೆಯಿಗಾಗಿ [AI ಹುಡುಕಾಟ ಮಾರ್ಗದರ್ಶಿ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) ಅನ್ನು ಅನುಸರಿಸಿ. ಮೇಲ್ವಿಚಾರಣೆಗೆ, [ಪ್ರತ್ಬಂದನೀಯತೆ ಮಾರ್ಗದರ್ಶಿ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md) ಅನ್ನು ಅನುಸರಿಸಿ.
+
+ಅಗತ್ಯ ಅನುಮತಿ, ಪ್ರವೇಶ ನಿಯಂತ್ರಣ, ಸಂರಕ್ಷಣೆ ನೀತಿ, ಮತ್ತು ರೆಡಕ್ಷನ್ ಇಲ್ಲದೆ ನಿಜವಾದ ಗ್ರಾಹಕ ಡೇಟಾದ ಮೇಲೆ ಪ್ರಾಂಪ್ಟ್/ಪ್ರತಿಕ್ರಿಯೆ ವಿಷಯವನ್ನು ಸೆರೆಹಿಡಿಯಬೇಡಿ.
+
+## 5. ಇದ್ದುಬಂದಿರುವ ಸಂಪನ್ಮೂಲಗಳು ಮತ್ತು CI/CD
+
+ಫೌಂಡರಿ ಪ್ರಾಜೆಕ್ಟ್ ಅನ್ನು ಪುನರ್ವಳಿಸಲು, ಮಾದರಿಯ [ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಸಂಪನ್ಮೂಲ ಸೂಚನೆಗಳು](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md#use-existing-resources) ಅನ್ನು ಅನುಸರಿಸಿ. `AZURE_EXISTING_AIPROJECT_RESOURCE_ID` ಅನ್ನು ಹೊಂದಿಸುವುದು ನಿಯೋಜನಾ ಮಾರ್ಗವನ್ನು ಬದಲಾಯಿಸುತ್ತದೆ; ಆ ಸಂದರ್ಭದಲ್ಲಿ, ಟೆಂಪ್ಲೇಟು ನಿಮಗಾಗಿ ಆಪ್ಲಿಕೇಶನ್ ಇನ್ಸೈಟ್ಸ್ ಅಥವಾ AI ಹುಡುಕಾಟವನ್ನು ಸೃಷ್ಟಿಸುವುದಿಲ್ಲ. ಅವಲಂಬನೆಗಳು, ಪಾತ್ರ ನಿಯೋಗಗಳು, ಮತ್ತು ಮಾದರಿ ನಿಯೋಜನೆಗಳನ್ನು ಸ್ಪಷ್ಟವಾಗಿ ಪರಿಶೀಲಿಸಿ.
+
+ಜನರೇಟ್ ಮಾಡಲಾದ ಪೈಪ್ಲೈನ್‌ಗೆ ನೀಡಲ್ಪಡುವ ಮೌಲ್ಯಗಳನ್ನು `pipeline.variables` ವಿಭಾಗ ನಿಯಂತ್ರಿಸುತ್ತದೆ; ಇದು ರಹಸ್ಯ ಸಂಗ್ರಹಸ್ಥಳವಲ್ಲ ಮತ್ತು ಅಜೂರ್ ಸಂಪನ್ಮೂಲಗಳನ್ನು ರಚಿಸುವುದಿಲ್ಲ. ಅಪ್ಲಿಕೇಶನ್‌ನಲ್ಲಿ ನಿರ್ವಹಿಸಲ್ಪಟ್ಟ ಗುರುತಿನ身份 ಮತ್ತು CI/CD ಗಾಗಿ OIDC ಅನ್ನು ಆದ್ಯತೆ ನೀಡಿ. AZD ಪರಿಸರ ಫೈಲ್‌ಗಳು ಪ್ಲೇನ್ಟೆಕ್ಸ್ಟ್ ಆಗಿದ್ದು, ಅವುಗಳನ್ನು ಸಮರ್ಪಕವಾಗಿ ನಿಬಂಧಿಸಬಾರದು.
+
+AZD ವಿಶ್ವಾಸಾರ್ಹ, ಸ್ಥಳೀಯವಾಗಿ ತಯಾರಿಸಿದ dotenv ಫೈಲನ್ನು ಆಮದು ಮಾಡಲು ಬೆಂಬಲಿಸುತ್ತದೆ:
+
+```bash
+azd env set --file .env
+```
+
+ಆ ಫೈಲ್ ಅನ್ನು ಆಮದುಗೊಳಿಸುವ ಮೊದಲು ಪರಿಶೀಲಿಸಿ, ಮತ್ತು ರಹಸ್ಯವನ್ನು ಒಳಗೊಂಡಿರುವ ಪರಿಸರ ಫೈಲ್‌ಗಳನ್ನು ಹಂಚಿಕೆ ಮಾಡಲಾದ ಟರ್ಮಿನಲ್ಗಳು ಅಥವಾ CI ಲಾಗ್‌ಗಳಲ್ಲಿ ಮುದ್ರಿಸಬೇಡಿ.
+
+## 6. ನಿಮ್ಮ ಗ್ರಹಿಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
+
+- ಯಾವ `azure.yaml` ಸೇವೆ ಅಪ್ಲಿಕೇಶನನ್ನು ನಿಯೋಜಿಸುತ್ತದೆ?
+- ನೀವು ಬದಲಾವಣೆ ಮಾಡಿದ ಪ್ರತಿ ಮೌಲ್ಯವನ್ನು ಯಾವ ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಷರ್ ಪ್ಯಾರಾಮೀಟರ್ ಉಪಯೋಗಿಸುತ್ತದೆ?
+- ಯಾವ ಬದಲಾವಣೆಗಳಿಗೆ ಕೇವಲ ನಿಯೋಜನೆಯಲ್ಲದೆ ವ್ಯವಸ್ಥಾಪನೆ ಅಗತ್ಯವಿದೆ?
+- ಆಯ್ಕೆಮಾಡಲಾದ ಪ್ರದೇಶ ಮತ್ತು ಚಂದಾದಾರಿಕೆ ಮಾದರಿ ಮತ್ತು ಕೋಟಾವನ್ನು ಬೆಂಬಲಿಸತಕ್ಕದೆಯೇ?
+- ಎಲ್ಲಾ ಸೆಟ್‌ಅಪ್ ಹೂಕಳು ಯಶಸ್ವಿಯಾಯಿತೇ, ಮತ್ತು ನಿಯೋಜಿಸಲಾದ ಅಪ್ಲಿಕೇಶನಿನ ವರ್ತನೆಯನ್ನು ನೀವು ದೃಢೀಕರಿಸಬಹುದೇ?
+
+ಮುಂದುವರಿದು [ಟೆಂಪ್ಲೆಟ್ ಅನ್ನು ಹೊಂದಿಸಿ](5-Customize-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ಈ ದಾಖಲೆ ಅನ್ನು AI ಭಾಷಾಂತರಣಾ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಯನ್ನು ಕಾಯ್ದುಕೊಳ್ಳಲು ಪ್ರಯತ್ನಿಸಿದರೂ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಅಸತ್ಯತೆಗಳಿರುವ ಸಂಭವವಿರುತ್ತದೆ ಎಂಬುದನ್ನು ದಯವಿಟ್ಟು ಗಮನದಲ್ಲಿಡಿ. ಮೂಲ ಭಾಷೆಯಲ್ಲಿರುವ ಮೂಲ ದಾಖಲೆವೇ ಅಧಿಕೃತ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಪ್ರಮುಖ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಭಾಷಾಂತರವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದವನ್ನು ಬಳಸುವ ಹಿನ್ನೆಲೆ ಉಂಟಾಗುವ ಯಾವುದೇ ಅಸಮಜೇಶಗಳು ಅಥವಾ ತಪ್ಪಾಗಿ ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದಕ್ಕಾಗಿ ನಾವು ಜವಾಬ್ದಾರಿಯಲ್ಲ.
+**ಅಸ್ವೀಕಾರ**:
+ಈ ದಸ್ತಾವೇಜು AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಯನ್ನು ಸಾಧಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ, ದಯವಿಟ್ಟು ಗಮನಿಸಿ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಅಸಡ್ಡೆಗಳು ಇರಬಹುದು. ಮೂಲ ಭಾಷೆಯಲ್ಲಿರುವ ಮೂಲ ದಸ್ತಾವೇಜು ಪ್ರಾಮಾಣಿಕ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಪ್ರಮುಖ ಮಾಹಿತಿಗಾಗಿ, ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದವನ್ನು ಬಳಸುವ ಮೂಲಕ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಅರ್ಥಗಳ ಅಥವಾ ತಪ್ಪು ವ್ಯಾಖ್ಯಾನಗಳ ಬಗ್ಗೆ ನಾವು ಹೊಣೆಗಾರರಲ್ಲ.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

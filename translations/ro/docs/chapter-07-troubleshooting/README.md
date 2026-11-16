@@ -6,89 +6,94 @@
 
 ## Prezentare generală
 
-Acest capitol te ajută să diagnostichezi și să rezolvi probleme comune când lucrezi cu Azure Developer CLI. De la eșecuri de implementare la probleme specifice AI.
+Acest capitol te ajută să diagnostichezi și să rezolvi probleme comune atunci când lucrezi cu Azure Developer CLI. De la eșecuri de implementare până la probleme specifice AI.
 
-> Validat cu `azd 1.27.1` în iulie 2026.
+> Ghidul comenzilor revizuit în conformitate cu referința lansată `azd 1.37.2`. Implementările în cloud nu au fost executate. Înlocuiește numele și ID-urile de resurse de exemplu înainte de a folosi comenzile.
 
 ## Obiective de învățare
 
-Parcurgând acest capitol, vei:
-- Diagnostica eșecurile comune de implementare AZD
-- Depana problemele de autentificare și permisiuni
-- Rezolva probleme de conectivitate la serviciile AI
-- Folosi Azure Portal și CLI pentru depanare
+Prin parcurgerea acestui capitol, vei:
+- Diagnostica eșecuri comune de implementare AZD
+- Depana probleme de autentificare și permisiuni
+- Rezolva probleme de conectivitate ale serviciilor AI
+- Folosi Portalul Azure și CLI pentru depanare
 
 ---
 
 ## 📚 Lecții
 
-| # | Lecție | Descriere | Timp |
+| # | Lecție | Descriere | Durată |
 |---|--------|-------------|------|
 | 1 | [Probleme Comune](common-issues.md) | Probleme întâlnite frecvent | 30 min |
-| 2 | [Ghid de Debugging](debugging.md) | Strategii pas cu pas pentru depanare | 45 min |
+| 2 | [Ghid de Debugging](debugging.md) | Strategii pas cu pas de debugging | 45 min |
 | 3 | [Depanare AI](ai-troubleshooting.md) | Probleme specifice AI | 30 min |
 
 ---
 
-## 🚨 Remedieri Rapide
+## 🚨 Remedii rapide
 
-### Probleme de Autentificare
+### Probleme de autentificare
 ```bash
-# Necesare pentru fluxurile de lucru AZD
+# Required for AZD workflows
 azd auth login
 
-# Opțional dacă utilizați și comenzile Azure CLI direct
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Eșecuri de Provisionare
+### Eșecuri la provisioning
 ```bash
 azd show
 azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### Conflicte de Resurse
+### Conflicte între resurse
+Verifică mai întâi resursa existentă și erorile de implementare. Nu șterge un mediu partajat sau de producție pentru a rezolva un conflict de denumire. Pentru un **mediu nou și dispensabil**, folosește un nume unic:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Cota Depășită
+### Depășirea cotei
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Modificarea `AZURE_LOCATION` nu mută resursele existente și poate cauza conflicte de locație la redeployment.
 
 ---
 
-## 📋 Referință Coduri de Eroare
+## 📋 Referință coduri de eroare
 
 | Eroare | Cauză | Soluție |
 |-------|-------|----------|
-| `AuthenticationError` | Nu s-a autentificat | `azd auth login` |
-| `ResourceNotFound` | Resursă lipsă | Verifică numele resurselor |
-| `QuotaExceeded` | Limite ale abonamentului | Solicită majorarea cotei |
+| `AuthenticationError` | Nu ești autentificat | `azd auth login` |
+| `ResourceNotFound` | Lipsă resursă | Verifică numele resurselor |
+| `QuotaExceeded` | Limite abonament | Solicita creșterea cotei |
 | `InvalidTemplate` | Eroare de sintaxă Bicep | `az bicep build` |
-| `Conflict` | Resursă existenta | Folosește un nume nou sau șterge |
+| `Conflict` | Resursă existentă | Folosește nume nou sau șterge |
 | `Forbidden` | Permisiuni insuficiente | Verifică rolurile RBAC |
 
 ---
 
-## 🔄 Resetare și Recuperare
+## 🔄 Resetare și recuperare
 
 ```bash
-# Resetare soft (păstrează resursele, redeplasează codul)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Resetare hard (șterge totul, începe de la zero)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Resetarea dură șterge date și poate schimba punctele finale. Fă backup înainte și analizează prompturile interactive de ștergere. `--force --purge` este potrivit doar pentru medii dispensabile când se intenționează ștergerea ireversibilă.
 
 ---
 
@@ -101,7 +106,7 @@ azd up
 
 ---
 
-## 📖 Resurse Aflate în Legătură
+## 📖 Resurse conexe
 
 - [Verificări Pre-Implementare](../chapter-06-pre-deployment/preflight-checks.md)
 - [Ghid de Configurare](../chapter-03-configuration/configuration.md)

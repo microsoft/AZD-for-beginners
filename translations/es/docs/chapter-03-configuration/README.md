@@ -1,6 +1,6 @@
 # Capítulo 3: Configuración y Autenticación
 
-**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duración**: 45-60 minutos | **⭐ Complejidad**: Intermedio
+**📚 Curso**: [AZD para Principiantes](../../README.md) | **⏱️ Duración**: 90-150 minutos incluyendo práctica de integración | **⭐ Complejidad**: Intermedio
 
 ---
 
@@ -8,15 +8,15 @@
 
 Este capítulo cubre la configuración del entorno, patrones de autenticación y mejores prácticas de seguridad para despliegues con Azure Developer CLI.
 
-> Validado con `azd 1.27.1` en julio de 2026.
+> Objetivo de revisión de comandos y configuración: `azd 1.37.2` (noviembre de 2026). No se realizó aprovisionamiento en vivo de Azure durante la revisión.
 
 ## Objetivos de aprendizaje
 
 Al completar este capítulo, usted:
 - Dominará la jerarquía de configuración de AZD
-- Gestionará múltiples entornos (desarrollo, staging, producción)
+- Gestionará múltiples entornos (dev, staging, prod)
 - Implementará autenticación segura con identidades administradas
-- Configurará ajustes específicos para cada entorno
+- Configurará ajustes específicos por entorno
 
 ---
 
@@ -31,52 +31,52 @@ Al completar este capítulo, usted:
 
 ## 🚀 Inicio Rápido
 
+Ejecute desde la raíz de una **aplicación azd ya inicializada**, no desde el repositorio del curso. Use nombres de entorno no usados si ya existen.
+
 ```bash
-# Crear múltiples entornos
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Cambiar entornos
+# Switch environments
 azd env select prod
 
-# Establecer variables de entorno
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Ver configuración
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` es ilustrativo: afecta la infraestructura solo si su plantilla lo consume explícitamente. Los valores ordinarios `azd env set` se guardan localmente en texto plano; no son almacenamiento seguro de secretos.
 
 ---
 
 ## 🔧 Jerarquía de Configuración
 
-AZD aplica configuraciones en este orden (los ajustes posteriores sobreescriben a los anteriores):
-
-1. **Valores predeterminados** (integrados en las plantillas)
-2. **azure.yaml** (configuración del proyecto)
-3. **Variables de entorno** (`azd env set`)
-4. **Flags de línea de comandos** (`--location eastus`)
+Mantenga tres superficies de configuración separadas: preferencias globales (`azd config`), estructura del proyecto (`azure.yaml`) y valores por entorno (`azd env`). Las banderas solo sobrescriben los ajustes que realmente soportan; no hay una superposición universal de variables de entorno arbitrarias sobre `azure.yaml` o Bicep.
 
 ---
 
 ## 🔐 Mejores Prácticas de Seguridad
 
 ```bash
-# Usar identidad administrada (recomendado)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Verificar el estado de autenticación de AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Opcional: verificar el contexto de Azure CLI si planeas ejecutar comandos az
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Reautenticar si es necesario
+# Re-authenticate if needed
 azd auth login
 
-# Opcional: actualizar la autenticación de Azure CLI para comandos az
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 

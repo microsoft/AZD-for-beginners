@@ -2,40 +2,36 @@
 
 **Navigasi Bab:**
 - **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Semasa**: Bab 8 - Corak Produksi & Perusahaan
+- **📖 Bab Terkini**: Bab 8 - Corak Produksi & Perusahaan
 - **⬅️ Bab Sebelumnya**: [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Juga Berkaitan**: [Makmal Bengkel AI](ai-workshop-lab.md)
+- **⬅️ Juga Berkaitan**: [Makmal Bengkel AI](../chapter-02-ai-development/ai-workshop-lab.md)
 - **🎯 Kursus Lengkap**: [AZD Untuk Pemula](../../README.md)
 
 ## Gambaran Keseluruhan
 
-Panduan ini menyediakan amalan terbaik yang menyeluruh untuk mengendalikan beban kerja AI yang sedia produksi menggunakan Azure Developer CLI (AZD). Berdasarkan maklum balas dari komuniti Microsoft Foundry Discord dan pengendalian pelanggan dunia sebenar, amalan ini menangani cabaran paling lazim dalam sistem AI produksi.
+Panduan ini menerangkan corak reka bentuk AI produksi menggunakan Azure Developer CLI (AZD). Ia adalah rujukan reka bentuk, bukan aplikasi yang boleh diterapkan atau sijil produksi.
 
-## Cabaran Utama yang Ditangani
+**Sempadan contoh:** Kecuali secara jelas digambarkan sebagai lengkap, serpihan Bicep menganggap parameter dan sumber yang dirujuk dari templat yang mengandungi. Ia mengecualikan imej/rancangan hos, identiti, penugasan peranan, DNS, output, dan integrasi lain yang diperlukan. Laluan perkhidmatan YAML dan skrip kait/ujian adalah fail ilustratif untuk dibuat dalam **aplikasi anda sendiri**; ia tidak disediakan oleh kursus ini. Gunakan sampel AZD yang berfungsi sebagai asas, kompilasikan infrastruktur lengkap, dan uji dalam persekitaran terpencil sebelum produksi.
 
-Berdasarkan keputusan tinjauan komuniti kami, ini adalah cabaran utama yang dihadapi oleh pembangun:
+## Cabaran Utama Yang Ditangani
 
-- **45%** menghadapi masalah dengan pengendalian AI pelbagai perkhidmatan
-- **38%** ada isu dengan pengurusan kelayakan dan rahsia  
-- **35%** mendapati kesukaran dengan kesediaan produksi dan skala
-- **32%** memerlukan strategi pengoptimuman kos yang lebih baik
-- **29%** memerlukan pemantauan dan penyelesaian masalah yang dipertingkatkan
+Kebimbangan produksi biasa termasuk penerapan multi-perkhidmatan, pengurusan identiti dan rahsia, penskalaan, kawalan kos, dan pemantauan. Tiada prevalens yang diukur dituntut di sini.
 
-## Corak Senibina untuk AI Produksi
+## Corak Seni Bina untuk AI Produksi
 
-### Corak 1: Senibina AI Mikroservis
+### Corak 1: Seni Bina Mikroservis AI
 
-**Kapan digunakan**: Aplikasi AI kompleks dengan pelbagai kemampuan
+**Bila digunakan**: Aplikasi AI kompleks dengan banyak kebolehan
 
 ```mermaid
 graph TD
-    Frontend[Web Hadapan] --- Gateway[Pintu Gerbang API] --- LB[Penyeimbang Beban]
-    Gateway --> Chat[Perkhidmatan Sembang]
-    Gateway --> Image[Perkhidmatan Imej]
-    Gateway --> Text[Perkhidmatan Teks]
-    Chat --> OpenAI[Model Microsoft Foundry]
-    Image --> Vision[Penglihatan Komputer]
-    Text --> DocIntel[Kecerdasan Dokumen]
+    Frontend[Web Frontend] --- Gateway[API Gateway] --- LB[Load Balancer]
+    Gateway --> Chat[Chat Service]
+    Gateway --> Image[Image Service]
+    Gateway --> Text[Text Service]
+    Chat --> OpenAI[Microsoft Foundry Models]
+    Image --> Vision[Computer Vision]
+    Text --> DocIntel[Document Intelligence]
 ```
 
 **Pelaksanaan AZD**:
@@ -61,13 +57,13 @@ services:
     host: containerapp
 ```
 
-### Corak 2: Pemprosesan AI Berpandukan Peristiwa
+### Corak 2: Pemprosesan AI Dipacu Acara
 
-**Kapan digunakan**: Pemprosesan batch, analisis dokumen, alur kerja async
+**Bila digunakan**: Pemprosesan kelompok, analisis dokumen, aliran kerja async
 
 ```bicep
 // Event Hub for AI processing pipeline
-resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
+resource eventHub 'Microsoft.EventHub/namespaces@2024-01-01' = {
   name: eventHubNamespaceName
   location: location
   sku: {
@@ -78,7 +74,7 @@ resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
 }
 
 // Service Bus for reliable message processing
-resource serviceBus 'Microsoft.ServiceBus/namespaces@2022-10-01-preview' = {
+resource serviceBus 'Microsoft.ServiceBus/namespaces@2024-01-01' = {
   name: serviceBusNamespaceName
   location: location
   sku: {
@@ -110,34 +106,36 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Berfikir Tentang Kesihatan Ejen AI
+Ini mencipta serpihan ruang nama, bukan hab, barisan, langganan, atau pencetus Fungsi. Fungsi yang boleh dijalankan juga memerlukan rancangan hos, konfigurasi runtime/penyimpanan, identiti terpasang, RBAC, dan akses rangkaian. Rujukan Key Vault memerlukan kebenaran untuk membaca rahsia; URL titik akhir bukanlah kelayakan.
 
-Apabila aplikasi web tradisional rosak, simptomnya biasa: halaman tidak dimuat, API mengembalikan ralat, atau pengedaran gagal. Aplikasi berkuasa AI boleh rosak dengan semua cara tersebut—tetapi ia juga boleh berkelakuan dengan cara lebih halus yang tidak menghasilkan mesej ralat yang jelas.
+## Fikirkan Mengenai Kesihatan Ejen AI
 
-Bahagian ini membantu anda membina model mental untuk memantau beban kerja AI supaya anda tahu ke mana hendak melihat apabila perkara tidak kelihatan betul.
+Apabila aplikasi web tradisional rosak, simptomnya biasa: halaman tidak dimuat, API mengembalikan ralat, atau penyebaran gagal. Aplikasi yang dikuasakan AI boleh rosak dengan cara yang sama—tetapi juga boleh berkelakuan salah dengan cara halus yang tidak menghasilkan mesej ralat yang jelas.
 
-### Bagaimana Kesihatan Ejen Berbeza dari Kesihatan Aplikasi Tradisional
+Bahagian ini membantu anda membina model mental untuk memantau beban kerja AI supaya anda tahu di mana hendak mencari apabila keadaan tidak nampak betul.
 
-Aplikasi tradisional sama ada berfungsi atau tidak. Ejen AI boleh nampak berfungsi tetapi menghasilkan keputusan yang lemah. Fikirkan kesihatan ejen dalam dua lapisan:
+### Bagaimana Kesihatan Ejen Berbeza daripada Kesihatan Aplikasi Tradisional
 
-| Lapisan | Apa yang Perlu Dipantau | Di Mana Hendak Melihat |
-|---------|------------------------|-----------------------|
-| **Kesihatan Infrastruktur** | Adakah perkhidmatan berjalan? Adakah sumber diperuntukkan? Adakah titik akhir boleh diakses? | `azd monitor`, kesihatan sumber di Portal Azure, log kontena/aplikasi |
-| **Kesihatan Tingkah Laku** | Adakah ejen memberi respons tepat? Adakah respons tepat masa? Adakah model dipanggil dengan betul? | Penjejakan Application Insights, metrik kelewatan panggilan model, log kualiti respons |
+Aplikasi tradisional juga boleh mengalami kegagalan ketepatan halus. Ejen AI menambah kualiti respons tidak deterministik kepada kebimbangan kebolehcapaian dan ketepatan biasa. Fikirkan kesihatan ejen dalam dua lapisan:
 
-Kesihatan infrastruktur adalah biasa—ia sama untuk mana-mana aplikasi azd. Kesihatan tingkah laku adalah lapisan baru yang diperkenalkan oleh beban kerja AI.
+| Lapisan | Apa Yang Perlu Ditonton | Di Mana Hendak Mencari |
+|-------|--------------|---------------|
+| **Kesihatan infrastruktur** | Adakah perkhidmatan berjalan? Adakah sumber diperuntukkan? Adakah titik akhir boleh dicapai? | `azd monitor`, kesihatan sumber Azure Portal, log bekas/aplikasi |
+| **Kesihatan tingkah laku** | Adakah ejen memberi respons dengan tepat? Adakah respons tepat pada masa? Adakah model dipanggil dengan betul? | Penjejak Application Insights, metrik kelewatan panggilan model, log kualiti respons |
 
-### Di Mana Hendak Melihat Apabila Aplikasi AI Tidak Berkelakuan Seperti Dijangka
+Kesihatan infrastruktur adalah biasa—sama untuk mana-mana aplikasi azd. Kesihatan tingkah laku adalah lapisan baru yang diperkenalkan oleh beban kerja AI.
 
-Jika aplikasi AI anda tidak menghasilkan keputusan yang anda jangkakan, berikut ialah senarai semak konseptual:
+### Di Mana Hendak Mencari Apabila Aplikasi AI Tidak Berkelakuan Seperti Dijangka
 
-1. **Mula dengan asas.** Adakah aplikasi berjalan? Bolehkah ia mencapai kebergantungan? Semak `azd monitor` dan kesihatan sumber seperti biasa untuk mana-mana aplikasi.
-2. **Periksa sambungan model.** Adakah aplikasi anda berjaya memanggil model AI? Panggilan model yang gagal atau tamat masa adalah penyebab paling biasa bagi isu aplikasi AI dan akan muncul dalam log aplikasi anda.
-3. **Lihat apa yang diterima model.** Respons AI bergantung pada input (prompt dan mana-mana konteks yang diambil). Jika keluaran salah, input biasanya salah. Semak sama ada aplikasi anda menghantar data yang betul ke model.
-4. **Kaji kelewatan respons.** Panggilan model AI lebih perlahan daripada panggilan API biasa. Jika aplikasi anda terasa perlahan, periksa sama ada masa respons model meningkat—ini boleh menunjukkan pengekangan, had kapasiti, atau kesesakan peringkat rantau.
-5. **Perhatikan isyarat kos.** Lonjakan tak dijangka dalam penggunaan token atau panggilan API boleh menunjukkan gelung, prompt yang salah konfigurasi, atau cubaan berlebihan.
+Jika aplikasi AI anda tidak menghasilkan keputusan yang dijangka, berikut adalah senarai semak konseptual:
 
-Anda tidak perlu menguasai alat pemerhatian segera. Intipati utamanya ialah aplikasi AI mempunyai lapisan tingkah laku tambahan untuk dipantau, dan pemantauan terbina dalam azd (`azd monitor`) memberikan anda titik permulaan untuk menyiasat kedua-dua lapisan.
+1. **Mulakan dengan asas.** Adakah aplikasi berjalan? Bolehkah ia mencapai kebergantungan? Semak `azd monitor` dan kesihatan sumber seperti anda lakukan untuk mana-mana aplikasi.
+2. **Periksa sambungan model.** Adakah aplikasi anda berjaya memanggil model AI? Panggilan model gagal atau tamat masa adalah punca paling biasa masalah aplikasi AI dan akan muncul dalam log aplikasi anda.
+3. **Periksa input dan asas dengan selamat.** Jawapan yang salah boleh disebabkan oleh pengambilan, arahan, keterbatasan model, atau pelaksanaan alat. Gunakan data diagnostik dikawal akses, disunting; jangan aktifkan log sembang/prompt secara membuta tuli dalam produksi.
+4. **Semak kelewatan respons.** Panggilan model AI lebih perlahan daripada panggilan API biasa. Jika aplikasi anda perlahan, periksa sama ada masa respons model meningkat—ini boleh menunjukkan perencatan, had kapasiti, atau kesesakan peringkat rantau.
+5. **Peka kepada isyarat kos.** Peningkatan penggunaan token atau panggilan API yang tidak dijangka boleh menunjukkan gelung, prompt salah konfigurasi, atau percubaan berlebihan.
+
+Anda tidak perlu menguasai alat pemerhatian dengan segera. Pengajaran utama ialah aplikasi AI mempunyai lapisan tingkah laku tambahan untuk dipantau, dan pemantauan terbina dalam azd (`azd monitor`) memberi anda titik permulaan untuk menyiasat kedua-dua lapisan.
 
 ---
 
@@ -149,7 +147,7 @@ Anda tidak perlu menguasai alat pemerhatian segera. Intipati utamanya ialah apli
 - Tiada komunikasi perkhidmatan-ke-perkhidmatan tanpa pengesahan
 - Semua panggilan API menggunakan identiti terurus
 - Pengasingan rangkaian dengan titik akhir peribadi
-- Kawalan akses sekurang-kurangnya keistimewaan
+- Kawalan akses keistimewaan minimum
 
 ```bicep
 // Managed Identity for each service
@@ -161,7 +159,7 @@ resource chatServiceIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2
 // Role assignments with minimal permissions
 resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: openAIAccount
-  name: guid(openAIAccount.id, chatServiceIdentity.id, openAIUserRoleDefinitionId)
+  name: guid(openAIAccount.id, chatServiceIdentity.id, '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
     principalId: chatServiceIdentity.properties.principalId
@@ -183,7 +181,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
     tenantId: tenant().tenantId
     sku: {
       family: 'A'
-      name: 'premium'  // Use premium for production
+      name: 'standard' // Premium is needed for HSM-backed keys, not ordinary secrets
     }
     enableRbacAuthorization: true  // Use RBAC instead of access policies
     enablePurgeProtection: true    // Prevent accidental deletion
@@ -192,7 +190,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   }
 }
 
-// Store all AI service credentials
+// Optional legacy key-auth alternative; omit when using Entra ID.
 resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   parent: keyVault
   name: 'openai-api-key'
@@ -204,6 +202,8 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   }
 }
 ```
+
+Tetapkan identiti runtime `Key Vault Secrets User` pada skop yang sesuai dan lampirkan ke hos; `enableRbacAuthorization` sahaja tidak memberi akses. Utamakan pengesahan identiti terurus OpenAI dengan `disableLocalAuth: true`. Rahsia kunci pilihan hanya masuk akal untuk akaun yang diaktifkan kunci dengan sengaja, dan prinsipal penyediaan juga memerlukan kebenaran untuk menulis rahsia.
 
 ### 3. Keselamatan Rangkaian
 
@@ -265,11 +265,13 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Prestasi dan Skala
+Titik akhir peribadi juga memerlukan kumpulan zon DNS peribadi/pautan VNet dan integrasi VNet aplikasi. Mereka tidak secara automatik menyekat akses awam: nyahaktifkan secara jelas akses rangkaian awam akaun AI selepas mengesahkan kesalinghubungan peribadi dan akses penyebaran.
 
-### 1. Strategi Auto-Penskalaan
+## Prestasi dan Penskalaan
 
-**Auto-scaling Aplikasi Kontena**:
+### 1. Strategi Pensakalan Automatik
+
+**Pensakalan Automatik Aplikasi Kontena**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -313,12 +315,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Strategi Penyimpanan Cache
+### 2. Strategi Caching
 
-**Redis Cache untuk Respons AI**:
+**Cache Redis untuk Respons AI**:
 
 ```bicep
-// Redis Premium for production workloads
+// Legacy Azure Cache for Redis example (not recommended for new deployments)
 resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
   name: redisCacheName
   location: location
@@ -333,8 +335,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
     redisConfiguration: {
       'maxmemory-policy': 'allkeys-lru'
     }
-    // Enable clustering for high availability
-    redisVersion: '6.0'
+    // Sharding distributes data; replication/failover provides availability.
     shardCount: 2
   }
 }
@@ -342,6 +343,8 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 // Cache configuration in application
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
+
+Azure Cache untuk Redis Basic/Standard/Premium sedang dalam [laluan persaraan](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Gunakan Azure Managed Redis untuk reka bentuk baru dan konfigurasi SKU, identiti, dan TLS yang didokumentasikan, bukannya menyalin sumber legasi ini ke dalam sistem produksi baru. Baris rentetan sambungan adalah tempat letak tidak berfungsi, bukan kelayakan. Bahagikan kekunci cache mengikut kebenaran, model/arah, dan versi pengambilan, dengan tarikh luput; cache kongsi hanya carian boleh mendedahkan data pengguna lain.
 
 ### 3. Pengimbangan Beban dan Pengurusan Trafik
 
@@ -381,14 +384,18 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
+Ini adalah sumber gerbang separa: penyebaran sebenar juga memerlukan konfigurasi subnet/IP gerbang, IP dan port hadapan, pendengar/sijil TLS, tetapan/probed HTTP belakang, peraturan laluan dan keutamaan, serta polisi WAF yang disemak. Nama hos/SNI TLS dan pengesahan mesti sepadan dengan belakang Container App.
+
 ## 💰 Pengoptimuman Kos
 
-### 1. Penentuan Saiz Sumber yang Betul
+### 1. Saiz Sumber Yang Sesuai
 
-**Konfigurasi Khusus Persekitaran**:
+**Konfigurasi Spesifik Persekitaran**:
+
+Nama ini adalah **input templat tersuai ilustratif**, bukan tetapan AZD automatik. Pemetaan setiap ke `infra/main.parameters.json`/Bicep dan konfigurasi hos dahulu. Contohnya, sampel RAG menggunakan `AZURE_SEARCH_SERVICE_SKU` dan `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, bukan nama generik di bawah. Berikan memori Container Apps unit yang disokong seperti `1Gi` dalam sumber sebenar. Terapkan perubahan infrastruktur dengan `azd up` atau `azd provision`; `azd deploy` sahaja tidak menerapkan perubahan Bicep.
 
 ```bash
-# Persekitaran pembangunan
+# Development environment
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -396,7 +403,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Persekitaran produksi
+# Production environment  
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -405,19 +412,21 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Pemantauan Kos dan Bajet
+### 2. Pemantauan Kos dan Belanjawan
 
 ```bicep
+// Supply the first day of the current UTC month, e.g. 2026-11-01T00:00:00Z.
+param budgetStartDate string
+
 // Cost management and budgets
-resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
-    amount: 2000  // $2000 monthly budget
+    amount: 2000  // In the billing currency, not necessarily USD
     category: 'Cost'
     notifications: {
       warning: {
@@ -446,36 +455,47 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
+Gantikan penerima contoh dan semak skop/kebenaran. Amaran bajet menggunakan data bil tertunda dan tidak menguatkuasakan had perbelanjaan.
+
 ### 3. Pengoptimuman Penggunaan Token
 
 **Pengurusan Kos OpenAI**:
 
+Ini hanya heuristik berdasarkan aksara untuk pratonton UI, **bukan** pengesah had token model. Kod produksi mesti menggunakan tokenizer yang sesuai dengan model diterapkan dan mengambil kira arahan sistem, skema alat, sejarah, dan bajet output. Tolak mesej pengguna yang terlalu besar daripada memotong secara diam-diam.
+
 ```typescript
-// Pengoptimuman token peringkat aplikasi
+// Application-level token optimization
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
   
   optimizePrompt(userInput: string, context: string): string {
     const availableTokens = this.maxTokens - this.reserveTokens;
-    const estimatedTokens = this.estimateTokens(userInput + context);
+    if (this.estimateTokens(userInput) + 8 >= availableTokens) {
+      throw new Error("User input exceeds the illustrative prompt budget");
+    }
+    const estimatedTokens = this.estimateTokens(userInput + context) + 8;
     
     if (estimatedTokens > availableTokens) {
-      // Potong konteks, bukan input pengguna
-      context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
+      // Truncate context, not user input
+      context = this.truncateContext(context, Math.max(0, availableTokens - this.estimateTokens(userInput) - 8));
     }
     
     return `${context}\n\nUser: ${userInput}`;
   }
   
   private estimateTokens(text: string): number {
-    // Anggaran kasar: 1 token ≈ 4 aksara
+    // Rough estimation: 1 token ≈ 4 characters
     return Math.ceil(text.length / 4);
+  }
+
+  private truncateContext(text: string, estimatedBudget: number): string {
+    return text.slice(0, Math.max(0, estimatedBudget) * 4);
   }
 }
 ```
 
-## Pemantauan dan Pengamatan
+## Pemantauan dan Kebolehlihatan
 
 ### 1. Application Insights Menyeluruh
 
@@ -488,8 +508,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   properties: {
     Application_Type: 'web'
     WorkspaceResourceId: logAnalyticsWorkspace.id
-    SamplingPercentage: 100  // Full sampling for AI apps
-    DisableIpMasking: false  // Enable for security
+    SamplingPercentage: 100  // Ingestion setting; review cost and SDK sampling separately
+    DisableIpMasking: false  // Retain IP masking
   }
 }
 
@@ -498,7 +518,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: 'ai-high-error-rate'
   location: 'global'
   properties: {
-    description: 'Alert when AI service error rate is high'
+    description: 'Alert when failed request count exceeds 10 in five minutes'
     severity: 2
     enabled: true
     scopes: [
@@ -524,21 +544,20 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. Pemantauan Khusus AI
 
-**Paparan Tersuai untuk Metrik AI**:
+**Papan Pemuka Tersuai untuk Metrik AI**:
 
 ```json
-// Dashboard configuration for AI workloads
 {
   "dashboard": {
     "name": "AI Application Monitoring",
     "tiles": [
       {
         "name": "OpenAI Request Volume",
-        "query": "requests | where name contains 'openai' | summarize count() by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize count() by bin(timestamp, 5m)"
       },
       {
         "name": "AI Response Latency",
-        "query": "requests | where name contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
       },
       {
         "name": "Token Usage",
@@ -552,6 +571,8 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   }
 }
 ```
+
+JSON ini adalah lakaran yang ditakrifkan aplikasi, bukan skema papan pemuka portal Azure yang boleh diimport. Pertanyaan token/kos memerlukan aplikasi anda mengeluarkan metrik tersuai tepat itu; ia tidak dicipta oleh AZD. Sesuaikan penapis pergantungan untuk nama titik akhir/span model sebenar anda.
 
 ### 3. Pemeriksaan Kesihatan dan Pemantauan Masa Aktif
 
@@ -570,7 +591,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
     Enabled: true
     Frequency: 300  // 5 minutes
     Timeout: 120    // 2 minutes
-    Kind: 'ping'
+    Kind: 'standard'
     Locations: [
       {
         Id: 'us-east-2-azr'
@@ -579,52 +600,26 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
         Id: 'us-west-2-azr'
       }
     ]
-    Configuration: {
-      WebTest: '''
-        <WebTest Name="AI Health Check" 
-                 Id="8d2de8d2-a2b0-4c2e-9a0d-8f9c9a0b8c8d" 
-                 Enabled="True" 
-                 CssProjectStructure="" 
-                 CssIteration="" 
-                 Timeout="120" 
-                 WorkItemIds="" 
-                 xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" 
-                 Description="" 
-                 CredentialUserName="" 
-                 CredentialPassword="" 
-                 PreAuthenticate="True" 
-                 Proxy="default" 
-                 StopOnError="False" 
-                 RecordedResultFile="" 
-                 ResultsLocale="">
-          <Items>
-            <Request Method="GET" 
-                     Guid="a5f10126-e4cd-570d-961c-cea43999a200" 
-                     Version="1.1" 
-                     Url="${webApp.properties.defaultHostName}/health" 
-                     ThinkTime="0" 
-                     Timeout="120" 
-                     ParseDependentRequests="True" 
-                     FollowRedirects="True" 
-                     RecordResult="True" 
-                     Cache="False" 
-                     ResponseTimeGoal="0" 
-                     Encoding="utf-8" 
-                     ExpectedHttpStatusCode="200" 
-                     ExpectedResponseUrl="" 
-                     ReportingName="" 
-                     IgnoreHttpStatusCode="False" />
-          </Items>
-        </WebTest>
-      '''
+    Request: {
+      RequestUrl: 'https://${webApp.properties.defaultHostName}/health'
+      HttpVerb: 'GET'
+      FollowRedirects: true
+      ParseDependentRequests: false
+    }
+    ValidationRules: {
+      ExpectedHttpStatusCode: 200
+      SSLCheck: true
+      SSLCertRemainingLifetimeCheck: 7
     }
   }
 }
 ```
 
-## Pemulihan Bencana dan Kebolehpercayaan Tinggi
+## Pemulihan Bencana dan Kebolehsediaan Tinggi
 
-### 1. Pengedaran Pelbagai Rantau
+Ujian sebelumnya menganggap perkhidmatan App Service `webApp` dan sumber Application Insights yang sedia ada. Ujian kebolehsediaan standard dikenakan bayaran dan memerlukan titik akhir boleh dihubungi; aplikasi hanya peribadi memerlukan reka bentuk pemantauan peribadi yang sesuai. Ujian ping URL sudah usang; gunakan [ujian kebolehsediaan standard](https://learn.microsoft.com/azure/azure-monitor/app/availability).
+
+### 1. Penyebaran Pelbagai Wilayah
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -634,16 +629,16 @@ services:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=eastus
+      AZURE_REGION: eastus
   api-secondary:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=westus2
+      AZURE_REGION: westus2
 ```
 
 ```bicep
-// Traffic Manager for global load balancing
+// Separate App Service topology, not the Container Apps declarations above
 resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = {
   name: trafficManagerProfileName
   location: 'global'
@@ -686,6 +681,8 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
+Pembolehubah persekitaran tidak memilih lokasi sumber. IaC mesti memperuntukkan hos serantau yang berbeza dan mengikat setiap perkhidmatan dengan tag `resourceName` atau `azd-service-name`. Contoh Pengurus Trafik adalah **topologi App Service berlainan** (`primaryAppService`/`secondaryAppService`), bukan penghalaan untuk deklarasi Container Apps. Container Apps memerlukan titik akhir luaran/pintu depan, penghalaan TLS/domain tersuai yang dikonfigurasi dengan betul, dan probe kesihatan.
+
 ### 2. Sandaran dan Pemulihan Data
 
 ```bicep
@@ -706,40 +703,13 @@ resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
   }
 }
 
-// Backup policy for AI models and data
-resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023-05-01' = {
-  parent: backupVault
-  name: 'ai-data-backup-policy'
-  properties: {
-    policyRules: [
-      {
-        backupParameters: {
-          backupType: 'Full'
-          objectType: 'AzureBackupParams'
-        }
-        trigger: {
-          schedule: {
-            repeatingTimeIntervals: [
-              'R/2024-01-01T02:00:00+00:00/P1D'  // Daily at 2 AM
-            ]
-          }
-          objectType: 'ScheduleBasedTriggerContext'
-        }
-        dataStore: {
-          datastoreType: 'VaultStore'
-          objectType: 'DataStoreInfoBase'
-        }
-        name: 'BackupDaily'
-        objectType: 'AzureBackupRule'
-      }
-    ]
-  }
-}
 ```
+
+Penyangkutan sahaja tidak membuat sandaran apa-apa. Konfigurasikan **dasar dan contoh sandaran yang disokong khusus beban kerja**, kebenaran sumber, pengekalan, dan ujian pemulihan menggunakan [matriks sokongan Sandaran Azure](https://learn.microsoft.com/azure/backup/backup-support-matrix). Tiada dasar sandaran Azure generik untuk penyebaran model Azure OpenAI yang dihoskan. Simpan definisi penyebaran infrastruktur/model dalam kawalan sumber; lindungi dokumen dimuat naik, data aplikasi, dan artifak pelarasan halus menggunakan ciri sandaran/eksport yang disokong oleh setiap perkhidmatan sokongan. Takrif dan uji RPO/RTO secara eksplisit.
 
 ## Integrasi DevOps dan CI/CD
 
-### 1. Alur Kerja GitHub Actions
+### 1. Aliran Kerja GitHub Actions
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -775,151 +745,123 @@ jobs:
           python scripts/test_ai_safety.py
           python scripts/validate_prompts.py
 
-  deploy-staging:
-    needs: test
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Staging
-        run: |
-          azd env select staging
-          azd deploy
-
-  deploy-production:
-    needs: test
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Production
-        run: |
-          azd env select production
-          azd deploy
-          
-      - name: Run Production Health Checks
-        run: |
-          python scripts/health_check.py --env production
 ```
+
+Ini adalah **bahagian ujian sahaja** aliran kerja dan menganggap anda telah mencipta `requirements.txt`, `tests/`, dan dua skrip keselamatan. Tambah tugasan penyediaan/penyebaran OIDC yang disahkan dari [Konfigurasi Saluran CI/CD](#cicd-pipeline-configuration), dengan `needs: test`, pemicu tolak/manual yang dipercayai, dan persekitaran GitHub yang dilindungi. Jangan sebarkan kod permintaan tarik tidak dipercayai dengan kelayakan awan. Runner baru tiada persekitaran AZD tempatan yang dipilih; sediakan input persekitaran/langganan/lokasi dan gunakan `azd auth login`, bukan hanya `azure/login`.
 
 ### 2. Pengesahan Infrastruktur
 
 ```bash
 # scripts/validate_infrastructure.sh
 #!/bin/bash
+set -euo pipefail
 
 echo "Validating AI infrastructure deployment..."
 
-# Semak jika semua perkhidmatan yang diperlukan sedang berjalan
-services=("openai" "search" "storage" "keyvault")
-for service in "${services[@]}"; do
-    echo "Checking $service..."
-    if ! az resource list --resource-type "Microsoft.CognitiveServices/accounts" --query "[?contains(name, '$service')]" -o tsv; then
-        echo "ERROR: $service not found"
+# Requires Azure CLI login and the resource group selected explicitly.
+: "${AZURE_RESOURCE_GROUP:?Set AZURE_RESOURCE_GROUP}"
+: "${AZURE_OPENAI_NAME:?Set AZURE_OPENAI_NAME}"
+: "${AZURE_OPENAI_CHAT_DEPLOYMENT:?Set the actual deployment name}"
+
+# A successful empty list is not proof that resources exist.
+types=("Microsoft.CognitiveServices/accounts" "Microsoft.Search/searchServices"
+       "Microsoft.Storage/storageAccounts" "Microsoft.KeyVault/vaults")
+for resource_type in "${types[@]}"; do
+    count=$(az resource list --resource-group "$AZURE_RESOURCE_GROUP" \
+        --resource-type "$resource_type" --query "length(@)" -o tsv)
+    if [[ "$count" -lt 1 ]]; then
+        echo "ERROR: No $resource_type found in $AZURE_RESOURCE_GROUP"
         exit 1
     fi
 done
 
-# Sahkan penempatan model OpenAI
+# Validate OpenAI model deployments
 echo "Validating OpenAI model deployments..."
-models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-4.1-mini"* ]]; then
-  echo "ERROR: Required model gpt-4.1-mini not deployed"
+state=$(az cognitiveservices account deployment show \
+  --name "$AZURE_OPENAI_NAME" --resource-group "$AZURE_RESOURCE_GROUP" \
+  --deployment-name "$AZURE_OPENAI_CHAT_DEPLOYMENT" \
+  --query "properties.provisioningState" -o tsv)
+if [[ "$state" != "Succeeded" ]]; then
+    echo "ERROR: Required model deployment is not provisioned successfully"
     exit 1
 fi
 
-# Uji kesambungan perkhidmatan AI
-echo "Testing AI service connectivity..."
-python scripts/test_connectivity.py
-
 echo "Infrastructure validation completed successfully!"
 ```
+
+Dijangka: keluar sifar dan mesej selesai hanya apabila semua jenis dijangka wujud dan penyebaran model bernama diprovokasi. Ini memeriksa inventori/keadaan penyediaan, **bukan** kesihatan sumber, topologi tepat, RBAC, kebolehcapaian rangkaian, atau tingkah laku model. Sesuaikan jenis dijangka dengan seni bina anda, kemudian lakukan ujian kesediaan aplikasi yang disahkan berasingan.
 
 ## Senarai Semak Kesediaan Produksi
 
 ### Keselamatan ✅
 - [ ] Semua perkhidmatan menggunakan identiti terurus
 - [ ] Rahsia disimpan dalam Key Vault
-- [ ] Titik akhir peribadi dikonfigurasikan
+- [ ] Titik akhir peribadi dikonfigurasi
 - [ ] Kumpulan keselamatan rangkaian dilaksanakan
-- [ ] RBAC dengan hak istimewa paling rendah
-- [ ] WAF dihidupkan pada titik akhir awam
+- [ ] RBAC dengan keistimewaan minimum
+- [ ] WAF diaktifkan pada titik akhir awam
 
 ### Prestasi ✅
-- [ ] Auto-scaling dikonfigurasikan
-- [ ] Penyimpanan cache dilaksanakan
-- [ ] Pengimbangan beban ditetapkan
+- [ ] Penskalaan automatik dikonfigurasi
+- [ ] Caching dilaksanakan
+- [ ] Persediaan pengimbangan beban
 - [ ] CDN untuk kandungan statik
 - [ ] Pengumpulan sambungan pangkalan data
 - [ ] Pengoptimuman penggunaan token
 
 ### Pemantauan ✅
-- [ ] Application Insights dikonfigurasikan
-- [ ] Metrik tersuai ditakrifkan
-- [ ] Peraturan pemberitahuan disediakan
-- [ ] Paparan dicipta
+- [ ] Application Insights dikonfigurasi
+- [ ] Metrik tersuai ditakrif
+- [ ] Peraturan amaran disediakan
+- [ ] Papan pemuka dibuat
 - [ ] Pemeriksaan kesihatan dilaksanakan
-- [ ] Polisi penyimpanan log
+- [ ] Polisi pengekalan log
 
 ### Kebolehpercayaan ✅
-- [ ] Pengedaran pelbagai rantau
+- [ ] Penyebaran pelbagai wilayah
 - [ ] Pelan sandaran dan pemulihan
 - [ ] Pemutus litar dilaksanakan
 - [ ] Polisi cubaan semula dikonfigurasikan
-- [ ] Degradasi lancar
+- [ ] Kemerosotan anggun
 - [ ] Titik akhir pemeriksaan kesihatan
 
 ### Pengurusan Kos ✅
-- [ ] Amaran bajet dikonfigurasikan
-- [ ] Penentuan saiz sumber yang betul
-- [ ] Diskaun dev/test digunakan
-- [ ] Instans terhad dibeli
-- [ ] Paparan pemantauan kos
+- [ ] Amaran bajet dikonfigurasi
+- [ ] Saiz sumber yang sesuai
+- [ ] Diskaun dev/ujian digunakan
+- [ ] Pembelian instans terpelihara
+- [ ] Papan pemuka pemantauan kos
 - [ ] Kajian kos berkala
 
 ### Pematuhan ✅
-- [ ] Keperluan kediaman data dipatuhi
-- [ ] Perekodan audit diaktifkan
+- [ ] Keperluan kediaman data dipenuhi
+- [ ] Log audit diaktifkan
 - [ ] Polisi pematuhan digunakan
-- [ ] Asas keselamatan dilaksanakan
+- [ ] Garis dasar keselamatan dilaksanakan
 - [ ] Penilaian keselamatan berkala
 - [ ] Pelan tindak balas insiden
 
 ## Penanda Aras Prestasi
 
-### Metrik Produksi Tipikal
+### Sasaran Produksi Ilustratif
+
+Ini adalah contoh SLO untuk perundingan dan ujian beban, bukan penanda aras yang diukur atau jaminan. Kelewatan respons bergantung pada panjang model/output; perbelanjaan token bulanan bergantung pada trafik dan harga, bukan hanya kiraan token.
 
 | Metrik | Sasaran | Pemantauan |
-|--------|---------|------------|
+|--------|--------|------------|
 | **Masa Respons** | < 2 saat | Application Insights |
-| **Ketersediaan** | 99.9% | Pemantauan masa aktif |
+| **Kebolehcapaian** | 99.9% | Pemantauan masa aktif |
 | **Kadar Ralat** | < 0.1% | Log aplikasi |
-| **Penggunaan Token** | < $500/bulan | Pengurusan kos |
+| **Perbelanjaan Model** | < $500/bulan (belanjawan contoh) | Pengurusan kos |
 | **Pengguna Serentak** | 1000+ | Ujian beban |
 | **Masa Pemulihan** | < 1 jam | Ujian pemulihan bencana |
 
 ### Ujian Beban
 
+Berikut adalah lakaran antara muka untuk skrip ujian beban **yang mesti anda laksanakan**; repositori ini tidak menyediakan `scripts/load_test.py`. Tetapkan beban permintaan, pengesahan, beban kerja perwakilan, pernyataan latensi/ralat peratusan, dan had perbelanjaan dalam alat ujian beban pilihan anda sebelum menjalankannya:
+
 ```bash
-# Skrip ujian beban untuk aplikasi AI
+# Load testing script for AI applications
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -933,176 +875,269 @@ Berdasarkan maklum balas komuniti Microsoft Foundry Discord:
 
 ### Cadangan Teratas dari Komuniti:
 
-1. **Mula Kecil, Skala Secara Beransur-ansur**: Mulakan dengan SKU asas dan naikkan mengikut penggunaan sebenar
+1. **Mula Kecil, Skala Secara Beransur-ansur**: Mulakan dengan SKU asas dan skala naik berdasarkan penggunaan sebenar
 2. **Pantau Segalanya**: Sediakan pemantauan menyeluruh dari hari pertama
-3. **Automasi Keselamatan**: Gunakan infrastruktur sebagai kod untuk keselamatan konsisten
-4. **Uji Secara Menyeluruh**: Sertakan ujian khusus AI dalam alur kerja anda
-5. **Rancang Untuk Kos**: Pantau penggunaan token dan tetapkan amaran bajet awal
+3. **Automasi Keselamatan**: Gunakan infrastruktur sebagai kod untuk keselamatan yang konsisten
+4. **Uji Secara Teliti**: Sertakan ujian khusus AI dalam aliran kerja anda
+5. **Rancang untuk Kos**: Pantau penggunaan token dan tetapkan amaran bajet awal
 
-### Perangkap Lazim Untuk Dielakkan:
+### Perangkap Biasa yang Perlu Dielakkan:
 
-- ❌ Menulis keras kunci API dalam kod
-- ❌ Tidak menyediakan pemantauan yang tepat
+- ❌ Kunci API yang dihoskan keras dalam kod
+- ❌ Tidak menyediakan pemantauan yang betul
 - ❌ Mengabaikan pengoptimuman kos
 - ❌ Tidak menguji senario kegagalan
-- ❌ Mengendalikan tanpa pemeriksaan kesihatan
+- ❌ Melaksanakan tanpa pemeriksaan kesihatan
 
-## Perintah CLI AZD AI dan Sambungan
+## Perintah dan Sambungan AI AZD CLI
 
-AZD termasuk set perintah dan sambungan khusus AI yang berkembang yang mempermudah alur kerja AI produksi. Alat-alat ini merapatkan jurang antara pembangunan tempatan dan pengedaran produksi untuk beban kerja AI.
+AZD merangkumi set perintah dan sambungan khusus AI yang semakin berkembang yang memudahkan aliran kerja AI pengeluaran. Alat ini merapatkan jurang antara pembangunan tempatan dan pelaksanaan pengeluaran untuk beban kerja AI.
+
+> **Semakan pelepasan (2026-11-04):** Panduan CLI di bawah telah disemak terhadap pelepasan yang diterbitkan bagi `azd` **1.37.2**, `azure.ai.agents` **1.0.0-beta.23**, dan `azure.ai.evaluations` **1.0.0-beta.2**. Agen beta.23 memerlukan `azd >= 1.37.0`; penilaian beta.2 memerlukan `azd >= 1.33.0`. Gunakan sekurang-kurangnya 1.37.0 untuk aliran kerja gabungan. Ini adalah semakan dokumentasi/sumber, bukan pengesahan pelaksanaan Azure langsung.
 
 ### Sambungan AZD untuk AI
 
-AZD menggunakan sistem sambungan untuk menambah kemampuan khusus AI. Pasang dan urus sambungan dengan:
+AZD menggunakan sistem sambungan untuk menambah keupayaan khusus AI. Pasang dan urus sambungan dengan:
 
 ```bash
-# Senaraikan semua sambungan yang tersedia (termasuk AI)
+# List all available extensions (including AI)
 azd extension list
 
-# Periksa butiran sambungan yang dipasang
+# Inspect installed extension details
+azd version
 azd extension show azure.ai.agents
 
-# Pasang sambungan agen Foundry
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Pasang sambungan penalaan halus
+# Install the separate Foundry evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Pasang sambungan model tersuai
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Tingkatkan semua sambungan yang dipasang
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
-**Sambungan AI tersedia:**
+**Sambungan AI yang tersedia:**
 
 | Sambungan | Tujuan | Status |
 |-----------|---------|--------|
-| `azure.ai.agents` | Pengurusan Perkhidmatan Ejen Foundry | Pratonton |
-| `azure.ai.skills` | Kemahiran ejen boleh guna semula | Pratonton |
+| `azure.ai.agents` | Pengurusan Perkhidmatan Agen Foundry | Pratonton |
+| `azure.ai.evaluations` | Set data penilaian, penilai, kumpulan eval, dan larian | Pratonton |
+| `azure.ai.skills` | Kemahiran agen yang boleh digunakan semula | Pratonton |
 | `azure.ai.connections` | Sambungan Foundry (sumber data, alat) | Pratonton |
-| `azure.ai.finetune` | Penalaan halus model Foundry | Pratonton |
-| `azure.ai.models` | Model khusus Foundry | Pratonton |
-| `azure.coding-agent` | Konfigurasi ejen pengekodan | Tersedia |
+| `azure.ai.finetune` | Penalaan model Foundry | Pratonton |
+| `azure.ai.models` | Model tersuai Foundry | Pratonton |
+| `azure.coding-agent` | Konfigurasi agen pengaturcaraan | Tersedia |
 
-> Sambungan `azure.ai.agents` berkembang dengan pesat. Kursus ini disahkan terhadap versi `0.1.40-preview`. Jalankan `azd extension upgrade --all` untuk mengambil set perintah terkini, dan `azd extension show azure.ai.agents` untuk mengesahkan versi yang dipasang.
+> Jalankan `azd extension list --installed` dan `azd extension show azure.ai.evaluations` untuk memeriksa versi terpasang. Kemas kini teras CLI dahulu menggunakan [arahan pemasangan/kemas kini](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) (untuk pemasangan winget Windows: `winget upgrade Microsoft.Azd`), kemudian jalankan `azd extension upgrade --all`. Tiada perintah teras `azd upgrade`. Semak perubahan besar sebelum menaik taraf automasi pengeluaran; jangan anggap kemas kini sambungan mengekalkan format perintah atau konfigurasi lama.
+
+### Perubahan dan Pembaikan Pelepasan Terkini
+
+| Pelepasan | Apa yang berubah untuk kursus ini |
+|---------|------------------------------|
+| `azd 1.37.0` | Menambah API pelancaran-stabil dan membetulkan penyuntingan sambungan yang menulis semula tetapan `azure.yaml` yang tidak berkaitan. |
+| `azd 1.37.1` | Memperbaiki penyaluran Ctrl+C merentas sambungan dan membezakan pembatalan/timeout dari kegagalan umum. |
+| `azd 1.37.2` | Meningkatkan pengesahan penyediaan: amaran kritikal lalai kepada **Tidak**, gagal tanpa pengesahan dalam larian tanpa pengawasan, dan pembatalan melangkau kaitan pasca-penyediaan. Juga membetulkan nilai persekitaran tidak diselesaikan dalam senarai larangan Deployment Stacks apabila ciri alfa tersebut diaktifkan. |
+| Agen `beta.22` | Memindahkan penilaian ke `azd ai eval`, menukar pengoptimuman kepada API GA v1, memerlukan `toolboxes` jamak, dan memisahkan pengurus-harness, suara, dan opt-in pratonton jangka panjang. Membetulkan pemilihan model khusus persekitaran dan pengesahan alat. |
+| Agen `beta.23` | Mendedahkan `init --harness`; membetulkan output jawapan A2A 0.3, laluan/modul prompt-agent tidak sah merentas lapisan infrastruktur, diagnostik masa tamat pengaktifan, dan amaran RBAC pembangun yang disimpan. |
+| Penilaian `beta.2` | Memerlukan konfigurasi penilaian camelCase, menambah penyusunan perbualan statik/bersimulasi dan sumber fail tempatan eksplisit, serta membetulkan pengendalian identiti/versi set data, kiraan pintu kualiti, dan diagnostik larian gagal. |
+
+Masa tamat pengaktifan agen **tidak** membuktikan kegagalan pelaksanaan: periksa versi yang dicuba dan keadaannya sebelum mencuba semula. Amaran RBAC pembangun boleh kekal walaupun penyediaan berjaya; selesaikan akses yang hilang sebelum memanggil sebagai pembangun tersebut.
+
+Sumber: [pelepasan AZD](https://github.com/Azure/azure-dev/releases), [pelepasan agen beta.23](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [migrasi agen beta.22](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), dan [pelepasan penilaian beta.2](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
 
 **Apakah sambungan `skills` dan `connections` yang lebih baru?**
 
-Dua sambungan pratonton muncul bersama alat ejen dan patut difahami walaupun anda baru:
+Dua sambungan pratonton muncul bersama alat agen dan patut difahami walaupun sebagai pemula:
 
-- **`azure.ai.skills`** — Sebuah **kemahiran** adalah keupayaan boleh guna semula (alat atau tingkah laku yang dibungkus) yang boleh anda lampirkan ke satu atau lebih ejen sebagai ganti melaksanakan semula setiap kali. Fikirkan ia sebagai blok binaan berkongsi: definisikan kemahiran "carian dokumen" atau "pemeriksaan pesanan" sekali, kemudian gunakan semula di antara ejen. Ini mengekalkan konsistensi sistem multi-ejen (Bab 5) dan mengelakkan salin tampal.
-- **`azure.ai.connections`** — Sebuah **sambungan** adalah pautan terurus dari projek Foundry anda ke sumber luar yang diperlukan ejen anda—sumber data (seperti Azure AI Search), titik akhir alat, atau perkhidmatan lain. Sambungan memusatkan *di mana* dan *bagaimana* ejen mengakses data, supaya kelayakan dan titik akhir hidup dalam satu tempat yang dikawal dan bukan tersebar dalam kod.
+- **`azure.ai.skills`** — **kemahiran** adalah keupayaan yang boleh digunakan semula (alat atau tingkah laku yang dibungkus) yang anda boleh lampirkan pada satu atau lebih agen daripada melaksanakannya berulang kali. Anggap ia sebagai blok binaan bersama: definisikan kemahiran "cari dokumen" atau "semak pesanan" sekali, kemudian guna semula merentas agen. Ini memastikan sistem multi-agen (Bab 5) konsisten dan mengelakkan salin-tampal.
+- **`azure.ai.connections`** — **sambungan** adalah pautan yang diurus dari projek Foundry anda ke sumber luaran yang diperlukan agen anda—sumber data (seperti Azure AI Search), titik akhir alat, atau perkhidmatan lain. Sambungan menempatkan *di mana* dan *bagaimana* agen mengakses data, jadi kelayakan dan titik akhir tinggal di satu tempat yang dikawal dan bukan berselerak dalam kod.
 
-Anda tidak perlu ini untuk mengedarkan ejen pertama anda—teruskan dengan `azure.ai.agents` semasa belajar. Gunakan `skills` apabila anda mendapati diri mengulangi alat sama bagi ejen berlainan, dan `connections` apabila beberapa ejen berkongsi sumber data yang sama.
+Anda tidak memerlukan ini untuk melaksanakan agen pertama anda—teruskan dengan `azure.ai.agents` semasa belajar. Gunakan `skills` apabila anda mendapati diri anda menyalin alat yang sama merentas agen, dan `connections` apabila beberapa agen berkongsi sumber data yang sama.
 
-### Memulakan Projek Ejen dengan `azd ai agent init`
+### Memulakan Projek Agen dengan `azd ai agent init`
 
-Perintah `azd ai agent init` membina rangka kerja projek ejen AI sedia produksi yang bersambung dengan Perkhidmatan Ejen Microsoft Foundry:
+Perintah `azd ai agent init` membina kerangka projek agen Microsoft Foundry. Gunakan templat projek `azure.yaml` semasa, bukan manifest agen legacy yang tersirat:
 
 ```bash
-# Mulakan projek ejen baru dari manifesto ejen
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize a new agent project from a local project template
+azd ai agent init --template ./templates/support-agent/azure.yaml
 
-# Mulakan dan sasarkan projek Foundry tertentu
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Initialize and target a specific Foundry project
+azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <foundry-project-id>
 
-# Mulakan dengan direktori sumber tersuai
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
-
-# Sasarkan Container Apps sebagai hos
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt the template into a different directory
+azd ai agent init --template ./templates/support-agent/azure.yaml --src ./agents/my-agent
 ```
 
-**Penanda utama:**
+**Bendera utama:**
 
-| Penanda | Keterangan |
-|---------|------------|
-| `-m, --manifest` | Laluan atau URI kepada manifest ejen untuk ditambah ke projek anda |
+| Bendera | Penerangan |
+|------|-------------|
+| `-t, --template` | Laluan atau URI GitHub yang disokong kepada dokumen projek `azure.yaml` |
 | `-p, --project-id` | ID Projek Microsoft Foundry sedia ada untuk persekitaran azd anda |
-| `-s, --src` | Direktori untuk memuat turun definisi ejen (default ke `src/<agent-id>`) |
-| `--host` | Menimpa hos lalai (contoh: `containerapp`) |
-| `-e, --environment` | Persekitaran azd yang hendak digunakan |
+| `-s, --src` | Direktori sumber untuk agen yang dijana, atau direktori sasaran semasa mengadaptasi projek |
+| `--kind` | Inisialisasi agen `hosted`, `prompt`, atau pratonton `prompt-voice` |
+| `--harness` | Harness pelaksanaan opsional untuk `--kind prompt`; memerlukan opt-in pratonton |
+| `-e, --environment` | Persekitaran azd untuk digunakan |
 
-**Petua produksi**: Gunakan `--project-id` untuk sambungkan terus ke projek Foundry sedia ada, memastikan kod ejen dan sumber awan anda terikat sejak mula.
+`--manifest`/`-m` adalah alias yang tidak disokong untuk `--template`/`-t`; menamakan semula bendera tidak menukar manifest lama kepada dokumen projek semasa. `--host containerapp` bukan bendera agen-init semasa. Untuk aplikasi Container Apps biasa, gunakan `azd init --template` dengan templat yang mengisytiharkan `host: containerapp`.
 
-### Mengurus Kitaran Hayat Ejen
+Untuk projek sedia ada dengan tepat satu perkhidmatan `azure.ai.project`, `azd ai agent add support-agent --file ./agents/support-agent.yaml` menambah atau mengemas kini definisi agen langsung tanpa penyediaan atau pelaksanaan. Perintah runtime menolak definisi lama tersirat `agent.yaml`/AgentManifest dan definisi perkhidmatan bersarang `config:`; migrasikan ke perkhidmatan `azure.ai.agent` semasa. Apabila init mencetak langkah seterusnya `cd`, jalankan ia sebelum `azd up`: init tidak menukar direktori shell anda.
 
-Selain `init`, sambungan `azure.ai.agents` menyediakan perintah untuk kitaran hayat penuh ejen yang dihoskan—ujian, penilaian, pengoptimuman, dan pemberhentian:
+**Petua pengeluaran**: Gunakan `--project-id` untuk menyambung terus ke projek Foundry sedia ada, mengekalkan kod agen dan sumber awan anda dipautkan dari awal.
+
+#### Ciri Pratonton Pilihan
+
+Harness berkawal, suara, dan panggilan jangka panjang dilumpuhkan secara berasingan secara lalai. Tetapkan hanya suis untuk ciri yang anda perlukan dalam **persekitaran proses shell/CI**, bukan dengan `azd env set`:
+
+| Ciri | Pembolehubah persekitaran proses |
+|---------|------------------------------|
+| Harness berkawal (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
+| Suara (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
+| Panggilan jangka panjang | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
+
+Contohnya, gunakan `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` dalam Bash atau `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` dalam PowerShell sebelum menjalankan perintah berkaitan. Satu suis tidak menghidupkan yang lain. Lihat [README agen yang dilepaskan](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) untuk semua suis pratonton dan batasan.
+
+### Mengurus Kitaran Hayat Agen
+
+Gunakan `azure.ai.agents` untuk menguji, memeriksa, mengoptimumkan, dan mengecualikan agen, dan sambungan `azure.ai.evaluations` yang berasingan untuk mengukur kualiti:
 
 ```bash
-# Panggil ejen yang telah dikerahkan dan lihat masa tindak balas pelayan
-# (jumlah kelewatan dan masa untuk bait pertama)
+# Invoke a deployed agent and view server response timing
+# (total latency and time to first byte)
 azd ai agent invoke
 
-# Tunjukkan konfigurasi titik hujung langsung sebelum menukarnya
+# Show the live endpoint configuration before changing it
 azd ai agent endpoint show
 
-# Hasilkan set data penilaian untuk ejen
-azd ai agent eval generate --dataset ./eval/dataset.jsonl
-
-# Optimumkan arahan ejen berdasarkan data penilaian anda
-# (memerlukan optimization_model dalam projek ejen)
-azd ai agent optimize
-
-# Muat turun sumber yang dikerahkan bagi ejen yang dihoskan berasaskan kod
-# (dengan pengesahan SHA-256)
+# Download the deployed source of a code-based hosted agent
+# (with SHA-256 verification)
 azd ai agent code download
 
-# Padamkan ejen yang dihoskan dan semua versinya
-# (--force menamatkan sesi aktif)
+# Delete a hosted agent and all of its versions
+# (--force terminates active sessions)
 azd ai agent delete --force
 ```
 
 **Kitaran hayat sekilas:**
 
-| Tahap | Perintah | Kegunaan produksi |
-|-------|----------|-------------------|
-| Uji | `azd ai agent invoke` | Sahkan respons dan ukur kelewatan sebelum lepasan |
-| Periksa | `azd ai agent endpoint show` | Semak autentikasi/konfigurasi titik akhir; kenal pasti perubahan pecah awal |
-| Ukur | `azd ai agent eval generate` | Bina set penilaian boleh ulang dari jejak sebenar |
-| Baiki | `azd ai agent optimize` | Laraskan arahan berdasarkan kualiti diukur |
-| Pulih | `azd ai agent code download` | Dapatkan sumber terpasang tepat untuk audit/pembalikan |
-| Berhenti | `azd ai agent delete --force` | Hapus ejen dan versinya dengan bersih |
+| Peringkat | Perintah | Penggunaan pengeluaran |
+|-------|---------|----------------|
+| Uji | `azd ai agent invoke` | Sahkan respons dan ukur latensi sebelum pelepasan |
+| Periksa | `azd ai agent endpoint show` | Semak auth/config titik akhir; kesan perubahan besar awal |
+| Ukur | `azd ai eval init`, `generate`, `run start` | Takrif, laksana, dan jalankan penilaian berulang |
+| Tingkatkan | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Gunakan semula penilaian yang serasi untuk mengoptimumkan agen |
+| Pulihkan | `azd ai agent code download` | Dapatkan semula sumber yang dikerahkan tepat untuk audit/rollback |
+| Pencen | `azd ai agent delete --force` | Buka agen dan versinya dengan bersih |
 
-> Ini adalah perintah pratonton dan mungkin berubah antara keluaran sambungan. Jalankan `azd ai agent --help` untuk lihat subperintah tepat dalam versi yang dipasang anda.
+> Ini adalah perintah pratonton dan mungkin berubah antara pelepasan sambungan. Jalankan `azd ai agent --help` untuk melihat subperintah tepat tersedia dalam versi yang dipasang.
 
-### Protokol Konteks Model (MCP) dengan `azd mcp`
-AZD termasuk sokongan pelayan MCP terbina dalam (Alpha), membolehkan ejen dan alat AI berinteraksi dengan sumber Azure anda melalui protokol piawai:
+`endpoint show` menyokong agen yang dihos, prompt, dan suara, tetapi kemas kini titik akhir hanya dihos; workflow agen tidak disokong. Muat turun kod dan contoh pencen agen dihos di atas bukan operasi generik untuk setiap jenis agen.
+
+#### Migrasi Penilaian dan Pemeriksaan Kualiti
+
+Bermula dengan agen **1.0.0-beta.22 (2026-10-23)**, perintah legacy `azd ai agent eval` menyediakan panduan migrasi dan bukannya aliran kerja penilaian lama. Jangan salin contoh lama `eval generate --dataset ...`: penilaian kini berada di bawah **`azd ai eval`**.
+
+Dalam projek agen yang diinisialisasi, sahkan dengan `azd auth login`, sahkan persekitaran/projek Foundry yang dipilih, dan pasang `azure.ai.evaluations`. Pelaksanaan model hakim diperlukan untuk penilaian berasaskan model; penjanaan dan simulasi perbualan mungkin memerlukan pemilihan model sendiri dan turut mengenakan caj tambahan.
 
 ```bash
-# Mulakan pelayan MCP untuk projek anda
+# Scaffold evals/ and wire an azure.ai.eval service into azure.yaml
+azd ai eval init
+
+# Optionally synthesize a rubric and dataset from the agent
+azd ai eval generate
+
+# Review generated files, then register datasets, evaluators, and eval groups
+azd up
+
+# Start an evaluation and wait for its results
+azd ai eval run start --wait
+
+# Inspect runs and available test-case output
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+```
+
+Ikuti pilihan interaktif dan langkah seterusnya yang dicetak daripada menganggap aset yang dijana sudah didaftarkan. Konfigurasi penilaian biasanya terletak di `evals/azure.eval.yaml`, dirujuk oleh perkhidmatan `azure.ai.eval` dalam `azure.yaml`. Kekunci adalah **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); kekunci konfigurasi lama snake_case ditolak. Laluan dalam konfigurasi rujukan menyelesai secara relatif kepada fail itu, bukan akar repositori.
+
+Untuk penilaian perbualan, pilih **statik** untuk menilai transkrip lengkap tanpa memanggil agen, atau **simulasi** untuk menjana perbualan dari biji scenario. Simulasi memerlukan sasaran agen, model simulator, dan pemilihan model hakim berasingan. Untuk perintah tanpa pengawasan, sediakan input yang disenaraikan oleh `azd ai eval init --help` dan `azd ai eval generate --help`; jangan anggap model penjanaan juga adalah hakim atau simulator.
+
+Untuk CI, konfigurasikan polisi kualiti eksplisit menggunakan `azd ai eval run start --help` (`--fail-on`) dan anggap keluar hos bukan sifar sebagai kegagalan. Larian selesai tidak secara automatik lulus kualiti. Semak baris gagal/rosak dan diagnostik; kekurangan atau ketidakkonsistenan kiraan keputusan bukan bukti kejayaan. Dataset yang berdaftar mengekalkan identiti/version perkhidmatan; `--max-samples` tidak boleh subset dataset berdaftar. Terbitkan dataset yang lebih kecil secara sengaja, atau gunakan sumber fail tempatan yang disokong.
+
+```bash
+# Example CI policy: at least 90% of all test cases must pass
+azd ai eval run start --wait --fail-on "pass-rate=0.9"
+```
+
+Pintu kadar lulus menggunakan kes ujian yang lulus dibahagi dengan jumlah kes ujian; baris yang gagal, rosak, dilangkau, dan tidak lulus mengira terhadapnya. Jangan gabungkan pintu dengan `--no-wait`, yang kembali sebelum keputusan tersedia.
+
+#### Migrasi Konfigurasi Pengoptimuman
+
+Pengoptimuman kini menggunakan API GA v1. Untuk guna semula penilaian **peringkat giliran, disokong dataset** yang serasi dari aliran kerja baru:
+
+```bash
+# Replace placeholders with the evaluation name and optimizer model deployment
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+`--eval` memilih penilaian; `--eval-config` memilih fail konfigurasi (termasuk definisi berpandukan fail). `--config` sebaliknya mengambil **permintaan API pengoptimuman bebas berdiri** dalam YAML atau JSON. Jangan hantar `eval.yaml` agen lama atau `azure.eval.yaml` baru kepada `--config`, dan jangan gabungkan `--config` dengan `--eval`/`--eval-config`. Penilaian perbualan, berpandukan jejak, atau simulasi tidak boleh dipertukarkan dengan pintasan pengoptimuman berpandukan dataset; gunakan format permintaan pengoptimuman yang disokong untuk senario tersebut. Semak calon-calon sebelum menerapkan atau menggunakan mereka.
+
+Lihat [rujukan penilaian untuk versi yang dikaji semula](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) dan [sumber perintah pengoptimuman untuk versi yang dikaji semula](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) untuk pilihan tepat.
+
+#### Pratonton Penggunaan Agen Hos Baca Sahaja
+
+Untuk persekitaran sedia ada yang terikat pada Foundry dengan perkhidmatan `azure.ai.agent` yang bersatu bagi `kind: hosted`, bandingkan konfigurasi yang disokong sebelum penerapan:
+
+```bash
+azd deploy <service-name> --preview --no-prompt
+```
+
+Pratonton ini tidak memasang agen. Ia bukan perbezaan lengkap infrastruktur/sekuriti: agen prompt/suara/aliran kerja, susun atur konfigurasi lama, dan beberapa tetapan hos adalah di luar skopnya. Keputusan `unknown` bukanlah kelulusan untuk menerapkan. Tiada perintah `azd ai agent deploy` atau agen `--dry-run` bebas berdiri; gunakan aliran kerja pemasangan teras.
+
+### Protokol Konteks Model (MCP) dengan `azd mcp`
+
+AZD termasuk sokongan pelayan MCP terbina dalam (Alpha), membolehkan agen dan alat AI berinteraksi dengan sumber Azure anda melalui protokol standard:
+
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# Semak semula peraturan persetujuan Copilot semasa untuk pelaksanaan alat
+# Review current Copilot consent rules for tool execution
 azd copilot consent list
 ```
 
-Pelayan MCP mendedahkan konteks projek azd anda—persekitaran, perkhidmatan, dan sumber Azure—kepada alat pembangunan yang dikuasakan AI. Ini membolehkan:
+Pelayan MCP mendedahkan konteks projek azd anda—persekitaran, perkhidmatan, dan sumber Azure—kepada alat pembangunan berkuasa AI. Ini membolehkan:
 
-- **Penggunaan AI dalam penyebaran**: Benarkan ejen pengekodan untuk bertanya tentang keadaan projek anda dan mencetuskan penyebaran
-- **Penemuan sumber**: Alat AI boleh menemui sumber Azure yang digunakan oleh projek anda
-- **Pengurusan persekitaran**: Ejen boleh beralih antara persekitaran pembangunan/persediaan/produksi
+- **Pemasangan dibantu AI**: Benarkan agen kod menyoal keadaan projek anda dan mencetuskan pemasangan
+- **Penemuan sumber**: Alat AI boleh menemui sumber Azure yang digunakan projek anda
+- **Pengurusan persekitaran**: Agen boleh bertukar antara persekitaran membangun/ujian/produksi
 
 ### Penjanaan Infrastruktur dengan `azd infra generate`
 
-Untuk beban kerja AI produksi, anda boleh menjana dan menyesuaikan Infrastruktur sebagai Kod (IaC) daripada bergantung kepada penyediaan automatik:
+Untuk beban kerja AI produksi, anda boleh menjana dan menyesuaikan Infrastruktur sebagai Kod dan bukannya bergantung pada penyediaan automatik:
 
 ```bash
-# Hasilkan fail Bicep/Terraform daripada definisi projek anda
+# Generate supported infrastructure for this project type
 azd infra generate
 ```
 
-Ini menulis IaC ke cakera supaya anda boleh:
-- Menyemak dan mengaudit infrastruktur sebelum penyebaran
-- Menambah polisi keselamatan khas (peraturan rangkaian, titik akhir peribadi)
-- Mengintegrasikan dengan proses semakan IaC sedia ada
-- Memantau perubahan infrastruktur secara berasingan daripada kod aplikasi
+Sokongan bergantung pada projek/hos dan penyedia yang dipasang; ini bukan perintah penyongsangan umum untuk sumber Azure sewenang-wenangnya atau janji untuk menjana kedua-dua Bicep dan Terraform. Jalankan `azd infra generate --help` dan periksa format yang dijana. Jika disokong, menulis IaC ke cakera membolehkan anda:
+- Menyemak dan mengaudit infrastruktur sebelum pemasangan
+- Menambah polisi keselamatan tersuai (peraturan rangkaian, titik akhir persendirian)
+- Mengintegrasi dengan proses semakan IaC sedia ada
+- Mengawal versi perubahan infrastruktur secara berasingan dari kod aplikasi
 
-### Kait Hayat Produksi
+### Lekuk Kitaran Hayat Produksi
 
-Kait AZD membolehkan anda menyuntik logik tersuai pada setiap peringkat hayat penyebaran—penting untuk aliran kerja AI produksi:
+Lekuk AZD membolehkan anda menyuntik logik tersuai pada setiap peringkat kitaran hayat pemasangan—penting untuk aliran kerja AI produksi:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1113,7 +1148,7 @@ hooks:
     run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
   postprovision:
     shell: sh
-    run: scripts/configure-networking.sh  # Set up private endpoints
+    run: scripts/verify-networking.sh  # Verify IaC-provisioned private connectivity
   predeploy:
     shell: sh
     run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
@@ -1131,40 +1166,40 @@ services:
 ```
 
 ```bash
-# Jalankan hook tertentu secara manual semasa pembangunan
+# Run a specific hook manually during development
 azd hooks run predeploy
 ```
 
-**Kait produksi yang disyorkan untuk beban kerja AI:**
+**Lekuk produksi yang disyorkan untuk beban kerja AI:**
 
-| Kait | Kes Penggunaan |
+| Lekuk | Kes Penggunaan |
 |------|----------|
 | `preprovision` | Sahkan kuota langganan untuk kapasiti model AI |
-| `postprovision` | Konfigurasikan titik akhir peribadi, sebar berat model |
-| `predeploy` | Jalankan ujian keselamatan AI, sahkan templat arahan |
-| `postdeploy` | Uji respons ejen secara ringkas, periksa sambungan model |
+| `postprovision` | Sahkan sambungan persendirian dan keluaran sumber yang diperlukan |
+| `predeploy` | Jalankan ujian keselamatan AI, sahkan templat prompt |
+| `postdeploy` | Ujian respons agen, sahkan sambungan model |
 
-### Konfigurasi Saluran CI/CD
+### Konfigurasi Paip CI/CD
 
-Gunakan `azd pipeline config` untuk menyambungkan projek anda ke GitHub Actions atau Azure Pipelines dengan pengesahan Azure yang selamat:
+Gunakan `azd pipeline config` untuk menyambungkan projek anda ke GitHub Actions atau Azure Pipelines dengan pengesahan Azure selamat:
 
 ```bash
-# Konfigurasikan saluran paip CI/CD (interaktif)
+# Configure CI/CD pipeline (interactive)
 azd pipeline config
 
-# Konfigurasikan dengan penyedia tertentu
+# Configure with a specific provider
 azd pipeline config --provider github
 ```
 
 Perintah ini:
-- Membuat prinsip perkhidmatan dengan akses least-privilege
-- Menyediakan kelayakan persekutuan (tiada rahsia disimpan)
-- Menjana atau mengemas kini fail definisi saluran anda
-- Tetapkan pemboleh ubah persekitaran yang diperlukan dalam sistem CI/CD anda
+- Mencipta atau mengkonfigurasi identiti paip; semak skop peranan/kebenaran yang dijana dan bukannya menganggap keistimewaan paling minimum
+- Mengkonfigurasi kelayakan federasi (tiada rahsia yang disimpan)
+- Menjana atau mengemas kini fail definisi paip anda
+- Menetapkan pemboleh ubah persekitaran yang diperlukan dalam sistem CI/CD anda
 
-#### Langkah demi langkah: saluran GitHub Actions pertama anda
+#### Langkah demi langkah: paip GitHub Actions pertama anda
 
-Berikut adalah panduan penuh dari projek azd yang berfungsi kepada penyebaran automatik setiap kali push.
+Berikut ialah panduan penuh dari projek azd yang berfungsi hingga pemasangan automatik pada setiap tolak.
 
 **1. Pastikan projek anda berada di GitHub**
 
@@ -1175,21 +1210,21 @@ git commit -m "Initial azd project"
 gh repo create my-ai-app --private --source=. --push
 ```
 
-**2. Jalankan konfigurasi saluran**
+**2. Jalankan konfigurasi paip**
 
 ```bash
 azd pipeline config --provider github
 ```
 
 azd akan, secara interaktif:
-- Tanya langganan Azure dan persekitaran yang hendak disasarkan
-- Membuat pendaftaran aplikasi Entra **+ prinsip perkhidmatan** untuk saluran ini
-- Sediakan **kelayakan persekutuan (OIDC)**—supaya GitHub mengesahkan ke Azure dengan token jangka pendek dan **tiada rahsia disimpan**
+- Tanya langganan dan persekitaran Azure yang hendak disasarkan
+- Mencipta **pendaftaran aplikasi + prinsipal perkhidmatan** Entra untuk paip
+- Menyediakan **kelayakan federasi (OIDC)** — supaya GitHub mengesahkan kepada Azure dengan token jangka pendek dan **tiada rahsia disimpan**
 - Tolak **pemboleh ubah** yang diperlukan ke repo GitHub anda (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
 
 **3. Fahami aliran kerja yang dijana**
 
-azd menambah `.github/workflows/azure-dev.yml`. Bahagian utama kelihatan seperti ini:
+Untuk templat yang disokong, konfigurasikan/semak `.github/workflows/azure-dev.yml`. Bahagian utama kelihatan seperti ini (templat mesti menyediakan rantaian alat dan parameter persekitaran aplikasi):
 
 ```yaml
 # .github/workflows/azure-dev.yml
@@ -1226,39 +1261,39 @@ jobs:
 **4. Sahkan ia berfungsi**
 
 ```bash
-# Tolak perubahan untuk mencetuskan saluran paip
+# Push a change to trigger the pipeline
 git commit -am "Trigger pipeline" --allow-empty
 git push
 ```
 
-Buka tab **Actions** dalam repo GitHub anda dan tonton aliran kerja menjalankan `azd provision` dan `azd deploy` secara automatik.
+Buka tab **Actions** di repo GitHub anda dan tonton aliran kerja berjalan `azd provision` dan `azd deploy` secara automatik.
 
-> **Mengapa kelayakan persekutuan penting:** saluran lama menyimpan rahsia klien di GitHub. Kelayakan persekutuan OIDC menghapuskan rahsia itu sepenuhnya—GitHub meminta token jangka pendek pada masa jalan, yang lebih selamat dan tiada keperluan untuk putar atau bocor. Ini adalah tetapan lalai `azd pipeline config`.
+> **Mengapa kelayakan federasi penting:** paip lama menyimpan rahsia klien dalam GitHub. Kelayakan federasi OIDC mengeluarkan rahsia itu sepenuhnya—GitHub meminta token jangka pendek semasa masa jalan, yang lebih selamat dan tiada yang perlu diputar atau bocor. Ini adalah default yang `azd pipeline config` sediakan.
 
-> **Rahsia vs. pemboleh ubah:** pengecam bukan sensitif (`AZURE_CLIENT_ID`, dll.) diletakkan dalam **pemboleh ubah** repo. Jika aplikasi anda benar-benar memerlukan rahsia ketika binaan, tambahkan sebagai **rahsia** GitHub dan rujuk dengan `${{ secrets.NAME }}`—tetapi lebih suka Key Vault + identiti terurus ketika masa jalan (lihat [Bab 3](../chapter-03-configuration/authsecurity.md)).
+> **Rahsia vs. pemboleh ubah:** pengecam tidak sensitif (`AZURE_CLIENT_ID`, dll.) dimasukkan dalam **pemboleh ubah** repo. Jika aplikasi anda benar-benar memerlukan rahsia semasa binaan, tambahkannya sebagai **rahsia** GitHub dan rujuk menggunakan `${{ secrets.NAME }}` — tetapi lebih baik gunakan Key Vault + identiti yang diuruskan semasa masa jalan (lihat [Bab 3](../chapter-03-configuration/authsecurity.md)).
 
-**Aliran kerja produksi dengan konfigurasi saluran:**
+**Aliran kerja produksi dengan konfigurasi paip:**
 
 ```bash
-# 1. Sediakan persekitaran pengeluaran
+# 1. Set up production environment
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. Konfigurasikan saluran paip
+# 2. Configure the pipeline
 azd pipeline config --provider github
 
-# 3. Saluran paip menjalankan azd deploy pada setiap push ke main
+# 3. Review the generated trigger, provisioning/deployment steps, and approvals
 ```
 
-#### Langkah demi langkah: Pipelines Azure DevOps
+#### Langkah demi langkah: Azure DevOps Pipelines
 
-Lebih suka Azure DevOps berbanding GitHub Actions? azd menyokongnya secara asli dengan penyedia `azdo`. Alirannya hampir sama—azd menjana fail saluran, membuat sambungan servis, dan menyediakan pengesahan.
+Lebih suka Azure DevOps berbanding GitHub Actions? azd menyokongnya secara asli dengan penyedia `azdo`. Alurannya hampir sama—azd menjana fail paip, mencipta sambungan perkhidmatan, dan menghubungkan pengesahan.
 
-**1. Pastikan anda ada projek Azure DevOps**
+**1. Pastikan anda mempunyai projek Azure DevOps**
 
-Anda perlukan organisasi dan projek di `https://dev.azure.com/<your-org>`. Jangkitkan Token Akses Peribadi (PAT) dengan skop **Build (Baca & jalankan)**, **Code (Baca & tulis)**, dan **Service Connections (Baca, soal & urus)**—azd akan minta anda memasukkannya.
+Anda memerlukan organisasi dan projek di `https://dev.azure.com/<your-org>`. Jana Token Akses Peribadi (PAT) dengan skop **Build (Baca & laksanakan)**, **Code (Baca & tulis)**, dan **Service Connections (Baca, soal & urus)** — azd akan meminta anda untuk ini.
 
-**2. Konfigurasikan saluran**
+**2. Konfigurasikan paip**
 
 ```bash
 azd pipeline config --provider azdo
@@ -1266,16 +1301,16 @@ azd pipeline config --provider azdo
 
 azd akan:
 - Tanya organisasi dan projek Azure DevOps anda
-- Membuat (atau guna semula) **sambungan perkhidmatan** ke Azure menggunakan prinsip perkhidmatan
-- Konfigurasikan **federasi identiti beban kerja (OIDC)** supaya tiada rahsia klien disimpan
-- Komit definisi saluran `azure-dev.yml` ke repo anda
+- Mencipta (atau menggunakan semula) **sambungan perkhidmatan** ke Azure menggunakan prinsipal perkhidmatan
+- Konfigurasikan **persekutuan identiti beban kerja (OIDC)** supaya tiada rahsia klien disimpan
+- Konfigurasikan definisi paip (biasanya `.azdo/pipelines/azure-dev.yml`) dari templat paip projek
 
-**3. Semak `azure-dev.yml` yang dijana**
+**3. Semak paip yang dijana**
 
-azd menulis saluran yang menyediakan dan menyebar setiap kali push ke `main`:
+Gunakan paip yang dijana projek, termasuk **sambungan perkhidmatan Azure dan langkah pengesahan AZD**. Panduan rasmi [persediaan Azure Pipelines](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) menunjukkan fragmen pemasangan di bawah; ini **hanya pemasangan**, bukan aliran kerja pemasangan dengan pengesahan yang berjalan:
 
 ```yaml
-# azure-dev.yml
+# .azdo/pipelines/azure-dev.yml (installer fragment only)
 trigger:
   - main
 
@@ -1283,57 +1318,45 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  - task: setup-azd@1
+  - task: setup-azd@0
     displayName: Install azd
-
-  - script: azd provision --no-prompt
-    displayName: Provision Infrastructure
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
-
-  - script: azd deploy --no-prompt
-    displayName: Deploy Application
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
 ```
 
-**4. Dari mana asal pemboleh ubah**
+Pasang peluasan AZD Azure DevOps jika tugas itu tidak tersedia dalam organisasi anda. Jangan salin langkah shell `azd provision`/`azd deploy` kosong tanpa pengesahan: mempunyai sambungan perkhidmatan yang dikonfigurasi tidak secara automatik log setiap proses ke dalam AZD. Ikuti log masuk OIDC dan konteks tugas yang dibenarkan dalam templat yang dijana, dan sediakan persekitaran/langganan/lokasi yang dipilih.
 
-azd menyimpan nilai persekitaran (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) sebagai **kumpulan pemboleh ubah** dalam Azure DevOps supaya saluran dapat membacanya. Anda boleh lihat dan edit di bawah **Pipelines → Library**.
+**4. Dari mana pemboleh ubah datang**
 
-> **Manfaat OIDC sama seperti GitHub:** penyedia `azdo` juga secara lalai konfigurasi federasi identiti beban kerja, jadi tiada rahsia klien disimpan dalam sambungan perkhidmatan—Azure DevOps bertukar token jangka pendek masa jalan. Gunakan `--auth-type client-credentials` hanya jika organisasi anda belum boleh guna OIDC.
+azd menyimpan nilai persekitaran (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) sebagai **kumpulan pemboleh ubah** dalam Azure DevOps supaya paip boleh membacanya. Anda boleh melihat dan mengeditnya di bawah **Pipelines → Library**.
 
-**5. Jalankan ia**
+> **Manfaat OIDC sama seperti GitHub:** penyedia `azdo` juga mengkonfigurasi persekutuan identiti beban kerja secara default, jadi tiada rahsia klien disimpan dalam sambungan perkhidmatan—Azure DevOps menukar token jangka pendek semasa masa jalan. Hantar `--auth-type client-credentials` hanya jika organisasi anda belum boleh menggunakan OIDC.
+
+**5. Jalankannya**
 
 ```bash
 git commit -am "Add Azure DevOps pipeline" --allow-empty
 git push
 ```
 
-Buka **Pipelines** dalam Azure DevOps untuk tonton `azd provision` dan `azd deploy` berjalan.
+Buka **Pipelines** dalam Azure DevOps untuk menonton `azd provision` dan `azd deploy` berjalan.
 
 ### Menambah Komponen dengan `azd add`
 
 Tambah perkhidmatan Azure secara berperingkat ke projek sedia ada:
 
 ```bash
-# Tambah komponen perkhidmatan baru secara interaktif
+# Add a new service component interactively
 azd add
 ```
 
-Ini sangat berguna untuk memperluas aplikasi AI produksi—contohnya, menambah perkhidmatan carian vektor, titik akhir ejen baru, atau komponen pemantauan ke penyebaran sedia ada.
+Ini sangat berguna untuk mengembangkan aplikasi AI produksi—contohnya, menambah perkhidmatan carian vektor, titik akhir agen baru, atau komponen pemantauan ke pemasangan sedia ada.
 
 ## Sumber Tambahan
 
-- **Kerangka Kerja Azure Well-Architected**: [Panduan beban kerja AI](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure Well-Architected Framework**: [Panduan beban kerja AI](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Dokumentasi Microsoft Foundry**: [Dokumen rasmi](https://learn.microsoft.com/azure/ai-studio/)
 - **Templat Komuniti**: [Contoh Azure](https://github.com/Azure-Samples)
-- **Komuniti Discord**: [Saluran #Azure](https://discord.gg/microsoft-azure)
-- **Kemahiran Ejen untuk Azure**: [microsoft/github-copilot-for-azure di skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 kemahiran ejen terbuka untuk Azure AI, Foundry, penyebaran, pengoptimuman kos, dan diagnostik. Pasang dalam editor anda:
+- **Komuniti Discord**: [saluran #Azure](https://discord.gg/microsoft-azure)
+- **Kemahiran Agen untuk Azure**: [microsoft/github-copilot-for-azure di skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Kemahiran agen yang boleh digunakan semula untuk Azure AI, Foundry, pemasangan, pengoptimuman kos, dan diagnostik. Pasang dalam penyunting anda:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1343,9 +1366,9 @@ Ini sangat berguna untuk memperluas aplikasi AI produksi—contohnya, menambah p
 **Navigasi Bab:**
 - **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Semasa**: Bab 8 - Corak Produksi & Perusahaan
-- **⬅️ Bab Sebelumnya**: [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Berkaitan Juga**: [Makmal Bengkel AI](ai-workshop-lab.md)
-- **� Kursus Lengkap**: [AZD Untuk Pemula](../../README.md)
+- **⬅️ Bab Sebelum**: [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Juga Berkaitan**: [Makmal Bengkel AI](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Kursus Lengkap**: [AZD Untuk Pemula](../../README.md)
 
 **Ingat**: Beban kerja AI produksi memerlukan perancangan teliti, pemantauan, dan pengoptimuman berterusan. Mulakan dengan corak ini dan sesuaikan dengan keperluan khusus anda.
 

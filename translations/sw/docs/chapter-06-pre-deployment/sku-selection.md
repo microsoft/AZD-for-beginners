@@ -1,90 +1,92 @@
 # Mwongozo wa Uchaguzi wa SKU - Kuchagua Ngazi Sahihi za Huduma za Azure
 
 **Uelekezaji wa Sura:**
-- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
-- **📖 Sura ya Sasa**: Sura 6 - Uthibitishaji na Upangaji kabla ya Utoaji
-- **⬅️ Iliyotangulia**: [Upangaji wa Uwezo](capacity-planning.md)
-- **➡️ Ifuatayo**: [Ukaguzi wa Kabla ya Kutekeleza](preflight-checks.md)
-- **🚀 Sura Ifuatayo**: [Sura 7: Kutatua Matatizo](../chapter-07-troubleshooting/common-issues.md)
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wakizazi](../../README.md)
+- **📖 Sura Ya Sasa**: Sura ya 6 - Uthibitishaji & Mpango kabla ya Utekelezaji
+- **⬅️ Iliyotangulia**: [Mipango ya Uwezo](capacity-planning.md)
+- **➡️ Inayofuata**: [Ukaguzi wa Kabla ya Safari](preflight-checks.md)
+- **🚀 Sura Inayofuata**: [Sura 7: Utatuzi wa Matatizo](../chapter-07-troubleshooting/common-issues.md)
 
 ## Utangulizi
 
-Mwongozo huu kamili unakusaidia kuchagua SKU (Stock Keeping Units) za huduma za Azure zinazofaa kwa mazingira tofauti, mzigo wa kazi, na mahitaji. Jifunze kuchambua mahitaji ya utendaji, vigezo vya gharama, na mahitaji ya upanuaji ili kuchagua ngazi zinazofaa za huduma kwa utekelezaji wako wa Azure Developer CLI.
+Mwongozo huu wa kina utakusaidia kuchagua SKU bora zaidi za huduma za Azure (Stock Keeping Units) kwa mazingira tofauti, mizigo ya kazi, na mahitaji. Jifunze kuchambua mahitaji ya utendaji, kuzingatia gharama, na mahitaji ya upanuzi ili kuchagua ngazi za huduma zinazofaa zaidi kwa utekelezaji wa Azure Developer CLI.
 
 ## Malengo ya Kujifunza
 
 Kwa kumaliza mwongozo huu, utakuwa na uwezo wa:
-- Kuelewa dhana za SKU za Azure, mifumo ya bei, na tofauti za vipengele
-- Kumudu mikakati ya uchaguzi wa SKU kwa mazingira maalum kama maendeleo, hatua za kuandaa, na uzalishaji
-- Kuchambua mahitaji ya mzigo wa kazi na kuyaleta kwa ngazi sahihi za huduma
-- Kutoa mikakati ya uboreshaji wa gharama kupitia uchaguzi wa busara wa SKU
-- Kutumia mbinu za upimaji wa utendaji na uthibitisho kwa chaguzi za SKU
-- Kupanga mapendekezo ya kiotomatiki ya SKU na ufuatiliaji
+- Kuelewa dhana za SKU za Azure, miundo ya bei, na tofauti za vipengele
+- Kumiliki mbinu za uchaguzi wa SKU kulingana na mazingira kwa maendeleo, maandalizi, na uzalishaji
+- Kuchambua mahitaji ya mzigo wa kazi na kuyalinganisha na ngazi zinazofaa za huduma
+- Kutekeleza mbinu za uboreshaji wa gharama kupitia uchaguzi wa SKU wenye busara
+- Kutumia mbinu za upimaji na uthibitishaji wa utendaji kwa chaguzi za SKU
+- Kusanidi mapendekezo ya kiotomatiki ya SKU na ufuatiliaji
 
 ## Matokeo ya Kujifunza
 
-Baada ya kumaliza, utaweza:
-- Kuchagua SKU za huduma za Azure zinazofaa kulingana na mahitaji na vizingiti vya mzigo wa kazi
-- Kubuni usanifu wa mazingira mengi wenye gharama nafuu kwa uchaguzi sahihi wa ngazi
-- Kutekeleza vipimo vya utendaji na uthibitisho kwa chaguzi za SKU
-- Kuunda zana za kiotomatiki kwa ajili ya mapendekezo ya SKU na uboreshaji wa gharama
-- Kupanga mabadiliko ya SKU na mikakati ya upanuaji kwa mahitaji yanayobadilika
-- Kutumia kanuni za Azure Well-Architected Framework katika uchaguzi wa ngazi za huduma
+Baada ya kumaliza, utakuwa na uwezo wa:
+- Kuchagua SKU za huduma za Azure zinazofaa kulingana na mahitaji ya mzigo wa kazi na vizingiti
+- Kubuni miundo ya gharama nafuu kwa mazingira mengi kwa uchaguzi sahihi wa ngazi
+- Kutekeleza benchmarking ya utendaji na uthibitishaji kwa chaguzi za SKU
+- Kuunda zana za kiotomatiki kwa mapendekezo ya SKU na uboreshaji wa gharama
+- Kupanga mikakati ya uhamisho na upanuzi wa SKU kwa mahitaji yanayobadilika
+- Kutumia kanuni za Azure Well-Architected Framework kwenye uchaguzi wa ngazi za huduma
 
-## Yaliyomo
+## Jedwali la Maudhui
 
-- [Kuelewa SKU](../../../../docs/chapter-06-pre-deployment)
-- [Uchaguzi Unaotegemea Mazingira](../../../../docs/chapter-06-pre-deployment)
-- [Mwongozo Maalum kwa Huduma](../../../../docs/chapter-06-pre-deployment)
-- [Mikakati ya Uboreshaji wa Gharama](../../../../docs/chapter-06-pre-deployment)
-- [Mambo ya Utendaji](../../../../docs/chapter-06-pre-deployment)
-- [Meza za Marejeo ya Haraka](../../../../docs/chapter-06-pre-deployment)
-- [Zana za Uthibitisho](../../../../docs/chapter-06-pre-deployment)
+- [Kuelewa SKU](#understanding-skus)
+- [Uchaguzi Kulingana na Mazingira](#environment-based-selection)
+- [Mwongozo Maalum wa Huduma](#service-specific-guidelines)
+- [Mikakati ya Uboreshaji wa Gharama](#cost-optimization-strategies)
+- [Mambo ya Kuzingatia kwa Utendaji](#performance-considerations)
+- [Majedwali ya Marejeo ya Haraka](#quick-reference-tables)
+- [Zana za Uthibitishaji](#validation-tools)
 
 ---
 
-## Understanding SKUs
+## Kuelewa SKU
 
-### What are SKUs?
+> **Mfano wa upeo:** Ramani za SKU za YAML na usanidi wa utendaji hapo chini ni maelezo ya muundo, si muundo wa `azure.yaml` au usanidi wa zana ya mzigo. Vipande vya Bicep ni mbadala/tukio: tambulisha vigezo vyake na rasilimali za mzazi, tumia majina ya kipekee unapoziunganisha, na unganisha moduli katika mradi unaofanya kazi. Bei, mipaka, na upatikane wa kanda/SKU lazima ukague kwa usajili wako kabla ya utekelezaji.
 
-SKU (Stock Keeping Units) zinaonyesha ngazi tofauti za huduma na viwango vya utendaji kwa rasilimali za Azure. Kila SKU inatoa tofauti za:
+### SKU ni Nini?
 
-- **Sifa za utendaji** (CPU, kumbukumbu, throughput)
-- **Upatikanaji wa vipengele** (chaguzi za upanuaji, viwango vya SLA)
-- **Mifumo ya bei** (kulipia kwa matumizi, uwezo uliohifadhiwa)
-- **Upatikanaji wa kikanda** (si SKU zote zinapatikana katika kanda zote)
+SKU (Stock Keeping Units) zinawakilisha ngazi tofauti za huduma na viwango vya utendaji kwa rasilimali za Azure. Kila SKU hutoa tofauti:
 
-### Key Factors in SKU Selection
+- **Tabia za Utendaji** (CPU, kumbukumbu, upitishaji)
+- **Upatikanaji wa Kipengele** (chaguzi za upanuzi, viwango vya SLA)
+- **Miundo ya Bei** (kutumia kulingana na matumizi, uwezo ulihifadhiwa)
+- **Upatikanaji wa Kanda** (si SKU zote zinapatikana katika kanda zote)
+
+### Vigezo Muhimu Katika Uchaguzi wa SKU
 
 1. **Mahitaji ya Mzigo wa Kazi**
-   - Mipangilio ya trafiki/mzigo inayotarajiwa
+   - Mienendo ya trafiki/mzigo inayotarajiwa
    - Mahitaji ya utendaji (CPU, kumbukumbu, I/O)
-   - Mahitaji ya kuhifadhi na mifumo ya upatikanaji
+   - Mahitaji ya hifadhi na mifumo ya upatikanaji
 
 2. **Aina ya Mazingira**
-   - Maendeleo/majaribio dhidi ya uzalishaji
+   - Maendeleo/kupima dhidi ya uzalishaji
    - Mahitaji ya upatikanaji
    - Mahitaji ya usalama na uzingatiaji
 
 3. **Vizingiti vya Bajeti**
    - Gharama za awali dhidi ya gharama za uendeshaji
-   - Punguzo la uwezo uliohifadhiwa
-   - Athari za gharama za auto-scaling
+   - Punguzo la uwezo ulihifadhiwa
+   - Athari za gharama za upanuzi wa kiotomatiki
 
 4. **Makadirio ya Ukuaji**
-   - Mahitaji ya upanuaji
+   - Mahitaji ya upanuzi
    - Mahitaji ya vipengele vya baadaye
-   - Ugumu wa uhamishaji
+   - Ugumu wa uhamisho
 
 ---
 
-## Environment-Based Selection
+## Uchaguzi Kulingana na Mazingira
 
-### Development Environment
+### Mazingira ya Maendeleo
 
-**Vipaumbele**: Uboreshaji wa gharama, utendakazi wa msingi, utoaji/kuondoa rahisi wa rasilimali
+**Kipaumbele**: Uboreshaji wa gharama, utendaji wa msingi, urahisi wa ugawaji/utoa
 
-#### Recommended SKUs
+#### SKU Zinazopendekezwa
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
-#### Characteristics
-- **App Service**: F1 (Free) au B1 (Basic) kwa majaribio rahisi
-- **Databases**: Ngazi ya Basic yenye rasilimali za kimsingi
-- **Storage**: Standard yenye redundancy ya ndani tu
-- **Compute**: Rasilimali zilizogawanywa zinakubalika
-- **Networking**: Mipangilio ya msingi
+#### Tabia
+- **Huduma za App**: F1 (Bure) au B1 (Msingi) kwa majaribio rahisi
+- **Misingi ya Data**: Ngazi ya msingi na rasilimali zisizo nyingi
+- **Hifadhi**: Kawaida na upyaaji wa ndani pekee
+- **Hisabati**: Rasilimali za pamoja zinakubalika
+- **Mitandao**: Usanidi wa msingi
 
-### Staging/Testing Environment
+### Mazingira ya Maandalizi/Ukipima
 
-**Vipaumbele**: Mipangilio inayofanana na uzalishaji, uwiano wa gharama, uwezo wa upimaji wa utendaji
+**Kipaumbele**: Usanidi kama uzalishaji, usawa wa gharama, uwezo wa kupima utendaji
 
-#### Recommended SKUs
+#### SKU Zinazopendekezwa
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -120,56 +122,56 @@ skus:
   container_apps: "Consumption" # Pay-per-use
 ```
 
-#### Characteristics
+#### Tabia
 - **Utendaji**: 70-80% ya uwezo wa uzalishaji
 - **Vipengele**: Vipengele vingi vya uzalishaji vimewezeshwa
-- **Ukurugenzi**: Baadhi ya redundancy ya kijiografia
-- **Upanuaji**: Auto-scaling iliyopunguzwa kwa ajili ya majaribio
-- **Ufuatiliaji**: Mfululizo kamili wa ufuatiliaji
+- **Upyaaji**: Baadhi ya upyaaji wa kijiografia
+- **Upanuzi**: Upanuzi wa kiotomatiki mdogo kwa majaribio
+- **Ufuatiliaji**: Stack kamili ya ufuatiliaji
 
-### Production Environment
+### Mazingira ya Uzalishaji
 
-**Vipaumbele**: Utendaji, upatikanaji, usalama, uzingatiaji, upanuaji
+**Kipaumbele**: Utendaji, upatikanaji, usalama, uzingatiaji, upanuzi
 
-#### Recommended SKUs
+#### SKU Zinazopendekezwa
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
-#### Characteristics
-- **Upatikanaji wa juu**: Mahitaji ya SLA ya 99.9%+
-- **Utendaji**: Rasilimali za kujitolea, throughput ya juu
+#### Tabia
+- **Upatikanaji wa Juu**: Mahitaji ya SLA 99.9%+
+- **Utendaji**: Rasilimali zilizojitolea, upitishaji mkubwa
 - **Usalama**: Vipengele vya usalama vya premium
-- **Upanuaji**: Uwezo kamili wa auto-scaling
-- **Ufuatiliaji**: Ubonyezi wa uchunguzi kamili
+- **Upanuzi**: Uwezo kamili wa upanuzi wa kiotomatiki
+- **Ufuatiliaji**: Uwezo wa kuangalia kwa kina
 
 ---
 
-## Service-Specific Guidelines
+## Mwongozo Maalum wa Huduma
 
-### Azure App Service
+### Huduma ya Azure App
 
-#### SKU Decision Matrix
+#### Mkataba wa Uamuzi wa SKU
 
-| Use Case | Recommended SKU | Rationale |
+| Matumizi | SKU Inayopendekezwa | Sababu |
 |----------|----------------|-----------|
-| Development/Testing | F1 (Free) or B1 (Basic) | Cost-effective, sufficient for testing |
-| Small production apps | S1 (Standard) | Custom domains, SSL, auto-scaling |
-| Medium production apps | P1V3 (Premium V3) | Better performance, more features |
-| High-traffic apps | P2V3 or P3V3 | Dedicated resources, high performance |
-| Mission-critical apps | I1V2 (Isolated V2) | Network isolation, dedicated hardware |
+| Maendeleo/Ukipima | F1 (Bure) au B1 (Msingi) | Gharama nafuu, imefaa kwa majaribio |
+| Programu ndogo za uzalishaji | S1 (Kawaida) | Kanda za desturi, SSL, upanuzi wa kiotomatiki |
+| Programu za uzalishaji wa kati | P1V3 (Premium V3) | Utendaji bora, vipengele zaidi |
+| Programu zenye trafiki kubwa | P2V3 au P3V3 | Rasilimali zilizojitolea, utendaji wa juu |
+| Programu muhimu kwa misheni | I1V2 (Isolated V2) | Utoaji wa mtandao, vifaa vilivyojitolea |
 
-#### Configuration Examples
+#### Mifano ya Usanidi
 
-**Development**
+**Maendeleo**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-dev'
@@ -185,7 +187,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-**Production**
+**Uzalishaji**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-prod'
@@ -201,21 +203,21 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-### Azure SQL Database
+### Hifadhidata ya Azure SQL
 
-#### SKU Selection Framework
+#### Mfumo wa Uchaguzi wa SKU
 
-1. **DTU-based (Database Transaction Units)**
-   - **Basic**: 5 DTU - Maendeleo/majaribio
-   - **Standard**: S0-S12 (10-3000 DTU) - Kusudi la jumla
-   - **Premium**: P1-P15 (125-4000 DTU) - Mifumo inayohitaji utendaji mkubwa
+1. **Msingi wa DTU (Units za Muamala wa Hifadhidata)**
+   - **Msingi**: 5 DTU - Maendeleo/ukipima
+   - **Kawaida**: S0-S12 (10-3000 DTU) - Madhumuni ya jumla
+   - **Premium**: P1-P15 (125-4000 DTU) - Muhimu kwa utendaji
 
-2. **vCore-based** (Inapendekezwa kwa uzalishaji)
-   - **General Purpose**: Mchanganyiko sawa wa compute na kuhifadhi
-   - **Business Critical**: Latency ndogo, IOPS kubwa
-   - **Hyperscale**: Kuhifadhi inayoweza kupanuka kwa kiwango kikubwa (hadi 100TB)
+2. **Msingi wa vCore** (Inapendekezwa kwa uzalishaji)
+   - **Madhumuni ya Jumla**: Usimbaji sawia wa hisabati na hifadhi
+   - **Biashara Muhimu**: Ugumu wa pungufu, IOPS za juu
+   - **Hyperscale**: Hifadhi inayopanuka sana; hakikisha mipaka na msaada wa kanda za sasa
 
-#### Example Configurations
+#### Mifano ya Usanidi
 
 ```bicep
 // Development
@@ -250,23 +252,23 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 }
 ```
 
-### Azure Container Apps
+### Programu za Kontena za Azure
 
-#### Environment Types
+#### Aina za Mazingira
 
-1. **Consumption-based**
-   - Malipo kwa matumizi
-   - Inafaa kwa maendeleo na mizigo ya kazi inayobadilika
-   - Miundombinu iliyogawanywa
+1. **Kulingana na Matumizi**
+   - Malipo kulingana na matumizi
+   - Inafaa kwa maendeleo na mizigo inayobadilika
+   - Miundombinu ya pamoja
 
-2. **Dedicated (Workload Profiles)**
-   - Rasilimali za compute zilizojitolea
-   - Utendaji unaoweza kutegemewa
-   - Bora kwa mzigo wa uzalishaji
+2. **Zilizojitolea (Profaili za Mizigo)**
+   - Rasilimali za hisabati zilizojiwekea
+   - Utendaji unaotabirika
+   - Bora kwa mizigo ya uzalishaji
 
-#### Configuration Examples
+#### Mifano ya Usanidi
 
-**Development (Consumption)**
+**Maendeleo (Matumizi)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Production (Dedicated)**
+**Uzalishaji (Zilizojitolea)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,33 +317,35 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+Upaya wa upyaaji wa maeneo pia unahitaji miundombinu ya kanda inayoungwa mkono na usanidi mzuri wa VNet/subnet, haijawekwa hapa. Mfano huu unajumuisha nodi tatu zilizojiwekea; sanidi angalau nakala mbili za app kwa usambazaji wa maeneo na pima nakala na nodi kwa kushindwa kwa eneo. Angalia [Mwongozo wa Uaminifu wa Container Apps](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). Ili kuweka app kwenye profaili hii, weka `workloadProfileName: 'production-profile'`; kuunda profaili pekee hakuhamishi apps kwenye hiyo.
+
 ### Azure Cosmos DB
 
-#### Throughput Models
+#### Miundo ya Upitishaji
 
-1. **Manual Provisioned Throughput**
-   - Utendaji unaoweza kutabirika
-   - Punguzo la uwezo uliohifadhiwa
+1. **Upitishaji wa Kusudiwa kwa Mikono**
+   - Utendaji unaotabirika
+   - Punguzo la uwezo ulihifadhiwa
    - Bora kwa mizigo thabiti
 
-2. **Autoscale Provisioned Throughput**
-   - Upanuaji wa moja kwa moja kulingana na matumizi
-   - Lipa kwa kile unachotumia (kwa chini)
+2. **Upitishaji wa Kiotomatiki**
+   - Upanuzi wa kiotomatiki kulingana na matumizi
+   - Lipa unachotumia (kwa kiwango cha chini)
    - Nzuri kwa mizigo inayobadilika
 
 3. **Serverless**
    - Lipa kwa ombi
-   - Hakuna throughput iliyotengwa
-   - Inafaa kwa maendeleo na mizigo ya kazi isiyokuwa ya kudumu
+   - Hakuna upitishaji uliopangwa
+   - Inafaa kwa maendeleo na mizigo ya vipindi
 
-#### SKU Examples
+#### Mifano ya SKU
 
 ```bicep
 // Development - Serverless
@@ -396,19 +400,19 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 }
 ```
 
-### Azure Storage Account
+### Akaunti ya Hifadhi ya Azure
 
-#### Storage Account Types
+#### Aina za Akaunti za Hifadhi
 
-1. **Standard_LRS** - Maendeleo, data isiyo muhimu sana
-2. **Standard_GRS** - Uzalishaji, inahitaji geo-redundancy
+1. **Standard_LRS** - Maendeleo, data zisizo muhimu
+2. **Standard_GRS** - Uzalishaji, inahitaji upyaaji wa kijiografia
 3. **Premium_LRS** - Programu za utendaji wa juu
-4. **Premium_ZRS** - Upatikanaji wa juu kwa redundancy ya zona
+4. **Premium_ZRS** - Upatikanaji wa juu na upyaaji wa maeneo
 
-#### Performance Tiers
+#### Ngazi za Utendaji
 
-- **Standard**: Madhumuni ya jumla, gharama nafuu
-- **Premium**: Utendaji wa juu, matukio ya latency ndogo
+- **Kawaida**: Madhumuni ya jumla, gharama nafuu
+- **Premium**: Utendaji wa juu, hali za kuchelewesha kidogo
 
 ```bicep
 // Development
@@ -451,19 +455,22 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## Mikakati ya Uboreshaji wa Gharama
 
-### 1. Reserved Capacity
+### 1. Uwezo Ulihifadhiwa
 
-Hifadhi rasilimali kwa 1-3 miaka kwa punguzo kubwa:
+Hifadhi rasilimali kwa miaka 1-3 kwa punguzo kubwa:
 
 ```bash
-# Angalia chaguzi za uhifadhi
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. Right-Sizing
+Matoleo ya uhifadhi na aina za rasilimali zinazostahiki zinatofautiana; chunguza katalogi na masharti ya ununuzi badala ya kudhani kila huduma/SKU inaunga mkono uhifadhi.
 
-Anza na SKU ndogo na upandishe kulingana na matumizi halisi:
+### 2. Ukipaji Sahihi
+
+Anza na SKU ndogo na pandisha kulingana na matumizi halisi:
 
 ```yaml
 # Progressive scaling approach
@@ -477,9 +484,9 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. Auto-Scaling Configuration
+### 3. Usanidi wa Upanuzi wa Kiotomatiki
 
-Tekeleza upanuaji wa busara ili kuboresha gharama:
+Tekeleza upanuzi wenye busara ili uboresha gharama:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -536,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. Scheduled Scaling
+### 4. Upanuzi uliopangwa
 
-Punguza wakati wa saa zisizo za kazi:
+Punguza wakati wa saa zisizohitaji:
 
 ```json
 {
@@ -583,11 +592,11 @@ Punguza wakati wa saa zisizo za kazi:
 
 ---
 
-## Mambo ya Utendaji
+## Mambo ya Kuzingatia ya Utendaji
 
-### Baseline Performance Requirements
+### Mahitaji ya Msingi ya Utendaji
 
-Tambua mahitaji wazi ya utendaji kabla ya uchaguzi wa SKU:
+Tafsiri mahitaji ya utendaji kabla ya uchaguzi wa SKU:
 
 ```yaml
 performance_requirements:
@@ -603,21 +612,23 @@ performance_requirements:
     rto: "30 minutes"
 ```
 
-### Load Testing
+### Upimaji wa Mzigo
 
-Jaribu SKU tofauti ili kuthibitisha utendaji:
+Jaribu SKU tofauti kuthibitisha utendaji:
 
 ```bash
-# Huduma ya Azure ya kupima mzigo
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
-### Monitoring and Optimization
+### Ufuatiliaji na Uboreshaji
 
-Weka ufuatiliaji kamili:
+Sanidi ufuatiliaji mpana:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -644,45 +656,45 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## Meza za Marejeo ya Haraka
+## Majedwali ya Marejeo ya Haraka
 
-### App Service SKU Quick Reference
+### Marejeo ya Haraka ya SKU za Huduma za App
 
-| SKU | Tier | vCPU | RAM | Storage | Price Range | Use Case |
+| SKU | Ngazi | vCPU | RAM | Hifadhi | Mipaka ya Bei | Matumizi |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | Free | Shared | 1GB | 1GB | Free | Development |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | Small apps |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Production |
-| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | High performance |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Enterprise |
+| F1 | Bure | Zilizogawanywa | 1GB | 1GB | Bure | Maendeleo |
+| B1 | Msingi | 1 | 1.75GB | 10GB | $ | Programu ndogo |
+| S1 | Kawaida | 1 | 1.75GB | 50GB | $$ | Uzalishaji |
+| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Utendaji wa Juu |
+| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Kampuni |
 
-### SQL Database SKU Quick Reference
+### Marejeo ya Haraka ya SKU za Hifadhidata za SQL
 
-| SKU | Tier | DTU/vCore | Storage | Price Range | Use Case |
+| SKU | Ngazi | DTU/vCore | Hifadhi | Mipaka ya Bei | Matumizi |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Development |
-| S2 | Standard | 50 DTU | 250GB | $$ | Small production |
-| P2 | Premium | 250 DTU | 1TB | $$$ | High performance |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Balanced |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Mission critical |
+| Msingi | Msingi | 5 DTU | 2GB | $ | Maendeleo |
+| S2 | Kawaida | 50 DTU | 250GB | $$ | Uzalishaji mdogo |
+| P2 | Premium | 250 DTU | 1TB | $$$ | Utendaji wa Juu |
+| GP_Gen5_4 | Madhumuni ya Jumla | 4 vCore | 4TB | $$$ | Sawia |
+| BC_Gen5_8 | Biashara Muhimu | 8 vCore | 4TB | $$$$ | Muhimu kwa misheni |
 
-### Container Apps SKU Quick Reference
+### Marejeo ya Haraka ya SKU za Programu za Kontena
 
-| Model | Pricing | CPU/Memory | Use Case |
+| Mfano | Bei | CPU/Kumbukumbu | Matumizi |
 |-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | Development, variable load |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | Production |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | High performance |
+| Matumizi | Lipa kwa matumizi | Mchanganyiko wa CPU/kumbukumbu unaoungwa mkono unategemea mazingira/profayili | Maendeleo au uzalishaji, mzigo unaobadilika |
+| D4 Iliyojitolea | Malipo kwa nodi iliyojitolea | 4 vCPU, 16GiB kwa nodi | Mahitaji ya mzigo unaodumu/vipengele vya upatanishi |
+| D8 Iliyojitolea | Malipo kwa nodi iliyojitolea | 8 vCPU, 32GiB kwa nodi | Mzigo mkubwa unaodumu |
 
 ---
 
-## Zana za Uthibitisho
+## Zana za Uthibitishaji
 
-### SKU Availability Checker
+### Kichunguzi cha Upatikanaji wa SKU
 
 ```bash
 #!/bin/bash
-# Angalia upatikanaji wa SKU katika eneo lengwa
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# Matumizi
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### Cost Estimation Script
+### Msimbo wa Makadirio ya Gharama
+
+**Pseudocode tu:** `Get-ResourceCost` hapo chini ni kazi maalum ya mradi ambayo lazima utekeleze kwa kutumia bei za sasa za kanda/mkataba na mawazo ya matumizi. Sio PowerShell au cmdlet ya Azure.
 
 ```powershell
-# Skripti ya PowerShell kwa makadirio ya gharama
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Tumia Azure Pricing API au kalkuleta
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# Matumizi
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -748,7 +763,9 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### Performance Validation
+### Uthibitishaji wa Utendaji
+
+YAML ifuatayo ni mchoro wa mahitaji, **sio** muundo wa pembejeo wa Azure Load Testing, JMeter, Locust, au k6. Itafsiri kwenye zana uliyochagua kabla ya kutumia amri ya mtihani wa mzigo hapo juu.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,43 +800,43 @@ test_configuration:
 
 ---
 
-## Muhtasari wa Mazoea Bora
+## Muhtasari wa Mbinu Bora
 
-### Yafaa Kufanywa
+### Kazi za Kufanya
 
-1. **Anza ndogo na upandishe** kulingana na matumizi halisi
+1. **Anza kidogo na panda kulingana na matumizi halisi**
 2. **Tumia SKU tofauti kwa mazingira tofauti**
-3. **Fuatilia utendaji na gharama kwa kuendelea**
-4. **Tumia uwezo uliohifadhiwa kwa mzigo wa uzalishaji**
-5. **Tekeleza auto-scaling inapofaa**
-6. **Jaribu utendaji kwa mizigo ya kazi halisi**
-7. **Panga ukuaji lakini epuka ku-provision kupita kiasi**
+3. **Fuatilia utendaji na gharama kwa daima**
+4. **Tumia uwezo ulihifadhiwa kwa mizigo ya uzalishaji**
+5. **Tekeleza upanuzi wa kiotomatiki inapofaa**
+6. **Pima utendaji na mizigo halisi**
+7. **Panga ukuaji lakini epuka kutoa rasilimali kupita kiasi**
 8. **Tumia ngazi za bure kwa maendeleo inapowezekana**
 
-### Usifanye
+### Kosa za Kuepuka
 
 1. **Usitumie SKU za uzalishaji kwa maendeleo**
-2. **Usizame upatikanaji wa kikanda wa SKU**
-3. **Usisahau gharama za uhamisho wa data**
-4. **Usipatie rasilimali nyingi bila hoja**
-5. **Usiache athari za utegemezi bila kuangalia**
-6. **Usiweka mipaka ya auto-scaling juu mno**
+2. **Usipuuzie upatikanaji wa SKU wa kanda**
+3. **Usisahau gharama za uhamishaji wa data**
+4. **Usitoe rasilimali kupita kiasi bila sababu**
+5. **Usipuuzie athari za utegemezi**
+6. **Usiwe na mipaka ya upanuzi wa kiotomatiki kwa kiwango cha juu mno**
 7. **Usisahau mahitaji ya uzingatiaji**
-8. **Usichague kwa msingi wa bei peke yake**
+8. **Usichague kwa bei peke yake**
 
 ---
 
-**Ushauri wa Kitaalamu**: Tumia Azure Cost Management na Advisor kupata mapendekezo binafsi ya kuboresha uchaguzi wako wa SKU kulingana na mifumo ya matumizi halisi.
+**Ushauri Maalum**: Tumia Azure Cost Management na Advisor kupata mapendekezo binafsi ya kuboresha uchaguzi wa SKU kulingana na mienendo halisi ya matumizi.
 
 ---
 
 **Uelekezaji**
-- **Somo la Awali**: [Upangaji wa Uwezo](capacity-planning.md)
-- **Somo Lifuatao**: [Ukaguzi wa Kabla ya Kutekeleza](preflight-checks.md)
+- **Somo Lililotangulia**: [Mipango ya Uwezo](capacity-planning.md)
+- **Somu Linalofuata**: [Ukaguzi wa Kabla ya Safari](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Taarifa ya kutokuwajibika:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali kumbuka kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Nyaraka ya asili kwa lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu ya binadamu. Hatuwajibiki kwa kutokuelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

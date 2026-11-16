@@ -1,22 +1,22 @@
-# Poglavje 4: Infrastruktura kot koda & Razmestitev
+# Poglavje 4: Infrastruktura kot koda in namestitev
 
-**📚 Tečaj**: [AZD Za začetnike](../../README.md) | **⏱️ Trajanje**: 1-1,5 ure | **⭐ Kompleksnost**: Srednja
+**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 2-3 ure branja; omogočite dodatni čas za vaje namestitve | **⭐ Kompleksnost**: Srednja
 
 ---
 
 ## Pregled
 
-To poglavje obravnava vzorce infrastrukture kot kode (IaC) z Bicep predlogami, zagotavljanje virov in strategije razmestitve z uporabo Azure Developer CLI.
+To poglavje pokriva vzorce Infrastructure as Code (IaC) z Bicep predlogami, zagotavljanje virov ter strategije namestitve z uporabo Azure Developer CLI.
 
-> Preverjeno z `azd 1.27.1` julija 2026.
+> Cilj pregleda ukazov in konfiguracije: `azd 1.37.2` (november 2026). Med pregledom ni bilo izvedeno živo zagotavljanje Azure.
 
 ## Cilji učenja
 
-Z dokončanjem tega poglavja boste:
-- Razumeli strukturo in sintakso Bicep predlog
-- Zagotavljali Azure vire z `azd provision`
-- Razmestili aplikacije z `azd deploy`
-- Implementirali blue-green in rolling strategije razmestitve
+Z opravljenim poglavljem boste:
+- Razumeli strukturo in sintakso Bicep predloge
+- Zagotovili Azure vire z `azd provision`
+- Namestili aplikacije z `azd deploy`
+- Izvajali modro-zeleno in postopno strategijo namestitve
 
 ---
 
@@ -24,34 +24,37 @@ Z dokončanjem tega poglavja boste:
 
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
-| 1 | [Zagotavljanje virov](provisioning.md) | Upravljanje Azure virov z AZD | 45 min |
-| 2 | [Vodnik za razmestitev](deployment-guide.md) | Strategije razmestitve aplikacij | 45 min |
-| 3 | [Ustvarjanje lastne predloge](custom-templates.md) | Gradnja in objava ponovno uporabnih azd predlog | 30 min |
+| 1 | [Zagotovitev virov](provisioning.md) | Upravljanje Azure virov z AZD | 45 min |
+| 2 | [Vodnik po namestitvi](deployment-guide.md) | Strategije namestitve aplikacij | 45 min |
+| 3 | [Ustvarjanje lastne predloge](custom-templates.md) | Gradnja in objava večkrat uporabnih predlog azd | 30 min |
 
 ---
 
-## 🚀 Hiter začetek
+## 🚀 Hitri začetek
 
 ```bash
-# Inicializiraj iz predloge
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Predogled, kaj bo ustvarjeno
+# Preview what will be created
 azd provision --preview
 
-# Samo zagotovitev infrastrukture
+# Provision infrastructure only
 azd provision
 
-# Samo namestitev kode
+# Deploy code only
 azd deploy
 
-# Ali oboje skupaj
+# Or both together
 azd up
 ```
 
 ---
 
-## 📁 Struktura projektov AZD
+## 📁 Struktura projekta AZD
 
 ```
 my-project/
@@ -72,11 +75,11 @@ my-project/
 
 | Ukaz | Opis |
 |---------|-------------|
-| `azd init` | Inicializiraj projekt |
-| `azd provision` | Ustvari Azure vire |
-| `azd deploy` | Razmestitev kode aplikacije |
-| `azd up` | zagotavljanje + razmestitev |
-| `azd down` | Izbriši vse vire |
+| `azd init` | Inicializirajte projekt |
+| `azd provision` | Ustvarite Azure vire |
+| `azd deploy` | Namestite kodo aplikacije |
+| `azd up` | zagotavljanje + namestitev |
+| `azd down` | Izbrišite vse vire |
 
 ---
 
@@ -91,9 +94,9 @@ my-project/
 
 ## 📖 Povezani viri
 
-- [Preverjanja pred razmestitvijo](../chapter-06-pre-deployment/README.md)
-- [Primeri aplikacij z vsebniki](../../examples/container-app/README.md)
-- [Primer aplikacije z bazo podatkov](../../examples/database-app/README.md)
+- [Preverjanja pred namestitvijo](../chapter-06-pre-deployment/README.md)
+- [Primeri aplikacij v vsebniku](../../examples/container-app/README.md)
+- [Primer aplikacije s podatkovno bazo](../../examples/database-app/README.md)
 
 ---
 

@@ -1,135 +1,140 @@
-# Deployment Guide - Mastering AZD Deployments
+# មគ្គុទេសក៍ការដាក់អនុវត្ត - ការគ្រប់គ្រងការដាក់អនុវត្ត AZD
 
-**Chapter Navigation:**
-- **📚 ទំព័រមេគណៈសិក្សា**: [AZD For Beginners](../../README.md)
-- **📖 ជំពូកបច្ចុប្បន្ន**: ជំពូក 4 - កិច្ចការក្រៅ (Infrastructure as Code & Deployment)
-- **⬅️ ជំពូកមុន**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
-- **➡️ បន្ទាប់**: [Provisioning Resources](provisioning.md)
-- **🧩 ក៏នៅក្នុងជំពូកនេះ**: [Authoring Your Own Template](custom-templates.md)
-- **🚀 ជំពូកបន្ទាប់**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+**ការរុករកជំពូក៖**
+- **📚 ផ្ទះសិក្សា**: [AZD សម្រាប់អ្នកចាប់ផ្តើម](../../README.md)
+- **📖 ជំពូកបច្ចុប្បន្ន**: ជំពូក 4 - ឧបករណ៍អវសាខ់ជាបញ្ចី & ការដាក់អនុវត្ត
+- **⬅️ ជំពូកមុន**: [ជំពូក 3: ការកំណត់រចនា](../chapter-03-configuration/configuration.md)
+- **➡️ បន្ទាប់**: [ការផ្គត់ផ្គង់ប្រភព](provisioning.md)
+- **🧩 ក៏មាននៅក្នុងជំពូកនេះ**: [ការច្នៃប្រឌិតការប្រព្រឹត្តិតែមួយទ្រង់ទ្រាយ](custom-templates.md)
+- **🚀 ជំពូកបន្ទាប់**: [ជំពូក 5: ដំណោះស្រាយ AI បន្តិចបន្តួចជាច្រើនភ្នាក់ងារ](../../examples/retail-scenario.md)
 
-## ការណែនាំ
+## ទិដ្ឋភាពទូទៅ
 
-មគ្គុទេសក៍នេះគ្របដណ្តប់អ្វីគ្រប់យ៉ាងដែលអ្នកត្រូវត្រៀមខ្លួនសម្រាប់ការបញ្ចូនកម្មវិធីដោយប្រើ Azure Developer CLI ចាប់ពីការបញ្ចូនបញ្ជា​តែមួយរហូតដល់​សถานភាពផលិតកម្ម​កម្រិតខ្ពស់ជាមួយ hooks ផ្ទាល់ខ្លួន, បរិយាកាស​ច្រើន, និងការរួមបញ្ចូល CI/CD។ បង្កើតជំនាញលំអិតលើលំនាំជីវិតនៃការដាក់ឲ្យដំណើរការជាមួយឧទាហរណ៍អនុវត្តន៍ និងអនុប្បទានល្អៗ។
+> បានពិនិត្យឡើងវិញ ប្រឆាំងនឹង `azd 1.37.2` (វិច្ឆិកា ២០២៦)។ ពាក្យបញ្ជា​ប្រើ Bash; ឧទាហរណ៍ JSON តម្រូវឱ្យមាន `jq`។ លើសពីលំហាត់ todo ដែលបាន initialized យ៉ាងច្បាស់ អ្នកទាំងអស់គ្នាគឺជា **ផ្នែកបញ្ចូលគ្នា**៖ ផ្តល់ប្រភពឯង, អគារវិទ្យាសាស្ត្រ, ការធ្វើតេស្ត និងស្គ្រីបរបស់អ្នក។ មិនមានការដាក់បញ្ចូល Azure ត្រូវបានអនុវត្តក្នុងការពិនិត្យនេះទេ។
 
-## គោលដៅការសិក្សា
+មគ្គុទេសក៍ទូលំទូលាយនេះគ្របដណ្តប់អ្វីគ្រប់យ៉ាងដែលអ្នកត្រូវការដើម្បីដាក់អនុសាសន៍កម្មវិធីដោយប្រើ Azure Developer CLI ពីការដាក់បញ្ចូលពាក្យបញ្ជាលោកតែមួយដល់ស្ថានភាពផលិតកម្មកម្រិតខ្ពស់ជាមួយគន្លឹះប្តូរពិសេស បរិយាកាសច្រើន និងការរួមបញ្ចូល CI/CD។ ចេះគ្រប់គ្រងវដ្តដាក់បញ្ចូលទាំងមូលដោយឧទាហរណ៍ប្រាកដ និងការអនុវត្តល្អបំផុត។
+
+## គោលបំណងការសិក្សា
 
 ដោយបញ្ចប់មគ្គុទេសក៍នេះ អ្នកនឹង:
-- ស្គាល់ពាក្យបញ្ជា និងចរន្តការងារ Azure Developer CLI សម្រាប់ការដាក់ឲ្យដំណើរការ
-- យល់ដឹងពីលំនាំជីវិតទាំងមូលរបស់ការដាក់ឲ្យដំណើរការ ពីការបង្កើតធនធានដល់ការត្រួតពិនិត្យ
-- អនុវត្ត hooks ផ្ទាល់ខ្លួនសម្រាប់អូតូម៉ាទ័រ​កុនិតកម្មមុននិងបន្ទាប់ការដាក់ឲ្យដំណើរការ
-- កំណត់បរិយាកាសច្រើនជាមួយប៉ារ៉ាម៉ែត្រ​ដែលបំណុលនឹងបរិយាកាសនីមួយៗ
-- តំឡើងយុទ្ធសាស្រ្តដាក់ឲ្យដំណើរការខ្ពស់ រួមទាំង blue-green និង canary
-- រួមបញ្ចូល azd deployments ជាមួយបណ្ដាញ CI/CD និងដំណើរការ DevOps
+- ជំនាញពាក្យបញ្ជារ Azure Developer CLI សម្រាប់ដាក់ការងារ និងវដ្តការងារ
+- អ្វីដែលចេះពីវដ្តដាក់បញ្ចូលទាំងមូលពីការផ្គត់ផ្គង់ទៅការត្រួតពិនិត្យ
+- អនុវត្តខ្សែពេលប្តូរពិសេសសម្រាប់ស្វ័យប្រតិបត្តិការពាក់ព័ន្ធមុននិងបន្ទាប់ពីដាក់បញ្ចូល
+- កំណត់បរិយាកាសច្រើនជាមួយប៉ារ៉ាម៉ែត្រ​ឯកសារបរិយាកាស
+- តំឡើងយុទ្ធសាស្ត្រដាក់បញ្ចូលកម្រិតខ្ពស់ រួមមានដាក់បន្លូតប្លូផោន និង canary
+- រួមបញ្ចូលការដាក់បញ្ចូល azd ជាមួយបំពង់ CI/CD និងវដ្តការងារ DevOps
 
-## លទ្ធផលការសិក្សា
+## ផលប៉ះពាល់ការសិក្សា
 
-បន្ទាប់ពីបញ្ចប់ អ្នកនឹងអាច:
-- ប្រតិបត្តិ និងដោះស្រាយ​បញ្ហាចរន្តការដាក់ឲ្យដំណើរការ azd ដោយឯករាជ្យ
-- រចនា និងអនុវត្តអូតូម៉ាទ័រការដាក់ឲ្យដំណើរការ​ផ្ទាល់ខ្លួនដោយប្រើ hooks
-- កំណត់ការដាក់ឲ្យដំណើរការដែលរួចទៅរកផលិតកម្មជាមួយសុវត្ថិភាព និងការត្រួតពិនិត្យសមរម្យ
-- គ្រប់គ្រង​សถานភាព​ដាក់ឲ្យដំណើរការច្រើនជ្រុលស្មុគស្មាញ
-- បង្កើនប្រសិទ្ធិភាពនៃការដាក់ឲ្យដំណើរការ និងអនុវត្តយុទ្ធសាស្រ្តចូលត្រឡប់
-- រួមបញ្ចូល azd deployments ទៅក្នុងការអនុវត្ត DevOps ក្រុមហ៊ុន
+នៅពេលបញ្ចប់ អ្នកនឹងអាច:
+- ប្រតិបត្តិ និងដោះស្រាយបញ្ហាវដ្តបញ្ចូល azd ទាំងអស់ដោយឯករាជ្យ
+- រចនារ និងអនុវត្តស្វ័យប្រតិបត្តិការដាក់បញ្ចូលដោយខ្សែពេល
+- កំណត់ការដាក់បញ្ចូលដែលបានបង្ហាញសម្រាប់ផលិតកម្មជាមួយសុវត្ថិភាព និងការត្រួតពិនិត្យត្រឹមត្រូវ
+- គ្រប់គ្រងស្ថានភាពដាក់បញ្ចូលមួយចំនួននៃបរិយាកាស
+- បង្កើនប្រសិទ្ធភាពការដាក់បញ្ចូល និងអនុវត្តយុទ្ធសាស្ត្រត្រឡប់ក្រោយ
+- រួមបញ្ចូលការដាក់បញ្ចូល azd ទៅក្នុងអនុវត្ត DevOps របស់សហគ្រាស
 
-## ទិដ្ឋភាពទូទៅនៃការដាក់ឲ្យដំណើរការ
+## ទិដ្ឋភាពទូទៅនៃការដាក់បញ្ចូល
 
-Azure Developer CLI ផ្ដល់ពាក្យបញ្ជាច្រើនសម្រាប់ការដាក់ឲ្យដំណើរការ:
-- `azd up` - ចរន្តការងារពេញលេញ (provision + deploy)
-- `azd provision` - បង្កើត/ធ្វើបច្ចុប្បន្នភាពធនធាន Azure តែប៉ុណ្ណោះ
-- `azd deploy` - ដាក់ឲ្យដំណើរការកូដកម្មវិធីតែម្ដង
-- `azd package` - សង់ និងកញ្ចប់កម្មវិធី
+Azure Developer CLI ផ្ដល់ពាក្យបញ្ជាដាក់បញ្ចូលច្រើន:
+- `azd up` - វដ្តការងារពេញលេញ (ផ្គត់ផ្គង់ + ដាក់បញ្ចូល)
+- `azd provision` - បង្កើត/ធ្វើបច្ចុប្បន្នភាពធនធាន Azure តែមួយ
+- `azd deploy` - ដាក់បញ្ចូលកូដកម្មវិធីតែមួយ
+- `azd package` - សង់ និងបញ្ចប់កម្មវិធី
 
-## ចរន្តការដាក់ឲ្យដំណើរការមូលដ្ឋាន
+## វដ្តដាក់បញ្ចូលមូលដ្ឋាន
 
-### ការដាក់ឲ្យដំណើរការពេញលេញ (azd up)
-ចរន្តការងារដែលគេប្រើជាញឹកញាប់សម្រាប់គម្រោងថ្មី:
+### ដាក់បញ្ចូលពេញលេញ (azd up)
+វដ្តការងារដែលទូទៅបំផុតសម្រាប់គម្រោងថ្មីៗ:
 ```bash
-# ដាក់ប្រើអ្វីៗទាំងអស់ពីចាប់ផ្តើម
+# Deploy everything from scratch
 azd up
 
-# ដាក់ប្រើជាមួយបរិយាកាសដែលបានកំណត់
+# Deploy with specific environment
 azd up --environment production
 
-# ដាក់ប្រើជាមួយប៉ារ៉ាម៉ែត្រផ្ទាល់ខ្លួន
-azd up --parameter location=westus2 --parameter sku=P1v2
+# Configure a location for the selected environment before first provisioning
+azd env set AZURE_LOCATION westus2
+# SKU changes must be wired into your template's parameter file/Bicep.
+azd up
 ```
 
-### ការដាក់ឲ្យដំណើរការជាមិញសម្រាប់ហេតុបរិស្ថានធនធានតែប៉ុណ្ណោះ
-នៅពេលដែលអ្នកត្រូវការកែប្រែធនធាន Azure តែប៉ុណ្ណោះ:
+### ដាក់បញ្ចូលគ្រោងនិយមតែធនធាន
+នៅពេលដែលអ្នកត្រូវការធ្វើបច្ចុប្បន្នភាពធនធាន Azure តែប៉ុណ្ណោះ:
 ```bash
-# ផ្ដល់/ធ្វើបច្ចុប្បន្នភាព ហេដ្ឋារចនាសម្ព័ន្ធ
+# Provision/update infrastructure
 azd provision
 
-# ផ្ដល់ដោយ dry-run ដើម្បីពិនិត្យមើលការផ្លាស់ប្តូរមុន
+# Provision with dry-run to preview changes
 azd provision --preview
 
-# ផ្ដល់សេវាកម្មជាក់លាក់
-azd provision --service database
+# Provisioning applies infrastructure, not an azure.yaml service selection.
+# In a configured layered project, use: azd provision <layer-name>
 ```
 
-### ការដាក់ឲ្យដំណើរការតែ​កូដ
-សម្រាប់ការអាប់ដែតកម្មវិធីយ៉ាងលឿន:
+### ដាក់បញ្ចូលគ្រោងតែកូដ
+សម្រាប់បច្ចុប្បន្នភាពកម្មវិធីរហ័ស:
 ```bash
-# ចែកចាយសេវាកម្មទាំងអស់
+# Deploy all services
 azd deploy
 
-# លទ្ធផលដែលរំពឹងទុក:
-# កំពុងចែកចាយសេវាកម្ម (azd deploy)
-# - web: កំពុងចែកចាយ... រួចរាល់
-# - api: កំពុងចែកចាយ... រួចរាល់
-# SUCCESS: ការចែកចាយរបស់អ្នកបានបញ្ចប់ក្នុង 2 នាទី 15 វិនាទី
+# Expected output:
+# Deploying services (azd deploy)
+# - web: Deploying... Done
+# - api: Deploying... Done
+# SUCCESS: Your deployment completed in 2 minutes 15 seconds
 
-# ចែកចាយសេវាកម្មជាក់លាក់
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# ចែកចាយដោយប្រើប៉ារ៉ាម៉ែត្រសាងសង់ផ្ទាល់ខ្លួន
-azd deploy --service api --build-arg NODE_ENV=production
+# Docker build arguments belong in azure.yaml: services.api.docker.buildArgs
+# They are not an azd deploy --build-arg flag.
 
-# ផ្ទៀងផ្ទាត់ការចែកចាយ
+# Verify deployment
 azd show --output json | jq '.services'
 ```
 
-### ✅ ការផ្ទៀងផ្ទាត់ការដាក់ឲ្យដំណើរការ
+### ✅ ការត្រួតពិនិត្យការដាក់បញ្ចូល
 
-បន្ទាប់ពីការដាក់ឲ្យដំណើរការ ធ្វើការផ្ទៀងផ្ទាត់ភាពជោគជ័យ:
+បន្ទាប់ពីការដាក់បញ្ចូលណាមួយ ត្រួតពិនិត្យភាពជោគជ័យ:
 
 ```bash
-# ពិនិត្យថាសេវាកម្មទាំងអស់កំពុងដំណើរការ
+# Inspect configured service targets and ingress URLs (not a health check)
 azd show
 
-# សាកល្បងចំណុចបញ្ចប់សុខភាព
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Test health endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
-curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
-curl -f "$API_URL/health" || echo "❌ API health check failed"
+curl -f "$WEB_URL" || { echo "❌ Web request failed"; exit 1; }
+# For the todo-nodejs-mongo template, /lists exists; /health does not.
+curl -f "$API_URL/lists" || { echo "❌ API request failed"; exit 1; }
 
-# តាមដានកំហុស (ដោយលំនាំដើម នឹងបើកក្នុងកម្មវិធីរុករក)
+# Monitor for errors (opens in browser by default)
 azd monitor --logs
 ```
 
-**កញ្ចប់ជោគជ័យ៖**
-- ✅ សេវាកម្មទាំងអស់បង្ហាញស្ថានភាព "Running"
-- ✅ ចំណុចផ្ទុកសុខភាព (health endpoints) បញ្ចូន HTTP 200
-- ✅ គ្មានកំណត់ហេតុកំហុសនៅក្នុង 5 នាទីចុងក្រោយ
-- ✅ កម្មវិធីឆ្លើយតបនឹងសំណើសាកល្បង
+**លក្ខខណ្ឌជោគជ័យ:**
+- ✅ `azd show` ដោះសោរគោលដៅ/URL ប្រើប្រាស់បាន
+- ✅ សំណើទៅផ្លូវកម្មវិធីពិតប្រាកដត្រឡប់ស្ថានភាព និងខួរក្បាលបានគោរព
+- ✅ គ្មានកំណត់ហេតុបញ្ហាក្នុងរយៈពេល ៥ នាទីចុងក្រោយ
+- ✅ កម្មវិធីបង្ហាញចំលើយចំពោះសំណួរតេស្ត
 
-## 🏗️ យល់ដឹងអំពីដំណើរការដាក់ឲ្យដំណើរការ
+## 🏗️ ការយល់ដឹងអំពីដំណើរការដាក់បញ្ចូល
 
-### ថ្មីចំពោះ hooks? ចាប់ផ្តើមពីទីនេះ
+### ថ្មីចំពោះ hooks? ចាប់ផ្តើមនៅទីនេះ
 
-A **hook** គឺជាពាក្យបញ្ជា​មួយដែល azd ជូនដំណើរការអូតូម៉ាទ័រនៅពេលពិសេសមួយក្នុងដំណើរការ deploy—មុនឬបន្ទាប់ពី provision, និងមុនឬបន្ទាប់ពី deploy កូដរបស់អ្នក។ វាអនុញ្ញាតឱ្យអ្នកអូតូម៉ាទ័រងារតូចៗដែលជារឿងធម្មតារីករាលដាលជុំវិញការដាក់ឲ្យដំណើរការ: ដាំទិន្នន័យទៅក្នុងទិន្នន័យសន្ដាន, រត់ migrations, សង់អាសserts, ឬធ្វើការសាកល្បងសាមញ្ញលើកម្មវិធីចាក់សកម្ម។
+**hook** គឺជាពាក្យបញ្ជាដែល azd រត់ស្វ័យប្រវត្តិនៅពេលណាមួយជាក់លាក់ក្នុងដំណើរការដាក់បញ្ចូល—មុន ឬបន្ទាប់ពីការផ្គត់ផ្គង់ ឬមុន ឬបន្ទាប់ពីដាក់កូដ។ វាអនុញ្ញាតឱ្យអ្នកអូតូម៉ាតិករងារតូចៗដែលតែងតែជុំវិញការដាក់បញ្ចូល៖ ដាំទិន្នន័យក្នុងមូលដ្ឋានទិន្នន័យ ដំណើរការបម្លែង សង់ទ្រព្យសកម្ម ឬពិនិត្យកម្មវិធីផ្លូវការឡើងវិញ។
 
-| Hook | Runs… | Common use |
+| Hook | រត់… | ការប្រើប្រាស់ទូទៅ |
 |------|-------|------------|
-| `preprovision` | Before resources are created | Validate prerequisites, log in to a registry |
-| `postprovision` | After resources exist | Configure resources, set up the database |
-| `predeploy` | Before code is deployed | Build front-end assets, run unit tests |
-| `postdeploy` | After code is live | Run DB migrations, smoke-test the endpoint |
+| `preprovision` | មុនធនធានត្រូវបានបង្កើត | ផ្ទៀងផ្ទាត់លក្ខខណ្ឌជាមុន ការចូលទៅតាមកំណត់ក្នុងស្តុក |
+| `postprovision` | បន្ទាប់ពីធនធានមាន | កំណត់រៀបចំធនធាន តំឡើងមូលដ្ឋានទិន្នន័យ |
+| `predeploy` | មុនកូដត្រូវបានដាក់បញ្ចូល | សង់ទ្រព្យសកម្មផ្នែកមុខ​ រត់តេស្តឯកត្តា |
+| `postdeploy` | បន្ទាប់ពីកូដនៅលីវ | រត់បម្លែងមូលដ្ឋានទិន្នន័យ ពិនិត្យកម្មវិធីផ្លូវការឡើងវិញ |
 
-Hooks ស្ថិតនៅក្នុង `azure.yaml` របស់អ្នក។ នេះគឺជា ឧទាហរណ៍តូចជាងគេ—វាចុចសារមួយបន្ទាប់ពីការដាក់ឲ្យដំណើរការ:
+Hooks ស្ថិតនៅក្នុង `azure.yaml` របស់អ្នក។ នេះគឺជាឧទាហរណ៍តូចបំផុតដែលបោះពុម្ពសារ បន្ទាប់ពីដាក់បញ្ចូល:
 
 ```yaml
 # azure.yaml
@@ -139,15 +144,15 @@ hooks:
     run: echo "Deployment finished! 🎉"
 ```
 
-នេះហើយ—នៅពេលក្រោយដែលអ្នករត់ `azd up` សារ​នោះនឹងបោះពុម្ពដោយស្វ័យប្រវត្តិ។ អ្នកក៏អាចរត់ hook មួយប្រភេទដោយឯង មិនចាំបាច់ធ្វើ deploy ពេញលេញ ដែលល្អសម្រាប់សាកល្បង:
+ប៉ុណ្ណោះ—លើកក្រោយដែលអ្នករត់ `azd up` សារ​នឹងបោះពុម្ពស្វ័យប្រវត្តិ។ អ្នកក៏អាចរត់ hook តែមួយ ដោយគ្មានការដាក់បញ្ចូលពេញលេញ ដែលល្អសម្រាប់ការតេស្ត:
 
 ```bash
 azd hooks run postdeploy
 ```
 
-ដំណាក់កាលខាងក្រោមបង្ហាញ hooks ក្នុងពិភពពិត (migrations, tests, validation) សម្រាប់មួយគ្រប់ដំណាក់កាល។
+ជំហានខាងក្រោមបង្ហាញ hooks ពិត (បម្លែង, តេស្ត, ផ្ទៀងផ្ទាត់) សម្រាប់រាល់ដំណាក់កាល។
 
-### ដំណាក់កាល 1: Pre-Provision Hooks
+### ដំណាក់កាលទី 1៖ Hook មុនផ្គត់ផ្គង់
 ```yaml
 # azure.yaml
 hooks:
@@ -161,13 +166,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### ដំណាក់កាល 2: ការបង្កើតធនធានអ៊ីនហ្វ្រាស្ត្រាក់ចcture
-- អានបំណែក template របស់ហេដ្ឋារចនាសម្ព័ន្ធ (Bicep/Terraform)
-- បង្កើតឬធ្វើបច្ចុប្បន្នភាពធនធាន Azure
-- កំណត់បណ្ដាញ និងសុវត្ថិភាព
-- តំឡើងការត្រួតពិនិត្យ និងកំណត់ហេតុ
+### ដំណាក់កាលទី 2៖ ផ្គត់ផ្គង់អគារវិទ្យាសាស្ត្រ
+- អានគំរូអគារវិទ្យាសាស្ត្រ (Bicep/Terraform)
+- បង្កើត ឬ បច្ចុប្បន្នភាពធនធាន Azure
+- កំណត់បណ្តាញ និងសុវត្ថិភាព
+- តំឡើងការត្រួតពិនិត្យ និង កំណត់ហេតុ
 
-### ដំណាក់កាល 3: Post-Provision Hooks
+### ដំណាក់កាលទី 3៖ Hook បន្ទាប់ពីផ្គត់ផ្គង់
 ```yaml
 hooks:
   postprovision:
@@ -180,12 +185,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### ដំណាក់កាល 4: ការកញ្ចប់កម្មវិធី
+### ដំណាក់កាលទី 4៖ ការបញ្ចប់កម្មវិធី
 - សង់កូដកម្មវិធី
-- បង្កើតអត្ថប្រយោជន៍សម្រាប់ការដាក់ឲ្យដំណើរការ
-- កញ្ចប់សម្រាប់វេទិកាគោលដ្ឋាន (containers, ZIP files, ជាដើម)
+- បង្កើតឯកសារដាក់បញ្ចូល
+- បញ្ចប់សម្រាប់វេទិកាគោលដៅ (containers, ZIP, ល។)
 
-### ដំណាក់កាល 5: Pre-Deploy Hooks
+### ដំណាក់កាលទី 5៖ Hook មុនដាក់បញ្ចូល
 ```yaml
 hooks:
   predeploy:
@@ -198,12 +203,12 @@ hooks:
       npm run db:migrate
 ```
 
-### ដំណាក់កាល 6: ការដាក់ឲ្យដំណើរការកម្មវិធី
-- ដាក់ឲ្យដំណើរការកម្មវិធីដែលបានកញ្ចប់ទៅសេវាកម្ម Azure
-- អាប់ដែតការកំណត់រចនាសម្ព័ន្ធ
-- ចាប់/ផ្ដើមឡើងវិញសេវាកម្ម
+### ដំណាក់កាលទី 6៖ ដាក់បញ្ចូលកម្មវិធី
+- ដាក់បញ្ចូលកម្មវិធីដែលបានបញ្ចប់ទៅសេវាកម្ម Azure
+- បច្ចុប្បន្នភាពការកំណត់រចនាសម្ព័ន្ធ
+- ចាប់ផ្តើម/ចាប់ផ្តើមឡើងវិញសេវាកម្ម
 
-### ដំណាក់កាល 7: Post-Deploy Hooks
+### ដំណាក់កាលទី 7៖ Hook បន្ទាប់ពីដាក់បញ្ចូល
 ```yaml
 hooks:
   postdeploy:
@@ -213,14 +218,14 @@ hooks:
       npm run test:integration
       
       echo "Warming up applications..."
-      curl https://${WEB_URL}/health
+      curl --fail "$WEB_URL/health"
 ```
 
-### ការដោះស្រាយបញ្ហា Hook
+### ការដោះស្រាយកំហុស Hook
 
-ដោយផ្ដល់លំនាំដើម, **បើពាក្យបញ្ជា hook បញ្ចប់ជាមួយកូដ non-zero, azd នឹងបញ្ឈបកម្មវិធីទាំងមូល។** នេះជារឿងដែលភាគច្រើនអ្នកចង់បាន—migration មួយបរាជ័យ គួរតែពន្យល់ការដាក់ឲ្យដំណើរការ មិនម្តងទេបញ្ចូនកម្មវិធីដែលខូច។ ប៉ុន្តែវាក៏មានន័យថា hooks ចាំបាច់ត្រូវបានសរសេរយ៉ាងប្រុងប្រយ័ត្ន។
+ដោយផ្ទាល់, **ប្រសិនបើពាក្យបញ្ជា hook បញ្ចប់ជាមួយកូដកំហុស មិនមែនសូន្យ azd នឹងបញ្ឈប់ប្រតិបត្តិការទាំងមូល។** នេះជារឿងដែលត្រូវការប្រើប្រាស់៖ ការផ្លាស់ប្តូរមិនជោគជ័យគួរតែបញ្ឈប់ការដាក់បញ្ចូល មិនគួរអោយកម្មវិធីខូចឆ្លងផ្លូវ។ តែវាមានន័យថា hooks ត្រូវបានសរសេរយ៉ាងប្រុងប្រយ័ត្ន។
 
-**1. ធ្វើឱ្យកំហុសភ្លក់ចេញ និងមានបំណង។** Hook មួយបរាជ័យពេលពាក្យបញ្ជាចុងក្រោយរបស់វាបង្វិលមកវិញកូដ exit non-zero។ ក្នុង script shell, បន្ថែម `set -e` ដូច្នេះ hook នឹងផ្អាកនៅពេលមានបច្ចុប្បន្នកំហុសទីមួយ មិនឲ្យបន្តភ្លាត់ចោល:
+**1. ធ្វើឱ្យកំហុសមិនត្រូវបានភ្លេច និងមានមោទយភាព។** Hook នោះបរាជ័យនៅពេលដែលពាក្យបញ្ជាចុងក្រោយត្រឡប់កូដមិនសូន្យ។ នៅក្នុង script បង្កប់ បន្ថែម `set -e` ដើម្បីឱ្យ hook បញ្ឈប់នៅពេលបញ្ជា​មួយបរាជ័យ ជួយមិនឲ្យតាមដានបន្តដោយស្ងាត់ស្ងៀម:
 
 ```yaml
 hooks:
@@ -232,24 +237,24 @@ hooks:
       npm run db:migrate
 ```
 
-**2. អនុញ្ញាតឲ្យ hook បរាជ័យដោយគ្មានការឈប់ azd។** សម្រាប់ជំហានមិនសំខាន់ (ជាឧទាហរណ៍ ការកម្ចាត់ cache ជាជម្រើស, ការជូនដំណឹងដោយខ្ជះខ្ជាយ), កំណត់ `continueOnError: true`។ azd នឹងកត់ឡុកកំហុសប៉ុន្តែបន្តការងារ:
+**2. អនុញ្ញាតឱ្យ hook បរាជ័យដោយគ្មានការបញ្ឈប់ azd។** សម្រាប់ជំហានមិនចាំបាច់ (ការកំដៅ cache ជាជម្រើស, សេចក្ដីជូនដំណឹងល្អបំផុត), កំណត់ `continueOnError: true`។ azd កត់ត្រាកំហុស ប៉ុន្តែបន្តដំណើរការ:
 
 ```yaml
 hooks:
   postdeploy:
     shell: sh
     continueOnError: true         # a failure here won't fail 'azd up'
-    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+    run: curl -f "$WEB_URL/warmup"
 ```
 
-**3. សាកល្បង hooks ដោយឯកឡែក មុនការរត់ពេញលេញ។** អ្នកមិនចាំបាច់រត់ `azd up` ដើម្បីដោះស្រាយកំហុស hook—រត់វាឯងហើយធ្វើការ iteration ឆាប់រហ័ស:
+**3. សាកល្បង hooks ដាច់ដោយឡែកមុនការរត់ពេញលេញ។** អ្នកមិនចាំបាច់រត់ `azd up` ដើម្បីដោះស្រាយបញ្ហា hook — រត់វាដាច់ដោយឡែក និងកែប្រែបានយ៉ាងរហ័ស:
 
 ```bash
-azd hooks run predeploy          # ដំណើរការតែ hook មុន​ការ​ដាក់ចេញ
+azd hooks run predeploy          # runs the matching project/service hooks
 azd hooks run postdeploy --service api
 ```
 
-**4. កត់សម្គាល់សម្រាប់​សែលផ្ទុកតាមប្រព័ន្ធប្រតិបត្តិការ។** Hook ដែលប្រើ `shell: pwsh` ត្រូវការតំឡើង PowerShell លើម៉ាស៊ីនដែលរត់វា (រួមទាំងភេព CI agents)។ ប្រើ `shell: sh` សម្រាប់ភាពអាចផ្ទុកបានទូលំទូលាយបំផុត, ឬផ្តល់ទាំង `windows` និង `posix` ជាវិភាគបម្រើ:
+**4. រក្សាយោបល់ចំពោះ shell ជាក់លាក់នៃប្រព័ន្ធប្រតិបត្តិការ។** Hook ដែលប្រើ `shell: pwsh` ត្រូវការតំឡើង PowerShell នៅលើម៉ាស៊ីនដែលរត់វា (រួមមានភ្នាក់ងារក្នុង CI)។ ប្រើ `shell: sh` សម្រាប់ភាពអាចដំណើរការបរិសុទ្ធបំផុត ឬផ្ដល់ទាំង `windows` និង `posix` ជាច្រើនប្រភេទ:
 
 ```yaml
 hooks:
@@ -262,63 +267,63 @@ hooks:
       run: ./scripts/setup.ps1
 ```
 
-> **ក技巧 Debugging:** រត់ពាក្យបញ្ជា azd ណាមួយជាមួយ `--debug` ដើម្បីឃើញតួអក្សរពេញលេញនៃបញ្ជា hook និងលទ្ធផលពេញលេញ—មានតំលៃយ៉ាងខ្លាំងពេល hook ធ្វើការ_locally ប៉ុន្តែបរាជ័យនៅក្នុង CI។
+> **ក្បួនដោះស្រាយបញ្ហា:** រត់ពាក្យបញ្ជា azd ណាមួយជាមួយ `--debug` ដើម្បីមើលបន្ទាត់ពាក្យបញ្ជារនិងលទ្ធផលពេញលេញ—មានតម្លៃខ្លាំងពេល hook ប្រតិបត្តិបានល្អក្នុងក្នុងស្រុក ប៉ុន្តែនៅ CI បរាជ័យ។
 
-## 🎛️ ការកំណត់ការដាក់ឲ្យដំណើរការ
+## 🎛️ ការកំណត់តម្លៃការដាក់បញ្ចូល
 
-### ការកំណត់បែបថ្មីសម្រាប់សេវាកម្មជាក់លាក់
+### កំណត់តម្លៃការដាក់បញ្ចូលសេវាកម្មជាក់លាក់
 ```yaml
 # azure.yaml
 services:
   web:
     project: ./src/web
     host: staticwebapp
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    dist: dist
     
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
     env:
-      - name: NODE_ENV
-        value: production
-      - name: API_VERSION
-        value: "1.0.0"
+      NODE_ENV: production
+      API_VERSION: "1.0.0"
         
   worker:
     project: ./src/worker
     host: function
-    runtime: node
-    buildCommand: npm install --production
+    language: js
 ```
 
 ### ការកំណត់បរិយាកាសជាក់លាក់
+
+អ្នកគ្រាន់តែបំពេញតម្លៃ azd ផ្ទាល់ខ្លួនប៉ុណ្ណោះ។ ផ្ទៀងផ្ទាត់ផែនទីទៅកំណត់រចនាសម្ព័ន្ធអគារវិទ្យាសាស្ត្រ/ពេលរត់។ `NODE_ENV` ជាធម្មតាជា `production` សម្រាប់កម្មវិធី Node ដែលបានដាក់រៀបចំ រួមទាំងការដាក់បញ្ចូល staging; ប្រើអថេរពិសេស app-specific ខុសគ្នាសម្រាប់ដំណាក់កាលដាក់បញ្ចូល។
+
 ```bash
-# បរិយាកាសអភិវឌ្ឍន៍
+# Development environment
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# បរិយាកាសសាកល្បង
+# Staging environment
 azd env new staging
-azd env set NODE_ENV staging
+azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# បរិយាកាសផលិតកម្ម
+# Production environment
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 សេណារីយ៉ូដាក់ឲ្យដំណើរការដ៏ខ្ពស់
+## 🔧 ស្ថានភាពដាក់បញ្ចូលកម្រិតខ្ពស់
 
-### កម្មវិធីច្រើនសេវា
+### កម្មវិធីពហុសេវាកម្ម
 ```yaml
 # Complex application with multiple services
 services:
@@ -354,52 +359,53 @@ services:
     host: function
 ```
 
-### Blue-Green Deployments
+### ដាក់បញ្ជូលប្លូផោន
+
+**ការអធិប្បាយប្រតិបត្តិការទាំងមូល៖ អ្នកត្រូវផ្គត់ផ្គង់ទាំងពីរបរិយាកាស ស្រទាប់ការ​បែងចែកចរាចរណ៍រួម និងស្គ្រីបពីរខាងក្រោម។ azd មិនប្តូរចរាចរណ៍ ឬផ្ទៀងផ្ទាត់ស្រាប់ត្រៀមត្រលប់ក្រោយស្វ័យប្រវត្តិទេ។ រក្សាស្លៀកប្ដូរពណ៌បៃតងរហូតដល់បៃតងបានចេញពីការតេស្ត ហើយមិនត្រូវការត្រលប់ក្រោយបានទៀតទេ។
+
 ```bash
-# បង្កើតបរិយាកាសពណ៌ខៀវ
+# Create blue environment
 azd env new production-blue
 azd up --environment production-blue
 
-# សាកល្បងបរិយាកាសពណ៌ខៀវ
+# Test blue environment
 ./scripts/test-environment.sh production-blue
 
-# ប្ដូរចរាចរណ៍ទៅពណ៌ខៀវ (ធ្វើបច្ចប្បន្នភាព DNS/ឧបករណ៍បែងចែកបន្ទុកដោយដៃ)
+# Switch traffic to blue (manual DNS/load balancer update)
 ./scripts/switch-traffic.sh production-blue
 
-# សម្អាតបរិយាកាសពណ៌បៃតង
+# Clean up green environment
 azd env select production-green
 azd down --force
 ```
 
-### Canary Deployments
-```yaml
-# azure.yaml - Configure traffic splitting
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    trafficSplit:
-      - revision: stable
-        percentage: 90
-      - revision: canary
-        percentage: 10
+### ដាក់បញ្ចូល canary
+```bash
+# Requires an existing Container App in multiple-revision mode and two
+# ready revisions. Replace placeholders with actual revision names.
+az containerapp ingress traffic set \
+  --name "<app-name>" --resource-group "<rg-name>" \
+  --revision-weight "<stable-revision>=90" "<canary-revision>=10"
 ```
 
-### Staged Deployments
+ការបែកចែកចរាចរណ៍ជារបស់កំណត់តម្លៃ Container Apps (Bicep ឬ Azure CLI) មិនមែនជាគ្រឿងចំណុច `azure.yaml` `trafficSplit`។ ការមើលជាមុន/ផ្គត់ផ្គង់ និងការដាក់បញ្ចូលក្រោយត្រូវរក្សា​របៀបនិងច្បាប់ដឹកនាំដែលអ្នកបានជ្រើសរើស។
+
+### ដាក់បញ្ចូលជាចំណុចមួយៗ
 ```bash
 #!/bin/bash
 # deploy-staged.sh
+set -e
 
 echo "Deploying to development..."
 azd env select dev
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running dev tests..."
 ./scripts/test-environment.sh dev
 
 echo "Deploying to staging..."
 azd env select staging
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running staging tests..."
 ./scripts/test-environment.sh staging
@@ -409,43 +415,38 @@ read -p "Deploy to production? (y/N): " confirm
 if [[ $confirm == [yY] ]]; then
     echo "Deploying to production..."
     azd env select production
-    azd up --confirm-with-no-prompt
+    azd up --no-prompt
     
     echo "Running production smoke tests..."
     ./scripts/test-environment.sh production
 fi
 ```
 
-## 🐳 ការដាក់ឲ្យដំណើរការដោយcontainer
+## 🐳 ដាក់បញ្ចូលកុងតឺណ័រ
 
-### ការដាក់ឲ្យដំណើរការ Container App
+### ដាក់បញ្ចូលកម្មវិធី Container App
 ```yaml
 services:
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        BUILD_VERSION: ${BUILD_VERSION}
-        NODE_ENV: production
+        - BUILD_VERSION=${BUILD_VERSION}
+        - NODE_ENV=production
     env:
-      - name: DATABASE_URL
-        value: ${DATABASE_URL}
-    secrets:
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-    scale:
-      minReplicas: 1
-      maxReplicas: 10
+      NODE_ENV: production
 ```
 
-### ការបង្កើត Dockerfile ជាច្រើនដំណាក់កាល
+កំណត់តម្លៃសម្ងាត់ runtime ជាមួយ `configuration.secrets`/`secretRef` (ឬយោង Key Vault) និងកំណត់អត្រាពង្រីកជាមួយ `template.scale` នៅក្នុងអគារវិទ្យាសាស្ត្រ Container App។ កុំបង្កើតគ្រឿងចំណុចបរិវេណសេវាកម្ម `secrets` ឬ `scale` ក្នុង `azure.yaml`។
+
+### ការបញ្ចូល Dockerfile ជាច្រើនដំណាក់កាល
 ```dockerfile
 # Dockerfile
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 WORKDIR /app
 COPY package*.json ./
 
@@ -455,11 +456,12 @@ COPY . .
 CMD ["npm", "run", "dev"]
 
 FROM base AS build
-RUN npm ci --only=production
+RUN npm ci
 COPY . .
 RUN npm run build
+RUN npm prune --omit=dev
 
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
@@ -470,77 +472,89 @@ CMD ["npm", "start"]
 
 ## ⚡ បង្កើនប្រសិទ្ធភាព
 
-### ការដាក់ឲ្យដំណើរការតាមសេវាកម្ម
+### ដាក់បញ្ចូលសេវាកម្មជាក់លាក់
 ```bash
-# ដាក់ដំណើរការសេវាកម្មជាក់លាក់ ដើម្បីធ្វើវដ្តបានលឿន
-azd deploy --service web
-azd deploy --service api
+# Deploy a specific service for faster iteration
+azd deploy web
+azd deploy api
 
-# ដាក់ដំណើរការសេវាកម្មទាំងអស់
+# Deploy all services
 azd deploy
 ```
 
-### កាសេវ៍ Build Caching
+### កាកសំណល់គ្រប់គ្រងសំណង់
 ```yaml
-# azure.yaml - Configure build commands
+# azure.yaml fragment - assumes package.json has a build script
 services:
   web:
     project: ./src/web
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    host: appservice
+    dist: dist
 ```
 
-### ការដាក់ឲ្យដំណើរការកូដដែលមានប្រសិទ្ធភាព
+វដ្ត Node ស្តង់ដារប្រើស្គ្រីបកញ្ចប់; hooks សេវា `prepackage` អាចបន្ថែមជំហានដែលត្រូវការបាន។ កាកសំណល់ស្រទាប់ Docker គឺបំបែកពីការកំណត់ពាក្យបញ្ជាសង់សេវា។
+
+### ដាក់បញ្ចូលកូដប្រសិទ្ធភាព
 ```bash
-# ប្រើ azd deploy (មិនមែន azd up) សម្រាប់ការផ្លាស់ប្ដូរជាកូដតែប៉ុណ្ណោះ
-# នេះលើកលែងការផ្គត់ផ្គង់ហេដ្ឋារចនាសម្ព័ន្ធ និងរហ័សជាច្រើន
+# Use azd deploy (not azd up) for code-only changes
+# This skips infrastructure provisioning and is much faster
 azd deploy
 
-# ដាក់ចេញសេវាកម្មជាក់លាក់ ដើម្បីអនុវត្តបានលឿនបំផុត
-azd deploy --service api
+# Deploy specific service for fastest iteration
+azd deploy api
 ```
 
-## 🔍 ការត្រួតពិនិត្យការដាក់ឲ្យដំណើរការ
+## 🔍 ត្រួតពិនិត្យការដាក់បញ្ចូល
 
-### ការត្រួតពិនិត្យតាមពេលវេលាពិត
+### ត្រួតពិនិត្យការដាក់បញ្ចូលពេលពិត
 ```bash
-# តាមដានកម្មវិធីក្នុងពេលពិត
+# Monitor application in real-time
 azd monitor --live
 
-# មើលកំណត់ហេតុរបស់កម្មវិធី
+# View application logs
 azd monitor --logs
 
-# ពិនិត្យស្ថានភាពការដាក់ចេញ
+# Check deployment status
 azd show
 ```
 
-### ការត្រួតពិនិត្យសុខភាព
-```yaml
-# azure.yaml - Configure health checks
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    healthCheck:
-      path: /health
-      interval: 30s
-      timeout: 10s
-      retries: 3
+### ត្រួតពិនិត្យសុខភាព
+```bicep
+// Partial Container App container definition:
+// merge into properties.template.containers[] in your Bicep resource.
+probes: [
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 3000
+      scheme: 'HTTP'
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+    timeoutSeconds: 10
+    failureThreshold: 3
+  }
+]
 ```
 
-### ការផ្ទៀងផ្ទាត់បន្ទាប់ពីដាក់ឲ្យដំណើរការ
+កម្មវិធីរបស់អ្នកត្រូវអនុវត្ត `/health`; វា​មិនត្រូវបានផ្ដល់ដោយស្វ័យប្រវត្តិ​ដោយ azd ទេ។ គ្មានគ្រឿងចំណុចសេវា `azure.yaml` `healthCheck` ទូទៅទេ។
+
+### ផ្ទៀងផ្ទាត់បន្ទាប់ពីដាក់បញ្ចូល
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
+set -e
 
 echo "Validating deployment..."
 
-# ពិនិត្យសុខភាពកម្មវិធី
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Check application health
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
 echo "Testing web application..."
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Web application is healthy"
 else
     echo "❌ Web application health check failed"
@@ -548,7 +562,7 @@ else
 fi
 
 echo "Testing API..."
-if curl -f "$API_URL/health"; then
+if curl -f "$API_URL/lists"; then
     echo "✅ API is healthy"
 else
     echo "❌ API health check failed"
@@ -561,82 +575,52 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 ការពិចារណាផ្នែកសន្តិសុខ
+## 🔐 គិតគូរអំពីសុវត្ថិភាព
 
-### ការគ្រប់គ្រងសម្ងាត់ (Secrets Management)
+### ការគ្រប់គ្រងសម្ងាត់
 ```bash
-# ផ្ទុកសម្ងាត់ដោយយ៉ាងសុវត្ថិភាព
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
-azd env set API_KEY "your-api-key" --secret
-
-# យោងសម្ងាត់នៅក្នុង azure.yaml
+# Interactive Key Vault reference setup; requires appropriate vault permissions
+azd env set-secret DATABASE_PASSWORD
+azd env set-secret JWT_SECRET
+azd env set-secret API_KEY
 ```
 
-```yaml
-services:
-  api:
-    secrets:
-      - name: database-password
-        value: ${DATABASE_PASSWORD}
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-```
+`azd env set ... --secret` មិនត្រឹមត្រូវទេ។ តម្លៃបរិយាកាសធម្មតាគឺជាអត្ថបទរលោងនៅក្នុងភ្លៅ បើមិនយកទៅជាការវាយតម្លៃនូវការចុចអានផ្សេងទៀត។ ពាក្យបញ្ជាខាងលើរក្សាទុកកំណត់យោង Key Vault ប៉ុន្តែអគារវិទ្យាសាស្ត្រ/កម្មវិធីរបស់អ្នកត្រូវតែបរិភោគសម្ងាត់នោះ និងផ្ដល់សិទ្ធិចូលដំណើរការជាផ្លូវការពេលរត់។
 
-### សុវត្ថិភាពបណ្ដាញ
-```yaml
-# azure.yaml - Configure network security
-infra:
-  parameters:
-    enablePrivateEndpoints: true
-    allowedIPs:
-      - "203.0.113.0/24"  # Office IP range
-      - "198.51.100.0/24" # VPN IP range
-```
+### សុវត្ថិភាពបណ្តាញ
+សន្និដ្ឋាន និងប្រើប្រាស់ប៉ារ៉ាម៉ែត្របណ្តាញនៅក្នុង Bicep ហើយផ្ទៀងផ្ទាត់វានៅក្នុង `infra/main.parameters.json`។ គ្មានស្រទាប់ `infra.parameters` ទូទៅនៅក្នុង `azure.yaml` ទេ។ ឧទាហរណ៍ឯកសារសង្កេត `203.0.113.0/24` និង `198.51.100.0/24` មិនមែនបណ្តាញកន្លែងធ្វើការណ៍/VPN ពិតប្រាកដទេ; ជំនួសវាដោយបណ្តាញដែលមានអាណត្តិ។
 
-### អត្តសញ្ញាណ និងការគ្រប់គ្រងការចូលដំណើរការ
-```yaml
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    identity:
-      type: systemAssigned
-    keyVault:
-      - name: app-secrets
-        secrets:
-          - database-connection
-          - external-api-key
-```
+### ការគ្រប់គ្រងអត្តសញ្ញាណ និងការចូលដំណើរការ
+បើករបស់ Container App `identity` នៅក្នុង Bicep ហើយផ្ដល់តួនាទី Key Vault ផ្នែកទិន្នន័យនៅ​លើវិស័យ Vault។ កំណត់ឡើងសម្ងាត់ដែលគាំទ្រដោយ Key Vault និងយោងពេលរត់នៅក្នុងធនធាននោះ។ `identity` និង `keyVault` មិនមែនជាគ្រឿងចំណុចសេវា azd ទូទៅទេ។ មើល [Authentication & Managed Identity](../chapter-03-configuration/authsecurity.md)។
 
-## 🚨 យុទ្ធសាស្រ្តបង្វិលត្រឡប់
+## 🚨 យុទ្ធសាស្ត្រត្រឡប់ក្រោយ
 
-### ការត្រឡប់ឆាប់រហ័ស
+### ត្រឡប់ក្រោយរហ័ស
 ```bash
-# AZD មិនមានមុខងារ​បង្វិលត្រឡប់ (rollback) ស្រេចក្នុងខ្លួនទេ។ វិធីសាស្ត្រដែលផ្ដល់អនុសាសន៍៖
+# AZD doesn't have built-in rollback. Recommended approaches:
 
-# ជម្រើស 1: ដាក់ឡើងវិញពី Git (ផ្ដល់អនុសាសន៍)
-git revert HEAD  # ត្រឡប់ការផ្លាស់ប្ដូរ commit ដែលមានបញ្ហា
+# Option 1: Redeploy from Git (recommended)
+git revert HEAD  # Revert the problematic commit
 git push
 azd deploy
 
-# ជម្រើស 2: ដាក់ឡើងវិញ commit ជាក់លាក់
-git checkout <previous-commit-hash>
+# Option 2: Redeploy specific commit
+git checkout "<previous-commit-hash>"
 azd deploy
 git checkout main
 ```
 
-### ការត្រឡប់ហេដ្ឋារចនាសម្ព័ន្ធ
+### ត្រឡប់ក្រោយអគារវិទ្យាសាស្ត្រ
 ```bash
-# ពិនិត្យមើលការផ្លាស់ប្តូរហេដ្ឋារចនាសម្ព័ន្ធ មុនអនុវត្ត
+# Preview infrastructure changes before applying
 azd provision --preview
 
-# សម្រាប់ការវិលត្រឡប់ហេដ្ឋារចនាសម្ព័ន្ធ សូមប្រើការគ្រប់គ្រងកំណែ:
-git revert HEAD  # វិលត្រឡប់ការផ្លាស់ប្តូរហេដ្ឋារចនាសម្ព័ន្ធ
-azd provision    # អនុវត្តស្ថានភាពមុននៃហេដ្ឋារចនាសម្ព័ន្ធ
+# For infrastructure rollback, use version control:
+git revert HEAD  # Revert infrastructure changes
+azd provision    # Apply previous infrastructure state
 ```
 
-### ការត្រឡប់មigrations ទិន្នន័យ
+### ត្រឡប់ក្រោយបម្លែងមូលដ្ឋានទិន្នន័យ
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -650,21 +634,21 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 ម៉េត្រិកការដាក់ឲ្យដំណើរការ
+## 📊 គន្លងវាស់វែងការដាក់បញ្ចូល
 
-### តាមដានប្រសិទ្ធភាពការដាក់ឲ្យដំណើរការ
+### តាមដានប្រសិទ្ធភាពការដាក់បញ្ចូល
 ```bash
-# មើលស្ថានភាពនៃការដាក់ឲ្យដំណើរការបច្ចុប្បន្ន
+# View current deployment status
 azd show
 
-# តាមដានកម្មវិធីដោយប្រើ Application Insights
+# Monitor application with Application Insights
 azd monitor --overview
 
-# មើលមេត្រិចក្នុងពេលពិត
+# View live metrics
 azd monitor --live
 ```
 
-### ការចាប់ប្រមូលម៉េត្រិកផ្ទាល់ខ្លួន
+### ការបង្កើតគន្លងវាស់វែងផ្ទាល់ខ្លួន
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -681,32 +665,32 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 អនុវត្តន៍ល្អបំផុត
+## 🎯 អនុវត្តល្អបំផុត
 
-### 1. ភាពស្របគ្នារវាងបរិយាកាស
+### 1. ទៀងទាត់បរិយាកាស
 ```bash
-# ប្រើឈ្មោះឲ្យស្របគ្នា
+# Use consistent naming
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# រក្សាសមភាពរវាងបរិយាកាស
+# Maintain environment parity
 ./scripts/sync-environments.sh
 ```
 
-### 2. ការផ្ទៀងផ្ទាត់ហេដ្ឋារចនាសម្ព័ន្ធ
+### 2. ផ្ទៀងផ្ទាត់អគារវិទ្យាសាស្ត្រ
 ```bash
-# ពិនិត្យមើលការផ្លាស់ប្តូររចនាសម្ព័ន្ធមុនការដាក់ឱ្យប្រតិបត្តិ
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# ប្រើការត្រួតពិនិត្យកូដ (linting) សម្រាប់ ARM/Bicep
+# Use ARM/Bicep linting
 az bicep lint --file infra/main.bicep
 
-# ផ្ទៀងផ្ទាត់វេយ្យាករណ៍របស់ Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 ```
 
-### 3. ការរួមបញ្ចូលការធ្វើតេស្ត
+### 3. ការរួមបញ្ចូលតេស្ត
 ```yaml
 hooks:
   predeploy:
@@ -735,9 +719,9 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. ការយោង និងកំណត់ហេតុ
+### 4. ឯកសារ និងកំណត់ហេតុ
 ```bash
-# កត់ត្រានីតិវិធីដាក់ចេញ
+# Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -745,64 +729,70 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## ជំហានបន្ទាប់
 
-- [Provisioning Resources](provisioning.md) - ជជែកជ្រៅជាងក្នុងការគ្រប់គ្រងហេដ្ឋារចនាសម្ព័ន្ធ
-- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - ផែនការយុទ្ធសាស្ត្រការដាក់ឲ្យដំណើរការ
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - ដោះស្រាយបញ្ហាក្នុងការដាក់ឲ្យដំណើរការ
-- [Best Practices](../chapter-07-troubleshooting/debugging.md) - យុទ្ធសាស្ត្រដាក់ឲ្យដំណើរការសម្រាប់ផលិតកម្ម
+- [Provisioning Resources](provisioning.md) - ជ្រៅចូលក្នុងការគ្រប់គ្រងអគារវិទ្យាសាស្ត្រ
+- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - ផែនការយុទ្ធសាស្ត្រ​ដាក់បញ្ចូល
+- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - ដោះស្រាយបញ្ហាក្នុងការដាក់បញ្ចូល
+- [Best Practices](../chapter-07-troubleshooting/debugging.md) - យុទ្ធសាស្ត្រដាក់បញ្ចូលសម្រាប់ផលិតកម្ម
 
-## 🎯 លំហាត់អនុវត្តផ្ទាល់
+## 🎯 លំហាត់ដាក់បញ្ចូលប្រាក់ប្រឹក្សា
 
-### លំហាត់ 1: ចរន្តការដាក់ឲ្យដំណើរការបន្ថែមលើ (20 នាទី)
-**គោលដៅ**: បង្កើតជំនាញក្នុងការប្រៀបធៀបរវាងការដាក់ឲ្យដំណើរការពេញលេញ និងការដាក់ឲ្យដំណើរការបន្ថែម
+### លំហាត់ ១៖ វដ្តដាក់បញ្ចូលបន្តបន្ទាប់ (២០នាទី)
+**គោលបំណង**: ជំនាញកំណត់ខុសគ្នារវាងការដាក់បញ្ចូលពេញលេញ និងបន្តបន្ទាប់
+
+**ចំណុចចាប់ផ្តើម:** Bash, Node.js 22, Git, ការចូល azd, និងការជាវ Azure ដែលមានសិទ្ធិដាក់បញ្ចូល។ រត់នៅក្នុងថតថ្មី; រំពឹងថា App Service/Cosmos DB អាចគិតថ្លៃ។ ពេលវេលាសំឡេងពីតំបន់ និងគំរូ។
 
 ```bash
-# ការដាក់ប្រើដំបូង
+# Initial deployment
 mkdir deployment-practice && cd deployment-practice
-azd init --template todo-nodejs-mongo
-azd up
+azd init --template todo-nodejs-mongo .
+time azd up
 
-# កត់ត្រាពេលវេលានៃការដាក់ប្រើដំបូង
+# Record initial deployment time
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# ធ្វើការផ្លាស់ប្តូរកូដ
-echo "// Updated $(date)" >> src/api/src/server.js
+# Make a code change
+echo "// Updated $(date)" >> src/api/src/index.ts
 
-# ដាក់ប្រើតែកូដ (លឿន)
+# Deploy only code (fast)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# ប្រៀបធៀបពេលវេលា
+# Compare times
 cat deployment-log.txt
 
-# សម្អាត
+# Clean up
 azd down --force --purge
 ```
 
-**កញ្ចប់ជោគជ័យ:**
-- [ ] ការដាក់ឲ្យដំណើរការពេញលេញចំណាយ 5-15 នាទី
-- [ ] ការដាក់ឲ្យដំណើរការបែប code-only ចំណាយ 2-5 នាទី
-- [ ] ការផ្លាស់ប្តូរកូដបញ្ចេញនៅក្នុងកម្មវិធីដែលបានដាក់
-- [ ] ហេដ្ឋារចនាសម្ព័ន្ធមិនផ្លាស់ប្តូរបន្ទាប់ពី `azd deploy`
+**លក្ខខណ្ឌជោគជ័យ:**
+- [ ] កត់ត្រាពេលវេលាប្រតិបត្តិការ១២៥សម្រាប់ពាក្យបញ្ជារ២ទាំងអស់ (គ្មានប៉ុណ្ណោះពេលវេលានៅធានាឡើយ)
+- [ ] ពាក្យបញ្ជាទាំងពីរបញ្ចប់ដោយជោគជ័យ
+- [ ] API នៅស្ថិតក្នុងសភាពដំណើរការ; ការកែប្រែមតិយោបល់តែមួយគឺមិនមែនជាបម្លែង UI ច្បាស់ឡើយ
+- [ ] អគារវិទ្យាសាស្ត្រមិនបានផ្លាស់ប្តួរតាំងពី `azd deploy`
 
-**លទ្ធផលការសិក្សា**: `azd deploy` លឿន 50-70% ជាង `azd up` សម្រាប់ការផ្លាស់ប្តូរកូដ
+**ផលប៉ះពាល់ការសិក្សា**: `azd deploy` មិនបញ្ចូលការផ្គត់ផ្គង់អគារវិទ្យាសាស្ត្រ។ ប្រៀបធៀបទ្រង់ទ្រាយពេលវេលាដែលបានវាស់ ត្រូវប្រៀបធៀបមិនត្រូវទុកចិត្តលើការល្បឿនបង្គួរដែលថេរ។
 
-### លំហាត់ 2: Hooks ដាក់ឲ្យដំណើរការផ្ទាល់ខ្លួន (30 នាទី)
-**គោលដៅ**: អនុវត្តអូតូម៉ាទ័រមុននិងបន្ទាប់ការដាក់ឲ្យដំណើរការ
+### លំហាត់ ២៖ Hook ដាក់បញ្ចូលស្វ័យប្រវត្តិកម្ម (៣០នាទី)
+**គោលបំណង**: អនុវត្តស្វ័យប្រវត្តិការមុន និងបន្ទាប់ពីដាក់បញ្ចូល
+
+**ចំណុចចាប់ផ្តើម:** គម្រោង `deployment-practice` ដែលបាន initialize ខាងលើ។ ប្រសិនបើអ្នកបានសំអាត វារត់ `azd up` ម្តងទៀតមុនពេលតេស្តការដាក់បញ្ចូលតែកូដ។ ការផ្ទៀងផ្ទាត់ខាងក្រោមប្រើ script សង់ API ពិតមួយ មិនមែន script `test:unit` មិនមានស្ថិត។ តេស្ត API ក្នុងគំរូត្រូវការចូលទៅមូលដ្ឋានទិន្នន័យដែលបានកំណត់; មិនមែនតេស្តឯកត្តា។
 
 ```bash
-# បង្កើតស្គ្រីបផ្ទៀងផ្ទាត់មុនការដាក់ចេញ
+# Create pre-deploy validation script
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "⚠️ Running pre-deployment checks..."
 
-# ពិនិត្យថាការធ្វើតេស្តបានជោគជ័យ
-if ! npm run test:unit; then
-    echo "❌ Tests failed! Aborting deployment."
+# Install API dependencies and check its actual lint/TypeScript build
+npm --prefix src/api ci
+if ! npm --prefix src/api run build; then
+    echo "❌ Build validation failed! Aborting deployment."
     exit 1
 fi
 
-# ពិនិត្យរកការផ្លាស់ប្តូរដែលមិនទាន់បាន commit
+# Check for uncommitted changes
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -812,14 +802,15 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# បង្កើតសាកល្បងសុខភាពបន្ទាប់ពីការដាក់ចេញ
+# Create post-deploy smoke test
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "💨 Running smoke tests..."
 
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Health check passed!"
 else
     echo "❌ Health check failed!"
@@ -831,8 +822,11 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# បន្ថែម hooks ទៅក្នុង azure.yaml
-cat >> azure.yaml << 'EOF'
+# Merge the following into the EXISTING azure.yaml using your editor.
+# If hooks already exists, merge its children; never append a duplicate YAML key.
+```
+
+```yaml
 
 hooks:
   predeploy:
@@ -842,23 +836,26 @@ hooks:
   postdeploy:
     shell: sh
     run: ./scripts/post-deploy-test.sh
-EOF
+```
 
-# សាកល្បងការដាក់ចេញជាមួយ hooks
+```bash
+# Test deployment with hooks
 azd deploy
 ```
 
-**កញ្ចប់ជោគជ័យ:**
-- [ ] ស្គ្រីប Pre-deploy រត់មុនការដាក់ឲ្យដំណើរការ
-- [ ] ការដាក់ឲ្យដំណើរការបញ្ឈប់បើតេស្តបរាជ័យ
-- [ ] ការសាកល្បង smoke បន្ទាប់-deploy ធ្វើការផ្ទៀងផ្ទាត់សុខភាព
+**លក្ខខណ្ឌជោគជ័យ:**
+- [ ] script មុនដាក់បញ្ចូលរត់មុនការដាក់បញ្ចូល
+- [ ] ដាក់បញ្ចូលបញ្ឈប់បើការផ្ទៀងផ្ទាត់សង់បរាជ័យ
+- [ ] នេះបន្ទាប់ពីដាក់បញ្ចូល smoke test ផ្ទៀងផ្ទាត់សុខភាព
 - [ ] Hooks រត់តាមលំដាប់ត្រឹមត្រូវ
 
-### លំហាត់ 3: យុទ្ធសាស្ត្រការដាក់ឲ្យដំណើរការជាច្រើនបរិយាកាស (45 នាទី)
-**គោលដៅ**: អនុវត្តចរន្តការដាក់ឲ្យដំណើរការជាដំណាក់កាល (dev → staging → production)
+### លំហាត់ ៣៖ យុទ្ធសាស្ត្រដាក់បញ្ចូលពហុបរិយាកាស (៤៥នាទី)
+**គោលបំណង**: អនុវត្តវដ្តដាក់បញ្ចូលជាចំណុច (dev → staging → production)
+
+**ចំណុចចាប់ផ្តើម៖** គម្រោង todo រួចរាល់ដូចគ្នាជាមួយ `jq`។ បង្កើតបរិយាកាសខាងក្រោមដោយមានតម្លៃការជាវ/ទីតាំងពិត (ឬកំណត់ `AZURE_SUBSCRIPTION_ID`/`AZURE_LOCATION` ក្នុងមួយមួយ) **មុន**ការហៅការងារដែលគ្មានការទាមទារ។ វាធ្វើឱ្យបរាជ័យដោយចេតនា ជាជាងបង្កើតតម្លៃខ្វះ។ ប្រើបរិយាកាសហ្វឹកហាត់ដែលអាចចោលបានតែប៉ុណ្ណោះ មិនមែនការជាវផលិតកម្មពិតទេ។
 
 ```bash
-# បង្កើតស្គ្រីបសម្រាប់ដាក់ចេញ
+# Create deployment script
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -866,25 +863,25 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# ជំហាន 1: ដាក់ចេញទៅ dev
+# Step 1: Deploy to dev
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
 azd up --no-prompt
 
 echo "Running dev tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# ជំហាន 2: ដាក់ចេញទៅ staging
+# Step 2: Deploy to staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
 azd up --no-prompt
 
 echo "Running staging tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# ជំហាន 3: ការអនុម័តដោយដៃសម្រាប់បរិយាកាសផលិត
+# Step 3: Manual approval for production
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -896,7 +893,7 @@ if [[ $confirm == "yes" ]]; then
     azd up --no-prompt
     
     echo "Running production smoke tests..."
-    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
     
     echo "
 ✅ Production deployment completed!"
@@ -907,74 +904,90 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# បង្កើតបរិយាកាស
-azd env new dev
-azd env new staging
-azd env new production
+# Create environments
+# Reuse existing dev if you completed Exercise 1; create unused environments
+azd env select dev
+azd env new staging --subscription "<subscription-id>" --location eastus2
+azd env new production --subscription "<subscription-id>" --location eastus2
 
-# រត់ការដាក់ចេញតាមដំណាក់កាល
+# Run staged deployment
 ./deploy-staged.sh
+
+# After verification, delete each disposable deployment (review prompts)
+azd down --environment dev
+azd down --environment staging
+azd down --environment production
 ```
 
-**កញ្ចប់ជោគជ័យ:**
-- [ ] បរិយាកាស Dev ដាក់ឲ្យដំណើរការជោគជ័យ
-- [ ] បរិយាកាស Staging ដាក់ឲ្យដំណើរការជោគជ័យ
-- [ ] តម្រូវការអនុម័តដោយដោយដៃសម្រាប់ផលិតកម្ម
-- [ ] បរិយាកាសទាំងអស់មានការត្រួតពិនិត្យសុខភាពដំណើរការបាន
-- [ ] អាចត្រឡប់ក្រោយបានប្រសិនបើចាំបាច់
+**គោលសំដៅជោគជ័យ៖**
+- [ ] បរិយាកាស Dev ត្រូវបានផ្សព្វផ្សាយដោយជោគជ័យ
+- [ ] បរិយាកាស Staging ត្រូវបានផ្សព្វផ្សាយដោយជោគជ័យ
+- [ ] តម្រូវការការអនុម័តដោយដៃសម្រាប់ផលិតកម្ម
+- [ ] បរិយាកាសទាំងអស់មានការត្រួតពិនិត្យសុខភាពដំណើរការ
+- [ ] អាចត្រឡប់ក្រោយបានបើចាំបាច់
 
-### លំហាត់ 4: យុទ្ធសាស្ត្រត្រឡប់ (25 នាទី)
-**គោលដៅ**: អនុវត្តនិងសាកល្បងការត្រឡប់ការដាក់ឲ្យដំណើរការប្រើ Git
+### លំហាត់ 4៖ យុទ្ធសាស្ត្រត្រឡប់ក្រោយ (25 នាទី)
+**គោលដៅ៖** អនុវត្តន៍ និងសាកល្បងការត្រឡប់ក្រោយការផ្សព្វផ្សាយដោយប្រើ Git
+
+**ចំណុចចាប់ផ្តើម៖** ការត្រួតពិនិត្យហ្វឹកហាត់ដែលត្រូវបានបំបែកនៃពាំនាំ todo ទាំងអស់ពីមូលដ្ឋានប្រភពបានបញ្ជូនទៅ, ធ្វើការងារ Git ស្អាត, និងបរិយាកាសកំណត់រចនាសម្ព័ន្ធដែលអាចចោលបាន។ មិនដែលណែនាំឱ្យមានការបរាជ័យដោយចេតនានៅក្នុងគម្រោងផលិតកម្មពិត។ `APP_VERSION` ខាងក្រោយគឺសម្រាប់កំណត់ហេតុបណ្ដោះអាសន្នទេ រហូតតែអ្នកភ្ជាប់វាចូលក្នុងកម្មវិធីយ៉ាងច្បាស់។
 
 ```bash
-# ដាក់ឲ្យដំណើរការ v1
+# Deploy v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# រក្សាទុក hash នៃ commit v1
+# Save v1 commit hash
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# ដាក់ឲ្យដំណើរការ v2 ដែលមានការផ្លាស់ប្តូរដែលបាក់បែក
-echo "throw new Error('Intentional break')" >> src/api/src/server.js
-git add . && git commit -m "v2 with intentional break"
+# Deploy v2 with breaking change
+echo "throw new Error('Intentional break');" >> src/api/src/index.ts
+git add src/api/src/index.ts
+git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
-azd deploy
+DEPLOY_FAILED=false
+azd deploy api || DEPLOY_FAILED=true
 
-# រកឃើញការបរាជ័យ និងត្រឡប់វិញ
-if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+# Detect failure and rollback
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+if [ "$DEPLOY_FAILED" = true ] || ! curl -f "$API_URL/lists"; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # ត្រឡប់វិញដោយប្រើ git
+    # Rollback using git
     git revert HEAD --no-edit
     
-    # ត្រឡប់បរិយាកាសវិញ
+    # Rollback environment
     azd env set APP_VERSION "1.0.0"
     
-    # ដាក់ឲ្យដំណើរការ v1 វិញ
-    azd deploy
+    # Redeploy v1
+    azd deploy api
+    curl --fail "$API_URL/lists"
     
     echo "✅ Rolled back to v1.0.0"
 fi
+
+# Clean up the disposable deployment when finished
+azd down
 ```
 
-**កញ្ចប់ជោគជ័យ:**
-- [ ] អាចរកឃើញការបរាជ័យក្នុងការដាក់ឲ្យដំណើរការ
-- [ ] ស្គ្រីបត្រឡប់រត់ដោយស្វ័យប្រវត្តិ
-- [ ] កម្មវិធីត្រលប់ទៅស្ថានភាពដំណើរការបាន
-- [ ] ការត្រួតពិនិត្យសុខភាពជោគជ័យបន្ទាប់ពីត្រឡប់
+**គោលសំដៅជោគជ័យ៖**
+- [ ] អាចរកឃើញការបរាជ័យការផ្សព្វផ្សាយ
+- [ ] ស្គ្រីបត្រឡប់ក្រោយអនុវត្តដោយស្វ័យប្រវត្តិ
+- [ ] កម្មវិធីត្រឡប់ទៅស្ថានភាពដំណើរការឡើងវិញ
+- [ ] ការត្រួតពិនិត្យសុខភាពជាប់ខ្នងបន្ទាប់ពីត្រឡប់ក្រោយ
 
-## 📊 ការតាមដានម៉េត្រិកការដាក់ឲ្យដំណើរការ
+## 📊 ការតាមដានមេតូណកីឡាផ្សព្វផ្សាយ
 
-### តាមដានប្រសិទ្ធភាពការដាក់ឲ្យដំណើរការ
+### តាមដានប្រសិទ្ធភាពការផ្សព្វផ្សាយរបស់អ្នក
 
 ```bash
-# បង្កើតស្គ្រីបសម្រាប់មេត្រិចការដាក់ប្រើ
+# Create deployment metrics script
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
 
 azd deploy "$@"
+DEPLOY_STATUS=$?
 
 END_TIME=$(date +%s)
 DURATION=$((END_TIME - START_TIME))
@@ -986,26 +999,27 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# កត់ត្រាទៅក្នុងឯកសារ
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+# Log to file
+echo "$(date +%Y-%m-%dT%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+exit "$DEPLOY_STATUS"
 EOF
 
 chmod +x track-deployment.sh
 
-# ប្រើវា
+# Use it
 ./track-deployment.sh
 ```
 
-**វិភាគម៉េត្រិករបស់អ្នក:**
+**វិភាគមេតូណិចរបស់អ្នក៖**
 ```bash
-# មើលប្រវត្តិការដាក់ចេញ
+# View deployment history
 cat deployment-metrics.csv
 
-# គណនាពេលវេលាមធ្យមនៃការដាក់ចេញ
+# Calculate average deployment time
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
-## ធនធានបន្ថែម
+## ប្រាក់ចំណេញបន្ថែម
 
 - [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
@@ -1014,9 +1028,9 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 ---
 
-**Navigation**
-- **មេរៀនមុន**: [Your First Project](../chapter-01-foundation/first-project.md)
-- **មេរៀនបន្ទាប់**: [Provisioning Resources](provisioning.md)
+**ការនាវិក**
+- **មេរៀនមុន**៖ [គម្រោងដំបូងរបស់អ្នក](../chapter-01-foundation/first-project.md)
+- **មេរៀនបន្ទាប់**៖ [ការផ្គត់ផ្គង់ធនធាន](provisioning.md)
 
 ---
 

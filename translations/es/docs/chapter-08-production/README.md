@@ -1,22 +1,24 @@
-# Capítulo 8: Patrones de Producción y Empresariales
+# Capítulo 8: Patrones de Producción y Empresa
 
-**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duración**: 2-3 horas | **⭐ Complejidad**: Avanzado
+**📚 Curso**: [AZD para Principiantes](../../README.md) | **⏱️ Duración**: 2-3 horas | **⭐ Complejidad**: Avanzado
 
 ---
 
-## Visión General
+## Resumen
 
-Este capítulo cubre patrones de despliegue listos para empresas, endurecimiento de seguridad, monitoreo y optimización de costos para cargas de trabajo de IA en producción.
+Este capítulo cubre patrones de implementación listos para empresas, endurecimiento de seguridad, monitoreo y optimización de costes para cargas de trabajo de IA en producción.
 
-> Validado contra `azd 1.27.1` en julio de 2026.
+Esta es una referencia arquitectónica, no una plantilla de producción completa y desplegable. Los ejemplos omiten detalles de integración que deben ser proporcionados y probados en su propia aplicación; leer la lista de verificación no certifica la preparación para producción.
 
-## Objetivos de Aprendizaje
+> **Revisión de lanzamiento (2026-11-04):** La guía AI CLI fue verificada contra la documentación/fuente de `azd 1.37.2`, agentes `1.0.0-beta.23` y evaluaciones `1.0.0-beta.2`. Véase [cambios y correcciones de la versión](production-ai-practices.md#recent-release-changes-and-fixes) para requisitos de compatibilidad y detalles de migración; esto no es una validación en vivo de despliegue.
+
+## Objetivos de aprendizaje
 
 Al completar este capítulo, usted podrá:
-- Desplegar aplicaciones resilientes multi-región
-- Implementar patrones de seguridad empresariales
+- Desplegar aplicaciones resilientes multirregión
+- Implementar patrones de seguridad empresarial
 - Configurar monitoreo integral
-- Optimizar costos a gran escala
+- Optimizar costos a escala
 - Configurar pipelines CI/CD con AZD
 
 ---
@@ -24,14 +26,14 @@ Al completar este capítulo, usted podrá:
 ## 📚 Lecciones
 
 | # | Lección | Descripción | Tiempo |
-|---|--------|-------------|------|
-| 1 | [Prácticas de IA en Producción](production-ai-practices.md) | Patrones de despliegue empresariales | 90 min |
+|---|---------|-------------|--------|
+| 1 | [Prácticas de IA en Producción](production-ai-practices.md) | Patrones de despliegue empresarial | 90 min |
 
 ---
 
-## 🚀 Lista de Verificación para Producción
+## 🚀 Lista de verificación para producción
 
-- [ ] Despliegue multi-región para resiliencia
+- [ ] Despliegue multirregión para resiliencia
 - [ ] Identidad administrada para autenticación (sin claves)
 - [ ] Application Insights para monitoreo
 - [ ] Presupuestos y alertas de costos configurados
@@ -43,33 +45,34 @@ Al completar este capítulo, usted podrá:
 
 ## 🏗️ Patrones de Arquitectura
 
-### Patrón 1: Microservicios en IA
+### Patrón 1: Microservicios IA
 
 ```mermaid
 graph LR
-    Gateway[Puerta de enlace API] --> AI[Servicio de IA] --> Models[Modelos Microsoft Foundry]
-    Gateway --> Auth[Servicio de Autenticación]
-    AI --> Data[Almacén de datos]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
-### Patrón 2: IA impulsada por eventos
+### Patrón 2: IA basada en eventos
 
 ```mermaid
 graph LR
-    EventGrid[Cuadrícula de Eventos] --> Functions[Funciones] --> Pipeline[Canalización de IA]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
 
-## 🔐 Mejores Prácticas de Seguridad
+## 🔐 Mejores prácticas de seguridad
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -80,36 +83,29 @@ properties: {
 
 ---
 
-## 💰 Optimización de Costos
+## 💰 Optimización de costos
 
-| Estrategia | Ahorros |
-|----------|---------|
-| Escalar a cero (Container Apps) | 60-80% |
-| Usar niveles por consumo para desarrollo | 50-70% |
-| Escalado programado | 30-50% |
-| Capacidad reservada | 20-40% |
+| Estrategia | Restricción principal |
+|-----------|----------------------|
+| Escalar a cero (Container Apps) | Requiere un disparador adecuado; otros servicios aún generan costos |
+| Usar niveles de consumo para desarrollo | Comparar precios del servicio seleccionado y la carga de trabajo |
+| Escalado programado | Escalar mediante infraestructura/automatización soportada |
+| Reservas/capacidad aprovisionada | Sólo cuando es soportado; compromisos pueden aumentar costos inactivos |
 
-```bash
-# Establecer alertas de presupuesto
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Use el [patrón completo de recurso de presupuesto](production-ai-practices.md#2-cost-monitoring-and-budgets) con una fecha de inicio válida, ámbito de facturación, destinatarios y permisos. Un presupuesto envía alertas; no limita el gasto. El ahorro depende de la utilización medida y no son porcentajes garantizados.
 
 ---
 
-## 📊 Configuración de Monitoreo
+## 📊 Configuración de monitoreo
 
 ```bash
-# Transmitir registros
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Verificar Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# Ver métricas
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -118,7 +114,7 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navegación
 
 | Dirección | Capítulo |
-|-----------|---------|
+|-----------|----------|
 | **Anterior** | [Capítulo 7: Solución de Problemas](../chapter-07-troubleshooting/README.md) |
 | **Curso Completo** | [Inicio del Curso](../../README.md) |
 

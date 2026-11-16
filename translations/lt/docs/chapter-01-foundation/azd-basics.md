@@ -1,120 +1,122 @@
-# AZD pagrindai - Azure Developer CLI supratimas
+# AZD Pagrindai – Pagrindinės sąvokos ir esmė
 
-# AZD pagrindai - Pagrindinės sąvokos ir pagrindai
-
-**Skyrių navigacija:**
-- **📚 Kurso pradžia**: [AZD Pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 1 skyrius - Pagrindai ir greitas startas
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 1 skyrius – Pagrindai ir greitas startas
 - **⬅️ Ankstesnis**: [Kurso apžvalga](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Kitas**: [Instaliavimas ir nustatymas](installation.md)
-- **🚀 Kitas skyrius**: [2 skyrius: AI-pirmasis vystymas](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Kitas**: [Diegimas ir nustatymai](installation.md)
+- **🚀 Kitas skyrius**: [2 skyrius: AI-pirmas vystymas](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Įvadas
 
-Ši pamoka supažindins jus su Azure Developer CLI (azd) — galingu komandine eilutei skirtu įrankiu, kuris pagreitina jūsų kelią nuo vietinio vystymo iki diegimo Azure. Išmoksite pagrindines sąvokas, pagrindines funkcijas ir suprasite, kaip azd supaprastina debesų gimtąjų programų diegimą.
+> Peržiūrėta pagal `azd 1.37.2` (2026 m. lapkritis). Bash komandos naudoja kabučiuose esančius vietos rezervavimo ženklus, kuriuos turite pakeisti. Šablonų darbo eigos naudoja `.` pasirenkant dabartinį katalogą; be katalogo argumento, šablono inicializavimas sukuria poaplankį ir nekeičia jūsų terminalo darbinio katalogo. Sudėtingi fragmentai yra iliustraciniai, ne pilni projektai.
+
+Ši pamoka supažindina jus su Azure Developer CLI (azd), galingu komandine eilute valdomu įrankiu, kuris pagreitina jūsų kelią nuo vietinio kūrimo iki Azure diegimo. Išmoksite pagrindines sąvokas, pagrindines funkcijas ir suprasite, kaip azd supaprastina debesų natūralios aplikacijos diegimą.
 
 ## Mokymosi tikslai
 
-Pamokos pabaigoje jūs:
-- Suprasite, kas yra Azure Developer CLI ir jo pagrindinį tikslą
+Baigę šią pamoką, jūs:
+- Suprasite, kas yra Azure Developer CLI ir koks jo pagrindinis tikslas
 - Išmoksite pagrindines šablonų, aplinkų ir paslaugų sąvokas
-- Išnagrinėsite pagrindines funkcijas, įskaitant šablonais paremtą vystymą ir Infrastruktūrą kaip Kodą
+- Išnagrinėsite svarbias funkcijas, įskaitant šablonais pagrįstą vystymą ir infrastruktūrą kaip kodą
 - Suprasite azd projekto struktūrą ir darbo eigą
-- Būsite pasirengę įdiegti ir sukonfigūruoti azd savo vystymo aplinkai
+- Būsite pasiruošę įdiegti ir sukonfigūruoti azd savo vystymo aplinkoje
 
 ## Mokymosi rezultatai
 
-Baigę šią pamoką, galėsite:
-- Paaiškinti azd vaidmenį moderniuose debesų vystymo darbuose
+Baigę pamoką, galėsite:
+- Paaiškinti azd vaidmenį šiuolaikinėse debesų kūrimo darbo eigoje
 - Nustatyti azd projekto struktūros komponentus
-- Apibūdinti, kaip šablonai, aplinkos ir paslaugos veikia kartu
-- Suprasti Infrastruktūros kaip Kodo privalumus naudojant azd
-- Atpažinti skirtingas azd komandas ir jų paskirtis
+- Aprašyti, kaip šablonai, aplinkos ir paslaugos sąveikauja
+- Suprasti infrastruktūros kaip kodo privalumus su azd
+- Atpažinti skirtingas azd komandas ir jų paskirtį
 
 ## Kas yra Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) yra komandine eilutei skirtas įrankis, sukurtas pagreitinti jūsų kelią nuo vietinio vystymo iki diegimo Azure. Jis supaprastina procesą kuriant, diegiant ir valdant debesų gimtąsias programas Azure.
+Azure Developer CLI (azd) yra komandų eilutės įrankis, sukurtas pagreitinti jūsų kelią nuo vietinio vystymo iki Azure diegimo. Jis supaprastina debesų natūralių programų kūrimo, diegimo ir valdymo procesą Azure.
 
-### Ką galite diegti su azd?
+### Ką galite diegti naudodami azd?
 
-azd palaiko platų darbo krūvių spektrą — ir sąrašas nuolat auga. Šiandien galite naudoti azd, kad diegtumėte:
+azd palaiko daugybę darbo krūvių – ir sąrašas nuolat auga. Šiandien galite naudoti azd diegimui:
 
-| Darbo krūvio tipas | Pavyzdžiai | Tas pats darbo srautas? |
-|---------------|----------|----------------|
-| **Tradicinės programos** | Žiniatinklio programos, REST API, statiniai puslapiai | ✅ `azd up` |
-| **Paslaugos ir mikroservisai** | Container Apps, Function Apps, daugiaservisiai back-end'ai | ✅ `azd up` |
-| **Dirbtiniu intelektu paremtos programos** | Pokalbių programos su Microsoft Foundry modeliais, RAG sprendimai su AI Search | ✅ `azd up` |
-| **Išmanieji agentai** | Foundry talpinami agentai, daugiaagentės orkestracijos | ✅ `azd up` |
+| Darbo krūvio tipas | Pavyzdžiai | Ta pati darbo eiga? |
+|------------------|------------|--------------------|
+| **Tradicinės programos** | Tinklapių programos, REST API, statiniai puslapiai | ✅ `azd up` |
+| **Paslaugos ir mikroservisai** | Container Apps, Function Apps, daugiapaslaugiai serveriai | ✅ `azd up` |
+| **Dirbtiniu intelektu paremti sprendimai** | Pokalbių programos su Microsoft Foundry modeliais, RAG sprendimai su AI paieška | ✅ `azd up` |
+| **Išmanieji agentai** | Foundry valdomi agentai, daugiaagentų orchestracijos | ✅ `azd up` |
 
-Pagrindinė įžvalga ta, kad **azd gyvavimo ciklas išlieka toks pats nepriklausomai nuo to, ką diegiate**. Jūs inicijuojate projektą, paruošiate infrastruktūrą, diegiate savo kodą, stebite programą ir išvalote — ar tai paprastas tinklalapis, ar sudėtingas AI agentas.
+Pagrindinė įžvalga yra ta, kad **azd gyvenimo ciklas išlieka toks pats nepriklausomai nuo to, ką diegiate**. Jūs inicijuojate projektą, teikiate infrastruktūrą, diegiate kodą, stebite programą ir išvalote – nesvarbu, ar tai paprastas tinklapis, ar sudėtingas DI agentas.
 
-Ši tolyga numatyta dizaino. azd traktuoja AI galimybes kaip dar vieną paslaugos tipą, kurią jūsų programa gali naudoti, o ne kaip kažką esminai skirto. Pokalbių galinis taškas, naudojantis Microsoft Foundry modeliais, azd požiūriu yra tiesiog dar viena paslauga, kurią reikia sukonfigūruoti ir išdiegti.
+Ši tęstinumas yra sąmoningas dizainas. azd traktuoja DI galimybes kaip dar vieną paslaugos tipą, kuria jūsų programa gali pasinaudoti, o ne kaip kažką esmiškai skirtingo. Pokalbių taškas, paremta Microsoft Foundry modeliais, iš azd perspektyvos yra tiesiog dar viena paslauga konfigūruoti ir diegti.
 
-### 🎯 Kodėl naudoti AZD? Palyginimas iš realaus pasaulio
+### 🎯 Kodėl naudoti AZD? Tikro pasaulio palyginimas
 
-Palyginkime paprastos žiniatinklio programos su duomenų baze diegimą:
+Palyginkime paprastos internetinės programos su duomenų baze diegimą:
 
 #### ❌ BE AZD: Rankinis Azure diegimas (30+ minučių)
 
+**Iliustracinis Bash pavyzdys, ne vykdomasis programos pradžios taškas.** Tai reikalauja esamos programos kodo, unikalių išteklių pavadinimų, Azure CLI autentifikacijos ir reikiamų CLI plėtinių. Naudokite šablono pratimą žemiau end-to-end palaikomam procesui.
+
 ```bash
-# Žingsnis 1: Sukurti išteklių grupę
+# Step 1: Create resource group
 az group create --name myapp-rg --location eastus
 
-# Žingsnis 2: Sukurti App Service planą
+# Step 2: Create App Service Plan
 az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# Žingsnis 3: Sukurti Web programą
+# Step 3: Create Web App
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
-  --runtime "NODE:18-lts"
+  --runtime "NODE:22-lts"
 
-# Žingsnis 4: Sukurti Cosmos DB paskyrą (10–15 minučių)
+# Step 4: Create Cosmos DB account (10-15 minutes)
 az cosmosdb create --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --kind MongoDB
 
-# Žingsnis 5: Sukurti duomenų bazę
+# Step 5: Create database
 az cosmosdb mongodb database create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --name tododb
 
-# Žingsnis 6: Sukurti kolekciją
+# Step 6: Create collection
 az cosmosdb mongodb collection create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --database-name tododb \
   --name todos
 
-# Žingsnis 7: Gauti prisijungimo eilutę
+# Step 7: Get connection string
 CONN_STR=$(az cosmosdb keys list \
   --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --type connection-strings \
   --query "connectionStrings[0].connectionString" -o tsv)
 
-# Žingsnis 8: Konfigūruoti programos nustatymus
+# Step 8: Configure app settings
 az webapp config appsettings set \
   --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --settings MONGODB_URI="$CONN_STR"
 
-# Žingsnis 9: Įjungti žurnalavimą
+# Step 9: Enable logging
 az webapp log config --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --application-logging filesystem \
   --detailed-error-messages true
 
-# Žingsnis 10: Nustatyti Application Insights
+# Step 10: Set up Application Insights
 az monitor app-insights component create \
   --app myapp-insights \
   --location eastus \
   --resource-group myapp-rg
 
-# Žingsnis 11: Susieti Application Insights su Web programa
+# Step 11: Link App Insights to Web App
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -125,230 +127,238 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings APPINSIGHTS_INSTRUMENTATIONKEY="$INSTRUMENTATION_KEY"
 
-# Žingsnis 12: Sukurti programą lokaliai
+# Step 12: Build application locally
 npm install
 npm run build
 
-# Žingsnis 13: Sukurti diegimo paketą
+# Step 13: Create deployment package
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
-# Žingsnis 14: Diegti programą
+# Step 14: Deploy application
 az webapp deployment source config-zip \
   --resource-group myapp-rg \
   --name myapp-web-unique123 \
   --src app.zip
 
-# Žingsnis 15: Laukti ir melstis, kad tai veiktų 🙏
-# (Automatinio patikrinimo nėra, reikalingas rankinis testavimas)
+# Step 15: Wait and pray it works 🙏
+# (No automated validation, manual testing required)
 ```
 
 **Problemos:**
-- ❌ 15+ komandų, kurias reikia atsiminti ir vykdyti teisinga tvarka
-- ❌ 30–45 minučių rankinio darbo
-- ❌ Lengva padaryti klaidų (rašybos klaidos, neteisingi parametrai)
-- ❌ Ryšio eilutės atsiduria terminalo istorijoje
-- ❌ Nėra automatizuoto atsitraukimo, jei kažkas nepavyksta
-- ❌ Sunku pakartoti komandos nariams
-- ❌ Kiekvieną kartą skiriasi (nepakartojama)
+- ❌ Reikia prisiminti ir vykdyti 15+ komandų iš eilės
+- ❌ 30-45 minučių rankinio darbo
+- ❌ Lengva suklysti (rašybos klaidos, neteisingi parametrai)
+- ❌ Kredencialai reikalauja aiškaus tvarkymo; klaidų žurnalai ir terminalo sekimas gali juos atskleisti
+- ❌ Nėra automatizuoto atstatymo, jei kažkas nepavyksta
+- ❌ Sunku pakartoti komandai
+- ❌ Kiekvieną kartą skiriasi (nenuspėjama)
 
 #### ✅ SU AZD: Automatizuotas diegimas (5 komandos, 10-15 minučių)
 
 ```bash
-# Žingsnis 1: Inicializuokite iš šablono
-azd init --template todo-nodejs-mongo
+# Step 1: Initialize from template
+azd init --template todo-nodejs-mongo .
 
-# Žingsnis 2: Autentifikuokitės
+# Step 2: Authenticate
 azd auth login
 
-# Žingsnis 3: Sukurkite aplinką
-azd env new dev
+# Step 3: Select the environment created during init
+azd env select dev
 
-# Žingsnis 4: Peržiūrėkite pakeitimus (nebūtina, bet rekomenduojama)
+# Step 4: Preview changes (optional but recommended)
 azd provision --preview
 
-# Žingsnis 5: Įdiekite viską
+# Step 5: Deploy everything
 azd up
 
-# ✨ Baigta! Viskas įdiegta, sukonfigūruota ir stebima
+# ✨ Done! Everything is deployed, configured, and monitored
 ```
 
 **Privalumai:**
-- ✅ **5 komandos** vs. 15+ rankinių žingsnių
-- ✅ **10-15 minučių** bendras laikas (daugiausia laukiate Azure)
-- ✅ **Mažiau rankinių klaidų** - nuoseklus, šablonais pagrįstas darbo srautas
-- ✅ **Saugus slapčių tvarkymas** - daug šablonų naudoja Azure valdomą slapčių saugyklą
-- ✅ **Pakartojami diegimai** - tas pats darbo srautas kiekvieną kartą
-- ✅ **Pilnai reprodukuojama** - tas pats rezultatas kiekvieną kartą
-- ✅ **Paruošta komandai** - bet kas gali diegti su tomis pačiomis komandomis
-- ✅ **Infrastruktūra kaip kodas** - Bicep šablonai versijomis kontroliuojami
-- ✅ **Įmontuota stebėsena** - Application Insights sukonfigūruotas automatiškai
+- ✅ **5 komandos** prieš 15+ rankinių žingsnių
+- ✅ **10-15 minučių** bendrai (daugiausia laiko laukimas Azure)
+- ✅ **Mažiau rankinių klaidų** – nuosekli, šablonais valdoma darbo eiga
+- ✅ **Saugus slaptų duomenų tvarkymas** – daug šablonų naudoja Azure valdomą slaptų duomenų saugyklą
+- ✅ **Pakartojami diegimai** – ta pati darbo eiga kiekvieną kartą
+- ✅ **Pakartojami infrastruktūros aprašai** – priklauso nuo kvotų, regiono prieinamumo ir šablono versijų
+- ✅ **Paruošta komandai** – kas nors gali diegti su tomis pačiomis komandomis
+- ✅ **Infrastruktūra kaip kodas** – versijų kontroliuojami Bicep šablonai
+- ✅ **Šablonais apibrėžtas stebėjimas** – Application Insights įtraukta šablone
 
-### 📊 Laiko ir klaidų sumažinimas
+### Laikas ir patikimumas
 
-| Metrika | Rankinis diegimas | AZD diegimas | Pagerėjimas |
-|:-------|:------------------|:---------------|:------------|
-| **Komandos** | 15+ | 5 | 67% mažiau |
-| **Laikas** | 30-45 min | 10-15 min | 60% greičiau |
-| **Klaidų rodiklis** | ~40% | <5% | 88% mažiau |
-| **Nuoseklumas** | Mažas (rankinis) | 100% (automatizuotas) | Tobula |
-| **Komandos įvedimas** | 2-4 valandos | 30 minučių | 75% greičiau |
-| **Atkūrimo laikas** | 30+ min (rankinis) | 2 min (automatizuotas) | 93% greičiau |
+Aukščiau pateikti laikai yra apytikriai, ne etalonai. azd sumažina komandų koordinavimo poreikį, tačiau negarantuoja diegimo trukmės, klaidų pašalinimo ar automatinio programos/duomenų bazės atstatymo. Laikykite veikiančias versijas šaltinio valdyme ir testuokite atkūrimo procedūras.
 
 ## Pagrindinės sąvokos
 
 ### Šablonai
-Šablonai yra azd pagrindas. Jie talpina:
-- **Programos kodas** - Jūsų šaltinio kodas ir priklausomybės
-- **Infrastruktūros apibrėžimai** - Azure ištekliai apibrėžti Bicep arba Terraform
-- **Konfigūracijos failai** - Nustatymai ir aplinkos kintamieji
-- **Diegimo scenarijai** - Automatizuoti diegimo darbo srautai
+Šablonai yra azd pamatas. Jie apima:
+- **Programos kodą** – Jūsų šaltinio kodas ir priklausomybės
+- **Infrastruktūros aprašus** – Azure resursai aprašyti Bicep arba Terraform
+- **Konfigūracijos failus** – Nustatymai ir aplinkos kintamieji
+- **Diegimo scenarijus** – Automatizuotos diegimo darbo eigos
 
 ### Aplinkos
-Aplinkos atspindi skirtingus diegimo tikslus:
-- **Development** - Testavimui ir vystymui
-- **Staging** - Preprodukcinė aplinka
-- **Production** - Veikianti gamybinė aplinka
+Aplinkos atspindi skirtingas diegimo paskirties vietas:
+- **Vystymui** – Bandymui ir kūrimui
+- **Paruošiamajai** – Prieš gamybinė aplinka
+- **Gamybinė** – Veikianti gamybinė aplinka
 
-Kiekviena aplinka palaiko savo:
-- Azure resursų grupę
+Kiekviena aplinka turi savo:
+- Aplinkos pavadinimą ir reikšmes; resursų izoliacija priklauso nuo infrastruktūros šablono
 - Konfigūracijos nustatymus
 - Diegimo būseną
 
 ### Paslaugos
-Paslaugos yra jūsų programos statybiniai blokai:
-- **Frontend** - Žiniatinklio programos, vieno puslapio aplikacijos (SPA)
-- **Backend** - API, mikroservisai
-- **Duomenų bazė** - Duomenų saugojimo sprendimai
-- **Saugykla** - Failų ir blobų saugykla
+Paslaugos `azure.yaml` apibūdina diegiamus programos komponentus:
+- **Frontend** – Tinklapio programos, SPA
+- **Backend** – API, mikroservisai
 
-## Pagrindinės funkcijos
+Duomenų bazės ir saugyklos paprastai tiekiamos kaip infrastruktūros resursai, o ne kaip išrasti paslaugų talpinimo įrankiai, tokie kaip `host: postgres`.
 
-### 1. Šablonais grindžiamas vystymas
+## Svarbiausios funkcijos
+
+### 1. Šablonais valdoma vystymosi eiga
 ```bash
-# Naršyti galimus šablonus
+# Browse available templates
 azd template list
 
-# Inicializuoti iš šablono
-azd init --template <template-name>
+# Initialize from a template
+azd init --template "<template-name>" .
 ```
 
 ### 2. Infrastruktūra kaip kodas
-- **Bicep** - Azure domenui skirta kalba
-- **Terraform** - Daugia debesų infrastruktūros įrankis
-- **ARM Templates** - Azure Resource Manager šablonai
+- **Bicep** – Azure domeno specifinė kalba
+- **Terraform** – Daugiadebesų infrastruktūros įrankis
+- Bicep kompiliuoja į ARM šablonus; žali ARM JSON nėra atskira integruota `infra.provider`.
 
-### 3. Integruoti darbo srautai
+### 3. Integruotos darbo eigos
 ```bash
-# Pilnas diegimo darbo procesas
-azd up            # Paruošimas + diegimas — pirminei sąrankai be rankinio įsikišimo
+# Complete deployment workflow
+azd up            # Provision + Deploy this is hands off for first time setup
 
-# 🧪 NAUJA: Peržiūrėkite infrastruktūros pakeitimus prieš diegimą (SAUGU)
-azd provision --preview    # Simuliuokite infrastruktūros diegimą nekeisdami esamos infrastruktūros
+# 🧪 NEW: Preview infrastructure changes before deployment (SAFE)
+azd provision --preview    # Simulate infrastructure deployment without making changes
 
-azd provision     # Sukurti Azure išteklius — jei atnaujinate infrastruktūrą, naudokite tai
-azd deploy        # Diegti programos kodą arba perdiegti programos kodą po atnaujinimo
-azd down          # Išvalyti išteklius
+azd provision     # Create Azure resources if you update the infrastructure use this
+azd deploy        # Deploy application code or redeploy application code once update
+azd down          # Clean up resources
 ```
 
 #### 🛡️ Saugus infrastruktūros planavimas su peržiūra
-Komanda `azd provision --preview` yra žaidimo keitiklis saugiems diegimams:
-- **Saudo vykdymo analizė** - Rodo, kas bus sukurta, pakeista arba ištrinta
-- **Nulinė rizika** - Jokių realių pakeitimų jūsų Azure aplinkoje nebus atlikta
-- **Komandos bendradarbiavimas** - Dalinkitės peržiūros rezultatais prieš diegimą
-- **Sąnaudų įvertinimas** - Supraskite išteklių kaštus prieš įsipareigojant
+Komanda `azd provision --preview` pakeičia žaidimo taisykles saugiam diegimui:
+- **Sausojo paleidimo analizė** – Parodo, kas bus sukurta, pakeista ar ištrinta
+- **Nevykdo infrastruktūros taikymo** – Peržiūri tiekėjo pakeitimus; pirmiausia peržiūrėkite projekto kablius, nes jie gali vykdyti komandas su pašaliniais efektais
+- **Komandinė bendradarbiavimas** – Dalijasi peržiūros rezultatais prieš diegimą
+- **Išlaidų planavimo įvestis** – Peržiūrėkite siūlomus SKU, tada įvertinkite juos Azure kainų skaičiuokle; peržiūra nekainuoja kainos
 
 ```bash
-# Pavyzdinis peržiūros darbo eiga
-azd provision --preview           # Peržiūrėkite, kas pasikeis
-# Peržiūrėkite išvestį, aptarkite su komanda
-azd provision                     # Taikykite pakeitimus užtikrintai
+# Example preview workflow
+azd provision --preview           # See what will change
+# Review the output, discuss with team
+azd provision                     # Apply changes with confidence
 ```
 
-### 📊 Vizualizacija: AZD vystymo darbo srautas
+### 📊 Vizualizacija: AZD vystymo darbo eiga
 
 ```mermaid
 graph LR
-    A[azd init] -->|Inicializuoti projektą| B[azd auth login]
-    B -->|Autentifikuoti| C[azd env new]
-    C -->|Sukurti aplinką| D{Pirmasis diegimas?}
-    D -->|Taip| E[azd up]
-    D -->|Ne| F[azd provision --preview]
-    F -->|Peržiūrėti pakeitimus| G[azd provision]
-    E -->|Paruošia ir diegia| H[Veikiantys ištekliai]
-    G -->|Atnaujina infrastruktūrą| H
-    H -->|Stebėti| I[azd monitor]
-    I -->|Atlikti kodo pakeitimus| J[azd deploy]
-    J -->|Perdiegti tik kodą| H
-    H -->|Išvalyti| K[azd down]
+    %% Initialization Phase
+    subgraph Setup & Init
+        A[azd init] -->|Initialize project| B[azd auth login]
+        B -->|Authenticate| C[azd env new]
+        C -->|Create environment| D{First deployment?}
+    end
+
+    %% Deployment Phase
+    D -->|Yes| E[azd up]
+    D -->|No| F[azd provision --preview]
     
-    style A fill:#e1f5fe
-    style E fill:#c8e6c9
-    style F fill:#fff9c4
-    style H fill:#c5e1a5
-    style K fill:#ffcdd2
+    F -->|Review changes| G[azd provision]
+    
+    %% Operational Phase
+    E -->|Provisions & deploys| H((Resources running))
+    G -->|Updates infrastructure| H
+    
+    H -->|Monitor logs/metrics| I[azd monitor]
+    
+    %% Daily Dev Loop
+    J[azd deploy] -->|Redeploy code only| H
+    H -->|Make code changes| J
+    
+    %% Cleanup
+    H -->|Teardown resources| K[azd down]
+
+    %% Styling
+    style A fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style E fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    style F fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style H fill:#d1c4e9,stroke:#512da8,stroke-width:2px
+    style J fill:#e1f5fe,stroke:#01579b,stroke-width:1px
+    style K fill:#ffcdd2,stroke:#c62828,stroke-width:2px
 ```
 
-**Darbo srauto paaiškinimas:**
-1. **Init** - Pradėkite nuo šablono arba naujo projekto
-2. **Auth** - Autentifikuokitės su Azure
-3. **Environment** - Sukurkite izoliuotą diegimo aplinką
-4. **Preview** - 🆕 Visada pirmiausia peržiūrėkite infrastruktūros pakeitimus (saugi praktika)
-5. **Provision** - Kurkite/atnaujinkite Azure išteklius
-6. **Deploy** - Paskelbkite savo programos kodą
-7. **Monitor** - Stebėkite programos našumą
-8. **Iterate** - Darykite pakeitimus ir pakartotinai diegkite kodą
-9. **Cleanup** - Pašalinkite išteklius, kai baigta
+**Darbo eigos paaiškinimas:**
+1. **Init** – Pradžia nuo šablono ar naujo projekto
+2. **Auth** – Prisijungimas prie Azure
+3. **Environment** – Sukuriama izoliuota diegimo aplinka
+4. **Preview** – 🆕 Visada pirmiausia peržiūrėkite infrastruktūros pakeitimus (saugaus darbo praktika)
+5. **Provision** – Sukurkite / atnaujinkite Azure resursus
+6. **Deploy** – Įkelkite programos kodą
+7. **Monitor** – Stebėkite programos veikimą
+8. **Iterate** – Darykite pakeitimus ir pakartotinai diegkite kodą
+9. **Cleanup** – Išvalykite resursus po darbo pabaigos
 
-### 4. Aplinkų valdymas
+### 4. Aplinkos valdymas
 ```bash
-# Kurti ir valdyti aplinkas
-azd env new <environment-name>
-azd env select <environment-name>
+# Create and manage environments
+azd env new "<environment-name>"
+azd env select "<environment-name>"
 azd env list
 ```
 
-### 5. Praplėtimai ir AI komandos
+### 5. Plėtiniai ir DI komandos
 
-azd naudoja plėtinių sistemą, kad pridėtų galimybių už pagrindinės CLI ribų. Tai ypač naudinga AI darbo krūviams:
+azd naudoja plėtinių sistemą, leidžiančią pridėti funkcijų, kurios viršija pagrindinę CLI galią. Tai ypač naudinga DI darbo krūviams:
 
 ```bash
-# Išvardinti galimus plėtinius
+# List available extensions
 azd extension list
 
-# Įdiegti Foundry agentų plėtinį
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Inicializuoti dirbtinio intelekto agento projektą iš manifestos
-azd ai agent init -m agent-manifest.yaml
+# Initialize an AI agent project interactively
+azd ai agent init
 
-# Išbandyti diegtą agentą (rodo vėlavimą ir laiką iki pirmojo baito)
+# Test a deployed agent (shows latency and time-to-first-byte)
 azd ai agent invoke
 
-# Paleisti MCP serverį dirbtinio intelekto pagalbai skirtam vystymui (Alfa)
+# Start the MCP server for AI-assisted development (Alpha)
 azd mcp start
 ```
 
-**Agentų gyvavimo ciklas nuo pradžios iki galo.** Kai įdiegsite `azure.ai.agents`, viena darbo eiga nuves jus nuo idėjos iki veikiantį, stebimą agento. Jums to nereikia visko turėti iš karto — tiesiog žinokite, kad tai egzistuoja:
+**Agentų gyvenimo ciklas nuo pradžios iki pabaigos.** Naudokite `azure.ai.agents` agentų gyvenimo ciklo operacijoms ir atskirai įdiekite `azure.ai.evaluations` vertinimui. Naudokite `azd >= 1.37.0` bendrame darbo eigoje. Viso to nereikia turėti iš karto:
 
-| Etapas | Komanda | Ką ji daro |
-|-------|---------|--------------|
-| **Sukūrimas** | `azd ai agent init -m <manifest>` | Sugeneruoja agento projektą iš manifest'o |
-| **Testavimas** | `azd ai agent invoke` | Iškviečia agentą ir mato atsakymo laiką |
-| **Matuoti** | `azd ai agent eval generate` | Sukuria vertinimo duomenų rinkinį agentui |
-| **Tobulinimas** | `azd ai agent optimize` | Optimizuoja agento instrukcijas pagal jūsų duomenis |
-| **Tikrinti** | `azd ai agent endpoint show` | Rodo gyvą galinio taško konfigūraciją |
-| **Išvalyti** | `azd ai agent delete` | Ištrina talpinamą agentą ir visas jo versijas |
+| Etapas | Komanda | Ką daro |
+|-------|---------|---------|
+| **Scaffold** | `azd ai agent init --template <path-to-azure.yaml>` | Pritaikykite dabartinį agento projekto šabloną |
+| **Test** | `azd ai agent invoke` | Iškvieskite agentą ir stebėkite atsakymo laiką |
+| **Measure** | `azd ai eval init`, `generate`, `run start` | Konfigūruokite, diegkite ir vykdykite vertinimus su atskiru plėtiniu |
+| **Improve** | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Pakartotinai naudokite suderinamą vertinimą agento optimizavimui |
+| **Inspect** | `azd ai agent endpoint show` | Peržiūrėkite tiesioginį pabaigos taško konfigūraciją |
+| **Clean up** | `azd ai agent delete` | Ištrinkite talpinamą agentą ir visas jo versijas |
 
-> Praplėtimai išsamiai aptariami [2 skyriuje: AI-pirmasis vystymas](../chapter-02-ai-development/agents.md) ir [AZD AI CLI komandų](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) nuorodoje.
+> Plėtiniai išsamiau aptariami [2 skyriuje: AI-pirmas vystymas](../chapter-02-ai-development/agents.md) ir [AZD DI CLI komandų](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) referencijoje.
 
 ## 📁 Projekto struktūra
 
 Tipinė azd projekto struktūra:
 ```
 my-app/
-├── .azd/                    # azd configuration
-│   └── config.json
-├── .azure/                  # Azure deployment artifacts
+├── .azure/                  # Local environments and selected-environment config
+│   ├── config.json
+│   └── dev/.env
 ├── .devcontainer/          # Development container config
 ├── .github/workflows/      # GitHub Actions
 ├── .vscode/               # VS Code settings
@@ -389,309 +399,298 @@ hooks:
 ```
 
 ### .azure/config.json
-Aplinkai specifinė konfigūracija:
+Projekto vietinis numatytos aplinkos pasirinkimas (iliustracinis; valdomas azd):
 ```json
 {
-  "version": 1,
-  "defaultEnvironment": "dev",
-  "environments": {
-    "dev": {
-      "subscriptionId": "your-subscription-id",
-      "location": "eastus"
-    }
-  }
+  "defaultEnvironment": "dev"
 }
 ```
 
-## 🎪 Bendri darbo srautai su praktiniais pratimais
+## 🎪 Dažnos darbo eigos su praktiniais pratimais
 
-> **💡 Mokymosi patarimas:** Atlikite šiuos pratimus eilės tvarka, kad palaipsniui ugdytumėte AZD įgūdžius.
+> **💡 Mokymosi patarimas:** Sekite šiuos pratimus tvarkingai, kad palaipsniui įgytumėte AZD įgūdžių.
 
-### 🎯 Pratimas 1: Inicializuokite savo pirmąjį projektą
+### 🎯 Pratimas 1: Inicializuokite pirmąjį projektą
 
 **Tikslas:** Sukurti AZD projektą ir ištirti jo struktūrą
 
 **Veiksmai:**
 ```bash
-# Naudokite patikrintą šabloną
-azd init --template todo-nodejs-mongo
+# Use a proven template
+mkdir azd-basics-practice
+cd azd-basics-practice
+# Choose "dev" for the environment name when prompted
+azd init --template todo-nodejs-mongo .
 
-# Peržiūrėkite sugeneruotus failus
-ls -la  # Peržiūrėkite visus failus, įskaitant paslėptus
+# Explore the generated files
+ls -la  # View all files including hidden ones
 
-# Sukurti pagrindiniai failai:
-# - azure.yaml (pagrindinė konfigūracija)
-# - infra/ (infrastruktūros kodas)
-# - src/ (programos kodas)
+# Key files created:
+# - azure.yaml (main config)
+# - infra/ (infrastructure code)
+# - src/ (application code)
 ```
 
-**✅ Sėkmė:** Jūs turite azure.yaml, infra/ ir src/ katalogus
+**✅ Sėkmė:** Turite azure.yaml, infra/ ir src/ katalogus
 
 ---
 
 ### 🎯 Pratimas 2: Diegimas į Azure
 
-**Tikslas:** Atlikti pilną diegimą nuo pradžios iki pabaigos
+**Tikslas:** Atlikti ištisinį diegimą
 
 **Veiksmai:**
 ```bash
-# 1. Autentifikuokite
-az login && azd auth login
+# 1. Authenticate
+azd auth login
 
-# 2. Sukurkite aplinką
-azd env new dev
+# 2. Select the dev environment created in Exercise 1
+azd env select dev
 azd env set AZURE_LOCATION eastus
 
-# 3. Peržiūrėkite pakeitimus (REKOMENDUOJAMA)
+# 3. Preview changes (RECOMMENDED)
 azd provision --preview
 
-# 4. Įdiekite viską
+# 4. Deploy everything
 azd up
 
-# 5. Patikrinkite diegimą
-azd show    # Peržiūrėkite savo programos URL
+# 5. Verify deployment
+azd show    # View your app URL
 ```
 
-**Tikėtinas laikas:** 10-15 minučių  
-**✅ Sėkmė:** Programos URL atsidaro naršyklėje
+**Numatomas laikas:** 10-15 minučių  
+**✅ Sėkmė:** Naršyklėje atsidaro programos URL
 
 ---
 
 ### 🎯 Pratimas 3: Kelios aplinkos
 
-**Tikslas:** Diegti į dev ir staging
+**Tikslas:** Diegimas į dev ir staging aplinkas
 
 **Veiksmai:**
 ```bash
-# Jau turite dev, sukurkite staging
+# Already have dev, create staging
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Perjunkite tarp jų
+# Switch between them
 azd env list
 azd env select dev
 ```
 
-**✅ Sėkmė:** Dvi atskiros resursų grupės Azure portale
+**✅ Sėkmė:** Du atskiri resursų grupės Azure portale
+
+**Išvalymas:** Pratimas 3 sukuria antrą apmokamą diegimą. Ištrinkite abu pabaigę:
+
+```bash
+azd down --environment dev
+azd down --environment staging
+```
 
 ---
 
-### 🛡️ Švarus startas: `azd down --force --purge`
+### 🛡️ Naikinantis išvalymas: `azd down --force --purge`
 
-Kai reikia visiškai atstatyti:
+Kai ketinate tyčia ištrinti pasirinktų aplinkų Azure resursus:
 
 ```bash
 azd down --force --purge
 ```
 
-**Ką tai daro:**
+**Kas vyksta:**
 - `--force`: Be patvirtinimo raginimų
-- `--purge`: Ištrina visą vietinę būseną ir Azure išteklius
+- `--purge`: Taip pat nuolatai ištrina palaikomus minkšto ištrynimo resursus (pavyzdžiui, Key Vault), kai leidžiama apsauga nuo ištrynimo. Vietinis `.azure/` katalogas neištrinamas.
 
-**Naudokite kai:**
-- Diegimas nutrūko viduryje
-- Pereinate tarp projektų
-- Reikia naujos pradžios
+**Naudoti:** kai baigėte su vienkartine aplinka. Nepasirinkite naikinančio išvalymo kaip pirmosios reakcijos į autentifikacijos, kvotų ar konfigūracijos klaidą.
 
 ---
 
-## 🎪 Originalus darbo srauto atitikmuo
+## 🎪 Originalios darbo eigos nuoroda
 
 ### Naujo projekto pradžia
 ```bash
-# Metodas 1: Naudoti esamą šabloną
-azd init --template todo-nodejs-mongo
+# Method 1: Use existing template
+azd init --template todo-nodejs-mongo .
 
-# Metodas 2: Pradėti nuo nulio
+# Method 2: Start from scratch
 azd init
 
-# Metodas 3: Naudoti dabartinį katalogą
+# Method 3: Use current directory
 azd init .
 ```
 
 ### Vystymo ciklas
 ```bash
-# Paruoškite kūrimo aplinką
+# Set up development environment
 azd auth login
 azd env new dev
 azd env select dev
 
-# Įdiekite viską
+# Deploy everything
 azd up
 
-# Atlikite pakeitimus ir įdiekite iš naujo
+# Make changes and redeploy
 azd deploy
 
-# Išvalykite, kai baigsite
-azd down --force --purge # komanda Azure Developer CLI yra **visiškas atstatymas** jūsų aplinkai — ypač naudinga, kai sprendžiate nepavykusius diegimus, tvarkote apleistus išteklius arba ruošiatės švariam pakartotiniam diegimui.
+# Clean up when done
+azd down --force --purge # Deletes this environment's discovered Azure resources; review before forcing deletion.
 ```
 
-## Supratimas apie `azd down --force --purge`
-Komanda `azd down --force --purge` yra galingas būdas visiškai sunaikinti jūsų azd aplinką ir visus su ja susijusius išteklius. Štai ką kiekvienas parametras daro:
+## Kas yra `azd down --force --purge`
+Komanda `azd down --force --purge` yra galingas būdas visiškai išardyti azd aplinką ir visus susijusius resursus. Štai ką kiekvienas ženklas atlieka:
 ```
 --force
 ```
-
 - Praleidžia patvirtinimo raginimus.
-- Naudinga automatizavimui arba skriptavimui, kai rankinė sąveika neįmanoma.
-- Užtikrina, kad išmontavimas vyktų be pertraukų, net jei CLI aptinka neatitikimų.
+- Naudinga automatizavimui ar scenarijų rašymui, kai rankinis įvestis neįmanoma.
+- Nepereinama per teises, apsaugą nuo išvalymo ar ištrynimo klaidas.
 
 ```
 --purge
 ```
-
-Ištrina **visą susijusią metaduomenį**, įskaitant:
-Aplinkos būseną
-Vietinį `.azure` katalogą
-Kešiuotą diegimo informaciją
-Tai neleidžia azd "prisiminti" ankstesnių diegimų, kurie gali sukelti problemų, tokių kaip nesuderintos resursų grupės ar pasenusios registro nuorodos.
+Nuolatinai ištrina palaikomus minkšto ištrynimo Azure resursus be papildomo patvirtinimo. Galioja apsauga nuo išvalymo ir teisės. **Neištrina** vietinių aplinkų ar `.azure/` aplanko.
 
 
 ### Kodėl naudoti abu?
-Kai `azd up` stringa dėl liekančios būsenos arba dalinių diegimų, ši kombinacija užtikrina **švarų startą**.
+Naudokite abu tik tada, kai ketinate pašalinti pasirinktų aplinkų Azure resursus ir išvalyti atkuriamus resursus. Tai naikinantis išvalymas, o ne bendras gedimų taisymas ar vietinės būsenos resetas.
 
-Tai ypač naudinga po rankinių resursų ištrynimų Azure portale arba keičiant šablonus, aplinkas ar resursų grupių pavadinimų konvencijas.
+Tai ypač praverčia po rankinio išteklių panaikinimo Azure portale arba keičiant šablonus, aplinkas ar resursų grupių pavadinimo konvencijas.
 
 
-### Kelių aplinkų valdymas
+### Kelios aplinkos valdymas
 ```bash
-# Sukurti parengimo (staging) aplinką
+# Create staging environment
 azd env new staging
 azd env select staging
 azd up
 
-# Perjungti atgal į dev
+# Switch back to dev
 azd env select dev
 
-# Palyginti aplinkas
+# Compare environments
 azd env list
 ```
 
 ## 🔐 Autentifikacija ir kredencialai
 
-Autentifikacijos supratimas yra esminis sėkmingiems azd diegimams. Azure naudoja kelis autentifikacijos metodus, o azd pasitelkia tą pačią kredencialų grandinę, kurią naudoja kiti Azure įrankiai.
+Skirkite diegimo autentifikaciją (`azd auth login`) nuo programos SDK autentifikacijos (`DefaultAzureCredential`). Tai nepriklausomos sritys. Pagal nutylėjimą azd nenaudoja Azure CLI kredencialų.
 
 ### Azure CLI autentifikacija (`az login`)
 
-Prieš naudodami azd, turite autentifikuotis su Azure. Dažniausiai naudojamas metodas yra Azure CLI:
+Vykdykite `azd auth login` azd. Toliau pateiktos Azure CLI komandos yra neprivalomos ir autentifikuoja `az` komandas atskirai:
 
 ```bash
-# Interaktyvus prisijungimas (atidaro naršyklę)
+# Interactive login (opens browser)
 az login
 
-# Prisijungti su konkrečiu nuomininku
-az login --tenant <tenant-id>
+# Login with specific tenant
+az login --tenant "<tenant-id>"
 
-# Prisijungti naudojant paslaugos principalą
-az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
+# Login with service principal
+az login --service-principal -u "<app-id>" -p "<password>" --tenant "<tenant-id>"
 
-# Patikrinti dabartinę prisijungimo būseną
+# Check current login status
 az account show
 
-# Išvardinti prieinamas prenumeratas
+# List available subscriptions
 az account list --output table
 
-# Nustatyti numatytąją prenumeratą
-az account set --subscription <subscription-id>
+# Set default subscription
+az account set --subscription "<subscription-id>"
 ```
 
-### Autentifikacijos srautas
-1. **Interaktyvus prisijungimas**: Atidaro numatytąją naršyklę autentifikacijai
-2. **Device Code Flow**: Skirta aplinkoms be naršyklės prieigos
-3. **Service Principal**: Automatizavimui ir CI/CD scenarijoms
-4. **Managed Identity**: Azure talpinamoms programoms
+### Autentifikacijos eiga
+1. **Interaktyvus prisijungimas**: Atveria numatytąją naršyklę autentifikacijai
+2. **Įrenginio kodo srautas**: Skirta aplinkoms be naršyklės
+3. **Paslaugų principas**: Automatizavimui ir CI/CD scenarijams
+4. **Valdomas tapatumas**: Azure talpinamoms programoms
 
 ### DefaultAzureCredential grandinė
 
-`DefaultAzureCredential` yra kredencialų tipas, kuris suteikia supaprastintą autentifikacijos patirtį automatiškai bandydamas kelis kredencialų šaltinius tam tikra tvarka:
+`DefaultAzureCredential` yra kredencialų tipas, kuris supaprastina autentifikaciją, automatiškai bandydamas kelis kredencialų šaltinius tam tikra tvarka:
 
-#### Kredencialų grandinės tvarka
+#### Programos SDK kredencialų grandinė
+
+Tiksli grandinė priklauso nuo Azure Identity SDK kalbos, versijos, įdiegtų papildinių ir parinkčių. Šis diagrama yra konceptualus, o ne fiksuota azd autentifikacijos seka; naujausi SDK taip pat gali apimti Azure Developer CLI kredencialus.
 ```mermaid
 graph TD
-    A[Numatytasis Azure kredencialas] --> B[Aplinkos kintamieji]
-    B --> C[Darbo apkrovos tapatybė]
-    C --> D[Valdomoji tapatybė]
+    A[DefaultAzureCredential] --> B[Environment Variables]
+    B --> C[Workload Identity]
+    C --> D[Managed Identity]
     D --> E[Visual Studio]
     E --> F[Visual Studio Code]
     F --> G[Azure CLI]
     G --> H[Azure PowerShell]
-    H --> I[Interaktyvus naršyklės prisijungimas]
+    H --> I[Interactive Browser]
 ```
 
 #### 1. Aplinkos kintamieji
 ```bash
-# Nustatyti aplinkos kintamuosius tarnybinei paskyrai
+# Set environment variables for service principal
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. Workload Identity (Kubernetes/GitHub Actions)
+#### 2. Darbo krūvio tapatybė (Kubernetes/GitHub Actions)
 Naudojama automatiškai:
-- Azure Kubernetes Service (AKS) su Workload Identity
+- Azure Kubernetes Service (AKS) su Darbo krūvio tapatybe
 - GitHub Actions su OIDC federacija
-- Kiti su federacija susiję tapatybės scenarijai
+- Kitose federuotose tapatybės scenarijuose
 
-#### 3. Managed Identity
+#### 3. Valdomoji tapatybė
 Skirta Azure ištekliams, tokiems kaip:
 - Virtualios mašinos
 - App Service
 - Azure Functions
-- Container Instances
+- Konteinerių instancijos
 
 ```bash
-# Patikrina, ar programa veikia Azure išteklyje, kuriame yra valdomoji tapatybė
-az account show --query "user.type" --output tsv
-# Grąžina: "servicePrincipal", jei naudojama valdomoji tapatybė
+# Inspect a deployed Container App's configured identity (requires az login)
+az containerapp show --name "<app-name>" --resource-group "<rg-name>" --query identity
 ```
 
-#### 4. Integracija su kūrimo įrankiais
+#### 4. Kūrėjų įrankių integracija
 - **Visual Studio**: Automatiškai naudoja prisijungusį paskyrą
-- **VS Code**: Naudoja Azure Account plėtinio kredencialus
-- **Azure CLI**: Naudoja `az login` kredencialus (dažniausiai naudojama vietiniame vystyme)
+- **VS Code**: Parama priklauso nuo SDK ir palaikomų brokerių/papildinių
+- **Azure CLI**: Naudoja `az login` kredencialus (dažniausiai vietiniam kūrimui)
 
 ### AZD autentifikacijos nustatymas
 
 ```bash
-# Metodas 1: Naudokite Azure CLI (Rekomenduojama kūrimo metu)
-az login
-azd auth login  # Naudoja esamus Azure CLI prisijungimo duomenis
+# Method 1: Direct azd authentication (recommended)
+azd auth login
 
-# Metodas 2: Tiesioginė azd autentifikacija
-azd auth login --use-device-code  # Skirta aplinkoms be grafinės sąsajos
+# Method 2: Direct azd authentication
+azd auth login --use-device-code  # For headless environments
 
-# Metodas 3: Patikrinkite autentifikacijos būseną
+# Method 3: Check authentication status
 azd auth login --check-status
 
-# Metodas 4: Atsijunkite ir vėl autentifikuokitės
+# Method 4: Logout and re-authenticate
 azd auth logout
 azd auth login
 ```
 
-### Autentifikacijos geriausios praktikos
+### Geriausios autentifikacijos praktikos
 
-#### Lokaliam vystymui
+#### Vietinei kūrimui
 ```bash
-# 1. Prisijunkite naudodami Azure CLI
-az login
-
-# 2. Patikrinkite, ar prenumerata yra teisinga
-az account show
-az account set --subscription "Your Subscription Name"
-
-# 3. Naudokite azd su esamais kredencialais
+# 1. Log in to azd
 azd auth login
+
+# 2. Select the subscription for this initialized environment
+azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+
+# 3. Check azd sign-in details (read the status message)
+azd auth login --check-status
 ```
 
-#### CI/CD procesams
+#### CI/CD vamzdynams
 ```yaml
-# GitHub Actions example
-- name: Azure Login
-  uses: azure/login@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+# Partial GitHub Actions steps: assumes checkout, azd installation,
+# required AZURE_* environment values, and pipeline secret configuration.
 - name: Deploy with azd
   run: |
     azd auth login --client-id ${{ secrets.AZURE_CLIENT_ID }} \
@@ -701,171 +700,176 @@ azd auth login
 ```
 
 #### Produkcinėms aplinkoms
-- Naudokite **Managed Identity**, kai paleidžiate ant Azure išteklių
-- Naudokite **Service Principal** automatizavimo scenarijuose
-- Venkite saugoti prisijungimo duomenų kode ar konfiguracijos failuose
-- Naudokite **Azure Key Vault** jautriai konfigūracijai
+- Naudokite **Valdomą tapatybę** kai veikia Azure ištekliuose
+- Automatizavimo scenarijams naudokite **Paslaugų principalą**
+- Venkite saugoti kredencialus kode ar konfigūracijos failuose
+- Naudokite **Azure Key Vault** jautrioms konfigūracijoms
 
-### Dažnos autentifikavimo problemos ir sprendimai
+### Dažnos autentifikacijos problemos ir sprendimai
 
-#### Problema: „No subscription found“
+#### Problema: „Nerasta prenumerata“
 ```bash
-# Sprendimas: nustatyti numatytąją prenumeratą
+# Solution: Set default subscription
 az account list --output table
 az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
 
-#### Problema: „Insufficient permissions“
+#### Problema: „Neužtenka leidimų“
 ```bash
-# Sprendimas: Patikrinkite ir priskirkite reikiamus vaidmenis
+# Solution: Check and assign required roles
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
-# Dažniausiai reikalingi vaidmenys:
-# - Contributor (resursų valdymui)
-# - User Access Administrator (vaidmenų priskyrimui)
+# Common required roles:
+# - Contributor (for resource management)
+# - User Access Administrator (for role assignments)
 ```
 
-#### Problema: „Token expired“
+#### Problema: „Token'o galiojimo laikas pasibaigė“
 ```bash
-# Sprendimas: Autentifikuotis iš naujo
+# Solution: Re-authenticate
 az logout
 az login
 azd auth logout
 azd auth login
 ```
 
-### Autentifikavimas skirtinguose scenarijuose
+### Autentifikacija įvairiuose scenarijuose
 
-#### Vietinis vystymas
+#### Vietinis kūrimas
 ```bash
-# Asmeninio tobulėjimo paskyra
+# Personal development account
 az login
 azd auth login
 ```
 
-#### Komandinis vystymas
+#### Komandinis kūrimas
 ```bash
-# Naudokite konkretų nuomininką organizacijai
+# Use specific tenant for organization
 az login --tenant contoso.onmicrosoft.com
-azd auth login
+azd auth login --tenant-id "<tenant-id>"
 ```
 
-#### Multi-tenant scenarijai
+#### Daugiapakopiai scenarijai
 ```bash
-# Perjungti tarp nuomininkų
+# Switch between tenants
 az login --tenant tenant1.onmicrosoft.com
-# Diegti nuomininkui 1
+azd auth login --tenant-id "<tenant-1-id>"
+# Select an environment configured with tenant 1's subscription
+azd env select tenant1-dev
+# Deploy to tenant 1
 azd up
 
 az login --tenant tenant2.onmicrosoft.com  
-# Diegti nuomininkui 2
+azd auth login --tenant-id "<tenant-2-id>"
+azd env select tenant2-dev
+# Deploy to tenant 2
 azd up
 ```
 
 ### Saugumo aspektai
 
-1. **Prisijungimo duomenų saugojimas**: Niekada nesaugokite prisijungimo duomenų šaltinio kode
-2. **Prieigos srities apribojimas**: Naudokite mažiausio privilegijų principą service principalams
-3. **Tokenų keitimas**: Reguliariai atnaujinkite service principal slaptus raktus
-4. **Audito įrašai**: Stebėkite autentifikavimo ir diegimo veiksmus
-5. **Tinklo saugumas**: Naudokite privačius galinius taškus, kai įmanoma
+1. **Kredencialų saugojimas**: Niekuomet nesaugokite kredencialų šaltinio kode
+2. **Apribojimų taikymas**: Naudokite mažiausio teisių principą paslaugų principalams
+3. **Token'o rotacija**: Reguliariai keiskite paslaugų principalų slaptus raktus
+4. **Audito sekimas**: Stebėkite autentifikacijos ir diegimo veiksmus
+5. **Tinklų saugumas**: Naudokite privačius galinius taškus, kai įmanoma
 
-### Autentifikavimo trikčių šalinimas
+### Autentifikacijos trikčių šalinimas
 
 ```bash
-# Autentifikavimo problemų trikčių šalinimas
+# Debug authentication issues
 azd auth login --check-status
 az account show
 az account get-access-token
 
-# Bendros diagnostikos komandos
-whoami                          # Dabartinis naudotojo kontekstas
-az ad signed-in-user show      # Microsoft Entra ID naudotojo informacija
-az group list                  # Patikrinti prieigą prie išteklių
+# Common diagnostic commands
+whoami                          # Current user context
+az ad signed-in-user show      # Microsoft Entra ID user details
+az group list                  # Test resource access
 ```
 
-## Supratimas `azd down --force --purge`
+## Komandų atrankos nustatymas
 
-### Aptikimas
+### Atranka
 ```bash
-azd template list              # Naršyti šablonus
-azd template show <template>   # Šablono detalės
-azd init --help               # Inicializacijos parinktys
+azd template list              # Browse templates
+azd template list --help       # Template discovery options
+azd init --help               # Initialization options
 ```
 
 ### Projekto valdymas
 ```bash
-azd show                     # Projekto apžvalga
-azd env list                # Galimos aplinkos ir pasirinkta numatytoji
-azd config show            # Konfigūracijos nustatymai
+azd show                     # Project overview
+azd env list                # Available environments and selected default
+azd config show            # Configuration settings
 ```
 
-### Stebėsena
+### Stebėjimas
 ```bash
-azd monitor                  # Atidaryti Azure portalo stebėjimą
-azd monitor --logs           # Peržiūrėti programos žurnalus
-azd monitor --live           # Peržiūrėti tiesioginius rodiklius
-azd pipeline config          # Nustatyti CI/CD
+azd monitor                  # Open Azure portal monitoring
+azd monitor --logs           # View application logs
+azd monitor --live           # View live metrics
+azd pipeline config          # Set up CI/CD
 ```
 
 ## Geriausios praktikos
 
 ### 1. Naudokite prasmingus pavadinimus
 ```bash
-# Gerai
+# Good
 azd env new production-east
-azd init --template web-app-secure
+azd init --template todo-nodejs-mongo .
 
-# Vengti
+# Avoid
 azd env new env1
-azd init --template template1
+azd init --template template1 .
 ```
 
-### 2. Naudokitės šablonais
+### 2. Pasinaudokite šablonais
 - Pradėkite nuo esamų šablonų
 - Priderinkite pagal savo poreikius
-- Sukurkite pakartotinai naudojamus šablonus savo organizacijai
+- Sukurkite pakartotinai naudojamus organizacijos šablonus
 
 ### 3. Aplinkos izoliacija
-- Naudokite atskiras aplinkas dev/staging/prod
-- Niekada neišdiekite tiesiogiai į produkciją iš vietinio kompiuterio
-- Naudokite CI/CD srautus produkcijos diegimams
+- Naudokite atskiras aplinkas vystymui/testavimui/produkcijai
+- Niekada nediekite tiesiogiai į gamybą iš vietinio kompiuterio
+- Produkcijos diegimams naudokite CI/CD vamzdynus
 
 ### 4. Konfigūracijos valdymas
-- Naudokite aplinkos kintamuosius jautriems duomenims
-- Laikykite konfigūraciją versijų valdyme
+- Slaptažodžiams naudokite valdomą tapatybę ir Key Vault; įprasti `azd env set` reikšmės yra vietinė tekstinė eilutė
+- Laikykite konfigūraciją versijų valdymo sistemoje
 - Dokumentuokite aplinkai specifinius nustatymus
 
 ## Mokymosi eiga
 
-### Pradedantiesiems (1–2 savaitė)
-1. Įdiekite azd ir autentifikuokitės
+### Pradedantiesiems (1-2 savaitė)
+1. Įdiegti azd ir autentifikuotis
 2. Diegti paprastą šabloną
 3. Suprasti projekto struktūrą
 4. Išmokti pagrindines komandas (up, down, deploy)
 
-### Tarpinis (3–4 savaitės)
+### Vidutiniams vartotojams (3-4 savaitė)
 1. Priderinti šablonus
 2. Valdyti kelias aplinkas
 3. Suprasti infrastruktūros kodą
-4. Sukurti CI/CD srautus
+4. Nustatyti CI/CD vamzdynus
 
-### Pažengusiems (5+ savaitės)
-1. Kurti pasirinktinius šablonus
-2. Išplėstiniai infrastruktūros modeliai
-3. Diegimai keliose regionuose
-4. Įmonės lygio konfigūracijos
+### Pažengusiems (5+ savaitė)
+1. Kurti savo šablonus
+2. Pažangūs infrastruktūros modeliai
+3. Daugiarajonės diegimo galimybės
+4. Įmonių lygio konfigūracijos
 
 ## Tolimesni žingsniai
 
-**📖 Tęskite 1 skyrių mokymąsi:**
-- [Diegimas ir nustatymas](installation.md) - Įdiekite ir sukonfigūruokite azd
-- [Jūsų pirmasis projektas](first-project.md) - Užbaikite praktinį pamoką
-- [Konfigūracijos vadovas](configuration.md) - Išplėstiniai konfigūracijos parametrai
+**📖 Tęsti 1 skyrių mokymus:**
+- [Įdiegimas ir nustatymas](installation.md) - Įdiekite ir konfigur uokite azd
+- [Jūsų pirmasis projektas](first-project.md) - Baigiamas praktinis vadovas
+- [Konfigūracijos gidas](../chapter-03-configuration/configuration.md) - Pažangios konfigūracijos parinktys
 
-**🎯 Pasirengę kitam skyriui?**
-- [2 skyrius: AI-pirmasis vystymas](../chapter-02-ai-development/microsoft-foundry-integration.md) - Pradėkite kurti AI programas
+**🎯 Pasiruošę kitam skyriui?**
+- [2 skyrius: AI-pirmasis kūrimas](../chapter-02-ai-development/microsoft-foundry-integration.md) - Pradėkite kurti AI programas
 
 ## Papildomi ištekliai
 
@@ -875,89 +879,92 @@ azd init --template template1
 
 ---
 
-## 🙋 Dažnai užduodami klausimai
+## 🙋 Dažniausiai užduodami klausimai
 
-### Bendri klausimai
+### Bendrieji klausimai
 
 **K: Kuo skiriasi AZD ir Azure CLI?**
 
-A: Azure CLI (`az`) skirta valdyti atskirus Azure išteklius. AZD (`azd`) skirta valdyti visas programas:
+A: Azure CLI (`az`) skirtas valdyti atskirus Azure išteklius. AZD (`azd`) skirtas valdyti visoms programoms:
 
 ```bash
-# Azure CLI - žemo lygio išteklių valdymas
+# Azure CLI - Low-level resource management
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ...reikia dar daug daugiau komandų
+# ...many more commands needed
 
-# AZD - programos lygio valdymas
-azd up  # Diegia visą programą su visais ištekliais
+# AZD - Application-level management
+azd up  # Deploys entire app with all resources
 ```
 
-**Mąstykite taip:**
-- `az` = Veikia su atskiromis Lego kaladėlėmis
-- `azd` = Darbas su pilnais Lego rinkiniais
+**Pagalvokite taip:**
+- `az` = Veiksmas su atskiromis Lego kaladėlėmis
+- `azd` = Darbas su visais Lego rinkiniais
 
 ---
 
-**K: Ar man reikia žinoti Bicep arba Terraform, kad naudotis AZD?**
+**K: Ar reikia mokėti Bicep arba Terraform naudotis AZD?**
 
 A: Ne! Pradėkite nuo šablonų:
 ```bash
-# Naudokite esamą šabloną - nereikia žinių apie IaC
-azd init --template todo-nodejs-mongo
+# Use existing template - no IaC knowledge needed
+azd init --template todo-nodejs-mongo .
 azd up
 ```
 
-Vėliau galite išmokti Bicep, kad pritaikytumėte infrastruktūrą. Šablonai suteikia veikiančius pavyzdžius, iš kurių galite mokytis.
+Vėliau galite išmokti Bicep, kad pritaikytumėte infrastruktūrą. Šablonai suteikia veikiantį pavyzdį mokymuisi.
 
 ---
 
-**K: Kiek kainuoja vykdyti AZD šablonus?**
+**K: Kiek kainuoja naudoti AZD šablonus?**
 
-A: Išlaidos priklauso nuo šablono. Daugumos vystymo šablonų kaina yra $50–150 per mėnesį:
+A: Kainos priklauso nuo regiono, SKU, veikimo laiko, duomenų bazės režimo ir modelio naudojimo. Vystymo aplinka gali kainuoti nemažai net kai nenaudojama; nenumatykite vieno universalio diapazono $50-150:
 
 ```bash
-# Peržiūrėkite išlaidas prieš diegiant
+# Preview resource changes (not prices)
 azd provision --preview
 
-# Visada išvalykite, kai nenaudojate
-azd down --force --purge  # Pašalina visus išteklius
+# Always cleanup when not using
+azd down --force --purge  # Removes all resources
 ```
 
-**Patarimas:** Naudokite nemokamas lygius, kai prieinami:
-- App Service: F1 (nemokamas) lygis
-- Microsoft Foundry Models: Azure OpenAI 50,000 tokenų/mėn nemokamai
-- Cosmos DB: 1000 RU/s nemokamas lygis
+**Profesionalus patarimas:** Naudokitės nemokamomis galimybėmis, kur įmanoma:
+- App Service: F1 (Nemokama) lygis
+- Azure OpenAI: nėra bendro garantuoto mėnesinio nemokamo tokenų kiekio; tikrinkite esamų modelių ir pasiūlymų kainas
+- Cosmos DB: tinkami būsenos pagal srautą paskyros gali pasirinkti nemokamą lygį; serverless šablonai automatiškai netinka
 
 ---
 
 **K: Ar galiu naudoti AZD su esamais Azure ištekliais?**
 
-A: Taip, bet lengviau pradėti nuo nulio. AZD geriausiai veikia, kai jis valdo visą gyvavimo ciklą. Jei turite esamus išteklius:
-```bash
-# Parinktis 1: Importuoti esamus išteklius (išplėstinė)
-azd init
-# Tada modifikuokite infra/ taip, kad jis nurodytų esamus išteklius
+A: Taip, bet lengviau pradėti iš naujo. AZD geriausiai veikia valdyti visą ciklą. Su esamais ištekliais:
 
-# Parinktis 2: Pradėti nuo nulio (rekomenduojama)
-azd init --template matching-your-stack
-azd up  # Sukuria naują aplinką
+```bash
+# Option 1: Import existing resources (advanced)
+azd init
+# Then modify infra/ to reference existing resources
+
+# Option 2: Start fresh (recommended)
+azd init --template "<verified-template-name>" .
+azd up  # Creates new environment
 ```
 
 ---
 
 **K: Kaip pasidalinti projektu su komandos nariais?**
 
-A: Patalpinkite (commit) AZD projektą į Git (bet NE .azure aplanko):
-```bash
-# Pagal numatytuosius nustatymus jau įtraukta į .gitignore
-.azure/        # Turi slaptus duomenis ir aplinkos parametrus
-*.env          # Aplinkos kintamieji
+A: Įkelkite AZD projektą į Git (bet NE .azure aplanką):
 
-# Komandos nariai tada:
-git clone <your-repo>
+```bash
+# Already in .gitignore by default
+.azure/        # Contains secrets and environment data
+*.env          # Environment variables
+
+# Team members then:
+git clone "<your-repo>"
+# Change into the cloned repository before running the remaining commands.
 azd auth login
-azd env new <their-name>-dev
+azd env new "<their-name>-dev"
 azd up
 ```
 
@@ -965,25 +972,26 @@ Visi gauna identišką infrastruktūrą iš tų pačių šablonų.
 
 ---
 
-### Trikčių šalinimo klausimai
+### Problematikos klausimai
 
-**K: "azd up" nepavyko iki galo. Ką daryti?**
+**K: „azd up“ nepavyko pusiau. Ką daryti?**
 
-A: Patikrinkite klaidą, ištaisykite ją, tada bandykite dar kartą:
+A: Patikrinkite klaidą, ištaisykite ir bandykite dar kartą:
+
 ```bash
-# Peržiūrėti išsamius žurnalus
-azd show
+# Capture detailed diagnostics (redact sensitive values before sharing)
+azd up --debug
 
-# Dažniausi sprendimai:
+# Common fixes:
 
-# 1. Jei viršyta kvota:
-azd env set AZURE_LOCATION "westus2"  # Išbandykite kitą regioną
+# 1. If quota exceeded:
+azd env set AZURE_LOCATION "westus2"  # Try different region
 
-# 2. Jei resurso pavadinimo konfliktas:
-azd down --force --purge  # Pradėti nuo nulio
-azd up  # Bandykite dar kartą
+# 2. If resource name conflict:
+azd down --force --purge  # Clean slate
+azd up  # Retry
 
-# 3. Jei autentifikacija pasibaigė:
+# 3. If auth expired:
 az login
 azd auth login
 azd up
@@ -993,43 +1001,46 @@ azd up
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
+azd env set AZURE_SUBSCRIPTION_ID "<correct-subscription-id>"
 ```
 
 ---
 
-**K: Kaip išdiegti tik kodo pakeitimus nesikurjant infrastruktūros iš naujo?**
+**K: Kaip diegti tik kodo pakeitimus be infrastruktūros diegimo?**
 
-A: Naudokite `azd deploy` vietoje `azd up`:
+A: Venkite naudoti `azd up`, naudokite `azd deploy`:
+
 ```bash
-azd up          # Pirmą kartą: paruošimas + diegimas (lėtai)
+azd up          # First time: provision + deploy (slow)
 
-# Atlikite kodo pakeitimus...
+# Make code changes...
 
-azd deploy      # Vėlesniais kartais: tik diegimas (greitai)
+azd deploy      # Subsequent times: deploy only (fast)
 ```
 
-Greitumo palyginimas:
-- `azd up`: 10–15 minučių (sukuria infrastruktūrą)
-- `azd deploy`: 2–5 minutės (tik kodas)
+Greičio palyginimas:
+- `azd up`: 10-15 minučių (įdiegia infrastruktūrą)
+- `azd deploy`: 2-5 minutės (tik kodas)
 
 ---
 
 **K: Ar galiu pritaikyti infrastruktūros šablonus?**
 
 A: Taip! Redaguokite Bicep failus `infra/`:
-```bash
-# Po azd init
-cd infra/
-code main.bicep  # Redaguoti VS Code programoje
 
-# Peržiūrėti pakeitimus
+```bash
+# After azd init
+cd infra/
+code main.bicep  # Edit in VS Code
+
+# Preview changes
 azd provision --preview
 
-# Taikyti pakeitimus
+# Apply changes
 azd provision
 ```
 
-**Patarimas:** Pradėkite nuo mažų pakeitimų – pirmiausia pakeiskite SKU:
+**Patarimas:** Pradėkite nuo nedidelių pakeitimų - keiskite SKU:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -1042,46 +1053,48 @@ sku: {
 **K: Kaip ištrinti viską, ką sukūrė AZD?**
 
 A: Viena komanda pašalina visus išteklius:
+
 ```bash
 azd down --force --purge
 
-# Tai ištrina:
-# - Visus Azure išteklius
-# - Resursų grupę
-# - Vietinę aplinkos būseną
-# - Talpykloje saugomus diegimo duomenis
+# This deletes:
+# - Azure resources/resource groups discovered for the selected environment
+# - Supported soft-deleted resources, if purge protection allows
+# Local .azure files remain; shared/external resources may remain too.
 ```
 
-**Visada vykdykite tai kai:**
-- Baigėte testuoti šabloną
+**Visada vykdykite šią komandą, kai:**
+- Baigėte šablono testavimą
 - Perėjote prie kito projekto
-- Norite pradėti nuo nulio
+- Norite pradėti iš naujo
 
-**Taupymas:** Pašalinus nenaudojamus išteklius – mokesčiai = $0
+**Kainos patikra:** Patikrinkite Azure dėl ištrynimo ir galimų laikomų/bendrų išteklių. Ankstesnės išlaidos lieka galiojančios.
 
 ---
 
-**K: Kas, jei netyčia ištryniau išteklius Azure portale?**
+**K: Ką daryti, jei netyčia ištryniau išteklius Azure portale?**
 
-A: AZD būsena gali nesutapti. Švaraus starto metodas:
+A: AZD būsena gali išsiderinti. Naudokite švaraus lapo metodą:
+
 ```bash
-# 1. Pašalinti vietinę būseną
+# 1. Delete remaining resources only if that is your intent
 azd down --force --purge
 
-# 2. Pradėti iš naujo
+# 2. Start fresh
 azd up
 
-# Alternatyva: Leisti AZD aptikti ir ištaisyti
-azd provision  # Sukurs trūkstamus išteklius
+# Alternative: Let AZD detect and fix
+azd provision  # Will create missing resources
 ```
 
 ---
 
 ### Pažangūs klausimai
 
-**K: Ar galiu naudoti AZD CI/CD srautuose?**
+**K: Ar galiu naudoti AZD CI/CD vamzdynuose?**
 
 A: Taip! GitHub Actions pavyzdys:
+
 ```yaml
 # .github/workflows/deploy.yml
 name: Deploy with AZD
@@ -1094,7 +1107,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Install azd
         run: curl -fsSL https://aka.ms/install-azd.sh | bash
@@ -1107,68 +1120,70 @@ jobs:
             --tenant-id ${{ secrets.AZURE_TENANT_ID }}
       
       - name: Deploy
+        env:
+          AZURE_ENV_NAME: dev
+          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
         run: azd up --no-prompt
 ```
 
 ---
 
-**K: Kaip tvarkyti slaptus duomenis ir jautrią informaciją?**
+**K: Kaip tvarkyti slaptažodžius ir jautrius duomenis?**
 
-A: AZD automatiškai integruojasi su Azure Key Vault:
+A: Naudokite Key Vault tiesiogiai. `azd env set` rašo paprastas reikšmes į vietinį aplinkos failą; jis automatiškai nesukuria vault'o, nepriskiria vaidmenų ar neįterpia slaptažodžių į programą.
+
 ```bash
-# Slaptosios reikšmės saugomos Key Vault, ne kode
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
-
-# AZD automatiškai:
-# 1. Sukuria Key Vault
-# 2. Saugo slaptą reikšmę
-# 3. Suteikia programai prieigą per valdomą tapatybę
-# 4. Įterpia vykdymo metu
+# Interactive: create/select a Key Vault secret and save its reference
+azd env set-secret DATABASE_PASSWORD
 ```
 
-**Niekada neįtraukite į commit:**
-- `.azure/` aplankas (turi aplinkos duomenis)
-- `.env` failai (lokalūs slaptiniai)
-- Ryšio eilutės
+Jums reikia tinkamų vault teisių. Jūsų infrastruktūra/programa turi prijungti slaptažodį prie vartotojo ir suteikti vykdymo tapatybės prieigą. Nespausdinkite išspręstų slaptažodžių žurnaluose.
+
+**Niekada nekelkite:**
+- `.azure/` aplanko (turi aplinkos duomenis)
+- `.env` failų (vietiniai slaptažodžiai)
+- Prisijungimo eilutės
 
 ---
 
-**K: Ar galiu diegti keliuose regionuose?**
+**K: Ar galima diegti keliuose regionuose?**
 
-A: Taip, sukurkite aplinką kiekvienam regionui:
+A: Taip, sukurkite aplinką pagal regioną:
+
 ```bash
-# Rytų JAV aplinka
+# East US environment
 azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
 
-# Vakarų Europos aplinka
+# West Europe environment
 azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
 
-# Kiekviena aplinka yra nepriklausoma
+# Each environment is independent
 azd env list
 ```
 
-Tikroms kelių regionų programoms pritaikykite Bicep šablonus taip, kad diegtų keliose regionuose vienu metu.
+Tikrų daugiarajonių programų atveju, pritaikykite Bicep šablonus diegimui keliuose regionuose vienu metu.
 
 ---
 
-**K: Kur galiu gauti pagalbą, jei užstrigau?**
+**K: Kur gauti pagalbą, jei užstrigau?**
 
 1. **AZD dokumentacija:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
-2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
+2. **GitHub problemos:** https://github.com/Azure/azure-dev/issues
 3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli kanalas
-4. **Stack Overflow:** Tag `azure-developer-cli`
-5. **Šis kursas:** [Trikčių šalinimo vadovas](../chapter-07-troubleshooting/common-issues.md)
+4. **Stack Overflow:** Žymė `azure-developer-cli`
+5. **Šis kursas:** [Trikčių šalinimo gidas](../chapter-07-troubleshooting/common-issues.md)
 
-**Patarimas:** Prieš klausiant, paleiskite:
+**Profesionalus patarimas:** Prieš klausdami, vykdykite:
 ```bash
-azd show       # Rodo dabartinę būseną
-azd version    # Rodo jūsų versiją
+azd show       # Shows current state
+azd version    # Shows your version
 ```
-Įtraukite šią informaciją į savo klausimą, kad gautumėte greitesnę pagalbą.
+Pateikite šią informaciją klausime dėl greitesnės pagalbos.
 
 ---
 
@@ -1177,28 +1192,28 @@ azd version    # Rodo jūsų versiją
 Dabar suprantate AZD pagrindus. Pasirinkite savo kelią:
 
 ### 🎯 Pradedantiesiems:
-1. **Toliau:** [Diegimas ir nustatymas](installation.md) - Įdiekite AZD savo mašinoje
-2. **Tada:** [Jūsų pirmasis projektas](first-project.md) - Išdiekite savo pirmąją programą
-3. **Praktika:** Atlikite visus 3 pratimus šioje pamokoje
+1. **Kitas žingsnis:** [Įdiegimas ir nustatymas](installation.md) - Įdiekite AZD savo kompiuteryje
+2. **Tada:** [Jūsų pirmasis projektas](first-project.md) - Diekite savo pirmąją programą
+3. **Praktikuokitės:** Atlikite visus 3 pratimus šiame pamokoje
 
 ### 🚀 AI kūrėjams:
-1. **Praleiskite į:** [2 skyrius: AI-pirmasis vystymas](../chapter-02-ai-development/microsoft-foundry-integration.md)
-2. **Diegti:** Pradėkite su `azd init --template get-started-with-ai-chat`
-3. **Mokykitės:** Kurkite, kol diegiate
+1. **Praleiskite:** [2 skyrius: AI-pirmasis kūrimas](../chapter-02-ai-development/microsoft-foundry-integration.md)
+2. **Diegti:** Tuščio projekto kataloge pradėkite su `azd init --template get-started-with-ai-chat .`
+3. **Mokykitės:** Kurkite diegiant
 
 ### 🏗️ Patyrusiems kūrėjams:
-1. **Peržiūrėti:** [Konfigūracijos vadovas](configuration.md) - Išplėstiniai nustatymai
-2. **Išnagrinėkite:** [Infrastruktūra kaip kodas](../chapter-04-infrastructure/provisioning.md) - Bicep giluminė analizė
-3. **Kurti:** Sukurkite pasirinktinius šablonus savo technologijų rinkiniui
+1. **Peržiūrėti:** [Konfigūracijos gidas](../chapter-03-configuration/configuration.md) - Pažangūs nustatymai
+2. **Tyrinėti:** [Infrastruktūra kaip kodas](../chapter-04-infrastructure/provisioning.md) - Gilaus Bicep apžvalga
+3. **Kurti:** Sukurkite savo šablonus savo stalui
 
 ---
 
-**Skyriaus naršymas:**
-- **📚 Kurso pradžia**: [AZD For Beginners](../../README.md)
-- **📖 Dabartinis skyrius**: 1 skyrius - Pagrindai ir greitas pradžios  
+**Skyrių navigacija:**
+- **📚 Kurso pradžia**: [AZD Pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 1 skyrius - Pagrindai ir greitas startas  
 - **⬅️ Ankstesnis**: [Kurso apžvalga](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Kitas**: [Diegimas ir nustatymas](installation.md)
-- **🚀 Kitas skyrius**: [2 skyrius: AI-pirmasis vystymas](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Kitas**: [Įdiegimas ir nustatymas](installation.md)
+- **🚀 Kitas skyrius**: [2 skyrius: AI-pirmasis kūrimas](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 

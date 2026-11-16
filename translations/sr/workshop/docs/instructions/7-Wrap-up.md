@@ -1,6 +1,6 @@
-# 7. Wrap-Up & Next Steps
+# 7. Закључак и следећи кораци
 
-!!! tip "GLAVNE PORUKE KOJE TREBA ZAPAMTITI SU"
+!!! tip "ГЛАВНЕ ПОУКЕ СУ"
 
     - [ ] AZD templates accelerate AI application development from days to hours
     - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
@@ -9,102 +9,102 @@
 
 ---
 
-## 1. What You Accomplished
+## 1. Шта сте постигли
 
-Congratulations! In this workshop, you have successfully:
+Честитамо! На овом радионици сте успешно:
 
-| Module | Accomplishment |
+| Модул | Постигао сте |
 |:---|:---|
-| **Module 1** | Discovered Azure Developer CLI and selected an AI template |
-| **Module 2** | Deployed and validated a complete AI agents solution |
-| **Module 3** | Deconstructed the template to understand its architecture |
-| **Module 4** | Explored `azure.yaml` configuration and lifecycle hooks |
-| **Module 5** | Customized the template for your own scenario |
-| **Module 6** | Safely tore down infrastructure and managed resources |
+| **Модул 1** | Упознали сте Azure Developer CLI и одабрали AI шаблон |
+| **Модул 2** | Деплојовали и проверили комплетно решење за AI агенте |
+| **Модул 3** | Разложили шаблон да бисте разумели његову архитектуру |
+| **Модул 4** | Истражили сте `azure.yaml` конфигурацију и животни циклус |
+| **Модул 5** | Прилагодили сте шаблон за свој сценарио |
+| **Модул 6** | Безбедно сте уклонили инфраструктуру и управљали ресурсима |
 
 ---
 
-## 2. Key Concepts Mastered
+## 2. Кључни појмови које сте савладали
 
 ### Azure Developer CLI (azd)
-- `azd init` - Initialize projects from templates
-- `azd up` - Provision and deploy in one command
-- `azd env` - Manage environment variables
-- `azd down` - Clean up resources safely
+- `azd init` - Иницијализација пројеката из шаблона
+- `azd up` - Постављање и деплој у једној команди
+- `azd env` - Управљање променљивима окружења
+- `azd down` - Безбедно чишћење ресурса
 
-### AZD Template Structure
-- `azure.yaml` - Configuration and deployment hooks
-- `infra/` - Bicep infrastructure-as-code
-- `src/` - Application source code
-- `scripts/` - Automation and setup scripts
+### Структура AZD шаблона
+- `azure.yaml` - Конфигурација и хук функције за деплој
+- `infra/` - Bicep инфраструктура као код
+- `src/` - Изворни код апликације
+- `scripts/` - Скрипте за аутоматизацију и подешавање
 
-### Microsoft Foundry Capabilities
-- AI Agent Service for intelligent assistants
-- File Search and Azure AI Search for knowledge retrieval
-- Built-in tracing, monitoring, and evaluation
-- Red teaming for AI safety validation
+### Могућности Microsoft Foundry-а
+- AI агент сервис за интелигентне помоћнике
+- Трагање у фајловима и Azure AI претрага за проналажење знања
+- Уграђено праћење, мониторинг и евалуација
+- Red teaming за валидацију безбедности AI
 
 ---
 
-## 3. Continue Your Learning Journey
+## 3. Наставите своје учење
 
-### Recommended Next Steps
+### Препоручени следећи кораци
 
-| Path | Resource | Time |
+| Пут | Ресурс | Време |
 |:---|:---|:---|
-| **Complete Course** | [AZD for Beginners Curriculum](../../README.md) | 8-12 hours |
-| **Try Another Template** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 hours |
-| **Deep Dive** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Ongoing |
-| **Community** | [Azure Discord](https://aka.ms/foundry/discord) | Join today! |
+| **Комплетан курс** | [AZD for Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Самостално |
+| **Испробајте други шаблон** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 сата |
+| **Дубинско проучавање** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Континуирано |
+| **Заједница** | [Azure Discord](https://aka.ms/foundry/discord) | Придружите се данас! |
 
-### Suggested Templates to Try Next
+### Предложени шаблони за испробавање
 
-1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Basic chat with your data
-2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Advanced RAG patterns
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Enterprise retail scenarios
+1. **[Започните са AI Четом](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Основни разговор са вашим подацима
+2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Напредни RAG шаблони
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Пословни сценарији у трговини
 
 ---
 
-## 4. Workshop Challenge
+## 4. Изазови радионице
 
-Ready to test your skills? Try these challenges:
+Спремни да тестирате своје вештине? Испробајте ове изазове:
 
-| Challenge | Description | Difficulty |
+| Изазов | Опис | Тежина |
 |:---|:---|:---|
-| **1. Multi-Agent Scenario** | Deploy and customize for a different industry (e.g., healthcare, finance) | ⭐⭐ |
-| **2. Custom Knowledge Base** | Add your own data files and create a custom search index | ⭐⭐⭐ |
-| **3. Production Deployment** | Set up CI/CD with GitHub Actions using `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. Сценарио са више агената** | Деплојујте и прилагодите за другу индустрију (нпр. здравство, финансије) | ⭐⭐ |
+| **2. Прилагођена база знања** | Додајте своје датотеке и направите прилагођени индекс претраге | ⭐⭐⭐ |
+| **3. Продукцијски деплој** | Подесите CI/CD са GitHub Actions користећи `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. Share Your Feedback
+## 5. Поделите своје мишљење
 
-Your feedback helps us improve this workshop!
+Ваше мишљење нам помаже да побољшамо ову радионицу!
 
-- **GitHub Issues**: [Post feedback](https://github.com/microsoft/azd-for-beginners/issues) - tag with `Workshop`
-- **Discord**: Join [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - post in `#get-help`
-- **Contributions**: Help improve the workshop by submitting pull requests!
+- **GitHub Issues**: [Поставите повратну информацију](https://github.com/microsoft/azd-for-beginners/issues) - означите са `Workshop`
+- **Discord**: Придружите се [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - објавите у `#get-help`
+- **Доприноси**: Помозите у побољшању радионице слањем pull захтева!
 
 ---
 
-## Thank You! 🎉
+## Хвала вам! 🎉
 
-Thank you for completing the AZD for AI Developers Workshop. We hope this experience has equipped you with the skills and confidence to build and deploy AI applications on Azure.
+Хвала вам што сте завршили радионицу AZD for AI Developers. Надамо се да вас је ово искуство опремило вештинама и самопоуздањем за изградњу и деплој AI апликација на Azure.
 
-**Keep building, keep learning, and welcome to the Azure AI developer community!**
+**Наставите да развијате, наставите да учите и добродошли у Azure AI заједницу програмера!**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 Course Home** | [AZD For Beginners](../../README.md) |
-| **📖 Documentation** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-| **💬 Community** | [Azure Discord](https://aka.ms/foundry/discord) |
+| **📚 Почетна страница курса** | [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
+| **📖 Документација** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
+| **🛠️ AI шаблони** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+| **💬 Заједница** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ограничење одговорности:
-Овај документ је преведен помоћу услуге за превођење засноване на вештачкој интелигенцији [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да обезбедимо тачност, имајте на уму да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитетним извором. За критичне информације препоручује се професионални људски превод. Не сносимо одговорност за било какве неспоразуме или погрешна тумачења која проистичу из употребе овог превода.
+**Изјава о одрицању одговорности**:
+Овај документ је преведен коришћењем услуге за аутоматски превод [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо тачности, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква неспоразума или погрешна тумачења која произилазе из коришћења овог превода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,23 +1,23 @@
 # 第6章：部署前規劃與驗證
 
-**📚 課程**: [AZD 初學者指南](../../README.md) | **⏱️ 時長**: 1 小時 | **⭐ 難度**: 中階
+**📚 課程**：[初學者的AZD](../../README.md) | **⏱️ 時間**：閱讀2-4小時；另需適應性實驗時間 | **⭐ 複雜度**：中級–進階
 
 ---
 
-## 概述
+## 概覽
 
-本章涵蓋在部署應用程式前的重要規劃和驗證步驟。學習如何透過適當的容量規劃、SKU 選擇及預檢查，避免昂貴錯誤。
+本章涵蓋部署應用程式前的重要規劃與驗證步驟。透過適當的容量規劃、SKU 選擇與預檢查，學會避免昂貴的錯誤。
 
-> 已於2026年7月使用 `azd 1.27.1` 驗證。
+> 指令指南已依照發布的 `azd 1.37.2` 參考文件審查。未執行雲端部署。較長的課程包含示範片段，非完整本地部署專案。
 
 ## 學習目標
 
 完成本章後，您將能：
-- 執行部署前的預檢查
-- 進行容量規劃及資源需求預估
-- 為成本優化選擇合適的SKU
+- 部署前執行預檢查
+- 規劃容量並估算資源需求
+- 選擇適當SKU以優化成本
 - 配置 Application Insights 進行監控
-- 了解團隊協作模式
+- 了解多代理協調模式及其部署需求
 
 ---
 
@@ -25,27 +25,27 @@
 
 | # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [預檢查](preflight-checks.md) | 部署前驗證設定 | 15 分鐘 |
-| 2 | [容量規劃](capacity-planning.md) | 預估資源需求 | 20 分鐘 |
-| 3 | [SKU 選擇](sku-selection.md) | 選擇適合的定價級別 | 15 分鐘 |
+| 1 | [預檢查](preflight-checks.md) | 驗證部署前配置 | 15 分鐘 |
+| 2 | [容量規劃](capacity-planning.md) | 估算資源需求 | 20 分鐘 |
+| 3 | [SKU 選擇](sku-selection.md) | 選擇合適的價格層 | 15 分鐘 |
 | 4 | [Application Insights](application-insights.md) | 配置監控 | 20 分鐘 |
-| 5 | [協作模式](coordination-patterns.md) | 團隊部署流程 | 15 分鐘 |
+| 5 | [協調模式](coordination-patterns.md) | 進階多代理協調設計 | 60-75 分鐘 |
 
 ---
 
 ## 🚀 快速開始
 
 ```bash
-# 檢查訂閱配額
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# 預覽部署（不會建立資源）
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# 驗證 Bicep 語法
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 檢查環境配置
+# Check environment configuration
 azd env get-values
 ```
 
@@ -53,31 +53,31 @@ azd env get-values
 
 ## ☑️ 部署前檢查清單
 
-### 在 `azd provision` 之前
+### `azd provision` 前
 
-- [ ] 已核實區域配額
-- [ ] SKU 已適當選擇
-- [ ] 成本預估已審查
-- [ ] 命名規則一致
-- [ ] 已配置安全性/RBAC
+- [ ] 驗證區域配額
+- [ ] 適當選擇SKU
+- [ ] 成本估算審閱
+- [ ] 命名慣例一致
+- [ ] 配置安全性/RBAC
 
-### 在 `azd deploy` 之前
+### `azd deploy` 前
 
-- [ ] 環境變數已設定
-- [ ] 秘密存於 Key Vault
-- [ ] 連接字串已核實
-- [ ] 已配置健康檢查
+- [ ] 設定環境變數
+- [ ] 機密存於 Key Vault
+- [ ] 驗證連線字串
+- [ ] 配置健康檢查
 
 ---
 
 ## 💰 SKU 選擇指南
 
-| 工作負載 | 開發環境 | 生產環境 |
+| 工作負載 | 開發 | 生產 |
 |----------|-------------|------------|
-| 容器應用程式 | 消耗型 | 專用 D4 |
-| 應用服務 | B1/B2 | P1v3 以上 |
-| Microsoft Foundry 模型 | 標準 | 標準 + PTU |
-| AI 搜尋 | 基本 | 標準 S2 以上 |
+| Container Apps | 消耗 | 消耗或專用工作負載配置，依據實測負載 |
+| App Service | B1/B2 | P1v3以上 |
+| Azure OpenAI 模型 | 支援隨用隨付部署類型 | 隨用隨付或預配吞吐量；依模型/區域而定 |
+| AI 搜尋 | 免費/基礎內限額 | 依索引、複本及查詢負載大小的基礎或標準層 |
 
 ---
 
@@ -92,7 +92,7 @@ azd env get-values
 
 ## 📖 相關資源
 
-- [設定指南](../chapter-03-configuration/configuration.md)
+- [配置指南](../chapter-03-configuration/configuration.md)
 - [部署指南](../chapter-04-infrastructure/deployment-guide.md)
 - [常見問題](../chapter-07-troubleshooting/common-issues.md)
 
