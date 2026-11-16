@@ -1,46 +1,46 @@
 # 第7章: トラブルシューティングとデバッグ
 
-**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: 1～1.5時間 | **⭐ 難易度**: 中級
+**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: 1～1.5時間 | **⭐ 複雑度**: 中級
 
 ---
 
 ## 概要
 
-本章では、Azure Developer CLIを使用する際に発生しやすい一般的な問題の診断と解決方法を説明します。デプロイ失敗からAI特有の問題まで網羅しています。
+この章では、Azure Developer CLIを使用する際の一般的な問題の診断と解決方法を説明します。デプロイ失敗からAI固有の問題までをカバーします。
 
-> 2026年7月に `azd 1.27.1` で検証済み。
+> コマンドの案内はリリースされた`azd 1.37.2`リファレンスに基づき確認済みです。クラウドへのデプロイは実行されていません。コマンド使用前に例示されたリソース名やIDを置き換えてください。
 
 ## 学習目標
 
-本章を修了することで、以下ができるようになります:
+この章を修了すると次のことができるようになります:
 - 一般的なAZDデプロイ失敗の診断
-- 認証と権限の問題のデバッグ
+- 認証および権限の問題をデバッグ
 - AIサービスの接続問題の解決
-- トラブルシューティングのためのAzure PortalとCLIの利用
+- トラブルシューティングにAzureポータルとCLIを活用
 
 ---
 
-## 📚 レッスン一覧
+## 📚 レッスン
 
 | # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [共通の問題](common-issues.md) | よくある問題の対処 | 30分 |
-| 2 | [デバッグガイド](debugging.md) | ステップごとのデバッグ手法 | 45分 |
-| 3 | [AIトラブルシューティング](ai-troubleshooting.md) | AI特有の問題 | 30分 |
+| 1 | [一般的な問題](common-issues.md) | よくあるトラブル | 30分 |
+| 2 | [デバッグガイド](debugging.md) | ステップごとのデバッグ方法 | 45分 |
+| 3 | [AIトラブルシューティング](ai-troubleshooting.md) | AI固有の問題 | 30分 |
 
 ---
 
-## 🚨 クイック修正
+## 🚨 クイックフィックス
 
 ### 認証問題
 ```bash
-# AZDワークフローに必須です
+# Required for AZD workflows
 azd auth login
 
-# Azure CLIコマンドを直接使用している場合はオプションです
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
 ### プロビジョニング失敗
@@ -51,8 +51,9 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### リソース競合
+既存のリソースとデプロイのエラーをまず調査してください。命名競合を解決するために共有または本番環境を削除しないでください。<strong>新しい使い捨て環境の場合</strong>は一意の名前を使用してください:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
@@ -60,19 +61,21 @@ azd up
 ### クォータ超過
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+`AZURE_LOCATION`を変更しても既存リソースは移動されず、再デプロイ時にロケーションの競合が発生する可能性があります。
 
 ---
 
-## 📋 エラーコード一覧
+## 📋 エラーコードリファレンス
 
 | エラー | 原因 | 解決策 |
 |-------|-------|----------|
 | `AuthenticationError` | ログインしていない | `azd auth login` |
-| `ResourceNotFound` | リソースが見つからない | リソース名を確認 |
-| `QuotaExceeded` | サブスクリプションの制限超過 | クォータ増加を申請 |
+| `ResourceNotFound` | リソースが存在しない | リソース名を確認 |
+| `QuotaExceeded` | サブスクリプション制限 | クォータ増加を依頼 |
 | `InvalidTemplate` | Bicep構文エラー | `az bicep build` |
 | `Conflict` | リソースが既に存在 | 新しい名前を使うか削除 |
 | `Forbidden` | 権限不足 | RBACロールを確認 |
@@ -82,29 +85,31 @@ azd up
 ## 🔄 リセットと復旧
 
 ```bash
-# ソフトリセット（リソースを保持し、コードを再展開）
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# ハードリセット（すべて削除し、初めからやり直す）
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+ハードリセットはデータを削除し、エンドポイントが変更される可能性があります。事前にバックアップを行い、対話型の削除プロンプトを確認してください。`--force --purge`は戻せない削除を意図する使い捨て環境でのみ適切です。
 
 ---
 
 ## 🔗 ナビゲーション
 
-| 方向 | チャプター |
+| 方向 | 章 |
 |-----------|---------|
-| <strong>前へ</strong> | [第6章: プリデプロイメント](../chapter-06-pre-deployment/README.md) |
+| <strong>前へ</strong> | [第6章: プレデプロイメント](../chapter-06-pre-deployment/README.md) |
 | <strong>次へ</strong> | [第8章: 本番環境](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 関連リソース
 
-- [プリデプロイメントチェック](../chapter-06-pre-deployment/preflight-checks.md)
-- [設定ガイド](../chapter-03-configuration/configuration.md)
+- [プレデプロイメントチェック](../chapter-06-pre-deployment/preflight-checks.md)
+- [構成ガイド](../chapter-03-configuration/configuration.md)
 - [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 
 ---

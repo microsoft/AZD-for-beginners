@@ -8,7 +8,9 @@
 
 This chapter covers enterprise-ready deployment patterns, security hardening, monitoring, and cost optimization for production AI workloads.
 
-> Validated against `azd 1.27.1` in July 2026.
+This is an architectural reference, not a complete deployable production template. Examples omit integration details that must be supplied and tested in your own application; reading the checklist does not certify production readiness.
+
+> **Release review (2026-11-04):** AI CLI guidance was checked against `azd 1.37.2`, agents `1.0.0-beta.23`, and evaluations `1.0.0-beta.2` documentation/source. See [release changes and fixes](production-ai-practices.md#recent-release-changes-and-fixes) for compatibility requirements and migration details; this is not a live deployment validation.
 
 ## Learning Objectives
 
@@ -64,12 +66,13 @@ graph LR
 ## 🔐 Security Best Practices
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,28 +85,21 @@ properties: {
 
 ## 💰 Cost Optimization
 
-| Strategy | Savings |
+| Strategy | Main Constraint |
 |----------|---------|
-| Scale to zero (Container Apps) | 60-80% |
-| Use consumption tiers for dev | 50-70% |
-| Scheduled scaling | 30-50% |
-| Reserved capacity | 20-40% |
+| Scale to zero (Container Apps) | Requires a suitable trigger; other services still incur costs |
+| Use consumption tiers for dev | Compare selected service pricing and workload |
+| Scheduled scaling | Scale through supported infrastructure/automation |
+| Reservations/provisioned capacity | Only when supported; commitments can increase idle costs |
 
-```bash
-# Establecer alertas de presupuesto
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Use the [complete budget resource pattern](production-ai-practices.md#2-cost-monitoring-and-budgets) with a valid start date, billing scope, recipients, and permissions. A budget sends alerts; it does not cap spending. Savings depend on measured utilization and are not guaranteed percentages.
 
 ---
 
 ## 📊 Monitoring Setup
 
 ```bash
-# Stream logs
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
 # Check Application Insights

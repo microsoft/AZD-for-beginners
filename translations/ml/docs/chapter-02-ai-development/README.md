@@ -1,73 +1,77 @@
-# അധ്യായം 2: AI-ഫസ്റ്റ് ഡവലപ്‌മെന്റ്
+# അധ്യായം 2: എഐ-ഫസ്റ്റ് വികസനം
 
-**📚 കോഴ്‌സ്**: [AZD For Beginners](../../README.md) | **⏱️ ദൈർഘ്യം**: 1-2 മണിക്കൂർ | **⭐ സങ്കീർണത**: ഇടത്തു തടവിലുള്ളത്
+**📚 കോഴ്‌സ്**: [AZD For Beginners](../../README.md) | **⏱️ ദൈർഘ്യം**: വർക്ഷോപ്പ് ഉൾപ്പെടെ 4-5 മണിക്കൂർ | **⭐ സങ്കീർണ്ണത**: മധ്യസ്ഥാനം
 
 ---
 
 ## അവലോകനം
 
-ഈ അധ്യായം Azure Developer CLI සහ Microsoft Foundry സേവനങ്ങൾ ഉപയോഗിച്ച് AI-പവർഡ് ആപ്ലിക്കേഷനുകൾ ഡിപ്ലോയ്മെന്റ് ചെയ്യുന്നതിൽ കേന്ദ്രീകരിക്കുന്നു. ലളിതമായ AI ചാറ്റ് ആപ്പുകളിൽ നിന്നും ടൂളുകൾ ഉപയോഗിക്കുന്ന ബുദ്ധിമുട്ടുള്ള ഏജന്റുകളിലേക്ക്.
+ഈ അധ്യായം Azure Developer CLI ഉം Microsoft Foundry സേവനങ്ങളും ഉപയോഗിച്ച് എഐ-ശക്തിയുള്ള ആപ്ലിക്കേഷനുകൾ വിന്യസിക്കുന്നതിന് ശ്രദ്ധ കേന്ദ്രീകരിക്കുന്നു. ലളിതമായ എഐ ചാറ്റ് ആപ്പുകൾ മുതൽ ഉപകരണങ്ങളോടുകൂടിയ ബുദ്ധിമുട്ടുള്ള ഏജന്റുമാര വരെ.
 
-> **സ്ഥിരീകരണ കുറിപ്പ് (2026-07-13):** ഈ അധ്യായത്തിലെ കമാൻഡ് ഫ്ലോയും എക്സ്റ്റൻഷൻ ഗൈഡൻസ് `azd` `1.27.1` ഉം നിലവിലെ പ്രിവ്യൂ AI ഏജന്റ് എക്സ്റ്റൻഷൻ റിലീസ് `azure.ai.agents` `1.0.0-beta.5` ഉം നേരെ പരിശോധിച്ചിട്ടുണ്ട്. പഴയ AZD ബിൽഡ് ഉപയോഗിക്കുകയാണെങ്കിൽ, ആദ്യം അപ്‌ഡേറ്റ് ചെയ്ത് ശേഷം വ്യായാമങ്ങൾ തുടരുക.
+> **റിലീസ് റിവ്യൂ (2026-11-04):** AI CLI മാർഗ്ഗനിർദേശങ്ങൾ പ്രസിദ്ധീകരിച്ച `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, ഉം `azure.ai.evaluations` `1.0.0-beta.2` ഡോക്യുമെന്റേഷൻ/സോഴ്‌സ് എന്നിവയ്ക്കു വിരുദ്ധമായി പരിശോധിച്ചതാണ്. സംയുക്ത പ്രവൃത്തി പ്രവാഹത്തിനായി `azd >= 1.37.0` ഉപയോഗിക്കുക. നിലവിൽ അവലോകനങ്ങൾ വേർതിരിച്ച `azd ai eval` നെയിംസ്പേസിൽ ഉപയോഗിക്കുന്നു; [റിലീസ് മാറ്റങ്ങളും മൈഗ്രേഷൻ മാർഗ്ഗനിർദേശവും](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) പരിശോധിക്കുക. ഇത് ലൈവ് വിന്യസീകരണ പരിശോധന അല്ല.
 
 ## പഠന ലക്ഷ്യങ്ങൾ
 
-ഈ അധ്യായം പൂർത്തിയാക്കി നിങ്ങൾക്ക്:
-- മുൻകൂട്ടി നിർമ്മിച്ച AZD ടെംപ്ലേറ്റുകൾ ഉപയോഗിച്ച് AI ആപ്ലിക്കേഷനുകൾ ഡിപ്ലോയ്ചെയ്‌യ്യുക
-- AZD-യുമായി Microsoft Foundry സംയോജനം മനസ്സിലാക്കുക
-- ടൂളുകളുമായി AI ഏജന്റുകൾ കോൺഫിഗർ ചെയ്യുകയും ഇഷ്ടാനുസൃതമാക്കുകയും ചെയ്യുക
-- RAG (Retrieval-Augmented Generation) ആപ്ലിക്കേഷനുകൾ ഡിപ്ലോയ്മെന്റ് ചെയ്യുക
+ഈ അധ്യായം പൂർത്തിയാക്കുന്നതിലൂടെ, നിങ്ങൾക്ക്:
+- മുൻനിര AZD ടെംപ്ലേറ്റുകൾ ഉപയോഗിച്ച് എ.ഐ ആപ്ലിക്കേഷനുകൾ വിന്യസിക്കാൻ കഴിയും
+- AZD-യോടൊപ്പം Microsoft Foundry ഇന്റഗ്രേഷൻ മനസ്സിലാക്കുക
+- ഉപകരണങ്ങളോടുകൂടിയ എഐ ഏജന്റുകളെ ഘടിപ്പിക്കുകയും ഇഷ്ടാനുസൃതമാക്കുകയും ചെയ്യുക
+- RAG (Retrieval-Augmented Generation) ആപ്ലിക്കേഷനുകൾ വിന്യസിക്കുക
 
 ---
 
 ## 📚 പാഠങ്ങൾ
 
-| # | പാഠം | വിവരണം | സമയം |
+| # | പാഠം | വിശദീകരണം | സമയം |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD-യെ Foundry സേവനങ്ങളുമായി കണക്ട് ചെയ്യുക | 30 മിനിറ്റ് |
-| 2 | [AI Agents Guide](agents.md) | ടൂളുകളോടു കൂടി ബുദ്ധിമുട്ടുള്ള ഏജന്റുകൾ ഡിപ്ലോയ്മെന്റ് ചെയ്യുക | 45 മിനിറ്റ് |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | AI മോഡലുകൾ ഡിപ്ലോയും കോൺഫിഗർ ചെയ്യുക | 30 മിനിറ്റ് |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | കൈയിൽ ഉപരിതലം: നിങ്ങളുടെ AI പരിഹാരം AZD-സജ്ജമാക്കുക | 60 മിനിറ്റ് |
+| 1 | [Microsoft Foundry ഇന്റഗ്രേഷൻ](microsoft-foundry-integration.md) | AZD-നെ Foundry സേവനങ്ങളുമായി ബന്ധിപ്പിക്കുക | 30 മിനിട്ട് |
+| 2 | [എഐ ഏജന്റുമാരുടെ മാർഗ്ഗദർശി](agents.md) | ഉപകരണങ്ങളോടുകൂടിയ ബുദ്ധിമുട്ടുള്ള ഏജന്റുമാരെ വിന്യസിക്കുക | 45 മിനിട്ട് |
+| 3 | [എഐ മോഡൽ വിന്യാസം](ai-model-deployment.md) | എഐ മോഡലുകൾ വിന്യസിക്കുകയും ക്രമീകരിക്കുകയും ചെയ്യുക | 30 മിനിട്ട് |
+| 4 | [എഐ വർക്‌ഷോപ്പ് ലാബ്](ai-workshop-lab.md) | പ്രായോഗികം: ഒരു ടെംപ്ലേറ്റ് പരിശോധിക്കുകയും നിർമാണം പദ്ധതി പോകുകയും ചെയുക | 2-3 മണിക്കൂർ |
 
 ---
 
-## 🚀 ചുരുങ്ങിയ തുടക്കം
+## 🚀 ദ്രുത ആരംഭം
+
+പുതിയ ശൂന്യമായ ഡയറക്ടറിയിൽ ഒരു ഓപ്ഷൻ തിരഞ്ഞെടുക്കുക. തുടർച്ചയായ `.` നിലവിലെ ഡയറക്ടറി പ്രാരംഭമാക്കും; അല്ലെങ്കിൽ AZD സബ്ഡയറക്ടറി സൃഷ്ടിച്ചേക്കാം പക്ഷേ നിങ്ങളുടെ ഷെല്ലിന്റെ പ്രവർത്തന ഡയറക്ടറി മാറ്റാനില്ല.
 
 ```bash
-# ഓപ്ഷൻ 1: RAG ചാറ്റ് അപ്ലിക്കേഷൻ
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# ഓപ്ഷൻ 2: എഐ എജന്റുകൾ
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# ഓപ്ഷൻ 3: ക്വിക്ക് ചാറ്റ് ആപ്പ്
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
 ---
 
-## 🤖 പ്രധാനം ചെയ്‌ത AI ടെംപ്ലേറ്റുകൾ
+## 🤖 സവിശേഷ എഐ ടെംപ്ലേറ്റുകൾ
 
-| ടെംപ്ലേറ്റ് | വിവരണം | സേവനങ്ങൾ |
+| ടെംപ്ലേറ്റ് | വിശദീകരണം | സേവനങ്ങൾ |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | സൂചനകളോടുള്ള RAG ചാറ്റ് | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ടൂളുകളോടുള്ള AI ഏജന്റ് | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | അടിസ്ഥാന AI ചാറ്റ് | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | സൈറ്റേഷനുകളോട് കൂടിയ RAG ചാറ്റ് | OpenAI + എഐ തിരയൽ |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ഉപകരണങ്ങളോടുകൂടിയ എഐ ഏജന്റ് | എഐ ഏജന്റ് സർവീസ് |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | അടിസ്ഥാന എഐ ചാറ്റ് | OpenAI + കണ്ടെയ്‌നർ ആപ്പുകൾ |
 
 ---
 
-## 💰 ചെലവ് ബോധവൽക്കരണം
+## 💰 ചെലവ് ബോധവല്‍ക്കരണം
 
-| പരിസ്ഥിതി | اندازارنة മാസം ചെലവ് |
+ഇവ സംപ്രദായപരമായ പരിധികളാണ്, ഉദ്ധാരണങ്ങൾ അല്ല; മോഡൽ ട്രാഫിക്, തിരയൽ/കമ്പ്യൂട്ട് SKUs, പ്രദേശം, ഓപ്ഷണൽ സവിശേഷതകൾ ഇവയെ ബാധിക്കാം. ഓർമ്മിക്കുക തിരഞ്ഞെടുക്കപ്പെട്ട സാമ്പിൾ നിലവിലെ വില നിർദ്ദേശം പരിശോധിക്കുക പ്രൊവിജനിങ്ങിന് മുമ്പ്.
+
+| പരിസ്ഥിതി | അനുമാനിത മാസവേതനം ചെലവ് |
 |-------------|----------------------|
-| ഡവലപ്പ്മെന്റ് | $80-150 |
+| ഡെവലപ്പ്മെന്റ് | $80-150 |
 | സ്റ്റേജിംഗ് | $150-300 |
 | പ്രൊഡക്ഷൻ | $300-3,500+ |
 
-**സംവാതനം:** പരീക്ഷണത്തിനു ശേഷം `azd down` റണ്‍ ചെയ്യുക ചെലവുകൾ ഒഴിവാക്കാൻ.
+**ടിപ്പ്:** ചാർജുകൾ ഒഴിവാക്കാൻ പരിശോധിച്ചതിനു ശേഷം `azd down` പ്രവർത്തിപ്പിക്കുക.
 
 ---
 
@@ -75,17 +79,17 @@ azd up
 
 | ദിശ | അധ്യായം |
 |-----------|---------|
-| **മുമ്പത്തെ** | [Chapter 1: Foundation](../chapter-01-foundation/README.md) |
-| **അടുത്തത്** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **പ്രവേശിക്കുക** | [Chapter 8: Production Patterns](../chapter-08-production/README.md) |
+| **മുൻപ്** | [അധ്യായം 1: അടിസ്ഥാനങ്ങൾ](../chapter-01-foundation/README.md) |
+| **അടുത്തത്** | [അധ്യായം 3: ക്രമീകരണം](../chapter-03-configuration/README.md) |
+| **ഓവർണിവായി** | [അധ്യായം 8: പ്രൊഡക്ഷൻ മാതൃകകൾ](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 ബന്ധപ്പെട്ട വിഭവങ്ങൾ
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [എഐ പ്രശ്നപരിഹാരം](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [പ്രൊഡക്ഷൻ എഐ പ്രാക്ടീസുകൾ](../chapter-08-production/production-ai-practices.md)
+- [അപ്ലിക്കേഷൻ ഇൻസൈറ്റ്സ്](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

@@ -1,73 +1,75 @@
-# AZD Dağıtımları için Ön Uçuş Kontrolleri
+# AZD Dağıtımları için Uçuş Öncesi Kontroller
 
-**Bölüm Gezinimi:**
-- **📚 Kurs Anasayfası**: [AZD Yeni Başlayanlar](../../README.md)
-- **📖 Geçerli Bölüm**: Bölüm 6 - Dağıtımdan Önce Doğrulama ve Planlama
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [Yeni Başlayanlar için AZD](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 6 - Dağıtım Öncesi Doğrulama ve Planlama
 - **⬅️ Önceki**: [SKU Seçimi](sku-selection.md)
 - **➡️ Sonraki Bölüm**: [Bölüm 7: Sorun Giderme](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 İlgili**: [Bölüm 4: Dağıtım Kılavuzu](../chapter-04-infrastructure/deployment-guide.md)
+- **🔧 İlgili**: [Bölüm 4: Dağıtım Rehberi](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Giriş
 
-Bu kapsamlı rehber, Azure Developer CLI dağıtımları başlamadan önce başarılı olmalarını sağlamak için dağıtımdan önce doğrulama betikleri ve prosedürleri sağlar. Kimlik doğrulama, kaynak kullanılabilirliği, kotalar, güvenlik uyumluluğu ve performans gereksinimleri için otomatik kontroller uygulamayı öğrenerek dağıtım hatalarının önüne geçin ve dağıtım başarı oranlarını optimize edin.
+Bu kapsamlı rehber, Azure Developer CLI dağıtımlarının başlamadan önce başarılı olmasını sağlamak için dağıtım öncesi doğrulama komut dosyaları ve prosedürleri sağlar. Kimlik doğrulama, kaynak kullanılabilirliği, kotalar, güvenlik uyumu ve performans gereksinimleri için otomatik kontroller uygulamayı öğrenin; böylece dağıtım hatalarını önleyin ve dağıtım başarı oranlarını optimize edin.
 
 ## Öğrenme Hedefleri
 
-Bu rehberi tamamlayarak şunları öğreneceksiniz:
-- Otomatikleştirilmiş dağıtımdan önce doğrulama teknikleri ve betikleri konusunda uzmanlaşma
-- Kimlik doğrulama, izinler ve kotalar için kapsamlı kontrol stratejilerini anlama
-- Kaynak kullanılabilirliği ve kapasite doğrulama prosedürlerini uygulama
-- Kurumsal politikalar için güvenlik ve uyumluluk kontrolleri yapılandırma
-- Maliyet tahmini ve bütçe doğrulama iş akışları tasarlama
-- CI/CD boru hatları için özel ön uçuş kontrol otomasyonları oluşturma
+Bu rehberi tamamlayarak:
+- Otomatik dağıtım öncesi doğrulama teknikleri ve komut dosyalarını ustalıkla kullanabileceksiniz
+- Kimlik doğrulama, izinler ve kotalar için kapsamlı kontrol stratejilerini anlayacaksınız
+- Kaynak kullanılabilirliği ve kapasite doğrulama prosedürlerini uygulayabileceksiniz
+- Kurumsal politikalar için güvenlik ve uyumluluk kontrollerini yapılandırabileceksiniz
+- Maliyet tahmini ve bütçe doğrulama iş akışları tasarlayabileceksiniz
+- CI/CD boru hatları için özel uçuş öncesi kontrol otomasyonları oluşturabileceksiniz
 
 ## Öğrenme Çıktıları
 
-Tamamlandığında şunları yapabileceksiniz:
-- Kapsamlı ön uçuş doğrulama betikleri oluşturma ve yürütme
-- Farklı dağıtım senaryoları için otomatik kontrol iş akışları tasarlama
-- Ortama özgü doğrulama prosedürleri ve politikaları uygulama
-- Dağıtım hazırlığı için proaktif izleme ve uyarı yapılandırma
-- Dağıtımdan önceki sorunları giderme ve düzeltici önlemler uygulama
-- Ön uçuş kontrollerini DevOps boru hatlarına ve otomasyon iş akışlarına entegre etme
+Tamamladıktan sonra, şunları yapabileceksiniz:
+- Kapsamlı uçuş öncesi doğrulama komut dosyaları oluşturmak ve çalıştırmak
+- Farklı dağıtım senaryoları için otomatik kontrol iş akışları tasarlamak
+- Ortama özgü doğrulama prosedürleri ve politikaları uygulamak
+- Dağıtım hazırlığı için proaktif izleme ve uyarı yapılandırmak
+- Dağıtım öncesi sorunları gidermek ve düzeltici eylemler uygulamak
+- Uçuş öncesi kontrolleri DevOps boru hatları ve otomasyon iş akışlarına entegre etmek
 
 ## İçindekiler
 
-- [Genel Bakış](#genel-bakış)
-- [Otomatik Ön Uçuş Betiği](#otomatik-ön-uçuş-betiği)
-- [Manuel Doğrulama Kontrol Listesi](#codeblock1)
-- [Ortam Doğrulaması](#✅-yedekleme-kurtarma)
-- [Kaynak Doğrulama](#üretim-ortamı-doğrulaması)
+- [Genel Bakış](#overview)
+- [Otomatik Uçuş Öncesi Komut Dosyası](#automated-pre-flight-script)
+- [Manuel Doğrulama Kontrol Listesi](#manual-validation-checklist)
+- [Ortam Doğrulaması](#environment-validation)
+- [Kaynak Doğrulaması](#resource-validation)
 - [Güvenlik ve Uyumluluk Kontrolleri](#security--compliance-checks)
-- [Performans ve Kapasite Planlama](#performance--capacity-planning)
-- [Yaygın Sorunların Giderilmesi](#troubleshooting-common-issues)
+- [Performans ve Kapasite Planlaması](capacity-planning.md)
+- [Yaygın Sorunların Giderilmesi](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 ## Genel Bakış
 
-Ön uçuş kontrolleri, dağıtımdan önce gerçekleştirilen ve şunları sağlamak için yapılan temel doğrulamalardır:
+Uçuş öncesi kontroller, dağıtımdan önce yapılan temel doğrulamalardır ve şunları garanti eder:
 
-- **Kaynak kullanılabilirliği** ve hedef bölgelerdeki kotalar
-- **Kimlik doğrulama ve izinler**in doğru yapılandırılması
+- **Hedef bölgelerdeki kaynak kullanılabilirliği** ve kotalar
+- **Kimlik doğrulama ve izinlerin** doğru yapılandırılmış olması
 - **Şablon geçerliliği** ve parametre doğruluğu
 - **Ağ bağlantısı** ve bağımlılıklar
-- **Güvenlik uyumluluğu** ve kuruluş politikalarına uygunluk
-- **Maliyet tahmini** bütçe kısıtları içinde
+- **Kurumsal politikalarla uyumlu güvenlik**
+- **Bütçe sınırları dahilinde maliyet tahmini**
 
-### Ön Uçuş Kontrolleri Ne Zaman Çalıştırılmalı
+### Uçuş Öncesi Kontrolleri Ne Zaman Çalıştırmalı
 
-- **Yeni bir ortama ilk dağıtımdan önce**
+- **Yeni bir ortam için ilk dağıtımdan önce**
 - **Önemli şablon değişikliklerinden sonra**
-- **Prodüksiyon dağıtımlarından önce**
-- **Azure bölgelerini değiştirirken**
+- **Üretim dağıtımlarından önce**
+- **Azure bölgeleri değiştirildiğinde**
 - **CI/CD boru hatlarının bir parçası olarak**
 
 ---
 
-## Otomatik Ön Uçuş Betiği
+## Otomatik Uçuş Öncesi Komut Dosyası
 
-### PowerShell Ön Uçuş Denetleyicisi
+> **Kapsam ve ön koşullar:** Bunlar, bu bölümün sağladığı yerel dosyalar değil, kendi projenizde kaydetmeniz gereken başlangıç komut dosyalarıdır. PowerShell sürümü, PowerShell **7.3+** (yerel komut hata yayılımı) ve `powershell-yaml` modülünü `ConvertFrom-Yaml` için gerektirir. Bash sürümü Bash, `jq`, Python 3.10+ ve PyYAML gerektirir. Her ikisi de Azure CLI, azd ve çalışan bir Bicep projesine ihtiyaç duyar. Bunlar dağıtım hazır olma, kapasite veya uyumluluk kanıtı değil, teşhis amaçlıdır. `azd provision --preview` öncesinde şablon bağlama noktalarını inceleyin; bağlama noktaları proje komutları çalıştırabilir.
+
+### PowerShell Uçuş Öncesi Denetleyicisi
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +102,14 @@ param(
     [switch]$Detailed
 )
 
-# Çıktı için renk kodlaması
+# Fail native commands into catch blocks instead of reporting false successes.
+$ErrorActionPreference = 'Stop'
+if ($PSVersionTable.PSVersion -lt [version]'7.3') {
+    throw 'PowerShell 7.3+ is required for this script.'
+}
+$PSNativeCommandUseErrorActionPreference = $true
+
+# Color coding for output
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +137,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # AZD kurulumunu kontrol et
+    # Check AZD installation
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +147,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Azure CLI kurulumunu kontrol et
+    # Check Azure CLI installation
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +157,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # PowerShell sürümünü kontrol et
+    # Check PowerShell version
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,23 +172,23 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # AZD kimlik doğrulamasını kontrol et
+        # Check AZD authentication
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
-        if ($azdAuth.status -eq "Logged-in") {
-            Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
+        if ($azdAuth.status -eq "success") {
+            Write-Status "AZD authentication" "Success" "Token available; expires $($azdAuth.expiresOn)"
         }
         else {
             Write-Status "AZD authentication" "Error" "Run 'azd auth login'"
             return $false
         }
         
-        # Azure CLI kimlik doğrulamasını kontrol et
+        # Check Azure CLI authentication
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Abonelik erişimini doğrula
+        # Validate subscription access
         $subscriptionId = $azAccount.id
-        $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
+        $subscription = az account show --subscription $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
         
         return $true
@@ -194,39 +203,29 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Mevcut kullanıcının rol atamalarını al
+        # Get current user's role assignments
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
             $_.roleDefinitionName -eq "Contributor" -or 
-            $_.roleDefinitionName -eq "Owner" -or
-            $_.roleDefinitionName -eq "User Access Administrator"
+            $_.roleDefinitionName -eq "Owner"
         }
         
         if ($hasContributor) {
-            Write-Status "Required permissions" "Success" "Contributor or higher role found"
+            Write-Status "Role assignment inventory" "Info" "Contributor/Owner found; verify effective scope, policy and any role-assignment permissions separately"
         }
         else {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Kaynak grubunun oluşturulmasını test et (belirtilmişse)
+        # Test resource group creation (if specified)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Kaynak grubu oluşturma yeteneğini test et
-                try {
-                    az group create --name "preflight-test-rg" --location $Location --output none
-                    az group delete --name "preflight-test-rg" --yes --output none
-                    Write-Status "Resource group creation" "Success" "Can create resource groups"
-                }
-                catch {
-                    Write-Status "Resource group creation" "Error" "Cannot create resource groups"
-                    return $false
-                }
+                Write-Status "Resource group creation" "Warning" "Group does not exist. Review subscription-scope permissions; this diagnostic does not create/delete test groups."
             }
         }
         
@@ -242,25 +241,28 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Hesaplama kotalarını kontrol et
+        # Check compute quotas
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # Belirli kotaları kontrol et
+        # Check specific quotas
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
-        if ($coreQuota) {
+        if ($coreQuota -and $coreQuota.limit -gt 0) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
             if ($usagePercent -lt 80) {
                 Write-Status "Compute cores quota" "Success" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
+            } else {
+                Write-Status "Compute cores quota" "Warning" "Missing or zero quota; verify service requirements"
             }
             else {
                 Write-Status "Compute cores quota" "Warning" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
             }
         }
         
-        # App Service limitlerini kontrol et
+        # Check App Service limits
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
-            if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
+            $displayLocation = az account list-locations --query "[?name=='$Location'].displayName | [0]" -o tsv
+            if ($appServiceUsage | Where-Object { $_.name -eq $Location -or $_.name -eq $displayLocation }) {
                 Write-Status "App Service availability" "Success" "Available in $Location"
             }
             else {
@@ -271,28 +273,27 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Depolama hesabı sınırlarını kontrol et
-        $storageAccounts = az storage account list --output json | ConvertFrom-Json
-        $accountCount = ($storageAccounts | Measure-Object).Count
-        if ($accountCount -lt 200) {
-            Write-Status "Storage account limit" "Success" "$accountCount/250 storage accounts"
+        # Check storage account limits
+        $storageUsage = @(az storage account show-usage --location $Location --output json | ConvertFrom-Json)[0]
+        if ($storageUsage -and $storageUsage.limit -gt 0 -and $storageUsage.currentValue -lt $storageUsage.limit) {
+            Write-Status "Storage account quota" "Info" "$($storageUsage.currentValue)/$($storageUsage.limit) in $Location"
         }
         else {
-            Write-Status "Storage account limit" "Warning" "$accountCount/250 storage accounts"
+            Write-Status "Storage account quota" "Warning" "No headroom or missing quota data"
         }
         
         return $true
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # Engelleyici değil
+        return $true # Non-blocking
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Azure uç noktalarını test et
+    # Test Azure endpoints
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -306,13 +307,19 @@ function Test-NetworkConnectivity {
             Write-Status "Connectivity to $endpoint" "Success" "Status: $($response.StatusCode)"
         }
         catch {
-            Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+            # A 401/403/404 response may still prove HTTP reachability.
+            if ($_.Exception.Response) {
+                Write-Status "Connectivity to $endpoint" "Info" "HTTP response received; this is not an authorization test"
+            } else {
+                Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+                return $false
+            }
         }
     }
     
-    # DNS çözümlemesini test et
+    # Test DNS resolution
     try {
-        $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
+        $dnsResult = [System.Net.Dns]::GetHostAddresses("management.azure.com")
         Write-Status "DNS resolution" "Success" "Resolved successfully"
     }
     catch {
@@ -326,18 +333,21 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # azure.yaml dosyasının var olup olmadığını kontrol et
+    # Check if azure.yaml exists
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # azure.yaml dosyasını ayrıştır
+        # Parse azure.yaml
         try {
+            if (-not (Get-Command ConvertFrom-Yaml -ErrorAction SilentlyContinue)) {
+                throw 'ConvertFrom-Yaml requires the powershell-yaml module.'
+            }
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Hizmetleri doğrula
+            # Validate services
             if ($azureYaml.services) {
-                $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
+                $serviceCount = $azureYaml.services.Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
             }
             else {
@@ -345,7 +355,7 @@ function Test-TemplateValidation {
             }
         }
         catch {
-            Write-Status "azure.yaml parsing" "Error" "Invalid YAML format"
+            Write-Status "azure.yaml parsing" "Error" $_.Exception.Message
             return $false
         }
     }
@@ -354,13 +364,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Altyapı dosyalarını kontrol et
+    # Check for infrastructure files
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # main.bicep dosyası varsa doğrula
+            # Validate main.bicep if it exists
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,12 +391,12 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 YENİ: Altyapı önizlemesini test et (güvenli kuru çalıştırma)
+    # Preview ARM changes only after reviewing the project's hooks.
     try {
-        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        Write-Status "Infrastructure preview test" "Info" "Previewing proposed changes (not a capacity or deployment guarantee)..."
         $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
-            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+            Write-Status "Infrastructure preview" "Success" "Preview completed; review changes and remaining diagnostics"
         }
         else {
             Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
@@ -403,7 +413,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # Bölgenin geçerli olup olmadığını kontrol et
+        # Check if location is valid
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,13 +425,13 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Hizmetin bölgede kullanılabilirliğini kontrol et
+        # Check service availability in region
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
             try {
                 $providers = az provider show --namespace $service --output json | ConvertFrom-Json
-                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $Location }
+                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $validLocation.displayName }
                 
                 if ($resourceTypes) {
                     Write-Status "$service availability" "Success" "Available in $Location"
@@ -446,11 +456,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Temel maliyet tahmini (doğru tahminler için Azure Fiyatlandırma API'si gerekir)
+    # Basic cost estimation (would need Azure Pricing API for accurate estimates)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Bütçenin var olup olmadığını kontrol et
+    # Check if budget exists
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +480,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Yaygın güvenlik uygulamalarını kontrol et
+    # Text-search heuristics only: presence of keywords is not compliance proof.
     try {
-        # Key Vault'un yapılandırılıp yapılandırılmadığını kontrol et
+        # Check if Key Vault is configured
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +490,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Yönetilen kimlik kullanımını kontrol et
+        # Check for managed identity usage
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +498,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # HTTPS zorlamasını kontrol et
+        # Check for HTTPS enforcement
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +514,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# Ana yürütme
+# Main execution
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +526,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # Tüm kontrolleri çalıştır
+    # Run all checks
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -527,7 +537,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # Özet
+    # Summary
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -547,7 +557,7 @@ function Invoke-PreflightCheck {
     Write-Host ""
     if ($allPassed) {
         Write-Host "${Green}✓ All pre-flight checks passed ($passedCount/$totalCount)${Reset}"
-        Write-Host "${Green}✓ Ready for deployment!${Reset}"
+        Write-Host "${Green}✓ Implemented checks passed; review warnings and untested requirements.${Reset}"
         exit 0
     }
     else {
@@ -557,26 +567,27 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Ön kontrolleri çalıştır
+# Run the pre-flight check
+azd env select $EnvironmentName
 Invoke-PreflightCheck
 ```
 
-### Bash Ön Uçuş Denetleyicisi
+### Bash Uçuş Öncesi Denetleyicisi
 
 ```bash
 #!/bin/bash
-# Unix/Linux sistemleri için Bash ile yapılan ön kontroller
+# Bash version of pre-flight checks for Unix/Linux systems
 
 set -euo pipefail
 
-# Renk kodları
+# Color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # Renk yok
+NC='\033[0m' # No Color
 
-# Küresel değişkenler
+# Global variables
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -606,7 +617,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # AZD kurulumunu kontrol et
+    # Check AZD installation
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +626,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Azure CLI kurulumunu kontrol et
+    # Check Azure CLI installation
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,12 +635,16 @@ check_prerequisites() {
         return 1
     fi
     
-    # jq kurulumunu kontrol et
+    # Check jq installation
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
-        print_status "jq not found" "warning" "Install jq for better JSON parsing"
+        print_status "jq not found" "error" "jq is required"
+        return 1
     fi
+    python3 -c "import yaml" >/dev/null 2>&1 || {
+        print_status "Python/PyYAML not found" "error" "Python 3 and PyYAML are required"; return 1;
+    }
     
     return 0
 }
@@ -637,16 +652,16 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # AZD kimlik doğrulamasını kontrol et
-    if azd auth login --check-status >/dev/null 2>&1; then
-        local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
-        print_status "AZD authentication" "success" "User: $principal_name"
+    # Check AZD authentication
+    # --check-status returns exit code 0 even when unauthenticated; inspect JSON.
+    if azd auth login --check-status --output json | jq -e '.status == "success"' >/dev/null; then
+        print_status "AZD authentication" "success" "Token available"
     else
         print_status "AZD authentication" "error" "Run 'azd auth login'"
         return 1
     fi
     
-    # Azure CLI kimlik doğrulamasını kontrol et
+    # Check Azure CLI authentication
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,11 +676,11 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # azure.yaml dosyasını kontrol et
+    # Check azure.yaml
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # Temel YAML doğrulaması
+        # Basic YAML validation
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -677,13 +692,13 @@ check_template_validation() {
         return 1
     fi
     
-    # Altyapı dosyalarını kontrol et
+    # Check infrastructure files
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # main.bicep dosyası mevcutsa doğrula
+            # Validate main.bicep if exists
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +721,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Lokasyonun geçerli olup olmadığını kontrol et
+    # Check if location is valid
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,11 +729,13 @@ check_regional_availability() {
         return 1
     fi
     
-    # Hizmet kullanılabilirliğini kontrol et
+    # Check service availability
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
+    local display_location
+    display_location=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
     for service in "${services[@]}"; do
-        if az provider show --namespace "$service" --query "resourceTypes[?locations[?contains(@, '$LOCATION')]]" --output tsv | grep -q .; then
+        if az provider show --namespace "$service" --query "resourceTypes[?contains(locations, '$display_location')]" --output tsv | grep -q .; then
             print_status "$service availability" "success" "Available in $LOCATION"
         else
             print_status "$service availability" "warning" "May not be available in $LOCATION"
@@ -729,7 +746,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Komut satırı argümanlarını ayrıştır
+    # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +772,7 @@ main() {
         esac
     done
     
-    # Gerekli parametreleri doğrula
+    # Validate required parameters
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,20 +785,22 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Kontrolleri çalıştır
+    # Run checks
     local all_passed=true
     
     check_prerequisites || all_passed=false
+    if ! $all_passed; then exit 1; fi
+    azd env select "$ENVIRONMENT_NAME" || exit 1
     check_authentication || all_passed=false
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # Özet
+    # Summary
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
         echo -e "${GREEN}✓ All pre-flight checks passed${NC}"
-        echo -e "${GREEN}✓ Ready for deployment!${NC}"
+        echo -e "${GREEN}✓ Implemented checks passed; review warnings and untested requirements.${NC}"
         exit 0
     else
         echo -e "${RED}✗ Some pre-flight checks failed${NC}"
@@ -790,7 +809,7 @@ main() {
     fi
 }
 
-# Ana fonksiyonu çalıştır
+# Run main function
 main "$@"
 ```
 
@@ -798,92 +817,95 @@ main "$@"
 
 ## Manuel Doğrulama Kontrol Listesi
 
-### Dağıtımdan Önce Kontrol Listesi
+### Dağıtım Öncesi Kontrol Listesi
 
-Bu kontrol listesini yazdırın ve dağıtımdan önce her bir öğeyi doğrulayın:
+Bu kontrol listesini yazdırın ve dağıtımdan önce her bir maddeyi doğrulayın:
 
 #### ✅ Ortam Kurulumu
 - [ ] AZD CLI yüklü ve en son sürüme güncellenmiş
 - [ ] Azure CLI yüklü ve kimlik doğrulaması yapılmış
 - [ ] Doğru Azure aboneliği seçilmiş
 - [ ] Ortam adı benzersiz ve adlandırma kurallarına uygun
-- [ ] Hedef kaynak grubu belirlenmiş veya oluşturulabilir
+- [ ] Hedef kaynak grubu tanımlanmış veya oluşturulabilir
 
-#### ✅ Kimlik Doğrulama & İzinler
-- [ ] Başarıyla `azd auth login` ile kimlik doğrulandı
-- [ ] Kullanıcının hedef abonelik/kaynak grubunda Contributor rolü var
-- [ ] CI/CD için service principal yapılandırılmış (varsa)
+#### ✅ Kimlik Doğrulama ve İzinler
+- [ ] `azd auth login` ile başarıyla kimlik doğrulandı
+- [ ] Kullanıcının hedef abonelik/kaynak grubunda Katkıda Bulunan rolü var
+- [ ] Eğer şablonlar rol atamaları oluşturuyorsa, dağıtan kimlik de kapsamlı rol atama izinlerine sahip (yalnızca Katkıda Bulunan rolü bunları vermez)
+- [ ] CI/CD için yapılandırılmış hizmet kullanıcısı (varsa)
 - [ ] Süresi dolmuş sertifika veya kimlik bilgisi yok
 
-#### ✅ Şablon Doğrulama
-- [ ] `azure.yaml` mevcut ve geçerli YAML
-- [ ] azure.yaml içinde tanımlı tüm hizmetlerin karşılık gelen kaynak kodu var
-- [ ] `infra/` dizininde Bicep şablonları mevcut
-- [ ] `main.bicep` hatasız derleniyor (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Altyapı önizlemesi başarıyla çalışıyor (`azd provision --preview`)
-- [ ] Gerekli tüm parametrelerin varsayılan değerleri var ya da sağlanacak
-- [ ] Şablonlarda hardcoded gizli bilgiler yok
+#### ✅ Şablon Doğrulaması
+- [ ] `azure.yaml` mevcut ve geçerli YAML formatında
+- [ ] azure.yaml içinde tanımlı tüm servislerin karşılık gelen kaynak kodu var
+- [ ] `infra/` dizinindeki Bicep şablonları mevcut
+- [ ] `main.bicep` hata olmadan derleniyor (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Altyapı ön izlemesi başarıyla çalışıyor (`azd provision --preview`)
+- [ ] Tüm gerekli parametrelerin varsayılan değerleri var veya sağlanacak
+- [ ] Şablonlarda sert kodlanmış gizli bilgiler yok
 
 #### ✅ Kaynak Planlaması
 - [ ] Hedef Azure bölgesi seçilmiş ve doğrulanmış
-- [ ] Gerekli Azure hizmetleri hedef bölgede mevcut
-- [ ] Planlanan kaynaklar için yeterli kotalar mevcut
-- [ ] Kaynak adlandırma çakışmaları kontrol edildi
-- [ ] Kaynaklar arasındaki bağımlılıklar anlaşıldı
+- [ ] Hedef bölgede gerekli Azure servisleri mevcut
+- [ ] Planlanan kaynaklar için yeterli kota var
+- [ ] Kaynak adlandırma çakışmaları kontrol edilmiş
+- [ ] Kaynaklar arasındaki bağımlılıklar anlaşılmış
 
-#### ✅ Ağ & Güvenlik
+#### ✅ Ağ ve Güvenlik
 - [ ] Azure uç noktalarına ağ bağlantısı doğrulandı
-- [ ] Gerekirse firewall/proxy ayarları yapılandırıldı
-- [ ] Gizli veriler için Key Vault yapılandırıldı
-- [ ] Mümkün olduğunda managed identities kullanıldı
+- [ ] Gerekirse güvenlik duvarı/proxy ayarları yapılandırıldı
+- [ ] Gizli bilgiler için Anahtar Kasası yapılandırıldı
+- [ ] Mümkün olduğunda yönetilen kimlikler kullanıldı
 - [ ] Web uygulamaları için HTTPS zorlaması etkinleştirildi
 
 #### ✅ Maliyet Yönetimi
-- [ ] Maliyet tahminleri Azure Fiyatlandırma Hesaplayıcısı kullanılarak hesaplandı
-- [ ] Gerekirse bütçe uyarıları yapılandırıldı
-- [ ] Ortam türüne uygun SKU'lar seçildi
-- [ ] Üretim iş yükleri için rezerve kapasite düşünüldü
+- [ ] Azure Fiyatlandırma Hesaplayıcısı kullanılarak maliyet tahminleri yapıldı
+- [ ] Gerekliyse bütçe uyarıları yapılandırıldı
+- [ ] Ortam türüne uygun SKU’lar seçildi
+- [ ] Üretim iş yükleri için rezerve kapasite göz önünde bulunduruldu
 
-#### ✅ İzleme & Gözlemlenebilirlik
+#### ✅ İzleme ve Görünürlük
 - [ ] Şablonlarda Application Insights yapılandırıldı
 - [ ] Log Analytics çalışma alanı planlandı
 - [ ] Kritik metrikler için uyarı kuralları tanımlandı
-- [ ] Uygulamalarda sağlık kontrolü uç noktaları uygulandı
+- [ ] Uygulamalarda sağlık denetim uç noktaları uygulandı
 
-#### ✅ Yedekleme & Kurtarma
-- [ ] Veri kaynakları için yedekleme stratejisi tanımlandı
-- [ ] Kurtarma süresi hedefleri (RTO) belgelenmiş
-- [ ] Kurtarma nokta hedefleri (RPO) belgelenmiş
-- [ ] Üretim için felaket kurtarma planı mevcut
+#### ✅ Yedekleme ve Kurtarma
+- [ ] Veri kaynakları için yedekleme stratejisi belirlendi
+- [ ] Kurtarma süresi hedefleri (RTO) belgelendi
+- [ ] Kurtarma noktası hedefleri (RPO) belgelendi
+- [ ] Üretim için felaket kurtarma planı hazır
 
 ---
 
 ## Ortam Doğrulaması
 
-### Geliştirme Ortamı Doğrulaması
+Aşağıdaki `grep` kontrolleri sadece açıklayıcı hatırlatmalardır. Eşleşen bir kelime, özelliğin doğru kaynak için yapılandırıldığını kanıtlamaz ve eksik kelime yokluğunu ispatlamaz (modüller/varsayılanlar sağlayabilir). Bunları üretim uyumluluk kapıları olarak kullanmayın.
+
+### Geliştirme Ortam Doğrulaması
 
 ```bash
 #!/bin/bash
-# Geliştirme ortamına özgü doğrulamalar
+# Development environment specific validations
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Geliştirme dostu yapılandırmaları kontrol et
+    # Check for development-friendly configurations
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Otomatik kapatma yapılandırmalarını kontrol et
+    # Check for auto-shutdown configurations
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Geliştirme veritabanı yapılandırmalarını doğrula
+    # Validate development database configurations
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,37 +914,37 @@ validate_dev_environment() {
 }
 ```
 
-### Üretim Ortamı Doğrulaması
+### Üretim Ortam Doğrulaması
 
 ```bash
 #!/bin/bash
-# Üretim ortamına özgü doğrulamalar
+# Production environment specific validations
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Yüksek kullanılabilirlik yapılandırmalarını kontrol et
+    # Check for high availability configurations
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Yedekleme yapılandırmalarını kontrol et
+    # Check for backup configurations
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # İzleme kurulumunu doğrula
+    # Validate monitoring setup
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Güvenlik yapılandırmalarını kontrol et
+    # Check for security configurations
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -933,9 +955,9 @@ validate_prod_environment() {
 
 ---
 
-## Kaynak Doğrulama
+## Kaynak Doğrulaması
 
-### Kota Doğrulama Betiği
+### Kota Doğrulama Komut Dosyası
 
 ```python
 #!/usr/bin/env python3
@@ -948,17 +970,17 @@ import subprocess
 import sys
 from typing import Dict, List, Tuple
 
-def run_command(command: List[str]) -> Dict:
+def run_command(command: List[str]) -> dict | list | None:
     """Run Azure CLI command and return JSON result"""
     try:
         result = subprocess.run(command, capture_output=True, text=True, check=True)
         return json.loads(result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error running command {' '.join(command)}: {e}")
-        return {}
+        return None
     except json.JSONDecodeError as e:
         print(f"Error parsing JSON: {e}")
-        return {}
+        return None
 
 def check_compute_quotas(location: str) -> bool:
     """Check compute quotas in specified location"""
@@ -976,7 +998,10 @@ def check_compute_quotas(location: str) -> bool:
         if quota_item['name']['value'] in critical_quotas:
             current = quota_item['currentValue']
             limit = quota_item['limit']
-            usage_percent = (current / limit) * 100 if limit > 0 else 0
+            if limit <= 0:
+                print(f"❌ No quota for {quota_item['name']['value']}")
+                return False
+            usage_percent = (current / limit) * 100
             
             status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
             print(f"{status} {quota_item['name']['localizedValue']}: {current}/{limit} ({usage_percent:.1f}%)")
@@ -990,15 +1015,17 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Abonelikteki depolama hesaplarını al
-    accounts = run_command(['az', 'storage', 'account', 'list'])
+    # Retrieve regional quota rather than assuming a subscription-wide constant.
+    usages = run_command(['az', 'storage', 'account', 'show-usage', '--location', location])
     
-    if accounts is None:
+    if not usages:
         print("❌ Could not retrieve storage account information")
         return False
     
-    account_count = len(accounts)
-    max_accounts = 250  # Varsayılan Azure limiti
+    account_count = usages['currentValue']
+    max_accounts = usages['limit']
+    if max_accounts <= 0:
+        return False
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,18 +1038,14 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # Sanal ağları kontrol et
-    vnets = run_command(['az', 'network', 'vnet', 'list'])
-    if vnets is not None:
-        vnet_count = len(vnets)
-        print(f"✅ Virtual Networks: {vnet_count}/1000")
-    
-    # Genel IP adreslerini kontrol et
-    public_ips = run_command(['az', 'network', 'public-ip', 'list'])
-    if public_ips is not None:
-        ip_count = len(public_ips)
-        print(f"✅ Public IP Addresses: {ip_count}/1000")
-    
+    usages = run_command(['az', 'network', 'list-usages', '--location', location])
+    if not usages:
+        return False
+    for item in usages:
+        current, limit = item['currentValue'], item['limit']
+        print(f"{item['name']['value']}: {current}/{limit}")
+        if limit <= 0 or current >= limit:
+            return False
     return True
 
 def main():
@@ -1034,19 +1057,20 @@ def main():
     
     print("🔍 Azure Quota and Limits Validation")
     print(f"📍 Location: {location}")
-    print(f"⏰ Time: {subprocess.run(['date'], capture_output=True, text=True).stdout.strip()}")
+    from datetime import datetime, timezone
+    print(f"⏰ Time: {datetime.now(timezone.utc).isoformat()}")
     
     all_passed = True
     
-    # Kontrolleri çalıştır
+    # Run checks
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # Özet
+    # Summary
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
-        print("✅ All quota checks passed - sufficient capacity available")
+        print("✅ Implemented quota thresholds passed; not a capacity reservation")
         sys.exit(0)
     else:
         print("❌ Some quota limits are near capacity - consider requesting increases")
@@ -1060,18 +1084,18 @@ if __name__ == "__main__":
 
 ## Güvenlik ve Uyumluluk Kontrolleri
 
-### Güvenlik Doğrulama Betiği
+### Güvenlik Doğrulama Komut Dosyası
 
 ```bash
 #!/bin/bash
-# AZD dağıtımları için güvenlik ve uyumluluk doğrulaması
+# Security and compliance validation for AZD deployments
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Key Vault kullanımını kontrol et
+    # Check for Key Vault usage
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Yönetilen kimlik kullanımını kontrol et
+    # Check for managed identity usage
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # HTTPS zorlamasını kontrol et
+    # Check for HTTPS enforcement
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1119,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Minimum TLS sürümünü kontrol et
+    # Check for minimum TLS version
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1127,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Genel erişim kısıtlamalarını kontrol et
+    # Check for public access restrictions
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1135,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Ağ güvenlik gruplarını kontrol et
+    # Check for network security groups
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1148,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Veri şifrelemesini kontrol et
+    # Check for data encryption
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Denetim kayıtlarını kontrol et
+    # Check for audit logging
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Yedekleme ve saklama politikalarını kontrol et
+    # Check for backup and retention policies
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1170,7 @@ check_compliance_requirements() {
     fi
 }
 
-# Ana yürütme
+# Main execution
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1157,13 +1181,13 @@ main() {
         exit 1
     fi
     
-    local security_issues
-    security_issues=$(check_security_practices)
+    local security_issues=0
+    check_security_practices || security_issues=$?
     check_compliance_requirements
     
     echo -e "\n=== Security Check Summary ==="
     if [[ $security_issues -eq 0 ]]; then
-        echo "✅ All security checks passed"
+        echo "✅ Text-search reminders passed; this is not a security/compliance assessment"
         exit 0
     else
         echo "⚠️  $security_issues security recommendations found"
@@ -1203,20 +1227,36 @@ on:
 
 jobs:
   preflight:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
     - name: Install AZD
       uses: Azure/setup-azd@v0.1.0
+      with:
+        version: 1.37.2
     
-    - name: Install Azure CLI
-      uses: azure/setup-azure@v3
+    - name: Verify prerequisites
+      run: |
+        az version
+        jq --version
+        python3 -c "import yaml"
     
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+    - name: AZD Login
+      run: |
+        azd auth login --client-id "${{ vars.AZURE_CLIENT_ID }}" \
+          --tenant-id "${{ vars.AZURE_TENANT_ID }}" \
+          --federated-credential-provider github
     
     - name: Run Pre-flight Checks
       run: |
@@ -1230,13 +1270,9 @@ jobs:
         chmod +x ./scripts/security-check.sh
         ./scripts/security-check.sh
     
-    - name: Upload Results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: preflight-results
-        path: preflight-results.json
 ```
+
+Bu iş akışı için federasyonlu kimlik bilgilerini yapılandırın ve kaydedilen komut dosyalarını çalıştırmadan önce seçilen azd ortamını oluşturun/gerekirse geri yükleyin. Bu örnekler sadece konsol çıktısı yazar; herhangi bir `preflight-results.json` veya JUnit dosyası oluşturmaz.
 
 ### Azure DevOps Entegrasyonu
 
@@ -1272,76 +1308,80 @@ steps:
       curl -fsSL https://aka.ms/install-azd.sh | bash
       export PATH=$PATH:~/.azd/bin
 
-- task: Bash@3
+- task: AzureCLI@2
   displayName: 'Run Pre-flight Checks'
   inputs:
-    targetType: filePath
-    filePath: './scripts/preflight-check.sh'
-    arguments: '--environment-name ${{ parameters.environment }} --location ${{ parameters.location }}'
-
-- task: PublishTestResults@2
-  displayName: 'Publish Pre-flight Results'
-  condition: always()
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: 'preflight-results.xml'
-    testRunTitle: 'Pre-flight Validation'
+    azureSubscription: $(serviceConnection)
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      set -e
+      # Requires a workload-identity-federated service connection.
+      # AzureCLI@2 supplies AZURESUBSCRIPTION_* for the azd provider.
+      azd auth login --federated-credential-provider azure-pipelines
+      bash ./scripts/preflight-check.sh \
+        --environment-name "${{ parameters.environment }}" \
+        --location "${{ parameters.location }}"
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 ```
+
+Boru hattı, bu görevden önce azd ortamını geri yüklemeli/oluşturmalı ve bu derste gösterilen komut dosyalarını kaydetmelidir. Federasyonlu servis bağlantısını yapılandırın ve boru hattına gerekli token izinlerini verin. Önceki bir `AzureCLI@2` görevinden Azure CLI girişinin sonraki sade Bash görevini doğrulamasını beklemeyin.
 
 ---
 
 ## En İyi Uygulamalar Özeti
 
-### ✅ Ön Uçuş Kontrolleri İçin En İyi Uygulamalar
+### ✅ Uçuş Öncesi Kontrol İçin En İyi Uygulamalar
 
-1. **Mümkün olduğunda Otomatikleştir**
-   - Kontrolleri CI/CD boru hatlarına entegre edin
-   - Tekrarlanabilir doğrulamalar için betikler kullanın
-   - Denetim izleri için sonuçları saklayın
+1. **Mümkün Olduğunda Otomatikleştir**
+   - Kontrolleri CI/CD boru hatlarına entegre et
+   - Tekrarlanabilir doğrulamalar için komut dosyaları kullan
+   - Denetim kayıtları için sonuçları sakla
 
-2. **Ortam Özelinde Doğrulama**
-   - Dev/staging/prod için farklı kontroller
-   - Her ortam için uygun güvenlik gereksinimleri
+2. **Ortama Özgü Doğrulama**
+   - Geliştirme/test/üretim için farklı kontroller
+   - Ortama uygun güvenlik gereksinimleri
    - Üretim dışı ortamlar için maliyet optimizasyonu
 
-3. **Kapsamlı Kontrol**
+3. **Kapsamlı Kapsama**
    - Kimlik doğrulama ve izinler
    - Kaynak kotaları ve kullanılabilirlik
-   - Şablon doğrulama ve sözdizimi
+   - Şablon doğrulama ve söz dizimi
    - Güvenlik ve uyumluluk gereksinimleri
 
-4. **Açık Raporlama**
+4. **Net Raporlama**
    - Renk kodlu durum göstergeleri
-   - Düzeltme adımlarıyla birlikte ayrıntılı hata mesajları
+   - Düzeltici adımları içeren ayrıntılı hata mesajları
    - Hızlı değerlendirme için özet raporlar
 
-5. **Hemen Durdurma**
-   - Kritik kontroller başarısız olursa dağıtımı durdurun
-   - Çözüm için net rehberlik sağlayın
-   - Kontrollerin kolayca tekrar çalıştırılabilmesini sağlayın
+5. **Hızlı Hata Yakalama**
+   - Kritik kontroller başarısızsa dağıtımı durdur
+   - Çözüm için net kılavuzlar sağla
+   - Kontrollerin kolayca tekrar çalıştırılmasını sağla
 
-### Yaygın Ön Uçuş Tuzakları
+### Yaygın Uçuş Öncesi Hatalar
 
-1. **Doğrulamayı atlamak** için "hızlı" dağıtımlar
-2. **Yetersiz izinler**in dağıtım öncesi kontrol edilmemesi
-3. **Kota limitlerini görmezden gelmek** dağıtım başarısız olana kadar
-4. **CI/CD boru hatlarında şablonları doğrulamamak**
-5. **Üretim ortamları için güvenlik doğrulamasının eksik olması**
-6. **Yetersiz maliyet tahmini** nedeniyle bütçe sürprizleri
-
----
-
-İpucu: Gerçek dağıtım işinden önce CI/CD boru hattınızda ön uçuş kontrollerini ayrı bir iş olarak çalıştırın. Bu, sorunları erken tespit etmenizi sağlar ve geliştiricilere daha hızlı geri bildirim verir.
+1. **"Hızlı" dağıtımlar için doğrulama atlama**
+2. **Dağıtımdan önce yetersiz izin kontrolü**
+3. **Kota sınırlarını dağıtım başarısına kadar görmezden gelme**
+4. **CI/CD boru hatlarında şablonları doğrulamama**
+5. **Üretim ortamları için güvenlik doğrulamasını atlama**
+6. **Yetersiz maliyet tahmini nedeniyle bütçe sürprizleri**
 
 ---
 
-**Gezinme**
+**Uzman İpucu**: Uçuş öncesi kontrolleri, gerçek dağıtım işinden önce CI/CD boru hattınızda ayrı bir iş olarak çalıştırın. Bu, sorunları erken yakalamanızı sağlar ve geliştiricilere daha hızlı geri bildirim verir.
+
+---
+
+**Navigasyon**
 - **Önceki Ders**: [SKU Seçimi](sku-selection.md)
 - **Sonraki Ders**: [Hızlı Başvuru](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Sorumluluk Reddi**:
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, özgün dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkan herhangi bir yanlış anlaşılma veya yanlış yorumlamadan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

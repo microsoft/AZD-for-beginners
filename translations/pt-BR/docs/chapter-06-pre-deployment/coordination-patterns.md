@@ -1,29 +1,29 @@
-# Padrões de Coordenação Multi-Agente
+# Padrões de Coordenação Multiagente
 
-⏱️ **Tempo Estimado**: 60-75 minutos | 💰 **Custo Estimado**: ~$100-300/mês | ⭐ **Complexidade**: Avançado
+⏱️ **Tempo Estimado**: 60-75 minutos de leitura; várias horas para implementar | 💰 **Custo Estimado**: depende da carga de trabalho | ⭐ **Complexidade**: Avançada
 
-**📚 Caminho de Aprendizagem:**
-- ← Anterior: [Planejamento de Capacidade](capacity-planning.md) - Dimensionamento de recursos e estratégias de escalonamento
-- 🎯 **Você Está Aqui**: Padrões de Coordenação Multi-Agente (Orquestração, comunicação, gerenciamento de estado)
-- → Próximo: [Seleção de SKU](sku-selection.md) - Escolhendo os serviços Azure adequados
-- 🏠 [Início do Curso](../../README.md)
+**📚 Roteiro de Aprendizagem:**
+- ← Anterior: [Planejamento de Capacidade](capacity-planning.md) - Estratégias de dimensionamento e escalabilidade de recursos
+- 🎯 **Você Está Aqui**: Padrões de Coordenação Multiagente (Orquestração, comunicação, gerenciamento de estado)
+- → Próximo: [Seleção de SKU](sku-selection.md) - Escolhendo os serviços Azure certos
+- 🏠 [Página Inicial do Curso](../../README.md)
 
 ---
 
-## O que você aprenderá
+## O Que Você Vai Aprender
 
-Ao concluir esta lição, você irá:
+Ao completar esta lição, você irá:
 - Entender padrões de **arquitetura multiagente** e quando usá-los
 - Implementar **padrões de orquestração** (centralizado, descentralizado, hierárquico)
 - Projetar estratégias de **comunicação entre agentes** (síncrona, assíncrona, orientada a eventos)
 - Gerenciar **estado compartilhado** entre agentes distribuídos
 - Implantar **sistemas multiagente** no Azure com AZD
-- Aplicar **padrões de coordenação** para cenários de IA do mundo real
+- Aplicar **padrões de coordenação** para cenários reais de IA
 - Monitorar e depurar sistemas de agentes distribuídos
 
-## Por que a Coordenação Multi-Agente Importa
+## Por Que a Coordenação Multiagente é Importante
 
-### A Evolução: De Agente Único para Multi-Agente
+### A Evolução: De Agente Único para Multiagente
 
 **Agente Único (Simples):**
 ```
@@ -31,23 +31,24 @@ User → Agent → Response
 ```
 - ✅ Fácil de entender e implementar
 - ✅ Rápido para tarefas simples
-- ❌ Limitado pelas capacidades de um único modelo
+- ❌ Limitado pelas capacidades do modelo único
 - ❌ Não pode paralelizar tarefas complexas
 - ❌ Sem especialização
 
-**Sistema Multi-Agente (Avançado):**
+**Sistema Multiagente (Avançado):**
 ```mermaid
 graph TD
-    Orchestrator[Orquestrador] --> Agent1[Agente1<br/>Planejar]
-    Orchestrator --> Agent2[Agente2<br/>Codificar]
-    Orchestrator --> Agent3[Agente3<br/>Revisar]
-```- ✅ Agentes especializados para tarefas específicas
-- ✅ Execução paralela para velocidade
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```
+- ✅ Agentes especializados para tarefas específicas
+- ✅ Execução paralela para maior rapidez
 - ✅ Modular e fácil de manter
-- ✅ Melhor para fluxos de trabalho complexos
+- ✅ Melhor em fluxos de trabalho complexos
 - ⚠️ Requer lógica de coordenação
 
-**Analogia**: Agente único é como uma pessoa fazendo todas as tarefas. Multi-agente é como uma equipe onde cada membro tem habilidades especializadas (pesquisador, programador, revisor, escritor) trabalhando juntos.
+**Analogia**: Agente único é como uma pessoa fazendo todas as tarefas. Multiagente é como uma equipe onde cada membro tem habilidades especializadas (pesquisador, programador, revisor, escritor) trabalhando juntos.
 
 ---
 
@@ -55,27 +56,28 @@ graph TD
 
 ### Padrão 1: Coordenação Sequencial (Cadeia de Responsabilidade)
 
-**Quando usar**: As tarefas devem ser concluídas em uma ordem específica, cada agente baseia-se na saída anterior.
+**Quando usar**: As tarefas devem ser concluídas em ordem específica, cada agente usa a saída do anterior.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as Agente de Pesquisa
-    participant Agent2 as Agente Escritor
-    participant Agent3 as Agente Editor
+    participant Agent1 as Research Agent
+    participant Agent2 as Writer Agent
+    participant Agent3 as Editor Agent
     
-    User->>Orchestrator: "Escreva um artigo sobre IA"
-    Orchestrator->>Agent1: Pesquisar o tópico
-    Agent1-->>Orchestrator: Resultados da pesquisa
-    Orchestrator->>Agent2: Escrever rascunho (usando a pesquisa)
-    Agent2-->>Orchestrator: Rascunho do artigo
-    Orchestrator->>Agent3: Editar e melhorar
-    Agent3-->>Orchestrator: Artigo final
-    Orchestrator-->>User: Artigo polido
+    User->>Orchestrator: "Write article about AI"
+    Orchestrator->>Agent1: Research topic
+    Agent1-->>Orchestrator: Research results
+    Orchestrator->>Agent2: Write draft (using research)
+    Agent2-->>Orchestrator: Draft article
+    Orchestrator->>Agent3: Edit and improve
+    Agent3-->>Orchestrator: Final article
+    Orchestrator-->>User: Polished article
     
-    Note over User,Agent3: Sequencial: Cada etapa aguarda a anterior
-```}
+    Note over User,Agent3: Sequential: Each step waits for previous
+```
+
 **Benefícios:**
 - ✅ Fluxo de dados claro
 - ✅ Fácil de depurar
@@ -84,9 +86,9 @@ sequenceDiagram
 **Limitações:**
 - ❌ Mais lento (sem paralelismo)
 - ❌ Uma falha bloqueia toda a cadeia
-- ❌ Não consegue lidar com tarefas interdependentes
+- ❌ Não suporta tarefas interdependentes
 
-**Exemplos de Casos de Uso:**
+**Exemplos de Uso:**
 - Pipeline de criação de conteúdo (pesquisa → escrever → editar → publicar)
 - Geração de código (planejar → implementar → testar → implantar)
 - Geração de relatórios (coleta de dados → análise → visualização → resumo)
@@ -95,17 +97,17 @@ sequenceDiagram
 
 ### Padrão 2: Coordenação Paralela (Fan-Out/Fan-In)
 
-**Quando usar**: Tarefas independentes podem ser executadas simultaneamente, resultados combinados no final.
+**Quando usar**: Tarefas independentes podem rodar simultaneamente, resultados combinados no final.
 
 ```mermaid
 graph TB
-    User[Solicitação do Usuário]
-    Orchestrator[Orquestrador]
-    Agent1[Agente de Análise]
-    Agent2[Agente de Pesquisa]
-    Agent3[Agente de Dados]
-    Aggregator[Agregador de Resultados]
-    Response[Resposta Combinada]
+    User[User Request]
+    Orchestrator[Orchestrator]
+    Agent1[Analysis Agent]
+    Agent2[Research Agent]
+    Agent3[Data Agent]
+    Aggregator[Result Aggregator]
+    Response[Combined Response]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -119,35 +121,36 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Benefícios:**
 - ✅ Rápido (execução paralela)
 - ✅ Tolerante a falhas (resultados parciais aceitáveis)
 - ✅ Escala horizontalmente
 
 **Limitações:**
-- ⚠️ Os resultados podem chegar fora de ordem
-- ⚠️ Necessita de lógica de agregação
-- ⚠️ Gerenciamento de estado complexo
+- ⚠️ Resultados podem chegar fora de ordem
+- ⚠️ Precisa lógica de agregação
+- ⚠️ Gerenciamento complexo de estado
 
-**Exemplos de Casos de Uso:**
+**Exemplos de Uso:**
 - Coleta de dados de múltiplas fontes (APIs + bancos de dados + web scraping)
-- Análise competitiva (múltiplos modelos geram soluções, a melhor é selecionada)
-- Serviços de tradução (traduzir para múltiplos idiomas simultaneamente)
+- Análise competitiva (vários modelos geram soluções, a melhor é selecionada)
+- Serviços de tradução (traduz simultaneamente para múltiplos idiomas)
 
 ---
 
 ### Padrão 3: Coordenação Hierárquica (Gerente-Trabalhador)
 
-**Quando usar**: Workflows complexos com subtarefas, onde é necessário delegar.
+**Quando usar**: Fluxos complexos com sub-tarefas, é necessária delegação.
 
 ```mermaid
 graph TB
-    Master[Orquestrador Mestre]
-    Manager1[Gerente de Pesquisa]
-    Manager2[Gerente de Conteúdo]
-    W1[Raspador Web]
-    W2[Analisador de Artigos]
-    W3[Redator]
+    Master[Master Orchestrator]
+    Manager1[Research Manager]
+    Manager2[Content Manager]
+    W1[Web Scraper]
+    W2[Paper Analyzer]
+    W3[Writer]
     W4[Editor]
     
     Master --> Manager1
@@ -161,75 +164,77 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
+
 **Benefícios:**
-- ✅ Lida com workflows complexos
+- ✅ Lida com fluxos complexos
 - ✅ Modular e fácil de manter
-- ✅ Fronteiras de responsabilidade claras
+- ✅ Limites claros de responsabilidade
 
 **Limitações:**
 - ⚠️ Arquitetura mais complexa
 - ⚠️ Maior latência (múltiplas camadas de coordenação)
 - ⚠️ Requer orquestração sofisticada
 
-**Exemplos de Casos de Uso:**
-- Processamento de documentos corporativos (classificar → encaminhar → processar → arquivar)
-- Pipelines de dados multiestágio (ingestão → limpeza → transformação → análise → relatório)
-- Workflows de automação complexos (planejamento → alocação de recursos → execução → monitoramento)
+**Exemplos de Uso:**
+- Processamento corporativo de documentos (classificar → roteirizar → processar → arquivar)
+- Pipelines de dados em múltiplas etapas (ingestão → limpeza → transformação → análise → relatório)
+- Fluxos de automação complexos (planejamento → alocação de recursos → execução → monitoramento)
 
 ---
 
-### Padrão 4: Coordenação Orientada a Eventos (Publicação-Assinatura)
+### Padrão 4: Coordenação Orientada a Eventos (Publicação-Inscrição)
 
-**Quando usar**: Agentes precisam reagir a eventos, acoplamento frouxo é desejado.
+**Quando usar**: Agentes precisam reagir a eventos, desejável desacoplamento.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as Coletor de Dados
-    participant EventBus as Barramento de Serviço do Azure
-    participant Agent2 as Analisador
-    participant Agent3 as Notificador
-    participant Agent4 as Arquivador
+    participant Agent1 as Data Collector
+    participant EventBus as Azure Service Bus
+    participant Agent2 as Analyzer
+    participant Agent3 as Notifier
+    participant Agent4 as Archiver
     
-    Agent1->>EventBus: Publicar evento "DadosRecebidos"
-    EventBus->>Agent2: Assinar: Analisar dados
-    EventBus->>Agent3: Assinar: Enviar notificação
-    EventBus->>Agent4: Assinar: Arquivar dados
+    Agent1->>EventBus: Publish "DataReceived" event
+    EventBus->>Agent2: Subscribe: Analyze data
+    EventBus->>Agent3: Subscribe: Send notification
+    EventBus->>Agent4: Subscribe: Archive data
     
-    Note over Agent1,Agent4: Todos os assinantes processam de forma independente
+    Note over Agent1,Agent4: All subscribers process independently
     
-    Agent2->>EventBus: Publicar evento "AnáliseConcluída"
-    EventBus->>Agent3: Assinar: Enviar relatório de análise
+    Agent2->>EventBus: Publish "AnalysisComplete" event
+    EventBus->>Agent3: Subscribe: Send analysis report
 ```
+
 **Benefícios:**
-- ✅ Acoplamento frouxo entre agentes
-- ✅ Fácil adicionar novos agentes (apenas assinem)
+- ✅ Desacoplamento entre agentes
+- ✅ Fácil adicionar novos agentes (basta assinar)
 - ✅ Processamento assíncrono
 - ✅ Resiliente (persistência de mensagens)
 
 **Limitações:**
 - ⚠️ Consistência eventual
 - ⚠️ Depuração complexa
-- ⚠️ Desafios de ordenação de mensagens
+- ⚠️ Desafios na ordenação de mensagens
 
-**Exemplos de Casos de Uso:**
-- Sistemas de monitoramento em tempo real (alertas, painéis, logs)
-- Notificações multicanal (email, SMS, push, Slack)
+**Exemplos de Uso:**
+- Sistemas de monitoramento em tempo real (alertas, dashboards, logs)
+- Notificações multicanal (e-mail, SMS, push, Slack)
 - Pipelines de processamento de dados (múltiplos consumidores dos mesmos dados)
 
 ---
 
 ### Padrão 5: Coordenação Baseada em Consenso (Votação/Quórum)
 
-**Quando usar**: Necessita de acordo entre múltiplos agentes antes de prosseguir.
+**Quando usar**: Necessário acordo entre múltiplos agentes antes de prosseguir.
 
 ```mermaid
 graph TB
-    Input[Tarefa de Entrada]
-    Agent1[Agente 1: gpt-4.1]
-    Agent2[Agente 2: Claude]
-    Agent3[Agente 3: Gemini]
-    Voter[Votador de Consenso]
-    Output[Saída Acordada]
+    Input[Input Task]
+    Agent1[Agent 1: gpt-4.1]
+    Agent2[Agent 2: Claude]
+    Agent3[Agent 3: Gemini]
+    Voter[Consensus Voter]
+    Output[Agreed Output]
     
     Input --> Agent1
     Input --> Agent2
@@ -241,42 +246,43 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
+
 **Benefícios:**
 - ✅ Maior precisão (múltiplas opiniões)
-- ✅ Tolerante a falhas (falhas de minoria aceitáveis)
+- ✅ Tolerante a falhas (falhas minoritárias aceitáveis)
 - ✅ Garantia de qualidade embutida
 
 **Limitações:**
-- ❌ Caro (várias chamadas de modelo)
+- ❌ Custo elevado (múltiplas chamadas ao modelo)
 - ❌ Mais lento (espera por todos os agentes)
-- ⚠️ Requer resolução de conflitos
+- ⚠️ Necessita resolução de conflitos
 
-**Exemplos de Casos de Uso:**
-- Moderação de conteúdo (múltiplos modelos revisam o conteúdo)
-- Revisão de código (múltiplos linters/analisadores)
-- Diagnóstico médico (múltiplos modelos de IA, validação de experts)
+**Exemplos de Uso:**
+- Moderação de conteúdo (vários modelos revisam o conteúdo)
+- Revisão de código (vários linters/analisadores)
+- Diagnóstico médico (múltiplos modelos de IA, validação por especialistas)
 
 ---
 
 ## Visão Geral da Arquitetura
 
-### Sistema Multi-Agente Completo no Azure
+### Sistema Multiagente Completo no Azure
 
 ```mermaid
 graph TB
-    User[Usuário/Cliente de API]
-    APIM[Gerenciamento de API do Azure]
-    Orchestrator[Serviço Orquestrador<br/>Aplicativo em Contêiner]
-    ServiceBus[Azure Service Bus<br/>Hub de Eventos]
+    User[User/API Client]
+    APIM[Azure API Management]
+    Orchestrator[Orchestrator Service<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Queues / Topics]
     
-    Agent1[Agente de Pesquisa<br/>Aplicativo em Contêiner]
-    Agent2[Agente Escritor<br/>Aplicativo em Contêiner]
-    Agent3[Agente Analista<br/>Aplicativo em Contêiner]
-    Agent4[Agente Revisor<br/>Aplicativo em Contêiner]
+    Agent1[Research Agent<br/>Container App]
+    Agent2[Writer Agent<br/>Container App]
+    Agent3[Analyst Agent<br/>Container App]
+    Agent4[Reviewer Agent<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>Estado Compartilhado)]
-    Storage[Armazenamento do Azure<br/>Artefatos]
-    AppInsights[Application Insights<br/>Monitoramento]
+    CosmosDB[(Cosmos DB<br/>Shared State)]
+    Storage[Azure Storage<br/>Artifacts]
+    AppInsights[Application Insights<br/>Monitoring]
     
     User --> APIM
     APIM --> Orchestrator
@@ -307,58 +313,67 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Componentes Principais:**
 
 | Componente | Propósito | Serviço Azure |
 |-----------|---------|---------------|
-| **Gateway de API** | Ponto de entrada, limitação de taxa, autenticação | API Management |
-| **Orquestrador** | Coordena workflows de agentes | Container Apps |
+| **API Gateway** | Ponto de entrada, limitação de taxa, autenticação | API Management |
+| **Orquestrador** | Coordena fluxos dos agentes | Container Apps |
 | **Fila de Mensagens** | Comunicação assíncrona | Service Bus / Event Hubs |
 | **Agentes** | Trabalhadores de IA especializados | Container Apps / Functions |
-| **Armazenamento de Estado** | Estado compartilhado, rastreamento de tarefas | Cosmos DB |
+| **Armazenamento de Estado** | Estado compartilhado, monitoramento de tarefas | Cosmos DB |
 | **Armazenamento de Artefatos** | Documentos, resultados, logs | Blob Storage |
-| **Monitoramento** | Tracing distribuído, logs | Application Insights |
+| **Monitoramento** | Rastreamento distribuído, logs | Application Insights |
+
+Fila/tópicos do Service Bus e Event Hubs são serviços diferentes com modelos de entrega/consumo distintos; Event Hubs não é substituto direto do código de worker do Service Bus abaixo. Paralelismo, mensagens persistentes e votação do modelo não garantem isoladamente tolerância a falhas ou maior precisão.
 
 ---
 
-## Pré-requisitos
+## Pré-Requisitos
 
 ### Ferramentas Necessárias
 
 ```bash
-# Verificar o Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Esperado: azd versão 1.0.0 ou superior
+# Command reference baseline: azd 1.37.2
 
-# Verificar o Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Esperado: azure-cli 2.50.0 ou superior
+# ✅ Expected: azure-cli 2.50.0 or higher
 
-# Verificar o Docker (para testes locais)
+# Verify Docker (for local testing)
 docker --version
-# ✅ Esperado: Docker versão 20.10 ou superior
+# ✅ Expected: Docker version 20.10 or higher
 ```
 
 ### Requisitos do Azure
 
-- Assinatura ativa do Azure
+- Assinatura Azure ativa
 - Permissões para criar:
   - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
+  - Namespaces do Service Bus
+  - Contas Cosmos DB
+  - Contas de armazenamento
   - Application Insights
 
-### Pré-requisitos de Conhecimento
+### Conhecimentos Pré-requisitos
 
 Você deve ter concluído:
-- [Gerenciamento de Configuração](../chapter-03-configuration/configuration.md)
+- [Gestão de Configuração](../chapter-03-configuration/configuration.md)
 - [Autenticação & Segurança](../chapter-03-configuration/authsecurity.md)
 - [Exemplo de Microsserviços](../../../../examples/microservices)
 
 ---
 
 ## Guia de Implementação
+
+> **Fragmentos de design, não um laboratório completo:** A árvore de projeto e os rótulos `File:` abaixo descrevem arquivos para criar em seu próprio projeto; este repositório não contém uma aplicação completa `multi-agent-system`. Faltam templates principais/parâmetros, ambiente/registro Container Apps, Dockerfiles e travas de dependências, configuração de banco/container Cosmos, deploys de modelos, configuração de identidade/permissão, regras de escalonamento e workers/filas paralelos. Não espere que `azd init` gere esses arquivos nem que `azd up` implante os snippets sem alterações. Para um ponto inicial executável, complete [Fundamentos Multiagente](../chapter-05-multi-agent/multi-agent-basics.md).
+
+**Assumptos de runtime:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask e (para monitoramento) `azure-monitor-opentelemetry`; coloque `shared` no caminho de importação Python em cada imagem de serviço. O container Cosmos `agent-state/tasks` deve existir com chave de partição `/id`. Conexões baseadas em chave facilitam estes fragmentos, mas não são recomendação para produção: prefira identidades gerenciadas com papéis Service Bus/Cosmos/OpenAI de plano de dados com escopo. Não exponha chaves em outputs ou logs.
+
+Entrega do Service Bus é **pelo menos uma vez**. Persista idempotência por tarefa **e passo**, use concorrência otimista (ETags) para estado ler/alterar/escrever e renove bloqueios de mensagens durante processamento longo. O gerenciador de estado simples abaixo é apenas sequencial e não implementa essas garantias para produção.
 
 ### Estrutura do Projeto
 
@@ -396,9 +411,9 @@ multi-agent-system/
 
 ### Implementação: Pipeline de Criação de Conteúdo
 
-Vamos construir um pipeline sequencial: Pesquisa → Escrita → Edição → Publicação
+Vamos projetar um pipeline sequencial: Pesquisa → Escrever → Editar. A publicação está fora deste exemplo.
 
-### 1. Configuração do AZD
+### 1. Configuração AZD
 
 **Arquivo: `azure.yaml`**
 
@@ -483,7 +498,8 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 }
 
 output namespace string = serviceBusNamespace.name
-output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+// Do not output RootManageSharedAccessKey. Resolve scoped credentials
+// securely or use managed identity in the application and scale rules.
 ```
 
 ### 3. Gerenciador de Estado Compartilhado
@@ -492,7 +508,7 @@ output connectionString string = listKeys('${serviceBusNamespace.id}/Authorizati
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 class StateManager:
@@ -513,7 +529,7 @@ class StateManager:
             'type': task_type,
             'status': 'pending',
             'input': input_data,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'steps': []
         }
         self.container.create_item(task)
@@ -525,7 +541,7 @@ class StateManager:
         
         task['steps'].append({
             'name': step_name,
-            'completed_at': datetime.utcnow().isoformat(),
+            'completed_at': datetime.now(timezone.utc).isoformat(),
             'result': result
         })
         
@@ -537,7 +553,7 @@ class StateManager:
         task = self.container.read_item(task_id, partition_key=task_id)
         task['status'] = 'completed'
         task['result'] = final_result
-        task['completed_at'] = datetime.utcnow().isoformat()
+        task['completed_at'] = datetime.now(timezone.utc).isoformat()
         self.container.replace_item(task_id, task)
         return task
     
@@ -561,7 +577,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Conexão com o Service Bus
+# Service Bus connection
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -572,15 +588,15 @@ def health():
 @app.route('/create-content', methods=['POST'])
 def create_content():
     """
-    Sequential workflow: Research → Write → Edit → Publish
+    Sequential workflow: Research → Write → Edit (returns a draft; no publishing)
     """
-    data = request.json
+    data = request.get_json(silent=True) or {}
     topic = data.get('topic')
     
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Criar tarefa no armazenamento de estado
+    # Create task in state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -588,13 +604,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # Enviar mensagem para o agente de pesquisa (primeira etapa)
+    # Send message to research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Para onde enviar os resultados
+            'next_queue': 'writer-tasks'  # Where to send results
         }),
         content_type='application/json'
     )
@@ -606,7 +622,7 @@ def create_content():
         'task_id': task_id,
         'status': 'started',
         'workflow': 'sequential',
-        'steps': ['research', 'write', 'edit', 'publish'],
+        'steps': ['research', 'write', 'edit'],
         'message': 'Content creation pipeline initiated'
     }), 202
 
@@ -635,7 +651,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# Inicializar clientes
+# Initialize clients
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -643,7 +659,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -655,9 +671,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Chamar os modelos Microsoft Foundry para pesquisa
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -667,14 +683,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # Atualizar estado
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # Enviar para o próximo agente (escritor)
+    # Send to next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -731,7 +747,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -744,9 +760,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Chamar os modelos Microsoft Foundry para escrever o artigo
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -756,14 +772,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # Atualizar o estado
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # Enviar para o editor
+    # Send to editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -819,7 +835,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -831,9 +847,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Chamar o Microsoft Foundry Models para editar
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -843,7 +859,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Marcar a tarefa como concluída
+    # Mark task as complete
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -877,26 +893,27 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Implantar e Testar
+### 8. Deploy e Teste
+
+Esses comandos se aplicam **somente após implementar os arquivos de projeto faltantes**. A inicialização interativa do agente Foundry é um fluxo separado; não gera este design de Service Bus.
 
 ```bash
-# Opção A: Implantação baseada em modelo
-azd init
+# In your completed custom project
 azd up
 
-# Opção B: Implantação via manifesto do agente (requer extensão)
+# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> Veja [Comandos da CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para todos os flags e opções `azd ai`.
+> Veja [Comandos AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para todas as flags e opções `azd ai`.
 
 ```bash
-# Obter a URL do orquestrador
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# Criar conteúdo
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
@@ -908,18 +925,18 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "status": "started",
   "workflow": "sequential",
-  "steps": ["research", "write", "edit", "publish"],
+  "steps": ["research", "write", "edit"],
   "message": "Content creation pipeline initiated"
 }
 ```
 
-**Verificar progresso da tarefa:**
+**Verifique o progresso da tarefa:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Saída esperada (concluída):**
+**✅ Saída esperada (completo):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -990,7 +1007,7 @@ def research_parallel():
         }
     )
     
-    # Fan-out: Enviar para todos os agentes simultaneamente
+    # Fan-out: publish sequentially; workers may process concurrently.
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1041,9 +1058,10 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# Acompanhar resultados por tarefa
-task_results = defaultdict(list)
-expected_agents = 4  # web, acadêmico, notícias, social
+# Single-process demo only: not durable or shared across replicas.
+# Production: use durable unique (task_id, agent_type) result records.
+task_results = defaultdict(dict)
+expected_agents = 4  # web, academic, news, social
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1051,29 +1069,29 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # Armazenar resultado
-    task_results[task_id].append({
+    # Store result
+    task_results[task_id][agent_type] = {
         'agent': agent_type,
         'data': result
-    })
+    }
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Verificar se todos os agentes concluíram (fan-in)
+    # Check if all agents completed (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # Combinar resultados
+        # Combine results
         aggregated = {
             'query': message_data['query'],
-            'sources': task_results[task_id],
-            'summary': generate_summary(task_results[task_id])
+            'sources': list(task_results[task_id].values()),
+            'summary': generate_summary(list(task_results[task_id].values()))
         }
         
-        # Marcar como concluído
+        # Mark complete
         state_manager.complete_task(task_id, aggregated)
         
-        # Limpar
+        # Clean up
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1106,8 +1124,8 @@ if __name__ == '__main__':
 ```
 
 **Benefícios do Padrão Paralelo:**
-- ⚡ **4x mais rápido** (os agentes executam simultaneamente)
-- 🔄 **Tolerante a falhas** (resultados parciais aceitáveis)
+- ⚡ **Potencialmente menor latência** (limitada pelo worker mais lento mais sobrecarga da coordenação)
+- 🔄 **Pode suportar resultados parciais** com prazos explícitos e política de falha (não implementado pelo agregador básico)
 - 📈 **Escalável** (adicione mais agentes facilmente)
 
 ---
@@ -1116,73 +1134,60 @@ if __name__ == '__main__':
 
 ### Exercício 1: Adicionar Tratamento de Timeout ⭐⭐ (Médio)
 
-**Objetivo**: Implementar lógica de timeout para que o agregador não espere para sempre por agentes lentos.
+**Objetivo**: Implementar lógica de timeout para que o agregador não espere indefinidamente por agentes lentos.
+
+**Ponto de partida:** Execute esta simulação local de prazo antes de integrá-la a um worker de fila. Um timeout verificado somente quando outra mensagem chega nunca dispara se o worker ausente não enviar nada.
 
 **Passos**:
 
-1. **Adicionar rastreamento de timeout ao agregador:**
+1. **Adicionar monitoramento de timeout no agregador:**
 
 ```python
-from datetime import datetime, timedelta
+import asyncio
 
-task_timeouts = {}  # id_tarefa -> tempo_de_expiração
+async def simulated_agent(name, delay):
+    await asyncio.sleep(delay)
+    return {'agent': name, 'result': 'done'}
 
-def process_result(message_data):
-    task_id = message_data['task_id']
-    
-    # Defina um tempo limite no primeiro resultado
-    if task_id not in task_timeouts:
-        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
-    
-    task_results[task_id].append({
-        'agent': message_data['agent_type'],
-        'data': message_data['result']
-    })
-    
-    # Verificar se está completo OU se expirou
-    if len(task_results[task_id]) == expected_agents or \
-       datetime.utcnow() > task_timeouts[task_id]:
-        
-        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
-        
-        aggregated = {
-            'query': message_data['query'],
-            'sources': task_results[task_id],
-            'completed_agents': len(task_results[task_id]),
-            'timed_out': len(task_results[task_id]) < expected_agents
-        }
-        
-        state_manager.complete_task(task_id, aggregated)
-        
-        # Limpeza
-        del task_results[task_id]
-        del task_timeouts[task_id]
+async def main():
+    tasks = [asyncio.create_task(simulated_agent(name, delay))
+             for name, delay in [('web', 0.1), ('academic', 0.2),
+                                 ('news', 0.3), ('social', 3)]]
+    done, pending = await asyncio.wait(tasks, timeout=1)
+    results = [task.result() for task in done]
+    for task in pending:
+        task.cancel()
+    await asyncio.gather(*pending, return_exceptions=True)
+    print({'completed_agents': len(results), 'timed_out': bool(pending)})
+    assert len(results) == 3 and pending
+
+asyncio.run(main())
 ```
 
-2. **Testar com delays artificiais:**
+2. **Saída esperada:**
 
-```python
-# Em um agente, adicione atraso para simular processamento lento
-import time
-time.sleep(35)  # Excede o tempo limite de 30 segundos
+```text
+{'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Implantar e verificar:**
+3. **Integração com sistema de fila (tarefa de design):** Persistir prazo de despacho e agentes esperados ao criar a tarefa, executar captura periódica do prazo independente dos resultados recebidos, finalizar atomica resultados parciais e ignorar mensagens tardias/duplicadas para tarefas finalizadas. Um timeout local não cancela workers remotos.
+
+Apenas para seu projeto implementado:
 
 ```bash
 azd deploy aggregator
 
-# Enviar tarefa
+# Submit task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# Verificar resultados após 30 segundos
+# Check results after 30 seconds
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Critérios de sucesso:**
-- ✅ A tarefa é concluída após 30 segundos mesmo que os agentes não estejam completos
+**✅ Critérios de Sucesso:**
+- ✅ O teste local retorna após seu prazo de um segundo mesmo que um agente esteja incompleto
 - ✅ A resposta indica resultados parciais (`"timed_out": true`)
 - ✅ Resultados disponíveis são retornados (3 de 4 agentes)
 
@@ -1192,42 +1197,20 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### Exercício 2: Implementar Lógica de Retentativa ⭐⭐⭐ (Avançado)
 
-**Objetivo**: Tentar novamente tarefas de agentes falhadas automaticamente antes de desistir.
+**Objetivo**: Retentar automaticamente tarefas de agentes falhadas antes de desistir.
 
 **Passos**:
 
-1. **Adicionar rastreamento de retentativas ao orquestrador:**
+1. **Usar contagens de entrega do Service Bus em vez de contadores customizados de retentativa:**
 
 ```python
-from dataclasses import dataclass
-from typing import Dict
-
-@dataclass
-class RetryConfig:
-    max_retries: int = 3
-    backoff_seconds: int = 5
-
-retry_counts: Dict[str, int] = {}  # id_da_mensagem -> número_de_tentativas
-
-def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
-    """Send message with retry metadata"""
-    message_id = message_data.get('message_id', str(uuid.uuid4()))
-    message_data['message_id'] = message_id
-    message_data['retry_count'] = retry_counts.get(message_id, 0)
-    message_data['max_retries'] = retry_config.max_retries
-    
-    sender = servicebus_client.get_queue_sender(queue_name)
-    message = ServiceBusMessage(
-        body=json.dumps(message_data),
-        content_type='application/json',
-        message_id=message_id
-    )
-    
-    with sender:
-        sender.send_messages(message)
+import json
+import time
+# Integration fragment: use a live peek-lock ServiceBusReceiver.
+# Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Adicionar handler de retentativa aos agentes:**
+2. **Adicionar manipulação de retentativa nos agentes:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,31 +1218,21 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # Processar a mensagem
+        # Process the message
         process_func(message_data)
         
-        # Sucesso - concluído
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
-        message_id = message.message_id
-        retry_count = message_data.get('retry_count', 0)
-        max_retries = message_data.get('max_retries', 3)
-        
-        if retry_count < max_retries:
-            # Retentar: abandonar e reenfileirar com contador incrementado
-            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
-            
-            message_data['retry_count'] = retry_count + 1
-            
-            # Enviar de volta para a mesma fila com atraso
-            time.sleep(5 * (retry_count + 1))  # Atraso exponencial
-            send_with_retry(queue_name, message_data, RetryConfig())
-            
-            receiver.complete_message(message)  # Remover o original
+        if message.delivery_count < 4:
+            # Bounded exponential delay: 5s, 10s, 20s.
+            # Renew the lock if processing + waiting can exceed its duration.
+            time.sleep(5 * 2 ** (message.delivery_count - 1))
+            receiver.abandon_message(message)
         else:
-            # Máximo de tentativas excedido - mover para a fila de mensagens mortas
-            print(f"❌ Max retries exceeded for message {message_id}")
+            # Max retries exceeded - move to dead letter queue
+            print(f"❌ Max attempts exceeded for message {message.message_id}")
             receiver.dead_letter_message(
                 message,
                 reason="MaxRetriesExceeded",
@@ -1267,13 +1240,13 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Monitorar a fila de dead-letter:**
+3. **Monitorar fila dead letter:**
 
 ```python
 def monitor_dead_letters():
     """Check dead letter queue for failed messages"""
     receiver = servicebus_client.get_queue_receiver(
-        'research-queue',
+        'research-tasks',
         sub_queue='deadletter'
     )
     
@@ -1285,11 +1258,11 @@ def monitor_dead_letters():
             print(f"Description: {message.dead_letter_error_description}")
 ```
 
-**✅ Critérios de sucesso:**
-- ✅ Tarefas falhas são retentadas automaticamente (até 3 vezes)
-- ✅ Backoff exponencial entre retentativas (5s, 10s, 15s)
-- ✅ Após o máximo de retentativas, mensagens vão para a fila de dead-letter
-- ✅ A fila de dead-letter pode ser monitorada e reprocessada
+**✅ Critérios de Sucesso:**
+- ✅ Tarefas falhadas retentadas automaticamente (até 3 vezes)
+- ✅ Backoff exponencial entre as retentativas (5s, 10s, 20s), com renovação de bloqueio de mensagem onde necessário
+- ✅ Após retentativas máximas, mensagens vão para fila dead letter
+- ✅ Mensagens dead letter podem ser inspecionadas; replay requer fluxo de recuperação idempotente separado
 
 **Tempo**: 30-40 minutos
 
@@ -1297,7 +1270,7 @@ def monitor_dead_letters():
 
 ### Exercício 3: Implementar Circuit Breaker ⭐⭐⭐ (Avançado)
 
-**Objetivo**: Prevenir falhas em cascata parando requisições para agentes com falhas.
+**Objetivo**: Evitar falhas em cascata interrompendo requisições a agentes com falha.
 
 **Passos**:
 
@@ -1305,12 +1278,12 @@ def monitor_dead_letters():
 
 ```python
 from enum import Enum
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # Operação normal
-    OPEN = "open"          # Falhando, rejeitar solicitações
-    HALF_OPEN = "half_open"  # Testando se recuperou
+    CLOSED = "closed"      # Normal operation
+    OPEN = "open"          # Failing, reject requests
+    HALF_OPEN = "half_open"  # Testing if recovered
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1323,8 +1296,8 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Verificar se o tempo limite expirou
-            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+            # Check if timeout expired
+            if datetime.now(timezone.utc) - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
             else:
@@ -1333,7 +1306,8 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # Sucesso
+            # Success
+            self.failure_count = 0 # Count consecutive failures only
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1343,19 +1317,19 @@ class CircuitBreaker:
             
         except Exception as e:
             self.failure_count += 1
-            self.last_failure_time = datetime.utcnow()
+            self.last_failure_time = datetime.now(timezone.utc)
             
             if self.failure_count >= self.failure_threshold:
                 self.state = CircuitState.OPEN
                 print(f"🔴 Circuit breaker: OPEN (too many failures)")
             
-            raise e
+            raise
 ```
 
-2. **Aplicar às chamadas aos agentes:**
+2. **Aplicar às chamadas dos agentes:**
 
 ```python
-# No orquestrador
+# In orchestrator
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,31 +1345,32 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Continue com outros agentes
+        # Continue with other agents
 ```
 
-3. **Testar o circuit breaker:**
+Este circuito protege a **operação de envio**, não a conclusão pelo trabalhador remoto: enfileirar com sucesso uma mensagem não diz nada sobre se um agente está ativo. `send_message` é a função de envio da sua aplicação. Para circuitos de execução, alimente falhas/timeouts de tarefas observadas em um coordenador durável. Esta classe em memória é uma demonstração de thread única, não um disjuntor distribuído.
 
-```bash
-# Simular falhas repetidas (parar um agente)
-az containerapp stop --name web-research-agent --resource-group rg-agents
+3. **Teste o disjuntor localmente:**
 
-# Enviar múltiplas requisições
-for i in {1..10}; do
-  curl -X POST $ORCHESTRATOR_URL/research-parallel \
-    -H "Content-Type: application/json" \
-    -d '{"query": "test query '$i'"}'
-  sleep 2
-done
-
-# Verificar logs - deve ver o circuito aberto após 5 falhas
-# Use o Azure CLI para logs do Container App:
-az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```python
+# Run after the class definition; no Azure changes required.
+circuit = CircuitBreaker(failure_threshold=5, timeout_seconds=0)
+def fail():
+    raise RuntimeError("simulated failure")
+for _ in range(5):
+    try:
+        circuit.call(fail)
+    except RuntimeError:
+        pass
+assert circuit.state == CircuitState.OPEN
+assert circuit.call(lambda: "recovered") == "recovered"
+assert circuit.state == CircuitState.CLOSED
+print("Circuit breaker recovery verified")
 ```
 
-**✅ Critérios de sucesso:**
-- ✅ Após 5 falhas, o circuito abre (rejeita requisições)
-- ✅ Após 60 segundos, o circuito vai para meio-aberto (testa recuperação)
+**✅ Critérios de Sucesso:**
+- ✅ Após 5 falhas, o circuito abre (rejeita solicitações)
+- ✅ Após 60 segundos, o circuito fica meio aberto (testa recuperação)
 - ✅ Outros agentes continuam funcionando normalmente
 - ✅ O circuito fecha automaticamente quando o agente se recupera
 
@@ -1410,50 +1385,49 @@ az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 5
 **Arquivo: `src/shared/tracing.py`**
 
 ```python
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.samplers import AlwaysOnSampler
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
-# Configurar rastreamento
-config_integration.trace_integrations(['requests', 'logging'])
-
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# Criar rastreador
-tracer = Tracer(
-    exporter=AzureExporter(connection_string=connection_string),
-    sampler=AlwaysOnSampler()
-)
+# Configure once per process. Message send/receive trace-context propagation
+# and agent attributes on exceptions need explicit instrumentation.
+if connection_string:
+    configure_azure_monitor(connection_string=connection_string, logger_name=__name__)
+tracer = trace.get_tracer(__name__)
 
-# Configurar registro de logs
+# Configure logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
 
-def trace_agent_call(agent_name, task_id, operation):
+def trace_agent_call(agent_name, task_id, operation_name, operation):
     """Trace agent operations"""
-    with tracer.span(name=f'{agent_name}.{operation}') as span:
-        span.add_attribute('agent', agent_name)
-        span.add_attribute('task_id', task_id)
-        span.add_attribute('operation', operation)
+    with tracer.start_as_current_span(f'agent.{agent_name}.{operation_name}', kind=SpanKind.CLIENT) as span:
+        span.set_attribute('agent', agent_name)
+        span.set_attribute('task_id', task_id)
+        span.set_attribute('operation', operation_name)
         
         try:
             result = operation()
-            span.add_attribute('status', 'success')
+            span.set_attribute('status', 'success')
+            logger.info('Agent operation completed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             return result
         except Exception as e:
-            span.add_attribute('status', 'error')
-            span.add_attribute('error', str(e))
+            span.set_attribute('status', 'error')
+            logger.exception('Agent operation failed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             raise
 ```
 
-### Consultas do Application Insights
+### Consultas no Application Insights
 
-**Rastrear fluxos de trabalho multiagente:**
+**Acompanhe fluxos multi-agente:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1496,20 +1470,22 @@ exceptions
 
 ### Custos do Sistema Multi-Agente (Estimativas Mensais)
 
+Figuras de planejamento ilustrativas apenas, não cotações: o total abaixo é **$240-565/mês**. Verifique taxas regionais atuais, horas de réplicas ativas/ociosas, mix de tokens de entrada/saída, armazenamento e telemetria. Serverless não tem throughput provisionado mínimo, mas ainda cobra por solicitações e armazenamento.
+
 | Componente | Configuração | Custo |
 |-----------|--------------|------|
 | **Orquestrador** | 1 Container App (1 vCPU, 2GB) | $30-50 |
 | **4 Agentes** | 4 Container Apps (0.5 vCPU, 1GB cada) | $60-120 |
-| **Service Bus** | Standard tier, 10M messages | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
+| **Service Bus** | Nível Standard, 10M mensagens | $10-20 |
+| **Cosmos DB** | Serverless, 5GB armazenamento, 1M RUs | $25-50 |
+| **Blob Storage** | 10GB armazenamento, 100K operações | $5-10 |
+| **Application Insights** | 5GB ingestão | $10-15 |
 | **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
-| **Total** | | **$240-565/month** |
+| **Total** | | **$240-565/mês** |
 
 ### Estratégias de Otimização de Custos
 
-1. **Use serverless onde possível:**
+1. **Use serverless sempre que possível:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1518,23 +1494,23 @@ exceptions
    }
    ```
 
-2. **Escale agentes para zero quando ociosos:**
+2. **Escale agentes para zero quando ocioso:**
    ```bicep
    scale: {
-     minReplicas: 0  // Scale to zero when no messages
+     minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
      maxReplicas: 10
    }
    ```
 
-3. **Use batching para o Service Bus:**
+3. **Use agrupamento para Service Bus:**
    ```python
-   # Enviar mensagens em lotes (mais barato)
+   # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Faça cache de resultados usados com frequência:**
+4. **Armazene em cache resultados usados frequentemente:**
    ```python
-   # Use o Azure Cache for Redis
+   # Use Azure Cache for Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
@@ -1547,24 +1523,21 @@ exceptions
 
 1. **Use operações idempotentes**
    ```python
-   # O agente pode processar com segurança a mesma mensagem várias vezes
+   # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
-       if state_manager.task_exists(task_id):
-           print(f"Task {task_id} already processed, skipping")
-           return
-       # Processando tarefa...
+       raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Implemente registro abrangente**
+2. **Implemente logging abrangente**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
 3. **Use IDs de correlação**
    ```python
-   # Propagar task_id por todo o fluxo de trabalho
+   # Pass task_id through entire workflow
    message_data = {
-       'task_id': task_id,  # ID de correlação
+       'task_id': task_id,  # Correlation ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
@@ -1576,9 +1549,9 @@ exceptions
    }
    ```
 
-5. **Monitore filas de dead-letter**
+5. **Monitore filas de dead letter**
    ```python
-   # Monitoramento regular de mensagens com falha
+   # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
@@ -1586,29 +1559,29 @@ exceptions
 
 1. **Não crie dependências circulares**
    ```python
-   # ❌ RUIM: Agente A → Agente B → Agente A (loop infinito)
-   # ✅ BOM: Defina claramente um grafo direcionado acíclico (DAG)
+   # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
+   # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Não bloqueie threads dos agentes**
+2. **Não bloqueie threads de agentes**
    ```python
-   # ❌ RUIM: Espera síncrona
+   # ❌ BAD: Synchronous wait
    while not task_complete:
        time.sleep(1)
    
-   # ✅ BOM: Use callbacks da fila de mensagens
+   # ✅ GOOD: Use message queue callbacks
    ```
 
 3. **Não ignore falhas parciais**
    ```python
-   # ❌ RUIM: Fazer com que todo o fluxo de trabalho falhe se um agente falhar
-   # ✅ BOM: Retornar resultados parciais com indicadores de erro
+   # ❌ BAD: Fail entire workflow if one agent fails
+   # ✅ GOOD: Return partial results with error indicators
    ```
 
 4. **Não use tentativas infinitas**
    ```python
-   # ❌ RUIM: repetir indefinidamente
-   # ✅ BOM: max_retries = 3, então enviar para a fila dead-letter
+   # ❌ BAD: retry forever
+   # ✅ GOOD: max_retries = 3, then dead letter
    ```
 
 ---
@@ -1619,34 +1592,37 @@ exceptions
 
 **Sintomas:**
 - Mensagens se acumulam na fila
-- Agentes não estão processando
-- Status da tarefa preso em "pending"
+- Agentes não processam
+- Status da tarefa preso em "pendente"
 
 **Diagnóstico:**
 ```bash
-# Verificar a profundidade da fila
+# Check queue depth
 az servicebus queue show \
+  --resource-group "$RG_NAME" \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Verificar os logs do agente usando o Azure CLI
+# Check agent logs using Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Soluções:**
 
-1. **Aumentar réplicas de agentes:**
+1. **Aumente réplicas de agentes:**
    ```bash
    az containerapp update \
+     --resource-group "$RG_NAME" \
      --name research-agent \
      --min-replicas 3 \
      --max-replicas 10
    ```
 
-2. **Verificar dead letter queue:**
+2. **Verifique a fila de dead letter:**
    ```bash
    az servicebus queue show \
+     --resource-group "$RG_NAME" \
      --namespace-name mybus \
      --name research-tasks \
      --query "countDetails.deadLetterMessageCount"
@@ -1654,36 +1630,36 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problema: Tarefa estoura o tempo / nunca conclui
+### Problema: Timeout de tarefa/nunca conclui
 
 **Sintomas:**
-- Status da tarefa permanece "in_progress"
+- Status da tarefa permanece "em progresso"
 - Alguns agentes concluem, outros não
 - Sem mensagens de erro
 
 **Diagnóstico:**
 ```bash
-# Verificar estado da tarefa
+# Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# Verificar o Application Insights
-# Executar consulta: traces | where customDimensions.task_id == "..."
+# Check Application Insights
+# Run query: traces | where customDimensions.task_id == "..."
 ```
 
 **Soluções:**
 
 1. **Implemente timeout no agregador (Exercício 1)**
 
-2. **Verifique falhas de agentes usando o Azure Monitor:**
+2. **Verifique falhas de agentes usando Azure Monitor:**
    ```bash
-   # Visualize os logs via azd monitor
+   # View logs via azd monitor
    azd monitor --logs
    
-   # Ou use o Azure CLI para verificar os logs de um aplicativo de contêiner específico
+   # Or use Azure CLI to check specific container app logs
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Verifique se todos os agentes estão em execução:**
+3. **Verifique se todos os agentes estão executando:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1698,16 +1674,16 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [Padrões de Orquestração de Agente de IA](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
 ### Próximos Passos Neste Curso
-- ← Anterior: [Capacity Planning](capacity-planning.md)
-- → Próximo: [SKU Selection](sku-selection.md)
+- ← Anterior: [Planejamento de Capacidade](capacity-planning.md)
+- → Próximo: [Seleção de SKU](sku-selection.md)
 - 🏠 [Início do Curso](../../README.md)
 
 ### Exemplos Relacionados
-- [Microservices Example](../../../../examples/microservices) - padrões de comunicação entre serviços
-- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - integração com IA
+- [Exemplo de Microsserviços](../../../../examples/microservices) - Padrões de comunicação de serviço
+- [Exemplo de Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Integração de IA
 
 ---
 
@@ -1717,25 +1693,25 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - ✅ Cinco padrões de coordenação (sequencial, paralelo, hierárquico, orientado a eventos, consenso)
 - ✅ Arquitetura multi-agente na Azure (Service Bus, Cosmos DB, Container Apps)
 - ✅ Gerenciamento de estado entre agentes distribuídos
-- ✅ Tratamento de timeout, retentativas e circuit breakers
+- ✅ Tratamento de timeout, tentativas e disjuntores
 - ✅ Monitoramento e depuração de sistemas distribuídos
 - ✅ Estratégias de otimização de custos
 
-**Principais Lições:**
-1. **Escolha o padrão certo** - Sequencial para fluxos de trabalho ordenados, paralelo para velocidade, orientado a eventos para flexibilidade
-2. **Gerencie o estado com cuidado** - Use Cosmos DB ou similar para estado compartilhado
-3. **Trate falhas de forma elegante** - Timeouts, retentativas, circuit breakers, filas dead-letter
-4. **Monitore tudo** - Rastreabilidade distribuída é essencial para depuração
+**Principais Conclusões:**
+1. **Escolha o padrão correto** - Sequencial para fluxos ordenados, paralelo para velocidade, orientado a eventos para flexibilidade
+2. **Gerencie estado cuidadosamente** - Use Cosmos DB ou similar para estado compartilhado
+3. **Trate falhas com cuidado** - Timeouts, tentativas, disjuntores, filas de dead letter
+4. **Monitore tudo** - Rastreamento distribuído é essencial para depuração
 5. **Otimize custos** - Escale para zero, use serverless, implemente cache
 
 **Próximos Passos:**
 1. Complete os exercícios práticos
 2. Construa um sistema multi-agente para seu caso de uso
-3. Estude [SKU Selection](sku-selection.md) para otimizar desempenho e custos
+3. Estude [Seleção de SKU](sku-selection.md) para otimizar desempenho e custo
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se uma tradução profissional realizada por tradutores humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

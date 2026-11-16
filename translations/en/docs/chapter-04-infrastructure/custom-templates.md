@@ -6,7 +6,7 @@
 - **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
 - **🚀 Next Chapter**: [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
 
-> Validated against `azd 1.27.1` in July 2026.
+> Reviewed against `azd 1.37.2` (November 2026). This is an **authoring walkthrough with partial files**, not a complete template: you must supply application code and `modules/web.bicep` with its environment, registry, Container App, and outputs before deployment. Azure provisioning was not executed in this review.
 
 ## Introduction
 
@@ -38,12 +38,12 @@ An azd template is **a Git repository** that contains, at minimum:
 | File / folder | Purpose | Required? |
 |---------------|---------|-----------|
 | `azure.yaml` | Describes services, hosts, and infra provider | ✅ Yes |
-| `infra/` | Bicep, Terraform, or Pulumi that provisions resources | ✅ Yes |
-| `src/` (or your code) | The application code azd deploys | ✅ Yes |
+| `infra/` | Bicep or Terraform provisioning definitions | Required for this explicit-IaC example; generated-infrastructure projects can omit it |
+| `src/` (or your code) | The application code azd deploys | Required for source-based services; not all templates contain application code |
 | `README.md` | How to use the template | ✅ Strongly recommended |
 | `.azdo/` or `.github/` | CI/CD pipeline definitions | Optional |
 | `.devcontainer/` | Reproducible dev environment | Optional |
-| `azure.yaml` `metadata` | Gallery + telemetry info | Optional (required to publish) |
+| `azure.yaml` `metadata` | Template identity/telemetry info | Recommended; publishing a Git repository does not require it |
 
 There is nothing magic here: when you run `azd init --template you/your-repo`, azd clones the repo and reads `azure.yaml`.
 
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -111,11 +111,11 @@ The single most important rule for a *reusable* template: **never hardcode names
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -141,12 +148,15 @@ output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 Two things make this template-friendly:
 
 1. **`azd-env-name` tag** — azd uses it to track and clean up resources per environment.
-2. **`uniqueString(...)` resource token** — produces a stable, globally-unique suffix so names don't collide.
+2. **`uniqueString(...)` resource token** — produces a stable hash suffix to reduce collisions; it is not a guarantee of global uniqueness.
+
+The missing `modules/web.bicep` must accept `name`, `location`, and `tags`, provision the Container Apps environment/registry and app, tag the app with `azd-service-name: web`, and export `uri`. It must also expose registry values needed by the chosen build/deploy flow (for example `AZURE_CONTAINER_REGISTRY_ENDPOINT` from the root module). An endpoint output alone does not wire service discovery, application settings, or registry authentication.
 
 Provide a matching parameters file that reads values azd injects from the environment:
 
+Save the following as `infra/main.parameters.json`:
+
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -170,7 +180,7 @@ Before sharing, prove the template works from a clean state.
 ```bash
 # From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
 # Provision + deploy end to end
 azd auth login
@@ -183,9 +193,9 @@ azd up
 azd down --force --purge
 ```
 
-If `azd down` leaves resources behind, you probably missed the `azd-env-name` tag on a resource.
+If `azd down` leaves resources behind, check environment/resource-group discovery, external/shared resources, permissions, locks, and purge protection. `--purge` does not delete local `.azure/` state.
 
-> **Tip:** run `azd provision --preview` first. It performs a what-if and surfaces template errors before any resource is created.
+> **Tip:** after supplying all missing files, run `azd provision --preview` first. Inspect hooks before preview because they can execute side-effecting commands. Preview is not a price estimate or a guarantee that provisioning will succeed.
 
 ---
 
@@ -194,13 +204,17 @@ If `azd down` leaves resources behind, you probably missed the `azd-env-name` ta
 Push the repository to GitHub (public if you want others to use it):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
 Anyone can now use it:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
@@ -226,7 +240,7 @@ Submit by opening a pull request that adds your template to the gallery's data f
 | Hardcoded resource names | Use the `uniqueString()` resource token |
 | `azd down` leaves resources | Tag every resource (or the resource group) with `azd-env-name` |
 | Template works for you, fails for others | Remove subscription IDs, tenant IDs, and region assumptions |
-| Outputs not wired into the app | Export `SERVICE_<NAME>_ENDPOINT_URL` and other `AZURE_*` outputs |
+| Outputs not wired into the app | Match `azd-service-name`/`resourceName` for deployment and explicitly map outputs to app settings |
 | Gallery submission rejected | Add `README.md`, `LICENSE`, and `metadata.template` |
 
 ---

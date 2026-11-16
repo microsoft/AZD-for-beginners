@@ -1,88 +1,88 @@
 # 3장: 구성 및 인증
 
-**📚 과정**: [AZD 초보자](../../README.md) | **⏱️ 소요 시간**: 45-60분 | **⭐ 난이도**: 중급
+**📚 강의**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 통합 연습 포함 90-150분 | **⭐ 난이도**: 중급
 
 ---
 
 ## 개요
 
-이 장에서는 Azure Developer CLI 배포를 위한 환경 구성, 인증 패턴 및 보안 모범 사례를 다룹니다.
+이 장에서는 Azure 개발자 CLI 배포를 위한 환경 구성, 인증 패턴 및 보안 모범 사례를 다룹니다.
 
-> `azd 1.27.1` 버전에서 2026년 7월에 검증됨.
+> 명령 및 구성 검토 대상: `azd 1.37.2` (2026년 11월). 검토 중 라이브 Azure 프로비저닝은 실행되지 않았습니다.
 
 ## 학습 목표
 
 이 장을 완료하면 다음을 할 수 있습니다:
-- AZD 구성 계층 마스터하기
-- 여러 환경(dev, staging, prod) 관리하기
-- 관리형 ID를 사용한 보안 인증 구현하기
-- 환경별 설정 구성하기
+- AZD 구성 계층 구조를 숙달합니다
+- 여러 환경(dev, staging, prod)을 관리합니다
+- 관리형 ID를 통해 안전한 인증을 구현합니다
+- 환경별 설정을 구성합니다
 
 ---
 
 ## 📚 강의 목록
 
-| # | 강의 | 설명 | 시간 |
+| # | 강의 | 설명 | 소요 시간 |
 |---|--------|-------------|------|
 | 1 | [구성 가이드](configuration.md) | 환경 설정 및 관리 | 30분 |
-| 2 | [인증 및 보안](authsecurity.md) | 관리형 ID와 RBAC 패턴 | 30분 |
+| 2 | [인증 및 보안](authsecurity.md) | 관리형 ID 및 RBAC 패턴 | 30분 |
 
 ---
 
 ## 🚀 빠른 시작
 
+<strong>이미 초기화된 azd 애플리케이션</strong>의 루트에서 실행하세요, 강의 저장소가 아닙니다. 이미 존재하는 경우 사용하지 않은 환경 이름을 사용하세요.
+
 ```bash
-# 여러 환경 생성
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# 환경 전환
+# Switch environments
 azd env select prod
 
-# 환경 변수 설정
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# 구성 보기
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME`은 예시입니다: 템플릿에서 명시적으로 사용하지 않으면 인프라에 영향을 주지 않습니다. 일반 `azd env set` 값은 평문으로 로컬에 저장되며, 안전한 비밀 저장소가 아닙니다.
 
 ---
 
 ## 🔧 구성 계층
 
-AZD는 다음 순서로 설정을 적용합니다(나중에 적용된 설정이 이전 것을 덮어씀):
-
-1. <strong>기본값</strong> (템플릿 내장)
-2. **azure.yaml** (프로젝트 구성)
-3. **환경 변수** (`azd env set`)
-4. **명령줄 플래그** (`--location eastus`)
+세 가지 다른 구성 표면을 분리하세요: 전역 환경설정(`azd config`), 프로젝트 구조(`azure.yaml`), 그리고 환경별 값(`azd env`). 플래그는 실제로 지원하는 설정만 덮어쓰며, `azure.yaml` 또는 Bicep에 임의 환경 변수를 보편적으로 오버레이하지 않습니다.
 
 ---
 
 ## 🔐 보안 모범 사례
 
 ```bash
-# 관리 ID 사용(권장)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# AZD 인증 상태 확인
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# 선택 사항: az 명령어를 실행할 계획이라면 Azure CLI 컨텍스트 확인
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# 필요 시 다시 인증
+# Re-authenticate if needed
 azd auth login
 
-# 선택 사항: az 명령어를 위한 Azure CLI 인증 갱신
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
 ---
 
-## 🔗 탐색
+## 🔗 내비게이션
 
 | 방향 | 장 |
 |-----------|---------|

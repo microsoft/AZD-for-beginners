@@ -1,60 +1,58 @@
-# 6. Usuwanie infrastruktury
+# 6. Demontaż infrastruktury
 
-!!! tip "PO ZAKOŃCZENIU TEGO MODUŁU BĘDZIESZ W STANIE"
+!!! tip "NA KONIEC TEGO MODUŁU BĘDZIESZ UMIAŁ"
 
-    - [ ] Zrozumieć znaczenie sprzątania zasobów i zarządzania kosztami
-    - [ ] Używać `azd down` do bezpiecznego wycofywania infrastruktury
-    - [ ] Odzyskać miękko usunięte usługi Azure AI, jeśli zajdzie taka potrzeba
-    - [ ] **Lab 6:** Posprzątać zasoby Azure i zweryfikować ich usunięcie
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Ćwiczenia dodatkowe
 
-Zanim usuniemy projekt, poświęć kilka minut na swobodne eksploracje.
+Zanim zdemontujesz projekt, poświęć kilka minut na swobodne eksploracje.
 
-!!! info "Wypróbuj te propozycje eksploracji"
+!!! info "Wypróbuj te pytania do eksploracji"
 
-    **Eksperymentuj z GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. Zapytaj: `Jakie inne szablony AZD mógłbym wypróbować dla scenariuszy wieloagentowych?`
-    2. Zapytaj: `Jak mogę dostosować instrukcje agenta dla zastosowania w opiece zdrowotnej?`
-    3. Zapytaj: `Jakie zmienne środowiskowe kontrolują optymalizację kosztów?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Zbadaj portal Azure:**
+    **Explore the Azure Portal:**
     
-    1. Przejrzyj metryki Application Insights dla swojej wdrożonej aplikacji
-    2. Sprawdź analizę kosztów dla uruchomionych zasobów
-    3. Jeszcze raz zbadaj „plac zabaw” agenta w portalu Microsoft Foundry
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Usuwanie infrastruktury
+## Demontaż infrastruktury
 
-1. Usunięcie infrastruktury jest tak proste jak:
+1. Demontaż infrastruktury jest tak prosty jak:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. Flaga `--purge` zapewnia również usunięcie miękko usuniętych zasobów Cognitive Service, co zwalnia kwotę zajmowaną przez te zasoby. Po zakończeniu zobaczysz coś takiego:
+1. Potwierdź wybrane środowisko i przejrzyj zasoby do usunięcia. Usuwa to zasoby Azure i może spowodować utratę danych. Zachowaj monit potwierdzenia dla tego procesu nauki. Po zakończeniu zobaczysz podobny wynik:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Opcjonalnie) Jeśli teraz ponownie uruchomisz `azd up`, zauważysz, że model gpt-4.1 zostaje wdrożony, ponieważ zmienna środowiskowa została zmieniona (i zapisana) w lokalnym folderze `.azure`. 
+1. Zweryfikuj usunięcie w portalu i sprawdź zasoby poza zakresem wdrożenia. Raportowanie kosztów i aktualizacje limitów mogą mieć opóźnienie. Lokalna konfiguracja `.azure` pozostaje, chyba że ją wyraźnie usuniesz.
 
-      Oto wdrożenia modelu **przed**:
+1. `azd down --purge` dodatkowo żąda trwałego usunięcia obsługiwanych zasobów w stanie miękkiego usunięcia. Używaj go tylko, gdy odzyskanie nie jest potrzebne i rozumiesz zasady retencji/ochrony przed usunięciem. Nie gwarantuje natychmiastowego zwolnienia limitów.
 
-      ![Initial](../../../../../translated_images/pl/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      A tutaj **po**:
-      ![New](../../../../../translated_images/pl/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Nie wdrażaj ponownie tylko po to, by zweryfikować czyszczenie. Późniejsza celowa komenda `azd up` może odtworzyć zasoby, używając pozostałych lokalnych danych wejściowych, co spowoduje ponowne naliczenie opłat. Aktualizacje modelu zazwyczaj używają wspieranych zmian provisioningowych, a nie demontażu.
 
 ---
 

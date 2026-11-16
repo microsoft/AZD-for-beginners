@@ -1,79 +1,81 @@
-# Panduan Pemilihan SKU - Memilih Peringkat Perkhidmatan Azure yang Betul
+# Panduan Pemilihan SKU - Memilih Tahap Perkhidmatan Azure yang Betul
 
 **Navigasi Bab:**
-- **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Semasa**: Bab 6 - Pengesahan & Perancangan Pra-Pengeluaran
-- **⬅️ Sebelumnya**: [Capacity Planning](capacity-planning.md)
-- **➡️ Seterusnya**: [Pre-flight Checks](preflight-checks.md)
-- **🚀 Bab Seterusnya**: [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/common-issues.md)
+- **📚 Halaman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 6 - Pengesahan & Perancangan Pra-Penerapan
+- **⬅️ Sebelumnya**: [Perancangan Kapasiti](capacity-planning.md)
+- **➡️ Seterusnya**: [Pemeriksaan Pra-Penerbangan](preflight-checks.md)
+- **🚀 Bab Berikutnya**: [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/common-issues.md)
 
 ## Pengenalan
 
-Panduan komprehensif ini membantu anda memilih SKU (Stock Keeping Units) perkhidmatan Azure yang optimum untuk persekitaran, beban kerja, dan keperluan yang berbeza. Pelajari cara menganalisis keperluan prestasi, pertimbangan kos, dan keperluan kebolehskalaan untuk memilih peringkat perkhidmatan yang paling sesuai bagi pengedaran Azure Developer CLI anda.
+Panduan menyeluruh ini membantu anda memilih SKU (Unit Penyimpanan Stok) perkhidmatan Azure yang optimum untuk persekitaran, beban kerja, dan keperluan yang berbeza. Belajar menganalisis keperluan prestasi, pertimbangan kos, dan keperluan skala untuk memilih tahap perkhidmatan yang paling sesuai bagi penyebaran Azure Developer CLI anda.
 
 ## Matlamat Pembelajaran
 
 Dengan menyelesaikan panduan ini, anda akan:
 - Memahami konsep SKU Azure, model harga, dan perbezaan ciri
-- Menguasai strategi pemilihan SKU khusus persekitaran untuk pembangunan, staging, dan pengeluaran
-- Menganalisis keperluan beban kerja dan memadankannya kepada peringkat perkhidmatan yang sesuai
-- Melaksanakan strategi pengoptimuman kos melalui pemilihan SKU yang bijak
-- Mengaplikasikan teknik pengujian prestasi dan pengesahan untuk pilihan SKU
+- Menguasai strategi pemilihan SKU khusus persekitaran untuk pembangunan, pemeriksaan dan produksi
+- Menganalisis keperluan beban kerja dan memadankan dengan tahap perkhidmatan yang sesuai
+- Melaksanakan strategi pengoptimuman kos melalui pemilihan SKU pintar
+- Menerapkan teknik pengujian prestasi dan pengesahan untuk pilihan SKU
 - Mengkonfigurasi cadangan SKU automatik dan pemantauan
 
 ## Hasil Pembelajaran
 
 Setelah selesai, anda akan dapat:
 - Memilih SKU perkhidmatan Azure yang sesuai berdasarkan keperluan dan kekangan beban kerja
-- Mereka bentuk seni bina berbilang persekitaran yang menjimatkan kos dengan pemilihan peringkat yang betul
+- Merekabentuk seni bina multi-persekitaran yang berkesan kos dengan pemilihan tahap yang betul
 - Melaksanakan penanda aras prestasi dan pengesahan untuk pilihan SKU
-- Mewujudkan alat automatik untuk cadangan SKU dan pengoptimuman kos
-- Merancang migrasi SKU dan strategi penskalaan untuk keperluan yang berubah
-- Mengaplikasikan prinsip Rangka Kerja Azure Well-Architected kepada pemilihan peringkat perkhidmatan
+- Mencipta alat automatik untuk cadangan SKU dan pengoptimuman kos
+- Merancang migrasi SKU dan strategi peningkatan untuk keperluan yang berubah
+- Menerapkan prinsip Rangka Kerja Azure Well-Architected pada pemilihan tahap perkhidmatan
 
-## Isi Kandungan
+## Jadual Kandungan
 
-- [Memahami SKU](../../../../docs/chapter-06-pre-deployment)
-- [Pemilihan Berdasarkan Persekitaran](../../../../docs/chapter-06-pre-deployment)
-- [Garis Panduan Spesifik Perkhidmatan](../../../../docs/chapter-06-pre-deployment)
-- [Strategi Pengoptimuman Kos](../../../../docs/chapter-06-pre-deployment)
-- [Pertimbangan Prestasi](../../../../docs/chapter-06-pre-deployment)
-- [Jadual Rujukan Pantas](../../../../docs/chapter-06-pre-deployment)
-- [Alat Pengesahan](../../../../docs/chapter-06-pre-deployment)
+- [Memahami SKU](#understanding-skus)
+- [Pemilihan Berdasarkan Persekitaran](#environment-based-selection)
+- [Garis Panduan Khusus Perkhidmatan](#service-specific-guidelines)
+- [Strategi Pengoptimuman Kos](#cost-optimization-strategies)
+- [Pertimbangan Prestasi](#performance-considerations)
+- [Jadual Rujukan Pantas](#quick-reference-tables)
+- [Alat Pengesahan](#validation-tools)
 
 ---
 
 ## Memahami SKU
 
-### Apa itu SKU?
+> **Contoh skop:** Peta SKU YAML dan konfigurasi prestasi di bawah adalah nota reka bentuk, bukan `azure.yaml` skema atau konfigurasi alat beban. Blok Bicep adalah alternatif/fragmen: nyatakan parameter dan sumber induknya, gunakan nama simbolik unik apabila menggabungkannya, dan sambungkan modul ke projek yang berfungsi. Harga, had, dan ketersediaan wilayah/SKU mesti diperiksa untuk langganan anda sebelum penerapan.
 
-SKU (Stock Keeping Units) mewakili peringkat perkhidmatan dan tahap prestasi yang berbeza untuk sumber Azure. Setiap SKU menawarkan perbezaan dalam:
+### Apakah itu SKU?
 
-- **Ciri-ciri prestasi** (CPU, memori, throughput)
-- **Ketersediaan ciri** (pilihan penskalaan, tahap SLA)
-- **Model harga** (berdasarkan penggunaan, kapasiti ditempah)
-- **Ketersediaan serantau** (tidak semua SKU tersedia di semua rantau)
+SKU (Unit Penyimpanan Stok) mewakili tahap perkhidmatan dan tahap prestasi yang berbeza untuk sumber Azure. Setiap SKU menawarkan:
+
+- **Ciri prestasi** (CPU, memori, kelajuan)
+- **Ketersediaan ciri** (pilihan skala, tahap SLA)
+- **Model harga** (berdasarkan penggunaan, kapasiti berrezab)
+- **Ketersediaan wilayah** (tidak semua SKU tersedia di semua wilayah)
 
 ### Faktor Utama dalam Pemilihan SKU
 
 1. **Keperluan Beban Kerja**
    - Corak trafik/beban yang dijangka
    - Keperluan prestasi (CPU, memori, I/O)
-   - Keperluan storan dan corak capaian
+   - Keperluan storan dan corak akses
 
 2. **Jenis Persekitaran**
-   - Pembangunan/ujian vs. pengeluaran
-   - Keperluan kebolehcapaian
+   - Pembangunan/ujian berbanding produksi
+   - Keperluan ketersediaan
    - Keperluan keselamatan dan pematuhan
 
 3. **Kekangan Bajet**
-   - Kos awal vs. kos operasi
-   - Diskaun kapasiti ditempah
-   - Implikasi kos penskalaan automatik
+   - Kos awal berbanding kos operasi
+   - Diskaun kapasiti berrezab
+   - Implikasi kos auto-scaling
 
 4. **Unjuran Pertumbuhan**
-   - Keperluan kebolehskalaan
-   - Keperluan ciri masa hadapan
+   - Keperluan kebolehpambesaran
+   - Keperluan ciri masa depan
    - Kompleksiti migrasi
 
 ---
@@ -82,9 +84,9 @@ SKU (Stock Keeping Units) mewakili peringkat perkhidmatan dan tahap prestasi yan
 
 ### Persekitaran Pembangunan
 
-**Keutamaan**: Pengoptimuman kos, fungsi asas, penyediaan/pembatalan mudah
+**Keutamaan**: Pengoptimuman kos, fungsi asas, penyediaan/penghapusan mudah
 
-#### SKU yang Disyorkan
+#### SKU Disyorkan
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### Ciri-ciri
-- **App Service**: F1 (Percuma) atau B1 (Asas) untuk ujian ringkas
-- **Pangkalan Data**: Peringkat asas dengan sumber minimum
+- **Perkhidmatan Aplikasi**: F1 (Percuma) atau B1 (Asas) untuk ujian mudah
+- **Pangkalan Data**: Tahap asas dengan sumber minimum
 - **Storan**: Standard dengan redundansi tempatan sahaja
-- **Pengkomputeran**: Sumber berkongsi boleh diterima
+- **Pengkomputeran**: Sumber dikongsi boleh diterima
 - **Rangkaian**: Konfigurasi asas
 
-### Persekitaran Staging/Pengujian
+### Persekitaran Pemeriksaan/Ujian
 
-**Keutamaan**: Konfigurasi seperti pengeluaran, keseimbangan kos, keupayaan ujian prestasi
+**Keutamaan**: Konfigurasi menyerupai produksi, keseimbangan kos, keupayaan ujian prestasi
 
-#### SKU yang Disyorkan
+#### SKU Disyorkan
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -121,24 +123,24 @@ skus:
 ```
 
 #### Ciri-ciri
-- **Prestasi**: 70-80% kapasiti pengeluaran
-- **Ciri-ciri**: Kebanyakan ciri pengeluaran diaktifkan
+- **Prestasi**: 70-80% kapasiti produksi
+- **Ciri**: Kebanyakan ciri produksi diaktifkan
 - **Redundansi**: Beberapa redundansi geografi
-- **Penskalaan**: Penskalaan automatik terhad untuk ujian
+- **Penskalaan**: Auto-scaling terhad untuk ujian
 - **Pemantauan**: Tumpukan pemantauan penuh
 
-### Persekitaran Pengeluaran
+### Persekitaran Produksi
 
-**Keutamaan**: Prestasi, kebolehcapaian, keselamatan, pematuhan, kebolehskalaan
+**Keutamaan**: Prestasi, ketersediaan, keselamatan, pematuhan, kebolehpambesaran
 
-#### SKU yang Disyorkan
+#### SKU Disyorkan
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
@@ -146,30 +148,30 @@ skus:
 
 #### Ciri-ciri
 - **Ketersediaan tinggi**: Keperluan SLA 99.9%+
-- **Prestasi**: Sumber berdedikasi, throughput tinggi
+- **Prestasi**: Sumber berdedikasi, kelajuan tinggi
 - **Keselamatan**: Ciri keselamatan premium
-- **Penskalaan**: Keupayaan penskalaan automatik penuh
-- **Pemantauan**: Pemerhatian menyeluruh
+- **Penskalaan**: Keupayaan auto-scaling penuh
+- **Pemantauan**: Kebolehpantauan menyeluruh
 
 ---
 
-## Garis Panduan Spesifik Perkhidmatan
+## Garis Panduan Khusus Perkhidmatan
 
 ### Azure App Service
 
 #### Matriks Keputusan SKU
 
-| Use Case | Recommended SKU | Rationale |
-|----------|----------------|-----------|
-| Development/Testing | F1 (Free) or B1 (Basic) | Cost-effective, sufficient for testing |
-| Small production apps | S1 (Standard) | Custom domains, SSL, auto-scaling |
-| Medium production apps | P1V3 (Premium V3) | Better performance, more features |
-| High-traffic apps | P2V3 or P3V3 | Dedicated resources, high performance |
-| Mission-critical apps | I1V2 (Isolated V2) | Network isolation, dedicated hardware |
+| Kes Penggunaan | SKU Disyorkan | Alasannya |
+|--------------|---------------|-------------|
+| Pembangunan/Ujian | F1 (Percuma) atau B1 (Asas) | Berkesan kos, mencukupi untuk ujian |
+| Aplikasi produksi kecil | S1 (Standard) | Domain tersuai, SSL, auto-scaling |
+| Aplikasi produksi sederhana | P1V3 (Premium V3) | Prestasi lebih baik, lebih banyak ciri |
+| Aplikasi trafik tinggi | P2V3 atau P3V3 | Sumber berdedikasi, prestasi tinggi |
+| Aplikasi kritikal misi | I1V2 (Isolated V2) | Pengasingan rangkaian, perkakasan berdedikasi |
 
 #### Contoh Konfigurasi
 
-**Development**
+**Pembangunan**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-dev'
@@ -185,7 +187,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-**Production**
+**Produksi**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-prod'
@@ -203,17 +205,17 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### Rangka Kerja Pemilihan SKU
+#### Kerangka Pemilihan SKU
 
-1. **Berasaskan DTU (Database Transaction Units)**
-   - **Basic**: 5 DTU - Pembangunan/ujian
-   - **Standard**: S0-S12 (10-3000 DTU) - Tujuan am
+1. **Berasaskan DTU (Unit Transaksi Pangkalan Data)**
+   - **Asas**: 5 DTU - Pembangunan/ujian
+   - **Standard**: S0-S12 (10-3000 DTU) - Tujuan umum
    - **Premium**: P1-P15 (125-4000 DTU) - Kritikal prestasi
 
-2. **Berasaskan vCore** (Disyorkan untuk pengeluaran)
-   - **General Purpose**: Imbangan pengkomputeran dan storan
-   - **Business Critical**: Latensi rendah, IOPS tinggi
-   - **Hyperscale**: Storan sangat boleh diskala (sehingga 100TB)
+2. **Berasaskan vCore** (Disyorkan untuk produksi)
+   - **Tujuan Umum**: Imbangan pengkomputeran dan storan
+   - **Kritikal Perniagaan**: Latensi rendah, IOPS tinggi
+   - **Hyperscale**: Storan sangat skala; sahkan had saiz dan sokongan wilayah terkini
 
 #### Contoh Konfigurasi
 
@@ -255,18 +257,18 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 #### Jenis Persekitaran
 
 1. **Berasaskan Penggunaan**
-   - Harga bayar ikut penggunaan
+   - Harga bayar ikut guna
    - Sesuai untuk pembangunan dan beban kerja berubah-ubah
-   - Infrastruktur berkongsi
+   - Infrastruktur dikongsi
 
-2. **Didedikasikan (Profil Beban Kerja)**
+2. **Berdedikasi (Profil Beban Kerja)**
    - Sumber pengkomputeran berdedikasi
    - Prestasi boleh diramal
-   - Lebih baik untuk beban kerja pengeluaran
+   - Lebih sesuai untuk beban kerja produksi
 
 #### Contoh Konfigurasi
 
-**Pembangunan (Consumption)**
+**Pembangunan (Penggunaan)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Pengeluaran (Dedicated)**
+**Produksi (Berdedikasi)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,31 +317,33 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+Redundansi zon juga memerlukan infrastruktur wilayah disokong dan konfigurasi VNet/subnet yang sesuai, tidak disertakan di sini. Contoh ini memperuntukkan tiga nod berdedikasi; konfigurasi sekurang-kurangnya dua replika aplikasi untuk pengagihan silang-zon dan saiz kedua-dua replika serta nod untuk kegagalan zon. Lihat [panduan kebolehpercayaan Container Apps](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). Untuk meletakkan aplikasi pada profil ini, tetapkan `workloadProfileName: 'production-profile'`; hanya mencipta profil tidak mengalihkan aplikasi kepadanya.
+
 ### Azure Cosmos DB
 
-#### Model Throughput
+#### Model Kelajuan
 
-1. **Provisioned Throughput Manual**
+1. **Kelajuan Berreser Manual**
    - Prestasi boleh diramal
-   - Diskaun kapasiti ditempah
-   - Terbaik untuk beban kerja stabil
+   - Diskaun kapasiti berrezab
+   - Sesuai untuk beban kerja stabil
 
-2. **Autoscale Provisioned Throughput**
-   - Penskalaan automatik berdasarkan penggunaan
-   - Bayar untuk apa yang anda gunakan (dengan minimum)
-   - Baik untuk beban kerja berubah-ubah
+2. **Kelajuan Berreser Automatik**
+   - Skala automatik berdasarkan penggunaan
+   - Bayar mengikut guna (dengan minimum)
+   - Sesuai untuk beban kerja berubah-ubah
 
 3. **Serverless**
-   - Bayar ikut permintaan
-   - Tiada throughput yang diprovisikan
-   - Ideal untuk pembangunan dan beban kerja berselang
+   - Bayar-per-permintaan
+   - Tiada kelajuan berreser
+   - Ideal untuk pembangunan dan beban kerja berkala
 
 #### Contoh SKU
 
@@ -396,18 +400,18 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 }
 ```
 
-### Azure Storage Account
+### Akaun Storan Azure
 
 #### Jenis Akaun Storan
 
 1. **Standard_LRS** - Pembangunan, data tidak kritikal
-2. **Standard_GRS** - Pengeluaran, memerlukan geo-redundansi
-3. **Premium_LRS** - Aplikasi prestasi tinggi
+2. **Standard_GRS** - Produksi, memerlukan geo-redundansi
+3. **Premium_LRS** - Aplikasi berprestasi tinggi
 4. **Premium_ZRS** - Ketersediaan tinggi dengan redundansi zon
 
-#### Peringkat Prestasi
+#### Tahap Prestasi
 
-- **Standard**: Tujuan am, kos efektif
+- **Standard**: Tujuan umum, berkesan kos
 - **Premium**: Prestasi tinggi, senario latensi rendah
 
 ```bicep
@@ -451,19 +455,22 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## Strategi Pengoptimuman Kos
 
-### 1. Tempahan Kapasiti
+### 1. Kapasiti Berrezab
 
-Tempah sumber untuk 1-3 tahun untuk diskaun ketara:
+Tempah sumber untuk 1-3 tahun bagi diskaun yang ketara:
 
 ```bash
-# Semak pilihan tempahan
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. Penentuan Saiz Sesuai
+Tawaran reservasi dan jenis sumber yang layak berbeza; periksa katalog dan terma pembelian daripada menganggap setiap perkhidmatan/SKU menyokong reservasi.
 
-Mula dengan SKU yang lebih kecil dan skala naik berdasarkan penggunaan sebenar:
+### 2. Pemadanan Saiz yang Betul
+
+Mulakan dengan SKU lebih kecil dan tingkatkan berdasarkan penggunaan sebenar:
 
 ```yaml
 # Progressive scaling approach
@@ -477,7 +484,7 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. Konfigurasi Penskalaan Automatik
+### 3. Konfigurasi Auto-Scaling
 
 Laksanakan penskalaan pintar untuk mengoptimumkan kos:
 
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -536,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. Penskalaan Berjadual
+### 4. Penjadualan Penskalaan
 
-Skala turun semasa waktu tidak puncak:
+Skala turun pada waktu tidak sibuk:
 
 ```json
 {
@@ -605,14 +614,16 @@ performance_requirements:
 
 ### Ujian Beban
 
-Uji pelbagai SKU untuk mengesahkan prestasi:
+Uji SKU yang berbeza untuk mengesahkan prestasi:
 
 ```bash
-# Perkhidmatan Ujian Beban Azure
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
 ### Pemantauan dan Pengoptimuman
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -648,31 +660,31 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ### Rujukan Pantas SKU App Service
 
-| SKU | Tier | vCPU | RAM | Storage | Price Range | Use Case |
-|-----|------|------|-----|---------|-------------|----------|
-| F1 | Percuma | Berkongsi | 1GB | 1GB | Percuma | Pembangunan |
+| SKU | Tahap | vCPU | RAM | Storan | Julat Harga | Kes Penggunaan |
+|-----|-------|------|-----|--------|-------------|----------------|
+| F1 | Percuma | Dikongsi | 1GB | 1GB | Percuma | Pembangunan |
 | B1 | Asas | 1 | 1.75GB | 10GB | $ | Aplikasi kecil |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Pengeluaran |
+| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Produksi |
 | P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Prestasi tinggi |
 | I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Perusahaan |
 
 ### Rujukan Pantas SKU Pangkalan Data SQL
 
-| SKU | Tier | DTU/vCore | Storage | Price Range | Use Case |
-|-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Pembangunan |
-| S2 | Standard | 50 DTU | 250GB | $$ | Pengeluaran kecil |
+| SKU | Tahap | DTU/vCore | Storan | Julat Harga | Kes Penggunaan |
+|-----|-------|-----------|--------|-------------|----------------|
+| Asas | Asas | 5 DTU | 2GB | $ | Pembangunan |
+| S2 | Standard | 50 DTU | 250GB | $$ | Produksi kecil |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Prestasi tinggi |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Seimbang |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Misi kritikal |
+| GP_Gen5_4 | Tujuan Umum | 4 vCore | 4TB | $$$ | Seimbang |
+| BC_Gen5_8 | Kritikal Perniagaan | 8 vCore | 4TB | $$$$ | Kritikal misi |
 
 ### Rujukan Pantas SKU Container Apps
 
-| Model | Pricing | CPU/Memory | Use Case |
-|-------|---------|------------|----------|
-| Consumption | Bayar ikut penggunaan | 0.25-2 vCPU | Pembangunan, beban berubah-ubah |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | Pengeluaran |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | Prestasi tinggi |
+| Model | Harga | CPU/Memori | Kes Penggunaan |
+|-------|-------|------------|----------------|
+| Penggunaan | Bayar-per-guna | Gabungan CPU/memori disokong bergantung pada persekitaran/profil | Pembangunan atau produksi, beban berubah-ubah |
+| Berdedikasi D4 | Pengebilan nod berdedikasi | 4 vCPU, 16GiB per nod | Beban berterusan/kebutuhan pengasingan |
+| Berdedikasi D8 | Pengebilan nod berdedikasi | 8 vCPU, 32GiB per nod | Beban berterusan lebih tinggi |
 
 ---
 
@@ -682,7 +694,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ```bash
 #!/bin/bash
-# Semak ketersediaan SKU di rantau sasaran
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# Penggunaan
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
 ### Skrip Anggaran Kos
 
+**Pseudokod sahaja:** `Get-ResourceCost` di bawah adalah fungsi spesifik projek yang perlu anda laksanakan menggunakan harga dan anggaran penggunaan wilayah/kontrak terkini. Ia bukan cmdlet PowerShell atau Azure.
+
 ```powershell
-# Skrip PowerShell untuk anggaran kos
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Gunakan Azure Pricing API atau kalkulator
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# Penggunaan
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -749,6 +764,8 @@ Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
 ### Pengesahan Prestasi
+
+YAML berikut adalah lakaran keperluan, **bukan** skema input Azure Load Testing, JMeter, Locust, atau k6. Terjemahkan ia ke konfigurasi sebenar alat pilihan anda sebelum menggunakan arahan load-test di atas.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -785,41 +802,41 @@ test_configuration:
 
 ## Ringkasan Amalan Terbaik
 
-### Perkara Yang Perlu
+### Perkara Yang Perlu Dilakukan
 
-1. **Mula kecil dan skala naik** berdasarkan penggunaan sebenar
+1. **Mula kecil dan tingkatkan** berdasarkan penggunaan sebenar
 2. **Gunakan SKU berbeza untuk persekitaran berbeza**
 3. **Pantau prestasi dan kos secara berterusan**
-4. **Manfaatkan kapasiti ditempah untuk beban kerja pengeluaran**
-5. **Laksanakan penskalaan automatik di mana sesuai**
-6. **Uji prestasi dengan beban kerja yang realistik**
-7. **Rancang untuk pertumbuhan tetapi elakkan over-provisioning**
-8. **Gunakan peringkat percuma untuk pembangunan apabila boleh**
+4. **Manfaatkan kapasiti berrezab untuk beban kerja produksi**
+5. **Laksanakan auto-scaling jika sesuai**
+6. **Uji prestasi dengan beban kerja realistik**
+7. **Rancang untuk pertumbuhan tetapi elakkan pemebasan berlebihan**
+8. **Gunakan tahap percuma untuk pembangunan apabila mungkin**
 
-### Perkara Yang Tidak Perlu
+### Perkara Yang Tidak Perlu Dilakukan
 
-1. **Jangan gunakan SKU pengeluaran untuk pembangunan**
-2. **Jangan abaikan ketersediaan SKU serantau**
-3. **Jangan lupa tentang kos pemindahan data**
-4. **Jangan over-provision tanpa justifikasi**
-5. **Jangan abaikan impak pergantungan**
-6. **Jangan tetapkan had penskalaan automatik terlalu tinggi**
-7. **Jangan lupa tentang keperluan pematuhan**
-8. **Jangan membuat keputusan hanya berdasarkan harga**
+1. **Jangan gunakan SKU produksi untuk pembangunan**
+2. **Jangan abaikan ketersediaan SKU wilayah**
+3. **Jangan lupa kos pemindahan data**
+4. **Jangan terlalu berlebihan tanpa justifikasi**
+5. **Jangan abaikan kesan pergantungan**
+6. **Jangan tetapkan had auto-scaling terlalu tinggi**
+7. **Jangan lupa keperluan pematuhan**
+8. **Jangan buat keputusan berasaskan harga sahaja**
 
 ---
 
-**Petua Pro**: Gunakan Azure Cost Management dan Advisor untuk mendapatkan cadangan peribadi bagi mengoptimumkan pemilihan SKU anda berdasarkan corak penggunaan sebenar.
+**Petua Pakar**: Gunakan Pengurusan Kos Azure dan Advisor untuk mendapatkan cadangan peribadi bagi mengoptimumkan pemilihan SKU anda berdasarkan corak penggunaan sebenar.
 
 ---
 
 **Navigasi**
-- **Pelajaran Sebelumnya**: [Capacity Planning](capacity-planning.md)
-- **Pelajaran Seterusnya**: [Preflight Checks](preflight-checks.md)
+- **Pelajaran Sebelumnya**: [Perancangan Kapasiti](capacity-planning.md)
+- **Pelajaran Seterusnya**: [Pemeriksaan Pra-Penerbangan](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha mencapai ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi ralat atau ketidakakuratan. Dokumen asal dalam bahasa aslinya harus dianggap sebagai sumber rujukan yang sah. Bagi maklumat yang kritikal, terjemahan profesional oleh penterjemah manusia adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsiran yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

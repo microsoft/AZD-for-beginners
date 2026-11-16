@@ -1,21 +1,21 @@
-# Sura ya 4: Miundombinu kama Kanuni & Utekelezaji
+# Sura ya 4: Miundombinu kama Msimbo & Utekelezaji
 
-**📚 Kozi**: [AZD Kwa Anuani](../../README.md) | **⏱️ Muda**: Saa 1-1.5 | **⭐ Ugumu**: Wastani
+**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: masaa 2-3 ya kusoma; ruhusu muda wa ziada kwa mazoezi ya utekelezaji | **⭐ Ugumu**: Kiwiliwili
 
 ---
 
 ## Muhtasari
 
-Sura hii inahusu mifumo ya Miundombinu kama Kanuni (IaC) kwa matumizi ya kiolezo cha Bicep, upangaji rasilimali, na mikakati ya utekelezaji kwa kutumia Azure Developer CLI.
+Sura hii inashughulikia mifumo ya Miundombinu kama Msimbo (IaC) kwa kutumia templeti za Bicep, utayarishaji wa rasilimali, na mikakati ya utekelezaji kwa kutumia Azure Developer CLI.
 
-> Imethibitishwa dhidi ya `azd 1.27.1` mwezi Julai 2026.
+> Lengo la ukaguzi wa amri na usanidi: `azd 1.37.2` (Novemba 2026). Utoaji wa Azure wa moja kwa moja haukukamilishwa wakati wa ukaguzi.
 
 ## Malengo ya Kujifunza
 
-Kwa kumaliza sura hii, utakuwa na uwezo wa:
-- Kuelewa muundo na sarufi ya kiolezo cha Bicep
-- Kuandaa rasilimali za Azure kwa kutumia `azd provision`
-- Kuweka programu moja kwa moja kwa kutumia `azd deploy`
+Kwa kumaliza sura hii, utajua:
+- Kuelewa muundo na sintaksia ya templeti za Bicep
+- Kutayarisha rasilimali za Azure kwa kutumia `azd provision`
+- Kuweka programu kwenye mtandao kwa kutumia `azd deploy`
 - Kutekeleza mikakati ya utekelezaji ya blue-green na rolling
 
 ---
@@ -24,28 +24,31 @@ Kwa kumaliza sura hii, utakuwa na uwezo wa:
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Kuandaa Rasilimali](provisioning.md) | Usimamizi wa rasilimali za Azure kwa kutumia AZD | Dakika 45 |
-| 2 | [Mwongozo wa Utekelezaji](deployment-guide.md) | Mikakati ya utekelezaji wa programu | Dakika 45 |
-| 3 | [Kuandika Kiolezo Chako](custom-templates.md) | Jenga na chapisha violezo vinavyoweza kutumika tena vya azd | Dakika 30 |
+| 1 | [Utayarishaji wa Rasilimali](provisioning.md) | Usimamizi wa rasilimali za Azure kwa kutumia AZD | Dakika 45 |
+| 2 | [Mwongozo wa Utekelezaji](deployment-guide.md) | Mikakati ya kuweka programu mtandaoni | Dakika 45 |
+| 3 | [Kuunda Templeti Yako](custom-templates.md) | Jenga na chapisha templeti za azd zinazoweza kutumika tena | Dakika 30 |
 
 ---
 
-## 🚀 Anza Haraka
+## 🚀 Mwanzo wa Haraka
 
 ```bash
-# Anzisha kutoka kwa kiolezo
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Onyesha awali kile kitakachoundwa
+# Preview what will be created
 azd provision --preview
 
-# Toa huduma ya miundombinu pekee
+# Provision infrastructure only
 azd provision
 
-# Tekeleza msimbo pekee
+# Deploy code only
 azd deploy
 
-# Au vyote viwili pamoja
+# Or both together
 azd up
 ```
 
@@ -80,20 +83,20 @@ my-project/
 
 ---
 
-## 🔗 Urambazaji
+## 🔗 Uvukeji
 
 | Mwelekeo | Sura |
 |-----------|---------|
-| **Iliyotangulia** | [Sura 3: Usanidi](../chapter-03-configuration/README.md) |
-| **Inayofuata** | [Sura 5: Suluhisho za Wakala Kadhaa](../chapter-05-multi-agent/README.md) |
+| **Iliyopita** | [Sura ya 3: Usanidi](../chapter-03-configuration/README.md) |
+| **Inayofuata** | [Sura ya 5: Suluhisho za Wakala Wengi](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Rasilimali Zinazohusiana
 
-- [Uhakiki wa Kabla ya Utekelezaji](../chapter-06-pre-deployment/README.md)
-- [Mifano ya Programu ya Kontena](../../examples/container-app/README.md)
-- [Mfano wa Programu ya Hifadhidata](../../examples/database-app/README.md)
+- [Ukaguzi Kabla ya Utekelezaji](../chapter-06-pre-deployment/README.md)
+- [Mifano ya Programu za Kontena](../../examples/container-app/README.md)
+- [Mfano wa Programu ya Database](../../examples/database-app/README.md)
 
 ---
 

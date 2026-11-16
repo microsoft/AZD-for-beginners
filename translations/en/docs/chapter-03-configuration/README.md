@@ -1,6 +1,6 @@
 # Chapter 3: Configuration & Authentication
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 45-60 minutes | **⭐ Complexity**: Intermediate
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 90-150 minutes including integration practice | **⭐ Complexity**: Intermediate
 
 ---
 
@@ -8,7 +8,7 @@
 
 This chapter covers environment configuration, authentication patterns, and security best practices for Azure Developer CLI deployments.
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command and configuration review target: `azd 1.37.2` (November 2026). Live Azure provisioning was not run during review.
 
 ## Learning Objectives
 
@@ -31,6 +31,8 @@ By completing this chapter, you will:
 
 ## 🚀 Quick Start
 
+Run from the root of an **already initialized azd application**, not the course repository. Use unused environment names if these already exist.
+
 ```bash
 # Create multiple environments
 azd env new dev
@@ -48,27 +50,25 @@ azd env set SKU_NAME P1v3
 azd env get-values
 ```
 
+`SKU_NAME` is illustrative: it affects infrastructure only if your template explicitly consumes it. Ordinary `azd env set` values are saved locally in plaintext; they are not secure secret storage.
+
 ---
 
 ## 🔧 Configuration Hierarchy
 
-AZD applies settings in this order (later overrides earlier):
-
-1. **Default values** (built into templates)
-2. **azure.yaml** (project configuration)
-3. **Environment variables** (`azd env set`)
-4. **Command-line flags** (`--location eastus`)
+Keep three different configuration surfaces separate: global preferences (`azd config`), project structure (`azure.yaml`), and per-environment values (`azd env`). Flags override only the settings they actually support; there is no universal overlay of arbitrary environment variables onto `azure.yaml` or Bicep.
 
 ---
 
 ## 🔐 Security Best Practices
 
 ```bash
-# Use managed identity (recommended)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
 # Check AZD authentication status
-azd auth status
+azd auth login --check-status
 
 # Optional: verify Azure CLI context if you plan to run az commands
 az account show

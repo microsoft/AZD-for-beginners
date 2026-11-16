@@ -1,23 +1,23 @@
-# Hoofdstuk 6: Pre-Deployment Planning & Validatie
+# Hoofdstuk 6: Planning & Validatie Voorafgaand aan Implementatie
 
-**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 1 uur | **⭐ Complexiteit**: Gemiddeld
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 2-4 uur lezen; extra tijd voor aangepaste labs | **⭐ Complexiteit**: Gemiddeld–Geavanceerd
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk behandelt essentiële plannings- en validatiestappen vóór het implementeren van je applicatie. Leer kostbare fouten te vermijden met goede capaciteitsplanning, SKU-selectie en preflight checks.
+Dit hoofdstuk behandelt essentiële planning en validatiestappen vóór het implementeren van je applicatie. Leer kostbare fouten te voorkomen met correcte capaciteitsplanning, SKU-selectie en preflight-controles.
 
-> Gevalideerd tegen `azd 1.27.1` in juli 2026.
+> Commandoregelinstructies beoordeeld aan de hand van de vrijgegeven `azd 1.37.2` referentie. Cloudimplementaties zijn niet uitgevoerd. De langere lessen bevatten illustratieve fragmenten, geen complete lokale implementatieprojecten.
 
 ## Leerdoelen
 
-Door dit hoofdstuk te voltooien, zul je:
-- Preflight checks uitvoeren vóór implementatie
-- Capaciteitsplanning maken en resourcevereisten inschatten
-- Passende SKU's selecteren voor kostenoptimalisatie
+Door dit hoofdstuk te voltooien zul je:
+- Preflight-controles uitvoeren vóór implementatie
+- Capaciteit plannen en resourcevereisten schatten
+- Geschikte SKUs selecteren voor kostenoptimalisatie
 - Application Insights configureren voor monitoring
-- Patronen voor teamcoördinatie begrijpen
+- Inzicht krijgen in multi-agent coördinatiepatronen en hun implementatievereisten
 
 ---
 
@@ -25,39 +25,39 @@ Door dit hoofdstuk te voltooien, zul je:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Configuratie valideren vóór implementatie | 15 min |
-| 2 | [Capaciteitsplanning](capacity-planning.md) | Resourcevereisten inschatten | 20 min |
-| 3 | [SKU Selectie](sku-selection.md) | Passende prijsniveaus kiezen | 15 min |
+| 1 | [Preflight-controles](preflight-checks.md) | Validatie van configuratie vóór implementatie | 15 min |
+| 2 | [Capaciteitsplanning](capacity-planning.md) | Resourcevereisten schatten | 20 min |
+| 3 | [SKU-selectie](sku-selection.md) | Keuze van passende prijsklassen | 15 min |
 | 4 | [Application Insights](application-insights.md) | Monitoring configureren | 20 min |
-| 5 | [Coördinatiepatronen](coordination-patterns.md) | Team deployment workflows | 15 min |
+| 5 | [Coördinatiepatronen](coordination-patterns.md) | Geavanceerd ontwerp voor multi-agent orkestratie | 60-75 min |
 
 ---
 
 ## 🚀 Snelstart
 
 ```bash
-# Controleer abonnementquota
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Voorbeeld van implementatie (geen bronnen aangemaakt)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Valideer Bicep-syntaxis
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Controleer omgevingsconfiguratie
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Pre-implementatie Checklist
+## ☑️ Controlelijst Voorafgaand aan Implementatie
 
 ### Voor `azd provision`
 
 - [ ] Quotum geverifieerd voor regio
-- [ ] SKU's passend geselecteerd
-- [ ] Kostenschatting beoordeeld
+- [ ] SKUs passend geselecteerd
+- [ ] Kostenraming beoordeeld
 - [ ] Naamgevingsconventie consistent
 - [ ] Beveiliging/RBAC geconfigureerd
 
@@ -65,19 +65,19 @@ azd env get-values
 
 - [ ] Omgevingsvariabelen ingesteld
 - [ ] Geheimen in Key Vault
-- [ ] Connectiestrings geverifieerd
+- [ ] Verbindingsreeksen geverifieerd
 - [ ] Health checks geconfigureerd
 
 ---
 
-## 💰 SKU Selectiegids
+## 💰 SKU-selectiegids
 
-| Werkbelasting | Ontwikkeling | Productie |
+| Werklast | Ontwikkeling | Productie |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Consumption | Consumption of toegewijde werklastprofiel, afhankelijk van gemeten belasting |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Azure OpenAI modellen | Ondersteunde pay-as-you-go-implementatietype | Pay-as-you-go of voorzien van doorvoer; afhankelijk van model/regio |
+| AI Search | Gratis/Basis binnen limieten | Basis- of Standaardlaag aangepast voor index, replica’s en querybelasting |
 
 ---
 
@@ -94,7 +94,7 @@ azd env get-values
 
 - [Configuratiehandleiding](../chapter-03-configuration/configuration.md)
 - [Implementatiehandleiding](../chapter-04-infrastructure/deployment-guide.md)
-- [Veelvoorkomende Problemen](../chapter-07-troubleshooting/common-issues.md)
+- [Veelvoorkomende problemen](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

@@ -1,21 +1,21 @@
 # Kapittel 1: Grunnlag & Rask Start
 
-**📚 Kurs**: [AZD For Nybegynnere](../../README.md) | **⏱️ Varighet**: 30-45 minutter | **⭐ Vanskelighetsgrad**: Nybegynner
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 75-120 minutter inkludert første utrulling; ekstra øvelser tar lengre tid | **⭐ Vanskelighetsgrad**: Nybegynner
 
 ---
 
 ## Oversikt
 
-Dette kapittelet introduserer Azure Developer CLI (azd) grunnleggende. Du vil lære kjernekonsepter, installere verktøyene og distribuere din første applikasjon til Azure.
+Dette kapittelet introduserer grunnleggende om Azure Developer CLI (azd). Du vil lære kjernebegreper, installere verktøyene og distribuere din første applikasjon til Azure.
 
-> Validert med `azd 1.27.1` i juli 2026.
+> Kommando- og konfigurasjonsgjennomgang mål: `azd 1.37.2` (November 2026). Live Azure-provisjonering ble ikke kjørt under gjennomgangen.
 
 ## Læringsmål
 
-Ved å fullføre dette kapittelet vil du:
+Når du har fullført dette kapittelet, vil du:
 - Forstå hva Azure Developer CLI er og hvordan det skiller seg fra Azure CLI
 - Installere og konfigurere AZD på din plattform
-- Distribuere din første applikasjon til Azure med `azd up`
+- Deployere din første applikasjon til Azure med `azd up`
 - Rydde opp ressurser med `azd down`
 
 ---
@@ -24,17 +24,17 @@ Ved å fullføre dette kapittelet vil du:
 
 | # | Leksjon | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [AZD Grunnleggende](azd-basics.md) | Kjernetemaer, terminologi og prosjektstruktur | 15 min |
-| 2 | [Installasjon & Oppsett](installation.md) | Plattformspesifikke installasjonsveiledninger | 10 min |
+| 1 | [AZD Grunnleggende](azd-basics.md) | Kjernebegreper, terminologi og prosjektstruktur | 15 min |
+| 2 | [Installasjon & Oppsett](installation.md) | Plattformspesifikke installasjonsguider | 10 min |
 | 3 | [Ditt Første Prosjekt](first-project.md) | Praktisk: Distribuer en webapp til Azure | 20 min |
-| 4 | [Ta med egen app](bring-your-own-app.md) | Legg til azd i et eksisterende prosjekt du allerede har | 15 min |
-| 5 | [Utviklingscontainere & Codespaces](dev-containers.md) | Reproduserbare azd-miljøer med utviklingscontainere | 15 min |
+| 4 | [Bruk Din Egen App](bring-your-own-app.md) | Legg til azd i et eksisterende prosjekt du allerede har | 15 min |
+| 5 | [Dev Containers & Codespaces](dev-containers.md) | Reproduserbare azd-miljøer med dev containers | 15 min |
 
 ---
 
-## ✅ Start her: Valider oppsettet ditt
+## ✅ Start Her: Valider Oppsettet Ditt
 
-Før du begynner, bekreft at din lokale maskin er klar for kapittel 1-mal:
+Før du begynner, bekreft at din lokale maskin er klar for kapittel 1-malen:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Før du begynner, bekreft at din lokale maskin er klar for kapittel 1-mal:
 bash ./validate-setup.sh
 ```
 
-Hvis skriptet rapporterer manglende verktøy, fiks disse først og fortsett deretter med kapitlet.
+Hvis skriptet melder om manglende verktøy, fiks disse først og fortsett deretter med kapittelet.
 
 ---
 
 ## 🚀 Rask Start
 
 ```bash
-# Sjekk installasjon
+# Check installation
 azd version
 
-# Autentiser for AZD
-# Valgfritt: az login hvis du planlegger å kjøre Azure CLI-kommandoer direkte
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Distribuer din første app
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Rydd opp når du er ferdig
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,14 +74,14 @@ azd down --force --purge
 
 ## ✅ Suksesskriterier
 
-Etter å ha fullført dette kapittelet, bør du kunne:
+Etter å ha fullført dette kapittelet, skal du kunne:
 
 ```bash
-azd version              # Viser installert versjon
-azd init --template todo-nodejs-mongo  # Initialiserer prosjekt
-azd up                   # Distribuerer til Azure
-azd show                 # Viser URL for kjørende app
-azd down --force --purge # Rydder opp ressurser
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -88,15 +90,15 @@ azd down --force --purge # Rydder opp ressurser
 
 | Retning | Kapittel |
 |-----------|---------|
-| **Neste** | [Kapittel 2: AI-Første Utvikling](../chapter-02-ai-development/README.md) |
+| **Neste** | [Kapittel 2: AI-Først Utvikling](../chapter-02-ai-development/README.md) |
 | **Hopp til** | [Kapittel 3: Konfigurasjon](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Relaterte Ressurser
 
-- [Kommando-hurtigreferanse](../../resources/cheat-sheet.md)
-- [Ofte Stilte Spørsmål](../../resources/faq.md)
+- [Kommando Hurtigreferanse](../../resources/cheat-sheet.md)
+- [FAQ](../../resources/faq.md)
 - [Ordlisten](../../resources/glossary.md)
 
 ---

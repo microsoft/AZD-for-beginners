@@ -1,43 +1,45 @@
-# Provisioning Azure Resources with AZD
+# AZD ile Azure Kaynaklarının Sağlanması
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 4 - Infrastructure as Code & Deployment
-- **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
-- **➡️ Next Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
-- **🔧 Related**: [Chapter 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [Başlangıç için AZD](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 4 - Kod Olarak Altyapı & Dağıtım
+- **⬅️ Önceki**: [Dağıtım Kılavuzu](deployment-guide.md)
+- **➡️ Sonraki Bölüm**: [Bölüm 5: Çoklu Ajanlı AI Çözümleri](../../examples/retail-scenario.md)
+- **🔧 İlgili**: [Bölüm 6: Dağıtım Öncesi Doğrulama](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Giriş
 
-Bu kapsamlı rehber, Azure Developer CLI kullanarak Azure kaynaklarını sağlama ve yönetme hakkında bilmeniz gereken her şeyi kapsar. Bicep, ARM şablonları, Terraform ve Pulumi kullanarak temel kaynak oluşturma işlemlerinden gelişmiş kurumsal düzey altyapı mimarilerine kadar Infrastructure as Code (IaC) desenlerini uygulamayı öğrenin.
+Bu kılavuz, Azure Developer CLI'nın yerleşik Bicep ve Terraform sağlayıcıları kullanılarak Azure kaynaklarının sağlanması ve yönetimini kapsar.
+
+> `azd 1.37.2` ile incelendi (Kasım 2026). Aksi belirtilmedikçe, Bicep, Terraform ve betik örnekleri **tam şablon değil, açıklayıcı parçalar**dır. Bunları, referans verilen parametreleri, modülleri, kimlikleri, ağ yapılandırmasını ve uygulama kodunu sağlayan bir projeye entegre edin. Bu incelemede Azure sağlama işlemi gerçekleştirilmedi.
 
 ## Öğrenme Hedefleri
 
-Bu rehberi tamamladıktan sonra:
-- Infrastructure as Code ilkelerini ve Azure kaynak sağlama konusunu ustalıkla öğreneceksiniz
-- Azure Developer CLI tarafından desteklenen birden çok IaC sağlayıcısını anlayacaksınız
-- Yaygın uygulama mimarileri için Bicep şablonları tasarlayıp uygulayacaksınız
-- Kaynak parametrelerini, değişkenleri ve ortama özgü ayarları yapılandıracaksınız
-- Ağ ve güvenlik dahil olmak üzere gelişmiş altyapı desenlerini uygulayacaksınız
-- Kaynak yaşam döngüsünü, güncellemeleri ve bağımlılık çözümlemesini yöneteceksiniz
+Bu kılavuzu tamamlayarak:
+- Altyapıyı Kod olarak yönetme ilkelerini ve Azure kaynak sağlama yöntemlerini öğreneceksiniz
+- Azure Developer CLI tarafından desteklenen birden fazla IaC sağlayıcısını anlayacaksınız
+- Yaygın uygulama mimarileri için Bicep şablonları tasarlayacak ve uygulayacaksınız
+- Kaynak parametreleri, değişkenleri ve ortama özel ayarları yapılandıracaksınız
+- Ağ ve güvenlik dahil gelişmiş altyapı desenlerini uygulayacaksınız
+- Kaynak yaşam döngüsünü, güncellemeleri ve bağımlılık çözümlemelerini yöneteceksiniz
 
-## Öğrenme Çıktıları
+## Öğrenme Sonuçları
 
-Tamamladıktan sonra yapabilecekleriniz:
-- Bicep ve ARM şablonları kullanarak Azure altyapısı tasarlayıp sağlayabileceksiniz
-- Doğru kaynak bağımlılıklarıyla karmaşık çok hizmetli mimarileri yapılandırabileceksiniz
-- Birden çok ortam ve yapılandırma için parametreleştirilmiş şablonları uygulayabileceksiniz
-- Altyapı sağlama sorunlarını giderip dağıtım hatalarını çözebileceksiniz
-- Altyapı tasarımında Azure Well-Architected Framework ilkelerini uygulayabileceksiniz
-- Altyapı güncellemelerini yönetip altyapı sürümleme stratejileri uygulayabileceksiniz
+Tamamlandığında şunları yapabileceksiniz:
+- Bicep ve ARM şablonları kullanarak Azure altyapısını tasarlamak ve sağlamak
+- Doğru kaynak bağımlılıklarıyla karmaşık çok servisli mimariler yapılandırmak
+- Birden fazla ortam ve yapılandırma için parametreli şablonlar uygulamak
+- Altyapı sağlama sorunlarını teşhis etmek ve dağıtım hatalarını gidermek
+- Azure İyi Mimarilik Çerçevesi ilkelerini altyapı tasarımına uygulamak
+- Altyapı güncellemelerini yönetmek ve altyapı sürümlendirme stratejileri uygulamak
 
 ## Altyapı Sağlama Genel Bakış
 
-Azure Developer CLI birden çok Infrastructure as Code (IaC) sağlayıcısını destekler:
-- **Bicep** (önerilen) - Azure'ın domain-özgü dili
-- **ARM Templates** - JSON tabanlı Azure Resource Manager şablonları
-- **Terraform** - Çok bulutlu altyapı aracı
-- **Pulumi** - Programlama dilleriyle modern altyapı olarak kod
+Azure Developer CLI birden fazla Altyapıyı Kod (IaC) sağlayıcısını destekler:
+- **Bicep** (önerilen) - Azure’ın alan özel dili
+- **ARM Şablonları** - Bicep ARM’e derlenir; ham ARM JSON ayrı yerleşik bir `infra.provider` değildir
+- **Terraform** - Çoklu bulut altyapı aracı
+- **Uzantı sağlayıcıları** - Ayrı kurulan sağlayıcı uzantısı ve belgelenmiş yapılandırması gerekir; herhangi bir sağlayıcı dizesinin desteklendiği varsayılmaz
 
 ## Azure Kaynaklarını Anlamak
 
@@ -50,17 +52,18 @@ Azure Account
 ```
 
 ### Uygulamalar için Yaygın Azure Hizmetleri
-- **Hesaplama**: App Service, Container Apps, Functions, Virtual Machines
-- **Depolama**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Ağ**: Virtual Network, Application Gateway, CDN
-- **Güvenlik**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
+- **Compute**: Uygulama Hizmeti, Konteyner Uygulamaları, Fonksiyonlar, Sanal Makineler
+- **Depolama**: Depolama Hesabı, Cosmos DB, SQL Veritabanı, PostgreSQL
+- **Ağ**: Sanal Ağ, Uygulama Geçidi, CDN
+- **Güvenlik**: Key Vault, Uygulama Insights, Log Analytics
+- **AI/ML**: Azure AI Hizmetleri, Azure OpenAI, Azure Makine Öğrenimi
 
 ## Bicep Altyapı Şablonları
 
 ### Temel Bicep Şablon Yapısı
 ```bicep
-// infra/main.bicep
+// infra/modules/web.bicep - resource-group-scoped module fragment
+targetScope = 'resourceGroup'
 @description('The name of the environment')
 param environmentName string
 
@@ -75,11 +78,6 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var tags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
-}
-
-// Resource Group (created automatically by azd)
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
-  name: '${applicationName}-${environmentName}-rg'
 }
 
 // App Service Plan
@@ -100,11 +98,14 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'web' })
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
@@ -128,7 +129,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Gelişmiş Bicep Desenleri
+Tam bir azd projesi için, bu modülü etiketlenmiş bir kaynak grubu oluşturan ve kapsamını geçiren abonelik kapsamlı `infra/main.bicep` içinden çağırın. `main.parameters.json` içinde `environmentName`/`location`'ü eşleştirin. `azd-service-name: web` etiketi kaynağı `services.web` ile ilişkilendirir; rastgele çıktı isimleri tek başına servis keşfini yapılandırmaz.
+
+### Gelişmiş Bicep Kalıpları
 
 #### Modüler Altyapı
 ```bicep
@@ -142,11 +145,14 @@ param appSettings array = []
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: name
   location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: planId
     siteConfig: {
       appSettings: appSettings
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
     }
     httpsOnly: true
@@ -202,11 +208,11 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 
 ## 🌐 azd ile Terraform Kullanımı
 
-Bicep azd'nin varsayılanıdır, ancak azd ayrıca **Terraform**'u da destekler—ekip zaten bunu standardize ettiyse veya çok bulutlu altyapıyı yönetiyorsanız faydalıdır. azd iş akışı (`azd up`, `azd provision`, `azd down`) aynıdır; yalnızca altyapı dili ve klasör düzeni değişir.
+Bicep azd'nin varsayılanıdır, ancak azd ayrıca **Terraform**'u da destekler — ekip zaten bunu standartlaştırmışsa veya çoklu bulut altyapısını yönetiyorsanız faydalıdır. azd iş akışı (`azd up`, `azd provision`, `azd down`) aynıdır; sadece altyapı dili ve klasör yapısı değişir.
 
 ### azd'ye Terraform kullanmasını söyleyin
 
-Terraform sağlayıcısına işaret eden `infra` bölümünü `azure.yaml` dosyasına ekleyin:
+Terraform sağlayıcısına işaret eden bir `infra` bölümünü `azure.yaml`'ye ekleyin:
 
 ```yaml
 # azure.yaml
@@ -223,7 +229,7 @@ services:
 
 ### Terraform klasör düzeni
 
-Terraform sağlayıcısı ile `infra/` klasörünüz Bicep yerine `.tf` dosyalarını kullanır:
+Terraform sağlayıcısı ile `infra/` klasörünüz Bicep yerine `.tf` dosyaları kullanır:
 
 ```
 infra/
@@ -234,7 +240,9 @@ infra/
 └── main.tfvars.json   # values azd injects per environment
 ```
 
-### Minimal bir `main.tf`
+### Bir `main.tf` parçası
+
+Bu sadece bir kaynak grubu ve plan oluşturur, deploy edilebilir bir servis değil. Ayrıca giriş değişkenlerini, uyumlu bir `azurerm` sağlayıcısını, web uygulamasını ve onun servis etiketi/kaynak adı eşlemesini de bildirmeniz gerekir.
 
 ```hcl
 # infra/main.tf
@@ -253,9 +261,9 @@ resource "azurerm_service_plan" "plan" {
 }
 ```
 
-### azd'nin Terraform çıktılarınızla nasıl bağlandığı
+### azd'nin Terraform çıktılarına bağlanması
 
-azd, uç noktalarınızı öğrenmek ve ortam değerlerini uygulamanıza geri bağlamak için Terraform **outputs**'u okur. Çıktı adları önemlidir—azd belirli adlara bakar:
+azd Terraform **çıktılarını** ortam değerlerine okur. Bu parça `azurerm_linux_web_app.web` tanımladığınızı varsayar; servis keşfi hala eşleşen bir kaynak adı veya `azd-service-name` etiketi ister:
 
 ```hcl
 # infra/outputs.tf
@@ -264,111 +272,48 @@ output "AZURE_LOCATION" {
 }
 
 output "SERVICE_WEB_ENDPOINT_URL" {
-  value = azurerm_linux_web_app.web.default_hostname
+  value = "https://${azurerm_linux_web_app.web.default_hostname}"
 }
 ```
 
-> **Önemli:** azd, her ortam için kaynakları izlemek amacıyla `azd-env-name` etiketini ve `AZURE_*` çıktıları kullanır. `azd down` her şeyi bulup kaldırabilsin diye resource group'unuzu her zaman `"azd-env-name" = var.environment_name` ile etiketleyin.
+> **Önemli:** azd, kaynakları her ortam için takip etmek için `azd-env-name` etiketi ve `AZURE_*` çıktılarını kullanır. Kaynak grubunuzu her zaman `"azd-env-name" = var.environment_name` ile etiketleyin ki `azd down` her şeyi bulup kaldırabilsin.
 
-### Terraform ile dağıtım
+### Terraform ile dağıtım yapma
 
-Komutlar Bicep ile tamamen aynıdır:
-
-```bash
-azd auth login
-azd env new dev
-azd provision --preview   # azd arka planda 'terraform plan' çalıştırır
-azd up                    # kaynak sağlama + dağıtım
-azd down --force          # Terraform tarafından yönetilen kaynakları yok eder
-```
-
-> **Önkoşul:** Terraform'un sisteminizde yüklü olması ve `PATH` üzerinde olması gerekir. azd Terraform *iş akışını* yönetir, ancak Terraform'u sizin için yüklemez. State için azd varsayılan olarak lokal state kullanır; ekipler için `provider.tf` içinde uzak bir backend (örneğin bir Azure Storage backend'i) yapılandırın.
-
-Tam, çalıştırılabilir Terraform tabanlı başlangıç projeleri için [Awesome AZD gallery](https://azure.github.io/awesome-azd/) sayfasını gezip Terraform filtresi uygulayın veya resmi [azd Terraform documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd) belgesine bakın.
-
-## 🧩 azd ile Pulumi Kullanımı
-
-Ekip altyapıyı DSL yerine genel amaçlı bir dilde (TypeScript, Python, Go veya C#) yazıyorsa, azd ayrıca **Pulumi**'yi de destekler. Terraform'da olduğu gibi `azd up` / `azd provision` / `azd down` iş akışı değişmez—tek fark altyapı aracının ve klasör düzeninin farklı olmasıdır.
-
-### azd'ye Pulumi kullanmasını söyleyin
-
-```yaml
-# azure.yaml
-name: my-pulumi-app
-infra:
-  provider: pulumi      # default is "bicep"
-  path: infra           # folder containing your Pulumi program
-services:
-  web:
-    project: ./src
-    language: js
-    host: containerapp
-```
-
-### Pulumi klasör düzeni
-
-```
-infra/
-├── Pulumi.yaml          # project definition
-├── Pulumi.dev.yaml      # stack config (one per environment)
-├── index.ts             # your resource program (or __main__.py, main.go, etc.)
-├── package.json         # dependencies (for TypeScript)
-└── tsconfig.json
-```
-
-### Minimal bir `index.ts`
-
-```typescript
-import * as azure from "@pulumi/azure-native";
-import * as pulumi from "@pulumi/pulumi";
-
-const environmentName = pulumi.getStack();
-
-// Her kaynağı etiketleyin, böylece azd bunları izleyip temizleyebilir
-const tags = { "azd-env-name": environmentName };
-
-const rg = new azure.resources.ResourceGroup("rg", {
-  resourceGroupName: `rg-${environmentName}`,
-  tags,
-});
-
-// azd bu çıktıları ortamınıza geri okur
-export const AZURE_LOCATION = rg.location;
-export const SERVICE_WEB_ENDPOINT_URL = "https://...";
-```
-
-### Stacks, azd ortamlarına karşılık gelir
-
-Pulumi dağıtımları **stacks** olarak organize eder ve azd her azd ortamını aynı ada sahip bir Pulumi stack'ine eşler. `azd env new staging` çalıştırdığınızda, azd `staging` Pulumi stack'ini seçer (veya oluşturur). Aynı `azd-env-name` etiketleme ve `AZURE_*` çıktı kuralları geçerlidir, böylece `azd down` her şeyi bulup kaldırabilir.
-
-### Pulumi ile dağıtım
+Komutlar tamamen Bicep ile aynı:
 
 ```bash
 azd auth login
 azd env new dev
-azd provision --preview   # azd arka planda 'pulumi preview' çalıştırır
-azd up                    # kaynak sağlama + dağıtım
-azd down --force          # 'pulumi destroy' çalıştırır
+azd provision --preview   # azd runs 'terraform plan' under the hood
+azd up                    # provision + deploy
+azd down --force          # destroys the Terraform-managed resources
 ```
 
-> **Önkoşul:** Pulumi'nin sisteminizde yüklü olması ve `PATH` üzerinde olması gerekir; ayrıca bir state backend'e ihtiyacınız olacaktır (Pulumi Cloud veya Azure Blob Storage gibi kendi yönettiğiniz bir backend). azd Pulumi *iş akışını* yönetir, kurulumu değil. Detaylar için resmi [azd Pulumi documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd) belgesine bakın.
+> **Önkoşul:** Terraform yüklü olmalı ve `PATH` üzerinde olmalıdır. azd Terraform *iş akışını* yönetir ancak Terraform'u sizin için yüklemez. Durum için azd varsayılan olarak yerel durumu kullanır; ekipler için uzaktan bir backend (örneğin, Azure Depolama backend'i) `provider.tf` içinde yapılandırılmalıdır.
 
-## 🎯 Servisiniz İçin Bir Host Seçme
+Tam, çalıştırılabilir Terraform tabanlı başlangıçlar için, [Awesome AZD galerisi](https://azure.github.io/awesome-azd/)nde Terraform filtresi uygulayın veya resmi [azd Terraform dokümantasyonuna](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd) bakın.
 
-`azure.yaml` içindeki `host` alanı kodunuzun nerede çalışacağını belirler. azd birkaç hostu destekler—doğru olanı seçmek altyapı dilinden daha önemlidir. İşte yeni başlayanlar için bir karşılaştırma:
+## 🧩 Diğer Altyapı Araçları
 
-| `host` value | Best for | Why |
+Pulumi, azd 1.37.2'de yerleşik bir sağlayıcı değildir. Sadece `infra.provider: pulumi` ayarlamak çalışan bir entegrasyon sağlamaz ve `azd env new` otomatik olarak bir Pulumi yığını oluşturmaz/seçmez. Başka bir IaC aracı kullanıyorsanız, doğrulanmış bir sağlayıcı uzantısının dokümantasyonunu izleyin veya yaşam döngüsünü kendi iş akışınızda açıkça yönetin. Bu kurs Pulumi sağlayıcısı sağlama veya doğrulama yapmaz.
+
+## 🎯 Servisiniz İçin Bir Host Seçmek
+
+`host` alanı `azure.yaml` içerisinde kodunuzun nerede çalışacağını belirler. azd birkaç hostu destekler—doğru olanı seçmek altyapı dilinden daha önemlidir. İşte yeni başlayanlar için bir karşılaştırma:
+
+| `host` değeri | En İyi | Neden |
 |--------------|----------|-----|
-| `appservice` | Traditional web apps and APIs | Simplest PaaS; no containers required |
-| `staticwebapp` | Front-end SPAs (React, Vue, Angular) | Global CDN + free SSL, built-in API support |
-| `function` | Event-driven and serverless workloads | Scale-to-zero, pay-per-execution |
-| `containerapp` | Containerized microservices | Serverless containers, scale-to-zero, built-in ingress |
-| `aks` | Complex orchestration needs | Full Kubernetes control when you truly need it |
-| `springapp` | Java Spring Boot apps | Managed Azure Spring Apps runtime tuned for Spring |
+| `appservice` | Geleneksel web uygulamaları ve API'ler | En basit PaaS; konteyner gerekmez |
+| `staticwebapp` | Ön uç SPA'lar (React, Vue, Angular) | Küresel CDN + ücretsiz SSL, yerleşik API desteği |
+| `function` | Olay odaklı ve sunucusuz iş yükleri | Sıfıra ölçeklenme, işlem başına ödeme |
+| `containerapp` | Konteynerli mikroservisler | Sunucusuz konteynerler, sıfıra ölçeklenme, yerleşik giriş |
+| `aks` | Karmaşık orkestrasyon gereksinimleri | Gerçekten ihtiyaç duyduğunuzda tam Kubernetes kontrolü |
+| `springapp` | Mevcut Azure Spring Apps dağıtımları | Eskimiş hedef; servis 31 Mart 2028'de emekliye ayrılacak ve yeni müşterilere kapalıdır |
 
-### AKS'ye ne zaman yönelmelisiniz
+### AKS'ye ne zaman başvurmalı
 
-**Azure Kubernetes Service (`host: aks`)** size Kubernetes'in tüm gücünü verir—özel controller'lar, servis mesh'leri, karmaşık ağ yapılandırmaları ve ince ayarlı zamanlama. Bu güç operasyonel yük getirir: node pool'ları, yükseltmeleri ve cluster ağını siz yönetirsiniz.
+**Azure Kubernetes Service (`host: aks`)** size Kubernetes’in tam gücünü sunar—özel denetleyiciler, servis meshleri, karmaşık ağ yapısı ve ince ayarlı planlama. Bu güç operasyonel yükle birlikte gelir: düğüm havuzlarını, yükseltmeleri ve küme ağını siz yönetirsiniz.
 
 ```yaml
 services:
@@ -378,11 +323,11 @@ services:
     host: aks          # deploys to an existing AKS cluster
 ```
 
-> **Mümkünse daha basit başlayın.** Çoğu mikroservis için, **Container Apps** size bir cluster yönetmeden konteynerler, otomatik ölçeklendirme ve scale-to-zero sağlar. Kubernetes'e özgü özelliklere gerçekten ihtiyaç duyduğunuzda AKS'i seçin.
+> **Mümkünse daha basit başlayın.** Çoğu mikro hizmet için, **Container Apps** size küme yönetmeden konteynerler, otomatik ölçeklendirme ve sıfıra ölçeklendirme sunar. Kubernetes’e özgü özelliklere ihtiyacınız olduğunda AKS’i tercih edin.
 
-### Azure Spring Apps ne zaman kullanılmalı
+### Azure Spring Apps ne zaman kullanılır
 
-**Azure Spring Apps (`host: springapp`)** Spring Boot için özel olarak tasarlanmış yönetilen bir runtime'dır. Service discovery, config server ve blue-green dağıtım gibi konuları ele alır, böylece Java ekipleri kendi altyapılarını işletmek zorunda kalmaz.
+**Azure Spring Apps (`host: springapp`)** Spring Boot için amaçlanmış yönetilen bir çalışma zamanı ortamıdır. Java ekiplerinin kendi altyapılarını işletmemesi için servis keşfi, yapılandırma sunucusu ve mavi-yeşil dağıtımı yönetir.
 
 ```yaml
 services:
@@ -392,7 +337,7 @@ services:
     host: springapp
 ```
 
-> Mevcut Spring Boot uygulamalarınız varsa ve onlar için optimize edilmiş bir runtime istiyorsanız `springapp` kullanın. Spring'e özgü ihtiyaçları olmayan yeni konteynerlenmiş Java uygulamaları için genellikle `containerapp` daha basit bir seçenektir.
+> Azure Spring Apps’i yeni başlayan bir proje için seçmeyin: yeni müşterilere kapalıdır ve [31 Mart 2028’de emekliye ayrılacaktır](https://learn.microsoft.com/azure/spring-apps/basic-standard/retirement-announcement). Desteklenen alternatifler olarak Container Apps’i tercih edin ve mevcut dağıtımlar için geçiş planlayın.
 
 ## 🗃️ Veritabanı Sağlama
 
@@ -446,6 +391,8 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 ```
 
 ### PostgreSQL
+**Parça önkoşulları:** `@secure() param databasePassword string` tanımlayın ve güçlü bir sağlanan değer kullanın. Genel erişim **veya** devredilen alt ağ/özel DNS’i entegre edin; iki parça kendiliğinden bağlantı kurmaz.
+
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -492,7 +439,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Güvenlik ve Sırlar Yönetimi
+`0.0.0.0` kuralı, kendi aboneliğinizin ötesindeki Azure hizmetlerinden bağlantılara izin verir. Bu özel ağ değildir; gerçek iş yükleri için kısıtlı bir ağ tasarımını tercih edin.
+
+## 🔒 Güvenlik ve Gizli Bilgiler Yönetimi
 
 ### Key Vault Entegrasyonu
 ```bicep
@@ -536,7 +485,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Managed Identity Yapılandırması
+### Yönetilen Kimlik Yapılandırması
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -553,8 +502,8 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
           value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
         }
         {
-          name: 'AZURE_CLIENT_ID'
-          value: webApp.identity.principalId
+          name: 'NODE_ENV'
+          value: 'production'
         }
       ]
     }
@@ -562,9 +511,11 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
+Sistem tarafından atanan bir kimlik için `AZURE_CLIENT_ID` değerini uygulama kimlik numarasına ayarlamayın. Kullanıcı tarafından atanan kimlik kendi **istemci kimliğini** kullanır, nesne/uygulama kimliğini değil. Key Vault referansı ayrıca uygulama kimliğinin kasa rol atamasını ve ağ erişimini gerektirir.
+
 ## 🌍 Ağ ve Bağlantı
 
-### Virtual Network Yapılandırması
+### Sanal Ağ Yapılandırması
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -627,7 +578,9 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### SSL ile Application Gateway
+### SSL ile Uygulama Geçidi
+**Eksik mimari parçası, dağıtılabilir bir geçit değildir:** VNet’e özel bir `gateway-subnet` ekleyin, ayrıca arka uç havuzları, HTTP ayarları, dinleyiciler, öncelikli yönlendirme kuralları ve bir TLS sertifikası (veya yetkili Key Vault referansı) ekleyin. Sadece 443 numaralı portu açmak HTTPS yapılandırması yapmaz.
+
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -721,7 +674,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Özel Metrikler ve Uyarılar
+### Özel Ölçümler ve Uyarılar
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -731,7 +684,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
     description: 'Alert when CPU usage is high'
     severity: 2
     enabled: true
-    scopes: [webApp.id]
+    scopes: [appServicePlan.id]
     evaluationFrequency: 'PT5M'
     windowSize: 'PT5M'
     criteria: {
@@ -740,6 +693,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
         {
           name: 'CPU Usage'
           metricName: 'CpuPercentage'
+          metricNamespace: 'Microsoft.Web/serverfarms'
           operator: 'GreaterThan'
           threshold: 80
           timeAggregation: 'Average'
@@ -758,8 +712,11 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 ## 🔧 Ortama Özgü Yapılandırmalar
 
 ### Farklı Ortamlar için Parametre Dosyaları
+Aşağıdaki iki dosya **alternatif parametre dosyası örnekleri**dir. azd otomatik olarak ortam adına göre `main.parameters.dev.json` veya `main.parameters.prod.json` dosyasını seçmez. Gerçek `main.parameters.json` dosyasını ortam yer değiştirmeleriyle (örneğin `${APP_SERVICE_SKU=B1}`) kullanın ve Bicep’te her parametreyi deklarasyon/teslim edin.
+
+`infra/main.parameters.dev.json` için örnek içerik:
+
 ```json
-// infra/main.parameters.dev.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -783,8 +740,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
+`infra/main.parameters.prod.json` için örnek içerik:
+
 ```json
-// infra/main.parameters.prod.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -819,7 +777,7 @@ param environmentType string = 'dev'
 
 // Development resources
 resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'dev') {
-  name: '${applicationName}devstorage${resourceToken}'
+  name: 'stdev${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -829,7 +787,7 @@ resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environ
 
 // Production resources with geo-redundancy
 resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'prod') {
-  name: '${applicationName}prodstorage${resourceToken}'
+  name: 'stprod${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -843,7 +801,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Gelişmiş Sağlama Desenleri
+## 🚀 Gelişmiş Sağlama Kalıpları
 
 ### Çok Bölgeli Dağıtım
 ```bicep
@@ -914,77 +872,53 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 ```
 
 ### Altyapı Testi
-```bicep
-// infra/test/main.test.bicep
-param location string = resourceGroup().location
+```bash
+# Local compilation checks syntax/types; this does not provision infrastructure
+az bicep build --file infra/main.bicep --stdout
 
-module mainTemplate '../main.bicep' = {
-  name: 'main-template-test'
-  params: {
-    environmentName: 'test'
-    location: location
-    applicationName: 'testapp'
-  }
-}
-
-// Test assertions
-resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'test-deployment'
-  location: location
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '8.0'
-    scriptContent: '''
-      $webAppName = "${mainTemplate.outputs.WEB_NAME}"
-      $response = Invoke-WebRequest -Uri "https://${mainTemplate.outputs.WEB_URL}/health" -UseBasicParsing
-      if ($response.StatusCode -ne 200) {
-        throw "Health check failed"
-      }
-      Write-Output "All tests passed!"
-    '''
-    timeout: 'PT10M'
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'P1D'
-  }
-}
+# After deploying your own complete app, test an actual application route
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error "$WEB_URL"
 ```
 
-## 🧪 Altyapı Önizlemesi ve Doğrulama (YENİ)
+Altyapı sağlama, uygulama kodunuzu dağıtmaz. Uygulama kontrollerini yalnızca `azd deploy`/`azd up` sonra çalıştırın ve uygulamanız bunu uyguluyorsa yalnızca `/health` kullanın. ARM dağıtım betikleri Azure kaynakları oluşturur ve ek kimlik, desteklenen çalışma zamanı sürümleri ve izinler gerektirir; bunlar yerel birim testleri değildir.
 
-### Dağıtımdan Önce Altyapı Değişikliklerini Önizleyin
+## 🧪 Altyapı Ön İzleme ve Doğrulama (YENİ)
 
-`azd provision --preview` özelliği, kaynakları gerçekten dağıtmadan önce altyapı sağlama işlemini **simüle etmenize** olanak tanır. Bu, `terraform plan` veya `bicep what-if` ruhuna benzer; Azure ortamınızda hangi değişikliklerin yapılacağını gösteren bir **dry-run görünümü** sağlar.
+### Dağıtımdan Önce Altyapı Değişikliklerini Ön İzle
+
+`azd provision --preview` özelliği, kaynakları gerçekten dağıtmadan önce **altyapı sağlama simülasyonu** yapmanızı sağlar. Bu, ruhen `terraform plan` veya `bicep what-if` gibidir ve Azure ortamınızda yapılacak değişikliklerin **kuru çalışma görünümünü** sunar.
 
 #### 🛠️ Ne Yapar
-- **IaC şablonlarınızı** (Bicep veya Terraform) analiz eder
-- **Kaynak değişikliklerinin bir önizlemesini** gösterir: eklemeler, silmeler, güncellemeler
-- **Değişiklikleri uygulamaz** — salt okunur ve çalıştırması güvenlidir
+- **IaC şablonlarınızı analiz eder** (Bicep veya Terraform)
+- **Kaynak değişikliklerinin bir ön izlemesini gösterir**: eklemeler, silmeler, güncellemeler
+- **Sağlayıcının önerdiği altyapı değişikliklerini uygulamaz** — önce proje kancalarını inceleyin; betiklerin yan etkileri olabilir ve ön izleme yine Azure izinleri gerektirir
 
 #### Kullanım Durumları
 ```bash
-# Dağıtımdan önce altyapı değişikliklerini önizleyin
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Belirli bir ortam için önizleme
+# Preview for specific environment
 azd provision --preview -e production
 ```
 
 Bu komut size yardımcı olur:
-- **Kaynakları taahhüt etmeden önce** altyapı değişikliklerini doğrulamaya
-- **Geliştirme döngüsünde hatalı yapılandırmaları erken yakalamaya**
-- **Ekip ortamlarında güvenli işbirliği yapmaya**
-- **Sürprizler olmadan en düşük ayrıcalıklı dağıtımları sağlamaya**
+- Kaynakları taahhüt etmeden önce **altyapı değişikliklerini doğrulamaya**
+- Geliştirme döngüsünde **yanlış yapılandırmaları erken yakalamaya**
+- Takım ortamlarında **güvenli iş birliğine**
+- Sürprizler olmadan **en az ayrıcalıkla dağıtımlar yapmaya**
 
-Özellikle kullanışlıdır:
-- Karmaşık çok hizmetli ortamlarla çalışırken
-- Üretim altyapısında değişiklik yaparken
-- Şablon değişikliklerini PR onayından önce doğrularken
-- Yeni ekip üyelerini altyapı desenleri konusunda eğitirken
+Özellikle faydalıdır:
+- Karmaşık çoklu hizmet ortamlarında çalışırken
+- Üretim altyapısında değişiklikler yaparken
+- PR onayı öncesi şablon değişikliklerini doğrularken
+- Yeni takım üyelerine altyapı kalıplarını öğretirken
 
-### Örnek Önizleme Çıktısı
-Tam önizleme çıktısı sağlayıcıya ve proje yapısına göre değişir, ancak sonuç uygulanmadan önce önerilen değişiklikleri açıkça tanımlamalıdır.
+### Örnek Ön İzleme Çıktısı
+Tam ön izleme çıktısı sağlayıcıya ve proje yapısına göre değişir, ancak sonuç kesinlikle herhangi bir şey uygulanmadan önce önerilen değişiklikleri açıkça göstermelidir.
 
-```bash
+```text
 $ azd provision --preview
 
 🔍 Previewing infrastructure changes...
@@ -1007,22 +941,26 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Kaynak Güncellemeleri ve Geçişler
+## �🔄 Kaynak Güncellemeleri ve Taşımalar
 
 ### Güvenli Kaynak Güncellemeleri
 ```bash
-# Altyapı değişikliklerini önce önizleyin (TAVSİYE EDİLİR)
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Önizleme onayı alındıktan sonra değişiklikleri uygulayın
-azd provision --confirm-with-no-prompt
+# Apply changes after preview confirmation
+azd provision
+# In automation, --no-prompt uses known values and fails on unresolved decisions;
+# it is not an approval bypass.
 
-# Geri alma için altyapı değişikliklerini geri almak üzere Git'i kullanın:
-git revert HEAD  # Son altyapı commit'ini geri alın
-azd provision    # Önceki altyapı durumunu uygulayın
+# For rollback, use Git to revert infrastructure changes:
+git revert HEAD  # Revert last infrastructure commit
+azd provision    # Apply previous infrastructure state
 ```
 
-### Veritabanı Geçişleri
+### Veritabanı Taşımaları
+**Eksik dağıtım betiği kalıbı:** ihtiyaç duyulan yerde yapılandırılmış kullanıcı ataması kimliği, desteklenen Azure CLI çalışma zamanı, kullanılabilir taşıma araçları, sağlanmış taşıma dizini/yapılandırması ve veritabanı bağlantısı gerektirir. Bu kaynak sadece bir şablona yapıştırılarak çalıştırılamaz.
+
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -1047,25 +985,29 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
     ]
     timeout: 'PT30M'
     cleanupPreference: 'OnSuccess'
+    retentionInterval: 'P1D'
   }
 }
 ```
 
 ## 🎯 En İyi Uygulamalar
 
-### 1. Kaynak İsimlendirme Kuralları
+### 1. Kaynak Adlandırma Kuralları
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
   appService: '${applicationName}-web-${resourceToken}'
   database: '${applicationName}-db-${resourceToken}'
-  storage: '${take(replace(applicationName, '-', ''), 15)}${environmentName}sa${take(resourceToken, 8)}'
-  keyVault: '${take(applicationName, 15)}-kv-${take(resourceToken, 8)}'
+  storage: 'st${resourceToken}' // lowercase alphanumeric, <=24 characters
+  keyVault: 'kv-${resourceToken}' // <=24 characters
 }
 ```
 
 ### 2. Etiketleme Stratejisi
 ```bicep
+// utcNow is only allowed in a parameter default, not directly in a variable.
+param deploymentDate string = utcNow('yyyy-MM-dd')
+
 var commonTags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
@@ -1073,7 +1015,7 @@ var commonTags = {
   'cost-center': 'engineering'
   'owner': 'platform-team'
   'project': applicationName
-  'created-date': utcNow('yyyy-MM-dd')
+  'deployment-date': deploymentDate
 }
 ```
 
@@ -1110,23 +1052,23 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Sonraki Adımlar
 
-- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Kaynak kullanılabilirliğini doğrulayın
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Altyapı problemlerini giderin
-- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - Sağlama sorunlarını debug edin
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Uygun hizmet katmanlarını seçin
+- [Dağıtım Öncesi Planlama](../chapter-06-pre-deployment/capacity-planning.md) - Kaynak uygunluğunu doğrulayın
+- [Yaygın Sorunlar](../chapter-07-troubleshooting/common-issues.md) - Altyapı sorunlarını giderin
+- [Hata Ayıklama Rehberi](../chapter-07-troubleshooting/debugging.md) - Sağlama sorunlarını giderme
+- [SKU Seçimi](../chapter-06-pre-deployment/sku-selection.md) - Uygun hizmet katmanlarını seçin
 
 ## Ek Kaynaklar
 
-- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Bicep Belgeleri](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Şablonları](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Mimari Merkezi](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure İyi Tasarlanmış Çerçeve](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Deployment Guide](deployment-guide.md)
-- **Next Lesson**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+**Gezinme**
+- **Önceki Ders**: [Dağıtım Kılavuzu](deployment-guide.md)
+- **Sonraki Ders**: [Kapasite Planlaması](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 

@@ -35,7 +35,7 @@ This guide will help you install and configure Azure Developer CLI on your syste
 
 Before installing azd, ensure you have:
 - **Azure subscription** - [Create a free account](https://azure.microsoft.com/free/)
-- **Azure CLI** - For authentication and resource management
+- **Azure CLI** (optional) - For examples that explicitly run `az`; azd authenticates independently
 - **Git** - For cloning templates and version control
 - **Docker** (optional) - For containerized applications
 
@@ -78,10 +78,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
 #### Option 3: Manual Installation
-```bash
-# Download and install
-curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
-```
+Download the archive for your macOS architecture from [the release assets](https://github.com/Azure/azure-dev/releases), extract it, and add the `azd` binary to your `PATH`.
 
 ### Linux
 
@@ -113,11 +110,13 @@ If `azd` is missing, install it with the standard script for the environment.
 
 ```bash
 # Run azd in a container
-docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
+docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
 # Create an alias for easier use
-alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
+alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
+
+This ephemeral container does not preserve login state between runs. For repeated deployments, use the [dev container setup](dev-containers.md); container builds also require a Docker daemon accessible from inside the container.
 
 ## ✅ Verify Installation
 
@@ -195,9 +194,9 @@ azd auth login --use-device-code
 For automated environments:
 ```bash
 azd auth login \
-  --client-id <client-id> \
-  --client-secret <client-secret> \
-  --tenant-id <tenant-id>
+  --client-id "<client-id>" \
+  --client-secret "<client-secret>" \
+  --tenant-id "<tenant-id>"
 ```
 
 ### Validate Your Complete Setup
@@ -219,7 +218,7 @@ bash ./validate-setup.sh
 ### Global Configuration
 ```bash
 # Set default subscription
-azd config set defaults.subscription <subscription-id>
+azd config set defaults.subscription "<subscription-id>"
 
 # Set default location
 azd config set defaults.location eastus2
@@ -235,9 +234,8 @@ Add to your shell profile (`.bashrc`, `.zshrc`, `.profile`):
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# azd configuration
-export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Enable debug logging
+# Enable diagnostics per command rather than relying on undocumented variables
+azd version --debug
 ```
 
 ## IDE Integration
@@ -299,12 +297,10 @@ source ~/.bashrc
 
 #### Network/Proxy Issues
 ```bash
-# Configure proxy
-azd config set http.proxy http://proxy:8080
-azd config set https.proxy https://proxy:8080
-
-# Skip SSL verification (not recommended for production)
-azd config set http.insecure true
+# Configure standard proxy environment variables for the current Bash session
+export HTTP_PROXY="http://proxy:8080"
+export HTTPS_PROXY="http://proxy:8080"
+# Use your organization's trusted CA configuration; do not disable TLS validation.
 ```
 
 #### Version Conflicts
@@ -321,8 +317,7 @@ rm -rf ~/.azd
 ### Getting More Help
 ```bash
 # Enable debug logging
-export AZD_DEBUG=true
-azd <command> --debug
+azd show --debug
 
 # View current configuration
 azd config show
@@ -371,7 +366,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 - Template-based workflows
 - Developer productivity focus
 
-**You need both**: azd uses az CLI for authentication
+**They are independent**: azd uses its own authentication by default. Install and sign in to Azure CLI only for `az` commands, or explicitly opt into `azd config set auth.useAzCliAuth true`.
 </details>
 
 <details>
@@ -382,7 +377,7 @@ Yes! You can:
 2. Reference existing resources in your Bicep templates
 3. Use azd for new deployments alongside existing infrastructure
 
-See [Configuration Guide](configuration.md) for details.
+See [Configuration Guide](../chapter-03-configuration/configuration.md) for details.
 </details>
 
 <details>
@@ -390,14 +385,16 @@ See [Configuration Guide](configuration.md) for details.
 
 Yes, configure the cloud:
 ```bash
-# Azure Government
-az cloud set --name AzureUSGovernment
-az login
+# Azure Government (azd)
+azd config set cloud.name AzureUSGovernment
+azd auth login
 
-# Azure China
-az cloud set --name AzureChinaCloud
-az login
+# Azure China (alternative)
+azd config set cloud.name AzureChinaCloud
+azd auth login
 ```
+
+If you also use Azure CLI, configure `az cloud set --name ...` separately. Template services and model availability vary by cloud.
 </details>
 
 <details>
@@ -419,7 +416,7 @@ azd itself is **completely free** and open-source. You only pay for:
 - Azure resources you deploy
 - Azure consumption costs (compute, storage, etc.)
 
-Use `azd provision --preview` to estimate costs before deployment.
+Use `azd provision --preview` to inspect proposed resources, then estimate their costs with the [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/). Preview does not calculate prices.
 </details>
 
 ## Next Steps

@@ -1,74 +1,57 @@
 # Pag-deploy ng AI Model gamit ang Azure Developer CLI
 
 **Pag-navigate sa Kabanata:**
-- **📚 Tahanan ng Kurso**: [AZD Para sa mga Nagsisimula](../../README.md)
+- **📚 Bahay ng Kurso**: [AZD For Beginners](../../README.md)
 - **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-First Development
-- **⬅️ Nakaraan**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **⬅️ Nakaraan**: [AI Agents](agents.md)
 - **➡️ Susunod**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Susunod na Kabanata**: [Kabanata 3: Pag-configure](../chapter-03-configuration/configuration.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 3: Configuration](../chapter-03-configuration/configuration.md)
 
-Nagbibigay ang gabay na ito ng komprehensibong mga tagubilin para sa pag-deploy ng mga AI model gamit ang mga AZD template, mula sa pagpili ng modelo hanggang sa mga pattern ng pag-deploy sa produksyon.
+Ang gabay na ito ay nagbibigay ng komprehensibong mga tagubilin para sa pag-deploy ng mga AI model gamit ang mga AZD template, kabilang ang lahat mula sa pagpili ng modelo hanggang sa mga pattern ng deployment sa produksyon.
 
-> **Tala sa Pagpapatunay (2026-07-13):** Ang AZD workflow sa gabay na ito ay sinuri laban sa `azd` `1.27.1`. Para sa mga AI deployment na tumatagal higit sa default na service deployment window, sinusuportahan ng kasalukuyang mga release ng AZD ang `azd deploy --timeout <seconds>`.
+> **Pagsusuri ng release (2026-11-04):** Ang mga kaugnay na pagbabago sa CLI ay na-review laban sa `azd` `1.37.2`; ang availability, mga bersyon, at quota ng modelo ay nananatiling nakadepende sa rehiyon at subscription. Ang `azd deploy --timeout <seconds>` ang kumokontrol sa window ng deployment ng serbisyo, hindi garantiya ng activation ng agent. Tingnan ang [kasalukuyang mga tala ng release at gabay sa migrasyon ng AI](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
 ## Talaan ng Nilalaman
 
-- [Strategiya sa Pagpili ng Modelo](#strategiya-sa-pagpili-ng-modelo)
-- [Pag-configure ng AZD para sa mga AI Model](#pag-configure-ng-azd-para-sa-mga-ai-model)
-- [Mga Pattern sa Pag-deploy](#mga-pattern-sa-pag-deploy)
-- [Pamamahala ng Modelo](#pamamahala-ng-modelo)
-- [Mga Pagsasaalang-alang sa Produksyon](#mga-pagsasaalang-alang-sa-produksyon)
-- [Pagsubaybay at Obserbabilidad](#pagsubaybay-at-obserbabilidad)
+- [Strategiya sa Pagpili ng Modelo](#model-selection-strategy)
+- [Konfigurasyon ng AZD para sa mga AI Modelo](#azd-configuration-for-ai-models)
+- [Mga Pattern ng Deployment](#deployment-patterns)
+- [Pamamahala ng Modelo](#model-management)
+- [Mga Pagsasaalang-alang sa Produksyon](#production-considerations)
+- [Pagsubaybay at Observability](#monitoring-and-observability)
 
 ## Strategiya sa Pagpili ng Modelo
 
-### Mga Modelo ng Microsoft Foundry Models
+### Azure OpenAI Models sa Microsoft Foundry
 
-Piliin ang tamang modelo para sa iyong kaso ng paggamit:
+Piliin ang tamang modelo para sa iyong gamit:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+Ideklara ang mga deployment ng modelo sa Bicep (sa ibaba), hindi sa mga arbitraryo na `services.*.config.AZURE_OPENAI_MODELS` na setting. Hindi ini-interpret ng AZD ang ganoong setting bilang isang listahan ng mga resource ng modelo. Ang `project` ng isang serbisyo ay tumutukoy sa pinanggalingan ng aplikasyon, hindi sa `infra/` na direktoryo nito.
+
+Ang mga halimbawa ay gumagamit ng inilathalang bersyon ng `gpt-4.1-mini` **`2025-04-14`** at bersyon ng embedding na **`1`**. Kumpirmahin na suportado ang bersyon ng modelo at deployment SKU sa iyong target na rehiyon/akawnt bago mag-provision.
 
 ### Pagpaplano ng Kapasidad ng Modelo
 
-| Uri ng Modelo | Kaso ng Paggamit | Inirerekomendang Kapasidad | Mga Pagsasaalang-alang sa Gastos |
+| Uri ng Modelo | Gamit | Halimbawa ng Demand ng Token | Mga Pagsasaalang-alang sa Gastos |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Makatipid para sa karamihan ng gawain |
-| gpt-4.1 | Kumplikadong pangangatwiran | 20-100 TPM | Mas mataas na gastos, gamitin para sa mga premium na tampok |
-| text-embedding-3-large | Paghahanap, RAG | 30-120 TPM | Malakas na default na pagpipilian para sa semantic na paghahanap at retrieval |
-| Whisper | Pagsasalita-sa-teksto | 10-50 TPM | Mga gawain sa pagproseso ng audio |
+| gpt-4.1-mini | Chat, Q&A | 10,000-50,000 TPM | Benchmark ang gastos at kalidad para sa iyong trabaho |
+| gpt-4.1 | Mga komplikadong gawain | 20,000-100,000 TPM | Suriin ang pagtaas sa kalidad laban sa gastos ng token |
+| text-embedding-3-large | Paghahanap, RAG | 30,000-120,000 TPM | Isaalang-alang ang pag-ingest pati na rin ang trapiko ng query |
+| Whisper | Speech-to-text | Magplano gamit ang tagal ng audio at mga limitasyon ng request | Huwag gamitin ang formula ng kapasidad na text-model TPM |
 
-## Pag-configure ng AZD para sa mga AI Model
+Ang TPM ay nangangahulugang tokens bawat minuto. Para sa mga Standard na text deployment na ito, ang ARM `sku.capacity` ay nasa **1,000-TPM na yunit**, hindi individual na TPM (ang kapasidad na `10` ay nangangahulugang 10,000 TPM). Ang mga ratio ng RPM-to-TPM ay nag-iiba depende sa uri ng modelo/deployment; tiyaking kung ano ang mga limitasyon ay tugma sa [dokyumentasyon ng quota](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic). Ang mga hanay na ito ay mga halimbawa, hindi rekomendasyon sa sukat.
 
-### Pag-configure ng Bicep Template
+## Konfigurasyon ng AZD para sa mga AI Modelo
 
-Gumawa ng mga deployment ng modelo sa pamamagitan ng Bicep templates:
+### Konfigurasyon ng Template ng Bicep
+
+Gumawa ng mga deployment ng modelo gamit ang mga Bicep template:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,21 +108,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
+Ito ay isang halimbawa ng imprastruktura ng **development** na may saklaw sa resource group, hindi isang kompletong AZD application template. Pinapayagan ng akawnt ang public network access at nangangailangan ng Entra ID/RBAC authentication (`Cognitive Services OpenAI User` para sa mga tumatawag). Ang produksyon ay nangangailangan ng private endpoint, DNS, at connectivity ng aplikasyon na nakalarawan sa Kabanata 8. Kailangan din ng AZD ng pangunahing template/parameter mapping at mga resource ng application host; gumamit ng gumaganang halimbawa para sa kompletong deployment.
+
 ### Mga Variable ng Kapaligiran
 
-I-configure ang iyong application environment:
+I-configure ang kapaligiran ng iyong aplikasyon:
 
 ```bash
-# pagsasaayos ng .env
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Mga Pattern sa Pag-deploy
+Ito ay mga pangalan na itinakda ng aplikasyon; ikonekta ang mga ito sa iyong host configuration. Ang Azure OpenAI v1 endpoint na ginamit sa health check sa ibaba ay hindi nangangailangan ng luma nang `api-version` na query parameter; ang mga mas lumang `AzureOpenAI` na client ay nangangailangan, kaya sundin ang API na ginagamit ng iyong aplikasyon.
 
-### Pattern 1: Deployment sa Isang Rehiyon
+## Mga Pattern ng Deployment
+
+### Pattern 1: Single-Region Deployment
 
 ```yaml
 # azure.yaml - Single region
@@ -146,20 +133,21 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 Pinakamainam para sa:
 - Pag-develop at testing
-- Mga aplikasyon sa iisang pamilihan
+- Mga aplikasyon na nakatuon sa isang merkado lamang
 - Pag-optimize ng gastos
 
-### Pattern 2: Deployment sa Maramihang Rehiyon
+### Pattern 2: Multi-Region Deployment
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,14 +157,18 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
+Kailangan punan ang mga hindi isinama na property ng akawnt/SKU; ang fragment na ito ay hindi maaaring i-deploy nang nakasulat. Mag-deploy ng mga modelo sa bawat akawnt at ipatupad nang hiwalay ang routing/failover at mga kontrol sa data residency.
+
 Pinakamainam para sa:
-- Mga pandaigdigang aplikasyon
-- Mataas na pangangailangan sa availability
-- Pamamahagi ng load
+- Mga global na aplikasyon
+- Mataas na availability na mga pangangailangan
+- Paghahati ng load
 
-### Pattern 3: Hybrid na Deployment
+### Pattern 3: Hybrid Deployment
 
-Pagsamahin ang Microsoft Foundry Models sa iba pang AI services:
+Pagsamahin ang mga Microsoft Foundry Models sa iba pang mga serbisyo ng AI:
+
+Ipinapalagay ng mga sumusunod na fragment na ang mga pangalan at `location` ay ibinibigay ng naglalaman na template.
 
 ```bicep
 // Hybrid AI services
@@ -207,16 +199,16 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ## Pamamahala ng Modelo
 
-### Kontrol sa Bersyon
+### Kontrol ng Bersyon
 
-Subaybayan ang mga bersyon ng modelo sa iyong AZD configuration:
+Subaybayan ang mga bersyon ng modelo sa konfigurasyon ng iyong aplikasyon o IaC. Ang JSON na ito ay isang halimbawa na **itinakda ng aplikasyon**, hindi isang built-in na schema ng modelo sa AZD; kailangang ipatupad at i-deploy nang malinaw ang isang fallback:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -227,27 +219,27 @@ Subaybayan ang mga bersyon ng modelo sa iyong AZD configuration:
 }
 ```
 
-### Mga Update sa Modelo
+### Mga Update ng Modelo
 
-Gamitin ang AZD hooks para sa mga update ng modelo:
+Gumamit ng hook ng AZD para sa read-only na tseke ng availability, pagkatapos ay i-update ang IaC at i-provision ito:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# Kung ang deployment ay tumagal nang mas mahaba kaysa sa default na timeout
-azd deploy --timeout 1800
 ```
 
-### Pagsubok ng A/B
+Patakbuhin ang `azd up` **sa labas** ng hook para ilapat ang nabagong imprastruktura ng modelo at i-deploy ang code. Huwag kailanman tawagin ang `azd deploy` mula sa isang hook na `predeploy`: ito ay nagti-trigger nang paulit-ulit ng parehong hook. Pinalalawig ng `azd deploy --timeout 1800` ang timeout ng deployment ng aplikasyon; hindi nito ina-update ang mga Bicep resource.
 
-Mag-deploy ng maramihang bersyon ng modelo:
+### A/B Testing
+
+Ang halimbawa ng resource sa ibaba ay pumipili ng pangalan ng deployment at kapasidad; lumilikha ito ng **isang** deployment lamang, hindi isang A/B test. Para sa totoong eksperimento, mag-provision ng dalawang magkakaibang resource ng deployment, i-route ang kinokontrol na bahagi ng mga request sa bawat isa, at ihambing ang kalidad, latency, at gastos. Ipinapalagay nito ang `openAi` mula sa halimbawa ng akawnt:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -273,10 +265,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Pagpaplano ng Kapasidad
 
-Kalkulahin ang kinakailangang kapasidad base sa mga pattern ng paggamit:
+Kalkulahin ang kinakailangang kapasidad base sa pattern ng paggamit:
 
 ```python
-# Halimbawa ng kalkulasyon ng kapasidad
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# Halimbawa ng paggamit
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Pag-configure ng Auto-scaling
+Inaasahang output: `Required capacity: 9100 TPM`. Sa 1,000-TPM na yunit ng kapasidad, i-round up sa hindi bababa sa `10`, pagkatapos ay tiyaking suriin ang mga espesipikong RPM ng modelo at tinantyang rate-limit ng serbisyo (kasama ang hinihiling na budget ng output). Ang pagtatantya ng demand ng token na ito ay hindi garantiya laban sa throttling.
+
+### Konfigurasyon ng Auto-scaling
 
 I-configure ang auto-scaling para sa Container Apps:
+
+**Bahaging resource:** pagsamahin ang mga setting ng `template.scale` sa isang kompletong Container App na may lokasyon, managed environment, container image, resources, at ingress. Ang pag-scale ng replicas ay hindi nagpapataas ng quota ng modelo.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,18 +335,21 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Pag-optimize ng Gastos
 
-Magpatupad ng mga kontrol sa gastos:
+Ipatupad ang mga kontrol sa gastos:
+
+**Halimbawa ng budget resource:** tukuyin ang `budgetStartDate` bilang unang araw ng kasalukuyang buwan sa UTC (halimbawa `2026-11-01T00:00:00Z` para sa pagsusuring ito), at palitan ang contact address. Ang pagsisimula ay kailangang sumunod sa kasalukuyang mga limitasyon ng petsa ng serbisyo. Nagbibigay ng alerto ang mga budget sa naantala na data ng billing; hindi nito nililimitahan ang paggastos.
 
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -368,7 +368,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Pagsubaybay at Obserbabilidad
+## Pagsubaybay at Observability
 
 ### Integrasyon ng Application Insights
 
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
 
-### Mga Custom na Metrics
+Ipinapalagay ng fragment ng resource ang `applicationInsightsName`, `location`, at isang umiiral na `logAnalyticsWorkspace`. Nagpo-provision ito ng pagsubaybay, ngunit hindi nito sinasaniban ang app o lumilikha ng custom na metrics.
 
-Subaybayan ang mga AI-specific metrics:
+### Custom Metrics
+
+Subaybayan ang mga espesipikong metric para sa AI:
+
+Gamitin ang suportadong [distribusyon ng Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python), hindi ang lumang SDK ng `applicationinsights` para sa Python. I-install ang `azure-monitor-opentelemetry`, i-configure ang `APPLICATIONINSIGHTS_CONNECTION_STRING`, at i-initialize isang beses lang sa pagsisimula:
 
 ```python
-# Pasadyang telemetry para sa mga modelo ng AI
-import logging
-from applicationinsights import TelemetryClient
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
+
+Ipinapakita nito ang pagpapalabas ng attribute, hindi aktwal na instrumentation ng pagtawag sa modelo. Balutin ang totoong request sa isang span para sukatin ang tagal nito; suriin ang `dependencies`/`traces` sa Application Insights. Huwag magpadala ng mga prompt, sagot, susi, o hilaw na mensahe ng exception na naglalaman ng sensitibong data.
 
 ### Health Checks
 
-Magpatupad ng pagsubaybay sa kalusugan ng AI service:
+Ipatupad ang pagsubaybay sa kalusugan ng AI service:
+
+Mag-install ng `fastapi`, `uvicorn`, `httpx`, at `azure-identity`. Itakda ang mga variable ng endpoint/deployment sa itaas at bigyan ng pahintulot ang caller ng `Cognitive Services OpenAI User`. Ang **readiness probe** na ito ay gumagamit ng Azure OpenAI v1 data plane na may Entra ID; ito ay gumagawa ng billable na pagtawag sa modelo. Patakbuhin gamit ang `uvicorn health:app` matapos i-save bilang `health.py`. Gumamit ng hiwalay na magaang liveness check, limitahan/cach-in ang resulta ng readiness, at huwag hayagang ibahagi ang ruta na ito nang walang kontrol sa access.
 
 ```python
-# Mga endpoint para sa tseke ng kalusugan
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,44 +431,50 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Subukan ang koneksyon sa OpenAI
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
 
-## Mga Susunod na Hakbang
+Inaasahan: Nagbabalik ang `GET /health/ai-models` ng `200 {"status":"healthy"}` kapag ang nakatakdang chat deployment ay magagamit, o `503` nang hindi ibinubunyag ang mga detalye sa itaas. Ang pagpapakita ng mga deployment ay isang operasyon sa management plane at hindi valid na health probe sa data plane.
 
-1. **Suriin ang [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** para sa mga pattern ng pag-integrate ng serbisyo
-2. **Kumpletuhin ang [AI Workshop Lab](ai-workshop-lab.md)** para sa praktikal na karanasan
-3. **Ipagpatupad ang [Mga Praktis sa Produksyon ng AI](production-ai-practices.md)** para sa mga enterprise deployment
-4. **Siyasatin ang [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** para sa mga karaniwang isyu
+## Susunod na Mga Hakbang
+
+1. **Suriin ang [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** para sa mga pattern ng integration ng serbisyo
+2. **Tapusin ang [AI Workshop Lab](ai-workshop-lab.md)** para sa praktikal na karanasan
+3. **Ipapatupad ang [Production AI Practices](../chapter-08-production/production-ai-practices.md)** para sa mga enterprise deployment
+4. **Suriin ang [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** para sa mga karaniwang isyu
 
 ## Mga Sanggunian
 
-- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Availability ng Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentasyon ng Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Pag-scale ng Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Pag-optimize ng Gastos para sa AI Model](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Pag-optimize ng Gastos ng AI Model](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Pag-navigate sa Kabanata:**
-- **📚 Tahanan ng Kurso**: [AZD Para sa mga Nagsisimula](../../README.md)
+- **📚 Bahay ng Kurso**: [AZD For Beginners](../../README.md)
 - **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-First Development
-- **⬅️ Nakaraan**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **⬅️ Nakaraan**: [AI Agents](agents.md)
 - **➡️ Susunod**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Susunod na Kabanata**: [Kabanata 3: Pag-configure](../chapter-03-configuration/configuration.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 3: Configuration](../chapter-03-configuration/configuration.md)
 
 ---
 

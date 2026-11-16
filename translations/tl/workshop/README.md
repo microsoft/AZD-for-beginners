@@ -4,12 +4,12 @@
       🎯 AZD para sa Mga AI Developer Workshop
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>Isang praktikal na workshop para sa pagbuo ng mga aplikasyon ng AI gamit ang Azure Developer CLI.</strong><br>
-      Kumpletuhin ang 7 modyul para maging bihasa sa mga AZD template at mga workflow ng AI deployment.
+      <strong>Isang hands-on na workshop para sa paggawa ng mga AI application gamit ang Azure Developer CLI.</strong><br>
+      Kumpletuhin ang 7 modules para maging eksperto sa AZD templates at AI deployment workflows.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Huling Na-update: Marso 2026
+        📅 Na-review ang panggagalingan: Nobyembre 2026
       </span>
     </div>
   </div>
@@ -17,157 +17,160 @@
 
 # AZD para sa Mga AI Developer Workshop
 
-Maligayang pagdating sa praktikal na workshop para matutunan ang Azure Developer CLI (AZD) na nakatuon sa pag-deploy ng mga aplikasyon ng AI. Tutulungan ka ng workshop na ito na magkaroon ng praktikal na pag-unawa sa mga AZD template sa 3 hakbang:
+Maligayang pagdating sa hands-on na workshop para sa pag-aaral ng Azure Developer CLI (AZD) na nakatuon sa deployment ng AI application. Tutulungan ka ng workshop na ito na magkaroon ng praktikal na pag-unawa sa AZD templates sa 3 hakbang:
 
-1. **Pagtuklas** - hanapin ang template na angkop para sa iyo.
-1. **Pag-deploy** - i-deploy at i-validate na gumagana ito
-1. **Pagpapasadya** - i-modify at i-ulit upang maging sa iyo!
+1. **Diskubre** - hanapin ang tamang template para sa iyo.
+1. **Deployment** - i-deploy at i-validate na gumagana ito
+1. **Pag-customize** - baguhin at ulitin para maging sarili mo ito!
 
-Sa kabuuan ng workshop na ito, ipakikilala rin sa iyo ang mga pangunahing tool at workflow ng developer, upang matulungan kang gawing mas maayos ang iyong end-to-end development journey.
+Sa kabuuan ng workshop na ito, ipakikilala rin sa iyo ang mga pangunahing developer tools at workflows, upang matulungan kang maging mas epektibo sa iyong proseso ng end-to-end development.
 
 <br/>
 
 ## Gabay sa Browser
 
-Ang mga aralin sa workshop ay nasa Markdown. Maaari mo itong i-navigate nang direkta sa GitHub - o maglunsad ng browser-based na preview tulad ng ipinapakita sa screenshot sa ibaba.
+Ang mga leksyon sa workshop ay nasa Markdown. Maaari mong direktang i-browse sa GitHub - o ilunsad ang preview ng browser gaya ng ipinapakita sa screenshot sa ibaba.
 
-![Pagsasanay](../../../translated_images/tl/workshop.75906f133e6f8ba0.webp)
+![Workshop](../../../translated_images/tl/workshop.75906f133e6f8ba0.webp)
 
-Upang gamitin ang opsyon na ito - i-fork ang repository sa iyong profile, at ilunsad ang GitHub Codespaces. Kapag aktibo na ang VS Code terminal, i-type ang utos na ito:
+Para magamit ang opsyong ito - i-fork ang repository sa iyong profile, at ilunsad ang GitHub Codespaces. Kapag aktibo na ang terminal ng VS Code, i-type ang command na ito:
 
-This browser preview works in GitHub Codespaces, dev containers, or a local clone with Python and MkDocs installed.
+Gumagana ang browser preview na ito sa GitHub Codespaces, dev containers, o lokal na kopya na may naka-install na Python at MkDocs.
 
 ```bash title="" linenums="0"
-mkdocs serve > /dev/null 2>&1 &
+python -m pip install -r requirements-dev.txt
+python -m mkdocs serve --config-file workshop/mkdocs.yml
 ```
 
-Sa loob ng ilang segundo, makakakita ka ng pop-up dialog. Piliin ang opsyon na `Open in browser`. Bubukas ang web-based na gabay sa isang bagong tab ng browser. Ilan sa mga benepisyo ng preview na ito:
+Patakbuhin ang mga command na ito mula sa **ugat ng repository ng kurso**, hindi mula sa hiwalay na na-initialize na AI sample. Panatilihing bukas ang preview para makita agad ang mga error; itigil ito gamit ang Ctrl+C. Para tingnan ang site nang hindi nag-se-serve, patakbuhin ang `python -m mkdocs build --strict --config-file workshop/mkdocs.yml`.
 
-1. **Built-in na paghahanap** - hanapin ang mga keyword o aralin nang mabilis.
-1. **Icon ng Kopya** - i-hover ang cursor sa mga codeblock upang makita ang opsyon na ito
-1. **Toggle ng Tema** - magpalit sa pagitan ng madilim at maliwanag na mga tema
-1. **Kumuha ng tulong** - i-click ang Discord icon sa footer upang sumali!
+Sa loob ng ilang segundo, makikita mo ang isang pop-up dialog. Piliin ang opsyong `Open in browser`. Bubukas na ngayon ang web-based na gabay sa isang bagong tab ng browser. Ilan sa mga benepisyo ng preview na ito:
+
+1. **Built-in search** - mabilis na hanapin ang mga keyword o aralin.
+1. **Copy icon** - i-hover ang mouse sa mga codeblock para makita ang opsyon
+1. **Theme toggle** - magpalit sa pagitan ng dark at light na tema
+1. **Kumuha ng tulong** - i-click ang Discord icon sa footer para sumali!
 
 <br/>
 
 ## Pangkalahatang-ideya ng Workshop
 
-**Tagal:** 3-4 oras  
-**Antas:** Baguhan hanggang Katamtaman  
-**Mga Kinakailangan:** Pamilyaridad sa Azure, mga konsepto ng AI, VS Code & mga command-line tool.
+**Tagal:** 3-4 na oras  
+**Antas:** Baguhan hanggang Intermediate  
+**Mga Paunang Kinakailangan:** Pamilyar sa Azure, mga konsepto ng AI, VS Code at command-line tools.
 
-Ito ay isang praktikal na workshop kung saan natututo ka sa pamamagitan ng paggawa. Kapag natapos mo na ang mga ehersisyo, inirerekomenda naming repasuhin ang kurikulum na AZD Para sa Mga Nagsisimula upang ipagpatuloy ang iyong paglalakbay sa pag-aaral patungo sa mga pinakamahusay na kasanayan sa Seguridad at Produktibidad.
+Isang hands-on na workshop ito kung saan natututo ka sa pamamagitan ng paggawa. Pagkatapos mong makumpleto ang mga ehersisyo, inirerekomenda namin na balikan mo ang AZD For Beginners na kurikulum para ipagpatuloy ang iyong pagkatuto sa mga pinakamahusay na kasanayan sa Seguridad at Produktibidad.
 
-| Oras| Modyul  | Layunin |
+| Oras | Module  | Layunin |
 |:---|:---|:---|
-| 15 minuto | [Panimula](docs/instructions/0-Introduction.md) | Ilatag ang konteksto at unawain ang mga layunin |
-| 30 minuto | [Pumili ng AI Template](docs/instructions/1-Select-AI-Template.md) | Suriin ang mga opsyon at pumili ng panimulang template | 
-| 30 minuto | [I-validate ang AI Template](docs/instructions/2-Validate-AI-Template.md) | I-deploy ang default na solusyon sa Azure |
-| 30 minuto | [Pag-analisa ng AI Template](docs/instructions/3-Deconstruct-AI-Template.md) | Suriin ang istruktura at pagsasaayos |
-| 30 minuto | [I-configure ang AI Template](docs/instructions/4-Configure-AI-Template.md) | I-aktiba at subukan ang mga magagamit na tampok |
-| 30 minuto | [I-customize ang AI Template](docs/instructions/5-Customize-AI-Template.md) | Iangkop ang template sa iyong mga pangangailangan |
-| 30 minuto | [Pagbuwag ng Imprastruktura](docs/instructions/6-Teardown-Infrastructure.md) | Linisin at pakawalan ang mga resource |
-| 15 minuto | [Pagwawakas at Susunod na Hakbang](docs/instructions/7-Wrap-up.md) | Mga mapagkukunan sa pag-aaral, hamon sa Workshop |
+| 15 mins | [Panimula](docs/instructions/0-Introduction.md) | Itakda ang pundasyon, unawain ang mga layunin |
+| 30 mins | [Piliin ang AI Template](docs/instructions/1-Select-AI-Template.md) | Tuklasin ang mga opsyon at pumili ng panimula | 
+| 30 mins | [I-validate ang AI Template](docs/instructions/2-Validate-AI-Template.md) | I-deploy ang default na solusyon sa Azure |
+| 30 mins | [I-deconstruct ang AI Template](docs/instructions/3-Deconstruct-AI-Template.md) | Tuklasin ang istruktura at configuration |
+| 30 mins | [I-configure ang AI Template](docs/instructions/4-Configure-AI-Template.md) | I-activate at subukan ang mga available na feature |
+| 30 mins | [I-customize ang AI Template](docs/instructions/5-Customize-AI-Template.md) | Iangkop ang template sa iyong pangangailangan |
+| 30 mins | [I-teardown ang Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) | Linisin at palayain ang mga resources |
+| 15 mins | [Pagtatapos at Mga Susunod na Hakbang](docs/instructions/7-Wrap-up.md) | Mga learning resource, hamon sa workshop |
 
 <br/>
 
-## Ano ang Matututunan Mo
+## Ano ang Iyong Matututunan
 
-Isipin ang AZD Template bilang isang learning sandbox upang tuklasin ang iba't ibang kakayahan at tool para sa end-to-end development sa Microsoft Foundry. Sa pagtatapos ng workshop na ito, dapat ay mayroon kang intuitibong pag-unawa sa iba't ibang tool at konsepto sa kontekstong ito.
+Isipin ang AZD Template bilang isang learning sandbox upang tuklasin ang iba't ibang kakayahan at mga tools para sa end-to-end development sa Microsoft Foundry. Sa pagtatapos ng workshop na ito, dapat mayroon kang intuitive na pag-unawa sa iba't ibang tools at konsepto sa kontekstong ito.
 
 | Konsepto  | Layunin |
 |:---|:---|
-| **Azure Developer CLI** | Unawain ang mga command ng tool at mga workflow|
-| **AZD Templates**| Unawain ang estruktura ng proyekto at pagsasaayos|
-| **Azure AI Agent**| Mag-provision at mag-deploy ng Microsoft Foundry project  |
+| **Azure Developer CLI** | Unawain ang mga command ng tool at workflows|
+| **AZD Templates**| Unawain ang istruktura ng proyekto at config|
+| **Azure AI Agent**| Mag-provision at mag-deploy ng Microsoft Foundry na proyekto  |
 | **Azure AI Search**| Paganahin ang context engineering gamit ang mga agent |
-| **Observability**| Suriin ang tracing, monitoring at evaluations |
-| **Red Teaming**| Suriin ang adversarial testing at mga mitigations |
+| **Observability**| Tuklasin ang tracing, monitoring at evaluations |
+| **Red Teaming**| Tuklasin ang adversarial testing at mitigations |
 
 <br/>
 
-## Estruktura ng Workshop
+## Istruktura ng Workshop
 
-Istrakturado ang workshop upang dalhin ka mula sa pagtuklas ng template, hanggang sa pag-deploy, pag-analisa, at pagpapasadya - gamit ang opisyal na [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) starter template bilang batayan.
+Ang workshop ay nakaayos upang dalhin ka sa isang paglalakbay mula sa pagtuklas ng template, hanggang sa deployment, deconstruction, at customization - gamit ang opisyal na [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) na starter template bilang batayan.
 
-### [Modyul 1: Piliin ang AI Template](docs/instructions/1-Select-AI-Template.md) (30 minuto)
+### [Module 1: Piliin ang AI Template](docs/instructions/1-Select-AI-Template.md) (30 mins)
 
 - Ano ang mga AI Template?
-- Saan ako makakahanap ng mga AI Template?
-- Paano ako makakapagsimula sa pagbuo ng mga AI Agent?
-- **Lab**: Quickstart sa Codespaces o isang dev container
+- Saan ako makakahanap ng AI Template?
+- Paano ako makakapagsimula sa paggawa ng AI Agents?
+- **Lab**: Quickstart sa Codespaces o dev container
 
-### [Modyul 2: I-validate ang AI Template](docs/instructions/2-Validate-AI-Template.md) (30 minuto)
+### [Module 2: I-validate ang AI Template](docs/instructions/2-Validate-AI-Template.md) (30 mins)
 
-- Ano ang Arkitektura ng AI Template?
+- Ano ang AI Template Architecture?
 - Ano ang AZD Development Workflow?
 - Paano ako makakakuha ng tulong sa AZD Development?
-- **Lab**: I-deploy at I-validate ang AI Agents template
+- **Lab**: Deploy at I-validate ang AI Agents template
 
-### [Modyul 3: Pag-analisa ng AI Template](docs/instructions/3-Deconstruct-AI-Template.md) (30 minuto)
+### [Module 3: I-deconstruct ang AI Template](docs/instructions/3-Deconstruct-AI-Template.md) (30 mins)
 
-- Suriin ang iyong environment sa `.azure/` 
-- Suriin ang pagkakaayos ng iyong resource sa `infra/` 
-- Suriin ang iyong AZD configuration sa `azure.yaml`s
+- Tuklasin ang iyong kapaligiran sa `.azure/` 
+- Tuklasin ang iyong resource setup sa `infra/` 
+- Tuklasin ang iyong AZD configuration sa `azure.yaml`s
 - **Lab**: Baguhin ang Environment Variables & I-redeploy
 
-### [Modyul 4: I-configure ang AI Template](docs/instructions/4-Configure-AI-Template.md) (30 minuto)
-- Suriin: Retrieval Augmented Generation
-- Suriin: Agent Evaluation & Red Teaming
-- Suriin: Tracing & Monitoring
-- **Lab**: Suriin ang AI Agent + Observability 
+### [Module 4: I-configure ang AI Template](docs/instructions/4-Configure-AI-Template.md) (30 mins)
+- Tuklasin: Retrieval Augmented Generation
+- Tuklasin: Agent Evaluation & Red Teaming
+- Tuklasin: Tracing & Monitoring
+- **Lab**: Tuklasin ang AI Agent + Observability 
 
-### [Modyul 5: I-customize ang AI Template](docs/instructions/5-Customize-AI-Template.md) (30 minuto)
-- Tukuyin: PRD na may Scenario Requirements
+### [Module 5: I-customize ang AI Template](docs/instructions/5-Customize-AI-Template.md) (30 mins)
+- Tukuyin: PRD na may mga Scenario Requirements
 - I-configure: Environment Variables para sa AZD
-- Ipatupad: Lifecycle Hooks para sa karagdagang mga gawain
+- Ipatupad: Lifecycle Hooks para sa dagdag na mga gawain
 - **Lab**: I-customize ang template para sa aking scenario
 
-### [Modyul 6: Pagbuwag ng Imprastruktura](docs/instructions/6-Teardown-Infrastructure.md) (30 minuto)
-- Recap: Ano ang mga AZD Templates?
-- Recap: Bakit gamitin ang Azure Developer CLI?
-- Susunod na Hakbang: Subukan ang ibang template!
-- **Lab**: I-deprovision ang imprastruktura & paglilinis
+### [Module 6: I-teardown ang Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) (30 mins)
+- Balikan: Ano ang AZD Templates?
+- Balikan: Bakit gamitin ang Azure Developer CLI?
+- Mga Susunod na Hakbang: Subukan ang ibang template!
+- **Lab**: I-deprovision ang infrastructure at paglilinis
 
 <br/>
 
 ## Hamon sa Workshop
 
-Gusto mo bang hamunin ang sarili para sa higit pa? Narito ang ilang mungkahing proyekto - o ibahagi ang iyong mga ideya sa amin!!
+Gusto mo bang hamunin ang sarili na gumawa pa ng higit? Narito ang ilang mungkahing proyekto - o ibahagi ang iyong mga ideya sa amin!!
 
 | Proyekto | Deskripsyon |
 |:---|:---|
-|1. **Pag-analisa ng Isang Komplikadong AI Template** | Gamitin ang workflow at mga tool na inilahad namin at tingnan kung kaya mong i-deploy, i-validate, at i-customize ang ibang AI solution template. _Ano ang natutunan mo?_|
-|2. **I-customize Ayon sa Iyong Scenario**  | Subukang sumulat ng PRD (Product Requirements Document) para sa ibang scenario. Pagkatapos gamitin ang GitHub Copilot sa iyong template repo sa Agent Model - at hilingin dito na bumuo ng isang customization workflow para sa iyo. _Ano ang natutunan mo? Paano mo mapapabuti ang mga mungkahing ito?_|
+|1. **I-deconstruct ang Isang Kumplikadong AI Template** | Gamitin ang workflow at mga tool na inilatag namin at tingnan kung kaya mong i-deploy, i-validate, at i-customize ang ibang AI solution template. _Ano ang iyong natutunan?_|
+|2. **I-customize Ayon sa Iyong Scenario**  | Subukang gumawa ng PRD (Product Requirements Document) para sa ibang scenario. Pagkatapos, gamitin ang GitHub Copilot sa iyong template repo sa Agent Model - at hilingin na gumawa ng customization workflow para sa iyo. _Ano ang iyong natutunan? Paano mo mapapabuti ang mga mungkahing ito?_|
 | | |
 
 ## May feedback?
 
-1. Mag-post ng isyu sa repo na ito - i-tag ito ng `Workshop` para sa kaginhawaan.
-1. Sumali sa Microsoft Foundry Discord - kumonekta sa iyong mga kasamahan!
+1. Mag-post ng isyu sa repo na ito - lagyan tag ang `Workshop` para sa kaginhawaan.
+1. Sumali sa Microsoft Foundry Discord - makipag-ugnayan sa iyong mga kapwa!
 
 
 | | | 
 |:---|:---|
-| **📚 Tahanan ng Kurso**| [AZD Para sa Mga Nagsisimula](../README.md)|
-| **📖 Dokumentasyon** | [Magsimula gamit ang AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️ Mga Template ng AI** | [Mga Template ng Microsoft Foundry](https://ai.azure.com/templates) |
-|**🚀 Susunod na Hakbang** | [Simulan ang Workshop](#pangkalahatang-ideya-ng-workshop) |
+| **📚 Home ng Kurso**| [AZD For Beginners](../README.md)|
+| **📖 Dokumentasyon** | [Simulan sa AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+|**🚀 Mga Susunod na Hakbang** | [Simulan ang Workshop](#workshop-overview) |
 | | |
 
 <br/>
 
 ---
 
-**Navigasyon:** [Pangunahing Kurso](../README.md) | [Panimula](docs/instructions/0-Introduction.md) | [Modyul 1: Piliin ang Template](docs/instructions/1-Select-AI-Template.md)
+**Pag-navigate:** [Pangunahing Kurso](../README.md) | [Panimula](docs/instructions/0-Introduction.md) | [Module 1: Piliin ang Template](docs/instructions/1-Select-AI-Template.md)
 
-**Handa ka na bang magsimulang bumuo ng mga aplikasyon ng AI gamit ang AZD?**
+**Handa ka na bang magsimulang gumawa ng mga AI application gamit ang AZD?**
 
 [Simulan ang Workshop: Panimula →](docs/instructions/0-Introduction.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:
-Ang dokumentong ito ay isinalin gamit ang AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman pinagsisikapan naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ituring na awtoritatibong sanggunian ang orihinal na dokumento sa orihinal nitong wika. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot para sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

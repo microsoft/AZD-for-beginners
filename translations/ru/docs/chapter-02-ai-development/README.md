@@ -1,73 +1,77 @@
 # Глава 2: Разработка с приоритетом на ИИ
 
-**📚 Курс**: [AZD для начинающих](../../README.md) | **⏱️ Продолжительность**: 1-2 часа | **⭐ Сложность**: Средний уровень
+**📚 Курс**: [AZD для начинающих](../../README.md) | **⏱️ Длительность**: 4-5 часов включая практику | **⭐ Сложность**: Средний уровень
 
 ---
 
 ## Обзор
 
-В этой главе рассматривается развертывание приложений с искусственным интеллектом с использованием Azure Developer CLI и служб Microsoft Foundry. От простых чат-приложений с ИИ до интеллектуальных агентов с инструментами.
+Эта глава посвящена развертыванию приложений с поддержкой ИИ с использованием Azure Developer CLI и сервисов Microsoft Foundry. От простых чат-приложений до интеллектуальных агентов с инструментами.
 
-> **Примечание по проверке (2026-07-13):** Поток команд и рекомендации по расширениям в этой главе были проверены на версии `azd` `1.27.1` и текущем предварительном выпуске расширения AI агента `azure.ai.agents` `1.0.0-beta.5`. Если у вас более старая версия AZD, сначала обновитесь, а затем продолжайте выполнение упражнений.
+> **Обзор выпуска (2026-11-04):** Руководство AI CLI проверено по опубликованной документации/исходникам `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23` и `azure.ai.evaluations` `1.0.0-beta.2`. Используйте `azd >= 1.37.0` для объединённого рабочего процесса. Оценки теперь используют отдельное пространство имён `azd ai eval`; см. [изменения выпуска и рекомендации по миграции](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Это не проверка живого развертывания.
 
 ## Цели обучения
 
-Завершив эту главу, вы сможете:
-- Развертывать приложения с ИИ, используя готовые шаблоны AZD
-- Понять интеграцию Microsoft Foundry с AZD
-- Настраивать и конфигурировать AI агентов с инструментами
-- Развертывать приложения RAG (Retrieval-Augmented Generation)
+Выполнив эту главу, вы:
+- Развернёте приложения с ИИ, используя готовые шаблоны AZD
+- Поймёте интеграцию Microsoft Foundry с AZD
+- Настроите и персонализируете агентов ИИ с инструментами
+- Развернёте приложения RAG (генерация с расширенным поиском)
 
 ---
 
 ## 📚 Уроки
 
-| № | Урок | Описание | Время |
+| # | Урок | Описание | Время |
 |---|--------|-------------|------|
-| 1 | [Интеграция Microsoft Foundry](microsoft-foundry-integration.md) | Подключение AZD к службам Foundry | 30 мин |
-| 2 | [Руководство по AI агентам](agents.md) | Развертывание интеллектуальных агентов с инструментами | 45 мин |
-| 3 | [Развертывание AI модели](ai-model-deployment.md) | Развертывание и настройка AI моделей | 30 мин |
-| 4 | [Лабораторная работа AI Workshop](ai-workshop-lab.md) | Практика: подготовка решения с ИИ для AZD | 60 мин |
+| 1 | [Интеграция Microsoft Foundry](microsoft-foundry-integration.md) | Подключение AZD к сервисам Foundry | 30 мин |
+| 2 | [Руководство по агентам ИИ](agents.md) | Развертывание интеллектуальных агентов с инструментами | 45 мин |
+| 3 | [Развертывание моделей ИИ](ai-model-deployment.md) | Развертывание и настройка моделей ИИ | 30 мин |
+| 4 | [Практическая лаборатория ИИ](ai-workshop-lab.md) | Практика: изучение шаблона и планирование конверсии | 2-3 часа |
 
 ---
 
 ## 🚀 Быстрый старт
 
+Выберите один из вариантов в новой пустой директории. Заканчивающийся `.` инициализирует текущую директорию; иначе AZD может создать подпапку без изменения рабочей директории терминала.
+
 ```bash
-# Вариант 1: Чат-приложение RAG
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# Вариант 2: AI агенты
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# Вариант 3: Быстрое чат-приложение
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
 ---
 
-## 🤖 Популярные шаблоны ИИ
+## 🤖 Рекомендуемые шаблоны ИИ
 
 | Шаблон | Описание | Сервисы |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG чат с цитатами | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI агент с инструментами | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Базовый AI чат | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG чат с цитированием | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Агент ИИ с инструментами | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Базовый чат ИИ | OpenAI + Container Apps |
 
 ---
 
-## 💰 Осведомленность о стоимости
+## 💰 Оценка затрат
 
-| Среда | Оценочная ежемесячная стоимость |
-|-------------|----------------------|
+Это ориентировочные диапазоны, а не цены или лимиты; трафик модели, тарифные планы поиска/вычислений, регион и дополнительные функции могут превышать их. Ознакомьтесь с актуальными ценами вашего выбранного примера перед развертыванием.
+
+| Окружение | Примерная ежемесячная стоимость |
+|-------------|------------------------------|
 | Разработка | $80-150 |
-| Тестирование | $150-300 |
-| Продакшн | $300-3,500+ |
+| Стейджинг | $150-300 |
+| Продакшен | $300-3,500+ |
 
-**Совет:** Выполняйте `azd down` после тестирования, чтобы избежать начисления платы.
+**Совет:** Запускайте `azd down` после тестирования, чтобы избежать платы.
 
 ---
 
@@ -76,15 +80,15 @@ azd up
 | Направление | Глава |
 |-----------|---------|
 | **Предыдущая** | [Глава 1: Основы](../chapter-01-foundation/README.md) |
-| **Следующая** | [Глава 3: Конфигурация](../chapter-03-configuration/README.md) |
-| **Перейти к** | [Глава 8: Производственные шаблоны](../chapter-08-production/README.md) |
+| **Следующая** | [Глава 3: Настройка](../chapter-03-configuration/README.md) |
+| **Перейти к** | [Глава 8: Паттерны продакшена](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Связанные ресурсы
 
-- [Отладка ИИ](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Практики производства ИИ](../chapter-08-production/production-ai-practices.md)
+- [Поиск и устранение проблем с ИИ](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Практики продакшен ИИ](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

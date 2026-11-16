@@ -1,111 +1,113 @@
-# မူလ-အေဂျင့် ပေါင်းစည်းမှု ပုံစံများ
+# မူလတန်းအေဂျင့်များ ကော်အပ် ကျင့်စဉ်များ
 
-⏱️ **ခန့်မှန်းချိန်**: 60-75 မိနစ် | 💰 **ခန့်မှန်း ကုန်ကျစရိတ်**: ~$100-300/လ | ⭐ **ခက်ခဲမှု**: အဆင့်မြင့်
+⏱️ **ခန့်မှန်းချိန်**: ၆၀-၇၅ မိနစ် ဖတ်ရှုရန်; တီထွင်ရန် အချိန် အနည်းငယ် | 💰 **ခန့်မှန်းကုန်ကျစရိတ်**: အလုပ်ပမာဏပေါ်မူတည် | ⭐ **ရှုပ်ထွေးမှု**: အဆင့်မြင့်
 
-**📚 သင်ယူရေး လမ်းကြောင်း:**
-- ← ယခင်: [စွမ်းရည် စီမံခန့်ခွဲမှု](capacity-planning.md) - အရင်းအမြစ် အရွယ်အစား သတ်မှတ်ခြင်းနှင့် အတိုင်းအတာ တိုးမြှင့်ရေး မဟာဗျူဟာများ
-- 🎯 **သင် ဤနေရာတွင် ရှိသည်**: အများ-အေဂျင့် ပေါင်းစည်းမှု ပုံစံများ (စီမံခန့်ခွဲမှု, ဆက်သွယ်မှု, အခြေအနေ စီမံခန့်ခွဲမှု)
-- → နောက်တစ်ခု: [SKU ရွေးချယ်ခြင်း](sku-selection.md) - မှန်ကန်သော Azure ဝန်ဆောင်မှုများ ရွေးချယ်ခြင်း
+**📚 သင်ယူမှု လမ်းညွှန်:**
+- ← ယခင်: [စွမ်းအားစီမံချက်](capacity-planning.md) - အရင်းအမြစ် အရွယ်အစားပြုခြင်းနှင့် အဆင့်မြှင့်မှု မဟာဗျူဟာများ
+- 🎯 **သင် ရှိသည့်နေရာ**: မူလတန်းအေဂျင့် များ၏ ကော်အပ် ကျင့်စဉ်များ (စီမံခြင်း၊ ဆက်သွယ်ရေး၊ အခြေအနေ စီမံခန့်ခွဲမှု)
+- → နောက်တစ်ခု: [SKU ရွေးချယ်ခြင်း](sku-selection.md) - မှန်ကန်သော Azure ဝန်ဆောင်မှုများကို ရွေးချယ်ခြင်း
 - 🏠 [သင်တန်း မူလစာမျက်နှာ](../../README.md)
 
 ---
 
-## သင် သင်ယူမည့် အရာများ
+## သင် အောက်ပါကို သင်ယူ မည်
 
-ဒီသင်ခန်းစာကို ပြီးမြောက်ပါက သင်သည်:
-- **multi-agent architecture** ပုံစံများနှင့် ဘယ်အချိန်တွင် အသုံးပြုရမည်ကို နားလည်နိုင်မည်
-- **orchestration patterns** (ဗဟိုပြု, မဗဟိုပြု, အဆင့်လိုက်) များကို အကောင်အထည်ဖော်နိုင်မည်
-- **agent communication** နည်းဗျူဟာများ (တပြိုင်နက်ဆက်သွယ်မှု, အချိန်မတည်ငြိမ်သောဆက်သွယ်မှု, ပြောင်းလဲမှု အခြေပြု) ကို ဒီဇိုင်းဆွဲနိုင်မည်
-- ဖြန့်ချိထားသော agent များအကြား **shared state** ကို စီမံနိုင်မည်
-- AZD ဖြင့် Azure ပေါ်တွင် **multi-agent systems** များကို တပ်ဆင်နိုင်မည်
-- အစစ်အမှန် AI မျှော်မှန်းချက်များအတွက် **coordination patterns** များကို အသုံးချနိုင်မည်
-- ဖြန့်ချိထားသော agent စနစ်များကို စောင့်ကြည့်ခြင်းနှင့် အမှားရှာဖွေမှုပြုနိုင်မည်
+ဤသင်ခန်းစာ ဖြည့်ဆည်းပြီးနောက် သင်သည်
+- **မူလတန်းအေဂျင့် ဖွဲ့စည်းပုံ** ကျင့်စဉ်များနှင့် ဘယ်အချိန်တွင် အသုံးပြုရမည်ကို နားလည်မည်
+- **စီမံခြင်းကျင့်စဉ်များ** (အလယ်ခေါင်းစဉ်၊ အရေးပေါ်၊ အဆင့်မြင့်) ကို တည်ဆောက်မည်
+- **အေဂျင့် ဆက်သွယ်ရေး** မဟာဗျူဟာများ (အချိန်တော်တည်း၊ အချိန်ကြာ, ဖြစ်စဉ်ချုပ်) တည်ဆောက်မည်
+- ဖြန့်ဝေထားသော အေဂျင့်များအတွက် **မျှဝေထားသော အခြေအနေ** ကို စီမံခန့်ခွဲမည်
+- AZD နှင့်အတူ **မူလတန်းအေဂျင့် စနစ်များ** ကို ပို့ဆောင်မည်
+- လူကြီးမင်း၏ AI လက်တွေ့ဖြည်းဖြည်းမှုများအတွက် **ကော်အပ်ကျင့်စဉ်များ** ကို အသုံးပြုမည်
+- ဖြန့်ဝေထားသော အေဂျင့်စနစ်များကို စောင့်ကြည့်၍ အဆင်ပြေအောင် ပြင်ဆင်မည်
 
-## မူလ-အေဂျင့် ပေါင်းစည်းမှု အရေးပါမှု
+## မူလတန်းအေဂျင့် ကော်အပ်မှု အရေးကြီးချက်
 
-### တိုးတက်မှု: တစ်ဦးတည်း အေးဂျင့် မှ အများ-အေဂျင့် သို့
+### တိုးတက်မှု: တစ်ခုတည်းအေဂျင့်မှ မူလတန်းအေဂျင့်ဆီသို့
 
-**တစ်ဦးတည်း အေးဂျင့် (ရိုးရှင်း):**
+**တစ်ဦးတည်းအေဂျင့် (ရိုးရိုး):**
 ```
 User → Agent → Response
 ```
-- ✅ နားလည်ရလွယ်ပြီး အကောင်အထည်ဖော်ရန် လွယ်ကူသည်
-- ✅ ရိုးရှင်းသော အလုပ်များအတွက် မြန်ဆန်သည်
-- ❌ တစ်ခုတည်း မော်ဒယ်၏ စွမ်းရည်များဖြင့် ကန့်သတ်ထားသည်
-- ❌ ရှုပ်ထွေးသော အလုပ်များကို တပြိုင်နက်တွင် လုပ်ဆောင်၍ မရ
-- ❌ အထူးကျွမ်းကျင်မှု မရှိ
+- ✅ နားလည်ရလွယ်ကူပြီး တည်ဆောက်ရလွယ်ကူသည်
+- ✅ ရိုးရှင်းတဲ့ အလုပ်များအတွက် အမြန်ဖြစ်သည်
+- ❌ တစ်ခုတည်း မော်ဒယ်၏ စွမ်းရည်ကန့်သတ်ချက်ရှိသည်
+- ❌ ရှုပ်ထွေးသော အလုပ်များကို 병렬လုပ်ဆောင်၍ မရနိုင်ပါ
+- ❌ အထူးပြုလုပ်မှု မရှိပါ
 
-**အများ-အေဂျင့် စနစ် (အဆင့်မြင့်):**
+**မူလတန်းအေဂျင့် စနစ် (အဆင့်မြင့်):**
 ```mermaid
 graph TD
-    Orchestrator[စီမံခန့်ခွဲသူ] --> Agent1[အေးဂျင့် 1<br/>အစီအစဉ်]
-    Orchestrator --> Agent2[အေးဂျင့် 2<br/>ကုဒ်]
-    Orchestrator --> Agent3[အေးဂျင့် 3<br/>ပြန်လည်သုံးသပ်ခြင်း]
-```- ✅ အလုပ်အမျိုးအစားအလိုက် အထူးကျွမ်းကျင်ထားသော agent များ
-- ✅ မြန်ဆန်မှုအတွက် တပြိုင်နက် ဆောင်ရွက်နိုင်မှု
-- ✅ မော်ဒူလာဖြင့် ထိန်းသိမ်းရလွယ်ကူသည်
-- ✅ ရှုပ်ထွေးသော လုပ်ငန်းစဉ်များတွင် ကောင်းမွန်သည်
-- ⚠️ ညှိနှိုင်းမှု ရုပ်သိမ်းရေး လိုအပ်သည်
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```
+- ✅ အထူးပြုအေဂျင့်များခုခံထားသော အလုပ်များအတွက်
+- ✅ အမြန်လုပ်ဆောင်ရန် 병렬 အလုပ်လုပ်နိုင်သည်
+- ✅ မော်ဂျူးမြှောက်၍ ထိန်းသိမ်းရန် လွယ်ကူသည်
+- ✅ ရှုပ်ထွေးသော လုပ်ငန်းစဉ်များအတွက် ကောင်းမွန်သည်
+- ⚠️ ကော်အပ်ခြင်းဆိုင်ရာ ရေးရာများ လိုအပ်သည်
 
-**နှိုင်းယှဉ်ချက်**: တစ်ဦးတည်း အေးဂျင့် သည် အလုပ်အားလုံးကို တစ်ယောက်တည်း လုပ်သော လူတစ်ယောက်တည်းကဲ့သို့ ဖြစ်သည်။ အများ-အေဂျင့် သည် သုတေသန, ကုဒ်ရေးသူ, စစ်ဆေးသူ, စာရေးသူ စသည့် အထူးကျွမ်းကျင်သူများ ပါဝင်သည့် အသင်းတစ်စု ကဲ့သို့ ပူးပေါင်းဆောင်ရွက် သောအခြေအနေဖြစ်သည်။
+**တူညီချက်**: တစ်ဦးတည်းအေဂျင့်မှာ တစ်ဦးလူကိုယ်တိုင် အလုပ်အားလုံးသွားရာ။ မူလတန်းအေဂျင့်မှာ တစ်ဦးချင်းစွမ်းရည် အထူးပြုထားသော အဖွဲ့ (သုတေသနသူ၊ ကုဒ်ရေးသူ၊ သုံးသပ်သူ၊ စာရေးသူ) တစ်စုတစ်ဝေးလုပ်ကိုင်နေရာဖြစ်သည်။
 
 ---
 
-## အဓိက ပေါင်းစည်းမှု ပုံစံများ
+## အခြေခံ ကော်အပ်ကျင့်စဉ်များ
 
-### Pattern 1: အစဉ်လိုက် ပေါင်းစည်းမှု (တာဝန် ဆက်လက်မှု ချိုင်)
+### ကျင့်စဉ် ၁: တန်းလိုက် ကော်အပ်မှု (တာဝန်ဗျိုးဆက်)
 
-**ဘယ်အချိန်တွင် အသုံးပြုသင့်သလဲ**: တာဝန်များကို သတ်မှတ်ထားသော အစီလိုက်အတိုင်း ပြီးမြောက်ရမည်၊ အချင်းချင်း အောက်တွင် အလုပ်များ အခြေခံနိုင်ရန်။
+**ဘယ်အချိန်အသုံးပြုမလဲ**: အလုပ်များအားတိကျသောအဆင့်လိုက်ပြီးဆုံးရန်၊ တစ်ဦးချင်းစီ အရင်အဆင့်၏ ထုတ်ကုန်ပေါ်တွင် တည်ဆောက်သည်။
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as သုတေသန အေးဂျင့်
-    participant Agent2 as စာရေး အေးဂျင့်
-    participant Agent3 as တည်းဖြတ် အေးဂျင့်
+    participant Agent1 as Research Agent
+    participant Agent2 as Writer Agent
+    participant Agent3 as Editor Agent
     
-    User->>Orchestrator: "AI အကြောင်း ဆောင်းပါးရေးပါ"
-    Orchestrator->>Agent1: ခေါင်းစဉ် သုတေသန
-    Agent1-->>Orchestrator: သုတေသန ရလဒ်များ
-    Orchestrator->>Agent2: မူကြမ်းရေးပါ (သုတေသနကို အသုံးပြု၍)
-    Agent2-->>Orchestrator: မူကြမ်း ဆောင်းပါး
-    Orchestrator->>Agent3: တည်းဖြတ်၍ တိုးတက်စေပါ
-    Agent3-->>Orchestrator: နောက်ဆုံး ဆောင်းပါး
-    Orchestrator-->>User: တိုးတက် ကောင်းမွန်သည့် ဆောင်းပါး
+    User->>Orchestrator: "Write article about AI"
+    Orchestrator->>Agent1: Research topic
+    Agent1-->>Orchestrator: Research results
+    Orchestrator->>Agent2: Write draft (using research)
+    Agent2-->>Orchestrator: Draft article
+    Orchestrator->>Agent3: Edit and improve
+    Agent3-->>Orchestrator: Final article
+    Orchestrator-->>User: Polished article
     
-    Note over User,Agent3: စဉ်ဆက်: အဆင့်တိုင်းသည် ယခင် အဆင့်ကို စောင့်ဆိုင်းသည်
+    Note over User,Agent3: Sequential: Each step waits for previous
 ```
+
 **အားသာချက်များ:**
-- ✅ ဒေတာသွားလာမှု ပေါ်လွင်သည်
-- ✅ အမှား ရှာဖွေရေး လွယ်ကူသည်
-- ✅ အလုပ်လုပ်စဉ် အစီအမံ ခန့်မှန်းနိုင်သည်
+- ✅ အချက်အလက် လွှဲပြောင်းမှု ရှင်းလင်းသည်
+- ✅ အမှားရှာဖွေရန် လွယ်ကူသည်
+- ✅ ဆောင်ရွက်မှု အဆင့်စဉ် ကြိုတင်ခန့်မှန်းနိုင်သည်
 
 **ကန့်သတ်ချက်များ:**
-- ❌ ရှာဖွေရေး အနေနဲ့ နှေးကွေးသည် (တပြိုင်နက်ဆောင်ရွက်မှု မရှိ)
-- ❌ တစ်ခု ကျရှုံးခြင်းက အစုံလုံးကို တားဆီးနိုင်သည်
-- ❌ အချိုးကျ မဟုတ်သော အလုပ်များကို ကိုင်တွယ်ရန် မဖြစ်နိုင်
+- ❌ အမြန်မဖြစ်နိုင် (병렬 မရှိ)
+- ❌ တစ်ခုခု မအောင်မြင်ပါက တာ၀န်စဉ်တစ်လျှောက် လုပ်ငန်းများ ပိတ်မိသည်
+- ❌ အချိုးကျမှုရှိသော အလုပ်များကို ကိုင်တွယ်၍ မရသည်
 
-**ဥပမာ အသုံးချမှုများ:**
-- အကြောင်းအရာ ဖန်တီးခြင်း လုပ်ငန်းစဉ် (သုတေသန → ရေးသား → တည်းဖြတ် → ထုတ်ဝေ)
-- ကုဒ် ထုတ်လုပ်ခြင်း (အစီအစဉ် → တည်ဆောက် → စမ်းသပ် → ထုတ်လွှင့်)
-- အစီရင်ခံစာ ဖန်တီးခြင်း (ဒေတာ စုပေါင်း → विश्लेषण → တီထွင်ခြင်း → အကျဉ်းချုပ်)
+**ဥပမာ အသုံးပြုမှုများ:**
+- အကြောင်းအရာ ဖန်တီးခြင်း လုပ်ငန်းစဉ် (သုတေသန → စာရေး → အည်းတည် → ဖြန့်ချိ)
+- ကုဒ် ဖန်တီးမှု (အစီအစဉ် → အကောင်အထည် → စမ်းသပ် → ထုတ်လုပ်)
+- အစီရင်ခံစာ ဖန်တီးမှု (ဒေတာ စုဆောင်း → စမ်းသပ် → ချမူ → အနှစ်ချုပ်)
 
 ---
 
-### Pattern 2: 병렬 ပေါင်းစည်းမှု (Fan-Out/Fan-In)
+### ကျင့်စဉ် ၂: 병렬 ကော်အပ်မှု (ပန်ထွက်/ပန်ဝင်)
 
-**ဘယ်အချိန်တွင် အသုံးပြုသင့်သလဲ**: လွတ်လပ်သော တာဝန်များကို တပြိုင်နက် ဆောင်ရွက်နိုင်ပြီး နောက်ဆုံးတွင် ရလဒ်များကို ပေါင်းစည်းလိုသည်။
+**ဘယ်အချိန်အသုံးပြုမလဲ**: လွတ်လပ်သော အလုပ်များကို တပြိုင်နက် ထပ်တလဲလဲ ရန်၊ ရလဒ်များကို နောက်ဆုံးတွင် ပေါင်းစပ်ရန်။
 
 ```mermaid
 graph TB
-    User[အသုံးပြုသူ တောင်းဆိုချက်]
-    Orchestrator[ညှိနှိုင်းသူ]
-    Agent1[ခွဲခြမ်းစိတ်ဖြာ အေဂျင့်]
-    Agent2[သုတေသန အေဂျင့်]
-    Agent3[ဒေတာ အေဂျင့်]
-    Aggregator[ရလဒ် စုစည်းသူ]
-    Response[ပေါင်းစပ် တုံ့ပြန်ချက်]
+    User[User Request]
+    Orchestrator[Orchestrator]
+    Agent1[Analysis Agent]
+    Agent2[Research Agent]
+    Agent3[Data Agent]
+    Aggregator[Result Aggregator]
+    Response[Combined Response]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -119,36 +121,37 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **အားသာချက်များ:**
-- ✅ မြန် (တပြိုင်နက် ဆောင်ရွက်မှု)
-- ✅ ဖောလတ်တန် (အပိုင်းအစ ရလဒ်များကို အလက်ခံနိုင်သည်)
-- ✅ အလျားလိုက် တိုးချဲ့နိုင်သည်
+- ✅ အမြန်။ 병렬 လုပ်ဆောင်မှု
+- ✅ အမှားခံနိုင်သည် (အစိတ်အပိုင်းရလဒ်များ လက်ခံနိုင်သည်)
+- ✅ အလျားလိုက် ဆွဲချသော ရွေးချယ်မှုရှိသည်
 
 **ကန့်သတ်ချက်များ:**
-- ⚠️ ရလဒ်များသည် အစီအစဉ် မကျ၍ ထွက်လာနိုင်သည်
-- ⚠️ ပေါင်းစည်းမှု ရုပ်ပုံ စီမံခန့်ခွဲရန် လိုအပ်သည်
-- ⚠️ တည်နေရာ အခြေအနေ စီမံခန့်ခွဲမှု ရှုပ်ထွေးသည်
+- ⚠️ ရလဒ်များ အစီအစဉ်မကျောက်နိုင်
+- ⚠️ ပေါင်းစပ်ရေးရာ လိုအပ်သည်
+- ⚠️ အခြေအနေ စီမံခန့်ခွဲမှု ခက်ခဲသည်
 
-**ဥပမာ အသုံးချမှုများ:**
-- အထွေထွေ ဒေတာ စုဆောင်းခြင်း (APIs + ဒေတာဘေ့စ်များ + ဝက်ဘ် စကရပ်)
-- ယှဉ်ပြိုင်သုံးသပ်ခြင်း (အမျိုးမျိုး မော်ဒယ်များက ဖြေရှင်းချက် များထုတ်ပေး၊ အကောင်းဆုံးကို ရွေးချယ်)
-- ဘာသာပြန်ဝန်ဆောင်မှုများ (ဘာသာစကားစုံသို့ တပြိုင်နက် ဘာသာပြန်)
+**ဥပမာ အသုံးပြုမှုများ:**
+- အရင်းအမြစ်စုံမှ ဒေတာ စုဆောင်းမှု (API များ + ဒေတာဘေ့စ်များ + ဝဘ် စကရပ်)
+- ယှဉ်ပြိုင်မှု သုတေသန (မော်ဒယ်များစွာက ဖြေရှင်းချက် ထုတ်လုပ်၍ အကောင်းဆုံး ရွေးချယ်)
+- ဘာသာပြန် ဝန်ဆောင်မှုများ (ဘာသာစကားများစွာအတွက် တပြိုင်နက် ဘာသာပြန်)
 
 ---
 
-### Pattern 3: တန်းစီ ပေါင်းစည်းမှု (မန်နေဂျာ-အလုပ်သမား)
+### ကျင့်စဉ် ၃: အဆင့်တန်း ကော်အပ်မှု (မန်နေဂျာ-အလုပ်သမား)
 
-**ဘယ်အချိန်တွင် အသုံးပြုသင့်သလဲ**: အခန်းကဏ္ဍများဖြင့် ကှဲထွက်သော ရှုပ်ထွေးသော လုပ်ငန်းစဉ်များတွင် တာဝန်အဖွဲ့ချုပ် လိုအပ်သည့် အချိန်။
+**ဘယ်အချိန်အသုံးပြုမလဲ**: ရှုပ်ထွေးသော လုပ်ငန်းစဉ်များတွင် အခြားအလုပ်ငန်းများ ဝေဝါးဖွဲ့ရန် လိုအပ်သည်။
 
 ```mermaid
 graph TB
-    Master[အဓိက စီမံကိန်း ဦးဆောင်သူ]
-    Manager1[သုတေသန မန်နေဂျာ]
-    Manager2[အကြောင်းအရာ မန်နေဂျာ]
-    W1[ဝက်ဘ် ဒေတာ ဆွဲထုတ်သူ]
-    W2[စာတမ်း ခွဲခြမ်းစိတ်ဖြာသူ]
-    W3[စာရေးသူ]
-    W4[တည်းဖြတ်သူ]
+    Master[Master Orchestrator]
+    Manager1[Research Manager]
+    Manager2[Content Manager]
+    W1[Web Scraper]
+    W2[Paper Analyzer]
+    W3[Writer]
+    W4[Editor]
     
     Master --> Manager1
     Master --> Manager2
@@ -161,75 +164,77 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
+
 **အားသာချက်များ:**
 - ✅ ရှုပ်ထွေးသော လုပ်ငန်းစဉ်များကို ကိုင်တွယ်နိုင်သည်
-- ✅ မော်ဒူလာဖြစ်၍ ထိန်းသိမ်းရ လွယ်ကူသည်
-- ✅ တာဝန် ဖြန့်ချိမှု များကို တိတိကျကျ သတ်မှတ်နိုင်သည်
+- ✅ မော်ဂျူးမြှောက်၍ ထိန်းသိမ်းမှု လွယ်ကူသည်
+- ✅ တာဝန် ခွဲခြားမှုရှင်းလင်းသည်
 
 **ကန့်သတ်ချက်များ:**
-- ⚠️ ပိုမိုရှုပ်ထွေးသော စက်ရုပ်ပုံစံ
-- ⚠️ အချိန်ကြာမြင့်မှု မြင့်တက်နိုင်သည် (ညှိနှိုင်းအလွှာများ များ)
-- ⚠️ ထိရောက်သည့် စီမံခန့်ခွဲမှု လိုအပ်သည်
+- ⚠️ အဆောက်အအုံ ပိုရှုပ်ထွေးသည်
+- ⚠️ နှောင့်နှေးမှု ပိုရှိသည် (ကော်အပ်မှု အလွှာများ များသည်)
+- ⚠️ အဆန်းတစ်တွေ့ရင် စီမံခန့်ခွဲမှုလိုအပ်သည်
 
-**ဥပမာ အသုံးချမှုများ:**
-- စီးပွားဖြစ် စာရွက်စာတမ်း ပြင်ဆင်မှု (သတ်မှတ် → ညွှန်ပေး → ဆောင်ရွက် → သိုလှောင်)
-- အဆင့်စုံ ဒေတာ လှုပ်ရှားမှု လမ်းကြောင်းများ (ယူဆောင် → သန့်ရေ → ပြောင်းလဲ → विश्लेषण → အစီရင်ခံ)
-- ရှုပ်ထွေးသော အော်တိုမေးရှင်း လုပ်ငန်းစဉ်များ (အစီအစဉ် → အရင်းအမြစ် ချီးမြှင့် → ဆောင်ရွက်မှု → ကြီးကြပ်စစ်ဆေးမှု)
+**ဥပမာ အသုံးပြုမှုများ:**
+- အဖြစ်မှန် စာရွက်စာတမ်း စီမံခန့်ခွဲမှု (အမျိုးအစားခွဲ → လမ်းညွှန် → ဆောင်ရွက် → သိုလှောင်)
+- အဆင့်ရှည် ဒေတာ လုပ်ငန်းစဉ် (လက်ခံ → အဆင်း → ပြောင်း → စိစစ် → အစီရင်ခံ)
+- ရှုပ်ထွေးသော အလိုအလျောက် လုပ်ငန်းစဉ်များ (အစီအစဉ် → အရင်းအမြစ် မျွှားပေးမှု → ဆောင်ရွက် → စောင့်ကြည့်)
 
 ---
 
-### Pattern 4: အဖြစ်အပျက် အသက်ဝင်သည့် ပေါင်းစည်းမှု (Publish-Subscribe)
+### ကျင့်စဉ် ၄: ဖြစ်စဉ်အခြေခံ ကော်အပ်မှု (ဖော်ပြမှု-စာရင်းသွင်းမှု)
 
-**ဘယ်အချိန်တွင် အသုံးပြုသင့်သလဲ**: အေးဂျင့်များသည် အဖြစ်အပျက်များကို တုံ့ပြန်ရမည်၊ အချင်းချင်း ချိတ်ဆက်မှု သက်သာစေချင်သောအချိန်။
+**ဘယ်အချိန်အသုံးပြုမလဲ**: အေဂျင့်များ ဖြစ်ပွားမှုများကိုတုံ့ပြန်ရန်လိုအပ်ပြီး၊ ဇွဲမဟုတ်သော ဆက်သွယ်မှုလိုအပ်သည်။
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as ဒေတာ စုဆောင်းသူ
-    participant EventBus as Azure ဝန်ဆောင်မှု ဘတ်စ်
-    participant Agent2 as ခွဲခြမ်းစိတ်ဖြာသူ
-    participant Agent3 as အသိပေးသူ
-    participant Agent4 as မှတ်တမ်းသိမ်းသူ
+    participant Agent1 as Data Collector
+    participant EventBus as Azure Service Bus
+    participant Agent2 as Analyzer
+    participant Agent3 as Notifier
+    participant Agent4 as Archiver
     
-    Agent1->>EventBus: ထုတ်ပြန်သည် "ဒေတာလက်ခံခြင်း" ဖြစ်ရပ်
-    EventBus->>Agent2: စာရင်းသွင်း: ဒေတာကို ခွဲခြမ်းစစ်ဆေးသည်
-    EventBus->>Agent3: စာရင်းသွင်း: အသိပေးပို့သည်
-    EventBus->>Agent4: စာရင်းသွင်း: ဒေတာကို မှတ်တမ်းသိမ်းဆည်းသည်
+    Agent1->>EventBus: Publish "DataReceived" event
+    EventBus->>Agent2: Subscribe: Analyze data
+    EventBus->>Agent3: Subscribe: Send notification
+    EventBus->>Agent4: Subscribe: Archive data
     
-    Note over Agent1,Agent4: စာရင်းသွင်းသူများအားလုံးကို သီးခြား အလိုက် လုပ်ဆောင်သည်
+    Note over Agent1,Agent4: All subscribers process independently
     
-    Agent2->>EventBus: ထုတ်ပြန်သည် "ခွဲခြမ်းစိတ်ဖြာပြီးစီးခြင်း" ဖြစ်ရပ်
-    EventBus->>Agent3: စာရင်းသွင်း: ခွဲခြမ်းစိတ်ဖြာ အစီရင်ခံစာ ပို့သည်
+    Agent2->>EventBus: Publish "AnalysisComplete" event
+    EventBus->>Agent3: Subscribe: Send analysis report
 ```
+
 **အားသာချက်များ:**
-- ✅ အေးဂျင့်များအကြား ချိတ်ဆက်မှု သက်သာသည်
-- ✅ အသစ်သော အေးဂျင့်များကို လွယ်ကူစွာ ထည့်သွင်းနိုင်သည် (subscribe လုပ်ရန်သာ)
-- ✅ အချိန်မတည်ငြိမ်သော ဆောင်ရွက်မှု
-- ✅ ပြန်လည် တည်တံ့နိုင်ခြင်း (မက်ဆေ့ခ်ျ သိမ်းဆည်းခြင်း)
+- ✅ အေဂျင့်များအကြား ဇွဲမဟုတ်သော ဆက်သွယ်မှု
+- ✅ အေဂျင့်အသစ် ထည့်ရန် လွယ်ကူသည် (စာရင်းသွင်းခြင်းဖြင့်)
+- ✅ အချိန်ကြာ ညှိနှိုင်းမှု
+- ✅ ခိုင်မာသော (စာတိုက်မြဲခြင်း)
 
 **ကန့်သတ်ချက်များ:**
-- ⚠️ နောက်ကျသော တူညီမှု (eventual consistency)
-- ⚠️ အမှားရှာဖွေရေး ရှုပ်ထွေးသည်
-- ⚠️ မက်ဆေ့ခ်ျ အစီအစဉ် ဆိုင်ရာ အခက်အခဲများ
+- ⚠️ နောက်ဆုံးတွင် တိကျမှု ရှိရန်လိုအပ်သည်
+- ⚠️ အမှားရှာဖွေရေး အရမ်းခက်ခဲသည်
+- ⚠️ စာတိုက်စီအစဉ် အခက်အခဲများ
 
-**ဥပမာ အသုံးချမှုများ:**
-- အချိန်စီးကြောင်းစောင့်ကြည့်မှု စနစ်များ (သတိပေးချက်များ၊ ဒက်ရှ်ဘုတ်များ၊ မှတ်တမ်းများ)
-- စွမ်းရည်စုံ မက်ဆေ့ခ်ျ ဂျာနယ်များ (အီးမေးလ်၊ SMS, push, Slack)
-- ဒေတာ တင်ပြခြင်း လမ်းကြောင်းများ (တူညီသော ဒေတာကို အပေါင်းအစုစား ပရိုဆက်ဆာများ)
+**ဥပမာ အသုံးပြုမှုများ:**
+- အချိန်နောက်ခံ စောင့်ကြည့်ရေး စနစ်များ (သတိပေးချက်များ၊ ပေါ်လာဖော်ပြမှုများ၊ မှတ်တမ်းများ)
+- စနစ်များထဲမှ အကြောင်းကြားချက်များ (အီးမေလ်, SMS, push, Slack)
+- ဒေတာ လုပ်ငန်းစဉ်များ (အချက်အလက်နှစ်သက်သူများစွာ)
 
 ---
 
-### Pattern 5: သဘောတူညီမှု အခြေပြု ပေါင်းစည်းမှု (မဲပေးခြင်း/Quorum)
+### ကျင့်စဉ် ၅: သဘောတူညီမှုလေ့လာပုံ (မဲပေးခြင်း / ပါဝင်ခွင့်)
 
-**ဘယ်အချိန်တွင် အသုံးပြုသင့်သလဲ**: တစ်ဖက်လူတစ်စုမှ အတည်ပြုချက် လိုအပ်သောအချိန်။
+**ဘယ်အချိန်အသုံးပြုမလဲ**: ရှေ့ဆက်ရန် မမီမှီ သဘောတူညီမှု လိုအပ်သောအခါ။
 
 ```mermaid
 graph TB
-    Input[အဝင် တာဝန်]
-    Agent1[ကိုယ်စားလှယ် 1: gpt-4.1]
-    Agent2[ကိုယ်စားလှယ် 2: Claude]
-    Agent3[ကိုယ်စားလှယ် 3: Gemini]
-    Voter[သဘောတူ မဲဆန္ဒရှင်]
-    Output[သဘောတူ အထွက်]
+    Input[Input Task]
+    Agent1[Agent 1: gpt-4.1]
+    Agent2[Agent 2: Claude]
+    Agent3[Agent 3: Gemini]
+    Voter[Consensus Voter]
+    Output[Agreed Output]
     
     Input --> Agent1
     Input --> Agent2
@@ -241,42 +246,43 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
+
 **အားသာချက်များ:**
-- ✅ မြင့်မားသော တိကျမှန်ကန်မှု (အမြင်များ အများအတွက်)
-- ✅ ဖောလတ်တန် (နည်းလမ်း အနည်းငယ် ကျရှုံးမှုများကို ခံနိုင်)
-- ✅ အရည်အသွေး အာမခံချက် ထည့်သွင်းထားသည်
+- ✅ တိကျမှု ပိုမိုမြင့်မား (ထောက်ခံချက်များစွာ)
+- ✅ အမှားခံနိုင်မှု (ထူးခြားမှု မဖြစ်လျှင်လက်ခံနိုင်သည်)
+- ✅ အရည်အသွေး အာမခံမှု ထည့်သွင်းထားသည်
 
 **ကန့်သတ်ချက်များ:**
-- ❌ စျေးကြီး (မော်ဒယ်များကို မကြာခဏ ခေါ်ယူရသည်)
-- ❌ နှေးကွေးသည် (အေးဂျင့် အားလုံး၏ သဘောတူညီချက်ကို စောင့်ရသည်)
-- ⚠️ ဆန့်ကျင်မှု ဖြေရှင်းနည်း လိုအပ်သည်
+- ❌ တန်ဖိုးကြီး (မော်ဒယ်များစွာကို ခေါ်ယူရသည်)
+- ❌ နှောင့်နှေး (အေဂျင့်အားလုံး စောင့်ရသည်)
+- ⚠️ ညှိနှိုင်း ပြဿနာ မဖြေရှင်းနိုင်ရုံ
 
-**ဥပမာ အသုံးချမှုများ:**
-- အကြောင်းအရာ စီမံခန့်ခွဲမှု (အမျိုးမျိုးသော မော်ဒယ်များက အကြောင်းအရာကို အကဲဖြတ်)
-- ကုဒ် စစ်ဆေးခြင်း (လင်တာများ/ခွဲခြမ်းစိတ်ဖြာသူများ အများ)
-- ဆေးဘက်ဆိုင်ရာ ရောဂါ ချဉ်းကပ်ချက်များ (အမျိုးမျိုး AI မော်ဒယ်များနှင့် ကျွမ်းကျင်ပညာရှင် အတည်ပြု)
+**ဥပမာ အသုံးပြုမှုများ:**
+- အကြောင်းအရာ ပြုပြင်ခြင်း (မော်ဒယ်များစွာ ထောက်ဖြည့်သည်)
+- ကုဒ် သုံးသပ်ခြင်း (လင့်တာများ/ခွဲခြမ်းဆန်းစစ်သူများစွာ)
+- ဆေးဘက်ဆိုင်ရာ ရောဂါ ခွဲခြားခြင်း (AI မော်ဒယ်များစွာနှင့် ကျွမ်းကျင်သူ အတည်ပြုချက်)
 
 ---
 
-## စက်ပုံ အကျဉ်းချုံး
+## ဖွဲ့စည်းပုံ အနှစ်ချုပ်
 
-### Azure ပေါ်တွင် ပြည့်စုံသော အများ-အေဂျင့် စနစ်
+### Azure ပေါ်တွင် အပြည့်အစုံ မူလတန်း အေဂျင့် စနစ်
 
 ```mermaid
 graph TB
-    User[အသုံးပြုသူ / API ဖောက်သည်]
-    APIM[Azure API စီမံခန့်ခွဲမှု]
-    Orchestrator[Orchestrator ဝန်ဆောင်မှု<br/>ကွန်တိန်နာ အက်ပ်]
-    ServiceBus[Azure Service Bus<br/>အီဗင့် ဟပ်]
+    User[User/API Client]
+    APIM[Azure API Management]
+    Orchestrator[Orchestrator Service<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Queues / Topics]
     
-    Agent1[သုတေသန အေဂျင့်<br/>ကွန်တိန်နာ အက်ပ်]
-    Agent2[စာရေးသူ အေဂျင့်<br/>ကွန်တိန်နာ အက်ပ်]
-    Agent3[သုံးသပ်သူ အေဂျင့်<br/>ကွန်တိန်နာ အက်ပ်]
-    Agent4[ပြန်လည်သုံးသပ်သူ အေဂျင့်<br/>ကွန်တိန်နာ အက်ပ်]
+    Agent1[Research Agent<br/>Container App]
+    Agent2[Writer Agent<br/>Container App]
+    Agent3[Analyst Agent<br/>Container App]
+    Agent4[Reviewer Agent<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>မျှဝေထားသော အခြေအနေ)]
-    Storage[Azure Storage<br/>ပစ္စည်းများ]
-    AppInsights[Application Insights<br/>စောင့်ကြည့်မှု]
+    CosmosDB[(Cosmos DB<br/>Shared State)]
+    Storage[Azure Storage<br/>Artifacts]
+    AppInsights[Application Insights<br/>Monitoring]
     
     User --> APIM
     APIM --> Orchestrator
@@ -307,60 +313,69 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**အဓိက တင်_COMPONENT များ:**
 
-| ကော်မponent | ရည်ရွယ်ချက် | Azure ဝန်ဆောင်မှု |
+**အဓိက အစိတ်အပိုင်းများ:**
+
+| အစိတ်အပိုင်း | ရည်ရွယ်ချက် | Azure ဝန်ဆောင်မှု |
 |-----------|---------|---------------|
-| **API Gateway** | ဝင်ရောက်ရန် နေရာ၊ rate limiting, အတည်ပြုခြင်း | API Management |
-| **Orchestrator** | အေးဂျင့် လုပ်ငန်းစဉ်များကို ညွှန်ကြားမှု ပေးသည် | Container Apps |
-| **Message Queue** | အချိန်မတည်ငြိမ်သော ဆက်သွယ်မှု | Service Bus / Event Hubs |
-| **Agents** | အထူးကျွမ်းကျင် AI အလုပ်သမားများ | Container Apps / Functions |
-| **State Store** | မျှဝေထားသော အခြေအနေ၊ တာဝန် ချက်ချက် စာရင်း | Cosmos DB |
-| **Artifact Storage** | စာရွက်စာတမ်းများ၊ ရလဒ်များ၊ မှတ်တမ်းများ | Blob Storage |
-| **Monitoring** | ဖြန့်ချိသံနှင့် မှတ်တမ်းများ | Application Insights |
+| **API Gateway** | ဝင်ပေါက်၊ အမြန်နှုန်း ကန့်သတ်မှု၊ အတည်ပြုချက် | API Management |
+| **Orchestrator** | အေဂျင့် လုပ်ငန်းစဉ်များ စီမံကိန်း | Container Apps |
+| **Message Queue** | အချိန်ကြာ ဆက်သွယ်ရေး | Service Bus / Event Hubs |
+| **Agents** | အထူးပြု AI အလုပ်သမားများ | Container Apps / Functions |
+| **State Store** | မျှဝေထားသော အခြေအနေ၊ အလုပ် စောင့်ကြည့်မှု | Cosmos DB |
+| **Artifact Storage** | စာတမ်းများ၊ ရလဒ်များ၊ မှတ်တမ်းများ | Blob Storage |
+| **Monitoring** | ဖြန့်ဝေထားသော အခြေအနေ စောင့်ကြည့်မှု၊ မှတ်တမ်းများ | Application Insights |
+
+Service Bus queues/topics နှင့် Event Hubs သည် တစ်ခုချင်းစီ၏ ပို့ဆောင်မှု/စားသုံးမှု မော်ဒယ် မတူကြပါ; Event Hubs သည် Service Bus အလုပ်သမားကုဒ်အတွက် အစားထိုး မဟုတ်ပါ။ 병렬လုပ်ဆောင်မှု၊ စာတိုက်မြဲမှုနှင့် မော်ဒယ် မဲပေးမှု တို့သည် ကိုယ်တိုင် အမှားခံနိုင်မှု သို့မဟုတ် တိကျမှုတိုးစေခြင်း မပေးပါ။
 
 ---
 
-## မလိုအပ်သော ကိရိယာများ
+## မေ့မထားသည့်သီကောင်းချက်များ
 
-### လိုအပ်သော ကိရိယာများ
+### လိုအပ်သောကိရိယာများ
 
 ```bash
-# Azure Developer CLI ကို စစ်ဆေးပါ
+# Verify Azure Developer CLI
 azd version
-# ✅ မျှော်လင့်သည်: azd ဗားရှင်း 1.0.0 သို့မဟုတ် အထက်
+# Command reference baseline: azd 1.37.2
 
-# Azure CLI ကို စစ်ဆေးပါ
+# Verify Azure CLI
 az --version
-# ✅ မျှော်လင့်သည်: azure-cli ဗားရှင်း 2.50.0 သို့မဟုတ် အထက်
+# ✅ Expected: azure-cli 2.50.0 or higher
 
-# Docker ကို စစ်ဆေးပါ (ဒေသတွင်း စမ်းသပ်မှုအတွက်)
+# Verify Docker (for local testing)
 docker --version
-# ✅ မျှော်လင့်သည်: Docker ဗားရှင်း 20.10 သို့မဟုတ် အထက်
+# ✅ Expected: Docker version 20.10 or higher
 ```
 
-### Azure သတ်မှတ်ချက်များ
+### Azure လိုအပ်ချက်များ
 
-- အသက်ဝင်သော Azure subscription
-- ဖန်တီးခွင့်များရှိခြင်း:
-  - Container Apps များ
-  - Service Bus namespaces များ
+- လုပ်ငန်းဆောင်ရွက်နေသော Azure စာရင်းသွင်းမရှိမဖြစ်လိုအပ်သည်
+- ဖန်တီးခွင့်များရရန်:
+  - Container Apps
+  - Service Bus namespaces
   - Cosmos DB အကောင့်များ
   - Storage အကောင့်များ
   - Application Insights
 
-### အသိပညာ အခြေခံလိုအပ်ချက်များ
+### အသိပညာ လိုအပ်ချက်များ
 
-သင်သည် အောက်ပါများကို ပြီးစီးထားသင့်သည်:
-- [Configuration Management](../chapter-03-configuration/configuration.md)
-- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
-- [Microservices Example](../../../../examples/microservices)
+သင်သည် အောက်ပါများ ပြီးစီးထားသင့်သည်
+- [ဖွဲ့စည်းမှု စီမံခန့်ခွဲမှု](../chapter-03-configuration/configuration.md)
+- [အကိုက်အခက်များနှင့် လုံခြုံရေး](../chapter-03-configuration/authsecurity.md)
+- [Microservices ဥပမာ](../../../../examples/microservices)
 
 ---
 
-## အကောင်အထည်ဖော် လမ်းညွှန်
+## အကောင်အထည်ဖော်ခြင်း လမ်းညွှန်
 
-### ပရောဂျက် ဖွဲ့စည်းမှု
+> **ဒီဇိုင်း အပိုင်းများ ဖြစ်ပြီး တိုက်ရိုက် အသုံးပြုနိုင်မယ့် စမ်းသပ်ကြည့်ရန် မဟုတ်ပါ:** ယခု ပရောဂျက် ကြန့်ဆိုင်ရာ နှင့် `File:` အဖြစ် ဖိုင်များကို တည်ဆောက်ရန် ရည်ရွယ်ထားသည်၊ ဤသိုလှောင်ထားရာ မူလတန်း `multi-agent-system` အပြည့်အစုံ မပါဝင်ပါ။ ပျောက်နေတဲ့အပိုင်းများမှာ main/parameter တemplates, Container Apps ပတ်ဝန်းကျင်/ မှတ်ပုံတင်မှု, Dockerfiles နှင့် မှီခိုမှု Locks, Cosmos ဒေတာဘေ့စ်/ ကွန်တိနာများ စီစဉ်မှု, မော်ဒယ် တပ်ဆင်မှုများ, အထောက်အကူပြု Identity/Role ဖွဲ့စည်းမှု, အဆင့် မြှင့် စည်းမျဉ်းများ နှင့် 병렬 အလုပ်သမား/ပြားများ ပါဝင်သည်။ `azd init` သည် အဆိုပါ ဖိုင်များကို မထုတ်ပေးနိုင်ပါ၊ `azd up` သည် အပိုင်းများကို မပြောင်းလဲဘဲ တပ်ဆင်မည် မဟုတ်ပါ။ စမ်းသပ်လုပ်ဆောင်ရန် စတင်ရာအတွက် [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md) အပြီးသတ်ပါ။
+
+**Runtime ကတိများ:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask နှင့် (စောင့်ကြည့်မှုအတွက်) `azure-monitor-opentelemetry`; ၀န်ဆောင်မှုရုပ်ပုံတိုင်းတွင် `shared` ကို Python import လမ်းကြောင်း၌ ထည့်ပါ။ Cosmos `agent-state/tasks` ကွန်တိနာသည် `/id` partition key ဖြင့် ရှိပြီးသားဖြစ်ရမည်။ key-based ချိတ်ဆက်မှုများသည် ဤအပိုင်းများကို လွယ်ကူစေပြီး ထုတ်လုပ်မှု ညွှန်ကြားချက် မဟုတ်ပါ: Service Bus/Cosmos/OpenAI data-plane များအတွက် scoped managed identities ကို အသုံးပြုရန် ပိုမိုအဆင်ပြေသည်။ keys များကို output သို့မဟုတ် မှတ်တမ်းများတွင် မထုတ်ပြန်ပေးရ။ 
+
+Service Bus ပို့ဆောင်မှုသည် **အနည်းဆုံးတစ်ကြိမ်** သေချာမှုရှိသည်။ taskနှင့် step တို့အလိုက် idempotency ကို ထိန်းသိမ်းပါ၊ optimistic concurrency (ETags) ဖြင့် state ကို ဖတ်/ပြောင်း/ရေးဆွဲ လုပ်ရပါမည်၊ နှင့် သတင်းစကားလှုပ်ရှားမှု တာရှည်ဖြစ်စဉ်မှာ message lock များကို ပြန်လည်ပြီးသေချာ စေပါ။ အောက်ပါ ရိုးရှင်းသော အခြေအနေစီမံသူမှာ ဖွဲ့စည်းရန်သာဖြစ်ပြီး ထုတ်လုပ်မှုအာမခံချက် မပါဝင်ပါ။
+
+### ပရောဂျက် ဖွဲ့စည်းပုံ
 
 ```
 multi-agent-system/
@@ -392,13 +407,13 @@ multi-agent-system/
 
 ---
 
-## သင်ခန်းစာ ၁: အစဉ်လိုက် ပေါင်းစည်းမှု ပုံစံ
+## သင်ခန်းစာ ၁: တန်းလိုက် ကော်အပ်မှု ကျင့်စဉ်
 
-### အကောင်အထည်ဖော်ခြင်း: အကြောင်းအရာ ဖန်တီးရေး လုပ်ငန်းစဉ်
+### လုပ်ဆောင်မှု: အကြောင်းအရာ ဖန်တီးမှု လုပ်ငန်းစဉ်
 
-အစီအစဉ်တစ်ခု ဖန်တီးမည်: သုတေသန → ရေးသား → တည်းဖြတ် → ထုတ်ဝေ
+တန်းလိုက် လုပ်ငန်းစဉ် တစ်ခုဒီဇိုင်းဆွဲပါ: သုတေသန → စာရေး → အည်းတည်။ ထုတ်လုပ်ခြင်းက ဤဥပမာထဲ မပါဝင်ပါ။
 
-### 1. AZD သတ်မှတ်ချက်
+### ၁. AZD ဖွဲ့စည်းမှု
 
 **ဖိုင်: `azure.yaml`**
 
@@ -429,7 +444,7 @@ services:
     host: containerapp
 ```
 
-### 2. အခြေခံ အင်ဖရာစทรတ်ခ်ချာ: ညှိနှိုင်းရေးအတွက် Service Bus
+### ၂. အင်ဖရာ: ကော်အပ်မှုအတွက် Service Bus
 
 **ဖိုင်: `infra/core/servicebus.bicep`**
 
@@ -483,16 +498,17 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 }
 
 output namespace string = serviceBusNamespace.name
-output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+// Do not output RootManageSharedAccessKey. Resolve scoped credentials
+// securely or use managed identity in the application and scale rules.
 ```
 
-### 3. မျှဝေထားသော State မန်နေဂျာ
+### ၃. မျှဝေထားသော အခြေအနေ စီမံခန့်ခွဲသူ
 
 **ဖိုင်: `src/shared/state_manager.py`**
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 class StateManager:
@@ -513,7 +529,7 @@ class StateManager:
             'type': task_type,
             'status': 'pending',
             'input': input_data,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'steps': []
         }
         self.container.create_item(task)
@@ -525,7 +541,7 @@ class StateManager:
         
         task['steps'].append({
             'name': step_name,
-            'completed_at': datetime.utcnow().isoformat(),
+            'completed_at': datetime.now(timezone.utc).isoformat(),
             'result': result
         })
         
@@ -537,7 +553,7 @@ class StateManager:
         task = self.container.read_item(task_id, partition_key=task_id)
         task['status'] = 'completed'
         task['result'] = final_result
-        task['completed_at'] = datetime.utcnow().isoformat()
+        task['completed_at'] = datetime.now(timezone.utc).isoformat()
         self.container.replace_item(task_id, task)
         return task
     
@@ -546,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Orchestrator ဝန်ဆောင်မှု
+### ၄. စီမံခန့်ခွဲသူ ဝန်ဆောင်မှု
 
 **ဖိုင်: `src/orchestrator/app.py`**
 
@@ -561,7 +577,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Service Bus ချိတ်ဆက်မှု
+# Service Bus connection
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -572,15 +588,15 @@ def health():
 @app.route('/create-content', methods=['POST'])
 def create_content():
     """
-    Sequential workflow: Research → Write → Edit → Publish
+    Sequential workflow: Research → Write → Edit (returns a draft; no publishing)
     """
-    data = request.json
+    data = request.get_json(silent=True) or {}
     topic = data.get('topic')
     
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # state store ထဲတွင် task တစ်ခု ဖန်တီးပါ
+    # Create task in state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -588,13 +604,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # research agent ထံသို့ မက်ဆေ့ခ်် ပို့ပါ (ပထမအဆင့်)
+    # Send message to research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # ရလဒ်များကို ဘယ်ကို ပို့မလဲ
+            'next_queue': 'writer-tasks'  # Where to send results
         }),
         content_type='application/json'
     )
@@ -606,7 +622,7 @@ def create_content():
         'task_id': task_id,
         'status': 'started',
         'workflow': 'sequential',
-        'steps': ['research', 'write', 'edit', 'publish'],
+        'steps': ['research', 'write', 'edit'],
         'message': 'Content creation pipeline initiated'
     }), 202
 
@@ -623,7 +639,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. သုတေသန အေးဂျင့်
+### ၅. သုတေသန အေဂျင့်
 
 **ဖိုင်: `src/agents/research/app.py`**
 
@@ -635,7 +651,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# client များကို စတင်တည်ဆောက်ပါ
+# Initialize clients
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -643,7 +659,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -655,9 +671,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # သုတေသနအတွက် Microsoft Foundry မော်ဒယ်များကို ခေါ်သုံးပါ
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -667,14 +683,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # အခြေအနေကို အပ်ဒိတ်လုပ်ပါ
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # နောက်ထပ် agent (writer) ထံသို့ ပို့ပါ
+    # Send to next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -713,7 +729,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. ရေးသားသူ အေးဂျင့်
+### ၆. စာရေး အေဂျင့်
 
 **ဖိုင်: `src/agents/writer/app.py`**
 
@@ -731,7 +747,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -744,9 +760,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Microsoft Foundry မော်ဒယ်များကို ခေါ်၍ ဆောင်းပါးရေးပါ
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -756,14 +772,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # အခြေအနေကို အပ်ဒိတ်လုပ်ပါ
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # တည်းဖြတ်သူထံ ပို့ပါ
+    # Send to editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -801,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. တည်းဖြတ်သူ အေးဂျင့်
+### ၇. အည်းတည် အေဂျင့်
 
 **ဖိုင်: `src/agents/editor/app.py`**
 
@@ -819,7 +835,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -831,9 +847,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # တည်းဖြတ်ရန် Microsoft Foundry မော်ဒယ်များကို ခေါ်ပါ
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -843,7 +859,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # တာဝန်ကို ပြီးမြောက်အဖြစ် သတ်မှတ်ပါ
+    # Mark task as complete
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -877,49 +893,50 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. တပ်ဆင်ခြင်းနှင့် စမ်းသပ်ခြင်း
+### ၈. တပ်ဆင်ပြီး စမ်းသပ်ခြင်း
+
+၎င်း အမိန့်မှာ **သင် မသိမ်းဆည်းထားသော ပရောဂျက် ဖိုင်များကို တည်ဆောက်ပြီးနောက်** မှာသာ အသုံးပြုနိုင်သည်။ Interactive Foundry အေဂျင့် စတင်ခြင်းက သီးကွဲသော လုပ်ငန်းစဉ်ဖြစ်ပြီး ဤ Service Bus ဒီဇိုင်းကို မထုတ်ပေးပါ။
 
 ```bash
-# ရွေးချယ်ချက် A: တမ်းပလိတ်အခြေပြု တပ်ဆင်ခြင်း
-azd init
+# In your completed custom project
 azd up
 
-# ရွေးချယ်ချက် B: အေးဂျင့် manifest အခြေပြု တပ်ဆင်ခြင်း (တိုးချဲ့မှု လိုအပ်သည်)
+# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> ကြည့်ပါ [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) အတွက် အားလုံး `azd ai` flag များနှင့် ရွေးချယ်စရာများ။
+> မှတ်ချက်အတွက် [AZD AI CLI Command များ](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) ကိုကြည့်ပါ၊ `azd ai` အားလုံး၏ စက်ထားချက်များနှင့် ရွေးချယ်စရာများ။
 
 ```bash
-# orchestrator URL ကို ရယူပါ
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# အကြောင်းအရာ ဖန်တီးပါ
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ မျှော်မှန်းရလဒ်:**
+**✅ မျှော်မှန်းထားသော output:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "status": "started",
   "workflow": "sequential",
-  "steps": ["research", "write", "edit", "publish"],
+  "steps": ["research", "write", "edit"],
   "message": "Content creation pipeline initiated"
 }
 ```
 
-**တာဝန် တိုးတက်မှု စစ်ဆေးပါ:**
+**အလုပ်တိုးတက်မှု စစ်ဆေးရန်:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ မျှော်မှန်းရလဒ် (ပြီးစီးပြီး):**
+**✅ မျှော်မှန်းထားသော output (ပြီးဆုံးပြီး):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -947,13 +964,13 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## သင်ခန်းစာ ၂: 병렬 ပေါင်းစည်းမှု ပုံစံ
+## သင်ခန်းစာ 2: 병렬 조정 패턴 (Parallel Coordination Pattern)
 
-### အကောင်အထည်ဖော်ခြင်း: မျိုးစုံ အရင်းအမြစ် သုတေသန စုစည်းရေး
+### အကောင်အထည်ဖော်ခြင်း: အရင်းအမြစ်များစွာမှ သုတေသန စုစည်းသူ
 
-တပြိုင်နက် အရင်းအမြစ် အများမှ သတင်းအချက်အလက် စုဆောင်းသည့် 병렬 စနစ်တစ်ခု ဖန်တီးမည်။
+မျိုးစုံသောအရင်းအမြစ်များမှ အချက်အလက်များကို တပြိုင်နက်တည်း စုဆောင်းသည့် 병렬စနစ်တစ်ခု တည်ဆောက်ကြစို့။
 
-### 병렬 Orchestrator
+### 병렬 조정 기관 (Parallel Orchestrator)
 
 **ဖိုင်: `src/orchestrator/parallel_workflow.py`**
 
@@ -990,7 +1007,7 @@ def research_parallel():
         }
     )
     
-    # ချဲ့ထွင်ပေးခြင်း: အားလုံးအေဂျင့်များကို တပြိုင်နက်တည်း ပို့ခြင်း
+    # Fan-out: publish sequentially; workers may process concurrently.
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1025,7 +1042,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### ပေါင်းစည်းမှု ရောလောစရာ
+### စုပေါင်းမှု လုပ်ငန်းစဉ်
 
 **ဖိုင်: `src/agents/aggregator/app.py`**
 
@@ -1041,9 +1058,10 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# အလုပ်တစ်ခုချင်းစီအလိုက် ရလဒ်များကို ခြေရာခံပါ
-task_results = defaultdict(list)
-expected_agents = 4  # ဝဘ်၊ ပညာရေးဆိုင်ရာ၊ သတင်း၊ လူမှု
+# Single-process demo only: not durable or shared across replicas.
+# Production: use durable unique (task_id, agent_type) result records.
+task_results = defaultdict(dict)
+expected_agents = 4  # web, academic, news, social
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1051,29 +1069,29 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # ရလဒ်ကို သိမ်းဆည်းပါ
-    task_results[task_id].append({
+    # Store result
+    task_results[task_id][agent_type] = {
         'agent': agent_type,
         'data': result
-    })
+    }
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # agent များအားလုံး အလုပ်ပြီးဆုံးကြောင်း စစ်ဆေးပါ (fan-in)
+    # Check if all agents completed (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # ရလဒ်များကို ပေါင်းစည်းပါ
+        # Combine results
         aggregated = {
             'query': message_data['query'],
-            'sources': task_results[task_id],
-            'summary': generate_summary(task_results[task_id])
+            'sources': list(task_results[task_id].values()),
+            'summary': generate_summary(list(task_results[task_id].values()))
         }
         
-        # ပီးစီးဟု အမှတ်ပြုပါ
+        # Mark complete
         state_manager.complete_task(task_id, aggregated)
         
-        # ရှင်းလင်းလုပ်ဆောင်ပါ
+        # Clean up
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1105,129 +1123,94 @@ if __name__ == '__main__':
     main()
 ```
 
-**병렬 ပုံစံ၏ အားသာချက်များ:**
-- ⚡ **၄ ဆ လျင်မြန်** (agent များ တပြိုင်နက် ဆောင်ရွက်)
-- 🔄 **ဖောလတ်တန်** (အပိုင်းအစ ရလဒ်ကိုလက်ခံနိုင်)
-- 📈 **တိုးချဲ့နိုင်မှု** (agent များကိုလွယ်ကူစွာ ဖြည့်စွက်နိုင်)
+**တန်းတူ မျဉ်းစာ၏ အကျိုးကျေးဇူးများ -**
+- ⚡ **လျော့နည်းနိုင်သော ကန့်လန့်ချိန်** (အဆိုးဆုံး သမားအလုပ်သမားနှင့် သဟဇာတမှုဆိုင်ရာ ကုန်ကျစရိတ်တို့ဖြင့် ကန့်သတ်ထားသည်)
+- 🔄 **အစိတ်အပိုင်း ရလဒ်များကို ထောက်ပံ့နိုင်သည်** ပြီးဆုံးချိန်နှင့် မအောင်မြင်မှု မူဝါဒတို့ကို သတ်မှတ်ထား၍ (အခြေခံ စုစည်းသူက ချမှတ်ထားသည့် မဟုတ်)
+- 📈 **မတန်ခါမှုရှိသည်** (အေးဂျင့်များ ပေါင်းထည့်ရန် လွယ်ကူသည်)
 
 ---
 
-## လက်တွေ့လေ့ကျင့်ခန်းများ
+## လက်တွေ့ လေ့ကျင့်မှုများ
 
-### လေ့ကျင့်ခန်း ၁: Timeout ကို ထည့်သွင်းပါ ⭐⭐ (အလယ်အလတ်)
+### လေ့ကျင့်ခန်း ၁: Timeout ကိုင်တွယ်မှု ထည့်သွင်းခြင်း ⭐⭐ (အလယ်အလတ်)
 
-**ရည်ရွယ်ချက်**: Aggregator သည် နှေး၏ agent များကို မစောင့်တော့ဘဲ အချိန်ကန့်သတ် နည်းလမ်းကို ထည့်သွင်းပါ။
+**ရည်မှန်းချက်**: Aggregator သည် အလွန်ပျင်းရိသမျှ အေးဂျင့်များအတွက် အမြဲစောင့်မည် မဟုတ်ဘဲ Timeout မွတ်ရန် စနစ်ထည့်သွင်းရန်။
 
-**ခြေလှမ်းများ**:
+**စတင်ချက်**: ဒီ ဒေသခံ ပြီးဆုံးချိန် သဘောတူညီမှုကို queue worker ထဲသို့ ပေါင်းသင်းမတိုင်မီ ပြေးကြည့်ပါ။ အခြားသတင်းစကား တစ်ခု ရောက်လာတဲ့အခါမှသာ Timeout စစ်ဆေးသည်မှာ ပျောက်ဆုံးထားသော worker ထံမှ မည်သည့်သတင်းမပေးလျှင် မလည်ပတ်ပါ။
 
-1. **Aggregator တွင် timeout ချိန်ခြင်းကို ထည့်ပါ:**
+**အဆင့်များ**:
 
-```python
-from datetime import datetime, timedelta
-
-task_timeouts = {}  # task_id -> သက်တမ်းကုန်ချိန်
-
-def process_result(message_data):
-    task_id = message_data['task_id']
-    
-    # ပထမဆုံးရလာတဲ့ရလဒ်တွင် အချိန်ကုန်ဆုံးချိန် သတ်မှတ်ပါ
-    if task_id not in task_timeouts:
-        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
-    
-    task_results[task_id].append({
-        'agent': message_data['agent_type'],
-        'data': message_data['result']
-    })
-    
-    # ပြီးစီးသွားပါသလား သို့မဟုတ် အချိန်ကုန်ဆုံးပြီလား စစ်ဆေးပါ
-    if len(task_results[task_id]) == expected_agents or \
-       datetime.utcnow() > task_timeouts[task_id]:
-        
-        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
-        
-        aggregated = {
-            'query': message_data['query'],
-            'sources': task_results[task_id],
-            'completed_agents': len(task_results[task_id]),
-            'timed_out': len(task_results[task_id]) < expected_agents
-        }
-        
-        state_manager.complete_task(task_id, aggregated)
-        
-        # ရှင်းလင်းခြင်း
-        del task_results[task_id]
-        del task_timeouts[task_id]
-```
-
-2. **အတုနဲ့ သာမန် အချိန်ကြာလာစေပြီး စမ်းသပ်ပါ:**
+1. **Aggregator သို့ Timeout ချိန် ဂရုစိုက်မှု ထည့်ပါ**:
 
 ```python
-# agent တစ်ခုတွင် အလုပ်လုပ်ချိန်နှေးသော သရုပ်ဖော်မှုအတွက် နောက်ကျမှုကို ထည့်ပါ
-import time
-time.sleep(35)  # 30 စက္ကန့် သတ်မှတ်ထားသော အချိန်ကန့်သတ်ချက်ကို ကျော်လွန်သည်
+import asyncio
+
+async def simulated_agent(name, delay):
+    await asyncio.sleep(delay)
+    return {'agent': name, 'result': 'done'}
+
+async def main():
+    tasks = [asyncio.create_task(simulated_agent(name, delay))
+             for name, delay in [('web', 0.1), ('academic', 0.2),
+                                 ('news', 0.3), ('social', 3)]]
+    done, pending = await asyncio.wait(tasks, timeout=1)
+    results = [task.result() for task in done]
+    for task in pending:
+        task.cancel()
+    await asyncio.gather(*pending, return_exceptions=True)
+    print({'completed_agents': len(results), 'timed_out': bool(pending)})
+    assert len(results) == 3 and pending
+
+asyncio.run(main())
 ```
 
-3. **တပ်ဆင်ပြီး အတည်ပြုပါ:**
+2. **မျှော်မှန်းရလဒ်**:
+
+```text
+{'completed_agents': 3, 'timed_out': True}
+```
+
+3. **Queue-system ပေါင်းစည်းမှု (ဒီဇိုင်းအလုပ်):** တာဝန်ဖန်တီးစဉ်တွင် ပို့ဆောင်စောင့်မှတ်ချိန်နှင့် မျှော်လင့်ထားသော အေးဂျင့်များကို မြဲမြံစွာ သိမ်းဆည်းပါ၊ ရလာဒ်များ ဝင်ရောက်မှု မဟုတ်ဘဲ သတ်မှတ်ချိန်အား ပုံမှန် စစ်ဆေးပါ၊ အပိုင်းအစ ရလဒ်များကို အတူတကွ ပြီးစီးအောင် ဆောင်ရွက်ပါ၊ နောက်ကျ/ တူညီသော မက်ဆေ့များကို ပြီးစီးပြီးသော တာဝန်များအတွက် ဂရုမထားပါနှင့်။ ဒေသတွင်း အချိန်ကုန် သတ်မှတ်ချက်သည် ရှေ့နေ ဝန်ထမ်းများကို ပယ်ဖျက်ခြင်း မလုပ်ပါ။
+
+သင့်မှ ဆောင်ရွက်ထားသော ပရောဂျက်အတွက်သာ:
 
 ```bash
 azd deploy aggregator
 
-# အလုပ်ကို တင်သွင်းပါ
+# Submit task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# ၃၀ စက္ကန့်အကြာတွင် ရလဒ်များကို စစ်ဆေးပါ
+# Check results after 30 seconds
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ အောင်မြင်မှု အချက်ပြချက်များ:**
-- ✅ Agent များ မပြီးစီးသော်လည်း 30 စက္ကန့်အပြီးတွင် အလုပ်ပြီးစီးသည်
-- ✅ တုံ့ပြန်ချက်တွင် အပိုင်းအစ ရလဒ်များပါရှိ (`"timed_out": true`)
-- ✅ ရနိုင်သော ရလဒ်များ ပြန်လည်ပေးပို့သည် (agent ၄ ယောက်ထဲမှ ၃ ယောက်)
+**✅ အောင်မြင်မှု မီတာများ:**
+- ✅ ဒေသတွင်း စမ်းသပ်မှုသည် တစ်စက္ကန့် သတ်မှတ်ချိန် အပြီးတွင် ဖြတ်သန်းပြီး မျှော်လင့်ထားသော အေးဂျင့် မပြီးစီးပါကလည်း ပြန်လာသည်
+- ✅ တုံ့ပြန်ချက်သည် အပိုင်းအစ ရလဒ်များကို ပြသသည် (`"timed_out": true`)
+- ✅ ရနိုင်သော ရလဒ်များ ပြန်ပေးသည် (အေးဂျင့် ၄ ဦးထဲမှ ၃ ဦး)
 
-**အချိန်**: 20-25 မိနစ်
+**အချိန်**: ၂၀-၂၅ မိနစ်
 
 ---
 
-### လေ့ကျင့်ခန်း ၂: Retry logic ကို အကောင်အထည်ဖော်ပါ ⭐⭐⭐ (အဆင့်မြင့်)
+### အာဆိုက် ၂: Retry Logic ကို အကောင်အထည်ဖော်ပါ ⭐⭐⭐ (ရှုပ်ထွေး)
 
-**ရည်ရွယ်ချက်**: မအောင်မြင်သော agent တာဝန်များကို ဖြုတ်ပစ်မီ အလိုအလျောက် ပြန်ကြိုးစားစေပါ။
+**ရည်ရွယ်ချက်**: မအောင်မြင်သော အေးဂျင့် တာဝန်များကို အလိုအလျောက် ပြန်ကြိုးစားပါ။
 
 **ခြေလှမ်းများ**:
 
-1. **Orchestrator တွင် retry သတင်းအချက် အလက် ထည့်သွင်းပါ:**
+1. **ပြန်လည်တိမ်းခြင်း မရည်ရွယ်သော custom retry Counters များအစား Service Bus ပို့ဆောင်မှု အရေအတွက်များကို သုံးပါ:**
 
 ```python
-from dataclasses import dataclass
-from typing import Dict
-
-@dataclass
-class RetryConfig:
-    max_retries: int = 3
-    backoff_seconds: int = 5
-
-retry_counts: Dict[str, int] = {}  # message_id မှ retry_count သို့
-
-def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
-    """Send message with retry metadata"""
-    message_id = message_data.get('message_id', str(uuid.uuid4()))
-    message_data['message_id'] = message_id
-    message_data['retry_count'] = retry_counts.get(message_id, 0)
-    message_data['max_retries'] = retry_config.max_retries
-    
-    sender = servicebus_client.get_queue_sender(queue_name)
-    message = ServiceBusMessage(
-        body=json.dumps(message_data),
-        content_type='application/json',
-        message_id=message_id
-    )
-    
-    with sender:
-        sender.send_messages(message)
+import json
+import time
+# Integration fragment: use a live peek-lock ServiceBusReceiver.
+# Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Agent များတွင် retry ကိုင်တွယ်သူ ထည့်ပါ:**
+2. **အေးဂျင့်များထဲသို့ retry handler ချိတ်ဆက်ပါ:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,31 +1218,21 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # မက်ဆေ့ခ်ျကို ဆောင်ရွက်ပါ
+        # Process the message
         process_func(message_data)
         
-        # အောင်မြင် - ပြီးဆုံး
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
-        message_id = message.message_id
-        retry_count = message_data.get('retry_count', 0)
-        max_retries = message_data.get('max_retries', 3)
-        
-        if retry_count < max_retries:
-            # ထပ်မံကြိုးစားရန်: စွန့်ပစ်၍ ရေတွက်ကို တိုးပြီး ပြန်ထည့်ပါ
-            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
-            
-            message_data['retry_count'] = retry_count + 1
-            
-            # တူညီသော တန်းသို့ နောက်ကျစေ၍ ပြန်ပို့ပါ
-            time.sleep(5 * (retry_count + 1))  # အက်စပိုနင်ရှယ် နောက်ကျမှု
-            send_with_retry(queue_name, message_data, RetryConfig())
-            
-            receiver.complete_message(message)  # မူလကို ဖယ်ရှားပါ
+        if message.delivery_count < 4:
+            # Bounded exponential delay: 5s, 10s, 20s.
+            # Renew the lock if processing + waiting can exceed its duration.
+            time.sleep(5 * 2 ** (message.delivery_count - 1))
+            receiver.abandon_message(message)
         else:
-            # ထပ်မံကြိုးစားမှု အများဆုံး ကျော်လွန်ပြီ - Dead-letter queue သို့ ရွှေ့ပို့ပါ
-            print(f"❌ Max retries exceeded for message {message_id}")
+            # Max retries exceeded - move to dead letter queue
+            print(f"❌ Max attempts exceeded for message {message.message_id}")
             receiver.dead_letter_message(
                 message,
                 reason="MaxRetriesExceeded",
@@ -1267,13 +1240,13 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **dead letter ခလုတ်ကို စောင့်ကြည့်ပါ:**
+3. **dead letter queue ကို စောင့်ကြည့်ပါ:**
 
 ```python
 def monitor_dead_letters():
     """Check dead letter queue for failed messages"""
     receiver = servicebus_client.get_queue_receiver(
-        'research-queue',
+        'research-tasks',
         sub_queue='deadletter'
     )
     
@@ -1285,32 +1258,32 @@ def monitor_dead_letters():
             print(f"Description: {message.dead_letter_error_description}")
 ```
 
-**✅ အောင်မြင်မှု အချက်ပြချက်များ:**
-- ✅ မအောင်မြင်သော တာဝန်များကို အလိုအလျောက် ပြန်ကြိုးစားသည် (အကြိမ် ၃ ဆ ထိ)
-- ✅ ပြန်ကြိုးစားမှုများအကြား exponential backoff (5s, 10s, 15s)
-- ✅ အများဆုံး retry ပြီးသွားလျှင် မက်ဆေ့ခ်ျများသည် dead letter queue သို့ သွားသည်
-- ✅ Dead letter queue ကို စောင့်ကြည့်ပြီး ထပ်မံ စတင်ပေးနိုင်သည်
+**✅ အောင်မြင်မှု မီတာများ:**
+- ✅ မအောင်မြင်သော တာဝန်များကို အလိုအလျောက် retry လုပ်သည် (အကြိမ် ၃ ကြိမ်အထိ)
+- ✅ retry အကြား exponential backoff ရှိသည် (၅စက္ကန့်၊ ၁၀စက္ကန့်၊ ၂၀စက္ကန့်)၊ မက်ဆေ့ ဂရုစိုက်မှု ထပ်မံသတ်မှတ်ခြင်းနှင့်အတူ
+- ✅ retry အမြောက်ဆုံးတွင် မက်ဆေ့များသည် dead letter queue သို့သွားသည်
+- ✅ dead letter မက်ဆေ့များကို စစ်ဆေးနိုင်ပြီး replay လုပ်ရန် သီးခြား idempotent ပြန်လည်ရယူခြင်း စနစ် လိုအပ်သည်
 
-**အချိန်**: 30-40 မိနစ်
+**အချိန်**: ၃၀-၄၀ မိနစ်
 
 ---
 
-### လေ့ကျင့်ခန်း ၃: Circuit Breaker ကို အကောင်အထည်ဖော်ပါ ⭐⭐⭐ (အဆင့်မြင့်)
+### အာဆိုက် ၃: Circuit Breaker ကို အကောင်အထည်ဖော်ပါ ⭐⭐⭐ (ရှုပ်ထွေး)
 
-**ရည်ရွယ်ချက်**: မအောင်မြင်မှုများ ဆက်တိုက် ဖြစ်ပေါ်ခြင်းမှ ကာကွယ်ရန် ဆက်တိုက်တောင်းဆိုမှုများကို ရှောင်ကြဉ်ပါ။
+**ရည်ရွယ်ချက်**: ပျက်စီးနေသော အေးဂျင့်များသို့ တောင်းဆိုမှုများကို ရပ်တန့်ခြင်းမှတဆင့် ပျက်စီးမှု စီးဆင်းခြင်းကို ကာကွယ်ပါ။
 
 **ခြေလှမ်းများ**:
 
-1. **circuit breaker class တစ်ခု ဖန်တီးပါ:**
+1. **စကာကဒီသာမြန်းအတန်းဖန်တီးပါ။**
 
 ```python
 from enum import Enum
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # ပုံမှန် လည်ပတ်မှု
-    OPEN = "open"          # ပျက်ကွက်နေသည်၊ တောင်းဆိုချက်များကို ငြင်းပယ်သည်
-    HALF_OPEN = "half_open"  # ပြန်လည် ပြန်လာနိုင်သလား စမ်းသပ်နေသည်
+    CLOSED = "closed"      # Normal operation
+    OPEN = "open"          # Failing, reject requests
+    HALF_OPEN = "half_open"  # Testing if recovered
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1323,8 +1296,8 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # အချိန်ကုန်ဆုံးသွားသလား စစ်ဆေးသည်
-            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+            # Check if timeout expired
+            if datetime.now(timezone.utc) - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
             else:
@@ -1333,7 +1306,8 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # အောင်မြင်သည်
+            # Success
+            self.failure_count = 0 # Count consecutive failures only
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1343,19 +1317,19 @@ class CircuitBreaker:
             
         except Exception as e:
             self.failure_count += 1
-            self.last_failure_time = datetime.utcnow()
+            self.last_failure_time = datetime.now(timezone.utc)
             
             if self.failure_count >= self.failure_threshold:
                 self.state = CircuitState.OPEN
                 print(f"🔴 Circuit breaker: OPEN (too many failures)")
             
-            raise e
+            raise
 ```
 
-2. **Agent ခေါ်ဆိုမှုများတွင် အသုံးချပါ:**
+2။ **အေးဂျင့်ခေါ်ဆိုမှုများတွင် အကောင်အထည်ဖော်ပါ။**
 
 ```python
-# orchestrator တွင်
+# In orchestrator
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,89 +1345,89 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # အခြား agent များနှင့် ဆက်လက်ဆောင်ရွက်ပါ
+        # Continue with other agents
 ```
 
-3. **circuit breaker ကို စမ်းသပ်ပါ:**
+ဒီစက်ရုပ်ထို့သည် **ပို့ဆောင်ရေးလုပ်ငန်း** ကို ကာကွယ်ပေးပြီး၊ ကွယ်လွန်ပါသောအလုပ်သမားမှ ပြီးမြောက်မှုမဟုတ်ပါ: စာတိုက်တစ်စောင် အောင်မြင်စွာ စာကြည့်တိုက်ထဲ ထည့်ခြင်းသည် ကိုယ်စားလှယ်တစ်ယောက် အသက်ရှင်သောအကြောင်း မပြောဆိုနိုင်ပါ။ `send_message` သည် သင့်အက်ပ်လိကေးရှင်း၏ ပို့ဆောင်သူလုပ်ဆောင်ချက် ဖြစ်သည်။ လုပ်ဆောင်စက်နှင့်အတူ စမ်းသပ်မှုများကို ပြည့်စုံသောကိုအော်ဒင်းနေတာထဲ အတွင်းစွဲ၍ ထည့်သွင်းပါ။ ဒီအမှတ်အသားစနစ်သည် တစ်သွက်ဘီးမှ အချင်းချင်းညှိနှိုင်းမှု မဟုတ်ပဲ single-thread လေ့လာမှု တစ်ခုဖြစ်သည်။
 
-```bash
-# ထပ်ဖြစ်နေသော မအောင်မြင်မှုများကို ကိုယ်စားပြုစမ်းခြင်း (အေးဂျင့် တစ်ခုကို ရပ်ပါ)
-az containerapp stop --name web-research-agent --resource-group rg-agents
+3. **စက်ရုပ်ကိရိယာကို ဒေသတွင်းစမ်းသပ်ပါ:**
 
-# တောင်းသာချက်များ အများကြီး ပို့ပါ
-for i in {1..10}; do
-  curl -X POST $ORCHESTRATOR_URL/research-parallel \
-    -H "Content-Type: application/json" \
-    -d '{"query": "test query '$i'"}'
-  sleep 2
-done
-
-# မှတ်တမ်းများကို စစ်ဆေးပါ - မအောင်မြင်မှု ၅ ကြိမ်အပြီး circuit သည် ဖွင့် (open) နေသည်ကို တွေ့ရမည်
-# Container App မှတ်တမ်းများအတွက် Azure CLI ကို အသုံးပြုပါ:
-az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```python
+# Run after the class definition; no Azure changes required.
+circuit = CircuitBreaker(failure_threshold=5, timeout_seconds=0)
+def fail():
+    raise RuntimeError("simulated failure")
+for _ in range(5):
+    try:
+        circuit.call(fail)
+    except RuntimeError:
+        pass
+assert circuit.state == CircuitState.OPEN
+assert circuit.call(lambda: "recovered") == "recovered"
+assert circuit.state == CircuitState.CLOSED
+print("Circuit breaker recovery verified")
 ```
 
-**✅ အောင်မြင်မှု အချက်ပြချက်များ:**
-- ✅ မအောင်မြင်မှု ၅ ကြိမ် ပြီးနောက် circuit ဖွင့်ကျော် (တောင်းဆိုမှုများကို ငြင်းပယ်သည်)
-- ✅ 60 စက္ကန့်အပြီး circuit သည် half-open ဖြစ်ပြီး ပြန်လည်သက်သာမှု စမ်းသပ်မှုများ လုပ်သည်
-- ✅ အခြား agent များ မစွန့်ခွာပဲ ဆက်လက်လုပ်ကိုင်နိုင်သည်
-- ✅ Agent ပြန်လည်ကောင်းမွန်လာလျှင် circuit ကို အလိုအလျောက် ပိတ်သည်
+**✅ အောင်မြင်မှုအပိုင်းများ:**
+- ✅  အမှား ၅ ကြိမ်ဖြစ်လျှင် စက်ရုပ်ကိရိယာ ပြတ်စဲသည် (တောင်းဆိုမှုများကို ငြင်းပယ်သည်)
+- ✅ စက္ကန့် ၆၀ ပြီးသောအခါ စက်ရုပ်ကိရိယာ အဝက်ဖွင့် (ပြန်လည်ကောင်းမွန်မှုကို စမ်းသပ်သည်)
+- ✅ အခြားကိုယ်စားလှယ်များ ဆက်လက် လုပ်ဆောင်နေသည်
+- ✅ ကိုယ်စားလှယ် ပြန်လည်ကောင်းမွန်လျှင် စက်ရုပ်ကိရိယာ ကိုယ်တိုင်ပိတ်သည်
 
-**အချိန်**: 40-50 မိနစ်
+**အချိန်**: ၄၀-၅၀ မိနစ်
 
 ---
 
-## စောင့်ကြည့်ခြင်းနှင့် အမှားရှာဖွေရေး
+## ကြည့်ရှုမှု နှင့် မှားယွင်းချက်ရှာဖွေရေး
 
-### Application Insights ဖြင့် ဖြန့်ချိ သံလွှတ်ခြင်း (Distributed Tracing)
+### Application Insights ဖြင့် မျှဝေထားသော လမ်းကြောင်းနက္ခတ်ခြင်း
 
 **ဖိုင်: `src/shared/tracing.py`**
 
 ```python
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.samplers import AlwaysOnSampler
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
-# Tracing ကို ဆက်တင်ပြင်ဆင်ပါ
-config_integration.trace_integrations(['requests', 'logging'])
-
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# tracer တစ်ခု ဖန်တီးပါ
-tracer = Tracer(
-    exporter=AzureExporter(connection_string=connection_string),
-    sampler=AlwaysOnSampler()
-)
+# Configure once per process. Message send/receive trace-context propagation
+# and agent attributes on exceptions need explicit instrumentation.
+if connection_string:
+    configure_azure_monitor(connection_string=connection_string, logger_name=__name__)
+tracer = trace.get_tracer(__name__)
 
-# Logging ကို ဆက်တင်ပြင်ဆင်ပါ
+# Configure logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
 
-def trace_agent_call(agent_name, task_id, operation):
+def trace_agent_call(agent_name, task_id, operation_name, operation):
     """Trace agent operations"""
-    with tracer.span(name=f'{agent_name}.{operation}') as span:
-        span.add_attribute('agent', agent_name)
-        span.add_attribute('task_id', task_id)
-        span.add_attribute('operation', operation)
+    with tracer.start_as_current_span(f'agent.{agent_name}.{operation_name}', kind=SpanKind.CLIENT) as span:
+        span.set_attribute('agent', agent_name)
+        span.set_attribute('task_id', task_id)
+        span.set_attribute('operation', operation_name)
         
         try:
             result = operation()
-            span.add_attribute('status', 'success')
+            span.set_attribute('status', 'success')
+            logger.info('Agent operation completed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             return result
         except Exception as e:
-            span.add_attribute('status', 'error')
-            span.add_attribute('error', str(e))
+            span.set_attribute('status', 'error')
+            logger.exception('Agent operation failed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             raise
 ```
 
 ### Application Insights မေးခွန်းများ
 
-**မျှဝေထားသော အေးဂျင့် လုပ်ငန်းစဉ်များကို လိုက်နာပါ:**
+**အေဂျင့်များစွာ စီမံကိန်းများ ကို မျှဝေကြည့်ပါ:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1463,7 +1437,7 @@ traces
 | order by timestamp asc
 ```
 
-**Agent performance နှိုင်းယှဉ်ချက်:**
+**အေဂျင့် စွမ်းဆောင်ရည် နှိုင်းယှဉ်မှု:**
 
 ```kusto
 // Compare agent execution times
@@ -1477,7 +1451,7 @@ dependencies
 | order by avg_duration desc
 ```
 
-**အမှား သုံးသပ်ခြင်း:**
+**အမှားခွဲခြမ်းစိတ်ဖြာခြင်း:**
 
 ```kusto
 // Find which agents fail most
@@ -1492,24 +1466,26 @@ exceptions
 
 ---
 
-## ကုန်ကျစရိတ် အချက်အလက်
+## ကုန်ကျစရိတ် ခွဲခြမ်းစိတ်ဖြာခြင်း
 
-### အများ-အေဂျင့် စနစ် ကုန်ကျစရိတ် (လစဉ် ခန့်မှန်းချက်)
+### အေဂျင့်စနစ်များ လစဉ် ကျသင့်စရိတ်များ ခန့်မှန်းချက်
 
-| အစိတ်အပိုင်း | သတ်မှတ်ချက် | ကုန်ကျစရိတ် |
+ဤသင်ခန်းစာမှာ စီမံမှုပုံပြင်များ ဖြစ်ပြီး၊ ဈေးနှုန်းမဟုတ်ပါ: အောက်ပါထည့်သွင်းချက်မှာ **လစဉ် $240-565** ဖြစ်သည်။ ပြည်နယ်အလိုက် လက်ရှိနှုန်း၊ လည်ပတ်/အပန်းဖြေ မော်ဒယ်အချိန်များ၊ ဝင်/ထွက် တိုကင်ပေါင်းစပ်မှု၊ သိမ်းဆည်းခြင်းနှင့် စစ်ဆေးမှုများကို အတည်ပြုပါ။ Serverless သည် provisioned-throughput အနည်းဆုံးမရသော သို့ပင် အမိန့်များနှင့် သိမ်းဆည်းမှုများအတွက် ငွေချေနိုင်သည်။
+
+| ပစ္စည်း | ဖွဲ့စည်းမှု | စျေးနှုန်း |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
-| **Service Bus** | Standard tier, 10M messages | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
-| **စုစုပေါင်း** | | **$240-565/လ** |
+| **အော်ခတ်စထရေးတာ** | Container App ၁ ခု (vCPU ၁, ၂GB) | $30-50 |
+| **အေဂျင့် ၄ ယောက်** | Container App ၄ ခု (vCPU 0.5, 1GB တစ်ခုချင်း) | $60-120 |
+| **Service Bus** | စံတော်ချိန်အဆင့်, ၁၀ မီလီယံ စာတိုက်များ | $10-20 |
+| **Cosmos DB** | Serverless, 5GB သိမ်းဆည်းမှု, ၁ မီလီယံ RUs | $25-50 |
+| **Blob Storage** | ၁၀GB သိမ်းဆည်းမှု, ၁၀၀,၀၀၀ လည်ပတ်မှုများ | $5-10 |
+| **Application Insights** | ၅GB ဝင်စာများ | $10-15 |
+| **Microsoft Foundry Models** | gpt-4.1, ၁၀ မီလီယံ တိုကင် | $100-300 |
+| **စုစုပေါင်း** | | **လစဉ် $240-565** |
 
-### ကုန်ကျစရိတ် အထိထိရောက်ဆုံး မဟာဗျူဟာများ
+### ကုန်ကျစရိတ် လျှော့ချရေးနည်းလမ်းများ
 
-1. **ဖြစ်နိုင်သမျှ serverless ကို အသုံးပြုပါ:**
+1. **ဖြစ်နိုင်သမျှ serverless အသုံးချပါ:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1518,127 +1494,126 @@ exceptions
    }
    ```
 
-2. **အသုံးမရှိသောအချိန်တွင် agent များကို zero သို့ scale လုပ်ပါ:**
+2. **အေးဆေးအချိန်မှာ အေဂျင့်များကို အကွာအဝေးသို့ ချိန်ညှိပါ:**
    ```bicep
    scale: {
-     minReplicas: 0  // Scale to zero when no messages
+     minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
      maxReplicas: 10
    }
    ```
 
-3. **Service Bus အတွက် batching ကို အသုံးပြုပါ:**
+3. **Service Bus အတွက် အစုလိုက်အသုံးပြုပါ:**
    ```python
-   # မက်ဆေ့ခ််များကို အစုလိုက်ပို့ပါ (ပိုစျေးသက်သာ)
+   # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **အကြိမ်ကြိမ် အသုံးပြုသော ရလဒ်များကို cache ထားပါ:**
+4. **မကြာခဏသုံးသော ရလဒ်များကို cache ထားပါ:**
    ```python
-   # Azure Cache for Redis ကို အသုံးပြုပါ
+   # Use Azure Cache for Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
 
 ---
 
-## အကောင်းဆုံး လက်ဆောင်များ
+## အကောင်းဆုံးလမ်းညွှန်ချက်များ
 
-### ✅ လုပ်ရန်:
+### ✅ ပြုလုပ်ရန်:
 
-1. **idempotent လုပ်ဆောင်ချက်များကို အသုံးပြုပါ**
+1. **idempotent လုပ်ဆောင်ချက်များ အသုံးပြုပါ**
    ```python
-   # အေဂျင့်သည် တူညီသော မက်ဆေ့ခ်ျအား အကြိမ်များစွာ လုံခြုံစိတ်ချစွာ ပြန်လုပ်ဆောင်နိုင်သည်
+   # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
-       if state_manager.task_exists(task_id):
-           print(f"Task {task_id} already processed, skipping")
-           return
-       # တာဝန်ကို ဆောင်ရွက်နေသည်...
+       raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **အပြည့်အစုံ အမှတ်တရ မှတ်တမ်းတင်မှု ထည့်သွင်းပါ**
+2. **ပြည့်စုံသော မှတ်တမ်းတင်ခြင်း လုပ်ဆောင်ပါ**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **correlation IDs များကို အသုံးပြုပါ**
+3. **correlation ID များ အသုံးပြုပါ**
    ```python
-   # task_id ကို လုပ်ငန်းစဉ်တစ်လျှောက်လုံး ပို့ဆောင်ပါ
+   # Pass task_id through entire workflow
    message_data = {
-       'task_id': task_id,  # ဆက်စပ်မှု အိုင်ဒီ
+       'task_id': task_id,  # Correlation ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **မက်ဆေ့ခ်ျ TTL (time-to-live) သတ်မှတ်ပါ**
+4. **စာတိုက် TTL (အသက်တာကာလ) သတ်မှတ်ပါ**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **dead letter queues များကို စောင့်ကြည့်ပါ**
+5. **dead letter queue များ စောင့်ကြည့်ပါ**
    ```python
-   # ပုံမှန် မအောင်မြင်သော မက်ဆေ့များကို စောင့်ကြည့်ခြင်း
+   # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
-### ❌ မလုပ်သင့်:
+### ❌ မပြုလုပ်ရ:
 
-1. **စက်ဘီးပတ်ပတ်လည် ရှိသော သက်ဆိုင်မှုများ မဖန်တီးပါနှင့်**
+1. **စက်ဝိုင်းမိုက်မှု မဖန်တီးရ**
    ```python
-   # ❌ မကောင်း: Agent A → Agent B → Agent A (အဆုံးမဲ့ လည်ပတ်မှု)
-   # ✅ ကောင်း: ရှင်းရှင်းလင်းလင်း ဦးတည်ချက်ရှိပြီး လှည့်မရှိသော ဂရပ် (DAG) ကို သတ်မှတ်ပါ
+   # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
+   # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Agent thread များကို ပိတ်မထားပါနှင့်**
+2. **အေဂျင့် သြားကြိုး မပိတ်ရ**
    ```python
-   # ❌ မကောင်း: တပြေးညီ စောင့်ဆိုင်းခြင်း
+   # ❌ BAD: Synchronous wait
    while not task_complete:
        time.sleep(1)
    
-   # ✅ ကောင်း: message queue ၏ callback များကို အသုံးပြုပါ
+   # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **အပိုင်းအစ အမှားများကို မလွှတ်ပစ်ပါနှင့်**
+3. **မပြီးမြောက်သေးသော အမှားများကို မလွှတ်တင်ရ**
    ```python
-   # ❌ မကောင်း: တစ်ဧဂျင့်ပျက်ပါက အလုပ်စဉ်တစ်ခုလုံးကို ပျက်စေခြင်း
-   # ✅ ကောင်း: အမှားအညွှန်းများနှင့် အပိုင်းအစ ရလဒ်များကို ပြန်ပေးပို့ခြင်း
+   # ❌ BAD: Fail entire workflow if one agent fails
+   # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **အဆုံးမဲ့ ထပ်မံကြိုးစားမှုများ မသုံးပါ**
+4. **အဆုံးမဲ့ ပြန်ကြိုးစားမှု မသုံးရ**
    ```python
-   # ❌ မကောင်း: အဆုံးမဲ့ retry ပြုလုပ်ခြင်း
-   # ✅ ကောင်း: max_retries = 3, ပြီးနောက် dead letter သို့ပို့ပါ
+   # ❌ BAD: retry forever
+   # ✅ GOOD: max_retries = 3, then dead letter
    ```
 
 ---
 
-## ပြဿနာရှာဖွေရေး လမ်းညွှန်
+## ပြသနာဖြေရှင်းလမ်းညွှန်
 
-### ပြဿနာ: မက်ဆေ့ချ်များ queue တွင် ပိတ်ဆို့နေခြင်း
+### ပြသနာ: စာတိုက်များ ကြိမ်တစ်ခါတွင် ချိတ်ဆက်နေခြင်း
 
 **လက္ခဏာများ:**
-- မက်ဆေ့ခ်ျများသည် queue တွင် စုဆောင်းနေသည်
-- အေဂျင့်များ မလုပ်ဆောင်နိုင်ခြင်း
-- Task အခြေအနေသည် "pending" တွင် ကပ်နေသည်
+- စာတိုက်မကြာခဏ စုစည်းနေခြင်း
+- ကိုယ်စားလှယ်များ မလုပ်ဆောင်ခြင်း
+- တာဝန်အခြေအနေ "pending" တွင် ရပ်တန့်နေခြင်း
 
-**ဆန်းစစ်ချက်:**
+**အဓိကကြားနာချက်များ:**
 ```bash
-# တန်း၏ အရှည်ကို စစ်ဆေးပါ
+# Check queue depth
 az servicebus queue show \
+  --resource-group "$RG_NAME" \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Azure CLI ကို အသုံးပြု၍ အေဂျင့် မှတ်တမ်းများကို စစ်ဆေးပါ
+# Check agent logs using Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **ဖြေရှင်းနည်းများ:**
 
-1. **အေဂျင့်အတွက် replica များကို တိုးချဲ့ပါ:**
+1. **ကိုယ်စားလှယ်ကူးသန်းမှု အရေအတွက် တိုးမြှင့်ပါ:**
    ```bash
    az containerapp update \
+     --resource-group "$RG_NAME" \
      --name research-agent \
      --min-replicas 3 \
      --max-replicas 10
@@ -1647,6 +1622,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 2. **dead letter queue ကို စစ်ဆေးပါ:**
    ```bash
    az servicebus queue show \
+     --resource-group "$RG_NAME" \
      --namespace-name mybus \
      --name research-tasks \
      --query "countDetails.deadLetterMessageCount"
@@ -1654,36 +1630,36 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### ပြဿနာ: Task သည် timeout ဖြစ်ခြင်း သို့မဟုတ် မပြီးစီးခြင်း
+### ပြသနာ: တာဝန် မာကျေမဖြစ်၊ မပြီးမြောက်ပေါ့
 
 **လက္ခဏာများ:**
-- Task အခြေအနေသည် "in_progress" မှာရှိနေသည်
-- အချို့ အေဂျင့်များ ပြီးဆုံးသော်လည်း အချို့ မပြီးစီးပါ
-- အမှားမက်ဆေ့ခ်ျများ မရှိပါ
+- တာဝန်အခြေအနေ "in_progress" အနေဖြင့် ဆက်လက်ရှိနေခြင်း
+- အချို့ကိုယ်စားလှယ်များပြီးမြောက်ပြီး၊ အချို့ မပြီးမြောက်
+- အမှားစာတွေ မရရှိခြင်း
 
-**ဆန်းစစ်ချက်:**
+**အဓိကကြားနာချက်များ:**
 ```bash
-# တာဝန်၏ အခြေအနေကို စစ်ဆေးပါ
+# Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# Application Insights ကို စစ်ဆေးပါ
-# Query ကို ဆောင်ရွက်ပါ: traces | where customDimensions.task_id == "..."
+# Check Application Insights
+# Run query: traces | where customDimensions.task_id == "..."
 ```
 
 **ဖြေရှင်းနည်းများ:**
 
-1. **Aggregator တွင် timeout ကို အကောင်အထည်ဖော်ပါ (လေ့ကျင့်ခန်း 1)**
+1. **Aggregator တွင် timeout စနစ် ထည့်သွင်းပါ (လေ့ကျင့်မှု ၁)**
 
-2. **Azure Monitor ကို အသုံးပြု၍ အေဂျင့် မအောင်မြင်မှုများကို စစ်ဆေးပါ:**
+2. **Azure Monitor ဖြင့် ကိုယ်စားလှယ် ပြဿနာများ စစ်ဆေးပါ:**
    ```bash
-   # azd monitor ဖြင့် လော့ဂ်များ ကြည့်ရန်
+   # View logs via azd monitor
    azd monitor --logs
    
-   # သို့မဟုတ် Azure CLI ကို အသုံးပြု၍ သီးသန့် container app ၏ လော့ဂ်များကို စစ်ဆေးပါ
+   # Or use Azure CLI to check specific container app logs
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **အေဂျင့်များအားလုံး လည်ပတ်နေကြသည်ဟု အတည်ပြုပါ:**
+3. **ကိုယ်စားလှယ်အားလုံး လည်ပတ်နေကြောင်း အတည်ပြုပါ:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1694,48 +1670,48 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## ပိုမိုလေ့လာရန်
 
-### တရားဝင် ကိုးကားစာတမ်းများ
+### တရား၀င်စာရွက်စာတမ်းများ
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### ဒီသင်တန်းအတွက် နောက်ဆက်တွဲ အဆင့်များ
-- ← ယခင်: [စွမ်းရည် စီမံခန့်ခွဲခြင်း](capacity-planning.md)
-- → နောက်: [SKU ရွေးချယ်ခြင်း](sku-selection.md)
-- 🏠 [သင်တန်းမူလစာမျက်နှာ](../../README.md)
+### ဒီသင်ခန်းစာတွင် နောက်တက်ရန်
+- ← ယခင်: [Capacity Planning](capacity-planning.md)
+- → နောက်: [SKU Selection](sku-selection.md)
+- 🏠 [သင်ခန်းစာ မူလစာမျက်နှာ](../../README.md)
 
 ### ဆက်စပ် ဥပမာများ
 - [Microservices ဥပမာ](../../../../examples/microservices) - ဝန်ဆောင်မှု ဆက်သွယ်မှု ပုံစံများ
-- [Microsoft Foundry Models ဥပမာ](../../../../examples/azure-openai-chat) - AI ပေါင်းစည်းမှု
+- [Microsoft Foundry Models ဥပမာ](../../../../examples/azure-openai-chat) - AI ပေါင်းစပ်ခြင်း
 
 ---
 
-## အနှစ်ချုပ်
+## အကျဉ်းချုပ်
 
-**သင်သင်ယူခဲ့သည်များ:**
-- ✅ ညှိနှိုင်းမှု ပုံစံ ၅ မျိုး (sequential, parallel, hierarchical, event-driven, consensus)
-- ✅ Azure ပေါ်ရှိ Multi-agent စနစ် (Service Bus, Cosmos DB, Container Apps)
-- ✅ ဖြန့်ဝေထားသော အေဂျင့်များအကြား အခြေနေ စီမံခန့်ခွဲမှု
-- ✅ Timeout ကိုင်တွယ်ခြင်း၊ ပြန်ကြိုးစားမှုများ၊ နှင့် circuit breaker များ
-- ✅ ဖြန့်ဝေထားစနစ်များကို ကြည့်ရှုစစ်ဆေးခြင်းနှင့် အမှားရှာဖွေရေး
-- ✅ ကုန်ကျစရိတ် ထိရောက်စွာ လျှော့ချရေးနည်းလမ်းများ
+**သင်ယူထားသည်များ:**
+- ✅ ငါးမျိုးစီမံခန့်ခွဲမှု ပုံစံများ (စဉ်ဆက်, 병렬, အဆင့်လိုက်, ဖြစ်စဉ်အခြေစိုက်, သဘောတူညီမှု)
+- ✅ Azure ပေါ်တွင် အေဂျင့်စနစ် (Service Bus, Cosmos DB, Container Apps)
+- ✅ မျှဝေပေးထားသော ကိုယ်စားလှယ်များအကြား အခြေအနေစီမံခန့်ခွဲမှု
+- ✅ Timeout ကိုင်တွယ်ချက်များ၊ ပြန်လည်ကြိုးစားမှုနှင့် စက်ရုပ်ကိရိယာများ
+- ✅ မျှဝေထားသောစနစ်များကို ကြည့်ရှုမှုပြုခြင်းနှင့် မှားယွင်းချက်ရှာဖွေရေး
+- ✅ ကုန်ကျစရိတ် လျှော့ချရေးနည်းလမ်းများ
 
 **အဓိကယူဆချက်များ:**
-1. **မှန်ကန်သည့် ပုံစံကို ရွေးချယ်ပါ** - စနစ်တကျ လုပ်ဆောင်ရန် sequential၊ အမြန်လိုအပ်ချက်များအတွက် parallel၊ ပြောင်းလွယ်ပြင်လွယ်အတွက် event-driven
-2. **အခြေနေကို ဂရုတစိုက် စီမံပါ** - မျှဝေထားသော state အတွက် Cosmos DB သို့ ဆက်စပ်ဖြေရှင်းချက်များကို အသုံးပြုပါ
-3. **အလုပ်ချို့ယွင်းမှုများကို သေချာနည်းလမ်းဖြင့် ကိုင်တွယ်ပါ** - Timeouts, retries, circuit breakers, dead letter queues
-4. **အားလုံးကို စောင့်ကြည့်ပါ** - ဖြန့်ဝေထားသော tracing သည် debugging အတွက် မရှိမဖြစ် လိုအပ်သည်
-5. **ကုန်ကျစရိတ်ကို ထိရောက်စွာ လျှော့ချပါ** - Scale to zero, serverless ကို အသုံးပြုပါ၊ caching ကို ထည့်သွင်းပါ
+1. **မှန်ကန်သော ပုံစံ ရွေးချယ်ပါ** - စဉ်ဆက်လုပ်ငန်းများအတွက် စဉ်လိုက်၊ အမြန်နှုန်းအတွက် 병렬, လွယ်ကူမှုအတွက် ဖြစ်စဉ်အခြေစိုက်
+2. **အခြေအနေကို ဂရုစိုက်စွာ စီမံပါ** - Cosmos DB သို့တူညီသော စနစ်များ အသုံးချပါ
+3. **အမှားများကို ဂရုမစိုက် စီမံပါ** - Timeout, ပြန်ကြိုးစားမှု, စက်ရုပ်ကိရိယာ, dead letter queue များ
+4. **အားလုံးကို ကြည့်ရှုပါ** - မျှဝေထားသော လမ်းကြောင်းနက္ခတ်ခြင်းသည် မှားယွင်းချက်ရှာဖွေရေးအတွက် အရေးပါသည်
+5. **ကုန်ကျစရိတ် အများဆုံး လျှော့ချပါ** - အေးဆေး အချိန်တွင် အဆင်းသို့ချ, serverless အသုံးပြု, cache ထည့်သွင်းပါ
 
-**နောက်ဆက်တွဲ အဆင့်များ:**
-1. လက်တွေ့လေ့ကျင့်ခန်းများကို ပြီးမြောက်ပါ
-2. သင့်အသုံးပြုမှုပေါ် မူတည်၍ multi-agent စနစ်တစ်ခု တည်ဆောက်ပါ
-3. ကိုယ့်ဆိုင်ရာ စွမ်းဆောင်ရည်နှင့် ကုန်ကျစရိတ် ထိရောက်စေရန် [SKU ရွေးချယ်ခြင်း](sku-selection.md) ကို လေ့လာပါ
+**နောက်တက်ရန်:**
+1. လေ့ကျင့်ခန်းများ ပြီးမြောက်ပါ
+2. ကိုယ်ပိုင် ကိစ္စအတွက် အေဂျင့်စနစ် တည်ဆောက်ပါ
+3. စွမ်းဆောင်ရည်နှင့် ကုန်ကျစရိတ် လျှော့ကြည့်ရန် [SKU Selection](sku-selection.md) ကိုလေ့လာပါ
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးပမ်းသည်ဖြစ်သောကြောင့် သတင်းအချက်အလက်မှန်ကန်စေရန် ကြိုးစားပေမယ့်၊ အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုရန် လိုအပ်ပါသည်။ မူလစာတမ်းကို မူရင်းဘာသာစကားဖြင့် ရှိသော အရာကို အာဏာပိုင် ရင်းမြစ်အဖြစ် ယူဆသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် သေချာမှုနှင့် တိကျမှုလိုအပ်ပါက ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန်မှ ဘာသာပြန်ချက်ရယူရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှုအားဖြင့် ဖြစ်ပေါ်လာသည့် နားမလည်မှုများ သို့မဟုတ် မှားဖတ်ရှုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
+**ပြောကြားချက်**
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းနေသော်လည်း၊ စက်ကိရိယာဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် လိုအပ်ပါသည်။ မူလစာတမ်းကို မူရင်းဘာသာဖြင့်သာ ယုံကြည်စိတ်ချရသော အချက်အလက်အဖြစ် သတ်မှတ်သင့်သည်။ အရေးကြီးသည့် သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန်သူဝန်ဆောင်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုကွာခြားမှုများ သို့မဟုတ် မမှန်ကန်သော အသုံးပြုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မခံပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

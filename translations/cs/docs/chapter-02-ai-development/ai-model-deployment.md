@@ -1,74 +1,57 @@
-# Nasazení AI modelu s Azure Developer CLI
+# Nasazení modelu AI pomocí Azure Developer CLI
 
 **Navigace kapitolou:**
-- **📚 Domů ke kurzu**: [AZD Pro začátečníky](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
-- **⬅️ Předchozí**: [Integrace Microsoft Foundry](microsoft-foundry-integration.md)
+- **📚 Domů kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj orientovaný na AI
+- **⬅️ Předchozí**: [AI Agenti](agents.md)
 - **➡️ Další**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../chapter-03-configuration/configuration.md)
 
-Tento průvodce poskytuje komplexní instrukce pro nasazení AI modelů pomocí šablon AZD, pokrývající vše od výběru modelu až po produkční vzory nasazení.
+Tento průvodce poskytuje komplexní instrukce pro nasazení AI modelů pomocí AZD šablon, pokrývající vše od výběru modelu po vzory nasazení do produkce.
 
-> **Poznámka k ověření (2026-07-13):** Workflow AZD v tomto průvodci bylo ověřeno s `azd` verzí `1.27.1`. Pro AI nasazení, která trvají déle než výchozí časové okno nasazení služby, aktuální verze AZD podporují příkaz `azd deploy --timeout <sekundy>`.
+> **Recenze vydání (2026-11-04):** Související změny CLI byly přezkoumány s `azd` `1.37.2`; dostupnost modelů, verze a kvóty zůstávají závislé na regionu a předplatném. `azd deploy --timeout <seconds>` řídí okno nasazení služby, nikoli záruku aktivace agenta. Viz [aktuální poznámky k vydání a pokyny pro migraci AI](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
 ## Obsah
 
-- [Strategie výběru modelu](#strategie-výběru-modelu)
-- [Konfigurace AZD pro AI modely](#konfigurace-azd-pro-ai-modely)
-- [Vzorová nasazení](#vzorová-nasazení)
-- [Správa modelu](#správa-modelu)
-- [Provozní úvahy](#provozní-úvahy)
-- [Monitorování a pozorovatelnost](#monitorování-a-pozorovatelnost)
+- [Strategie výběru modelu](#model-selection-strategy)
+- [Konfigurace AZD pro AI modely](#azd-configuration-for-ai-models)
+- [Vzorová nasazení](#deployment-patterns)
+- [Správa modelů](#model-management)
+- [Aspekty produkce](#production-considerations)
+- [Monitoring a pozorovatelnost](#monitoring-and-observability)
 
 ## Strategie výběru modelu
 
-### Modely Microsoft Foundry
+### Azure OpenAI modely v Microsoft Foundry
 
-Vyberte správný model pro svůj případ použití:
+Vyberte správný model pro váš případ použití:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+Nasazení modelů deklarujte v Bicep (níže), ne v libovolných nastaveních `services.*.config.AZURE_OPENAI_MODELS`. AZD takové nastavení neinterpretuje jako seznam modelových zdrojů. `project` služby odkazuje na zdroj aplikace, ne na její `infra/` adresář.
+
+Příklady používají publikovanou verzi `gpt-4.1-mini` **`2025-04-14`** a verzi embeddingu **`1`**. Před nasazením si ověřte, že verze modelu a SKU nasazení jsou podporovány ve vaší cílové oblasti/účtu.
 
 ### Plánování kapacity modelu
 
-| Typ modelu | Případ použití | Doporučená kapacita | Cenová hlediska |
+| Typ modelu | Případ použití | Ilustrační poptávka tokenů | Nákladové úvahy |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Nákladově efektivní pro většinu pracovních zatížení |
-| gpt-4.1 | Komplexní uvažování | 20-100 TPM | Vyšší náklady, použijte pro prémiové funkce |
-| text-embedding-3-large | Vyhledávání, RAG | 30-120 TPM | Silná výchozí volba pro sémantické vyhledávání a získávání |
-| Whisper | Přepis řeči na text | 10-50 TPM | Pracovní zatížení zpracování audia |
+| gpt-4.1-mini | Chat, Otázky a odpovědi | 10 000–50 000 TPM | Benchmark nákladů a kvality pro vaši zátěž |
+| gpt-4.1 | Složité úkoly | 20 000–100 000 TPM | Vyhodnoťte zlepšení kvality vůči nákladům na tokeny |
+| text-embedding-3-large | Vyhledávání, RAG | 30 000–120 000 TPM | Zohledněte příjem dat i dotazovací provoz |
+| Whisper | Přepis řeči na text | Plánujte podle délky audia a limitů požadavků | Nepoužívejte kapacitní vzorec TPM pro textové modely |
+
+TPM znamená tokeny za minutu. Pro tato standardní textová nasazení je ARM `sku.capacity` v jednotkách **1 000 TPM**, ne jednotlivých TPM (kapacita `10` znamená 10 000 TPM). Poměry RPM k TPM se liší podle typu modelu/nasazení; ověřte oba limity dle [dokumentace kvót](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic). Tyto rozsahy jsou příklady, nikoliv doporučení velikosti.
 
 ## Konfigurace AZD pro AI modely
 
 ### Konfigurace šablony Bicep
 
-Vytvořte nasazení modelu pomocí šablon Bicep:
+Vytvořte nasazení modelů pomocí Bicep šablon:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,21 +108,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
+Toto je příklad **vývojové infrastruktury** omezený na skupinu prostředků, nikoli kompletní šablona aplikace AZD. Účet umožňuje přístup z veřejné sítě a vyžaduje autentizaci Entra ID/RBAC (`Cognitive Services OpenAI User` pro volající). Pro produkci je potřeba privátní konektivita, DNS a připojení aplikace popsané v Kapitole 8. AZD také potřebuje hlavní šablonu/mapování parametrů a prostředky hostitele aplikace; pro úplné nasazení použijte funkční ukázku.
+
 ### Proměnné prostředí
 
-Nakonfigurujte prostředí své aplikace:
+Nakonfigurujte prostředí vaší aplikace:
 
 ```bash
-# konfigurace .env
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Vzorová nasazení
+Toto jsou názvy definované aplikací; propojte je s konfigurací hostitele. Azure OpenAI v1 koncový bod používaný níže pro kontrolu stavu nevyžaduje zastaralý dotazovací parametr `api-version`; starší klienti `AzureOpenAI` ano, proto postupujte podle generování API používaného vaší aplikací.
 
-### Vzor 1: Nasazení v jedné oblasti
+## Vzory nasazení
+
+### Vzor 1: Nasazení v jednom regionu
 
 ```yaml
 # azure.yaml - Single region
@@ -146,7 +133,7 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
@@ -156,10 +143,11 @@ Nejvhodnější pro:
 - Aplikace pro jedno tržní prostředí
 - Optimalizaci nákladů
 
-### Vzor 2: Nasazení ve více oblastech
+### Vzor 2: Nasazení v několika regionech
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,14 +157,18 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
+Vynechané vlastnosti účtu/SKU musí být doplněny; tento úsek nelze nasadit v původní podobě. Nasazujte modely v každém účtu a implementujte směrování/přepínání a řízení držby dat samostatně.
+
 Nejvhodnější pro:
 - Globální aplikace
 - Požadavky na vysokou dostupnost
-- Rozložení zátěže
+- Distribuci zátěže
 
 ### Vzor 3: Hybridní nasazení
 
-Kombinujte Microsoft Foundry Modely s dalšími AI službami:
+Kombinujte Microsoft Foundry Models s dalšími AI službami:
+
+Následující úseky předpokládají, že názvy a `location` jsou dodány obsaženou šablonou.
 
 ```bicep
 // Hybrid AI services
@@ -207,16 +199,16 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ## Správa modelu
 
-### Kontrola verzí
+### Správa verzí
 
-Sledujte verze modelů ve své konfiguraci AZD:
+Sledujte verze modelů v konfiguraci vaší aplikace nebo IaC. Tento JSON je **příklad definovaný aplikací**, nikoli vestavěné schéma modelu AZD; musí být implementován a nasazen záložní mechanismus explicitně:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -229,25 +221,25 @@ Sledujte verze modelů ve své konfiguraci AZD:
 
 ### Aktualizace modelu
 
-Používejte AZD háčky pro aktualizace modelů:
+Použijte háček AZD pro kontrolu dostupnosti pouze pro čtení, poté aktualizujte IaC a proveďte provisioning:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# Pokud nasazení trvá déle než výchozí časový limit
-azd deploy --timeout 1800
 ```
+
+Spusťte `azd up` **mimo** háček pro aplikaci změněné infrastruktury modelu a nasazení kódu. Nikdy nevolejte `azd deploy` z háčku `predeploy`: rekurzivně spouští ten samý háček. `azd deploy --timeout 1800` prodlužuje časový limit nasazení aplikace; neaktualizuje prostředky Bicep.
 
 ### A/B testování
 
-Nasazujte více verzí modelu:
+Ilustrační prostředek níže vybírá název nasazení a kapacitu; vytvoří **jedno** nasazení, nikoli A/B test. Pro skutečný experiment nasaďte dvě odlišné nasazovací prostředky, směrujte řízenou část požadavků na každý a porovnejte kvalitu, latenci a náklady. Předpokládá `openAi` z příkladu účtu:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -269,14 +261,15 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Provozní úvahy
+## Produkční aspekty
 
 ### Plánování kapacity
 
-Vypočítejte požadovanou kapacitu na základě vzorů používání:
+Vypočítejte požadovanou kapacitu na základě vzorů využití:
 
 ```python
-# Příklad výpočtu kapacity
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# Příklad použití
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Konfigurace automatického škálování
+Očekávaný výstup: `Required capacity: 9100 TPM`. Při kapacitě 1 000 TPM zaokrouhlete nahoru alespoň na `10`, poté ověřte odhad RPM specifický pro model a limit služby (včetně požadovaného rozpočtu na výstup). Tento odhad tokenové poptávky nezaručuje ochranu proti omezování.
 
-Nakonfigurujte automatické škálování pro Container Apps:
+### Konfigurace autoškálování
+
+Nakonfigurujte autoškálování pro Container Apps:
+
+**Částečný prostředek:** spojte nastavení `template.scale` do kompletního Container App s umístěním, spravovaným prostředím, kontejnerovým obrazem, prostředky a ingress. Zvýšení počtu replik nezvyšuje kvótu modelu.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,18 +335,21 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Optimalizace nákladů
 
-Implementujte kontroly nákladů:
+Implementujte kontrolu nákladů:
+
+**Ilustrační rozpočtový prostředek:** definujte `budgetStartDate` jako první den aktuálního měsíce v UTC (například `2026-11-01T00:00:00Z` pro tuto kontrolu) a nahraďte kontaktní adresu. Začátek musí vyhovovat aktuálním časovým omezením služby. Rozpočty upozorňují na opožděná fakturační data; nezastavují utrácení.
 
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Monitorování a pozorovatelnost
+## Sledování a pozorovatelnost
 
-### Integrace Application Insights
+### Integrace s Application Insights
 
-Nakonfigurujte monitorování pro AI pracovní zatížení:
+Nakonfigurujte sledování AI zátěží:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
+
+Tento prostředek předpokládá `applicationInsightsName`, `location` a existující `logAnalyticsWorkspace`. Provisions monitorování, ale neinstruuje aplikaci ani nevytváří vlastní metriky.
 
 ### Vlastní metriky
 
 Sledujte metriky specifické pro AI:
 
-```python
-# Vlastní telemetrie pro AI modely
-import logging
-from applicationinsights import TelemetryClient
+Použijte podporovanou [Azure Monitor OpenTelemetry distribuci](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python), nikoli zastaralé SDK `applicationinsights` pro Python. Nainstalujte `azure-monitor-opentelemetry`, nakonfigurujte `APPLICATIONINSIGHTS_CONNECTION_STRING` a inicializujte jednou při startu:
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+```python
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
+
+Toto ilustruje emisí atributů, nikoli skutečné instrumentace volání modelu. Zabalte skutečný požadavek do rozsahu pro měření jeho trvání; inspectujte `dependencies`/`traces` v Application Insights. Neposílejte výzvy, odpovědi, klíče ani surové zprávy o výjimkách obsahující citlivá data.
 
 ### Kontroly stavu
 
-Implementujte monitorování stavu AI služeb:
+Implementujte sledování stavu AI služeb:
+
+Nainstalujte `fastapi`, `uvicorn`, `httpx` a `azure-identity`. Nastavte výše uvedené proměnné endpointu/nasazení a povolte volajícímu `Cognitive Services OpenAI User`. Tento **readiness probe** používá Azure OpenAI v1 datovou rovinu s Entra ID; provádí zpoplatněné volání modelu. Spusťte s `uvicorn health:app` po uložení jako `health.py`. Použijte samostatnou lehkou kontrolu životaschopnosti, omezujte rychlost/kachlování výsledků readiness a nezveřejňujte tuto cestu veřejně bez řízení přístupu.
 
 ```python
-# Koncové body kontroly zdraví
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,42 +431,48 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Testovat připojení OpenAI
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
+
+Očekávané: `GET /health/ai-models` vrací `200 {"status":"healthy"}`, když je nakonfigurované chat nasazení použitelné, nebo `503` bez zveřejnění podrobností upstream. Výpis nasazení je operace managementové roviny a není validní health probe datové roviny.
 
 ## Další kroky
 
-1. **Prostudujte [Průvodce integrací Microsoft Foundry](microsoft-foundry-integration.md)** pro vzory integrace služeb
+1. **Projděte [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** pro vzory integrace služeb
 2. **Dokončete [AI Workshop Lab](ai-workshop-lab.md)** pro praktické zkušenosti
-3. **Implementujte [Produkční AI praktiky](production-ai-practices.md)** pro nasazení ve firmách
-4. **Prozkoumejte [Průvodce řešením problémů AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** pro běžné problémy
+3. **Implementujte [Production AI Practices](../chapter-08-production/production-ai-practices.md)** pro podnikovou produkci
+4. **Prozkoumejte [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** pro běžné problémy
 
 ## Zdroje
 
-- [Dostupnost modelů Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Dokumentace Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Škálování Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Optimalizace nákladů AI modelů](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Navigace kapitolou:**
-- **📚 Domů ke kurzu**: [AZD Pro začátečníky](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
-- **⬅️ Předchozí**: [Integrace Microsoft Foundry](microsoft-foundry-integration.md)
+**Navigace kapitol:**
+- **📚 Domů kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - AI-first vývoj
+- **⬅️ Předchozí**: [AI Agents](agents.md)
 - **➡️ Další**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../chapter-03-configuration/configuration.md)
 

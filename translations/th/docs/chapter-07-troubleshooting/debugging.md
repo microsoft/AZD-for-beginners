@@ -1,77 +1,72 @@
-# คู่มือการดีบักสำหรับการปรับใช้ AZD
+# คู่มือการดีบักสำหรับการใช้งาน AZD
 
-**การนำทางบท:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: บทที่ 7 - การแก้ไขปัญหา & การดีบัก
-- **⬅️ Previous**: [ปัญหาทั่วไป](common-issues.md)
-- **➡️ Next**: [การแก้ปัญหาเฉพาะ AI](ai-troubleshooting.md)
-- **🚀 Next Chapter**: [บทที่ 8: รูปแบบการผลิตและองค์กร](../chapter-08-production/production-ai-practices.md)
+**การนำทางบทเรียน:**
+- **📚 หน้าแรกของหลักสูตร**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
+- **📖 บทปัจจุบัน**: บทที่ 7 - การแก้ไขปัญหาและการดีบัก
+- **⬅️ บทก่อนหน้า**: [ปัญหาทั่วไป](common-issues.md)
+- **➡️ ถัดไป**: [การแก้ไขปัญหาเฉพาะ AI](ai-troubleshooting.md)
+- **🚀 บทถัดไป**: [บทที่ 8: รูปแบบการผลิตและองค์กร](../chapter-08-production/production-ai-practices.md)
 
 ## บทนำ
 
-คู่มือฉบับนี้ครอบคลุมกลยุทธ์ เครื่องมือ และเทคนิคการดีบักขั้นสูงสำหรับการวินิจฉัยและแก้ไขปัญหาที่ซับซ้อนในการปรับใช้ด้วย Azure Developer CLI เรียนรู้วิธีการตรวจสอบอย่างเป็นระบบ เทคนิคการวิเคราะห์ล็อก การโปรไฟล์ประสิทธิภาพ และเครื่องมือวินิจฉัยขั้นสูงเพื่อแก้ไขปัญหาการปรับใช้และปัญหารันไทม์อย่างมีประสิทธิภาพ
+คู่มือฉบับสมบูรณ์นี้นำเสนอวิธีการดีบักขั้นสูง เครื่องมือ และเทคนิคสำหรับวินิจฉัยและแก้ไขปัญหาซับซ้อนเกี่ยวกับการใช้งาน Azure Developer CLI เรียนรู้วิธีการแก้ไขปัญหาอย่างเป็นระบบ เทคนิคการวิเคราะห์บันทึกการทำงาน การวัดประสิทธิภาพ และเครื่องมือวินิจฉัยขั้นสูง เพื่อแก้ไขปัญหาการใช้งานและระหว่างรันไทม์อย่างมีประสิทธิภาพ
 
 ## เป้าหมายการเรียนรู้
 
-เมื่อทำคู่มือนี้เสร็จ คุณจะสามารถ:
-- เชี่ยวชาญวิธีการดีบักอย่างเป็นระบบสำหรับปัญหา Azure Developer CLI
-- เข้าใจการกำหนดค่าการบันทึกขั้นสูงและเทคนิคการวิเคราะห์ล็อก
-- นำกลยุทธ์การโปรไฟล์และการเฝ้าติดตามประสิทธิภาพไปใช้
-- ใช้เครื่องมือและบริการวินิจฉัยของ Azure เพื่อแก้ไขปัญหาที่ซับซ้อน
-- ประยุกต์ใช้การดีบักเครือข่ายและการแก้ไขปัญหาด้านความปลอดภัย
-- กำหนดค่าการตรวจสอบและการแจ้งเตือนอย่างครอบคลุมเพื่อการตรวจจับปัญหาเชิงรุก
+เมื่อเรียนจบคู่มือนี้ คุณจะสามารถ:
+- เชี่ยวชาญวิธีดีบักอย่างเป็นระบบสำหรับปัญหา Azure Developer CLI
+- เข้าใจการตั้งค่าการบันทึกขั้นสูงและเทคนิคการวิเคราะห์บันทึก
+- ใช้กลยุทธ์การวัดและติดตามประสิทธิภาพ
+- ใช้เครื่องมือวินิจฉัยและบริการ Azure สำหรับการแก้ปัญหาซับซ้อน
+- ใช้เทคนิคดีบักเครือข่ายและแก้ไขปัญหาด้านความปลอดภัย
+- ตั้งค่าการตรวจสอบและแจ้งเตือนอย่างครอบคลุมเพื่อการตรวจพบปัญหาเชิงรุก
 
 ## ผลลัพธ์การเรียนรู้
 
-หลังจากเสร็จสิ้น คุณจะสามารถ:
-- นำวิธี TRIAGE ไปใช้เพื่อดีบักปัญหาการปรับใช้ที่ซับซ้อนอย่างเป็นระบบ
-- กำหนดค่าและวิเคราะห์ข้อมูลการบันทึกและการติดตามอย่างครอบคลุม
-- ใช้ Azure Monitor, Application Insights และเครื่องมือวินิจฉัยได้อย่างมีประสิทธิภาพ
-- แก้ไขปัญหาการเชื่อมต่อเครือข่าย การยืนยันตัวตน และสิทธิ์การเข้าถึงได้อย่างอิสระ
-- นำการตรวจสอบและการเพิ่มประสิทธิภาพ performance ไปใช้
-- สร้างสคริปต์ดีบักแบบกำหนดเองและงานอัตโนมัติสำหรับปัญหาที่เกิดซ้ำ
+เมื่อสำเร็จ คุณจะสามารถ:
+- ใช้วิธีการ TRIAGE ในการดีบักปัญหาการใช้งานที่ซับซ้อนได้อย่างเป็นระบบ
+- ตั้งค่าและวิเคราะห์ข้อมูลบันทึกและการติดตามอย่างครบถ้วน
+- ใช้ Azure Monitor, Application Insights และเครื่องมือวินิจฉัยอย่างมีประสิทธิภาพ
+- ดีบักปัญหาการเชื่อมต่อเครือข่าย การยืนยันตัวตน และสิทธิ์ใช้งานได้ด้วยตัวเอง
+- ใช้กลยุทธ์การติดตามและเพิ่มประสิทธิภาพการทำงาน
+- สร้างสคริปต์ดีบักและระบบอัตโนมัติสำหรับปัญหาที่เกิดซ้ำ
 
 ## วิธีการดีบัก
 
-### แนวทาง TRIAGE
-- **T**ime: ปัญหาเริ่มเกิดขึ้นเมื่อไหร่?
-- **R**eproduce: คุณสามารถทำให้เกิดซ้ำได้อย่างสม่ำเสมอหรือไม่?
-- **I**solate: ส่วนประกอบใดที่ล้มเหลว?
-- **A**nalyze: บันทึกแจ้งอะไรเรา?
-- **G**ather: เก็บรวบรวมข้อมูลที่เกี่ยวข้องทั้งหมด
+### วิธี TRIAGE
+- **T**ime: ปัญหาเริ่มเกิดขึ้นเมื่อใด?
+- **R**eproduce: คุณสามารถสร้างปัญหาได้อย่างสม่ำเสมอหรือไม่?
+- **I**solate: องค์ประกอบใดล้มเหลว?
+- **A**nalyze: บันทึกข้อมูลบอกอะไรเรา?
+- **G**ather: รวบรวมข้อมูลที่เกี่ยวข้องทั้งหมด
 - **E**scalate: เมื่อใดควรขอความช่วยเหลือเพิ่มเติม
 
-## การเปิดโหมดดีบัก
+## การเปิดใช้งานโหมดดีบัก
+
+> **ขอบเขต:** ตัวอย่างเหล่านี้เป็นแนวทางสำหรับการวินิจฉัยที่ปรับใช้งานได้ ไม่ได้เป็นชุดสคริปต์ที่จัดเตรียมไว้ คือให้เปลี่ยนชื่อ/รหัสทรัพยากร ใช้ Bash สำหรับบล็อก shell ค่าออกและตัวแปรสภาพแวดล้อม `--debug` อาจมีข้อมูลสำคัญ — โปรดตรวจสอบ/ลบก่อนแชร์ ตัวอย่างที่ทำการใช้งาน, ย้อนกลับ หรือเปลี่ยนการตั้งค่าต้องได้รับการอนุมัติจากผู้ปฏิบัติงานอย่างชัดเจน
 
 ### ตัวแปรสภาพแวดล้อม
 ```bash
-# เปิดการดีบักแบบครอบคลุม
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# การดีบักของ Azure CLI
-export AZURE_CLI_DIAGNOSTICS=true
-
-# ปิดการส่งข้อมูลเทเลเมทรีเพื่อให้ผลลัพธ์สะอาดขึ้น
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### การกำหนดค่าแบบดีบัก
+### การตั้งค่าการดีบัก
 ```bash
-# ตั้งค่าการกำหนดค่าดีบักทั่วทั้งระบบ
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# เปิดการบันทึกการติดตาม
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
 
-## 📊 เทคนิคการวิเคราะห์ล็อก
+`azd config set` สามารถเก็บคีย์อะไรก็ได้; แต่ไม่ได้หมายความว่า `debug.enabled`, `debug.logLevel` หรือ `trace.outputPath` เป็นการตั้งค่าที่รองรับ ใช้แฟลก `--debug` ของคำสั่งที่ออกอย่างเป็นทางการแทน
 
-### การทำความเข้าใจระดับล็อก
+## 📊 เทคนิคการวิเคราะห์บันทึก
+
+### ความเข้าใจระดับบันทึก
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### การวิเคราะห์ล็อกแบบมีโครงสร้าง
+### การวิเคราะห์บันทึกแบบมีโครงสร้าง
 ```bash
-# ดูบันทึกด้วย Azure Monitor (ผ่าน azd monitor)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# ดูบันทึกของแอปแบบเรียลไทม์
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# สำหรับการวิเคราะห์บันทึกอย่างละเอียด ให้ใช้ Azure CLI กับ App Service หรือ Container App ของคุณ:
-# บันทึก App Service
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# บันทึก Container App
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# ส่งออกบันทึก Application Insights เพื่อการวิเคราะห์
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
-### การเชื่อมโยงล็อก
+### การเชื่อมโยงบันทึก
 ```bash
 #!/bin/bash
-# correlate-logs.sh - เชื่อมโยงบันทึกข้ามบริการโดยใช้ Azure Monitor
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# ค้นหาใน Application Insights เพื่อหาบันทึกที่เกี่ยวข้อง
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# ค้นหาบันทึกกิจกรรมของ Azure
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
 ## 🛠️ เครื่องมือดีบักขั้นสูง
 
 ### การสืบค้น Azure Resource Graph
 ```bash
-# ค้นหาทรัพยากรตามแท็ก
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# ค้นหาการปรับใช้ที่ล้มเหลว
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# ตรวจสอบสถานะของทรัพยากร
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### การดีบักเครือข่าย
 ```bash
-# ทดสอบการเชื่อมต่อระหว่างบริการ
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# การใช้งาน
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
 ### การดีบักคอนเทนเนอร์
 ```bash
-# แก้ไขปัญหาแอปคอนเทนเนอร์
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -183,10 +180,10 @@ debug_container() {
 
 ### การดีบักการเชื่อมต่อฐานข้อมูล
 ```bash
-# ดีบักการเชื่อมต่อฐานข้อมูล
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -204,22 +201,11 @@ debug_database() {
 
 ### การตรวจสอบประสิทธิภาพแอปพลิเคชัน
 ```bash
-# เปิดการดีบักของ Application Insights
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# การตรวจสอบประสิทธิภาพที่กำหนดเอง
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -236,33 +224,31 @@ monitor_performance() {
 }
 ```
 
-### การวิเคราะห์การใช้งานทรัพยากร
+### การวิเคราะห์การใช้ทรัพยากร
 ```bash
-# ตรวจสอบการใช้งานทรัพยากร
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
 ```
 
-## 🧪 การทดสอบและการยืนยัน
+## 🧪 การทดสอบและการตรวจสอบ
 
-### การดีบักการทดสอบแบบผสาน
+### การดีบักการทดสอบแบบบูรณาการ
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# ตั้งค่าสภาพแวดล้อมสำหรับการดีบัก
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# ดึงจุดสิ้นสุดของบริการ
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# ทดสอบจุดสิ้นสุดสำหรับตรวจสอบสถานะ
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# เรียกใช้การทดสอบ
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# เรียกใช้การทดสอบแบบบูรณาการที่กำหนดเอง
+# Run custom integration tests
 npm run test:integration
 ```
 
-### การทดสอบโหลดเพื่อการดีบัก
+### การทดสอบโหลดสำหรับดีบัก
 ```bash
-# การทดสอบโหลดแบบง่ายเพื่อระบุคอขวดด้านประสิทธิภาพ
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # ใช้ Apache Bench (ติดตั้ง: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # ดึงเมตริกหลัก
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # ตรวจสอบข้อผิดพลาด
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
 ## 🔧 การดีบักโครงสร้างพื้นฐาน
 
-### การดีบักเทมเพลต Bicep
+### การดีบักแม่แบบ Bicep
 ```bash
-# ตรวจสอบเทมเพลต Bicep พร้อมผลลัพธ์โดยละเอียด
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # การตรวจสอบไวยากรณ์
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # การตรวจสอบลินท์
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # การปรับใช้แบบ What-if
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# ดีบักการปรับใช้เทมเพลต
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -375,54 +359,46 @@ debug_deployment() {
 }
 ```
 
-### การวิเคราะห์สถานะทรัพยากร
+### การวิเคราะห์สถานะของทรัพยากร
 ```bash
-# วิเคราะห์สถานะของทรัพยากรเพื่อหาความไม่สอดคล้อง
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # แสดงรายการทรัพยากรทั้งหมดพร้อมสถานะของแต่ละทรัพยากร
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # ตรวจสอบทรัพยากรที่ล้มเหลว
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
 ## 🔒 การดีบักด้านความปลอดภัย
 
-### การดีบักกระบวนการตรวจสอบสิทธิ์
+### การดีบักกระบวนการยืนยันตัวตน
 ```bash
-# ดีบักการตรวจสอบสิทธิ์ของ Azure
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # ถอดรหัสโทเค็น JWT (ต้องการ jq และ base64)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# ดีบักการเข้าถึง Key Vault
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,14 +416,14 @@ debug_keyvault() {
 
 ### การดีบักความปลอดภัยเครือข่าย
 ```bash
-# ดีบักกลุ่มความปลอดภัยของเครือข่าย
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # ตรวจสอบกฎความปลอดภัย
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -458,28 +434,25 @@ debug_network_security() {
 
 ## 📱 การดีบักเฉพาะแอปพลิเคชัน
 
-### การดีบักแอป Node.js
+### การดีบักแอปพลิเคชัน Node.js
 ```javascript
-// debug-middleware.js - มิดเดิลแวร์ดีบักสำหรับ Express
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // บันทึกรายละเอียดคำขอ
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // เขียนทับ res.json เพื่อบันทึกการตอบกลับ
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -489,14 +462,16 @@ module.exports = (req, res, next) => {
 
 ### การดีบักการสืบค้นฐานข้อมูล
 ```javascript
-// database-debug.js - เครื่องมือสำหรับดีบักฐานข้อมูล
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -519,10 +494,10 @@ module.exports = DebuggingPool;
 
 ## 🚨 ขั้นตอนการดีบักฉุกเฉิน
 
-### การตอบสนองต่อปัญหาในระบบผลิต
+### การตอบสนองต่อปัญหาในสภาพแวดล้อมผลิต
 ```bash
 #!/bin/bash
-# emergency-debug.sh - การดีบักฉุกเฉินในสภาพแวดล้อมการผลิต
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# สลับไปยังสภาพแวดล้อมที่ถูกต้อง
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# รวบรวมข้อมูลที่สำคัญ
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# ใช้ Azure Monitor สำหรับบันทึกข้อผิดพลาด
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
 ### ขั้นตอนการย้อนกลับ
 ```bash
-# สคริปต์ย้อนกลับอย่างรวดเร็ว
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # สลับสภาพแวดล้อม
+    # Switch environment
     azd env select "$environment"
     
-    # ย้อนกลับโดยใช้ Git (AZD ไม่มีฟีเจอร์ย้อนกลับในตัว)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # ตรวจสอบการย้อนกลับ
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # ทดสอบ endpoints ที่สำคัญ
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 แดชบอร์ดสำหรับการดีบัก
+การย้อนกลับด้วยโค้ดเพียงอย่างเดียวนี้จะไม่ย้อนกลับโครงสร้างพื้นฐาน, การย้ายฐานข้อมูล หรือความลับ ใช้ worktree ที่สะอาด บันทึกคอมมิตเริ่มต้น และกู้คืนภายหลัง; คำสั่งจะเช็คเอาต์คอมมิตที่เลือกในที่เก็บข้อมูลปัจจุบัน
+
+## 📊 แดชบอร์ดดีบัก
 
 ### แดชบอร์ดการตรวจสอบที่กำหนดเอง
 ```bash
-# สร้างคำสืบค้นของ Application Insights เพื่อการดีบัก
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # คำสืบค้นสำหรับข้อผิดพลาด
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # คำสืบค้นสำหรับปัญหาด้านประสิทธิภาพ
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # คำสืบค้นสำหรับการล้มเหลวของการพึ่งพา
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### การรวมล็อก
+### การรวบรวมบันทึก
 ```bash
-# รวบรวมบันทึกจากแหล่งข้อมูล Azure หลายแหล่ง
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,28 +630,30 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
 }
 ```
 
-## 🔗 ทรัพยากรขั้นสูง
+## 🔗 แหล่งข้อมูลขั้นสูง
 
 ### สคริปต์ดีบักที่กำหนดเอง
-Create a `scripts/debug/` directory with:
-- `health-check.sh` - การตรวจสอบสถานะแบบครอบคลุม
-- `performance-test.sh` - การทดสอบประสิทธิภาพแบบอัตโนมัติ
-- `log-analyzer.py` - การวิเคราะห์และแยกวิเคราะห์ล็อกขั้นสูง
+สร้างไดเรกทอรี `scripts/debug/` ที่มี:
+- `health-check.sh` - การตรวจสุขภาพแบบครอบคลุม
+- `performance-test.sh` - การทดสอบประสิทธิภาพอัตโนมัติ
+- `log-analyzer.py` - การวิเคราะห์และแยกแยะบันทึกขั้นสูง
 - `resource-validator.sh` - การตรวจสอบความถูกต้องของโครงสร้างพื้นฐาน
 
-### การรวมระบบการตรวจสอบ
+### การบูรณาการการตรวจสอบ
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -686,36 +664,36 @@ hooks:
       fi
 ```
 
-## แนวปฏิบัติที่ดีที่สุด
+## แนวทางปฏิบัติที่ดีที่สุด
 
-1. **Always enable debug logging** in non-production environments
-2. **Create reproducible test cases** for issues
-3. **Document debugging procedures** for your team
-4. **Automate health checks** and monitoring
-5. **Keep debug tools updated** with your application changes
-6. **Practice debugging procedures** during non-incident times
+1. **เปิดใช้งานการบันทึกดีบักเสมอ** ในสภาพแวดล้อมที่ไม่ใช่การผลิต
+2. **สร้างกรณีทดสอบที่ทำซ้ำได้** สำหรับปัญหา
+3. **จัดทำเอกสารขั้นตอนการดีบัก** สำหรับทีมของคุณ
+4. **ทำให้อัตโนมัติการตรวจสุขภาพและการตรวจสอบ**
+5. **อัปเดตเครื่องมือดีบักให้ทันสมัย** ตามการเปลี่ยนแปลงของแอปพลิเคชันของคุณ
+6. **ฝึกฝนขั้นตอนการดีบัก** ในช่วงเวลาที่ไม่มีเหตุการณ์
 
 ## ขั้นตอนถัดไป
 
 - [การวางแผนความจุ](../chapter-06-pre-deployment/capacity-planning.md) - วางแผนความต้องการทรัพยากร
 - [การเลือก SKU](../chapter-06-pre-deployment/sku-selection.md) - เลือกระดับบริการที่เหมาะสม
-- [การตรวจสอบก่อนการปรับใช้](../chapter-06-pre-deployment/preflight-checks.md) - การยืนยันก่อนการปรับใช้
-- [ชีทช่วยจำ](../../resources/cheat-sheet.md) - คำสั่งอ้างอิงด่วน
+- [การตรวจสอบก่อนการรัน](../chapter-06-pre-deployment/preflight-checks.md) - การตรวจสอบก่อนใช้งาน
+- [ชีทคำสั่งด่วน](../../resources/cheat-sheet.md) - คำสั่งอ้างอิงด่วน
 
 ---
 
-**จำไว้ว่า**: การดีบักที่ดีคือการทำอย่างเป็นระบบ รอบคอบ และอดทน เครื่องมือและเทคนิคเหล่านี้จะช่วยให้คุณวินิจฉัยปัญหาได้เร็วขึ้นและมีประสิทธิภาพมากขึ้น
+**จำไว้**: การดีบักที่ดีคือการทำอย่างเป็นระบบ รอบคอบ และอดทน เครื่องมือและเทคนิคเหล่านี้จะช่วยให้คุณวินิจฉัยปัญหาได้รวดเร็วและมีประสิทธิภาพมากขึ้น
 
 ---
 
 **การนำทาง**
-- **Previous Lesson**: [ปัญหาทั่วไป](common-issues.md)
+- **บทเรียนก่อนหน้า**: [ปัญหาทั่วไป](common-issues.md)
 
-- **Next Lesson**: [การวางแผนความจุ](../chapter-06-pre-deployment/capacity-planning.md)
+- **บทเรียนถัดไป**: [การวางแผนความจุ](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิด**:
-เอกสารฉบับนี้ถูกแปลโดยใช้บริการแปลด้วย AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้ว่าเราจะมุ่งมั่นเพื่อความถูกต้อง แต่โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้องได้ เอกสารต้นฉบับในภาษาต้นทางควรถือเป็นแหล่งอ้างอิงหลัก สำหรับข้อมูลที่มีความสำคัญ ขอแนะนำให้ใช้การแปลโดยนักแปลมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดใด ๆ ที่เกิดจากการใช้การแปลนี้
+**ปฏิเสธความรับผิดชอบ**:
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) ขณะที่เราพยายามให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดขึ้นจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

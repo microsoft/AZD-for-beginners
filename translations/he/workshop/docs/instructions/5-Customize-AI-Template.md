@@ -1,470 +1,133 @@
-# 5. להתאמה אישית של תבנית
+# 5. התאמה אישית של תבנית
 
-!!! tip "בסוף מודול זה תוכל/י"
+!!! tip "בסוף מודול זה תוכל"
 
-    - [ ] לחקור את יכולות הסוכן המובנות
-    - [ ] להוסיף חיפוש AI עם האינדקס האישי שלך
-    - [ ] להפעלת וניתוח מדדי מעקב
-    - [ ] לבצע הרצת הערכה
-    - [ ] לבצע סריקת red-teaming
-    - [ ] **מענה למעבדה 5: בניית תוכנית התאמה אישית** 
-
----
-
-## 5.1 יכולות סוכן AI
-
-!!! success "סיימנו זאת במעבדה 01"
-
-- **חיפוש בקבצים**: חיפוש מובנה של OpenAI לשליפת ידע
-- **אזכורים**: ייחוס אוטומטי למקורות בתגובות
-- **הנחיות הניתנות להתאמה**: שינוי התנהגות ואישיות הסוכן
-- **שילוב כלים**: מערכת כלים מתרחבת ליכולות מותאמות
+    - [ ] Distinguish configuration changes from application implementation
+    - [ ] Plan a grounded retrieval customization
+    - [ ] Enable and inspect tracing without unnecessarily capturing sensitive content
+    - [ ] Locate and run the sample's current evaluation and red-teaming tests
+    - [ ] **Lab 5:** Build a customization and validation plan
 
 ---
 
-## 5.2 אפשרויות שליפת ידע
+## 5.1 הקמת קו בסיס
 
-!!! task "לסיום זה עלינו לבצע שינויים ולפרוס מחדש"    
-    
-    ```bash title=""
-    # הגדרת משתני סביבה
-    azd env set USE_AZURE_AI_SEARCH_SERVICE true
-    azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
-    azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
-    azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
-    azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
+השתמש במאגר [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) שהאתחל מהמודולים הקודמים. רשום את גרסת התבנית, גרסת AZD, הסביבה הנבחרת, פריסת המודל, ואת שאלות הדוגמה העובדות לפני שינוי כל דבר.
 
-    # העלאת נתונים ויצירת אינדקס שלי
+הדוגמה מממשת יישום צ'אט הנתמך בסוכן. היא **אינה** הופכת למערכת קמעונאית עם שני סוכנים רק על ידי הגדרת משתני סביבה או שמירת קבצי הוראות נוספים. סוכנים נוספים, מטפלי כלים, ניתוב, הרשאות וגישה לנתונים דורשים קוד יישום.
 
-    ```
+בדוק את ההוראות והכלים של הסוכן שמוצב כרגע ב-Foundry. בדוק שאלה עובדתית אחת, שאלה של משאוב אחד, ושאלה שנתוני הדוגמה אינם יכולים לענות עליה. אמת את הציטוטים מול מסמכי המקור עצמם במקום להניח שתגובה שוטפת נכונה.
 
----
+## 5.2 התאמה אישית של משאוב ידע
 
-**חיפוש בקבצים של OpenAI (בררת מחדל):**
+התבנית תומכת במשאוב מבוסס קבצים ואינטגרציה אופציונלית עם Azure AI Search. עקוב אחר [המדריך הנוכחי של AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) לאינדוקס והגדרת כלים.
 
-- מובנה בסוכני Foundry
-- עיבוד ואינדוקס אוטומטי של מסמכים
-- אין צורך בקונפיגורציה נוספת
-
-**חיפוש Azure AI (אופציונלי):**
-
-- חיפוש סמנטי ווקטורי היברידי
-- ניהול אינדקס מותאם אישית
-- יכולות חיפוש מתקדמות
-- דורש `USE_AZURE_AI_SEARCH_SERVICE=true`
-
----
-
-## 5.3 [מעקב ופיקוח](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
-
-!!! task "לסיום זה עלינו לבצע שינויים ולפרוס מחדש"    
-    
-    ```bash title=""
-    azd env set ENABLE_AZURE_MONITOR_TRACING true
-    azd deploy
-    ```
-
-**מעקב:**
-
-- שילוב OpenTelemetry
-- מעקב בקשות/תגובות
-- מדדי ביצועים
-- זמין בפורטל Microsoft Foundry
-
-**רישום:**
-
-- יומני יישום ב-Container Apps
-- רישום מובנה עם מזהי קורלציה
-- צפייה ביומנים בזמן אמת והיסטורית
-
----
-
-## 5.4 [הערכת סוכן](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
-
-**הערכה מקומית:**
-
-- מעריכים מובנים להערכת איכות
-- סקריפטים מותאמים להערכה
-- מדידת ביצועים
-
-**פיקוח מתמשך:**
-
-- הערכה אוטומטית של אינטראקציות חיות
-- מעקב אחר מדדי איכות
-- זיהוי הידרדרות בביצועים
-
-**שילוב CI/CD:**
-
-- תזרים עבודה ב-GitHub Actions
-- בדיקות והערכה אוטומטיות
-- השוואת בדיקות סטטיסטית
-
----
-
-## 5.5 [סוכן Red Teaming AI](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
-
-**Red Teaming AI:**
-
-- סריקה אוטומטית לאבטחה
-- הערכת סיכונים למערכות AI
-- הערכת בטיחות במספר קטגוריות
-
-**אימות:**
-
-- זהות מנוהלת לשירותי Azure
-- אימות אופציונלי לשירות האפליקציות של Azure
-- אימות בסיסי כמנגנון גיבוי לפיתוח
-
-
-
-!!! quote "בסוף מעבדה זו ייתכן שברשותך"
-    - [ ] הגדרת דרישות התרחיש שלך
-    - [ ] התאמת משתני סביבה (קונפיגורציה)
-    - [ ] התאמת הנחיות הסוכן (משימה)
-    - [ ] פריסת התבנית המותאמת (אפליקציה)
-    - [ ] השלמת משימות לאחר הפריסה (ידני)
-    - [ ] ביצוע הערכה לבחינה
-
-דוגמה זו ממחישה התאמת תבנית עבור מקרה שימוש קמעונאי ארגוני עם שני סוכנים מיוחדים ופריסות מודלים מרובות.
-
----
-
-## 5.6 התאמה אישית עבורך!
-
-### 5.6.1. דרישות תרחיש
-
-#### **פריסות סוכן:** 
-
-   - סוכן קנייה: מסייע ללקוחות למצוא ולהשוות מוצרים
-   - סוכן נאמנות: מנהל תגמולים ומבצעים ללקוחות
-
-#### **פריסות מודל:**
-
-   - `gpt-4.1`: מודל צ'אט ראשי
-   - `o3`: מודל הסקת מסקנות לשאלות מורכבות
-   - `gpt-4.1-nano`: מודל קל ללשוחח בפשטות
-   - `text-embedding-3-large`: הטמעות איכותיות לחיפוש
-
-#### **תכונות:**
-
-   - מעקב ופיקוח מופעלים
-   - חיפוש AI עבור קטלוג מוצרים
-   - מסגרת הערכה לאבטחת איכות
-   - Red teaming לאימות אבטחה
-
----
-
-### 5.6.2 יישום התרחיש
-
-
-#### 5.6.2.1. קונפיגורציה לפני פריסה
-
-צור סקריפט הגדרה (`setup-retail.sh`)
-
-```bash title="" linenums="0"
-#!/bin/bash
-
-# הגדר שם סביבה
-azd env set AZURE_ENV_NAME "retail-ai-agents"
-
-# הגדר אזור (בחר לפי זמינות הדגם)
-azd env set AZURE_LOCATION "eastus2"
-
-# אפשר את כל השירותים האופציונליים
-azd env set USE_APPLICATION_INSIGHTS true
+```bash
+# Infrastructure settings; these can add charges
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
-azd env set ENABLE_AZURE_MONITOR_TRACING true
-
-# הגדר את דגם הצ'אט הראשי (gpt-4.1 כהכי קרוב ל-gpt-4.1 זמין)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
-azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
-azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
-azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
-
-# הגדר את דגם ההטמעה לחיפוש משופר
-azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
-azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
-azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
-
-# הגדר שם סוכן (ייצור את הסוכן הראשון)
-azd env set AZURE_AI_AGENT_NAME "shopper-agent"
-
-# הגדר אינדקס חיפוש
-azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
-
-echo "Environment configured for retail deployment"
-echo "Recommended quota: 300,000+ TPM across all models"
-```
-
----
-
-#### 5.6.2.2: הנחיות לסוכן
-
-צור את הקובץ `custom-agents/shopper-agent-instructions.md`:
-
-```markdown
-# Shopper Agent Instructions
-
-You are a helpful shopping assistant for an enterprise retail company. Your role is to:
-
-1. **Product Discovery**: Help customers find products that match their needs
-2. **Comparison**: Provide detailed product comparisons with pros/cons
-3. **Recommendations**: Suggest complementary products and alternatives
-4. **Inventory**: Check product availability and delivery options
-
-## Guidelines:
-- Always provide citations from the product catalog
-- Be conversational and helpful
-- Ask clarifying questions to understand customer needs
-- Mention relevant promotions when appropriate
-- Escalate complex warranty or return questions to human agents
-
-## Knowledge Base:
-You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
-```
-
-צור את הקובץ `custom-agents/loyalty-agent-instructions.md`:
-
-```markdown
-# Loyalty Agent Instructions
-
-You are a customer loyalty specialist focused on maximizing customer satisfaction and retention. Your responsibilities include:
-
-1. **Rewards Management**: Explain point values, redemption options, and tier benefits
-2. **Promotions**: Identify applicable discounts and special offers
-3. **Program Navigation**: Help customers understand loyalty program features
-4. **Account Support**: Assist with account-related questions and updates
-
-## Guidelines:
-- Prioritize customer satisfaction and retention
-- Explain complex program rules in simple terms
-- Proactively identify opportunities for customers to save money
-- Celebrate customer milestones and achievements
-- Connect customers with shopper agent for product questions
-
-## Knowledge Base:
-You have access to loyalty program rules, current promotions, customer tier information, and reward catalogs.
-```
-
----
-
-#### 5.6.2.3: סקריפט פריסה
-
-צור את הקובץ `deploy-retail.sh`:
-
-```bash title="" linenums="0"
-#!/bin/bash
-set -e
-
-echo "🚀 Starting Enterprise Retail AI Agents deployment..."
-
-# אימות דרישות מוקדמות
-echo "📋 Validating prerequisites..."
-if ! command -v azd &> /dev/null; then
-    echo "❌ Azure Developer CLI (azd) is required"
-    exit 1
-fi
-
-if ! az account show &> /dev/null; then
-    echo "❌ Please login to Azure CLI: az login"
-    exit 1
-fi
-
-# הגדרת הסביבה
-echo "🔧 Configuring deployment environment..."
-chmod +x setup-retail.sh
-./setup-retail.sh
-
-# בדוק את המכסה באזור הנבחר
-echo "📊 Checking quota availability..."
-LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
-echo "Deploying to region: $LOCATION"
-echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4.1: 150,000 TPM"
-echo "   - text-embedding-3-large: 75,000 TPM"
-echo "   - Additional models: 75,000+ TPM"
-
-read -p "Continue with deployment? (y/N): " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Deployment cancelled"
-    exit 1
-fi
-
-# פריסה של התשתית והאפליקציה
-echo "🏗️  Deploying Azure infrastructure..."
+azd provision --preview
 azd up
-
-# איסוף פלט הפריסה
-echo "📝 Capturing deployment information..."
-azd show > deployment-info.txt
-
-# קבל את כתובת האתר של האפליקציה
-APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
-
-if [ ! -z "$APP_URL" ]; then
-    echo "✅ Deployment completed successfully!"
-    echo "🌐 Web Application: $APP_URL"
-    echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
-else
-    echo "⚠️  Deployment completed but unable to retrieve URL"
-    echo "Run 'azd show' for deployment details"
-fi
-
-echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
-echo "2. Upload product catalog to search index"
-echo "3. Configure custom agent instructions"
-echo "4. Test both agents with sample queries"
 ```
 
----
+הפעלת השירות היא רק חלק ממשאוב. לפני העלאת הנתונים שלך:
 
-#### 5.6.2.4: קונפיגורציה לאחר פריסה
+1. אשר שיש לך הרשאה להשתמש במסמכים והסר מידע רגיש.
+2. בחר מודל ההטמעה הנתמך באזור שלך וקבע את גרסתו התואמת, סוג הפריסה וממדי הוקטורים.
+3. צור/מלא את האינדקס בעזרת התהליך המתועד בדוגמה.
+4. הגדר את כלי המשאוב של הסוכן להשתמש באינדקס זה.
+5. בדוק משאוב, ציטוטים, הרשאות והתנהגות כשאין מסמך רלוונטי.
 
-צור את הקובץ `configure-retail-agents.sh`:
+אל תעבור מ-`text-embedding-3-small` למודל הטמעה שונה ללא בדיקת ממדים ובנייה/אינדוקס מחדש של וקטורים לפי הצורך. שם כמו `retail-products` אינו קטלוג מיושם או מדיניות בקרת גישה.
 
-```bash title="" linenums="0"
-#!/bin/bash
+## 5.3 מעקב ובקרה
 
-echo "🔧 Configuring retail agents..."
+עקוב אחר [מדריך הנראות של הדוגמה](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#tracing-and-monitoring). ודא שקיים משאבי Application Insights והחיבור הנדרש; אם משנים הגדרות תשתית, השתמש ב-`azd up`.
 
-# לקבלת מידע על פריסה
-PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
-AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
-
-echo "Project Endpoint: $PROJECT_ENDPOINT"
-echo "Primary Agent ID: $AGENT_ID"
-
-# הוראות להגדרה ידנית
-echo "
-🤖 Agent Configuration:
-
-1. **Update Shopper Agent Instructions:**
-   - Go to Microsoft Foundry portal: https://ai.azure.com
-   - Navigate to your project
-   - Select Agents tab
-   - Edit the existing agent
-   - Update instructions with content from custom-agents/shopper-agent-instructions.md
-
-2. **Create Loyalty Agent:**
-   - In Agents tab, click 'Create Agent'
-   - Name: 'loyalty-agent'
-   - Model: Use same deployment as shopper agent
-   - Instructions: Use content from custom-agents/loyalty-agent-instructions.md
-   - Enable file search tool
-   - Save and note the Agent ID
-
-3. **Upload Knowledge Base:**
-   - Prepare product catalog files (JSON/CSV format)
-   - Upload to both agents' file search
-   - Or configure Azure AI Search index
-
-4. **Test Configuration:**
-   - Test shopper agent with product queries
-   - Test loyalty agent with rewards questions
-   - Verify citations and search functionality
-
-📊 Monitoring Setup:
-- Tracing: Available in Microsoft Foundry > Tracing tab
-- Logs: Azure Portal > Container Apps > Monitoring > Log Stream
-- Evaluation: Run python evals/evaluate.py
-
-🔒 Security Validation:
-- Run red teaming: python airedteaming/ai_redteaming.py
-- Review security recommendations
-- Configure authentication if needed
-"
+```bash
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+azd up
 ```
 
-### 5.6.3: בדיקה ואימות
+שלח בקשת בדיקה, ואז בדוק את יומני היישום של Container App ואת תצוגת המעקב של הסוכן ב-Foundry. בדוק השהייה, קריאות כלים, שגיאות וקורלציה בין הבקשה למעקב. אל תניח שעקיבה מחוברת רק בגלל שהפריסה הצליחה.
 
-צור את הקובץ `test-retail-deployment.sh`:
+השאר את `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` מושבת אלא אם בדקת במפורש הסכמה, הצפנה, שמירת נתונים ובקרות גישה. רובדים יכולים להכיל טיעוני כלים רגישים או תוכן מסמכים אפילו כשיומני יישום רגילים נראים תמימים.
 
-```bash title="" linenums="0"
-#!/bin/bash
+## 5.4 הערכת סוכן
 
-echo "🧪 Testing retail deployment..."
+נקודת הכניסה להערכה בדוגמה היא כעת [`tests/test_evaluation.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_evaluation.py), לא ספריית `evals/`. משורש הדוגמה, השתמש בסביבת פייתון העומדת בדרישות המתועדות שלה:
 
-# אמת שהמשתני סביבה מוגדרים
-echo "📋 Checking environment configuration..."
-azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
-
-# בדוק זמינות יישום האינטרנט
-APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
-if [ ! -z "$APP_URL" ]; then
-    echo "🌐 Testing web application at: $APP_URL"
-    HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
-    if [ "$HTTP_STATUS" = "200" ]; then
-        echo "✅ Web application is responding"
-    else
-        echo "❌ Web application returned status: $HTTP_STATUS"
-    fi
-else
-    echo "❌ Could not retrieve web application URL"
-fi
-
-# הרץ הערכה אם מוגדר
-if [ -f "evals/evaluate.py" ]; then
-    echo "📊 Running agent evaluation..."
-    cd evals
-    python -m pip install -r ../src/requirements.txt
-    python -m pip install azure-ai-evaluation
-    python evaluate.py
-    cd ..
-fi
-
-echo "
-🎯 Deployment validation complete!
-
-Next steps:
-1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
-3. Upload your product catalog and loyalty program data
-4. Configure agent instructions for your specific use case
-5. Run comprehensive testing with your retail scenarios
-"
+```bash
+python -m pip install -r src/requirements.txt
+pytest tests/test_evaluation.py -s
 ```
 
----
+לפני הרצה, השלם את [דרישות מוקדמות להערכה](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md). הבדיקות טוענות תצורה מ-`.azure/<environment>/.env` שנבחר; אשר שהסביבה המתכוונת נבחרה. קלטים חשובים כוללים:
 
-### 5.6.4 תוצאות צפויות
+- `AZURE_EXISTING_AIPROJECT_ENDPOINT`
+- `AZURE_EXISTING_AGENT_ID`, בפורמט הנדרש על ידי הדוגמה הנוכחית (גרסה שנבדקה משתמשת ב-`agent_name:agent_version`)
+- `AZURE_AI_AGENT_DEPLOYMENT_NAME`, המשמש כפריסת מודל השיפוט
 
-לאחר ביצוע מדריך זה, יהיו לך:
+בדוק את הבדיקות להבין בחירת מעריך, ספי הערכה, תפקידים נדרשים ועלויות מודל. ריצה שהושלמה אינה בהכרח מעבר בגדר איכות; בדוק ציונים, תיקי כישלון/שגיאה, והתוצאות המקושרות ב-Foundry.
 
-1. **תשתית פרוסה:**
+### הרחבת הערכות AZד נפרדת
 
-      - פרויקט Microsoft Foundry עם פריסות מודל
-      - Container Apps המארחים את יישום האינטרנט
-      - שירות AI Search עבור קטלוג מוצרים
-      - Application Insights למעקב ופיקוח
+בדיקת הפייתון שלעיל היא **תהליך ספציפי לדוגמה**. ההרחבה האופציונלית `azure.ai.evaluations` היא תהליך שונה, עם תצורת `evals/azure.eval.yaml` משלה:
 
-2. **סוכן ראשוני:**
+```bash
+azd extension install azure.ai.evaluations
+azd ai eval --help
+```
 
-      - סוכן קנייה מוגדר עם הנחיות בסיסיות
-      - יכולת חיפוש בקבצים מופעלת
-      - מעקב ופיקוח מוגדרים
+להתקנת הרחבה מלאה, ראו [תהליכי הערכה והגירה](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-08-production/production-ai-practices.md). מאז סוכנים extension beta.22, אל תשתמש בפקודות הוסרו `azd ai agent eval`. התקנת הרחבת ההערכות לא ממירה את בדיקות הפייתון של הדוגמה או יוצרת אוטומטית תצורת הערכה.
 
-3. **מוכן להתאמה אישית:**
+## 5.5 Red teaming בבינה מלאכותית והערכה רציפה
 
-      - מסגרת להוספת סוכן נאמנות
-      - תבניות הנחיות מותאמות
-      - סקריפטים לבדיקה ואימות
-      - הגדרת מעקב והערכה
+הדוגמה הנוכחית מספקת [`tests/test_red_teaming.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_red_teaming.py). השלם את דרישותיה המקדימות וסקור את היעד והעלויות המתוכננים לפני הרצה:
 
-4. **מוכנות לייצור:**
+```bash
+pytest tests/test_red_teaming.py -s
+```
 
-      - סריקת אבטחה עם red teaming
-      - מעקב ביצועים
-      - מסגרת הערכת איכות
-      - ארכיטקטורה מתרחבת
+השתמש בפריסת בדיקה מורשית ונתונים סינתטיים. סקור את ההתקפות והתוצאות שנוצרו; סריקה זו אינה מבססת שהיישום מאובטח או תואם.
 
-דוגמה זו ממחישה כיצד תבנית AZD ניתנת להרחבה ולהתאמה לתרחישים ארגוניים ספציפיים תוך שמירה על שיטות עבודה מומלצות לאבטחה, מעקב והרחבה.
+המדריך ל[תצפית](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#continuous-evaluation) מתאר גם הערכה רציפה המוגדרת בהפעלה של המכולה. הוא מעריך אינטראקציות משתמש אמיתיות, לא תנועה שנוצרה על ידי בדיקה, ותמיכת המעריך משתנה לפי אזור. אין אינטראקציות פירושו שאין ערכי הערכה. אמת את גרסת הדוגמה המותקנת ואת תצורת המעריך במקום להניח שלכל פריסה יש את ברירות המחדל זהות.
+
+אימות מופרד מהערכת. עקוב אחר תצורת הזהות/הגישה המתועדת בדוגמה. אין תיעוד ל"נפילה לאימות בסיסי" שעליו ניתן לסמוך להגנה על נקודת קצה ציבורית.
+
+## 5.6 תרגיל עיצוב: התאמה אישית בקמעונאות
+
+!!! warning "תרגיל עיצוב, לא פריסה גמורה"
+
+    The workshop does not provide a complete Shopper/Loyalty multi-agent implementation. Do not claim that additional agents, models, catalogs, or policies exist until you have implemented and verified them.
+
+כתוב תוכנית קצרה המתייחסת ל:
+
+| תחום | החלטה והוכחות לאיסוף |
+|------|----------------------------------|
+| אחריות סוכן | להתחיל עם סוכן אחד, או להצדיק סוכני Shopper ו-Loyalty נפרדים ולוגיקת ניתוב |
+| נתונים | להגדיר מערך נתונים סינתטי של קטלוג/תגמולים ובעלות על עדכונים |
+| כלים | ליישם תחילה מטפלים לקריאה בלבד; לפרט הרשאות ואימות לכל כתיבה |
+| מודלים | לבחור שילובי מודל/גרסה/קוד מוצר זמינים ולאמת מכסה; להימנע מהקצאת מודלים שלא בשימוש |
+| אחזור | להגדיר אינדקסים, ממדי הטמעה, הפניות ושליטה בגישה ברמת מסמך |
+| הערכה | להוסיף מקרים של תשובות צפויות, שאלות לא נתמכות, שימוש בכלים ומקרי בטיחות עם ספי הגדרה מפורשים |
+| תפעול | להגדיר טלמטריה, תקציבי השהייה/שגיאה, הגבלות על עלויות, ובעלות על ניקוי |
+
+שמירת `custom-agents/shopper-agent-instructions.md` לא גורמת לדוגמה לטעון אותו. מצא את קוד היישום שיוצר/מעדכן את הסוכן, חבר לשם את ההוראות שסקרת, ואמת גרסת הסוכן שנוצרה לפני הבדיקה. הוראות אינן יכולות להעניק גישה לנתונים או לכלים שלא יישמת.
+
+החל שינוי אחד בכל פעם, פרוס מחדש את הרכיבים שהושפעו, והרץ מחדש את שאלות הבסיס וההערכות שלך. שמור גרסה עבודה להשוואה. להשראה ארכיטקטונית, עיין ב[מפת הדרכים לקמעונאות](https://github.com/microsoft/AZD-for-beginners/blob/main/examples/retail-scenario.md), שגם היא אינה יישום קמעונאי שלם.
+
+!!! quote "בסוף מעבדה זו עליך שיהיה לך"
+
+    - [ ] A documented customization scope and cost/region checks
+    - [ ] Evidence that retrieval and tracing work for your selected environment
+    - [ ] Reviewed evaluation/red-teaming results, or a clear explanation of unmet prerequisites
+    - [ ] A list of missing implementation work rather than a claim of automatic production readiness
+
+המשך ל[פירוק תשתית](6-Teardown-Infrastructure.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). על אף שאנו שואפים לדיוק, יש לשים לב כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפת המקור שלו הוא המקור המוסמך. למידע קריטי מומלץ שימוש בתרגום מקצועי על ידי אדם. איננו אחראים לכל הבנה שגויה או פרשנויות מוטעות הנובעות משימוש בתרגום זה.
+**כתב ויתור**:
+מסמך זה תורגם באמצעות שירות תרגום אוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להחשיב את המסמך המקורי בשפתו הטבעית כמקור הסמכות. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי מתרגם אדם. אנו לא אחראים לכל אי-הבנה או פירוש שגוי הנובע מהשימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

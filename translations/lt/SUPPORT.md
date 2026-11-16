@@ -1,26 +1,26 @@
-# TODO: Šio saugyklos prižiūrėtojas dar neredagavo šio failo
+# Pagalba
 
-**SAUGYKLOS SAVININKAS**: Ar norite, kad šiam produktui/projektui būtų teikiama Klientų aptarnavimo ir palaikymo (CSS) paslauga?
+## Kurso problemos ir klausimai
 
-- **Be CSS palaikymo:** Užpildykite šabloną informacija apie tai, kaip pateikti problemas ir gauti pagalbą.
-- **Su CSS palaikymu:** Užpildykite formą adresu [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS padės jums nustatyti kitus žingsnius.
-- **Nežinote?** Užpildykite formą taip, tarsi atsakymas būtų „Taip“. CSS padės jums apsispręsti.
+Prieš pranešdami apie problemą, ieškokite [kurso problemų](https://github.com/microsoft/AZD-for-beginners/issues). Nurodykite paveiktą anglų kalbos pamoką, komandą, kurią vykdėte, jūsų AZD/pratęsimo versijas ir klaidos pranešimą. Iš žurnalų ir ekrano nuotraukų pašalinkite prisijungimo duomenis, žetonus, prenumeratos detales ir asmeninę informaciją.
 
-*Tuomet pašalinkite šį pirmąjį skyrių iš šio SUPPORT.MD failo prieš publikuodami savo saugyklą.*
+Bendrai mokymosi klausimams naudokite [Azure kūrėjų bendruomenę](https://discord.gg/microsoft-azure). Bendruomenės atsakymai nėra garantuota pagalbos paslauga.
 
-# Palaikymas
+## Įrankių ir paslaugų problemos
 
-## Kaip pateikti problemas ir gauti pagalbą  
+Praneškite apie atkuriamas AZD CLI klaidas [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). Dėl „Azure“ paslaugų incidentų arba prenumeratai skirtos pagalbos naudokite palaikymo parinktis, esančias [Azure portale](https://portal.azure.com/).
 
-Šis projektas naudoja „GitHub Issues“ klaidoms ir funkcijų užklausoms stebėti. Prieš pateikdami naują problemą, prašome peržiūrėti esamas problemas, kad išvengtumėte dubliavimo. Naujas problemas pateikite kaip naują klaidą arba funkcijos užklausą.
+## Saugumo ataskaitos
 
-Jei reikia pagalbos ar turite klausimų apie šio projekto naudojimą, prašome **SAUGYKLOS PRIŽIŪRĖTOJAS: ĮRAŠYKITE INSTRUKCIJAS ČIA, KAIP SUSISIEKTI SU SAUGYKLOS SAVININKAIS AR BENDRUOMENE DĖL PAGALBOS. TAI GALI BŪTI „STACK OVERFLOW“ ŽYMA ARBA KITAS KANALAS. KUR JŪS PADĖSITE ŽMONĖMS?**.
+Sekite [SECURITY.md](SECURITY.md) privačiam pažeidžiamumo pranešimui. Neskelbkite slaptos informacijos ar pažeidžiamumo detalių viešoje kurso problemų vietoje.
 
-## Microsoft palaikymo politika  
+## „Microsoft“ palaikymo politika
 
-Šio **PROJEKTO ar PRODUKTO** palaikymas apsiriboja aukščiau išvardytais ištekliais.
+Pagalba šiam mokymo projektui ribojama iki aukščiau nurodytų išteklių. Kurso pavyzdžiai neįtraukia gamybinės palaikymo prievolės.
 
 ---
 
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

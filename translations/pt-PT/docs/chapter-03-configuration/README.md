@@ -1,28 +1,28 @@
 # Capítulo 3: Configuração & Autenticação
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 45-60 minutos | **⭐ Complexidade**: Intermédio
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 90-150 minutos incluindo prática de integração | **⭐ Complexidade**: Intermédio
 
 ---
 
 ## Visão Geral
 
-Este capítulo cobre a configuração do ambiente, padrões de autenticação e melhores práticas de segurança para implementações com o Azure Developer CLI.
+Este capítulo abrange a configuração do ambiente, padrões de autenticação e melhores práticas de segurança para as implementações do Azure Developer CLI.
 
-> Validado com `azd 1.27.1` em julho de 2026.
+> Alvo de revisão do comando e configuração: `azd 1.37.2` (novembro 2026). O provisionamento ativo no Azure não foi executado durante a revisão.
 
 ## Objetivos de Aprendizagem
 
-Ao completar este capítulo, irá:
+Ao completar este capítulo, você irá:
 - Dominar a hierarquia de configuração do AZD
 - Gerir múltiplos ambientes (dev, staging, prod)
 - Implementar autenticação segura com identidades geridas
-- Configurar definições específicas de ambiente
+- Configurar definições específicas para cada ambiente
 
 ---
 
-## 📚 Aulas
+## 📚 Lições
 
-| # | Aula | Descrição | Tempo |
+| # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
 | 1 | [Guia de Configuração](configuration.md) | Configuração e gestão do ambiente | 30 min |
 | 2 | [Autenticação & Segurança](authsecurity.md) | Padrões de identidade gerida e RBAC | 30 min |
@@ -31,52 +31,52 @@ Ao completar este capítulo, irá:
 
 ## 🚀 Início Rápido
 
+Execute a partir da raiz de uma **aplicação azd já inicializada**, não do repositório do curso. Use nomes de ambiente não usados se estes já existirem.
+
 ```bash
-# Criar múltiplos ambientes
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Alternar entre ambientes
+# Switch environments
 azd env select prod
 
-# Definir variáveis de ambiente
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Ver configuração
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` é ilustrativo: afeta a infraestrutura apenas se o seu template o consumir explicitamente. Valores ordinários de `azd env set` são guardados localmente em texto claro; não constituem armazenamento seguro de segredos.
 
 ---
 
 ## 🔧 Hierarquia de Configuração
 
-O AZD aplica as definições nesta ordem (mais recentes sobrepõem as anteriores):
-
-1. **Valores predefinidos** (integrados nos modelos)
-2. **azure.yaml** (configuração do projeto)
-3. **Variáveis de ambiente** (`azd env set`)
-4. **Flags da linha de comando** (`--location eastus`)
+Mantenha três superfícies diferentes de configuração separadas: preferências globais (`azd config`), estrutura do projeto (`azure.yaml`), e valores por ambiente (`azd env`). Flags sobrepõem apenas as definições que suportam; não existe uma sobreposição universal de variáveis de ambiente arbitrárias sobre `azure.yaml` ou Bicep.
 
 ---
 
 ## 🔐 Melhores Práticas de Segurança
 
 ```bash
-# Use identidade gerida (recomendado)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Verifique o estado da autenticação AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Opcional: verifique o contexto do Azure CLI se planeia executar comandos az
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Reautentique se necessário
+# Re-authenticate if needed
 azd auth login
 
-# Opcional: atualize a autenticação do Azure CLI para comandos az
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -87,7 +87,7 @@ az login
 | Direção | Capítulo |
 |-----------|---------|
 | **Anterior** | [Capítulo 2: Desenvolvimento de IA](../chapter-02-ai-development/README.md) |
-| **Próximo** | [Capítulo 4: Infraestrutura](../chapter-04-infrastructure/README.md) |
+| **Seguinte** | [Capítulo 4: Infraestrutura](../chapter-04-infrastructure/README.md) |
 
 ---
 

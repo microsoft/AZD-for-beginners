@@ -1,6 +1,6 @@
 # Chapter 1: Foundation & Quick Start
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 30-45 minutes | **⭐ Complexity**: Beginner
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 75-120 minutes including the first deployment; additional exercises take longer | **⭐ Complexity**: Beginner
 
 ---
 
@@ -8,7 +8,7 @@
 
 This chapter introduces Azure Developer CLI (azd) fundamentals. You'll learn core concepts, install the tools, and deploy your first application to Azure.
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command and configuration review target: `azd 1.37.2` (November 2026). Live Azure provisioning was not run during review.
 
 ## Learning Objectives
 
@@ -61,7 +61,9 @@ azd version
 azd auth login
 
 # Deploy your first app
-azd init --template todo-nodejs-mongo
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
 # Clean up when done
@@ -76,7 +78,7 @@ After completing this chapter, you should be able to:
 
 ```bash
 azd version              # Shows installed version
-azd init --template todo-nodejs-mongo  # Initializes project
+azd env list             # Lists the initialized environment
 azd up                   # Deploys to Azure
 azd show                 # Displays running app URL
 azd down --force --purge # Cleans up resources

@@ -1,28 +1,28 @@
-# Application Insights Integration with AZD
+# 使用 AZD 整合 Application Insights
 
-⏱️ <strong>估計時間</strong>: 40-50 分鐘 | 💰 <strong>成本影響</strong>: 約 $5-15/月 | ⭐ <strong>複雜度</strong>: 中等
+⏱️ <strong>預計時間</strong>：40-50 分鐘 | 💰 <strong>成本影響</strong>：約 $5-15/月 | ⭐ <strong>複雜度</strong>：中階
 
-**📚 學習路徑:**
-- ← 上一章: [預檢檢查](preflight-checks.md) - 部署前驗證
-- 🎯 <strong>您在此處</strong>: Application Insights 整合（監控、遙測、除錯）
-- → 下一章: [部署指南](../chapter-04-infrastructure/deployment-guide.md) - 部署到 Azure
+**📚 學習路徑：**
+- ← 上一步：[預檢查](preflight-checks.md) - 部署前驗證
+- 🎯 <strong>您現在的位置</strong>：Application Insights 整合（監控、遙測、除錯）
+- → 下一步：[部署指南](../chapter-04-infrastructure/deployment-guide.md) - 部署至 Azure
 - 🏠 [課程首頁](../../README.md)
 
 ---
 
-## 您將學到的內容
+## 您將學到什麼
 
-完成本課程後，您將會：
-- 在 AZD 專案中自動整合 **Application Insights**
-- 為微服務設定 <strong>分散式追蹤</strong>
-- 實作 <strong>自訂遙測</strong>（指標、事件、相依項）
-- 設定 <strong>即時度量</strong> 以進行即時監控
-- 從 AZD 部署建立 <strong>警示與儀表板</strong>
-- 使用 <strong>遙測查詢</strong> 診斷生產環境問題
-- 優化 <strong>成本與取樣</strong> 策略
-- 監控 **AI/LLM 應用**（代幣、延遲、成本）
+完成本課程後，您將能：
+- 在 AZD 基礎設施中宣告 **Application Insights** 並配置 SDK 檢測
+- 配置微服務的 <strong>分散式追蹤</strong>
+- 實作 <strong>自訂遙測</strong>（指標、事件、依賴）
+- 設置 <strong>即時指標</strong> 用於即時監控
+- 針對 AZD 部署建立 <strong>警示與儀表板</strong>
+- 使用 <strong>遙測查詢</strong> 除錯生產問題
+- 優化 <strong>成本與抽樣</strong> 策略
+- 監控 **AI/LLM 應用程式**（代幣、延遲、成本）
 
-## 為何在 AZD 中使用 Application Insights 很重要
+## 為什麼 Application Insights 與 AZD 重要
 
 ### 挑戰：生產環境可觀察性
 
@@ -36,7 +36,7 @@
 ❌ Unknown failure rates and bottlenecks
 ```
 
-**有 Application Insights + AZD：**
+**有 Application Insights 與 AZD：**
 ```
 ✅ Automatic telemetry collection
 ✅ Centralized logs from all services
@@ -44,10 +44,10 @@
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-<strong>類比</strong>：Application Insights 就像為您的應用程式裝上黑盒飛行記錄器 + 駕駛艙儀表板。您可以即時看到所有發生的事，並能重播任何事件。
+<strong>比喻</strong>：Application Insights 就像是應用程式的「黑盒子」飛行記錄器與駕駛艙儀表板。您可以即時看到所有發生的事件，並回放任何事故。
 
 ---
 
@@ -57,24 +57,24 @@
 
 ```mermaid
 graph TB
-    User[使用者/客戶端]
-    App1[容器應用程式 1<br/>API 閘道]
-    App2[容器應用程式 2<br/>產品服務]
-    App3[容器應用程式 3<br/>訂單服務]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[Application Insights<br/>遙測中心]
-    LogAnalytics[(Log Analytics<br/>工作區)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Azure 入口網站<br/>儀表板與警示]
-    Query[Kusto 查詢<br/>自訂分析]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|自動儀器化| AppInsights
-    App2 -.->|自動儀器化| AppInsights
-    App3 -.->|自動儀器化| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,57 +83,62 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-### 自動監控的項目
 
-| Telemetry Type | What It Captures | Use Case |
+### 自動監控內容
+
+支援的自動檢測功能會捕捉已儀表化函式庫的請求／依賴。自訂事件和指標需在應用程式代碼中實作；可用性測試必須另行配置。存在資源並不代表會自動收集所有下列資料。
+
+| 遙測類型 | 捕捉內容 | 使用案例 |
 |----------------|------------------|----------|
-| **Requests** | HTTP 請求、狀態碼、時長 | API 效能監控 |
-| **Dependencies** | 外部呼叫（資料庫、API、儲存） | 找出瓶頸 |
-| **Exceptions** | 未處理錯誤與堆疊追蹤 | 除錯失敗情況 |
-| **Custom Events** | 業務事件（註冊、購買） | 分析與漏斗 |
-| **Metrics** | 效能計數器、自訂指標 | 容量規劃 |
-| **Traces** | 帶有嚴重性等級的日誌訊息 | 除錯與稽核 |
-| **Availability** | 可用性與回應時間測試 | SLA 監控 |
+| <strong>請求</strong> | HTTP 請求、狀態碼、持續時間 | API 性能監控 |
+| <strong>依賴</strong> | 外部呼叫（資料庫、API、儲存體） | 識別瓶頸 |
+| <strong>例外</strong> | 未處理錯誤與堆疊追蹤 | 除錯錯誤 |
+| <strong>自訂事件</strong> | 業務事件（註冊、購買） | 分析與漏斗 |
+| <strong>指標</strong> | 性能計數器、自訂指標 | 容量規劃 |
+| <strong>追蹤</strong> | 有嚴重性標記的日誌訊息 | 除錯與稽核 |
+| <strong>可用性</strong> | 正常運作與回應時間測試 | SLA 監控 |
 
 ---
 
-## 前置需求
+## 前置條件
 
-### 所需工具
+### 需要的工具
 
 ```bash
-# 驗證 Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ 預期：azd 版本 1.0.0 或更高
+# Command reference baseline: azd 1.37.2
 
-# 驗證 Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ 預期：azure-cli 2.50.0 或更高
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Azure 要求
 
-- 有效的 Azure 訂閱
-- 有權限建立：
+- 活躍的 Azure 訂閱
+- 擁有建立權限：
   - Application Insights 資源
   - Log Analytics 工作區
   - Container Apps
   - 資源群組
 
-### 知識前置
+### 知識前提
 
 您應該已完成：
 - [AZD 基礎](../chapter-01-foundation/azd-basics.md) - AZD 核心概念
-- [設定](../chapter-03-configuration/configuration.md) - 環境設定
+- [設定](../chapter-03-configuration/configuration.md) - 環境建置
 - [第一個專案](../chapter-01-foundation/first-project.md) - 基本部署
 
 ---
 
-## 課程 1：使用 AZD 自動化 Application Insights
+## 課程 1：使用 AZD 的自動 Application Insights
 
 ### AZD 如何佈建 Application Insights
 
-當您部署時，AZD 會自動建立並設定 Application Insights。讓我們看看如何運作。
+AZD 只在 <strong>專案的基建宣告它時</strong> 才配置 Application Insights。`azure.yaml` 本身不會創建監控或為應用程式程式碼插入儀器碼。
+
+> **範例範圍：** 本課程包含整合片段，而非此存放庫中的完整 `monitored-app` 專案。請先提供主模板與參數映射、Container Apps 環境、註冊表/映像檔與身份驗證配置、Dockerfile 及服務標籤，方可部署。後續課程會顯示替代/擴充片段，並非所有檔案都可直接不變拼湊起來。若要有可運行的基線，請從[微服務範例](../../../../examples/microservices)開始。
 
 ### 專案結構
 
@@ -169,14 +174,14 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**就這樣！** AZD 預設會建立 Application Insights。基本監控不需要額外設定。
+這裡宣告可部署的服務。以下 Bicep 和 SDK 設定提供監控；azd 並不會自動新增它們。
 
 ---
 
-### 步驟 2：監控基礎設施（Bicep）
+### 步驟 2：監控基建（Bicep）
 
 **檔案：`infra/core/monitoring.bicep`**
 
@@ -223,11 +228,12 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
 
-### 步驟 3：將 Container App 連接到 Application Insights
+### 步驟 3：將 Container App 連接至 Application Insights
 
 **檔案：`infra/app/api.bicep`**
 
@@ -235,7 +241,8 @@ output applicationInsightsName string = applicationInsights.name
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -285,35 +293,29 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ---
 
-### 步驟 4：帶有遙測的應用程式程式碼
+### 步驟 4：帶有遙測的應用程式碼
 
 **檔案：`src/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# 取得 Application Insights 連線字串
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # 設定分散式追蹤
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # 開發環境 100% 採樣
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # 設定日誌
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # 模擬資料庫呼叫（會自動被追蹤為相依性）
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # 模擬緩慢操作
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -367,27 +369,27 @@ if __name__ == '__main__':
 **檔案：`src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+在您專案中解析這些依賴關係，並一同測試它們，然後鎖定產生的版本。新專案應使用 Azure Monitor OpenTelemetry，而非已退休的 OpenCensus Python 匯出器。
 
 ---
 
-### 步驟 5：部署並驗證
+### 第 5 步：部署與驗證
 
 ```bash
-# 初始化 AZD
-azd init
-
-# 部署（會自動設定 Application Insights）
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# 取得應用程式 URL
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# 產生遙測資料
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -404,47 +406,42 @@ curl $APP_URL/api/slow
 
 ---
 
-### 步驟 6：在 Azure 入口網站查看遙測
+### 第 6 步：在 Azure 入口網站查看遙測
 
 ```bash
-# 取得 Application Insights 詳細資料
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# 在 Azure 入口網站開啟
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**前往 Azure 入口網站 → Application Insights → 交易搜尋**
+**導航至 Azure 入口網站 → Application Insights → Transaction Search**
 
-您應該會看到：
+你應該會看到：
 - ✅ 帶有狀態碼的 HTTP 請求
-- ✅ 請求時長（例如 `/api/slow` 超過 3 秒）
-- ✅ 來自 `/api/error-test` 的例外詳細資訊
+- ✅ 請求持續時間 (3 秒以上用於 `/api/slow`)
+- ✅ `/api/error-test` 的例外詳情
 - ✅ 自訂日誌訊息
 
 ---
 
-## 課程 2：自訂遙測與事件
+## 課程 2：自訂遙測和事件
 
-### 追蹤業務事件
+### 追蹤商業事件
 
-讓我們為關鍵業務事件新增自訂遙測。
+讓我們為商業關鍵事件新增自訂遙測。
 
 **檔案：`src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # 設定日誌記錄器
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # 設定度量匯出器
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # 設定追蹤器
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# 全域遙測客戶端
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### 更新應用以加入自訂事件
+### 更新應用程式以加入自訂事件
 
-**檔案：`src/app.py`（增強版）**
+**檔案：`src/app.py` (增強版)**
+
+將這些路由新增至現有的 Flask 應用程式；保留先前的 health/test 路由。下方縮短的區塊顯示分離的應用程式以便理解。遙測初始化現由 `telemetry.py` 管理—請勿重複初始化匯出器。
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # 追蹤業務事件
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # 追蹤收入指標
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # 模擬搜尋（實際上會是資料庫查詢）
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # 轉換為毫秒
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # 追蹤搜尋事件
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # 追蹤搜尋效能指標
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # 模擬外部 API 呼叫
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # 追蹤依賴
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -619,22 +589,22 @@ if __name__ == '__main__':
 ### 測試自訂遙測
 
 ```bash
-# 追蹤購買事件
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# 追蹤搜尋事件
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# 追蹤外部依賴
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
-**在 Azure 入口網站查看：**
+**於 Azure 入口網站檢視：**
 
-前往 Application Insights → Logs，然後執行：
+導航至 Application Insights → Logs，然後執行：
 
 ```kusto
 // View purchase events
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -669,7 +639,7 @@ traces
 
 ### 啟用跨服務追蹤
 
-對於微服務，Application Insights 會自動在服務間關聯請求。
+透過相容的儀器及 W3C trace-context 傳播，Application Insights 可關聯跨服務的請求。僅分享連接字串並不會建立父子跨度。以下架構片段引用您必須實現的模組。
 
 **檔案：`infra/main.bicep`**
 
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### 檢視端對端交易
+### 查看端對端交易
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API 網關<br/>(追蹤識別碼: abc123)
-    participant Product as 產品服務<br/>(父識別碼: abc123)
-    participant Order as 訂單服務<br/>(父識別碼: abc123)
-    participant AppInsights as 應用程式洞察
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
+    participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: 開始追蹤: abc123
-    Gateway->>AppInsights: 記錄請求 (追蹤識別碼: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: 父識別碼: abc123
-    Product->>AppInsights: 記錄相依性呼叫
-    Product-->>Gateway: 產品詳細資料
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: 父識別碼: abc123
-    Order->>AppInsights: 記錄相依性呼叫
-    Order-->>Gateway: 訂單已建立
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: 結帳完成
-    Gateway->>AppInsights: 記錄回應 (持續時間: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: 以追蹤識別碼進行關聯
+    Note over AppInsights: Correlation by Trace ID
 ```
+
 **查詢端對端追蹤：**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,65 +759,65 @@ dependencies
 
 ---
 
-## 課程 4：即時度量與即時監控
+## 第四課：即時指標和即時監控
 
-### 啟用 Live Metrics Stream
+### 啟用即時指標串流
 
-Live Metrics 提供延遲小於 1 秒的即時遙測。
+當 SDK 支援並啟用時，即時指標可提供近實時遙測。這不是延遲服務水準協議。上面 Python OpenTelemetry 設定採用了 `enable_live_metrics=True`。
 
-**存取 Live Metrics：**
+**存取即時指標：**
 
 ```bash
-# 取得 Application Insights 資源
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# 取得資源群組
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**您在即時會看到：**
-- ✅ 進入請求速率（requests/sec）
-- ✅ 外發相依呼叫
+**您在即時中看到的內容：**
+- ✅ 進入的請求率（請求/秒）
+- ✅ 外送依賴呼叫
 - ✅ 例外計數
-- ✅ CPU 與記憶體使用率
-- ✅ 活躍伺服器數
-- ✅ 取樣遙測
+- ✅ CPU 和記憶體使用率
+- ✅ 活躍伺服器數目
+- ✅ 抽樣遙測
 
-### 產生負載以供測試
+### 產生負載用於測試
 
 ```bash
-# 產生負載以檢視即時指標
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# 在 Azure 入口網站檢視即時指標
-# 您應該會看到請求率飆升
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
 
-## 實作練習
+## 實務練習
 
-### 練習 1：設定警示 ⭐⭐（中等）
+### 練習 1：設定警示 ⭐⭐ (中階)
 
-<strong>目標</strong>：為高錯誤率與慢回應建立警示。
+<strong>目標</strong>：為高錯誤率和慢回應建立警示。
 
 **步驟：**
 
 1. **建立錯誤率警示：**
 
 ```bash
-# 取得 Application Insights 資源 ID
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# 為失敗的請求建立指標警示
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,7 +825,7 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
 2. **建立慢回應警示：**
@@ -870,9 +841,9 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **透過 Bicep 建立警示（AZD 建議方法）：**
+3. **透過 Bicep 建立警示（AZD 推薦用法）：**
 
-**檔案：`infra/core/alerts.bicep`**
+**檔案： `infra/core/alerts.bicep`**
 
 ```bicep
 param applicationInsightsId string
@@ -947,54 +918,54 @@ output slowResponseAlertId string = slowResponseAlert.id
 4. **測試警示：**
 
 ```bash
-# 產生錯誤
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# 產生較慢的回應
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# 檢查警報狀態 (等待 5-10 分鐘)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
-**✅ 成功準則：**
-- ✅ 警示建立成功
-- ✅ 當超過門檻時警示會觸發
+**✅ 成功標準：**
+- ✅ 成功建立警示
+- ✅ 閾值超過時警示會觸發
 - ✅ 可在 Azure 入口網站查看警示歷史
-- ✅ 已整合進 AZD 部署
+- ✅ 與 AZD 部署整合
 
 <strong>時間</strong>：20-25 分鐘
 
 ---
 
-### 練習 2：建立自訂儀表板 ⭐⭐（中等）
+### 練習 2：建立自訂儀表板 ⭐⭐ (中階)
 
-<strong>目標</strong>：建立顯示關鍵應用指標的儀表板。
+<strong>目標</strong>：建置展示主要應用程式指標的儀表板。
 
 **步驟：**
 
 1. **透過 Azure 入口網站建立儀表板：**
 
-前往：Azure 入口網站 → 儀表板 → 新增儀表板
+導覽至：Azure 入口網站 → 儀表板 → 新增儀表板
 
-2. **新增關鍵指標的區塊：**
+2. **加入主要指標的磚塊：**
 
-- 請求數量（過去 24 小時）
+- 請求數（過去 24 小時）
 - 平均回應時間
 - 錯誤率
-- 前 5 大最慢操作
+- 五個最慢的操作
 - 使用者地理分佈
 
 3. **透過 Bicep 建立儀表板：**
 
-**檔案：`infra/core/dashboard.bicep`**
+**檔案： `infra/core/dashboard.bicep`**
 
 ```bicep
 param dashboardName string
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1065,8 +1046,8 @@ output dashboardId string = dashboard.id
 
 4. **部署儀表板：**
 
-```bash
-# 新增到 main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,13 +1057,15 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# 部署
+```bash
+# Deploy
 azd up
 ```
 
-**✅ 成功準則：**
-- ✅ 儀表板顯示關鍵指標
+**✅ 成功標準：**
+- ✅ 儀表板顯示主要指標
 - ✅ 可釘選到 Azure 入口網站首頁
 - ✅ 即時更新
 - ✅ 可透過 AZD 部署
@@ -1091,15 +1074,15 @@ azd up
 
 ---
 
-### 練習 3：監控 AI/LLM 應用 ⭐⭐⭐（進階）
+### 練習 3：監控 AI/LLM 應用程式 ⭐⭐⭐ (進階)
 
 <strong>目標</strong>：追蹤 Microsoft Foundry 模型使用情況（代幣、成本、延遲）。
 
 **步驟：**
 
-1. **建立 AI 監控封裝：**
+1. **建立 AI 監控包裝器：**
 
-**檔案：`src/ai_telemetry.py`**
+**檔案： `src/ai_telemetry.py`**
 
 ```python
 from telemetry import telemetry
@@ -1109,39 +1092,43 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # 呼叫 Microsoft Foundry 模型
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
                 **kwargs
             )
             
-            duration = (time.time() - start_time) * 1000  # 毫秒
+            duration = (time.time() - start_time) * 1000  # ms
             
-            # 擷取使用量
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # 計算成本（gpt-4.1 定價）
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 每千個標記
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 每千個標記
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # 追蹤自訂事件
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # 追蹤指標
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1182,7 +1169,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **使用受監控的用戶端：**
+2. **使用監控客戶端：**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# 初始化受監控的 OpenAI 客戶端
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # 使用自動監控進行呼叫
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1222,7 +1211,7 @@ def chat():
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1250,10 +1239,10 @@ traces
     AvgCostPerRequest = avg(Cost)
 ```
 
-**✅ 成功準則：**
-- ✅ 每次 OpenAI 呼叫皆自動被追蹤
-- ✅ 代幣使用與成本可見
-- ✅ 延遲被監控
+**✅ 成功標準：**
+- ✅ 每次 OpenAI 呼叫均自動追蹤
+- ✅ 可見代幣使用和成本
+- ✅ 監控延遲
 - ✅ 可設定預算警示
 
 <strong>時間</strong>：35-45 分鐘
@@ -1262,34 +1251,21 @@ traces
 
 ## 成本優化
 
-### 取樣策略
+### 抽樣策略
 
-透過取樣控制成本：
+透過抽樣遙測控制成本：
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# 開發: 100% 採樣
-sampler = ProbabilitySampler(rate=1.0)
-
-# 生產: 10% 採樣 (將成本降低 90%)
-sampler = ProbabilitySampler(rate=0.1)
-
-# 自適應採樣 (自動調整)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**在 Bicep 中：**
+跟蹤採樣不會將每個遙測類別都減少 90%。度量和獨立發出的日誌需要自己的流量控制。選擇比例時要根據可觀察性需求，而不是一刀切的生產禁止。
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+明確設定 SDK 採樣；組件的 `SamplingPercentage` 屬性不能替代配置 Python OpenTelemetry 採樣器。
 
 ### 資料保留
 
@@ -1305,38 +1281,38 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 ### 每月成本估算
 
-| Data Volume | Retention | Monthly Cost |
+| 資料量 | 保留期間 | 每月成本 |
 |-------------|-----------|--------------|
-| 1 GB/month | 30 days | ~$2-5 |
-| 5 GB/month | 30 days | ~$10-15 |
-| 10 GB/month | 90 days | ~$25-40 |
-| 50 GB/month | 90 days | ~$100-150 |
+| 1 GB/月 | 30 天 | 約 $2-5 |
+| 5 GB/月 | 30 天 | 約 $10-15 |
+| 10 GB/月 | 90 天 | 約 $25-40 |
+| 50 GB/月 | 90 天 | 約 $100-150 |
 
-<strong>免費額度</strong>：每月包含 5 GB
+以上數字為說明用，非報價。請根據您所在地區與協議，驗證資料攝取、保留、警示及測試費用；免費額度依 Azure Monitor 定價共享/範圍劃分，並非每個 Application Insights 資源有保證免費 SKU。
 
 ---
 
-## 知識檢查點
+## 知識檢核點
 
 ### 1. 基本整合 ✓
 
 測試您的理解：
 
-- [ ] **Q1**: AZD 如何佈建 Application Insights？
-  - **A**: 透過 `infra/core/monitoring.bicep` 的 Bicep 範本自動建立
+- [ ] **Q1**：AZD 如何設定 Application Insights？
+  - **A**：它部署專案的 Bicep/Terraform 範本明確宣告的監控資源。
 
-- [ ] **Q2**: 啟用 Application Insights 的環境變數是什麼？
-  - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [ ] **Q2**：哪個環境變數啟用 Application Insights？
+  - **A**：`APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: 三種主要的遙測類型是什麼？
-  - **A**: Requests（HTTP 呼叫）、Dependencies（外部呼叫）、Exceptions（錯誤）
+- [ ] **Q3**：三種主要的遙測類型是什麼？
+  - **A**：請求（HTTP 呼叫）、依賴（外部呼叫）、例外（錯誤）
 
 **實作驗證：**
 ```bash
-# 檢查 Application Insights 是否已設定
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# 確認遙測資料是否正在傳送
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1349,14 +1325,14 @@ az monitor app-insights metrics show \
 
 測試您的理解：
 
-- [ ] **Q1**: 如何追蹤自訂業務事件？
-  - **A**: 使用帶有 `custom_dimensions` 的 logger 或 `TelemetryClient.track_event()`
+- [ ] **Q1**：如何追蹤自訂業務事件？
+  - **A**：本課程的封裝會寫入帶有 `event_name` 屬性的結構化 OTel 日誌，可在 `traces` 中查詢；這些不會自動成為 `customEvents`。
 
-- [ ] **Q2**: 事件與指標有何不同？
-  - **A**: 事件是離散的發生項，指標是數值型的量測
+- [ ] **Q2**：事件跟度量的差異是什麼？
+  - **A**：事件是離散發生，度量是數值測量
 
-- [ ] **Q3**: 如何在服務間關聯遙測？
-  - **A**: Application Insights 會自動使用 `operation_Id` 進行關聯
+- [ ] **Q3**：如何在服務間關聯遙測？
+  - **A**：Application Insights 會自動使用 `operation_Id` 進行關聯
 
 **實作驗證：**
 ```kusto
@@ -1372,84 +1348,80 @@ traces
 
 測試您的理解：
 
-- [ ] **Q1**: 什麼是取樣，為何要使用？
-  - **A**: 取樣透過只擷取一部分遙測來降低資料量（以及成本）
+- [ ] **Q1**：什麼是採樣及其用途？
+  - **A**：採樣透過僅擷取部分遙測，減少資料量（及成本）
 
-- [ ] **Q2**: 如何設定警示？
-  - **A**: 使用 Bicep 或 Azure 入口網站的指標警示，基於 Application Insights 指標
+- [ ] **Q2**：如何設置警示？
+  - **A**：使用 Bicep 或 Azure 入口網站上基於 Application Insights 度量的度量警示
 
-- [ ] **Q3**: Log Analytics 與 Application Insights 有何差異？
-  - **A**: Application Insights 將資料儲存在 Log Analytics 工作區；App Insights 提供應用程式專屬視圖
+- [ ] **Q3**：Log Analytics 與 Application Insights 的差別？
+  - **A**：Application Insights 將資料儲存於 Log Analytics 工作區；App Insights 提供應用程式特定檢視
 
 **實作驗證：**
 ```bash
-# 檢查取樣設定
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
 
-## 最佳實務
+## 最佳實踐
 
-### ✅ 建議執行：
+### ✅ 建議：
 
 1. **使用關聯 ID**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. <strong>為關鍵指標設定警示</strong>
+2. <strong>為關鍵度量設定警示</strong>
    ```bicep
    // Error rate, slow responses, availability
    ```
 
 3. <strong>使用結構化日誌</strong>
    ```python
-   # ✅ 良好: 有結構
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ 不良: 無結構
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
-4. <strong>監控相依項</strong>
+4. <strong>監控依賴</strong>
    ```python
-   # 自動追蹤資料庫呼叫、HTTP 請求等。
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
-5. **在部署期間使用 Live Metrics**
+5. <strong>部署期間使用即時度量</strong>
 
-### ❌ 不建議：
+### ❌ 不要：
 
 1. <strong>不要記錄敏感資料</strong>
    ```python
-   # ❌ 唔好
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ 好
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **生產環境不要使用 100% 取樣**
+2. **在未測量量和診斷需求前，不要選擇取樣**
    ```python
-   # ❌ 昂貴
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ 經濟實惠
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. <strong>不要忽略死信佇列</strong>
+3. <strong>不要忽略死信隊列</strong>
 
-4. <strong>別忘了設定資料保留限制</strong>
+4. <strong>不要忘記設定資料保留限額</strong>
 
 ---
 
@@ -1459,19 +1431,19 @@ az monitor app-insights component show \
 
 **診斷：**
 ```bash
-# 檢查連接字串是否已設定
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# 透過 Azure Monitor 檢查應用程式日誌
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# 或使用適用於 Container Apps 的 Azure CLI:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **解決方案：**
 ```bash
-# 在容器應用程式中驗證連線字串
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1485,31 +1457,30 @@ az containerapp show \
 
 **診斷：**
 ```bash
-# 檢查資料擷取
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **解決方案：**
 - 降低取樣率
-- 減少保留期間
-- 移除詳細等級過高的日誌
+- 縮短保留期限
+- 移除詳細日誌
 
 ---
 
-## 深入了解
+## 進一步了解
 
 ### 官方文件
-- [Application Insights 概覽](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [Application Insights 概述](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Azure Monitor OpenTelemetry 設定](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
+- [Kusto 查詢語言](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
 - [AZD 監控](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### 本課程的下一步
-- ← 上一章: [預檢檢查](preflight-checks.md)
-- → 下一章: [部署指南](../chapter-04-infrastructure/deployment-guide.md)
+### 本課程接下來的步驟
+- ← 上一章：[預檢查](preflight-checks.md)
+- → 下一章：[部署指南](../chapter-04-infrastructure/deployment-guide.md)
 - 🏠 [課程首頁](../../README.md)
 
 ### 相關範例
@@ -1522,30 +1493,30 @@ az monitor app-insights metrics show \
 
 **您已學會：**
 - ✅ 使用 AZD 自動佈建 Application Insights
-- ✅ 自訂遙測（事件、指標、相依項）
-- ✅ 跨微服務的分散式追蹤
-- ✅ 即時度量與即時監控
-- ✅ 警示與儀表板
+- ✅ 自訂遙測（事件、指標、依賴項）
+- ✅ 跨微服務分散式追蹤
+- ✅ 即時指標和即時監控
+- ✅ 警報和儀表板
 - ✅ AI/LLM 應用監控
 - ✅ 成本優化策略
 
 **主要重點：**
-1. **AZD 自動配置監控** - 無需手動設定
-2. <strong>使用結構化日誌</strong> - 讓查詢更容易
-3. <strong>追蹤業務事件</strong> - 不只是技術指標
-4. **監控 AI 成本** - 追蹤 token 與支出
-5. <strong>設定警示</strong> - 採取主動，而非被動
-6. <strong>優化成本</strong> - 使用抽樣與保留限制
+1. <strong>明確宣告監控</strong> - AZD 佈署您的範本；SDK 工具埋點傳送遙測
+2. <strong>使用結構化日誌</strong> - 使查詢更容易
+3. <strong>追蹤業務事件</strong> - 不僅限技術指標
+4. **監控 AI 成本** - 追蹤 token 和支出
+5. <strong>設定警報</strong> - 採取主動而非被動
+6. <strong>優化成本</strong> - 使用取樣率和保留限制
 
-**後續步驟：**
+**接下來的步驟：**
 1. 完成實作練習
-2. 將 Application Insights 新增到你的 AZD 專案中
-3. 為你的團隊建立自訂儀表板
-4. 閱讀 [部署指南](../chapter-04-infrastructure/deployment-guide.md)
+2. 將 Application Insights 加入您的 AZD 專案
+3. 為您的團隊建立自訂儀表板
+4. 學習 [部署指南](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**:
-本文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的原文應被視為具權威性的資料來源。對於重要資訊，建議採用專業人工翻譯。我們對因使用本翻譯而產生的任何誤解或誤釋，概不負責。
+**免責聲明**：
+本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議尋求專業人工翻譯。我們不對因使用本翻譯而引起的任何誤解或曲解承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

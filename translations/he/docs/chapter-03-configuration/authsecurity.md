@@ -1,53 +1,55 @@
-# דפוסי אימות וזהות מנוהלת
+# תבניות אימות וזהות מנוהלת
 
-⏱️ **זמן משוער**: 45-60 דקות | 💰 **השפעה על עלות**: חינם (ללא חיובים נוספים) | ⭐ **מורכבות**: בינוני
+⏱️ **זמן משוער**: 45-60 דקות קריאה; אפשר זמן נוסף לשילוב תרגילים | 💰 **השפעה על עלות**: זהות/RBAC הם בחינם; חישוב, אחסון ו-Key Vault מנוהלים מחויבים | ⭐ **רמת מורכבות**: בינונית
 
-**📚 מסלול לימוד:**
+> סוקר בהתאם ל-`azd 1.37.2` (נובמבר 2026). שיעור זה מכיל **קטעי אינטגרציה להמחשה, לא תבנית `secure-app` להורדה מלאה**. צור את הקבצים המוזכרים, ספק תשתית תואמת והחלף מקומיים לפני הפריסה. לא סופקו משאבי Azure במהלך הסקירה.
+
+**📚 מסלול למידה:**
 - ← קודם: [ניהול תצורה](configuration.md) - ניהול משתני סביבה וסודות
-- 🎯 **אתה כאן**: אימות ואבטחה (זהות מנוהלת, Key Vault, דפוסים מאובטחים)
-- → הבא: [הפרויקט הראשון](first-project.md) - בנה את אפליקציית AZD הראשונה שלך
-- 🏠 [דף הבית של הקורס](../../README.md)
+- 🎯 **אתה כאן**: אימות ואבטחה (זהות מנוהלת, Key Vault, תבניות מאובטחות)
+- → הבא: [תשתית כקוד](../chapter-04-infrastructure/README.md) - פריסה והקצאת משאבים
+- 🏠 [בית הקורס](../../README.md)
 
 ---
 
 ## מה תלמד
 
-בסיום שיעור זה, תלמד:
-- להבין דפוסי אימות ב-Azure (מפתחות, מחרוזות חיבור, זהות מנוהלת)
+עם השלמת שיעור זה, תלמד:
+- להבין תבניות אימות ב-Azure (מפתחות, מחרוזות חיבור, זהות מנוהלת)
 - ליישם **זהות מנוהלת** לאימות ללא סיסמה
-- לאבטח סודות עם אינטגרציית **Azure Key Vault**
-- לקנפג **בקרת גישה מבוססת תפקידים (RBAC)** לפריסות AZD
-- ליישם שיטות אבטחה טובות ב-Container Apps ובשירותי Azure
-- להמיר מאימות מבוסס מפתח לאימות מבוסס זהות
+- לאבטח סודות באמצעות אינטגרציית **Azure Key Vault**
+- להגדיר **שליטה בהתבסס על תפקיד (RBAC)** עבור פריסות AZD
+- ליישם שיטות אבטחה מיטביות ב-Container Apps ובשירותי Azure
+- לעבור מאימות מבוסס מפתח לאימות מבוסס זהות
 
-## למה זהות מנוהלת חשובה
+## מדוע זהות מנוהלת חשובה
 
 ### הבעיה: אימות מסורתי
 
 **לפני זהות מנוהלת:**
 ```javascript
-// ❌ סיכון אבטחה: סודות מוצפנים בקוד
+// ❌ SECURITY RISK: Hardcoded secrets in code
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **בעיות:**
-- 🔴 **סודות חשופים** בקוד, בקבצי תצורה, במשתני סביבה
-- 🔴 **סיבוב אישורים** דורש שינויים בקוד ופריסה מחדש
+- 🔴 **סודות חשופים** בקוד, בקבצי תצורה ובמשתני סביבה
+- 🔴 **סיבוב אישורים** דורש שינויים בקוד ופריסה מחודשת
 - 🔴 **סיוטי ביקורת** - מי ניגש למה ומתי?
-- 🔴 **פריסה נרחבת** - סודות מפוזרים במערכות רבות
-- 🔴 **סיכוני תאימות** - כשל בבדיקות אבטחה
+- 🔴 **פיזור** - סודות מפוזרים במערכות רבות
+- 🔴 **סיכוני תאימות** - נכשל בביקורות אבטחה
 
 ### הפתרון: זהות מנוהלת
 
 **אחרי זהות מנוהלת:**
 ```javascript
-// ✅ מאובטח: אין סודות בקוד
+// ✅ SECURE: No secrets in code
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Azure מטפל באימות באופן אוטומטי
+  credential  // Azure automatically handles authentication
 );
 ```
 
@@ -55,92 +57,92 @@ const client = new BlobServiceClient(
 - ✅ **אפס סודות** בקוד או בתצורה
 - ✅ **סיבוב אוטומטי** - Azure מנהל זאת
 - ✅ **רישום ביקורת מלא** ביומני Microsoft Entra ID
-- ✅ **אבטחה מרוכזת** - ניהול בפורטל Azure
-- ✅ **מוכן לתאימות** - עומד בסטנדרטים לאבטחה
+- ✅ **אבטחה מרוכזת** - ניהול דרך פורטל Azure
+- ✅ **מוכנות תאימות** - עומד בסטנדרטים אבטחתיים
 
-**אנלוגיה**: אימות מסורתי הוא כמו לשאת מפתחות פיזיים רבים לדלתות שונות. זהות מנוהלת היא כמו תג אבטחה שמעניק גישה אוטומטית בהתאם למי שאתה—אין מפתחות לאבד, להעתיק או לסובב.
+**אנלוגיה**: אימות מסורתי הוא כמו לשאת מספר מפתחות פיזיים לדלתות שונות. זהות מנוהלת היא כמו תג אבטחה שמאפשר גישה אוטומטית בהתאם למי שאתה — ללא מפתחות לאבד, להעתיק או לסובב.
 
 ---
 
-## סקירת ארכיטקטורה
+## סקירת אדריכלות
 
 ### זרימת אימות עם זהות מנוהלת
 
 ```mermaid
 sequenceDiagram
-    participant App as היישום שלך<br/>(יישום מכולה)
-    participant MI as זהות מנוהלת<br/>(Microsoft Entra ID)
-    participant KV as מחסן מפתחות
-    participant Storage as אחסון Azure
+    participant App as Your Application<br/>(Container App)
+    participant MI as Managed Identity<br/>(Microsoft Entra ID)
+    participant KV as Key Vault
+    participant Storage as Azure Storage
     participant DB as Azure SQL
     
-    App->>MI: בקש אסימון גישה<br/>(אוטומטי)
-    MI->>MI: אמת זהות<br/>(אין צורך בסיסמה)
-    MI-->>App: החזר אסימון<br/>(תקף שעה אחת)
+    App->>MI: Request access token<br/>(automatic)
+    MI->>MI: Verify identity<br/>(no password needed)
+    MI-->>App: Return token for requested audience<br/>(lifetime varies)
     
-    App->>KV: קבל סוד<br/>(באמצעות אסימון)
-    KV->>KV: בדוק הרשאות RBAC
-    KV-->>App: החזר ערך סוד
+    App->>KV: Get secret<br/>(using token)
+    KV->>KV: Check RBAC permissions
+    KV-->>App: Return secret value
     
-    App->>Storage: העלה בלוב<br/>(באמצעות אסימון)
-    Storage->>Storage: בדוק הרשאות RBAC
-    Storage-->>App: הצלחה
+    App->>Storage: Upload blob<br/>(using token)
+    Storage->>Storage: Check RBAC permissions
+    Storage-->>App: Success
     
-    App->>DB: שאילתת נתונים<br/>(באמצעות אסימון)
-    DB->>DB: בדוק הרשאות SQL
-    DB-->>App: החזר תוצאות
+    App->>DB: Query data<br/>(using token)
+    DB->>DB: Check SQL permissions
+    DB-->>App: Return results
     
-    Note over App,DB: כל האימות ללא סיסמה!
+    Note over App,DB: Request a separate token for each service audience;<br/>SDK credentials handle caching and renewal
 ```
 
 ### סוגי זהויות מנוהלות
 
 ```mermaid
 graph TB
-    MI[זהות מנוהלת]
-    SystemAssigned[זהות שהוקצתה על ידי המערכת]
-    UserAssigned[זהות שהוקצתה על ידי המשתמש]
+    MI[Managed Identity]
+    SystemAssigned[System-Assigned Identity]
+    UserAssigned[User-Assigned Identity]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[מחזור חיים קשור למשאב]
-    SystemAssigned --> SA2[יצירה/מחיקה אוטומטית]
-    SystemAssigned --> SA3[הטובה ביותר למשאב יחיד]
+    SystemAssigned --> SA1[Lifecycle tied to resource]
+    SystemAssigned --> SA2[Automatic creation/deletion]
+    SystemAssigned --> SA3[Best for single resource]
     
-    UserAssigned --> UA1[מחזור חיים עצמאי]
-    UserAssigned --> UA2[יצירה/מחיקה ידנית]
-    UserAssigned --> UA3[משותפת בין משאבים]
+    UserAssigned --> UA1[Independent lifecycle]
+    UserAssigned --> UA2[Manual creation/deletion]
+    UserAssigned --> UA3[Shared across resources]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
 
-| תכונה | מוקצה ע"י מערכת | מוקצה ע"י משתמש |
+| תכונה | זהות שהוקצתה למערכת | זהות שהוקצתה למשתמש |
 |---------|----------------|---------------|
 | **מחזור חיים** | קשור למשאב | עצמאי |
 | **יצירה** | אוטומטית עם המשאב | יצירה ידנית |
-| **מחיקה** | נמחק עם המשאב | שומר לאחר מחיקת המשאב |
-| **שיתוף** | משאב אחד בלבד | משותף למספר משאבים |
-| **מקרה שימוש** | תסריטים פשוטים | תסריטים מורכבים עם מספר משאבים |
-| **ברירת מחדל AZD** | ✅ מומלץ | אופציונלי |
+| **מחיקה** | נמחק עם המשאב | נמשך אחרי מחיקת המשאב |
+| **שיתוף** | משאב אחד בלבד | מספר משאבים |
+| **מקרה שימוש** | תרחישים פשוטים | תרחישי ריבוי משאבים מורכבים |
+| **בחירת תבנית** | מוגדר בתשתית | מוגדר בתשתית |
 
 ---
 
 ## דרישות מוקדמות
 
-### כלים דרושים
+### כלים נדרשים
 
-כבר עליך להיות מותקן את הכלים מהשיעורים הקודמים:
+עליך כבר להחזיק בכלים אלה שהותקנו משיעורים קודמים:
 
 ```bash
-# אמת את Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ צפוי: גרסה 1.0.0 או גבוהה יותר של azd
+# ✅ Expected: azd version 1.0.0 or higher
 
-# אמת את Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ צפוי: גרסה 2.50.0 או גבוהה יותר של azure-cli
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### דרישות Azure
@@ -152,22 +154,22 @@ az --version
   - יצירת משאבי Key Vault
   - פריסת Container Apps
 
-### דרישות ידע
+### דרישות ידע מוקדמות
 
-כבר השלמת:
-- [מדריך התקנה](installation.md) - הגדרת AZD
-- [יסודות AZD](azd-basics.md) - מושגים בסיסיים
+עליך להשלים:
+- [מדריך התקנה](../chapter-01-foundation/installation.md) - הגדרת AZD
+- [יסודות AZD](../chapter-01-foundation/azd-basics.md) - מושגים מרכזיים
 - [ניהול תצורה](configuration.md) - משתני סביבה
 
 ---
 
-## שיעור 1: הבנת דפוסי אימות
+## שיעור 1: הבנת תבניות אימות
 
-### דפוס 1: מחרוזות חיבור (ישן - להמנע)
+### תבנית 1: מחרוזות חיבור (ישן - להימנע)
 
 **איך זה עובד:**
 ```bash
-# מחרוזת החיבור מכילה אישורים
+# Connection string contains credentials
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
@@ -176,16 +178,18 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 **בעיות:**
 - ❌ סודות גלויים במשתני סביבה
 - ❌ מתועדים במערכות פריסה
-- ❌ קשה לסובב אותם
-- ❌ אין עקבות גישה
+- ❌ קשה לסובב
+- ❌ ללא רישום ביקורת גישה
 
-**מתי להשתמש:** רק לפיתוח מקומי, לא בייצור.
+**מתי להשתמש:** כאשר השירות היעד דורש אימות מבוסס מפתח. העדף זהות כאשר נתמך; אחרת אחסן מפתחות באבטחה וסבב אותם, כולל בייצור.
 
 ---
 
-### דפוס 2: הפניות ל-Key Vault (טוב יותר)
+### תבנית 2: הפניות ל-Key Vault (טובה יותר)
 
 **איך זה עובד:**
+**קטעי Bicep חלקיים:** שדות הכרחיים לוולט, זהות Container App והכניסה `configuration.secrets` שלו הושמטו. `secretRef` מציין סוד של Container App; הוא **אינו** URI של Key Vault. כדי להשתמש ב-Key Vault, הגדר סוד בשם זה עם `keyVaultUrl` ואישור `identity` מורשה.
+
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -205,21 +209,23 @@ env: [
 ```
 
 **יתרונות:**
-- ✅ סודות מאוחסנים בצורה מאובטחת ב-Key Vault
-- ✅ ניהול סודות מרכזי
-- ✅ סיבוב ללא שינוי בקוד
+- ✅ סודות מאוחסנים בבטחה ב-Key Vault
+- ✅ ניהול סודות מרוכז
+- ✅ סיבוב ללא שינויים בקוד
 
 **מגבלות:**
 - ⚠️ עדיין משתמשים במפתחות/סיסמאות
-- ⚠️ צריך לנהל גישת Key Vault
+- ⚠️ יש לנהל גישת Key Vault
 
 **מתי להשתמש:** שלב מעבר ממחרוזות חיבור לזהות מנוהלת.
 
 ---
 
-### דפוס 3: זהות מנוהלת (השיטה הטובה ביותר)
+### תבנית 3: זהות מנוהלת (שיטה מיטבית)
 
 **איך זה עובד:**
+**Bicep חלקי:** מיזוג בלוק הזהות לתוך Container App מלא וסיפוק `storageAccount` והגדרת התפקיד. הקצאת תפקיד דורשת גם `name` דטרמיניסטי.
+
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -231,17 +237,19 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 // Grant permissions
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(storageAccount.id, containerApp.id, storageBlobDataContributorRole)
   scope: storageAccount
   properties: {
     roleDefinitionId: storageBlobDataContributorRole
     principalId: containerApp.identity.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 ```
 
 **קוד אפליקציה:**
 ```javascript
-// אין צורך בסודות!
+// No secrets needed!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -254,31 +262,31 @@ const blobServiceClient = new BlobServiceClient(
 
 **יתרונות:**
 - ✅ אפס סודות בקוד/תצורה
-- ✅ סיבוב אישורים אוטומטי
+- ✅ סיבוב אוטומטי של אישורים
 - ✅ רישום ביקורת מלא
 - ✅ הרשאות מבוססות RBAC
-- ✅ מוכן לתאימות
+- ✅ מוכנות תאימות
 
-**מתי להשתמש:** תמיד, עבור אפליקציות בייצור.
+**מתי להשתמש:** העדף לאפליקציות מתארחות ב-Azure שניגשות לשירותים התומכים באימות Microsoft Entra.
 
 ---
 
-### דפוס 4: עיקרי שירות (CI/CD ואוטומציה)
+### תבנית 4: Service Principals (CI/CD ואוטומציה)
 
-זהות מנוהלת היא הסטנדרט הזהב *למשאבים שרצים בתוך Azure*. אבל מה לגבי דברים שרצים **מחוץ** ל-Azure — כמו צינור CI/CD על סוכן בנייה, או סקריפט במחשב הנייד שלך שאי אפשר להשתמש בו בהתחברות אינטראקטיבית? כאן נכנסת לתמונה **עיקר שירות**: זהות לא אנושית עם אישורים משלה שהמערכת האוטומטית יכולה להתחבר איתה.
+זהות מנוהלת היא התקן הזהב *למשאבים הפועלים בתוך Azure*. אבל מה לגבי דברים הפועלים **מחוץ** ל-Azure—כמו צינור CI/CD בסוכן בנייה, או סקריפט במחשבך הנייד שלא יכול להשתמש בכניסה האינטראקטיבית שלך? כאן נכנס **service principal**: זהות שאינה אנושית עם אישורים משלה, שתהליך אוטומטי יכול להיכנס באמצעותם.
 
 **איך זה עובד:**
 
-צור עיקר שירות המוגבל לקבוצת משאבים (הרשאות מינימום):
+צור service principal בפרופיל של קבוצת משאבים (הרשאה מינימלית):
 
 ```bash
 az ad sp create-for-rbac \
   --name "myapp-cicd" \
   --role contributor \
-  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+  --scopes "/subscriptions/<sub-id>/resourceGroups/<rg-name>"
 ```
 
-זה מדפיס Client ID, Client Secret ו-Tenant ID. azd יכול להתחבר איתם ללא אינטראקציה:
+זה מדפיס מזהה לקוח, סוד לקוח ומזהה שוכר. azd יכול להיכנס איתם באופן לא אינטראקטיבי:
 
 ```bash
 azd auth login \
@@ -287,7 +295,7 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-**עדיפות לאישורים פדרטיביים (OIDC) על פני סודות.** במקום סוד לקוח ארוך טווח, קונפיגור אישור פדרטיבי כך שהצינור יחליף אסימון קצר מועד—בלי סוד לדליפה או סיבוב:
+**העדף אישורים מאוחדים (OIDC) על פני סודות.** במקום סוד לקוח ארוך טווח, הגדר אישור מאוחד כך שהצינור יחליף אסימון קצר טווח—לא סוד לדליפה או לסיבוב:
 
 ```bash
 azd auth login \
@@ -296,33 +304,33 @@ azd auth login \
   --tenant-id "<tenant>"
 ```
 
-> `azd pipeline config` מגדיר זאת עבורך אוטומטית. ראה מדריכי CI/CD ב-[פרק 8](../chapter-08-production/production-ai-practices.md).
+> `azd pipeline config` מגדיר זאת עבורך אוטומטית. ראה את ההליכות של CI/CD ב-[פרק 8](../chapter-08-production/production-ai-practices.md).
 
 **יתרונות:**
-- ✅ עובד מחוץ ל-Azure (סוכני בנייה, סביבות פנימיות, עננים אחרים)
-- ✅ ניתן להגביל אותו לקבוצת משאבים בודדת עם תפקיד אחד
-- ✅ הגרסה הפדרטיבית (OIDC) אינה משתמשת בסוד מאוחסן
+- ✅ עובד מחוץ ל-Azure (סוכני בנייה, במקומי, עננים נוספים)
+- ✅ ניתן להקצות לקבוצת משאבים בודדת עם תפקיד אחד
+- ✅ גרסת OIDC המאוחדת אינה משתמשת בסוד מאוחסן
 
 **חסרונות:**
-- ⚠️ הגרסה המבוססת סוד דורשת אחסון וסיבוב זהירים
-- ⚠️ סוד שנחשף מעניק את כל ההרשאות של עיקר השירות—שמור על הגבלות קפדניות
+- ⚠️ גרסת סוד דורשת אחסון זהיר וסיבוב
+- ⚠️ סוד שנחשף מעניק את כל מה שה-SP יכול לעשות—השאר את ההקצאות מדויקות
 
-**מתי להשתמש:** צינורות CI/CD ואוטומציה שאינם יכולים להשתמש בזהות מנוהלת. העדף תמיד את הגרסה הפדרטיבית/OIDC על פני סוד לקוח, והעדף זהות מנוהלת כשעומס העבודה רץ בתוך Azure.
+**מתי להשתמש:** צינורות CI/CD ואוטומציה שלא יכולים להשתמש בזהות מנוהלת. תמיד העדיף את גרסת ה-**מאוחדת/OIDC** על פני סוד לקוח, והעדף זהות מנוהלת כאשר העומס רץ בתוך Azure.
 
 **אחסון בטוח של אישורים:**
-- לעולם אל תיעד סודות—השתמש באחסון הסודות של הצינור שלך (GitHub Actions secrets, קבוצות משתנים ב-Azure DevOps / Key Vault).
-- הגב את עיקר השירות לתפקיד וקבוצת משאבים הקטנים ביותר הנדרשים.
-- הגדר תוקף וסובב, או ביטל את הסוד לחלוטין עם OIDC.
+- לעולם אל תתחייב סודות—השתמש בחנות הסודות של הצינור (GitHub Actions secrets, קבוצות משתנים Azure DevOps / Key Vault).
+- הגדר את ה-SP לתפקיד ולקבוצת משאבים הקטנים ביותר הדרושים.
+- הגדר תאריך תפוגה וסבב, או השמט את הסוד לחלוטין עם OIDC.
 
 ---
 
 ## שיעור 2: יישום זהות מנוהלת עם AZD
 
-### יישום שלב אחר שלב
+### יישום שלב-אחר-שלב
 
-בואו נבנה Container App מאובטח שמשתמש בזהות מנוהלת לגישה ל-Azure Storage ול-Key Vault.
+הקטעים הבאים מראים כיצד לשלב זהות מנוהלת בפרויקט Container App. הם **לא התחלה להעתקה והרצה**: מודול האחסון, תשתית סביבה מנוהלת/רישום מלאה, Dockerfile, וקובץ הפרמטרים אינם כלולים כאן. התחל מתבנית Container Apps עובדת ומזג את התבניות האלה, תוך שמירה על תצורת הרישום והתגים של השירות.
 
-### מבנה הפרויקט
+### מבנה פרויקט
 
 ```
 secure-app/
@@ -341,7 +349,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. קונפיגורציית AZD (azure.yaml)
+### 1. הגדרות AZD (azure.yaml)
 
 ```yaml
 name: secure-app
@@ -354,7 +362,7 @@ services:
     language: js
     host: containerapp
 
-# Enable managed identity (AZD handles this automatically)
+# Managed identity must be enabled in the infrastructure, not by this YAML.
 ```
 
 ### 2. תשתית: הפעלת זהות מנוהלת
@@ -366,6 +374,8 @@ targetScope = 'subscription'
 
 param environmentName string
 param location string = 'eastus'
+param containerAppsEnvironmentId string
+param containerImage string
 
 var tags = { 'azd-env-name': environmentName }
 
@@ -408,6 +418,8 @@ module containerApp './app/container-app.bicep' = {
     tags: tags
     storageAccountName: storage.outputs.name
     keyVaultName: keyVault.outputs.name
+    containerAppsEnvironmentId: containerAppsEnvironmentId
+    containerImage: containerImage
   }
 }
 
@@ -418,7 +430,8 @@ module storageRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'  // Storage Blob Data Contributor
-    targetResourceId: storage.outputs.id
+    targetResourceType: 'storage'
+    targetResourceName: storage.outputs.name
   }
 }
 
@@ -429,7 +442,8 @@ module kvRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: '4633458b-17de-408a-b874-0445c86b69e6'  // Key Vault Secrets User
-    targetResourceId: keyVault.outputs.id
+    targetResourceType: 'keyvault'
+    targetResourceName: keyVault.outputs.name
   }
 }
 
@@ -439,7 +453,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App עם זהות מוקצת ע"י מערכת
+### 3. Container App עם זהות שהוקצתה למערכת
 
 **קובץ: `infra/app/container-app.bicep`**
 
@@ -449,15 +463,18 @@ param location string
 param tags object = {}
 param storageAccountName string
 param keyVaultName string
+param containerAppsEnvironmentId string
+param containerImage string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: name
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'api' })
   identity: {
     type: 'SystemAssigned'  // 🔑 Enable managed identity
   }
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -468,7 +485,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Must exist; configure registry credentials for private images
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -496,18 +513,28 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. מודול הקצאת תפקיד RBAC
+### 4. מודול הקצאת תפקידים RBAC
 
 **קובץ: `infra/core/role-assignment.bicep`**
 
 ```bicep
 param principalId string
 param roleDefinitionId string  // Azure built-in role ID
-param targetResourceId string
+@allowed(['storage', 'keyvault'])
+param targetResourceType string
+param targetResourceName string
 
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(principalId, roleDefinitionId, targetResourceId)
-  scope: resourceId('Microsoft.Resources/resourceGroups', resourceGroup().name)
+// Typed existing resources give Bicep a valid resource scope, not a string ID.
+resource storageTarget 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
+  name: targetResourceName
+}
+resource vaultTarget 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: targetResourceName
+}
+
+resource storageAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'storage') {
+  name: guid(storageTarget.id, principalId, roleDefinitionId)
+  scope: storageTarget
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
     principalId: principalId
@@ -515,7 +542,17 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
-output id string = roleAssignment.id
+resource vaultAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'keyvault') {
+  name: guid(vaultTarget.id, principalId, roleDefinitionId)
+  scope: vaultTarget
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
+    principalId: principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+// This module assigns at the target resource scope, not the whole resource group.
 ```
 
 ### 5. קוד אפליקציה עם זהות מנוהלת
@@ -531,29 +568,29 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 אתחול אישורי גישה (עובד אוטומטית עם זהות מנוהלת)
+// 🔑 Initialize credential (works automatically with managed identity)
 const credential = new DefaultAzureCredential();
 
-// הגדרת אחסון Azure
+// Azure Storage setup
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
-  credential  // אין צורך במפתחות!
+  credential  // No keys needed!
 );
 
-// הגדרת מחסן מפתחות
+// Key Vault setup
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
-  credential  // אין צורך במפתחות!
+  credential  // No keys needed!
 );
 
-// בדיקת בריאות
+// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// העלאת קובץ לאחסון בבלוב
+// Upload file to blob storage
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -562,7 +599,8 @@ app.post('/upload', async (req, res) => {
     const blobName = `file-${Date.now()}.txt`;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     
-    await blockBlobClient.upload('Hello from managed identity!', 30);
+    const content = 'Hello from managed identity!';
+    await blockBlobClient.upload(content, Buffer.byteLength(content));
     
     res.json({
       success: true,
@@ -575,7 +613,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// קבלת סוד ממחסן המפתחות
+// Get secret from Key Vault
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -583,7 +621,7 @@ app.get('/secret/:name', async (req, res) => {
     
     res.json({
       name: secretName,
-      value: secret.value,
+      retrieved: secret.value !== undefined, // Never return the secret value to callers
       message: 'Secret retrieved using managed identity!'
     });
   } catch (error) {
@@ -592,7 +630,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// רשימת מיכלי בבלוב (מציג גישה לקריאה)
+// List blob containers (demonstrates read access)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -637,17 +675,19 @@ app.listen(PORT, () => {
 
 ### 6. פריסה ובדיקה
 
+הרץ פקודות אלה **רק לאחר** השלמת התשתית, Dockerfile, ו-`main.parameters.json` תואמים בפרויקט שלך. אמת את azd עם `azd auth login`; היכנס נפרד עם `az login` לבדיקה כלקוח Azure CLI. נקודות הקצה המוצגות הן להדגמה ודורשות בקרות גישה מתאימות לפני שימוש ציבורי.
+
 ```bash
-# אתחול סביבה AZD
+# Initialize AZD environment
 azd init
 
-# פריסת תשתית ויישום
+# Deploy infrastructure and application
 azd up
 
-# קבלת כתובת ה-URL של היישום
-APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
+# Get the app URL
+APP_URL=$(azd env get-value APP_URL)
 
-# בדיקת מצב בריאות
+# Test health check
 curl $APP_URL/health
 ```
 
@@ -673,7 +713,7 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**בדיקת רשימת containers:**
+**בדיקת רשימת קונטיינרים:**
 ```bash
 curl $APP_URL/containers
 ```
@@ -689,46 +729,50 @@ curl $APP_URL/containers
 
 ---
 
-## תפקידי RBAC נפוצים ב-Azure
+## תפקידי RBAC נפוצים ל-Azure
 
-### מזהי תפקידים מובנים לזהות מנוהלת
+### מזהי תפקיד מובנים לזהות מנוהלת
 
 | שירות | שם התפקיד | מזהה התפקיד | הרשאות |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | קריאת blobs ו-containers |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | קריאה, כתיבה ומחיקה של blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | קריאה, כתיבה ומחיקה של הודעות תור |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6ea1-4ae2-8e65-a410df84e7d1` | קריאת blobs וקונטיינרים |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | קריאה, כתיבה, מחיקה של blobs |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | קריאה, כתיבה, מחיקה של תורים/הודעות |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | קריאת סודות |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | קריאה, כתיבה ומחיקת סודות |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | קריאה, כתיבה, מחיקת סודות |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | קריאת נתוני Cosmos DB |
 | **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | קריאה וכתיבת נתוני Cosmos DB |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | ניהול מסדי נתונים SQL |
+| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | ניהול משאבי מסד נתונים; לא מעניק גישה לנתוני SQL |
 | **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | שליחה, קבלה וניהול הודעות |
 
-### איך למצוא מזהי תפקידים
+### כיצד למצוא מזהי תפקידים
+
+שני המזהים של Cosmos DB עבור NoSQL לעיל הם **הגדרות תפקידי נתוני Cosmos מקומיים**, לא מזהי תפקידי מנוי Azure RBAC. הקצה אותם עם `az cosmosdb sql role assignment create` (או `Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments`), לא עם `az role assignment create`. גישה לנתוני SQL דורשת משתמש מסד נתונים Entra והרשאות SQL.
 
 ```bash
-# רשום את כל התפקידים המובנים
+# List all built-in roles
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# חפש תפקיד ספציפי
+# Search for specific role
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# קבל פרטי תפקיד
+# Get role details
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
 ---
 
-## תרגילים מעשיים
+## תרגולים מעשיים
+
+**דרישות מוקדמות לאינטגרציה לכל שלושת התרגילים:** תבנית Container App פעילה בפרויקט שלך, משאבי Bicep תואמים, כניסה עם Azure CLI/azd, וסמכות להקצות את התפקידים הדרושים. אלה התאמות מודרכות, לא התחלות עצמאיות מקומיות; החלף את שמות המשאבים המדגמים בשמות שהקצת.
 
 ### תרגיל 1: הפעלת זהות מנוהלת לאפליקציה קיימת ⭐⭐ (בינוני)
 
 **מטרה**: הוסף זהות מנוהלת לפריסת Container App קיימת
 
-**תסריט**: יש לך Container App שמשתמש במחרוזות חיבור. המר אותו לזהות מנוהלת.
+**תרחיש**: יש לך Container App שמשתמש במחרוזות חיבור. המר אותו לזהות מנוהלת.
 
-**נקודת התחלה**: Container App עם קונפיגורציה זו:
+**נקודת התחלה**: Container App עם תצורה זו:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -742,7 +786,7 @@ env: [
 
 **שלבים**:
 
-1. **הפעל זהות מנוהלת בביספ:**
+1. **הפעל זהות מנוהלת ב-Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -754,7 +798,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **הענק גישה ל-Storage:**
+2. **הענק גישת Storage:**
 
 ```bicep
 // Get storage account reference
@@ -812,49 +856,50 @@ env: [
 5. **פרוס ובדוק:**
 
 ```bash
-# לפרוס מחדש
+# Redeploy
 azd up
 
-# לבדוק שזה עדיין עובד
-curl https://myapp.azurecontainerapps.io/upload
+# Test that it still works
+APP_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail -X POST "$APP_URL/upload"
 ```
 
 **✅ קריטריוני הצלחה:**
-- ✅ הפריסה מתבצעת ללא שגיאות
-- ✅ פעולות Storage עובדות (העלאה, רשימה, הורדה)
-- ✅ אין מחרוזות חיבור במשתני הסביבה
-- ✅ זהות גלויה בפורטל Azure תחת לשונית "Identity"
+- ✅ האפליקציה מתפרסת ללא שגיאות
+- ✅ פעולות אחסון עובדות (העלאה, רשימה, הורדה)
+- ✅ אין מחרוזות חיבור במשתני סביבה
+- ✅ זהות נראית בפורטל Azure בלשונית "זהות"
 
 **אימות:**
 
 ```bash
-# בדוק אם זהות מנוהלת מופעלת
+# Check managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ צפוי: "SystemAssigned"
+# ✅ Expected: "SystemAssigned"
 
-# בדוק הקצאת תפקיד
+# Check role assignment
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ צפוי: מציג את תפקיד "Storage Blob Data Contributor"
+# ✅ Expected: Shows "Storage Blob Data Contributor" role
 ```
 
 **זמן**: 20-30 דקות
 
 ---
 
-### תרגיל 2: גישה מרובת שירותים עם זהות מוקצת משתמש ⭐⭐⭐ (מתקדם)
+### תרגיל 2: גישה מרובת שירותים עם זהות שהוקצתה למשתמש ⭐⭐⭐ (מתקדם)
 
-**מטרה**: צור זהות מוקצת משתמש משותפת למספר Container Apps
+**מטרה**: צור זהות שהוקצתה למשתמש משותפת בין מספר Container Apps
 
-**תסריט**: יש לך 3 מיקרו-שירותים שכולם צריכים גישה לאותו חשבון Storage ול-Key Vault.
+**תרחיש**: יש לך 3 מיקרו-שירותים שכולם צריכים גישה לאותו חשבון Storage ו-Key Vault.
 
 **שלבים**:
 
-1. **צור זהות מוקצת משתמש:**
+1. **צור זהות שהוקצתה למשתמש:**
 
 **קובץ: `infra/core/identity.bicep`**
 
@@ -874,7 +919,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **הקצה תפקידים לזהות מוקצת המשתמש:**
+2. **הקצה תפקידים לזהות שהוקצתה למשתמש:**
 
 ```bicep
 // In main.bicep
@@ -890,7 +935,7 @@ module userIdentity './core/identity.bicep' = {
 
 // Grant Storage access
 resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'storage-contributor')
+  name: guid(storageAccount.id, environmentName, 'storage-contributor')
   scope: storageAccount
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
@@ -901,7 +946,7 @@ resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
 
 // Grant Key Vault access
 resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'kv-secrets-user')
+  name: guid(keyVault.id, environmentName, 'kv-secrets-user')
   scope: keyVault
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
@@ -911,7 +956,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **הקצה את הזהות למספר Container Apps:**
+3. **הקצה זהות למספר אפליקציות מכולה:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -948,18 +993,22 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **קוד אפליקציה (כל השירותים משתמשים באותו דפוס):**
+4. **קוד האפליקציה (כל השירותים משתמשים באותו דפוס):**
 
 ```javascript
-const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
+const { ManagedIdentityCredential } = require('@azure/identity');
+const { BlobServiceClient } = require('@azure/storage-blob');
 
-// עבור זהות שהוקצתה למשתמש, ציין את מזהה הלקוח
+// For user-assigned identity, specify the client ID
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // מזהה לקוח של זהות שהוקצתה למשתמש
+  process.env.AZURE_CLIENT_ID  // User-assigned identity client ID
 );
 
-// או השתמש ב-DefaultAzureCredential (זיהוי אוטומטי)
-const credential = new DefaultAzureCredential();
+// Alternative (choose ONE credential declaration):
+// const { DefaultAzureCredential } = require('@azure/identity');
+// const credential = new DefaultAzureCredential({
+//   managedIdentityClientId: process.env.AZURE_CLIENT_ID
+// });
 
 const blobServiceClient = new BlobServiceClient(
   `https://${process.env.STORAGE_ACCOUNT_NAME}.blob.core.windows.net`,
@@ -967,28 +1016,31 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **פרוס ואמת:**
+קבע לכל אפליקציית מכולה את זמן הריצה `AZURE_CLIENT_ID` ל-`userIdentity.outputs.clientId` ואת `STORAGE_ACCOUNT_NAME` לשם האחסון שלך ב-Bicep. רק הקצאת הזהות או הרצת `azd env set` לא מגדירה ערכי זמן ריצה אלו.
+
+5. **פרוס ובדוק:**
 
 ```bash
 azd up
 
-# בדוק שכל השירותים יכולים לגשת לאחסון
-curl https://api-gateway.azurecontainerapps.io/upload
-curl https://product-service.azurecontainerapps.io/upload
-curl https://order-service.azurecontainerapps.io/upload
+# Test all services can access storage
+# Replace with the actual ingress URLs reported for your three services
+curl --fail -X POST "$API_GATEWAY_URL/upload"
+curl --fail -X POST "$PRODUCT_SERVICE_URL/upload"
+curl --fail -X POST "$ORDER_SERVICE_URL/upload"
 ```
 
 **✅ קריטריוני הצלחה:**
-- ✅ זהות אחת משותפת ל-3 שירותים
-- ✅ כל השירותים יכולים לגשת ל-Storage ול-Key Vault
-- ✅ הזהות נשארת גם אם מוחק שירות אחד
+- ✅ זהות אחת משותפת בין 3 שירותים
+- ✅ כל השירותים יכולים לגשת לאחסון ולמפתח Vault
+- ✅ הזהות נשמרת גם אם מחקתם שירות אחד
 - ✅ ניהול הרשאות מרוכז
 
-**יתרונות זהות מוקצת משתמש:**
+**יתרונות זהות מוקצית למשתמש:**
 - זהות יחידה לניהול
 - הרשאות עקביות בין השירותים
 - שורדת מחיקת שירות
-- טובה לארכיטקטורות מורכבות
+- טובה יותר לארכיטקטורות מורכבות
 
 **זמן**: 30-40 דקות
 
@@ -996,9 +1048,9 @@ curl https://order-service.azurecontainerapps.io/upload
 
 ### תרגיל 3: יישום סיבוב סודות ב-Key Vault ⭐⭐⭐ (מתקדם)
 
-**מטרה**: אחסן מפתחות API של צד שלישי ב-Key Vault וגושש אליהם באמצעות זהות מנוהלת
+**מטרה**: לאחסן מפתחות API של צד שלישי ב-Key Vault ולגשת אליהם באמצעות זהות מנוהלת
 
-**תסריט**: האפליקציה שלך צריכה לקרוא ל-API חיצוני (OpenAI, Stripe, SendGrid) שדורש מפתחות API.
+**תרחיש**: האפליקציה שלך צריכה לקרוא ל-API חיצוני (OpenAI, Stripe, SendGrid) שדורש מפתחות API.
 
 **שלבים**:
 
@@ -1036,10 +1088,10 @@ output uri string = keyVault.properties.vaultUri
 2. **אחסן סודות ב-Key Vault:**
 
 ```bash
-# קבל שם מאגר מפתחות
-KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
+# Get Key Vault name
+KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
-# אחסן מפתחות API של צד שלישי
+# Store third-party API keys
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1056,7 +1108,7 @@ az keyvault secret set \
   --value "SG.xxxxxxxxxxxxx"
 ```
 
-3. **קוד אפליקציה לשחזור סודות:**
+3. **קוד האפליקציה לשליפת סודות:**
 
 **קובץ: `src/config.js`**
 
@@ -1075,7 +1127,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // בדוק את הזיכרון המטמון קודם כל
+    // Check cache first
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1111,6 +1163,8 @@ module.exports = new Config();
 
 **קובץ: `src/app.js`**
 
+קטע **אפליקציה חלפית** זה דורש `npm install openai`, מפתח צד שלישי אמיתי, דגם נגיש, ותשתית מהפרויקט שלך. הוא קורא ל-OpenAI ישירות, לא לפריסה של Azure OpenAI. מפתחות המילוי להלן אינם מאשרים בקשה.
+
 ```javascript
 const express = require('express');
 const config = require('./config');
@@ -1118,7 +1172,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// אתחול OpenAI עם מפתח מ-Key Vault
+// Initialize OpenAI with key from Key Vault
 let openaiClient;
 
 async function initializeServices() {
@@ -1126,9 +1180,6 @@ async function initializeServices() {
   openaiClient = new OpenAI({ apiKey: openaiKey });
   console.log('✅ Services initialized with secrets from Key Vault');
 }
-
-// קריאה בהפעלה
-initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
   try {
@@ -1146,8 +1197,12 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Secure API with Key Vault integration running');
+// Start listening only after initialization succeeds.
+initializeServices().then(() => {
+  app.listen(3000, () => console.log('Key Vault demo running'));
+}).catch(error => {
+  console.error('Initialization failed:', error.message);
+  process.exitCode = 1;
 });
 ```
 
@@ -1156,230 +1211,237 @@ app.listen(3000, () => {
 ```bash
 azd up
 
-# בדוק שמפתחות ה-API פועלים
+# Test that API keys work
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
 **✅ קריטריוני הצלחה:**
-- ✅ אין מפתחות API בקוד או במשתני סביבה  
-- ✅ האפליקציה מושכת את המפתחות מ-Key Vault  
-- ✅ API של צד שלישי עובדים כראוי  
-- ✅ ניתן לסובב מפתחות ללא שינויים בקוד  
+- ✅ אין מפתחות API בקוד או במשתני סביבה
+- ✅ האפליקציה שולפת את המפתחות מה-Key Vault
+- ✅ APIs של צד שלישי פועלים כראוי
+- ✅ ניתן לסובב מפתחות מבלי לשנות את הקוד
 
 **סובב סוד:**
 
 ```bash
-# עדכן סוד ב-Key Vault
+# Update secret in Key Vault
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# הפעל מחדש את האפליקציה כדי לטעון את המפתח החדש
+# Find the active revision name, then restart it to clear the in-process cache
+az containerapp revision list --name myapp --resource-group rg-myapp --output table
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
-  
-**זמן**: 25-35 דקות  
+
+**זמן**: 25-35 דקות
 
 ---
 
 ## נקודת בדיקת ידע
 
-### 1. תבניות אימות ✓
+### 1. דפוסי הזדהות ✓
 
 בדוק את הבנתך:
 
-- [ ] **שאלה 1**: מהם שלוש תבניות האימות העיקריות?  
-  - **תשובה**: מיתרי חיבור (מורשת), הפניות ל-Key Vault (מעבר), זהות מנוהלת (הטובה ביותר)
+- [ ] **שאלה 1**: מהם שלושת דפוסי ההזדהות העיקריים? 
+  - **תשובה**: מחרוזות חיבור (מסורתיות), הפניות ל-Key Vault (מעבר), זהות מנוהלת (הטובה ביותר)
 
-- [ ] **שאלה 2**: מדוע זהות מנוהלת טובה יותר ממיתרי חיבור?  
-  - **תשובה**: אין סודות בקוד, סיבוב אוטומטי, מעקב ביקורת מקיף, הרשאות RBAC
+- [ ] **שאלה 2**: מדוע זהות מנוהלת טובה יותר ממחרוזות חיבור?
+  - **תשובה**: אין סודות בקוד, סיבוב אוטומטי, רישום מלא, הרשאות RBAC
 
-- [ ] **שאלה 3**: מתי תשתמש בזהות שהוקצתה למשתמש במקום זהות שהוקצתה למערכת?  
-  - **תשובה**: כשמשתפים זהות בין משאבים מרובים או כאשר מחזור חיי הזהות עצמאי ממחזור חיי המשאב
+- [ ] **שאלה 3**: מתי תשתמש בזהות מוקצית למשתמש במקום בזהות מוקצית למערכת?
+  - **תשובה**: כשמשתפים זהות בין משאבים מרובים או כשמחזור חיי הזהות עצמאי ממחזור חיי המשאב
 
-**הוכחה מעשית:**  
+**אימות מעשי:**
 ```bash
-# בדוק איזה סוג של זהות האפליקציה שלך משתמשת
+# Check what type of identity your app uses
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# רשום את כל הקצאות התפקידים עבור הזהות
+# List all role assignments for the identity
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
-  
+
 ---
 
 ### 2. RBAC והרשאות ✓
 
 בדוק את הבנתך:
 
-- [ ] **שאלה 1**: מהו מזהה התפקיד עבור "Storage Blob Data Contributor"?  
+- [ ] **שאלה 1**: מהו מזהה התפקיד של "Storage Blob Data Contributor"?
   - **תשובה**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **שאלה 2**: אילו הרשאות מעניק "Key Vault Secrets User"?  
-  - **תשובה**: גישה רק לקריאה לסודות (לא יכול ליצור, לעדכן או למחוק)
+- [ ] **שאלה 2**: אילו הרשאות נותן "Key Vault Secrets User"?
+  - **תשובה**: גישה לקריאה בלבד לסודות (אי אפשר ליצור, לעדכן או למחוק)
 
-- [ ] **שאלה 3**: איך מעניקים לאפליקציית מכולה גישה ל-Azure SQL?  
-  - **תשובה**: הקצה תפקיד "SQL DB Contributor" או קבע אימות Microsoft Entra ID ל-SQL
+- [ ] **שאלה 3**: איך מעניקים לאפליקציית מכולה גישה ל-Azure SQL?
+  - **תשובה**: הגדר אימות Microsoft Entra, צור את הזהות כמשתמש מסד נתונים, והענק הרשאות SQL נדרשות. "SQL DB Contributor" מנהל רק משאבי Azure; אינו מאשר שאילתות.
 
-**הוכחה מעשית:**  
+**אימות מעשי:**
 ```bash
-# מצא תפקיד ספציפי
+# Find specific role
 az role definition list --name "Storage Blob Data Contributor"
 
-# בדוק אילו תפקידים מוקצים לזהות שלך
+# Check what roles are assigned to your identity
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
-  
+
 ---
 
-### 3. אינטגרציה עם Key Vault ✓
+### 3. שילוב עם Key Vault ✓
 
 בדוק את הבנתך:
 
-- [ ] **שאלה 1**: איך מפעילים RBAC ל-Key Vault במקום מדיניות גישה?  
+- [ ] **שאלה 1**: איך מפעילים RBAC ל-Key Vault במקום מדיניות גישה?
   - **תשובה**: קבע `enableRbacAuthorization: true` ב-Bicep
 
-- [ ] **שאלה 2**: איזו ספריית SDK של Azure מטפלת באימות זהות מנוהלת?  
+- [ ] **שאלה 2**: איזו ספריית SDK של Azure מטפלת באימות זהות מנוהלת?
   - **תשובה**: `@azure/identity` עם מחלקת `DefaultAzureCredential`
 
-- [ ] **שאלה 3**: כמה זמן נשארים סודות Key Vault במטמון?  
+- [ ] **שאלה 3**: כמה זמן סודות Key Vault נשארים במטמון?
   - **תשובה**: תלוי באפליקציה; יש ליישם אסטרטגיית מטמון משלך
 
-**הוכחה מעשית:**  
+**אימות מעשי:**
 ```bash
-# בדוק גישה למאגר המפתחות
+# Test Key Vault access
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
-  --query "value"
+  --query "{name:name,enabled:attributes.enabled}"
 
-# בדוק שה-RBAC מופעל
+# Check RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ צפוי: נכון
+# ✅ Expected: true
 ```
-  
+
 ---
 
-## טובות אבטחה מומלצות
+## שיטות עבודה מומלצות לאבטחה
 
-### ✅ עשה:
+### ✅ עשו:
 
-1. **תמיד השתמש בזהות מנוהלת בסביבת ייצור**  
+1. **תמיד השתמש בזהות מנוהלת בסביבת הייצור**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
-  
-2. **השתמש בתפקידי RBAC עם הרשאות מינימליות**  
-   - השתמש בתפקידי "קורא" כשאפשר  
-   - הימנע מ"תפקיד בעלים" או "משתתף" אלא אם נדרש  
 
-3. **אחסן מפתחות צד שלישי ב-Key Vault**  
+2. **השתמש בתפקידי RBAC עם ההרשאות המינימליות**
+   - השתמש בתפקידי "קורא" כשניתן
+   - הימנע מתפקידי "בעלים" או "עוזר" אלא אם כן נדרש
+
+3. **אחסן מפתחות צד שלישי ב-Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
-  
-4. **הפעל רישום ביקורת**  
+
+4. **אפשר רישום ביקורת** (קטע חלקי של משאב; שלב עם ההצהרות של הכספת והסביבת עבודה שלך)
    ```bicep
-   diagnosticSettings: {
-     logs: [{ category: 'AuditEvent', enabled: true }]
+   resource vaultDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+     name: 'vault-audit'
+     scope: keyVault
+     properties: {
+       workspaceId: logAnalytics.id
+       logs: [{ category: 'AuditEvent', enabled: true }]
+     }
    }
    ```
-  
-5. **השתמש בזהויות שונות לפיתוח/סטייג'/ייצור**  
+
+5. **השתמש בזהויות שונות לסביבת פיתוח/בדיקה/ייצור**
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
-  
-6. **סובב סודות באופן קבוע**  
-   - קבע תאריכי תפוגה על סודות Key Vault  
-   - אוטומט סיבוב עם Azure Functions  
 
-### ❌ אל תעשה:
+6. **סובב סודות באופן קבוע**
+   - קבע תאריכי תפוגה על סודות Key Vault
+   - הפעל סיבוב אוטומטי עם Azure Functions
 
-1. **אל תכניס סודות ישירות בקוד**  
+### ❌ אל תעשו:
+
+1. **אל תכתוב סודות ישירות בקוד**
    ```javascript
-   // ❌ רע
+   // ❌ BAD
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
-  
-2. **אל תשתמש במיתרי חיבור בייצור**  
+
+2. **אל תשתמש במחרוזות חיבור בסביבת הייצור**
    ```javascript
-   // ❌ רע
+   // ❌ BAD
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
-  
-3. **אל תיתן הרשאות מיותרות**  
+
+3. **אל תעניק הרשאות מופרזות**
    ```bicep
    // ❌ BAD - too much access
-   roleDefinitionId: 'Owner'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')
    
    // ✅ GOOD - least privilege
-   roleDefinitionId: 'Storage Blob Data Reader'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1')
    ```
-  
-4. **אל תרשום סודות ביומנים**  
+
+4. **אל תרשום סודות ביומנים**
    ```javascript
-   // ❌ רע
+   // ❌ BAD
    console.log('API Key:', apiKey);
    
-   // ✅ טוב
+   // ✅ GOOD
    console.log('API Key retrieved successfully');
    ```
-  
-5. **אל תשתף זהויות ייצור בין סביבות שונות**  
+
+5. **אל תשתף זהויות ייצור בין סביבות**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
    ```
-  
+
 ---
 
-## מדריך פתרון בעיות
+## מדריך לפתרון תקלות
 
-### בעיה: "Unauthorized" בגישה ל-Azure Storage
+### בעיה: "לא מורשה" בעת גישה ל-Azure Storage
 
-**תסמינים:**  
+**תסמינים:**
 ```
 Error: Unauthorized (403)
 AuthorizationPermissionMismatch: This request is not authorized to perform this operation
 ```
-  
-**אבחנה:**  
+
+**אבחנה:**
 
 ```bash
-# בדוק אם זהות מנוהלת מופעלת
+# Check if managed identity is enabled
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ צפוי: "SystemAssigned" או "UserAssigned"
+# ✅ Expected: "SystemAssigned" or "UserAssigned"
 
-# בדוק הקצאות תפקיד
+# Check role assignments
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# צפוי: יש לראות "Storage Blob Data Contributor" או תפקיד דומה
+# Expected: Should see "Storage Blob Data Contributor" or similar role
 ```
-  
-**פתרונות:**  
 
-1. **הענק תפקיד RBAC נכון:**  
+**פתרונות:**
+
+1. **הענק תפקיד RBAC נכון:**
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1387,54 +1449,54 @@ az role assignment create \
   --role "Storage Blob Data Contributor" \
   --scope $STORAGE_ID
 ```
-  
-2. **המתן להפצת השינויים (יכול לקחת 5-10 דקות):**  
+
+2. **המתן להפצה (יכול לקחת 5-10 דקות):**
 ```bash
-# בדוק את מצב הקצאת התפקיד
+# Check role assignment status
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
-  
-3. **ודא שקוד האפליקציה משתמש בהרשאה הנכונה:**  
+
+3. **ודא שקוד האפליקציה משתמש באישורי גישה נכונים:**
 ```javascript
-// ודא שאתה משתמש ב-DefaultAzureCredential
+// Make sure you're using DefaultAzureCredential
 const credential = new DefaultAzureCredential();
 ```
-  
+
 ---
 
 ### בעיה: גישה ל-Key Vault נדחתה
 
-**תסמינים:**  
+**תסמינים:**
 ```
 Error: Forbidden (403)
 The user, group or application does not have secrets get permission
 ```
-  
-**אבחנה:**  
+
+**אבחנה:**
 
 ```bash
-# בדוק אם ניהול הרשאות מבוסס תפקיד ב-Key Vault מופעל
+# Check Key Vault RBAC is enabled
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ צפוי: נכון
+# ✅ Expected: true
 
-# בדוק הקצאות תפקידים
+# Check role assignments
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
 ```
-  
-**פתרונות:**  
 
-1. **הפעל RBAC ב-Key Vault:**  
+**פתרונות:**
+
+1. **הפעל RBAC ב-Key Vault:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
-  
-2. **הענק תפקיד Key Vault Secrets User:**  
+
+2. **הענק תפקיד Key Vault Secrets User:**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1442,158 +1504,153 @@ az role assignment create \
   --role "Key Vault Secrets User" \
   --scope $KV_ID
 ```
-  
+
 ---
 
-### בעיה: DefaultAzureCredential נכשל במחשב המקומי
+### בעיה: DefaultAzureCredential נכשל מקומית
 
-**תסמינים:**  
+**תסמינים:**
 ```
 Error: DefaultAzureCredential failed to retrieve a token
 CredentialUnavailableError: No credential available
 ```
-  
-**אבחנה:**  
+
+**אבחנה:**
 
 ```bash
-# בדוק אם אתה מחובר
+# Check if you're logged in
 az account show
 
-# בדוק את האימות של Azure CLI
+# Check Azure CLI authentication
 az ad signed-in-user show
 ```
-  
-**פתרונות:**  
 
-1. **התחבר ל-Azure CLI:**  
+**פתרונות:**
+
+1. **התחבר ל-Azure CLI:**
 ```bash
 az login
 ```
-  
-2. **קבע מינוי Azure:**  
+
+2. **קבע את המנוי ב-Azure:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
-  
-3. **לעבודה מקומית, השתמש במשתני סביבה:**  
+
+3. **לפיתוח מקומי, השתמש במשתני סביבה:**
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
-  
-4. **או השתמש בהרשאה שונה במחשב המקומי:**  
+
+4. **או השתמש באישורי גישה אחרים מקומית:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// השתמש ב-AzureCliCredential לפיתוח מקומי
+// Use AzureCliCredential for local dev
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
 ```
-  
+
 ---
 
-### בעיה: הקצאת תפקיד לוקחת זמן רב להתפשט
+### בעיה: הקצאת תפקיד לוקחת יותר מדי זמן להפצה
 
-**תסמינים:**  
-- התפקיד הוקצה בהצלחה  
-- עדיין מתקבלים שגיאות 403  
-- גישה ספורדית (לפעמים עובד, לפעמים לא)  
+**תסמינים:**
+- התפקיד הוקצה בהצלחה
+- עדיין מקבלים שגיאות 403
+- גישה מתחלפת (לפעמים עובד, לפעמים לא)
 
-**הסבר:**  
-שינויים ב-Azure RBAC יכולים לקחת 5-10 דקות להתפשט ברחבי העולם.  
+**הסבר:**
+שינויים ב-RBAC של Azure יכולים לקחת 5-10 דקות להתפשט גלובלית.
 
-**פתרון:**  
+**פתרון:**
 
 ```bash
-# המתן ונסה שוב
+# Wait and retry
 echo "Waiting for RBAC propagation..."
-sleep 300  # המתן 5 דקות
+sleep 300  # Wait 5 minutes
 
-# בדוק גישה
-curl https://myapp.azurecontainerapps.io/upload
+# Test access
+curl --fail -X POST "$APP_URL/upload"
 
-# אם עדיין נכשל, הפעל מחדש את האפליקציה
+# If still failing, restart the app
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
-  
+
 ---
 
 ## שיקולי עלות
 
 ### עלויות זהות מנוהלת
 
-| משאב           | עלות           |  
-|-----------------|----------------|  
-| **זהות מנוהלת** | 🆓 **חינם** - ללא תשלום |  
-| **הקצאות תפקידי RBAC** | 🆓 **חינם** - ללא תשלום |  
-| **בקשות אסימון Microsoft Entra ID** | 🆓 **חינם** - כלול |  
-| **פעולות Key Vault** | $0.03 לכל 10,000 פעולות |  
-| **אחסון Key Vault** | $0.024 לסוד לחודש |  
+| משאב | עלות |
+|----------|------|
+| **זהות מנוהלת** | 🆓 **חינם** - ללא תשלום |
+| **הקצאות תפקידי RBAC** | 🆓 **חינם** - ללא תשלום |
+| **בקשות אסימון Microsoft Entra ID** | 🆓 **חינם** - כלול |
+| **פעולות Key Vault** | $0.03 לכל 10,000 פעולות |
+| **אחסון סודות Key Vault** | בדוק תמחור עדכני; אל תניח תשלום חודשי לכל סוד |
 
-**זהות מנוהלת חוסכת כסף על ידי:**  
-- ✅ ביטול פעולות Key Vault לאימות שירות-לשירות  
-- ✅ הפחתת תקלות אבטחה (ללא חשיפת אישורים)  
-- ✅ הקטנת עומס תפעולי (ללא סיבוב ידני)  
+**זהות מנוהלת חוסכת כסף על ידי:**
+- ✅ ביטול פעולות Key Vault לאימות שירות-לשירות
+- ✅ הפחתת אירועי אבטחה (ללא מידע רגיש שנחשף)
+- ✅ הפחתת עומס תפעולי (ללא סיבוב ידני)
 
-**השוואת עלויות לדוגמה (חודשי):**  
-
-| תרחיש              | מיתרי חיבור         | זהות מנוהלת      | חסכון           |  
-|--------------------|--------------------|------------------|-----------------|  
-| אפליקציה קטנה (1M בקשות) | ~50$ (Key Vault + פעולות) | ~0$              | 50$/חודש       |  
-| אפליקציה בינונית (10M בקשות) | ~200$             | ~0$              | 200$/חודש      |  
-| אפליקציה גדולה (100M בקשות) | ~1,500$           | ~0$              | 1,500$/חודש    |  
+כמות בקשות האפליקציה אינה שווה לכמות פעולות Key Vault: דפוסי מטמון וסיבוב קובעים עלויות קריאת סודות. זהות לא מורידה חיובי מחשוב/אחסון. בדוק [תמחור Key Vault](https://azure.microsoft.com/pricing/details/key-vault/) ומחשבון תמחור Azure לאזור שלך במקום להסיק חיסכון מחודשי רק לפי בקשות.
 
 ---
 
 ## למידה נוספת
 
-### תיעוד רשמי  
-- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)  
-- [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)  
-- [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)  
-- [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)  
+### תיעוד רשמי
+- [זהות מנוהלת של Azure](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [RBAC ב-Azure](https://learn.microsoft.com/azure/role-based-access-control/overview)
+- [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
+- [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
 
-### תיעוד SDK  
-- [@azure/identity (Node.js)](https://www.npmjs.com/package/@azure/identity)  
-- [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)  
-- [azure-identity (Python)](https://pypi.org/project/azure-identity/)  
+### תיעוד SDK
+- [@azure/identity (Node.js)](https://www.npmjs.com/package/@azure/identity)
+- [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
+- [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### שלבים הבאים בקורס זה  
-- ← הקודם: [ניהול תצורה](configuration.md)  
-- → הבא: [הפרויקט הראשון](first-project.md)  
-- 🏠 [בית הקורס](../../README.md)  
+### צעדים הבאים בקורס זה
+- ← קודם: [ניהול תצורה](configuration.md)
+- → הבא: [תשתית כקוד](../chapter-04-infrastructure/README.md)
+- 🏠 [בית הקורס](../../README.md)
 
-### דוגמאות קשורות  
-- [דוגמת שיחה עם Microsoft Foundry Models](../../../../examples/azure-openai-chat) - משתמש בזהות מנוהלת עבור Microsoft Foundry Models  
-- [דוגמת מיקרוסרביסים](../../../../examples/microservices) - תבניות אימות מרובות שירותים  
+### דוגמאות קשורות
+- [דוגמת שיחה עם דגמי Microsoft Foundry](../../../../examples/azure-openai-chat) - משתמש בזהות מנוהלת עבור Microsoft Foundry Models
+- [דוגמת מיקרוסרוויסים](../../../../examples/microservices) - דפוסי הזדהות בין-שירותיים מרובי שירותים
 
 ---
 
 ## סיכום
 
-**למדת:**  
-- ✅ שלוש תבניות אימות (מיתרי חיבור, Key Vault, זהות מנוהלת)  
-- ✅ איך להפעיל ולקנפג זהות מנוהלת ב-AZD  
-- ✅ הקצאות תפקידי RBAC לשירותי Azure  
-- ✅ אינטגרציה עם Key Vault לסודות צד שלישי  
-- ✅ זהויות שהוקצו למשתמש לעומת זהויות שהוקצו למערכת  
-- ✅ טובות אבטחה ופתרון בעיות  
+**למדת:**
+- ✅ שלושה דפוסי הזדהות (מחרוזות חיבור, Key Vault, זהות מנוהלת)
+- ✅ כיצד להפעיל ולתצור זהות מנוהלת ב-AZD
+- ✅ הקצאת תפקידי RBAC לשירותי Azure
+- ✅ שילוב Key Vault לסודות צד שלישי
+- ✅ זהויות מוקצות למשתמש לעומת מוקצות למערכת
+- ✅ שיטות אבטחה מומלצות ופתרון תקלות
 
-**נקודות עיקריות:**  
-1. **תמיד השתמש בזהות מנוהלת בייצור** - אפס סודות, סיבוב אוטומטי  
-2. **השתמש בתפקידי RBAC עם הרשאות מינימליות** - הענק רק הרשאות נחוצות  
-3. **אחסן מפתחות צד שלישי ב-Key Vault** - ניהול סודי מרוכז  
-4. **הפרד זהויות לפי סביבה** - בידוד פיתוח, סטייג', ייצור  
-5. **הפעל רישום ביקורת** - מעקב מי גישה ומה  
+**נקודות מפתח:**
+1. **תמיד השתמש בזהות מנוהלת בסביבת הייצור** - ללא סודות, סיבוב אוטומטי
+2. **השתמש בתפקידי RBAC עם ההרשאות המינימליות** - הענק רק הרשאות נחוצות
+3. **אחסן מפתחות צד שלישי ב-Key Vault** - ניהול סודות מרוכז
+4. **זהויות מופרדות לפי סביבה** - הפרדה בין פיתוח, בדיקה וייצור
+5. **אפשר רישום ביקורת** - מעקב אחרי מי גישש למה
 
-**שלבים הבאים:**  
-1. השלם את התרגילים הפרקטיים למעלה  
-2. העבר אפליקציה קיימת ממיתרי חיבור לזהות מנוהלת  
-3. בנה את פרויקט AZD ראשון שלך עם אבטחה מהיום הראשון: [הפרויקט הראשון](first-project.md)
+**השלבים הבאים:**
+1. השלם את התרגילים המעשים למעלה
+2. העבר אפליקציה קיימת ממחרוזות חיבור לזהות מנוהלת
+3. חזור על תהליך הפריסה למתחילים: [פרויקט ראשון](../chapter-01-foundation/first-project.md)
 
 ---
 

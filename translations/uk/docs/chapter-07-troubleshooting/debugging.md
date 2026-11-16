@@ -1,77 +1,72 @@
 # Посібник з налагодження для розгортань AZD
 
 **Навігація по розділах:**
-- **📚 Головна сторінка курсу**: [AZD для початківців](../../README.md)
-- **📖 Поточний розділ**: Розділ 7 - Усунення несправностей та налагодження
-- **⬅️ Попередній**: [Поширені проблеми](common-issues.md)
-- **➡️ Наступний**: [Усунення несправностей для ШІ](ai-troubleshooting.md)
-- **🚀 Наступний розділ**: [Розділ 8: Виробничі та корпоративні шаблони](../chapter-08-production/production-ai-practices.md)
+- **📚 Домашня сторінка курсу**: [AZD для початківців](../../README.md)
+- **📖 Поточний розділ**: Розділ 7 - Вирішення проблем та налагодження
+- **⬅️ Попередній**: [Типові проблеми](common-issues.md)
+- **➡️ Наступний**: [Вирішення проблем конкретно для ШІ](ai-troubleshooting.md)
+- **🚀 Наступний розділ**: [Розділ 8: Продакшн та корпоративні шаблони](../chapter-08-production/production-ai-practices.md)
 
 ## Вступ
 
-Цей всебічний посібник надає просунуті стратегії налагодження, інструменти та методики для діагностики й вирішення складних проблем з розгортаннями за допомогою Azure Developer CLI. Навчіться системним методам усунення несправностей, технікам аналізу журналів, профілюванню продуктивності та просунутим діагностичним інструментам для ефективного вирішення проблем із розгортанням і під час виконання.
+Цей ґрунтовний посібник надає розширені стратегії налагодження, інструменти та методи для діагностики і вирішення складних проблем з розгортаннями Azure Developer CLI. Навчіться системним методикам виправлення помилок, аналізу журналів, профілювання продуктивності та розширеним діагностичним інструментам для ефективного вирішення проблем з розгортанням та під час роботи.
 
-## Цілі навчання
+## Навчальні цілі
 
 Після проходження цього посібника ви:
-- Оволодієте системними методиками налагодження проблем Azure Developer CLI
-- Зрозумієте налаштування розширеного логування та техніки аналізу журналів
+- Оволодієте системними методами налагодження проблем Azure Developer CLI
+- Зрозумієте розширені налаштування журналювання та методики аналізу логів
 - Реалізуєте стратегії профілювання продуктивності та моніторингу
-- Використовуватимете діагностичні інструменти та служби Azure для розв’язання складних проблем
-- Застосовуватимете методики налагодження мережі та безпеки
-- Налаштуєте всебічний моніторинг і оповіщення для проактивного виявлення проблем
+- Використовуватимете діагностичні інструменти та сервіси Azure для розв’язання складних проблем
+- Застосуєте методики налагодження мережі та безпеки
+- Налаштуєте комплексний моніторинг і сповіщення для проактивного виявлення проблем
 
 ## Результати навчання
 
-Після завершення ви зможете:
-- Застосовувати методологію TRIAGE для систематичного налагодження складних проблем розгортання
-- Налаштовувати та аналізувати всебічну інформацію з логування і трасування
-- Ефективно використовувати Azure Monitor, Application Insights та діагностичні інструменти
-- Самостійно налагоджувати проблеми з мережею, автентифікацією та дозволами
-- Реалізовувати моніторинг продуктивності та стратегії оптимізації
-- Створювати кастомні скрипти налагодження та автоматизацію для повторюваних проблем
+По завершенню ви зможете:
+- Використовувати методику TRIAGE для системного налагодження складних проблем із розгортанням
+- Налаштовувати та аналізувати комплексну інформацію журналювання і трасування
+- Ефективно користуватися Azure Monitor, Application Insights та діагностичними інструментами
+- Самостійно налагоджувати проблеми мережевої підключеності, автентифікації та дозволів
+- Реалізовувати стратегії моніторингу продуктивності та оптимізації
+- Створювати власні скрипти для налагодження та автоматизації повторюваних проблем
 
-## Методологія налагодження
+## Методика налагодження
 
 ### Підхід TRIAGE
-- **T**ime: Коли почалася проблема?
-- **R**eproduce: Чи можна її послідовно відтворити?
-- **I**solate: Який компонент дає збій?
-- **A**nalyze: Що повідомляють журнали?
-- **G**ather: Зберіть всю релевантну інформацію
-- **E**scalate: Коли звертатися по додаткову допомогу
+- **T**ime (Час): Коли почалася проблема?
+- **R**eproduce (Відтворити): Чи вдається відтворити її стабільно?
+- **I**solate (Ізолювати): Який компонент виходить з ладу?
+- **A**nalyze (Аналізувати): Що говорять логи?
+- **G**ather (Зібрати): Зберіть всю релевантну інформацію
+- **E**scalate (Ескалувати): Коли звертатися за додатковою допомогою
 
 ## Увімкнення режиму налагодження
 
-### Змінні середовища
+> **Обсяг:** Це приклади для адаптації, а не набір скриптів. Замініть імена/ID ресурсів; використовуйте Bash для блоків shell. Результати `--debug` та значення середовища можуть містити конфіденційну інформацію — перегляньте/видаліть перед публікацією. Приклади, що розгортають, відкочують або змінюють конфігурацію, вимагають явного схвалення оператора.
+
+### Змінні оточення
 ```bash
-# Увімкнути повне налагодження
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Налагодження Azure CLI
-export AZURE_CLI_DIAGNOSTICS=true
-
-# Вимкнути телеметрію для чистішого виводу
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Конфігурація налагодження
 ```bash
-# Встановити конфігурацію налагодження глобально
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# Увімкнути трасове логування
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
 
-## 📊 Техніки аналізу журналів
+`azd config set` може зберігати довільні ключі; це не робить `debug.enabled`, `debug.logLevel` або `trace.outputPath` підтримуваними параметрами. Використовуйте прапорець `--debug` в опублікованій команді.
 
-### Розуміння рівнів логів
+## 📊 Методи аналізу журналів
+
+### Розуміння рівнів журналу
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Структурований аналіз логів
+### Структурований аналіз журналів
 ```bash
-# Переглянути журнали за допомогою Azure Monitor (через azd monitor)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# Переглядайте журнали застосунку в реальному часі
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# Для детального аналізу журналів використовуйте Azure CLI з вашим App Service або Container App:
-# Журнали App Service
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Журнали Container App
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# Експортуйте журнали Application Insights для аналізу
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
 ### Кореляція логів
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Корелює журнали між службами за допомогою Azure Monitor
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Пошук пов'язаних журналів в Application Insights
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Пошук журналів активності Azure
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
 ## 🛠️ Розширені інструменти налагодження
 
 ### Запити Azure Resource Graph
 ```bash
-# Запит ресурсів за тегами
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Знайти невдалі розгортання
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Перевірити стан ресурсу
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Налагодження мережі
 ```bash
-# Перевірити з'єднання між сервісами
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# Використання
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Налагодження контейнерів
 ```bash
-# Налагодження проблем додатку в контейнері
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -183,10 +180,10 @@ debug_container() {
 
 ### Налагодження підключення до бази даних
 ```bash
-# Налагодження підключення до бази даних
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -204,22 +201,11 @@ debug_database() {
 
 ### Моніторинг продуктивності додатків
 ```bash
-# Увімкнути налагодження Application Insights
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# Користувацький моніторинг продуктивності
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -238,23 +226,21 @@ monitor_performance() {
 
 ### Аналіз використання ресурсів
 ```bash
-# Контролювати використання ресурсів
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Налаштувати середовище налагодження
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# Отримати кінцеві точки сервісу
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Перевірити кінцеві точки стану
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# Запустити тести
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Запустити спеціальні інтеграційні тести
+# Run custom integration tests
 npm run test:integration
 ```
 
-### Навантажувальне тестування задля налагодження
+### Навантажувальне тестування для налагодження
 ```bash
-# Простий навантажувальний тест для виявлення вузьких місць продуктивності
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,14 +307,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Використовує Apache Bench (встановлення: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Отримати ключові метрики
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Перевірити на наявність збоїв
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -337,26 +323,24 @@ load_test() {
 
 ### Налагодження шаблонів Bicep
 ```bash
-# Перевірити шаблони Bicep із детальним виводом
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Перевірка синтаксису
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Лінт-перевірка
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # Розгортання в режимі what-if
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# Налагодження розгортання шаблону
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,52 +361,44 @@ debug_deployment() {
 
 ### Аналіз стану ресурсів
 ```bash
-# Аналізувати стани ресурсів на предмет невідповідностей
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # Перелічити всі ресурси з їх станами
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Перевірити на наявність несправних ресурсів
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
 ## 🔒 Налагодження безпеки
 
-### Налагодження потоку аутентифікації
+### Налагодження потоку автентифікації
 ```bash
-# Налагодження автентифікації Azure
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # Декодувати JWT-токен (потребує jq та base64)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Налагодження доступу до Key Vault
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,14 +416,14 @@ debug_keyvault() {
 
 ### Налагодження мережевої безпеки
 ```bash
-# Налагодити групи мережевої безпеки
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Перевірити правила безпеки
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 Налагодження, специфічне для додатків
+## 📱 Налагодження специфічне для додатків
 
 ### Налагодження додатків Node.js
 ```javascript
-// debug-middleware.js - проміжне ПЗ для налагодження Express
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Логувати деталі запиту
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // Перевизначити res.json для логування відповідей
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Налагодження запитів до бази даних
+### Налагодження SQL-запитів
 ```javascript
-// database-debug.js - Утиліти налагодження бази даних
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Процедури екстреного налагодження
+## 🚨 Процедури аварійного налагодження
 
-### Реакція на проблеми в продакшн
+### Реагування на проблеми у продакшні
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Аварійне налагодження у виробничому середовищі
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Переключитися на правильне середовище
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# Зібрати критичну інформацію
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# Використовувати Azure Monitor для журналів помилок
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
 ### Процедури відкату
 ```bash
-# Швидкий скрипт відкату
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # Переключити середовище
+    # Switch environment
     azd env select "$environment"
     
-    # Відкат за допомогою Git (AZD не має вбудованого відкату)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # Перевірити відкат
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # Протестувати критичні кінцеві точки
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
+Цей відкат коду лише не повертає інфраструктуру, міграції бази даних або секрети. Використовуйте чисте робоче дерево, зафіксуйте початковий коміт і відновіть його пізніше; команда перевіряє вибраний коміт у поточному репозиторії.
+
 ## 📊 Панелі налагодження
 
 ### Користувацька панель моніторингу
 ```bash
-# Створити запити Application Insights для налагодження
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # Запит для помилок
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Запит для проблем з продуктивністю
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Запит для збоїв залежностей
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Агрегація логів
+### Агрегація журналів
 ```bash
-# Агрегувати журнали з кількох джерел Azure
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,6 +630,7 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
@@ -662,11 +639,11 @@ aggregate_logs() {
 
 ## 🔗 Розширені ресурси
 
-### Користувацькі скрипти налагодження
+### Власні скрипти налагодження
 Створіть директорію `scripts/debug/` з:
-- `health-check.sh` - Комплексна перевірка працездатності
+- `health-check.sh` - Комплексна перевірка здоров'я
 - `performance-test.sh` - Автоматизоване тестування продуктивності
-- `log-analyzer.py` - Розширений парсинг та аналіз логів
+- `log-analyzer.py` - Розширений аналіз та парсинг логів
 - `resource-validator.sh` - Валідація інфраструктури
 
 ### Інтеграція моніторингу
@@ -676,6 +653,7 @@ hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -688,34 +666,34 @@ hooks:
 
 ## Найкращі практики
 
-1. **Завжди вмикайте детальне логування** в непродукційних середовищах
-2. **Створюйте відтворювані тестові випадки** для проблем
-3. **Документуйте процедури налагодження** для вашої команди
+1. **Завжди увімкнюйте журналювання налагодження** в непроизводчих середовищах
+2. **Створюйте відтворювані тестові кейси** для проблем
+3. **Документуйте процедури налагодження** для своєї команди
 4. **Автоматизуйте перевірки стану** та моніторинг
-5. **Підтримуйте інструменти налагодження в актуальному стані** відповідно до змін у додатку
-6. **Відпрацьовуйте процедури налагодження** у періоди без інцидентів
+5. **Підтримуйте інструменти налагодження в актуальному стані** разом зі змінами додатка
+6. **Практикуйте процедури налагодження** у позааварійний час
 
 ## Наступні кроки
 
-- [Планування ресурсів](../chapter-06-pre-deployment/capacity-planning.md) - Планування вимог до ресурсів
-- [Вибір SKU](../chapter-06-pre-deployment/sku-selection.md) - Виберіть відповідні рівні сервісу
-- [Перевірки перед запуском](../chapter-06-pre-deployment/preflight-checks.md) - Валідація перед розгортанням
-- [Шпаргалка](../../resources/cheat-sheet.md) - Швидкі довідкові команди
+- [Планування потужності](../chapter-06-pre-deployment/capacity-planning.md) - Плануйте вимоги до ресурсів
+- [Вибір SKU](../chapter-06-pre-deployment/sku-selection.md) - Обирайте відповідні рівні сервісу
+- [Передрейдові перевірки](../chapter-06-pre-deployment/preflight-checks.md) - Валідація перед розгортанням
+- [Шпаргалка](../../resources/cheat-sheet.md) - Команди швидкого доступу
 
 ---
 
-**Пам'ятайте**: Добре налагодження означає систематичність, ретельність і терпіння. Ці інструменти та методики допоможуть діагностувати проблеми швидше та ефективніше.
+**Пам’ятайте**: Хороше налагодження — це системність, ретельність і терпіння. Ці інструменти та методики допоможуть вам швидше і ефективніше діагностувати проблеми.
 
 ---
 
 **Навігація**
-- **Попередній урок**: [Поширені проблеми](common-issues.md)
+- **Попередній урок**: [Типові проблеми](common-issues.md)
 
-- **Наступний урок**: [Планування ресурсів](../chapter-06-pre-deployment/capacity-planning.md)
+- **Наступний урок**: [Планування потужності](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Відмова від відповідальності:
-Цей документ було перекладено із використанням сервісу машинного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, зверніть увагу, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ його рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується звернутися до професійного перекладача. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
+**Відмова від відповідальності**:
+Цей документ було перекладено за допомогою сервісу штучного інтелекту для перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

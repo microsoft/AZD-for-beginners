@@ -1,22 +1,22 @@
 # Rozdział 1: Podstawy i szybki start
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 30-45 minut | **⭐ Poziom**: Początkujący
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 75-120 minut, łącznie z pierwszym wdrożeniem; dodatkowe ćwiczenia zajmują więcej czasu | **⭐ Stopień trudności**: Początkujący
 
 ---
 
 ## Przegląd
 
-Ten rozdział wprowadza podstawy Azure Developer CLI (azd). Nauczysz się podstawowych pojęć, zainstalujesz narzędzia i wdrożysz swoją pierwszą aplikację do Azure.
+Ten rozdział wprowadza podstawy Azure Developer CLI (azd). Poznasz podstawowe koncepcje, zainstalujesz narzędzia i wdrożysz swoją pierwszą aplikację w Azure.
 
-> Potwierdzono na `azd 1.27.1` w lipcu 2026.
+> Cel przeglądu poleceń i konfiguracji: `azd 1.37.2` (listopad 2026). Podczas przeglądu nie przeprowadzono rzeczywistego uruchamiania Azure.
 
 ## Cele nauki
 
 Po ukończeniu tego rozdziału będziesz:
 - Rozumieć, czym jest Azure Developer CLI i jak różni się od Azure CLI
-- Instalować i konfigurować AZD na swojej platformie
-- Wdrażać swoją pierwszą aplikację do Azure za pomocą `azd up`
-- Sprzątać zasoby za pomocą `azd down`
+- Zainstalujesz i skonfigurujesz AZD na swojej platformie
+- Wdrożysz swoją pierwszą aplikację w Azure za pomocą `azd up`
+- Posprzątasz zasoby za pomocą `azd down`
 
 ---
 
@@ -24,17 +24,17 @@ Po ukończeniu tego rozdziału będziesz:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Podstawy AZD](azd-basics.md) | Podstawowe pojęcia, terminologia i struktura projektu | 15 min |
-| 2 | [Instalacja i konfiguracja](installation.md) | Przewodniki instalacji specyficzne dla platformy | 10 min |
-| 3 | [Twój pierwszy projekt](first-project.md) | Praktycznie: wdrożenie aplikacji webowej do Azure | 20 min |
-| 4 | [Dodaj swoją aplikację](bring-your-own-app.md) | Dodaj azd do istniejącego projektu, który już masz | 15 min |
-| 5 | [Dev Containers i Codespaces](dev-containers.md) | Powtarzalne środowiska azd z dev containers | 15 min |
+| 1 | [Podstawy AZD](azd-basics.md) | Podstawowe koncepcje, terminologia i struktura projektu | 15 min |
+| 2 | [Instalacja i konfiguracja](installation.md) | Poradniki instalacji specyficzne dla platform | 10 min |
+| 3 | [Twój pierwszy projekt](first-project.md) | Praktyczne: Wdrożenie aplikacji webowej do Azure | 20 min |
+| 4 | [Dodaj własną aplikację](bring-your-own-app.md) | Dodaj azd do istniejącego projektu, który już posiadasz | 15 min |
+| 5 | [Kontenery deweloperskie i Codespaces](dev-containers.md) | Powtarzalne środowiska azd z kontenerami deweloperskimi | 15 min |
 
 ---
 
-## ✅ Zacznij tutaj: Sprawdź swoje środowisko
+## ✅ Zaczynaj tutaj: Sprawdź swoje środowisko
 
-Zanim zaczniesz, potwierdź, że Twoja lokalna maszyna jest gotowa dla szablonu z Rozdziału 1:
+Przed rozpoczęciem upewnij się, że twój lokalny komputer jest gotowy na szablon Rozdział 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Zanim zaczniesz, potwierdź, że Twoja lokalna maszyna jest gotowa dla szablonu 
 bash ./validate-setup.sh
 ```
 
-Jeśli skrypt zgłasza brakujące narzędzia, najpierw je zainstaluj, a następnie kontynuuj rozdział.
+Jeśli skrypt zgłasza brakujące narzędzia, najpierw je napraw, a następnie kontynuuj rozdział.
 
 ---
 
-## 🚀 Szybki start
+## 🚀 Szybki Start
 
 ```bash
-# Sprawdź instalację
+# Check installation
 azd version
 
-# Uwierzytelnij się dla AZD
-# Opcjonalnie: az login, jeśli planujesz bezpośrednio uruchamiać polecenia Azure CLI
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Wdróż swoją pierwszą aplikację
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Posprzątaj po zakończeniu pracy
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -75,11 +77,11 @@ azd down --force --purge
 Po ukończeniu tego rozdziału powinieneś być w stanie:
 
 ```bash
-azd version              # Pokazuje zainstalowaną wersję
-azd init --template todo-nodejs-mongo  # Inicjalizuje projekt
-azd up                   # Wdraża do Azure
-azd show                 # Wyświetla URL działającej aplikacji
-azd down --force --purge # Czyści zasoby
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -88,16 +90,16 @@ azd down --force --purge # Czyści zasoby
 
 | Kierunek | Rozdział |
 |-----------|---------|
-| **Następny** | [Rozdział 2: AI-Pierwszy rozwój](../chapter-02-ai-development/README.md) |
+| **Dalej** | [Rozdział 2: Rozwój AI-First](../chapter-02-ai-development/README.md) |
 | **Przejdź do** | [Rozdział 3: Konfiguracja](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Powiązane zasoby
 
-- [Polecenia – ściągawka](../../resources/cheat-sheet.md)
+- [Karta ściągawki poleceń](../../resources/cheat-sheet.md)
 - [FAQ](../../resources/faq.md)
-- [Słownik terminów](../../resources/glossary.md)
+- [Słownik pojęć](../../resources/glossary.md)
 
 ---
 

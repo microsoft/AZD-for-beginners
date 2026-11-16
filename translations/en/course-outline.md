@@ -6,7 +6,7 @@ Master Azure Developer CLI (azd) through structured chapters designed for progre
 
 ### Why This Course is Essential for Modern Developers
 
-Based on Microsoft Foundry Discord community insights, **45% of developers want to use AZD for AI workloads** but encounter challenges with:
+Developers deploying AI workloads commonly need guidance on:
 - Complex multi-service AI architectures
 - Production AI deployment best practices  
 - Azure AI service integration and configuration
@@ -127,7 +127,7 @@ cd azd-for-beginners/workshop
 **For Learners:**
 - **Interactive Workshop Environment**: [Workshop Materials](workshop/README.md) - Browser-based learning platform
 - **Step-by-Step Instructions**: [Guided Exercises](../../workshop/docs/instructions) - Detailed implementation walkthroughs  
-- **Reference Documentation**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-focused deep dives
+- **Reference Documentation**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - AI-focused deep dives
 - **Community Resources**: Azure Discord channels, GitHub discussions, and expert support
 
 #### 🏢 Enterprise Workshop Implementation
@@ -164,9 +164,9 @@ cd azd-for-beginners/workshop
 - Core concepts and terminology
 
 #### Learning Resources
-- [AZD Basics](docs/getting-started/azd-basics.md) - Core concepts
-- [Installation & Setup](docs/getting-started/installation.md) - Platform-specific guides
-- [Your First Project](docs/getting-started/first-project.md) - Hands-on tutorial
+- [AZD Basics](docs/chapter-01-foundation/azd-basics.md) - Core concepts
+- [Installation & Setup](docs/chapter-01-foundation/installation.md) - Platform-specific guides
+- [Your First Project](docs/chapter-01-foundation/first-project.md) - Hands-on tutorial
 - [Command Cheat Sheet](resources/cheat-sheet.md) - Quick reference
 
 #### Practical Outcome
@@ -185,9 +185,9 @@ Successfully deploy a simple web application to Azure using AZD
 - RAG (Retrieval-Augmented Generation) patterns
 
 #### Learning Resources
-- [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- [AI Model Deployment](docs/microsoft-foundry/ai-model-deployment.md)
-- [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - **NEW**: Comprehensive 2-3 hour hands-on lab
+- [Microsoft Foundry Integration](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- [AI Model Deployment](docs/chapter-02-ai-development/ai-model-deployment.md)
+- [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - **NEW**: Comprehensive 2-3 hour hands-on lab
 - [Interactive Workshop Guide](workshop/README.md) - **NEW**: Browser-based workshop with MkDocs preview
 - [Microsoft Foundry Templates](README.md#featured-microsoft-foundry-templates)
 - [Workshop Instructions](../../workshop/docs/instructions) - **NEW**: Step-by-step guided exercises
@@ -218,8 +218,8 @@ Deploy and configure an AI-powered chat application with RAG capabilities
 - Multi-environment deployments
 
 #### Learning Resources
-- [Configuration Guide](docs/getting-started/configuration.md) - Environment setup
-- [Authentication & Security Patterns](docs/getting-started/authsecurity.md) - Managed identity and Key Vault integration
+- [Configuration Guide](docs/chapter-03-configuration/configuration.md) - Environment setup
+- [Authentication & Security Patterns](docs/chapter-03-configuration/authsecurity.md) - Managed identity and Key Vault integration
 - Multi-environment examples
 
 #### Practical Outcome
@@ -240,8 +240,8 @@ Manage multiple environments with proper authentication and security
 - Containerized application deployment with Azure Container Apps and AZD
 
 #### Learning Resources
-- [Deployment Guide](docs/deployment/deployment-guide.md) - Complete workflows
-- [Provisioning Resources](docs/deployment/provisioning.md) - Resource management
+- [Deployment Guide](docs/chapter-04-infrastructure/deployment-guide.md) - Complete workflows
+- [Provisioning Resources](docs/chapter-04-infrastructure/provisioning.md) - Resource management
 - Container and microservices examples
 - [Container App Examples](examples/container-app/README.md) - Quick start, production, and advanced deployment patterns
 
@@ -263,13 +263,13 @@ Deploy complex multi-service applications using custom infrastructure templates
 - Integrating containerized microservices as part of agent-based solutions
 
 #### Learning Resources
-- [Retail Multi-Agent Solution](examples/retail-scenario.md) - Complete implementation
-- [ARM Template Package](../../examples/retail-multiagent-arm-template) - One-click deployment
+- [Retail Multi-Agent Solution](examples/retail-scenario.md) - Architecture blueprint, not a complete application
+- [ARM Template Package](../../examples/retail-multiagent-arm-template) - Infrastructure scaffold with implementation prerequisites
 - Multi-agent coordination patterns
 - [Microservices Architecture Example](../../examples/container-app/microservices) - Service-to-service communication, async messaging, and production deployment
 
 #### Practical Outcome
-Deploy and manage a production-ready multi-agent AI solution
+Design a multi-agent AI solution and identify the application implementation, validation, and operational work needed beyond provisioning infrastructure
 
 ---
 
@@ -284,11 +284,11 @@ Deploy and manage a production-ready multi-agent AI solution
 - Cost optimization planning
 
 #### Learning Resources
-- [Capacity Planning](docs/pre-deployment/capacity-planning.md) - Resource validation
-- [SKU Selection](docs/pre-deployment/sku-selection.md) - Cost-effective choices
-- [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Automated scripts
-- [Application Insights Integration](docs/pre-deployment/application-insights.md) - Monitoring and observability
-- [Multi-Agent Coordination Patterns](docs/pre-deployment/coordination-patterns.md) - Agent orchestration strategies
+- [Capacity Planning](docs/chapter-06-pre-deployment/capacity-planning.md) - Resource validation
+- [SKU Selection](docs/chapter-06-pre-deployment/sku-selection.md) - Cost-effective choices
+- [Pre-flight Checks](docs/chapter-06-pre-deployment/preflight-checks.md) - Automated scripts
+- [Application Insights Integration](docs/chapter-06-pre-deployment/application-insights.md) - Monitoring and observability
+- [Multi-Agent Coordination Patterns](docs/chapter-06-pre-deployment/coordination-patterns.md) - Agent orchestration strategies
 
 #### Practical Outcome
 Validate and optimize deployments before execution
@@ -306,9 +306,9 @@ Validate and optimize deployments before execution
 - Performance optimization
 
 #### Learning Resources
-- [Common Issues](docs/troubleshooting/common-issues.md) - FAQ and solutions
-- [Debugging Guide](docs/troubleshooting/debugging.md) - Step-by-step strategies
-- [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - AI service problems
+- [Common Issues](docs/chapter-07-troubleshooting/common-issues.md) - FAQ and solutions
+- [Debugging Guide](docs/chapter-07-troubleshooting/debugging.md) - Step-by-step strategies
+- [AI-Specific Troubleshooting](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - AI service problems
 
 #### Practical Outcome
 Independently diagnose and resolve common deployment issues
@@ -328,7 +328,7 @@ Independently diagnose and resolve common deployment issues
 - Best practices for production container app deployments (security, monitoring, cost, CI/CD)
 
 #### Learning Resources
-- [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Enterprise patterns
+- [Production AI Best Practices](docs/chapter-08-production/production-ai-practices.md) - Enterprise patterns
 - Microservices and enterprise examples
 - Monitoring and governance frameworks
 - [Microservices Architecture Example](../../examples/container-app/microservices) - Blue-green/canary deployment, distributed tracing, and cost optimization
@@ -474,7 +474,7 @@ Upon completion of advanced chapters, learners will demonstrate:
 - Evaluate and recommend AI architecture patterns for business requirements
 
 **Learning Verification:**
-- ✅ Deploy complete retail multi-agent solution with ARM templates
+- ✅ Review the retail multi-agent blueprint and distinguish provisioned infrastructure from missing application implementation
 - ✅ Demonstrate agent coordination and workflow orchestration
 - ✅ Complete capacity planning exercises with real resource constraints
 - ✅ Validate deployment readiness through automated pre-flight checks
@@ -552,10 +552,9 @@ Graduates are prepared for advanced specialization in:
 - **Developer Community Leadership**: Contributing to Azure samples and community resources
 - **Corporate Training**: Teaching AZD and AI deployment skills within organizations
 
-
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

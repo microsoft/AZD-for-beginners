@@ -1,69 +1,71 @@
-# సామర్థ్య ప్రణాళిక - Azure వనరు లభ్యత మరియు పరిమితులు
+# సామర్థ్య ప్రణాళిక - Azure వనరు అందుబాటును మరియు పరిమితులు
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD ప్రారంభికులు](../../README.md)
-- **📖 Current Chapter**: అధ్యాయం 6 - ప్రి-డిప్లాయ్‌మెంట్ ధృవీకరణ మరియు ప్రణాళిక
-- **⬅️ Previous Chapter**: [అధ్యాయం 5: బహుళ-ఏజెంట్ AI పరిష్కారాలు](../../examples/retail-scenario.md)
-- **➡️ Next**: [SKU ఎంపిక](sku-selection.md)
-- **🚀 Next Chapter**: [అధ్యాయం 7: సమస్య పరిష్కారం](../chapter-07-troubleshooting/common-issues.md)
+**అధ్యాయం నావిగేషన్:**
+- **📚 కోర్సు హోమ్**: [AZD For Beginners](../../README.md)
+- **📖 ప్రస్తుత అధ్యాయం**: అధ్యాయం 6 - మొదటి-డిప్లాయ్‌మెంట్ ధృవీకరణ & ప్రణాళిక
+- **⬅️ గత అధ్యాయం**: [అధ్యాయం 5: బహుళ-ఏజెంట్ AI పరిష్కారాలు](../../examples/retail-scenario.md)
+- **➡️ తదుపరి**: [SKU ఎంపిక](sku-selection.md)
+- **🚀 తదుపరి అధ్యాయం**: [అధ్యాయం 7: సమస్యల పరిష్కారం](../chapter-07-troubleshooting/common-issues.md)
 
 ## పరిచయం
 
-ఈ విస్తృత గైడ్ Azure Developer CLI తో డిప్లాయ్‌మెంట్ చేయక ముందు Azure వనరు సామర్థ్యాన్ని ప్లాన్ చేయడానికి మరియు ధృవీకరించడానికి సహాయపడుతుంది. విజయవంతమైన డిప్లాయ్‌మెంట్‌లను నిర్ధారించేందుకు ఖాతాదారులను, లభ్యతను మరియు ప్రాంతీయ పరిమితులను ఎలా నిర్ధారించాలో తెలుసుకోండి, ఖర్చులు మరియు పనితీరును ఆప్టిమైజ్ చేయండి. వివిధ అప్లికేషన్ ఆర్కిటెక్చర్ల మరియు స్కేలింగ్ సందర్భాల కోసం సామర్థ్య ప్రణాళిక సాంకేతికతలను నెరిపించండి.
+ఈ సమగ్ర గైడ్ Azure Developer CLI ను ఉపయోగించి డిప్లాయ్‌మెంట్ ముందు Azure వనరుల సామర్థ్యాన్ని ప్రణాళిక చేసి ధృవీకరించడంలో సహాయపడుతుంది. ఉత్తమ ఫలితాల కోసం క్వోటాలు, అందుబాటు, ప్రాంతీయ పరిమితులను అంచనా వేయడం మరియు ఖర్చులు, పనితీరు మెరుగుపరచడం నేర్చుకోండి. వివిధ అప్లికేషన్ శిల్పాలు మరియు స్కేలింగ్ పరిస్థితుల కోసం సామర్థ్య ప్రణాళిక సాంకేతికతలను ఆర్జించండి.
 
-## నేర్చుకునే లక్ష్యాలు
+## అభ్యాస లక్ష్యాలు
 
-ఈ గైడ్ పూర్తి చేసిన తర్వాత, మీరు:
-- Azure క్వోటాలు, పరిమితులు మరియు ప్రాంతీయ లభ్యత 관련 పరిమితుల గురించి అర్థం చేసుకుంటారు
-- డిప్లాయ్‌మెంట్‌కు ముందు వనరు లభ్యత మరియు సామర్థ్యాన్ని పరిశీలించే సాంకేతికతలను ఆధిపత్యం చేస్తారు
-- ఆటోమెటెడ్ సామర్థ్య ధృవీకరణ మరియు మానిటరింగ్ వ్యూహాలను అమలు చేస్తారు
-- సరైన వనరు సైజింగ్ మరియు స్కేలింగ్ పరిగణనలు ఉపయోగించి అప్లికేషన్లను డిజైన్ చేస్తారు
-- తెలివైన సామర్థ్య ప్రణాళిక ద్వారా ఖర్చు ఆప్టిమైజేషన్ వ్యూహాలను అన్వయిస్తారు
-- క్వోటా వినియోగం మరియు వనరు లభ్యత కోసం అలెర్ట్‌లు మరియు మానిటరింగ్‌ను కాన్ఫిగర్ చేస్తారు
+ఈ గైడ్ పూర్తి చేసిన తరువాత మీరు:
+- Azure క్వోటాలు, పరిమితులు మరియు ప్రాంతీయ అందుబాటు నియమాలను అర్థం చేసుకోవాలి
+- డిప్లాయ్‌మెంట్ ముందు వనరు అందుబాటు మరియు సామర్థ్యాన్ని తనిఖీ చేయడానికి సాంకేతికతలపై పట్టండి
+- ఆటోమేటిక్ సామర్థ్య ధృవీకరణ మరియు పర్యవేక్షణ వ్యూహాలను అమలు చేయండి
+- సరైన వనరు కొలత మరియు స్కేలింగ్ పరిగణనలతో అప్లికేషన్లను రూపకల్పన చేయండి
+- తెలివైన సామర్థ్య ప్రణాళిక ద్వారా ఖర్చు ఆప్టిమైజేషన్ వ్యూహాలను వర్తించండి
+- క్వోటా వాడకం మరియు వనరు అందుబాటు గురించి అలెర్ట్లు మరియు పర్యవేక్షణను సెట్ చేయండి
 
-## నేర్పుకునే ఫలితాలు
+## అభ్యాస ఫలితాలు
 
-పూర్తిగా చేసిన తరువాత, మీరు సాధించగలరు:
-- డిప్లాయ్‌మెంట్‌కు ముందుగా Azure వనరు సామర్థ్య అవసరాలను ఆంకితం చేసి ధృవీకరించగలరు
-- సామర్థ్య తనిఖీలు మరియు క్వోటా మానిటరింగ్ కోసం ఆటోమెటెడ్ స్క్రిప్ట్‌లు సృష్టించగలరు
-- ప్రాంతీయ మరియు సబ్‌స్క్రిప్షన్ పరిమితులను పరిగణనలోకి తీసుకునే స్కేలబుల్ ఆర్కిటెక్చర్లు డిజైన్ చేయగలరు
-- వివిధ వర్క్‌లోడ్ రకాల కోసం ఖర్చు-సరైన వనరు సైజింగ్ వ్యూహాలను అమలు చేయగలరు
-- సామర్థ్య సంబంధిత సమస్యల కోసం ప్రాక్టివ్ మానిటరింగ్ మరియు అలర్టింగ్‌ను కాన్ఫిగర్ చేయగలరు
-- సరైన సామర్థ్య పంపణీతో బహు-ప్రాంత డిప్లాయ్‌మెంట్‌లను ప్లాన్ చేయగలరు
+పూర్తి చేసిన తరువాత, మీరు చేయగలిగే పనులు:
+- డిప్లాయ్‌మెంట్ ముందు Azure వనరుల సామర్థ్య అవసరాలను అంచనా వేత్తు మరియు ధృవీకరించండి
+- సామర్థ్య తనిఖీలు మరియు క్వోటా పర్యవేక్షణ కోసం ఆటోమేటెడ్ స్క్రిప్ట్స్ సృష్టించండి
+- ప్రాంతీయ మరియు సబ్‌స్క్రిప్షన్ పరిమితులను పరిగణలోకి తీసుకొని స్కేలబుల్ ఆర్కిటెక్చర్లను డిజైన్ చేయండి
+- వివిధ వర్క్లోడ్ రకాల కోసం ఖర్చు-సమర్థవంతమైన వనరు కొలత వ్యూహాలను అమలు చేయండి
+- సామర్థ్య సంబంధ సమస్యల కోసం ప్రాథమిక పర్యవేక్షణ మరియు అలెర్టింగ్‌ను సెట్ చేయండి
+- సరైన సామర్థ్య పంపిణీతో బహు-ప్రాంతీయ డిప్లాయ్‌మెంట్ల ను ప్రణాళిక చేయండి
 
-## సామర్థ్య ప్రణాళిక ఎందుకు ముఖ్యమో
+## సామర్థ్య ప్రణాళిక ఎందుకు ముఖ్యం
 
-అప్లికేషన్లు డిప్లాయ్ చేయక ముందే, మీరు నిర్ధారించుకోవాలి:
-- **ప్రయావశ్యకమైన క్వోటాలు** అవసరమైన వనరులకు
-- **వనరు లభ్యత** మీ లక్ష్య ప్రాంతంలో
-- **సేవా టియర్ లభ్యత** మీ సబ్స్క్రిప్షన్ రకానికి
-- **అంచనా పెట్టిన ట్రాఫిక్ కోసం నెట్‌వర్క్ సామర్థ్యం**
-- **సరైన సైజింగ్ ద్వారా ఖర్చు ఆప్టిమైజేషన్**
+> **వ్యాప్తి:** ఈ Bash ఉదాహరణల కోసం Azure CLI, `jq` మరియు ఎంపికైన సబ్‌స్క్రిప్షన్ అవసరం. ఇవి ప్రచురించిన ఆఫరింగులు మరియు క్వోటాను పరిశీలిస్తాయి; ఇవి భౌతిక సామర్థ్యాన్ని నిరూపించవు లేదా వనరులను రిజర్వ్ చేయవు. మీ స్వంత ప్రాజెక్ట్‌లో స్నిపెట్లను సేవ్/అనుకూలపరిచండి—క్రింద ఉన్న స్క్రిప్ట్/కాన్ఫిగ్ ఫైల్ పేర్లు ఉదాహరణలు మాత్రమే, అప్‌లోడ్ చేయబడలేదు. VM క్వోటాలు కంటెయినర్ యాప్స్, యాప్స్ సర్వీస్, లేదా Azure OpenAI క్వోటాలకు వర్తించవు.
 
-## 📊 Azure క్వోటాలు మరియు పరిమితుల అవగాహన
+అప్లికేషన్లను డిప్లాయ్‌ చేయడానికి ముందు, మీరు నిర్ధారించుకోవాలి:
+- **అవసరమైన వనరులకు సరిపోని క్వోటాలు**
+- **మీ లక్ష్య ప్రాంతంలో వనరు అందుబాటు**
+- **మీ సబ్‌స్క్రిప్షన్ రకం కోసం సర్వీస్ టియర్ అందుబాటు**
+- **అంచనా ట్రాఫిక్ కోసం నెట్వర్క్ సామర్థ్యం**
+- **సరైన కొలత ద్వారా ఖర్చు ఆప్టిమైజేషన్**
+
+## 📊 Azure క్వోటాలు మరియు పరిమితులను అర్థం చేసుకోండి
 
 ### పరిమితుల రకాలు
-1. **సబ్‌స్క్రిప్షన్-స్తాయి క్వోటాలు** - ప్రతి సబ్‌స్క్రిప్షన్‌కు గరిష్ఠ వనరులు
-2. **ప్రాంతీయ క్వోటాలు** - ప్రతి ప్రాంతానికి గరిష్ఠ వనరులు
-3. **వనరు-నిర్దిష్ట పరిమితులు** - వ్యక్తిగత వనరు రకాల కోసం పరిమితులు
-4. **సేవా టియర్ పరిమితులు** - మీ సేవా ప్రణాళికపై ఆధారపడి పరిమితులు
+1. **సబ్‌స్క్రిప్షన్ స్థాయి క్వోటాలు** - ప్రతి సబ్‌స్క్రిప్షన్‌కు గరిష్ట వనరులు
+2. **ప్రాంతీయ క్వోటాలు** - ప్రతి ప్రాంతానికి గరిష్ట వనరులు
+3. **వనరు-స్పెసిఫిక్ పరిమితులు** - వ్యక్తిగత వనరు రకాలపై పరిమితులు
+4. **సర్వీస్ టియర్ పరిమితులు** - మీ సర్వీస్ ప్లాన్ ఆధారంగా పరిమితులు
 
 ### సాధారణ వనరు క్వోటాలు
 ```bash
-# ప్రస్తుత క్వోటా వినియోగాన్ని తనిఖీ చేయండి
+# Check current quota usage
 az vm list-usage --location eastus2 --output table
 
-# నిర్దిష్ట వనరు క్వోటాలను తనిఖీ చేయండి
+# Check specific resource quotas
 az network list-usages --location eastus2 --output table
-az storage account show-usage --output table
+az storage account show-usage --location eastus2 --output table
 ```
 
-## ప్రి-డిప్లాయ్‌మెంట్ సామర్థ్య పరీక్షలు
+## ముందస్తు-డిప్లాయ్ సామర్థ్య తనిఖీలు
 
-### ఆటోమెటెడ్ సామర్థ్య ధృవీకరణ స్క్రిప్ట్
+### ఆటోమేటెడ్ సామర్థ్య ధృవీకరణ స్క్రిప్ట్
 ```bash
 #!/bin/bash
-# capacity-check.sh - డిప్లాయ్‌మెంట్ ముందు Azure సామర్థ్యాన్ని నిర్ధారించండి
+# capacity-check.sh - Validate Azure capacity before deployment
 
 set -e
 
@@ -74,7 +76,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# క్వోటా వినియోగాన్ని తనిఖీ చేసే ఫంక్షన్
+# Function to check quota usage
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -83,22 +85,26 @@ check_quota() {
     
     case $resource_type in
         "compute")
-            usage=$(az vm list-usage --location "$LOCATION" --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az vm list-usage --location "$LOCATION" --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
         "storage")
-            usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+            usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.current')
             limit=$(echo "$usage" | jq -r '.limit')
             ;;
         "network")
-            usage=$(az network list-usages --location "$LOCATION" --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az network list-usages --location "$LOCATION" --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
     esac
     
+    if ! [[ "$current" =~ ^[0-9]+$ && "$limit" =~ ^[0-9]+$ ]]; then
+        echo "❌ Quota data missing or unrecognized for $resource_type"
+        return 1
+    fi
     available=$((limit - current))
     
     if [ "$available" -ge "$required" ]; then
@@ -109,98 +115,95 @@ check_quota() {
     fi
 }
 
-# వివిధ వనరుల క్వోటాలను తనిఖీ చేయండి
-check_quota "compute" 4      # 4 vCPUలు అవసరం
-check_quota "storage" 2      # 2 స్టోరేజ్ అకౌంట్లు అవసరం
-check_quota "network" 1      # 1 వర్చువల్ నెట్‌వర్క్ అవసరం
+# Check various resource quotas
+check_quota "compute" 4      # Need 4 vCPUs
+check_quota "storage" 2      # Need 2 storage accounts
+check_quota "network" 1      # Need 1 virtual network
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### సేవ-నిర్దిష్ట సామర్థ్య పరీక్షలు
+### సర్వీస్-స్పెసిఫిక్ సామర్థ్య తనిఖీలు
 
-#### App Service సామర్థ్యం
+#### యాప్ సర్వీస్ సామర్థ్యం
 ```bash
-# App Service Plan యొక్క లభ్యతను తనిఖీ చేయండి
+# Check App Service Plan availability
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # ప్రాంతంలో అందుబాటులో ఉన్న SKUs ను తనిఖీ చేయండి
-    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
+    # Check available SKUs in region
+    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location' || name=='$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)']" -o tsv)
     
     if [ -n "$available_skus" ]; then
-        echo "✅ $sku is available in $location"
+        echo "✅ $sku is listed for $location (not a capacity guarantee)"
     else
         echo "❌ $sku is not available in $location"
         
-        # ప్రత్యామ్నాయ ప్రాంతాలను సూచించండి
+        # Suggest alternative regions
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # ప్రస్తుత వినియోగాన్ని తనిఖీ చేయండి
+    # Check current usage
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# వినియోగం
+# Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### డేటాబేస్ సామర్థ్యం
 ```bash
-# PostgreSQL సామర్థ్యాన్ని తనిఖీ చేయండి
+# Check PostgreSQL capacity
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # SKU అందుబాటులో ఉందో తనిఖీ చేయండి
+    # Inspect the nested regional capability catalog; do not assume top-level
+    # entries are VM SKU names. Select supported tier/version/SKU combinations.
     available=$(az postgres flexible-server list-skus --location "$location" \
-        --query "contains([].name, '$sku')" -o tsv)
+        --output json)
     
-    if [ "$available" = "true" ]; then
-        echo "✅ PostgreSQL $sku is available in $location"
+    if [ -n "$available" ] && [ "$available" != "[]" ]; then
+        echo "$available" | jq .
+        echo "Inspect the catalog for $sku; this does not verify physical capacity."
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # అందుబాటులో ఉన్న SKUలను చూపించండి
+        # Show available SKUs
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
-            --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
+            --output json
         return 1
     fi
 }
 
-# Cosmos DB సామర్థ్యాన్ని తనిఖీ చేయండి
+# Check Cosmos DB capacity
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # ప్రాంతం అందుబాటును తనిఖీ చేయండి
-    available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
+    # Check region availability
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    available_regions=$(az cosmosdb locations list --query "[?name=='$display_location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # సర్వర్‌లెస్ మద్దతు ఉన్నదో లేదో తనిఖీ చేయండి (అవసరమైతే)
+        # Check if serverless is supported (if needed)
         if [ "$tier" = "serverless" ]; then
-            serverless_regions=$(az cosmosdb locations list \
-                --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
-            
-            if [ -n "$serverless_regions" ]; then
-                echo "✅ Cosmos DB Serverless is supported in $location"
-            else
-                echo "⚠️  Cosmos DB Serverless may not be supported in $location"
-            fi
+            echo "Verify serverless support and limits separately in Cosmos DB documentation."
+            echo "Availability-zone support is NOT a serverless-support signal."
         fi
     else
         echo "❌ Cosmos DB is not available in $location"
@@ -209,38 +212,33 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Container Apps సామర్థ్యం
+#### కంటెయినర్ యాప్స్ సామర్థ్యం
 ```bash
-# Container Apps సామర్థ్యాన్ని తనిఖీ చేయండి
+# Check Container Apps capacity
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # ప్రాంతంలో Container Apps అందుబాటులో ఉందో కాదో తనిఖీ చేయండి
-    az provider show --namespace Microsoft.App \
-        --query "resourceTypes[?resourceType=='containerApps'].locations" \
-        --output table | grep -q "$location"
-    
-    if [ $? -eq 0 ]; then
+    # Check if Container Apps is available in region
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    if az provider show --namespace Microsoft.App \
+        --query "resourceTypes[?resourceType=='containerApps'].locations[]" \
+        --output tsv | grep -Fxq "$display_location"; then
         echo "✅ Container Apps is available in $location"
         
-        # ప్రస్తుత పర్యావరణాల సంఖ్యను తనిఖీ చేయండి
+        # Check current environment count
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps కు ప్రతి ప్రాంతానికి 15 పర్యావరణాల పరిమితి ఉంది
-        if [ "$current_envs" -lt 15 ]; then
-            echo "✅ Can create more Container App environments"
-        else
-            echo "⚠️  Near Container App environment limit in $location"
-        fi
+        echo "Check Microsoft.App quotas for this subscription/region in Azure Quotas."
+        echo "An environment count alone does not establish available quota."
     else
         echo "❌ Container Apps is not available in $location"
         
-        # అందుబాటులో ఉన్న ప్రాంతాలను చూపించండి
+        # Show available regions
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -250,11 +248,11 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 ప్రాంతీయ లభ్యత ధృవీకరణ
+## 📍 ప్రాంతీయ అందుబాటు ధృవీకరణ
 
-### ప్రాంతం ద్వారా సేవల లభ్యత
+### ప్రాంతం ప్రకారం సర్వీస్ అందుబాటు
 ```bash
-# ప్రాంతాల అంతటా సేవల అందుబాటును తనిఖీ చేయండి
+# Check service availability across regions
 check_service_availability() {
     local service=$1
     
@@ -269,9 +267,8 @@ check_service_availability() {
                 --query "resourceTypes[?resourceType=='containerApps'].locations" -o table
             ;;
         "postgres")
-            az postgres flexible-server list-skus --location eastus2 >/dev/null 2>&1 && \
-            echo "PostgreSQL Flexible Server regions:" && \
-            az account list-locations --query "[?metadata.regionType=='Physical'].{name:name,displayName:displayName}" -o table
+            echo "PostgreSQL offerings for candidate region eastus2:"
+            az postgres flexible-server list-skus --location eastus2 --output json
             ;;
         "cosmosdb")
             az cosmosdb locations list --query "[].{name:name,documentationUrl:documentationUrl}" -o table
@@ -279,18 +276,20 @@ check_service_availability() {
     esac
 }
 
-# అన్ని సేవలను తనిఖీ చేయండి
+# Check all services
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-### ప్రాంతం ఎంపిక కోసం సిఫార్సులు
+### ప్రాంత ఎంపిక చర్చ (ఉదాహరణ)
+
+క్రింది లేబుల్లు అన్వేషణ కోసం సూచనలు, నిర్ధారించిన ధరలు, హార్డ్‌వేర్ లేదా అనుగుణత ర‍్యాంకింగ్‌లు కాదు. ప్రస్తుత ప్రాంతీయ ధరలు మరియు కొలిచిన మధ్యవర్తిత్వాన్ని పోల్చండి. GDPR జర్మనీ ప్రాంతాన్ని తప్పనిసరిగా కోరుకోదు; నివాసం, సేవా ఫీచర్లు, సంస్థ/చట్ట అవసరాలు కలిసి అంచనా వేయాలి.
 ```bash
-# ఆవశ్యకతల ఆధారంగా ఉత్తమ ప్రాంతాలను సిఫార్సు చేయండి
+# Recommend optimal regions based on requirements
 recommend_region() {
-    local requirements=$1  # "తక్కువ ఖర్చు" | "పనితీరు" | "అనుగుణత"
+    local requirements=$1  # "lowcost" | "performance" | "compliance"
     
     echo "Region recommendations for: $requirements"
     
@@ -303,14 +302,14 @@ recommend_region() {
             ;;
         "performance")
             echo "⚡ Performance-optimized regions:"
-            echo "  - East US 2 (Virginia) - Latest hardware"
-            echo "  - West US 2 (Washington) - Latest hardware"
+            echo "  - East US 2 (Virginia) - Measure latency to your users"
+            echo "  - West US 2 (Washington) - Verify required SKUs"
             echo "  - North Europe (Ireland) - For EU users"
             ;;
         "compliance")
             echo "🔒 Compliance-focused regions:"
             echo "  - US Gov regions - For government workloads"
-            echo "  - Germany regions - For GDPR compliance"
+            echo "  - EU regions - Assess residency and contractual requirements"
             echo "  - Australia regions - For data sovereignty"
             ;;
     esac
@@ -321,27 +320,17 @@ recommend_region() {
 
 ### వనరు ఖర్చు అంచనా
 ```bash
-# డిప్లాయ్‌మెంట్ ఖర్చులను అంచనా వేయండి
+# Estimate deployment costs
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # అంచనా కోసం తాత్కాలిక రిసోర్స్ గ్రూప్‌ను సృష్టించండి
-    temp_rg="temp-estimation-$(date +%s)"
-    az group create --name "$temp_rg" --location "$location" >/dev/null
-    
-    # వాలిడేషన్ మోడ్‌లో ఇన్‌ఫ్రాస్ట్రక్చర్‌ను డిప్లాయ్ చేయండి
-    az deployment group validate \
-        --resource-group "$temp_rg" \
-        --template-file infra/main.bicep \
-        --parameters @infra/main.parameters.json \
-        --parameters location="$location" \
-        --query "properties.validatedResources[].{type:type,name:name}" -o table
-    
-    # తాత్కాలిక రిసోర్స్ గ్రూప్‌ను తొలగించండి
-    az group delete --name "$temp_rg" --yes --no-wait
+    # Review declared resources locally. ARM validate/what-if do NOT price them.
+    # Do not create/delete a resource group just to estimate cost.
+    az bicep build --file infra/main.bicep --stdout |
+      jq -r '.resources[] | [.type, (.sku.name // "see module/parameters")] | @tsv'
     
     echo ""
     echo "💡 Use Azure Pricing Calculator for detailed cost estimates:"
@@ -352,12 +341,12 @@ estimate_costs() {
 }
 ```
 
-### SKU ఆప్టిమైజేషన్ సిఫార్సులు
+### SKU ఆప్టిమైజేషన్ సూచనలు
 ```bash
-# అవసరాల ప్రకారం ఉత్తమ SKUs ను సిఫార్సు చేయండి
+# Recommend optimal SKUs based on requirements
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "డెవ్" | "స్టేజింగ్" | "ప్రొడక్షన్"
+    local workload_type=$2  # "dev" | "staging" | "production"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -417,32 +406,33 @@ recommend_sku() {
 }
 ```
 
-## 🚀 ఆటోమెటెడ్ ప్రీ-ఫ్లైట్ చెక్సు
+## 🚀 ఆటోమేటెడ్ ముందస్తు-ఫ్లైట్ తనిఖీలు
 
-### సమగ్ర ప్రీ-ఫ్లైట్ స్క్రిప్ట్
+### సమగ్ర ముందస్తు-ఫ్లైట్ స్క్రిప్ట్
 ```bash
 #!/bin/bash
-# preflight-check.sh - డిప్లాయ్‌మెంట్‌కు ముందు పూర్తి ధృవీకరణ
+# preflight-check.sh - Complete pre-deployment validation
+# Starting-point example: adapt service checks and supply project-specific costs.
 
 set -e
 
-# కాన్ఫిగరేషన్
+# Configuration
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# ఫలితాల కోసం రంగులు
+# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # రంగు లేదు
+NC='\033[0m' # No Color
 
-# లాగ్ ఫంక్షన్లు
+# Logging functions
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# కాన్ఫిగరేషన్ లోడ్ చేయండి
+# Load configuration
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -462,9 +452,10 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# తనిఖీ 1: ప్రామాణీకరణ
+# Check 1: Authentication
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
+    SUBSCRIPTION_ID=$(az account show --query id -o tsv)
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
     log_info "Authenticated with subscription: $SUBSCRIPTION_NAME"
 else
@@ -472,7 +463,7 @@ else
     exit 1
 fi
 
-# తనిఖీ 2: ప్రాంతీయ అందుబాటుదల
+# Check 2: Regional availability
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -481,14 +472,15 @@ else
     exit 1
 fi
 
-# తనిఖీ 3: కోటా ధృవీకరణ
+# Check 3: Quota validation
 log_info "Checking quota availability..."
 
-# vCPU కోటా
+# vCPU quota
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
-    --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
 vcpu_limit=$(echo "$vcpu_usage" | jq -r '.[0].limit')
+[[ "$vcpu_current" =~ ^[0-9]+$ && "$vcpu_limit" =~ ^[0-9]+$ ]] || { log_error "Missing VM quota data"; exit 1; }
 vcpu_available=$((vcpu_limit - vcpu_current))
 
 if [ "$vcpu_available" -ge "$REQUIRED_VCPUS" ]; then
@@ -498,10 +490,11 @@ else
     exit 1
 fi
 
-# స్టోరేజ్ ఖాతా కోటా
-storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+# Storage account quota
+storage_usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
+[[ "$storage_current" =~ ^[0-9]+$ && "$storage_limit" =~ ^[0-9]+$ ]] || { log_error "Missing storage quota data"; exit 1; }
 storage_available=$((storage_limit - storage_current))
 
 if [ "$storage_available" -ge "$REQUIRED_STORAGE" ]; then
@@ -511,13 +504,14 @@ else
     exit 1
 fi
 
-# తనిఖీ 4: సేవా అందుబాటుదల
+# Check 4: Service availability
 log_info "Checking service availability..."
+DISPLAY_LOCATION=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
 
 for service in "${REQUIRED_SERVICES[@]}"; do
     case $service in
         "appservice")
-            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION' || name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "App Service is available in $LOCATION"
             else
                 log_error "App Service is not available in $LOCATION"
@@ -535,7 +529,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
         "containerapp")
             if az provider show --namespace Microsoft.App \
                 --query "resourceTypes[?resourceType=='containerApps'].locations" \
-                --output tsv | grep -q "$LOCATION"; then
+                --output tsv | grep -Fxq "$DISPLAY_LOCATION"; then
                 log_info "Container Apps is available in $LOCATION"
             else
                 log_error "Container Apps is not available in $LOCATION"
@@ -543,22 +537,29 @@ for service in "${REQUIRED_SERVICES[@]}"; do
             fi
             ;;
         "cosmosdb")
-            if az cosmosdb locations list --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az cosmosdb locations list --query "[?name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "Cosmos DB is available in $LOCATION"
             else
                 log_error "Cosmos DB is not available in $LOCATION"
                 exit 1
             fi
             ;;
+        "storage")
+            log_info "Storage account quota checked above; validate the selected SKU separately."
+            ;;
+        *)
+            log_error "No check implemented for service: $service"; exit 1
+            ;;
     esac
 done
 
-# తనిఖీ 5: నెట్‌వర్క్ సామర్థ్యం
+# Check 5: Network capacity
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
-    --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
 vnet_current=$(echo "$vnet_usage" | jq -r '.[0].current')
 vnet_limit=$(echo "$vnet_usage" | jq -r '.[0].limit')
+[[ "$vnet_current" =~ ^[0-9]+$ && "$vnet_limit" =~ ^[0-9]+$ ]] || { log_error "Missing network quota data"; exit 1; }
 vnet_available=$((vnet_limit - vnet_current))
 
 if [ "$vnet_available" -gt 0 ]; then
@@ -567,7 +568,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# తనిఖీ 6: వనరుల నామకరణ ధృవీకరణ
+# Check 6: Resource naming validation
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -579,9 +580,12 @@ else
     exit 1
 fi
 
-# తనిఖీ 7: ఖర్చు అంచనా
+# Check 7: Cost estimation
 log_info "Performing cost estimation..."
-ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
+# Set this from a reviewed Pricing Calculator estimate; no built-in pricing API
+# is implemented by this example.
+: "${ESTIMATED_MONTHLY_COST:?Set ESTIMATED_MONTHLY_COST to your reviewed estimate}"
+[[ "$ESTIMATED_MONTHLY_COST" =~ ^[0-9]+$ ]] || { log_error "Use an integer cost estimate"; exit 1; }
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
 
 if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; then
@@ -594,7 +598,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# తనిఖీ 8: టెంప్లేట్ ధృవీకరణ
+# Check 8: Template validation
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -608,10 +612,10 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# తుది సారాంశం
+# Final summary
 echo "=================================="
-log_info "✅ All pre-flight checks passed!"
-log_info "Ready for deployment to $LOCATION"
+log_info "✅ Implemented checks passed; review remaining service-specific limits."
+log_info "Quota is not a reservation or guarantee of capacity in $LOCATION."
 echo "Next steps:"
 echo "  1. Run 'azd up' to deploy"
 echo "  2. Monitor deployment progress"
@@ -652,31 +656,31 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 డిప్లాయ్‌మెంట్ సమయంలో సామర్థ్యాన్ని పర్యవేక్షించడం
+## 📈 డిప్లాయ్‌మెంట్ సమయంలో సామర్థ్య పర్యవేక్షణ
 
-### రియల్-టైమ్ సామర్థ్యం పర్యవేక్షణ
+### రియల్టైమ్ సామర్థ్య పర్యవేక్షణ
 ```bash
-# డిప్లాయ్‌మెంట్ సమయంలో సామర్థ్యాన్ని పర్యవేక్షించండి
+# Monitor capacity during deployment
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # డిప్లాయ్‌మెంట్ స్థితిని తనిఖీ చేయండి
+        # Check deployment status
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
-            --query "[0].properties.provisioningState" -o tsv)
+            --query "sort_by(@, &properties.timestamp)[-1].properties.provisioningState" -o tsv)
         
         if [ "$deployment_status" = "Succeeded" ]; then
             log_info "Deployment completed successfully"
             break
-        elif [ "$deployment_status" = "Failed" ]; then
+        elif [ "$deployment_status" = "Failed" ] || [ "$deployment_status" = "Canceled" ]; then
             log_error "Deployment failed"
             break
         fi
         
-        # ప్రస్తుత వనరుల వినియోగాన్ని తనిఖీ చేయండి
+        # Check current resource usage
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -687,17 +691,18 @@ monitor_deployment_capacity() {
 }
 ```
 
-## 🔗 AZDతో ఇంటిగ్రేషన్
+## 🔗 AZD తో ఐక్యకరణ
 
-### azure.yaml లో ప్రీ-ఫ్లైట్ హుక్స్ జోడించండి
+### azure.yaml కి ముందస్తు-ఫ్లైట్ హూక్స్ జోడించండి
 ```yaml
 # azure.yaml
 hooks:
   preprovision:
     shell: sh
     run: |
+      set -e
       echo "Running pre-flight capacity checks..."
-      ./scripts/preflight-check.sh ${AZURE_LOCATION} ${AZURE_ENV_NAME}
+      bash ./scripts/preflight-check.sh "${AZURE_LOCATION}" "${AZURE_ENV_NAME}"
       
       if [ $? -ne 0 ]; then
         echo "Pre-flight checks failed"
@@ -707,40 +712,40 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## ఉత్తమ పద్ధతులు
+## ఉత్తమ ఆచారాలు
 
-1. **ఎల్లప్పుడూ సామర్థ్య పరీక్షలు నిర్వహించండి** కొత్త ప్రాంతాల్లో డిప్లాయ్ చేయముందు
-2. **క్వోటా వినియోగాన్ని నియమితంగా పర్యవేక్షించండి** ఆశ్చర్యకరం రాకుండా
-3. **వృద్ధి కోసం ప్రణాళిక చేయండి** భవిష్యత్ సామర్థ్య అవసరాలను తనిఖీ చేయండి
-4. **ఖర్చు అంచనా సాధనాలను ఉపయోగించండి** బిల్ షాక్ నివారించడానికి
-5. **మీ టీమ్ కోసం సామర్థ్య అవసరాలను డాక్యుమెంట్ చేయండి**
-6. **CI/CD పైప్లైన్లలో సామర్థ్య ధృవీకరణను ఆటోమేట్ చేయండి**
-7. **ప్రాంతీయ ఫెయిల్‌ఓవర్ సామర్థ్య అవసరాలను పరిగణనలోకి తీసుకోండి**
+1. **కొత్త ప్రాంతాల్లో డిప్లాయ్‌మెంట్‌కు ముందు ఎప్పుడూ సామర్థ్య తనిఖీలు జరపండి**
+2. **అనూహ్య పరిస్థితులను నివారించేందుకు క్వోటా వినియోగాన్ని తరచూ పర్యవేక్షించండి**
+3. **వృద్ధి కోసం ప్రణాళిక చేయండి, భవిష్యత్తు సామర్థ్య అవసరాలను తనిఖీ చేయండి**
+4. **బిల్ షాక్ నివారించడానికి ఖర్చు అంచనా సాధనాలు ఉపయోగించండి**
+5. **మీ బృందం కోసం సామర్థ్య అవసరాలను డాక్యుమెంట్ చేయండి**
+6. **CI/CD పైప్లైన్లలో సామర్థ్య ధృవీకరణను ఆటోమేట్లు చేయండి**
+7. **ప్రాంతీయ ఫెయిలోవర్ సామర్థ్య అవసరాలను పరిగణించండి**
 
-## తదుపరి దశలు
+## తదుపరి చర్యలు
 
-- [SKU ఎంపిక మార్గదర్శి](sku-selection.md) - ఆప్టిమల్ సర్వీస్ టియర్‌లను ఎంచుకోండి
-- [ప్రీ-ఫ్లైట్ చెక్సు](preflight-checks.md) - ఆటోమెటెడ్ ధృవీకరణ స్క్రిప్ట్‌లు
-- [చీట్ షీట్](../../resources/cheat-sheet.md) - తక్షణ సూచన కమాండ్లు
+- [SKU ఎంపిక గైడ్](sku-selection.md) - ఉత్తమ సర్వీస్ టియర్‌లను ఎంచుకోవాలి
+- [ముందస్తు-ఫ్లైట్ తనిఖీలు](preflight-checks.md) - ఆటోమేటెడ్ ధృవీకరణ స్క్రిప్టులు
+- [చీట్ షీటు](../../resources/cheat-sheet.md) - త్వరిత సూచన ఆదేశాలు
 - [పదకోశం](../../resources/glossary.md) - పదాలు మరియు నిర్వచనాలు
 
 ## అదనపు వనరులు
 
-- [Azure Subscription Limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
-- [Azure Cost Management](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure Regional Availability](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure సబ్‌స్క్రిప్షన్ పరిమితులు](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Azure ధర లెక్కింపయంత్రం](https://azure.microsoft.com/pricing/calculator/)
+- [Azure ఖర్చు నిర్వహణ](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Azure ప్రాంతీయ అందుబాటు](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [డీబగ్గింగ్ గైడ్](../chapter-07-troubleshooting/debugging.md)
+**నావిగేషన్**
+- **గత పాఠం**: [డిబగ్గింగ్ గైడ్](../chapter-07-troubleshooting/debugging.md)
 
-- **Next Lesson**: [SKU ఎంపిక](sku-selection.md)
+- **తదుపరి పాఠం**: [SKU ఎంపిక](sku-selection.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-డిస్క్లెయిమర్:
-ఈ డాక్యుమెంట్‌ను AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడినది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమేటెడ్ అనువాదాలలో తప్పులు లేదా అసత్యతలు ఉండవచ్చు అనే విషయాన్ని దయచేసి గమనించండి. మూల భాషలోని అసలు డాక్యుమెంట్‌ను అధికారిక మూలంగా పరిగణించాలి. ముఖ్యమైన సమాచారానికి వృత్తిపరమైన మానవ అనువాదాన్ని సిఫార్సు చేస్తాము. ఈ అనువాదాన్ని ఉపయోగించటం వలన ఏర్పడే ఏవైనా అపార్థాలు లేదా తప్పుగా అర్థం చేసుకోవడాలకు మేము బాధ్యులు కాదని గమనించండి.
+**అస్వీకరణ**:
+ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నిస్తున్నప్పటికీ, ఆటోమేటెడ్ అనువాదాలు తప్పులు లేదా అసమగ్రతలను కలిగి ఉండవచ్చు. దాని స్వదేశ భాషలో ఉన్న అసలు పత్రాన్ని అధికారం కలిగిన మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, ప్రొఫెషనల్ మానవ అనువాదాన్ని సిఫారసు చేస్తాము. ఈ అనువాదం ఉపయోగం వల్ల కలిగే ఏవైనా అపార్థాలు లేదా తప్పుదారులు కోసం మేము బాధ్యత వహించము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

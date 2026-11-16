@@ -1,65 +1,45 @@
 # Разгръщане на AI модел с Azure Developer CLI
 
 **Навигация в главата:**
-- **📚 Начална страница на курса**: [AZD за начинаещи](../../README.md)
-- **📖 Текуща глава**: Глава 2 - AI-първи развитие
-- **⬅️ Предишна**: [Интеграция с Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Следваща**: [AI лаборатория Workshop](ai-workshop-lab.md)
+- **📚 Основен курс**: [AZD за начинаещи](../../README.md)
+- **📖 Текуща глава**: Глава 2 - AI-първо разработване
+- **⬅️ Предишна**: [AI агенти](agents.md)
+- **➡️ Следваща**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Следваща глава**: [Глава 3: Конфигурация](../chapter-03-configuration/configuration.md)
 
-Това ръководство предоставя изчерпателни инструкции за разгръщане на AI модели с помощта на шаблони AZD, покривайки всичко от избора на модел до модели за производство.
+Това ръководство предоставя изчерпателни инструкции за разгръщане на AI модели с помощта на шаблони на AZD, обхващайки всичко от избора на модел до модели на производство.
 
-> **Бележка за валидиране (2026-07-13):** Работният процес на AZD в това ръководство е тестван с `azd` `1.27.1`. За AI разгръщания, които отнемат повече време от стандартния прозорец за разгръщане на услугата, текущите версии на AZD поддържат `azd deploy --timeout <seconds>`.
+> **Преглед на изданието (2026-11-04):** Свързаните промени в CLI бяха прегледани спрямо `azd` `1.37.2`; наличността на моделите, версиите и квотата остават зависими от региона и абонамента. `azd deploy --timeout <seconds>` контролира прозореца за разгръщане на услугата, не гарантира активирането на агент. Вижте [текущите бележки към изданието и насоките за миграция на AI](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
 ## Съдържание
 
-- [Стратегия за избор на модел](#стратегия-за-избор-на-модел)
-- [Конфигурация на AZD за AI модели](#конфигурация-на-azd-за-ai-модели)
-- [Модели за разгръщане](#модели-за-разгръщане)
-- [Управление на моделите](#управление-на-моделите)
-- [Разглеждания при производство](#съображения-при-производство)
-- [Мониторинг и наблюдаемост](#мониторинг-и-наблюдаемост)
+- [Стратегия за избор на модел](#model-selection-strategy)
+- [Конфигурация на AZD за AI модели](#azd-configuration-for-ai-models)
+- [Модели на разгръщане](#deployment-patterns)
+- [Управление на модели](#model-management)
+- [Съображения за производство](#production-considerations)
+- [Мониторинг и наблюдаемост](#monitoring-and-observability)
 
 ## Стратегия за избор на модел
 
-### Модели Microsoft Foundry
+### Azure OpenAI модели в Microsoft Foundry
 
 Изберете правилния модел за вашия случай на употреба:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+Декларирайте разгръщанията на моделите в Bicep (по-долу), а не в произволни `services.*.config.AZURE_OPENAI_MODELS` настройки. AZD не тълкува такава настройка като списък с ресурси на модел. `project` на услуга сочи към изходния код на приложението, а не неговата `infra/` директория.
+
+Примерите използват публикуваната версия `gpt-4.1-mini` **`2025-04-14`** и версията за вграждане **`1`**. Потвърдете, че версията на модела и SKU за разгръщане се поддържат в съответния регион/акаунт преди внедряване.
 
 ### Планиране на капацитета на модела
 
-| Тип модел | Случай на употреба | Препоръчителен капацитет | Обмисляния за разходи |
+| Тип модел | Случай на употреба | Илюстративно търсене на токени | Съображения за разходи |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Чат, Въпроси и отговори | 10-50 TPM | Икономичен за повечето натоварвания |
-| gpt-4.1 | Сложни разсъждения | 20-100 TPM | По-висока цена, използвайте за премиум функции |
-| text-embedding-3-large | Търсене, RAG | 30-120 TPM | Силен стандартен избор за семантично търсене и извличане |
-| Whisper | Глас към текст | 10-50 TPM | Натоварвания с обработка на аудио |
+| gpt-4.1-mini | Чат, Въпроси и отговори | 10,000-50,000 TPM | Бенчмаркови разходи и качество за вашата работна натовареност |
+| gpt-4.1 | Сложни задачи | 20,000-100,000 TPM | Оценяване на качествените печалби спрямо разхода за токени |
+| text-embedding-3-large | Търсене, RAG | 30,000-120,000 TPM | Вземете предвид както въвеждането, така и трафика по заявки |
+| Whisper | Реч в текст | Планирайте използвайки продължителността на аудиото и лимитите за заявки | Не използвайте формула за капацитет TPM на текстов модел |
+
+TPM означава токени в минута. За тези стандартни текстови разгръщания ARM `sku.capacity` е в **единици по 1,000 TPM**, а не индивидуални TPM (капацитет `10` означава 10,000 TPM). Съотношенията RPM към TPM варират според модела/типа разгръщане; проверете и двете ограничения в [документацията за квоти](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic). Тези диапазони са примери, а не препоръки за размер.
 
 ## Конфигурация на AZD за AI модели
 
@@ -69,6 +49,9 @@ services:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,19 +108,22 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
+Това е пример за **инфраструктура за разработка**, обхващаща ресурсна група, не пълен AZD шаблон на приложение. Акаунтът позволява публичен достъп до мрежата и изисква удостоверяване чрез Entra ID/RBAC (`Cognitive Services OpenAI User` за извикващите). Продукцията изисква частна крайна точка, DNS и свързаност на приложението, описани в Глава 8. AZD се нуждае и от главен шаблон/съотнасяне на параметри и ресурси за хостинг на приложение; ползвайте работещ пример за пълно разгръщане.
+
 ### Променливи на средата
 
 Конфигурирайте средата на вашето приложение:
 
 ```bash
-# конфигурация на .env
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Модели за разгръщане
+Това са имена, дефинирани от приложението; включете ги във вашата хост конфигурация. Използваната по-долу крайна точка Azure OpenAI v1 за проверка на състоянието не изисква старата параметърна заявка `api-version`; по-старите клиенти `AzureOpenAI` я изискват, затова следвайте API-то, използвано от вашето приложение.
+
+## Модели на разгръщане
 
 ### Модел 1: Разгръщане в един регион
 
@@ -146,7 +133,7 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
@@ -154,12 +141,13 @@ services:
 Най-подходящ за:
 - Разработка и тестване
 - Приложения за един пазар
-- Оптимизация на разходите
+- Оптимизация на разходи
 
-### Модел 2: Разгръщане в много региони
+### Модел 2: Мултирегионално разгръщане
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,6 +157,8 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
+Пропуснатите свойства на акаунта/SKU трябва да се подадат; този фрагмент не може да се разгърне в настоящия вид. Разгръщайте модели във всеки акаунт и реализирайте отделно маршрутизиране/аварийно пренасочване и контрол на обитаването на данни.
+
 Най-подходящ за:
 - Глобални приложения
 - Изисквания за висока наличност
@@ -176,7 +166,9 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 ### Модел 3: Хибридно разгръщане
 
-Комбинирайте Microsoft Foundry Models с други AI услуги:
+Комбинирайте Microsoft Foundry модели с други AI услуги:
+
+Следващите фрагменти предполагат, че имената и `location` са подадени от съдържащия шаблон.
 
 ```bicep
 // Hybrid AI services
@@ -205,18 +197,18 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Управление на моделите
+## Управление на модели
 
 ### Контрол на версиите
 
-Проследявайте версиите на моделите в конфигурацията AZD:
+Проследявайте версиите на моделите в конфигурацията на приложението си или в IaC. Този JSON е **пример, дефиниран от приложението**, не вграден AZD модел; трябва да се имплементира и разположи резервно решение:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -227,27 +219,27 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Актуализации на моделите
+### Актуализации на модела
 
-Използвайте AZD куки за актуализации на моделите:
+Използвайте AZD hook за проверка на наличността само за четене, след което актуализирайте IaC и го разположете:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# Ако разгръщането отнеме повече от зададения по подразбиране таймаут
-azd deploy --timeout 1800
 ```
 
-### A/B тестиране
+Изпълнете `azd up` **извън** hook-а, за да приложите промените в инфраструктурата на модела и да разположите кода. Никога не извиквайте `azd deploy` от `predeploy` hook: това рекурсивно задейства същия hook. `azd deploy --timeout 1800` удължава времето за разгръщане на приложението; не променя ресурсите на Bicep.
 
-Разгръщайте множество версии на модела:
+### A/B тестване
+
+Илюстративният ресурс по-долу избира име за разгръщане и капацитет; той създава **едно** разгръщане, а не A/B тест. За реален експеримент разположете два отделни ресурса за разгръщане, насочвайте контролирана част от заявките към всеки и сравнете качество, латентност и разходи. Предполага се `openAi` от акаунтния пример:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -269,14 +261,15 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Съображения при производство
+## Съображения за производство
 
 ### Планиране на капацитета
 
-Изчислете необходимия капацитет според моделите на употреба:
+Изчислете необходимия капацитет въз основа на моделите на използване:
 
 ```python
-# Пример за изчисляване на капацитет
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# Пример за използване
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Конфигурация за автомащабиране
+Очакван изход: `Required capacity: 9100 TPM`. С единици капацитет от 1,000 TPM се закръгля нагоре поне до `10`, след което проверете RPM и оценка на лимита на услугата (включително бюджета за искан изход) за конкретния модел. Тази оценка на търсенето на токени не гарантира липса на ограничаване.
 
-Конфигурирайте автомащабиране за Container Apps:
+### Конфигурация за авто-мащабиране
+
+Конфигурирайте авто-мащабиране за Контейнер приложения:
+
+**Частичен ресурс:** интегрирайте настройките `template.scale` в пълно Контейнер приложение с локация, управлявана среда, контейнерно изображение, ресурси и входящ трафик. Мащабирането на репликите не увеличава квотата на модела.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,18 +335,21 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Оптимизация на разходите
 
-Прилагайте контрол на разходите:
+Реализирайте контрол на разходите:
+
+**Илюстративен бюджетен ресурс:** дефинирайте `budgetStartDate` като първия ден от текущия месец в UTC (например `2026-11-01T00:00:00Z` за този преглед), и заменете адреса за контакт. Началото трябва да отговаря на текущите ограничения на датата на услугата. Бюджетите предупреждават за забавени данни за фактуриране; те не спират разходите.
 
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -372,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Интеграция с Application Insights
 
-Конфигурирайте мониторинг за AI натоварвания:
+Конфигурирайте мониторинг за AI работни натоварвания:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
 
-### Персонализирани метрики
+Ресурсният фрагмент предполага `applicationInsightsName`, `location` и съществуващ `logAnalyticsWorkspace`. Той разполага мониторинг, но не инструктира приложението или създава потребителски метрики.
 
-Проследявайте специфични AI метрики:
+### Потребителски метрики
+
+Следете AI-специфични метрики:
+
+Използвайте поддържаното [разпределение Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python), а не наследствения Python SDK `applicationinsights`. Инсталирайте `azure-monitor-opentelemetry`, конфигурирайте `APPLICATIONINSIGHTS_CONNECTION_STRING` и инициализирайте веднъж при стартиране:
 
 ```python
-# Потребителска телеметрия за AI модели
-import logging
-from applicationinsights import TelemetryClient
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
 
-### Проверки на здравето
+Това илюстрира излъчване на атрибути, а не реална инструментализация на повикване на модел. Обвийте реалната заявка в span, за да измерите продължителността ѝ; инспектирайте `dependencies`/`traces` в Application Insights. Не изпращайте подканящи текстове, отговори, ключове или съобщения за изключения с чувствителна информация.
 
-Прилагайте мониторинг на здравето за AI услугите:
+### Проверки на състоянието
+
+Реализирайте мониторинг на здравето на AI услугата:
+
+Инсталирайте `fastapi`, `uvicorn`, `httpx` и `azure-identity`. Задайте горните променливи за крайна точка/разгръщане и предоставете `Cognitive Services OpenAI User` на извикващия. Тази **проверка за готовност** използва Azure OpenAI v1 слой за данни с Entra ID; тя прави платено повикване към модел. Стартирайте с `uvicorn health:app` след запис като `health.py`. Използвайте отделна лека проверка за жизненост, кеширайте/ограничете резултатите от готовността и не излагайте този маршрут публично без контрол на достъп.
 
 ```python
-# Крайни точки за проверка на здравето
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,32 +431,38 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Тествайте връзка с OpenAI
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
+
+Очаквано: `GET /health/ai-models` връща `200 {"status":"healthy"}`, когато конфигурираното чат разгръщане е използваемо, или `503` без да разкрива подробности нагоре по веригата. Изброяването на разгръщания е операция на управленската равнина и не е валидна проверка за здраве на слоя за данни.
 
 ## Следващи стъпки
 
 1. **Прегледайте [Ръководството за интеграция с Microsoft Foundry](microsoft-foundry-integration.md)** за модели на интеграция на услуги
-2. **Завършете [AI лаборатория Workshop](ai-workshop-lab.md)** за практически опит
-3. **Прилагайте [Практики за производство на AI](production-ai-practices.md)** за корпоративни разгръщания
+2. **Завършете [AI Workshop Lab](ai-workshop-lab.md)** за практически опит
+3. **Прилагайте [Практики за AI в производство](../chapter-08-production/production-ai-practices.md)** за корпоративни внедрявания
 4. **Разгледайте [Ръководството за отстраняване на проблеми с AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** за често срещани проблеми
 
 ## Ресурси
 
-- [Достъпност на модели Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Наличност на модели Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Документация за Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Мащабиране на Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Оптимизация на разходите за AI модели](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
@@ -493,10 +470,10 @@ async def check_ai_models():
 ---
 
 **Навигация в главата:**
-- **📚 Начална страница на курса**: [AZD за начинаещи](../../README.md)
-- **📖 Текуща глава**: Глава 2 - AI-първи развитие
-- **⬅️ Предишна**: [Интеграция с Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Следваща**: [AI лаборатория Workshop](ai-workshop-lab.md)
+- **📚 Основен курс**: [AZD за начинаещи](../../README.md)
+- **📖 Текуща глава**: Глава 2 - AI-първо разработване
+- **⬅️ Предишна**: [AI агенти](agents.md)
+- **➡️ Следваща**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Следваща глава**: [Глава 3: Конфигурация](../chapter-03-configuration/configuration.md)
 
 ---

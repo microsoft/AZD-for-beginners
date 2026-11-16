@@ -1,22 +1,22 @@
-# 1. fejezet: Alapok és Gyors kezdés
+# 1. fejezet: Alapok & Gyors kezdés
 
-**📚 Tanfolyam**: [AZD Kezdőknek](../../README.md) | **⏱️ Időtartam**: 30-45 perc | **⭐ Nehézségi szint**: Kezdő
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 75-120 perc az első telepítéssel együtt; további gyakorlatok hosszabbak | **⭐ Nehézségi szint**: Kezdő
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet bemutatja az Azure Developer CLI (azd) alapjait. Megismerheted az alapfogalmakat, telepítheted az eszközöket, és telepítheted az első alkalmazásodat az Azure-ba.
+Ez a fejezet bemutatja az Azure Developer CLI (azd) alapjait. Megtanulod az alapfogalmakat, telepíted az eszközöket és telepíted első alkalmazásodat az Azure-ra.
 
-> Érvényesítve `azd 1.27.1` verzióval 2026 júliusában.
+> Parancs- és konfigurációfelülvizsgálat célpont: `azd 1.37.2` (2026. november). Az élő Azure-provízió nem futott a felülvizsgálat során.
 
 ## Tanulási célok
 
-A fejezet elvégzése után képes leszel:
-- Megérteni, mi az Azure Developer CLI, és miben különbözik az Azure CLI-től
-- Telepíteni és konfigurálni az AZD-t a saját platformodon
-- Az első alkalmazásodat telepíteni az Azure-ra a `azd up` paranccsal
-- Erőforrásokat tisztítani a `azd down` paranccsal
+A fejezet elvégzése után:
+- Megérted, mi az Azure Developer CLI és miben különbözik az Azure CLI-től
+- Telepíted és beállítod az AZD-t a platformodon
+- Az első alkalmazásodat az Azure-ra telepíted az `azd up` segítségével
+- Erőforrásokat törölsz az `azd down` használatával
 
 ---
 
@@ -24,15 +24,15 @@ A fejezet elvégzése után képes leszel:
 
 | # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [AZD Alapok](azd-basics.md) | Alapfogalmak, terminológia és projektstruktúra | 15 perc |
-| 2 | [Telepítés és Beállítás](installation.md) | Platform specifikus telepítési útmutatók | 10 perc |
-| 3 | [Az első projekted](first-project.md) | Gyakorlati útmutató: Webalkalmazás telepítése az Azure-ra | 20 perc |
-| 4 | [Használd a saját alkalmazásodat](bring-your-own-app.md) | Az azd hozzáadása már meglévő projekthez | 15 perc |
-| 5 | [Dev konténerek és Codespaces](dev-containers.md) | Reprodukálható azd környezetek dev konténerekkel | 15 perc |
+| 1 | [AZD alapok](azd-basics.md) | Alapfogalmak, terminológia és projektstruktúra | 15 perc |
+| 2 | [Telepítés & Beállítás](installation.md) | Platform specifikus telepítési útmutatók | 10 perc |
+| 3 | [Az első projekted](first-project.md) | Gyakorlati feladat: Webalkalmazás telepítése Azure-ra | 20 perc |
+| 4 | [Hoztam egy saját appot](bring-your-own-app.md) | Az azd hozzáadása egy már meglévő projekthez | 15 perc |
+| 5 | [Fejlesztői konténerek & Codespaces](dev-containers.md) | Reprodukálható azd környezetek fejlesztői konténerekkel | 15 perc |
 
 ---
 
-## ✅ Kezdj itt: Ellenőrizd a beállításokat
+## ✅ Innen kezd: Rendszered ellenőrzése
 
 Mielőtt elkezdenéd, győződj meg róla, hogy a helyi géped készen áll az 1. fejezet sablonjára:
 
@@ -46,25 +46,27 @@ Mielőtt elkezdenéd, győződj meg róla, hogy a helyi géped készen áll az 1
 bash ./validate-setup.sh
 ```
 
-Ha a script hiányzó eszközökről számol be, először azokat javítsd, majd folytasd a fejezettel.
+Ha a szkript hiányzó eszközökről jelez, orvosold azokat először, majd folytasd a fejezettel.
 
 ---
 
 ## 🚀 Gyors kezdés
 
 ```bash
-# Telepítés ellenőrzése
+# Check installation
 azd version
 
-# Hitelesítés az AZD-hez
-# Opcionális: az login, ha közvetlenül az Azure CLI parancsokat szeretné futtatni
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Az első alkalmazás telepítése
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Takarítsa el a befejezés után
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -75,11 +77,11 @@ azd down --force --purge
 A fejezet elvégzése után képes leszel:
 
 ```bash
-azd version              # Megjeleníti a telepített verziót
-azd init --template todo-nodejs-mongo  # Inicializálja a projektet
-azd up                   # Telepít Azure-ra
-azd show                 # Megjeleníti a futó alkalmazás URL-jét
-azd down --force --purge # Erőforrások takarítása
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -88,16 +90,16 @@ azd down --force --purge # Erőforrások takarítása
 
 | Irány | Fejezet |
 |-----------|---------|
-| **Következő** | [2. fejezet: AI-vezérelt fejlesztés](../chapter-02-ai-development/README.md) |
-| **Ugrás ide** | [3. fejezet: Konfiguráció](../chapter-03-configuration/README.md) |
+| **Következő** | [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/README.md) |
+| **Ugorj** | [3. fejezet: Konfiguráció](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Kapcsolódó források
 
-- [Parancs összefoglaló](../../resources/cheat-sheet.md)
-- [Gyakran Ismételt Kérdések](../../resources/faq.md)
-- [Szószedet](../../resources/glossary.md)
+- [Parancs Gyorsútmutató](../../resources/cheat-sheet.md)
+- [GYIK](../../resources/faq.md)
+- [Fogalomtár](../../resources/glossary.md)
 
 ---
 

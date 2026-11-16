@@ -1,4 +1,4 @@
-# Capitolo 8: Pattern di Produzione e Aziendali
+# Capitolo 8: Pattern per Produzione e Enterprise
 
 **📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 2-3 ore | **⭐ Complessità**: Avanzato
 
@@ -6,15 +6,17 @@
 
 ## Panoramica
 
-Questo capitolo tratta pattern di deployment pronti per l'azienda, rafforzamento della sicurezza, monitoraggio e ottimizzazione dei costi per carichi di lavoro AI in produzione.
+Questo capitolo tratta i pattern di deployment pronti per l'impresa, il rafforzamento della sicurezza, il monitoraggio e l'ottimizzazione dei costi per carichi di lavoro AI in produzione.
 
-> Validato con `azd 1.27.1` a luglio 2026.
+Si tratta di un riferimento architetturale, non di un template completo e distribuibile in produzione. Gli esempi omettono dettagli di integrazione che devono essere forniti e testati nella vostra applicazione; leggere la checklist non certifica la prontezza per la produzione.
+
+> **Revisione della release (2026-11-04):** Le linee guida AI CLI sono state verificate contro la documentazione/sorgente di `azd 1.37.2`, agenti `1.0.0-beta.23`, e valutazioni `1.0.0-beta.2`. Vedi [modifiche e correzioni della release](production-ai-practices.md#recent-release-changes-and-fixes) per i requisiti di compatibilità e i dettagli di migrazione; questa non è una convalida di deployment live.
 
 ## Obiettivi di Apprendimento
 
 Completando questo capitolo, sarai in grado di:
 - Distribuire applicazioni resilienti multi-regione
-- Implementare pattern di sicurezza aziendali
+- Implementare pattern di sicurezza enterprise
 - Configurare un monitoraggio completo
 - Ottimizzare i costi su larga scala
 - Impostare pipeline CI/CD con AZD
@@ -25,17 +27,17 @@ Completando questo capitolo, sarai in grado di:
 
 | # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Pratiche AI in Produzione](production-ai-practices.md) | Pattern di deployment aziendale | 90 min |
+| 1 | [Pratiche AI per la Produzione](production-ai-practices.md) | Pattern di deployment enterprise | 90 min |
 
 ---
 
-## 🚀 Lista di Controllo per la Produzione
+## 🚀 Checklist per la Produzione
 
-- [ ] Deployment multi-regione per resilienza
-- [ ] Identità gestita per autenticazione (nessuna chiave)
-- [ ] Application Insights per monitoraggio
-- [ ] Budget e alert sui costi configurati
-- [ ] Scansione di sicurezza abilitata
+- [ ] Deployment multi-regione per la resilienza
+- [ ] Identità gestita per l'autenticazione (senza chiavi)
+- [ ] Application Insights per il monitoraggio
+- [ ] Budget e avvisi sui costi configurati
+- [ ] Scansione della sicurezza abilitata
 - [ ] Integrazione pipeline CI/CD
 - [ ] Piano di disaster recovery
 
@@ -47,29 +49,30 @@ Completando questo capitolo, sarai in grado di:
 
 ```mermaid
 graph LR
-    Gateway[Gateway API] --> AI[Servizio AI] --> Models[Modelli Microsoft Foundry]
-    Gateway --> Auth[Servizio di Autenticazione]
-    AI --> Data[Archivio Dati]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
-### Pattern 2: AI Event-Driven
+### Pattern 2: AI guidata da eventi
 
 ```mermaid
 graph LR
-    EventGrid[Griglia Eventi] --> Functions[Funzioni] --> Pipeline[Pipeline AI]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
 
-## 🔐 Migliori Pratiche di Sicurezza
+## 🔐 Best Practice di Sicurezza
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,34 +85,27 @@ properties: {
 
 ## 💰 Ottimizzazione dei Costi
 
-| Strategia | Risparmio |
+| Strategia | Vincolo principale |
 |----------|---------|
-| Scalare a zero (Container Apps) | 60-80% |
-| Usare livelli a consumo per sviluppo | 50-70% |
-| Scalabilità programmata | 30-50% |
-| Capacità riservata | 20-40% |
+| Scala a zero (Container Apps) | Richiede un trigger adatto; altri servizi continuano a generare costi |
+| Utilizzo di livelli di consumo per dev | Confronta il prezzo del servizio selezionato e il carico di lavoro |
+| Scaling programmato | Scala tramite infrastruttura/automazione supportata |
+| Prenotazioni/capacità riservata | Solo quando supportato; gli impegni possono aumentare i costi inattivi |
 
-```bash
-# Imposta avvisi di budget
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Usa il [pattern completo della risorsa budget](production-ai-practices.md#2-cost-monitoring-and-budgets) con una data di inizio valida, ambito di fatturazione, destinatari e autorizzazioni. Un budget invia allarmi; non limita la spesa. Il risparmio dipende dall’utilizzo misurato e non è garantito in percentuale.
 
 ---
 
 ## 📊 Configurazione del Monitoraggio
 
 ```bash
-# Flusso di log
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Controlla Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# Visualizza metriche
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -119,17 +115,17 @@ az monitor metrics list --resource <resource-id>
 
 | Direzione | Capitolo |
 |-----------|---------|
-| **Precedente** | [Capitolo 7: Risoluzione Problemi](../chapter-07-troubleshooting/README.md) |
-| **Corso Completo** | [Home del Corso](../../README.md) |
+| **Precedente** | [Capitolo 7: Risoluzione dei problemi](../chapter-07-troubleshooting/README.md) |
+| **Corso completato** | [Home del corso](../../README.md) |
 
 ---
 
 ## 📖 Risorse Correlate
 
-- [Guida agli Agenti AI](../chapter-02-ai-development/agents.md)
+- [Guida AI Agents](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Soluzioni Multi-Agente](../chapter-05-multi-agent/README.md)
-- [Esempio Microservizi](../../examples/microservices/README.md)
+- [Esempio di Microservizi](../../examples/microservices/README.md)
 
 ---
 

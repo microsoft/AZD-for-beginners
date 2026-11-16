@@ -1,284 +1,133 @@
-# 3. Dekonstrueeri mall
+# 3. Malli lagundamine
 
-!!! tip "SELLE MODUULI LÕPUS OLED VÕIMELINE"
+!!! tip "SELLE MÕÕDULI LÕPUS OLETE VÕIMALIK"
 
-    - [ ] Aktiveerima GitHub Copiloti koos MCP serveritega Azure abistamiseks
-    - [ ] Mõistma AZD malli kaustastruktuuri ja komponente
-    - [ ] Uurima infrastruktuuri kui koodi (Bicep) organiseerimismustreid
-    - [ ] **Labor 3:** Kasutama GitHub Copiloti hoidla arhitektuuri uurimiseks ja mõistmiseks
-
----
-
-AZD mallide ja Azure Developer CLI-ga (`azd`) saame kiiresti alustada oma AI arendusreisiga standardiseeritud hoidlate abil, mis pakuvad näidiskoodi, infrastruktuuri ja konfiguratsioonifaile - valmis juurutamiseks mõeldud _algus_ projektina.
-
-**Kuid nüüd peame mõistma projekti struktuuri ja koodi baasi ning suutma kohandada AZD malli - ilma eelneva kogemuseta või AZD mõistmiseta!**
+    - [ ] Use GitHub Copilot and optional MCP tools for Azure documentation and read-only exploration
+    - [ ] Identify the template's application, infrastructure, configuration, and test entry points
+    - [ ] Verify generated explanations against actual repository files
+    - [ ] **Lab 3:** Trace one request and one configuration input through the project
 
 ---
 
 ## 1. Aktiveeri GitHub Copilot
 
-### 1.1 Installi GitHub Copilot Chat
+Ava VS Code'is initsialiseeritud AI näidis ning lülita sisse [GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Logi sisse kontoga, millel on sobiv plaan; kasutuspiirangud võivad erineda. Kutsu Copiloti selgitama hoidlat enne muudatuste lubamist.
 
-On aeg uurida [GitHub Copiloti koos agentrežiimiga](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Nüüd saame looduslikus keeles kirjeldada oma ülesannet kõrgel tasemel ja saada abi selle teostamisel. Selle labori jaoks kasutame [Copilot Free plaani](https://github.com/github-copilot/signup), millel on igakuine limiit täidete ja vestluste arvu kohta.
+### Vabatahtlikud MCP serverid
 
-Laienduse saad installida turult ning see on tihti juba Codespaces'is või arenduskonteineri keskkonnas saadaval. _Klõpsa Copiloti ikooni rippmenüüst `Open Chat` ja kirjuta näiteks `What can you do?`_ - võib-olla palutakse sul sisse logida. **GitHub Copilot Chat on valmis.**
+Need teenused võivad pakkuda täiendavaid tööriistu:
 
-### 1.2. Installi MCP serverid
+- [Azure MCP Server](https://learn.microsoft.com/azure/developer/azure-mcp-server/overview)
+- [Microsoft Learn MCP Server](https://learn.microsoft.com/training/support/mcp)
 
-Agentrežiimi tõhusaks toimimiseks vajab see juurdepääsu õigele tööriistakomplektile, et aidata teadmiste hankimisel või toimingute tegemisel. Siin tulevad appi MCP serverid. Konfigureerime järgmised serverid:
+VS Code'is vaata üle [MCP konfiguratsiooni juhend](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) ja loo vajadusel `.vscode/mcp.json`:
 
-1. [Azure MCP server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP server](../../../../../workshop/docs/instructions)
+```json
+{
+  "servers": {
+    "Azure MCP Server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"]
+    },
+    "microsoft.docs.mcp": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
 
-Nende aktiveerimiseks:
+Käsk `npx` vajab toetatud Node.js/npm paigaldust ja tõmbab alla täidetava koodi. Vaata paketti üle ja seosta kinnitatud versioon korduvkasutatava meeskonna seadistuse jaoks. Käivita serverid VS Code'i MCP juhtnuppude abil ning kontrolli nende tööriistu; nimed võivad versioonide vahel muutuda.
 
-1. Loo fail nimega `.vscode/mcp.json`, juhul kui seda pole
-1. Kopeeri faili järgmine sisu ja seejärel käivita serverid!
-   ```json title=".vscode/mcp.json"
-   {
-      "servers": {
-         "Azure MCP Server": {
-            "command": "npx",
-            "args": [
-            "-y",
-            "@azure/mcp@latest",
-            "server",
-            "start"
-            ]
-         },
-         "microsoft.docs.mcp": {
-            "type": "http",
-            "url": "https://learn.microsoft.com/api/mcp"
-         }
-      }
-   }
-   ```
+**Autentimine on eraldi.** Kasuta AZD jaoks `azd auth login`. Järgi Azure MCP dokumenteeritud autentimise voogu selle tööriistade jaoks; pelgalt AZD sisselogimine ei loo MCP sessiooni. Kasuta eraldi `az login`, kui mingi harjutus või haak kutsub Azure CLI-d.
 
-??? warning "Võid saada vea, et `npx` pole installitud (klõpsa laiendamiseks parandamiseks)"
+Proovi lugemisõigusega päringuid:
 
-      Parandamiseks ava `.devcontainer/devcontainer.json` fail ja lisa features jaotisesse see rida. Seejärel ehita konteiner uuesti. Nüüd peaks sul olema `npx` installitud.
+1. “Kasuta Microsoft Learn MCP-d, et leida Azure Developer CLI konfiguratsiooni dokumentatsioon.”
+2. “Selgita selle hoidla `azure.yaml`; too välja failid, mis rakendavad iga haaki.”
+3. “Kasuta saadaolevaid Azure MCP tööriistu, loetle mu juurutatud ressursid ilma midagi muutmata.”
 
-      ```title="" linenums="0"
-         "features": {
-            "ghcr.io/devcontainers/features/node:1": {},
-            ...
-         },
-      ```
+Kontrolli valitud rentniku/tellimuse ja iga pakutava tööriistakutse puhul. Ära heaks kiida ressursi loomist, kustutamist või ligipääsmuudatusi vaid arhitektuuri uurimiseks.
 
----
+## 2. Arhitektuuri mõistmine
 
-### 1.3. Testi GitHub Copilot Chati
+Näidis majutab Pythoni FastAPI tagapoolt ja React/TypeScripti esiotsa Azure Container Appsis. Tagapool suhtleb agendiga Microsoft Foundry projektis. Andmete hankimine ja jälgitavus sõltuvad lubatud malli omadustest ja õnnestunud seadistusest; neid ei garanteerita ainult rakenduse juurutamise põhjal.
 
-**Kõigepealt kasuta `azd auth login`, et autentida Azure'i VS Code käsurealt. Kasuta ka `az login` ainult juhul, kui plaanid Azure CLI käske otse käivitada.**
+![Illustreeriv arhitektuur](../../../../../translated_images/et/architecture.8cec470ec15c65c7.webp)
 
-Järgmisena peaksid saama pärida oma Azure tellimuse olekut ning küsida küsimusi juurutatud ressursside või konfiguratsiooni kohta. Proovi järgmisi päringuid:
+Võrdle seda skeemi [praeguse ülespoole juurutusjuhendiga](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) ja oma tegelike ressurssidega. Kontrolli seadistatud mudelijuhtimist, agendi tööriistu, hallatud identiteeti, rollimääranguid ja vabatahtlikke AI Search/Application Insights ressursse.
 
-1. `List my Azure resource groups`
-1. `#foundry list my current deployments`
-
-Samuti võid küsida Azure dokumentatsiooni kohta ning saada vastuseid Microsoft Docs MCP serverist. Proovi neid päringuid:
-
-1. `#microsoft_docs_search What is Azure Developer CLI?`
-1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
-
-Või võid küsida koodinäiteid mingi ülesande täitmiseks. Proovi seda päringut.
-
-1. `Give me a Python code example that uses AAD for an interactive chat client`
-
-Küsimisrežiimis annab see koodi, mille saad kopeerida-kleebiks ja katsetada. Agentrežiimis võib see minna sammu edasi ja luua vajalikud ressursid sinu jaoks - sealhulgas seadistusskriptid ja dokumentatsiooni - et aidata ülesannet täita.
-
-**Sa oled nüüd varustatud malli hoidla uurimise alustamiseks**
-
----
-
-## 2. Arhitektuuri dekonstruerimine
-
-??? prompt "KÜSI: Selgita rakenduse arhitektuuri docs/images/architecture.png failis ühe lõiguga"
-
-      See rakendus on Azure’i-põhine tehisintellektil töötav vestlusrakendus, mis demonstreerib moodsat agentidel põhinevat arhitektuuri. Lahendus keskendub Azure Container Apile, mis majutab põhirakenduse koodi, mis töötleb kasutajasisestusi ja genereerib nutikaid vastuseid AI agendi kaudu.
-      
-      Arhitektuur kasutab Microsoft Foundry projekti kui aluspõhja AI võimekuse jaoks, ühendudes Azure AI teenustega, mis pakuvad aluseks olevaid keelemudeleid (nt gpt-4.1-mini) ja agentide funktsionaalsust.
-      
-      Kasutajate interaktsioonid liiguvad React-põhiselt kasutajaliideselt FastAPI taustteenusele, mis suhtleb AI agent teenusega kontekstuaalsete vastuste genereerimiseks.
-      
-      Süsteem sisaldab teadmiste hankimise võimekust kas failide otsingu või Azure AI Search teenuse kaudu, võimaldades agendil pääseda ligi ja tsiteerida üleslaaditud dokumentidest pärinevat teavet.
-      
-      Operatiivseks tipptasemeks sisaldab arhitektuur ulatuslikku jälgimist Application Insightsi ja Log Analytics Workspace’i kaudu jälgimiseks, logimiseks ja jõudluse optimeerimiseks.
-      
-      Azure Storage pakub rakendusandmete ja failide üleslaadimiseks blob-salvestuse võimalust, samal ajal kui Managed Identity tagab turvalise ligipääsu Azure ressursside vahel ilma mandaate salvestamata.
-      
-      Kogu lahendus on kujundatud skaleeritavaks ja hooldatavaks, kus konteineripõhine rakendus skaleerub automaatselt nõudluse põhjal, pakkudes samal ajal sisseehitatud turvalisust, jälgimist ja CI/CD võimalusi Azure hallatavate teenuste ökosüsteemiga.
-
-![Arhitektuur](../../../../../translated_images/et/architecture.48d94861e6e6cdc0.webp)
-
----
+**Harjutus:** Kutsu Copilot jälgima vestluse päringut esiotsast läbi API Foundryni koos failide ja funktsioonide viidetega. Ava need viited ja kontrolli selgitust. Ära järeldage rakendatud autentimist, marsruutimist ega lubamist ainult skeemi põhjal.
 
 ## 3. Hoidla struktuur
 
-!!! prompt "KÜSI: Selgita malli kaustastruktuuri. Alusta visuaalse hierarhilise diagrammiga."
+Alljärgnevaid valitud teid kontrolliti vastavalt näidisele 4. novembril 2026. Sinu initsialiseeritud revisjon jääb tõe allikaks:
 
-??? info "VASTUS: Visuaalne hierarhiline diagramm"
+```text
+get-started-with-ai-agents/
+  azure.yaml
+  docker-compose.yaml
+  requirements-dev.txt
+  .devcontainer/
+  infra/
+    main.bicep
+    main.parameters.json
+    api.bicep
+    core/
+  src/
+    Dockerfile
+    pyproject.toml
+    requirements.txt
+    api/
+      main.py
+      routes.py
+      search_index_manager.py
+    frontend/
+      package.json
+      src/
+    files/
+  scripts/
+    validate_env_vars.sh
+    validate_env_vars.ps1
+    postdeploy.sh
+    postdeploy.ps1
+  tests/
+    test_evaluation.py
+    test_red_teaming.py
+  docs/
+    deployment.md
+    deploy_customization.md
+    ai_search.md
+    observability.md
+    local_development.md
+    troubleshooting.md
+```
 
-      ```bash title="" 
-      get-started-with-ai-agents/
-      ├── 📋 Konfiguratsioon & Seadistus
-      │   ├── azure.yaml                    # Azure Developer CLI konfiguratsioon
-      │   ├── docker-compose.yaml           # Kohalikud arenduskonteinerid
-      │   ├── pyproject.toml                # Python projekti konfiguratsioon
-      │   ├── requirements-dev.txt          # Arenduse sõltuvused
-      │   └── .devcontainer/                # VS Code arenduskonteineri seadistus
-      │
-      ├── 🏗️ Infrastruktuur (infra/)
-      │   ├── main.bicep                    # Põhja infrastruktuuri mall
-      │   ├── api.bicep                     # API-spetsiifilised ressursid
-      │   ├── main.parameters.json          # Infrastruktuuri parameetrid
-      │   └── core/                         # Modulaarseid infrastruktuuri komponente
-      │       ├── ai/                       # AI teenuste konfiguratsioonid
-      │       ├── host/                     # Hostimise infrastruktuur
-      │       ├── monitor/                  # Jälgimine ja logimine
-      │       ├── search/                   # Azure AI Search seadistused
-      │       ├── security/                 # Turvalisus ja identiteet
-      │       └── storage/                  # Salvestuskonto konfiguratsioonid
-      │
-      ├── 💻 Rakenduse lähtekood (src/)
-      │   ├── api/                          # Tagapõhja API
-      │   │   ├── main.py                   # FastAPI rakenduse sisendpunkt
-      │   │   ├── routes.py                 # API marsruudi määratlused
-      │   │   ├── search_index_manager.py   # Otsingufunktsioonid
-      │   │   ├── data/                     # API andmetöötlus
-      │   │   ├── static/                   # Staatilised veebivarad
-      │   │   └── templates/                # HTML mallid
-      │   ├── frontend/                     # React/TypeScript kasutajaliides
-      │   │   ├── package.json              # Node.js sõltuvused
-      │   │   ├── vite.config.ts            # Vite build konfiguratsioon
-      │   │   └── src/                      # Kasutajaliidese lähtekood
-      │   ├── data/                         # Näidisandmefailid
-      │   │   └── embeddings.csv            # Ettevalmistatud embedimised
-      │   ├── files/                        # Teadmistebaasi failid
-      │   │   ├── customer_info_*.json      # Kliendiandmete näited
-      │   │   └── product_info_*.md         # Toote dokumentatsioon
-      │   ├── Dockerfile                    # Konteineri konfiguratsioon
-      │   └── requirements.txt              # Pythoni sõltuvused
-      │
-      ├── 🔧 Automatiseerimine & Skriptid (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Pärast juurutust seadistus
-      │   ├── setup_credential.sh/.ps1     # Mandaadi seadistus
-      │   ├── validate_env_vars.sh/.ps1    # Keskkonnamuutujate valideerimine
-      │   └── resolve_model_quota.sh/.ps1  # Mudeli kvoodi haldamine
-      │
-      ├── 🧪 Testimine & Hinnang
-      │   ├── tests/                        # Ühik- ja integratsioonitestid
-      │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Agendi hindamisraamistik
-      │   │   ├── evaluate.py               # Hindamise käivitaja
-      │   │   ├── eval-queries.json         # Testiküsimused
-      │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Arenduse mängumaa
-      │   │   ├── 1-quickstart.py           # Kiire algus näited
-      │   │   └── aad-interactive-chat.py   # Autentimise näited
-      │   └── airedteaming/                 # AI ohutuse hindamine
-      │       └── ai_redteaming.py          # Punase meeskonna testimine
-      │
-      ├── 📚 Dokumentatsioon (docs/)
-      │   ├── deployment.md                 # Juurutamisjuhend
-      │   ├── local_development.md          # Kohaliku arenduse juhised
-      │   ├── troubleshooting.md            # Levinumad probleemid ja lahendused
-      │   ├── azure_account_setup.md        # Azure eeldused
-      │   └── images/                       # Dokumentatsiooni varad
-      │
-      └── 📄 Projekti metaandmed
-         ├── README.md                     # Projekti ülevaade
-         ├── CODE_OF_CONDUCT.md           # Kogukonna juhendid
-         ├── CONTRIBUTING.md              # Panuse juhend
-         ├── LICENSE                      # Litsentsitingimused
-         └── next-steps.md                # Pärast juurutust juhised
-      ```
+### Tehniline taristu ja konfiguratsioon
 
-### 3.1. Põhirakenduse arhitektuur
+`infra/main.bicep` haldab ressursse; `main.parameters.json` ühendab malli sisendid AZD keskkonna väärtustega. `azure.yaml` valib rakendusteenuse ja elutsükli haakid. Jälgi näiteks sisendit `USE_AZURE_AI_SEARCH_SERVICE` nende failide kaudu, et leida, mis tegelikult muutub.
 
-See mall järgib **täisvirna veebirakenduse** mustrit, kus on:
+### Rakendus ja identiteet
 
-- **Tagapõhi**: Python FastAPI koos Azure AI integratsiooniga
-- **Kasutajaliides**: TypeScript/React koos Vite build süsteemiga
-- **Infrastruktuur**: Azure Bicep mallid pilveressursside jaoks
-- **Konteineriseerimine**: Docker järjepidevaks juurutamiseks
+Loe `src/api/` ja `src/frontend/` koos. Määra, kus agent luuakse või hangitakse, kus juhised/tööriistad seadistatakse ja millist identiteeti iga Azure kõne kasutab. Näidise failid kaustas `src/files/` on demonstratiivsed andmed, mitte tootmiskataloog või volitusmudel.
 
-### 3.2 Infrastruktuur kui kood (bicep)
+### Testid ja jälgitavus
 
-Infrastruktuuri kiht kasutab **Azure Bicep** mudeleid modulaarseks organiseerimiseks:
+Praegused hindamis- ja punatiimimise sisendid on kaustas `tests/`; vanemad kaustaviited `evals/` ja `airedteaming/` on selle näidise jaoks aegunud. Loe `docs/observability.md` eelduste ja kulude kohta enne pilvetestide käivitamist. Need Pythoni testid on eraldi vabatahtlikust `azure.ai.evaluations` AZD laiendusest.
 
-   - **`main.bicep`**: Orkestreerib kõik Azure ressursid
-   - **`core/` moodulid**: Taaskasutatavad komponendid erinevatele teenustele
-      - AI teenused (Microsoft Foundry mudelid, AI Search)
-      - Konteinerite hostimine (Azure Container Apps)
-      - Jälgimine (Application Insights, Log Analytics)
-      - Turvalisus (Key Vault, Managed Identity)
+## 4. Kinnita oma leiud
 
-### 3.3 Rakenduse lähtekood (`src/`)
+- Leia ühe näidisküsimuse API marsruut, agendi suhtlus ja andmete hankimise kood.
+- Selgita, milline identiteet pääseb Foundryle ligi ja milline konfiguratsioon valib selle otsapunkti.
+- Leia tegelikud eelsättimise ja järeljuurutamise skriptid ning nende veakäsitluskäitumine.
+- Tõmba nimekirja kõik sõltuvused või vabatahtlikud funktsioonid, mis sinu juurutusest puuduvad.
 
-**Tagapõhja API (`src/api/`)**:
-
-- FastAPI-põhine REST API
-- Foundry Agenti integratsioon
-- Otsingumootori haldus teadmiste hankimiseks
-- Failide üleslaadimise ja töötlemise võimalused
-
-**Kasutajaliides (`src/frontend/`)**:
-
-- Moodne React/TypeScript SPA
-- Vite kiire arendus ja optimeeritud buildid
-- Vestlusliides agendi suheldamiseks
-
-**Teadmistebaas (`src/files/`)**:
-
-- Näidis kliendi- ja tooteteave
-- Demonstreerib failipõhist teadmiste hankimist
-- JSON ja Markdown formaadis näited
-
-### 3.4 DevOps ja automatiseerimine
-
-**Skriptid (`scripts/`)**:
-
-- Platvormideülene PowerShell ja Bash skriptid
-- Keskkonna valideerimine ja seadistus
-- Pärast juurutust seadistamine
-- Mudelikvoodi haldus
-
-**Azure Developer CLI integratsioon**:
-
-- `azure.yaml` konfiguratsioon `azd` töövoogude jaoks
-- Automatiseeritud provisioning ja juurutus
-- Keskkonnamuutujate haldus
-
-### 3.5 Testimine ja kvaliteedi tagamine
-
-**Hindamisraamistik (`evals/`)**:
-
-- Agendi jõudluse hindamine
-- Päring-vastus kvaliteedi testid
-- Automatiseeritud hindamisprotsess
-
-**AI ohutus (`airedteaming/`)**:
-
-- Punase meeskonna testimine AI ohutuse tagamiseks
-- Turvariskide skaneerimine
-- Vastutustundliku AI praktikad
-
----
-
-## 4. Palju õnne 🏆
-
-Sa edukalt kasutasid GitHub Copilot Chati MCP serveritega, et uurida hoidlat.
-
-- [X] Aktiveerisid GitHub Copiloti Azure jaoks
-- [X] Mõistsid rakenduse arhitektuuri
-- [X] Uurisin AZD malli struktuuri
-
-See annab sulle aimu selle malli _infrastruktuur kui kood_ varadest. Järgmisena vaatame AZD konfiguratsioonifaili.
+Jätka [Malli seadistamisega](4-Configure-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest loobumine**:
-See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüame täpsust, palun arvestage, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Kriitilise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta käesoleva tõlke kasutamisest tingitud eksituste või valesti mõistmiste eest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

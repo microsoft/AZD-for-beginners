@@ -1,23 +1,23 @@
 # Kapitel 6: Planering och validering före distribution
 
-**📚 Kurs**: [AZD För nybörjare](../../README.md) | **⏱️ Varaktighet**: 1 timme | **⭐ Svårighetsgrad**: Medelnivå
+**📚 Kurs**: [AZD För nybörjare](../../README.md) | **⏱️ Tid**: 2-4 timmar läsning; extra tid för anpassade labbar | **⭐ Svårighetsgrad**: Mellan–Avancerad
 
 ---
 
 ## Översikt
 
-Detta kapitel täcker viktiga planerings- och valideringssteg innan du distribuerar din applikation. Lär dig undvika kostsamma misstag med korrekt kapacitetsplanering, SKU-val och förhandskontroller.
+Det här kapitlet täcker viktiga planerings- och valideringssteg före distribution av din applikation. Lär dig undvika kostsamma misstag genom korrekt kapacitetsplanering, val av SKU och förhandskontroller.
 
-> Validerad mot `azd 1.27.1` i juli 2026.
+> Kommandoriktlinjer granskade mot den publicerade `azd 1.37.2` referensen. Molndistributioner har inte körts. De längre lektionerna innehåller illustrativa fragment, inte kompletta lokala distributionsprojekt.
 
-## Lärandemål
+## Målsättningar
 
-Genom att slutföra detta kapitel kommer du att:
+När du har slutfört detta kapitel kommer du att:
 - Köra förhandskontroller före distribution
 - Planera kapacitet och uppskatta resursbehov
 - Välja lämpliga SKU:er för kostnadsoptimering
 - Konfigurera Application Insights för övervakning
-- Förstå samordningsmönster för teamet
+- Förstå mönster för samordning av flera agenter och deras distributionskrav
 
 ---
 
@@ -27,41 +27,41 @@ Genom att slutföra detta kapitel kommer du att:
 |---|--------|-------------|------|
 | 1 | [Förhandskontroller](preflight-checks.md) | Validera konfiguration före distribution | 15 min |
 | 2 | [Kapacitetsplanering](capacity-planning.md) | Uppskatta resursbehov | 20 min |
-| 3 | [SKU-val](sku-selection.md) | Välj lämpliga prisnivåer | 15 min |
+| 3 | [SKU-val](sku-selection.md) | Välj lämpliga prisklasser | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfigurera övervakning | 20 min |
-| 5 | [Samordningsmönster](coordination-patterns.md) | Teamets distributionsarbetsflöden | 15 min |
+| 5 | [Samordningsmönster](coordination-patterns.md) | Avancerad design för multi-agent orkestrering | 60-75 min |
 
 ---
 
 ## 🚀 Snabbstart
 
 ```bash
-# Kontrollera prenumerationskvoter
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Förhandsgranska distribution (inga resurser skapas)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Validera Bicep-syntax
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Kontrollera miljökonfiguration
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Kontrollista före distribution
+## ☑️ Checklista före distribution
 
-### Före `azd provision`
+### Innan `azd provision`
 
 - [ ] Kvot verifierad för region
-- [ ] SKU:er valda lämpligt
-- [ ] Kostnadsuppskattning granskad
-- [ ] Namngivningskonvention konsekvent
-- [ ] Säkerhet/RBAC konfigurerat
+- [ ] SKU:er valda korrekt
+- [ ] Kostnadsberäkning granskad
+- [ ] Konventionsnamngivning konsekvent
+- [ ] Säkerhet/RBAC konfigurerad
 
-### Före `azd deploy`
+### Innan `azd deploy`
 
 - [ ] Miljövariabler satta
 - [ ] Hemligheter i Key Vault
@@ -74,10 +74,10 @@ azd env get-values
 
 | Arbetsbelastning | Utveckling | Produktion |
 |----------|-------------|------------|
-| Containerappar | Consumption | Dedicated D4 |
+| Container Apps | Consumption | Consumption eller dedikerad arbetsprofil, baserat på mätt belastning |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Azure OpenAI-modeller | Stödd pay-as-you-go-distributionstyp | Pay-as-you-go eller provisionerad genomströmning; beroende på modell/region |
+| AI Search | Gratis/Basic inom gränser | Basic eller Standard-nivå anpassad för index, repliker och frågelast |
 
 ---
 

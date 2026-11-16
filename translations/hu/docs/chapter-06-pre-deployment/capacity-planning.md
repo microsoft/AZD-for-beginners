@@ -1,69 +1,71 @@
-# Kapacitástervezés - Azure erőforrások elérhetősége és korlátai
+# Kapacitástervezés - Azure erőforrás elérhetőség és korlátok
 
 **Fejezet navigáció:**
-- **📚 Kurzus főoldal**: [AZD For Beginners](../../README.md)
-- **📖 Jelenlegi fejezet**: 6. fejezet - Előtelepítés előtti ellenőrzés és tervezés
+- **📚 Tanfolyam kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 6. fejezet - Előkészítő validáció és tervezés
 - **⬅️ Előző fejezet**: [5. fejezet: Többügynökös MI megoldások](../../examples/retail-scenario.md)
 - **➡️ Következő**: [SKU kiválasztás](sku-selection.md)
-- **🚀 Következő fejezet**: [7. fejezet: Hibaelhárítás](../chapter-07-troubleshooting/common-issues.md)
+- **🚀 Következő fejezet**: [7. fejezet: Hibakeresés](../chapter-07-troubleshooting/common-issues.md)
 
-## Bevezetés
+## Bevezető
 
-Ez az átfogó útmutató segít a Azure erőforrások kapacitásának megtervezésében és érvényesítésében az Azure Developer CLI-vel történő telepítés előtt. Tanulja meg felmérni a kvótákat, elérhetőséget és regionális korlátozásokat, hogy biztosítsa a sikeres telepítéseket, miközben optimalizálja a költségeket és a teljesítményt. Sajátítsa el a kapacitástervezési technikákat különböző alkalmazás-architektúrák és skálázási forgatókönyvek esetére.
+Ez az átfogó útmutató segít megtervezni és validálni az Azure erőforrás kapacitását az Azure Developer CLI használatával a telepítés előtt. Tanulja meg ellenőrizni a kvótákat, elérhetőséget és regionális korlátokat annak érdekében, hogy sikeres telepítéseket hajtson végre miközben optimalizálja a költségeket és teljesítményt. Sajátítsa el a kapacitástervezési technikákat különböző alkalmazás architektúrákhoz és skálázási forgatókönyvekhez.
 
 ## Tanulási célok
 
-A útmutató elvégzésével Ön:
-- Megérti az Azure kvótáit, korlátait és regionális elérhetőségi korlátait
-- Elsajátítja az erőforrás-elérhetőség és kapacitás ellenőrzésének technikáit telepítés előtt
-- Megvalósít automatizált kapacitás-érvényesítési és monitorozási stratégiákat
-- Olyan alkalmazásokat tervez, amelyek megfelelő méretezéssel és skálázási megfontolásokkal rendelkeznek
-- Alkalmaz költségoptimalizálási stratégiákat intelligens kapacitástervezéssel
-- Konfigurál riasztásokat és monitorozást a kvótahasználathoz és az erőforrások elérhetőségéhez
+Az útmutató elvégzése után képes lesz:
+- Megérteni az Azure kvótákat, korlátokat és regionális elérhetőségi korlátozásokat
+- Elsajátítani az erőforrás elérhetőség és kapacitás ellenőrzésének technikáit telepítés előtt
+- Automatizált kapacitás validációs és monitorozási stratégiákat alkalmazni
+- Olyan alkalmazásokat tervezni, amelyek megfelelő erőforrás méretezéssel és skálázási megfontolásokkal rendelkeznek
+- Költségoptimalizálási stratégiákat alkalmazni intelligens kapacitástervezéssel
+- Riasztásokat és monitorozást beállítani a kvóta használathoz és erőforrás elérhetőséghez
 
 ## Tanulási eredmények
 
-A befejezést követően képes lesz:
-- Felmérni és érvényesíteni az Azure erőforrás kapacitásigényeit telepítés előtt
-- Automatizált szkripteket létrehozni kapacitás-ellenőrzésre és kvóta-monitorozásra
-- Olyan skálázható architektúrákat tervezni, amelyek figyelembe veszik a regionális és előfizetési korlátokat
-- Költséghatékony erőforrás-méretezési stratégiákat alkalmazni különböző munkaterhelésekhez
+A fejezet végére képes lesz:
+- Értékelni és validálni az Azure erőforrás kapacitás igényeit telepítés előtt
+- Automatizált szkripteket készíteni kapacitás ellenőrzéshez és kvóta monitorozáshoz
+- Skálázható architektúrákat tervezni regionális és előfizetési korlátok figyelembevételével
+- Költséghatékony erőforrás méretezési stratégiákat alkalmazni különböző munkaterhelés típusokra
 - Proaktív monitorozást és riasztást konfigurálni kapacitással kapcsolatos problémákra
-- Többrégiós telepítéseket tervezni megfelelő kapacitás-elosztással
+- Több régiós telepítéseket megtervezni megfelelő kapacitás elosztással
 
 ## Miért fontos a kapacitástervezés
 
-Alkalmazások telepítése előtt biztosítania kell:
-- **Megfelelő kvótákat** a szükséges erőforrásokhoz
-- **Erőforrás elérhetőséget** a cél régióban
-- **Szolgáltatási szint elérhetőséget** az előfizetés típusához
-- **Hálózati kapacitást** a várt forgalomhoz
-- **Költségoptimalizálást** megfelelő méretezéssel
+> **Hatókör:** Ezek a Bash példák az Azure CLI, `jq` és egy kiválasztott előfizetés használatát igénylik. Megvizsgálják a közzétett ajánlatokat és kvótákat; egyik sem bizonyít fizikai kapacitást vagy nem foglal erőforrásokat. Mentse/el az itt található példákat saját projektjéhez - a szkript/konfigurációs fájlnevek példák, nem feltöltött kézbesítők. A VM kvóták nem vonatkoznak a Container Apps, App Service vagy Azure OpenAI kvótákra.
 
-## 📊 Az Azure kvóták és korlátok megértése
+Alkalmazások telepítése előtt meg kell győződni arról, hogy:
+- **Elégséges kvóták** a szükséges erőforrásokhoz
+- **Erőforrás elérhetőség** a célzott régióban
+- **Szolgáltatási szint elérhetőség** az előfizetés típusához
+- **Hálózati kapacitás** a várt forgalomhoz
+- **Költség optimalizálás** megfelelő méretezéssel
 
-### A korlátok típusai
-1. **Előfizetés-szintű kvóták** - Maximális erőforrások előfizetésenként
+## 📊 Azure kvóták és korlátok megértése
+
+### Korlát típusok
+1. **Előfizetés szintű kvóták** - Maximális erőforrások előfizetésenként
 2. **Regionális kvóták** - Maximális erőforrások régiónként
-3. **Erőforrás-specifikus korlátok** - Egyes erőforrástípusokra vonatkozó korlátok
-4. **Szolgáltatási szint korlátok** - A szolgáltatási terv alapú korlátok
+3. **Erőforrás specifikus korlátok** - Egyedi erőforrás típusok korlátai
+4. **Szolgáltatási szint korlátok** - Szolgáltatási csomag alapján érvényes korlátok
 
-### Gyakori erőforrás-kvóták
+### Gyakori erőforrás kvóták
 ```bash
-# Ellenőrizze az aktuális kvótahasználatot
+# Check current quota usage
 az vm list-usage --location eastus2 --output table
 
-# Ellenőrizze a konkrét erőforrások kvótáit
+# Check specific resource quotas
 az network list-usages --location eastus2 --output table
-az storage account show-usage --output table
+az storage account show-usage --location eastus2 --output table
 ```
 
-## Előtelepítés előtti kapacitás-ellenőrzések
+## Telepítés előtti kapacitás ellenőrzések
 
-### Automatizált kapacitás-érvényesítő szkript
+### Automatizált kapacitás validációs szkript
 ```bash
 #!/bin/bash
-# capacity-check.sh - Azure kapacitás ellenőrzése a telepítés előtt
+# capacity-check.sh - Validate Azure capacity before deployment
 
 set -e
 
@@ -74,7 +76,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Függvény a kvótahasználat ellenőrzésére
+# Function to check quota usage
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -83,22 +85,26 @@ check_quota() {
     
     case $resource_type in
         "compute")
-            usage=$(az vm list-usage --location "$LOCATION" --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az vm list-usage --location "$LOCATION" --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
         "storage")
-            usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+            usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.current')
             limit=$(echo "$usage" | jq -r '.limit')
             ;;
         "network")
-            usage=$(az network list-usages --location "$LOCATION" --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az network list-usages --location "$LOCATION" --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
     esac
     
+    if ! [[ "$current" =~ ^[0-9]+$ && "$limit" =~ ^[0-9]+$ ]]; then
+        echo "❌ Quota data missing or unrecognized for $resource_type"
+        return 1
+    fi
     available=$((limit - current))
     
     if [ "$available" -ge "$required" ]; then
@@ -109,98 +115,95 @@ check_quota() {
     fi
 }
 
-# Különböző erőforráskvóták ellenőrzése
-check_quota "compute" 4      # Szükséges 4 vCPU
-check_quota "storage" 2      # Szükséges 2 tárolófiók
-check_quota "network" 1      # Szükséges 1 virtuális hálózat
+# Check various resource quotas
+check_quota "compute" 4      # Need 4 vCPUs
+check_quota "storage" 2      # Need 2 storage accounts
+check_quota "network" 1      # Need 1 virtual network
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Szolgáltatás-specifikus kapacitás-ellenőrzések
+### Szolgáltatás-specifikus kapacitás ellenőrzések
 
-#### App Service kapacitása
+#### App Service kapacitás
 ```bash
-# Ellenőrizze az App Service Plan elérhetőségét
+# Check App Service Plan availability
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Ellenőrizze a régióban elérhető SKU-kat
-    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
+    # Check available SKUs in region
+    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location' || name=='$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)']" -o tsv)
     
     if [ -n "$available_skus" ]; then
-        echo "✅ $sku is available in $location"
+        echo "✅ $sku is listed for $location (not a capacity guarantee)"
     else
         echo "❌ $sku is not available in $location"
         
-        # Javasoljon alternatív régiókat
+        # Suggest alternative regions
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Ellenőrizze az aktuális használatot
+    # Check current usage
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Használat
+# Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-#### Adatbázis-kapacitás
+#### Adatbázis kapacitás
 ```bash
-# Ellenőrizze a PostgreSQL kapacitását
+# Check PostgreSQL capacity
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Ellenőrizze, hogy az SKU elérhető-e
+    # Inspect the nested regional capability catalog; do not assume top-level
+    # entries are VM SKU names. Select supported tier/version/SKU combinations.
     available=$(az postgres flexible-server list-skus --location "$location" \
-        --query "contains([].name, '$sku')" -o tsv)
+        --output json)
     
-    if [ "$available" = "true" ]; then
-        echo "✅ PostgreSQL $sku is available in $location"
+    if [ -n "$available" ] && [ "$available" != "[]" ]; then
+        echo "$available" | jq .
+        echo "Inspect the catalog for $sku; this does not verify physical capacity."
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Mutassa az elérhető SKU-kat
+        # Show available SKUs
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
-            --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
+            --output json
         return 1
     fi
 }
 
-# Ellenőrizze a Cosmos DB kapacitását
+# Check Cosmos DB capacity
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Ellenőrizze a régió elérhetőségét
-    available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
+    # Check region availability
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    available_regions=$(az cosmosdb locations list --query "[?name=='$display_location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Ellenőrizze, hogy a serverless támogatott-e (ha szükséges)
+        # Check if serverless is supported (if needed)
         if [ "$tier" = "serverless" ]; then
-            serverless_regions=$(az cosmosdb locations list \
-                --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
-            
-            if [ -n "$serverless_regions" ]; then
-                echo "✅ Cosmos DB Serverless is supported in $location"
-            else
-                echo "⚠️  Cosmos DB Serverless may not be supported in $location"
-            fi
+            echo "Verify serverless support and limits separately in Cosmos DB documentation."
+            echo "Availability-zone support is NOT a serverless-support signal."
         fi
     else
         echo "❌ Cosmos DB is not available in $location"
@@ -209,38 +212,33 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Container Apps kapacitása
+#### Container Apps kapacitás
 ```bash
-# Ellenőrizze a Container Apps kapacitását
+# Check Container Apps capacity
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Ellenőrizze, hogy a Container Apps elérhető-e a régióban
-    az provider show --namespace Microsoft.App \
-        --query "resourceTypes[?resourceType=='containerApps'].locations" \
-        --output table | grep -q "$location"
-    
-    if [ $? -eq 0 ]; then
+    # Check if Container Apps is available in region
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    if az provider show --namespace Microsoft.App \
+        --query "resourceTypes[?resourceType=='containerApps'].locations[]" \
+        --output tsv | grep -Fxq "$display_location"; then
         echo "✅ Container Apps is available in $location"
         
-        # Ellenőrizze az aktuális környezetek számát
+        # Check current environment count
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # A Container Apps esetében régiónként legfeljebb 15 környezet engedélyezett
-        if [ "$current_envs" -lt 15 ]; then
-            echo "✅ Can create more Container App environments"
-        else
-            echo "⚠️  Near Container App environment limit in $location"
-        fi
+        echo "Check Microsoft.App quotas for this subscription/region in Azure Quotas."
+        echo "An environment count alone does not establish available quota."
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Mutassa az elérhető régiókat
+        # Show available regions
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -250,11 +248,11 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Regionális elérhetőség ellenőrzése
+## 📍 Regionális elérhetőség ellenőrzés
 
-### Szolgáltatás elérhetősége régiónként
+### Szolgáltatás elérhetőség régiónként
 ```bash
-# Ellenőrizze a szolgáltatások elérhetőségét régiónként
+# Check service availability across regions
 check_service_availability() {
     local service=$1
     
@@ -269,9 +267,8 @@ check_service_availability() {
                 --query "resourceTypes[?resourceType=='containerApps'].locations" -o table
             ;;
         "postgres")
-            az postgres flexible-server list-skus --location eastus2 >/dev/null 2>&1 && \
-            echo "PostgreSQL Flexible Server regions:" && \
-            az account list-locations --query "[?metadata.regionType=='Physical'].{name:name,displayName:displayName}" -o table
+            echo "PostgreSQL offerings for candidate region eastus2:"
+            az postgres flexible-server list-skus --location eastus2 --output json
             ;;
         "cosmosdb")
             az cosmosdb locations list --query "[].{name:name,documentationUrl:documentationUrl}" -o table
@@ -279,18 +276,20 @@ check_service_availability() {
     esac
 }
 
-# Ellenőrizze az összes szolgáltatást
+# Check all services
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-### Régió kiválasztási ajánlások
+### Régió kiválasztás megbeszélés (illusztráció)
+
+A következő címkék vizsgálati szempontokat jelölnek, nem ellenőrzött árakat, hardvert vagy megfelelőségi rangsorokat. Hasonlítsa össze az aktuális regionális árakat és mért késleltetést. A GDPR nem írja elő kifejezetten a németországi régiót; a lakóhelyet, szolgáltatási funkciókat és szervezeti/jogi követelményeket együtt kell értékelni.
 ```bash
-# Ajánljon optimális régiókat a követelmények alapján
+# Recommend optimal regions based on requirements
 recommend_region() {
-    local requirements=$1  # "alacsony költség" | "teljesítmény" | "megfelelés"
+    local requirements=$1  # "lowcost" | "performance" | "compliance"
     
     echo "Region recommendations for: $requirements"
     
@@ -303,14 +302,14 @@ recommend_region() {
             ;;
         "performance")
             echo "⚡ Performance-optimized regions:"
-            echo "  - East US 2 (Virginia) - Latest hardware"
-            echo "  - West US 2 (Washington) - Latest hardware"
+            echo "  - East US 2 (Virginia) - Measure latency to your users"
+            echo "  - West US 2 (Washington) - Verify required SKUs"
             echo "  - North Europe (Ireland) - For EU users"
             ;;
         "compliance")
             echo "🔒 Compliance-focused regions:"
             echo "  - US Gov regions - For government workloads"
-            echo "  - Germany regions - For GDPR compliance"
+            echo "  - EU regions - Assess residency and contractual requirements"
             echo "  - Australia regions - For data sovereignty"
             ;;
     esac
@@ -319,29 +318,19 @@ recommend_region() {
 
 ## 💰 Költségtervezés és becslés
 
-### Erőforrás-költség becslés
+### Erőforrás költségbecslés
 ```bash
-# Becsülje meg a telepítési költségeket
+# Estimate deployment costs
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Hozzon létre egy ideiglenes erőforráscsoportot a becsléshez
-    temp_rg="temp-estimation-$(date +%s)"
-    az group create --name "$temp_rg" --location "$location" >/dev/null
-    
-    # Telepítse az infrastruktúrát érvényesítési módban
-    az deployment group validate \
-        --resource-group "$temp_rg" \
-        --template-file infra/main.bicep \
-        --parameters @infra/main.parameters.json \
-        --parameters location="$location" \
-        --query "properties.validatedResources[].{type:type,name:name}" -o table
-    
-    # Törölje az ideiglenes erőforráscsoportot
-    az group delete --name "$temp_rg" --yes --no-wait
+    # Review declared resources locally. ARM validate/what-if do NOT price them.
+    # Do not create/delete a resource group just to estimate cost.
+    az bicep build --file infra/main.bicep --stdout |
+      jq -r '.resources[] | [.type, (.sku.name // "see module/parameters")] | @tsv'
     
     echo ""
     echo "💡 Use Azure Pricing Calculator for detailed cost estimates:"
@@ -354,10 +343,10 @@ estimate_costs() {
 
 ### SKU optimalizálási ajánlások
 ```bash
-# Ajánljon optimális SKU-kat a követelmények alapján
+# Recommend optimal SKUs based on requirements
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "fejlesztés" | "teszt" | "éles"
+    local workload_type=$2  # "dev" | "staging" | "production"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -417,32 +406,33 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Automatizált előellenőrzések
+## 🚀 Automatizált elő-ellenőrzések
 
-### Átfogó előellenőrző szkript
+### Átfogó elő-ellenőrző szkript
 ```bash
 #!/bin/bash
-# preflight-check.sh - Teljes telepítés előtti ellenőrzés
+# preflight-check.sh - Complete pre-deployment validation
+# Starting-point example: adapt service checks and supply project-specific costs.
 
 set -e
 
-# Konfiguráció
+# Configuration
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Kimenet színei
+# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # Nincs szín
+NC='\033[0m' # No Color
 
-# Naplózó függvények
+# Logging functions
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Konfiguráció betöltése
+# Load configuration
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -462,9 +452,10 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Ellenőrzés 1: Hitelesítés
+# Check 1: Authentication
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
+    SUBSCRIPTION_ID=$(az account show --query id -o tsv)
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
     log_info "Authenticated with subscription: $SUBSCRIPTION_NAME"
 else
@@ -472,7 +463,7 @@ else
     exit 1
 fi
 
-# Ellenőrzés 2: Regionális elérhetőség
+# Check 2: Regional availability
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -481,14 +472,15 @@ else
     exit 1
 fi
 
-# Ellenőrzés 3: Kvóta ellenőrzése
+# Check 3: Quota validation
 log_info "Checking quota availability..."
 
-# vCPU kvóta
+# vCPU quota
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
-    --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
 vcpu_limit=$(echo "$vcpu_usage" | jq -r '.[0].limit')
+[[ "$vcpu_current" =~ ^[0-9]+$ && "$vcpu_limit" =~ ^[0-9]+$ ]] || { log_error "Missing VM quota data"; exit 1; }
 vcpu_available=$((vcpu_limit - vcpu_current))
 
 if [ "$vcpu_available" -ge "$REQUIRED_VCPUS" ]; then
@@ -498,10 +490,11 @@ else
     exit 1
 fi
 
-# Tárolási fiók kvóta
-storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+# Storage account quota
+storage_usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
+[[ "$storage_current" =~ ^[0-9]+$ && "$storage_limit" =~ ^[0-9]+$ ]] || { log_error "Missing storage quota data"; exit 1; }
 storage_available=$((storage_limit - storage_current))
 
 if [ "$storage_available" -ge "$REQUIRED_STORAGE" ]; then
@@ -511,13 +504,14 @@ else
     exit 1
 fi
 
-# Ellenőrzés 4: Szolgáltatás elérhetősége
+# Check 4: Service availability
 log_info "Checking service availability..."
+DISPLAY_LOCATION=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
 
 for service in "${REQUIRED_SERVICES[@]}"; do
     case $service in
         "appservice")
-            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION' || name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "App Service is available in $LOCATION"
             else
                 log_error "App Service is not available in $LOCATION"
@@ -535,7 +529,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
         "containerapp")
             if az provider show --namespace Microsoft.App \
                 --query "resourceTypes[?resourceType=='containerApps'].locations" \
-                --output tsv | grep -q "$LOCATION"; then
+                --output tsv | grep -Fxq "$DISPLAY_LOCATION"; then
                 log_info "Container Apps is available in $LOCATION"
             else
                 log_error "Container Apps is not available in $LOCATION"
@@ -543,22 +537,29 @@ for service in "${REQUIRED_SERVICES[@]}"; do
             fi
             ;;
         "cosmosdb")
-            if az cosmosdb locations list --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az cosmosdb locations list --query "[?name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "Cosmos DB is available in $LOCATION"
             else
                 log_error "Cosmos DB is not available in $LOCATION"
                 exit 1
             fi
             ;;
+        "storage")
+            log_info "Storage account quota checked above; validate the selected SKU separately."
+            ;;
+        *)
+            log_error "No check implemented for service: $service"; exit 1
+            ;;
     esac
 done
 
-# Ellenőrzés 5: Hálózati kapacitás
+# Check 5: Network capacity
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
-    --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
 vnet_current=$(echo "$vnet_usage" | jq -r '.[0].current')
 vnet_limit=$(echo "$vnet_usage" | jq -r '.[0].limit')
+[[ "$vnet_current" =~ ^[0-9]+$ && "$vnet_limit" =~ ^[0-9]+$ ]] || { log_error "Missing network quota data"; exit 1; }
 vnet_available=$((vnet_limit - vnet_current))
 
 if [ "$vnet_available" -gt 0 ]; then
@@ -567,7 +568,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Ellenőrzés 6: Erőforrásnevek érvényesítése
+# Check 6: Resource naming validation
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -579,9 +580,12 @@ else
     exit 1
 fi
 
-# Ellenőrzés 7: Költségbecslés
+# Check 7: Cost estimation
 log_info "Performing cost estimation..."
-ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
+# Set this from a reviewed Pricing Calculator estimate; no built-in pricing API
+# is implemented by this example.
+: "${ESTIMATED_MONTHLY_COST:?Set ESTIMATED_MONTHLY_COST to your reviewed estimate}"
+[[ "$ESTIMATED_MONTHLY_COST" =~ ^[0-9]+$ ]] || { log_error "Use an integer cost estimate"; exit 1; }
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
 
 if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; then
@@ -594,7 +598,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Ellenőrzés 8: Sablon érvényesítése
+# Check 8: Template validation
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -608,10 +612,10 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Végső összegzés
+# Final summary
 echo "=================================="
-log_info "✅ All pre-flight checks passed!"
-log_info "Ready for deployment to $LOCATION"
+log_info "✅ Implemented checks passed; review remaining service-specific limits."
+log_info "Quota is not a reservation or guarantee of capacity in $LOCATION."
 echo "Next steps:"
 echo "  1. Run 'azd up' to deploy"
 echo "  2. Monitor deployment progress"
@@ -652,31 +656,31 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Kapacitás monitorozása telepítés közben
+## 📈 Kapacitás monitorozás telepítés közben
 
-### Valós idejű kapacitásfigyelés
+### Valós idejű kapacitás monitorozás
 ```bash
-# Figyeld a kapacitást telepítés közben
+# Monitor capacity during deployment
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Ellenőrizd a telepítés állapotát
+        # Check deployment status
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
-            --query "[0].properties.provisioningState" -o tsv)
+            --query "sort_by(@, &properties.timestamp)[-1].properties.provisioningState" -o tsv)
         
         if [ "$deployment_status" = "Succeeded" ]; then
             log_info "Deployment completed successfully"
             break
-        elif [ "$deployment_status" = "Failed" ]; then
+        elif [ "$deployment_status" = "Failed" ] || [ "$deployment_status" = "Canceled" ]; then
             log_error "Deployment failed"
             break
         fi
         
-        # Ellenőrizd az aktuális erőforráshasználatot
+        # Check current resource usage
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -689,15 +693,16 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integráció az AZD-vel
 
-### Előellenőrzési hookok hozzáadása az azure.yaml-hoz
+### Elő-ellenőrzési hook-ok hozzáadása az azure.yaml fájlhoz
 ```yaml
 # azure.yaml
 hooks:
   preprovision:
     shell: sh
     run: |
+      set -e
       echo "Running pre-flight capacity checks..."
-      ./scripts/preflight-check.sh ${AZURE_LOCATION} ${AZURE_ENV_NAME}
+      bash ./scripts/preflight-check.sh "${AZURE_LOCATION}" "${AZURE_ENV_NAME}"
       
       if [ $? -ne 0 ]; then
         echo "Pre-flight checks failed"
@@ -709,27 +714,27 @@ hooks:
 
 ## Legjobb gyakorlatok
 
-1. **Mindig futtass kapacitás-ellenőrzéseket** új régiókba történő telepítés előtt
-2. **Rendszeresen figyeld a kvótahasználatot**, hogy elkerüld a meglepetéseket
-3. **Tervezd a növekedést** a jövőbeni kapacitásigények ellenőrzésével
-4. **Használj költségbecslő eszközöket**, hogy elkerüld a számlameglepetéseket
-5. **Dokumentáld a kapacitáskövetelményeket** a csapatod számára
-6. **Automatizáld a kapacitás-ellenőrzést** CI/CD pipeline-okban
-7. **Fontold meg a regionális failover** kapacitáskövetelményeket
+1. **Mindig futtasson kapacitásellenőrzést** új régiókba történő telepítés előtt
+2. **Rendszeresen ellenőrizze a kvóta használatot** meglepetések elkerülésére
+3. **Tervezze meg a növekedést** a jövőbeli kapacitásigények ellenőrzésével
+4. **Használjon költségbecslő eszközöket** a számlalöket elkerüléséhez
+5. **Dokumentálja a kapacitás követelményeket** a csapata számára
+6. **Automatizálja a kapacitás validációt** CI/CD folyamatokban
+7. **Vegye figyelembe a regionális failover kapacitás igényeket**
 
 ## Következő lépések
 
-- [SKU kiválasztási útmutató](sku-selection.md) - Válassz optimális szolgáltatási szinteket
-- [Előellenőrzések](preflight-checks.md) - Automatizált ellenőrző szkriptek
-- [Gyorsparancsok](../../resources/cheat-sheet.md) - Gyors referencia parancsok
-- [Fogalomtár](../../resources/glossary.md) - Fogalmak és definíciók
+- [SKU kiválasztási útmutató](sku-selection.md) - Optimális szolgáltatási szintek kiválasztása
+- [Elő-ellenőrzések](preflight-checks.md) - Automatizált validációs szkriptek
+- [Segédlet](../../resources/cheat-sheet.md) - Gyorsparancsok
+- [Fogalomtár](../../resources/glossary.md) - Kifejezések és definíciók
 
 ## További források
 
 - [Azure előfizetési korlátok](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure árkalkulátor](https://azure.microsoft.com/pricing/calculator/)
 - [Azure költségkezelés](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure régiós elérhetőség](https://azure.microsoft.com/global-infrastructure/services/)
+- [Azure regionális elérhetőség](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
@@ -741,6 +746,6 @@ hooks:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Felelősségkizárás**:
-Ez a dokumentum az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) használatával készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő irányadónak. Kritikus jelentőségű információk esetén szakmai, emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő bármilyen félreértésért vagy téves értelmezésért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

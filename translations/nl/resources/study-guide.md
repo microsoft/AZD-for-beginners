@@ -1,87 +1,87 @@
 # Studiegids - Uitgebreide Leerdoelen
 
-**Navigatie van het leerpad**
-- **📚 Cursus Startpagina**: [AZD For Beginners](../README.md)
-- **📖 Begin met leren**: [Hoofdstuk 1: Basis & Snelstart](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Voortgang bijhouden**: [Cursusvoltooiing](../README.md#-course-completion--certification)
+**Navigatie van het Leertraject**
+- **📚 Cursus Home**: [AZD Voor Beginners](../README.md)
+- **📖 Begin met Leren**: [Hoofdstuk 1: Basis & Snelle Start](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Voortgangsbewaking**: [Cursusvoltooiing](../README.md#-course-completion--certification)
 
-## Inleiding
+## Introductie
 
-Deze uitgebreide studiegids biedt gestructureerde leerdoelen, kernconcepten, oefenopdrachten en toetsmateriaal om je te helpen de Azure Developer CLI (azd) te beheersen. Gebruik deze gids om je voortgang bij te houden en ervoor te zorgen dat je alle essentiële onderwerpen hebt behandeld.
+Deze uitgebreide studiegids biedt gestructureerde leerdoelen, kernconcepten, oefenopdrachten en beoordelingsmaterialen om je te helpen de Azure Developer CLI (azd) te beheersen. Gebruik deze gids om je voortgang bij te houden en ervoor te zorgen dat je alle essentiële onderwerpen hebt behandeld.
 
 ## Leerdoelen
 
-Door deze studiegids te voltooien zul je:
-- Alle fundamentele en gevorderde concepten van Azure Developer CLI beheersen
-- Praktische vaardigheden ontwikkelen in het implementeren en beheren van Azure-toepassingen
-- Vertrouwen opbouwen in het oplossen van problemen en het optimaliseren van implementaties
-- Productieklare deployment-praktijken en beveiligingsoverwegingen begrijpen
+Door deze studiegids te voltooien, zul je:
+- Alle fundamentele en geavanceerde concepten van Azure Developer CLI beheersen
+- Praktische vaardigheden ontwikkelen voor het implementeren en beheren van Azure-applicaties
+- Zelfvertrouwen opbouwen in het oplossen van problemen en optimaliseren van implementaties
+- Productieklare implementatiepraktijken en beveiligingsoverwegingen begrijpen
 
 ## Leerresultaten
 
-Na het voltooien van alle secties van deze studiegids kun je:
-- Volledige applicatiearchitecturen ontwerpen, implementeren en beheren met azd
-- Uitgebreide monitoring-, beveiligings- en kostenoptimalisatiestrategieën implementeren
-- Complexe implementatieproblemen zelfstandig oplossen
-- Aangepaste templates maken en bijdragen aan de azd-community
+Na het afronden van alle secties in deze studiegids, zul je in staat zijn om:
+- Volledige applicatie-architecturen te ontwerpen, implementeren en beheren met azd
+- Uitgebreide monitoring-, beveiligings- en kostenoptimalisatiestrategieën te implementeren
+- Zelfstandig complexe implementatieproblemen op te lossen
+- Aangepaste sjablonen te maken en bij te dragen aan de azd-gemeenschap
 
-## Leerstructuur met 8 hoofdstukken
+## Leerstructuur van 8 Hoofdstukken
 
-### Hoofdstuk 1: Basis & Snelstart (Week 1)
+### Hoofdstuk 1: Basis & Snelle Start (Week 1)
 **Duur**: 30-45 minuten | **Complexiteit**: ⭐
 
 #### Leerdoelen
-- Begrijp de kernconcepten en terminologie van Azure Developer CLI
-- Installeer en configureer succesvol AZD op je ontwikkelplatform
-- Zet je eerste applicatie uit met een bestaande template
-- Navigeer effectief in de AZD-commandoregelinterface
+- Azure Developer CLI kernconcepten en terminologie begrijpen
+- AZD succesvol installeren en configureren op je ontwikkelplatform
+- Je eerste applicatie implementeren met een bestaande sjabloon
+- Effectief navigeren door de AZD command line interface
 
-#### Belangrijke concepten om te beheersen
-- AZD-projectstructuur en componenten (azure.yaml, infra/, src/)
-- Template-gebaseerde deployment-werkstromen
+#### Sleutelconcepten om te Beheersen
+- AZD projectstructuur en componenten (azure.yaml, infra/, src/)
+- Sjabloon-gebaseerde implementatie workflows
 - Basisprincipes van omgevingsconfiguratie
 - Beheer van resourcegroepen en abonnementen
 
-#### Praktische oefeningen
-1. **Installatieverificatie**: Installeer AZD en verifieer met `azd version`
-2. **Eerste deployment**: Rol de todo-nodejs-mongo-template succesvol uit
-3. **Omgeving instellen**: Configureer je eerste omgevingsvariabelen
-4. **Resource verkenning**: Verken gedeploide resources in de Azure Portal
+#### Praktische Oefeningen
+1. **Installatie Verificatie**: Installeer AZD en verifieer met `azd version`
+2. **Eerste Implementatie**: Implementeer succesvol de todo-nodejs-mongo sjabloon
+3. **Omgevingsinstellingen**: Stel je eerste omgevingsvariabelen in
+4. **Resource Verkenning**: Navigeer door geïmplementeerde resources in de Azure Portal
 
-#### Toetsvragen
+#### Beoordelingsvragen
 - Wat zijn de kerncomponenten van een AZD-project?
-- Hoe initialiseert u een nieuw project vanuit een template?
+- Hoe initialiseert u een nieuw project van een sjabloon?
 - Wat is het verschil tussen `azd up` en `azd deploy`?
 - Hoe beheert u meerdere omgevingen met AZD?
 
 ---
 
-### Hoofdstuk 2: AI-First Ontwikkeling (Week 2)
+### Hoofdstuk 2: AI-Eerst Ontwikkeling (Week 2)
 **Duur**: 1-2 uur | **Complexiteit**: ⭐⭐
 
 #### Leerdoelen
-- Integreer Microsoft Foundry-services met AZD-werkstromen
-- Implementeer en configureer AI-aangedreven applicaties
-- Begrijp RAG (Retrieval-Augmented Generation) implementatiepatronen
-- Beheer AI-modelimplementaties en -schaalbaarheid
+- Microsoft Foundry diensten integreren met AZD-workflows
+- Implementeren en configureren van AI-gestuurde applicaties
+- RAG (Retrieval-Augmented Generation) implementatiepatronen begrijpen
+- AI-model implementaties en schaalbeheer beheren
 
-#### Belangrijke concepten om te beheersen
-- Integratie van Microsoft Foundry Models-service en API-beheer
-- AI Search-configuratie en vectorindexering
-- Modelimplementatiestrategieën en capaciteitsplanning
-- Monitoring en prestatie-optimalisatie van AI-toepassingen
+#### Sleutelconcepten om te Beheersen
+- Integratie van Microsoft Foundry Models service en API-beheer
+- AI Search configuratie en vectorindexering
+- Implementatiestrategieën voor modellen en capaciteitsplanning
+- AI applicatiemonitoring en prestatieoptimalisatie
 
-#### Praktische oefeningen
-1. **AI-chat implementatie**: Rol de azure-search-openai-demo-template uit
-2. **RAG-implementatie**: Configureer documentindexering en retrieval
-3. **Modelconfiguratie**: Stel meerdere AI-modellen in met verschillende doeleinden
-4. **AI-monitoring**: Implementeer Application Insights voor AI-workloads
+#### Praktische Oefeningen
+1. **AI Chat Implementatie**: Implementeer de azure-search-openai-demo sjabloon
+2. **RAG-Implementatie**: Configureer documentindexering en -opvraging
+3. **Model Configuratie**: Stel meerdere AI-modellen met verschillende doeleinden in
+4. **AI Monitoring**: Implementeer Application Insights voor AI workloads
 
-#### Toetsvragen
-- Hoe configureer je Microsoft Foundry Models-services in een AZD-template?
-- Wat zijn de belangrijkste componenten van een RAG-architectuur?
-- Hoe beheer je modelcapaciteit en schaalbaarheid?
-- Welke monitoringstatistieken zijn belangrijk voor AI-toepassingen?
+#### Beoordelingsvragen
+- Hoe configureer je Microsoft Foundry Models services in een AZD-sjabloon?
+- Wat zijn de kerncomponenten van een RAG-architectuur?
+- Hoe beheer je AI-modelcapaciteit en schaalvergroting?
+- Welke monitoringstatistieken zijn belangrijk voor AI-applicaties?
 
 ---
 
@@ -89,221 +89,221 @@ Na het voltooien van alle secties van deze studiegids kun je:
 **Duur**: 45-60 minuten | **Complexiteit**: ⭐⭐
 
 #### Leerdoelen
-- Beheers strategieën voor omgevingsconfiguratie en -beheer
-- Implementeer veilige authenticatiepatronen en managed identity
+- Beheers omgevingsconfiguratie en beheerstrategieën
+- Implementeer veilige authenticatiepatronen en beheerde identiteit
 - Organiseer resources met juiste naamgevingsconventies
-- Configureer multi-omgeving deployments (dev, staging, prod)
+- Configureer multi-omgeving implementaties (dev, staging, prod)
 
-#### Belangrijke concepten om te beheersen
-- Omgevinghiërarchie en configuratievoorrang
-- Managed identity en service principal-authenticatie
-- Key Vault-integratie voor geheimenbeheer
-- Omgevingsspecifieke parameterbeheer
+#### Sleutelconcepten om te Beheersen
+- Omgevingshiërarchie en configuratievoorrang
+- Beheerde identiteit en service principal authenticatie
+- Integratie van Key Vault voor geheimenbeheer
+- Omgeving-specifiek parameterbeheer
 
-#### Praktische oefeningen
-1. **Multi-omgeving setup**: Configureer dev-, staging- en prod-omgevingen
-2. **Beveiligingsconfiguratie**: Implementeer managed identity-authenticatie
+#### Praktische Oefeningen
+1. **Multi-Omgeving Setup**: Configureer dev-, staging- en prod-omgevingen
+2. **Beveiligingsconfiguratie**: Implementeer beheerde identiteit authenticatie
 3. **Geheimenbeheer**: Integreer Azure Key Vault voor gevoelige gegevens
 4. **Parameterbeheer**: Maak omgevingsspecifieke configuraties
 
-#### Toetsvragen
+#### Beoordelingsvragen
 - Hoe configureer je verschillende omgevingen met AZD?
-- Wat zijn de voordelen van managed identity ten opzichte van service principals?
+- Wat zijn de voordelen van het gebruik van beheerde identiteit ten opzichte van service principals?
 - Hoe beheer je applicatiegeheimen veilig?
 - Wat is de configuratiehiërarchie in AZD?
 
 ---
 
-### Hoofdstuk 4: Infrastructure as Code & Deployment (Week 4-5)
-**Duur**: 1-1.5 uur | **Complexiteit**: ⭐⭐⭐
+### Hoofdstuk 4: Infrastructure as Code & Implementatie (Week 4-5)
+**Duur**: 1-1,5 uur | **Complexiteit**: ⭐⭐⭐
 
 #### Leerdoelen
-- Maak en pas Bicep-infrastructuurtemplates aan
-- Implementeer geavanceerde deployment-patronen en werkstromen
-- Begrijp strategieën voor resourceprovisioning
+- Maak en pas Bicep infrastructuresjablonen aan
+- Implementeer geavanceerde implementatiepatronen en workflows
+- Begrijp resource provisioning strategieën
 - Ontwerp schaalbare multi-service architecturen
 
-- Roll out containerized applicaties met Azure Container Apps en AZD
+- Implementeer containerized applicaties met Azure Container Apps en AZD
 
 
-#### Belangrijke concepten om te beheersen
-- Bicep-template-structuur en best practices
-- Resource-afhankelijkheden en deployment-volgorde
-- Parameterbestanden en template-modulariteit
-- Aangepaste hooks en deployment-automatisering
-- Deployment-patronen voor Container Apps (quick start, productie, microservices)
+#### Sleutelconcepten om te Beheersen
+- Bicep sjabloonstructuur en best practices
+- Resource afhankelijkheden en implementatievolgorde
+- Parameterbestanden en sjabloonmodulariteit
+- Aangepaste hooks en implementatie-automatisering
+- Container app implementatiepatronen (snelle start, productie, microservices)
 
-#### Praktische oefeningen
-1. **Aangepaste template maken**: Bouw een multi-service applicatie-template
-2. **Bicep-beheersing**: Maak modulaire, herbruikbare infrastructuurcomponenten
-3. **Deployment-automatisering**: Implementeer pre/post deployment hooks
-4. **Architectuurontwerp**: Rol een complexe microservices-architectuur uit
-5. **Container App Deployment**: Rol de [Simple Flask API](../../../examples/container-app/simple-flask-api) en [Microservices Architecture](../../../examples/container-app/microservices) voorbeelden uit met AZD
+#### Praktische Oefeningen
+1. **Aangepaste Sjablooncreatie**: Bouw een multi-service applicatiesjabloon
+2. **Bicep Beheersing**: Maak modulaire, herbruikbare infrastructuurcomponenten
+3. **Implementatie Automatisering**: Implementeer pre/post implementatie hooks
+4. **Architectuurontwerp**: Implementeer complexe microservices architecturen
+5. **Container App Implementatie**: Implementeer de [Simple Flask API](../../../examples/container-app/simple-flask-api) en [Microservices Architecture](../../../examples/container-app/microservices) voorbeelden met AZD
 
-#### Toetsvragen
-- Hoe maak je aangepaste Bicep-templates voor AZD?
+#### Beoordelingsvragen
+- Hoe maak je aangepaste Bicep sjablonen voor AZD?
 - Wat zijn de best practices voor het organiseren van infrastructuurcode?
-- Hoe ga je om met resource-afhankelijkheden in templates?
-- Welke deployment-patronen ondersteunen zero-downtime-updates?
+- Hoe ga je om met resource afhankelijkheden in sjablonen?
+- Welke implementatiepatronen ondersteunen zero-downtime updates?
 
 ---
 
-### Hoofdstuk 5: Multi-Agent AI-oplossingen (Week 6-7)
+### Hoofdstuk 5: Multi-Agent AI Oplossingen (Week 6-7)
 **Duur**: 2-3 uur | **Complexiteit**: ⭐⭐⭐⭐
 
 #### Leerdoelen
-- Ontwerp en implementeer multi-agent AI-architecturen
-- Orkestreer agentcoördinatie en communicatie
-- Rol productieklare AI-oplossingen uit met monitoring
-- Begrijp agent-specialisatie en workflowpatronen
+- Ontwerp en implementeer multi-agent AI architecturen
+- Orkestreer agent coördinatie en communicatie
+- Implementeer productieklare AI-oplossingen met monitoring
+- Begrijp agent specialisatie en workflow patronen
 - Integreer containerized microservices als onderdeel van multi-agent oplossingen
 
-#### Belangrijke concepten om te beheersen
-- Multi-agent architectuurpatronen en ontwerprincipes
-- Agentcommunicatieprotocollen en datastromen
+#### Sleutelconcepten om te Beheersen
+- Multi-agent architectuurpatronen en ontwerpprincipes
+- Agent communicatieprotocollen en datastromen
 - Load balancing en schaalstrategieën voor AI-agents
 - Productiemonitoring voor multi-agent systemen
 - Service-naar-service communicatie in containerized omgevingen
 
-#### Praktische oefeningen
-1. **Retail-oplossing uitrollen**: Rol het volledige multi-agent retailscenario uit
-2. **Agentaanpassing**: Wijzig het gedrag van Customer- en Inventory-agents
-3. **Architectuur-schaalbaarheid**: Implementeer load balancing en autoscaling
-4. **Productiemonitoring**: Stel uitgebreide monitoring en alerting in
-5. **Microservices-integratie**: Breid het [Microservices Architecture](../../../examples/container-app/microservices) voorbeeld uit om agentgebaseerde workflows te ondersteunen
+#### Praktische Oefeningen
+1. **Retail Architectuurreview**: Analyseer het retailblauwdruk en identificeer welke applicatiecomponenten moeten worden geïmplementeerd vóór de implementatie
+2. **Agent Aanpassing**: Pas gedrag van Customer en Inventory agents aan
+3. **Architectuur Schalen**: Implementeer load balancing en autoscaling
+4. **Productiemonitoring**: Stel uitgebreide monitoring en alarmering in
+5. **Microservices Integratie**: Breid het [Microservices Architecture](../../../examples/container-app/microservices) voorbeeld uit om agent-gebaseerde workflows te ondersteunen
 
-#### Toetsvragen
+#### Beoordelingsvragen
 - Hoe ontwerp je effectieve multi-agent communicatiepatronen?
-- Wat zijn de belangrijkste overwegingen bij het schalen van AI-agent workloads?
+- Wat zijn de belangrijkste overwegingen voor het schalen van AI-agent workloads?
 - Hoe monitor en debug je multi-agent AI-systemen?
-- Welke productiemethoden zorgen voor betrouwbaarheid van AI-agents?
+- Welke productiepatronen zorgen voor betrouwbaarheid van AI-agents?
 
 ---
 
-### Hoofdstuk 6: Pre-Deployment Validatie & Planning (Week 8)
+### Hoofdstuk 6: Pre-Implementatie Validatie & Planning (Week 8)
 **Duur**: 1 uur | **Complexiteit**: ⭐⭐
 
 #### Leerdoelen
-- Voer uitgebreide capaciteitsplanning en resourcevalidatie uit
-- Selecteer optimale Azure SKUs voor kosteneffectiviteit
-- Implementeer geautomatiseerde pre-flight checks en validatie
-- Plan deployments met kostenoptimalisatiestrategieën
+- Voer uitgebreide capaciteitsplanning en resource-validatie uit
+- Selecteer optimale Azure SKU's voor kostenbesparing
+- Implementeer geautomatiseerde pre-flight controles en validatie
+- Plan implementaties met kostenoptimalisatiestrategieën
 
-#### Belangrijke concepten om te beheersen
-- Azure resourcequota's en capaciteitslimieten
+#### Sleutelconcepten om te Beheersen
+- Azure resourcequota’s en capaciteitsbeperkingen
 - SKU-selectiecriteria en kostenoptimalisatie
 - Geautomatiseerde validatiescripts en testen
-- Deploymentplanning en risicoanalyse
+- Implementatieplanning en risicobeoordeling
 
-#### Praktische oefeningen
+#### Praktische Oefeningen
 1. **Capaciteitsanalyse**: Analyseer resourcevereisten voor je applicaties
-2. **SKU-optimalisatie**: Vergelijk en selecteer kosteneffectieve servicetiers
-3. **Validatie-automatisering**: Implementeer pre-deployment check-scripts
-4. **Kostenplanning**: Maak schattingen van deploymentkosten en budgetten
+2. **SKU Optimalisatie**: Vergelijk en selecteer kosteneffectieve servicetiers
+3. **Validatie Automatisering**: Implementeer pre-implementatie controlescripts
+4. **Kostenplanning**: Maak kostenramingen en budgetten voor implementatie
 
-#### Toetsvragen
-- Hoe valideer je Azure-capaciteit vóór deployment?
-- Welke factoren beïnvloeden SKU-selectiebeslissingen?
-- Hoe automatiseer je pre-deployment validatie?
-- Welke strategieën helpen bij het optimaliseren van deploymentkosten?
+#### Beoordelingsvragen
+- Hoe valideer je Azure capaciteit vóór implementatie?
+- Welke factoren beïnvloeden SKU-keuzebeslissingen?
+- Hoe automatiseer je pre-implementatie validatie?
+- Welke strategieën helpen bij het optimaliseren van implementatiekosten?
 
 ---
 
-### Hoofdstuk 7: Troubleshooting & Debugging (Week 9)
-**Duur**: 1-1.5 uur | **Complexiteit**: ⭐⭐
+### Hoofdstuk 7: Probleemoplossing & Debuggen (Week 9)
+**Duur**: 1-1,5 uur | **Complexiteit**: ⭐⭐
 
 #### Leerdoelen
-- Ontwikkel systematische debug-aanpakken voor AZD-deployments
-- Los veelvoorkomende deployment- en configuratieproblemen op
+- Ontwikkel systematische debugmethoden voor AZD-implementaties
+- Los veelvoorkomende implementatie- en configuratieproblemen op
 - Debug AI-specifieke problemen en prestatieproblemen
-- Implementeer monitoring en alerting voor proactieve probleemdetectie
+- Implementeer monitoring en alarmering voor proactieve probleemdetectie
 
-#### Belangrijke concepten om te beheersen
-- Diagnostische technieken en loggingstrategieën
-- Veelvoorkomende foutpatronen en hun oplossingen
+#### Sleutelconcepten om te Beheersen
+- Diagnostische technieken en logstrategieën
+- Veelvoorkomende faalpatronen en hun oplossingen
 - Prestatiemonitoring en optimalisatie
-- Incidentrespons en herstelprocedures
+- Incident response en herstelprocedures
 
-#### Praktische oefeningen
-1. **Diagnostische vaardigheden**: Oefen met opzettelijk kapotte deployments
+#### Praktische Oefeningen
+1. **Diagnostische Vaardigheden**: Oefen met bewust kapotte implementaties
 2. **Loganalyse**: Gebruik Azure Monitor en Application Insights effectief
-3. **Prestatieafstemming**: Optimaliseer traag presterende applicaties
-4. **Herstelprocedures**: Implementeer backup- en disaster recovery
+3. **Prestatieafstemming**: Optimaliseer langzaam presterende applicaties
+4. **Herstelprocedures**: Implementeer back-up en noodherstel
 
-#### Toetsvragen
-- Wat zijn de meest voorkomende AZD-deploymentfouten?
+#### Beoordelingsvragen
+- Wat zijn de meest voorkomende AZD-implementatiefouten?
 - Hoe debug je authenticatie- en permissieproblemen?
-- Welke monitoringstrategieën helpen productproblemen te voorkomen?
+- Welke monitoringstrategieën helpen productieproblemen te voorkomen?
 - Hoe optimaliseer je applicatieprestaties in Azure?
 
 ---
 
-### Hoofdstuk 8: Productie- & Enterprise-patronen (Week 10-11)
+### Hoofdstuk 8: Productie- & Enterprisepatronen (Week 10-11)
 **Duur**: 2-3 uur | **Complexiteit**: ⭐⭐⭐⭐
 
 #### Leerdoelen
-- Implementeer enterprise-grade deployment-strategieën
+- Implementeer enterprise-grade implementatiestrategieën
 - Ontwerp beveiligingspatronen en compliancekaders
 - Stel monitoring, governance en kostenbeheer in
 - Creëer schaalbare CI/CD-pijplijnen met AZD-integratie
-- Pas best practices toe voor productie-Container App-deployments (beveiliging, monitoring, kosten, CI/CD)
+- Pas best practices toe voor productie-container app-implementaties (beveiliging, monitoring, kosten, CI/CD)
 
-#### Belangrijke concepten om te beheersen
-- Enterprise-beveiliging en compliancevereisten
-- Governance-kaders en beleidimplementatie
+#### Sleutelconcepten om te Beheersen
+- Enterprise beveiligings- en compliancevereisten
+- Governance-kaders en beleidsimplementatie
 - Geavanceerde monitoring en kostenbeheer
-- CI/CD-integratie en geautomatiseerde deployment-pijplijnen
-- Blue-green en canary deployment-strategieën voor containerized workloads
+- CI/CD-integratie en geautomatiseerde implementatiepijplijnen
+- Blue-green- en canary-implementatiestrategieën voor container workloads
 
-#### Praktische oefeningen
-1. **Enterprise-beveiliging**: Implementeer uitgebreide beveiligingspatronen
-2. **Governance-kader**: Stel Azure Policy en resourcebeheer in
-3. **Geavanceerde monitoring**: Maak dashboards en geautomatiseerde alerting
-4. **CI/CD-integratie**: Bouw geautomatiseerde deployment-pijplijnen
+#### Praktische Oefeningen
+1. **Enterprise Beveiliging**: Implementeer uitgebreide beveiligingspatronen
+2. **Governance Kader**: Stel Azure Policy en resourcebeheer in
+3. **Geavanceerde Monitoring**: Maak dashboards en geautomatiseerde alarmering
+4. **CI/CD Integratie**: Bouw geautomatiseerde implementatiepijplijnen
 5. **Productie Container Apps**: Pas beveiliging, monitoring en kostenoptimalisatie toe op het [Microservices Architecture](../../../examples/container-app/microservices) voorbeeld
 
-#### Toetsvragen
-- Hoe implementeer je enterprise-beveiliging in AZD-deployments?
+#### Beoordelingsvragen
+- Hoe implementeer je enterprise beveiliging in AZD-implementaties?
 - Welke governancepatronen zorgen voor compliance en kostenbeheersing?
 - Hoe ontwerp je schaalbare monitoring voor productiesystemen?
-- Welke CI/CD-patronen werken het beste met AZD-werkstromen?
+- Welke CI/CD-patronen werken het best met AZD-workflows?
 
 #### Leerdoelen
 - Begrijp de fundamenten en kernconcepten van Azure Developer CLI
-- Installeer en configureer succesvol azd op je ontwikkelomgeving
-- Voltooi je eerste deployment met een bestaande template
-- Navigeer door de azd-projectstructuur en begrijp de belangrijkste componenten
+- Installeer en configureer azd succesvol in je ontwikkelomgeving
+- Voltooi je eerste implementatie met een bestaande sjabloon
+- Navigeer door de azd-projectstructuur en begrijp de kerncomponenten
 
-#### Belangrijke concepten om te beheersen
-- Templates, omgevingen en services
+#### Sleutelconcepten om te Beheersen
+- Sjablonen, omgevingen en services
 - azure.yaml configuratiestructuur
 - Basis azd-commando's (init, up, down, deploy)
-- Infrastructure as Code-principes
-- Azure-authenticatie en autorisatie
+- Infrastructure as Code principes
+- Azure authenticatie en autorisatie
 
-#### Oefenopdrachten
+#### Oefeningen
 
 **Oefening 1.1: Installatie en Setup**
-```bash
-# Voltooi deze taken:
+```text
+# Complete these tasks:
 1. Install azd using your preferred method
-2. Install Azure CLI and authenticate
+2. Install Azure CLI only for exercises or template hooks that explicitly use `az`; authenticate AZD independently
 3. Verify installation with: azd version
 4. Test connectivity with: azd auth login
 5. Explore available templates: azd template list
 ```
 
-**Oefening 1.2: Eerste Deployment**
-```bash
-# Rol een eenvoudige webapplicatie uit:
-1. Initialize project: azd init --template todo-nodejs-mongo
+**Oefening 1.2: Eerste Implementatie**
+```text
+# Deploy a simple web application:
+1. Initialize project in an empty directory: azd init --template todo-nodejs-mongo .
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
 4. Test the deployed application
 5. Clean up resources: azd down
 ```
 
-**Oefening 1.3: Projectstructuuranalyse**
+**Oefening 1.3: Analyse Projectstructuur**
 ```
 Analyze the following components:
 1. azure.yaml - service definitions and hooks
@@ -314,16 +314,16 @@ Analyze the following components:
 
 #### Zelfbeoordelingsvragen
 1. Wat zijn de drie kernconcepten van azd-architectuur?
-2. Wat is het doel van het azure.yaml-bestand?
-3. Hoe helpen omgevingen bij het beheren van verschillende deploymentdoelen?
-4. Welke authenticatiemethoden kunnen met azd worden gebruikt?
+2. Wat is het doel van het azure.yaml bestand?
+3. Hoe helpen omgevingen bij het beheren van verschillende implementatiedoelen?
+4. Welke authenticatiemethoden kunnen worden gebruikt met azd?
 5. Wat gebeurt er wanneer je `azd up` voor het eerst uitvoert?
 
 ---
 
-## Voortgangsregistratie en beoordelingskader
-```bash
-# Maak en configureer meerdere omgevingen:
+## Voortgangsbewaking en Beoordelingskader
+```text
+# Create and configure multiple environments:
 1. Create development environment: azd env new development
 2. Create staging environment: azd env new staging
 3. Create production environment: azd env new production
@@ -331,8 +331,8 @@ Analyze the following components:
 5. Deploy the same application to different environments
 ```
 
-**Oefening 2.2: Geavanceerde configuratie**
-```yaml
+**Oefening 2.2: Geavanceerde Configuratie**
+```text
 # Modify azure.yaml to include:
 1. Multiple services with different configurations
 2. Pre and post deployment hooks
@@ -341,8 +341,8 @@ Analyze the following components:
 ```
 
 **Oefening 2.3: Beveiligingsconfiguratie**
-```bash
-# Implementeer de beste beveiligingspraktijken:
+```text
+# Implement security best practices:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
 3. Implement least-privilege access controls
@@ -350,31 +350,31 @@ Analyze the following components:
 ```
 
 #### Zelfbeoordelingsvragen
-1. Hoe gaat azd om met de voorrang van omgevingsvariabelen?
-2. Wat zijn deployment hooks en wanneer zou je ze gebruiken?
-3. Hoe configureer je verschillende SKUs voor verschillende omgevingen?
-4. Wat zijn de beveiligingsimplicaties van verschillende authenticatiemethoden?
+1. Hoe gaat azd om met omgevingsvariabelevoorrang?
+2. Wat zijn implementatie hooks en wanneer moet je deze gebruiken?
+3. Hoe configureer je verschillende SKU's voor verschillende omgevingen?
+4. Wat zijn de beveiligingsgevolgen van verschillende authenticatiemethoden?
 5. Hoe beheer je geheimen en gevoelige configuratiegegevens?
 
-### Module 3: Deployment en Provisioning (Week 4)
+### Module 3: Implementatie en Provisioning (Week 4)
 
 #### Leerdoelen
-- Beheers deployment-werkstromen en best practices
-- Begrijp Infrastructure as Code met Bicep-templates
+- Beheers implementatieworkflows en best practices
+- Begrijp Infrastructure as Code met Bicep-sjablonen
 - Implementeer complexe multi-service architecturen
-- Optimaliseer deploymentprestaties en betrouwbaarheid
+- Optimaliseer implementatieprestaties en betrouwbaarheid
 
-#### Belangrijke concepten om te beheersen
-- Bicep-template-structuur en modules
-- Resource-afhankelijkheden en volgorde
-- Deployment-strategieën (blue-green, rolling updates)
-- Multi-region deployments
-- Database-migraties en databeheer
+#### Sleutelconcepten om te Beheersen
+- Bicep sjabloonstructuur en modules
+- Resource afhankelijkheden en volgorde
+- Implementatiestrategieën (blue-green, rolling updates)
+- Multi-regio implementaties
+- Database migraties en databeheer
 
-#### Oefenopdrachten
+#### Oefeningen
 
-**Oefening 3.1: Aangepaste infrastructuur**
-```bicep
+**Oefening 3.1: Aangepaste Infrastructuur**
+```text
 // Create custom Bicep templates for:
 1. Web application with custom domain and SSL
 2. Database with backup and high availability
@@ -383,9 +383,9 @@ Analyze the following components:
 5. Network security groups and virtual networks
 ```
 
-**Oefening 3.2: Multi-service applicatie**
-```bash
-# Implementeer een microservices-architectuur:
+**Oefening 3.2: Multi-Service Applicatie**
+```text
+# Deploy a microservices architecture:
 1. Frontend web application
 2. Backend API service
 3. Database service
@@ -393,9 +393,9 @@ Analyze the following components:
 5. Background worker service
 ```
 
-**Oefening 3.3: Database-integratie**
-```bash
-# Implementeer patronen voor database-implementatie:
+**Oefening 3.3: Database Integratie**
+```text
+# Implement database deployment patterns:
 1. Deploy PostgreSQL with connection pooling
 2. Implement schema migrations
 3. Configure backup and recovery procedures
@@ -404,139 +404,139 @@ Analyze the following components:
 ```
 
 #### Zelfbeoordelingsvragen
-1. Wat zijn de voordelen van het gebruik van Bicep ten opzichte van ARM-templates?
-2. Hoe ga je om met databasemigraties in azd-deployments?
-3. Welke strategieën bestaan er voor zero-downtime deployments?
+1. Wat zijn de voordelen van het gebruik van Bicep in plaats van ARM-sjablonen?
+2. Hoe ga je om met database migraties in azd-implementaties?
+3. Welke strategieën bestaan er voor zero-downtime implementaties?
 4. Hoe beheer je afhankelijkheden tussen services?
-5. Wat zijn de overwegingen voor multi-region deployments?
+5. Wat zijn de overwegingen voor multi-regio implementaties?
 
-### Module 4: Pre-Deployment Validatie (Week 5)
+### Module 4: Pre-Implementatie Validatie (Week 5)
 
 #### Leerdoelen
-- Implementeer uitgebreide controles voorafgaand aan de uitrol
-- Beheers capaciteitsplanning en resource-validatie
-- Begrijp SKU-selectie en kostenoptimalisatie
-- Bouw geautomatiseerde validatiepijplijnen
+- Voer uitgebreide pre-deployment controles uit  
+- Beheers capaciteitsplanning en resourcevalidatie  
+- Begrijp SKU-selectie en kostenoptimalisatie  
+- Bouw geautomatiseerde validatiepijplijnen  
 
-#### Belangrijke concepten om te beheersen
-- Azure resourcequota's en limieten
-- Criteria voor SKU-selectie en kostenimplicaties
-- Geautomatiseerde validatiescripts en -tools
-- Methodologieën voor capaciteitsplanning
-- Prestatie-testen en optimalisatie
+#### Belangrijke concepten om te beheersen  
+- Azure resourcequota's en limieten  
+- Criteria voor SKU-selectie en kostenimplicaties  
+- Geautomatiseerde validatiescripts en tools  
+- Methodologieën voor capaciteitsplanning  
+- Prestatie testen en optimalisatie  
 
-#### Praktijkoefeningen
+#### Oefeningen  
 
-**Oefening 4.1: Capaciteitsplanning**
-```bash
-# Implementeer capaciteitsvalidatie:
+**Oefening 4.1: Capaciteitsplanning**  
+```text
+# Implement capacity validation:
 1. Create scripts to check Azure quotas
 2. Validate service availability in target regions
 3. Estimate resource costs for different SKUs
 4. Plan for scaling and growth requirements
 5. Document capacity requirements for each environment
 ```
-
-**Oefening 4.2: Pre-flightvalidatie**
-```powershell
-# Bouw een uitgebreide validatiepijplijn:
+  
+**Oefening 4.2: Pre-flight Validatie**  
+```text
+# Build comprehensive validation pipeline:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
 4. Network connectivity and security validation
 5. Cost estimation and budget verification
 ```
-
-**Oefening 4.3: SKU-optimalisatie**
-```bash
-# Optimaliseer serviceconfiguraties:
+  
+**Oefening 4.3: SKU-optimalisatie**  
+```text
+# Optimize service configurations:
 1. Compare performance characteristics of different SKUs
 2. Implement cost-effective development configurations
 3. Design high-performance production configurations
 4. Create monitoring dashboards for resource utilization
 5. Set up auto-scaling policies
 ```
+  
+#### Zelfbeoordelingsvragen  
+1. Welke factoren moeten de keuzes voor SKU-selectie beïnvloeden?  
+2. Hoe valideer je de beschikbaarheid van Azure-resources vóór de deployment?  
+3. Wat zijn de belangrijkste componenten van een pre-flight checksysteem?  
+4. Hoe schat je de kosten van deployment in en houd je ze onder controle?  
+5. Welke monitoring is essentieel voor capaciteitsplanning?  
 
-#### Zelfbeoordelingsvragen
-1. Welke factoren moeten een rol spelen bij het kiezen van een SKU?
-2. Hoe valideer je de beschikbaarheid van Azure-resources vóór uitrol?
-3. Wat zijn de belangrijkste componenten van een pre-flight check-systeem?
-4. Hoe schat en beheers je de uitrolkosten?
-5. Welke monitoring is essentieel voor capaciteitsplanning?
+### Module 5: Probleemoplossing en Debugging (Week 6)  
 
-### Module 5: Probleemoplossing en Debugging (Week 6)
+#### Leerdoelen  
+- Beheers systematische methodes voor probleemoplossing  
+- Ontwikkel expertise in het debuggen van complexe deploymentproblemen  
+- Implementeer uitgebreide monitoring en alerting  
+- Bouw incident response en herstelprocedures  
 
-#### Leerdoelen
-- Beheers systematische methodologieën voor probleemoplossing
-- Ontwikkel expertise in het debuggen van complexe uitrolproblemen
-- Implementeer uitgebreide monitoring en waarschuwingen
-- Bouw procedures voor incidentrespons en herstel
+#### Belangrijke concepten om te beheersen  
+- Veelvoorkomende patronen van deploymentfouten  
+- Loganalyse- en correlatietechnieken  
+- Prestatiebewaking en optimalisatie  
+- Detectie en reactie op beveiligingsincidenten  
+- Disaster recovery en bedrijfscontinuïteit  
 
-#### Belangrijke concepten om te beheersen
-- Veelvoorkomende faalpatronen bij uitrol
-- Loganalyse en correlatietechnieken
-- Prestatiemonitoring en optimalisatie
-- Detectie en respons op beveiligingsincidenten
-- Rampenherstel en bedrijfscontinuïteit
+#### Oefeningen  
 
-#### Praktijkoefeningen
-
-**Oefening 5.1: Probleemoplossingsscenario's**
-```bash
-# Oefen met het oplossen van veelvoorkomende problemen:
+**Oefening 5.1: Probleemoplossingsscenario's**  
+```text
+# Practice resolving common issues:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
 3. Application startup and runtime errors
 4. Network connectivity problems
 5. Performance and scaling issues
 ```
-
-**Oefening 5.2: Monitoring-implementatie**
-```bash
-# Stel uitgebreide monitoring in:
+  
+**Oefening 5.2: Implementatie van Monitoring**  
+```text
+# Set up comprehensive monitoring:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
 4. Log aggregation and analysis
 5. Health check endpoints and automated testing
 ```
-
-**Oefening 5.3: Incidentrespons**
-```bash
-# Ontwikkel procedures voor incidentrespons:
+  
+**Oefening 5.3: Incident Response**  
+```text
+# Build incident response procedures:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
 4. Practice disaster recovery scenarios
 5. Document lessons learned and improvements
 ```
+  
+#### Zelfbeoordelingsvragen  
+1. Wat is de systematische aanpak voor het oplossen van azd deployments?  
+2. Hoe correleer je logs tussen meerdere services en resources?  
+3. Welke monitoringmetriek is het belangrijkst voor vroege probleemdetectie?  
+4. Hoe implementeer je effectieve disaster recovery procedures?  
+5. Wat zijn de belangrijkste onderdelen van een incident response plan?  
 
-#### Zelfbeoordelingsvragen
-1. Wat is de systematische aanpak voor het oplossen van problemen bij azd-deployments?
-2. Hoe correleer je logs over meerdere diensten en resources?
-3. Welke monitoringmetrics zijn het belangrijkst voor vroege probleemdetectie?
-4. Hoe implementeer je effectieve procedures voor rampenherstel?
-5. Wat zijn de belangrijkste componenten van een incidentresponsplan?
+### Module 6: Gevorderde onderwerpen en best practices (Week 7-8)  
 
-### Module 6: Geavanceerde onderwerpen en beste praktijken (Week 7-8)
+#### Leerdoelen  
+- Implementeer deployementpatronen van enterprise-niveau  
+- Beheers CI/CD-integratie en automatisering  
+- Ontwikkel aangepaste templates en draag bij aan de community  
+- Begrijp geavanceerde beveiligings- en compliancevereisten  
 
-#### Leerdoelen
-- Implementeer enterprise-grade uitrolpatronen
-- Beheers CI/CD-integratie en automatisering
-- Ontwikkel aangepaste templates en draag bij aan de community
-- Begrijp geavanceerde beveiligings- en nalevingsvereisten
+#### Belangrijke concepten om te beheersen  
+- Integratiepatronen voor CI/CD-pijplijnen  
+- Ontwikkeling en distributie van aangepaste templates  
+- Governance en compliance op enterprise-niveau  
+- Geavanceerde netwerk- en beveiligingsconfiguraties  
+- Prestatieoptimalisatie en kostenbeheer  
 
-#### Belangrijke concepten om te beheersen
-- Integratiepatronen voor CI/CD-pijplijnen
-- Ontwikkeling en distributie van aangepaste templates
-- Enterprise governance en naleving
-- Geavanceerde netwerk- en beveiligingsconfiguraties
-- Prestatieoptimalisatie en kostenbeheer
+#### Oefeningen  
 
-#### Praktijkoefeningen
-
-**Oefening 6.1: CI/CD-integratie**
-```yaml
+**Oefening 6.1: CI/CD-integratie**  
+```text
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
 2. Azure DevOps pipeline integration
@@ -544,320 +544,320 @@ Analyze the following components:
 4. Automated testing and quality gates
 5. Security scanning and compliance checks
 ```
-
-**Oefening 6.2: Ontwikkeling van aangepaste templates**
-```bash
-# Maak aangepaste sjablonen aan en publiceer ze:
+  
+**Oefening 6.2: Ontwikkeling van aangepaste templates**  
+```text
+# Create and publish custom templates:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
 4. Test template across different environments
 5. Publish and maintain template in template gallery
 ```
-
-**Oefening 6.3: Enterprise-implementatie**
-```bash
-# Implementeer functies voor ondernemingen:
+  
+**Oefening 6.3: Enterprise-implementatie**  
+```text
+# Implement enterprise-grade features:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
 4. Cost allocation and chargeback mechanisms
 5. Disaster recovery and business continuity
 ```
+  
+#### Zelfbeoordelingsvragen  
+1. Hoe integreer je azd in bestaande CI/CD-workflows?  
+2. Wat zijn de belangrijkste aandachtspunten bij de ontwikkeling van aangepaste templates?  
+3. Hoe implementeer je governance en compliance in azd-deployments?  
+4. Wat zijn de best practices voor enterprise-scale deployments?  
+5. Hoe draag je effectief bij aan de azd-community?  
 
-#### Zelfbeoordelingsvragen
-1. Hoe integreer je azd in bestaande CI/CD-workflows?
-2. Wat zijn de belangrijkste aandachtspunten bij het ontwikkelen van aangepaste templates?
-3. Hoe implementeer je governance en naleving in azd-deployments?
-4. Wat zijn de beste praktijken voor uitrol op ondernemingsschaal?
-5. Hoe draag je effectief bij aan de azd-community?
+## Praktische projecten  
 
-## Praktische projecten
-
-### Project 1: Persoonlijke portfoliowebsite
+### Project 1: Persoonlijke portfolio website  
 **Complexiteit**: Beginner  
-**Duur**: 1-2 weken
+**Duur**: 1-2 weken  
 
-Bouw en implementeer een persoonlijke portfoliowebsite met:
-- Statische website-hosting op Azure Storage
-- Configuratie van een aangepast domein
-- CDN-integratie voor wereldwijde prestaties
-- Geautomatiseerde deployment-pijplijn
+Bouw en deploy een persoonlijke portfolio website met:  
+- Hosting van statische website op Azure Storage  
+- Configuratie van een aangepast domein  
+- CDN-integratie voor wereldwijde performance  
+- Geautomatiseerde deployement pijplijn  
 
-**Op te leveren**:
-- Werkende website uitgerold op Azure
-- Aangepast azd-template voor portfolio-uitrols
-- Documentatie van het uitrolproces
-- Kostenanalyse en aanbevelingen voor optimalisatie
+**Op te leveren producten**:  
+- Werkende website gedeployed op Azure  
+- Aangepaste azd-template voor portfolio deployments  
+- Documentatie van het deploymentproces  
+- Kostenanalyse en optimalisatieaanbevelingen  
 
-### Project 2: Taakbeheerapplicatie
-**Complexiteit**: Gemiddeld  
-**Duur**: 2-3 weken
+### Project 2: Taakbeheerapplicatie  
+**Complexiteit**: Gevorderd  
+**Duur**: 2-3 weken  
 
-Maak een full-stack taakbeheertoepassing met:
-- React-frontend uitgerold naar App Service
-- Node.js API-backend met authenticatie
-- PostgreSQL-database met migraties
-- Application Insights-monitoring
+Maak een full-stack taakbeheerapplicatie met:  
+- React frontend gedeployed naar App Service  
+- Node.js API backend met authenticatie  
+- PostgreSQL-database met migraties  
+- Application Insights monitoring  
 
-**Op te leveren**:
-- Complete applicatie met gebruikersauthenticatie
-- Databaseschema en migratiescripts
-- Monitoringdashboards en waarschuwingsregels
-- Deploy-configuratie voor meerdere omgevingen
+**Op te leveren producten**:  
+- Volledige applicatie met gebruikersauthenticatie  
+- Databaseschema en migratiescripts  
+- Monitoring dashboards en alarmeringsregels  
+- Multi-omgeving deployement configuratie  
 
-### Project 3: Microservices e-commerceplatform
+### Project 3: Microservices E-commerce Platform  
 **Complexiteit**: Geavanceerd  
-**Duur**: 4-6 weken
+**Duur**: 4-6 weken  
 
-Ontwerp en implementeer een op microservices gebaseerd e-commerceplatform:
-- Meerdere API-diensten (catalogus, bestellingen, betalingen, gebruikers)
-- Berichtenwachtrij-integratie met Service Bus
-- Redis-cache voor prestatieoptimalisatie
-- Uitgebreide logging en monitoring
+Ontwerp en implementeer een microservices-gebaseerd e-commerce platform:  
+- Meerdere API-services (catalogus, bestellingen, betalingen, gebruikers)  
+- Berichtenwachtrij-integratie met Service Bus  
+- Redis-cache voor prestatieoptimalisatie  
+- Uitgebreide logging en monitoring  
 
-**Referentievoorbeeld**: Zie [Microservices-architectuur](../../../examples/container-app/microservices) voor een productieklare template en implementatiegids
+**Referentievoorbeeld**: Zie [Microservices Architectuur](../../../examples/container-app/microservices) voor een leerexemplaar met twee services en implementatiehandleiding. Wachtrijen, persistentie, authenticatie, betalingsverwerking en productieverharding zijn aparte projecttaken.  
 
-**Op te leveren**:
-- Volledige microservices-architectuur
-- Patronen voor communicatie tussen services
-- Prestatie-testen en optimalisatie
-- Productieklaar beveiligingsimplementatie
+**Op te leveren producten**:  
+- Complete microservices-architectuur  
+- Inter-service communicatiepatronen  
+- Prestatie testen en optimalisatie  
+- Productieklaar beveiligingsimplementatie  
 
-## Beoordeling en certificering
+## Beoordeling en certificering  
 
-### Kenniscontroles
+### Kenniscontroles  
 
-Voltooi deze beoordelingen na elke module:
+Voltooi deze beoordelingen na elk module:  
 
-**Module 1 Beoordeling**: Basisconcepten en installatie
-- Meerkeuzevragen over kernconcepten
-- Praktische installatie- en configuratietaken
-- Eenvoudige uitroloefening
+**Module 1 Beoordeling**: Basisconcepten en installatie  
+- Meerkeuzevragen over kernconcepten  
+- Praktische installatie- en configuratietaken  
+- Simpele deployment oefening  
 
-**Module 2 Beoordeling**: Configuratie en omgevingen
-- Scenario's voor omgevingsbeheer
-- Oefeningen voor configuratieprobleemoplossing
-- Implementatie van beveiligingsconfiguratie
+**Module 2 Beoordeling**: Configuratie en omgevingen  
+- Omgevingsbeheerscenario's  
+- Oplossen van configuratieproblemen  
+- Implementatie van beveiligingsconfiguratie  
 
-**Module 3 Beoordeling**: Uitrol en provisioning
-- Uitdagingen op het gebied van infrastructuurontwerp
-- Scenario's voor multi-service-uitrol
-- Oefeningen voor prestatieoptimalisatie
+**Module 3 Beoordeling**: Deployment en provisioning  
+- Uitdagingen bij ontwerp van infrastructuur  
+- Scenario's voor multi-service deployment  
+- Oefeningen in prestatieoptimalisatie  
 
-**Module 4 Beoordeling**: Voorafgaande validatie
-- Case studies voor capaciteitsplanning
-- Scenario's voor kostenoptimalisatie
-- Implementatie van validatiepijplijnen
+**Module 4 Beoordeling**: Pre-deployment validatie  
+- Casestudy's voor capaciteitsplanning  
+- Scenario's voor kostenoptimalisatie  
+- Implementatie van validatiepijplijnen  
 
-**Module 5 Beoordeling**: Probleemoplossing en debugging
-- Oefeningen voor probleemdiagnose
-- Taken voor implementatie van monitoring
-- Simulaties van incidentrespons
+**Module 5 Beoordeling**: Probleemoplossing en debugging  
+- Diagnosticoefeningen  
+- Taken voor implementatie van monitoring  
+- Simulaties van incidentrespons  
 
-**Module 6 Beoordeling**: Geavanceerde onderwerpen
-- Ontwerp van CI/CD-pijplijnen
-- Ontwikkeling van aangepaste templates
-- Enterprise-architectuurscenario's
+**Module 6 Beoordeling**: Gevorderde onderwerpen  
+- Ontwerp van CI/CD-pijplijnen  
+- Ontwikkeling van aangepaste templates  
+- Scenario's voor enterprise architectuur  
 
-### Eindopdracht
+### Eindproject  
 
-Ontwerp en implementeer een complete oplossing die beheersing van alle concepten aantoonbaar maakt:
+Ontwerp en implementeer een complete oplossing die de beheersing van alle concepten aantoont:  
 
-**Vereisten**:
-- Meerlaagse applicatiearchitectuur
-- Meerdere uitrolomgevingen
-- Uitgebreide monitoring en waarschuwingssystemen
-- Implementatie van beveiliging en naleving
-- Kostenoptimalisatie en prestatieafstemming
-- Volledige documentatie en runbooks
+**Vereisten**:  
+- Multi-tier applicatiearchitectuur  
+- Meerdere deploymentomgevingen  
+- Uitgebreide monitoring en alerting  
+- Implementatie van beveiliging en compliance  
+- Kostenoptimalisatie en performancetuning  
+- Volledige documentatie en runbooks  
 
-**Evaluatiecriteria**:
-- Kwaliteit van de technische implementatie
-- Volledigheid van de documentatie
-- Naleving van beveiligings- en beste praktijken
-- Prestatie- en kostenoptimalisatie
-- Effectiviteit van probleemoplossing en monitoring
+**Evaluatiecriteria**:  
+- Technische implementatiekwaliteit  
+- Compleetheid van documentatie  
+- Naleving van beveiliging en best practices  
+- Prestatie- en kostenoptimalisatie  
+- Effectiviteit van troubleshooting en monitoring  
 
-## Studiebronnen en referenties
+## Studieresources en referenties  
 
-### Officiële documentatie
-- [Azure Developer CLI-documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Bicep-documentatie](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+### Officiële documentatie  
+- [Azure Developer CLI Documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Bicep Documentatie](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
 
-### Communitybronnen
-- [AZD Template Gallery](https://azure.github.io/awesome-azd/)
-- [Azure-Samples GitHub-organisatie](https://github.com/Azure-Samples)
-- [Azure Developer CLI GitHub-repository](https://github.com/Azure/azure-dev)
+### Community resources  
+- [AZD Template Gallery](https://azure.github.io/awesome-azd/)  
+- [Azure-Samples GitHub Organisatie](https://github.com/Azure-Samples)  
+- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)  
 
-### Praktijkomgevingen
-- [Azure Free Account](https://azure.microsoft.com/free/)
-- [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)
-- [GitHub Actions](https://github.com/features/actions)
+### Oefenomgevingen  
+- [Azure Free Account](https://azure.microsoft.com/free/)  
+- [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)  
+- [GitHub Actions](https://github.com/features/actions)  
 
-### Aanvullende tools
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
+### Extra tools  
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)  
+- [Visual Studio Code](https://code.visualstudio.com/)  
+- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)  
 
-## Aanbevolen studieschema
+## Aanbevolen studieschema  
 
-### Voltijdstudie (8 weken)
-- **Weken 1-2**: Modules 1-2 (Aan de slag, Configuratie)
-- **Weken 3-4**: Modules 3-4 (Uitrol, Voorafgaande validatie)
-- **Weken 5-6**: Modules 5-6 (Probleemoplossing, Geavanceerde onderwerpen)
-- **Weken 7-8**: Praktische projecten en eindbeoordeling
+### Voltijdstudie (8 weken)  
+- **Weken 1-2**: Modules 1-2 (Aan de slag, Configuratie)  
+- **Weken 3-4**: Modules 3-4 (Deployment, Pre-deployment)  
+- **Weken 5-6**: Modules 5-6 (Probleemoplossing, Gevorderde onderwerpen)  
+- **Weken 7-8**: Praktische projecten en eindbeoordeling  
 
-### Deeltijdstudie (16 weken)
-- **Weken 1-4**: Module 1 (Aan de slag)
-- **Weken 5-7**: Module 2 (Configuratie en omgevingen)
-- **Weken 8-10**: Module 3 (Uitrol en provisioning)
-- **Weken 11-12**: Module 4 (Voorafgaande validatie)
-- **Weken 13-14**: Module 5 (Probleemoplossing en debugging)
-- **Weken 15-16**: Module 6 (Geavanceerde onderwerpen en beoordeling)
+### Deeltijdstudie (16 weken)  
+- **Weken 1-4**: Module 1 (Aan de slag)  
+- **Weken 5-7**: Module 2 (Configuratie en Omgevingen)  
+- **Weken 8-10**: Module 3 (Deployment en Provisioning)  
+- **Weken 11-12**: Module 4 (Pre-deployment Validatie)  
+- **Weken 13-14**: Module 5 (Probleemoplossing en Debugging)  
+- **Weken 15-16**: Module 6 (Gevorderde onderwerpen en beoordeling)  
 
----
+---  
 
-## Voortgangsregistratie en beoordelingskader
+## Voortgangsbewaking en beoordelingskader  
 
-### Checklist voor hoofdstukvoltooiing
+### Checklist voor hoofdstukvoltooiing  
 
-Volg je voortgang door elk hoofdstuk met deze meetbare uitkomsten:
+Houd je voortgang per hoofdstuk bij met deze meetbare resultaten:  
 
-#### 📚 Hoofdstuk 1: Basis & Aan de slag
-- [ ] **Installatie voltooid**: AZD geïnstalleerd en geverifieerd op je platform
-- [ ] **Eerste implementatie**: Succesvol het todo-nodejs-mongo-template uitgerold
-- [ ] **Omgeving ingesteld**: Eerste omgevingsvariabelen geconfigureerd
-- [ ] **Resources verkend**: Uitgerolde resources in de Azure Portal bekeken
-- [ ] **Beheersing van commando's**: Vertrouwd met basis AZD-commando's
+#### 📚 Hoofdstuk 1: Fundament & Snelstart  
+- [ ] **Installatie voltooid**: AZD geïnstalleerd en geverifieerd op jouw platform  
+- [ ] **Eerste deployment**: Succesvol gedeployd todo-nodejs-mongo template  
+- [ ] **Omgevingsconfiguratie**: Eerste omgevingsvariabelen ingesteld  
+- [ ] **Resource navigatie**: Gedeployde resources verkend in Azure Portal  
+- [ ] **Commandobeheersing**: Vertrouwd met basis AZD-commando's  
 
-#### 🤖 Hoofdstuk 2: AI-first ontwikkeling  
-- [ ] **AI-templateimplementatie**: Succesvol azure-search-openai-demo uitgerold
-- [ ] **RAG-implementatie**: Documentindexering en -opvraging geconfigureerd
-- [ ] **Modelconfiguratie**: Meerdere AI-modellen opgezet voor verschillende doeleinden
-- [ ] **AI-monitoring**: Application Insights geïmplementeerd voor AI-workloads
-- [ ] **Prestatieoptimalisatie**: AI-applicatieprestaties afgesteld
+#### 🤖 Hoofdstuk 2: AI-First ontwikkeling  
+- [ ] **AI template deployment**: azure-search-openai-demo succesvol gedeployd  
+- [ ] **RAG-implementatie**: Documentindexering en -opvraging geconfigureerd  
+- [ ] **Modelconfiguratie**: Meerdere AI-modellen met verschillende doeleinden ingesteld  
+- [ ] **AI monitoring**: Application Insights geïmplementeerd voor AI workloads  
+- [ ] **Prestatieoptimalisatie**: AI-applicatieprestaties getuned  
 
-#### ⚙️ Hoofdstuk 3: Configuratie & Authenticatie
-- [ ] **Multi-omgeving ingesteld**: dev-, staging- en prod-omgevingen geconfigureerd
-- [ ] **Beveiligingsimplementatie**: Managed identity-authenticatie ingesteld
-- [ ] **Geheimenbeheer**: Azure Key Vault geïntegreerd voor gevoelige gegevens
-- [ ] **Parameterbeheer**: Omgeving-specifieke configuraties gemaakt
-- [ ] **Authenticatiebeheersing**: Veilige toegangsarchitecturen geïmplementeerd
+#### ⚙️ Hoofdstuk 3: Configuratie & Authenticatie  
+- [ ] **Multi-omgeving setup**: Dev, staging, en prod omgevingen geconfigureerd  
+- [ ] **Beveiligingsimplementatie**: Managed identity authenticatie ingesteld  
+- [ ] **Geheimbeheer**: Azure Key Vault geïntegreerd voor gevoelige data  
+- [ ] **Parameterbeheer**: Omgevingsspecifieke configuraties opgesteld  
+- [ ] **Authenticatiemeesterschap**: Veilige toegangspatronen geïmplementeerd  
 
-#### 🏗️ Hoofdstuk 4: Infrastructure as Code & Uitrol
-- [ ] **Aangepaste templatecreatie**: Een multi-service applicatemplate gemaakt
-- [ ] **Bicep-beheersing**: Modulaire, herbruikbare infrastructuurcomponenten aangemaakt
-- [ ] **Automatisering van uitrol**: Pre- en post-deploy hooks geïmplementeerd
-- [ ] **Architectuurontwerp**: Complexe microservices-architectuur uitgerold
-- [ ] **Templateoptimalisatie**: Templates geoptimaliseerd voor prestaties en kosten
+#### 🏗️ Hoofdstuk 4: Infrastructure as Code & Deployment  
+- [ ] **Aangepaste template creatie**: Multi-service applicatietemplate gebouwd  
+- [ ] **Bicep-meesterschap**: Modulaire, herbruikbare infrastructuurcomponenten gemaakt  
+- [ ] **Deployment automatisering**: Pre/post deployment hooks geïmplementeerd  
+- [ ] **Architectuurontwerp**: Complexe microservicesarchitectuur gedeployd  
+- [ ] **Template-optimalisatie**: Templates geoptimaliseerd voor performance en kosten  
 
-#### 🎯 Hoofdstuk 5: Multi-agent AI-oplossingen
-- [ ] **Retailoplossing implementatie**: Compleet multi-agent retailscenario uitgerold
-- [ ] **Agentaanpassing**: Gedrag van Customer- en Inventory-agent aangepast
-- [ ] **Architectuurschaling**: Load balancing en auto-scaling geïmplementeerd
-- [ ] **Productiemonitoring**: Uitgebreide monitoring en waarschuwingen ingesteld
-- [ ] **Prestatieafstemming**: Multi-agent systeemprestaties geoptimaliseerd
+#### 🎯 Hoofdstuk 5: Multi-Agent AI-oplossingen  
+- [ ] **Retail architectuurreview**: Ontbrekende applicatiecomponenten geïdentificeerd en implementatie- en validatieplanning gemaakt  
+- [ ] **Agentaanpassing**: Gedrag van Customer en Inventory agents aangepast  
+- [ ] **Architectuurschaling**: Load balancing en auto-scaling geïmplementeerd  
+- [ ] **Productiemonitoring**: Uitgebreide monitoring en alerting opgezet  
+- [ ] **Performance tuning**: Multi-agent systeem geoptimaliseerd  
 
-#### 🔍 Hoofdstuk 6: Voorafgaande validatie & planning
-- [ ] **Capaciteitsanalyse**: Resourcevereisten voor applicaties geanalyseerd
-- [ ] **SKU-optimalisatie**: Kosteneffectieve servicetiers geselecteerd
-- [ ] **Validatie-automatisering**: Pre-deployment controlscripts geïmplementeerd
-- [ ] **Kostenplanning**: Schattingen van uitrolkosten en budgetten gemaakt
-- [ ] **Risicobeoordeling**: Uitrolrisico's geïdentificeerd en gemitigeerd
+#### 🔍 Hoofdstuk 6: Pre-deployment validatie & planning  
+- [ ] **Capaciteitsanalyse**: Resourcevereisten voor applicaties geanalyseerd  
+- [ ] **SKU-optimalisatie**: Kosteneffectieve serviceniveaus geselecteerd  
+- [ ] **Validatieautomatisering**: Pre-deployment check scripts geïmplementeerd  
+- [ ] **Kostenplanning**: Schattingen en budgetten voor deploymentkosten opgesteld  
+- [ ] **Risicobeoordeling**: Deploymentrisico's geïdentificeerd en gemitigeerd  
 
-#### 🚨 Hoofdstuk 7: Probleemoplossing & Debugging
-- [ ] **Diagnostische vaardigheden**: Succesvol debuggen van opzettelijk kapotte uitrols
-- [ ] **Loganalyse**: Azure Monitor en Application Insights effectief gebruikt
-- [ ] **Prestatieafstemming**: Trage applicaties geoptimaliseerd
-- [ ] **Herstelprocedures**: Back-up en rampenherstel geïmplementeerd
-- [ ] **Monitoringconfiguratie**: Proactieve monitoring en waarschuwingen ingericht
+#### 🚨 Hoofdstuk 7: Probleemoplossing & Debugging  
+- [ ] **Diagnostische vaardigheden**: Bewust kapotte deployments succesvol gedebugd  
+- [ ] **Loganalyse**: Azure Monitor en Application Insights effectief gebruikt  
+- [ ] **Prestatie tuning**: Trage applicaties geoptimaliseerd  
+- [ ] **Herstelprocedures**: Backup- en disaster recovery geïmplementeerd  
+- [ ] **Monitoring setup**: Proactieve monitoring en alerting aangemaakt  
 
-#### 🏢 Hoofdstuk 8: Productie- en enterprisepatronen
-- [ ] **Enterprise-beveiliging**: Uitgebreide beveiligingspatronen geïmplementeerd
-- [ ] **Governancekader**: Azure Policy en resourcebeheer opgezet
-- [ ] **Geavanceerde monitoring**: Dashboards en geautomatiseerde waarschuwingen aangemaakt
-- [ ] **CI/CD-integratie**: Geautomatiseerde uitrolpijplijnen opgebouwd
-- [ ] **Nalevingsimplementatie**: Voldoet aan enterprise-compliancevereisten
+#### 🏢 Hoofdstuk 8: Productie- en enterprisepatronen  
+- [ ] **Enterprisebeveiliging**: Uitgebreide beveiligingspatronen geïmplementeerd  
+- [ ] **Governance framework**: Azure Policy en resourcebeheer opgezet  
+- [ ] **Geavanceerde monitoring**: Dashboards en geautomatiseerde alerting gemaakt  
+- [ ] **CI/CD-integratie**: Geautomatiseerde deployementpijplijnen gebouwd  
+- [ ] **Compliance-implementatie**: Voldaan aan enterprise compliancevereisten  
 
-### Leerplanning en mijlpalen
+### Leertijdlijn en mijlpalen  
 
-#### Week 1-2: Basis opbouwen
-- **Mijlpaal**: Eerste AI-applicatie uitrollen met AZD
-- **Validatie**: Werkende applicatie toegankelijk via publieke URL
-- **Vaardigheden**: Basis AZD-workflows en integratie van AI-diensten
+#### Week 1-2: Fundament leggen  
+- **Mijlpaal**: Eerste AI-applicatie gedeployd met AZD  
+- **Validatie**: Werkende applicatie toegankelijk via openbare URL  
+- **Vaardigheden**: Basis AZD workflows en AI service-integratie  
 
-#### Week 3-4: Configuratiebeheersing
-- **Mijlpaal**: Multi-omgevinguitrol met veilige authenticatie
-- **Validatie**: Dezelfde applicatie uitgerold naar dev/staging/prod
-- **Vaardigheden**: Omgevingsbeheer en beveiligingsimplementatie
+#### Week 3-4: Configuratiemeesterschap  
+- **Mijlpaal**: Multi-omgeving deployment met veilige authenticatie  
+- **Validatie**: Zelfde applicatie gedeployd naar dev/staging/prod  
+- **Vaardigheden**: Omgevingsbeheer en beveiligingsimplementatie  
 
-#### Week 5-6: Infrastructuurexpertise
-- **Mijlpaal**: Aangepaste template voor complexe multi-serviceapplicatie
-- **Validatie**: Herbruikbare template uitgerold door een ander teamlid
-- **Vaardigheden**: Bicep-beheersing en infrastructuurautomatisering
+#### Week 5-6: Infrastructuurexpertise  
+- **Mijlpaal**: Aangepaste template voor complexe multi-service applicatie  
+- **Validatie**: Herbruikbare template gedeployd door een andere teamlid  
+- **Vaardigheden**: Bicep-meesterschap en infrastructuurautomatisering  
 
-#### Week 7-8: Geavanceerde AI-implementatie
-- **Mijlpaal**: Productieklaar multi-agent AI-oplossing
-- **Validatie**: Systeem verwerkt real-world load met monitoring
-- **Vaardigheden**: Multi-agent orkestratie en prestatieoptimalisatie
+#### Week 7-8: Geavanceerde AI-implementatie  
+- **Mijlpaal**: Productieklaar multi-agent AI-oplossing  
+- **Validatie**: Systeem verwerkt echte loads met monitoring  
+- **Vaardigheden**: Multi-agent orkestratie en prestatieoptimalisatie  
 
-#### Week 9-10: Productieklaarheid
-- **Mijlpaal**: Deploy op enterprise-niveau met volledige naleving
-- **Validatie**: Geslaagd voor security review en kostenoptimalisatie-audit
-- **Vaardigheden**: Governance, monitoring en CI/CD-integratie
+#### Week 9-10: Productieklaar maken  
+- **Mijlpaal**: Enterprise-grade deployment met volledige compliance  
+- **Validatie**: Geslaagd voor beveiligingsreview en kostenoptimalisatie-audit  
+- **Vaardigheden**: Governance, monitoring en CI/CD-integratie  
 
-### Beoordeling en certificering
+### Beoordeling en certificering  
 
-#### Methoden voor kennisvalidatie
-1. **Praktische uitrol**: Werkende applicaties voor elk hoofdstuk
-2. **Code-reviews**: Beoordeling van template- en configuratiekwaliteit
-3. **Probleemoplossing**: Scenario's voor probleemoplossing en oplossingen
-4. **Peer-onderwijs**: Verklaar concepten aan medeleerlingen
-5. **Bijdrage aan community**: Deel templates of verbeteringen
+#### Methoden voor kennisvalidatie  
+1. **Praktische deployments**: Werkende applicaties voor elk hoofdstuk  
+2. **Code reviews**: Template- en configuratiebeoordeling  
+3. **Probleemoplossing**: Scenario's en oplossingen voor troubleshooting  
+4. **Peer teaching**: Leg concepts uit aan andere leerlingen  
+5. **Communitybijdrage**: Deel templates of verbeteringen  
 
-#### Professionele ontwikkelingsuitkomsten
-- **Portfolioprojecten**: 8 productieklare implementaties
-- **Technische vaardigheden**: AZD- en AI-implementatie-expertise volgens industriestandaarden
-- **Probleemoplossend vermogen**: Onafhankelijke foutopsporing en optimalisatie
-- **Communityerkenning**: Actieve deelname aan de Azure-ontwikkelaarscommunity
-- **Carrière-ontwikkeling**: Vaardigheden direct toepasbaar op cloud- en AI-rollen
+#### Professionele ontwikkelingsresultaten  
+- **Portfolio projecten**: Leer deployments en architectuuroefeningen; productieklaarheid vereist aparte implementatie en beoordeling  
+- **Technische vaardigheden**: Industrienorm AZD en AI deployment expertise  
+- **Probleemoplossend vermogen**: Onafhankelijke troubleshooting en optimalisatie  
+- **Community-recognitie**: Actieve deelname aan Azure ontwikkelaarscommunity  
+- **Carrièreontwikkeling**: Vaardigheden direct toepasbaar op cloud- en AI-functies
 
-#### Succesindicatoren
+#### Succescriteria
 - **Implementatiesuccespercentage**: >95% succesvolle implementaties
-- **Tijd voor probleemoplossing**: <30 minuten voor veelvoorkomende problemen
+- **Oplostijd Problemen**: <30 minuten voor veelvoorkomende problemen
 - **Prestatieoptimalisatie**: Aantoonbare verbeteringen in kosten en prestaties
-- **Naleving van beveiligingsnormen**: Alle implementaties voldoen aan bedrijfsbeveiligingsnormen
+- **Beveiligingsbeoordeling**: Documenteer controles en resterende hiaten ten opzichte van de eisen van uw organisatie; het voltooien van de cursus certificeert geen naleving
 - **Kennisoverdracht**: Vermogen om andere ontwikkelaars te begeleiden
 
-### Voortdurend leren en communitybetrokkenheid
+### Continu leren en betrokkenheid bij de gemeenschap
 
 #### Blijf op de hoogte
-- **Azure-updates**: Volg de release-opmerkingen van de Azure Developer CLI
-- **Community-evenementen**: Neem deel aan evenementen voor Azure- en AI-ontwikkelaars
-- **Documentatie**: Draag bij aan documentatie en voorbeelden in de community
-- **Feedbackcyclus**: Geef feedback op cursusinhoud en Azure-diensten
+- **Azure-updates**: Volg de release-opmerkingen van Azure Developer CLI
+- **Gemeenschapsevenementen**: Neem deel aan Azure- en AI-ontwikkelaarsevenementen
+- **Documentatie**: Lever bijdragen aan gemeenschapsdocumentatie en voorbeelden
+- **Feedbackcyclus**: Geef feedback over cursusinhoud en Azure-diensten
 
 #### Carrièreontwikkeling
-- **Professioneel netwerk**: Leg contact met Azure- en AI-experts
-- **Spreekmogelijkheden**: Presenteer je inzichten op conferenties of meetups
-- **Open source-bijdrage**: Draag bij aan AZD-sjablonen en -tools
+- **Professioneel netwerk**: Verbind met Azure- en AI-experts
+- **Spreekgelegenheden**: Presenteer wat je hebt geleerd op conferenties of meetups
+- **Open-sourcebijdrage**: Draag bij aan AZD-sjablonen en -tools
 - **Mentorschap**: Begeleid andere ontwikkelaars in hun AZD-leertraject
 
 ---
 
-**Hoofdstuknavigatie:**
-- **📚 Cursusstartpagina**: [AZD voor beginners](../README.md)
-- **📖 Begin met leren**: [Hoofdstuk 1: Basis & Snelstart](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Voortgang bijhouden**: Volg je voortgang door het uitgebreide leersysteem van 8 hoofdstukken
-- **🤝 Community**: [Azure Discord](https://discord.gg/microsoft-azure) voor ondersteuning en discussie
+**Navigatie hoofdstuk:**
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../README.md)
+- **📖 Begin met leren**: [Hoofdstuk 1: Basis & Snel Start](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Voortgangsbewaking**: Volg je voortgang via het uitgebreide 8-hoofdstukken leerprogramma
+- **🤝 Gemeenschap**: [Azure Discord](https://discord.gg/microsoft-azure) voor ondersteuning en discussie
 
-**Studievoortgang bijhouden**: Gebruik deze gestructureerde gids om de Azure Developer CLI te beheersen door stapsgewijs, praktisch te leren met meetbare resultaten en voordelen voor professionele ontwikkeling.
+**Studievoortgang bijhouden**: Gebruik deze gestructureerde gids om Azure Developer CLI beheerst te leren via progressief, praktisch leren met meetbare resultaten en voordelen voor professionele ontwikkeling.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

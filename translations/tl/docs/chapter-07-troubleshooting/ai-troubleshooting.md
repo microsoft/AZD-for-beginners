@@ -1,24 +1,26 @@
-# Gabay sa Pag-troubleshoot na Espesipiko sa AI
+# Gabay sa Pagsasaayos ng Mga Problema ng AI
 
-**Pag-navigate ng Kabanata:**
-- **📚 Pangunahing Pahina ng Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 7 - Pag-troubleshoot at Pag-debug
-- **⬅️ Nakaraang**: [Gabay sa Pag-debug](debugging.md)
-- **➡️ Susunod na Kabanata**: [Kabanata 8: Mga Pattern para sa Produksyon at Enterprise](../chapter-08-production/production-ai-practices.md)
-- **🤖 Kaugnay**: [Kabanata 2: Pag-unlad na Una ang AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Tahanan ng Kurso**: [AZD Para sa mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 7 - Pagsasaayos ng Problema at Pag-debug
+- **⬅️ Nakaraang Kabanata**: [Gabay sa Pag-debug](debugging.md)
+- **➡️ Susunod na Kabanata**: [Kabanata 8: Mga Pattern sa Produksyon at Enterprise](../chapter-08-production/production-ai-practices.md)
+- **🤖 Kaugnay**: [Kabanata 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Sinasaklaw ng komprehensibong gabay sa pag-troubleshoot na ito ang mga karaniwang problema kapag nagde-deploy ng mga solusyon na AI gamit ang AZD, at naglalaan ng mga solusyon at teknik sa pag-debug na partikular para sa mga serbisyo ng Azure AI.
+Ang komprehensibong gabay na ito sa pagsasaayos ng problema ay tumutugon sa mga karaniwang isyu sa pag-deploy ng mga AI na solusyon gamit ang AZD, na nagbibigay ng mga solusyon at mga teknik sa pag-debug na partikular sa mga serbisyo ng Azure AI.
 
-## Talaan ng Nilalaman
+> **Saklaw:** Ang mga utos ay gumagamit ng mga halimbawa ng pangalan ng resource; palitan ang mga iyon at piliin ang tamang subscription. Ang mga bloke ng Bicep ay mga fragment na pagsasamahin sa isang umiiral na template, hindi standalone na mga deployment. Ang mga snippet ng Python ay nangangailangan ng tinukoy na mga SDK at konfigurasyon ng aplikasyon. Walang live na deployment sa Azure ang naisagawa para sa pagsusuring ito.
 
-- [Mga Isyu sa Microsoft Foundry Models Service](#azure-openai-service-issues)
-- [Mga Problema sa Azure AI Search](#mga-problema-sa-azure-ai-search)
-- [Mga Isyu sa Pag-deploy ng Container Apps](#mga-isyu-sa-pag-deploy-ng-container-apps)
-- [Mga Error sa Pag-authenticate at Mga Pahintulot](#mga-error-sa-pag-authenticate-at-mga-pahintulot)
-- [Mga Pagkabigo sa Pag-deploy ng Modelo](#mga-pagkabigo-sa-pag-deploy-ng-modelo)
-- [Mga Isyu sa Pagganap at Pag-scale](#mga-isyu-sa-pagganap-at-pag-scale)
-- [Pamamahala ng Gastos at Quota](#pamamahala-ng-gastos-at-quota)
-- [Mga Kasangkapan at Teknik sa Pag-debug](#mga-kasangkapan-at-teknik-sa-pag-debug)
+## Talaan ng mga Nilalaman
+
+- [Mga Isyu sa Microsoft Foundry Models Service](#microsoft-foundry-models-service-issues)
+- [Mga Problema sa Azure AI Search](#azure-ai-search-problems)
+- [Mga Isyu sa Pag-deploy ng Container Apps](#container-apps-deployment-issues)
+- [Mga Error sa Pagpapatotoo at Permiso](#authentication-and-permission-errors)
+- [Pagkabigo sa Pag-deploy ng Modelo](#model-deployment-failures)
+- [Mga Isyu sa Pagganap at Pag-scale](#performance-and-scaling-issues)
+- [Pamamahala ng Gastos at Quota](#cost-and-quota-management)
+- [Mga Kasangkapan at Teknik sa Pag-debug](#debugging-tools-and-techniques)
 
 ## Mga Isyu sa Microsoft Foundry Models Service
 
@@ -31,34 +33,29 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Mga Sanhi:**
 - Hindi magagamit ang Microsoft Foundry Models sa napiling rehiyon
-- Nauubos ang quota sa piniling mga rehiyon
+- Uubos na quota sa mga paboritong rehiyon
 - Mga limitasyon sa kapasidad ng rehiyon
 
 **Mga Solusyon:**
 
-1. **Suriin ang Pagkakaroon ng Rehiyon:**
+1. **Suriin ang Availability ng Rehiyon:**
 ```bash
-# Ilista ang mga magagamit na rehiyon para sa OpenAI
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --query "[].locations[]" \
-  --output table
+# Inspect model/deployment-type offerings in a candidate region
+az cognitiveservices model list --location eastus2 --output json
+# Availability in the catalog does not guarantee quota or physical capacity.
 ```
 
 2. **I-update ang Konfigurasyon ng AZD:**
-```yaml
-# azure.yaml - Force specific region
-infra:
-  provider: bicep
-  path: infra
-  module: main
-parameters:
-  location: "eastus2"  # Known working region
+```bash
+# For a new environment: choose a supported region with available quota
+azd env set AZURE_LOCATION eastus2
+# Templates with a separate model-location parameter must wire that value
+# through infra/main.parameters.json as documented by the template.
 ```
 
 3. **Gumamit ng Ibang Rehiyon:**
 ```bicep
-// infra/main.bicep - Multi-region fallback
+// infra/main.bicep - Explicit location selection, NOT automatic fallback
 @allowed([
   'eastus2'
   'francecentral'
@@ -79,41 +76,35 @@ Error: Deployment failed due to insufficient quota
 
 1. **Suriin ang Kasalukuyang Quota:**
 ```bash
-# Suriin ang paggamit ng quota
+# Check quota usage
 az cognitiveservices usage list \
-  --name YOUR_OPENAI_RESOURCE \
-  --resource-group YOUR_RG
+  --location eastus2 --output table
 ```
 
-2. **Humiling ng Pagtaas ng Quota:**
-```bash
-# Isumite ang kahilingan para sa pagtaas ng quota
-az support tickets create \
-  --ticket-name "OpenAI Quota Increase" \
-  --description "Need increased quota for production deployment" \
-  --severity "minimal" \
-  --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
-```
+2. **Humiling ng Pagsasaayos ng Quota:**
+Gamitin ang workflow ng pamamahala ng quota ng portal ng Foundry para sa apektadong subscription, rehiyon, modelo, at uri ng deployment. Tingnan ang [opisyal na patnubay sa quota](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Ang hiling para sa VM quota ay hindi nagpapataas ng quota ng modelo.
 
 3. **I-optimize ang Kapasidad ng Modelo:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi // Existing account resource declared in your template
+  name: 'chat-model'
   properties: {
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
-    name: 'Standard'
-    capacity: 1  // Start with minimal capacity
+    name: 'GlobalStandard' // Verify this model/version/type in the target region
+    capacity: 1  // Capacity units are model/deployment-type specific
   }
 }
 ```
 
-### Isyu: Hindi Wastong Bersyon ng API
+### Isyu: Hindi Wasto ang Bersyon ng API
 
 **Sintomas:**
 ```
@@ -124,21 +115,16 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **Gumamit ng Sinusuportahang Bersyon ng API:**
 ```python
-# Gamitin ang pinakabagong sinusuportahang bersyon
-AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
+# Stable dated Azure OpenAI data-plane API, where supported by your feature
+AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
 2. **Suriin ang Kompatibilidad ng Bersyon ng API:**
-```bash
-# Ilista ang mga suportadong bersyon ng API
-az rest --method get \
-  --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
-  --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
-```
+Suriin ang [sanggunian sa lifecycle ng Azure OpenAI API](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). Ang mga bersyon ng API ng ARM resource-provider ay **hindi** naglilista ng mga bersyon ng inference/data-plane API. Ang mga bagong kliyenteng v1 ay gumagamit ng `/openai/v1/` nang walang naka-detalye na `api-version`; huwag paghaluin ang dalawang konfigurasyon ng kliyente.
 
 ## Mga Problema sa Azure AI Search
 
-### Isyu: Hindi Sapat ang Antas ng Presyo ng Search Service
+### Isyu: Hindi Sapat ang Pricing Tier ng Search Service
 
 **Sintomas:**
 ```
@@ -147,11 +133,14 @@ Error: Semantic search requires Basic tier or higher
 
 **Mga Solusyon:**
 
-1. **I-upgrade ang Antas ng Presyo:**
+1. **Gumamit ng Sinusuportahang Pricing Tier:**
+
+Nangangailangan ang Semantic ranker ng Basic o mas mataas pa. Ang paglipat mula Free/Basic patungo sa ibang tier ay maaaring mangailangan na gumawa ng bagong search service at muling buuin ang mga index; ang pag-edit ng SKU ay hindi garantisadong in-place upgrade.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
   name: searchServiceName
+  location: location
   location: location
   sku: {
     name: 'basic'  // Minimum for semantic search
@@ -165,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **I-disable ang Semantic Search (Para sa Development):**
+2. **Patayin ang Semantic Search (Para sa Pag-develop):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -179,7 +168,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Isyu: Nabibigo ang Paglikha ng Index
+### Isyu: Pagkabigo sa Paglikha ng Index
 
 **Sintomas:**
 ```
@@ -188,22 +177,23 @@ Error: Cannot create index, insufficient permissions
 
 **Mga Solusyon:**
 
-1. **Suriin ang Mga Key ng Search Service:**
+1. **Tiyakin ang Mga Key ng Search Service:**
 ```bash
-# Kunin ang admin key ng serbisyo ng paghahanap
+# Get search service admin key
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
 ```
 
-2. **Suriin ang Schema ng Index:**
+2. **Suriin ang Index Schema:**
 ```python
-# I-validate ang eskema ng indeks
+# Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
 def validate_index_schema(index_definition):
     """Validate index schema before creation."""
+    # These are this application's requirements, not universal Search fields.
     required_fields = ['id', 'content']
     field_names = [field.name for field in index_definition.fields]
     
@@ -214,13 +204,14 @@ def validate_index_schema(index_definition):
 
 3. **Gumamit ng Managed Identity:**
 ```bicep
-// Grant search permissions to managed identity
+// Grant index-definition management permissions to the managed identity.
+// Search Index Data Contributor manages documents, not index definitions.
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: searchService
-  name: guid(searchService.id, containerApp.id, searchIndexDataContributorRole)
+  name: guid(searchService.id, containerApp.id, 'Search Service Contributor')
   properties: {
     principalId: containerApp.identity.principalId
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8ebe5a00-799e-43f5-93ac-243d3dce84a7')
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7ca78c08-252a-4471-8644-bb5ff32d4ba0')
     principalType: 'ServicePrincipal'
   }
 }
@@ -228,7 +219,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## Mga Isyu sa Pag-deploy ng Container Apps
 
-### Isyu: Pagkabigo sa Pag-build ng Container
+### Isyu: Pagkabigo sa Pagbuo ng Container
 
 **Sintomas:**
 ```
@@ -237,7 +228,7 @@ Error: Failed to build container image
 
 **Mga Solusyon:**
 
-1. **Suriin ang Sintaks ng Dockerfile:**
+1. **Suriin ang Syntax ng Dockerfile:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -259,21 +250,22 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Suriin ang Mga Depensiya:**
+2. **I-validate ang Mga Dependency:**
 ```txt
-# requirements.txt - Pin versions for stability
-fastapi==0.104.1
-uvicorn==0.24.0
-openai==1.3.7
-azure-identity==1.14.1
-azure-keyvault-secrets==4.7.0
-azure-search-documents==11.4.0
-azure-cosmos==4.5.1
+# Dependency names for these snippets. Resolve supported versions in your
+# project's environment, test together, then commit a lock/pinned requirements file.
+fastapi
+uvicorn
+openai
+azure-identity
+azure-keyvault-secrets
+azure-search-documents
+azure-cosmos
 ```
 
 3. **Magdagdag ng Health Check:**
 ```python
-# main.py - Magdagdag ng endpoint para sa pagsusuri ng katayuan
+# main.py - Add health check endpoint
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -292,7 +284,7 @@ Error: Container failed to start within timeout period
 
 **Mga Solusyon:**
 
-1. **Dagdagan ang Timeout sa Pagsisimula:**
+1. **Palawigin ang Startup Timeout:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -307,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
           }
           probes: [
             {
-              type: 'startup'
+              type: 'Startup'
               httpGet: {
                 path: '/health'
                 port: 8000
@@ -325,11 +317,14 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **I-optimize ang Paglo-load ng Modelo:**
+2. **I-optimize ang Pag-load ng Modelo:**
 ```python
-# Gamitin ang lazy loading para sa mga modelo upang mabawasan ang oras ng pagsisimula
+# Lazy load models to reduce startup time
+# Illustrative skeleton: implement _initialize_client and synchronize concurrent
+# initialization before using this pattern in an application.
 import asyncio
 from contextlib import asynccontextmanager
+from fastapi import FastAPI
 
 class ModelManager:
     def __init__(self):
@@ -341,23 +336,23 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # I-initialize ang kliyente ng AI dito
+        # Initialize AI client here
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Pagsisimula
+    # Startup
     app.state.model_manager = ModelManager()
     yield
-    # Pagsasara
+    # Shutdown
     pass
 
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Mga Error sa Pag-authenticate at Mga Pahintulot
+## Mga Error sa Pagpapatotoo at Pahintulot
 
-### Isyu: Tinanggihan ang Pahintulot ng Managed Identity
+### Isyu: Managed Identity Permission Denied
 
 **Sintomas:**
 ```
@@ -366,15 +361,15 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 **Mga Solusyon:**
 
-1. **Suriin ang Mga Itinalagang Role:**
+1. **Suriin ang Mga Assignment ng Papel:**
 ```bash
-# Suriin ang kasalukuyang mga pagtatalaga ng tungkulin
+# Check current role assignments
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Itakda ang Kinakailangang Mga Role:**
+2. **Italaga ang Mga Kinakailangang Papel:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -391,22 +386,26 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Subukan ang Pag-authenticate:**
+3. **Subukan ang Pagpapatotoo:**
 ```python
-# Subukan ang pagpapatotoo ng pinamamahalaang pagkakakilanlan
+# Test managed identity authentication
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
-async def test_authentication():
+def test_authentication():
     try:
-        credential = DefaultAzureCredential()
-        token = await credential.get_token("https://cognitiveservices.azure.com/.default")
-        print(f"Authentication successful: {token.token[:10]}...")
+        with DefaultAzureCredential() as credential:
+            token = credential.get_token("https://cognitiveservices.azure.com/.default")
+            print(f"Token acquired; expires at Unix time {token.expires_on}")
     except ClientAuthenticationError as e:
         print(f"Authentication failed: {e}")
+
+test_authentication()
 ```
 
-### Isyu: Tinanggihan ang Access sa Key Vault
+Pinapatunayang pagpapatotoo ang pagkuha ng token, hindi ang pahintulot na patakbuhin ang isang modelo. Subukan ang nilalayong operasyon nang hiwalay. Sa lokal, maaaring gamitin ng `DefaultAzureCredential` ang mga kredensyal ng developer; sa Azure, tiyaking ang nilalayong managed identity ang napili.
+
+### Isyu: Access Denied sa Key Vault
 
 **Sintomas:**
 ```
@@ -415,7 +414,9 @@ Error: The user, group or application does not have secrets get permission
 
 **Mga Solusyon:**
 
-1. **Bigyan ng Mga Pahintulot sa Key Vault:**
+1. **Bigyan ng Pahintulot ang Key Vault:**
+
+Gamitin ang sumusunod na fragment ng access-policy para lamang sa vault na may `enableRbacAuthorization: false`. Para sa vault na may RBAC na pinagana, gamitin ang opsyon 2; ang pagdaragdag ng access policy ay hindi nagbibigay ng data-plane access sa RBAC mode.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Gumamit ng RBAC sa halip na Access Policies:**
+2. **Gumamit ng RBAC Imbes na Access Policies:**
+
+Ang vault ay dapat magkaroon ng `enableRbacAuthorization: true`; ang pagpapalit ng mga modelo ng pahintulot ay nangangailangan ng planadong pag-migrate ng umiiral na access.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -447,7 +450,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Mga Pagkabigo sa Pag-deploy ng Modelo
+## Pagkabigo sa Pag-deploy ng Modelo
 
 ### Isyu: Hindi Magagamit ang Bersyon ng Modelo
 
@@ -458,81 +461,65 @@ Error: Model version 'gpt-4-32k' is not available
 
 **Mga Solusyon:**
 
-1. **Suriin ang Mga Magagamit na Modelo:**
+1. **Suriin ang Mga Available na Modelo:**
 ```bash
-# Ilista ang mga magagamit na modelo
+# List available models
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
-  --query "[].{name:model.name, version:model.version}" \
+  --query "[].{name:name, version:version}" \
   --output table
 ```
 
-2. **Gumamit ng Mga Fallback na Modelo:**
+2. **Pumili ng Isang Available na Modelo nang Eksakto:**
 ```bicep
-// Model deployment with fallback
+// Example model selection; verify version and deployment type in the catalog.
 @description('Primary model configuration')
 param primaryModel object = {
   name: 'gpt-4.1-mini'
-  version: '2024-07-18'
+  version: '2025-04-14'
 }
 
-@description('Fallback model configuration')
-param fallbackModel object = {
-  name: 'gpt-4.1'
-  version: '2024-08-06'
-}
-
-// Try primary model first, fallback if unavailable
+// Bicep does not catch provisioning failures and retry a fallback model.
 resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
   name: 'chat-model'
   properties: {
-    model: primaryModel
+    model: {
+      format: 'OpenAI'
+      name: primaryModel.name
+      version: primaryModel.version
+    }
   }
   sku: {
-    name: 'Standard'
+    name: 'GlobalStandard'
     capacity: 10
   }
 }
 ```
 
-3. **I-validate ang Modelo Bago I-deploy:**
-```python
-# Pagpapatunay ng modelo bago ilunsad
-import httpx
-
-async def validate_model_availability(model_name: str, version: str) -> bool:
-    """Check if model is available before deployment."""
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/models",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
-            )
-            models = response.json()
-            return any(
-                model["id"] == f"{model_name}-{version}"
-                for model in models.get("data", [])
-            )
-    except Exception:
-        return False
+3. **Suriin ang Modelo Bago ang Deployment:**
+```bash
+# Management-plane catalog for the actual account
+az cognitiveservices account list-models \
+  --name YOUR_OPENAI_RESOURCE --resource-group YOUR_RG --output json
+# Inspect model/version and supported SKUs; check regional quota separately.
 ```
 
 ## Mga Isyu sa Pagganap at Pag-scale
 
-### Isyu: Mataas na Latency ng Mga Tugon
+### Isyu: Mataas na Latency ng mga Tugon
 
 **Sintomas:**
-- Oras ng tugon > 30 segundo
+- Mga oras ng tugon > 30 segundo
 - Mga error sa timeout
-- Mahinang karanasan ng gumagamit
+- Mahinang karanasan para sa gumagamit
 
 **Mga Solusyon:**
 
-1. **Magpatupad ng Timeout sa Mga Request:**
+1. **Ipatupad ang Request Timeouts:**
 ```python
-# I-configure ang mga wastong timeout
+# Configure proper timeouts
 import httpx
 
 client = httpx.AsyncClient(
@@ -545,9 +532,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Magdagdag ng Caching para sa Mga Tugon:**
+2. **Magdagdag ng Response Caching:**
 ```python
-# Cache ng Redis para sa mga tugon
+# Redis cache for responses
 import redis.asyncio as redis
 import json
 
@@ -599,7 +586,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Isyu: Mga Error na Nauubos ang Memorya
+### Isyu: Mga Error sa Out of Memory
 
 **Sintomas:**
 ```
@@ -629,7 +616,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **I-optimize ang Paggamit ng Memorya:**
 ```python
-# Pagpapatakbo ng modelo nang matipid sa memorya
+# Memory-efficient model handling
 import gc
 import psutil
 
@@ -637,34 +624,37 @@ class MemoryOptimizedAI:
     def __init__(self):
         self.max_memory_percent = 80
         
+    async def _process_ai_request(self, request):
+        raise NotImplementedError("Supply the application's AI operation")
+
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Suriin ang paggamit ng memorya bago magproseso
+        # Check memory usage before processing
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Pilitin ang garbage collection
+            gc.collect()  # Force garbage collection
             
         result = await self._process_ai_request(request)
         
-        # Maglinis pagkatapos ng pagproseso
+        # Clean up after processing
         gc.collect()
         return result
 ```
 
 ## Pamamahala ng Gastos at Quota
 
-### Isyu: Mga Hindi Inaasahang Mataas na Gastos
+### Isyu: Hindi Inaasahang Mataas na Gastos
 
 **Sintomas:**
-- Mas mataas kaysa inaasahan ang bill ng Azure
-- Paggamit ng token na lumalagpas sa mga tinatayang halaga
-- Nag-trigger ang mga alerto sa budget
+- Mas mataas ang bill sa Azure kaysa inaasahan
+- Paggamit ng token na lumalampas sa tantya
+- Na-trigger na mga alerto sa budget
 
 **Mga Solusyon:**
 
-1. **Magpatupad ng Mga Kontrol sa Gastos:**
+1. **Ipatupad ang Mga Kontrol sa Gastos:**
 ```python
-# Pagsubaybay sa paggamit ng token
+# Token usage tracking
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -681,23 +671,26 @@ class TokenTracker:
         return total_tokens
 ```
 
+Ang in-memory counter na ito ay ilustratibo lamang, hindi kontrol ng buwanang paggastos: nagre-reset ito sa restart, hindi ito shared sa mga replica, at sinusuri ang paggamit lamang pagkatapos ng tawag. Ang totoong limitasyon ay nangangailangan ng matibay na accounting, concurrency-safe na reservations bago ang mga request, at patakaran ng buwanang reset. Ang mga metric ng memorya ng container ay dapat ding isaalang-alang ang mga limitasyon ng cgroup; ang `psutil.virtual_memory()` ay hindi maaasahang sukat ng limitasyon ng container, at ang garbage collection ay hindi nagpapatupad ng memory cap.
+
 2. **Mag-set up ng Mga Alerto sa Gastos:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate // Parameter: first day of a supported budget period
+      endDate: budgetEndDate     // Parameter: a future date
     }
     timeGrain: 'Monthly'
-    amount: 500  // $500 monthly limit
+    amount: 500  // Notification threshold in the subscription's billing currency
     category: 'Cost'
     notifications: {
       Actual_GreaterThan_80_Percent: {
         enabled: true
         operator: 'GreaterThan'
         threshold: 80
+        thresholdType: 'Actual'
         contactEmails: ['admin@company.com']
         contactRoles: ['Owner']
       }
@@ -706,9 +699,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
+Ideklara ang `budgetStartDate` at `budgetEndDate` sa iyong template. Ang mga budget ay nagtutukoy ng paalala; hindi nito pinapatigil ang mga resource o nagpapataw ng hard cap sa paggastos.
+
 3. **I-optimize ang Pagpili ng Modelo:**
 ```python
-# Pagpili ng modelo na isinasaalang-alang ang gastos
+# Cost-aware model selection
 MODEL_COST_TIERS = {
   'gpt-4.1-mini': 'low',
   'gpt-4.1': 'high'
@@ -724,53 +719,60 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 
 ## Mga Kasangkapan at Teknik sa Pag-debug
 
-### Mga Utos ng AZD para sa Pag-debug
+### Mga Utos sa Pag-debug ng AZD
 
 ```bash
-# Paganahin ang detalyadong pag-log
+# Enable verbose logging
 azd up --debug
 
-# Suriin ang katayuan ng deployment
+# Check deployment status
 azd show
 
-# Tingnan ang mga log ng aplikasyon (magbubukas ang dashboard ng pagmamanman)
+# View application logs (opens monitoring dashboard)
 azd monitor --logs
 
-# Tingnan ang mga live na sukatan
+# View live metrics
 azd monitor --live
 
-# Suriin ang mga variable ng kapaligiran
+# Check environment variables
 azd env get-values
 ```
 
 ### Mga Utos ng AZD AI Extension para sa Diagnostiko
 
-Kung nag-deploy ka ng mga agent gamit ang `azd ai agent init`, available ang mga karagdagang kasangkapan na ito:
+Kung nag-deploy ka ng mga ahente gamit ang `azd ai agent init`, ang mga karagdagang kasangkapang ito ay magagamit:
 
 ```bash
-# Tiyaking naka-install ang extension para sa mga ahente
+# Ensure the agents extension is installed
 azd extension install azure.ai.agents
 
-# Muling i-initialize o i-update ang isang ahente mula sa manifest
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Check project storage permissions and agent configuration
+azd ai agent doctor
 
-# Gamitin ang MCP server para payagan ang mga AI tool na mag-query ng estado ng proyekto
+# Inspect the deployed endpoint
+azd ai agent endpoint show
+
+# Use the MCP server to let AI tools query project state
 azd mcp start
 
-# Gumawa ng mga file ng imprastruktura para sa pagsusuri at pag-audit
+# Generate infrastructure files for review and audit
 azd infra generate
 ```
 
-> **Tip:** Gamitin ang `azd infra generate` para isulat ang IaC sa disk upang masuri mo nang eksakto kung anong mga resources ang na-provision. Napakahalaga nito kapag nag-de-debug ng mga isyu sa konfigurasyon ng resource. Tingnan ang [Sanggunian ng AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para sa buong detalye.
+> **Tip:** Gamitin ang `azd infra generate` upang isulat ang IaC sa disk para masuri mo nang eksakto kung anong mga resource ang na-provision. Napakahalaga nito sa pag-debug ng mga isyu sa konfigurasyon ng resource. Tingnan ang [sanggunian ng AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para sa buong detalye.
+
+**Release-aware diagnostics (2026-11-04):** Ang mga ahente `1.0.0-beta.23` ay nangangailangan ng `azd >= 1.37.0`; i-upgrade ang core CLI bago ang mga hindi compatible na extension. Itinatago ng release ng ahenteng ito ang mga warning ng developer RBAC sa huling output ng deployment at tinutukoy ang bersyon na sangkot sa mga pagkabigo sa activation/timeouts. Ang timeout ay hindi nagpapatunay na nabigo ang deployment: suriin ang sinusubukang bersyon bago subukang muli. Nag-aayos din ito ng A2A 0.3 na invocations na nagpapakita ng mga lifecycle message sa halip na mga kumpletong sagot. Ang core na `azd 1.37.1` ay nag-aayos ng cancellation propagation sa mga extension; pinapabuti ng `1.37.2` ang mahahalagang kumpirmasyon ng provisioning at ang pamamahala ng pagkakansela.
+
+Kung ang utos sa pagsusuri ng mas lumang tutorial ay nagpi-print lamang ng gabay sa paglipat, i-install ang `azure.ai.evaluations` (`1.0.0-beta.2` ay nangangailangan ng `azd >= 1.33.0`) at gamitin ang `azd ai eval init`, `generate`, at `run start`. Hindi na tinatanggap ng `--config` ng Optimization ang mga lumang evaluation file. Tingnan ang [evaluation migration](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) at [optimization migration](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
 ### Pag-debug ng Aplikasyon
 
-1. **Istrakturadong Pag-log:**
+1. **Nakabalangkas na Pag-log:**
 ```python
 import logging
 import json
 
-# I-configure ang istrukturadong pag-log para sa mga aplikasyon ng AI
+# Configure structured logging for AI applications
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -789,36 +791,40 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Mga Endpoint ng Health Check:**
+2. **Mga Endpoint para sa Health Check:**
 ```python
+# Integration fragment: add to an existing FastAPI app, protect this diagnostic
+# endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
+# authorization, not Azure OpenAI inference.
+import os
+from azure.identity.aio import DefaultAzureCredential
+from azure.search.documents.indexes.aio import SearchIndexClient
+from fastapi import Response
+
 @app.get("/debug/health")
-async def detailed_health_check():
+async def detailed_health_check(response: Response):
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Suriin ang koneksyon sa OpenAI
+    # Check Search service
     try:
-        client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
-        await client.models.list()
-        checks['openai'] = {'status': 'healthy'}
-    except Exception as e:
-        checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
-    
-    # Suriin ang serbisyo ng paghahanap
-    try:
-        search_client = SearchIndexClient(
-            endpoint=AZURE_SEARCH_ENDPOINT,
-            credential=DefaultAzureCredential()
-        )
-        indexes = await search_client.list_index_names()
-        checks['search'] = {'status': 'healthy', 'indexes': list(indexes)}
-    except Exception as e:
-        checks['search'] = {'status': 'unhealthy', 'error': str(e)}
+        async with DefaultAzureCredential() as credential:
+            async with SearchIndexClient(
+                endpoint=os.environ['AZURE_SEARCH_ENDPOINT'],
+                credential=credential
+            ) as search_client:
+                # AsyncItemPaged is iterated asynchronously, not awaited as a list.
+                async for _ in search_client.list_index_names():
+                    break
+        checks['search'] = {'status': 'healthy'}
+    except Exception:
+        response.status_code = 503
+        checks['search'] = {'status': 'unhealthy'}
     
     return checks
 ```
 
-3. **Pagsubaybay sa Pagganap:**
+3. **Pagmo-monitor ng Performance:**
 ```python
 import time
 from functools import wraps
@@ -849,43 +855,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Mga Karaniwang Error Code at Mga Solusyon
+## Mga Karaniwang Error Code at Solusyon
 
 | Error Code | Paglalarawan | Solusyon |
 |------------|-------------|----------|
 | 401 | Hindi Awtorisado | Suriin ang mga API key at konfigurasyon ng managed identity |
-| 403 | Ipinagbabawal | Suriin ang mga assignment ng role ng RBAC |
-| 429 | Na-rate limit | Magpatupad ng lohika ng retry na may exponential backoff |
-| 500 | Panloob na Error ng Server | Suriin ang status ng pag-deploy ng modelo at mga log |
-| 503 | Hindi Magagamit ang Serbisyo | Suriin ang kalusugan ng serbisyo at pagkakaroon sa rehiyon |
+| 403 | Ipinagbabawal | Tiyakin ang mga RBAC role assignment |
+| 429 | Na-rate Limit | Magpatupad ng retry logic na may exponential backoff |
+| 500 | Internal Server Error | Suriin ang kalagayan ng deployment ng modelo at mga log |
+| 503 | Hindi Available ang Serbisyo | Tiyakin ang kalusugan ng serbisyo at availability sa rehiyon |
 
 ## Mga Susunod na Hakbang
 
-1. **Suriin ang [Gabay sa Pag-deploy ng AI Model](../chapter-02-ai-development/ai-model-deployment.md)** para sa mga pinakamahusay na kasanayan sa pag-deploy
-2. **Kumpletuhin ang [Mga Praktika sa Production AI](../chapter-08-production/production-ai-practices.md)** para sa mga solusyong angkop sa enterprise
-3. **Sumali sa [Discord ng Microsoft Foundry](https://aka.ms/foundry/discord)** para sa suporta mula sa komunidad
-4. **Mag-submit ng mga isyu** sa [Repository ng AZD sa GitHub](https://github.com/Azure/azure-dev) para sa mga partikular na problema sa AZD
+1. **Suriin ang [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** para sa pinakamahusay na kasanayan sa deployment
+2. **Kumpletuhin ang [Production AI Practices](../chapter-08-production/production-ai-practices.md)** para sa mga solusyong handa para sa enterprise
+3. **Sumali sa [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** para sa suporta ng komunidad
+4. **Mag-submit ng mga isyu** sa [AZD GitHub repository](https://github.com/Azure/azure-dev) para sa mga partikular na problema ng AZD
 
-## Mga Sanggunian
+## Mga Mapagkukunan
 
-- [Pag-troubleshoot ng Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Pag-troubleshoot ng Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Pag-troubleshoot ng Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Kasanayan ng Azure Diagnostics Agent**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - I-install ang mga kasanayan sa pag-troubleshoot ng Azure sa iyong editor: `npx skills add microsoft/github-copilot-for-azure`
+- [Pag-troubleshoot sa Azure OpenAI quota at throttling](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
+- [Pag-troubleshoot sa Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Pag-troubleshoot sa Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Mag-install ng mga kasanayan sa pag-troubleshoot ng Azure sa iyong editor: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Pag-navigate ng Kabanata:**
-- **📚 Pangunahing Pahina ng Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 7 - Pag-troubleshoot at Pag-debug
-- **⬅️ Nakaraang**: [Gabay sa Pag-debug](debugging.md)
+- **📚 Tahanan ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 7 - Troubleshooting at Pag-debug
+- **⬅️ Nakaraan**: [Gabayan sa Pag-debug](debugging.md)
 - **➡️ Susunod na Kabanata**: [Kabanata 8: Mga Pattern para sa Produksyon at Enterprise](../chapter-08-production/production-ai-practices.md)
-- **🤖 Kaugnay**: [Kabanata 2: Pag-unlad na Una ang AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 Sanggunian**: [Pag-troubleshoot ng Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **🤖 Nauugnay**: [Kabanata 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Sanggunian**: [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:
-Ang dokumentong ito ay isinalin gamit ang serbisyong pagsasalin ng AI na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, mangyaring tandaan na ang mga awtomatikong salin ay maaaring maglaman ng mga pagkakamali o di-katumpakan. Dapat ituring na pinagkakatiwalaang sanggunian ang orihinal na dokumento sa orihinal nitong wika. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

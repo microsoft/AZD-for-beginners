@@ -1,366 +1,368 @@
 # 詞彙表 - Azure 與 AZD 術語
 
 <strong>所有章節參考</strong>
-- **📚 課程首頁**: [AZD 入門](../README.md)
-- **📖 學習基礎**: [第 1 章：AZD 基礎](../docs/getting-started/azd-basics.md)
-- **🤖 AI 術語**: [第 2 章：AI 優先開發](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **📚 課程首頁**: [初學者的 AZD](../README.md)
+- **📖 學習基礎**: [第一章：AZD 基礎](../docs/chapter-01-foundation/azd-basics.md)
+- **🤖 AI 術語**: [第二章：AI 優先開發](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## 介紹
 
-此綜合詞彙表提供在 Azure Developer CLI 與 Azure 雲端開發中使用的術語、概念與縮寫的定義。為理解技術文件、排解問題與就 azd 專案及 Azure 服務進行有效溝通提供重要參考。
+本綜合詞彙表提供 Azure Developer CLI 及 Azure 雲端開發中使用的術語、概念及縮寫定義。是理解技術文件、排解問題及有效溝通 azd 專案與 Azure 服務的必備參考資料。
 
 ## 學習目標
 
-使用本詞彙表，您將能：
-- 理解 Azure Developer CLI 的基本術語與概念
-- 掌握 Azure 雲端開發的詞彙與技術術語
-- 有效率地查閱基礎設施即程式碼與部署相關術語
-- 了解 Azure 服務名稱、縮寫及其用途
-- 存取排錯與偵錯術語的定義
-- 學習進階的 Azure 架構與開發概念
+使用此詞彙表，您將能：
+- 理解重要的 Azure Developer CLI 術語與概念
+- 精通 Azure 雲端開發詞彙與技術術語
+- 有效率參考基礎設施即代碼與部署術語
+- 理解 Azure 服務名稱、縮寫及其功能
+- 取得排錯與除錯術語定義
+- 學習進階 Azure 架構與開發概念
 
 ## 學習成果
 
-透過定期參考本詞彙表，您將能：
-- 使用正確的 Azure Developer CLI 術語進行有效溝通
-- 更清楚地理解技術文件與錯誤訊息
-- 自信地操作與瀏覽 Azure 服務與概念
-- 使用適當的技術詞彙進行問題排解
-- 在團隊討論中提供準確的技術用語
-- 系統性地擴展您的 Azure 雲端開發知識
+持續查閱此詞彙表後，您將能：
+- 使用正確 Azure Developer CLI 術語有效溝通
+- 更清晰理解技術文件和錯誤訊息
+- 自信導覽 Azure 服務與相關概念
+- 使用恰當技術術語排解問題
+- 精確使用技術用語參與團隊討論
+- 系統性擴展您的 Azure 雲端開發知識
 
 ## A
 
-**ARM Template**  
-Azure Resource Manager 範本。以 JSON 為基礎的基礎設施即程式碼格式，用於以宣告式定義與部署 Azure 資源。
+**ARM 範本**  
+Azure Resource Manager 範本。以 JSON 為基礎的基礎設施即代碼格式，用於宣告性地定義和部署 Azure 資源。
 
-**App Service**  
-Azure 的平台即服務 (PaaS) 方案，用於在不需管理基礎設施的情況下託管網站應用程式、REST API 與行動後端。
+<strong>應用服務</strong>  
+Azure 的平台即服務 (PaaS)，用於主機托管網頁應用程式、REST API 及行動後端，無需管理基礎架構。
 
 **Application Insights**  
-Azure 的應用程式效能監控 (APM) 服務，提供對應用程式效能、可用性與使用情況的深入洞察。
+Azure 的應用程式效能監控 (APM) 服務，提供對應用程式效能、可用性與使用情況的深入了解。
 
 **Azure CLI**  
-用於管理 Azure 資源的命令列介面。azd 使用它來進行驗證與部分操作。
+管理 Azure 資源的命令列介面。它是 AZD 的輔助工具，但登入獨立；AZD 核心驗證使用 `azd auth login`。
 
 **Azure Developer CLI (azd)**  
-以開發者為中心的命令列工具，透過範本與基礎設施即程式碼加速將應用程式建置並部署到 Azure 的流程。
+以開發者為中心的命令列工具，通過範本和基礎設施即代碼加速建立和部署應用程式到 Azure。
 
 **azure.yaml**  
-azd 專案的主要設定檔，定義服務、基礎設施與部署掛鉤。
+azd 專案的主要設定文件，定義服務、基礎架構及部署掛鉤。
 
 **Azure Resource Manager (ARM)**  
-Azure 的部署與管理服務，提供建立、更新與刪除資源的管理層。
+Azure 的部署與管理服務，提供建立、更新及刪除資源的管理層。
 
 ## B
 
 **Bicep**  
-由 Microsoft 開發用於部署 Azure 資源的領域專用語言 (DSL)。語法比 ARM 範本更簡潔，並會編譯為 ARM。
+微軟開發的領域專用語言 (DSL)，用於部署 Azure 資源。語法比 ARM 範本簡潔，編譯成 ARM。
 
-**Build**  
-編譯原始程式碼、安裝相依套件並為部署準備應用程式的過程。
+<strong>建置</strong>  
+編譯原始碼、安裝相依性及準備應用程式以供部署的過程。
 
-**Blue-Green Deployment**  
-使用兩個相同的生產環境（藍色與綠色）來最小化停機時間與風險的部署策略。
+<strong>藍綠部署</strong>  
+利用兩個相同的生產環境（藍與綠）以減少停機時間和風險的部署策略。
 
 ## C
 
-**Container Apps**  
-Azure 的無伺服器容器服務，允許在不管理複雜基礎設施的情況下執行容器化應用程式。
+<strong>容器應用</strong>  
+Azure 的無伺服器容器服務，允許在無需管理複雜基礎架構的情況下執行容器化應用程式。
 
 **CI/CD**  
-持續整合/持續部署。自動化整合程式碼變更與部署應用程式的作法。
+持續整合/持續部署。自動化整合代碼變更及部署應用程式的實踐。
 
 **Cosmos DB**  
-Azure 全球分散式、多模型資料庫服務，提供完整的吞吐量、延遲、可用性與一致性服務等級協議 (SLA)。
+Azure 的全球分佈多模型資料庫服務，提供吞吐量、延遲、可用性及一致性的完整 SLA。
 
-**Configuration**  
-控制應用程式行為與部署選項的設定與參數。
+<strong>設定</strong>  
+控制應用程式行為與部署選項的設定和值。
 
 ## D
 
-**Deployment**  
-在目標基礎設施上安裝與設定應用程式及其相依項目的過程。
+<strong>部署</strong>  
+在目標基礎架構上安裝及配置應用程式及其相依性的過程。
 
 **Docker**  
-使用容器化技術來開發、運送與執行應用程式的平台。
+使用容器化技術開發、傳送及執行應用程式的平台。
 
 **Dockerfile**  
-包含用於構建 Docker 容器映像指令的文字檔。
+建立 Docker 容器映像檔的指令文本文件。
 
 ## E
 
-**Environment**  
-代表應用程式的特定實例之部署目標（例如：開發、暫存、正式環境）。
+<strong>環境</strong>  
+代表應用程式具體實例的部署目標 (如開發、預備、正式)。
 
-**Environment Variables**  
-以鍵值對儲存的設定值，應用程式可於執行時存取。
+<strong>環境變數</strong>  
+以鍵值對形式存儲的配置值，應用程式在執行時可存取。
 
-**Endpoint**  
-可存取應用程式或服務的 URL 或網路位址。
+<strong>端點</strong>  
+可訪問應用程式或服務之 URL 或網絡地址。
 
 ## F
 
-**Function App**  
-Azure 的無伺服器運算服務，允許在不管理基礎設施的情況下執行事件驅動的程式碼。
+<strong>函式應用程式</strong>  
+Azure 的無伺服器運算服務，允許執行事件驅動程式碼，無需管理基礎架構。
 
 ## G
 
 **GitHub Actions**  
-與 GitHub 倉庫整合的 CI/CD 平台，用於自動化工作流程。
+整合 GitHub 儲存庫的 CI/CD 平台，用於自動化工作流程。
 
 **Git**  
-用於追蹤原始程式碼變更的分散式版本控制系統。
+用於追蹤原始碼更改的分散式版本控制系統。
 
 ## H
 
-**Hooks**  
-在部署生命週期特定時點（preprovision、postprovision、predeploy、postdeploy）執行的自訂腳本或命令。
+<strong>掛鉤</strong>  
+在部署生命週期特定階段（預配置、後配置、預部署、後部署）執行的自定義腳本或命令。
 
-**Host**  
-應用程式將被部署的 Azure 服務類型（例如：appservice、containerapp、function）。
+<strong>主機</strong>  
+應用程式將要部署的 Azure 服務類型 (例如 appservice、containerapp、function)。
 
 ## I
 
-**Infrastructure as Code (IaC)**  
-透過程式碼而非人工流程來定義與管理基礎設施的作法。
+**基礎設施即代碼 (IaC)**  
+透過程式碼定義與管理基礎設施的實踐，取代手動操作。
 
-**Init**  
-初始化一個新的 azd 專案的過程，通常是從範本開始。
+<strong>初始化</strong>  
+初始化新 azd 專案的過程，通常從範本開始。
 
 ## J
 
 **JSON**  
-JavaScript 物件記號。常用於設定檔與 API 回應的資料交換格式。
+JavaScript 物件表示法。一種常用於配置文件及 API 回應的資料交換格式。
 
 **JWT**  
-JSON Web Token。用於在各方之間以 JSON 物件安全地傳輸資訊的標準。
+JSON Web Token。用於安全傳輸資訊的 JSON 物件標準。
 
 ## K
 
 **Key Vault**  
-Azure 用於安全儲存與管理祕密、金鑰與憑證的服務。
+Azure 用於安全存儲與管理機密、金鑰及憑證的服務。
 
-**Kusto Query Language (KQL)**  
-用於分析 Azure Monitor、Application Insights 與其他 Azure 服務資料的查詢語言。
+**Kusto 查詢語言 (KQL)**  
+用於分析 Azure Monitor、Application Insights 及其他 Azure 服務資料的查詢語言。
 
 ## L
 
-**Load Balancer**  
-將進入的網路流量分散到多個伺服器或實例的服務。
+<strong>負載平衡器</strong>  
+將進入網絡流量分配至多部伺服器或實例的服務。
 
-**Log Analytics**  
-Azure 用於收集、分析與對雲端及內部部署環境的遙測資料採取行動的服務。
+<strong>日誌分析</strong>  
+Azure 服務，用於收集、分析及處理雲端及本地環境的遙測資料。
 
 ## M
 
-**Managed Identity**  
-Azure 功能，為 Azure 服務提供自動管理的身分，用於向其他 Azure 服務進行驗證。
+<strong>託管身份</strong>  
+Azure 功能，提供自動管理身份以驗證至其他 Azure 服務。
 
-**Microservices**  
-將應用程式建構為一系列小型、獨立服務的架構方法。
+<strong>微服務</strong>  
+將應用程式建構為一組小型獨立服務的架構方法。
 
-**Monitor**  
-Azure 的統一監控解決方案，提供跨應用程式與基礎設施的全方位可觀測性。
+<strong>監控</strong>  
+Azure 的統一監控解決方案，提供跨應用程式和基礎設施的全方位可觀察性。
 
 ## N
 
 **Node.js**  
-建立在 Chrome 的 V8 JavaScript 引擎上的 JavaScript 執行環境，用於構建伺服器端應用程式。
+基於 Chrome V8 JavaScript 引擎的 JavaScript 執行環境，用於建構伺服器端應用程式。
 
 **npm**  
-Node.js 的套件管理工具，用於管理相依性與套件。
+Node.js 的套件管理器，管理相依性和套件。
 
 ## O
 
-**Output**  
-從基礎設施部署返回的值，可供應用程式或其他資源使用。
+<strong>輸出</strong>  
+從基礎設施部署中回傳的值，可供應用程式或其他資源使用。
 
 ## P
 
-**Package**  
-為部署準備應用程式程式碼與相依項目的過程。
+<strong>打包</strong>  
+準備應用程式代碼與相依性以進行部署的過程。
 
-**Parameters**  
-傳遞給基礎設施範本以自訂部署的輸入值。
+<strong>參數</strong>  
+傳遞給基礎設施範本的輸入值，用以自訂部署。
 
 **PostgreSQL**  
-作為 Azure 管理型服務支援的開源關聯式資料庫系統。
+開源關聯式資料庫系統，在 Azure 中作為託管服務支援。
 
-**Provisioning**  
-建立與設定基礎設施範本中定義的 Azure 資源的過程。
+<strong>配置</strong>  
+建立與配置基礎設施範本中定義的 Azure 資源的過程。
 
 ## Q
 
-**Quota**  
-對 Azure 訂閱或區域中可建立資源數量的限制。
+<strong>配額</strong>  
+Azure 訂閱或區域可建立資源數量的限制。
 
 ## R
 
-**Resource Group**  
-共享相同生命週期、權限與政策的 Azure 資源的邏輯容器。
+<strong>資源群組</strong>  
+邏輯容器，管理共用相同生命週期、權限與政策的 Azure 資源。
 
-**Resource Token**  
-azd 生成的唯一字串，用以確保部署中的資源名稱具有唯一性。
+<strong>資源代幣</strong>  
+由 azd 生成的唯一字串，確保跨部署資源名稱的唯一性。
 
 **REST API**  
-使用 HTTP 方法設計網路應用程式的架構風格。
+用 HTTP 方法設計網絡應用程式的架構風格。
 
-**Rollback**  
-回復到先前版本的應用程式或基礎設施設定的過程。
+<strong>回滾</strong>  
+退回到應用程式或基礎設施配置的先前版本的過程。
 
 ## S
 
-**Service**  
-在 azure.yaml 中定義的應用程式組件（例如：Web 前端、API 後端、資料庫）。
+<strong>服務</strong>  
+azure.yaml 中定義的應用程式組件（如網頁前端、API 後端、資料庫）。
 
 **SKU**  
-庫存保有單位。代表 Azure 資源的不同服務等級或效能級別。
+存貨單位，代表 Azure 資源的不同服務層級或效能等級。
 
-**SQL Database**  
-基於 Microsoft SQL Server 的 Azure 管理型關聯式資料庫服務。
+**SQL 資料庫**  
+基於 Microsoft SQL Server 的 Azure 託管關聯式資料庫服務。
 
-**Static Web Apps**  
-用於從原始碼倉庫建立與部署全端網頁應用程式的 Azure 服務。
+<strong>靜態網頁應用</strong>  
+Azure 服務，從原始碼儲存庫構建及部署完整堆疊網頁應用程式。
 
-**Storage Account**  
-提供 Blob、檔案、佇列與表等資料物件的雲端儲存服務。
+<strong>儲存帳戶</strong>  
+Azure 服務，提供 blob、檔案、佇列和表格等資料物件的雲端儲存。
 
-**Subscription**  
-包含資源群組與資源的 Azure 帳戶容器，並附帶計費與存取管理。
+<strong>訂閱</strong>  
+Azure 帳戶容器，包含資源群組和資源，並具帳單與存取管理。
 
 ## T
 
-**Template**  
-預建的專案結構，包含應用程式程式碼、基礎設施定義與常見情境的設定。
+<strong>範本</strong>  
+預先建構的專案結構，包含應用程式代碼、基礎架構定義及常見情境配置。
 
 **Terraform**  
-支援多雲提供者（包括 Azure）的開源基礎設施即程式碼工具。
+支援多雲供應商（含 Azure）的開源基礎設施即代碼工具。
 
 **Traffic Manager**  
-Azure 基於 DNS 的流量負載平衡器，用於在全球 Azure 區域間分配流量。
+Azure 基於 DNS 的流量負載平衡器，用於全球 Azure 區域間分散流量。
 
 ## U
 
 **URI**  
-統一資源識別符。用來識別特定資源的字串。
+統一資源識別符。識別特定資源的字串。
 
 **URL**  
-統一資源定位符。URI 的一種類型，指定資源位置及如何取得它。
+統一資源定位符。指定資源位置及取得方式的 URI 類型。
 
 ## V
 
-**Virtual Network (VNet)**  
-Azure 中私有網路的基本構建區塊，提供隔離與分段功能。
+**虛擬網路 (VNet)**  
+Azure 內私有網絡的基本建置區塊，提供隔離與分割功能。
 
 **VS Code**  
-Visual Studio Code。廣受歡迎的程式碼編輯器，與 Azure 及 azd 有良好整合。
+Visual Studio Code。具優秀 Azure 和 azd 整合的熱門代碼編輯器。
 
 ## W
 
 **Webhook**  
-由特定事件觸發的 HTTP 回呼，常用於 CI/CD 管線。
+由特定事件觸發的 HTTP 回呼，常用於 CI/CD 流程。
 
-**What-if**  
-Azure 的功能，可在不實際執行部署的情況下顯示部署將會做出的變更。
+<strong>假設執行</strong>  
+Azure 功能，可顯示部署將會做出的變更而不實際執行。
 
 ## Y
 
 **YAML**  
-YAML 不是標記語言。用於 azure.yaml 等設定檔的人類可讀資料序列化標準。
+YAML 不是標記語言。用於配置文件（如 azure.yaml）的可讀性高的資料序列化標準。
 
 ## Z
 
-**Zone**  
-Azure 區域內的物理分離位置，提供冗餘與高可用性。
+<strong>區域</strong>  
+Azure 區域內物理上分離的位置，提供冗餘和高可用性。
 
 ---
 
-## 常見縮寫
+## 常用縮寫
 
-| 縮寫 | 全名 | 描述 |
+| 縮寫 | 全稱 | 說明 |
 |---------|-----------|-------------|
-| AAD | Azure Active Directory (now Microsoft Entra ID) | 身分與存取管理服務 |
-| ACR | Azure Container Registry | 容器映像註冊表服務 |
-| AKS | Azure Kubernetes Service | 管理型 Kubernetes 服務 |
-| API | Application Programming Interface | 建構軟體的協定集合 |
+| AAD | Azure Active Directory（現為 Microsoft Entra ID） | 身份與存取管理服務 |
+| ACR | Azure Container Registry | 容器映像檔註冊服務 |
+| AKS | Azure Kubernetes Service | 託管 Kubernetes 服務 |
+| API | Application Programming Interface | 構建軟體的一組協定 |
 | ARM | Azure Resource Manager | Azure 的部署與管理服務 |
-| CDN | Content Delivery Network | 分散式伺服器網路 |
-| CI/CD | Continuous Integration/Continuous Deployment | 自動化開發作法 |
-| CLI | Command Line Interface | 文字介面的使用者介面 |
-| DNS | Domain Name System | 將網域名稱轉換為 IP 位址的系統 |
+| CDN | Content Delivery Network | 分布式伺服器網絡 |
+| CI/CD | 持續整合/持續部署 | 自動化開發實踐 |
+| CLI | 命令列介面 | 文字式使用者介面 |
+| DNS | Domain Name System | 將域名轉換為 IP 位址的系統 |
 | HTTPS | Hypertext Transfer Protocol Secure | HTTP 的安全版本 |
-| IaC | Infrastructure as Code | 透過程式碼管理基礎設施 |
+| IaC | 基礎設施即代碼 | 透過代碼管理基礎設施 |
 | JSON | JavaScript Object Notation | 資料交換格式 |
-| JWT | JSON Web Token | 用於安全傳輸資訊的代幣格式 |
-| KQL | Kusto Query Language | 用於 Azure 資料服務的查詢語言 |
-| RBAC | Role-Based Access Control | 基於使用者角色的存取控制方法 |
-| REST | Representational State Transfer | 網路服務的架構風格 |
-| SDK | Software Development Kit | 開發工具套件 |
-| SLA | Service Level Agreement | 關於服務可用性/效能的承諾 |
-| SQL | Structured Query Language | 管理關聯式資料庫的語言 |
-| SSL/TLS | Secure Sockets Layer/Transport Layer Security | 加密協定 |
-| URI | Uniform Resource Identifier | 識別資源的字串 |
-| URL | Uniform Resource Locator | 指定資源位置的 URI 類型 |
-| VM | Virtual Machine | 電腦系統的模擬 |
-| VNet | Virtual Network | Azure 中的私有網路 |
-| YAML | YAML Ain't Markup Language | 資料序列化標準 |
+| JWT | JSON Web Token | 用於安全資訊傳遞的代幣格式 |
+| KQL | Kusto 查詢語言 | 用於 Azure 資料服務的查詢語言 |
+| RBAC | 基於角色的存取控制 | 根據使用者角色的存取方法 |
+| REST | 表述性狀態轉換 | 網路服務的架構風格 |
+| SDK | 軟體開發工具包 | 開發工具集合 |
+| SLA | 服務等級協議 | 對服務可用性/效能的承諾 |
+| SQL | 結構化查詢語言 | 管理關聯式資料庫的語言 |
+| SSL/TLS | 安全套接字層/傳輸層安全性 | 密碼學協定 |
+| URI | 統一資源識別符 | 識別資源的字串 |
+| URL | 統一資源定位符 | 指定資源位置的 URI 類型 |
+| VM | 虛擬機器 | 電腦系統的模擬 |
+| VNet | 虛擬網路 | Azure 內的私有網路 |
+| YAML | YAML 不是標記語言 | 資料序列化標準 |
 
 ---
 
 ## Azure 服務名稱對應
 
-| 常用名稱 | 官方 Azure 服務名稱 | azd Host 類型 |
+| 常用名稱 | 官方 Azure 服務名稱 | azd 主機類型 |
 |-------------|------------------------------|---------------|
-| Web App | Azure App Service | `appservice` |
-| API App | Azure App Service | `appservice` |
-| Container App | Azure Container Apps | `containerapp` |
-| Function | Azure Functions | `function` |
-| Static Site | Azure Static Web Apps | `staticwebapp` |
-| Database | Azure Database for PostgreSQL | `postgres` |
-| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Storage | Azure Storage Account | `storage` |
-| Cache | Azure Cache for Redis | `redis` |
-| Search | Azure AI Search | `search` |
-| Messaging | Azure Service Bus | `servicebus` |
+| 網頁應用程式 | Azure App Service | `appservice` |
+| API 應用程式 | Azure App Service | `appservice` |
+| 容器應用程式 | Azure Container Apps | `containerapp` |
+| 函式 | Azure Functions | `function` |
+| 靜態網站 | Azure Static Web Apps | `staticwebapp` |
+| 資料庫 | Azure Database for PostgreSQL | 基礎設施資源，非應用程式 `host` |
+| NoSQL 資料庫 | Azure Cosmos DB | 基礎設施資源，非應用程式 `host` |
+| 儲存 | Azure Storage Account | 基礎設施資源，非內建應用程式 `host` |
+| 快取 | Azure Managed Redis | 基礎設施資源，非應用程式 `host` |
+| 搜索 | Azure AI Search | 基礎設施資源，非應用程式 `host` |
+| 訊息傳遞 | Azure Service Bus | 基礎設施資源，非應用程式 `host` |
+
+`services.<name>.host` 選擇應用程式部署目標；它並非任一 Azure 資源類型的簡寫。資料庫、快取、搜索服務及佇列通常由基礎架構提供者建置，並透過輸出／配置連接至應用程式。
 
 ---
 
-## 情境特定術語
+## 特定情境術語
 
 ### 開發術語
-- **Hot Reload**: 在開發期間自動更新應用程式而無需重啟
-- **Build Pipeline**: 自動化建構與測試程式碼的流程
-- **Deployment Slot**: App Service 中的暫存環境
-- **Environment Parity**: 保持開發、暫存與正式環境的一致性
+- <strong>熱重載</strong>：開發時自動更新應用程式，無需重啟
+- <strong>建置管線</strong>：自動化建置與測試代碼的流程
+- <strong>部署槽</strong>：App Service 中的預備環境
+- <strong>環境一致性</strong>：保持開發、預備與正式環境相似
 
 ### 安全術語
-- **Managed Identity**: 提供自動憑證管理的 Azure 功能
-- **Key Vault**: 用於安全儲存祕密、金鑰與憑證
-- **RBAC**: 對 Azure 資源的基於角色的存取控制
-- **Network Security Group**: 控制網路流量的虛擬防火牆
+- <strong>託管身份</strong>：Azure 提供的自動憑證管理功能
+- <strong>金鑰保管庫</strong>：用於安全存儲機密、金鑰及憑證
+- **RBAC**：基於角色的 Azure 資源存取控制
+- <strong>網絡安全群組</strong>：控制網絡流量的虛擬防火牆
 
 ### 監控術語
-- **Telemetry**: 自動收集測量與資料
-- **Application Performance Monitoring (APM)**: 監控軟體效能
-- **Log Analytics**: 用於收集與分析日誌資料的服務
-- **Alert Rules**: 基於指標或條件的自動通知
+- <strong>遙測</strong>：自動收集測量值與資料
+- **應用效能監控 (APM)**：監控軟體效能
+- <strong>日誌分析</strong>：收集及分析日誌資料的服務
+- <strong>警示規則</strong>：根據指標或條件的自動通知
 
 ### 部署術語
-- **Blue-Green Deployment**: 零停機部署策略
-- **Canary Deployment**: 漸進式向部分使用者推出
-- **Rolling Update**: 依序替換應用程式實例
-- **Rollback**: 回復到先前的應用程式版本
+- <strong>藍綠部署</strong>：零停機時間部署策略
+- <strong>金絲雀發布</strong>：逐步向部分使用者釋出
+- <strong>滾動更新</strong>：應用實例的順序替換
+- <strong>回滾</strong>：復原至先前的應用程式版本
 
 ---
 
-<strong>使用提示</strong>: 使用 `Ctrl+F` 可快速搜尋本詞彙表中的特定術語。術語在適用情況下會相互參照。
+<strong>使用提示</strong>：使用 `Ctrl+F` 可快速搜尋本詞彙表中特定術語。術語間如有關聯會予以交叉參考。
 
 ---
 
 <strong>導覽</strong>
-- <strong>上一課程</strong>: [Cheat Sheet](cheat-sheet.md)
-- <strong>下一課程</strong>: [FAQ](faq.md)
+- <strong>上一課</strong>：[速查表](cheat-sheet.md)
+- <strong>下一課</strong>：[常見問題](faq.md)
 
 ---
 

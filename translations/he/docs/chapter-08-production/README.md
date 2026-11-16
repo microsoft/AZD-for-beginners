@@ -1,23 +1,25 @@
-# פרק 8: תבניות ייצור וארגוניות
+# פרק 8: דפוסי ייצור וארגוניים
 
-**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך**: 2-3 שעות | **⭐ מורכבות**: מתקדם
+**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך**: 2-3 שעות | **⭐ רמת מורכבות**: מתקדם
 
 ---
 
 ## סקירה כללית
 
-פרק זה מכסה תבניות פריסה מוכנות לארגון, החמרת אבטחה, ניטור ואופטימיזציית עלויות לעומסי עבודה של ייצור AI.
+פרק זה עוסק בדפוסי פריסה המתאימים לארגונים, הקשחת אבטחה, ניטור ואופטימיזציית עלויות לעומסי עבודה של AI בפרודקשן.
 
-> אומת מול `azd 1.27.1` ביולי 2026.
+זוהי התייחסות אדריכלית, לא תבנית פריסה מלאה למערכת ייצור. דוגמאות עושות שימוש בפירוט אינטגרציה שיש לספק ולבדוק באפליקציה שלך; קריאת רשימת הביקורת אינה מאשרת מוכנות לפרודקשן.
 
-## מטרות למידה
+> **סקירת שחרור (2026-11-04):** ההנחיה ל-AI CLI נבדקה אל מול `azd 1.37.2`, סוכנים `1.0.0-beta.23`, ותיעוד/מקור הערכות `1.0.0-beta.2`. ראה [שינויים ותיקונים בשחרור](production-ai-practices.md#recent-release-changes-and-fixes) לדרישות תאימות ופרטי הגירה; אין זו אימות פריסה חיה.
 
-בסיום פרק זה, תוכל:
-- לפרוס יישומים רב-אזוריים חסינים
-- ליישם תבניות אבטחה ארגוניות
+## מטרות הלמידה
+
+בסיום פרק זה תוכל:
+- לפרוס יישומים רב-אזוריים חסיני תקלות
+- ליישם דפוסי אבטחה ארגוניים
 - להגדיר ניטור מקיף
-- לאופטמיזציה של עלויות בקנה מידה
-- להגדיר צינורות CI/CD עם AZD
+- לאופטם עלויות בהיקף
+- להקים צינורות CI/CD עם AZD
 
 ---
 
@@ -25,38 +27,38 @@
 
 | # | שיעור | תיאור | זמן |
 |---|--------|-------------|------|
-| 1 | [שיטות ייצור AI](production-ai-practices.md) | תבניות פריסה ארגוניות | 90 דק' |
+| 1 | [שיטות AI בפרודקשן](production-ai-practices.md) | דפוסי פריסה ארגוניים | 90 דקות |
 
 ---
 
-## 🚀 רשימת בדיקה לייצור
+## 🚀 רשימת ביקורת לפרודקשן
 
-- [ ] פריסת רב-אזורית לחוסן
+- [ ] פריסה רב-אזורית לעמידות
 - [ ] זהות מנוהלת לאימות (ללא מפתחות)
 - [ ] Application Insights לניטור
-- [ ] תקציבי עלויות והתראות מוגדרים
-- [ ] סריקת אבטחה מופעלת
-- [ ] אינטגרציה לצינור CI/CD
-- [ ] תכנית התאוששות מאסון
+- [ ] תקציבי עלויות והגדרות התראות
+- [ ] סריקות אבטחה מופעלות
+- [ ] אינטגרציה עם צנרת CI/CD
+- [ ] תוכנית שחזור מאסון
 
 ---
 
-## 🏗️ תבניות ארכיטקטורה
+## 🏗️ דפוסי אדריכלות
 
-### תבנית 1: מיקרוסרוויסים AI
+### דגם 1: מיקרו-שירותי AI
 
 ```mermaid
 graph LR
-    Gateway[שער API] --> AI[שירות AI] --> Models[דגמי Microsoft Foundry]
-    Gateway --> Auth[שירות אימות]
-    AI --> Data[מאגר נתונים]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
-### תבנית 2: AI מונחה אירועים
+### דגם 2: AI מונחה אירועים
 
 ```mermaid
 graph LR
-    EventGrid[רשת אירועים] --> Functions[פונקציות] --> Pipeline[צינור בינה מלאכותית]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
@@ -64,12 +66,13 @@ graph LR
 ## 🔐 שיטות אבטחה מומלצות
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,34 +85,27 @@ properties: {
 
 ## 💰 אופטימיזציית עלויות
 
-| אסטרטגיה | חיסכון |
+| אסטרטגיה | מגבלה עיקרית |
 |----------|---------|
-| סקייל לאפס (Container Apps) | 60-80% |
-| שימוש בשכבות צריכה לפיתוח | 50-70% |
-| סקייל מתוזמן | 30-50% |
-| קיבולת שמורה | 20-40% |
+| Scale to zero (Container Apps) | דורש טריגר מתאים; שירותים אחרים עדיין יוצרים עלויות |
+| שימוש בשכבות צריכה לפיתוח | השוואת מחירי שירות ושל עומס עבודה נבחר |
+| תזמון סקיילינג | סקיילינג דרך תשתית/אוטומציה נתמכת |
+| הזמנות/קיבולת מוקצית | רק כאשר נתמך; התחייבויות יכולות להעלות עלויות רדומות |
 
-```bash
-# הגדרת התראות תקציב
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+השתמש ב[דגם משאבי תקציב מלא](production-ai-practices.md#2-cost-monitoring-and-budgets) עם תאריך התחלה תקף, היקף חיוב, נמענים והרשאות. תקציב שולח התראות; אין זה מגביל הוצאה. החיסכון תלוי במדידת ניצול ואינו אחוז מובטח.
 
 ---
 
 ## 📊 הגדרת ניטור
 
 ```bash
-# הזרם יומני
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# בדוק תובנות יישום
+# Check Application Insights
 azd monitor --overview
 
-# הצג מדדים
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -120,7 +116,7 @@ az monitor metrics list --resource <resource-id>
 | כיוון | פרק |
 |-----------|---------|
 | **קודם** | [פרק 7: פתרון בעיות](../chapter-07-troubleshooting/README.md) |
-| **סיום קורס** | [בית הקורס](../../README.md) |
+| **סיום קורס** | [דף הבית של הקורס](../../README.md) |
 
 ---
 
@@ -128,8 +124,8 @@ az monitor metrics list --resource <resource-id>
 
 - [מדריך סוכני AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [פתרונות מרובי סוכנים](../chapter-05-multi-agent/README.md)
-- [דוגמת מיקרוסרוויסים](../../examples/microservices/README.md)
+- [פתרונות רב-סוכניים](../chapter-05-multi-agent/README.md)
+- [דוגמת מיקרו-שירותים](../../examples/microservices/README.md)
 
 ---
 

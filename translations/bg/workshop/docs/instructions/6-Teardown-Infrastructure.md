@@ -1,60 +1,58 @@
-# 6. Премахване на инфраструктурата
+# 6. Демонтаж на инфраструктурата
 
-!!! tip "КЪМ КРАЯ НА ТОЗИ МОДУЛ ЩЕ МОЖЕТЕ"
+!!! tip "КЪМ КРАЯ НА ТОЗИ МОДУЛ ЩЕ МОЖЕТЕ ДА"
 
-    - [ ] Разберете значението на почистването на ресурси и управление на разходите
-    - [ ] Използвайте `azd down`, за да премахнете инфраструктурата безопасно
-    - [ ] Възстановете меко изтрити Azure AI услуги при необходимост
-    - [ ] **Лаб 6:** Почистете Azure ресурсите и потвърдете премахването
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Допълнителни упражнения
 
-Before we tear down the project, take a few minutes to do some open-ended exploration.
+Преди да демонтираме проекта, отделете няколко минути за свободно изследване.
 
-!!! info "Опитайте тези предложения за изследване"
+!!! info "Изпробвайте тези въпроси за изследване"
 
-    **Експериментирайте с GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
     1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
     2. Ask: `How can I customize the agent instructions for a healthcare use case?`
     3. Ask: `What environment variables control cost optimization?`
     
-    **Разгледайте Azure портала:**
+    **Explore the Azure Portal:**
     
-    1. Прегледайте метриките на Application Insights за вашето внедряване
-    2. Проверете анализа на разходите за предоставените ресурси
-    3. Разгледайте отново тестовата среда за агенти в портала Microsoft Foundry
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Премахване на инфраструктурата
+## Демонтаж на инфраструктурата
 
-1. Премахването на инфраструктурата е толкова лесно, колкото:
+1. Демонтажът на инфраструктурата е толкова лесен, колкото:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. Потвърдете избраната среда и прегледайте ресурсите за изтриване. Това премахва Azure ресурси и може да унищожи данни. Запазете подкана за потвърждение за този учебен процес. След завършване ще видите изход, подобен на:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (По избор) Ако сега отново изпълните `azd up`, ще забележите, че моделът gpt-4.1 се внедрява, тъй като променливата на средата беше променена (и запазена) в локалната папка `.azure`. 
+1. Уверете се в изтриването в портала и проверете за ресурси извън обхвата на разгръщането. Отчетите за разходи и актуализациите на квотата могат да изостават. Локалната конфигурация `.azure` остава, освен ако не я премахнете изрично.
 
-      Ето внедряванията на модела **преди**:
+1. `azd down --purge` допълнително иска постоянно изтриване на поддържани ресурси с мека изтривка. Използвайте го само когато не е необходима възстановяване и разбирате политиките за задържане/защита от изтриване. Не гарантира незабавно освобождаване на квотата.
 
-      ![Преди](../../../../../translated_images/bg/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      А ето го **след**:
-      ![След](../../../../../translated_images/bg/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Не се препоставяйте само за да проверите почистването. По-късно целенасочен `azd up` може да пресъздаде ресурси с помощта на останалите локални входни данни и отново начислява такси. Актуализациите на модела обикновено използват поддържани промени в осигуряването, а не демонтаж.
 
 ---
 

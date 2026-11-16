@@ -1,22 +1,22 @@
-# פרק 7: פתרון בעיות ואיתור באגים
+# פרק 7: פתרון בעיות ודיבאג
 
-**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך**: שעה עד שעתיים | **⭐ רמת קושי**: בינוני
+**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך**: 1-1.5 שעות | **⭐ רמת קושי**: בינוני
 
 ---
 
-## מבט כללי
+## סקירה כללית
 
-פרק זה עוזר לך לאבחן ולפתור בעיות נפוצות בעבודה עם Azure Developer CLI. מכשלונות פריסה ועד בעיות ייחודיות לבינה מלאכותית.
+פרק זה עוזר לך לאבחן ולפתור בעיות נפוצות בעת עבודה עם Azure Developer CLI. מכישלונות פריסה ועד בעיות ספציפיות ל-AI.
 
-> אומת נגד `azd 1.27.1` ביולי 2026.
+> הנחיית הפקודות נבדקה מול מַפְרֵט `azd 1.37.2` שפורסם. פריסות ענן לא בוצעו. החלף שמות ומזהים של משאבים לדוגמה לפני השימוש בפקודות.
 
-## מטרות למידה
+## מטרות הלמידה
 
 עם סיום פרק זה, תוכל:
 - לאבחן כשלונות פריסה נפוצים ב-AZD
-- לאתר בעיות אימות והרשאות
-- לפתור בעיות חיבור לשירותי AI
-- להשתמש בפורטל Azure ו-CLI לפתרון בעיות
+- לדבג בעיות הזדהות והרשאות
+- לפתור בעיות בחיבור לשירותי AI
+- להשתמש ב-Azure Portal וב-CLI לפתרון בעיות
 
 ---
 
@@ -24,71 +24,76 @@
 
 | # | שיעור | תיאור | זמן |
 |---|--------|-------------|------|
-| 1 | [בעיות נפוצות](common-issues.md) | בעיות שמופיעות לעיתים קרובות | 30 דק' |
-| 2 | [מדריך איתור באגים](debugging.md) | אסטרטגיות איתור באגים שלב אחר שלב | 45 דק' |
-| 3 | [פתרון בעיות ב-AI](ai-troubleshooting.md) | בעיות ייחודיות לבינה מלאכותית | 30 דק' |
+| 1 | [בעיות נפוצות](common-issues.md) | בעיות הנפוצות לעיתים קרובות | 30 דק' |
+| 2 | [מדריך דיבאג](debugging.md) | אסטרטגיות דיבאג צעד-אחר-צעד | 45 דק' |
+| 3 | [פתרון בעיות AI](ai-troubleshooting.md) | בעיות ספציפיות ל-AI | 30 דק' |
 
 ---
 
-## 🚨 תיקונים מהירים
+## 🚨 פתרונות מהירים
 
-### בעיות אימות
+### בעיות הזדהות
 ```bash
-# דרוש עבור זרימות עבודה של AZD
+# Required for AZD workflows
 azd auth login
 
-# אופציונלי אם אתה גם משתמש בפקודות Azure CLI ישירות
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### כשלונות פריסה
+### כישלונות פריסה
 ```bash
 azd show
 azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### התנגשויות משאבים
+### התנגשות משאבים
+בדוק תחילה את המשאב הקיים ואת שגיאות הפריסה. אל תמחק סביבה משותפת או ייצורית כדי לפתור קונפליקט בשם. עבור **סביבה חד-פעמית חדשה**, השתמש בשם ייחודי:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### חריגות מכסת שימוש
+### חריגת מכסות
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+שינוי `AZURE_LOCATION` אינו מעביר משאבים קיימים ויכול לגרום לקונפליקטים במיקום בעת פריסה מחדש.
 
 ---
 
-## 📋 הפניות לקוד שגיאה
+## 📋 טבלת קודי שגיאה
 
 | שגיאה | סיבה | פתרון |
 |-------|-------|----------|
 | `AuthenticationError` | לא מחובר | `azd auth login` |
-| `ResourceNotFound` | משאב חסר | בדוק שמות משאבים |
-| `QuotaExceeded` | גבולות מנוי | בקש הגדלת מכסה |
+| `ResourceNotFound` | משאב חסר | בדוק את שמות המשאבים |
+| `QuotaExceeded` | מגבלות מנוי | בקש הגדלת מכסה |
 | `InvalidTemplate` | שגיאת תחביר ב-Bicep | `az bicep build` |
-| `Conflict` | משאב קיים | השתמש בשם חדש או מחק |
+| `Conflict` | המשאב כבר קיים | השתמש בשם חדש או מחק |
 | `Forbidden` | הרשאות לא מספקות | בדוק תפקידי RBAC |
 
 ---
 
-## 🔄 איפוס והתאוששות
+## 🔄 איפוס ושחזור
 
 ```bash
-# איפוס רך (שמירת משאבים, פרוס מחדש קוד)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# איפוס קשה (מחק הכל, התחל מחדש)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+איפוס קשה מוחק נתונים ועלול לשנות נקודות קצה. גבה קודם ובחן את הודעות האישור באינטראקטיביות. `--force --purge` מתאים רק לסביבות חד-פעמיות כאשר יש כוונה למחיקה בלתי הפיכה.
 
 ---
 
@@ -96,16 +101,16 @@ azd up
 
 | כיוון | פרק |
 |-----------|---------|
-| **הקודם** | [פרק 6: לפני פריסה](../chapter-06-pre-deployment/README.md) |
-| **הבא** | [פרק 8: הפקה](../chapter-08-production/README.md) |
+| **הקודם** | [פרק 6: טרום פריסה](../chapter-06-pre-deployment/README.md) |
+| **הבא** | [פרק 8: ייצור](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 משאבים קשורים
 
-- [בדיקות לפני פריסה](../chapter-06-pre-deployment/preflight-checks.md)
-- [מדריך הגדרות](../chapter-03-configuration/configuration.md)
-- [בעיות ב-AZD בגיטהאב](https://github.com/Azure/azure-dev/issues)
+- [בדיקות טרום פריסה](../chapter-06-pre-deployment/preflight-checks.md)
+- [מדריך תצורה](../chapter-03-configuration/configuration.md)
+- [בעיות GitHub של AZD](https://github.com/Azure/azure-dev/issues)
 
 ---
 

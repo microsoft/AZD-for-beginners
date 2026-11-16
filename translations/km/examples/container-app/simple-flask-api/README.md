@@ -1,433 +1,227 @@
-# Simple Flask API - Container App Example
+# API Flask រងាយៗ — Azure Container Apps
 
-**Learning Path:** Beginner ⭐ | **Time:** 25-35 minutes | **Cost:** $0-15/month
+**កម្រិត:** ជាថ្មី · **ពេលវេលា:** ៣០–៤៥ នាទី រួមបញ្ចូលការតំឡើង
 
-កម្មវិធី Python Flask REST API ពេញលេញដែលដំណើរការ និងបានដាក់នៅលើ Azure Container Apps ដោយប្រើ Azure Developer CLI (azd)។ ឧទាហរណ៍នេះបង្ហាញពីការដាក់កុងតឺន័រ ការកំណត់ auto-scaling និងមូលដ្ឋានការត្រួតពិនិត្យ។
+ដេញចេញ Python Flask CRUD API ជាមួយ Azure Developer CLI (azd)។ ម៉ូលដ្ឋានកូដ, Dockerfile,
+Bicep, និងប៉ារ៉ាម៉ែត្រ deployment មានរួមបញ្ចូល។ នេះគឺជា **ឧទាហរណ៍សម្រាប់ការសិក្សា** មិនមែន
+ជា API រួចរាល់សម្រាប់ផលិតកម្មឡើយ។
 
-## 🎯 What You'll Learn
+## អ្វីដែលអ្នកនឹងរៀន
 
-- ដាក់កម្មវិធី Python ដែលបានលាយជាកុងតឺន័រទៅ Azure
-- កំណត់ auto-scaling ជាមួយ scale-to-zero
-- អនុមោគ probes សុខភាព និង readiness checks
-- ត្រួតពិនិត្យកំណត់ហេតុនិង métriques របស់កម្មវិធី
-- ប្រើ Azure Developer CLI សម្រាប់ដាក់ប្រតិបត្តិការយ៉ាងរហ័ស
-
-## 📦 What's Included
-
-✅ **Flask Application** - REST API ពេញលេញមានប្រតិបត្តិការ CRUD (`src/app.py`)  
-✅ **Dockerfile** - ការកំណត់កុងតឺន័រសម្រាប់ produção  
-✅ **Bicep Infrastructure** - Περιβάλλον Container Apps និងការដាក់ API  
-✅ **AZD Configuration** - ការកំណត់ដាក់មួយពាក្យបញ្ជា  
-✅ **Health Probes** - ការត្រួតពិនិត្យ liveness និង readiness បានកំណត់  
-✅ **Auto-scaling** - 0-10 replicas អាស្រ័យលើប្រាក់ចំណូល HTTP  
-
-## Architecture
+- បង្កើត និងផ្សព្វផ្សាយ container តាមរយៈ azd។
+- កំណត់ ingress និង liveness/readiness probes។
+- ផ្ទៀងផ្ទាត់ចម្លើយ CRUD និងពិនិត្យកំណត់ត្រាអ្នកប្រើប្រាស់កម្មវិធី។
+- ស្វែងយល់ពីមូលហេតុដែលទិន្នន័យក្នុង-memory មិនសមសម្រាប់កម្មវិធីដែលមានរយៈពេលយូរ។
 
 ```mermaid
-graph TD
-    subgraph ACA[បរិយាកាស Azure Container Apps]
-        Flask[កុងតឺន័រ API របស់ Flask<br/>ចំណុចបញ្ចប់សុខភាព<br/>API ប្រភេទ REST<br/>ការកំណត់ទំហំដោយស្វ័យប្រវត្តិ 0-10 ចម្លង]
-        AppInsights[ការយល់ដឹងអំពីកម្មវិធី]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
 
-## Prerequisites
+**សំខាន់៖** ធាតុទាំងអស់ត្រូវបានរក្សាទុកក្នុងដំណើរការមួយ។ ផ្ទួរមុនគឺ **one Gunicorn worker,
+0–1 replicas**, ផ្អែកលើការរួមផ្សំឡើងដែលជៀសវាងទិន្នន័យមិនស្របគ្នារវាង workers/replicas។
+ធាតុត្រូវបានបាត់បង់ក្រោយការចាប់ផ្តើមម្តងទៀត, បម្រែបម្រួលកំណែ, ឬ scale-to-zero។ ការកើនឡើង replicas
+ត្រូវការម្ដងទុកទិន្នន័យយ៉ាងយូរ។ API មិនមានការផ្ទៀងផ្ទាត់ឬការអនុញ្ញាតណា។
 
-### Required
-- **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (សម្រាប់ការធ្វើតេស្តក្នុងម៉ាស៊ីនតំបន់បណ្តាញ)
+## គន្លឹះមុន
 
-### Verify Prerequisites
+- [Current stable azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (ចេញផ្សាយ release ពេលមើលវិចារ៖ 1.37.2)។
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) សម្រាប់ការត្រួតពិនិត្យ។
+- Docker ជាមួយ daemon របស់វាដំណើរការ; ត្រូវការសម្រាប់ការបង្កើតរូបភាពផ្ទាល់ខ្លួនផ្ទាល់។
+- អាជ្ញាប័ណ្ណ Azure, អនុញ្ញាតបង្កើតធនធាន, និងកំណត់ចំណុច Container Apps តំបន់។
+- Bash សម្រាប់ពាក្យបញ្ជាខាងក្រោម (ឬ PowerShell ស្មើ)។
+- Python 3.11 សម្រាប់ការអភិវឌ្ឍន៍ផ្ទាល់ជាជម្រើស។
 
 ```bash
-# ពិនិត្យកំណែ azd (ត្រូវការកំណែ 1.5.0 ឬខ្ពស់ជាង)
 azd version
-
-# ផ្ទៀងផ្ទាត់ការចូលទៅកាន់ Azure
+az version
+docker info
 azd auth login
-
-# ពិនិត្យ Docker (ជាជម្រើស, សម្រាប់ការសាកល្បងក្នុងបរិយាកាសក្នុងស្រុក)
-docker --version
+az login
 ```
 
-## ⏱️ Deployment Timeline
+ឧបករណ៍ CLI មានការចូលទៅនីតិវិធីផ្សេងៗគ្នា។ ប្រើ subscription ដូចគ្នាក្នុងទាំងពីរ។
 
-| Phase | Duration | What Happens |
-|-------|----------|--------------||
-| Environment setup | 30 seconds | Create azd environment |
-| Build container | 2-3 minutes | Docker build Flask app |
-| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
-| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| **Total** | **8-12 minutes** | ការដាក់ពេញលេញបានរៀបចំរួចរាល់ |
+## ចាប់ផ្តើមរហ័ស
 
-## Quick Start
+ពីឫសស្នូល repository:
 
 ```bash
-# ចូលទៅកាន់ឧទាហរណ៍
 cd examples/container-app/simple-flask-api
-
-# ចាប់ផ្តើមបរិយាកាស (ជ្រើសឈ្មោះមិនស្ទួន)
-azd env new myflaskapi
-
-# ដាក់ដំណើរការ​អ្វីៗ​ទាំងអស់ (ហេដ្ឋារចនាសម្ព័ន្ធ + កម្មវិធី)
+azd env new flask-demo
 azd up
-# អ្នកនឹងត្រូវបានស្នើឱ្យ:
-# 1. ជ្រើសការជាវ Azure
-# 2. ជ្រើសទីតាំង (ឧទាហរណ៍: eastus2)
-# 3. រង់ចាំ 8-12 នាទី សម្រាប់ការដាក់ដំណើរការ
-
-# ទទួលយកចំណុចបញ្ចប់ API របស់អ្នក
-azd env get-values
-
-# សាកល្បង API
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**Expected Output:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ Verify Deployment
-
-### Step 1: Check Deployment Status
-
-```bash
-# មើលសេវាកម្មដែលបានដាក់ចេញ
-azd show
-
-# លទ្ធផលដែលរំពឹងទុកបង្ហាញ៖
-# - សេវាកម្ម: api
-# - ចំណុចបញ្ចប់: https://ca-api-[env].xxx.azurecontainerapps.io
-# - ស្ថានភាព: កំពុងរត់
-```
-
-### Step 2: Test API Endpoints
-
-```bash
-# យកចំណុចបញ្ចប់ API
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# សាកល្បងសុខភាព
-curl $API_URL/health
+គេរំពឹងថា: HTTP 200 និង JSON មាន `"status":"healthy"`,
+`"service":"simple-flask-api"`, និង timestamps UTC បច្ចុប្បន្ន។
+ការតំឡើងនិងការបង្កើតរូបភាពភាគច្រើនចំណាយពេលប៉ុន្មាននាទី; រយៈពេលអាចខុសគ្នា។
 
-# សាកល្បងចំណុចបញ្ចប់មូលដ្ឋាន
-curl $API_URL/
+ការតំឡើងដំបូងប្រើរូបភាព hello-world សាធារណៈស្តាប់លើ port 80។
+`azure.yaml` ជ្រើស `infra/app/api.bicep` និងឯកសារប៉ារ៉ាម៉ែត្រដែលត្រូវគ្នា សម្រាប់
+ការដេញថោនសេវាកម្ម ដែលផ្លាស់ប្តូររូបភាព ingress, និង probes ទៅ port 8000។
+មិនត្រូវលុបប៉ារ៉ាម៉ែត្រដេញថោនទាំងនោះ។
 
-# បង្កើតធាតុមួយ
-curl -X POST $API_URL/api/items \
+## ផ្ទៀងផ្ទាត់ CRUD
+
+បើកបង្ហាញជាលំដាប់ ខណៈដែល replica ដូចគ្នាអនុវត្តន៍។
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# យកធាតុទាំងអស់
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**Success Criteria:**
-- ✅ endpoint សុខភាព ផ្ញើតម្លៃ HTTP 200
-- ✅ endpoint មេ បង្ហាញព័ត៌មាន API
-- ✅ POST បង្កើតធាតុថ្មី និងត្រឡប់ HTTP 201
-- ✅ GET ត្រឡប់ធាតុដែលបានបង្កើត
+ជោគជ័យ: POST 201, អាន/PUT 200, DELETE 204 គ្មានខ្លឹមសារក្រោយ, បន្ទាប់មកឥវ៉ាន់ខ្វះ 404។
+JSON ឥតត្រឹមត្រូវ ឬឈ្មោះទទេ ។ ត្រូវតែតប 400។
+ប្រសិនបើឥវ៉ាន់បាត់បង់នៅចន្លោះសំណើ, សូមពិនិត្យការចាប់ផ្តើមឡើងវិញ ឬការត្រួបត្រាស់ scale-to-zero;
+នេះគឺជាកំណត់អនុញ្ញាតក្នុង-memory មិនមែន persistence ទេ។
 
-### Step 3: View Logs
+| Endpoint | វិធីសាស្រ្ត |
+|---|---|
+| `/` | GET — ព័ត៌មានសេវាកម្ម |
+| `/health` | GET — liveness/readiness |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## កំណត់ត្រា និង ការកំណត់រចនា
 
 ```bash
-# ផ្សាយកំណត់ហេតុផ្ទាល់ដោយប្រើ azd monitor
-azd monitor --logs
-
-# ឬប្រើ Azure CLI:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# អ្នកគួរតែឃើញ:
-# - សារចាប់ផ្តើមរបស់ Gunicorn
-# - កំណត់ហេតុសំណើ HTTP
-# - កំណត់ហេតុព័ត៌មានអំពីកម្មវិធី
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## Project Structure
+គេរំពឹង៖ ការចាប់ផ្តើម Gunicorn, កំណត់ត្រាចូលសំណើ, និងសារកម្មវិធី។
+`azd monitor --logs` បើកមើលផ្ទាំងវាគ្មិន; វាមិនស្ទ្រីមទៅ terminal ទេ។
+Application Insights ត្រូវបានតំឡើង តែកូដ Flask នេះ **មិនបានបង្កើតឧបករណ៍**;
+ប្រើ Container Apps/Log Analytics សម្រាប់កំណត់ត្រា stdout។
 
+កែប្រែ `infra/app/api.bicep` សម្រាប់ CPU/memory, កំណត់ replica ឬ scale rules, បន្ទាប់មក
+ប្រតិបត្តិ `azd up`។ ផ្ទួរពេញលេញគឺ 0.5 vCPU, 1 GiB, កំណត់ទាប 0 /ខ្ពស់ 1 replica, និង
+HTTP threshold 50 សំណើសមិទ្ធិ concurrent។ Scale-to-zero អាចបន្ថែមភាពយឺត cold-start។
+
+តម្លៃ `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL`, ឬ
+`SCALE_TO_ZERO_TIMEOUT` គឺ **មិនបានភ្ជាប់ជាមួយប្លង់ឬកម្មវិធីនេះ**។
+ការកំណត់តម្លៃមិនមានន័យថាបង្កើតវាជាព័ត៍មានបរិស្ថានពេលដំណើរការ។
+រូបភាពចងកំពង់ port 8000 វាច្បាស់លាស់; កែ Dockerfile, Bicep ingress, និង probes
+ជាមួយគ្នា ប្រសិនបើផ្លាស់ប្តូរ port។
+
+## ឯកសារ
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API Endpoints
+## ការអភិវឌ្ឍន៍ផ្ទាល់
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | ការត្រួតពិនិត្យសុខភាព |
-| `/api/items` | GET | បង្ហាញបញ្ជីធាតុទាំងអស់ |
-| `/api/items` | POST | បង្កើតធាតុថ្មី |
-| `/api/items/{id}` | GET | ទទួលបានធាតុជាក់លាក់ |
-| `/api/items/{id}` | PUT | បន្ទាន់សម័យធាតុ |
-| `/api/items/{id}` | DELETE | លុបធាតុ |
-
-## Configuration
-
-### Environment Variables
+ពីថតឧទាហរណ៍នេះ:
 
 ```bash
-# កំណត់ការកំណត់ផ្ទាល់ខ្លួន
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### Scaling Configuration
-
-API នេះធ្វើការ scale អូតូម៉ាទិកអាស្រ័យលើចរាចរណ៍ HTTP:
-- **Min Replicas**: 0 (scale ទៅសូន្យពេលឥតប្រើ)
-- **Max Replicas**: 10
-- **Concurrent Requests per Replica**: 50
-
-## Development
-
-### Run Locally
+នៅ terminal ផ្សេងទៀត សាកល្បង `http://localhost:8000/health` និង endpoints CRUD។
+ឬសាងសង់ និងរត់រូបភាពពិតប្រាកដ:
 
 ```bash
-# ដំឡើងការ​ពឹងផ្អែក
-cd src
-pip install -r requirements.txt
-
-# រត់កម្មវិធី
-python app.py
-
-# សាកល្បងក្នុងស្រុក
-curl http://localhost:8000/health
-```
-
-### Build and Test Container
-
-```bash
-# កសាងរូបភាព Docker
 docker build -t flask-api:local ./src
-
-# ដំណើរការ កុងតឺន័រ នៅក្នុងម៉ាស៊ីនផ្ទាល់
-docker run -p 8000:8000 flask-api:local
-
-# សាកល្បង កុងតឺន័រ
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## Deployment
+សម្រាប់កំណែបក្សកូដបន្ទាប់ពីដេញថោនដំបូង, ប្រើ `azd deploy api`។
+សម្រាប់កែប្រែ Bicep, ប្រើ `azd up` ដើម្បីតំឡើងឡើងវិញ និងដេញថោន។
 
-### Full Deployment
+## ប្រតិបត្តិការអនុវត្តបុគ្គលិក
+
+### 1. ផ្ទៀងផ្ទាត់ការបដិសេធ input
+
+**ចំណុចចាប់ផ្តើម:** API ដែលបានដេញថោន, `API_URL` ខាងលើ។
+**គោលបំណង:** ផ្ទៀងផ្ទាត់ API បដិសេធ JSON មិនត្រឹមត្រូវ និងឈ្មោះខ្វះ។
 
 ```bash
-# ដាក់ឲ្យដំណើរការ ហេដ្ឋារចនាសម្ព័ន្ធ និងកម្មវិធី
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### Code-Only Deployment
+**លទ្ធផលជោគជ័យ / ដំណោះស្រាយ:** មានការតប ៤០០ ជាមួយកំហុស JSON មិនមែន ៥០០។
+**បញ្ហាទូទៅ:** មិនបញ្ចូល header content-type JSON។
+
+### 2. បន្ថែម endpoint វិធីសាស្រ្តអានតែ
+
+**ចំណុចចាប់ផ្តើម:** `src/app.py`។ **គោលបំណង:** ពង្រឹង និងដេញថោន API។
+បន្ថែមនេះមុន `if __name__ == '__main__':` block:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+ប្រតិបត្តិ `azd deploy api` បន្ទាប់មក `curl --fail-with-body "${API_URL}/version"`។
+**លទ្ធផលជោគជ័យ:** HTTP 200 និង `{"version":"1.0.0"}`។
+**បញ្ហាប្រជាធិបតេយ្យ៖** ដាក់ផ្លូវក្រោយការហៅ `app.run()` ដែលរារាំងពេល
+សាកល្បងជាមួយ `python src/app.py`។
+
+### ចំណុចបញ្ជាក់ចំណេះដឹង
+
+ហេតุก្នុងមូលហេតុមួយអ្នកធ្វើការតែមួយគ្មានគ្រប់គ្រាន់សម្រាប់ទិន្នន័យដែលចេះរឹងប៉ុន្មាន? ព្រោះថាប្រមាណមួយដំណើរការរួចផ្តាច់ភាសាចុះពីពាក្យវចនានុក្រមនៅពេលចាប់ផ្តើមឡើងវិញ។ កំណែផលិតកម្មត្រូវការជំពាក់រក្សាទុកទិន្នន័យរួមមាន,
+អត្តសញ្ញាណ​ភាព, អនុញ្ញាត, ការផ្លាស់ប្តូរ, សាកល្បង និងត្រួតពិនិត្យប្រតិបត្តិការ។
+
+
+## សំរចេខ្លាយ និងការដោះស្រាយបញ្ហា
+
+នេះមិនមែនជាការដាក់ផ្សាយ $0 ជាអនុញ្ញាតទេ៖ បណ្ណាល័យ Basic និងការផ្ទុក/បញ្ចូលកំណត់ហេតុ
+អាចបង្កការចំណាយបើទោះបីសូមកុំព្យូទ័រកម្មវិធីនៅលេខសូន្យក៏ដោយ។ ប្រើ
+[ម៉ាស៊ីនគិតតម្លៃ](https://azure.microsoft.com/pricing/calculator/) សម្រាប់តំបន់របស់អ្នក។
+
+- **ការបរាជ័យសាងសង់ Docker:** បញ្ជាក់ `docker info`, ការចូលប្រព័ន្ធបណ្ដាញ និងការគាំទ្រទាក់ទង។
+- **កម្មវិធីមិនល្អ:** ពិនិត្យកំណត់ហេតុកុងសូល/ប្រព័ន្ធ និងផ្ទៀងផ្ទាត់លេខច្រករូបភាព, ការចូល,
+  និងកម្មវិធីពិនិត្យធម្មតាត្រូវគ្នា។ មិនគួរកម្មវិធីកំណត់ជំនួសជានិច្ចត្រូវបានពិនិត្យលើលេខច្រក Flask។
+- **403/ការអនុញ្ញាត៖** បញ្ជាក់ជាវសមាជិក និងការអនុញ្ញាតបង្កើតធនធាន។
+- **វត្ថុដូរមកមិនមាន៖** សភាពចងចាំក្នុងមនុស្សបាត់បង់នៅពេលចាប់ផ្ដើមឡើងវិញ/បង្ហាញទៅសូន្យ; បន្ថែមមូលដ្ឋានទិន្នន័យ
+  សម្រាប់ឱ្យមានឥរិយាបថរឹងប៉ុន្មាន។
+
+## ការសម្អាត និងជំហានបន្ទាប់
 
 ```bash
-# ដាក់ចេញតែកូដកម្មវិធី (ហេដ្ឋារចនាសម្ព័ន្ធនៅដដែល)
-azd deploy api
+azd down
 ```
 
-### Update Configuration
+ពិនិត្យការបង្ហាញសំណើលុបចោល និងធានាថាគ្រូបញ្ជាក់ធនធានដែលបានបោះបង់ចោល។
+កុំប្រើការសម្អាតបំផ្លាញដល់ក្រុមធនធានដែលមានទិន្នន័យដែលមិនផ្សេងទៀត។
 
-```bash
-# ​ធ្វើបច្ចុប្បន្នភាពអថេរបរិស្ថាន
-azd env set API_KEY "new-api-key"
-
-# ​បញ្ចូនឡើងវិញជាមួយការកំណត់ថ្មី
-azd deploy api
-```
-
-## Monitoring
-
-### View Logs
-
-```bash
-# ស្ទ្រីមកំណត់ហេតុបន្តផ្ទាល់ដោយប្រើ azd monitor
-azd monitor --logs
-
-# ឬប្រើ Azure CLI សម្រាប់ Container Apps:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# មើល 100 បន្ទាត់ចុងក្រោយ
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### Monitor Metrics
-
-```bash
-# បើកផ្ទាំងតាមដាន Azure Monitor
-azd monitor --overview
-
-# មើលមាត្រដ្ឋានជាក់លាក់
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## Testing
-
-### Health Check
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-Expected response:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### Create Item
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### Get All Items
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## Cost Optimization
-
-ការដាក់នេះប្រើ scale-to-zero ដូច្នេះអ្នកនឹងចំណាយតែពេលដែល API កំពុងដំណើរការ៖
-
-- **Idle cost**: ~$0/month (scale ទៅសូន្យ)
-- **Active cost**: ~$0.000024/second per replica
-- **Expected monthly cost** (ការ​ប្រើប្រាស់ស្រាល): $5-15
-
-### Reduce Costs Further
-
-```bash
-# កាត់បន្ថយចំនួន replicas អតិបរមាសម្រាប់ dev
-azd env set MAX_REPLICAS 3
-
-# ប្រើពេលរង់ចាំទំនេរដែលខ្លីជាង
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 នាទី
-```
-
-## Troubleshooting
-
-### Container Won't Start
-
-```bash
-# ពិនិត្យកំណត់ហេតុខុងតឺន័រដោយប្រើ Azure CLI
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# ផ្ទៀងផ្ទាត់ថា Docker image បានសាងសង់នៅលើម៉ាស៊ីនក្នុងស្រុក
-docker build -t test ./src
-```
-
-### API Not Accessible
-
-```bash
-# ផ្ទៀងផ្ទាត់ថា អ៊ីង្រេស ជា​ខាងក្រៅ
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### High Response Times
-
-```bash
-# ពិនិត្យការប្រើប្រាស់ CPU/អង្គចងចាំ
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# បង្កើនធនធាន ប្រសិនបើចាំបាច់
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## Clean Up
-
-```bash
-# លុបធនធានទាំងអស់
-azd down --force --purge
-```
-
-## Next Steps
-
-### Expand This Example
-
-1. **Add Database** - បញ្ចូល Azure Cosmos DB ឬ SQL Database
-   ```bash
-   # បន្ថែមម៉ូឌុល Cosmos DB ទៅ infra/main.bicep
-   # អាប់ដេត app.py ជាមួយការតភ្ជាប់មូលដ្ឋានទិន្នន័យ
-   ```
-
-2. **Add Authentication** - អនុវត្ត Microsoft Entra ID ឬ API keys
-   ```python
-   # បន្ថែម middleware សម្រាប់ផ្ទៀងផ្ទាត់អត្តសញ្ញាណទៅក្នុង app.py
-   from functools import wraps
-   ```
-
-3. **Set Up CI/CD** - GitHub Actions workflow
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Add Managed Identity** - សុវត្ថិភាពក្នុងការចូលដំណើរការ Azure services
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### Related Examples
-
-- **[Database App](../../../../../examples/database-app)** - ឧទាហរណ៍ពេញលេញជាមួយ SQL Database
-- **[Microservices](../../../../../examples/container-app/microservices)** - ស្ថាបត្យកម្ម multi-service
-- **[Container Apps Master Guide](../README.md)** - គំរូ container ទាំងអស់
-
-### Learning Resources
-
-- 📚 [AZD For Beginners Course](../../../README.md) - ទំព័រដើមរបស់វគ្គសិក្សា
-- 📚 [Container Apps Patterns](../README.md) - គំរូដាក់បញ្ចូលបន្ថែម
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - គំរូសហគមន៍
-
-## Additional Resources
-
-### Documentation
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - មាគ្គុទេសក៍ framework Flask
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - ឯកសារ​ផ្លូវការ Azure
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - ឯកសារอ้างอิงคำสั่ง azd
-
-### Tutorials
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - ដាក់កម្មវិធីដំបូងរបស់អ្នក
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - មគ្គុទេសក៍អភិវឌ្ឍ Python
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - ហេតុការណ៍ Infrastructure as code
-
-### Tools
-- **[Azure Portal](https://portal.azure.com)** - គ្រប់គ្រងធនធានតាមរូបភាព
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - ការរួមបញ្ចូល IDE
-
----
-
-**🎉 Congratulations!** អ្នកបានដាក់ Flask API ដែលអាចប្រើក្នុងផលិតកម្មទៅ Azure Container Apps ជាមួយ auto-scaling និងការត្រួតពិនិត្យរួចរាល់។
-
-**Questions?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) or check the [FAQ](../../../resources/faq.md)
+[បន្ទាប់: កម្មវិធីមូលដ្ឋានទិន្នន័យ](../../../../../examples/database-app) · [សេវាមីក្រូ](../../../../../examples/container-app/microservices) ·
+[ទិដ្ឋភាពទូទៅនៃកុងតឺន័រ](../README.md) · [ផ្ទះមុខវិជ្ជា](../../../README.md) ·
+[រាយការណ៍បញ្ហា](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

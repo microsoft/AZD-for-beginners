@@ -1,6 +1,6 @@
 # Kapitel 3: Konfiguration & Autentisering
 
-**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 45-60 minuter | **⭐ Svårighetsgrad**: Medel
+**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 90-150 minuter inklusive integrationsövningar | **⭐ Svårighetsgrad**: Medelnivå
 
 ---
 
@@ -8,13 +8,13 @@
 
 Detta kapitel täcker miljökonfiguration, autentiseringsmönster och säkerhetsbästa praxis för distributioner med Azure Developer CLI.
 
-> Validerad mot `azd 1.27.1` i juli 2026.
+> Mål för granskning av kommandon och konfiguration: `azd 1.37.2` (november 2026). Live Azure-provisionering kördes inte under granskningen.
 
 ## Lärandemål
 
 Genom att slutföra detta kapitel kommer du att:
-- Mästra AZD-konfigurationshierarkin
-- Hantera flera miljöer (utveckling, staging, produktion)
+- Bemästra AZD-konfigurationshierarkin
+- Hantera flera miljöer (dev, staging, prod)
 - Implementera säker autentisering med hanterade identiteter
 - Konfigurera miljöspecifika inställningar
 
@@ -25,58 +25,58 @@ Genom att slutföra detta kapitel kommer du att:
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
 | 1 | [Konfigurationsguide](configuration.md) | Miljöinställning och hantering | 30 min |
-| 2 | [Autentisering & Säkerhet](authsecurity.md) | Hanterad identitet och RBAC-mönster | 30 min |
+| 2 | [Autentisering & Säkerhet](authsecurity.md) | Mönster för hanterade identiteter och RBAC | 30 min |
 
 ---
 
-## 🚀 Kom igång snabbt
+## 🚀 Snabbstart
+
+Kör från roten av en **redan initierad azd-applikation**, inte kursrepositoryt. Använd oanvända miljönamn om dessa redan finns.
 
 ```bash
-# Skapa flera miljöer
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Byt miljöer
+# Switch environments
 azd env select prod
 
-# Ställ in miljövariabler
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Visa konfiguration
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` är illustrativt: det påverkar infrastrukturen endast om din mall uttryckligen använder det. Vanliga `azd env set`-värden sparas lokalt i klartext; de är inte säker hemlagring.
 
 ---
 
 ## 🔧 Konfigurationshierarki
 
-AZD tillämpar inställningar i denna ordning (senare åsidosätter tidigare):
-
-1. **Standardvärden** (inbyggda i mallar)
-2. **azure.yaml** (projektkonfiguration)
-3. **Miljövariabler** (`azd env set`)
-4. **Kommandoradsflaggor** (`--location eastus`)
+Håll tre olika konfigurationsytor isär: globala preferenser (`azd config`), projektstruktur (`azure.yaml`), och miljöspecifika värden (`azd env`). Flaggs överstyr endast de inställningar de faktiskt stöder; det finns ingen universell överlagring av godtyckliga miljövariabler på `azure.yaml` eller Bicep.
 
 ---
 
 ## 🔐 Säkerhetsbästa praxis
 
 ```bash
-# Använd hanterad identitet (rekommenderas)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Kontrollera AZD autentiseringsstatus
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Valfritt: verifiera Azure CLI-kontekst om du planerar att köra az-kommandon
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Autentisera om vid behov
+# Re-authenticate if needed
 azd auth login
 
-# Valfritt: uppdatera Azure CLI-autentisering för az-kommandon
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -93,7 +93,7 @@ az login
 
 ## 📖 Relaterade resurser
 
-- [Kontroller före distribution](../chapter-06-pre-deployment/README.md)
+- [Förhandskontroller](../chapter-06-pre-deployment/README.md)
 - [Felsökning](../chapter-07-troubleshooting/common-issues.md)
 
 ---

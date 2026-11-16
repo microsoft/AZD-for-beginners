@@ -1,23 +1,23 @@
-# 第6章: デプロイ前の計画と検証
+# 第6章: 展開前の計画と検証
 
-**📚 コース**: [AZD入門](../../README.md) | **⏱️ 所要時間**: 1時間 | **⭐ 難易度**: 中級
+**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: 2〜4時間の読書時間；適応されたラボに追加時間 | **⭐ 難易度**: 中級〜上級
 
 ---
 
 ## 概要
 
-この章では、アプリケーションをデプロイする前の重要な計画と検証のステップを説明します。適切な容量計画、SKU選択、事前チェックを行うことで、高コストなミスを避ける方法を学びます。
+この章では、アプリケーションを展開する前に必要な計画と検証の手順を扱います。適切な容量計画、SKUの選択、事前チェックによって高額なミスを回避する方法を学びます。
 
-> `azd 1.27.1` にて2026年7月に検証済み。
+> 発行済みの `azd 1.37.2` リファレンスに基づくコマンドガイダンスを確認しています。クラウド展開は実行していません。長めのレッスンには、完全なローカル展開プロジェクトではなく、説明的な断片が含まれています。
 
 ## 学習目標
 
-この章を完了すると、以下ができるようになります:
-- デプロイ前に事前チェックを実行する
+この章を終えることで、あなたは以下を習得します:
+- 展開前に事前チェックを実施する
 - 容量計画とリソース要件の見積もりを行う
 - コスト最適化のために適切なSKUを選択する
-- 監視のためにApplication Insightsを構成する
-- チームの調整パターンを理解する
+- 監視用にApplication Insightsを設定する
+- マルチエージェントの調整パターンとその展開要件を理解する
 
 ---
 
@@ -25,59 +25,59 @@
 
 | # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [事前チェック](preflight-checks.md) | デプロイ前に構成を検証する | 15分 |
-| 2 | [容量計画](capacity-planning.md) | リソース要件を見積もる | 20分 |
-| 3 | [SKU選択](sku-selection.md) | 適切な料金階層を選択する | 15分 |
-| 4 | [Application Insights](application-insights.md) | 監視構成 | 20分 |
-| 5 | [調整パターン](coordination-patterns.md) | チームのデプロイワークフロー | 15分 |
+| 1 | [事前チェック](preflight-checks.md) | 展開前の設定確認 | 15分 |
+| 2 | [容量計画](capacity-planning.md) | リソース要件の見積もり | 20分 |
+| 3 | [SKUの選択](sku-selection.md) | 適切な価格帯の選択 | 15分 |
+| 4 | [Application Insights](application-insights.md) | 監視の設定 | 20分 |
+| 5 | [調整パターン](coordination-patterns.md) | 高度なマルチエージェントオーケストレーション設計 | 60〜75分 |
 
 ---
 
 ## 🚀 クイックスタート
 
 ```bash
-# サブスクリプションのクォータを確認
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# デプロイのプレビュー（リソースは作成されません）
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Bicep の構文を検証
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 環境設定を確認
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ デプロイ前チェックリスト
+## ☑️ 展開前チェックリスト
 
-### `azd provision` 実行前
+### `azd provision` の前に
 
-- [ ] リージョンのクォータを確認
+- [ ] リージョンのクォータ確認済み
 - [ ] 適切なSKUを選択済み
-- [ ] コスト見積もりをレビュー済み
+- [ ] コスト見積もりを確認済み
 - [ ] 命名規則が一貫している
-- [ ] セキュリティ/RBACを構成済み
+- [ ] セキュリティ/RBACを設定済み
 
-### `azd deploy` 実行前
+### `azd deploy` の前に
 
 - [ ] 環境変数を設定済み
-- [ ] Key Vaultにシークレットを保存済み
+- [ ] Key Vaultにシークレットを格納済み
 - [ ] 接続文字列を確認済み
-- [ ] ヘルスチェックを構成済み
+- [ ] ヘルスチェックを設定済み
 
 ---
 
 ## 💰 SKU選択ガイド
 
-| ワークロード | 開発 | 本番 |
+| ワークロード | 開発環境 | 本番環境 |
 |----------|-------------|------------|
-| コンテナーアプリ | コンシューム | 専用 D4 |
+| Container Apps | コンシューム | 測定された負荷に基づくコンシュームまたは専用ワークロードプロファイル |
 | App Service | B1/B2 | P1v3以上 |
-| Microsoft Foundry モデル | スタンダード | スタンダード + PTU |
-| AI Search | ベーシック | スタンダード S2以上 |
+| Azure OpenAIモデル | 対応の従量課金型展開タイプ | 従量課金型またはプロビジョンドスループット；モデルおよびリージョン依存 |
+| AI Search | 上限内の無料/基本プラン | インデックス、レプリカ、クエリ負荷に応じた基本または標準プラン |
 
 ---
 
@@ -92,9 +92,9 @@ azd env get-values
 
 ## 📖 関連リソース
 
-- [構成ガイド](../chapter-03-configuration/configuration.md)
-- [デプロイガイド](../chapter-04-infrastructure/deployment-guide.md)
-- [一般的な問題](../chapter-07-troubleshooting/common-issues.md)
+- [設定ガイド](../chapter-03-configuration/configuration.md)
+- [展開ガイド](../chapter-04-infrastructure/deployment-guide.md)
+- [よくある問題](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

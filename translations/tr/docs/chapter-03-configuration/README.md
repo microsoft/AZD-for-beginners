@@ -1,21 +1,21 @@
-# Bölüm 3: Yapılandırma ve Kimlik Doğrulama
+# Bölüm 3: Yapılandırma & Kimlik Doğrulama
 
-**📚 Kurs**: [Başlangıç için AZD](../../README.md) | **⏱️ Süre**: 45-60 dakika | **⭐ Zorluk Seviyesi**: Orta
+**📚 Kurs**: [AZD Yeni Başlayanlar için](../../README.md) | **⏱️ Süre**: Entegrasyon pratiği dahil 90-150 dakika | **⭐ Zorluk Seviyesi**: Orta
 
 ---
 
 ## Genel Bakış
 
-Bu bölümde Azure Developer CLI dağıtımları için ortam yapılandırması, kimlik doğrulama kalıpları ve güvenlik en iyi uygulamaları ele alınmaktadır.
+Bu bölüm, Azure Developer CLI dağıtımları için ortam yapılandırması, kimlik doğrulama kalıpları ve güvenlik en iyi uygulamalarını kapsar.
 
-> Temmuz 2026'da `azd 1.27.1` ile doğrulanmıştır.
+> Komut ve yapılandırma inceleme hedefi: `azd 1.37.2` (Kasım 2026). İnceleme sırasında canlı Azure sağlama çalıştırılmadı.
 
 ## Öğrenme Hedefleri
 
 Bu bölümü tamamlayarak:
-- AZD yapılandırma hiyerarşisini ustaca kullanacaksınız
-- Birden çok ortamı (geliştirme, test, üretim) yöneteceksiniz
-- Yönetilen kimliklerle güvenli kimlik doğrulamasını uygulayacaksınız
+- AZD yapılandırma hiyerarşisini öğreneceksiniz
+- Birden çok ortamı yöneteceksiniz (dev, staging, prod)
+- Yönetilen kimliklerle güvenli kimlik doğrulamayı uygulayacaksınız
 - Ortama özgü ayarları yapılandıracaksınız
 
 ---
@@ -24,59 +24,59 @@ Bu bölümü tamamlayarak:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Yapılandırma Rehberi](configuration.md) | Ortam kurulumu ve yönetimi | 30 dk |
-| 2 | [Kimlik Doğrulama ve Güvenlik](authsecurity.md) | Yönetilen kimlik ve RBAC kalıpları | 30 dk |
+| 1 | [Yapılandırma Kılavuzu](configuration.md) | Ortam kurulumu ve yönetimi | 30 dk |
+| 2 | [Kimlik Doğrulama & Güvenlik](authsecurity.md) | Yönetilen kimlik ve RBAC kalıpları | 30 dk |
 
 ---
 
 ## 🚀 Hızlı Başlangıç
 
+Kurs deposu değil, **önceden başlatılmış bir azd uygulamasının kökünden** çalıştırın. Eğer zaten varsa kullanılmamış ortam adlarını tercih edin.
+
 ```bash
-# Birden fazla ortam oluştur
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Ortamlar arasında geçiş yap
+# Switch environments
 azd env select prod
 
-# Ortam değişkenlerini ayarla
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Yapılandırmayı görüntüle
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` örnektir: yalnızca şablonunuz açıkça kullanıyorsa altyapıyı etkiler. Normal `azd env set` değerleri yerel olarak düz metin halinde kaydedilir; bunlar güvenli gizli depolama değildir.
 
 ---
 
 ## 🔧 Yapılandırma Hiyerarşisi
 
-AZD ayarları şu sırayla uygular (sonrakiler öncekinin yerini alır):
-
-1. **Varsayılan değerler** (şablonların içine gömülü)
-2. **azure.yaml** (proje yapılandırması)
-3. **Ortam değişkenleri** (`azd env set`)
-4. **Komut satırı bayrakları** (`--location eastus`)
+Üç farklı yapılandırma yüzeyini ayrı tutun: genel tercihler (`azd config`), proje yapısı (`azure.yaml`) ve ortam bazlı değerler (`azd env`). Bayraklar yalnızca destekledikleri ayarları geçersiz kılar; `azure.yaml` veya Bicep üzerinde keyfi ortam değişkenlerinin evrensel bir üst üste binmesi yoktur.
 
 ---
 
 ## 🔐 Güvenlik En İyi Uygulamaları
 
 ```bash
-# Yönetilen kimliği kullanın (önerilir)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# AZD kimlik doğrulama durumunu kontrol edin
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# İsteğe bağlı: az komutlarını çalıştırmayı planlıyorsanız Azure CLI bağlamını doğrulayın
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Gerekirse tekrar kimlik doğrulaması yapın
+# Re-authenticate if needed
 azd auth login
 
-# İsteğe bağlı: az komutları için Azure CLI kimlik doğrulamasını yenileyin
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -86,7 +86,7 @@ az login
 
 | Yön | Bölüm |
 |-----------|---------|
-| **Önceki** | [Bölüm 2: Yapay Zeka Geliştirme](../chapter-02-ai-development/README.md) |
+| **Önceki** | [Bölüm 2: AI Geliştirme](../chapter-02-ai-development/README.md) |
 | **Sonraki** | [Bölüm 4: Altyapı](../chapter-04-infrastructure/README.md) |
 
 ---

@@ -1,43 +1,43 @@
 # 1. Pumili ng Template
 
-!!! tip "SA PAGTATAPOS NG MODULONG ITO MAGAGAWA MO"
+!!! tip "SA PAGTATAPOS NG MODULONG ITO MAAARI MO NG"
 
-    - [ ] Ilarawan kung ano ang mga AZD template
-    - [ ] Tuklasin at gamitin ang mga AZD template para sa AI
-    - [ ] Magsimula gamit ang template na AI Agents
-    - [ ] **Lab 1:** AZD Quickstart sa Codespaces o isang dev container
+    - [ ] Describe what AZD templates are
+    - [ ] Discover and use AZD templates for AI
+    - [ ] Get started with the AI Agents template
+    - [ ] **Lab 1:** AZD Quickstart in Codespaces or a dev container
 
 ---
 
-## 1. Isang Analohiya ng Tagabuo
+## 1. Isang Anolohiya ng Tagapagtayo
 
-Ang pagbuo ng isang modernong AI application na handa para sa enterprise _mula sa simula_ ay maaaring nakakakaba. Parang pagbuo ng bagong bahay mo nang mag-isa, brick by brick. Oo, magagawa! Ngunit hindi ito ang pinakamabisang paraan upang makamit ang ninanais na resulta!
+Ang paggawa ng isang modernong enterprise-ready na AI application _mula sa simula_ ay maaaring maging nakakatakot. Kagaya ito ng pagbuo ng iyong bagong bahay nang mag-isa, bato-bato. Oo, kaya ito! Ngunit ito ay hindi ang pinakaepektibong paraan upang makuha ang nais na resulta!
 
-Sa halip, madalas tayong nagsisimula sa umiiral na _design blueprint_, at nakikipagtulungan sa isang arkitekto upang i-customize ito sa ating mga personal na pangangailangan. At iyan mismo ang paraan na dapat sundan kapag bumubuo ng mga intelligent na aplikasyon. Una, hanapin ang magandang disenyo ng arkitektura na tugma sa iyong problemang saklaw. Pagkatapos, makipagtulungan sa isang arkitekto ng solusyon upang i-customize at paunlarin ang solusyon para sa iyong partikular na senaryo.
+Sa halip, madalas tayong nagsisimula sa isang umiiral na _disenyo blueprint_, at nagtatrabaho kasama ang isang arkitekto upang i-customize ito ayon sa ating mga personal na pangangailangan. At iyon talaga ang tamang paraan sa paggawa ng mga matatalinong aplikasyon. Una, humanap ng magandang disenyo ng arkitektura na angkop sa iyong problema. Pagkatapos ay makipagtulungan sa isang solution architect upang i-customize at paunlarin ang solusyon para sa iyong partikular na sitwasyon.
 
-Ngunit saan natin mahahanap ang mga design blueprint na ito? At paano tayo makakahanap ng isang arkitekto na handang turuan tayo kung paano i-customize at i-deploy ang mga blueprint na ito nang mag-isa? Sa workshop na ito, sasagutin namin ang mga tanong na iyon sa pamamagitan ng pagpapakilala sa iyo sa tatlong teknolohiya:
+Pero saan natin mahahanap ang mga disenyo blueprint na ito? At paano tayo makakahanap ng arkitekto na handang turuan tayo kung paano i-customize at i-deploy ang mga blueprint na ito nang mag-isa? Sa workshop na ito, sasagutin namin ang mga tanong na iyon sa pamamagitan ng pagpapakilala sa iyo sa tatlong teknolohiya:
 
-1. [Azure Developer CLI](https://aka.ms/azd) - isang open-source na tool na nagpapabilis sa landas ng developer mula sa lokal na pag-develop (build) hanggang sa pag-deploy sa cloud (ship).
-1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - standardized open-source repositories na naglalaman ng sample code, imprastruktura at mga file ng konfigurasyon para sa pag-deploy ng isang AI solution architecture.
-1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - isang coding agent na nakabatay sa kaalaman tungkol sa Azure, na maaaring gumabay sa atin sa pag-navigate sa codebase at paggawa ng mga pagbabago — gamit ang natural na wika.
+1. [Azure Developer CLI](https://aka.ms/azd) - isang open-source na kasangkapan na nagpapabilis ng landas ng developer mula sa lokal na development (build) hanggang cloud deployment (ship).
+1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - mga standardized open-source na repositoryo na naglalaman ng sample na code, imprastruktura at mga configuration file para sa pag-deploy ng AI solution architecture.
+1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - isang coding agent na nakabatay sa kaalaman ng Azure, na makakatulong sa atin na mag-navigate sa codebase at gumawa ng mga pagbabago gamit ang natural na wika.
 
-Sa mga tool na ito, maaari na nating _tuklasin_ ang tamang template, _i-deploy_ ito upang i-validate na gumagana, at _i-customize_ ito upang umangkop sa ating mga partikular na senaryo. Tingnan natin at alamin kung paano ito gumagana.
+Sa mga kasangkapang ito, maaari na nating _matuklasan_ ang tamang template, _i-deploy_ ito upang patunayan na gumagana, at _i-customize_ ito upang umangkop sa ating mga partikular na senaryo. Sige, simulan natin at alamin kung paano ito gumagana.
 
 
 ---
 
 ## 2. Azure Developer CLI
 
-Ang [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (o `azd`) ay isang open-source commandline tool na maaaring pabilisin ang iyong code-to-cloud na paglalakbay gamit ang isang hanay ng mga friendly na command para sa developer na gumagana nang pare-pareho sa iyong IDE (development) at CI/CD (devops) na mga environment.
+Ang [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (o `azd`) ay isang open-source na commandline na kasangkapan na maaaring pabilisin ang iyong code-to-cloud na paglalakbay gamit ang mga utos na friendly sa developer na gumagana nang pare-pareho sa iyong IDE (development) at CI/CD (devops) na mga kapaligiran.
 
-Sa `azd`, ang iyong deployment na paglalakbay ay maaaring maging kasing simple ng:
+Sa tulong ng `azd`, maaaring maging kasing simple ng:
 
-- `azd init` - Nag-i-initialize ng bagong AI project mula sa umiiral na AZD template.
-- `azd up` - Nagpaprovisyon ng imprastruktura at dine-deploy ang iyong aplikasyon sa isang hakbang.
-- `azd monitor` - Kumuha ng real-time na monitoring at diagnostics para sa iyong na-deploy na aplikasyon.
-- `azd pipeline config` - Mag-set up ng CI/CD pipelines para i-automate ang pag-deploy sa Azure.
+- `azd init` - Nagpapasimula ng bagong AI project mula sa umiiral na AZD template.
+- `azd up` - Nagpapasigla ng imprastruktura at nagde-deploy ng iyong aplikasyon sa isang hakbang.
+- `azd monitor` - Nakakakuha ng real-time monitoring at diagnostics para sa iyong na-deploy na aplikasyon.
+- `azd pipeline config` - Nagse-set up ng CI/CD pipelines upang i-automate ang deployment sa Azure.
 
-**🎯 | EXERCISE**: <br/> Siyasatin ang `azd` commandline tool sa iyong kasalukuyang workshop na kapaligiran ngayon. Maaari itong GitHub Codespaces, isang dev container, o isang lokal na clone na may mga kinakailangang naka-install. Magsimula sa pag-type ng utos na ito upang makita kung ano ang kaya ng tool:
+**🎯 | PAGSASANAY**: <br/> Siyasatin ang `azd` commandline tool sa iyong kasalukuyang kapaligiran ng workshop ngayon. Maaaring ito ay GitHub Codespaces, isang dev container, o isang lokal na kopya na may naka-install na mga kinakailangan. Simulan sa pamamagitan ng pag-type ng utos na ito upang makita kung ano ang kaya ng tool:
 
 ```bash title="" linenums="0"
 azd help
@@ -49,70 +49,67 @@ azd help
 
 ## 3. Ang AZD Template
 
-Para magawa ito ng `azd`, kailangan nitong malaman ang imprastruktura na ipaglalaan, ang mga setting ng konfigurasyon na ipatutupad, at ang aplikasyon na ide-deploy. Dito pumapasok ang [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp).
+Para maisakatuparan ito ng `azd`, kailangan nitong malaman ang imprastrukturang ipapatupad, ang mga setting ng konfigurasyon na ipatutupad, at ang aplikasyon na ide-deploy. Dito pumapasok ang [mga AZD template](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp).
 
-Ang mga AZD template ay mga open-source na repository na pinagsasama ang sample code kasama ang mga file ng imprastruktura at konfigurasyon na kinakailangan para sa pag-deploy ng solution architecture.
-Sa pamamagitan ng paggamit ng isang _Infrastructure-as-Code_ (IaC) na pamamaraan, pinapayagan nila ang mga definition ng resource ng template at mga setting ng konfigurasyon na ma-version-control (tulad ng source code ng app) - lumilikha ng mga reusable at pare-parehong workflow sa mga gumagamit ng proyektong iyon.
+Ang mga AZD template ay mga open-source na repositoryo na pinagsasama ang sample na code kasama ang imprastruktura at mga konfigurasyon na file na kinakailangan para sa pag-deploy ng solution architecture.
+Sa pamamagitan ng paggamit ng _Infrastructure-as-Code_ (IaC) na pamamaraan, pinapayagan nila ang mga template resource definitions at mga setting ng konfigurasyon na ma-version-control (katulad ng source code ng app) - na lumilikha ng mga reusable at konsistent na workflow sa mga gumagamit ng proyektong iyon.
 
-Kapag lumilikha o muling gumagamit ng AZD template para sa _iyong_ senaryo, isaalang-alang ang mga sumusunod na tanong:
+Kapag lumilikha o muling ginagamit ang isang AZD template para sa _iyong_ senaryo, isaalang-alang ang mga tanong na ito:
 
-1. Ano ang binubuo mo? → Mayroon bang template na may starter code para sa senaryong iyon?
-1. Paano naka-arkitektura ang iyong solusyon? → Mayroon bang template na may kinakailangang mga resource?
-1. Paano dine-deploy ang iyong solusyon? → Isipin ang `azd deploy` na may pre/post-processing hooks!
-1. Paano mo pa ito mai-o-optimize? → Isipin ang built-in monitoring at automation pipelines!
+1. Ano ang iyong binubuo? → Mayroon bang template na may starter code para sa senaryong iyon?
+1. Paano na-arkitekto ang iyong solusyon? → Mayroon bang template na may mga kinakailangang resources?
+1. Paano na-deploy ang iyong solusyon? → Isipin ang `azd deploy` na may pre/post-processing hooks!
+1. Paano mo pa ito mapapa-optimize? → Isipin ang built-in monitoring at automation pipelines!
 
-**🎯 | EXERCISE**: <br/> 
-Bisitahin ang [Awesome AZD](https://azure.github.io/awesome-azd/) gallery at gamitin ang mga filter upang tuklasin ang 250+ na mga template na kasalukuyang magagamit. Tingnan kung makakakita ka ng isa na tumutugma sa _iyong_ mga kinakailangan ng senaryo.
+**🎯 | PAGSASANAY**: <br/> 
+Bisitahin ang [Awesome AZD](https://azure.github.io/awesome-azd/) na gallery at gamitin ang mga filter upang tuklasin ang 250+ templates na kasalukuyang magagamit. Tingnan kung makakahanap ka ng angkop para sa _iyong_ mga pangangailangan ng senaryo.
 
-![Kodigo](../../../../../translated_images/tl/azd-code-to-cloud.2d9503d69d3400da.webp)
+![Code](../../../../../translated_images/tl/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 
-## 4. Mga Template ng AI App
+## 4. Mga AI App Template
 
-Para sa mga AI-powered na aplikasyon, nagbibigay ang Microsoft ng mga espesyal na template na tampok ang **Microsoft Foundry** at **Foundry Agents**. Pinapabilis ng mga template na ito ang iyong landas sa pagbuo ng mga intelligent, production-ready na aplikasyon.
+Para sa mga AI-powered na aplikasyon, nagbibigay ang Microsoft ng espesyal na mga template na nagtatampok ng **Microsoft Foundry** at **Foundry Agents**. Pinapalakas ng mga template na ito ang iyong landas sa paggawa ng matatalinong, production-ready na mga aplikasyon.
 
-### Microsoft Foundry at Foundry Agents na Mga Template
+### Mga Template ng Microsoft Foundry at Foundry Agents
 
-Pumili ng template sa ibaba upang i-deploy. Bawat template ay magagamit sa [Awesome AZD](https://azure.github.io/awesome-azd/) at maaaring i-initialize gamit ang isang utos.
+Pumili ng isang template sa ibaba upang i-deploy. Ang bawat template ay makikita sa [Awesome AZD](https://azure.github.io/awesome-azd/) at maaaring simulan gamit ang isang utos lamang.
 
-| Template | Paglalarawan | Deploy Command |
+| Template | Deskripsyon | Deploy Command |
 |----------|-------------|----------------|
-| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Chat application na gumagamit ng Retrieval Augmented Generation (RAG) at Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
-| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Bumuo ng AI agents gamit ang Foundry Agents para sa autonomous na pag-execute ng mga gawain | `azd init -t azure-samples/foundry-agent-service-starter` |
-| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Isaayos ang koordinasyon ng maramihang Foundry Agents para sa mga kumplikadong workflow | `azd init -t azure-samples/multi-agent-orchestration` |
-| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Mag-extract at mag-analyze ng mga dokumento gamit ang mga modelo ng Microsoft Foundry | `azd init -t azure-samples/ai-document-processing` |
-| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Bumuo ng mga intelligent na chatbot na may integrasyon sa Microsoft Foundry | `azd init -t azure-samples/ai-chat-protocol` |
-| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Gumawa ng mga imahe gamit ang DALL-E sa pamamagitan ng Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
-| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | AI agents na gumagamit ng Semantic Kernel kasama ang Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
-| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Mga multi-agent system na gumagamit ng AutoGen framework | `azd init -t azure-samples/autogen-multi-agent` |
+| **[AI Chat with RAG](https://github.com/Azure-Samples/azure-search-openai-demo)** | Chat application na naka-base sa paghahanap | `azd init -t Azure-Samples/azure-search-openai-demo .` |
+| **[Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)** | Agent-supported na chat application; ginagamit sa buong workshop na ito | `azd init -t Azure-Samples/get-started-with-ai-agents .` |
+| **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** | Panimulang AI chat application | `azd init -t Azure-Samples/get-started-with-ai-chat .` |
 
-### Mabilis na Pagsisimula
+Ito ang mga alternatibo: i-initialize ang **isang** template sa sarili nitong walang laman na direktoryo. Ang trailing na `.` ay pumipili ng direktoryong iyon; kung hindi ito isasama sa kasalukuyang mga bersyon ng AZD, lilikha ito ng subdirectory na may pangalan ng template. Ang initialization ay nagda-download ng proyekto; ang `azd up` ay nagsasagawa ng bayad na deployment pagkatapos mong suriin ang mga kinakailangan, resources, suporta sa rehiyon, at quota.
 
-1. **Mag-browse ng mga template**: Bisitahin ang [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) at i-filter ayon sa `AI`, `Agents`, o `Microsoft Foundry`
-2. **Piliin ang iyong template**: Pumili ng isa na tumutugma sa iyong kaso ng paggamit
-3. **I-initialize**: Patakbuhin ang `azd init` command para sa napili mong template
-4. **I-deploy**: Patakbuhin ang `azd up` para mag-provision at mag-deploy
+### Mabilis na Simula
 
-**🎯 | EXERCISE**: <br/>
+1. **Mag-browse ng mga template**: Bisitahin ang [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) at gamitin ang mga filter sa pamamagitan ng `AI`, `Agents`, o `Microsoft Foundry`
+2. **Pumili ng iyong template**: Piliin ang angkop sa iyong kaso ng paggamit
+3. **I-initialize**: Patakbuhin ang utos na `azd init` para sa napili mong template
+4. **I-deploy**: Patakbuhin ang `azd up` upang ipatupad at i-deploy
+
+**🎯 | PAGSASANAY**: <br/>
 Pumili ng isa sa mga template sa itaas batay sa iyong senaryo:
 
-- **Bumubuo ng chatbot?** → Magsimula sa **AI Chat with RAG** o **Conversational AI Bot**
-- **Kailangan ng autonomous agents?** → Subukan ang **Foundry Agent Service Starter** o **Multi-Agent Orchestration**
-- **Naga-process ng mga dokumento?** → Gamitin ang **AI Document Intelligence**
-- **Nais ng tulong sa AI coding?** → Tuklasin ang **Semantic Kernel Agent** o **AutoGen Multi-Agent**
+- **Nagpapatuloy sa workshop na ito?** → Piliin ang **Get Started with AI Agents**
+- **Gumagawa ng search-grounded na chat?** → Tuklasin ang **AI Chat with RAG** nang hiwalay
+- **Kailangan ng ibang arkitektura?** → Hanapin sa gallery at beripikahin ang aktwal na repository, katayuan ng implementasyon, at mga kinakailangan
 
-```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
-azd init -t azure-samples/azure-search-openai-demo
+```bash title="Initialize the workshop template in an empty directory" linenums="0"
+azd init -t Azure-Samples/get-started-with-ai-agents .
+azd auth login
 azd up
 ```
 
-!!! info "Tuklasin ang Iba Pang Mga Template"
-    Ang [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) ay naglalaman ng 250+ na mga template. Gamitin ang mga filter upang hanapin ang mga template na tumutugma sa iyong mga partikular na kinakailangan para sa wika, framework, at mga serbisyo ng Azure.
+!!! info "Tuklasin pa ang mga Template"
+    Ang [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) ay naglalaman ng 250+ templates. Gamitin ang mga filter upang hanapin ang mga template na tumutugma sa iyong partikular na mga pangangailangan para sa wika, framework, at mga serbisyo ng Azure.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:
-Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI na pagsasalin na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o di-tumpak na impormasyon. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na awtoritatibong sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng isang taong tagasalin. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

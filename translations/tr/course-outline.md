@@ -1,559 +1,560 @@
-# Yeni Başlayanlar için AZD: Kurs İçeriği ve Öğrenme Çerçevesi
+# Başlangıç Seviyesi AZD: Kurs Taslağı ve Öğrenme Çerçevesi
 
 ## Kurs Genel Bakışı
 
-Azure Developer CLI (azd) hakkında yapılandırılmış bölümler aracılığıyla ilerleyerek uzmanlaşın. **Microsoft Foundry entegrasyonuyla AI uygulama dağıtımına özel odaklanma.**
+Kademeli öğrenme için yapılandırılmış bölümler aracılığıyla Azure Developer CLI (azd) ustalığı kazanın. **Microsoft Foundry entegrasyonu ile AI uygulama dağıtımına özel odaklanma.**
 
-### Bu Kurs Neden Modern Geliştiriciler İçin Önemlidir
+### Modern Geliştiriciler için Bu Kurs Neden Önemlidir
 
-Microsoft Foundry Discord topluluğu içgörülerine dayanarak, **geliştiricilerin %45’i AI iş yükleri için AZD kullanmak istiyor** ancak şu zorluklarla karşılaşıyorlar:
-- Karmaşık çok hizmetli AI mimarileri
-- Üretim AI dağıtımı en iyi uygulamaları  
+AI yükünü dağıtan geliştiriciler genellikle aşağıdaki konularda rehberliğe ihtiyaç duyar:
+- Karmaşık çok servisli AI mimarileri
+- Üretim AI dağıtım en iyi uygulamaları  
 - Azure AI hizmet entegrasyonu ve yapılandırması
 - AI iş yükleri için maliyet optimizasyonu
-- AI'ya özgü dağıtım sorunlarını giderme
+- AI’ye özgü dağıtım sorunlarının giderilmesi
 
 ### Temel Öğrenme Hedefleri
 
 Bu yapılandırılmış kursu tamamlayarak:
-- **AZD Temellerinde Uzmanlaşın**: Temel kavramlar, kurulum ve yapılandırma
-- **AI Uygulamaları Dağıtımı**: AZD ile Microsoft Foundry hizmetlerini kullanın
-- **Kod Olarak Altyapı Uygulaması**: Azure kaynaklarını Bicep şablonlarıyla yönetin
-- **Dağıtım Sorunlarını Giderme**: Yaygın sorunları çözüp hata ayıklama yapın
-- **Üretim İçin Optimizasyon**: Güvenlik, ölçeklendirme, izleme ve maliyet yönetimi
-- **Çoklu Ajan Çözümleri Oluşturma**: Karmaşık AI mimarilerini dağıtın
+- **AZD Temellerini Öğrenin**: Temel kavramlar, kurulum ve yapılandırma
+- **AI Uygulamaları Dağıtın**: Microsoft Foundry hizmetleri ile AZD kullanımı
+- **Altyapı Kod olarak Uygulayın**: Azure kaynaklarını Bicep şablonlarıyla yönetin
+- **Dağıtımları Giderin**: Yaygın sorunları çözün ve hata ayıklayın
+- **Üretim için Optimize Edin**: Güvenlik, ölçeklendirme, izleme ve maliyet yönetimi
+- **Çoklu Ajan Çözümleri Oluşturun**: Karmaşık AI mimarilerini dağıtın
 
 ## 🎓 Atölye Öğrenme Deneyimi
 
-### Esnek Öğrenme Sunum Seçenekleri
-Bu kurs, **bireysel kendi hızında öğrenme** ve **yönlendirmeli atölye oturumları** olmak üzere her iki yöntemi de destekleyecek şekilde tasarlanmıştır. Katılımcılar, interaktif egzersizlerle pratik beceriler geliştirirken AZD'yi uygulamalı olarak deneyimlerler.
+### Esnek Öğrenim Sunum Seçenekleri
+Bu kurs, **kendi hızınızda bireysel öğrenmeyi** ve **yardımlı atölye oturumlarını** destekleyecek şekilde tasarlanmıştır; katılımcılar etkileşimli egzersizlerle pratik beceriler kazanarak AZD ile uygulamalı deneyim elde ederler.
 
 #### 🚀 Kendi Hızınızda Öğrenme Modu
-**Bireysel geliştiriciler ve sürekli öğrenme için mükemmel**
+**Bireysel geliştiriciler ve sürekli öğrenme için ideal**
 
 **Özellikler:**
-- **Tarayıcı Tabanlı Arayüz**: Herhangi bir web tarayıcısı üzerinden erişilebilen MkDocs destekli atölye
-- **GitHub Codespaces Entegrasyonu**: Önyapılandırılmış araçlarla tek tıklamayla geliştirme ortamı
-- **Etkileşimli DevContainer Ortamı**: Yerel kurulum gerektirmez – hemen kodlamaya başlayın
-- **İlerleme Takibi**: Dahili kontrol noktaları ve doğrulama egzersizleri
-- **Topluluk Desteği**: Sorular ve iş birliği için Azure Discord kanallarına erişim
+- **Tarayıcı Tabanlı Arayüz**: Herhangi bir web tarayıcısıyla erişilebilen MkDocs destekli atölye
+- **GitHub Codespaces Entegrasyonu**: Önden yapılandırılmış araçlarla tek tıklamalı geliştirme ortamı
+- **Etkileşimli DevContainer Ortamı**: Yerel kurulum gerektirmez - hemen kodlamaya başlayın
+- **İlerleme Takibi**: Yerleşik kontrol noktaları ve doğrulama egzersizleri
+- **Topluluk Desteği**: Sorular ve işbirliği için Azure Discord kanalları erişimi
 
 **Öğrenme Yapısı:**
-- **Esnek Zamanlama**: Bölümleri günler veya haftalar boyunca kendi hızınızda tamamlayın
-- **Kontrol Noktası Sistemi**: İleriye geçmeden önce öğrenmeyi doğrulayın
+- **Esnek Zamanlama**: Bölümleri günler veya haftalar içinde kendi hızınızda tamamlayın
+- **Kontrol Noktası Sistemi**: Karmaşık konulara geçmeden önce öğrenmeyi doğrulayın
 - **Kaynak Kütüphanesi**: Kapsamlı dokümantasyon, örnekler ve sorun giderme rehberleri
 - **Portföy Geliştirme**: Profesyonel portföyler için dağıtılabilir projeler oluşturun
 
-**Başlarken (Kendi Hızınızda):**
+**Başlangıç (Kendi Hızınızda):**
 ```bash
-# Seçenek 1: GitHub Codespaces (Tavsiye Edilen)
-# Depoya gidin ve "Code" → "main üzerinde codespace oluştur" seçeneğine tıklayın
+# Option 1: GitHub Codespaces (Recommended)
+# Navigate to the repository and click "Code" → "Create codespace on main"
 
-# Seçenek 2: Yerel Geliştirme
+# Option 2: Local Development
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# workshop/README.md dosyasındaki kurulum talimatlarını izleyin
+# Follow setup instructions in workshop/README.md
 ```
 
-#### 🏛️ Yönlendirmeli Atölye Oturumları
-**Kurumsal eğitim, bootcamp’ler ve eğitim kurumları için ideal**
+#### 🏛️ Yardımlı Atölye Oturumları
+**Kurumsal eğitim, bootcamp ve eğitim kurumları için ideal**
 
 **Atölye Format Seçenekleri:**
 
-**📚 Akademik Ders Entegrasyonu (8-12 hafta)**
-- **Üniversite Programları**: Haftada 2 saatlik oturumlarla bir dönemlik ders
+**📚 Akademik Kurs Entegrasyonu (8-12 hafta)**
+- **Üniversite Programları**: Haftada 2 saatlik oturumlarla dönemlik kurs
 - **Bootcamp Formatı**: Günlük 6-8 saatlik oturumlarla yoğun 3-5 günlük program
-- **Kurumsal Eğitim**: Pratik proje uygulamalı aylık ekip oturumları
-- **Değerlendirme Çerçevesi**: Puanlı ödevler, akran incelemeleri ve final projeleri
+- **Kurumsal Eğitim**: Aylık ekip oturumları ve pratik proje uygulaması
+- **Değerlendirme Çerçevesi**: Notlandırılmış ödevler, eş değerlendirmeler ve final projeleri
 
 **🚀 Yoğun Atölye (1-3 gün)**
-- **1. Gün**: Temel + AI Geliştirme (Bölümler 1-2) - 6 saat
+- **1. Gün**: Temel + AI geliştirme (Bölümler 1-2) - 6 saat
 - **2. Gün**: Yapılandırma + Altyapı (Bölümler 3-4) - 6 saat  
 - **3. Gün**: İleri Desenler + Üretim (Bölümler 5-8) - 8 saat
-- **Takip**: Proje tamamlaması için isteğe bağlı 2 haftalık mentorluk
+- **Takip**: Proje tamamlanması için isteğe bağlı 2 haftalık mentorluk
 
-**⚡ Yönetici Brifingi (4-6 saat)**
+**⚡ Yöneticilere Özet (4-6 saat)**
 - **Stratejik Genel Bakış**: AZD değer önerisi ve iş etkisi (1 saat)
-- **Etkileşimli Demo**: AI uygulamasını uçtan uca dağıtım (2 saat)
+- **Uygulamalı Demo**: AI uygulamasını baştan sona dağıtım (2 saat)
 - **Mimari İnceleme**: Kurumsal desenler ve yönetişim (1 saat)
-- **Uygulama Planlama**: Organizasyonel benimseme stratejisi (1-2 saat)
+- **Uygulama Planlaması**: Kurumsal benimseme stratejisi (1-2 saat)
 
-#### 🛠️ Atölye Öğrenme Yöntemi
-**Keşif → Dağıtım → Özelleştirme yaklaşımı ile uygulamalı beceri gelişimi**
+#### 🛠️ Atölye Öğrenme Metodolojisi
+**Keşif → Dağıtım → Özelleştirme yaklaşımıyla uygulamalı beceri geliştirme**
 
-**1. Aşama: Keşif (45 dakika)**
-- **Şablon İncelemesi**: Microsoft Foundry şablonları ve hizmetlerini değerlendirin
-- **Mimari Analiz**: Çoklu ajan desenleri ve dağıtım stratejilerini anlayın
-- **Gereksinim Değerlendirmesi**: Kurumsal ihtiyaçlar ve kısıtlamaları belirleyin
-- **Ortam Kurulumu**: Geliştirme ortamı ve Azure kaynaklarını yapılandırın
+**Aşama 1: Keşif (45 dakika)**
+- **Şablon İncelemesi**: Microsoft Foundry şablonlarını ve hizmetlerini değerlendirin
+- **Mimari Analizi**: Çoklu ajan desenlerini ve dağıtım stratejilerini anlayın
+- **Gereksinim Değerlendirmesi**: Kurumsal ihtiyaçları ve kısıtlamaları belirleyin
+- **Ortam Kurulumu**: Geliştirme ortamını ve Azure kaynaklarını yapılandırın
 
-**2. Aşama: Dağıtım (2 saat)**
-- **Adım Adım Uygulama**: AZD ile AI uygulamalarının kılavuzlu dağıtımı
-- **Hizmet Yapılandırması**: Azure AI hizmetleri, uç noktalar ve kimlik doğrulaması
-- **Güvenlik Uygulaması**: Kurumsal güvenlik desenleri ve erişim kontrolleri
-- **Doğrulama Testleri**: Dağıtımları doğrulayın ve yaygın sorunları giderin
+**Aşama 2: Dağıtım (2 saat)**
+- **Rehberli Uygulama**: AZD ile AI uygulamalarını adım adım dağıtın
+- **Hizmet Yapılandırması**: Azure AI hizmetleri, uç noktalar ve kimlik doğrulamayı yapılandırın
+- **Güvenlik Uygulaması**: Kurumsal güvenlik desenleri ve erişim denetimleri uygulayın
+- **Doğrulama Testi**: Dağıtımları doğrulayın ve yaygın sorunları giderin
 
-**3. Aşama: Özelleştirme (45 dakika)**
-- **Uygulama Değişikliği**: Şablonları belirli kullanım durumlarına göre uyarlayın
+**Aşama 3: Özelleştirme (45 dakika)**
+- **Uygulama Değişikliği**: Şablonları özel kullanım durumları ve gereksinimlere uyarlayın
 - **Üretim Optimizasyonu**: İzleme, maliyet yönetimi ve ölçeklendirme stratejileri uygulayın
 - **İleri Desenler**: Çoklu ajan koordinasyonu ve karmaşık mimarileri keşfedin
-- **Gelecek Planlama**: Sürekli beceri gelişimi için öğrenme rotası belirleyin
+- **Sonraki Adımlar Planlama**: Sürekli beceri geliştirme için öğrenme yolunu tanımlayın
 
-#### 🎯 Atölye Öğrenme Sonuçları
+#### 🎯 Atölye Öğrenme Çıktıları
 **Uygulamalı pratikle geliştirilen ölçülebilir beceriler**
 
 **Teknik Yetkinlikler:**
-- **Üretim AI Uygulamaları Dağıtımı**: Başarıyla AI destekli çözümler dağıtın ve yapılandırın
-- **Kod Olarak Altyapı Ustalığı**: Özel Bicep şablonları oluşturun ve yönetin
-- **Çoklu Ajan Mimarisi**: Koordine AI ajan çözümleri uygulayın
-- **Üretim Hazırlığı**: Güvenlik, izleme ve yönetişim desenlerini uygulayın
-- **Sorun Giderme Uzmanlığı**: Dağıtım ve yapılandırma sorunlarını bağımsız olarak çözün
+- **Üretim AI Uygulamaları Dağıtımı**: AI destekli çözümleri başarıyla dağıtma ve yapılandırma
+- **Altyapıyı Kod Olarak Yönetme Uzmanlığı**: Özel Bicep şablonları oluşturma ve yönetme
+- **Çoklu Ajan Mimarisi**: Koordine AI ajan çözümleri uygulama
+- **Üretime Hazırlık**: Güvenlik, izleme ve yönetişim desenlerini uygulama
+- **Sorun Giderme Uzmanlığı**: Dağıtım ve yapılandırma sorunlarını bağımsız çözme
 
 **Profesyonel Beceriler:**
-- **Proje Liderliği**: Bulut dağıtım girişimlerinde teknik ekipleri yönetin
-- **Mimari Tasarım**: Ölçeklenebilir, maliyet-etkin Azure çözümleri tasarlayın
-- **Bilgi Transferi**: AZD en iyi uygulamalarında meslektaşları eğitin ve mentorluk yapın
-- **Stratejik Planlama**: Kurumsal bulut benimseme stratejilerine etki edin
+- **Proje Liderliği**: Bulut dağıtım girişimlerinde teknik ekipleri yönetme
+- **Mimari Tasarım**: Ölçeklenebilir, maliyet etkin Azure çözümleri tasarlama
+- **Bilgi Transferi**: Meslektaşları AZD en iyi uygulamalarında eğitme ve mentorluk yapma
+- **Stratejik Planlama**: Kurumsal bulut benimseme stratejilerini etkileyebilme
 
 #### 📋 Atölye Kaynakları ve Materyalleri
-**Kolaylaştırıcılar ve öğrenciler için kapsamlı araç seti**
+**Kolaylaştırıcılar ve katılımcılar için kapsamlı araç seti**
 
 **Kolaylaştırıcılar için:**
-- **Eğitmen Kılavuzu**: [Atölye Genel Bakış](workshop/README.md) - Oturum planlama ve sunum rehberi
-- **Sunum Materyalleri**: Slaytlar, mimari diyagramlar ve demo senaryoları
-- **Değerlendirme Araçları**: Uygulamalı egzersizler, bilgi kontrolleri ve değerlendirme ölçütleri
-- **Teknik Kurulum**: Ortam yapılandırması, sorun giderme rehberleri ve yedek planlar
+- **Eğitmen Kılavuzu**: [Atölye Genel Bakışı](workshop/README.md) - Oturum planlama ve sunum rehberi
+- **Sunum Materyalleri**: Slaytlar, mimari diyagramlar ve demo betikleri
+- **Değerlendirme Araçları**: Pratik egzersizler, bilgi kontrolleri ve değerlendirme kriterleri
+- **Teknik Kurulum**: Ortam yapılandırması, sorun giderme rehberleri ve yedekleme planları
 
 **Katılımcılar için:**
 - **Etkileşimli Atölye Ortamı**: [Atölye Materyalleri](workshop/README.md) - Tarayıcı tabanlı öğrenme platformu
-- **Adım Adım Talimatlar**: [Kılavuzlu Egzersizler](../../workshop/docs/instructions) - Detaylı uygulama adımları  
-- **Referans Dokümantasyonu**: [AI Atölye Laboratuvarı](docs/microsoft-foundry/ai-workshop-lab.md) - AI odaklı kapsamlı çalışmalar
+- **Adım Adım Talimatlar**: [Rehberli Egzersizler](../../workshop/docs/instructions) - Ayrıntılı uygulama adımları  
+- **Referans Dokümantasyonu**: [AI Atölyesi Laboratuvarı](docs/chapter-02-ai-development/ai-workshop-lab.md) - AI odaklı derinlemesine incelemeler
 - **Topluluk Kaynakları**: Azure Discord kanalları, GitHub tartışmaları ve uzman desteği
 
 #### 🏢 Kurumsal Atölye Uygulaması
-**Organizasyonel dağıtım ve eğitim stratejileri**
+**Kurumsal dağıtım ve eğitim stratejileri**
 
 **Kurumsal Eğitim Programları:**
-- **Geliştirici İşe Alımı**: Yeni çalışan oryantasyonu ve AZD temelleri (2-4 hafta)
-- **Ekip Yetkinlik Geliştirme**: Mevcut ekipler için üç ayda bir atölye (1-2 gün)
-- **Mimari İnceleme**: Kıdemli mühendisler ve mimarlar için aylık oturumlar (4 saat)
-- **Liderlik Brifingleri**: Teknik karar vericiler için yönetici atölyeleri (yarım gün)
+- **Geliştirici Oryantasyonu**: Yeni çalışanlara AZD temelleri eğitimi (2-4 hafta)
+- **Ekip Beceri Geliştirme**: Mevcut geliştirme ekipleri için üç aylık atölyeler (1-2 gün)
+- **Mimari İnceleme**: Kıdemli mühendis ve mimar oturumları (ayda 4 saat)
+- **Liderlik Bilgilendirmeleri**: Teknik karar vericiler için yarım günlük yöneticilere atölye
 
 **Uygulama Desteği:**
-- **Özel Atölye Tasarımı**: Belirli organizasyon ihtiyaçlarına uygun içerik
-- **Pilot Program Yönetimi**: Başarı ölçütleri ve geri bildirim döngüleriyle yapılandırılmış uygulama  
+- **Özel Atölye Tasarımı**: Belirli kurumsal ihtiyaçlara özel içerikler
+- **Pilot Program Yönetimi**: Başarı ölçütleri ve geri bildirim döngüleri ile yapılandırılmış uygulama  
 - **Sürekli Mentorluk**: Atölye sonrası proje uygulama desteği
-- **Topluluk Oluşturma**: Dahili Azure AI geliştirici toplulukları ve bilgi paylaşımı
+- **Topluluk Oluşturma**: Kurumsal Azure AI geliştirici toplulukları ve bilgi paylaşımı
 
 **Başarı Ölçütleri:**
-- **Beceri Kazanımı**: Ön/son değerlendirmeler ile teknik yetkinlik artışı
-- **Dağıtım Başarısı**: Üretim uygulamalarını başarıyla dağıtan katılımcı yüzdesi
-- **Verimlilik Süresi**: Yeni Azure AI projelerinde işe başlama süresinin kısalması
-- **Bilgi Tutma**: Atölye sonrası 3-6 ay takip değerlendirmeleri
+- **Beceri Edinimi**: Teknik yetkinlik artışını ölçmek için ön/son değerlendirmeler
+- **Dağıtım Başarısı**: Katılımcıların üretim uygulamalarını başarıyla dağıtma oranı
+- **Verimlilik Süresi**: Yeni Azure AI projeleri için oryantasyon süresinin kısaltılması
+- **Bilgi Tutma**: Atölye sonrası 3-6 aylık takip değerlendirmeleri
 
-## 8 Bölümlü Öğrenme Yapısı
+## 8 Bölümlük Öğrenme Yapısı
 
-### Bölüm 1: Temel & Hızlı Başlangıç (30-45 dakika) 🌱
-**Önkoşullar**: Azure aboneliği, temel komut satırı bilgisi  
-**Zorluk Seviyesi**: ⭐
+### Bölüm 1: Temel ve Hızlı Başlangıç (30-45 dakika) 🌱
+**Ön Koşullar**: Azure aboneliği, temel komut satırı bilgisi  
+**Zorluk Derecesi**: ⭐
 
 #### Öğrenecekleriniz
-- Azure Developer CLI temellerinin anlaşılması
-- AZD’nin platformunuza kurulması  
+- Azure Developer CLI temellerini anlama
+- AZD'nin platformunuza kurulumu  
 - İlk başarılı dağıtımınız
-- Temel kavramlar ve terminoloji
+- Temel kavramlar ve terimler
 
 #### Öğrenme Kaynakları
-- [AZD Temelleri](docs/getting-started/azd-basics.md) - Temel kavramlar
-- [Kurulum ve Ayar](docs/getting-started/installation.md) - Platforma özel rehberler
-- [İlk Projeniz](docs/getting-started/first-project.md) - Uygulamalı öğretici
+- [AZD Temelleri](docs/chapter-01-foundation/azd-basics.md) - Temel kavramlar
+- [Kurulum ve Ayar](docs/chapter-01-foundation/installation.md) - Platforma özgü rehberler
+- [İlk Projeniz](docs/chapter-01-foundation/first-project.md) - Pratik atölye
 - [Komut Hızlı Başvuru](resources/cheat-sheet.md) - Hızlı referans
 
 #### Pratik Sonuç
-AZD kullanarak Azure’a basit bir web uygulaması başarıyla dağıtın
+Basit bir web uygulamasını AZD kullanarak Azure’a başarılı şekilde dağıtın
 
 ---
 
 ### Bölüm 2: AI-Öncelikli Geliştirme (1-2 saat) 🤖
-**Önkoşullar**: Bölüm 1 tamamlanmış  
-**Zorluk Seviyesi**: ⭐⭐
+**Ön Koşullar**: Bölüm 1 tamamlandı  
+**Zorluk Derecesi**: ⭐⭐
 
 #### Öğrenecekleriniz
 - AZD ile Microsoft Foundry entegrasyonu
 - AI destekli uygulamaların dağıtımı
-- AI hizmet yapılandırmalarının anlaşılması
+- AI hizmeti yapılandırmalarını anlama
 - RAG (Retrieval-Augmented Generation) desenleri
 
 #### Öğrenme Kaynakları
-- [Microsoft Foundry Entegrasyonu](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- [AI Model Dağıtımı](docs/microsoft-foundry/ai-model-deployment.md)
-- [AI Atölye Laboratuvarı](docs/microsoft-foundry/ai-workshop-lab.md) - **YENİ**: Kapsamlı 2-3 saatlik uygulamalı laboratuvar
+- [Microsoft Foundry Entegrasyonu](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- [AI Model Dağıtımı](docs/chapter-02-ai-development/ai-model-deployment.md)
+- [AI Atölyesi Laboratuvarı](docs/chapter-02-ai-development/ai-workshop-lab.md) - **YENİ**: Kapsamlı 2-3 saatlik uygulamalı lab
 - [Etkileşimli Atölye Kılavuzu](workshop/README.md) - **YENİ**: MkDocs önizlemeli tarayıcı tabanlı atölye
 - [Microsoft Foundry Şablonları](README.md#featured-microsoft-foundry-templates)
 - [Atölye Talimatları](../../workshop/docs/instructions) - **YENİ**: Adım adım rehberli egzersizler
 
 #### Pratik Sonuç
-RAG özellikli AI destekli sohbet uygulaması dağıtın ve yapılandırın
+RAG özellikli AI destekli sohbet uygulamasını dağıtın ve yapılandırın
 
-#### Atölye Öğrenme Yolu (İsteğe Bağlı Gelişme)
+#### Atölye Öğrenme Yolu (İsteğe Bağlı Geliştirme)
 **YENİ Etkileşimli Deneyim**: [Tam Atölye Kılavuzu](workshop/README.md)
 1. **Keşif** (30 dk): Şablon seçimi ve değerlendirme
-2. **Dağıtım** (45 dk): AI şablon fonksiyonelliğini dağıtım ve doğrulama  
-3. **Parçalara Ayırma** (30 dk): Şablon mimarisi ve bileşenlerini anlama
-4. **Yapılandırma** (30 dk): Ayarları ve parametreleri özelleştirme
-5. **Özelleştirme** (45 dk): Şablonları değiştirip kendi yapınıza uygun hale getirme
-6. **Temizlik** (15 dk): Kaynakları temizleyin ve yaşam döngüsünü anlayın
-7. **Kapanış** (15 dk): Sonraki adımlar ve ileri öğrenme yolları
+2. **Dağıtım** (45 dk): AI şablon işlevselliğini dağıtıp doğrulama  
+3. **Analiz** (30 dk): Şablon mimarisi ve bileşenlerini anlama
+4. **Yapılandırma** (30 dk): Ayar ve parametreleri özelleştirme
+5. **Özelleştirme** (45 dk): Şablonu değiştirip kendinize göre uyarlama
+6. **Temizlik** (15 dk): Kaynakları temizleyip yaşam döngüsünü anlama
+7. **Özet** (15 dk): Sonraki adımlar ve ileri öğrenme yolları
 
 ---
 
-### Bölüm 3: Yapılandırma & Kimlik Doğrulama (45-60 dakika) ⚙️
-**Önkoşullar**: Bölüm 1 tamamlanmış  
-**Zorluk Seviyesi**: ⭐⭐
+### Bölüm 3: Yapılandırma ve Kimlik Doğrulama (45-60 dakika) ⚙️
+**Ön Koşullar**: Bölüm 1 tamamlandı  
+**Zorluk Derecesi**: ⭐⭐
 
 #### Öğrenecekleriniz
 - Ortam yapılandırması ve yönetimi
 - Kimlik doğrulama ve güvenlik en iyi uygulamaları
-- Kaynak isimlendirme ve organizasyonu
+- Kaynak adlandırma ve organizasyon
 - Çoklu ortam dağıtımları
 
 #### Öğrenme Kaynakları
-- [Yapılandırma Rehberi](docs/getting-started/configuration.md) - Ortam kurulumu
-- [Kimlik Doğrulama & Güvenlik Desenleri](docs/getting-started/authsecurity.md) - Yönetilen kimlik ve Key Vault entegrasyonu
+- [Yapılandırma Kılavuzu](docs/chapter-03-configuration/configuration.md) - Ortam ayarı
+- [Kimlik Doğrulama & Güvenlik Desenleri](docs/chapter-03-configuration/authsecurity.md) - Yönetilen kimlik ve Key Vault entegrasyonu
 - Çoklu ortam örnekleri
 
 #### Pratik Sonuç
-Doğru kimlik doğrulama ve güvenlik ile birden fazla ortam yönetin
+Doğru kimlik doğrulama ve güvenlik ile birden çok ortamı yönetin
 
 ---
 
-### Bölüm 4: Kod Olarak Altyapı & Dağıtım (1-1.5 saat) 🏗️
-**Önkoşullar**: Bölümler 1-3 tamamlanmış  
-**Zorluk Seviyesi**: ⭐⭐⭐
+### Bölüm 4: Altyapı Kod olarak & Dağıtım (1-1.5 saat) 🏗️
+**Ön Koşullar**: Bölümler 1-3 tamamlandı  
+**Zorluk Derecesi**: ⭐⭐⭐
 
 #### Öğrenecekleriniz
 - İleri dağıtım desenleri
-- Bicep ile Kod Olarak Altyapı
+- Bicep ile altyapı kodu
 - Kaynak sağlama stratejileri
 - Özel şablon oluşturma
 
-- Azure Container Apps ve AZD ile konteyner tabanlı uygulama dağıtımı
+- Azure Container Apps ve AZD ile konteyner uygulama dağıtımı
 
 #### Öğrenme Kaynakları
-- [Dağıtım Rehberi](docs/deployment/deployment-guide.md) - Tam iş akışları
-- [Kaynak Sağlama](docs/deployment/provisioning.md) - Kaynak yönetimi
+- [Dağıtım Kılavuzu](docs/chapter-04-infrastructure/deployment-guide.md) - Tam iş akışları
+- [Kaynak Sağlama](docs/chapter-04-infrastructure/provisioning.md) - Kaynak yönetimi
 - Konteyner ve mikroservis örnekleri
 - [Container App Örnekleri](examples/container-app/README.md) - Hızlı başlangıç, üretim ve ileri dağıtım desenleri
 
 #### Pratik Sonuç
-Özel altyapı şablonları kullanarak karmaşık çok hizmetli uygulamalar dağıtın
+Özel altyapı şablonları kullanarak karmaşık çok servisli uygulamalar dağıtın
 
 ---
 
 ### Bölüm 5: Çoklu Ajan AI Çözümleri (2-3 saat) 🤖🤖
-**Önkoşullar**: Bölümler 1-2 tamamlanmış  
-**Zorluk Seviyesi**: ⭐⭐⭐⭐
+**Ön Koşullar**: Bölümler 1-2 tamamlandı  
+**Zorluk Derecesi**: ⭐⭐⭐⭐
 
 #### Öğrenecekleriniz
 - Çoklu ajan mimari desenleri
 - Ajan orkestrasyonu ve koordinasyonu
-- Üretim hazır AI dağıtımları
+- Üretime hazır AI dağıtımları
 - Müşteri ve Envanter ajan uygulamaları
 
-- Ajan tabanlı çözümler kapsamında konteynerleştirilmiş mikroservis entegrasyonu
+- Ajan tabanlı çözümlerde konteynerleştirilmiş mikroservislerin entegrasyonu
 
 #### Öğrenme Kaynakları
-- [Perakende Çoklu Ajan Çözümü](examples/retail-scenario.md) - Tam uygulama
-- [ARM Şablon Paketi](../../examples/retail-multiagent-arm-template) - Tek tıkla dağıtım
+- [Perakende Çoklu Ajan Çözümü](examples/retail-scenario.md) - Mimari taslak, tam uygulama değil
+- [ARM Şablon Paketi](../../examples/retail-multiagent-arm-template) - Uygulama önkoşulları ile altyapı iskeleti
 - Çoklu ajan koordinasyon desenleri
-- [Mikroservis Mimari Örneği](../../examples/container-app/microservices) - Hizmetler arası iletişim, asenkron mesajlaşma ve üretim dağıtımı
+- [Mikroservis Mimari Örneği](../../examples/container-app/microservices) - Servisten servise iletişim, asenkron mesajlaşma ve üretim dağıtımı
 
 #### Pratik Sonuç
-Üretim hazır çoklu ajan AI çözümünü dağıtın ve yönetin
+Çoklu ajan AI çözümü tasarlayın ve uygulama, doğrulama ve operasyonel işleri belirleyin; altyapı sağlamanın ötesinde gereklilikleri kavrayın
 
 ---
 
-### Bölüm 6: Dağıtımdan Önce Doğrulama & Planlama (1 saat) 🔍
-**Önkoşullar**: Bölüm 4 tamamlanmış  
-**Zorluk Seviyesi**: ⭐⭐
+### Bölüm 6: Dağıtımdan Önce Doğrulama ve Planlama (1 saat) 🔍
+**Ön Koşullar**: Bölüm 4 tamamlandı  
+**Zorluk Derecesi**: ⭐⭐
 
 #### Öğrenecekleriniz
-- Kapasite planlama ve kaynak doğrulama
-- SKU seçimi stratejileri
-- Ön kontrol listeleri ve otomasyon
-- Maliyet optimizasyon planlaması
+- Kapasite planlaması ve kaynak doğrulaması
+- SKU seçim stratejileri
+- Uçuş öncesi kontroller ve otomasyon
+- Maliyet optimizasyonu planlaması
 
 #### Öğrenme Kaynakları
-- [Kapasite Planlama](docs/pre-deployment/capacity-planning.md) - Kaynak doğrulama
-- [SKU Seçimi](docs/pre-deployment/sku-selection.md) - Maliyet etkin tercihler
-- [Ön Kontroller](docs/pre-deployment/preflight-checks.md) - Otomatik betikler
-- [Application Insights Entegrasyonu](docs/pre-deployment/application-insights.md) - İzleme ve gözlemlenebilirlik
-- [Çoklu Ajan Koordinasyon Desenleri](docs/pre-deployment/coordination-patterns.md) - Ajan orkestrasyon stratejileri
+- [Kapasite Planlaması](docs/chapter-06-pre-deployment/capacity-planning.md) - Kaynak doğrulaması
+- [SKU Seçimi](docs/chapter-06-pre-deployment/sku-selection.md) - Maliyet etkin seçimler
+- [Uçuş Öncesi Kontroller](docs/chapter-06-pre-deployment/preflight-checks.md) - Otomatik betikler
+- [Application Insights Entegrasyonu](docs/chapter-06-pre-deployment/application-insights.md) - İzleme ve gözlemlenebilirlik
+- [Çoklu Ajan Koordinasyon Desenleri](docs/chapter-06-pre-deployment/coordination-patterns.md) - Ajan orkestrasyon stratejileri
 
 #### Pratik Sonuç
-Dağıtımları uygulamadan önce doğrulayın ve optimize edin
+Dağıtımı uygulamadan önce doğrulayın ve optimize edin
+
 ---
 
 ### Bölüm 7: Sorun Giderme ve Hata Ayıklama (1-1.5 saat) 🔧
-**Önkoşullar**: Herhangi bir dağıtım bölümü tamamlanmış olmalı  
+**Ön Koşullar**: Herhangi bir dağıtım bölümü tamamlanmış  
 **Zorluk Seviyesi**: ⭐⭐
 
 #### Öğrenecekleriniz
 - Sistematik hata ayıklama yaklaşımları
 - Yaygın sorunlar ve çözümleri
-- AI’ye özgü hata giderme
+- AI'ya özgü sorun giderme
 - Performans optimizasyonu
 
-#### Öğrenim Kaynakları
-- [Yaygın Sorunlar](docs/troubleshooting/common-issues.md) - SSS ve çözümler
-- [Hata Ayıklama Rehberi](docs/troubleshooting/debugging.md) - Adım adım stratejiler
-- [AI’ye Özgü Sorun Giderme](docs/troubleshooting/ai-troubleshooting.md) - AI hizmeti problemleri
+#### Öğrenme Kaynakları
+- [Yaygın Sorunlar](docs/chapter-07-troubleshooting/common-issues.md) - SSS ve çözümler
+- [Hata Ayıklama Rehberi](docs/chapter-07-troubleshooting/debugging.md) - Adım adım stratejiler
+- [AI'ya Özgü Sorun Giderme](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - AI servis problemleri
 
 #### Pratik Sonuç
-Yaygın dağıtım sorunlarını bağımsız olarak teşhis edip çözme
+Yaygın dağıtım sorunlarını bağımsız olarak teşhis edip çözüme kavuşturmak
 
 ---
 
-### Bölüm 8: Üretim ve Kurumsal Desenler (2-3 saat) 🏢
-**Önkoşullar**: Bölümler 1-4 tamamlanmış olmalı  
+### Bölüm 8: Üretim ve Kurumsal Modeler (2-3 saat) 🏢
+**Ön Koşullar**: Bölümler 1-4 tamamlanmış  
 **Zorluk Seviyesi**: ⭐⭐⭐⭐
 
 #### Öğrenecekleriniz
 - Üretim dağıtım stratejileri
-- Kurumsal güvenlik desenleri
+- Kurumsal güvenlik kalıpları
 - İzleme ve maliyet optimizasyonu
 - Ölçeklenebilirlik ve yönetişim
 
 - Üretim konteyner uygulaması dağıtımları için en iyi uygulamalar (güvenlik, izleme, maliyet, CI/CD)
 
-#### Öğrenim Kaynakları
-- [Üretim AI En İyi Uygulamaları](docs/microsoft-foundry/production-ai-practices.md) - Kurumsal desenler
+#### Öğrenme Kaynakları
+- [Üretim AI En İyi Uygulamaları](docs/chapter-08-production/production-ai-practices.md) - Kurumsal modeller
 - Mikroservisler ve kurumsal örnekler
 - İzleme ve yönetişim çerçeveleri
-- [Mikroservis Mimarisi Örneği](../../examples/container-app/microservices) - Mavi-yeşil/canary dağıtımı, dağıtık izleme ve maliyet optimizasyonu
+- [Mikroservis Mimari Örneği](../../examples/container-app/microservices) - Mavi-yeşil/canary dağıtımı, dağıtık izleme ve maliyet optimizasyonu
 
 #### Pratik Sonuç
-Tam üretim yeteneklerine sahip kurumsal uygulamalar dağıtma
+Tam üretim yeteneklerine sahip kurumsal hazır uygulamalar dağıtmak
 
 ---
 
-## Öğrenme İlerleyişi ve Zorluk
+## Öğrenme İlerlemesi ve Zorluk Seviyesi
 
-### İlerleyici Beceri Gelişimi
+### Kademeli Beceri Gelişimi
 
-- **🌱 Başlangıç**: Bölüm 1 (Temel) → Bölüm 2 (AI Geliştirme)
-- **🔧 Orta Düzey**: Bölümler 3-4 (Yapılandırma & Altyapı) → Bölüm 6 (Doğrulama)
-- **🚀 İleri Düzey**: Bölüm 5 (Çoklu Ajan Çözümleri) → Bölüm 7 (Sorun Giderme)
-- **🏢 Kurumsal**: Tüm bölümleri tamamla, Bölüm 8’e (Üretim Desenleri) odaklan
+- **🌱 Yeni Başlayanlar**: 1. Bölüm (Temel) ile başlayın → 2. Bölüm (AI Geliştirme)
+- **🔧 Orta Düzey**: Bölümler 3-4 (Yapılandırma & Altyapı) → 6. Bölüm (Doğrulama)
+- **🚀 İleri Düzey**: 5. Bölüm (Çoklu Ajan Çözümleri) → 7. Bölüm (Sorun Giderme)
+- **🏢 Kurumsal**: Tüm bölümleri tamamlayın, 8. Bölüme (Üretim Modelleri) odaklanın
 
-- **Konteyner Uygulama Yolu**: Bölümler 4 (Konteynerleştirilmiş dağıtım), 5 (Mikroservis entegrasyonu), 8 (Üretim en iyi uygulamaları)
+- **Konteyner Uygulama Yolu**: Bölümler 4 (Konteynerli dağıtım), 5 (Mikroservis entegrasyonu), 8 (Üretim en iyi uygulamaları)
 
-### Zorluk Göstergeleri
+### Zorluk Seviyesi Göstergeleri
 
-- **⭐ Temel**: Tek kavram, rehberli eğitimler, 30-60 dakika
-- **⭐⭐ Orta**: Çoklu kavramlar, uygulamalı pratik, 1-2 saat  
+- **⭐ Temel**: Tek kavramlar, rehberli öğreticiler, 30-60 dakika
+- **⭐⭐ Orta**: Birden çok kavram, uygulamalı pratik, 1-2 saat  
 - **⭐⭐⭐ İleri**: Karmaşık mimariler, özel çözümler, 1-3 saat
-- **⭐⭐⭐⭐ Uzman**: Üretim sistemleri, kurumsal desenler, 2-4 saat
+- **⭐⭐⭐⭐ Uzman**: Üretim sistemleri, kurumsal kalıplar, 2-4 saat
 
 ### Esnek Öğrenme Yolları
 
-#### 🎯 AI Geliştirici Hızlı Yol (4-6 saat)
-1. **Bölüm 1**: Temel & Hızlı Başlangıç (45 dk)
-2. **Bölüm 2**: AI-Öncelikli Geliştirme (2 saat)  
-3. **Bölüm 5**: Çoklu Ajan AI Çözümleri (3 saat)
-4. **Bölüm 8**: Üretim AI En İyi Uygulamaları (1 saat)
+#### 🎯 AI Geliştirici Hızlandırılmış Programı (4-6 saat)
+1. **1. Bölüm**: Temel ve Hızlı Başlangıç (45 dk)
+2. **2. Bölüm**: AI-Öncelikli Geliştirme (2 saat)  
+3. **5. Bölüm**: Çoklu Ajan AI Çözümleri (3 saat)
+4. **8. Bölüm**: Üretim AI En İyi Uygulamaları (1 saat)
 
 #### 🛠️ Altyapı Uzmanı Yolu (5-7 saat)
-1. **Bölüm 1**: Temel & Hızlı Başlangıç (45 dk)
-2. **Bölüm 3**: Yapılandırma & Kimlik Doğrulama (1 saat)
-3. **Bölüm 4**: Kod Olarak Altyapı & Dağıtım (1.5 saat)
-4. **Bölüm 6**: Dağıtımdan Önce Doğrulama & Planlama (1 saat)
-5. **Bölüm 7**: Sorun Giderme & Hata Ayıklama (1.5 saat)
-6. **Bölüm 8**: Üretim & Kurumsal Desenler (2 saat)
+1. **1. Bölüm**: Temel ve Hızlı Başlangıç (45 dk)
+2. **3. Bölüm**: Yapılandırma ve Kimlik Doğrulama (1 saat)
+3. **4. Bölüm**: Kod Olarak Altyapı ve Dağıtım (1.5 saat)
+4. **6. Bölüm**: Dağıtımdan Önce Doğrulama ve Planlama (1 saat)
+5. **7. Bölüm**: Sorun Giderme ve Hata Ayıklama (1.5 saat)
+6. **8. Bölüm**: Üretim ve Kurumsal Modeler (2 saat)
 
 #### 🎓 Tam Öğrenme Yolculuğu (8-12 saat)
 Tüm 8 bölümün sırasıyla tamamlanması, uygulamalı pratik ve doğrulama ile
 
-## Kurs Tamamlama Çerçevesi
+## Ders Tamamlama Çerçevesi
 
-### Bilgi Doğrulaması
-- **Bölüm Kontrol Noktaları**: Ölçülebilir sonuçlarla pratik egzersizler
-- **Uygulamalı Doğrulama**: Her bölüm için çalışan çözümler dağıtımı
+### Bilgi Doğrulama
+- **Bölüm Kontrol Noktaları**: Ölçülebilir sonuçlu pratik egzersizler
+- **Uygulamalı Doğrulama**: Her bölüm için çalışan çözümler dağıtmak
 - **İlerleme Takibi**: Görsel göstergeler ve tamamlama rozetleri
-- **Topluluk Doğrulaması**: Deneyim paylaşımları Azure Discord kanallarında
+- **Topluluk Doğrulaması**: Azure Discord kanallarında deneyim paylaşımı
 
-### Öğrenme Sonuçları Değerlendirmesi
+### Öğrenme Çıktıları Değerlendirmesi
 
 #### Bölüm 1-2 Tamamlama (Temel + AI)
-- ✅ AZD ile temel web uygulaması dağıtımı
-- ✅ RAG özellikli AI destekli sohbet uygulaması dağıtımı
+- ✅ AZD kullanarak temel web uygulaması dağıtımı
+- ✅ RAG destekli AI sohbet uygulaması dağıtımı
 - ✅ AZD temel kavramları ve AI entegrasyonunu anlama
 
 #### Bölüm 3-4 Tamamlama (Yapılandırma + Altyapı)  
-- ✅ Çoklu ortam dağıtımlarını yönetme
+- ✅ Çok ortamlı dağıtımları yönetme
 - ✅ Özel Bicep altyapı şablonları oluşturma
-- ✅ Güvenli kimlik doğrulama desenleri uygulama
+- ✅ Güvenli kimlik doğrulama kalıplarını uygulama
 
 #### Bölüm 5-6 Tamamlama (Çoklu Ajan + Doğrulama)
-- ✅ Karmaşık çoklu ajan AI çözümü dağıtımı
+- ✅ Karmaşık çoklu ajan AI çözümünü dağıtma
 - ✅ Kapasite planlaması ve maliyet optimizasyonu yapma
-- ✅ Otomatik dağıtımdan önce doğrulama uygulama
+- ✅ Otomatik ön dağıtım doğrulaması uygulama
 
 #### Bölüm 7-8 Tamamlama (Sorun Giderme + Üretim)
-- ✅ Dağıtım sorunlarını bağımsız olarak hata ayıklayıp çözme
-- ✅ Kurumsal seviye izleme ve güvenlik uygulama
-- ✅ Yönetişim ile üretime hazır uygulamalar dağıtma
+- ✅ Dağıtım sorunlarını bağımsız olarak hata ayıklama ve çözme  
+- ✅ Kurumsal düzeyde izleme ve güvenlik uygulama
+- ✅ Yönetişimle üretim hazır uygulamalar dağıtma
 
-### Sertifikasyon ve Tanınma
-- **Kurs Tamamlama Rozeti**: Tüm 8 bölümü pratik doğrulama ile tamamla
-- **Topluluk Tanıma**: Microsoft Foundry Discord aktif katılımı
-- **Mesleki Gelişim**: Sektöre uygun AZD ve AI dağıtım becerileri
-- **Kariyer İlerlemesi**: Kurumsal bulut dağıtım yetkinlikleri
+### Sertifikasyon ve Tanınırlık
+- **Ders Tamamlama Rozeti**: Tüm 8 bölümü pratik doğrulama ile tamamlamak
+- **Topluluk Tanınırlığı**: Microsoft Foundry Discord’da aktif katılım
+- **Profesyonel Gelişim**: Sektöre uygun AZD ve AI dağıtım becerileri
+- **Kariyer İlerlemesi**: Kurumsal düzey bulut dağıtım yetenekleri
 
-## 🎓 Kapsamlı Öğrenme Sonuçları
+## 🎓 Kapsamlı Öğrenme Çıktıları
 
 ### Temel Seviye (Bölümler 1-2)
-Temel bölümler tamamlandığında, öğrenenler şunları gösterecek:
+Temel bölümler tamamlandığında, öğrenenler gösterir:
 
-**Teknik Yetkinlikler:**
-- AZD komutları ile basit web uygulamalarını Azure’a dağıtma
-- RAG özellikleri ile AI sohbet uygulamalarını yapılandırma ve dağıtma
-- AZD çekirdek kavramlarını anlama: şablonlar, ortamlar, sağlama iş akışları
-- Microsoft Foundry hizmetlerini AZD dağıtımlarıyla entegre etme
-- Azure AI hizmetleri yapılandırmaları ve API uç noktalarında gezinme
-
-**Profesyonel Beceriler:**
-- Tutarlı sonuçlar için yapılandırılmış dağıtım iş akışlarını takip etme
-- Temel dağıtım sorunlarını loglar ve dokümantasyonla çözme
-- Bulut dağıtım süreçleri hakkında etkili iletişim kurma
-- Güvenli AI hizmet entegrasyonu için en iyi uygulamaları uygulama
-
-**Öğrenme Doğrulaması:**
-- ✅ `todo-nodejs-mongo` şablonunu başarılı şekilde dağıtma
-- ✅ `azure-search-openai-demo`'yu RAG ile yapılandırıp dağıtma
-- ✅ Etkileşimli atölye egzersizlerini tamamlama (Keşif aşaması)
-- ✅ Azure Discord topluluğu tartışmalarına katılma
-
-### Orta Seviye (Bölümler 3-4)
-Orta seviye bölümler tamamlandığında, öğrenenler şunları gösterecek:
-
-**Teknik Yetkinlikler:**
-- Çoklu ortam (dev, staging, prod) dağıtımlarını yönetme
-- Altyapı kodu için özel Bicep şablonları oluşturma
-- Yönetilen kimlik ile güvenli kimlik doğrulama desenleri uygulama
-- Özel yapılandırmalarla karmaşık çoklu hizmet uygulamaları dağıtma
-- Maliyet ve performans için kaynak sağlama stratejileri optimize etme
+**Teknik Yetenekler:**
+- AZD komutlarıyla basit web uygulamalarını Azure’a dağıtmak
+- RAG özellikli AI destekli sohbet uygulamalarını yapılandırmak ve dağıtmak
+- AZD temel kavramlarını anlamak: şablonlar, ortamlar, sağlama iş akışları
+- Microsoft Foundry servislerini AZD dağıtımlarıyla entegre etmek
+- Azure AI servis yapılandırmalarını ve API uç noktalarını gezinmek
 
 **Profesyonel Beceriler:**
-- Ölçeklenebilir altyapı mimarileri tasarlama
-- Bulut dağıtımları için güvenlik en iyi uygulamalarını uygulama
-- Takım işbirliği için altyapı desenlerini dokümante etme
-- Gereksinimler için uygun Azure hizmetlerini değerlendirme ve seçme
+- Tutarlı sonuçlar için yapılandırılmış dağıtım iş akışlarını takip etmek
+- Temel dağıtım sorunlarını günlükler ve dokümantasyon ile gidermek
+- Bulut dağıtım süreçleri hakkında etkin iletişim kurmak
+- Güvenli AI servis entegrasyonu için en iyi uygulamaları uygulamak
 
 **Öğrenme Doğrulaması:**
-- ✅ Ortama özel ayarlarla ayrı ortamlar yapılandırma
-- ✅ Çoklu hizmet uygulaması için özel Bicep şablonu oluşturma ve dağıtma
-- ✅ Güvenli erişim için yönetilen kimlik kimlik doğrulaması uygulama
-- ✅ Gerçek senaryolarla yapılandırma yönetimi egzersizlerini tamamlama
+- ✅ `todo-nodejs-mongo` şablonunu başarıyla dağıtmak
+- ✅ RAG ile `azure-search-openai-demo`’i dağıtmak ve yapılandırmak
+- ✅ Etkileşimli atölye egzersizlerini tamamlamak (Keşif aşaması)
+- ✅ Azure Discord topluluk tartışmalarına katılmak
 
-### İleri Seviye (Bölümler 5-6)
-İleri seviye bölümler tamamlandığında, öğrenenler şunları gösterecek:
+### Orta Düzey (Bölümler 3-4)
+Orta düzey bölümler tamamlandığında, öğrenenler gösterir:
 
-**Teknik Yetkinlikler:**
-- Koordine iş akışlarıyla çoklu ajan AI çözümleri dağıtma ve düzenleme
-- Perakende senaryoları için Müşteri ve Envanter ajan mimarileri uygulama
-- Kapsamlı kapasite planlama ve kaynak doğrulaması yapma
-- Otomatik dağıtımdan önce doğrulama ve optimizasyon yürütme
-- İş yükü gereksinimlerine göre maliyet etkili SKU seçimleri tasarlama
+**Teknik Yetenekler:**
+- Çok ortamlı dağıtımları yönetmek (geliştirme, önizleme, üretim)
+- Kod olarak altyapı için özel Bicep şablonları oluşturmak
+- Yönetilen kimlik ile güvenli kimlik doğrulama kalıplarını uygulamak
+- Özel yapılandırmalarla karmaşık çok servisli uygulamalar dağıtmak
+- Maliyet ve performans için kaynak sağlama stratejilerini optimize etmek
 
 **Profesyonel Beceriler:**
-- Üretim ortamları için karmaşık AI çözümleri mimarisi oluşturma
-- AI dağıtım stratejileri hakkında teknik tartışmalara liderlik etme
-- Junior geliştiricilere AZD ve AI dağıtım en iyi uygulamalarında mentorluk yapma
-- İş ihtiyacı için AI mimari desenlerini değerlendirme ve önerme
+- Ölçeklenebilir altyapı mimarileri tasarlamak
+- Bulut dağıtımları için güvenlik en iyi uygulamalarını uygulamak
+- Takım işbirliği için altyapı modellerini dokümante etmek
+- Gereksinimler için uygun Azure servislerini değerlendirmek ve seçmek
 
 **Öğrenme Doğrulaması:**
-- ✅ ARM şablonları ile tam perakende çoklu ajan çözümü dağıtımı
-- ✅ Ajan koordinasyonu ve iş akışı düzenlemesini gösterme
-- ✅ Gerçek kaynak kısıtlamaları ile kapasite planlama egzersizlerini tamamlama
-- ✅ Otomatik ön kontrol doğrulamaları ile dağıtım hazır hale getirme
+- ✅ Ortama özel ayarlarla ayrı ortamlar yapılandırmak
+- ✅ Çok servisli uygulama için özel Bicep şablonu oluşturup dağıtmak
+- ✅ Güvenli erişim için yönetilen kimlik kimlik doğrulaması uygulamak
+- ✅ Gerçek senaryolarla yapılandırma yönetimi egzersizlerini tamamlamak
 
-### Uzman Seviye (Bölümler 7-8)
-Uzman seviye bölümler tamamlandığında, öğrenenler şunları gösterecek:
+### İleri Düzey (Bölümler 5-6)
+İleri düzey bölümler tamamlandığında, öğrenenler gösterir:
 
-**Teknik Yetkinlikler:**
-- Karmaşık dağıtım sorunlarını bağımsız teşhis ve çözme
-- Kurumsal güvenlik desenleri ve yönetişim çerçeveleri uygulama
-- Kapsamlı izleme ve uyarı stratejileri tasarlama
-- Üretim dağıtımlarını ölçek, maliyet ve performans açısından optimize etme
-- Uygun test ve doğrulama ile CI/CD hatları kurma
+**Teknik Yetenekler:**
+- Koordine iş akışlarıyla çoklu ajan AI çözümleri dağıtmak ve düzenlemek
+- Perakende senaryoları için Müşteri ve Envanter ajan mimarileri uygulamak
+- Kapsamlı kapasite planlaması ve kaynak doğrulaması yapmak
+- Otomatik ön dağıtım doğrulaması ve optimizasyonu gerçekleştirmek
+- İş yükü gereksinimlerine göre maliyet etkin SKU seçimi tasarlamak
 
 **Profesyonel Beceriler:**
-- Kurumsal bulut dönüşüm girişimlerine liderlik etme
-- Kurumsal dağıtım standartlarını tasarlama ve uygulama
-- Geliştirme ekiplerine ileri AZD uygulamalarında eğitim ve mentorluk verme
-- Kurumsal AI dağıtımları için teknik karar alma süreçlerine etki etme
+- Üretim ortamları için karmaşık AI çözümleri mimarisi oluşturmak
+- AI dağıtım stratejileri hakkında teknik tartışmalara öncülük etmek
+- AZD ve AI dağıtım en iyi uygulamalarında genç geliştiricilere mentörlük yapmak
+- İş gereksinimleri için AI mimari kalıplarını değerlendirmek ve önermek
 
 **Öğrenme Doğrulaması:**
-- ✅ Karmaşık çoklu hizmet dağıtım hatalarını çözme
-- ✅ Uyum gereksinimleriyle kurumsal güvenlik desenlerini uygulama
-- ✅ Application Insights ile üretim izleme tasarlama ve dağıtma
-- ✅ Kurumsal yönetişim çerçevesi uygulamasını tamamlama
+- ✅ Perakende çoklu ajan şablonunu incelemek ve sağlanan altyapıyı eksik uygulamadan ayırt etmek
+- ✅ Ajan koordinasyonu ve iş akışı düzenlemesini göstermek
+- ✅ Gerçek kaynak kısıtlamalarıyla kapasite planlama egzersizlerini tamamlamak
+- ✅ Otomatik ön kontrol ile dağıtım hazırlığını doğrulamak
 
-## 🎯 Kurs Tamamlama Sertifikası
+### Uzman Seviyesi (Bölümler 7-8)
+Uzman bölümler tamamlandığında, öğrenenler gösterir:
+
+**Teknik Yetenekler:**
+- Karmaşık dağıtım sorunlarını bağımsız olarak teşhis ve çözmek
+- Kurumsal güvenlik kalıpları ve yönetişim çerçeveleri uygulamak
+- Kapsamlı izleme ve uyarı stratejileri tasarlamak
+- Üretim dağıtımlarını ölçek, maliyet ve performans için optimize etmek
+- Doğru test ve doğrulama ile CI/CD boru hatları kurmak
+
+**Profesyonel Beceriler:**
+- Kurumsal bulut dönüşüm girişimlerine liderlik etmek
+- Kurum içi dağıtım standartlarını tasarlamak ve uygulamak
+- Geliştirme ekiplerine ileri AZD uygulamalarında eğitim ve mentörlük sağlamak
+- Kurumsal AI dağıtımları için teknik karar almayı etkilemek
+
+**Öğrenme Doğrulaması:**
+- ✅ Karmaşık çok servisli dağıtım hatalarını çözmek
+- ✅ Uyumluluk gereksinimlerine uygun kurumsal güvenlik kalıplarını uygulamak
+- ✅ Application Insights ile üretim izlemesini tasarlamak ve dağıtmak
+- ✅ Kurumsal yönetişim çerçevesi uygulamasını tamamlamak
+
+## 🎯 Ders Tamamlama Sertifikası
 
 ### İlerleme Takip Çerçevesi
-Öğrenme ilerlemenizi yapılandırılmış kontrol noktalarıyla takip edin:
+Yapılandırılmış kontrol noktaları ile öğrenme ilerlemenizi takip edin:
 
-- [ ] **Bölüm 1**: Temel & Hızlı Başlangıç ✅
-- [ ] **Bölüm 2**: AI-Öncelikli Geliştirme ✅  
-- [ ] **Bölüm 3**: Yapılandırma & Kimlik Doğrulama ✅
-- [ ] **Bölüm 4**: Kod Olarak Altyapı & Dağıtım ✅
-- [ ] **Bölüm 5**: Çoklu Ajan AI Çözümleri ✅
-- [ ] **Bölüm 6**: Dağıtımdan Önce Doğrulama & Planlama ✅
-- [ ] **Bölüm 7**: Sorun Giderme & Hata Ayıklama ✅
-- [ ] **Bölüm 8**: Üretim & Kurumsal Desenler ✅
+- [ ] **1. Bölüm**: Temel ve Hızlı Başlangıç ✅
+- [ ] **2. Bölüm**: AI-Öncelikli Geliştirme ✅  
+- [ ] **3. Bölüm**: Yapılandırma ve Kimlik Doğrulama ✅
+- [ ] **4. Bölüm**: Kod Olarak Altyapı ve Dağıtım ✅
+- [ ] **5. Bölüm**: Çoklu Ajan AI Çözümleri ✅
+- [ ] **6. Bölüm**: Dağıtımdan Önce Doğrulama ve Planlama ✅
+- [ ] **7. Bölüm**: Sorun Giderme ve Hata Ayıklama ✅
+- [ ] **8. Bölüm**: Üretim ve Kurumsal Modeler ✅
 
 ### Doğrulama Süreci
-Her bölümü tamamladıktan sonra bilgilerinizi doğrulayın:
+Her bölümü tamamladıktan sonra bilginizi şu yollarla doğrulayın:
 
-1. **Pratik Egzersiz Tamamlama**: Her bölüm için çalışan çözümler dağıtma
-2. **Bilgi Değerlendirmesi**: SSS bölümlerini inceleme ve öz-değerlendirmeleri tamamlama
-3. **Topluluk Katılımı**: Azure Discord’da deneyimleri paylaşma ve geri bildirim alma
-4. **Portföy Geliştirme**: Dağıtımlarınızı ve öğrenilen dersleri dokümante etme
-5. **Eş Değerlendirme**: Diğer öğrenenlerle karmaşık senaryolar üzerinde işbirliği yapma
+1. **Pratik Egzersiz Tamamlama**: Her bölüm için çalışan çözümler dağıtmak
+2. **Bilgi Değerlendirmesi**: SSS bölümlerini gözden geçirmek ve öz değerlendirmeler yapmak
+3. **Topluluk Katılımı**: Deneyimleri paylaşmak ve Azure Discord’da geri bildirim almak
+4. **Portföy Geliştirme**: Dağıtımlarınızı ve edinilen dersleri belgelemek
+5. **Eş Değerlendirme**: Karmaşık senaryolarda diğer öğrenenlerle işbirliği yapmak
 
-### Kurs Tamamlama Faydaları
-Tüm bölümleri doğrulama ile tamamlayanlar şunlara sahip olacak:
+### Ders Tamamlama Avantajları
+Tüm bölümler doğrulama ile tamamlandığında, mezunlar kazanır:
 
 **Teknik Uzmanlık:**
-- **Üretim Deneyimi**: Gerçek AI uygulamalarını Azure ortamlarına dağıtma
-- **Profesyonel Beceriler**: Kurumsal hazır dağıtım ve sorun giderme yetkinlikleri  
-- **Mimari Bilgi**: Çoklu ajan AI çözümleri ve karmaşık altyapı desenleri
-- **Hata Ayıklama Ustası**: Dağıtım ve yapılandırma sorunlarını bağımsız çözme
+- **Üretim Deneyimi**: Gerçek AI uygulamalarını Azure ortamlarına dağıttı
+- **Profesyonel Beceriler**: Kurumsal hazır dağıtım ve sorun giderme yetenekleri  
+- **Mimari Bilgi**: Çoklu ajan AI çözümleri ve karmaşık altyapı kalıpları
+- **Sorun Giderme Ustalığı**: Dağıtım ve yapılandırma sorunlarını bağımsız çözme
 
-**Mesleki Gelişim:**
-- **Sektör Tanınırlığı**: Yüksek talep gören AZD ve AI dağıtım alanlarında doğrulanabilir beceriler
-- **Kariyer İlerlemesi**: Bulut mimarı ve AI dağıtım uzmanı rolleri için yeterlilik
+**Profesyonel Gelişim:**
+- **Sektör Tanınırlığı**: Talep gören AZD ve AI dağıtım alanlarında doğrulanabilir beceriler
+- **Kariyer İlerlemesi**: Bulut mimarı ve AI dağıtım uzmanı rolleri için nitelikler
 - **Topluluk Liderliği**: Azure geliştirici ve AI topluluklarında aktif üyelik
 - **Sürekli Öğrenme**: İleri Microsoft Foundry uzmanlığı için temel
 
 **Portföy Varlıkları:**
-- **Dağıtılan Çözümler**: AI uygulamaları ve altyapı desenlerinin çalışan örnekleri
+- **Dağıtılan Çözümler**: AI uygulamaları ve altyapı kalıplarının çalışan örnekleri
 - **Dokümantasyon**: Kapsamlı dağıtım rehberleri ve sorun giderme prosedürleri  
-- **Topluluk Katkıları**: Azure topluluğuna yapılan tartışmalar, örnekler ve geliştirmeler
+- **Topluluk Katkıları**: Azure topluluğuyla paylaşılan tartışmalar, örnekler ve geliştirmeler
 - **Profesyonel Ağ**: Azure uzmanları ve AI dağıtım uygulayıcıları ile bağlantılar
 
-### Kurs Sonrası Öğrenme Yolu  
-Mezunlar gelişmiş uzmanlık için hazırdır:
-- **Microsoft Foundry Uzmanı**: AI model dağıtımı ve orkestrasyonunda derin uzmanlık
-- **Bulut Mimari Liderliği**: Kurumsal ölçek dağıtım tasarımı ve yönetişim
-- **Geliştirici Topluluğu Liderliği**: Azure örnekleri ve topluluk kaynaklarına katkı
-- **Kurumsal Eğitim**: Organizasyonlarda AZD ve AI dağıtım becerilerinin öğretilmesi
+### Kurs Sonrası Öğrenme Yolu
+Mezunlar ileri uzmanlık için hazırlanmıştır:
+- **Microsoft Foundry Uzmanı**: AI model dağıtımı ve orkestrasyonda derin uzmanlık
+- **Bulut Mimarlığı Liderliği**: Kurumsal ölçek dağıtım tasarımı ve yönetişim
+- **Geliştirici Topluluğu Liderliği**: Azure örnekleri ve topluluk kaynaklarına katkı sağlama
+- **Kurumsal Eğitim**: Kurumlarda AZD ve AI dağıtım becerileri öğretme
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, yazıldığı dildeki kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı nedeniyle oluşabilecek yanlış anlamalar veya yorum farklılıklarından dolayı sorumluluk kabul edilmemektedir.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

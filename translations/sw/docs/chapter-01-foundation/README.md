@@ -1,22 +1,22 @@
-# Sura ya 1: Msingi & Anza Haraka
+# Sura 1: Msingi & Mwanzo wa Haraka
 
-**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: Dakika 30-45 | **⭐ Ugumu**: Maanzilishi
+**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: Dakika 75-120 ikiwa ni pamoja na utoaji wa kwanza; mazoezi ya ziada huchukua muda mrefu zaidi | **⭐ Ugumu**: Mwanzo
 
 ---
 
 ## Muhtasari
 
-Sura hii inatambulisha misingi ya Azure Developer CLI (azd). Utajifunza dhana kuu, kusanidi zana, na kuweka programu yako ya kwanza kwenye Azure.
+Sura hii inatambulisha misingi ya Azure Developer CLI (azd). Utajifunza dhana za msingi, kusanidi zana, na kutoa programu yako ya kwanza kwenye Azure.
 
-> Imethibitishwa dhidi ya `azd 1.27.1` mwezi Julai 2026.
+> Lengo la mapitio ya amri na usanidi: `azd 1.37.2` (Novemba 2026). Utoaji wa moja kwa moja wa Azure haukufanyika wakati wa mapitio.
 
 ## Malengo ya Kujifunza
 
 Kwa kumaliza sura hii, utakuwa na uwezo wa:
-- Elewa Azure Developer CLI ni nini na jinsi inavyotofautiana na Azure CLI
-- Sakinisha na usanidi AZD kwenye jukwaa lako
-- Weka programu yako ya kwanza kwenye Azure kwa kutumia `azd up`
-- Safisha rasilimali kwa kutumia `azd down`
+- Kuelewa Azure Developer CLI ni nini na inatofautianaje na Azure CLI
+- Kusakinisha na kusanidi AZD kwenye jukwaa lako
+- Kutoa programu yako ya kwanza kwenye Azure kwa kutumia `azd up`
+- Kusafisha rasilimali kwa kutumia `azd down`
 
 ---
 
@@ -24,17 +24,17 @@ Kwa kumaliza sura hii, utakuwa na uwezo wa:
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Misingi ya AZD](azd-basics.md) | Dhana kuu, istilahi, na muundo wa mradi | Dakika 15 |
-| 2 | [Usakinishaji & Usanidi](installation.md) | Maagizo ya usakinishaji maalum kwa jukwaa | Dakika 10 |
-| 3 | [Mradi Wako wa Kwanza](first-project.md) | Mazoezi: Tuma programu ya wavuti kwenye Azure | Dakika 20 |
+| 1 | [Misingi ya AZD](azd-basics.md) | Dhana za msingi, istilahi, na muundo wa mradi | Dakika 15 |
+| 2 | [Usakinishaji & Usanidi](installation.md) | Mwongozo wa usakinishaji maalum kwa jukwaa | Dakika 10 |
+| 3 | [Mradi Wako wa Kwanza](first-project.md) | Kwa vitendo: Toa programu ya wavuti kwenye Azure | Dakika 20 |
 | 4 | [Leta Programu Yako](bring-your-own-app.md) | Ongeza azd kwenye mradi uliopo tayari | Dakika 15 |
-| 5 | [Dev Containers & Codespaces](dev-containers.md) | Mazingira yanayoweza kurudiwa kwa azd kwa kutumia kontena za maendeleo | Dakika 15 |
+| 5 | [Makonteina ya Maendeleo & Codespaces](dev-containers.md) | Mazingira ya azd yanayorejelewa na makonteina ya maendeleo | Dakika 15 |
 
 ---
 
 ## ✅ Anza Hapa: Thibitisha Usanidi Wako
 
-Kabla ya kuanza, thibitisha kwamba kompyuta yako ya ndani iko tayari kwa kiolezo cha Sura ya 1:
+Kabla ya kuanza, thibitisha kuwa kompyuta yako ya eneo la mbali iko tayari kwa kiolezo cha Sura 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Kabla ya kuanza, thibitisha kwamba kompyuta yako ya ndani iko tayari kwa kiolezo
 bash ./validate-setup.sh
 ```
 
-Ikiwa script inaripoti zana zilizokosekana, rekebisha hizo kwanza kisha endelea na sura.
+Ikiwa script inaripoti zana zinazokosekana, rekebisha hizo kwanza kisha endelea na sura.
 
 ---
 
-## 🚀 Anza Haraka
+## 🚀 Mwanzo wa Haraka
 
 ```bash
-# Angalia usakinishaji
+# Check installation
 azd version
 
-# Thibitisha kwa ajili ya AZD
-# Hiari: az login ikiwa unapanga kuendesha amri za Azure CLI moja kwa moja
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Sambaza programu yako ya kwanza
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Safisha baada ya kumaliza
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -75,28 +77,28 @@ azd down --force --purge
 Baada ya kumaliza sura hii, unapaswa kuwa na uwezo wa:
 
 ```bash
-azd version              # Inaonyesha toleo lililosakinishwa
-azd init --template todo-nodejs-mongo  # Inaanzisha mradi
-azd up                   # Inaweka kwenye Azure
-azd show                 # Inaonyesha URL ya programu inayokimbia
-azd down --force --purge # Inasafisha rasilimali
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
 
-## 🔗 Mwongozo wa Kuenda
+## 🔗 Urambazaji
 
 | Mwelekeo | Sura |
 |-----------|---------|
-| **Ifuatayo** | [Sura ya 2: Maendeleo ya AI-Kwanza](../chapter-02-ai-development/README.md) |
-| **Ruka kwa** | [Sura ya 3: Usanidi](../chapter-03-configuration/README.md) |
+| **Ifuatayo** | [Sura 2: Maendeleo ya AI-Kwanza](../chapter-02-ai-development/README.md) |
+| **Ruka hadi** | [Sura 3: Usanidi](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Rasilimali Zinazohusiana
 
-- [Karatasi ya Amri ya Kushika](../../resources/cheat-sheet.md)
-- [Maswali Yanayoulizwa Mara kwa Mara (FAQ)](../../resources/faq.md)
+- [Karatasi ya Amri](../../resources/cheat-sheet.md)
+- [Maswali Yanayoulizwa Mara kwa Mara](../../resources/faq.md)
 - [Kamusi](../../resources/glossary.md)
 
 ---

@@ -2,66 +2,66 @@
 
 **Navigare capitole:**
 - **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul curent**: Capitolul 4 - Infrastructură ca și Cod & Implementare
+- **📖 Capitolul curent**: Capitolul 4 - Infrastructură ca Cod & Implementare
 - **⬅️ Anterior**: [Ghid de implementare](deployment-guide.md)
 - **🚀 Capitolul următor**: [Capitolul 5: Soluții Multi-Agent](../chapter-05-multi-agent/README.md)
 
-> Validat cu `azd 1.27.1` în iulie 2026.
+> Revizuit conform `azd 1.37.2` (Noiembrie 2026). Acesta este un **ghid de creare cu fișiere parțiale**, nu un șablon complet: trebuie să furnizați codul aplicației și `modules/web.bicep` cu mediul său, registrul, Container App și rezultatele înainte de implementare. Provizionarea Azure nu a fost executată în această revizuire.
 
 ## Introducere
 
-Până acum ai *consumat* șabloane cu `azd init --template <name>`. Dar odată ce ai un layout de proiect care place echipei tale — să zicem, o Aplicație Container cu Cosmos DB și monitorizarea potrivită — vei dori să îl transformi într-un șablon reutilizabil al tău. Un șablon este doar un depozit Git cu o structură previzibilă pe care azd știe cum să o citească. Această lecție îți arată cum să construiești unul de la zero, să îl testezi și (opțional) să îl publici în galeria comunității.
+Până acum ați *consumat* șabloane cu `azd init --template <name>`. Dar odată ce aveți un layout de proiect pe care echipa voastră îl agrează — să zicem, un Container App cu un Cosmos DB și monitorizarea potrivită — veți dori să-l transformați într-un șablon reutilizabil propriu. Un șablon este doar un depozit Git cu o structură predictibilă pe care azd știe să o citească. Această lecție vă arată cum să construiți unul de la zero, să-l testați și (opțional) să-l publicați în galeria comunității.
 
 ## Obiective de învățare
 
-La finalul acestei lecții, vei:
-- Înțelege ce transformă un folder într-un "șablon azd"
-- Cunoaște fișierele și structura folderului necesare
+La finalul acestei lecții, veți:
+- Înțelege ce face un folder să fie un „șablon azd”
+- Cunoaște fișierele și structura de folder necesare
 - Adăuga un `azure.yaml` și `infra/` pe care alții să le poată reutiliza
-- Testa șablonul local înainte de a-l partaja
-- Publica și (opțional) să-l trimiți în Awesome AZD
+- Testa șablonul local înainte de a-l distribui
+- Publica și (opțional) trimite la Awesome AZD
 
 ## Rezultate de învățare
 
-După ce termini această lecție, vei putea:
-- Să faci scafolding unui nou depozit de șablon
-- Să parametrizezi infrastructura astfel încât să funcționeze în orice abonament
-- Să validezi un șablon cu `azd init` și `azd up`
-- Să adaugi metadatele pe care galeria comunității le cere
+După ce finalizați această lecție, veți fi capabili să:
+- Scafoldați un nou depozit șablon
+- Parametrizați infrastructura astfel încât să funcționeze în orice subscripție
+- Validati un șablon cu `azd init` și `azd up`
+- Adăugați metadatele cerute de galeria comunității
 
 ---
 
-## Ce este un șablon, de fapt?
+## Ce este, de fapt, un șablon?
 
 Un șablon azd este **un depozit Git** care conține, minim:
 
-| Fișier / folder | Scop | Necesitate? |
-|---------------|---------|-----------|
-| `azure.yaml` | Descrie servicii, gazde și furnizor de infrastructură | ✅ Da |
-| `infra/` | Bicep, Terraform sau Pulumi care creează resurse | ✅ Da |
-| `src/` (sau codul tău) | Codul aplicației pe care azd o implementează | ✅ Da |
-| `README.md` | Cum se folosește șablonul | ✅ Foarte recomandat |
+| Fișier / folder | Scop | Necesare? |
+|---------------|--------|-----------|
+| `azure.yaml` | Descrie serviciile, gazdele și furnizorul infra | ✅ Da |
+| `infra/` | Definiții de provizionare Bicep sau Terraform | Necesare pentru acest exemplu explicit-IaC; proiectele generate pot să nu le includă |
+| `src/` (sau codul tău) | Codul aplicației implementat de azd | Necesare pentru serviciile bazate pe sursă; nu toate șabloanele conțin cod aplicație |
+| `README.md` | Cum se folosește șablonul | ✅ Recomandat puternic |
 | `.azdo/` sau `.github/` | Definiții pipeline CI/CD | Opțional |
-| `.devcontainer/` | Mediu de dezvoltare reproductibil | Opțional |
-| `azure.yaml` `metadata` | Info galerie + telemetrie | Opțional (necesar pentru publicare) |
+| `.devcontainer/` | Mediu de dezvoltare reproducibil | Opțional |
+| `azure.yaml` `metadata` | Informații de identitate/telemetrie șablon | Recomandat; publicarea unui repo Git nu îl cere |
 
-Nu este nimic magic aici: când rulezi `azd init --template you/your-repo`, azd clonează repo-ul și citește `azure.yaml`.
+Nu există magie aici: când rulați `azd init --template you/your-repo`, azd clona repo-ul și citește `azure.yaml`.
 
 ---
 
-## Pasul 1: Crearea scheletului depozitului
+## Pasul 1: Scafoldați depozitul
 
-Creează structura folderelor manual sau pornește de la un șablon minimal și editează:
+Creați structura de foldere manual sau porniți de la un șablon minimal și editați:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Creează aspectul standard
+# Create the standard layout
 mkdir -p src infra
 ```
 
-Un layout final tipic arată așa:
+Un layout tipic finalizat arată așa:
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Pasul 2: Scrie `azure.yaml`
+## Pasul 2: Scrieți `azure.yaml`
 
-Acesta este nucleul șablonului. Spune azd ce să implementeze și cum:
+Aceasta este inima șablonului. Spune azd ce să implementeze și cum:
 
 ```yaml
 # azure.yaml
@@ -92,7 +92,7 @@ name: my-azd-template
 metadata:
   template: my-azd-template@1.0.0   # name@version — used by the gallery and telemetry
 infra:
-  provider: bicep                   # or "terraform" / "pulumi"
+  provider: bicep                   # built-in alternative: terraform
   path: infra
 services:
   web:
@@ -101,21 +101,21 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Câmpul `metadata.template` este ce folosește telemetria galeriei pentru a calcula utilizarea. Folosește convenția `name@version`.
+> Câmpul `metadata.template` este ceea ce folosește telemetria galeriei pentru a număra utilizarea. Folosiți convenția `name@version`.
 
 ---
 
-## Pasul 3: Parametrizează infrastructura
+## Pasul 3: Parametrizați infrastructura
 
-Regula cea mai importantă pentru un șablon *reutilizabil*: **nu codifica niciodată nume, regiuni sau valori specifice abonamentului.** Folosește parametri și modelul tokenului de resursă astfel încât același șablon să funcționeze în orice abonament al oricui.
+Regula cea mai importantă pentru un șablon *reutilizabil*: **nu hardcodați niciodată nume, regiuni sau valori specifice subscripției.** Folosiți parametri și tiparul resource token pentru ca același șablon să funcționeze în subscripția oricui.
 
 ```bicep
 // infra/main.bicep
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = resourceGroup().location
+param location string
 
 @minLength(1)
 @maxLength(64)
@@ -126,8 +126,15 @@ param environmentName string
 var resourceToken = uniqueString(subscription().id, environmentName, location)
 var tags = { 'azd-env-name': environmentName }
 
+resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+  tags: tags
+}
+
 module web 'modules/web.bicep' = {
   name: 'web'
+  scope: rg
   params: {
     name: 'app-${resourceToken}'
     location: location
@@ -140,13 +147,16 @@ output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 
 Două lucruri fac acest șablon prietenos:
 
-1. **Eticheta `azd-env-name`** — azd o folosește pentru a urmări și a curăța resursele pe mediu.
-2. **Tokenul de resursă `uniqueString(...)`** — produce un sufix stabil, unic global ca numele să nu se ciocnească.
+1. **Tag-ul `azd-env-name`** — azd îl folosește pentru a urmări și curăța resursele per mediu.
+2. **Token-ul de resursă `uniqueString(...)`** — produce un sufix hash stabil pentru a reduce coliziunile; nu garantează unicitatea globală.
 
-Furnizează un fișier de parametri corespunzător care citește valorile inserate de azd din mediu:
+`modules/web.bicep` lipsește și trebuie să accepte `name`, `location` și `tags`, să provizioneze mediul/registrul și aplicația Container Apps, să eticheteze aplicația cu `azd-service-name: web` și să exporte `uri`. De asemenea, trebuie să expună valorile registry necesare pentru fluxul ales de build/deploy (de exemplu `AZURE_CONTAINER_REGISTRY_ENDPOINT` din modulul rădăcină). Doar un output endpoint nu conectează descoperirea serviciului, setările aplicației sau autentificarea registrului.
+
+Furnizați un fișier de parametri corespondent care citește valorile pe care azd le injectează din mediu:
+
+Salvați următorul ca `infra/main.parameters.json`:
 
 ```json
-// infra/main.parameters.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -161,99 +171,103 @@ azd înlocuiește automat `${AZURE_ENV_NAME}` și `${AZURE_LOCATION}` din mediul
 
 ---
 
-## Pasul 4: Testează-ți șablonul local
+## Pasul 4: Testați șablonul local
 
-Înainte de a partaja, dovedește că șablonul funcționează dintr-o stare curată.
+Înainte de a distribui, demonstrați că șablonul funcționează de la o stare curată.
 
-**Testează din folderul local** (nu este necesar push Git):
+**Testați din folderul local** (nu este nevoie să faceți push pe Git):
 
 ```bash
-# Dintr-un director gol, inițializează folosind calea șablonului local
+# From an empty directory, initialize using your local template path
 mkdir /tmp/test-run && cd /tmp/test-run
-azd init --template /path/to/my-azd-template
+azd init --template /path/to/my-azd-template .
 
-# Provisionare + implementare de la început până la sfârșit
+# Provision + deploy end to end
 azd auth login
 azd up
 ```
 
-**Apoi testează dezmembrarea** — un șablon bun curăță tot complet:
+**Apoi testați dezinstalarea** — un șablon bun curăță complet:
 
 ```bash
 azd down --force --purge
 ```
 
-Dacă `azd down` lasă resurse în urmă, probabil ai omis eticheta `azd-env-name` pe o resursă.
+Dacă `azd down` lasă resurse în urmă, verificați descoperirea grupului de resurse/mediu, resurse externe/partajate, permisiuni, blocaje și protecția de purjare. `--purge` nu șterge starea locală `.azure/`.
 
-> **Sfat:** rulează mai întâi `azd provision --preview`. Execută un what-if și afișează erorile șablonului înainte de a crea ceva resursă.
+> **Sfat:** după ce ați furnizat toate fișierele lipsă, rulați `azd provision --preview` mai întâi. Inspectați hook-urile înainte de preview deoarece ele pot executa comenzi cu efecte secundare. Preview nu este o estimare de preț sau o garanție că provizionarea va reuși.
 
 ---
 
-## Pasul 5: Publică șablonul
+## Pasul 5: Publicați șablonul
 
-Publică depozitul pe GitHub (public dacă vrei ca alții să-l folosească):
+Împingeți depozitul pe GitHub (public dacă vreți ca alții să-l folosească):
 
 ```bash
+# Return to the SOURCE template folder, not /tmp/test-run.
+# Review .gitignore and staged content; never commit .azure/ or secrets.
+git add azure.yaml infra src README.md .gitignore
+git commit -m "Add reusable azd template"
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Acum oricine îl poate folosi:
+Oricine îl poate folosi acum:
 
 ```bash
-azd init --template your-github-username/my-azd-template
+azd init --template your-github-username/my-azd-template .
 ```
 
 ---
 
-## Pasul 6 (Opțional): Trimite în Awesome AZD
+## Pasul 6 (Opțional): Trimiteți la Awesome AZD
 
-[Galeria Awesome AZD](https://azure.github.io/awesome-azd/) listează șabloane comunitare. Pentru a fi listat, repo-ul tău ar trebui să includă:
+Galeria [Awesome AZD](https://azure.github.io/awesome-azd/) listează șabloanele comunității. Pentru a fi listat, repo-ul vostru ar trebui să includă:
 
 - ✅ Un `README.md` clar cu cerințe, un diagramă de arhitectură și note despre costuri
 - ✅ Un `azure.yaml` funcțional cu `metadata.template`
-- ✅ Infrastructură care se provisionează curat în un abonament nou
+- ✅ Infrastructură care se provizionează curat într-o subscripție nouă
 - ✅ Un fișier `LICENSE`
-- ✅ (Recomandat) Un `.devcontainer/` pentru Codespaces cu un singur clic
+- ✅ (Recomandat) Un `.devcontainer/` pentru Codespaces cu un singur click
 
-Trimite prin deschiderea unui pull request care adaugă șablonul tău în fișierul de date al galeriei, urmând ghidul de contribuție din [Awesome AZD repository](https://github.com/Azure/awesome-azd).
+Trimiteți trimițând un pull request care adaugă șablonul vostru în fișierul de date al galeriei, urmând ghidul de contribuție de la depozitul [Awesome AZD](https://github.com/Azure/awesome-azd).
 
 ---
 
 ## Capcane comune
 
-| Capcană | Corectare |
-|---------|-----|
-| Nume de resurse codificate fix | Folosește tokenul de resursă `uniqueString()` |
-| `azd down` lasă resurse în urmă | Etichetează fiecare resursă (sau grupul de resurse) cu `azd-env-name` |
-| Șablonul funcționează pentru tine, dar nu și pentru alții | Scoate ID-urile de abonament, de tenant și presupunerile legate de regiune |
-| Output-urile nu sunt conectate în aplicație | Exportă `SERVICE_<NAME>_ENDPOINT_URL` și alte output-uri `AZURE_*` |
-| Trimiterea pentru galerie respinsă | Adaugă `README.md`, `LICENSE` și `metadata.template` |
+| Capcană | Remediere |
+|---------|----------|
+| Nume de resurse hardcodate | Folosiți token-ul de resursă `uniqueString()` |
+| `azd down` lasă resurse în urmă | Etichetați fiecare resursă (sau grupul de resurse) cu `azd-env-name` |
+| Șablonul funcționează pentru tine, dar nu și pentru alții | Eliminați ID-urile de subscripție, ID-urile de tenant și presupunerile legate de regiune |
+| Output-urile nu sunt conectate în aplicație | Potriviți `azd-service-name`/`resourceName` pentru implementare și mapați output-urile explicit în setările aplicației |
+| Trimiterea în galerie a fost respinsă | Adăugați `README.md`, `LICENSE`, și `metadata.template` |
 
 ---
 
 ## Rezumat
 
 - Un șablon este doar un repo Git cu `azure.yaml`, `infra/` și codul tău.
-- Parametrizează totul — nume, regiuni și ID-uri — pentru a rula oriunde.
-- Etichetează întotdeauna resursele cu `azd-env-name` ca să funcționeze `azd down`.
-- Testează local cu `azd init --template <local-path>` înainte de publicare.
-- Adaugă metadate și un README ca să poți trimite în Awesome AZD.
+- Parametrizați totul — nume, regiuni și ID-uri — astfel încât să ruleze oriunde.
+- Etichetați întotdeauna resursele cu `azd-env-name` ca `azd down` să funcționeze.
+- Testați local cu `azd init --template <local-path>` înainte de a publica.
+- Adăugați metadate și un README pentru a trimite la Awesome AZD.
 
 ---
 
 ## 🔗 Navigare
 
 | Direcție | Resursă |
-|-----------|----------|
+|-----------|---------|
 | **Anterior** | [Ghid de implementare](deployment-guide.md) |
 | **Acasă capitol** | [Capitolul 4: Infrastructură ca Cod](README.md) |
 | **Capitolul următor** | [Capitolul 5: Soluții Multi-Agent](../chapter-05-multi-agent/README.md) |
 
-## 📖 Resurse conexe
+## 📖 Resurse relevante
 
-- [Provisionarea resurselor](provisioning.md)
+- [Provizionare resurse](provisioning.md)
 - [Galeria Awesome AZD](https://azure.github.io/awesome-azd/)
-- [Documentația oficială azd pentru şabloane](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Documentația oficială azd pentru șabloane](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

@@ -1,248 +1,257 @@
-# Dasar-Dasar Multi-Agen - Deploy Sistem AI Terkoordinasi Pertamamu
+# Dasar Multi-Agen - Terapkan Sistem AI Koordinasi Pertama Anda
 
 **Navigasi Bab:**
 - **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 5 - Solusi AI Multi-Agen
 - **⬅️ Sebelumnya**: [Bab 4: Infrastruktur](../chapter-04-infrastructure/README.md)
-- **➡️ Selanjutnya**: [Pola Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md)
+- **➡️ Berikutnya**: [Pola Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Divalidasi dengan `azd 1.27.1` pada Juli 2026.
+> Panduan perintah ditinjau berdasarkan referensi `azd 1.37.2` yang dirilis. Penempatan cloud tidak dijalankan.
 
 ## Pendahuluan
 
-Pada bab-bab sebelumnya kamu telah melakukan deploy aplikasi tunggal—dan di Bab 2 kamu telah melakukan deploy satu agen AI. Pelajaran ini mengambil langkah berikutnya: melakukan deploy **sistem multi-agen**, di mana beberapa agen spesialis bekerja sama untuk memecahkan masalah yang tidak bisa ditangani dengan baik oleh satu agen sendiri.
+Dalam bab sebelumnya Anda menerapkan satu aplikasi—dan di Bab 2 Anda menerapkan satu agen AI. Pelajaran ini mengambil langkah berikutnya: menerapkan **sistem multi-agen**, di mana beberapa agen spesialis bekerja bersama menyelesaikan masalah yang tidak bisa ditangani dengan baik oleh agen tunggal sendirian.
 
-Kabar baik untuk pemula: **kamu tidak memerlukan perintah baru.** Solusi multi-agen tetaplah proyek azd. Kamu akan melakukan `azd init`, `azd up`, menguji, dan `azd down`—persis seperti alur kerja yang sudah kamu kuasai. Yang berubah adalah *bentuk* aplikasi di dalamnya.
+Kabar baik untuk pemula: **Anda tidak perlu perintah baru.** Solusi multi-agen masih merupakan proyek azd. Anda akan `azd init`, `azd up`, menguji, dan `azd down`—persis seperti alur kerja yang sudah Anda kenal. Yang berubah adalah *bentuk* aplikasi di dalamnya.
 
 ## Tujuan Pembelajaran
 
-Pada akhir pelajaran ini, kamu akan:
-- Memahami apa arti "multi-agen" dan kapan hal itu layak dengan kerumitan tambahan
+Pada akhir pelajaran ini, Anda akan:
+- Memahami apa arti "multi-agen" dan kapan layak menanggung kompleksitas tambahan
 - Mengenali peran umum dalam sistem multi-agen (orchestrator + spesialis)
-- Melakukan deploy template multi-agen nyata yang berfungsi menggunakan `azd up`
+- Menerapkan templat multi-agen nyata yang berfungsi dengan `azd up`
 - Memahami sumber daya Azure yang mendukung aplikasi multi-agen
-- Mengetahui cara memverifikasi, menyesuaikan, dan membongkar solusi dengan aman
+- Tahu cara memverifikasi, menyesuaikan, dan membersihkan solusi dengan aman
 
 ## Hasil Pembelajaran
 
-Setelah menyelesaikan pelajaran ini, kamu akan dapat:
+Setelah menyelesaikan pelajaran ini, Anda akan mampu:
 - Menjelaskan perbedaan antara agen tunggal dan sistem multi-agen
 - Memilih antara agen tunggal dengan alat dan desain multi-agen sejati
-- Melakukan deploy dan pengujian template multi-agen secara menyeluruh dengan azd
-- Mengidentifikasi di mana masing-masing agen berjalan dan bagaimana mereka berkomunikasi
-- Membersihkan semua sumber daya guna menghindari biaya berkelanjutan
+- Menerapkan dan menguji templat multi-agen secara menyeluruh dengan azd
+- Mengidentifikasi dimana setiap agen berjalan dan bagaimana mereka berkomunikasi
+- Membersihkan semua sumber daya untuk menghindari biaya berkelanjutan
 
 ---
 
 ## Apa Itu Sistem Multi-Agen?
 
-Satu agen AI adalah satu model dengan seperangkat instruksi dan (opsional) beberapa alat. Itu bekerja baik untuk tugas fokus. Namun saat tugas tumbuh—penelitian, kemudian menulis, lalu pengeditan, dan kemudian pemeriksaan fakta—memadatkan semuanya dalam satu prompt membuat agen menjadi lebih lambat, kurang andal, dan sulit untuk di-debug.
+Satu agen AI adalah satu model dengan seperangkat instruksi dan (opsional) beberapa alat. Itu bekerja dengan baik untuk tugas fokus. Tetapi saat tugas tumbuh—riset, kemudian menulis, kemudian mengedit, kemudian memeriksa fakta—memasukkan semuanya ke dalam satu prompt membuat agen menjadi lebih lambat, kurang dapat diandalkan, dan lebih sulit untuk debug.
 
-Sistem **multi-agen** memecah pekerjaan menjadi spesialis yang masing-masing mengerjakan satu tugas dengan baik, yang dikoordinasikan oleh seorang orchestrator:
+Sistem **multi-agen** memecah pekerjaan menjadi spesialis yang masing-masing menjalankan satu pekerjaan dengan baik, yang dikoordinasi oleh seorang orchestrator:
 
 ```mermaid
 graph TD
-    User([Permintaan pengguna]) --> Orchestrator[Agen Orkestrator<br/>Merencanakan dan mengarahkan pekerjaan]
-    Orchestrator --> Researcher[Agen Peneliti<br/>Mengumpulkan fakta]
-    Orchestrator --> Writer[Agen Penulis<br/>Menyusun konten]
-    Orchestrator --> Editor[Agen Editor<br/>Meninjau dan memperbaiki]
+    User([User request]) --> Orchestrator[Orchestrator Agent<br/>Plans and routes the work]
+    Orchestrator --> Researcher[Researcher Agent<br/>Gathers facts]
+    Orchestrator --> Writer[Writer Agent<br/>Drafts content]
+    Orchestrator --> Editor[Editor Agent<br/>Reviews and refines]
     Researcher --> Orchestrator
     Writer --> Orchestrator
     Editor --> Orchestrator
-    Orchestrator --> Result([Jawaban akhir])
+    Orchestrator --> Result([Final answer])
 ```
 
-### Dua peran yang selalu kamu temui
+### Dua peran yang selalu Anda lihat
 
 | Peran | Tugas | Contoh |
 |------|-------|--------|
-| **Orchestrator** | Memutuskan *apa yang terjadi selanjutnya* dan mengarahkan pekerjaan antar agen | "Pertama riset, lalu tulis, kemudian sunting" |
-| **Spesialis** | Mengerjakan satu pekerjaan fokus dan mengembalikan hasil | Seorang "peneliti" yang hanya mengumpulkan fakta |
+| **Orchestrator** | Memutuskan *apa yang terjadi selanjutnya* dan mengarahkan pekerjaan antar agen | "Pertama riset, lalu menulis, lalu mengedit" |
+| **Spesialis** | Melakukan satu pekerjaan fokus dan mengembalikan hasil | "Peneliti" yang hanya mengumpulkan fakta |
 
-### Apakah kamu benar-benar perlu banyak agen?
+### Apakah Anda benar-benar memerlukan banyak agen?
 
-Mulai dari yang sederhana. Gunakan multi-agen **hanya** ketika salah satu dari ini benar:
+Mulailah sederhana. Gunakan multi-agen **hanya** ketika salah satu ini benar:
 
-- ✅ Tugas memiliki **tahapan berbeda** yang mendapat manfaat dari instruksi berbeda (riset vs menulis vs tinjau)
-- ✅ Kamu ingin spesialis berjalan **secara paralel** untuk menghemat waktu
-- ✅ Langkah berbeda memerlukan **alat atau sumber data berbeda**
-- ✅ Kamu perlu setiap langkah **dapat diuji dan di-debug secara independen**
+- ✅ Tugas memiliki **tahapan berbeda** yang mendapat manfaat dari instruksi berbeda (riset vs menulis vs review)
+- ✅ Anda ingin spesialis dijalankan **secara paralel** untuk menghemat waktu
+- ✅ Langkah berbeda membutuhkan **alat atau sumber data berbeda**
+- ✅ Anda butuh setiap langkah **dapat diuji dan debug secara independen**
 
-Jika tugasmu hanya tanya jawab tunggal atau panggilan alat sederhana, **agen tunggal dengan alat** (Bab 2) lebih sederhana, murah, dan mudah dijalankan.
+Jika tugas Anda berupa tanya jawab tunggal atau panggilan alat sederhana, **agen tunggal dengan alat** (Bab 2) lebih sederhana, lebih murah, dan lebih mudah dioperasikan.
 
-> **Tips pemula:** "Lebih banyak agen" bukan berarti "lebih baik." Setiap agen menambah latensi, biaya, dan hal baru untuk dimonitor. Tambah agen hanya ketika masalah benar-benar terbagi menjadi beberapa bagian.
+> **Tip pemula:** "Lebih banyak agen" bukan berarti "lebih baik." Setiap agen menambah latensi, biaya, dan hal baru untuk dipantau. Tambah agen hanya saat masalah jelas terbagi menjadi bagian.
 
 ---
 
 ## Dua Cara Membangun Multi-Agen di Azure
 
 | Pendekatan | Apa itu | Terbaik untuk |
-|-----------|---------|-------------|
-| **Agen tunggal + alat** | Satu agen Foundry yang memanggil fungsi/alat | Alur kerja sederhana, memulai |
-| **Beberapa agen terkoordinasi** | Beberapa agen dengan seorang orchestrator | Tahapan berbeda, kerja paralel, spesialisasi |
+|----------|---------|-------------|
+| **Agen tunggal + alat** | Satu agen Foundry yang memanggil fungsi/alat | Alur kerja sederhana, mulai belajar |
+| **Beberapa agen terkoordinasi** | Beberapa agen dengan orchestrator | Tahapan jelas, pekerjaan paralel, spesialisasi |
 
-Pelajaran ini fokus pada pendekatan kedua menggunakan **template siap pakai**, agar kamu bisa melihat sistem multi-agen nyata berjalan sebelum membuat sendiri.
+Pelajaran ini fokus pada pendekatan kedua menggunakan **templat siap pakai**, agar Anda dapat melihat sistem multi-agen nyata berjalan sebelum membangun sendiri.
 
 ---
 
-## Praktik Langsung: Deploy Aplikasi Multi-Agen yang Berfungsi
+## Praktik Langsung: Terapkan Aplikasi Multi-Agen yang Berfungsi
 
-Kita akan deploy **Contoso Creative Writer**, contoh resmi Azure yang menggunakan beberapa agen (peneliti, penulis, editor) yang dikoordinasikan untuk menghasilkan sebuah artikel. Ini adalah aplikasi multi-agen pertama yang bagus karena peran-perannya mudah dipahami.
+Kami akan menerapkan **Contoso Creative Writer**, sampel resmi Azure yang mengoordinasikan agen riset, produk, penulisan, dan pengeditan untuk menghasilkan sebuah artikel. Sebelum melanjutkan, periksa [prasyarat dan biaya sampel](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): dibutuhkan kuota model, Azure AI Search, akses Bing Grounding, Python, Docker, dan hook kompatibel Bash. Ketersediaan model dan wilayah tergantung langganan Anda; penempatan tidak dijamin hanya dengan memilih wilayah tertentu.
 
-### Langkah 1: Inisialisasi template
+### Langkah 1: Inisialisasi templat
 
 ```bash
-# Buat folder kerja
+# Create a working folder
 mkdir creative-writer && cd creative-writer
 
-# Inisialisasi dari template multi-agen resmi
-azd init --template contoso-creative-writer
+# Initialize from the official multi-agent template
+azd init --template Azure-Samples/contoso-creative-writer .
 ```
 
-> Jelajahi lebih banyak template multi-agen kapan saja di [Galeri Awesome AZD AI](https://azure.github.io/awesome-azd/?tags=ai). Pilihan ramah pemula lainnya termasuk `get-started-with-ai-agents` dan `azure-ai-travel-agents`.
+> Telusuri lebih banyak templat multi-agen kapan saja di [galeri Awesome AZD AI](https://azure.github.io/awesome-azd/?tags=ai). Pilihan ramah pemula lainnya termasuk `get-started-with-ai-agents` dan `azure-ai-travel-agents`.
 
 ### Langkah 2: Autentikasi
 
 ```bash
-# Diperlukan untuk alur kerja azd
+# Required for azd workflows
 azd auth login
+
+# Also required by this sample's Azure CLI hooks
+az login
 ```
 
-### Langkah 3: Buat environment
+### Langkah 3: Periksa lingkungan
 
 ```bash
-azd env new dev
+# init normally creates/selects an environment; confirm it before proceeding
+azd env list
+# Only if you need an additional environment:
+# azd env new dev
 ```
 
-### Langkah 4: Pratinjau, lalu deploy
+### Langkah 4: Pratinjau, lalu terapkan
 
 ```bash
-# Lihat apa yang akan dibuat sebelum mengeluarkan biaya apa pun (direkomendasikan)
+# See what will be created before spending anything (recommended)
 azd provision --preview
 
-# Sediakan infrastruktur dan sebar semua agen dalam satu langkah
+# Provision infrastructure and deploy all agents in one step
 azd up
 ```
 
-`azd up` akan meminta langganan dan wilayah, lalu menyediakan sumber daya Azure dan melakukan deploy aplikasi. Deploy AI dapat memakan waktu lebih lama dibanding aplikasi web sederhana—jika kamu melakukan deploy model yang lebih besar, kamu bisa memperpanjang batas waktu deploy:
+`azd up` akan meminta pengaturan langganan dan wilayah yang hilang, lalu menyediakan sumber daya dan menerapkan aplikasi. Pratinjau tidak memesan kuota atau menjamin keberhasilan; hook templat mungkin masih berjalan selama pratinjau penyediaan, jadi periksa dulu. Untuk memperpanjang waktu tunggu azd untuk setiap **penyebaran layanan** (bukan penyediaan model):
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Perhatian biaya dan kapasitas:** Aplikasi multi-agen mendeploy model AI yang menggunakan kuota dan menimbulkan biaya. Jika `azd up` gagal karena kuota model, lihat [Pemecahan Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md) untuk perbaikan wilayah dan kuota, serta Bab 6 [Perencanaan Kapasitas](../chapter-06-pre-deployment/capacity-planning.md).
+Batas waktu menghentikan azd menunggu; tidak membatalkan penyebaran di Azure. Periksa status sumber daya sebelum mencoba ulang.
+
+> **Perhatian biaya dan kapasitas:** Aplikasi multi-agen menerapkan model AI yang mengkonsumsi kuota dan menimbulkan biaya. Jika `azd up` gagal pada kuota model, lihat [Pemecahan Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md) untuk perbaikan wilayah dan kuota, serta Bab 6 [Perencanaan Kapasitas](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Memahami Apa yang Kamu Deploy
+## Memahami Apa yang Anda Terapkan
 
-Aplikasi multi-agen tipikal seperti ini menyediakan satu set sumber daya Azure yang sesuai dengan tanggung jawab pada diagram di atas:
+Aplikasi multi-agen tipikal seperti ini menyediakan seperangkat sumber daya Azure yang langsung sesuai dengan tanggung jawab dalam diagram di atas:
 
-| Sumber Daya | Alasannya ada |
-|------------|---------------|
-| **Microsoft Foundry / Models** | Menyimpan model bahasa yang digunakan masing-masing agen |
-| **Azure AI Search** | Memberi data berdasarkan tanah untuk pencarian pada agen peneliti |
-| **Container Apps** (atau App Service) | Menyimpan kode orchestrator dan agen |
-| **Cosmos DB** (di beberapa contoh) | Menyimpan status/memori bersama yang diteruskan antar agen |
-| **Application Insights** | Melacak permintaan *melintasi* agen agar kamu bisa debug alur kerja |
+| Sumber Daya | Kenapa ada |
+|------------|-----------|
+| **Microsoft Foundry / Models** | Menampung model bahasa yang digunakan setiap agen |
+| **Azure AI Search** | Memberi agen peneliti data berbasis sumber yang dapat dicari |
+| **Container Apps** (atau App Service) | Menampung kode orchestrator dan agen |
+| **Cosmos DB** (di beberapa sampel) | Menyimpan status/memori bersama yang dipertukarkan antar agen |
+| **Application Insights** | Melacak permintaan *lintas* agen agar Anda dapat debug alur kerja |
 
-### Bagaimana agen saling berkomunikasi
+### Bagaimana agen berkomunikasi satu sama lain
 
-Di kebanyakan contoh azd multi-agen, **orchestrator berjalan dalam kode aplikasi kamu** (misalnya menggunakan kerangka kerja seperti Semantic Kernel atau Microsoft Agent Framework). Orchestrator memanggil masing-masing agen spesialis secara bergantian, meneruskan hasilnya, dan merakit jawaban akhir. Para agen berbagi konteks melalui:
+Dalam sebagian besar sampel azd multi-agen, **orchestrator berjalan di kode aplikasi Anda** (misalnya, menggunakan kerangka kerja seperti Semantic Kernel atau Framework Agen Microsoft). Orchestrator memanggil tiap agen spesialis berurutan, meneruskan hasil, dan merakit jawaban akhir. Agen berbagi konteks melalui:
 
-- **Panggilan fungsi/alat** — orchestrator memanggil spesialis dan menerima hasil kembali
-- **Memori bersama** — basis data (sering Cosmos DB) menyimpan status yang dapat dibaca oleh kedua agen
-- **Pesan/event** — agar longgar terhubung, agen saling berkomunikasi lewat antrean atau Service Bus
+- **Panggilan fungsi/alat** — orchestrator memanggil spesialis dan mendapat hasil kembali
+- **Memori bersama** — database (sering Cosmos DB) memegang status yang bisa dibaca kedua agen
+- **Pesan/acara** — untuk pengikatan longgar, agen berkomunikasi melalui antrean atau Service Bus
 
-> **Mengapa ini penting untuk debugging:** karena tiap langkah terpisah, Application Insights memperlihatkan *agen mana* yang lambat atau gagal. Itu adalah alasan utama membagi kerja ke beberapa agen sejak awal.
+> **Mengapa ini penting untuk debugging:** karena setiap langkah terpisah, Application Insights menunjukkan *agen mana* yang lambat atau gagal. Itu alasan utama memecah pekerjaan ke beberapa agen sejak awal.
 
 ---
 
-## Verifikasi Deploy
+## Verifikasi Penempatan
 
-Pastikan sistem benar-benar bekerja sebelum lanjut:
+Pastikan sistem benar-benar berfungsi sebelum melanjutkan:
 
 ```bash
-# Tampilkan titik akhir yang telah diterapkan
+# Show the deployed endpoints
 azd show
 
-# Buka dasbor pemantauan aplikasi
+# Open the app's monitoring dashboard
 azd monitor
 
-# Ikuti log jika ada sesuatu yang terlihat tidak beres
+# Open Application Insights Logs (not a terminal log stream)
 azd monitor --logs
 ```
 
-Kemudian buka URL aplikasi dari `azd show` dan coba permintaan yang melibatkan semua agen (untuk Creative Writer, minta ia menulis artikel pendek dengan topik tertentu). Dalam **pencarian transaksi** Application Insights, kamu harus melihat permintaan menyebar ke langkah peneliti, penulis, dan editor.
+Kemudian buka URL aplikasi dari `azd show` dan minta artikel singkat. Gunakan tampilan debug sampel untuk memeriksa alur kerja agen. Pencarian transaksi Application Insights bisa menampilkan langkah individual hanya jika sampel menginstrumentasi dan mengkorelasikannya; azd tidak secara otomatis menambah rentang agen.
 
 **Kriteria keberhasilan:**
-- ✅ `azd show` menampilkan endpoint yang dapat dijangkau
-- ✅ Permintaan menghasilkan hasil yang jelas melewati beberapa tahapan
-- ✅ Application Insights menunjukkan jejak untuk lebih dari satu langkah agen
+- ✅ `azd show` mencantumkan endpoint yang dapat dijangkau
+- ✅ Permintaan menghasilkan hasil yang jelas melewati banyak tahapan
+- ✅ Tampilan debug menunjukkan beberapa langkah agen; jika pelacakan diaktifkan, verifikasi telemetri terkait setelah pengambilan
 
 ---
 
-## Sesuaikan: Tambah atau Atur Agen
+## Kustomisasi: Tambah atau Sesuaikan Agen
 
-Karena setiap agen hanyalah instruksi dan alat, kostumisasi dapat dilakukan dengan mudah:
+Karena setiap agen hanyalah instruksi plus alat, kustomisasi bisa dilakukan:
 
-1. **Temukan definisi agen** di template (biasanya dalam folder `prompts/`, `agents/`, atau kumpulan file `*.prompty`).
-2. **Atur instruksi agen** — misalnya, beri tahu agen editor untuk menerapkan nada atau jumlah kata tertentu.
-3. **Deploy ulang hanya kode** (infrastruktur tidak berubah):
+1. **Temukan definisi agen** dalam templat (sering berupa set file `prompts/`, `agents/`, atau `*.prompty`).
+2. **Sesuaikan instruksi agen** — misalnya, beri tahu agen editor untuk menerapkan nada atau jumlah kata tertentu.
+3. **Terapkan ulang hanya kode** (infrastruktur tidak berubah):
 
    ```bash
    azd deploy
    ```
 
-Untuk langkah lebih lanjut dan membangun agen dari *manifes milikmu sendiri*, gunakan ekstensi agen dan siklus hidupnya sepenuhnya:
+Untuk melangkah lebih jauh dengan proyek agen Foundry *milik Anda sendiri*, gunakan inisialisasi interaktif ekstensi agen:
 
 ```bash
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
-azd ai agent invoke      # uji, dengan waktu respons
+azd ai agent invoke      # test, with response timing
 ```
 
-Lihat [Bab 2: Agen](../chapter-02-ai-development/agents.md) dan [referensi AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk siklus hidup agen lengkap (`invoke`, `eval generate`, `optimize`, `delete`).
+Lihat [Bab 2: Agen](../chapter-02-ai-development/agents.md) dan [referensi AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk siklus lengkap: agen `invoke`, alur kerja ekstensi evaluasi terpisah `azd ai eval`, agen `optimize`, dan agen `delete`.
 
 ---
 
 ## Bersihkan
 
-Aplikasi multi-agen menjalankan beberapa layanan yang dapat ditagih. Bongkar semuanya saat sudah selesai:
+Aplikasi multi-agen menjalankan banyak layanan berbayar. Hancurkan semuanya setelah selesai digunakan:
 
 ```bash
-azd down --force --purge
+# Review the resources and confirm deletion interactively
+azd down
 ```
 
-Flag `--purge` juga menghapus sumber daya AI yang dihapus lembut (seperti akun Foundry/Azure AI Services) agar tidak menghalangi deploy ulang atau terus menimbulkan biaya.
+Penghapusan bersifat destruktif. Untuk lab sekali pakai, `azd down --force --purge` melewati penghapusan dan konfirmasi purge soft-delete yang didukung; pembersihan tidak dapat dibatalkan jika didukung dan dapat diblokir oleh proteksi purge. Penghapusan lunak adalah perhatian pemulihan/pemakaian nama ulang, bukan bukti biaya berkelanjutan sendiri. Periksa sumber daya tersisa dan penagihan setelah pembersihan.
 
 ---
 
-## Catatan Tentang Sistem Multi-Agen Produksi
+## Catatan tentang Sistem Multi-Agen Produksi
 
-[Solusi Multi-Agen Retail](../../examples/retail-scenario.md) dalam repo ini adalah **cetakan arsitektur**, bukan template satu perintah—itu mendokumentasikan bagaimana sistem retail produksi *akan* dibangun (dan secara eksplisit menyatakan bahwa pembangunan lengkap adalah usaha besar). Gunakan sebagai referensi desain *setelah* kamu melakukan deploy contoh yang berfungsi di sini. Untuk kekhawatiran produksi (ketahanan, biaya, monitoring, tata kelola), lanjutkan ke [Bab 8: Praktik AI Produksi](../chapter-08-production/production-ai-practices.md).
+Solusi [Retail Multi-Agent](../../examples/retail-scenario.md) dalam repo ini adalah **cetakan arsitektur**, bukan template satu perintah—ia mendokumentasikan bagaimana sebuah sistem ritel produksi *akan* dibangun (dan secara eksplisit menyatakan bahwa pembangunan penuh adalah usaha yang besar). Gunakan ini sebagai referensi desain *setelah* Anda menerapkan contoh kerja di sini. Untuk masalah produksi (ketahanan, biaya, pemantauan, tata kelola), lanjutkan ke [Bab 8: Praktik AI Produksi](../chapter-08-production/production-ai-practices.md).
 
 ---
 
 ## Ringkasan
 
-- Sistem multi-agen memecah pekerjaan ke beberapa spesialis yang dikoordinasikan oleh orchestrator.
-- Gunakan hanya saat tugas memiliki tahapan berbeda, paralelisme, atau alat berbeda per langkah—kalau tidak, pilih agen tunggal.
-- Alur kerja azd tetap sama: `azd init` → `azd up` → uji → `azd down`.
-- Template nyata seperti `contoso-creative-writer` memungkinkan kamu melihat dan menyesuaikan aplikasi multi-agen yang berfungsi hari ini.
-- Pelacakan Application Insights lintas agen adalah salah satu manfaat praktis terbesar dari desain multi-agen.
+- Sistem multi-agen membagi pekerjaan di antara para spesialis yang dikoordinasikan oleh seorang pengatur.
+- Gunakan hanya ketika tugas memiliki tahapan berbeda, paralelisme, atau alat berbeda di setiap langkah—jika tidak, lebih baik menggunakan satu agen saja.
+- Alur kerja azd tidak berubah: `azd init` → `azd up` → test → `azd down`.
+- Template nyata seperti `contoso-creative-writer` memungkinkan Anda melihat dan menyesuaikan aplikasi multi-agen yang berfungsi hari ini.
+- Pelacakan Application Insights di seluruh agen adalah salah satu manfaat praktis terbesar dari desain multi-agen.
 
 ---
 
 ## 🔗 Navigasi
 
 | Arah | Pelajaran |
-|-------|----------|
+|-----------|--------|
 | **Sebelumnya** | [Bab 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
-| **Selanjutnya** | [Pola Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Berikutnya** | [Pola Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md) |
 
-## 📖 Sumber Daya Terkait
+## 📖 Sumber Terkait
 
 - [Panduan Agen AI](../chapter-02-ai-development/agents.md)
 - [Pola Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md)

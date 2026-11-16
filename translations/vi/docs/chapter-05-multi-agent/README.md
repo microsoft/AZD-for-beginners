@@ -1,20 +1,20 @@
 # Chương 5: Giải pháp AI đa tác nhân
 
-**📚 Khóa học**: [AZD cho Người mới bắt đầu](../../README.md) | **⏱️ Thời lượng**: 2-3 giờ | **⭐ Độ phức tạp**: Nâng cao
+**📚 Khóa học**: [AZD Cho Người Mới Bắt Đầu](../../README.md) | **⏱️ Thời gian**: 2-3 giờ | **⭐ Mức độ**: Nâng cao
 
 ---
 
 ## Tổng quan
 
-Chương này đề cập đến các mô hình kiến trúc đa tác nhân nâng cao, sự phối hợp giữa các tác nhân, và triển khai AI sẵn sàng cho sản xuất trong các kịch bản phức tạp.
+Chương này bao gồm các mẫu kiến trúc đa tác nhân nâng cao, điều phối tác nhân, và triển khai AI sẵn sàng sản xuất cho các kịch bản phức tạp.
 
-> Đã xác thực trên `azd 1.27.1` vào tháng 7 năm 2026.
+> Hướng dẫn lệnh đã được xem xét đối chiếu với tham chiếu `azd 1.37.2` đã phát hành. Việc triển khai trên đám mây không được thực hiện.
 
 ## Mục tiêu học tập
 
 Sau khi hoàn thành chương này, bạn sẽ:
-- Hiểu các mô hình kiến trúc đa tác nhân
-- Triển khai hệ thống các tác nhân AI phối hợp
+- Hiểu các mẫu kiến trúc đa tác nhân
+- Triển khai hệ thống tác nhân AI phối hợp
 - Thực hiện giao tiếp giữa các tác nhân
 - Xây dựng các giải pháp đa tác nhân sẵn sàng cho sản xuất
 
@@ -24,28 +24,30 @@ Sau khi hoàn thành chương này, bạn sẽ:
 
 | # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Kiến thức cơ bản về đa tác nhân](multi-agent-basics.md) | Thực hành: triển khai ứng dụng đa tác nhân hoạt động với `azd up` | 45 phút |
-| 2 | [Mô hình phối hợp](../chapter-06-pre-deployment/coordination-patterns.md) | Chiến lược phối hợp giữa các tác nhân (tiếp tục trong Chương 6) | 30 phút |
-| 3 | [Triển khai mẫu ARM](../../examples/retail-multiagent-arm-template/README.md) | Ví dụ triển khai chỉ với một cú nhấp | 30 phút |
+| 1 | [Cơ bản về đa tác nhân](multi-agent-basics.md) | Thực hành: triển khai ứng dụng đa tác nhân hoạt động với `azd up` | 45 phút |
+| 2 | [Mẫu Điều phối](../chapter-06-pre-deployment/coordination-patterns.md) | Chiến lược điều phối tác nhân (tiếp tục trong Chương 6) | 30 phút |
+| 3 | [Triển khai ARM Template](../../examples/retail-multiagent-arm-template/README.md) | Ví dụ triển khai một lần nhấp | 30 phút |
 
-> **Bắt đầu với Bài học 1.** Đây là bài duy nhất có thực hành đầy đủ, có thể triển khai trong chương này. Bài học 2 nằm trong Chương 6 (chung cho kế hoạch triển khai trước), và [Giải pháp đa tác nhân bán lẻ](../../examples/retail-scenario.md) là bản thiết kế kiến trúc — một tham chiếu thiết kế, không phải là mẫu lệnh một cú.
+> **Bắt đầu với Bài học 1.** Đây là bài học duy nhất hoàn toàn thực hành và có thể triển khai trong chương này. Bài học 2 nằm trong Chương 6 (chia sẻ với kế hoạch tiền triển khai), và [Giải pháp đa tác nhân bán lẻ](../../examples/retail-scenario.md) là một bản thiết kế kiến trúc — tài liệu tham khảo thiết kế, không phải mẫu lệnh một cú nhấp.
 
 ---
 
 ## 🚀 Bắt đầu nhanh
 
 ```bash
-# Lựa chọn 1: Triển khai từ một mẫu
-azd init --template agent-openai-python-prompty
+# Option 1: Deploy the multi-agent template used in Lesson 1
+azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Lựa chọn 2: Triển khai từ một bản khai báo đại lý (yêu cầu phần mở rộng azure.ai.agents)
+# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> **Phương pháp nào?** Dùng `azd init --template` để bắt đầu từ mẫu đang hoạt động. Dùng `azd ai agent init` khi bạn có manifest tác nhân của riêng mình. Xem [tham chiếu AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) để biết chi tiết đầy đủ.
+> **Phương pháp nào?** Dùng `azd init --template` để bắt đầu từ mẫu hoạt động. Dùng `azd ai agent init` tương tác, hoặc `azd ai agent init --template <path-to-azure.yaml>` để áp dụng dự án tác nhân hiện tại. Xem [tham chiếu AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) để biết yêu cầu phiên bản và di chuyển đánh giá.
+
+Chạy các lựa chọn này trong các thư mục trống riêng biệt. Tiện ích mở rộng tác nhân `1.0.0-beta.23` yêu cầu `azd >= 1.37.0`; luồng tương tác của nó không tạo ra pipeline Service Bus tùy chỉnh trong bài học điều phối.
 
 ---
 
@@ -53,29 +55,29 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Đại lý Điều phối<br/>Phân luồng yêu cầu, quản lý quy trình làm việc] --> Customer[Đại lý Khách hàng<br/>Truy vấn người dùng, sở thích]
-    Orchestrator --> Inventory[Đại lý Kho hàng<br/>Mức tồn kho, đơn đặt hàng]
+    Orchestrator[Orchestrator Agent<br/>Routes requests, manages workflow] --> Customer[Customer Agent<br/>User queries, preferences]
+    Orchestrator --> Inventory[Inventory Agent<br/>Stock levels, orders]
 ```
 
 ---
 
-## 🎯 Giải pháp nổi bật: Đa tác nhân bán lẻ
+## 🎯 Giải pháp tiêu biểu: Đa tác nhân bán lẻ
 
-[Giải pháp đa tác nhân bán lẻ](../../examples/retail-scenario.md) trình bày:
+Giải pháp [Multi-Agent Bán Lẻ](../../examples/retail-scenario.md) trình bày:
 
-- **Tác nhân khách hàng**: Xử lý tương tác và sở thích người dùng
-- **Tác nhân kho**: Quản lý tồn kho và xử lý đơn hàng
-- **Điều phối viên**: Phối hợp giữa các tác nhân
-- **Bộ nhớ chia sẻ**: Quản lý ngữ cảnh giữa các tác nhân
+- **Đại lý Khách hàng**: Xử lý tương tác và sở thích của người dùng
+- **Đại lý Hàng tồn kho**: Quản lý kho và xử lý đơn hàng
+- **Điều phối viên**: Điều phối giữa các đại lý
+- **Bộ nhớ dùng chung**: Quản lý ngữ cảnh giữa các đại lý
 
-### Dịch vụ sử dụng
+### Các Dịch vụ Được Sử dụng
 
 | Dịch vụ | Mục đích |
 |---------|---------|
-| Mẫu Microsoft Foundry | Hiểu ngôn ngữ |
+| Mô hình Microsoft Foundry | Hiểu ngôn ngữ |
 | Azure AI Search | Danh mục sản phẩm |
-| Cosmos DB | Trạng thái và bộ nhớ tác nhân |
-| Container Apps | Lưu trữ tác nhân |
+| Cosmos DB | Trạng thái và bộ nhớ đại lý |
+| Container Apps | Lưu trữ đại lý |
 | Application Insights | Giám sát |
 
 ---
@@ -85,14 +87,14 @@ graph TD
 | Hướng | Chương |
 |-----------|---------|
 | **Trước** | [Chương 4: Hạ tầng](../chapter-04-infrastructure/README.md) |
-| **Sau** | [Chương 6: Trước khi triển khai](../chapter-06-pre-deployment/README.md) |
+| **Tiếp theo** | [Chương 6: Tiền Triển khai](../chapter-06-pre-deployment/README.md) |
 
 ---
 
-## 📖 Tài nguyên liên quan
+## 📖 Tài nguyên Liên quan
 
-- [Hướng dẫn Tác nhân AI](../chapter-02-ai-development/agents.md)
-- [Thực hành AI sản xuất](../chapter-08-production/production-ai-practices.md)
+- [Hướng dẫn Đại lý AI](../chapter-02-ai-development/agents.md)
+- [Thực hành AI trong Sản xuất](../chapter-08-production/production-ai-practices.md)
 - [Khắc phục sự cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

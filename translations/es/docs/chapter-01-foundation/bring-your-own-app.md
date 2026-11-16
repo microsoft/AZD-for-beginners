@@ -1,52 +1,52 @@
-# Trae tu propia aplicación: agrega azd a un proyecto existente
+# Trae Tu Propia Aplicación - Añadir azd a un Proyecto Existente
 
-**Navegación del capítulo:**
-- **📚 Inicio del curso**: [AZD para principiantes](../../README.md)
-- **📖 Capítulo actual**: Capítulo 1 - Fundamentos y Inicio rápido
-- **⬅️ Anterior**: [Tu primer proyecto](first-project.md)
-- **➡️ Siguiente**: [Contenedores de desarrollo y Codespaces](dev-containers.md)
+**Navegación del Capítulo:**
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Inicio Rápido
+- **⬅️ Anterior**: [Tu Primer Proyecto](first-project.md)
+- **➡️ Siguiente**: [Dev Containers & Codespaces](dev-containers.md)
 
-> Validado con `azd 1.27.1` en julio de 2026.
+> Objetivo de la revisión de comando y configuración: `azd 1.37.2` (noviembre 2026). Los archivos generados dependen de la aplicación detectada; no se ejecutó despliegue en Azure en esta revisión.
 
 ## Introducción
 
-En [Tu primer proyecto](first-project.md) desplegaste una aplicación comenzando desde una plantilla. Pero la mayoría de las veces ya *tienes* una aplicación — una API Node.js, un servicio Python Flask, una aplicación web .NET — en una carpeta de tu máquina. Esta lección muestra cómo agregar azd a ese código existente para que puedas desplegarlo con `azd up`, sin plantilla requerida.
+En [Tu Primer Proyecto](first-project.md) desplegaste una aplicación comenzando desde una plantilla. Pero la mayoría de las veces ya *tienes* una aplicación — una API de Node.js, un servicio Python Flask, una aplicación web .NET — en una carpeta en tu máquina. Esta lección muestra cómo añadir azd a ese código existente para que puedas desplegarlo con `azd up`, sin necesidad de plantilla.
 
-## Objetivos de aprendizaje
+## Objetivos de Aprendizaje
 
-Al final de esta lección, tú:
-- Entenderás las tres formas de iniciar un proyecto azd
-- Ejecutarás `azd init` dentro de una base de código existente
-- Comprenderás qué hacen `azure.yaml` y la carpeta `infra/` para tu app
-- Sabrás cuándo dejar que azd genere la infraestructura o escribir la tuya propia
-- Desplegarás tu app existente en Azure con `azd up`
+Al final de esta lección, serás capaz de:
+- Entender las tres formas de iniciar un proyecto azd
+- Ejecutar `azd init` dentro de una base de código existente
+- Comprender qué hacen `azure.yaml` y la carpeta `infra/` para tu aplicación
+- Saber cuándo dejar que azd genere la infraestructura vs. escribir la tuya propia
+- Desplegar tu aplicación existente en Azure con `azd up`
 
-## Resultados de aprendizaje
+## Resultados de Aprendizaje
 
 Después de completar esta lección, podrás:
 - Inicializar azd en un proyecto que ya tienes
 - Leer y editar un archivo básico `azure.yaml`
 - Generar infraestructura inicial con `azd infra generate`
-- Elegir un host de Azure apropiado para tu app
+- Elegir un host de Azure apropiado para tu aplicación
 - Desplegar y limpiar tu propia aplicación
 
 ---
 
-## Tres formas de iniciar un proyecto azd
+## Tres Formas de Iniciar un Proyecto azd
 
 | Punto de partida | Comando | Cuándo usar |
 |----------------|---------|-------------|
-| **Desde una plantilla** | `azd init --template <name>` | Para aprender o comenzar una nueva app desde un ejemplo comprobado |
-| **Desde tu código existente** | `azd init` (en la carpeta de tu proyecto) | Ya tienes una app y quieres desplegarla |
-| **Desde un repositorio Git** | `azd init --from-code` (en un repositorio clonado) | Adaptar azd a un repositorio existente |
+| **Desde una plantilla** | `azd init --template <name> .` (directorio vacío) | Aprendizaje o comenzar una nueva aplicación desde un ejemplo probado |
+| **Desde tu código existente** | `azd init` (en tu carpeta de proyecto) | Ya tienes una aplicación y quieres desplegarla |
+| **Desde un repositorio Git** | `azd init --from-code` (en un repositorio clonado) | Adoptar azd para un repositorio existente |
 
-Ya practicaste la primera opción. Esta lección cubre la segunda — el escenario real más común.
+Ya practicaste la primera opción. Esta lección cubre la segunda — el escenario más común en el mundo real.
 
 ---
 
-## Paso 1: Ejecuta `azd init` en tu proyecto
+## Paso 1: Ejecutar `azd init` en Tu Proyecto
 
-Abre una terminal **dentro de la carpeta de tu proyecto existente** y ejecuta:
+Abre un terminal **dentro de la carpeta de tu proyecto existente** y ejecuta:
 
 ```bash
 cd my-existing-app
@@ -61,31 +61,30 @@ azd preguntará cómo quieres inicializar. Elige:
   Select a template
 ```
 
-Elige **"Use code in the current directory."** azd entonces escanea tu carpeta, detecta tu lenguaje y framework, y propone un host.
+Selecciona **"Usar código en el directorio actual."** azd entonces escanea tu carpeta, detecta tu lenguaje y framework, y propone un host.
 
 ### Lo que azd detecta
 
-azd busca señales como `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` o un `Dockerfile`, y sugiere un host de Azure acorde:
+azd busca señales de la aplicación tales como `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, o un `Dockerfile`. El flujo desde código no es un asistente general de selección de host para cada objetivo de despliegue soportado:
 
-| Tu app | Host probable detectado |
+| Tu aplicación | Host probablemente detectado |
 |----------|----------------------|
-| Aplicación Node.js / Python / .NET web | Azure App Service o Container Apps |
-| App containerizada (`Dockerfile`) | Azure Container Apps |
-| App de funciones | Azure Functions |
-| Sitio estático (salida build React/Vue) | Azure Static Web Apps |
+| Aplicación web de Node.js / Python / .NET soportada | Típicamente Azure Container Apps; inspecciona la definición generada |
+| Aplicación en contenedor (`Dockerfile`) | Azure Container Apps |
+| Aplicación Function o proyecto Static Web Apps | Usa una plantilla que coincida o crea `azure.yaml` e infraestructura si desde código no soporta tu disposición |
 
-Confirma los servicios detectados, y azd crea los archivos que necesitas.
+Confirma el/los servicio(s) detectados, y azd genera los archivos que necesitas.
 
 ---
 
-## Paso 2: Entiende qué creó azd
+## Paso 2: Entender Qué azd Creó
 
-Después de init, tendrás dos cosas nuevas en tu proyecto:
+Después de la inicialización, inspecciona `azure.yaml`. El flujo de infraestructura generada puede mantener la infraestructura implícita hasta que ejecutes `azd infra generate`; no asumas que `infra/` ya existe:
 
 ```
 my-existing-app/
 ├── azure.yaml          # ← NEW: tells azd what to deploy and where
-├── infra/              # ← NEW: Infrastructure as Code (Bicep by default)
+├── infra/              # Materialized with azd infra generate when using implicit infrastructure
 │   ├── main.bicep
 │   └── main.parameters.json
 ├── src/ (your code)    # unchanged
@@ -94,7 +93,7 @@ my-existing-app/
 
 ### `azure.yaml` — la definición del proyecto
 
-Este es el corazón de un proyecto azd. Uno mínimo se ve así:
+Este es el corazón de un proyecto azd. La siguiente **definición ilustrativa de App Service** requiere infraestructura de App Service correspondiente; no es razón para cambiar un host generado de Container Apps sin cambiar la infraestructura:
 
 ```yaml
 # azure.yaml
@@ -106,66 +105,68 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-El bloque `services` es la parte clave: cada entrada mapea una carpeta de tu código a un host en Azure. Si tu app tiene tanto frontend como API, tendrás dos servicios.
+El bloque `services` es la parte clave: cada entrada asigna una carpeta de tu código a un host en Azure. Si tu aplicación tiene tanto un frontend como una API, tendrás dos servicios.
 
-### `infra/` — tus recursos en Azure como código
+### `infra/` — tus recursos de Azure como código
 
-La carpeta `infra/` contiene archivos Bicep que definen los recursos Azure que tu app necesita (el App Service, la base de datos, etc.). No tienes que escribirlos a mano — azd genera un punto de partida funcional. *Puedes* editarlos después para agregar recursos o fortalecer seguridad (cubierto en [Capítulo 4](../chapter-04-infrastructure/README.md)).
+La carpeta `infra/` contiene archivos Bicep que definen los recursos de Azure que tu aplicación necesita (el App Service, la base de datos, etc.). No tienes que escribirlos a mano—azd genera un punto inicial funcional. Puedes *editar* estos después para añadir recursos o reforzar la seguridad (cubierto en [Capítulo 4](../chapter-04-infrastructure/README.md)).
 
-> **Consejo:** ¿Quieres ver o personalizar la infraestructura generada antes de desplegar? Ejecuta `azd infra generate` (también disponible como `azd infra synth`) para escribir la Infraestructura como Código en disco y así poder revisarla y controlarla con versiones.
+> **Consejo:** ¿Quieres ver o personalizar la infraestructura generada antes de desplegar? Ejecuta `azd infra generate` (también disponible como `azd infra synth`) para escribir la IaC en disco y poder revisarla y controlarla con versiones.
 
 ---
 
-## Paso 3: Configura lo necesario
+## Paso 3: Configura la Configuración Requerida
 
-Si tu app necesita configuraciones o secretos (cadena de conexión, clave API), no los codifiques directamente. Usa valores de entorno:
+Si tu app necesita configuraciones o secretos (una cadena de conexión, una clave API), no las codifiques directamente. Usa valores de entorno:
 
 ```bash
-# Crear un entorno
+# Create an environment
 azd env new dev
 
-# Establecer un valor no secreto
+# Set a non-secret value
 azd env set API_VERSION 1.0.0
 ```
 
-Para secretos reales, guárdalos en Key Vault y refiérete a ellos desde tu infraestructura — mira [Capítulo 3: Configuración y autenticación](../chapter-03-configuration/authsecurity.md).
+Esto almacena un valor local sólo. Para afectar la app, consúmelo explícitamente en parámetros de infraestructura, una configuración de servicio soportada, o un hook; configurar una variable arbitraria no configura el runtime desplegado.
+
+Para secretos reales, guárdalos en Key Vault y refiérete a ellos desde tu infraestructura—consulta [Capítulo 3: Configuración y Autenticación](../chapter-03-configuration/authsecurity.md).
 
 ---
 
-## Paso 4: Despliega
+## Paso 4: Desplegar
 
-Ahora usa el mismo flujo de trabajo que ya conoces:
+Ahora usa el mismo flujo que ya conoces:
 
 ```bash
-# Autenticar (requerido para azd)
+# Authenticate (required for azd)
 azd auth login
 
-# Vista previa de los recursos que se crearán
+# Preview the resources that will be created
 azd provision --preview
 
-# Provisión de infraestructura y despliegue de tu código
+# Provision infrastructure and deploy your code
 azd up
 ```
 
-Al terminar, azd imprime la URL de tu app. Verifícala como con cualquier app azd:
+Cuando termine, azd muestra la URL de tu app. Verifícala del mismo modo que cualquier app azd:
 
 ```bash
-azd show           # mostrar endpoints
-azd monitor --logs # revisar los registros si es necesario
+azd show           # show endpoints
+azd monitor --logs # check logs if needed
 ```
 
 ---
 
-## Problemas comunes en la primera ejecución
+## Problemas Comunes al Iniciar
 
 | Síntoma | Causa probable | Solución |
-|---------|--------------|----------|
-| azd no detectó mi app | Falta manifiesto (p.ej., `package.json`) | Agrega el manifiesto, o elige el host manualmente durante `azd init` |
-| Falla la compilación durante `azd up` | La app necesita un paso de compilación | Agrega `buildCommand`/`outputPath` bajo el servicio en `azure.yaml` |
-| La app inicia pero devuelve errores | Falta configuración/secreto | Establece valores con `azd env set` o conecta Key Vault |
-| Host equivocado elegido | Detección automática errónea | Edita `host:` en `azure.yaml` y vuelve a ejecutar `azd up` |
+|---------|--------------|-----|
+| azd no detectó mi app | Falta manifiesto (p. ej., `package.json`) | Añade el manifiesto, o elige el host manualmente durante `azd init` |
+| Fallo en compilación durante `azd up` | La app necesita un paso de build | Configura los scripts del paquete de la app o un hook de servicio `prepackage`; usa `dist` para salida del despliegue, no `buildCommand`/`outputPath` |
+| La app inicia pero retorna errores | Faltan configuración/secreto | Conecta valores a configuraciones del runtime en la app o a una referencia de Key Vault; `azd env set` sólo no es suficiente |
+| Host incorrecto elegido | La detección automática no coincide con tus necesidades | Cambia tanto `host:` como la infraestructura correspondiente, o elige una plantilla que coincida |
 
-Para más, consulta [Capítulo 7: Resolución de problemas](../chapter-07-troubleshooting/README.md).
+Para más, consulta [Capítulo 7: Solución de Problemas](../chapter-07-troubleshooting/README.md).
 
 ---
 
@@ -179,8 +180,8 @@ azd down --force --purge
 
 ## Resumen
 
-- `azd init` → **"Use code in the current directory"** agrega azd a una app que ya tienes.
-- `azure.yaml` mapea las carpetas de tu código a hosts de Azure; `infra/` define los recursos como Bicep.
+- `azd init` → **"Usar código en el directorio actual"** añade azd a una app que ya tienes.
+- `azure.yaml` asigna tus carpetas de código a hosts de Azure; `infra/` define los recursos como Bicep.
 - `azd infra generate` te permite revisar o personalizar la infraestructura generada.
 - Una vez inicializada, tu app existente usa el mismo flujo `azd up` / `azd down` que una app basada en plantilla.
 
@@ -189,16 +190,16 @@ azd down --force --purge
 ## 🔗 Navegación
 
 | Dirección | Lección |
-|-----------|---------|
-| **Anterior** | [Tu primer proyecto](first-project.md) |
-| **Siguiente** | [Contenedores de desarrollo y Codespaces](dev-containers.md) |
+|-----------|--------|
+| **Anterior** | [Tu Primer Proyecto](first-project.md) |
+| **Siguiente** | [Dev Containers & Codespaces](dev-containers.md) |
 
-## 📖 Recursos relacionados
+## 📖 Recursos Relacionados
 
-- [Conceptos básicos de AZD](azd-basics.md)
-- [Capítulo 4: Infraestructura como código](../chapter-04-infrastructure/README.md)
-- [Configuración y autenticación](../chapter-03-configuration/authsecurity.md)
-- [Hoja de referencia de comandos](../../resources/cheat-sheet.md)
+- [Fundamentos de AZD](azd-basics.md)
+- [Capítulo 4: Infraestructura como Código](../chapter-04-infrastructure/README.md)
+- [Configuración y Autenticación](../chapter-03-configuration/authsecurity.md)
+- [Hoja de Referencia de Comandos](../../resources/cheat-sheet.md)
 
 ---
 

@@ -1,22 +1,22 @@
-# Kapitola 1: Základy a rychlý start
+# Kapitola 1: Základy a Rychlý start
 
-**📚 Kurz**: [AZD Pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 30-45 minut | **⭐ Složitost**: Začátečník
+**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 75-120 minut včetně prvního nasazení; další cvičení zabere více času | **⭐ Složitost**: Začátečník
 
 ---
 
 ## Přehled
 
-Tato kapitola představuje základy Azure Developer CLI (azd). Naučíte se hlavní koncepty, nainstalujete nástroje a nasadíte svou první aplikaci do Azure.
+Tato kapitola představuje základy Azure Developer CLI (azd). Naučíte se základní koncepty, nainstalujete nástroje a nasadíte první aplikaci do Azure.
 
-> Ověřeno s `azd 1.27.1` v červenci 2026.
+> Cíl přezkoumání příkazů a konfigurace: `azd 1.37.2` (listopad 2026). Při přezkoumání nebylo provedeno živé nasazení Azure.
 
-## Cíle učení
+## Výukové cíle
 
-Po dokončení této kapitoly budete:
-- Rozumět tomu, co je Azure Developer CLI a jak se liší od Azure CLI
+Po dokončení této kapitoly budete umět:
+- Pochopit, co je Azure Developer CLI a jak se liší od Azure CLI
 - Nainstalovat a nakonfigurovat AZD na vaší platformě
-- Nasadit svou první aplikaci do Azure pomocí `azd up`
-- Vyčistit zdroje pomocí `azd down`
+- Nasadit první aplikaci do Azure pomocí `azd up`
+- Uklidit prostředky pomocí `azd down`
 
 ---
 
@@ -24,17 +24,17 @@ Po dokončení této kapitoly budete:
 
 | # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Základy AZD](azd-basics.md) | Hlavní koncepty, terminologie a struktura projektu | 15 min |
-| 2 | [Instalace a nastavení](installation.md) | Platformově specifické instalační průvodce | 10 min |
+| 1 | [Základy AZD](azd-basics.md) | Základní koncepty, terminologie a struktura projektu | 15 min |
+| 2 | [Instalace a nastavení](installation.md) | Průvodce instalací pro různé platformy | 10 min |
 | 3 | [Váš první projekt](first-project.md) | Prakticky: Nasazení webové aplikace do Azure | 20 min |
-| 4 | [Použijte vlastní aplikaci](bring-your-own-app.md) | Přidání azd do již existujícího projektu | 15 min |
-| 5 | [Vývojové kontejnery a Codespaces](dev-containers.md) | Reprodukovatelné azd prostředí s dev kontejnery | 15 min |
+| 4 | [Přidání vaší vlastní aplikace](bring-your-own-app.md) | Přidání azd do existujícího projektu, který už máte | 15 min |
+| 5 | [Vývojové kontejnery a Codespaces](dev-containers.md) | Reprodukovatelné prostředí azd pomocí vývojových kontejnerů | 15 min |
 
 ---
 
 ## ✅ Začněte zde: Ověřte své nastavení
 
-Než začnete, ujistěte se, že váš lokální počítač je připraven pro šablonu Kapitoly 1:
+Než začnete, ověřte, že váš lokální počítač je připraven pro šablonu Kapitoly 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Než začnete, ujistěte se, že váš lokální počítač je připraven pro š
 bash ./validate-setup.sh
 ```
 
-Pokud skript hlásí chybějící nástroje, nejprve je opravte a pak pokračujte v kapitole.
+Pokud skript hlásí chybějící nástroje, nejprve je nainstalujte a poté pokračujte v kapitole.
 
 ---
 
 ## 🚀 Rychlý start
 
 ```bash
-# Zkontrolujte instalaci
+# Check installation
 azd version
 
-# Ověřte se pro AZD
-# Volitelné: az login, pokud plánujete spouštět příkazy Azure CLI přímo
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Nasadit svou první aplikaci
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Vyčistěte po dokončení
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -75,11 +77,11 @@ azd down --force --purge
 Po dokončení této kapitoly byste měli být schopni:
 
 ```bash
-azd version              # Zobrazuje nainstalovanou verzi
-azd init --template todo-nodejs-mongo  # Inicializuje projekt
-azd up                   # Nasazuje do Azure
-azd show                 # Zobrazuje URL spuštěné aplikace
-azd down --force --purge # Čistí prostředky
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -95,8 +97,8 @@ azd down --force --purge # Čistí prostředky
 
 ## 📖 Související zdroje
 
-- [Přehled příkazů](../../resources/cheat-sheet.md)
-- [Často kladené otázky](../../resources/faq.md)
+- [Příručka příkazů](../../resources/cheat-sheet.md)
+- [Často kladené dotazy](../../resources/faq.md)
 - [Glosář](../../resources/glossary.md)
 
 ---

@@ -1,40 +1,40 @@
 # Capitolul 1: Bază & Pornire Rapidă
 
-**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 30-45 minute | **⭐ Complexitate**: Începător
+**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 75-120 minute inclusiv prima implementare; exercițiile suplimentare durează mai mult | **⭐ Complexitate**: Începător
 
 ---
 
 ## Prezentare generală
 
-Acest capitol introduce elementele fundamentale ale Azure Developer CLI (azd). Vei învăța conceptele de bază, vei instala uneltele și vei implementa prima ta aplicație în Azure.
+Acest capitol introduce elementele de bază ale Azure Developer CLI (azd). Veți învăța conceptele esențiale, veți instala instrumentele și veți implementa prima aplicație în Azure.
 
-> Validat cu `azd 1.27.1` în iulie 2026.
+> Țintă de revizuire a comenzilor și configurațiilor: `azd 1.37.2` (noiembrie 2026). Producția live Azure nu a fost rulată în timpul revizuirii.
 
 ## Obiective de învățare
 
-Finalizând acest capitol, vei:
-- Înțelege ce este Azure Developer CLI și cum diferă de Azure CLI
-- Instala și configura AZD pe platforma ta
-- Implementa prima ta aplicație în Azure cu `azd up`
+După ce parcurgeți acest capitol, veți:
+- Înțelege ce este Azure Developer CLI și cum se diferențiază de Azure CLI
+- Instala și configura AZD pe platforma dumneavoastră
+- Implementa prima aplicație în Azure cu `azd up`
 - Curăța resursele cu `azd down`
 
 ---
 
 ## 📚 Lecții
 
-| # | Lecție | Descriere | Timp |
+| # | Lecția | Descriere | Timp |
 |---|--------|-------------|------|
-| 1 | [Bazele AZD](azd-basics.md) | Concepte principale, terminologie și structură de proiect | 15 min |
+| 1 | [Noțiuni de bază AZD](azd-basics.md) | Concepte principale, terminologie și structură de proiect | 15 min |
 | 2 | [Instalare & Configurare](installation.md) | Ghiduri de instalare specifice platformei | 10 min |
-| 3 | [Primul Tău Proiect](first-project.md) | Practic: Implementarea unei aplicații web în Azure | 20 min |
-| 4 | [Adaugă-ți Propria Aplicație](bring-your-own-app.md) | Adaugă azd într-un proiect existent pe care îl ai deja | 15 min |
-| 5 | [Containere Dev & Codespaces](dev-containers.md) | Medii azd reproductibile cu containere dezvoltare | 15 min |
+| 3 | [Primul tău proiect](first-project.md) | Practic: Implementarea unei aplicații web în Azure | 20 min |
+| 4 | [Adu-ți propria aplicație](bring-your-own-app.md) | Adăugarea azd într-un proiect existent pe care îl aveți deja | 15 min |
+| 5 | [Containere de dezvoltare & Codespaces](dev-containers.md) | Medii azd reproducibile cu containere de dezvoltare | 15 min |
 
 ---
 
-## ✅ Începe aici: Validează-ți configurarea
+## ✅ Începe aici: Verifică-ți configurarea
 
-Înainte de a începe, confirmă că mașina ta locală este pregătită pentru șablonul Capitolului 1:
+Înainte să începi, confirmă că mașina ta locală este pregătită pentru șablonul Capitolului 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Finalizând acest capitol, vei:
 bash ./validate-setup.sh
 ```
 
-Dacă scriptul raportează unelte lipsă, rezolvă acele probleme mai întâi, apoi continuă cu capitolul.
+Dacă scriptul raportează instrumente lipsă, rezolvă acele probleme mai întâi, apoi continuă cu capitolul.
 
 ---
 
-## 🚀 Pornire Rapidă
+## 🚀 Pornire rapidă
 
 ```bash
-# Verificați instalarea
+# Check installation
 azd version
 
-# Autentificați-vă pentru AZD
-# Opțional: az login dacă intenționați să rulați comenzi Azure CLI direct
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Implementați prima aplicație
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Curățați după ce terminați
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,14 +74,14 @@ azd down --force --purge
 
 ## ✅ Criterii de succes
 
-După finalizarea acestui capitol, ar trebui să poți:
+După ce termini acest capitol, ar trebui să poți:
 
 ```bash
-azd version              # Afișează versiunea instalată
-azd init --template todo-nodejs-mongo  # Initializează proiectul
-azd up                   # Realizează implementarea în Azure
-azd show                 # Afișează URL-ul aplicației în execuție
-azd down --force --purge # Curăță resursele
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -88,14 +90,14 @@ azd down --force --purge # Curăță resursele
 
 | Direcție | Capitol |
 |-----------|---------|
-| **Următorul** | [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/README.md) |
+| **Următor** | [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/README.md) |
 | **Sari la** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Resurse conexe
 
-- [Fișa de comenzi rapide](../../resources/cheat-sheet.md)
+- [Fișă de comenzi](../../resources/cheat-sheet.md)
 - [Întrebări frecvente](../../resources/faq.md)
 - [Glosar](../../resources/glossary.md)
 

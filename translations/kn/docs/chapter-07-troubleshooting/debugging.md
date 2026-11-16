@@ -1,75 +1,70 @@
-# AZD ನಿಯೋಜನೆಗಳಿಗಾಗಿ ಡಿಬಗಿಂಗ್ ಮಾರ್ಗದರ್ಶನ
+# AZD ನಿಯೋಜನೆಗಳಿಗಾಗಿ ಡಿಬಗ್ ಮಾರ್ಗದರ್ಶನ
 
-**Chapter Navigation:**
-- **📚 Course Home**: [ಆರಂಭಿಕರಿಗಾಗಿ AZD](../../README.md)
-- **📖 Current Chapter**: ಅಧ್ಯಾಯ 7 - ಸಮಸ್ಯೆ ಪರಿಹಾರ ಮತ್ತು ಡಿಬಗಿಂಗ್
-- **⬅️ Previous**: [ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳು](common-issues.md)
-- **➡️ Next**: [AI-ನಿರ್ದಿಷ್ಟ ಸಮಸ್ಯೆ ಪರಿಹಾರ](ai-troubleshooting.md)
-- **🚀 Next Chapter**: [ಅಧ್ಯಾಯ 8: ಉತ್ಪಾದನೆ ಮತ್ತು ಎಂಟರ್‌ಪ್ರೈಸ್ ಮಾದರಿಗಳು](../chapter-08-production/production-ai-practices.md)
+**ಅಧ್ಯಾಯ ನ್ಯಾವಿಗೇಶನ್:**
+- **📚 ಕೋರ್ಸ್ ಹೋಮ್**: [ಬೆಗಿನರ್ಸ್ ಗೆ AZD](../../README.md)
+- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 7 - ಸಮಸ್ಯೆ ಪರಿಹಾರ ಮತ್ತು ಡಿಬಗಿಂಗ್
+- **⬅️ ಹಿಂದಿನದು**: [ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳು](common-issues.md)
+- **➡️ ಮುಂದಿನದು**: [AI-ವಿಶೇಷ ಸಮಸ್ಯೆ ಪರಿಹಾರ](ai-troubleshooting.md)
+- **🚀 ಮುಂದಿನ ಅಧ್ಯಾಯ**: [ಅಧ್ಯಾಯ 8: ಉತ್ಪಾದನೆ ಮತ್ತು ಎಂಟರ್ಪ್ರೈಸು ಮಾದರಿಗಳು](../chapter-08-production/production-ai-practices.md)
 
 ## ಪರಿಚಯ
 
-ಈ ಸಮಗ್ರ ಮಾರ್ಗದರ್ಶಿ Azure Developer CLI ನಿಯೋಜನೆಗಳ ಸವಾಲುಗಳನ್ನು ನಿದಾನ ಮಾಡಲು ಮತ್ತು ಪರಿಹರಿಸಲು ಉನ್ನತ ಮಟ್ಟದ ಡಿಬಗಿಂಗ್ ತಂತ್ರಗಳು, ಸಾಧನಗಳು ಮತ್ತು ತಂತ್ರಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ. ನಿಯತಕಾಲಿಕ ಸಮಸ್ಯೆ ಪರಿಹಾರ ವಿಧಾನಶಾಸ್ತ್ರಗಳು, ಲಾಗ್ ವಿಶ್ಲೇಷಣೆ ತಂತ್ರಗಳು, ಕಾರ್ಯಕ್ಷಮತೆ ಪ್ರೊಫೈಲಿಂಗ್ ಮತ್ತು ಉನ್ನತ ದ್ದಯೋಗೋಪಾಯ ಸಾಧನಗಳನ್ನು ಕಲಿಯಿರಿ ಮತ್ತು ನಿಯೋಜನೆ ಮತ್ತು ರನ್‍ಟೈಮ್ ಸಮಸ್ಯೆಗಳನ್ನು ಪರಿಣಾಮಕಾರಿಯಾಗಿ ಪರಿಹರಿಸಿ.
+ಈ ವಿಸ್ತೃತ ಮಾರ್ಗದರ್ಶನವು Azure ಡೆವಲಪರ್ CLI ನಿಯೋಜನೆಗಳ ಸೌಲಭ್ಯಗಳಾದ ಕಠಿಣ ಸಮಸ್ಯೆಗಳನ್ನು ಗುರುತಿಸಿ ಪರಿಹರಿಸಲು ಸುಧಾರಿತ ಡಿಬಗಿಂಗ್ ತಂತ್ರಗಳು, ಸಾಧನಗಳು ಮತ್ತು ತಾಂತ್ರಿಕಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ. ಸಿಸ್ಟಮ್ಯಾಟಿಕ್ ಸಮಸ್ಯೆ ಪರಿಹಾರ ವಿಧಾನಗಳು, ಲಾಗ್ ವಿಶ್ಲೇಷಣೆ ತಂತ್ರಗಳು, ಕಾರ್ಯಕ್ಷಮತೆ ಪ್ರೊಫೈಲಿಂಗ್ ಮತ್ತು ಸುಧಾರಿತ ನಿದಾನಾತ್ಮಕ ಸಾಧನಗಳನ್ನು ಕಲಿಯಿರಿ ಮತ್ತು ನಿಯೋಜನೆ ಹಾಗೂ ರನ್‌ಟೈಮ್ ಸಮಸ್ಯೆಗಳನ್ನು ಪರಿಣಾಮಕಾರಿಯಾಗಿ ಪರಿಹರಿಸಿ.
 
-## ಕಲಿಕೆಯ ಗುರಿಗಳು
+## ಕಲಿಕೋದ್ದೇಶಗಳು
 
-ಈ ಮಾರ್ಗದರ್ಶಿಯನ್ನು ಪೂರ್ಣಗೊಳಿಸುವ ಮೂಲಕ ನೀವು:
-- Azure Developer CLI ಸಮಸ್ಯೆಗಳಿಗೆ ವ್ಯವಸ್ಥಿತ ಡಿಬಗಿಂಗ್ ವಿಧಾನಗಳನ್ನು ಪರಿಣತಿಗೊಳಿಸಬಹುದು
-- ಉನ್ನತ ಲಾಗಿಂಗ್ ಸಂರಚನೆ ಮತ್ತು ಲಾಗ್ ವಿಶ್ಲೇಷಣೆ ತಂತ್ರಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುತ್ತೀರಿ
-- ಕಾರ್ಯಕ್ಷಮತೆ ಪ್ರೊಫೈಲಿಂಗ್ ಮತ್ತು ನಿಗಾ ಯುಕ್ತತೆಯ ತಂತ್ರಗಳನ್ನು ಅನುಷ್ಟಾನಗೊಳಿಸುತ್ತೀರಿ
-- ಸಂಕೀರ್ಣ ಸಮಸ್ಯೆ ಪರಿಹಾರಕ್ಕಾಗಿ Azure ನಿರ್ಣಾಯಕ ಸಾಧನಗಳು ಮತ್ತು ಸೇವೆಗಳನ್ನು ಬಳಸುತ್ತೀರಿ
-- ನೆಟ್‌ವರ್ಕ್ ಡಿಬಗಿಂಗ್ ಮತ್ತು ಭದ್ರತಾ ಸಮಸ್ಯೆ ಪರಿಹಾರ ತಂತ್ರಗಳನ್ನು ಅನ್ವಯಿಸುತ್ತೀರಿ
-- ಪ್ರೊಆಕ್ಟಿವ್ ಸಮಸ್ಯೆ ಪತ್ತೆಗೊಳ್ಳುವಿಕೆಗೆ ಸಂಪೂರ್ಣ ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ಅಲರ್ಟ್ ಸಂರಚನೆ ಮಾಡುತ್ತೀರಿ
+ಈ ಮಾರ್ಗದರ್ಶನವನ್ನು ಪೂರ್ಣಗೊಳಿಸುವ ಮೂಲಕ ನೀವು:
+- Azure ಡೆವಲಪರ್ CLI ಸಮಸ್ಯೆಗಳಿಗಾಗಿ ಸಿಸ್ಟಮ್ಯಾಟಿಕ್ ಡಿಬಗಿಂಗ್ ವಿಧಾನಗಳನ್ನು ಮಾಸ್ಟರ್ ಮಾಡಬಹುದು
+- ಸುಧಾರಿತ ಲಾಗಿಂಗ್ ಸಂರಚನೆ ಮತ್ತು ಲಾಗ್ ವಿಶ್ಲೇಷಣೆ ತಂತ್ರಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ
+- ಕಾರ್ಯಕ್ಷಮತೆ ಪ್ರೊಫೈಲಿಂಗ್ ಮತ್ತುamonitoring ತಂತ್ರಗಳನ್ನು ನಿರ್ವಹಿಸಿ
+- ಕುಂಚಿನ ಸಮಸ್ಯೆ ಪರಿಹಾರಕ್ಕಾಗಿ Azure ನಿದಾನಾತ್ಮಕ ಸಾಧನಗಳು ಮತ್ತು ಸೇವೆಗಳನ್ನು ಬಳಸಿ
+- ನೆಟ್‌ವರ್ಕ್ ಡಿಬಗಿಂಗ್ ಮತ್ತು ಭದ್ರತಾ ಸಮಸ್ಯೆ ಪರಿಹಾರ ತಂತ್ರಗಳನ್ನು ಅನ್ವಯಿಸಿ
+- ಪ್ರೋಆಕ್ಟಿವ್ ಸಮಸ್ಯೆ ಗುರುತಿಸುವಿಕೆಗಾಗಿ ಸಮಗ್ರ ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ಅಲರ್ಟಿಂಗ್ ಸಂರಚನೆ ಮಾಡಿ
 
-## ಕಲಿಕೆಯ ಫಲಿತಾಂಶಗಳು
+## ಕಲಿಕಾ ಫಲಿತಾಂಶಗಳು
 
-ಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ, ನೀವು ಶಕ್ತಿರಾಗಿರುತ್ತೀರಿ:
-- ಸಂಕೀರ್ಣ ನಿಯೋಜನೆ ಸಮಸ್ಯೆಗಳನ್ನು ವ್ಯವಸ್ಥಿತವಾಗಿ ಡಿಬಗ್ ಮಾಡಲು TRIAGE ವಿಧಾನವನ್ನು ಅನ್ವಯಿಸುವುದು
-- ಸುದೀರ್ಘ ಲಾಗಿಂಗ್ ಮತ್ತು ಟ್ರೇಸಿಂಗ್ ಮಾಹಿತಿಯನ್ನು ಸಂರಚಿಸಲು ಮತ್ತು ವಿಶ್ಲೇಷಿಸಲು
-- Azure Monitor, Application Insights ಮತ್ತು ನಿರ್ಣಾಯಕ ಸಾಧನಗಳನ್ನು ಪರಿಣಾಮಕಾರಿಯಾಗಿ ಬಳಸಲು
-- ನೆಟ್‌ವರ್ಕ್ ಸಂಪರ್ಕ, ಪ್ರಮಾಣೀಕರಣ ಮತ್ತು ಅನುಮತಿ ಸಮಸ್ಯೆಗಳನ್ನು ಸ್ವತಂತ್ರವಾಗಿ ಡಿಬಗ್ ಮಾಡಲು
-- ಕಾರ್ಯಕ್ಷಮತೆ ನಿಗಾ ಮತ್ತು ಆಪ್ಟಿಮೈಜೇಶನ್ ತಂತ್ರಗಳನ್ನು ಜಾರಿಗೆ ತರಲು
-- ಪುನರಾವರ್ತಿಯಾಗುವ ಸಮಸ್ಯೆಗಳಿಗಾಗಿ ಕಸ್ಟಮ್ ಡಿಬಗಿಂಗ್ ಸ್ಕ್ರಿಪ್ಟುಗಳು ಮತ್ತು ಸ್ವಯಂಚಾಲನವನ್ನು ರಚಿಸಲು
+ಪೂರ್ಣಗೊಂಡ ಮೇಲೆ, ನೀವು ಈ ಸಾಮರ್ಥ್ಯಗಳನ್ನು ಹೊಂದಿರುತ್ತೀರಿ:
+- ಸಂಕೀರ್ಣ ನಿಯೋಜನೆ ಸಮಸ್ಯೆಗಳನ್ನು ಸಿಸ್ಟಮ್ಯಾಟಿಕ್ ಆಗಿ ಡಿಬಗ್ ಮಾಡಲು TRIAGE ವಿಧಾನವನ್ನು ಅನ್ವಯಿಸಿ
+- ಸಮಗ್ರ ಲಾಗಿಂಗ್ ಮತ್ತು ಟ್ರೇಸಿಂಗ್ ಮಾಹಿತಿಯನ್ನು ಸಂರಚಿಸಿ ಮತ್ತು ವಿಶ್ಲೇಷಿಸಿ
+- Azure Monitor, Application Insights ಮತ್ತು ನಿದಾನಾತ್ಮಕ ಸಾಧನಗಳನ್ನು ಪರಿಣಾಮಕಾರಿಯಾಗಿ ಬಳಸಿ
+- ನೆಟ್‌ವರ್ಕ್ ಸಂಪರ್ಕ, ಪ್ರಾಮಾಣೀಕರಣ ಮತ್ತು ಪರವಾನಗಿ ಸಮಸ್ಯೆಗಳನ್ನು ಸ್ವತಂತ್ರವಾಗಿ ಡಿಬಗ್ ಮಾಡಿ
+- ಕಾರ್ಯಕ್ಷಮತೆ ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ಸುಧಾರಣಾ ತಂತ್ರಗಳನ್ನು ಜಾರಿಗೊಳಿಸಿ
+- ಮರುನಿವೃತ್ತಿಯಾಗುವ ಸಮಸ್ಯೆಗಳಿಗೆ ಕಸ್ಟಮ್ ಡಿಬಗಿಂಗ್ სკ್ರಿಪ್ಟ್‌ಗಳು ಮತ್ತು ಸ್ವಯಂಚಾಲಿತೀಕರಣ ರಚಿಸಿ
 
 ## ಡಿಬಗಿಂಗ್ ವಿಧಾನಶಾಸ್ತ್ರ
 
-### TRIAGE ಕ್ರಮ
-- **ಸ**ಮಯ: ಸಮಸ್ಯೆ ಯಾವಾಗ ಆರಂಭವಾಯಿತು?
-- **ಪ**ುನರಾವರ್ತಿಸು: ನೀವು ಇದನ್ನು ನಿರಂತರವಾಗಿ ಪುನರಾವರ್ತಿಸಬಹುದಿದ್ದೀರಾ?
-- **ವ**ಿಭಜಿಸು: ಯಾವ ಘಟಕ ವಿಫಲವಾಗುತ್ತಿದೆ?
-- **ವ**ಿಶ್ಲೇಷಣೆ: ಲಾಗ್‌ಗಳು ನಮಗೆ 무엇 ಹೇಳಿಸುತ್ತವೆ?
-- **ಸ**ಂಗ್ರಹಿಸಿ: ಸಂಬಂಧಪಟ್ಟ ಎಲ್ಲಾ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸಿ
-- **ಮ**ೇಲಕ್ಕೆತ್ತಿ: ಹೆಚ್ಚುವರಿ ಸಹಾಯವನ್ನು ಯಾವಾಗ ಕೇಳಬೇಕು?
+### TRIAGE ವಿಧಾನ
+- **T**ೈಮ್: ಸಮಸ್ಯೆ ಯಾವಾಗ ಪ್ರಾರಂಭವಾಯಿತು?
+- **R**ೀಪ್ರೊಡ್ಯೂಸ್: ನೀವು ಅದನ್ನು ನಿರಂತರವಾಗಿ ಪುನರಾವರ್ತಿಸಬಹುದೆ?
+- **I**ಸೋಲೇಟು: ಯಾವ ઘટಕ ವಿಫಲವಾಗಿದೆ?
+- **A**ನಾಲಿಸಿಸ್: ಲಾಗ್‌ಗಳು ನಮಗೆ ಏನು ಹೇಳುತ್ತವೆ?
+- **G**ದಾಯರಿ: ಎಲ್ಲಾ ಸಂಬಂಧಿತ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸಿ
+- **E**ಸ್ಕಾಲೇಟ್: ಹೆಚ್ಚುವರಿ ಸಹಾಯ ಬೇಕಾಗುವ ಸಮಯ
 
-## ಡೀಬಗ್ ಮೋಡ್ ಸಕ್ರಿಯಗೊಳಿಸುವುದು
+## ಡಿಬಗ್ ಮೋಡ್ ಸಕ್ರಿಯಗೊಳಿಸುವಿಕೆ
 
-### ಪರಿಸರ ಚರಗಳು
+> **ವ್ಯಾಪ್ತಿ:** ಇವು ನಿದಾನಾತ್ಮಕ ಉದಾಹರಣೆಗಳು ಮಾರ್ಪಡಿಸಲು; ಪೂರೈಕೆ ಮಾಡಿದ ಸ್ಕ್ರಿಪ್ಟ್ ಸಂಗ್ರಹವಲ್ಲ. ಸಂಪನ್ಮೂಲ ಹೆಸರುಗಳು/ಐಡಿಗಳಲ್ಲಿ ಬದಲಾವಣೆ ಮಾಡಿ; ಶೆಲ್ ಬ್ಲಾಕ್‌ಗಳಿಗೆ Bash ಬಳಸಿ. `--debug` ಔಟ್‌ಪುಟ್ ಮತ್ತು ಪರಿಸರ ಮೌಲ್ಯಗಳಲ್ಲಿ ಸಂವೇದನಾಶೀಲ ಮಾಹಿತಿ ಇರಬಹುದು—ಹಂಚುವ ಮುನ್ನ ಅವಲೋಕಿಸಿ/ಸಂಪಾದಿಸಿ. ನಿಯೋಜನೆ, ಹಿಂದೂಪಡಿಸುವಿಕೆ ಅಥವಾ ಸಂರಚನೆ ಬದಲಾಯಿಸುವ ಉದಾಹರಣೆಗಳಿಗೆ ಸ್ಪಷ್ಟ ಕಾರ್ಯಾಚರಣೆ ಅನುಮೋದನೆ ಅಗತ್ಯ.
+
+### ಪರಿಸರ چلಕಗಳು
 ```bash
-# ವಿಸ್ತೃತ ಡಿಬಗಿಂಗ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Azure CLI ಡಿಬಗಿಂಗ್
-export AZURE_CLI_DIAGNOSTICS=true
-
-# ಸ್ವಚ್ಛ ಫಲಿತಾಂಶಕ್ಕಾಗಿ ಟೆಲಿಮೆಟ್ರಿಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### ಡೀಬಗ್ ಸಂರಚನೆ
+### ಡಿಬಗ್ ಸಂರಚನೆ
 ```bash
-# ಡಿಬಗ್ ಸಂರಚನೆಯನ್ನು ಜಾಗತಿಕವಾಗಿ ಹೊಂದಿಸಿ
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# ಟ್ರೇಸ್ ಲಾಗಿಂಗ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
 
-## 📊 ಲಾಗ್ ವಿಶ್ಲೇಷಣಾ ತಂತ್ರಗಳು
+`azd config set` ಅಥವ ಸ್ವಂತ ಕೀಗಳನ್ನು ಸಂಗ್ರಹಿಸಬಹುದು; ಅದರಿಂದ `debug.enabled`, `debug.logLevel` ಅಥವಾ `trace.outputPath` ಬೆಂಬಲಿತ ಸೆಟ್ಟಿಂಗ್‌ಗಳಾಗುವುದಿಲ್ಲ. ಬಿಡುಗಡೆಯಾದ ಆಜ್ಞೆಯ `--debug` ಧ್ವಜವನ್ನು ಬಳಸಿ.
+
+## 📊 ಲಾಗ್ ವಿಶ್ಲೇಷಣೆ ತಂತ್ರಗಳು
 
 ### ಲಾಗ್ ಮಟ್ಟಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು
 ```
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### ರಚಿತ ಲಾಗ್ ವಿಶ್ಲೇಷಣೆ
+### ಸಂರಚಿತ ಲಾಗ್ ವಿಶ್ಲೇಷಣೆ
 ```bash
-# azd monitor ಮೂಲಕ Azure Monitor ನಲ್ಲಿ ಲಾಗ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# ನೇರ ಸಮಯದಲ್ಲಿ ಅಪ್ಲಿಕೇಶನ್ ಲಾಗ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# ವಿವರಣಾತ್ಮಕ ಲಾಗ್ ವಿಶ್ಲೇಷಣೆಯಿಗಾಗಿ, ನಿಮ್ಮ App Service ಅಥವಾ Container App ಜೊತೆ Azure CLI ಅನ್ನು ಬಳಸಿ:
-# App Service ಲಾಗ್‌ಗಳು
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Container App ಲಾಗ್‌ಗಳು
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# ವಿಶ್ಲೇಷಣೆಯಿಗಾಗಿ Application Insights ಲಾಗ್‌ಗಳನ್ನು ರಫ್ತು ಮಾಡಿ
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
-### ಲಾಗ್ ಸಂಬಂಧ
+### ಲಾಗ್ ಸಂಪರ್ಕ
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Azure Monitor ಅನ್ನು ಉಪಯೋಗಿಸಿ ಸೇವೆಗಳಾದ್ಯಂತ ಲಾಗ್‌ಗಳನ್ನು ಪರಸ್ಪರ ಸಂಬಂಧಗೊಳಿಸಿ
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Application Insights ನಲ್ಲಿ ಸಂಬಂಧಿತ ಲಾಗ್‌ಗಳನ್ನು ಹುಡುಕಿ
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Azure ಚಟುವಟಿಕೆ ಲಾಗ್‌ಗಳನ್ನು ಹುಡುಕಿ
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ ಉನ್ನತ ಡೀಬಗಿಂಗ್ ಉಪಕರಣಗಳು
+## 🛠️ ಸುಧಾರಿತ ಡಿಬಗಿಂಗ್ ಸಾಧನಗಳು
 
 ### Azure ಸಂಪನ್ಮೂಲ ಗ್ರಾಫ್ ಪ್ರಶ್ನೆಗಳು
 ```bash
-# ಟ್ಯಾಗ್‌ಗಳ ಮೂಲಕ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಶೋಧಿಸಿ
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# ವಿಫಲವಾದ ನಿಯೋಜನೆಗಳನ್ನು ಹುಡುಕಿ
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# ಸಂಪನ್ಮೂಲದ ಆರೋಗ್ಯವನ್ನು ಪರಿಶೀಲಿಸಿ
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### ನೆಟ್‌ವರ್ಕ್ ಡಿಬಗಿಂಗ್
 ```bash
-# ಸೇವೆಗಳ ನಡುವೆ ಸಂಪರ್ಕವನ್ನು ಪರೀಕ್ಷಿಸಿ
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# ಬಳಕೆ
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
 ### ಕಂಟೈನರ್ ಡಿಬಗಿಂಗ್
 ```bash
-# ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್ ಸಮಸ್ಯೆಗಳನ್ನು ಡಿಬಗ್ ಮಾಡಿ
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -183,10 +180,10 @@ debug_container() {
 
 ### ಡೇಟಾಬೇಸ್ ಸಂಪರ್ಕ ಡಿಬಗಿಂಗ್
 ```bash
-# ಡೇಟಾಬೇಸ್ ಸಂಪರ್ಕವನ್ನು ಡೀಬಗ್ ಮಾಡಿ
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -202,24 +199,13 @@ debug_database() {
 
 ## 🔬 ಕಾರ್ಯಕ್ಷಮತೆ ಡಿಬಗಿಂಗ್
 
-### ಅಪ್ಲಿಕೇಶನ್ ಕಾರ್ಯಕ್ಷಮತೆ ಮೇಲ್ವಿಚಾರಣೆ
+### ಅಪ್ಲಿಕೇಶನ್ ಕಾರ್ಯಕ್ಷಮತೆಯ ಮಾನಿಟರಿಂಗ್
 ```bash
-# Application Insights ಡಿಬಗಿಂಗ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# ಕಸ್ಟಮ್ ಕಾರ್ಯಕ್ಷಮತೆ ಮೇಲ್ವಿಚಾರಣೆ
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -236,33 +224,31 @@ monitor_performance() {
 }
 ```
 
-### ಸಂಪನ್ಮೂಲ ಬಳಕೆಯ ವಿಶ್ಲೇಷಣೆ
+### ಸಂಪನ್ಮೂಲ ಉಪಯೋಗ ವಿಶ್ಲೇಷಣೆ
 ```bash
-# ಸಂಪನ್ಮೂಲ ಬಳಕೆಯನ್ನು ನಿಗಾ ಮಾಡಿ
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
 ```
 
-## 🧪 ಪರೀಕ್ಷೆ ಮತ್ತು ಮಾನ್ಯತೆ
+## 🧪 ಪರೀಕ್ಷೆ ಮತ್ತು ಪರಿಶೀಲನೆ
 
-### ಇಂಟಿಗ್ರೇಶನ್ ಟೆಸ್ಟ್ ಡಿಬಗಿಂಗ್
+### ಏಕೀಕರಣ ಪರೀಕ್ಷೆ ಡಿಬಗಿಂಗ್
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# ಡೀಬಗ್ ಪರಿಸರವನ್ನು ಸೆಟ್ ಮಾಡಿ
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# ಸೇವೆಯ ಎಂಡ್ಪಾಯಿಂಟ್‌ಗಳನ್ನು ಪಡೆಯಿರಿ
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# ಆರೋಗ್ಯ ಎಂಡ್ಪಾಯಿಂಟ್‌ಗಳನ್ನು ಪರೀಕ್ಷಿಸಿ
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# ಟೆಸ್ಟ್‌ಗಳನ್ನು ಓಡಿಸಿ
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# ಕಸ್ಟಮ್ ಇಂಟಿಗ್ರೇಶನ್ ಟೆಸ್ಟ್‌ಗಳನ್ನು ಓಡಿಸಿ
+# Run custom integration tests
 npm run test:integration
 ```
 
-### ಡಿಬಗಿಂಗ್ ಗಾಗಿ ಲೋಡ್ ಟೆಸ್ಟಿಂಗ್
+### ಲೋಡ್ ಪರೀಕ್ಷೆ ಡಿಬಗಿಂಗ್
 ```bash
-# ಕಾರ್ಯಕ್ಷಮತೆಯ ಅಡೆತಡೆಗಳನ್ನು ಗುರುತಿಸಲು ಸರಳ ಲೋಡ್ ಪರೀಕ್ಷೆ
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Apache Bench ಬಳಸಿ (ಸ್ಥಾಪಿಸಲು: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # ಪ್ರಮುಖ ಗಣಕಾಂಶಗಳನ್ನು ಹೊರತೆಗೆಯಿರಿ
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # ವಿಫಲತೆಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಿ
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
 ## 🔧 ಮೂಲಸೌಕರ್ಯ ಡಿಬಗಿಂಗ್
 
-### Bicep ಟೆಂಪ್ಲೇಟು ಡಿಬಗಿಂಗ್
+### Bicep ಟೆಂಪ್ಲೇಟ್ ಡಿಬಗಿಂಗ್
 ```bash
-# ವಿವರವಾದ ಔಟ್‌ಪುಟ್‌ೊಂದಿಗೆ Bicep ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಮಾನ್ಯಗೊಳಿಸಿ
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # ವ್ಯಾಕರಣ ಪರಿಶೀಲನೆ
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # ಲಿಂಟ್ ಪರಿಶೀಲನೆ
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # What-if ನಿಯೋಜನೆ
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# ಟೆಂಪ್ಲೇಟು ನಿಯೋಜನೆಯನ್ನು ಡಿಬಗ್ ಮಾಡಿ
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,52 +361,44 @@ debug_deployment() {
 
 ### ಸಂಪನ್ಮೂಲ ಸ್ಥಿತಿ ವಿಶ್ಲೇಷಣೆ
 ```bash
-# ಅಸಂಗತತೆಗಳಿಗಾಗಿ ಸಂಪನ್ಮೂಲಗಳ ಸ್ಥಿತಿಗಳನ್ನು ವಿಶ್ಲೇಷಿಸಿ
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # ಎಲ್ಲಾ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಅವುಗಳ ಸ್ಥಿತಿಗಳೊಡನೆ ಪಟ್ಟಿ ಮಾಡಿ
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # ವಿಫಲಗೊಂಡಿರುವ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
 ## 🔒 ಭದ್ರತಾ ಡಿಬಗಿಂಗ್
 
-### ಪ್ರಾಮಾಣೀಕರಣ ಹರಿವು ಡಿಬಗಿಂಗ್
+### ಪ್ರಾಮಾಣೀಕರಣ ವಹಿವಾಟು ಡಿಬಗಿಂಗ್
 ```bash
-# Azure ಪ್ರಮಾಣೀಕರಣದ ಡಿಬಗ್
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # JWT ಟೋಕನ್ ಡಿಕೋಡ್ ಮಾಡಿ (jq ಮತ್ತು base64 ಅಗತ್ಯವಿದೆ)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# ಕೀ ವಾಲ್ಟ್ ಪ್ರವೇಶದ ಡಿಬಗ್
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,14 +416,14 @@ debug_keyvault() {
 
 ### ನೆಟ್‌ವರ್ಕ್ ಭದ್ರತಾ ಡಿಬಗಿಂಗ್
 ```bash
-# ನೆಟ್‌ವರ್ಕ್ ಸುರಕ್ಷತಾ ಗುಂಪುಗಳನ್ನು ಡೀಬಗ್ ಮಾಡಿ
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # ಸುರಕ್ಷತಾ ನಿಯಮಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 ಅಪ್ಲಿಕೇಶನ್-ನಿರ್ದಿಷ್ಟ ಡಿಬಗಿಂಗ್
+## 📱 ಅಪ್ಲಿಕೇಶನ್-ವಿಶೇಷ ಡಿಬಗಿಂಗ್
 
-### Node.js ಅಪ್ಲಿಕೇಶನ್ ಡಿಬಗಿಂಗ್
+### ನೋಡ್.js ಅಪ್ಲಿಕೇಶನ್ ಡಿಬಗಿಂಗ್
 ```javascript
-// debug-middleware.js - Express ಡಿಬಗಿಂಗ್ ಮಿಡ್‌ಲ್ವೇರ್
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // ಅನುರೋಧದ ವಿವರಗಳನ್ನು ಲಾಗ್ ಮಾಡಿ
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // ಪ್ರತಿಕ್ರಿಯೆಗಳನ್ನು ಲಾಗ್ ಮಾಡಲು res.json ಅನ್ನು ಓವರ್‌ರೈಡ್ ಮಾಡಿ
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### ಡೇಟಾಬೇಸ್ ಪ್ರಶ್ನೆ ಡಿಬಗಿಂಗ್
+### ಡೇಟಾಬೇಸ್ ಕ್ವೇರಿ ಡಿಬಗಿಂಗ್
 ```javascript
-// database-debug.js - ಡೇಟಾಬೇಸ್ ಡೀಬಗಿಂಗ್ ಉಪಕರಣಗಳು
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 ತುರ್ತು ಡಿಬಗಿಂಗ್ ಪ್ರಕ್ರಿಯೆಗಳು
+## 🚨 ತುರ್ತು ಪರಿಸ್ಥಿತಿಗಳಲ್ಲಿ ಡಿಬಗಿಂಗ್ ವಿಧಾನಗಳು
 
-### ಉತ್ಪಾದನಾ ಸಮಸ್ಯೆಗಳ ಪ್ರತಿಕ್ರೀಯೆ
+### ಉತ್ಪಾದನಾ ಸಮಸ್ಯೆ ಪ್ರತಿಕ್ರಿಯೆ
 ```bash
 #!/bin/bash
-# emergency-debug.sh - ತುರ್ತು ಉತ್ಪಾದನಾ ಡಿಬಗಿಂಗ್
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# ಸರಿಯಾದ ಪರಿಸರಕ್ಕೆ ಬದಲಾಯಿಸಿ
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# ಅತ್ಯವಶ್ಯಕ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸಿ
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# ದೋಷ ಲಾಗ್ಗಳಿಗಾಗಿ Azure Monitor ಅನ್ನು ಬಳಸಿ
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### ರೋಲ್‌ಬ್ಯಾಕ್ ಪ್ರಕ್ರಿಯೆಗಳು
+### ಹಿನ್ನಡೆಯ ನಿರ್ವಹಣೆ ವಿಧಾನಗಳು
 ```bash
-# ವೇಗದ ರೋಲ್ಬ್ಯಾಕ್ ಸ್ಕ್ರಿಪ್ಟ್
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # ಪರಿಸರ ಬದಲಾವಣೆ
+    # Switch environment
     azd env select "$environment"
     
-    # Git ಬಳಸಿ ರೋಲ್ಬ್ಯಾಕ್ (AZDನಲ್ಲಿ ಒಳಗೊಂಡಿರುವ ರೋಲ್ಬ್ಯಾಕ್ ಇಲ್ಲ)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # ರೋಲ್ಬ್ಯಾಕ್ ಪರಿಶೀಲಿಸಿ
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # ಪ್ರಮುಖ ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗಳನ್ನು ಪರೀಕ್ಷಿಸಿ
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 ಡಿಬಗಿಂಗ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ಗಳು
+ಈ ಕೋಡ್-ಮಾತ್ರ ಹಿನ್ನಡೆಯ ಮೂಲಕ ಮೂಲಸೌಕರ್ಯ, ಡೇಟಾಬೇಸ್ ಮಿಗ್ರೇಶನ್ಗಳು ಅಥವಾ ರಹಸ್ಯಗಳನ್ನು ಹಿಂಪಡೆಯುವುದಿಲ್ಲ. ಸ್ವಚ್ಛವಾದ ವರ್ಕ್‌ಟ್ರೀ ಬಳಸಿ, ಪ್ರಾರಂಭಿಕ ಕಮಿಟ್ ದಾಖಲಿಸಿ, ನಂತರ ಅದನ್ನು ಮರುಸ್ಥಾಪಿಸಿ; ಆಜ್ಞೆಯು ಈಗಿನ ರೆಪೊಸಿಟರಿಯಲ್ಲಿ ಆಯ್ದ ಕಮಿಟ್ ಅನ್ನು ಪರೀಕ್ಷಿಸುತ್ತದೆ.
 
-### ಕಸ್ಟಮ್ ಮೇಲ್ವಿಚಾರಣೆ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್
+## 📊 ಡಿಬಗಿಂಗ್ ಡ್ಯಾಷ್‌ಬೋರ್ಡ್‌ಗಳು
+
+### ಕಸ್ಟಮ್ ಮಾನಿಟರಿಂಗ್ ಡ್ಯಾಷ್‌ಬೋರ್ಡ್
 ```bash
-# ಡಿಬಗಿಂಗ್‌ಗಾಗಿ Application Insights ಪ್ರಶ್ನೆಗಳನ್ನು ರಚಿಸಿ
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # ದೋಷಗಳಿಗಾಗಿ ಪ್ರಶ್ನೆ
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # ಕಾರ್ಯಕ್ಷಮತೆ ಸಮಸ್ಯೆಗಳಿಗಾಗಿ ಪ್ರಶ್ನೆ
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # ನಿರ್ಭರತೆ ವಿಫಲತೆಗಳಿಗಾಗಿ ಪ್ರಶ್ನೆ
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### ಲಾಗ್ ಸಂಗ್ರಹಣೆ
+### ಲಾಗ್ ಸಮಗ್ರತೆ
 ```bash
-# ಬಹು ಅಜೂರ್ ಮೂಲಗಳಿಂದ ಲಾಗ್‌ಗಳನ್ನು ಏಕೀಕರಿಸಿ
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,28 +630,30 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
 }
 ```
 
-## 🔗 ಉನ್ನತ ಸಂಪನ್ಮೂಲಗಳು
+## 🔗 ಸುಧಾರಿತ ಸಂಪನ್ಮೂಲಗಳು
 
-### ಕಸ್ಟಮ್ ಡಿಬಗ್ ಸ್ಕ್ರಿಪ್ಟುಗಳು
-ನಿಮ್ಮ ಯೋಜನೆಯಲ್ಲಿ `scripts/debug/` ಡೈರೆಕ್ಟರಿ ರಚಿಸಿ ಮತ್ತು ಒಳಗೊಂಡಿರಲಿ:
-- `health-check.sh` - ವ್ಯಾಪಕ ಆರೋಗ್ಯ ಪರಿಶೀಲನೆ
+### ಕಸ್ಟಮ್ ಡಿಬಗ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು
+`scripts/debug/` ಡೈರೆಕ್ಟರಿಯನ್ನು ರಚಿಸಿ:
+- `health-check.sh` - ಸಮಗ್ರ ಆರೋಗ್ಯ ಪರಿಶೀಲನೆ
 - `performance-test.sh` - ಸ್ವಯಂಚಾಲಿತ ಕಾರ್ಯಕ್ಷಮತೆ ಪರೀಕ್ಷೆ
-- `log-analyzer.py` - ಉನ್ನತ ಲಾಗ್ ಪಾರ್ಸಿಂಗ್ ಮತ್ತು ವಿಶ್ಲೇಷಣೆ
-- `resource-validator.sh` - ಮೂಲಸೌಕರ್ಯ ಮಾನ್ಯತೆ
+- `log-analyzer.py` - ಸುಧಾರಿತ ಲಾಗ್ ಪಾರ್ಸಿಂಗ್ ಮತ್ತು ವಿಶ್ಲೇಷಣೆ
+- `resource-validator.sh` - ಮೂಲಸೌಕರ್ಯ ಪರಿಶೀಲನೆ
 
-### ಮೇಲ್ವಿಚಾರಣೆ ಸಂಯೋಜನೆ
+### ಮಾನಿಟರಿಂಗ್ ಏಕೀಕರಣ
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -686,37 +664,36 @@ hooks:
       fi
 ```
 
-## ಉತ್ತಮ ಅಭ್ಯಾಸಗಳು
+## ಉತ್ತಮ ಕಾರ್ಯಪ್ರವೃತ್ತಿಗಳು
 
-1. **ಉತ್ಪಾದನಾ ಹೊರಗಿನ ಪರಿಸರಗಳಲ್ಲಿ ಎಂದಿಗೂ ಡೀಬಗ್ ಲಾಗಿಂಗ್ ಸಕ್ರಿಯಗೊಳಿಸಿ**
-2. **ಸಮಸ್ಯೆಗಳಿಗಾಗಿ ಪುನರಾವರ್ತಿಸಬಹುದಾದ ಪರೀಕ್ಷಾ ಪ್ರಕರಣಗಳನ್ನು ರಚಿಸಿ**
-3. **ನಿಮ್ಮ ತಂಡದಿಗಾಗಿ ಡಿಬಗಿಂಗ್ ಪ್ರಕ್ರಿಯೆಗಳನ್ನು ದಾಖಲೆಗೊಳಿಸಿ**
-4. **ಆರೋಗ್ಯ ಪರಿಶೀಲನೆಗಳನ್ನು ಮತ್ತು ಮೇಲ್ವಿಚಾರಣೆಯನ್ನು ಸ್ವಯಂಕ್ರಿಯಗೊಳಿಸಿ**
-5. **ಡಿಬಗ್ ಉಪಕರಣಗಳನ್ನು ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಬದಲಾವಣೆಗಳೊಂದಿಗೆ ನವೀಕರಿಸಿ**
-6. **ಘಟನೆಯಿಲ್ಲದ ಸಂದರ್ಭಗಳಲ್ಲಿ ಡಿಬಗಿಂಗ್ ಪ್ರಕ್ರಿಯೆಗಳನ್ನು ಅಭ್ಯಾಸ ಮಾಡಿ**
+1. **ಎಲ್ಲಾ ಸಮಯವೂ ಡಿಬಗ್ ಲಾಗಿಂಗ್ ಸಕ್ರಿಯಗೊಳಿಸಿ** ಖಾಸಗಿ ಪರಿಸರಗಳಲ್ಲಿ
+2. **ಸಮಸ್ಯೆಗಳಿಗೆ ಪುನರಾವೃತ ಪರೀಕ್ಷಾ ಪ್ರಕರಣಗಳನ್ನು ರಚಿಸಿ**
+3. **ನಿಮ್ಮ ತಂಡಕ್ಕೆ ಡಿಬಗಿಂಗ್ ಪ್ರಕ್ರಿಯೆಗಳ ದಾಖಲೆ ಮಾಡಿರಿ**
+4. **ಆರೋಗ್ಯ ಪರಿಶೀಲನೆಗಳು ಮತ್ತು ಮಾನಿಟರಿಂಗ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿರಲಿ**
+5. **ಡಿಬಗ್ ಸಾಧನಗಳನ್ನು ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಬದಲಾವಣೆಗಳಿಗೆ ತಕ್ಕಂತೆ ನವೀಕರಿಸಿಕೊಳ್ಳಿ**
+6. **ದಿನಸಿ ಸಂದರ್ಭಗಳಲ್ಲಿ ಡಿಬಗಿಂಗ್ ಪ್ರಕ್ರಿಯೆಗಳನ್ನು ಅಭ್ಯಾಸ ಮಾಡಿ**
 
 ## ಮುಂದಿನ ಹಂತಗಳು
 
-- [ಕ್ಷಮತಾ ಯೋಜನೆ](../chapter-06-pre-deployment/capacity-planning.md) - ಸಂಪನ್ಮೂಲ ಅಗತ್ಯಗಳನ್ನು ಯೋಜಿಸಿ
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - ಸೂಕ್ತ ಸೇವಾ ಮಟ್ಟಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ
-- [Preflight Checks](../chapter-06-pre-deployment/preflight-checks.md) - ನಿಯೋಜನೆಯ ಮುನ್ನ ಮಾನ್ಯತೆ
-- [Cheat Sheet](../../resources/cheat-sheet.md) - ತ್ವರಿತ ಉಲ್ಲೇಖ ಆದೇಶಗಳು
+- [ಸಮರ್ಥನೆ ಯೋಜನೆ](../chapter-06-pre-deployment/capacity-planning.md) - ಸಂಪನ್ಮೂಲ ಅಗತ್ಯಗಳನ್ನು ಯೋಜಿಸಿ
+- [SKU ಆಯ್ಕೆ](../chapter-06-pre-deployment/sku-selection.md) - ಯುಕ್ತ ಸೇವಾ ಶ್ರೇಣಿಗಳನ್ನು ಆರಿಸಿಕೊಳ್ಳಿ
+- [ಪ್ರಿಫ್ಲೆಟ್ ಪರಿಶೀಲನೆಗಳು](../chapter-06-pre-deployment/preflight-checks.md) - ನಿಯೋಜನೆ ಮುಂಚಿತ ಪರಿಶೀಲನೆ
+- [ಚೀಟ್ ಶೀಟ್](../../resources/cheat-sheet.md) - ತ್ವರಿತ ಸಂಗ್ರಹ ಆಜ್ಞೆಗಳು
 
 ---
 
-**ಗಮನಿಸಿ**: ಉತ್ತಮ ಡಿಬಗಿಂಗ್ ಎಂದರೆ ವ್ಯವಸ್ಥಿತವಾಗಿರುವುದು, ಸಮಗ್ರವಾಗಿರುವುದು ಮತ್ತು ಸಹನೆಯಿರಬೇಕಾಗಿದೆ. These tools and techniques will help you diagnose issues faster and more effectively.
+**ಒಂದು ನೆನಪಿಕೆ**: ಉತ್ತಮ ಡಿಬಗಿಂಗ್ ಎಂದರೆ ಸಿಸ್ಟಮ್ಯಾಟಿಕ್, ಸಂಪೂರ್ಣ ಮತ್ತು ಸಹನಶೀಲವಾಗಿರುವುದು. ಇವುಗಳ ಸಾಧನಗಳು ಮತ್ತು ತಂತ್ರಗಳು ನಿಮಗೆ ಸಮಸ್ಯೆಗಳನ್ನು ವೇಗವಾಗಿ ಮತ್ತು ಹೆಚ್ಚು ಪರಿಣಾಮಕಾರಿಯಾಗಿ ವಿಶ್ಲೇಷಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತವೆ.
 
 ---
 
 **ನ್ಯಾವಿಗೇಶನ್**
-- **Previous Lesson**: [ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳು](common-issues.md)
+- **ಹಿಂದಿನ ಪಾಠ**: [ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳು](common-issues.md)
 
-- **Next Lesson**: [ಕ್ಷಮತಾ ಯೋಜನೆ](../chapter-06-pre-deployment/capacity-planning.md)
+- **ಮುಂದಿನ ಪಾಠ**: [ಸಮರ್ಥನೆ ಯೋಜನೆ](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-ಜವಾಬ್ದಾರಿ ನಿರಾಕರಣೆ:
-
-ಈ ದಸ್ತಾವೇಜನ್ನು AI ಅನುವಾದ ಸೇವೆ Co-op Translator (https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಯನ್ನು ಸಾಧಿಸಲು ಪ್ರಯತ್ನಿಸಿದರೂ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ತಪ್ಪುಗಳಿರಬಹುದೆಂದು ದಯವಿಟ್ಟು ಗಮನಿಸಿ. ಮೂಲ ದಸ್ತಾವೇಜಿನುದ್ಭವ ಭಾಷೆಯಲ್ಲಿರುವ ಪ್ರತಿಯನ್ನು ಅಧಿಕೃತ ಮೂಲವನ್ನಾಗಿ ಪರಿಗಣಿಸಬೇಕು. ಪ್ರಮುಖ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದದ ಬಳಕೆಯಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಅರ್ಥಮಾಡಿಕೆ ಅಥವಾ ತಪ್ಪಾಗಿ ವ್ಯಾಖ್ಯಾನಗೊಳ್ಳುವುವುದಕ್ಕಾಗಿ ನಾವು ಜವಾಬ್ದಾರಿಯಲ್ಲ.
+**ಅಸ್ವೀಕಾರ**:
+ಈ ದಸ್ತಾವೇಜು AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಯನ್ನು ಸಾಧಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ, ದಯವಿಟ್ಟು ಗಮನಿಸಿ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಅಸಡ್ಡೆಗಳು ಇರಬಹುದು. ಮೂಲ ಭಾಷೆಯಲ್ಲಿರುವ ಮೂಲ ದಸ್ತಾವೇಜು ಪ್ರಾಮಾಣಿಕ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಪ್ರಮುಖ ಮಾಹಿತಿಗಾಗಿ, ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದವನ್ನು ಬಳಸುವ ಮೂಲಕ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಅರ್ಥಗಳ ಅಥವಾ ತಪ್ಪು ವ್ಯಾಖ್ಯಾನಗಳ ಬಗ್ಗೆ ನಾವು ಹೊಣೆಗಾರರಲ್ಲ.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

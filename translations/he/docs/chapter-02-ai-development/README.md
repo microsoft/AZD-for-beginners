@@ -1,49 +1,51 @@
 # פרק 2: פיתוח מונחה בינה מלאכותית
 
-**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך זמן**: 1-2 שעות | **⭐ רמת קושי**: בינונית
+**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך**: 4-5 שעות כולל סדנה | **⭐ מורכבות**: בינוני
 
 ---
 
 ## סקירה כללית
 
-פרק זה מתמקד בפריסת אפליקציות מופעלות בינה מלאכותית באמצעות Azure Developer CLI ושירותי Microsoft Foundry. מאפליקציות צ'אט פשוטות ועד סוכנים אינטיליגנטיים עם כלים.
+פרק זה מתמקד בפריסת יישומים המונעים על ידי בינה מלאכותית באמצעות Azure Developer CLI ושירותי Microsoft Foundry. מיישומי צ'אט בינה מלאכותית פשוטים ועד סוכנים אינטליגנטיים עם כלים.
 
-> **הערת אימות (2026-07-13):** זרימת הפקודות וההנחיות להרחבות בפרק זה נבדקו מול `azd` `1.27.1` וגרסת התצוגה המקדימה של הרחבת סוכני הבינה המלאכותית `azure.ai.agents` `1.0.0-beta.5`. אם אתם משתמשים בבניית AZD ישנה יותר, עדכנו קודם ואז המשיכו עם התרגילים.
+> **סקירת גרסה (2026-11-04):** הנחיית CLI של בינה מלאכותית נבדקה מול התיעוד/המקור שפורסם של `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, ו-`azure.ai.evaluations` `1.0.0-beta.2`. השתמש ב-`azd >= 1.37.0` עבור זרימת העבודה המשולבת. הערכות משתמשות כעת במרחב השמות הנפרד `azd ai eval`; ראה [שינויים בגרסה והנחיות הגירה](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). זה אינו אימות פריסה חי.
 
-## מטרות למידה
+## מטרות הלמידה
 
-בסיום פרק זה תוכלו:
-- לפרוס אפליקציות בינה מלאכותית באמצעות תבניות AZD מוכנות מראש
-- להבין את האינטגרציה של Microsoft Foundry עם AZD
-- להגדיר ולהתאים סוכני בינה מלאכותית עם כלים
-- לפרוס אפליקציות RAG (ייצור משודרג בבחירת מידע)
+בסיום פרק זה, תוכל:
+- לפרוס יישומי בינה מלאכותית באמצעות תבניות AZD מוכנות מראש
+- להבין אינטגרציה של Microsoft Foundry עם AZD
+- להגדיר ולהתאים אישית סוכני בינה מלאכותית עם כלים
+- לפרוס יישומי RAG (Retrieval-Augmented Generation)
 
 ---
 
 ## 📚 שיעורים
 
-| # | שיעור | תיאור | זמן |
+| # | שיעור | תיאור | משך |
 |---|--------|-------------|------|
-| 1 | [אינטגרציה עם Microsoft Foundry](microsoft-foundry-integration.md) | חיבור AZD לשירותי Foundry | 30 דק' |
-| 2 | [מדריך סוכני בינה מלאכותית](agents.md) | פריסת סוכנים אינטיליגנטיים עם כלים | 45 דק' |
-| 3 | [פריסת דגמי בינה מלאכותית](ai-model-deployment.md) | לפרוס ולהגדיר דגמי בינה מלאכותית | 30 דק' |
-| 4 | [מעבדת סדנת בינה מלאכותית](ai-workshop-lab.md) | מעשי: הכנת פתרון בינה מלאכותית המוכן ל-AZD | 60 דק' |
+| 1 | [אינטגרציית Microsoft Foundry](microsoft-foundry-integration.md) | חיבור AZD עם שירותי Foundry | 30 דק |
+| 2 | [מדריך סוכני בינה מלאכותית](agents.md) | פריסת סוכנים אינטליגנטיים עם כלים | 45 דק |
+| 3 | [פריסת מודל בינה מלאכותית](ai-model-deployment.md) | לפרוס ולהגדיר מודלים של בינה מלאכותית | 30 דק |
+| 4 | [מעבדת סדנת בינה מלאכותית](ai-workshop-lab.md) | עבודה מעשית: חקור תבנית ותכנן את ההמרה שלך | 2-3 שעות |
 
 ---
 
 ## 🚀 התחלה מהירה
 
+בחר אפשרות אחת בספריית קבצים חדשה וריקה. בסוף `.` מאתחל את הספרייה הנוכחית; אחרת AZD יכול ליצור תיקיית משנה מבלי לשנות את ספריית העבודה של הטרמינל שלך.
+
 ```bash
-# אפשרות 1: יישום שיחה RAG
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# אפשרות 2: סוכני AI
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# אפשרות 3: יישום שיחה מהיר
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
@@ -53,21 +55,23 @@ azd up
 
 | תבנית | תיאור | שירותים |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | צ'אט RAG עם מקורות | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | סוכן בינה מלאכותית עם כלים | שירות סוכני בינה מלאכותית |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | צ'אט בינה מלאכותית בסיסי | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | צ'אט RAG עם ציטוטים | OpenAI + חיפוש בינה מלאכותית |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | סוכן בינה מלאכותית עם כלים | שירות סוכן בינה מלאכותית |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | צ'אט בסיסי של בינה מלאכותית | OpenAI + Container Apps |
 
 ---
 
-## 💰 מודעות לעלות
+## 💰 מודעות עלויות
 
-| סביבה | עלות חודשית מוערכת |
+אלה טווחים להמחשה בלבד, לא הצעות מחיר או הגבלות; תעבורת מודל, SKU של חיפוש/חישוב, אזור ותכונות אופציונליות יכולים לחרוג מהם. סקור את הנחיות התמחור הנוכחיות של הדוגמה שבחרת לפני הספקה.
+
+| סביבה | עלות חודשית משוערת |
 |-------------|----------------------|
-| פיתוח | 80-150$ |
-| סביבה ביניים | 150-300$ |
-| ייצור | 300-3,500$+ |
+| פיתוח | $80-150 |
+| סביבה לבחינה | $150-300 |
+| ייצור | $300-3,500+ |
 
-**טיפ:** הריצו `azd down` לאחר בדיקות כדי למנוע חיובים.
+**טיפ:** הרץ `azd down` לאחר הבדיקות כדי למנוע עלויות.
 
 ---
 
@@ -75,16 +79,16 @@ azd up
 
 | כיוון | פרק |
 |-----------|---------|
-| **קודם** | [פרק 1: יסודות](../chapter-01-foundation/README.md) |
+| **הקודם** | [פרק 1: היסודות](../chapter-01-foundation/README.md) |
 | **הבא** | [פרק 3: תצורה](../chapter-03-configuration/README.md) |
-| **דלג ל** | [פרק 8: דפוסי ייצור](../chapter-08-production/README.md) |
+| **דילוג אל** | [פרק 8: דפוסי ייצור](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 משאבים קשורים
 
-- [פתרון בעיות בינה מלאכותית](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [פרקטיקות ייצור לבינה מלאכותית](../chapter-08-production/production-ai-practices.md)
+- [פתרון תקלות בבינה מלאכותית](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [שיטות עבודה בבינה מלאכותית לייצור](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

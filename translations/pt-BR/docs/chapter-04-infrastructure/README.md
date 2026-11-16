@@ -1,51 +1,54 @@
 # Capítulo 4: Infraestrutura como Código & Implantação
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1-1.5 horas | **⭐ Complexidade**: Intermediário
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 horas de leitura; reserve tempo extra para exercícios de implantação | **⭐ Complexidade**: Intermediário
 
 ---
 
 ## Visão Geral
 
-Este capítulo aborda padrões de Infraestrutura como Código (IaC) com templates Bicep, provisão de recursos e estratégias de implantação usando o Azure Developer CLI.
+Este capítulo aborda padrões de Infraestrutura como Código (IaC) com templates Bicep, provisionamento de recursos e estratégias de implantação usando Azure Developer CLI.
 
-> Validado com `azd 1.27.1` em julho de 2026.
+> Revisão de comandos e configuração alvo: `azd 1.37.2` (Novembro de 2026). Provisionamento ativo no Azure não foi executado durante a revisão.
 
 ## Objetivos de Aprendizagem
 
 Ao concluir este capítulo, você irá:
-- Compreender a estrutura e sintaxe de templates Bicep
+- Entender a estrutura e sintaxe de templates Bicep
 - Provisionar recursos Azure com `azd provision`
 - Implantar aplicações com `azd deploy`
 - Implementar estratégias de implantação blue-green e rolling
 
 ---
 
-## 📚 Lições
+## 📚 Aulas
 
-| # | Lição | Descrição | Tempo |
+| # | Aula | Descrição | Tempo |
 |---|--------|-------------|------|
 | 1 | [Provisionamento de Recursos](provisioning.md) | Gerenciamento de recursos Azure com AZD | 45 min |
 | 2 | [Guia de Implantação](deployment-guide.md) | Estratégias de implantação de aplicações | 45 min |
-| 3 | [Criando Seu Próprio Template](custom-templates.md) | Construir e publicar templates azd reutilizáveis | 30 min |
+| 3 | [Criando Seu Próprio Template](custom-templates.md) | Criar e publicar templates azd reutilizáveis | 30 min |
 
 ---
 
-## 🚀 Início Rápido
+## 🚀 Começando Rápido
 
 ```bash
-# Inicializar a partir do template
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Visualizar o que será criado
+# Preview what will be created
 azd provision --preview
 
-# Provisionar infraestrutura apenas
+# Provision infrastructure only
 azd provision
 
-# Implantar código apenas
+# Deploy code only
 azd deploy
 
-# Ou ambos juntos
+# Or both together
 azd up
 ```
 
@@ -73,10 +76,10 @@ my-project/
 | Comando | Descrição |
 |---------|-------------|
 | `azd init` | Inicializar projeto |
-| `azd provision` | Criar recursos no Azure |
+| `azd provision` | Criar recursos do Azure |
 | `azd deploy` | Implantar código da aplicação |
 | `azd up` | provisionar + implantar |
-| `azd down` | Apagar todos os recursos |
+| `azd down` | Excluir todos os recursos |
 
 ---
 
@@ -92,7 +95,7 @@ my-project/
 ## 📖 Recursos Relacionados
 
 - [Verificações Pré-Implantação](../chapter-06-pre-deployment/README.md)
-- [Exemplos de Aplicações em Contêiner](../../examples/container-app/README.md)
+- [Exemplos de Container Apps](../../examples/container-app/README.md)
 - [Exemplo de Aplicação de Banco de Dados](../../examples/database-app/README.md)
 
 ---

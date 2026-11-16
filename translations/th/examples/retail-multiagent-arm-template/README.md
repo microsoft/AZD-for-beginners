@@ -1,784 +1,239 @@
-# แบบจำลองโครงสร้างพื้นฐานหลายตัวแทนสำหรับค้าปลีก
+# โครงสร้างพื้นฐาน Multi-Agent สำหรับการค้าปลีก
 
-**บทที่ 5: แพ็กเกจการปรับใช้ในระบบจริง**  
-- **📚 หน้าแรกของหลักสูตร**: [AZD สำหรับผู้เริ่มต้น](../../README.md)  
-- **📖 บทที่เกี่ยวข้อง**: [บทที่ 5: โซลูชัน AI หลายตัวแทน](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
-- **📝 คู่มือสถานการณ์**: [สถาปัตยกรรมสมบูรณ์](../retail-scenario.md)  
-- **🎯 การปรับใช้ด่วน**: [การปรับใช้คลิกเดียว](../../../../examples/retail-multiagent-arm-template)  
+**ตัวอย่างสถาปัตยกรรมขั้นสูง — ไม่ใช่แอปพลิเคชัน multi-agent ที่ทำงานได้จริง**
 
-> **⚠️ แบบจำลองโครงสร้างพื้นฐานเท่านั้น**  
-> เทมเพลต ARM นี้จะปรับใช้ **ทรัพยากร Azure** สำหรับระบบหลายตัวแทน  
->  
-> **สิ่งที่จะถูกปรับใช้ (15-25 นาที):**  
-> - ✅ บริการ Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings ใน 3 ภูมิภาค)  
-> - ✅ บริการ AI Search (เปล่า พร้อมสำหรับการสร้างดัชนี)  
-> - ✅ Container Apps (ภาพแทนที่ พร้อมสำหรับโค้ดของคุณ)  
-> - ✅ Storage, Cosmos DB, Key Vault, Application Insights  
->  
-> **สิ่งที่ไม่รวม (ต้องพัฒนาเพิ่มเติม):**  
-> - ❌ โค้ดการใช้งานตัวแทน (Customer Agent, Inventory Agent)  
-> - ❌ ตรรกะการกำหนดเส้นทางและ API endpoints  
-> - ❌ UI แชทส่วนหน้า  
-> - ❌ สคีมาและท่อข้อมูลดัชนีค้นหา  
-> - ❌ **ประมาณเวลาการพัฒนา: 80-120 ชั่วโมง**  
->  
-> **ใช้เทมเพลตนี้หาก:**  
-> - ✅ คุณต้องการจัดเตรียมโครงสร้างพื้นฐาน Azure สำหรับโครงการหลายตัวแทน  
-> - ✅ คุณวางแผนจะพัฒนาโค้ดตัวแทนแยกต่างหาก  
-> - ✅ คุณต้องการโครงสร้างพื้นฐานพร้อมใช้งานในระบบจริง  
->  
-> **อย่าใช้ถ้า:**  
-> - ❌ คุณต้องการตัวอย่างการสาธิตหลายตัวแทนที่ใช้งานได้ทันที  
-> - ❌ คุณกำลังมองหาโค้ดตัวอย่างแอปพลิเคชันสมบูรณ์  
+[หน้าแรกหลักสูตร](../../README.md) ·
+[บทที่ 5](../../docs/chapter-05-multi-agent/README.md) ·
+[แผนผังสถาปัตยกรรม](../retail-scenario.md)
 
-## ภาพรวม
+## สิ่งที่นี่ติดตั้ง
 
-ไดเรกทอรีนี้มีเทมเพลต Azure Resource Manager (ARM) ครบถ้วนสำหรับปรับใช้ **โครงสร้างพื้นฐานพื้นฐาน** ของระบบสนับสนุนลูกค้าหลายตัวแทน เทมเพลตนี้จะจัดเตรียมบริการ Azure ทั้งหมดที่จำเป็น กำหนดค่าที่ถูกต้องและเชื่อมโยงกัน พร้อมสำหรับการพัฒนาแอปพลิเคชันของคุณ
+โฟลเดอร์นี้ประกอบด้วยแม่แบบ ARM, พารามิเตอร์ และสคริปต์การติดตั้ง Bash
+ไม่มี **`azure.yaml` หรือซอร์สแอปพลิเคชันค้าปลีก** ใดๆ
 
-**หลังจากปรับใช้ คุณจะมี:** โครงสร้างพื้นฐาน Azure พร้อมใช้งานในระบบจริง  
-**เพื่อทำระบบให้สมบูรณ์ คุณต้องมี:** โค้ดตัวแทน, UI ส่วนหน้า และการกำหนดค่าข้อมูล (ดู [คู่มือสถาปัตยกรรม](../retail-scenario.md))  
+| ทรัพยากร | สถานะจริงหลังจากการจัดหา |
+|---|---|
+| บัญชี Azure OpenAI หลัก | การปรับใช้ `gpt-4.1-chat` โดยใช้ `gpt-4.1` เวอร์ชัน `2025-04-14`, `GlobalStandard` |
+| บัญชี OpenAI สำรอง (ไม่บังคับ) | `gpt-4.1-mini-inventory`, รุ่น `gpt-4.1-mini` เวอร์ชัน `2025-04-14`, `GlobalStandard` |
+| บัญชี Embeddings (ไม่บังคับ) | `text-embedding-ada-002` เวอร์ชัน `2`, `Standard`; ไม่มีสายงานการจัดทำดัชนี |
+| บัญชี Grader OpenAI | `gpt-4.1-grader`, รุ่น `gpt-4.1` เวอร์ชัน `2025-04-14`, `GlobalStandard`; ไม่มีผู้ประเมิน |
+| การค้นหา AI | บริการว่าง; ไม่มีดัชนีหรือเอกสาร |
+| การจัดเก็บ | `documents` และภาชนะบรรจุ blob `uploads` ว่างเปล่า |
+| Cosmos DB | บัญชีแบบ Serverless, ฐานข้อมูล `chathistory`, ภาชนะบรรจุ `conversations` แบ่งพาร์ทิชันโดย `/userId`, TTL ของไอเทม 30 วัน |
+| Container Apps | ตัวเราท์เตอร์และส่วนหน้ารันทั้งคู่บน `mcr.microsoft.com/azuredocs/containerapps-helloworld:latest` ที่พอร์ต 80 |
+| Key Vault (ไม่บังคับ) | ห้องนิรภัยที่เปิดใช้งาน RBAC ว่างเปล่า; **ไม่มีความลับหรือการมอบหมายบทบาท** |
+| Application Insights / Log Analytics (ไม่บังคับ) | ทรัพยากรและการเก็บรวบรวมบันทึกสภาพแวดล้อม; ไม่มีการติดตั้งแอปแบบกำหนดเอง, การแจ้งเตือน หรือแดชบอร์ด |
+| Document Intelligence | บัญชี S0; ไม่มีเวิร์กโฟลว์การประมวลผลเอกสาร |
 
-## 🎯 สิ่งที่จะถูกปรับใช้
+Legacy Bing Search v7 ถูกยกเลิกเมื่อวันที่ 11 สิงหาคม 2025 และ **ไม่ได้ถูกจัดเตรียม**.
+ไม่มีการดำเนินการผสานรวมเว็บกราวด์ดิ้งอื่นแทน.
 
-### โครงสร้างพื้นฐานหลัก (สถานะหลังการปรับใช้)
+**ไม่ได้รวมอยู่:** ตัวแทนลูกค้า/สินค้าคงคลัง, API เราท์เตอร์ `/chat`, ส่วนหน้าหน้าจอแชต,
+สคีมาค้นหาหรือสคริปต์การนำเข้า, Azure Container Registry, จุดเชื่อมต่อส่วนตัว,
+ตัวตนที่จัดการ, การมอบหมาย RBAC, การสลับสำรองอัตโนมัติ, Front Door, สแกนเนอร์ทีมแดง,
+CLI ประเมินผล, การตรวจสอบสิทธิ์ หรือ CI/CD.
 
-✅ **บริการ Microsoft Foundry Models** (พร้อมเรียก API)  
-  - ภูมิภาคหลัก: การปรับใช้ gpt-4.1 (ความจุ 20K TPM)  
-  - ภูมิภาครอง: การปรับใช้ gpt-4.1-mini (ความจุ 10K TPM)  
-  - ภูมิภาคที่สาม: แบบจำลอง text embeddings (ความจุ 30K TPM)  
-  - ภูมิภาคประเมิน: แบบจำลอง gpt-4.1 grader (ความจุ 15K TPM)  
-  - **สถานะ:** ทำงานเต็มที่ - สามารถเรียก API ได้ทันที  
+ข้อความสำเร็จของ ARM ยืนยันเพียงการจัดเตรียมทรัพยากรเท่านั้น ไม่รับรอง
+การทำงานของแอปพลิเคชัน, ความปลอดภัย, ความพร้อมใช้งาน หรือความพร้อมสำหรับผลิตจริง.
 
-✅ **Azure AI Search** (ว่างเปล่า - พร้อมสำหรับการกำหนดค่า)  
-  - เปิดใช้งานฟีเจอร์ค้นหาแบบเวกเตอร์  
-  - ระดับมาตรฐาน พร้อมพาร์ติชัน 1 และรีพลิกา 1 ตัว  
-  - **สถานะ:** บริการกำลังทำงาน แต่ต้องสร้างดัชนี  
-  - **ต้องทำ:** สร้างดัชนีค้นหาด้วยสคีมาของคุณ  
+## ข้อกำหนดเบื้องต้นและค่าใช้จ่าย
 
-✅ **Azure Storage Account** (ว่างเปล่า - พร้อมอัปโหลด)  
-  - คอนเทนเนอร์บล็อบ: `documents`, `uploads`  
-  - การตั้งค่าความปลอดภัย (HTTPS เท่านั้น, ไม่อนุญาตการเข้าถึงสาธารณะ)  
-  - **สถานะ:** พร้อมรับไฟล์  
-  - **ต้องทำ:** อัปโหลดข้อมูลสินค้าและเอกสารของคุณ  
+- Bash (Git Bash/WSL บน Windows) และ
+  [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- การสมัครสมาชิกที่มีสิทธิ์สร้างทรัพยากรทั้งหมดที่ระบุไว้
+- ตรวจสอบความพร้อมใช้งานของ **แต่ละรุ่น/เวอร์ชัน/SKU ในแต่ละภูมิภาคที่เลือก** และ
+  โควต้าสำหรับการสมัครสมาชิกของคุณ ค่าปริยายคือตัวอย่าง ไม่ใช่ข้อรับประกัน
+  ดู [ความพร้อมใช้งานของรุ่น](https://learn.microsoft.com/azure/ai-services/openai/concepts/models).
+- เลือกกลุ่มทรัพยากรเฉพาะที่คุณสามารถลบได้หลังจากทดสอบเสร็จ.
 
-⚠️ **Container Apps Environment** (ภาพแทนถูกปรับใช้)  
-  - แอปตัวกำหนดเส้นทางตัวแทน (ภาพ nginx เริ่มต้น)  
-  - แอปส่วนหน้า (ภาพ nginx เริ่มต้น)  
-  - ตั้งค่าอัตโนมัติปรับขนาด (0-10 อินสแตนซ์)  
-  - **สถานะ:** กำลังรันคอนเทนเนอร์แทนที่  
-  - **ต้องทำ:** สร้างและปรับใช้แอปตัวแทนของคุณ  
+```bash
+az version
+az login
+az account show --query "{subscription:id,name:name}" -o table
+az cognitiveservices usage list --location eastus2 -o table
+```
 
-✅ **Azure Cosmos DB** (ว่างเปล่า - พร้อมข้อมูล)  
-  - กำหนดค่าฐานข้อมูลและคอนเทนเนอร์ล่วงหน้า  
-  - ปรับแต่งให้เหมาะสมกับการทำงานแบบหน่วงต่ำ  
-  - เปิดใช้งาน TTL สำหรับล้างข้อมูลอัตโนมัติ  
-  - **สถานะ:** พร้อมเก็บประวัติแชท  
+ตำแหน่งเริ่มต้น: หลัก `eastus2`, รอง `westus2`, embeddings `francecentral`;
+ค่าเริ่มต้น grader อยู่ในภูมิภาคหลัก เว้นแต่จะกำหนด `graderLocation`
+`--no-multi-region` ข้ามบัญชีรองและ embeddings; ไม่ข้ามบัญชี grader
 
-✅ **Azure Key Vault** (ตัวเลือก - พร้อมความลับ)  
-  - เปิดใช้งาน Soft delete  
-  - กำหนด RBAC สำหรับ managed identities  
-  - **สถานะ:** พร้อมเก็บคีย์ API และสตริงการเชื่อมต่อ  
 
-✅ **Application Insights** (ตัวเลือก - การตรวจสอบทำงาน)  
-  - เชื่อมต่อกับ Log Analytics workspace  
-  - กำหนดเมตริกและการแจ้งเตือนแบบกำหนดเอง  
-  - **สถานะ:** พร้อมรับข้อมูล telemetry จากแอป  
-
-✅ **Document Intelligence** (พร้อมเรียก API)  
-  - ระดับ S0 สำหรับงานระบบจริง  
-  - **สถานะ:** พร้อมประมวลผลเอกสารที่อัปโหลด  
-
-✅ **Bing Search API** (พร้อมเรียก API)  
-  - ระดับ S1 สำหรับการค้นหาแบบเรียลไทม์  
-  - **สถานะ:** พร้อมรองรับการค้นหาเว็บ  
+Search มีค่าใช้จ่ายในขณะที่จัดเตรียมแม้จะว่างเปล่า. จำนวนสำเนาขั้นต่ำของคอนเทนเนอร์,
+ความซ้ำซ้อนของการจัดเก็บ, คำขอ/พื้นที่จัดเก็บ Cosmos DB, โทเค็นของโมเดล, การเรียก Document Intelligence
+และการนำเข้าบันทึก/พื้นที่จัดเก็บสามารถเพิ่มค่าใช้จ่ายได้ ไม่มีค่าคงที่หรือการตรวจสอบ
+ยอดรวมรายเดือน** ประเมินจำนวน SKU ที่แน่นอนใน
+[Azure pricing calculator](https://azure.microsoft.com/pricing/calculator/) และ
+กำหนดงบประมาณก่อนทำการปรับใช้
 
 ### โหมดการปรับใช้
 
-| โหมด | ความจุ OpenAI | อินสแตนซ์ Container | ระดับการค้นหา | ความทนทานของ Storage | เหมาะสำหรับ |
-|------|---------------|---------------------|---------------|-----------------------|-------------|
-| **น้อยที่สุด** | 10K-20K TPM | 0-2 รีพลิกา | พื้นฐาน | LRS (ภายในพื้นที่) | การพัฒนา/ทดสอบ, เรียนรู้, พิสูจน์แนวคิด |
-| **มาตรฐาน** | 30K-60K TPM | 2-5 รีพลิกา | มาตรฐาน | ZRS (โซน) | ระบบจริง, ปริมาณผู้ใช้ปานกลาง (<10K) |
-| **พรีเมียม** | 80K-150K TPM | 5-10 รีพลิกา, โซนทนทาน | พรีเมียม | GRS (ภูมิภาค) | องค์กร, ปริมาณผู้ใช้สูง (>10K), SLA 99.99% |
+การตั้งค่าเหล่านี้เป็นขนาดของทรัพยากร **ไม่ใช่การรับรองการผลิตหรือ SLA**
 
-**ผลกระทบด้านค่าใช้จ่าย:**  
-- **น้อยที่สุด → มาตรฐาน:** ค่าใช้จ่ายเพิ่มประมาณ 4 เท่า ($100-370/เดือน → $420-1,450/เดือน)  
-- **มาตรฐาน → พรีเมียม:** ค่าใช้จ่ายเพิ่มประมาณ 3 เท่า ($420-1,450/เดือน → $1,150-3,500/เดือน)  
-- **เลือกตาม:** โหลดที่คาดการณ์, ความต้องการ SLA, งบประมาณ  
+| โหมด | หน่วยความจุ Chat / mini / embedding / grader | ตัวทำซ้ำของเราเตอร์ | ตัวทำซ้ำของ frontend | ชั้นการค้นหา | การจัดเก็บข้อมูล |
+|---|---|---|---|---|---|
+| minimal | 10 / 10 / 20 / 5 | 0–3 | 1–2 | basic, 1 ตัวทำซ้ำ | Standard_LRS |
+| standard | 20 / 15 / 30 / 15 | 1–3 | 1–2 | standard, 1 ตัวทำซ้ำ | Standard_ZRS |
+| premium | 40 / 30 / 60 / 30 | 1–10 | 1–5 | standard2, 2 ตัวทำซ้ำ | Standard_GRS |
 
-**การวางแผนความจุ:**  
-- **TPM (Tokens Per Minute):** ทั้งหมดจากการปรับใช้แบบจำลอง  
-- **อินสแตนซ์ Container:** ช่วงอัตโนมัติปรับขนาด (ขั้นต่ำ-สูงสุด รีพลิกา)  
-- **ระดับการค้นหา:** มีผลต่อประสิทธิภาพการค้นหาและขนาดดัชนีสูงสุด  
+หน่วยความจุของโมเดลขึ้นอยู่กับเฉพาะโมเดล/SKU; ห้ามนำมารวมกันเป็นการรับประกัน TPM สากล
+โหมดพรีเมียมไม่ได้เปิดใช้งาน Container Apps ที่มีความทนทานโซน: ซึ่งต้องการ
+การออกแบบเครือข่ายเพิ่มเติม Basic Search รองรับการค้นหาแบบเวกเตอร์โดยมี
+ข้อจำกัดบริการ; ไม่ได้ขัดแย้งกับเวกเตอร์โดยธรรมชาติ
 
-## 📋 ความต้องการเบื้องต้น
+## 🚀 การปรับใช้อย่างรวดเร็ว
 
-### เครื่องมือที่ต้องใช้  
-1. **Azure CLI** (เวอร์ชัน 2.50.0 ขึ้นไป)  
-   ```bash
-   az --version  # ตรวจสอบเวอร์ชัน
-   az login      # ตรวจสอบสิทธิ์
-   ```
-  
-2. **บัญชี Azure ที่ใช้งานจริง** พร้อมสิทธิ์ Owner หรือ Contributor  
-   ```bash
-   az account show  # ยืนยันการสมัครสมาชิก
-   ```
-  
-### โควต้า Azure ที่ต้องมี  
+ทบทวน `azuredeploy.json` และ `azuredeploy.parameters.json` ก่อน คำสั่งด้านล่างนี้
+**สร้างทรัพยากร Azure ที่มีค่าใช้จ่าย**; ไม่ใช่การตรวจสอบแบบออฟไลน์
 
-ก่อนปรับใช้ ตรวจสอบว่าโควต้ามีเพียงพอในภูมิภาคเป้าหมายของคุณ:  
+จากโฟลเดอร์รากของรีโพสิตอรี:
 
 ```bash
-# ตรวจสอบความพร้อมใช้งานของโมเดล Microsoft Foundry ในภูมิภาคของคุณ
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --location eastus2
-
-# ตรวจสอบโควต้า OpenAI (ตัวอย่างสำหรับ gpt-4.1)
-az cognitiveservices usage list \
-  --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
-
-# ตรวจสอบโควต้าของ Container Apps
-az provider show \
-  --namespace Microsoft.App \
-  --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
-```
-  
-**โควต้าขั้นต่ำที่ต้องการ:**  
-- **Microsoft Foundry Models:** 3-4 การปรับใช้แบบจำลองในภูมิภาคต่าง ๆ  
-  - gpt-4.1: 20K TPM (Tokens Per Minute)  
-  - gpt-4.1-mini: 10K TPM  
-  - text-embedding-ada-002: 30K TPM  
-  - **หมายเหตุ:** gpt-4.1 อาจมีรายการรอในบางภูมิภาค — ตรวจสอบ [สถานะแบบจำลอง](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)  
-- **Container Apps:** สภาพแวดล้อมที่จัดการ + 2-10 อินสแตนซ์คอนเทนเนอร์  
-- **AI Search:** ระดับมาตรฐาน (ระดับพื้นฐานไม่เพียงพอสำหรับการค้นหาแบบเวกเตอร์)  
-- **Cosmos DB:** ความเร็วผ่านมาตรฐานที่จัดเตรียมไว้  
-
-**ถ้าโควต้าไม่เพียงพอ:**  
-1. ไปที่ Azure Portal → Quotas → ขอเพิ่มโควต้า  
-2. หรือใช้ Azure CLI:  
-   ```bash
-   az support tickets create \
-     --ticket-name "OpenAI-Quota-Increase" \
-     --severity "minimal" \
-     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
-   ```
-3. พิจารณาใช้ภูมิภาคอื่นที่พร้อมใช้งาน  
-
-## 🚀 การปรับใช้ด่วน
-
-### ตัวเลือกที่ 1: ใช้ Azure CLI  
-
-```bash
-# โคลนหรือลงไฟล์เทมเพลต
-git clone <repository-url>
 cd examples/retail-multiagent-arm-template
-
-# ทำให้สคริปต์การติดตั้งสามารถเรียกใช้งานได้
-chmod +x deploy.sh
-
-# ติดตั้งด้วยการตั้งค่าเริ่มต้น
-./deploy.sh -g myResourceGroup
-
-# ติดตั้งสำหรับการผลิตพร้อมคุณสมบัติเพิ่มเติมแบบพรีเมียม
-./deploy.sh -g myProdRG -e prod -m premium -l eastus2
+bash deploy.sh --help
+bash deploy.sh -g retail-learning-rg -m minimal --no-multi-region
 ```
-  
-### ตัวเลือกที่ 2: ใช้ Azure Portal  
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)  
+สคริปต์ใช้เส้นทางสัมพันธ์กับไดเรกทอรีของมันเอง ตรวจสอบการเข้าสู่ระบบ/เครื่องมือ/อาร์กิวเมนต์,
+สร้างกรุ๊ปทรัพยากรถ้าไม่มี, ตรวจสอบการปรับใช้, จัดเตรียม และ
+แสดงผลลัพธ์ที่ไม่ใช่ความลับ ไม่ต้องการหรือทำการดึง `jq`,
+การเติมข้อมูล, การดึงความลับ หรือการตั้งค่าแอปพลิเคชันหลังปรับใช้
 
-### ตัวเลือกที่ 3: ใช้ Azure CLI โดยตรง  
+ค่าคำสั่งในบรรทัดคำสั่งของสคริปต์จะเขียนทับค่าที่สอดคล้องใน
+ไฟล์พารามิเตอร์ แก้ไขไฟล์พารามิเตอร์สำหรับการตั้งค่าเช่น ภูมิภาครอง/ภูมิภาคอันดับสาม;
+ใช้การปรับใช้ CLI ตรงถ้าคุณต้องการเขียนทับพารามิเตอร์โดยอิสระ:
 
 ```bash
-# สร้างกลุ่มทรัพยากร
-az group create --name myResourceGroup --location eastus2
-
-# ปรับใช้แม่แบบ
+az group create --name retail-learning-rg --location eastus2
 az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file azuredeploy.json \
-  --parameters azuredeploy.parameters.json
-```
-  
-## ⏱️ กำหนดเวลาการปรับใช้  
-
-### สิ่งที่คาดว่าจะเกิดขึ้น
-
-| ขั้นตอน | ระยะเวลา | สิ่งที่เกิดขึ้น |
-|---------|----------|-----------------||
-| **การตรวจสอบเทมเพลต** | 30-60 วินาที | Azure ตรวจสอบไวยากรณ์และพารามิเตอร์ ARM เทมเพลต |
-| **การตั้งค่ากลุ่มทรัพยากร** | 10-20 วินาที | สร้างกลุ่มทรัพยากร (ถ้ายังไม่มี) |
-| **การจัดสรร OpenAI** | 5-8 นาที | สร้างบัญชี OpenAI 3-4 บัญชี และปรับใช้แบบจำลอง |
-| **Container Apps** | 3-5 นาที | สร้างสภาพแวดล้อมและปรับใช้คอนเทนเนอร์แทนที่ |
-| **Search & Storage** | 2-4 นาที | จัดเตรียมบริการ AI Search และบัญชีเก็บข้อมูล |
-| **Cosmos DB** | 2-3 นาที | สร้างฐานข้อมูลและตั้งค่าคอนเทนเนอร์ |
-| **การตั้งค่าการตรวจสอบ** | 2-3 นาที | ติดตั้ง Application Insights และ Log Analytics |
-| **การกำหนดค่า RBAC** | 1-2 นาที | กำหนด managed identities และสิทธิ์การเข้าถึง |
-| **รวมเวลาการปรับใช้** | **15-25 นาที** | โครงสร้างพื้นฐานสมบูรณ์พร้อมใช้งาน |
-
-**หลังปรับใช้:**  
-- ✅ **โครงสร้างพื้นฐานพร้อมใช้งาน:** บริการ Azure ทั้งหมดถูกปรับใช้และกำลังทำงาน  
-- ⏱️ **การพัฒนาแอปพลิเคชัน:** 80-120 ชั่วโมง (ความรับผิดชอบของคุณ)  
-- ⏱️ **การกำหนดค่าอินเด็กซ์:** 15-30 นาที (ต้องใช้สคีมของคุณ)  
-- ⏱️ **การอัปโหลดข้อมูล:** แตกต่างตามขนาดชุดข้อมูล  
-- ⏱️ **การทดสอบและตรวจสอบ:** 2-4 ชั่วโมง  
-
----
-
-## ✅ ตรวจสอบความสำเร็จของการปรับใช้  
-
-### ขั้นตอนที่ 1: ตรวจสอบการจัดเตรียมทรัพยากร (2 นาที)  
-
-```bash
-# ตรวจสอบว่าแหล่งข้อมูลทั้งหมดถูกปรับใช้เรียบร้อยแล้ว
-az resource list \
-  --resource-group myResourceGroup \
-  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
-  --output table
-```
-  
-**ที่คาดหวัง:** ตารางว่าง (ทรัพยากรทั้งหมดแสดงสถานะ "Succeeded")  
-
-### ขั้นตอนที่ 2: ตรวจสอบการปรับใช้ Microsoft Foundry Models (3 นาที)  
-
-```bash
-# แสดงรายชื่อบัญชี OpenAI ทั้งหมด
-az cognitiveservices account list \
-  --resource-group myResourceGroup \
-  --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
-  --output table
-
-# ตรวจสอบการปรับใช้โมเดลสำหรับภูมิภาคหลัก
-OPENAI_NAME=$(az cognitiveservices account list \
-  --resource-group myResourceGroup \
-  --query "[?kind=='OpenAI'] | [0].name" -o tsv)
-
-az cognitiveservices account deployment list \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --output table
-```
-  
-**ที่คาดหวัง:**  
-- 3-4 บัญชี OpenAI (ภูมิภาคหลัก รอง ที่สาม และประเมิน)  
-- 1-2 แบบจำลองต่อบัญชี (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)  
-
-### ขั้นตอนที่ 3: ทดสอบ endpoints โครงสร้างพื้นฐาน (5 นาที)  
-
-```bash
-# รับ URL ของ Container App
-az containerapp list \
-  --resource-group myResourceGroup \
-  --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
-  --output table
-
-# ทดสอบจุดเชื่อมต่อเราเตอร์ (จะตอบกลับด้วยภาพตัวอย่าง)
-ROUTER_URL=$(az containerapp show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --query "properties.configuration.ingress.fqdn" -o tsv)
-
-echo "Testing: https://$ROUTER_URL"
-curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expected)"
-```
-  
-**ที่คาดหวัง:**  
-- Container Apps แสดงสถานะ "Running"  
-- nginx แทนที่ตอบกลับ HTTP 200 หรือ 404 (ยังไม่มีโค้ดแอปจริง)  
-
-### ขั้นตอนที่ 4: ตรวจสอบการเข้าถึง API Microsoft Foundry Models (3 นาที)  
-
-```bash
-# รับข้อมูล endpoint และ key ของ OpenAI
-OPENAI_ENDPOINT=$(az cognitiveservices account show \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --query "properties.endpoint" -o tsv)
-
-OPENAI_KEY=$(az cognitiveservices account keys list \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --query "key1" -o tsv)
-
-# ทดสอบการใช้งานการปรับใช้ gpt-4.1
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
-  -H "Content-Type: application/json" \
-  -H "api-key: $OPENAI_KEY" \
-  -d '{
-    "messages": [{"role": "user", "content": "Say hello"}],
-    "max_tokens": 10
-  }'
-```
-  
-**ที่คาดหวัง:** การตอบสนอง JSON พร้อมการเติมเต็มการสนทนา (ยืนยันว่า OpenAI ใช้งานได้)  
-
-### สิ่งที่ทำงานกับสิ่งที่ยังไม่ทำงาน  
-
-**✅ ทำงานหลังปรับใช้:**  
-- แบบจำลอง Microsoft Foundry Models ถูกปรับใช้และรับคำสั่ง API  
-- บริการ AI Search ทำงาน (ว่างเปล่า ยังไม่มีดัชนี)  
-- Container Apps ทำงาน (ภาพ nginx แทนที่)  
-- บัญชี Storage เข้าถึงและพร้อมอัปโหลด  
-- Cosmos DB พร้อมสำหรับการเก็บข้อมูล  
-- Application Insights รวบรวม telemetry โครงสร้างพื้นฐาน  
-- Key Vault พร้อมเก็บความลับ  
-
-**❌ ยังไม่ทำงาน (ต้องพัฒนา):**  
-- จุดเชื่อมต่อของ agent (ยังไม่มีโค้ดแอปพลิเคชันปรับใช้)  
-- ฟังก์ชันแชท (ต้อง frontend + backend เพิ่มเติม)  
-- คำค้นหา (ยังไม่มีการสร้างดัชนี)  
-- ระบบประมวลผลเอกสาร (ยังไม่มีข้อมูลอัปโหลด)  
-- Telemetry แบบกำหนดเอง (ต้องติดตั้งเครื่องมือแอป)  
-
-**ขั้นตอนถัดไป:** ดู [การกำหนดค่าหลังการปรับใช้](../../../../examples/retail-multiagent-arm-template) เพื่อพัฒนาและปรับใช้แอปของคุณ  
-
----
-
-## ⚙️ ตัวเลือกการกำหนดค่า  
-
-### พารามิเตอร์เทมเพลต  
-
-| พารามิเตอร์ | ประเภท | เริ่มต้น | คำอธิบาย |
-|--------------|---------|---------|-----------|
-| `projectName` | string  | "retail" | คำนำหน้าชื่อทรัพยากรทั้งหมด |
-| `location` | string | ตำแหน่งกลุ่มทรัพยากร | ภูมิภาคหลักสำหรับการปรับใช้ |
-| `secondaryLocation` | string | "westus2" | ภูมิภาครองสำหรับการปรับใช้หลายภูมิภาค |
-| `tertiaryLocation` | string | "francecentral" | ภูมิภาคสำหรับแบบจำลอง embeddings |
-| `environmentName` | string | "dev" | ชื่อสภาพแวดล้อม (dev/staging/prod) |
-| `deploymentMode` | string | "standard" | การกำหนดค่าการปรับใช้ (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | เปิดใช้งานการปรับใช้หลายภูมิภาค |
-| `enableMonitoring` | bool | true | เปิดใช้งาน Application Insights และการบันทึกล็อก |
-| `enableSecurity` | bool | true | เปิดใช้งาน Key Vault และความปลอดภัยเสริม |
-
-### การปรับแต่งพารามิเตอร์  
-
-แก้ไขไฟล์ `azuredeploy.parameters.json`:  
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "projectName": {
-      "value": "mycompany"
-    },
-    "environmentName": {
-      "value": "prod"
-    },
-    "deploymentMode": {
-      "value": "premium"
-    },
-    "location": {
-      "value": "eastus2"
-    }
-  }
-}
-```
-  
-## 🏗️ ภาพรวมสถาปัตยกรรม  
-
-```mermaid
-graph TD
-    Frontend[หน้าแรก<br/>แอปคอนเทนเนอร์] --> Router[ตัวจัดการเอเจนต์<br/>แอปคอนเทนเนอร์] --> Agents[เอเจนต์<br/>ลูกค้า + สินค้า]
-    Router --> Search[ค้นหา AI<br/>ฐานข้อมูลเวกเตอร์]
-    Router --> Models[โมเดล Microsoft Foundry<br/>หลายภูมิภาค]
-    Agents --> Storage[ที่เก็บข้อมูล<br/>เอกสาร]
-    Search --> CosmosDB[Cosmos DB<br/>ประวัติแชท]
-    Models --> AppInsights[App Insights<br/>การตรวจสอบ]
-    Storage --> KeyVault[Key Vault<br/>ความลับ]
-```  
-## 📖 การใช้งานสคริปต์ปรับใช้  
-
-สคริปต์ `deploy.sh` ให้ประสบการณ์การปรับใช้อย่างโต้ตอบ:  
-
-```bash
-# แสดงความช่วยเหลือ
-./deploy.sh --help
-
-# การปรับใช้พื้นฐาน
-./deploy.sh -g myResourceGroup
-
-# การปรับใช้ขั้นสูงพร้อมการตั้งค่าที่กำหนดเอง
-./deploy.sh \
-  -g myProductionRG \
-  -p companyname \
-  -e prod \
-  -m premium \
-  -l eastus2
-
-# การปรับใช้สำหรับการพัฒนาโดยไม่ใช้หลายภูมิภาค
-./deploy.sh \
-  -g myDevRG \
-  -e dev \
-  -m minimal \
-  --no-multi-region \
-  --no-security
-```
-  
-### คุณสมบัติของสคริปต์  
-
-- ✅ **การตรวจสอบความพร้อมใช้งาน** (Azure CLI, สถานะล็อกอิน, ไฟล์เทมเพลต)  
-- ✅ **การจัดการกลุ่มทรัพยากร** (สร้างถ้ายังไม่มี)  
-- ✅ **การตรวจสอบเทมเพลต** ก่อนปรับใช้  
-- ✅ **การติดตามความคืบหน้า** พร้อมแสดงสี  
-- ✅ **แสดงผลลัพธ์การปรับใช้**  
-- ✅ **คำแนะนำหลังการปรับใช้**  
-
-## 📊 การตรวจสอบการปรับใช้  
-
-### ตรวจสอบสถานะการปรับใช้  
-
-```bash
-# แสดงรายการการปรับใช้
-az deployment group list --resource-group myResourceGroup --output table
-
-# ดึงรายละเอียดการปรับใช้
-az deployment group show \
-  --resource-group myResourceGroup \
-  --name retail-deployment-YYYYMMDD-HHMMSS
-
-# ติดตามความคืบหน้าการปรับใช้
-az deployment group create \
-  --resource-group myResourceGroup \
+  --resource-group retail-learning-rg \
+  --name retail-learning \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json \
-  --verbose
+  --parameters projectName=retail environmentName=dev \
+    deploymentMode=minimal enableMultiRegion=false
 ```
-  
-### ผลลัพธ์การปรับใช้  
 
-หลังจากการปรับใช้สำเร็จ มีผลลัพธ์ดังนี้:  
+การจัดเตรียมอาจใช้เวลาระหว่าง 15–45 นาทีหรือมากกว่านั้น และอาจล้มเหลวจากข้อจำกัดโควต้าภูมิภาคหรือ
+ข้อจำกัดวงจรชีวิตโมเดล อย่าลองใหม่โดยไม่อ่านผลการทำงานที่ล้มเหลวก่อน
 
-- **Frontend URL:** จุดเชื่อมต่อสาธารณะสำหรับอินเทอร์เฟซเว็บ  
-- **Router URL:** API endpoint สำหรับตัวกำหนดเส้นทางตัวแทน  
-- **OpenAI Endpoints:** จุดเชื่อมต่อบริการ OpenAI หลักและรอง  
-- **Search Service:** จุดเชื่อมต่อบริการ Azure AI Search  
-- **Storage Account:** ชื่อบัญชีเก็บข้อมูลสำหรับเอกสาร  
-- **Key Vault:** ชื่อ Key Vault (ถ้าเปิดใช้งาน)  
-- **Application Insights:** ชื่อบริการตรวจสอบ (ถ้าเปิดใช้งาน)  
+## ตัวเลือกการกำหนดค่า
 
-## 🔧 หลังการปรับใช้: ขั้นตอนต่อไป  
-> **📝 สำคัญ:** โครงสร้างพื้นฐานถูกปรับใช้แล้ว แต่คุณต้องพัฒนาและปรับใช้โค้ดแอปพลิเคชัน
+| พารามิเตอร์ | ค่าเริ่มต้นในเทมเพลต | ความหมาย |
+|---|---|---|
+| `projectName` | จำเป็น (`retail` ในไฟล์พารามิเตอร์) | ตัวอักษรพิมพ์เล็ก/ตัวเลข 3–10 ตัว |
+| `location` | ตำแหน่งกรุ๊ปทรัพยากร | ภูมิภาคหลัก (`eastus2` ในไฟล์พารามิเตอร์) |
+| `secondaryLocation` | `westus2` | ภูมิภาคบัญชี mini model |
+| `tertiaryLocation` | `francecentral` | ภูมิภาคบัญชี embeddings |
+| `graderLocation` | ภูมิภาคหลัก | ภูมิภาคบัญชี grader อิสระ |
+| `environmentName` | `dev` | `dev`, `staging` หรือ `prod`; ชื่อเท่านั้น ไม่ใช่การตั้งค่าการป้องกัน |
+| `deploymentMode` | `standard` | เลือก SKU/ความจุ |
+| `enableMultiRegion` | `true` | เพิ่มบัญชีรองและ embeddings |
+| `enableMonitoring` | `true` | เพิ่ม Insights/workspace และการเก็บบันทึกสภาพแวดล้อม |
+| `enableSecurity` | `true` | สร้าง vault ว่างเปล่าที่เปิดใช้ RBAC เท่านั้น |
 
-### ขั้นตอนที่ 1: พัฒนาแอปพลิเคชันตัวแทน (ความรับผิดชอบของคุณ)
+พารามิเตอร์ `openAiApiVersion` ที่ทำให้เข้าใจผิดถูกลบออก: เวอร์ชัน API ข้อมูลระนาบการทำงาน
+ไม่ได้ควบคุมเวอร์ชันทรัพยากร ARM หรือเวอร์ชันโมเดล คู่ชื่อ/เวอร์ชันโมเดล
+อยู่ใน `variables.modelDeployments`; ตรวจสอบพร้อมกันกับ SKU การปรับใช้
 
-เทมเพลต ARM สร้าง **Container Apps ว่างเปล่า** พร้อมด้วยภาพ nginx แทนที่ คุณต้อง:
+## ตรวจสอบการจัดเตรียม
 
-**การพัฒนาที่จำเป็น:**
-1. **การใช้งานตัวแทน** (30-40 ชั่วโมง)
-   - ตัวแทนบริการลูกค้าพร้อมการรวม gpt-4.1
-   - ตัวแทนนับสินค้าพร้อมการรวม gpt-4.1-mini
-   - ตรรกะการกำหนดเส้นทางตัวแทน
-
-2. **การพัฒนาด้านหน้า** (20-30 ชั่วโมง)
-   - UI ส่วนต่อประสานการแชท (React/Vue/Angular)
-   - ฟังก์ชันการอัปโหลดไฟล์
-   - การแสดงและจัดรูปแบบการตอบกลับ
-
-3. **บริการด้านหลัง** (12-16 ชั่วโมง)
-   - FastAPI หรือ Express router
-   - มิดเดิลแวร์การตรวจสอบสิทธิ์
-   - การรวมเทเลเมทรี
-
-**ดู:** [Architecture Guide](../retail-scenario.md) สำหรับแพตเทิร์นการดำเนินการและตัวอย่างโค้ดโดยละเอียด
-
-### ขั้นตอนที่ 2: กำหนดค่าดัชนีการค้นหา AI (15-30 นาที)
-
-สร้างดัชนีการค้นหาที่ตรงกับโมเดลข้อมูลของคุณ:
+ใช้ชื่อการปรับใช้จากผลลัพธ์ของสคริปต์หรือ `az deployment group list`
+สำหรับการปรับใช้ตรงข้างต้น:
 
 ```bash
-# รับรายละเอียดบริการค้นหา
-SEARCH_NAME=$(az search service list \
-  --resource-group myResourceGroup \
-  --query "[0].name" -o tsv)
-
-SEARCH_KEY=$(az search admin-key show \
-  --service-name $SEARCH_NAME \
-  --resource-group myResourceGroup \
-  --query "primaryKey" -o tsv)
-
-# สร้างดัชนีด้วยโครงสร้างข้อมูลของคุณ (ตัวอย่าง)
-curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
-  -H "Content-Type: application/json" \
-  -H "api-key: ${SEARCH_KEY}" \
-  -d '{
-    "name": "products",
-    "fields": [
-      {"name": "id", "type": "Edm.String", "key": true},
-      {"name": "title", "type": "Edm.String", "searchable": true},
-      {"name": "content", "type": "Edm.String", "searchable": true},
-      {"name": "category", "type": "Edm.String", "filterable": true},
-      {"name": "content_vector", "type": "Collection(Edm.Single)", 
-       "searchable": true, "dimensions": 1536, "vectorSearchProfile": "default"}
-    ],
-    "vectorSearch": {
-      "algorithms": [{"name": "default", "kind": "hnsw"}],
-      "profiles": [{"name": "default", "algorithm": "default"}]
-    }
-  }'
+RG=retail-learning-rg
+DEPLOYMENT=retail-learning
+az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.provisioningState -o tsv
+az deployment operation group list -g "$RG" -n "$DEPLOYMENT" -o table
+az resource list -g "$RG" -o table
 ```
 
-**แหล่งข้อมูล:**
-- [AI Search Index Schema Design](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [Vector Search Configuration](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+คาดหวัง: สถานะการปรับใช้ `Succeeded` หากล้มเหลว ให้ตรวจสอบรายละเอียดข้อผิดพลาดการทำงาน
+เพียงรายการทรัพยากรที่แสดงไม่น่าเชื่อถือในการตรวจสอบสถานะการจัดเตรียม
 
-### ขั้นตอนที่ 3: อัปโหลดข้อมูลของคุณ (เวลาขึ้นอยู่กับปริมาณ)
-
-เมื่อคุณมีข้อมูลผลิตภัณฑ์และเอกสาร:
+ทดสอบ placeholder **root** ไม่ใช่ endpoint ตัวแทนที่ไม่มีอยู่จริง:
 
 ```bash
-# รับรายละเอียดบัญชีจัดเก็บข้อมูล
-STORAGE_NAME=$(az storage account list \
-  --resource-group myResourceGroup \
-  --query "[0].name" -o tsv)
-
-STORAGE_KEY=$(az storage account keys list \
-  --account-name $STORAGE_NAME \
-  --resource-group myResourceGroup \
-  --query "[0].value" -o tsv)
-
-# อัปโหลดเอกสารของคุณ
-az storage blob upload-batch \
-  --destination documents \
-  --source /path/to/your/product/docs \
-  --account-name $STORAGE_NAME \
-  --account-key $STORAGE_KEY
-
-# ตัวอย่าง: อัปโหลดไฟล์เดียว
-az storage blob upload \
-  --container-name documents \
-  --name "product-manual.pdf" \
-  --file /path/to/product-manual.pdf \
-  --account-name $STORAGE_NAME \
-  --account-key $STORAGE_KEY
+ROUTER_URL=$(az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.outputs.routerUrl.value -o tsv)
+curl --fail-with-body "$ROUTER_URL"
 ```
 
-### ขั้นตอนที่ 4: สร้างและปรับใช้แอปพลิเคชันของคุณ (8-12 ชั่วโมง)
+คาดหวัง: หน้า hello-world HTTP 200, **ไม่ใช่การตอบสนองแชท** ข้อผิดพลาด HTTP
+ไม่ถือเป็นการตรวจสอบที่สำเร็จ
 
-เมื่อคุณพัฒนาโค้ดตัวแทนเสร็จแล้ว:
+เพื่อทดสอบการอนุมานโมเดลหลักจริง (มีค่าใช้จ่าย):
 
 ```bash
-# 1. สร้าง Azure Container Registry (ถ้าจำเป็น)
-az acr create \
-  --name myregistry \
-  --resource-group myResourceGroup \
-  --sku Basic
-
-# 2. สร้างและส่งภาพเอเจนต์เราท์เตอร์
-docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
-az acr login --name myregistry
-docker push myregistry.azurecr.io/agent-router:v1
-
-# 3. สร้างและส่งภาพส่วนหน้า
-docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
-docker push myregistry.azurecr.io/frontend:v1
-
-# 4. อัปเดต Container Apps ด้วยภาพของคุณ
-az containerapp update \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/agent-router:v1
-
-az containerapp update \
-  --name retail-frontend \
-  --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/frontend:v1
-
-# 5. กำหนดตัวแปรสภาพแวดล้อม
-az containerapp update \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --set-env-vars \
-    OPENAI_ENDPOINT=secretref:openai-endpoint \
-    OPENAI_KEY=secretref:openai-key \
-    SEARCH_ENDPOINT=secretref:search-endpoint \
-    SEARCH_KEY=secretref:search-key
+OPENAI_ENDPOINT=$(az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.outputs.openAiEndpointPrimary.value -o tsv)
+OPENAI_NAME=$(az cognitiveservices account list -g "$RG" \
+  --query "[?kind=='OpenAI' && contains(name, '-openai-primary-')].name | [0]" -o tsv)
+OPENAI_KEY=$(az cognitiveservices account keys list -g "$RG" -n "$OPENAI_NAME" \
+  --query key1 -o tsv)
+curl --fail-with-body \
+  "${OPENAI_ENDPOINT%/}/openai/deployments/gpt-4.1-chat/chat/completions?api-version=2024-10-21" \
+  -H "Content-Type: application/json" -H "api-key: $OPENAI_KEY" \
+  -d '{"messages":[{"role":"user","content":"Say hello"}],"max_tokens":20}'
+unset OPENAI_KEY
 ```
 
-### ขั้นตอนที่ 5: ทดสอบแอปพลิเคชันของคุณ (2-4 ชั่วโมง)
+คาดหวัง: JSON ที่มี `choices` และ `usage` ชื่อการปรับใช้คือ
+`gpt-4.1-chat` ไม่ใช่ชื่อโมเดลพื้นฐาน `gpt-4.1`
+
+## 🔧 หลังการปรับใช้: ขั้นตอนถัดไป
+
+นี่คือ **งานค้างการพัฒนา** ไม่ใช่แบบฝึกหัดที่เสร็จสมบูรณ์:
+
+1. ดำเนินการตัวแทนลูกค้า/สินค้าเชื่อมต่อและสัญญา router ให้ได้รับการรับรอง
+2. ดำเนินการ frontend และตรวจสอบการกำหนดค่า
+3. สร้างและเติมดัชนีการค้นหาที่มีขนาด/โปรไฟล์ตรงกับโมเดล embedding ของคุณ
+   และจัดการกับข้อผิดพลาดและการอัปเดตเอกสาร
+4. สร้าง registry และกำหนดสิทธิ์/ตัวตนสำหรับการดึงภาพ
+5. สร้างและส่งภาพจริง เปลี่ยนพอร์ต ingress และ probes ของ Container App
+   ให้ตรงกับภาพเหล่านั้นก่อนการทดสอบ; พอร์ต 80 ที่นี่เป็นของ placeholder
+6. กำหนด secret หรือ managed identities และบทบาทข้อมูลระนาบขอบเขต อย่า
+   อ้างอิงชื่อความลับสมมติ: แบบฟอร์มนี้ไม่สร้างความลับแอปพลิเคชันใดๆ
+7. ติดตั้งแอปพลิเคชัน กำหนดการแจ้งเตือน ทดสอบความล้มเหลว/การกู้คืน และประเมินผล
+   ผลลัพธ์ด้วยข้อมูลพื้นฐานที่เป็นตัวแทนและการตรวจสอบโดยมนุษย์
+
+ดู [แผนผังสถาปัตยกรรม](../retail-scenario.md) สำหรับขอบเขตการออกแบบ
+
+## การแก้ไขปัญหาและขอบเขตความปลอดภัย
+
+- **โมเดลไม่พร้อมใช้งาน:** ตรวจสอบโมเดล/เวอร์ชัน/SKU ภูมิภาค และโควต้าการสมัครใช้งาน;
+  สคริปต์นี้ไม่ตรวจสอบแคตตาล็อกโมเดลล่วงหน้า
+- **ปิดการตรวจสอบ:** ที่อยู่บันทึกสภาพแวดล้อมคือ `none` ไม่ใช่การกำหนดค่า Log Analytics ที่ว่างเปล่าผิดพลาด
+
+- **เป็นแค่ตัวแทน:** `/chat` การประเมินตัวแทน และการดูดซับไฟล์ไม่มีอยู่จริง
+- **เครือข่าย/ตัวตน:** จุดเชื่อมต่อสาธารณะและการตรวจสอบสิทธิ์ภายในเปิดใช้งาน
+  การเปิดใช้งาน Key Vault RBAC เพียงอย่างเดียวไม่สร้างมอบหมายบทบาทหรือตัวตน
+- **สภาพแวดล้อมการผลิต:** เพิ่มการตรวจสอบสิทธิ์ ตัวตนที่เจาะจง การจัดการความลับ
+  เครือข่ายส่วนตัวเมื่อเหมาะสม การออกแบบความพร้อมใช้งาน และการทดสอบการดำเนินงาน
+  บัญชีโมเดลหลายภูมิภาคเพียงอย่างเดียวไม่สนับสนุนการสำรองข้อมูล
+
+## การล้างข้อมูล
+
+ไม่มีโปรเจกต์ AZD ที่นี่; `azd down` ไม่ใช่คำสั่งล้างข้อมูล
+หลังจากตรวจสอบว่ากลุ่มมีเพียงทรัพยากรการเรียนรู้ของคุณเท่านั้น:
 
 ```bash
-# รับ URL ของแอปพลิเคชันของคุณ
-ROUTER_URL=$(az containerapp show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --query "properties.configuration.ingress.fqdn" -o tsv)
-
-# ทดสอบปลายทางเอเย่นต์ (เมื่อโค้ดของคุณถูกติดตั้งแล้ว)
-curl -X POST "https://${ROUTER_URL}/chat" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "message": "Hello, I need help with my order",
-    "agent": "customer"
-  }'
-
-# ตรวจสอบบันทึกแอปพลิเคชัน
-az containerapp logs show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --follow
+az group delete --name retail-learning-rg --yes
+az group exists --name retail-learning-rg
 ```
 
-### แหล่งข้อมูลการใช้งาน
+คาดว่าจะเกิดขึ้นหลังการลบเสร็จสิ้น: `false` ทรัพยากร Key Vault และ Cognitive Services
+ที่ถูกลบแบบซอฟต์อาจยังคงชื่อไว้ได้; การลบอย่างถาวรต้องมีสิทธิ์ที่เหมาะสม
+ตรวจสอบ Cost Management สำหรับค่าบริการที่ล่าช้า
 
-**สถาปัตยกรรม & การออกแบบ:**
-- 📖 [Complete Architecture Guide](../retail-scenario.md) - แพตเทิร์นการดำเนินการอย่างละเอียด
-- 📖 [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
-
-**ตัวอย่างโค้ด:**
-- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - แพตเทิร์น RAG
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - เฟรมเวิร์กตัวแทน (C#)
-- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - การประสานงานตัวแทน (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - การสนทนาแบบหลายตัวแทน
-
-**ประมาณการรวมความพยายาม:**
-- การปรับใช้โครงสร้างพื้นฐาน: 15-25 นาที (✅ เสร็จสมบูรณ์)
-- การพัฒนาแอปพลิเคชัน: 80-120 ชั่วโมง (🔨 งานของคุณ)
-- การทดสอบและปรับแต่ง: 15-25 ชั่วโมง (🔨 งานของคุณ)
-
-## 🛠️ การแก้ไขปัญหา
-
-### ปัญหาทั่วไป
-
-#### 1. ควอต้าของ Microsoft Foundry Models เกิน
-
-```bash
-# ตรวจสอบการใช้งานโควตาปัจจุบัน
-az cognitiveservices usage list --location eastus2
-
-# ขอเพิ่มโควต้า
-az support tickets create \
-  --ticket-name "OpenAI-Quota-Increase" \
-  --severity "minimal" \
-  --description "Request quota increase for Microsoft Foundry Models in region X"
-```
-
-#### 2. การปรับใช้ Container Apps ล้มเหลว
-
-```bash
-# ตรวจสอบบันทึกแอปคอนเทนเนอร์
-az containerapp logs show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --follow
-
-# รีสตาร์ทแอปคอนเทนเนอร์
-az containerapp revision restart \
-  --name retail-router \
-  --resource-group myResourceGroup
-```
-
-#### 3. การเริ่มต้นบริการค้นหา
-
-```bash
-# ตรวจสอบสถานะบริการค้นหา
-az search service show \
-  --name <search-service-name> \
-  --resource-group myResourceGroup
-
-# ทดสอบการเชื่อมต่อบริการค้นหา
-curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
-  -H "api-key: <search-admin-key>"
-```
-
-### การตรวจสอบการปรับใช้
-
-```bash
-# ตรวจสอบให้แน่ใจว่าทรัพยากรทั้งหมดถูกสร้างขึ้น
-az resource list \
-  --resource-group myResourceGroup \
-  --output table
-
-# ตรวจสอบสุขภาพของทรัพยากร
-az resource list \
-  --resource-group myResourceGroup \
-  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
-  --output table
-```
-
-## 🔐 การพิจารณาด้านความปลอดภัย
-
-### การจัดการคีย์
-- ความลับทั้งหมดถูกเก็บใน Azure Key Vault (เมื่อเปิดใช้งาน)
-- แอปพลิเคชันคอนเทนเนอร์ใช้ managed identity สำหรับการตรวจสอบสิทธิ์
-- บัญชีเก็บข้อมูลมีค่าเริ่มต้นที่ปลอดภัย (HTTPS เท่านั้น ไม่มีการเข้าถึง blob สาธารณะ)
-
-### ความปลอดภัยของเครือข่าย
-- แอปพลิเคชันคอนเทนเนอร์ใช้เครือข่ายภายในตามที่เป็นไปได้
-- บริการค้นหากำหนดค่าพร้อมตัวเลือกส่วนปลายทางแบบส่วนตัว
-- Cosmos DB กำหนดค่าด้วยสิทธิ์ขั้นต่ำที่จำเป็น
-
-### การกำหนดค่า RBAC
-```bash
-# กำหนดบทบาทที่จำเป็นสำหรับตัวตนที่จัดการ
-az role assignment create \
-  --assignee <container-app-managed-identity> \
-  --role "Cognitive Services OpenAI User" \
-  --scope <openai-resource-id>
-```
-
-## 💰 การเพิ่มประสิทธิภาพค่าใช้จ่าย
-
-### การประมาณค่าใช้จ่าย (รายเดือน, USD)
-
-| โหมด | OpenAI | Container Apps | Search | Storage | รวมโดยประมาณ |
-|------|--------|----------------|--------|---------|------------|
-| ขั้นต่ำ | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
-| มาตรฐาน | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
-| พรีเมียม | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
-
-### การติดตามค่าใช้จ่าย
-
-```bash
-# ตั้งค่าการแจ้งเตือนงบประมาณ
-az consumption budget create \
-  --account-name <subscription-id> \
-  --budget-name "retail-budget" \
-  --amount 500 \
-  --time-grain Monthly \
-  --start-date 2024-01-01 \
-  --end-date 2024-12-31
-```
-
-## 🔄 การอัปเดตและบำรุงรักษา
-
-### การอัปเดตเทมเพลต
-- ควบคุมเวอร์ชันของไฟล์เทมเพลต ARM
-- ทดสอบการเปลี่ยนแปลงในสภาพแวดล้อมการพัฒนาก่อน
-- ใช้โหมดการปรับใช้อย่างเพิ่มเติมเพื่อการอัปเดต
-
-### การอัปเดตทรัพยากร
-```bash
-# อัปเดตด้วยพารามิเตอร์ใหม่
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file azuredeploy.json \
-  --parameters azuredeploy.parameters.json \
-  --mode Incremental
-```
-
-### การสำรองข้อมูลและกู้คืน
-- เปิดใช้งานการสำรองข้อมูลอัตโนมัติของ Cosmos DB
-- เปิดใช้งานการลบแบบซอฟต์ของ Key Vault
-- เก็บทบทวนแอปคอนเทนเนอร์เพื่อย้อนกลับ
-
-## 📞 การสนับสนุน
-
-- **ปัญหาเกี่ยวกับเทมเพลต:** [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **สนับสนุน Azure:** [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **ชุมชน:** [Azure AI Discord](https://discord.gg/microsoft-azure)
-
----
-
-**⚡ พร้อมปรับใช้โซลูชันหลายตัวแทนของคุณแล้วหรือยัง?**
-
-เริ่มด้วย: `./deploy.sh -g myResourceGroup`
+[รายงานปัญหา](https://github.com/microsoft/AZD-for-beginners/issues) ·
+[Azure AI Search](https://learn.microsoft.com/azure/search/) ·
+[Container Apps](https://learn.microsoft.com/azure/container-apps/)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิดชอบ**:  
-เอกสารฉบับนี้ได้รับการแปลโดยใช้บริการแปลภาษาอัตโนมัติ [Co-op Translator](https://github.com/Azure/co-op-translator) แม้ว่าเราจะพยายามให้มีความถูกต้องสูงสุด แต่โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความคลาดเคลื่อนได้ เอกสารต้นฉบับในภาษาดั้งเดิมควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่มีความสำคัญ แนะนำให้ใช้บริการแปลโดยมืออาชีพที่เป็นมนุษย์ ทางเราจะไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดขึ้นจากการใช้การแปลฉบับนี้
+**ปฏิเสธความรับผิดชอบ**:
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) ขณะที่เราพยายามให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดขึ้นจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,18 +1,18 @@
 # Chapter 2: AI-First Development
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-2 hours | **⭐ Complexity**: Intermediate
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 4-5 hours including the workshop | **⭐ Complexity**: Intermediate
 
 ---
 
 ## Overview
 
-Dis chapter focus on how to deploy AI-powered applications using Azure Developer CLI and Microsoft Foundry services. From simple AI chat apps go all the way to intelligent agents wey get tools.
+Dis chapter dey focus for how to deploy AI-powered applications using Azure Developer CLI and Microsoft Foundry services. From simple AI chat apps to smart agents wey get tools dem.
 
-> **Validation note (2026-07-13):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.27.1` and the current preview AI agent extension release `azure.ai.agents` `1.0.0-beta.5`. If you are on an older AZD build, update first and then continue with the exercises.
+> **Release review (2026-11-04):** AI CLI guidance bin check against di published `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, and `azure.ai.evaluations` `1.0.0-beta.2` documentation/source. Make you use `azd >= 1.37.0` for di combined workflow. Evaluations now dey use di separate `azd ai eval` namespace; see [release changes and migration guidance](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Dis no be live deployment validation.
 
 ## Learning Objectives
 
-If you finish dis chapter, you go fit:
+As you finish dis chapter, you go fit:
 - Deploy AI applications using pre-built AZD templates
 - Understand Microsoft Foundry integration with AZD
 - Configure and customize AI agents with tools
@@ -27,23 +27,25 @@ If you finish dis chapter, you go fit:
 | 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Connect AZD with Foundry services | 30 min |
 | 2 | [AI Agents Guide](agents.md) | Deploy intelligent agents with tools | 45 min |
 | 3 | [AI Model Deployment](ai-model-deployment.md) | Deploy and configure AI models | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Make your AI solution AZD-ready | 60 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Explore a template and plan your conversion | 2-3 hours |
 
 ---
 
 ## 🚀 Quick Start
 
+Choose one option inside new empty directory. The trailing `.` go initialize di current directory; otherwise AZD fit create subdirectory without change your shell work directory.
+
 ```bash
-# Option 1: RAG Chat App
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
 # Option 2: AI Agents
-azd init --template get-started-with-ai-agents
+azd init --template get-started-with-ai-agents .
 azd up
 
 # Option 3: Quick Chat App
-azd init --template openai-chat-app-quickstart
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
@@ -61,13 +63,15 @@ azd up
 
 ## 💰 Cost Awareness
 
+Dis na sample estimates, no be quotes or caps; model traffic, Search/compute SKUs, region, and optional features fit pass dem. Make you check di pricing guide of your sample before you start.
+
 | Environment | Estimated Monthly Cost |
 |-------------|----------------------|
 | Development | $80-150 |
 | Staging | $150-300 |
 | Production | $300-3,500+ |
 
-**Tip:** Run `azd down` after testing to avoid charges.
+**Tip:** Run `azd down` after you do your testing to avoid extra charges.
 
 ---
 

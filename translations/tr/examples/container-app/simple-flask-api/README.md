@@ -1,433 +1,227 @@
-# Basit Flask API - Container App Örneği
+# Basit Flask API — Azure Container Apps
 
-**Öğrenme Yolu:** Başlangıç ⭐ | **Süre:** 25-35 dakika | **Maliyet:** $0-15/ay
+**Seviye:** Başlangıç · **Süre:** Kurulum dahil 30–45 dakika
 
-Tam, çalışan bir Python Flask REST API'si, Azure Developer CLI (azd) kullanılarak Azure Container Apps'e dağıtıldı. Bu örnek kapsayıcı dağıtımını, otomatik ölçeklendirmeyi ve izleme temellerini gösterir.
+Azure Developer CLI (azd) ile Python Flask CRUD API dağıtın. Kaynak, Dockerfile,
+Bicep ve dağıtım parametreleri dahil edilmiştir. Bu bir **öğrenme örneğidir**, üretim hazır API
+değildir.
 
-## 🎯 Neleri Öğreneceksiniz
+## Neler öğreneceksiniz
 
-- Konteynerleştirilmiş bir Python uygulamasını Azure'a dağıtma
-- Sıfıra ölçeklendirme (scale-to-zero) ile otomatik ölçeklendirmeyi yapılandırma
-- Sağlık probları ve hazır olma kontrolleri uygulama
-- Uygulama günlüklerini ve metriklerini izleme
-- Hızlı dağıtım için Azure Developer CLI kullanma
-
-## 📦 Neler Dahil
-
-✅ **Flask Uygulaması** - CRUD işlemleriyle tam REST API (`src/app.py`)  
-✅ **Dockerfile** - Üretime hazır kapsayıcı yapılandırması  
-✅ **Bicep Altyapısı** - Container Apps ortamı ve API dağıtımı  
-✅ **AZD Yapılandırması** - Tek komutla dağıtım kurulumu  
-✅ **Sağlık Probları** - Canlılık (liveness) ve hazır olma (readiness) kontrolleri yapılandırıldı  
-✅ **Otomatik ölçeklendirme** - HTTP yüküne göre 0-10 replika  
-
-## Mimari
+- azd ile bir konteyner oluşturup yayınlama.
+- Ingress ve liveness/readiness probe'larını yapılandırma.
+- CRUD yanıtlarını doğrulama ve uygulama günlüklerini inceleme.
+- Bellek içi verinin kalıcı uygulamalar için neden uygun olmadığını anlama.
 
 ```mermaid
-graph TD
-    subgraph ACA[Azure Container Apps Ortamı]
-        Flask[Flask API Konteyneri<br/>Sağlık uç noktaları<br/>REST API<br/>Otomatik ölçeklendirme 0-10 replika]
-        AppInsights[Uygulama İçgörüleri]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
 
-## Ön Koşullar
+**Önemli:** öğeler tek bir işlemde tutulur. Varsayılan, **bir Gunicorn işçisi,
+0–1 replika**dır, bu da işçiler/replikalar arasında tutarsız verilerin önüne geçer.
+Yeniden başlatma, revizyon değişikliği veya ölçek sıfıra düşürmede öğeler kaybolur.
+Replika sayısını artırmak paylaşılan kalıcı depolama gerektirir. API'nin kimlik doğrulama veya yetkilendirmesi yoktur.
 
-### Gereksinimler
-- **Azure Developer CLI (azd)** - [Kurulum kılavuzu](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure aboneliği** - [Ücretsiz hesap](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Docker'ı yükleyin](https://www.docker.com/products/docker-desktop/) (yerel test için)
+## Önkoşullar
 
-### Ön Koşulları Doğrulayın
+- [Güncel kararlı azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (inceleme sırasında yayınlanmış sürüm: 1.37.2).
+- Doğrulama için [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- Docker ve daemonu çalışır durumda; varsayılan yerel imaj oluşturma için gereklidir.
+- Azure aboneliği, kaynak oluşturma izinleri ve Container Apps bölgesel kota.
+- Aşağıdaki komutlar için Bash (veya eşdeğer PowerShell).
+- İsteğe bağlı yerel geliştirme için Python 3.11.
 
 ```bash
-# azd sürümünü kontrol edin (1.5.0 veya daha yeni gerekli)
 azd version
-
-# Azure girişini doğrulayın
+az version
+docker info
 azd auth login
-
-# Docker'ı kontrol edin (isteğe bağlı, yerel test için)
-docker --version
+az login
 ```
 
-## ⏱️ Dağıtım Zaman Çizelgesi
+CLI araçlarının ayrı oturumları vardır. İki ortamda da aynı aboneliği kullanın.
 
-| Aşama | Süre | Neler Olur |
-|-------|----------|--------------||
-| Ortam kurulumu | 30 saniye | azd ortamı oluşturulur |
-| Kapsayıcı oluşturma | 2-3 dakika | Flask uygulamasının Docker imajı oluşturulur |
-| Altyapı sağlama | 3-5 dakika | Container Apps, kayıt defteri, izleme oluşturulur |
-| Uygulamayı dağıtma | 2-3 dakika | İmaj itilir ve Container Apps'e dağıtılır |
-| **Toplam** | **8-12 dakika** | Dağıtım tamamlandı ve hazır |
+## Hızlı başlangıç
 
-## Hızlı Başlangıç
+Depo kök dizininden:
 
 ```bash
-# Örneğe git
 cd examples/container-app/simple-flask-api
-
-# Ortamı başlat (benzersiz bir ad seç)
-azd env new myflaskapi
-
-# Her şeyi dağıt (altyapı + uygulama)
+azd env new flask-demo
 azd up
-# Aşağıdakiler istenecek:
-# 1. Azure aboneliğini seçin
-# 2. Bölge seçin (ör. eastus2)
-# 3. Dağıtım için 8-12 dakika bekleyin
-
-# API uç noktanızı alın
-azd env get-values
-
-# API'yi test edin
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**Beklenen Çıktı:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ Dağıtımı Doğrulayın
-
-### 1. Adım: Dağıtım Durumunu Kontrol Et
-
-```bash
-# Dağıtılan hizmetleri görüntüle
-azd show
-
-# Beklenen çıktı şunu gösterir:
-# - Hizmet: api
-# - Uç nokta: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Durum: Çalışıyor
-```
-
-### 2. Adım: API Uç Noktalarını Test Edin
-
-```bash
-# API uç noktasını al
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# Sağlığı test et
-curl $API_URL/health
+Beklenen: HTTP 200 ve `"status":"healthy"`, 
+`"service":"simple-flask-api"` ve güncel UTC zaman damgası içeren JSON.
+Sağlama ve imaj oluşturma genellikle birkaç dakika sürer; süreler değişiklik gösterebilir.
 
-# Kök uç noktayı test et
-curl $API_URL/
+İlk sağlama, 80 numaralı portu dinleyen genel bir hello-world imajını kullanır.
+`azure.yaml`, hizmet dağıtımı için `infra/app/api.bicep` ve eşleşen parametre dosyasını seçer, 
+bu da imajı, ingress'i ve testleri 8000 numaralı porta geçirir.
+Bu dağıtım parametrelerini silmeyin.
 
-# Bir öğe oluştur
-curl -X POST $API_URL/api/items \
+## CRUD Doğrulaması
+
+Aynı replika aktifken aşağıdakileri sırasıyla çalıştırın:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# Tüm öğeleri al
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**Başarı Kriterleri:**
-- ✅ Sağlık uç noktası HTTP 200 döndürür
-- ✅ Kök uç nokta API bilgilerini gösterir
-- ✅ POST yeni öğe oluşturur ve HTTP 201 döndürür
-- ✅ GET oluşturulan öğeleri döndürür
+Başarı: POST 201, okuma/PUT 200, gövdesiz DELETE 204 ve ardından eksik öğe 404.
+Yanlış biçimlendirilmiş/nesne olmayan JSON veya boş bir isim 400 döner.
+Bir öğe istekler arasında kaybolursa, yeniden başlatma veya sıfıra ölçekleme olup olmadığını kontrol edin;
+bu, kalıcılık değil kasıtlı bir bellek içi sınırlamadır.
 
-### 3. Adım: Günlükleri Görüntüleyin
+| Uç Nokta | Metodlar |
+|---|---|
+| `/` | GET — hizmet bilgisi |
+| `/health` | GET — canlılık/hazırlık |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## Günlükler ve yapılandırma
 
 ```bash
-# azd monitor kullanarak canlı günlükleri aktarın
-azd monitor --logs
-
-# Veya Azure CLI'yi kullanın:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Şunları görmelisiniz:
-# - Gunicorn başlatma mesajları
-# - HTTP istek günlükleri
-# - Uygulama bilgi günlükleri
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## Proje Yapısı
+Beklenen: Gunicorn başlatma, istek erişim günlükleri ve uygulama mesajları.
+`azd monitor --logs` bir portal görünümü açar; terminale akış göndermez.
+Application Insights sağlanmıştır ancak **bu Flask kodu tarafından enstrümente edilmemiştir**;
+stdout günlükleri için Container Apps/Log Analytics kullanın.
 
+CPU/bellek, replika sınırları veya ölçek kuralları için `infra/app/api.bicep` dosyasını düzenleyin, sonra
+`azd up` çalıştırın. Varsayılanlar 0.5 vCPU, 1 GiB, minimum 0 / maksimum 1 replika ve
+50 eşzamanlı istek için HTTP eşik değeridir. Sıfıra ölçekleme soğuk başlatma gecikmesi ekleyebilir.
+
+Keyfi `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL` veya
+`SCALE_TO_ZERO_TIMEOUT` değerleri **bu şablona veya uygulamaya bağlı değildir**.
+Bir değer atamak, otomatik olarak onun çalışma zamanı ortam değişkeni olmasını sağlamaz.
+Görüntü port 8000'i açıkça bağlar; port değiştiriliyorsa Dockerfile, Bicep giriş ve denetleyicileri
+birlikte güncelleyin.
+
+## Dosyalar
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API Uç Noktaları
+## Yerel geliştirme
 
-| Uç Nokta | Yöntem | Açıklama |
-|----------|--------|-------------|
-| `/health` | GET | Sağlık kontrolü |
-| `/api/items` | GET | Tüm öğeleri listele |
-| `/api/items` | POST | Yeni öğe oluştur |
-| `/api/items/{id}` | GET | Belirli öğeyi al |
-| `/api/items/{id}` | PUT | Öğeyi güncelle |
-| `/api/items/{id}` | DELETE | Öğeyi sil |
-
-## Yapılandırma
-
-### Ortam Değişkenleri
+Bu örnek dizininden:
 
 ```bash
-# Özel yapılandırmayı ayarla
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### Ölçeklendirme Yapılandırması
-
-API, HTTP trafiğine göre otomatik olarak ölçeklenir:
-- **Minimum Replika Sayısı**: 0 (boşta iken sıfıra ölçeklenir)
-- **Maksimum Replika Sayısı**: 10
-- **Replika Başına Eşzamanlı İstekler**: 50
-
-## Geliştirme
-
-### Yerel Olarak Çalıştırma
+Başka bir terminalde, `http://localhost:8000/health` ve CRUD uç noktalarını test edin.
+Ya da gerçek görüntüyü oluşturup çalıştırın:
 
 ```bash
-# Bağımlılıkları yükle
-cd src
-pip install -r requirements.txt
-
-# Uygulamayı çalıştır
-python app.py
-
-# Yerel olarak test et
-curl http://localhost:8000/health
-```
-
-### Kapsayıcıyı Oluşturma ve Test Etme
-
-```bash
-# Docker imajı oluştur
 docker build -t flask-api:local ./src
-
-# Konteyneri yerel olarak çalıştır
-docker run -p 8000:8000 flask-api:local
-
-# Konteyneri test et
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## Dağıtım
+İlk dağıtımdan sonra sadece kod değişiklikleri için `azd deploy api` çalıştırın.
+Bicep değişiklikleri için `azd up` çalıştırarak yeniden sağlama ve dağıtım yapın.
 
-### Tam Dağıtım
+## Pratik alıştırmalar
+
+### 1. Girdi reddini doğrula
+
+**Başlangıç noktası:** yukarıdaki dağıtılmış API, `API_URL`.
+**Amaç:** API'nin geçersiz JSON biçimlerini ve eksik isimleri reddettiğini doğrulamak.
 
 ```bash
-# Altyapıyı ve uygulamayı dağıt
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### Yalnızca Kod ile Dağıtım
+**Başarı kriteri / çözüm:** ikisi de 500 yerine JSON hatası ile 400 döner.
+**Yaygın sorun:** JSON içerik türü başlığının atlanması.
+
+### 2. Salt okunur sürüm uç noktası ekle
+
+**Başlangıç noktası:** `src/app.py`. **Amaç:** API'yi genişletip yeniden dağıtmak.
+Bunu `if __name__ == '__main__':` bloğundan önce ekleyin:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+Önce `azd deploy api` sonra `curl --fail-with-body "${API_URL}/version"` çalıştırın.
+**Başarı kriteri:** HTTP 200 ve `{"version":"1.0.0"}`.
+**Yaygın sorun:** engelleyen `app.run()` çağrısından sonra rotayı koymak  
+`python src/app.py` ile test ediliyor.
+
+### Bilgi kontrol noktası
+
+Kalıcı veri için neden tek bir işçi yetersizdir? Çünkü bir işlem bile yeniden başlatıldığında
+sözlüğünü kaybeder. Üretim sürümü kalıcı paylaşılan depolama,
+kimlik doğrulama, yetkilendirme, göçler, testler ve operasyonel izleme gerektirir.
+
+## Maliyetler ve sorun giderme
+
+Bu garantili $0 dağıtımı değildir: Temel kayıt defteri ve kayıt depolama/yutma
+uygulama hesaplaması sıfır olduğunda bile ücretlendirmeye neden olabilir. Bölgeniz için
+[fiyatlandırma hesaplayıcısını](https://azure.microsoft.com/pricing/calculator/) kullanın.
+
+- **Docker derleme hatası:** `docker info`, ağ erişimi ve bağımlılıkları doğrulayın.
+- **Sağlıksız uygulama:** konsol/sistem günlüklerini inceleyin ve görüntü portu, giriş ile
+  denetlemelerin uyumlu olduğunu doğrulayın. Flask portunda yer tutucu denetlenmemelidir.
+- **403/izinler:** abonelik ve kaynak oluşturma izinlerini doğrulayın.
+- **Öğeler kayboluyor:** bellekteki durum yeniden başlatma/sıfıra ölçekleme sırasında sıfırlanır; kalıcı davranış için bir veritabanı ekleyin.
+
+
+## Temizlik ve sonraki adımlar
 
 ```bash
-# Sadece uygulama kodunu dağıtın (altyapı değişmeden)
-azd deploy api
+azd down
 ```
 
-### Yapılandırmayı Güncelleme
+Silme istemini inceleyin ve ayrılmış kaynak grubunun kaldırıldığını doğrulayın.
+Alakasız veriler içeren bir kaynak grubuna karşı yıkıcı temizlik yapmayın.
 
-```bash
-# Ortam değişkenlerini güncelle
-azd env set API_KEY "new-api-key"
-
-# Yeni yapılandırmayla yeniden dağıt
-azd deploy api
-```
-
-## İzleme
-
-### Günlükleri Görüntüle
-
-```bash
-# azd monitor kullanarak canlı günlükleri akış halinde izleyin
-azd monitor --logs
-
-# Veya Container Apps için Azure CLI'yi kullanın:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Son 100 satırı görüntüleyin
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### Metrikleri İzleme
-
-```bash
-# Azure Monitor panosunu aç
-azd monitor --overview
-
-# Belirli metrikleri görüntüle
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## Test Etme
-
-### Sağlık Kontrolü
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-Beklenen yanıt:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### Öğe Oluşturma
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### Tüm Öğeleri Getir
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## Maliyet Optimizasyonu
-
-Bu dağıtım sıfıra ölçeklendirmeyi (scale-to-zero) kullanır, dolayısıyla API istekleri işlerken ödeme yaparsınız:
-
-- **Boşta Kalma Maliyeti**: Yaklaşık $0/ay (sıfıra ölçeklendirilir)
-- **Aktif maliyet**: Yaklaşık $0.000024/saniye her replika için
-- **Beklenen aylık maliyet** (hafif kullanım): $5-15
-
-### Maliyetleri Daha da Azaltma
-
-```bash
-# Geliştirme için maksimum replika sayısını azalt
-azd env set MAX_REPLICAS 3
-
-# Daha kısa boşta kalma zaman aşımı kullan
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 dakika
-```
-
-## Sorun Giderme
-
-### Kapsayıcı Başlamıyor
-
-```bash
-# Azure CLI kullanarak konteyner günlüklerini kontrol edin
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Docker görüntüsünün yerel olarak oluşturulduğunu doğrulayın
-docker build -t test ./src
-```
-
-### API Erişilemiyor
-
-```bash
-# Ingress'in harici olduğunu doğrulayın
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### Yüksek Yanıt Süreleri
-
-```bash
-# CPU/Bellek kullanımını kontrol et
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# Gerekirse kaynakları ölçeklendir
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## Temizleme
-
-```bash
-# Tüm kaynakları sil
-azd down --force --purge
-```
-
-## Sonraki Adımlar
-
-### Bu Örneği Genişletin
-
-1. **Veritabanı Ekle** - Azure Cosmos DB veya SQL Veritabanını entegre edin
-   ```bash
-   # infra/main.bicep dosyasına Cosmos DB modülü ekle
-   # app.py dosyasını veritabanı bağlantısıyla güncelle
-   ```
-
-2. **Kimlik Doğrulama Ekle** - Microsoft Entra ID veya API anahtarlarını uygulayın
-   ```python
-   # app.py dosyasına kimlik doğrulama ara yazılımı ekle
-   from functools import wraps
-   ```
-
-3. **CI/CD Kur** - GitHub Actions iş akışı
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Yönetilen Kimlik Ekle** - Azure hizmetlerine güvenli erişim sağlayın
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### İlgili Örnekler
-
-- **[Veritabanı Uygulaması](../../../../../examples/database-app)** - SQL Veritabanı ile tam örnek
-- **[Mikroservisler](../../../../../examples/container-app/microservices)** - Çok servisli mimari
-- **[Container Apps Ana Rehberi](../README.md)** - Tüm kapsayıcı desenleri
-
-### Öğrenme Kaynakları
-
-- 📚 [AZD Yeni Başlayanlar Kursu](../../../README.md) - Ana kurs ana sayfası
-- 📚 [Container Apps Desenleri](../README.md) - Daha fazla dağıtım deseni
-- 📚 [AZD Şablon Galerisi](https://azure.github.io/awesome-azd/) - Topluluk şablonları
-
-## Ek Kaynaklar
-
-### Dokümantasyon
-- **[Flask Dokümantasyonu](https://flask.palletsprojects.com/)** - Flask framework kılavuzu
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Resmi Azure dokümanları
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd komut referansı
-
-### Eğitimler
-- **[Container Apps Hızlı Başlangıç](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - İlk uygulamanızı dağıtma
-- **[Azure'da Python](https://learn.microsoft.com/azure/developer/python/)** - Python geliştirme kılavuzu
-- **[Bicep Dili](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Altyapı olarak kod
-
-### Araçlar
-- **[Azure Portal](https://portal.azure.com)** - Kaynakları görsel olarak yönetin
-- **[VS Code Azure Uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE entegrasyonu
-
----
-
-**🎉 Tebrikler!** Otomatik ölçeklendirme ve izleme ile üretime hazır bir Flask API'sini Azure Container Apps'e dağıttınız.
-
-**Sorularınız mı var?** [Bir issue açın](https://github.com/microsoft/AZD-for-beginners/issues) veya [SSS](../../../resources/faq.md) kısmına bakın
+[Sonraki: Veritabanı uygulaması](../../../../../examples/database-app) · [Mikroservisler](../../../../../examples/container-app/microservices) ·
+[Kapsayıcı genel bakış](../README.md) · [Kurs ana sayfası](../../../README.md) ·
+[Bir sorun bildir](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 
