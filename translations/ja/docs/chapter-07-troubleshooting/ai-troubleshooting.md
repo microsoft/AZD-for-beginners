@@ -1,7 +1,7 @@
 # AI固有のトラブルシューティングガイド
 
 **章のナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📚 コースホーム**: [AZD 入門](../../README.md)
 - **📖 現在の章**: 第7章 - トラブルシューティング＆デバッグ
 - **⬅️ 前へ**: [デバッグガイド](debugging.md)
 - **➡️ 次の章**: [第8章: プロダクション＆エンタープライズパターン](../chapter-08-production/production-ai-practices.md)
@@ -876,7 +876,7 @@ def monitor_performance(func):
 ---
 
 **章のナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📚 コースホーム**: [AZD 入門](../../README.md)
 - **📖 現在の章**: 第7章 - トラブルシューティング＆デバッグ
 - **⬅️ 前へ**: [デバッグガイド](debugging.md)
 - **➡️ 次の章**: [第8章: プロダクション＆エンタープライズパターン](../chapter-08-production/production-ai-practices.md)
