@@ -1,195 +1,207 @@
-# सामान्य समस्या आणि उपाय
+# सामान्य समस्या आणि निराकरणे
 
 **अध्याय नेव्हिगेशन:**
-- **📚 कोर्स होम**: [AZD नवशिक्यांसाठी](../../README.md)
-- **📖 सध्याचा अध्याय**: अध्याय 7 - समस्या निवारण आणि डीबगिंग
+- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
+- **📖 सध्याचा अध्याय**: अध्याय 7 - समस्या सोडवणे आणि डीबगिंग
 - **⬅️ मागील अध्याय**: [अध्याय 6: प्री-फ्लाइट तपासण्या](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ पुढचे**: [डीबगिंग मार्गदर्शक](debugging.md)
-- **🚀 पुढचा अध्याय**: [अध्याय 8: उत्पादन आणि एंटरप्राइझ पॅटर्न्स](../chapter-08-production/production-ai-practices.md)
+- **➡️ पुढील**: [डीबगिंग मार्गदर्शक](debugging.md)
+- **🚀 पुढील अध्याय**: [अध्याय 8: उत्पादन आणि एंटरप्राइझ नमुने](../chapter-08-production/production-ai-practices.md)
 
 ## परिचय
 
-हा सर्वसमावेशक समस्या निवारण मार्गदर्शक Azure Developer CLI वापरताना सहसा येणाऱ्या समस्यांवर आधारित आहे. प्रमाणीकरण, तैनाती, इन्फ्रास्ट्रक्चर प्रोविजनिंग आणि अनुप्रयोग कॉन्फिगरेशनसंबंधी सामान्य समस्या कशा ओळखाव्यात, त्यांचे निदान कसे करायचे आणि त्यांचे निराकरण कसे करायचे हे शिका. प्रत्येक समस्येत तपशीलवार लक्षणे, मूळ कारणे आणि टप्प्याटप्प्याने निराकरण प्रक्रिया दिल्या आहेत.
+हा संपूर्ण समस्या सोडवण्याचा मार्गदर्शक Azure Developer CLI वापरताना सर्वात जास्त आढळणाऱ्या समस्यांवर आधारित आहे. प्रमाणीकऱण, तैनाती, पायाभूत सुविधा पुरवठा आणि अनुप्रयोग संरचनेशी संबंधित सामान्य समस्यांचे निदान, समस्या निवारण आणि निराकरण कसे करावे हे शिकाअ। प्रत्येक समस्येसह सविस्तर लक्षणे, मुळ कारणे आणि पायरी-दर-पायरी निराकरण प्रक्रिया दिल्या आहेत.
 
-## शिकण्याचे उद्दिष्टे
+## अभ्यासाचे उद्दिष्टे
 
-हा मार्गदर्शक पूर्ण केल्यावर, आपण:
-- Azure Developer CLI समस्या निदान करण्याच्या तंत्रांमध्ये प्राविण्य मिळवाल
-- सामान्य प्रमाणीकरण आणि परवानगी-संबंधी समस्या व त्यांच्या उपायांचा अभ्यास कराल
-- तैनाती अपयश, इन्फ्रास्ट्रक्चर प्रोविजनिंग त्रुटी आणि कॉन्फिगरेशन समस्या सोडवू शकाल
-- सक्रिय मॉनिटरिंग आणि डीबगिंग धोरणे अमलात आणाल
-- जटिल समस्यांसाठी प्रणालीबद्ध समस्या निवारण पद्धती लागू कराल
-- भविष्यातील समस्यांपासून बचावासाठी योग्य लॉगिंग आणि मॉनिटरिंग कॉन्फिगर कराल
+हा मार्गदर्शक पूर्ण केल्यानंतर, आपण:
+- Azure Developer CLI समस्यांसाठी निदान तंत्रज्ञानात पारंगत व्हाल
+- सामान्य प्रमाणीकरण आणि अनुमती समस्यांसह त्यांचे निराकरण समजून घ्याल
+- तैनाती अपयश, पायाभूत सुविधा पुरवठा त्रुटी आणि संरचना समस्या सोडवू शकाल
+- सक्रिय निरीक्षण आणि डीबगिंग धोरणे राबवाल
+- गुंतागुंतीच्या समस्यांसाठी सुसंगत समस्या निवारण पद्धती वापराल
+- भविष्यातील समस्या टाळण्यासाठी योग्य लॉगिंग आणि निरीक्षण संरचीत कराल
 
-## शिक्षणाचे परिणाम
+## शिकलेल्या गोष्टींचे निकाल
 
-पूर्ण केल्यावर, आपण सक्षम असाल:
+पूर्ण केल्यानंतर, आपण सक्षम असाल:
 - अंगभूत निदान साधने वापरून Azure Developer CLI समस्या ओळखणे
-- प्रमाणीकरण, सबस्क्रिप्शन आणि परवानगी-संबंधी समस्या स्वतंत्रपणे निराकरण करणे
-- तैनाती अपयश आणि इन्फ्रास्ट्रक्चर प्रोविजनिंग त्रुटी प्रभावीपणे तपासणे आणि सोडवणे
-- अनुप्रयोग कॉन्फिगरेशन समस्या व वातावरण-विशिष्ट समस्या डीबग करणे
-- संभाव्य समस्यांचे पूर्वसूचक ओळखण्यासाठी मॉनिटरिंग आणि अलर्टिंग अमलात आणणे
-- लॉगिंग, डीबगिंग आणि समस्या निराकरणाच्या सर्वोत्तम पद्धती लागू करणे
+- प्रमाणीकरण, सदस्यता, आणि अनुमती-संबंधित समस्या स्वतंत्रपणे सोडवणे
+- तैनाती अपयश आणि पायाभूत सुविधा पुरवठा त्रुटी प्रभावीपणे दुरुस्त करणे
+- अनुप्रयोग संरचना समस्या आणि वातावरण-विशिष्ट समस्या डीबग करणे
+- संभाव्य समस्या सक्रियपणे ओळखण्यासाठी निरीक्षण आणि अॅलर्टिंग योजनेची अंमलबजावणी करणे
+- लॉगिंग, डीबगिंग आणि समस्या निराकरण कार्यप्रवाहासाठी सर्वोत्तम पद्धती लागू करणे
 
 ## जलद निदान
 
-विशिष्ट समस्यांमध्ये जाण्यापूर्वी, निदान माहिती गोळा करण्यासाठी हे आदेश चालवा:
+> उदाहरण नावे/आयडी आपल्या वातावरणातील मूल्यांनी बदला. Bash, Bicep, JavaScript आणि पॅरामीटर-फाईलचे तुकडे वेगळ्या लेबलसह दिले आहेत; हे एक executable स्क्रिप्ट नाहीत. विध्वंसकारी ऑपरेशन्स तपासा आणि गुपिते सामायिक करण्यापूर्वी गुपितांवर पट्टी लावा. `azd monitor --logs` ब्राउझर उघडतो; टर्मिनल लॉग्स नाहीत.
+
+विशिष्ट समस्यांमध्ये जाऊन आधी, खालील आज्ञा चालवा ज्यामुळे निदान माहिती जमा होईल:
 
 ```bash
-# azd आवृत्ती आणि स्थिती तपासा
+# Check azd version and health
 azd version
 azd config show
 
-# Azure प्रमाणीकरण सत्यापित करा
+# Verify Azure authentication
 az account show
 az account list
 
-# सध्याचे वातावरण तपासा
+# Check current environment
 azd env list
 azd env get-values
 
-# डिबग लॉगिंग सक्षम करा
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
-## प्रमाणीकरण संबंधी समस्या
+## प्रमाणीकरण समस्या
 
-### समस्या: "Failed to get access token"
+### समस्या: "अ‍ॅक्सेस टोकन मिळवण्यात अयशस्वी"
 **लक्षणे:**
 - `azd up` प्रमाणीकरण त्रुटींसह अयशस्वी होते
-- आदेश "unauthorized" किंवा "access denied" परत करतात
+- आज्ञा "अनधिकृत" किंवा "अ‍ॅक्सेस नाकारले" परत करतात
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. Azure CLI सह पुन्हा प्रमाणीकरण करा
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# 2. कॅश केलेली क्रेडेन्शियल्स साफ करा
+# 2. Clear cached credentials
 az account clear
 az login
 
-# 3. डिव्हाइस कोड प्रवाह वापरा (हेडलॅस सिस्टमसाठी)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# 4. विशिष्ट सदस्यता सेट करा
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
-### समस्या: "Insufficient privileges" दरम्यान तैनाती
+### समस्या: तैनाती दरम्यान "तयारी पुरेशी नाही" त्रुटी
 **लक्षणे:**
-- परवानगी त्रुटींसह तैनाती अयशस्वी होते
-- काही Azure संसाधने तयार करता येत नाहीत
+- अनुमती त्रुटींसह तैनाती अयशस्वी होते
+- विशिष्ट Azure संसाधने तयार करता येत नाहीत
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. Azure मधील आपल्या भूमिका नियुक्त्या तपासा
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. खात्री करा की आपल्याकडे आवश्यक भूमिका आहेत
-# - Contributor (संसाधन निर्मितीसाठी)
-# - User Access Administrator (भूमिका नियुक्तीसाठी)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. योग्य परवानग्यांसाठी आपल्या Azure प्रशासकाशी संपर्क साधा
+# 3. Contact your Azure administrator for proper permissions
 ```
 
-### समस्या: मल्टी-टेनंट प्रमाणीकरण समस्या
-**उपाय:**
+### समस्या: बहु-भाड्यांकाशी प्रमाणीकरण समस्या
+**निराकरणे:**
 ```bash
-# 1. विशिष्ट टेनंटसह लॉगिन करा
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. कॉन्फिगरेशनमध्ये टेनंट सेट करा
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. टेनंट बदलताना टेनंट कॅश साफ करा
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
-## 🏗️ इन्फ्रास्ट्रक्चर प्रोविजनिंग त्रुटी
+## 🏗️ पायाभूत सुविधा पुरवठा त्रुटी
 
-### समस्या: संसाधन नावांचे संघर्ष
+### समस्या: संसाधन नावांमध्ये संघर्ष
 **लक्षणे:**
-- "The resource name already exists" त्रुटी
-- संसाधन तयार करताना तैनाती अयशस्वी होते
+- "संसाधन नाव आधीपासून अस्तित्वात आहे" त्रुट्या
+- संसाधन निर्मिती दरम्यान तैनाती अयशस्वी होते
 
-**उपाय:**
-```bash
-# 1. टोकन्ससह अद्वितीय संसाधन नावे वापरा
-# तुमच्या Bicep टेम्पलेटमध्ये:
+**निराकरणे:**
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
+```
 
-# 2. पर्यावरणाचे नाव बदला
+```bash
+# 2. Change environment name
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. विद्यमान संसाधने साफ करा
-azd down --force --purge
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
 ```
 
-### समस्या: लोकेशन/रीजन उपलब्ध नाही
+### समस्या: स्थान/क्षेत्र उपलब्ध नाही
 **लक्षणे:**
-- "The location 'xyz' is not available for resource type"
-- निवडलेल्या प्रदेशात काही SKUs उपलब्ध नाहीत
+- "xyz स्थान हा संसाधन प्रकारासाठी उपलब्ध नाही" त्रुटी
+- निवडलेल्या प्रदेशात काही SKU उपलब्ध नाहीत
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. संसाधन प्रकारांसाठी उपलब्ध ठिकाणे तपासा
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. सामान्यपणे उपलब्ध क्षेत्रे वापरा
-azd config set defaults.location eastus2
-# किंवा
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. क्षेत्रानुसार सेवा उपलब्धता तपासा
-# भेट द्या: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### समस्या: कोटा ओलांडले गेले आहे
-**लक्षणे:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+स्थान बदलल्याने विद्यमान संसाधने स्थलांतरित होत नाहीत. विद्यमान संसाधन समूह किंवा संसाधन स्थान बदल नाकारू शकते; प्रादेशिक पुन:तैनातीसाठी स्वतंत्र वातावरण वापरा.
 
-**उपाय:**
+### समस्या: कोटाच्या मर्यादा ओलांडल्या गेल्या
+**लक्षणे:**
+- "संसाधन प्रकारासाठी कोटा ओलांडला"
+- "संसाधनांची कमाल संख्या गाठली"
+
+**निराकरणे:**
 ```bash
-# 1. सध्याचा कोटा वापर तपासा
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# 2. Azure पोर्टलद्वारे कोटा वाढीची विनंती करा
-# या ठिकाणी जा: Subscriptions > Usage + quotas
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# 3. विकासासाठी लहान SKUs वापरा
-# main.parameters.json मध्ये:
+```
+
+विकासासाठी, `infra/main.parameters.json` मध्ये समर्थन असलेला लहान SKU निवडा:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# 4. न वापरलेल्या संसाधनांची साफसफाई करा
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
 ### समस्या: Bicep टेम्पलेट त्रुटी
 **लक्षणे:**
-- टेम्पलेट व्हॅलिडेशन अयशस्वी
-- Bicep फाइल्समधील सिंटॅक्स त्रुटी
+- टेम्पलेट प्रमाणीकरण अयशस्वी
+- Bicep फाइल्समध्ये व्याकरण त्रुटी
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. Bicep वाक्यरचना सत्यापित करा
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Bicep लिंटर वापरा
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. पॅरामीटर फाइलची वाक्यरचना तपासा
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. तैनातीतील बदलांचे पूर्वावलोकन करा
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
@@ -197,313 +209,314 @@ azd provision --preview
 
 ### समस्या: बिल्ड अपयश
 **लक्षणे:**
-- तैनाती दरम्यान अनुप्रयोग बिल्ड करण्यात अयशस्वी
-- पॅकेज इंस्टॉलेशन त्रुटी
+- अनुप्रयोग तैनातीदरम्यान बिल्ड होणे अयशस्वी होते
+- पॅकेज इन्स्टॉलेशन त्रुटी
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. डिबग फ्लॅगसह बिल्ड आउटपुट तपासा
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. तैनात केलेल्या सेवेची स्थिती पहा
+# 2. View deployed service status
 azd show
 
-# 3. बिल्ड स्थानिकपणे चाचणी करा
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Node.js/Python आवृत्ती सुसंगतता तपासा
+# 3. Check Node.js/Python version compatibility
 node --version  # Should match azure.yaml settings
 python --version
 
-# 4. बिल्ड कॅशे साफ करा
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. कंटेनर वापरत असल्यास Dockerfile तपासा
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
 ### समस्या: कंटेनर तैनाती अपयश
 **लक्षणे:**
-- कंटेनर ऍप्स सुरू होण्यात अयशस्वी
+- कंटेनर अनुप्रयोग सुरू होऊ शकत नाहीत
 - इमेज पुल त्रुटी
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. Docker बिल्ड स्थानिकपणे चाचणी करा
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Azure CLI वापरून कंटेनर लॉग तपासा
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. azd द्वारे अनुप्रयोगाचे निरीक्षण करा
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. कंटेनर रजिस्ट्री प्रवेशाची पडताळणी करा
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. कंटेनर अॅपचे कॉन्फिगरेशन तपासा
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### समस्या: डेटाबेस कनेक्शन अयशस्वी
+### समस्या: डेटाबेस कनेक्शन अपयश
 **लक्षणे:**
-- अ‍ॅप डेटाबेसशी कनेक्ट करू शकत नाही
-- कनेक्शन टाईमआउट त्रुटी
+- अनुप्रयोग डेटाबेसशी कनेक्ट होऊ शकत नाही
+- कनेक्शन टाइमआउट त्रुटी
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. डेटाबेस फायरवॉल नियम तपासा
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. अनुप्रयोगातून कनेक्टिव्हिटी तपासा
-# आपल्या अॅपमध्ये तात्पुरते जोडा:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. कनेक्शन स्ट्रिंगचे स्वरूप सत्यापित करा
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# 4. डेटाबेस सर्व्हरची स्थिती तपासा
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
-## 🔧 कॉन्फिगरेशन समस्या
+## 🔧 संरचना समस्या
 
-### समस्या: पर्यावरण चल कार्य करत नाहीत
+### समस्या: पर्यावरणीय चल कार्य करत नाहीत
 **लक्षणे:**
-- अ‍ॅप कॉन्फिगरेशन मूल्ये वाचू शकत नाही
-- पर्यावरण चल रिक्त दिसत आहेत
+- अनुप्रयोग संरचना मूल्ये वाचू शकत नाही
+- पर्यावरणीय चल रिक्त दिसतात
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. पर्यावरण चल सेट झाले आहेत का ते तपासा
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. azure.yaml मध्ये असलेल्या चलांची नावे तपासा
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. अनुप्रयोग पुन्हा सुरू करा
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. अॅप सर्व्हिसचे कॉन्फिगरेशन तपासा
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
 ### समस्या: SSL/TLS प्रमाणपत्र समस्या
 **लक्षणे:**
-- HTTPS कार्य करत नाही
-- प्रमाणपत्र व्हॅलिडेशन त्रुटी
+- HTTPS कार्यरत नाही
+- प्रमाणपत्र प्रमाणीकरण त्रुटी
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. SSL प्रमाणपत्राची स्थिती तपासा
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# 2. केवळ HTTPS सक्षम करा
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. सानुकूल डोमेन जोडा (आवश्यक असल्यास)
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### समस्या: CORS कॉन्फिगरेशन समस्या
+### समस्या: CORS संरचना समस्या
 **लक्षणे:**
-- फ्रंटएंड API कॉल करू शकत नाही
-- Cross-origin request blocked
+- फ्रंटेंड API कॉल करू शकत नाही
+- क्रॉस-ओरिजिन विनंती अडवली गेली
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. App Service साठी CORS कॉन्फिगर करा
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. CORS हाताळण्यासाठी API अद्यतनित करा
-# Express.js मध्ये:
+```
+
+2. आपला विद्यमान Express अनुप्रयोग (बार केलेले `cors` सह) अद्यतनित करा:
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# 3. योग्य URL वर चालत आहे का ते तपासा
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
-## 🌍 वातावरण व्यवस्थापन समस्या
+## 🌍 पर्यावरण व्यवस्थापन समस्या
 
-### समस्या: पर्यावरण बदलण्यास समस्या
+### समस्या: पर्यावरण स्विचिंग समस्या
 **लक्षणे:**
 - चुकीचे पर्यावरण वापरले जात आहे
-- कॉन्फिगरेशन योग्यप्रकारे बदलत नाही
+- संरचना योग्यरित्या स्विच होत नाही
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. सर्व पर्यावरणांची यादी करा
+# 1. List all environments
 azd env list
 
-# 2. पर्यावरण स्पष्टपणे निवडा
+# 2. Explicitly select environment
 azd env select production
 
-# 3. सध्याचे पर्यावरण सत्यापित करा
+# 3. Verify current environment
 azd env list
 
-# 4. दूषित असल्यास नवीन पर्यावरण तयार करा
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
-### समस्या: पर्यावरण भ्रष्टावस्था
+### समस्या: पर्यावरण भ्रष्टाचार
 **लक्षणे:**
-- पर्यावरण अमान्य स्थिती दर्शवते
-- संसाधने कॉन्फिगरेशनशी जुळत नाहीत
+- पर्यावरण अमान्य स्थितीत दिसते
+- संसाधने संरचनेशी जुळत नाहीत
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. पर्यावरण स्थिती ताजे करा
+# 1. Refresh environment state
 azd env refresh
 
-# 2. पर्यावरण कॉन्फिगरेशन रीसेट करा
+# 2. Reset environment configuration
 azd env new production-reset
-# आवश्यक पर्यावरण व्हेरिएबल्स कॉपी करा
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. विद्यमान संसाधने आयात करा (जर शक्य असेल तर)
-# हाताने .azure/production/config.json मध्ये संसाधन आयडींसह अद्यतन करा
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
 ## 🔍 कार्यक्षमता समस्या
 
-### समस्या: हळू तैनाती वेळ
+### समस्या: हळू तैनाती वेळा
 **लक्षणे:**
-- तैनाती खूप वेळ घेत आहेत
-- तैनाती दरम्यान टाइमआउट्स
+- तैनाती खूप वेळ घेत आहे
+- तैनाती दरम्यान टाइमआउट होते
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. जलद पुनरावृत्ती साठी विशिष्ट सेवा तैनात करा
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. पायाभूत सुविधांमध्ये बदल नसल्यास फक्त कोड तैनात करा
-azd deploy  # azd up पेक्षा जलद
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. बिल्ड प्रक्रियेचे अनुकूलन करा
-# package.json मध्ये:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. संसाधन स्थान तपासा (एकाच प्रदेशाचा वापर करा)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
 ### समस्या: अनुप्रयोग कार्यक्षमता समस्या
 **लक्षणे:**
-- प्रतिसाद वेळ हळू आहे
-- उच्च संसाधन वापर
+- प्रतिसाद वेळा हळू आहेत
+- संसाधन वापर जास्त
 
-**उपाय:**
+**निराकरणे:**
 ```bash
-# 1. संसाधने वाढवा
-# main.parameters.json मध्ये SKU अद्यतनित करा:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# 2. Application Insights चे मॉनिटरिंग सक्षम करा
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# 3. Azure मध्ये अनुप्रयोगाचे लॉग तपासा
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# किंवा कंटेनर अनुप्रयोगांसाठी:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. कॅशिंग लागू करा
-# Redis कॅश आपल्या पायाभूत संरचनेत जोडा
+# 4. Implement caching
+# Add Redis cache to your infrastructure
 ```
 
-## 🛠️ समस्या निवारण साधने आणि आदेश
+## 🛠️ समस्या निवारण साधने आणि आज्ञा
 
-### डीबग आदेश
+### डीबग आज्ञा
 ```bash
-# व्यापक डीबगिंग
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# azd आवृत्ती तपासा
+# Check azd version
 azd version
 
-# सध्याचे कॉन्फिगरेशन पाहा
+# View current configuration
 azd config show
 
-# कनेक्टिव्हिटी तपासा
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### लॉग विश्लेषण
 ```bash
-# Azure CLI मार्फत अनुप्रयोग लॉग
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# azd वापरून अनुप्रयोगाचे निरीक्षण
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Azure संसाधन लॉग
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
-# कंटेनर लॉग (Container Apps साठी)
+# Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### संसाधन तपासणी
 ```bash
-# सर्व संसाधने यादी करा
+# List all resources
 az resource list --resource-group myrg -o table
 
-# संसाधनाची स्थिती तपासा
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# नेटवर्क निदान
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 अतिरिक्त मदत मिळविणे
 
-### कधी एस्कॅलेट करावे
-- सर्व उपाय केल्यानंतरही प्रमाणीकरण समस्या कायम असल्यास
-- Azure सेवांशी संबंधित इन्फ्रास्ट्रक्चर समस्या असल्यास
-- बिलिंग किंवा सबस्क्रिप्शन-संबंधी समस्या असल्यास
-- सुरक्षा विचार किंवा घटना असल्यास
+### केव्हां संपर्क साधावा
+- सर्व निराकरणे करूनही प्रमाणीकरण समस्या कायम आहेत
+- Azure सेवांमधील पायाभूत सुविधा समस्या
+- बिलिंग किंवा सदस्यता-संबंधित समस्या
+- सुरक्षा चिंता किंवा घटना
 
-### समर्थन चॅनेल
+### समर्थन चॅनेल्स
 ```bash
-# 1. Azure Service Health तपासा
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Azure समर्थन तिकिट तयार करा
-# या लिंकवर जा: https://portal.azure.com -> मदत + समर्थन
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. समुदाय संसाधने
-# - Stack Overflow: azure-developer-cli टॅग
-# - GitHub इश्यूज: https://github.com/Azure/azure-dev/issues
-# - Microsoft प्रश्नोत्तर: https://learn.microsoft.com/en-us/answers/
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
+# - GitHub Issues: https://github.com/Azure/azure-dev/issues
+# - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### संकलित करण्याची माहिती
-समर्थनाशी संपर्क करण्यापूर्वी, खालील गोष्टी गोळा करा:
+### गोळा करावयाची माहिती
+समर्थन संपर्क करण्यापूर्वी, जमा करा:
 - `azd version` आउटपुट
 - `azd config show` आउटपुट
-- `azd show` आउटपुट (सध्याच्या तैनातीची स्थिती)
-- त्रुटी संदेश (पूर्ण मजकूर)
-- समस्या पुनरुत्पादन करण्यासाठी पावले
-- पर्यावरण तपशील (`azd env get-values`)
-- समस्या कधी सुरू झाली याची टाइमलाइन
+- `azd show` आउटपुट (सध्याचा तैनाती स्थिती)
+- त्रुटी संदेश (संपूर्ण मजकूर)
+- समस्या पुन्हा एकदा कशी घडवून आणायची ते चरण
+- गुपिते असलेली अदृश्य केलेली पर्यावरण तपशील (कच्चे `azd env get-values` कधीही शेअर करू नका)
+- समस्या सुरू झाल्याचा कालमर्यादा
 
-### लॉग संकलन स्क्रिप्ट
+### लॉग गोळा करण्याचा स्क्रिप्ट
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -530,71 +543,73 @@ echo "Debug information collected in debug-logs/"
 
 ### पूर्व-तैनाती तपासणी यादी
 ```bash
-# 1. प्रमाणीकरण सत्यापित करा
+# 1. Validate authentication
 az account show
 
-# 2. कोटा आणि मर्यादा तपासा
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# 3. टेम्पलेट्स सत्यापित करा
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# 4. प्रथम स्थानिकपणे चाचणी करा
+# 4. Test locally first
 npm run build
 npm run test
 
-# 5. ड्राय-रन तैनाती वापरा
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
-### मॉनिटरिंग सेटअप
-```bash
-# Application Insights सक्षम करा
-# main.bicep मध्ये जोडा:
+### निरीक्षण सेटअप
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# अलर्ट सेट करा
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
 ### नियमित देखभाल
 ```bash
-# साप्ताहिक आरोग्य तपासण्या
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# मासिक खर्चाचे पुनरावलोकन
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# त्रैमासिक सुरक्षा पुनरावलोकन
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
 ## संबंधित संसाधने
 
-- [डीबगिंग मार्गदर्शक](debugging.md) - प्रगत डीबगिंग तंत्रे
-- [संसाधने प्रोविजनिंग](../chapter-04-infrastructure/provisioning.md) - इन्फ्रास्ट्रक्चर समस्या निवारण
+- [डीबगिंग मार्गदर्शक](debugging.md) - प्रगत डीबगिंग तंत्रज्ञान
+- [पुरवठा संसाधने](../chapter-04-infrastructure/provisioning.md) - पायाभूत सुविधा समस्या निवारण
 - [क्षमता नियोजन](../chapter-06-pre-deployment/capacity-planning.md) - संसाधन नियोजन मार्गदर्शन
-- [SKU निवड](../chapter-06-pre-deployment/sku-selection.md) - सेवा टियर शिफारसी
+- [SKU निवड](../chapter-06-pre-deployment/sku-selection.md) - सेवा स्तर शिफारसी
 
 ---
 
-**टीप**: हा मार्गदर्शक बुकमार्क करून ठेवा आणि समस्या आढळल्यास त्याचा संदर्भ घ्या. बहुतेक समस्या आधीही पाहिल्या गेल्या आहेत आणि त्यांना स्थापित उपाय आहेत!
+**टीप**: हा मार्गदर्शक बुकमार्क करा आणि समस्या आढळल्यास त्याचा संदर्भ घ्या. बहुतेक समस्या आधी पाहिल्या गेल्या आहेत आणि त्यांच्या निराकरणे स्थिर आहेत!
 
 ---
 
 **नेव्हिगेशन**
-- **मागील धडा**: [संसाधने प्रोविजनिंग](../chapter-04-infrastructure/provisioning.md)
+- **मागील धडा**: [पुरवठा संसाधने](../chapter-04-infrastructure/provisioning.md)
 - **पुढील धडा**: [डीबगिंग मार्गदर्शक](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **अस्वीकरण**:
-हा दस्तऐवज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून अनुवादित केला आहे. जरी आम्ही अचूकतेसाठी प्रयत्न करत असलो तरी, कृपया लक्षात घ्या की स्वयंचलित अनुवादांमध्ये चुका किंवा अशुद्धता असू शकतात. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानला पाहिजे. महत्त्वाच्या माहितीसाठी व्यावसायिक मानवी अनुवादाची शिफारस केली जाते. या अनुवादाच्या वापरामुळे उद्भवणाऱ्या कोणत्याही गैरसमजुती किंवा चुकीच्या अर्थनिर्वचनांसाठी आम्ही जबाबदार नाही.
+हा दस्तऐवज AI भाषांतर सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) चा वापर करून अनुवादित केला आहे. जरी आम्ही अचूकतेसाठी प्रयत्न करतो, तरी कृपया लक्षात घ्या की स्वयंचलित भाषांतरांमध्ये त्रुटी किंवा अचूकतेची कमतरता असू शकते. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानला पाहिजे. महत्त्वाची माहिती असल्यास, व्यावसायिक मानवी भाषांतराची शिफारस केली जाते. या भाषांतराच्या वापरामुळे उद्भवणाऱ्या कोणत्याही गैरसमज किंवा चुकीच्या अर्थलावणीसाठी आम्ही जबाबदार नाही.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

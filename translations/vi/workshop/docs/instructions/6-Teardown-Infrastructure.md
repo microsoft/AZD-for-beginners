@@ -1,60 +1,58 @@
-# 6. Dỡ bỏ Hạ tầng
+# 6. Gỡ bỏ Hạ tầng
 
-!!! tip "KHI KẾT THÚC MODULE NÀY BẠN SẼ CÓ THỂ"
+!!! tip "KHI KẾT THÚC MODULE NÀY BẠN SẼ CÓ KHẢ NĂNG"
 
-    - [ ] Hiểu tầm quan trọng của việc dọn dẹp tài nguyên và quản lý chi phí
-    - [ ] Sử dụng `azd down` để gỡ bỏ hạ tầng một cách an toàn
-    - [ ] Phục hồi các dịch vụ Azure AI bị xóa mềm nếu cần
-    - [ ] **Lab 6:** Dọn dẹp tài nguyên Azure và xác minh việc loại bỏ
-
----
-
-## Bài tập bổ sung
-
-Trước khi dỡ bỏ dự án, hãy dành vài phút để khám phá theo hướng mở.
-
-!!! info "Thử những gợi ý khám phá này"
-
-    **Thử nghiệm với GitHub Copilot:**
-    
-    1. Hỏi: `What other AZD templates could I try for multi-agent scenarios?`
-    2. Hỏi: `How can I customize the agent instructions for a healthcare use case?`
-    3. Hỏi: `What environment variables control cost optimization?`
-    
-    **Khám phá Azure Portal:**
-    
-    1. Xem lại các số liệu Application Insights cho bản triển khai của bạn
-    2. Kiểm tra phân tích chi phí cho các tài nguyên đã được cấp phát
-    3. Khám phá lại khu vực thử nghiệm agent trên cổng Microsoft Foundry một lần nữa
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## Gỡ bỏ Hạ tầng
+## Bài tập Thưởng
 
-1. Việc dỡ bỏ hạ tầng dễ như sau:
+Trước khi gỡ bỏ dự án, hãy dành vài phút để khám phá mở rộng.
+
+!!! info "Thử Những Gợi ý Khám phá Này"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
+
+---
+
+## Hủy cấp phát Hạ tầng
+
+1. Việc gỡ bỏ hạ tầng rất đơn giản:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. Xác nhận môi trường đã chọn và xem xét các tài nguyên sẽ bị xóa. Việc này sẽ loại bỏ tài nguyên Azure và có thể phá hủy dữ liệu. Giữ lại lời nhắc xác nhận cho quy trình học tập này. Khi hoàn thành bạn sẽ thấy kết quả tương tự:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Tùy chọn) Nếu bạn chạy `azd up` một lần nữa, bạn sẽ thấy mô hình gpt-4.1 được triển khai vì biến môi trường đã bị thay đổi (và được lưu) trong thư mục cục bộ `.azure`. 
+1. Xác minh việc xóa trong cổng thông tin và kiểm tra các tài nguyên ngoài phạm vi triển khai. Báo cáo chi phí và cập nhật hạn mức có thể bị chậm. Cấu hình `.azure` cục bộ sẽ vẫn còn trừ khi bạn chủ động xoá nó.
 
-      Đây là các bản triển khai mô hình **trước**:
+1. `azd down --purge` còn yêu cầu xóa vĩnh viễn các tài nguyên được xóa mềm được hỗ trợ. Chỉ sử dụng khi không cần khôi phục và bạn hiểu các chính sách giữ/bảo vệ xóa bỏ. Nó không đảm bảo việc giải phóng hạn mức ngay lập tức.
 
-      ![Ban đầu](../../../../../translated_images/vi/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      Và đây là **sau**:
-      ![Mới](../../../../../translated_images/vi/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Không triển khai lại chỉ để xác minh việc dọn dẹp. Một `azd up` có chủ đích sau đó có thể tái tạo tài nguyên sử dụng các đầu vào cục bộ còn lại, và sẽ phát sinh phí lại. Việc cập nhật mô hình thường dùng các thay đổi cấp phát được hỗ trợ, không phải gỡ bỏ.
 
 ---
 

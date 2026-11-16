@@ -1,69 +1,71 @@
-# Mipango ya Uwezo - Upatikanaji wa Rasilimali za Azure na Vizingiti
+# Mipango ya Uwezo - Upatikanaji na Vikomo vya Rasilimali za Azure
 
-**Urambazaji wa Sura:**
+**Uvinjari wa Sura:**
 - **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
-- **📖 Sura ya Sasa**: Sura 6 - Uthibitishaji na Mipango Kabla ya Uenezaji
-- **⬅️ Sura Iliyopita**: [Sura 5: Suluhisho za AI za Wakala-Wengi](../../examples/retail-scenario.md)
+- **📖 Sura ya Sasa**: Sura ya 6 - Ukaguzi wa Kabla ya Utekelezaji & Mipango
+- **⬅️ Sura Iliyopita**: [Sura ya 5: Suluhisho za AI za Wakala Wengi](../../examples/retail-scenario.md)
 - **➡️ Ifuatayo**: [Uchaguzi wa SKU](sku-selection.md)
-- **🚀 Sura Ifuatayo**: [Sura 7: Kutatua Matatizo](../chapter-07-troubleshooting/common-issues.md)
+- **🚀 Sura Ifuatayo**: [Sura ya 7: Utatuzi wa Matatizo](../chapter-07-troubleshooting/common-issues.md)
 
 ## Utangulizi
 
-Mwongozo huu kamili utakusaidia kupanga na kuthibitisha uwezo wa rasilimali za Azure kabla ya kueneza kwa kutumia Azure Developer CLI. Jifunze jinsi ya kutathmini vikoa, upatikanaji, na vizingiti vya kikanda ili kuhakikisha uenezaji wenye mafanikio huku ukiboresha gharama na utendaji. Tumia mbinu za mipango ya uwezo kwa usanifu mbalimbali wa programu na hali za upanuaji.
+Mwongozo huu kamili utakusaidia kupanga na kuthibitisha uwezo wa rasilimali za Azure kabla ya kuziweka kwa kutumia Azure Developer CLI. Jifunze kutathmini viwango, upatikanaji, na vikwazo vya maeneo ili kuhakikisha utekelezaji unaofaulu huku ukiboresha gharama na utendakazi. Jifunze mbinu za upangaji wa uwezo kwa usanifu mbalimbali wa programu na hali za upanuzi.
 
 ## Malengo ya Kujifunza
 
 Kwa kumaliza mwongozo huu, utakuwa na uwezo wa:
-- Kuelewa vikoa, vizingiti, na vikwazo vya upatikanaji vya kanda vya Azure
-- Kumaster mbinu za kuangalia upatikanaji wa rasilimali na uwezo kabla ya uenezaji
-- Kutekeleza mikakati ya uthibitishaji wa uwezo na ufuatiliaji yaliyo otomatishwa
-- Kubuni programu kwa urefusho sahihi wa rasilimali na kuzingatia upanuaji
-- Kutumia mbinu za uboreshaji wa gharama kupitia mipango ya uwezo yenye busara
-- Kusanidi onyo na ufuatiliaji kwa matumizi ya vikoa na upatikanaji wa rasilimali
+- Kuelewa viwango vya Azure, vikomo, na vikwazo vya upatikanaji kwa maeneo maalum
+- Kumiliki mbinu za kuangalia upatikanaji wa rasilimali na uwezo kabla ya utekelezaji
+- Kutekeleza mikakati ya uhakiki na ufuatiliaji wa uwezo wa moja kwa moja
+- Kubuni programu kwa ukubwa na kuzingatia upanuzi wa rasilimali ipasavyo
+- Kutumia mikakati ya kuboresha gharama kupitia upangaji makini wa uwezo
+- Kusanidi arifa na ufuatiliaji wa matumizi ya viwango na upatikanaji wa rasilimali
 
 ## Matokeo ya Kujifunza
 
 Baada ya kumaliza, utaweza:
-- Kutathmini na kuthibitisha mahitaji ya uwezo wa rasilimali za Azure kabla ya uenezaji
-- Kuunda skripti zilizootomatishwa za ukaguzi wa uwezo na ufuatiliaji wa vikoa
-- Kubuni usanifu unaoweza kupanuka unaochukua vizingiti vya kikanda na usajili
-- Kutekeleza mikakati ya ukadiriaji wa rasilimali yenye gharama nafuu kwa aina tofauti za mzigo wa kazi
-- Kusanidi ufuatiliaji wa wakati wa kulenga na onyo kwa masuala yanayohusiana na uwezo
-- Kupanga uenezaji wa maeneo mengi kwa mgawanyo sahihi wa uwezo
+- Kutathmini na kuthibitisha mahitaji ya uwezo wa rasilimali za Azure kabla ya utekelezaji
+- Kuunda skiripti za moja kwa moja kwa ajili ya ukaguzi wa uwezo na ufuatiliaji wa viwango
+- Kubuni usanifu unaoweza kupanuka unaozingatia vikwazo vya maeneo na usajili
+- Kutekeleza mikakati ya ukubwa wa rasilimali inayowezesha gharama nafuu kwa aina mbalimbali za mzigo wa kazi
+- Kusanidi ufuatiliaji wa mapema na arifa kwa masuala yanayohusiana na uwezo
+- Kupanga utekelezaji wa maeneo mengi kwa usambazaji sahihi wa uwezo
 
-## Kwa Nini Mipango ya Uwezo ni Muhimu
+## Kwa Nini Upangaji wa Uwezo ni Muhimu
 
-Kabla ya kueneza programu, unahitaji kuhakikisha:
-- **Vikoa vya kutosha** kwa rasilimali zinazohitajika
-- **Upatikanaji wa rasilimali** katika kanda yako lengwa
+> **Upeo:** Mifano hii ya Bash inahitaji Azure CLI, `jq`, na usajili ulioteuliwa. Wanachunguza matoleo yaliyotangazwa na viwango; hakuthibitishi uwezo halisi wa kimwili wala kuhifadhi rasilimali. Hifadhi/badilisha vipande katika mradi wako mwenyewe—majina ya faili ya skiripti/mrithi yanayo hapa ni mifano tu, si za kuingia mfukoni. Viwango vya VM havijumuishi Container Apps, App Service, au viwango vya Azure OpenAI.
+
+Kabla ya kuanzisha programu, unahitaji kuhakikisha:
+- **Viwango vya kutosha** kwa rasilimali zinazohitajika
+- **Upatikanaji wa rasilimali** katika eneo unalolenga
 - **Upatikanaji wa ngazi ya huduma** kwa aina ya usajili wako
 - **Uwezo wa mtandao** kwa trafiki inayotarajiwa
-- **Uboreshaji wa gharama** kupitia urefusho sahihi
+- **Kuboresha gharama** kupitia ukubwa unaofaa
 
-## 📊 Kuelewa Vikoa na Vizingiti vya Azure
+## 📊 Kuelewa Viwango na Vikomo vya Azure
 
-### Aina za Vizingiti
-1. **Vikoa vya ngazi ya usajili** - Rasilimali za juu kwa usajili
-2. **Vikoa vya kikanda** - Rasilimali za juu kwa kanda
-3. **Vizingiti maalum kwa rasilimali** - Vizingiti kwa aina za rasilimali binafsi
-4. **Vizingiti vya ngazi ya huduma** - Vizingiti kulingana na mpango wako wa huduma
+### Aina za Vikomo
+1. **Viwango vya ngazi ya usajili** - Rasilimali kubwa zaidi kwa usajili mmoja
+2. **Viwango vya eneo** - Rasilimali kubwa zaidi kwa eneo moja
+3. **Vikomo vya rasilimali binafsi** - Vikomo kwa aina ya rasilimali binafsi
+4. **Vikomo vya ngazi ya huduma** - Vikomo kulingana na mpango wako wa huduma
 
-### Vikoa vya Rasilimali Vinavyojirudia
+### Viwango vya Rasilimali Vinavyotumika Mara kwa Mara
 ```bash
-# Angalia matumizi ya kwota ya sasa
+# Check current quota usage
 az vm list-usage --location eastus2 --output table
 
-# Angalia kwota maalum za rasilimali
+# Check specific resource quotas
 az network list-usages --location eastus2 --output table
-az storage account show-usage --output table
+az storage account show-usage --location eastus2 --output table
 ```
 
-## Ukaguzi wa Uwezo Kabla ya Uenezaji
+## Ukaguzi wa Uwezo Kabla ya Utekelezaji
 
-### Skripti ya Uthibitishaji wa Uwezo Iliyootomatishwa
+### Skiripti ya Uhakiki wa Uwezo Ulioamshwa
 ```bash
 #!/bin/bash
-# capacity-check.sh - Thibitisha uwezo wa Azure kabla ya utekelezaji
+# capacity-check.sh - Validate Azure capacity before deployment
 
 set -e
 
@@ -74,7 +76,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Kazi ya kukagua matumizi ya ukomo
+# Function to check quota usage
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -83,22 +85,26 @@ check_quota() {
     
     case $resource_type in
         "compute")
-            usage=$(az vm list-usage --location "$LOCATION" --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az vm list-usage --location "$LOCATION" --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
         "storage")
-            usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+            usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.current')
             limit=$(echo "$usage" | jq -r '.limit')
             ;;
         "network")
-            usage=$(az network list-usages --location "$LOCATION" --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az network list-usages --location "$LOCATION" --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
     esac
     
+    if ! [[ "$current" =~ ^[0-9]+$ && "$limit" =~ ^[0-9]+$ ]]; then
+        echo "❌ Quota data missing or unrecognized for $resource_type"
+        return 1
+    fi
     available=$((limit - current))
     
     if [ "$available" -ge "$required" ]; then
@@ -109,98 +115,95 @@ check_quota() {
     fi
 }
 
-# Angalia vigezo mbalimbali vya ukomo wa rasilimali
-check_quota "compute" 4      # Zinahitajika vCPU 4
-check_quota "storage" 2      # Zinahitajika akaunti 2 za hifadhi
-check_quota "network" 1      # Inahitajika mtandao wa virtuali 1
+# Check various resource quotas
+check_quota "compute" 4      # Need 4 vCPUs
+check_quota "storage" 2      # Need 2 storage accounts
+check_quota "network" 1      # Need 1 virtual network
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Ukaguzi wa Uwezo wa Huduma-Maalum
+### Ukaguzi wa Uwezo wa Huduma Maalum
 
 #### Uwezo wa App Service
 ```bash
-# Angalia upatikanaji wa Mpango wa Huduma ya App
+# Check App Service Plan availability
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Angalia SKU zinazopatikana katika eneo
-    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
+    # Check available SKUs in region
+    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location' || name=='$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)']" -o tsv)
     
     if [ -n "$available_skus" ]; then
-        echo "✅ $sku is available in $location"
+        echo "✅ $sku is listed for $location (not a capacity guarantee)"
     else
         echo "❌ $sku is not available in $location"
         
-        # Pendekeza mikoa mbadala
+        # Suggest alternative regions
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Angalia matumizi ya sasa
+    # Check current usage
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Matumizi
+# Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Uwezo wa Hifadhidata
 ```bash
-# Angalia uwezo wa PostgreSQL
+# Check PostgreSQL capacity
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Angalia kama SKU inapatikana
+    # Inspect the nested regional capability catalog; do not assume top-level
+    # entries are VM SKU names. Select supported tier/version/SKU combinations.
     available=$(az postgres flexible-server list-skus --location "$location" \
-        --query "contains([].name, '$sku')" -o tsv)
+        --output json)
     
-    if [ "$available" = "true" ]; then
-        echo "✅ PostgreSQL $sku is available in $location"
+    if [ -n "$available" ] && [ "$available" != "[]" ]; then
+        echo "$available" | jq .
+        echo "Inspect the catalog for $sku; this does not verify physical capacity."
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Onyesha SKU zinazopatikana
+        # Show available SKUs
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
-            --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
+            --output json
         return 1
     fi
 }
 
-# Angalia uwezo wa Cosmos DB
+# Check Cosmos DB capacity
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Angalia upatikanaji wa mkoa
-    available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
+    # Check region availability
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    available_regions=$(az cosmosdb locations list --query "[?name=='$display_location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Angalia kama serverless inasaidiwa (ikiwa inahitajika)
+        # Check if serverless is supported (if needed)
         if [ "$tier" = "serverless" ]; then
-            serverless_regions=$(az cosmosdb locations list \
-                --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
-            
-            if [ -n "$serverless_regions" ]; then
-                echo "✅ Cosmos DB Serverless is supported in $location"
-            else
-                echo "⚠️  Cosmos DB Serverless may not be supported in $location"
-            fi
+            echo "Verify serverless support and limits separately in Cosmos DB documentation."
+            echo "Availability-zone support is NOT a serverless-support signal."
         fi
     else
         echo "❌ Cosmos DB is not available in $location"
@@ -211,36 +214,31 @@ check_cosmos_capacity() {
 
 #### Uwezo wa Container Apps
 ```bash
-# Angalia uwezo wa Container Apps
+# Check Container Apps capacity
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Angalia kama Container Apps inapatikana katika eneo
-    az provider show --namespace Microsoft.App \
-        --query "resourceTypes[?resourceType=='containerApps'].locations" \
-        --output table | grep -q "$location"
-    
-    if [ $? -eq 0 ]; then
+    # Check if Container Apps is available in region
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    if az provider show --namespace Microsoft.App \
+        --query "resourceTypes[?resourceType=='containerApps'].locations[]" \
+        --output tsv | grep -Fxq "$display_location"; then
         echo "✅ Container Apps is available in $location"
         
-        # Angalia idadi ya mazingira ya sasa
+        # Check current environment count
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps ina kikomo cha mazingira 15 kwa kila eneo
-        if [ "$current_envs" -lt 15 ]; then
-            echo "✅ Can create more Container App environments"
-        else
-            echo "⚠️  Near Container App environment limit in $location"
-        fi
+        echo "Check Microsoft.App quotas for this subscription/region in Azure Quotas."
+        echo "An environment count alone does not establish available quota."
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Onyesha maeneo yanayopatikana
+        # Show available regions
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -250,11 +248,11 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Uthibitishaji wa Upatikanaji wa Kanda
+## 📍 Uhakiki wa Upatikanaji wa Kanda
 
-### Upatikanaji wa Huduma kwa Kanda
+### Upatikanaji wa Huduma Kwenye Kanda
 ```bash
-# Kagua upatikanaji wa huduma katika mikoa yote
+# Check service availability across regions
 check_service_availability() {
     local service=$1
     
@@ -269,9 +267,8 @@ check_service_availability() {
                 --query "resourceTypes[?resourceType=='containerApps'].locations" -o table
             ;;
         "postgres")
-            az postgres flexible-server list-skus --location eastus2 >/dev/null 2>&1 && \
-            echo "PostgreSQL Flexible Server regions:" && \
-            az account list-locations --query "[?metadata.regionType=='Physical'].{name:name,displayName:displayName}" -o table
+            echo "PostgreSQL offerings for candidate region eastus2:"
+            az postgres flexible-server list-skus --location eastus2 --output json
             ;;
         "cosmosdb")
             az cosmosdb locations list --query "[].{name:name,documentationUrl:documentationUrl}" -o table
@@ -279,18 +276,20 @@ check_service_availability() {
     esac
 }
 
-# Kagua huduma zote
+# Check all services
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-### Mapendekezo ya Uchaguzi wa Kanda
+### Majadiliano ya Uchaguzi wa Kanda (Ya Mfano)
+
+Lebele hapa chini ni vidokezo vya uchunguzi, si viwango vya bei, vifaa, au maadili ya utekelezaji. Linganisha bei za maeneo ya sasa na ucheleweshaji uliopimwa. GDPR haisemi eneo la Ujerumani hasa; makazi, vipengele vya huduma, na mahitaji ya shirika/kisheria lazima yatathminiwe pamoja.
 ```bash
-# Pendekeza mikoa bora kulingana na mahitaji
+# Recommend optimal regions based on requirements
 recommend_region() {
-    local requirements=$1  # "gharama-chini" | "utendaji" | "uzingatiaji"
+    local requirements=$1  # "lowcost" | "performance" | "compliance"
     
     echo "Region recommendations for: $requirements"
     
@@ -303,45 +302,35 @@ recommend_region() {
             ;;
         "performance")
             echo "⚡ Performance-optimized regions:"
-            echo "  - East US 2 (Virginia) - Latest hardware"
-            echo "  - West US 2 (Washington) - Latest hardware"
+            echo "  - East US 2 (Virginia) - Measure latency to your users"
+            echo "  - West US 2 (Washington) - Verify required SKUs"
             echo "  - North Europe (Ireland) - For EU users"
             ;;
         "compliance")
             echo "🔒 Compliance-focused regions:"
             echo "  - US Gov regions - For government workloads"
-            echo "  - Germany regions - For GDPR compliance"
+            echo "  - EU regions - Assess residency and contractual requirements"
             echo "  - Australia regions - For data sovereignty"
             ;;
     esac
 }
 ```
 
-## 💰 Mipango na Makadirio ya Gharama
+## 💰 Mipango ya Gharama na Makadirio
 
 ### Makadirio ya Gharama za Rasilimali
 ```bash
-# Kadiria gharama za uanzishaji
+# Estimate deployment costs
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Unda kikundi cha rasilimali cha muda kwa ajili ya makadirio
-    temp_rg="temp-estimation-$(date +%s)"
-    az group create --name "$temp_rg" --location "$location" >/dev/null
-    
-    # Tekeleza miundombinu katika hali ya uhakiki
-    az deployment group validate \
-        --resource-group "$temp_rg" \
-        --template-file infra/main.bicep \
-        --parameters @infra/main.parameters.json \
-        --parameters location="$location" \
-        --query "properties.validatedResources[].{type:type,name:name}" -o table
-    
-    # Futa kikundi cha rasilimali cha muda
-    az group delete --name "$temp_rg" --yes --no-wait
+    # Review declared resources locally. ARM validate/what-if do NOT price them.
+    # Do not create/delete a resource group just to estimate cost.
+    az bicep build --file infra/main.bicep --stdout |
+      jq -r '.resources[] | [.type, (.sku.name // "see module/parameters")] | @tsv'
     
     echo ""
     echo "💡 Use Azure Pricing Calculator for detailed cost estimates:"
@@ -354,10 +343,10 @@ estimate_costs() {
 
 ### Mapendekezo ya Uboreshaji wa SKU
 ```bash
-# Pendekeza SKUs bora kulingana na mahitaji
+# Recommend optimal SKUs based on requirements
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "utengenezaji" | "maandalizi" | "uzalishaji"
+    local workload_type=$2  # "dev" | "staging" | "production"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -417,32 +406,33 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Ukaguzi wa Kabla ya Uzinduaji Uliotomatishwa
+## 🚀 Ukaguzi wa Moja kwa Moja Kabla ya Kuenda Angani
 
-### Skripti Kamili ya Kabla ya Uzinduaji
+### Skiripti Kamili ya Kabla ya Kuwasili
 ```bash
 #!/bin/bash
-# preflight-check.sh - Uthibitisho kamili kabla ya utekelezaji
+# preflight-check.sh - Complete pre-deployment validation
+# Starting-point example: adapt service checks and supply project-specific costs.
 
 set -e
 
-# Usanidi
+# Configuration
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Rangi za matokeo
+# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # Hakuna Rangi
+NC='\033[0m' # No Color
 
-# Kazi za uandishi wa logi
+# Logging functions
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Pakia usanidi
+# Load configuration
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -462,9 +452,10 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Ukaguzi 1: Uthibitishaji
+# Check 1: Authentication
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
+    SUBSCRIPTION_ID=$(az account show --query id -o tsv)
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
     log_info "Authenticated with subscription: $SUBSCRIPTION_NAME"
 else
@@ -472,7 +463,7 @@ else
     exit 1
 fi
 
-# Ukaguzi 2: Upatikanaji wa kikanda
+# Check 2: Regional availability
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -481,14 +472,15 @@ else
     exit 1
 fi
 
-# Ukaguzi 3: Uthibitisho wa kikomo
+# Check 3: Quota validation
 log_info "Checking quota availability..."
 
-# Kikomo cha vCPU
+# vCPU quota
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
-    --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
 vcpu_limit=$(echo "$vcpu_usage" | jq -r '.[0].limit')
+[[ "$vcpu_current" =~ ^[0-9]+$ && "$vcpu_limit" =~ ^[0-9]+$ ]] || { log_error "Missing VM quota data"; exit 1; }
 vcpu_available=$((vcpu_limit - vcpu_current))
 
 if [ "$vcpu_available" -ge "$REQUIRED_VCPUS" ]; then
@@ -498,10 +490,11 @@ else
     exit 1
 fi
 
-# Kikomo cha akaunti ya uhifadhi
-storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+# Storage account quota
+storage_usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
+[[ "$storage_current" =~ ^[0-9]+$ && "$storage_limit" =~ ^[0-9]+$ ]] || { log_error "Missing storage quota data"; exit 1; }
 storage_available=$((storage_limit - storage_current))
 
 if [ "$storage_available" -ge "$REQUIRED_STORAGE" ]; then
@@ -511,13 +504,14 @@ else
     exit 1
 fi
 
-# Ukaguzi 4: Upatikanaji wa huduma
+# Check 4: Service availability
 log_info "Checking service availability..."
+DISPLAY_LOCATION=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
 
 for service in "${REQUIRED_SERVICES[@]}"; do
     case $service in
         "appservice")
-            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION' || name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "App Service is available in $LOCATION"
             else
                 log_error "App Service is not available in $LOCATION"
@@ -535,7 +529,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
         "containerapp")
             if az provider show --namespace Microsoft.App \
                 --query "resourceTypes[?resourceType=='containerApps'].locations" \
-                --output tsv | grep -q "$LOCATION"; then
+                --output tsv | grep -Fxq "$DISPLAY_LOCATION"; then
                 log_info "Container Apps is available in $LOCATION"
             else
                 log_error "Container Apps is not available in $LOCATION"
@@ -543,22 +537,29 @@ for service in "${REQUIRED_SERVICES[@]}"; do
             fi
             ;;
         "cosmosdb")
-            if az cosmosdb locations list --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az cosmosdb locations list --query "[?name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "Cosmos DB is available in $LOCATION"
             else
                 log_error "Cosmos DB is not available in $LOCATION"
                 exit 1
             fi
             ;;
+        "storage")
+            log_info "Storage account quota checked above; validate the selected SKU separately."
+            ;;
+        *)
+            log_error "No check implemented for service: $service"; exit 1
+            ;;
     esac
 done
 
-# Ukaguzi 5: Uwezo wa mtandao
+# Check 5: Network capacity
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
-    --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
 vnet_current=$(echo "$vnet_usage" | jq -r '.[0].current')
 vnet_limit=$(echo "$vnet_usage" | jq -r '.[0].limit')
+[[ "$vnet_current" =~ ^[0-9]+$ && "$vnet_limit" =~ ^[0-9]+$ ]] || { log_error "Missing network quota data"; exit 1; }
 vnet_available=$((vnet_limit - vnet_current))
 
 if [ "$vnet_available" -gt 0 ]; then
@@ -567,7 +568,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Ukaguzi 6: Uthibitisho wa majina ya rasilimali
+# Check 6: Resource naming validation
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -579,9 +580,12 @@ else
     exit 1
 fi
 
-# Ukaguzi 7: Makadirio ya gharama
+# Check 7: Cost estimation
 log_info "Performing cost estimation..."
-ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
+# Set this from a reviewed Pricing Calculator estimate; no built-in pricing API
+# is implemented by this example.
+: "${ESTIMATED_MONTHLY_COST:?Set ESTIMATED_MONTHLY_COST to your reviewed estimate}"
+[[ "$ESTIMATED_MONTHLY_COST" =~ ^[0-9]+$ ]] || { log_error "Use an integer cost estimate"; exit 1; }
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
 
 if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; then
@@ -594,7 +598,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Ukaguzi 8: Uthibitisho wa kiolezo
+# Check 8: Template validation
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -608,17 +612,17 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Muhtasari wa mwisho
+# Final summary
 echo "=================================="
-log_info "✅ All pre-flight checks passed!"
-log_info "Ready for deployment to $LOCATION"
+log_info "✅ Implemented checks passed; review remaining service-specific limits."
+log_info "Quota is not a reservation or guarantee of capacity in $LOCATION."
 echo "Next steps:"
 echo "  1. Run 'azd up' to deploy"
 echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
 
-### Kiolezo cha Faili la Usanidi
+### Kiolezo cha Faili ya Mipangilio
 ```json
 {
   "requirements": {
@@ -652,31 +656,31 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Ufuatiliaji wa Uwezo Wakati wa Uenezaji
+## 📈 Ufuatiliaji wa Uwezo Wakati wa Utekelezaji
 
 ### Ufuatiliaji wa Uwezo kwa Wakati Halisi
 ```bash
-# Fuatilia uwezo wakati wa uanzishaji
+# Monitor capacity during deployment
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Kagua hali ya uanzishaji
+        # Check deployment status
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
-            --query "[0].properties.provisioningState" -o tsv)
+            --query "sort_by(@, &properties.timestamp)[-1].properties.provisioningState" -o tsv)
         
         if [ "$deployment_status" = "Succeeded" ]; then
             log_info "Deployment completed successfully"
             break
-        elif [ "$deployment_status" = "Failed" ]; then
+        elif [ "$deployment_status" = "Failed" ] || [ "$deployment_status" = "Canceled" ]; then
             log_error "Deployment failed"
             break
         fi
         
-        # Angalia matumizi ya rasilimali ya sasa
+        # Check current resource usage
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -687,17 +691,18 @@ monitor_deployment_capacity() {
 }
 ```
 
-## 🔗 Uunganishaji na AZD
+## 🔗 Muunganisho na AZD
 
-### Ongeza hatua za ukaguzi wa kabla ya uzinduaji kwenye azure.yaml
+### Ongeza Mikanda ya Kabla ya Kuanza kwenye azure.yaml
 ```yaml
 # azure.yaml
 hooks:
   preprovision:
     shell: sh
     run: |
+      set -e
       echo "Running pre-flight capacity checks..."
-      ./scripts/preflight-check.sh ${AZURE_LOCATION} ${AZURE_ENV_NAME}
+      bash ./scripts/preflight-check.sh "${AZURE_LOCATION}" "${AZURE_ENV_NAME}"
       
       if [ $? -ne 0 ]; then
         echo "Pre-flight checks failed"
@@ -707,40 +712,40 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## Mbinu Bora
+## Misingi Bora
 
-1. **Kimbia kila wakati ukaguzi wa uwezo** kabla ya kueneza kwenye kanda mpya
-2. **Fuatilia matumizi ya vikoa mara kwa mara** ili kuepuka mshangao
-3. **Panga kukua** kwa kuangalia mahitaji ya uwezo ya baadaye
-4. **Tumia zana za makadirio ya gharama** ili kuepuka mshtuko wa bili
-5. **Andika mahitaji ya uwezo** kwa timu yako
-6. **Otomatisha uthibitishaji wa uwezo** katika mizunguko ya CI/CD
-7. **Zingatia mahitaji ya uwezo kwa kuhamisha kikanda** kama mpango wa kukabiliana na hitilafu
+1. **Kukimbia ukaguzi wa uwezo kila mara** kabla ya kuwekeza katika maeneo mapya
+2. **Fuatilia matumizi ya viwango mara kwa mara** ili kuepuka mshangao
+3. **Panga kwa ukuaji** kwa kuangalia mahitaji ya uwezo wa baadaye
+4. **Tumia zana za makadirio ya gharama** ili kuepuka mshtuko wa muswada
+5. **Tumia kumbukumbu ya mahitaji ya uwezo** kwa timu yako
+6. **Panga uhakiki wa uwezo kiotomatiki** ndani ya mizunguko ya CI/CD
+7. **Zingatia mahitaji ya uwezo wa kufulia mikoa** 
 
-## Hatua Zifuatazo
+## Hatua Zinazofuata
 
-- [Uchaguzi wa SKU](sku-selection.md) - Chagua ngazi za huduma zinazofaa
-- [Ukaguzi wa kabla ya uzinduaji](preflight-checks.md) - Skripti za uthibitishaji zilizootomatishwa
-- [Karatasi ya Mbinu Fupi](../../resources/cheat-sheet.md) - Amri za kumbukumbu ya haraka
-- [Kamusi ya Maneno](../../resources/glossary.md) - Maneno na maana
+- [Mwongozo wa Uchaguzi wa SKU](sku-selection.md) - Chagua ngazi bora za huduma
+- [Uhakiki wa Kabla ya Kuenda Angani](preflight-checks.md) - Skiripti za uhakiki wa otomatiki
+- [Laha ya Hila](../../resources/cheat-sheet.md) - Amri za rejea za haraka
+- [Fasili](../../resources/glossary.md) - Maneno na ufafanuzi
 
 ## Rasilimali Zaidi
 
-- [Vizingiti vya Usajili wa Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Vikomo vya Usajili vya Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Kalkuleta ya Bei ya Azure](https://azure.microsoft.com/pricing/calculator/)
-- [Usimamizi wa Gharama wa Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Upatikanaji wa Kanda za Azure](https://azure.microsoft.com/global-infrastructure/services/)
+- [Usimamizi wa Gharama za Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Upatikanaji wa Kanda wa Azure](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
-**Urambazaji**
-- **Somo Lililopita**: [Mwongozo wa Kurekebisha Makosa](../chapter-07-troubleshooting/debugging.md)
+**Uvinjari**
+- **Somo lililopita**: [Mwongozo wa Utatuzi](../chapter-07-troubleshooting/debugging.md)
 
-- **Somo Lifuatayo**: [Uchaguzi wa SKU](sku-selection.md)
+- **Somo linalofuata**: [Uchaguzi wa SKU](sku-selection.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Kauli ya kutokuwa na dhamana**:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya utafsiri wa AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya asili katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo cha kuaminika. Kwa taarifa muhimu, inapendekezwa kutumia utafsiri wa kitaalamu kutoka kwa mtafsiri wa binadamu. Hatuwajibiki kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

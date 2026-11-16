@@ -1,433 +1,227 @@
-# API Flask đơn giản - Ví dụ Ứng dụng Container
+# API Flask đơn giản — Azure Container Apps
 
-**Lộ trình học:** Người mới bắt đầu ⭐ | **Thời gian:** 25-35 phút | **Chi phí:** $0-15/tháng
+**Cấp độ:** Người mới bắt đầu · **Thời gian:** 30–45 phút bao gồm thiết lập
 
-Một REST API Python Flask hoàn chỉnh, hoạt động được triển khai lên Azure Container Apps bằng Azure Developer CLI (azd). Ví dụ này minh họa việc triển khai container, tự động mở rộng và các khái niệm giám sát cơ bản.
+Triển khai một API CRUD Python Flask với Azure Developer CLI (azd). Bao gồm mã nguồn, Dockerfile,
+Bicep và các tham số triển khai. Đây là một **ví dụ học tập**, không phải
+một API sẵn sàng cho sản xuất.
 
-## 🎯 Những gì bạn sẽ học
+## Những gì bạn sẽ học
 
-- Triển khai một ứng dụng Python đóng gói dưới dạng container lên Azure
-- Cấu hình tự động mở rộng với khả năng scale-to-zero
-- Triển khai probes kiểm tra sức khỏe và readiness
-- Giám sát nhật ký và số liệu ứng dụng
-- Sử dụng Azure Developer CLI để triển khai nhanh
-
-## 📦 Những gì được bao gồm
-
-✅ **Ứng dụng Flask** - REST API hoàn chỉnh với các thao tác CRUD (`src/app.py`)  
-✅ **Dockerfile** - Cấu hình container sẵn sàng cho sản xuất  
-✅ **Hạ tầng Bicep** - Môi trường Container Apps và triển khai API  
-✅ **Cấu hình AZD** - Thiết lập triển khai bằng một lệnh  
-✅ **Health Probes** - Đã cấu hình kiểm tra liveness và readiness  
-✅ **Tự động mở rộng** - 0-10 bản sao dựa trên tải HTTP  
-
-## Architecture
+- Xây dựng và xuất bản một container thông qua azd.
+- Cấu hình ingress và probe liveness/readiness.
+- Xác minh phản hồi CRUD và kiểm tra nhật ký ứng dụng.
+- Hiểu tại sao dữ liệu trong bộ nhớ không phù hợp cho các ứng dụng bền vững.
 
 ```mermaid
-graph TD
-    subgraph ACA[Môi trường Azure Container Apps]
-        Flask[Container API Flask<br/>Các endpoint kiểm tra sức khỏe<br/>REST API<br/>Tự động mở rộng 0-10 bản sao]
-        AppInsights[Thông tin Ứng dụng]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
 
-## Prerequisites
+**Quan trọng:** các mục được giữ trong một tiến trình. Mặc định là **một worker Gunicorn,
+0–1 bản sao**, tránh cố ý đảm bảo dữ liệu nhất quán giữa các worker/bản sao.
+Các mục sẽ mất khi khởi động lại, thay đổi phiên bản, hoặc thu nhỏ về 0. Tăng số bản sao
+yêu cầu bộ nhớ lưu trữ bền dùng chung. API không có xác thực hay phân quyền.
 
-### Bắt buộc
-- **Azure Developer CLI (azd)** - [Hướng dẫn cài đặt](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [Tài khoản miễn phí](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Cài Docker](https://www.docker.com/products/docker-desktop/) (để thử nghiệm cục bộ)
+## Yêu cầu trước
 
-### Xác minh các yêu cầu
+- [azd ổn định hiện tại](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (phiên bản công bố tại thời điểm xem xét: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) để kiểm tra.
+- Docker với daemon đang chạy; cần thiết cho việc xây dựng ảnh cục bộ mặc định.
+- Tài khoản Azure, quyền tạo tài nguyên và hạn ngạch khu vực Container Apps.
+- Bash cho các lệnh dưới đây (hoặc PowerShell tương đương).
+- Python 3.11 cho phát triển cục bộ tùy chọn.
 
 ```bash
-# Kiểm tra phiên bản azd (cần 1.5.0 trở lên)
 azd version
-
-# Xác minh đăng nhập Azure
+az version
+docker info
 azd auth login
-
-# Kiểm tra Docker (tùy chọn, để thử nghiệm cục bộ)
-docker --version
+az login
 ```
 
-## ⏱️ Dòng thời gian triển khai
-
-| Giai đoạn | Thời lượng | Điều gì xảy ra |
-|-------|----------|--------------||
-| Thiết lập môi trường | 30 giây | Tạo môi trường azd |
-| Xây dựng container | 2-3 phút | Docker build ứng dụng Flask |
-| Cấp phát hạ tầng | 3-5 phút | Tạo Container Apps, registry và giám sát |
-| Triển khai ứng dụng | 2-3 phút | Đẩy image và triển khai lên Container Apps |
-| **Tổng cộng** | **8-12 phút** | Triển khai hoàn chỉnh sẵn sàng |
+Các công cụ CLI có phiên đăng nhập riêng biệt. Dùng cùng một subscription ở cả hai.
 
 ## Bắt đầu nhanh
 
+Từ thư mục gốc của kho lưu trữ:
+
 ```bash
-# Đi tới ví dụ
 cd examples/container-app/simple-flask-api
-
-# Khởi tạo môi trường (chọn tên duy nhất)
-azd env new myflaskapi
-
-# Triển khai mọi thứ (cơ sở hạ tầng + ứng dụng)
+azd env new flask-demo
 azd up
-# Bạn sẽ được yêu cầu:
-# 1. Chọn đăng ký Azure
-# 2. Chọn vị trí (ví dụ: eastus2)
-# 3. Chờ 8-12 phút để triển khai
-
-# Lấy điểm cuối API của bạn
-azd env get-values
-
-# Kiểm tra API
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**Kết quả mong đợi:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ Xác minh triển khai
-
-### Bước 1: Kiểm tra trạng thái triển khai
-
-```bash
-# Xem các dịch vụ đã triển khai
-azd show
-
-# Đầu ra mong đợi hiển thị:
-# - Dịch vụ: api
-# - Điểm cuối: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Trạng thái: Đang chạy
-```
-
-### Bước 2: Kiểm tra các endpoint API
-
-```bash
-# Lấy endpoint API
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# Kiểm tra trạng thái
-curl $API_URL/health
+Mong đợi: HTTP 200 và JSON với `"status":"healthy"`,
+`"service":"simple-flask-api"`, và dấu thời gian UTC hiện tại.
+Quá trình cấp phát và xây dựng ảnh thường mất vài phút; thời gian có thể thay đổi.
 
-# Kiểm tra endpoint gốc
-curl $API_URL/
+Cấp phát ban đầu sử dụng ảnh hello-world công khai lắng nghe trên cổng 80.
+`azure.yaml` chọn `infra/app/api.bicep` và tệp tham số khớp để
+triển khai dịch vụ, chuyển ảnh, ingress và probes thành cổng 8000.
+Không xóa các tham số triển khai này.
 
-# Tạo một mục
-curl -X POST $API_URL/api/items \
+## Xác minh CRUD
+
+Chạy các lệnh sau theo thứ tự trong khi bản sao cùng hoạt động:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# Lấy tất cả các mục
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**Tiêu chí thành công:**
-- ✅ Endpoint health trả về HTTP 200
-- ✅ Endpoint gốc hiển thị thông tin API
-- ✅ POST tạo item và trả về HTTP 201
-- ✅ GET trả về các item đã tạo
+Thành công: POST 201, đọc/PUT 200, DELETE 204 không có nội dung, sau đó 404 cho mục mất.
+JSON bị sai định dạng/không phải đối tượng hoặc tên rỗng trả về 400.
+Nếu một mục biến mất giữa các yêu cầu, kiểm tra khởi động lại hoặc thu nhỏ về 0;
+đây là giới hạn bộ nhớ trong do thiết kế, không phải lưu trữ bền.
 
-### Bước 3: Xem nhật ký
+| Điểm cuối | Phương thức |
+|---|---|
+| `/` | GET — thông tin dịch vụ |
+| `/health` | GET — liveness/readiness |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## Nhật ký và cấu hình
 
 ```bash
-# Phát trực tiếp nhật ký bằng azd monitor
-azd monitor --logs
-
-# Hoặc sử dụng Azure CLI:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Bạn sẽ thấy:
-# - Thông báo khởi động của Gunicorn
-# - Nhật ký yêu cầu HTTP
-# - Nhật ký thông tin ứng dụng
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## Cấu trúc dự án
+Mong đợi: Gunicorn khởi động, nhật ký truy cập yêu cầu, và thông điệp ứng dụng.
+`azd monitor --logs` mở một cửa sổ portal; nó không phát trực tiếp ra terminal.
+Application Insights đã được cấp phát nhưng **không được cài đặt qua code Flask này**;
+sử dụng Container Apps/Log Analytics để xem nhật ký stdout.
 
+Chỉnh sửa `infra/app/api.bicep` cho CPU/bộ nhớ, giới hạn bản sao hoặc quy tắc scale, sau đó
+chạy `azd up`. Mặc định là 0.5 vCPU, 1 GiB, tối thiểu 0 / tối đa 1 bản sao, và
+ngưỡng HTTP 50 yêu cầu đồng thời. Thu nhỏ về 0 có thể gây độ trễ khởi động lạnh.
+
+Giá trị `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL` hoặc
+`SCALE_TO_ZERO_TIMEOUT` tự do **không được kết nối với mẫu hoặc ứng dụng này**.
+Việc đặt giá trị không tự động biến nó thành biến môi trường khi chạy.
+Ảnh bind cổng 8000 rõ ràng; cập nhật Dockerfile, ingress Bicep và probes
+cùng nhau nếu thay đổi cổng.
+
+## Tệp
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## Các Endpoint API
+## Phát triển cục bộ
 
-| Endpoint | Phương thức | Mô tả |
-|----------|--------|-------------|
-| `/health` | GET | Kiểm tra sức khỏe |
-| `/api/items` | GET | Liệt kê tất cả item |
-| `/api/items` | POST | Tạo item mới |
-| `/api/items/{id}` | GET | Lấy item cụ thể |
-| `/api/items/{id}` | PUT | Cập nhật item |
-| `/api/items/{id}` | DELETE | Xóa item |
-
-## Cấu hình
-
-### Biến môi trường
+Từ thư mục ví dụ này:
 
 ```bash
-# Đặt cấu hình tùy chỉnh
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### Cấu hình tự động mở rộng
-
-API tự động mở rộng dựa trên lưu lượng HTTP:
-- **Số bản sao tối thiểu**: 0 (mở rộng về 0 khi không hoạt động)
-- **Số bản sao tối đa**: 10
-- **Số yêu cầu đồng thời mỗi bản sao**: 50
-
-## Phát triển
-
-### Chạy cục bộ
+Trong terminal khác, kiểm thử `http://localhost:8000/health` và các điểm cuối CRUD.
+Hoặc xây dựng và chạy ảnh thực tế:
 
 ```bash
-# Cài đặt các phụ thuộc
-cd src
-pip install -r requirements.txt
-
-# Chạy ứng dụng
-python app.py
-
-# Kiểm tra cục bộ
-curl http://localhost:8000/health
-```
-
-### Xây dựng và kiểm thử container
-
-```bash
-# Xây dựng ảnh Docker
 docker build -t flask-api:local ./src
-
-# Chạy container cục bộ
-docker run -p 8000:8000 flask-api:local
-
-# Kiểm tra container
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## Triển khai
+Với các thay đổi chỉ trong code sau khi triển khai lần đầu, chạy `azd deploy api`.
+Với thay đổi Bicep, chạy `azd up` để cấp lại và triển khai.
 
-### Triển khai đầy đủ
+## Bài tập thực hành
+
+### 1. Xác thực từ chối đầu vào không hợp lệ
+
+**Điểm bắt đầu:** API đã triển khai, `API_URL` phía trên.
+**Mục tiêu:** xác minh API từ chối các JSON sai định dạng và tên bị thiếu.
 
 ```bash
-# Triển khai hạ tầng và ứng dụng
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### Triển khai chỉ mã nguồn
+**Tiêu chí thành công / giải pháp:** cả hai trả về 400 với lỗi JSON, không phải 500.
+**Vấn đề phổ biến:** thiếu header content-type JSON.
+
+### 2. Thêm điểm cuối chỉ đọc
+
+**Điểm bắt đầu:** `src/app.py`. **Mục tiêu:** mở rộng và triển khai lại API.
+Thêm đoạn này trước khối `if __name__ == '__main__':`:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+Chạy `azd deploy api`, sau đó `curl --fail-with-body "${API_URL}/version"`.
+**Tiêu chí thành công:** HTTP 200 và `{"version":"1.0.0"}`.
+**Vấn đề phổ biến:** đặt tuyến đường sau câu gọi chặn `app.run()` khi
+thử nghiệm với `python src/app.py`.
+
+### Điểm kiểm tra kiến thức
+
+Tại sao một worker không đủ cho dữ liệu bền? Bởi vì ngay cả một tiến trình cũng mất
+từ điển của nó khi khởi động lại. Phiên bản sản xuất cần lưu trữ chia sẻ bền bỉ,
+xác thực, phân quyền, di cư, kiểm thử, và giám sát vận hành.
+
+## Chi phí và xử lý sự cố
+
+Đây không phải là triển khai $0 đảm bảo: registry Basic và lưu trữ/nhập nhật nhật ký
+có thể phát sinh phí ngay cả khi tính toán ứng dụng là 0. Dùng
+[máy tính giá](https://azure.microsoft.com/pricing/calculator/) cho khu vực của bạn.
+
+- **Xây dựng Docker thất bại:** xác nhận `docker info`, truy cập mạng, và phụ thuộc.
+- **Ứng dụng không khỏe mạnh:** kiểm tra nhật ký bảng điều khiển/hệ thống và xác minh cổng ảnh, ingress,
+  và probes đồng nhất. Thứ placeholder không được probe trên cổng Flask.
+- **403/quyền:** xác nhận subscription và quyền tạo tài nguyên.
+- **Mục mất:** trạng thái trong bộ nhớ bị đặt lại khi khởi động lại/thu nhỏ về 0; thêm cơ sở dữ liệu
+  cho hành vi bền bỉ.
+
+## Dọn dẹp và bước tiếp theo
 
 ```bash
-# Chỉ triển khai mã ứng dụng (cơ sở hạ tầng không thay đổi)
-azd deploy api
+azd down
 ```
 
-### Cập nhật cấu hình
+Xem lại nhắc nhở xóa và xác minh nhóm tài nguyên chuyên dụng đã được gỡ bỏ.
+Không dùng dọn dẹp phá hủy trên nhóm tài nguyên có dữ liệu không liên quan.
 
-```bash
-# Cập nhật biến môi trường
-azd env set API_KEY "new-api-key"
-
-# Triển khai lại với cấu hình mới
-azd deploy api
-```
-
-## Giám sát
-
-### Xem nhật ký
-
-```bash
-# Xem nhật ký trực tiếp bằng azd monitor
-azd monitor --logs
-
-# Hoặc sử dụng Azure CLI cho Container Apps:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Xem 100 dòng cuối cùng
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### Giám sát số liệu
-
-```bash
-# Mở bảng điều khiển Azure Monitor
-azd monitor --overview
-
-# Xem các chỉ số cụ thể
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## Kiểm thử
-
-### Kiểm tra sức khỏe
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-Phản hồi mong đợi:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### Tạo Item
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### Lấy tất cả Item
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## Tối ưu chi phí
-
-Bản triển khai này sử dụng chế độ scale-to-zero, nên bạn chỉ phải trả khi API đang xử lý các yêu cầu:
-
-- **Chi phí khi nhàn rỗi**: ~$0/tháng (mở về 0)
-- **Chi phí khi hoạt động**: ~$0.000024/giây cho mỗi bản sao
-- **Chi phí dự kiến hàng tháng** (sử dụng nhẹ): $5-15
-
-### Giảm chi phí hơn nữa
-
-```bash
-# Giảm số bản sao tối đa cho môi trường phát triển
-azd env set MAX_REPLICAS 3
-
-# Sử dụng thời gian chờ không hoạt động ngắn hơn
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 phút
-```
-
-## Xử lý sự cố
-
-### Container không khởi động được
-
-```bash
-# Kiểm tra nhật ký container bằng Azure CLI
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Xác minh image Docker được xây dựng cục bộ
-docker build -t test ./src
-```
-
-### API không truy cập được
-
-```bash
-# Xác minh ingress là bên ngoài
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### Thời gian phản hồi cao
-
-```bash
-# Kiểm tra mức sử dụng CPU/bộ nhớ
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# Mở rộng tài nguyên nếu cần
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## Dọn dẹp
-
-```bash
-# Xóa tất cả tài nguyên
-azd down --force --purge
-```
-
-## Bước tiếp theo
-
-### Mở rộng ví dụ này
-
-1. **Thêm cơ sở dữ liệu** - Tích hợp Azure Cosmos DB hoặc SQL Database
-   ```bash
-   # Thêm mô-đun Cosmos DB vào infra/main.bicep
-   # Cập nhật app.py với kết nối cơ sở dữ liệu
-   ```
-
-2. **Thêm xác thực** - Triển khai Microsoft Entra ID hoặc API keys
-   ```python
-   # Thêm middleware xác thực vào app.py
-   from functools import wraps
-   ```
-
-3. **Thiết lập CI/CD** - Workflow GitHub Actions
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Thêm Managed Identity** - Bảo mật truy cập tới các dịch vụ Azure
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### Ví dụ liên quan
-
-- **[Ứng dụng cơ sở dữ liệu](../../../../../examples/database-app)** - Ví dụ hoàn chỉnh với SQL Database
-- **[Microservices](../../../../../examples/container-app/microservices)** - Kiến trúc đa dịch vụ
-- **[Hướng dẫn chính Container Apps](../README.md)** - Tất cả các mẫu container
-
-### Tài nguyên học tập
-
-- 📚 [Khóa học AZD cho người mới](../../../README.md) - Trang chính của khóa học
-- 📚 [Mẫu Container Apps](../README.md) - Nhiều mẫu triển khai hơn
-- 📚 [Thư viện mẫu AZD](https://azure.github.io/awesome-azd/) - Mẫu từ cộng đồng
-
-## Tài nguyên bổ sung
-
-### Tài liệu
-- **[Tài liệu Flask](https://flask.palletsprojects.com/)** - Hướng dẫn framework Flask
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Tài liệu chính thức của Azure
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Tham khảo lệnh azd
-
-### Hướng dẫn
-- **[Bắt đầu nhanh Container Apps](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Triển khai ứng dụng đầu tiên của bạn
-- **[Python trên Azure](https://learn.microsoft.com/azure/developer/python/)** - Hướng dẫn phát triển Python
-- **[Ngôn ngữ Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Hạ tầng như mã
-
-### Công cụ
-- **[Azure Portal](https://portal.azure.com)** - Quản lý tài nguyên bằng giao diện đồ họa
-- **[Tiện ích mở rộng Azure cho VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Tích hợp IDE
-
----
-
-**🎉 Xin chúc mừng!** Bạn đã triển khai một API Flask sẵn sàng cho sản xuất lên Azure Container Apps với tự động mở rộng và giám sát.
-
-**Có câu hỏi?** [Mở một issue](https://github.com/microsoft/AZD-for-beginners/issues) hoặc xem [Câu hỏi thường gặp](../../../resources/faq.md)
+[Tiếp theo: Ứng dụng cơ sở dữ liệu](../../../../../examples/database-app) · [Microservices](../../../../../examples/container-app/microservices) ·
+[Tổng quan về Container](../README.md) · [Trang chủ khóa học](../../../README.md) ·
+[Báo lỗi](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

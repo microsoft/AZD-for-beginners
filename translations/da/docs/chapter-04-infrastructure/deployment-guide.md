@@ -1,135 +1,140 @@
-# Deploymentsvejledning - Mestring af AZD-udrulninger
+# Udrulningsvejledning - Mestring af AZD Udrulninger
 
 **Kapitelnavigation:**
-- **📚 Course Home**: [AZD til begyndere](../../README.md)
-- **📖 Aktuelt kapitel**: Kapitel 4 - Infrastruktur som kode og udrulning
-- **⬅️ Forrige kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
-- **➡️ Næste**: [Provisionering af ressourcer](provisioning.md)
-- **🧩 Også i dette kapitel**: [Udarbejdelse af din egen skabelon](custom-templates.md)
-- **🚀 Næste kapitel**: [Kapitel 5: Multi-agent AI-løsninger](../../examples/retail-scenario.md)
+- **📚 Kursus Hjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 4 - Infrastruktur som kode & udrulning
+- **⬅️ Forrige Kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
+- **➡️ Næste**: [Provisionering af Ressourcer](provisioning.md)
+- **🧩 Også i dette kapitel**: [Forfat din egen Skabelon](custom-templates.md)
+- **🚀 Næste Kapitel**: [Kapitel 5: Multi-Agent AI Løsninger](../../examples/retail-scenario.md)
 
 ## Introduktion
 
-Denne omfattende vejledning dækker alt, du skal vide om at udrulle applikationer med Azure Developer CLI, fra grundlæggende én-kommando-udrulninger til avancerede produktionsscenarier med tilpassede hooks, flere miljøer og CI/CD-integration. Mestre hele udrulningslivscyklussen med praktiske eksempler og bedste praksis.
+> Gennemgået mod `azd 1.37.2` (november 2026). Kommandoer bruger Bash; JSON-eksempler kræver `jq`. Bortset fra den eksplicit initialiserede todo-øvelse er avancerede eksempler **integrationsfragmenter**: lever din egen kilde, infrastruktur, tests og scripts. Ingen Azure-udrulninger blev udført i denne gennemgang.
+
+Denne omfattende vejledning dækker alt, du behøver at vide om at udrulle applikationer ved hjælp af Azure Developer CLI, fra grundlæggende udrulninger med en enkelt kommando til avancerede produktionsscenarier med brugerdefinerede hooks, flere miljøer og CI/CD-integration. Mestre hele udrulningslivscyklussen med praktiske eksempler og bedste praksis.
 
 ## Læringsmål
 
 Ved at gennemføre denne vejledning vil du:
-- Mestre alle Azure Developer CLI udrulningskommandoer og arbejdsgange
+- Mestre alle Azure Developer CLI udrulningskommandoer og workflows
 - Forstå hele udrulningslivscyklussen fra provisionering til overvågning
-- Implementere tilpassede udrulningshooks til pre- og post-udrulningsautomatisering
+- Implementere brugerdefinerede udrulningshooks til pre- og post-udrulningsautomatisering
 - Konfigurere flere miljøer med miljøspecifikke parametre
-- Opsætte avancerede udrulningsstrategier inklusive blue-green og canary-udrulninger
-- Integrere azd-udrulninger med CI/CD-pipelines og DevOps-arbejdsgange
+- Opsætte avancerede udrulningsstrategier, herunder blue-green og canary udrulninger
+- Integrere azd-udrulninger med CI/CD pipelines og DevOps workflows
 
 ## Læringsresultater
 
-Efter gennemførelsen vil du være i stand til at:
-- Udføre og fejlsøge alle azd-udrulningsarbejdsgange selvstændigt
-- Designe og implementere tilpasset udrulningsautomatisering ved hjælp af hooks
+Når du er færdig, vil du kunne:
+- Udføre og fejlfinde alle azd udrulningsworkflows selvstændigt
+- Designe og implementere brugerdefineret udrulningsautomatisering ved hjælp af hooks
 - Konfigurere produktionsklare udrulninger med korrekt sikkerhed og overvågning
-- Håndtere komplekse multi-miljø udrulningsscenarier
+- Administrere komplekse multi-miljø udrulningsscenarier
 - Optimere udrulningsydelse og implementere rollback-strategier
-- Integrere azd-udrulninger i virksomheds DevOps-praksis
+- Integrere azd udrulninger i virksomheds-DevOps-praksis
 
-## Oversigt over udrulning
+## Oversigt over Udrulning
 
 Azure Developer CLI tilbyder flere udrulningskommandoer:
-- `azd up` - Fuldt workflow (provisionering + udrulning)
-- `azd provision` - Opret/opdater Azure-ressourcer kun
+- `azd up` - Komplett workflow (provision + deploy)
+- `azd provision` - Opret/opdater kun Azure-ressourcer
 - `azd deploy` - Udrul kun applikationskode
 - `azd package` - Byg og pak applikationer
 
-## Grundlæggende udrulningsarbejdsgange
+## Grundlæggende Udrulningsworkflows
 
-### Fuldt udrul (azd up)
-Den mest almindelige arbejdsgang for nye projekter:
+### Komplett Udrulning (azd up)
+Det mest almindelige workflow for nye projekter:
 ```bash
-# Udrul alt fra bunden
+# Deploy everything from scratch
 azd up
 
-# Udrul i et specifikt miljø
+# Deploy with specific environment
 azd up --environment production
 
-# Udrul med brugerdefinerede parametre
-azd up --parameter location=westus2 --parameter sku=P1v2
+# Configure a location for the selected environment before first provisioning
+azd env set AZURE_LOCATION westus2
+# SKU changes must be wired into your template's parameter file/Bicep.
+azd up
 ```
 
-### Kun infrastruktur-udrulning
+### Infrastruktur-Only Udrulning
 Når du kun skal opdatere Azure-ressourcer:
 ```bash
-# Provisionér/opdater infrastruktur
+# Provision/update infrastructure
 azd provision
 
-# Provisionér med dry-run for at forhåndsvise ændringer
+# Provision with dry-run to preview changes
 azd provision --preview
 
-# Provisionér specifikke tjenester
-azd provision --service database
+# Provisioning applies infrastructure, not an azure.yaml service selection.
+# In a configured layered project, use: azd provision <layer-name>
 ```
 
-### Kun kode-udrulning
-Til hurtige opdateringer af applikationen:
+### Kode-Only Udrulning
+Til hurtige applikationsopdateringer:
 ```bash
-# Udrul alle tjenester
+# Deploy all services
 azd deploy
 
-# Forventet output:
-# Udruller tjenester (azd deploy)
-# - web: Udruller... Færdig
-# - api: Udruller... Færdig
-# SUCCES: Din udrulning blev gennemført på 2 minutter og 15 sekunder
+# Expected output:
+# Deploying services (azd deploy)
+# - web: Deploying... Done
+# - api: Deploying... Done
+# SUCCESS: Your deployment completed in 2 minutes 15 seconds
 
-# Udrul en specifik tjeneste
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Udrul med brugerdefinerede build-argumenter
-azd deploy --service api --build-arg NODE_ENV=production
+# Docker build arguments belong in azure.yaml: services.api.docker.buildArgs
+# They are not an azd deploy --build-arg flag.
 
-# Bekræft udrulning
+# Verify deployment
 azd show --output json | jq '.services'
 ```
 
-### ✅ Verificering af udrulning
+### ✅ Verifikation af Udrulning
 
-Efter enhver udrulning, bekræft at den var succesfuld:
+Efter enhver udrulning skal succes verificeres:
 
 ```bash
-# Kontroller, at alle tjenester kører
+# Inspect configured service targets and ingress URLs (not a health check)
 azd show
 
-# Test sundhedsendepunkter
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Test health endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
-curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
-curl -f "$API_URL/health" || echo "❌ API health check failed"
+curl -f "$WEB_URL" || { echo "❌ Web request failed"; exit 1; }
+# For the todo-nodejs-mongo template, /lists exists; /health does not.
+curl -f "$API_URL/lists" || { echo "❌ API request failed"; exit 1; }
 
-# Overvåg for fejl (åbnes i browseren som standard)
+# Monitor for errors (opens in browser by default)
 azd monitor --logs
 ```
 
-**Succeskriterier:**
-- ✅ Alle tjenester viser "Kører" status
-- ✅ Sundhedsendepunkter returnerer HTTP 200
-- ✅ Ingen fejl i loggene i de sidste 5 minutter
-- ✅ Applikationen svarer på testforespørgsler
+**Succes kriterier:**
+- ✅ `azd show` løser forventede servicemål/URL’er
+- ✅ Forespørgsler til faktiske applikationsruter returnerer forventet status og krop
+- ✅ Ingen fejllogs i de sidste 5 minutter
+- ✅ Applikationen svarer på test-forespørgsler
 
-## 🏗️ Forstå udrulningsprocessen
+## 🏗️ Forstå Udrulningsprocessen
 
 ### Ny til hooks? Start her
 
-En **hook** er en kommando azd kører automatisk på et bestemt tidspunkt i udrulningsprocessen—før eller efter provisionering, og før eller efter udrulning af din kode. De lader dig automatisere de små opgaver, som altid omgiver en udrulning: seedning af en database, kørsel af migrationer, bygge assets eller smoke-test af den live app.
+En **hook** er en kommando, som azd automatisk kører på et bestemt tidspunkt i udrulningsprocessen—før eller efter provisionering, og før eller efter at din kode er udrullet. De lader dig automatisere de små opgaver, der altid omgiver en udrulning: at indlæse data i en database, køre migrationer, bygge assets eller smoke-teste den live app.
 
-| Hook | Kører… | Typisk anvendelse |
-|------|--------|-------------------|
-| `preprovision` | Før ressourcer oprettes | Valider forudsætninger, log ind i et register |
+| Hook | Kører… | Almindelig anvendelse |
+|------|---------|-----------------------|
+| `preprovision` | Før ressourcer oprettes | Validér forudsætninger, log ind på et register |
 | `postprovision` | Efter ressourcer eksisterer | Konfigurer ressourcer, opsæt databasen |
-| `predeploy` | Før kode udrulles | Byg front-end assets, kør enhedstest |
-| `postdeploy` | Efter kode er live | Kør DB-migrationer, smoke-test endpointet |
+| `predeploy` | Før kode udrulles | Byg front-end assets, kør unit tests |
+| `postdeploy` | Efter kode er live | Kør DB migrationer, smoke-test endpointet |
 
-Hooks ligger i din `azure.yaml`. Her er det mindste mulige eksempel—det printer blot en besked efter udrulning:
+Hooks lever i din `azure.yaml`. Her er det mindste mulige eksempel—det printer bare en besked efter udrulning:
 
 ```yaml
 # azure.yaml
@@ -139,15 +144,15 @@ hooks:
     run: echo "Deployment finished! 🎉"
 ```
 
-Det var det—næste gang du kører `azd up`, udskrives beskeden automatisk. Du kan også køre en hook alene, uden en fuld udrulning, hvilket er godt til test:
+Det var det—næste gang du kører `azd up`, printer beskeden automatisk. Du kan også køre en hook alene uden en fuld udrulning, hvilket er fantastisk til test:
 
 ```bash
 azd hooks run postdeploy
 ```
 
-Faserne nedenfor viser virkelighedsnære hooks (migrationer, tests, validering) for hver fase.
+Faserne nedenfor viser virkelighedstro hooks (migrationer, tests, validering) for hver fase.
 
-### Fase 1: Pre-provision hooks
+### Fase 1: Pre-Provision Hooks
 ```yaml
 # azure.yaml
 hooks:
@@ -161,13 +166,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Fase 2: Provisionering af infrastruktur
-- Læser infrastruktur-skabeloner (Bicep/Terraform)
+### Fase 2: Infrastruktur Provisionering
+- Læser ind infrastructure templates (Bicep/Terraform)
 - Opretter eller opdaterer Azure-ressourcer
 - Konfigurerer netværk og sikkerhed
 - Opsætter overvågning og logning
 
-### Fase 3: Post-provision hooks
+### Fase 3: Post-Provision Hooks
 ```yaml
 hooks:
   postprovision:
@@ -180,12 +185,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Fase 4: Pakning af applikationen
+### Fase 4: Applikationspakning
 - Bygger applikationskode
 - Opretter udrulningsartefakter
-- Pakker til målplatformen (containere, ZIP-filer, osv.)
+- Pakker til målplatform (containere, ZIP-filer osv.)
 
-### Fase 5: Pre-deploy hooks
+### Fase 5: Pre-Deploy Hooks
 ```yaml
 hooks:
   predeploy:
@@ -198,12 +203,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Fase 6: Udrulning af applikationen
+### Fase 6: Applikationsudrulning
 - Udruller pakkede applikationer til Azure-tjenester
 - Opdaterer konfigurationsindstillinger
 - Starter/genstarter tjenester
 
-### Fase 7: Post-deploy hooks
+### Fase 7: Post-Deploy Hooks
 ```yaml
 hooks:
   postdeploy:
@@ -213,14 +218,14 @@ hooks:
       npm run test:integration
       
       echo "Warming up applications..."
-      curl https://${WEB_URL}/health
+      curl --fail "$WEB_URL/health"
 ```
 
-### Håndtering af hook-fejl
+### Håndtering af Hook-Fejl
 
-Som standard, **hvis en hook-kommando afsluttes med en ikke-nul exitkode, stopper azd hele operationen.** Det er som regel det, du ønsker—en fejlet migration bør stoppe udrulningen, ikke sende en brudt app i produktion. Men det betyder også, at hooks skal skrives omhyggeligt.
+Som standard **stopper azd hele operationen, hvis en hook-kommando afsluttes med en ikke-nul kode.** Det er normalt det ønskede—en mislykket migration skal stoppe udrulningen, ikke sende en ødelagt app af sted. Men det betyder, at hooks skal skrives med omhu.
 
-**1. Gør fejl tydelige og tilsigtede.** En hook fejler, når dens sidste kommando returnerer en ikke-nul exitkode. I shell-scripts, tilføj `set -e`, så hooken stopper ved den første fejl i stedet for at fortsætte stille:
+**1. Gør fejl hørlige og tilsigtede.** En hook fejler, når dens sidste kommando returnerer en ikke-nul exit-kode. I shell-scripts, tilføj `set -e` så hooken stopper ved den første fejlende kommando i stedet for at fortsætte stille:
 
 ```yaml
 hooks:
@@ -232,24 +237,24 @@ hooks:
       npm run db:migrate
 ```
 
-**2. Tillad at en hook fejler uden at stoppe azd.** For ikke-kritiske trin (en valgfri cache-opvarmning, en best-effort-notifikation), sæt `continueOnError: true`. azd logger fejlen, men fortsætter:
+**2. Tillad, at en hook fejler uden at stoppe azd.** For ikke-kritiske trin (et valgfrit cache-opvarmning, en bestræbelses-notifikation), sæt `continueOnError: true`. azd logger fejlen men fortsætter:
 
 ```yaml
 hooks:
   postdeploy:
     shell: sh
     continueOnError: true         # a failure here won't fail 'azd up'
-    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+    run: curl -f "$WEB_URL/warmup"
 ```
 
-**3. Test hooks isoleret før en fuld kørsels.** Du behøver ikke køre `azd up` for at debugge en hook—kør den alene og iterér hurtigt:
+**3. Test hooks isoleret før fuld kørsel.** Du behøver ikke køre `azd up` for at fejlfinde en hook—kør den alene og iterér hurtigt:
 
 ```bash
-azd hooks run predeploy          # kører kun predeploy-hooken
+azd hooks run predeploy          # runs the matching project/service hooks
 azd hooks run postdeploy --service api
 ```
 
-**4. Pas på OS-specifikke shells.** En hook der bruger `shell: pwsh` kræver PowerShell installeret på maskinen, der kører den (inklusive CI-agenter). Brug `shell: sh` for bredest mulig portabilitet, eller lever begge `windows` og `posix` varianter:
+**4. Pas på OS-specifikke shells.** En hook, der bruger `shell: pwsh`, kræver PowerShell installeret på maskinen, der kører den (inklusive CI-agenter). Brug `shell: sh` for bredest mulig portabilitet, eller stil både `windows` og `posix` varianter til rådighed:
 
 ```yaml
 hooks:
@@ -262,63 +267,63 @@ hooks:
       run: ./scripts/setup.ps1
 ```
 
-> **Debugging-tip:** kør enhver azd-kommando med `--debug` for at se den præcise hook-kommando og dens fulde output—uvurderligt, når en hook virker lokalt men fejler i CI.
+> **Fejlsøgnings-tip:** kør enhver azd-kommando med `--debug` for at se den eksakte hook-kommando og dens fulde output—uvurderligt når en hook virker lokalt men fejler i CI.
 
 ## 🎛️ Udrulningskonfiguration
 
-### Tjeneste-specifikke udrulningsindstillinger
+### Service-Specifikke Udrulningsindstillinger
 ```yaml
 # azure.yaml
 services:
   web:
     project: ./src/web
     host: staticwebapp
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    dist: dist
     
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
     env:
-      - name: NODE_ENV
-        value: production
-      - name: API_VERSION
-        value: "1.0.0"
+      NODE_ENV: production
+      API_VERSION: "1.0.0"
         
   worker:
     project: ./src/worker
     host: function
-    runtime: node
-    buildCommand: npm install --production
+    language: js
 ```
 
-### Miljøspecifikke konfigurationer
+### Miljøspecifikke Konfigurationer
+
+Disse er kun lokale azd-værdier. Map dem eksplicit til infrastruktur/runtime-konfiguration. `NODE_ENV` er normalt `production` for en udrullet Node-app, inklusive staging-udrulning; brug en separat app-specifik variabel til at skelne udrulningsstadier.
+
 ```bash
-# Udviklingsmiljø
+# Development environment
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging-miljø
+# Staging environment
 azd env new staging
-azd env set NODE_ENV staging
+azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Produktionsmiljø
+# Production environment
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Avancerede udrulningsscenarier
+## 🔧 Avancerede Udrulningsscenarier
 
-### Multitjenesteapplikationer
+### Multi-Service Applikationer
 ```yaml
 # Complex application with multiple services
 services:
@@ -354,52 +359,53 @@ services:
     host: function
 ```
 
-### Blue-green-udrulninger
+### Blue-Green Udrulninger
+
+**Illustrativ operationel skitse:** du skal levere begge miljøer, et delt trafikstyrelseslag og de to scripts nedenfor. azd skifter ikke trafik eller validerer rollback parathed automatisk. Behold grøn indtil blå har bestået test og rollback ikke længere er nødvendig.
+
 ```bash
-# Opret blå miljø
+# Create blue environment
 azd env new production-blue
 azd up --environment production-blue
 
-# Test det blå miljø
+# Test blue environment
 ./scripts/test-environment.sh production-blue
 
-# Skift trafik til blå (manuel opdatering af DNS/load balancer)
+# Switch traffic to blue (manual DNS/load balancer update)
 ./scripts/switch-traffic.sh production-blue
 
-# Ryd op i det grønne miljø
+# Clean up green environment
 azd env select production-green
 azd down --force
 ```
 
-### Canary-udrulninger
-```yaml
-# azure.yaml - Configure traffic splitting
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    trafficSplit:
-      - revision: stable
-        percentage: 90
-      - revision: canary
-        percentage: 10
+### Canary Udrulninger
+```bash
+# Requires an existing Container App in multiple-revision mode and two
+# ready revisions. Replace placeholders with actual revision names.
+az containerapp ingress traffic set \
+  --name "<app-name>" --resource-group "<rg-name>" \
+  --revision-weight "<stable-revision>=90" "<canary-revision>=10"
 ```
 
-### Trinvise udrulninger
+Trafikdeling hører til Container Apps-konfig, (Bicep eller Azure CLI), ikke en `azure.yaml` `trafficSplit` egenskab. Preview/provisionering og senere udrulninger skal bevare dit valgte revisionsmode og routing-regler.
+
+### Trinvise Udrulninger
 ```bash
 #!/bin/bash
 # deploy-staged.sh
+set -e
 
 echo "Deploying to development..."
 azd env select dev
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running dev tests..."
 ./scripts/test-environment.sh dev
 
 echo "Deploying to staging..."
 azd env select staging
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running staging tests..."
 ./scripts/test-environment.sh staging
@@ -409,43 +415,38 @@ read -p "Deploy to production? (y/N): " confirm
 if [[ $confirm == [yY] ]]; then
     echo "Deploying to production..."
     azd env select production
-    azd up --confirm-with-no-prompt
+    azd up --no-prompt
     
     echo "Running production smoke tests..."
     ./scripts/test-environment.sh production
 fi
 ```
 
-## 🐳 Containerudrulninger
+## 🐳 Container Udrulninger
 
-### Container-app-udrulninger
+### Container App Udrulninger
 ```yaml
 services:
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        BUILD_VERSION: ${BUILD_VERSION}
-        NODE_ENV: production
+        - BUILD_VERSION=${BUILD_VERSION}
+        - NODE_ENV=production
     env:
-      - name: DATABASE_URL
-        value: ${DATABASE_URL}
-    secrets:
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-    scale:
-      minReplicas: 1
-      maxReplicas: 10
+      NODE_ENV: production
 ```
 
-### Flertrins Dockerfile-optimering
+Konfigurer runtime-hemmeligheder med `configuration.secrets`/`secretRef` (eller Key Vault-referencer) og skalering med `template.scale` i Container App-infrastruktur. Find ikke på service-niveau `secrets` eller `scale` egenskaber i `azure.yaml`.
+
+### Multi-Stage Dockerfile Optimering
 ```dockerfile
 # Dockerfile
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 WORKDIR /app
 COPY package*.json ./
 
@@ -455,11 +456,12 @@ COPY . .
 CMD ["npm", "run", "dev"]
 
 FROM base AS build
-RUN npm ci --only=production
+RUN npm ci
 COPY . .
 RUN npm run build
+RUN npm prune --omit=dev
 
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
@@ -470,77 +472,89 @@ CMD ["npm", "start"]
 
 ## ⚡ Ydelsesoptimering
 
-### Tjenestespecifikke udrulninger
+### Service-Specifikke Udrulninger
 ```bash
-# Udrul en specifik tjeneste for hurtigere iteration
-azd deploy --service web
-azd deploy --service api
+# Deploy a specific service for faster iteration
+azd deploy web
+azd deploy api
 
-# Udrul alle tjenester
+# Deploy all services
 azd deploy
 ```
 
-### Build-caching
+### Build Caching
 ```yaml
-# azure.yaml - Configure build commands
+# azure.yaml fragment - assumes package.json has a build script
 services:
   web:
     project: ./src/web
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    host: appservice
+    dist: dist
 ```
 
-### Effektive kodeudrulninger
+Standard Node-workflow bruger pakkescripts; service `prepackage` hooks kan tilføje nødvendige trin. Docker lag-caching er adskilt fra definition af en service build-kommando.
+
+### Effektive Kodeudrulninger
 ```bash
-# Brug azd deploy (ikke azd up) til ændringer, der kun er i koden
-# Dette springer opsætning af infrastrukturen over og er meget hurtigere
+# Use azd deploy (not azd up) for code-only changes
+# This skips infrastructure provisioning and is much faster
 azd deploy
 
-# Udrul en specifik tjeneste for hurtigst mulig iteration
-azd deploy --service api
+# Deploy specific service for fastest iteration
+azd deploy api
 ```
 
-## 🔍 Overvågning af udrulning
+## 🔍 Udrulningsovervågning
 
-### Realtids-overvågning af udrulninger
+### Realtids Udrulningsovervågning
 ```bash
-# Overvåg applikationen i realtid
+# Monitor application in real-time
 azd monitor --live
 
-# Se applikationslogfiler
+# View application logs
 azd monitor --logs
 
-# Kontroller udrulningsstatus
+# Check deployment status
 azd show
 ```
 
-### Sundhedstjek
-```yaml
-# azure.yaml - Configure health checks
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    healthCheck:
-      path: /health
-      interval: 30s
-      timeout: 10s
-      retries: 3
+### Helbredstjek
+```bicep
+// Partial Container App container definition:
+// merge into properties.template.containers[] in your Bicep resource.
+probes: [
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 3000
+      scheme: 'HTTP'
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+    timeoutSeconds: 10
+    failureThreshold: 3
+  }
+]
 ```
 
-### Validering efter udrulning
+Din app skal implementere `/health`; den leveres ikke automatisk af azd. Der findes ikke en generisk `azure.yaml` `healthCheck` service-egenskab.
+
+### Post-Udrulnings Validering
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
+set -e
 
 echo "Validating deployment..."
 
-# Kontroller applikationens sundhed
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Check application health
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
 echo "Testing web application..."
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Web application is healthy"
 else
     echo "❌ Web application health check failed"
@@ -548,7 +562,7 @@ else
 fi
 
 echo "Testing API..."
-if curl -f "$API_URL/health"; then
+if curl -f "$API_URL/lists"; then
     echo "✅ API is healthy"
 else
     echo "❌ API health check failed"
@@ -561,82 +575,52 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Sikkerhedsovervejelser
+## 🔐 Sikkerhedshensyn
 
-### Håndtering af hemmeligheder
+### Håndtering af Hemmeligheder
 ```bash
-# Opbevar hemmeligheder sikkert
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
-azd env set API_KEY "your-api-key" --secret
-
-# Referer til hemmeligheder i azure.yaml
+# Interactive Key Vault reference setup; requires appropriate vault permissions
+azd env set-secret DATABASE_PASSWORD
+azd env set-secret JWT_SECRET
+azd env set-secret API_KEY
 ```
 
-```yaml
-services:
-  api:
-    secrets:
-      - name: database-password
-        value: ${DATABASE_PASSWORD}
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-```
+`azd env set ... --secret` er ugyldig. Almindelige miljøværdier er lokale almindelig tekst; antag ikke at læse-kommandoer redigerer dem ud. Kommandoerne ovenfor gemmer Key Vault-referencer, men din infrastruktur/applikation skal stadig bruge hemmelighederne og give runtime identities adgang.
 
 ### Netværkssikkerhed
-```yaml
-# azure.yaml - Configure network security
-infra:
-  parameters:
-    enablePrivateEndpoints: true
-    allowedIPs:
-      - "203.0.113.0/24"  # Office IP range
-      - "198.51.100.0/24" # VPN IP range
-```
+Deklarér og brug netværksparametre i Bicep, og map dem i `infra/main.parameters.json`. Der findes ikke generisk `infra.parameters` overlay i `azure.yaml`. Eksempel dokumentationsområderne `203.0.113.0/24` og `198.51.100.0/24` er ikke ægte kontor-/VPN-netværk; udskift dem med autoriserede netværksområder.
 
 ### Identitets- og adgangsstyring
-```yaml
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    identity:
-      type: systemAssigned
-    keyVault:
-      - name: app-secrets
-        secrets:
-          - database-connection
-          - external-api-key
-```
+Aktiver Container App's `identity` i Bicep og tildel den nødvendige Key Vault dataplanelrolle i vault-omfanget. Konfigurer navngivne Key Vault-støttede hemmeligheder og runtime-referencer i denne ressource; `identity` og `keyVault` er ikke generiske azd service-egenskaber. Se [Authentication & Managed Identity](../chapter-03-configuration/authsecurity.md).
 
-## 🚨 Rollback-strategier
+## 🚨 Rollback Strategier
 
-### Hurtig rollback
+### Hurtig Rollback
 ```bash
-# AZD har ikke indbygget tilbageførsel. Anbefalede fremgangsmåder:
+# AZD doesn't have built-in rollback. Recommended approaches:
 
-# Mulighed 1: Genudrul fra Git (anbefalet)
-git revert HEAD  # Tilbagefør det problematiske commit
+# Option 1: Redeploy from Git (recommended)
+git revert HEAD  # Revert the problematic commit
 git push
 azd deploy
 
-# Mulighed 2: Genudrul et specifikt commit
-git checkout <previous-commit-hash>
+# Option 2: Redeploy specific commit
+git checkout "<previous-commit-hash>"
 azd deploy
 git checkout main
 ```
 
-### Rollback af infrastruktur
+### Infrastruktur Rollback
 ```bash
-# Forhåndsvis infrastrukturændringer før anvendelse
+# Preview infrastructure changes before applying
 azd provision --preview
 
-# Til tilbagerulning af infrastrukturen, brug versionsstyring:
-git revert HEAD  # Tilbagefør ændringer i infrastrukturen
-azd provision    # Anvend tidligere infrastrukturtilstand
+# For infrastructure rollback, use version control:
+git revert HEAD  # Revert infrastructure changes
+azd provision    # Apply previous infrastructure state
 ```
 
-### Rollback af databasemigrationer
+### Database Migration Rollback
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -650,21 +634,21 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Udrulningsmetrikker
+## 📊 Udrulningsmetrics
 
-### Spor udrulningsydelse
+### Følg Udrulningsydelse
 ```bash
-# Vis den aktuelle udrulningsstatus
+# View current deployment status
 azd show
 
-# Overvåg applikationen med Application Insights
+# Monitor application with Application Insights
 azd monitor --overview
 
-# Vis live-metrikker
+# View live metrics
 azd monitor --live
 ```
 
-### Tilpasset metriksamling
+### Brugerdefineret Metrics Indsamling
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -681,28 +665,28 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Bedste praksis
+## 🎯 Bedste Praksis
 
-### 1. Konsistens mellem miljøer
+### 1. Miljøkonsistens
 ```bash
-# Brug konsekvent navngivning
+# Use consistent naming
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Oprethold paritet mellem miljøerne
+# Maintain environment parity
 ./scripts/sync-environments.sh
 ```
 
-### 2. Infrastrukturvalidering
+### 2. Infrastruktur Validering
 ```bash
-# Forhåndsvis infrastrukturændringer før udrulning
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Brug ARM/Bicep-linting
+# Use ARM/Bicep linting
 az bicep lint --file infra/main.bicep
 
-# Valider Bicep-syntaks
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 ```
 
@@ -735,74 +719,80 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Dokumentation og logning
+### 4. Dokumentation og Logning
 ```bash
-# Dokumentér udrulningsprocedurer
+# Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## Næste skridt
+## Næste Skridt
 
-- [Provisionering af ressourcer](provisioning.md) - Dybdegående gennemgang af infrastrukturadministration
-- [Planlægning før udrulning](../chapter-06-pre-deployment/capacity-planning.md) - Planlæg din udrulningsstrategi
-- [Almindelige problemer](../chapter-07-troubleshooting/common-issues.md) - Løs udrulningsproblemer
-- [Bedste praksis](../chapter-07-troubleshooting/debugging.md) - Produktionsklare udrulningsstrategier
+- [Provisionering af Ressourcer](provisioning.md) - Dyk ned i infrastrukturstyring
+- [Pre-Udrulnings Planlægning](../chapter-06-pre-deployment/capacity-planning.md) - Planlæg din udrulningsstrategi
+- [Almindelige Problemer](../chapter-07-troubleshooting/common-issues.md) - Løs udrulningsproblemer
+- [Bedste Praksis](../chapter-07-troubleshooting/debugging.md) - Produktionsklare udrulningsstrategier
 
-## 🎯 Praktiske udrulningsøvelser
+## 🎯 Praktiske Udrulningsøvelser
 
-### Øvelse 1: Inkrementel udrulningsarbejdsgang (20 minutter)
-**Mål**: Mestre forskellen mellem fulde og inkrementelle udrulninger
+### Øvelse 1: Inkrementelt Udrulningsworkflow (20 minutter)
+**Mål**: Mestre forskellen mellem fuld og inkrementel udrulning
+
+**Startpunkt:** Bash, Node.js 22, Git, azd sign-in og et Azure-abonnement med udrulningstilladelser. Kør i en ny mappe; forbered på fakturerbare App Service/Cosmos DB ressourcer. Tidspunkter afhænger af region og skabelon.
 
 ```bash
-# Initial udrulning
+# Initial deployment
 mkdir deployment-practice && cd deployment-practice
-azd init --template todo-nodejs-mongo
-azd up
+azd init --template todo-nodejs-mongo .
+time azd up
 
-# Registrer tidspunkt for initial udrulning
+# Record initial deployment time
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# Foretag en kodeændring
-echo "// Updated $(date)" >> src/api/src/server.js
+# Make a code change
+echo "// Updated $(date)" >> src/api/src/index.ts
 
-# Udrul kun kode (hurtigt)
+# Deploy only code (fast)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# Sammenlign tider
+# Compare times
 cat deployment-log.txt
 
-# Ryd op
+# Clean up
 azd down --force --purge
 ```
 
-**Succeskriterier:**
-- [ ] En fuld udrulning tager 5-15 minutter
-- [ ] En udrulning kun af kode tager 2-5 minutter
-- [ ] Kodeændringer afspejles i den udrullede app
+**Succes kriterier:**
+- [ ] Registrer forløbet tid for begge kommandoer (der er ingen garanteret varighed)
+- [ ] Begge kommandoer fuldfører med succes
+- [ ] API’en forbliver funktionel; kommentaret redigeringen er ikke en synlig UI-ændring
 - [ ] Infrastruktur uændret efter `azd deploy`
 
-**Læringsudbytte**: `azd deploy` er 50-70% hurtigere end `azd up` for kodeændringer
+**Læringsresultat**: `azd deploy` springer infrastrukturprovisionering over. Sammenlign målte tider fremfor at antage en fast procentvis hastighedsforøgelse.
 
-### Øvelse 2: Tilpassede udrulningshooks (30 minutter)
+### Øvelse 2: Brugerdefinerede Udrulningshooks (30 minutter)
 **Mål**: Implementer pre- og post-udrulningsautomatisering
 
+**Startpunkt:** det initialiserede `deployment-practice` projekt ovenfor. Hvis du har ryddet op i det, kør `azd up` igen før test af kode-only udrulning. Valideringen nedenfor bruger API’ens faktiske build script, ikke et ikke-eksisterende root `test:unit` script. Skabelonens API-tests kræver konfigureret databaseadgang; de er ikke isolerede enhedstests.
+
 ```bash
-# Opret valideringsskript før udrulning
+# Create pre-deploy validation script
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "⚠️ Running pre-deployment checks..."
 
-# Kontroller om testene passerer
-if ! npm run test:unit; then
-    echo "❌ Tests failed! Aborting deployment."
+# Install API dependencies and check its actual lint/TypeScript build
+npm --prefix src/api ci
+if ! npm --prefix src/api run build; then
+    echo "❌ Build validation failed! Aborting deployment."
     exit 1
 fi
 
-# Kontroller for ikke-committede ændringer
+# Check for uncommitted changes
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -812,14 +802,15 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Opret smoke-test efter udrulning
+# Create post-deploy smoke test
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "💨 Running smoke tests..."
 
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Health check passed!"
 else
     echo "❌ Health check failed!"
@@ -831,8 +822,11 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Tilføj hooks til azure.yaml
-cat >> azure.yaml << 'EOF'
+# Merge the following into the EXISTING azure.yaml using your editor.
+# If hooks already exists, merge its children; never append a duplicate YAML key.
+```
+
+```yaml
 
 hooks:
   predeploy:
@@ -842,23 +836,26 @@ hooks:
   postdeploy:
     shell: sh
     run: ./scripts/post-deploy-test.sh
-EOF
+```
 
-# Test udrulning med hooks
+```bash
+# Test deployment with hooks
 azd deploy
 ```
 
-**Succeskriterier:**
-- [ ] Pre-deploy-scriptet kører før udrulning
-- [ ] Udrulning afbrydes hvis tests fejler
-- [ ] Post-deploy smoke-test validerer sundhed
-- [ ] Hooks udføres i korrekt rækkefølge
+**Succes kriterier:**
+- [ ] Pre-udrulningsscript kører før udrulning
+- [ ] Udrulning afbrydes, hvis build-validering fejler
+- [ ] Post-udrulnings smoke-test validerer sundhedstilstand
+- [ ] Hooks kører i korrekt rækkefølge
 
-### Øvelse 3: Multi-miljø udrulningsstrategi (45 minutter)
-**Mål**: Implementer en trinvise udrulningsarbejdsgang (dev → staging → production)
+### Øvelse 3: Multi-Miljø Udrulningsstrategi (45 minutter)
+**Mål**: Implementer trinvist udrulningsworkflow (dev → staging → produktion)
+
+**Udgangspunkt:** det samme initialiserede todo-projekt med `jq`. Opret nedenstående miljøer med rigtige abonnement-/lokationsværdier (eller sæt `AZURE_SUBSCRIPTION_ID`/`AZURE_LOCATION` i hver) **før** du kalder workflowet uden prompt. Det fejler med vilje i stedet for at opfinde manglende værdier. Brug kun engangsmiljøer til træning, ikke et faktisk produktionsabonnement.
 
 ```bash
-# Opret udrulningsscript
+# Create deployment script
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -866,25 +863,25 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Trin 1: Udrul til dev
+# Step 1: Deploy to dev
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
 azd up --no-prompt
 
 echo "Running dev tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Trin 2: Udrul til staging
+# Step 2: Deploy to staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
 azd up --no-prompt
 
 echo "Running staging tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Trin 3: Manuel godkendelse til produktion
+# Step 3: Manual approval for production
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -896,7 +893,7 @@ if [[ $confirm == "yes" ]]; then
     azd up --no-prompt
     
     echo "Running production smoke tests..."
-    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
     
     echo "
 ✅ Production deployment completed!"
@@ -907,74 +904,90 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# Opret miljøer
-azd env new dev
-azd env new staging
-azd env new production
+# Create environments
+# Reuse existing dev if you completed Exercise 1; create unused environments
+azd env select dev
+azd env new staging --subscription "<subscription-id>" --location eastus2
+azd env new production --subscription "<subscription-id>" --location eastus2
 
-# Kør trinvis udrulning
+# Run staged deployment
 ./deploy-staged.sh
+
+# After verification, delete each disposable deployment (review prompts)
+azd down --environment dev
+azd down --environment staging
+azd down --environment production
 ```
 
-**Succeskriterier:**
-- [ ] Dev-miljøet udrulles succesfuldt
-- [ ] Staging-miljøet udrulles succesfuldt
+**Succes kriterier:**
+- [ ] Dev-miljøet deployer succesfuldt
+- [ ] Staging-miljøet deployer succesfuldt
 - [ ] Manuel godkendelse kræves til produktion
-- [ ] Alle miljøer har fungerende sundhedstjek
-- [ ] Kan rulle tilbage om nødvendigt
+- [ ] Alle miljøer har fungerende helbredstjek
+- [ ] Kan rulle tilbage hvis nødvendigt
 
-### Øvelse 4: Rollback-strategi (25 minutter)
-**Mål**: Implementer og test rollback af udrulning ved hjælp af Git
+### Øvelse 4: Tilbageførselsstrategi (25 minutter)
+**Mål**: Implementer og test backout af deployment ved hjælp af Git
+
+**Udgangspunkt:** en isoleret trænings-udtjekning af todo-skabelonen med al baseline-kode committet, et rent Git-arbejdsområde og et engangskonfigureret miljø. Indfør aldrig bevidste fejl i et reelt produktionsprojekt. `APP_VERSION` nedenfor er kun bogføring medmindre du eksplicit kobler det ind i appen.
 
 ```bash
-# Udrul v1
+# Deploy v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Gem v1 commit-hash
+# Save v1 commit hash
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Udrul v2 med inkompatibel ændring
-echo "throw new Error('Intentional break')" >> src/api/src/server.js
-git add . && git commit -m "v2 with intentional break"
+# Deploy v2 with breaking change
+echo "throw new Error('Intentional break');" >> src/api/src/index.ts
+git add src/api/src/index.ts
+git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
-azd deploy
+DEPLOY_FAILED=false
+azd deploy api || DEPLOY_FAILED=true
 
-# Opdag fejl og rul tilbage
-if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+# Detect failure and rollback
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+if [ "$DEPLOY_FAILED" = true ] || ! curl -f "$API_URL/lists"; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Rul tilbage med git
+    # Rollback using git
     git revert HEAD --no-edit
     
-    # Rul miljøet tilbage
+    # Rollback environment
     azd env set APP_VERSION "1.0.0"
     
-    # Udrul v1 igen
-    azd deploy
+    # Redeploy v1
+    azd deploy api
+    curl --fail "$API_URL/lists"
     
     echo "✅ Rolled back to v1.0.0"
 fi
+
+# Clean up the disposable deployment when finished
+azd down
 ```
 
-**Succeskriterier:**
-- [ ] Kan opdage udrulningsfejl
-- [ ] Rollback-script kører automatisk
+**Succes kriterier:**
+- [ ] Kan opdage deploymentsfejl
+- [ ] Tilbageførsels-script kører automatisk
 - [ ] Applikationen vender tilbage til fungerende tilstand
-- [ ] Sundhedstjek bestås efter rollback
+- [ ] Helbredstjek bestås efter tilbageførsel
 
-## 📊 Sporing af udrulningsmetrikker
+## 📊 Overvågning af deploymentsmålinger
 
-### Spor din udrulningsydelse
+### Overvåg din deployments ydeevne
 
 ```bash
-# Opret script til udrulningsmålinger
+# Create deployment metrics script
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
 
 azd deploy "$@"
+DEPLOY_STATUS=$?
 
 END_TIME=$(date +%s)
 DURATION=$((END_TIME - START_TIME))
@@ -986,31 +999,32 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# Log til fil
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+# Log to file
+echo "$(date +%Y-%m-%dT%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+exit "$DEPLOY_STATUS"
 EOF
 
 chmod +x track-deployment.sh
 
-# Brug det
+# Use it
 ./track-deployment.sh
 ```
 
-**Analyser dine metrikker:**
+**Analyser dine målinger:**
 ```bash
-# Vis udrulningshistorik
+# View deployment history
 cat deployment-metrics.csv
 
-# Beregn gennemsnitlig udrulningstid
+# Calculate average deployment time
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
 ## Yderligere ressourcer
 
-- [Azure Developer CLI - Udrulningsreference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service Udrulning](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps - Udrulning af artefakt](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions Udrulning](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI Deployments Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 

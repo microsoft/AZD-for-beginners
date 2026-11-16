@@ -1,60 +1,58 @@
-# 6. 清除基礎設施
+# 6. 拆除基建
 
-!!! tip "在本模組結束時您將能夠"
+!!! tip "完成本單元後你將能夠"
 
-    - [ ] 了解資源清理與成本管理的重要性
-    - [ ] 使用 `azd down` 安全地解除佈署基礎設施
-    - [ ] 如有需要，還原已軟刪除的 Azure AI Services
-    - [ ] **實作 6：** 清理 Azure 資源並驗證移除
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## 額外練習
 
-在我們拆除專案之前，花幾分鐘做一些開放式探索。
+在拆除項目之前，花幾分鐘做一些開放式探索。
 
-!!! info "試試這些探索提示"
+!!! info "嘗試這些探索提示"
 
-    **使用 GitHub Copilot 做實驗：**
+    **Experiment with GitHub Copilot:**
     
-    1. 問：`What other AZD templates could I try for multi-agent scenarios?`
-    2. 問：`How can I customize the agent instructions for a healthcare use case?`
-    3. 問：`What environment variables control cost optimization?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **探索 Azure 入口網站：**
+    **Explore the Azure Portal:**
     
-    1. 檢視您佈署的 Application Insights 指標
-    2. 檢查已佈署資源的成本分析
-    3. 再次探索 Microsoft Foundry portal agent playground
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## 解除佈署基礎設施
+## 拆除基建
 
-1. 拆除基礎設施非常簡單：
+1. 拆除基建很簡單，只要：
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. 確認選擇的環境並檢視將刪除的資源。這會移除 Azure 資源並可能刪除數據。保留此學習工作流程的確認提示。完成後你將看到類似輸出：
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (可選) 如果您現在再次執行 `azd up`，您會注意到 gpt-4.1 模型會被佈署，因為環境變數已在本機 `.azure` 資料夾中被變更（並儲存）。 
+1. 在入口網站中驗證刪除，並檢查部署範圍外的資源。成本報告和配額更新可能延遲。除非你明確移除，否則本地 `.azure` 配置將保留。
 
-      這是模型部署的<strong>之前</strong>：
+1. `azd down --purge` 會額外請求永久刪除支持的軟刪除資源。只有在不需要恢復且了解保留／清除保護政策時使用。它不保證立即釋放配額。
 
-      ![初始](../../../../../translated_images/zh-MO/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      而這是<strong>之後</strong>：
-      ![新的](../../../../../translated_images/zh-MO/14-deploy-new.f7f3c355a3cf7299.webp)
+1. 不要為了驗證清理而重新部署。之後故意的 `azd up` 可以透過剩餘的本地輸入重新建立資源，並再次產生費用。模型更新通常使用受支持的佈建變更，而非拆除。
 
 ---
 

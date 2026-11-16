@@ -1,46 +1,48 @@
 # הפרויקט הראשון שלך - מדריך מעשי
 
-**ניווט בפרקים:**
-- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+**ניווט בפרק:**
+- **📚 עמוד הקורס**: [AZD למתחילים](../../README.md)
 - **📖 הפרק הנוכחי**: פרק 1 - יסודות והתחלה מהירה
-- **⬅️ הקודם**: [התקנה והגדרה](installation.md)
-- **➡️ הבא**: [קונפיגורציה](configuration.md)
-- **🚀 הפרק הבא**: [פרק 2: פיתוח ממוקד ב-AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **⬅️ הקודם**: [התקנה והגדרות](installation.md)
+- **➡️ הבא**: [הבא את האפליקציה שלך](bring-your-own-app.md)
+- **🚀 הפרק הבא**: [פרק 2: פיתוח AI-קודם](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## מבוא
+## הקדמה
 
-ברוכים הבאים לפרויקט הראשון שלכם עם Azure Developer CLI! מדריך מעשי מקיף זה מספק הדרכה מלאה ליצירה, פריסה וניהול אפליקציה מלאה בערכת Azure באמצעות azd. תעבדו עם אפליקציית todo אמיתית הכוללת ממשק React frontend, backend של Node.js API, ומסד נתונים MongoDB.
+ברוכים הבאים לפרויקט הראשון שלך עם Azure Developer CLI! תפרוס אפליקציית todo עם ממשק React, API ב-Node.js ו-Azure Cosmos DB. התבנית שומרת על השם ההיסטורי `todo-nodejs-mongo`; התשתית הנוכחית שלה משתמשת ב-Cosmos DB עבור NoSQL, לכן בדוק את קובץ ה-README שהורדת ואת `infra/` במקום להסיק את ממשק ה-API של מסד הנתונים מהשם.
 
-## מטרות הלמידה
+> נבדק מול `azd 1.37.2` והתבנית הציבורית בנובמבר 2026. דוגמאות מטה משתמשות ב-Bash; חילוץ JSON דורש גם `jq`. פריסות ב-Azure גורמות לחיובים ולא בוצעו במהלך סקירה זו.
 
-בסיום מדריך זה:
-- תתמקדו בזרימת העבודה לאתחול פרויקט azd באמצעות תבניות
-- תבינו את מבנה פרויקט Azure Developer CLI וקבצי ההגדרה
-- תבצעו פריסת אפליקציה מלאה ל-Azure כולל הקמת תשתיות
-- תיישמו עדכוני אפליקציה ואסטרטגיות לפריסה מחדש
-- תנהלו סביבות מרובות לפיתוח ולבדיקות
-- תיישמו נהלי ניקוי משאבים וניהול עלויות
+## מטרות למידה
 
-## תוצאות הלמידה
+בסיום מדריך זה, תלמד:
+- לשלוט בתהליך אתחול פרויקט azd באמצעות תבניות
+- להבין את מבנה פרויקט Azure Developer CLI וקבצי הקונפיגורציה
+- לבצע פריסת אפליקציה מלאה ל-Azure עם פריסת תשתית
+- ליישם עדכוני אפליקציה ואסטרטגיות לפריסה מחדש
+- לנהל סביבות מרובות עבור פיתוח ובדיקות
+- ליישם ניקוי משאבים והקפדה על ניהול עלויות
 
-בסיום, תוכלו:
-- לאתחל ולהגדיר פרויקטי azd מתבניות בעצמכם
+## תוצאות למידה
+
+לאחר ההשלמה תוכל:
+- לאתחל ולהגדיר פרויקטים של azd מתבניות באופן עצמאי
 - לנווט ולשנות מבני פרויקטים של azd ביעילות
-- לפרוס אפליקציות full-stack ל-Azure באמצעות פקודה אחת
-- לפתור בעיות שכיחות בפריסה ובעיות אימות
-- לנהל סביבות Azure מרובות לשלבים שונים בפריסה
-- ליישם זרימות עבודה לפריסה רציפה של עדכוני אפליקציה
+- לפרוס אפליקציות מלאות ל-Azure באמצעות פקודות יחידות
+- לפתור בעיות פריסה נפוצות ובעיות אימות
+- לנהל סביבות Azure מרובות לשלבי פריסה שונים
+- ליישם תהליכי פריסה רציפה לעדכוני אפליקציה
 
-## התחלת עבודה
+## התחלה
 
-### רשימת דרישות מוקדמות
+### רשימת תנאים מוקדמים
 - ✅ Azure Developer CLI מותקן ([מדריך התקנה](installation.md))
-- ✅ אימות AZD הושלם באמצעות `azd auth login`
+- ✅ התחברות AZD הושלמה עם `azd auth login`
 - ✅ Git מותקן במערכת שלך
-- ✅ Node.js 16+ (למדריך זה)
+- ✅ Node.js 22 LTS (או גרסה נתמכת לפי התבנית שהורדת)
 - ✅ Visual Studio Code (מומלץ)
 
-לפני ההמשך, הפעל את מאמת ההגדרות משורש מאגר הקוד:
+לפני שתמשיך, הרץ את מאמת ההתקנה משורש המאגר:
 
 **Windows:** `./validate-setup.ps1`
 
@@ -48,14 +50,14 @@
 
 ### אמת את ההתקנה שלך
 ```bash
-# בדוק התקנת azd
+# Check azd installation
 azd version
 
-# בדוק אימות AZD
+# Check AZD authentication
 azd auth login --check-status
 ```
 
-### אמת את אימות Azure CLI האופציונלי
+### אמת התחברות אופציונלית ב-Azure CLI
 
 ```bash
 az account show
@@ -68,46 +70,45 @@ node --version
 
 ## שלב 1: בחר ואתחל תבנית
 
-נתחיל בתבנית אפליקציית todo פופולרית הכוללת frontend ב-React ו-backend של Node.js API.
+נתחיל עם תבנית פופולרית של אפליקציית todo הכוללת ממשק React ו-API ב-Node.js.
 
 ```bash
-# דפדף תבניות זמינות
+# Browse available templates
 azd template list
 
-# אתחל את תבנית אפליקציית המטלות
+# Initialize the todo app template
 mkdir my-first-azd-app
 cd my-first-azd-app
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
-# פעל לפי ההנחיות:
-# - הכנס שם סביבה: "dev"
-# - בחר מנוי (אם יש לך כמה)
-# - בחר אזור: "East US 2" (או האזור המועדף עליך)
+# Follow the prompts:
+# - Enter an environment name: "dev"
+# - Choose a subscription (if you have multiple)
+# - Choose a region: "East US 2" (or your preferred region)
 ```
 
-### מה קרה בדיוק?
-- הורדת את קוד התבנית לתיקייה המקומית שלך
-- יצרת קובץ `azure.yaml` המכיל הגדרות שירותים
-- הגדרת קוד תשתית בתיקיית `infra/`
-- יצרת קונפיגורציית סביבה
+### מה בדיוק קרה?
+- קוד התבנית הורד לתיקייה המקומית שלך
+- נוצר קובץ `azure.yaml` עם הגדרות שירות
+- הוגדר קוד התשתית בתיקיית `infra/`
+- נוצר קונפיגורציית סביבה
 
 ## שלב 2: חקור את מבנה הפרויקט
 
-בוא נבדוק מה azd יצר עבורנו:
+בוא נבחן מה יצא מ-azd:
 
 ```bash
-# הצג את מבנה הפרויקט
-tree /f   # חלונות
-# או
-find . -type f | head -20   # מק/לינוקס
+# View the project structure
+tree /f   # Windows
+# or
+find . -type f | head -20   # macOS/Linux
 ```
 
-אתה אמור לראות:
+תראה:
 ```
 my-first-azd-app/
-├── .azd/
-│   └── config.json              # Project configuration
 ├── .azure/
+│   ├── config.json              # Selected local environment
 │   └── dev/                     # Environment-specific files
 ├── .devcontainer/               # Development container config
 ├── .github/workflows/           # GitHub Actions CI/CD
@@ -115,80 +116,77 @@ my-first-azd-app/
 ├── infra/                       # Infrastructure as code (Bicep)
 │   ├── main.bicep              # Main infrastructure template
 │   ├── main.parameters.json     # Parameters for deployment
-│   └── modules/                # Reusable infrastructure modules
+│   └── app/                    # Application infrastructure modules
 ├── src/
 │   ├── api/                    # Node.js backend API
 │   │   ├── src/               # API source code
-│   │   ├── package.json       # Node.js dependencies
-│   │   └── Dockerfile         # Container configuration
+│   │   └── package.json       # Node.js dependencies
 │   └── web/                   # React frontend
 │       ├── src/               # React source code
-│       ├── package.json       # React dependencies
-│       └── Dockerfile         # Container configuration
+│       └── package.json       # React dependencies
 ├── azure.yaml                  # azd project configuration
 └── README.md                   # Project documentation
 ```
 
 ### קבצים מרכזיים להבנה
 
-**azure.yaml** - הלב של פרויקט ה-azd שלך:
+**azure.yaml** - לב פרויקט ה-azd שלך:
 ```bash
-# הצג את תצורת הפרויקט
+# View the project configuration
 cat azure.yaml
 ```
 
-**infra/main.bicep** - הגדרת התשתית:
+**infra/main.bicep** - הגדרת תשתית:
 ```bash
-# הצג את קוד התשתית
+# View the infrastructure code
 head -30 infra/main.bicep
 ```
 
-## שלב 3: התאמת הפרויקט (אופציונלי)
+## שלב 3: התאם אישית את הפרויקט שלך (אופציונלי)
 
-לפני הפריסה תוכל להתאים את האפליקציה:
+לפני הפריסה, תוכל להתאים אישית את האפליקציה:
 
-### שנה את ה-Frontend
+### שנה את הממשק קדמי
 ```bash
-# פתח את קומפוננטת האפליקציה של React
-code src/web/src/App.tsx
+# Open the React app component
+code src/web/src/layout/header.tsx
 ```
 
 בצע שינוי פשוט:
-```typescript
-// מצא את הכותרת ושנה אותה
-<h1>My Awesome Todo App</h1>
+```tsx
+// Replace the existing <Text variant="xLarge">ToDo</Text> element
+<Text variant="xLarge">My Awesome Todo App</Text>
 ```
 
 ### הגדר משתני סביבה
 ```bash
-# הגדר משתני סביבה מותאמים אישית
+# Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# הצג את כל משתני הסביבה
+# View all environment variables
 azd env get-values
 ```
+
+שני ערכים מותאמים אלו מדגימים אחסון מקומי בלבד. תבנית המלאי אינה צורכת `WEBSITE_TITLE` או `API_VERSION`, ולכן הם אינם משנים את האפליקציה. העריכה המפורשת למקור שלמעלה משנה את הכותרת המוצגת.
 
 ## שלב 4: פרוס ל-Azure
 
 עכשיו לחלק המרגש - פרוס הכל ל-Azure!
 
 ```bash
-# פריסת תשתית ויישום
+# Deploy infrastructure and application
 azd up
 
-# הפקודה הזו תעשה את הבא:
-# 1. תספק משאבי Azure (שירות אפליקציה, Cosmos DB, וכו')
-# 2. תוכניס את היישום שלך
-# 3. תפרוס למשאבים המסופקים
-# 4. תציג את כתובת ה-URL של היישום
+# This command will:
+# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
+# 2. Build your application
+# 3. Deploy to the provisioned resources
+# 4. Display the application URL
 ```
 
-### מה קורה בזמן הפריסה?
+### מה קורה במהלך הפריסה?
 
-הפקודה `azd up` מבצעת את השלבים הבאים:
-1. **הקמה** (`azd provision`) - יוצרת משאבי Azure
-2. **אריזה** - בונה את קוד האפליקציה שלך
-3. **פריסה** (`azd deploy`) - מפריסה את הקוד למשאבי Azure
+תהליך העבודה מספק תשתית ומארז/מפזר קוד. סדר מדויק ניתן להתאמה דרך `workflows.up` ב-`azure.yaml`; תבנית זו מציינת תחילה אספקה ואחריה פריסה. אל תיתן אמון בסדר שלב אוניברסלי לכל תבנית.
 
 ### פלט צפוי
 ```
@@ -205,334 +203,334 @@ https://app-web-abc123def.azurewebsites.net
 
 ## שלב 5: בדוק את האפליקציה שלך
 
-### גישה לאפליקציה שלך
-לחץ על כתובת ה-URL המופיעה בפלט הפריסה, או קבל אותה בכל עת:
+### גש לאפליקציה שלך
+לחץ על כתובת ה-URL שסופקה בפלט הפריסה, או קבל אותה בכל עת:
 ```bash
-# קבל נקודות קצה של היישום
+# Get application endpoints
 azd show
 
-# פתח את היישום בדפדפן שלך
-azd show --output json | jq -r '.services.web.endpoint'
+# Open the application in your browser
+azd show --output json | jq -er '.services.web.ingressUrl'
 ```
 
 ### בדוק את אפליקציית Todo
-1. **הוסף פריט todo** - לחץ על "Add Todo" והכנס משימה
+1. **הוסף פריט todo** - לחץ "Add Todo" והזן משימה
 2. **סמן כהושלם** - סמן פריטים שהושלמו
-3. **מחק פריטים** - הסר תזכורות שאינך צריך יותר
+3. **מחק פריטים** - הסר todos שאינך צריך עוד
 
-### נטר את האפליקציה שלך
+### פקח על האפליקציה שלך
 ```bash
-# פתח את פורטל Azure עבור המשאבים שלך
+# Open Azure portal for your resources
 azd monitor
 
-# הצג יומני אפליקציה
+# View application logs
 azd monitor --logs
 
-# הצג מדדים חיים
+# View live metrics
 azd monitor --live
 ```
 
 ### ✅ אמת את הפריסה שלך
 
-לפני שממשיכים, רוץ דרך רשימת בדיקות מהירה כדי לוודא שהכל עובד באמת—אל תסמוך על "פריסה הצליחה" כמשמעות "האפלקיציה עובדת":
+לפני שממשיכים, עבור רשימת בדיקה מהירה זו כדי לאשר שהכל באמת עובד - אל תניח ש"פריסה הצליחה" משמעותה "האפליקציה עובדת":
 
 ```bash
-# 1. אשר שהנקודה הסופית קיימת ונגישה
+# 1. Confirm the endpoint exists and is reachable
 azd show
 
-# 2. בצע בדיקת עישון לנקודה הסופית (מצפה ל-HTTP 200)
-curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+# 2. Smoke-test the endpoint (expects HTTP 200)
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error --location "$WEB_URL"
 
-# 3. בדוק את נקודת הבריאות אם האפליקציה שלך חושפת אחת
-curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+# 3. Test the API's actual list route (the template has no /health route)
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail --show-error "$API_URL/lists"
 ```
 
-**הפריסה אושרה כאשר:**
-- ✅ `azd show` מציג כתובת URL נגישה
-- ✅ ה-URL נפתח בדפדפן ללא שגיאות
-- ✅ הפונקציות המרכזיות עובדים (הוספה/סיום/מחיקה של todo)
-- ✅ `azd monitor --logs` מראה בקשות שמגיעות ללא שגיאות בלתי צפויות
+**הפריסה מאומתת כאשר:**
+- ✅ `azd show` מציג כתובת URL לנקודת קצה נגישה
+- ✅ כתובת ה-URL נפתחת בדפדפן שלך ללא שגיאות
+- ✅ הפונקציות המרכזיות עובדות (הוסף/סמן כהושלם/מחק todo)
+- ✅ `azd monitor --logs` מציג בקשות עם ללא שגיאות בלתי צפויות
 
-אם משהו נכשל, עבור אל [פרק 7: פתרון בעיות](../chapter-07-troubleshooting/README.md).
+אם בדיקה כלשהי נכשלה, עבור אל [פרק 7: פתרון בעיות](../chapter-07-troubleshooting/README.md).
 
 ## שלב 6: בצע שינויים ופרוס מחדש
 
-נעשה שינוי ונראה כמה קל לעדכן:
+בוא נעשה שינוי ונראה כמה קל לעדכן:
 
 ### שנה את ה-API
 ```bash
-# ערוך את קוד ה-API
-code src/api/src/routes/lists.js
+# Edit the API code
+code src/api/src/routes/lists.ts
 ```
 
-הוסף כותרת תגובה מותאמת אישית:
+הוסף כותרת תגובה מותאמת:
 ```javascript
-// מצא מטפל בנתיב והוסף:
+// Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
 ### פרוס רק את שינויים בקוד
 ```bash
-# פרוס רק את קוד היישום (דלג על התשתית)
+# Deploy only the application code (skip infrastructure)
 azd deploy
 
-# זה הרבה יותר מהיר מ-'azd up' מכיוון שהתשתית כבר קיימת
+# This is much faster than 'azd up' since infrastructure already exists
 ```
 
 ## שלב 7: נהל סביבות מרובות
 
-צור סביבה לבדיקות כדי לבדוק שינויים לפני הייצור:
+צור סביבה לבדיקות לפני ייצור:
 
 ```bash
-# צור סביבה חדשה לבדיקות
+# Create a new staging environment
 azd env new staging
 
-# פרוס לסביבת הבדיקות
+# Deploy to staging
 azd up
 
-# חזור לסביבת הפיתוח
+# Switch back to dev environment
 azd env select dev
 
-# רשום את כל הסביבות
+# List all environments
 azd env list
 ```
 
 ### השוואת סביבות
 ```bash
-# הצג סביבה לפיתוח
+# View dev environment
 azd env select dev
 azd show
 
-# הצג סביבה לניסויים
+# View staging environment  
 azd env select staging
 azd show
 ```
 
 ## שלב 8: נקה משאבים
 
-כשסיימת להתנסות, נקה כדי להימנע מחיובים שוטפים:
+כשסיימת להתנסות, נקה כדי למנוע חיובים מתמשכים:
 
 ```bash
-# מחק את כל המשאבים ב-Azure עבור הסביבה הנוכחית
-azd down
+# Review and delete BOTH environments created in this tutorial
+azd down --environment dev
+azd down --environment staging
 
-# מחיקה בכוח ללא אישור וניקוי משאבים שנמחקו בריכוך
-azd down --force --purge
-
-# מחק סביבה ספציפית
-azd env select staging
-azd down --force --purge
+# Automation alternative for a selected disposable environment:
+# azd down --environment dev --force --purge
+# --purge affects supported soft-deleted Azure resources, not local .azure files.
 ```
 
-## אפליקציה קלאסית מול אפליקציית AI: אותה זרימת עבודה
+## אפליקציה קלאסית מול אפליקציית AI: אותו תהליך עבודה
 
-רק עכשיו פרסת אפליקציית ווב מסורתית. אבל מה אם רצית לפרוס אפליקציית צ׳אט המופעלת על AI - למשל, צ׳אט שמגובה במודלים של Microsoft Foundry?
+הרגע פרסת אפליקציית רשת מסורתית. אבל מה אם תרצה לפרוס אפליקציית AI — למשל, אפליקציית צ\'אט שמגובה במודלים של Microsoft Foundry?
 
-החדשות הטובות: **זרימת העבודה זהה.**
+החדשות הטובות: **תהליך העבודה זהה.**
 
-| שלב | אפליקציית Todo קלאסית | אפליקציית צ'אט AI |
+| שלב | אפליקציית Todo קלאסית | אפליקציית צ\'אט AI |
 |------|-----------------|-------------|
-| אתחול | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| אתחול (תיקייה ריקה) | `azd init --template todo-nodejs-mongo .` | `azd init --template azure-search-openai-demo .` |
 | אימות | `azd auth login` | `azd auth login` |
 | פריסה | `azd up` | `azd up` |
-| ניטור | `azd monitor` | `azd monitor` |
+| פיקוח | `azd monitor` | `azd monitor` |
 | ניקוי | `azd down --force --purge` | `azd down --force --purge` |
 
-ההבדל היחיד הוא **התבנית** שמתחילים ממנה. תבנית AI כוללת תשתיות נוספות (כגון משאב Microsoft Foundry Models או אינדקס חיפוש AI), אך azd מטפל בכל זה בשבילך. אינך צריך ללמוד פקודות חדשות, להשתמש בכלי אחר, או לשנות את דרך החשיבה שלך על הפריסה.
+פקודות מחזור החיים הן אותו דבר, אך התנאים המוקדמים שונים. תבנית AI יכולה לדרוש גישה למודל, מכסת אזור, אינג\'סטיה של נתונים, וקונפיגורציה נוספת. קרא את קובץ ה-README שלה לפני הפריסה; `azd up` אינו יכול לספק הרשאות או מכסה חסרות.
 
-זה העיקרון המרכזי של azd: **זרימת עבודה אחת, כל עומס עבודה.** הכישורים שהלמדת במדריך זה—אתחול, פריסה, ניטור, פריסה מחדש, וניקוי—חלים באותה מידה על אפליקציות וסוכני AI.
+זוהי העיקרון המרכזי של azd: **תהליך עבודה אחד, כל עומס עבודה.** הכישורים שהתאמנת עליהם במדריך זה — איתחול, פריסה, פיקוח, פריסה מחדש וניקוי — חלים במידה שווה על יישומי AI וסוכנים.
 
 ---
 
 ## מה שלמדת
 
-מזל טוב! השלמת בהצלחה:
-- ✅ אתחלת פרויקט azd מתבנית
-- ✅ חקרת את מבנה הפרויקט והקבצים המרכזיים
-- ✅ פרסת אפליקציה מלאה ל-Azure
-- ✅ ביצעת שינויים בקוד ופרסת מחדש
-- ✅ ניהלת סביבות מרובות
-- ✅ ניקית משאבים
+מזל טוב! הצלחת:
+- ✅ לאתחל פרויקט azd מתבנית
+- ✅ לחקור את מבנה הפרויקט והקבצים המרכזיים
+- ✅ לפרוס אפליקציית full-stack ל-Azure
+- ✅ לבצע שינויים בקוד ולפרוס מחדש
+- ✅ לנהל סביבות מרובות
+- ✅ לנקות משאבים
 
-## 🎯 תרגילי אימות כישורים
+## 🎯 תרגילי אימות מיומנות
 
 ### תרגיל 1: פרוס תבנית שונה (15 דקות)
-**מטרה**: להראות שליטה בזרימת עבודה של `azd init` ושל פריסה
+**מטרה**: להראות שליטה בתהליך init ופריסת azd
 
 ```bash
-# נסה את סטאק פייתון + MongoDB
+# Try Python + MongoDB stack
 mkdir todo-python && cd todo-python
-azd init --template todo-python-mongo
+azd init --template todo-python-mongo .
 azd up
 
-# אמת את הפריסה
+# Verify deployment
 azd show
-curl $(azd show --output json | jq -r '.services.web.endpoint')
+curl --fail "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# נקה
+# Clean up
 azd down --force --purge
 ```
 
 **קריטריוני הצלחה:**
 - [ ] האפליקציה פרוסה ללא שגיאות
-- [ ] יש גישה ל-URL של האפליקציה בדפדפן
-- [ ] האפליקציה פועלת כראוי (הוספה/הסרה של TODOs)
-- [ ] כל המשאבים נוקו בהצלחה
+- [ ] יכול לגשת לכתובת האפליקציה בדפדפן
+- [ ] האפליקציה מתפקדת כראוי (הוסף/הסר todos)
+- [ ] ניקיון מלא של כל המשאבים בוצע בהצלחה
 
-### תרגיל 2: התאמת קונפיגורציה (20 דקות)
-**מטרה**: תרגול קונפיגורציית משתני סביבה
+### תרגיל 2: התאם אישית קונפיגורציה (20 דקות)
+**מטרה**: לתרגל אחסון ערך לסביבה מקומית מבלי לבלבל אותו עם קונפיגורציית זמן ריצה
 
 ```bash
-cd my-first-azd-app
+# Return to your original my-first-azd-app directory first
 
-# צור סביבה מותאמת אישית
+# Create custom environment
 azd env new custom-config
 
-# הגדר משתנים מותאמים אישית
+# Set custom variables
 azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
 
-# בדוק משתנים
+# Verify variables
 azd env get-values | grep APP_TITLE
 
-# פרוס עם תצורת מותאם אישית
-azd up
+# Check one value exactly; expected: My Custom Todo App
+azd env get-value APP_TITLE
 ```
 
 **קריטריוני הצלחה:**
-- [ ] סביבה מותאמת אישית נוצרה בהצלחה
-- [ ] משתני סביבה נקבעו וניתנים לשליפה
-- [ ] האפליקציה פרוסה עם קונפיגורציה מותאמת
-- [ ] ניתן לאמת הגדרות מותאמות באפליקציה המופרסת
+- [ ] סביבה מותאמת נוצרה בהצלחה
+- [ ] משתני סביבה הוגדרו וניתן לשליפה
+- [ ] `azd env get-value APP_TITLE` מדפיס `My Custom Todo App`
+- [ ] יכול להסביר מדוע ערכים אלה לא משנים את האפליקציה אלא אם כן הקוד/תשתית צורכים אותם
 
-### תרגיל 3: זרימת עבודה בסביבות מרובות (25 דקות)
-**מטרה**: שליטה בניהול סביבות ואסטרטגיות פריסה
+### תרגיל 3: תהליך עבודה עם סביבות מרובות (25 דקות)
+**מטרה**: לשלוט בניהול סביבות ואסטרטגיות פריסה
 
 ```bash
-# צור סביבת פיתוח
+# Create dev environment
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# ציין את כתובת ה-URL של הפיתוח
-DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Dev: $DEV_URL"
 
-# צור סביבת הביניים
+# Create staging environment
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# ציין את כתובת ה-URL של הביניים
-STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Staging: $STAGING_URL"
 
-# השווה בין הסביבות
+# Compare environments
 azd env list
 
-# בדוק את שתי הסביבות
-curl "$DEV_URL/health"
-curl "$STAGING_URL/health"
+# Test both environments
+curl --fail "$DEV_URL"
+curl --fail "$STAGING_URL"
 
-# נקה את שתי הסביבות
+# Clean up both
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
 **קריטריוני הצלחה:**
-- [ ] נוצרו שתי סביבות עם קונפיגורציות שונות
+- [ ] שתי סביבות נוצרו עם קונפיגורציות שונות
 - [ ] שתי הסביבות פרוסו בהצלחה
 - [ ] ניתן לעבור בין סביבות באמצעות `azd env select`
-- [ ] משתני הסביבה שונים בין הסביבות
-- [ ] שתי הסביבות נוקו בהצלחה
+- [ ] משתני סביבה שונים בין הסביבות
+- [ ] ניקוי משאבים של שתי הסביבות בוצע בהצלחה
 
 ## 📊 ההתקדמות שלך
 
 **זמן מושקע**: ~60-90 דקות  
-**כישורים נרכשו**:
-- ✅ אתחול פרוייקטים מתבניות
-- ✅ הקמת משאבים ב-Azure
-- ✅ זרימות עבודה לפריסת אפליקציות
-- ✅ ניהול סביבות
+**מיומנויות שנרכשו**:
+- ✅ אתחול פרויקט מתבנית
+- ✅ פריסת משאבים ב-Azure
+- ✅ תהליכי פריסת אפליקציה
+- ✅ ניהול סביבה
 - ✅ ניהול קונפיגורציה
 - ✅ ניקוי משאבים וניהול עלויות
 
-**הרמה הבאה**: אתה מוכן ל-[מדריך קונפיגורציה](configuration.md) ללמוד דפוסי קונפיגורציה מתקדמים!
+**שלב הבא**: אתה מוכן ל[מדריך הקונפיגורציה](../chapter-03-configuration/configuration.md) ללמידת דפוסי קונפיגורציה מתקדמים!
 
 ## פתרון בעיות נפוצות
 
 ### שגיאות אימות
 ```bash
-# אמת מחדש עם Azure
-az login
+# Re-authenticate with azd (az login does not refresh azd's default credentials)
+azd auth login
 
-# אמת גישה למנוי
-az account show
+# Verify the selected environment's subscription
+azd env get-value AZURE_SUBSCRIPTION_ID
 ```
 
-### כשלי פריסה
+### כשלונות בפריסה
 ```bash
-# הפעל רישום תיקון באגים
-export AZD_DEBUG=true
+# Enable debug logging
 azd up --debug
 
-# הצג יומני יישום ב-Azure
+# View application logs in Azure
 azd monitor --logs
 
-# עבור אפליקציות מכולה, השתמש ב-Azure CLI:
+# For Container Apps, use Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
-### קונפליקטים בשם משאבים
+### קונפליקטים בשמות משאבים
 ```bash
-# השתמש בשם סביבה ייחודי
+# Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### בעיות פורטים/רשת
 ```bash
-# בדוק אם הפורטים זמינים
+# Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## השלבים הבאים
+## צעדים הבאים
 
-כעת שסיימת את הפרויקט הראשון שלך, חקור את הנושאים המתקדמים הבאים:
+עכשיו כשסיימת את הפרויקט הראשון שלך, חקור את הנושאים המתקדמים הבאים:
 
-### 1. התאמת תשתית
+### 1. התאמה אישית של תשתית
 - [תשתית כקוד](../chapter-04-infrastructure/provisioning.md)
-- [הוספת מסדי נתונים, אחסון ושירותים נוספים](../chapter-04-infrastructure/provisioning.md#adding-services)
+- [הוסף תשתית למסד נתונים](../chapter-04-infrastructure/provisioning.md#%EF%B8%8F-database-provisioning)
 
-### 2. הקמת CI/CD
-- [מדריך פריסה](../chapter-04-infrastructure/deployment-guide.md) - זרימות עבודה של CI/CD מלאות
-- [תיעוד Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - קונפיגורציית צינורות פריסה
+### 2. הגדרת CI/CD
+- [מדריך פריסה](../chapter-04-infrastructure/deployment-guide.md) - תהליכי CI/CD מלאים
+- [מסמכי Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - קונפיגורציית פייפליין
 
-### 3. שיטות עבודה מומלצות בייצור
-- [מדריך פריסה](../chapter-04-infrastructure/deployment-guide.md) - אבטחה, ביצועים וניטור
+### 3. שיטות עבודה מומלצות לייצור
+- [מדריך פריסה](../chapter-04-infrastructure/deployment-guide.md) - אבטחה, ביצועים ופיקוח
 
-### 4. חקור תבניות נוספות
+### 4. חקור עוד תבניות
 ```bash
-# דפדף בתבניות לפי קטגוריה
+# Browse templates by category
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# נסה ערכות טכנולוגיה שונות
-azd init --template todo-python-mongo
-azd init --template todo-csharp-sql
-azd init --template todo-java-mongo
+# Try different technology stacks
+# Choose ONE in a new empty directory, not all three in the same project
+azd init --template todo-python-mongo .
+# azd init --template todo-csharp-sql .
+# azd init --template todo-java-mongo .
 ```
 
 ## משאבים נוספים
 
 ### חומרי למידה
-- [תיעוד Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [מרכז ארכיטקטורת Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [מסגרת עבודה Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [מסמכי Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [מרכז אדריכלות Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [מסגרת עבודה של Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### קהילה ותמיכה
 - [GitHub של Azure Developer CLI](https://github.com/Azure/azure-dev)
@@ -541,21 +539,21 @@ azd init --template todo-java-mongo
 
 ### תבניות ודוגמאות
 - [גלריית תבניות רשמית](https://azure.github.io/awesome-azd/)
-- [תבניות קהילתיות](https://github.com/Azure-Samples/azd-templates)
-- [דפוסי ארגונים](https://github.com/Azure/azure-dev/tree/main/templates)
+- [תרומות תבניות קהילה](https://github.com/Azure/awesome-azd)
+- [מקור תבנית Todo](https://github.com/Azure-Samples/todo-nodejs-mongo)
 
 ---
 
-**מזל טוב על השלמת פרויקט ה-azd הראשון שלך!** עכשיו אתה מוכן לבנות ולפרוס אפליקציות מדהימות ב-Azure בביטחון.
+**מזל טוב על השלמת פרויקט azd הראשון שלך!** אתה עכשיו מוכן לבנות ולפרוס אפליקציות מדהימות על Azure בביטחון.
 
 ---
 
-**ניווט בפרקים:**
-- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+**ניווט בפרק:**
+- **📚 עמוד הקורס**: [AZD למתחילים](../../README.md)
 - **📖 הפרק הנוכחי**: פרק 1 - יסודות והתחלה מהירה
-- **⬅️ הקודם**: [התקנה והגדרה](installation.md)
+- **⬅️ הקודם**: [התקנה והגדרות](installation.md)
 - **➡️ הבא**: [הבא את האפליקציה שלך](bring-your-own-app.md)
-- **🚀 הפרק הבא**: [פרק 2: פיתוח ממוקד ב-AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 הפרק הבא**: [פרק 2: פיתוח AI-קודם](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 

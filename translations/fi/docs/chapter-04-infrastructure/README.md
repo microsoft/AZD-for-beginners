@@ -1,51 +1,54 @@
-# Luku 4: Infrastructure as Code & Julkaisu
+# Luku 4: Infrastruktuuri koodina & käyttöönotto
 
-**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1-1,5 tuntia | **⭐ Vaativuus**: Keskitaso
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 2-3 tuntia lukemista; varaa lisäaikaa käyttöönottoharjoituksiin | **⭐ Vaativuus**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tässä luvussa käsitellään Infrastructure as Code (IaC) -malleja Bicep-mallipohjien avulla, resurssien provisiointia sekä julkaisuja Azure Developer CLI:n avulla.
+Tämä luku käsittelee Infrastructure as Code (IaC) -malleja Bicep-mallipohjien, resurssien provisioinnin ja käyttöönottojen strategioiden avulla Azure Developer CLI:llä.
 
-> Vahvistettu versiossa `azd 1.27.1` heinäkuussa 2026.
+> Komento- ja konfiguraatiotarkistus kohdistuu: `azd 1.37.2` (marraskuu 2026). Elävää Azuren provisiointia ei suoritettu tarkistuksen aikana.
 
 ## Oppimistavoitteet
 
-Tämän luvun suorittamisen jälkeen osaat:
-- Ymmärtää Bicep-mallipohjan rakenteen ja syntaksin
-- Provisioida Azure-resursseja komennolla `azd provision`
-- Julkaista sovelluksia komennolla `azd deploy`
-- Toteuttaa sinivihreä- ja rullautuva julkaisutavat
+Tämän luvun suorittamalla sinä:
+- Ymmärrät Bicep-mallipohjan rakenteen ja syntaksin
+- Provisionoit Azure-resursseja `azd provision` avulla
+- Otat sovellukset käyttöön `azd deploy` avulla
+- Toteutat blue-green- ja rolling-käyttöönottostrategiat
 
 ---
 
 ## 📚 Oppitunnit
 
 | # | Oppitunti | Kuvaus | Aika |
-|---|----------|--------|------|
-| 1 | [Resurssien provisiointi](provisioning.md) | Azure-resurssien hallinta AZD:llä | 45 min |
-| 2 | [Julkaisun opas](deployment-guide.md) | Sovelluksen julkaisustrategiat | 45 min |
-| 3 | [Oman mallin laatiminen](custom-templates.md) | Rakentaminen ja julkaisukoettavien azd-mallien teko | 30 min |
+|---|--------|-------------|------|
+| 1 | [Resurssien provisiointi](provisioning.md) | Azuren resurssien hallinta AZD:llä | 45 min |
+| 2 | [Käyttöönottoguide](deployment-guide.md) | Sovellusten käyttöönoton strategiat | 45 min |
+| 3 | [Oman mallipohjan kirjoittaminen](custom-templates.md) | Rakenna ja julkaise uudelleenkäytettäviä azd-malleja | 30 min |
 
 ---
 
-## 🚀 Pika-aloitus
+## 🚀 Pikakäynnistys
 
 ```bash
-# Alusta mallista
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Esikatsele, mitä luodaan
+# Preview what will be created
 azd provision --preview
 
-# Tarjoa vain infrastruktuuri
+# Provision infrastructure only
 azd provision
 
-# Ota käyttöön vain koodi
+# Deploy code only
 azd deploy
 
-# Tai molemmat yhdessä
+# Or both together
 azd up
 ```
 
@@ -68,14 +71,14 @@ my-project/
 
 ---
 
-## 🔧 Keskeiset komennot
+## 🔧 Tärkeimmät komennot
 
 | Komento | Kuvaus |
-|---------|--------|
+|---------|-------------|
 | `azd init` | Alusta projekti |
-| `azd provision` | Luo Azure-resurssit |
-| `azd deploy` | Julkaise sovelluskoodi |
-| `azd up` | provisioi + julkaise |
+| `azd provision` | Luo Azure-resursseja |
+| `azd deploy` | Ota sovelluskoodi käyttöön |
+| `azd up` | provisioi + ota käyttöön |
 | `azd down` | Poista kaikki resurssit |
 
 ---
@@ -83,17 +86,17 @@ my-project/
 ## 🔗 Navigointi
 
 | Suunta | Luku |
-|---------|------|
-| **Edellinen** | [Luku 3: Konfigurointi](../chapter-03-configuration/README.md) |
-| **Seuraava** | [Luku 5: Multi-Agent -ratkaisut](../chapter-05-multi-agent/README.md) |
+|-----------|---------|
+| **Edellinen** | [Luku 3: Konfiguraatio](../chapter-03-configuration/README.md) |
+| **Seuraava** | [Luku 5: Moni-agenttiset ratkaisut](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Aiheeseen liittyvät resurssit
+## 📖 Liittyvät resurssit
 
-- [Ennakkotarkastukset ennen julkaisua](../chapter-06-pre-deployment/README.md)
-- [Container-sovellus-esimerkit](../../examples/container-app/README.md)
-- [Tietokantasovellus-esimerkki](../../examples/database-app/README.md)
+- [Ennen käyttöönottoa tehtävät tarkistukset](../chapter-06-pre-deployment/README.md)
+- [Container App -esimerkit](../../examples/container-app/README.md)
+- [Tietokantasovelluksen esimerkki](../../examples/database-app/README.md)
 
 ---
 

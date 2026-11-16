@@ -1,280 +1,133 @@
 # 3. Išardyti šabloną
 
-!!! tip "MODULIO PABAIGOJE GALĖSITE"
+!!! tip "ŠIO MODULIO PABAIGOJE JŪS GALĖSITE"
 
-    - [ ] Aktyvuoti GitHub Copilot su MCP serveriais Azure pagalbai
-    - [ ] Suprasti AZD šablono aplankų struktūrą ir komponentus
-    - [ ] Ištirti infrastruktūros kaip kodo (Bicep) organizavimo modelius
-    - [ ] **Lab 3:** Naudoti GitHub Copilot norint ištirti ir suprasti saugyklos architektūrą 
-
----
-
-
-Su AZD šablonais ir Azure Developer CLI (`azd`) galime greitai pradėti mūsų DI kūrimo kelionę su standartizuotomis saugyklomis, kurios suteikia pavyzdinį kodą, infrastruktūrą ir konfigūracijos failus - paruošto diegti _starter_ projekto pavidalu.
-
-**Tačiau dabar turime suprasti projekto struktūrą ir kodo bazę - ir sugebėti pritaikyti AZD šabloną - be jokios ankstesnės patirties ar supratimo apie AZD!**
+    - [ ] Use GitHub Copilot and optional MCP tools for Azure documentation and read-only exploration
+    - [ ] Identify the template's application, infrastructure, configuration, and test entry points
+    - [ ] Verify generated explanations against actual repository files
+    - [ ] **Lab 3:** Trace one request and one configuration input through the project
 
 ---
 
 ## 1. Aktyvuokite GitHub Copilot
 
-### 1.1 Įdiekite GitHub Copilot Chat
+Atidarykite inicializuotą AI pavyzdį VS Code ir įjunkite [GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Prisijunkite su paskyra, turinčia tinkamą planą; naudojimo apribojimai skiriasi. Paprašykite Copilot paaiškinti saugyklą prieš leidžiant keitimus.
 
-Dabar laikas išbandyti [GitHub Copilot su Agent režimu](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Dabar galime natūralia kalba aprašyti mūsų užduotį aukštu lygiu ir gauti pagalbą vykdant. Šiai laboratorijai naudosime [Nemokamas Copilot planas](https://github.com/github-copilot/signup), kuriame yra mėnesinis užklausų ir pokalbių limitas.
+### Pasirinktiniai MCP serveriai
 
-Priedą galima įdiegti iš marketplace, ir jis dažnai jau yra prieinamas Codespaces arba dev container aplinkose. _Spustelėkite `Open Chat` iš Copilot piktogramos išskleidžiamojo meniu - ir įrašykite užklausą kaip `What can you do?`_ - gali būti paprašyta prisijungti. **GitHub Copilot Chat yra paruoštas**.
+Šios paslaugos gali suteikti papildomų įrankių:
 
-### 1.2. Įdiekite MCP serverius
+- [Azure MCP Server](https://learn.microsoft.com/azure/developer/azure-mcp-server/overview)
+- [Microsoft Learn MCP Server](https://learn.microsoft.com/training/support/mcp)
 
-Kad Agent režimas būtų veiksmingas, jam reikia prieigos prie tinkamų įrankių, kurie padėtų jam gauti žinias arba atlikti veiksmus. Čia gali padėti MCP serveriai. Konfigūruosime šiuos serverius:
+VS Code peržiūrėkite [MCP konfigūracijos instrukcijas](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) ir prireikus sukurkite `.vscode/mcp.json`:
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+```json
+{
+  "servers": {
+    "Azure MCP Server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"]
+    },
+    "microsoft.docs.mcp": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
 
-Norėdami juos aktyvuoti:
+`npx` komanda reikalauja palaikomos Node.js/npm diegimo ir atsisiunčia vykdomąjį kodą. Peržiūrėkite paketą ir fiksuokite patvirtintą versiją, kad būtų atkuriama komandos aplinka. Paleiskite serverius naudodami VS Code MCP valdymą ir patikrinkite jų prieinamus įrankius; pavadinimai gali keistis tarp versijų.
 
-1. Sukurkite failą pavadinimu `.vscode/mcp.json`, jei jo nėra
-1. Nukopijuokite toliau pateiktą turinį į tą failą - ir paleiskite serverius!
-   ```json title=".vscode/mcp.json"
-   {
-      "servers": {
-         "Azure MCP Server": {
-            "command": "npx",
-            "args": [
-            "-y",
-            "@azure/mcp@latest",
-            "server",
-            "start"
-            ]
-         },
-         "microsoft.docs.mcp": {
-            "type": "http",
-            "url": "https://learn.microsoft.com/api/mcp"
-         }
-      }
-   }
-   ```
+**Autentifikacija vykdoma atskirai.** Naudokite `azd auth login` AZD atveju. Sekite Azure MCP dokumentuotą autentifikacijos srauto eigą savo įrankiams; vien AZD prisijungimas nesukuria MCP seanso. Naudokite `az login` atskirai, kai pratimas ar kabliukas kviečia Azure CLI.
 
-??? warning "Gali pasirodyti klaida, kad `npx` nėra įdiegtas (spustelėkite, kad išplėstumėte pataisymą)"
+Išbandykite tik skaitymo užklausas:
 
-      Norėdami tai ištaisyti, atidarykite `.devcontainer/devcontainer.json` failą ir pridėkite šią eilutę į features skiltį. Tada perstatykite konteinerį. Dabar turėtumėte turėti įdiegtą `npx`.
+1. „Naudokite Microsoft Learn MCP, kad surastumėte Azure Developer CLI konfigūracijos dokumentaciją.“
+2. „Paaiškinkite šios saugyklos `azure.yaml`; nurodykite failus, kurie įgyvendina kiekvieną kabliuką.“
+3. „Naudodami prieinamus Azure MCP įrankius, išvardykite mano diegiamus resursus nesikeisdami nieko.“
 
-      ```title="" linenums="0"
-         "features": {
-            "ghcr.io/devcontainers/features/node:1": {},
-            ...
-         },
-      ```
+Patikrinkite pasirinktą nuomininką/prenumeratą ir kiekvieną siūlomą įrankio kvietimą. Nepriimkite resursų kūrimo, šalinimo ar prieigos pokyčių tik tam, kad ištyrinėtumėte architektūrą.
 
----
+## 2. Supraskite architektūrą
 
-### 1.3. Išbandykite GitHub Copilot Chat
+Pavyzdyje talpinamas Python FastAPI backend'as ir React/TypeScript frontend'as Azure Container Apps aplinkoje. Backend'as bendrauja su agentu Microsoft Foundry projekte. Duomenų gavimas ir stebėjimas priklauso nuo įjungtų šablono funkcijų ir sėkmingo nustatymo; jie nėra garantuoti vien tik dėl to, kad programa įdiegta.
 
-**Pirmiausia naudokite `azd auth login`, kad autentikuotumėtės prie Azure iš VS Code komandų eilutės. Taip pat naudokite `az login` tik jei ketinate vykdyti Azure CLI komandas tiesiogiai.**
+![Iliustracinė architektūra](../../../../../translated_images/lt/architecture.8cec470ec15c65c7.webp)
 
-Dabar turėtumėte galėti užklausti savo Azure prenumeratos būsenos ir užduoti klausimus apie išdiegtus išteklius ar konfigūraciją. Išbandykite šias užklausas:
+Palyginkite šį diagramą su [dabartine aukščiausio lygio diegimo instrukcija](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) ir savo tikraisiais resursais. Patikrinkite sukonfigūruotą modelio diegimą, agento įrankius, valdomą tapatybę, vaidmenų priskyrimus ir pasirinktinius AI Search/Application Insights resursus.
 
-1. `List my Azure resource groups`
-1. `#foundry list my current deployments`
-
-Taip pat galite užduoti klausimus apie Azure dokumentaciją ir gauti atsakymus, pagrįstus Microsoft Docs MCP serveriu. Išbandykite šias užklausas:
-
-1. `#microsoft_docs_search What is Azure Developer CLI?`
-1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
-
-Arba galite paprašyti kodo fragmentų užduočiai atlikti. Išbandykite šią užklausą.
-
-1. `Give me a Python code example that uses AAD for an interactive chat client`
-
-Ask režime tai pateiks kodą, kurį galėsite nukopijuoti ir išbandyti. Agent režime tai gali nueiti dar toliau ir sukurti atitinkamus išteklius jums - įskaitant parengimo scenarijus ir dokumentaciją - kad padėtų įvykdyti užduotį.
-
-**Dabar esate pasiruošę pradėti tyrinėti šablono saugyklą**
-
----
-
-## 2. Išardyti architektūrą
-
-??? prompt "PRAŠYMAS: Paaiškinkite programos architektūrą, esančią docs/images/architecture.png, vienoje pastraipoje"
-
-      Ši programa yra DI-varoma pokalbių programėlė, sukurta Azure platformoje, kuri demonstruoja modernią agentais grįstą architektūrą. Sprendimas sukasi aplink Azure Container App, kuri talpina pagrindinį programos kodą, apdorojantį vartotojo įvestis ir generuojantį intelektualius atsakymus per DI agentą. 
-      
-      Architektūra remiasi Microsoft Foundry projektu kaip DI galimybių pagrindu, jungiantis prie Azure AI paslaugų, teikiančių pagrindinius kalbos modelius (tokius kaip gpt-4.1-mini) ir agentų funkcionalumą. Vartotojo sąveikos teka per React pagrindu sukurtą frontendą į FastAPI backendą, kuris bendrauja su DI agentų paslauga, kad generuotų kontekstualius atsakymus. 
-      
-      Sistema įtraukia žinių gavimo galimybes per failų paiešką arba Azure AI Search paslaugą, leidžiančią agentui pasiekti ir cituoti informaciją iš įkeltų dokumentų. Dėl veiklos priežiūros architektūra apima išsamią stebėseną per Application Insights ir Log Analytics Workspace, skirtą sekimui, žurnalui ir našumo optimizavimui. 
-      
-      Azure Storage suteikia blob saugyklą programos duomenims ir failų įkėlimams, o Managed Identity užtikrina saugų prieigos tarp Azure išteklių mechanizmą be kredencialų saugojimo. Visa sprendimas yra sukurtas mastelį keisti ir prižiūrėti, su konteinerizuota programa, kuri automatiškai plečiasi pagal poreikį, tuo pačiu teikdama integruotą saugumą, stebėjimą ir CI/CD galimybes per Azure valdomų paslaugų ekosistemą.
-
-![Architektūra](../../../../../translated_images/lt/architecture.48d94861e6e6cdc0.webp)
-
----
+**Pratimas:** Paprašykite Copilot sekti pokalbio užklausą nuo frontend'o per API iki Foundry, su failų ir funkcijų nuorodomis. Atidarykite tas nuorodas ir patikrinkite paaiškinimą. Neverskite autentifikacijos, maršruto ar autorizacijos iš diagramų vien tik nuojautos pagrindu.
 
 ## 3. Saugyklos struktūra
 
-!!! prompt "PRAŠYMAS: Paaiškinkite šablono aplankų struktūrą. Pradėkite nuo vizualios hierarchinės diagramos."
+Toliau nurodyti pasirinkti keliai buvo patikrinti pagal pavyzdį 2026 m. lapkričio 4 d. Jūsų inicializuotas leidimas išlieka tiesos šaltiniu:
 
-??? info "ATSAKYMAS: Vizualinė hierarchinė diagrama"
+```text
+get-started-with-ai-agents/
+  azure.yaml
+  docker-compose.yaml
+  requirements-dev.txt
+  .devcontainer/
+  infra/
+    main.bicep
+    main.parameters.json
+    api.bicep
+    core/
+  src/
+    Dockerfile
+    pyproject.toml
+    requirements.txt
+    api/
+      main.py
+      routes.py
+      search_index_manager.py
+    frontend/
+      package.json
+      src/
+    files/
+  scripts/
+    validate_env_vars.sh
+    validate_env_vars.ps1
+    postdeploy.sh
+    postdeploy.ps1
+  tests/
+    test_evaluation.py
+    test_red_teaming.py
+  docs/
+    deployment.md
+    deploy_customization.md
+    ai_search.md
+    observability.md
+    local_development.md
+    troubleshooting.md
+```
 
-      ```bash title="" 
-      get-started-with-ai-agents/
-      ├── 📋 Configuration & Setup
-      │   ├── azure.yaml                    # Azure Developer CLI configuration
-      │   ├── docker-compose.yaml           # Local development containers
-      │   ├── pyproject.toml                # Python project configuration
-      │   ├── requirements-dev.txt          # Development dependencies
-      │   └── .devcontainer/                # VS Code dev container setup
-      │
-      ├── 🏗️ Infrastructure (infra/)
-      │   ├── main.bicep                    # Main infrastructure template
-      │   ├── api.bicep                     # API-specific resources
-      │   ├── main.parameters.json          # Infrastructure parameters
-      │   └── core/                         # Modular infrastructure components
-      │       ├── ai/                       # AI service configurations
-      │       ├── host/                     # Hosting infrastructure
-      │       ├── monitor/                  # Monitoring and logging
-      │       ├── search/                   # Azure AI Search setup
-      │       ├── security/                 # Security and identity
-      │       └── storage/                  # Storage account configs
-      │
-      ├── 💻 Application Source (src/)
-      │   ├── api/                          # Backend API
-      │   │   ├── main.py                   # FastAPI application entry
-      │   │   ├── routes.py                 # API route definitions
-      │   │   ├── search_index_manager.py   # Search functionality
-      │   │   ├── data/                     # API data handling
-      │   │   ├── static/                   # Static web assets
-      │   │   └── templates/                # HTML templates
-      │   ├── frontend/                     # React/TypeScript frontend
-      │   │   ├── package.json              # Node.js dependencies
-      │   │   ├── vite.config.ts            # Vite build configuration
-      │   │   └── src/                      # Frontend source code
-      │   ├── data/                         # Sample data files
-      │   │   └── embeddings.csv            # Pre-computed embeddings
-      │   ├── files/                        # Knowledge base files
-      │   │   ├── customer_info_*.json      # Customer data samples
-      │   │   └── product_info_*.md         # Product documentation
-      │   ├── Dockerfile                    # Container configuration
-      │   └── requirements.txt              # Python dependencies
-      │
-      ├── 🔧 Automation & Scripts (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Post-deployment setup
-      │   ├── setup_credential.sh/.ps1     # Credential configuration
-      │   ├── validate_env_vars.sh/.ps1    # Environment validation
-      │   └── resolve_model_quota.sh/.ps1  # Model quota management
-      │
-      ├── 🧪 Testing & Evaluation
-      │   ├── tests/                        # Unit and integration tests
-      │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Agent evaluation framework
-      │   │   ├── evaluate.py               # Evaluation runner
-      │   │   ├── eval-queries.json         # Test queries
-      │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Development playground
-      │   │   ├── 1-quickstart.py           # Getting started examples
-      │   │   └── aad-interactive-chat.py   # Authentication examples
-      │   └── airedteaming/                 # AI safety evaluation
-      │       └── ai_redteaming.py          # Red team testing
-      │
-      ├── 📚 Documentation (docs/)
-      │   ├── deployment.md                 # Deployment guide
-      │   ├── local_development.md          # Local setup instructions
-      │   ├── troubleshooting.md            # Common issues & fixes
-      │   ├── azure_account_setup.md        # Azure prerequisites
-      │   └── images/                       # Documentation assets
-      │
-      └── 📄 Project Metadata
-         ├── README.md                     # Project overview
-         ├── CODE_OF_CONDUCT.md           # Community guidelines
-         ├── CONTRIBUTING.md              # Contribution guide
-         ├── LICENSE                      # License terms
-         └── next-steps.md                # Post-deployment guidance
-      ```
+### Infrastruktūra ir konfigūracija
 
-### 3.1. Pagrindinė programos architektūra
+`infra/main.bicep` orkestruoja resursus; `main.parameters.json` sujungia šablono įvestis su AZD aplinkos reikšmėmis. `azure.yaml` pasirenka programos paslaugą ir gyvavimo ciklo kabliukus. Sekite tokią įvestį kaip `USE_AZURE_AI_SEARCH_SERVICE` per šiuos failus, kad surastumėte, kas iš tikrųjų keičiasi.
 
-Šis šablonas atitinka **pilno steko žiniatinklio programos** modelį su:
+### Programa ir tapatybė
 
-- **Backend**: Python FastAPI su Azure AI integracija
-- **Frontend**: TypeScript/React su Vite build sistema
-- **Infrastruktūra**: Azure Bicep šablonai debesų ištekliams
-- **Konteinerizacija**: Docker už nuoseklų diegimą
+Skaitykite kartu `src/api/` ir `src/frontend/`. Nustatykite, kur agentas sukuriamas arba gaunamas, kur konfigūruojamos instrukcijos/įrankiai ir kuri tapatybė naudojama kiekvienam Azure kvietimui. Pavyzdžių failai po `src/files/` yra demonstraciniai duomenys, ne gamybinis katalogas ar autorizacijos modelis.
 
-### 3.2 Infrastruktūra kaip kodas (Bicep)
+### Testai ir stebėjimas
 
-Infrastruktūros sluoksnis naudoja **Azure Bicep** šablonus, organizuotus modulių pagalba:
+Dabartiniai įvertinimo ir raudonojo komandos taškai yra po `tests/`; senesni `evals/` ir `airedteaming/` katalogų nuorodos šiam pavyzdžiui yra pasenusios. Prieš vykdant debesies testus, perskaitykite `docs/observability.md` apie reikalavimus ir išlaidas. Šie Python testai yra atskirti nuo pasirinktino `azure.ai.evaluations` AZD plėtinio.
 
-   - **`main.bicep`**: Koordinuoja visus Azure išteklius
-   - **`core/` moduliai**: Pernaudojami komponentai skirtingoms paslaugoms
-      - AI paslaugos (Microsoft Foundry modeliai, AI Search)
-      - Konteinerių talpinimas (Azure Container Apps)
-      - Stebėjimas (Application Insights, Log Analytics)
-      - Saugumas (Key Vault, Managed Identity)
+## 4. Patvirtinkite savo išvadas
 
-### 3.3 Programos šaltiniai (`src/`)
+- Nustatykite API maršrutą, agento sąveiką ir duomenų gavimo kodą vienam pavyzdiniam klausimui.
+- Paaiškinkite, kuri tapatybė pasiekia Foundry ir kuri konfigūracija pasirenka jos galinį tašką.
+- Suraskite tikruosius pre-up ir post-deploy scenarijus bei jų klaidų tvarkymo elgseną.
+- Išvardykite bet kokius priklausomumus ar pasirinktines funkcijas, kurios nėra jūsų diegime.
 
-**Backend API (`src/api/`)**:
-
-- REST API, paremtas FastAPI
-- Foundry agentų integracija
-- Paieškos indekso valdymas žinių gavimui
-- Failų įkėlimo ir apdorojimo galimybės
-
-**Frontend (`src/frontend/`)**:
-
-- Moderni React/TypeScript SPA
-- Vite greitam vystymui ir optimizuotiems buildams
-- Pokalbių sąsaja agentų sąveikoms
-
-**Žinių bazė (`src/files/`)**:
-
-- Pavyzdiniai klientų ir produktų duomenys
-- Demonstruoja žinių gavimą iš failų
-- JSON ir Markdown formato pavyzdžiai
-
-
-### 3.4 DevOps ir automatizavimas
-
-**Scenarijai (`scripts/`)**:
-
-- Kryžminės platformos PowerShell ir Bash scenarijai
-- Aplinkos patikra ir konfigūracija
-- Po diegimo konfigūracija
-- Modelių kvotų valdymas
-
-**Azure Developer CLI integracija**:
-
-- `azure.yaml` konfigūracija `azd` darbo eigoms
-- Automatizuotas išteklių paruošimas ir diegimas
-- Aplinkos kintamųjų valdymas
-
-### 3.5 Testavimas ir kokybės užtikrinimas
-
-**Vertinimo sistema (`evals/`)**:
-
-- Agentų našumo vertinimas
-- Užklausų-atsakymų kokybės testavimas
-- Automatizuota vertinimo grandinė
-
-**DI saugumas (`airedteaming/`)**:
-
-- Raudonųjų komandų (red team) testavimas DI saugumui
-- Saugumo spragų skanavimas
-- Atsakingos DI praktikos
-
----
-
-## 4. Sveikiname 🏆
-
-Sėkmingai panaudojote GitHub Copilot Chat su MCP serveriais, kad ištirtumėte saugyklą.
-
-- [X] Aktyvavote GitHub Copilot Azure palaikymui
-- [X] Supratote programos architektūrą
-- [X] Ištirtėte AZD šablono struktūrą
-
-Tai suteikia supratimą apie šio šablono _infrastruktūrą kaip kodą_ išteklius. Toliau peržiūrėsime AZD konfigūracijos failą.
+Toliau tęskite [Konfigūruoti šabloną](4-Configure-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

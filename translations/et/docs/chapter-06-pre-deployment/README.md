@@ -1,23 +1,23 @@
-# 6. peatükk: Eelkäivitamise planeerimine ja valideerimine
+# 6. peatükk: ETTELAEVITUSPLANEERIMINE JA KINNITAMINE
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 1 tund | **⭐ Tase**: Kesktase
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2-4 tundi lugemist; lisaks kohandatud laborid | **⭐ keerukus**: Kesktase–edasijõudnud
 
 ---
 
 ## Ülevaade
 
-Selles peatükis käsitletakse olulisi planeerimise ja valideerimise samme enne teie rakenduse juurutamist. Õppige vältima kulukaid vigu nõuetekohase suutlikkuse planeerimise, SKU valiku ja eelkontrollidega.
+See peatükk käsitleb olulisi planeerimis- ja kinnitusetappe enne rakenduse juurutamist. Õpi vältima kulukaid vigu õige mahutavuse planeerimise, SKU-de valiku ja eelkontrollide abil.
 
-> Valideeritud `azd 1.27.1` vastu juulis 2026.
+> Käsuviidad kontrolliti vabastatud `azd 1.37.2` referentsi vastu. Pilvejuurutusi ei teostatud. Pikemad õppetunnid sisaldavad illustratiivseid fragmente, mitte täis kohalikke juurutusprojekte.
 
 ## Õpieesmärgid
 
-Selle peatüki lõpetamise järel:
-- Teete eelkontrolle enne juurutamist
-- Planeerite suutlikkust ja hindate ressursinõudeid
-- Valite sobivad SKU-d kulude optimeerimiseks
-- Konfigureerite Application Insights'i jälgimiseks
-- Mõistate meeskonna koordineerimise mustreid
+Selle peatüki lõpetamisel:
+- Teed eelkontrolle enne juurutamist
+- Planeerid mahutavust ja hindad ressursside vajadust
+- Valid kulude optimeerimiseks sobivad SKU-d
+- Konfigureerid rakenduse jälgimiseks Application Insightsi
+- Mõistad mitme agendi koordineerimise mustreid ja nende juurutamise nõudeid
 
 ---
 
@@ -25,47 +25,47 @@ Selle peatüki lõpetamise järel:
 
 | # | Õppetund | Kirjeldus | Aeg |
 |---|--------|-------------|------|
-| 1 | [Eelkontrollid](preflight-checks.md) | Kinnitage konfiguratsioon enne juurutamist | 15 min |
-| 2 | [Suutlikkuse planeerimine](capacity-planning.md) | Hinnake ressursinõudeid | 20 min |
-| 3 | [SKU valik](sku-selection.md) | Valige sobivad hinnakategooriad | 15 min |
-| 4 | [Application Insights](application-insights.md) | Jälgimise konfigureerimine | 20 min |
-| 5 | [Koordineerimismustrid](coordination-patterns.md) | Meeskonna juurutuse töövood | 15 min |
+| 1 | [Eelkontrollid](preflight-checks.md) | Kinnita konfiguratsioon enne juurutamist | 15 min |
+| 2 | [Mahutavuse planeerimine](capacity-planning.md) | Hinda ressursside vajadust | 20 min |
+| 3 | [SKU valik](sku-selection.md) | Vali sobivad hinnatasemed | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigureeri jälgimine | 20 min |
+| 5 | [Koordineerimismustrid](coordination-patterns.md) | Edasijõudnud mitme agendi orkestreerimise disain | 60-75 min |
 
 ---
 
-## 🚀 Kiire algus
+## 🚀 Kiirkäivitus
 
 ```bash
-# Kontrolli tellimuse kvotasid
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Eelvaade juurutamisele (ressursse ei loodata)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Kontrolli Bicep süntaksit
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Kontrolli keskkonna seadistust
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Eelkontrollide kontrollnimekiri
+## ☑️ Kontrollnimekiri enne juurutamist
 
 ### Enne `azd provision`
 
-- [ ] Piirmäära kontrollitud regioonis
-- [ ] SKU-d asjakohaselt valitud
-- [ ] Kulude hinnang üle vaadatud
-- [ ] Nimekonventsioon ühtne
-- [ ] Turvalisus/RBAC konfigureeritud
+- [ ] Piirangud piirkonnas kontrollitud
+- [ ] SKU-d õigesti valitud
+- [ ] Kuluarvestus üle vaadatud
+- [ ] Nimekonventsioon järjepidev
+- [ ] Turve/RBAC konfigureeritud
 
 ### Enne `azd deploy`
 
-- [ ] Keskkonnamuutujad määratud
-- [ ] Saladused Key Vault'is
-- [ ] Ühendusstringid kontrollitud
+- [ ] Keskkonnamuutujad seatud
+- [ ] Salajased võtmed Key Vaultis
+- [ ] Ühendusread kontrollitud
 - [ ] Tervisekontrollid konfigureeritud
 
 ---
@@ -74,26 +74,26 @@ azd env get-values
 
 | Koormus | Arendus | Tootmine |
 |----------|-------------|------------|
-| Container Apps | Tarbimine | Pühendatud D4 |
+| Container Apps | Tarbimine | Tarbimine või pühendatud töökoormuse profiil, vastavalt mõõdetud koormusele |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry mudelid | Standard | Standard + PTU |
-| AI Search | Põhiline | Standard S2+ |
+| Azure OpenAI mudelid | Toetatud pay-as-you-go juurutustüüp | Pay-as-you-go või pühendatud läbilaskevõime; mudelipiirkonnast sõltuv |
+| AI Search | Tasuta/Põhiline piirides | Põhiline või Standard tase, suurus sõltub indeksist, koopiatest ja päringukoormusest |
 
 ---
 
-## 🔗 Navigatsioon
+## 🔗 Navigeerimine
 
 | Suund | Peatükk |
 |-----------|---------|
-| **Eelmine** | [5. peatükk: Mitme agendi kasutus](../chapter-05-multi-agent/README.md) |
-| **Järgmine** | [7. peatükk: Veaotsing](../chapter-07-troubleshooting/README.md) |
+| **Eelmine** | [5. peatükk: Mitme agendi](../chapter-05-multi-agent/README.md) |
+| **Järgmine** | [7. peatükk: Tõrkeotsing](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 Seotud ressursid
 
 - [Konfiguratsioonijuhend](../chapter-03-configuration/configuration.md)
-- [Juurutamisjuhend](../chapter-04-infrastructure/deployment-guide.md)
+- [Juurutusjuhend](../chapter-04-infrastructure/deployment-guide.md)
 - [Tavalised probleemid](../chapter-07-troubleshooting/common-issues.md)
 
 ---

@@ -1,366 +1,368 @@
-# 词汇表 - Azure 和 AZD 术语
+# 术语表 - Azure 和 AZD 术语
 
-<strong>所有章节参考</strong>
-- **📚 课程主页**: [AZD For Beginners](../README.md)
-- **📖 学习基础**: [第 1 章：AZD 基础](../docs/getting-started/azd-basics.md)
-- **🤖 AI 术语**: [第 2 章：以 AI 为先的开发](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+<strong>所有章节的参考资料</strong>
+- **📚 课程主页**：[AZD 新手指南](../README.md)
+- **📖 学习基础**：[第1章：AZD 基础](../docs/chapter-01-foundation/azd-basics.md)
+- **🤖 AI 术语**：[第2章：AI优先开发](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## 介绍
 
-本详尽词汇表提供在 Azure Developer CLI 和 Azure 云开发中使用的术语、概念和缩略语的定义。是理解技术文档、排查问题以及就 azd 项目和 Azure 服务进行有效沟通的必要参考。
+本综合术语表提供了 Azure Developer CLI 和 Azure 云开发中使用的术语、概念和缩写的定义。是理解技术文档、解决问题及有效沟通 azd 项目和 Azure 服务的必备参考。
 
 ## 学习目标
 
-使用此词汇表，您将能够：
+通过使用本术语表，你将：
 - 理解关键的 Azure Developer CLI 术语和概念
 - 掌握 Azure 云开发的词汇和技术术语
-- 高效查阅基础设施即代码和部署术语
-- 理解 Azure 服务名称、缩略语及其用途
-- 查找故障排查和调试相关术语的定义
-- 学习高级 Azure 架构与开发概念
+- 高效引用基础设施即代码和部署相关术语
+- 理解 Azure 服务名称、缩写及其用途
+- 获取故障排查和调试术语的定义
+- 学习高级 Azure 架构和开发概念
 
 ## 学习成果
 
-定期参考此词汇表，您将能够：
-- 使用正确的 Azure Developer CLI 术语进行有效沟通
+经常参考本术语表，你将能够：
+- 使用准确的 Azure Developer CLI 术语进行有效沟通
 - 更清晰地理解技术文档和错误信息
-- 自信地导航 Azure 服务和概念
-- 使用恰当的技术词汇进行问题排查
-- 在团队讨论中提供准确的技术语言
-- 系统性地扩展您的 Azure 云开发知识
+- 自信地浏览 Azure 服务和概念
+- 使用适当的技术词汇进行故障排查
+- 准确地参与团队技术讨论
+- 系统性扩展你的 Azure 云开发知识
 
 ## A
 
-**ARM Template**  
-Azure Resource Manager 模板。基于 JSON 的基础设施即代码格式，用于以声明式方式定义和部署 Azure 资源。
+**ARM 模板**  
+Azure 资源管理器模板。基于 JSON 的基础设施即代码格式，用于声明式定义和部署 Azure 资源。
 
-**App Service**  
-Azure 的平台即服务 (PaaS) 提供，用于托管 Web 应用、REST API 和移动后台，而无需管理基础设施。
+**应用服务 (App Service)**  
+Azure 的平台即服务 (PaaS) 产品，托管 Web 应用、REST API 和移动后端，免运维基础设施。
 
 **Application Insights**  
-Azure 的应用性能监控 (APM) 服务，提供对应用性能、可用性和使用情况的深度洞察。
+Azure 的应用性能监控 (APM) 服务，提供对应用性能、可用性及使用情况的深入洞察。
 
 **Azure CLI**  
-用于管理 Azure 资源的命令行界面。azd 用于身份验证和某些操作时会使用该工具。
+管理 Azure 资源的命令行界面。它与 AZD 互补，但登录独立；AZD 核心认证使用 `azd auth login`。
 
 **Azure Developer CLI (azd)**  
-面向开发者的命令行工具，通过使用模板和基础设施即代码来加速将应用构建并部署到 Azure 的过程。
+面向开发者的命令行工具，加快使用模板和基础设施即代码构建部署 Azure 应用的流程。
 
 **azure.yaml**  
-azd 项目的主要配置文件，定义服务、基础设施和部署钩子。
+azd 项目的主配置文件，定义服务、基础设施及部署钩子。
 
 **Azure Resource Manager (ARM)**  
-Azure 的部署和管理服务，提供用于创建、更新和删除资源的管理层。
+Azure 的部署和管理服务，为创建、更新和删除资源提供管理层。
 
 ## B
 
 **Bicep**  
-由微软开发的用于部署 Azure 资源的领域特定语言 (DSL)。相比 ARM 模板提供更简洁的语法，同时可编译为 ARM。
+微软开发的领域特定语言 (DSL)，用于部署 Azure 资源。语法比 ARM 模板更简单，同时可编译为 ARM。
 
-**Build**  
-编译源代码、安装依赖项并为部署准备应用的过程。
+**构建 (Build)**  
+编译源代码、安装依赖并准备应用部署的过程。
 
-**Blue-Green Deployment**  
-使用两个相同的生产环境（蓝色和绿色）来最小化停机时间和风险的部署策略。
+**蓝绿部署 (Blue-Green Deployment)**  
+使用两个相同的生产环境（蓝色和绿色）以最小化停机和风险的部署策略。
 
 ## C
 
-**Container Apps**  
-Azure 的无服务器容器服务，能够在无需管理复杂基础设施的情况下运行容器化应用。
+**容器应用 (Container Apps)**  
+Azure 的无服务器容器服务，实现无需管理复杂基础设施即可运行容器化应用。
 
-**CI/CD**  
-持续集成/持续部署。用于集成代码更改和部署应用的自动化实践。
+**持续集成/持续部署 (CI/CD)**  
+通过自动化集成代码变更和部署应用的实践。
 
 **Cosmos DB**  
-Azure 的全球分布、多模型数据库服务，提供关于吞吐量、延迟、可用性和一致性的全面 SLA。
+Azure 的全球分布、多模型数据库服务，提供吞吐量、延迟、可用性及一致性的全面 SLA。
 
-**Configuration**  
-控制应用行为和部署选项的设置和参数。
+**配置 (Configuration)**  
+控制应用行为和部署选项的设置与参数。
 
 ## D
 
-**Deployment**  
-在目标基础设施上安装和配置应用及其依赖项的过程。
+**部署 (Deployment)**  
+在目标基础设施上安装和配置应用及其依赖的过程。
 
 **Docker**  
-使用容器化技术开发、分发和运行应用的平台。
+使用容器化技术开发、交付和运行应用的平台。
 
 **Dockerfile**  
 包含构建 Docker 容器镜像指令的文本文件。
 
 ## E
 
-**Environment**  
-表示应用特定实例的部署目标（例如：development、staging、production）。
+**环境 (Environment)**  
+表示应用的特定实例的部署目标（如开发、预发布、生产环境）。
 
-**Environment Variables**  
-以键值对形式存储的配置值，应用在运行时可访问这些值。
+**环境变量 (Environment Variables)**  
+以键值对形式存储的配置值，供应用在运行时访问。
 
-**Endpoint**  
-应用或服务可被访问的 URL 或网络地址。
+**端点 (Endpoint)**  
+访问应用或服务的 URL 或网络地址。
 
 ## F
 
-**Function App**  
-Azure 的无服务器计算服务，能够在无需管理基础设施的情况下运行事件驱动代码。
+**函数应用 (Function App)**  
+Azure 的无服务器计算服务，支持运行事件驱动代码，无需管理基础设施。
 
 ## G
 
 **GitHub Actions**  
-与 GitHub 仓库集成的 CI/CD 平台，用于自动化工作流。
+与 GitHub 仓库集成的 CI/CD 平台，实现工作流自动化。
 
 **Git**  
-用于跟踪源代码更改的分布式版本控制系统。
+用于跟踪源代码变更的分布式版本控制系统。
 
 ## H
 
-**Hooks**  
-在部署生命周期特定点运行的自定义脚本或命令（preprovision、postprovision、predeploy、postdeploy）。
+**钩子 (Hooks)**  
+部署生命周期中特定点执行的自定义脚本或命令（预供应、后供应、预部署、后部署）。
 
-**Host**  
-应用将被部署的 Azure 服务类型（例如：appservice、containerapp、function）。
+**主机 (Host)**  
+部署应用的 Azure 服务类型（如 appservice、containerapp、function）。
 
 ## I
 
-**Infrastructure as Code (IaC)**  
-通过代码而非手动流程来定义和管理基础设施的实践。
+**基础设施即代码 (Infrastructure as Code, IaC)**  
+通过代码定义和管理基础设施的实践，替代手动操作。
 
-**Init**  
-初始化新的 azd 项目的过程，通常基于模板。
+**初始化 (Init)**  
+初始化新的 azd 项目过程，通常基于模板。
 
 ## J
 
 **JSON**  
-JavaScript 对象表示法。常用于配置文件和 API 响应的数据交换格式。
+JavaScript 对象表示法。常用的数据交换格式，用于配置文件和 API 响应。
 
 **JWT**  
-JSON Web Token。用于在各方之间以 JSON 对象安全传输信息的标准。
+JSON Web 令牌。用于安全地以 JSON 对象形式在各方间传输信息的标准。
 
 ## K
 
 **Key Vault**  
-Azure 用于安全存储和管理机密、密钥和证书的服务。
+Azure 的安全存储和管理机密、密钥及证书的服务。
 
-**Kusto Query Language (KQL)**  
-用于分析 Azure Monitor、Application Insights 和其他 Azure 服务中数据的查询语言。
+**Kusto 查询语言 (KQL)**  
+用于分析 Azure Monitor、Application Insights 及其他 Azure 服务数据的查询语言。
 
 ## L
 
-**Load Balancer**  
+**负载均衡器 (Load Balancer)**  
 将传入网络流量分配到多个服务器或实例的服务。
 
-**Log Analytics**  
-用于收集、分析并对来自云和本地环境的遥测数据采取行动的 Azure 服务。
+**日志分析 (Log Analytics)**  
+Azure 收集、分析和处理云端及本地环境遥测数据的服务。
 
 ## M
 
-**Managed Identity**  
-Azure 功能，为 Azure 服务提供自动管理的身份以便对其他 Azure 服务进行身份验证。
+**托管身份 (Managed Identity)**  
+为 Azure 服务提供自动管理的身份以认证访问其他 Azure 服务的功能。
 
-**Microservices**  
-一种将应用构建为多个小型、独立服务集合的架构方法。
+**微服务 (Microservices)**  
+架构方法，将应用构建为一组小型独立服务。
 
 **Monitor**  
-Azure 的统一监控解决方案，提供跨应用和基础设施的全栈可观察性。
+Azure 的统一监控解决方案，实现应用和基础设施的全栈可观测性。
 
 ## N
 
 **Node.js**  
-基于 Chrome 的 V8 JavaScript 引擎构建的 JavaScript 运行时，用于构建服务器端应用。
+基于 Chrome V8 引擎的 JavaScript 运行时，用于构建服务器端应用。
 
 **npm**  
-Node.js 的包管理器，用于管理依赖项和包。
+Node.js 的包管理器，管理依赖和包。
 
 ## O
 
-**Output**  
-从基础设施部署中返回的值，可被应用或其他资源使用。
+**输出 (Output)**  
+基础设施部署返回的值，可被应用或其他资源使用。
 
 ## P
 
-**Package**  
-为部署准备应用代码和依赖项的过程。
+**打包 (Package)**  
+准备应用代码和依赖以便部署的过程。
 
-**Parameters**  
-传递给基础设施模板以自定义部署的输入值。
+**参数 (Parameters)**  
+传入基础设施模板以定制部署的输入值。
 
 **PostgreSQL**  
-作为 Azure 托管服务支持的开源关系型数据库系统。
+开源关系数据库系统，Azure 中以托管服务形式支持。
 
-**Provisioning**  
-创建和配置基础设施模板中定义的 Azure 资源的过程。
+**供应 (Provisioning)**  
+创建和配置基础设施模板定义的 Azure 资源的过程。
 
 ## Q
 
-**Quota**  
-对 Azure 订阅或区域中可创建资源数量的限制。
+**配额 (Quota)**  
+Azure 订阅或区域内可创建资源数量的限制。
 
 ## R
 
-**Resource Group**  
-共享相同生命周期、权限和策略的 Azure 资源的逻辑容器。
+**资源组 (Resource Group)**  
+Azure 资源的逻辑容器，共享生命周期、权限和策略。
 
-**Resource Token**  
-由 azd 生成的唯一字符串，用于确保资源名称在部署中唯一。
+**资源令牌 (Resource Token)**  
+由 azd 生成的唯一字符串，确保资源名称在部署中唯一。
 
 **REST API**  
 使用 HTTP 方法设计网络应用的架构风格。
 
-**Rollback**  
-将应用或基础设施配置恢复到先前版本的过程。
+**回滚 (Rollback)**  
+恢复到应用或基础设施配置先前版本的过程。
 
 ## S
 
-**Service**  
-在 azure.yaml 中定义的应用组件（例如：Web 前端、API 后端、数据库）。
+**服务 (Service)**  
+在 azure.yaml 中定义的应用组成部分（如 Web 前端、API 后端、数据库）。
 
 **SKU**  
-库存单位。表示 Azure 资源的不同服务层级或性能级别。
+库存单位，表示 Azure 资源的不同服务层或性能级别。
 
-**SQL Database**  
-基于 Microsoft SQL Server 的 Azure 托管关系型数据库服务。
+**SQL 数据库**  
+基于 Microsoft SQL Server 的 Azure 托管关系数据库服务。
 
-**Static Web Apps**  
-用于从源代码仓库构建和部署全栈 Web 应用的 Azure 服务。
+**静态网站 (Static Web Apps)**  
+Azure 基于源代码仓库构建和部署全栈 Web 应用的服务。
 
-**Storage Account**  
-提供用于存储数据对象（包括 blob、文件、队列和表）的云存储的 Azure 服务。
+**存储账户 (Storage Account)**  
+提供 Blob、文件、队列和表等数据对象云存储的 Azure 服务。
 
-**Subscription**  
-包含资源组和资源的 Azure 帐户容器，关联计费和访问管理。
+**订阅 (Subscription)**  
+Azure 账户容器，包含资源组和资源，并关联计费和访问管理。
 
 ## T
 
-**Template**  
-预构建的项目结构，包含应用代码、基础设施定义和常见场景的配置。
+**模板 (Template)**  
+预构建的项目结构，包含应用代码、基础设施定义和常见场景配置。
 
 **Terraform**  
-支持包括 Azure 在内的多个云提供商的开源基础设施即代码工具。
+开源基础设施即代码工具，支持包括 Azure 在内的多云供应商。
 
-**Traffic Manager**  
-Azure 基于 DNS 的流量负载均衡器，用于在全球 Azure 区域之间分发流量。
+**流量管理器 (Traffic Manager)**  
+Azure 基于 DNS 的流量负载均衡器，用于跨全球 Azure 区域分配流量。
 
 ## U
 
 **URI**  
-统一资源标识符。用于标识特定资源的字符串。
+统一资源标识符。识别特定资源的字符串。
 
 **URL**  
-统一资源定位符。指定资源位置及如何检索资源的 URI 类型。
+统一资源定位符。指定资源位置及获取方式的 URI 类型。
 
 ## V
 
-**Virtual Network (VNet)**  
-Azure 中用于私有网络的基本构建块，提供隔离和分段。
+**虚拟网络 (Virtual Network，VNet)**  
+Azure 私有网络的基础构件，提供隔离和分段。
 
 **VS Code**  
-Visual Studio Code。流行的代码编辑器，具有出色的 Azure 和 azd 集成。
+Visual Studio Code。广受欢迎的代码编辑器，具备出色的 Azure 和 azd 集成。
 
 ## W
 
 **Webhook**  
-由特定事件触发的 HTTP 回调，常用于 CI/CD 管道。
+由特定事件触发的 HTTP 回调，常用于 CI/CD 流水线。
 
-**What-if**  
-Azure 功能，可显示部署将会进行哪些更改而不实际执行它。
+**假如 (What-if)**  
+Azure 功能，显示部署将做出的更改而不实际执行。
 
 ## Y
 
 **YAML**  
-YAML 不是标记语言。用于像 azure.yaml 这样的配置文件的人类可读数据序列化标准。
+YAML 不只是标记语言。用于配置文件如 azure.yaml 的人类可读数据序列化标准。
 
 ## Z
 
-**Zone**  
-Azure 区域内的物理独立位置，提供冗余和高可用性。
+**可用区 (Zone)**  
+Azure 区域内物理分离的位置，提供冗余和高可用性。
 
 ---
 
-## 常见缩略语
+## 常用缩写
 
-| 缩略语 | 全称 | 描述 |
-|--------|------|------|
-| AAD | Azure Active Directory（现为 Microsoft Entra ID） | 身份和访问管理服务 |
-| ACR | Azure Container Registry | 容器镜像注册表服务 |
-| AKS | Azure Kubernetes Service | 托管的 Kubernetes 服务 |
-| API | Application Programming Interface | 构建软件的一组协议 |
-| ARM | Azure Resource Manager | Azure 的部署和管理服务 |
-| CDN | Content Delivery Network | 分布式服务器网络 |
-| CI/CD | Continuous Integration/Continuous Deployment | 自动化开发实践 |
-| CLI | Command Line Interface | 基于文本的用户界面 |
-| DNS | Domain Name System | 将域名转换为 IP 地址的系统 |
-| HTTPS | Hypertext Transfer Protocol Secure | 安全版本的 HTTP |
-| IaC | Infrastructure as Code | 通过代码管理基础设施 |
-| JSON | JavaScript Object Notation | 数据交换格式 |
-| JWT | JSON Web Token | 用于安全信息传输的令牌格式 |
-| KQL | Kusto Query Language | Azure 数据服务的查询语言 |
-| RBAC | Role-Based Access Control | 基于用户角色的访问控制方法 |
-| REST | Representational State Transfer | Web 服务的架构风格 |
-| SDK | Software Development Kit | 一组开发工具 |
-| SLA | Service Level Agreement | 关于服务可用性/性能的承诺 |
-| SQL | Structured Query Language | 管理关系数据库的语言 |
-| SSL/TLS | Secure Sockets Layer/Transport Layer Security | 加密协议 |
-| URI | Uniform Resource Identifier | 标识资源的字符串 |
-| URL | Uniform Resource Locator | 指定资源位置的 URI 类型 |
-| VM | Virtual Machine | 计算机系统的仿真 |
-| VNet | Virtual Network | Azure 中的私有网络 |
-| YAML | YAML Ain't Markup Language | 数据序列化标准 |
+| 缩写 | 全称 | 说明 |
+|---------|-----------|-------------|
+| AAD | Azure Active Directory（现 Microsoft Entra ID） | 身份与访问管理服务 |
+| ACR | Azure 容器注册中心 | 容器镜像注册服务 |
+| AKS | Azure Kubernetes 服务 | 托管 Kubernetes 服务 |
+| API | 应用程序编程接口 | 构建软件的协议集 |
+| ARM | Azure 资源管理器 | Azure 的部署和管理服务 |
+| CDN | 内容分发网络 | 分布式服务器网络 |
+| CI/CD | 持续集成/持续部署 | 自动化开发实践 |
+| CLI | 命令行界面 | 基于文本的用户界面 |
+| DNS | 域名系统 | 将域名转换为 IP 地址的系统 |
+| HTTPS | 安全超文本传输协议 | HTTP 的安全版本 |
+| IaC | 基础设施即代码 | 通过代码管理基础设施 |
+| JSON | JavaScript 对象表示法 | 数据交换格式 |
+| JWT | JSON Web 令牌 | 用于安全信息传输的令牌格式 |
+| KQL | Kusto 查询语言 | Azure 数据服务查询语言 |
+| RBAC | 基于角色的访问控制 | 基于用户角色的访问控制方法 |
+| REST | 表述性状态转移 | Web 服务的架构风格 |
+| SDK | 软件开发工具包 | 开发工具集合 |
+| SLA | 服务水平协议 | 服务可用性/性能承诺 |
+| SQL | 结构化查询语言 | 管理关系数据库的语言 |
+| SSL/TLS | 安全套接层/传输层安全协议 | 加密协议 |
+| URI | 统一资源标识符 | 标识资源的字符串 |
+| URL | 统一资源定位符 | 指定资源位置的 URI 类型 |
+| VM | 虚拟机 | 计算机系统的仿真 |
+| VNet | 虚拟网络 | Azure 中的私有网络 |
+| YAML | YAML 不只是标记语言 | 数据序列化标准 |
 
 ---
 
 ## Azure 服务名称映射
 
-| 常用名称 | 官方 Azure 服务名称 | azd Host Type |
+| 通用名 | 官方 Azure 服务名称 | azd 主机类型 |
 |-------------|------------------------------|---------------|
-| Web App | Azure App Service | `appservice` |
-| API App | Azure App Service | `appservice` |
-| Container App | Azure Container Apps | `containerapp` |
-| Function | Azure Functions | `function` |
-| Static Site | Azure Static Web Apps | `staticwebapp` |
-| Database | Azure Database for PostgreSQL | `postgres` |
-| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Storage | Azure Storage Account | `storage` |
-| Cache | Azure Cache for Redis | `redis` |
-| Search | Azure AI Search | `search` |
-| Messaging | Azure Service Bus | `servicebus` |
+| Web 应用 | Azure 应用服务 | `appservice` |
+| API 应用 | Azure 应用服务 | `appservice` |
+| 容器应用 | Azure 容器应用 | `containerapp` |
+| 函数 | Azure Functions | `function` |
+| 静态网站 | Azure 静态 Web 应用 | `staticwebapp` |
+| 数据库 | Azure PostgreSQL 数据库 | 基础设施资源，不是应用 `host` |
+| NoSQL 数据库 | Azure Cosmos DB | 基础设施资源，不是应用 `host` |
+| 存储 | Azure 存储账户 | 基础设施资源，不是内置应用 `host` |
+| 缓存 | Azure 托管 Redis | 基础设施资源，不是应用 `host` |
+| 搜索 | Azure AI 搜索 | 基础设施资源，不是应用 `host` |
+| 消息服务 | Azure 服务总线 | 基础设施资源，不是应用 `host` |
+
+`services.<name>.host` 选择应用部署目标；不是任何 Azure 资源类型的简写。数据库、缓存、搜索和队列通常通过基础设施提供程序供应，并通过输出/配置连接至应用。
 
 ---
 
-## 上下文特定术语
+## 特定上下文术语
 
 ### 开发术语
-- **Hot Reload**：在开发期间无需重启即可自动更新应用
-- **Build Pipeline**：用于构建和测试代码的自动化流程
-- **Deployment Slot**：App Service 内的暂存环境
-- **Environment Parity**：保持开发、暂存和生产环境的一致性
+- <strong>热重载</strong>：开发时自动更新应用，无需重启
+- <strong>构建流水线</strong>：自动化构建和测试代码的流程
+- <strong>部署槽</strong>：应用服务中的预发布环境
+- <strong>环境一致性</strong>：保持开发、预发布和生产环境相似
 
 ### 安全术语
-- **Managed Identity**：提供自动凭据管理的 Azure 功能
-- **Key Vault**：用于安全存储机密、密钥和证书
-- **RBAC**：针对 Azure 资源的基于角色访问控制
-- **Network Security Group**：用于控制网络流量的虚拟防火墙
+- <strong>托管身份</strong>：Azure 提供的自动凭据管理功能
+- **Key Vault**：安全存储机密、密钥和证书
+- **RBAC**：Azure 资源的基于角色访问控制
+- <strong>网络安全组</strong>：控制网络流量的虚拟防火墙
 
 ### 监控术语
-- **Telemetry**：自动收集测量数据和信息
-- **Application Performance Monitoring (APM)**：监控软件性能
-- **Log Analytics**：用于收集和分析日志数据的服务
-- **Alert Rules**：基于指标或条件的自动通知
+- <strong>遥测</strong>：自动收集测量和数据
+- **应用性能监控 (APM)**：监测软件性能
+- <strong>日志分析</strong>：收集和分析日志数据的服务
+- <strong>告警规则</strong>：基于指标或条件的自动通知
 
 ### 部署术语
-- **Blue-Green Deployment**：零停机时间的部署策略
-- **Canary Deployment**：向部分用户逐步推出的发布方式
-- **Rolling Update**：按序替换应用实例
-- **Rollback**：恢复到先前应用版本
+- <strong>蓝绿部署</strong>：零停机部署策略
+- <strong>金丝雀发布</strong>：逐步向部分用户推送
+- <strong>滚动更新</strong>：顺序替换应用实例
+- <strong>回滚</strong>：恢复到先前应用版本
 
 ---
 
-<strong>使用提示</strong>：使用 `Ctrl+F` 可以快速在此词汇表中查找特定术语。术语在适用处会进行交叉引用。
+<strong>使用提示</strong>：使用 `Ctrl+F` 快速搜索本术语表中特定术语。相关术语已交叉引用。
 
 ---
 
 <strong>导航</strong>
-- <strong>上一课</strong>: [Cheat Sheet](cheat-sheet.md)
-- <strong>下一课</strong>: [FAQ](faq.md)
+- <strong>上一课</strong>：[备忘单](cheat-sheet.md)
+- <strong>下一课</strong>：[常见问题解答](faq.md)
 
 ---
 

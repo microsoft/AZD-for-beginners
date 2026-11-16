@@ -1,60 +1,58 @@
-# 6. Rastavljanje infrastrukture
+# 6. Uklanjanje infrastrukture
 
 !!! tip "NA KRAJU OVOG MODULA MOĆI ĆETE"
 
-    - [ ] Razumjeti važnost čišćenja resursa i upravljanja troškovima
-    - [ ] Koristiti `azd down` za sigurno ukidanje infrastrukture
-    - [ ] Povratiti soft-obrisane Azure AI usluge ako je potrebno
-    - [ ] **Laboratorij 6:** Očistiti Azure resurse i potvrditi uklanjanje
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Bonus vježbe
 
-Prije nego što rastavimo projekt, odvojite nekoliko minuta za otvoreno istraživanje.
+Prije nego što uklonite projekt, odvojite nekoliko minuta za slobodno istraživanje.
 
 !!! info "Isprobajte ove poticaje za istraživanje"
 
-    **Eksperimentirajte s GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. Pitajte: `Koje druge AZD predloške bih mogao isprobati za scenarije s više agenata?`
-    2. Pitajte: `Kako mogu prilagoditi upute agenta za slučaj upotrebe u zdravstvu?`
-    3. Pitajte: `Koje varijable okruženja kontroliraju optimizaciju troškova?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Istražite Azure Portal:**
+    **Explore the Azure Portal:**
     
-    1. Pregledajte metrike Application Insights za vašu implementaciju
-    2. Provjerite analizu troškova za osigurane resurse
-    3. Još jednom istražite Microsoft Foundry portal agent playground
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
 ## Ukidanje infrastrukture
 
-1. Rastavljanje infrastrukture je jednostavno kao:
+1. Uklanjanje infrastrukture je jednostavno kao:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. Zastavica `--purge` osigurava da se također izbrišu soft-obrisani resursi Cognitive Servica, čime se oslobađa kvota koju ti resursi drže. Kada završi, vidjet ćete nešto poput ovoga:
+1. Potvrdite odabrano okruženje i pregledajte resurse koji će biti izbrisani. Ovo uklanja Azure resurse i može uništiti podatke. Zadržite potvrdu za ovaj obrazovni proces. Kada je završeno, vidjet ćete sličan izlaz:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Opcionalno) Ako sada ponovno pokrenete `azd up`, primijetit ćete da se model gpt-4.1 implementira jer je varijabla okruženja promijenjena (i spremljena) u lokalnoj mapi `.azure`.
+1. Provjerite brisanje na portalu i provjerite ima li resursa izvan opsega implementacije. Izvještavanje troškova i ažuriranja kvota mogu kasniti. Lokalne `.azure` konfiguracije ostaju osim ako ih eksplicitno ne uklonite.
 
-      Evo implementacija modela **prije**:
+1. `azd down --purge` dodatno traži trajno brisanje podržanih soft-obrisanih resursa. Koristite ga samo ako oporavak nije potreban i razumijete politike zadržavanja/zaštite od brisanja. Ne jamči trenutno oslobađanje kvote.
 
-      ![Initial](../../../../../translated_images/hr/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      A ovako je **poslije**:
-      ![New](../../../../../translated_images/hr/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Nemojte ponovno implementirati samo da biste provjerili čišćenje. Kasnija namjerna `azd up` može ponovno stvoriti resurse koristeći preostale lokalne unose i ponovno će se naplaćivati. Ažuriranja modela obično koriste podržane promjene u opskrbi, a ne uklanjanje.
 
 ---
 

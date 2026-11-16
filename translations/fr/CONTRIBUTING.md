@@ -62,6 +62,19 @@ Nous accueillons les types de contributions suivants:
 - Suivez les bonnes pratiques Azure et AZD
 - Fournissez les résultats attendus lorsque cela est applicable
 
+### Valider la documentation en anglais
+
+Depuis la racine du dépôt, installez les dépendances de développement existantes et exécutez :
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s .github/scripts -p "test_*.py"
+python .github/scripts/check_links.py
+python -m mkdocs build --strict --config-file workshop/mkdocs.yml
+```
+
+Le vérificateur de liens hors ligne vérifie les chemins Markdown/HTML en anglais, les titres, les ancres explicites et les espaces réservés pour liens vides. Il exclut les `translations/` et `translated_images/` générés, y compris les liens vers ces répertoires. Il ne récupère pas les sites externes ni ne valide les déploiements Azure. Utilisez `--json <report-path>` pour exporter les échecs et l'inventaire des URL externes pour une vérification réseau séparée. Vérifiez les commandes en amont actuelles et les prérequis d'exemples lors de la modification des instructions techniques ; distinguez les applications testées des plans de conception.
+
 ### Messages de commit
 
 Utilisez des messages de commit clairs et descriptifs:
@@ -75,9 +88,9 @@ Veuillez lire et respecter notre [Code de conduite](CODE_OF_CONDUCT.md) pour mai
 
 ## Obtenir de l'aide
 
-- **Questions**: Ouvrez une [discussion GitHub](https://github.com/microsoft/azd-for-beginners/discussions)
-- **Communauté**: Rejoignez le [Discord Azure](https://discord.gg/microsoft-azure)
-- **Documentation**: Consultez la [documentation Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- **Questions** : Recherchez ou ouvrez un [problème GitHub](https://github.com/microsoft/AZD-for-beginners/issues)
+- **Communauté** : Rejoignez le [Discord Azure](https://discord.gg/microsoft-azure)
+- **Documentation** : Consultez les [docs Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ## Licence
 
@@ -90,6 +103,6 @@ Merci de contribuer à faire d'AZD For Beginners une meilleure ressource d'appre
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Clause de non-responsabilité :
-Ce document a été traduit à l'aide du service de traduction automatique par IA [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des imprécisions. Le document original dans sa langue d'origine doit être considéré comme la source faisant foi. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+**Avertissement** :
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforçions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant autorité. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous ne saurions être tenus responsables des malentendus ou erreurs d'interprétation découlant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

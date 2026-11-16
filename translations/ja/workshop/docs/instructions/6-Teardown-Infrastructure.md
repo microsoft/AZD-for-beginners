@@ -1,60 +1,58 @@
-# 6. インフラストラクチャの撤去
+# 6. インフラの解体
 
-!!! tip "このモジュールの終了時には次のことができるようになります"
+!!! tip "このモジュールの終了時には以下ができるようになります"
 
-    - [ ] リソースのクリーンアップとコスト管理の重要性を理解する
-    - [ ] インフラを安全に解除するために `azd down` を使用する
-    - [ ] 必要に応じてソフト削除された Azure AI サービスを復元する
-    - [ ] **Lab 6:** Azure リソースをクリーンアップして削除を確認する
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## ボーナス演習
 
-Before we tear down the project, take a few minutes to do some open-ended exploration.
+プロジェクトを解体する前に、数分間かけてオープンエンドな探索をしてみましょう。
 
-!!! info "これらの探索プロンプトを試す"
+!!! info "これらの探索用の問いかけを試してみてください"
 
-    **GitHub Copilot を使った実験：**
+    **Experiment with GitHub Copilot:**
     
-    1. 尋ねる： `マルチエージェントのシナリオに試せる他の AZD テンプレートは何ですか？`
-    2. 尋ねる： `医療ユースケース向けにエージェントの指示をどうカスタマイズできますか？`
-    3. 尋ねる： `コスト最適化を制御する環境変数はどれですか？`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Azure ポータルの探索：**
+    **Explore the Azure Portal:**
     
-    1. デプロイのための Application Insights のメトリクスを確認する
-    2. プロビジョニングされたリソースのコスト分析を確認する
-    3. Microsoft Foundry ポータルのエージェントプレイグラウンドをもう一度探検する
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## インフラの解除
+## インフラの解放
 
-1. インフラの撤去は次のように簡単です：
+1. インフラを解体するのは簡単です:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. 選択された環境を確認し、削除されるリソースを見直します。これによりAzureリソースが削除され、データが消失する可能性があります。この学習ワークフローでは確認プロンプトを維持してください。完了すると次のような出力が表示されます:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (任意) もし今 `azd up` を再実行すると、環境変数がローカルの `.azure` フォルダで変更（および保存）されたため、gpt-4.1 モデルがデプロイされるのがわかります。 
+1. ポータルで削除を確認し、デプロイメントの範囲外のリソースがないかチェックします。コスト報告やクォータの更新には遅延があります。ローカルの`.azure`設定は明示的に削除しない限り残ります。
 
-      ここにモデルのデプロイ（<strong>変更前</strong>）があります：
+1. `azd down --purge` はサポートされているソフト削除されたリソースの永久削除も要求します。リカバリが不要で、保持・削除保護ポリシーを理解している場合のみ使ってください。即時クォータ解放を保証するわけではありません。
 
-      ![変更前](../../../../../translated_images/ja/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      そしてこちらが<strong>変更後</strong>です：
-      ![変更後](../../../../../translated_images/ja/14-deploy-new.f7f3c355a3cf7299.webp)
+1. クリーンアップを確認するためだけに再デプロイしないでください。後から意図的に`azd up`を実行すれば、残っているローカルの入力を使ってリソースを再作成できますが、再び料金が発生します。モデルの更新は通常、解体ではなくサポートされたプロビジョニング変更を使用します。
 
 ---
 

@@ -1,95 +1,108 @@
-# Přispívání do AZD pro začátečníky
+# Přispívání do AZD Pro Začátečníky
 
-Děkujeme za zájem o přispívání do kurzu AZD pro začátečníky! Tento dokument obsahuje pokyny a informace pro přispěvatele.
+Děkujeme za váš zájem přispívat do kurzu AZD Pro Začátečníky! Tento dokument obsahuje pokyny a informace pro přispěvatele.
 
-## Jak přispět
+## Jak přispívat
 
-### Hlášení problémů
+### Hlásit chyby
 
 Pokud najdete chyby, omyly nebo máte návrhy na vylepšení:
 
-1. **Zkontrolujte existující problémy**: Prohledejte [existující issues](https://github.com/microsoft/azd-for-beginners/issues), abyste se vyhnuli duplicitám
-2. **Vytvořte nové hlášení**: Použijte odpovídající šablonu hlášení
-3. **Uveďte podrobnosti**: Zahrňte kroky k reprodukci, očekávané chování a snímky obrazovky, pokud jsou relevantní
+1. **Zkontrolujte stávající problémy**: Prohledejte [stávající problémy](https://github.com/microsoft/azd-for-beginners/issues), abyste předešli duplicitám
+2. **Vytvořte nový problém**: Použijte odpovídající šablonu problému
+3. **Uveďte podrobnosti**: Začněte kroky ke znovuobjevení chyby, očekávaným chováním a případnými screenshoty
 
 ### Navrhování změn
 
 1. **Vytvořte fork repozitáře**: Vytvořte si vlastní fork projektu
-2. **Vytvořte větev**: Vytvořte větev pro své změny
+2. **Vytvořte větev**: Založte si větev s novými funkcemi pro své změny
 3. **Proveďte změny**: Dodržujte naše standardy kódování a dokumentace
-4. **Otestujte své změny**: Ověřte, že všechny odkazy fungují a obsah se správně zobrazuje
-5. **Odešlete pull request**: Uveďte jasný popis svých změn
+4. **Otestujte své změny**: Zkontrolujte, že všechny odkazy fungují a obsah se správně zobrazuje
+5. **Odešlete pull request**: Přiložte jasný popis svých změn
 
 ### Typy příspěvků
 
 Vítáme následující typy příspěvků:
 
 #### Vylepšení obsahu
-- Opravte překlepy, gramatiku a problémy s formátováním
+- Opravte překlepy, gramatiku a formátování
 - Zlepšete srozumitelnost stávající dokumentace
 - Aktualizujte zastaralé informace
 - Přidejte chybějící vysvětlení nebo kontext
 
 #### Nové příklady
-- Přidejte scénáře nasazení z reálného světa
-- Vytvořte nové šablony AZD pro běžné použití
+- Přidejte situace z reálného nasazení
+- Vytvořte nové šablony AZD pro běžné případy použití
 - Poskytněte další ukázky kódu a cvičení
 
-#### Podpora překladu
+#### Podpora překladů
 - Pomozte udržovat stávající překlady
-- Zlepšete kvalitu překladu
-- Přidejte překlady pro nový obsah
+- Zlepšujte kvalitu překladů
+- Přidávejte překlady nového obsahu
 
 #### Hlášení chyb
-- Nahlaste nefunkční odkazy nebo nesprávné ukázky kódu
+- Hlaste nefunkční odkazy nebo nesprávné příklady kódu
 - Identifikujte nesrovnalosti v dokumentaci
-- Označte problémy s přístupností
+- Upozorněte na problémy s přístupností
 
-## Pokyny pro přispívání
+## Pokyny pro příspěvky
 
 ### Standardy dokumentace
 
-- Používejte jasný jazyk srozumitelný pro začátečníky
-- Uveďte učební cíle a očekávané výsledky
+- Používejte jasný, pro začátečníky přátelský jazyk
+- Uveďte cíle učení a očekávané výsledky
 - Poskytněte krok za krokem instrukce s očekávanými výstupy
 - Přidejte navigační odkazy na související obsah
-- Používejte konzistentní formátování a styl markdownu
+- Používejte konzistentní formátování a styl markdown
 
-### Ukázky kódu
+### Příklady kódu
 
-- Zajistěte, aby byly všechny ukázky kódu otestované a fungovaly
-- Zahrňte komentáře vysvětlující klíčové koncepty
-- Dodržujte osvědčené postupy Azure a AZD
-- Uveďte očekávaný výstup tam, kde je to relevantní
+- Zajistěte, aby všechny příklady kódu byly testované a funkční
+- Přidejte komentáře vysvětlující klíčové koncepty
+- Dodržujte nejlepší praxe Azure a AZD
+- Uveďte očekávaný výstup, pokud je to možné
 
-### Zprávy commitů
+### Ověření anglické dokumentace
 
-Používejte jasné, popisné zprávy commitů:
+Ze kořenu repozitáře nainstalujte existující požadavky pro vývoj a spusťte:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s .github/scripts -p "test_*.py"
+python .github/scripts/check_links.py
+python -m mkdocs build --strict --config-file workshop/mkdocs.yml
+```
+
+Offline kontrola odkazů testuje anglické Markdown/HTML cesty, nadpisy, explicitní kotvy a prázdná místa odkazů. Vylučuje generované `translations/` a `translated_images/`, včetně odkazů do těchto adresářů. Neprovádí kontroly externích webů ani validaci nasazení Azure. Použijte `--json <report-path>` pro export chyb a externí inventář URL pro samostatnou síťovou kontrolu. Ověřte aktuální upstream příkazy a vzorové předpoklady při změně technických instrukcí; rozlišujte testované aplikace od návrhových plánů.
+
+### Zprávy o commitech
+
+Používejte jasné, popisné zprávy o commitech:
 - `docs: fix typo in installation guide`
 - `feat: add new container app example`
 - `fix: correct broken link in chapter 2`
 
 ## Kodex chování
 
-Přečtěte si, prosím, a dodržujte náš [Kodex chování](CODE_OF_CONDUCT.md), abyste udrželi přívětivou a inkluzivní komunitu.
+Přečtěte si a dodržujte náš [Kodex chování](CODE_OF_CONDUCT.md), aby byla komunitní atmosféra přátelská a inkluzivní.
 
-## Jak získat pomoc
+## Získání pomoci
 
-- **Otázky**: Otevřete [diskusi na GitHubu](https://github.com/microsoft/azd-for-beginners/discussions)
-- **Komunita**: Připojte se k [Azure Discord](https://discord.gg/microsoft-azure)
+- **Dotazy**: Prohledejte nebo založte [GitHub issue](https://github.com/microsoft/AZD-for-beginners/issues)
+- **Komunita**: Přidejte se na [Azure Discord](https://discord.gg/microsoft-azure)
 - **Dokumentace**: Prohlédněte si [dokumentaci Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ## Licence
 
-Přispíváním do tohoto repozitáře souhlasíte s tím, že vaše příspěvky budou licencovány pod [licencí MIT](../../LICENSE).
+Přispěním do tohoto repozitáře souhlasíte, že vaše příspěvky budou licencovány pod [licencí MIT](../../LICENSE).
 
 ---
 
-Děkujeme, že pomáháte učinit AZD pro začátečníky lepším vzdělávacím zdrojem pro komunitu!
+Děkujeme, že pomáháte učinit AZD Pro Začátečníky lepším zdrojem pro komunitu!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Prohlášení o vyloučení odpovědnosti:
-Tento dokument byl přeložen pomocí služby pro překlad využívající umělou inteligenci [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro zásadní informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakákoli nedorozumění nebo mylné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,32 +1,32 @@
-# Application Insights Integration with AZD
+# AZD ਨਾਲ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਇੰਟੀਗ੍ਰੇਸ਼ਨ
 
-⏱️ **ਅੰਦਾਜ਼ਾ ਸਮਾਂ**: 40-50 ਮਿੰਟ | 💰 **ਲਾਗਤ ਪ੍ਰਭਾਵ**: ~$5-15/ਮਹੀਨਾ | ⭐ **ਜਟਿਲਤਾ**: ਦਰਮਿਆਨੀ
+⏱️ **ਅਨੁਮਾਨਿਤ ਸਮਾਂ**: 40-50 ਮਿੰਟ | 💰 **ਲਾਗਤ ਪ੍ਰਭਾਵ**: ~$5-15/ਮਹੀਨਾ | ⭐ **ਜਟਿਲਤਾ**: ਦਰਮਿਆਨਾ
 
-**📚 ਸਿੱਖਣ ਦਾ ਰਸਤਾ:**
-- ← Previous: [ਪ੍ਰੀਫਲਾਈਟ ਚੈੱਕਸ](preflight-checks.md) - ਪ੍ਰਭਾਵ ਤੈਅ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਦੀ ਜਾਂਚ
-- 🎯 **ਤੁਸੀਂ ਇੱਥੇ ਹੋ**: Application Insights Integration (ਮਾਨੀਟਰਿੰਗ, ਟੈਲੀਮੀਟਰੀ, ਡੀਬੱਗਿੰਗ)
-- → Next: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Azure 'ਤੇ ਡਿਪਲੌਇ ਕਰੋ
-- 🏠 [Course Home](../../README.md)
+**📚 ਸਿਖਲਾਈ ਦਾ ਰਾਸਤਾ:**
+- ← ਪਿਛਲਾ: [ਪ੍ਰੀਫਲਾਈਟ ਚੈੱਕ](preflight-checks.md) - ਪ੍ਰੀ-ਡਿਪਲੋਈਮੈਂਟ ਵੈਰੀਫਿਕੇਸ਼ਨ
+- 🎯 **ਤੁਹਾਡੀ ਸਥਿਤੀ**: ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਇੰਟੀਗ੍ਰੇਸ਼ਨ (ਮਾਨੀਟਰਿੰਗ, ਟੈਲੀਮੀਟਰੀ, ਡੀਬੱਗਿੰਗ)
+- → ਅਗਲਾ: [ਡਿਪਲੋਈਮੈਂਟ ਗਾਈਡ](../chapter-04-infrastructure/deployment-guide.md) - ਐਜ਼ੂਰ ਤੇ ਡਿਪਲੋਈ ਕਰਨਾ
+- 🏠 [ਕੋਰਸ ਹੋਮ](../../README.md)
 
 ---
 
 ## ਤੁਸੀਂ ਕੀ ਸਿੱਖੋਗੇ
 
-ਇਸ ਪਾਠ ਨੂੰ مکمل ਕਰਨ ਨਾਲ, ਤੁਸੀਂ:
-- AZD ਪ੍ਰੋਜੈਕਟਾਂ ਵਿੱਚ ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ **Application Insights** ਨੂੰ ਇੰਟੀਗ੍ਰੇਟ ਕਰਨਾ ਸਿੱਖੋਗੇ
-- ਮਾਇਕਰੋਸਰਵਿਸਿਜ਼ ਲਈ **distributed tracing** ਸੰਰਚਿਤ ਕਰਨਾ
-- **ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ** ਲਾਗੂ ਕਰਨਾ (ਮੀਟਰਿਕਸ, ਇਵੈਂਟਸ, ਡਿਪੈਂਡੇਨਸੀਜ਼)
-- ਰੀਅਲ-ਟਾਈਮ ਮਾਨੀਟਰਿੰਗ ਲਈ **ਲਾਈਵ ਮੀਟਰਿਕਸ** ਸੈਟਅਪ ਕਰਨਾ
-- AZD ਡਿਪਲੌਇਮੈਂਟ ਤੋਂ **ਅਲਰਟ ਅਤੇ ਡੈਸ਼ਬੋਰਡ** ਬਣਾਉਣਾ
-- **ਟੈਲੀਮੀਟਰੀ ਕੁਐਰੀਜ਼** ਨਾਲ ਪ੍ਰੋਡਕਸ਼ਨ ਸਮੱਸਿਆਵਾਂ ਦੀ ਡੀਬੱਗਿੰਗ ਕਰਨੀ
-- **ਲਾਗਤ ਅਤੇ ਸੈਂਪਲਿੰਗ** ਰਣਨੀਤੀਆਂ ਨੂੰ ਅਨੁਕੂਲਤ ਕਰਨਾ
-- **AI/LLM ਐਪਲੀਕੇਸ਼ਨਾਂ** (ਟੋਕਨਸ, ਲੇਟੈਂਸੀ, ਲਾਗਤ) ਦੀ ਨਿਗਰਾਨੀ ਕਰਨੀ
+ਇਹ ਪਾਠ ਪੂਰਾ ਕਰਨ ਨਾਲ, ਤੁਸੀਂ:
+- AZD ਇੰਫਰਾਸਟਰੱਕਚਰ ਵਿੱਚ **ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ** ਦਾ ਇਲਾਨ ਕਰੋ ਅਤੇ SDK ਇੰਸਟ੍ਰੂਮੈਂਟੇਸ਼ਨ ਕਾਨਫਿਗਰ ਕਰੋ
+- ਮਾਈਕ੍ਰੋਸਰਵਿਸਾਂ ਲਈ **ਵੰਡੇ ਗਏ ਟਰੇਸਿੰਗ** ਨੂੰ ਸੈੱਟ ਅੱਪ ਕਰੋ
+- **ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ** (ਮੀਟਰਿਕਸ, ਇਵੈਂਟਸ, ਡਿਪੈਂਡੈਂਸੀਜ਼) ਨੂੰ ਲਾਗੂ ਕਰੋ
+- ਰੀਅਲ-ਟਾਈਮ ਮਾਨੀਟਰਿੰਗ ਲਈ **ਲਾਈਵ ਮੀਟਰਿਕਸ** ਸੈੱਟ ਕਰੋ
+- AZD ਡਿਪਲੋਇਮੈਂਟ ਤੋਂ **ਅਲਰਟਸ ਅਤੇ ਡੈਸ਼ਬੋਰਡ** ਬਣਾਓ
+- **ਟੈਲੀਮੀਟਰੀ ਕਵੈਰੀਜ਼** ਨਾਲ ਪ੍ਰੋਡਕਸ਼ਨ ਸਮੱਸਿਆਵਾਂ ਦਾ ਡੀਬੱਗ ਕਰੋ
+- **ਲਾਗਤਾਂ ਅਤੇ ਸੈਂਪਲਿੰਗ** ਰਣਨੀਤੀਆਂ ਦਾ ਅਨੁਕੂਲਨ ਕਰੋ
+- **AI/LLM ਐਪਲੀਕੇਸ਼ਨਜ਼** (ਟੋਕਨਜ਼, ਲਿਆਟੇnਸੀ, ਲਾਗਤਾਂ) ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ
 
-## ਕਿਉਂ AZD ਨਾਲ Application Insights ਮਹੱਤਵਪੂਰਨ ਹੈ
+## AZD ਨਾਲ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਅਹੰਕਾਰ ਵਾਲਾ ਕਿਉਂ ਹੈ
 
-### ਚੁਣੌਤੀ: ਪ੍ਰੋਡਕਸ਼ਨ ਅਬਜ਼ਰਵੇਬਿਲਟੀ
+### ਚੁਣੌਤੀ: ਪ੍ਰੋਡਕਸ਼ਨ ਦੀ ਨਿਗਰਾਨੀ
 
-**Application Insights ਬਗੈਰ:**
+**ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਬਿਨਾਂ:**
 ```
 ❌ No visibility into production behavior
 ❌ Manual log aggregation across services
@@ -36,7 +36,7 @@
 ❌ Unknown failure rates and bottlenecks
 ```
 
-**Application Insights + AZD ਨਾਲ:**
+**ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ + AZD ਨਾਲ:**
 ```
 ✅ Automatic telemetry collection
 ✅ Centralized logs from all services
@@ -44,37 +44,37 @@
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**ਉਪਮਾ**: Application Insights ਤੁਹਾਡੇ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਇੱਕ "ਬਲੈਕ ਬਾਕਸ" ਫਲਾਈਟ ਰਿਕਾਰਡਰ + ਕਾਕਪਿਟ ਡੈਸ਼ਬੋਰਡ ਵਾਂਗ ਹੈ। ਤੁਸੀਂ ਹਰ ਚੀਜ਼ ਰੀਅਲ-ਟਾਈਮ ਵੇਖ ਸਕਦੇ ਹੋ ਅਤੇ ਕਿਸੇ ਵੀ ਘਟਨਾ ਨੂੰ ਰੀਪਲੇ ਕਰ ਸਕਦੇ ਹੋ।
+**ਉਪਮਾ**: ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਤੁਹਾਡੇ ਐਪਲੀਕੇਸ਼ਨ ਲਈ "ਬਲੈਕ ਬਾਕਸ" ਫਲਾਈਟ ਰਿਕਾਰਡਰ + ਕਾਕਪਿਟ ਡੈਸ਼ਬੋਰਡ ਵਰਗਾ ਹੈ। ਤੁਸੀਂ ਹਰ ਚੀਜ਼ ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਦੇਖ ਸਕਦੇ ਹੋ ਅਤੇ ਕਿਸੇ ਵੀ ਘਟਨਾ ਨੂੰ ਦੁਬਾਰਾ ਚਲਾ ਸਕਦੇ ਹੋ।
 
 ---
 
-## ਆਰਕੀਟੈਕਚਰ ਓਵਰਵਿਊ
+## ਆਰਕੀਟੈਕਚਰ ਦਾ ਝਲਕ
 
-### AZD ਆਰਕੀਟੈਕਚਰ ਵਿੱਚ Application Insights
+### AZD ਆਰਕੀਟੈਕਚਰ ਵਿੱਚ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ
 
 ```mermaid
 graph TB
-    User[ਉਪਭੋਗਤਾ/ਕਲਾਇੰਟ]
-    App1[ਕੰਟੇਨਰ ਐਪ 1<br/>API ਗੇਟਵੇ]
-    App2[ਕੰਟੇਨਰ ਐਪ 2<br/>ਉਤਪਾਦ ਸੇਵਾ]
-    App3[ਕੰਟੇਨਰ ਐਪ 3<br/>ਆਰਡਰ ਸੇਵਾ]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ<br/>ਟੈਲੀਮੇਟਰੀ ਹੱਬ]
-    LogAnalytics[(ਲੌਗ ਵਿਸ਼ਲੇਸ਼ਣ<br/>ਵਰਕਸਪੇਸ)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Azure ਪੋਰਟਲ<br/>ਡੈਸ਼ਬੋਰਡ ਅਤੇ ਚੇਤਾਵਨੀਆਂ]
-    Query[Kusto ਪੁੱਛਗਿੱਛ<br/>ਕਸਟਮ ਵਿਸ਼ਲੇਸ਼ਣ]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|ਆਟੋ-ਇੰਸਟ੍ਰੂਮੈਂਟੇਸ਼ਨ| AppInsights
-    App2 -.->|ਆਟੋ-ਇੰਸਟ੍ਰੂਮੈਂਟੇਸ਼ਨ| AppInsights
-    App3 -.->|ਆਟੋ-ਇੰਸਟ੍ਰੂਮੈਂਟੇਸ਼ਨ| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,59 +83,64 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-### ਕੀ ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਮਾਨੀਟਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ
 
-| Telemetry Type | What It Captures | Use Case |
+### ਕੀ ਖੁਦਕਾਰ ਤੌਰ 'ਤੇ ਮਾਨੀਟਰ ਹੁੰਦਾ ਹੈ
+
+ਸਮਰਥਿਤ ਆਟੋ-ਇੰਸਟ੍ਰੂਮੈਂਟੇਸ਼ਨ ਲਾਇਬ੍ਰੇਰੀਜ਼ ਲਈ ਰਿਕਵੇਸਟ/ਡਿਪੈਂਡੈਂਸੀਜ਼ ਕੈਪਚਰ ਕਰਦਾ ਹੈ। ਕਸਟਮ ਇਵੈਂਟਸ ਅਤੇ ਮੀਟਰਿਕਸ ਲਈ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਦੀ ਲੋੜ ਹੈ; ਉਪਲਬਧਤਾ ਟੈਸਟ ਨੂੰ ਵੱਖਰੇ ਤੌਰ 'ਤੇ ਕਾਨਫਿਗਰ ਕਰਨਾ ਪੈਂਦਾ ਹੈ। ਇਹ ਇਸ ਲਈ ਹਰ ਕਤਾਰ ਨੂੰ ਨਹੀਂ ਕੈਪਚਰ ਕਰਦਾ ਜੋ ਸਿਰਫ਼ ਰਿਸੋর্স ਮੌਜੂਦ ਹੋਣ ਕੰ ਕਾਰਨ ਹੈ।
+
+| ਟੈਲੀਮੀਟਰੀ ਕਿਸਮ | ਇਹ ਕੀ ਕੈਪਚਰ ਕਰਦਾ ਹੈ | ਵਰਤੋਂ ਦਾ ਕੇਸ |
 |----------------|------------------|----------|
-| **Requests** | HTTP requests, status codes, duration | API ਦੀ ਕਾਰਗੁਜ਼ਾਰੀ ਦੀ ਨਿਗਰਾਨੀ |
-| **Dependencies** | External calls (DB, APIs, storage) | ਬੋਟਲਨੇਕ ਦੀ ਪਛਾਣ |
-| **Exceptions** | Unhandled errors with stack traces | ਫੇਲ੍ਹਰਾਂ ਦੀ ਡੀਬੱਗਿੰਗ |
-| **Custom Events** | Business events (signup, purchase) | ਐਨਾਲਿਟਿਕਸ ਅਤੇ ਫਨਲਜ਼ |
-| **Metrics** | Performance counters, custom metrics | ਕੁੰਪੂਟਿੰਗ ਸਮਰੱਥਾ ਦੀ ਯੋਜਨਾ |
-| **Traces** | Log messages with severity | ਡੀਬੱਗਿੰਗ ਅਤੇ ਆਡਿਟਿੰਗ |
-| **Availability** | Uptime and response time tests | SLA ਨਿਗਰਾਨੀ |
+| **ਰਿਕਵੇਸਟਸ** | HTTP ਰਿਕਵੇਸਟਸ, ਸਥਿਤੀ ਕੋਡ, ਸਮਾ | API ਪ੍ਰਦਰਸ਼ਨ ਮਾਨੀਟਰਿੰਗ |
+| **ਡਿਪੈਂਡੈਂਸੀਜ਼** | ਬਾਹਰੀ ਕਾਲਜ਼ (DB, APIs, ਸਟੋਰੇਜ) | ਬੋਤਲਨੈੱਕ ਪਛਾਣੋ |
+| **ਐਕਸਪੈਸ਼ਨਜ਼** | ਅਣਹੈਂਡਲ ਕੀਤੀਆਂ ਗਲਤੀਆਂ ਅਤੇ ਸਟੈਕ ਟਰੇਸ | ਫੇਲੀਆਂ ਦਾ ਡੀਬੱਗਿੰਗ |
+| **ਕਸਟਮ ਇਵੈਂਟਸ** | ਕਾਰੋਬਾਰੀ ਇਵੈਂਟਸ (ਸਾਈਨਅੱਪ, ਖਰੀਦ) | ਵਿਸ਼ਲੇਸ਼ਣ ਅਤੇ ਫਨਲਜ਼ |
+| **ਮੀਟਰਿਕਸ** | ਪ੍ਰਦਰਸ਼ਨ ਕਾਊਂਟਰ, ਕਸਟਮ ਮੀਟਰਿਕਸ | ਸਮਰੱਥਾ ਯੋਜਨਾ |
+| **ਟਰੇਸਜ਼** | ਗੰਭੀਰਤਾ ਨਾਲ ਲਾਗ ਸੁਨੇਹੇ | ਡੀਬੱਗਿੰਗ ਅਤੇ ਆਡੀਟਿੰਗ |
+| **ਉਪਲਬਧਤਾ** | ਅੱਪਟਾਈਮ ਅਤੇ ਪ੍ਰਤੀਕ੍ਰਿਆ ਸਮਾਂ ਟੈਸਟ | SLA ਮਾਨੀਟਰਿੰਗ |
 
 ---
 
-## ਪਹਿਲੀਂਆਂ ਲੋੜਾਂ
+## ਲੋੜੀਂਦੇ ਤੱਤ
 
-### ਲਾਜ਼ਮੀ ਸੰਦ
+### ਜ਼ਰੂਰੀ ਟੂਲਜ਼
 
 ```bash
-# Azure Developer CLI ਦੀ ਜਾਂਚ ਕਰੋ
+# Verify Azure Developer CLI
 azd version
-# ✅ ਉਮੀਦ ਕੀਤੀ: azd ਵਰਜ਼ਨ 1.0.0 ਜਾਂ ਉਸ ਤੋਂ ਉੱਪਰ
+# Command reference baseline: azd 1.37.2
 
-# Azure CLI ਦੀ ਜਾਂਚ ਕਰੋ
+# Verify Azure CLI
 az --version
-# ✅ ਉਮੀਦ ਕੀਤੀ: azure-cli 2.50.0 ਜਾਂ ਉਸ ਤੋਂ ਉੱਪਰ
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
-### Azure ਲੋੜਾਂ
+### ਐਜ਼ੂਰ ਦੀਆਂ ਲੋੜਾਂ
 
-- ਸਰਗਰਮ Azure ਸਬਸਕ੍ਰਿਪਸ਼ਨ
-- ਬਣਾਉਣ ਦੀਆਂ ਅਨੁਮਤੀਆਂ:
-  - Application Insights ਸਰੋਤਾਂ
-  - Log Analytics workspaces
-  - Container Apps
-  - Resource groups
+- ਸਰਗਰਮ ਐਜ਼ੂਰ ਸਬਸਕ੍ਰਿਪਸ਼ਨ
+- ਬਣਾਉਣ ਦੇ ਅਧਿਕਾਰ:
+  - ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਦੇ ਰਿਸੋੁਰਸ
+  - ਲਾਗ ਐਨਾਲਿਟਿਕਸ ਵਿਰਕਸਪੇਸز
+  - ਕੰਟੇਨਰ ਐਪਸ
+  - ਰਿਸੋੁਰਸ ਗਰੂਪ
 
 ### ਗਿਆਨ ਦੀਆਂ ਲੋੜਾਂ
 
-ਤੁਹਾਨੂੰ ਇਹ ਮੁਕੰਮਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ:
-- [AZD ਬੇਸਿਕਸ](../chapter-01-foundation/azd-basics.md) - ਮੁੱਖ AZD ਸੰਕਲਪ
-- [Configuration](../chapter-03-configuration/configuration.md) - ਵਾਤਾਵਰਣ ਸੈਟਅਪ
-- [First Project](../chapter-01-foundation/first-project.md) - ਮੂਲ ਡਿਪਲੌਇਮੈਂਟ
+ਤੁਸੀਂ ਸੰਪੂਰਨ ਕਰ ਚੁੱਕੇ ਹੋਣ ਚਾਹੀਦੇ ਹੋ:
+- [AZD ਬੇਸਿਕਸ](../chapter-01-foundation/azd-basics.md) - ਬੁਨਿਆਦੀ AZD ਧਾਰਣਾ
+- [ਕਾਨਫਿਗਰੇਸ਼ਨ](../chapter-03-configuration/configuration.md) - ਮਾਹੌਲ ਸੈਟਅੱਪ
+- [ਪਹਿਲਾ ਪ੍ਰੋਜੈਕਟ](../chapter-01-foundation/first-project.md) - ਮੁਢਲਾ ਡਿਪਲੋਇਮੈਂਟ
 
 ---
 
-## ਪਾਠ 1: AZD ਨਾਲ ਸਵੈਚਾਲਿਤ Application Insights
+## ਪਾਠ 1: AZD ਨਾਲ ਆਟੋਮੈਟਿਕ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ
 
-### AZD ਕਿਵੇਂ Application Insights ਪ੍ਰੋਵਿਸ਼ਨ ਕਰਦਾ ਹੈ
+### AZD ਕਿਵੇਂ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਤਿਆਰ ਕਰਦਾ ਹੈ
 
-AZD ਤੁਹਾਡੇ ਡਿਪਲੌਇਮੈਂਟ ਵੇਲੇ ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ Application Insights ਬਣਾਉਂਦਾ ਅਤੇ ਕੰਫਿਗਰ ਕਰਦਾ ਹੈ। ਆਓ ਦੇਖੀਏ ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ।
+AZD ਸਿਰਫ਼ **ਜਦੋਂ ਪ੍ਰੋਜੈਕਟ ਦੀ ਇਨਫ੍ਰਾਸਟ੍ਰਕਚਰ ਇਸਦਾ ਐਲਾਨ ਕਰਦੀ ਹੈ** ਤਦ ਹੀ ਐਪਲੀਕੇਸ਼ਨ ਇੰਸਾਈਟਸ ਦੀ ਪ੍ਰਦਾਨਗੀ ਕਰਦਾ ਹੈ। `azure.yaml` ਆਪਣੇ ਆਪ ਵਿੱਚ ਮਾਨੀਟਰਨਿੰਗ ਬਣਾਉਂਦਾ ਜਾਂ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਵਿੱਚ ਇੰਸਟਰੂਮੈਂਟ ਨਹੀਂ ਕਰਦਾ।
 
-### ਪ੍ਰੋਜੈਕਟ ਸਰਚਨਾ
+> **ਉਦਾਹਰਣ ਸਕੋਪ:** ਇਸ ਪਾਠ ਵਿੱਚ ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਟੁਕੜੇ ਹਨ, ਨਾ ਕਿ ਇਸ ਰਿਪੋਜ਼ੀਟਰੀ ਵਿੱਚ ਪੂਰਾ `monitored-app` ਪ੍ਰੋਜੈਕਟ। ਮੇਨ ਟੈਂਪਲੇਟ ਅਤੇ ਪੈਰਾਮੀਟਰ ਮੈਪਿੰਗ, ਕੰਟੇਨਰ ਐਪਸ ਮਾਹੌਲ, ਰਜਿਸਟਰੀ/ਚਿੱਤਰ ਅਤੇ ਪਰਛਾਊ ਸੰਰਚਨਾ, Dockerfile ਅਤੇ ਸਰਵਿਸ ਟੈਗਸ ਪੇਸ਼ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਜਮ੍ਹਾਂ ਕਰੋ। ਬਾਅਦ ਦੇ ਪਾਠ ਵੱਖ-ਵੱਖ/ਵਿੱਸਤਾਰ ਟੁਕੜੇ ਦਿਖਾਉਂਦੇ ਹਨ, ਨਾ ਕਿ ਐਸਿਆਂ ਫਾਇਲਾਂ ਜੋ ਸਾਰੇ ਬਿਨਾਂ ਬਦਲਾਅ ਦੇ ਇਕੱਠੇ ਚਿਪਕਾਏ ਜਾ ਸਕਦੇ ਹਨ। ਜੇ ਤੁਹਾਨੂੰ ਚਲਾਉਣਯੋਗ ਬੇਸਲਾਈਨ ਦੀ ਜਰੂਰਤ ਹੈ ਤਾਂ ਕਾਰਜਸ਼ੀਲ [ਮਾਈਕਰੋਸਰਵਿਸਜ਼ ਉਦਾਹਰਣ](../../../../examples/microservices) ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ।
+
+### ਪ੍ਰੋਜੈਕਟ ਦੀ ਸੰਰਚਨਾ
 
 ```
 monitored-app/
@@ -154,9 +159,9 @@ monitored-app/
 
 ---
 
-### ਕਦਮ 1: AZD ਕੰਫਿਗਰ ਕਰੋ (azure.yaml)
+### ਪਹਿਲਾ ਕਦਮ: AZD ਕਨਫਿਗਰ ਕਰੋ (azure.yaml)
 
-**File: `azure.yaml`**
+**ਫਾਇਲ: `azure.yaml`**
 
 ```yaml
 name: monitored-app
@@ -169,16 +174,16 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**बस ਇਸੇ ਨਾਲ!** ਮੁੱਢਲੀ ਮਾਨੀਟਰਿੰਗ ਲਈ AZD ਡਿਫੌਲਟ ਰੂਪ ਵਿੱਚ Application Insights ਬਣਾਉਂਦਾ। ਹੋਰ ਕੋਈ ਵਾਧੂ ਕੰਫਿਗਰੇਸ਼ਨ ਲੋੜ ਨਹੀਂ।
+ਇਹ ਡਿਪਲੋਏ ਕਰਨ ਵਾਲੀ ਸੇਵਾ ਦਾ ਐਲਾਨ ਕਰਦਾ ਹੈ। ਹੇਠਾਂ ਦਿੱਤੀ ਬਾਈਸਪ ਅਤੇ SDK ਸੰਰਚਨਾਹਾਂ ਮਾਨੀਟਰਨਿੰਗ ਦਿੰਦੀਆਂ ਹਨ; azd ਇਨ੍ਹਾਂ ਨੂੰ ਆਪਣੇ ਆਪ ਨਹੀਂ ਜੋੜਦਾ।
 
 ---
 
-### ਕਦਮ 2: ਮਾਨੀਟਰਿੰਗ ਇੰਫ੍ਰਾਸਟਰਕਚਰ (Bicep)
+### ਦੂਜਾ ਕਦਮ: ਮਾਨੀਟਰਨਿੰਗ ਇਨਫ੍ਰਾਸਟ੍ਰਕਚਰ (ਬਾਈਸਪ)
 
-**File: `infra/core/monitoring.bicep`**
+**ਫਾਇਲ: `infra/core/monitoring.bicep`**
 
 ```bicep
 param logAnalyticsName string
@@ -223,19 +228,21 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
 
-### ਕਦਮ 3: Container App ਨੂੰ Application Insights ਨਾਲ ਜੋੜੋ
+### ਤੀਜਾ ਕਦਮ: ਕੰਟੇਨਰ ਐਪ ਨੂੰ ਐਪਲੀਕੇਸ਼ਨ ਇੰਸਾਈਟਸ ਨਾਲ ਜੋੜੋ
 
-**File: `infra/app/api.bicep`**
+**ਫਾਇਲ: `infra/app/api.bicep`**
 
 ```bicep
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -285,35 +293,29 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ---
 
-### ਕਦਮ 4: ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਬੱਚੇ ਟੈਲੀਮੀਟਰੀ
+### ਚੌਥਾ ਕਦਮ: ਟੈਲੀਮੀਟਰੀ ਨਾਲ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ
 
-**File: `src/app.py`**
+**ਫਾਇਲ: `src/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Application Insights ਕਨੈਕਸ਼ਨ ਸਟਰਿੰਗ ਪ੍ਰਾਪਤ ਕਰੋ
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # ਵੰਡੇ ਹੋਏ ਟ੍ਰੇਸਿੰਗ ਨੂੰ ਸੰਰਚਿਤ ਕਰੋ
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # ਡੈਵ ਲਈ 100% ਸੈਂਪਲਿੰਗ
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # ਲੌਗਿੰਗ ਨੂੰ ਸੰਰਚਿਤ ਕਰੋ
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # ਡੇਟਾਬੇਸ ਕਾਲ ਦੀ ਨਕਲ ਕਰੋ (ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਡਿਪੈਂਡੇਸੀ ਵਜੋਂ ਟ੍ਰੈਕ ਕੀਤਾ ਜਾਂਦਾ ਹੈ)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # ਧੀਮੀ ਕਾਰਵਾਈ ਦੀ ਨਕਲ ਕਰੋ
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -364,30 +366,30 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**File: `src/requirements.txt`**
+**ਫਾਇਲ: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ ਇਹਨਾਂ ਨਿਰਭਰਤਾਵਾਂ ਨੂੰ ਹੱਲ ਕਰੋ, ਇਕੱਠੇ ਟੈਸਟ ਕਰੋ, ਅਤੇ ਨਤੀਜੇ ਵਜੋਂ ਵਰਜਨ ਲੌਕ ਕਰੋ। ਨਵੇਂ ਪ੍ਰੋਜੈਕਟਜ਼ ਨੂੰ OpenCensus Python ਐਕਸਪੋਰਟਰਾਂ ਦੀ ਬਜਾਏ Azure Monitor OpenTelemetry ਦੀ ਵਰਤੋਂ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ।
 
 ---
 
-### ਕਦਮ 5: ਡਿਪਲੋਇ ਅਤੇ ਜਾਂਚੋ
+### ਪੰਜਵਾਂ ਕਦਮ: ਡਿਪਲੋਏ ਅਤੇ ਤਸਦੀਕ ਕਰੋ
 
 ```bash
-# AZD ਨੂੰ ਸ਼ੁਰੂ ਕਰੋ
-azd init
-
-# ਤੈਨਾਤ ਕਰੋ (ਆਟੋਮੈਟਿਕ ਤੌਰ ਤੇ Application Insights ਨੂੰ ਪ੍ਰੋਵਿਜ਼ਨ ਕਰਦਾ ਹੈ)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# ਐਪ ਦਾ URL ਪ੍ਰਾਪਤ ਕਰੋ
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# ਟੈਲੀਮੇਟਰੀ ਤਿਆਰ ਕਰੋ
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -404,47 +406,42 @@ curl $APP_URL/api/slow
 
 ---
 
-### ਕਦਮ 6: Azure ਪੋਰਟਲ ਵਿੱਚ ਟੈਲੀਮੀਟਰੀ ਵੇਖੋ
+### ਛੇਵਾਂ ਕਦਮ: ਏਜ਼ੂਅਰ ਝਰਪਟ ਵਿੱਚ ਟੈਲੀਮੀਟਰੀ ਵੇਖੋ
 
 ```bash
-# ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਦੇ ਵੇਰਵੇ ਪ੍ਰਾਪਤ ਕਰੋ
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# ਐਜ਼ੂਰ ਪੋਰਟਲ ਵਿੱਚ ਖੋਲ੍ਹੋ
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Navigate to Azure Portal → Application Insights → Transaction Search**
+**ਏਜ਼ੂਅਰ ਫ਼ੋਰਮ → ਐਪਲੀਕੇਸ਼ਨ ਇੰਸਾਈਟਸ → ਟਰਾਂਜ਼ੈਕਸ਼ਨ ਖੋਜ ਵਿੱਚ ਜਾਓ**
 
-ਤੁਹਾਨੂੰ ਦਿਖਾਈ ਦੇਵੇਗਾ:
-- ✅ HTTP requests ਸਥਿਤੀ ਕੋਡਾਂ ਸਮੇਤ
-- ✅ Request ਦੀ ਮਿਆਦ ( `/api/slow` ਲਈ 3+ ਸਕਿੰਟ)
-- ✅ `/api/error-test` ਤੋਂ Exception ਵੇਰਵੇ
-- ✅ ਕਸਟਮ ਲੌਗ ਸੁਨੇਹੇ
+ਤੁਸੀਂ ਇਹ ਦੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
+- ✅ ਐਚਟੀਟੀਪੀ ਬੇਨਤੀਆਂ ਸਥਿਤੀ ਕੋਡਾਂ ਨਾਲ
+- ✅ ਬੇਨਤੀ ਸਮਾਂ (3+ ਸਕਿੰਟਾਂ ਲਈ `/api/slow`)
+- ✅ `/api/error-test` ਤੋਂ ਅਪਵਾਦ ਵੇਰਵੇ
+- ✅ ਕਸਟਮ ਲਾਗ ਸੁਨੇਹੇ
 
 ---
 
-## ਪਾਠ 2: ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ ਅਤੇ ਇਵੈਂਟਸ
+## ਪਾਠ 2: ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ ਅਤੇ ਘਟਨਾਵਾਂ
 
-### ਬਿਜ਼ਨਸ ਇਵੈਂਟਸ ਟਰੈਕ ਕਰੋ
+### ਕਾਰੋਬਾਰੀ ਘਟਨਾਵਾਂ ਦਾ ਟ੍ਰੈਕ ਕਰੋ
 
-ਆਓ ਬਿਜ਼ਨਸ-ਨਿਰਣਾ ਯੋਗ ਇਵੈਂਟਸ ਲਈ ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ ਸ਼ਾਮਲ ਕਰੀਏ।
+ਆਓ ਕਾਰੋਬਾਰ-ਮਹੱਤਵਪੂਰਨ ਘਟਨਾਵਾਂ ਲਈ ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ ਸ਼ਾਮਲ ਕਰੀਏ।
 
-**File: `src/telemetry.py`**
+**ਫਾਇਲ: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # ਲੌਗਰ ਸੈਟਅੱਪ ਕਰੋ
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # ਮੀਟ੍ਰਿਕਸ ਐਕਸਪੋਰਟਰ ਸੈਟਅੱਪ ਕਰੋ
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # ਟ੍ਰੇਸਰ ਸੈਟਅੱਪ ਕਰੋ
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# ਗਲੋਬਲ ਟੈਲੀਮੇਟਰੀ ਕਲਾਇੰਟ
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### ਐਪ ਨੂੰ ਕਸਟਮ ਇਵੈਂਟਸ ਨਾਲ ਅਪਡੇਟ ਕਰੋ
+### ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਕਸਟਮ ਘਟਨਾਵਾਂ ਨਾਲ ਅੱਪਡੇਟ ਕਰੋ
 
-**File: `src/app.py` (enhanced)**
+**ਫਾਇਲ: `src/app.py` (ਸੁਧਾਰੀ ਕੀਤੀ)**
+
+ਮੌਜੂਦਾ Flask ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਇਹ ਰoutes ਸ਼ਾਮਲ ਕਰੋ; ਪਹਿਲਾਂ ਵਾਲੇ ਹੇਲਥ/ਟੈਸਟ ਰoutes ਸੁਰੱਖਿਅਤ ਰੱਖੋ। ਹੇਠਾਂ ਦਿੱਤਾ ਛੋਟਾ ਹਿੱਸਾ ਸਪਸ਼ਟਤਾ ਲਈ ਵੱਖਰਾ ਐਪ ਦਿਖਾਉਂਦਾ ਹੈ। ਟੈਲੀਮੀਟਰੀ ਸ਼ੁਰੂਆਤ ਹੁਣ `telemetry.py` ਵਿੱਚ ਰਹਿੰਦੀ ਹੈ—ਐਕਸਪੋਰਟਰਾਂ ਨੂੰ ਦੋ ਵਾਰੀ ਇਨਿਸ਼ੀਆਲਾਈਜ਼ ਨਾ ਕਰੋ।
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # ਕਾਰੋਬਾਰੀ ਘਟਨਾ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # ਆਮਦਨ ਮੈਟ੍ਰਿਕ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # ਖੋਜ ਦੀ ਨਕਲ ਕਰੋ (ਅਸਲ ਵਿੱਚ ਡੇਟਾਬੇਸ ਕਵੈਰੀ ਹੋਵੇਗੀ)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # ਮਿਲੀਸੈਕਿੰਡਾਂ ਵਿੱਚ ਬਦਲੋ
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # ਖੋਜ ਘਟਨਾ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # ਖੋਜ ਪ੍ਰਦਰਸ਼ਨ ਮੈਟ੍ਰਿਕ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # ਬਾਹਰੀ API ਕਾਲ ਦੀ ਨਕਲ ਕਰੋ
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # ਨਿਰਭਰਤਾ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -616,25 +586,25 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ ਦੀ ਟੈਸਟਿੰਗ
+### ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ ਦੀ ਜਾਂਚ ਕਰੋ
 
 ```bash
-# ਖਰੀਦ ਘਟਨਾ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# ਖੋਜ ਘਟਨਾ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# ਬਾਹਰੀ ਨਿਰਭਰਤਾ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
-**Azure Portal ਵਿੱਚ ਵੇਖੋ:**
+**ਏਜ਼ੂਅਰ ਫ਼ੋਰਮ ਵਿੱਚ ਵੇਖੋ:**
 
-Navigate to Application Insights → Logs, ਫਿਰ ਚਲਾਓ:
+ਐਪਲੀਕੇਸ਼ਨ ਇੰਸਾਈਟਸ → ਲਾਗਜ਼ ਵਿੱਚ ਜਾਓ, ਫਿਰ ਚਲਾਓ:
 
 ```kusto
 // View purchase events
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -665,13 +635,13 @@ traces
 
 ---
 
-## ਪਾਠ 3: ਮਾਇਕਰੋਸਰਵਿਸਿਜ਼ ਲਈ ਡਿਸਟ੍ਰੀਬਿਊਟਡ ਟਰੇਸਿੰਗ
+## ਪਾਠ 3: ਮਾਈਕਰੋਸਰਵਿਸਜ਼ ਲਈ ਵਿਤਰਿਤ ਟ੍ਰੇਸਿੰਗ
 
-### ਕ੍ਰਾਸ-ਸਰਵਿਸ ਟਰੇਸਿੰਗ ਯੋਗ ਕਰੋ
+### ਕ੍ਰਾਸ-ਸੇਵਾ ਟ੍ਰੇਸਿੰਗ ਸಕ್ರਿਯ ਕਰੋ
 
-ਮਾਇਕਰੋਸਰਵਿਸਿਜ਼ ਲਈ, Application Insights ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਸਰਵਿਸਾਂ ਦਰਮਿਆਨ ਬੇਨਤੀ ਨੂੰ ਕੋਰਿਲੇਟ ਕਰਦਾ ਹੈ।
+ਸੰਗਤਿ ਇੰਸਟਰੂਮੈਂਟੇਸ਼ਨ ਅਤੇ W3C ਟਰੇਸ-ਕੌਂਟੇਕਸਟ ਪ੍ਰਚਾਰ ਨਾਲ, ਐਪਲੀਕੇਸ਼ਨ ਇੰਸਾਈਟਸ ਸੇਵਾਵਾਂ ਵਿਚ ਬੇਨਤੀਆਂ ਨੂੰ ਜੋੜਦਾ ਹੈ। ਸਿਰਫ਼ ਕਨੈਕਸ਼ਨ ਸਟਰਿੰਗ ਸਾਂਝੀ ਕਰਕੇ ਮਾਪਾ-ਪਿਤਾ ਸਪੈਨਜ਼ ਸਥਾਪਤ ਨਹੀਂ ਹੁੰਦੇ। ਹੇਠਾਂ ਦਿੱਤਾ ਸਾਂਰਚਨਾ ਟੁਕੜਾ ਮੋਡੀਊਲਾਂ ਦੀਆਂ ਸੂਚੀਆਂ ਦਿੰਦਾ ਹੈ ਜੋ ਤੁਹਾਨੂੰ ਲਾਗੂ ਕਰਣੀਆਂ ਹਨ।
 
-**File: `infra/main.bicep`**
+**ਫਾਇਲ: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### ਏਂਡ-ਟੂ-ਏਂਡ ਟਰਾਂਜ਼ੈਕਸ਼ਨ ਵੇਖੋ
+### ਐਂਡ-ਟੂ-ਐਂਡ ਟ੍ਰਾਂਜ਼ੈਕਸ਼ਨ ਵੇਖੋ
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API ਗੇਟਵੇ<br/>(ਟ੍ਰੇਸ ID: abc123)
-    participant Product as ਉਤਪਾਦ ਸੇਵਾ<br/>(ਪੈਰੈਂਟ ID: abc123)
-    participant Order as ਆਰਡਰ ਸੇਵਾ<br/>(ਪੈਰੈਂਟ ID: abc123)
-    participant AppInsights as ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
+    participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: ਟ੍ਰੇਸ ਸ਼ੁਰੂ ਕਰੋ: abc123
-    Gateway->>AppInsights: ਬੇਨਤੀ ਲੌਗ ਕਰੋ (ਟ੍ਰੇਸ ID: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: ਪੈਰੈਂਟ ID: abc123
-    Product->>AppInsights: ਡਿਪੈਂਡੈਂਸੀ ਕਾਲ ਲੌਗ
-    Product-->>Gateway: ਉਤਪਾਦ ਵੇਰਵੇ
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: ਪੈਰੈਂਟ ID: abc123
-    Order->>AppInsights: ਡਿਪੈਂਡੈਂਸੀ ਕਾਲ ਲੌਗ
-    Order-->>Gateway: ਆਰਡਰ ਬਣਾਇਆ ਗਿਆ
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: ਚੈਕਆਉਟ ਮੁਕੰਮਲ
-    Gateway->>AppInsights: ਰਿਸਪਾਂਸ ਲੌਗ ਕਰੋ (ਅਵਧੀ: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: ਟ੍ਰੇਸ ID ਦੁਆਰਾ ਕੋਰਲੇਸ਼ਨ
+    Note over AppInsights: Correlation by Trace ID
 ```
-**ਏਂਡ-ਟੂ-ਏਂਡ ਟਰੇਸ ਦੀ ਕੁਐਰੀ:**
+
+**ਕੁਇਰੀ ਐਂਡ-ਟੂ-ਐਂਡ ਟ੍ਰੇਸ:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,65 +759,65 @@ dependencies
 
 ---
 
-## ਪਾਠ 4: ਲਾਈਵ ਮੀਟਰਿਕਸ ਅਤੇ ਰੀਅਲ-ਟਾਈਮ ਮਾਨੀਟਰਿੰਗ
+## ਪਾਠ 4: ਲਾਈਵ ਮੈਟਰਿਕਸ ਅਤੇ ਰੀਅਲ-ਟਾਈਮ ਨਿਗਰਾਨੀ
 
-### ਲਾਈਵ ਮੀਟਰਿਕਸ ਸਟਰੀਮ ਯੋਗ ਕਰੋ
+### ਲਾਈਵ ਮੈਟਰਿਕਸ ਸਟਰੀਮ ਚਾਲੂ ਕਰੋ
 
-ਲਾਈਵ ਮੀਟਰਿਕਸ <1 ਸਕਿੰਟ ਦੇ ਲੇਟੈਂਸੀ ਨਾਲ ਰੀਅਲ-ਟਾਈਮ ਟੈਲੀਮੀਟਰੀ ਦਿੰਦਾ ਹੈ।
+ਜਦੋਂ SDK ਦੁਆਰਾ ਸਮਰਥਿਤ ਅਤੇ ਚਾਲੂ ਕੀਤਾ ਜਾਵੇ ਤਦ ਲਾਈਵ ਮੈਟਰਿਕਸ ਨੇੜਲੇ-ਰੀਅਲ-ਟਾਈਮ ਟੇਲੀਮੇਟਰੀ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ। ਇਹ ਲેટੈਂਸੀ SLA ਨਹੀਂ ਹੈ। ਉੱਪਰ ਦਿੱਤਾ ਗਿਆ Python OpenTelemetry ਸੈਟਅੱਪ `enable_live_metrics=True` ਨਾਲ ਚੁਣਦਾ ਹੈ।
 
-**ਲਾਈਵ ਮੀਟਰਿਕਸ ਤੱਕ ਪਹੁੰਚ:**
+**ਲਾਈਵ ਮੈਟਰਿਕਸ ਤੱਕ ਪਹੁੰਚ:**
 
 ```bash
-# Application Insights ਸੰਸਾਧਨ ਪ੍ਰਾਪਤ ਕਰੋ
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# ਸੰਸਾਧਨ ਗਰੁੱਪ ਪ੍ਰਾਪਤ ਕਰੋ
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**ਤੁਹਾਨੂੰ ਜੋ ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਦਿਖਾਈ ਦੇਵੇਗਾ:**
-- ✅ ਆ ਰਹੀਆਂ ਬੇਨਤੀਆਂ ਦੀ ਦਰ (requests/sec)
-- ✅ ਜਾ ਰਹੀਆਂ ਡਿਪੈਂਡੇਨਸੀ ਕਾਲਾਂ
-- ✅ Exception ਗਿਣਤੀ
-- ✅ CPU ਅਤੇ ਮੈਮੋਰੀ ਦੀ ਵਰਤੋਂ
-- ✅ ਸਰਵਰਾਂ ਦੀ ਸਰਗਰਮ ਗਿਣਤੀ
-- ✅ ਨਮੂਨਾ ਟੈਲੀਮੀਟਰੀ
+**ਤੁਹਾਡੇ ਕੋਲ ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਜੋ ਦਿਖਾਈ ਦੇਂਦਾ ਹੈ:**
+- ✅ ਆਉਣ ਵਾਲੇ ਬਿਨੈ ਦਰ (ਬਿਨੈ/ਸੈਕੰਡ)
+- ✅ ਬਾਹਰੀ ਡਿਪੈਂਡੈਂਸੀ ਕਾਲਾਂ
+- ✅ ਐਕਸੈਪਸ਼ਨ ਗਿਣਤੀ
+- ✅ CPU ਅਤੇ ਮੇਮੋਰੀ ਵਰਤੋਂ
+- ✅ ਸਰਗਰਮ ਸਰਵਰ ਗਿਣਤੀ
+- ✅ ਨਮੂਨਾ ਟੇਲੀਮੇਟਰੀ
 
-### ਟੈਸਟਿੰਗ ਲਈ ਲੋਡ ਜਨਰੇਟ ਕਰੋ
+### ਟੈਸਟਿੰਗ ਲਈ ਲੋਡ ਬਣਾਓ
 
 ```bash
-# ਲਾਈਵ ਮੈਟ੍ਰਿਕਸ ਵੇਖਣ ਲਈ ਲੋਡ ਜਨਰੇਟ ਕਰੋ
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Azure Portal ਵਿੱਚ ਲਾਈਵ ਮੈਟ੍ਰਿਕਸ ਵੇਖੋ
-# ਤੁਹਾਨੂੰ ਬੇਨਤੀ ਦਰ ਵਿੱਚ ਉਛਾਲ ਦੇਖਣਾ ਚਾਹੀਦਾ ਹੈ
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
 
-## ਪ੍ਰੈਕਟਿਕਲ ਅਭਿਆਸ
+## ਪ੍ਰਯੋਗਾਤਮਕ ਕਸਰਤਾਂ
 
-### ਅਭਿਆਸ 1: ਅਲਰਟ ਸੈਟਅਪ ਕਰੋ ⭐⭐ (ਦਰਮਿਆਨੀ)
+### ਕਸਰਤ 1: ਅਲਰਟ ਸੈੱਟ ਕਰੋ ⭐⭐ (ਮੱਧਮ)
 
-**ਉਦੇਸ਼**: ਉੱਚ error ਦਰਾਂ ਅਤੇ ਧੀਮੀ ਪ੍ਰਤੀਕ੍ਰਿਆਵਾਂ ਲਈ ਅਲਰਟ ਬਣਾਓ।
+**ਉਦੇਸ਼**: ਵੱਧ ਤਰ੍ਹਾਂ ਦੀਆਂ ਗਲਤੀਆਂ ਅਤੇ ਧੀਮੇ ਪ੍ਰਤੀਕਿਰਿਆਵਾਂ ਲਈ ਅਲਰਟ ਬਣਾਉਣਾ।
 
 **ਕਦਮ:**
 
-1. **Error ਦਰ ਲਈ ਅਲਰਟ ਬਣਾਓ:**
+1. **ਗਲਤੀ ਦਰ ਲਈ ਅਲਰਟ ਬਣਾਓ:**
 
 ```bash
-# Application Insights ਰਿਸੋਰਸ ID ਪ੍ਰਾਪਤ ਕਰੋ
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# ਫੇਲ ਹੋਈਆਂ ਰਿਕਵੇਸਟਾਂ ਲਈ ਮੀਟਰਿਕ ਅਲਰਟ ਬਣਾਓ
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,10 +825,10 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
-2. **ਧੀਮੀ ਪ੍ਰਤੀਕ੍ਰਿਆਵਾਂ ਲਈ ਅਲਰਟ ਬਣਾਓ:**
+2. **ਧੀਮੇ ਪ੍ਰਤੀਕਿਰਿਆਵਾਂ ਲਈ ਅਲਰਟ ਬਣਾਓ:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,9 +841,9 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Bicep ਰਾਹੀਂ ਅਲਰਟ ਬਣਾਓ (AZD ਲਈ ਪਸੰਦੀਦਾ):**
+3. **ਬਾਈਸਪ (AZD ਲਈ ਪ੍ਰਾਥਮਿਕ) ਰਾਹੀਂ ਅਲਰਟ ਬਣਾਓ:**
 
-**File: `infra/core/alerts.bicep`**
+**ਫਾਇਲ: `infra/core/alerts.bicep`**
 
 ```bicep
 param applicationInsightsId string
@@ -944,57 +915,57 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **ਅਲਰਟਾਂ ਦੀ ਟੈਸਟਿੰਗ:**
+4. **ਅਲਰਟਾਂ ਦੀ ਟੈਸਟਿੰਗ ਕਰੋ:**
 
 ```bash
-# ਤ੍ਰੁਟੀਆਂ ਪੈਦਾ ਕਰੋ
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# ਧੀਮੇ ਜਵਾਬ ਪੈਦਾ ਕਰੋ
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# چੇਤਾਵਨੀ ਦੀ ਸਥਿਤੀ ਦੀ ਜਾਂਚ ਕਰੋ (5-10 ਮਿੰਟ ਉਡੀਕ ਕਰੋ)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
-**✅ ਸਫਲਤਾ ਮਾਪਦੰਡ:**
-- ✅ ਅਲਰਟ ਸਫਲਤਾਪੂਰਵਕ ਬਣ ਗਈਆਂ
-- ✅ ਥ੍ਰੇਸ਼ਹੋਲਡ ਪਾਰ ਹੋਣ 'ਤੇ ਅਲਰਟ ਚਲ੍ਹਦੇ ਹਨ
-- ✅ Azure Portal ਵਿੱਚ ਅਲਰਟ ਇਤਿਹਾਸ ਵੇਖਿਆ ਜਾ ਸਕਦਾ ਹੈ
-- ✅ AZD ਡਿਪਲੌਇਮੈਂਟ ਨਾਲ ਇੰਟੀਗਰੇਟ ਕੀਤਾ ਗਿਆ
+**✅ ਸਫਲਤਾ ਕੇਸ:**
+- ✅ ਅਲਰਟ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਏ ਗਏ
+- ✅ ਅਲਰਟ ਸੀਮਾਵਾਂ ਤੋਂ ਬਾਅਦ ਚਾਲੂ ਹੁੰਦੇ ਹਨ
+- ✅ ਅਜ਼ੂਰ ਪੋਰਟਲ ਵਿੱਚ ਅਲਰਟ ਇਤਿਹਾਸ ਦੇਖ ਸਕਦੇ ਹਨ
+- ✅ AZD ਡਿਪਲੋਇਮੈਂਟ ਨਾਲ ਇੰਟੀਗ੍ਰੇਟ ਕੀਤਾ ਗਿਆ
 
 **ਸਮਾਂ**: 20-25 ਮਿੰਟ
 
 ---
 
-### ਅਭਿਆਸ 2: ਕਸਟਮ ਡੈਸ਼ਬੋਰਡ ਬਣਾਓ ⭐⭐ (ਦਰਮਿਆਨੀ)
+### ਕਸਰਤ 2: ਕਸਟਮ ਡੈਸ਼ਬੋਰ੍ਡ ਬਣਾਓ ⭐⭐ (ਮੱਧਮ)
 
-**ਉਦੇਸ਼**: ਕੁੰਜੀ ਐਪਲੀਕੇਸ਼ਨ ਮੀਟਰਿਕਸ ਦਰਸਾਉਂਦਾ ਡੈਸ਼ਬੋਰਡ ਬਣਾਓ।
+**ਉਦੇਸ਼**: ਮੁੱਖ ਐਪਲੀਕੇਸ਼ਨ ਮੈਟਰਿਕਸ ਦਿਖਾਉਣ ਵਾਲਾ ਡੈਸ਼ਬੋਰ੍ਡ ਬਣਾਉਣਾ।
 
 **ਕਦਮ:**
 
-1. **Azure Portal ਰਾਹੀਂ ਡੈਸ਼ਬੋਰਡ ਬਣਾਓ:**
+1. **ਅਜ਼ੂਰ ਪੋਰਟਲ ਰਾਹੀਂ ਡੈਸ਼ਬੋਰ੍ਡ ਬਣਾਓ:**
 
-Navigate to: Azure Portal → Dashboards → New Dashboard
+ਜਾਓ: ਅਜ਼ੂਰ ਪੋਰਟਲ → ਡੈਸ਼ਬੋਰ੍ਡ → ਨਵਾਂ ਡੈਸ਼ਬੋਰ੍ਡ
 
-2. **ਮੁੱਖ ਮੀਟਰਿਕਸ ਲਈ ਟਾਈਲਾਂ ਸ਼ਾਮਲ ਕਰੋ:**
+2. **ਮੁੱਖ ਮੈਟਰਿਕਸ ਲਈ ਟਾਈਲਾਂ ਸ਼ਾਮਲ ਕਰੋ:**
 
-- ਬੇਨਤੀ ਗਿਣਤੀ (ਆਖਰੀ 24 ਘੰਟੇ)
-- ਔਸਤ ਪ੍ਰਤੀਕ੍ਰਿਆ ਸਮਾਂ
-- Error ਦਰ
-- Top 5 ਸਭ ਤੋਂ ਧੀਮੇ ਓਪਰੇਸ਼ਨ
-- ਉਪਭੋਗਤਿਆਂ ਦਾ ਭੂਗੋਲਿਕ ਵੰਡ
+- ਬਿਨੈ ਗਿਣਤੀ (ਆਖਰੀ 24 ਘੰਟੇ)
+- ਔਸਤ ਪ੍ਰਤੀਕਿਰਿਆ ਸਮਾਂ
+- ਗਲਤੀ ਦਰ
+- ਸ਼੍ਰੇਣੀ ਵਿੱਖੇ ਸਭ ਤੋਂ ਧੀਮੀਆਂ 5 ਕਾਰਵਾਈਆਂ
+- ਉਪਭੋਗਤਾਵਾਂ ਦੀ ਭੌਗੋਲਿਕ ਵੰਡ
 
-3. **Bicep ਰਾਹੀਂ ਡੈਸ਼ਬੋਰਡ ਬਣਾਓ:**
+3. **ਬਾਈਸਪ ਰਾਹੀਂ ਡੈਸ਼ਬੋਰ੍ਡ ਬਣਾੳੋ:**
 
-**File: `infra/core/dashboard.bicep`**
+**ਫਾਇਲ: `infra/core/dashboard.bicep`**
 
 ```bicep
 param dashboardName string
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1063,10 +1044,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **ਡਿਪਲੌਇ ਡੈਸ਼ਬੋਰਡ:**
+4. **ਡੈਸ਼ਬੋਰ੍ਡ ਤੈਨਾਤ ਕਰੋ:**
 
-```bash
-# main.bicep ਵਿੱਚ ਸ਼ਾਮਿਲ ਕਰੋ
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,30 +1057,32 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# ਤੈਨਾਤ ਕਰੋ
+```bash
+# Deploy
 azd up
 ```
 
-**✅ ਸਫਲਤਾ ਮਾਪਦੰਡ:**
-- ✅ ਡੈਸ਼ਬੋਰਡ ਮੁੱਖ ਮੀਟਰਿਕਸ ਦਿਖਾਉਂਦਾ ਹੈ
-- ✅ Azure Portal ਹੋਮ 'ਤੇ ਪਿਨ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ
+**✅ ਸਫਲਤਾ ਕੇਸ:**
+- ✅ ਡੈਸ਼ਬੋਰ੍ਡ ਮੁੱਖ ਮੈਟਰਿਕਸ ਦਿਖਾਉਂਦਾ ਹੈ
+- ✅ ਅਜ਼ੂਰ ਪੋਰਟਲ ਮੁੱਖ ਪਨੇ 'ਤੇ ਚਿਪਕਾਇਆ ਜਾ ਸਕਦਾ ਹੈ
 - ✅ ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਅਪਡੇਟ ਹੁੰਦਾ ਹੈ
-- ✅ AZD ਰਾਹੀਂ ਡਿਪਲੋਏਬਲ
+- ✅ AZD ਦੁਆਰਾ ਤੈਨਾਤ ਯੋਗ
 
 **ਸਮਾਂ**: 25-30 ਮਿੰਟ
 
 ---
 
-### ਅਭਿਆਸ 3: AI/LLM ਐਪਲੀਕੇਸ਼ਨ ਮਾਨੀਟਰ ਕਰੋ ⭐⭐⭐ (ਅਡਵਾਂਸਡ)
+### ਕਸਰਤ 3: ਏਆਈ/ਐਲਐਲਐੱਮ ਐਪਲੀਕੇਸ਼ਨ ਨਿਗਰਾਨੀ ਕਰੋ ⭐⭐⭐ (ਅਡਵਾਂਸਡ)
 
-**ਉਦੇਸ਼**: Microsoft Foundry Models ਦੀ ਵਰਤੋਂ (ਟੋਕਨਸ, ਲਾਗਤ, ਲੇਟੈਂਸੀ) ਟਰੈਕ ਕਰੋ।
+**ਉਦੇਸ਼**: Microsoft Foundry ਮਾਡਲਾਂ ਦੀ ਵਰਤੋਂ ਟ੍ਰੈਕ ਕਰੋ (ਟੋਕਨ, ਲਾਗਤ, ਲੇਟੈਂਸੀ)।
 
 **ਕਦਮ:**
 
-1. **AI ਮਾਨੀਟਰਿੰਗ ਰੈਪਰ ਬਣਾਓ:**
+1. **ਏਆਈ ਨਿਗਰਾਨੀ ਰੈਪਰ ਬਣਾਓ:**
 
-**File: `src/ai_telemetry.py`**
+**ਫਾਇਲ: `src/ai_telemetry.py`**
 
 ```python
 from telemetry import telemetry
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # ਮਾਇਕ੍ਰੋਸਾਫਟ ਫਾਊਂਡਰੀ ਮਾਡਲਾਂ ਨੂੰ ਕਾਲ ਕਰੋ
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # ਵਰਤੋਂ ਨਿਕਾਲੋ
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # ਲਾਗਤ ਦੀ ਗਣਨਾ ਕਰੋ (gpt-4.1 ਦੀ ਕੀਮਤ)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 ਪ੍ਰਤੀ 1K ਟੋਕਨ
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 ਪ੍ਰਤੀ 1K ਟੋਕਨ
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # ਕਸਟਮ ਇਵੈਂਟ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # ਮਾਪਦੰਡਾਂ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1182,7 +1169,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **ਨਿਗਰਾਨ ਕੀਤੇ ਕਲਾਇੰਟ ਦੀ ਵਰਤੋਂ ਕਰੋ:**
+2. **ਨਿਗਰਾਨ ਕੀਤੀ ਕਲਾਇਟੰਟ ਦੀ ਵਰਤੋਂ ਕਰੋ:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# ਨਿਗਰਾਨ ਕੀਤੇ OpenAI ਕਲਾਇੰਟ ਨੂੰ ਆਰੰਭ ਕਰੋ
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # ਸਵੈਚਾਲਿਤ ਨਿਗਰਾਨੀ ਨਾਲ ਕਾਲ
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,13 +1205,13 @@ def chat():
     })
 ```
 
-3. **AI ਮੀਟਰਿਕਸ ਦੀ ਕੁਐਰੀ ਕਰੋ:**
+3. **ਏਆਈ ਮੈਟਰਿਕਸ ਨੂੰ ਕੁਇਰੀ ਕਰੋ:**
 
 ```kusto
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1250,48 +1239,35 @@ traces
     AvgCostPerRequest = avg(Cost)
 ```
 
-**✅ ਸਫਲਤਾ ਮਾਪਦੰਡ:**
-- ✅ ਹਰ OpenAI ਕਾਲ ਆਪਣੇ ਆਪ ਟਰੈਕ ਕੀਤੀ ਜਾਂਦੀ ਹੈ
-- ✅ ਟੋਕਨ ਵਰਤੋਂ ਅਤੇ ਲਾਗਤ ਦਿਖਾਈ ਦਿੰਦੇ ਹਨ
-- ✅ ਲੇਟੈਂਸੀ ਮਾਨੀਟਰ ਕੀਤੀ ਜਾਂਦੀ ਹੈ
-- ✅ ਬਜਟ ਅਲਰਟ ਸੈਟ ਕੀਤੇ ਜਾ ਸਕਦੇ ਹਨ
+**✅ ਸਫਲਤਾ ਕੇਸ:**
+- ✅ ਹਰ OpenAI ਕਾਲ ਸਵੈਚਾਲਿਤ ਤੌਰ ਤੇ ਟ੍ਰੈਕ ਕੀਤੀ ਗਈ
+- ✅ ਟੋਕਨ ਵਰਤੋਂ ਅਤੇ ਲਾਗਤਾਂ ਦਿੱਖਾਈ ਦਿੰਦੀਆਂ ਹਨ
+- ✅ ਲੇਟੈਂਸੀ ਨਿਗਰਾਨੀ ਕੀਤੀ ਗਈ
+- ✅ ਬਜਟ ਅਲਰਟ ਸੈੱਟ ਕੀਤੇ ਜਾ ਸਕਦੇ ਹਨ
 
 **ਸਮਾਂ**: 35-45 ਮਿੰਟ
 
 ---
 
-## ਲਾਗਤ ਅਨੁਕੂਲਨ
+## ਲਾਗਤ ਸੁਧਾਰ
 
-### ਸੈਂਪਲਿੰਗ ਰਣਨੀਤੀਆਂ
+### ਨਮੂਨਾ ਸਟਰੈਟਜੀਜ਼
 
-ਟੈਲੀਮੀਟਰੀ ਨੂੰ ਸੈਂਪਲ ਕਰਕੇ ਲਾਗਤ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰੋ:
+ਟੇਲੀਮੇਟਰੀ ਨੂੰ ਨਮੂਨਾ ਲਵਾ ਕੇ ਲਾਗਤ ਨੂੰ ਕਾਬੂ ਕਰੋ:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# ਵਿਕਾਸ: 100% ਸੈਂਪਲਿੰਗ
-sampler = ProbabilitySampler(rate=1.0)
-
-# ਉਤਪਾਦਨ: 10% ਸੈਂਪਲਿੰਗ (ਖ਼ਰਚੇ 90% ਘਟਾਓ)
-sampler = ProbabilitySampler(rate=0.1)
-
-# ਅਨੁਕੂਲ ਸੈਂਪਲਿੰਗ (ਆਪੋ-ਆਪ ਢਲ ਜਾਂਦੀ ਹੈ)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**Bicep ਵਿੱਚ:**
+ਟ੍ਰੇਸ ਸੈਂਪਲਿੰਗ ਹਰ ਟੈਲੀਮੀਟਰੀ ਸ਼੍ਰੇਣੀ ਨੂੰ 90% ਘਟਾਉਂਦਾ ਨਹੀਂ ਹੈ। ਮੈਟਰਿਕਸ ਅਤੇ ਸਵਤੰਤਰ ਤੌਰ 'ਤੇ ਜਾਰੀ ਕੀਤੇ ਲਾਗਾਂ ਨੂੰ ਆਪਣਾ ਖੁਦ ਦਾ ਵਾਲਿਊਮ ਕੰਟਰੋਲ ਲੋੜੀਂਦਾ ਹੈ। ਦਰ ਨੂੰ ਦ੍ਰਿਸ਼ਟੀਯੋਗਤਾ ਦੀਆਂ ਜਰੂਰਤਾਂ ਦੇ ਅਨੁਸਾਰ ਚੁਣੋ, ਨਾ ਕਿ ਇੱਕ ਸਾਰਥਕ ਉਤਪਾਦਨ ਮਨਾਹੀ ਦੇ ਤੌਰ 'ਤੇ।
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+SDK ਸੈਂਪਲਿੰਗ ਨੂੰ ਖਾਸ ਤੌਰ 'ਤੇ ਸੈੱਟ ਕਰੋ; ਕੰਪੋਨੈਂਟ ਦੀ `SamplingPercentage` ਪ੍ਰਾਪਰਟੀ ਪਾਇਥਨ ਓਪਨਟੈਲੀਮੀਟਰੀ ਸੈਂਪਲਰ ਨੂੰ ਸੰਰਚਿਤ ਕਰਨ ਦਾ ਬਦਲ ਨਹੀਂ ਹੈ।
 
-### ਡੈਟਾ ਰਿਟੈਨਸ਼ਨ
+### ਡਾਟਾ ਰਿਟੇਨਸ਼ਨ
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1303,40 +1279,40 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### ਮਹੀਨਾਵਾਰ ਲਾਗਤ ਅੰਦਾਜ਼ੇ
+### ਮਾਸਿਕ ਲਾਗਤ ਅੰਦਾਜ਼ੇ
 
-| Data Volume | Retention | Monthly Cost |
+| ਡਾਟਾ ਵਾਲਿਊਮ | ਰਿਟੇਨਸ਼ਨ | ਮਾਸਿਕ ਲਾਗਤ |
 |-------------|-----------|--------------|
-| 1 GB/month | 30 days | ~$2-5 |
-| 5 GB/month | 30 days | ~$10-15 |
-| 10 GB/month | 90 days | ~$25-40 |
-| 50 GB/month | 90 days | ~$100-150 |
+| 1 GB/ਮਹੀਨਾ | 30 ਦਿਨ | ~ $2-5 |
+| 5 GB/ਮਹੀਨਾ | 30 ਦਿਨ | ~ $10-15 |
+| 10 GB/ਮਹੀਨਾ | 90 ਦਿਨ | ~ $25-40 |
+| 50 GB/ਮਹੀਨਾ | 90 ਦਿਨ | ~ $100-150 |
 
-**ਫ੍ਰੀ ਟੀਅਰ**: 5 GB/month ਸ਼ਾਮਲ
+ਇਹ ਅੰਕੜੇ ਦਰਸਾਉਣ ਵਾਲੇ ਹਨ, ਨ ਕਿ ਕੋਟੇ। ਆਪਣੇ ਖੇਤਰ ਅਤੇ ਸਮਝੌਤੇ ਵਿੱਚ ਇੰਡਿਗੇਸ਼ਨ, ਰਿਟੇਨਸ਼ਨ, ਅਲਰਟ ਅਤੇ ਟੈਸਟ ਕੀਮਤਾਂ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ; ਮੁਫ਼ਤ ਅਲਾਓਂਸਜ਼ Azure ਮਾਨੀਟਰ ਕੀਮਤਾਂ ਅਨੁਸਾਰ ਸਾਂਝੇ/ਸਕੋਪ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ, ਨ ਕਿ ਹਰ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਰਿਸੋਰਸ ਲਈ ਇਕ ਮੁਫ਼ਤ SKU ਦੀ ਗਾਰੰਟੀ।
 
 ---
 
-## ਗਿਆਨ ਚੈਕਪੌਇੰਟ
+## ਗਿਆਨ ਜਾਂਚ ਬਿੰਦੂ
 
-### 1. ਮੂਲ ਇੰਟੀਗ੍ਰੇਸ਼ਨ ✓
+### 1. ਬੁਨਿਆਦੀ ਇੰਟੀਗ੍ਰੇਸ਼ਨ ✓
 
-ਆਪਣੀ ਸਮਝ ਦੀ ਜਾਂਚ ਕਰੋ:
+ਆਪਣੀ ਸਮਝ ਦਾ ਟੈਸਟ ਕਰੋ:
 
-- [ ] **Q1**: AZD Application Insights ਕਿਵੇਂ ਪ੍ਰੋਵਾਈਡ ਕਰਦਾ ਹੈ?
-  - **A**: `infra/core/monitoring.bicep` ਵਿੱਚ Bicep ਟੈਂਪਲੇਟਾਂ ਰਾਹੀਂ ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ
+- [ ] **Q1**: AZD ਕਿਵੇਂ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ?
+  - **ਜਵਾਬ**: ਇਹ ਪ੍ਰੋਜੈਕਟ ਦੇ Bicep/Terraform ਟੈਮਪਲੇਟਾਂ ਦੁਆਰਾ ਸਪਸ਼ਟ ਤੌਰ 'ਤੇ ਘੋਸ਼ਿਤ ਮਾਨੀਟਰਿੰਗ ਸਰੋਤ ਤੈਨਾਤ ਕਰਦਾ ਹੈ।
 
-- [ ] **Q2**: ਕਿਹੜਾ ਐਨਵਾਇਰਨਮੈਂਟ ਵੈਰੀਏਬਲ Application Insights ਨੂੰ ਯੋਗ ਕਰਦਾ ਹੈ?
-  - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [ ] **Q2**: ਕਿਹੜਾ ਵਾਤਾਵਰਨ ਵੇਰੀਏਬਲ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਨੂੰ ਯੋਗ ਕਰਦਾ ਹੈ?
+  - **ਜਵਾਬ**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: ਤਿੰਨ ਮੁੱਖ ਟੈਲੀਮੀਟਰੀ ਕਿਸਮਾਂ ਕਿਹੜੀਆਂ ਹਨ?
-  - **A**: Requests (HTTP calls), Dependencies (external calls), Exceptions (errors)
+- [ ] **Q3**: ਮੁੱਖ ਤੌਰ 'ਤੇ ਤਿੰਨ ਪ੍ਰਮੁਖ ਟੈਲੀਮੀਟਰੀ ਕਿਸਮਾਂ ਕੀ ਹਨ?
+  - **ਜਵਾਬ**: ਬਿਨਤੀਆਂ (HTTP ਕਾਲਾਂ), ਨਿਰਭਰਤਾਵਾਂ (ਬਾਹਰੀ ਕਾਲਾਂ), إستثناء (ਗਲਤੀਆਂ)
 
-**Hands-On Verification:**
+**ਹੱਥ-ਅੱਗੇ ਜਾਂਚ:**
 ```bash
-# ਜਾਂਚ ਕਰੋ ਕਿ Application Insights ਕੰਫਿਗਰ ਕੀਤਾ ਗਿਆ ਹੈ
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# ਪੁਸ਼ਟੀ ਕਰੋ ਕਿ ਟੈਲੀਮੇਟਰੀ ਆ ਰਹੀ ਹੈ
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1347,18 +1323,18 @@ az monitor app-insights metrics show \
 
 ### 2. ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ ✓
 
-ਆਪਣੀ ਸਮਝ ਦੀ ਜਾਂਚ ਕਰੋ:
+ਆਪਣੀ ਸਮਝ ਦਾ ਟੈਸਟ ਕਰੋ:
 
-- [ ] **Q1**: ਤੁਸੀਂ ਕਸਟਮ ਬਿਜ਼ਨਸ ਇਵੈਂਟਸ ਕਿਵੇਂ ਟਰੈਕ ਕਰਦੇ ਹੋ?
-  - **A**: `custom_dimensions` ਨਾਲ ਲੌਗਰ ਦੀ ਵਰਤੋਂ ਜਾਂ `TelemetryClient.track_event()` ਦੀ ਵਰਤੋਂ
+- [ ] **Q1**: ਤੁਸੀਂ ਕਿਵੇਂ ਕਸਟਮ ਕਾਰੋਬਾਰੀ ਘਟਨਾਵਾਂ ਨੂੰ ਟ੍ਰੈਕ ਕਰਦੇ ਹੋ?
+  - **ਜਵਾਬ**: ਇਸ ਪਾਠ ਦਾ ਰੈਪਰ ਸੰਗਠਿਤ OTel ਲਾਗ ਲਿਖਦਾ ਹੈ ਜਿਸ ਵਿੱਚ `event_name` ਗੁਣਾ ਹਨ, ਜਿਹੜੇ `traces` ਵਿੱਚ ਪੁੱਛੇ ਜਾ ਸਕਦੇ ਹਨ; ਇਹ ਆਪਣੇ ਆਪ ਨਹੀਂ ਹੁੰਦੇ `customEvents`।
 
-- [ ] **Q2**: ਇਵੈਂਟਸ ਅਤੇ ਮੀਟਰਿਕਸ ਵਿੱਚ ਕੀ ਫਰਕ ਹੈ?
-  - **A**: ਇਵੈਂਟਸ ਵਿਭਿੰਨ ਘਟਨਾਵਾਂ ਹਨ, ਮੀਟਰਿਕਸ ਗਿਣਤੀਯੋਗ ਮਾਪਦੰਡ ਹਨ
+- [ ] **Q2**: ਘਟਨਾਵਾਂ ਅਤੇ ਮੈਟਰਿਕਸ ਵਿੱਚ ਕੀ ਫਰਕ ਹੈ?
+  - **ਜਵਾਬ**: ਘਟਨਾਵਾਂ ਅਲੱਗ ਘਟਨਾਵਾਂ ਹਨ, ਮੈਟਰਿਕਸ ਗਿਣਤੀ ਮਾਪ ਹਨ
 
-- [ ] **Q3**: ਤੁਸੀਂ ਸਰਵਿਸਾਂ ਦਰਮਿਆਨ ਟੈਲੀਮੀਟਰੀ ਨੂੰ ਕਿਵੇਂ ਕੋਰਿਲੇਟ ਕਰਦੇ ਹੋ?
-  - **A**: Application Insights ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਕੋਰਿਲੇਸ਼ਨ ਲਈ `operation_Id` ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ
+- [ ] **Q3**: ਤੁਸੀਂ ਸੇਵਾਵਾਂ ਵਿੱਚ ਟੈਲੀਮੀਟਰੀ ਨੂੰ ਕਿਵੇਂ ਸੰਗਰਹਿਤ ਕਰਦੇ ਹੋ?
+  - **ਜਵਾਬ**: ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਸਵੈਚਾਲਿਤ ਤੌਰ 'ਤੇ `operation_Id` ਦਾ ਵਰਤੋਂ ਕਰਦਾ ਹੈ
 
-**Hands-On Verification:**
+**ਹੱਥ-ਅੱਗੇ ਜਾਂਚ:**
 ```kusto
 // Verify custom events
 traces
@@ -1368,110 +1344,106 @@ traces
 
 ---
 
-### 3. ਪ੍ਰੋਡਕਸ਼ਨ ਮਾਨੀਟਰਿੰਗ ✓
+### 3. ਉਤਪਾਦਨ ਮਾਨੀਟਰਿੰਗ ✓
 
-ਆਪਣੀ ਸਮਝ ਦੀ ਜਾਂਚ ਕਰੋ:
+ਆਪਣੀ ਸਮਝ ਦਾ ਟੈਸਟ ਕਰੋ:
 
-- [ ] **Q1**: ਸੈਂਪਲਿੰਗ ਕੀ ਹੈ ਅਤੇ ਇਸ ਦੀ ਵਰਤੋਂ ਕਿਉਂ ਕਰੋ?
-  - **A**: ਸੈਂਪਲਿੰਗ ਡਾਟਾ ਵਾਲੀਅਮ (ਅਤੇ ਲਾਗਤ) ਘਟਾਉਂਦੀ ਹੈ by ਸਿਰਫ਼ ਕੁਝ ਪ੍ਰਤੀਸ਼ਤ ਟੈਲੀਮੀਟਰੀ ਕੀਪ ਕਰਕੇ
+- [ ] **Q1**: ਸੈਂਪਲਿੰਗ ਕੀ ਹੈ ਅਤੇ ਇਸਦਾ ਕਿਉਂ ਉਪਯੋਗ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ?
+  - **ਜਵਾਬ**: ਸੈਂਪਲਿੰਗ ਡਾਟਾ ਵਾਲਿਊਮ (ਅਤੇ ਲਾਗਤ) ਨੂੰ ਘਟਾਉਂਦੀ ਹੈ, ਸਰਫ਼ ਟੈਲੀਮੀਟਰੀ ਦੇ ਇੱਕ ਹਿੱਸੇ ਨੂੰ ਲੈ ਕੇ
 
-- [ ] **Q2**: ਤੁਸੀਂ ਅਲਰਟ ਕਿਵੇਂ ਸੈਟਅਪ ਕਰਦੇ ਹੋ?
-  - **A**: Bicep ਜਾਂ Azure Portal 'ਚ Application Insights ਮੀਟਰਿਕਸ 'ਤੇ ਆਧਾਰਿਤ ਮੈਟਰਿਕ ਅਲਰਟ ਦੀ ਵਰਤੋਂ
+- [ ] **Q2**: ਤੁਸੀਂ ਅਲਰਟ ਕਿਵੇਂ ਸੈੱਟ ਕਰਦੇ ਹੋ?
+  - **ਜਵਾਬ**: ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਮੈਟਰਿਕਸ ਦੇ ਆਧਾਰ 'ਤੇ Bicep ਜਾਂ Azure ਪੋਰਟਲ ਵਿੱਚ ਮੈਟਰਿਕ ਅਲਰਟ ਵਰਤੋ
 
-- [ ] **Q3**: Log Analytics ਅਤੇ Application Insights ਵਿੱਚ ਕੀ ਫਰਕ ਹੈ?
-  - **A**: Application Insights ਡਾਟਾ ਨੂੰ Log Analytics workspace ਵਿੱਚ ਸਟੋਰ ਕਰਦਾ ਹੈ; App Insights ਐਪਲਿਕੇਸ਼ਨ-ਖਾਸ ਨਜ਼ਾਰੇ ਦਿੰਦਾ ਹੈ
+- [ ] **Q3**: ਲਾਗ ਐਨਾਲਿਟਿਕਸ ਅਤੇ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਵਿੱਚ ਕੀ ਫਰਕ ਹੈ?
+  - **ਜਵਾਬ**: ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਡਾਟਾ ਨੂੰ ਲਾਗ ਐਨਾਲਿਟਿਕਸ ਵਰਕਸਪੇਸ ਵਿੱਚ ਸਟੋਰ ਕਰਦਾ ਹੈ; ਐਪ ਇਨਸਾਈਟਸ ਕਾਰਜ ਪ੍ਰਦਰਸ਼ਨ ਲਈ ਵਿਸ਼ੇਸ਼ ਦਰਸ਼ਣ ਦਿੰਦਾ ਹੈ
 
-**Hands-On Verification:**
+**ਹੱਥ-ਅੱਗੇ ਜਾਂਚ:**
 ```bash
-# ਸੈਂਪਲਿੰਗ ਸੰਰਚਨਾ ਦੀ ਜਾਂਚ ਕਰੋ
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
 
-## ਸ੍ਰੇਸ਼ਠ ਅਭਿਆਸ
+## ਸਭ ਤੋਂ ਵਧੀਆ ਅਮਲ
 
 ### ✅ ਕਰੋ:
 
-1. **ਕੋਰੇਲੇਸ਼ਨ IDs ਦੀ ਵਰਤੋਂ ਕਰੋ**
+1. **ਕੋਰਲੀਸ਼ਨ ID ਦੀ ਵਰਤੋਂ ਕਰੋ**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
-2. **ਮਹੱਤਵਪੂਰਨ ਮੀਟਰਿਕਸ ਲਈ ਅਲਰਟ ਸੈਟਅਪ ਕਰੋ**
+2. **ਜਰੂਰੀ ਮੈਟਰਿਕ ਲਈ ਅਲਰਟ ਸੈੱਟ ਕਰੋ**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **ਸਟ੍ਰਕਚਰਡ ਲੋਗਿੰਗ ਦੀ ਵਰਤੋਂ ਕਰੋ**
+3. **ਸੰਰਚਿਤ ਲాగਿੰਗ ਦੀ ਵਰਤੋਂ ਕਰੋ**
    ```python
-   # ✅ ਚੰਗਾ: ਸੰਰਚਿਤ
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ ਖਰਾਬ: ਅਸੰਰਚਿਤ
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
-4. **ਡਿਪੈਂਡੇਨਸੀਜ਼ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ**
+4. **ਨਿਰਭਰਤਾਵਾਂ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ**
    ```python
-   # ਆਟੋਮੈਟਿਕ ਤੌਰ ਤੇ ਡੇਟਾਬੇਸ ਕਾਲਾਂ, HTTP ਬੇਨਤੀਆਂ ਆਦਿ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
-5. **ਡਿਪਲੌਇਮੈਂਟ ਦੌਰਾਨ ਲਾਈਵ ਮੀਟਰਿਕਸ ਦੀ ਵਰਤੋਂ ਕਰੋ**
+5. **ਤੈਨਾਤੀ ਸਮੇਂ ਲਾਈਵ ਮੈਟ੍ਰਿਕਸ ਦੀ ਵਰਤੋਂ ਕਰੋ**
 
 ### ❌ ਨਾ ਕਰੋ:
 
-1. **ਸੰਵੇਦਨਸ਼ੀਲ ਡਾਟਾ ਲੌਗ ਨਾ ਕਰੋ**
+1. **ਸੰਵੇਦਨਸ਼ੀਲ ਡੇਟਾ ਦਾ ਲੌਗ ਨਾ ਕਰੋ**
    ```python
-   # ❌ ਬੁਰਾ
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ ਚੰਗਾ
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **ਪ੍ਰੋਡਕਸ਼ਨ ਵਿੱਚ 100% ਸੈਂਪਲਿੰਗ ਨਾ ਵਰਤੋਂ**
+2. **ਵਾਲਿਊਮ ਅਤੇ ਨਿਰਾਕਰਣ ਜਰੂਰਤਾਂ ਨੂੰ ਮਾਪੇ ਬਿਨਾਂ ਸੈਂਪਲਿੰਗ ਨਾ ਚੁਣੋ**
    ```python
-   # ❌ ਮਹਿੰਗਾ
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ ਲਾਗਤ-ਫਾਇਦੇਮੰਦ
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **ਡੈਡ ਲੈਟਰ ਕਿਊਜ਼ ਨੂੰ ਨਜ਼ਰਅੰਦਾਜ਼ ਨਾ ਕਰੋ**
+3. **ਡੈੱਡ ਲੈਟਰ ਕਿਊਜ਼ ਨੂੰ ਨਜ਼ਰਅੰਦਾਜ਼ ਨਾ ਕਰੋ**
 
-4. **ਡੈਟਾ ਰਿਟੈਨਸ਼ਨ ਲਿਮਿਟਾਂ ਸੈਟ ਕਰਨਾ ਨਾ ਭੁੱਲੋ**
+4. **ਡੇਟਾ ਰੋਕਥਾਮ ਹੱਦਾਂ ਸੈਟ ਕਰਨਾ ਨਾ ਭੁੱਲੋ**
 
 ---
 
-## ਸਮੱਸਿਆ ਸਮਾਧਾਨ
+## ਸਮੱਸਿਆ ਨਿਪਟਾਰਾ
 
-### ਸਮੱਸਿਆ: ਕੋਈ ਟੈਲੀਮੀਟਰੀ ਨਹੀਂ ਆ ਰਹੀ
+### ਸਮੱਸਿਆ: ਕੋਈ ਟੈਲੀਮੀਟਰੀ ਨਹੀਂ ਦਿਖਾਈ ਦੇ ਰਹੀ
 
-**ਨਿਧਾਨ:**
+**ਨਿਰਾਕਰਨ:**
 ```bash
-# ਚੈੱਕ ਕਰੋ ਕਿ ਕਨੈਕਸ਼ਨ ਸਟਰਿੰਗ ਸੈੱਟ ਕੀਤੀ ਗਈ ਹੈ
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Azure Monitor ਰਾਹੀਂ ਐਪਲੀਕੇਸ਼ਨ ਲੌਗਾਂ ਚੈੱਕ ਕਰੋ
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# ਜਾਂ Container Apps ਲਈ Azure CLI ਵਰਤੋਂ:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **ਹੱਲ:**
 ```bash
-# ਕੰਟੇਨਰ ਐਪ ਵਿੱਚ ਕਨੈਕਸ਼ਨ ਸਟ੍ਰਿੰਗ ਦੀ ਜਾਂਚ ਕਰੋ
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1481,71 +1453,70 @@ az containerapp show \
 
 ---
 
-### ਸਮੱਸਿਆ: ਉੱਚ ਲਾਗਤ
+### ਸਮੱਸਿਆ: ਵੱਧ ਖ਼ਰਚੇ
 
-**ਨਿਧਾਨ:**
+**ਨਿਰਾਕਰਨ:**
 ```bash
-# ਡੇਟਾ ਇੰਜੈਸ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **ਹੱਲ:**
-- ਸੈਂਪਲਿੰਗ ਰੇਟ ਘਟਾਓ
-- ਰਿਟੈਨਸ਼ਨ ਪੀਰੀਅਡ ਘਟਾਓ
--.verbose ਲੌਗਿੰਗ ਹਟਾਓ
+- ਸੈਂਪਲਿੰਗ ਦਰ ਘਟਾਓ
+- ਰੋਕੇ ਰੱਖਣ ਦੀ ਮੁਦਤ ਘਟਾਓ
+- ਵਿਸ਼ਤ ਲੌਗਿੰਗ ਹਟਾਓ
 
 ---
 
-## ਹੋਰ ਜਾਣੋ
+## ਹੋਰ ਸਿੱਖੋ
 
-### ਅਧਿਕਾਰਿਕ ਦਸਤਾਵੇਜ਼
+### ਅਧਿਕਾਰਕ ਦਸਤਾਵੇਜ਼
 - [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+- [Azure Monitor OpenTelemetry setup](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
 - [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
 - [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### ਕੋਰਸ ਵਿੱਚ ਅੱਗੇ ਦੇ ਕਦਮ
-- ← Previous: [ਪ੍ਰੀਫਲਾਈਟ ਚੈੱਕਸ](preflight-checks.md)
-- → Next: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Course Home](../../README.md)
+### ਇਸ ਕੋਰਸ ਵਿੱਚ ਅਗਲੇ ਕਦਮ
+- ← ਪਹਿਲਾਂ: [Preflight Checks](preflight-checks.md)
+- → ਅੱਗੇ: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- 🏠 [ਕੋਰਸ ਮੁੱਖ ਸਫ਼ਾ](../../README.md)
 
 ### ਸੰਬੰਧਿਤ ਉਦਾਹਰਣ
-- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI ਟੈਲੀਮੀਟਰੀ
-- [Microservices Example](../../../../examples/microservices) - ਡਿਸਟ੍ਰੀਬਿਊਟਡ ਟਰੇਸਿੰਗ
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - ਏਆਈ ਟੈਲੀਮੀਟਰੀ
+- [Microservices Example](../../../../examples/microservices) - ਵੰਡਿਆ ਟ੍ਰੇਸਿੰਗ
 
 ---
 
-## ਸਾਰ
+## ਸੰਖੇਪ
 
-**ਤੁਸੀਂ ਸਿੱਖਿਆ:**
-- ✅ AZD ਨਾਲ Automatic Application Insights ਪ੍ਰੋਵਿਜ਼ਨਿੰਗ
-- ✅ ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ (ਇਵੈਂਟਸ, ਮੀਟਰਿਕਸ, ਡਿਪੈਂਡੇਨਸੀਜ਼)
-- ✅ ਮਾਇਕਰੋਸਰਵਿਸਿਜ਼ ਵਿੱਚ ਡਿਸਟ੍ਰੀਬਿਊਟਡ ਟਰੇਸਿੰਗ
-- ✅ ਲਾਈਵ ਮੀਟਰਿਕਸ ਅਤੇ ਰੀਅਲ-ਟਾਈਮ ਮਾਨੀਟਰਿੰਗ
+**ਤੁਸੀਂ ਸਿੱਖਿਆ ਹੈ:**
+- ✅ AZD ਨਾਲ ਸਵੈਚਾਲਿਤ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਸੈਟਅਪ
+- ✅ ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ (ਈਵੈਂਟ, ਮੈਟਰਿਕਸ, ਡੀਪੈਂਡੇਨਸੀਜ਼)
+- ✅ ਮਾਇਕ੍ਰੋਸਰਵਿਸਜ਼ ਵਿਚ ਵੰਡਿਆ ਟ੍ਰੇਸਿੰਗ
+- ✅ ਲਾਈਵ ਮੈਟਰਿਕਸ ਅਤੇ ਰੀਅਲ-ਟਾਈਮ ਮਾਨੀਟਰਨਿੰਗ
 - ✅ ਅਲਰਟ ਅਤੇ ਡੈਸ਼ਬੋਰਡ
-- ✅ AI/LLM ਐਪਲੀਕੇਸ਼ਨ ਮਾਨੀਟਰਿੰਗ
-- ✅ ਲਾਗਤ ਅਨੁਕੂਲਣ ਰਣਨੀਤੀਆਂ
+- ✅ ਏਆਈ/ਐੱਲਐੱਲਐਮ ਐਪਲੀਕੇਸ਼ਨ ਮਾਨੀਟਰਨਿੰਗ
+- ✅ ਖ਼ਰਚਾ ਸਧਾਰਨ ਕਰਨ ਦੀਆਂ ਰਣਨੀਤੀਆਂ
 
-**ਮੁੱਖ ਨਕ্ਸ਼ੇ:**
-1. **AZD ਨਿਗਰਾਨੀ ਸਵੈਚਾਲਿਤ ਤੌਰ 'ਤੇ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ** - ਕੋਈ ਮੈਨੁਅਲ ਸੈਟਅਪ ਨਹੀਂ
-2. **ਸੰਰਚਿਤ ਲਾਗਿੰਗ ਵਰਤੋ** - ਕੁਇਰੀ ਕਰਨਾ ਆਸਾਨ ਬਣਾਉਂਦਾ ਹੈ
-3. **ਕਾਰੋਬਾਰੀ ਘਟਨਾਵਾਂ ਨੂੰ ਟਰੈਕ ਕਰੋ** - ਸਿਰਫ ਤਕਨੀਕੀ ਮੈਟ੍ਰਿਕਸ ਹੀ ਨਹੀਂ
-4. **AI ਖਰਚਾਂ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ** - ਟੋਕਨ ਅਤੇ ਖਰਚਾਂ ਨੂੰ ਟਰੈਕ ਕਰੋ
-5. **ਅਲਰਟ ਸੈਟ ਕਰੋ** - ਪ੍ਰਤੀਕ੍ਰਿਆਕਾਰੀ ਨਾ ਬਣੋ, ਪਹਿਲਾਂ ਕਦਮ ਚੁੱਕੋ
-6. **ਖਰਚਾਂ ਨੂੰ ਅਪਟੀਮਾਈਜ਼ ਕਰੋ** - ਸੈਂਪਲਿੰਗ ਅਤੇ ਰਿਟੇਨਸ਼ਨ ਸੀਮਾਵਾਂ ਵਰਤੋ
+**ਮੁੱਖ ਨਤੀਜੇ:**
+1. **ਮਾਨੀਟਰਨਿੰਗ ਨੂੰ ਖੁਲਾਸਾ ਕਰਨਾ** - AZD ਤੁਹਾਡੇ ਟੈਂਪਲੇਟ ਤੈਨਾਤ ਕਰਦਾ ਹੈ; SDK ਇੰਸਟਰੂਮੈਂਟੇਸ਼ਨ ਟੈਲੀਮੀਟਰੀ ਭੇਜਦਾ ਹੈ
+2. **ਸੰਰਚਿਤ ਲੌਗਿੰਗ ਵਰਤੋਂ** - ਪੁੱਛਗਿੱਛ ਨੂੰ ਆਸਾਨ ਬਣਾਉਂਦਾ ਹੈ
+3. **ਵਪਾਰਕ ਈਵੈਂਟਸ ਦਾ ਪਤਾ ਲਗਾਓ** - ਸਿਰਫ ਤਕਨੀਕੀ ਮੈਟਰਿਕਸ ਨਹੀਂ
+4. **ਏਆਈ ਖ਼ਰਚੇ ਦੀ ਮਾਨੀਟਰਨਿੰਗ ਕਰੋ** - ਟੋਕਨ ਅਤੇ ਖ਼ਰਚੇ ਦਾ ਪਤਾ ਲਗਾਓ
+5. **ਅਲਰਟ ਸੈਟ ਕਰੋ** - ਪ੍ਰਤੀਕਿਰਿਆਸ਼ੀਲ ਨਹੀਂ, ਪਹਿਲਾਂ ਤੋਂ ਤਿਆਰ ਰਹੋ
+6. **ਖ਼ਰਚਾ ਸਧਾਰੋ** - ਸੈਂਪਲਿੰਗ ਅਤੇ ਰੋਕਥਾਮ ਹੱਦਾਂ ਵਰਤੋਂ
 
 **ਅਗਲੇ ਕਦਮ:**
-1. ਵਿਆਵਹਾਰਿਕ ਅਭਿਆਸ ਪੂਰੇ ਕਰੋ
-2. ਆਪਣੇ AZD ਪ੍ਰੋਜੈਕਟਾਂ ਵਿੱਚ Application Insights ਸ਼ਾਮਲ ਕਰੋ
+1. ਅਭਿਆਸ ਕਾਰਜ ਪੂਰੇ ਕਰੋ
+2. ਆਪਣੇ AZD ਪ੍ਰੋਜੈਕਟਾਂ ਵਿੱਚ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਸ਼ਾਮਲ ਕਰੋ
 3. ਆਪਣੀ ਟੀਮ ਲਈ ਕਸਟਮ ਡੈਸ਼ਬੋਰਡ ਬਣਾਓ
-4. ਸਿੱਖੋ [ਡਿਪਲੋਇਮੈਂਟ ਗਾਈਡ](../chapter-04-infrastructure/deployment-guide.md)
+4. ਸਿੱਖੋ [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ਅਸਵੀਕਾਰਨ**:
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਪਰ ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵਚਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਣਸ਼ੁੱਧੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਹੀ ਪ੍ਰਮਾਣਿਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਣ ਜਾਣਕਾਰੀ ਲਈ ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਿਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫ਼ਹਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**ਅਸਵੀਕਾਰੋਪਣ**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾਵਾਂ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਮੱਤਿਆਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

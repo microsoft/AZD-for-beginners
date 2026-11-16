@@ -1,238 +1,244 @@
-# Κατάλογος Εντολών - Βασικές Εντολές AZD
+# Φύλλο Απάτης Εντολών - Βασικές Εντολές AZD
 
-**Σύντομη Αναφορά για Όλα τα Κεφάλαια**
+**Γρήγορη Αναφορά για Όλα τα Κεφάλαια**
 - **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../README.md)
-- **📖 Γρήγορη Εκκίνηση**: [Κεφάλαιο 1: Βάσεις & Γρήγορη Εκκίνηση](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Εντολές AI**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στο AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Για Προχωρημένους**: [Κεφάλαιο 4: Υποδομή ως Κώδικας](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **📖 Γρήγορη Εκκίνηση**: [Κεφάλαιο 1: Θεμέλια & Γρήγορη Εκκίνηση](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Εντολές Τεχνητής Νοημοσύνης**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα στην ΤΝ](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Προχωρημένα**: [Κεφάλαιο 4: Υποδομή ως Κώδικας](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Εισαγωγή
 
-Αυτός ο ολοκληρωμένος κατάλογος εντολών παρέχει γρήγορη αναφορά για τις πιο συχνά χρησιμοποιούμενες εντολές του Azure Developer CLI, οργανωμένες ανά κατηγορία με πρακτικά παραδείγματα. Ιδανικό για γρήγορες αναζητήσεις κατά την ανάπτυξη, την αντιμετώπιση προβλημάτων και τις καθημερινές εργασίες με έργα azd.
+Αυτό το ολοκληρωμένο φύλλο απάτης παρέχει γρήγορη αναφορά για τις πιο συχνά χρησιμοποιούμενες εντολές Azure Developer CLI, οργανωμένες κατά κατηγορία με πρακτικά παραδείγματα. Ιδανικό για γρήγορη αναζήτηση κατά την ανάπτυξη, την αντιμετώπιση προβλημάτων και τις καθημερινές λειτουργίες με έργα azd.
 
 ## Στόχοι Μάθησης
 
-Χρησιμοποιώντας αυτόν τον οδηγό, θα:
-- Έχετε άμεση πρόσβαση σε βασικές εντολές και σύνταξη του Azure Developer CLI
-- Κατανοείτε την οργάνωση εντολών κατά λειτουργικές κατηγορίες και σενάρια χρήσης
-- Ανατρέχετε σε πρακτικά παραδείγματα για κοινά σενάρια ανάπτυξης και διάθεσης
-- Έχετε στη διάθεσή σας εντολές αντιμετώπισης προβλημάτων για γρήγορη επίλυση ζητημάτων
-- Εντοπίζετε επιλογές προχωρημένης διαμόρφωσης και προσαρμογής με αποδοτικό τρόπο
-- Βρίσκετε εντολές διαχείρισης περιβάλλοντος και ροής εργασίας για πολλαπλά περιβάλλοντα
+Χρησιμοποιώντας αυτό το φύλλο απάτης, θα:
+- Έχετε άμεση πρόσβαση σε βασικές εντολές και σύνταξη Azure Developer CLI
+- Κατανοείτε την οργάνωση εντολών κατά λειτουργικές κατηγορίες και περιπτώσεις χρήσης
+- Ανατρέχετε σε πρακτικά παραδείγματα για κοινά σενάρια ανάπτυξης και παράδοσης
+- Έχετε πρόσβαση σε εντολές αντιμετώπισης προβλημάτων για γρήγορη επίλυση ζητημάτων
+- Βρίσκετε αποδοτικά προχωρημένες επιλογές διαμόρφωσης και προσαρμογής
+- Εντοπίζετε εντολές διαχείρισης περιβάλλοντος και ροές εργασίας πολλαπλών περιβαλλόντων
 
-## Μαθησιακά Αποτελέσματα
+## Αποτελέσματα Μάθησης
 
-Με τακτική αναφορά σε αυτόν τον οδηγό, θα μπορείτε να:
-- Εκτελείτε εντολές azd με αυτοπεποίθηση χωρίς να συμβουλεύεστε την πλήρη τεκμηρίωση
-- Επιλύετε γρήγορα κοινά προβλήματα χρησιμοποιώντας τις κατάλληλες διαγνωστικές εντολές
-- Διαχειρίζεστε αποτελεσματικά πολλαπλά περιβάλλοντα και σενάρια ανάπτυξης
-- Εφαρμόζετε προχωρημένα χαρακτηριστικά και επιλογές διαμόρφωσης του azd όποτε χρειάζεται
-- Αντιμετωπίζετε ζητήματα ανάπτυξης χρησιμοποιώντας συστηματικές ακολουθίες εντολών
-- Βελτιστοποιείτε ροές εργασίας μέσω της αποτελεσματικής χρήσης συντομεύσεων και επιλογών του azd
+Με τακτική αναφορά σε αυτό το φύλλο απάτης, θα μπορείτε:
+- Να εκτελείτε εντολές azd με σιγουριά χωρίς να ανατρέχετε στην πλήρη τεκμηρίωση
+- Να επιλύετε γρήγορα κοινά προβλήματα χρησιμοποιώντας κατάλληλες διαγνωστικές εντολές
+- Να διαχειρίζεστε αποδοτικά πολλαπλά περιβάλλοντα και σενάρια ανάπτυξης
+- Να εφαρμόζετε προχωρημένες λειτουργίες και επιλογές διαμόρφωσης azd ανάλογα με τις ανάγκες
+- Να αντιμετωπίζετε προβλήματα ανάπτυξης χρησιμοποιώντας συστηματικές αλληλουχίες εντολών
+- Να βελτιστοποιείτε ροές εργασίας μέσω αποτελεσματικής χρήσης συντομεύσεων και επιλογών azd
 
-## Εντολές Ξεκινήματος
+## Εντολές Έναρξης
 
 ### Πιστοποίηση
 ```bash
-# Σύνδεση στο Azure μέσω AZD
+# Login to Azure via AZD
 azd auth login
 
-# Σύνδεση στο Azure CLI (το AZD το χρησιμοποιεί εσωτερικά)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# Έλεγχος τρέχοντος λογαριασμού
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# Ορισμός προεπιλεγμένης συνδρομής
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# Αποσύνδεση από το AZD
+# Logout from AZD
 azd auth logout
 
-# Αποσύνδεση από το Azure CLI
+# Logout from Azure CLI
 az logout
 ```
 
 ### Αρχικοποίηση Έργου
 ```bash
-# Περιηγηθείτε στα διαθέσιμα πρότυπα
+# Browse available templates
 azd template list
 
-# Αρχικοποίηση από πρότυπο
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# Αρχικοποίηση στον τρέχοντα κατάλογο
+# Initialize in current directory
 azd init .
 
-# Αρχικοποίηση με προσαρμοσμένο όνομα
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
-## Βασικές Εντολές Ανάπτυξης
+## Κύριες Εντολές Ανάπτυξης
 
-### Ολοκληρωμένη Ροή Ανάπτυξης
+### Πλήρης Ροή Ανάπτυξης
 ```bash
-# Ανάπτυξη όλων (παροχή πόρων + ανάπτυξη)
+# Deploy everything (provision + deploy)
 azd up
 
-# Ανάπτυξη με απενεργοποιημένες τις προτροπές επιβεβαίωσης
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# Ανάπτυξη σε συγκεκριμένο περιβάλλον
+# Deploy to specific environment
 azd up --environment production
 
-# Ανάπτυξη με προσαρμοσμένες παραμέτρους
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
 ### Μόνο Υποδομή
 ```bash
-# Παροχή πόρων του Azure
+# Provision Azure resources
 azd provision
 
-# 🧪 Προεπισκόπηση αλλαγών στην υποδομή
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# Εμφανίζει μια προσομοιωμένη προεπισκόπηση των πόρων που θα δημιουργηθούν/τροποποιηθούν/διαγραφούν
-# Παρόμοιο με το 'terraform plan' ή 'bicep what-if' - ασφαλές για εκτέλεση, δεν εφαρμόζονται αλλαγές
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
 ### Μόνο Εφαρμογή
 ```bash
-# Ανάπτυξη κώδικα εφαρμογής
+# Deploy application code
 azd deploy
 
-# Ανάπτυξη συγκεκριμένης υπηρεσίας
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Ανάπτυξη όλων των υπηρεσιών
+# Deploy all services
 azd deploy --all
 ```
 
-### Κατασκευή και Πακετάρισμα
+### Κατασκευή και Συσκευασία
 ```bash
-# Επαναφορά (λήψη) των εξαρτήσεων της εφαρμογής
+# Restore (download) application dependencies
 azd restore
 
-# Επαναφορά συγκεκριμένης υπηρεσίας
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# Δημιουργία ενός αναπτύξιμου αντικειμένου χωρίς ανάπτυξη
+# Build a deployable artifact without deploying
 azd package
 
-# Δημιουργία συγκεκριμένης υπηρεσίας
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** κατεβάζει τις εξαρτήσεις της εφαρμογής σας (npm, pip, NuGet, Maven, κ.λπ.). Εκτελείται αυτόματα κατά τη διάρκεια του `azd package` και του `azd deploy`, οπότε σπάνια το καλείτε απευθείας—τρέξτε το χειροκίνητα για να προ-κατεβάσετε εξαρτήσεις (π.χ. για να ζεστάνετε την cache ενός CI ή να εργαστείτε εκτός σύνδεσης στη συνέχεια).
+> **`azd restore`** κατεβάζει τις εξαρτήσεις της εφαρμογής σας (npm, pip, NuGet, Maven, κ.ά.). Εκτελείται αυτόματα κατά τη `azd package` και `azd deploy`, οπότε σπάνια την καλείτε απευθείας — εκτελέστε την χειροκίνητα για να προ-φορτώσετε τις εξαρτήσεις (για παράδειγμα, για να ζεστάνετε μια cache CI ή να εργαστείτε εκτός σύνδεσης μετά).
 
-> **`azd package`** δημιουργεί το αναπτύξιμο αντικείμενο (εικόνα container ή zip) **χωρίς** να το στείλει στο Azure. Χρησιμοποιήστε το μόνο του για να επαληθεύσετε ότι η κατασκευή πετυχαίνει, να εξετάσετε την έξοδο ή να παράγετε ένα αντικείμενο που μια ξεχωριστή διαδικασία θα αναπτύξει αργότερα. Το `azd deploy` πακετάρει αυτόματα, οπότε χρειάζεστε `azd package` μόνο όταν θέλετε το αντικείμενο χωρίς την ανάπτυξη.
+> **`azd package`** προετοιμάζει ένα αναπτυσσόμενο αρχείο χωρίς να προωθεί την υπηρεσία εφαρμογής. Η συμπεριφορά εξαρτάται από τη γλώσσα και τον κεντρικό υπολογιστή: η συσκευασία container μπορεί να χρησιμοποιεί απομακρυσμένες κατασκευές Azure και να δημοσιεύει εικόνες σε ρετζίστρι, οπότε δεν είναι απαραίτητα εκτός σύνδεσης ή χωρίς εγγραφές στο Azure. Η `azd deploy` μπορεί να συσκευάζει αυτόματα· χρησιμοποιήστε ξεχωριστό βήμα συσκευασίας όταν χρειάζεστε αρχείο ή έλεγχο κατασκευής.
 
 
 ## 🌍 Διαχείριση Περιβάλλοντος
 
-### Ενέργειες Περιβάλλοντος
+### Λειτουργίες Περιβάλλοντος
 ```bash
-# Εμφάνιση όλων των περιβαλλόντων
+# List all environments
 azd env list
 
-# Δημιουργία νέου περιβάλλοντος
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# Επιλογή περιβάλλοντος
+# Select environment
 azd env select production
 
-# Εμφάνιση διαθέσιμων περιβαλλόντων
+# Show available environments
 azd env list
 
-# Ανανέωση κατάστασης περιβάλλοντος
+# Refresh environment state
 azd env refresh
 ```
 
 ### Μεταβλητές Περιβάλλοντος
 ```bash
-# Ορισμός μεταβλητής περιβάλλοντος
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# Ανάκτηση μεταβλητής περιβάλλοντος
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# Λίστα όλων των μεταβλητών περιβάλλοντος
+# List all environment variables
 azd env get-values
 
-# Κατάργηση μεταβλητής περιβάλλοντος
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
+
+Τα αρχεία περιβάλλοντος είναι απλό κείμενο. Μην θεωρείτε την `azd env set` αποθήκη μυστικών· χρησιμοποιήστε αναφορές Key Vault ή διαχειριζόμενη ταυτότητα όπου απαιτείται.
 
 ## ⚙️ Εντολές Διαμόρφωσης
 
 ### Παγκόσμια Διαμόρφωση
 ```bash
-# Εμφάνιση όλων των ρυθμίσεων
+# List all configuration
 azd config show
 
-# Ορισμός παγκόσμιων προεπιλογών
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Αφαίρεση ρύθμισης
+# Remove configuration
 azd config unset defaults.location
 
-# Επαναφορά όλων των ρυθμίσεων
+# Reset all configuration
 azd config reset
 ```
 
 ### Διαμόρφωση Έργου
 ```bash
-# Επικύρωση azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# Εμφάνιση πληροφοριών έργου
+# Show project information
 azd show
 
-# Λήψη σημείων τερματισμού υπηρεσίας
+# Get service endpoints
 azd show --output json
 ```
 
-## 📊 Παρακολούθηση και Διάγνωση
+## 📊 Παρακολούθηση και Διαγνωστικά
 
-### Πίνακας Παρακολούθησης
+### Πίνακας Ελέγχου Παρακολούθησης
 ```bash
-# Άνοιγμα του πίνακα ελέγχου παρακολούθησης της πύλης Azure
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# Άνοιγμα των ζωντανών μετρικών του Application Insights
+# Open Application Insights live metrics
 azd monitor --live
 
-# Άνοιγμα της καρτέλας καταγραφών του Application Insights
+# Open Application Insights logs blade
 azd monitor --logs
 
-# Άνοιγμα της επισκόπησης του Application Insights
+# Open Application Insights overview
 azd monitor --overview
 ```
 
-### Προβολή Καταγραφών Container
+Το Application Insights πρέπει να διαμορφωθεί από το πρότυπο. Η επιλογή Live Metrics της AZD δεν υποστηρίζεται προς το παρόν για εφαρμογές Python· χρησιμοποιήστε την επισκόπηση, τα αρχεία καταγραφής ή την τεκμηριωμένη ροή εργασίας ιχνηλάτησης του δείγματος αντ’ αυτού.
+
+### Προβολή Αρχείων Καταγραφής Container
 ```bash
-# Προβολή αρχείων καταγραφής μέσω Azure CLI (για Container Apps)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Παρακολούθηση αρχείων καταγραφής σε πραγματικό χρόνο
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Προβολή αρχείων καταγραφής από το Azure Portal
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
 ### Ερωτήματα Log Analytics
 ```bash
-# Πρόσβαση στο Log Analytics μέσω της πύλης Azure
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# Ερωτήματα στα αρχεία καταγραφής χρησιμοποιώντας το Azure CLI
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -240,30 +246,30 @@ az monitor log-analytics query \
 
 ## 🛠️ Εντολές Συντήρησης
 
-### Καθαρισμός
+### Εκκαθάριση
 ```bash
-# Κατάργηση όλων των πόρων του Azure
+# Remove all Azure resources
 azd down
 
-# Εξαναγκαστική διαγραφή χωρίς επιβεβαίωση
+# Force delete without confirmation
 azd down --force
 
-# Οριστική διαγραφή των προσωρινά διαγραμμένων πόρων
+# Purge soft-deleted resources
 azd down --purge
 
-# Πλήρης καθαρισμός
+# Complete cleanup
 azd down --force --purge
 ```
 
 ### Ενημερώσεις
 ```bash
-# Έλεγχος για ενημερώσεις azd
+# Check for azd updates
 azd version
 
-# Λήψη τρέχουσας έκδοσης
+# Get current version
 azd version
 
-# Προβολή τρέχουσας διαμόρφωσης
+# View current configuration
 azd config show
 ```
 
@@ -271,177 +277,199 @@ azd config show
 
 ### Pipeline και CI/CD
 ```bash
-# Ρύθμιση των GitHub Actions
+# Configure GitHub Actions
 azd pipeline config
 
-# Ρύθμιση του Azure DevOps
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# Εμφάνιση της διαμόρφωσης του pipeline
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
 ### Διαχείριση Υποδομής
 ```bash
-# Δημιουργία προτύπων υποδομής
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 Προεπισκόπηση και Σχεδιασμός Υποδομής
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# Προσομοιώνει την παροχή υποδομής χωρίς πραγματική ανάπτυξη
-# Αναλύει πρότυπα Bicep/Terraform και εμφανίζει:
-# - Πόροι προς προσθήκη (πράσινο +)
-# - Πόροι προς τροποποίηση (κίτρινο ~)
-# - Πόροι προς διαγραφή (κόκκινο -)
-# Ασφαλές για εκτέλεση - δεν γίνονται πραγματικές αλλαγές στο περιβάλλον Azure
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# Συνθέτει υποδομή από azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ### Πληροφορίες Έργου
 ```bash
-# Εμφάνιση κατάστασης έργου και σημείων τερματισμού
+# Show project status and endpoints
 azd show
 
-# Εμφάνιση λεπτομερών πληροφοριών έργου σε μορφή JSON
+# Show detailed project info as JSON
 azd show --output json
 
-# Λήψη σημείων τερματισμού υπηρεσίας
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
-## 🤖 Εντολές AI & Επεκτάσεων
+## 🤖 Εντολές ΤΝ & Επεκτάσεις
 
 ### Επεκτάσεις AZD
+
+Αναφορά CLI ΤΝ ελέγχθηκε 2026-11-04: `azd 1.37.2`, agents `1.0.0-beta.23`, αξιολογήσεις `1.0.0-beta.2`. Χρησιμοποιήστε `azd >= 1.37.0` για την ενιαία ροή εργασίας· αναβαθμίστε τον πυρήνα CLI πριν από μη συμβατές επεκτάσεις.
+
 ```bash
-# Καταγράψτε όλες τις διαθέσιμες επεκτάσεις (συμπεριλαμβανομένης της Τεχνητής Νοημοσύνης)
+# List all available extensions (including AI)
 azd extension list
 
-# Εγκαταστήστε την επέκταση Foundry Agents
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Εγκαταστήστε την επέκταση Agent Skills (προεπισκόπηση)
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the agent skills extension (preview)
 azd extension install azure.ai.skills
 
-# Εγκαταστήστε την επέκταση Foundry Connections (προεπισκόπηση)
+# Install the Foundry connections extension (preview)
 azd extension install azure.ai.connections
 
-# Εγκαταστήστε την επέκταση fine-tuning
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Εγκαταστήστε την επέκταση Custom Models
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Αναβαθμίστε όλες τις εγκατεστημένες επεκτάσεις
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
-### Εντολές Πράκτορα AI
+### Εντολές Agent ΤΝ
 ```bash
-# Αρχικοποιήστε ένα έργο agent από ένα manifest
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# Στοχεύστε ένα συγκεκριμένο έργο Foundry
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# Καθορίστε τον κατάλογο πηγαίου κώδικα του agent
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# Επιλέξτε στόχο φιλοξενίας
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# Δοκιμάστε έναν αναπτυγμένο agent (εκτυπώνει καθυστέρηση + χρόνο έως το πρώτο byte)
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# Εμφανίστε τη διαμόρφωση του ζωντανού endpoint
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# Δημιουργήστε ένα σύνολο δεδομένων αξιολόγησης, στη συνέχεια βελτιστοποιήστε τον agent
-azd ai agent eval generate
-azd ai agent optimize
-
-# Κατεβάστε τον αναπτυγμένο πηγαίο κώδικα ενός φιλοξενούμενου agent που είναι βασισμένος σε κώδικα
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# Διαγράψτε έναν φιλοξενούμενο agent και όλες τις εκδόσεις του (--force τερματίζει τις ενεργές συνεδρίες)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
-### Διακομιστής MCP (Alpha)
+`--template`/`-t` αντικαθιστά την αποσυρμένη ορθογραφία `--manifest`/`-m`· τα παλιά manifests χρειάζονται μετανάστευση. Δεν υπάρχει τωρινή επιλογή agent-init `--host containerapp`. Οι managed-harness, voice, και μακροχρόνιες προεπισκοπήσεις απαιτούν ανεξάρτητα αποδοχή στο shell/περιβάλλον CI· δείτε την [αναφορά AI CLI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+### Αξιολογήσεις και Βελτιστοποίηση ΤΝ
 ```bash
-# Εκκινήστε τον διακομιστή MCP για το έργο σας
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+Agents beta.22 αντικατέστησε τις παλιές εντολές αξιολόγησης με `azd ai eval` από `azure.ai.evaluations`. Η νέα διαμόρφωση αξιολόγησης χρησιμοποιεί κλειδιά camelCase. Η βελτιστοποίηση `--config` απαιτεί ανεξάρτητο αίτημα API βελτιστοποίησης, **όχι** παλιό `eval.yaml` ή νέο `azure.eval.yaml`· χρησιμοποιήστε `--eval`/`--eval-config` για επανάχρηση αξιολόγησης. Δείτε [ρύθμιση αξιολόγησης](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) και [μετανάστευση βελτιστοποίησης](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### MCP Server (Άλφα)
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# Διαχειριστείτε τη συναίνεση εργαλείου για τις λειτουργίες MCP
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
 ### Δημιουργία Υποδομής
 ```bash
-# Δημιουργήστε αρχεία IaC από τον ορισμό του έργου σας
+# Generate IaC files from your project definition
 azd infra generate
 
-# Συνθέστε την υποδομή από το azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
 
 ## 🎯 Γρήγορες Ροές Εργασίας
 
-### Ροή Ανάπτυξης
+### Ροή Εργασίας Ανάπτυξης
 ```bash
-# Ξεκινήστε νέο έργο
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# Αναπτύξτε στο περιβάλλον ανάπτυξης
+# Deploy to development
 azd env new dev
 azd up
 
-# Κάντε αλλαγές και αναπτύξτε ξανά
+# Make changes and redeploy
 azd deploy
 
-# Ανοίξτε τον πίνακα ελέγχου παρακολούθησης
+# Open monitoring dashboard
 azd monitor --live
 ```
 
-### Ροή για Πολλαπλά Περιβάλλοντα
+### Ροή Εργασίας Πολλαπλών Περιβαλλόντων
 ```bash
-# Ρύθμιση περιβαλλόντων
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Ανάπτυξη στο περιβάλλον ανάπτυξης
+# Deploy to dev
 azd env select dev
 azd up
 
-# Δοκιμή και προώθηση στο περιβάλλον staging
+# Test and promote to staging
 azd env select staging
 azd up
 
-# Ανάπτυξη στο περιβάλλον παραγωγής
+# Deploy to production
 azd env select production
 azd up
 ```
 
-### Ροή Αντιμετώπισης Προβλημάτων
+### Ροή Εργασίας Αντιμετώπισης Προβλημάτων
 ```bash
-# Ενεργοποίηση λειτουργίας εντοπισμού σφαλμάτων
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# Έλεγχος κατάστασης ανάπτυξης
-azd show
-
-# Επικύρωση διαμόρφωσης
+# Validate configuration
 azd config show
 
-# Άνοιγμα πίνακα ελέγχου παρακολούθησης για τα αρχεία καταγραφής
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# Έλεγχος κατάστασης πόρων
+# Check resource status
 azd show --output json
 ```
 
@@ -449,127 +477,121 @@ azd show --output json
 
 ### Πληροφορίες Αποσφαλμάτωσης
 ```bash
-# Ενεργοποίηση εξόδου εντοπισμού σφαλμάτων
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# Απενεργοποίηση τηλεμετρίας για καθαρότερη έξοδο
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# Έλεγχος τρέχουσας διαμόρφωσης
+# Check current configuration
 azd config show
 
-# Έλεγχος κατάστασης αυθεντικοποίησης
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
-### Αποσφαλμάτωση Προτύπων
+### Αποσφαλμάτωση Προτύπου
 ```bash
-# Εμφάνιση διαθέσιμων προτύπων με λεπτομέρειες
+# List available templates with details
 azd template list --output json
 
-# Εμφάνιση πληροφοριών προτύπου
+# Show template information
 azd template show <template-name>
 
-# Επικύρωση προτύπου πριν από την αρχικοποίηση
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
 ## 📁 Εντολές Αρχείων και Καταλόγων
 
 ### Δομή Έργου
 ```bash
-# Εμφάνιση τρέχουσας δομής καταλόγου
+# Show current directory structure
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Μεταβείτε στη ρίζα του έργου azd
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# Εμφάνιση καταλόγου διαμόρφωσης του azd
-echo $AZD_CONFIG_DIR  # Συνήθως ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
 ## 🎨 Μορφοποίηση Εξόδου
 
 ### Έξοδος JSON
 ```bash
-# Λάβετε έξοδο JSON για χρήση σε σενάρια
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# Αναλύστε με το jq
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### Έξοδος Πίνακα
 ```bash
-# Μορφοποίηση ως πίνακας
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# Προβολή αναπτυγμένων υπηρεσιών
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Συνήθεις Συνδυασμοί Εντολών
+## 🔧 Κοινά Συνδυασμοί Εντολών
 
 ### Σενάριο Έλεγχου Υγείας
 ```bash
 #!/bin/bash
-# Γρήγορος έλεγχος υγείας
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
 ```
 
-### Επαλήθευση Ανάπτυξης
+### Επικύρωση Ανάπτυξης
 ```bash
 #!/bin/bash
-# Επαλήθευση πριν από την ανάπτυξη
+# Pre-deployment validation
 azd show
-azd provision --preview  # Προεπισκόπηση αλλαγών πριν από την ανάπτυξη
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
 ### Σύγκριση Περιβάλλοντος
 ```bash
 #!/bin/bash
-# Σύγκριση περιβαλλόντων
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
 ### Σενάριο Εκκαθάρισης Πόρων
 ```bash
 #!/bin/bash
-# Καθαρίστε τα παλιά περιβάλλοντα
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
 ## 📝 Μεταβλητές Περιβάλλοντος
 
-### Συνήθεις Μεταβλητές Περιβάλλοντος
+### Κοινές Μεταβλητές Περιβάλλοντος
 ```bash
-# Διαμόρφωση Azure
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# Διαμόρφωση AZD
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# Διαμόρφωση εφαρμογής
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -578,57 +600,56 @@ export LOG_LEVEL="info"
 
 ### Γρήγορες Διορθώσεις
 ```bash
-# Επαναφορά αυθεντικοποίησης
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# Αναγκαστική ανανέωση περιβάλλοντος
+# Force refresh environment
 azd env refresh
 
-# Επαναανάπτυξη όλων των υπηρεσιών
+# Redeploy all services
 azd deploy
 
-# Έλεγχος κατάστασης ανάπτυξης
+# Check deployment status
 azd show --output json
 ```
 
-### Εντολές Αποκατάστασης
+### Εντολές Ανάκτησης
 ```bash
-# Ανάκτηση από αποτυχημένη ανάπτυξη - καθαρισμός και επανανάπτυξη
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# Μόνο επαναπαροχή της υποδομής
+# Reprovision infrastructure only
 azd provision
 
-# Μόνο επανανάπτυξη της εφαρμογής
+# Redeploy application only
 azd deploy
 ```
 
-## 💡 Συμβουλές Επαγγελματιών
+## 💡 Επαγγελματικές Συμβουλές
 
-### Συντομεύσεις (aliases) για Γρηγορότερη Ροή Εργασίας
+### Συντομεύσεις για Ταχύτερη Ροή Εργασίας
 ```bash
-# Προσθέστε το στο .bashrc ή .zshrc σας
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Συντομεύσεις Συναρτήσεων
+### Συντομεύσεις Λειτουργιών
 ```bash
-# Γρήγορη εναλλαγή περιβαλλόντων
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# Γρήγορη ανάπτυξη με παρακολούθηση
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# Κατάσταση περιβάλλοντος
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -641,42 +662,42 @@ azd-status() {
 
 ### Λήψη Βοήθειας
 ```bash
-# Γενική βοήθεια
+# General help
 azd --help
 azd help
 
-# Βοήθεια για συγκεκριμένη εντολή
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# Εμφάνιση πληροφοριών έκδοσης και κατασκευής
+# Show version and build info
 azd version
 azd version --output json
 ```
 
 ### Σύνδεσμοι Τεκμηρίωσης
 ```bash
-# Άνοιγμα τεκμηρίωσης στο πρόγραμμα περιήγησης
+# Open documentation in browser
 azd docs
 
-# Εμφάνιση τεκμηρίωσης προτύπου
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Συμβουλή**: Αποθηκεύστε σε σελιδοδείκτη αυτόν τον κατάλογο εντολών και χρησιμοποιήστε `Ctrl+F` για να βρείτε γρήγορα τις εντολές που χρειάζεστε!
+**Συμβουλή**: Σελιδοδείκτης αυτό το φύλλο απάτης και χρησιμοποιήστε `Ctrl+F` για να βρείτε γρήγορα τις εντολές που χρειάζεστε!
 
 ---
 
 **Πλοήγηση**
-- **Προηγούμενο Μάθημα**: [Έλεγχοι Προ-ανάπτυξης](../docs/pre-deployment/preflight-checks.md)
+- **Προηγούμενο Μάθημα**: [Προέλεγχοι](../docs/chapter-06-pre-deployment/preflight-checks.md)
 - **Επόμενο Μάθημα**: [Γλωσσάριο](glossary.md)
 
 ---
 
-> **💡 Θέλετε βοήθεια με εντολές Azure στο επεξεργαστή σας;** Εγκαταστήστε [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) με `npx skills add microsoft/github-copilot-for-azure` — 37 δεξιότητες για AI, Foundry, ανάπτυξη, διαγνωστικά και άλλα.
+> **💡 Θέλετε βοήθεια εντολών Azure στον επεξεργαστή σας;** Εγκαταστήστε τα [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) με `npx skills add microsoft/github-copilot-for-azure` — 37 δεξιότητες για ΤΝ, Foundry, ανάπτυξη, διαγνωστικά, και άλλα.
 
 ---
 

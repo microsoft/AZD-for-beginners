@@ -1,22 +1,22 @@
-# Kabanata 3: Konfigurasyon at Pagpapatunay
+# Kabanata 3: Konfigurasyon at Pagpapatotoo
 
-**📚 Kurso**: [AZD Para sa Mga Baguhan](../../README.md) | **⏱️ Tagal**: 45-60 minuto | **⭐ Antas ng Kahirapan**: Intermediate
+**📚 Kurso**: [AZD Para sa mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 90-150 minuto kasama na ang pagsasanay sa integrasyon | **⭐ Antas ng Kahirapan**: Intermediate
 
 ---
 
 ## Pangkalahatang-ideya
 
-Tinatalakay ng kabanatang ito ang konfigurasyon ng kapaligiran, mga pattern ng pagpapatunay, at mga pinakamahusay na kasanayan sa seguridad para sa mga deployment ng Azure Developer CLI.
+Sinasaklaw ng kabanatang ito ang konfigurasyon ng kapaligiran, mga pattern ng pagpapatotoo, at mga pinakamahusay na gawi sa seguridad para sa mga deployment ng Azure Developer CLI.
 
-> Napatunayan gamit ang `azd 1.27.1` noong Hulyo 2026.
+> Target ng pagsusuri sa utos at konfigurasyon: `azd 1.37.2` (Nobyembre 2026). Hindi isinagawa ang live na pag-provision ng Azure sa panahon ng pagsusuri.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng kabanatang ito, matututuhan mo:
-- Mabisang makontrol ang AZD configuration hierarchy
-- Pamahalaan ang maramihang mga kapaligiran (dev, staging, prod)
-- Magpatupad ng ligtas na pagpapatunay gamit ang mga managed identities
-- I-configure ang mga setting na partikular sa kapaligiran
+Sa pagtatapos ng kabanatang ito, iyong:
+- Masusugan ang antas ng konfigurasyon ng AZD
+- Pamahalaan ang maraming kapaligiran (dev, staging, prod)
+- Ipatupad ang ligtas na pagpapatotoo gamit ang managed identities
+- I-configure ang mga settings na partikular sa kapaligiran
 
 ---
 
@@ -25,73 +25,73 @@ Sa pagtatapos ng kabanatang ito, matututuhan mo:
 | # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
 | 1 | [Gabay sa Konfigurasyon](configuration.md) | Pagsasaayos at pamamahala ng kapaligiran | 30 min |
-| 2 | [Pagpapatunay at Seguridad](authsecurity.md) | Managed identity at mga pattern ng RBAC | 30 min |
+| 2 | [Pagpapatotoo at Seguridad](authsecurity.md) | Managed identity at mga pattern ng RBAC | 30 min |
 
 ---
 
 ## 🚀 Mabilisang Pagsisimula
 
+Patakbuhin mula sa root ng **isang naunang na-initialized na azd application**, hindi mula sa repository ng kurso. Gumamit ng hindi pa nagagamit na mga pangalan ng kapaligiran kung meron nang umiiral.
+
 ```bash
-# Gumawa ng maramihang mga kapaligiran
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Lumipat ng mga kapaligiran
+# Switch environments
 azd env select prod
 
-# Itakda ang mga variable ng kapaligiran
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Tingnan ang konfigurasyon
+# View configuration
 azd env get-values
 ```
 
----
-
-## 🔧 Hierarchy ng Konfigurasyon
-
-Ipinapatupad ng AZD ang mga setting sa ganitong pagkakasunod (ang huli ay pumapalit sa nauna):
-
-1. **Mga default na halaga** (nakapaloob sa mga template)
-2. **azure.yaml** (konfigurasyon ng proyekto)
-3. **Mga environment variable** (`azd env set`)
-4. **Mga command-line flags** (`--location eastus`)
+Ang `SKU_NAME` ay halimbawa lamang: ito ay nakakaapekto sa imprastraktura lamang kung ito ay tahasang kinokonsumo ng iyong template. Ang mga karaniwang halaga ng `azd env set` ay iniimbak nang lokal sa plaintext; hindi ito ligtas na imbakan ng mga sikreto.
 
 ---
 
-## 🔐 Pinakamahuhusay na Kasanayan sa Seguridad
+## 🔧 Antas ng Konfigurasyon
+
+Panatilihing hiwalay ang tatlong magkaibang bahagi ng konfigurasyon: mga global na kagustuhan (`azd config`), istruktura ng proyekto (`azure.yaml`), at mga halaga bawat kapaligiran (`azd env`). Ang mga flag ay nagtataas lamang ng mga settings na tunay nilang sinusuportahan; walang pangkalahatang pag-overlay ng nagbibadyang arbitraryong mga environment variable sa `azure.yaml` o Bicep.
+
+---
+
+## 🔐 Mga Pinakamahusay na Gawi sa Seguridad
 
 ```bash
-# Gamitin ang pinamamahalaang pagkakakilanlan (inirerekomenda)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Suriin ang katayuan ng pagpapatunay ng AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Opsyonal: tiyakin ang konteksto ng Azure CLI kung balak mong magpatakbo ng az commands
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Muling magpatunay kung kinakailangan
+# Re-authenticate if needed
 azd auth login
 
-# Opsyonal: i-refresh ang pagpapatunay ng Azure CLI para sa az commands
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
 ---
 
-## 🔗 Navigation
+## 🔗 Navigasyon
 
 | Direksyon | Kabanata |
 |-----------|---------|
-| **Nakahuli** | [Kabanata 2: AI Development](../chapter-02-ai-development/README.md) |
-| **Susunod** | [Kabanata 4: Infrastrukturang](../chapter-04-infrastructure/README.md) |
+| **Nauna** | [Kabanata 2: AI Development](../chapter-02-ai-development/README.md) |
+| **Susunod** | [Kabanata 4: Infrastructure](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Kaugnay na Mga Sanggunian
+## 📖 Mga Kaugnay na Mapagkukunan
 
 - [Mga Paunang Pagsusuri bago ang Deployment](../chapter-06-pre-deployment/README.md)
 - [Pag-aayos ng Problema](../chapter-07-troubleshooting/common-issues.md)

@@ -6,7 +6,7 @@
 - **⬅️ Previous**: [Your First Project](first-project.md)
 - **➡️ Next**: [Dev Containers & Codespaces](dev-containers.md)
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command and configuration review target: `azd 1.37.2` (November 2026). Generated files depend on the detected application; Azure deployment was not executed in this review.
 
 ## Introduction
 
@@ -36,7 +36,7 @@ After completing this lesson, you will be able to:
 
 | Starting point | Command | When to use |
 |----------------|---------|-------------|
-| **From a template** | `azd init --template <name>` | Learning, or starting a new app from a proven sample |
+| **From a template** | `azd init --template <name> .` (empty directory) | Learning, or starting a new app from a proven sample |
 | **From your existing code** | `azd init` (in your project folder) | You already have an app and want to deploy it |
 | **From a Git repo** | `azd init --from-code` (in a cloned repo) | Adopting azd for an existing repository |
 
@@ -65,14 +65,13 @@ Pick **"Use code in the current directory."** azd then scans your folder, detect
 
 ### What azd detects
 
-azd looks for signals like `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, or a `Dockerfile`, and suggests a matching Azure host:
+azd looks for application signals such as `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, or a `Dockerfile`. The from-code flow is not a general host-selection wizard for every supported deployment target:
 
 | Your app | Likely detected host |
 |----------|----------------------|
-| Node.js / Python / .NET web app | Azure App Service or Container Apps |
+| Supported Node.js / Python / .NET web app | Typically Azure Container Apps; inspect the generated definition |
 | Containerized app (`Dockerfile`) | Azure Container Apps |
-| Function app | Azure Functions |
-| Static site (React/Vue build output) | Azure Static Web Apps |
+| Function app or Static Web Apps project | Use a matching template or author `azure.yaml` and infrastructure if from-code does not support your layout |
 
 Confirm the detected service(s), and azd scaffolds the files you need.
 
@@ -80,12 +79,12 @@ Confirm the detected service(s), and azd scaffolds the files you need.
 
 ## Step 2: Understand What azd Created
 
-After init, you'll have two new things in your project:
+After init, inspect `azure.yaml`. The generated-infrastructure flow can keep infrastructure implicit until you run `azd infra generate`; do not assume `infra/` already exists:
 
 ```
 my-existing-app/
 ├── azure.yaml          # ← NEW: tells azd what to deploy and where
-├── infra/              # ← NEW: Infrastructure as Code (Bicep by default)
+├── infra/              # Materialized with azd infra generate when using implicit infrastructure
 │   ├── main.bicep
 │   └── main.parameters.json
 ├── src/ (your code)    # unchanged
@@ -94,7 +93,7 @@ my-existing-app/
 
 ### `azure.yaml` — the project definition
 
-This is the heart of an azd project. A minimal one looks like this:
+This is the heart of an azd project. The following **illustrative App Service definition** requires matching App Service infrastructure; it is not a reason to change a generated Container Apps host without changing infrastructure:
 
 ```yaml
 # azure.yaml
@@ -127,6 +126,8 @@ azd env new dev
 # Set a non-secret value
 azd env set API_VERSION 1.0.0
 ```
+
+This stores a local value only. To affect the app, explicitly consume it in infrastructure parameters, a supported service setting, or a hook; setting an arbitrary variable does not configure the deployed runtime.
 
 For real secrets, store them in Key Vault and reference them from your infrastructure—see [Chapter 3: Configuration & Authentication](../chapter-03-configuration/authsecurity.md).
 
@@ -161,9 +162,9 @@ azd monitor --logs # check logs if needed
 | Symptom | Likely cause | Fix |
 |---------|--------------|-----|
 | azd didn't detect my app | Missing manifest (e.g., `package.json`) | Add the manifest, or pick the host manually during `azd init` |
-| Build fails during `azd up` | App needs a build step | Add `buildCommand`/`outputPath` under the service in `azure.yaml` |
-| App starts but returns errors | Missing config/secret | Set values with `azd env set` or wire up Key Vault |
-| Wrong host chosen | Auto-detection guessed | Edit `host:` in `azure.yaml` and re-run `azd up` |
+| Build fails during `azd up` | App needs a build step | Configure the app's package scripts or service `prepackage` hook; use `dist` for deployment output, not `buildCommand`/`outputPath` |
+| App starts but returns errors | Missing config/secret | Wire values into runtime app settings or a Key Vault reference; `azd env set` alone is not enough |
+| Wrong host chosen | Auto-detection does not match your needs | Change both `host:` and the corresponding infrastructure, or choose a matching template |
 
 For more, see [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md).
 

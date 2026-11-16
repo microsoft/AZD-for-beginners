@@ -1,22 +1,22 @@
-# Bab 3: Konfigurasi & Otentikasi
+# Bab 3: Konfigurasi & Autentikasi
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 45-60 menit | **⭐ Kompleksitas**: Menengah
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 90-150 menit termasuk praktik integrasi | **⭐ Kompleksitas**: Menengah
 
 ---
 
 ## Ikhtisar
 
-Bab ini membahas konfigurasi lingkungan, pola otentikasi, dan praktik keamanan terbaik untuk penyebaran Azure Developer CLI.
+Bab ini membahas konfigurasi lingkungan, pola autentikasi, dan praktik keamanan terbaik untuk deployment Azure Developer CLI.
 
-> Divalidasi dengan `azd 1.27.1` pada Juli 2026.
+> Target tinjauan perintah dan konfigurasi: `azd 1.37.2` (November 2026). Penyediaan Azure langsung tidak dijalankan selama tinjauan.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
 - Menguasai hierarki konfigurasi AZD
-- Mengelola beberapa lingkungan (dev, staging, prod)
-- Menerapkan otentikasi aman dengan identitas terkelola
-- Mengonfigurasi pengaturan khusus lingkungan
+- Mengelola banyak lingkungan (dev, staging, prod)
+- Menerapkan autentikasi aman dengan managed identities
+- Mengonfigurasi pengaturan spesifik lingkungan
 
 ---
 
@@ -24,59 +24,59 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Panduan Konfigurasi](configuration.md) | Pengaturan dan pengelolaan lingkungan | 30 menit |
-| 2 | [Otentikasi & Keamanan](authsecurity.md) | Pola identitas terkelola dan RBAC | 30 menit |
+| 1 | [Panduan Konfigurasi](configuration.md) | Pengaturan dan manajemen lingkungan | 30 menit |
+| 2 | [Autentikasi & Keamanan](authsecurity.md) | Pola managed identity dan RBAC | 30 menit |
 
 ---
 
-## 🚀 Mulai Cepat
+## 🚀 Memulai Cepat
+
+Jalankan dari root aplikasi **azd yang sudah diinisialisasi**, bukan dari repositori kursus. Gunakan nama lingkungan yang belum terpakai jika nama tersebut sudah ada.
 
 ```bash
-# Buat beberapa lingkungan
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Beralih lingkungan
+# Switch environments
 azd env select prod
 
-# Atur variabel lingkungan
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Lihat konfigurasi
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` bersifat ilustratif: hanya memengaruhi infrastruktur jika template Anda secara eksplisit menggunakannya. Nilai `azd env set` biasa disimpan secara lokal dalam bentuk teks biasa; mereka bukan penyimpanan rahasia yang aman.
 
 ---
 
 ## 🔧 Hierarki Konfigurasi
 
-AZD menerapkan pengaturan dalam urutan ini (yang terakhir menimpa sebelumnya):
-
-1. **Nilai default** (tertanam dalam template)
-2. **azure.yaml** (konfigurasi proyek)
-3. **Variabel lingkungan** (`azd env set`)
-4. **Flag baris perintah** (`--location eastus`)
+Jaga tiga permukaan konfigurasi yang berbeda tetap terpisah: preferensi global (`azd config`), struktur proyek (`azure.yaml`), dan nilai per lingkungan (`azd env`). Flag hanya menimpa pengaturan yang benar-benar didukung; tidak ada overlay universal dari variabel lingkungan sewenang-wenang ke `azure.yaml` atau Bicep.
 
 ---
 
 ## 🔐 Praktik Keamanan Terbaik
 
 ```bash
-# Gunakan identitas yang dikelola (disarankan)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Periksa status otentikasi AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Opsional: verifikasi konteks Azure CLI jika Anda berencana menjalankan perintah az
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Autentikasi ulang jika diperlukan
+# Re-authenticate if needed
 azd auth login
 
-# Opsional: segarkan otentikasi Azure CLI untuk perintah az
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -91,7 +91,7 @@ az login
 
 ---
 
-## 📖 Sumber Daya Terkait
+## 📖 Sumber Terkait
 
 - [Pemeriksaan Pra-Penyebaran](../chapter-06-pre-deployment/README.md)
 - [Pemecahan Masalah](../chapter-07-troubleshooting/common-issues.md)

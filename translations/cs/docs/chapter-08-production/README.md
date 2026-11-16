@@ -6,18 +6,20 @@
 
 ## Přehled
 
-Tato kapitola pokrývá podnikové vzory pro nasazení, zabezpečení, monitorování a optimalizaci nákladů produkčních AI úloh.
+Tato kapitola pokrývá podnikové nasazovací vzory, zabezpečení, monitorování a optimalizaci nákladů pro produkční AI zátěže.
 
-> Ověřeno na `azd 1.27.1` v červenci 2026.
+Jedná se o architektonickou referenci, nikoli kompletní šablonu pro produkční nasazení. Příklady neobsahují detaily integrace, které musíte dodat a otestovat ve vaší vlastní aplikaci; přečtení kontrolního seznamu nezaručuje produkční připravenost.
+
+> **Přehled vydání (2026-11-04):** Pokyny AI CLI byly zkontrolovány vůči dokumentaci/zdroji `azd 1.37.2`, agentům `1.0.0-beta.23` a evaluacím `1.0.0-beta.2`. Viz [změny a opravy vydání](production-ai-practices.md#recent-release-changes-and-fixes) pro požadavky kompatibility a podrobnosti migrace; toto není validace živého nasazení.
 
 ## Výukové cíle
 
-Po dokončení této kapitoly budete:
-- Nasazovat aplikace odolné v několika regionech
-- Implementovat podnikové vzory zabezpečení
-- Nakonfigurovat komplexní monitorování
-- Optimalizovat náklady ve velkém měřítku
-- Nastavit CI/CD pipeline s AZD
+Po dokončení této kapitoly budete schopni:
+- Nasadit víceregionální odolné aplikace
+- Implementovat podnikové bezpečnostní vzory
+- Konfigurovat komplexní monitorování
+- Optimalizovat náklady v měřítku
+- Nastavit CI/CD pipeline pomocí AZD
 
 ---
 
@@ -25,51 +27,52 @@ Po dokončení této kapitoly budete:
 
 | # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Produkční AI praktiky](production-ai-practices.md) | Podnikové vzory nasazení | 90 min |
+| 1 | [Produkční AI praktiky](production-ai-practices.md) | Podnikové nasazovací vzory | 90 min |
 
 ---
 
 ## 🚀 Produkční kontrolní seznam
 
-- [ ] Nasazení v několika regionech pro odolnost
+- [ ] Víceregionální nasazení pro odolnost
 - [ ] Spravovaná identita pro autentizaci (bez klíčů)
 - [ ] Application Insights pro monitorování
-- [ ] Nastavení rozpočtů a upozornění na náklady
-- [ ] Povolené skenování zabezpečení
+- [ ] Nastavený rozpočet nákladů a upozornění
+- [ ] Povolené zabezpečovací skenování
 - [ ] Integrace CI/CD pipeline
-- [ ] Plán obnovy po havárii
+- [ ] Plán obnovy při havárii
 
 ---
 
-## 🏗️ Architektonické vzory
+## 🏗️ Vzorce architektury
 
-### Vzor 1: Microservices AI
+### Vzorec 1: Mikroservisní AI
 
 ```mermaid
 graph LR
-    Gateway[API brána] --> AI[AI služba] --> Models[Modely Microsoft Foundry]
-    Gateway --> Auth[Auth služba]
-    AI --> Data[Úložiště dat]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
-### Vzor 2: Událostmi řízené AI
+### Vzorec 2: Událostmi řízená AI
 
 ```mermaid
 graph LR
-    EventGrid[Event Grid] --> Functions[Funkce] --> Pipeline[AI Pipeline]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
 
-## 🔐 Nejlepší bezpečnostní praktiky
+## 🔐 Nejlepší bezpečnostní postupy
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,34 +85,27 @@ properties: {
 
 ## 💰 Optimalizace nákladů
 
-| Strategie | Úspory |
+| Strategie | Hlavní omezení |
 |----------|---------|
-| Škálování na nulu (Container Apps) | 60-80 % |
-| Použití režimů spotřeby pro vývoj | 50-70 % |
-| Plánované škálování | 30-50 % |
-| Rezervovaná kapacita | 20-40 % |
+| Škálování na nulu (Container Apps) | Vyžaduje vhodný spouštěč; jiné služby stále generují náklady |
+| Použití spotřebních úrovní pro vývoj | Porovnat ceny vybrané služby a zatížení |
+| Plánované škálování | Škálování přes podporovanou infrastrukturu/automatizaci |
+| Rezervace/provízená kapacita | Pouze pokud je podporována; závazky mohou zvýšit neaktivní náklady |
 
-```bash
-# Nastavit upozornění rozpočtu
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Použijte [kompletní vzorec rozpočtového zdroje](production-ai-practices.md#2-cost-monitoring-and-budgets) s platným datem zahájení, rozsahem vyúčtování, příjemci a oprávněními. Rozpočet posílá upozornění; neomezuje výdaje. Úspory závisí na měřeném využití a nejsou zaručenými procenty.
 
 ---
 
 ## 📊 Nastavení monitorování
 
 ```bash
-# Streamujte protokoly
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Zkontrolujte Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# Zobrazit metriky
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -119,17 +115,17 @@ az monitor metrics list --resource <resource-id>
 
 | Směr | Kapitola |
 |-----------|---------|
-| **Předchozí** | [Kapitola 7: Odstraňování problémů](../chapter-07-troubleshooting/README.md) |
+| **Předchozí** | [Kapitola 7: Řešení problémů](../chapter-07-troubleshooting/README.md) |
 | **Kurz dokončen** | [Domů kurzu](../../README.md) |
 
 ---
 
 ## 📖 Související zdroje
 
-- [Průvodce AI agenty](../chapter-02-ai-development/agents.md)
+- [Průvodce AI agentů](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Řešení s více agenty](../chapter-05-multi-agent/README.md)
-- [Příklad microservices](../../examples/microservices/README.md)
+- [Víceagentní řešení](../chapter-05-multi-agent/README.md)
+- [Příklad mikroservisů](../../examples/microservices/README.md)
 
 ---
 

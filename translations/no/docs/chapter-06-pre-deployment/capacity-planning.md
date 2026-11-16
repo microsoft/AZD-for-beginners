@@ -1,21 +1,21 @@
-# Kapasitetsplanlegging - Azure-ressursers tilgjengelighet og begrensninger
+# Kapasitetsplanlegging - Tilgjengelighet og grenser for Azure-ressurser
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD for nybegynnere](../../README.md)
-- **📖 Current Chapter**: Kapittel 6 - Forhåndsvalidering og planlegging før distribusjon
-- **⬅️ Previous Chapter**: [Kapittel 5: Multi-Agent AI-løsninger](../../examples/retail-scenario.md)
-- **➡️ Next**: [Valg av SKU](sku-selection.md)
-- **🚀 Next Chapter**: [Kapittel 7: Feilsøking](../chapter-07-troubleshooting/common-issues.md)
+**Kapittelnavigasjon:**
+- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 6 - Forhåndsvalidering og planlegging før distribusjon
+- **⬅️ Forrige kapittel**: [Kapittel 5: Multikagent AI-løsninger](../../examples/retail-scenario.md)
+- **➡️ Neste**: [SKU-valg](sku-selection.md)
+- **🚀 Neste kapittel**: [Kapittel 7: Feilsøking](../chapter-07-troubleshooting/common-issues.md)
 
 ## Introduksjon
 
-Denne omfattende guiden hjelper deg med å planlegge og validere kapasiteten til Azure-ressurser før distribusjon med Azure Developer CLI. Lær å vurdere kvoter, tilgjengelighet og regionale begrensninger for å sikre vellykkede distribusjoner samtidig som du optimaliserer kostnader og ytelse. Mestre kapasitetsplanleggingsteknikker for forskjellige applikasjonsarkitekturer og skaleringsscenarier.
+Denne omfattende guiden hjelper deg med å planlegge og validere kapasiteten til Azure-ressurser før distribusjon med Azure Developer CLI. Lær å vurdere kvoter, tilgjengelighet og regionale begrensninger for å sikre vellykkede distribusjoner samtidig som du optimaliserer kostnader og ytelse. Mestre kapasitetsplanleggingsteknikker for ulike applikasjonsarkitekturer og skaleringsscenarioer.
 
 ## Læringsmål
 
 Ved å fullføre denne guiden vil du:
 - Forstå Azure-kvoter, grenser og regionale tilgjengelighetsbegrensninger
-- Mestre teknikker for å sjekke ressurs tilgjengelighet og kapasitet før distribusjon
+- Mestre teknikker for å sjekke tilgjengelighet og kapasitet på ressurser før distribusjon
 - Implementere automatiserte strategier for kapasitetsvalidering og overvåking
 - Designe applikasjoner med riktig ressursdimensjonering og skaleringshensyn
 - Anvende kostnadsoptimaliseringsstrategier gjennom intelligent kapasitetsplanlegging
@@ -23,47 +23,49 @@ Ved å fullføre denne guiden vil du:
 
 ## Læringsutbytte
 
-Etter fullføring vil du kunne:
-- Vurdere og validere krav til Azure-ressurskapasitet før distribusjon
+Når du er ferdig, vil du kunne:
+- Vurdere og validere kapasitetsbehov for Azure-ressurser før distribusjon
 - Lage automatiserte skript for kapasitetskontroll og kvoteovervåking
-- Designe skalerbare arkitekturer som tar hensyn til regionale og abonnementgrenser
-- Implementere kostnadseffektive ressursdimensjoneringsstrategier for ulike arbeidsbelastningstyper
+- Designe skalerbare arkitekturer som tar hensyn til regionale og abonnementgrenseverdier
+- Implementere kostnadseffektive strategier for dimensjonering av ressurser for ulike arbeidsbelastningstyper
 - Konfigurere proaktiv overvåking og varsling for kapasitetsrelaterte problemer
-- Planlegge distribusjoner i flere regioner med riktig kapasitetsfordeling
+- Planlegge distribusjoner på tvers av flere regioner med riktig kapasitetsfordeling
 
 ## Hvorfor kapasitetsplanlegging er viktig
 
+> **Omfang:** Disse Bash-eksemplene krever Azure CLI, `jq`, og et valgt abonnement. De undersøker publiserte tilbud og kvoter; ingen av dem bekrefter fysisk kapasitet eller reserverer ressurser. Lagre/tilpass utdrag i ditt eget prosjekt—skript-/konfigurasjonsfilnavnene nedenfor er eksempler og ikke innsjekkede leveranser. VM-kvoter dekker ikke Container Apps, App Service eller Azure OpenAI-kvoter.
+
 Før du distribuerer applikasjoner, må du sørge for:
-- **Tilstrekkelige kvoter** for nødvendige ressurser
-- **Ressurstilgjengelighet** i målregionen din
-- **Tjenestetiers tilgjengelighet** for abonnementstypen din
+- **Tilstrekkelige kvoter** for krevde ressurser
+- **Ressurs tilgjengelighet** i den valgte regionen
+- **Tjenestenivå tilgjengelighet** for din abonnementstype
 - **Nettverkskapasitet** for forventet trafikk
 - **Kostnadsoptimalisering** gjennom riktig dimensjonering
 
-## 📊 Forstå Azure-kvoter og begrensninger
+## 📊 Forstå Azure-kvoter og grenser
 
-### Typer begrensninger
-1. **Kvoter på abonnementnivå** - Maksimalt antall ressurser per abonnement
-2. **Regionale kvoter** - Maksimalt antall ressurser per region
+### Typer grenser
+1. **Kvoter på abonnementnivå** - Maksimale ressurser per abonnement
+2. **Regionale kvoter** - Maksimale ressurser per region
 3. **Ressursspesifikke grenser** - Grenser for individuelle ressurs typer
-4. **Tjenestetiers grenser** - Begrensninger basert på tjenesteplanen din
+4. **Tjenestenivågrenser** - Grenser basert på din tjenesteplan
 
 ### Vanlige ressurskvoter
 ```bash
-# Sjekk gjeldende kvoteforbruk
+# Check current quota usage
 az vm list-usage --location eastus2 --output table
 
-# Sjekk spesifikke ressurskvoter
+# Check specific resource quotas
 az network list-usages --location eastus2 --output table
-az storage account show-usage --output table
+az storage account show-usage --location eastus2 --output table
 ```
 
-## Pre-Deployment Capacity Checks
+## Kapasitetskontroller før distribusjon
 
 ### Automatisert kapasitetsvalideringsskript
 ```bash
 #!/bin/bash
-# capacity-check.sh - Valider Azure-kapasitet før utrulling
+# capacity-check.sh - Validate Azure capacity before deployment
 
 set -e
 
@@ -74,7 +76,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Funksjon for å sjekke kvotebruk
+# Function to check quota usage
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -83,22 +85,26 @@ check_quota() {
     
     case $resource_type in
         "compute")
-            usage=$(az vm list-usage --location "$LOCATION" --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az vm list-usage --location "$LOCATION" --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
         "storage")
-            usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+            usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.current')
             limit=$(echo "$usage" | jq -r '.limit')
             ;;
         "network")
-            usage=$(az network list-usages --location "$LOCATION" --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+            usage=$(az network list-usages --location "$LOCATION" --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
             current=$(echo "$usage" | jq -r '.[0].current')
             limit=$(echo "$usage" | jq -r '.[0].limit')
             ;;
     esac
     
+    if ! [[ "$current" =~ ^[0-9]+$ && "$limit" =~ ^[0-9]+$ ]]; then
+        echo "❌ Quota data missing or unrecognized for $resource_type"
+        return 1
+    fi
     available=$((limit - current))
     
     if [ "$available" -ge "$required" ]; then
@@ -109,98 +115,95 @@ check_quota() {
     fi
 }
 
-# Sjekk ulike ressurskvoter
-check_quota "compute" 4      # Trenger 4 vCPUer
-check_quota "storage" 2      # Trenger 2 lagringskontoer
-check_quota "network" 1      # Trenger 1 virtuelt nettverk
+# Check various resource quotas
+check_quota "compute" 4      # Need 4 vCPUs
+check_quota "storage" 2      # Need 2 storage accounts
+check_quota "network" 1      # Need 1 virtual network
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### Tjenestespesifikke kapasitetskontroller
+### Kapasitetskontroller spesifikke for tjeneste
 
-#### App Service-kapasitet
+#### Kapasitet for App Service
 ```bash
-# Sjekk tilgjengeligheten for App Service Plan
+# Check App Service Plan availability
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Sjekk tilgjengelige SKU-er i regionen
-    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
+    # Check available SKUs in region
+    available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location' || name=='$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)']" -o tsv)
     
     if [ -n "$available_skus" ]; then
-        echo "✅ $sku is available in $location"
+        echo "✅ $sku is listed for $location (not a capacity guarantee)"
     else
         echo "❌ $sku is not available in $location"
         
-        # Foreslå alternative regioner
+        # Suggest alternative regions
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Sjekk gjeldende bruk
+    # Check current usage
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Bruk
+# Usage
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Databasekapasitet
 ```bash
-# Sjekk PostgreSQL-kapasitet
+# Check PostgreSQL capacity
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Sjekk om SKU er tilgjengelig
+    # Inspect the nested regional capability catalog; do not assume top-level
+    # entries are VM SKU names. Select supported tier/version/SKU combinations.
     available=$(az postgres flexible-server list-skus --location "$location" \
-        --query "contains([].name, '$sku')" -o tsv)
+        --output json)
     
-    if [ "$available" = "true" ]; then
-        echo "✅ PostgreSQL $sku is available in $location"
+    if [ -n "$available" ] && [ "$available" != "[]" ]; then
+        echo "$available" | jq .
+        echo "Inspect the catalog for $sku; this does not verify physical capacity."
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Vis tilgjengelige SKU-er
+        # Show available SKUs
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
-            --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
+            --output json
         return 1
     fi
 }
 
-# Sjekk Cosmos DB-kapasitet
+# Check Cosmos DB capacity
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Sjekk om regionen er tilgjengelig
-    available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
+    # Check region availability
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    available_regions=$(az cosmosdb locations list --query "[?name=='$display_location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Sjekk om serverløs støttes (hvis nødvendig)
+        # Check if serverless is supported (if needed)
         if [ "$tier" = "serverless" ]; then
-            serverless_regions=$(az cosmosdb locations list \
-                --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
-            
-            if [ -n "$serverless_regions" ]; then
-                echo "✅ Cosmos DB Serverless is supported in $location"
-            else
-                echo "⚠️  Cosmos DB Serverless may not be supported in $location"
-            fi
+            echo "Verify serverless support and limits separately in Cosmos DB documentation."
+            echo "Availability-zone support is NOT a serverless-support signal."
         fi
     else
         echo "❌ Cosmos DB is not available in $location"
@@ -209,38 +212,33 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Container Apps-kapasitet
+#### Kapasitet for Container Apps
 ```bash
-# Sjekk Container Apps-kapasitet
+# Check Container Apps capacity
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Sjekk om Container Apps er tilgjengelig i regionen
-    az provider show --namespace Microsoft.App \
-        --query "resourceTypes[?resourceType=='containerApps'].locations" \
-        --output table | grep -q "$location"
-    
-    if [ $? -eq 0 ]; then
+    # Check if Container Apps is available in region
+    display_location=$(az account list-locations --query "[?name=='$location'].displayName | [0]" -o tsv)
+    if az provider show --namespace Microsoft.App \
+        --query "resourceTypes[?resourceType=='containerApps'].locations[]" \
+        --output tsv | grep -Fxq "$display_location"; then
         echo "✅ Container Apps is available in $location"
         
-        # Sjekk gjeldende antall miljøer
+        # Check current environment count
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps har en grense på 15 miljøer per region
-        if [ "$current_envs" -lt 15 ]; then
-            echo "✅ Can create more Container App environments"
-        else
-            echo "⚠️  Near Container App environment limit in $location"
-        fi
+        echo "Check Microsoft.App quotas for this subscription/region in Azure Quotas."
+        echo "An environment count alone does not establish available quota."
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Vis tilgjengelige regioner
+        # Show available regions
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -254,7 +252,7 @@ check_container_apps_capacity() {
 
 ### Tjenestetilgjengelighet per region
 ```bash
-# Sjekk tjenestens tilgjengelighet på tvers av regioner
+# Check service availability across regions
 check_service_availability() {
     local service=$1
     
@@ -269,9 +267,8 @@ check_service_availability() {
                 --query "resourceTypes[?resourceType=='containerApps'].locations" -o table
             ;;
         "postgres")
-            az postgres flexible-server list-skus --location eastus2 >/dev/null 2>&1 && \
-            echo "PostgreSQL Flexible Server regions:" && \
-            az account list-locations --query "[?metadata.regionType=='Physical'].{name:name,displayName:displayName}" -o table
+            echo "PostgreSQL offerings for candidate region eastus2:"
+            az postgres flexible-server list-skus --location eastus2 --output json
             ;;
         "cosmosdb")
             az cosmosdb locations list --query "[].{name:name,documentationUrl:documentationUrl}" -o table
@@ -279,18 +276,20 @@ check_service_availability() {
     esac
 }
 
-# Sjekk alle tjenester
+# Check all services
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-### Anbefalinger for valg av region
+### Diskusjon om regionvalg (illustrativ)
+
+Følgende etiketter er oppfordringer til undersøkelse, ikke verifiserte priser, maskinvare eller samsvarsrangeringer. Sammenlign gjeldende regionale priser og målt latenstid. GDPR krever ikke spesifikt en region i Tyskland; bosted, tjenestefunksjoner og organisatoriske/juridiske krav må vurderes samlet.
 ```bash
-# Anbefal optimale regioner basert på kravene
+# Recommend optimal regions based on requirements
 recommend_region() {
-    local requirements=$1  # "lavpris" | "ytelse" | "samsvar"
+    local requirements=$1  # "lowcost" | "performance" | "compliance"
     
     echo "Region recommendations for: $requirements"
     
@@ -303,14 +302,14 @@ recommend_region() {
             ;;
         "performance")
             echo "⚡ Performance-optimized regions:"
-            echo "  - East US 2 (Virginia) - Latest hardware"
-            echo "  - West US 2 (Washington) - Latest hardware"
+            echo "  - East US 2 (Virginia) - Measure latency to your users"
+            echo "  - West US 2 (Washington) - Verify required SKUs"
             echo "  - North Europe (Ireland) - For EU users"
             ;;
         "compliance")
             echo "🔒 Compliance-focused regions:"
             echo "  - US Gov regions - For government workloads"
-            echo "  - Germany regions - For GDPR compliance"
+            echo "  - EU regions - Assess residency and contractual requirements"
             echo "  - Australia regions - For data sovereignty"
             ;;
     esac
@@ -321,27 +320,17 @@ recommend_region() {
 
 ### Estimering av ressurskostnader
 ```bash
-# Beregn distribusjonskostnader
+# Estimate deployment costs
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Opprett en midlertidig ressursgruppe for estimering
-    temp_rg="temp-estimation-$(date +%s)"
-    az group create --name "$temp_rg" --location "$location" >/dev/null
-    
-    # Distribuer infrastrukturen i valideringsmodus
-    az deployment group validate \
-        --resource-group "$temp_rg" \
-        --template-file infra/main.bicep \
-        --parameters @infra/main.parameters.json \
-        --parameters location="$location" \
-        --query "properties.validatedResources[].{type:type,name:name}" -o table
-    
-    # Rydd opp i den midlertidige ressursgruppen
-    az group delete --name "$temp_rg" --yes --no-wait
+    # Review declared resources locally. ARM validate/what-if do NOT price them.
+    # Do not create/delete a resource group just to estimate cost.
+    az bicep build --file infra/main.bicep --stdout |
+      jq -r '.resources[] | [.type, (.sku.name // "see module/parameters")] | @tsv'
     
     echo ""
     echo "💡 Use Azure Pricing Calculator for detailed cost estimates:"
@@ -352,12 +341,12 @@ estimate_costs() {
 }
 ```
 
-### Anbefalinger for optimalisering av SKU
+### Anbefalinger for SKU-optimalisering
 ```bash
-# Anbefal optimale SKU-er basert på kravene
+# Recommend optimal SKUs based on requirements
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "utvikling" | "preproduksjon" | "produksjon"
+    local workload_type=$2  # "dev" | "staging" | "production"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -417,32 +406,33 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Automatiserte pre-flight-sjekker
+## 🚀 Automatiserte pre-flight-kontroller
 
 ### Omfattende pre-flight-skript
 ```bash
 #!/bin/bash
-# preflight-check.sh - Fullstendig forhåndsvalidering før distribusjon
+# preflight-check.sh - Complete pre-deployment validation
+# Starting-point example: adapt service checks and supply project-specific costs.
 
 set -e
 
-# Konfigurasjon
+# Configuration
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Farger for utdata
+# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # Ingen farge
+NC='\033[0m' # No Color
 
-# Loggfunksjoner
+# Logging functions
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Last inn konfigurasjon
+# Load configuration
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -462,9 +452,10 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Sjekk 1: Autentisering
+# Check 1: Authentication
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
+    SUBSCRIPTION_ID=$(az account show --query id -o tsv)
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
     log_info "Authenticated with subscription: $SUBSCRIPTION_NAME"
 else
@@ -472,7 +463,7 @@ else
     exit 1
 fi
 
-# Sjekk 2: Regional tilgjengelighet
+# Check 2: Regional availability
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -481,14 +472,15 @@ else
     exit 1
 fi
 
-# Sjekk 3: Validering av kvoter
+# Check 3: Quota validation
 log_info "Checking quota availability..."
 
-# vCPU-kvote
+# vCPU quota
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
-    --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='cores'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
 vcpu_limit=$(echo "$vcpu_usage" | jq -r '.[0].limit')
+[[ "$vcpu_current" =~ ^[0-9]+$ && "$vcpu_limit" =~ ^[0-9]+$ ]] || { log_error "Missing VM quota data"; exit 1; }
 vcpu_available=$((vcpu_limit - vcpu_current))
 
 if [ "$vcpu_available" -ge "$REQUIRED_VCPUS" ]; then
@@ -498,10 +490,11 @@ else
     exit 1
 fi
 
-# Kvote for lagringskonto
-storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
+# Storage account quota
+storage_usage=$(az storage account show-usage --location "$LOCATION" --query "{current:currentValue,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
+[[ "$storage_current" =~ ^[0-9]+$ && "$storage_limit" =~ ^[0-9]+$ ]] || { log_error "Missing storage quota data"; exit 1; }
 storage_available=$((storage_limit - storage_current))
 
 if [ "$storage_available" -ge "$REQUIRED_STORAGE" ]; then
@@ -511,13 +504,14 @@ else
     exit 1
 fi
 
-# Sjekk 4: Tjenestetilgjengelighet
+# Check 4: Service availability
 log_info "Checking service availability..."
+DISPLAY_LOCATION=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
 
 for service in "${REQUIRED_SERVICES[@]}"; do
     case $service in
         "appservice")
-            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az appservice list-locations --sku B1 --query "[?name=='$LOCATION' || name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "App Service is available in $LOCATION"
             else
                 log_error "App Service is not available in $LOCATION"
@@ -535,7 +529,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
         "containerapp")
             if az provider show --namespace Microsoft.App \
                 --query "resourceTypes[?resourceType=='containerApps'].locations" \
-                --output tsv | grep -q "$LOCATION"; then
+                --output tsv | grep -Fxq "$DISPLAY_LOCATION"; then
                 log_info "Container Apps is available in $LOCATION"
             else
                 log_error "Container Apps is not available in $LOCATION"
@@ -543,22 +537,29 @@ for service in "${REQUIRED_SERVICES[@]}"; do
             fi
             ;;
         "cosmosdb")
-            if az cosmosdb locations list --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
+            if az cosmosdb locations list --query "[?name=='$DISPLAY_LOCATION']" -o tsv | grep -q .; then
                 log_info "Cosmos DB is available in $LOCATION"
             else
                 log_error "Cosmos DB is not available in $LOCATION"
                 exit 1
             fi
             ;;
+        "storage")
+            log_info "Storage account quota checked above; validate the selected SKU separately."
+            ;;
+        *)
+            log_error "No check implemented for service: $service"; exit 1
+            ;;
     esac
 done
 
-# Sjekk 5: Nettverkskapasitet
+# Check 5: Network capacity
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
-    --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
+    --query "[?name.value=='VirtualNetworks'].{current:currentValue,limit:limit}" -o json)
 vnet_current=$(echo "$vnet_usage" | jq -r '.[0].current')
 vnet_limit=$(echo "$vnet_usage" | jq -r '.[0].limit')
+[[ "$vnet_current" =~ ^[0-9]+$ && "$vnet_limit" =~ ^[0-9]+$ ]] || { log_error "Missing network quota data"; exit 1; }
 vnet_available=$((vnet_limit - vnet_current))
 
 if [ "$vnet_available" -gt 0 ]; then
@@ -567,7 +568,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Sjekk 6: Validering av ressursnavn
+# Check 6: Resource naming validation
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -579,9 +580,12 @@ else
     exit 1
 fi
 
-# Sjekk 7: Kostnadsberegning
+# Check 7: Cost estimation
 log_info "Performing cost estimation..."
-ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
+# Set this from a reviewed Pricing Calculator estimate; no built-in pricing API
+# is implemented by this example.
+: "${ESTIMATED_MONTHLY_COST:?Set ESTIMATED_MONTHLY_COST to your reviewed estimate}"
+[[ "$ESTIMATED_MONTHLY_COST" =~ ^[0-9]+$ ]] || { log_error "Use an integer cost estimate"; exit 1; }
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
 
 if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; then
@@ -594,7 +598,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Sjekk 8: Validering av mal
+# Check 8: Template validation
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -608,10 +612,10 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Endelig oppsummering
+# Final summary
 echo "=================================="
-log_info "✅ All pre-flight checks passed!"
-log_info "Ready for deployment to $LOCATION"
+log_info "✅ Implemented checks passed; review remaining service-specific limits."
+log_info "Quota is not a reservation or guarantee of capacity in $LOCATION."
 echo "Next steps:"
 echo "  1. Run 'azd up' to deploy"
 echo "  2. Monitor deployment progress"
@@ -656,27 +660,27 @@ echo "  3. Verify application health post-deployment"
 
 ### Sanntidsovervåking av kapasitet
 ```bash
-# Overvåk kapasiteten under utrulling
+# Monitor capacity during deployment
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Sjekk utrullingsstatus
+        # Check deployment status
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
-            --query "[0].properties.provisioningState" -o tsv)
+            --query "sort_by(@, &properties.timestamp)[-1].properties.provisioningState" -o tsv)
         
         if [ "$deployment_status" = "Succeeded" ]; then
             log_info "Deployment completed successfully"
             break
-        elif [ "$deployment_status" = "Failed" ]; then
+        elif [ "$deployment_status" = "Failed" ] || [ "$deployment_status" = "Canceled" ]; then
             log_error "Deployment failed"
             break
         fi
         
-        # Sjekk gjeldende ressursbruk
+        # Check current resource usage
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -687,7 +691,7 @@ monitor_deployment_capacity() {
 }
 ```
 
-## 🔗 Integrasjon med AZD
+## 🔗 Integrering med AZD
 
 ### Legg til pre-flight hooks i azure.yaml
 ```yaml
@@ -696,8 +700,9 @@ hooks:
   preprovision:
     shell: sh
     run: |
+      set -e
       echo "Running pre-flight capacity checks..."
-      ./scripts/preflight-check.sh ${AZURE_LOCATION} ${AZURE_ENV_NAME}
+      bash ./scripts/preflight-check.sh "${AZURE_LOCATION}" "${AZURE_ENV_NAME}"
       
       if [ $? -ne 0 ]; then
         echo "Pre-flight checks failed"
@@ -709,38 +714,38 @@ hooks:
 
 ## Beste praksis
 
-1. **Kjør alltid kapasitetskontroller** før du distribuerer til nye regioner
+1. **Kjør alltid kapasitetskontroller** før distribusjon i nye regioner
 2. **Overvåk kvotebruk regelmessig** for å unngå overraskelser
 3. **Planlegg for vekst** ved å sjekke fremtidige kapasitetsbehov
-4. **Bruk kostnadsestimeringsverktøy** for å unngå uventede regninger
-5. **Dokumenter kapasitetskravene** for teamet ditt
+4. **Bruk kostnadsestimeringsverktøy** for å unngå regningssjokk
+5. **Dokumenter kapasitetskrav** for teamet ditt
 6. **Automatiser kapasitetsvalidering** i CI/CD-pipelines
-7. **Vurder regional failover** kapasitetskrav
+7. **Vurder kapasitet for regional failover**
 
 ## Neste steg
 
-- [Veiledning for valg av SKU](sku-selection.md) - Velg optimale tjenestetiers
-- [Pre-flight-sjekker](preflight-checks.md) - Automatiserte valideringsskript
-- [Hurtigreferanse](../../resources/cheat-sheet.md) - Hurtigkommandoreferanse
-- [Ordliste](../../resources/glossary.md) - Begreper og definisjoner
+- [SKU-valgguide](sku-selection.md) - Velg optimale tjenestenivåer
+- [Forhåndskontroller](preflight-checks.md) - Automatiserte valideringsskript
+- [Lur-skjema](../../resources/cheat-sheet.md) - Hurtigreferanse-kommandoer
+- [Ordlisten](../../resources/glossary.md) - Begreper og definisjoner
 
-## Ytterligere ressurser
+## Ekstra ressurser
 
-- [Azure Subscription Limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
-- [Azure Cost Management](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure Regional Availability](https://azure.microsoft.com/global-infrastructure/services/)
+- [Begrensninger for Azure-abonnementer](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [Azure-priskalkulator](https://azure.microsoft.com/pricing/calculator/)
+- [Azure kostnadsstyring](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [Azure regional tilgjengelighet](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Debugging Guide](../chapter-07-troubleshooting/debugging.md)
+**Navigasjon**
+- **Forrige leksjon**: [Feilsøkingsguide](../chapter-07-troubleshooting/debugging.md)
 
-- **Next Lesson**: [Valg av SKU](sku-selection.md)
+- **Neste leksjon**: [SKU-valg](sku-selection.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket bør regnes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

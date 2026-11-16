@@ -1,110 +1,115 @@
 # Masalah Umum dan Solusi
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD untuk Pemula](../../README.md)
-- **📖 Current Chapter**: Bab 7 - Pemecahan Masalah & Debugging
-- **⬅️ Previous Chapter**: [Bab 6: Pre-flight Checks](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ Next**: [Panduan Debugging](debugging.md)
-- **🚀 Next Chapter**: [Bab 8: Pola Produksi & Perusahaan](../chapter-08-production/production-ai-practices.md)
+**Navigasi Bab:**
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 7 - Pemecahan Masalah & Debugging
+- **⬅️ Bab Sebelumnya**: [Bab 6: Pemeriksaan Awal](../chapter-06-pre-deployment/preflight-checks.md)
+- **➡️ Berikutnya**: [Panduan Debugging](debugging.md)
+- **🚀 Bab Berikutnya**: [Bab 8: Pola Produksi & Enterprise](../chapter-08-production/production-ai-practices.md)
 
 ## Pendahuluan
 
-Panduan pemecahan masalah yang komprehensif ini mencakup masalah yang paling sering ditemui saat menggunakan Azure Developer CLI. Pelajari cara mendiagnosis, memecahkan, dan menyelesaikan masalah umum terkait autentikasi, penerapan, penyediaan infrastruktur, dan konfigurasi aplikasi. Setiap masalah mencakup gejala terperinci, penyebab akar, dan prosedur penyelesaian langkah demi langkah.
+Panduan pemecahan masalah komprehensif ini mencakup masalah yang paling sering ditemui saat menggunakan Azure Developer CLI. Pelajari cara mendiagnosis, memecahkan masalah, dan menyelesaikan masalah umum dengan otentikasi, penyebaran, penyediaan infrastruktur, dan konfigurasi aplikasi. Setiap masalah mencakup gejala rinci, penyebab utama, dan prosedur penyelesaian langkah demi langkah.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
 - Menguasai teknik diagnostik untuk masalah Azure Developer CLI
-- Memahami masalah autentikasi dan izin umum serta solusinya
-- Menyelesaikan kegagalan penerapan, kesalahan penyediaan infrastruktur, dan masalah konfigurasi
+- Memahami masalah umum otentikasi dan izin serta solusinya
+- Menyelesaikan kegagalan penyebaran, kesalahan penyediaan infrastruktur, dan masalah konfigurasi
 - Menerapkan strategi pemantauan dan debugging proaktif
 - Menerapkan metodologi pemecahan masalah sistematis untuk masalah kompleks
-- Mengonfigurasi logging dan pemantauan yang tepat untuk mencegah masalah di masa depan
+- Mengkonfigurasi pencatatan dan pemantauan yang tepat untuk mencegah masalah di masa depan
 
 ## Hasil Pembelajaran
 
 Setelah menyelesaikan, Anda akan mampu:
 - Mendiagnosis masalah Azure Developer CLI menggunakan alat diagnostik bawaan
-- Menyelesaikan masalah autentikasi, langganan, dan izin secara mandiri
-- Memecahkan kegagalan penerapan dan kesalahan penyediaan infrastruktur secara efektif
-- Debug konfigurasi aplikasi dan masalah spesifik lingkungan
-- Menerapkan pemantauan dan alerting untuk mengidentifikasi potensi masalah secara proaktif
-- Menerapkan praktik terbaik untuk logging, debugging, dan alur kerja penyelesaian masalah
+- Menyelesaikan masalah otentikasi, langganan, dan izin secara mandiri
+- Memecahkan masalah kegagalan penyebaran dan kesalahan penyediaan infrastruktur secara efektif
+- Debug masalah konfigurasi aplikasi dan masalah khusus lingkungan
+- Menerapkan pemantauan dan pemberitahuan untuk mengidentifikasi masalah potensial secara proaktif
+- Menerapkan praktik terbaik untuk pencatatan, debugging, dan alur kerja penyelesaian masalah
 
 ## Diagnostik Cepat
 
-Sebelum menyelami masalah spesifik, jalankan perintah ini untuk mengumpulkan informasi diagnostik:
+> Ganti nama/ID contoh dengan nilai lingkungan Anda. Fragmen Bash, Bicep, JavaScript, dan file parameter dilabeli terpisah di bawah; mereka bukan satu skrip yang dapat dieksekusi. Tinjau operasi destruktif dan hapus data rahasia sebelum membagikan diagnostik. `azd monitor --logs` membuka browser; itu tidak menampilkan log terminal secara langsung.
+
+Sebelum masuk ke masalah spesifik, jalankan perintah ini untuk mengumpulkan informasi diagnostik:
 
 ```bash
-# Periksa versi dan status kesehatan azd
+# Check azd version and health
 azd version
 azd config show
 
-# Verifikasi autentikasi Azure
+# Verify Azure authentication
 az account show
 az account list
 
-# Periksa lingkungan saat ini
+# Check current environment
 azd env list
 azd env get-values
 
-# Aktifkan pencatatan debug
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
-## Masalah Autentikasi
+## Masalah Otentikasi
 
-### Masalah: "Failed to get access token"
+### Masalah: "Gagal mendapatkan token akses"
 **Gejala:**
-- `azd up` gagal dengan kesalahan autentikasi
-- Perintah mengembalikan "unauthorized" atau "access denied"
+- `azd up` gagal dengan kesalahan otentikasi
+- Perintah mengembalikan "tidak sah" atau "akses ditolak"
 
 **Solusi:**
 ```bash
-# 1. Autentikasi ulang dengan Azure CLI
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# 2. Hapus kredensial yang di-cache
+# 2. Clear cached credentials
 az account clear
 az login
 
-# 3. Gunakan alur kode perangkat (untuk sistem tanpa antarmuka pengguna)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# 4. Tetapkan langganan secara eksplisit
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
-### Masalah: "Insufficient privileges" selama penerapan
+### Masalah: "Hak istimewa tidak cukup" selama penyebaran
 **Gejala:**
-- Penerapan gagal dengan kesalahan izin
-- Tidak dapat membuat beberapa sumber daya Azure tertentu
+- Penyebaran gagal dengan kesalahan izin
+- Tidak dapat membuat sumber daya Azure tertentu
 
 **Solusi:**
 ```bash
-# 1. Periksa penetapan peran Azure Anda
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Pastikan Anda memiliki peran yang diperlukan
-# - Kontributor (untuk pembuatan sumber daya)
-# - Administrator Akses Pengguna (untuk penetapan peran)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. Hubungi administrator Azure Anda untuk mendapatkan izin yang tepat
+# 3. Contact your Azure administrator for proper permissions
 ```
 
-### Masalah: Masalah autentikasi multi-tenant
+### Masalah: Masalah otentikasi multi-tenant
 **Solusi:**
 ```bash
-# 1. Masuk dengan tenant tertentu
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. Tetapkan tenant dalam konfigurasi
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. Bersihkan cache tenant jika berpindah tenant
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
@@ -112,162 +117,169 @@ az account clear
 
 ### Masalah: Konflik nama sumber daya
 **Gejala:**
-- Kesalahan "The resource name already exists"
-- Penerapan gagal selama pembuatan sumber daya
+- Kesalahan "Nama sumber daya sudah ada"
+- Penyebaran gagal saat pembuatan sumber daya
 
 **Solusi:**
-```bash
-# 1. Gunakan nama sumber daya unik dengan token
-# Dalam template Bicep Anda:
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
+```
 
-# 2. Ubah nama lingkungan
+```bash
+# 2. Change environment name
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Bersihkan sumber daya yang ada
-azd down --force --purge
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
 ```
 
 ### Masalah: Lokasi/Region tidak tersedia
 **Gejala:**
-- "The location 'xyz' is not available for resource type"
-- Beberapa SKU tidak tersedia di region yang dipilih
+- "Lokasi 'xyz' tidak tersedia untuk jenis sumber daya"
+- SKU tertentu tidak tersedia di region yang dipilih
 
 **Solusi:**
 ```bash
-# 1. Periksa lokasi yang tersedia untuk jenis sumber daya
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Gunakan wilayah yang umum tersedia
-azd config set defaults.location eastus2
-# atau
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. Periksa ketersediaan layanan berdasarkan wilayah
-# Kunjungi: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Masalah: Kuota terlampaui
+Mengubah variabel lokasi tidak memindahkan sumber daya yang ada. Grup sumber daya atau sumber daya yang ada mungkin menolak perubahan lokasi; gunakan lingkungan terpisah untuk penyebaran regional ulang.
+
+### Masalah: Kesalahan kuota terlampaui
 **Gejala:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+- "Kuota terlampaui untuk jenis sumber daya"
+- "Jumlah maksimum sumber daya tercapai"
 
 **Solusi:**
 ```bash
-# 1. Periksa penggunaan kuota saat ini
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# 2. Ajukan peningkatan kuota melalui portal Azure
-# Buka: Langganan > Penggunaan + kuota
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# 3. Gunakan SKU yang lebih kecil untuk pengembangan
-# Dalam main.parameters.json:
+```
+
+Untuk pengembangan, pilih SKU kecil yang didukung di `infra/main.parameters.json`:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# 4. Bersihkan sumber daya yang tidak terpakai
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
 ### Masalah: Kesalahan template Bicep
 **Gejala:**
 - Kegagalan validasi template
-- Kesalahan sintaks di file Bicep
+- Kesalahan sintaks dalam file Bicep
 
 **Solusi:**
 ```bash
-# 1. Validasi sintaks Bicep
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Gunakan linter Bicep
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Periksa sintaks file parameter
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. Pratinjau perubahan penyebaran
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
-## 🚀 Kegagalan Penerapan
+## 🚀 Kegagalan Penyebaran
 
-### Masalah: Gagal build
+### Masalah: Kegagalan build
 **Gejala:**
-- Aplikasi gagal dibangun selama penerapan
-- Kesalahan pemasangan paket
+- Aplikasi gagal dibangun saat penyebaran
+- Kesalahan instalasi paket
 
 **Solusi:**
 ```bash
-# 1. Periksa output build dengan flag debug
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. Lihat status layanan yang dideploy
+# 2. View deployed service status
 azd show
 
-# 3. Uji build secara lokal
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Periksa kompatibilitas versi Node.js/Python
-node --version  # Harus cocok dengan pengaturan azure.yaml
+# 3. Check Node.js/Python version compatibility
+node --version  # Should match azure.yaml settings
 python --version
 
-# 4. Bersihkan cache build
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. Periksa Dockerfile jika menggunakan kontainer
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Masalah: Kegagalan penerapan container
+### Masalah: Kegagalan penyebaran kontainer
 **Gejala:**
-- Aplikasi container gagal untuk memulai
-- Kesalahan pengambilan image
+- Aplikasi kontainer gagal mulai
+- Kesalahan penarikan image
 
 **Solusi:**
 ```bash
-# 1. Uji pembuatan Docker secara lokal
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Periksa log kontainer menggunakan Azure CLI
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. Pantau aplikasi melalui azd
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. Verifikasi akses ke registri kontainer
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. Periksa konfigurasi aplikasi kontainer
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Masalah: Kegagalan koneksi database
+### Masalah: Kegagalan koneksi basis data
 **Gejala:**
-- Aplikasi tidak dapat terhubung ke database
-- Waktu tunggu koneksi habis
+- Aplikasi tidak dapat terhubung ke basis data
+- Kesalahan batas waktu koneksi
 
 **Solusi:**
 ```bash
-# 1. Periksa aturan firewall database
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Uji konektivitas dari aplikasi
-# Tambahkan ke aplikasi Anda sementara:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Verifikasi format string koneksi
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# 4. Periksa status server database
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
@@ -280,17 +292,17 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 **Solusi:**
 ```bash
-# 1. Verifikasi variabel lingkungan sudah diatur
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. Periksa nama variabel di azure.yaml
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. Mulai ulang aplikasi
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. Periksa konfigurasi layanan aplikasi
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
@@ -301,13 +313,13 @@ az webapp config appsettings list --name myapp --resource-group myrg
 
 **Solusi:**
 ```bash
-# 1. Periksa status sertifikat SSL
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# 2. Aktifkan hanya HTTPS
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Tambahkan domain kustom (jika diperlukan)
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
@@ -318,86 +330,88 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 **Solusi:**
 ```bash
-# 1. Konfigurasikan CORS untuk App Service
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Perbarui API untuk menangani CORS
-# Di Express.js:
+```
+
+2. Perbarui aplikasi Express Anda yang sudah ada (dengan `cors` diimpor):
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# 3. Periksa apakah berjalan pada URL yang benar
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
 ## 🌍 Masalah Manajemen Lingkungan
 
-### Masalah: Masalah pengalihan lingkungan
+### Masalah: Masalah pergantian lingkungan
 **Gejala:**
 - Lingkungan yang salah digunakan
-- Konfigurasi tidak beralih dengan semestinya
+- Konfigurasi tidak berganti dengan benar
 
 **Solusi:**
 ```bash
-# 1. Daftar semua lingkungan
+# 1. List all environments
 azd env list
 
-# 2. Pilih lingkungan secara eksplisit
+# 2. Explicitly select environment
 azd env select production
 
-# 3. Verifikasi lingkungan saat ini
+# 3. Verify current environment
 azd env list
 
-# 4. Buat lingkungan baru jika rusak
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
-### Masalah: Kerusakan lingkungan
+### Masalah: Korupsi lingkungan
 **Gejala:**
 - Lingkungan menunjukkan status tidak valid
-- Sumber daya tidak sesuai dengan konfigurasi
+- Sumber daya tidak cocok dengan konfigurasi
 
 **Solusi:**
 ```bash
-# 1. Segarkan status lingkungan
+# 1. Refresh environment state
 azd env refresh
 
-# 2. Setel ulang konfigurasi lingkungan
+# 2. Reset environment configuration
 azd env new production-reset
-# Salin variabel lingkungan yang diperlukan
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. Impor sumber daya yang ada (jika memungkinkan)
-# Perbarui secara manual .azure/production/config.json dengan ID sumber daya
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
 ## 🔍 Masalah Kinerja
 
-### Masalah: Waktu penerapan yang lambat
+### Masalah: Waktu penyebaran lambat
 **Gejala:**
-- Penerapan memakan waktu terlalu lama
-- Waktu tunggu selama penerapan
+- Penyebaran memakan waktu terlalu lama
+- Timeout selama penyebaran
 
 **Solusi:**
 ```bash
-# 1. Terapkan layanan tertentu untuk iterasi yang lebih cepat
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. Gunakan penerapan berbasis kode saja saat infrastruktur tidak berubah
-azd deploy  # Lebih cepat daripada azd up
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. Optimalkan proses build
-# Dalam package.json:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. Periksa lokasi sumber daya (gunakan wilayah yang sama)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
 ### Masalah: Masalah kinerja aplikasi
@@ -407,101 +421,100 @@ azd config set defaults.location eastus2
 
 **Solusi:**
 ```bash
-# 1. Tingkatkan sumber daya
-# Perbarui SKU di main.parameters.json:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# 2. Aktifkan pemantauan Application Insights
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# 3. Periksa log aplikasi di Azure
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# atau untuk Container Apps:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. Terapkan caching
-# Tambahkan cache Redis ke infrastruktur Anda
+# 4. Implement caching
+# Add Redis cache to your infrastructure
 ```
 
 ## 🛠️ Alat dan Perintah Pemecahan Masalah
 
 ### Perintah Debug
 ```bash
-# Debugging menyeluruh
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# Periksa versi azd
+# Check azd version
 azd version
 
-# Lihat konfigurasi saat ini
+# View current configuration
 azd config show
 
-# Uji konektivitas
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### Analisis Log
 ```bash
-# Log aplikasi melalui Azure CLI
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# Pantau aplikasi dengan azd
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Log sumber daya Azure
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
-# Log kontainer (untuk Container Apps)
+# Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### Investigasi Sumber Daya
 ```bash
-# Daftar semua sumber daya
+# List all resources
 az resource list --resource-group myrg -o table
 
-# Periksa status sumber daya
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# Diagnostik jaringan
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 Mendapatkan Bantuan Tambahan
 
-### Kapan Mengeskalasikan
-- Masalah autentikasi terus berlanjut setelah mencoba semua solusi
+### Kapan Harus Menaikkan Masalah
+- Masalah otentikasi berlanjut setelah mencoba semua solusi
 - Masalah infrastruktur dengan layanan Azure
 - Masalah terkait tagihan atau langganan
 - Kekhawatiran atau insiden keamanan
 
 ### Saluran Dukungan
 ```bash
-# 1. Periksa Azure Service Health
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Buat tiket dukungan Azure
-# Buka: https://portal.azure.com -> Bantuan + dukungan
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. Sumber daya komunitas
-# - Stack Overflow: tag azure-developer-cli
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Informasi yang Perlu Dikumpulkan
+### Informasi yang Harus Dikumpulkan
 Sebelum menghubungi dukungan, kumpulkan:
-- `azd version` keluaran
-- `azd config show` keluaran
-- `azd show` keluaran (status penerapan saat ini)
+- Output `azd version`
+- Output `azd config show`
+- Output `azd show` (status penyebaran saat ini)
 - Pesan kesalahan (teks lengkap)
 - Langkah untuk mereproduksi masalah
-- Detail lingkungan (`azd env get-values`)
-- Garis waktu kapan masalah dimulai
+- Detail lingkungan yang disunting (jangan pernah membagikan `azd env get-values` mentah, yang mungkin berisi rahasia)
+- Kronologi kapan masalah mulai terjadi
 
 ### Skrip Pengumpulan Log
 ```bash
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -528,73 +541,75 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Pencegahan Masalah
 
-### Daftar Periksa Pra-penerapan
+### Daftar Periksa Pra-penyebaran
 ```bash
-# 1. Validasi autentikasi
+# 1. Validate authentication
 az account show
 
-# 2. Periksa kuota dan batasan
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# 3. Validasi template
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# 4. Uji secara lokal terlebih dahulu
+# 4. Test locally first
 npm run build
 npm run test
 
-# 5. Gunakan penyebaran dry-run
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
 ### Pengaturan Pemantauan
-```bash
-# Aktifkan Application Insights
-# Tambahkan ke main.bicep:
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# Siapkan peringatan
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
-### Pemeliharaan Berkala
+### Pemeliharaan Rutin
 ```bash
-# Pemeriksaan kesehatan mingguan
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# Tinjauan biaya bulanan
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# Tinjauan keamanan triwulanan
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
 ## Sumber Daya Terkait
 
-- [Panduan Debugging](debugging.md) - Teknik debugging tingkat lanjut
+- [Panduan Debugging](debugging.md) - Teknik debugging lanjutan
 - [Penyediaan Sumber Daya](../chapter-04-infrastructure/provisioning.md) - Pemecahan masalah infrastruktur
 - [Perencanaan Kapasitas](../chapter-06-pre-deployment/capacity-planning.md) - Panduan perencanaan sumber daya
 - [Pemilihan SKU](../chapter-06-pre-deployment/sku-selection.md) - Rekomendasi tingkat layanan
 
 ---
 
-**Tip**: Simpan panduan ini sebagai bookmark dan rujuk kembali kapan pun Anda mengalami masalah. Sebagian besar masalah sudah pernah terjadi sebelumnya dan memiliki solusi yang jelas!
+**Tip**: Simpan panduan ini dalam bookmark dan rujuk setiap kali Anda menghadapi masalah. Sebagian besar masalah sudah pernah muncul sebelumnya dan memiliki solusi yang sudah mapan!
 
 ---
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Penyediaan Sumber Daya](../chapter-04-infrastructure/provisioning.md)
-- **Pelajaran Berikutnya**: [Panduan Debugging](debugging.md)
+- **Pelajaran Selanjutnya**: [Panduan Debugging](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa terjemahan profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

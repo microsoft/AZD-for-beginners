@@ -1,44 +1,40 @@
-# Καλές Πρακτικές για Παραγωγικά Φορτία Εργασίας Τεχνητής Νοημοσύνης με το AZD
+# Βέλτιστες Πρακτικές Φορτίου Εργασίας Παραγωγής AI με AZD
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Αρχική Μαθήματος**: [AZD For Beginners](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 8 - Πρότυπα Παραγωγής & Επιχειρήσεων
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 8 - Παρατηρήσεις Παραγωγής & Επιχειρήσεων
 - **⬅️ Προηγούμενο Κεφάλαιο**: [Κεφάλαιο 7: Αντιμετώπιση Προβλημάτων](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Σχετικό Επίσης**: [Εργαστήριο AI](ai-workshop-lab.md)
-- **🎯 Ολοκλήρωση Μαθήματος**: [AZD For Beginners](../../README.md)
+- **⬅️ Σχετικό επίσης**: [AI Εργαστήριο Workshop](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Πλήρης Κύκλος Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
 
 ## Επισκόπηση
 
-Αυτός ο οδηγός παρέχει ολοκληρωμένες βέλτιστες πρακτικές για την ανάπτυξη παραγωγικών φορτίων εργασίας ΤΝ χρησιμοποιώντας το Azure Developer CLI (AZD). Βασισμένο σε σχόλια από την κοινότητα Microsoft Foundry Discord και σε πραγματικές αναπτύξεις πελατών, αυτές οι πρακτικές αντιμετωπίζουν τις πιο κοινές προκλήσεις σε παραγωγικά συστήματα ΤΝ.
+Αυτός ο οδηγός εξηγεί πρότυπα σχεδιασμού παραγωγής AI χρησιμοποιώντας το Azure Developer CLI (AZD). Είναι μια αναφορά σχεδιασμού, όχι μια εφαρμογή προς ανάπτυξη ή πιστοποίηση παραγωγής.
+
+**Περιορισμοί παραδείγματος:** Εκτός αν περιγράφεται ρητά ως πλήρης, τα θραύσματα Bicep υποθέτουν παραμέτρους και αναφερόμενους πόρους από ένα περιλαμβανόμενο πρότυπο. Παραλείπουν εικόνες/πλάνα φιλοξενίας, ταυτότητες, αναθέσεις ρόλων, DNS, αποτελέσματα και άλλες απαιτούμενες ενσωματώσεις. Τα YAML μονοπάτια υπηρεσίας και τα σενάρια hook/test είναι ενδεικτικά αρχεία προς δημιουργία **στη δική σας εφαρμογή**· δεν παρέχονται από αυτό το μάθημα. Χρησιμοποιήστε ένα λειτουργικό δείγμα AZD ως βάση, συνθέστε την πλήρη υποδομή και δοκιμάστε το σε απομονωμένο περιβάλλον πριν την παραγωγή.
 
 ## Κύριες Προκλήσεις που Αντιμετωπίζονται
 
-Βάσει των αποτελεσμάτων της δημοσκόπησης της κοινότητάς μας, αυτά είναι τα κορυφαία προβλήματα που αντιμετωπίζουν οι προγραμματιστές:
+Συνηθισμένες ανησυχίες παραγωγής περιλαμβάνουν αναπτύξεις πολλαπλών υπηρεσιών, διαχείριση ταυτότητας και μυστικών, κλιμάκωση, έλεγχο κόστους και παρακολούθηση. Δεν υποστηρίζεται εδώ μετρημένη επικράτηση.
 
-- **45%** δυσκολεύονται με αναπτύξεις ΤΝ που περιλαμβάνουν πολλαπλές υπηρεσίες
-- **38%** έχουν προβλήματα με τη διαχείριση διαπιστευτηρίων και μυστικών  
-- **35%** θεωρούν δύσκολη την ετοιμότητα για παραγωγή και την κλιμάκωση
-- **32%** χρειάζονται καλύτερες στρατηγικές βελτιστοποίησης κόστους
-- **29%** απαιτούν βελτιωμένη παρακολούθηση και αντιμετώπιση προβλημάτων
+## Πρότυπα Αρχιτεκτονικής για Παραγωγή AI
 
-## Πρότυπα Αρχιτεκτονικής για Παραγωγικά Συστήματα Τεχνητής Νοημοσύνης
+### Πρότυπο 1: Αρχιτεκτονική Microservices AI
 
-### Pattern 1: Αρχιτεκτονική ΤΝ με Μικροϋπηρεσίες
-
-**Πότε να χρησιμοποιήσετε**: Πολύπλοκες εφαρμογές ΤΝ με πολλαπλές δυνατότητες
+**Πότε να χρησιμοποιηθεί**: Πολύπλοκες εφαρμογές AI με πολλαπλές ικανότητες
 
 ```mermaid
 graph TD
-    Frontend[Frontend Ιστού] --- Gateway[Πύλη API] --- LB[Ισορροπιστής Φορτίου]
-    Gateway --> Chat[Υπηρεσία Συνομιλίας]
-    Gateway --> Image[Υπηρεσία Εικόνας]
-    Gateway --> Text[Υπηρεσία Κειμένου]
-    Chat --> OpenAI[Μοντέλα Microsoft Foundry]
-    Image --> Vision[Υπολογιστική Όραση]
-    Text --> DocIntel[Νοημοσύνη Εγγράφων]
+    Frontend[Web Frontend] --- Gateway[API Gateway] --- LB[Load Balancer]
+    Gateway --> Chat[Chat Service]
+    Gateway --> Image[Image Service]
+    Gateway --> Text[Text Service]
+    Chat --> OpenAI[Microsoft Foundry Models]
+    Image --> Vision[Computer Vision]
+    Text --> DocIntel[Document Intelligence]
 ```
 
-**Εφαρμογή με AZD**:
+**Υλοποίηση AZD**:
 
 ```yaml
 # azure.yaml
@@ -61,13 +57,13 @@ services:
     host: containerapp
 ```
 
-### Pattern 2: Επεξεργασία ΤΝ με Event-Driven προσέγγιση
+### Πρότυπο 2: Επεξεργασία AI Με Βάση Γεγονότα
 
-**Πότε να χρησιμοποιήσετε**: Επεξεργασία παρτίδων, ανάλυση εγγράφων, ασύγχρονες ροές εργασίας
+**Πότε να χρησιμοποιηθεί**: Επεξεργασία παρτίδων, ανάλυση εγγράφων, ασύγχρονα ροή εργασιών
 
 ```bicep
 // Event Hub for AI processing pipeline
-resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
+resource eventHub 'Microsoft.EventHub/namespaces@2024-01-01' = {
   name: eventHubNamespaceName
   location: location
   sku: {
@@ -78,7 +74,7 @@ resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
 }
 
 // Service Bus for reliable message processing
-resource serviceBus 'Microsoft.ServiceBus/namespaces@2022-10-01-preview' = {
+resource serviceBus 'Microsoft.ServiceBus/namespaces@2024-01-01' = {
   name: serviceBusNamespaceName
   location: location
   sku: {
@@ -110,46 +106,48 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Σκέψεις για την Υγεία του Πράκτορα ΤΝ
+Αυτό δημιουργεί θραύσματα χώρου ονομάτων, όχι κόμβους, ουρές, συνδρομές ή ενεργοποιητές Function. Μια εκτελέσιμη Function χρειάζεται επίσης πλάνο φιλοξενίας, διαμόρφωση χρόνου εκτέλεσης/αποθήκευσης, συνημμένη ταυτότητα, RBAC και πρόσβαση δικτύου. Η αναφορά Key Vault χρειάζεται άδεια ανάγνωσης του μυστικού· ένα endpoint URL από μόνο του δεν αποτελεί διαπιστευτήριο.
 
-Όταν μια παραδοσιακή web εφαρμογή σπάει, τα συμπτώματα είναι οικεία: μια σελίδα δεν φορτώνει, ένα API επιστρέφει σφάλμα ή μια ανάπτυξη αποτυγχάνει. Οι εφαρμογές που βασίζονται σε ΤΝ μπορούν να σπάσουν με όλους αυτούς τους ίδιους τρόπους—αλλά μπορούν επίσης να λειτουργούν λάθος με πιο λεπτούς τρόπους που δεν παράγουν εμφανή μηνύματα σφάλματος.
+## Σκέψεις Για Την Υγεία Του Πράκτορα AI
 
-Αυτή η ενότητα σας βοηθά να χτίσετε ένα νοητικό μοντέλο για την παρακολούθηση φορτίων εργασίας ΤΝ ώστε να ξέρετε πού να κοιτάξετε όταν τα πράγματα δεν φαίνονται σωστά.
+Όταν μια παραδοσιακή ιστοσελίδα σπάει, τα συμπτώματα είναι οικεία: μια σελίδα δεν φορτώνει, ένα API επιστρέφει σφάλμα ή μια ανάπτυξη αποτυγχάνει. Οι εφαρμογές που τροφοδοτούνται από AI μπορούν να σπάσουν με όλους αυτούς τους ίδιους τρόπους — αλλά μπορούν επίσης να λειτουργήσουν λανθασμένα με πιο λεπτούς τρόπους που δεν παράγουν προφανή μηνύματα σφάλματος.
 
-### Πώς Διαφέρει η Υγεία του Πράκτορα από την Υγεία μιας Παραδοσιακής Εφαρμογής
+Αυτό το τμήμα βοηθά να δημιουργήσετε ένα νοητικό μοντέλο για την παρακολούθηση φορτίων εργασίας AI ώστε να ξέρετε πού να κοιτάξετε όταν κάτι φαίνεται λάθος.
 
-Μια παραδοσιακή εφαρμογή είτε λειτουργεί είτε όχι. Ένας πράκτορας ΤΝ μπορεί να φαίνεται ότι λειτουργεί αλλά να παράγει φτωχά αποτελέσματα. Σκεφτείτε την υγεία του πράκτορα σε δύο επίπεδα:
+### Πώς Διαφέρει η Υγεία του Πράκτορα από την Υγεία Παραδοσιακής Εφαρμογής
 
-| Επίπεδο | Τι να Παρακολουθήσετε | Πού να Ψάξετε |
+Οι παραδοσιακές εφαρμογές μπορούν επίσης να έχουν λεπτές αποτυχίες ορθότητας. Ένας πράκτορας AI προσθέτει μη ντετερμινιστική ποιότητα απόκρισης στις συνήθεις ανησυχίες διαθεσιμότητας και ορθότητας. Σκεφτείτε την υγεία του πράκτορα σε δύο στρώματα:
+
+| Στρώμα | Τι Να Παρακολουθείτε | Πού Να Κοιτάξετε |
 |-------|--------------|---------------|
-| **Υγεία υποδομής** | Τρέχει η υπηρεσία; Έχουν παραχωρηθεί πόροι; Είναι τα endpoints προσβάσιμα; | `azd monitor`, υγεία πόρων στο Azure Portal, αρχεία καταγραφής container/app |
-| **Υγεία συμπεριφοράς** | Ανταποκρίνεται ο πράκτορας με ακρίβεια; Είναι οι απαντήσεις έγκαιρες; Καλείται σωστά το μοντέλο; | ιχνηλατήσεις του Application Insights, μετρήσεις λανθάνουσας κλήσης μοντέλου, αρχεία καταγραφής ποιότητας απάντησης |
+| **Υγεία Υποδομής** | Λειτουργεί η υπηρεσία; Έχουν προμηθευτεί πόροι; Είναι προσβάσιμα τα endpoints; | `azd monitor`, υγεία πόρων στο Azure Portal, αρχεία καταγραφής container/app |
+| **Υγεία Συμπεριφοράς** | Αντιδρά ο πράκτορας με ακρίβεια; Είναι οι απαντήσεις έγκαιρες; Καλείται σωστά το μοντέλο; |  ίχνη Application Insights, μετρικές καθυστέρησης κλήσεων μοντέλου, αρχεία καταγραφής ποιότητας απόκρισης |
 
-Η υγεία υποδομής είναι οικεία—είναι η ίδια για οποιαδήποτε εφαρμογή azd. Η υγεία συμπεριφοράς είναι το νέο επίπεδο που εισάγουν τα φορτία εργασίας ΤΝ.
+Η υγεία υποδομής είναι γνωστή—είναι η ίδια για κάθε εφαρμογή azd. Η υγεία συμπεριφοράς είναι το νέο στρώμα που εισάγουν τα φορτία AI.
 
-### Πού να Ψάξετε Όταν οι Εφαρμογές ΤΝ Δεν Συμπεριφέρονται όπως Αναμένεται
+### Πού Να Κοιτάξετε Όταν Οι Εφαρμογές AI Δεν Συμπεριφέρονται Όπως Αναμένεται
 
-Αν η εφαρμογή ΤΝ σας δεν παράγει τα αποτελέσματα που περιμένετε, ορίστε μια εννοιολογική λίστα ελέγχου:
+Αν η εφαρμογή AI σας δεν παράγει τα αναμενόμενα αποτελέσματα, ορίστε μια εννοιολογική λίστα ελέγχου:
 
-1. **Ξεκινήστε με τα βασικά.** Τρέχει η εφαρμογή; Μπορεί να φτάσει στις εξαρτήσεις της; Ελέγξτε `azd monitor` και την υγεία των πόρων όπως θα κάνατε για οποιαδήποτε εφαρμογή.
-2. **Ελέγξτε τη σύνδεση με το μοντέλο.** Καλεί επιτυχώς η εφαρμογή το μοντέλο ΤΝ; Οι αποτυχημένες ή οι κλήσεις που λήγουν είναι η πιο συνηθισμένη αιτία προβλημάτων σε εφαρμογές ΤΝ και θα εμφανιστούν στα αρχεία καταγραφής της εφαρμογής σας.
-3. **Δείτε τι έλαβε το μοντέλο.** Οι απαντήσεις ΤΝ εξαρτώνται από την είσοδο (το prompt και οποιοδήποτε ανακτημένο πλαίσιο). Αν το αποτέλεσμα είναι λάθος, συνήθως η είσοδος είναι λάθος. Ελέγξτε αν η εφαρμογή στέλνει τα σωστά δεδομένα στο μοντέλο.
-4. **Ανασκοπήστε τη λανθάνουσα απόκριση.** Οι κλήσεις σε μοντέλα ΤΝ είναι πιο αργές από τις τυπικές κλήσεις API. Αν η εφαρμογή φαίνεται αργή, ελέγξτε αν οι χρόνοι απόκρισης του μοντέλου έχουν αυξηθεί—αυτό μπορεί να υποδεικνύει περιορισμό (throttling), όρια χωρητικότητας ή συμφόρηση σε επίπεδο περιοχής.
-5. **Παρατηρήστε τα σήματα κόστους.** Απροσδόκητα άλματα στη χρήση token ή στις κλήσεις API μπορούν να υποδεικνύουν βρόχο, λανθασμένη διαμόρφωση prompt ή υπερβολικές επαναλήψεις.
+1. **Ξεκινήστε με τα βασικά.** Λειτουργεί η εφαρμογή; Μπορεί να φτάσει στις εξαρτήσεις της; Ελέγξτε `azd monitor` και την υγεία πόρων όπως θα κάνατε με οποιαδήποτε εφαρμογή.
+2. **Ελέγξτε τη σύνδεση μοντέλου.** Καλεί με επιτυχία η εφαρμογή το μοντέλο AI; Οι αποτυχημένες ή ληξιπρόθεσμες κλήσεις μοντέλου είναι η πιο κοινή αιτία προβλημάτων AI και θα εμφανίζονται στα αρχεία καταγραφής της εφαρμογής σας.
+3. **Επιθεωρήστε τις εισόδους και τη θεμελίωση με ασφάλεια.** Λάθος απαντήσεις μπορεί να προέρχονται από ανάκτηση, οδηγίες, περιορισμούς μοντέλου ή εκτέλεση εργαλείου. Χρησιμοποιήστε διαγνωστικά δεδομένα με ελεγχόμενη πρόσβαση και απόκρυψη· μην ενεργοποιείτε την αδιάκριτη καταγραφή προτροπής/απόκρισης σε παραγωγή.
+4. **Αναθεωρήστε την καθυστέρηση απόκρισης.** Οι κλήσεις μοντέλου AI είναι πιο αργές από τυπικές κλήσεις API. Αν η εφαρμογή σας αργεί, ελέγξτε αν οι χρόνοι απόκρισης του μοντέλου έχουν αυξηθεί — αυτό μπορεί να δείχνει περιορισμό, όρια χωρητικότητας ή συμφόρηση σε επίπεδο περιοχής.
+5. **Παρακολουθήστε σήματα κόστους.** Απροσδόκητες αιχμές στη χρήση token ή κλήσεων API μπορεί να υποδηλώνουν βρόχο, εσφαλμένη εντολή ή υπερβολικές επαναλήψεις.
 
-Δεν χρειάζεται να κυριαρχήσετε αμέσως τα εργαλεία παρατηρησιμότητας. Το κύριο συμπέρασμα είναι ότι οι εφαρμογές ΤΝ έχουν ένα επιπλέον επίπεδο συμπεριφοράς για παρακολούθηση, και το ενσωματωμένο monitoring του azd (`azd monitor`) σας δίνει ένα σημείο εκκίνησης για διερεύνηση και των δύο επιπέδων.
+Δεν χρειάζεται να γίνετε ειδικοί στα εργαλεία παρατηρησιμότητας αμέσως. Το βασικό συμπέρασμα είναι ότι οι εφαρμογές AI έχουν ένα επιπλέον στρώμα συμπεριφοράς προς παρακολούθηση, και η ενσωματωμένη παρακολούθηση του azd (`azd monitor`) σας δίνει ένα σημείο εκκίνησης για διερεύνηση και των δύο στρωμάτων.
 
 ---
 
-## Καλές Πρακτικές Ασφάλειας
+## Βέλτιστες Πρακτικές Ασφάλειας
 
 ### 1. Μοντέλο Ασφάλειας Μηδενικής Εμπιστοσύνης
 
 **Στρατηγική Υλοποίησης**:
-- Καμία επικοινωνία υπηρεσίας-προς-υπηρεσία χωρίς ταυτοποίηση
+- Καμία επικοινωνία υπηρεσίας προς υπηρεσία χωρίς αυθεντικοποίηση
 - Όλες οι κλήσεις API χρησιμοποιούν διαχειριζόμενες ταυτότητες
 - Απομόνωση δικτύου με ιδιωτικά endpoints
-- Έλεγχοι πρόσβασης με αρχή του ελάχιστου προνομίου
+- Έλεγχοι πρόσβασης με ελάχιστα προνόμια
 
 ```bicep
 // Managed Identity for each service
@@ -161,7 +159,7 @@ resource chatServiceIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2
 // Role assignments with minimal permissions
 resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: openAIAccount
-  name: guid(openAIAccount.id, chatServiceIdentity.id, openAIUserRoleDefinitionId)
+  name: guid(openAIAccount.id, chatServiceIdentity.id, '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
     principalId: chatServiceIdentity.properties.principalId
@@ -183,7 +181,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
     tenantId: tenant().tenantId
     sku: {
       family: 'A'
-      name: 'premium'  // Use premium for production
+      name: 'standard' // Premium is needed for HSM-backed keys, not ordinary secrets
     }
     enableRbacAuthorization: true  // Use RBAC instead of access policies
     enablePurgeProtection: true    // Prevent accidental deletion
@@ -192,7 +190,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   }
 }
 
-// Store all AI service credentials
+// Optional legacy key-auth alternative; omit when using Entra ID.
 resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   parent: keyVault
   name: 'openai-api-key'
@@ -205,9 +203,11 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
+Εκχωρήστε την ταυτότητα χρόνου εκτέλεσης `Key Vault Secrets User` στο κατάλληλο εύρος και επισυνάψτε την στον host· μόνο το `enableRbacAuthorization` δεν παρέχει πρόσβαση. Προτιμήστε αυθεντικοποίηση ταυτότητας που διαχειρίζεται το OpenAI με `disableLocalAuth: true`. Το προαιρετικό μυστικό κλειδιού έχει νόημα μόνο για λογαριασμό με σκόπιμα ενεργοποιημένο κλειδί, και ο κύριος προμήθειας χρειάζεται επίσης δικαίωμα εγγραφής μυστικών.
+
 ### 3. Ασφάλεια Δικτύου
 
-**Διαμόρφωση Ιδιωτικών Endpoints**:
+**Διαμόρφωση Ιδιωτικού Endpoint**:
 
 ```bicep
 // Virtual Network for AI services
@@ -265,11 +265,13 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Επιδόσεις και Κλιμάκωση
+Τα ιδιωτικά endpoints απαιτούν επίσης ομάδες ζωνών DNS ιδιωτικές / συνδέσμους VNet και ενοποίηση εφαρμογής VNet. Δεν αποκλείουν αυτόματα τη δημόσια πρόσβαση: απενεργοποιήστε ρητά τη δημόσια δικτυακή πρόσβαση του λογαριασμού AI μετά την επικύρωση της ιδιωτικής συνδεσιμότητας και της πρόσβασης ανάπτυξης.
+
+## Απόδοση και Κλιμάκωση
 
 ### 1. Στρατηγικές Αυτόματης Κλιμάκωσης
 
-**Αυτόματη κλιμάκωση για Container Apps**:
+**Αυτόματη κλιμάκωση container apps**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -313,12 +315,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Στρατηγικές Cache
+### 2. Στρατηγικές Κρυφής Μνήμης (Caching)
 
-**Redis Cache για Απαντήσεις ΤΝ**:
+**Redis Cache για Απαντήσεις AI**:
 
 ```bicep
-// Redis Premium for production workloads
+// Legacy Azure Cache for Redis example (not recommended for new deployments)
 resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
   name: redisCacheName
   location: location
@@ -333,8 +335,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
     redisConfiguration: {
       'maxmemory-policy': 'allkeys-lru'
     }
-    // Enable clustering for high availability
-    redisVersion: '6.0'
+    // Sharding distributes data; replication/failover provides availability.
     shardCount: 2
   }
 }
@@ -342,6 +343,8 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 // Cache configuration in application
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
+
+Το Azure Cache for Redis Basic/Standard/Premium βρίσκεται σε [διαδρομή απόσυρσης](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Χρησιμοποιήστε το Azure Managed Redis για νέους σχεδιασμούς και τη εγγραμμένη διαμόρφωση SKU, ταυτότητας και TLS του, αντί να αντιγράφετε αυτόν τον παλιό πόρο σε νέο σύστημα παραγωγής. Η γραμμή σύνδεσης-αλυσίδας είναι ένα μη λειτουργικό placeholder, όχι διαπιστευτήριο. Διαμέριση κλειδιών cache κατά εξουσιοδότηση, μοντέλο/οδηγίες και έκδοση ανάκτησης, με ημερομηνία λήξης· μια κοινή cache μόνο για ερωτήματα μπορεί να αποκαλύψει δεδομένα άλλου χρήστη.
 
 ### 3. Ισορροπία Φορτίου και Διαχείριση Κυκλοφορίας
 
@@ -381,14 +384,18 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
+Αυτό είναι μερικός πόρος gateway: μια πραγματική ανάπτυξη χρειάζεται επίσης υποδίκτυο gateway/διαμόρφωση IP, frontend IPs και ports, ακροατές/πιστοποιητικά TLS, ρυθμίσεις HTTP backend/ probes, κανόνες δρομολόγησης και προτεραιότητες, και πολιτική WAF που έχει αναθεωρηθεί. Η αναγνώριση ονόματος κεντρικού υπολογιστή TLS/SNI και η αυθεντικοποίηση πρέπει να ταιριάζουν με το backend του Container App.
+
 ## 💰 Βελτιστοποίηση Κόστους
 
-### 1. Κατάλληλο Μέγεθος Πόρων
+### 1. Δέσμευση Πόρων Στοχευμένα
 
-**Διαμορφώσεις ανά Περιβάλλον**:
+**Διαμορφώσεις συγκεκριμένες για το περιβάλλον**:
+
+Αυτά τα ονόματα είναι **ενδεικτικές είσοδοι προτύπου προσαρμογής**, όχι αυτόματες ρυθμίσεις AZD. Χαρτογραφήστε κάθε ένα σε `infra/main.parameters.json`/Bicep και διαμόρφωση host πρώτα. Για παράδειγμα, το δείγμα RAG χρησιμοποιεί `AZURE_SEARCH_SERVICE_SKU` και `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, όχι τα γενικά ονόματα παρακάτω. Δώστε στη μνήμη Container Apps μονάδα που υποστηρίζεται όπως `1Gi` στον πραγματικό πόρο. Εφαρμόστε αλλαγές υποδομής με `azd up` ή `azd provision`· μόνο `azd deploy` δεν εφαρμόζει αλλαγές Bicep.
 
 ```bash
-# Περιβάλλον ανάπτυξης
+# Development environment
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -396,7 +403,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Περιβάλλον παραγωγής
+# Production environment  
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -408,16 +415,18 @@ azd env set CONTAINER_MEMORY 4.0
 ### 2. Παρακολούθηση Κόστους και Προϋπολογισμοί
 
 ```bicep
+// Supply the first day of the current UTC month, e.g. 2026-11-01T00:00:00Z.
+param budgetStartDate string
+
 // Cost management and budgets
-resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
-    amount: 2000  // $2000 monthly budget
+    amount: 2000  // In the billing currency, not necessarily USD
     category: 'Cost'
     notifications: {
       warning: {
@@ -446,38 +455,49 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
+Αντικαταστήστε τους παραλήπτες παραδείγματος και ελέγξτε εύρος/δικαιώματα. Οι ειδοποιήσεις προϋπολογισμού χρησιμοποιούν καθυστερημένα δεδομένα χρέωσης και δεν επιβάλλουν όριο δαπανών.
+
 ### 3. Βελτιστοποίηση Χρήσης Token
 
 **Διαχείριση Κόστους OpenAI**:
 
+Αυτό είναι μόνο μια ευρετική βάσει χαρακτήρων για προεπισκόπηση UI, **όχι** έλεγχος ορίου token μοντέλου. Ο κώδικας παραγωγής πρέπει να χρησιμοποιεί tokenizer κατάλληλο για το αναπτυγμένο μοντέλο και να λαμβάνει υπόψη οδηγίες συστήματος, σχήματα εργαλείων, ιστορικό και προϋπολογισμό εξόδου. Απορρίψτε ένα υπερμεγέθες μήνυμα χρήστη παρά να το περικόπτετε σιωπηλά.
+
 ```typescript
-// Βελτιστοποίηση token σε επίπεδο εφαρμογής
+// Application-level token optimization
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
   
   optimizePrompt(userInput: string, context: string): string {
     const availableTokens = this.maxTokens - this.reserveTokens;
-    const estimatedTokens = this.estimateTokens(userInput + context);
+    if (this.estimateTokens(userInput) + 8 >= availableTokens) {
+      throw new Error("User input exceeds the illustrative prompt budget");
+    }
+    const estimatedTokens = this.estimateTokens(userInput + context) + 8;
     
     if (estimatedTokens > availableTokens) {
-      // Περικόψτε το πλαίσιο, όχι την είσοδο του χρήστη
-      context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
+      // Truncate context, not user input
+      context = this.truncateContext(context, Math.max(0, availableTokens - this.estimateTokens(userInput) - 8));
     }
     
     return `${context}\n\nUser: ${userInput}`;
   }
   
   private estimateTokens(text: string): number {
-    // Χονδρική εκτίμηση: 1 token ≈ 4 χαρακτήρες
+    // Rough estimation: 1 token ≈ 4 characters
     return Math.ceil(text.length / 4);
+  }
+
+  private truncateContext(text: string, estimatedBudget: number): string {
+    return text.slice(0, Math.max(0, estimatedBudget) * 4);
   }
 }
 ```
 
 ## Παρακολούθηση και Παρατηρησιμότητα
 
-### 1. Ολοκληρωμένο Application Insights
+### 1. Ολοκληρωμένα Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -488,8 +508,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   properties: {
     Application_Type: 'web'
     WorkspaceResourceId: logAnalyticsWorkspace.id
-    SamplingPercentage: 100  // Full sampling for AI apps
-    DisableIpMasking: false  // Enable for security
+    SamplingPercentage: 100  // Ingestion setting; review cost and SDK sampling separately
+    DisableIpMasking: false  // Retain IP masking
   }
 }
 
@@ -498,7 +518,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: 'ai-high-error-rate'
   location: 'global'
   properties: {
-    description: 'Alert when AI service error rate is high'
+    description: 'Alert when failed request count exceeds 10 in five minutes'
     severity: 2
     enabled: true
     scopes: [
@@ -522,23 +542,22 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Παρακολούθηση Ειδικά για ΤΝ
+### 2. Παρακολούθηση Ειδική για AI
 
-**Προσαρμοσμένες Πίνακες Ελέγχου για Μετρικές ΤΝ**:
+**Προσαρμοσμένοι Πίνακες Ελέγχου για Μετρικές AI**:
 
 ```json
-// Dashboard configuration for AI workloads
 {
   "dashboard": {
     "name": "AI Application Monitoring",
     "tiles": [
       {
         "name": "OpenAI Request Volume",
-        "query": "requests | where name contains 'openai' | summarize count() by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize count() by bin(timestamp, 5m)"
       },
       {
         "name": "AI Response Latency",
-        "query": "requests | where name contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
       },
       {
         "name": "Token Usage",
@@ -553,7 +572,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Έλεγχοι Υγείας και Παρακολούθηση Διαθεσιμότητας
+Αυτό το JSON είναι ένα σκίτσο ορισμένο από την εφαρμογή, όχι ένα εισαγόμενο σχήμα πίνακα ελέγχου Azure portal. Τα ερωτήματα token/cost απαιτούν η εφαρμογή σας να εκπέμπει ακριβώς αυτές τις προσαρμοσμένες μετρικές· δεν δημιουργούνται από το AZD. Προσαρμόστε φίλτρα εξαρτήσεων για το πραγματικό τέλος/ονομασίες διαστήματος μοντέλου.
+
+### 3. Ελέγχοι Υγείας και Παρακολούθηση Διαθεσιμότητας
 
 ```bicep
 // Application Insights availability tests
@@ -570,7 +591,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
     Enabled: true
     Frequency: 300  // 5 minutes
     Timeout: 120    // 2 minutes
-    Kind: 'ping'
+    Kind: 'standard'
     Locations: [
       {
         Id: 'us-east-2-azr'
@@ -579,52 +600,26 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
         Id: 'us-west-2-azr'
       }
     ]
-    Configuration: {
-      WebTest: '''
-        <WebTest Name="AI Health Check" 
-                 Id="8d2de8d2-a2b0-4c2e-9a0d-8f9c9a0b8c8d" 
-                 Enabled="True" 
-                 CssProjectStructure="" 
-                 CssIteration="" 
-                 Timeout="120" 
-                 WorkItemIds="" 
-                 xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" 
-                 Description="" 
-                 CredentialUserName="" 
-                 CredentialPassword="" 
-                 PreAuthenticate="True" 
-                 Proxy="default" 
-                 StopOnError="False" 
-                 RecordedResultFile="" 
-                 ResultsLocale="">
-          <Items>
-            <Request Method="GET" 
-                     Guid="a5f10126-e4cd-570d-961c-cea43999a200" 
-                     Version="1.1" 
-                     Url="${webApp.properties.defaultHostName}/health" 
-                     ThinkTime="0" 
-                     Timeout="120" 
-                     ParseDependentRequests="True" 
-                     FollowRedirects="True" 
-                     RecordResult="True" 
-                     Cache="False" 
-                     ResponseTimeGoal="0" 
-                     Encoding="utf-8" 
-                     ExpectedHttpStatusCode="200" 
-                     ExpectedResponseUrl="" 
-                     ReportingName="" 
-                     IgnoreHttpStatusCode="False" />
-          </Items>
-        </WebTest>
-      '''
+    Request: {
+      RequestUrl: 'https://${webApp.properties.defaultHostName}/health'
+      HttpVerb: 'GET'
+      FollowRedirects: true
+      ParseDependentRequests: false
+    }
+    ValidationRules: {
+      ExpectedHttpStatusCode: 200
+      SSLCheck: true
+      SSLCertRemainingLifetimeCheck: 7
     }
   }
 }
 ```
 
-## Ανάκαμψη από Καταστροφές και Υψηλή Διαθεσιμότητα
+## Ανάκτηση από Καταστροφή και Υψηλή Διαθεσιμότητα
 
-### 1. Ανάπτυξη σε Πολλές Περιοχές
+Η προηγούμενη δοκιμή υποθέτει υπάρχουσα υπηρεσία App Service `webApp` και πόρο Application Insights. Οι τυπικοί έλεγχοι διαθεσιμότητας χρεώνονται και απαιτούν προσβάσιμο endpoint· οι εφαρμογές με μόνο ιδιωτική πρόσβαση χρειάζονται κατάλληλο σχεδιασμό ιδιωτικής παρακολούθησης. Οι δοκιμές ping URL είναι αποσυρμένες· χρησιμοποιήστε [τυπικούς ελέγχους διαθεσιμότητας](https://learn.microsoft.com/azure/azure-monitor/app/availability).
+
+### 1. Ανάπτυξη σε Πολλαπλές Περιοχές
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -634,16 +629,16 @@ services:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=eastus
+      AZURE_REGION: eastus
   api-secondary:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=westus2
+      AZURE_REGION: westus2
 ```
 
 ```bicep
-// Traffic Manager for global load balancing
+// Separate App Service topology, not the Container Apps declarations above
 resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = {
   name: trafficManagerProfileName
   location: 'global'
@@ -686,6 +681,8 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
+Οι μεταβλητές περιβάλλοντος δεν επιλέγουν τοποθεσίες πόρων. Το IaC πρέπει να προμηθεύσει ξεχωριστούς περιφερειακούς hosts και να δέσει κάθε υπηρεσία με ετικέτες `resourceName` ή `azd-service-name`. Το παράδειγμα Traffic Manager είναι μια **ξεχωριστή τοπολογία App Service** (`primaryAppService`/`secondaryAppService`), όχι δρομολόγηση για τις δηλώσεις Container Apps. Τα Container Apps απαιτούν κατάλληλα διαμορφωμένο εξωτερικό endpoint/front door, TLS/δρομολόγηση προσαρμοσμένου τομέα, και ελέγχους υγείας.
+
 ### 2. Αντίγραφα Ασφαλείας και Ανάκτηση Δεδομένων
 
 ```bicep
@@ -706,40 +703,13 @@ resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
   }
 }
 
-// Backup policy for AI models and data
-resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023-05-01' = {
-  parent: backupVault
-  name: 'ai-data-backup-policy'
-  properties: {
-    policyRules: [
-      {
-        backupParameters: {
-          backupType: 'Full'
-          objectType: 'AzureBackupParams'
-        }
-        trigger: {
-          schedule: {
-            repeatingTimeIntervals: [
-              'R/2024-01-01T02:00:00+00:00/P1D'  // Daily at 2 AM
-            ]
-          }
-          objectType: 'ScheduleBasedTriggerContext'
-        }
-        dataStore: {
-          datastoreType: 'VaultStore'
-          objectType: 'DataStoreInfoBase'
-        }
-        name: 'BackupDaily'
-        objectType: 'AzureBackupRule'
-      }
-    ]
-  }
-}
 ```
 
-## DevOps και Ενσωμάτωση CI/CD
+Το vault από μόνο του δεν κάνει αντιγραφή ασφαλείας. Διαμορφώστε μια **υποστηριζόμενη πολιτική και παράδειγμα backup ειδικό για το φορτίο εργασίας**, δικαιώματα πηγής, διατήρηση και δοκιμές επαναφοράς με χρήση των [πινάκων υποστήριξης Azure Backup](https://learn.microsoft.com/azure/backup/backup-support-matrix). Δεν υπάρχει γενική πολιτική Azure Backup για αναπτύξεις Azure OpenAI μοντέλων φιλοξενίας. Κρατήστε τους ορισμούς υποδομής/ανάπτυξης μοντέλου στον έλεγχο πηγής· προστατέψτε ανεβασμένα έγγραφα, δεδομένα εφαρμογής και τεχνουργήματα fine-tuning χρησιμοποιώντας τις υποστηριζόμενες δυνατότητες backup/εξαγωγής κάθε υπηρεσίας. Ορίστε και δοκιμάστε σαφώς RPO/RTO.
 
-### 1. Ροή Εργασίας GitHub Actions
+## Ενσωμάτωση DevOps και CI/CD
+
+### 1. GitHub Actions Workflow
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -775,151 +745,123 @@ jobs:
           python scripts/test_ai_safety.py
           python scripts/validate_prompts.py
 
-  deploy-staging:
-    needs: test
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Staging
-        run: |
-          azd env select staging
-          azd deploy
-
-  deploy-production:
-    needs: test
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Production
-        run: |
-          azd env select production
-          azd deploy
-          
-      - name: Run Production Health Checks
-        run: |
-          python scripts/health_check.py --env production
 ```
 
-### 2. Επικύρωση Υποδομής
+Αυτό είναι το **τμήμα μόνο για δοκιμές** ενός workflow και υποθέτει ότι έχετε δημιουργήσει `requirements.txt`, `tests/`, και τα δύο σενάρια ασφαλείας. Προσθέστε τις αυθεντικοποιημένες δουλειές προμήθειας/ανάπτυξης OIDC από το [CI/CD Pipeline Configuration](#cicd-pipeline-configuration), με `needs: test`, έναν αξιόπιστο push/χειροκίνητο trigger, και προστατευμένα περιβάλλοντα GitHub. Μην αναπτύσσετε κώδικα pull-request χωρίς εμπιστοσύνη με διαπιστευτήρια cloud. Ένας φρέσκος runner δεν έχει επιλεγμένο τοπικό περιβάλλον AZD· παράσχετε τις εισόδους περιβάλλοντος/συνδρομής/τοποθεσίας και χρησιμοποιήστε `azd auth login`, όχι μόνο `azure/login`.
+
+### 2. Επαλήθευση Υποδομής
 
 ```bash
 # scripts/validate_infrastructure.sh
 #!/bin/bash
+set -euo pipefail
 
 echo "Validating AI infrastructure deployment..."
 
-# Έλεγχος αν όλες οι απαιτούμενες υπηρεσίες εκτελούνται
-services=("openai" "search" "storage" "keyvault")
-for service in "${services[@]}"; do
-    echo "Checking $service..."
-    if ! az resource list --resource-type "Microsoft.CognitiveServices/accounts" --query "[?contains(name, '$service')]" -o tsv; then
-        echo "ERROR: $service not found"
+# Requires Azure CLI login and the resource group selected explicitly.
+: "${AZURE_RESOURCE_GROUP:?Set AZURE_RESOURCE_GROUP}"
+: "${AZURE_OPENAI_NAME:?Set AZURE_OPENAI_NAME}"
+: "${AZURE_OPENAI_CHAT_DEPLOYMENT:?Set the actual deployment name}"
+
+# A successful empty list is not proof that resources exist.
+types=("Microsoft.CognitiveServices/accounts" "Microsoft.Search/searchServices"
+       "Microsoft.Storage/storageAccounts" "Microsoft.KeyVault/vaults")
+for resource_type in "${types[@]}"; do
+    count=$(az resource list --resource-group "$AZURE_RESOURCE_GROUP" \
+        --resource-type "$resource_type" --query "length(@)" -o tsv)
+    if [[ "$count" -lt 1 ]]; then
+        echo "ERROR: No $resource_type found in $AZURE_RESOURCE_GROUP"
         exit 1
     fi
 done
 
-# Επαλήθευση των αναπτύξεων μοντέλων OpenAI
+# Validate OpenAI model deployments
 echo "Validating OpenAI model deployments..."
-models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-4.1-mini"* ]]; then
-  echo "ERROR: Required model gpt-4.1-mini not deployed"
+state=$(az cognitiveservices account deployment show \
+  --name "$AZURE_OPENAI_NAME" --resource-group "$AZURE_RESOURCE_GROUP" \
+  --deployment-name "$AZURE_OPENAI_CHAT_DEPLOYMENT" \
+  --query "properties.provisioningState" -o tsv)
+if [[ "$state" != "Succeeded" ]]; then
+    echo "ERROR: Required model deployment is not provisioned successfully"
     exit 1
 fi
-
-# Δοκιμή της συνδεσιμότητας της υπηρεσίας AI
-echo "Testing AI service connectivity..."
-python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Λίστα Ελέγχου Ετοιμότητας για Παραγωγή
+Αναμενόμενο: μηδενικός κωδικός εξόδου και μήνυμα ολοκλήρωσης μόνο όταν υπάρχουν όλοι οι αναμενόμενοι τύποι και έχει προμηθευτεί η ονομασμένη ανάπτυξη μοντέλου. Αυτό ελέγχει την κατάσταση απογραφής/προμήθειας, **όχι** υγεία πόρων, ακριβή τοπολογία, RBAC, προσβασιμότητα δικτύου ή συμπεριφορά μοντέλου. Προσαρμόστε τους αναμενόμενους τύπους στην αρχιτεκτονική σας, και στη συνέχεια πραγματοποιήστε ξεχωριστό αυθεντικοποιημένο τεστ ετοιμότητας εφαρμογής.
+
+## Λίστα Ελέγχου Ετοιμότητας Παραγωγής
 
 ### Ασφάλεια ✅
 - [ ] Όλες οι υπηρεσίες χρησιμοποιούν διαχειριζόμενες ταυτότητες
-- [ ] Μυστικά αποθηκευμένα στο Key Vault
-- [ ] Διαμορφωμένα ιδιωτικά endpoints
-- [ ] Υλοποίηση Network Security Groups
+- [ ] Μυστικά αποθηκευμένα σε Key Vault
+- [ ] Ιδιωτικά endpoints διαμορφωμένα
+- [ ] Υλοποιημένες ομάδες ασφάλειας δικτύου
 - [ ] RBAC με ελάχιστα προνόμια
-- [ ] WAF ενεργό στα δημόσια endpoints
+- [ ] Ενεργοποιημένο WAF σε δημόσια endpoints
 
 ### Απόδοση ✅
 - [ ] Διαμορφωμένη αυτόματη κλιμάκωση
-- [ ] Υλοποίηση caching
-- [ ] Ρύθμιση ισορροπίας φορτίου
+- [ ] Υλοποιημένο caching
+- [ ] Ρύθμιση ισορροπίας φόρτου
 - [ ] CDN για στατικό περιεχόμενο
-- [ ] Pooling συνδέσεων προς τη βάση δεδομένων
+- [ ] Pooling συνδέσεων βάσης δεδομένων
 - [ ] Βελτιστοποίηση χρήσης token
 
 ### Παρακολούθηση ✅
-- [ ] Application Insights διαμορφωμένο
+- [ ] Διαμορφωμένα Application Insights
 - [ ] Ορισμένες προσαρμοσμένες μετρικές
-- [ ] Ρυθμισμένοι κανόνες ειδοποίησης
-- [ ] Δημιουργία πίνακα ελέγχου
-- [ ] Εφαρμοσμένοι έλεγχοι υγείας
-- [ ] Πολιτικές διατήρησης αρχείων καταγραφής
+- [ ] Ρυθμίσεις κανόνων ειδοποίησης
+- [ ] Δημιουργημένος πίνακας ελέγχου
+- [ ] Υλοποιημένοι έλεγχοι υγείας
+- [ ] Πολιτικές διατήρησης καταγραφών
 
 ### Αξιοπιστία ✅
-- [ ] Ανάπτυξη σε πολλές περιοχές
+- [ ] Ανάπτυξη σε πολλαπλές περιοχές
 - [ ] Σχέδιο backup και ανάκτησης
-- [ ] Εφαρμογή μηχανισμών circuit breakers
-- [ ] Διαμόρφωση πολιτικών επαναπροσπάθειας
-- [ ] Ομαλή υποβάθμιση λειτουργιών
+- [ ] Υλοποίηση διακοπτών κυκλώματος
+- [ ] Διαμορφωμένες πολιτικές επαναληπτικών προσπαθειών
+- [ ] Ομαλή απαξίωση
 - [ ] Endpoints ελέγχου υγείας
 
 ### Διαχείριση Κόστους ✅
-- [ ] Ρυθμισμένοι ειδοποιητές προϋπολογισμού
-- [ ] Σωστό μέγεθος πόρων
-- [ ] Εφαρμογή εκπτώσεων για dev/test
-- [ ] Αγορά reserved instances
-- [ ] Πίνακας ελέγχου παρακολούθησης κόστους
+- [ ] Διαμορφωμένες ειδοποιήσεις προϋπολογισμού
+- [ ] Στοχευμένη δέσμευση πόρων
+- [ ] Εφαρμοσμένες εκπτώσεις dev/test
+- [ ] Αγορασμένες κρατημένες περιπτώσεις
+- [ ] Πίνακας παρακολούθησης κόστους
 - [ ] Τακτικές ανασκοπήσεις κόστους
 
 ### Συμμόρφωση ✅
-- [ ] Ικανοποίηση απαιτήσεων τοπικής διαμονής δεδομένων
-- [ ] Ενεργοποιημένη καταγραφή ελέγχου
+- [ ] Ικανοποίηση απαιτήσεων κατοικίας δεδομένων
+- [ ] Ενεργοποιημένη καταγραφή ελέγχων
 - [ ] Εφαρμοσμένες πολιτικές συμμόρφωσης
-- [ ] Υλοποιημένα security baselines
-- [ ] Τακτικές αξιολογήσεις ασφάλειας
-- [ ] Σχέδιο αντιμετώπισης περιστατικών
+- [ ] Υλοποιημένες βάσεις ασφάλειας
+- [ ] Τακτικές εκτιμήσεις ασφάλειας
+- [ ] Σχέδιο ανταπόκρισης περιστατικών
 
-## Δείκτες Απόδοσης
+## Μετρήσεις Απόδοσης
 
-### Τυπικές Μετρικές Παραγωγής
+### Ενδεικτικοί Στόχοι Παραγωγής
+
+Αυτοί είναι παραδείγματα SLO προς διαπραγμάτευση και δοκιμή φόρτου, όχι μετρημένες μετρήσεις ή εγγυήσεις. Η καθυστέρηση απόκρισης εξαρτάται από το μήκος μοντέλου/εξόδου· η μηνιαία δαπάνη token εξαρτάται από την κίνηση και τις τιμές, όχι μόνο από τον αριθμό token.
 
 | Μετρική | Στόχος | Παρακολούθηση |
 |--------|--------|------------|
-| **Χρόνος Απόκρισης** | < 2 seconds | Application Insights |
-| **Διαθεσιμότητα** | 99.9% | Παρακολούθηση uptime |
-| **Ποσοστό Σφαλμάτων** | < 0.1% | Application logs |
-| **Χρήση Token** | < $500/month | Cost management |
-| **Ταυτόχρονοι Χρήστες** | 1000+ | Load testing |
-| **Χρόνος Ανάκτησης** | < 1 hour | Δοκιμές ανάκαμψης από καταστροφή |
+| **Χρόνος Απόκρισης** | < 2 δευτερόλεπτα | Application Insights |
+| **Διαθεσιμότητα** | 99.9% | Παρακολούθηση διαθεσιμότητας |
+| **Ποσοστό Σφάλματος** | < 0.1% | Αρχεία καταγραφής εφαρμογής |
+| **Δαπάνη Μοντέλου** | < $500/μήνα (παράδειγμα προϋπολογισμού) | Διαχείριση κόστους |
+| **Ταυτόχρονοι Χρήστες** | 1000+ | Δοκιμή φορτίου |
+| **Χρόνος Αποκατάστασης** | < 1 ώρα | Δοκιμές αποκατάστασης καταστροφών |
 
-### Δοκιμές Φόρτου
+### Δοκιμή Φόρτου
+
+Το παρακάτω είναι ένα σκίτσο διεπαφής για ένα σενάριο δοκιμής φόρτου **που πρέπει να υλοποιήσετε**· αυτό το αποθετήριο δεν παρέχει `scripts/load_test.py`. Ορίστε τα φορτία αιτήσεων, τον έλεγχο ταυτότητας, αντιπροσωπευτικά φορτία εργασίας, δηλώσεις λατενσίας/σφαλμάτων ανά εκατοστημόριο και όριο δαπανών στο εργαλείο δοκιμής φόρτου της επιλογής σας πριν το εκτελέσετε:
 
 ```bash
-# Σενάριο δοκιμών φόρτου για εφαρμογές τεχνητής νοημοσύνης
+# Load testing script for AI applications
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -927,182 +869,275 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Βέλτιστες Πρακτικές από την Κοινότητα
+## 🤝 Βέλτιστες Πρακτικές Κοινότητας
 
-Βασισμένο σε σχόλια της κοινότητας Microsoft Foundry στο Discord:
+Βάσει των σχολίων της κοινότητας Microsoft Foundry στο Discord:
 
-### Κορυφαίες Συστάσεις από την Κοινότητα:
+### Κύριες Συστάσεις από την Κοινότητα:
 
-1. **Ξεκινήστε Μικρά, Κλιμακώστε Σταδιακά**: Ξεκινήστε με βασικά SKUs και αυξήστε ανάλογα με τη χρήση
-2. **Παρακολουθείτε τα Πάντα**: Ρυθμίστε ολοκληρωμένη παρακολούθηση από την πρώτη μέρα
+1. **Ξεκινήστε Μικρά, Κλιμακώστε Σταδιακά**: Ξεκινήστε με βασικά SKUs και αυξήστε βάσει πραγματικής χρήσης
+2. **Παρακολουθείτε Τα Πάντα**: Ρυθμίστε ολοκληρωμένη παρακολούθηση από την πρώτη μέρα
 3. **Αυτοματοποιήστε την Ασφάλεια**: Χρησιμοποιήστε υποδομή ως κώδικα για συνεπή ασφάλεια
-4. **Δοκιμάστε Ενδελεχώς**: Συμπεριλάβετε δοκιμές ειδικές για ΤΝ στο pipeline σας
-5. **Σχεδιάστε για Κόστος**: Παρακολουθήστε τη χρήση token και ρυθμίστε ειδοποιήσεις προϋπολογισμού νωρίς
+4. **Δοκιμάστε Ενδελεχώς**: Συμπεριλάβετε δοκιμές ειδικές για AI στην αλυσίδα
+5. **Προγραμματίστε για Κόστη**: Παρακολουθήστε τη χρήση tokens και ορίστε ειδοποιήσεις προϋπολογισμού νωρίς
 
-### Συνήθη Σφάλματα που Πρέπει να Αποφεύγετε:
+### Συνηθισμένες Παγίδες που Πρέπει να Αποφύγετε:
 
-- ❌ Σκληροκωδικοποίηση κλειδιών API μέσα στον κώδικα
-- ❌ Μη ρύθμιση κατάλληλης παρακολούθησης
+- ❌ Σκληρός κωδικός κλειδιών API στον κώδικα
+- ❌ Μη ρύθμιση σωστής παρακολούθησης
 - ❌ Αγνόηση βελτιστοποίησης κόστους
-- ❌ Μη δοκιμή σε σενάρια αποτυχίας
+- ❌ Μη δοκιμή σεναρίων αποτυχίας
 - ❌ Ανάπτυξη χωρίς ελέγχους υγείας
 
-## Εντολές AZD AI CLI και Επεκτάσεις
+## Εντολές και Επεκτάσεις AZD AI CLI
 
-Το AZD περιλαμβάνει ένα αναπτυσσόμενο σύνολο εντολών και επεκτάσεων ειδικών για ΤΝ που απλοποιούν ροές εργασίας παραγωγικής ΤΝ. Αυτά τα εργαλεία γεφυρώνουν το κενό μεταξύ τοπικής ανάπτυξης και παραγωγικής ανάπτυξης για φορτία εργασίας ΤΝ.
+Το AZD περιλαμβάνει ένα αυξανόμενο σύνολο εντολών και επεκτάσεων ειδικών για AI που απλοποιούν ροές εργασίας παραγωγής AI. Αυτά τα εργαλεία γεφυρώνουν το κενό μεταξύ της τοπικής ανάπτυξης και της παραγωγικής υλοποίησης για φορτία AI.
 
-### Επεκτάσεις AZD για ΤΝ
+> **Ανασκόπηση έκδοσης (2026-11-04):** Η παρακάτω καθοδήγηση CLI ελέγχθηκε ενάντια στις δημοσιευμένες εκδόσεις των `azd` **1.37.2**, `azure.ai.agents` **1.0.0-beta.23**, και `azure.ai.evaluations` **1.0.0-beta.2**. Οι agents beta.23 απαιτούν `azd >= 1.37.0`· οι αξιολογήσεις beta.2 απαιτούν `azd >= 1.33.0`. Χρησιμοποιήστε τουλάχιστον 1.37.0 για συνδυασμένη ροή εργασίας. Πρόκειται για ανασκόπηση τεκμηρίωσης/πηγής, όχι για ζωντανή επικύρωση ανάπτυξης Azure.
 
-Το AZD χρησιμοποιεί ένα σύστημα επεκτάσεων για να προσθέσει δυνατότητες ειδικές για ΤΝ. Εγκαταστήστε και διαχειριστείτε επεκτάσεις με:
+### Επεκτάσεις AZD για AI
+
+Το AZD χρησιμοποιεί σύστημα επεκτάσεων για να προσθέσει δυνατότητες ειδικές για AI. Εγκαταστήστε και διαχειριστείτε επεκτάσεις με:
 
 ```bash
-# Απαρίθμησε όλες τις διαθέσιμες επεκτάσεις (συμπεριλαμβανομένης της τεχνητής νοημοσύνης)
+# List all available extensions (including AI)
 azd extension list
 
-# Εξέτασε τις λεπτομέρειες της εγκατεστημένης επέκτασης
+# Inspect installed extension details
+azd version
 azd extension show azure.ai.agents
 
-# Εγκατέστησε την επέκταση Foundry agents
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Εγκατέστησε την επέκταση fine-tuning
+# Install the separate Foundry evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Εγκατέστησε την επέκταση custom models
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Αναβάθμισε όλες τις εγκατεστημένες επεκτάσεις
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
-**Διαθέσιμες επεκτάσεις για ΤΝ:**
+**Διαθέσιμες επεκτάσεις AI:**
 
 | Επέκταση | Σκοπός | Κατάσταση |
 |-----------|---------|--------|
-| `azure.ai.agents` | Διαχείριση Foundry Agent Service | Προεπισκόπηση |
+| `azure.ai.agents` | Διαχείριση υπηρεσίας Foundry Agent | Προεπισκόπηση |
+| `azure.ai.evaluations` | Σύνολα δεδομένων αξιολογήσεων, αξιολογητές, ομάδες αξιολογήσεων και εκτελέσεις | Προεπισκόπηση |
 | `azure.ai.skills` | Επαναχρησιμοποιήσιμες δεξιότητες agent | Προεπισκόπηση |
 | `azure.ai.connections` | Συνδέσεις Foundry (πηγές δεδομένων, εργαλεία) | Προεπισκόπηση |
-| `azure.ai.finetune` | Fine-tuning μοντέλων Foundry | Προεπισκόπηση |
+| `azure.ai.finetune` | Λεπτομερής ρύθμιση μοντέλων Foundry | Προεπισκόπηση |
 | `azure.ai.models` | Προσαρμοσμένα μοντέλα Foundry | Προεπισκόπηση |
 | `azure.coding-agent` | Διαμόρφωση coding agent | Διαθέσιμο |
 
-> Η επέκταση `azure.ai.agents` εξελίσσεται γρήγορα. Αυτό το μάθημα επικυρώνεται με `0.1.40-preview`. Εκτελέστε `azd extension upgrade --all` για να λάβετε το τελευταίο σύνολο εντολών, και `azd extension show azure.ai.agents` για να επιβεβαιώσετε την εγκατεστημένη έκδοσή σας.
+> Εκτελέστε `azd extension list --installed` και `azd extension show azure.ai.evaluations` για να ελέγξετε τις εγκατεστημένες εκδόσεις. Ενημερώστε πρώτα το βασικό CLI χρησιμοποιώντας τις [οδηγίες εγκατάστασης/ενημέρωσης](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) (για εγκατάσταση Windows μέσω winget: `winget upgrade Microsoft.Azd`), και μετά τρέξτε `azd extension upgrade --all`. Δεν υπάρχει εντολή core `azd upgrade`. Εξετάστε τις αλλαγές συμβατότητας πριν από την αναβάθμιση της παραγωγικής αυτοματοποίησης· μην υποθέτετε ότι μια αναβάθμιση επέκτασης διατηρεί τις παλιές μορφές εντολών ή διαμόρφωσης.
+
+### Πρόσφατες Αλλαγές και Διορθώσεις Έκδοσης
+
+| Έκδοση | Τι αλλάζει για αυτό το μάθημα |
+|---------|------------------------------|
+| `azd 1.37.0` | Προσθέτει σταθερά APIs παραγωγής-προεπισκόπησης και διορθώνει επεξεργασίες επεκτάσεων που ξαναγράφουν μη σχετικές ρυθμίσεις `azure.yaml`. |
+| `azd 1.37.1` | Διορθώνει τη διάδοση Ctrl+C σε επεκτάσεις και διαχωρίζει ακυρώσεις/λήξεις χρόνου από γενικές αποτυχίες. |
+| `azd 1.37.2` | Βελτιώνει την επικύρωση παροχής: κρίσιμες προειδοποιήσεις έχουν προεπιλογή **Όχι**, αποτυγχάνουν χωρίς επιβεβαίωση σε εκτελέσεις χωρίς επίβλεψη, και η ακύρωση παρακάμπτει hooks μετά την παροχή. Επίσης διορθώνει μη επιλυμένες τιμές περιβάλλοντος σε λίστες άρνησης Deployment Stacks όταν η δυνατότητα alpha είναι ενεργοποιημένη. |
+| Agents `beta.22` | Μεταφέρει την αξιολόγηση σε `azd ai eval`, αλλάζει τη βελτιστοποίηση στο GA v1 API, απαιτεί πληθυντικό `toolboxes`, και διαχωρίζει τη διαχείριση harness, voice, και παρατεταμένα preview opt-in. Διορθώνει επιλογή μοντέλου ειδική περιβάλλοντος και έλεγχο ταυτότητας toolbox. |
+| Agents `beta.23` | Αποκαλύπτει `init --harness`; διορθώνει έξοδο απάντησης A2A 0.3, μη έγκυρες διαδρομές/modules prompt-agent σε επίπεδα υποδομής, διαγνωστικά χρόνου λήξης ενεργοποίησης, και προειδοποιήσεις RBAC προγραμματιστή που διατηρούνται. |
+| Evaluations `beta.2` | Απαιτεί ρυθμίσεις αξιολόγησης camelCase, προσθέτει στατική/προσομοιωμένη συγγραφή συνομιλιών και ρητές τοπικές πηγές αρχείων, και διορθώνει διαχείριση ταυτότητας/έκδοσης dataset, μετρήσεις quality-gate, και διαγνωστικά αποτυχιών εκτέλεσης. |
+
+Ένα timeout ενεργοποίησης agent δεν αποδεικνύει αποτυχία ανάπτυξης: ελέγξτε την προσπαθούμενη έκδοση και την κατάστασή της πριν ξαναδοκιμάσετε. Προειδοποιήσεις RBAC προγραμματιστή μπορούν να παραμείνουν ακόμη και αν το provisioning πετύχει· επιλύστε την έλλειψη πρόσβασης πριν καλέσετε ως εκείνος ο προγραμματιστής.
+
+Πηγές: [AZD releases](https://github.com/Azure/azure-dev/releases), [agents beta.23 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [agents beta.22 migration](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), και [evaluations beta.2 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
 
 **Τι είναι οι νεότερες επεκτάσεις `skills` και `connections`;**
 
-Δύο επεκτάσεις preview εμφανίστηκαν παράλληλα με τα εργαλεία agent και αξίζει να τις κατανοήσετε ακόμη και ως αρχάριος:
+Δύο προεπισκοπικές επεκτάσεις εμφανίστηκαν παράλληλα με τα εργαλεία agent και αξίζουν να τις κατανοήσετε ακόμα και ως αρχάριος:
 
-- **`azure.ai.skills`** — Μια **δεξιότητα (skill)** είναι μια επαναχρησιμοποιήσιμη ικανότητα (ένα πακεταρισμένο εργαλείο ή συμπεριφορά) που μπορείτε να επισυνάψετε σε έναν ή περισσότερους agents αντί να την αναπαράγετε κάθε φορά. Σκεφτείτε την ως ένα κοινό δομικό στοιχείο: ορίστε μια δεξιότητα "αναζήτηση τεκμηρίωσης" ή "αναζήτηση παραγγελίας" μια φορά και επαναχρησιμοποιήστε την σε πολλούς agents. Αυτό διατηρεί τα πολυ-agent συστήματα (Κεφάλαιο 5) συνεπή και αποφεύγει το copy-paste.
-- **`azure.ai.connections`** — Μια **σύνδεση (connection)** είναι ένας διαχειριζόμενος σύνδεσμος από το έργο Foundry σε έναν εξωτερικό πόρο που χρειάζονται οι agents σας—μια πηγή δεδομένων (όπως το Azure AI Search), ένα endpoint εργαλείου ή κάποια άλλη υπηρεσία. Οι συνδέσεις κεντροθετούν το *πού* και *πώς* οι agents έχουν πρόσβαση στα δεδομένα, ώστε διαπιστευτήρια και endpoints να βρίσκονται σε ένα ελεγχόμενο σημείο αντί να είναι διασκορπισμένα στον κώδικα.
+- **`azure.ai.skills`** — Μια **δεξιότητα** είναι μια επαναχρησιμοποιήσιμη ικανότητα (ένα συσκευασμένο εργαλείο ή συμπεριφορά) που μπορείτε να επισυνάψετε σε έναν ή περισσότερους agents αντί να την υλοποιείτε ξανά κάθε φορά. Σκεφτείτε το ως ένα κοινό οικοδομικό στοιχείο: ορίστε μια δεξιότητα "αναζήτησε στα έγγραφα" ή "κάνε αναζήτηση παραγγελίας" μία φορά, και μετά ξαναχρησιμοποιήστε τη σε πολλούς agents. Αυτό διατηρεί τα συστήματα πολλαπλών agents (Κεφάλαιο 5) συνεπή και αποφεύγει την αντιγραφή-επικόλληση.
+- **`azure.ai.connections`** — Μια **σύνδεση** είναι ένας διαχειριζόμενος σύνδεσμος από το έργο Foundry σας σε εξωτερική πηγή που χρειάζονται οι agents σας — μια πηγή δεδομένων (όπως Azure AI Search), ένα σημείο τερματισμού εργαλείου ή άλλη υπηρεσία. Οι Συσυνδέσεις κεντροποιούν *πού* και *πώς* έχουν πρόσβαση οι agents σε δεδομένα, ώστε τα διαπιστευτήρια και τα σημεία τερματισμού να διατηρούνται σε ένα ελεγχόμενο σημείο και όχι διάσπαρτα στον κώδικα.
 
-Δεν χρειάζεστε αυτά για να αναπτύξετε τους πρώτους σας agents—μείνετε με `azure.ai.agents` ενώ μαθαίνετε. Προσθέστε `skills` όταν βρείτε ότι αναπαράγετε το ίδιο εργαλείο σε πολλούς agents, και `connections` όταν αρκετοί agents μοιράζονται την ίδια πηγή δεδομένων.
+Δεν χρειάζεστε αυτά για να αναπτύξετε τους πρώτους agents σας — μείνετε με το `azure.ai.agents` ενώ μαθαίνετε. Καταφύγετε στο `skills` όταν διαπιστώσετε ότι πολλαπλασιάζετε το ίδιο εργαλείο σε agents, και στο `connections` όταν αρκετοί agents μοιράζονται την ίδια πηγή δεδομένων.
 
-### Αρχικοποίηση Έργων Agent με `azd ai agent init`
+### Εκκίνηση έργων Agent με `azd ai agent init`
 
-Η εντολή `azd ai agent init` δημιουργεί ένα project agent έτοιμο για παραγωγή ενσωματωμένο με το Microsoft Foundry Agent Service:
+Η εντολή `azd ai agent init` δημιουργεί το σκελετό ενός Microsoft Foundry agent project. Χρησιμοποιήστε ένα τρέχον πρότυπο `azure.yaml` έργου, όχι έναν παρωχημένο ρητό agent manifest:
 
 ```bash
-# Αρχικοποιήστε ένα νέο έργο πράκτορα από το manifest του πράκτορα
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize a new agent project from a local project template
+azd ai agent init --template ./templates/support-agent/azure.yaml
 
-# Αρχικοποιήστε και στοχεύστε ένα συγκεκριμένο έργο Foundry
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Initialize and target a specific Foundry project
+azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <foundry-project-id>
 
-# Αρχικοποιήστε με προσαρμοσμένο φάκελο πηγής
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
-
-# Στοχεύστε τα Container Apps ως οικοδεσπότη
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt the template into a different directory
+azd ai agent init --template ./templates/support-agent/azure.yaml --src ./agents/my-agent
 ```
 
-**Βασικές σημαίες:**
+**Κύριες σημαίες:**
 
-| Flag | Description |
+| Σημαία | Περιγραφή |
 |------|-------------|
-| `-m, --manifest` | Path or URI to an agent manifest to add to your project |
-| `-p, --project-id` | Existing Microsoft Foundry Project ID for your azd environment |
-| `-s, --src` | Directory to download the agent definition (defaults to `src/<agent-id>`) |
-| `--host` | Override the default host (e.g., `containerapp`) |
-| `-e, --environment` | The azd environment to use |
+| `-t, --template` | Διαδρομή ή υποστηριζόμενη URI GitHub σε ένα έγγραφο έργου `azure.yaml` |
+| `-p, --project-id` | ID υπάρχοντος Microsoft Foundry Project για το περιβάλλον azd |
+| `-s, --src` | Φάκελος προέλευσης για τους παραγόμενους agents ή φάκελος στόχος κατά την υιοθέτηση έργου |
+| `--kind` | Αρχικοποιήστε έναν agent `hosted`, `prompt` ή προεπισκόπησης `prompt-voice` |
+| `--harness` | Προαιρετικό execution harness για `--kind prompt`· απαιτεί το προεπισκοπικό opt-in |
+| `-e, --environment` | Το περιβάλλον azd προς χρήση |
 
-**Συμβουλή για παραγωγή**: Χρησιμοποιήστε `--project-id` για να συνδεθείτε απευθείας σε ένα υπάρχον Foundry project, κρατώντας τον κώδικα του agent και τους cloud πόρους σας συνδεδεμένους από την αρχή.
+`--manifest`/`-m` είναι ένας παρωχημένος ψευδώνυμος για `--template`/`-t`· η μετονομασία της σημαίας δεν μετατρέπει ένα παλιό manifest σε τρέχον έγγραφο έργου. `--host containerapp` δεν είναι τρέχουσα σημαία agent-init. Για μια κοινή εφαρμογή Container Apps, χρησιμοποιήστε `azd init --template` με ένα πρότυπο που δηλώνει `host: containerapp`.
 
-### Διαχείριση Κύκλου Ζωής του Πράκτορα
+Για ένα υπάρχον έργο με ακριβώς μια υπηρεσία `azure.ai.project`, η `azd ai agent add support-agent --file ./agents/support-agent.yaml` προσθέτει ή ενημερώνει μια άμεση ορισμό agent χωρίς παροχή ή ανάπτυξη. Οι εντολές runtime απορρίπτουν παλαιούς ρητούς `agent.yaml`/AgentManifest και ενσωματωμένες υπηρεσίες `config:`· μεταφέρετέ τες σε τρέχουσα υπηρεσία `azure.ai.agent`. Όταν το init τυπώνει το `cd` επόμενο βήμα, τρέξτε το πριν από `azd up`· το init δεν αλλάζει τον κατάλογο shell σας.
 
-Πέρα από το `init`, η επέκταση `azure.ai.agents` παρέχει εντολές για ολόκληρο τον κύκλο ζωής ενός hosted agent—δοκιμή, αξιολόγηση, βελτιστοποίηση και απόσυρση:
+**Συμβουλή παραγωγής**: Χρησιμοποιήστε το `--project-id` για να συνδεθείτε άμεσα με ένα υπάρχον έργο Foundry, διατηρώντας τον κώδικα agent και τους πόρους cloud συνδεδεμένους από την αρχή.
+
+#### Προαιρετικά Χαρακτηριστικά Προεπισκόπησης
+
+Managed harness, voice, και παρατεταμένη ενεργοποίηση είναι ανεξάρτητα απενεργοποιημένα από προεπιλογή. Ορίστε μόνο το διακόπτη για το χαρακτηριστικό που χρειάζεστε στο **περιβάλλον εργασίας/διαδικασίας CI**, όχι με `azd env set`:
+
+| Χαρακτηριστικό | Μεταβλητή περιβάλλοντος διαδικασίας |
+|---------|------------------------------|
+| Managed harness (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
+| Φωνή (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
+| Παρατεταμένη ενεργοποίηση | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
+
+Για παράδειγμα, χρησιμοποιήστε `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` σε Bash ή `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` σε PowerShell πριν εκτελέσετε την σχετική εντολή. Ένας διακόπτης δεν ενεργοποιεί τους άλλους. Δείτε το [απελευθερωμένο README agents](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) για όλους τους διακόπτες προεπισκόπησης και τις περιορισμούς.
+
+### Διαχείριση κύκλου ζωής Agent
+
+Χρησιμοποιήστε `azure.ai.agents` για να δοκιμάσετε, ελέγξετε, βελτιστοποιήσετε και αποσύρετε agents, και την ξεχωριστή επέκταση `azure.ai.evaluations` για μέτρηση ποιότητας:
 
 ```bash
-# Κλήση ενός αναπτυγμένου πράκτορα και προβολή του χρόνου απόκρισης του διακομιστή
-# (συνολική καθυστέρηση και χρόνος έως το πρώτο byte)
+# Invoke a deployed agent and view server response timing
+# (total latency and time to first byte)
 azd ai agent invoke
 
-# Εμφάνιση της διαμόρφωσης του ενεργού τερματικού σημείου πριν την αλλαγή της
+# Show the live endpoint configuration before changing it
 azd ai agent endpoint show
 
-# Δημιουργία ενός συνόλου δεδομένων αξιολόγησης για τον πράκτορα
-azd ai agent eval generate --dataset ./eval/dataset.jsonl
-
-# Βελτιστοποιήστε τις οδηγίες του πράκτορα βάσει των δεδομένων αξιολόγησής σας
-# (απαιτεί ένα optimization_model στο έργο του πράκτορα)
-azd ai agent optimize
-
-# Κατεβάστε τον αναπτυγμένο πηγαίο κώδικα ενός φιλοξενούμενου πράκτορα που βασίζεται σε κώδικα
-# (με επαλήθευση SHA-256)
+# Download the deployed source of a code-based hosted agent
+# (with SHA-256 verification)
 azd ai agent code download
 
-# Διαγραφή ενός φιλοξενούμενου πράκτορα και όλων των εκδόσεών του
-# (--force τερματίζει ενεργές συνεδρίες)
+# Delete a hosted agent and all of its versions
+# (--force terminates active sessions)
 azd ai agent delete --force
 ```
 
 **Κύκλος ζωής με μια ματιά:**
 
-| Στάδιο | Εντολή | Χρήση σε Παραγωγή |
+| Στάδιο | Εντολή | Παραγωγική χρήση |
 |-------|---------|----------------|
-| Test | `azd ai agent invoke` | Επικύρωση απαντήσεων και μέτρηση λανθάνουσας πριν την κυκλοφορία |
-| Inspect | `azd ai agent endpoint show` | Ανασκόπηση auth/config endpoint· εντοπισμός αλλαγών που σπάνε νωρίς |
-| Measure | `azd ai agent eval generate` | Δημιουργία επαναλήψιμου συνόλου αξιολόγησης από πραγματικά traces |
-| Improve | `azd ai agent optimize` | Βελτιστοποίηση οδηγιών βάσει μετρημένης ποιότητας |
-| Recover | `azd ai agent code download` | Ανάκτηση του ακριβούς αναπτυγμένου πηγαίου για έλεγχο/rollback |
-| Retire | `azd ai agent delete --force` | Απομάκρυνση agent και των εκδόσεών του με καθαρό τρόπο |
+| Δοκιμή | `azd ai agent invoke` | Επικύρωση απαντήσεων και μέτρηση λατενσίας πριν την κυκλοφορία |
+| Έλεγχος | `azd ai agent endpoint show` | Επανεξέταση ελέγχου ταυτότητας/διαμόρφωσης τερματικού σημείου; εντοπίστε έγκαιρα αλλαγές συμβατότητας |
+| Μέτρηση | `azd ai eval init`, `generate`, `run start` | Ορίστε, αναπτύξτε και εκτελέστε επαναλαμβανόμενες αξιολογήσεις |
+| Βελτίωση | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Επαναχρησιμοποιήστε μια συμβατή αξιολόγηση για βελτιστοποίηση του agent |
+| Αποκατάσταση | `azd ai agent code download` | Ανάκτηση του ακριβούς αναπτυγμένου πηγαίου για έλεγχο/επανεγκατάσταση |
+| Αποχώρηση | `azd ai agent delete --force` | Απομάκρυνση agent και των εκδόσεών του καθαρά |
 
-> Αυτές είναι εντολές σε preview και μπορεί να αλλάξουν ανάμεσα σε εκδόσεις επεκτάσεων. Εκτελέστε `azd ai agent --help` για να δείτε τις ακριβείς υποεντολές που είναι διαθέσιμες στην εγκατεστημένη έκδοσή σας.
+> Αυτές είναι εντολές σε προεπισκόπηση και μπορεί να αλλάξουν μεταξύ εκδόσεων επεκτάσεων. Τρέξτε `azd ai agent --help` για να δείτε τις ακριβείς διαθέσιμες υποεντολές στην εγκατεστημένη έκδοση σας.
 
-### Model Context Protocol (MCP) με `azd mcp`
-AZD περιλαμβάνει ενσωματωμένη υποστήριξη διακομιστή MCP (Alpha), επιτρέποντας σε πράκτορες και εργαλεία AI να αλληλεπιδρούν με τους πόρους Azure σας μέσω ενός τυποποιημένου πρωτοκόλλου:
+`endpoint show` υποστηρίζει hosted, prompt, και voice agents, αλλά οι ενημερώσεις τερματικών είναι μόνο για hosted· οι workflow agents δεν υποστηρίζονται. Η λήψη κώδικα και το παράδειγμα απόσυρσης hosted-agent παραπάνω δεν είναι γενικές λειτουργίες για κάθε τύπο agent.
+
+#### Μεταφορά Αξιολόγησης και Έλεγχοι Ποιότητας
+
+Ξεκινώντας με τους agents **1.0.0-beta.22 (2026-10-23)**, οι παλαιές εντολές `azd ai agent eval` παρέχουν καθοδήγηση μετανάστευσης αντί για την παλιά ροή αξιολόγησης. Μη αντιγράφετε παλαιά `eval generate --dataset ...` παραδείγματα: η αξιολόγηση ζει πλέον κάτω από **`azd ai eval`**.
+
+Σε ένα αρχικοποιημένο έργο agent, ελέγξτε ταυτότητα με `azd auth login`, επιβεβαιώστε το επιλεγμένο περιβάλλον/έργο Foundry, και εγκαταστήστε `azure.ai.evaluations`. Απαιτείται ανάπτυξη μοντέλου judge για σκοράρισμα βάσει μοντέλου· η παραγωγή και η προσομοίωση συνομιλιών μπορεί να απαιτούν δικές τους επιλογές μοντέλου και επιφέρουν επιπλέον χρεώσεις.
 
 ```bash
-# Ξεκινήστε τον MCP διακομιστή για το έργο σας
+# Scaffold evals/ and wire an azure.ai.eval service into azure.yaml
+azd ai eval init
+
+# Optionally synthesize a rubric and dataset from the agent
+azd ai eval generate
+
+# Review generated files, then register datasets, evaluators, and eval groups
+azd up
+
+# Start an evaluation and wait for its results
+azd ai eval run start --wait
+
+# Inspect runs and available test-case output
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+```
+
+Ακολουθήστε τις αλληλεπιδραστικές επιλογές και τα τυπωμένα επόμενα βήματα αντί να υποθέσετε ότι τα παραγόμενα στοιχεία είναι ήδη καταχωρημένα. Η διαμόρφωση αξιολόγησης συνήθως ζει στο `evals/azure.eval.yaml`, αναφερόμενη από την υπηρεσία `azure.ai.eval` στο `azure.yaml`. Τα κλειδιά είναι **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`)· απορρίπτονται τα παλαιά κλειδιά διαμόρφωσης snake_case. Οι διαδρομές μέσα σε αναφερόμενη διαμόρφωση επιλύονται σχετικώς προς το αρχείο, όχι τη ρίζα του αποθετηρίου.
+
+Για αξιολογήσεις συνομιλιών, επιλέξτε **στατική** για να σκοράρετε ολοκληρωμένες απομαγνητοφωνήσεις χωρίς να καλέσετε agent, ή **προσομοίωση** για να δημιουργήσετε συνομιλίες από σενάρια. Η προσομοίωση χρειάζεται ένα agent στόχο, ένα μοντέλο προσομοιωτή, και ξεχωριστή επιλογή μοντέλου judge. Για εντολές χωρίς επίβλεψη, χρησιμοποιήστε τα εισαγόμενα που απαριθμούνται από `azd ai eval init --help` και `azd ai eval generate --help`· μην υποθέτετε ότι το μοντέλο παραγωγής είναι επίσης judge ή προσομοιωτής.
+
+Για CI, διαμορφώστε ρητή πολιτική ποιότητας με `azd ai eval run start --help` (`--fail-on`) και θεωρήστε διαφορετικό του μηδενός κωδικό εξόδου host ως αποτυχία. Μια ολοκληρωμένη εκτέλεση δεν είναι αυτόματα πέρασμα ποιότητας. Επανεξετάστε αποτυχημένες/με σφάλματα γραμμές και διαγνωστικά· η έλλειψη ή ασυνέπεια αριθμών αποτελεσμάτων δεν αποτελεί απόδειξη επιτυχίας. Τα καταχωρημένα σύνολα δεδομένων διατηρούν την ταυτότητα/έκδοση υπηρεσίας· το `--max-samples` δεν μπορεί να υποσύνολο ενός καταχωρημένου dataset. Δημοσιεύστε σκόπιμα μικρότερο dataset ή χρησιμοποιήστε υποστηριζόμενη πηγή τοπικού αρχείου.
+
+```bash
+# Example CI policy: at least 90% of all test cases must pass
+azd ai eval run start --wait --fail-on "pass-rate=0.9"
+```
+
+Η πύλη βαθμολογίας περνά περιστρέφοντας τις επιτυχημένες δοκιμαστικές περιπτώσεις δια  το σύνολο των δοκιμαστικών περιπτώσεων· απορριφθείσες, με σφάλμα, παραλειφθείσες και άλλως μη περασμένες γραμμές υπολογίζονται ως αρνητικές. Μη συνδυάζετε την πύλη με `--no-wait`, που επιστρέφει πριν βγει απόφαση.
+
+#### Μετανάστευση Διαμόρφωσης Βελτιστοποίησης
+
+Η βελτιστοποίηση πλέον χρησιμοποιεί το GA v1 API. Για να επαναχρησιμοποιήσετε μια συμβατή αξιολόγηση **επίπεδου γύρου, υποστηριζόμενη από dataset** από τη νέα ροή εργασίας:
+
+```bash
+# Replace placeholders with the evaluation name and optimizer model deployment
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+`--eval` επιλέγει μια αξιολόγηση· `--eval-config` επιλέγει το αρχείο διαμόρφωσής της (συμπεριλαμβανομένων των ορισμών με υποστήριξη αρχείων). Το `--config` αντίθετα παίρνει ένα **αυτόνομο αίτημα API βελτιστοποίησης** σε YAML ή JSON. Μην στέλνετε έναν παλιό πράκτορα `eval.yaml` ή τον νέο `azure.eval.yaml` στο `--config`, και μην συνδυάζετε `--config` με `--eval`/`--eval-config`. Οι αξιολογήσεις συνομιλίας, με υποστήριξη ίχνους ή προσομοίωσης δεν είναι ανταλλάξιμες με τη συντόμευση βελτιστοποίησης βασισμένη στο σύνολο δεδομένων· χρησιμοποιήστε τη μορφή υποστηριζόμενου αιτήματος βελτιστοποίησης για αυτά τα σενάρια. Εξετάστε τους υποψηφίους πριν τους εφαρμόσετε ή τους αναπτύξετε.
+
+Δείτε την [αναφορά αξιολογήσεων για την αναθεωρημένη έκδοση](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) και τον [πηγαίο κώδικα εντολών βελτιστοποίησης για την αναθεωρημένη έκδοση](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) για ακριβείς επιλογές.
+
+#### Προεπισκόπηση Ανάπτυξης Πράκτορα μόνο για Ανάγνωση
+
+Για ένα υπάρχον περιβάλλον δεμένο με Foundry με μια ενοποιημένη υπηρεσία `azure.ai.agent` του `kind: hosted`, συγκρίνετε τη υποστηριζόμενη διαμόρφωση πριν την ανάπτυξη:
+
+```bash
+azd deploy <service-name> --preview --no-prompt
+```
+
+Αυτή η προεπισκόπηση δεν αναπτύσσει τον πράκτορα. Δεν είναι μια πλήρης διαφορά υποδομής/ασφαλείας: οι πράκτορες προτροπής/φωνής/ροής εργασίας, οι παλιοί σχεδιασμοί διαμόρφωσης και ορισμένες φιλοξενούμενες ρυθμίσεις βρίσκονται εκτός του πεδίου της. Ένα αποτέλεσμά `unknown` δεν αποτελεί έγκριση για ανάπτυξη. Δεν υπάρχει αυτόνομη εντολή `azd ai agent deploy` ή πράκτορα `--dry-run`· χρησιμοποιήστε τη βασική ροή ανάπτυξης.
+
+### Πρωτόκολλο Συμφραζομένων Μοντέλου (MCP) με `azd mcp`
+
+Το AZD περιλαμβάνει ενσωματωμένη υποστήριξη διακομιστή MCP (Alpha), επιτρέποντας στους πρακτορες AI και τα εργαλεία να αλληλεπιδρούν με τους πόρους Azure σας μέσω ενός τυποποιημένου πρωτοκόλλου:
+
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# Επανεξετάστε τους τρέχοντες κανόνες συναίνεσης του Copilot για την εκτέλεση εργαλείων
+# Review current Copilot consent rules for tool execution
 azd copilot consent list
 ```
 
-Ο διακομιστής MCP εκθέτει το πλαίσιο έργου azd—περιβάλλοντα, υπηρεσίες και πόρους Azure—σε εργαλεία ανάπτυξης με δυνατότητα AI. Αυτό επιτρέπει:
+Ο διακομιστής MCP εκθέτει το πλαίσιο έργου σας azd—περιβάλλοντα, υπηρεσίες και πόρους Azure—σε εργαλεία ανάπτυξης με τεχνητή νοημοσύνη. Αυτό διευκολύνει:
 
-- **Υποβοηθούμενη από AI ανάπτυξη**: Επιτρέψτε σε πράκτορες κωδικοποίησης να ερωτήσουν την κατάσταση του έργου σας και να ενεργοποιήσουν αναπτύξεις
-- **Ανακάλυψη πόρων**: Τα εργαλεία AI μπορούν να εντοπίσουν ποιους πόρους Azure χρησιμοποιεί το έργο σας
-- **Διαχείριση περιβάλλοντος**: Οι πράκτορες μπορούν να αλλάζουν μεταξύ περιβάλλοντος ανάπτυξης/δοκιμών/παραγωγής
+- **Υποβοηθούμενη ανάπτυξη AI**: Επιτρέπει στους κωδικογράφους πράκτορες να ρωτούν την κατάσταση του έργου και να πυροδοτούν αναπτύξεις
+- **Ανακάλυψη πόρων**: Τα εργαλεία AI μπορούν να ανακαλύψουν ποιους πόρους Azure χρησιμοποιεί το έργο σας
+- **Διαχείριση περιβάλλοντος**: Οι πράκτορες μπορούν να εναλλάσσονται ανάμεσα σε περιβάλλοντα ανάπτυξης/δοκιμής/παραγωγής
 
-### Infrastructure Generation with `azd infra generate`
+### Δημιουργία Υποδομής με `azd infra generate`
 
-Για παραγωγικά φορτία εργασίας AI, μπορείτε να δημιουργήσετε και να προσαρμόσετε Infrastructure as Code αντί να βασίζεστε στην αυτόματη προμήθεια:
+Για παραγωγικά φορτία εργασίας AI, μπορείτε να δημιουργήσετε και να προσαρμόσετε Υποδομή ως Κώδικα αντί να βασίζεστε σε αυτόματη παροχή:
 
 ```bash
-# Δημιουργήστε αρχεία Bicep/Terraform από τον ορισμό του έργου σας
+# Generate supported infrastructure for this project type
 azd infra generate
 ```
 
-Αυτό γράφει IaC στο δίσκο ώστε να μπορείτε:
-- Να ελέγξετε και να ελέγξετε την υποδομή πριν την ανάπτυξη
-- Να προσθέσετε προσαρμοσμένες πολιτικές ασφαλείας (κανόνες δικτύου, ιδιωτικά endpoints)
-- Να ενσωματώσετε με υπάρχοντες διαδικασίες ελέγχου IaC
-- Να διατηρείτε τις αλλαγές υποδομής σε έλεγχο εκδόσεων χωριστά από τον κώδικα της εφαρμογής
+Η υποστήριξη εξαρτάται από το έργο/διακομιστή και τους εγκατεστημένους παρόχους· αυτή δεν είναι μια γενική εντολή αντίστροφης μηχανικής για αυθαίρετους πόρους Azure ή μια υπόσχεση για δημιουργία και Bicep και Terraform. Εκτελέστε `azd infra generate --help` και ελέγξτε τη δημιουργημένη μορφή. Όπου υποστηρίζεται, η εγγραφή IaC στο δίσκο σας επιτρέπει:
+- Να εξετάζετε και να ελέγχετε την υποδομή πριν την ανάπτυξη
+- Να προστίθενται προσαρμοσμένες πολιτικές ασφάλειας (κανόνες δικτύου, ιδιωτικά endpoints)
+- Να ενσωματώνεστε σε υπάρχοντες διαδικασίες ελέγχου IaC
+- Να ελέγχετε τις αλλαγές υποδομής ξεχωριστά από τον κώδικα εφαρμογής
 
-### Production Lifecycle Hooks
+### Σύνδεσμοι Ζωής Παραγωγής
 
-Τα hooks του AZD σας επιτρέπουν να εισάγετε προσαρμοσμένη λογική σε κάθε στάδιο του κύκλου ζωής ανάπτυξης—κρίσιμο για παραγωγικές ροές εργασίας AI:
+Οι σύνδεσμοι AZD σας επιτρέπουν να εγχύετε προσαρμοσμένη λογική σε κάθε στάδιο του κύκλου ζωής ανάπτυξης—κριτικής σημασίας για παραγωγικά φορτία εργασίας AI:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1113,7 +1148,7 @@ hooks:
     run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
   postprovision:
     shell: sh
-    run: scripts/configure-networking.sh  # Set up private endpoints
+    run: scripts/verify-networking.sh  # Verify IaC-provisioned private connectivity
   predeploy:
     shell: sh
     run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
@@ -1131,42 +1166,42 @@ services:
 ```
 
 ```bash
-# Εκτελέστε χειροκίνητα ένα συγκεκριμένο hook κατά την ανάπτυξη
+# Run a specific hook manually during development
 azd hooks run predeploy
 ```
 
-**Συνιστώμενα hooks παραγωγής για φορτία εργασίας AI:**
+**Προτεινόμενοι σύνδεσμοι παραγωγής για φορτία εργασίας AI:**
 
-| Hook | Περίπτωση χρήσης |
-|------|------------------|
-| `preprovision` | Επικύρωση ορίων συνδρομής για χωρητικότητα μοντέλου AI |
-| `postprovision` | Διαμόρφωση ιδιωτικών endpoints, ανάπτυξη βαρών μοντέλου |
-| `predeploy` | Εκτέλεση δοκιμών ασφάλειας AI, επικύρωση προτύπων προτροπών |
-| `postdeploy` | Εκτέλεση γρήγορων ελέγχων στις απαντήσεις των πρακτόρων, επαλήθευση συνδεσιμότητας μοντέλου |
+| Σύνδεσμος | Περίπτωση Χρήσης |
+|------|----------|
+| `preprovision` | Επαλήθευση ποσοστώσεων συνδρομής για χωρητικότητα μοντέλου AI |
+| `postprovision` | Επαλήθευση ιδιωτικής συνδεσιμότητας και απαιτούμενων εξόδων πόρων |
+| `predeploy` | Εκτέλεση δοκιμών ασφάλειας AI, επαλήθευση προτύπων προτροπής |
+| `postdeploy` | Δοκιμή καπνού στις αποκρίσεις πράκτορα, επαλήθευση συνδεσιμότητας μοντέλου |
 
-### CI/CD Pipeline Configuration
+### Διαμόρφωση CI/CD Pipeline
 
 Χρησιμοποιήστε `azd pipeline config` για να συνδέσετε το έργο σας με GitHub Actions ή Azure Pipelines με ασφαλή αυθεντικοποίηση Azure:
 
 ```bash
-# Ρυθμίστε τον αγωγό CI/CD (διαδραστικά)
+# Configure CI/CD pipeline (interactive)
 azd pipeline config
 
-# Ρυθμίστε με συγκεκριμένο πάροχο
+# Configure with a specific provider
 azd pipeline config --provider github
 ```
 
 Αυτή η εντολή:
-- Δημιουργεί ένα service principal με πρόσβαση ελάχιστων δικαιωμάτων
-- Διαμορφώνει federated credentials (χωρίς αποθηκευμένα μυστικά)
-- Δημιουργεί ή ενημερώνει το αρχείο ορισμού pipeline
-- Ορίζει τις απαιτούμενες μεταβλητές περιβάλλοντος στο σύστημά CI/CD σας
+- Δημιουργεί ή διαμορφώνει μια ταυτότητα pipeline· ελέγξτε το δημιουργημένο εύρος ρόλων/δικαιωμάτων αντί να υποθέτετε τον ελάχιστο προνόμιο
+- Διαμορφώνει ομοσπονδιακά διαπιστευτήρια (χωρίς αποθηκευμένα μυστικά)
+- Δημιουργεί ή ενημερώνει το αρχείο ορισμού pipeline σας
+- Ορίζει απαιτούμενες μεταβλητές περιβάλλοντος στο σύστημα CI/CD σας
 
-#### Step-by-step: your first GitHub Actions pipeline
+#### Βήμα-βήμα: το πρώτο σας pipeline στο GitHub Actions
 
-Εδώ είναι ο πλήρης οδηγός από ένα λειτουργικό έργο azd σε αυτοματοποιημένες αναπτύξεις σε κάθε push.
+Ακολουθεί η πλήρης παρουσίαση από ένα λειτουργικό έργο azd μέχρι τις αυτοματοποιημένες αναπτύξεις σε κάθε push.
 
-**1. Make sure your project is on GitHub**
+**1. Βεβαιωθείτε ότι το έργο σας είναι στο GitHub**
 
 ```bash
 git init
@@ -1175,21 +1210,21 @@ git commit -m "Initial azd project"
 gh repo create my-ai-app --private --source=. --push
 ```
 
-**2. Run pipeline config**
+**2. Εκτελέστε τη διαμόρφωση pipeline**
 
 ```bash
 azd pipeline config --provider github
 ```
 
-azd θα, με διαδραστικό τρόπο:
-- Θα ρωτήσει ποια συνδρομή Azure και ποιο περιβάλλον να στοχεύσει
-- Θα δημιουργήσει ένα Entra **εγγραφή εφαρμογής + service principal** για το pipeline
-- Θα ρυθμίσει **federated credentials (OIDC)**—ώστε το GitHub να αυθεντικοποιείται στο Azure με βραχύβια tokens και **να μην αποθηκεύονται μυστικά**
-- Θα σπρώξει τις απαιτούμενες **μεταβλητές** στο repo σας στο GitHub (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+Το azd θα, διαδραστικά:
+- Ζητήσει ποια συνδρομή Azure και περιβάλλον θα στοχεύσει
+- Δημιουργήσει μια **εγγραφή εφαρμογής + εκπρόσωπο υπηρεσίας** Entra για το pipeline
+- Ρυθμίσει **ομοσπονδιακά διαπιστευτήρια (OIDC)**—ώστε το GitHub να αυθεντικοποιείται στο Azure με βραχύβια tokens και **χωρίς αποθηκευμένα μυστικά**
+- Στείλει τις απαιτούμενες **μεταβλητές** στο αποθετήριο σας στο GitHub (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
 
-**3. Understand the generated workflow**
+**3. Κατανοήστε τη δημιουργημένη ροή εργασίας**
 
-azd προσθέτει `.github/workflows/azure-dev.yml`. Τα βασικά μέρη μοιάζουν ως εξής:
+Για ένα υποστηριζόμενο πρότυπο, διαμορφώστε/εξετάστε το `.github/workflows/azure-dev.yml`. Τα βασικά μέρη μοιάζουν έτσι (το πρότυπο πρέπει να παρέχει την εργαλειοθήκη της εφαρμογής και τις παραμέτρους περιβάλλοντος):
 
 ```yaml
 # .github/workflows/azure-dev.yml
@@ -1223,59 +1258,59 @@ jobs:
         run: azd deploy --no-prompt
 ```
 
-**4. Verify it works**
+**4. Επαληθεύστε ότι λειτουργεί**
 
 ```bash
-# Προώθησε μια αλλαγή για να ενεργοποιηθεί το pipeline
+# Push a change to trigger the pipeline
 git commit -am "Trigger pipeline" --allow-empty
 git push
 ```
 
-Ανοίξτε την καρτέλα **Actions** στο repo σας στο GitHub και παρακολουθήστε τον workflow να εκτελεί αυτόματα `azd provision` και `azd deploy`.
+Ανοίξτε την καρτέλα **Actions** στο αποθετήριό σας στο GitHub και παρακολουθήστε τη ροή εργασίας να εκτελεί `azd provision` και `azd deploy` αυτόματα.
 
-> **Γιατί έχουν σημασία τα federated credentials:** παλαιότερα pipelines αποθήκευαν ένα client secret στο GitHub. Τα OIDC federated credentials καταργούν εντελώς αυτό το μυστικό—το GitHub ζητάει ένα βραχύβιo token κατά την εκτέλεση, το οποίο είναι πιο ασφαλές και δεν υπάρχει κάτι για να περιστραφεί ή να διαρρεύσει. Αυτή είναι η προεπιλογή που ρυθμίζει το `azd pipeline config`.
+> **Γιατί έχουν σημασία τα ομοσπονδιακά διαπιστευτήρια:** τα παλιότερα pipelines αποθήκευαν ένα μυστικό πελάτη στο GitHub. Τα ομοσπονδιακά διαπιστευτήρια OIDC αφαιρούν εντελώς αυτό το μυστικό—το GitHub ζητά ένα βραχύβιο token κατά το runtime, που είναι πιο ασφαλές και δεν χρειάζεται περιστροφή ή διαρροή. Αυτό είναι η προεπιλεγμένη διαμόρφωση που ρυθμίζει το `azd pipeline config`.
 
-> **Μυστικά vs. μεταβλητές:** μη ευαίσθητοι αναγνωριστικοί (`AZURE_CLIENT_ID`, κ.λπ.) τοποθετούνται στις **μεταβλητές** του repo. Αν η εφαρμογή σας χρειάζεται πραγματικά ένα μυστικό κατά το build, προσθέστε το ως GitHub **secret** και αναφερθείτε σε αυτό με `${{ secrets.NAME }}`—αλλά προτιμήστε Key Vault + managed identity κατά το runtime (δείτε [Κεφάλαιο 3](../chapter-03-configuration/authsecurity.md)).
+> **Μυστικά vs μεταβλητές:** μη ευαίσθητοι αναγνωριστές (`AZURE_CLIENT_ID`, κ.λπ.) πηγαίνουν στις **μεταβλητές** του αποθετηρίου. Αν η εφαρμογή σας χρειάζεται πραγματικά ένα μυστικό κατά το χρόνο κατασκευής, προσθέστε το σαν **μυστικό** στο GitHub και αναφερθείτε σε αυτό με `${{ secrets.NAME }}`—αλλά προτιμήστε το Key Vault + διαχειριζόμενη ταυτότητα κατά το runtime (δείτε [Κεφάλαιο 3](../chapter-03-configuration/authsecurity.md)).
 
-**Ροή εργασίας παραγωγής με pipeline config:**
+**Ροή εργασίας παραγωγής με διαμόρφωση pipeline:**
 
 ```bash
-# 1. Ρύθμιση περιβάλλοντος παραγωγής
+# 1. Set up production environment
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. Διαμόρφωση του pipeline
+# 2. Configure the pipeline
 azd pipeline config --provider github
 
-# 3. Το pipeline εκτελεί azd deploy σε κάθε push στο main
+# 3. Review the generated trigger, provisioning/deployment steps, and approvals
 ```
 
-#### Step-by-step: Azure DevOps Pipelines
+#### Βήμα-βήμα: Azure DevOps Pipelines
 
-Προτιμάτε Azure DevOps αντί για GitHub Actions; Το azd το υποστηρίζει εγγενώς με τον provider `azdo`. Η ροή είναι σχεδόν ίδια—το azd δημιουργεί το αρχείο pipeline, δημιουργεί μια υπηρεσιακή σύνδεση και ρυθμίζει την αυθεντικοποίηση.
+Προτιμάτε Azure DevOps αντί GitHub Actions; Το azd το υποστηρίζει εγγενώς με τον πάροχο `azdo`. Η ροή είναι σχεδόν πανομοιότυπη—το azd δημιουργεί το αρχείο pipeline, δημιουργεί μια υπηρεσία σύνδεσης και ρυθμίζει την αυθεντικοποίηση.
 
-**1. Make sure you have an Azure DevOps project**
+**1. Βεβαιωθείτε ότι έχετε έργο Azure DevOps**
 
-Χρειάζεστε έναν οργανισμό και ένα έργο στο `https://dev.azure.com/<your-org>`. Δημιουργήστε ένα Personal Access Token (PAT) με δικαιώματα **Build (Read & execute)**, **Code (Read & write)** και **Service Connections (Read, query & manage)**—το azd θα σας το ζητήσει.
+Χρειάζεστε έναν οργανισμό και ένα έργο στο `https://dev.azure.com/<your-org>`. Δημιουργήστε ένα Προσωπικό Διακριτικό Πρόσβασης (PAT) με δικαιώματα **Build (Ανάγνωση & εκτέλεση)**, **Code (Ανάγνωση & εγγραφή)**, και **Service Connections (Ανάγνωση, ερώτηση & διαχείριση)**—το azd θα σας το ζητήσει.
 
-**2. Configure the pipeline**
+**2. Διαμορφώστε το pipeline**
 
 ```bash
 azd pipeline config --provider azdo
 ```
 
-azd θα:
-- Θα ρωτήσει για τον οργανισμό και το έργο Azure DevOps σας
-- Θα δημιουργήσει (ή θα επαναχρησιμοποιήσει) μια **service connection** στο Azure χρησιμοποιώντας ένα service principal
-- Θα διαμορφώσει **workload identity federation (OIDC)** ώστε να μην αποθηκεύεται client secret
-- Θα κάνει commit ένα `azure-dev.yml` αρχείο ορισμού pipeline στο repo σας
+Το azd θα:
+- Ζητήσει τον οργανισμό Azure DevOps και το έργο σας
+- Δημιουργήσει (ή επαναχρησιμοποιήσει) μια **υπηρεσία σύνδεσης** στο Azure χρησιμοποιώντας έναν εκπρόσωπο υπηρεσίας
+- Ρυθμίσει **ομοσπονδία ταυτότητας φορτίου εργασίας (OIDC)** ώστε να μην αποθηκεύεται μυστικό πελάτη
+- Ρυθμίσει έναν ορισμό pipeline (συνήθως `.azdo/pipelines/azure-dev.yml`) από το πρότυπο pipeline του έργου
 
-**3. Review the generated `azure-dev.yml`**
+**3. Εξετάστε το δημιουργημένο pipeline**
 
-azd γράφει ένα pipeline που προμηθεύει και αναπτύσσει σε κάθε push στο `main`:
+Χρησιμοποιήστε το δημιουργημένο pipeline του έργου, συμπεριλαμβανομένων των **βημάτων σύνδεσης υπηρεσίας Azure και αυθεντικοποίησης AZD**. Ο επίσημος [οδηγός ρύθμισης Azure Pipelines](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) δείχνει το τμήμα εγκατάστασης παρακάτω· αυτό είναι μόνο **εγκατάσταση**, όχι εκτελέσιμη ροή ανάπτυξης με αυθεντικοποίηση:
 
 ```yaml
-# azure-dev.yml
+# .azdo/pipelines/azure-dev.yml (installer fragment only)
 trigger:
   - main
 
@@ -1283,57 +1318,45 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  - task: setup-azd@1
+  - task: setup-azd@0
     displayName: Install azd
-
-  - script: azd provision --no-prompt
-    displayName: Provision Infrastructure
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
-
-  - script: azd deploy --no-prompt
-    displayName: Deploy Application
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
 ```
 
-**4. Where the variables come from**
+Εγκαταστήστε την επέκταση AZD Azure DevOps αν η εργασία αυτή δεν είναι διαθέσιμη στον οργανισμό σας. Μην αντιγράφετε γυμνές εντολές `azd provision`/`azd deploy` χωρίς αυθεντικοποίηση: η ρύθμιση υπηρεσίας σύνδεσης δεν κάνει αυτόματα login κάθε διαδικασία στο AZD. Ακολουθήστε την είσοδο OIDC και το εξουσιοδοτημένο πλαίσιο εργασίας του προτύπου και δώστε το επιλεγμένο περιβάλλον/συνδρομή/τοποθεσία.
 
-azd αποθηκεύει τις τιμές περιβάλλοντος (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) ως **variable group** στο Azure DevOps ώστε το pipeline να μπορεί να τις διαβάσει. Μπορείτε να τις δείτε και να τις επεξεργαστείτε κάτω από **Pipelines → Library**.
+**4. Από πού προκύπτουν οι μεταβλητές**
 
-> **Ίδιο όφελος OIDC όπως στο GitHub:** ο provider `azdo` επίσης διαμορφώνει workload identity federation από προεπιλογή, οπότε δεν υπάρχει client secret αποθηκευμένο στην service connection—το Azure DevOps ανταλλάσσει ένα βραχύβιο token κατά το runtime. Χρησιμοποιήστε `--auth-type client-credentials` μόνο αν ο οργανισμός σας δεν μπορεί να χρησιμοποιήσει ακόμη OIDC.
+Το azd αποθηκεύει τις τιμές περιβάλλοντος (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) ως **ομάδα μεταβλητών** στο Azure DevOps ώστε το pipeline να μπορεί να τις διαβάσει. Μπορείτε να τις δείτε και να τις επεξεργαστείτε κάτω από **Pipelines → Library**.
 
-**5. Run it**
+> **Ίδιο όφελος OIDC με το GitHub:** ο πάροχος `azdo` ρυθμίζει επίσης από προεπιλογή ομοσπονδία ταυτότητας φορτίου εργασίας, οπότε δεν αποθηκεύεται μυστικό πελάτη στην υπηρεσία σύνδεσης—το Azure DevOps ανταλλάσσει βραχύβιο token κατά το runtime. Περάστε `--auth-type client-credentials` μόνο αν ο οργανισμός σας δεν μπορεί να χρησιμοποιήσει ακόμη OIDC.
+
+**5. Εκτελέστε το**
 
 ```bash
 git commit -am "Add Azure DevOps pipeline" --allow-empty
 git push
 ```
 
-Ανοίξτε **Pipelines** στο Azure DevOps για να παρακολουθήσετε το `azd provision` και το `azd deploy`.
+Ανοίξτε τα **Pipelines** στο Azure DevOps για να παρακολουθήσετε την εκτέλεση `azd provision` και `azd deploy`.
 
-### Adding Components with `azd add`
+### Προσθήκη Συστατικών με `azd add`
 
-Προσθέστε σταδιακά υπηρεσίες Azure σε ένα υπάρχον έργο:
+Προσθέστε σταδιακά υπηρεσίες Azure σε υπάρχον έργο:
 
 ```bash
-# Προσθέστε ένα νέο συστατικό υπηρεσίας διαδραστικά
+# Add a new service component interactively
 azd add
 ```
 
-Αυτό είναι ιδιαίτερα χρήσιμο για την επέκταση παραγωγικών εφαρμογών AI—για παράδειγμα, προσθήκη υπηρεσίας αναζήτησης διανυσμάτων, ενός νέου endpoint πράκτορα, ή ενός συστατικού παρακολούθησης σε μια υπάρχουσα ανάπτυξη.
+Αυτό είναι ιδιαίτερα χρήσιμο για επέκταση παραγωγικών εφαρμογών AI—για παράδειγμα, προσθέτοντας μια υπηρεσία αναζήτησης διανυσμάτων, ένα νέο endpoint πράκτορα, ή ένα στοιχείο παρακολούθησης σε υπάρχουσα ανάπτυξη.
 
-## Additional Resources
+## Πρόσθετοι Πόροι
 
-- **Azure Well-Architected Framework**: [AI workload guidance](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
-- **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
-- **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 ανοιχτές δεξιότητες πρακτόρων για Azure AI, Foundry, ανάπτυξη, βελτιστοποίηση κόστους και διαγνωστικά. Εγκαταστήστε στον επεξεργαστή σας:
+- **Πλαίσιο Azure Well-Architected**: [Κατευθύνσεις φορτίου εργασίας AI](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Τεκμηρίωση Microsoft Foundry**: [Επίσημα έγγραφα](https://learn.microsoft.com/azure/ai-studio/)
+- **Πρότυπα Κοινότητας**: [Δείγματα Azure](https://github.com/Azure-Samples)
+- **Κοινότητα Discord**: [κανάλι #Azure](https://discord.gg/microsoft-azure)
+- **Δεξιότητες Πρακτόρων για Azure**: [microsoft/github-copilot-for-azure στο skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Επαναχρησιμοποιήσιμες δεξιότητες πρακτόρων για Azure AI, Foundry, ανάπτυξη, βελτιστοποίηση κόστους και διαγνωστικά. Εγκαταστήστε στον επεξεργαστή σας:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1341,11 +1364,11 @@ azd add
 ---
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Αρχική Μαθήματος**: [AZD For Beginners](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 8 - Προτύπα Παραγωγής και Επιχειρηματικά
-- **⬅️ Προηγούμενο Κεφάλαιο**: [Κεφάλαιο 7: Αντιμετώπιση προβλημάτων](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Επίσης Σχετικό**: [Εργαστήριο AI](ai-workshop-lab.md)
-- **� Μάθημα Ολοκληρώθηκε**: [AZD For Beginners](../../README.md)
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 8 - Παραγωγή & Επιχειρηματικά Μοντέλα
+- **⬅️ Προηγούμενο Κεφάλαιο**: [Κεφάλαιο 7: Επίλυση Προβλημάτων](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Επίσης Σχετικό**: [Εργαστήριο AI](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Ολοκλήρωση Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
 
 **Θυμηθείτε**: Τα παραγωγικά φορτία εργασίας AI απαιτούν προσεκτικό σχεδιασμό, παρακολούθηση και συνεχή βελτιστοποίηση. Ξεκινήστε με αυτά τα πρότυπα και προσαρμόστε τα στις συγκεκριμένες απαιτήσεις σας.
 

@@ -1,22 +1,22 @@
-# Luku 2: AI-Ensimmäinen Kehitys
+# Luku 2: AI-Ensisijainen Kehitys
 
-**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1-2 tuntia | **⭐ Vaativuus**: Keskitaso
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 4-5 tuntia sisältäen työpajan | **⭐ Vaativuus**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tässä luvussa keskitytään AI-teknologialla toimivien sovellusten käyttöönottoon Azure Developer CLI:n ja Microsoft Foundryn palveluiden avulla. Yksinkertaisista AI-chat-sovelluksista älykkäisiin agenteihin työkalujen kanssa.
+Tässä luvussa keskitytään AI-tehoisten sovellusten käyttöönottoon Azure Developer CLI:n ja Microsoft Foundry -palvelujen avulla. Yksinkertaisista AI-chat-sovelluksista älykkäisiin agenteihin työkalujen kanssa.
 
-> **Vahvistushuomautus (2026-07-13):** Tämän luvun komentovirrat ja laajennusohjeet on tarkistettu `azd` version `1.27.1` ja nykyisen esikatselu AI-agenttilaajennuksen `azure.ai.agents` version `1.0.0-beta.5` mukaan. Jos käytät vanhempaa AZD-versiota, päivitä ensin ja jatka sitten harjoituksiin.
+> **Julkaisun tarkistus (2026-11-04):** AI CLI -ohjeistus tarkistettiin julkaistua `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23` sekä `azure.ai.evaluations` `1.0.0-beta.2` dokumentaatiolähdettä vasten. Käytä `azd >= 1.37.0` yhdistettyyn työnkulkuun. Arvioinnit käyttävät nyt erillistä `azd ai eval` nimiavaruutta; katso [julkaisumuutokset ja siirtymäohjeet](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Tämä ei ole reaaliaikainen käyttöönoton validointi.
 
 ## Oppimistavoitteet
 
-Tämän luvun suorittamalla osaat:
-- Ottaa AI-sovelluksia käyttöön valmiilla AZD-malleilla
-- Ymmärtää Microsoft Foundryn integraation AZD:n kanssa
-- Määritellä ja mukauttaa AI-agentteja työkaluineen
-- Ottaa käyttöön RAG (Retrieval-Augmented Generation) sovelluksia
+Tässä luvussa opit:
+- Ottamaan AI-sovelluksia käyttöön valmiiden AZD-mallien avulla
+- Ymmärtämään Microsoft Foundryn integroinnin AZD:hen
+- Konfiguroimaan ja räätälöimään AI-agentteja työkaluineen
+- Ottamaan käyttöön RAG (Retrieval-Augmented Generation) -sovelluksia
 
 ---
 
@@ -24,32 +24,34 @@ Tämän luvun suorittamalla osaat:
 
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundryn integraatio](microsoft-foundry-integration.md) | Yhdistä AZD Foundryn palveluihin | 30 min |
-| 2 | [AI-agenttien opas](agents.md) | Ota käyttöön älykkäitä agentteja työkaluilla | 45 min |
-| 3 | [AI-mallin käyttöönotto](ai-model-deployment.md) | Käyttöönotto ja AI-mallien määrittely | 30 min |
-| 4 | [AI-työpajan laboratorio](ai-workshop-lab.md) | Käytännön harjoitus: Tee AI-ratkaisustasi AZD-valmis | 60 min |
+| 1 | [Microsoft Foundryn integrointi](microsoft-foundry-integration.md) | Yhdistä AZD Foundry-palveluihin | 30 min |
+| 2 | [AI-Agenttien opas](agents.md) | Ota käyttöön älykkäitä agentteja työkaluilla | 45 min |
+| 3 | [AI-mallin käyttöönotto](ai-model-deployment.md) | Ota käyttöön ja konfiguroi AI-malleja | 30 min |
+| 4 | [AI-työpajatyö](ai-workshop-lab.md) | Käytännössä: Tutustu mallipohjaan ja suunnittele muunnos | 2-3 tuntia |
 
 ---
 
 ## 🚀 Pika-aloitus
 
+Valitse yksi vaihtoehto uudesta tyhjästä hakemistosta. Perässä oleva `.` alustaa nykyisen hakemiston; muuten AZD voi luoda alihakemiston muuttamatta komentotulkki-ikkunan työhakemistoa.
+
 ```bash
-# Vaihtoehto 1: RAG-chat-sovellus
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# Vaihtoehto 2: AI-agentit
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# Vaihtoehto 3: Nopea chat-sovellus
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
 ---
 
-## 🤖 Suositut AI-mallit
+## 🤖 Esitellyt AI-mallit
 
 | Malli | Kuvaus | Palvelut |
 |----------|-------------|----------|
@@ -61,13 +63,15 @@ azd up
 
 ## 💰 Kustannustietoisuus
 
+Nämä ovat havainnollistavia vaihteluvälejä, eivät sitovia hintoja tai kattoja; malliliikenne, haku/laskenta-SKU:t, alue ja valinnaiset ominaisuudet voivat ylittää nämä. Tarkista valitsemasi mallin tämänhetkiset hinnoitteluohjeet ennen käyttöönottoa.
+
 | Ympäristö | Arvioitu kuukausikustannus |
 |-------------|----------------------|
-| Kehitys | $80-150 |
-| Testaus | $150-300 |
-| Tuotanto | $300-3,500+ |
+| Kehitys | 80-150 $ |
+| Esituotanto | 150-300 $ |
+| Tuotanto | 300-3 500+ $ |
 
-**Vinkki:** Suorita `azd down` testauksen jälkeen kulujen välttämiseksi.
+**Vinkki:** Suorita `azd down` testauksen jälkeen välttääksesi ylimääräiset kulut.
 
 ---
 
@@ -75,15 +79,15 @@ azd up
 
 | Suunta | Luku |
 |-----------|---------|
-| **Edellinen** | [Luku 1: Perusta](../chapter-01-foundation/README.md) |
+| **Edellinen** | [Luku 1: Perusteet](../chapter-01-foundation/README.md) |
 | **Seuraava** | [Luku 3: Konfigurointi](../chapter-03-configuration/README.md) |
-| **Siirry kohtaan** | [Luku 8: Tuotantokuvioita](../chapter-08-production/README.md) |
+| **Siirry** | [Luku 8: Tuotantomallit](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Liittyvät resurssit
+## 📖 Aiheeseen liittyvät resurssit
 
-- [AI-ongelmien ratkaisu](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI Vianetsintä](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [Tuotannon AI-käytännöt](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 

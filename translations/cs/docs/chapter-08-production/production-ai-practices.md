@@ -1,41 +1,37 @@
-# Nejlepší postupy pro produkční AI workloady s AZD
+# Nejlepší postupy pro produkční AI pracovní zátěže s AZD
 
 **Navigace kapitolou:**
-- **📚 Domů kurzu**: [AZD For Beginners](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 8 - Produkční & Enterprise vzory
-- **⬅️ Předchozí kapitola**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Také související**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Dokončení kurzu**: [AZD For Beginners](../../README.md)
+- **📚 Domů kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 8 - Produkční & podnikové vzory
+- **⬅️ Předchozí kapitola**: [Kapitola 7: Řešení problémů](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Také související**: [AI Workshop Lab](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Dokončení kurzu**: [AZD pro začátečníky](../../README.md)
 
 ## Přehled
 
-Tento průvodce poskytuje komplexní doporučené postupy pro nasazení produkčně připravených AI workloadů pomocí Azure Developer CLI (AZD). Na základě zpětné vazby z komunity Microsoft Foundry Discord a skutečných zákaznických nasazení tato doporučení řeší nejběžnější výzvy v produkčních AI systémech.
+Tento průvodce vysvětluje produkční návrhové vzory AI pomocí Azure Developer CLI (AZD). Jedná se o návrhový referenční materiál, nikoli o nasaditelnou aplikaci nebo produkční certifikaci.
 
-## Hlavní řešené výzvy
+**Příklady hranic:** Pokud není výslovně uvedeno jako kompletní, fragmenty Bicep předpokládají parametry a referencované zdroje z obsahující šablony. Vynechávají hostitelské image/plány, identity, přiřazení rolí, DNS, výstupy a další požadovanou integraci. YAML cesty služeb a hook/testovací skripty jsou ilustrativní soubory k vytvoření ve **vaší vlastní aplikaci**; nejsou tímto kurzem dodávány. Použijte funkční vzorek AZD jako základ, sestavte kompletní infrastrukturu a otestujte ji v izolovaném prostředí před produkcí.
 
-Na základě výsledků našeho komunitního průzkumu jsou to největší problémy, kterým vývojáři čelí:
+## Klíčové řešené výzvy
 
-- **45 %** mají problém s nasazením více služeb AI
-- **38 %** mají potíže s řízením přihlašovacích údajů a tajemství  
-- **35 %** považuje připravenost na produkci a škálování za obtížné
-- **32 %** potřebuje lepší strategie optimalizace nákladů
-- **29 %** vyžaduje zlepšené monitorování a odstraňování problémů
+Běžné produkční starosti zahrnují nasazení více služeb, správu identit a tajemství, škálování, kontrolu nákladů a monitorování. Zde není tvrzen žádný měřený výskyt.
 
 ## Architektonické vzory pro produkční AI
 
 ### Vzor 1: Mikroservisní AI architektura
 
-**Kdy použít**: Složité AI aplikace s více schopnostmi
+**Kdy použít**: Složitá AI aplikace s několika schopnostmi
 
 ```mermaid
 graph TD
-    Frontend[Webové rozhraní] --- Gateway[API brána] --- LB[Vyrovnávač zátěže]
-    Gateway --> Chat[Služba chatu]
-    Gateway --> Image[Služba obrázků]
-    Gateway --> Text[Textová služba]
-    Chat --> OpenAI[Modely Microsoft Foundry]
-    Image --> Vision[Počítačové vidění]
-    Text --> DocIntel[Inteligence dokumentů]
+    Frontend[Web Frontend] --- Gateway[API Gateway] --- LB[Load Balancer]
+    Gateway --> Chat[Chat Service]
+    Gateway --> Image[Image Service]
+    Gateway --> Text[Text Service]
+    Chat --> OpenAI[Microsoft Foundry Models]
+    Image --> Vision[Computer Vision]
+    Text --> DocIntel[Document Intelligence]
 ```
 
 **Implementace v AZD**:
@@ -61,13 +57,13 @@ services:
     host: containerapp
 ```
 
-### Vzor 2: Událostmi řízené zpracování AI
+### Vzor 2: Událostmi řízené AI zpracování
 
-**Kdy použít**: Hromadné zpracování, analýza dokumentů, asynchronní workflowy
+**Kdy použít**: Hromadné zpracování, analýza dokumentů, asynchronní pracovní postupy
 
 ```bicep
 // Event Hub for AI processing pipeline
-resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
+resource eventHub 'Microsoft.EventHub/namespaces@2024-01-01' = {
   name: eventHubNamespaceName
   location: location
   sku: {
@@ -78,7 +74,7 @@ resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
 }
 
 // Service Bus for reliable message processing
-resource serviceBus 'Microsoft.ServiceBus/namespaces@2022-10-01-preview' = {
+resource serviceBus 'Microsoft.ServiceBus/namespaces@2024-01-01' = {
   name: serviceBusNamespaceName
   location: location
   sku: {
@@ -110,46 +106,48 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Posuzování stavu AI agenta
+To vytváří fragmenty namespace, nikoli huby, fronty, odběry nebo spuštění Function. Spustitelná funkce také potřebuje hostingový plán, konfiguraci runtime/úložiště, připojenou identitu, RBAC a přístup k síti. Odkaz na Key Vault vyžaduje oprávnění ke čtení tajemství; samotná URL koncového bodu není přihlašovací údaj.
 
-Když se tradiční webová aplikace porouchá, příznaky jsou známé: stránka se nenačte, API vrátí chybu nebo nasazení selže. AI-poháněné aplikace se mohou porouchat stejnými způsoby — ale mohou se také chovat jemněji chybně, aniž by vznikaly zjevné chybové zprávy.
+## Přemýšlení o zdraví AI agenta
 
-Tato sekce vám pomůže vybudovat mentální model pro monitorování AI workloadů, abyste věděli, kde hledat, když něco nefunguje podle očekávání.
+Když tradiční webová aplikace selže, příznaky jsou známé: stránka se nenačte, API vrátí chybu nebo selže nasazení. Aplikace s AI mohou selhat ve stejných způsoby—but mohou se také chovat jemněji, bez zřejmých chybových hlášení.
 
-### Jak se zdraví agenta liší od zdraví tradiční aplikace
+Tato sekce vám pomůže vybudovat mentální model pro monitorování AI zátěží, abyste věděli, kde hledat, když něco není v pořádku.
 
-Tradiční aplikace buď funguje, nebo ne. AI agent může vypadat, že funguje, ale produkovat špatné výsledky. Považujte zdraví agenta za dvě vrstvy:
+### Jak se zdraví agenta liší od tradičního zdraví aplikace
 
-| Vrstva | Co sledovat | Kde hledat |
-|-------|--------------|---------------|
-| **Stav infrastruktury** | Běží služba? Jsou prostředky přiděleny? Jsou koncové body dosažitelné? | `azd monitor`, Azure Portal resource health, container/app logs |
-| **Stav chování** | Odpovídá agent přesně? Jsou odpovědi včasné? Je model volán správně? | Application Insights traces, metriky latence volání modelu, protokoly kvality odpovědí |
+Tradiční aplikace mohou mít také jemné chyby správnosti. AI agent přidává nedeterministickou kvalitu odpovědi k běžným starostem o dostupnost a správnost. Zdraví agenta lze chápat ve dvou vrstvách:
 
-Stav infrastruktury je známý — je stejný pro jakoukoli azd aplikaci. Stav chování je nová vrstva, kterou AI workloady zavádějí.
+| Vrstva | Na co dávat pozor | Kde hledat |
+|-------|------------------|-------------|
+| **Zdraví infrastruktury** | Běží služba? Jsou zdroje přiděleny? Jsou koncové body dostupné? | `azd monitor`, stav zdroje v Azure Portálu, logy kontejnerů/aplikací |
+| **Zdraví chování** | Reaguje agent přesně? Jsou odpovědi včasné? Je model volán správně? | Trace v Application Insights, metriky latence volání modelu, logy kvality odpovědí |
 
-### Kde hledat, když se AI aplikace nechovají podle očekávání
+Zdraví infrastruktury je známé—je stejné pro jakoukoliv aplikaci azd. Zdraví chování je nová vrstva, kterou AI zátěže zavádějí.
 
-Pokud vaše AI aplikace negeneruje očekávané výsledky, zde je konceptuální kontrolní seznam:
+### Kam se podívat, když AI aplikace nefungují podle očekávání
 
-1. **Začněte od základů.** Běží aplikace? Může dosáhnout svých závislostí? Zkontrolujte `azd monitor` a stav prostředků stejně jako u jakékoli jiné aplikace.
-2. **Zkontrolujte připojení k modelu.** Volá vaše aplikace úspěšně AI model? Selhávající nebo časově vypršená volání modelu jsou nejčastější příčinou problémů a objeví se ve vašich aplikačních logech.
-3. **Podívejte se na to, co model obdržel.** AI odpovědi závisí na vstupu (prompt a jakýkoli získaný kontext). Pokud je výstup špatný, vstup je obvykle špatný. Zkontrolujte, jestli aplikace posílá modelu správná data.
-4. **Prověřte latenci odpovědí.** Volání modelu AI jsou pomalejší než běžná API volání. Pokud se aplikace zdá pomalá, zkontrolujte, zda se nezvýšily doby odezvy modelu — to může naznačovat omezování, kapacitní limity nebo přetížení na úrovni regionu.
-5. **Sledujte signály nákladů.** Neočekávané skoky ve využití tokenů nebo API voláních mohou naznačovat smyčku, špatně nakonfigurovaný prompt nebo nadměrné opakování.
+Pokud vaše AI aplikace nevytváří očekávané výsledky, zde je koncepční kontrolní seznam:
 
-Nemusíte se hned stát expertem na observabilní nástroje. Hlavní poznatek je, že AI aplikace mají další vrstvu chování, kterou je třeba sledovat, a vestavěné monitorování azd (`azd monitor`) vám dává výchozí bod pro vyšetřování obou vrstev.
+1. **Začněte základy.** Běží aplikace? Může dosáhnout na závislosti? Zkontrolujte `azd monitor` a stav zdroje stejně jako u jakékoli jiné aplikace.
+2. **Zkontrolujte připojení k modelu.** Volá vaše aplikace úspěšně AI model? Selhávající nebo překročené volání modelu jsou nejčastější příčinou problémů a objeví se v logách aplikace.
+3. **Bezpečně zkontrolujte vstup a základy.** Špatné odpovědi mohou být způsobeny vyhledáváním, instrukcemi, omezeními modelu nebo vykonáváním nástrojů. Používejte přístupově řízená, anonymizovaná diagnostická data; v produkci nepovolujte nezřízené logování promptů/odpovědí.
+4. **Zkontrolujte latenci odpovědi.** Volání AI modelů jsou pomalejší než typická API volání. Když aplikace působí pomalu, zkontrolujte, zda se nezvýšila doba odezvy modelu—může to znamenat omezení, kapacitní limity nebo přetížení regionu.
+5. **Sledujte signály nákladů.** Nečekané špičky ve využití tokenů nebo API volání mohou znamenat smyčku, špatně nastavený prompt nebo nadměrné opakování.
+
+Nemusíte hned ovládat nástroje observability. Klíčové je, že AI aplikace mají další vrstvu chování k monitorování, a vestavěný monitoring azd (`azd monitor`) vám dává výchozí bod pro prozkoumání obou vrstev.
 
 ---
 
-## Nejlepší postupy zabezpečení
+## Nejlepší bezpečnostní postupy
 
-### 1. Zero-Trust model zabezpečení
+### 1. Bezpečnostní model Zero-Trust
 
-**Strategie implementace**:
-- Žádná komunikace služba-ke-službě bez autentizace
-- Všechna API volání používají spravované identity
+**Implementační strategie**:
+- Žádná komunikace služba ke službě bez ověření
+- Všechny API volání používají spravované identity
 - Izolace sítě pomocí privátních koncových bodů
-- Přístupy podle principu nejmenších oprávnění
+- Přístupy s nejmenšími právy
 
 ```bicep
 // Managed Identity for each service
@@ -161,7 +159,7 @@ resource chatServiceIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2
 // Role assignments with minimal permissions
 resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: openAIAccount
-  name: guid(openAIAccount.id, chatServiceIdentity.id, openAIUserRoleDefinitionId)
+  name: guid(openAIAccount.id, chatServiceIdentity.id, '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
     principalId: chatServiceIdentity.properties.principalId
@@ -172,7 +170,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Bezpečná správa tajemství
 
-**Vzor integrace s Key Vault**:
+**Vzor integrace Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -183,7 +181,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
     tenantId: tenant().tenantId
     sku: {
       family: 'A'
-      name: 'premium'  // Use premium for production
+      name: 'standard' // Premium is needed for HSM-backed keys, not ordinary secrets
     }
     enableRbacAuthorization: true  // Use RBAC instead of access policies
     enablePurgeProtection: true    // Prevent accidental deletion
@@ -192,7 +190,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   }
 }
 
-// Store all AI service credentials
+// Optional legacy key-auth alternative; omit when using Entra ID.
 resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   parent: keyVault
   name: 'openai-api-key'
@@ -205,9 +203,11 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
+Přiřaďte runtime identitu `Key Vault Secrets User` na příslušné úrovni a připojte ji k hostiteli; `enableRbacAuthorization` samotné nepřiděluje přístup. Preferujte autentizaci spravovanou identitou OpenAI s `disableLocalAuth: true`. Volitelné tajemství klíče dává smysl jen pro účet s explicitně povoleným klíčem, a oprávnění k zápisu tajemství musí mít i provisioningový principál.
+
 ### 3. Síťová bezpečnost
 
-**Konfigurace privátních koncových bodů**:
+**Konfigurace privátního koncového bodu**:
 
 ```bicep
 // Virtual Network for AI services
@@ -265,11 +265,13 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
+Privátní koncové body vyžadují také skupiny privátních DNS zón/VNet odkazy a integraci aplikace do VNet. Nezablokují automaticky veřejný přístup: po ověření privátní konektivity a přístupu k nasazení explicitně vypněte veřejný síťový přístup AI účtu.
+
 ## Výkon a škálování
 
-### 1. Strategie automatického škálování
+### 1. Strategie auto-škálování
 
-**Automatické škálování Container Apps**:
+**Auto-škálování Container Apps**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -315,10 +317,10 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. Strategie cachování
 
-**Redis Cache pro AI odpovědi**:
+**Redis cache pro AI odpovědi**:
 
 ```bicep
-// Redis Premium for production workloads
+// Legacy Azure Cache for Redis example (not recommended for new deployments)
 resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
   name: redisCacheName
   location: location
@@ -333,8 +335,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
     redisConfiguration: {
       'maxmemory-policy': 'allkeys-lru'
     }
-    // Enable clustering for high availability
-    redisVersion: '6.0'
+    // Sharding distributes data; replication/failover provides availability.
     shardCount: 2
   }
 }
@@ -343,7 +344,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Vyrovnávání zátěže a řízení provozu
+Azure Cache pro Redis Basic/Standard/Premium je na [cestě k vypnutí](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Pro nové návrhy používejte Azure Managed Redis s dokumentovanou konfigurací SKU, identity a TLS, místo kopírování tohoto legacy zdroje do nové produkční služby. Řádek connection-string je nefunkční zástupce, nikoli přihlašovací údaj. Oddělujte cache klíče podle autorizace, modelu/instrukcí a verze vyhledávání, s expirací; sdílená cache jen pro dotazy může zveřejnit data jiného uživatele.
+
+### 3. Vyvažování zátěže a správa provozu
 
 **Application Gateway s WAF**:
 
@@ -381,14 +384,18 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
+Toto je částečný gateway zdroj: reálné nasazení vyžaduje také konfiguraci podsítě brány/IP, frontend IP a porty, TLS posluchače/certifikáty, backend HTTP nastavení/probe, routovací pravidla a priority, a přezkoumanou WAF politiku. TLS hostname/SNI a autentizace musí odpovídat backendu Container App.
+
 ## 💰 Optimalizace nákladů
 
-### 1. Správné dimenzování prostředků
+### 1. Správná velikost zdrojů
 
 **Konfigurace specifické pro prostředí**:
 
+Tyto názvy jsou **ilustrativní vstupy do šablony na míru**, nikoli automatické nastavení AZD. Nejprve je namapujte do `infra/main.parameters.json`/Bicep a konfigurace hostitele. Například RAG vzorek používá `AZURE_SEARCH_SERVICE_SKU` a `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, nikoli obecné názvy níže. Paměť Container Apps nastavte na podporovanou jednotku, např. `1Gi` ve zdroji. Infrastrukturní změny aplikujte přes `azd up` nebo `azd provision`; `azd deploy` samotné Bicep změny neaplikuje.
+
 ```bash
-# Vývojové prostředí
+# Development environment
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -396,7 +403,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Produkční prostředí
+# Production environment  
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -405,19 +412,21 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Sledování nákladů a rozpočty
+### 2. Monitorování nákladů a rozpočty
 
 ```bicep
+// Supply the first day of the current UTC month, e.g. 2026-11-01T00:00:00Z.
+param budgetStartDate string
+
 // Cost management and budgets
-resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
-    amount: 2000  // $2000 monthly budget
+    amount: 2000  // In the billing currency, not necessarily USD
     category: 'Cost'
     notifications: {
       warning: {
@@ -446,38 +455,49 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
+Nahraďte příklady příjemců a zkontrolujte rozsah/oprávnění. Upozornění rozpočtu používají zpožděná fakturační data a nezavádějí limit výdajů.
+
 ### 3. Optimalizace využití tokenů
 
-**Řízení nákladů OpenAI**:
+**Správa nákladů OpenAI**:
+
+Toto je pouze znakově založená heuristika pro UI náhled, **nikoli** ověřovač limitu tokenů modelu. Produkční kód musí používat tokenizér vhodný pro nasazený model a zohlednit systémové instrukce, schémata nástrojů, historii a rozpočet výstupu. Odmítejte příliš velkou uživatelskou zprávu, místo aby byla tiše zkracována.
 
 ```typescript
-// Optimalizace tokenů na úrovni aplikace
+// Application-level token optimization
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
   
   optimizePrompt(userInput: string, context: string): string {
     const availableTokens = this.maxTokens - this.reserveTokens;
-    const estimatedTokens = this.estimateTokens(userInput + context);
+    if (this.estimateTokens(userInput) + 8 >= availableTokens) {
+      throw new Error("User input exceeds the illustrative prompt budget");
+    }
+    const estimatedTokens = this.estimateTokens(userInput + context) + 8;
     
     if (estimatedTokens > availableTokens) {
-      // Zkracujte kontext, ne uživatelský vstup
-      context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
+      // Truncate context, not user input
+      context = this.truncateContext(context, Math.max(0, availableTokens - this.estimateTokens(userInput) - 8));
     }
     
     return `${context}\n\nUser: ${userInput}`;
   }
   
   private estimateTokens(text: string): number {
-    // Hrubý odhad: 1 token ≈ 4 znaky
+    // Rough estimation: 1 token ≈ 4 characters
     return Math.ceil(text.length / 4);
+  }
+
+  private truncateContext(text: string, estimatedBudget: number): string {
+    return text.slice(0, Math.max(0, estimatedBudget) * 4);
   }
 }
 ```
 
 ## Monitorování a observabilita
 
-### 1. Komplexní Application Insights
+### 1. Kompletní Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -488,8 +508,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   properties: {
     Application_Type: 'web'
     WorkspaceResourceId: logAnalyticsWorkspace.id
-    SamplingPercentage: 100  // Full sampling for AI apps
-    DisableIpMasking: false  // Enable for security
+    SamplingPercentage: 100  // Ingestion setting; review cost and SDK sampling separately
+    DisableIpMasking: false  // Retain IP masking
   }
 }
 
@@ -498,7 +518,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: 'ai-high-error-rate'
   location: 'global'
   properties: {
-    description: 'Alert when AI service error rate is high'
+    description: 'Alert when failed request count exceeds 10 in five minutes'
     severity: 2
     enabled: true
     scopes: [
@@ -522,23 +542,22 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Monitorování specifické pro AI
+### 2. AI-specifické monitorování
 
-**Vlastní dashboardy pro metriky AI**:
+**Vlastní dashboardy pro AI metriky**:
 
 ```json
-// Dashboard configuration for AI workloads
 {
   "dashboard": {
     "name": "AI Application Monitoring",
     "tiles": [
       {
         "name": "OpenAI Request Volume",
-        "query": "requests | where name contains 'openai' | summarize count() by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize count() by bin(timestamp, 5m)"
       },
       {
         "name": "AI Response Latency",
-        "query": "requests | where name contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
       },
       {
         "name": "Token Usage",
@@ -553,7 +572,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Kontroly zdraví a monitorování dostupnosti
+Tento JSON je náčrt definovaný aplikací, nikoli importovatelný schema dashboardu z Azure portálu. Tokenové/nákladové dotazy vyžadují, aby vaše aplikace emitovala tyto přesné vlastní metriky; nejsou vytvářeny AZD. Přizpůsobte filtry závislostí pro skutečné názvy vašich model endpoint/span.
+
+### 3. Kontroly stavu a monitorování dostupnosti
 
 ```bicep
 // Application Insights availability tests
@@ -570,7 +591,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
     Enabled: true
     Frequency: 300  // 5 minutes
     Timeout: 120    // 2 minutes
-    Kind: 'ping'
+    Kind: 'standard'
     Locations: [
       {
         Id: 'us-east-2-azr'
@@ -579,44 +600,16 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
         Id: 'us-west-2-azr'
       }
     ]
-    Configuration: {
-      WebTest: '''
-        <WebTest Name="AI Health Check" 
-                 Id="8d2de8d2-a2b0-4c2e-9a0d-8f9c9a0b8c8d" 
-                 Enabled="True" 
-                 CssProjectStructure="" 
-                 CssIteration="" 
-                 Timeout="120" 
-                 WorkItemIds="" 
-                 xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" 
-                 Description="" 
-                 CredentialUserName="" 
-                 CredentialPassword="" 
-                 PreAuthenticate="True" 
-                 Proxy="default" 
-                 StopOnError="False" 
-                 RecordedResultFile="" 
-                 ResultsLocale="">
-          <Items>
-            <Request Method="GET" 
-                     Guid="a5f10126-e4cd-570d-961c-cea43999a200" 
-                     Version="1.1" 
-                     Url="${webApp.properties.defaultHostName}/health" 
-                     ThinkTime="0" 
-                     Timeout="120" 
-                     ParseDependentRequests="True" 
-                     FollowRedirects="True" 
-                     RecordResult="True" 
-                     Cache="False" 
-                     ResponseTimeGoal="0" 
-                     Encoding="utf-8" 
-                     ExpectedHttpStatusCode="200" 
-                     ExpectedResponseUrl="" 
-                     ReportingName="" 
-                     IgnoreHttpStatusCode="False" />
-          </Items>
-        </WebTest>
-      '''
+    Request: {
+      RequestUrl: 'https://${webApp.properties.defaultHostName}/health'
+      HttpVerb: 'GET'
+      FollowRedirects: true
+      ParseDependentRequests: false
+    }
+    ValidationRules: {
+      ExpectedHttpStatusCode: 200
+      SSLCheck: true
+      SSLCertRemainingLifetimeCheck: 7
     }
   }
 }
@@ -624,7 +617,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## Obnova po havárii a vysoká dostupnost
 
-### 1. Nasazení do více regionů
+Výše uvedený test předpokládá existující App Service `webApp` a Application Insights zdroj. Standardní testy dostupnosti jsou zpoplatněné a vyžadují dostupný endpoint; aplikace jen s privátním přístupem potřebují vhodný soukromý monitorovací design. URL ping testy jsou zastaralé; použijte [standardní testy dostupnosti](https://learn.microsoft.com/azure/azure-monitor/app/availability).
+
+### 1. Nasazení napříč regiony
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -634,16 +629,16 @@ services:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=eastus
+      AZURE_REGION: eastus
   api-secondary:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=westus2
+      AZURE_REGION: westus2
 ```
 
 ```bicep
-// Traffic Manager for global load balancing
+// Separate App Service topology, not the Container Apps declarations above
 resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = {
   name: trafficManagerProfileName
   location: 'global'
@@ -686,6 +681,8 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
+Proměnné prostředí nevybírají lokaci zdrojů. IaC musí provisionovat oddělené regionální hostitele a navázat každou službu pomocí `resourceName` nebo `azd-service-name` tagů. Příklad Traffic Manageru je **samostatná topologie App Service** (`primaryAppService`/`secondaryAppService`), nikoli směrování pro deklarace Container Apps. Container Apps vyžaduje vhodně nakonfigurovaný externí endpoint/front door, TLS/vlastní doménu a kontrolní sondy stavu.
+
 ### 2. Zálohování a obnova dat
 
 ```bicep
@@ -706,40 +703,13 @@ resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
   }
 }
 
-// Backup policy for AI models and data
-resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023-05-01' = {
-  parent: backupVault
-  name: 'ai-data-backup-policy'
-  properties: {
-    policyRules: [
-      {
-        backupParameters: {
-          backupType: 'Full'
-          objectType: 'AzureBackupParams'
-        }
-        trigger: {
-          schedule: {
-            repeatingTimeIntervals: [
-              'R/2024-01-01T02:00:00+00:00/P1D'  // Daily at 2 AM
-            ]
-          }
-          objectType: 'ScheduleBasedTriggerContext'
-        }
-        dataStore: {
-          datastoreType: 'VaultStore'
-          objectType: 'DataStoreInfoBase'
-        }
-        name: 'BackupDaily'
-        objectType: 'AzureBackupRule'
-      }
-    ]
-  }
-}
 ```
 
-## DevOps a integrace CI/CD
+Samotný vault nic nezálohuje. Nakonfigurujte **politiku a instanci zálohy podporovanou pro konkrétní pracovní zátěž**, oprávnění zdroje, retenční pravidla a testy obnovy dle [podpory Azure Backup](https://learn.microsoft.com/azure/backup/backup-support-matrix). Neexistuje univerzální politika pro zálohování Azure OpenAI modelů v cloudu. Uchovávejte definice infrastruktury/nasazení modelu ve zdrojové kontrole; chraňte nahrané dokumenty, data aplikace a artefakty doladění pomocí zálohování/exportních možností každé podpůrné služby. Explicitně definujte a testujte RPO/RTO.
 
-### 1. Pracovní postup GitHub Actions
+## Integrace DevOps a CI/CD
+
+### 1. GitHub Actions workflow
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -775,151 +745,123 @@ jobs:
           python scripts/test_ai_safety.py
           python scripts/validate_prompts.py
 
-  deploy-staging:
-    needs: test
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Staging
-        run: |
-          azd env select staging
-          azd deploy
-
-  deploy-production:
-    needs: test
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Production
-        run: |
-          azd env select production
-          azd deploy
-          
-      - name: Run Production Health Checks
-        run: |
-          python scripts/health_check.py --env production
 ```
+
+Toto je **pouze testovací část** workflow a předpokládá, že jste vytvořili `requirements.txt`, `tests/` a dva bezpečnostní skripty. Přidejte autentizované OIDC provisioning/nasazovací úlohy z [Konfigurace CI/CD pipeline](#cicd-pipeline-configuration), s `needs: test`, důvěryhodným spuštěním push/manual, a chráněnými GitHub prostředími. Nenasazujte nedůvěryhodný pull-request kód s cloudovými přihlašovacími údaji. Čerstvý runner nemá zvolené lokální prostředí AZD; zadejte vstupy prostředí/předplatného/lokace a použijte `azd auth login`, ne jen `azure/login`.
 
 ### 2. Validace infrastruktury
 
 ```bash
 # scripts/validate_infrastructure.sh
 #!/bin/bash
+set -euo pipefail
 
 echo "Validating AI infrastructure deployment..."
 
-# Zkontrolujte, zda všechny požadované služby běží
-services=("openai" "search" "storage" "keyvault")
-for service in "${services[@]}"; do
-    echo "Checking $service..."
-    if ! az resource list --resource-type "Microsoft.CognitiveServices/accounts" --query "[?contains(name, '$service')]" -o tsv; then
-        echo "ERROR: $service not found"
+# Requires Azure CLI login and the resource group selected explicitly.
+: "${AZURE_RESOURCE_GROUP:?Set AZURE_RESOURCE_GROUP}"
+: "${AZURE_OPENAI_NAME:?Set AZURE_OPENAI_NAME}"
+: "${AZURE_OPENAI_CHAT_DEPLOYMENT:?Set the actual deployment name}"
+
+# A successful empty list is not proof that resources exist.
+types=("Microsoft.CognitiveServices/accounts" "Microsoft.Search/searchServices"
+       "Microsoft.Storage/storageAccounts" "Microsoft.KeyVault/vaults")
+for resource_type in "${types[@]}"; do
+    count=$(az resource list --resource-group "$AZURE_RESOURCE_GROUP" \
+        --resource-type "$resource_type" --query "length(@)" -o tsv)
+    if [[ "$count" -lt 1 ]]; then
+        echo "ERROR: No $resource_type found in $AZURE_RESOURCE_GROUP"
         exit 1
     fi
 done
 
-# Ověřte nasazení modelů OpenAI
+# Validate OpenAI model deployments
 echo "Validating OpenAI model deployments..."
-models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-4.1-mini"* ]]; then
-  echo "ERROR: Required model gpt-4.1-mini not deployed"
+state=$(az cognitiveservices account deployment show \
+  --name "$AZURE_OPENAI_NAME" --resource-group "$AZURE_RESOURCE_GROUP" \
+  --deployment-name "$AZURE_OPENAI_CHAT_DEPLOYMENT" \
+  --query "properties.provisioningState" -o tsv)
+if [[ "$state" != "Succeeded" ]]; then
+    echo "ERROR: Required model deployment is not provisioned successfully"
     exit 1
 fi
-
-# Otestujte připojení ke službě AI
-echo "Testing AI service connectivity..."
-python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Kontrolní seznam pro produkční připravenost
+Očekává se nulový exit a dokončovací zpráva pouze pokud všechny očekávané typy existují a pojmenované nasazení modelu je provisionováno. Kontroluje to stav inventáře/provisioningu, **nikoli** stav zdroje, přesnou topologii, RBAC, síťovou dosažitelnost nebo chování modelu. Přizpůsobte očekávané typy vaší architektuře a poté proveďte samostatný autentizovaný test připravenosti aplikace.
+
+## Kontrolní seznam produkční připravenosti
 
 ### Bezpečnost ✅
 - [ ] Všechny služby používají spravované identity
-- [ ] Tajemství uložená v Key Vault
+- [ ] Tajemství uložena v Key Vault
 - [ ] Konfigurace privátních koncových bodů
-- [ ] Implementovány bezpečnostní skupiny sítě
-- [ ] RBAC s principem nejmenších oprávnění
-- [ ] WAF povolen na veřejných koncových bodech
+- [ ] Implementace síťových bezpečnostních skupin
+- [ ] RBAC s nejmenšími právy
+- [ ] Povolená WAF na veřejných koncových bodech
 
 ### Výkon ✅
-- [ ] Automatické škálování nakonfigurováno
-- [ ] Implementováno cachování
-- [ ] Nastaveno vyrovnávání zátěže
+- [ ] Konfigurace auto-škálování
+- [ ] Implementace cachování
+- [ ] Nastavení vyvažování zátěže
 - [ ] CDN pro statický obsah
-- [ ] Poolování připojení k databázi
+- [ ] Poolování připojení databáze
 - [ ] Optimalizace využití tokenů
 
 ### Monitorování ✅
-- [ ] Application Insights nakonfigurováno
-- [ ] Definovány vlastní metriky
-- [ ] Nastaveny pravidla alertů
-- [ ] Vytvořen dashboard
-- [ ] Implementovány health checky
-- [ ] Politiky uchovávání logů
+- [ ] Konfigurace Application Insights
+- [ ] Definice vlastních metrik
+- [ ] Nastavení pravidel upozornění
+- [ ] Vytvoření dashboardu
+- [ ] Implementace kontrol stavu
+- [ ] Pravidla uchovávání logů
 
 ### Spolehlivost ✅
-- [ ] Nasazení do více regionů
+- [ ] Nasazení napříč regiony
 - [ ] Plán zálohování a obnovy
-- [ ] Implementovány circuit-breakery
-- [ ] Nakonfigurovány retry politiky
-- [ ] Graceful degradation
-- [ ] Konečné body health checků
+- [ ] Implementace přerušovačů obvodů
+- [ ] Konfigurace retry politik
+- [ ] Šetrné degradace
+- [ ] Endpointy kontroly stavu
 
-### Řízení nákladů ✅
-- [ ] Nastaveny upozornění rozpočtu
-- [ ] Správné dimenzování prostředků
-- [ ] Aplikovány slevy pro vývoj/test
-- [ ] Zakoupené rezervované instance
-- [ ] Dashboard pro sledování nákladů
+### Správa nákladů ✅
+- [ ] Konfigurace rozpočtových upozornění
+- [ ] Správná velikost zdrojů
+- [ ] Aplikace slev pro vývoj/testování
+- [ ] Nákup rezervovaných instancí
+- [ ] Dashboard monitorování nákladů
 - [ ] Pravidelné revize nákladů
 
-### Soulad (Compliance) ✅
-- [ ] Splněny požadavky na umístění dat
-- [ ] Auditní logování povoleno
-- [ ] Aplikovány compliance politiky
-- [ ] Implementovány bezpečnostní baseline
-- [ ] Pravidelné bezpečnostní hodnocení
+### Soulad ✅
+- [ ] Splnění požadavků na lokalizaci dat
+- [ ] Povolení auditních logů
+- [ ] Aplikace pravidel souladu
+- [ ] Implementace bezpečnostních základů
+- [ ] Pravidelné bezpečnostní audity
 - [ ] Plán reakce na incidenty
 
 ## Výkonové benchmarky
 
-### Typické produkční metriky
+### Ilustrativní produkční cíle
 
-| Metrika | Cíl | Sledování |
-|--------|--------|------------|
+Toto jsou příkladné SLO k vyjednání a testování zátěže, nikoli měřené benchmarky nebo záruky. Latence odpovědi závisí na délce modelu/výstupu; měsíční výdaje na tokeny závisí na provozu a cenách, nikoli jen na počtu tokenů.
+
+| Metrika | Cíl | Monitorování |
+|--------|-----|-------------|
 | **Doba odezvy** | < 2 sekundy | Application Insights |
-| **Dostupnost** | 99.9% | Monitorování dostupnosti |
-| **Míra chyb** | < 0.1% | Aplikační logy |
-| **Využití tokenů** | < $500/month | Řízení nákladů |
-| **Současní uživatelé** | 1000+ | Zátěžové testování |
-| **Doba obnovy** | < 1 hodina | Testy obnovy po havárii |
+| **Dostupnost** | 99,9 % | Monitorování uptime |
+| **Míra chyb** | < 0,1 % | Logy aplikace |
+| **Výdaje na model** | < 500 $/měsíc (příklad rozpočtu) | Správa nákladů |
+| **Současní uživatelé** | 1000+ | Testování zátěže |
+| **Doba zotavení** | < 1 hodina | Testy obnovy po havárii |
 
 ### Zátěžové testování
 
+Níže je náčrt rozhraní pro skript zátěžového testování, který **musíte implementovat**; toto úložiště neposkytuje `scripts/load_test.py`. Definujte přenosy požadavků, autentizaci, reprezentativní pracovní zátěže, asertace latence/chyb percentilů a limit výdajů ve vámi zvoleném nástroji pro zátěžové testování před jeho spuštěním:
+
 ```bash
-# Skript pro zátěžové testování AI aplikací
+# Load testing script for AI applications
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -927,51 +869,57 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Osvědčené postupy komunity
+## 🤝 Nejlepší praktiky komunity
 
 Na základě zpětné vazby komunity Microsoft Foundry Discord:
 
-### Hlavní doporučení od komunity:
+### Nejlepší doporučení od komunity:
 
-1. **Začněte malě, škálujte postupně**: Začněte se základními SKU a škálujte podle skutečného využití
-2. **Monitorujte vše**: Nastavte komplexní monitorování od prvního dne
-3. **Automatizujte zabezpečení**: Používejte infrastrukturu jako kód pro konzistentní zabezpečení
-4. **Důkladně testujte**: Zahrňte testování specifické pro AI do vašeho pipeline
-5. **Plánujte náklady**: Sledujte využití tokenů a nastavte upozornění rozpočtu brzy
+1. **Začněte malé, škálujte postupně**: Začněte s jednoduchými SKU a škálujte na základě skutečného použití
+2. **Monitorujte vše**: Nastavte komplexní monitoring od prvního dne
+3. **Automatizujte bezpečnost**: Používejte infrastrukturu jako kód pro konzistentní bezpečnost
+4. **Testujte důkladně**: Zařaďte AI-specifické testování do vašeho procesu
+5. **Plánujte náklady**: Sledujte využití tokenů a nastavte rozpočtové upozornění včas
 
-### Běžné úskalí, kterým se vyvarovat:
+### Běžné nástrahy, kterým se vyhnout:
 
-- ❌ Vkládání API klíčů přímo do kódu
-- ❌ Nezprovoznění správného monitorování
+- ❌ Tvrdé kódování API klíčů přímo v kódu
+- ❌ Nenastavení správného monitoringu
 - ❌ Ignorování optimalizace nákladů
-- ❌ Netestování scénářů selhání
-- ❌ Nasazení bez health checků
+- ❌ Netestování scénářů chyb
+- ❌ Nasazení bez kontrol zdraví
 
-## Příkazy AZD AI CLI a rozšíření
+## AZD AI CLI příkazy a rozšíření
 
-AZD obsahuje rostoucí sadu AI-specifických příkazů a rozšíření, které zjednodušují produkční AI workflowy. Tyto nástroje přemostí propast mezi lokálním vývojem a produkčním nasazením AI workloadů.
+AZD obsahuje rostoucí sadu AI-specifických příkazů a rozšíření, která zjednodušují produkční AI pracovní postupy. Tyto nástroje překlenou propast mezi lokálním vývojem a produkčním nasazením AI zátěží.
 
-### Rozšíření AZD pro AI
+> **Revize vydání (2026-11-04):** Níže uvedené pokyny pro CLI byly ověřeny s vydanými verzemi `azd` **1.37.2**, `azure.ai.agents` **1.0.0-beta.23**, a `azure.ai.evaluations` **1.0.0-beta.2**. Agent beta.23 vyžaduje `azd >= 1.37.0`; evaluace beta.2 vyžaduje `azd >= 1.33.0`. Používejte alespoň 1.37.0 pro kombinovaný pracovní postup. Jedná se o revizi dokumentace/zdroje, nikoliv o validaci živého nasazení v Azure.
 
-AZD používá systém rozšíření pro přidání AI-specifických schopností. Rozšíření nainstalujete a spravujete pomocí:
+### AZD rozšíření pro AI
+
+AZD používá systém rozšíření pro přidání AI-specifických funkcí. Instalujte a spravujte rozšíření pomocí:
 
 ```bash
-# Vypsat všechna dostupná rozšíření (včetně AI)
+# List all available extensions (including AI)
 azd extension list
 
-# Zobrazit podrobnosti nainstalovaných rozšíření
+# Inspect installed extension details
+azd version
 azd extension show azure.ai.agents
 
-# Nainstalovat rozšíření Foundry Agents
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Nainstalovat rozšíření pro doladění
+# Install the separate Foundry evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Nainstalovat rozšíření pro vlastní modely
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Aktualizovat všechna nainstalovaná rozšíření
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
@@ -979,130 +927,217 @@ azd extension upgrade --all
 
 | Rozšíření | Účel | Stav |
 |-----------|---------|--------|
-| `azure.ai.agents` | Správa Foundry Agent Service | Preview |
-| `azure.ai.skills` | Znovupoužitelné agentní dovednosti | Preview |
-| `azure.ai.connections` | Foundry připojení (zdroje dat, nástroje) | Preview |
-| `azure.ai.finetune` | Doladění modelů ve Foundry | Preview |
-| `azure.ai.models` | Vlastní modely ve Foundry | Preview |
-| `azure.coding-agent` | Konfigurace coding agenta | Available |
+| `azure.ai.agents` | Správa Foundry Agent Service | Náhled |
+| `azure.ai.evaluations` | Evaluační datasety, hodnotitelé, evaluační skupiny a běhy | Náhled |
+| `azure.ai.skills` | Znovupoužitelné schopnosti agentů | Náhled |
+| `azure.ai.connections` | Foundry připojení (datové zdroje, nástroje) | Náhled |
+| `azure.ai.finetune` | Ladění Foundry modelů | Náhled |
+| `azure.ai.models` | Vlastní Foundry modely | Náhled |
+| `azure.coding-agent` | Konfigurace kódujícího agenta | K dispozici |
 
-> Rozšíření `azure.ai.agents` se rychle vyvíjí. Tento kurz je validován proti verzi `0.1.40-preview`. Spusťte `azd extension upgrade --all` pro získání nejnovější sady příkazů a `azd extension show azure.ai.agents` pro potvrzení nainstalované verze.
+> Spusťte `azd extension list --installed` a `azd extension show azure.ai.evaluations` pro kontrolu nainstalovaných verzí. Nejprve aktualizujte jádro CLI podle [instalačních/aktualizačních instrukcí](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) (pro Windows winget instalaci: `winget upgrade Microsoft.Azd`), poté spusťte `azd extension upgrade --all`. Neexistuje žádný příkaz core `azd upgrade`. Před upgradem produkční automatizace si nastudujte breaking changes; neočekávejte, že upgrade rozšíření zachová staré příkazy nebo formáty konfigurace.
 
-**Co jsou novější rozšíření `skills` a `connections`?**
+### Nedávné změny a opravy ve vydáních
 
-Dva náhledová rozšíření se objevila spolu s nástroji pro agenty a stojí za to je pochopit i pro začátečníka:
+| Vydání | Co se mění pro tento kurz |
+|---------|------------------------------|
+| `azd 1.37.0` | Přidává stabilní deployment-preview API a opravuje přepisování nesouvisejících `azure.yaml` nastavení při úpravách rozšíření. |
+| `azd 1.37.1` | Opravuje propagaci Ctrl+C přes rozšíření a rozlišuje zrušení/time-outy od generických chyb. |
+| `azd 1.37.2` | Vylepšuje validaci provisioning: kritická varování defaultně na **Ne**, ve scénářích bez potvrzení selže, zrušení přeskočí post-provision hooky. Opravuje také nevyřešené environment hodnoty v deny listech Deployment Stacků, pokud je povolena alfa funkce. |
+| Agent beta `beta.22` | Přesouvá evaluaci na `azd ai eval`, mění optimalizaci na GA v1 API, vyžaduje množné `toolboxes`, odděluje managed-harness, hlas a dlouhodobé preview opt-in. Opravuje výběr modelu podle prostředí a autentizaci toolboxu. |
+| Agent beta `beta.23` | Zpřístupňuje `init --harness`; opravuje A2A 0.3 výstup odpovědí, neplatné cesty/přecky prompt-agent skrz infrastrukturu, diagnostiku timeoutu aktivace a varování RBAC vývojářů. |
+| Evaluace beta `beta.2` | Vyžaduje konfiguraci evaluace v camelCase, přidává statické/simulované konverzace a explicitní lokální soubory zdrojů, opravuje identitu/verzi datasetů, počítání quality gate a diagnostiku neúspěšných běhů. |
 
-- **`azure.ai.skills`** — **skill** je znovupoužitelná schopnost (zabalený nástroj nebo chování), kterou můžete připojit k jednomu nebo více agentům místo opětovné implementace pokaždé. Představte si to jako sdílený stavební blok: definujte jednou „hledání v dokumentaci“ nebo „vyhledání objednávky“ a znovu jej použijte napříč agenty. To udržuje multi-agentní systémy (Kapitola 5) konzistentní a zabraňuje kopírování kódu.
-- **`azure.ai.connections`** — **connection** je spravované propojení z vašeho Foundry projektu na externí zdroj, který agenti potřebují — zdroj dat (např. Azure AI Search), endpoint nástroje nebo jiná služba. Connections centralizují *kde* a *jak* agenti přistupují k datům, takže přihlašovací údaje a koncové body žijí na jednom řízeném místě místo toho, aby byly rozházené v kódu.
+Timeout aktivace agenta **neprokazuje** selhání nasazení: nejprve zkontrolujte pokusu verzi a stav před opakováním. Varování RBAC vývojářů mohou přetrvávat i při úspěšném provisioningu; vyřešte přístup chybějícího uživatele před spuštěním pod jeho identitou.
 
-Pro první nasazení agentů tato rozšíření nepotřebujete — při učení zůstaňte u `azure.ai.agents`. Pořiďte si `skills`, když začnete duplikovat stejný nástroj mezi agenty, a `connections`, když více agentů sdílí stejný zdroj dat.
+Zdroje: [AZD vydání](https://github.com/Azure/azure-dev/releases), [vydání agentů beta.23](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [migrace agentů beta.22](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), a [vydání evaluací beta.2](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
 
-### Inicializace projektu agenta pomocí `azd ai agent init`
+**Co jsou novější `skills` a `connections` rozšíření?**
 
-Příkaz `azd ai agent init` vygeneruje kostru produkčně připraveného projektu AI agenta integrovaného s Microsoft Foundry Agent Service:
+Vedle nástrojů agenta se objevila dvě preview rozšíření, která stojí za pochopení i jako začátečník:
+
+- **`azure.ai.skills`** — **Schopnost** je znovupoužitelná funkce (zabalený nástroj nebo chování), kterou můžete připojit k jednomu nebo více agentům místo opětovné implementace. Představte si to jako sdílený stavební blok: definujte si schopnost „vyhledat v dokumentaci“ nebo „vyhledat objednávku“ jednou a znovu ji použijte mezi agenty. Udrží to systém více agentů (Kapitola 5) konzistentní a zabrání kopírování.
+- **`azure.ai.connections`** — **Připojení** je spravované propojení mezi vaším Foundry projektem a externím zdrojem, který agenti potřebují—datový zdroj (např. Azure AI Search), koncový bod nástroje nebo jiná služba. Připojení centralizují *kde* a *jak* agenti přistupují k datům, takže přihlašovací údaje a koncové body jsou na jednom řízeném místě místo rozházených v kódu.
+
+Tyto nepotřebujete pro nasazení prvních agentů—drže se `azure.ai.agents` při učení. Sáhněte po `skills`, když budete duplikovat stejný nástroj mezi agenty, a `connections`, když více agentů sdílí stejný datový zdroj.
+
+### Inicializace agentních projektů s `azd ai agent init`
+
+Příkaz `azd ai agent init` vytvoří kostru Microsoft Foundry agentního projektu. Použijte aktuální šablonu projektu `azure.yaml`, ne implicitní starý manifest agenta:
 
 ```bash
-# Inicializovat nový projekt agenta z manifestu agenta
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize a new agent project from a local project template
+azd ai agent init --template ./templates/support-agent/azure.yaml
 
-# Inicializovat a zacílit na konkrétní projekt Foundry
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Initialize and target a specific Foundry project
+azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <foundry-project-id>
 
-# Inicializovat s vlastním zdrojovým adresářem
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
-
-# Zacílit na Container Apps jako hostitele
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt the template into a different directory
+azd ai agent init --template ./templates/support-agent/azure.yaml --src ./agents/my-agent
 ```
 
-**Klíčové přepínače:**
+**Klíčové příznaky:**
 
-| Přepínač | Popis |
+| Příznak | Popis |
 |------|-------------|
-| `-m, --manifest` | Cesta nebo URI k agent manifestu, který chcete přidat do projektu |
-| `-p, --project-id` | Existující Microsoft Foundry Project ID pro vaše azd prostředí |
-| `-s, --src` | Adresář pro stažení definice agenta (výchozí `src/<agent-id>`) |
-| `--host` | Přepsat výchozí hostitele (např. `containerapp`) |
-| `-e, --environment` | Azd prostředí, které se má použít |
+| `-t, --template` | Cesta nebo podporovaný GitHub URI k projektovému dokumentu `azure.yaml` |
+| `-p, --project-id` | Existující ID Microsoft Foundry projektu pro vaše azd prostředí |
+| `-s, --src` | Zdrojový adresář pro generované agenty, nebo cílový adresář při adoptování projektu |
+| `--kind` | Inicializace agenta `hosted`, `prompt` nebo preview `prompt-voice` |
+| `--harness` | Volitelný běhový harness pro `--kind prompt`; vyžaduje preview opt-in |
+| `-e, --environment` | Použité azd prostředí |
 
-**Tip pro produkci**: Použijte `--project-id` pro přímé připojení k existujícímu Foundry projektu, čímž udržíte kód agenta a cloudové prostředky propojené od začátku.
+`--manifest`/`-m` je zastaralý alias pro `--template`/`-t`; přejmenování příznaku nepřevede starý manifest na aktuální projektový dokument. `--host containerapp` není aktuální příznak agent-init. Pro běžnou aplikaci Container Apps použijte `azd init --template` s šablonou deklarující `host: containerapp`.
 
-### Správa životního cyklu agenta
+Pro existující projekt s právě jedním službou `azure.ai.project`, `azd ai agent add support-agent --file ./agents/support-agent.yaml` přidá nebo aktualizuje přímo definici agenta bez provisioningu nebo nasazení. Příkazy runtime odmítají staré implicitní `agent.yaml`/AgentManifest a vnořené definice služeb `config:`; migrujte je na aktuální službu `azure.ai.agent`. Když init vypíše `cd` další krok, spusťte jej před `azd up`: init nemění adresář shelle.
 
-Kromě `init` rozšíření `azure.ai.agents` poskytuje příkazy pro celý životní cyklus hostovaného agenta — testování, hodnocení, optimalizaci a vyřazení:
+**Tip pro produkci**: Použijte `--project-id` pro přímé připojení k existujícímu Foundry projektu, což udržuje váš agentní kód i cloudové zdroje propojené od začátku.
+
+#### Volitelné Preview funkce
+
+Managed harness, hlas a dlouhodobé vyvolání jsou samostatně ve výchozím nastavení zakázány. Nastavte pouze přepínač pro funkci, kterou potřebujete, v **prostředí procesu shelle/CI**, nepoužívejte `azd env set`:
+
+| Funkce | Proměnná prostředí procesu |
+|---------|------------------------------|
+| Managed harness (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
+| Hlas (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
+| Dlouhodobé vyvolání | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
+
+Například použijte `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` v Bash nebo `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` v PowerShell před spuštěním příslušného příkazu. Jeden přepínač neaktivuje ostatní. Viz [README u vydaných agentů](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) pro všechny preview přepínače a omezení.
+
+### Správa životního cyklu agentů
+
+Použijte `azure.ai.agents` pro testování, kontrolu, optimalizaci a vyřazení agentů, a samostatné rozšíření `azure.ai.evaluations` k měření kvality:
 
 ```bash
-# Vyvolejte nasazeného agenta a zobrazte časování odpovědí serveru
-# (celková latence a doba do prvního bajtu)
+# Invoke a deployed agent and view server response timing
+# (total latency and time to first byte)
 azd ai agent invoke
 
-# Zobrazte konfiguraci živého koncového bodu před jejím změněním
+# Show the live endpoint configuration before changing it
 azd ai agent endpoint show
 
-# Vygenerujte evaluační datovou sadu pro agenta
-azd ai agent eval generate --dataset ./eval/dataset.jsonl
-
-# Optimalizujte pokyny agenta podle vašich evaluačních dat
-# (vyžaduje optimization_model v projektu agenta)
-azd ai agent optimize
-
-# Stáhněte nasazený zdroj hostovaného agenta založeného na kódu
-# (s ověřením SHA-256)
+# Download the deployed source of a code-based hosted agent
+# (with SHA-256 verification)
 azd ai agent code download
 
-# Odstraňte hostovaného agenta a všechny jeho verze
-# (--force ukončí aktivní relace)
+# Delete a hosted agent and all of its versions
+# (--force terminates active sessions)
 azd ai agent delete --force
 ```
 
-**Životní cyklus přehledně:**
+**Životní cyklus na první pohled:**
 
 | Fáze | Příkaz | Použití v produkci |
 |-------|---------|----------------|
-| Test | `azd ai agent invoke` | Ověřit odpovědi a změřit latenci před vydáním |
-| Inspekce | `azd ai agent endpoint show` | Zkontrolovat auth/konfiguraci endpointu; odhalit rozbíjející změny brzy |
-| Měření | `azd ai agent eval generate` | Vytvořit opakovatelné evaluační sady z reálných trace |
-| Zlepšení | `azd ai agent optimize` | Ladit instrukce proti změřené kvalitě |
-| Obnova | `azd ai agent code download` | Získat přesný nasazený zdroj pro audit/rollback |
-| Vyřazení | `azd ai agent delete --force` | Čistě odstranit agenta a jeho verze |
+| Testovat | `azd ai agent invoke` | Ověřit odpovědi a změřit latenci před vydáním |
+| Inspektovat | `azd ai agent endpoint show` | Kontrola autentizace/konfigurace koncového bodu; včasná detekce breaking changes |
+| Měřit | `azd ai eval init`, `generate`, `run start` | Definovat, nasadit a spustit opakovatelné evaluace |
+| Zlepšit | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Znovupoužití kompatibilní evaluace pro optimalizaci agenta |
+| Zotavit se | `azd ai agent code download` | Získat přesný nasazený zdroj pro audit/rollback |
+| Vyřadit | `azd ai agent delete --force` | Čistě odstranit agenta a jeho verze |
 
-> Jedná se o příkazy v náhledu a mohou se mezi verzemi rozšíření měnit. Spusťte `azd ai agent --help` pro zobrazení přesných podpříkazů dostupných ve vaší nainstalované verzi.
+> Jedná se o preview příkazy, které se mohou mezi vydáními rozšíření měnit. Spusťte `azd ai agent --help` pro zobrazení přesných dostupných podpříkazů vaší nainstalované verze.
 
-### Model Context Protocol (MCP) s `azd mcp`
-AZD includes built-in MCP server support (Alpha), enabling AI agents and tools to interact with your Azure resources through a standardized protocol:
+`endpoint show` podporuje hostované, promptové a hlasové agenty, ale aktualizace koncových bodů jsou pouze pro hostované; workflow agenti nejsou podporováni. Stahování kódu a příklad vyřazení hostovaného agenta výše nejsou obecné operace pro všechny typy agentů.
+
+#### Migrace evaluace a kontroly kvality
+
+Od agentů **1.0.0-beta.22 (2026-10-23)** staré příkazy `azd ai agent eval` poskytují migraci místo dřívějšího evaluančního workflow. Nekopírujte staré příklady `eval generate --dataset ...`: evaluace nyní žije pod **`azd ai eval`**.
+
+V inicializovaném agentském projektu se autentizujte s `azd auth login`, potvrďte vybrané prostředí/Foundry projekt a nainstalujte `azure.ai.evaluations`. Pro nasazení modelu rozhodčího je potřeba sledování modelu; generování a simulace konverzací mohou vyžadovat vlastní modelové volby a nést další náklady.
 
 ```bash
-# Spusťte MCP server pro váš projekt
+# Scaffold evals/ and wire an azure.ai.eval service into azure.yaml
+azd ai eval init
+
+# Optionally synthesize a rubric and dataset from the agent
+azd ai eval generate
+
+# Review generated files, then register datasets, evaluators, and eval groups
+azd up
+
+# Start an evaluation and wait for its results
+azd ai eval run start --wait
+
+# Inspect runs and available test-case output
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+```
+
+Následujte interaktivní volby a vytištěné další kroky, místo aby jste předpokládali, že generované prostředky jsou již zaregistrovány. Konfigurace evaluace běžně žije v `evals/azure.eval.yaml`, odkazováno službou `azure.ai.eval` ve `azure.yaml`. Klíče jsou **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); staré snake_case klíče konfigurace jsou odmítnuty. Cesty uvnitř referencované konfigurace se resolverují relativně k tomuto souboru, ne k kořeni repozitáře.
+
+Pro evaluace konverzací vyberte **statické**, pokud chcete ohodnotit dokončené přepisy bez vyvolání agenta, nebo **simulaci**, pokud chcete generovat konverzace ze scénářových semínek. Simulace potřebuje cílového agenta, model simulačního a samostatný výběr modelu rozhodčího. Pro bezobslužné příkazy zadejte vstupy vypsané `azd ai eval init --help` a `azd ai eval generate --help`; nepředpokládejte, že model generování je zároveň rozhodčí nebo simulační.
+
+Pro CI nakonfigurujte explicitní politiku kvality pomocí `azd ai eval run start --help` (`--fail-on`) a považujte nenulový host exit za selhání. Dokončený běh není automaticky úspěšným průchodem kvalitou. Prověřte chybné/errované řádky a diagnostiku; chybějící nebo nekonzistentní počty výsledků nejsou známkou úspěchu. Registrované datasety si uchovávají svoji identitu a verzi služby; `--max-samples` nemůže podmnožinu registrovaného datasetu vytvořit. Následně publikujte menší dataset záměrně, nebo použijte podporovaný lokální zdroj souborů.
+
+```bash
+# Example CI policy: at least 90% of all test cases must pass
+azd ai eval run start --wait --fail-on "pass-rate=0.9"
+```
+
+Brána propustnosti používá poměr úspěšných testů dělený počtem všech testů; neúspěšné, erorové, přeskočené a jiné neprošlé řádky se započítávají proti ní. Nekombinujte bránu s `--no-wait`, která vrací před tím, než je k dispozici verdikt.
+
+#### Migrace konfigurace optimalizace
+
+Optimalizace nyní používá GA v1 API. Pro znovupoužití kompatibilní **na úrovni kol, datasetem podporované** evaluace z nového workflow:
+
+```bash
+# Replace placeholders with the evaluation name and optimizer model deployment
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+`--eval` vybírá vyhodnocení; `--eval-config` vybírá jeho konfigurační soubor (včetně definic založených na souborech). `--config` místo toho přijímá **samostatný požadavek na optimalizační API** v YAML nebo JSON. Nepředávejte starý agent `eval.yaml` ani nový `azure.eval.yaml` do `--config`, a nespojujte `--config` s `--eval`/`--eval-config`. Vyhodnocení založená na konverzaci, trace nebo simulaci nejsou zaměnitelná s optimalizační zkratkou založenou na datovém souboru; pro tyto scénáře použijte podporovaný formát optimalizačního požadavku. Před aplikací nebo nasazením zkontrolujte kandidáty.
+
+Viz [reference vyhodnocení pro revidované vydání](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) a [zdroj příkazu optimalizace pro revidované vydání](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) pro přesné možnosti.
+
+#### Náhled nasazení hostovaného agenta pouze pro čtení
+
+Pro existující prostředí svázané s Foundry s jednotnou službou `azure.ai.agent` typu `kind: hosted` porovnejte podporovanou konfiguraci před nasazením:
+
+```bash
+azd deploy <service-name> --preview --no-prompt
+```
+
+Tento náhled agenta nenasazuje. Nejedná se o úplný rozdíl infrastruktury/bezpečnosti: agenti prompt/voice/workflow, starší konfigurační rozvržení a některá hostovaná nastavení nejsou jeho součástí. Výsledek `unknown` není schválením nasazení. Neexistuje samostatný `azd ai agent deploy` nebo příkaz `--dry-run` agenta; použijte hlavní nasazovací pracovní postup.
+
+### Protokol kontextu modelu (MCP) s `azd mcp`
+
+AZD zahrnuje vestavěnou podporu MCP serveru (Alfa), která umožňuje AI agentům a nástrojům interagovat s vašimi zdroji Azure prostřednictvím standardizovaného protokolu:
+
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# Zkontrolujte aktuální pravidla souhlasu Copilota pro spouštění nástrojů
+# Review current Copilot consent rules for tool execution
 azd copilot consent list
 ```
 
-MCP server vystavuje kontext vašeho azd projektu—prostředí, služby a Azure zdroje—pro nástroje pro vývoj s podporou AI. To umožňuje:
+MCP server vystavuje kontext vašeho projektu azd—prostředí, služby a zdroje Azure—AI-poháněným vývojovým nástrojům. To umožňuje:
 
-- **Nasazování s asistencí AI**: Umožněte kódovacím agentům dotazovat stav projektu a spouštět nasazení
-- **Objevování zdrojů**: Nástroje AI mohou zjistit, jaké Azure zdroje váš projekt používá
-- **Správa prostředí**: Agenti mohou přepínat mezi prostředími dev/staging/production
+- **Nasazení s asistencí AI**: Nechte kódovací agenty dotazovat stav projektu a spouštět nasazení
+- **Objevování zdrojů**: AI nástroje mohou zjistit, jaké zdroje Azure váš projekt používá
+- **Správa prostředí**: Agenti mohou přepínat mezi vývojovým/testovacím/produkčním prostředím
 
-### Generování infrastruktury pomocí `azd infra generate`
+### Generování infrastruktury s `azd infra generate`
 
-Pro produkční AI pracovní zátěže můžete generovat a přizpůsobit infrastrukturu jako kód místo spoléhání se na automatické provisionování:
+Pro produkční AI pracovní zátěže můžete generovat a přizpůsobovat infrastrukturu jako kód místo spoléhání na automatické poskytování:
 
 ```bash
-# Vygenerovat soubory Bicep/Terraform z definice projektu
+# Generate supported infrastructure for this project type
 azd infra generate
 ```
 
-To zapíše IaC na disk, díky čemuž můžete:
-- Prohlédnout a auditovat infrastrukturu před nasazením
-- Přidat vlastní bezpečnostní politiky (síťová pravidla, privátní koncové body)
-- Integrovat do stávajících procesů kontroly IaC
+Podpora závisí na projektu/hostiteli a instalovaných poskytovatelích; nejde o obecný příkaz pro reverzní inženýrství libovolných zdrojů Azure ani o záruku generování jak Bicep, tak Terraform. Spusťte `azd infra generate --help` a zkontrolujte generovaný formát. Pokud je podporováno, zápis IaC na disk umožňuje:
+- Prověřit a auditovat infrastrukturu před nasazením
+- Přidat vlastní bezpečnostní zásady (síťová pravidla, privátní koncové body)
+- Integrovat s existujícími procesy kontroly IaC
 - Verzovat změny infrastruktury samostatně od aplikačního kódu
 
-### Produkční hooky životního cyklu
+### Produkční háčky životního cyklu
 
-AZD hooky vám umožňují vložit vlastní logiku do každé fáze životního cyklu nasazení—kritické pro produkční AI pracovní postupy:
+Háčky AZD umožňují vkládat vlastní logiku v každé fázi životního cyklu nasazení—kritické pro produkční AI pracovní postupy:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1113,7 +1148,7 @@ hooks:
     run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
   postprovision:
     shell: sh
-    run: scripts/configure-networking.sh  # Set up private endpoints
+    run: scripts/verify-networking.sh  # Verify IaC-provisioned private connectivity
   predeploy:
     shell: sh
     run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
@@ -1131,40 +1166,40 @@ services:
 ```
 
 ```bash
-# Ručně spusťte konkrétní hook během vývoje
+# Run a specific hook manually during development
 azd hooks run predeploy
 ```
 
-**Doporučené produkční hooky pro AI pracovní zátěže:**
+**Doporučené produkční háčky pro AI pracovní zátěže:**
 
-| Hook | Použití |
+| Háček | Případ použití |
 |------|----------|
-| `preprovision` | Ověřit kvóty předplatného pro kapacitu AI modelu |
-| `postprovision` | Konfigurovat privátní koncové body, nasadit váhy modelu |
-| `predeploy` | Spustit AI bezpečnostní testy, ověřit šablony promptů |
-| `postdeploy` | Provest smoke test odpovědí agentů, ověřit konektivitu modelu |
+| `preprovision` | Ověření kvót předplatného pro kapacitu AI modelu |
+| `postprovision` | Ověření privátní konektivity a požadovaných výstupů zdrojů |
+| `predeploy` | Spuštění testů bezpečnosti AI, ověření šablon promptů |
+| `postdeploy` | Smoke test odpovědí agenta, ověření konektivity modelu |
 
 ### Konfigurace CI/CD pipeline
 
-Použijte `azd pipeline config` k připojení vašeho projektu k GitHub Actions nebo Azure Pipelines se zabezpečenou autentizací Azure:
+Použijte `azd pipeline config`, abyste připojili svůj projekt k GitHub Actions nebo Azure Pipelines s bezpečnou autentizací Azure:
 
 ```bash
-# Nakonfigurujte CI/CD pipeline (interaktivně)
+# Configure CI/CD pipeline (interactive)
 azd pipeline config
 
-# Nakonfigurujte s konkrétním poskytovatelem
+# Configure with a specific provider
 azd pipeline config --provider github
 ```
 
 Tento příkaz:
-- Vytvoří service principal s nejmenším nutným oprávněním
+- Vytvoří nebo nakonfiguruje identitu pipeline; zkontrolujte její generovaný rozsah rolí/oprávnění, než předpokládáte nejmenší potřebná oprávnění
 - Konfiguruje federované přihlašovací údaje (žádné uložené tajné klíče)
-- Vygeneruje nebo aktualizuje soubor definice pipeline
-- Nastaví požadované proměnné prostředí ve vašem CI/CD systému
+- Generuje nebo aktualizuje definici pipeline souboru
+- Nastaví potřebné proměnné prostředí ve vašem CI/CD systému
 
-#### Krok za krokem: váš první GitHub Actions pipeline
+#### Krok za krokem: vaše první GitHub Actions pipeline
 
-Zde je kompletní průvodce od funkčního azd projektu po automatická nasazení při každém pushi.
+Zde je kompletní průvodce od fungujícího projektu azd po automatizovaná nasazení při každém pushi.
 
 **1. Ujistěte se, že váš projekt je na GitHubu**
 
@@ -1175,21 +1210,21 @@ git commit -m "Initial azd project"
 gh repo create my-ai-app --private --source=. --push
 ```
 
-**2. Spusťte pipeline config**
+**2. Spusťte konfiguraci pipeline**
 
 ```bash
 azd pipeline config --provider github
 ```
 
 azd interaktivně:
-- Zeptá se, které Azure předplatné a prostředí chcete použít
-- Vytvoří Entra **registraci aplikace + service principal** pro pipeline
-- Nastaví **federované přihlašovací údaje (OIDC)**—takže GitHub se autentizuje do Azure s krátkodobými tokeny a **žádná tajemství nejsou uložena**
-- Nahraje požadované **proměnné** do vašeho GitHub repozitáře (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+- Zeptá se, které předplatné Azure a prostředí zacílit
+- Vytvoří registraci aplikace Entra + služební účet pro pipeline
+- Nastaví federované přihlašovací údaje (OIDC)—takže GitHub autentizuje do Azure s krátkodobými tokeny a **žádné tajné klíče nejsou ukládány**
+- Nahraje potřebné **proměnné** do vašeho GitHub repozitáře (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
 
-**3. Pochopte vygenerovaný workflow**
+**3. Porozumějte generovanému workflow**
 
-azd přidá `.github/workflows/azure-dev.yml`. Klíčové části vypadají takto:
+U podporované šablony konfigurujte/prohlédněte `.github/workflows/azure-dev.yml`. Klíčové části vypadají takto (šablona musí dodat nástrojový řetězec aplikace a parametry prostředí):
 
 ```yaml
 # .github/workflows/azure-dev.yml
@@ -1223,40 +1258,40 @@ jobs:
         run: azd deploy --no-prompt
 ```
 
-**4. Ověřte, že funguje**
+**4. Ověřte, že to funguje**
 
 ```bash
-# Pro spuštění pipeline proveďte push změny.
+# Push a change to trigger the pipeline
 git commit -am "Trigger pipeline" --allow-empty
 git push
 ```
 
-Otevřete kartu **Actions** ve vašem GitHub repozitáři a sledujte, jak workflow automaticky spouští `azd provision` a `azd deploy`.
+Otevřete záložku **Actions** ve vašem GitHub repozitáři a sledujte automatický běh workflow `azd provision` a `azd deploy`.
 
-> **Proč jsou federované přihlašovací údaje důležité:** starší pipeline ukládaly klientské tajemství v GitHubu. OIDC federované přihlašovací údaje toto tajemství zcela odstraňují—GitHub si při běhu vyžádá krátkodobý token, což je bezpečnější a není co rotovat nebo zveřejnit. Toto je výchozí nastavení `azd pipeline config`.
+> **Proč jsou důležité federované přihlašovací údaje:** starší pipeline ukládaly klientské tajemství na GitHubu. OIDC federované přihlašovací údaje toto tajemství zcela odstraní—GitHub na běhu požádá o krátkodobý token, což je bezpečnější a není třeba to otáčet nebo uniknout. Toto je výchozí nastavení, které `azd pipeline config` zavádí.
 
-> **Tajemství vs. proměnné:** necitlivé identifikátory (`AZURE_CLIENT_ID`, atd.) patří do repozitáře jako **proměnné**. Pokud vaše aplikace skutečně potřebuje tajemství při sestavení, přidejte ho jako GitHub **secret** a odkažte se na něj pomocí `${{ secrets.NAME }}`—ale preferujte Key Vault + spravovanou identitu v runtime (viz [Chapter 3](../chapter-03-configuration/authsecurity.md)).
+> **Tajné klíče vs. proměnné:** necitlivé identifikátory (`AZURE_CLIENT_ID` atd.) se vkládají do repozitářových **proměnných**. Pokud vaše aplikace opravdu potřebuje tajemství při sestavení, přidejte jej jako GitHub **tajemství** a použijte `${{ secrets.NAME }}`—ale upřednostněte Key Vault + spravovanou identitu za běhu (viz [Kapitola 3](../chapter-03-configuration/authsecurity.md)).
 
-**Produkční workflow s pipeline config:**
+**Produkční workflow s konfigurací pipeline:**
 
 ```bash
-# 1. Nastavte produkční prostředí
+# 1. Set up production environment
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. Nakonfigurujte pipeline
+# 2. Configure the pipeline
 azd pipeline config --provider github
 
-# 3. Pipeline spouští azd deploy při každém pushi do větve main
+# 3. Review the generated trigger, provisioning/deployment steps, and approvals
 ```
 
 #### Krok za krokem: Azure DevOps Pipelines
 
-Dáváte přednost Azure DevOps před GitHub Actions? azd to nativně podporuje pomocí poskytovatele `azdo`. Průběh je téměř totožný—azd vygeneruje soubor pipeline, vytvoří service connection a nastaví autentizaci.
+Preferujete Azure DevOps před GitHub Actions? azd jej nativně podporuje s poskytovatelem `azdo`. Průběh je téměř stejný—azd generuje soubor pipeline, vytváří servisní připojení a zapojuje autentizaci.
 
-**1. Ujistěte se, že máte Azure DevOps projekt**
+**1. Ujistěte se, že máte projekt Azure DevOps**
 
-Potřebujete organizaci a projekt na `https://dev.azure.com/<your-org>`. Vygenerujte Personal Access Token (PAT) s oprávněními **Build (Read & execute)**, **Code (Read & write)** a **Service Connections (Read, query & manage)**—azd vás na něj vyzve.
+Potřebujete organizaci a projekt na `https://dev.azure.com/<your-org>`. Generujte osobní přístupový token (PAT) s oprávněními **Build (čtení & spuštění)**, **Code (čtení & zápis)** a **Service Connections (čtení, dotaz a správa)**—azd si jej vyžádá.
 
 **2. Nakonfigurujte pipeline**
 
@@ -1264,18 +1299,18 @@ Potřebujete organizaci a projekt na `https://dev.azure.com/<your-org>`. Vygener
 azd pipeline config --provider azdo
 ```
 
-azd provede:
-- Zeptá se na vaši Azure DevOps organizaci a projekt
-- Vytvoří (nebo znovu použije) **service connection** do Azure pomocí service principala
-- Nakonfiguruje **workload identity federation (OIDC)** tak, aby nebylo uloženo žádné klientské tajemství
-- Commitne definici pipeline `azure-dev.yml` do vašeho repozitáře
+azd:
+- Zeptá se na vaši organizaci a projekt Azure DevOps
+- Vytvoří (nebo použije) **servisní připojení** k Azure pomocí servisního principála
+- Nakonfiguruje federaci identity pracovních zátěží (OIDC) tak, aby se neskladovalo klientské tajemství
+- Nakonfiguruje definici pipeline (obvykle `.azdo/pipelines/azure-dev.yml`) z šablony pipeline projektu
 
-**3. Zkontrolujte vygenerovaný `azure-dev.yml`**
+**3. Prohlédněte si generovanou pipeline**
 
-azd vytvoří pipeline, která provádí provisioning a nasazení při každém pushi do `main`:
+Použijte generovanou pipeline projektu, včetně jeho **Azure servisního připojení a kroků autentizace AZD**. Oficiální [průvodce nastavením Azure Pipelines](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) ukazuje instalační fragment níže; toto je **pouze instalace**, nikoliv spustitelný autentizovaný nasazovací workflow:
 
 ```yaml
-# azure-dev.yml
+# .azdo/pipelines/azure-dev.yml (installer fragment only)
 trigger:
   - main
 
@@ -1283,29 +1318,17 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  - task: setup-azd@1
+  - task: setup-azd@0
     displayName: Install azd
-
-  - script: azd provision --no-prompt
-    displayName: Provision Infrastructure
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
-
-  - script: azd deploy --no-prompt
-    displayName: Deploy Application
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
 ```
 
-**4. Odkud proměnné pocházejí**
+Nainstalujte rozšíření AZD Azure DevOps, pokud daný úkol není ve vaší organizaci k dispozici. Nekopírujte holé `azd provision`/`azd deploy` shellové kroky bez autentizace: konfigurace servisního připojení sama o sobě automaticky nepřihlásí každý proces do AZD. Postupujte podle přihlášení OIDC a autorizovaného kontextu úkolu ve vygenerované šabloně a zadejte vybrané prostředí/předplatné/umístění.
 
-azd ukládá hodnoty prostředí (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) jako **variable group** v Azure DevOps, aby je pipeline mohla číst. Můžete je zobrazit a upravit pod **Pipelines → Library**.
+**4. Odkud pocházejí proměnné**
 
-> **Stejný přínos OIDC jako u GitHubu:** poskytovatel `azdo` také výchozně konfiguruje workload identity federation, takže v service connection není uloženo žádné klientské tajemství—Azure DevOps vymění krátkodobý token při běhu. Předávejte `--auth-type client-credentials` pouze pokud vaše organizace zatím nemůže používat OIDC.
+azd ukládá hodnoty prostředí (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) jako **skupinu proměnných** v Azure DevOps, aby je pipeline mohla číst. Můžete je upravovat v sekci **Pipelines → Library**.
+
+> **Stejný přínos OIDC jako GitHub:** poskytovatel `azdo` také implicitně nastavuje federaci identity pracovních zátěží, takže v servisním připojení není ukládáno klientské tajemství—Azure DevOps za běhu vyměňuje krátkodobý token. Předávejte `--auth-type client-credentials` pouze, pokud vaše organizace ještě nemůže používat OIDC.
 
 **5. Spusťte to**
 
@@ -1314,26 +1337,26 @@ git commit -am "Add Azure DevOps pipeline" --allow-empty
 git push
 ```
 
-Otevřete **Pipelines** v Azure DevOps a sledujte spuštění `azd provision` a `azd deploy`.
+Otevřete sekci **Pipelines** v Azure DevOps a sledujte průběh `azd provision` a `azd deploy`.
 
-### Přidávání komponent pomocí `azd add`
+### Přidání komponent s `azd add`
 
-Inkrementálně přidávejte Azure služby do existujícího projektu:
+Postupně přidávejte služby Azure do existujícího projektu:
 
 ```bash
-# Přidejte novou komponentu služby interaktivně
+# Add a new service component interactively
 azd add
 ```
 
-To je obzvlášť užitečné pro rozšiřování produkčních AI aplikací—například přidání služby pro vektorové vyhledávání, nového agentního endpointu nebo monitorovací komponenty do stávajícího nasazení.
+To je zvláště užitečné pro rozšiřování produkčních AI aplikací—například přidáním vektorové vyhledávací služby, nového koncového bodu agenta nebo monitorovací komponenty do již nasazeného prostředí.
 
 ## Další zdroje
 
 - **Azure Well-Architected Framework**: [Pokyny pro AI pracovní zátěže](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Dokumentace Microsoft Foundry**: [Oficiální dokumentace](https://learn.microsoft.com/azure/ai-studio/)
-- **Komunitní šablony**: [Azure Samples](https://github.com/Azure-Samples)
-- **Komunita na Discordu**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 otevřených agentních dovedností pro Azure AI, Foundry, nasazení, optimalizaci nákladů a diagnostiku. Nainstalujte do svého editoru:
+- **Šablony komunity**: [Azure Samples](https://github.com/Azure-Samples)
+- **Discord komunita**: [#Azure kanál](https://discord.gg/microsoft-azure)
+- **Agent Skills pro Azure**: [microsoft/github-copilot-for-azure na skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - znovupoužitelné agent dovednosti pro Azure AI, Foundry, deployment, optimalizaci nákladů a diagnostiku. Instalujte ve vašem editoru:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1341,13 +1364,13 @@ To je obzvlášť užitečné pro rozšiřování produkčních AI aplikací—n
 ---
 
 **Navigace kapitol:**
-- **📚 Domov kurzu**: [AZD For Beginners](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 8 - Produkční a podnikové vzory
+- **📚 Domů kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 8 - Produkční a Enterprise vzory
 - **⬅️ Předchozí kapitola**: [Kapitola 7: Řešení problémů](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Také související**: [AI Workshop Lab](ai-workshop-lab.md)
-- **� Kurz dokončen**: [AZD For Beginners](../../README.md)
+- **⬅️ Také související**: [AI Workshop Laboratoř](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Kurz dokončen**: [AZD pro začátečníky](../../README.md)
 
-**Pamatujte**: Produkční AI zátěže vyžadují pečlivé plánování, monitorování a nepřetržitou optimalizaci. Začněte s těmito vzory a upravte je podle vašich konkrétních požadavků.
+**Pamatujte**: Produkční AI pracovní zátěže vyžadují pečlivé plánování, monitorování a průběžnou optimalizaci. Začněte s těmito vzory a přizpůsobte je svým specifickým požadavkům.
 
 ---
 

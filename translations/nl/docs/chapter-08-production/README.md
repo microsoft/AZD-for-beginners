@@ -1,4 +1,4 @@
-# Hoofdstuk 8: Productie- & Enterprisepatronen
+# Hoofdstuk 8: Productie- & Enterprise-patronen
 
 **📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 2-3 uur | **⭐ Complexiteit**: Geavanceerd
 
@@ -6,18 +6,20 @@
 
 ## Overzicht
 
-Dit hoofdstuk behandelt enterprise-klare implementatiepatronen, beveiligingsversteviging, monitoring en kostenoptimalisatie voor productie-AI workloads.
+Dit hoofdstuk behandelt enterprise-klare uitrolpatronen, beveiligingsversteviging, monitoring en kostenoptimalisatie voor productie AI-werklasten.
 
-> Gevalideerd tegen `azd 1.27.1` in juli 2026.
+Dit is een architectuurreferentie, geen volledige deploybare productie-template. Voorbeelden laten integratiedetails weg die u zelf in uw eigen applicatie moet aanleveren en testen; het lezen van de checklist certificeert geen productieklaarheid.
+
+> **Release review (2026-11-04):** AI CLI-handleiding is gecontroleerd aan de hand van de documentatie/bron van `azd 1.37.2`, agents `1.0.0-beta.23` en evaluaties `1.0.0-beta.2`. Zie [releasewijzigingen en fixes](production-ai-practices.md#recent-release-changes-and-fixes) voor compatibiliteitseisen en migratiedetails; dit is geen validatie van een live uitrol.
 
 ## Leerdoelen
 
 Door dit hoofdstuk te voltooien, zult u:
-- Multi-region veerkrachtige applicaties implementeren
-- Enterprise beveiligingspatronen toepassen
-- Uitgebreide monitoring configureren
+- Meerdimensionale veerkrachtige applicaties uitrollen
+- Enterprise beveiligingspatronen implementeren
+- Omvattende monitoring configureren
 - Kosten op schaal optimaliseren
-- CI/CD pipelines opzetten met AZD
+- CI/CD-pijplijnen opzetten met AZD
 
 ---
 
@@ -25,19 +27,19 @@ Door dit hoofdstuk te voltooien, zult u:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Productie AI Praktijken](production-ai-practices.md) | Enterprise implementatiepatronen | 90 min |
+| 1 | [Productie AI-praktijken](production-ai-practices.md) | Enterprise uitrolpatronen | 90 min |
 
 ---
 
 ## 🚀 Productie Checklist
 
-- [ ] Multi-region implementatie voor veerkracht
+- [ ] Meerdere regio's ingezet voor veerkracht
 - [ ] Beheerde identiteit voor authenticatie (geen sleutels)
 - [ ] Application Insights voor monitoring
 - [ ] Kostenbudgetten en waarschuwingen geconfigureerd
 - [ ] Beveiligingsscanning ingeschakeld
-- [ ] CI/CD pipeline-integratie
-- [ ] Disaster recovery plan
+- [ ] Integratie van CI/CD-pijplijn
+- [ ] Rampenherstelplan
 
 ---
 
@@ -47,29 +49,30 @@ Door dit hoofdstuk te voltooien, zult u:
 
 ```mermaid
 graph LR
-    Gateway[API Gateway] --> AI[AI-service] --> Models[Microsoft Foundry-modellen]
-    Gateway --> Auth[Auth-service]
-    AI --> Data[Gegevensopslag]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
 ### Patroon 2: Event-Driven AI
 
 ```mermaid
 graph LR
-    EventGrid[Event Grid] --> Functions[Functies] --> Pipeline[AI-pijplijn]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
 
-## 🔐 Beste Beveiligingspraktijken
+## 🔐 Beveiligingsbest practices
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -82,34 +85,27 @@ properties: {
 
 ## 💰 Kostenoptimalisatie
 
-| Strategie | Besparing |
+| Strategie | Belangrijkste beperking |
 |----------|---------|
-| Opschalen naar nul (Container Apps) | 60-80% |
-| Gebruik consumptietarieven voor dev | 50-70% |
-| Geplande opschaling | 30-50% |
-| Gereserveerde capaciteit | 20-40% |
+| Scale to zero (Container Apps) | Vereist een geschikte trigger; andere diensten veroorzaken nog steeds kosten |
+| Gebruik consumptietarieven voor dev | Vergelijk geselecteerde serviceprijzen en werklast |
+| Geplande scaling | Schaal via ondersteunde infrastructuur/automatisering |
+| Reserveringen/voorzien capaciteit | Alleen als ondersteund; verplichtingen kunnen idle kosten verhogen |
 
-```bash
-# Stel budgetwaarschuwingen in
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Gebruik het [complete budget resource patroon](production-ai-practices.md#2-cost-monitoring-and-budgets) met een geldige startdatum, factureringsscope, ontvangers en rechten. Een budget verzendt meldingen; het beperkt de uitgaven niet. Besparingen zijn afhankelijk van gemeten gebruik en zijn geen gegarandeerde percentages.
 
 ---
 
 ## 📊 Monitoring Setup
 
 ```bash
-# Logboeken streamen
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Controleer Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# Bekijk statistieken
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -120,11 +116,11 @@ az monitor metrics list --resource <resource-id>
 | Richting | Hoofdstuk |
 |-----------|---------|
 | **Vorige** | [Hoofdstuk 7: Problemen oplossen](../chapter-07-troubleshooting/README.md) |
-| **Cursus Voltooid** | [Startpagina Cursus](../../README.md) |
+| **Cursus voltooid** | [Cursus Home](../../README.md) |
 
 ---
 
-## 📖 Gerelateerde Bronnen
+## 📖 Gerelateerde bronnen
 
 - [AI Agents Gids](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)

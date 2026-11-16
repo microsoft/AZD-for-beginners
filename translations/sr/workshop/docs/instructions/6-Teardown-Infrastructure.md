@@ -1,60 +1,58 @@
-# 6. Уклањање инфраструктуре
+# 6. Демонтаж инфраструктуре
 
-!!! tip "НА КРАЈУ ОВОГ МОДУЛА БИЋЕТЕ У СТАЊУ ДА"
+!!! tip "НА КРАЈУ ОВОГ МОДУЛА ЋЕТЕ МОЋИ"
 
-    - [ ] Разумете значај чишћења ресурса и управљања трошковима
-    - [ ] Користите `azd down` да безбедно уклоните инфраструктуру
-    - [ ] Вратите услуге Azure AI које су меко избрисане ако је потребно
-    - [ ] **Лаб 6:** Очистите Azure ресурсе и проверите њихово уклањање
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Бонус вежбе
 
-Пре него што уклонимо пројекат, одвојите неколико минута за неформално истраживање.
+Пре него што демонтирате пројекат, одвојите неколико минута за отворено истраживање.
 
-!!! info "ИСПРОБАЈТЕ ОВЕ ПРЕДЛОГЕ ЗА ИСТРАЖИВАЊЕ"
+!!! info "Испробајте ове подстицаје за истраживање"
 
-    **Експериментишите са GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. Ask: `Које друге AZD шаблоне могу да испробам за сценарије са више агената?`
-    2. Ask: `Како могу да прилагодим инструкције агента за случај употребе у здравству?`
-    3. Ask: `Које променљиве окружења контролишу оптимизацију трошкова?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Истражите Azure портал:**
+    **Explore the Azure Portal:**
     
-    1. Прегледајте метрике Application Insights за ваше распоређивање
-    2. Проверите анализу трошкова за провизионисане ресурсе
-    3. Још једном истражите 'agent playground' на порталу Microsoft Foundry
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
 ## Уклањање инфраструктуре
 
-1. Уклањање инфраструктуре је једноставно као:
+1. Демонтажa инфраструктуре је једноставна као:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. Опција `--purge` обезбеђује да такође уклони и меки-обрисане Cognitive Service ресурсе, чиме ослобађа квоту коју ти ресурси држе. Када се заврши видећете нешто слично овоме:
+1. Потврдите изабрано окружење и прегледајте ресурсе који ће се брисати. Ово уклања Azure ресурсе и може уништити податке. Задржите промпт за потврду у овом процесу учења. Када се заврши, видећете излаз сличан овом:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Опционо) Ако сада поново покренете `azd up`, приметићете да се модел gpt-4.1 распоређује пошто је променљива окружења промењена (и сачувана) у локалном фолдеру `.azure`. 
+1. Проверите брисање у порталу и проверите ресурсе изван домена распоређивања. Пријављивање трошкова и ажурирање квота може каснити. Локална `.azure` конфигурација остаје осим ако је експлицитно не уклоните.
 
-      Ево распоређивања модела **пре**:
+1. `azd down --purge` додатно захтева трајно брисање подржаних ресурса оних који су „меко“ избрисани. Користите је само када опоравак није потребан и разумете политике задржавања/заштите од чишћења. Не гарантује тренутно ослобађање квоте.
 
-      ![Почетно](../../../../../translated_images/sr/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      А овде је **после**:
-      ![Ново](../../../../../translated_images/sr/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Не реодређујте само ради провере чишћења. Каснија намерна `azd up` може поново створити ресурсе користећи преостале локалне уносе и поново изазвати трошкове. Ажурирања модела обично користе подржане промене при провизији, а не демонтажу.
 
 ---
 

@@ -1,60 +1,58 @@
-# 6. အင်ဖရာစထရား ဖျက်သိမ်းခြင်း
+# ၆. အဆောက်အဦးဖျက်သိမ်းခြင်း
 
-!!! tip "ဒီမော်ဂျူး၏ အဆုံးတွင် သင် အောက်ပါအရာများကို ပြုလုပ်နိုင်ပါမည်"
+!!! tip "ဤမော်ဂျူး၏အဆုံးတွင် သင်မှာ အောက်ပါအရာများကို လုပ်နိုင်ပါမည်"
 
-    - [ ] ရင်းမြစ်များ ဖျက်သိမ်းခြင်းနှင့် ကုန်ကျစရိတ် စီမံခန့်ခွဲမှု၏ အရေးပါမှုကို နားလည်ရန်
-    - [ ] လုံခြုံစွာ အင်ဖရာစထရား ပယ်ဖျက်ရန် `azd down` ကို အသုံးပြုပါ
-    - [ ] လိုအပ်လျှင် soft-deleted ဖြစ်ထားသော Azure AI Services များကို ပြန်လည် ရယူရန်
-    - [ ] **Lab 6:** Azure အရင်းအမြစ်များကို ဖျက်သိမ်း၍ ဖျက်ပြီးပြီဖြစ်ကြောင်း စစ်ဆေးရန်
-
----
-
-## အပို လေ့ကျင့်ခန်းများ
-
-Before we tear down the project, take a few minutes to do some open-ended exploration.
-
-!!! info "ဤ စူးစမ်းလေ့လာရန် အကြံပြုချက်များကို စမ်းသပ်ပါ"
-
-    **GitHub Copilot ဖြင့် စမ်းသပ်ခြင်း:**
-    
-    1. မေးပါ: `multi-agent အခြေအနေများအတွက် မည်သည့် AZD templates များကို ကြိုးစားကြည့်နိုင်ပါသနည်း?`
-    2. မေးပါ: `ကျန်းမာရေးဆိုင်ရာ အသုံးပြုမှုအတွက် agent ညွှန်ကြားချက်များကို မည်သို့ တွဲဖက်ပြင်ဆင်နိုင်သနည်း?`
-    3. မေးပါ: `ကုန်ကျစရိတ် အာရုံစိုက်မှုကို ထိန်းချုပ်သည့် environment variables များဘာတွေလဲ?`
-    
-    **Azure Portal ကို တိုက်ရိုက် စူးစမ်းပါ:**
-    
-    1. သင့် deployment အတွက် Application Insights မက်ထရစ်များကို ပြန်လည် သုံးသပ်ပါ
-    2. Provision လုပ်ထားသော ရင်းမြစ်များအတွက် ကုန်ကျစရိတ် ခွဲခြမ်းစိတ်ဖြာကို စစ်ဆေးပါ
-    3. Microsoft Foundry portal ရဲ့ agent playground ကို ထပ်မံ စူးစမ်းကြည့်ပါ
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## အင်ဖရာစထရား ပယ်ဖျက်ခြင်း
+## ပန်းတိုင်လက်တွေ့လေ့ကျင့်ခန်းများ
 
-1. အင်ဖရာစထရားကို ပိတ်ပင် ဖျက်သိမ်းခြင်းမှာ အလွန်လွယ်ကူသည် - အောက်ပါအတိုင်းပါ:
+ပရောဂျက်ကို ဖျက်သိမ်းမည့်မတိုင်မီ၊ အချိန်အနည်းငယ်ယူ၍ ဖွင့်လှစ်စူးစမ်းခြင်းအနေနှင့်လုပ်ဆောင်ပါ။
+
+!!! info "ဒီစမ်းသပ်စရာတောင်းဆိုချက်များကို လုပ်ကြည့်ပါ"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
+
+---
+
+## အဆောက်အဦး ဖျက်ခြင်း
+
+၁။ အဆောက်အဦးကို ဖျက်သိမ်းခြင်းမှာ အလွန်လွယ်ကူသည်-
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1။ ရွေးချယ်ထားသောenviromentကို အတည်ပြုပြီး ဖျက်မည့်ရင်းမြစ်များကို သုံးသပ်ပါ။ ဤလုပ်ဆောင်မှုသည် Azure ရင်းမြစ်များ ပြန်ဖျက်ပြီး ဒေတာကိုလည်း ဖျက်စေပါသည်။ လေ့လာရေးလုပ်ငန်းစဉ်အတွက် အတည်ပြုစာမျက်နှာကို ထိန်းသိမ်းပါ။ ပြီးစီးသွားလျှင် အောက်ပါအတိုင်း output ကို သင်မြင်ရပါမည်။
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optional) ယခု `azd up` ကို ထပ်မံ လည်ပတ်ပါက၊ သင့် local `.azure` ဖိုလ်ဒါတွင် environment variable ကို ပြောင်းလဲ၍ သိမ်းဆည်းထားသောကြောင့် gpt-4.1 မော်ဒယ် ထပ်မံ deploy လုပ်ခံရမည်ကို တွေ့ရပါလိမ့်မည်။ 
+၁။ portal တွင်ဖျက်သိမ်းမှုကို အတည်ပြုကြည့်ရှုပြီး deployment ၏ကွာလတင်အတွင်းမဟုတ်သော ရင်းမြစ်များရှိမရှိ စစ်ဆေးပါ။ ကုန်ကျစရိတ် 보고 및 할당량 갱신이 지연될 수 있습니다. 로컬 `.azure` 구성은 명시적으로 제거하지 않는 한 유지됩니다.
 
-      ဒီမှာ မော်ဒယ် deployment များ၏ **မတိုင်မီ** အခြေအနေ ဖြစ်သည်:
+၁။ `azd down --purge` သည် ထောက်ပံ့ထားသော soft-deleted ရင်းမြစ်များ၏ သက်တမ်းကြာရှည်ဖျက်ပစ်ခြင်းကို ထပ်မံတောင်းဆိုသည်။ သတိပြုရန်မှာ ပြန်လည်ရယူခြင်းမလိုအပ်ပါကသာ အဲဒီကိုသုံးရန်ဖြစ်ပြီး သိမ်းဆည်းမှု/ဖယ်ရှားမှုကာကွယ်မှု မူဝါဒများကို နားလည်သည်။ ဤသည်သည် သတ်မှတ်ချက်လွတ်မြောက်မှုကို နှေးကွေးစေခြင်း မရှိပါ။
 
-      ![အစ](../../../../../translated_images/my/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      နှင့် ၎င်းသည် **ပြီးနောက်** ဖြစ်ပါသည်:
-      ![အသစ်](../../../../../translated_images/my/14-deploy-new.f7f3c355a3cf7299.webp)
+၁။ သန့်ရှင်းမှုကို စစ်ဆေးရန် အတွက် မပြန်လည်အသုံးပြုရန်။ နောက်မှ ရည်ရွယ်၍ `azd up` သည် ဒေသခံ input များကို အသုံးပြု၍ ရင်းမြစ်များကို ပြန်ဖန်တီးနိုင်ပြီး ပိုမိုကျသင့်မှုရှိစေပါသည်။ မော်ဒယ်အပ်ဒိတ်များသည် ပုံမှန်အားဖြင့် ထောက်ပံ့ထားသော provisioning ပြင်ဆင်မှုများကိုသာ အသုံးပြုသည်၊ အဆောက်အဦးဖျက်သိမ်းခြင်းမဟုတ်ပါ။
 
 ---
 

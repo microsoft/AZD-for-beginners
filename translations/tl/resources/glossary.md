@@ -1,366 +1,368 @@
-# Glossary - Azure and AZD Terminology
+# Glossaryo - Terminolohiya ng Azure at AZD
 
-**Reference for All Chapters**
-- **📚 Course Home**: [AZD Para sa mga Nagsisimula](../README.md)
-- **📖 Matuto ng Mga Pangunahing Kaalaman**: [Kabanata 1: Mga Batayang AZD](../docs/getting-started/azd-basics.md)
-- **🤖 Mga Term ng AI**: [Kabanata 2: Pag-unlad na Nakasentro sa AI](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+**Sanggunian para sa Lahat ng Kabanata**
+- **📚 Tahanan ng Kurso**: [AZD Para sa mga Nagsisimula](../README.md)
+- **📖 Matutunan ang mga Pangunahing Kaalaman**: [Kabanata 1: Mga Pangunahing Kaalaman sa AZD](../docs/chapter-01-foundation/azd-basics.md)
+- **🤖 Mga Termino sa AI**: [Kabanata 2: AI-Unang Pag-unlad](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Panimula
 
-Ang komprehensibong glosaryong ito ay nagbibigay ng mga depinisyon para sa mga termino, konsepto, at akronim na ginagamit sa Azure Developer CLI at pag-develop sa Azure cloud. Mahalaga itong sanggunian para sa pag-unawa ng teknikal na dokumentasyon, paglutas ng problema, at epektibong komunikasyon tungkol sa mga proyekto ng azd at mga serbisyo ng Azure.
+Ang komprehensibong glossaryong ito ay nagbibigay ng mga kahulugan para sa mga termino, konsepto, at mga akronim na ginagamit sa Azure Developer CLI at pag-unlad ng Azure cloud. Mahalaga itong sanggunian para sa pag-unawa sa teknikal na dokumentasyon, paglutas ng mga isyu, at mabisang komunikasyon tungkol sa mga proyekto ng azd at mga serbisyo ng Azure.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa paggamit ng glosaryong ito, ikaw ay:
-- Maiintindihan ang mga mahahalagang termino at konsepto ng Azure Developer CLI
-- Mahahasa sa bokabularyo at teknikal na mga termino ng pag-develop sa Azure cloud
-- Makakahanap ng mabilis na sanggunian para sa Infrastructure as Code at deployment na terminolohiya
-- Mauunawaan ang mga pangalan ng serbisyo ng Azure, akronim, at ang mga layunin nito
-- Makakakuha ng mga depinisyon para sa troubleshooting at debugging na terminolohiya
-- Matututo ng advanced na mga konsepto sa arkitektura at pag-develop sa Azure
+Sa paggamit ng glossaryong ito, mauunawaan mo ang:
+- Mahahalagang terminolohiya at konsepto ng Azure Developer CLI
+- Malawak na bokabularyo at mga teknikal na termino sa pag-unlad ng Azure cloud
+- Mabisang paggamit ng mga termino sa Infrastructure as Code at deployment
+- Mga pangalan ng serbisyo ng Azure, mga akronim, at kanilang mga layunin 
+- Mga kahulugan para sa paglutas ng mga problema at terminolohiya ng debugging
+- Mga advanced na konsepto sa arkitektura at pag-unlad sa Azure
 
-## Mga Kinalabasan ng Pagkatuto
+## Mga Resulta ng Pagkatuto
 
-Sa regular na pag-refer sa glosaryong ito, magagawa mong:
-- Makipagkomunika nang epektibo gamit ang wastong termino ng Azure Developer CLI
-- Mas malinaw na maunawaan ang teknikal na dokumentasyon at mga mensahe ng error
+Sa regular na pagsangguni sa glossaryong ito, magagawa mong:
+- Mabisang makipagkomunika gamit ang tamang terminolohiya ng Azure Developer CLI
+- Mas malinaw na maunawaan ang teknikal na dokumentasyon at mga error messages
 - Mag-navigate sa mga serbisyo at konsepto ng Azure nang may kumpiyansa
-- Mag-troubleshoot ng mga isyu gamit ang angkop na teknikal na bokabularyo
+- Maglutas ng mga isyu gamit ang angkop na teknikal na bokabularyo
 - Makibahagi sa mga talakayan ng koponan gamit ang tumpak na teknikal na wika
-- Palawakin ang iyong kaalaman sa pag-develop sa Azure cloud nang sistematiko
+- Sistematikong mapalawak ang iyong kaalaman sa pag-unlad ng Azure cloud
 
 ## A
 
 **ARM Template**  
-Azure Resource Manager template. JSON-based Infrastructure as Code format used to define and deploy Azure resources declaratively.
+Azure Resource Manager template. JSON-based na format ng Infrastructure as Code na ginagamit upang ideklara at i-deploy ang mga Azure resource.
 
 **App Service**  
-Azure's platform-as-a-service (PaaS) offering for hosting web applications, REST APIs, and mobile backends without managing infrastructure.
+Plataporma ng Azure bilang serbisyo (PaaS) para sa pagho-host ng mga web application, REST API, at mga mobile backend nang hindi pinamamahalaan ang imprastruktura.
 
 **Application Insights**  
-Azure's application performance monitoring (APM) service that provides deep insights into application performance, availability, and usage.
+Serbisyo sa Azure para sa pagpapanatili ng performance ng aplikasyon (APM) na nagbibigay ng malalim na pananaw sa performance, availability, at paggamit ng aplikasyon.
 
 **Azure CLI**  
-Command-line interface for managing Azure resources. Used by azd for authentication and some operations.
+Command-line interface para sa pamamahala ng mga resource ng Azure. Kumpleto ito ng AZD ngunit may hiwalay na pag-login; ang pangunahing autentikasyon ng AZD ay gumagamit ng `azd auth login`.
 
 **Azure Developer CLI (azd)**  
-Developer-centric command-line tool that accelerates the process of building and deploying applications to Azure using templates and Infrastructure as Code.
+Command-line tool na nakatuon sa mga developer na nagpapabilis ng proseso ng paggawa at pag-deploy ng mga aplikasyon sa Azure gamit ang mga template at Infrastructure as Code.
 
 **azure.yaml**  
-The main configuration file for an azd project that defines services, infrastructure, and deployment hooks.
+Pangunahing configuration file para sa isang azd na proyekto na naglalaman ng mga serbisyo, imprastruktura, at mga deployment hooks.
 
 **Azure Resource Manager (ARM)**  
-Azure's deployment and management service that provides a management layer for creating, updating, and deleting resources.
+Serbisyo ng Azure para sa deployment at pamamahala na nagbibigay ng management layer para sa paglikha, pag-update, at pagtanggal ng mga resource.
 
 ## B
 
 **Bicep**  
-Domain-specific language (DSL) developed by Microsoft for deploying Azure resources. Provides simpler syntax than ARM templates while compiling to ARM.
+Domain-specific language (DSL) na binuo ng Microsoft para sa pag-deploy ng mga Azure resource. Nagbibigay ito ng mas simpleng syntax kaysa sa ARM templates habang kino-compile papuntang ARM.
 
 **Build**  
-Ang proseso ng pag-compile ng source code, pag-install ng mga dependency, at paghahanda ng mga aplikasyon para sa deployment.
+Proseso ng pag-compile ng source code, pag-install ng mga dependencies, at paghahanda ng mga aplikasyon para sa deployment.
 
 **Blue-Green Deployment**  
-Deployment strategy that uses two identical production environments (blue and green) to minimize downtime and risk.
+Deployment strategy na gumagamit ng dalawang magkaparehong production environment (blue at green) upang mabawasan ang downtime at panganib.
 
 ## C
 
 **Container Apps**  
-Azure's serverless container service that enables running containerized applications without managing complex infrastructure.
+Serverless na container service ng Azure na nagpapahintulot sa pagpapatakbo ng mga containerized na aplikasyon nang hindi pinamamahalaan ang komplikadong imprastruktura.
 
 **CI/CD**  
-Continuous Integration/Continuous Deployment. Automated practices for integrating code changes and deploying applications.
+Continuous Integration/Continuous Deployment. Mga automated na praktis para sa pagsasanib ng mga pagbabago sa code at pag-deploy ng mga aplikasyon.
 
 **Cosmos DB**  
-Azure's globally distributed, multi-model database service that provides comprehensive SLAs for throughput, latency, availability, and consistency.
+Globally distributed, multi-model database service ng Azure na nagbibigay ng komprehensibong SLA para sa throughput, latency, availability, at consistency.
 
 **Configuration**  
-Mga setting at parameter na kumokontrol sa pag-uugali ng aplikasyon at mga opsyon ng deployment.
+Mga setting at parameter na kumokontrol sa behavior ng aplikasyon at mga opsyon sa deployment.
 
 ## D
 
 **Deployment**  
-Ang proseso ng pag-install at pag-configure ng mga aplikasyon at kanilang mga dependency sa target na imprastruktura.
+Proseso ng pag-install at pagsasaayos ng mga aplikasyon at kanilang mga dependencies sa target na imprastruktura.
 
 **Docker**  
-Platform para sa pag-develop, pagpapadala, at pagpapatakbo ng mga aplikasyon gamit ang teknolohiyang containerization.
+Plataporma para sa pagbuo, paghahatid, at pagpapatakbo ng mga aplikasyon gamit ang teknolohiyang containerization.
 
 **Dockerfile**  
-Text file na naglalaman ng mga instruksiyon para sa pagbuo ng Docker container image.
+Text file na naglalaman ng mga instruksyon para sa pagbuo ng Docker container image.
 
 ## E
 
 **Environment**  
-A deployment target that represents a specific instance of your application (e.g., development, staging, production).
+Target na deployment na kumakatawan sa isang partikular na instance ng iyong aplikasyon (hal., development, staging, production).
 
 **Environment Variables**  
-Mga configuration value na naka-imbak bilang key-value pairs na maaaring ma-access ng mga aplikasyon sa runtime.
+Mga configuration value na naka-store bilang mga key-value pair na maaaring ma-access ng mga aplikasyon sa runtime.
 
 **Endpoint**  
-URL o network address kung saan maaaring ma-access ang isang aplikasyon o serbisyo.
+URL o network address kung saan maaring ma-access ang isang aplikasyon o serbisyo.
 
 ## F
 
 **Function App**  
-Azure's serverless compute service that enables running event-driven code without managing infrastructure.
+Serverless compute service ng Azure na nagpapahintulot sa pagpapatakbo ng event-driven code nang hindi pinamamahalaan ang imprastruktura.
 
 ## G
 
 **GitHub Actions**  
-CI/CD platform integrated with GitHub repositories for automating workflows.
+CI/CD platform na integrated sa mga repository ng GitHub para sa pag-automate ng mga workflow.
 
 **Git**  
-Distributed version control system used for tracking changes in source code.
+Distributed version control system na ginagamit para i-track ang mga pagbabago sa source code.
 
 ## H
 
 **Hooks**  
-Custom scripts or commands that run at specific points during the deployment lifecycle (preprovision, postprovision, predeploy, postdeploy).
+Custom scripts o mga command na tumatakbo sa mga tiyak na punto ng lifecycle ng deployment (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-The Azure service type where an application will be deployed (e.g., appservice, containerapp, function).
+Uri ng Azure service kung saan ide-deploy ang isang aplikasyon (hal., appservice, containerapp, function).
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Practice of defining and managing infrastructure through code rather than manual processes.
+Praktis ng pagdedeklara at pamamahala sa imprastruktura gamit ang code sa halip na manu-manong proseso.
 
 **Init**  
-Ang proseso ng pag-initialize ng bagong azd project, karaniwan mula sa isang template.
+Proseso ng pag-initialize ng bagong azd na proyekto, karaniwang mula sa isang template.
 
 ## J
 
 **JSON**  
-JavaScript Object Notation. Data interchange format commonly used for configuration files and API responses.
+JavaScript Object Notation. Data interchange format na karaniwang ginagamit para sa mga configuration file at mga tugon mula sa API.
 
 **JWT**  
-JSON Web Token. Standard for securely transmitting information between parties as a JSON object.
+JSON Web Token. Standard para sa secure na pagpapadala ng impormasyon sa pagitan ng mga partido bilang isang JSON na object.
 
 ## K
 
 **Key Vault**  
-Azure's service for securely storing and managing secrets, keys, and certificates.
+Serbisyo ng Azure para sa secure na pagtatago at pamamahala ng mga lihim, susi, at sertipiko.
 
 **Kusto Query Language (KQL)**  
-Query language used for analyzing data in Azure Monitor, Application Insights, and other Azure services.
+Wika sa pag-query na ginagamit para sa pagsusuri ng data sa Azure Monitor, Application Insights, at iba pang Azure services.
 
 ## L
 
 **Load Balancer**  
-Service that distributes incoming network traffic across multiple servers or instances.
+Serbisyo na nagpapamahagi ng papasok na network traffic sa maraming server o instance.
 
 **Log Analytics**  
-Azure service for collecting, analyzing, and acting on telemetry data from cloud and on-premises environments.
+Serbisyo ng Azure para sa pagkolekta, pagsusuri, at pagtugon sa telemetry data mula sa cloud at on-premises na mga kapaligiran.
 
 ## M
 
 **Managed Identity**  
-Azure feature that provides Azure services with an automatically managed identity for authenticating to other Azure services.
+Tampok ng Azure na nagbibigay sa mga serbisyo ng Azure ng awtomatikong pinamamahalaang pagkakakilanlan para sa authentication sa ibang Azure services.
 
 **Microservices**  
-Architectural approach where applications are built as a collection of small, independent services.
+Arkitekturang pamamaraan kung saan ang mga aplikasyon ay binubuo bilang koleksyon ng maliliit, independiyenteng serbisyo.
 
 **Monitor**  
-Azure's unified monitoring solution that provides full-stack observability across applications and infrastructure.
+Pinagsanib na solusyon sa pagmo-monitor ng Azure na nagbibigay ng full-stack observability sa mga aplikasyon at imprastruktura.
 
 ## N
 
 **Node.js**  
-JavaScript runtime built on Chrome's V8 JavaScript engine for building server-side applications.
+JavaScript runtime na binuo sa Chrome's V8 JavaScript engine para sa paggawa ng server-side na mga aplikasyon.
 
 **npm**  
-Package manager for Node.js that manages dependencies and packages.
+Package manager para sa Node.js na namamahala ng mga dependencies at mga package.
 
 ## O
 
 **Output**  
-Mga value na ibinabalik mula sa deployment ng imprastruktura na maaaring gamitin ng mga aplikasyon o iba pang mga resource.
+Mga halaga na ibinabalik mula sa deployment ng imprastruktura na maaaring gamitin ng mga aplikasyon o ibang mga resource.
 
 ## P
 
 **Package**  
-The process of preparing application code and dependencies for deployment.
+Proseso ng paghahanda ng code ng aplikasyon at mga dependencies para sa deployment.
 
 **Parameters**  
-Input values passed to infrastructure templates to customize deployments.
+Mga input value na ipinapasa sa mga infrastructure template para i-customize ang mga deployment.
 
 **PostgreSQL**  
-Open-source relational database system supported as a managed service in Azure.
+Open-source relational database system na suportado bilang managed service sa Azure.
 
 **Provisioning**  
-Ang proseso ng paglikha at pag-configure ng mga Azure resource na tinukoy sa mga infrastructure template.
+Proseso ng paglikha at pagsasaayos ng mga Azure resource na tinukoy sa mga infrastructure template.
 
 ## Q
 
 **Quota**  
-Limits on the amount of resources that can be created in an Azure subscription or region.
+Mga limitasyon sa dami ng resource na maaaring malikha sa isang Azure subscription o rehiyon.
 
 ## R
 
 **Resource Group**  
-Logical container for Azure resources that share the same lifecycle, permissions, and policies.
+Lohikal na lalagyan para sa mga Azure resource na may magkakaparehong lifecycle, permiso, at polisiya.
 
 **Resource Token**  
-Unique string generated by azd to ensure resource names are unique across deployments.
+Natatanging string na ginawang ng azd upang matiyak na ang mga pangalan ng resource ay natatangi sa mga deployment.
 
 **REST API**  
-Architectural style for designing networked applications using HTTP methods.
+Architectural style para sa pagdidisenyo ng networked applications gamit ang HTTP methods.
 
 **Rollback**  
-Process of reverting to a previous version of an application or infrastructure configuration.
+Proseso ng pagbabalik sa naunang bersyon ng isang aplikasyon o configuration ng imprastruktura.
 
 ## S
 
 **Service**  
-A component of your application defined in azure.yaml (e.g., web frontend, API backend, database).
+Isang bahagi ng iyong aplikasyon na tinukoy sa azure.yaml (hal., web frontend, API backend, database).
 
 **SKU**  
-Stock Keeping Unit. Represents different service tiers or performance levels for Azure resources.
+Stock Keeping Unit. Kumakatawan sa iba't ibang tier ng serbisyo o antas ng performance para sa mga Azure resource.
 
 **SQL Database**  
-Azure's managed relational database service based on Microsoft SQL Server.
+Managed relational database service ng Azure na batay sa Microsoft SQL Server.
 
 **Static Web Apps**  
-Azure service for building and deploying full-stack web applications from source code repositories.
+Serbisyo ng Azure para sa paggawa at pag-deploy ng full-stack web application mula sa mga source code repository.
 
 **Storage Account**  
-Azure service that provides cloud storage for data objects including blobs, files, queues, and tables.
+Serbisyo ng Azure na nagbibigay ng cloud storage para sa mga data object kabilang ang blobs, files, queues, at tables.
 
 **Subscription**  
-Azure account container that holds resource groups and resources, with associated billing and access management.
+Lalagyan ng Azure account na nagtataglay ng mga resource group at mga resource, pati na rin ng kaugnay na billing at pamamahala ng access.
 
 ## T
 
 **Template**  
-Pre-built project structure containing application code, infrastructure definitions, and configuration for common scenarios.
+Pre-built na istruktura ng proyekto na naglalaman ng code ng aplikasyon, mga depinisyon ng imprastruktura, at configuration para sa mga karaniwang senaryo.
 
 **Terraform**  
-Open-source Infrastructure as Code tool that supports multiple cloud providers including Azure.
+Open-source na Infrastructure as Code tool na sumusuporta sa maramihang cloud provider kabilang ang Azure.
 
 **Traffic Manager**  
-Azure's DNS-based traffic load balancer for distributing traffic across global Azure regions.
+DNS-based na traffic load balancer ng Azure para sa pamamahagi ng trapiko sa mga global Azure region.
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. String that identifies a particular resource.
+Uniform Resource Identifier. String na kumikilala sa isang partikular na resource.
 
 **URL**  
-Uniform Resource Locator. Type of URI that specifies where a resource is located and how to retrieve it.
+Uniform Resource Locator. Uri ng URI na nagtutukoy kung saan matatagpuan ang isang resource at kung paano ito makukuha.
 
 ## V
 
 **Virtual Network (VNet)**  
-Fundamental building block for private networks in Azure, providing isolation and segmentation.
+Pangunahing building block para sa mga pribadong network sa Azure, na nagbibigay ng isolation at segmentation.
 
 **VS Code**  
-Visual Studio Code. Popular code editor with excellent Azure and azd integration.
+Visual Studio Code. Sikat na code editor na may mahusay na integrasyon sa Azure at azd.
 
 ## W
 
 **Webhook**  
-HTTP callback triggered by specific events, commonly used in CI/CD pipelines.
+HTTP callback na pinu-trigger ng mga partikular na pangyayari, karaniwang gamit sa mga CI/CD pipeline.
 
 **What-if**  
-Azure feature that shows what changes would be made by a deployment without actually executing it.
+Tampok ng Azure na nagpapakita kung anong mga pagbabago ang gagawin ng isang deployment nang hindi ito isinasagawa.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Human-readable data serialization standard used for configuration files like azure.yaml.
+YAML Ain't Markup Language. Human-readable na data serialization standard na ginagamit para sa mga configuration file tulad ng azure.yaml.
 
 ## Z
 
 **Zone**  
-Physically separate locations within an Azure region that provide redundancy and high availability.
+Pisikal na hiwalay na lokasyon sa loob ng isang Azure region na nagbibigay ng redundancy at mataas na availability.
 
 ---
 
-## Common Acronyms
+## Mga Karaniwang Akronim
 
-| Acronym | Buong Kahulugan | Paglalarawan |
-|---------|-----------------|--------------|
-| AAD | Azure Active Directory (now Microsoft Entra ID) | Identity and access management service |
-| ACR | Azure Container Registry | Container image registry service |
+| Akronim | Buong Katawagan | Paglalarawan |
+|---------|-----------|-------------|
+| AAD | Azure Active Directory (ngayon Microsoft Entra ID) | Identity at access management service |
+| ACR | Azure Container Registry | Serbisyo para sa container image registry |
 | AKS | Azure Kubernetes Service | Managed Kubernetes service |
-| API | Application Programming Interface | Set of protocols for building software |
-| ARM | Azure Resource Manager | Azure's deployment and management service |
-| CDN | Content Delivery Network | Distributed network of servers |
-| CI/CD | Continuous Integration/Continuous Deployment | Automated development practices |
-| CLI | Command Line Interface | Text-based user interface |
-| DNS | Domain Name System | System for translating domain names to IP addresses |
-| HTTPS | Hypertext Transfer Protocol Secure | Secure version of HTTP |
-| IaC | Infrastructure as Code | Managing infrastructure through code |
+| API | Application Programming Interface | Set ng mga protocol para sa paggawa ng software |
+| ARM | Azure Resource Manager | Serbisyo ng Azure para sa deployment at pamamahala |
+| CDN | Content Delivery Network | Distributed na network ng mga server |
+| CI/CD | Continuous Integration/Continuous Deployment | Mga automated na praktis sa pag-unlad |
+| CLI | Command Line Interface | Text-based na user interface |
+| DNS | Domain Name System | Sistema para sa pagsasalin ng mga domain name sa IP address |
+| HTTPS | Hypertext Transfer Protocol Secure | Secure na bersyon ng HTTP |
+| IaC | Infrastructure as Code | Pamamahala ng imprastruktura gamit ang code |
 | JSON | JavaScript Object Notation | Data interchange format |
-| JWT | JSON Web Token | Token format for secure information transmission |
-| KQL | Kusto Query Language | Query language for Azure data services |
-| RBAC | Role-Based Access Control | Access control method based on user roles |
-| REST | Representational State Transfer | Architectural style for web services |
-| SDK | Software Development Kit | Collection of development tools |
-| SLA | Service Level Agreement | Commitment to service availability/performance |
-| SQL | Structured Query Language | Language for managing relational databases |
-| SSL/TLS | Secure Sockets Layer/Transport Layer Security | Cryptographic protocols |
-| URI | Uniform Resource Identifier | String identifying a resource |
-| URL | Uniform Resource Locator | Type of URI specifying resource location |
-| VM | Virtual Machine | Emulation of a computer system |
-| VNet | Virtual Network | Private network in Azure |
+| JWT | JSON Web Token | Token format para sa secure na pagpapadala ng impormasyon |
+| KQL | Kusto Query Language | Wika sa pag-query para sa mga Azure data service |
+| RBAC | Role-Based Access Control | Paraan ng access control base sa mga role ng user |
+| REST | Representational State Transfer | Architectural style para sa mga web service |
+| SDK | Software Development Kit | Koleksyon ng mga development tool |
+| SLA | Service Level Agreement | Pangako sa availability/performance ng serbisyo |
+| SQL | Structured Query Language | Wika para sa pamamahala ng relational databases |
+| SSL/TLS | Secure Sockets Layer/Transport Layer Security | Mga cryptographic protocol |
+| URI | Uniform Resource Identifier | String na nagpapakilala sa isang resource |
+| URL | Uniform Resource Locator | Uri ng URI na nagtutukoy ng lokasyon ng resource |
+| VM | Virtual Machine | Emulasyon ng isang computer system |
+| VNet | Virtual Network | Pribadong network sa Azure |
 | YAML | YAML Ain't Markup Language | Data serialization standard |
 
 ---
 
-## Azure Service Name Mappings
+## Mga Pagmamapa ng Pangalan ng Serbisyo ng Azure
 
-| Common Name | Official Azure Service Name | azd Host Type |
+| Karaniwang Pangalan | Opisyal na Pangalan ng Serbisyo ng Azure | Uri ng Host ng azd |
 |-------------|------------------------------|---------------|
 | Web App | Azure App Service | `appservice` |
 | API App | Azure App Service | `appservice` |
 | Container App | Azure Container Apps | `containerapp` |
 | Function | Azure Functions | `function` |
 | Static Site | Azure Static Web Apps | `staticwebapp` |
-| Database | Azure Database for PostgreSQL | `postgres` |
-| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Storage | Azure Storage Account | `storage` |
-| Cache | Azure Cache for Redis | `redis` |
-| Search | Azure AI Search | `search` |
-| Messaging | Azure Service Bus | `servicebus` |
+| Database | Azure Database for PostgreSQL | Infrastructure resource, hindi isang aplikasyon `host` |
+| NoSQL DB | Azure Cosmos DB | Infrastructure resource, hindi isang aplikasyon `host` |
+| Storage | Azure Storage Account | Infrastructure resource, hindi isang built-in na aplikasyon `host` |
+| Cache | Azure Managed Redis | Infrastructure resource, hindi isang aplikasyon `host` |
+| Search | Azure AI Search | Infrastructure resource, hindi isang aplikasyon `host` |
+| Messaging | Azure Service Bus | Infrastructure resource, hindi isang aplikasyon `host` |
+
+`services.<name>.host` ay pumipili ng isang application deployment target; ito ay hindi shorthand para sa anumang uri ng Azure resource. Karaniwang pinoprovide ang mga database, cache, search service, at queues sa pamamagitan ng infrastructure provider at nakakonekta sa application gamit ang outputs/configuration.
 
 ---
 
-## Context-Specific Terms
+## Mga Termino na Espesipiko sa Konteksto
 
-### Development Terms
+### Mga Termino sa Pag-unlad
 - **Hot Reload**: Awtomatikong pag-update ng mga aplikasyon habang nagde-develop nang hindi nire-restart
 - **Build Pipeline**: Automated na proseso para sa pagbuo at pagsubok ng code
-- **Deployment Slot**: Staging environment sa loob ng App Service
-- **Environment Parity**: Pagpanatili ng pagkakapareho ng development, staging, at production na mga environment
+- **Deployment Slot**: Staging environment sa loob ng isang App Service
+- **Environment Parity**: Pagpapareho ng development, staging, at production environment
 
-### Security Terms
-- **Managed Identity**: Azure feature providing automatic credential management
-- **Key Vault**: Secure storage for secrets, keys, and certificates
-- **RBAC**: Role-based access control for Azure resources
+### Mga Termino sa Seguridad
+- **Managed Identity**: Tampok ng Azure na nagbibigay ng awtomatikong pamamahala ng kredensyal
+- **Key Vault**: Secure na storage para sa mga lihim, susi, at sertipiko
+- **RBAC**: Role-based access control para sa mga resource ng Azure
 - **Network Security Group**: Virtual firewall para sa pagkontrol ng network traffic
 
-### Monitoring Terms
-- **Telemetry**: Awtomatikong koleksyon ng mga sukat at datos
+### Mga Termino sa Pagmo-monitor
+- **Telemetry**: Awtomatikong pagkolekta ng mga sukat at data
 - **Application Performance Monitoring (APM)**: Pagmo-monitor ng performance ng software
 - **Log Analytics**: Serbisyo para sa pagkolekta at pagsusuri ng log data
-- **Alert Rules**: Automated na mga abiso batay sa metrics o kondisyon
+- **Alert Rules**: Automated na mga notification base sa mga metric o kondisyon
 
-### Deployment Terms
-- **Blue-Green Deployment**: Zero-downtime deployment strategy
-- **Canary Deployment**: Unti-unting rollout sa subset ng mga gumagamit
+### Mga Termino sa Deployment
+- **Blue-Green Deployment**: Deployment strategy na walang downtime
+- **Canary Deployment**: Unti-unting pag-rollout sa subset ng mga user
 - **Rolling Update**: Sunud-sunod na pagpapalit ng mga instance ng aplikasyon
 - **Rollback**: Pagbabalik sa naunang bersyon ng aplikasyon
 
 ---
 
-**Usage Tip**: Use `Ctrl+F` to quickly search for specific terms in this glossary. Terms are cross-referenced where applicable.
+**Usage Tip**: Gamitin ang `Ctrl+F` upang mabilis na maghanap ng mga partikular na termino sa glossaryo na ito. Ang mga termino ay naka-cross reference kapag naaangkop.
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Mabilisang Sanggunian](cheat-sheet.md)
-- **Next Lesson**: [Mga Madalas na Itanong (FAQ)](faq.md)
+**Navigasyon**
+- **Nakalipas na Aralin**: [Cheat Sheet](cheat-sheet.md)
+- **Susunod na Aralin**: [FAQ](faq.md)
 
 ---
 

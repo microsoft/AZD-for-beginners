@@ -1,28 +1,28 @@
 # 3. fejezet: Konfiguráció és hitelesítés
 
-**📚 Tanfolyam**: [AZD Kezdőknek](../../README.md) | **⏱️ Időtartam**: 45-60 perc | **⭐ Bonyolultság**: Középhaladó
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 90-150 perc integrációs gyakorlattal | **⭐ Összetettség**: Középhaladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet a környezet konfigurációját, a hitelesítési mintákat, valamint az Azure Developer CLI telepítések biztonsági legjobb gyakorlatait tárgyalja.
+Ez a fejezet az Azure Developer CLI telepítések környezeti konfigurációját, hitelesítési mintáit és biztonsági bevált gyakorlatait ismerteti.
 
-> Ellenőrizve az `azd 1.27.1` verzióval 2026 júliusában.
+> Parancs- és konfigurációellenőrzés célpont: `azd 1.37.2` (2026. november). Éles Azure előkészítés nem történt az ellenőrzés során.
 
 ## Tanulási célok
 
-A fejezet elvégzése után képes leszel:
-- Az AZD konfigurációs hierarchiájának elsajátítása
-- Több környezet (fejlesztői, teszt, éles) kezelése
-- Biztonságos hitelesítés megvalósítása kezelt identitásokkal
-- Környezet specifikus beállítások konfigurálása
+A fejezet elvégzésével:
+- Sajátítod az AZD konfigurációs hierarchiát
+- Több környezet (fejlesztés, előkészítés, éles) kezelését megtanulod
+- Biztonságos hitelesítést valósítasz meg kezelt identitásokkal
+- Környezet-specifikus beállításokat konfigurálsz
 
 ---
 
-## 📚 Tananyagok
+## 📚 Leckék
 
-| # | Lecke | Leírás | Időtartam |
+| # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
 | 1 | [Konfigurációs útmutató](configuration.md) | Környezet beállítása és kezelése | 30 perc |
 | 2 | [Hitelesítés és biztonság](authsecurity.md) | Kezelt identitás és RBAC minták | 30 perc |
@@ -31,52 +31,52 @@ A fejezet elvégzése után képes leszel:
 
 ## 🚀 Gyors kezdés
 
+Futtasd egy **már inicializált azd alkalmazás gyökeréből**, ne a tanfolyam tárházából. Használj nem használt környezetneveket, ha ezek már léteznek.
+
 ```bash
-# Több környezet létrehozása
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Környezetek közötti váltás
+# Switch environments
 azd env select prod
 
-# Környezeti változók beállítása
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Konfiguráció megtekintése
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` illusztratív: csak akkor befolyásolja az infrastruktúrát, ha a sablonod kifejezetten felhasználja. A megszokott `azd env set` értékek helyileg, titkosítatlanul vannak tárolva; nem szolgálnak biztonságos titkos tárolóként.
 
 ---
 
 ## 🔧 Konfigurációs hierarchia
 
-Az AZD a következő sorrendben alkalmazza a beállításokat (a későbbi felülírja a korábbit):
-
-1. **Alapértelmezett értékek** (beépítve a sablonokba)
-2. **azure.yaml** (projekt konfiguráció)
-3. **Környezeti változók** (`azd env set`)
-4. **Parancssori kapcsolók** (`--location eastus`)
+Tartsd külön három különböző konfigurációs felületet: globális preferenciák (`azd config`), projekt struktúra (`azure.yaml`) és környezetenkénti értékek (`azd env`). A jelzők csak az általuk támogatott beállításokat írják felül; nincs univerzális átfedés tetszőleges környezeti változókról `azure.yaml` vagy Bicep fölé.
 
 ---
 
-## 🔐 Biztonsági legjobb gyakorlatok
+## 🔐 Biztonsági bevált gyakorlatok
 
 ```bash
-# Használjon kezelt identitást (ajánlott)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Ellenőrizze az AZD hitelesítési állapotát
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Opcionális: ellenőrizze az Azure CLI környezetét, ha az az parancsokat szeretné futtatni
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Szükség esetén hitelesítse újra magát
+# Re-authenticate if needed
 azd auth login
 
-# Opcionális: frissítse az Azure CLI hitelesítést az az parancsokhoz
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -86,12 +86,12 @@ az login
 
 | Irány | Fejezet |
 |-----------|---------|
-| **Előző** | [2. fejezet: Mesterséges intelligencia fejlesztés](../chapter-02-ai-development/README.md) |
+| **Előző** | [2. fejezet: AI fejlesztés](../chapter-02-ai-development/README.md) |
 | **Következő** | [4. fejezet: Infrastruktúra](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Kapcsolódó anyagok
+## 📖 Kapcsolódó források
 
 - [Telepítés előtti ellenőrzések](../chapter-06-pre-deployment/README.md)
 - [Hibaelhárítás](../chapter-07-troubleshooting/common-issues.md)

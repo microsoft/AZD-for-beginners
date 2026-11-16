@@ -1,60 +1,58 @@
 # 6. 인프라 해체
 
-!!! tip "이 모듈을 마치면 할 수 있게 됩니다"
+!!! tip "이 모듈을 마치면 할 수 있는 것"
 
-    - [ ] 리소스 정리와 비용 관리의 중요성 이해
-    - [ ] `azd down`을 사용해 인프라를 안전하게 해체
-    - [ ] 필요 시 소프트 삭제된 Azure AI 서비스 복구
-    - [ ] **실습 6:** Azure 리소스 정리 및 제거 확인
-
----
-
-## 보너스 연습
-
-프로젝트를 해체하기 전에 몇 분간 자유롭게 탐색해 보세요.
-
-!!! info "다음 탐색 질문을 시도해 보세요"
-
-    **GitHub Copilot으로 실험하기:**
-    
-    1. 물어보기: `멀티 에이전트 시나리오에 적합한 다른 AZD 템플릿은 무엇이 있을까요?`
-    2. 물어보기: `헬스케어 사용 사례에 맞게 에이전트 지침을 어떻게 맞춤 설정할 수 있을까요?`
-    3. 물어보기: `비용 최적화를 조절하는 환경 변수는 무엇인가요?`
-    
-    **Azure 포털 탐색하기:**
-    
-    1. 배포된 Application Insights 메트릭 검토
-    2. 프로비저닝 된 리소스의 비용 분석 확인
-    3. Microsoft Foundry 포털 에이전트 플레이그라운드 다시 탐색
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## 인프라 해제
+## 추가 연습 문제
+
+프로젝트를 해체하기 전에, 잠시 시간을 내어 자유 탐색을 해보세요.
+
+!!! info "이 탐색 프롬프트를 시도해보세요"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
+
+---
+
+## 인프라 제거
 
 1. 인프라 해체는 다음처럼 간단합니다:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. `--purge` 플래그는 소프트 삭제된 인지 서비스 리소스도 정리하여 해당 리소스가 차지한 할당량을 해제합니다. 완료되면 다음과 같은 메시지를 볼 수 있습니다:
+1. 선택한 환경을 확인하고 삭제할 리소스를 검토하세요. 이 작업은 Azure 리소스를 제거하며 데이터가 파괴될 수 있습니다. 이 학습 워크플로우에서는 확인 프롬프트를 유지하세요. 완료되면 다음과 유사한 출력이 표시됩니다:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (선택 사항) 이제 `azd up`을 다시 실행하면 환경 변수 변경 사항이 로컬 `.azure` 폴더에 저장되어 gpt-4.1 모델이 배포되는 것을 확인할 수 있습니다.
+1. 포털에서 삭제를 확인하고 배포 범위 밖에 있는 리소스를 점검하세요. 비용 보고 및 할당량 업데이트는 지연될 수 있습니다. 명시적으로 제거하지 않는 한 로컬 `.azure` 구성은 유지됩니다.
 
-      아래는 **배포 이전** 모델 상태입니다:
+1. `azd down --purge` 는 지원되는 소프트 삭제된 리소스의 영구 삭제도 요청합니다. 복구가 필요 없고 보존/정리 보호 정책을 이해한 경우에만 사용하세요. 즉각적인 할당량 해제를 보장하지 않습니다.
 
-      ![Initial](../../../../../translated_images/ko/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      그리고 이것이 **배포 이후** 상태입니다:
-      ![New](../../../../../translated_images/ko/14-deploy-new.f7f3c355a3cf7299.webp)
+1. 정리를 확인하기 위해 재배포하지 마세요. 나중에 의도적으로 `azd up` 를 실행하면 남아 있는 로컬 입력을 사용해 리소스를 다시 만들고 다시 비용이 청구됩니다. 모델 업데이트는 일반적으로 지원되는 프로비저닝 변경을 사용하며, 해체 방식은 아닙니다.
 
 ---
 

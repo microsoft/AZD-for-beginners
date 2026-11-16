@@ -1,100 +1,100 @@
-# Chương 6: Lập Kế Hoạch & Xác Thực Trước Triển Khai
+# Chương 6: Kế Hoạch & Xác Thực Trước Triển Khai
 
-**📚 Khóa học**: [AZD Cho Người Mới](../../README.md) | **⏱️ Thời lượng**: 1 giờ | **⭐ Độ phức tạp**: Trung cấp
+**📚 Khóa học**: [AZD Dành cho Người Mới](../../README.md) | **⏱️ Thời lượng**: 2-4 giờ đọc; thêm thời gian cho các phòng lab điều chỉnh | **⭐ Độ phức tạp**: Trung cấp–Nâng cao
 
 ---
 
-## Tổng quan
+## Tổng Quan
 
-Chương này bao gồm các bước lập kế hoạch và xác thực cần thiết trước khi triển khai ứng dụng của bạn. Học cách tránh các sai sót tốn kém với lập kế hoạch dung lượng đúng đắn, lựa chọn SKU và kiểm tra trước khi bay.
+Chương này bao gồm các bước kế hoạch và xác thực cần thiết trước khi triển khai ứng dụng của bạn. Học cách tránh những sai lầm tốn kém với kế hoạch năng lực đúng đắn, chọn SKU và kiểm tra trước khi bay.
 
-> Đã xác thực với `azd 1.27.1` vào tháng 7 năm 2026.
+> Hướng dẫn lệnh được rà soát đối chiếu với tài liệu tham khảo `azd 1.37.2` đã phát hành. Các triển khai trên đám mây không được thực hiện. Các bài học dài hơn bao gồm các đoạn minh họa, không phải dự án triển khai địa phương hoàn chỉnh.
 
-## Mục tiêu học tập
+## Mục Tiêu Học Tập
 
 Sau khi hoàn thành chương này, bạn sẽ:
 - Thực hiện kiểm tra trước khi triển khai
-- Lập kế hoạch dung lượng và ước tính yêu cầu tài nguyên
-- Lựa chọn SKU phù hợp để tối ưu chi phí
+- Lập kế hoạch năng lực và ước tính yêu cầu tài nguyên
+- Chọn SKU phù hợp để tối ưu chi phí
 - Cấu hình Application Insights để giám sát
-- Hiểu các mẫu phối hợp trong nhóm
+- Hiểu các mẫu phối hợp đa tác nhân và yêu cầu triển khai của chúng
 
 ---
 
-## 📚 Các bài học
+## 📚 Các Bài Học
 
-| # | Bài học | Mô tả | Thời gian |
+| # | Bài Học | Mô Tả | Thời Gian |
 |---|--------|-------------|------|
-| 1 | [Kiểm tra trước khi bay](preflight-checks.md) | Xác thực cấu hình trước triển khai | 15 phút |
-| 2 | [Lập kế hoạch dung lượng](capacity-planning.md) | Ước tính yêu cầu tài nguyên | 20 phút |
-| 3 | [Lựa chọn SKU](sku-selection.md) | Chọn mức giá phù hợp | 15 phút |
+| 1 | [Kiểm Tra Trước Bay](preflight-checks.md) | Xác thực cấu hình trước khi triển khai | 15 phút |
+| 2 | [Lập Kế Hoạch Năng Lực](capacity-planning.md) | Ước tính yêu cầu tài nguyên | 20 phút |
+| 3 | [Chọn SKU](sku-selection.md) | Lựa chọn cấp giá phù hợp | 15 phút |
 | 4 | [Application Insights](application-insights.md) | Cấu hình giám sát | 20 phút |
-| 5 | [Các mẫu phối hợp](coordination-patterns.md) | Quy trình làm việc nhóm khi triển khai | 15 phút |
+| 5 | [Mẫu Phối Hợp](coordination-patterns.md) | Thiết kế điều phối đa tác nhân nâng cao | 60-75 phút |
 
 ---
 
-## 🚀 Bắt đầu nhanh
+## 🚀 Bắt Đầu Nhanh
 
 ```bash
-# Kiểm tra hạn mức đăng ký
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Xem trước triển khai (không tạo tài nguyên)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Xác thực cú pháp Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Kiểm tra cấu hình môi trường
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Danh sách kiểm tra trước triển khai
+## ☑️ Danh Sách Kiểm Tra Trước Triển Khai
 
-### Trước khi chạy `azd provision`
+### Trước `azd provision`
 
 - [ ] Đã xác minh hạn mức cho khu vực
-- [ ] SKU đã lựa chọn phù hợp
-- [ ] Đã xem xét ước tính chi phí
+- [ ] SKU được chọn phù hợp
+- [ ] Ước tính chi phí đã được rà soát
 - [ ] Quy ước đặt tên nhất quán
-- [ ] Cấu hình bảo mật/RBAC
+- [ ] Đã cấu hình bảo mật/RBAC
 
-### Trước khi chạy `azd deploy`
+### Trước `azd deploy`
 
-- [ ] Các biến môi trường đã thiết lập
+- [ ] Thiết lập biến môi trường
 - [ ] Bí mật trong Key Vault
-- [ ] Đã xác minh chuỗi kết nối
-- [ ] Cấu hình kiểm tra sức khỏe
+- [ ] Chuỗi kết nối đã được kiểm tra
+- [ ] Đã cấu hình kiểm tra sức khỏe
 
 ---
 
-## 💰 Hướng dẫn lựa chọn SKU
+## 💰 Hướng Dẫn Chọn SKU
 
-| Khối lượng công việc | Phát triển | Sản xuất |
+| Khối Lượng Công Việc | Phát Triển | Sản Xuất |
 |----------|-------------|------------|
-| Container Apps | Tiêu thụ | D4 dành riêng |
+| Container Apps | Tiêu thụ | Tiêu thụ hoặc cấu hình tải chuyên dụng, dựa trên tải đo được |
 | App Service | B1/B2 | P1v3+ |
-| Mô hình Microsoft Foundry | Tiêu chuẩn | Tiêu chuẩn + PTU |
-| AI Search | Cơ bản | Tiêu chuẩn S2+ |
+| Mô hình Azure OpenAI | Hỗ trợ triển khai trả theo dùng | Trả theo dùng hoặc thông lượng được cấp; tùy thuộc mô hình/khu vực |
+| AI Search | Miễn phí/Cơ bản trong giới hạn | Cơ bản hoặc tiêu chuẩn tùy kích cỡ chỉ mục, bản sao, và tải truy vấn |
 
 ---
 
-## 🔗 Điều hướng
+## 🔗 Điều Hướng
 
 | Hướng | Chương |
 |-----------|---------|
-| **Trước** | [Chương 5: Đa tác nhân](../chapter-05-multi-agent/README.md) |
-| **Tiếp theo** | [Chương 7: Khắc phục sự cố](../chapter-07-troubleshooting/README.md) |
+| **Trước** | [Chương 5: Đa Tác Nhân](../chapter-05-multi-agent/README.md) |
+| **Tiếp** | [Chương 7: Xử Lý Sự Cố](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Tài nguyên liên quan
+## 📖 Tài Nguyên Liên Quan
 
-- [Hướng dẫn cấu hình](../chapter-03-configuration/configuration.md)
-- [Hướng dẫn triển khai](../chapter-04-infrastructure/deployment-guide.md)
-- [Các sự cố phổ biến](../chapter-07-troubleshooting/common-issues.md)
+- [Hướng Dẫn Cấu Hình](../chapter-03-configuration/configuration.md)
+- [Hướng Dẫn Triển Khai](../chapter-04-infrastructure/deployment-guide.md)
+- [Các Vấn Đề Thường Gặp](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

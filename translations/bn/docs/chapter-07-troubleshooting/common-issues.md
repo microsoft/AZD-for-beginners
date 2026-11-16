@@ -1,507 +1,520 @@
 # সাধারণ সমস্যা এবং সমাধান
 
-**অধ্যায় নেভিগেশন:**
-- **📚 কোর্স হোম**: [AZD For Beginners](../../README.md)
-- **📖 বর্তমান অধ্যায়**: অধ্যায় ৭ - ট্রাবলশুটিং ও ডিবাগিং
-- **⬅️ পূর্ববর্তী অধ্যায়**: [অধ্যায় ৬: প্রি-ফ্লাইট চেকস](../chapter-06-pre-deployment/preflight-checks.md)
+**চ্যাপ্টার নেভিগেশন:**
+- **📚 কোর্স হোম**: [AZD ফর বিগিনারস](../../README.md)
+- **📖 বর্তমান চ্যাপ্টার**: চ্যাপ্টার ৭ - সমস্যা সমাধান ও ডিবাগিং
+- **⬅️ পূর্ববর্তী চ্যাপ্টার**: [চ্যাপ্টার ৬: প্রি-ফ্লাইট চেকস](../chapter-06-pre-deployment/preflight-checks.md)
 - **➡️ পরবর্তী**: [ডিবাগিং গাইড](debugging.md)
-- **🚀 পরবর্তী অধ্যায়**: [অধ্যায় ৮: প্রডাকশন ও এন্টারপ্রাইজ প্যাটার্নস](../chapter-08-production/production-ai-practices.md)
+- **🚀 পরবর্তী চ্যাপ্টার**: [চ্যাপ্টার ৮: প্রোডাকশন ও এন্টারপ্রাইজ প্যাটার্নস](../chapter-08-production/production-ai-practices.md)
 
-## ভূমিকা
+## পরিচিতি
 
-এই বিস্তৃত ট্রাবলশুটিং গাইডটি Azure Developer CLI ব্যবহারের সময় সবচেয়ে সাধারণত মুখোমুখি হওয়া সমস্যাগুলি কভার করে। প্রমাণীকরণ, ডিপ্লয়মেন্ট, অবকাঠামো প্রোভিশনিং এবং অ্যাপ্লিকেশন কনফিগারেশনের সাথে সাধারণ সমস্যা নির্ণয়, সমাধান এবং সংশোধন শিখুন। প্রতিটি সমস্যায় বিস্তারিত উপসর্গ, মূল কারণ এবং ধাপে ধাপে সমাধান পদ্ধতি অন্তর্ভুক্ত রয়েছে।
+এই ব্যাপক ট্রাবলশুটিং গাইডটি Azure Developer CLI ব্যবহারের সময় সবচেয়ে বেশি দেখা সাধারণ সমস্যাগুলো কভার করে। অটেনটিকেশন, ডিপ্লয়মেন্ট, অবকাঠামো প্রোভিশনিং, এবং অ্যাপ্লিকেশন কনফিগারেশনের সাধারণ সমস্যা নির্ণয়, সমাধান এবং ঠিক করার পদ্ধতি শিখুন। প্রতিটি সমস্যার বিস্তারিত উপসর্গ, মূল কারণ এবং ধাপে ধাপে সমাধান প্রক্রিয়া অন্তর্ভুক্ত করা হয়েছে।
 
 ## শেখার লক্ষ্য
 
-এই গাইড শেষ করার মাধ্যমে আপনি:
-- Azure Developer CLI সমস্যাগুলির জন্য নির্ণয় প্রযুক্তিতে পারদর্শী হয়ে উঠবেন
-- সাধারণ প্রমাণীকরণ ও অনুমতি সমস্যাগুলি এবং তাদের সমাধান বুঝতে পারবেন
-- ডিপ্লয়মেন্ট ব্যর্থতা, অবকাঠামো প্রোভিশনিং ত্রুটি এবং কনফিগারেশন সমস্যা সমাধান করতে সক্ষম হবেন
-- প্রোঅ্যাকটিভ মনিটরিং এবং ডিবাগিং কৌশল প্রয়োগ করতে পারবেন
-- জটিল সমস্যার জন্য পদ্ধতিগত ট্রাবলশুটিং মেথডোলজি বাস্তবায়ন করবেন
-- ভবিষ্যতের সমস্যা প্রতিরোধে সঠিক লগিং ও মনিটরিং কনফিগার করবেন
+এই গাইডটি সম্পন্ন করার মাধ্যমে আপনি:
+- Azure Developer CLI সমস্যা সমাধানে ডায়াগনস্টিক কৌশল আয়ত্ত করবেন
+- সাধারণ অটেনটিকেশন এবং অনুমতি সমস্যা এবং তাদের সমাধান বুঝতে পারবেন
+- ডিপ্লয়মেন্ট ব্যর্থতা, অবকাঠামো প্রোভিশনিং ত্রুটি এবং কনফিগারেশন সমস্যা সমাধান করতে পারবেন
+- প্রোঅ্যাকটিভ মনিটরিং এবং ডিবাগিং কৌশল বাস্তবায়ন করবেন
+- জটিল সমস্যাগুলোর জন্য সিস্টেমেটিক ট্রাবলশুটিং পদ্ধতি প্রয়োগ করবেন
+- ভবিষ্যতে সমস্যা প্রতিরোধে সঠিক লগিং ও মনিটরিং কনফিগার করবেন
 
 ## শেখার ফলাফল
 
-পূর্ণ করার পরে, আপনি সক্ষম হবেন:
-- বিল্ট-ইন ডায়াগনস্টিক টুল ব্যবহার করে Azure Developer CLI সমস্যাগুলির নির্ণয় করতে
-- প্রমাণীকরণ, সাবস্ক্রিপশন, এবং অনুমতি সম্পর্কিত সমস্যাগুলি স্বতন্ত্রভাবে সমাধান করতে
-- ডিপ্লয়মেন্ট ব্যর্থতা এবং অবকাঠামো প্রোভিশনিং ত্রুটিগুলি কার্যকরভাবে ট্রাবলশুট করতে
-- অ্যাপ্লিকেশন কনফিগারেশন সমস্যা এবং পরিবেশ-নির্দিষ্ট সমস্যাগুলির ডিবাগিং করতে
-- সম্ভাব্য সমস্যাগুলি প্রোঅ্যাকটিভভাবে শনাক্ত করার জন্য মনিটরিং এবং অ্যালার্টিং প্রয়োগ করতে
-- লগিং, ডিবাগিং এবং সমস্যা সমাধান কর্মপ্রবাহের জন্য সেরা অনুশীলনগুলি প্রয়োগ করতে
+গাইড শেষে আপনি সক্ষম হবেন:
+- বিল্ট-ইন ডায়াগনস্টিক টুল ব্যবহার করে Azure Developer CLI সমস্যা নির্ণয় করতে
+- অটেনটিকেশন, সাবস্ক্রিপশন ও অনুমতি সম্পর্কিত সমস্যা স্বতন্ত্রভাবে সমাধান করতে
+- ডিপ্লয়মেন্ট ব্যর্থতা ও অবকাঠামো প্রোভিশনিং ত্রুটি কার্যকরভাবে ট্রাবলশুট করতে
+- অ্যাপ্লিকেশন কনফিগারেশন সমস্যা এবং পরিবেশনির্দিষ্ট সমস্যা ডিবাগ করতে
+- সম্ভাব্য সমস্যাগুলো প্রোঅ্যাকটিভভাবে শনাক্ত করতে মনিটরিং ও অ্যালার্টিং প্রয়োগ করতে
+- লগিং, ডিবাগিং এবং সমস্যা সমাধানের ওয়ার্কফ্লো জন্য সেরা অনুশীলন বাস্তবায়ন করতে
 
-## দ্রুত নির্ণয়
+## দ্রুত ডায়াগনস্টিক
 
-নির্দিষ্ট সমস্যাগুলিতে প্রবেশ করার আগে, ডায়াগনস্টিক তথ্য সংগ্রহ করতে এই কমান্ডগুলি চালান:
+> নির্দিষ্ট নাম/আইডি আপনার পরিবেশ অনুযায়ী পরিবর্তন করুন। নিচে আলাদাভাবে বাশ, বিসেপ, জাভাস্ক্রিপ্ট এবং প্যারামিটার-ফাইল ফ্র্যাগমেন্ট লেবেল করা হয়েছে; এগুলো একক কোন এক্সিকিউটেবল স্ক্রিপ্ট নয়। ধ্বংসাত্মক অপারেশন রিভিউ করুন এবং ডায়াগনস্টিক শেয়ার করার আগে সিক্রেটস রেড্যাক্ট করুন। `azd monitor --logs` একটি ব্রাউজার খুলবে; টার্মিনাল লগ স্ট্রিম করবে না।
+
+নির্দিষ্ট সমস্যাগুলিতে যাওয়ার আগে, নিচের কমান্ডগুলো চালিয়ে ডায়াগনস্টিক তথ্য সংগ্রহ করুন:
 
 ```bash
-# azd সংস্করণ এবং স্বাস্থ্য পরীক্ষা করুন
+# Check azd version and health
 azd version
 azd config show
 
-# Azure প্রমাণীকরণ যাচাই করুন
+# Verify Azure authentication
 az account show
 az account list
 
-# বর্তমান পরিবেশ পরীক্ষা করুন
+# Check current environment
 azd env list
 azd env get-values
 
-# ডিবাগ লগিং সক্ষম করুন
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
-## প্রমাণীকরণ সমস্যা
+## অটেনটিকেশন সমস্যা
 
-### সমস্যা: "অ্যাক্সেস টোকেন পাওয়া যায়নি"
-**উপসর্গ:**
-- `azd up` প্রমাণীকরণ ত্রুটির কারণে ব্যর্থ হয়
-- কমান্ডগুলি "অননুমোদিত" বা "অ্যাক্সেস বিয়ুক্ত" বার্তা দেয়
+### সমস্যা: "অ্যাকসেস টোকেন পাওয়া যায়নি"
+**উপসর্গসমূহ:**
+- `azd up` অটেনটিকেশন ত্রুটির সাথে ব্যর্থ হয়
+- কমান্ডগুলো "অনুমোদিত নয়" বা "অ্যাকসেস অস্বীকৃত" রিটার্ন করে
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# 1. Azure CLI দিয়ে পুনরায় প্রমাণীকরণ করুন
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# 2. সংরক্ষণকৃত অনুমোদন তথ্য মুছুন
+# 2. Clear cached credentials
 az account clear
 az login
 
-# 3. ডিভাইস কোড ফ্লো ব্যবহার করুন (হেডলেস সিস্টেমের জন্য)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# 4. স্পষ্ট সাবস্ক্রিপশন সেট করুন
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
-### সমস্যা: ডিপ্লয়মেন্টের সময় "অপ্রতুল বিশেষাধিকার"
-**উপসর্গ:**
-- অনুমতি ত্রুটির কারণে ডিপ্লয়মেন্ট ব্যর্থ হয়
-- কিছু Azure রিসোর্স তৈরি করতে পারে না
+### সমস্যা: ডিপ্লয়মেন্টের সময় "অপর্যাপ্ত অনুমতি"
+**উপসর্গসমূহ:**
+- অনুমতির ত্রুটিতে ডিপ্লয়মেন্ট ব্যর্থ হয়
+- নির্দিষ্ট Azure রিসোর্স তৈরি করতে পারে না
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# 1. আপনার Azure ভূমিকা নিয়োগগুলি পরীক্ষা করুন
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. নিশ্চিত করুন যে আপনার প্রয়োজনীয় ভূমিকা রয়েছে
-# - কন্ট্রিবিউটর (সম্পদ তৈরির জন্য)
-# - ইউজার অ্যাকসেস অ্যাডমিনিস্ট্রেটর (ভূমিকা নিয়োগের জন্য)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. সঠিক অনুমতির জন্য আপনার Azure প্রশাসকের সাথে যোগাযোগ করুন
+# 3. Contact your Azure administrator for proper permissions
 ```
 
-### সমস্যা: মাল্টি-টেন্যান্ট প্রমাণীকরণ সমস্যা
-**সমাধান:**
+### সমস্যা: মাল্টি-টেন্যান্ট অটেনটিকেশন সমস্যা
+**সমাধানসমূহ:**
 ```bash
-# 1. নির্দিষ্ট টেন্যান্ট দিয়ে লগইন করুন
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. কনফিগারেশনে টেন্যান্ট সেট করুন
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. টেন্যান্ট পরিবর্তন করলে টেন্যান্ট ক্যাশ পরিষ্কার করুন
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
 ## 🏗️ অবকাঠামো প্রোভিশনিং ত্রুটি
 
-### সমস্যা: রিসোর্স নামের সংঘাত
-**উপসর্গ:**
-- "রিসোর্স নাম ইতিমধ্যে রয়েছে" ত্রুটি
-- রিসোর্স তৈরি করার সময় ডিপ্লয়মেন্ট ব্যর্থ
+### সমস্যা: রিসোর্স নামের দ্বন্দ্ব
+**উপসর্গসমূহ:**
+- "রিসোর্সের নাম ইতিমধ্যে বিদ্যমান" ত্রুটি
+- রিসোর্স তৈরি করার সময় ডিপ্লয়মেন্ট ব্যর্থ হয়
 
-**সমাধান:**
-```bash
-# ১. টোকেন সহ অনন্য রিসোর্স নাম ব্যবহার করুন
-# আপনার বiceps টেমপ্লেটে:
+**সমাধানসমূহ:**
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
+```
 
-# ২. পরিবেশের নাম পরিবর্তন করুন
+```bash
+# 2. Change environment name
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# ৩. বিদ্যমান রিসোর্সগুলি পরিষ্কৃত করুন
-azd down --force --purge
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
 ```
 
-### সমস্যা: লোকেশন/রেজিয়ন উপলব্ধ নয়
-**উপসর্গ:**
-- "রিসোর্স প্রকার জন্য 'xyz' লোকেশন উপলব্ধ নয়"
-- নির্বাচিত অঞ্চলে কিছু SKU উপলব্ধ নয়
+### সমস্যা: লোকেশন/অঞ্চল পাওয়া যায় না
+**উপসর্গসমূহ:**
+- "xyz" লোকেশন রিসোর্স টাইপের জন্য উপলব্ধ নয়
+- বাছাই করা অঞ্চলে কিছু SKU উপলব্ধ নয়
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# 1. রিসোর্স টাইপের জন্য উপলব্ধ অবস্থানগুলি চেক করুন
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. সাধারণত উপলব্ধ অঞ্চলে ব্যবহার করুন
-azd config set defaults.location eastus2
-# অথবা
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. অঞ্চলের দ্বারা সেবার প্রাপ্যতা চেক করুন
-# পরিদর্শন করুন: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### সমস্যা: কোটার সীমা ছাড়ানো ত্রুটি
-**উপসর্গ:**
-- "রিসোর্স প্রকারের জন্য কোটা ছাড়ানো হয়েছে"
-- "রিসোর্সের সর্বোচ্চ সংখ্যা পৌঁছানো হয়েছে"
+লোকেশন ভেরিয়েবল পরিবর্তন করলে বিদ্যমান রিসোর্স স্থানান্তরিত হয় না। বিদ্যমান রিসোর্স গ্রুপ বা রিসোর্স লোকেশন পরিবর্তন প্রত্যাখ্যান করতে পারে; আঞ্চলিক পুনঃডিপ্লয়মেন্টের জন্য আলাদা পরিবেশ ব্যবহার করুন।
 
-**সমাধান:**
+### সমস্যা: কোটা অতিক্রমের ত্রুটি
+**উপসর্গসমূহ:**
+- "রিসোর্স টাইপের জন্য কোটা অতিক্রম হয়েছে"
+- "সর্বোচ্চ রিসোর্স সংখ্যা পৌঁছেছে"
+
+**সমাধানসমূহ:**
 ```bash
-# ১. বর্তমান কোটা ব্যবহার পরীক্ষা করুন
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# ২. Azure পোর্টালের মাধ্যমে কোটা বৃদ্ধি অনুরোধ করুন
-# যান: Subscriptions > Usage + quotas
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# ৩. উন্নয়নের জন্য ছোট SKUs ব্যবহার করুন
-# main.parameters.json এ:
+```
+
+ডেভেলপমেন্টের জন্য `infra/main.parameters.json`-এ সমর্থিত ছোট SKU বেছে নিন:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# ৪. ব্যবহার না করা রিসোর্স গুলো পরিষ্কার করুন
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### সমস্যা: বাইসপ টেমপ্লেট ত্রুটি
-**উপসর্গ:**
-- টেমপ্লেট যাচাইকরণ ব্যর্থ
-- বাইসপ ফাইলের সিনট্যাক্স ত্রুটি
+### সমস্যা: বিসেপ টেমপ্লেট ত্রুটি
+**উপসর্গসমূহ:**
+- টেমপ্লেট ভ্যালিডেশন ব্যর্থতা
+- বিসেপ ফাইলে সিনট্যাক্স ত্রুটি
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# 1. Bicep সিনট্যাক্স যাচাই করুন
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Bicep লিন্টার ব্যবহার করুন
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. প্যারামিটার ফাইলের সিনট্যাক্স চেক করুন
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. ডিপ্লয়মেন্ট পরিবর্তনগুলি প্রিভিউ করুন
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
 ## 🚀 ডিপ্লয়মেন্ট ব্যর্থতা
 
 ### সমস্যা: বিল্ড ব্যর্থতা
-**উপসর্গ:**
-- ডিপ্লয়মেন্টের সময় অ্যাপ্লিকেশন বিল্ড ব্যর্থ হয়
-- প্যাকেজ ইনস্টলেশন ত্রুটি
+**উপসর্গসমূহ:**
+- ডিপ্লয়মেন্টের সময় অ্যাপ্লিকেশন বিল্ড করতে ব্যর্থ
+- প্যাকেজ ইনস্টলেশনের ত্রুটি
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# 1. ডিবাগ ফ্ল্যাগ দিয়ে বিল্ড আউটপুট পরীক্ষা করুন
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. মোতায়েনকৃত সার্ভিসের অবস্থা দেখুন
+# 2. View deployed service status
 azd show
 
-# 3. লোকালি বিল্ড পরীক্ষা করুন
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Node.js/Python সংস্করণ সামঞ্জস্য পরীক্ষা করুন
-node --version  # azure.yaml সেটিংসের সাথে মিল থাকা উচিত
+# 3. Check Node.js/Python version compatibility
+node --version  # Should match azure.yaml settings
 python --version
 
-# 4. বিল্ড ক্যাশ মুছুন
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. কনটেইনার ব্যবহার করলে Dockerfile পরীক্ষা করুন
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### সমস্যা: কন্টেইনার ডিপ্লয়মেন্ট ব্যর্থতা
-**উপসর্গ:**
-- কন্টেইনার অ্যাপ শুরু করতে ব্যর্থ
+### সমস্যা: কনটেইনার ডিপ্লয়মেন্ট ব্যর্থতা
+**উপসর্গসমূহ:**
+- কনটেইনার অ্যাপ্লিকেশন শুরু হতে ব্যর্থ
 - ইমেজ পুল ত্রুটি
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# 1. লোকালি Docker বিল্ড পরীক্ষা করুন
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Azure CLI ব্যবহার করে কন্টেইনার লগ পরীক্ষা করুন
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. azd মাধ্যমে অ্যাপ্লিকেশন মনিটর করুন
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. কন্টেইনার রেজিস্ট্রি অ্যাক্সেস নিশ্চিত করুন
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. কন্টেইনার অ্যাপ কনফিগারেশন পরীক্ষা করুন
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
 ### সমস্যা: ডাটাবেস সংযোগ ব্যর্থতা
-**উপসর্গ:**
-- অ্যাপ্লিকেশন ডাটাবেসে সংযোগ করতে পারে না
-- সংযোগ টাইমআউট ত্রুটি
+**উপসর্গসমূহ:**
+- অ্যাপ্লিকেশন ডাটাবেসে কানেক্ট করতে পারছে না
+- কানেকশন টাইমআউট ত্রুটি
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# ১। ডাটাবেস ফায়ারওয়াল নিয়ম পরীক্ষা করুন
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# ২। অ্যাপ্লিকেশন থেকে সংযোগ পরীক্ষা করুন
-# সাময়িকভাবে আপনার অ্যাপে যোগ করুন:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# ৩। সংযোগ স্ট্রিংয়ের ফর্ম্যাট যাচাই করুন
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# ৪। ডাটাবেস সার্ভারের অবস্থা পরীক্ষা করুন
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
 ## 🔧 কনফিগারেশন সমস্যা
 
 ### সমস্যা: পরিবেশ ভেরিয়েবল কাজ করছে না
-**উপসর্গ:**
-- অ্যাপ কনফিগারেশন মান পড়তে পারে না
-- পরিবেশ ভেরিয়েবল ফাঁকা দেখা যায়
+**উপসর্গসমূহ:**
+- অ্যাপ কনফিগারেশন মান পড়তে পারছে না
+- পরিবেশ ভেরিয়েবলগুলো খালি দেখাচ্ছে
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# 1. পরিবেশ ভেরিয়েবলগুলি সেট করা হয়েছে কিনা যাচাই করুন
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. azure.yaml এ ভেরিয়েবল নামগুলি পরীক্ষা করুন
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. অ্যাপ্লিকেশন পুনরায় চালু করুন
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. অ্যাপ সেবা কনফিগারেশন পরীক্ষা করুন
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
 ### সমস্যা: SSL/TLS সার্টিফিকেট সমস্যা
-**উপসর্গ:**
+**উপসর্গসমূহ:**
 - HTTPS কাজ করছে না
 - সার্টিফিকেট যাচাইকরণ ত্রুটি
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# ১. SSL সার্টিফিকেটের অবস্থা পরীক্ষা করুন
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# ২. শুধুমাত্র HTTPS সক্রিয় করুন
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# ৩. কাস্টম ডোমেইন যোগ করুন (প্রয়োজন হলে)
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
 ### সমস্যা: CORS কনফিগারেশন সমস্যা
-**উপসর্গ:**
-- ফ্রন্টএন্ড API কল করতে পারে না
-- ক্রস-অরিজিন অনুরোধ ব্লক হয়েছে
+**উপসর্গসমূহ:**
+- ফ্রন্টেন্ড API কল করতে পারছে না
+- ক্রস-অরিজিন রিকোয়েস্ট ব্লক হয়েছে
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# ১. অ্যাপ সার্ভিসের জন্য CORS কনফিগার করুন
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# ২. CORS পরিচালনার জন্য API আপডেট করুন
-# Express.js-এ:
+```
+
+২. আপনার বিদ্যমান Express অ্যাপ্লিকেশনটি আপডেট করুন (যেখানে `cors` ইম্পোর্ট করা হয়েছে):
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# ৩. সঠিক URL-এ চলছে কিনা পরীক্ষা করুন
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
 ## 🌍 পরিবেশ ব্যবস্থাপনা সমস্যা
 
-### সমস্যা: পরিবেশ সুইচিং সমস্যা
-**উপসর্গ:**
+### সমস্যা: পরিবেশ পরিবর্তনের সমস্যা
+**উপসর্গসমূহ:**
 - ভুল পরিবেশ ব্যবহার হচ্ছে
-- কনফিগারেশন সঠিকভাবে স্যুইচ হচ্ছে না
+- কনফিগারেশন সঠিকভাবে পরিবর্তিত হচ্ছে না
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# 1. সমস্ত পরিবেশ তালিকা করুন
+# 1. List all environments
 azd env list
 
-# 2. স্পষ্টভাবে পরিবেশ নির্বাচন করুন
+# 2. Explicitly select environment
 azd env select production
 
-# 3. বর্তমান পরিবেশ যাচাই করুন
+# 3. Verify current environment
 azd env list
 
-# 4. যদি পরিবেশ ক্ষতিগ্রস্ত হয় তবে নতুন পরিবেশ তৈরি করুন
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
 ### সমস্যা: পরিবেশ দূষণ
-**উপসর্গ:**
+**উপসর্গসমূহ:**
 - পরিবেশ অবৈধ অবস্থা দেখাচ্ছে
-- রিসোর্সগুলি কনফিগারেশনের সাথে মেলেনা
+- রিসোর্স কনফিগারেশনের সাথে মিলছে না
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# 1. পরিবেশের অবস্থা রিফ্রেশ করুন
+# 1. Refresh environment state
 azd env refresh
 
-# 2. পরিবেশের কনফিগারেশন রিসেট করুন
+# 2. Reset environment configuration
 azd env new production-reset
-# প্রয়োজনীয় পরিবেশ ভেরিয়েবল কপি করুন
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. বিদ্যমান সম্পদ আমদানি করুন (যদি সম্ভব হয়)
-# .azure/production/config.json ম্যানুয়ালি রিসোর্স আইডি দিয়ে আপডেট করুন
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
 ## 🔍 কর্মক্ষমতা সমস্যা
 
 ### সমস্যা: ধীর ডিপ্লয়মেন্ট সময়
-**উপসর্গ:**
-- ডিপ্লয়মেন্ট খুব সময় নিচ্ছে
+**উপসর্গসমূহ:**
+- ডিপ্লয়মেন্ট অনেক সময় নিচ্ছে
 - ডিপ্লয়মেন্টের সময় টাইমআউট
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# 1. দ্রুত পুনরাবৃত্তির জন্য নির্দিষ্ট পরিষেবাগুলি মোতায়েন করুন
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. অবকাঠামো অপরিবর্তিত থাকলে শুধুমাত্র কোড মোতায়েন করুন
-azd deploy  # azd up থেকে দ্রুত
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. বিল্ড প্রক্রিয়া অপ্টিমাইজ করুন
-# package.json এ:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. সম্পদ অবস্থান চেক করুন (একই অঞ্চলে ব্যবহার করুন)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
-### সমস্যা: অ্যাপ্লিকেশন কর্মক্ষমতা সমস্যা
-**উপসর্গ:**
-- ধীর প্রতিক্রিয়া সময়
+### সমস্যা: অ্যাপ্লিকেশন কর্মক্ষমতার সমস্যা
+**উপসর্গসমূহ:**
+- ধীর সাড়া সময়
 - উচ্চ রিসোর্স ব্যবহার
 
-**সমাধান:**
+**সমাধানসমূহ:**
 ```bash
-# ১। সম্পদ বৃদ্ধি করুন
-# main.parameters.json এ SKU আপডেট করুন:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# ২। অ্যাপ্লিকেশন ইনসাইটস মনিটরিং সক্ষম করুন
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# ৩। Azure-এ অ্যাপ্লিকেশন লগ পরীক্ষা করুন
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# অথবা কন্টেইনার অ্যাপস-এর জন্য:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# ৪। ক্যাশিং প্রয়োগ করুন
-# আপনার অবকাঠামোতে Redis ক্যাশ যোগ করুন
+# 4. Implement caching
+# Add Redis cache to your infrastructure
 ```
 
-## 🛠️ ট্রাবলশুটিং টুলস এবং কমান্ড
+## 🛠️ ট্রাবলশুটিং টুল এবং কমান্ড
 
-### ডিবাগ কমান্ডসমূহ
+### ডিবাগ কমান্ড
 ```bash
-# ব্যাপক ডিবাগিং
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# azd সংস্করণ পরীক্ষা করুন
+# Check azd version
 azd version
 
-# বর্তমান কনফিগারেশন দেখুন
+# View current configuration
 azd config show
 
-# সংযোগ পরীক্ষা করুন
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### লগ বিশ্লেষণ
 ```bash
-# Azure CLI এর মাধ্যমে অ্যাপ্লিকেশন লগগুলি
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# azd দিয়ে অ্যাপ্লিকেশন মনিটর করুন
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Azure রিসোর্স লগগুলি
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
-# কন্টেইনার লগগুলি (কন্টেইনার অ্যাপস-এর জন্য)
+# Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### রিসোর্স তদন্ত
 ```bash
-# সব রিসোর্স তালিকা করুন
+# List all resources
 az resource list --resource-group myrg -o table
 
-# রিসোর্সের পরিস্থিতি পরীক্ষা করুন
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# নেটওয়ার্ক ডায়াগনস্টিক্স
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 অতিরিক্ত সাহায্য নেওয়া
+## 🆘 অতিরিক্ত সাহায্য পাওয়া
 
-### কখন আগ্রহী হওয়া উচিত
-- সমস্ত সমাধান চেষ্টা করার পরও প্রমাণীকরণ সমস্যা স্থায়ী থাকে
-- Azure পরিষেবার অবকাঠামো সমস্যা
+### কখন এস্কেলেট করবেন
+- সব সমাধান চেষ্টা করার পরেও অটেনটিকেশন সমস্যা থাকে
+- Azure সেবাগুলোর অবকাঠামো সমস্যা
 - বিলিং বা সাবস্ক্রিপশন সম্পর্কিত সমস্যা
 - নিরাপত্তা উদ্বেগ বা ঘটনা
 
-### সাপোর্ট চ্যানেলসমূহ
+### সহায়তা চ্যানেলস
 ```bash
-# 1. আজুর সার্ভিস হেল্থ চেক করুন
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. আজুর সাপোর্ট টিকেট তৈরি করুন
-# যান: https://portal.azure.com -> সাহায্য + সাপোর্ট
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. কমিউনিটি রিসোর্সসমূহ
-# - স্ট্যাক ওভারফ্লো: azure-developer-cli ট্যাগ
-# - গিটহাব ইস্যুসমূহ: https://github.com/Azure/azure-dev/issues
-# - মাইক্রোসফট প্রশ্নোত্তর: https://learn.microsoft.com/en-us/answers/
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
+# - GitHub Issues: https://github.com/Azure/azure-dev/issues
+# - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
 ### সংগ্রহ করার তথ্য
-সাপোর্টে যোগাযোগ করার পূর্বে, সংগ্রহ করুন:
+সহায়তা যোগাযোগ করার আগে, সংগ্রহ করুন:
 - `azd version` আউটপুট
 - `azd config show` আউটপুট
-- `azd show` আউটপুট (বর্তমান ডিপ্লয়মেন্টের অবস্থা)
-- ত্রুটি বার্তা (পুরো লেখা)
-- সমস্যাটি পুনরাবৃত্তির জন্য ধাপসমূহ
-- পরিবেশের বিবরণ (`azd env get-values`)
-- সমস্যাটি শুরু হওয়ার টাইমলাইন
+- `azd show` আউটপুট (বর্তমান ডিপ্লয়মেন্ট স্ট্যাটাস)
+- ত্রুটি বার্তা (সম্পূর্ণ টেক্সট)
+- সমস্যা পুনরুত্পাদনের ধাপসমূহ
+- রেড্যাক্টেড পরিবেশ বিবরণ (কখনোই কাঁচা `azd env get-values` শেয়ার করবেন না, এতে সিক্রেটস থাকতে পারে)
+- সমস্যাটি কখন শুরু হয়েছিল তার টাইমলাইন
 
 ### লগ সংগ্রহ স্ক্রিপ্ট
 ```bash
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -528,73 +541,75 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 সমস্যা প্রতিরোধ
 
-### প্রি-ডিপ্লয়মেন্ট চেকলিস্ট
+### পূর্ব-ডিপ্লয়মেন্ট চেকলিস্ট
 ```bash
-# 1. প্রমাণীকরণ যাচাই করুন
+# 1. Validate authentication
 az account show
 
-# 2. কোটা এবং সীমা চেক করুন
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# 3. টেমপ্লেট যাচাই করুন
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# 4. প্রথমে লোকালি পরীক্ষা করুন
+# 4. Test locally first
 npm run build
 npm run test
 
-# 5. ড্রাই-রান ডিপ্লয়মেন্ট ব্যবহার করুন
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
 ### মনিটরিং সেটআপ
-```bash
-# অ্যাপ্লিকেশন ইনসাইটস সক্ষম করুন
-# main.bicep এ যোগ করুন:
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# সতর্কতা সেট আপ করুন
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
 ### নিয়মিত রক্ষণাবেক্ষণ
 ```bash
-# সাপ্তাহিক স্বাস্থ্য পরীক্ষা
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# মাসিক খরচ পর্যালোচনা
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# ত্রৈমাসিক নিরাপত্তা পর্যালোচনা
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
-## সম্পর্কিত সম্পদসমূহ
+## সম্পর্কিত রিসোর্সসমূহ
 
-- [ডিবাগিং গাইড](debugging.md) - উন্নত ডিবাগিং প্রযুক্তি
-- [প্রোভিশনিং রিসোর্স](../chapter-04-infrastructure/provisioning.md) - অবকাঠামো ট্রাবলশুটিং
-- [ক্ষমতা পরিকল্পনা](../chapter-06-pre-deployment/capacity-planning.md) - রিসোর্স পরিকল্পনা দিকনির্দেশনা
-- [SKU নির্বাচন](../chapter-06-pre-deployment/sku-selection.md) - সার্ভিস টিয়ার সুপারিশ
+- [ডিবাগিং গাইড](debugging.md) - উন্নত ডিবাগিং কৌশল
+- [রিসোর্স প্রোভিশনিং](../chapter-04-infrastructure/provisioning.md) - অবকাঠামো ট্রাবলশুটিং
+- [ক্যাপাসিটি প্ল্যানিং](../chapter-06-pre-deployment/capacity-planning.md) - রিসোর্স পরিকল্পনার নির্দেশনা
+- [SKU নির্বাচন](../chapter-06-pre-deployment/sku-selection.md) - সার্ভিস টিয়ার পরামর্শ
 
 ---
 
-**টিপ**: এই গাইডটি বুকমার্ক করে রাখুন এবং যখনই সমস্যা সম্মুখীন হন তখন এটি দেখুন। বেশিরভাগ সমস্যা পূর্বে দেখা হয়েছে এবং প্রতিষ্ঠিত সমাধান রয়েছে!
+**টিপ**: এই গাইডটি বুকমার্ক রাখুন এবং যখনই সমস্যা দেখবেন তখন রেফার করুন। অধিকাংশ সমস্যা আগেও দেখা গেছে এবং তাদের নির্ধারিত সমাধান রয়েছে!
 
 ---
 
 **নেভিগেশন**
-- **পূর্ববর্তী পাঠ**: [প্রোভিশনিং রিসোর্স](../chapter-04-infrastructure/provisioning.md)
+- **পূর্ববর্তী পাঠ**: [রিসোর্স প্রোভিশনিং](../chapter-04-infrastructure/provisioning.md)
 - **পরবর্তী পাঠ**: [ডিবাগিং গাইড](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**বিয়োজ্ঞপ্তি**:  
-এই নথিটি AI অনুবাদ সেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনূদিত হয়েছে। আমরা সঠিকতার প্রতি যত্নশীল হলেও, স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসত্যতা থাকতে পারে। মূল নথিটি তার আদি ভাষায়ই কর্তৃপক্ষের সর্বোচ্চ উৎস হিসেবে বিবেচিত হওয়া উচিত। গুরুত্বপূর্ণ তথ্যের জন্য পেশাদার মানব অনুবাদ করা উত্তম। এই অনুবাদের ব্যবহারে সৃষ্ট কোনো ভুলবোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়বদ্ধ নয়।
+**অস্বীকৃতি**:
+এই নথিটি AI অনুবাদ পরিষেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনূদিত হয়েছে। যদিও আমরা শুদ্ধতার জন্য চেষ্টা করি, অনুগ্রহ করে মনে রাখবেন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসঙ্গতি থাকতে পারে। মূল নথিটি তার স্বভাষায় কর্তৃত্বপূর্ণ উৎস হিসেবে বিবেচিত হওয়া উচিত। গুরুত্বপূর্ণ তথ্যের জন্য পেশাদার মানব অনুবাদ সুপারিশ করা হয়। এই অনুবাদের ব্যবহারে প্রয়োজনীয় ভুল বোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়বদ্ধ নই।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

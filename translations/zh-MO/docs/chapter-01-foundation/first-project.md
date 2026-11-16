@@ -1,61 +1,63 @@
-# 您的第一個專案 - 實作教學
+# 你的第一個專案 - 實作教學
 
-**章節導覽:**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 目前章節**: 第 1 章 - 基礎與快速上手
-- **⬅️ 上一章**: [Installation & Setup](installation.md)
-- **➡️ 下一章**: [Configuration](configuration.md)
-- **🚀 下一章節**: [第 2 章：以 AI 為先的開發](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**章節導覽：**
+- **📚 課程首頁**: [AZD For Beginners](../../README.md)
+- **📖 本章節**: 第 1 章 - 基礎與快速開始
+- **⬅️ 上一章**: [安裝與設定](installation.md)
+- **➡️ 下一章**: [帶入你的應用程式](bring-your-own-app.md)
+- **🚀 下一章節**: [第 2 章：AI 優先開發](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## 介紹
 
-歡迎來到您的第一個 Azure 開發者 CLI 專案！這份完整的實作教學會完整示範如何使用 azd 在 Azure 上建立、部署與管理一個完整的應用程式。您將操作一個真實的 todo 應用程式，包含 React 前端、Node.js API 後端及 MongoDB 資料庫。
+歡迎使用你的第一個 Azure Developer CLI 專案！你將會部署一個有 React 前端、Node.js API 及 Azure Cosmos DB 的待辦事項應用程式。此範本保留了歷史名稱 `todo-nodejs-mongo`；其目前的基礎架構使用 Cosmos DB 作為 NoSQL，因此請檢查下載的 README 和 `infra/`，而非直接從名稱推論資料庫 API。
+
+> 根據 `azd 1.37.2` 及 2026 年 11 月的公開範本進行檢閱。以下範例使用 Bash；JSON 擷取亦需要 `jq`。Azure 部署會產生費用，該次審核期間未執行實際部署。
 
 ## 學習目標
 
-完成本教學後，您將能夠：
+完成本教學後，您將能：
 - 精通使用範本初始化 azd 專案的工作流程
-- 了解 Azure 開發者 CLI 專案結構與設定檔
-- 執行包含基礎結構佈建的完整應用程式部署到 Azure
+- 理解 Azure Developer CLI 專案結構及設定檔
+- 執行完整的應用程式部署及基礎架構配置到 Azure
 - 實作應用程式更新與重新部署策略
-- 管理多個開發與預備（staging）環境
-- 套用資源清理與成本管理實務
+- 管理開發及測試多個環境
+- 應用資源清理及成本管理實務
 
 ## 學習成果
 
-完成後，您將能夠：
-- 獨立從範本初始化與設定 azd 專案
-- 有效導覽與修改 azd 專案結構
-- 使用單一指令將全端應用程式部署到 Azure
-- 排解常見部署與驗證問題
+完成後你將能：
+- 獨立從範本初始化及設定 azd 專案
+- 有效導覽及修改 azd 專案結構
+- 使用單一指令部署全端應用程式到 Azure
+- 排解常見部署問題及驗證錯誤
 - 管理不同部署階段的多個 Azure 環境
-- 為應用程式更新實作持續部署工作流程
+- 實作持續部署工作流程以更新應用程式
 
 ## 開始使用
 
-### 先決條件檢查清單
-- ✅ Azure Developer CLI 已安裝 ([Installation Guide](installation.md))
-- ✅ 已使用 `azd auth login` 完成 AZD 驗證
+### 先決條件清單
+- ✅ 已安裝 Azure Developer CLI ([安裝指南](installation.md))
+- ✅ 已完成使用 `azd auth login` 的 AZD 身份驗證
 - ✅ 系統已安裝 Git
-- ✅ Node.js 16+（本教學需求）
+- ✅ 已安裝 Node.js 22 LTS（或下載的範本所需的支援版本）
 - ✅ 建議使用 Visual Studio Code
 
-在繼續之前，請在儲存庫根目錄執行設定驗證程式：
+在繼續之前，請從儲存庫根目錄執行設定驗證器：
 
-**Windows:** `./validate-setup.ps1`
+**Windows：** `./validate-setup.ps1`
 
-**macOS / Linux:** `bash ./validate-setup.sh`
+**macOS / Linux：** `bash ./validate-setup.sh`
 
 ### 驗證您的設定
 ```bash
-# 檢查 azd 是否已安裝
+# Check azd installation
 azd version
 
-# 檢查 AZD 驗證
+# Check AZD authentication
 azd auth login --check-status
 ```
 
-### 驗證選用的 Azure CLI 認證
+### 驗證可選的 Azure CLI 身份驗證
 
 ```bash
 az account show
@@ -66,48 +68,47 @@ az account show
 node --version
 ```
 
-## 步驟 1：選擇並初始化範本
+## 第 1 步：選擇並初始化範本
 
-我們從一個熱門的 todo 範本開始，該範本包含 React 前端與 Node.js API 後端。
+我們先從一個包含 React 前端和 Node.js API 後端的流行待辦事項應用程式範本開始。
 
 ```bash
-# 瀏覽可用的範本
+# Browse available templates
 azd template list
 
-# 初始化待辦事項應用程式範本
+# Initialize the todo app template
 mkdir my-first-azd-app
 cd my-first-azd-app
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
-# 依提示操作:
-# - 輸入環境名稱: "dev"
-# - 選擇一個訂閱 (如果你有多個)
-# - 選擇一個區域: "East US 2" (或你偏好的區域)
+# Follow the prompts:
+# - Enter an environment name: "dev"
+# - Choose a subscription (if you have multiple)
+# - Choose a region: "East US 2" (or your preferred region)
 ```
 
 ### 剛才發生了什麼？
-- 已將範本程式碼下載到本地目錄
-- 建立了一個包含服務定義的 `azure.yaml` 檔案
-- 在 `infra/` 目錄中設定基礎結構程式碼
-- 建立了一個環境設定
+- 下載範本程式碼到本地目錄
+- 建立帶有服務定義的 `azure.yaml` 檔案
+- 在 `infra/` 目錄中設定基礎設施程式碼
+- 建立環境配置
 
-## 步驟 2：探索專案結構
+## 第 2 步：探索專案結構
 
-來查看 azd 為我們建立了哪些內容：
+讓我們檢視 azd 為我們建立了什麼：
 
 ```bash
-# 檢視專案結構
+# View the project structure
 tree /f   # Windows
-# 或
+# or
 find . -type f | head -20   # macOS/Linux
 ```
 
 您應該會看到：
 ```
 my-first-azd-app/
-├── .azd/
-│   └── config.json              # Project configuration
 ├── .azure/
+│   ├── config.json              # Selected local environment
 │   └── dev/                     # Environment-specific files
 ├── .devcontainer/               # Development container config
 ├── .github/workflows/           # GitHub Actions CI/CD
@@ -115,80 +116,77 @@ my-first-azd-app/
 ├── infra/                       # Infrastructure as code (Bicep)
 │   ├── main.bicep              # Main infrastructure template
 │   ├── main.parameters.json     # Parameters for deployment
-│   └── modules/                # Reusable infrastructure modules
+│   └── app/                    # Application infrastructure modules
 ├── src/
 │   ├── api/                    # Node.js backend API
 │   │   ├── src/               # API source code
-│   │   ├── package.json       # Node.js dependencies
-│   │   └── Dockerfile         # Container configuration
+│   │   └── package.json       # Node.js dependencies
 │   └── web/                   # React frontend
 │       ├── src/               # React source code
-│       ├── package.json       # React dependencies
-│       └── Dockerfile         # Container configuration
+│       └── package.json       # React dependencies
 ├── azure.yaml                  # azd project configuration
 └── README.md                   # Project documentation
 ```
 
-### 關鍵檔案說明
+### 主要要理解的檔案
 
 **azure.yaml** - 您 azd 專案的核心：
 ```bash
-# 檢視專案設定
+# View the project configuration
 cat azure.yaml
 ```
 
-**infra/main.bicep** - 基礎結構定義：
+**infra/main.bicep** - 基礎設施定義：
 ```bash
-# 檢視基礎架構程式碼
+# View the infrastructure code
 head -30 infra/main.bicep
 ```
 
-## 步驟 3：自訂您的專案（可選）
+## 第 3 步：客製化您的專案（選用）
 
-在部署之前，您可以自訂應用程式：
+部署前，您可以自訂應用程式：
 
 ### 修改前端
 ```bash
-# 開啟 React 應用程式元件
-code src/web/src/App.tsx
+# Open the React app component
+code src/web/src/layout/header.tsx
 ```
 
-做一個簡單變更：
-```typescript
-// 找到標題並更改它
-<h1>My Awesome Todo App</h1>
+做一個簡單的變更：
+```tsx
+// Replace the existing <Text variant="xLarge">ToDo</Text> element
+<Text variant="xLarge">My Awesome Todo App</Text>
 ```
 
 ### 設定環境變數
 ```bash
-# 設定自訂環境變數
+# Set custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# 檢視所有環境變數
+# View all environment variables
 azd env get-values
 ```
 
-## 步驟 4：部署到 Azure
+這兩個自訂值僅示範本地儲存。基礎範本未使用 `WEBSITE_TITLE` 或 `API_VERSION`，因此不會改變應用程式。上述明確的來源修改改變了顯示的標題。
 
-現在進入令人興奮的階段 — 將所有內容部署到 Azure！
+## 第 4 步：部署到 Azure
+
+現在是令人興奮的部分——將所有東西部署到 Azure！
 
 ```bash
-# 部署基礎架構與應用程式
+# Deploy infrastructure and application
 azd up
 
-# 此命令會：
-# 1. 佈建 Azure 資源（App Service、Cosmos DB 等）
-# 2. 建置您的應用程式
-# 3. 部署到已佈建的資源
-# 4. 顯示應用程式的 URL
+# This command will:
+# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
+# 2. Build your application
+# 3. Deploy to the provisioned resources
+# 4. Display the application URL
 ```
 
-### 部署期間發生了什麼？
+### 部署過程中發生了什麼？
 
-`azd up` 指令會執行以下步驟：
-1. **Provision** (`azd provision`) - 建立 Azure 資源
-2. **Package** - 建置您的應用程式程式碼
-3. **Deploy** (`azd deploy`) - 將程式碼部署到 Azure 資源
+工作流程提供基礎設施，並包裝/部署程式碼。具體順序可透過 `workflows.up` 在 `azure.yaml` 中自訂；此範本指定先 provision 後 deploy。不要假設每個範本都用同一個階段順序。
 
 ### 預期輸出
 ```
@@ -203,359 +201,359 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## 步驟 5：測試您的應用程式
+## 第 5 步：測試您的應用程式
 
-### 存取您的應用程式
-點選部署輸出中提供的 URL，或隨時取得：
+### 訪問您的應用程式
+按部署輸出的 URL，或隨時取得：
 ```bash
-# 取得應用程式端點
+# Get application endpoints
 azd show
 
-# 在你的瀏覽器中開啟應用程式
-azd show --output json | jq -r '.services.web.endpoint'
+# Open the application in your browser
+azd show --output json | jq -er '.services.web.ingressUrl'
 ```
 
-### 測試待辦事項應用程式
-1. <strong>新增待辦項目</strong> - 點選「新增待辦」並輸入一個任務
-2. <strong>標記為完成</strong> - 勾選已完成的項目
-3. <strong>刪除項目</strong> - 移除不需要的待辦
+### 測試待辦應用
+1. <strong>新增待辦項目</strong> - 點選「Add Todo」並輸入任務
+2. <strong>標示完成</strong> - 勾選已完成項目
+3. <strong>刪除項目</strong> - 移除不再需要的待辦事項
 
 ### 監控您的應用程式
 ```bash
-# 開啟 Azure 入口網站以檢視您的資源
+# Open Azure portal for your resources
 azd monitor
 
-# 檢視應用程式日誌
+# View application logs
 azd monitor --logs
 
-# 檢視即時指標
+# View live metrics
 azd monitor --live
 ```
 
 ### ✅ 驗證您的部署
 
-在繼續之前，請通過以下快速檢查清單確認一切實際運作—不要假設「部署成功」就代表「應用程式正常運作」：
+繼續前，請執行此快速檢查清單確認一切正常運作——不要假設「部署成功」就代表「應用程式運作正常」：
 
 ```bash
-# 1. 確認端點存在並且可連線
+# 1. Confirm the endpoint exists and is reachable
 azd show
 
-# 2. 對端點進行煙霧測試（期望回應 HTTP 200）
-curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+# 2. Smoke-test the endpoint (expects HTTP 200)
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error --location "$WEB_URL"
 
-# 3. 如果您的應用程式有提供健康端點，請檢查它
-curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+# 3. Test the API's actual list route (the template has no /health route)
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail --show-error "$API_URL/lists"
 ```
 
-**當部署驗證通過時：**
-- ✅ `azd show` 列出可存取的端點 URL
-- ✅ 該 URL 可在瀏覽器中開啟且沒有錯誤
-- ✅ 核心功能可運作（新增/完成/刪除 待辦）
-- ✅ `azd monitor --logs` 顯示請求到達且沒有意外錯誤
+**當部署被驗證時：**
+- ✅ `azd show` 列出可連接的端點 URL
+- ✅ URL 可在瀏覽器中開啟且無錯誤
+- ✅ 核心功能正常運作（新增/完成/刪除待辦）
+- ✅ `azd monitor --logs` 顯示請求到達且無意外錯誤
 
-如果任何檢查失敗，請前往 [第 7 章：問題排解](../chapter-07-troubleshooting/README.md)。
+若有任何檢查失敗，請跳至 [第 7 章：疑難排解](../chapter-07-troubleshooting/README.md)。
 
-## 步驟 6：變更並重新部署
+## 第 6 步：做更改並重新部署
 
-讓我們做個變更，看看更新有多簡單：
+讓我們做個更改，看看更新有多容易：
 
 ### 修改 API
 ```bash
-# 編輯 API 程式碼
-code src/api/src/routes/lists.js
+# Edit the API code
+code src/api/src/routes/lists.ts
 ```
 
 新增自訂回應標頭：
 ```javascript
-// 找到一個路由處理器並加入：
+// Find a route handler and add:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### 僅部署程式碼變更
+### 只部署程式碼變更
 ```bash
-# 僅部署應用程式程式碼（跳過基礎架構）
+# Deploy only the application code (skip infrastructure)
 azd deploy
 
-# 由於基礎架構已存在，這比 'azd up' 快得多
+# This is much faster than 'azd up' since infrastructure already exists
 ```
 
-## 步驟 7：管理多個環境
+## 第 7 步：管理多環境
 
-建立一個預備（staging）環境，在正式環境前測試變更：
+建立測試環境以在生產前測試更改：
 
 ```bash
-# 建立新的暫存環境
+# Create a new staging environment
 azd env new staging
 
-# 部署到暫存環境
+# Deploy to staging
 azd up
 
-# 切換回開發環境
+# Switch back to dev environment
 azd env select dev
 
-# 列出所有環境
+# List all environments
 azd env list
 ```
 
 ### 環境比較
 ```bash
-# 檢視開發環境
+# View dev environment
 azd env select dev
 azd show
 
-# 檢視預發布環境
+# View staging environment  
 azd env select staging
 azd show
 ```
 
-## 步驟 8：清除資源
+## 第 8 步：清理資源
 
-當您完成試驗後，請清理資源以避免持續費用：
+實驗結束後，請清理以免產生持續費用：
 
 ```bash
-# 刪除當前環境的所有 Azure 資源
-azd down
+# Review and delete BOTH environments created in this tutorial
+azd down --environment dev
+azd down --environment staging
 
-# 強制刪除且不需確認，並清除已軟刪除的資源
-azd down --force --purge
-
-# 刪除特定環境
-azd env select staging
-azd down --force --purge
+# Automation alternative for a selected disposable environment:
+# azd down --environment dev --force --purge
+# --purge affects supported soft-deleted Azure resources, not local .azure files.
 ```
 
-## 傳統應用 vs. AI 驅動應用：相同工作流程
+## 傳統應用程式與 AI 驅動應用程式：相同工作流程
 
-您剛才部署的是一個傳統的網頁應用程式。但如果您想部署一個 AI 驅動的應用，例如使用 Microsoft Foundry Models 的聊天應用程式呢？
+您剛部署了一個傳統網頁應用。但如果想部署 AI 驅動的應用，比如由 Microsoft Foundry Models 支援的聊天應用呢？
 
-好消息是：**工作流程是相同的。**
+好消息是：**工作流程相同。**
 
 | 步驟 | 傳統待辦應用 | AI 聊天應用 |
-|------|-------------|-------------|
-| 初始化 | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
-| 驗證 | `azd auth login` | `azd auth login` |
+|------|-----------------|-------------|
+| 初始化 (空目錄) | `azd init --template todo-nodejs-mongo .` | `azd init --template azure-search-openai-demo .` |
+| 身份驗證 | `azd auth login` | `azd auth login` |
 | 部署 | `azd up` | `azd up` |
 | 監控 | `azd monitor` | `azd monitor` |
 | 清理 | `azd down --force --purge` | `azd down --force --purge` |
 
-唯一的差別是您啟始時所選的 <strong>範本</strong>。AI 範本會包括額外的基礎結構（例如 Microsoft Foundry Models 資源或 AI Search 索引），但 azd 會為您處理這些。您不需要學習新的指令、採用不同的工具或改變您對部署的思維方式。
+生命週期指令相同，但前提條件不同。AI 範本可能需要模型存取、區域配額、資料引入及額外配置。部署前請閱讀其 README；`azd up` 無法提供缺少的權限或配額。
 
-這就是 azd 的核心原則：**一種工作流程，適用於任何工作負載。** 您在本教學中練習的技能——初始化、部署、監控、重新部署與清理——同樣適用於 AI 應用程式與代理程式。
+這是 azd 的核心原則：**一套工作流程，適用於任何工作負載。** 您在本教學練習的技能—初始化、部署、監控、重新部署、清理—對 AI 應用和代理同樣適用。
 
 ---
 
-## 您已學會的內容
+## 您學到了什麼
 
-恭喜！您已成功：
+恭喜您！您已成功：
 - ✅ 從範本初始化 azd 專案
-- ✅ 探索專案結構與關鍵檔案
-- ✅ 將全端應用程式部署到 Azure
-- ✅ 變更程式碼並重新部署
+- ✅ 探索專案結構和主要檔案
+- ✅ 部署全端應用程式到 Azure
+- ✅ 做程式碼變更並重新部署
 - ✅ 管理多個環境
 - ✅ 清理資源
 
 ## 🎯 技能驗證練習
 
-### 練習 1：部署不同的範本（15 分鐘）
-<strong>目標</strong>：展示對 azd init 與部署工作流程的掌握
+### 練習 1：部署不同範本（15 分鐘）
+<strong>目標</strong>：展示對 azd init 和部署工作流程的熟練掌握
 
 ```bash
-# 嘗試 Python + MongoDB 堆疊
+# Try Python + MongoDB stack
 mkdir todo-python && cd todo-python
-azd init --template todo-python-mongo
+azd init --template todo-python-mongo .
 azd up
 
-# 驗證部署
+# Verify deployment
 azd show
-curl $(azd show --output json | jq -r '.services.web.endpoint')
+curl --fail "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# 清理
+# Clean up
 azd down --force --purge
 ```
 
 **成功標準：**
 - [ ] 應用程式部署無錯誤
 - [ ] 能在瀏覽器中存取應用程式 URL
-- [ ] 應用程式功能正常（新增/移除 待辦）
+- [ ] 應用程式功能正常（新增/移除待辦）
 - [ ] 成功清理所有資源
 
-### 練習 2：自訂設定（20 分鐘）
-<strong>目標</strong>：練習環境變數設定
+### 練習 2：自訂配置（20 分鐘）
+<strong>目標</strong>：練習本地環境值儲存，並了解其與執行時配置的差異
 
 ```bash
-cd my-first-azd-app
+# Return to your original my-first-azd-app directory first
 
-# 建立自訂環境
+# Create custom environment
 azd env new custom-config
 
-# 設定自訂變數
+# Set custom variables
 azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
 
-# 驗證變數
+# Verify variables
 azd env get-values | grep APP_TITLE
 
-# 使用自訂設定部署
-azd up
+# Check one value exactly; expected: My Custom Todo App
+azd env get-value APP_TITLE
 ```
 
 **成功標準：**
 - [ ] 成功建立自訂環境
-- [ ] 環境變數已設定且可擷取
-- [ ] 應用程式以自訂設定部署成功
-- [ ] 可在已部署的應用程式中驗證自訂設定
+- [ ] 設定並能檢索環境變數
+- [ ] `azd env get-value APP_TITLE` 輸出 `My Custom Todo App`
+- [ ] 能說明為何這些值除非有程式碼/基礎設施使用，否則不會改變基礎範本應用
 
 ### 練習 3：多環境工作流程（25 分鐘）
-<strong>目標</strong>：精通環境管理與部署策略
+<strong>目標</strong>：掌握環境管理與部署策略
 
 ```bash
-# 建立開發環境
+# Create dev environment
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# 記下開發網址
-DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note dev URL
+DEV_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Dev: $DEV_URL"
 
-# 建立預備環境
+# Create staging environment
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# 記下預備網址
-STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Staging: $STAGING_URL"
 
-# 比較環境
+# Compare environments
 azd env list
 
-# 測試兩個環境
-curl "$DEV_URL/health"
-curl "$STAGING_URL/health"
+# Test both environments
+curl --fail "$DEV_URL"
+curl --fail "$STAGING_URL"
 
-# 清理兩個環境
+# Clean up both
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
 **成功標準：**
-- [ ] 建立兩個具有不同設定的環境
-- [ ] 兩個環境皆部署成功
-- [ ] 可使用 `azd env select` 在環境間切換
-- [ ] 不同環境之間的環境變數有所不同
+- [ ] 建立兩個配置不同的環境
+- [ ] 兩個環境成功部署
+- [ ] 能用 `azd env select` 切換環境
+- [ ] 環境變數在環境間不同
 - [ ] 成功清理兩個環境
 
 ## 📊 您的進度
 
-<strong>投入時間</strong>：約 60–90 分鐘  
-<strong>學到的技能</strong>：
-- ✅ 以範本為基礎的專案初始化
+<strong>花費時間</strong>：約 60-90 分鐘  
+<strong>已習得技能</strong>：
+- ✅ 基於範本的專案初始化
 - ✅ Azure 資源佈建
-- ✅ 應用程式部署工作流程
+- ✅ 應用部署流程
 - ✅ 環境管理
-- ✅ 設定管理
+- ✅ 配置管理
 - ✅ 資源清理與成本管理
 
-<strong>下一階段</strong>：您已準備好閱讀 [設定指南](configuration.md) 以學習進階設定模式！
+<strong>下一階段</strong>：您已經準備好閱讀[配置指南](../chapter-03-configuration/configuration.md)以學習進階配置模式！
 
 ## 常見問題排解
 
-### 驗證錯誤
+### 身份驗證錯誤
 ```bash
-# 重新向 Azure 進行身分驗證
-az login
+# Re-authenticate with azd (az login does not refresh azd's default credentials)
+azd auth login
 
-# 驗證訂閱存取權限
-az account show
+# Verify the selected environment's subscription
+azd env get-value AZURE_SUBSCRIPTION_ID
 ```
 
 ### 部署失敗
 ```bash
-# 啟用偵錯記錄
-export AZD_DEBUG=true
+# Enable debug logging
 azd up --debug
 
-# 在 Azure 檢視應用程式記錄
+# View application logs in Azure
 azd monitor --logs
 
-# 對於 Container Apps，請使用 Azure CLI：
+# For Container Apps, use Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
 ### 資源名稱衝突
 ```bash
-# 使用唯一的環境名稱
+# Use a unique environment name
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### 連接埠/網路問題
+### 連接埠／網路問題
 ```bash
-# 檢查埠是否可用
+# Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
 ## 下一步
 
-完成第一個專案後，您可以探索這些進階主題：
+完成您的第一個專案後，探究以下進階主題：
 
-### 1. 自訂基礎結構
-- [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md)
-- [新增資料庫、儲存與其他服務](../chapter-04-infrastructure/provisioning.md#adding-services)
+### 1. 自訂基礎設施
+- [基礎設施即程式碼](../chapter-04-infrastructure/provisioning.md)
+- [新增資料庫基礎設施](../chapter-04-infrastructure/provisioning.md#%EF%B8%8F-database-provisioning)
 
-### 2. 設定 CI/CD
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - 完整 CI/CD 工作流程
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - 管線設定
+### 2. 設定持續整合／持續部署 (CI/CD)
+- [部署指南](../chapter-04-infrastructure/deployment-guide.md) - 完整 CI/CD 流程
+- [Azure Developer CLI 文件](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - 管線配置
 
-### 3. 生產環境最佳實務
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - 安全性、效能與監控
+### 3. 生產最佳實踐
+- [部署指南](../chapter-04-infrastructure/deployment-guide.md) - 安全性、效能與監控
 
 ### 4. 探索更多範本
 ```bash
-# 按類別瀏覽範本
+# Browse templates by category
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# 嘗試不同的技術堆疊
-azd init --template todo-python-mongo
-azd init --template todo-csharp-sql
-azd init --template todo-java-mongo
+# Try different technology stacks
+# Choose ONE in a new empty directory, not all three in the same project
+azd init --template todo-python-mongo .
+# azd init --template todo-csharp-sql .
+# azd init --template todo-java-mongo .
 ```
 
-## 其他資源
+## 額外資源
 
-### 學習資料
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+### 學習材料
+- [Azure Developer CLI 文件](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure 架構中心](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure 良好架構框架](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### 社群與支援
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer 社群](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### 範本與範例
-- [Official Template Gallery](https://azure.github.io/awesome-azd/)
-- [Community Templates](https://github.com/Azure-Samples/azd-templates)
-- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
+- [官方範本畫廊](https://azure.github.io/awesome-azd/)
+- [社群範本貢獻](https://github.com/Azure/awesome-azd)
+- [待辦範本原始碼](https://github.com/Azure-Samples/todo-nodejs-mongo)
 
 ---
 
-**恭喜完成您的第一個 azd 專案！** 您現在已能自信地在 Azure 上建立與部署出色的應用程式。
+**恭喜完成您的第一個 azd 專案！** 您現在已準備好自信地在 Azure 上建置及部署出色的應用程式。
 
 ---
 
-**章節導覽:**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 目前章節**: 第 1 章 - 基礎與快速上手
-- **⬅️ 上一章**: [Installation & Setup](installation.md)
-- **➡️ 下一章**: [使用您自己的應用](bring-your-own-app.md)
-- **🚀 下一章節**: [第 2 章：以 AI 為先的開發](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**章節導覽：**
+- **📚 課程首頁**： [AZD 新手入門](../../README.md)
+- **📖 目前章節**： 第一章 - 基礎與快速開始
+- **⬅️ 上一章**： [安裝與設定](installation.md)
+- **➡️ 下一章**： [帶入您自己的應用](bring-your-own-app.md)
+- **🚀 下一章節**： [第二章：AI 優先開發](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 

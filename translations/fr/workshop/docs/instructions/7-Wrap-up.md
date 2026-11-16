@@ -1,11 +1,11 @@
 # 7. Conclusion et prochaines étapes
 
-!!! tip "LES MESSAGES CLÉS SONT"
+!!! tip "LES PRINCIPAUX MESSAGES À RETENIR SONT"
 
-    - [ ] Les modèles AZD accélèrent le développement d'applications IA de jours à heures
-    - [ ] La méthodologie Découverte → Déploiement → Personnalisation offre un parcours d’apprentissage structuré
-    - [ ] GitHub Copilot avec les serveurs MCP permet l’exploration en langage naturel de bases de code complexes
-    - [ ] Microsoft Foundry fournit des fonctionnalités intégrées d’observabilité, d’évaluation et de tests de sécurité
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
@@ -16,11 +16,11 @@ Félicitations ! Lors de cet atelier, vous avez réussi à :
 | Module | Accomplissement |
 |:---|:---|
 | **Module 1** | Découvrir Azure Developer CLI et sélectionner un modèle IA |
-| **Module 2** | Déployer et valider une solution complète d’agents IA |
+| **Module 2** | Déployer et valider une solution complète d'agents IA |
 | **Module 3** | Déconstruire le modèle pour comprendre son architecture |
-| **Module 4** | Explorer la configuration `azure.yaml` et les hooks du cycle de vie |
+| **Module 4** | Explorer `azure.yaml` la configuration et les hooks du cycle de vie |
 | **Module 5** | Personnaliser le modèle pour votre propre scénario |
-| **Module 6** | Démanteler l'infrastructure en toute sécurité et gérer les ressources |
+| **Module 6** | Démanteler l'infrastructure de manière sécurisée et gérer les ressources |
 
 ---
 
@@ -33,47 +33,47 @@ Félicitations ! Lors de cet atelier, vous avez réussi à :
 - `azd down` - Nettoyer les ressources en toute sécurité
 
 ### Structure du modèle AZD
-- `azure.yaml` - Configuration et hooks de déploiement
-- `infra/` - Infrastructure en tant que code Bicep
+- `azure.yaml` - Hooks de configuration et de déploiement
+- `infra/` - Infrastructure-as-code Bicep
 - `src/` - Code source de l'application
-- `scripts/` - Scripts d’automatisation et d’installation
+- `scripts/` - Scripts d'automatisation et de configuration
 
-### Capacités de Microsoft Foundry
-- Service d’agents IA pour assistants intelligents
-- Recherche de fichiers et Azure AI Search pour la récupération de connaissances
-- Tracing, surveillance et évaluation intégrés
+### Capacités Microsoft Foundry
+- Service d'agents IA pour assistants intelligents
+- Recherche de fichiers et Azure AI Search pour la recherche de connaissances
+- Traçage, surveillance et évaluation intégrés
 - Red teaming pour la validation de la sécurité IA
 
 ---
 
-## 3. Poursuivez votre apprentissage
+## 3. Poursuivez votre parcours d'apprentissage
 
 ### Prochaines étapes recommandées
 
 | Parcours | Ressource | Durée |
 |:---|:---|:---|
-| **Cours complet** | [Curriculum AZD pour débutants](../../README.md) | 8-12 heures |
+| **Compléter le cours** | [Programme AZD pour débutants](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | À votre rythme |
 | **Essayer un autre modèle** | [Modèles Microsoft Foundry](https://ai.azure.com/templates) | 1-2 heures |
 | **Approfondir** | [Documentation Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | En continu |
-| **Communauté** | [Azure Discord](https://aka.ms/foundry/discord) | Rejoignez dès aujourd’hui ! |
+| **Communauté** | [Discord Azure](https://aka.ms/foundry/discord) | Rejoignez dès aujourd'hui ! |
 
-### Modèles suggérés pour la suite
+### Modèles suggérés à essayer ensuite
 
-1. **[Démarrer avec AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Chat basique avec vos données  
-2. **[Démo Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Modèles RAG avancés  
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Scénarios d’entreprise retail  
+1. **[Commencer avec le chat IA](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Chat basique avec vos données
+2. **[Démo Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Modèles avancés RAG
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Scénarios de grande distribution d'entreprise
 
 ---
 
-## 4. Défi de l’atelier
+## 4. Défi de l'atelier
 
 Prêt à tester vos compétences ? Essayez ces défis :
 
 | Défi | Description | Difficulté |
 |:---|:---|:---|
-| **1. Scénario multi-agents** | Déployer et personnaliser pour une industrie différente (ex. santé, finance) | ⭐⭐ |
+| **1. Scénario multi-agent** | Déployer et personnaliser pour un secteur différent (ex : santé, finance) | ⭐⭐ |
 | **2. Base de connaissances personnalisée** | Ajouter vos propres fichiers de données et créer un index de recherche personnalisé | ⭐⭐⭐ |
-| **3. Déploiement en production** | Mettre en place CI/CD avec GitHub Actions via `azd pipeline config` | ⭐⭐⭐⭐ |
+| **3. Déploiement en production** | Mettre en place CI/CD avec GitHub Actions en utilisant `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
@@ -81,30 +81,30 @@ Prêt à tester vos compétences ? Essayez ces défis :
 
 Vos retours nous aident à améliorer cet atelier !
 
-- **GitHub Issues** : [Publiez vos retours](https://github.com/microsoft/azd-for-beginners/issues) - taggez `Workshop`  
-- **Discord** : Rejoignez [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - postez dans `#get-help`  
-- **Contributions** : Aidez à améliorer l’atelier en soumettant des pull requests !
+- **Problèmes GitHub** : [Publiez vos retours](https://github.com/microsoft/azd-for-beginners/issues) - taguez avec `Workshop`
+- **Discord** : Rejoignez [Discord Microsoft Foundry](https://aka.ms/foundry/discord) - postez dans `#get-help`
+- **Contributions** : Aidez à améliorer l'atelier en soumettant des pull requests !
 
 ---
 
 ## Merci ! 🎉
 
-Merci d'avoir complété l’atelier AZD pour les développeurs IA. Nous espérons que cette expérience vous a donné les compétences et la confiance pour construire et déployer des applications IA sur Azure.
+Merci d'avoir suivi l'atelier AZD for AI Developers. Nous espérons que cette expérience vous a doté des compétences et de la confiance pour créer et déployer des applications IA sur Azure.
 
-**Continuez à bâtir, continuez à apprendre, et bienvenue dans la communauté des développeurs Azure AI !**
+**Continuez à construire, continuez à apprendre, et bienvenue dans la communauté des développeurs IA Azure !**
 
 ---
 
 | | |
 |:---|:---|
-| **📚 Page d’accueil du cours** | [AZD pour débutants](../../README.md) |
+| **📚 Accueil du cours** | [AZD pour débutants](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
 | **📖 Documentation** | [Docs Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
 | **🛠️ Modèles IA** | [Modèles Microsoft Foundry](https://ai.azure.com/templates) |
-| **💬 Communauté** | [Azure Discord](https://aka.ms/foundry/discord) |
+| **💬 Communauté** | [Discord Azure](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Avertissement** :  
-Ce document a été traduit à l’aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d’assurer l’exactitude, veuillez noter que les traductions automatiques peuvent comporter des erreurs ou des inexactitudes. Le document original dans sa langue d’origine doit être considéré comme la source faisant autorité. Pour toute information critique, il est recommandé de faire appel à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d’interprétations erronées résultant de l’utilisation de cette traduction.
+**Avertissement** :
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforçions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant autorité. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous ne saurions être tenus responsables des malentendus ou erreurs d'interprétation découlant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

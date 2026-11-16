@@ -37,10 +37,10 @@ With regular reference to this cheat sheet, you will be able to:
 # Login to Azure via AZD
 azd auth login
 
-# Login to Azure CLI (AZD uses this under the hood)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# Check current account
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
 # Set default subscription
@@ -59,15 +59,16 @@ az logout
 # Browse available templates
 azd template list
 
-# Initialize from template
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
 # Initialize in current directory
 azd init .
 
 # Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
 ## Core Deployment Commands
@@ -78,13 +79,14 @@ azd init --template todo-nodejs-mongo my-awesome-app
 azd up
 
 # Deploy with confirmation prompts disabled
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 # Deploy to specific environment
 azd up --environment production
 
-# Deploy with custom parameters
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
 ### Infrastructure Only
@@ -94,8 +96,8 @@ azd provision
 
 # 🧪 Preview infrastructure changes
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
 ### Application Only
@@ -104,8 +106,8 @@ azd provision --preview
 azd deploy
 
 # Deploy specific service
-azd deploy --service web
-azd deploy --service api
+azd deploy web
+azd deploy api
 
 # Deploy all services
 azd deploy --all
@@ -117,18 +119,18 @@ azd deploy --all
 azd restore
 
 # Restore a specific service
-azd restore --service api
+azd restore api
 
 # Build a deployable artifact without deploying
 azd package
 
 # Build specific service
-azd package --service api
+azd package api
 ```
 
 > **`azd restore`** downloads your app's dependencies (npm, pip, NuGet, Maven, etc.). It runs automatically during `azd package` and `azd deploy`, so you rarely call it directly—run it manually to pre-fetch dependencies (for example, to warm a CI cache or work offline afterward).
 
-> **`azd package`** builds the deployable artifact (a container image or zip) **without** pushing it to Azure. Use it on its own to verify a build succeeds, inspect the output, or produce an artifact a separate process will deploy later. `azd deploy` packages automatically, so you only need `azd package` when you want the artifact without deploying.
+> **`azd package`** prepares a deployable artifact without deploying the application service. Behavior depends on the language and host: container packaging can use Azure remote builds and publish images to a registry, so it is not necessarily offline or free of Azure writes. `azd deploy` can package automatically; use a separate package step when you need an artifact or a build check.
 
 
 ## 🌍 Environment Management
@@ -155,18 +157,20 @@ azd env refresh
 ### Environment Variables
 ```bash
 # Set environment variable
-azd env set API_KEY "your-secret-key"
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
 # Get environment variable
-azd env get API_KEY
+azd env get-value LOG_LEVEL
 
 # List all environment variables
 azd env get-values
 
-# Remove environment variable
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
+
+Environment files are plaintext. Do not treat `azd env set` as secret storage; use Key Vault references or managed identity as appropriate.
 
 ## ⚙️ Configuration Commands
 
@@ -188,8 +192,8 @@ azd config reset
 
 ### Project Configuration
 ```bash
-# Validate azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
 # Show project information
 azd show
@@ -214,6 +218,8 @@ azd monitor --logs
 # Open Application Insights overview
 azd monitor --overview
 ```
+
+Application Insights must be configured by the template. AZD's Live Metrics option is not currently supported for Python applications; use the overview, logs, or the sample's documented tracing workflow instead.
 
 ### Viewing Container Logs
 ```bash
@@ -277,8 +283,8 @@ azd pipeline config
 # Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
 ### Infrastructure Management
@@ -291,12 +297,12 @@ azd provision --preview
 # Simulates infrastructure provisioning without deploying
 # Analyzes Bicep/Terraform templates and shows:
 # - Resources to be added (green +)
-# - Resources to be modified (yellow ~)
+# - Resources to be modified (yellow ~) 
 # - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# Synthesize infrastructure from azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ### Project Information
@@ -314,12 +320,18 @@ azd show --output json | jq '.services'
 ## 🤖 AI & Extensions Commands
 
 ### AZD Extensions
+
+AI CLI reference reviewed 2026-11-04: `azd 1.37.2`, agents `1.0.0-beta.23`, evaluations `1.0.0-beta.2`. Use `azd >= 1.37.0` for the combined workflow; upgrade the core CLI before incompatible extensions.
+
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
 # Install the Foundry agents extension
 azd extension install azure.ai.agents
+
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
 
 # Install the agent skills extension (preview)
 azd extension install azure.ai.skills
@@ -339,17 +351,17 @@ azd extension upgrade --all
 
 ### AI Agent Commands
 ```bash
-# Initialize an agent project from a manifest
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
+
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
 # Target a specific Foundry project
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# Specify the agent source directory
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
-
-# Choose a hosting target
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
@@ -357,16 +369,35 @@ azd ai agent invoke
 # Show the live endpoint configuration
 azd ai agent endpoint show
 
-# Generate an evaluation dataset, then optimize the agent
-azd ai agent eval generate
-azd ai agent optimize
-
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
 # Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
+
+`--template`/`-t` replaces the deprecated `--manifest`/`-m` spelling; legacy manifests need migration. There is no current agent-init `--host containerapp` option. Managed-harness, voice, and long-running previews need independent shell/CI environment opt-ins; see the [AI CLI reference](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+### AI Evaluations and Optimization
+```bash
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+Agents beta.22 replaced legacy evaluation commands with `azd ai eval` from `azure.ai.evaluations`. New evaluation configuration uses camelCase keys. Optimization `--config` takes a standalone optimization API request, **not** legacy `eval.yaml` or new `azure.eval.yaml`; use `--eval`/`--eval-config` for evaluation reuse. See [evaluation setup](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) and [optimization migration](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
 ### MCP Server (Alpha)
 ```bash
@@ -382,8 +413,8 @@ azd copilot consent list
 # Generate IaC files from your project definition
 azd infra generate
 
-# Synthesize infrastructure from azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
@@ -392,8 +423,8 @@ azd infra synth
 
 ### Development Workflow
 ```bash
-# Start new project
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
 # Deploy to development
@@ -429,11 +460,8 @@ azd up
 
 ### Troubleshooting Workflow
 ```bash
-# Enable debug mode
-export AZD_DEBUG=true
-
 # Check deployment status
-azd show
+azd show --debug
 
 # Validate configuration
 azd config show
@@ -449,18 +477,17 @@ azd show --output json
 
 ### Debug Information
 ```bash
-# Enable debug output
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
 # Disable telemetry for cleaner output
-export AZD_DISABLE_TELEMETRY=true
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
 # Check current configuration
 azd config show
 
-# Check authentication status
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
 ### Template Debugging
@@ -471,8 +498,8 @@ azd template list --output json
 # Show template information
 azd template show <template-name>
 
-# Validate template before init
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
 ## 📁 File and Directory Commands
@@ -483,8 +510,8 @@ azd template validate <template-name>
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigate to azd project root
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
 # Show azd configuration directory
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
@@ -500,14 +527,14 @@ azd env list --output json
 azd config show --output json
 
 # Parse with jq
-azd show --output json | jq '.services.web.endpoint'
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### Table Output
 ```bash
-# Format as table
-azd env list --output table
+# Human-readable environment table
+azd env list
 
 # View deployed services
 azd show --output json | jq '.services | keys'
@@ -539,20 +566,16 @@ az account show
 # Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
 ### Resource Cleanup Script
 ```bash
 #!/bin/bash
-# Clean up old environments
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
 ## 📝 Environment Variables
@@ -565,9 +588,8 @@ export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
 # AZD configuration
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
 # Application configuration
 export NODE_ENV="production"
@@ -578,9 +600,8 @@ export LOG_LEVEL="info"
 
 ### Quick Fixes
 ```bash
-# Reset authentication
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
 # Force refresh environment
 azd env refresh
@@ -594,9 +615,9 @@ azd show --output json
 
 ### Recovery Commands
 ```bash
-# Recover from failed deployment - clean and redeploy
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
 # Reprovision infrastructure only
 azd provision
@@ -620,12 +641,12 @@ alias azde='azd env'
 ```bash
 # Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
 # Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
 # Environment status
@@ -671,7 +692,7 @@ azd template show <template-name> --docs
 ---
 
 **Navigation**
-- **Previous Lesson**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
+- **Previous Lesson**: [Preflight Checks](../docs/chapter-06-pre-deployment/preflight-checks.md)
 - **Next Lesson**: [Glossary](glossary.md)
 
 ---

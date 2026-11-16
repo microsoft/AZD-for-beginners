@@ -1,50 +1,52 @@
 # Microsoft Foundry Integration mit AZD
 
 **Kapitel-Navigation:**
-- **📚 Kursstart**: [AZD für Einsteiger](../../README.md)
-- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-zentrierte Entwicklung
-- **⬅️ Vorheriges Kapitel**: [Kapitel 1: Ihr erstes Projekt](../chapter-01-foundation/first-project.md)
-- **➡️ Nächstes**: [Bereitstellung von KI-Modellen](ai-model-deployment.md)
+- **📚 Kurs Startseite**: [AZD Für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-Zentrierte Entwicklung
+- **⬅️ Vorheriges Kapitel**: [Kapitel 1: Dein erstes Projekt](../chapter-01-foundation/first-project.md)
+- **➡️ Nächstes**: [KI-Agenten](agents.md)
 - **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
 ## Übersicht
 
-Diese Anleitung zeigt, wie Microsoft Foundry-Dienste mit Azure Developer CLI (AZD) für eine optimierte Bereitstellung von KI-Anwendungen integriert werden. Microsoft Foundry bietet eine umfassende Plattform zum Erstellen, Bereitstellen und Verwalten von KI-Anwendungen, während AZD den Infrastruktur- und Bereitstellungsprozess vereinfacht.
+Diese Anleitung zeigt, wie Microsoft Foundry-Dienste mit Azure Developer CLI (AZD) für optimierte KI-Anwendungsbereitstellungen integriert werden. Microsoft Foundry bietet eine umfassende Plattform zum Erstellen, Bereitstellen und Verwalten von KI-Anwendungen, während AZD den Infrastruktur- und Bereitstellungsprozess vereinfacht.
 
 ## Was ist Microsoft Foundry?
 
-Microsoft Foundry ist Microsofts einheitliche Plattform für KI-Entwicklung, die umfasst:
+Microsoft Foundry ist Microsofts einheitliche Plattform für KI-Entwicklung, die beinhaltet:
 
-- **Modellkatalog**: Zugang zu hochmodernen KI-Modellen
+- **Modellkatalog**: Zugriff auf moderne KI-Modelle
 - **Prompt Flow**: Visueller Designer für KI-Workflows
 - **Microsoft Foundry Portal**: Integrierte Entwicklungsumgebung für KI-Anwendungen
 - **Bereitstellungsoptionen**: Verschiedene Hosting- und Skalierungsoptionen
-- **Sicherheit und Schutz**: Eingebaute verantwortungsvolle KI-Funktionen
+- **Sicherheit und Schutz**: Eingebaute verantwortungsbewusste KI-Funktionen
 
-## AZD + Microsoft Foundry: Gemeinsam besser
+## AZD + Microsoft Foundry: Besser zusammen
 
-| Merkmal | Microsoft Foundry | Vorteil der AZD-Integration |
+| Funktion | Microsoft Foundry | AZD Integrationsvorteil |
 |---------|-----------------|------------------------|
-| **Modellbereitstellung** | Manuelle Portalbereitstellung | Automatisierte, wiederholbare Bereitstellungen |
-| **Infrastruktur** | Klick-für-Klick Bereitstellung | Infrastruktur als Code (Bicep) |
+| **Modellbereitstellung** | Manuelle Portal-Bereitstellung | Automatisierte, wiederholbare Bereitstellungen |
+| **Infrastruktur** | Klick-basierte Bereitstellung | Infrastruktur als Code (Bicep) |
 | **Umgebungsverwaltung** | Fokus auf einzelne Umgebung | Mehrere Umgebungen (Dev/Staging/Prod) |
-| **CI/CD-Integration** | Eingeschränkt | Native Unterstützung für GitHub Actions |
-| **Kostenmanagement** | Grundlegende Überwachung | Umweltbezogene Kostenoptimierung |
+| **CI/CD-Integration** | Eingeschränkt | Native GitHub Actions Unterstützung |
+| **Kostenverwaltung** | Grundüberwachung | Umgebungspezifische Kostenoptimierung |
 
 ## Voraussetzungen
 
-- Azure-Abonnement mit passenden Berechtigungen
-- Installierte Azure Developer CLI
-- Zugriff auf Microsoft Foundry Models-Dienste
-- Grundlegende Vertrautheit mit Microsoft Foundry
+- Azure-Abonnement mit entsprechenden Berechtigungen
+- Azure Developer CLI installiert
+- Zugriff auf Microsoft Foundry Models Dienste
+- Grundkenntnisse zu Microsoft Foundry
 
-> **Aktuelle AZD-Basisversion:** Diese Beispiele wurden mit `azd` `1.27.1` geprüft. Für den KI-Agenten-Workflow verwenden Sie die aktuelle Vorschauversion der Erweiterung und prüfen Sie vor Beginn Ihre installierte Version.
+> **Release-Überprüfung (2026-11-04):** Die KI-CLI-Anleitung wurde gegen `azd` `1.37.2`, Agenten `1.0.0-beta.23` und Evaluierungsdokumentation/-quellen `1.0.0-beta.2` geprüft. Verwenden Sie `azd >= 1.37.0` für den kombinierten Workflow. Siehe [Release-Änderungen und -Fixes](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes); diese Prüfung zertifiziert nicht jede Vorlage oder SDK-Beispiel anhand einer Live-Bereitstellung.
 
-## Kernintegration Patterns
+## Kernintegrationsmuster
 
-### Pattern 1: Integration von Microsoft Foundry Models
+**Reichweite der Beispiele:** Das folgende Bicep enthält illustrative Ressourcenfragmente, keine vollständige einsatzbereite Vorlage. Die übergeordnete Vorlage muss Namen, `location`, referenzierte Ressourcen, Identitäten, Outputs und Hosting der Anwendung definieren. Verwenden Sie eine verlinkte Beispielvorlage als ausführbaren Ausgangspunkt. Bash-Beispiele erfordern eine separate Azure CLI-Authentifizierung neben `azd auth login`.
 
-**Anwendungsfall**: Bereitstellung von Chat-Anwendungen mit Microsoft Foundry Models Modellen
+### Muster 1: Microsoft Foundry Models Integration
+
+**Anwendungsfall**: Bereitstellung von Chat-Anwendungen mit Azure OpenAI-Modellen in Microsoft Foundry
 
 ```yaml
 # azure.yaml
@@ -54,8 +56,7 @@ services:
     project: ./api
     host: containerapp
     env:
-      - AZURE_OPENAI_ENDPOINT
-      - AZURE_OPENAI_API_KEY
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
 ```
 
 **Infrastruktur (main.bicep):**
@@ -70,7 +71,7 @@ resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   }
   properties: {
     customSubDomainName: openAIAccountName
-    disableLocalAuth: false
+    disableLocalAuth: true
   }
 }
 
@@ -82,19 +83,21 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
-    scaleSettings: {
-      scaleType: 'Standard'
-      capacity: 30
-    }
+  }
+  sku: {
+    name: 'Standard'
+    capacity: 30 // 30,000 TPM for this text-model deployment type
   }
 }
 ```
 
-### Pattern 2: AI-Suche + RAG-Integration
+Der Aufrufer benötigt eine angehängte verwaltete Identität und `Cognitive Services OpenAI User` auf Kontoebene; das Deaktivieren von Schlüsseln gewährt keinen Zugriff. Prüfen Sie Region/Modell/SKU-Verfügbarkeit und Kontingent vor der Bereitstellung.
 
-**Anwendungsfall**: Bereitstellung von Retrieval Augmented Generation (RAG)-Anwendungen
+### Muster 2: KI-Suche + RAG-Integration
+
+**Anwendungsfall**: Bereitstellung von Retrieval-Augmented Generation (RAG)-Anwendungen
 
 ```bicep
 // Azure AI Search
@@ -111,20 +114,13 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
   }
 }
 
-// Connect Search with OpenAI
-resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-11-01' = {
-  parent: searchService
-  name: 'openai-connection'
-  properties: {
-    targetResourceId: openAIAccount.id
-    authenticationMethod: 'managedIdentity'
-  }
-}
 ```
 
-### Pattern 3: Dokumentenintelligenz-Integration
+Es gibt keine `Microsoft.Search/searchServices/dataConnections` ARM-Ressource für diese Integration. Konfigurieren Sie einen Suchindex, eine Datenquelle, Indexer/Skillset oder Vektorisierer über die unterstützten Search Data-Plane APIs. Wenn Search ein Einbettungsmodell aufruft, aktivieren Sie dessen verwaltete Identität, gewähren die relevante Modellrolle und konfigurieren die Einbettungs-Fähigkeit bzw. den Vektorisierer. Siehe [integrierte Vektorisierung](https://learn.microsoft.com/azure/search/vector-search-integrated-vectorization).
 
-**Anwendungsfall**: Dokumentenverarbeitung und Analyse-Workflows
+### Muster 3: Dokumentenintelligenz-Integration
+
+**Anwendungsfall**: Dokumentenverarbeitungs- und Analyse-Workflows
 
 ```bicep
 // Document Intelligence service
@@ -155,35 +151,39 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 Konfigurations-Patterns
+## 🔧 Konfigurationsmuster
 
 ### Einrichtung von Umgebungsvariablen
 
+Mit Ausnahme der dokumentierten AZD-Einstellungen wie `AZURE_LOCATION` sind dies **eigene Vorlagen-Eingabenamen**. Sie wirken nur, wenn die Vorlage/Anwendung sie via Parameter- und Host-Umgebungsmapping nutzt. Für `azure-search-openai-demo` verwenden Sie deren tatsächliche Namen wie `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY` und `AZURE_SEARCH_SERVICE_SKU`. Modellkapazität ist nicht Konten-SKU.
+
 **Produktionskonfiguration:**
 ```bash
-# Kern-KI-Dienste
+# Core AI services
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Modellkonfigurationen
+# Model configurations
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
-# Leistungseinstellungen
+# Performance settings
 azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
 **Entwicklungskonfiguration:**
 ```bash
-# Kostenoptimierte Einstellungen für die Entwicklung
+# Cost-optimized settings for development
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Kostenloses Kontingent
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
 ```
 
 ### Sichere Konfiguration mit Key Vault
+
+Bevorzugen Sie Entra ID mit lokal deaktivierter Schlüssel-Authentifizierung. Das Folgende ist nur eine **Legacy-Alternative mit Schlüssel-Authentifizierung** für Anwendungen, die Schlüssel benötigen: Erfordert ein Konto mit aktivierter Schlüssel-Authentifizierung, die Anwendung-Identität am Host angebunden und funktionierenden Key Vault Zugriff/Netzwerk. Kombinieren Sie keine Schlüsselerfassung mit `disableLocalAuth: true` und erwarten Schlüssel-basierte Aufrufe.
 
 ```bicep
 // Key Vault for secrets
@@ -192,6 +192,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   location: location
   properties: {
     tenantId: tenant().tenantId
+    enableRbacAuthorization: false // This fragment deliberately uses access policies
     sku: {
       family: 'A'
       name: 'standard'
@@ -222,67 +223,70 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### AZD-Erweiterungen für Foundry
 
-AZD bietet Erweiterungen, die KI-spezifische Fähigkeiten für die Arbeit mit Microsoft Foundry-Diensten hinzufügen:
+AZD bietet Erweiterungen, die KI-spezifische Funktionen für die Arbeit mit Microsoft Foundry-Diensten hinzufügen:
 
 ```bash
-# Installieren Sie die Foundry-Agenten-Erweiterung
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Installieren Sie die Fine-Tuning-Erweiterung
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Installieren Sie die benutzerdefinierte Modelle-Erweiterung
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Auflisten der installierten Erweiterungen
+# List installed extensions
 azd extension list --installed
 
-# Überprüfen Sie die derzeit installierte Version der Agenten-Erweiterung
+# Inspect the currently installed agent extension version
 azd extension show azure.ai.agents
 ```
 
-Die KI-Erweiterungen entwickeln sich in der Vorschau noch schnell weiter. Sollte ein Befehl anders funktionieren als hier gezeigt, aktualisieren Sie die betreffende Erweiterung, bevor Sie das Projekt selbst prüfen.
+Die KI-Erweiterungen entwickeln sich im Preview-Modus schnell weiter. Wenn ein Befehl sich anders verhält als hier gezeigt, aktualisieren Sie die jeweilige Erweiterung bevor Sie im Projekt forschen.
 
 ### Agent-First-Bereitstellung mit `azd ai`
 
-Wenn Sie ein Agenten-Manifest haben, verwenden Sie `azd ai agent init`, um ein Projekt zu starten, das mit dem Foundry Agent Service verbunden ist:
+Verwenden Sie `azd ai agent init` interaktiv oder übernehmen Sie eine aktuelle `azure.yaml` Agent-Projektvorlage, die mit Foundry Agent Service verbunden ist:
 
 ```bash
-# Von einem Agentenmanifest initialisieren
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Initialize from a current project template (supply your template path)
+azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <foundry-project-id>
 
-# Nach Azure bereitstellen
+# Deploy to Azure
 azd up
 ```
 
-Neuere Vorschauversionen von `azure.ai.agents` haben auch Vorlagen-basierte Initialisierungsunterstützung für `azd ai agent init` hinzugefügt. Wenn Sie neuere Agenten-Beispiele folgen, schauen Sie in die Hilfeseite der Erweiterung für die verfügbaren Flags in Ihrer installierten Version.
+`--template`/`-t` ersetzt die veraltete Schreibweise `--manifest`/`-m`; ältere Manifest- und verschachtelte Agent-Konfiguration erfordert weiterhin Migration. Evaluieren Sie Agenten mit `azd ai eval` von `azure.ai.evaluations`, nicht mit dem entfernten Legacy-Workflow. Siehe [Evaluierungsmigration](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) für Einrichtung, Ausführung und Ergebnisse.
 
-Siehe [AZD AI CLI-Befehle](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) für die vollständige Befehlsreferenz und Flags.
+Siehe [AZD KI CLI Befehle](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) für die vollständige Befehlsreferenz und Optionen.
 
-### Bereitstellung mit einem einzigen Befehl
+### Einzelbefehl-Bereitstellung
 
 ```bash
-# Alles mit einem Befehl bereitstellen
+# Deploy everything with one command
 azd up
 
-# Oder inkrementell bereitstellen
-azd provision  # Nur Infrastruktur
-azd deploy     # Nur Anwendung
+# Or deploy incrementally
+azd provision  # Infrastructure only
+azd deploy     # Application only
 
-# Für lang laufende KI-App-Bereitstellungen in azd 1.23.11+
+# For long-running AI app deployments in azd 1.23.11+
 azd deploy --timeout 1800
 ```
 
 ### Umgebungs-spezifische Bereitstellungen
 
 ```bash
-# Entwicklungsumgebung
+# Development environment
 azd env new development
 azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# Produktionsumgebung
+# Production environment
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -292,7 +296,7 @@ azd up
 
 ## Überwachung und Beobachtbarkeit
 
-### Application Insights Integration
+### Integration von Application Insights
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -307,34 +311,30 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 }
 
 // Custom metrics for AI operations
-resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01' = {
-  parent: applicationInsights
-  name: 'AI-Metrics'
-  properties: {
-    name: 'AI Operations Metrics'
-    content: '''
-      requests
-      | where name contains "openai"
-      | summarize 
-          RequestCount = count(),
-          AvgDuration = avg(duration),
-          SuccessRate = countif(success == true) * 100.0 / count()
-      by bin(timestamp, 5m)
-    '''
-  }
-}
+```
+
+Dies stellt eine Insights-Ressource bereit, keine Telemetrieinstrumentierung. Sobald Ihre App ausgehende Modellaufrufspannen ausgibt, führen Sie folgende illustrative Abfrage in Application Insights Logs aus (passen Sie Filter an Ihre tatsächlichen Span-Namen an):
+
+```kusto
+dependencies
+| where target contains "openai"
+| summarize RequestCount = count(), AvgDuration = avg(duration),
+    SuccessRate = countif(success == true) * 100.0 / count()
+  by bin(timestamp, 5m)
 ```
 
 ### Kostenüberwachung
 
 ```bicep
+// Supply the first day of the current UTC month, e.g. 2026-11-01T00:00:00Z.
+param budgetStartDate string
+
 // Budget alert for AI services
-resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
   name: 'ai-services-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 500
@@ -353,9 +353,11 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
+Verwenden Sie einen echten Empfänger und prüfen Sie Abrechnungsbereich-Berechtigungen. Ein Budget sendet Warnungen; es ist keine Ausgabengrenze.
+
 ## 🔐 Sicherheit Best Practices
 
-### Konfiguration verwalteter Identitäten
+### Verwaltung von Managed Identity
 
 ```bicep
 // Managed identity for the web application
@@ -377,6 +379,8 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 ```
 
 ### Netzwerksicherheit
+
+Dieses Endpunktfragment benötigt außerdem eine private DNS-Zone/-Gruppe, VNet-Links, Anwendungs-VNet-Konnektivität und eine explizit öffentliche Zugriffspolitik. Ein privater Endpunkt allein deaktiviert keinen öffentlichen Zugriff.
 
 ```bicep
 // Private endpoints for AI services
@@ -411,12 +415,12 @@ services:
     project: ./api
     host: containerapp
     env:
-      - REDIS_CONNECTION_STRING
-      - CACHE_TTL=3600
+      REDIS_CONNECTION_STRING: ${REDIS_CONNECTION_STRING}
+      CACHE_TTL: "3600"
 ```
 
 ```bicep
-// Redis cache for AI responses
+// Existing Azure Cache for Redis example; use Azure Managed Redis for new designs.
 resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
   name: redisCacheName
   location: location
@@ -432,7 +436,11 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Auto-Skalierungs-Konfiguration
+Azure Cache für Redis Basic/Standard/Premium wird [eingestellt](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq); Verwenden Sie für neue Bereitstellungen Azure Managed Redis und folgen Sie dessen aktueller Vorlage/Authentifizierungsanleitung. Begrenzen Sie gecachte KI-Antworten nach Autorisierung, Modell/Anweisungen und Datenversion mit Ablaufzeit; teilen Sie private Antworten niemals nur anhand von Abfragetext.
+
+### Auto-Skalierungskonfiguration
+
+**Teilressource:** Fügen Sie diese Skalierungs- und Ingress-Einstellungen einer vollständigen Container-App mit verwalteter Umgebung, Container-Image und Ressourcenlimits hinzu. Mehr Replikate erhöhen kein Modell-Kontingent.
 
 ```bicep
 // Container App with auto-scaling
@@ -466,62 +474,68 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Fehlerbehebung häufiger Probleme
+## Fehlerbehebung bei häufigen Problemen
 
-### Problem 1: OpenAI-Quota überschritten
+### Problem 1: OpenAI-Kontingent überschritten
 
 **Symptome:**
-- Bereitstellung schlägt mit Quota-Fehlern fehl
+- Bereitstellung schlägt mit Kontingentfehlern fehl
 - 429-Fehler in Anwendungsprotokollen
 
 **Lösungen:**
 ```bash
-# Überprüfen Sie die aktuelle Kontingentnutzung
+# Check current quota usage
 az cognitiveservices usage list --location eastus
 
-# Versuchen Sie eine andere Region
+# Try a different region in a NEW disposable environment, not by moving resources
+azd env new quota-region-test
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Kapazität vorübergehend reduzieren
+# Alternative: select the ORIGINAL environment before reducing its capacity
+# azd env select <original-environment>
 azd env set AZURE_OPENAI_CAPACITY 10
-azd deploy
+azd provision
 ```
+
+Die oben genannte Kapazitätsvariable gilt nur für eine benutzerdefinierte Vorlage, die sie verwendet. Nutzen Sie für das RAG-Beispiel `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`. Ändern Sie `AZURE_LOCATION` nicht, um bestehende Ressourcen zu verschieben; erstellen Sie eine separate Umgebung für eine neue Region und planen Sie Migration/Aufräumen.
 
 ### Problem 2: Authentifizierungsfehler
 
 **Symptome:**
-- 401/403-Fehler beim Aufruf von KI-Diensten
+- 401/403-Fehler bei Aufrufen von KI-Diensten
 - "Zugriff verweigert"-Meldungen
 
 **Lösungen:**
 ```bash
-# Rollen-Zuweisungen überprüfen
+# Verify role assignments
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Überprüfen der Konfiguration der verwalteten Identität
-az webapp identity show --name YOUR_APP --resource-group YOUR_RG
+# Check managed identity configuration
+az containerapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Zugriff auf den Key Vault validieren
-az keyvault secret show --vault-name YOUR_KV --name openai-api-key
+# Validate Key Vault access
+az keyvault secret show --vault-name YOUR_KV --name openai-api-key --query id -o tsv
 ```
 
 ### Problem 3: Modellbereitstellungsprobleme
 
 **Symptome:**
-- Modelle nicht in der Bereitstellung verfügbar
+- Modelle in der Bereitstellung nicht verfügbar
 - Spezifische Modellversionen schlagen fehl
 
 **Lösungen:**
 ```bash
-# Verfügbare Modelle nach Region auflisten
+# List available models by region
 az cognitiveservices model list --location eastus
 
-# Modellversion in der Bicep-Vorlage aktualisieren
-# Modellkapazitätsanforderungen überprüfen
+# Update model version in bicep template
+# Check model capacity requirements
 ```
 
 ## Beispielvorlagen
+
+Dies sind Alternativen, keine sequentiellen Befehle. Starten Sie jeden in einem separaten leeren Verzeichnis. Das explizite `.` Ziel behält die Initialisierung in Ihrem aktuellen Verzeichnis; sonst erstellt aktuelles AZD ein untergeordnetes Verzeichnis mit dem Vorlagennamen, ohne Ihr Arbeitsverzeichnis zu wechseln.
 
 ### RAG-Chat-Anwendung (Python)
 
@@ -529,11 +543,11 @@ az cognitiveservices model list --location eastus
 
 **Dienste**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Beschreibung**: Das beliebteste Azure AI-Beispiel – eine produktionsreife RAG-Chat-App, die es Ihnen ermöglicht, Fragen zu Ihren eigenen Dokumenten zu stellen. Verwendet GPT-4.1-mini für Chat, text-embedding-3-large für Embeddings und Azure AI Search für die Suche. Unterstützt multimodale Dokumente, Sprachein-/-ausgabe, Microsoft Entra Authentifizierung und Application Insights-Tracing.
+**Beschreibung**: Eine RAG-Chat-Referenzanwendung für Fragen zu Ihren Dokumenten mit Azure AI Search Retrieval. Prüfen Sie die vom aktuellen Beispiel unterstützten Modelle, optionale Funktionen, Kostenhinweise und Produktionshärtung vor Gebrauch; das Bereitstellen eines Beispiels macht die Anwendung nicht produktionsbereit.
 
-**Schnellstart**:
+**Schneller Start**:
 ```bash
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 azd up
 ```
 
@@ -543,11 +557,11 @@ azd up
 
 **Dienste**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Beschreibung**: Die .NET/C#-Entsprechung des Python RAG-Chat-Beispiels. Gebaut mit ASP.NET Core Minimal API und Blazor WebAssembly-Frontend. Enthält Sprachchat, GPT-4o-mini Vision-Unterstützung und einen Begleit-Client als .NET MAUI Blazor Hybrid für Desktop/Mobil.
+**Beschreibung**: Das .NET/C#-Äquivalent des Python-RAG-Chat-Beispiels. Gebaut mit ASP.NET Core Minimal API und Blazor WebAssembly Frontend. Enthält Sprach-Chat, GPT-4o-mini-Vision-Unterstützung und eine begleitende .NET MAUI Blazor Hybrid Desktop/Mobil-Klient.
 
-**Schnellstart**:
+**Schneller Start**:
 ```bash
-azd init --template azure-search-openai-demo-csharp
+azd init --template azure-search-openai-demo-csharp .
 azd up
 ```
 
@@ -557,11 +571,11 @@ azd up
 
 **Dienste**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Beschreibung**: Java-Version des RAG-Chat-Beispiels unter Verwendung von Langchain4J für die KI-Orchestrierung. Unterstützt eine Microservice-Ereignisarchitektur, mehrere Suchstrategien (Text, Vektor, Hybrid), Dokumenten-Upload mit Azure Document Intelligence und Bereitstellung auf Azure Container Apps oder Azure Kubernetes Service.
+**Beschreibung**: Java-Version des RAG-Chat-Beispiels unter Einsatz von Langchain4J für KI-Orchestrierung. Unterstützt Mikroservice Event-Driven-Architektur, mehrere Suchstrategien (Text, Vektor, Hybrid), Dokumentenupload mit Azure Document Intelligence und Bereitstellung auf Azure Container Apps oder Azure Kubernetes Service.
 
-**Schnellstart**:
+**Schneller Start**:
 ```bash
-azd init --template azure-search-openai-demo-java
+azd init --template azure-search-openai-demo-java .
 azd up
 ```
 
@@ -571,140 +585,125 @@ azd up
 
 **Dienste**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Beschreibung**: End-to-End Retail RAG Copilot mit Microsoft Foundry und Prompty. Ein Contoso Outdoor Retailer Chatbot, der Antworten auf Produktkatalog- und Kundenbestelldaten stützt. Zeigt den kompletten GenAIOps Workflow – Prototyp mit Prompty, Bewertung mit KI-unterstützten Evaluatoren und Bereitstellung via AZD zu Container Apps.
+**Beschreibung**: End-to-End Retail RAG Copilot mit Microsoft Foundry und Prompty. Ein Contoso Outdoor-Einzelhändler-Chatbot, der Antworten auf Produktkatalog- und Kundenbestelldaten stützt. Demonstriert den gesamten GenAIOps-Workflow — Prototyp mit Prompty, Bewertung mit KI-unterstützten Evaluatoren und Bereitstellung via AZD zu Container Apps.
 
-**Schnellstart**:
+**Schneller Start**:
 ```bash
-azd init --template contoso-chat
+azd init --template contoso-chat .
 azd up
 ```
 
-### Kreative Mehr-Agenten-Anwendung zum Schreiben
+### Kreative Schreib Multi-Agent-Anwendung
 
 **Repository**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
-**Dienste**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
+**Dienste**: Azure OpenAI + Azure KI-Agenten-Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Beschreibung**: Mehr-Agenten-Beispiel, das die KI-Agenten-Orchestrierung mit Prompty demonstriert. Verwendet einen Forschungsagenten (Bing Grounding im Azure AI Agent Service), einen Produktagenten (Azure AI Search), einen Schreibagenten und einen Lektoragenten, die gemeinsam gut recherchierte Artikel erstellen. Enthält CI/CD mit Auswertung in GitHub Actions.
+**Beschreibung**: Multi-Agenten-Beispiel zur Demonstration der KI-Agenten-Orchestrierung mit Prompty. Nutzt einen Forschungsagenten (Bing Grounding in Azure KI-Agenten-Service), einen Produktagenten (Azure AI Search), einen Schreibagenten und einen Lektor-Agenten, die gemeinsam fundierte Artikel erstellen. Enthält CI/CD mit Evaluierung in GitHub Actions.
 
-**Schnellstart**:
+**Schneller Start**:
 ```bash
-azd init --template contoso-creative-writer
+azd init --template contoso-creative-writer .
 azd up
 ```
 
-### Serverloser RAG-Chat (JavaScript/TypeScript)
+### Serverloser RAG Chat (JavaScript/TypeScript)
 
 **Repository**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
 **Dienste**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB für NoSQL + LangChain.js
 
-**Beschreibung**: Vollständig serverloser RAG-Chatbot mit LangChain.js, Azure Functions für die API und Azure Static Web Apps zum Hosting. Verwendet Azure Cosmos DB als Vektor- und Chatverlaufsdatenbank. Unterstützt lokale Entwicklung mit Ollama zum kostenfreien Testen.
+**Beschreibung**: Vollständig serverloser RAG-Chatbot mit LangChain.js, Azure Functions als API und Azure Static Web Apps zum Hosting. Nutzt Azure Cosmos DB als Vektorspeicher und Chatverlaufsdatenbank. Unterstützt lokale Entwicklung mit Ollama für kostenfreies Testen.
 
-**Schnellstart**:
+**Schneller Start**:
 ```bash
-azd init --template serverless-chat-langchainjs
+azd init --template serverless-chat-langchainjs .
 azd up
 ```
 
-### Chat mit Ihrer Datenlösung Beschleuniger
+### Chat mit Deinen Daten Lösungsgenerator
 
 **Repository**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
-**Dienste**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
+**Dienste**: Microsoft Foundry + Azure Container Apps (Web/API/Ingestion) + Azure AI Search mit Cosmos DB oder PostgreSQL mit pgvector
 
-**Beschreibung**: Unternehmensgerechte RAG-Lösung mit Verwaltungsportal für Dokumenten-Upload/-Verwaltung, mehreren Orchestrator-Optionen (Semantic Kernel, LangChain, Prompt Flow), Sprach-zu-Text, Microsoft Teams-Integration und Auswahl zwischen PostgreSQL oder Cosmos DB-Backend. Entworfen als anpassbarer Startpunkt für Produktions-RAG-Szenarien.
+**Beschreibung**: Ein dokumentenbasiertes Chat-Beschleuniger mit Zitaten. Das aktuelle Beispiel hostet ein React-Frontend, FastAPI-Backend und Functions Ingestion Worker auf Container Apps; Orchestrator-Optionen sind Agent Framework und LangGraph. Auswahl der Datenbank-/Abrufoptionen erfolgt bei Bereitstellung. Es ist ein Ausgangspunkt, kein schlüsselfertiges Produktionssystem; ältere App Service-, Semantic Kernel- oder Prompt Flow-Varianten beschreiben nicht den aktuellen Standard.
 
-**Schnellstart**:
+**Schneller Start**:
 ```bash
-azd init --template chat-with-your-data-solution-accelerator
+azd init --template chat-with-your-data-solution-accelerator .
 azd up
 ```
 
-### KI-Reiseagenten — Mehr-Agenten-MCP-Orchestrierung
+### KI-Reiseagenten — Multi-Agenten MCP-Orchestrierung
 
 **Repository**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
 **Dienste**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP-Server (.NET, Python, Java, TypeScript)
 
-**Beschreibung**: Referenzanwendung für die Orchestrierung von Mehr-Agenten-KI mit drei Frameworks (LangChain.js, LlamaIndex.TS und Microsoft Agent Framework). Verfügt über MCP (Model Context Protocol)-Server in vier Sprachen, bereitgestellt als serverlose Azure Container Apps mit OpenTelemetry-Monitoring.
+**Beschreibung**: Referenzanwendung für Multi-Agenten-KI-Orchestrierung mit drei Frameworks (LangChain.js, LlamaIndex.TS und Microsoft Agent Framework). Beinhaltet MCP (Model Context Protocol)-Server in vier Sprachen, bereitgestellt als serverlose Azure Container Apps mit OpenTelemetry-Überwachung.
 
 **Schnellstart**:
 ```bash
-azd init --template azure-ai-travel-agents
+azd init --template azure-ai-travel-agents .
 azd up
 ```
 
-### Azure AI Starter
-
-**Repository**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
-
-**Dienste**: Azure AI-Dienste + Azure OpenAI
-
-**Beschreibung**: Minimale Bicep-Vorlage, die Azure AI-Dienste mit konfigurierten Machine Learning-Modellen bereitstellt. Ein leichter Einstiegspunkt, wenn Sie nur die Azure AI-Infrastruktur ohne kompletten Anwendungsstack bereitstellen möchten.
-
-**Schnellstart**:
-```bash
-azd init --template azd-ai-starter
-azd up
-```
-
-> **Weitere Vorlagen durchsuchen**: Besuchen Sie die [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) für über 80 KI-spezifische AZD-Vorlagen in verschiedenen Sprachen und Szenarien.
+> **Weitere Vorlagen durchsuchen**: Besuchen Sie die [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) für derzeit verfügbare Vorlagen für verschiedene Sprachen und Szenarien. Jedes verlinkte Beispiel ist ein externes Repository, kein lokales Beispiel dieses Kurses; prüfen Sie die aktuellen Voraussetzungen und Hinweise zur Produktion vor der Bereitstellung.
 
 ## Nächste Schritte
 
-1. **Beispiele ausprobieren**: Beginnen Sie mit einer vorgefertigten Vorlage, die zu Ihrem Anwendungsfall passt
-2. **Für Ihre Bedürfnisse anpassen**: Ändern Sie Infrastruktur- und Anwendungscode
-3. **Überwachung hinzufügen**: Implementieren Sie umfassende Beobachtbarkeit
-4. **Kosten optimieren**: Feinabstimmung der Konfigurationen für Ihr Budget
-5. **Sichern Sie Ihre Bereitstellung**: Implementieren Sie unternehmensgerechte Sicherheitsmuster
-6. **Für die Produktion skalieren**: Fügen Sie Multi-Region- und Hochverfügbarkeitsfunktionen hinzu
+1. **Beispiele ausprobieren**: Beginnen Sie mit einer vorgefertigten Vorlage, die Ihrem Anwendungsfall entspricht
+2. **An Ihre Bedürfnisse anpassen**: Infrastruktur- und Anwendungscode modifizieren
+3. **Überwachung hinzufügen**: Umfassende Observability implementieren
+4. **Kosten optimieren**: Konfigurationen an Ihr Budget anpassen
+5. **Bereitstellung absichern**: Unternehmenssicherheitsmuster implementieren
+6. **Für Produktion skalieren**: Multi-Region- und Hochverfügbarkeitsfunktionen hinzufügen
 
 ## 🎯 Praktische Übungen
 
 ### Übung 1: Microsoft Foundry Models Chat-App bereitstellen (30 Minuten)
-**Ziel**: Bereitstellung und Test einer produktionsbereiten KI-Chat-Anwendung
+**Ziel**: Eine KI-Chat-Referenzanwendung bereitstellen und testen
 
 ```bash
-# Vorlage initialisieren
+# Initialize template
 mkdir ai-chat-demo && cd ai-chat-demo
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 
-# Umgebungsvariablen setzen
+# Set environment variables
 azd env set AZURE_LOCATION eastus2
-azd env set AZURE_OPENAI_CAPACITY 30
+azd env set AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY 30
 
-# Bereitstellen
+# Deploy
 azd up
 
-# Die Anwendung testen
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-echo "Chat app: $WEB_URL"
+# Test the application
+azd show
+# Open the web endpoint shown; do not assume a service name/JSON shape.
 
-# KI-Operationen überwachen
+# Monitor AI operations
 azd monitor
 
-# Aufräumen
+# Clean up
 azd down --force --purge
 ```
 
 **Erfolgskriterien:**
-- [ ] Bereitstellung erfolgt ohne Quotenfehler
-- [ ] Zugriff auf Chat-Oberfläche im Browser möglich
-- [ ] Fragen stellen und KI-gestützte Antworten erhalten möglich
+- [ ] Bereitstellung ohne Quotenfehler abschließen
+- [ ] Chat-Schnittstelle im Browser zugänglich
+- [ ] Fragen stellen und KI-basierte Antworten erhalten können
 - [ ] Application Insights zeigt Telemetriedaten
-- [ ] Ressourcen wurden erfolgreich bereinigt
+- [ ] Ressourcen erfolgreich bereinigt
 
-**Geschätzte Kosten**: 5-10 $ für 30 Minuten Testzeit
+**Kosten:** Prüfen Sie vor der Bereitstellung die aktuelle Kostenübersicht und die ausgewählten SKUs. Die Abrechnung läuft weiter, bis die Ressourcen gelöscht werden; es gibt keine feste 30-minütige Schätzung, die auf jede Konfiguration zutrifft.
 
 ### Übung 2: Multi-Modell-Bereitstellung konfigurieren (45 Minuten)
-**Ziel**: Bereitstellung mehrerer KI-Modelle mit unterschiedlichen Konfigurationen
+**Ziel**: Mehrere KI-Modelle mit unterschiedlichen Konfigurationen bereitstellen
 
-```bash
-# Erstellen Sie eine benutzerdefinierte Bicep-Konfiguration
-cat > infra/ai-models.bicep << 'EOF'
+**Ausgangspunkt:** Ein vorhandenes Azure OpenAI-Konto und ein AZD-Ressourcengruppen-Modul, das diese Datei aufrufen kann. Erstellen Sie mit Ihrem Editor `infra/ai-models.bicep` mit folgendem Inhalt. Es wird nicht automatisch bereitgestellt, nur weil es sich unter `infra/` befindet.
+
+```bicep
 param openAiAccountName string
-param location string
 
 resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
   name: openAiAccountName
@@ -718,12 +717,12 @@ resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
-    scaleSettings: {
-      scaleType: 'Standard'
-      capacity: 30
-    }
+  }
+  sku: {
+    name: 'Standard'
+    capacity: 30
   }
 }
 
@@ -737,39 +736,53 @@ resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
       name: 'text-embedding-3-large'
       version: '1'
     }
-    scaleSettings: {
-      scaleType: 'Standard'
-      capacity: 50
-    }
+  }
+  sku: {
+    name: 'Standard'
+    capacity: 50
   }
   dependsOn: [gpt4omini]
 }
-EOF
+```
 
-# Bereitstellen und überprüfen
+Fügen Sie aus dem ressourcengruppenspezifischen Modul, dem das Konto gehört, einen Modulaufruf hinzu (passen Sie den Symbolnamen an Ihr tatsächliches Konto an):
+
+```bicep
+module additionalModels 'ai-models.bicep' = {
+  name: 'additional-models'
+  params: {
+    openAiAccountName: openAIAccount.name
+  }
+}
+```
+
+Erklären Sie nicht dieselben Bereitstellungen in beiden Modulen. Wenn der AZD-Einstiegspunkt abonnementsweit ist, rufen Sie dies aus seinem kindmodul für die Ressourcengruppe auf und passen Sie den relativen Pfad an. Bauen Sie dieses enthaltende Modul mit `az bicep build --file <path-to-containing-module>`, dann:
+
+```bash
 azd provision
-azd show
+az cognitiveservices account deployment list \
+  --name YOUR_OPENAI_ACCOUNT --resource-group YOUR_RG \
+  --query "[].{deployment:name,model:properties.model.name,version:properties.model.version,capacity:sku.capacity}" -o table
 ```
 
 **Erfolgskriterien:**
 - [ ] Mehrere Modelle erfolgreich bereitgestellt
-- [ ] Unterschiedliche Kapazitätseinstellungen angewandt
-- [ ] Modelle über API erreichbar
-- [ ] Beide Modelle können von der Anwendung angesprochen werden
+- [ ] Unterschiedliche Kapazitätseinstellungen angewendet
+- [ ] Modelle über API zugänglich
+- [ ] Beide Modelle aus der Anwendung aufrufbar
 
-### Übung 3: Kostenüberwachung einrichten (20 Minuten)
+### Übung 3: Kostenüberwachung implementieren (20 Minuten)
 **Ziel**: Budgetwarnungen und Kostenverfolgung einrichten
 
-```bash
-# Budgetwarnung zu Bicep hinzufügen
-cat >> infra/main.bicep << 'EOF'
+**Ausgangspunkt:** Das oben gezeigte Budgetmuster und ein ressourcengruppenspezifisches Infrastrukturmodul. Fügen Sie diese Ressource mit Ihrem Editor hinzu; übergeben Sie `budgetStartDate` aus Ihrer Parameterzuordnung (duplizieren Sie den Parameter nicht, wenn er bereits deklariert ist). Ersetzen Sie den Empfänger und bestätigen Sie, dass Sie Schreibzugriff auf das Budget haben.
 
-resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+```bicep
+param budgetStartDate string
+resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
   name: 'ai-monthly-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2025-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 200
@@ -790,76 +803,78 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
     }
   }
 }
-EOF
+```
 
-# Budgetwarnung bereitstellen
+```bash
+# Deploy budget alert
 azd provision
 
-# Aktuelle Kosten überprüfen
-az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
+# Verify the budget at its resource-group scope
+az rest --method get \
+  --url "https://management.azure.com/subscriptions/YOUR_SUB/resourceGroups/YOUR_RG/providers/Microsoft.Consumption/budgets/ai-monthly-budget?api-version=2024-08-01"
 ```
+
+Erwartet: Die Antwort enthält `amount: 200`, beide Schwellenwerte und Ihren Empfänger. Prüfen Sie im Portal die Kostenverwaltung auf tatsächliche Gebühren; Kostendaten sind verzögert, und eine Warnung muss während einer kurzen Übung nicht ausgelöst werden.
 
 **Erfolgskriterien:**
 - [ ] Budgetwarnung in Azure erstellt
 - [ ] E-Mail-Benachrichtigungen konfiguriert
-- [ ] Kostendaten im Azure-Portal sichtbar
-- [ ] Budgetgrenzen angemessen gesetzt
+- [ ] Kostendaten im Azure-Portal einsehbar
+- [ ] Budgetgrenzen angemessen festgelegt
 
 ## 💡 Häufig gestellte Fragen
 
 <details>
-<summary><strong>Wie kann ich die Kosten von Microsoft Foundry Models während der Entwicklung reduzieren?</strong></summary>
+<summary><strong>Wie kann ich die Kosten für Microsoft Foundry Models während der Entwicklung senken?</strong></summary>
 
-1. **Free Tier nutzen**: Microsoft Foundry Models bietet 50.000 Token/Monat kostenlos
-2. **Kapazität reduzieren**: Kapazität auf 10 TPM statt 30+ für Entwicklungszwecke einstellen
-3. **azd down verwenden**: Ressourcen freigeben, wenn nicht aktiv entwickelt wird
-4. **Antworten cachen**: Redis Cache für wiederholte Anfragen implementieren
-5. **Prompt Engineering einsetzen**: Tokenverbrauch durch effiziente Eingabeaufforderungen reduzieren
-
+1. **Preise prüfen**: Es gibt keine universelle kostenlose monatliche Freimenge von 50.000 Token für Azure OpenAI-Modelle
+2. **Kapazität richtig dimensionieren**: Die Kapazität `10` entspricht typischerweise 10.000 TPM für diese Standard-Textmodelle, nicht 10 TPM. Die Reduzierung dieses Ratenlimits senkt nicht die Preise pro Token.
+3. **azd down verwenden**: Löschen Sie verworfene Ressourcen, wenn Sie nicht aktiv entwickeln (dies ist keine Deallokation)
+4. **Antworten cachen**: Implementieren Sie Redis-Cache für wiederholte Anfragen
+5. **Prompt-Engineering nutzen**: Reduzieren Sie Tokenverbrauch durch effiziente Eingabeaufforderungen
 
 ```bash
-# Entwicklungskonfiguration
-azd env set AZURE_OPENAI_CAPACITY 10
-azd env set ENABLE_RESPONSE_CACHE true
+# Development configuration
+azd env set AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY 10
+azd provision
+# Caching requires application code and infrastructure; no universal AZD toggle.
 ```
 </details>
 
 <details>
-<summary><strong>Was ist der Unterschied zwischen Microsoft Foundry Models und OpenAI API?</strong></summary>
+<summary><strong>Was ist der Unterschied zwischen Microsoft Foundry Models und der OpenAI API?</strong></summary>
 
 **Microsoft Foundry Models**:
-- Unternehmenssicherheit und Compliance
+- Enterprise-Sicherheit und Compliance
 - Integration in private Netzwerke
 - SLA-Garantien
-- Managed Identity Authentifizierung
+- Authentifizierung mit Managed Identity
 - Höhere Kontingente verfügbar
 
-**OpenAI API**:
-- Schnellere Verfügbarkeit neuer Modelle
-- Einfachere Einrichtung
-- Niedrigere Einstiegshürde
-- Nur über das öffentliche Internet
+**OpenAI API**: Ein separater Anbieter/API mit eigener Modellverfügbarkeit, Preisgestaltung, Authentifizierung und Enterprise-Konnektivitätsoptionen. Vergleichen Sie aktuelle Angebote, anstatt anzunehmen, dass sie nur öffentlich im Internet verfügbar ist oder Modelle immer zuerst liefert.
 
-Für produktive Anwendungen wird **Microsoft Foundry Models empfohlen**.
+Wählen Sie basierend auf den Anforderungen Ihrer Organisation; Azure-spezifische Managed-Identity- und Private-Link-Beispiele in diesem Kurs gelten für Azure-gehostete Dienste, nicht für jedes Modell/Anbieter im Foundry-Katalog.
 </details>
 
 <details>
-<summary><strong>Wie gehe ich mit Fehlern bei Überschreitung des Kontingents bei Microsoft Foundry Models um?</strong></summary>
+<summary><strong>Wie gehe ich mit Microsoft Foundry Models Fehlermeldungen bei überschrittener Kontingentgrenze um?</strong></summary>
 
 ```bash
-# Aktuellen Kontingent prüfen
+# Check current quota
 az cognitiveservices usage list --location eastus2
 
-# Anderen Bereich versuchen
+# Try different region
+azd env new quota-region-test
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Kapazität vorübergehend reduzieren
+# Alternative: select the original environment before reducing capacity
+# azd env select <original-environment>
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# Kontingentserhöhung anfordern
-# Zum Azure-Portal > Kontingente > Erhöhung anfordern gehen
+# Request quota increase
+# Go to Azure Portal > Quotas > Request increase
 ```
 </details>
 
@@ -872,24 +887,26 @@ Ja! Verwenden Sie **Azure AI Search** für RAG (Retrieval Augmented Generation):
 # azure.yaml
 services:
   ai:
+    project: ./api
+    host: containerapp
     env:
-      - AZURE_SEARCH_ENDPOINT
-      - AZURE_SEARCH_INDEX
-      - AZURE_OPENAI_ENDPOINT
+      AZURE_SEARCH_ENDPOINT: ${AZURE_SEARCH_ENDPOINT}
+      AZURE_SEARCH_INDEX: ${AZURE_SEARCH_INDEX}
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
 ```
 
-Siehe die Vorlage [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo).
+Siehe die [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) Vorlage.
 </details>
 
 <details>
-<summary><strong>Wie sichere ich AI-Modellendpunkte ab?</strong></summary>
+<summary><strong>Wie sichere ich KI-Modell-Endpunkte ab?</strong></summary>
 
 **Beste Praktiken**:
 1. Verwenden Sie Managed Identity (keine API-Schlüssel)
 2. Aktivieren Sie Private Endpoints
 3. Konfigurieren Sie Netzwerksicherheitsgruppen
-4. Implementieren Sie Rate Limiting
-5. Verwenden Sie Azure Key Vault für Geheimnisse
+4. Implementieren Sie Ratenbegrenzung
+5. Nutzen Sie Azure Key Vault für Geheimnisse
 
 ```bicep
 // Managed Identity authentication
@@ -914,18 +931,18 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 - **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Issues und Diskussionen](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Offizielle Dokumentation](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Microsoft Foundry Skill auf skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Installieren Sie Azure + Foundry Agent Skills in Ihrem Editor mit `npx skills add microsoft/github-copilot-for-azure`
+- **Agent Skills**: [Microsoft Foundry Skill auf skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Installieren Sie Azure- + Foundry-Agent Skills in Ihrem Editor mit `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Kapitelnavigation:**
-- **📚 Kurs Startseite**: [AZD für Einsteiger](../../README.md)
-- **📖 Aktuelles Kapitel**: Kapitel 2 - AI-First Entwicklung
+**Kapitel-Navigation:**
+- **📚 Kurs-Startseite**: [AZD Für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-zentrierte Entwicklung
 - **⬅️ Vorheriges Kapitel**: [Kapitel 1: Ihr erstes Projekt](../chapter-01-foundation/first-project.md)
-- **➡️ Nächstes Kapitel**: [AI Modell-Bereitstellung](ai-model-deployment.md)
+- **➡️ Nächstes**: [KI-Agenten](agents.md)
 - **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
-**Brauchen Sie Hilfe?** Treten Sie unseren Community-Diskussionen bei oder eröffnen Sie ein Issue im Repository. Die Azure AI + AZD Community ist hier, um Ihnen zum Erfolg zu verhelfen!
+**Brauchen Sie Hilfe?** Treten Sie unseren Community-Diskussionen bei oder öffnen Sie ein Issue im Repository. Die Azure AI + AZD Community hilft Ihnen gerne zum Erfolg!
 
 ---
 

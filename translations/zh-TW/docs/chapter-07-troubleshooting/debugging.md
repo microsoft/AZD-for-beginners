@@ -1,77 +1,72 @@
-# AZD 部署除錯指南
+# AZD 部署偵錯指南
 
-**章節導覽：**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 本章節**: 第7章 - 疑難排解與除錯
-- **⬅️ 上一節**: [常見問題](common-issues.md)
-- **➡️ 下一節**: [AI 專屬疑難排解](ai-troubleshooting.md)
-- **🚀 下一章節**: [第8章：生產與企業模式](../chapter-08-production/production-ai-practices.md)
+**章節導航：**
+- **📚 課程首頁**：[初學者的 AZD](../../README.md)
+- **📖 本章節**：第 7 章 - 疑難排解與除錯
+- **⬅️ 上一節**：[常見問題](common-issues.md)
+- **➡️ 下一節**：[AI 特定疑難排解](ai-troubleshooting.md)
+- **🚀 下一章**：[第 8 章：生產與企業模式](../chapter-08-production/production-ai-practices.md)
 
 ## 介紹
 
-本綜合指南提供進階的除錯策略、工具與技術，用於診斷和解決 Azure Developer CLI 部署中的複雜問題。學習系統性的疑難排解方法論、日誌分析技巧、效能剖析，以及進階診斷工具，以有效率地解決部署與執行時問題。
+本全面指南提供進階的偵錯策略、工具和技巧，用於診斷和解決 Azure Developer CLI 部署的複雜問題。學習系統性疑難排解方法、日誌分析技術、效能剖析，以及進階診斷工具以高效解決部署與執行時問題。
 
 ## 學習目標
 
-完成本指南後，您將能夠：
-- 掌握 Azure Developer CLI 問題的系統性除錯方法
-- 理解進階的日誌設定與日誌分析技巧
-- 實作效能分析與監控策略
-- 使用 Azure 診斷工具與服務解決複雜問題
-- 套用網路除錯與安全疑難排解技術
-- 設定完善的監控與警示以主動偵測問題
+完成本指南後，您將能：
+- 掌握 Azure Developer CLI 問題的系統化偵錯方法
+- 理解進階日誌設定和日誌分析技術
+- 實施效能剖析與監控策略
+- 使用 Azure 診斷工具和服務解決複雜問題
+- 應用網絡偵錯和安全疑難排解技巧
+- 配置全面監控與警報以主動偵測問題
 
 ## 學習成果
 
-完成後，您將能：
-- 套用 TRIAGE 方法論，系統性除錯複雜部署問題
-- 設定並分析完整的日誌與追蹤資訊
-- 有效使用 Azure Monitor、Application Insights 與診斷工具
-- 獨立除錯網路連線、驗證與權限問題
-- 實作效能監控與優化策略
-- 為重複性問題建立自訂除錯腳本與自動化
+完成後，您將能夠：
+- 應用 TRIAGE 方法系統性偵錯複雜部署問題
+- 配置並分析完整的日誌和追蹤資訊
+- 有效使用 Azure Monitor、Application Insights 及診斷工具
+- 獨立偵錯網路連線、身份驗證與權限問題
+- 實施效能監控與最佳化策略
+- 建立自訂偵錯腳本與自動化處理重複性問題
 
-## 除錯方法學
+## 偵錯方法論
 
 ### TRIAGE 方法
-- **T**ime: When did the issue start?
-- **R**eproduce: Can you consistently reproduce it?
-- **I**solate: What component is failing?
-- **A**nalyze: What do the logs tell us?
-- **G**ather: Collect all relevant information
-- **E**scalate: When to seek additional help
+- **T**ime（時間）：問題何時開始？
+- **R**eproduce（重現）：能否持續重現？
+- **I**solate（隔離）：是哪個元件失效？
+- **A**nalyze（分析）：日誌告訴了我們什麼？
+- **G**ather（蒐集）：收集所有相關資訊
+- **E**scalate（升級）：何時尋求額外協助
 
-## 啟用除錯模式
+## 啟用偵錯模式
+
+> **範圍：** 這些為診斷示範範例，供適應修改，非預設腳本集。請替換資源名稱/ID；shell 區塊請使用 Bash。`--debug` 的輸出與環境設定可能含敏感資訊，分享前請審查/遮蔽。示範包含部署、回滾或變更配置時，需明確操作員批准。
 
 ### 環境變數
 ```bash
-# 啟用全面的偵錯
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Azure CLI 偵錯
-export AZURE_CLI_DIAGNOSTICS=true
-
-# 停用遙測以獲得較乾淨的輸出
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### 除錯設定
+### 偵錯配置
 ```bash
-# 在全域設定除錯組態
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# 啟用追蹤日誌
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
+
+`azd config set` 可以儲存任意鍵；這並不表示 `debug.enabled`、`debug.logLevel` 或 `trace.outputPath` 為支持的設定。請使用已發佈命令的 `--debug` 旗標。
 
 ## 📊 日誌分析技巧
 
-### 了解日誌等級
+### 理解日誌階層
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -83,66 +78,67 @@ FATAL   - Critical errors that cause application termination
 
 ### 結構化日誌分析
 ```bash
-# 使用 Azure Monitor 查看日誌（透過 azd monitor）
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# 即時檢視應用程式日誌
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# 如需詳細的日誌分析，請使用 Azure CLI 搭配您的 App Service 或 Container App：
-# App Service 日誌
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Container App 日誌
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# 匯出 Application Insights 日誌以供分析
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
 ### 日誌關聯
 ```bash
 #!/bin/bash
-# correlate-logs.sh - 使用 Azure Monitor 將不同服務的日誌關聯起來
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# 在 Application Insights 中搜尋關聯的日誌
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# 搜尋 Azure 活動記錄
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ 進階除錯工具
+## 🛠️ 進階偵錯工具
 
-### Azure Resource Graph 查詢
+### Azure 資源圖查詢
 ```bash
-# 依標籤查詢資源
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# 尋找失敗的部署
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# 檢查資源健康狀態
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### 網路除錯
+### 網路偵錯
 ```bash
-# 測試服務之間的連線
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# 使用方式
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
-### 容器除錯
+### 容器偵錯
 ```bash
-# 除錯容器應用程式問題
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -181,12 +178,12 @@ debug_container() {
 }
 ```
 
-### 資料庫連線除錯
+### 資料庫連線偵錯
 ```bash
-# 除錯資料庫連線
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -200,26 +197,15 @@ debug_database() {
 }
 ```
 
-## 🔬 效能除錯
+## 🔬 效能偵錯
 
-### 應用程式效能監控
+### 應用效能監控
 ```bash
-# 啟用 Application Insights 偵錯
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# 自訂效能監控
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -236,25 +224,23 @@ monitor_performance() {
 }
 ```
 
-### 資源使用分析
+### 資源使用率分析
 ```bash
-# 監控資源使用情況
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
@@ -262,7 +248,7 @@ monitor_resources() {
 
 ## 🧪 測試與驗證
 
-### 整合測試除錯
+### 整合測試偵錯
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# 設定除錯環境
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# 取得服務端點
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# 測試健康檢查端點
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# 執行測試
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# 執行自訂整合測試
+# Run custom integration tests
 npm run test:integration
 ```
 
-### 用於除錯的負載測試
+### 負載測試偵錯
 ```bash
-# 簡單的負載測試，用於識別效能瓶頸
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # 使用 Apache Bench（安裝：apt-get install apache2-utils）
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # 擷取關鍵指標
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # 檢查是否有失敗
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 基礎設施除錯
+## 🔧 基礎架構偵錯
 
-### Bicep 範本除錯
+### Bicep 模板偵錯
 ```bash
-# 驗證 Bicep 範本並顯示詳細輸出
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # 語法驗證
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint 檢查
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # What-if 部署
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# 偵錯範本部署
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,52 +361,44 @@ debug_deployment() {
 
 ### 資源狀態分析
 ```bash
-# 分析資源狀態以尋找不一致之處
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # 列出所有資源及其狀態
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # 檢查是否存在失敗的資源
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
-## 🔒 安全性除錯
+## 🔒 安全偵錯
 
-### 驗證流程除錯
+### 認證流程偵錯
 ```bash
-# 除錯 Azure 驗證
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # 解碼 JWT 令牌（需要 jq 和 base64）
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# 除錯 Key Vault 存取
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -438,16 +414,16 @@ debug_keyvault() {
 }
 ```
 
-### 網路安全除錯
+### 網路安全偵錯
 ```bash
-# 除錯網路安全性群組
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # 檢查安全性規則
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 應用程式專屬除錯
+## 📱 應用專屬偵錯
 
-### Node.js 應用程式除錯
+### Node.js 應用偵錯
 ```javascript
-// debug-middleware.js - Express 偵錯中介軟體
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // 記錄請求詳細資訊
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // 覆寫 res.json 以記錄回應
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### 資料庫查詢除錯
+### 資料庫查詢偵錯
 ```javascript
-// database-debug.js - 資料庫偵錯工具
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 緊急除錯程序
+## 🚨 緊急偵錯程序
 
-### 生產環境事件回應
+### 生產問題應對
 ```bash
 #!/bin/bash
-# emergency-debug.sh - 緊急生產環境偵錯
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# 切換到正確的環境
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# 收集關鍵資訊
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# 使用 Azure Monitor 取得錯誤日誌
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
 ### 回滾程序
 ```bash
-# 快速回滾腳本
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # 切換環境
+    # Switch environment
     azd env select "$environment"
     
-    # 使用 Git 回滾（AZD 沒有內建回滾功能）
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # 驗證回滾
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # 測試關鍵端點
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 除錯儀表板
+此純程式碼回滾不會恢復基礎架構、資料庫遷移或金鑰。請使用乾淨工作樹，記錄起始 commit，並在之後復原；命令在當前倉庫檢出選定的 commit。
+
+## 📊 偵錯儀表板
 
 ### 自訂監控儀表板
 ```bash
-# 建立 Application Insights 查詢以進行除錯
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # 查詢錯誤
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # 查詢效能問題
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # 查詢相依性失敗
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### 日誌聚合
+### 日誌彙整
 ```bash
-# 從多個 Azure 來源彙總日誌
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,6 +630,7 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
@@ -662,12 +639,12 @@ aggregate_logs() {
 
 ## 🔗 進階資源
 
-### 自訂除錯腳本
-建立一個 `scripts/debug/` 目錄，包含：
-- `health-check.sh` - 綜合健康檢查
+### 自訂偵錯腳本
+建立 `scripts/debug/` 目錄，內含：
+- `health-check.sh` - 全面健康檢查
 - `performance-test.sh` - 自動化效能測試
 - `log-analyzer.py` - 進階日誌解析與分析
-- `resource-validator.sh` - 基礎設施驗證
+- `resource-validator.sh` - 基礎架構驗證
 
 ### 監控整合
 ```yaml
@@ -676,6 +653,7 @@ hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -688,34 +666,34 @@ hooks:
 
 ## 最佳實務
 
-1. **在非生產環境中務必啟用除錯日誌**
-2. **為問題建立可重現的測試案例**
-3. **為團隊記錄除錯程序**
-4. **自動化健康檢查**與監控
-5. **隨應用程式變更更新除錯工具**
-6. **在非事件時段演練除錯程序**
+1. <strong>非生產環境務必啟用偵錯日誌</strong>
+2. <strong>為問題建立可重現測試案例</strong>
+3. <strong>為團隊紀錄偵錯流程</strong>
+4. <strong>自動化健康檢查與監控</strong>
+5. <strong>隨應用變更更新偵錯工具</strong>
+6. **平時練習偵錯流程，非事故時段進行**
 
 ## 下一步
 
 - [容量規劃](../chapter-06-pre-deployment/capacity-planning.md) - 規劃資源需求
-- [SKU 選擇](../chapter-06-pre-deployment/sku-selection.md) - 選擇適當的服務階層
-- [部署前檢查](../chapter-06-pre-deployment/preflight-checks.md) - 部署前驗證
+- [SKU 選擇](../chapter-06-pre-deployment/sku-selection.md) - 選擇適合的服務等級
+- [預檢查](../chapter-06-pre-deployment/preflight-checks.md) - 部署前驗證
 - [速查表](../../resources/cheat-sheet.md) - 快速參考指令
 
 ---
 
-**記住**: 良好的除錯在於系統性、徹底與耐心。這些工具與技術將幫助你更快速且更有效地診斷問題。
+<strong>記得</strong>：良好的偵錯來自系統化、周全和耐心。這些工具與技巧將幫助您更快、更有效地診斷問題。
 
 ---
 
-**導覽**
-- **上一課**: [常見問題](common-issues.md)
+<strong>導航</strong>
+- <strong>上一課</strong>：[常見問題](common-issues.md)
 
-- **下一課**: [容量規劃](../chapter-06-pre-deployment/capacity-planning.md)
+- <strong>下一課</strong>：[容量規劃](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責聲明：
-本文件已使用 AI 翻譯服務 Co-op Translator (https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但自動翻譯可能包含錯誤或不準確之處。原始文件之母語版本應視為權威來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用此翻譯而產生的任何誤解或誤譯負責。
+**免責聲明**：
+此文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們努力追求準確性，但請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應視為權威來源。對於關鍵資訊，建議採用專業人工翻譯。我們不對因使用此翻譯所產生的任何誤解或誤譯承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

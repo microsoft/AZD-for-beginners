@@ -1,90 +1,92 @@
-# SKU Selection Guide - Choosing the Right Azure Service Tiers
+# Οδηγός Επιλογής SKU - Επιλογή των κατάλληλων επιπέδων υπηρεσιών Azure
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 6 - Pre-Deployment Validation & Planning
-- **⬅️ Previous**: [Capacity Planning](capacity-planning.md)
-- **➡️ Next**: [Pre-flight Checks](preflight-checks.md)
-- **🚀 Next Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
+**Πλοήγηση Κεφαλαίου:**
+- **📚 Αρχική Μαθήματος**: [AZD For Beginners](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 6 - Επαλήθευση & Σχεδιασμός Προ-Ανάπτυξης
+- **⬅️ Προηγούμενο**: [Capacity Planning](capacity-planning.md)
+- **➡️ Επόμενο**: [Pre-flight Checks](preflight-checks.md)
+- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 7: Αντιμετώπιση Προβλημάτων](../chapter-07-troubleshooting/common-issues.md)
 
-## Introduction
+## Εισαγωγή
 
-This comprehensive guide helps you select optimal Azure service SKUs (Stock Keeping Units) for different environments, workloads, and requirements. Learn to analyze performance needs, cost considerations, and scalability requirements to choose the most appropriate service tiers for your Azure Developer CLI deployments.
+Αυτός ο ολοκληρωμένος οδηγός βοηθά στην επιλογή των βέλτιστων SKU υπηρεσιών Azure (Stock Keeping Units) για διαφορετικά περιβάλλοντα, φόρτους εργασίας και απαιτήσεις. Μάθετε να αναλύετε τις ανάγκες απόδοσης, τα κόστη και τις απαιτήσεις κλιμάκωσης για να επιλέξετε τα πιο κατάλληλα επίπεδα υπηρεσιών για τις αναπτύξεις σας με το Azure Developer CLI.
 
-## Learning Goals
+## Στόχοι Μάθησης
 
-By completing this guide, you will:
-- Understand Azure SKU concepts, pricing models, and feature differences
-- Master environment-specific SKU selection strategies for development, staging, and production
-- Analyze workload requirements and match them to appropriate service tiers
-- Implement cost optimization strategies through intelligent SKU selection
-- Apply performance testing and validation techniques for SKU choices
-- Configure automated SKU recommendations and monitoring
+Ολοκληρώνοντας αυτόν τον οδηγό, θα:
+- Κατανοήσετε τις έννοιες SKU του Azure, τα μοντέλα τιμολόγησης και τις διαφορές χαρακτηριστικών
+- Κατακτήσετε στρατηγικές επιλογής SKU ανά περιβάλλον για ανάπτυξη, δοκιμές και παραγωγή
+- Αναλύσετε τις απαιτήσεις φορτίου εργασίας και τις αντιστοιχίσετε στα κατάλληλα επίπεδα υπηρεσιών
+- Υλοποιήσετε στρατηγικές βελτιστοποίησης κόστους μέσω έξυπνης επιλογής SKU
+- Εφαρμόσετε τεχνικές δοκιμής απόδοσης και επικύρωσης για τις επιλογές SKU
+- Παραμετροποιήσετε αυτοματοποιημένες συστάσεις και παρακολούθηση SKU
 
-## Learning Outcomes
+## Αποτελέσματα Μάθησης
 
-Upon completion, you will be able to:
-- Select appropriate Azure service SKUs based on workload requirements and constraints
-- Design cost-effective multi-environment architectures with proper tier selection
-- Implement performance benchmarking and validation for SKU choices
-- Create automated tools for SKU recommendation and cost optimization
-- Plan SKU migrations and scaling strategies for changing requirements
-- Apply Azure Well-Architected Framework principles to service tier selection
+Με την ολοκλήρωση, θα είστε ικανοί να:
+- Επιλέγετε κατάλληλα SKU υπηρεσιών Azure βάσει απαιτήσεων και περιορισμών φόρτου εργασίας
+- Σχεδιάζετε κοστολογικά αποδοτικές αρχιτεκτονικές πολλαπλών περιβαλλόντων με σωστή επιλογή επιπέδου
+- Υλοποιείτε μετρήσεις και επικύρωση απόδοσης για επιλογές SKU
+- Δημιουργείτε αυτοματοποιημένα εργαλεία για σύσταση SKU και βελτιστοποίηση κόστους
+- Προγραμματίζετε μεταναστεύσεις SKU και στρατηγικές κλιμάκωσης για μεταβαλλόμενες ανάγκες
+- Εφαρμόζετε τις αρχές του Azure Well-Architected Framework στην επιλογή επιπέδου υπηρεσίας
 
-## Table of Contents
+## Πίνακας Περιεχομένων
 
-- [Understanding SKUs](../../../../docs/chapter-06-pre-deployment)
-- [Environment-Based Selection](../../../../docs/chapter-06-pre-deployment)
-- [Service-Specific Guidelines](../../../../docs/chapter-06-pre-deployment)
-- [Cost Optimization Strategies](../../../../docs/chapter-06-pre-deployment)
-- [Performance Considerations](../../../../docs/chapter-06-pre-deployment)
-- [Quick Reference Tables](../../../../docs/chapter-06-pre-deployment)
-- [Validation Tools](../../../../docs/chapter-06-pre-deployment)
-
----
-
-## Understanding SKUs
-
-### What are SKUs?
-
-SKUs (Stock Keeping Units) represent different service tiers and performance levels for Azure resources. Each SKU offers different:
-
-- **Performance characteristics** (CPU, memory, throughput)
-- **Feature availability** (scaling options, SLA levels)
-- **Pricing models** (consumption-based, reserved capacity)
-- **Regional availability** (not all SKUs available in all regions)
-
-### Key Factors in SKU Selection
-
-1. **Workload Requirements**
-   - Expected traffic/load patterns
-   - Performance requirements (CPU, memory, I/O)
-   - Storage needs and access patterns
-
-2. **Environment Type**
-   - Development/testing vs. production
-   - Availability requirements
-   - Security and compliance needs
-
-3. **Budget Constraints**
-   - Initial costs vs. operational costs
-   - Reserved capacity discounts
-   - Auto-scaling cost implications
-
-4. **Growth Projections**
-   - Scalability requirements
-   - Future feature needs
-   - Migration complexity
+- [Κατανόηση των SKU](#understanding-skus)
+- [Επιλογή με Βάση το Περιβάλλον](#environment-based-selection)
+- [Κατευθυντήριες Οδηγίες ανά Υπηρεσία](#service-specific-guidelines)
+- [Στρατηγικές Βελτιστοποίησης Κόστους](#cost-optimization-strategies)
+- [Παράγοντες Απόδοσης](#performance-considerations)
+- [Πίνακες Γρήγορης Αναφοράς](#quick-reference-tables)
+- [Εργαλεία Επικύρωσης](#validation-tools)
 
 ---
 
-## Environment-Based Selection
+## Κατανόηση των SKU
 
-### Development Environment
+> **Παράδειγμα εύρους:** Οι παρακάτω χάρτες SKU YAML και ρυθμίσεις απόδοσης είναι σημειώσεις σχεδιασμού, όχι `azure.yaml` σχήμα ή ρύθμιση εργαλείου φόρτου. Τα μπλοκ Bicep είναι εναλλακτικές/κομμάτια: δηλώνουν τις παραμέτρους και τους γονικούς πόρους τους, χρησιμοποιούν μοναδικά συμβολικά ονόματα όταν τα συνδυάζετε και συνδέουν τα modules σε ένα λειτουργικό έργο. Πρέπει να ελέγξετε τιμές, όρια και διαθεσιμότητα περιοχής/SKU για τη συνδρομή σας πριν από την ανάπτυξη.
 
-**Priorities**: Cost optimization, basic functionality, easy provisioning/de-provisioning
+### Τι είναι τα SKUs;
 
-#### Recommended SKUs
+Τα SKUs (Μονάδες Κρατήσεως Αποθέματος) αντιπροσωπεύουν διαφορετικά επίπεδα υπηρεσιών και επίπεδα απόδοσης για πόρους Azure. Κάθε SKU προσφέρει διαφορετικά:
+
+- **Χαρακτηριστικά απόδοσης** (CPU, μνήμη, διαμετακόμιση)
+- **Διαθεσιμότητα χαρακτηριστικών** (επιλογές κλιμάκωσης, επίπεδα SLA)
+- **Μοντέλα τιμολόγησης** (κατανάλωση, δεσμευμένη χωρητικότητα)
+- **Περιφερειακή διαθεσιμότητα** (δεν είναι όλα τα SKUs διαθέσιμα σε όλες τις περιοχές)
+
+### Βασικοί Παράγοντες στην Επιλογή SKU
+
+1. **Απαιτήσεις Φόρτου Εργασίας**
+   - Αναμενόμενα πρότυπα κίνησης/φόρτου
+   - Απαιτήσεις απόδοσης (CPU, μνήμη, I/O)
+   - Ανάγκες αποθήκευσης και πρότυπα πρόσβασης
+
+2. **Τύπος Περιβάλλοντος**
+   - Ανάπτυξη/δοκιμές έναντι παραγωγής
+   - Απαιτήσεις διαθεσιμότητας
+   - Ανάγκες ασφαλείας και συμμόρφωσης
+
+3. **Περιορισμοί Προϋπολογισμού**
+   - Αρχικό κόστος έναντι λειτουργικού κόστους
+   - Εκπτώσεις σε δεσμευμένη χωρητικότητα
+   - Επιπτώσεις κόστους αυτο-κλιμάκωσης
+
+4. **Προβλέψεις Ανάπτυξης**
+   - Απαιτήσεις κλιμάκωσης
+   - Μελλοντικές ανάγκες χαρακτηριστικών
+   - Πολυπλοκότητα μετανάστευσης
+
+---
+
+## Επιλογή με Βάση το Περιβάλλον
+
+### Περιβάλλον Ανάπτυξης
+
+**Προτεραιότητες**: Βελτιστοποίηση κόστους, βασική λειτουργικότητα, εύκολη παροχή/απόσυρση
+
+#### Συνιστώμενα SKU
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
-#### Characteristics
-- **App Service**: F1 (Free) or B1 (Basic) for simple testing
-- **Databases**: Basic tier with minimal resources
-- **Storage**: Standard with local redundancy only
-- **Compute**: Shared resources acceptable
-- **Networking**: Basic configurations
+#### Χαρακτηριστικά
+- **App Service**: F1 (Δωρεάν) ή B1 (Βασικό) για απλή δοκιμή
+- **Βάσεις Δεδομένων**: Βασικό επίπεδο με ελάχιστους πόρους
+- **Αποθήκευση**: Προκαθορισμένη με μόνο τοπική πλεονασματικότητα
+- **Υπολογισμός**: Επιτρεπτοί κοινοί πόροι
+- **Δικτύωση**: Βασικές ρυθμίσεις
 
-### Staging/Testing Environment
+### Περιβάλλον Στάδιο/Δοκιμών
 
-**Priorities**: Production-like configuration, cost balance, performance testing capability
+**Προτεραιότητες**: Ρύθμιση με βάση την παραγωγή, ισορροπία κόστους, δυνατότητα δοκιμής απόδοσης
 
-#### Recommended SKUs
+#### Συνιστώμενα SKU
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -120,56 +122,56 @@ skus:
   container_apps: "Consumption" # Pay-per-use
 ```
 
-#### Characteristics
-- **Performance**: 70-80% of production capacity
-- **Features**: Most production features enabled
-- **Redundancy**: Some geographic redundancy
-- **Scaling**: Limited auto-scaling for testing
-- **Monitoring**: Full monitoring stack
+#### Χαρακτηριστικά
+- **Απόδοση**: 70-80% της χωρητικότητας παραγωγής
+- **Χαρακτηριστικά**: Τα περισσότερα χαρακτηριστικά παραγωγής ενεργοποιημένα
+- **Πλεονασματικότητα**: Μερική γεωγραφική πλεονασματικότητα
+- **Κλιμάκωση**: Περιορισμένη αυτο-κλιμάκωση για δοκιμές
+- **Παρακολούθηση**: Πλήρες στοίβα παρακολούθησης
 
-### Production Environment
+### Περιβάλλον Παραγωγής
 
-**Priorities**: Performance, availability, security, compliance, scalability
+**Προτεραιότητες**: Απόδοση, διαθεσιμότητα, ασφάλεια, συμμόρφωση, κλιμακωσιμότητα
 
-#### Recommended SKUs
+#### Συνιστώμενα SKU
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
-#### Characteristics
-- **High availability**: 99.9%+ SLA requirements
-- **Performance**: Dedicated resources, high throughput
-- **Security**: Premium security features
-- **Scaling**: Full auto-scaling capabilities
-- **Monitoring**: Comprehensive observability
+#### Χαρακτηριστικά
+- **Υψηλή διαθεσιμότητα**: Απαιτήσεις SLA 99.9%+
+- **Απόδοση**: Αφιερωμένοι πόροι, υψηλή διαμετακόμιση
+- **Ασφάλεια**: Χαρακτηριστικά premium ασφάλειας
+- **Κλιμάκωση**: Πλήρεις δυνατότητες αυτο-κλιμάκωσης
+- **Παρακολούθηση**: Ολοκληρωμένη παρατηρησιμότητα
 
 ---
 
-## Service-Specific Guidelines
+## Κατευθυντήριες Οδηγίες ανά Υπηρεσία
 
 ### Azure App Service
 
-#### SKU Decision Matrix
+#### Πίνακας Αποφάσεων SKU
 
-| Use Case | Recommended SKU | Rationale |
+| Περίπτωση Χρήσης | Συνιστώμενο SKU | Αιτιολόγηση |
 |----------|----------------|-----------|
-| Development/Testing | F1 (Free) or B1 (Basic) | Cost-effective, sufficient for testing |
-| Small production apps | S1 (Standard) | Custom domains, SSL, auto-scaling |
-| Medium production apps | P1V3 (Premium V3) | Better performance, more features |
-| High-traffic apps | P2V3 or P3V3 | Dedicated resources, high performance |
-| Mission-critical apps | I1V2 (Isolated V2) | Network isolation, dedicated hardware |
+| Ανάπτυξη/Δοκιμές | F1 (Δωρεάν) ή B1 (Βασικό) | Οικονομικό, επαρκές για δοκιμές |
+| Μικρές εφαρμογές παραγωγής | S1 (Standard) | Προσαρμοσμένοι τομείς, SSL, αυτο-κλιμάκωση |
+| Μεσαίες εφαρμογές παραγωγής | P1V3 (Premium V3) | Καλύτερη απόδοση, περισσότερα χαρακτηριστικά |
+| Εφαρμογές υψηλής κυκλοφορίας | P2V3 ή P3V3 | Αφιερωμένοι πόροι, υψηλή απόδοση |
+| Εφαρμογές κρίσιμης σημασίας | I1V2 (Isolated V2) | Απομόνωση δικτύου, αφιερωμένος εξοπλισμός |
 
-#### Configuration Examples
+#### Παραδείγματα Ρυθμίσεων
 
-**Development**
+**Ανάπτυξη**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-dev'
@@ -185,7 +187,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-**Production**
+**Παραγωγή**
 ```bicep
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-${environmentName}-prod'
@@ -203,19 +205,19 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### SKU Selection Framework
+#### Πλαίσιο Επιλογής SKU
 
-1. **DTU-based (Database Transaction Units)**
-   - **Basic**: 5 DTU - Development/testing
-   - **Standard**: S0-S12 (10-3000 DTU) - General purpose
-   - **Premium**: P1-P15 (125-4000 DTU) - Performance-critical
+1. **Βάσει DTU (Μονάδες Συναλλαγής Βάσης Δεδομένων)**
+   - **Basic**: 5 DTU - Ανάπτυξη/δοκιμές
+   - **Standard**: S0-S12 (10-3000 DTU) - Γενικού σκοπού
+   - **Premium**: P1-P15 (125-4000 DTU) - Απόδοση κρίσιμης σημασίας
 
-2. **vCore-based** (Recommended for production)
-   - **General Purpose**: Balanced compute and storage
-   - **Business Critical**: Low latency, high IOPS
-   - **Hyperscale**: Highly scalable storage (up to 100TB)
+2. **Βάσει vCore** (Συνιστάται για παραγωγή)
+   - **General Purpose**: Ισορροπημένος υπολογισμός και αποθήκευση
+   - **Business Critical**: Χαμηλή καθυστέρηση, υψηλή IOPS
+   - **Hyperscale**: Πολύ κλιμακούμενη αποθήκευση· επιβεβαιώστε τα τρέχοντα όρια μεγέθους και υποστήριξη περιοχής
 
-#### Example Configurations
+#### Παραδείγματα Ρυθμίσεων
 
 ```bicep
 // Development
@@ -252,21 +254,21 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 ### Azure Container Apps
 
-#### Environment Types
+#### Τύποι Περιβάλλοντος
 
-1. **Consumption-based**
-   - Pay-per-use pricing
-   - Suitable for development and variable workloads
-   - Shared infrastructure
+1. **Βάσει Κατανάλωσης**
+   - Τιμολόγηση ανά χρήση
+   - Κατάλληλο για ανάπτυξη και μεταβλητούς φόρτους εργασίας
+   - Κοινόχρηστη υποδομή
 
-2. **Dedicated (Workload Profiles)**
-   - Dedicated compute resources
-   - Predictable performance
-   - Better for production workloads
+2. **Αφιερωμένο (Προφίλ Φόρτου Εργασίας)**
+   - Αφιερωμένοι υπολογιστικοί πόροι
+   - Προβλέψιμη απόδοση
+   - Κατάλληλο για φόρτους παραγωγής
 
-#### Configuration Examples
+#### Παραδείγματα Ρυθμίσεων
 
-**Development (Consumption)**
+**Ανάπτυξη (Βάσει Κατανάλωσης)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Production (Dedicated)**
+**Παραγωγή (Αφιερωμένο)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,33 +317,35 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+Η πλεονασματικότητα ζώνης απαιτεί επίσης υποδομή υποστηριζόμενης περιοχής και κατάλληλη διαμόρφωση VNet/υποδικτύου, που παραλείπεται εδώ. Αυτό το παράδειγμα κατανέμει τρεις αφιερωμένους κόμβους· ρυθμίστε τουλάχιστον δύο αντίγραφα εφαρμογής για διανομή διαζωνική και μεγεθύνετε τόσο τα αντίγραφα όσο και τους κόμβους για αποτυχία ζώνης. Δείτε [Οδηγίες αξιοπιστίας Container Apps](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). Για να τοποθετήσετε μια εφαρμογή σε αυτό το προφίλ, ρυθμίστε το `workloadProfileName: 'production-profile'` της· το να δημιουργήσετε μόνο το προφίλ δεν μετακινεί τις εφαρμογές εκεί.
+
 ### Azure Cosmos DB
 
-#### Throughput Models
+#### Μοντέλα Διαμετακόμισης
 
-1. **Manual Provisioned Throughput**
-   - Predictable performance
-   - Reserved capacity discounts
-   - Best for steady workloads
+1. **Με Μηχανική Ρύθμιση Διαμετακόμισης**
+   - Προβλέψιμη απόδοση
+   - Εκπτώσεις δεσμευμένης χωρητικότητας
+   - Καλύτερο για σταθερούς φόρτους
 
-2. **Autoscale Provisioned Throughput**
-   - Automatic scaling based on usage
-   - Pay for what you use (with minimum)
-   - Good for variable workloads
+2. **Με Αυτόματη Κλιμάκωση Διαμετακόμισης**
+   - Αυτόματη κλιμάκωση βάσει χρήσης
+   - Πληρώνετε για αυτό που χρησιμοποιείτε (με ελάχιστο)
+   - Καλή επιλογή για μεταβλητούς φόρτους
 
 3. **Serverless**
-   - Pay-per-request
-   - No provisioned throughput
-   - Ideal for development and intermittent workloads
+   - Πληρωμή ανά αίτηση
+   - Χωρίς εκ των προτέρων διαμετακόμιση
+   - Ιδανικό για ανάπτυξη και διαλείπουσες εργασίες
 
-#### SKU Examples
+#### Παραδείγματα SKU
 
 ```bicep
 // Development - Serverless
@@ -398,17 +402,17 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 ### Azure Storage Account
 
-#### Storage Account Types
+#### Τύποι Λογαριασμών Αποθήκευσης
 
-1. **Standard_LRS** - Development, non-critical data
-2. **Standard_GRS** - Production, geo-redundancy needed
-3. **Premium_LRS** - High-performance applications
-4. **Premium_ZRS** - High availability with zone redundancy
+1. **Standard_LRS** - Ανάπτυξη, μη κρίσιμα δεδομένα
+2. **Standard_GRS** - Παραγωγή, απαιτείται γεωπλεονασματικότητα
+3. **Premium_LRS** - Εφαρμογές υψηλής απόδοσης
+4. **Premium_ZRS** - Υψηλή διαθεσιμότητα με πλεονασματικότητα ζώνης
 
-#### Performance Tiers
+#### Επίπεδα Απόδοσης
 
-- **Standard**: General purpose, cost-effective
-- **Premium**: High-performance, low-latency scenarios
+- **Standard**: Γενικού σκοπού, οικονομικό
+- **Premium**: Υψηλής απόδοσης, χαμηλής λανθάνουσας κατάστασης σενάρια
 
 ```bicep
 // Development
@@ -449,21 +453,24 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ---
 
-## Cost Optimization Strategies
+## Στρατηγικές Βελτιστοποίησης Κόστους
 
-### 1. Reserved Capacity
+### 1. Δεσμευμένη Χωρητικότητα
 
-Reserve resources for 1-3 years for significant discounts:
+Κρατήστε πόρους για 1-3 χρόνια για σημαντικές εκπτώσεις:
 
 ```bash
-# Ελέγξτε τις επιλογές κράτησης
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. Right-Sizing
+Οι προσφορές κράτησης και οι επιλέξιμοι τύποι πόρων διαφέρουν· ελέγξτε τον κατάλογο και τους όρους αγοράς αντί να υποθέτετε ότι κάθε υπηρεσία/SKU υποστηρίζει κράτηση.
 
-Start with smaller SKUs and scale up based on actual usage:
+### 2. Σωστό Μέγεθος
+
+Ξεκινήστε με μικρότερα SKUs και αυξήστε τη κλίμακα βάσει πραγματικής χρήσης:
 
 ```yaml
 # Progressive scaling approach
@@ -477,9 +484,9 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. Auto-Scaling Configuration
+### 3. Ρυθμίσεις Αυτόματης Κλιμάκωσης
 
-Implement intelligent scaling to optimize costs:
+Υλοποιήστε έξυπνη κλιμάκωση για βελτιστοποίηση κόστους:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -536,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. Scheduled Scaling
+### 4. Προγραμματισμένη Κλιμάκωση
 
-Scale down during off-hours:
+Κλιμακώστε χαμηλότερα κατά τις ώρες μη αιχμής:
 
 ```json
 {
@@ -583,11 +592,11 @@ Scale down during off-hours:
 
 ---
 
-## Performance Considerations
+## Παράγοντες Απόδοσης
 
-### Baseline Performance Requirements
+### Βασικές Απαιτήσεις Απόδοσης
 
-Define clear performance requirements before SKU selection:
+Ορίστε σαφείς απαιτήσεις απόδοσης πριν την επιλογή SKU:
 
 ```yaml
 performance_requirements:
@@ -603,21 +612,23 @@ performance_requirements:
     rto: "30 minutes"
 ```
 
-### Load Testing
+### Δοκιμή Φόρτου
 
-Test different SKUs to validate performance:
+Δοκιμάστε διάφορα SKUs για επικύρωση απόδοσης:
 
 ```bash
-# Υπηρεσία δοκιμής φόρτου του Azure
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
-### Monitoring and Optimization
+### Παρακολούθηση και Βελτιστοποίηση
 
-Set up comprehensive monitoring:
+Ρυθμίστε ολοκληρωμένη παρακολούθηση:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -644,45 +656,45 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## Quick Reference Tables
+## Πίνακες Γρήγορης Αναφοράς
 
-### App Service SKU Quick Reference
+### Γρήγορη Αναφορά SKU App Service
 
-| SKU | Tier | vCPU | RAM | Storage | Price Range | Use Case |
-|-----|------|------|-----|---------|-------------|----------|
-| F1 | Free | Shared | 1GB | 1GB | Free | Development |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | Small apps |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Production |
-| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | High performance |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Enterprise |
+| SKU | Επίπεδο | vCPU | RAM | Αποθήκευση | Εύρος Τιμών | Περίπτωση Χρήσης |
+|-----|--------|------|-----|------------|-------------|------------------|
+| F1 | Δωρεάν | Κοινόχρηστο | 1GB | 1GB | Δωρεάν | Ανάπτυξη |
+| B1 | Βασικό | 1 | 1.75GB | 10GB | $ | Μικρές εφαρμογές |
+| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Παραγωγή |
+| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Υψηλή απόδοση |
+| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Επιχειρήσεις |
 
-### SQL Database SKU Quick Reference
+### Γρήγορη Αναφορά SKU Βάσης SQL
 
-| SKU | Tier | DTU/vCore | Storage | Price Range | Use Case |
-|-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Development |
-| S2 | Standard | 50 DTU | 250GB | $$ | Small production |
-| P2 | Premium | 250 DTU | 1TB | $$$ | High performance |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Balanced |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Mission critical |
+| SKU | Επίπεδο | DTU/vCore | Αποθήκευση | Εύρος Τιμών | Περίπτωση Χρήσης |
+|-----|--------|-----------|------------|-------------|------------------|
+| Basic | Βασικό | 5 DTU | 2GB | $ | Ανάπτυξη |
+| S2 | Standard | 50 DTU | 250GB | $$ | Μικρή παραγωγή |
+| P2 | Premium | 250 DTU | 1TB | $$$ | Υψηλή απόδοση |
+| GP_Gen5_4 | Γενικού Σκοπού | 4 vCore | 4TB | $$$ | Ισορροπημένο |
+| BC_Gen5_8 | Επιχειρησιακής Σημασίας | 8 vCore | 4TB | $$$$ | Κρίσιμη αποστολή |
 
-### Container Apps SKU Quick Reference
+### Γρήγορη Αναφορά SKU Container Apps
 
-| Model | Pricing | CPU/Memory | Use Case |
-|-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | Development, variable load |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | Production |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | High performance |
+| Μοντέλο | Τιμολόγηση | CPU/Μνήμη | Περίπτωση Χρήσης |
+|---------|-------------|------------|------------------|
+| Κατανάλωση | Πληρωμή ανά χρήση | Τα υποστηριζόμενα combinations CPU/μνήμης εξαρτώνται από το περιβάλλον/προφίλ | Ανάπτυξη ή παραγωγή, μεταβλητός φόρτος |
+| Αφιερωμένο D4 | Χρέωση αφιερωμένου κόμβου | 4 vCPU, 16GiB ανά κόμβο | Αντοχή φόρτου/απομόνωση |
+| Αφιερωμένο D8 | Χρέωση αφιερωμένου κόμβου | 8 vCPU, 32GiB ανά κόμβο | Υψηλότερος αντοχή φόρτου |
 
 ---
 
-## Validation Tools
+## Εργαλεία Επικύρωσης
 
-### SKU Availability Checker
+### Ελεγκτής Διαθεσιμότητας SKU
 
 ```bash
 #!/bin/bash
-# Έλεγχος διαθεσιμότητας SKU στην περιοχή προορισμού
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# Χρήση
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### Cost Estimation Script
+### Σενάριο Εκτίμησης Κόστους
+
+**Μόνο ψευδοκώδικας:** `Get-ResourceCost` παρακάτω είναι μια συνάρτηση ειδική για το έργο που πρέπει να υλοποιήσετε με βάση το τρέχον τιμολόγιο περιοχής/συμβολαίου και τις υποθέσεις χρήσης. Δεν είναι PowerShell ή Azure cmdlet.
 
 ```powershell
-# Σενάριο PowerShell για εκτίμηση κόστους
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Χρησιμοποιήστε το Azure Pricing API ή τον υπολογιστή τιμών
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# Χρήση
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -748,7 +763,9 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### Performance Validation
+### Επικύρωση Απόδοσης
+
+Το ακόλουθο YAML είναι σκίτσο απαιτήσεων, **όχι** σχήμα εισόδου Azure Load Testing, JMeter, Locust ή k6. Μεταφράστε το σε πραγματική ρύθμιση του εργαλείου που επιλέξατε πριν χρησιμοποιήσετε την εντολή load-test παραπάνω.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,43 +800,43 @@ test_configuration:
 
 ---
 
-## Best Practices Summary
+## Περίληψη Καλύτερων Πρακτικών
 
-### Do's
+### Πρέπει να
 
-1. **Start small and scale up** based on actual usage
-2. **Use different SKUs for different environments**
-3. **Monitor performance and costs continuously**
-4. **Leverage reserved capacity for production workloads**
-5. **Implement auto-scaling where appropriate**
-6. **Test performance with realistic workloads**
-7. **Plan for growth but avoid over-provisioning**
-8. **Use free tiers for development when possible**
+1. **Ξεκινήστε μικρά και αυξήστε** βάσει πραγματικής χρήσης
+2. **Χρησιμοποιήστε διαφορετικά SKUs για διαφορετικά περιβάλλοντα**
+3. **Παρακολουθείτε διαρκώς απόδοση και κόστη**
+4. **Εκμεταλλευτείτε τη δεσμευμένη χωρητικότητα για φόρτους παραγωγής**
+5. **Εφαρμόστε αυτο-κλιμάκωση όπου ενδείκνυται**
+6. **Δοκιμάστε την απόδοση με ρεαλιστικούς φόρτους εργασίας**
+7. **Σχεδιάστε για ανάπτυξη αλλά αποφύγετε υπερπρομήθεια**
+8. **Χρησιμοποιείστε δωρεάν επίπεδα για ανάπτυξη όπου είναι δυνατόν**
 
-### Don'ts
+### Μην
 
-1. **Don't use production SKUs for development**
-2. **Don't ignore regional SKU availability**
-3. **Don't forget about data transfer costs**
-4. **Don't over-provision without justification**
-5. **Don't ignore the impact of dependencies**
-6. **Don't set auto-scaling limits too high**
-7. **Don't forget about compliance requirements**
-8. **Don't make decisions based on price alone**
-
----
-
-**Pro Tip**: Use Azure Cost Management and Advisor to get personalized recommendations for optimizing your SKU selections based on actual usage patterns.
+1. **Μην χρησιμοποιείτε SKU παραγωγής για ανάπτυξη**
+2. **Μην αγνοείτε τη διαθεσιμότητα SKU κατά περιοχή**
+3. **Μην ξεχνάτε το κόστος μεταφοράς δεδομένων**
+4. **Μην κάνετε υπερπρομήθεια χωρίς αιτιολόγηση**
+5. **Μην αγνοείτε τον αντίκτυπο των εξαρτήσεων**
+6. **Μην ορίζετε όρια αυτο-κλιμάκωσης πολύ υψηλά**
+7. **Μην ξεχνάτε τις απαιτήσεις συμμόρφωσης**
+8. **Μην παίρνετε αποφάσεις μόνο με βάση την τιμή**
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Capacity Planning](capacity-planning.md)
-- **Next Lesson**: [Preflight Checks](preflight-checks.md)
+**Επαγγελματική Συμβουλή**: Χρησιμοποιήστε το Azure Cost Management και Advisor για να πάρετε εξατομικευμένες συστάσεις βελτιστοποίησης επιλογών SKU βάσει των πραγματικών προτύπων χρήσης.
+
+---
+
+**Πλοήγηση**
+- **Προηγούμενο Μάθημα**: [Capacity Planning](capacity-planning.md)
+- **Επόμενο Μάθημα**: [Preflight Checks](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθυνών:
-Το παρόν έγγραφο έχει μεταφραστεί με χρήση της υπηρεσίας μετάφρασης με τεχνητή νοημοσύνη Co‑op Translator (https://github.com/Azure/co-op-translator). Παρά τις προσπάθειές μας για ακρίβεια, να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύψουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση ευθυνών**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

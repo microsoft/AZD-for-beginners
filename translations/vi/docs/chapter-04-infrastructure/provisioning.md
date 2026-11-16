@@ -1,47 +1,49 @@
-# Cung cấp tài nguyên Azure bằng AZD
+# Cung cấp tài nguyên Azure với AZD
 
-**Điều hướng chương:**
-- **📚 Trang khóa học**: [AZD cho người mới bắt đầu](../../README.md)
-- **📖 Chương hiện tại**: Chương 4 - Hạ tầng như mã & Triển khai
-- **⬅️ Trước**: [Deployment Guide](deployment-guide.md)
-- **➡️ Chương tiếp theo**: [Chương 5: Giải pháp AI đa tác nhân](../../examples/retail-scenario.md)
-- **🔧 Liên quan**: [Chương 6: Xác thực trước khi triển khai](../chapter-06-pre-deployment/capacity-planning.md)
+**Điều hướng Chương:**
+- **📚 Trang Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 4 - Hạ Tầng dưới dạng Mã & Triển Khai
+- **⬅️ Trước Đó**: [Hướng Dẫn Triển Khai](deployment-guide.md)
+- **➡️ Chương Tiếp Theo**: [Chương 5: Giải Pháp AI Đa Tác Nhân](../../examples/retail-scenario.md)
+- **🔧 Liên Quan**: [Chương 6: Kiểm Tra Trước Khi Triển Khai](../chapter-06-pre-deployment/capacity-planning.md)
 
-## Giới thiệu
+## Giới Thiệu
 
-Hướng dẫn toàn diện này bao quát mọi thứ bạn cần biết về việc cung cấp và quản lý tài nguyên Azure bằng Azure Developer CLI. Học cách triển khai các mô hình Hạ tầng như Mã (IaC) từ việc tạo tài nguyên cơ bản đến các kiến trúc hạ tầng doanh nghiệp nâng cao sử dụng Bicep, ARM templates, Terraform và Pulumi.
+Hướng dẫn này bao gồm việc cung cấp và quản lý tài nguyên Azure bằng Azure Developer CLI với các nhà cung cấp Bicep và Terraform tích hợp sẵn.
 
-## Mục tiêu học tập
+> Đã xem xét theo `azd 1.37.2` (tháng 11 năm 2026). Trừ khi có ghi chú khác, các ví dụ Bicep, Terraform và script là **đoạn minh họa**, không phải mẫu hoàn chỉnh. Kết hợp chúng vào một dự án cung cấp các tham số, module, danh tính, mạng và mã ứng dụng tham chiếu. Đánh giá không thực hiện cấp phát tài nguyên Azure.
 
-Khi hoàn thành hướng dẫn này, bạn sẽ:
-- Nắm vững nguyên tắc Hạ tầng như Mã và việc cung cấp tài nguyên Azure
-- Hiểu các nhà cung cấp IaC khác nhau được Azure Developer CLI hỗ trợ
-- Thiết kế và triển khai các mẫu Bicep cho các kiến trúc ứng dụng phổ biến
-- Cấu hình tham số tài nguyên, biến và các thiết lập theo môi trường
-- Triển khai các mẫu hạ tầng nâng cao bao gồm mạng và bảo mật
+## Mục Tiêu Học Tập
+
+Sau khi hoàn thành hướng dẫn này, bạn sẽ:
+- Nắm vững các nguyên tắc Hạ Tầng dưới dạng Mã và cung cấp tài nguyên Azure
+- Hiểu về nhiều nhà cung cấp IaC được Azure Developer CLI hỗ trợ
+- Thiết kế và triển khai mẫu Bicep cho các kiến trúc ứng dụng phổ biến
+- Cấu hình tham số tài nguyên, biến và cài đặt theo môi trường
+- Triển khai các mô hình hạ tầng nâng cao bao gồm mạng và bảo mật
 - Quản lý vòng đời tài nguyên, cập nhật và giải quyết phụ thuộc
 
-## Kết quả học tập
+## Kết Quả Học Tập
 
-Sau khi hoàn thành, bạn sẽ có khả năng:
-- Thiết kế và cung cấp hạ tầng Azure bằng Bicep và ARM templates
-- Cấu hình kiến trúc đa dịch vụ phức tạp với phụ thuộc tài nguyên phù hợp
-- Triển khai các mẫu tham số hóa cho nhiều môi trường và cấu hình
-- Khắc phục sự cố trong quá trình cung cấp hạ tầng và giải quyết lỗi triển khai
-- Áp dụng các nguyên tắc của Azure Well-Architected Framework vào thiết kế hạ tầng
-- Quản lý cập nhật hạ tầng và thực hiện chiến lược phiên bản hóa hạ tầng
+Khi hoàn thành, bạn sẽ có khả năng:
+- Thiết kế và cung cấp hạ tầng Azure bằng mẫu Bicep và ARM
+- Cấu hình kiến trúc đa dịch vụ phức tạp với phụ thuộc tài nguyên đúng cách
+- Triển khai mẫu tham số hóa cho nhiều môi trường và cấu hình
+- Khắc phục sự cố cung cấp hạ tầng và xử lý lỗi triển khai
+- Áp dụng nguyên tắc Azure Well-Architected Framework trong thiết kế hạ tầng
+- Quản lý cập nhật hạ tầng và triển khai chiến lược phiên bản hóa hạ tầng
 
-## Tổng quan về Cung cấp Hạ tầng
+## Tổng Quan Cung Cấp Hạ Tầng
 
-Azure Developer CLI hỗ trợ nhiều nhà cung cấp Hạ tầng như Mã (IaC):
-- **Bicep** (khuyến nghị) - ngôn ngữ đặc thù của Azure
-- **ARM Templates** - templates Azure Resource Manager dạng JSON
+Azure Developer CLI hỗ trợ nhiều nhà cung cấp Hạ Tầng dưới dạng Mã (IaC):
+- **Bicep** (khuyến nghị) - ngôn ngữ chuyên biệt của Azure
+- **ARM Templates** - Bicep biên dịch thành ARM; JSON ARM thô không phải là `infra.provider` riêng biệt tích hợp sẵn
 - **Terraform** - công cụ hạ tầng đa đám mây
-- **Pulumi** - Hạ tầng như mã hiện đại với ngôn ngữ lập trình
+- **Nhà cung cấp mở rộng** - Cần cài đặt riêng phần mở rộng nhà cung cấp và cấu hình theo tài liệu; không giả định chuỗi nhà cung cấp nào được hỗ trợ
 
-## Hiểu về các Tài nguyên Azure
+## Hiểu Về Tài Nguyên Azure
 
-### Cấp bậc tài nguyên
+### Cấu Trúc Hệ Thống Tài Nguyên
 ```
 Azure Account
 └── Subscriptions
@@ -49,18 +51,19 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Các dịch vụ Azure thường dùng cho ứng dụng
-- **Tính toán**: App Service, Container Apps, Functions, Virtual Machines
-- **Lưu trữ**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+### Các Dịch Vụ Azure Phổ Biến Cho Ứng Dụng
+- **Tính Toán**: App Service, Container Apps, Functions, Máy Ảo
+- **Lưu Trữ**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Mạng**: Virtual Network, Application Gateway, CDN
-- **Bảo mật**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
+- **Bảo Mật**: Key Vault, Application Insights, Log Analytics
+- **AI/ML**: Dịch vụ AI Azure, Azure OpenAI, Azure Machine Learning
 
-## Mẫu Hạ tầng Bicep
+## Mẫu Hạ Tầng Bicep
 
-### Cấu trúc mẫu Bicep cơ bản
+### Cấu Trúc Mẫu Bicep Cơ Bản
 ```bicep
-// infra/main.bicep
+// infra/modules/web.bicep - resource-group-scoped module fragment
+targetScope = 'resourceGroup'
 @description('The name of the environment')
 param environmentName string
 
@@ -75,11 +78,6 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var tags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
-}
-
-// Resource Group (created automatically by azd)
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
-  name: '${applicationName}-${environmentName}-rg'
 }
 
 // App Service Plan
@@ -100,11 +98,14 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'web' })
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
@@ -128,9 +129,11 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Các mẫu Bicep nâng cao
+Để có một dự án azd hoàn chỉnh, gọi module này từ `infra/main.bicep` phạm vi đăng ký tạo nhóm tài nguyên có tag và truyền phạm vi đó. Khớp `environmentName`/`location` trong `main.parameters.json`. Tag `azd-service-name: web` liên kết tài nguyên với `services.web`; chỉ đặt tên output tùy ý không cấu hình khám phá dịch vụ.
 
-#### Hạ tầng mô-đun
+### Mô Hình Bicep Nâng Cao
+
+#### Hạ Tầng Mô-đun
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -142,11 +145,14 @@ param appSettings array = []
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: name
   location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: planId
     siteConfig: {
       appSettings: appSettings
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
     }
     httpsOnly: true
@@ -179,7 +185,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Tạo tài nguyên có điều kiện
+#### Tạo Tài Nguyên Có Điều Kiện
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,13 +206,13 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🌐 Sử dụng Terraform với azd
+## 🌐 Sử Dụng Terraform với azd
 
-Bicep là mặc định của azd, nhưng azd cũng hỗ trợ **Terraform**—hữu ích nếu đội của bạn đã chuẩn hóa trên Terraform hoặc bạn quản lý hạ tầng đa đám mây. Quy trình công việc azd (`azd up`, `azd provision`, `azd down`) là giống hệt; chỉ có ngôn ngữ hạ tầng và bố cục thư mục thay đổi.
+Bicep là mặc định của azd, nhưng azd cũng hỗ trợ **Terraform** — hữu ích nếu nhóm bạn đã chuẩn hóa trên nó hoặc bạn quản lý hạ tầng đa đám mây. Quy trình azd (`azd up`, `azd provision`, `azd down`) giống hệt; chỉ thay đổi ngôn ngữ hạ tầng và cấu trúc thư mục.
 
-### Bảo cho azd sử dụng Terraform
+### Bảo azd sử dụng Terraform
 
-Thêm một phần `infra` vào `azure.yaml` trỏ tới nhà cung cấp Terraform:
+Thêm phần `infra` vào `azure.yaml` trỏ tới nhà cung cấp Terraform:
 
 ```yaml
 # azure.yaml
@@ -221,9 +227,9 @@ services:
     host: containerapp
 ```
 
-### Bố cục thư mục Terraform
+### Cấu trúc thư mục Terraform
 
-Với nhà cung cấp Terraform, thư mục `infra/` của bạn sử dụng các tệp `.tf` thay vì Bicep:
+Với nhà cung cấp Terraform, thư mục `infra/` của bạn dùng các file `.tf` thay vì Bicep:
 
 ```
 infra/
@@ -234,7 +240,9 @@ infra/
 └── main.tfvars.json   # values azd injects per environment
 ```
 
-### Một `main.tf` tối thiểu
+### Một đoạn `main.tf`
+
+Đoạn này chỉ tạo nhóm tài nguyên và kế hoạch, không phải dịch vụ có thể triển khai. Bạn phải khai báo biến đầu vào, nhà cung cấp `azurerm` tương thích, web app và ánh xạ tag tên dịch vụ/tài nguyên.
 
 ```hcl
 # infra/main.tf
@@ -253,9 +261,9 @@ resource "azurerm_service_plan" "plan" {
 }
 ```
 
-### Cách azd kết nối với outputs của Terraform
+### Cách azd kết nối với output Terraform
 
-azd đọc các **outputs** của Terraform để biết các endpoints của bạn và để kết nối các giá trị môi trường trở lại ứng dụng. Tên output quan trọng—azd tìm kiếm các tên cụ thể:
+azd đọc các **output** của Terraform thành giá trị môi trường. Đoạn này giả định bạn tạo `azurerm_linux_web_app.web`; khám phá dịch vụ vẫn cần tên tài nguyên hoặc tag `azd-service-name` phù hợp:
 
 ```hcl
 # infra/outputs.tf
@@ -264,111 +272,48 @@ output "AZURE_LOCATION" {
 }
 
 output "SERVICE_WEB_ENDPOINT_URL" {
-  value = azurerm_linux_web_app.web.default_hostname
+  value = "https://${azurerm_linux_web_app.web.default_hostname}"
 }
 ```
 
-> **Quan trọng:** azd sử dụng thẻ `azd-env-name` và các output `AZURE_*` để theo dõi tài nguyên theo môi trường. Luôn gắn thẻ nhóm tài nguyên của bạn với "azd-env-name" = var.environment_name để `azd down` có thể tìm và xóa mọi thứ.
+> **Quan trọng:** azd dùng tag `azd-env-name` và output `AZURE_*` để theo dõi tài nguyên theo môi trường. Luôn luôn gắn tag nhóm tài nguyên với `"azd-env-name" = var.environment_name` để `azd down` có thể tìm và loại bỏ hoàn toàn.
 
 ### Triển khai với Terraform
 
-Các lệnh hoàn toàn giống như Bicep:
+Câu lệnh hoàn toàn giống với Bicep:
 
 ```bash
 azd auth login
 azd env new dev
-azd provision --preview   # azd chạy 'terraform plan' ở hậu trường
-azd up                    # cung cấp + triển khai
-azd down --force          # hủy các tài nguyên do Terraform quản lý
+azd provision --preview   # azd runs 'terraform plan' under the hood
+azd up                    # provision + deploy
+azd down --force          # destroys the Terraform-managed resources
 ```
 
-> **Yêu cầu tiên quyết:** Terraform phải được cài đặt và nằm trong `PATH` của bạn. azd quản lý *quy trình làm việc* Terraform nhưng không cài Terraform cho bạn. Đối với trạng thái, azd mặc định dùng trạng thái cục bộ; đối với đội nhóm, cấu hình một backend từ xa (ví dụ, backend Azure Storage) trong `provider.tf`.
+> **Điều kiện tiên quyết:** Terraform phải được cài đặt và có trong `PATH` của bạn. azd quản lý *quy trình* Terraform nhưng không cài đặt Terraform cho bạn. Về state, azd mặc định dùng state cục bộ; với nhóm, cấu hình backend từ xa (chẳng hạn backend Azure Storage) trong `provider.tf`.
 
-Để có các starter dựa trên Terraform chạy được đầy đủ, duyệt qua [Awesome AZD gallery](https://azure.github.io/awesome-azd/) và lọc cho Terraform, hoặc xem [tài liệu azd Terraform chính thức](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+Để có mẫu mẫu chạy được dựa trên Terraform hoàn chỉnh, duyệt [bộ sưu tập Awesome AZD](https://azure.github.io/awesome-azd/) và lọc theo Terraform, hoặc xem tài liệu chính thức [azd Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
-## 🧩 Sử dụng Pulumi với azd
+## 🧩 Công Cụ Hạ Tầng Khác
 
-Nếu đội của bạn viết hạ tầng bằng ngôn ngữ tổng quát (TypeScript, Python, Go, hoặc C#) thay vì một DSL, azd cũng hỗ trợ **Pulumi**. Như với Terraform, quy trình `azd up` / `azd provision` / `azd down` không thay đổi—chỉ có công cụ hạ tầng và bố cục thư mục khác nhau.
+Pulumi không phải là nhà cung cấp cấp phát tích hợp sẵn của azd 1.37.2. Chỉ đặt `infra.provider: pulumi` không thiết lập tích hợp hoạt động, và `azd env new` không tự động tạo/chọn stack Pulumi. Nếu sử dụng công cụ IaC khác, hãy làm theo tài liệu phần mở rộng nhà cung cấp được xác thực hoặc quản lý vòng đời rõ ràng trong quy trình của bạn. Khóa học này không cung cấp hay xác thực nhà cung cấp Pulumi.
 
-### Bảo cho azd sử dụng Pulumi
+## 🎯 Lựa Chọn Nơi Lưu Trữ Dịch Vụ
 
-```yaml
-# azure.yaml
-name: my-pulumi-app
-infra:
-  provider: pulumi      # default is "bicep"
-  path: infra           # folder containing your Pulumi program
-services:
-  web:
-    project: ./src
-    language: js
-    host: containerapp
-```
+Trường `host` trong `azure.yaml` quyết định nơi mã của bạn chạy. azd hỗ trợ nhiều host—chọn đúng quan trọng hơn ngôn ngữ hạ tầng. Đây là so sánh thân thiện cho người mới:
 
-### Bố cục thư mục Pulumi
+| Giá trị `host` | Phù hợp với | Tại sao |
+|--------------|----------|-----|
+| `appservice` | Ứng dụng web và API truyền thống | PaaS đơn giản nhất; không cần container |
+| `staticwebapp` | SPA front-end (React, Vue, Angular) | CDN toàn cầu + SSL miễn phí, hỗ trợ API tích hợp |
+| `function` | Tải công việc theo sự kiện và serverless | Tỷ lệ tự động về zero, trả tiền theo lượt chạy |
+| `containerapp` | Microservices đóng gói container | Container serverless, tỷ lệ về zero, ingress tích hợp |
+| `aks` | Nhu cầu điều phối phức tạp | Toàn quyền Kubernetes khi bạn thật sự cần |
+| `springapp` | Triển khai Azure Spring Apps hiện có | Mục tiêu cũ; dịch vụ ngừng hoạt động 31 tháng 3 năm 2028 và không nhận khách mới |
 
-```
-infra/
-├── Pulumi.yaml          # project definition
-├── Pulumi.dev.yaml      # stack config (one per environment)
-├── index.ts             # your resource program (or __main__.py, main.go, etc.)
-├── package.json         # dependencies (for TypeScript)
-└── tsconfig.json
-```
+### Khi Nào Nên Dùng AKS
 
-### Một `index.ts` tối thiểu
-
-```typescript
-import * as azure from "@pulumi/azure-native";
-import * as pulumi from "@pulumi/pulumi";
-
-const environmentName = pulumi.getStack();
-
-// Gắn thẻ mọi tài nguyên để azd có thể theo dõi và dọn dẹp chúng
-const tags = { "azd-env-name": environmentName };
-
-const rg = new azure.resources.ResourceGroup("rg", {
-  resourceGroupName: `rg-${environmentName}`,
-  tags,
-});
-
-// azd đọc lại các đầu ra này vào môi trường của bạn
-export const AZURE_LOCATION = rg.location;
-export const SERVICE_WEB_ENDPOINT_URL = "https://...";
-```
-
-### Stacks tương ứng với môi trường azd
-
-Pulumi tổ chức triển khai thành **stacks**, và azd ánh xạ mỗi môi trường azd tới một Pulumi stack cùng tên. Khi bạn chạy `azd env new staging`, azd chọn (hoặc tạo) Pulumi stack `staging`. Quy tắc gắn thẻ `azd-env-name` và các output `AZURE_*` vẫn áp dụng, để `azd down` có thể tìm và xóa mọi thứ.
-
-### Triển khai với Pulumi
-
-```bash
-azd auth login
-azd env new dev
-azd provision --preview   # azd thực thi 'pulumi preview' phía sau hậu trường
-azd up                    # cấp phát + triển khai
-azd down --force          # chạy 'pulumi destroy'
-```
-
-> **Yêu cầu tiên quyết:** Pulumi phải được cài đặt và nằm trong `PATH` của bạn, và bạn sẽ cần một backend trạng thái (Pulumi Cloud hoặc một backend tự quản như Azure Blob Storage). azd quản lý *quy trình Pulumi*, không quản lý việc cài đặt. Xem [tài liệu azd Pulumi chính thức](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
-
-## 🎯 Chọn Host cho Dịch vụ của bạn
-
-Trường `host` trong `azure.yaml` quyết định nơi mã của bạn chạy. azd hỗ trợ nhiều host—chọn host phù hợp còn quan trọng hơn ngôn ngữ hạ tầng. Dưới đây là so sánh thân thiện cho người mới:
-
-| `host` value | Phù hợp cho | Tại sao |
-|--------------|-------------|--------|
-| `appservice` | Ứng dụng web truyền thống và API | PaaS đơn giản nhất; không cần container |
-| `staticwebapp` | Front-end SPA (React, Vue, Angular) | CDN toàn cầu + SSL miễn phí, hỗ trợ API tích hợp |
-| `function` | Workload theo sự kiện và serverless | Scale-to-zero, trả theo lần thực thi |
-| `containerapp` | Microservices đóng gói container | Container serverless, scale-to-zero, ingress tích hợp |
-| `aks` | Nhu cầu điều phối phức tạp | Kiểm soát Kubernetes đầy đủ khi bạn thực sự cần |
-| `springapp` | Ứng dụng Java Spring Boot | Runtime Azure Spring Apps được quản lý, tối ưu cho Spring |
-
-### Khi nào nên chọn AKS
-
-**Azure Kubernetes Service (`host: aks`)** cung cấp cho bạn toàn bộ sức mạnh của Kubernetes—controller tùy chỉnh, service mesh, mạng phức tạp và lập lịch chi tiết. Sức mạnh đó đi kèm chi phí vận hành: bạn phải quản lý node pools, nâng cấp và mạng lưới cụm.
+**Azure Kubernetes Service (`host: aks`)** cung cấp toàn bộ sức mạnh Kubernetes—bộ điều khiển tùy chỉnh, service mesh, mạng phức tạp và lập lịch chi tiết. Sức mạnh này đi kèm gánh nặng vận hành: bạn quản lý node pool, nâng cấp và mạng cụm.
 
 ```yaml
 services:
@@ -378,11 +323,11 @@ services:
     host: aks          # deploys to an existing AKS cluster
 ```
 
-> **Bắt đầu đơn giản hơn nếu có thể.** Đối với hầu hết microservices, **Container Apps** cung cấp container, autoscaling và scale-to-zero mà không cần quản lý cụm. Chỉ chọn AKS khi bạn cần những tính năng đặc thù của Kubernetes.
+> **Bắt đầu đơn giản hơn nếu có thể.** Với đa số microservices, **Container Apps** cung cấp container, tự động điều chỉnh và tỷ lệ về zero mà không cần quản lý cụm. Chọn AKS khi bạn cần tính năng đặc thù Kubernetes.
 
-### Khi nào sử dụng Azure Spring Apps
+### Khi Nào Nên Dùng Azure Spring Apps
 
-**Azure Spring Apps (`host: springapp`)** là một runtime được quản lý, thiết kế đặc biệt cho Spring Boot. Nó xử lý service discovery, config server và blue-green deployment để các đội Java không phải tự vận hành hạ tầng.
+**Azure Spring Apps (`host: springapp`)** là môi trường chạy được quản lý dành riêng cho Spring Boot. Nó xử lý khám phá dịch vụ, config server và triển khai blue-green để nhóm Java không phải tự quản hạ tầng.
 
 ```yaml
 services:
@@ -392,9 +337,9 @@ services:
     host: springapp
 ```
 
-> Sử dụng `springapp` khi bạn có các ứng dụng Spring Boot hiện có và muốn một runtime được tối ưu cho chúng. Đối với các ứng dụng Java mới đóng gói container mà không cần tính năng đặc thù của Spring, `containerapp` thường là lựa chọn đơn giản hơn.
+> Không chọn Azure Spring Apps cho dự án mới dành cho người mới: nó đóng cửa không nhận khách mới và [ngừng hoạt động 31 tháng 3 năm 2028](https://learn.microsoft.com/azure/spring-apps/basic-standard/retirement-announcement). Ưu tiên lựa chọn thay thế được hỗ trợ như Container Apps và lập kế hoạch di cư cho triển khai hiện tại.
 
-## 🗃️ Cung cấp Cơ sở dữ liệu
+## 🗃️ Cung Cấp Cơ Sở Dữ Liệu
 
 ### Cosmos DB
 ```bicep
@@ -446,6 +391,8 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 ```
 
 ### PostgreSQL
+**Điều kiện tiên quyết đoạn:** khai báo `@secure() param databasePassword string` và dùng giá trị mạnh được cung cấp. Chọn truy cập công khai **hoặc** tích hợp subnet được ủy quyền/DNS riêng tư phía dưới; hai đoạn không tự kết nối với nhau.
+
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -492,9 +439,11 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Bảo mật và Quản lý Bí mật
+Quy tắc `0.0.0.0` cho phép kết nối từ dịch vụ Azure ngoài đăng ký của bạn. Nó không phải mạng riêng; ưu tiên thiết kế mạng hạn chế cho tải thực.
 
-### Tích hợp Key Vault
+## 🔒 Bảo Mật và Quản Lý Bí Mật
+
+### Tích Hợp Key Vault
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -536,7 +485,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Cấu hình Managed Identity
+### Cấu Hình Danh Tính Quản Lý
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -553,8 +502,8 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
           value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
         }
         {
-          name: 'AZURE_CLIENT_ID'
-          value: webApp.identity.principalId
+          name: 'NODE_ENV'
+          value: 'production'
         }
       ]
     }
@@ -562,9 +511,11 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Mạng và Kết nối
+Với danh tính hệ thống tự gán, không đặt `AZURE_CLIENT_ID` thành ID chính của nó. Danh tính do người dùng gán sử dụng **client ID**, không phải ID đối tượng/chính. Tham chiếu Key Vault cũng cần vai trò vault của danh tính app và truy cập mạng.
 
-### Cấu hình Virtual Network
+## 🌍 Mạng và Kết Nối
+
+### Cấu Hình Mạng Ảo
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -628,6 +579,8 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 ```
 
 ### Application Gateway với SSL
+**Đoạn kiến trúc chưa hoàn chỉnh, không phải gateway có thể triển khai:** thêm `gateway-subnet` riêng cho VNet kèm pool backend, cài đặt HTTP, listener, quy tắc định tuyến với ưu tiên và chứng chỉ TLS (hoặc tham chiếu Key Vault ủy quyền). Mở cổng 443 đơn thuần không cấu hình HTTPS.
+
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -690,7 +643,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Giám sát và Quan sát
+## 📊 Giám Sát và Quan Sát
 
 ### Application Insights
 ```bicep
@@ -721,7 +674,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Metrics tùy chỉnh và Cảnh báo
+### Chỉ Số Tùy Chỉnh và Cảnh Báo
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -731,7 +684,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
     description: 'Alert when CPU usage is high'
     severity: 2
     enabled: true
-    scopes: [webApp.id]
+    scopes: [appServicePlan.id]
     evaluationFrequency: 'PT5M'
     windowSize: 'PT5M'
     criteria: {
@@ -740,6 +693,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
         {
           name: 'CPU Usage'
           metricName: 'CpuPercentage'
+          metricNamespace: 'Microsoft.Web/serverfarms'
           operator: 'GreaterThan'
           threshold: 80
           timeAggregation: 'Average'
@@ -755,11 +709,14 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Cấu hình theo Môi trường
+## 🔧 Cấu Hình Theo Môi Trường
 
-### Tệp tham số cho các Môi trường khác nhau
+### Tệp Tham Số Cho Các Môi Trường Khác Nhau
+Hai tệp dưới đây là **ví dụ tệp tham số thay thế**. azd không tự chọn `main.parameters.dev.json` hoặc `main.parameters.prod.json` theo tên môi trường. Dùng `main.parameters.json` thực với thay thế môi trường (ví dụ `${APP_SERVICE_SKU=B1}`), và khai báo/sử dụng mọi tham số trong Bicep.
+
+Ví dụ nội dung `infra/main.parameters.dev.json`:
+
 ```json
-// infra/main.parameters.dev.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -783,8 +740,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
+Ví dụ nội dung `infra/main.parameters.prod.json`:
+
 ```json
-// infra/main.parameters.prod.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -811,7 +769,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Cung cấp tài nguyên có điều kiện
+### Cung Cấp Tài Nguyên Có Điều Kiện
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -819,7 +777,7 @@ param environmentType string = 'dev'
 
 // Development resources
 resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'dev') {
-  name: '${applicationName}devstorage${resourceToken}'
+  name: 'stdev${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -829,7 +787,7 @@ resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environ
 
 // Production resources with geo-redundancy
 resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'prod') {
-  name: '${applicationName}prodstorage${resourceToken}'
+  name: 'stprod${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -843,9 +801,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Mẫu Cung cấp Nâng cao
+## 🚀 Mô Hình Cung Cấp Nâng Cao
 
-### Triển khai đa khu vực
+### Triển Khai Đa Khu Vực
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -913,78 +871,54 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Kiểm thử Hạ tầng
-```bicep
-// infra/test/main.test.bicep
-param location string = resourceGroup().location
+### Kiểm Tra Hạ Tầng
+```bash
+# Local compilation checks syntax/types; this does not provision infrastructure
+az bicep build --file infra/main.bicep --stdout
 
-module mainTemplate '../main.bicep' = {
-  name: 'main-template-test'
-  params: {
-    environmentName: 'test'
-    location: location
-    applicationName: 'testapp'
-  }
-}
-
-// Test assertions
-resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'test-deployment'
-  location: location
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '8.0'
-    scriptContent: '''
-      $webAppName = "${mainTemplate.outputs.WEB_NAME}"
-      $response = Invoke-WebRequest -Uri "https://${mainTemplate.outputs.WEB_URL}/health" -UseBasicParsing
-      if ($response.StatusCode -ne 200) {
-        throw "Health check failed"
-      }
-      Write-Output "All tests passed!"
-    '''
-    timeout: 'PT10M'
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'P1D'
-  }
-}
+# After deploying your own complete app, test an actual application route
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error "$WEB_URL"
 ```
 
-## 🧪 Xem trước & Xác thực Hạ tầng (MỚI)
+Cung cấp hạ tầng không triển khai mã ứng dụng của bạn. Chạy kiểm tra ứng dụng chỉ sau `azd deploy`/`azd up`, và dùng `/health` nếu app bạn hỗ trợ. Script triển khai ARM tạo tài nguyên Azure và cần danh tính bổ sung, runtime hỗ trợ và quyền; không phải kiểm thử đơn vị cục bộ.
 
-### Xem trước thay đổi hạ tầng trước khi triển khai
+## 🧪 Xem Trước & Kiểm Tra Hạ Tầng (MỚI)
 
-Tính năng `azd provision --preview` cho phép bạn **mô phỏng việc cung cấp hạ tầng** trước khi thực sự triển khai tài nguyên. Nó tương tự về tinh thần với `terraform plan` hoặc `bicep what-if`, cung cấp cho bạn một cái nhìn **dry-run** về những thay đổi sẽ được thực hiện lên môi trường Azure của bạn.
+### Xem Trước Thay Đổi Hạ Tầng Trước Khi Triển Khai
 
-#### 🛠️ Nó làm gì
-- **Phân tích các mẫu IaC của bạn** (Bicep hoặc Terraform)
-- **Hiển thị bản xem trước các thay đổi tài nguyên**: thêm mới, xóa, cập nhật
-- **Không áp dụng thay đổi** — chỉ đọc và an toàn để chạy
+Tính năng `azd provision --preview` cho phép bạn **mô phỏng cung cấp hạ tầng** trước khi triển khai thực tế tài nguyên. Nó tương tự `terraform plan` hoặc `bicep what-if`, cung cấp **xem trước khô** về các thay đổi sẽ thực hiện trong môi trường Azure của bạn.
 
-#### Trường hợp sử dụng
+#### 🛠️ Nó Thực Hiện
+- **Phân tích mẫu IaC** của bạn (Bicep hoặc Terraform)
+- **Hiển thị xem trước thay đổi tài nguyên**: thêm, xóa, cập nhật
+- **Không áp dụng thay đổi hạ tầng được đề xuất** — kiểm tra trước các hook dự án; script có thể gây tác dụng phụ và xem trước vẫn yêu cầu quyền Azure
+
+#### Trường Hợp Sử Dụng
 ```bash
-# Xem trước các thay đổi cơ sở hạ tầng trước khi triển khai
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Xem trước cho môi trường cụ thể
+# Preview for specific environment
 azd provision --preview -e production
 ```
 
 Lệnh này giúp bạn:
-- **Xác thực các thay đổi hạ tầng** trước khi cam kết tài nguyên
-- **Phát hiện cấu hình sai sớm** trong chu trình phát triển
+- **Xác nhận thay đổi hạ tầng** trước khi cam kết tài nguyên
+- **Phát hiện sai cấu hình sớm** trong chu trình phát triển
 - **Hợp tác an toàn** trong môi trường nhóm
-- **Đảm bảo triển khai với quyền tối thiểu** mà không có điều bất ngờ
+- **Đảm bảo triển khai quyền tối thiểu** không gây bất ngờ
 
 Nó đặc biệt hữu ích khi:
 - Làm việc với môi trường đa dịch vụ phức tạp
-- Thay đổi hạ tầng production
-- Xác thực sửa đổi template trước khi phê duyệt PR
-- Đào tạo thành viên mới về các mẫu hạ tầng
+- Thay đổi hạ tầng sản xuất
+- Kiểm tra sửa đổi mẫu trước khi duyệt PR
+- Đào tạo thành viên nhóm mới về mô hình hạ tầng
 
-### Ví dụ đầu ra xem trước
-Đầu ra xem trước chính xác thay đổi tùy theo nhà cung cấp và cấu trúc dự án, nhưng kết quả nên xác định rõ các thay đổi đề xuất trước khi bất kỳ thứ gì được áp dụng.
+### Ví Dụ Đầu Ra Xem Trước
+Đầu ra xem trước cụ thể thay đổi theo nhà cung cấp và cấu trúc dự án, nhưng kết quả cần xác định rõ các thay đổi đề xuất trước khi áp dụng gì.
 
-```bash
+```text
 $ azd provision --preview
 
 🔍 Previewing infrastructure changes...
@@ -1007,22 +941,26 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Cập nhật tài nguyên và Di cư
+## �🔄 Cập Nhật và Di Cư Tài Nguyên
 
-### Cập nhật tài nguyên an toàn
+### Cập Nhật Tài Nguyên An Toàn
 ```bash
-# Trước tiên, xem trước các thay đổi cơ sở hạ tầng (ĐƯỢC KHUYẾN NGHỊ)
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Áp dụng các thay đổi sau khi xác nhận bản xem trước
-azd provision --confirm-with-no-prompt
+# Apply changes after preview confirmation
+azd provision
+# In automation, --no-prompt uses known values and fails on unresolved decisions;
+# it is not an approval bypass.
 
-# Để hoàn tác, sử dụng Git để đảo ngược các thay đổi cơ sở hạ tầng:
-git revert HEAD  # Hoàn tác commit cuối cùng của cơ sở hạ tầng
-azd provision    # Áp dụng trạng thái trước đó của cơ sở hạ tầng
+# For rollback, use Git to revert infrastructure changes:
+git revert HEAD  # Revert last infrastructure commit
+azd provision    # Apply previous infrastructure state
 ```
 
-### Di cư cơ sở dữ liệu
+### Di Cư Cơ Sở Dữ Liệu
+**Mô hình script triển khai chưa hoàn chỉnh:** yêu cầu danh tính người dùng gán được cấu hình nơi cần, runtime Azure CLI được hỗ trợ, công cụ di cư sẵn có, thư mục/cấu hình di cư cung cấp, và kết nối cơ sở dữ liệu. Không thể thực thi chỉ bằng cách dán tài nguyên này vào mẫu.
+
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -1047,25 +985,29 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
     ]
     timeout: 'PT30M'
     cleanupPreference: 'OnSuccess'
+    retentionInterval: 'P1D'
   }
 }
 ```
 
-## 🎯 Thực hành tốt nhất
+## 🎯 Thực Tiễn Tốt Nhất
 
-### 1. Quy ước đặt tên tài nguyên
+### 1. Quy Ước Đặt Tên Tài Nguyên
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
   appService: '${applicationName}-web-${resourceToken}'
   database: '${applicationName}-db-${resourceToken}'
-  storage: '${take(replace(applicationName, '-', ''), 15)}${environmentName}sa${take(resourceToken, 8)}'
-  keyVault: '${take(applicationName, 15)}-kv-${take(resourceToken, 8)}'
+  storage: 'st${resourceToken}' // lowercase alphanumeric, <=24 characters
+  keyVault: 'kv-${resourceToken}' // <=24 characters
 }
 ```
 
-### 2. Chiến lược gắn thẻ
+### 2. Chiến Lược Gắn Tag
 ```bicep
+// utcNow is only allowed in a parameter default, not directly in a variable.
+param deploymentDate string = utcNow('yyyy-MM-dd')
+
 var commonTags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
@@ -1073,11 +1015,11 @@ var commonTags = {
   'cost-center': 'engineering'
   'owner': 'platform-team'
   'project': applicationName
-  'created-date': utcNow('yyyy-MM-dd')
+  'deployment-date': deploymentDate
 }
 ```
 
-### 3. Xác thực tham số
+### 3. Xác Thực Tham Số
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -1093,7 +1035,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Tổ chức outputs
+### 4. Tổ Chức Output
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -1108,25 +1050,25 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## Bước tiếp theo
+## Bước Tiếp Theo
 
-- [Lên kế hoạch trước khi triển khai](../chapter-06-pre-deployment/capacity-planning.md) - Xác thực khả năng cung cấp tài nguyên
-- [Các vấn đề thường gặp](../chapter-07-troubleshooting/common-issues.md) - Khắc phục sự cố hạ tầng
-- [Hướng dẫn gỡ lỗi](../chapter-07-troubleshooting/debugging.md) - Gỡ lỗi các vấn đề khi cung cấp
-- [Lựa chọn SKU](../chapter-06-pre-deployment/sku-selection.md) - Chọn hạng dịch vụ phù hợp
+- [Lập Kế Hoạch Trước Triển Khai](../chapter-06-pre-deployment/capacity-planning.md) - Xác nhận tài nguyên khả dụng
+- [Vấn Đề Thường Gặp](../chapter-07-troubleshooting/common-issues.md) - Khắc phục sự cố hạ tầng
+- [Hướng dẫn Gỡ lỗi](../chapter-07-troubleshooting/debugging.md) - Gỡ lỗi các vấn đề cung cấp
+- [Chọn SKU](../chapter-06-pre-deployment/sku-selection.md) - Chọn tầng dịch vụ phù hợp
 
-## Tài nguyên bổ sung
+## Tài nguyên Thêm
 
 - [Tài liệu Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Mẫu Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Trung tâm Kiến trúc Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Khung kiến trúc Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Điều hướng**
-- **Bài học trước**: [Deployment Guide](deployment-guide.md)
-- **Bài học tiếp theo**: [Lên kế hoạch công suất](../chapter-06-pre-deployment/capacity-planning.md)
+- **Bài học Trước**: [Hướng dẫn Triển khai](deployment-guide.md)
+- **Bài học Tiếp theo**: [Lập kế hoạch Năng lực](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 

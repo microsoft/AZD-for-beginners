@@ -1,11 +1,11 @@
 # Integrasjon av Application Insights med AZD
 
-⏱️ **Estimert tid**: 40-50 minutter | 💰 **Kostnadspåvirkning**: ~$5-15/måned | ⭐ **Kompleksitet**: Middels
+⏱️ **Estimert tid**: 40-50 minutter | 💰 **Kostnadseffekt**: ~$5-15/måned | ⭐ **Kompleksitet**: Middels
 
 **📚 Læringssti:**
-- ← Forrige: [Preflight Checks](preflight-checks.md) - Validering før distribusjon
+- ← Forrige: [Forhåndssjekk](preflight-checks.md) - Validering før distribusjon
 - 🎯 **Du er her**: Integrasjon av Application Insights (Overvåking, telemetri, feilsøking)
-- → Neste: [Deployering Guide](../chapter-04-infrastructure/deployment-guide.md) - Distribuer til Azure
+- → Neste: [Distribusjonsveiledning](../chapter-04-infrastructure/deployment-guide.md) - Distribuer til Azure
 - 🏠 [Kurs Hjem](../../README.md)
 
 ---
@@ -13,14 +13,14 @@
 ## Hva du vil lære
 
 Ved å fullføre denne leksjonen vil du:
-- Integrere **Application Insights** i AZD-prosjekter automatisk
-- Konfigurere **distribuert sporing** for mikrotjenester
+- Deklarere **Application Insights** i AZD-infrastruktur og konfigurere SDK-instrumentering
+- Konfigurere **distribuert sporing** for mikroservicer
 - Implementere **tilpasset telemetri** (målinger, hendelser, avhengigheter)
-- Sette opp **live-målinger** for sanntidsovervåking
+- Sette opp **live metrics** for sanntidsovervåking
 - Lage **varsler og dashbord** fra AZD-distribusjoner
 - Feilsøke produksjonsproblemer med **telemetri-spørringer**
 - Optimalisere **kostnader og sampling** strategier
-- Overvåke **AI/LLM-applikasjoner** (tokens, ventetid, kostnader)
+- Overvåke **AI/LLM-applikasjoner** (tokens, forsinkelse, kostnader)
 
 ## Hvorfor Application Insights med AZD er viktig
 
@@ -44,10 +44,10 @@ Ved å fullføre denne leksjonen vil du:
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**Analogien**: Application Insights er som å ha en "black box" flyinnspiller + cockpit-dashboard for applikasjonen din. Du ser alt som skjer i sanntid og kan spole tilbake hendelser.
+**Analogi**: Application Insights er som å ha en "svart boks" flyopptaker + cockpit-dashboard for applikasjonen din. Du ser alt som skjer i sanntid og kan spille av alle hendelser.
 
 ---
 
@@ -57,24 +57,24 @@ Ved å fullføre denne leksjonen vil du:
 
 ```mermaid
 graph TB
-    User[Bruker/Klient]
+    User[User/Client]
     App1[Container App 1<br/>API Gateway]
-    App2[Container App 2<br/>Produktjeneste]
-    App3[Container App 3<br/>Ordretjeneste]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[Application Insights<br/>Telemetri-sentral]
-    LogAnalytics[(Log Analytics<br/>Arbeidsområde)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Azure Portal<br/>Dashbord & Varsler]
-    Query[Kusto-spørringer<br/>Tilpasset analyse]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Auto-instrumentering| AppInsights
-    App2 -.->|Auto-instrumentering| AppInsights
-    App3 -.->|Auto-instrumentering| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,47 +83,50 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 ### Hva som overvåkes automatisk
 
-| Telemetri Type | Hva den fanger | Brukstilfelle |
-|----------------|----------------|---------------|
-| **Forespørsler** | HTTP-forespørsler, statuskoder, varighet | Overvåking av API-ytelse |
+Støttet automatisk instrumentering fanger opp forespørsler/avhengigheter for instrumenterte biblioteker. Tilpassede hendelser og målinger krever applikasjonskode; tilgjengelighetstester må konfigureres separat. Den samler ikke inn alt nedenfor bare fordi ressursen eksisterer.
+
+| Telemetritype | Hva den fanger | Bruksområde |
+|----------------|------------------|----------|
+| **Forespørsler** | HTTP-forespørsler, statuskoder, varighet | API-ytelsesovervåking |
 | **Avhengigheter** | Eksterne kall (DB, APIer, lagring) | Identifisere flaskehalser |
-| **Unntak** | Ubehandlede feil med stack trace | Feilsøking av feil |
-| **Egendefinerte hendelser** | Forretningshendelser (registrering, kjøp) | Analyse og salgstrakt |
-| **Målinger** | Ytelsestellere, egendefinerte målinger | Kapasitetsplanlegging |
+| **Unntak** | Ubehandlede feil med stack traces | Feilsøking av feil |
+| **Tilpassede hendelser** | Forretningshendelser (påmelding, kjøp) | Analyse og trakter |
+| **Målinger** | Ytelsestellere, tilpassede målinger | Kapasitetsplanlegging |
 | **Spor** | Loggmeldinger med alvorlighetsgrad | Feilsøking og revisjon |
-| **Tilgjengelighet** | Oppetid og responstidskontroller | SLA-overvåking |
+| **Tilgjengelighet** | Oppetid og responstidstester | SLA-overvåking |
 
 ---
 
 ## Forutsetninger
 
-### Påkrevde verktøy
+### Nødvendige verktøy
 
 ```bash
-# Verifiser Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Forventet: azd versjon 1.0.0 eller høyere
+# Command reference baseline: azd 1.37.2
 
-# Verifiser Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Forventet: azure-cli 2.50.0 eller høyere
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Azure-krav
 
-- Aktiv Azure-abonnement
+- Aktivt Azure-abonnement
 - Tillatelser til å opprette:
   - Application Insights-ressurser
   - Log Analytics-arbeidsområder
   - Container Apps
   - Ressursgrupper
 
-### Forkunnskaper
+### Forutgående kunnskap
 
 Du bør ha fullført:
-- [AZD Grunnleggende](../chapter-01-foundation/azd-basics.md) - Kjernebegreper i AZD
+- [AZD Grunnleggende](../chapter-01-foundation/azd-basics.md) - Kjerne AZD-konsepter
 - [Konfigurasjon](../chapter-03-configuration/configuration.md) - Miljøoppsett
 - [Første prosjekt](../chapter-01-foundation/first-project.md) - Grunnleggende distribusjon
 
@@ -131,9 +134,11 @@ Du bør ha fullført:
 
 ## Leksjon 1: Automatisk Application Insights med AZD
 
-### Hvordan AZD oppretter Application Insights
+### Hvordan AZD klargjør Application Insights
 
-AZD oppretter og konfigurerer automatisk Application Insights ved distribusjon. La oss se hvordan det fungerer.
+AZD klargjør Application Insights **bare når prosjektets infrastruktur erklærer det**. `azure.yaml` alene oppretter ikke overvåking eller instrumenterer applikasjonskode.
+
+> **Eksempelomfang:** Denne leksjonen inneholder integrasjonsfragmenter, ikke et komplett `monitored-app` prosjekt i dette depotet. Lever en hovedmal og parametermapping, et Container Apps-miljø, register/bilde og identitetskonfigurasjon, Dockerfile, og servicetagger før distribusjon. Senere leksjoner viser alternative/utvidelsesfragmenter, ikke filer som alle kan limes sammen uendret. Start med et fungerende [mikrotjenesteksempel](../../../../examples/microservices) hvis du trenger et kjørbart utgangspunkt.
 
 ### Prosjektstruktur
 
@@ -169,10 +174,10 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**Det er det!** AZD oppretter Application Insights som standard. Ingen ekstra konfigurasjon nødvendig for grunnleggende overvåking.
+Dette erklærer tjenesten som kan distribueres. Følgende Bicep og SDK-konfigurasjon leverer overvåking; azd legger dem ikke til implisitt.
 
 ---
 
@@ -223,6 +228,7 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
@@ -235,7 +241,8 @@ output applicationInsightsName string = applicationInsights.name
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -291,29 +299,23 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Hent Application Insights-tilkoblingsstreng
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Konfigurer distribuert sporing
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # 100% prøvetaking for utvikling
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # Konfigurer logging
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # Simuler databasekall (automatisk sporet som avhengighet)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Simuler treg operasjon
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -367,34 +369,34 @@ if __name__ == '__main__':
 **Fil: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+Løs disse avhengighetene i prosjektet ditt, test dem sammen, og lås versjonene som følge. Nye prosjekter bør bruke Azure Monitor OpenTelemetry, ikke de utgåtte OpenCensus Python-eksportørene.
 
 ---
 
 ### Steg 5: Distribuer og verifiser
 
 ```bash
-# Initialiser AZD
-azd init
-
-# Distribuer (setter opp Application Insights automatisk)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# Hent app-URL
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# Generer telemetri
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
 curl $APP_URL/api/slow
 ```
 
-**✅ Forventet output:**
+**✅ Forventet utgang:**
 ```json
 {
   "status": "healthy",
@@ -407,23 +409,23 @@ curl $APP_URL/api/slow
 ### Steg 6: Se telemetri i Azure-portalen
 
 ```bash
-# Hent Application Insights-detaljer
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Åpne i Azure-portalen
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Gå til Azure Portal → Application Insights → Transaction Search**
+**Naviger til Azure Portal → Application Insights → Transaction Search**
 
-Du skal kunne se:
+Du bør se:
 - ✅ HTTP-forespørsler med statuskoder
 - ✅ Forespørselsvarighet (3+ sekunder for `/api/slow`)
-- ✅ Detaljer om unntak fra `/api/error-test`
-- ✅ Egendefinerte loggmeldinger
+- ✅ Unntaksdetaljer fra `/api/error-test`
+- ✅ Tilpassede loggmeldinger
 
 ---
 
@@ -431,20 +433,15 @@ Du skal kunne se:
 
 ### Spor forretningshendelser
 
-La oss legge til egendefinert telemetri for forretningskritiske hendelser.
+La oss legge til tilpasset telemetri for forretningskritiske hendelser.
 
 **Fil: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # Sett opp logger
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # Sett opp måleeksportør
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # Sett opp sporer
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# Global telemetriklient
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### Oppdater applikasjonen med egendefinerte hendelser
+### Oppdater applikasjon med tilpassede hendelser
 
-**Fil: `src/app.py` (utvidet)**
+**Fil: `src/app.py` (forbedret)**
+
+Legg til disse rutene i eksisterende Flask-applikasjon; behold de tidligere helse-/testrutene. Den forkortede blokken nedenfor viser en separat app for klarhet. Telemetri-initiering finnes nå i `telemetry.py`—ikke initialiser eksportører to ganger.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # Spor forretningshendelse
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Spor inntektsmål
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # Simuler søk (ville være ekte databaseforespørsel)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Konverter til ms
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # Spor søkehending
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Spor søkeytelsesmetrisk
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # Simuler ekstern API-kall
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # Spor avhengighet
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -619,22 +589,22 @@ if __name__ == '__main__':
 ### Test tilpasset telemetri
 
 ```bash
-# Spor kjøpshendelse
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# Spor søkehåndelse
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# Spor ekstern avhengighet
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
 **Se i Azure Portal:**
 
-Naviger til Application Insights → Logs, og kjør:
+Naviger til Application Insights → Logs, kjør deretter:
 
 ```kusto
 // View purchase events
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -665,11 +635,11 @@ traces
 
 ---
 
-## Leksjon 3: Distribuert sporing for mikrotjenester
+## Leksjon 3: Distribuert sporing for mikroservicer
 
 ### Aktiver sporing på tvers av tjenester
 
-For mikrotjenester korrelerer Application Insights automatisk forespørsler på tvers av tjenester.
+Med kompatibel instrumentering og W3C trace-context-propagasjon korrelerer Application Insights forespørsler på tvers av tjenester. Å dele en tilkoblingsstreng alene etablerer ikke foreldrebarn-spans. Følgende arkitekturfragment refererer til moduler du må implementere.
 
 **Fil: `infra/main.bicep`**
 
@@ -744,35 +714,36 @@ output GATEWAY_URL string = apiGateway.outputs.uri
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API Gateway<br/>(Sporings-ID: abc123)
-    participant Product as Produkttjeneste<br/>(Foreldre-ID: abc123)
-    participant Order as Ordretjeneste<br/>(Foreldre-ID: abc123)
-    participant AppInsights as Applikasjonsinnsikt
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
+    participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Start spor: abc123
-    Gateway->>AppInsights: Loggfør forespørsel (Sporings-ID: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: Foreldre-ID: abc123
-    Product->>AppInsights: Loggfør avhengighetsanrop
-    Product-->>Gateway: Produktdetaljer
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: Foreldre-ID: abc123
-    Order->>AppInsights: Loggfør avhengighetsanrop
-    Order-->>Gateway: Ordre opprettet
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: Kasse fullført
-    Gateway->>AppInsights: Loggfør respons (Varighet: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: Korrelation etter sporings-ID
+    Note over AppInsights: Correlation by Trace ID
 ```
-**Spørr ende-til-ende sporing:**
+
+**Spørr ende-til-ende-spor:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -792,15 +763,15 @@ dependencies
 
 ### Aktiver Live Metrics-strøm
 
-Live Metrics gir sanntids telemetri med <1 sekunds forsinkelse.
+Live Metrics gir nær-sanntids telemetri når det støttes og aktiveres av SDK. Det er ikke en forsinkelses-SLA. Python OpenTelemetry-oppsettet ovenfor velger dette med `enable_live_metrics=True`.
 
-**Tilgang til Live Metrics:**
+**Åpne Live Metrics:**
 
 ```bash
-# Hent Application Insights-ressurs
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Hent ressursgruppe
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
@@ -810,21 +781,21 @@ echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME 
 - ✅ Innkommende forespørselsrate (forespørsler/sekund)
 - ✅ Utgående avhengighetskall
 - ✅ Antall unntak
-- ✅ CPU- og minneforbruk
+- ✅ CPU- og minnebruk
 - ✅ Antall aktive servere
-- ✅ Samplet telemetri
+- ✅ Prøvetakingsdata for telemetri
 
 ### Generer belastning for testing
 
 ```bash
-# Generer belastning for å se live-målinger
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Se live-målinger i Azure-portalen
-# Du bør se en topp i forespørselsraten
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
@@ -833,20 +804,20 @@ done
 
 ### Øvelse 1: Sett opp varsler ⭐⭐ (Middels)
 
-**Mål**: Lag varsler for høye feilrater og langsomme responser.
+**Mål**: Opprett varsler for høye feilrater og langsomme responser.
 
 **Steg:**
 
-1. **Lag varsel for feilrate:**
+1. **Opprett varsel for feilrate:**
 
 ```bash
-# Hent Application Insights ressurs-ID
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Opprett metrikkvarsel for mislykkede forespørsler
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,10 +825,10 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
-2. **Lag varsel for langsomme responser:**
+2. **Opprett varsel for langsomme responser:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,7 +841,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Lag varsel via Bicep (foretrukket for AZD):**
+3. **Opprett varsel via Bicep (foretrukket for AZD):**
 
 **Fil: `infra/core/alerts.bicep`**
 
@@ -947,25 +918,25 @@ output slowResponseAlertId string = slowResponseAlert.id
 4. **Test varsler:**
 
 ```bash
-# Generer feil
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Generer langsomme responser
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Sjekk varslingstatus (vent 5-10 minutter)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
 **✅ Suksesskriterier:**
-- ✅ Varsler opprettet uten feil
+- ✅ Varsler opprettet vellykket
 - ✅ Varsler utløses når terskler overskrides
 - ✅ Kan se varselhistorikk i Azure Portal
 - ✅ Integrert med AZD-distribusjon
@@ -974,9 +945,9 @@ az monitor metrics alert list \
 
 ---
 
-### Øvelse 2: Lag egendefinert dashbord ⭐⭐ (Middels)
+### Øvelse 2: Opprett tilpasset dashbord ⭐⭐ (Middels)
 
-**Mål**: Bygg et dashbord som viser viktige applikasjonsmålinger.
+**Mål**: Bygg et dashbord som viser nøkkelapplikasjonsmålinger.
 
 **Steg:**
 
@@ -984,13 +955,13 @@ az monitor metrics alert list \
 
 Naviger til: Azure Portal → Dashboards → Nytt dashbord
 
-2. **Legg til fliser for viktige målinger:**
+2. **Legg til fliser for nøkkelmålinger:**
 
 - Antall forespørsler (siste 24 timer)
 - Gjennomsnittlig responstid
 - Feilrate
 - Topp 5 langsomste operasjoner
-- Geografisk fordeling av brukere
+- Geografisk brukerfordeling
 
 3. **Lag dashbord via Bicep:**
 
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1065,8 +1046,8 @@ output dashboardId string = dashboard.id
 
 4. **Distribuer dashbord:**
 
-```bash
-# Legg til i main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,16 +1057,18 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# Distribuer
+```bash
+# Deploy
 azd up
 ```
 
 **✅ Suksesskriterier:**
-- ✅ Dashbord viser nøkkelindikatorer
-- ✅ Kan festes til Azure Portal startside
-- ✅ Oppdateres i sanntid
-- ✅ Kan distribueres via AZD
+- ✅ Dashbord viser nøkkelmålinger
+- ✅ Kan festes til Azure Portal-hjem
+- ✅ Oppdateringer i sanntid
+- ✅ Distribuerbart via AZD
 
 **Tid**: 25-30 minutter
 
@@ -1093,11 +1076,11 @@ azd up
 
 ### Øvelse 3: Overvåk AI/LLM-applikasjon ⭐⭐⭐ (Avansert)
 
-**Mål**: Spor Microsoft Foundry Models bruk (tokens, kostnader, ventetid).
+**Mål**: Spor Microsoft Foundry Models bruk (tokens, kostnader, forsinkelse).
 
 **Steg:**
 
-1. **Lag AI-overvåkings-wrapper:**
+1. **Lag AI-overvåkingswrapper:**
 
 **Fil: `src/ai_telemetry.py`**
 
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # Kall Microsoft Foundry-modeller
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # Hent ut bruk
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Beregn kostnad (gpt-4.1-prising)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 per 1K tokens
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 per 1K tokens
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # Spor egendefinert hendelse
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # Spor måledata
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# Initialiser overvåket OpenAI-klient
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Kall med automatisk overvåking
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1222,7 +1211,7 @@ def chat():
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1252,9 +1241,9 @@ traces
 
 **✅ Suksesskriterier:**
 - ✅ Hvert OpenAI-kall spores automatisk
-- ✅ Token-bruk og kostnader synlige
-- ✅ Ventetid overvåkes
-- ✅ Kan sette budsjett-alarmer
+- ✅ Tokenbruk og kostnader synlige
+- ✅ Forsinkelse overvåket
+- ✅ Kan sette budsjettvarsler
 
 **Tid**: 35-45 minutter
 
@@ -1262,36 +1251,23 @@ traces
 
 ## Kostnadsoptimalisering
 
-### Sampling-strategier
+### Samplingstrategier
 
 Kontroller kostnader ved å sample telemetri:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# Utvikling: 100 % prøvetaking
-sampler = ProbabilitySampler(rate=1.0)
-
-# Produksjon: 10 % prøvetaking (reduserer kostnader med 90 %)
-sampler = ProbabilitySampler(rate=0.1)
-
-# Adaptiv prøvetaking (justeres automatisk)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**I Bicep:**
+Spormsampling reduserer ikke hver telemetrikategori med 90 %. Målinger og uavhengig utgitte logger trenger egne volumkontroller. Velg rate basert på observabilitetsbehov, ikke et generelt forbud i produksjon.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+Sett SDK-sampling eksplisitt; komponentens `SamplingPercentage` egenskap er ikke en erstatning for å konfigurere Python OpenTelemetry-sampler.
 
-### Dataoppbevaring
+### Datasbevaring
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1303,40 +1279,40 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### Månedlige kostnadsestimater
+### Estimerte månedlige kostnader
 
-| Datavolum | Oppbevaring | Månedlig kostnad |
-|-----------|------------|------------------|
+| Datavolum | Bevaring | Månedlig kostnad |
+|-------------|-----------|--------------|
 | 1 GB/måned | 30 dager | ~$2-5 |
 | 5 GB/måned | 30 dager | ~$10-15 |
 | 10 GB/måned | 90 dager | ~$25-40 |
 | 50 GB/måned | 90 dager | ~$100-150 |
 
-**Gratisnivå**: 5 GB/måned inkludert
+Disse tallene er illustrative, ikke pristilbud. Verifiser innlasting, bevaring, varsel og testprising i din region og avtale; gratis kvoter er delt/avgrenset etter Azure Monitor-prising, ikke en garantert gratis SKU per Application Insights-ressurs.
 
 ---
 
-## Kunnskapskontroll
+## Kunnskapssjekkpunkt
 
 ### 1. Grunnleggende integrasjon ✓
 
-Test din forståelse:
+Test forståelsen din:
 
-- [ ] **Spørsmål 1**: Hvordan oppretter AZD Application Insights?
-  - **Svar**: Automatisk via Bicep-maler i `infra/core/monitoring.bicep`
+- [ ] **Q1**: Hvordan klargjør AZD Application Insights?
+  - **A**: Den distribuerer overvåkingsressursene som er eksplisitt erklært av prosjektets Bicep/Terraform-maler.
 
-- [ ] **Spørsmål 2**: Hvilket miljøvariabel aktiverer Application Insights?
-  - **Svar**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [ ] **Q2**: Hvilken miljøvariabel aktiverer Application Insights?
+  - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Spørsmål 3**: Hva er de tre hovedtypene telemetri?
-  - **Svar**: Forespørsler (HTTP-kall), Avhengigheter (eksterne kall), Unntak (feil)
+- [ ] **Q3**: Hva er de tre hovedtelemetritypene?
+  - **A**: Forespørsler (HTTP-kall), Avhengigheter (eksterne kall), Unntak (feil)
 
-**Praktisk verifisering:**
+**Praktisk bekreftelse:**
 ```bash
-# Sjekk om Application Insights er konfigurert
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Verifiser at telemetri flyter
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1347,18 +1323,18 @@ az monitor app-insights metrics show \
 
 ### 2. Tilpasset telemetri ✓
 
-Test din forståelse:
+Test forståelsen din:
 
-- [ ] **Spørsmål 1**: Hvordan sporer du egendefinerte forretningshendelser?
-  - **Svar**: Bruk logger med `custom_dimensions` eller `TelemetryClient.track_event()`
+- [ ] **Q1**: Hvordan sporer du tilpassede forretningshendelser?
+  - **A**: Denne leksjonens wrapper skriver strukturerte OTel-logger med `event_name` attributter, søkbare i `traces`; disse er ikke automatisk `customEvents`.
 
-- [ ] **Spørsmål 2**: Hva er forskjellen på hendelser og målinger?
-  - **Svar**: Hendelser er diskrete hendelser, målinger er numeriske målinger
+- [ ] **Q2**: Hva er forskjellen på hendelser og målinger?
+  - **A**: Hendelser er diskrete forekomster, målinger er numeriske målinger
 
-- [ ] **Spørsmål 3**: Hvordan korrelerer du telemetri på tvers av tjenester?
-  - **Svar**: Application Insights bruker automatisk `operation_Id` for korrelasjon
+- [ ] **Q3**: Hvordan korrelerer du telemetri på tvers av tjenester?
+  - **A**: Application Insights bruker automatisk `operation_Id` for korrelasjon
 
-**Praktisk verifisering:**
+**Praktisk bekreftelse:**
 ```kusto
 // Verify custom events
 traces
@@ -1370,24 +1346,22 @@ traces
 
 ### 3. Produksjonsovervåking ✓
 
-Test din forståelse:
+Test forståelsen din:
 
-- [ ] **Spørsmål 1**: Hva er sampling og hvorfor bruke det?
-  - **Svar**: Sampling reduserer datavolum (og kostnad) ved å bare fange en prosentandel av telemetri
+- [ ] **Q1**: Hva er sampling og hvorfor bruke det?
+  - **A**: Sampling reduserer datavolum (og kostnad) ved kun å fange en andel av telemetrien
 
-- [ ] **Spørsmål 2**: Hvordan setter du opp varsler?
-  - **Svar**: Bruk metrikkvarsler i Bicep eller Azure Portal basert på Application Insights-målinger
+- [ ] **Q2**: Hvordan setter du opp varsler?
+  - **A**: Bruk metrikkvarsler i Bicep eller Azure Portal basert på Application Insights-målinger
 
-- [ ] **Spørsmål 3**: Hva er forskjellen på Log Analytics og Application Insights?
-  - **Svar**: Application Insights lagrer data i Log Analytics-arbeidsområde; App Insights gir applikasjons-spesifikke visninger
+- [ ] **Q3**: Hva er forskjellen på Log Analytics og Application Insights?
+  - **A**: Application Insights lagrer data i Log Analytics-arbeidsområde; App Insights gir applikasjonsspesifikke visninger
 
-**Praktisk verifisering:**
+**Praktisk bekreftelse:**
 ```bash
-# Sjekk prøveuttaks-konfigurasjon
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
@@ -1399,10 +1373,8 @@ az monitor app-insights component show \
 1. **Bruk korrelasjons-IDer**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
@@ -1413,43 +1385,43 @@ az monitor app-insights component show \
 
 3. **Bruk strukturert logging**
    ```python
-   # ✅ BRA: Strukturert
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ DÅRLIG: Ustrukturert
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
 4. **Overvåk avhengigheter**
    ```python
-   # Spore databaseanrop, HTTP-forespørsler osv. automatisk.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
 5. **Bruk Live Metrics under distribusjoner**
 
-### ❌ IKKE:
+### ❌ IKKE GJØR:
 
 1. **Ikke logg sensitiv informasjon**
    ```python
-   # ❌ DÅRLIG
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ BRA
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **Ikke bruk 100% sampling i produksjon**
+2. **Ikke velg sampling uten å måle volum og diagnostiske behov**
    ```python
-   # ❌ Dyrt
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ Kostnadseffektivt
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **Ikke ignorer døde brevkøer**
+3. **Ikke ignorer døde bokskøer**
 
-4. **Ikke glem å sette databegrensninger**
+4. **Ikke glem å sette grenser for dataretensjon**
 
 ---
 
@@ -1459,19 +1431,19 @@ az monitor app-insights component show \
 
 **Diagnose:**
 ```bash
-# Sjekk at tilkoblingsstrengen er satt
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Sjekk applikasjonslogger via Azure Monitor
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# Eller bruk Azure CLI for Container Apps:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Løsning:**
 ```bash
-# Bekreft tilkoblingsstreng i Container App
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1485,16 +1457,15 @@ az containerapp show \
 
 **Diagnose:**
 ```bash
-# Sjekk dataopptak
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **Løsning:**
 - Reduser samplingsrate
-- Forkort oppbevaringsperiode
+- Kortere retensjonsperiode
 - Fjern detaljert logging
 
 ---
@@ -1503,49 +1474,49 @@ az monitor app-insights metrics show \
 
 ### Offisiell dokumentasjon
 - [Application Insights Oversikt](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+- [Azure Monitor OpenTelemetry-oppsett](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
 - [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD Overvåking](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
 ### Neste steg i dette kurset
-- ← Forrige: [Preflight Checks](preflight-checks.md)
-- → Neste: [Deployering Guide](../chapter-04-infrastructure/deployment-guide.md)
+- ← Forrige: [Forhåndssjekk](preflight-checks.md)
+- → Neste: [Distribusjonsveiledning](../chapter-04-infrastructure/deployment-guide.md)
 - 🏠 [Kurs Hjem](../../README.md)
 
 ### Relaterte eksempler
-- [Microsoft Foundry Models Eksempel](../../../../examples/azure-openai-chat) - AI-telemetri
-- [Mikrotjenester Eksempel](../../../../examples/microservices) - Distribuert sporing
+- [Microsoft Foundry-modeller eksempel](../../../../examples/azure-openai-chat) - AI telemetri
+- [Mikrotjenester eksempel](../../../../examples/microservices) - Distribuert sporing
 
 ---
 
 ## Oppsummering
 
 **Du har lært:**
-- ✅ Automatisk opprettelse av Application Insights med AZD
+- ✅ Automatisk Application Insights provisjonering med AZD
 - ✅ Tilpasset telemetri (hendelser, målinger, avhengigheter)
 - ✅ Distribuert sporing på tvers av mikrotjenester
-- ✅ Live-målinger og sanntidsovervåking
+- ✅ Sanntidsmålinger og overvåking
 - ✅ Varsler og dashbord
-- ✅ Overvåking av AI/LLM-applikasjoner
-- ✅ Kostnadsoptimalisering strategier
+- ✅ AI/LLM applikasjonsovervåking
+- ✅ Kostnadsoptimaliseringsstrategier
 
-**Viktige punkter å ta med seg:**
-1. **AZD overvåking skjer automatisk** - Ingen manuell oppsett
-2. **Bruk strukturert logging** - Gjør spørring enklere
+**Viktige poeng:**
+1. **Angi overvåking eksplisitt** - AZD distribuerer malene dine; SDK-instrumentering sender telemetri
+2. **Bruk strukturert logging** - Gjør forespørsler enklere
 3. **Spor forretningshendelser** - Ikke bare tekniske målinger
-4. **Overvåk AI-kostnader** - Spor tokens og forbruk
+4. **Overvåk AI-kostnader** - Følg tokens og utgifter
 5. **Sett opp varsler** - Vær proaktiv, ikke reaktiv
-6. **Optimaliser kostnader** - Bruk sampling og lagringsgrenser
+6. **Optimaliser kostnader** - Bruk sampling og retensjonsgrenser
 
 **Neste steg:**
 1. Fullfør de praktiske øvelsene
 2. Legg til Application Insights i AZD-prosjektene dine
-3. Lag egendefinerte dashboards for teamet ditt
-4. Lær [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+3. Lag tilpassede dashbord for teamet ditt
+4. Lær [Distribusjonsveiledning](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på dets originale språk skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

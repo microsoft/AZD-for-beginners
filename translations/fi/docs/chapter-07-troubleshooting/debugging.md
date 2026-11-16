@@ -1,75 +1,70 @@
-# AZD-käyttöönottojen vianmääritysopas
+# Vianmääritysohje AZD-jakeluille
 
-**Lukujen navigointi:**
+**Lukuvalikko:**
 - **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 7 - Vianmääritys ja debuggaus
+- **📖 Nykyinen luku**: Luku 7 - Ongelmien vianmääritys ja debuggaus
 - **⬅️ Edellinen**: [Yleiset ongelmat](common-issues.md)
 - **➡️ Seuraava**: [AI-kohtainen vianmääritys](ai-troubleshooting.md)
-- **🚀 Seuraava luku**: [Luku 8: Tuotanto- ja yritysmallit](../chapter-08-production/production-ai-practices.md)
+- **🚀 Seuraava luku**: [Luku 8: Tuotanto- ja yrityskäytännöt](../chapter-08-production/production-ai-practices.md)
 
 ## Johdanto
 
-Tämä kattava opas tarjoaa edistyneitä vianmääritysstrategioita, työkaluja ja tekniikoita Azure Developer CLI -käyttöönottojen monimutkaisten ongelmien diagnosointiin ja ratkaisemiseen. Opit systemaattisia vikojen etsintämenetelmiä, lokien analysointitekniikoita, suorituskyvyn profilointia ja edistyneitä diagnostiikkatyökaluja, joiden avulla voit ratkaista käyttöönotto- ja ajonaikaisia ongelmia tehokkaasti.
+Tämä kattava opas tarjoaa edistyneitä vianmäärityksen strategioita, työkaluja ja tekniikoita Azure Developer CLI -jakeluiden monimutkaisten ongelmien diagnosointiin ja ratkaisuun. Opit järjestelmälliset vianmäärityksen menetelmät, lokianalyysin tekniikat, suorituskyvyn profiloinnin sekä edistyneet diagnostiikkatyökalut tehokkaaseen jakelu- ja suoritusaikaongelmien ratkaisuun.
 
 ## Oppimistavoitteet
 
-Kun suoritat tämän oppaan loppuun, osaat:
-- Hallita systemaattisia vianmääritysmenetelmiä Azure Developer CLI -ongelmille
-- Ymmärtää edistyneen lokituksen asetukset ja lokianalyysitekniikat
-- Toteuttaa suorituskyvyn profilointi- ja valvontastrategioita
-- Käyttää Azuren diagnostiikkatyökaluja ja -palveluja monimutkaisten ongelmien ratkaisemiseen
-- Soveltaa verkon vianmääritystä ja tietoturvan vianetsintätekniikoita
-- Konfiguroida kattavan valvonnan ja hälytykset proaktiiviseen ongelmien havaitsemiseen
+Tämän oppaan suorittamisen jälkeen osaat:
+- Hallita järjestelmälliset vianmääritysmenetelmät Azure Developer CLI -ongelmille
+- Ymmärtää laajennetun lokituksen konfiguroinnin ja lokianalyysitekniikat
+- Toteuttaa suorituskyvyn profilointi- ja seurantastrategioita
+- Käyttää Azure-diagnostiikkatyökaluja ja palveluita monimutkaisten ongelmien ratkaisuun
+- Soveltaa verkkovianmääritystä ja tietoturvaongelmien ratkaisua
+- Konfiguroida kattava valvonta ja hälytykset ennakoivaan ongelmien havaitsemiseen
 
 ## Oppimistulokset
 
-Suoritettuasi oppaan pystyt:
-- Soveltamaan TRIAGE-menetelmää monimutkaisten käyttöönotto-ongelmien järjestelmälliseen vianmääritykseen
+Oppaan suorittamisen jälkeen pystyt:
+- Soveltamaan TRIAGE-menetelmää järjestelmällisesti monimutkaisten jakeluongelmien vianmääritykseen
 - Konfiguroimaan ja analysoimaan kattavia loki- ja jäljitystietoja
 - Käyttämään Azure Monitoria, Application Insightsia ja diagnostiikkatyökaluja tehokkaasti
-- Vianmäärityään verkon yhteyksiin, todennukseen ja käyttöoikeuksiin itsenäisesti
-- Toteuttamaan suorituskyvyn valvonta- ja optimointistrategioita
-- Luomaan mukautettuja vianmääritysskriptejä ja automaatiota toistuviin ongelmiin
+- Debuggaamaan verkkoyhteys-, todennus- ja käyttöoikeusongelmia itsenäisesti
+- Toteuttamaan suorituskyvyn seurantaa ja optimointistrategioita
+- Luomaan mukautettuja debuggausskriptejä ja automaatioita toistuviin ongelmiin
 
 ## Vianmääritysmenetelmä
 
 ### TRIAGE-lähestymistapa
-- **T**ime: Milloin ongelma alkoi?
-- **R**eproduce: Voitko toistaa sen johdonmukaisesti?
-- **I**solate: Mikä komponentti epäonnistuu?
-- **A**nalyze: Mitä lokit kertovat?
-- **G**ather: Kerää kaikki olennaiset tiedot
-- **E**scalate: Milloin pyytää lisäapua
+- **T** (Time/Aika): Milloin ongelma alkoi?
+- **R** (Reproduce/Toista): Voitko toistaa sen johdonmukaisesti?
+- **I** (Isolate/Eristä): Mikä komponentti epäonnistuu?
+- **A** (Analyze/Analysoi): Mitä lokit kertovat?
+- **G** (Gather/Kokoa): Kerää kaikki olennaiset tiedot
+- **E** (Escalate/Eskaletoi): Milloin haetaan lisäapua
 
-## Debug-tilan ottaminen käyttöön
+## Debug-tilan käyttöönotto
+
+> **Käyttötarkoitus:** Nämä ovat diagnostisia esimerkkejä muokattaviksi, eivät valmiita skriptikokoelmia. Vaihda resurssien nimet/ID:t; käytä Bashia komentokuplissa. `--debug` tulosteet ja ympäristöarvot voivat sisältää arkaluontoista tietoa—tarkista/peitä ennen jakamista. Esimerkit, jotka suorittavat käyttöönoton, peruuttavat tai muuttavat konfiguraatiota, vaativat selkeän käyttäjähyväksynnän.
 
 ### Ympäristömuuttujat
 ```bash
-# Ota kattava virheenkorjaus käyttöön
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Azure CLI -virheenkorjaus
-export AZURE_CLI_DIAGNOSTICS=true
-
-# Poista telemetria käytöstä puhtaamman tulosteen saamiseksi
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Debug-kokoonpano
+### Debug-konfiguraatio
 ```bash
-# Aseta virheenkorjausasetukset globaalisti
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# Ota jäljityslokitus käyttöön
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
 
-## 📊 Lokien analysointitekniikat
+`azd config set` voi tallentaa mielivaltaisia avaimia; se ei kuitenkaan tee `debug.enabled`, `debug.logLevel` tai `trace.outputPath` tuetuiksi asetuksiksi. Käytä julkaistun komennon `--debug`-lipuketta.
+
+## 📊 Lokianalyysitekniikat
 
 ### Lokitasojen ymmärtäminen
 ```
@@ -83,66 +78,67 @@ FATAL   - Critical errors that cause application termination
 
 ### Rakenteellinen lokianalyysi
 ```bash
-# Näytä lokit Azure Monitorilla (azd monitor -komennolla)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# Näytä sovelluksen lokit reaaliajassa
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# Yksityiskohtaista lokkien analyysiä varten käytä Azure CLI:tä yhdessä App Servicen tai Container Appin kanssa:
-# App Servicen lokit
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Container Appin lokit
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# Vie Application Insightsin lokit analyysiä varten
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
 ### Lokien korrelaatio
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Korreloi lokit palveluiden välillä Azure Monitorin avulla
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Etsi Application Insightsista korreloituja lokitapahtumia
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Etsi Azuren toimintalokeja
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ Edistyneet vianmääritystyökalut
+## 🛠️ Edistyneet debuggaustyökalut
 
 ### Azure Resource Graph -kyselyt
 ```bash
-# Hae resursseja tageilla
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Etsi epäonnistuneet käyttöönotot
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Tarkista resurssien kunto
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Verkon vianmääritys
+### Verkkovianmääritys
 ```bash
-# Testaa palveluiden välinen yhteys
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# Käyttö
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
-### Konttien vianmääritys
+### Konttien debuggaus
 ```bash
-# Säiliösovelluksen ongelmien vianmääritys
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -181,12 +178,12 @@ debug_container() {
 }
 ```
 
-### Tietokantayhteyksien vianmääritys
+### Tietokantayhteyden debuggaus
 ```bash
-# Vianmääritys tietokantayhteyksiin
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -200,26 +197,15 @@ debug_database() {
 }
 ```
 
-## 🔬 Suorituskyvyn vianmääritys
+## 🔬 Suorituskyvyn debuggaus
 
-### Sovelluksen suorituskyvyn valvonta
+### Sovelluksen suorituskyvyn seuranta
 ```bash
-# Ota käyttöön Application Insightsin virheenkorjaus
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# Mukautettu suorituskyvyn seuranta
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -238,23 +226,21 @@ monitor_performance() {
 
 ### Resurssien käytön analyysi
 ```bash
-# Seuraa resurssien käyttöä
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
@@ -262,7 +248,7 @@ monitor_resources() {
 
 ## 🧪 Testaus ja validointi
 
-### Integraatiotestauksen vianmääritys
+### Integraatiotestien debuggaus
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Aseta virheenkorjausympäristö
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# Hae palvelun päätepisteet
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Testaa terveystarkastuksen päätepisteet
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# Suorita testit
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Suorita mukautetut integraatiotestit
+# Run custom integration tests
 npm run test:integration
 ```
 
-### Kuormitustestaus vianmääritystä varten
+### Kuormitustestaus debuggausta varten
 ```bash
-# Yksinkertainen kuormitustesti suorituskykypullonkaulojen tunnistamiseksi
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Käytetään Apache Benchia (asennus: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Poimi keskeiset mittarit
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Tarkista epäonnistumiset
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 Infrastruktuurin vianmääritys
+## 🔧 Infrastruktuurin debuggaus
 
-### Bicep-mallien vianmääritys
+### Bicep-mallin debuggaus
 ```bash
-# Tarkista Bicep-mallit yksityiskohtaisella tulostuksella
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntaksin tarkistus
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint-tarkistus
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # Mitä jos -käyttöönotto
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# Mallin käyttöönoton vianmääritys
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,52 +361,44 @@ debug_deployment() {
 
 ### Resurssien tilan analyysi
 ```bash
-# Analysoi resurssien tilat epäjohdonmukaisuuksien varalta
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # Listaa kaikki resurssit ja niiden tilat
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Tarkista epäonnistuneet resurssit
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
-## 🔒 Tietoturvan vianmääritys
+## 🔒 Tietoturvan debuggaus
 
-### Todennusvirran vianmääritys
+### Todennusprosessin debuggaus
 ```bash
-# Azure-todennuksen vianmääritys
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # Dekoodaa JWT-tunniste (vaatii jq:n ja base64:n)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Key Vault -käytön vianmääritys
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -438,16 +414,16 @@ debug_keyvault() {
 }
 ```
 
-### Verkon tietoturvan vianmääritys
+### Verkkoturvan debuggaus
 ```bash
-# Vianmääritys verkkoturvaryhmille
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Tarkista turvallisuussäännöt
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 Sovelluskohtainen vianmääritys
+## 📱 Sovelluskohtainen debuggaus
 
-### Node.js-sovellusten vianmääritys
+### Node.js-sovelluksen debuggaus
 ```javascript
-// debug-middleware.js - Expressin virheenkorjausvälikerros
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Kirjaa pyynnön tiedot
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // Korvaa res.json niin, että vastaukset kirjataan
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Tietokantakyselyjen vianmääritys
+### Tietokantakyselyjen debuggaus
 ```javascript
-// database-debug.js - Tietokannan virheenkorjaustyökalut
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Hätätilanteen vianmääritysprosessit
+## 🚨 Hätätilanteiden debuggausmenettelyt
 
-### Tuotantovirheiden vaste
+### Tuotanto-ongelman vaste
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Hätätilainen tuotannon vianmääritys
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Vaihda oikeaan ympäristöön
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# Kerää kriittiset tiedot
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# Käytä Azure Monitoria virhelokeihin
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Palautusmenettelyt
+### Peruutusmenettelyt
 ```bash
-# Nopea palautusskripti
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # Vaihda ympäristö
+    # Switch environment
     azd env select "$environment"
     
-    # Palautus Gitillä (AZD:ssä ei ole sisäänrakennettua palautustoimintoa)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # Varmista palautus
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # Testaa kriittiset päätepisteet
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 Vianmäärityshallintapaneelit
+Tämä koodipohjainen peruutus ei palauta infrastruktuuria, tietokantamigraatioita tai salaisuuksia. Käytä puhdasta työtilaa, tallenna aloitussuuntaus ja palauta se myöhemmin; komento tarkistaa valitun suhteen nykyisessä arkistossa.
 
-### Mukautettu valvontapaneeli
+## 📊 Debuggauskojelautaset
+
+### Mukautettu valvontakojelauta
 ```bash
-# Luo Application Insights -kyselyjä virheenkorjaukseen
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # Kysely virheistä
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Kysely suorituskykyongelmista
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Kysely riippuvuuksien epäonnistumisista
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Lokkien aggregointi
+### Lokien yhdistäminen
 ```bash
-# Kerää lokit useista Azure-lähteistä
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,28 +630,30 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
 }
 ```
 
-## 🔗 Edistyneet resurssit
+## 🔗 Lisäresurssit
 
-### Mukautetut vianmääritysskriptit
-Luo kansio `scripts/debug/` ja lisää:
-- `health-check.sh` - Kattavat terveystarkistukset
+### Mukautetut debuggausskriptit
+Luo `scripts/debug/`-hakemisto, joka sisältää:
+- `health-check.sh` - Kattava terveystarkastus
 - `performance-test.sh` - Automaattinen suorituskyvyn testaus
-- `log-analyzer.py` - Edistynyt lokien jäsennys ja analyysi
+- `log-analyzer.py` - Edistynyt lokin jäsentäminen ja analyysi
 - `resource-validator.sh` - Infrastruktuurin validointi
 
-### Valvonnan integrointi
+### Valvonnan integraatio
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -688,34 +666,34 @@ hooks:
 
 ## Parhaat käytännöt
 
-1. **Ota debug-lokitus aina käyttöön** ei-tuotantoympäristöissä
-2. **Luo toistettavat testitapaukset** ongelmille
-3. **Dokumentoi vianmääritysprosessit** tiimillesi
-4. **Automatisoi terveystarkistukset** ja valvonta
-5. **Pidä vianmääritystyökalut ajan tasalla** sovelluksesi muutosten kanssa
-6. **Harjoittele vianmääritysmenettelyitä** ei-hätätilanteina
+1. **Ota aina debug-lokitus käyttöön** ei-tuotantoympäristöissä
+2. **Luo toistettavia testitapauksia** ongelmille
+3. **Dokumentoi vianmääritysmenettelyt** tiimillesi
+4. **Automatisoi terveystarkastukset** ja valvonta
+5. **Pidä debuggaustyökalut ajan tasalla** sovelluksen muutosten mukaisesti
+6. **Harjoittele debuggausmenettelyjä** ei-hätätilanteiden aikana
 
 ## Seuraavat askeleet
 
-- [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - Suunnittele resurssivaatimukset
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Valitse sopivat palvelutasot
-- [Preflight Checks](../chapter-06-pre-deployment/preflight-checks.md) - Ennen käyttöönottoa tehtävät tarkistukset
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Pikakomentovihjeet
+- [Kapasiteettisuunnittelu](../chapter-06-pre-deployment/capacity-planning.md) - Suunnittele resurssitarpeet
+- [SKU:n valinta](../chapter-06-pre-deployment/sku-selection.md) - Valitse sopivat palvelutasot
+- [Esitarkistukset](../chapter-06-pre-deployment/preflight-checks.md) - Ennen käyttöönottoa tehtävä tarkastus
+- [Pikakomentolista](../../resources/cheat-sheet.md) - Nopeat viittauskomennot
 
 ---
 
-**Muista**: Hyvä vianmääritys on systemaattista, perusteellista ja kärsivällistä. Nämä työkalut ja tekniikat auttavat sinua diagnosoimaan ongelmat nopeammin ja tehokkaammin.
+**Muista**: Hyvä vianmääritys perustuu järjestelmällisyyteen, huolellisuuteen ja kärsivällisyyteen. Nämä työkalut ja tekniikat auttavat sinua diagnosoimaan ongelmat nopeammin ja tehokkaammin.
 
 ---
 
 **Navigointi**
 - **Edellinen oppitunti**: [Yleiset ongelmat](common-issues.md)
 
-- **Seuraava oppitunti**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+- **Seuraava oppitunti**: [Kapasiteettisuunnittelu](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty tekoälypohjaisen käännöspalvelun [Co-op Translator](https://github.com/Azure/co-op-translator) avulla. Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää auktoriteettisena lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa mistään väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

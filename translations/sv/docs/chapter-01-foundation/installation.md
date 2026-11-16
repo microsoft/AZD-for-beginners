@@ -1,33 +1,33 @@
-# Installations- och uppstartsguide
+# Installations- och installationsguide
 
 **Kapitelnavigering:**
-- **📚 Kursens startsida**: [AZD för nybörjare](../../README.md)
-- **📖 Aktuellt kapitel**: Kapitel 1 - Grund & Snabbstart
-- **⬅️ Föregående**: [AZD-grunderna](azd-basics.md)
-- **➡️ Nästa**: [Ditt första projekt](first-project.md)
-- **🚀 Nästa kapitel**: [Kapitel 2: AI-först-utveckling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Kursstart**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 1 - Grundläggande & Kom igång snabbt
+- **⬅️ Föregående**: [AZD Grunder](azd-basics.md)
+- **➡️ Nästa**: [Ditt Första Projekt](first-project.md)
+- **🚀 Nästa kapitel**: [Kapitel 2: AI-First Utveckling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introduktion
 
-Denna omfattande guide visar hur du installerar och konfigurerar Azure Developer CLI (azd) på ditt system. Du får lära dig flera installationsmetoder för olika operativsystem, hur du ställer in autentisering och grundläggande konfiguration för att förbereda din utvecklingsmiljö för distributioner till Azure.
+Denna omfattande guide leder dig genom installation och konfiguration av Azure Developer CLI (azd) på ditt system. Du kommer lära dig flera installationsmetoder för olika operativsystem, autentiseringsinställningar och initial konfiguration för att förbereda din utvecklingsmiljö för Azure-distributioner.
 
 ## Lärandemål
 
-I slutet av denna lektion kommer du att:
-- Installera Azure Developer CLI framgångsrikt på ditt operativsystem
-- Konfigurera autentisering mot Azure med flera metoder
-- Sätta upp din utvecklingsmiljö med nödvändiga förutsättningar
-- Förstå olika installationsalternativ och när man ska använda dem
+I slutet av denna lektion kommer du:
+- Framgångsrikt installera Azure Developer CLI på ditt operativsystem
+- Konfigurera autentisering med Azure med flera metoder
+- Ställa in din utvecklingsmiljö med nödvändiga förutsättningar
+- Förstå olika installationsalternativ och när man ska använda varje
 - Felsöka vanliga installations- och uppstartsproblem
 
 ## Läranderesultat
 
-Efter att ha slutfört denna lektion kommer du att kunna:
-- Installera azd med lämplig metod för din plattform
-- Autentisera mot Azure med azd auth login
+Efter att ha slutfört denna lektion kommer du kunna:
+- Installera azd med rätt metod för din plattform
+- Autentisera med Azure genom azd auth login
 - Verifiera din installation och testa grundläggande azd-kommandon
 - Konfigurera din utvecklingsmiljö för optimal användning av azd
-- Åtgärda vanliga installationsproblem självständigt
+- Självständigt lösa vanliga installationsproblem
 
 Denna guide hjälper dig att installera och konfigurera Azure Developer CLI på ditt system, oavsett operativsystem eller utvecklingsmiljö.
 
@@ -35,22 +35,22 @@ Denna guide hjälper dig att installera och konfigurera Azure Developer CLI på 
 
 Innan du installerar azd, se till att du har:
 - **Azure-prenumeration** - [Skapa ett gratis konto](https://azure.microsoft.com/free/)
-- **Azure CLI** - För autentisering och resursadministration
-- **Git** - För kloning av mallar och versionskontroll
+- **Azure CLI** (valfritt) - För exempel som uttryckligen kör `az`; azd autentiserar oberoende
+- **Git** - För att klona mallar och versionshantering
 - **Docker** (valfritt) - För containeriserade applikationer
 
 ## Installationsmetoder
 
 ### Windows
 
-#### Alternativ 1: Windows Package Manager (rekommenderas)
+#### Alternativ 1: Windows Package Manager (Rekommenderat)
 ```cmd
 winget install microsoft.azd
 ```
 
-#### Alternativ 2: PowerShell-installationsskript
+#### Alternativ 2: PowerShell Installationsskript
 ```powershell
-# Användbart när winget inte är tillgängligt
+# Useful when winget is unavailable
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
@@ -59,14 +59,14 @@ powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' 
 choco install azd
 ```
 
-#### Alternativ 4: Manuell installation
-1. Ladda ner den senaste releasen från [GitHub](https://github.com/Azure/azure-dev/releases)
+#### Alternativ 4: Manuell Installation
+1. Ladda ner den senaste versionen från [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Extrahera till `C:\Program Files\azd\`
 3. Lägg till i PATH-miljövariabeln
 
 ### macOS
 
-#### Alternativ 1: Homebrew (rekommenderas)
+#### Alternativ 1: Homebrew (Rekommenderat)
 ```bash
 brew tap azure/azd
 brew install azd
@@ -77,60 +77,59 @@ brew install azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Alternativ 3: Manuell installation
-```bash
-# Ladda ner och installera
-curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
-```
+#### Alternativ 3: Manuell Installation
+Ladda ner arkivet för din macOS-arkitektur från [release assets](https://github.com/Azure/azure-dev/releases), extrahera det och lägg till `azd`-binären i din `PATH`.
 
 ### Linux
 
-#### Alternativ 1: Installationsskript (rekommenderas)
+#### Alternativ 1: Installationsskript (Rekommenderat)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
 #### Alternativ 2: Paketchefer
 
-**Manuell installation från release-artifakter:**
+**Manuell installation från release assets:**
 ```bash
-# Ladda ner det senaste arkivet för din Linux-arkitektur från:
+# Download the latest archive for your Linux architecture from:
 # https://github.com/Azure/azure-dev/releases
-# Extrahera det och lägg sedan till azd-binären i din PATH.
+# Then extract it and add the azd binary to your PATH.
 ```
 
 ### GitHub Codespaces
 
-Vissa Codespaces och devcontainer-miljöer inkluderar redan `azd`, men du bör verifiera det istället för att anta det:
+Vissa Codespaces och utvecklingscontainer-miljöer inkluderar redan `azd`, men du bör verifiera det istället för att anta:
 
 ```bash
 azd version
 ```
 
-Om `azd` saknas, installera det med standardskriptet för miljön.
+Om `azd` saknas, installera det med standard-skriptet för miljön.
 
 ### Docker
 
 ```bash
-# Kör azd i en container
-docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
+# Run azd in a container
+docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Skapa ett alias för enklare användning
-alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
+# Create an alias for easier use
+alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
+
+Denna tillfälliga container bevarar inte inloggningsstatus mellan körningar. För upprepade distributioner, använd [dev container setup](dev-containers.md); container-byggnader kräver också en Docker-daemon som är åtkomlig från insidan av containern.
 
 ## ✅ Verifiera installationen
 
 Efter installationen, verifiera att azd fungerar korrekt:
 
 ```bash
-# Kontrollera versionen
+# Check version
 azd version
 
-# Visa hjälp
+# View help
 azd --help
 
-# Lista tillgängliga mallar
+# List available templates
 azd template list
 ```
 
@@ -139,54 +138,54 @@ Förväntad utdata:
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Obs**: Den faktiska versionsnumret kommer att variera. Kontrollera [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) för den senaste versionen.
+**Notera**: Den faktiska versionsnumret kommer att variera. Kontrollera [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) för den senaste versionen.
 
-**✅ Kontrollista för lyckad installation:**
+**✅ Checklista för lyckad installation:**
 - [ ] `azd version` visar versionsnummer utan fel
 - [ ] `azd --help` visar kommandodokumentation
 - [ ] `azd template list` visar tillgängliga mallar
 - [ ] Du kan skapa en testkatalog och köra `azd init` framgångsrikt
 
-**Om alla kontroller godkänns är du redo att gå vidare till [Ditt första projekt](first-project.md)!**
+**Om alla kontroller är godkända är du redo att gå vidare till [Ditt Första Projekt](first-project.md)!**
 
-## Autentiseringsinställningar
+## Autentiseringsinställning
 
 ### Rekommenderad nybörjarinställning
 
-För AZD-först-arbetsflöden, logga in med `azd auth login`.
+För AZD-först arbetsflöden, logga in med `azd auth login`.
 
 ```bash
-# Krävs för AZD-kommandon som till exempel azd up
+# Required for AZD commands such as azd up
 azd auth login
 
-# Verifiera AZD-autentiseringsstatus
+# Verify AZD authentication status
 azd auth login --check-status
 ```
 
-Använd Azure CLI-inloggning endast när du planerar att köra `az`-kommandon själv under kursen.
+Använd bara Azure CLI-inloggning när du planerar att själv köra `az`-kommandon under kursen.
 
-### Azure CLI-autentisering (valfritt)
+### Autentisering med Azure CLI (Valfritt)
 ```bash
-# Installera Azure CLI om det inte redan är installerat
+# Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
-# Linux: se dokumentationen för installation av Azure CLI för din distribution
+# Linux: see the Azure CLI install docs for your distribution
 
-# Logga in på Azure
+# Login to Azure
 az login
 
-# Verifiera autentisering
+# Verify authentication
 az account show
 ```
 
-### Vilket inloggningsflöde bör du använda?
+### Vilket inloggningssätt ska du använda?
 
-- Använd `azd auth login` om du följer nybörjarspåret för AZD och huvudsakligen kör `azd`-kommandon.
+- Använd `azd auth login` om du följer nybörjarspåret med AZD och främst kör `azd`-kommandon.
 - Använd även `az login` när du vill köra Azure CLI-kommandon som `az account show` eller inspektera resurser direkt.
-- Om en övning innehåller både `azd`- och `az`-kommandon, kör båda inloggningarna en gång i början.
+- Om en övning innehåller både `azd` och `az` kommandon, kör båda inloggningskommandona en gång i början.
 
-### Enhetskodautentisering
-Om du är på ett system utan grafiskt gränssnitt eller har problem med webbläsaren:
+### Autentisering med enhetskod
+Om du är på ett system utan skärm eller har problem med webbläsare:
 ```bash
 azd auth login --use-device-code
 ```
@@ -195,14 +194,14 @@ azd auth login --use-device-code
 För automatiserade miljöer:
 ```bash
 azd auth login \
-  --client-id <client-id> \
-  --client-secret <client-secret> \
-  --tenant-id <tenant-id>
+  --client-id "<client-id>" \
+  --client-secret "<client-secret>" \
+  --tenant-id "<tenant-id>"
 ```
 
 ### Validera din kompletta konfiguration
 
-Om du vill göra en snabb beredskapskontroll innan du börjar Kapitel 1:
+Om du vill göra en snabb kontroll av beredskap innan du börjar Kapitel 1:
 
 **Windows:**
 ```powershell
@@ -216,44 +215,43 @@ bash ./validate-setup.sh
 
 ## Konfiguration
 
-### Global konfiguration
+### Global Konfiguration
 ```bash
-# Ställ in standardprenumeration
-azd config set defaults.subscription <subscription-id>
+# Set default subscription
+azd config set defaults.subscription "<subscription-id>"
 
-# Ställ in standardplats
+# Set default location
 azd config set defaults.location eastus2
 
-# Visa hela konfigurationen
+# View all configuration
 azd config show
 ```
 
 ### Miljövariabler
-Lägg till i din shell-profil (`.bashrc`, `.zshrc`, `.profile`):
+Lägg till i din shellprofil (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
-# Azure-konfiguration
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# azd-konfiguration
-export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Aktivera felsökningsloggning
+# Enable diagnostics per command rather than relying on undocumented variables
+azd version --debug
 ```
 
 ## IDE-integration
 
 ### Visual Studio Code
-Installera Azure Developer CLI-tillägget:
+Installera Azure Developer CLI extension:
 1. Öppna VS Code
-2. Gå till Tillägg (Ctrl+Shift+X)
+2. Gå till Extensions (Ctrl+Shift+X)
 3. Sök efter "Azure Developer CLI"
-4. Installera tillägget
+4. Installera extensionen
 
 Funktioner:
 - IntelliSense för azure.yaml
 - Integrerade terminalkommandon
-- Bläddra i mallar
-- Övervakning av distributioner
+- Mallbläddring
+- Övervakning av distribution
 
 ### GitHub Codespaces
 Skapa en `.devcontainer/devcontainer.json`:
@@ -270,16 +268,16 @@ Skapa en `.devcontainer/devcontainer.json`:
 
 ### IntelliJ/JetBrains
 1. Installera Azure-pluginet
-2. Konfigurera Azure-referenser
+2. Konfigurera Azure-uppgifter
 3. Använd integrerad terminal för azd-kommandon
 
-## 🐛 Felsökning av installation
+## 🐛 Felsöka installationen
 
 ### Vanliga problem
 
-#### Åtkomst nekad (Windows)
+#### Behörighet nekad (Windows)
 ```powershell
-# Kör PowerShell som administratör
+# Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
@@ -297,44 +295,41 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Nätverks-/proxyproblem
+#### Nätverks-/Proxy-problem
 ```bash
-# Konfigurera proxy
-azd config set http.proxy http://proxy:8080
-azd config set https.proxy https://proxy:8080
-
-# Hoppa över SSL-verifiering (rekommenderas inte i produktion)
-azd config set http.insecure true
+# Configure standard proxy environment variables for the current Bash session
+export HTTP_PROXY="http://proxy:8080"
+export HTTPS_PROXY="http://proxy:8080"
+# Use your organization's trusted CA configuration; do not disable TLS validation.
 ```
 
 #### Versionskonflikter
 ```bash
-# Ta bort gamla installationer
+# Remove old installations
 # Windows: winget uninstall microsoft.azd
 # macOS: brew uninstall azd
-# Linux: ta bort den tidigare azd-binären eller symlinken innan du installerar om
+# Linux: remove the previous azd binary or symlink before reinstalling
 
-# Rensa konfigurationen
+# Clean configuration
 rm -rf ~/.azd
 ```
 
 ### Få mer hjälp
 ```bash
-# Aktivera felsökningsloggning
-export AZD_DEBUG=true
-azd <command> --debug
+# Enable debug logging
+azd show --debug
 
-# Visa aktuell konfiguration
+# View current configuration
 azd config show
 
-# Visa aktuell distributionsstatus
+# View current deployment status
 azd show
 ```
 
 ## Uppdatera azd
 
 ### Kontrollera uppdatering
-azd varnar när en nyare release finns tillgänglig, och du kan bekräfta din nuvarande build med:
+azd varnar när en nyare version finns tillgänglig, och du kan bekräfta din nuvarande version med:
 ```bash
 azd version
 ```
@@ -361,7 +356,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 <details>
 <summary><strong>Vad är skillnaden mellan azd och az CLI?</strong></summary>
 
-**Azure CLI (az)**: Verktyg på låg nivå för att hantera enskilda Azure-resurser
+**Azure CLI (az)**: Verktyg på låg nivå för hantering av individuella Azure-resurser
 - `az webapp create`, `az storage account create`
 - En resurs åt gången
 - Fokus på infrastrukturhantering
@@ -369,9 +364,9 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 **Azure Developer CLI (azd)**: Verktyg på hög nivå för kompletta applikationsdistributioner
 - `azd up` distribuerar hela appen med alla resurser
 - Mallbaserade arbetsflöden
-- Fokus på utvecklareffektivitet
+- Fokus på utvecklarproduktivitet
 
-**Du behöver båda**: azd använder az CLI för autentisering
+**De är oberoende**: azd använder egen autentisering som standard. Installera och logga in på Azure CLI bara för `az`-kommandon, eller välj uttryckligen `azd config set auth.useAzCliAuth true`.
 </details>
 
 <details>
@@ -380,9 +375,9 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 Ja! Du kan:
 1. Importera befintliga resurser till azd-miljöer
 2. Referera till befintliga resurser i dina Bicep-mallar
-3. Använda azd för nya distributioner tillsammans med befintlig infrastruktur
+3. Använda azd för nya distributioner parallellt med befintlig infrastruktur
 
-Se [Konfigurationsguide](configuration.md) för detaljer.
+Se [Konfigurationsguide](../chapter-03-configuration/configuration.md) för detaljer.
 </details>
 
 <details>
@@ -390,42 +385,44 @@ Se [Konfigurationsguide](configuration.md) för detaljer.
 
 Ja, konfigurera molnet:
 ```bash
-# Azure för myndigheter
-az cloud set --name AzureUSGovernment
-az login
+# Azure Government (azd)
+azd config set cloud.name AzureUSGovernment
+azd auth login
 
-# Azure Kina
-az cloud set --name AzureChinaCloud
-az login
+# Azure China (alternative)
+azd config set cloud.name AzureChinaCloud
+azd auth login
 ```
+
+Om du också använder Azure CLI, konfigurera `az cloud set --name ...` separat. Malltjänster och modelltillgänglighet varierar beroende på moln.
 </details>
 
 <details>
 <summary><strong>Kan jag använda azd i CI/CD-pipelines?</strong></summary>
 
 Absolut! azd är designat för automation:
-- Integration med GitHub Actions
-- Stöd för Azure DevOps
-- Autentisering med service principal
+- GitHub Actions-integration
+- Azure DevOps-stöd
+- Service principal-autentisering
 - Icke-interaktivt läge
 
-Se [Distributionsguide](../chapter-04-infrastructure/deployment-guide.md) för CI/CD-mönster.
+Se [Deploymentsguide](../chapter-04-infrastructure/deployment-guide.md) för CI/CD-mönster.
 </details>
 
 <details>
 <summary><strong>Vad kostar det att använda azd?</strong></summary>
 
-azd i sig är **helt gratis** och öppen källkod. Du betalar endast för:
+Själva azd är **helt gratis** och öppen källkod. Du betalar endast för:
 - Azure-resurser du distribuerar
-- Azure-konsumtionskostnader (compute, lagring etc.)
+- Azure-kostnader för förbrukning (compute, lagring, etc.)
 
-Använd `azd provision --preview` för att uppskatta kostnader innan distribution.
+Använd `azd provision --preview` för att inspektera föreslagna resurser och uppskatta deras kostnader med [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/). Förhandsgranskning beräknar inte priser.
 </details>
 
 ## Nästa steg
 
-1. **Slutför autentiseringen**: Se till att du kan komma åt din Azure-prenumeration
-2. **Pröva din första distribution**: Följ [Guiden för första projektet](first-project.md)
+1. **Slutför autentisering**: Se till att du kan nå din Azure-prenumeration
+2. **Prova din första distribution**: Följ [Första Projekt-guiden](first-project.md)
 3. **Utforska mallar**: Bläddra bland tillgängliga mallar med `azd template list`
 4. **Konfigurera din IDE**: Ställ in din utvecklingsmiljö
 
@@ -435,23 +432,23 @@ Om du stöter på problem:
 - [Officiell dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Rapportera problem](https://github.com/Azure/azure-dev/issues)
 - [Community-diskussioner](https://github.com/Azure/azure-dev/discussions)
-- [Azure-support](https://azure.microsoft.com/support/)
-- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Få Azure-kommandovägledning direkt i din editor med `npx skills add microsoft/github-copilot-for-azure`
+- [Azure Support](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Få vägledning för Azure-kommandon direkt i din editor med `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Kapitelnavigering:**
-- **📚 Kursens startsida**: [AZD för nybörjare](../../README.md)
-- **📖 Aktuellt kapitel**: Kapitel 1 - Grund & Snabbstart
-- **⬅️ Föregående**: [AZD-grunderna](azd-basics.md) 
-- **➡️ Nästa**: [Ditt första projekt](first-project.md)
-- **🚀 Nästa kapitel**: [Kapitel 2: AI-först-utveckling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Kursstart**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 1 - Grundläggande & Kom igång snabbt
+- **⬅️ Föregående**: [AZD Grunder](azd-basics.md) 
+- **➡️ Nästa**: [Ditt Första Projekt](first-project.md)
+- **🚀 Nästa kapitel**: [Kapitel 2: AI-First Utveckling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Installation slutförd!** Fortsätt till [Ditt första projekt](first-project.md) för att börja bygga med azd.
+**✅ Installation klar!** Fortsätt till [Ditt Första Projekt](first-project.md) för att börja bygga med azd.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungsspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell, mänsklig översättning. Vi ansvarar inte för missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

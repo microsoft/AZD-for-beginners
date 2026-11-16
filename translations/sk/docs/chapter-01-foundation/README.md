@@ -1,14 +1,14 @@
 # Kapitola 1: Základy a Rýchly štart
 
-**📚 Kurz**: [AZD pre Začiatočníkov](../../README.md) | **⏱️ Trvanie**: 30-45 minút | **⭐ Zložitosť**: Začiatočník
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 75-120 minút vrátane prvého nasadenia; doplnkové cvičenia trvajú dlhšie | **⭐ Zložitosť**: Začiatočník
 
 ---
 
 ## Prehľad
 
-Táto kapitola predstavuje základy Azure Developer CLI (azd). Naučíte sa základné koncepty, nainštalujete nástroje a nasadíte svoju prvú aplikáciu do Azure.
+Táto kapitola predstavuje základy Azure Developer CLI (azd). Naučíte sa kľúčové koncepty, nainštalujete nástroje a nasadíte svoju prvú aplikáciu do Azure.
 
-> Overené s `azd 1.27.1` v júli 2026.
+> Cieľ revízie príkazov a konfigurácie: `azd 1.37.2` (november 2026). Pri revízii nebolo spustené živé nasadenie v Azure.
 
 ## Ciele učenia
 
@@ -16,7 +16,7 @@ Po dokončení tejto kapitoly budete:
 - Rozumieť, čo je Azure Developer CLI a ako sa líši od Azure CLI
 - Nainštalovať a nakonfigurovať AZD na vašej platforme
 - Nasadiť svoju prvú aplikáciu do Azure pomocou `azd up`
-- Vyčistiť zdroje pomocou `azd down`
+- Odstrániť zdroje pomocou `azd down`
 
 ---
 
@@ -24,17 +24,17 @@ Po dokončení tejto kapitoly budete:
 
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Základy AZD](azd-basics.md) | Základné koncepty, terminológia a štruktúra projektu | 15 min |
-| 2 | [Inštalácia a nastavenie](installation.md) | Platformovo špecifické návody na inštaláciu | 10 min |
+| 1 | [Základy AZD](azd-basics.md) | Kľúčové koncepty, terminológia a štruktúra projektu | 15 min |
+| 2 | [Inštalácia a nastavenie](installation.md) | Návody na inštaláciu podľa platformy | 10 min |
 | 3 | [Váš prvý projekt](first-project.md) | Prakticky: Nasadenie webovej aplikácie do Azure | 20 min |
-| 4 | [Použite svoju vlastnú aplikáciu](bring-your-own-app.md) | Pridajte azd do existujúceho projektu, ktorý už máte | 15 min |
+| 4 | [Použite vlastnú aplikáciu](bring-your-own-app.md) | Pridajte azd do existujúceho projektu, ktorý už máte | 15 min |
 | 5 | [Vývojové kontajnery a Codespaces](dev-containers.md) | Reprodukovateľné prostredia azd s vývojovými kontajnermi | 15 min |
 
 ---
 
-## ✅ Začnite tu: Overte svoju konfiguráciu
+## ✅ Začnite tu: Overte svoje prostredie
 
-Pred začiatkom si overte, že je váš lokálny počítač pripravený pre šablónu Kapitoly 1:
+Pred začiatkom si overte, či je váš lokálny počítač pripravený pre šablónu Kapitoly 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Pred začiatkom si overte, že je váš lokálny počítač pripravený pre šab
 bash ./validate-setup.sh
 ```
 
-Ak skript hlási chýbajúce nástroje, najprv ich opravte a potom pokračujte v kapitole.
+Ak skript hlási chýbajúce nástroje, najskôr ich opravte a potom pokračujte v kapitole.
 
 ---
 
 ## 🚀 Rýchly štart
 
 ```bash
-# Skontrolujte inštaláciu
+# Check installation
 azd version
 
-# Overte sa pre AZD
-# Voliteľné: az login, ak plánujete priamo spúšťať príkazy Azure CLI
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Nasadzujte svoju prvú aplikáciu
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Vyčistite po dokončení
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -75,11 +77,11 @@ azd down --force --purge
 Po dokončení tejto kapitoly by ste mali vedieť:
 
 ```bash
-azd version              # Zobrazuje nainštalovanú verziu
-azd init --template todo-nodejs-mongo  # Inicializuje projekt
-azd up                   # Nasadzuje do Azure
-azd show                 # Zobrazuje URL bežiacej aplikácie
-azd down --force --purge # Čistí zdroje
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -95,7 +97,7 @@ azd down --force --purge # Čistí zdroje
 
 ## 📖 Súvisiace zdroje
 
-- [Prehľad príkazov](../../resources/cheat-sheet.md)
+- [Skript príkazov](../../resources/cheat-sheet.md)
 - [Často kladené otázky](../../resources/faq.md)
 - [Glosár](../../resources/glossary.md)
 

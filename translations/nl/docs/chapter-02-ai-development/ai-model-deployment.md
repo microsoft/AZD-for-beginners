@@ -1,74 +1,57 @@
-# AI Model Uitrol met Azure Developer CLI
+# AI Model Deployment met Azure Developer CLI
 
 **Hoofdstuk Navigatie:**
-- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
 - **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
-- **⬅️ Vorig**: [Microsoft Foundry Integratie](microsoft-foundry-integration.md)
-- **➡️ Volgend**: [AI Workshop Lab](ai-workshop-lab.md)
+- **⬅️ Vorige**: [AI Agents](agents.md)
+- **➡️ Volgende**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
-Deze gids biedt uitgebreide instructies voor het uitrollen van AI-modellen met AZD-sjablonen, en behandelt alles van modelselectie tot productiemodellen voor uitrol.
+Deze gids biedt uitgebreide instructies voor het implementeren van AI-modellen met behulp van AZD-sjablonen, waarbij alles wordt behandeld van modelkeuze tot productiedistributiepatronen.
 
-> **Validatienotitie (2026-07-13):** De AZD workflow in deze gids is gecontroleerd met `azd` `1.27.1`. Voor AI-uitrol die langer duurt dan het standaard servicedeploy-venster, ondersteunen huidige AZD-versies `azd deploy --timeout <seconds>`.
+> **Release review (2026-11-04):** Gerelateerde CLI-wijzigingen zijn beoordeeld aan de hand van `azd` `1.37.2`; modelbeschikbaarheid, versies en quota blijven regio- en abonnement-afhankelijk. `azd deploy --timeout <seconds>` regelt het service-implementatievenster, niet de garantie voor agentactivatie. Zie [huidige release-opmerkingen en AI-migratierichtlijnen](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
 ## Inhoudsopgave
 
-- [Model Selectiestrategie](#model-selectiestrategie)
-- [AZD Configuratie voor AI-modellen](#azd-configuratie-voor-ai-modellen)
-- [Uitrolpatronen](#uitrolpatronen)
-- [Modelbeheer](#modelbeheer)
-- [Productie-overwegingen](#productie-overwegingen)
-- [Monitoring en Observeerbaarheid](#monitoring-en-observeerbaarheid)
+- [Model Selectiestrategie](#model-selection-strategy)
+- [AZD Configuratie voor AI Modellen](#azd-configuration-for-ai-models)
+- [Implementatiepatronen](#deployment-patterns)
+- [Modelbeheer](#model-management)
+- [Productie Overwegingen](#production-considerations)
+- [Monitoring en Observeerbaarheid](#monitoring-and-observability)
 
 ## Model Selectiestrategie
 
-### Microsoft Foundry Modellen
+### Azure OpenAI Modellen in Microsoft Foundry
 
-Kies het juiste model voor jouw use case:
+Kies het juiste model voor je gebruikssituatie:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+Verklaar modelimplementaties in Bicep (hieronder), niet in willekeurige `services.*.config.AZURE_OPENAI_MODELS` instellingen. AZD interpreteert zo'n instelling niet als een lijst van modelbronnen. De `project` van een service verwijst naar de applicatiebron, niet naar de `infra/` directory.
 
-### Capaciteitsplanning voor Modellen
+De voorbeelden gebruiken de gepubliceerde `gpt-4.1-mini` versie **`2025-04-14`** en embed-versie **`1`**. Bevestig dat de modelversie en implementatie-SKU worden ondersteund in je doellocatie/account voordat je deze provisioneert.
 
-| Modeltype | Use Case | Aanbevolen Capaciteit | Kostenoverwegingen |
+### Model Capaciteitsplanning
+
+| Modeltype | Gebruikssituatie | Illustratieve Token-vraag | Kostenaandachtspunten |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Kosteneffectief voor de meeste workloads |
-| gpt-4.1 | Complex redeneren | 20-100 TPM | Hogere kosten, gebruik voor premium features |
-| text-embedding-3-large | Zoek, RAG | 30-120 TPM | Sterke standaardkeuze voor semantisch zoeken en ophalen |
-| Whisper | Spraak-naar-tekst | 10-50 TPM | Audioverwerkingsworkloads |
+| gpt-4.1-mini | Chat, V&A | 10.000-50.000 TPM | Benchmark kosten en kwaliteit voor je workload |
+| gpt-4.1 | Complexe taken | 20.000-100.000 TPM | Evalueer kwaliteitswinst ten opzichte van tokencost |
+| text-embedding-3-large | Zoeken, RAG | 30.000-120.000 TPM | Houd rekening met ingestie en queryverkeer |
+| Whisper | Spraak-naar-tekst | Plan met audioduurtijd en aanvraaglimieten | Pas geen text-model TPM capaciteit formule toe |
 
-## AZD Configuratie voor AI-modellen
+TPM betekent tokens per minuut. Voor deze standaard tekstimplementaties is ARM `sku.capacity` in **1.000-TPM eenheden**, niet individuele TPM (capaciteit `10` betekent 10.000 TPM). RPM-tot-TPM verhoudingen variëren per model/implementatietype; verifieer beide limieten aan de hand van de [quotadocumentatie](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic). Deze bereiken dienen als voorbeelden, geen maatwerkaanbevelingen.
+
+## AZD Configuratie voor AI Modellen
 
 ### Bicep Sjabloon Configuratie
 
-Maak modeluitrol aan via Bicep-sjablonen:
+Maak modelimplementaties via Bicep-sjablonen:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,21 +108,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
+Dit is een resourcegroep-gescopeerd **ontwikkelingsinfrastructuurvoorbeeld**, geen volledig AZD-applicatiesjabloon. Het account staat openbaar netwerktoegang toe en vereist Entra ID/RBAC authenticatie (`Cognitive Services OpenAI User` voor aanroepers). Productie vereist het private endpoint, DNS en applicatieconnectiviteit beschreven in Hoofdstuk 8. AZD heeft ook een hoofdtemplate/parameter-mapping en applicatie-hostresources nodig; gebruik een werkend voorbeeld voor een volledige implementatie.
+
 ### Omgevingsvariabelen
 
 Configureer je applicatieomgeving:
 
 ```bash
-# .env-configuratie
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Uitrolpatronen
+Dit zijn applicatie-gedefinieerde namen; verbind ze met je hostconfiguratie. De Azure OpenAI v1 endpoint gebruikt door de onderstaande gezondheidscontrole vereist niet de verouderde `api-version` queryparameter; oudere `AzureOpenAI` clients wel, dus volg de door je applicatie gebruikte API-generatie.
 
-### Patroon 1: Uitrol in Eén Regio
+## Implementatiepatronen
+
+### Patroon 1: Single-Region Implementatie
 
 ```yaml
 # azure.yaml - Single region
@@ -146,20 +133,21 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Beste voor:
+Het beste voor:
 - Ontwikkeling en testen
-- Applicaties voor één markt
+- Single-market applicaties
 - Kostenoptimalisatie
 
-### Patroon 2: Multi-Regio Uitrol
+### Patroon 2: Multi-Region Implementatie
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,14 +157,18 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Beste voor:
+De weggelaten accounteigenschappen/SKU moeten worden aangeleverd; dit fragment is niet zoals geschreven implementeerbaar. Implementeer modellen in elk account en implementeer routing/failover en dataresidentiebeheer afzonderlijk.
+
+Het beste voor:
 - Globale applicaties
 - Hoge beschikbaarheidseisen
-- Verdeling van belasting
+- Verdeling van belastingen
 
-### Patroon 3: Hybride Uitrol
+### Patroon 3: Hybride Implementatie
 
-Combineer Microsoft Foundry Modellen met andere AI-diensten:
+Combineer Microsoft Foundry Modellen met andere AI-services:
+
+De volgende fragmenten veronderstellen dat namen en `location` worden geleverd door de omringende template.
 
 ```bicep
 // Hybrid AI services
@@ -209,14 +201,14 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Versiebeheer
 
-Houd modelversies bij in je AZD-configuratie:
+Volg modelversies in de configuratie van je applicatie of IaC. Deze JSON is een **applicatie-gedefinieerd voorbeeld**, geen ingebouwd AZD-modelschema; een fallback moet expliciet worden geïmplementeerd en uitgerold:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -229,25 +221,25 @@ Houd modelversies bij in je AZD-configuratie:
 
 ### Modelupdates
 
-Gebruik AZD hooks voor modelupdates:
+Gebruik een AZD-hook voor een alleen-lezen beschikbaarheidscontrole, werk vervolgens IaC bij en provisioneer het:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# Als de uitrol langer duurt dan de standaard time-out
-azd deploy --timeout 1800
 ```
 
-### A/B Testen
+Voer `azd up` **buiten** de hook uit om gewijzigde modelinfrastructuur toe te passen en code te implementeren. Nooit `azd deploy` aanroepen vanuit een `predeploy` hook: dit veroorzaakt recursieve activering van dezelfde hook. `azd deploy --timeout 1800` verlengt een applicatie-implementatietimeout; het werkt geen Bicep-resources bij.
 
-Rol meerdere modelversies uit:
+### A/B Testing
+
+De illustratieve resource hieronder selecteert een implementatienaam en capaciteit; het creëert **één** implementatie, geen A/B test. Voor een echt experiment, provisioneer twee afzonderlijke implementatieresources, routeer een gecontroleerd deel van de aanvragen naar elk, en vergelijk kwaliteit, latentie en kosten. Het gaat uit van `openAi` uit het accountvoorbeeld:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -269,14 +261,15 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Productie-overwegingen
+## Productie Overwegingen
 
 ### Capaciteitsplanning
 
 Bereken de benodigde capaciteit op basis van gebruikspatronen:
 
 ```python
-# Voorbeeld van capaciteitsberekening
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# Voorbeeldgebruik
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
+Verwachte output: `Required capacity: 9100 TPM`. Met 1.000-TPM capaciteitsunits, rond je af naar minstens `10`, controleer daarna model-specifieke RPM en service rate-limit schatting (inclusief gevraagde outputbudget). Deze schatting van tokenvraag is geen garantie tegen throttling.
+
 ### Auto-scaling Configuratie
 
 Configureer auto-scaling voor Container Apps:
+
+**Gedeeltelijke resource:** voeg de `template.scale` instellingen samen in een complete Container App met locatie, beheerde omgeving, container image, bronnen en ingress. Schalen van replica’s verhoogt de modelquota niet.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,18 +335,21 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Kostenoptimalisatie
 
-Voer kostenbeheersing in:
+Implementeer kostenbeheersing:
+
+**Illustratieve budget-resource:** definieer `budgetStartDate` als de eerste dag van de huidige maand in UTC (bijvoorbeeld `2026-11-01T00:00:00Z` voor deze review), en vervang het contactadres. De start moet voldoen aan de huidige datumvereisten van de service. Budgetten waarschuwen bij vertragingsfacturatie; ze stoppen het uitgeven niet.
 
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -372,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Application Insights Integratie
 
-Configureer monitoring voor AI-workloads:
+Configureer monitoring voor AI workloads:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
 
-### Aangepaste Metrics
+Het resourcefragment veronderstelt `applicationInsightsName`, `location`, en een bestaand `logAnalyticsWorkspace`. Het voorziet in monitoring, maar instrumenteert de app niet en creëert geen aangepaste statistieken.
 
-Volg AI-specifieke metrics:
+### Aangepaste Statistieken
+
+Volg AI-specifieke statistieken:
+
+Gebruik de ondersteunde [Azure Monitor OpenTelemetry distribution](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python), niet de legacy `applicationinsights` Python SDK. Installeer `azure-monitor-opentelemetry`, configureer `APPLICATIONINSIGHTS_CONNECTION_STRING`, en initialiseer eenmaal bij opstarten:
 
 ```python
-# Aangepaste telemetrie voor AI-modellen
-import logging
-from applicationinsights import TelemetryClient
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
 
-### Gezondheidschecks
+Dit illustreert het uitzenden van attributen, geen daadwerkelijke model-call instrumentatie. Wikkel het echte verzoek in een span om de duur ervan te meten; inspecteer `dependencies`/`traces` in Application Insights. Verstuur geen prompt- of antwoorddata, sleutels, of ruwe exceptieberichten met gevoelige informatie.
 
-Implementeer monitoring van de AI-servicegezondheid:
+### Gezondheidscontroles
+
+Implementeer AI service gezondheidsmonitoring:
+
+Installeer `fastapi`, `uvicorn`, `httpx`, en `azure-identity`. Stel de endpoint-/implementatievariabelen hierboven in en verleen de aanroeper `Cognitive Services OpenAI User`. Deze **readiness probe** gebruikt Azure OpenAI v1 data plane met Entra ID; het doet een factureerbare modelcall. Voer uit met `uvicorn health:app` na opslaan als `health.py`. Gebruik een aparte lichte liveness check, rate-limit/cache de readiness resultaten, en publiceer deze route niet zonder toegangscontrole.
 
 ```python
-# Eindpunten voor gezondheidscontrole
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,43 +431,49 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI-verbinding
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
+
+Verwacht: `GET /health/ai-models` retourneert `200 {"status":"healthy"}` wanneer de geconfigureerde chatimplementatie bruikbaar is, of `503` zonder upstreamdetails prijs te geven. Het opnoemen van implementaties is een management-plane operatie en geen geldige data-plane gezondheidsprobe.
 
 ## Volgende Stappen
 
-1. **Bekijk de [Microsoft Foundry Integratie Gids](microsoft-foundry-integration.md)** voor service-integratiepatronen
-2. **Voltooi de [AI Workshop Lab](ai-workshop-lab.md)** voor praktische ervaring
-3. **Implementeer [Productie AI Praktijken](production-ai-practices.md)** voor bedrijfsuitrol
-4. **Verken de [AI Troubleshooting Gids](../chapter-07-troubleshooting/ai-troubleshooting.md)** voor veelvoorkomende problemen
+1. **Bekijk de [Microsoft Foundry Integratiehandleiding](microsoft-foundry-integration.md)** voor service-integratiepatronen
+2. **Voltooi de [AI Workshop Lab](ai-workshop-lab.md)** voor praktijkervaring
+3. **Implementeer [Productie AI Praktijken](../chapter-08-production/production-ai-practices.md)** voor enterprise implementaties
+4. **Verken de [AI Probleemoplossingsgids](../chapter-07-troubleshooting/ai-troubleshooting.md)** voor veelvoorkomende problemen
 
 ## Bronnen
 
-- [Microsoft Foundry Modellen Model Beschikbaarheid](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Microsoft Foundry Modellen Modelbeschikbaarheid](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI Documentatie](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps Schalen](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Container Apps Schaling](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI Model Kostenoptimalisatie](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Hoofdstuk Navigatie:**
-- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
 - **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
-- **⬅️ Vorig**: [Microsoft Foundry Integratie](microsoft-foundry-integration.md)
-- **➡️ Volgend**: [AI Workshop Lab](ai-workshop-lab.md)
+- **⬅️ Vorige**: [AI Agents](agents.md)
+- **➡️ Volgende**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
 ---

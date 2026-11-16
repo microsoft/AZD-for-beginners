@@ -1,22 +1,22 @@
 # Kabanata 7: Pag-troubleshoot at Pag-debug
 
-**📚 Kurso**: [AZD Para sa mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 1-1.5 oras | **⭐ Lalim ng Kaalaman**: Intermediate
+**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 1-1.5 oras | **⭐ Antas ng Hirap**: Intermediate
 
 ---
 
 ## Pangkalahatang-ideya
 
-Tinutulungan ka ng kabanatang ito na masuri at malutas ang mga karaniwang isyu kapag nagtatrabaho gamit ang Azure Developer CLI. Mula sa mga pagkabigo sa deployment hanggang sa mga problema na specific sa AI.
+Tinutulungan ka ng kabanatang ito na tuklasin at lutasin ang mga karaniwang isyu kapag gumagamit ng Azure Developer CLI. Mula sa mga kabiguan sa deployment hanggang sa mga problema na tiyak sa AI.
 
-> Napatunayan gamit ang `azd 1.27.1` noong Hulyo 2026.
+> Mga gabay sa command na sinuri laban sa inilabas na `azd 1.37.2` na sanggunian. Hindi isinagawa ang mga deployment sa cloud. Palitan ang mga halimbawa ng pangalan ng resource at mga ID bago gamitin ang mga command.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng kabanatang ito, magagawa mo:
-- Masuri ang mga karaniwang pagkabigo sa AZD deployment
-- I-debug ang mga isyu sa authentication at permiso
-- Malutas ang mga problema sa koneksyon sa serbisyo ng AI
-- Gamitin ang Azure Portal at CLI para sa pag-troubleshoot
+Sa pagtapos ng kabanatang ito, ikaw ay:
+- Matutukoy ang mga karaniwang kabiguan sa AZD deployment
+- Ma-debug ang mga isyu sa authentication at permiso
+- Malulutas ang mga problema sa konektibidad ng AI service
+- Magagamit ang Azure Portal at CLI para sa pag-troubleshoot
 
 ---
 
@@ -24,87 +24,92 @@ Sa pagtatapos ng kabanatang ito, magagawa mo:
 
 | # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Mga Karaniwang Isyu](common-issues.md) | Mga madalas na problemang nararanasan | 30 min |
-| 2 | [Gabay sa Pag-debug](debugging.md) | Pahinga-hakbang na mga estratehiya sa pag-debug | 45 min |
-| 3 | [Pag-troubleshoot ng AI](ai-troubleshooting.md) | Mga isyung specific sa AI | 30 min |
+| 1 | [Mga Karaniwang Isyu](common-issues.md) | Madalas na nararanasang problema | 30 min |
+| 2 | [Gabay sa Pag-debug](debugging.md) | Mga hakbang sa pag-debug | 45 min |
+| 3 | [Pag-troubleshoot ng AI](ai-troubleshooting.md) | Mga isyung tiyak sa AI | 30 min |
 
 ---
 
-## 🚨 Mabilisang Pag-aayos
+## 🚨 Mga Mabilisang Ayos
 
 ### Mga Isyu sa Authentication
 ```bash
-# Kinakailangan para sa mga workflow ng AZD
+# Required for AZD workflows
 azd auth login
 
-# Opsyonal kung direkta ka ring gumagamit ng mga utos ng Azure CLI
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Mga Pagkabigo sa Provisioning
+### Mga Kabiguan sa Pagprovision
 ```bash
 azd show
 azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### Mga Salungatan sa Resource
+### Mga Konflikto sa Resource
+Suriin muna ang umiiral na resource at mga error sa deployment. Huwag tanggalin ang isang shared o production na kapaligiran para lamang ayusin ang naming conflict. Para sa isang **bagong disposable na kapaligiran**, gumamit ng natatanging pangalan:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Lumagpas sa Quota
+### Naabot ang Quota
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Ang pagbabago ng `AZURE_LOCATION` ay hindi ililipat ang mga umiiral na resources at maaaring magdulot ng mga location conflict kapag muling na-deploy.
 
 ---
 
-## 📋 Sanggunian sa Error Code
+## 📋 Sanggunian sa Mga Error Code
 
-| Error | Sanhi | Solusyon |
-|-------|-------|----------|
+| Error | Dahilan | Solusyon |
+|-------|---------|----------|
 | `AuthenticationError` | Hindi naka-login | `azd auth login` |
 | `ResourceNotFound` | Nawawalang resource | Suriin ang mga pangalan ng resource |
 | `QuotaExceeded` | Limitasyon sa subscription | Humiling ng pagtaas ng quota |
-| `InvalidTemplate` | Mali sa syntax ng Bicep | `az bicep build` |
-| `Conflict` | Naka-exist na resource | Gumamit ng bagong pangalan o burahin |
-| `Forbidden` | Kulang sa permiso | Suriin ang mga RBAC roles |
+| `InvalidTemplate` | Mali ang syntax ng Bicep | `az bicep build` |
+| `Conflict` | Umiiral na resource | Gumamit ng bagong pangalan o tanggalin |
+| `Forbidden` | Hindi sapat ang permiso | Suriin ang mga RBAC role |
 
 ---
 
-## 🔄 I-reset at Pagbawi
+## 🔄 Pag-reset at Pagbawi
 
 ```bash
-# Malambot na reset (panatilihin ang mga resources, muling i-deploy ang code)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Matigas na reset (burahin lahat, magsimula ng bago)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
 
+Ang hard reset ay nagtatanggal ng data at maaaring magbago ng mga endpoint. Mag-backup muna at suriin ang mga prompt para sa interactive na pagtanggal. Ang `--force --purge` ay angkop lamang para sa mga disposable na kapaligiran kapag layunin ang hindi na mababawi pang pagtanggal.
+
 ---
 
-## 🔗 Pag-navigate
+## 🔗 Navigasyon
 
 | Direksyon | Kabanata |
-|-----------|---------|
-| **Nakaraan** | [Kabanata 6: Bago ang Deployment](../chapter-06-pre-deployment/README.md) |
+|-----------|----------|
+| **Nuna** | [Kabanata 6: Bago ang Deployment](../chapter-06-pre-deployment/README.md) |
 | **Susunod** | [Kabanata 8: Produksyon](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Mga Kaugnay na Mapagkukunan
+## 📖 Mga Kaugnay na Sanggunian
 
-- [Mga Check bago ang Deployment](../chapter-06-pre-deployment/preflight-checks.md)
-- [Gabay sa Konfigurasyon](../chapter-03-configuration/configuration.md)
+- [Mga Suriin Bago ang Deployment](../chapter-06-pre-deployment/preflight-checks.md)
+- [Gabay sa Pag-configure](../chapter-03-configuration/configuration.md)
 - [Mga Isyu sa AZD GitHub](https://github.com/Azure/azure-dev/issues)
 
 ---

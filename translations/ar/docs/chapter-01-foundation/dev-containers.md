@@ -1,47 +1,47 @@
-# حاويات التطوير وGitHub Codespaces لأداة azd
+# حاويات التطوير وGitHub Codespaces لـ azd
 
 **تنقل الفصل:**
-- **📚 الصفحة الرئيسية للدورة:** [AZD للمبتدئين](../../README.md)
-- **📖 الفصل الحالي:** الفصل 1 - الأساسيات والبداية السريعة
-- **⬅️ السابق:** [أحضر تطبيقك الخاص](bring-your-own-app.md)
-- **🚀 الفصل التالي:** [الفصل 2: تطوير يركز على الذكاء الاصطناعي](../chapter-02-ai-development/README.md)
+- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
+- **📖 الفصل الحالي**: الفصل 1 - الأساسيات والبدء السريع
+- **⬅️ السابق**: [إحضار تطبيقك الخاص](bring-your-own-app.md)
+- **🚀 الفصل التالي**: [الفصل 2: تطوير يركز على الذكاء الاصطناعي](../chapter-02-ai-development/README.md)
 
-> تم التحقق عبر `azd 1.27.1` في يوليو 2026.
+> مراجعة الأوامر والتكوين تستهدف: `azd 1.37.2` (نوفمبر 2026). لم يتم تنفيذ بناء الحاويات أو نشرات Azure كجزء من هذه المراجعة.
 
 ## مقدمة
 
-تثبيت azd، وبيئة التشغيل المناسبة للغة، وDocker، وAzure CLI على كل جهاز مهمة متعبة—وهي السبب الأول وراء فشل درس "يعمل على جهازي" مع شخص آخر. حاوية تطوير **dev container** تحل هذه المشكلة بوصف كامل سلسلة الأدوات في ملف واحد. أي شخص يفتح المشروع في VS Code أو GitHub Codespaces يحصل على نفس البيئة تمامًا، مع وجود azd مثبتًا مسبقًا. تعرض لك هذه الدرس كيفية إضافة واحدة.
+تثبيت azd، بيئة تشغيل اللغة الصحيحة، Docker، وأداة Azure CLI على كل جهاز صعب - وهي السبب الأول في فشل الدروس التي "تعمل على جهازي" لشخص آخر. **حاوية التطوير** تحل هذه المشكلة بوصف كامل سلسلة الأدوات في ملف واحد. أي شخص يفتح المشروع في VS Code أو GitHub Codespaces يحصل على نفس البيئة تماماً، مع تثبيت azd مسبقاً. هذا الدرس يوضح لك كيفية إضافة واحدة.
 
 ## أهداف التعلم
 
-بنهاية هذا الدرس، ستتمكن من:
-- فهم ماهية حاوية التطوير ولماذا تساعد مع azd
-- إضافة ملف `.devcontainer/devcontainer.json` بسيط إلى مشروعك
-- تضمين azd، وAzure CLI، وDocker عبر *ميزات* حاوية التطوير
+بحلول نهاية هذا الدرس، ستتمكن من:
+- فهم ما هي حاوية التطوير ولماذا تساعد مع azd
+- إضافة `.devcontainer/devcontainer.json` بسيطة إلى مشروع
+- تضمين azd، أداة Azure CLI، وDocker عبر *ميزات* حاوية التطوير
 - فتح المشروع في GitHub Codespaces أو VS Code
 
-## مخرجات التعلم
+## نتائج التعلم
 
 بعد إكمال هذا الدرس، ستتمكن من:
-- كتابة ملف `devcontainer.json` لمشروع azd
-- إضافة أدوات azd وAzure دون تثبيت يدوي
-- تشغيل `azd up` من داخل الحاوية أو Codespace
+- إنشاء `devcontainer.json` لمشروع azd
+- إضافة azd وأدوات Azure بدون تثبيتات يدوية
+- تشغيل `azd up` من داخل حاوية أو Codespace
 
 ---
 
 ## ما هي حاوية التطوير؟
 
-حاوية التطوير هي بيئة تطوير مبنية على Docker تُعرف بملف `.devcontainer/devcontainer.json` في مستودعك. عندما تفتح المشروع:
+حاوية التطوير هي بيئة تطوير تعتمد على Docker تُعرف بواسطة ملف `.devcontainer/devcontainer.json` في مستودعك. عند فتح المشروع:
 
-- **VS Code** (مع امتداد Dev Containers) يبني الحاوية ويرتبط بها.
-- **GitHub Codespaces** يبني نفس الحاوية في السحابة ويمنحك محررًا مستندًا إلى المتصفح.
+- **VS Code** (مع امتداد Dev Containers) يبني الحاوية ويتصل بها.
+- **GitHub Codespaces** يبني نفس الحاوية في السحابة ويوفر لك محرر مستند إلى المتصفح.
 
-في كلا الحالتين، يحصل كل مساهم على أدوات متطابقة—لا حاجة لـ "هل ثبتت azd؟" كتحرّي أخطاء.
+في الحالتين، يحصل كل مساهم على نفس الأدوات - لا المزيد من استكشاف "هل ثبتت azd؟".
 
 ```mermaid
 graph LR
-    Repo[مستودعك<br/>+ devcontainer.json] --> VSCode[VS Code<br/>حاويات التطوير]
-    Repo --> Codespaces[GitHub<br/>مساحات الرموز]
+    Repo[Your Repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Dev Containers]
+    Repo --> Codespaces[GitHub<br/>Codespaces]
     VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
@@ -50,7 +50,7 @@ graph LR
 
 ## الخطوة 1: إنشاء ملف devcontainer
 
-أنشئ الملف `.devcontainer/devcontainer.json` في جذر مشروعك:
+أنشئ `.devcontainer/devcontainer.json` في جذر مشروعك:
 
 ```json
 {
@@ -58,7 +58,7 @@ graph LR
   "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {},
-    "ghcr.io/azure/azure-dev/azd:latest": {},
+    "ghcr.io/azure/azure-dev/azd:0": { "version": "1.37.2" },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/node:1": {}
   },
@@ -75,23 +75,23 @@ graph LR
 }
 ```
 
-ماذا يفعل كل جزء:
+ما يفعله كل جزء:
 
 | المفتاح | الغرض |
 |-----|---------|
 | `image` | نظام التشغيل الأساسي للحاوية |
-| `features` | مثبتات مدمجة—هنا: Azure CLI، **azd**، Docker، وNode.js |
-| `customizations.vscode.extensions` | يثبت تلقائيًا امتدادات VS Code لأدوات azd وBicep |
-| `forwardPorts` | يفتح منفذ التطبيق لديك في المتصفح |
-| `postCreateCommand` | يُشغل مرة واحدة بعد بناء الحاوية (هنا للتحقق من الصحة) |
+| `features` | المثبتات المسبقة—هنا: Azure CLI، **azd**، Docker، وNode.js |
+| `customizations.vscode.extensions` | يثبت تلقائياً امتدادات azd وBicep في VS Code |
+| `forwardPorts` | يفتح منفذ التطبيق للمتصفح لديك |
+| `postCreateCommand` | يُشغل مرة واحدة بعد بناء الحاوية (هنا، فحص سلامة) |
 
-> ميزة `ghcr.io/azure/azure-dev/azd:latest` هي الطريقة الرسمية للحصول على azd في الحاوية. يمكن تثبيت إصدار محدد (مثل `azd:1.27.1`) إذا كنت بحاجة للتكرار.
+> إصدار الميزة (`azd:0`) وإصدار CLI المثبت مختلفان. اضبط خيار `version` للميزة إلى `"1.37.2"` لتثبيت CLI؛ لا تستخدم إصدار CLI كميزة مميزة.
 
 ---
 
-## الخطوة 2: طابق الميزة مع لغة تطبيقك
+## الخطوة 2: مطابقة الميزة مع لغة تطبيقك
 
-استبدل ميزة `node` بما يستخدمه تطبيقك:
+استبدل ميزة `node` بما تستخدمه تطبيقك:
 
 ```jsonc
 // Python project
@@ -107,54 +107,54 @@ graph LR
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-احتفظ بـ `docker-in-docker` إذا كان `host` هو `containerapp` أو `aks` أو أي شيء يبني صورة حاوية—azd يحتاج إلى Docker لبناء ودفع الصور.
+احتفظ `docker-in-docker` عند بناء الصور محلياً. بناء ACR البعيد المهيأ (`docker.remoteBuild: true`) هو بديل؛ نوع المضيف وحده لا يتطلب دائماً Docker محلي.
 
 ---
 
-## الخطوة 3: افتحه
+## الخطوة 3: فتحها
 
 **في VS Code:**
-1. ثبّت امتداد **Dev Containers**.
+1. قم بتثبيت امتداد **Dev Containers**.
 2. افتح مجلد المشروع.
-3. انقر **إعادة الفتح في الحاوية** عند الطلب (أو شغل *Dev Containers: Reopen in Container*).
+3. انقر على **إعادة الفتح في الحاوية** عند الظهور (أو شغل *Dev Containers: Reopen in Container*).
 
 **في GitHub Codespaces:**
 1. ادفع المستودع إلى GitHub.
-2. انقر **Code → Codespaces → إنشاء codespace على الفرع الرئيسي**.
+2. انقر **Code → Codespaces → Create codespace on main**.
 3. انتظر بناء الحاوية—azd جاهز في الطرفية.
 
 ---
 
 ## الخطوة 4: النشر من داخل الحاوية
 
-تحتوي الحاوية على azd مثبت مسبقًا، لذا يعمل سير العمل العادي ببساطة:
+الحاوية تحتوي على azd مثبت مسبقاً، لذلك سير العمل المعتاد يعمل بسلاسة:
 
 ```bash
-azd auth login --use-device-code   # رمز الجهاز مفيد داخل مساحات الأكواد
+azd auth login --use-device-code   # device code is handy inside Codespaces
 azd up
 ```
 
-> **لماذا `--use-device-code`؟** في حاوية بعيدة أو Codespace لا يوجد متصفح محلي لإعادة التوجيه، لذا تسجيل الدخول برمز الجهاز هو الطريقة الموثوقة. ستلصق رمزًا في علامة تبويب المتصفح لإكمال تسجيل الدخول.
+> **لماذا `--use-device-code`؟** في الحاوية البعيدة أو Codespace لا يوجد متصفح محلي لإعادة التوجيه، لذا تسجيل الدخول عبر رمز الجهاز هو الطريقة الموثوقة. ستلصق رمزاً في تبويب المتصفح لإكمال تسجيل الدخول.
 
 ---
 
-## المشاكل الشائعة
+## الأخطاء الشائعة
 
 | المشكلة | الحل |
 |---------|-----|
 | لا يستطيع `azd up` بناء صورة | أضف ميزة `docker-in-docker` |
 | تسجيل الدخول عبر المتصفح يتوقف في Codespaces | استخدم `azd auth login --use-device-code` |
-| اختلاف الأدوات بين الزملاء | ثبت إصدارات الميزات (مثلاً `azd:1.27.1`) |
-| التطبيق غير قابل للوصول عبر المتصفح | أضف المنفذ إلى `forwardPorts` |
+| الأدوات تختلف بين الزملاء | ثبت CLI عبر خيار `version` في ميزة azd وثبت أطر تشغيل اللغة |
+| التطبيق غير متاح في المتصفح | أضف المنفذ إلى `forwardPorts` |
 
 ---
 
 ## ملخص
 
-- حاوية التطوير تجعل سلسلة أدوات azd قابلة للتكرار للجميع.
-- أضف azd وAzure CLI وDocker عبر *ميزات* حاوية التطوير.
+- حاوية التطوير تجعل سلسلة أدوات azd الخاصة بك قابلة لإعادة الإنتاج للجميع.
+- أضف azd، أداة Azure CLI، وDocker عبر *ميزات* حاوية التطوير.
 - طابق ميزة اللغة مع تطبيقك واحتفظ بـ `docker-in-docker` لمضيفي الحاويات.
-- استخدم تسجيل الدخول برمز الجهاز عند التشغيل داخل Codespaces.
+- استخدم تسجيل دخول رمز الجهاز عند التشغيل داخل Codespaces.
 
 ---
 
@@ -162,16 +162,16 @@ azd up
 
 | الاتجاه | المورد |
 |-----------|----------|
-| **السابق** | [أحضر تطبيقك الخاص](bring-your-own-app.md) |
-| **الصفحة الرئيسية للفصل** | [الفصل 1: الأساسيات والبداية السريعة](README.md) |
+| **السابق** | [إحضار تطبيقك الخاص](bring-your-own-app.md) |
+| **الصفحة الرئيسية للفصل** | [الفصل 1: الأساسيات والبدء السريع](README.md) |
 | **الفصل التالي** | [الفصل 2: تطوير يركز على الذكاء الاصطناعي](../chapter-02-ai-development/README.md) |
 
 ## 📖 موارد ذات صلة
 
 - [التثبيت والإعداد](installation.md)
-- [مذكرة اختصارات الأوامر](../../resources/cheat-sheet.md)
-- [المواصفة الرسمية لحاويات التطوير](https://containers.dev/)
-- [ميزة حاوية تطوير azd](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [ملخص أوامر](../../resources/cheat-sheet.md)
+- [المواصفات الرسمية لحاويات التطوير](https://containers.dev/)
+- [ميزة حاوية التطوير الخاصة بـ azd](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

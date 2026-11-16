@@ -1,22 +1,22 @@
-# అధ్యాయము 2: ఎఐ-ఫస్ట్ అభివృద్ధి
+# అధ్యాయం 2: AI-ఫస్ట్ డెవలప్‌మెంట్
 
-**📚 కోర్సు**: [AZD ప్రారంభికులకు](../../README.md) | **⏱️ వ్యవధి**: 1-2 గంటలు | **⭐ క్లిష్టత**: మధ్యస్థ
+**📚 కోర్స్**: [AZD ప్రారంభికులకు](../../README.md) | **⏱️ వ్యవధి**: వర్క్‌షాప్ సహా 4-5 గంటలు | **⭐ సంక్లిష్టత**: మధ్యస్థం
 
 ---
 
-## అవలోకనం
+## అవగాహన
 
-ఈ అధ్యాయం Azure Developer CLI మరియు Microsoft Foundry సేవల సహాయంతో AI-ఆధారిత అప్లికేషన్లను సమర్పించడంపై కేంద్రీకృతమవుతుంది. సాదారణ AI చాట్ యాప్స్ నుండి టూల్స్ సహా తెలివైన ఏజెంట్ల వరకు.
+ఈ అధ్యాయం Azure డెవలపర్ CLI మరియు Microsoft Foundry సేవలను ఉపయోగించి AI ఆధారిత యాప్లను నియమించడంపై కేంద్రీకృతమవుతుంది. సులభమైన AI చాట్ యాప్ల నుండి టూల్స్ తో బుద్ధిమంతమైన ఏజెంట్ల వరకు.
 
-> **ధృవపరిచే గమనిక (2026-07-13):** ఈ అధ్యాయం లో ఉన్న ఆజ్ఞల క్రమం మరియు విస్తరణ మార్గదర్శకాలు `azd` `1.27.1` మరియు ప్రస్తుత ప్రివ్యూ AI ఏజెంట్ విస్తరణ విడుదల `azure.ai.agents` `1.0.0-beta.5` తో సమీక్షించబడ్డాయి. మీరు పాత AZD బిల్డ్ లో ఉంటే, ముందుగా అప్‌డేట్ చేసి, ఆ తర్వాత క్రియాశీల దశలను కొనసాగించండి.
+> **విడుదల సమీక్ష (2026-11-04):** AI CLI మార్గదర్శకాన్ని ప్రచురితమైన `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, మరియు `azure.ai.evaluations` `1.0.0-beta.2` డాక్యుమెంటేషన్/సోర్స్‌పై తనిఖీ చేయబడింది. మిళిత వర్క్‌ఫ్లో కోసం `azd >= 1.37.0` ఉపయోగించండి. ఇప్పుడు మూల్యాంకనాలు వేర్వేరు `azd ai eval` నేమ్‌స్పేస్‌ని ఉపయోగిస్తాయి; [విడుదల మార్పులు మరియు మైగ్రేషన్ మార్గదర్శకాలు](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) చూడండి. ఇది ప్రత్యక్ష నియామక నిర్ధారణ కాదు.
 
-## నేర్చుకునే లక్ష్యాలు
+## నేర్చుకోవాల్సిన లక్ష్యాలు
 
-ఈ అధ్యాయం పూర్తి చేయడం ద్వారా, మీరు:
-- ముందుగా తయారు చేసిన AZD టెంప్లేట్లతో AI అప్లికేషన్లను విడుదల చేయగలుగుతారు
-- Microsoft Foundry నిర్వహణను AZD తో అర్థం చేసుకోగలుగుతారు
-- టూల్స్ తో AI ఏజెంట్లను కాన్ఫిగర్ మరియు అనుకూలీకరించగలుగుతారు
-- RAG (రిట్రీవల్-ఆగ్మెంటెడ్ జనరేషన్) అప్లికేషన్లను సమర్పించగలుగుతారు
+ఈ అధ్యాయం పూర్తిచేయడం ద్వారా, మీరు:
+- ముందే తయారుచేసిన AZD టెంప్లేట్లను ఉపయోగించి AI యాప్లను నియమించగలరు
+- Microsoft Foundry ని AZD తో ఎలా మలికించుకోవాలో అర్థం చేసుకోగలరు
+- టూల్స్ తో AI ఏజెంట్లను కాంపిగర్ మరియు అనుకూలీకరించగలరు
+- RAG (రిట్రీవల్-ఆగుమెంటెడ్ జనరేషన్) యాప్లను నియమించగలరు
 
 ---
 
@@ -24,42 +24,46 @@
 
 | # | పాఠం | వివరణ | సమయం |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry ఇంటిగ్రేషన్](microsoft-foundry-integration.md) | AZD ను Foundry సేవలతో కనెక్ట్ చేయడం | 30 నిమిషాలు |
-| 2 | [AI ఏజెంట్ల గైడ్](agents.md) | టూల్స్ తో తెలివైన ఏజెంట్లను సమర్పించడం | 45 నిమిషాలు |
-| 3 | [AI మోడల్ విడుదల](ai-model-deployment.md) | AI మోడల్స్ ని విడుదల చేసి, కాన్ఫిగర్ చేయడం | 30 నిమిషాలు |
-| 4 | [AI వర్క్‌షాప్ ల్యాబ్](ai-workshop-lab.md) | హ్యాండ్స్-ఆన్: మీ AI పరిష్కారాన్ని AZD-సిద్ధంగా చేయండి | 60 నిమిషాలు |
+| 1 | [Microsoft Foundry మలికింపు](microsoft-foundry-integration.md) | AZD ని Foundry సేవలతో కలపండి | 30 నిమి |
+| 2 | [AI ఏజెంట్ల గైడ్](agents.md) | టూల్స్ తో బుద్ధిమంతుల ఏజెంట్లను నియమించండి | 45 నిమి |
+| 3 | [AI మోడల్ నియామకం](ai-model-deployment.md) | AI మోడల్స్‌ను నియమించి కాంపిగర్ చేయండి | 30 నిమి |
+| 4 | [AI వర్క్‌షాప్ ల్యాబ్](ai-workshop-lab.md) | ప్రాక्टికల్: ఒక టెంప్లేట్ పరిశీలించండి మరియు మార్పిడి ప్రణాళికను రూపొందించండి | 2-3 గంటలు |
 
 ---
 
-## 🚀 త్వరిత ప్రారంభం
+## 🚀 తర్వరి ప్రారంభం
+
+కొత్త ఖాళీ డైరెక్టరీలో ఒక ఎంపికను ఎంచుకోండి. చివరి `.` ప్రస్తుత డైరెక్టరీని ప్రారంభిస్తుంది; లేకపోతే AZD మీ షెల్ పని డైరెక్టరీ మార్చకుండా ఒక ఉపడైరెక్టరీని సృష్టించవచ్చు.
 
 ```bash
-# ఎంపిక 1: RAG చాట్ అప్లికేషన్
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# ఎంపిక 2: AI ఏజెంట్లు
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# ఎంపిక 3: తక్షణ చాట్ యాప్
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
 ---
 
-## 🤖 ప్రత్యేక AI టెంప్లేట్లు
+## 🤖 ప్రముఖ AI టెంప్లేట్లు
 
 | టెంప్లేట్ | వివరణ | సేవలు |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | రిఫరెన్సులతో RAG చాట్ | OpenAI + AI శోధన |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | టూల్స్ తో AI ఏజెంట్ | AI ఏజెంట్ సర్వీస్ |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | ప్రాథమిక AI చాట్ | OpenAI + కంటైనర్ యాప్స్ |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | సిటేషన్లతో RAG చాట్ | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | టూల్స్ తో AI ఏజెంట్ | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | బేసిక్ AI చాట్ | OpenAI + కంటైనర్ యాప్స్ |
 
 ---
 
-## 💰 ఖర్చు అవగాహన
+## 💰 ఖర్చుల అవగాహన
+
+ఇవి చూపించే పరిధులు, కోటా లేదా గరిష్టాలు அல்ல; మోడల్ ట్రాఫిక్, సెర్చ్/కంప్యూట్ SKUs, ప్రాంతం మరియు ఐచ్ఛిక లక్షణాలు వీటిని మించి ఉండవచ్చు. మీ ఎంచుకున్న నమూనా ప్రస్తుత ధరల మార్గదర్శకాలను పూర్వం సమీక్షించండి.
 
 | వాతావరణం | అంచనా నెలవారీ ఖర్చు |
 |-------------|----------------------|
@@ -67,7 +71,7 @@ azd up
 | స్టేజింగ్ | $150-300 |
 | ఉత్పత్తి | $300-3,500+ |
 
-**సూచన:** టెస్టింగ్ తర్వాత ఛార్జీలను నివారించడానికి `azd down` ఆజ్ఞను నడిపించండి.
+**సూచి:** పరీక్ష అనంతరం ఛార్జీల‌ను దూరంగా ఉండేందుకు `azd down` రన్ చేయండి.
 
 ---
 
@@ -75,17 +79,17 @@ azd up
 
 | దిశ | అధ్యాయం |
 |-----------|---------|
-| **ముందటి** | [అధ్యాయం 1: ఫౌండేషన్](../chapter-01-foundation/README.md) |
-| **తరవాత** | [అధ్యాయం 3: కాన్ఫిగరేషన్](../chapter-03-configuration/README.md) |
-| **దాటివేయి** | [అధ్యాయం 8: ఉత్పత్తి నమూనాలు](../chapter-08-production/README.md) |
+| **మునుపటి** | [అధ్యాయం 1: ఫౌండేషన్](../chapter-01-foundation/README.md) |
+| **తరువాత** | [అధ్యాయం 3: కాన్ఫిగరేషన్](../chapter-03-configuration/README.md) |
+| **దూరం** | [అధ్యాయం 8: ఉత్పత్తి నమూనాలు](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 సంబంధిత వనరులు
 
-- [AI సమస్య పరిష్కారం](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [ఉత్పత్తి AI అనుభవాలు](../chapter-08-production/production-ai-practices.md)
-- [అప్లికేషన్ ఇన్‌సైట్స్](../chapter-06-pre-deployment/application-insights.md)
+- [AI సమస్యల పరిష్కారం](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [ఉత్పత్తి AI ప్రాక్టీసులు](../chapter-08-production/production-ai-practices.md)
+- [యాప్లికేషన్ ఇన్సైట్స్](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

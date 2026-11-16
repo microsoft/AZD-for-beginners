@@ -1,60 +1,58 @@
-# 6. Infrastruktuurin purku
+# 6. Infra rakenteen purku
 
-!!! tip "TÄMÄN MODUULIN PÄÄTTYESSÄ OSAAT"
+!!! tip "MODUULIN LOPPUUN MENNESSÄ OSAA"
 
-    - [ ] Ymmärtää resurssien siivouksen ja kustannusten hallinnan merkityksen
-    - [ ] Käyttää `azd down` turvallisesti infrastruktuurin purkamiseen
-    - [ ] Palauttaa pehmeästi poistetut Azure AI Services -resurssit tarvittaessa
-    - [ ] **Harjoitus 6:** Siivota Azure-resurssit ja varmistaa poisto
-
----
-
-## Lisätehtävät
-
-Before we tear down the project, take a few minutes to do some open-ended exploration.
-
-!!! info "Kokeile näitä tutkimuskehotteita"
-
-    **Kokeile GitHub Copilotia:**
-    
-    1. Kysy: `What other AZD templates could I try for multi-agent scenarios?`
-    2. Kysy: `How can I customize the agent instructions for a healthcare use case?`
-    3. Kysy: `What environment variables control cost optimization?`
-    
-    **Tutki Azure-portaalia:**
-    
-    1. Tarkastele Application Insightsin mittareita käyttöönotossasi
-    2. Tarkista provisionoitujen resurssien kustannusanalyysi
-    3. Tutki Microsoft Foundry -portaalin agenttien leikkikenttää vielä kerran
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## Poista infrastruktuuri
+## Bonus Harjoitukset
 
-1. Tearing down infrastructure is as easy as:
+Ennen kuin puret projektin, käytä muutama minuutti avoimeen tutkimiseen.
+
+!!! info "Kokeile Näitä Tutkimusaiheita"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
+
+---
+
+## Poista infrastruktuuri käytöstä
+
+1. Infrastruktuurin purku on yhtä helppoa kuin:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. Vahvista valittu ympäristö ja tarkista poistettavat resurssit. Tämä poistaa Azuren resurssit ja voi tuhota tietoja. Säilytä vahvistuskehotus tässä oppimistyönkulussa. Kun valmis, näet ulostulon, joka on samanlainen kuin:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Valinnainen) If you now run `azd up` again, you will notice the gpt-4.1 model gets deployed since the environment variable was changed (and saved) in the local `.azure` folder. 
+1. Vahvista poisto portaalissa ja tarkista resurssit jotka ovat käyttöönottoskaalasta ulkopuolella. Kustannusraportointi ja käyttöoikeuksien päivitykset voivat viivästyä. Paikallinen `.azure` kokoonpano säilyy ellet poista sitä erikseen.
 
-      Here is the model deployments **before**:
+1. `azd down --purge` pyytää lisäksi tuettuja pehmeästi poistettuja resursseja poistettavaksi pysyvästi. Käytä tätä vain, kun palautusta ei tarvita ja ymmärrät säilytys-/poistonsuojapolitiikat. Se ei takaa välitöntä käyttöoikeuksien vapautusta.
 
-      ![Alkuperäinen](../../../../../translated_images/fi/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      And here it is **after**:
-      ![Uusi](../../../../../translated_images/fi/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Älä ota uudelleen käyttöön vain varmistaaksesi siivouksen. Myöhemmällä tarkoituksellisella `azd up` voi luoda resurssit uudelleen käyttämällä jäljelle jääneitä paikallisia syötteitä, ja aiheuttaa taas kustannuksia. Mallipäivitykset käyttävät normaalisti tuettuja provisiointimuutoksia, eivät purkua.
 
 ---
 

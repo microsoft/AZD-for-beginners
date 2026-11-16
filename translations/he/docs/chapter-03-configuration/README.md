@@ -1,22 +1,22 @@
 # פרק 3: תצורה ואימות
 
-**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך**: 45-60 דקות | **⭐ דרגת קושי**: בינוני
+**📚 קורס**: [AZD למתחילים](../../README.md) | **⏱️ משך**: 90-150 דקות כולל תרגול אינטגרציה | **⭐ רמת מורכבות**: בינונית
 
 ---
 
 ## סקירה כללית
 
-פרק זה מתאר את תצורת הסביבה, תבניות אימות, ושיטות עבודה מומלצות לאבטחה לפריסות של Azure Developer CLI.
+פרק זה עוסק בתצורת הסביבה, דפוסי אימות, ופרקטיקות אבטחה מיטביות לפריסות Azure Developer CLI.
 
-> אומת עם `azd 1.27.1` ביולי 2026.
+> יעד סקירת פקודה ותצורה: `azd 1.37.2` (נובמבר 2026). לא בוצעה פריסת Azure חיה במהלך הסקירה.
 
 ## מטרות הלמידה
 
-בסיום פרק זה, תוכל:
+בסיום פרק זה תוכל:
 - לשלוט בהיררכיית התצורה של AZD
-- לנהל סביבות מרובות (פיתוח, בדיקה, הפקה)
+- לנהל סביבות מרובות (פיתוח, תיק, הפקה)
 - ליישם אימות מאובטח עם זהויות מנוהלות
-- להגדיר הגדרות ספציפיות לסביבה
+- להגדיר הגדרות ייחודיות לסביבה
 
 ---
 
@@ -24,59 +24,59 @@
 
 | # | שיעור | תיאור | זמן |
 |---|--------|-------------|------|
-| 1 | [מדריך תצורה](configuration.md) | הקמה וניהול סביבה | 30 דק' |
-| 2 | [אימות ואבטחה](authsecurity.md) | תבניות זהות מנוהלת ו-RBAC | 30 דק' |
+| 1 | [מדריך תצורה](configuration.md) | התקנה וניהול סביבה | 30 דקות |
+| 2 | [אימות ואבטחה](authsecurity.md) | דפוסי זהות מנוהלת ו-RBAC | 30 דקות |
 
 ---
 
 ## 🚀 התחלה מהירה
 
+הפעל משורש **אפליקציית azd שכבר הופעלה**, לא מאגר הקורס. השתמש בשמות סביבה לא בשימוש אם אלו כבר קיימים.
+
 ```bash
-# צור סביבות מרובות
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# החלף בין סביבות
+# Switch environments
 azd env select prod
 
-# הגדר משתני סביבה
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# הצג תצורה
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` הוא להמחשה: הוא משפיע על התשתית רק אם התבנית שלך צורכת אותו במפורש. ערכי `azd env set` רגילים נשמרים מקומית בטקסט ברור; אינם אחסון סודי מאובטח.
 
 ---
 
 ## 🔧 היררכיית תצורה
 
-AZD מיישם הגדרות בסדר הבא (הגדרות מאוחרות מבטלות מוקדמות):
-
-1. **ערכי ברירת מחדל** (מובנים בתבניות)
-2. **azure.yaml** (תצורת פרויקט)
-3. **משתני סביבה** (`azd env set`)
-4. **דגלי שורת הפקודה** (`--location eastus`)
+שמור על שלוש משטחים נפרדים של תצורה: העדפות גלובליות (`azd config`), מבנה הפרויקט (`azure.yaml`), וערכי סביבה (`azd env`). דגלים מעלים רק את ההגדרות הנתמכות בפועל; אין שכבת על אוניברסלית של משתני סביבה שרירותיים על `azure.yaml` או Bicep.
 
 ---
 
-## 🔐 שיטות עבודה מומלצות לאבטחה
+## 🔐 פרקטיקות אבטחה מיטביות
 
 ```bash
-# השתמש בזהות מנוהלת (מומלץ)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# בדוק את מצב האימות של AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# אופציונלי: אמת את הקשר של Azure CLI אם אתה מתכנן להריץ פקודות az
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# אמת מחדש אם יש צורך
+# Re-authenticate if needed
 azd auth login
 
-# אופציונלי: רענן את האימות של Azure CLI עבור פקודות az
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -86,15 +86,15 @@ az login
 
 | כיוון | פרק |
 |-----------|---------|
-| **קודם** | [פרק 2: פיתוח AI](../chapter-02-ai-development/README.md) |
-| **הבא** | [פרק 4: תשתיות](../chapter-04-infrastructure/README.md) |
+| **קודם** | [פרק 2: פיתוח בינה מלאכותית](../chapter-02-ai-development/README.md) |
+| **הבא** | [פרק 4: תשתית](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 משאבים קשורים
 
-- [בדיקות טרום פריסה](../chapter-06-pre-deployment/README.md)
-- [פתרון תקלות](../chapter-07-troubleshooting/common-issues.md)
+- [בדיקות לפני פריסה](../chapter-06-pre-deployment/README.md)
+- [איתור תקלות](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

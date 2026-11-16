@@ -1,22 +1,22 @@
 # 7. peatükk: tõrkeotsing ja silumine
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 1–1,5 tundi | **⭐ Tase**: Kesktase
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 1-1,5 tundi | **⭐ Keerukus**: Vahepealne
 
 ---
 
 ## Ülevaade
 
-See peatükk aitab teil diagnoosida ja lahendada tavalisi probleeme Azure Developer CLI-ga töötades. Alates juurutuse tõrgetest kuni tehisintellekti spetsiifiliste probleemideni.
+See peatükk aitab teil diagnoosida ja lahendada levinumaid probleeme Azure Developer CLI kasutamisel. Alates juurutamise ebaõnnestumistest kuni AI-spetsiifiliste probleemideni.
 
-> Kinnitatud `azd 1.27.1` alusel 2026. aasta juulis.
+> Käsujuhised on üle vaadatud välja antud `azd 1.37.2` viite alusel. Pilverakendusi ei ole käivitatud. Asendage käske kasutades näidisressursside nimed ja ID-d.
 
-## Õpieesmärgid
+## Õppe eesmärgid
 
-Selle peatüki lõpetamise järel:
-- diagnoosite tavalisi AZD juurutuse tõrkeid
-- silute autentimise ja õiguste probleeme
-- lahendate AI-teenuse ühenduvusprobleeme
-- kasutate tõrkeotsinguks Azure portaali ja CLI-d
+Selle peatüki lõpetamisel suudate:
+- Diagnostiseerida levinumaid AZD juurutamise tõrkeid
+- Siluda autentimis- ja õiguste probleeme
+- Lahendada AI-teenuste ühenduvusprobleeme
+- Kasutada tõrkeotsinguks Azure Portaali ja CLI-d
 
 ---
 
@@ -24,8 +24,8 @@ Selle peatüki lõpetamise järel:
 
 | # | Õppetund | Kirjeldus | Aeg |
 |---|--------|-------------|------|
-| 1 | [Tavalised probleemid](common-issues.md) | Sageli esinevad probleemid | 30 min |
-| 2 | [Silumise juhend](debugging.md) | Samm-sammuline silumise strateegia | 45 min |
+| 1 | [Levinumad probleemid](common-issues.md) | Sageli esinevad probleemid | 30 min |
+| 2 | [Silumise juhend](debugging.md) | Samm-sammuline silumisstrateegia | 45 min |
 | 3 | [AI tõrkeotsing](ai-troubleshooting.md) | AI-spetsiifilised probleemid | 30 min |
 
 ---
@@ -34,16 +34,16 @@ Selle peatüki lõpetamise järel:
 
 ### Autentimise probleemid
 ```bash
-# Nõutav AZD töövoogude jaoks
+# Required for AZD workflows
 azd auth login
 
-# Valikuline, kui kasutate ka Azure CLI käske otse
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Juurutuse tõrked
+### Juurutamise tõrked
 ```bash
 azd show
 azd monitor --logs
@@ -51,44 +51,49 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Ressursside konfliktid
+Kontrollige esmalt olemasolevaid ressursse ja juurutamise vigu. Ärge kustutage nimikonflikti lahendamiseks jagatud või tootmis keskkonda. Uue lühiajalise keskkonna puhul kasutage unikaalset nime:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Kvoodi ületamine
+### Piirangu ületamine
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+`AZURE_LOCATION` muutmine ei vii olemasolevaid ressursse ja võib põhjustada paiknemiskonflikte uuesti juurutamisel.
 
 ---
 
-## 📋 Veakoodide viited
+## 📋 Veakoodide viide
 
 | Viga | Põhjus | Lahendus |
 |-------|-------|----------|
-| `AuthenticationError` | Mitte sisse logitud | `azd auth login` |
-| `ResourceNotFound` | Puuduv ressurss | Kontrolli ressursside nimesid |
-| `QuotaExceeded` | Tellimuse piirangud | Taotlege kvoodi suurendamist |
-| `InvalidTemplate` | Bicepi süntaksiviga | `az bicep build` |
-| `Conflict` | Ressurss juba olemas | Kasuta uut nime või kustuta |
-| `Forbidden` | Ebapiisavad õigused | Kontrolli RBAC rolle |
+| `AuthenticationError` | Pole sisse logitud | `azd auth login` |
+| `ResourceNotFound` | Ressurss puudub | Kontrollige ressursi nimesid |
+| `QuotaExceeded` | Tellimuse piirangud | Taotlege limiidi suurendamist |
+| `InvalidTemplate` | Bicepi süntaksi viga | `az bicep build` |
+| `Conflict` | Ressurss juba olemas | Kasutage uut nime või kustutage vana |
+| `Forbidden` | Ebapiisavad õigused | Kontrollige RBAC rolle |
 
 ---
 
-## 🔄 Lähtestamine ja taastamine
+## 🔄 Lähtesta ja taasta
 
 ```bash
-# Pehme lähtestus (hoia ressursse, paigalda kood uuesti)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Tugev lähtestus (kustuta kõik, alusta uuesti)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Tugev lähtestus kustutab andmed ja võib muuta lõpp-punkte. Tehke enne varukoopia ja jälgige interaktiivseid kustutuskinnitusi. `--force --purge` sobib ainult lühiajaliseks keskkonnaks, kui soovitakse pöördumatut kustutamist.
 
 ---
 
@@ -96,16 +101,16 @@ azd up
 
 | Suund | Peatükk |
 |-----------|---------|
-| **Eelmine** | [6. peatükk: Eeljärjestamine](../chapter-06-pre-deployment/README.md) |
-| **Järgmine** | [8. peatükk: Tootmine](../chapter-08-production/README.md) |
+| **Eelmine** | [6. peatükk: eeljuurutus](../chapter-06-pre-deployment/README.md) |
+| **Järgmine** | [8. peatükk: tootmine](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Seotud ressursid
+## 📖 Seotud materjalid
 
-- [Eeljärjestamise kontrollid](../chapter-06-pre-deployment/preflight-checks.md)
+- [Eeljuurutamise kontrollid](../chapter-06-pre-deployment/preflight-checks.md)
 - [Konfiguratsiooni juhend](../chapter-03-configuration/configuration.md)
-- [AZD GitHub probleemid](https://github.com/Azure/azure-dev/issues)
+- [AZD GitHubi probleemid](https://github.com/Azure/azure-dev/issues)
 
 ---
 

@@ -1,4 +1,4 @@
-# Capítulo 8: Padrões de Produção & Empresa
+# Capítulo 8: Padrões de Produção & Empresariais
 
 **📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
 
@@ -6,70 +6,73 @@
 
 ## Visão Geral
 
-Este capítulo abrange padrões de implementação prontos para empresa, reforço de segurança, monitorização e otimização de custos para cargas de trabalho de IA em produção.
+Este capítulo cobre padrões de implementação prontos para empresas, reforço de segurança, monitorização e otimização de custos para workloads de IA em produção.
 
-> Validado com `azd 1.27.1` em julho de 2026.
+Esta é uma referência arquitetural, não um template completo para produção. Os exemplos omittem detalhes de integração que devem ser fornecidos e testados na sua própria aplicação; ler a lista de verificação não certifica a prontidão para produção.
 
-## Objetivos de Aprendizagem
+> **Revisão da versão (2026-11-04):** A orientação da CLI de IA foi verificada contra a documentação/fonte de `azd 1.37.2`, agentes `1.0.0-beta.23`, e avaliações `1.0.0-beta.2`. Veja [alterações e correções da versão](production-ai-practices.md#recent-release-changes-and-fixes) para requisitos de compatibilidade e detalhes da migração; isto não é uma validação de implementação ao vivo.
 
-Ao completar este capítulo, irá:
-- Implementar aplicações resilientes multi-região
+## Objectivos de Aprendizagem
+
+Ao completar este capítulo, você irá:
+- Implementar aplicações resilientes multi-regionais
 - Implementar padrões de segurança empresariais
 - Configurar monitorização abrangente
-- Otimizar custos em grande escala
+- Otimizar custos em escala
 - Configurar pipelines CI/CD com AZD
 
 ---
 
 ## 📚 Lições
 
-| # | Aula | Descrição | Duração |
+| # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implementação empresariais | 90 min |
+| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implementação empresarial | 90 min |
 
 ---
 
 ## 🚀 Lista de Verificação para Produção
 
-- [ ] Implementação multi-região para resiliência
+- [ ] Implementação multi-region para resiliência
 - [ ] Identidade gerida para autenticação (sem chaves)
 - [ ] Application Insights para monitorização
-- [ ] Orçamentos e alertas de custo configurados
-- [ ] Análise de segurança ativada
+- [ ] Orçamentos de custos e alertas configurados
+- [ ] Verificação de segurança ativada
 - [ ] Integração de pipeline CI/CD
 - [ ] Plano de recuperação de desastres
 
 ---
 
-## 🏗️ Padrões de Arquitectura
+## 🏗️ Padrões de Arquitetura
 
-### Padrão 1: IA de Microserviços
+### Padrão 1: Microserviços AI
 
 ```mermaid
 graph LR
-    Gateway[Gateway API] --> AI[Serviço de IA] --> Models[Modelos Microsoft Foundry]
-    Gateway --> Auth[Serviço de Autenticação]
-    AI --> Data[Armazenamento de Dados]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
-### Padrão 2: IA Orientada a Eventos
+### Padrão 2: AI Orientada a Eventos
 
 ```mermaid
 graph LR
-    EventGrid[Grelha de Eventos] --> Functions[Funções] --> Pipeline[Pipelines de IA]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
 
-## 🔐 Melhores Práticas de Segurança
+## 🔐 Melhores práticas de segurança
 
 ```bicep
-// Use managed identity
+// Illustrative properties from different resources, NOT a standalone Bicep file.
+// Attach identity to the application host:
 identity: {
   type: 'SystemAssigned'
 }
 
-// Private endpoints for AI services
+// AI account properties (also require private endpoints, DNS and app connectivity):
 properties: {
   publicNetworkAccess: 'Disabled'
   networkAcls: {
@@ -80,36 +83,29 @@ properties: {
 
 ---
 
-## 💰 Otimização de Custos
+## 💰 Otimização de custos
 
-| Estratégia | Poupança |
+| Estratégia | Principal restrição |
 |----------|---------|
-| Escalar para zero (Container Apps) | 60-80% |
-| Usar níveis de consumo para desenvolvimento | 50-70% |
-| Escalonamento programado | 30-50% |
-| Capacidade reservada | 20-40% |
+| Escalar a zero (Apps de Contentores) | Requer um trigger adequado; outros serviços ainda geram custos |
+| Usar níveis de consumo para dev | Comparar preços do serviço selecionado e carga de trabalho |
+| Escalonamento programado | Escalar através da infraestrutura/automação suportada |
+| Reservas/capacidade provisionada | Apenas quando suportado; compromissos podem aumentar custos em ócio |
 
-```bash
-# Definir alertas de orçamento
-az consumption budget create \
-  --budget-name "AI-Budget" \
-  --amount 500 \
-  --category Cost \
-  --time-grain Monthly
-```
+Utilize o [padrão completo de recurso de orçamento](production-ai-practices.md#2-cost-monitoring-and-budgets) com uma data de início válida, âmbito de faturação, destinatários e permissões. Um orçamento envia alertas; não limita gastos. As poupanças dependem da utilização medida e não são percentagens garantidas.
 
 ---
 
 ## 📊 Configuração de Monitorização
 
 ```bash
-# Transmitir registos
+# Open the Application Insights logs view (requires configured monitoring)
 azd monitor --logs
 
-# Verificar o Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# Ver métricas
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -120,13 +116,13 @@ az monitor metrics list --resource <resource-id>
 | Direção | Capítulo |
 |-----------|---------|
 | **Anterior** | [Capítulo 7: Resolução de Problemas](../chapter-07-troubleshooting/README.md) |
-| **Curso Completo** | [Página Inicial do Curso](../../README.md) |
+| **Curso Completo** | [Início do Curso](../../README.md) |
 
 ---
 
 ## 📖 Recursos Relacionados
 
-- [Guia de Agentes de IA](../chapter-02-ai-development/agents.md)
+- [Guia de Agentes AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Soluções Multi-Agente](../chapter-05-multi-agent/README.md)
 - [Exemplo de Microserviços](../../examples/microservices/README.md)

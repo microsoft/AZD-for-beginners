@@ -1,266 +1,269 @@
 # Wakala wa AI na Azure Developer CLI
 
-**Uelekezaji wa Sura:**
-- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
-- **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo Yanayoweka AI Kwanza
-- **⬅️ Iliyotangulia**: [Muunganisho wa Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Ifuatayo**: [Uenezi wa Mfano wa AI](ai-model-deployment.md)
-- **🚀 Maendeleo**: [Suluhisho za Wakala Wengi](../../examples/retail-scenario.md)
+**Uabiri wa Sura:**
+- **📚 Mwanzo wa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya Kwanza ya AI
+- **⬅️ Iliyotangulia**: [Muunganiko wa Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Ifuatayo**: [Utekelezaji wa Mfano wa AI](ai-model-deployment.md)
+- **🚀 Juu Zaidi**: [Suluhisho za Wakala Wengi](../../examples/retail-scenario.md)
 
 ---
 
 ## Utangulizi
 
-Wakala wa AI ni programu huru ambazo zinaweza kuhisi mazingira yao, kufanya maamuzi, na kuchukua hatua kufanikisha malengo maalum. Tofauti na chatbots rahisi zinazojibu amri, wakala wanaweza:
+Wakala wa AI ni programu za kujitegemea zinazoweza kutambua mazingira yao, kufanya maamuzi, na kuchukua hatua kufanikisha malengo maalum. Tofauti na roboti rahisi za mazungumzo zinazojibu tu maelekezo, wakala wanaweza:
 
-- **Tumia zana** - Piga API, tafuta katika hifadhidata, endesha msimbo
-- **Panga na tafakari** - Gawanya kazi ngumu katika hatua
-- **Jifunza kutokana na muktadha** - Hifadhi kumbukumbu na badilika tabia
-- **Shirikiana** - Fanya kazi na wakala wengine (mfumo wa wakala wengi)
+- **Kutumia zana** - Kupiga simu za API, kutafuta kwenye hifadhidata, kutekeleza msimbo
+- **Kupanga na kufikiria** - Kuvunja kazi ngumu kuwa hatua ndogo ndogo
+- **Kujifunza kutoka muktadha** - Kuhifadhi kumbukumbu na kubadilisha mwenendo
+- **Kushirikiana** - Kufanya kazi na wakala wengine (mifumo ya wakala wengi)
 
-Mwongozo huu unaonyesha jinsi ya kueneza wakala wa AI kwa Azure kwa kutumia Azure Developer CLI (azd).
+Mwongozo huu unaonyesha jinsi ya kuhamisha wakala wa AI kwenye Azure kwa kutumia Azure Developer CLI (azd).
 
-> **Kumbuka uthibitisho (2026-07-13):** Mwongozo huu umepitiwa dhidi ya `azd` `1.27.1` na `azure.ai.agents` `1.0.0-beta.5`. Uzoefu wa `azd ai` bado ni wa awali, basi hakikisha unakagua msaada wa programu-jalizi ikiwa bendera uliyo nazo ni tofauti.
+Matumizi ya muktadha wa mazungumzo si mafunzo ya mfano: kumbukumbu endelevu, udhibiti wa upatikanaji, na uhifadhi ni lazima zatekelezwe/kusanidiwa na programu.
+
+> **Mapitio ya toleo (2026-11-04):** Mifano ya CLI ilikaguliwa dhidi ya nyaraka/chanzo cha `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, na `azure.ai.evaluations` `1.0.0-beta.2`, si utekelezaji wa moja kwa moja wa Azure. Tumia `azd >= 1.37.0` kwa mtiririko wa kazi wa pamoja. Angalia [mabadiliko na marekebisho ya hivi karibuni](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) kabla ya kusasisha miradi ya zamani.
 
 ## Malengo ya Kujifunza
 
-Kwa kumaliza mwongozo huu, utaweza:
-- Elewa wakala wa AI ni nini na wanatofautianaje na chatbots
-- Eneza templeti za wakala wa AI zilizojengwa tayari kwa kutumia AZD
-- Sanidi Wakala wa Foundry kwa wakala maalum
-- Tekeleza mifumo ya msingi ya wakala (matumizi ya zana, RAG, wakala wengi)
-- Fuatilia na tatua matatizo ya wakala waliowekwa
+Kwa kukamilisha mwongozo huu, utakuwa na uwezo wa:
+- Kuelewa wakala wa AI ni nini na tofauti zao na roboti za mazungumzo
+- Kuweka templeti za wakala wa AI zilizo tayari kwa kutumia AZD
+- Kusanidi Wakala wa Foundry kwa wakala wa kipekee
+- Kutekeleza mifumo ya msingi ya wakala (matumizi ya zana, RAG, wakala wengi)
+- Kufuatilia na kutatua matatizo ya wakala waliowekwa
 
 ## Matokeo ya Kujifunza
 
-Baada ya kumaliza, utaweza:
-- Eneza programu za wakala wa AI kwa Azure kwa amri moja
-- Sanidi zana na uwezo wa wakala
-- Tekeleza uzalishaji ulioboreshwa kwa urejelezaji (RAG) kwa wakala
-- Buni miundo ya wakala wengi kwa michakato ngumu
-- Tatua matatizo ya kawaida ya uenezaji wa wakala
+Baada ya kukamilisha, utakuwa na uwezo wa:
+- Kuweka programu za wakala wa AI kwenye Azure kwa amri moja
+- Kusanidi zana na uwezo wa wakala
+- Kutekeleza kizazi kilichosaidiwa na upokeaji (RAG) na wakala
+- Kubuni miundo ya wakala wengi kwa kazi ngumu
+- Kutatua matatizo ya kawaida ya utekelezaji wa wakala
 
 ---
 
-## 🤖 Ni Nini Kinafanya Wakala Kutofautiana na Chatbot?
+## 🤖 Nini Kinachofanya Wakala Kutofautiana na Roboti ya Mazungumzo?
 
-| Kipengele | Chatbot | Wakala wa AI |
+| Sifa | Roboti ya Mazungumzo | Wakala wa AI |
 |---------|---------|----------|
-| **Tabia** | Kujibu maamri | Kuchukua hatua huru |
-| **Zana** | Hakuna | Inaweza kupiga API, kutafuta, kuendesha msimbo |
-| **Kumbukumbu** | Kiweli cha kikao tu | Kumbukumbu inayodumu katika vikao vyote |
-| **Mipango** | Jibu moja tu | Tafakari katika hatua nyingi |
+| **Mwenendo** | Anajibu maelekezo | Huchukua hatua za kujitegemea |
+| **Zana** | Inaweza kutumia upokeaji au zana | Kwa kawaida hutumia zana katika mduara wa lengo |
+| **Kumbukumbu** | Inategemea programu | Kumbukumbu endelevu ikiwa imeelekezwa wazi |
+| **Utaratibu** | Jibu moja | Fikiria hatua nyingi |
 | **Ushirikiano** | Kitu kimoja | Inaweza kufanya kazi na wakala wengine |
 
 ### Mfano Rahisi
 
-- **Chatbot** = Mtu mwenye msaada anayejibu maswali kwenye dawati la habari
-- **Wakala wa AI** = Msaidizi wa kibinafsi anayepiga simu, kuweka miadi, na kumaliza kazi kwa niaba yako
+- **Roboti ya Mazungumzo** = Mtu msaidizi mwenye msaada akijibu maswali kwenye dawati la taarifa
+- **Wakala wa AI** = Msaidizi wa kibinafsi anayewweza kupiga simu, kupanga miadi, na kukamilisha kazi kwa niaba yako
 
 ---
 
-## 🚀 Anza Haraka: Eneza Wakala Wako wa Kwanza
+## 🚀 Anzia Haraka: Weka Wakala Wako wa Kwanza
 
-### Chaguo 1: Templeti za Wakala wa Foundry (Inapendekezwa)
+Chagua chaguo moja katika **folda mpya tupu ya kazi**. Amri `.` inaanzisha huko; bila sehemu maalum, AZD ya sasa inaweza kuunda folda ndogo yenye jina la templeti na haibadilishi folda ya sasa ya shell yako. Hifadhi templeti/mizeitishaji tofauti katika folda tofauti.
+
+Muda/gia la gharama zilizo hapa chini ni mifano tu, si nukuu halali. Angalia mahitaji ya sasa, bei, idadi ya mfano, na huduma za hiari kabla ya utekelezaji wa kila sampuli.
+
+### Chaguo 1: Templeti ya Wakala wa Foundry (Inayopendekezwa)
 
 ```bash
-# Anzisha kiolezo cha mawakala wa AI
-azd init --template get-started-with-ai-agents
+# Initialize the AI agents template
+azd init --template get-started-with-ai-agents .
 
-# Tuma kwenye Azure
+# Deploy to Azure
 azd up
 ```
 
-**Kinachozunguka:**
-- ✅ Wakala wa Foundry
-- ✅ Miundo ya Microsoft Foundry (gpt-4.1)
-- ✅ Azure AI Search (kwa RAG)
-- ✅ Azure Container Apps (kiolesura cha wavuti)
-- ✅ Application Insights (ufuatiliaji)
+**Kinachowekwa:** Miundombinu ya sampuli ya sasa na chaguo zilizochaguliwa huchagua mfano, zana, mwenyeji, na rasilimali za ufuatiliaji. Rekebisha README yake na `infra/` kabla ya utoaji; usidhani kila templeti ya wakala ina Search au kiolesura cha wavuti.
 
-**Muda:** ~dakika 15-20
-**Gharama:** ~$100-150/mwezi (maendeleo)
+**Muda:** takriban dakika 15-20
+**Gharama:** takriban $100-150/kwa mwezi (maendeleo)
 
-### Chaguo 2: Wakala wa OpenAI na Prompty
+### Chaguo 2: Wakala wa Uandishi wa Ubunifu na Prompty
 
 ```bash
-# Anzisha kiolezo cha wakala kinachotegemea Prompty
-azd init --template agent-openai-python-prompty
+# Initialize the Prompty-based agent template
+azd init --template https://github.com/Azure-Samples/contoso-creative-writer .
 
-# Sambaza kwenye Azure
+# Deploy to Azure
 azd up
 ```
 
-**Kinachozunguka:**
-- ✅ Azure Functions (utekelezaji wa wakala bila seva)
+**Kinachowekwa:** Sampuli ya uandishi wa wakala wengi wa FastAPI/Prompty inayotumia Azure OpenAI, Bing Grounding, na Azure AI Search. Hifadhi ya zamani `agent-openai-python-prompty` inaelekeza hapa; si templeti ya wakala mdogo wa hali ya hewa wa Azure Functions. Fuata README yake ya sasa kwa mwenyeji, idadi ya mfano, na mahitaji ya Bing Grounding.
+
+**Muda:** takriban dakika 10-15
+**Gharama:** takriban $50-100/kwa mwezi (maendeleo)
+
+### Chaguo 3: Wakala wa Mazungumzo wa RAG
+
+```bash
+# Initialize RAG chat template
+azd init --template azure-search-openai-demo .
+
+# Deploy to Azure
+azd up
+```
+
+**Kinachowekwa:**
 - ✅ Miundo ya Microsoft Foundry
-- ✅ Faili za usanidi wa Prompty
-- ✅ Utekelezaji wa mfano wa wakala
+- ✅ Azure AI Search na data ya sampuli
+- ✅ Mchakato wa usindikaji wa hati
+- ✅ Kiolesura cha mazungumzo chenye marejeo
 
-**Muda:** ~dakika 10-15
-**Gharama:** ~$50-100/mwezi (maendeleo)
+**Muda:** takriban dakika 15-25
+**Gharama:** takriban $80-150/kwa mwezi (maendeleo)
 
-### Chaguo 3: Wakala wa RAG Chat
+### Chaguo 4: AZD AI Agent Init (Mapitio ya Templeti ya Mradi)
 
-```bash
-# Anzisha kiolezo cha mazungumzo ya RAG
-azd init --template azure-search-openai-demo
-
-# Tumia kwenye Azure
-azd up
-```
-
-**Kinachozunguka:**
-- ✅ Miundo ya Microsoft Foundry
-- ✅ Azure AI Search na data ya mfano
-- ✅ Mlolongo wa usindikaji wa hati
-- ✅ Kiolesura cha mazungumzo chenye rufaa
-
-**Muda:** ~dakika 15-25
-**Gharama:** ~$80-150/mwezi (maendeleo)
-
-### Chaguo 4: AZD AI Agent Init (Muonekano wa Maneno- au Templeti-Based)
-
-Ikiwa una faili la maelezo ya wakala, unaweza kutumia amri `azd ai` kuanzisha mradi wa Huduma ya Wakala wa Foundry moja kwa moja. Toleo la hivi karibuni la maonyesho liliongeza pia msaada wa kuanzisha kwa templeti, hivyo mtiririko sahihi wa amri unaweza kutofautiana kidogo kulingana na toleo la programu-jalizi uliyo nayo.
+Tumia `azd ai agent init` kwa maingiliano, au tumia mradi wa wakala wa sasa wa `azure.yaml` kwa `--template`/`-t`. Chaguo la zamani la `--manifest`/`-m` ni jina lililotupwa, si mgeuzi wa hati za zamani.
 
 ```bash
-# Sakinisha nyongeza za mawakala wa AI
+# Install the AI agents extension
 azd extension install azure.ai.agents
 
-# Hiari: hakiki toleo lililosakinishwa la awali
+# Optional: verify the installed preview version
 azd extension show azure.ai.agents
 
-# Anzisha kutoka kwenye taarifa ya wakala
-azd ai agent init -m agent-manifest.yaml
+# Initialize from a current agent project template (supply your template path)
+azd ai agent init --template ./templates/support-agent/azure.yaml
 
-# Weka kwenye Azure
+# Deploy to Azure
 azd up
 
-# Jaribu wakala aliyewekwa (inaonyesha ucheleweshaji + wakati wa pakiti ya kwanza)
+# Test the deployed agent (shows latency + time-to-first-byte)
 azd ai agent invoke
 ```
 
-**Wakati wa kutumia `azd ai agent init` dhidi ya `azd init --template`:**
+**Wakati wa kutumia `azd ai agent init` vs `azd init --template`:**
 
-| Mbinu | Bora Kwa | Jinsi Inavyofanya Kazi |
+| Mbinu | Bora Kwa Nani | Inavyofanya Kazi |
 |----------|----------|------|
-| `azd init --template` | Kuanzia na app ya mfano inayofanya kazi | Inanakili repo ya templeti kamili yenye msimbo + miundombinu |
-| `azd ai agent init -m` | Kujenga kwa maelezo yako ya wakala | Inaandaa muundo wa mradi kutokana na maelezo yako ya wakala |
+| `azd init --template` | Kuanzia mfano wa kazi uliopo | Kunasua hifadhi kamili ya templeti na msimbo + miundombinu |
+| `azd ai agent init --template` | Kukubali mradi wa wakala wa Foundry aliyepo | Inatumia hati ya mradi wa `azure.yaml` na ufafanuzi wake |
 
-> **Ushauri:** Tumia `azd init --template` unapojifunza (Chaguzi 1-3 hapo juu). Tumia `azd ai agent init` unapojenga wakala wa uzalishaji kwa maelezo yako mwenyewe.
+> **Kidokezo:** Tumia `azd init --template` unapo jifunza (Chaguzi 1-3 hapo juu). Tumia `azd ai agent init` kwa mtiririko wa kazi wa wakala wa Foundry. Kuongeza ufafanuzi wa moja kwa moja wa wakala kwa mradi uliopo, angalia [maelekezo ya kuanzisha na uhamishaji](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
 
-Baada ya `azd up`, programu-jalizi ile ile itakuongoza katika mchakato wa maisha ya wakala: `azd ai agent invoke` kwa mtihani, `azd ai agent eval generate` na `azd ai agent optimize` kupima na kuboresha ubora, na `azd ai agent delete` kusafisha. Tazama [Amri za AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa rejeleo kamili.
+Baada ya `azd up`, tumia `azd ai agent invoke` kujaribu, kisha ugani wa `azure.ai.evaluations` tofauti (`azd ai eval init`, `generate`, na `run start`) kupima ubora, na `azd ai agent optimize` kuboresha kwa kutumia usanidi mpya wa tathmini. Wakala beta.22 walibadilisha mtiririko wa kazi wa tathmini ya jadi na kubadilisha muundo wa `--config` wa uboreshaji. Angalia [uhamisho wa tathmini](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) na [uhamisho wa uboreshaji](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) kabla ya kutumia tena mifano ya zamani.
 
 ---
 
 ## 🏗️ Mifumo ya Muundo wa Wakala
 
-### Mfano 1: Wakala Mmoja Anayetumia Zana
+### Muundo 1: Wakala Mmoja na Zana
 
-Mfano rahisi zaidi wa wakala - wakala mmoja anayetumia zana nyingi.
+Muundo wa wakala rahisi kabisa - wakala mmoja anayeweza kutumia zana nyingi.
 
 ```mermaid
 graph TD
-    UI[Kiolesura cha Mtumiaji] --> Agent[Wakala wa AI<br/>gpt-4.1]
-    Agent --> Search[Chombo cha Utafutaji]
-    Agent --> Database[Chombo cha Hifadhidata]
-    Agent --> API[Chombo cha API]
+    UI[User Interface] --> Agent[AI Agent<br/>gpt-4.1]
+    Agent --> Search[Search Tool]
+    Agent --> Database[Database Tool]
+    Agent --> API[API Tool]
 ```
 
 **Bora kwa:**
-- Chatbots wa msaada kwa wateja
+- Roboti wa msaada wa wateja
 - Msaidizi wa utafiti
 - Wakala wa uchambuzi wa data
 
-**Templeti ya AZD:** `azure-search-openai-demo`
+**Mfano wa matumizi unaohusiana:** `azure-search-openai-demo` unaonyesha RAG, si mzunguko wa wakala wa zana yoyote ya jumla.
 
-### Mfano 2: Wakala wa RAG (Uzalishaji unaoimarishwa kwa urejelezaji)
+### Muundo 2: Wakala wa RAG (Uzazi Ulioboreshwa kwa Upataji)
 
-Wakala anayepata hati zinazofaa kabla ya kuzalisha majibu.
+Wakala anayepata nyaraka zinazofaa kabla ya kutoa majibu.
 
 ```mermaid
 graph TD
-    Query[Swali la Mtumiaji] --> RAG[Wakala wa RAG]
-    RAG --> Vector[Utafutaji wa Vector]
+    Query[User Query] --> RAG[RAG Agent]
+    RAG --> Vector[Vector Search]
     RAG --> LLM[LLM<br/>gpt-4.1]
     Vector -- Documents --> LLM
-    LLM --> Response[Jibu lenye Marejeleo]
+    LLM --> Response[Response with Citations]
 ```
 
 **Bora kwa:**
 - Misingi ya maarifa ya biashara
-- Mifumo ya maswali na majibu ya hati
-- Utafiti wa ulinganifu na kisheria
+- Mifumo ya maswali na majibu ya nyaraka
+- Utafiti wa utimilifu na wa kisheria
 
-**Templeti ya AZD:** `azure-search-openai-demo`
+**Kiolezo cha AZD:** `azure-search-openai-demo`
 
-### Mfano 3: Mfumo wa Wakala Wengi
+### Muundo 3: Mfumo wa Wakala Wengi
 
-Wakala wengi maalum wakishirikiana kufanya kazi kwenye kazi ngumu.
+Wakala wengi maalum wakishirikiana kwenye kazi tata.
 
 ```mermaid
 graph TD
-    Orchestrator[Wakala wa Kuratibu] --> Research[Wakala wa Utafiti<br/>gpt-4.1]
-    Orchestrator --> Writer[Wakala wa Mwandishi<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[Wakala wa Ukaguzi<br/>gpt-4.1]
+    Orchestrator[Orchestrator Agent] --> Research[Research Agent<br/>gpt-4.1]
+    Orchestrator --> Writer[Writer Agent<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Reviewer Agent<br/>gpt-4.1]
 ```
 
 **Bora kwa:**
-- Uzalishaji wa maudhui magumu
-- Michakato yenye hatua nyingi
-- Kazi zinazohitaji ujuzi tofauti
+- Uundaji wa maudhui tata
+- Miradi yenye hatua nyingi
+- Kazi zinazo hitaji utaalamu tofauti
 
-**Jifunze Zaidi:** [Mifumo ya Uratibu wa Wakala Wengi](../chapter-06-pre-deployment/coordination-patterns.md)
+**Jifunze Zaidi:** [Mifumo ya Kuratibu Wakala Wengi](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ Kusanidi Zana za Wakala
+## ⚙️ Kusanidi Vifaa vya Wakala
 
-Wakala huwa na nguvu wanapoweza kutumia zana. Hapa kuna jinsi ya kusanidi zana maarufu:
+Wakala huwa wenye nguvu wanapoweza kutumia vifaa. Hapa ni jinsi ya kusanidi vifaa vya kawaida:
 
-### Usanidi wa Zana katika Wakala wa Foundry
+### Usanidi wa Vifaa katika Wakala wa Foundry
+
+Sehemu hii ya **Agent Service SDK ya zamani** inalenga `azure-ai-projects==1.0.0` na `azure-ai-agents==1.1.0` na `azure-identity`. Si toleo jipya la API ya versioned-agent/Responses inayotumiwa na baadhi ya templates za Foundry za sasa, wala nyongeza ya `azure.ai.agents` AZD (pakiti tofauti). Usichanganye vizazi hivi vya API. Weka `PROJECT_ENDPOINT` kama hatua ya mradi wa Foundry wa zamani na `MODEL_DEPLOYMENT_NAME` kwa mzigo wa mfano uliopo unaoungwa mkono; thibitisha na `az login` ndani ya eneo lako na peana ruhusa za mradi zinazohitajika.
 
 ```python
 # agent_config.py
+import os
 from azure.ai.projects import AIProjectClient
-from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
+from azure.ai.agents.models import FunctionTool
+from azure.identity import DefaultAzureCredential
 
-# Tafsiri zana maalum
-search_tool = FunctionTool(
-    name="search_knowledge_base",
-    description="Search the company knowledge base for relevant documents",
-    parameters={
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "The search query"
-            }
-        },
-        "required": ["query"]
-    }
+def search_knowledge_base(query: str) -> str:
+    """Search the demonstration knowledge base.
+
+    :param query: Search text.
+    :return: Matching demonstration information.
+    """
+    # Local fixture only, not a production search implementation.
+    return "Demo policy: returns are accepted within 30 days."
+
+project_client = AIProjectClient(
+    endpoint=os.environ["PROJECT_ENDPOINT"],
+    credential=DefaultAzureCredential(),
 )
-
-# Unda wakala na zana
+search_tool = FunctionTool(functions={search_knowledge_base})
+project_client.agents.enable_auto_function_calls(search_tool)
 agent = project_client.agents.create_agent(
-    model="gpt-4.1",
+    model=os.environ["MODEL_DEPLOYMENT_NAME"],
     name="Support Agent",
-    instructions="You are a helpful support agent. Use the search tool to find relevant information.",
-    tools=[search_tool, CodeInterpreterTool()]
+    instructions="Use search_knowledge_base for policy questions. Label results as demo data.",
+    tools=search_tool.definitions,
 )
 ```
 
-### Usanidi wa Mazingira
+Kusajili schema ya kazi hakuendeshi Python kwenye huduma. Katika SDK hii, `enable_auto_function_calls` pamoja na `agents.runs.create_and_process(...)` hufanya callbacks zilizosajiliwa kwenye mchakato wa mteja wako. Angalia [mfano wa SDK uliotolewa](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py). Funga mteja na futa mawakala/mistari ya maonyesho mwanzo mwisho.
+
+### Mpangilio wa Mazingira
+
+Majina yafuatayo ni **maingizo ya kiolezo cha desturi ili kuonyesha**, si swichi za kujengwa za AZD. Kwanza pita kila thamani kupitia `infra/main.parameters.json`, miundombinu, na msimbo wa programu. `azd env set` pekee haibadili zana au maelekezo ya wakala.
 
 ```bash
-# Weka vigezo maalum vya mazingira kwa wakala
+# Set up agent-specific environment variables
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Anzisha na usanidi ulio sasishwa
-azd deploy
+# Apply wired infrastructure and application changes
+azd up
 ```
 
 ---
@@ -269,37 +272,37 @@ azd deploy
 
 ### Muunganisho wa Application Insights
 
-Templeti zote za wakala za AZD zina Application Insights kwa ufuatiliaji:
+Ikiwa kiolezo kilichochaguliwa kinatoa Application Insights na kuanzisha kipimo:
 
 ```bash
-# Fungua dashibodi ya ufuatiliaji
+# Open monitoring dashboard
 azd monitor --overview
 
-# Angalia kumbukumbu za moja kwa moja
+# Open the Application Insights logs view (not a streaming log tail)
 azd monitor --logs
 
-# Angalia vipimo vya moja kwa moja
+# View live metrics
 azd monitor --live
 ```
 
-### Viashiria Muhimu vya Kufuatilia
+### Viwango Muhimu vya Kufuatilia
 
 | Kipimo | Maelezo | Lengo |
 |--------|-------------|--------|
-| Muda wa Kujibu | Muda wa kuzalisha jibu | < sekunde 5 |
-| Matumizi ya Tokeni | Tokeni kwa kila ombi | Fuata gharama |
+| Ucheleweshaji wa Jibu | Muda wa kutoa jibu | < sekunde 5 |
+| Matumizi ya Tokeni | Tokeni kwa kila ombi | Fuata kwa gharama |
 | Kiwango cha Mafanikio cha Kuitwa kwa Zana | % ya utekelezaji wa zana uliofanikiwa | > 95% |
-| Kiwango cha Makosa | Maombi ya wakala yaliyoanguka | < 1% |
+| Kiwango cha Makosa | Omi za wakala zilizoshindikana | < 1% |
 | Kuridhika kwa Mtumiaji | Alama za maoni | > 4.0/5.0 |
 
-### Kuingiza Logi Maalum kwa Wakala
+### Uwekaji wa Kihusika wa Kumbukumbu kwa Wakala
 
 ```python
 import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# Sanidi Azure Monitor kwa OpenTelemetry
+# Configure Azure Monitor with OpenTelemetry
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -309,111 +312,107 @@ tracer = trace.get_tracer(__name__)
 def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
     with tracer.start_as_current_span("agent_interaction") as span:
         span.set_attributes({
-            "user_query": user_query,
+            "query_length": len(user_query),  # Do not log raw prompts or personal data
             "response_length": len(agent_response),
             "tools_used": tools_used,
             "latency_ms": latency_ms
         })
 ```
 
-> **Kumbuka:** Sakinisha vifurushi vinavyotakiwa: `pip install azure-monitor-opentelemetry opentelemetry`
+> **Kumbuka:** Sakinisha pakiti inayohitajika: `pip install azure-monitor-opentelemetry`. Inaleta utegemezi wa OpenTelemetry; namespace ya kuingiza si sharti la kusakinisha pakiti yenye jina `opentelemetry`.
 
 ---
 
-## 💰 Mambo ya Kuzingatia Kuhusu Gharama
+## 💰 Mambo ya Kufikiria Gharama
 
-### Makadirio ya Gharama Kila Mwezi Kwa Mfano
+### Makadirio ya Gharama za Kila Mwezi Kwa Mfano
+
+Hizi ni anuwai za mpango za kuonyesha, si nukuu wala mipaka ya matumizi. Mkoa, tokeni za mfano, SKUs za Search/compute, vipindi vya zana, uhifadhi, na trafiki vinaweza kuzidi. Angalia mwongozo wa gharama wa sampuli na bei za Azure kabla ya `azd up`.
 
 | Mfano | Mazingira ya Maendeleo | Uzalishaji |
 |---------|-----------------|------------|
 | Wakala Mmoja | $50-100 | $200-500 |
 | Wakala wa RAG | $80-150 | $300-800 |
 | Wakala Wengi (wakala 2-3) | $150-300 | $500-1,500 |
-| Wakala Wengi wa Biashara | $300-500 | $1,500-5,000+ |
+| Wakala Wengi wa Kampuni | $300-500 | $1,500-5,000+ |
 
-### Vidokezo vya Kuboresha Gharama
+### Vidokezo vya Kufanikisha Gharama
 
-1. **Tumia gpt-4.1-mini kwa kazi rahisi**
+1. **Tumia gpt-4.1-mini kwa kazi rahisi** (kama tu kiolezo chako kinatumia ingizo hili)
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Tekeleza kuhifadhi makabrasha kwa maswali yanayojirudia**
-   ```python
-   from functools import lru_cache
-   
-   @lru_cache(maxsize=1000)
-   def get_cached_response(query_hash):
-       return agent.run(query_hash)
-   ```
+2. **Tekeleza caching iliyopangwa kwa usalama kwa maswali yanayorudiwa.** Jumuisha uteuzi wa mwenyeji/mtumiaji, mzigo wa mfano, maelekezo, na toleo la urejeshaji katika ufunguo wa cache; weka muda wa kumalizika. Usishiriki majibu ya mazungumzo ya faragha kupitia cache ya maswali tu yenye mchakato mzima. Kifaa cha wakala wa SDK hakina njia ya jumla ya `agent.run()`.
 
-3. **Weka mipaka ya tokeni kwa kila mzunguko**
+3. **Weka vizingiti vya tokeni kwa kila mtiririko**
    ```python
-   # Weka max_completion_tokens unapotumia wakala, sio wakati wa kuunda
-   run = project_client.agents.create_run(
+   # Set max_completion_tokens when running the agent, not during creation
+   run = project_client.agents.runs.create_and_process(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # Punguza urefu wa jibu
+       max_completion_tokens=1000  # Budget across the run; may finish as incomplete
    )
    ```
 
-4. **Punguza hadi sifuri wakati haitumiki**
+4. **Pandisha Container Apps zinazostahiki hadi sifuri wakati zisizotumika**
    ```bash
-   # Programu za Kontena zinaweza kupanuka hadi sifuri moja kwa moja
+   # Custom-template input: must map to template.scale.minReplicas
    azd env set MIN_REPLICAS "0"
    ```
+   Tekeleza mabadiliko ya miundombinu kwa kutumia `azd provision` au `azd up`. Kupanda hadi sifuri kunahitaji kiamsha kinachofaa na hakuzimishi Search, uhifadhi, au malipo ya mfano/zana.
 
 ---
 
 ## 🔧 Kutatua Matatizo ya Wakala
 
-### Matatizo na Ufumbuzi Wa Kawaida
+### Masuala Yanayojirudia na Suluhisho
 
 <details>
-<summary><strong>❌ Wakala haajibu miito ya zana</strong></summary>
+<summary><strong>❌ Wakala haajibu simu za zana</strong></summary>
 
 ```bash
-# Angalia kama zana zimeandikwa vizuri
+# Inspect the application deployment (not the agent's registered tools)
 azd show
 
-# Thibitisha usambazaji wa OpenAI
+# Verify OpenAI deployment
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# Angalia kumbukumbu za wakala
+# Check agent logs
 azd monitor --logs
 ```
 
 **Sababu za kawaida:**
-- Kutosheleza saini ya kazi ya zana
-- Kukosa ruhusa muhimu
-- Sehemu ya API haipatikani
+- Kutoendana kwa saini ya kazi ya zana
+- Kukosa ruhusa zinazohitajika
+- Hatua ya API isiyopatikana
 </details>
 
 <details>
-<summary><strong>❌ Muda mrefu wa kusubiri majibu ya wakala</strong></summary>
+<summary><strong>❌ Ucheleweshaji mkubwa katika majibu ya wakala</strong></summary>
 
 ```bash
-# Angalia Application Insights kwa vikwazo
+# Check Application Insights for bottlenecks
 azd monitor --live
 
-# Fikiria kutumia mfano wa kasi zaidi
+# Consider using a faster model
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
-azd deploy
+azd up
 ```
 
-**Vidokezo vya kuboresha:**
-- Tumia majibu ya mtiririko
-- Tekeleza kuhifadhi majibu
+**Vidokezo vya uboreshaji:**
+- Tumia majibu ya kuhusishwa moja kwa moja (streaming)
+- Tekeleza caching ya majibu
 - Punguza ukubwa wa dirisha la muktadha
 </details>
 
 <details>
-<summary><strong>❌ Wakala anarudisha taarifa zisizo sahihi au za kufikirika</strong></summary>
+<summary><strong>❌ Wakala anarejesha taarifa zisizo sahihi au za kufikirika</strong></summary>
 
 ```python
-# Boresha kwa maagizo bora ya mfumo
+# Improve with better system prompts
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -422,22 +421,21 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Ongeza utafutaji kwa ajili ya kuweka msingi
-agent = project_client.agents.create_agent(
-    model="gpt-4.1",
-    instructions=instructions,
-    tools=[FileSearchTool()]  # Weka majibu msingi kwenye nyaraka
-)
+# Use these instructions in the agent definition.
+# For classic file search, first upload/index documents in a vector store,
+# then use FileSearchTool(vector_store_ids=[...]) and pass both its
+# .definitions and .resources when creating the agent.
 ```
+Maelekezo na urejeshaji hupunguza hatari; hakuna kinachohakikisha majibu halisi. Tathmini maswali ya msingi na yasiyo ya muktadha dhidi ya majibu yaliyojulikana.
 </details>
 
 <details>
-<summary><strong>❌ Makosa ya kuzidi mipaka ya tokeni</strong></summary>
+<summary><strong>❌ Makosa ya kutozidi kikomo cha tokeni</strong></summary>
 
 ```python
-# Tekeleza usimamizi wa dirisha la muktadha
+# Implement context window management
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
-    """Keep only recent messages within token limit."""
+    """Approximate content-only budget for objects with .content strings."""
     import tiktoken
     encoding = tiktoken.encoding_for_model(model)
     total_tokens = 0
@@ -452,132 +450,143 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     
     return truncated
 ```
+Msaidizi huyu haujumuishi schemas za majukumu/zana, maelekezo ya mfumo, tokeni za picha, na mzigo wa itifaki. Hifadhi nafasi kwa hayo na ukamilishaji; usigawanye jozi za simu za zana/matokeo au kuondoa maelekezo ya lazima ya mfumo. Sakinisha `tiktoken` tofauti. Si mkaguzi wa jumla wa dirisha la muktadha.
 </details>
 
 ---
 
 ## 🎓 Mazoezi ya Vitendo
 
-### Zoefzo 1: Eneza Wakala wa Msingi (dakika 20)
+### Zoeezi 1: Sambaza Wakala wa Msingi (dakika 20)
 
-**Lengo:** Eneza wakala wako wa kwanza wa AI kwa kutumia AZD
+**Lengo:** Sambaza wakala wako wa AI wa kwanza ukitumia AZD
 
 ```bash
-# Hatua ya 1: Anzisha kiolezo
-azd init --template get-started-with-ai-agents
+# Step 1: Initialize template
+azd init --template get-started-with-ai-agents .
 
-# Hatua ya 2: Ingia kwenye Azure
+# Step 2: Login to Azure
 azd auth login
-# Ikiwa unafanya kazi kwenye wakopeshaji mbalimbali, ongeza --tenant-id <tenant-id>
+# If you work across tenants, add --tenant-id <tenant-id>
 
-# Hatua ya 3: Tengeneza
+# Step 3: Deploy
 azd up
 
-# Hatua ya 4: Jaribu wakala
-# Matokeo yanayotarajiwa baada ya uanzishaji:
-#   Uanzishaji Umefafanikiwa!
-#   Sehemu ya mwisho: https://<app-name>.<region>.azurecontainerapps.io
-# Fungua URL iliyoonyeshwa kwenye matokeo na jaribu kuuliza swali
+# Step 4: Test the agent
+# Expected output after deployment:
+#   Deployment Complete!
+#   Endpoint: https://<app-name>.<region>.azurecontainerapps.io
+# Open the URL shown in the output and try asking a question
 
-# Hatua ya 5: Angalia ufuatiliaji
+# Step 5: View monitoring
 azd monitor --overview
 
-# Hatua ya 6: Safisha
+# Step 6: Clean up
 azd down --force --purge
 ```
 
 **Vigezo vya Mafanikio:**
 - [ ] Wakala anajibu maswali
-- [ ] Anaweza kufikia dashibodi ya ufuatiliaji kupitia `azd monitor`
-- [ ] Rasilimali zimeondolewa kwa mafanikio
+- [ ] Anaweza kufikia dashibodi ya kufuatilia kupitia `azd monitor`
+- [ ] Rasilimali zilisafishwa kwa mafanikio
 
-### Zoefzo 2: Ongeza Zana Maalum (dakika 30)
+### Zoeezi 2: Ongeza Zana ya Desturi (dakika 30)
 
-**Lengo:** Panua wakala kwa zana maalum
+**Lengo:** Ongeza wakala na zana ya desturi
 
-1. Eneza templeti ya wakala:
-   ```bash
-   azd init --template get-started-with-ai-agents
-   azd up
-   ```
-2. Unda kazi mpya ya zana katika msimbo wa wakala wako:
+**Mwanzo:** Tumia mteja wa SDK wa zamani kutoka [Tool Configuration](#tool-configuration-in-foundry-agents), si kiolezo chochote na kizazi tofauti cha SDK.
+
+1. Ongeza kifaa hiki cha uhakika kwenye `agent_config.py`:
    ```python
    def get_weather(location: str) -> str:
-       """Get current weather for a location."""
-       # Wito la API kwa huduma ya hali ya hewa
-       return f"Weather in {location}: Sunny, 72°F"
+       """Return demonstration weather, not live conditions.
+
+       :param location: City name.
+       :return: A clearly labelled fixture.
+       """
+       print(f"TOOL_CALLED: {location}")
+       return f"Demo weather in {location}: Sunny, 72°F (fixture, not live)"
    ```
-3. Sajili zana kwa wakala:
+2. Badilisha kujiandikisha na kuunda zana ya utafutaji na:
    ```python
-   from azure.ai.projects.models import FunctionTool
-
-   weather_tool = FunctionTool(
-       name="get_weather",
-       description="Get current weather for a location",
-       parameters={
-           "type": "object",
-           "properties": {
-               "location": {"type": "string", "description": "City name"}
-           },
-           "required": ["location"]
-       }
-   )
-
+   weather_tool = FunctionTool(functions={get_weather})
+   project_client.agents.enable_auto_function_calls(weather_tool)
    agent = project_client.agents.create_agent(
-       model="gpt-4.1",
+       model=os.environ["MODEL_DEPLOYMENT_NAME"],
        name="Weather Agent",
-       tools=[weather_tool]
+       instructions="Call get_weather for weather questions; explain that it returns demo data.",
+       tools=weather_tool.definitions,
    )
+   thread = project_client.agents.threads.create()
+   try:
+       project_client.agents.messages.create(
+           thread_id=thread.id, role="user", content="Use get_weather for Seattle."
+       )
+       run = project_client.agents.runs.create_and_process(
+           thread_id=thread.id, agent_id=agent.id
+       )
+       if run.status != "completed":
+           raise RuntimeError(f"Run status: {run.status}; error: {run.last_error}")
+       for message in project_client.agents.messages.list(thread_id=thread.id):
+           for text in message.text_messages:
+               print(text.text.value)
+   finally:
+       project_client.agents.threads.delete(thread.id)
+       project_client.agents.delete_agent(agent.id)
+       project_client.close()
    ```
-4. Eneza tena na jaribu:
+3. Endesha kwa ndani (hii inaita mradi wa Azure uliopo na husababisha malipo ya mfano):
    ```bash
-   azd deploy
-   # Uliza: "Hali ya hewa huko Seattle ni vipi?"
-   # Inayotarajiwa: Wakala anapiga simu get_weather("Seattle") na kurudisha taarifa za hali ya hewa
+   python agent_config.py
+   # Expected: TOOL_CALLED: Seattle, then a completed answer labelled demo data.
    ```
 
 **Vigezo vya Mafanikio:**
 - [ ] Wakala anatambua maswali yanayohusiana na hali ya hewa
-- [ ] Zana inaitwa ipasavyo
+- [ ] Zana inaitwa kwa usahihi
 - [ ] Jibu linajumuisha taarifa za hali ya hewa
 
-### Zoefzo 3: Jenga Wakala wa RAG (dakika 45)
+### Zoefleo 3: Jenga Wakala wa RAG (dakika 45)
 
-**Lengo:** Unda wakala anayejibu maswali kutoka kwa nyaraka zako
+**Lengo:** Tengeneza wakala anayejibu maswali kutoka kwa hati zako
 
 ```bash
-# Hatua ya 1: Sambaza mfano wa RAG
-azd init --template azure-search-openai-demo
+# Step 1: Deploy RAG template
+azd init --template azure-search-openai-demo .
 azd up
 
-# Hatua ya 2: Pandisha nyaraka zako
-# Weka faili za PDF/TXT katika saraka ya data/, kisha endesha:
-python scripts/prepdocs.py
+# Step 2: Upload your documents
+# For the sample's local ingestion path, place supported files in data/.
+# Run from the sample root after following its Python environment setup:
+./scripts/prepdocs.sh
+# Windows PowerShell equivalent: .\\scripts\\prepdocs.ps1
 
-# Hatua ya 3: Jaribu kwa maswali maalum ya eneo
-# Fungua URL ya programu ya wavuti kutoka kwa azd up output
-# Uliza maswali kuhusu nyaraka zako zilizopandishwa
-# Majibu yanapaswa kujumuisha marejeleo ya vyanzo kama [doc.pdf]
+# Step 3: Test with domain-specific questions
+# Open the web app URL from the azd up output
+# Ask questions about your uploaded documents
+# Responses should include citation references like [doc.pdf]
 ```
 
 **Vigezo vya Mafanikio:**
-- [ ] Wakala anajibu kutoka kwa nyaraka zilizopakiwa
-- [ ] Majibu yanajumuisha rufaa
-- [ ] Hakuna kufikirika kuhusu maswali yasiyo ya wigo
+- [ ] Wakala anajibu kutoka kwa hati zilizopakiwa
+- [ ] Majibu yanajumuisha marejeleo
+- [ ] Maswali ya mtihani yasiyohusiana yashughulikiwa bila madai yasiyoungwa mkono (si dhamana kwa kila swali la baadaye)
+
+Ikiwa `USE_CLOUD_INGESTION=true`, tumia badala yake mtiririko wa kuingiza/kupakia wa wingu wa sampuli; kifuniko cha ndani kinasahau kuingiza kwa makusudi. Baada ya majaribio, endesha `azd down` katika mazingira ya RAG na kagua rasilimali zitakazofutwa.
 
 ---
 
 ## 📚 Hatua Zifuatazo
 
-Sasa unapoelewa wakala wa AI, chunguza mada hizi za hali ya juu:
+Sasa umeelewa wakala wa AI, chunguza mada hizi za juu zaidi:
 
 | Mada | Maelezo | Kiungo |
 |-------|-------------|------|
-| **Mifumo ya Wakala Wengi** | Jenga mifumo yenye wakala wengi wanaoshirikiana | [Mfano wa Wakala Wengi wa Rejareja](../../examples/retail-scenario.md) |
-| **Mifumo ya Uratibu** | Jifunze mifumo ya upangaji na mawasiliano | [Mifumo ya Uratibu](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Uenezaji wa Uzalishaji** | Uenezaji wa wakala tayari kwa biashara | [Mazingira ya AI wa Uzalishaji](../chapter-08-production/production-ai-practices.md) |
-| **Tathmini ya Wakala** | Mtihani na tathmini ya utendaji wa wakala | [Tatizo la AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **Kiwanda cha Kazi cha AI** | Vitendo: Fanya suluhisho lako la AI liwe tayari kwa AZD | [Kiwanda cha Kazi cha AI](ai-workshop-lab.md) |
+| **Mifumo ya Wakala Wengi** | Jenga mifumo na mawakala wengi wanaoshirikiana | [Mfano wa Wakala Wengi wa Rejareja](../../examples/retail-scenario.md) |
+| **Mifumo ya Kuratibu** | Jifunze mitindo ya upangaji na mawasiliano | [Mifumo ya Kuratibu](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Usambazaji wa Uzalishaji** | Usambazaji wa wakala tayari kwa shirika | [Mazingira ya AI Uzalishaji](../chapter-08-production/production-ai-practices.md) |
+| **Tathmini ya Wakala** | Jaribu na tathmini utendaji wa wakala | [Ufumbuzi wa AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **Warsha ya AI** | Vitendo: Fanya suluhisho lako la AI liwe sawa na AZD | [Warsha ya AI](ai-workshop-lab.md) |
 
 ---
 
@@ -586,20 +595,20 @@ Sasa unapoelewa wakala wa AI, chunguza mada hizi za hali ya juu:
 ### Nyaraka Rasmi
 - [Huduma ya Wakala wa Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/agents/)
 - [Mwongozo wa Haraka wa Huduma ya Wakala wa Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
-- [Mfumo wa Wakala wa Semantic Kernel](https://learn.microsoft.com/semantic-kernel/)
+- [Muundo wa Wakala wa Semantic Kernel](https://learn.microsoft.com/semantic-kernel/)
 
-### Templeti za AZD kwa Wakala
-- [Anza na Wakala wa AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
-- [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+### Violezo vya AZD kwa Mawakala
+- [Anza na Mawakala wa AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Mawakala wa Uandishi wa Ubunifu na Prompty](https://github.com/Azure-Samples/contoso-creative-writer)
+- [Demo ya Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Rasilimali za Jumuia
-- [AZD Bora - Templeti za Wakala](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### Rasilimali za Jumuiya
+- [AZD Nzuri - Violezo vya Wakala](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Discord ya Azure AI](https://discord.gg/microsoft-azure)
 - [Discord ya Microsoft Foundry](https://discord.gg/nTYy5BXMWG)
 
 ### Ujuzi wa Wakala kwa Mhariri Wako
-- [**Ujuzi wa Wakala wa Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Sakinisha ujuzi wa wakala wa AI unaoweza kutumika tena kwa maendeleo ya Azure kwenye GitHub Copilot, Cursor, au wakala mwingine yeyote aliyeunga mkono. Inajumuisha ujuzi kwa [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [uenezaji](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), na [utambuzi](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+- [**Ujuzi wa Wakala wa Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Sakinisha ujuzi wa wakala wa AI unaoweza kutumika tena kwa maendeleo ya Azure katika GitHub Copilot, Cursor, au wakala yoyote unaounga mkono. Inajumuisha ujuzi wa [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [usambazaji](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), na [utambuzi](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -608,7 +617,7 @@ Sasa unapoelewa wakala wa AI, chunguza mada hizi za hali ya juu:
 
 **Uelekezaji**
 - **Somo lililotangulia**: [Muunganisho wa Microsoft Foundry](microsoft-foundry-integration.md)
-- **Somo lijalo**: [Uenezi wa Mfano wa AI](ai-model-deployment.md)
+- **Somo linalofuata**: [Usambazaji wa Mfano wa AI](ai-model-deployment.md)
 
 ---
 

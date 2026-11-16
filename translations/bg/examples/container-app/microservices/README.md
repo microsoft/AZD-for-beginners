@@ -1,798 +1,269 @@
-# Архитектура на микросервизи - Пример с Container App
+# Микроуслуги с две услуги — Azure Container Apps
 
-⏱️ **Прогнозно време**: 25-35 минути | 💰 **Прогнозна цена**: ~$50-100/month | ⭐ **Сложност**: Напреднало
+**Ниво:** Средно · **Време:** 45–60 минути, включително настройка
 
-Това е **опростена, но функционална** архитектура на микросервизи, разгърната в Azure Container Apps с помощта на AZD CLI. Този пример демонстрира комуникация между услуги, оркестрация на контейнери и наблюдение с практична конфигурация от 2 услуги.
+Този учебен пример реализира **Node.js API Gateway** и **Python Product Service само за четене**. Включени са изходният код, Dockerfiles, Bicep и конфигурацията на azd.
+Това не е система за използване в продукция.
 
-> **📚 Подход за учене**: Този пример започва с минимална архитектура от 2 услуги (API Gateway + Backend Service), която можете реално да разгърнете и изучите. След като усвоите тази основа, даваме насоки за разширяване до пълна екосистема от микросервизи.
 
-## Какво ще научите
 
-Като завършите този пример, ще:
-- Разгърнете множество контейнери в Azure Container Apps
-- Реализирате комуникация между услуги чрез вътрешна мрежа
-- Конфигурирате скалиране и проверки на здравето на база среда
-- Наблюдавате разпределени приложения с Application Insights
-- Разберете модели за разгръщане на микросервизи и добри практики
-- Научите как постепенно да разширявате от проста към комплексна архитектура
 
-## Архитектура
+- Използване на вътрешен бекенд FQDN през HTTPS.
+- Проверка на отговори при успех, не е намерен, и недостъпна услуга.
+- Разбиране на телеметрия и независими граници за скалиране.
 
-### Фаза 1: Какво изграждаме (включено в този пример)
 
 ```mermaid
-graph TD
-    Internet[Интернет] -- HTTPS --> Gateway[API шлюз<br/>Контейнер Node.js<br/>Маршрутира заявки<br/>Проверки на здравето<br/>Записване на заявки]
-    Gateway -- HTTP вътрешно --> Product[Услуга за продукти<br/>Контейнер Python<br/>CRUD за продукти<br/>Хранилище в паметта<br/>REST API]
-    Product --> Insights[Application Insights<br/>Мониторинг и логове]
-```
-**Защо да започнем просто?**
-- ✅ Разгръщане и разбиране бързо (25-35 минути)
-- ✅ Научете основните модели на микросервизи без сложност
-- ✅ Работещ код, който можете да променяте и експериментирате с
-- ✅ По-ниска цена за обучение (~$50-100/месец спрямо $300-1400/месец)
-- ✅ Изградете увереност преди да добавяте бази данни и опашки за съобщения
-
-**Аналогия**: Помислете за това като да учите да шофирате. Започвате с празен паркинг (2 услуги), овладявате основите, след което преминавате към градски трафик (5+ услуги с бази данни).
-
-### Фаза 2: Бъдещо разширяване (референтна архитектура)
-
-След като усвоите архитектурата с 2 услуги, можете да я разширите до:
-
-```
-Full Architecture (Not Included - For Reference)
-├── API Gateway (✅ Included)
-├── Product Service (✅ Included)
-├── Order Service (🔜 Add next)
-├── User Service (🔜 Add next)
-├── Notification Service (🔜 Add last)
-├── Azure Service Bus (🔜 For async communication)
-├── Cosmos DB (🔜 For product persistence)
-├── Azure SQL (🔜 For order management)
-└── Azure Storage (🔜 For file storage)
+flowchart LR
+    Client -->|HTTPS| Gateway[Public Node.js gateway — port 8080]
+    Gateway -->|HTTPS internal FQDN| Product[Internal Python product API — port 8000]
+    Gateway -. request/dependency telemetry .-> Insights[Application Insights]
+    Product -. application log traces .-> Insights
 ```
 
-Вижте раздела "Ръководство за разширяване" в края за стъпка-по-стъпка инструкции.
-
-## Включени функции
-
-✅ **Откриване на услуги**: Автоматично откриване базирано на DNS между контейнерите  
-✅ **Баланс на натоварването**: Вграден баланс на натоварване между репликите  
-✅ **Автоскалиране**: Независимо скалиране за всяка услуга на база HTTP заявки  
-✅ **Мониторинг на здравето**: Liveness и readiness проверки за двете услуги  
-✅ **Разпределено логване**: Централизирано логване с Application Insights  
-✅ **Вътрешна мрежа**: Сигурна комуникация между услуги  
-✅ **Оркестрация на контейнери**: Автоматично разгръщане и скалиране  
-✅ **Актуализации без прекъсване**: Rolling updates с управление на ревизиите  
+Каталогът с продукти съдържа пет фиксирани продукта в паметта. Няма **POST,
+PUT или DELETE обработчици**, база данни, Service Bus, услуга за поръчки/потребители/известия,
+C# или Go код. Това са идеи за бъдещо развитие, не включени функции.
+Входната точка (gateway) не удостоверява потребителите; вътрешният достъп не е заместител
+на авторизацията в приложението.
 
 ## Предварителни изисквания
 
-### Задължителни инструменти
-
-Преди да започнете, уверете се, че имате инсталирани следните инструменти:
-
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (версия 1.0.0 или по-нова)
-   ```bash
-   azd version
-   # Очакван изход: azd версия 1.0.0 или по-нова
-   ```
-
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (версия 2.50.0 или по-нова)
-   ```bash
-   az --version
-   # Очакван изход: azure-cli 2.50.0 или по-нова
-   ```
-
-3. **[Docker](https://www.docker.com/get-started)** (за локално разработване/тестване - по избор)
-   ```bash
-   docker --version
-   # Очакван изход: Docker версия 20.10 или по-нова
-   ```
-
-### Изисквания за Azure
-
-- Активен **абонамент за Azure** ([създайте безплатен акаунт](https://azure.microsoft.com/free/))
-- Права за създаване на ресурси в абонамента ви
-- Роля **Contributor** върху абонамента или групата за ресурси
-
-### Предварителни познания
-
-Това е пример за **напреднало ниво**. Трябва да имате:
-- Завършен [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
-- Основно разбиране на архитектурата на микросервизи
-- Запознатост с REST API и HTTP
-- Разбиране на концепциите за контейнери
-
-**Ново в Container Apps?** Започнете първо с примера [Simple Flask API example](../../../../../examples/container-app/simple-flask-api), за да научите основите.
-
-## Бърз старт (стъпка по стъпка)
-
-### Стъпка 1: Клониране и навигиране
+Първо завършете [единния Flask API](../../../../../examples/container-app/simple-flask-api).
+Инсталирайте текуща стабилна версия на azd (публикуван релийз към момента на преглед: 1.37.2), Azure CLI,
+и Docker с активиран демон. Необходим ви е абонамент за Azure, разрешения за създаване на ресурси
+и регионален квотен лимит за Container Apps.
 
 ```bash
-git clone https://github.com/microsoft/AZD-for-beginners.git
-cd AZD-for-beginners/examples/container-app/microservices
-```
-
-**✓ Проверка за успех**: Уверете се, че виждате `azure.yaml`:
-```bash
-ls
-# Очаквано: README.md, azure.yaml, infra/, src/
-```
-
-### Стъпка 2: Удостоверяване в Azure
-
-```bash
+azd version
+az version
+docker info
 azd auth login
+az login
 ```
 
-Това отваря вашия браузър за удостоверяване в Azure. Влезте с вашите Azure идентификационни данни.
+Използвайте същия абонамент и в двата CLI инструмента. Командите по-долу са за Bash.
 
-**✓ Проверка за успех**: Трябва да видите:
-```
-Logged in to Azure.
-```
+## Деплой и проверка
 
-### Стъпка 3: Инициализиране на средата
+От основната директория на репозитория:
 
 ```bash
-azd init
-```
-
-**Подканите, които ще видите**:
-- **Име на средата**: Въведете кратко име (например `microservices-dev`)
-- **Azure subscription**: Изберете вашия абонамент
-- **Azure location**: Изберете регион (например `eastus`, `westeurope`)
-
-**✓ Проверка за успех**: Трябва да видите:
-```
-SUCCESS: New project initialized!
-```
-
-### Стъпка 4: Разгръщане на инфраструктурата и услугите
-
-```bash
+cd examples/container-app/microservices
+azd env new microservices-demo
 azd up
+GATEWAY_URL=$(azd env get-value API_GATEWAY_URL)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+GATEWAY_NAME=$(azd env get-value API_GATEWAY_NAME)
+PRODUCT_NAME=$(azd env get-value PRODUCT_SERVICE_NAME)
+
+curl --fail-with-body "${GATEWAY_URL}/health"
+curl --fail-with-body "${GATEWAY_URL}/api/products"
+curl --fail-with-body "${GATEWAY_URL}/api/products/1"
+curl -i "${GATEWAY_URL}/api/products/999"
 ```
 
-**Какво се случва** (отнема 8-12 минути):
-1. Създава Container Apps среда
-2. Създава Application Insights за наблюдение
-3. Изгражда контейнера на API Gateway (Node.js)
-4. Изгражда контейнера на Product Service (Python)
-5. Разгръща двата контейнера в Azure
-6. Конфигурира мрежата и проверки на здравето
-7. Настройва наблюдение и логване
+**Успех:** health 200; list 200 с **пет** продукта; продукт 1 е лаптоп
+на цена 999.99 с наличност 50; неизвестен продукт връща 404.
+Описанията са включени в отговорите; времевите печати варират.
 
-**✓ Проверка за успех**: Трябва да видите:
+Първоначалното предоставяне използва публични hello-world изображения на порт 80, така че не се опитва
+да изтегля несъществуващи изображения от празно хранилище. Специфични за услугата Bicep модули
+и параметрични файлове ги заменят с изградени изображения и портове/проби на приложението по време на
+`azd deploy`. Основните параметри запазват имената на публикуваните изображения за по-късно предоставяне.
+
+## Услуги и мрежова конфигурация
+
+| Услуга | Изложени крайни точки | По подразбиране ресурси |
+|---|---|---|
+| Gateway | GET `/`, `/health`, `/api/products`, `/api/products/:id` | 1 vCPU, 2 GiB, 2–20 реплики |
+| Product | GET `/`, `/health`, `/products`, `/products/<id>` | 0.5 vCPU, 1 GiB, 1–10 реплики |
+
+Входният достъп за продукта има `external: false` и `allowInsecure: false`. Bicep инжектира
+`PRODUCT_SERVICE_URL=https://<actual-internal-fqdn>` в gateway. HTTP щеше
+пренасочване; HTTPS съвпада с конфигурирания ingress. Краткото DNS име трябва да съвпада с
+**реалното име на Container App**, а не с логическия ключ на услугата `product-service`.
+Не се опитвайте да извиквате вътрешния URL директно от вашия лаптоп.
+
+Гейтвеят има таймаут от пет секунди за извиквания на продукта. Липсващи идентификатори на продукт
+се предават като 404; транспортни грешки/други грешки във бекенда връщат 503. Гейтвеят
+`/health` проверява само гейтвея, а не наличността на бекенда.
+
+## Файлове и конфигурация
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/abbreviations.json
+infra/core/container-apps-environment.bicep
+infra/core/monitor.bicep
+infra/app/api-gateway.bicep
+infra/app/api-gateway.parameters.json
+infra/app/product-service.bicep
+infra/app/product-service.parameters.json
+src/api-gateway/{app.js,package.json,Dockerfile}
+src/product-service/{main.py,requirements.txt,Dockerfile}
 ```
-SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
-Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
-```
 
-**⏱️ Време**: 8-12 минути
+Скалиране, CPU/памет, портове и probe-и се задават в `infra/app/*.bicep`. Променете тези
+файлове и изпълнете `azd up`, за да приложите инфраструктурата и да преразположите. В този
+пример няма параметър с променлива на средата `GATEWAY_MAX_REPLICAS`.
 
-### Стъпка 5: Тестване на разгръщането
+За промени само в кода:
 
 ```bash
-# Вземете крайната точка на шлюза
-GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
-
-# Проверете здравето на API шлюза
-curl $GATEWAY_URL/health
-
-# Очакван изход:
-# {"status":"здрав","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
-```
-
-**Тествайте продуктовата услуга чрез API Gateway**:
-```bash
-# Списък с продукти
-curl $GATEWAY_URL/api/products
-
-# Очакван изход:
-# [
-#   {"id":1,"name":"Лаптоп","price":999.99,"stock":50},
-#   {"id":2,"name":"Мишка","price":29.99,"stock":200},
-#   {"id":3,"name":"Клавиатура","price":79.99,"stock":150}
-# ]
-```
-
-**✓ Проверка за успех**: И двете крайни точки връщат JSON данни без грешки.
-
----
-
-**🎉 Поздравления!** Разгърнахте архитектура на микросервизи в Azure!
-
-## Структура на проекта
-
-Всички файлове за имплементация са включени — това е завършен, работещ пример:
-
-```
-microservices/
-│
-├── README.md                         # This file
-├── azure.yaml                        # AZD configuration
-├── .gitignore                        # Git ignore patterns
-│
-├── infra/                           # Infrastructure as Code (Bicep)
-│   ├── main.bicep                   # Main orchestration
-│   ├── abbreviations.json           # Naming conventions
-│   ├── core/                        # Shared infrastructure
-│   │   ├── container-apps-environment.bicep  # Container environment + registry
-│   │   └── monitor.bicep            # Application Insights + Log Analytics
-│   └── app/                         # Service definitions
-│       ├── api-gateway.bicep        # API Gateway container app
-│       └── product-service.bicep    # Product Service container app
-│
-└── src/                             # Application source code
-    ├── api-gateway/                 # Node.js API Gateway
-    │   ├── app.js                   # Express server with routing
-    │   ├── package.json             # Node dependencies
-    │   └── Dockerfile               # Container definition
-    └── product-service/             # Python Product Service
-        ├── main.py                  # Flask API with product data
-        ├── requirements.txt         # Python dependencies
-        └── Dockerfile               # Container definition
-```
-
-**Какво прави всеки компонент:**
-
-**Инфраструктура (infra/)**:
-- `main.bicep`: Оркестрира всички Azure ресурси и техните зависимости
-- `core/container-apps-environment.bicep`: Създава Container Apps средата и Azure Container Registry
-- `core/monitor.bicep`: Настройва Application Insights за разпределено логване
-- `app/*.bicep`: Индивидуални дефиниции на container app с настройки за скалиране и проверки на здравето
-
-**API Gateway (src/api-gateway/)**:
-- Публична услуга, която маршрутизира заявки към бекенд услуги
-- Реализира логване, обработка на грешки и препращане на заявки
-- Демонстрира комуникация между услуги по HTTP
-
-**Product Service (src/product-service/)**:
-- Вътрешна услуга с каталог от продукти (в паметта за простота)
-- REST API с проверки на здравето
-- Пример за бекенд микросервисен модел
-
-## Преглед на услугите
-
-### API Gateway (Node.js/Express)
-
-**Порт**: 8080  
-**Достъп**: Публичен (външен вход)  
-**Цел**: Маршрутизира входящи заявки към подходящите бекенд услуги  
-
-**Крайни точки**:
-- `GET /` - Информация за услугата
-- `GET /health` - Крайна точка за проверка на здравето
-- `GET /api/products` - Препраща към продуктовата услуга (изброяване на всички)
-- `GET /api/products/:id` - Препраща към продуктовата услуга (вземане по ID)
-
-**Основни функции**:
-- Маршрутизиране на заявки с axios
-- Централизирано логване
-- Обработка на грешки и управление на таймаути
-- Откриване на услуги чрез променливи на средата
-- Интеграция с Application Insights
-
-**Извадка от кода** (`src/api-gateway/app.js`):
-```javascript
-// Вътрешна комуникация между услуги
-app.get('/api/products', async (req, res) => {
-  const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-  res.json(response.data);
-});
-```
-
-### Product Service (Python/Flask)
-
-**Порт**: 8000  
-**Достъп**: Само вътрешен (без външен вход)  
-**Цел**: Управлява продуктов каталог с данни в паметта  
-
-**Крайни точки**:
-- `GET /` - Информация за услугата
-- `GET /health` - Крайна точка за проверка на здравето
-- `GET /products` - Изброява всички продукти
-- `GET /products/<id>` - Връща продукт по ID
-
-**Основни функции**:
-- RESTful API с Flask
-- Съхранение на продукти в паметта (опростено, без нужда от база данни)
-- Наблюдение на здравето с проверки
-- Структурирано логване
-- Интеграция с Application Insights
-
-**Модел на данните**:
-```python
-{
-  "id": 1,
-  "name": "Laptop",
-  "description": "High-performance laptop",
-  "price": 999.99,
-  "stock": 50
-}
-```
-
-**Защо само вътрешна?**
-Продуктовата услуга не е изложена публично. Всички заявки трябва да минават през API Gateway, който предоставя:
-- Сигурност: Контролиран достъп
-- Гъвкавост: Можете да променяте бекенда без да засягате клиентите
-- Наблюдение: Централизирано логване на заявки
-
-## Разбиране на комуникацията между услугите
-
-### Как услугите си комуникират
-
-В този пример API Gateway комуникира с Product Service чрез **вътрешни HTTP повиквания**:
-
-```javascript
-// API шлюз (src/api-gateway/app.js)
-const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
-
-// Извърши вътрешна HTTP заявка
-const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
-```
-
-**Ключови точки**:
-
-1. **Откриване базирано на DNS**: Container Apps автоматично предоставя DNS за вътрешни услуги
-   - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Оптимизирано като: `http://product-service` (Container Apps го резолвва)
-
-2. **Без публично изложение**: Product Service има `external: false` в Bicep
-   - Достъпна само в рамките на Container Apps средата
-   - Няма достъп от интернет
-
-3. **Променливи на средата**: URL адресите на услугите се вкарват по време на разгръщане
-   - Bicep предава вътрешния FQDN към gateway-а
-   - Няма жорстко кодирани URL адреси в приложния код
-
-**Аналогия**: Помислете за това като за офисни стаи. API Gateway е рецепцията (публична), а Product Service е офис стая (само вътрешна). Посетителите трябва да минат през рецепцията, за да достигнат до някоя стая.
-
-## Опции за разгръщане
-
-### Пълно разгръщане (препоръчително)
-
-```bash
-# Разположете инфраструктурата и двете услуги
-azd up
-```
-
-Това разгръща:
-1. Container Apps среда
-2. Application Insights
-3. Container Registry
-4. Контейнер на API Gateway
-5. Контейнер на Product Service
-
-**Време**: 8-12 минути
-
-### Разгръщане на отделна услуга
-
-```bash
-# Разгръщайте само една услуга (след първоначалното azd up)
-azd deploy api-gateway
-
-# Или разгръщайте продуктовата услуга
 azd deploy product-service
+azd deploy api-gateway
 ```
 
-**Сценарий на използване**: Когато сте обновили кода в една услуга и искате да разгърнете само тази услуга.
+Образът на Node използва Node 22; образът на Python използва Python 3.11. И двата се свързват към
+`0.0.0.0`. Ingress/probes използват порт 8080 (гейтвей) и 8000 (продукт) съответно.
 
-### Актуализиране на конфигурацията
+## Локално разработване с Docker
+
+Стартирайте от тази примерна директория. Използвайте мрежа, дефинирана от потребителя, **не `localhost`
+за връзка от един контейнер към друг**:
 
 ```bash
-# Променете параметрите за мащабиране
-azd env set GATEWAY_MAX_REPLICAS 30
-
-# Разгърнете отново с новата конфигурация
-azd up
+docker network create azd-microservices-demo
+docker build -t local-product ./src/product-service
+docker build -t local-gateway ./src/api-gateway
+docker run -d --name azd-product --network azd-microservices-demo local-product
+docker run -d --name azd-gateway --network azd-microservices-demo \
+  -p 8080:8080 -e PRODUCT_SERVICE_URL=http://azd-product:8000 local-gateway
+curl --fail-with-body http://localhost:8080/api/products
 ```
 
-## Конфигурация
-
-### Конфигурация на скалирането
-
-И двете услуги са конфигурирани с HTTP-базирано автоскалиране в техните Bicep файлове:
-
-**API Gateway**:
-- Минимален брой реплики: 2 (винаги поне 2 за наличност)
-- Максимален брой реплики: 20
-- Тригер за скалиране: 50 едновременно заявки на реплика
-
-**Product Service**:
-- Минимален брой реплики: 1 (може да скалира до нула при нужда)
-- Максимален брой реплики: 10
-- Тригер за скалиране: 100 едновременно заявки на реплика
-
-**Персонализиране на скалирането** (в `infra/app/*.bicep`):
-```bicep
-scale: {
-  minReplicas: 1
-  maxReplicas: 10
-  rules: [
-    {
-      name: 'http-scale-rule'
-      http: {
-        metadata: {
-          concurrentRequests: '100'  // Adjust this
-        }
-      }
-    }
-  ]
-}
-```
-
-### Разпределение на ресурси
-
-**API Gateway**:
-- CPU: 1.0 vCPU
-- Памет: 2 GiB
-- Причина: Обработва целия външен трафик
-
-**Product Service**:
-- CPU: 0.5 vCPU
-- Памет: 1 GiB
-- Причина: Леки операции в паметта
-
-### Проверки на здравето
-
-И двете услуги включват проверки за liveness и readiness:
-
-```bicep
-probes: [
-  {
-    type: 'Liveness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 10
-    periodSeconds: 30
-  }
-  {
-    type: 'Readiness'
-    httpGet: {
-      path: '/health'
-      port: 8080
-    }
-    initialDelaySeconds: 5
-    periodSeconds: 10
-  }
-]
-```
-
-**Какво означава това**:
-- **Liveness**: Ако проверката на здравето се провали, Container Apps рестартира контейнера
-- **Readiness**: Ако не е готов, Container Apps спира маршрутизирането на трафик към тази реплика
-
-
-
-## Мониторинг и наблюдаемост
-
-### Преглед на логовете на услугите
+Очаквано: пет продукта. HTTP се използва само за тази локална Docker мрежа.
 
 ```bash
-# Прегледайте логовете с azd monitor
-azd monitor --logs
-
-# Или използвайте Azure CLI за конкретни контейнерни приложения:
-# Потоково предаване на логове от API Gateway
-az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
-
-# Прегледайте последните логове на продуктовата услуга
-az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
+docker stop azd-product azd-gateway
+docker rm azd-product azd-gateway
+docker network rm azd-microservices-demo
 ```
 
-**Очакван изход**:
+## Мониторинг
+
+```bash
+az containerapp logs show --name "$GATEWAY_NAME" --resource-group "$RG_NAME" --follow
+# In a separate terminal:
+az containerapp logs show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" --tail 100
 ```
-[api-gateway] API Gateway listening on port 8080
-[api-gateway] Product Service URL: http://product-service
-[api-gateway] GET /api/products 200 - 45ms
-[product-service] Retrieved 5 products
-```
 
-### Заявки в Application Insights
+`azd monitor --logs` отваря портал, а не предава поточно логове от терминала.
+SDK за Node събира заявки/зависимости на гейтвея. Python `AzureLogHandler`
+експортира **лог трасирания**, а не автоматични заявки към Flask, SQL зависимости или пълни
+дистрибутирани трасирания. OpenCensus е наследен SDK; препоръчва се Azure Monitor OpenTelemetry
+при разширяване на този пример.
 
-Достъпете Application Insights в Azure портала, след това изпълнете следните заявки:
+В Application Insights Logs генерирайте заявки и инспектирайте:
 
-**Намерете бавни заявки**:
 ```kusto
 requests
 | where timestamp > ago(1h)
-| where duration > 1000  // Requests taking >1 second
-| summarize count() by name, cloud_RoleName
-| order by count_ desc
+| where name contains "products"
+| summarize RequestCount=count(), AvgDuration=avg(duration) by bin(timestamp, 5m)
 ```
 
-**Проследете повиквания между услуги**:
+За съобщения от Python приложението:
+
 ```kusto
-dependencies
+traces
 | where timestamp > ago(1h)
-| where type == "Http"
-| project timestamp, name, target, duration, success
-| order by timestamp desc
+| where message contains "products"
+| project timestamp, message, severityLevel
 ```
 
-**Процент грешки по услуга**:
-```kusto
-exceptions
-| where timestamp > ago(24h)
-| summarize errorCount = count() by cloud_RoleName, type
-| order by errorCount desc
-```
-
-**Обем заявки във времето**:
-```kusto
-requests
-| where timestamp > ago(1h)
-| summarize requestCount = count() by bin(timestamp, 5m), cloud_RoleName
-| render timechart
-```
-
-### Достъп до таблото за мониторинг
-
-```bash
-# Получете подробности за Application Insights
-azd env get-values | grep APPLICATIONINSIGHTS
-
-# Отворете мониторинга в портала на Azure
-az monitor app-insights component show \
-  --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
-  --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
-  --query "appId" -o tsv
-```
-
-### Метрики в реално време
-
-1. Отворете Application Insights в Azure портала
-2. Кликнете "Live Metrics"
-3. Вижте заявки в реално време, неуспехи и производителност
-4. Тествайте като изпълните: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+Позволете забавяне при усвояване и вземане на проби; не очаквайте точен брой заявки или
+гарантирана латентност. Няма конфигурирани персонализирани аларми или табла.
 
 ## Практически упражнения
 
-[Забележка: Вижте пълните упражнения по-горе в секцията "Практически упражнения" за подробни стъпка-по-стъпка упражнения, включително проверка на разгръщането, модифициране на данни, тестове за авто-скалиране, обработка на грешки и добавяне на трета услуга.]
+### Упражнение 1: Модифицирайте каталога
 
-## Анализ на разходите
+**Изходна точка:** `src/product-service/main.py`.
+**Цел:** потвърдете независимо разполагане на услугата.
+Променете наличностите на лаптопа от 50 на 49 в фиксирания `products` списък, изпълнете
+`azd deploy product-service`, след това заявете `${GATEWAY_URL}/api/products/1`.
 
-### Прогнозни месечни разходи (за този пример с 2 услуги)
+**Критерии за успех / решение:** HTTP 200 с `"stock":49`. Възстановете 50 и преразположете.
+**Често срещан проблем:** редактиране на гейтвея вместо услугата, която притежава каталога.
+Това променя изходните данни, а не постоянна инвентарна база данни.
 
-| Ресурс | Конфигурация | Прогнозни разходи |
-|----------|--------------|----------------|
-| API Gateway | 2-20 реплики, 1 vCPU, 2GB RAM | $30-150 |
-| Product Service | 1-10 реплики, 0.5 vCPU, 1GB RAM | $15-75 |
-| Container Registry | Базово ниво | $5 |
-| Application Insights | 1-2 GB/month | $5-10 |
-| Log Analytics | 1 GB/month | $3 |
-| **Общо** | | **$58-243/month** |
+### Упражнение 2: Потвърдете конфигурацията на репликите
 
-**Разбивка на разходите по използване**:
-- **Слаб трафик** (тест/обучение): ~ $60/month
-- **Умерен трафик** (малък прод): ~ $120/month
-- **Висок трафик** (натоварени периоди): ~ $240/month
-
-### Съвети за оптимизация на разходите
-
-1. **Скалиране до нула за разработка**:
-   ```bicep
-   scale: {
-     minReplicas: 0  // Save $30-40/month when not in use
-     maxReplicas: 10
-   }
-   ```
-
-2. **Използвайте Consumption Plan за Cosmos DB** (когато го добавите):
-   - Плащате само за това, което използвате
-   - Няма минимално плащане
-
-3. **Задайте семплинг в Application Insights**:
-   ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Вземете проба от 50% от заявките
-   ```
-
-4. **Почистване, когато не е необходимо**:
-   ```bash
-   azd down
-   ```
-
-### Опции за безплатен план
-
-За обучение/тестване, обмислете:
-- Използвайте безплатните кредити на Azure (първите 30 дни)
-- Ограничете броя на репликите до минимум
-- Изтрийте след тестове (без текущи такси)
-
----
-
-## Почистване
-
-За да избегнете текущи такси, изтрийте всички ресурси:
+**Изходна точка:** `infra/app/product-service.bicep`.
+**Цел:** наблюдавайте инфраструктурна промяна без предположения за автоскалиране.
+Променете `minReplicas: 1` на `minReplicas: 2`, изпълнете `azd up`, след което:
 
 ```bash
-azd down --force --purge
+az containerapp show --name "$PRODUCT_NAME" --resource-group "$RG_NAME" \
+  --query properties.template.scale -o json
 ```
 
-**Подканване за потвърждение**:
-```
-? Total resources to delete: 6, are you sure you want to continue? (y/N)
-```
+**Критерии за успех:** конфигурираният минимум е 2, а максимумът остава 10.
+Възстановете минимум 1 и изпълнете `azd up`.
+**Често срещан проблем:** самият `azd deploy` не прилага промени в несвързаната споделена
+инфраструктура. Не задавайте `maxReplicas` на нула като симулация на грешка.
+Това потвърждава конфигурацията, а не е тест за натоварване или гарантиран брой реплики в момента.
 
-Въведете `y`, за да потвърдите.
+### Упражнение 3: Тествайте обработката на недостъпна услуга локално
 
-**Какво ще бъде изтрито**:
-- Container Apps Environment
-- И двете Container Apps (gateway и product service)
-- Container Registry
-- Application Insights
-- Log Analytics Workspace
-- Resource Group
+**Изходна точка:** и двата локални Docker контейнера отгоре работят.
+**Цел:** разграничете грешката на бекенда от липсващ продукт.
+Спирайте само продукта контейнера:
 
-**✓ Проверете почистването**:
 ```bash
-az group list --query "[?starts_with(name,'rg-microservices')]" --output table
+docker stop azd-product
+curl -i http://localhost:8080/api/products
+docker start azd-product
+curl --fail-with-body http://localhost:8080/api/products
 ```
 
-Трябва да върне празно.
+**Критерии за успех:** докато е спрян, гейтвеят връща 503 с
+`"error":"Product service unavailable"`; след рестарт списъкът връща 200.
+Повторете след кратко забавяне за стартиране ако е необходимо.
+**Често срещан проблем:** спирането на гейтвея тества друга грешка (липса на HTTP отговор).
 
----
+## Разходи и пропуски в продукцията
 
-## Ръководство за разширяване: От 2 до 5+ услуги
+Минималните реплики по подразбиране държат изчисленията работещи. Регистърът и мониторингът също носят
+такси. Няма валидиран фиксиран общ разход от $50/месец: оценете регионален CPU/памет,
+часове на реплики, заявки, регистър и съхранение на записи в
+[Azure ценови калкулатор](https://azure.microsoft.com/pricing/calculator/).
+Изтрийте обучителните ресурси своевременно.
 
-След като овладеете тази архитектура с 2 услуги, ето как да разширите:
+Работата в продукция включва удостоверяване/упълномощаване, ограничени управлявани идентичности,
+постоянни данни, валидация на вход/отговор, поддържана инструментализация за наблюдаемост,
+тестове за натоварване/грешки, CI/CD, аларми и процедури за възстановяване. Добавянето на поръчкова
+услуга, опашка или база данни е отделна задача за изпълнение, не завършено
+упражнение или вече налична функция тук.
 
-### Фаза 1: Добавяне на постоянство на данните (следваща стъпка)
+## Отстраняване на проблеми и почистване
 
-**Добавете Cosmos DB за Product Service**:
+- **Образът не е намерен при първоначално предоставяне:** bootstrap трябва да използва публичния образ;
+  проверете настройките по подразбиране на основния параметър на образа и съответствията на модула за разполагане.
+- **503 продукти:** проверете логовете на продукта, ревизията на образа и внедрения вътрешен HTTPS URL.
+- **404 неочакван път:** продуктният API е само за четене; проверете маршрута, а не липсващ CRUD обработчик.
+- **Няма телеметрия:** инспектирайте низовете за връзка по време на изпълнение без да ги излагате
+  и позволете забавяне при усвояване. Python таблиците за заявки не се попълват от неговия обработчик на логове.
 
-1. Create `infra/core/cosmos.bicep`:
-   ```bicep
-   resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
-     name: name
-     location: location
-     kind: 'GlobalDocumentDB'
-     properties: {
-       databaseAccountOfferType: 'Standard'
-       locations: [{ locationName: location, failoverPriority: 0 }]
-     }
-   }
-   ```
+От тази примерна директория:
 
-2. Актуализирайте product service да използва Cosmos DB вместо данни в паметта
-
-3. Прогнозна допълнителна цена: ~$25/month (serverless)
-
-### Фаза 2: Добавяне на трета услуга (Управление на поръчки)
-
-**Създайте Order Service**:
-
-1. Нова папка: `src/order-service/` (Python/Node.js/C#)
-2. Нов Bicep: `infra/app/order-service.bicep`
-3. Актуализирайте API Gateway да рутира `/api/orders`
-4. Добавете Azure SQL Database за съхранение на поръчките
-
-**Архитектурата става**:
-```
-API Gateway → Product Service (Cosmos DB)
-           → Order Service (Azure SQL)
-```
-
-### Фаза 3: Добавяне на асинхронна комуникация (Service Bus)
-
-**Реализирайте архитектура, базирана на събития**:
-
-1. Добавете Azure Service Bus: `infra/core/servicebus.bicep`
-2. Product Service публикува събития "ProductCreated"
-3. Order Service се абонира за продуктови събития
-4. Добавете Notification Service за обработка на събитията
-
-**Шаблон**: Request/Response (HTTP) + Event-Driven (Service Bus)
-
-### Фаза 4: Добавяне на удостоверяване на потребители
-
-**Реализирайте User Service**:
-
-1. Създайте `src/user-service/` (Go/Node.js)
-2. Добавете Azure AD B2C или персонализирано JWT удостоверяване
-3. API Gateway валидира токените
-4. Услугите проверяват потребителските разрешения
-
-### Фаза 5: Готовност за продукция
-
-**Добавете следните компоненти**:
-- Azure Front Door (глобално балансиране на натоварването)
-- Azure Key Vault (управление на тайни)
-- Azure Monitor Workbooks (персонализирани табла)
-- CI/CD Pipeline (GitHub Actions)
-- Blue-Green Deployments
-- Managed Identity за всички услуги
-
-**Пълна цена за продукционна архитектура**: ~$300-1,400/месец
-
----
-
-## Научете повече
-
-### Съответна документация
-- [Документация за Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Ръководство за архитектура на микросервизи](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights за разпределено проследяване](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Документация за Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-
-### Следващи стъпки в този курс
-- ← Предишен: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Пример за начинаещи с едноконтейнерно приложение
-- → Следващ: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - Добавяне на AI възможности
-- 🏠 [Начало на курса](../../README.md)
-
-### Сравнение: Кога да използвате кое
-
-**Single Container App** (Simple Flask API example):
-- ✅ Прости приложения
-- ✅ Монолитна архитектура
-- ✅ Бързо за разгръщане
-- ❌ Ограничена мащабируемост
-- **Цена**: ~$15-50/месец
-
-**Microservices** (This example):
-- ✅ Сложни приложения
-- ✅ Независимо мащабиране на всяка услуга
-- ✅ Автономия на екипите (различни услуги, различни екипи)
-- ❌ По-сложно за управление
-- **Цена**: ~$60-250/месец
-
-**Kubernetes (AKS)**:
-- ✅ Максимален контрол и гъвкавост
-- ✅ Портируемост между облаци
-- ✅ Разширено мрежово управление
-- ❌ Изисква експертиза по Kubernetes
-- **Цена**: минимум ~$150-500/месец
-
-**Препоръка**: Започнете с Container Apps (този пример), преминете към AKS само ако имате нужда от функции специфични за Kubernetes.
-
----
-
-## Често задавани въпроси
-
-**В: Защо само 2 услуги вместо 5+?**  
-О: Поради образователна прогресия. Овладейте основите (комуникация между услуги, наблюдение, мащабиране) с прост пример преди да добавяте сложност. Шаблоните, които научавате тук, се прилагат и към архитектури с 100 услуги.
-
-**В: Мога ли аз да добавя още услуги?**  
-О: Разбира се! Следвайте ръководството за разширяване по-горе. Всяка нова услуга следва същия модел: създайте src папка, създайте Bicep файл, актуализирайте azure.yaml, деплойвайте.
-
-**В: Подходящо ли е за продукция?**  
-О: Това е стабилна основа. За продукция добавете: managed identity, Key Vault, постоянни бази данни, CI/CD pipeline, аларми за наблюдение и стратегия за архивиране.
-
-**В: Защо да не използвам Dapr или друг service mesh?**  
-О: Дръжте го опростено за обучение. След като разберете нативната мрежова архитектура на Container Apps, можете да добавите Dapr за по-напреднали сценарии.
-
-**В: Как да дебъгна локално?**  
-О: Стартирайте услугите локално с Docker:
 ```bash
-cd src/api-gateway
-docker build -t local-gateway .
-docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
+azd down
 ```
 
-**В: Мога ли да използвам различни програмни езици?**  
-О: Да! Този пример показва Node.js (gateway) + Python (product service). Можете да смесвате всички езици, които работят в контейнери.
+Прегледайте подкани за изтриване и проверете дали специалната ресурсна група е премахната.
 
-**В: А ако нямам кредити за Azure?**  
-О: Използвайте безплатния слой на Azure (първите 30 дни за нови акаунти) или разгръщайте за кратки тестови периоди и изтривайте незабавно.
-
----
-
-> **🎓 Резюме на учебния път**: Вие научихте как да разположите архитектура с множество услуги с автоматично мащабиране, вътрешна мрежа, централизирано наблюдение и модели готови за продукция. Тази основа ви подготвя за сложни разпределени системи и корпоративни архитектури от микросервизи.
-
-**📚 Навигация в курса:**
-- ← Предишен: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
-- → Следващ: [Database Integration Example](../../../../../examples/database-app)
-- 🏠 [Начало на курса](../../../README.md)
-- 📖 [Най-добри практики за Container Apps](../../../docs/chapter-04-infrastructure/deployment-guide.md)
+[Предишна: Flask API](../../../../../examples/container-app/simple-flask-api) · [Следваща: Приложение за база данни](../../../../../examples/database-app) ·
+[AI разработка](../../../docs/chapter-02-ai-development/README.md) ·
+[Начало на курса](../../../README.md) · [Съобщете за проблем](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Отказ от отговорност**:
-Този документ е преведен с помощта на AI преводаческа услуга [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля, имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на оригиналния език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Ние не носим отговорност за каквито и да е недоразумения или погрешни тълкувания, произтичащи от използването на този превод.
+Този документ е преведен с помощта на AI преводачески услуга [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на неговия роден език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Ние не носим отговорност за каквито и да е недоразумения или неправилни тълкувания, произтичащи от използването на този превод.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

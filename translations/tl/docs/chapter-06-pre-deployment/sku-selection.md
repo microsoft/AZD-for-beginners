@@ -1,90 +1,92 @@
-# Gabay sa Pagpili ng SKU - Pagpili ng Tamang Mga Antas ng Serbisyo ng Azure
+# Gabay sa Pagpili ng SKU - Pagpili ng Tamang Azure Service Tiers
 
 **Pag-navigate ng Kabanata:**
-- **📚 Tahanan ng Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 6 - Pagpapatunay at Pagpaplano Bago ang Deployment
-- **⬅️ Nakaraan**: [Pagpaplano ng Kapasidad](capacity-planning.md)
-- **➡️ Susunod**: [Paunang Pagsusuri](preflight-checks.md)
-- **🚀 Susunod na Kabanata**: [Kabanata 7: Paglutas ng Mga Karaniwang Suliranin](../chapter-07-troubleshooting/common-issues.md)
+- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 6 - Pre-Deployment Validation & Planning
+- **⬅️ Nakaraan**: [Capacity Planning](capacity-planning.md)
+- **➡️ Susunod**: [Pre-flight Checks](preflight-checks.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
 
 ## Panimula
 
-Nakakatulong ang komprehensibong gabay na ito sa pagpili ng pinakamainam na Azure service SKUs (Stock Keeping Units) para sa iba't ibang kapaligiran, workload, at mga kinakailangan. Matutunan kung paano suriin ang mga pangangailangan sa pagganap, konsiderasyon sa gastos, at mga kinakailangan sa scalability upang piliin ang pinakaangkop na mga antas ng serbisyo para sa iyong mga deployment gamit ang Azure Developer CLI.
+Ang komprehensibong gabay na ito ay tumutulong sa iyong pumili ng pinakamainam na Azure service SKUs (Stock Keeping Units) para sa iba't ibang kapaligiran, mga workload, at pangangailangan. Matutunan kung paano suriin ang mga pangangailangan sa pagganap, mga konsiderasyon sa gastos, at mga kinakailangan sa scalability upang piliin ang pinakaangkop na service tiers para sa iyong mga deployment gamit ang Azure Developer CLI.
 
-## Mga Layunin sa Pagkatuto
+## Mga Layunin ng Pagkatuto
 
-Sa pagtatapos ng gabay na ito, ikaw ay:
-- Mauunawaan ang mga konsepto ng Azure SKU, mga modelo ng pagpepresyo, at pagkakaiba ng mga tampok
-- Mahahasa sa mga estratehiya ng pagpili ng SKU batay sa kapaligiran para sa pag-develop, staging, at produksyon
-- Masusuri ang mga kinakailangan ng workload at itutugma ang mga ito sa angkop na antas ng serbisyo
-- Magpapatupad ng mga estratehiya sa pag-optimize ng gastos sa pamamagitan ng matalinong pagpili ng SKU
-- Mag-aaplay ng mga pamamaraan sa pagsubok ng pagganap at pagpapatunay para sa mga pagpili ng SKU
-- Makokonpigura ang mga automated na rekomendasyon ng SKU at pagmamanman
+Sa pagtatapos ng gabay na ito, magagawa mong:
+- Maunawaan ang mga konsepto ng Azure SKU, mga modelo ng pagpepresyo, at pagkakaiba-iba ng mga tampok
+- Maging bihasa sa mga estratehiya ng pagpili ng SKU na nakabatay sa kapaligiran para sa development, staging, at production
+- Suriin ang mga pangangailangan ng workload at iakma ang mga ito sa angkop na service tiers
+- Magpatupad ng mga estratehiya para sa pag-optimize ng gastos sa pamamagitan ng matalinong pagpili ng SKU
+- Ilapat ang mga teknik sa pagsubok ng pagganap at pag-validate para sa mga pagpipilian ng SKU
+- I-configure ang mga automated na rekomendasyon ng SKU at monitoring
 
-## Mga Kinalabasan ng Pagkatuto
+## Mga Resulta ng Pagkatuto
 
-Pagkatapos makumpleto, maaari kang:
-- Pumili ng angkop na Azure service SKUs batay sa mga kinakailangan at limitasyon ng workload
-- Magdisenyo ng makatipid na multi-environment na arkitektura na may tamang pagpili ng mga antas
-- Magpatupad ng benchmarking ng pagganap at pagpapatunay para sa mga pagpili ng SKU
+Pagkatapos makumpleto, magagawa mong:
+- Pumili ng angkop na Azure service SKUs batay sa mga pangangailangan at paghihigpit ng workload
+- Magdisenyo ng cost-effective na multi-environment architecture gamit ang tamang pagpili ng tier
+- Magpatupad ng benchmarking at pag-validate ng pagganap para sa mga pagpipilian ng SKU
 - Lumikha ng mga automated na tool para sa rekomendasyon ng SKU at pag-optimize ng gastos
-- Magplano ng mga migrasyon ng SKU at mga estratehiya sa pag-scale para sa nagbabagong kinakailangan
-- Mag-apply ng mga prinsipyo ng Azure Well-Architected Framework sa pagpili ng antas ng serbisyo
+- Magplano ng mga estratehiya sa migration at pag-scale ng SKU para sa nagbabagong mga pangangailangan
+- Ilapat ang mga prinsipyo ng Azure Well-Architected Framework sa pagpili ng service tier
 
 ## Talaan ng Nilalaman
 
-- [Pag-unawa sa mga SKU](../../../../docs/chapter-06-pre-deployment)
-- [Pagpili Batay sa Kapaligiran](../../../../docs/chapter-06-pre-deployment)
-- [Mga Patnubay para sa Bawat Serbisyo](../../../../docs/chapter-06-pre-deployment)
-- [Mga Estratehiya sa Pag-optimize ng Gastos](../../../../docs/chapter-06-pre-deployment)
-- [Mga Isinasaalang-alang sa Pagganap](../../../../docs/chapter-06-pre-deployment)
-- [Mabilis na Sanggunian na Mga Talahanayan](../../../../docs/chapter-06-pre-deployment)
-- [Mga Tool sa Pagpapatunay](../../../../docs/chapter-06-pre-deployment)
+- [Pag-unawa sa SKUs](#understanding-skus)
+- [Pagpili Batay sa Kapaligiran](#environment-based-selection)
+- [Mga Gabay na Espesipiko sa Serbisyo](#service-specific-guidelines)
+- [Mga Estratehiya sa Pag-optimize ng Gastos](#cost-optimization-strategies)
+- [Mga Konsiderasyon sa Pagganap](#performance-considerations)
+- [Mga Mabilisang Talaan ng Sanggunian](#quick-reference-tables)
+- [Mga Kasangkapan sa Pag-validate](#validation-tools)
 
 ---
 
-## Pag-unawa sa mga SKU
+## Pag-unawa sa SKUs
 
-### Ano ang mga SKU?
+> **Halimbawa ng saklaw:** Ang mga YAML SKU map at mga performance configuration sa ibaba ay mga tala sa disenyo, hindi isang `azure.yaml` schema o configuration para sa load-tool. Ang mga Bicep block ay mga alternatibo/piraso: ideklara ang kanilang mga parameter at mga parent na resources, gumamit ng natatanging simbolikong mga pangalan kapag pinagsama-sama, at i-wire ang mga module sa isang gumaganang proyekto. Ang mga presyo, limitasyon, at availability ng rehiyon/SKU ay kailangang suriin para sa iyong subscription bago mag-deploy.
 
-Ang mga SKU (Stock Keeping Units) ay kumakatawan sa iba't ibang antas ng serbisyo at mga antas ng pagganap para sa mga Azure resource. Bawat SKU ay nag-aalok ng iba't ibang:
+### Ano ang mga SKUs?
 
-- **Mga katangian ng pagganap** (CPU, memory, throughput)
-- **Pagkakaroon ng tampok** (mga opsyon sa scaling, antas ng SLA)
-- **Mga modelo ng pagpepresyo** (batay sa consumption, reserved capacity)
-- **Pagkakaroon ayon sa rehiyon** (hindi lahat ng SKU ay magagamit sa lahat ng mga rehiyon)
+Ang SKUs (Stock Keeping Units) ay kumakatawan sa iba't ibang service tiers at mga antas ng pagganap para sa mga Azure resources. Bawat SKU ay nag-aalok ng iba't ibang:
 
-### Mga Pangunahing Salik sa Pagpili ng SKU
+- **Mga katangian ng pagganap** (CPU, memorya, throughput)
+- **Availability ng mga tampok** (mga pagpipilian sa scaling, antas ng SLA)
+- **Mga modelo ng pagpepresyo** (batay sa konsumo, reserved capacity)
+- **Availability sa rehiyon** (hindi lahat ng SKU ay magagamit sa lahat ng rehiyon)
 
-1. **Mga Kinakailangan ng Workload**
-   - Inaasahang mga pattern ng trapiko/load
-   - Mga kinakailangan sa pagganap (CPU, memory, I/O)
-   - Mga pangangailangan sa storage at mga pattern ng pag-access
+### Mga Mahalagang Salik sa Pagpili ng SKU
+
+1. **Mga Pangangailangan ng Workload**
+   - Inaasahang trapiko/patterns ng load
+   - Mga pangangailangan sa pagganap (CPU, memorya, I/O)
+   - Mga pangangailangan sa imbakan at mga pattern sa pag-access
 
 2. **Uri ng Kapaligiran**
-   - Pag-develop/pagsusuri kumpara sa produksyon
-   - Mga kinakailangan sa availability
-   - Pangangailangan sa seguridad at pagsunod sa regulasyon
+   - Development/testing kumpara sa production
+   - Mga pangangailangan sa availability
+   - Mga pangangailangan sa seguridad at pagsunod
 
-3. **Mga Limitasyon sa Badyet**
-   - Mga paunang gastos kumpara sa mga operational na gastos
-   - Mga diskwento para sa reserved capacity
-   - Mga implikasyon ng auto-scaling sa gastos
+3. **Mga Paghihigpit sa Badyet**
+   - Paunang gastos kumpara sa mga operational na gastos
+   - Mga diskwento sa reserved capacity
+   - Mga epekto ng gastos sa auto-scaling
 
-4. **Proyeksyon ng Paglago**
+4. **Mga Proyeksyon sa Paglago**
    - Mga kinakailangan sa scalability
-   - Mga hinaharap na pangangailangan sa tampok
-   - Kahirapan sa migrasyon
+   - Mga pangangailangan sa mga tampok sa hinaharap
+   - Komplikasyon sa migration
 
 ---
 
 ## Pagpili Batay sa Kapaligiran
 
-### Kapaligiran ng Pag-develop
+### Development Environment
 
 **Mga Prayoridad**: Pag-optimize ng gastos, pangunahing functionality, madaling provisioning/de-provisioning
 
-#### Recommended SKUs
+#### Inirerekomendang SKUs
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### Mga Katangian
-- **App Service**: F1 (Free) or B1 (Basic) para sa simpleng pagsubok
+- **App Service**: F1 (Libre) o B1 (Basic) para sa simpleng testing
 - **Databases**: Basic tier na may minimal na mga resources
-- **Storage**: Standard na may local redundancy lamang
-- **Compute**: Tinatanggap ang shared resources
-- **Networking**: Mga pangunahing konfigurasyon
+- **Storage**: Standard na may lokal na redundancy lamang
+- **Compute**: Katanggap-tanggap ang mga shared resources
+- **Networking**: Mga basic na configuration
 
-### Kapaligiran ng Staging/Pagsubok
+### Staging/Testing Environment
 
-**Mga Prayoridad**: Konfigurasyon na kahawig ng produksyon, balanse sa gastos, kakayahan sa pagsubok ng pagganap
+**Mga Prayoridad**: Production-like na configuration, balanse sa gastos, kakayahan sa performance testing
 
-#### Recommended SKUs
+#### Inirerekomendang SKUs
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -121,53 +123,53 @@ skus:
 ```
 
 #### Mga Katangian
-- **Pagganap**: 70-80% ng kapasidad ng produksyon
-- **Mga Tampok**: Karamihan sa mga tampok ng produksyon ay naka-enable
+- **Pagganap**: 70-80% ng kapasidad ng production
+- **Mga Tampok**: Halos lahat ng tampok ng production ay naka-enable
 - **Redundancy**: May ilang geographic redundancy
-- **Scaling**: Limitadong auto-scaling para sa pagsubok
-- **Monitoring**: Buong monitoring stack
+- **Scaling**: Limitadong auto-scaling para sa testing
+- **Monitoring**: Kumpletong monitoring stack
 
-### Kapaligiran ng Produksyon
+### Production Environment
 
-**Mga Prayoridad**: Pagganap, availability, seguridad, pagsunod sa regulasyon, scalability
+**Mga Prayoridad**: Pagganap, availability, seguridad, pagsunod, scalability
 
-#### Recommended SKUs
+#### Inirerekomendang SKUs
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
 #### Mga Katangian
-- **High availability**: Mga kinakailangan ng SLA na 99.9%+
-- **Pagganap**: Dedicated na mga resources, mataas na throughput
-- **Seguridad**: Premium na mga tampok sa seguridad
-- **Scaling**: Buong kakayahan ng auto-scaling
-- **Monitoring**: Komprehensibong observability
+- **Mataas na availability**: Mga pangangailangan ng 99.9%+ SLA
+- **Pagganap**: Nakalaang mga resources, mataas na throughput
+- **Seguridad**: Mga premium na tampok sa seguridad
+- **Scaling**: Kumpletong kakayahan sa auto-scaling
+- **Monitoring**: Komprehensibong obserbabilidad
 
 ---
 
-## Mga Patnubay para sa Bawat Serbisyo
+## Mga Gabay na Espesipiko sa Serbisyo
 
 ### Azure App Service
 
-#### Matriks ng Desisyon ng SKU
+#### SKU Decision Matrix
 
-| Use Case | Recommended SKU | Rationale |
+| Use Case | Inirerekomendang SKU | Rasyonal |
 |----------|----------------|-----------|
-| Development/Testing | F1 (Free) or B1 (Basic) | Cost-effective, sapat para sa pagsubok |
-| Small production apps | S1 (Standard) | Custom domains, SSL, auto-scaling |
-| Medium production apps | P1V3 (Premium V3) | Mas mahusay na pagganap, mas maraming tampok |
-| High-traffic apps | P2V3 or P3V3 | Dedicated resources, mataas na pagganap |
-| Mission-critical apps | I1V2 (Isolated V2) | Network isolation, dedicated hardware |
+| Development/Testing | F1 (Libre) o B1 (Basic) | Makatipid sa gastos, sapat para sa testing |
+| Maliit na production apps | S1 (Standard) | Custom domains, SSL, auto-scaling |
+| Katamtamang production apps | P1V3 (Premium V3) | Mas mahusay na pagganap, mas maraming tampok |
+| Mga app na may mataas na trapiko | P2V3 o P3V3 | Nakalaang mga resources, mataas na pagganap |
+| Mga app na mission-critical | I1V2 (Isolated V2) | Network isolation, nakalaang hardware |
 
-#### Mga Halimbawa ng Konfigurasyon
+#### Mga Halimbawa ng Configuration
 
 **Development**
 ```bicep
@@ -203,19 +205,19 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### Balangkas para sa Pagpili ng SKU
+#### Framework sa Pagpili ng SKU
 
 1. **DTU-based (Database Transaction Units)**
-   - **Basic**: 5 DTU - Pag-develop/pagsusuri
-   - **Standard**: S0-S12 (10-3000 DTU) - Pangkaraniwang paggamit
-   - **Premium**: P1-P15 (125-4000 DTU) - Performance-critical
+   - **Basic**: 5 DTU - Development/testing
+   - **Standard**: S0-S12 (10-3000 DTU) - Pangkaraniwang gamit
+   - **Premium**: P1-P15 (125-4000 DTU) - Para sa performance-critical
 
-2. **vCore-based** (Inirerekomenda para sa produksyon)
-   - **General Purpose**: Balanseng compute at storage
+2. **vCore-based** (Inirerekomenda para sa production)
+   - **General Purpose**: Balanced na compute at storage
    - **Business Critical**: Mababang latency, mataas na IOPS
-   - **Hyperscale**: Napakalaking scalable na storage (hanggang 100TB)
+   - **Hyperscale**: Lubos na scalable na storage; suriin ang kasalukuyang mga limitasyon sa laki at suporta sa rehiyon
 
-#### Mga Halimbawa ng Konfigurasyon
+#### Mga Halimbawa ng Configuration
 
 ```bicep
 // Development
@@ -252,21 +254,21 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 ### Azure Container Apps
 
-#### Mga Uri ng Kapaligiran
+#### Uri ng Kapaligiran
 
-1. **Consumption-based**
-   - Pay-per-use na pagpepresyo
-   - Angkop para sa pag-develop at mga variable na workload
+1. **Batay sa Konsumo**
+   - Pagpepresyong pay-per-use
+   - Angkop para sa development at mga variable na workload
    - Shared infrastructure
 
-2. **Dedicated (Workload Profiles)**
-   - Nakatuong compute resources
+2. **Dedikado (Mga Profile ng Workload)**
+   - Nakalaang compute resources
    - Predictable na pagganap
-   - Mas angkop para sa mga workload ng produksyon
+   - Mas maganda para sa production workloads
 
-#### Mga Halimbawa ng Konfigurasyon
+#### Mga Halimbawa ng Configuration
 
-**Development (Consumption)**
+**Development (Konsumo)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Production (Dedicated)**
+**Production (Dedikado)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,12 +317,14 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
+
+Kinakailangang mayroon ding supported-region infrastructure at angkop na VNet/subnet configuration para sa zone redundancy, na hindi kasama dito. Ang halimbawa na ito ay naglaan ng tatlong dedikadong nodes; i-configure ang hindi bababa sa dalawang app replicas para sa cross-zone distribution at sukatin pareho ang replicas at nodes para sa failure ng zone. Tingnan ang [Mga gabay sa pagiging maaasahan ng Container Apps](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). Upang ilagay ang isang app sa profile na ito, itakda ang kanyang `workloadProfileName: 'production-profile'`; ang paglikha lamang ng profile ay hindi lilipat ng mga app dito.
 
 ### Azure Cosmos DB
 
@@ -328,18 +332,18 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
 
 1. **Manual Provisioned Throughput**
    - Predictable na pagganap
-   - Mga diskwento para sa reserved capacity
-   - Pinakamainam para sa mga steady workloads
+   - Mga diskwento sa reserved capacity
+   - Pinakamabuti para sa steady workloads
 
 2. **Autoscale Provisioned Throughput**
-   - Awtomatikong nagsa-scale batay sa paggamit
-   - Nagbabayad para sa ginagamit (na may minimum)
-   - Mabuti para sa mga variable na workload
+   - Awtomatikong scaling batay sa paggamit
+   - Bayaran ang ginagamit (na may minimum)
+   - Magandang para sa mga variable na workload
 
 3. **Serverless**
-   - Pay-per-request
+   - Bayad kada request
    - Walang provisioned throughput
-   - Ideal para sa pag-develop at paminsang workload
+   - Ideal para sa development at mga panandaliang workload
 
 #### Mga Halimbawa ng SKU
 
@@ -400,15 +404,15 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 #### Mga Uri ng Storage Account
 
-1. **Standard_LRS** - Pag-develop, hindi kritikal na data
-2. **Standard_GRS** - Produksyon, nangangailangan ng geo-redundancy
-3. **Premium_LRS** - Mga application na nangangailangan ng mataas na pagganap
+1. **Standard_LRS** - Development, hindi kritikal na data
+2. **Standard_GRS** - Production, kailangan ng geo-redundancy
+3. **Premium_LRS** - Mga high-performance na aplikasyon
 4. **Premium_ZRS** - Mataas na availability na may zone redundancy
 
-#### Mga Antas ng Pagganap
+#### Mga Tier ng Pagganap
 
-- **Standard**: General purpose, cost-effective
-- **Premium**: Mataas na pagganap, mababang latency na mga senaryo
+- **Standard**: Pangkaraniwang gamit, cost-effective
+- **Premium**: Mataas na pagganap, low-latency scenarios
 
 ```bicep
 // Development
@@ -453,17 +457,20 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 1. Reserved Capacity
 
-Mag-reserve ng resources para sa 1-3 taon para sa makabuluhang mga diskwento:
+Magpareserba ng mga resources para sa 1-3 taon para sa malalaking diskwento:
 
 ```bash
-# Suriin ang mga pagpipilian sa reserbasyon
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. Right-Sizing
+Ang mga alok sa reservation at mga angkop na uri ng resource ay nag-iiba; suriin ang katalogo at mga termino ng pagbili sa halip na isipin na bawat serbisyo/SKU ay sumusuporta sa reservation.
 
-Magsimula sa mas maliit na mga SKU at mag-scale up batay sa aktwal na paggamit:
+### 2. Tamang Sukat (Right-Sizing)
+
+Magsimula sa mas maliliit na SKU at i-scale pataas base sa aktwal na paggamit:
 
 ```yaml
 # Progressive scaling approach
@@ -479,7 +486,7 @@ production:
 
 ### 3. Auto-Scaling Configuration
 
-Magpatupad ng matalinong scaling upang i-optimize ang gastos:
+Magpatupad ng matalinong scaling upang mai-optimize ang mga gastos:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -538,7 +547,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ### 4. Scheduled Scaling
 
-I-scale down sa mga off-hours:
+Mag-scale down sa mga oras na wala gaanong gamit:
 
 ```json
 {
@@ -583,9 +592,9 @@ I-scale down sa mga off-hours:
 
 ---
 
-## Mga Isinasaalang-alang sa Pagganap
+## Mga Konsiderasyon sa Pagganap
 
-### Pangunahing Kinakailangan sa Pagganap
+### Mga Baseline na Kinakailangan sa Pagganap
 
 Tukuyin ang malinaw na mga kinakailangan sa pagganap bago ang pagpili ng SKU:
 
@@ -603,21 +612,23 @@ performance_requirements:
     rto: "30 minutes"
 ```
 
-### Pagsusuri ng Load
+### Load Testing
 
-Subukan ang iba't ibang SKU upang mapatunayan ang pagganap:
+Subukan ang iba't ibang mga SKU upang ma-validate ang pagganap:
 
 ```bash
-# Serbisyo ng Azure Load Testing
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
-### Pagmamanman at Pag-optimize
+### Monitoring at Optimization
 
-Mag-set up ng komprehensibong pagmamanman:
+Mag-set up ng komprehensibong monitoring:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -644,45 +656,45 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## Mabilis na Sanggunian na Mga Talahanayan
+## Mga Mabilisang Talaan ng Sanggunian
 
-### Mabilis na Sanggunian ng App Service SKU
+### App Service SKU Mabilisang Sanggunian
 
-| SKU | Antas | vCPU | RAM | Storage | Saklaw ng Presyo | Gamit |
+| SKU | Tier | vCPU | RAM | Storage | Saklaw ng Presyo | Use Case |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | Free | Shared | 1GB | 1GB | Free | Pag-develop |
+| F1 | Libre | Shared | 1GB | 1GB | Libre | Development |
 | B1 | Basic | 1 | 1.75GB | 10GB | $ | Maliit na apps |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Produksyon |
+| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Production |
 | P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Mataas na pagganap |
 | I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Enterprise |
 
-### Mabilis na Sanggunian ng SQL Database SKU
+### SQL Database SKU Mabilisang Sanggunian
 
-| SKU | Antas | DTU/vCore | Storage | Saklaw ng Presyo | Gamit |
+| SKU | Tier | DTU/vCore | Storage | Saklaw ng Presyo | Use Case |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Pag-develop |
-| S2 | Standard | 50 DTU | 250GB | $$ | Maliit na produksyon |
+| Basic | Basic | 5 DTU | 2GB | $ | Development |
+| S2 | Standard | 50 DTU | 250GB | $$ | Maliit na production |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Mataas na pagganap |
 | GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Balanseng gamit |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Kritikal sa misyon |
+| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Mission-critical |
 
-### Mabilis na Sanggunian ng Container Apps SKU
+### Container Apps SKU Mabilisang Sanggunian
 
-| Model | Pricing | CPU/Memory | Gamit |
+| Modelo | Pagpepresyo | CPU/Memorya | Use Case |
 |-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | Pag-develop, variable na load |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | Produksyon |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | Mataas na pagganap |
+| Konsumo | Pay-per-use | Ang mga suportadong kumbinasyon ng CPU/memorya ay nakadepende sa kapaligiran/profile | Development o production, variable load |
+| Dedikado D4 | Dedicated node billing | 4 vCPU, 16GiB bawat node | Sustained load/isolation needs |
+| Dedikado D8 | Dedicated node billing | 8 vCPU, 32GiB bawat node | Mas mataas na sustained load |
 
 ---
 
-## Mga Tool sa Pagpapatunay
+## Mga Kasangkapan sa Pag-validate
 
 ### SKU Availability Checker
 
 ```bash
 #!/bin/bash
-# Suriin ang pagkakaroon ng SKU sa target na rehiyon
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# Paggamit
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### Cost Estimation Script
+### Script sa Pagtataya ng Gastos
+
+**Pseudocode lamang:** Ang `Get-ResourceCost` sa ibaba ay isang project-specific na function na kailangang mong ipatupad gamit ang kasalukuyang regional/contract pricing at mga palagay sa paggamit. Hindi ito isang PowerShell o Azure cmdlet.
 
 ```powershell
-# PowerShell script para sa pagtatantya ng gastos
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Gamitin ang Azure Pricing API o calculator
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# Paggamit
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -748,7 +763,9 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### Performance Validation
+### Pag-validate ng Pagganap
+
+Ang sumusunod na YAML ay isang balangkas ng mga pangangailangan, **hindi** isang input schema para sa Azure Load Testing, JMeter, Locust, o k6. Isalin ito sa totoong configuration ng iyong napiling kasangkapan bago gamitin ang load-test command sa itaas.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -787,39 +804,39 @@ test_configuration:
 
 ### Mga Dapat Gawin
 
-1. **Magsimula ng maliit at mag-scale up** batay sa aktwal na paggamit
-2. **Gumamit ng iba't ibang SKUs para sa iba't ibang kapaligiran**
-3. **Subaybayan ang pagganap at mga gastos nang patuloy**
-4. **Samantalahin ang reserved capacity para sa mga workload ng produksyon**
-5. **Magpatupad ng auto-scaling kung angkop**
-6. **Subukan ang pagganap gamit ang makatotohanang mga workload**
-7. **Magplano para sa paglago ngunit iwasan ang over-provisioning**
-8. **Gamitin ang mga free tier para sa pag-develop kapag posible**
+1. **Magsimula sa maliit at mag-scale pataas** base sa aktwal na paggamit
+2. **Gumamit ng iba't ibang SKU para sa iba't ibang kapaligiran**
+3. **Patuloy na i-monitor ang pagganap at mga gastos**
+4. **Samantalahin ang reserved capacity para sa mga production workload**
+5. **Magpatupad ng auto-scaling kung saan naaangkop**
+6. **Subukin ang pagganap gamit ang makatotohanang mga workload**
+7. **Magplano para sa paglago ngunit iwasan ang sobra-sobrang provisioning**
+8. **Gamitin ang mga libreng tier para sa development kung maaari**
 
-### Mga Huwag Gawin
+### Mga Hindi Dapat Gawin
 
-1. **Huwag gumamit ng production SKUs para sa pag-develop**
-2. **Huwag balewalain ang availability ng SKU ayon sa rehiyon**
+1. **Huwag gumamit ng production SKUs para sa development**
+2. **Huwag balewalain ang availability ng SKU sa rehiyon**
 3. **Huwag kalimutan ang mga gastos sa data transfer**
-4. **Huwag mag-over-provision nang walang katwiran**
-5. **Huwag balewalain ang epekto ng mga dependency**
-6. **Huwag itakda ang mga limitasyon ng auto-scaling nang masyadong mataas**
-7. **Huwag kalimutan ang mga kinakailangan sa pagsunod sa regulasyon**
-8. **Huwag gumawa ng mga desisyon batay sa presyo lamang**
+4. **Huwag mag-over-provision nang walang sapat na dahilan**
+5. **Huwag ipagsawalang-bahala ang epekto ng mga dependencies**
+6. **Huwag itakda nang sobrang taas ang mga limitasyon sa auto-scaling**
+7. **Huwag kalimutan ang mga pangangailangan sa pagsunod**
+8. **Huwag gumawa ng mga desisyon base lamang sa presyo**
 
 ---
 
-**Tip**: Gamitin ang Azure Cost Management at Advisor para makakuha ng mga personalisadong rekomendasyon sa pag-optimize ng iyong mga pagpili ng SKU batay sa aktwal na mga pattern ng paggamit.
+**Pro Tip**: Gamitin ang Azure Cost Management at Advisor upang makakuha ng mga personalisadong rekomendasyon para sa pag-optimize ng iyong mga pagpili ng SKU base sa aktwal na mga pattern ng paggamit.
 
 ---
 
 **Pag-navigate**
-- **Nakaraang Leksyon**: [Pagpaplano ng Kapasidad](capacity-planning.md)
-- **Susunod na Leksyon**: [Paunang Pagsusuri](preflight-checks.md)
+- **Nakaraang Aralin**: [Capacity Planning](capacity-planning.md)
+- **Susunod na Aralin**: [Preflight Checks](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Paunawa:
-Ang dokumentong ito ay isinalin gamit ang serbisyong AI na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa kanyang likas na wika ang dapat ituring na pinagmumulan ng awtoridad. Para sa mga kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasaling ginawa ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

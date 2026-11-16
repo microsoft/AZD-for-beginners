@@ -1,280 +1,133 @@
-# 3. Deconstruct a Template
+# 3. Tulkitse mallipohja
 
-!!! tip "TÄMÄN MODUULIN LOPPUUN MENNESSÄ OSAAT"
+!!! tip "TÄMÄN MODUULIN PÄÄTTYESSÄ OSAA SEURAAVANLAISET ASIAT"
 
-    - [ ] Activate GitHub Copilot with MCP servers for Azure assistance
-    - [ ] Understand the AZD template folder structure and components
-    - [ ] Explore infrastructure-as-code (Bicep) organization patterns
-    - [ ] **Lab 3:** Käytä GitHub Copilotia tutkiaksesi ja ymmärtääksesi repositorion arkkitehtuuria 
-
----
-
-
-With AZD templates and the Azure Developer CLI (`azd`) we can quickly jumpstart our AI development journey with standardized repositories that provide sample code, infrastructure and configuration files - in the form of a ready-to-deploy _starter_ project.
-
-**But now, we need to understand the project structure and codebase - and be able to customize the AZD template - without any prior experience or understanding of AZD!**
+    - [ ] Use GitHub Copilot and optional MCP tools for Azure documentation and read-only exploration
+    - [ ] Identify the template's application, infrastructure, configuration, and test entry points
+    - [ ] Verify generated explanations against actual repository files
+    - [ ] **Lab 3:** Trace one request and one configuration input through the project
 
 ---
 
-## 1. Activate GitHub Copilot
+## 1. Ota GitHub Copilot käyttöön
 
-### 1.1 Install GitHub Copilot Chat
+Avaa alustettu AI-esimerkki VS Codessa ja ota käyttöön [GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Kirjaudu sisään tilillä, jolla on kelvollinen suunnitelma; käyttörajoitukset vaihtelevat. Pyydä Copilotia selittämään repositorio ennen muutosten hyväksymistä.
 
-It's time to explore [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we can use natural language to describe our task at a high level, and get assistance in execution. For this lab, we'll use the [Copilot Free plan](https://github.com/github-copilot/signup) which has a monthly limit for completions and chat interactions.
+### Valinnaiset MCP-palvelimet
 
-The extension can be installed from the marketplace, and it is often already available in Codespaces or dev container environments. _Click `Open Chat` from the Copilot icon drop-down - and type a prompt like `What can you do?`_ - you may be prompted to log in. **GitHub Copilot Chat is ready**.
+Nämä palvelut voivat tarjota lisätyökaluja:
 
-### 1.2. Install MCP Servers
+- [Azure MCP Server](https://learn.microsoft.com/azure/developer/azure-mcp-server/overview)
+- [Microsoft Learn MCP Server](https://learn.microsoft.com/training/support/mcp)
 
-For Agent mode to be effective, it needs access to the right tools to help it retrieve knowledge or take actions. This is where MCP servers can help. We'll configure the following servers:
+VS Codessa käy läpi [MCP-konfigurointiopas](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) ja luo `.vscode/mcp.json` tarvittaessa:
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+```json
+{
+  "servers": {
+    "Azure MCP Server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"]
+    },
+    "microsoft.docs.mcp": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
 
-To activate these:
+`npx`-komento vaatii tuetun Node.js/npm-asennuksen ja lataa suoritettavan koodin. Tarkista paketti ja lukitse hyväksytty versio toistettavaa tiimin asetusta varten. Käynnistä palvelimet VS Coden MCP-ohjaimilla ja tarkastele niiden käytettävissä olevia työkaluja; nimet voivat muuttua versioiden välillä.
 
-1. Create a file called `.vscode/mcp.json` if it does not exist
-1. Copy the following into that file - and start the servers!
-   ```json title=".vscode/mcp.json"
-   {
-      "servers": {
-         "Azure MCP Server": {
-            "command": "npx",
-            "args": [
-            "-y",
-            "@azure/mcp@latest",
-            "server",
-            "start"
-            ]
-         },
-         "microsoft.docs.mcp": {
-            "type": "http",
-            "url": "https://learn.microsoft.com/api/mcp"
-         }
-      }
-   }
-   ```
+**Todennus on erillinen.** Käytä AZD:n `azd auth login`-komentoa. Noudata Azure MCP:n dokumentoitua todennusprosessia sen työkaluissa; pelkkä AZD-kirjautuminen ei luo MCP-istuntoa. Käytä `az login` erikseen, kun harjoitus tai koukku kutsuu Azure CLI:tä.
 
-??? warning "Saatat saada virheilmoituksen, että `npx` ei ole asennettuna (laajenna nähdäksesi korjauksen)"
+Kokeile lukuoikeudella toimivia kehotteita:
 
-      Korjataksesi tämän, avaa `.devcontainer/devcontainer.json`-tiedosto ja lisää tämä rivi features-osioon. Rakenna sitten säiliö uudelleen. Sinulla pitäisi nyt olla `npx` asennettuna.
+1. "Käytä Microsoft Learn MCP:tä löytääksesi Azure Developer CLI:n konfigurointidokumentaation."
+2. "Selitä tämän repositorion `azure.yaml`; mainitse tiedostot, jotka toteuttavat kukin koukun."
+3. "Käytä saatavilla olevia Azure MCP -työkaluja ja listaa käyttöönotetut resurssini muuttamatta mitään."
 
-      ```title="" linenums="0"
-         "features": {
-            "ghcr.io/devcontainers/features/node:1": {},
-            ...
-         },
-      ```
+Tarkista valittu vuokraaja/tilaus ja jokainen ehdotettu työkalukutsu. Älä hyväksy resurssien luontia, poistoa tai käyttöoikeusmuutoksia pelkästään arkkitehtuurin tutkimiseksi.
 
----
+## 2. Ymmärrä arkkitehtuuri
 
-### 1.3. Test GitHub Copilot Chat
+Esimerkissä on Python FastAPI -backend ja React/TypeScript-frontend Azure Container Appsissa. Backend kommunikoi agentin kanssa Microsoft Foundry -projektissa. Tietojen hakeminen ja havaittavuus riippuvat mallipohjan ominaisuuksien käytöstä ja onnistuneesta asennuksesta; niitä ei taata vain siksi, että sovellus on otettu käyttöön.
 
-**First use `azd auth login` to authenticate with Azure from the VS Code command line. Use `az login` as well only if you plan to run Azure CLI commands directly.**
+![Havainnollistava arkkitehtuuri](../../../../../translated_images/fi/architecture.8cec470ec15c65c7.webp)
 
-You should now be able to query your Azure subscription status, and ask questions about deployed resources or configuration. Try these prompts:
+Vertaa tätä kaaviota [nykyiseen upstream-käyttöönotto-oppaaseen](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) ja omiin resursseihisi. Tarkista konfiguroitu mallin käyttöönotto, agenttityökalut, hallittu identiteetti, roolijako, ja valinnaiset AI Search/Application Insights -resurssit.
 
-1. `List my Azure resource groups`
-1. `#foundry list my current deployments`
+**Harjoitus:** Pyydä Copilotia jäljittämään chat-pyyntö front-endistä API:n kautta Foundryyn, tiedosto- ja funktioviitteineen. Avaa viitteet ja varmista selitys. Älä päättele toteutettua todennusta, reititystä tai valtuutusta pelkästään kaaviosta.
 
-You can also ask questions about Azure documentation and get responses grounded in the Microsoft Docs MCP server. Try these prompts:
+## 3. Repositorion rakenne
 
-1. `#microsoft_docs_search What is Azure Developer CLI?`
-1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
+Seuraavat valitut polut tarkastettiin esimerkin mukaisesti 4. marraskuuta 2026. Alustettu versiosi on totuuden lähde:
 
-Or you can ask for code snippets to complete a task. Try this prompt.
+```text
+get-started-with-ai-agents/
+  azure.yaml
+  docker-compose.yaml
+  requirements-dev.txt
+  .devcontainer/
+  infra/
+    main.bicep
+    main.parameters.json
+    api.bicep
+    core/
+  src/
+    Dockerfile
+    pyproject.toml
+    requirements.txt
+    api/
+      main.py
+      routes.py
+      search_index_manager.py
+    frontend/
+      package.json
+      src/
+    files/
+  scripts/
+    validate_env_vars.sh
+    validate_env_vars.ps1
+    postdeploy.sh
+    postdeploy.ps1
+  tests/
+    test_evaluation.py
+    test_red_teaming.py
+  docs/
+    deployment.md
+    deploy_customization.md
+    ai_search.md
+    observability.md
+    local_development.md
+    troubleshooting.md
+```
 
-1. `Give me a Python code example that uses AAD for an interactive chat client`
+### Infrastruktuuri ja konfiguraatio
 
-In `Ask` mode, this will provide code that you can copy-paste and try out. In `Agent` mode, this might go a step further and create the relevant resources for you - including setup scripts and documentation - to help you execute that task.
+`infra/main.bicep` orkestroi resursseja; `main.parameters.json` yhdistää mallipohjan syötteet AZD-ympäristöarvoihin. `azure.yaml` valitsee sovelluspalvelun ja elinkaarikoukut. Jäljitä syöte kuten `USE_AZURE_AI_SEARCH_SERVICE` näiden tiedostojen läpi löytääksesi, mikä todellisuudessa muuttuu.
 
-**You are now equipped to start exploring the template repository**
+### Sovellus ja identiteetti
 
----
+Lue `src/api/` ja `src/frontend/` yhdessä. Tunnista, missä agentti luodaan tai haetaan, missä ohjeet/työkalut konfiguroidaan, ja mitä identiteettiä kukin Azure-kutsu käyttää. `src/files/`-kansion alle sijoitetut esimerkkitiedostot ovat demonstraatiodataa, eivät tuotantokatalogi tai valtuutusmalli.
 
-## 2. Deconstruct Architecture
+### Testit ja havaittavuus
 
-??? prompt "KYSYMYS: Selitä sovelluksen arkkitehtuuri tiedostossa docs/images/architecture.png yhdellä kappaleella"
+Nykyiset arviointi- ja red-teaming-päätepisteet ovat `tests/`-kansiossa; vanhat `evals/` ja `airedteaming/` polkuviitteet ovat vanhentuneita tässä esimerkissä. Lue `docs/observability.md` edellytykset ja kustannukset ennen pilvitestien suorittamista. Nämä Python-testit ovat erillään valinnaisesta `azure.ai.evaluations` AZD-laajennuksesta.
 
-      Tämä sovellus on Azureen rakennettu tekoälyllä tehostettu chat-sovellus, joka havainnollistaa modernia agenttipohjaista arkkitehtuuria. Ratkaisun keskiössä on Azure Container App, joka isännöi pääsovelluskoodia; se käsittelee käyttäjän syötteitä ja tuottaa älykkäitä vastauksia tekoälyagentin avulla. 
-      
-      Arkkitehtuuri hyödyntää Microsoft Foundry Projectia tekoälykyvykkyyksien perustana ja yhdistää Azure AI Services -palveluihin, jotka tarjoavat taustalla olevat kielimallit (kuten gpt-4.1-mini) ja agenttitoiminnot. Käyttäjän vuorovaikutus kulkee React-pohjaisesta käyttöliittymästä FastAPI-backendiin, joka kommunikoi tekoälyagenttipalvelun kanssa tuottaakseen kontekstuaalisia vastauksia. 
-      
-      Järjestelmä sisältää tiedonhakutoiminnallisuuksia joko tiedostohakuina tai Azure AI Search -palvelun kautta, jolloin agentti voi käyttää ja viitata ladattuihin dokumentteihin. Operatiivisen erinomaisuuden vuoksi arkkitehtuuriin kuuluu kattava monitorointi Application Insightsin ja Log Analytics Workspacen kautta seurantaa, lokitusta ja suorituskyvyn optimointia varten. 
-      
-      Azure Storage tarjoaa blob-tallennustilan sovellustiedoille ja tiedostolatauksille, ja Managed Identity varmistaa turvallisen pääsyn Azure-resurssien välillä ilman salasanojen tallentamista. Koko ratkaisu on suunniteltu skaalautuvaksi ja ylläpidettäväksi, ja kontitettua sovellusta skaalaataan automaattisesti kysynnän mukaan tarjoten samalla sisäänrakennetun tietoturvan, monitoroinnin ja CI/CD-ominaisuudet Azuren hallitun palveluympäristön kautta.
+## 4. Varmista löydöksesi
 
-![Arkkitehtuuri](../../../../../translated_images/fi/architecture.48d94861e6e6cdc0.webp)
+- Tunnista API-reitti, agenttiliikenne ja hakukoodi yhdelle esimerkkikysymykselle.
+- Selitä, mikä identiteetti pääsee Foundryyn ja mikä konfiguraatio valitsee sen päätepisteen.
+- Löydä todelliset pre-up- ja post-deploy-skriptit ja niiden virheenkäsittely.
+- Listaa kaikki riippuvuudet tai valinnaiset ominaisuudet, joita asennuksestasi puuttuu.
 
----
-
-## 3. Repository Structure
-
-!!! prompt "KYSYMYS: Selitä mallihakemiston rakenne. Aloita visuaalisella hierarkkisella kaaviolla."
-
-??? info "VASTAUS: Visuaalinen hierarkkinen kaavio"
-
-      ```bash title="" 
-      get-started-with-ai-agents/
-      ├── 📋 Konfigurointi ja asennus
-      │   ├── azure.yaml                    # Azure Developer CLI -konfiguraatio
-      │   ├── docker-compose.yaml           # Paikalliset kehityskontit
-      │   ├── pyproject.toml                # Python-projektin konfiguraatio
-      │   ├── requirements-dev.txt          # Kehitysriippuvuudet
-      │   └── .devcontainer/                # VS Code devcontainer-asetukset
-      │
-      ├── 🏗️ Infrastruktuuri (infra/)
-      │   ├── main.bicep                    # Pääinfrastruktuurimalli
-      │   ├── api.bicep                     # API-kohtaiset resurssit
-      │   ├── main.parameters.json          # Infrastruktuurin parametrit
-      │   └── core/                         # Modulaariset infrastruktuurikomponentit
-      │       ├── ai/                       # AI-palvelujen määritykset
-      │       ├── host/                     # Isännöintiin liittyvä infrastruktuuri
-      │       ├── monitor/                  # Valvonta ja lokitus
-      │       ├── search/                   # Azure AI Search -asetukset
-      │       ├── security/                 # Tietoturva ja identiteetti
-      │       └── storage/                  # Tallennustilin asetukset
-      │
-      ├── 💻 Sovelluksen lähdekoodi (src/)
-      │   ├── api/                          # Backend-API
-      │   │   ├── main.py                   # FastAPI-sovelluksen lähtöpiste
-      │   │   ├── routes.py                 # API-reittien määrittelyt
-      │   │   ├── search_index_manager.py   # Hakutoiminnallisuus
-      │   │   ├── data/                     # API:n datankäsittely
-      │   │   ├── static/                   # Staattiset web-resurssit
-      │   │   └── templates/                # HTML-mallit
-      │   ├── frontend/                     # React/TypeScript-käyttöliittymä
-      │   │   ├── package.json              # Node.js-riippuvuudet
-      │   │   ├── vite.config.ts            # Vite-rakennuskonfiguraatio
-      │   │   └── src/                      # Frontendin lähdekoodi
-      │   ├── data/                         # Esimerkkidata
-      │   │   └── embeddings.csv            # Ennakkoon lasketut embeddingit
-      │   ├── files/                        # Tietopohjan tiedostot
-      │   │   ├── customer_info_*.json      # Asiakasdatan esimerkit
-      │   │   └── product_info_*.md         # Tuotedokumentaatio
-      │   ├── Dockerfile                    # Konttikonfiguraatio
-      │   └── requirements.txt              # Python-riippuvuudet
-      │
-      ├── 🔧 Automaatio & skriptit (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Jälkiasennuksen määritykset
-      │   ├── setup_credential.sh/.ps1     # Tunnistetietojen asetukset
-      │   ├── validate_env_vars.sh/.ps1    # Ympäristömuuttujien tarkastus
-      │   └── resolve_model_quota.sh/.ps1  # Mallien määrärajojen hallinta
-      │
-      ├── 🧪 Testaus & arviointi
-      │   ├── tests/                        # Yksikkö- ja integraatiotestit
-      │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Agentin arviontikehys
-      │   │   ├── evaluate.py               # Arvioinnin ajaja
-      │   │   ├── eval-queries.json         # Testikyselyt
-      │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Kehitysalusta
-      │   │   ├── 1-quickstart.py           # Aloittamis-esimerkit
-      │   │   └── aad-interactive-chat.py   # Autentikointiesimerkit
-      │   └── airedteaming/                 # AI-turvallisuuden arviointi
-      │       └── ai_redteaming.py          # Red-tiimin testaus
-      │
-      ├── 📚 Dokumentaatio (docs/)
-      │   ├── deployment.md                 # Käyttöönotto-opas
-      │   ├── local_development.md          # Paikallisen kehityksen ohjeet
-      │   ├── troubleshooting.md            # Yleisimmät ongelmat ja korjaukset
-      │   ├── azure_account_setup.md        # Azure-esivaatimukset
-      │   └── images/                       # Dokumentaation resurssit
-      │
-      └── 📄 Projektin metatiedot
-         ├── README.md                     # Projektin yleiskatsaus
-         ├── CODE_OF_CONDUCT.md           # Yhteisön ohjeet
-         ├── CONTRIBUTING.md              # Ohjeet osallistumiseen
-         ├── LICENSE                      # Lisenssiehdot
-         └── next-steps.md                # Jälkiasennuksen ohjeet
-      ```
-
-### 3.1. Core App Architecture
-
-This template follows a **full-stack web application** pattern with:
-
-- **Backend**: Python FastAPI with Azure AI integration
-- **Frontend**: TypeScript/React with Vite build system
-- **Infrastructure**: Azure Bicep templates for cloud resources
-- **Containerization**: Docker for consistent deployment
-
-### 3.2 Infra As Code (bicep)
-
-The infrastructure layer uses **Azure Bicep** templates organized modularly:
-
-   - **`main.bicep`**: Orchestrates all Azure resources
-   - **`core/` modules**: Reusable components for different services
-      - AI services (Microsoft Foundry Models, AI Search)
-      - Container hosting (Azure Container Apps)
-      - Monitoring (Application Insights, Log Analytics)
-      - Security (Key Vault, Managed Identity)
-
-### 3.3 Application Source (`src/`)
-
-**Backend API (`src/api/`)**:
-
-- FastAPI-based REST API
-- Foundry Agents integration
-- Search index management for knowledge retrieval
-- File upload and processing capabilities
-
-**Frontend (`src/frontend/`)**:
-
-- Modern React/TypeScript SPA
-- Vite for fast development and optimized builds
-- Chat interface for agent interactions
-
-**Knowledge Base (`src/files/`)**:
-
-- Sample customer and product data
-- Demonstrates file-based knowledge retrieval
-- JSON and Markdown format examples
-
-
-### 3.4 DevOps & Automation
-
-**Scripts (`scripts/`)**:
-
-- Cross-platform PowerShell and Bash scripts
-- Environment validation and setup
-- Post-deployment configuration
-- Model quota management
-
-**Azure Developer CLI Integration**:
-
-- `azure.yaml` configuration for `azd` workflows
-- Automated provisioning and deployment
-- Environment variable management
-
-### 3.5 Testing & Quality Assurance
-
-**Evaluation Framework (`evals/`)**:
-
-- Agent performance evaluation
-- Query-response quality testing
-- Automated assessment pipeline
-
-**AI Safety (`airedteaming/`)**:
-
-- Red team testing for AI safety
-- Security vulnerability scanning
-- Responsible AI practices
-
----
-
-## 4. Congratulations 🏆
-
-You successfully used GitHub Copilot Chat with MCP servers, to explore the repository.
-
-- [X] GitHub Copilot aktivoitu Azurea varten
-- [X] Ymmärsit sovelluksen arkkitehtuurin
-- [X] Tutustuit AZD-mallin rakenteeseen
-
-This gives you a sense of the _infrastructure as code_ assets for this template. Next, we'll look at the configuration file for AZD.
+Jatka [Configure a Template](4-Configure-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, tulee huomioida, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä on pidettävä määräävänä lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virhetulkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,22 +1,22 @@
-# Chương 4: Hạ tầng dưới dạng Mã & Triển khai
+# Chương 4: Hạ Tầng Dưới Dạng Mã & Triển Khai
 
-**📚 Khóa học**: [AZD For Beginners](../../README.md) | **⏱️ Thời lượng**: 1-1.5 giờ | **⭐ Độ khó**: Trung cấp
+**📚 Khóa học**: [AZD Cho Người Mới Bắt Đầu](../../README.md) | **⏱️ Thời gian**: 2-3 giờ đọc; dành thêm thời gian cho bài tập triển khai | **⭐ Độ khó**: Trung cấp
 
 ---
 
 ## Tổng quan
 
-Chương này trình bày các mẫu Hạ tầng dưới dạng Mã (IaC) với các mẫu Bicep, cấp phát tài nguyên và chiến lược triển khai sử dụng Azure Developer CLI.
+Chương này bao gồm các mẫu Hạ Tầng dưới dạng Mã (IaC) với template Bicep, cấp phát tài nguyên và chiến lược triển khai sử dụng Azure Developer CLI.
 
-> Đã xác thực với `azd 1.27.1` vào tháng 7 năm 2026.
+> Mục tiêu xem xét lệnh và cấu hình: `azd 1.37.2` (Tháng 11 năm 2026). Không chạy cấp phát Azure trực tiếp trong quá trình xem xét.
 
 ## Mục tiêu học tập
 
 Sau khi hoàn thành chương này, bạn sẽ:
-- Hiểu được cấu trúc và cú pháp mẫu Bicep
+- Hiểu cấu trúc và cú pháp template Bicep
 - Cấp phát tài nguyên Azure với `azd provision`
 - Triển khai ứng dụng với `azd deploy`
-- Thực hiện các chiến lược triển khai xanh-lục và triển khai lăn
+- Thực hiện chiến lược triển khai xanh-xanh và tuần tự
 
 ---
 
@@ -24,28 +24,31 @@ Sau khi hoàn thành chương này, bạn sẽ:
 
 | # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Cấp phát tài nguyên](provisioning.md) | Quản lý tài nguyên Azure với AZD | 45 phút |
-| 2 | [Hướng dẫn triển khai](deployment-guide.md) | Chiến lược triển khai ứng dụng | 45 phút |
-| 3 | [Tạo mẫu tự thiết kế](custom-templates.md) | Xây dựng và xuất bản mẫu azd tái sử dụng | 30 phút |
+| 1 | [Cấp phát Tài nguyên](provisioning.md) | Quản lý tài nguyên Azure với AZD | 45 phút |
+| 2 | [Hướng dẫn Triển khai](deployment-guide.md) | Chiến lược triển khai ứng dụng | 45 phút |
+| 3 | [Tạo Template Riêng của Bạn](custom-templates.md) | Xây dựng và xuất bản template azd tái sử dụng | 30 phút |
 
 ---
 
-## 🚀 Bắt đầu nhanh
+## 🚀 Bắt đầu Nhanh
 
 ```bash
-# Khởi tạo từ mẫu
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Xem trước những gì sẽ được tạo
+# Preview what will be created
 azd provision --preview
 
-# Chỉ cung cấp hạ tầng
+# Provision infrastructure only
 azd provision
 
-# Chỉ triển khai mã
+# Deploy code only
 azd deploy
 
-# Hoặc cả hai cùng nhau
+# Or both together
 azd up
 ```
 
@@ -68,7 +71,7 @@ my-project/
 
 ---
 
-## 🔧 Các lệnh thiết yếu
+## 🔧 Lệnh Cơ bản
 
 | Lệnh | Mô tả |
 |---------|-------------|
@@ -85,15 +88,15 @@ my-project/
 | Hướng | Chương |
 |-----------|---------|
 | **Trước** | [Chương 3: Cấu hình](../chapter-03-configuration/README.md) |
-| **Tiếp** | [Chương 5: Giải pháp đa tác nhân](../chapter-05-multi-agent/README.md) |
+| **Tiếp** | [Chương 5: Giải pháp Đa Tác nhân](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Tài nguyên liên quan
+## 📖 Tài nguyên Liên quan
 
-- [Kiểm tra trước triển khai](../chapter-06-pre-deployment/README.md)
+- [Kiểm tra Trước Triển khai](../chapter-06-pre-deployment/README.md)
 - [Ví dụ Ứng dụng Container](../../examples/container-app/README.md)
-- [Ví dụ Ứng dụng Cơ sở dữ liệu](../../examples/database-app/README.md)
+- [Ví dụ Ứng dụng Cơ sở Dữ liệu](../../examples/database-app/README.md)
 
 ---
 

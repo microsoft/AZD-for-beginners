@@ -1,49 +1,51 @@
-# 第2章：AIファースト開発
+# 第2章: AIファースト開発
 
-**📚 コース**: [初心者向けAZD](../../README.md) | **⏱️ 所要時間**: 1-2時間 | **⭐ 難易度**: 中級
+**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: ワークショップ含む4〜5時間 | **⭐ 難易度**: 中級
 
 ---
 
 ## 概要
 
-本章では、Azure Developer CLI と Microsoft Foundry サービスを使ったAI搭載アプリケーションのデプロイに焦点を当てます。シンプルなAIチャットアプリからツールを備えたインテリジェントエージェントまで。
+本章では、Azure Developer CLIとMicrosoft Foundryサービスを利用したAI搭載アプリケーションの展開に焦点を当てます。シンプルなAIチャットアプリから、ツールを備えたインテリジェントエージェントまで。
 
-> **検証メモ (2026-07-13):** 本章のコマンドフローと拡張機能の指示は `azd` `1.27.1` と、現在のプレビュー版AIエージェント拡張 `azure.ai.agents` `1.0.0-beta.5` に基づいてレビューされています。旧バージョンのAZDを使用している場合は、最初にアップデートしてから演習を進めてください。
+> **リリースレビュー (2026-11-04):** AI CLIガイダンスは公開されている`azd` `1.37.2`、`azure.ai.agents` `1.0.0-beta.23`、および`azure.ai.evaluations` `1.0.0-beta.2`のドキュメント/ソースと照合されました。統合ワークフローには`azd >= 1.37.0`を使用してください。評価は現在別の`azd ai eval`ネームスペースを使用しています；詳細は[リリースの変更点と移行ガイダンス](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes)を参照してください。これはライブ展開の検証ではありません。
 
 ## 学習目標
 
 本章を修了すると、以下ができるようになります：
-- 事前構築されたAZDテンプレートを使ってAIアプリケーションをデプロイする
-- Microsoft FoundryとAZDの統合を理解する
-- ツールを備えたAIエージェントの設定とカスタマイズを行う
-- RAG（検索拡張生成）アプリケーションをデプロイする
+- 事前構築されたAZDテンプレートを使ったAIアプリケーションの展開
+- AZDとMicrosoft Foundry統合の理解
+- ツールを備えたAIエージェントの設定とカスタマイズ
+- RAG（Retrieval-Augmented Generation）アプリケーションの展開
 
 ---
 
 ## 📚 レッスン
 
-| # | レッスン | 説明 | 所要時間 |
+| # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry 統合](microsoft-foundry-integration.md) | FoundryサービスとAZDの接続 | 30分 |
-| 2 | [AIエージェントガイド](agents.md) | ツール付きインテリジェントエージェントのデプロイ | 45分 |
-| 3 | [AIモデルのデプロイ](ai-model-deployment.md) | AIモデルのデプロイと設定 | 30分 |
-| 4 | [AIワークショップ・ラボ](ai-workshop-lab.md) | ハンズオン：AIソリューションをAZD対応にする | 60分 |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZDとFoundryサービスの接続 | 30分 |
+| 2 | [AI Agents Guide](agents.md) | ツールを備えたインテリジェントエージェントの展開 | 45分 |
+| 3 | [AI Model Deployment](ai-model-deployment.md) | AIモデルの展開と設定 | 30分 |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | 実践：テンプレートを探検し変換計画を立てる | 2〜3時間 |
 
 ---
 
 ## 🚀 クイックスタート
 
+新しい空のディレクトリでいずれかのオプションを選択してください。末尾の`.`は現在のディレクトリを初期化します；それ以外の方法では、AZDがシェルの作業ディレクトリを変更せずにサブディレクトリを作成します。
+
 ```bash
-# オプション1：RAGチャットアプリケーション
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# オプション2：AIエージェント
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# オプション3：クイックチャットアプリ
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
@@ -59,7 +61,9 @@ azd up
 
 ---
 
-## 💰 コスト意識
+## 💰 コストに関する注意
+
+これらは例示的な範囲であり、見積価格や上限ではありません。モデルトラフィック、Search/コンピュートSKU、地域、任意の機能によりこれらを超える場合があります。プロビジョニング前に、選択したサンプルの最新の価格ガイダンスを確認してください。
 
 | 環境 | 推定月額コスト |
 |-------------|----------------------|
@@ -67,7 +71,7 @@ azd up
 | ステージング | $150-300 |
 | 本番 | $300-3,500+ |
 
-**ヒント:** テスト後はコストを避けるために `azd down` を実行してください。
+**ヒント:** テスト後は料金を避けるために`azd down`を実行してください。
 
 ---
 
@@ -75,16 +79,16 @@ azd up
 
 | 方向 | 章 |
 |-----------|---------|
-| <strong>前章</strong> | [第1章：基礎](../chapter-01-foundation/README.md) |
-| <strong>次章</strong> | [第3章：設定](../chapter-03-configuration/README.md) |
-| <strong>スキップ</strong> | [第8章：本番環境のパターン](../chapter-08-production/README.md) |
+| <strong>前へ</strong> | [Chapter 1: Foundation](../chapter-01-foundation/README.md) |
+| <strong>次へ</strong> | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
+| <strong>スキップ</strong> | [Chapter 8: Production Patterns](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 関連リソース
 
-- [AIトラブルシューティング](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [本番AIプラクティス](../chapter-08-production/production-ai-practices.md)
+- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

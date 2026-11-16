@@ -1,22 +1,22 @@
-# 4. peatükk: infrastruktuur kui kood & juurutamine
+# 4. peatükk: Infrastruktuur kui kood ja juurutamine
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 1-1,5 tundi | **⭐ Raskeusaste**: Kesktase
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2-3 tundi lugemist; varu juurutusharjutusteks lisaaega | **⭐ Keerukus**: Kesktase
 
 ---
 
 ## Ülevaade
 
-Selles peatükis käsitletakse infrastruktuuri kui koodi (IaC) mustreid Bicep mallide abil, ressursside loomist ja juurutamisstrateegiaid Azure Developer CLI kasutades.
+Selles peatükis käsitletakse infrastruktuuri kui koodi (IaC) mustreid Bicep mallide, ressursside provisjoneerimise ja juurutusstrateegiate abil Azure Developer CLI-ga.
 
-> Kontrollitud versiooniga `azd 1.27.1` juulis 2026.
+> Käsu- ja konfiguratsioonikontrolli siht: `azd 1.37.2` (november 2026). Azure’i live-provisjoneerimist kontrollimisel ei tehtud.
 
 ## Õpieesmärgid
 
-Selle peatüki läbimisel:
+Selle peatüki lõpuks:
 - Mõistad Bicep malli struktuuri ja süntaksit
-- Loome Azure ressursse käsuga `azd provision`
-- Juurutame rakendusi käsuga `azd deploy`
-- Rakendad sinine-roheline ja jooksva värskenduse juurutamisstrateegiaid
+- Provisjoneerid Azure ressursse kasutades `azd provision`
+- Juurutad rakendusi kasutades `azd deploy`
+- Rakendad sinise-rohelise ja pöörleva juurutamise strateegiaid
 
 ---
 
@@ -24,28 +24,31 @@ Selle peatüki läbimisel:
 
 | # | Õppetund | Kirjeldus | Aeg |
 |---|--------|-------------|------|
-| 1 | [Ressursside loomine](provisioning.md) | Azure ressursside haldus AZD-ga | 45 min |
-| 2 | [Juurutamisjuhend](deployment-guide.md) | Rakenduse juurutamisstrateegiad | 45 min |
-| 3 | [Oma malli loomine](custom-templates.md) | Taaskasutatavate azd mallide koostamine ja avaldamine | 30 min |
+| 1 | [Ressursside provisjoneerimine](provisioning.md) | Azure ressursside haldus AZD-ga | 45 min |
+| 2 | [Juurutamise juhend](deployment-guide.md) | Rakenduste juurutusstrateegiad | 45 min |
+| 3 | [Oma malli koostamine](custom-templates.md) | Korduvkasutatavate azd mallide loomine ja avaldamine | 30 min |
 
 ---
 
 ## 🚀 Kiire algus
 
 ```bash
-# Initsialiseeri mallist
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Vaata eelvaadet, mida luuakse
+# Preview what will be created
 azd provision --preview
 
-# Rajada ainult infrastruktuur
+# Provision infrastructure only
 azd provision
 
-# Paigalda ainult kood
+# Deploy code only
 azd deploy
 
-# Või mõlemad koos
+# Or both together
 azd up
 ```
 
@@ -68,15 +71,15 @@ my-project/
 
 ---
 
-## 🔧 Olulised käsud
+## 🔧 Põhikäsud
 
 | Käsk | Kirjeldus |
 |---------|-------------|
-| `azd init` | Projekti initsialiseerimine |
+| `azd init` | Projekti algatamine |
 | `azd provision` | Azure ressursside loomine |
 | `azd deploy` | Rakenduse koodi juurutamine |
-| `azd up` | juuruta + loo ressursid |
-| `azd down` | Kõigi ressursside kustutamine |
+| `azd up` | provisjoneerimine + juurutamine |
+| `azd down` | Kõikide ressursside kustutamine |
 
 ---
 
@@ -85,13 +88,13 @@ my-project/
 | Suund | Peatükk |
 |-----------|---------|
 | **Eelmine** | [3. peatükk: Konfiguratsioon](../chapter-03-configuration/README.md) |
-| **Järgmine** | [5. peatükk: Mitmeagendi lahendused](../chapter-05-multi-agent/README.md) |
+| **Järgmine** | [5. peatükk: Mitme agendi lahendused](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Seotud ressursid
+## 📖 Seotud materjalid
 
-- [Eeljuurutamise kontrollid](../chapter-06-pre-deployment/README.md)
+- [Enne juurutamist tehtavad kontrollid](../chapter-06-pre-deployment/README.md)
 - [Container App näited](../../examples/container-app/README.md)
 - [Andmebaasi rakenduse näide](../../examples/database-app/README.md)
 

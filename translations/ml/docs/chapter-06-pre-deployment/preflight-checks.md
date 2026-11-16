@@ -1,73 +1,75 @@
-# AZD വിന്യാസങ്ങൾക്ക് മുൻ‍പുള്ള പരിശോധനകൾ
+# AZD വിന്യസതലങ്ങൾക്ക് മുമ്പുള്ള പരിശോധനകൾ
 
-**അദ്ധ്യായ നാവിഗേഷൻ:**
-- **📚 കോഴ്‌സ് ഹോം**: [ആസിഡി ഫോർ ബിഗിന്നേഴ്സ്](../../README.md)
-- **📖 നിലവിലുള്ള അദ്ധ്യായം**: അദ്ധ്യായം 6 - മുൻവിന്യാസ പരിശോധന & പദ്ധതികരണം
-- **⬅️ മുൻപത്തെ**: [SKU തിരഞ്ഞെടുപ്പ്](sku-selection.md)
-- **➡️ അടുത്ത അദ്ധ്യായം**: [അദ്ധ്യായം 7: പ്രശ്നപരിഹാരം](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 ബന്ധപ്പെട്ടവ**: [അദ്ധ്യായം 4: വിന്യാസ മാൻുവൽ](../chapter-04-infrastructure/deployment-guide.md)
+**അധ്യായം നാവിഗേഷൻ:**
+- **📚 കോഴ്‌സ് ഹോം**: [ആസിഡി ഫോർ ബിഗിനേഴ്സ്](../../README.md)
+- **📖 നിലവിലെ അധ്യായം**: അധ്യായം 6 - പ്രീ-ഡിപ്ലോയ്മെന്റ് സ്ഥിരീകരണവും പദ്ധതിയിടലും
+- **⬅️ മുമ്പത്തെ**: [SKU തിരഞ്ഞെടുപ്പ്](sku-selection.md)
+- **➡️ അടുത്ത അധ്യായം**: [അദ്ധ്യായം 7: പ്രശ്നപരിഹാരം](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 ബന്ധപ്പെടുന്നവർ**: [അധ്യായം 4: വിന്യസന ഗൈഡ്](../chapter-04-infrastructure/deployment-guide.md)
 
 ## പരിചയം
 
-ഈ സമഗ്രമായ ഗൈഡ് ആരംഭിക്കാനായി azure developer CLI വിന്യാസങ്ങൾ വിജയകരമായി നടത്തുന്നതിനായി മുൻവിന്യാസ പരിശോധനാ സ്ക്രിപ്റ്റുകളും നടപടിക്രമങ്ങളും നൽകുന്നു. തെളിവുകൾ, സ്രോതസി ലഭ്യത, ക്വോട്ടകൾ, സുരക്ഷാ അനുസരണം, പ്രകടന ആവശ്യകതകൾ എന്നിവയ്ക്കായി ഓട്ടോമേറ്റഡ് പരിശോധനകൾ എങ്ങനെ നടപ്പിലാക്കാമെന്ന് പഠിക്കുക, വിന്യാസ പരാജയങ്ങളെ തടയുകയും വിജയ സാധ്യത വർദ്ധിപ്പിക്കുകയും ചെയ്യുക.
+വിജയകരമായ ആസ്യൂർ ഡെവലപ്പർ CLI വിന്യസനങ്ങൾ ആരംഭിക്കുന്നതിന് മുമ്പ് ഉറപ്പുവരുത്തുന്നതിനായി പ്രീ-ഡിപ്ലോയ്മെന്റ് സ്ഥിരീകരണ സ്ക്രിപ്റ്റുകളും നടപടികളും ഈ സമഗ്ര ഗൈഡ് നൽകുന്നു. ഓതന്റിക്കേഷൻ, സ്രോതസ്സുകളുടെ ലഭ്യത, ക്വോട്ടകൾ, സുരക്ഷാ പാലനവും പ്രകടന ആവശ്യകതകളും എന്നിവയ്ക്കായി സ്വയമേവ പരിശോധനകൾ നടപ്പിലാക്കാൻ പഠിക്കുക, ഇത് വിന്യസനമായ പിഴവുകൾ തടയുകയും വിജയകരമായ വിന്യസനത്തിന്റെ നിരക്കുകൾ മെച്ചപ്പെടുത്തുകയും ചെയ്യുന്നു.
 
 ## പഠന ലക്ഷ്യങ്ങൾ
 
-ഈ ഗൈഡ് പൂർത്തിയാക്കിയാൽ, നിങ്ങൾക്ക് കഴിയും:
-- ഓട്ടോമേറ്റഡ് മുൻവിന്യാസ പരിശോധനാ техനിക്കുകളും സ്ക്രിപ്റ്റുകളും കൈകാര്യം ചെയ്യുക
-- തെളീവുകൾ, അനുവാദങ്ങൾ, ക്വോട്ടുകൾ എന്നിവയുടെ സമഗ്ര പരിശോധന തന്ത്രങ്ങൾ മനസ്സിലാക്കുക
-- സ്രോതസി ലഭ്യതയും ശേഷിയും സംബന്ധിച്ച പരിശോധനാ നടപടിക്രമങ്ങൾ നടപ്പിലാക്കുക
-- സംഘടനയിലെ നയങ്ങൾക്കു വേണ്ടി സുരക്ഷാ അനുസരണപരിശോധനകൾ ക്രമീകരിക്കുക
-- ചെലവുകൊണ്ടുള്ള കണക്കുകൂട്ടലും ബജറ്റ് പരിശോധന പ്രക്രിയകളും രൂപകൽപ്പന ചെയ്യുക
-- CI/CD പൈപ്പ്ലൈനുകൾക്കുള്ള കസ്റ്റം മുൻഫ്ലൈറ്റ് പരിശോധന ഓട്ടോമേഷൻ രൂപകൽപ്പന ചെയ്യുക
+ഈ ഗൈഡ് പൂർത്തിയാക്കിയാൽ നിങ്ങൾ:
+- സ്വയമേവ പ്രീ-ഡിപ്ലോയ്മെന്റ് സ്ഥിരീകരണ രീതികളും സ്ക്രിപ്റ്റുകളും നൽകുവാൻ പ്രാവീണ്യം കൈവരിക്കുക
+- ഓതന്റിക്കേഷൻ, അനുവാദങ്ങൾ, ക്വോട്ടുകൾ എന്നിവയ്‌ക്കുള്ള സമഗ്ര പരിശോധന തന്ത്രങ്ങൾ മനസ്സിലാക്കുക
+- സ്രോതസ്സിന്റെ ലഭ്യതയും ശേഷിയും വിലയിരുത്തുന്ന നടപടിക്രമങ്ങൾ നടപ്പിലാക്കുക
+- സംഘടനാ നയം പാലനത്തിനായി സുരക്ഷയും പാലന പരിശോധനകളും ക്രമീകരിക്കുക
+- ചെലവ് കണക്കാകലും ബജറ്റ് പരിശോധന പ്രവാഹങ്ങളും രൂപകല്‍പ്പന ചെയ്യുക
+- CI/CD പൈപ്പ്ലൈനുകൾക്ക് വേണ്ടി കസ്റ്റം പ്രീ-ഫ്ലൈറ്റ് പരിശോധന ഓട്ടോമേഷൻ സൃഷ്‌ടിക്കുക
 
-## പഠനഫലങ്ങൾ
+## പഠന ഫലം
 
-പൂർത്തിയാക്കിയപ്പോൾ, നിങ്ങൾക്ക് കഴിയും:
-- സമഗ്ര മുൻഫ്ലൈറ്റ് പരിശോധന സ്ക്രിപ്റ്റുകൾ സൃഷ്ടിക്കുകയും നടത്തുകയും ചെയ്യുക
-- വ്യത്യസ്ത വിന്യാസ സാഹചര്യങ്ങൾക്ക് ഓട്ടോമേറ്റഡ് പരിശോധന പ്രവാഹങ്ങൾ രൂപകൽപ്പന ചെയ്യുക
-- പരിസ്ഥിതി-സ്പെസിഫിക് പരിശോധനാ നടപടിക്രമങ്ങളും നയങ്ങളും നടപ്പിലാക്കുക
-- വിന്യാസത്തിന്റെ തയ്യാറെടുപ്പിന് മുൻകൂട്ടി നിരീക്ഷണവും അലർട്ടും ക്രമീകരിക്കുക
-- മുൻവിന്യാസ പ്രശ്നങ്ങൾ പരിഹരിക്കുകയും ശരിയ്ക്കലുകൾ നടപ്പിലാക്കുകയും ചെയ്യുക
-- DevOps പൈപ്പ്ലൈൻസിലും ഓട്ടോമേഷൻ പ്രവാഹങ്ങളിലും മുൻഫ്ലൈറ്റ് പരിശോധനകൾ സംയോജിപ്പിക്കുക
+പൂർത്തിയായ ശേഷം നിങ്ങള് കഴിയും:
+- സമഗ്ര പ്രീ-ഫ്ലൈറ്റ് സ്രിപ്റ്റുകൾ സൃഷ്ടിക്കുകയും നടപ്പിലാക്കുകയും ചെയ്യുക
+- വ്യത്യസ്ത വിന്യസന സാഹചര്യങ്ങൾക്ക് സ്വയമേവ പരിശോധന പ്രവാഹങ്ങൾ രൂപകൽപ്പന ചെയ്യുക
+- പരിസ്ഥിതിബന്ധമായ സ്ഥിരീകരണ നടപടിക്രമങ്ങളും നയങ്ങളും നടപ്പിലാക്കുക
+- വിന്യസന ഒരുക്കത്തിനായി പ്രൊആക്ടീവ് മോണിറ്ററിങ്ങും അലർട്ടിങ്ങും ക്രമീകരിക്കുക
+- പ്രീ-ഡിപ്ലോയ്മെന്റ് പ്രശ്നസമാധാനവും പരിഹാര ക്രിയകളും നടപ്പിലാക്കുക
+- പ്രീ-ഫ്ലൈറ്റ് പരിശോധനകള്‍ DevOps പൈപ്പ്ലൈനുകളിലും ഓട്ടോമേഷൻ പ്രവാഹങ്ങളിലുമായി സംയോജിപ്പിക്കുക
 
-## ഉള്ളടക്ക പട്ടിക
+## ഉള്ളടക്കത്തിന്റെ പട്ടിക
 
-- [അവലോകനം](#അവലോകനം)
-- [ഓട്ടോമേറ്റഡ് മുൻഫ്ലൈറ്റ് സ്ക്രിപ്റ്റ്](#ഓട്ടോമേറ്റഡ്-മുൻഫ്ലൈറ്റ്-സ്ക്രിപ്റ്റ്)
-- [മാനുവൽ പരിശോധന ചെക്ക്ലിസ്റ്റ്](#codeblock1)
-- [പരിസ്ഥിതി പരിശോധന](#പരിസ്ഥിതി-പരിശോധന)
-- [സ്രോതസി പരിശോധന](#codeblock3)
-- [സുരക്ഷ & അനുസരണ പരിശോധനകൾ](#security--compliance-checks)
-- [പ്രകടന & ശേഷി പദ്ധതികരണം](#performance--capacity-planning)
-- [സാധാരണ പ്രശ്നങ്ങൾ പരിഹരിക്കൽ](#troubleshooting-common-issues)
-
----
-
-## അവലോകനം
-
-വിന്യാസം ആരംഭിക്കാനുമുമ്പുള്ള മുൻഫ്ലൈറ്റ് പരിശോധനകൾ നിർണായകമായ പരിശോധനകളാണ്, ഇത് ഉറപ്പാക്കുന്നു:
-
-- **ലക്ഷ്യപ്രദേശങ്ങളിലെ** സ്രോതസി ലഭ്യതയും ക്വോട്ടകളും
-- **തെളിവും അനുമതികളും** ശരിയായി ക്രമീകരിച്ചിരിക്കുന്നതും
-- **ടെംപ്ലേറ്റ് സാധുത**യും പാരാമീറ്ററുകളുടെ ശരിത്വവും
-- **നെറ്റ്‌വർക്കോ ബന്ധവും ആശ്രിതത്വങ്ങളും**
-- **സുരക്ഷാ അനുസരണം** സ്ഥാപന നയങ്ങൾ പാലിക്കുന്നത്
-- **ചിലവ് കണക്കുകൂട്ടൽ** ബജറ്റ് പരിധികളിനു ഉള്ളിൽ
-
-### മുൻഫ്ലൈറ്റ് പരിശോധനകൾ എപ്പോൾ നടത്താം
-
-- **പുതിയ പരിസ്ഥിതിയിലേക്ക് ആദ്യ വിന്യാസത്തിന് മുമ്പ്**
-- **പ്രധാന ടെംപ്ലേറ്റ് മാറ്റങ്ങൾക്ക് ശേഷം**
-- **പ്രോഡക്ഷൻ വിന്യാസങ്ങൾക്ക് മുമ്പ്**
-- **ആസ്യൂർ പ്രദേശങ്ങൾ മാറ്റുമ്പോൾ**
-- **CI/CD പൈപ്പ്ലൈനുകളുടെ ഭാഗമായ when**
+- [പരിചയം](#overview)
+- [സ്വയമേവ പ്രീ-ഫ്ലൈറ്റ് സ്രിപ്റ്റ്](#automated-pre-flight-script)
+- [മാനുവൽ സ്ഥിരീകരണ ചെക്ക്ലിസ്റ്റ്](#manual-validation-checklist)
+- [പരിസ്ഥിതി പരിശോധന](#environment-validation)
+- [സ്രോതസാദ്ധ്യത പരിശോധന](#resource-validation)
+- [സുരക്ഷയും പാലനവും](#security--compliance-checks)
+- [പ്രകടനവും ശേഷിയും പദ്ധതിയിടലും](capacity-planning.md)
+- [സൗകാര്യപരമായ പ്രശ്ന പരിഹാരങ്ങൾ](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-## ഓട്ടോമേറ്റഡ് മുൻഫ്ലൈറ്റ് സ്ക്രിപ്റ്റ്
+## പരിചയം
 
-### പവർഷെൽ മുൻഫ്ലൈറ്റ് ചെക്കർ
+ഇൻസ്റ്റാളേഷനായതിനുമുമ്പുള്ള പ്രീ-ഫ്ലൈറ്റ്പരിശോധനകൾ നിർണ്ണായക സ്ഥാപിതങ്ങൾ:
+
+- **ലക്ഷ്യ മേഖലകളിലെ സ്രോതസാദ്ധ്യതയും ക്വോട്ടകളും**
+- **ഓതന്റിക്കേഷൻ, അനുവാദങ്ങൾ ശരിയായി ക്രമീകരിച്ചിട്ടുണ്ട്**
+- **ടെംപ്ലേറ്റിന്റെ സാധുതയും പാരാമീറ്റർ ശരിതന്നതായിരിക്കുന്നു**
+- **നെട്വർക്ക് കണക്റ്റിവിറ്റിയും ആശ്രിതത്വങ്ങളും**
+- **സംഘടനാ നയങ്ങൾക്ക് മേൽനോട്ടം നൽകുന്ന സുരക്ഷാ പാലനം**
+- **ബജറ്റ് പരിധികളിൽ ചെലവ് കണക്കുകൾ**
+
+### പ്രീ-ഫ്ലൈറ്റ് പരിശോധന എപ്പോഴാണ് നടത്തേണ്ടത്
+
+- **പുതിയ പരിസ്ഥിതിയിൽ ആദ്യ വിന്യസനത്തിന് മുൻപ്**
+- **പ്രധാന ടെംപ്ലേറ്റ് മാറ്റങ്ങൾ കഴിഞ്ഞ്**
+- **പ്രൊഡക്ഷൻ വിന്യസനത്തിനു മുന്‍പ്**
+- **ആസ്യൂർ മേഖല മാറുമ്പോൾ**
+- **CI/CD പൈപ്പ്ലൈനുകളുടെ ഭാഗമായിട്ട്**
+
+---
+
+## സ്വയമേവ പ്രീ-ഫ്ലൈറ്റ് സ്രിപ്റ്റ്
+
+> **പരിധിയും മുൻകൂട്ടി ആവശ്യങ്ങളും:** നിങ്ങളുടെ സ്വന്തം പ്രോജക്റ്റിൽ സേവ് ചെയ്യാനുള്ള ആരംഭിസ്ഥാപന സ്ക്രിപ്റ്റുകളാണ് ഇവ; ഈ അധ്യായം നൽകുന്ന പ്രാദേശിക ഫയലുകൾ അല്ല. PowerShell പതിപ്പ് PowerShell **7.3+** (സ്വദേശ നിയമം പിഴവ് പ്രചാരണം) ആവശ്യമുണ്ട്, കൂടാതെ `powershell-yaml` മോഡ്യൂൾ `ConvertFrom-Yaml`-ക്കായി. ബാഷ് പതിപ്പ് ബാഷ്, `jq`, Python 3.10+, PyYAML എന്നിവ ആവശ്യമാണ്. രണ്ടിനും Azure CLI, azd, ഒരു പ്രവർത്തനക്ഷമമായ Bicep പ്രോജക്റ്റ് ആവശ്യമുണ്ട്. ഇവ ഡയഗ്നോസ്റ്റിക്‌സ് വേണ്ടി ആണ്, വിന്യസന ഒരുക്കം, ശേഷി, അല്ലെങ്കിൽ പാലനം തെളിയിക്കുന്നതല്ല. `azd provision --preview`-ക്ക് മുമ്പ് ടെംപ്ലേറ്റ് ഹുക്കുകൾ പരിശോധിക്കുക; ഹുക്കുകൾ എന്തെങ്കിലും പ്രോജക്റ്റ് കമാൻഡുകൾ പ്രവർത്തിപ്പിക്കാം.
+
+### PowerShell പ്രീ-ഫ്ലൈറ്റ് ചെക്കർ
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +102,14 @@ param(
     [switch]$Detailed
 )
 
-# ഔട്ട്പുട്ടിനുള്ള നിറം കോഡിംഗ്
+# Fail native commands into catch blocks instead of reporting false successes.
+$ErrorActionPreference = 'Stop'
+if ($PSVersionTable.PSVersion -lt [version]'7.3') {
+    throw 'PowerShell 7.3+ is required for this script.'
+}
+$PSNativeCommandUseErrorActionPreference = $true
+
+# Color coding for output
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +137,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # AZD ഇൻസ്റ്റലേഷൻ പരിശോധിക്കുക
+    # Check AZD installation
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +147,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Azure CLI ഇൻസ്റ്റലേഷൻ പരിശോധിക്കുക
+    # Check Azure CLI installation
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +157,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # PowerShell പതിപ്പ് പരിശോധിക്കുക
+    # Check PowerShell version
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,23 +172,23 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # AZD ആധാരീകരണം പരിശോധിക്കുക
+        # Check AZD authentication
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
-        if ($azdAuth.status -eq "Logged-in") {
-            Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
+        if ($azdAuth.status -eq "success") {
+            Write-Status "AZD authentication" "Success" "Token available; expires $($azdAuth.expiresOn)"
         }
         else {
             Write-Status "AZD authentication" "Error" "Run 'azd auth login'"
             return $false
         }
         
-        # Azure CLI ആധാരീകരണം പരിശോധിക്കുക
+        # Check Azure CLI authentication
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # സബ്സ്ക്രിപ്ഷൻ ആക്‌സസ് സ്ഥിരീകരിക്കുക
+        # Validate subscription access
         $subscriptionId = $azAccount.id
-        $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
+        $subscription = az account show --subscription $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
         
         return $true
@@ -194,39 +203,29 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # നിലവിലെ ഉപയോക്താവിന്റെ റൂൾ നിയുക്തികൾ നേടുക
+        # Get current user's role assignments
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
             $_.roleDefinitionName -eq "Contributor" -or 
-            $_.roleDefinitionName -eq "Owner" -or
-            $_.roleDefinitionName -eq "User Access Administrator"
+            $_.roleDefinitionName -eq "Owner"
         }
         
         if ($hasContributor) {
-            Write-Status "Required permissions" "Success" "Contributor or higher role found"
+            Write-Status "Role assignment inventory" "Info" "Contributor/Owner found; verify effective scope, policy and any role-assignment permissions separately"
         }
         else {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # റിസോഴ്‌സ് ഗ്രൂപ്പ് സൃഷ്ടി പരിശോധന (നിർദ്ദിഷ്‌ടമായിട്ടുള്ള പക്ഷം)
+        # Test resource group creation (if specified)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # റിസോഴ്‌സ് ഗ്രൂപ്പ് സൃഷ്ടിക്കാൻ കഴിവുള്ളതോ പരിശോധിക്കുക
-                try {
-                    az group create --name "preflight-test-rg" --location $Location --output none
-                    az group delete --name "preflight-test-rg" --yes --output none
-                    Write-Status "Resource group creation" "Success" "Can create resource groups"
-                }
-                catch {
-                    Write-Status "Resource group creation" "Error" "Cannot create resource groups"
-                    return $false
-                }
+                Write-Status "Resource group creation" "Warning" "Group does not exist. Review subscription-scope permissions; this diagnostic does not create/delete test groups."
             }
         }
         
@@ -242,25 +241,28 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # കമ്പ്യൂട്ട് കോറ്റാസുകൾ പരിശോധിക്കുക
+        # Check compute quotas
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # പ്രത്യേക കോറ്റാസുകൾ പരിശോധിക്കുക
+        # Check specific quotas
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
-        if ($coreQuota) {
+        if ($coreQuota -and $coreQuota.limit -gt 0) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
             if ($usagePercent -lt 80) {
                 Write-Status "Compute cores quota" "Success" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
+            } else {
+                Write-Status "Compute cores quota" "Warning" "Missing or zero quota; verify service requirements"
             }
             else {
                 Write-Status "Compute cores quota" "Warning" "$($coreQuota.currentValue)/$($coreQuota.limit) ($usagePercent%)"
             }
         }
         
-        # ആപ്പ് സർവീസ് പരിമിതികൾ പരിശോധിക്കുക
+        # Check App Service limits
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
-            if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
+            $displayLocation = az account list-locations --query "[?name=='$Location'].displayName | [0]" -o tsv
+            if ($appServiceUsage | Where-Object { $_.name -eq $Location -or $_.name -eq $displayLocation }) {
                 Write-Status "App Service availability" "Success" "Available in $Location"
             }
             else {
@@ -271,28 +273,27 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # സ്റ്റോറേജ് അക്കൗണ്ട് പരിമിതികൾ പരിശോധിക്കുക
-        $storageAccounts = az storage account list --output json | ConvertFrom-Json
-        $accountCount = ($storageAccounts | Measure-Object).Count
-        if ($accountCount -lt 200) {
-            Write-Status "Storage account limit" "Success" "$accountCount/250 storage accounts"
+        # Check storage account limits
+        $storageUsage = @(az storage account show-usage --location $Location --output json | ConvertFrom-Json)[0]
+        if ($storageUsage -and $storageUsage.limit -gt 0 -and $storageUsage.currentValue -lt $storageUsage.limit) {
+            Write-Status "Storage account quota" "Info" "$($storageUsage.currentValue)/$($storageUsage.limit) in $Location"
         }
         else {
-            Write-Status "Storage account limit" "Warning" "$accountCount/250 storage accounts"
+            Write-Status "Storage account quota" "Warning" "No headroom or missing quota data"
         }
         
         return $true
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # തടസമില്ലാതെ
+        return $true # Non-blocking
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Azure എൻഡ്‌പോയിന്റുകൾ പരിശോധന
+    # Test Azure endpoints
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -306,13 +307,19 @@ function Test-NetworkConnectivity {
             Write-Status "Connectivity to $endpoint" "Success" "Status: $($response.StatusCode)"
         }
         catch {
-            Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+            # A 401/403/404 response may still prove HTTP reachability.
+            if ($_.Exception.Response) {
+                Write-Status "Connectivity to $endpoint" "Info" "HTTP response received; this is not an authorization test"
+            } else {
+                Write-Status "Connectivity to $endpoint" "Error" $_.Exception.Message
+                return $false
+            }
         }
     }
     
-    # DNS പരിഹാര പരിശോധന
+    # Test DNS resolution
     try {
-        $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
+        $dnsResult = [System.Net.Dns]::GetHostAddresses("management.azure.com")
         Write-Status "DNS resolution" "Success" "Resolved successfully"
     }
     catch {
@@ -326,18 +333,21 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # azure.yaml ഉണ്ട് എങ്കിൽ പരിശോധിക്കുക
+    # Check if azure.yaml exists
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # azure.yaml നിയന്ത്രിക്കുക
+        # Parse azure.yaml
         try {
+            if (-not (Get-Command ConvertFrom-Yaml -ErrorAction SilentlyContinue)) {
+                throw 'ConvertFrom-Yaml requires the powershell-yaml module.'
+            }
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # സേവനങ്ങൾ സ്ഥിരീകരിക്കുക
+            # Validate services
             if ($azureYaml.services) {
-                $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
+                $serviceCount = $azureYaml.services.Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
             }
             else {
@@ -345,7 +355,7 @@ function Test-TemplateValidation {
             }
         }
         catch {
-            Write-Status "azure.yaml parsing" "Error" "Invalid YAML format"
+            Write-Status "azure.yaml parsing" "Error" $_.Exception.Message
             return $false
         }
     }
@@ -354,13 +364,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # ഇൻഫ്രാസ്ട്രക്ചർ ഫയലുകൾ അന്വേഷിക്കുക
+    # Check for infrastructure files
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # main.bicep ഉണ്ടെങ്കിൽ സ്ഥിരീകരിക്കുക
+            # Validate main.bicep if it exists
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,12 +391,12 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 പുതിയത്: ഇൻഫ്രാസ്ട്രക്ചർ പ്രിവ്യൂ സൗകര്യകരമായ ഡ്രൈ-റൺ പരിശോധന
+    # Preview ARM changes only after reviewing the project's hooks.
     try {
-        Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
+        Write-Status "Infrastructure preview test" "Info" "Previewing proposed changes (not a capacity or deployment guarantee)..."
         $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
-            Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
+            Write-Status "Infrastructure preview" "Success" "Preview completed; review changes and remaining diagnostics"
         }
         else {
             Write-Status "Infrastructure preview" "Warning" "Preview detected potential issues - review before deployment"
@@ -403,7 +413,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # സ്ഥലം സാധുവാണോ പരിശോധിക്കുക
+        # Check if location is valid
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,13 +425,13 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # സേവന ലഭ്യത പ്രദേശത്ത് പരിശോധിക്കുക
+        # Check service availability in region
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
             try {
                 $providers = az provider show --namespace $service --output json | ConvertFrom-Json
-                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $Location }
+                $resourceTypes = $providers.resourceTypes | Where-Object { $_.locations -contains $validLocation.displayName }
                 
                 if ($resourceTypes) {
                     Write-Status "$service availability" "Success" "Available in $Location"
@@ -446,11 +456,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # അടിസ്ഥാന ചെലവ് മൂല്യനിർണ്ണയം (സുസ്പഷ്ടമായ കണക്കുകൾക്കായി Azure പ്ലാനിംഗ് API ആവശ്യമുണ്ട്)
+    # Basic cost estimation (would need Azure Pricing API for accurate estimates)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # ബഡ്ജറ്റ് ഉണ്ടോ പരിശോധിക്കുക
+    # Check if budget exists
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +480,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # സാധാരണ സുരക്ഷാ პრაქტിസുകൾ പരിശോധിക്കുക
+    # Text-search heuristics only: presence of keywords is not compliance proof.
     try {
-        # കീ വാൾട്ട് ക്രമീകരിച്ചിട്ടുണ്ടോ പരിശോധിക്കുക
+        # Check if Key Vault is configured
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +490,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # മാനേജ്ഡ് ഐഡന്റിറ്റി ഉപയോഗം പരിശോധിക്കുക
+        # Check for managed identity usage
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +498,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # HTTPS നിർബന്ധിതം പരിശോധിക്കുക
+        # Check for HTTPS enforcement
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +514,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# പ്രധാന നിർവഹണം
+# Main execution
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +526,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # എല്ലാ പരിശോധനകളും നടത്തുക
+    # Run all checks
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -527,7 +537,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # സംക്ഷേപം
+    # Summary
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -547,7 +557,7 @@ function Invoke-PreflightCheck {
     Write-Host ""
     if ($allPassed) {
         Write-Host "${Green}✓ All pre-flight checks passed ($passedCount/$totalCount)${Reset}"
-        Write-Host "${Green}✓ Ready for deployment!${Reset}"
+        Write-Host "${Green}✓ Implemented checks passed; review warnings and untested requirements.${Reset}"
         exit 0
     }
     else {
@@ -557,26 +567,27 @@ function Invoke-PreflightCheck {
     }
 }
 
-# പ്രി-ഫ്ലൈറ്റ് പരിശോധന നടത്തുക
+# Run the pre-flight check
+azd env select $EnvironmentName
 Invoke-PreflightCheck
 ```
 
-### ബാഷ് മുൻഫ്ലൈറ്റ് ചെക്കർ
+### ബാഷ് പ്രീ-ഫ്ലൈറ്റ് ചെക്കർ
 
 ```bash
 #!/bin/bash
-# യൂണിക്സ്/ലിനക്സ് സิส്റ്റങ്ങളിലെ പ്രീ-ഫ്ലൈറ്റ് ചെക്കുകൾക്കുള്ള ബാഷ് പതിപ്പ്
+# Bash version of pre-flight checks for Unix/Linux systems
 
 set -euo pipefail
 
-# നിറം കോഡുകൾ
+# Color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # നിറമില്ല
+NC='\033[0m' # No Color
 
-# ഗ്ലോബൽ വ്യാറിയബിൾസ്
+# Global variables
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -606,7 +617,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # AZD ഇൻസ്റ്റാളേഷൻ പരിശോധിക്കുക
+    # Check AZD installation
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +626,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Azure CLI ഇൻസ്റ്റാളേഷൻ പരിശോധിക്കുക
+    # Check Azure CLI installation
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,12 +635,16 @@ check_prerequisites() {
         return 1
     fi
     
-    # jq ഇൻസ്റ്റാളേഷൻ പരിശോധിക്കുക
+    # Check jq installation
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
-        print_status "jq not found" "warning" "Install jq for better JSON parsing"
+        print_status "jq not found" "error" "jq is required"
+        return 1
     fi
+    python3 -c "import yaml" >/dev/null 2>&1 || {
+        print_status "Python/PyYAML not found" "error" "Python 3 and PyYAML are required"; return 1;
+    }
     
     return 0
 }
@@ -637,16 +652,16 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # AZD അംഗീകാരം പരിശോധിക്കുക
-    if azd auth login --check-status >/dev/null 2>&1; then
-        local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
-        print_status "AZD authentication" "success" "User: $principal_name"
+    # Check AZD authentication
+    # --check-status returns exit code 0 even when unauthenticated; inspect JSON.
+    if azd auth login --check-status --output json | jq -e '.status == "success"' >/dev/null; then
+        print_status "AZD authentication" "success" "Token available"
     else
         print_status "AZD authentication" "error" "Run 'azd auth login'"
         return 1
     fi
     
-    # Azure CLI അംഗീകാരം പരിശോധിക്കുക
+    # Check Azure CLI authentication
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,11 +676,11 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # azure.yaml പരിശോധിക്കുക
+    # Check azure.yaml
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # അടിസ്ഥാന YAML പരിശോധന
+        # Basic YAML validation
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -677,13 +692,13 @@ check_template_validation() {
         return 1
     fi
     
-    # ഇൻഫ്രാസ്ട്രക്ചർ ഫയലുകൾ പരിശോധിക്കുക
+    # Check infrastructure files
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # നിലവിലുള്ള പക്ഷം main.bicep ശരിവക്കുക
+            # Validate main.bicep if exists
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +721,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # ലൊക്കേഷൻ സാധുവാണോ പരിശോധിക്കുക
+    # Check if location is valid
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,11 +729,13 @@ check_regional_availability() {
         return 1
     fi
     
-    # സേവന ലഭ്യത പരിശോധിക്കുക
+    # Check service availability
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
+    local display_location
+    display_location=$(az account list-locations --query "[?name=='$LOCATION'].displayName | [0]" -o tsv)
     for service in "${services[@]}"; do
-        if az provider show --namespace "$service" --query "resourceTypes[?locations[?contains(@, '$LOCATION')]]" --output tsv | grep -q .; then
+        if az provider show --namespace "$service" --query "resourceTypes[?contains(locations, '$display_location')]" --output tsv | grep -q .; then
             print_status "$service availability" "success" "Available in $LOCATION"
         else
             print_status "$service availability" "warning" "May not be available in $LOCATION"
@@ -729,7 +746,7 @@ check_regional_availability() {
 }
 
 main() {
-    # കമാൻഡ് ലൈൻ ആർഗ്യുമെന്റുകൾ पार്സ് ചെയ്യുക
+    # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +772,7 @@ main() {
         esac
     done
     
-    # ആവശ്യമായ പരാമീറ്ററുകൾ പരിശോധന നടത്തുക
+    # Validate required parameters
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,20 +785,22 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # പരിശോധനകൾ നടത്തുക
+    # Run checks
     local all_passed=true
     
     check_prerequisites || all_passed=false
+    if ! $all_passed; then exit 1; fi
+    azd env select "$ENVIRONMENT_NAME" || exit 1
     check_authentication || all_passed=false
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # സംഗ്രഹം
+    # Summary
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
         echo -e "${GREEN}✓ All pre-flight checks passed${NC}"
-        echo -e "${GREEN}✓ Ready for deployment!${NC}"
+        echo -e "${GREEN}✓ Implemented checks passed; review warnings and untested requirements.${NC}"
         exit 0
     else
         echo -e "${RED}✗ Some pre-flight checks failed${NC}"
@@ -790,100 +809,103 @@ main() {
     fi
 }
 
-# പ്രധാന ഫംഗ്ഷൻ ഓടിക്കുക
+# Run main function
 main "$@"
 ```
 
 ---
 
-##manuel പരിശോധന ചെക്ക്ലിസ്റ്റ്
+## മാനുവൽ സ്ഥിരീകരണ ചെക്ക്ലിസ്റ്റ്
 
-### മുൻവിന്യാസ ചെക്ക്ലിസ്റ്റ്
+### പ്രീ-ഡിപ്ലോയ്മെന്റ് ചെക്ക്ലിസ്റ്റ്
 
-ഈ ചെക്ക്ലിസ്റ്റു പ്രിന്റ് ചെയ്ത് വിന്യാസത്തിനു മുമ്പ് ഓരോ ഇനവും പരിശോധിക്കുക:
+ഈ ചെക്ക്ലിസ്റ്റ് പ്രിന്റ് ചെയ്ത് വിന്യസനത്തിന് മുമ്പ് ഓരോ ഇനം പരിശോധന നടത്തുക:
 
 #### ✅ പരിസ്ഥിതി ക്രമീകരണം
-- [ ] AZD CLI ഇൻസ്റ്റാൾ ചെയ്ത് ഏറ്റവും പുതിയ പതിപ്പ് അപ്‌ഡേറ്റ് ചെയ്തിരിക്കുന്നു
-- [ ] Azure CLI ഇൻസ്റ്റാൾ ചെയ്ത് തെളിവടക്കം ചെയ്തിരിക്കുന്നു
-- [ ] ശരിയായ Azure സബ്‌സ്‌ക്രിപ്ഷൻ തിരഞ്ഞെടുക്കപ്പെട്ടു
-- [ ] പരിസ്ഥിതി നാമം പ്രവൃത്തിപൂര്‍വം ഒന്നിച്ചും നാമകരണം മാനദണ്ഡങ്ങൾ പാലിച്ചുകൊണ്ടുള്ളതും
-- [ ] ലക്ഷ്യമിടുന്ന റിസോഴ്‌സ് ഗ്രൂപ്പ് തിരിച്ചറിഞ്ഞുവോ ഉണ്ടാക്കാവുന്നതാണോ
+- [ ] അടുത്ത തവണ വയർഷൻ പുതിയതായി അപ്‌ഡേറ്റ് ചെയ്യപ്പെട്ട AZD CLI ഇൻസ്റ്റാൾ ചെയ്യുക
+- [ ] Azure CLI ഇൻസ്റ്റാൾ ചെയ്തു ഓതന്റിക്കേറ്റ് ചെയ്‌തിട്ടുണ്ട്
+- [ ] ശരിയായ Azure സബ്സ്ക്രിപ്ഷൻ തിരഞ്ഞെടുക്കുക
+- [ ] പരിസ്ഥിതിയുടെ പേര് വ്യത്യസ്തവും നാമകരണം ആചാരങ്ങൾ പാലിക്കുന്നതുമായിരിക്കണം
+- [ ] ലക്ഷ്യ റിസോഴ്സ് ഗ്രൂപ്പ് തിരിച്ചറിഞ്ഞിട്ടുണ്ടോ അല്ലെങ്കിൽ സൃഷ്‌ടിക്കാമോ
 
-#### ✅ തെളിവും അനുമതികളും
-- [ ] `azd auth login` ഉപയോഗിച്ച് വിജയകരമായി പാസ്സ് നടന്നിരിക്കുന്നു
-- [ ] ഉപയോക്താവിന് ലക്ഷ്യ സബ്‌സ്‌ക്രിപ്ഷനിൽ/റിസോഴ്‌സ് ഗ്രൂപ്പിൽ Contributor റോളുണ്ട്
-- [ ] CI/CD സവാളെക്കായി സർവീസ് പ്രിന്‍സിപ്പൽ ക്രമീകരിച്ചതുണ്ടോ (പ്രസക്തമാണെങ്കിൽ)
-- [ ] കാലഹരണപ്പെട്ട സേർട്ടിഫിക്കറ്റുകളും ക്രെഡൻഷ്യലുകളും ഇല്ല
+#### ✅ ഓതന്റിക്കേഷൻ & അനുവാദങ്ങൾ
+- [ ] വിജയകരമായി `azd auth login` ഓതന്റിക്കേറ്റ് ചെയ്തത്
+- [ ] ഉപയോക്താവിന് ലക്ഷ്യ സബ്സ്ക്രിപ്ഷനിൽ / റിസോഴ്‌സ് ഗ്രൂപ്പിൽ Contributor റോളുണ്ട്
+- [ ] ടെംപ്ലേറ്റുകൾ റോളുസംഭരണങ്ങൾ സൃഷ്‌ടിക്കുന്ന പക്ഷം, വിന്യസിക്കുന്ന ഐഡന്റിറ്റിക്കും അതിന്റേതായ സ്കോപ് ചെയ്ത റോളസ് അസ്‌സൈൻമെന്റ് അനുവാദങ്ങൾ ഉണ്ടാകണം (Contributor മാത്രമല്ലത് നൽകുന്നത്)
+- [ ] CI/CD-ക്കായി സർവീസ് പ്രിൻസിപ്പൽ ക്രമീകരിച്ചിട്ടുണ്ടെങ്കിൽ
+- [ ] കാലഹരണപ്പെട്ട സർട്ടിഫിക്കറ്റുകളും ക്രെഡൻഷ്യലുകളും ഇല്ല
 
-#### ✅ ടെംപ്ലേറ്റ് പരിശോദനം
-- [ ] `azure.yaml` ഉണ്ട്, സാധുവായ YAML ആണ്
-- [ ] azure.yamlൽ നിർവചിച്ച എല്ലാ സേവനങ്ങൾക്കും അനുയോജ്യമായ സോഴ്‌സ് കോഡ് ഉണ്ട്
-- [ ] `infra/` ഡയറക്‌ടറിയിലുള്ള Bicep ടെംപ്ലേറ്റ്‌സ് ലഭ്യമാണ്
-- [ ] `main.bicep` പിഴവുകൾ കൂടാതെ കംപൈൽ ചെയ്യുന്നു (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 ഇൻഫ്രാസ്ട്രക്ചർ മുൻനിരീക്ഷണം വിജയകരമായി നടത്തി (`azd provision --preview`)
-- [ ] ആവശ്യമായ എല്ലാ പാരാമീറ്ററുകൾക്കും ഡിഫോൾട്ട് മൂല്യങ്ങളോ നൽകപ്പെടുന്നവയോ
-- [ ] ടെംപ്ലേറ്റുകളിൽ സ്റ്റാറ്റിക് രഹസ്യങ്ങൾ ഇല്ലാതിരിക്കണം
+#### ✅ ടെംപ്ലേറ്റ് പരിശോധന
+- [ ] `azure.yaml` ഉണ്ടെന്നും സാധുവായ YAML ആണെന്നും
+- [ ] azure.yaml-ൽ നിർവചിച്ച എല്ലാ സേവനങ്ങൾക്കും അനുയായിയായ സ്രോതസ് കോഡ് ഉണ്ടെന്നും
+- [ ] `infra/` ഡയറക്ടറിയിലുള്ള Bicep ടെംപ്ലേറ്റുകൾ ലഭ്യമാണ്
+- [ ] `main.bicep` പിശകുകളില്ലാതെ കംപൈൽ ചെയ്യുന്നു (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 ഇൻഫ്രാസ്ട്രക്ചർ പ്രിവ്യൂ വിജയകരമായി ഓടുന്നു (`azd provision --preview`)
+- [ ] എല്ലാ ആവശ്യമായ പാരാമീറ്ററുകൾക്ക് ഡീഫോൾട്ട് മൂല്യങ്ങൾ ഉണ്ടോ അല്ലെങ്കിൽ നൽകും
+- [ ] ടെംപ്ലേറ്റുകളിൽ ഹാർഡ്കോടഡ് രഹസ്യങ്ങൾ ഇല്ല
 
-#### ✅ സ്രോതസി പദ്ധതി
-- [ ] ലക്ഷ്യമിടുന്ന ആസ്യൂർ പ്രദേശം തിരഞ്ഞെടുത്ത് പരിശോധിച്ചു
-- [ ] ആവശ്യമായ ആസ്യൂർ സേവനങ്ങൾ ലക്ഷ്യ പ്രദേശത്ത് ലഭ്യമാണ്
-- [ ] പദ്ധതിചെയ്ത സ്രോതസികൾക്കായി മതിയായ ക്വോട്ടകൾ ലഭ്യമാണ്
-- [ ] റിസോഴ്‌സ് നാമകരണം എന്നിവയുടെ പൊരുത്തം പരിശോധിച്ചു
-- [ ] റിസോഴ്‌സുകൾ തമ്മിലുള്ള ആശ്രിതത്വങ്ങൾ മനസ്സിലാക്കപ്പെട്ടിരിക്കുന്നു
+#### ✅ സ്രോതസ്സ് പദ്ധതിയിടൽ
+- [ ] ലക്ഷ്യമിടുന്ന ആസ്യൂർ മേഖല തിരഞ്ഞെടുക്കുകയും സാധൂകരിക്കുകയും ചെയ്തു
+- [ ] ലക്ഷ്യ മേഖലയിൽ ആവശ്യമായ ആസ്യൂർ സേവനങ്ങൾ ലഭ്യമാണ്
+- [ ] പദ്ധതിയിട്ട സ്രോതസിന് വേണ്ടിയുള്ള പാഷ്ണക്കുള്ള ക്വോട്ടകൾ ഉണ്ട്
+- [ ] സ്രോതസുകളുടെ പേരിടൽ ഏറ്റുമുട്ടലുകൾ പരിശോധിച്ചു
+- [ ] സ്രോതസുകൾ തമ്മിലുള്ള ആശ്രിതത്വങ്ങൾ മനസ്സിലാക്കി
 
 #### ✅ നെറ്റ്‌വർക്ക് & സുരക്ഷ
-- [ ] ആസ്യൂർ എൻ‌ഡ്‌പോയിന്റുകളിലേക്ക് നെറ്റ്‌വർക്ക് കണക്റ്റിവിറ്റി സ്ഥിരീകരിച്ചു
-- [ ] ഫയർവാൾ/പ്രോക്സി സെറ്റിംഗുകൾ ആവശ്യത്തിനു ക്രമീകരിച്ചു
-- [ ] രഹസ്യ നിയന്ത്രണത്തിന് കീ വാൾട്ട് ക്രമീകരിച്ചു
-- [ ] പരിപാലന ഐഡന്റിറ്റികളിൽ വ്യാപകമായി ഉപയോഗിച്ചു
-- [ ] വെബ് ആപ്ലിക്കേഷനുകൾക്കായി HTTPS നിർബന്ധിത നിശ്ചയിച്ചിരിക്കുന്നു
+- [ ] ആസ്യൂർ എൻഡ്പോയിന്റുകളിലേക്കുള്ള നെറ്റ്‌വർക്ക് കണക്റ്റിവിറ്റി സ്ഥിരീകരിച്ചു
+- [ ] ഫയർവാൾ/പ്രോക്സി ക്രമീകരണങ്ങൾ ആവശ്യമെങ്കിൽ ക്രമീകരിച്ചത്
+- [ ] രഹസ്യസംഭരണം සඳහා കീ വോൾട്ട് ക്രമീകരണം
+- [ ] അടിഞ്ഞിരിക്കുന്ന ഐഡന്റിറ്റികൾ ആവശ്യമായിടത്ത് ഉപയോഗിക്കുന്നത്
+- [ ] വെബ് അപ്ലിക്കേഷനുകൾക്ക് HTTPS പ്രാബല്യത്തിൽ കൊണ്ടുവന്നിട്ടുണ്ടോ
 
-#### ✅ ചെലവ് മാനേജ്മെന്റ്
-- [ ] ആസ്യൂർ പ്രൈസിംഗ് കാൽക്കുലേറ്റർ ഉപയോഗിച്ച് ചെലവ് കണക്കുകൂട്ടി
-- [ ] ആവശ്യമായെങ്കിൽ ബജറ്റ് അലർട്ടുകൾ ക്രമീകരിച്ചു
-- [ ] പരിസ്ഥിതി തരംകേട് കൊണ്ട് യോജിച്ച SKUകൾ തിരഞ്ഞെടുത്തു
-- [ ] പ്രോഡക്ഷൻ ജോലികൾക്കായി റിസർവ്വ് ചെയ്ത ശേഷി പരിഗണിച്ചു
+#### ✅ ചെലവ് മാനേജ്‌മെന്റ്
+- [ ] ചെലവ് കണക്കുകൾ ആസ്യൂർ പ്രൈസിംഗ് കാൽക്കുലേറ്റർ ഉപയോഗിച്ച് കണക്കാക്കി
+- [ ] ബജറ്റ് അലർട്ട് ക്രമീകരിച്ചത് (ആവശ്യമായ പക്ഷം)
+- [ ] പരിസ്ഥിതി തരം അനുസരിച്ച് അനുയോജ്യമായ SKU-കൾ തിരഞ്ഞെടുക്കുക
+- [ ] പ്രൊഡക്ഷൻ വര്‍ക്ക്ലോഡുകള്‍ക്ക് റിസർവ്ഡ് ശേഷി പരിഗണിക്കപ്പെടുന്നു
 
-#### ✅ നിരീക്ഷണം & നിരീക്ഷണയോഗ്യത
-- [ ] ആപ്ലിക്കേഷൻ ഇൻസൈറ്റ്സ് ടെംപ്ലേറ്റുകളിൽ ക്രമീകരിച്ചു
-- [ ] ലോഗ് അനലിറ്റിക്‌സ് വർക്ക്സ്പേസ് പദ്ധതിയിടുക
-- [ ] നിർണായക മീറ്റ്രിക്കുകൾക്ക് അലർട്ട് നിയമങ്ങൾ നിർവചിച്ചു
-- [ ] ആപ്ലിക്കേഷനുകളിൽ ഹെൽത്ത് ചെക്ക് എൻഡ്പോയിന്റുകൾ നടപ്പിലാക്കി
+#### ✅ മേൽനോട്ടവും ദൃശ്യീയതയും
+- [ ] ടെംപ്ലേറ്റിൽ അപ്ലിക്കേഷൻ ഇൻസൈറ്റ്സ് ക്രമീകരിച്ചിട്ടുണ്ടോ
+- [ ] ലോഗ് അനലിറ്റിക്സ് വർക്ക്‌സ്പേസ് പദ്ധതി ചെയ്തിട്ടുണ്ടോ
+- [ ] നിർണ്ണായക മെട്രിക്‌സിന് അലർട്ട് നിയമങ്ങൾ നിർവചിച്ചു
+- [ ] ആപ്ലിക്കേഷനുകളിൽ ഹെൽത്ത് ചെക്ക് എൻഡ്പോയിന്റുകൾ നടപ്പിലാക്കിയിട്ടുണ്ടോ
 
-#### ✅ ബാക്കപ്പ് & പുനരുദ്ധാരം
-- [ ] ഡാറ്റാ റിസോഴ്‌സുകൾക്ക് ബാക്കപ്പ് തന്ത്രം നിർവചിച്ചു
-- [ ] പുനരുദ്ധാരണം സമയലക്ഷ്യങ്ങൾ (RTO) രേഖപ്പെടുത്തി
-- [ ] പുനരുദ്ധാരണം പോയിന്റ് ലക്ഷ്യങ്ങൾ (RPO) രേഖപ്പെടുത്തി
-- [ ] പ്രോഡക്ഷൻ സിസ്റ്റങ്ങൾക്ക് ദുരന്ത പുനരുദ്ധാരണം പദ്ധതി ഉണ്ട്
+#### ✅ ബാക്കപ്പ് & പുനരുദ്ധാരണം
+- [ ] ഡേറ്റാ സ്രോതസിനായുള്ള ബാക്കപ്പ് തന്ത്രം നിർവചിച്ചിട്ടുണ്ട്
+- [ ] പുനരുദ്ധാരണ സമയ ലക്‌ഷ്യങ്ങൾ (RTO) ഡോക്യുമെന്റുചെയ്തു
+- [ ] പുനരുദ്ധാരണ പോയിന്റ് ലക്‌ഷ്യങ്ങൾ (RPO) രേഖപ്പെടുത്തിയിട്ടുണ്ട്
+- [ ] പ്രൊഡക്ഷൻ വേണ്ടി ദുരന്ത പുനരുദ്ധാരണ പദ്ധതി സജ്ജമാക്കി
 
 ---
 
 ## പരിസ്ഥിതി പരിശോധന
 
-### ഡെവലപ്പ്മെന്റ് പരിസ്ഥിതി പരിശോധന
+താഴെ കൊടുത്തിട്ടുള്ള `grep` പരിശോധനകൾ ഓർമ്മപ്പെടുത്തലിനാണ് മാത്രം. ഒരു പദം കാണുന്നതിലൂടെ അത് ശരിയായ സ്രോതസിന് കോൺഫിഗർ ചെയ്തിരിക്കുന്നു എന്നുള്ളതല്ല; കാണാതിരിക്കുക അതിന്റെ അഭാവം തെളിയിക്കുന്നുമല്ല (മോഡ്യൂളുകളും ഡിഫോൾട്ടുകളും അത് നൽകാം). ഇവ പ്രൊഡക്ഷൻ പാലനത്തിനുള്ള വാതിലുകൾ ആയി ഉപയോഗിക്കരുത്.
+
+### വികസന പരിസ്ഥിതിയുടെ പരിശോധന
 
 ```bash
 #!/bin/bash
-# വികസന പരിസ്ഥിതിക്ക് പ്രത്യേകമായ സ്ഥിരീകരണങ്ങൾ
+# Development environment specific validations
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # വികസനത്തിനെ അനുയോജ്യമായ ക്രമീകരണങ്ങൾ പരിശോധിക്കുക
+    # Check for development-friendly configurations
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # സ്വയം-shutdown ക്രമീകരണങ്ങൾ പരിശോധിക്കുക
+    # Check for auto-shutdown configurations
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # വികസന ഡാറ്റാബേസ് ക്രമീകരണങ്ങൾ പരിശോധിക്കുക
+    # Validate development database configurations
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,37 +914,37 @@ validate_dev_environment() {
 }
 ```
 
-### പ്രോഡക്ഷൻ പരിസ്ഥിതി പരിശോധന
+### പ്രൊഡക്ഷൻ പരിസ്ഥിതി പരിശോധന
 
 ```bash
 #!/bin/bash
-# പ്രൊഡക്ഷൻ പരിസ്ഥിതി നിഷ്‌ചിത പരിശോധനകൾ
+# Production environment specific validations
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # ഹൈ അവൈലബിലിറ്റി കോൺഫിഗറേഷനുകൾ പരിശോധിക്കുക
+    # Check for high availability configurations
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # ബേക്കപ്പ് കോൺഫിഗറേഷനുകൾ പരിശോധിക്കുക
+    # Check for backup configurations
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # മോണിറ്ററിംഗ് സജ്ജീകരണം നിഷ്‌ചയിക്കുക
+    # Validate monitoring setup
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # സുരക്ഷാ കോൺഫിഗറേഷനുകൾ പരിശോധിക്കുക
+    # Check for security configurations
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -933,7 +955,7 @@ validate_prod_environment() {
 
 ---
 
-## സ്രോതസി പരിശോധന
+## സ്രോതസ്സ് പരിശോധന
 
 ### ക്വോട്ട പരിശോധന സ്ക്രിപ്റ്റ്
 
@@ -948,17 +970,17 @@ import subprocess
 import sys
 from typing import Dict, List, Tuple
 
-def run_command(command: List[str]) -> Dict:
+def run_command(command: List[str]) -> dict | list | None:
     """Run Azure CLI command and return JSON result"""
     try:
         result = subprocess.run(command, capture_output=True, text=True, check=True)
         return json.loads(result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error running command {' '.join(command)}: {e}")
-        return {}
+        return None
     except json.JSONDecodeError as e:
         print(f"Error parsing JSON: {e}")
-        return {}
+        return None
 
 def check_compute_quotas(location: str) -> bool:
     """Check compute quotas in specified location"""
@@ -976,7 +998,10 @@ def check_compute_quotas(location: str) -> bool:
         if quota_item['name']['value'] in critical_quotas:
             current = quota_item['currentValue']
             limit = quota_item['limit']
-            usage_percent = (current / limit) * 100 if limit > 0 else 0
+            if limit <= 0:
+                print(f"❌ No quota for {quota_item['name']['value']}")
+                return False
+            usage_percent = (current / limit) * 100
             
             status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
             print(f"{status} {quota_item['name']['localizedValue']}: {current}/{limit} ({usage_percent:.1f}%)")
@@ -990,15 +1015,17 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # സബ്സ്ക്രിപ്ഷനിലെ സ്റ്റോറേജ് അക്കൗണ്ടുകൾ നേടുക
-    accounts = run_command(['az', 'storage', 'account', 'list'])
+    # Retrieve regional quota rather than assuming a subscription-wide constant.
+    usages = run_command(['az', 'storage', 'account', 'show-usage', '--location', location])
     
-    if accounts is None:
+    if not usages:
         print("❌ Could not retrieve storage account information")
         return False
     
-    account_count = len(accounts)
-    max_accounts = 250  # ഡിഫോൾട്ട് അസ്യൂർ പരിധി
+    account_count = usages['currentValue']
+    max_accounts = usages['limit']
+    if max_accounts <= 0:
+        return False
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,18 +1038,14 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # വിർച്വൽ നെറ്റ്‌വർകുകൾ പരിശോദിക്കുക
-    vnets = run_command(['az', 'network', 'vnet', 'list'])
-    if vnets is not None:
-        vnet_count = len(vnets)
-        print(f"✅ Virtual Networks: {vnet_count}/1000")
-    
-    # പബ്ലിക് ഐപി വിലാസങ്ങൾ പരിശോധിക്കുക
-    public_ips = run_command(['az', 'network', 'public-ip', 'list'])
-    if public_ips is not None:
-        ip_count = len(public_ips)
-        print(f"✅ Public IP Addresses: {ip_count}/1000")
-    
+    usages = run_command(['az', 'network', 'list-usages', '--location', location])
+    if not usages:
+        return False
+    for item in usages:
+        current, limit = item['currentValue'], item['limit']
+        print(f"{item['name']['value']}: {current}/{limit}")
+        if limit <= 0 or current >= limit:
+            return False
     return True
 
 def main():
@@ -1034,19 +1057,20 @@ def main():
     
     print("🔍 Azure Quota and Limits Validation")
     print(f"📍 Location: {location}")
-    print(f"⏰ Time: {subprocess.run(['date'], capture_output=True, text=True).stdout.strip()}")
+    from datetime import datetime, timezone
+    print(f"⏰ Time: {datetime.now(timezone.utc).isoformat()}")
     
     all_passed = True
     
-    # പരിശോധനകൾ നടത്തുക
+    # Run checks
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # സംഗ്രഹം
+    # Summary
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
-        print("✅ All quota checks passed - sufficient capacity available")
+        print("✅ Implemented quota thresholds passed; not a capacity reservation")
         sys.exit(0)
     else:
         print("❌ Some quota limits are near capacity - consider requesting increases")
@@ -1058,20 +1082,20 @@ if __name__ == "__main__":
 
 ---
 
-## സുരക്ഷ & അനുസരണ പരിശോധനകൾ
+## സുരക്ഷയും പാലനവും പരിശോധനകൾ
 
-### സുരക്ഷ പരിശോധന സ്ക്രിപ്റ്റ്
+### സുരക്ഷാ പരിശോധനാ സ്ക്രിപ്റ്റ്
 
 ```bash
 #!/bin/bash
-# AZD വിന്യസങ്ങൾക്ക് സുരക്ഷയും പാലന പരിശോധനയും
+# Security and compliance validation for AZD deployments
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # കീ വാൾട്ട് ഉപയോഗം പരിശോധിക്കുക
+    # Check for Key Vault usage
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # മാനേജ് ചെയ്ത ഐഡന്റിറ്റി ഉപയോഗം പരിശോധിക്കുക
+    # Check for managed identity usage
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # HTTPS ബാധ്യത പരിശോധിക്കുക
+    # Check for HTTPS enforcement
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1119,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # ಕನಿಷ್ಠ TLS പതിപ്പ് പരിശോധിക്കുക
+    # Check for minimum TLS version
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1127,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # പൊതു പ്രവേശന നിയന്ത്രണങ്ങൾ പരിശോധിക്കുക
+    # Check for public access restrictions
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1135,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # നെറ്റ്‌വർക്ക് സുരക്ഷ സംഘം പരിശോധിക്കുക
+    # Check for network security groups
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1148,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # ഡാറ്റ എൻക്രിപ്ഷൻ പരിശോധിക്കുക
+    # Check for data encryption
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # ഓഡിറ്റ് ലോഗിംഗ് പരിശോധിക്കുക
+    # Check for audit logging
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # ബാക്കപ്പ് ഉം നിലനിർത്തൽ നയങ്ങൾ പരിശോധിക്കുക
+    # Check for backup and retention policies
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1170,7 @@ check_compliance_requirements() {
     fi
 }
 
-# പ്രധാന നിർവഹണം
+# Main execution
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1157,13 +1181,13 @@ main() {
         exit 1
     fi
     
-    local security_issues
-    security_issues=$(check_security_practices)
+    local security_issues=0
+    check_security_practices || security_issues=$?
     check_compliance_requirements
     
     echo -e "\n=== Security Check Summary ==="
     if [[ $security_issues -eq 0 ]]; then
-        echo "✅ All security checks passed"
+        echo "✅ Text-search reminders passed; this is not a security/compliance assessment"
         exit 0
     else
         echo "⚠️  $security_issues security recommendations found"
@@ -1177,9 +1201,9 @@ main "$@"
 
 ---
 
-## CI/CD ഒരுங்கലിൽ സംയോജനം
+## CI/CD-യുമായി സംയോജനം
 
-### GitHub ആക്ഷൻസിനോടുള്ള സംയോജനം
+### GitHub പ്രവർത്തനങ്ങളുടെ സംയോജനം
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1203,20 +1227,36 @@ on:
 
 jobs:
   preflight:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
     - name: Install AZD
       uses: Azure/setup-azd@v0.1.0
+      with:
+        version: 1.37.2
     
-    - name: Install Azure CLI
-      uses: azure/setup-azure@v3
+    - name: Verify prerequisites
+      run: |
+        az version
+        jq --version
+        python3 -c "import yaml"
     
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+    - name: AZD Login
+      run: |
+        azd auth login --client-id "${{ vars.AZURE_CLIENT_ID }}" \
+          --tenant-id "${{ vars.AZURE_TENANT_ID }}" \
+          --federated-credential-provider github
     
     - name: Run Pre-flight Checks
       run: |
@@ -1230,13 +1270,9 @@ jobs:
         chmod +x ./scripts/security-check.sh
         ./scripts/security-check.sh
     
-    - name: Upload Results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: preflight-results
-        path: preflight-results.json
 ```
+
+ഈ പ്രവാഹത്തിന് ഫെഡറേറ്റഡ് ക്രെഡൻഷ്യലുകൾ ക്രമീകരിക്കുകയും തിരഞ്ഞെടുക്കപ്പെട്ട azd പരിസ്ഥിതി സൃഷ്‌ടിക്കുകയും പുനസംസ്ഥാപിക്കുകയും ചെയ്ത് സേവ് ചെയ്ത സ്ക്രിപ്റ്റുകൾ പ്രവർത്തിപ്പിക്കുക. ഈ ഉദാഹരണങ്ങൾ കൺസോൾ ഔട്ട്പുട്ട് മാത്രമാണ് നൽകുന്നത്; `preflight-results.json` അല്ലെങ്കിൽ JUnit ഫയൽ ഉണ്ടാകുന്നില്ല.
 
 ### Azure DevOps സംയോജനം
 
@@ -1272,76 +1308,80 @@ steps:
       curl -fsSL https://aka.ms/install-azd.sh | bash
       export PATH=$PATH:~/.azd/bin
 
-- task: Bash@3
+- task: AzureCLI@2
   displayName: 'Run Pre-flight Checks'
   inputs:
-    targetType: filePath
-    filePath: './scripts/preflight-check.sh'
-    arguments: '--environment-name ${{ parameters.environment }} --location ${{ parameters.location }}'
-
-- task: PublishTestResults@2
-  displayName: 'Publish Pre-flight Results'
-  condition: always()
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: 'preflight-results.xml'
-    testRunTitle: 'Pre-flight Validation'
+    azureSubscription: $(serviceConnection)
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      set -e
+      # Requires a workload-identity-federated service connection.
+      # AzureCLI@2 supplies AZURESUBSCRIPTION_* for the azd provider.
+      azd auth login --federated-credential-provider azure-pipelines
+      bash ./scripts/preflight-check.sh \
+        --environment-name "${{ parameters.environment }}" \
+        --location "${{ parameters.location }}"
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 ```
 
+പൈപ്പ്ലൈൻ താൻ‍റെ azd പരിസ്ഥിതി പുനരുദ്ധാരണം/സൃഷ്ടി ചെയ്ത് ഈ പാഠത്തിൽ കാണിച്ച സ്ക്രിപ്റ്റുകൾ സേവ് ചെയ്യുകയും ഈ ജോബ് മുമ്പ് നടത്തുകയും വേണം. ഫെഡറേറ്റഡ് സർവീസ് കണക്ഷൻ ക്രമീകരിക്കുക, പൈപ്പ്‌ലൈന് ആവശ്യമായ ടോക്കൺ അനുവാദങ്ങൾ അനുവദിക്കുക. മുൻപ് നടന്ന `AzureCLI@2` ടാസ്‌കിലെ Azure CLI ലോഗിൻ പിന്നീട് നടക്കുന്ന സാധാരണ ബാഷ് ടാസ്‌ക് ഓതന്റിക്കേറ്റു ചെയ്യും എന്ന് കരുതി മിക്കവാറും പ്രതീക്ഷിക്കുന്നുതല്ല.
+
 ---
 
-## മികച്ച പ്രാക്ടീസുകൾ സംഗ്രഹം
+## മികച്ച നടപ്പാക്കൽ ചുരുങ്ങിയത്
 
-### ✅ മുൻഫ്ലൈറ്റ് പരിശോധന മികച്ച പ്രാക്ടീസുകൾ
+### ✅ പ്രീ-ഫ്ലൈറ്റ് പരിശോധന മികച്ച രീതികൾ
 
-1. **ഓട്ടോമേഷൻ സാധ്യമാകാൻ**
+1. **സാധ്യമായിടത്ത് സ്വയംമാറ്റം വരുത്തുക**
    - CI/CD പൈപ്പ്ലൈനുകളിൽ പരിശോധനകൾ സംയോജിപ്പിക്കുക
-   - ആവർത്തന പരിശോധനകൾക്കായി സ്ക്രിപ്റ്റുകൾ ഉപയോഗിക്കുക
-   - ഓഡിറ്റ് ട്രെയിലുകൾക്കായി ഫലങ്ങൾ സൂക്ഷിക്കുക
+   - പരിശോധനകൾ ആവർത്തിക്കാവുന്നതായി സ്ക്രിപ്റ്റുകൾ ഉപയോഗിക്കുക
+   - ഓഡിറ്റ് ട്രെയ്ലുകൾക്കായി ഫലങ്ങൾ സൂക്ഷിക്കുക
 
-2. **പരിസ്ഥിതി-സ്പെസിഫിക് പരിശോധന**
-   - ഡെവ്/സ്റ്റേജിംഗ്/പ്രോഡിന് വ്യത്യസ്ത പരിശോധനകൾ
-   - അനുയോജ്യമായ സുരക്ഷാ ആവശ്യങ്ങൾ ഓരോ പരിസ്ഥിതിക്കും
-   - പ്രോഡക്ഷൻ അല്ലാത്ത പരിസ്ഥിതികൾക്കുള്ള ചെലവ് പ്രതിഫലം
+2. **പരിസ്ഥിതിബന്ധമായ സ്ഥിരീകരണം**
+   - ഡെവ്ലപ്‌മെന്റ് / സ്റ്റേജിംഗ് / പ്രൊഡക്ഷൻ വ്യത്യസ്ത പരിശോധനകൾ
+   - പരിസ്ഥിതിക്ക് അനുയോജ്യമായ സുരക്ഷാ ആവശ്യകതകൾ
+   - പ്രൊഡക്ഷൻ അല്ലാത്ത പരിസ്ഥിതികൾക്കുള്ള ചെലവ് തകൃതിയായമായുള്ള വിനിയോഗം
 
 3. **സമഗ്ര പരിധി**
-   - തെളിവും അനുമതികളും
-   - സ്രോതസി ക്വോട്ടകളും ലഭ്യതയും
-   - ടെംപ്ലേറ്റ് പരിശോധനയും വ്യാകരണവും
-   - സുരക്ഷയും അനുസരണ ആവശ്യങ്ങളും
+   - ഓതന്റിക്കേഷൻയും അനുമതികളും
+   - സ്രോതസുകളുടെ ക്വോട്ടകളും ലഭ്യതയും
+   - ടെംപ്ലേറ്റ് പരിശോധനയും സംഘാടകയിലും
+   - സുരക്ഷയും പാലന ആവശ്യകതകളും
 
-4. **വ്യക്തമായ റിപ്പോർട്ടിംഗ്**
-   - നിറത്തോട് ചേർന്ന സ്ഥിതി സൂചകങ്ങൾ
-   - പരിഹാര നടപടിക്രമങ്ങളോടുള്ള വിശദമായ പിശക് സന്ദേശങ്ങൾ
-   - വേഗത്തിലുള്ള വിലയിരുത്തലിന് സംഗ്രഹ റിപ്പോർട്ടുകൾ
+4. **വാർത്താ വ്യക്തമാക്കൽ**
+   - നിറം സംജ്ഞ അടിസ്ഥാനത്തിൽ നില സൂചനകൾ
+   - പിഴവ് സന്ദേശങ്ങൾ പരിഹാര ചുവടുകൾ ഉൾപ്പെടെ
+   - തൽപരിശോധനക്കുള്ള സംക്ഷിപ്ത റിപ്പോർട്ടുകൾ
 
-5. **വേഗത്തിൽ പരാജയപ്പെടൽ**
-   - നിർണായക പരിശോധനകൾ പരാജയപ്പെട്ടാൽ വിന്യാസം അവസാനിപ്പിക്കുക
-   - പരിഹാരത്തിന് വ്യക്തമായ മാർഗ നിർദ്ദേശം നൽകുക
-   - പരിശോധനകൾ പുനഃക്രമീകരിക്കാൻ എളുപ്പമാക്കുക
+5. **വേഗത്തിൽ പരാജയമാകുക**
+   - നിർണ്ണായക പരിശേധനകൾ പരാജയപ്പെട്ടാൽ വിന്യസനം നിർത്തുക
+   - പരിഹാരത്തിനുള്ള ശുശ്രൂഷിത നിർദ്ദേശങ്ങൾ നൽകുക
+   - പരിശോധന പുനരാരംഭിക്കാൻ എളുപ്പമാക്കുക
 
-### സാധാരണ മുൻഫ്ലൈറ്റ് പിഴവുകൾ
+### പൊതുവായ പ്രീ-ഫ്ലൈറ്റ് പിഴവ് പിഴകൽ
 
-1. "വേഗതയുള്ള" വിന്യാസങ്ങൾക്ക് പരിശോധന ഒഴിവാക്കൽ
-2. വേണ്ടത്ര അനുവാദങ്ങൾ പരിശോധിക്കാതെ വിന്യാസം
-3. വിന്യാസ പരാജയമായത് വരെ ക്വോട്ടാ പരിധികൾ അവഗണിക്കൽ
-4. CI/CD പൈപ്പ്ലൈനുകളിൽ ടെംപ്ലേറ്റുകൾ പരിശോദിക്കാതെ പോകൽ
-5. പ്രോഡക്ഷൻ പരിസ്ഥിതിക്ക് സുരക്ഷാ പരിശോധന നഷ്ടപ്പെട്ടത്
-6. ചെലവ് കണക്കുകൂട്ടൽ അപര്യാപ്തത കൊണ്ട് ബജറ്റ് അപ്രതീക്ഷിതം
+1. **"വേഗത്തിലുള്ള" വിന്യസനത്തിനായി സ്ഥിരീകരണം ഒഴിവാക്കുക**
+2. **വിന്യസനത്തിന് മുമ്പിലെ അനുയോജ്യമായ അനുവാദം പരിശോധിക്കാത്തത്**
+3. **ക്വോട്ട പരിധികൾ അവഗണിച്ച് വിന്യസനം പരാജയപ്പെടുന്നത് വരെ കാത്തിരിക്കുക**
+4. **CI/CD പൈപ്പ്ലൈനുകളിൽ ടെംപ്ലേറ്റുകൾ പരിശോധിക്കാത്തത്**
+5. **പ്രൊഡക്ഷൻ പരിസ്ഥിതികൾക്ക് സുരക്ഷാ പരിശോധന നഷ്ടപ്പെടുന്നത്**
+6. **ചിലവുകൂട് കണക്കാക്കൽ കൂട്ടിയപ്പോൾ ബജറ്റ് ഞെട്ടലുകൾ ഉണ്ടാകുന്നത്**
 
 ---
 
-**പ്രോ ടിപ്പ്**: മുൻഫ്ലൈറ്റ് പരിശോധനകൾ പ്രോഡക്ഷൻ ജോബിന് മുമ്പായി CI/CD പൈപ്പ്ലൈനിൽ വിച്ഛേദിച്ച ജോബായി നടത്തുക. ഇതു പ്രശ്നങ്ങൾ നേരത്തേ കണ്ടെത്താനും ഡെവലപ്പർമാർക്ക് വേഗത്തിലുള്ള ഫീഡ്ബാക്ക് നൽകാനും സഹായിക്കുമെന്നു കരുതൂ.
+**പ്രൊ ടിപ്പ്**: യഥാർത്ഥ വിന്യസനം ജോബിന് മുൻപായി CI/CD പൈപ്പ്‌ലൈനിൽ പ്രീ-ഫ്ലൈറ്റ് പരിശോധനകൾ വേർതിരിച്ചുള്ള ജോബായി നടത്തുക. ഇത് പ്രശ്നങ്ങൾ മുൻകൂട്ടി പിടിക്കാൻ സഹായിക്കും, ഡെവലപ്പർമാർക്ക് വേഗത്തിലുള്ള ഫീഡ്ബാക്ക് നൽകും.
 
 ---
 
 **നാവിഗേഷൻ**
-- **മുൻപത്തെ പാഠം**: [SKU തെരഞ്ഞെടുപ്പ്](sku-selection.md)
+- **മുമ്പത്തേ പാഠം**: [SKU തിരഞ്ഞെടുപ്പ്](sku-selection.md)
 - **അടുത്ത പാഠം**: [ചീറ്റ്ഷീറ്റ്](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**പരിചയപ്പെടുത്തല്‍**:  
-ഈ ഡോക്യുമെന്‍ट [Co-op Translator](https://github.com/Azure/co-op-translator) എന്ന എഐ വിവര്‍ത്തന സേവനം ഉപയോഗിച്ചാണ് വിവര്‍ത്തനം ചെയ്തിരിക്കുന്നത്. ഞങ്ങള്‍ ശുദ്ധതയെത്തിക്കാന്‍ ശ്രമിക്കുന്നുവെങ്കിലും, ഓട്ടോമാറ്റഡ് വിവര്‍ത്തനങ്ങളില്‍ പിഴവുകള്‍ അഥവാ തെറ്റായ വിവരങ്ങള്‍ ഉണ്ടായിരിക്കാമെന്ന് ദയവായി ശ്രദ്ധിക്കുക. സത്യസന്ധമായ ഉറവിടം ആത്മജനഭാഷയിലെ മൗലിക ഡോക്യുമെന്‍റാണ്. അത്യന്താപേക്ഷിതമായ വിവരങ്ങള്‍ക്ക് പ്രൊഫഷണല്‍ മാനവ വിവര്‍ത്തനം പ്രയോജനപ്പെടും. ഈ വിവര്‍ത്തനത്തിന്റെ ഉപയോഗത്തില്‍ ഉണ്ടാകുന്ന തെറ്റിദ്ധാരണകള്‍ക്കും തെറ്റായ വ്യാഖ്യാനങ്ങള്‍ക്കും ഞങ്ങള്‍ ഉത്തരവാദികള്‍ അല്ല.
+**അറിയിപ്പ്**:
+ഈ രേഖ AI പരിഭാഷാ സേവനം [Co-op Translator](https://github.com/Azure/co-op-translator) ഉപയോഗിച്ച് പരിഭാഷപ്പെടുത്തിയതാണ്. ഞങ്ങൾ കൃത്യതയ്ക്കായി ശ്രമിക്കുന്നുവെങ്കിലും, ഓട്ടോമേറ്റഡ് പരിഭാഷകളിൽ പിഴവുകൾ അല്ലെങ്കിൽ തെറ്റായ വിവരങ്ങൾ ഉണ്ടാകാൻ സാധ്യതയുണ്ട്. അതിന്റെ സ്വാഭാവിക ഭാഷയിലുള്ള അസൽ രേഖയാണ് പ്രാമാണികമായ ഉറവിടമായി പരിഗണിക്കേണ്ടത്. നിർണായകമായ വിവരങ്ങൾക്ക്, പ്രൊഫഷണൽ മനുഷ്യ പരിഭാഷ ശുപാർശ ചെയ്യുന്നു. ഈ പരിഭാഷ ഉപയോഗിച്ച് ഉണ്ടാകുന്ന തെറ്റിദ്ധാരണകൾ അല്ലെങ്കിൽ തെറ്റായ വ്യാഖ്യാനങ്ങൾക്കായി ഞങ്ങൾ ഉത്തരവാദികളല്ല.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

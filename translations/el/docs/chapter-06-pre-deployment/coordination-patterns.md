@@ -1,81 +1,83 @@
-# Πρότυπα Συντονισμού Πολλών Πρακτόρων
+# Πρότυπα Συντονισμού Πολυ-Πρακτόρων
 
-⏱️ **Εκτιμώμενος χρόνος**: 60-75 λεπτά | 💰 **Εκτιμώμενο κόστος**: ~$100-300/month | ⭐ **Πολυπλοκότητα**: Προχωρημένο
+⏱️ **Εκτιμώμενος Χρόνος**: 60-75 λεπτά ανάγνωσης· αρκετές ώρες για υλοποίηση | 💰 **Εκτιμώμενο Κόστος**: εξαρτώμενο από φόρτο εργασίας | ⭐ **Βαθμός Δυσκολίας**: Προχωρημένος
 
 **📚 Διαδρομή Μάθησης:**
-- ← Προηγούμενο: [Σχεδιασμός Χωρητικότητας](capacity-planning.md) - Μέγεθος πόρων και στρατηγικές κλιμάκωσης
-- 🎯 **Είστε εδώ**: Πρότυπα Συντονισμού Πολλών Πρακτόρων (Ορχήστρωση, επικοινωνία, διαχείριση κατάστασης)
-- → Επόμενο: [Επιλογή SKU](sku-selection.md) - Επιλογή των κατάλληλων υπηρεσιών Azure
-- 🏠 [Αρχική Μαθήματος](../../README.md)
+- ← Προηγούμενο: [Capacity Planning](capacity-planning.md) - Στρατηγικές διαχείρισης μεγέθους και κλιμάκωσης πόρων
+- 🎯 **Είστε Εδώ**: Πρότυπα Συντονισμού Πολυ-Πρακτόρων (Ορχήστρωση, επικοινωνία, διαχείριση κατάστασης)
+- → Επόμενο: [SKU Selection](sku-selection.md) - Επιλογή κατάλληλων υπηρεσιών Azure
+- 🏠 [Αρχική Σελίδα Μαθήματος](../../README.md)
 
 ---
 
-## Τι θα μάθετε
+## Τι θα Μάθετε
 
-Ολοκληρώνοντας αυτό το μάθημα, θα:
-- Θα κατανοήσετε τα πρότυπα **αρχιτεκτονικής πολλαπλών πρακτόρων** και πότε να τα χρησιμοποιείτε
-- Θα υλοποιήσετε **πρότυπα ορχήστρωσης** (κεντρικοποιημένα, αποκεντρωμένα, ιεραρχικά)
-- Θα σχεδιάσετε στρατηγικές **επικοινωνίας πρακτόρων** (συγχρονικές, ασύγχρονες, βασισμένες σε γεγονότα)
-- Θα διαχειριστείτε **κοινή κατάσταση** σε κατανεμημένους πράκτορες
-- Θα αναπτύξετε **συστήματα πολλαπλών πρακτόρων** στο Azure με AZD
-- Θα εφαρμόσετε **πρότυπα συντονισμού** σε πραγματικά σενάρια AI
-- Θα παρακολουθείτε και θα αποσφαλματώνετε κατανεμημένα συστήματα πρακτόρων
+Με την ολοκλήρωση αυτού του μαθήματος, θα:
+- Κατανοήσετε πρότυπα **αρχιτεκτονικής πολυ-πρακτόρων** και πότε να τα χρησιμοποιείτε
+- Υλοποιήσετε **πρότυπα ορχήστρωσης** (κεντρικοποιημένη, αποκεντρωμένη, ιεραρχική)
+- Σχεδιάσετε στρατηγικές **επικοινωνίας πρακτόρων** (συγχρονισμένη, ασύγχρονη, εκδήλωση-οδηγούμενη)
+- Διαχειριστείτε **κοινή κατάσταση** μεταξύ διανεμημένων πρακτόρων
+- Αναπτύξετε **συστήματα πολυ-πρακτόρων** στο Azure με AZD
+- Εφαρμόσετε **πρότυπα συντονισμού** για ρεαλιστικά σενάρια τεχνητής νοημοσύνης
+- Παρακολουθείτε και εντοπίζετε σφάλματα σε διανεμημένα συστήματα πρακτόρων
 
-## Γιατί ο Συντονισμός Πολλών Πρακτόρων έχει Σημασία
+## Γιατί έχει σημασία ο Συντονισμός Πολυ-Πρακτόρων
 
-### Η Εξέλιξη: Από έναν Πράκτορα σε Πολλούς Πράκτορες
+### Η Εξέλιξη: Από Μοναδικό Πράκτορα σε Πολυ-Πράκτορες
 
-**Μοναδικός Πράκτορας (Απλό):**
+**Μοναδικός Πράκτορας (Απλός):**
 ```
 User → Agent → Response
 ```
-- ✅ Εύκολο στην κατανόηση και υλοποίηση
-- ✅ Γρήγορο για απλές εργασίες
-- ❌ Περιορισμένο από τις δυνατότητες ενός μοντέλου
+- ✅ Εύκολος στην κατανόηση και υλοποίηση
+- ✅ Γρήγορος για απλές εργασίες
+- ❌ Περιορισμένος από τις δυνατότητες ενός μοντέλου
 - ❌ Δεν μπορεί να παραλληλοποιήσει σύνθετες εργασίες
-- ❌ Δεν υπάρχει εξειδίκευση
+- ❌ Χωρίς εξειδίκευση
 
-**Σύστημα Πολλών Πρακτόρων (Προχωρημένο):**
+**Σύστημα Πολυ-Πρακτόρων (Προχωρημένο):**
 ```mermaid
 graph TD
-    Orchestrator[Ορχηστρωτής] --> Agent1[Πράκτορας1<br/>Σχέδιο]
-    Orchestrator --> Agent2[Πράκτορας2<br/>Κώδικας]
-    Orchestrator --> Agent3[Πράκτορας3<br/>Ανασκόπηση]
-```- ✅ Εξειδικευμένοι πράκτορες για συγκεκριμένες εργασίες
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```
+- ✅ Εξειδικευμένοι πράκτορες για συγκεκριμένες εργασίες
 - ✅ Παράλληλη εκτέλεση για ταχύτητα
-- ✅ Δομημένο σε μονάδες και ευκολοσυντηρήσιμο
+- ✅ Μοντέρνο και εύκολο στη συντήρηση
 - ✅ Καλύτερο σε σύνθετες ροές εργασίας
 - ⚠️ Απαιτεί λογική συντονισμού
 
-**Αναλογία**: Ο μοναδικός πράκτορας είναι σαν ένα άτομο που κάνει όλες τις εργασίες. Το σύστημα πολλών πρακτόρων είναι σαν μια ομάδα όπου κάθε μέλος έχει εξειδικευμένες δεξιότητες (ερευνητής, προγραμματιστής, επιμελητής, συγγραφέας) που συνεργάζονται.
+**Αναλογία**: Ο μοναδικός πράκτορας μοιάζει με ένα άτομο που κάνει όλες τις εργασίες. Ο πολυ-πράκτορας είναι σαν μια ομάδα όπου κάθε μέλος έχει εξειδικευμένες δεξιότητες (ερευνητής, προγραμματιστής, αξιολογητής, συγγραφέας) που συνεργάζονται.
 
 ---
 
-## Κύρια Πρότυπα Συντονισμού
+## Βασικά Πρότυπα Συντονισμού
 
 ### Πρότυπο 1: Διαδοχικός Συντονισμός (Αλυσίδα Ευθύνης)
 
-**Πότε να χρησιμοποιηθεί**: Οι εργασίες πρέπει να ολοκληρωθούν σε συγκεκριμένη σειρά, κάθε πράκτορας βασίζεται στην έξοδο του προηγούμενου.
+**Πότε να χρησιμοποιείται**: Οι εργασίες πρέπει να ολοκληρώνονται με συγκεκριμένη σειρά, κάθε πράκτορας βασίζεται στα αποτελέσματα του προηγούμενου.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as Πράκτορας Έρευνας
-    participant Agent2 as Πράκτορας Συγγραφής
-    participant Agent3 as Πράκτορας Επιμέλειας
+    participant Agent1 as Research Agent
+    participant Agent2 as Writer Agent
+    participant Agent3 as Editor Agent
     
-    User->>Orchestrator: "Γράψε άρθρο για την τεχνητή νοημοσύνη"
-    Orchestrator->>Agent1: Ερεύνησε το θέμα
-    Agent1-->>Orchestrator: Αποτελέσματα έρευνας
-    Orchestrator->>Agent2: Γράψε προσχέδιο (με χρήση της έρευνας)
-    Agent2-->>Orchestrator: Προσχέδιο άρθρου
-    Orchestrator->>Agent3: Επιμέλεια και βελτίωση
-    Agent3-->>Orchestrator: Τελικό άρθρο
-    Orchestrator-->>User: Επεξεργασμένο άρθρο
+    User->>Orchestrator: "Write article about AI"
+    Orchestrator->>Agent1: Research topic
+    Agent1-->>Orchestrator: Research results
+    Orchestrator->>Agent2: Write draft (using research)
+    Agent2-->>Orchestrator: Draft article
+    Orchestrator->>Agent3: Edit and improve
+    Agent3-->>Orchestrator: Final article
+    Orchestrator-->>User: Polished article
     
-    Note over User,Agent3: Σειριακά: Κάθε βήμα περιμένει το προηγούμενο
+    Note over User,Agent3: Sequential: Each step waits for previous
 ```
+
 **Οφέλη:**
 - ✅ Σαφής ροή δεδομένων
 - ✅ Εύκολο στον εντοπισμό σφαλμάτων
@@ -84,28 +86,28 @@ sequenceDiagram
 **Περιορισμοί:**
 - ❌ Πιο αργό (χωρίς παραλληλισμό)
 - ❌ Μια αποτυχία μπλοκάρει ολόκληρη την αλυσίδα
-- ❌ Δεν μπορεί να χειριστεί αλληλεξαρτώμενες εργασίες
+- ❌ Δεν μπορεί να χειριστεί αλληλοεξαρτώμενες εργασίες
 
 **Παραδείγματα Χρήσης:**
-- Pipeline δημιουργίας περιεχομένου (έρευνα → συγγραφή → επιμέλεια → δημοσίευση)
-- Γενιά κώδικα (σχεδιασμός → υλοποίηση → δοκιμή → ανάπτυξη)
-- Δημιουργία αναφορών (συλλογή δεδομένων → ανάλυση → οπτικοποίηση → σύνοψη)
+- Ροή δημιουργίας περιεχομένου (έρευνα → σύνταξη → επεξεργασία → δημοσίευση)
+- Δημιουργία κώδικα (σχεδιασμός → υλοποίηση → δοκιμή → αναβάθμιση)
+- Δημιουργία αναφορών (συλλογή δεδομένων → ανάλυση → οπτικοποίηση → περίληψη)
 
 ---
 
 ### Πρότυπο 2: Παράλληλος Συντονισμός (Fan-Out/Fan-In)
 
-**Πότε να χρησιμοποιηθεί**: Ανεξάρτητες εργασίες μπορούν να εκτελεστούν ταυτόχρονα, τα αποτελέσματα συνδυάζονται στο τέλος.
+**Πότε να χρησιμοποιείται**: Ανεξάρτητες εργασίες μπορούν να τρέξουν ταυτόχρονα, με συνδυασμό αποτελεσμάτων στο τέλος.
 
 ```mermaid
 graph TB
-    User[Αίτημα Χρήστη]
-    Orchestrator[Ορχηστρωτής]
-    Agent1[Πράκτορας Ανάλυσης]
-    Agent2[Πράκτορας Έρευνας]
-    Agent3[Πράκτορας Δεδομένων]
-    Aggregator[Συγκεντρωτής Αποτελεσμάτων]
-    Response[Συνδυασμένη Απάντηση]
+    User[User Request]
+    Orchestrator[Orchestrator]
+    Agent1[Analysis Agent]
+    Agent2[Research Agent]
+    Agent3[Data Agent]
+    Aggregator[Result Aggregator]
+    Response[Combined Response]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -119,36 +121,37 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Οφέλη:**
 - ✅ Γρήγορο (παράλληλη εκτέλεση)
-- ✅ Ανθεκτικό σε σφάλματα (επιτρέπονται μερικά αποτελέσματα)
+- ✅ Ανθεκτικό σε σφάλματα (αποδεκτά μερικά αποτελέσματα)
 - ✅ Κλιμακώνεται οριζόντια
 
 **Περιορισμοί:**
 - ⚠️ Τα αποτελέσματα μπορεί να φτάσουν εκτός σειράς
-- ⚠️ Απαιτείται λογική συγκέντρωσης αποτελεσμάτων
+- ⚠️ Απαιτείται λογική συγκερασμού
 - ⚠️ Σύνθετη διαχείριση κατάστασης
 
 **Παραδείγματα Χρήσης:**
-- Συλλογή δεδομένων από πολλαπλές πηγές (API + βάσεις δεδομένων + web scraping)
-- Ανταγωνιστική ανάλυση (πολλαπλά μοντέλα παράγουν λύσεις, επιλέγεται η καλύτερη)
-- Υπηρεσίες μετάφρασης (μεταφράσεις σε πολλαπλές γλώσσες ταυτόχρονα)
+- Συλλογή δεδομένων από πολλαπλές πηγές (APIs + βάσεις δεδομένων + web scraping)
+- Ανάλυση ανταγωνισμού (πολλαπλά μοντέλα παράγουν λύσεις, επιλέγεται η καλύτερη)
+- Υπηρεσίες μετάφρασης (ταυτόχρονη μετάφραση σε πολλές γλώσσες)
 
 ---
 
-### Πρότυπο 3: Ιεραρχικός Συντονισμός (Manager-Worker)
+### Πρότυπο 3: Ιεραρχικός Συντονισμός (Διαχειριστής-Εργάτης)
 
-**Πότε να χρησιμοποιηθεί**: Σύνθετες ροές εργασίας με υπο-εργασίες, απαιτείται ανάθεση.
+**Πότε να χρησιμοποιείται**: Σύνθετες ροές εργασίας με υπο-εργασίες και απαραίτητη ανάθεση.
 
 ```mermaid
 graph TB
-    Master[Κύριος Ορχηστρωτής]
-    Manager1[Υπεύθυνος Έρευνας]
-    Manager2[Υπεύθυνος Περιεχομένου]
-    W1[Σαρωτής Ιστού]
-    W2[Αναλυτής Εγγράφων]
-    W3[Συγγραφέας]
-    W4[Επιμελητής]
+    Master[Master Orchestrator]
+    Manager1[Research Manager]
+    Manager2[Content Manager]
+    W1[Web Scraper]
+    W2[Paper Analyzer]
+    W3[Writer]
+    W4[Editor]
     
     Master --> Manager1
     Master --> Manager2
@@ -161,75 +164,77 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
+
 **Οφέλη:**
-- ✅ Χειρίζεται σύνθετες ροές εργασίας
-- ✅ Δομημένο σε μονάδες και ευκολοσυντηρήσιμο
+- ✅ Διαχειρίζεται σύνθετες ροές εργασίας
+- ✅ Μοντέρνο και εύκολο στη συντήρηση
 - ✅ Σαφή όρια ευθυνών
 
 **Περιορισμοί:**
-- ⚠️ Πιο πολύπλοκη αρχιτεκτονική
+- ⚠️ Πιο σύνθετη αρχιτεκτονική
 - ⚠️ Μεγαλύτερη καθυστέρηση (πολλαπλά επίπεδα συντονισμού)
 - ⚠️ Απαιτεί προηγμένη ορχήστρωση
 
 **Παραδείγματα Χρήσης:**
-- Επεξεργασία εγγράφων επιχείρησης (κατηγοριοποίηση → δρομολόγηση → επεξεργασία → αρχειοθέτηση)
-- Πολυ-σταδιακά data pipelines (εισαγωγή → καθαρισμός → μετασχηματισμός → ανάλυση → αναφορά)
-- Σύνθετες ροές αυτοματοποίησης (σχεδιασμός → κατανομή πόρων → εκτέλεση → παρακολούθηση)
+- Επεξεργασία εταιρικών εγγράφων (κατηγοριοποίηση → δρομολόγηση → επεξεργασία → αρχειοθέτηση)
+- Πολυεπίπεδες ροές δεδομένων (εισαγωγή → καθαρισμός → μετασχηματισμός → ανάλυση → αναφορά)
+- Σύνθετες ροές αυτοματισμού (σχεδιασμός → κατανομή πόρων → εκτέλεση → παρακολούθηση)
 
 ---
 
-### Πρότυπο 4: Συντονισμός Βασισμένος σε Γεγονότα (Publish-Subscribe)
+### Πρότυπο 4: Εκδήλωση-Οδηγούμενος Συντονισμός (Publish-Subscribe)
 
-**Πότε να χρησιμοποιηθεί**: Όταν οι πράκτορες πρέπει να αντιδρούν σε γεγονότα και επιθυμείται χαλαρή σύζευξη.
+**Πότε να χρησιμοποιείται**: Οι πράκτορες πρέπει να αντιδρούν σε εκδηλώσεις, απαιτείται χαλαρή σύνδεση.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as Συλλέκτης Δεδομένων
-    participant EventBus as Διαύλος Υπηρεσιών Azure
-    participant Agent2 as Αναλυτής
-    participant Agent3 as Ειδοποιητής
-    participant Agent4 as Αρχειοθέτης
+    participant Agent1 as Data Collector
+    participant EventBus as Azure Service Bus
+    participant Agent2 as Analyzer
+    participant Agent3 as Notifier
+    participant Agent4 as Archiver
     
-    Agent1->>EventBus: Δημοσίευση "ΔεδομέναΠαραλήφθηκαν" γεγονότος
-    EventBus->>Agent2: Εγγραφή: Ανάλυση δεδομένων
-    EventBus->>Agent3: Εγγραφή: Αποστολή ειδοποίησης
-    EventBus->>Agent4: Εγγραφή: Αρχειοθέτηση δεδομένων
+    Agent1->>EventBus: Publish "DataReceived" event
+    EventBus->>Agent2: Subscribe: Analyze data
+    EventBus->>Agent3: Subscribe: Send notification
+    EventBus->>Agent4: Subscribe: Archive data
     
-    Note over Agent1,Agent4: Όλοι οι συνδρομητές επεξεργάζονται ανεξάρτητα
+    Note over Agent1,Agent4: All subscribers process independently
     
-    Agent2->>EventBus: Δημοσίευση "ΑνάλυσηΟλοκληρώθηκε" γεγονότος
-    EventBus->>Agent3: Εγγραφή: Αποστολή αναφοράς ανάλυσης
+    Agent2->>EventBus: Publish "AnalysisComplete" event
+    EventBus->>Agent3: Subscribe: Send analysis report
 ```
+
 **Οφέλη:**
 - ✅ Χαλαρή σύνδεση μεταξύ πρακτόρων
-- ✅ Εύκολο να προστεθούν νέοι πράκτορες (απλά εγγραφή)
-- ✅ Ασύγχρονη επεξεργασία
-- ✅ Ανθεκτικό (επίμονη αποθήκευση μηνυμάτων)
+- ✅ Εύκολο να προστεθούν νέοι πράκτορες (απλή εγγραφή)
+- ✅ Ασύγχρονος χειρισμός
+- ✅ Ανθεκτικό (επιμονή μηνυμάτων)
 
 **Περιορισμοί:**
-- ⚠️ Τελική συνοχή
-- ⚠️ Σύνθετη αποσφαλμάτωση
-- ⚠️ Προκλήσεις στην σειρά των μηνυμάτων
+- ⚠️ Τελική συνέπεια
+- ⚠️ Δύσκολη εντοπισμός σφαλμάτων
+- ⚠️ Προκλήσεις στην παραγγελία μηνυμάτων
 
 **Παραδείγματα Χρήσης:**
 - Συστήματα παρακολούθησης σε πραγματικό χρόνο (ειδοποιήσεις, πίνακες ελέγχου, αρχεία καταγραφής)
-- Πολυ-καναλικές ειδοποιήσεις (email, SMS, push, Slack)
-- Data pipelines επεξεργασίας (πολλαπλοί καταναλωτές των ίδιων δεδομένων)
+- Πολυκαναλικές ειδοποιήσεις (email, SMS, push, Slack)
+- Ροές επεξεργασίας δεδομένων (πολλαπλοί καταναλωτές των ίδιων δεδομένων)
 
 ---
 
-### Πρότυπο 5: Συντονισμός Βασισμένος σε Συμφωνία (Ψηφοφορία/Απαρτία)
+### Πρότυπο 5: Συντονισμός με Βάση τη Συμφωνία (Διαψήφιση/Κβορούμ)
 
-**Πότε να χρησιμοποιηθεί**: Όταν χρειάζεται συμφωνία από πολλούς πράκτορες πριν προχωρήσετε.
+**Πότε να χρησιμοποιείται**: Απαιτείται συμφωνία από πολλούς πράκτορες πριν προχωρήσει η διαδικασία.
 
 ```mermaid
 graph TB
-    Input[Εργασία Εισόδου]
-    Agent1[Πράκτορας 1: gpt-4.1]
-    Agent2[Πράκτορας 2: Claude]
-    Agent3[Πράκτορας 3: Gemini]
-    Voter[Ψηφοφόρος Συμφωνίας]
-    Output[Συμφωνημένη Έξοδος]
+    Input[Input Task]
+    Agent1[Agent 1: gpt-4.1]
+    Agent2[Agent 2: Claude]
+    Agent3[Agent 3: Gemini]
+    Voter[Consensus Voter]
+    Output[Agreed Output]
     
     Input --> Agent1
     Input --> Agent2
@@ -241,42 +246,43 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
+
 **Οφέλη:**
-- ✅ Υψηλότερη ακρίβεια (πολλαπλές απόψεις)
-- ✅ Ανθεκτικό σε σφάλματα (αποδεκτές οι αποτυχίες μειοψηφίας)
+- ✅ Μεγαλύτερη ακρίβεια (πολλαπλές απόψεις)
+- ✅ Ανθεκτικό σε σφάλματα (ανεκτές μικρές αποτυχίες)
 - ✅ Ενσωματωμένη διασφάλιση ποιότητας
 
 **Περιορισμοί:**
-- ❌ Ακριβό (πολλαπλές κλήσεις σε μοντέλα)
+- ❌ Ακριβό (πολλαπλές κλήσεις μοντέλων)
 - ❌ Πιο αργό (αναμονή για όλους τους πράκτορες)
 - ⚠️ Απαιτείται επίλυση συγκρούσεων
 
 **Παραδείγματα Χρήσης:**
-- Εποπτεία περιεχομένου (πολλαπλά μοντέλα ελέγχουν το περιεχόμενο)
-- Ανασκόπηση κώδικα (πολλαπλοί linters/αναλυτές)
-- Ιατρική διάγνωση (πολλαπλά μοντέλα AI, επικύρωση από ειδικούς)
+- Μέτρηση περιεχομένου (πολλαπλά μοντέλα αξιολογούν το περιεχόμενο)
+- Ανασκόπηση κώδικα (πολλαπλοί αναλυτές/ελεγκτές)
+- Ιατρική διάγνωση (πολλαπλά μοντέλα AI, επικύρωση ειδικών)
 
 ---
 
 ## Επισκόπηση Αρχιτεκτονικής
 
-### Ολοκληρωμένο Σύστημα Πολλών Πρακτόρων στο Azure
+### Πλήρες Σύστημα Πολυ-Πρακτόρων στο Azure
 
 ```mermaid
 graph TB
-    User[Χρήστης/Πελάτης API]
-    APIM[Διαχείριση API του Azure]
-    Orchestrator[Υπηρεσία Ορχηστρωτή<br/>Εφαρμογή Κοντέινερ]
-    ServiceBus[Azure Service Bus<br/>Event Hub]
+    User[User/API Client]
+    APIM[Azure API Management]
+    Orchestrator[Orchestrator Service<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Queues / Topics]
     
-    Agent1[Πράκτορας Έρευνας<br/>Εφαρμογή Κοντέινερ]
-    Agent2[Πράκτορας Συγγραφής<br/>Εφαρμογή Κοντέινερ]
-    Agent3[Πράκτορας Αναλυτής<br/>Εφαρμογή Κοντέινερ]
-    Agent4[Πράκτορας Αναθεώρησης<br/>Εφαρμογή Κοντέινερ]
+    Agent1[Research Agent<br/>Container App]
+    Agent2[Writer Agent<br/>Container App]
+    Agent3[Analyst Agent<br/>Container App]
+    Agent4[Reviewer Agent<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>Κοινή Κατάσταση)]
-    Storage[Azure Storage<br/>Αρχεία]
-    AppInsights[Application Insights<br/>Παρακολούθηση]
+    CosmosDB[(Cosmos DB<br/>Shared State)]
+    Storage[Azure Storage<br/>Artifacts]
+    AppInsights[Application Insights<br/>Monitoring]
     
     User --> APIM
     APIM --> Orchestrator
@@ -307,17 +313,20 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Κύρια Συστατικά:**
 
 | Συστατικό | Σκοπός | Υπηρεσία Azure |
 |-----------|---------|---------------|
-| **Πύλη API** | Σημείο εισόδου, περιορισμός αιτήσεων, εξουσιοδότηση | API Management |
-| **Ορχηστρωτής** | Συντονίζει ροές εργασίας πρακτόρων | Container Apps |
-| **Ουρά Μηνυμάτων** | Ασύγχρονη επικοινωνία | Service Bus / Event Hubs |
-| **Πράκτορες** | Εξειδικευμένοι AI εργαζόμενοι | Container Apps / Functions |
-| **Αποθήκη Κατάστασης** | Κοινή κατάσταση, παρακολούθηση εργασιών | Cosmos DB |
-| **Αποθήκευση Αρχείων** | Έγγραφα, αποτελέσματα, αρχεία καταγραφής | Blob Storage |
-| **Παρακολούθηση** | Κατανεμημένη ιχνηλάτηση, αρχεία καταγραφής | Application Insights |
+| **API Gateway** | Σημείο εισόδου, περιορισμός ρυθμού, αυθεντικοποίηση | API Management |
+| **Orchestrator** | Συντονίζει ροές εργασιών πρακτόρων | Container Apps |
+| **Message Queue** | Ασύγχρονη επικοινωνία | Service Bus / Event Hubs |
+| **Πράκτορες** | Εξειδικευμένοι εργαζόμενοι AI | Container Apps / Functions |
+| **State Store** | Κοινή κατάσταση, παρακολούθηση εργασιών | Cosmos DB |
+| **Artifact Storage** | Έγγραφα, αποτελέσματα, αρχεία καταγραφής | Blob Storage |
+| **Monitoring** | Διανεμημένη παρακολούθηση, αρχεία καταγραφής | Application Insights |
+
+Τα queues/topics του Service Bus και τα Event Hubs είναι διαφορετικές υπηρεσίες με διαφορετικά μοντέλα παράδοσης/κατανάλωσης· το Event Hubs δεν αντικαθιστά αυτόματα τον κώδικα εργαζομένου του Service Bus που ακολουθεί. Ο παραλληλισμός, τα επίμονα μηνύματα και η ψηφοφορία μοντέλων από μόνα τους δεν εγγυώνται ανθεκτικότητα ή μεγαλύτερη ακρίβεια.
 
 ---
 
@@ -326,39 +335,45 @@ graph TB
 ### Απαιτούμενα Εργαλεία
 
 ```bash
-# Επαληθεύστε το Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Αναμενόμενο: azd έκδοση 1.0.0 ή νεότερη
+# Command reference baseline: azd 1.37.2
 
-# Επαληθεύστε το Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Αναμενόμενο: azure-cli 2.50.0 ή νεότερη
+# ✅ Expected: azure-cli 2.50.0 or higher
 
-# Επαληθεύστε το Docker (για τοπικές δοκιμές)
+# Verify Docker (for local testing)
 docker --version
-# ✅ Αναμενόμενο: έκδοση Docker 20.10 ή νεότερη
+# ✅ Expected: Docker version 20.10 or higher
 ```
 
 ### Απαιτήσεις Azure
 
 - Ενεργή συνδρομή Azure
-- Δικαιώματα για δημιουργία:
+- Δικαιώματα δημιουργίας:
   - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
+  - Ονοματοχώροι Service Bus
+  - Λογαριασμοί Cosmos DB
+  - Λογαριασμοί αποθήκευσης
   - Application Insights
 
 ### Προαπαιτούμενες Γνώσεις
 
-Θα πρέπει να έχετε ολοκληρώσει:
-- [Διαχείριση Διαμόρφωσης](../chapter-03-configuration/configuration.md)
-- [Έλεγχος ταυτότητας & Ασφάλεια](../chapter-03-configuration/authsecurity.md)
-- [Παράδειγμα Μικροϋπηρεσιών](../../../../examples/microservices)
+Πρέπει να έχετε ολοκληρώσει:
+- [Διαχείριση Ρυθμίσεων](../chapter-03-configuration/configuration.md)
+- [Αυθεντικοποίηση & Ασφάλεια](../chapter-03-configuration/authsecurity.md)
+- [Παράδειγμα Microservices](../../../../examples/microservices)
 
 ---
 
 ## Οδηγός Υλοποίησης
+
+> **Σχεδιαστικά θραύσματα, όχι πλήρες εργαστήριο:** Το δέντρο έργου και οι ετικέτες `File:` πιο κάτω περιγράφουν αρχεία που θα δημιουργήσετε στο δικό σας έργο· αυτή η αποθήκη δεν περιέχει ολοκληρωμένη εφαρμογή `multi-agent-system`. Λείπουν κομμάτια όπως πρότυπα κύριου/παραμέτρων, περιβάλλον/μητρώο Container Apps, Dockerfiles και κλειδώματα εξαρτήσεων, ρύθμιση βάσης δεδομένων/container Cosmos, αναπτύξεις μοντέλων, ρυθμίσεις ταυτότητας/ρόλων, κανόνες κλιμάκωσης και παράλληλοι εργάτες/ουρές. Μην περιμένετε `azd init` να δημιουργεί αυτά τα αρχεία ή `azd up` να αναπτύσσει τα αποσπάσματα αυτούσια. Για εκτελέσιμο σημείο εκκίνησης, ολοκληρώστε το [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
+
+**Υποθέσεις χρόνου εκτέλεσης:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask και (για παρακολούθηση) `azure-monitor-opentelemetry`; βάλτε `shared` στο μονοπάτι εισαγωγής Python σε κάθε υπηρεσία εικόνας. Το κοντέινερ Cosmos `agent-state/tasks` πρέπει να υπάρχει ήδη με πλήκτρο διαμερισμού `/id`. Οι συνδέσεις με βάση κλειδιά απλοποιούν αυτά τα θραύσματα, όχι οδηγία παραγωγής: προτιμήστε διαχειριζόμενες ταυτότητες με ρόλους περιορισμένου πεδίου για Service Bus/Cosmos/OpenAI data-plane. Μην εκθέτετε κλειδιά σε εξόδους ή αρχεία καταγραφής.
+
+Η παράδοση Service Bus είναι **τουλάχιστον μία φορά**. Διατηρείστε αδιαίρετη την επαναληψιμότητα ανά εργασία **και βήμα**, χρησιμοποιήστε αισιόδοξη ταυτόχρονη διαχείριση (ETags) για ανάγνωση/τροποποίηση/εγγραφή κατάστασης και ανανεώστε τους κλειδώματα μηνυμάτων κατά τη μακροχρόνια επεξεργασία. Ο απλός διαχειριστής κατάστασης παρακάτω είναι μόνο διαδοχικός και δεν υλοποιεί αυτές τις εγγυήσεις παραγωγής.
 
 ### Δομή Έργου
 
@@ -392,11 +407,11 @@ multi-agent-system/
 
 ---
 
-## Μάθημα 1: Πρότυπο Διαδοχικού Συντονισμού
+## Μάθημα 1: Διαδοχικό Πρότυπο Συντονισμού
 
-### Υλοποίηση: Pipeline Δημιουργίας Περιεχομένου
+### Υλοποίηση: Ροή Δημιουργίας Περιεχομένου
 
-Ας δημιουργήσουμε ένα διαδοχικό pipeline: Έρευνα → Συγγραφή → Επιμέλεια → Δημοσίευση
+Ας σχεδιάσουμε μια διαδοχική ροή: Έρευνα → Σύνταξη → Επεξεργασία. Η δημοσίευση είναι εκτός αυτού του παραδείγματος.
 
 ### 1. Διαμόρφωση AZD
 
@@ -483,7 +498,8 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 }
 
 output namespace string = serviceBusNamespace.name
-output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+// Do not output RootManageSharedAccessKey. Resolve scoped credentials
+// securely or use managed identity in the application and scale rules.
 ```
 
 ### 3. Διαχειριστής Κοινής Κατάστασης
@@ -492,7 +508,7 @@ output connectionString string = listKeys('${serviceBusNamespace.id}/Authorizati
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 class StateManager:
@@ -513,7 +529,7 @@ class StateManager:
             'type': task_type,
             'status': 'pending',
             'input': input_data,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'steps': []
         }
         self.container.create_item(task)
@@ -525,7 +541,7 @@ class StateManager:
         
         task['steps'].append({
             'name': step_name,
-            'completed_at': datetime.utcnow().isoformat(),
+            'completed_at': datetime.now(timezone.utc).isoformat(),
             'result': result
         })
         
@@ -537,7 +553,7 @@ class StateManager:
         task = self.container.read_item(task_id, partition_key=task_id)
         task['status'] = 'completed'
         task['result'] = final_result
-        task['completed_at'] = datetime.utcnow().isoformat()
+        task['completed_at'] = datetime.now(timezone.utc).isoformat()
         self.container.replace_item(task_id, task)
         return task
     
@@ -546,7 +562,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Υπηρεσία Ορχηστρωτή
+### 4. Υπηρεσία Ορχήστρωσης
 
 **Αρχείο: `src/orchestrator/app.py`**
 
@@ -561,7 +577,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Σύνδεση Service Bus
+# Service Bus connection
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -572,15 +588,15 @@ def health():
 @app.route('/create-content', methods=['POST'])
 def create_content():
     """
-    Sequential workflow: Research → Write → Edit → Publish
+    Sequential workflow: Research → Write → Edit (returns a draft; no publishing)
     """
-    data = request.json
+    data = request.get_json(silent=True) or {}
     topic = data.get('topic')
     
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Δημιουργία εργασίας στην αποθήκη κατάστασης
+    # Create task in state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -588,13 +604,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # Αποστολή μηνύματος στον πράκτορα έρευνας (πρώτο βήμα)
+    # Send message to research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Πού να αποσταλούν τα αποτελέσματα
+            'next_queue': 'writer-tasks'  # Where to send results
         }),
         content_type='application/json'
     )
@@ -606,7 +622,7 @@ def create_content():
         'task_id': task_id,
         'status': 'started',
         'workflow': 'sequential',
-        'steps': ['research', 'write', 'edit', 'publish'],
+        'steps': ['research', 'write', 'edit'],
         'message': 'Content creation pipeline initiated'
     }), 202
 
@@ -635,7 +651,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# Αρχικοποίηση πελατών
+# Initialize clients
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -643,7 +659,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -655,9 +671,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Κλήση μοντέλων Microsoft Foundry για έρευνα
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -667,14 +683,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # Ενημέρωση κατάστασης
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # Αποστολή στον επόμενο πράκτορα (συγγραφέα)
+    # Send to next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -731,7 +747,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -744,9 +760,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Καλέστε τα Microsoft Foundry Models για να γράψουν ένα άρθρο
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -756,14 +772,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # Ενημέρωση κατάστασης
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # Αποστολή στον συντάκτη
+    # Send to editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -801,7 +817,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Πράκτορας Επιμέλειας
+### 7. Πράκτορας Επεξεργασίας
 
 **Αρχείο: `src/agents/editor/app.py`**
 
@@ -819,7 +835,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -831,9 +847,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Καλέστε τα Microsoft Foundry Models για επεξεργασία
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -843,7 +859,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Σημειώστε την εργασία ως ολοκληρωμένη
+    # Mark task as complete
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -879,24 +895,25 @@ if __name__ == '__main__':
 
 ### 8. Ανάπτυξη και Δοκιμή
 
+Αυτές οι εντολές ισχύουν **μόνο αφού υλοποιήσετε τα ελλείποντα αρχεία έργου**. Η αλληλεπιδραστική αρχικοποίηση πρακτόρων Foundry είναι ξεχωριστή ροή εργασίας· δεν παράγει αυτόν τον σχεδιασμό Service Bus.
+
 ```bash
-# Επιλογή A: Ανάπτυξη βάσει προτύπου
-azd init
+# In your completed custom project
 azd up
 
-# Επιλογή B: Ανάπτυξη με manifest του πράκτορα (απαιτεί επέκταση)
+# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> Δείτε [Εντολές AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) για όλες τις παραμέτρους και επιλογές του `azd ai`.
+> Δείτε [Εντολές CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) για όλα τα `azd ai` flags και επιλογές.
 
 ```bash
-# Λήψη του URL του ορχηστρωτή
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# Δημιουργία περιεχομένου
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
@@ -908,18 +925,18 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "status": "started",
   "workflow": "sequential",
-  "steps": ["research", "write", "edit", "publish"],
+  "steps": ["research", "write", "edit"],
   "message": "Content creation pipeline initiated"
 }
 ```
 
-**Έλεγχος προόδου εργασίας:**
+**Ελέγξτε την πρόοδο της εργασίας:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Αναμενόμενη έξοδος (ολοκληρώθηκε):**
+**✅ Αναμενόμενη έξοδος (ολοκληρωμένη):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -947,11 +964,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Μάθημα 2: Πρότυπο Παράλληλου Συντονισμού
+## Μάθημα 2: Παράλληλο Πρότυπο Συντονισμού
 
-### Υλοποίηση: Συλλέκτης Έρευνας από Πολλαπλές Πηγές
+### Υλοποίηση: Συλλέκτης Πληροφοριών από Πολλαπλές Πηγές
 
-Ας δημιουργήσουμε ένα παράλληλο σύστημα που συγκεντρώνει πληροφορίες από πολλαπλές πηγές ταυτόχρονα.
+Ας δημιουργήσουμε ένα παράλληλο σύστημα που συγκεντρώνει πληροφορίες ταυτόχρονα από πολλαπλές πηγές.
 
 ### Παράλληλος Ορχηστρωτής
 
@@ -990,7 +1007,7 @@ def research_parallel():
         }
     )
     
-    # Fan-out: Αποστολή σε όλους τους πράκτορες ταυτόχρονα
+    # Fan-out: publish sequentially; workers may process concurrently.
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1041,9 +1058,10 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# Παρακολούθηση αποτελεσμάτων ανά εργασία
-task_results = defaultdict(list)
-expected_agents = 4  # διαδίκτυο, ακαδημαϊκά, ειδήσεις, κοινωνικά
+# Single-process demo only: not durable or shared across replicas.
+# Production: use durable unique (task_id, agent_type) result records.
+task_results = defaultdict(dict)
+expected_agents = 4  # web, academic, news, social
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1051,29 +1069,29 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # Αποθήκευση αποτελέσματος
-    task_results[task_id].append({
+    # Store result
+    task_results[task_id][agent_type] = {
         'agent': agent_type,
         'data': result
-    })
+    }
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Έλεγχος αν όλοι οι πράκτορες ολοκλήρωσαν (fan-in)
+    # Check if all agents completed (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # Συνδυασμός αποτελεσμάτων
+        # Combine results
         aggregated = {
             'query': message_data['query'],
-            'sources': task_results[task_id],
-            'summary': generate_summary(task_results[task_id])
+            'sources': list(task_results[task_id].values()),
+            'summary': generate_summary(list(task_results[task_id].values()))
         }
         
-        # Σήμανση ως ολοκληρωμένο
+        # Mark complete
         state_manager.complete_task(task_id, aggregated)
         
-        # Καθαρισμός
+        # Clean up
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1105,129 +1123,94 @@ if __name__ == '__main__':
     main()
 ```
 
-**Οφέλη του Παράλληλου Προτύπου:**
-- ⚡ **4x ταχύτερο** (οι πράκτορες τρέχουν ταυτόχρονα)
-- 🔄 **Ανθεκτικό σε σφάλματα** (επιτρέπονται μερικά αποτελέσματα)
-- 📈 **Κλιμακούμενο** (προσθέστε περισσότερους πράκτορες εύκολα)
+**Πλεονεκτήματα του Παράλληλου Προτύπου:**
+- ⚡ **Πιθανώς μικρότερη καθυστέρηση** (περιορισμένη από τον πιο αργό εργάτη συν το κόστος συντονισμού)
+- 🔄 **Υποστηρίζει μερικά αποτελέσματα** με ρητές προθεσμίες και πολιτική αποτυχίας (δεν υλοποιείται από τον βασικό συγκεντρωτή)
+- 📈 **Κλιμακώνεται** (προσθέστε εύκολα περισσότερους πράκτορες)
 
 ---
 
 ## Πρακτικές Ασκήσεις
 
-### Άσκηση 1: Προσθήκη Χειρισμού Χρονικού Ορίου ⭐⭐ (Μέτριο)
+### Άσκηση 1: Προσθήκη Χειρισμού Timeout ⭐⭐ (Μεσαίο)
 
-**Στόχος**: Υλοποιήστε λογική χρονικού ορίου ώστε ο συλλέκτης να μην περιμένει επ' αόριστον τους αργούς πράκτορες.
+**Στόχος**: Υλοποίηση λογικής timeout ώστε ο συγκεντρωτής να μην περιμένει επ' αόριστον τους αργούς πράκτορες.
+
+**Σημείο εκκίνησης:** Τρέξτε αυτή την τοπική προσομοίωση προθεσμίας πριν την ενσωματώσετε σε εργαζόμενο ουράς. Το timeout που ελέγχεται μόνο όταν φτάνει άλλο μήνυμα δεν πυροδοτείται αν ο εργάτης που λείπει δεν στείλει τίποτα.
 
 **Βήματα**:
 
-1. **Προσθέστε παρακολούθηση χρονικού ορίου στον συλλέκτη:**
+1. **Προσθέστε παρακολούθηση timeout στον συγκεντρωτή:**
 
 ```python
-from datetime import datetime, timedelta
+import asyncio
 
-task_timeouts = {}  # αναγνωριστικό_εργασίας -> χρόνος_λήξης
+async def simulated_agent(name, delay):
+    await asyncio.sleep(delay)
+    return {'agent': name, 'result': 'done'}
 
-def process_result(message_data):
-    task_id = message_data['task_id']
-    
-    # Ορισμός χρονικού ορίου στο πρώτο αποτέλεσμα
-    if task_id not in task_timeouts:
-        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
-    
-    task_results[task_id].append({
-        'agent': message_data['agent_type'],
-        'data': message_data['result']
-    })
-    
-    # Ελέγξτε αν ολοκληρώθηκε ή αν έληξε το χρονικό όριο
-    if len(task_results[task_id]) == expected_agents or \
-       datetime.utcnow() > task_timeouts[task_id]:
-        
-        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
-        
-        aggregated = {
-            'query': message_data['query'],
-            'sources': task_results[task_id],
-            'completed_agents': len(task_results[task_id]),
-            'timed_out': len(task_results[task_id]) < expected_agents
-        }
-        
-        state_manager.complete_task(task_id, aggregated)
-        
-        # Καθαρισμός
-        del task_results[task_id]
-        del task_timeouts[task_id]
+async def main():
+    tasks = [asyncio.create_task(simulated_agent(name, delay))
+             for name, delay in [('web', 0.1), ('academic', 0.2),
+                                 ('news', 0.3), ('social', 3)]]
+    done, pending = await asyncio.wait(tasks, timeout=1)
+    results = [task.result() for task in done]
+    for task in pending:
+        task.cancel()
+    await asyncio.gather(*pending, return_exceptions=True)
+    print({'completed_agents': len(results), 'timed_out': bool(pending)})
+    assert len(results) == 3 and pending
+
+asyncio.run(main())
 ```
 
-2. **Δοκιμάστε με τεχνητές καθυστερήσεις:**
+2. **Αναμενόμενη έξοδος:**
 
-```python
-# Σε έναν πράκτορα, πρόσθεσε καθυστέρηση για να προσομοιώσεις αργή επεξεργασία
-import time
-time.sleep(35)  # Υπερβαίνει το χρονικό όριο των 30 δευτερολέπτων
+```text
+{'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Αναπτύξτε και επαληθεύστε:**
+3. **Ενσωμάτωση σε σύστημα ουράς (έργο σχεδιασμού):** Διατηρήστε την προθεσμία αποστολής και τους αναμενόμενους πράκτορες κατά τη δημιουργία της εργασίας, τρέξτε περιοδικό έλεγχο προθεσμίας ανεξάρτητα από παραλαμβανόμενα αποτελέσματα, ολοκληρώστε ατομικά τα μερικά αποτελέσματα και αγνοήστε καθυστερημένα/διπλά μηνύματα για ολοκληρωμένες εργασίες. Το τοπικό timeout δεν ακυρώνει απομακρυσμένους εργάτες.
+
+Μόνο για το δικό σας υλοποιημένο έργο:
 
 ```bash
 azd deploy aggregator
 
-# Υποβολή εργασίας
+# Submit task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# Ελέγξτε τα αποτελέσματα μετά από 30 δευτερόλεπτα
+# Check results after 30 seconds
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Κριτήρια Επιτυχίας:**
-- ✅ Η εργασία ολοκληρώνεται μετά από 30 δευτερόλεπτα ακόμη κι αν οι πράκτορες δεν έχουν ολοκληρώσει
-- ✅ Η απάντηση υποδεικνύει μερικά αποτελέσματα (`"timed_out": true`)
-- ✅ Τα διαθέσιμα αποτελέσματα επιστρέφονται (3 από 4 πράκτορες)
+- ✅ Το τοπικό τεστ επιστρέφει μετά από το δευτερόλεπτο προθεσμίας ακόμα και αν υπάρχει ελλιπής πράκτορας
+- ✅ Η απόκριση υποδεικνύει μερικά αποτελέσματα (`"timed_out": true`)
+- ✅ Επιστρέφονται διαθέσιμα αποτελέσματα (3 από 4 πράκτορες)
 
 **Χρόνος**: 20-25 λεπτά
 
 ---
 
-### Άσκηση 2: Υλοποίηση Λογικής Επαναπροσπάθειας ⭐⭐⭐ (Προχωρημένο)
+### Άσκηση 2: Υλοποίηση Λογικής Επανάληψης ⭐⭐⭐ (Προχωρημένο)
 
-**Στόχος**: Επαναπροσπαθήστε αυτόματα τις αποτυχημένες εργασίες πρακτόρων πριν εγκαταλείψετε.
+**Στόχος**: Επαναλάβετε αυτόματα τις αποτυχημένες εργασίες πρακτόρων πριν εγκαταλείψετε.
 
 **Βήματα**:
 
-1. **Προσθέστε παρακολούθηση επαναπροσπαθειών στον ορχηστρωτή:**
+1. **Χρησιμοποιήστε τους μετρητές παράδοσης του Service Bus αντί για προσαρμοσμένους μετρητές επανάληψης:**
 
 ```python
-from dataclasses import dataclass
-from typing import Dict
-
-@dataclass
-class RetryConfig:
-    max_retries: int = 3
-    backoff_seconds: int = 5
-
-retry_counts: Dict[str, int] = {}  # αναγνωριστικό_μηνύματος -> αριθμός_επαναπροσπαθειών
-
-def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
-    """Send message with retry metadata"""
-    message_id = message_data.get('message_id', str(uuid.uuid4()))
-    message_data['message_id'] = message_id
-    message_data['retry_count'] = retry_counts.get(message_id, 0)
-    message_data['max_retries'] = retry_config.max_retries
-    
-    sender = servicebus_client.get_queue_sender(queue_name)
-    message = ServiceBusMessage(
-        body=json.dumps(message_data),
-        content_type='application/json',
-        message_id=message_id
-    )
-    
-    with sender:
-        sender.send_messages(message)
+import json
+import time
+# Integration fragment: use a live peek-lock ServiceBusReceiver.
+# Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Προσθέστε χειριστή επαναπροσπάθειας στους πράκτορες:**
+2. **Προσθέστε χειριστή επανάληψης στους πράκτορες:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,31 +1218,21 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # Επεξεργασία του μηνύματος
+        # Process the message
         process_func(message_data)
         
-        # Επιτυχία - ολοκληρώθηκε
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
-        message_id = message.message_id
-        retry_count = message_data.get('retry_count', 0)
-        max_retries = message_data.get('max_retries', 3)
-        
-        if retry_count < max_retries:
-            # Επανάληψη: εγκατάλειψη και επανατοποθέτηση στην ουρά με αυξημένο μετρητή
-            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
-            
-            message_data['retry_count'] = retry_count + 1
-            
-            # Αποστολή πίσω στην ίδια ουρά με καθυστέρηση
-            time.sleep(5 * (retry_count + 1))  # Εκθετική καθυστέρηση
-            send_with_retry(queue_name, message_data, RetryConfig())
-            
-            receiver.complete_message(message)  # Αφαίρεση του αρχικού μηνύματος
+        if message.delivery_count < 4:
+            # Bounded exponential delay: 5s, 10s, 20s.
+            # Renew the lock if processing + waiting can exceed its duration.
+            time.sleep(5 * 2 ** (message.delivery_count - 1))
+            receiver.abandon_message(message)
         else:
-            # Ο μέγιστος αριθμός επαναπροσπαθειών υπερβήθηκε - μεταφορά στην ουρά νεκρών μηνυμάτων
-            print(f"❌ Max retries exceeded for message {message_id}")
+            # Max retries exceeded - move to dead letter queue
+            print(f"❌ Max attempts exceeded for message {message.message_id}")
             receiver.dead_letter_message(
                 message,
                 reason="MaxRetriesExceeded",
@@ -1273,7 +1246,7 @@ def process_with_retry(message, receiver, process_func):
 def monitor_dead_letters():
     """Check dead letter queue for failed messages"""
     receiver = servicebus_client.get_queue_receiver(
-        'research-queue',
+        'research-tasks',
         sub_queue='deadletter'
     )
     
@@ -1286,31 +1259,31 @@ def monitor_dead_letters():
 ```
 
 **✅ Κριτήρια Επιτυχίας:**
-- ✅ Οι αποτυχημένες εργασίες επαναπροσπαθούν αυτόματα (έως 3 φορές)
-- ✅ Εκθετική καθυστέρηση μεταξύ επαναπροσπαθειών (5s, 10s, 15s)
-- ✅ Μετά τις μέγιστες επαναπροσπάθειες, τα μηνύματα πηγαίνουν στην ουρά dead letter
-- ✅ Η ουρά dead letter μπορεί να παρακολουθείται και να αναπαράγεται
+- ✅ Οι αποτυχημένες εργασίες επαναλαμβάνονται αυτόματα (έως 3 φορές)
+- ✅ Εκθετική αύξηση χρόνου μεταξύ επαναλήψεων (5s, 10s, 20s), με ανανέωση κλειδώματος μηνύματος όπου χρειάζεται
+- ✅ Μετά από τις μέγιστες προσπάθειες, τα μηνύματα πηγαίνουν στην ουρά dead letter
+- ✅ Τα μηνύματα του dead letter μπορούν να ελεγχθούν· η αναπαραγωγή απαιτεί ξεχωριστή διαδικασία επαναφοράς με αδιαίρετη λειτουργία
 
 **Χρόνος**: 30-40 λεπτά
 
 ---
 
-### Άσκηση 3: Υλοποίηση Circuit Breaker ⭐⭐⭐ (Προχωρημένο)
+### Άσκηση 3: Υλοποίηση Κύκλου Διακοπής (Circuit Breaker) ⭐⭐⭐ (Προχωρημένο)
 
-**Στόχος**: Να αποτραπούν καταρρεύσεις αλυσιδωτών σφαλμάτων σταματώντας τα αιτήματα προς αποτυχόντες πράκτορες.
+**Στόχος**: Αποτρέψτε αλυσιδωτές αποτυχίες σταματώντας τα αιτήματα προς αποτυγχάνοντες πράκτορες.
 
 **Βήματα**:
 
-1. **Δημιουργήστε κλάση circuit breaker:**
+1. **Δημιουργήστε κλάση κύκλου διακοπής:**
 
 ```python
 from enum import Enum
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # Κανονική λειτουργία
-    OPEN = "open"          # Αποτυγχάνει, απορρίψτε αιτήματα
-    HALF_OPEN = "half_open"  # Έλεγχος αν έχει ανακάμψει
+    CLOSED = "closed"      # Normal operation
+    OPEN = "open"          # Failing, reject requests
+    HALF_OPEN = "half_open"  # Testing if recovered
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1323,8 +1296,8 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Ελέγξτε αν έχει λήξει το χρονικό όριο
-            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+            # Check if timeout expired
+            if datetime.now(timezone.utc) - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
             else:
@@ -1333,7 +1306,8 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # Επιτυχία
+            # Success
+            self.failure_count = 0 # Count consecutive failures only
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1343,19 +1317,19 @@ class CircuitBreaker:
             
         except Exception as e:
             self.failure_count += 1
-            self.last_failure_time = datetime.utcnow()
+            self.last_failure_time = datetime.now(timezone.utc)
             
             if self.failure_count >= self.failure_threshold:
                 self.state = CircuitState.OPEN
                 print(f"🔴 Circuit breaker: OPEN (too many failures)")
             
-            raise e
+            raise
 ```
 
-2. **Εφαρμόστε στις κλήσεις προς πράκτορες:**
+2. **Εφαρμόστε στις κλήσεις πρακτόρων:**
 
 ```python
-# Στον ορχηστρωτή
+# In orchestrator
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,33 +1345,34 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Συνεχίστε με άλλους πράκτορες
+        # Continue with other agents
 ```
 
-3. **Δοκιμάστε τον circuit breaker:**
+Αυτό το κύκλωμα προστατεύει την **λειτουργία αποστολής**, όχι την ολοκλήρωση από τον απομακρυσμένο εργαζόμενο: η επιτυχής τοποθέτηση ενός μηνύματος στην ουρά δεν λέει τίποτα για το αν ένας πράκτορας είναι ζωντανός. `send_message` είναι η συνάρτηση αποστολέα της εφαρμογής σας. Για κυκλώματα εκτέλεσης, προωθήστε τα παρατηρούμενα σφάλματα/λήξεις χρόνου εργασιών σε έναν ανθεκτικό συντονιστή. Αυτή η κλάση που λειτουργεί στη μνήμη είναι μια επίδειξη μονής νηματικής εκτέλεσης, όχι ένας κατανεμημένος διακόπτης κυκλώματος.
 
-```bash
-# Προσομοιώστε επανειλημμένες αποτυχίες (διακόψτε έναν πράκτορα)
-az containerapp stop --name web-research-agent --resource-group rg-agents
+3. **Δοκιμάστε τον διακόπτη κυκλώματος τοπικά:**
 
-# Στείλτε πολλαπλά αιτήματα
-for i in {1..10}; do
-  curl -X POST $ORCHESTRATOR_URL/research-parallel \
-    -H "Content-Type: application/json" \
-    -d '{"query": "test query '$i'"}'
-  sleep 2
-done
-
-# Ελέγξτε τα αρχεία καταγραφής - θα πρέπει να δείτε το κύκλωμα ανοιχτό μετά από 5 αποτυχίες
-# Χρησιμοποιήστε το Azure CLI για τα αρχεία καταγραφής της εφαρμογής Container App:
-az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```python
+# Run after the class definition; no Azure changes required.
+circuit = CircuitBreaker(failure_threshold=5, timeout_seconds=0)
+def fail():
+    raise RuntimeError("simulated failure")
+for _ in range(5):
+    try:
+        circuit.call(fail)
+    except RuntimeError:
+        pass
+assert circuit.state == CircuitState.OPEN
+assert circuit.call(lambda: "recovered") == "recovered"
+assert circuit.state == CircuitState.CLOSED
+print("Circuit breaker recovery verified")
 ```
 
 **✅ Κριτήρια Επιτυχίας:**
 - ✅ Μετά από 5 αποτυχίες, το κύκλωμα ανοίγει (απορρίπτει αιτήματα)
-- ✅ Μετά από 60 δευτερόλεπτα, το κύκλωμα γίνεται ημι-ανοιχτό (half-open) (δοκιμάζει την ανάκαμψη)
-- ✅ Οι άλλοι πράκτορες συνεχίζουν να λειτουργούν κανονικά
-- ✅ Το κύκλωμα κλείνει αυτόματα όταν ο πράκτορας ανακάμψει
+- ✅ Μετά από 60 δευτερόλεπτα, το κύκλωμα γίνεται ημι-ανοιχτό (δοκιμάζει ανάκαμψη)
+- ✅ Οι άλλοι πράκτορες συνεχίζουν κανονικά τη δουλειά τους
+- ✅ Το κύκλωμα κλείνει αυτόματα όταν ο πράκτορας ανακάμπτει
 
 **Χρόνος**: 40-50 λεπτά
 
@@ -1405,55 +1380,54 @@ az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 5
 
 ## Παρακολούθηση και Αποσφαλμάτωση
 
-### Κατανεμημένη ιχνηλάτηση με το Application Insights
+### Κατανεμημένη Παρακολούθηση με Application Insights
 
 **Αρχείο: `src/shared/tracing.py`**
 
 ```python
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.samplers import AlwaysOnSampler
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
-# Ρυθμίστε την ιχνηλάτηση
-config_integration.trace_integrations(['requests', 'logging'])
-
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# Δημιουργήστε ιχνηλάτη
-tracer = Tracer(
-    exporter=AzureExporter(connection_string=connection_string),
-    sampler=AlwaysOnSampler()
-)
+# Configure once per process. Message send/receive trace-context propagation
+# and agent attributes on exceptions need explicit instrumentation.
+if connection_string:
+    configure_azure_monitor(connection_string=connection_string, logger_name=__name__)
+tracer = trace.get_tracer(__name__)
 
-# Ρυθμίστε την καταγραφή
+# Configure logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
 
-def trace_agent_call(agent_name, task_id, operation):
+def trace_agent_call(agent_name, task_id, operation_name, operation):
     """Trace agent operations"""
-    with tracer.span(name=f'{agent_name}.{operation}') as span:
-        span.add_attribute('agent', agent_name)
-        span.add_attribute('task_id', task_id)
-        span.add_attribute('operation', operation)
+    with tracer.start_as_current_span(f'agent.{agent_name}.{operation_name}', kind=SpanKind.CLIENT) as span:
+        span.set_attribute('agent', agent_name)
+        span.set_attribute('task_id', task_id)
+        span.set_attribute('operation', operation_name)
         
         try:
             result = operation()
-            span.add_attribute('status', 'success')
+            span.set_attribute('status', 'success')
+            logger.info('Agent operation completed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             return result
         except Exception as e:
-            span.add_attribute('status', 'error')
-            span.add_attribute('error', str(e))
+            span.set_attribute('status', 'error')
+            logger.exception('Agent operation failed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             raise
 ```
 
 ### Ερωτήματα Application Insights
 
-**Παρακολούθηση ροών εργασίας πολλών πρακτόρων:**
+**Παρακολούθηση ροών εργασίας πολλαπλών πρακτόρων:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1494,22 +1468,24 @@ exceptions
 
 ## Ανάλυση Κόστους
 
-### Κόστη Συστήματος Πολλών Πρακτόρων (Μηνιαίες Εκτιμήσεις)
+### Κόστη Συστημάτων Πολλαπλών Πρακτόρων (Μηνιαίες Εκτιμήσεις)
 
-| Συστατικό | Διαμόρφωση | Κόστος |
+Εικονογραφημένοι αριθμοί προγραμματισμού μόνο, όχι προσφορές: το άθροισμα παρακάτω είναι **240-565$/μήνα**. Επαληθεύστε τους τρέχοντες περιφερειακούς τιμοκαταλόγους, ώρες ενεργών/ανενεργών αντιγράφων, μείγματα εισόδου/εξόδου tokens, αποθήκευση και τηλεμετρία. Το Serverless δεν έχει ελάχιστο εγγυημένο ρυθμό παροχής αλλά χρεώνει για αιτήματα και αποθήκευση.
+
+| Συνιστώσα | Διαμόρφωση | Κόστος |
 |-----------|--------------|------|
-| **Ορχηστρωτής** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 Πράκτορες** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
-| **Service Bus** | Επίπεδο Standard, 10M μηνύματα | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB αποθήκευση, 100K λειτουργίες | $5-10 |
-| **Application Insights** | 5GB εισροή δεδομένων | $10-15 |
-| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
-| **Σύνολο** | | **$240-565/month** |
+| **Συντονιστής (Orchestrator)** | 1 Container App (1 vCPU, 2GB) | 30-50$ |
+| **4 Πράκτορες** | 4 Container Apps (0.5 vCPU, 1GB έκαστος) | 60-120$ |
+| **Service Bus** | Τυπικό επίπεδο, 10M μηνύματα | 10-20$ |
+| **Cosmos DB** | Serverless, 5GB αποθήκευση, 1M RU | 25-50$ |
+| **Blob Storage** | 10GB αποθήκευση, 100K λειτουργίες | 5-10$ |
+| **Application Insights** | 5GB εισαγωγή | 10-15$ |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | 100-300$ |
+| **Σύνολο** | | **240-565$/μήνα** |
 
 ### Στρατηγικές Βελτιστοποίησης Κόστους
 
-1. **Χρησιμοποιήστε serverless όπου είναι δυνατόν:**
+1. **Χρησιμοποιήστε serverless όπου είναι εφικτό:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1518,23 +1494,23 @@ exceptions
    }
    ```
 
-2. **Κλιμακώστε τους πράκτορες στο μηδέν όταν είναι αδρανείς:**
+2. **Κλιμακώστε τους πράκτορες σε μηδέν όταν είναι αδρανείς:**
    ```bicep
    scale: {
-     minReplicas: 0  // Scale to zero when no messages
+     minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
      maxReplicas: 10
    }
    ```
 
 3. **Χρησιμοποιήστε ομαδοποίηση για το Service Bus:**
    ```python
-   # Αποστολή μηνυμάτων σε παρτίδες (φθηνότερο)
+   # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Κάντε cache συχνά χρησιμοποιούμενων αποτελεσμάτων:**
+4. **Κρατήστε αποτελέσματα που χρησιμοποιούνται συχνά στην cache:**
    ```python
-   # Χρησιμοποιήστε το Azure Cache for Redis
+   # Use Azure Cache for Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
@@ -1543,72 +1519,69 @@ exceptions
 
 ## Καλές Πρακτικές
 
-### ✅ ΝΑ ΚΑΝΕΤΕ:
+### ✅ ΚΑΝΤΕ:
 
-1. **Χρησιμοποιήστε idempotent λειτουργίες**
+1. **Χρησιμοποιήστε ιδιόμορφες (idempotent) λειτουργίες**
    ```python
-   # Ο πράκτορας μπορεί να επεξεργαστεί με ασφάλεια το ίδιο μήνυμα πολλές φορές
+   # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
-       if state_manager.task_exists(task_id):
-           print(f"Task {task_id} already processed, skipping")
-           return
-       # Επεξεργασία εργασίας...
+       raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Υλοποιήστε ολοκληρωμένη καταγραφή (logging)**
+2. **Εφαρμόστε ολοκληρωμένη καταγραφή**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Χρησιμοποιήστε correlation IDs**
+3. **Χρησιμοποιήστε αναγνωριστικά συσχέτισης (correlation IDs)**
    ```python
-   # Διαβιβάστε το task_id σε ολόκληρη τη ροή εργασίας
+   # Pass task_id through entire workflow
    message_data = {
-       'task_id': task_id,  # Αναγνωριστικό συσχέτισης
+       'task_id': task_id,  # Correlation ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **Ορίστε TTL μηνυμάτων (time-to-live)**
+4. **Ορίστε TTL (χρονικό όριο ζωής) μηνυμάτων**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Παρακολουθήστε τις ουρές dead letter**
+5. **Παρακολουθήστε ουρές dead letter**
    ```python
-   # Τακτική παρακολούθηση αποτυχημένων μηνυμάτων
+   # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
 ### ❌ ΜΗΝ:
 
-1. **Μην δημιουργείτε κυκλικές εξαρτήσεις**
+1. **Δημιουργείτε κυκλικές εξαρτήσεις**
    ```python
-   # ❌ ΚΑΚΟ: Πράκτορας A → Πράκτορας B → Πράκτορας A (ατέρμονος βρόχος)
-   # ✅ ΚΑΛΟ: Καθορίστε σαφές προσανατολισμένο ακυκλικό γράφημα (DAG)
+   # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
+   # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Μην μπλοκάρετε νήματα πρακτόρων**
+2. **Μπλοκάρετε νημάτια πρακτόρων**
    ```python
-   # ❌ ΚΑΚΟ: Συγχρονική αναμονή
+   # ❌ BAD: Synchronous wait
    while not task_complete:
        time.sleep(1)
    
-   # ✅ ΚΑΛΟ: Χρησιμοποιήστε callbacks της ουράς μηνυμάτων
+   # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **Μην αγνοείτε μερικές αποτυχίες**
+3. **Παραβλέπετε μερικές αποτυχίες**
    ```python
-   # ❌ ΚΑΚΟ: Αποτυχία ολόκληρης της ροής εργασίας αν ένας πράκτορας αποτύχει
-   # ✅ ΚΑΛΟ: Επιστροφή μερικών αποτελεσμάτων με ενδείξεις σφάλματος
+   # ❌ BAD: Fail entire workflow if one agent fails
+   # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Μην χρησιμοποιείτε άπειρες επαναπροσπάθειες**
+4. **Χρησιμοποιείτε άπειρες επαναλήψεις**
    ```python
-   # ❌ ΚΑΚΟ: επανειλημμένες προσπάθειες επ' άπειρον
-   # ✅ ΚΑΛΟ: max_retries = 3, και μετά σε ουρά νεκρών μηνυμάτων
+   # ❌ BAD: retry forever
+   # ✅ GOOD: max_retries = 3, then dead letter
    ```
 
 ---
@@ -1620,33 +1593,36 @@ exceptions
 **Συμπτώματα:**
 - Τα μηνύματα συσσωρεύονται στην ουρά
 - Οι πράκτορες δεν επεξεργάζονται
-- Η κατάσταση εργασίας κολλημένη στο "pending"
+- Η κατάσταση εργασίας μένει "εκκρεμής"
 
 **Διάγνωση:**
 ```bash
-# Ελέγξτε το βάθος της ουράς
+# Check queue depth
 az servicebus queue show \
+  --resource-group "$RG_NAME" \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Ελέγξτε τα αρχεία καταγραφής του πράκτορα χρησιμοποιώντας το Azure CLI
+# Check agent logs using Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Λύσεις:**
 
-1. **Αυξήστε τα αντίγραφα των πρακτόρων:**
+1. **Αυξήστε αντίγραφα πρακτόρων:**
    ```bash
    az containerapp update \
+     --resource-group "$RG_NAME" \
      --name research-agent \
      --min-replicas 3 \
      --max-replicas 10
    ```
 
-2. **Ελέγξτε την ουρά νεκρών μηνυμάτων:**
+2. **Ελέγξτε την ουρά dead letter:**
    ```bash
    az servicebus queue show \
+     --resource-group "$RG_NAME" \
      --namespace-name mybus \
      --name research-tasks \
      --query "countDetails.deadLetterMessageCount"
@@ -1654,36 +1630,36 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Πρόβλημα: Χρονικό όριο εργασίας/δεν ολοκληρώνεται ποτέ
+### Πρόβλημα: Λήξη χρόνου εργασίας/δεν ολοκληρώνεται ποτέ
 
 **Συμπτώματα:**
-- Η κατάσταση της εργασίας παραμένει "in_progress"
-- Ορισμένοι πράκτορες ολοκληρώνουν, άλλοι όχι
+- Η κατάσταση εργασίας μένει "σε εξέλιξη"
+- Κάποιοι πράκτορες ολοκληρώνουν, άλλοι όχι
 - Δεν υπάρχουν μηνύματα σφάλματος
 
 **Διάγνωση:**
 ```bash
-# Ελέγξτε την κατάσταση της εργασίας
+# Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# Ελέγξτε το Application Insights
-# Εκτελέστε το ερώτημα: traces | where customDimensions.task_id == "..."
+# Check Application Insights
+# Run query: traces | where customDimensions.task_id == "..."
 ```
 
 **Λύσεις:**
 
-1. **Υλοποιήστε χρονικό όριο στον aggregator (Άσκηση 1)**
+1. **Εφαρμόστε χρονικό όριο στον συγκεντρωτή (Άσκηση 1)**
 
-2. **Ελέγξτε για σφάλματα πρακτόρων χρησιμοποιώντας το Azure Monitor:**
+2. **Ελέγξτε για αποτυχίες πρακτόρων με Azure Monitor:**
    ```bash
-   # Προβολή αρχείων καταγραφής μέσω azd monitor
+   # View logs via azd monitor
    azd monitor --logs
    
-   # Ή χρησιμοποιήστε το Azure CLI για να ελέγξετε τα αρχεία καταγραφής μιας συγκεκριμένης εφαρμογής κοντέινερ
+   # Or use Azure CLI to check specific container app logs
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Επαληθεύστε ότι όλοι οι πράκτορες εκτελούνται:**
+3. **Επαληθεύστε ότι όλοι οι πράκτορες τρέχουν:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1698,44 +1674,44 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
 ### Επόμενα Βήματα σε Αυτό το Μάθημα
-- ← Προηγούμενο: [Σχεδιασμός Χωρητικότητας](capacity-planning.md)
-- → Επόμενο: [Επιλογή SKU](sku-selection.md)
-- 🏠 [Αρχική Μαθήματος](../../README.md)
+- ← Προηγούμενο: [Capacity Planning](capacity-planning.md)
+- → Επόμενο: [SKU Selection](sku-selection.md)
+- 🏠 [Course Home](../../README.md)
 
 ### Σχετικά Παραδείγματα
-- [Παράδειγμα Μικροϋπηρεσιών](../../../../examples/microservices) - Σχήματα επικοινωνίας υπηρεσιών
-- [Παράδειγμα Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Ενσωμάτωση AI
+- [Microservices Example](../../../../examples/microservices) - Πρότυπα επικοινωνίας υπηρεσιών
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - Ενσωμάτωση AI
 
 ---
 
 ## Σύνοψη
 
 **Έχετε μάθει:**
-- ✅ Πέντε πρότυπα συντονισμού (διαδοχικό, παράλληλο, ιεραρχικό, καθοδηγούμενο από γεγονότα, συναίνεση)
+- ✅ Πέντε πρότυπα συντονισμού (διαδοχικό, παράλληλο, ιεραρχικό, συμβάν-οδηγούμενο, ομοφωνία)
 - ✅ Αρχιτεκτονική πολλαπλών πρακτόρων στο Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Διαχείριση κατάστασης μεταξύ κατανεμημένων πρακτόρων
-- ✅ Διαχείριση χρονικών ορίων, επαναπροσπάθειες και circuit breakers
+- ✅ Διαχείριση κατάστασης ανάμεσα σε κατανεμημένους πράκτορες
+- ✅ Διαχείριση λήξεων χρόνου, επαναλήψεων, και διακοπτών κυκλώματος
 - ✅ Παρακολούθηση και αποσφαλμάτωση κατανεμημένων συστημάτων
 - ✅ Στρατηγικές βελτιστοποίησης κόστους
 
-**Κύρια Συμπεράσματα:**
-1. **Επιλέξτε το σωστό πρότυπο** - Διαδοχικό για σειριακές ροές εργασίας, παράλληλο για ταχύτητα, καθοδηγούμενο από γεγονότα για ευελιξία
-2. **Διαχειριστείτε την κατάσταση με προσοχή** - Χρησιμοποιήστε το Cosmos DB ή παρόμοιο για κοινόχρηστη κατάσταση
-3. **Αντιμετωπίστε τις αποτυχίες με επιδεξιότητα** - Χρονικά όρια, επαναπροσπάθειες, circuit breakers, ουρές νεκρών μηνυμάτων
-4. **Παρακολουθήστε τα πάντα** - Η κατανεμημένη ιχνηλάτηση είναι απαραίτητη για την αποσφαλμάτωση
-5. **Βελτιστοποιήστε τα κόστη** - Κλιμάκωση στο μηδέν, χρησιμοποιήστε serverless, υλοποιήστε caching
+**Κύρια Μαθήματα:**
+1. **Επιλέξτε το σωστό πρότυπο** - Διαδοχικό για διατεταγμένες ροές εργασίας, παράλληλο για ταχύτητα, συμβάν-οδηγούμενο για ευελιξία
+2. **Διαχειριστείτε την κατάσταση με προσοχή** - Χρησιμοποιήστε Cosmos DB ή παρόμοιο για κοινή κατάσταση
+3. **Αντιμετωπίστε τις αποτυχίες με καλή διαχείριση** - Λήξεις χρόνου, επαναλήψεις, διακόπτες κυκλώματος, ουρές dead letter
+4. **Παρακολουθήστε τα πάντα** - Η κατανεμημένη παρακολούθηση είναι απαραίτητη για αποσφαλμάτωση
+5. **Βελτιστοποιήστε τα κόστη** - Κλιμάκωση σε μηδέν, χρήση serverless, εφαρμογή caching
 
 **Επόμενα Βήματα:**
 1. Ολοκληρώστε τις πρακτικές ασκήσεις
-2. Κατασκευάστε ένα σύστημα πολλαπλών πρακτόρων για την περίπτωσή χρήσης σας
-3. Μελετήστε [Επιλογή SKU](sku-selection.md) για να βελτιστοποιήσετε την απόδοση και το κόστος
+2. Δημιουργήστε ένα σύστημα πολλαπλών πρακτόρων για το δικό σας σενάριο
+3. Μελετήστε το [SKU Selection](sku-selection.md) για βελτιστοποίηση απόδοσης και κόστους
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Αποποίηση ευθυνών**:
-Το παρόν έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Παρότι επιδιώκουμε την ακρίβεια, λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται ως η επίσημη πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

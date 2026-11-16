@@ -1,468 +1,133 @@
-# 5. កែប្រែគំរូ
+# 5. ប្តូរតំរូវការលំនាំ
 
-!!! tip "នៅចុងម៉ូឌុលនេះ អ្នកនឹងអាច"
+!!! tip "នៅចុងផ្លូវនេះ អ្នកនឹងអាចធ្វើបាន"
 
-    - [ ] បានសិក្សាសមត្ថភាពលំនាំដើមរបស់ភ្នាក់ងារ AI
-    - [ ] បានបន្ថែម AI Search ជាមួយ index របស់អ្នក
-    - [ ] បានបើក និងវិភាគមេត្រិក Tracing
-    - [ ] បានអនុវត្តការប្រតិបត្តិការវាយតម្លៃ
-    - [ ] បានអនុវត្តស្កេន red-teaming
-    - [ ] **Lab 5: បានបង្កើតផែនការកែប្រែ** 
-
----
-
-## 5.1 សមត្ថភាពភ្នាក់ងារ AI
-
-!!! success "យើងបានបញ្ចប់រួចក្នុង Lab 01"
-
-- **File Search**: ការស្វែងរកឯកសារខាងក្នុងរបស់ OpenAI សម្រាប់ទាញយកចំណេះដឹង
-- **Citations**: ការបញ្ជាក់ប្រភពដោយស្វ័យប្រវត្តិក្នុងចម្លើយ
-- **Customizable Instructions**: ការផ្លាស់ប្តូរពេលបញ្ជា ដើម្បីកំណត់អាកប្បកិរិយា និងបុគ្គលិកលក្ខណៈរបស់ភ្នាក់ងារ
-- **Tool Integration**: ប្រព័ន្ធឧបករណ៍ដែលអាចពង្រីកសម្រាប់សមត្ថភាពផ្ទាល់ខ្លួន
+    - [ ] Distinguish configuration changes from application implementation
+    - [ ] Plan a grounded retrieval customization
+    - [ ] Enable and inspect tracing without unnecessarily capturing sensitive content
+    - [ ] Locate and run the sample's current evaluation and red-teaming tests
+    - [ ] **Lab 5:** Build a customization and validation plan
 
 ---
 
-## 5.2 ជម្រើសសម្រាប់ការទាញយកចំណេះដឹង
+## 5.1 បង្កើតបន្ទាត់មូលដ្ឋាន
 
-!!! task "ដើម្បីបញ្ចប់នេះ យើងត្រូវធ្វើការផ្លាស់ប្តូរ និងដាក់ឡើងវិញ"    
-    
-    ```bash title=""
-    # កំណត់អថេរបរិស្ថាន
-    azd env set USE_AZURE_AI_SEARCH_SERVICE true
-    azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
-    azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
-    azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
-    azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
+ប្រើឃ្លាំង [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) ដែលបាន初始化ពីម៉ូឌុលមុន។ កត់ត្រាពិនិត្យលំនាំថ្មី, កំណែ AZD, បរិយាកាសបានជ្រើស, ការចេញផ្សាយម៉ូដែល និងសំណួរគំរូការងារជាមុនពេលផ្លាស់ប្តូរអ្វីម្យ៉ាង។
 
-    # ផ្ទុកទិន្នន័យ និងបង្កើត index របស់ខ្ញុំ
+គំរូនេះអនុវត្តកម្មវិធីចក្ខុក្ខជាមួយភ្នាក់ងារគាំទ្រ។ វាមិនក្លាយជាប្រព័ន្ធលក់រាយមានពីរភ្នាក់ងារ ដែលត្រូវបានកំណត់កាតាមបរិយាកាស ឬរក្សាទុកឯកសារណែនាំបន្ថែមទេ។ ភ្នាក់ងារបន្ថែម ការគ្រប់គ្រងឧបករណ៍ ការតម្រង់ផ្លូវ សិទ្ធិក្នុងការអនុញ្ញាត និងការចូលប្រើទិន្នន័យ ត្រូវការកូដកម្មវិធី។
 
-    ```
+សូមពិនិត្យការណែនាំនិងឧបករណ៍របស់ភ្នាក់ងារដែលបានចេញផ្សាយបច្ចុប្បន្ននៅ Foundry។ សាកល្បងសំណួរពិតមួយ សំណួរយកវិញមួយ និងសំណួរដែលទិន្នន័យគំរូមិនអាចឆ្លើយបានមួយ។ ពិនិត្យអោយប្រាកដការយោងនឹងឯកសារប្រភពពិតមិនមែនសម្រាប់យល់ថាសំណួរតបល្អនោះត្រឹមត្រូវទេ។
 
----
+## 5.2 ប្តូរប្រមូលព័ត៌មានចំណេះដឹង
 
-**OpenAI File Search (Default):**
+លំនាំគំរូគាំទ្រការប្រមូលព័ត៌មានដោយផ្អែកលើឯកសារ និងការភ្ជាប់ជាមួយ Azure AI Search ជាជម្រើស។ អនុវត្តតាម [មគ្គុទេសក៍ Azure AI Search បច្ចុប្បន្ន](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) សម្រាប់ការបង្កើតឃ្លាំងពាក្យស្វែងរក និងការកំណត់ឧបករណ៍។
 
-- រួមបញ្ចូលជាមួយ Foundry Agents
-- ដំណើរការឯកសារដោយស្វ័យប្រវត្តិ និងការបញ្ចី
-- មិនទាមទារការកំណត់បន្ថែមទេ
-
-**Azure AI Search (Optional):**
-
-- ការស្វែងរកទ្វេមុខ សេម៉ង់ទិក និងវ៉ិចទ័រ
-- ការគ្រប់គ្រង index ផ្ទាល់ខ្លួន
-- សមត្ថភាពស្វែងរកកម្រិតខ្ពស់
-- តម្រូវឱ្យមាន `USE_AZURE_AI_SEARCH_SERVICE=true`
-
----
-
-## 5.3 [ការតាមដាន និងត្រួតពិនិត្យ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
-
-!!! task "ដើម្បីបញ្ចប់នេះ យើងត្រូវធ្វើការផ្លាស់ប្តូរ និងដាក់ឡើងវិញ"    
-    
-    ```bash title=""
-    azd env set ENABLE_AZURE_MONITOR_TRACING true
-    azd deploy
-    ```
-
-**ការតាមដាន:**
-
-- ការរួមបញ្ចូល OpenTelemetry
-- ការតាមដានសំណើ/ចម្លើយ
-- មេត្រិកប្រសិទ្ធភាព
-- មាននៅក្នុងផតហ្វូម Microsoft Foundry
-
-**កំណត់ហេតុ:**
-
-- កំណត់ហេតុកម្មវិធីនៅក្នុង Container Apps
-- កំណត់ហេតុដែលមានរចនាសម្ព័ន្ធ និងលេខសម្គាល់ភ្ជាប់ (correlation IDs)
-- មើលកំណត់ហេតុពេលវេលាពិត និងប្រវត្តិសាស្ត្រ
-
----
-
-## 5.4 [ការវាយតម្លៃភ្នាក់ងារ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
-
-**ការវាយតម្លៃក្នុងស្រុក:**
-
-- កម្មវិធីវាយតម្លៃដែលរួមមានសម្រាប់ការវាស់គុណភាព
-- ស្គ្រីបវាយតម្លៃផ្ទាល់ខ្លួន
-- ការវាស់ស្ទង់ប្រសិទ្ធភាព
-
-**ការត្រួតពិនិត្យបន្ត:**
-
-- ការវាយតម្លៃដោយស្វ័យប្រវត្តិលើអន្តរកម្មពេលពិត
-- ការតាមដានមេត្រិកគុណភាព
-- ការរកឃើញការវិលត្រឡប់នៃប្រសិទ្ធភាព
-
-**ការរួមបញ្ចូល CI/CD:**
-
-- លំនាំប្រតិបត្តិការលើ GitHub Actions
-- ការធ្វើតេស្ត និងវាយតម្លៃដោយស្វ័យប្រវត្តិ
-- ការធ្វើតេស្តប្រៀបធៀបទិន្នន័យស្ថិតិសាស្ត្រ
-
----
-
-## 5.5 [ភ្នាក់ងារ AI Red Teaming](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
-
-**ការធ្វើ Red Teaming សម្រាប់ AI:**
-
-- ការស្កេនសន្តិសុខដោយស្វ័យប្រវត្តិ
-- ការប៉ាន់ប្រមាណហានិភ័យសម្រាប់ប្រព័ន្ធ AI
-- ការវាយតម្លៃសុវត្ថិភាពឆ្លងកាត់ចំនួនប្រភេទជាច្រើន
-
-**ការផ្ទៀងផ្ទាត់អត្តសញ្ញាណ:**
-
-- Managed Identity សម្រាប់សេវាកម្ម Azure
-- ការផ្ទៀងផ្ទាត់ Azure App Service ជាជម្រើស
-- ការវិលត្រឡប់ទៅ authentication មូលដ្ឋានសម្រាប់ការអភិវឌ្ឍ
-
-!!! quote "នៅចុងមេរៀននេះ អ្នកគួរតែមាន"
-    - [ ] កំណត់តម្រូវការសេណារីយ៉ូរបស់អ្នក
-    - [ ] បានកំណត់អថេរបរិស្ថានផ្ទាល់ខ្លួន (config)
-    - [ ] បានប្តូរណែនាំភ្នាក់ងារផ្ទាល់ខ្លួន (task)
-    - [ ] បានដាក់បញ្ចូលគំរូផ្ទាល់ខ្លួន (app)
-    - [ ] បានបញ្ចប់ភារកិច្ចក្រោយការដាក់បញ្ចូល (ដោយដៃ)
-    - [ ] បានរត់ការវាយតម្លៃសាកល្បង
-
-This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
-
----
-
-## 5.6 កែសម្រួលសម្រាប់អ្នក!
-
-### 5.6.1. តម្រូវការសេណារីយ៉ូ
-
-#### **ការដាក់ដំឡើងភ្នាក់ងារ:** 
-
-   - Shopper Agent: ជួយអតិថិជនស្វែងរក និងប្រៀបធៀបផលិតផល
-   - Loyalty Agent: គ្រប់គ្រងរង្វាន់ និងការផ្សព្វផ្សាយសម្រាប់អតិថិជន
-
-#### **ការដាក់ចេញម៉ូឌែល:**
-
-   - `gpt-4.1`: ម៉ូឌែលជជែកសំខាន់
-   - `o3`: ម៉ូឌែលហេតុផលសម្រាប់សំណួរលំបាក
-   - `gpt-4.1-nano`: ម៉ូឌែលទន់សម្រាប់អន្តរកម្មសាមញ្ញ
-   - `text-embedding-3-large`: Embeddings គុណភាពខ្ពស់សម្រាប់ស្វែងរក
-
-#### **លក្ខណៈពិសេស:**
-
-   - បានបើកការតាមដាន និងត្រួតពិនិត្យ
-   - AI Search សម្រាប់បញ្ជីផលិតផល
-   - ស៊ុមវាយតម្លៃសម្រាប់ធានាគុណភាព
-   - Red teaming សម្រាប់ផ្ទៀងផ្ទាត់សុវត្ថិភាព
-
----
-
-### 5.6.2 អនុវត្តសេណារីយ៉ូ
-
-
-#### 5.6.2.1. ការកំណត់មុនការដាក់បញ្ចូល
-
-Create a setup script (`setup-retail.sh`)
-
-```bash title="" linenums="0"
-#!/bin/bash
-
-# កំណត់ឈ្មោះបរិស្ថាន
-azd env set AZURE_ENV_NAME "retail-ai-agents"
-
-# កំណត់តំបន់ (ជ្រើសឡើងដោយផ្អែកលើការមានស្រាប់នៃម៉ូដែល)
-azd env set AZURE_LOCATION "eastus2"
-
-# បើកសេវាកម្មជ្រើសរើសទាំងអស់
-azd env set USE_APPLICATION_INSIGHTS true
+```bash
+# Infrastructure settings; these can add charges
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
-azd env set ENABLE_AZURE_MONITOR_TRACING true
-
-# កំណត់ម៉ូដែលជជែកចម្បង (gpt-4.1 ជាដែលមានស្រាប់នៅជិតที่สุดនៃ gpt-4.1)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
-azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
-azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
-azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
-
-# កំណត់ម៉ូដែល embedding សម្រាប់ការស្វែងរកដែលបានបង្កើនប្រសិទ្ធភាព
-azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
-azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
-azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
-
-# កំណត់ឈ្មោះភ្នាក់ងារ (នឹងបង្កើតភ្នាក់ងារដំបូង)
-azd env set AZURE_AI_AGENT_NAME "shopper-agent"
-
-# កំណត់សន្ទស្សន៍ស្វែងរក
-azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
-
-echo "Environment configured for retail deployment"
-echo "Recommended quota: 300,000+ TPM across all models"
-```
-
----
-
-#### 5.6.2.2: ការណែនាំភ្នាក់ងារ
-
-Create `custom-agents/shopper-agent-instructions.md`:
-
-```markdown
-# Shopper Agent Instructions
-
-You are a helpful shopping assistant for an enterprise retail company. Your role is to:
-
-1. **Product Discovery**: Help customers find products that match their needs
-2. **Comparison**: Provide detailed product comparisons with pros/cons
-3. **Recommendations**: Suggest complementary products and alternatives
-4. **Inventory**: Check product availability and delivery options
-
-## Guidelines:
-- Always provide citations from the product catalog
-- Be conversational and helpful
-- Ask clarifying questions to understand customer needs
-- Mention relevant promotions when appropriate
-- Escalate complex warranty or return questions to human agents
-
-## Knowledge Base:
-You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
-```
-
-Create `custom-agents/loyalty-agent-instructions.md`:
-
-```markdown
-# Loyalty Agent Instructions
-
-You are a customer loyalty specialist focused on maximizing customer satisfaction and retention. Your responsibilities include:
-
-1. **Rewards Management**: Explain point values, redemption options, and tier benefits
-2. **Promotions**: Identify applicable discounts and special offers
-3. **Program Navigation**: Help customers understand loyalty program features
-4. **Account Support**: Assist with account-related questions and updates
-
-## Guidelines:
-- Prioritize customer satisfaction and retention
-- Explain complex program rules in simple terms
-- Proactively identify opportunities for customers to save money
-- Celebrate customer milestones and achievements
-- Connect customers with shopper agent for product questions
-
-## Knowledge Base:
-You have access to loyalty program rules, current promotions, customer tier information, and reward catalogs.
-```
-
----
-
-#### 5.6.2.3: ស្គ្រីបដាក់បញ្ចូល
-
-Create `deploy-retail.sh`:
-
-```bash title="" linenums="0"
-#!/bin/bash
-set -e
-
-echo "🚀 Starting Enterprise Retail AI Agents deployment..."
-
-# ផ្ទៀងផ្ទាត់លក្ខខណ្ឌជាមុន
-echo "📋 Validating prerequisites..."
-if ! command -v azd &> /dev/null; then
-    echo "❌ Azure Developer CLI (azd) is required"
-    exit 1
-fi
-
-if ! az account show &> /dev/null; then
-    echo "❌ Please login to Azure CLI: az login"
-    exit 1
-fi
-
-# រៀបចំបរិយាកាស
-echo "🔧 Configuring deployment environment..."
-chmod +x setup-retail.sh
-./setup-retail.sh
-
-# ពិនិត្យក្វូតានៅតំបន់ដែលបានជ្រើស
-echo "📊 Checking quota availability..."
-LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
-echo "Deploying to region: $LOCATION"
-echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4.1: 150,000 TPM"
-echo "   - text-embedding-3-large: 75,000 TPM"
-echo "   - Additional models: 75,000+ TPM"
-
-read -p "Continue with deployment? (y/N): " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Deployment cancelled"
-    exit 1
-fi
-
-# ដាក់ឲ្យដំណើរការរចនាសម្ព័ន្ធ និងកម្មវិធី
-echo "🏗️  Deploying Azure infrastructure..."
+azd provision --preview
 azd up
-
-# ចាប់យកលទ្ធផលនៃការដាក់ឲ្យដំណើរការ
-echo "📝 Capturing deployment information..."
-azd show > deployment-info.txt
-
-# យក URL នៃកម្មវិធីបណ្ដាញ
-APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
-
-if [ ! -z "$APP_URL" ]; then
-    echo "✅ Deployment completed successfully!"
-    echo "🌐 Web Application: $APP_URL"
-    echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
-else
-    echo "⚠️  Deployment completed but unable to retrieve URL"
-    echo "Run 'azd show' for deployment details"
-fi
-
-echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
-echo "2. Upload product catalog to search index"
-echo "3. Configure custom agent instructions"
-echo "4. Test both agents with sample queries"
 ```
 
----
+ការបើកសេវាកម្មគឺជាផ្នែកមួយតែប៉ុណ្ណោះនៃការប្រមូលព័ត៌មាន។ មុននឹងផ្ទុកទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នក:
 
-#### 5.6.2.4: ការកំណត់ក្រោយដាក់បញ្ចូល
+1. ប្រាកដថាអ្នកមានការអនុញ្ញាតឱ្យប្រើឯកសារនិងយកព័ត៌មានសំងាត់ដែលមានទេ។
+2. ជ្រើស ម៉ូដែល embedding ដែលគាំទ្រនៅតំបន់របស់អ្នក និងកំណត់កំណែដែលផ្គូផ្គង ប្រភេទសេវាកម្ម និងវិមាត្រវ៉ិចទ័រ។
+3. បង្កើត/បញ្ចូលឃ្លាំងដោយប្រើដំណើរការតាមឯកសារគំរូ។
+4. កំណត់ឧបករណ៍ប្រមូលព័ត៌មានរបស់ភ្នាក់ងារឱ្យប្រើឃ្លាំងនោះ។
+5. សាកល្បងការប្រមូលព័ត៌មាន ការយោង ការអនុញ្ញាត និងឥរិយាបថនៅពេលគ្មានឯកសារចាំបាច់មួយ។
 
-Create `configure-retail-agents.sh`:
+មេត្តាសូមកុំប្ដូរពី `text-embedding-3-small` ទៅម៉ូដែល embedding ផ្សេងដោយមិនពិនិត្យវិមាត្រនិងបង្កើតឃ្លាំង/រៀបចំវ៉ិចទ័រឡើងវិញតាមតម្រូវការ។ ឈ្មោះដូចជា `retail-products` មិនមែនជាកាតាឡុកបានអនុវត្តឬគោលការណ៍គ្រប់គ្រងការចូលប្រើទេ។
 
-```bash title="" linenums="0"
-#!/bin/bash
+## 5.3 តាមដាន និងត្រួតពិនិត្យ
 
-echo "🔧 Configuring retail agents..."
+អនុវត្តតាម [មគ្គុទេសក៍សមគ្រិតសកម្មភាពគំរូ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#tracing-and-monitoring)។ ធ្វើឱ្យប្រាកដថាធនធាន Application Insights និងការតភ្ជាប់ចាំបាច់មានរួចហើយ; ប្រសិនបើប្តូរការកំណត់សំណង់ ប្រើ `azd up`។
 
-# ទាញយកព័ត៌មានអំពីការដាក់បញ្ចូល
-PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
-AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
-
-echo "Project Endpoint: $PROJECT_ENDPOINT"
-echo "Primary Agent ID: $AGENT_ID"
-
-# សេចក្តីណែនាំសម្រាប់ការកំណត់រចនាសម្ព័ន្ធដោយដៃ
-echo "
-🤖 Agent Configuration:
-
-1. **Update Shopper Agent Instructions:**
-   - Go to Microsoft Foundry portal: https://ai.azure.com
-   - Navigate to your project
-   - Select Agents tab
-   - Edit the existing agent
-   - Update instructions with content from custom-agents/shopper-agent-instructions.md
-
-2. **Create Loyalty Agent:**
-   - In Agents tab, click 'Create Agent'
-   - Name: 'loyalty-agent'
-   - Model: Use same deployment as shopper agent
-   - Instructions: Use content from custom-agents/loyalty-agent-instructions.md
-   - Enable file search tool
-   - Save and note the Agent ID
-
-3. **Upload Knowledge Base:**
-   - Prepare product catalog files (JSON/CSV format)
-   - Upload to both agents' file search
-   - Or configure Azure AI Search index
-
-4. **Test Configuration:**
-   - Test shopper agent with product queries
-   - Test loyalty agent with rewards questions
-   - Verify citations and search functionality
-
-📊 Monitoring Setup:
-- Tracing: Available in Microsoft Foundry > Tracing tab
-- Logs: Azure Portal > Container Apps > Monitoring > Log Stream
-- Evaluation: Run python evals/evaluate.py
-
-🔒 Security Validation:
-- Run red teaming: python airedteaming/ai_redteaming.py
-- Review security recommendations
-- Configure authentication if needed
-"
+```bash
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+azd up
 ```
 
-### 5.6.3: ការធ្វើតេស្ត និងផ្ទៀងផ្ទាត់
+ផ្ញើសំណើសាកល្បង ហើយពិនិត្យកំណត់ហេតុកម្មវិធី Container App និងមើលការតាមដានភ្នាក់ងារនៅ Foundry។ ពិនិត្យពីពេលយឺត ការហៅឧបករណ៍ កំហុស និងការតភ្ជាប់រវាងសំណើនិងការតាមដាន។ កុំសន្មតថាឧបករណ៍បញ្ជូនព័តមានត្រូវបានភ្ជាប់ប្រសិនបើតែការចេញផ្សាយបានជោគជ័យ។
 
-Create `test-retail-deployment.sh`:
+ប្រាកដថាអូបសម្រាប់ `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` នៅស្ថានភាពអាប់ផដណ៍ បើមិនបានពិនិត្យការយល់ព្រម ការលុបបំបាត់ ការរក្សាទុក និងការគ្រប់គ្រងសិទ្ធិចូល ប្រហែលការតាមដានជាមិនបង្កវើកនូវអត្ថាធិប្បាយឧបករណ៍ ឬមាតិកាឯកសារសូម្បីតែមិនមានកំណត់ហេតុធម្មតាត្រូវបានភ្ជាប់។
 
-```bash title="" linenums="0"
-#!/bin/bash
+## 5.4 ការវាយតម្លៃភ្នាក់ងារ
 
-echo "🧪 Testing retail deployment..."
+ចំណុចចូលរបស់ការវាយតម្លៃគំរូគឺឥឡូវនេះគឺ [`tests/test_evaluation.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_evaluation.py) មិនមែនថត `evals/` ។ ពីមូលដ្ឋានគំរូ ប្រើបរិយាកាស Python ដែលបំពេញលក្ខណៈតម្រូវការបានឯកសារពិពណ៌នា៖
 
-# ផ្ទៀងផ្ទាត់ថាអថេរបរិយាកាសត្រូវបានកំណត់
-echo "📋 Checking environment configuration..."
-azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
-
-# សាកល្បងភាពអាចប្រើបានរបស់កម្មវិធីវេប
-APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
-if [ ! -z "$APP_URL" ]; then
-    echo "🌐 Testing web application at: $APP_URL"
-    HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
-    if [ "$HTTP_STATUS" = "200" ]; then
-        echo "✅ Web application is responding"
-    else
-        echo "❌ Web application returned status: $HTTP_STATUS"
-    fi
-else
-    echo "❌ Could not retrieve web application URL"
-fi
-
-# ដំណើរការវាយតម្លៃ ប្រសិនបើបានកំណត់
-if [ -f "evals/evaluate.py" ]; then
-    echo "📊 Running agent evaluation..."
-    cd evals
-    python -m pip install -r ../src/requirements.txt
-    python -m pip install azure-ai-evaluation
-    python evaluate.py
-    cd ..
-fi
-
-echo "
-🎯 Deployment validation complete!
-
-Next steps:
-1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
-3. Upload your product catalog and loyalty program data
-4. Configure agent instructions for your specific use case
-5. Run comprehensive testing with your retail scenarios
-"
+```bash
+python -m pip install -r src/requirements.txt
+pytest tests/test_evaluation.py -s
 ```
 
----
+មុនរត់ សូមបញ្ចប់ [លក្ខខ័ណ្ឌតម្រូវការវាយតម្លៃ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md)។ ការសាកល្បងបញ្ចូលកំណត់រចនាសម្ព័ន្ធពី `.azure/<environment>/.env` ដែលបានជ្រើស; ប្រាកដថាបរិយាកាសដែលចង់បានត្រូវបានជ្រើស។ ឧបករណ៍ដំណាក់កាលសំខាន់រួមមាន៖
 
-### 5.6.4 លទ្ធផលដែលរំពឹងទុក
+- `AZURE_EXISTING_AIPROJECT_ENDPOINT`
+- `AZURE_EXISTING_AGENT_ID`, ប្រើទ្រង់ទ្រាយត្រូវការដោយគំរូបច្ចុប្បន្ន (កំណែបានពិនិត្យប្រើ `agent_name:agent_version`)
+- `AZURE_AI_AGENT_DEPLOYMENT_NAME`, ប្រើជាការចេញផ្សាយម៉ូដែលអ្នកច裁
 
-បន្ទាប់ពីអនុវត្តតាមមគ្គុទេសក៍នេះ អ្នកនឹងមាន:
+សូមពិនិត្យការសាកល្បងដើម្បីយល់ពីជម្រើសអ្នកវាយតម្លៃ ចំនុចកំណត់ តួនាទីដែលចាំបាច់ និងថ្លៃប្រើប្រាស់ម៉ូដែល។ ការរត់បានមួយមិនមានន័យថាត្រួតពិនិត្យគុណភាពបានជោគជ័យទេ; សូមពិនិត្យពិន្ទុ ករណីបរាជ័យ/កំហុស និងលទ្ធផលបានភ្ជាប់នៅ Foundry។
 
-1. **គ្រឹះហេដ្ឋារចនាសម្ព័ន្ធដែលបានដាក់ចេញ:**
+### ផ្នែកបន្ថែមវាយតម្លៃ AZD ផ្សេងទៀត
 
-      - គម្រោង Microsoft Foundry ជាមួយការដាក់ចេញម៉ូឌែល
-      - Container Apps ដែលបង្ហោះកម្មវិធីវែប
-      - សេវា AI Search សម្រាប់បញ្ជីផលិតផល
-      - Application Insights សម្រាប់ការត្រួតពិនិត្យ
+ការធ្វើតេស្ត Python ខាងលើគឺជាដំណើរការប្រតិបត្តិការមួយ **ជាគំរូជាក់លាក់**។ កូដបន្ថែមជាជម្រើស `azure.ai.evaluations` គឺជាដំណើរការប្រតិបត្តិការផ្សេងទៀត ដែលមានការកំណត់រចនាសម្ព័ន្ធ `evals/azure.eval.yaml` របស់ខ្លួន:
 
-2. **ភ្នាក់ងារដំបូង:**
+```bash
+azd extension install azure.ai.evaluations
+azd ai eval --help
+```
 
-      - Shopper Agent ត្រូវបានកំណត់ជាមួយការណែនាំមូលដ្ឋាន
-      - សមត្ថភាពស្វែងរកឯកសារត្រូវបានបើក
-      - ការតាមដាន និងត្រួតពិនិត្យត្រូវបានកំណត់
+សម្រាប់ការតំឡើងបន្ថែមពេញលេញ សូមមើល [evaluation workflows and migration](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-08-production/production-ai-practices.md)។ ចាប់តាំងពី agents extension beta.22 កុំប្រើពាក្យបញ្ជា `azd ai agent eval` ដែលបានលុបចេញ។ ការតំឡើងបន្ថែម evaluations មិនបំលែងការធ្វើតេស្ត Python របស់គំរូនោះទេ ឬបង្កើតការកំណត់រចនាសម្ព័ន្ធការវាយតម្លៃដោយស្វ័យប្រវត្តិទេ។
 
-3. **រួចរាល់សម្រាប់ការកែតម្រូវ:**
+## 5.5 ការប្រយុទ្ធភាគីក្រុម AI និងការវាយតម្លៃបន្ត
 
-      - ស៊ុមការ​ងារសម្រាប់បន្ថែម Loyalty Agent
-      - គំរូណែនាំផ្ទាល់ខ្លួន
-      - ស្គ្រីបសម្រាប់ធ្វើតេស្ត និងផ្ទៀងផ្ទាត់
-      - ការកំណត់សម្រាប់ត្រួតពិនិត្យ និងវាយតម្លៃ
+គំរូបច្ចុប្បន្នផ្តល់ជូន [`tests/test_red_teaming.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_red_teaming.py)។ សូមបញ្ចប់លក្ខខណ្ឌមុនរបស់វា និងពិនិត្យមើលគោលដៅ និងថ្លៃកំពុងគ្រោងតាមមុនពេលរត់៖
 
-4. **ភាពរួចរាល់សម្រាប់ការបញ្ចេញផលិតកម្ម:**
+```bash
+pytest tests/test_red_teaming.py -s
+```
 
-      - ការស្កេនសន្តិសុខជាមួយ Red Teaming
-      - ការត្រួតពិនិត្យប្រសិទ្ធភាព
-      - ស៊ុមការវាយតម្លៃគុណភាព
-      - ស្ថាបត្យកម្មដែលអាចពង្រីកបាន
+ប្រើការចែកចាយតេស្តដែលមានអាជ្ញាប័ណ្ណ និងទិន្នន័យសនិ្ទស្សន៍។ សូមពិនិត្យការវាយប្រហារ និងលទ្ធផលដែលបានបង្កើតនេះ ទាំងនេះមិនបញ្ជាក់ថាកម្មវិធីមានសុវត្ថិភាព ឬគោរពតាមស្តង់ដារទេ។
 
-This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
+គាំទ្រ [មគ្គុទេសក៍ការមើលឃើញ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#continuous-evaluation) ក៏បានពិពណ៌នាអំពីការវាយតម្លៃបន្តបន្ទាប់ដែលកំណត់នៅពេលចាប់ផ្តើម upperContainer ។ វា វាយតម្លៃការប្រាស្រ័យទាក់ទងអ្នកប្រើប្រាស់ពិត មិនមែនជាចរាចរណ៍សាកល្បងដែលបង្កើតឡើងទេ ហើយការគាំទ្រ evaluator ផ្លាស់ប្តូរតាមតំបន់។ គ្មានការប្រាស្រ័យទាក់ទង គ្មានកំណត់ហេតុវាយតម្លៃ។ សូមផ្ទៀងផ្ទាត់កំណែគំរូបានដំឡើងនិងការកំណត់ប្រាក់ evaluator ជំនួសវិញវិញការសន្និដ្ឋានថាការដាក់ប្រេីរបស់គ្រប់គ្នាមានលំនាំដើមដូចគ្នា។
+
+ការផ្ទៀងផ្ទាត់អត្តសញ្ញាណផុតពីការវាយតម្លៃ។ តាមដានការតំរូវការចូល/ចូលប្រើដែលបានចុះបញ្ជីរបស់គំរូ។ មិនមាន «ការចុះបញ្ជីផ្ទាល់ខ្លួន auth fallback» ដែលបានចុះបញ្ជីសម្រាប់ការពារចំណុចសាធារណៈទេ។
+
+## 5.6 ហ្វឹកហាត់រចនាសម្ព័ន្ធ៖ ប្ដូរតាមលំនាំរាយលក់
+
+!!! warning "ហ្វឹកហាត់រចនា មិនមែនជាការដាក់ប្រេីរបញ្ចប់ទេ"
+
+    The workshop does not provide a complete Shopper/Loyalty multi-agent implementation. Do not claim that additional agents, models, catalogs, or policies exist until you have implemented and verified them.
+
+សរសេរវិធីសាស្ត្រខ្លីមួយដែលដំណើរការចំពោះ៖
+
+| តំបន់ | សេចក្តីសម្រេច និងភស្តុតាងត្រូវបានប្រមូល |
+|------|----------------------------------|
+| ភារកិច្ចភ្នាក់ងារ | ចាប់ផ្តើមជាមួយភ្នាក់ងារតែមួយ ឬជ្រាបជាភ្នាក់ងារ Shopper និង Loyalty ពិសេស និងក្រមប្រតិបត្តិការ routing |
+| ទិន្នន័យ | កំណត់តារាងសំភារៈ/រង្វាន់សិប្បនិម្មិត និងម្ចាស់កម្មសិទ្ធិនៃការអាប់ដេត |
+| ឧបករណ៍ | អនុវត្តចាត់ចែងសម្រាប់អានតែម្ដងជាលើកដំបូង; បញ្ជាក់ការអនុម័ត និងត្រួតពិនិត្យសម្រាប់ការសរសេរណាមួយ |
+| ម៉ូដែល | ជ្រើសរើសម៉ូដែល/កំណែ/SKU ដែលមាន និងផ្ទៀងផ្ទាត់កំណត់ quota; ជៀសវាងការផ្គូផ្គងម៉ូដែលមិនបានប្រើប្រាស់ |
+| ការទាញយក | កំណត់វិមាត្រសន្ទស្សន៍, embedding, ការជាប់ផ្សាយ, និងការត្រួតពិនិត្យចូលប្រើមានលំនាំឯកសារ |
+| ការវាយតម្លៃ | បន្ថែមចម្លើយដែលបានរំពឹង, សំណួរដែលមិនគាំទ្រ, ករណីប្រើឧបករណ៍ និងសុវត្ថិភាពដោយមានចំណុចស្ថិតិច្បាស់លាស់ |
+| ប្រតិបត្តិការ | កំណត់ telemetry, កំណត់ពេលវេលាចំណាំ/កំហុស, កំណត់ថ្លៃ និងម្ចាស់កម្មសិទ្ធិសំអាត |
+
+ការសន្សំ `custom-agents/shopper-agent-instructions.md` មិនបង្កើតឱ្យគំរូផ្ទុកវាទេ។ សូមស្វែងរកកូដកម្មវិធីដែលបង្កើត/អាប់ដេតភ្នាក់ងារ ភ្ជាប់ការណែនាំដែលបានពិនិត្យរបស់អ្នកនៅទីនោះ ហើយផ្ទៀងផ្ទាត់កំណែភ្នាក់ងារដែលបានផលិតមុនការសាកល្បង។ ការណែនាំមិនអាចផ្តល់សិទ្ធិចូលទៅកាន់ទិន្នន័យ ឬឧបករណ៍ដែលអ្នកមិនបានអនុវត្តបានទេ។
+
+អនុវត្តប្រែប្រួលមួយម្តង ប្រើវិញតំបន់ដែលទាក់ទង ហើយបើកដំណើរការសំណួរនិងការវាយតម្លៃដើមឡើងវិញ។ រក្សាកំណែដែលដំណើរការបានសម្រាប់ប្រៀបធៀប។ សម្រាប់ភាពច្នៃប្រឌិតរចនា សូមមើល [រាងប៉ាតទិនប្ដូរលក់រាយ](https://github.com/microsoft/AZD-for-beginners/blob/main/examples/retail-scenario.md) ដែលក៏មិនមែនជាកម្មវិធីលក់រាយពេញលេញដែរ។
+
+!!! quote "នៅចុងបញ្ចប់នៃមឹកហាត់នេះ អ្នកគួរតែមាន"
+
+    - [ ] A documented customization scope and cost/region checks
+    - [ ] Evidence that retrieval and tracing work for your selected environment
+    - [ ] Reviewed evaluation/red-teaming results, or a clear explanation of unmet prerequisites
+    - [ ] A list of missing implementation work rather than a claim of automatic production readiness
+
+បន្តទៅ [បំលែងហេដ្ឋារចនាសម្ព័ន្ធ](6-Teardown-Infrastructure.md)។
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ឯកសារនេះត្រូវបានបកប្រែដោយប្រើសេវាកម្មបកប្រែ AI [Co-op Translator](https://github.com/Azure/co-op-translator). ក្នុងខណៈដែលយើងខំប្រឹងធ្វើឱ្យមានភាពត្រឹមត្រូវ សូមចំណាំថាការបកប្រែដោយស្វ័យប្រវត្តិអាចមានកំហុស ឬភាពមិនត្រឹមត្រូវ។ ឯកសារដើមក្នុងភាសាមូលដ្ឋានគួរត្រូវបានចាត់ទុកថាជាធនធានដែលមានសុពលភាព។ សម្រាប់ព័ត៌មានសំខាន់ យើងណែនាំឱ្យប្រើការបកប្រែដោយមនុស្សជំនាញវិជ្ជាជីវៈ។ យើងមិនទទួលខុសត្រូវចំពោះការយល់ច្រឡំ ឬការបកស្រាយខុសណាមួយដែលបណ្តាលមកពីការប្រើប្រាស់ការបកប្រែនេះ។
+**ការបដិសេធ**:
+ឯកសារនេះត្រូវបានបម្លែងភាសា ដោយប្រើសេវាបម្លែងភាសា AI [Co-op Translator](https://github.com/Azure/co-op-translator)។ ទោះយើងខ្ញុំមានក្តីប្រាថ្នាឱ្យបានច្បាស់លាស់ តែសូមយល់ដឹងថាការបម្លែងដោយស្វ័យប្រវត្តិក៏អាចមានកំហុសឬភាពមិនត្រឹមត្រូវ។ ឯកសារដើមជាភាសាទីតាំងគួរត្រូវបានគេប្រើជាប្រភពច្បាស់លាស់។ សម្រាប់ព័ត៌មានសំខាន់ៗ សូមណែនាំឱ្យប្រើប្រាស់ការប្រែដោយមនុស្សជំនាញ។ យើងខ្ញុំមិនទទួលខុសត្រូវចំពោះការយល់ច្រឡំ ឬការបកស្រាយខុសបន្ទាប់ពីការប្រើប្រាស់ការបម្លែងនេះនោះទេ។
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

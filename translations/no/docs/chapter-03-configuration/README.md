@@ -1,20 +1,20 @@
-# Kapittel 3: Konfigurasjon og Autentisering
+# Kapittel 3: Konfigurasjon og autentisering
 
-**📚 Kurs**: [AZD For Nybegynnere](../../README.md) | **⏱️ Varighet**: 45-60 minutter | **⭐ Vanskelighetsgrad**: Middels
+**📚 Kurs**: [AZD For nybegynnere](../../README.md) | **⏱️ Varighet**: 90-150 minutter inkludert integrasjonsøvelse | **⭐ Vanskelighetsgrad**: Middels
 
 ---
 
 ## Oversikt
 
-Dette kapittelet dekker miljøkonfigurasjon, autentiseringsmønstre og sikkerhetsbeste praksis for distribusjoner med Azure Developer CLI.
+Dette kapitlet dekker miljøkonfigurasjon, autentiseringsmønstre og sikkerhetsbeste praksis for Azure Developer CLI-distribusjoner.
 
-> Validert mot `azd 1.27.1` i juli 2026.
+> Kommando- og konfigurasjonsgjennomgang mål: `azd 1.37.2` (november 2026). Live Azure-provisjonering ble ikke kjørt under gjennomgang.
 
-## Læringsmål
+## Lære mål
 
-Ved å fullføre dette kapittelet vil du:
-- Mestre AZD-konfigurasjonens hierarki
-- Håndtere flere miljøer (dev, staging, prod)
+Ved å fullføre dette kapitlet vil du:
+- Mestre AZD-konfigurasjonshierarki
+- Administrere flere miljøer (dev, staging, prod)
 - Implementere sikker autentisering med administrerte identiteter
 - Konfigurere miljøspesifikke innstillinger
 
@@ -24,59 +24,59 @@ Ved å fullføre dette kapittelet vil du:
 
 | # | Leksjon | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Konfigurasjonsguide](configuration.md) | Miljøoppsett og håndtering | 30 min |
-| 2 | [Autentisering og Sikkerhet](authsecurity.md) | Administrerte identiteter og RBAC-mønstre | 30 min |
+| 1 | [Konfigurasjonsveiledning](configuration.md) | Miljøoppsett og administrasjon | 30 min |
+| 2 | [Autentisering & sikkerhet](authsecurity.md) | Administrert identitet og RBAC-mønstre | 30 min |
 
 ---
 
-## 🚀 Komme i gang raskt
+## 🚀 Rask start
+
+Kjør fra roten av en **allerede initialisert azd-applikasjon**, ikke kurs-repositoriet. Bruk ubrukte miljønavn hvis disse allerede finnes.
 
 ```bash
-# Opprett flere miljøer
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Bytt miljøer
+# Switch environments
 azd env select prod
 
-# Sett miljøvariabler
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Vis konfigurasjon
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` er illustrativt: det påvirker kun infrastruktur hvis malen din eksplisitt bruker det. Vanlige `azd env set`-verdier lagres lokalt i klartekst; de er ikke sikker hemmelig lagring.
 
 ---
 
 ## 🔧 Konfigurasjonshierarki
 
-AZD bruker innstillinger i denne rekkefølgen (senere overstyrer tidligere):
-
-1. **Standardverdier** (innebygd i maler)
-2. **azure.yaml** (prosjektkonfigurasjon)
-3. **Miljøvariabler** (`azd env set`)
-4. **Kommando-linje-flagg** (`--location eastus`)
+Hold tre forskjellige konfigurasjonsoverflater adskilt: globale preferanser (`azd config`), prosjektstruktur (`azure.yaml`), og miljøspesifikke verdier (`azd env`). Flagg overstyrer kun innstillingene de faktisk støtter; det finnes ingen universell overlegg av vilkårlige miljøvariabler på `azure.yaml` eller Bicep.
 
 ---
 
-## 🔐 Beste praksis for sikkerhet
+## 🔐 Sikkerhetsbeste praksis
 
 ```bash
-# Bruk administrert identitet (anbefalt)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Sjekk AZD-autentiseringsstatus
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Valgfritt: verifiser Azure CLI-kontekst hvis du planlegger å kjøre az-kommandoer
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Autentiser på nytt om nødvendig
+# Re-authenticate if needed
 azd auth login
 
-# Valgfritt: oppdater Azure CLI-autentisering for az-kommandoer
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -93,7 +93,7 @@ az login
 
 ## 📖 Relaterte ressurser
 
-- [Sjekkliste før distribusjon](../chapter-06-pre-deployment/README.md)
+- [Pre-deployment-sjekker](../chapter-06-pre-deployment/README.md)
 - [Feilsøking](../chapter-07-troubleshooting/common-issues.md)
 
 ---

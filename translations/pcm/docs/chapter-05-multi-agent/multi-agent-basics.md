@@ -6,18 +6,18 @@
 - **⬅️ Previous**: [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md)
 - **➡️ Next**: [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command guidance reviewed against the released `azd 1.37.2` reference. Cloud deployments were not executed.
 
 ## Introduction
 
-For di earlier chapters, you don deploy only one application—and for Chapter 2, you deploy only one AI agent. Dis lesson na di next step: deploying **multi-agent system**, weh several specialized agents dey work together to solve problem wey no single agent fit handle well by imself.
+For di earlier chapters, you bin deploy just one application—and for Chapter 2 you deploy one AI agent dem. Dis lesson go carry you go di next step: deploy **multi-agent system**, where plenty specialized agents dey work together to solve problem wey one agent no fit handle well alone.
 
-Good news for beginners be say: **you no need new commands.** Multi-agent solution still be azd project. You go `azd init`, `azd up`, test, and `azd down`—na di same workflow wey you sabi. Di tins wey go change na di *shape* of di app inside.
+Di beta tin for beginners be say: **you no need new commands.** Multi-agent solution still be azd project. You go `azd init`, `azd up`, test, and `azd down`—di exact workflow wey you sabi already. Wetin go change na di *shape* of di app inside.
 
 ## Learning Goals
 
 By di end of dis lesson, you go:
-- Understand wetin "multi-agent" mean and wen e make sense to use am even if e get extra complexity
+- Understand wetin "multi-agent" mean and wen e worth di extra wahala
 - Recognize di common roles for multi-agent system (orchestrator + specialists)
 - Deploy real, working multi-agent template with `azd up`
 - Understand di Azure resources wey dey support multi-agent app
@@ -25,27 +25,27 @@ By di end of dis lesson, you go:
 
 ## Learning Outcomes
 
-After you finish dis lesson, you fit:
+After you finish dis lesson, you go fit:
 - Explain di difference between single agent and multi-agent system
-- Choose between single agent with tools and real multi-agent design
-- Deploy and test multi-agent template end-to-end with azd
+- Choose whether to use single agent with tools or real multi-agent design
+- Deploy and test multi-agent template end to end with azd
 - Identify where each agent dey run and how dem dey communicate
-- Clean up all resources so no extra money go dey charge you
+- Clean up all resources to avoid ongoing charges
 
 ---
 
-## Wetin Be Multi-Agent System?
+## Wetin Multi-Agent System Be?
 
-Single AI agent na one model wey get instructions and (sometimes) some tools. E dey work well for focused tasks. But as di work grow—research, then writing, then editing, then fact-checking—putting everything for one prompt go make di agent slow, less reliable, and harder to debug.
+One single AI agent na one model with set of instructions and (sometimes) some tools. E dey waka well for focused tasks. But as task dey grow—research, then writing, then editing, then fact-checking—if you pack everything inside one prompt, e go make di agent slow, unreliable, and hard to debug.
 
-**Multi-agent system** break di work into specialists, each dey do one job well, wen orchestrator dey coordinate dem:
+**Multi-agent system** na system wey divide work among specialists wey each dey do one job well, and orchestrator dey coordinate dem:
 
 ```mermaid
 graph TD
-    User([User request]) --> Orchestrator[Orchestrator Agent<br/>Plans and routes di work]
-    Orchestrator --> Researcher[Researcher Agent<br/>Gather facts]
-    Orchestrator --> Writer[Writer Agent<br/>Draft content]
-    Orchestrator --> Editor[Editor Agent<br/>Check and fix am]
+    User([User request]) --> Orchestrator[Orchestrator Agent<br/>Plans and routes the work]
+    Orchestrator --> Researcher[Researcher Agent<br/>Gathers facts]
+    Orchestrator --> Writer[Writer Agent<br/>Drafts content]
+    Orchestrator --> Editor[Editor Agent<br/>Reviews and refines]
     Researcher --> Orchestrator
     Writer --> Orchestrator
     Editor --> Orchestrator
@@ -56,182 +56,191 @@ graph TD
 
 | Role | Job | Example |
 |------|-----|---------|
-| **Orchestrator** | Decides *wetin go happen next* and directs work between agents | "First research, then write, then edit" |
-| **Specialist** | Dey do one focused job and return result | Researcher wey just dey gather facts |
+| **Orchestrator** | Decides *wetin happen next* and dey route work between agents | "First research, then write, then edit" |
+| **Specialist** | Dey do one focused job and return result | "Researcher" wey dey gather facts only |
 
 ### You really need multiple agents?
 
-Start simple. Use multi-agent **only** if one of these tins true:
+Start simple. Go multi-agent **only** if one of dis thing be true:
 
-- ✅ Di task get **different stages** wey dey need different instructions (research vs write vs review)
-- ✅ You want specialists to run **in parallel** to save time
+- ✅ Di task get **clear stages** wey need different instructions (research vs. write vs. review)
+- ✅ You want specialist agents to run **in parallel** to save time
 - ✅ Different steps need **different tools or data sources**
-- ✅ You want make every step fit **test and debug on its own**
+- ✅ You want each step to be **independently testable and debuggable**
 
-If your task na single question-and-answer or simple tool call, then **single agent with tools** (Chapter 2) na easier, cheaper, and simpler to use.
+If your task na single question-and-answer or simple tool call, **single agent with tools** (Chapter 2) simple pass, cheap pass, and easier to use.
 
-> **Beginner tip:** "More agents" no mean "better." Each agent dey add delay, cost, and something new to watch. Add agents only when di problem clear to split into parts.
+> **Beginner tip:** "More agents" no be always "better." Every agent add latency, cost, and new tin to monitor. Add agents only if problem clear to split into parts.
 
 ---
 
-## Two Ways to Build Multi-Agent for Azure
+## Two Ways to Build Multi-Agent on Azure
 
 | Approach | Wetin e be | Best for |
-|----------|------------|---------|
-| **Single agent + tools** | One Foundry agent wey dey call functions/tools | Simple workflows, beginners |
-| **Multiple coordinated agents** | Several agents with orchestrator | Different stages, parallel work, specialization |
+|----------|-------------|---------|
+| **Single agent + tools** | One Foundry agent wey dey call functions/tools | Simple workflows, start learning |
+| **Multiple coordinated agents** | Many agents with orchestrator | Distinct stages, parallel work, specialization |
 
-Dis lesson focus on di second method with **ready-made template**, so you fit see real multi-agent system wey dey run before you build your own.
+Dis lesson dey focus on di second way, using **ready-made template**, so you fit see real multi-agent system wey dey run before you build your own.
 
 ---
 
 ## Hands-On: Deploy Working Multi-Agent App
 
-We go deploy **Contoso Creative Writer**, official Azure sample wey use multiple agents (researcher, writer, editor) to produce article. Na good first multi-agent app because di roles easy to understand.
+We go deploy **Contoso Creative Writer**, official Azure sample wey dey coordinate research, product, writing, and editing agents to produce article. Before you start, check [sample prerequisites and costs](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): you go need model quota, Azure AI Search, Bing Grounding access, Python, Docker, and Bash-compatible hooks. Model and region availability depend on your subscription; deployment no guarantee if you choose particular region.
 
 ### Step 1: Initialize di template
 
 ```bash
-# Maak wan wok folder
+# Create a working folder
 mkdir creative-writer && cd creative-writer
 
-# Start from di official multi-agent template
-azd init --template contoso-creative-writer
+# Initialize from the official multi-agent template
+azd init --template Azure-Samples/contoso-creative-writer .
 ```
 
-> You fit see more multi-agent templates anytime for [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai). Other beginner-friendly options be `get-started-with-ai-agents` and `azure-ai-travel-agents`.
+> You fit browse more multi-agent templates anytime for [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai). Other beginner-friendly options na `get-started-with-ai-agents` and `azure-ai-travel-agents`.
 
 ### Step 2: Authenticate
 
 ```bash
-# We need am for azd workflows
+# Required for azd workflows
 azd auth login
+
+# Also required by this sample's Azure CLI hooks
+az login
 ```
 
-### Step 3: Create environment
+### Step 3: Check di environment
 
 ```bash
-azd env new dev
+# init normally creates/selects an environment; confirm it before proceeding
+azd env list
+# Only if you need an additional environment:
+# azd env new dev
 ```
 
 ### Step 4: Preview, then deploy
 
 ```bash
-# See wetin go create before you spend anything (recommended)
+# See what will be created before spending anything (recommended)
 azd provision --preview
 
-# Arrange infrastructure and put all agents for one step
+# Provision infrastructure and deploy all agents in one step
 azd up
 ```
 
-`azd up` go ask for subscription and region, then go setup Azure resources and deploy di application. AI deployments fit take longer than simple web app—if you dey deploy bigger models, you fit increase di deploy timeout:
+`azd up` go ask you for missing subscription and region settings, then e go provision resources and deploy di application. Preview no dey reserve quota or guarantee success; template hooks fit still run during provisioning preview, so inspect dem first. To extend how long azd go wait for each **service deployment** (no be model provisioning):
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Heads up on cost and capacity:** Multi-agent apps deploy AI models wey dey use quota and dey cost money. If `azd up` fail for model quota, check [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) for region and quota fixes, plus Chapter 6 [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md).
+Timeout stops azd waiting; e no cancel deployment for Azure. Make sure to inspect resource state before retry.
+
+> **Heads up for cost and capacity:** Multi-agent apps dey deploy AI models wey dey consume quota and cost money. If `azd up` fail for model quota, check [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) for region and quota fixes, plus Chapter 6 [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Understanding Wetin You Deploy
+## Understand Wetin You Deploy
 
-Typical multi-agent app like dis one dey setup Azure resources wey map directly to di jobs for di diagram wey dey above:
+Typical multi-agent app like dis one dey provision set of Azure resources wey map directly to responsibilities for di diagram wey don show:
 
-| Resource | Why e dey here |
-|----------|--------------|
-| **Microsoft Foundry / Models** | Hosts language models wey each agent dey use |
-| **Azure AI Search** | Gives researcher agent data wey e fit search |
-| **Container Apps** (or App Service) | Hosts di orchestrator and agent code |
-| **Cosmos DB** (for some samples) | Stores shared state/memory wey agents dey pass between themselves |
-| **Application Insights** | Traces requests *across* agents so you fit debug di flow |
+| Resource | Why e dey there |
+|----------|-----------------|
+| **Microsoft Foundry / Models** | Hosts di language models wey each agent dey use |
+| **Azure AI Search** | Gives researcher agent grounded data to search |
+| **Container Apps** (or App Service) | Hosts orchestrator and agent code |
+| **Cosmos DB** (for some samples) | Stores shared state/memory wey agents fit share |
+| **Application Insights** | Traces requests *across* agents make you fit debug di flow |
 
-### How agents dey talk to each other
+### How agents dey talk each other
 
-For most azd multi-agent samples, **orchestrator dey run inside your app code** (like example, using framework like Semantic Kernel or Microsoft Agent Framework). Orchestrator go call each specialist agent one by one, pass results, then join them to form final answer. Agents dey share context through:
+For most azd multi-agent samples, **orchestrator dey run inside your application code** (example, using framework like Semantic Kernel or Microsoft Agent Framework). Orchestrator go call each specialist agent one by one, pass results, and assemble final answer. Agents share context through:
 
-- **Function/tool calls** — orchestrator go call specialist and get result back
-- **Shared memory** — database (often Cosmos DB) wey hold state wey both agents fit read
-- **Messages/events** — for less tight connection, agents dey communicate through queue or Service Bus
+- **Function/tool calls** — orchestrator dey call specialist and get result back
+- **Shared memory** — database (often Cosmos DB) hold state wey both agents fit read
+- **Messages/events** — for loose connection, agents dey communicate through queue or Service Bus
 
-> **Why e matter for debugging:** because each step dey separate, Application Insights go show you *which* agent slow or fail. Na one big reason why dem split work among agents.
+> **Why e matter for debugging:** because each step separate, Application Insights fit show you *which* agent slow or fail. Na big reason to split work across agents.
 
 ---
 
-## Verify di Deployment
+## Verify Deployment
 
-Make sure di system dey work well before you continue:
+Confirm system dey really work before you continue:
 
 ```bash
-# Show di deployed endpoints
+# Show the deployed endpoints
 azd show
 
-# Open di app monitoring dashboard
+# Open the app's monitoring dashboard
 azd monitor
 
-# Tail logs if something dey off
+# Open Application Insights Logs (not a terminal log stream)
 azd monitor --logs
 ```
 
-Then open app URL from `azd show` and make request wey wan test all agents (for Creative Writer, ask am write short article on topic). For Application Insights **transaction search**, you go see di request split across researcher, writer, and editor steps.
+Then open app URL from `azd show` and request short article. Use sample debug view to check agent workflow. Application Insights transaction search fit show individual steps if sample get proper instrumentation and correlation; azd no add agent spans automatically.
 
 **Success criteria:**
-- ✅ `azd show` list reachable endpoint
+- ✅ `azd show` lists reachable endpoint
 - ✅ Request produce result wey clearly pass multiple stages
-- ✅ Application Insights show traces for more than one agent step
+- ✅ Debug view show multiple agent steps; if tracing active, verify telemetry after ingestion
 
 ---
 
 ## Customize: Add or Adjust Agent
 
-Because each agent na just instructions plus tools, e easy to customize:
+Because each agent na just instructions plus tools, customization dey easy:
 
-1. **Find agent definitions** inside template (fit dey for `prompts/`, `agents/`, or `*.prompty` files).
-2. **Tune agent instructions** — for example, tell editor agent make e use specific tone or word count.
+1. **Find agent definitions** inside template (often `prompts/`, `agents/`, or `*.prompty` files).
+2. **Tune agent instructions**—for example, tell editor agent to use specific tone or word count.
 3. **Redeploy only code** (infrastructure no change):
 
    ```bash
    azd deploy
    ```
 
-To go further and build agents from *your own* manifest, use agent extension with full lifecycle:
+To go further with *your own* Foundry agent project, use agent extension interactive initialization:
 
 ```bash
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
-azd ai agent invoke      # test, wit response timing
+azd ai agent invoke      # test, with response timing
 ```
 
-See [Chapter 2: Agents](../chapter-02-ai-development/agents.md) and [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full agent lifecycle (`invoke`, `eval generate`, `optimize`, `delete`).
+Check [Chapter 2: Agents](../chapter-02-ai-development/agents.md) and [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for complete lifecycle: agent `invoke`, separate evaluations extension `azd ai eval` workflow, agent `optimize`, and agent `delete`.
 
 ---
 
 ## Clean Up
 
-Multi-agent apps dey run many billable services. Tear everything down after you finish:
+Multi-agent apps run plenty billable services. Tear everything down when you don finish:
 
 ```bash
-azd down --force --purge
+# Review the resources and confirm deletion interactively
+azd down
 ```
 
-`--purge` flag go remove also soft-deleted AI resources (like Foundry/Azure AI Services accounts) so dem no go block future redeploy or dey continue dey cost you.
+Deletion na destructive process. For disposable lab, `azd down --force --purge` skip deletion and supported soft-delete purge confirmations; purging irreversible if supported and fit block purge protection. Soft deletion na recovery/name-reuse matter, no be proof of ongoing charges. Check if resources still dey and billing after cleanup.
 
 ---
 
 ## Note on Production Multi-Agent Systems
 
-[Retail Multi-Agent Solution](../../examples/retail-scenario.md) for dis repo na **architecture blueprint**, no be one-command template—it dey document how production retail system *go be built* (dem say full build na big work). Use am as design guide *after* you deploy working sample here. For production needs (resilience, cost, monitoring, governance), continue to [Chapter 8: Production AI Practices](../chapter-08-production/production-ai-practices.md).
+Di [Retail Multi-Agent Solution](../../examples/retail-scenario.md) for dis repo na **architecture blueprint**, no be one-command template—e dey describe how production retail system *go* build (e clear say full build serious work). Use am as design reference *after* you deploy working sample here. For production issues (resilience, cost, monitoring, governance), continue to [Chapter 8: Production AI Practices](../chapter-08-production/production-ai-practices.md).
 
 ---
 
 ## Summary
 
-- Multi-agent system dey split work among specialists coordinated by orchestrator.
-- Use am only when task get stages, parallelism, or different tools for steps—otherwise use single agent.
-- azd workflow no change: `azd init` → `azd up` → test → `azd down`.
-- Real template like `contoso-creative-writer` fit show you and customize working multi-agent app now.
-- Application Insights tracing across agents na one big practical benefit of multi-agent design.
+- Multi-agent system split work across specialists coordinated by orchestrator.
+- Use am only if task get distinct stages, parallelism, or different tools per step—otherwise choose single agent.
+- Azd workflow no change: `azd init` → `azd up` → test → `azd down`.
+- Real template like `contoso-creative-writer` let you see and customize working multi-agent app today.
+- Application Insights tracing across agents na one biggest practical benefits of multi-agent design.
 
 ---
 

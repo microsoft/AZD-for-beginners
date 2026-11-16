@@ -1,280 +1,133 @@
-# 3. Fumbua Kiolezo
+# 3. Vunjua Kiolezo
 
-!!! tip "MWISHO WA MODULI HII UTAWEZA"
+!!! tip "MWISHONI WA MODULI HII UTAWEZA"
 
-    - [ ] Washa GitHub Copilot na seva za MCP kwa msaada wa Azure
-    - [ ] Elewa muundo wa folda na vipengele vya kiolezo cha AZD
-    - [ ] Chunguza mifumo ya kupanga miundombinu-kama-msimbo (Bicep)
-    - [ ] **Maabara 3:** Tumia GitHub Copilot kuchunguza na kuelewa usanifu wa hazina
-
----
-
-
-Kwa violezo vya AZD na Azure Developer CLI (`azd`) tunaweza kuanzisha haraka safari yetu ya maendeleo ya AI kwa hifadhi zilizo sanifu zinazotoa msimbo wa mfano, miundombinu na faili za usanidi - kwa njia ya mradi wa _starter_ tayari kwa kutumika.
-
-**Lakini sasa, tunahitaji kuelewa muundo wa mradi na msimbo wa msingi - na kuweza kubadilisha kiolezo cha AZD - bila uzoefu wowote au uelewa wa AZD!**
+    - [ ] Use GitHub Copilot and optional MCP tools for Azure documentation and read-only exploration
+    - [ ] Identify the template's application, infrastructure, configuration, and test entry points
+    - [ ] Verify generated explanations against actual repository files
+    - [ ] **Lab 3:** Trace one request and one configuration input through the project
 
 ---
 
 ## 1. Washa GitHub Copilot
 
-### 1.1 Sakinisha GitHub Copilot Chat
+Fungua sampuli ya AI iliyozinduliwa katika VS Code na uwezeshe [GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Ingia kwa akaunti yenye mpango unaostahili; mipaka ya matumizi hutofautiana. Muulize Copilot aeleze hifadhi kabla ya kuidhinisha mabadiliko.
 
-Ni wakati wa kuchunguza [GitHub Copilot na Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Sasa, tunaweza kutumia lugha ya asili kuelezea kazi yetu kwa kiwango cha juu, na kupata msaada katika utekelezaji. Kwa maabara hii, tutatumia [Mpango wa Copilot Bila Malipo](https://github.com/github-copilot/signup) ambao una kikomo cha kila mwezi kwa utekelezaji na mwingiliano wa gumzo.
+### Seva za MPC za Hiari
 
-Kiendelezi kinaweza kusakinishwa kutoka kwenye marketplace, na mara nyingi tayari kinapatikana katika Codespaces au mazingira ya dev container. _Bonyeza `Open Chat` kutoka kwenye ikon ya Copilot iliyodondoshwa - na andika ombi kama `What can you do?`_ - huenda utakapoombwa uingie kwa kutumia akaunti. **GitHub Copilot Chat iko tayari**.
+Huduma hizi zinaweza kutoa zana za ziada:
 
-### 1.2. Sakinisha seva za MCP
+- [Azure MCP Server](https://learn.microsoft.com/azure/developer/azure-mcp-server/overview)
+- [Microsoft Learn MCP Server](https://learn.microsoft.com/training/support/mcp)
 
-Ili Agent mode iwe na ufanisi, inahitaji ufikiaji wa zana sahihi zitakazoiwezesha kupata maarifa au kuchukua hatua. Hapa ndipo seva za MCP zinapoweza kusaidia. Tutasanidi seva zifuatazo:
+Katika VS Code, kupitia [miongozo ya usanidi wa MCP](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) na tengeneza `.vscode/mcp.json` ikiwa inahitajika:
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+```json
+{
+  "servers": {
+    "Azure MCP Server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"]
+    },
+    "microsoft.docs.mcp": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
 
-Ili kuziwezesha hizi:
+Amri ya `npx` inahitaji usakinishaji wa Node.js/npm unaoungwa mkono na hupakua msimbo unaoweza kutekelezwa. Pitia kifurushi na weka toleo lililothibitishwa kwa usanidi unaoweza kurudiwa wa timu. Anzisha seva kwa kutumia vidhibiti vya MCP vya VS Code na angalia zana zao zilizopo; majina yanaweza kubadilika kati ya matoleo.
 
-1. Unda faili iitwayo `.vscode/mcp.json` ikiwa haipo
-1. Nakili yafuatayo ndani ya faili hiyo - kisha anza seva hizi!
-   ```json title=".vscode/mcp.json"
-   {
-      "servers": {
-         "Azure MCP Server": {
-            "command": "npx",
-            "args": [
-            "-y",
-            "@azure/mcp@latest",
-            "server",
-            "start"
-            ]
-         },
-         "microsoft.docs.mcp": {
-            "type": "http",
-            "url": "https://learn.microsoft.com/api/mcp"
-         }
-      }
-   }
-   ```
+**Uthibitishaji ni tofauti.** Tumia `azd auth login` kwa AZD. Fuata mtiririko wa uthibitishaji uliodokumentishwa wa Azure MCP kwa zana zake; kuingia kwa AZD pekee hakaundi kikao cha MCP. Tumia `az login` kwa tofauti wakati zoezi au hook inapoita Azure CLI.
 
-??? warning "Unaweza kupata kosa kwamba `npx` haijawekwa (bonyeza ili kupanua suluhisho)"
+Jaribu maagizo ya kusoma tu:
 
-      Ili kurekebisha hili, fungua faili `.devcontainer/devcontainer.json` na ongeza mstari huu kwenye sehemu ya features. Kisha jenga tena kontena. Sasa utakuwa na `npx` imewekwa.
+1. “Tumia Microsoft Learn MCP kupata nyaraka za usanidi wa Azure Developer CLI.”
+2. “Eleza `azure.yaml` ya hifadhi hii; taja faili zinazotekeleza kila hook.”
+3. “Kwa kutumia zana za Azure MCP zinazopatikana, oroda rasilimali zangu zilizotumika bila kubadili chochote.”
 
-      ```title="" linenums="0"
-         "features": {
-            "ghcr.io/devcontainers/features/node:1": {},
-            ...
-         },
-      ```
+Kagua mpangilio wa menyu/muamuzi wa kodi uliyochaguliwa na kila wito wa zana uliopendekezwa. Usikubali uundaji wa rasilimali, ufutaji, au mabadiliko ya ruhusa kwa ajili tu ya kuchunguza usanifu.
 
----
+## 2. Elewa usanifu
 
-### 1.3. Jaribu GitHub Copilot Chat
+Sampuli ina backend ya Python FastAPI na frontend ya React/TypeScript kwenye Azure Container Apps. Backend huwasiliana na wakala katika mradi wa Microsoft Foundry. Urejeshaji na uangalizi hutegemea vipengele vilivyoamilishwa vya kiolezo na usanidi uliofanikiwa; hayaathiriwi ukiwa tu kwa sababu programu ilizinduliwa.
 
-**Kwanza tumia `azd auth login` kujiathentisha na Azure kutoka kwa mstari wa amri wa VS Code. Tumia pia `az login` tu ikiwa unapanga kuendesha amri za Azure CLI moja kwa moja.**
+![Usanifu wa kielelezo](../../../../../translated_images/sw/architecture.8cec470ec15c65c7.webp)
 
-Sasa unapaswa kuweza kuuliza hali ya usajili wako wa Azure, na kuuliza maswali kuhusu rasilimali zilizowekwa au usanidi. Jaribu maombi haya:
+Linganisha mchoro huu na [miongozo ya sasa ya maingizo ya juu](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) na rasilimali zako halisi. Kagua usanidi wa uanzishaji wa modeli, zana za wakala, utambulisho ulioendeshwa, ugawaji wa majukumu, na rasilimali za hiari za AI Search/Application Insights.
 
-1. `List my Azure resource groups`
-1. `#foundry list my current deployments`
+**Zoezi:** Muulize Copilot kufuatilia ombi la mazungumzo kutoka frontend kupitia API hadi Foundry, ukiwa na rejea za faili na kazi. Fungua rejea hizo na hakiki maelezo. Usihitishe uthibitishaji, upangaji njia, au idhini kutoka kwa mchoro pekee.
 
-Unaweza pia kuuliza maswali kuhusu nyaraka za Azure na kupata majibu yenye msingi kwenye Microsoft Docs MCP server. Jaribu maombi haya:
+## 3. Muundo wa hifadhi
 
-1. `#microsoft_docs_search What is Azure Developer CLI?`
-1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
+Njia zilizochaguliwa zilikaguliwa dhidi ya sampuli tarehe 4 Novemba, 2026. Toleo lako lililozinduliwa ndilo chanzo cha ukweli:
 
-Au unaweza kuomba vipande vya msimbo kukamilisha kazi. Jaribu ombi hili.
+```text
+get-started-with-ai-agents/
+  azure.yaml
+  docker-compose.yaml
+  requirements-dev.txt
+  .devcontainer/
+  infra/
+    main.bicep
+    main.parameters.json
+    api.bicep
+    core/
+  src/
+    Dockerfile
+    pyproject.toml
+    requirements.txt
+    api/
+      main.py
+      routes.py
+      search_index_manager.py
+    frontend/
+      package.json
+      src/
+    files/
+  scripts/
+    validate_env_vars.sh
+    validate_env_vars.ps1
+    postdeploy.sh
+    postdeploy.ps1
+  tests/
+    test_evaluation.py
+    test_red_teaming.py
+  docs/
+    deployment.md
+    deploy_customization.md
+    ai_search.md
+    observability.md
+    local_development.md
+    troubleshooting.md
+```
 
-1. `Give me a Python code example that uses AAD for an interactive chat client`
+### Miundombinu na usanidi
 
-Katika hali ya `Ask`, hili litatupa msimbo ambao unaweza kunakili-kubandika na kujaribu. Katika hali ya `Agent`, hili linaweza kuchukua hatua zaidi na kuunda rasilimali zinazofaa kwako - pamoja na script za usanidi na nyaraka - kukusaidia kutekeleza kazi hiyo.
+`infra/main.bicep` huendesha rasilimali; `main.parameters.json` huunganisha pembejeo za kiolezo na thamani za mazingira ya AZD. `azure.yaml` huchagua huduma ya programu na vifungo vya mzunguko wa maisha. Fuata pembejeo kama `USE_AZURE_AI_SEARCH_SERVICE` kupitia faili hizi ili kuona kinachobadilika kwa kweli.
 
-**Sasa umewekwa kuanza kuchunguza hazina ya kiolezo**
+### Programu na utambulisho
 
----
+Soma pamoja `src/api/` na `src/frontend/`. Tambua mahali wakala anapoanzishwa au kurejeshwa, mahali maelekezo/zana zinapokusudiwa, na utambulisho unaotumiwa na kila mwito wa Azure. Faili za sampuli chini ya `src/files/` ni data za maonyesho, si orodha ya uzalishaji au mfano wa ruhusa.
 
-## 2. Fumbua Usanifu wa Mfumo
+### Majaribio na uangalizi
 
-??? prompt "OMBA: Eleza usanifu wa programu katika docs/images/architecture.png kwa aya 1"
+Sehemu za sasa za tathmini na timu ya kujaribu ni chini ya `tests/`; rejea za zamani za wao za `evals/` na `airedteaming/` ni za zamani kwa sampuli hii. Soma `docs/observability.md` kwa mahitaji ya awali na gharama kabla ya kuendesha majaribio ya mawingu. Majaribio haya ya Python ni tofauti na nyongeza ya hiari ya `azure.ai.evaluations` AZD.
 
-      Programu hii ni programu ya gumzo inayotumia AI iliyojengwa kwenye Azure inayonyesha usanifu wa kisasa wa msingi wa mawakala. Suluhisho linajikita kwenye Azure Container App inayoweka msimbo mkuu wa programu, ambao unachakata pembejeo za mtumiaji na kuzalisha majibu yenye akili kupitia wakala wa AI.
-      
-      Usanifu unatumia Microsoft Foundry Project kama msingi wa uwezo wa AI, ukiunganishwa na Azure AI Services zinazotoa mifano ya lugha (kama gpt-4.1-mini) na utendaji wa mawakala. Mwingiliano wa watumiaji hupitia frontend inayotegemea React hadi backend ya FastAPI ambayo inazungumza na huduma ya wakala wa AI kwa ajili ya uzalishaji wa majibu ya muktadha.
-      
-      Mfumo unajumuisha uwezo wa kupata maarifa kupitia utafutaji wa faili au huduma ya Azure AI Search, ikiruhusu wakala kupata na kunukuu taarifa kutoka kwa nyaraka zilizopakuliwa. Kwa ubora wa uendeshaji, usanifu unajumuisha ufuatiliaji kamili kupitia Application Insights na Log Analytics Workspace kwa ufuatiliaji, uandishi wa kumbukumbu, na uboreshaji wa utendaji.
-      
-      Azure Storage hutoa uhifadhi wa blob kwa data za programu na upakuaji wa faili, wakati Managed Identity inahakikisha ufikiaji salama kati ya rasilimali za Azure bila kuhifadhi nywila. Suluhisho lote limebuniwa kwa uwezo wa kupanuka na utunzaji, na programu iliyokonteneriwa inapanuka moja kwa moja kulingana na mahitaji wakati ikitoa usalama uliojengwa, ufuatiliaji, na uwezo wa CI/CD kupitia ekosistemu ya huduma zilizosimamiwa za Azure.
+## 4. Thibitisha matokeo yako
 
-![Usanifu](../../../../../translated_images/sw/architecture.48d94861e6e6cdc0.webp)
+- Tambua njia ya API, mwingiliano wa wakala, na msimbo wa urejeshaji kwa swali moja la sampuli.
+- Eleza utambulisho unaofikia Foundry na usanidi unaochagua kiunganishi chake.
+- Tafuta maandishi halisi ya kabla ya kuanzisha na baada ya kupeleka na tabia yao ya kushughulikia makosa.
+- Orodhesha utegemezi wowote au vipengele hiari ambavyo havipo katika uanzishaji wako.
 
----
-
-## 3. Muundo wa Hazina
-
-!!! prompt "OMBA: Eleza muundo wa folda wa kiolezo. Anza na mchoro wa muundo wa ngazi wa kuona."
-
-??? info "JIBU: Mchoro wa Kimtazamo wa Muundo wa Ngazi"
-
-      ```bash title="" 
-      get-started-with-ai-agents/
-      ├── 📋 Mipangilio na Usanidi
-      │   ├── azure.yaml                    # Usanidi wa Azure Developer CLI
-      │   ├── docker-compose.yaml           # Makontena ya maendeleo ya ndani
-      │   ├── pyproject.toml                # Usanidi wa mradi wa Python
-      │   ├── requirements-dev.txt          # Vitegemezi vya maendeleo
-      │   └── .devcontainer/                # Usanidi wa dev container wa VS Code
-      │
-      ├── 🏗️ Miundombinu (infra/)
-      │   ├── main.bicep                    # Kiolezo kikuu cha miundombinu
-      │   ├── api.bicep                     # Rasilimali maalum za API
-      │   ├── main.parameters.json          # Vigezo vya miundombinu
-      │   └── core/                         # Vipengele vya moduli za miundombinu
-      │       ├── ai/                       # Usanidi wa huduma za AI
-      │       ├── host/                     # Miundombinu ya mwenyeji
-      │       ├── monitor/                  # Ufuatiliaji na uandishi wa kumbukumbu
-      │       ├── search/                   # Usanidi wa Azure AI Search
-      │       ├── security/                 # Usalama na utambulisho
-      │       └── storage/                  # Usanidi wa akaunti za kuhifadhi
-      │
-      ├── 💻 Chanzo cha Programu (src/)
-      │   ├── api/                          # Backend API
-      │   │   ├── main.py                   # Kuingia kwa programu ya FastAPI
-      │   │   ├── routes.py                 # Ufafanuzi wa njia za API
-      │   │   ├── search_index_manager.py   # Kazi za utafutaji
-      │   │   ├── data/                     # Usindikaji wa data za API
-      │   │   ├── static/                   # Mali imara za wavuti
-      │   │   └── templates/                # Kiolezo za HTML
-      │   ├── frontend/                     # Mwisho wa mbele wa React/TypeScript
-      │   │   ├── package.json              # Vitegemezi za Node.js
-      │   │   ├── vite.config.ts            # Usanidi wa ujenzi wa Vite
-      │   │   └── src/                      # Chanzo cha frontend
-      │   ├── data/                         # Faili za data za mfano
-      │   │   └── embeddings.csv            # Embeddings zilizohesabiwa awali
-      │   ├── files/                        # Faili za msingi wa maarifa
-      │   │   ├── customer_info_*.json      # Sampuli za data za wateja
-      │   │   └── product_info_*.md         # Nyaraka za bidhaa
-      │   ├── Dockerfile                    # Usanidi wa kontena
-      │   └── requirements.txt              # Vitegemezi vya Python
-      │
-      ├── 🔧 Uendeshaji & Skripti (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Usanidi baada ya utumaji
-      │   ├── setup_credential.sh/.ps1     # Usanidi wa vitambulisho
-      │   ├── validate_env_vars.sh/.ps1    # Uhakiki wa mazingira
-      │   └── resolve_model_quota.sh/.ps1  # Usimamizi wa kigezo cha modeli
-      │
-      ├── 🧪 Upimaji & Tathmini
-      │   ├── tests/                        # Majaribio ya kitengo na ujumuishaji
-      │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Mfumo wa tathmini ya wakala
-      │   │   ├── evaluate.py               # Mwendeshaji wa tathmini
-      │   │   ├── eval-queries.json         # Maswali ya mtihani
-      │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Uwanja wa majaribio wa maendeleo
-      │   │   ├── 1-quickstart.py           # Mifano ya kuanza haraka
-      │   │   └── aad-interactive-chat.py   # Mifano ya uthibitishaji
-      │   └── airedteaming/                 # Tathmini ya usalama wa AI
-      │       └── ai_redteaming.py          # Majaribio ya timu nyekundu
-      │
-      ├── 📚 Nyaraka (docs/)
-      │   ├── deployment.md                 # Mwongozo wa utumaji
-      │   ├── local_development.md          # Maelekezo ya usanidi wa ndani
-      │   ├── troubleshooting.md            # Masuala ya kawaida & suluhisho
-      │   ├── azure_account_setup.md        # Masharti ya Azure
-      │   └── images/                       # Mali za nyaraka
-      │
-      └── 📄 Metadata ya Mradi
-         ├── README.md                     # Muhtasari wa mradi
-         ├── CODE_OF_CONDUCT.md           # Miongozo ya jamii
-         ├── CONTRIBUTING.md              # Mwongozo wa michango
-         ├── LICENSE                      # Masharti ya leseni
-         └── next-steps.md                # Mwongozo baada ya utumaji
-      ```
-
-### 3.1. Usanifu wa App Msingi
-
-Kiolezo hiki kinafuata muundo wa **programu ya wavuti kamili** na:
-
-- **Backend**: FastAPI ya Python yenye muunganisho na Azure AI
-- **Frontend**: TypeScript/React na mfumo wa ujenzi wa Vite
-- **Infrastructure**: Violezo vya Azure Bicep kwa rasilimali za wingu
-- **Containerization**: Docker kwa utumaji thabiti
-
-### 3.2 Miundombinu kama Msimbo (bicep)
-
-Safu ya miundombinu inatumia violezo vya **Azure Bicep** vilivyopangwa kwa moduli:
-
-   - **`main.bicep`**: Inaendesha rasilimali zote za Azure
-   - **`core/` modules**: Vipengele vinavyotumika tena kwa huduma mbalimbali
-      - Huduma za AI (Microsoft Foundry Models, AI Search)
-      - Uendeshaji wa makontena (Azure Container Apps)
-      - Ufuatiliaji (Application Insights, Log Analytics)
-      - Usalama (Key Vault, Managed Identity)
-
-### 3.3 Chanzo cha Programu (`src/`)
-
-**Backend API (`src/api/`)**:
-
-- API ya REST inayotokana na FastAPI
-- Muunganisho na Foundry Agents
-- Usimamizi wa index ya utafutaji kwa ajili ya upokezaji maarifa
-- Uwezo wa kupakia faili na usindikaji
-
-**Frontend (`src/frontend/`)**:
-
-- SPA ya kisasa ya React/TypeScript
-- Vite kwa maendeleo ya haraka na ujenzi ulioboreshwa
-- Kiolesura cha gumzo kwa mwingiliano wa wakala
-
-**Msingi wa Maarifa (`src/files/`)**:
-
-- Sampuli za data za wateja na bidhaa
-- Inaonyesha upokezaji wa maarifa kwa kutumia faili
-- Mifano ya muundo wa JSON na Markdown
-
-
-### 3.4 DevOps & Uendeshaji Otomatiki
-
-**Skripti (`scripts/`)**:
-
-- Skripti za PowerShell na Bash zinazoendana na mifumo mbalimbali
-- Uhakiki wa mazingira na usanidi
-- Usanidi baada ya utumaji
-- Usimamizi wa kigezo cha modeli
-
-**Muunganisho wa Azure Developer CLI**:
-
-- Usanidi wa `azure.yaml` kwa mtiririko wa kazi wa `azd`
-- Upangaji na utumaji uliot automatishwa
-- Usimamizi wa vigezo vya mazingira
-
-### 3.5 Upimaji & Udhibiti wa Ubora
-
-**Mfumo wa Tathmini (`evals/`)**:
-
-- Tathmini ya utendaji wa wakala
-- Upimaji wa ubora wa majibu ya maswali
-- Mstari wa tathmini uliot automatishwa
-
-**Usalama wa AI (`airedteaming/`)**:
-
-- Majaribio ya timu nyekundu kwa usalama wa AI
-- Skanningu ya udhaifu wa usalama
-- Mazoezi ya AI yenye kuwajibika
-
----
-
-## 4. Hongera 🏆
-
-Umetumia kwa mafanikio GitHub Copilot Chat na seva za MCP, kuchunguza hazina.
-
-- [X] Umewashwa GitHub Copilot kwa Azure
-- [X] Umeelewa Usanifu wa Programu
-- [X] Umechunguza muundo wa kiolezo cha AZD
-
-Hii inakupa hisia ya mali za _miundombinu kama msimbo_ kwa kiolezo hiki. Ifuatayo, tutaangalia faili ya usanidi ya AZD.
+Endelea kwa [Sanidi Kiolezo](4-Configure-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Onyo**:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya kutafsiri kwa AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au zisizo sahihi. Nyaraka ya asili katika lugha yake inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inashauriwa. Hatuwajibiki kwa kutoelewana au tafsiri mbaya zinazotokana na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,51 +1,51 @@
-# Poglavje 6: Načrtovanje pred uvajanjem in preverjanje
+# Poglavje 6: Načrtovanje in preverjanje pred uvajanjem
 
-**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 1 ura | **⭐ Kompleksnost**: Srednje zahtevno
+**📚 Tečaj**: [AZD Za začetnike](../../README.md) | **⏱️ Trajanje**: 2-4 ure branja; dodaten čas za prilagojene vaje | **⭐ Kompleksnost**: Srednja–Napredna
 
 ---
 
 ## Pregled
 
-To poglavje zajema bistvene korake načrtovanja in preverjanja pred uvajanjem vaše aplikacije. Naučite se izogniti dragim napakam z ustreznim načrtovanjem zmogljivosti, izbiro SKU-jev in predhodnimi preverjanji.
+To poglavje pokriva ključne korake načrtovanja in preverjanja pred uvajanjem vaše aplikacije. Naučite se, kako se izogniti dragim napakam s pravilnim načrtovanjem zmogljivosti, izbiro SKU-jev in preverjanjem pred izvajanjem.
 
-> Preverjeno z `azd 1.27.1` julija 2026.
+> Usmeritve za ukaze so preverjene glede na izdani referenčni `azd 1.37.2`. Uvajanja v oblaku niso bila izvedena. Daljše lekcije vsebujejo ilustrativne fragmente, ne popolnih projektov lokalnega uvajanja.
 
 ## Cilji učenja
 
-Z dokončanjem tega poglavja boste:
-- Izvedli predhodna preverjanja pred uvajanjem
-- Načrtovali zmogljivost in ocenili zahteve po virih
+Po zaključku tega poglavja boste:
+- Izvajali preverjanja pred uvajanjem
+- Načrtovali zmogljivost in ocenili potrebe po virih
 - Izbrali ustrezne SKU-je za optimizacijo stroškov
 - Konfigurirali Application Insights za nadzor
-- Razumeli vzorce usklajevanja ekipe
+- Razumeli vzorce koordinacije več agentov in njihove zahteve za uvajanje
 
 ---
 
 ## 📚 Lekcije
 
 | # | Lekcija | Opis | Čas |
-|---|--------|-------------|------|
-| 1 | [Predhodna preverjanja](preflight-checks.md) | Preverite konfiguracijo pred uvajanjem | 15 min |
-| 2 | [Načrtovanje zmogljivosti](capacity-planning.md) | Ocenite zahteve virov | 20 min |
+|---|--------|-------|-----|
+| 1 | [Preverjanja pred izvajanjem](preflight-checks.md) | Preverite konfiguracijo pred uvajanjem | 15 min |
+| 2 | [Načrtovanje zmogljivosti](capacity-planning.md) | Ocenite potrebe po virih | 20 min |
 | 3 | [Izbira SKU](sku-selection.md) | Izberite ustrezne cenovne razrede | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfiguracija nadzora | 20 min |
-| 5 | [Vzorce usklajevanja](coordination-patterns.md) | Delovni tokovi uvajanja ekipe | 15 min |
+| 5 | [Vzorce koordinacije](coordination-patterns.md) | Napredna zasnova orkestracije več agentov | 60-75 min |
 
 ---
 
 ## 🚀 Hiter začetek
 
 ```bash
-# Preveri kvote naročnine
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Predogled namestitve (ne ustvarja virov)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Preveri skladnost sintakse Bicep
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Preveri konfiguracijo okolja
+# Check environment configuration
 azd env get-values
 ```
 
@@ -55,45 +55,45 @@ azd env get-values
 
 ### Pred `azd provision`
 
-- [ ] Preverjena kvota za regijo
-- [ ] Ustrezno izbrani SKU-ji
+- [ ] Kvote preverjene za regijo
+- [ ] SKU-ji ustrezno izbrani
 - [ ] Pregledana ocena stroškov
-- [ ] Konsistentna konvencija poimenovanja
-- [ ] Konfigurirana varnost/RBAC
+- [ ] Dosledna poimenovalna konvencija
+- [ ] Varnost/RBAC konfiguriran
 
 ### Pred `azd deploy`
 
 - [ ] Nastavljene okoljske spremenljivke
-- [ ] Gesla v Key Vault
+- [ ] Skrivnosti v Key Vault
 - [ ] Preverjene povezovalne nizi
-- [ ] Konfigurirani zdravstveni pregledi
+- [ ] Konfigurirane zdravstvene preverjanja
 
 ---
 
-## 💰 Vodič za izbiro SKU
+## 💰 Vodnik za izbiro SKU
 
-| Delovno breme | Razvoj | Produkcija |
-|----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Delovna obremenitev | Razvoj | Produkcija |
+|--------------------|----------|-----------|
+| Container Apps | Poraba | Poraba ali namenski profil obremenitve, glede na izmerjeno obremenitev |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Azure OpenAI modeli | Podprt tip uvajanja "plačilo-po-porabi" | Plačilo-po-porabi ali zagotovljena prepustnost; odvisno od modela/regije |
+| AI Search | Brezplačno/osnovno v mejah | Osnovni ali standardni razred velikosti za indeks, kopije in obremenitev poizvedb |
 
 ---
 
 ## 🔗 Navigacija
 
-| Usmeritev | Poglavje |
-|-----------|---------|
-| **Prejšnje** | [Poglavje 5: Večagentno](../chapter-05-multi-agent/README.md) |
-| **Naslednje** | [Poglavje 7: Odpravljanje napak](../chapter-07-troubleshooting/README.md) |
+| Smer | Poglavje |
+|------|----------|
+| **Prejšnje** | [Poglavje 5: Več agentov](../chapter-05-multi-agent/README.md) |
+| **Naslednje** | [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 Sorodni viri
 
-- [Vodič za konfiguracijo](../chapter-03-configuration/configuration.md)
-- [Vodič za uvajanje](../chapter-04-infrastructure/deployment-guide.md)
+- [Vodnik za konfiguracijo](../chapter-03-configuration/configuration.md)
+- [Vodnik za uvajanje](../chapter-04-infrastructure/deployment-guide.md)
 - [Pogoste težave](../chapter-07-troubleshooting/common-issues.md)
 
 ---

@@ -1,26 +1,26 @@
-# TODO: El responsable de este repositorio aún no ha editado este archivo
-
-**PROPIETARIO DEL REPO**: ¿Desea soporte de Servicio al Cliente y Soporte (CSS) para este producto/proyecto?
-
-- **Sin soporte CSS:** Complete esta plantilla con información sobre cómo reportar problemas y obtener ayuda.
-- **Con soporte CSS:** Complete un formulario de ingreso en [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS trabajará con usted para determinar los próximos pasos.
-- **¿No está seguro?** Complete un formulario de ingreso como si la respuesta fuera "Sí". CSS le ayudará a decidir.
-
-*Luego elimine este primer encabezado de este archivo SUPPORT.MD antes de publicar su repositorio.*
-
 # Soporte
 
-## Cómo reportar problemas y obtener ayuda  
+## Problemas y preguntas del curso
 
-Este proyecto utiliza GitHub Issues para rastrear errores y solicitudes de características. Por favor, busque entre los problemas existentes antes de reportar nuevos problemas para evitar duplicados. Para nuevos problemas, reporte su error o solicitud de característica como un nuevo Issue.
+Busca en los [problemas del curso](https://github.com/microsoft/AZD-for-beginners/issues) antes de reportar un problema. Incluye la lección de inglés afectada, el comando que ejecutaste, tus versiones de AZD/extensiones y el mensaje de error. Elimina credenciales, tokens, detalles de suscripción y datos personales de los registros y capturas de pantalla.
 
-Para obtener ayuda y hacer preguntas sobre el uso de este proyecto, por favor **RESPONSABLE DEL REPO: INSERTE AQUÍ LAS INSTRUCCIONES SOBRE CÓMO CONTACTAR A LOS RESPONSABLES DEL REPO O A LA COMUNIDAD PARA OBTENER AYUDA. PODRÍA SER UNA ETIQUETA DE STACK OVERFLOW U OTRO CANAL. ¿DÓNDE AYUDARÁ A LAS PERSONAS?**.
+Para preguntas generales de aprendizaje, usa la [comunidad de desarrolladores de Azure](https://discord.gg/microsoft-azure). Las respuestas de la comunidad no son un servicio de soporte garantizado.
 
-## Política de soporte de Microsoft  
+## Problemas con herramientas y servicios
 
-El soporte para este **PROYECTO o PRODUCTO** se limita a los recursos mencionados anteriormente.
+Reporta errores reproducibles de AZD CLI en [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). Para incidentes del servicio Azure o asistencia específica de suscripción, usa las opciones de soporte disponibles en el [portal de Azure](https://portal.azure.com/).
+
+## Reportes de seguridad
+
+Sigue [SECURITY.md](SECURITY.md) para reportar vulnerabilidades de forma privada. No publiques secretos ni detalles de exploits en un problema público del curso.
+
+## Política de soporte de Microsoft
+
+El soporte para este proyecto educativo está limitado a los recursos listados arriba. Los ejemplos del curso no incluyen un compromiso de soporte en producción.
 
 ---
 
-**Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Descargo de responsabilidad**:
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional humana. No somos responsables de cualquier malentendido o interpretación errónea que surja del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

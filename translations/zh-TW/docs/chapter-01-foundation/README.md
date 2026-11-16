@@ -1,70 +1,72 @@
-# 第1章：基礎與快速入門
+# 第 1 章：基礎與快速入門
 
-**📚 課程**：[AZD 初學者指南](../../README.md) | **⏱️ 時長**：30-45分鐘 | **⭐ 複雜度**：初學者
+**📚 課程**: [AZD 入門](../../README.md) | **⏱️ 時長**: 75-120 分鐘含首次部署；額外練習時間更長 | **⭐ 難度**: 初學者
 
 ---
 
 ## 概覽
 
-本章介紹 Azure Developer CLI（azd）基礎知識。您將學習核心概念、安裝工具，並將您的第一個應用程式部署到 Azure。
+本章介紹 Azure Developer CLI (azd) 的基本概念。你將學習核心觀念、安裝工具，並部署第一個應用程式到 Azure。
 
-> 已於2026年7月使用 `azd 1.27.1` 驗證。
+> 指令和設定回顧目標: `azd 1.37.2` (2026 年 11 月)。回顧時未執行實際 Azure 佈建。
 
 ## 學習目標
 
-完成本章後，您將能：
-- 了解 Azure Developer CLI 是什麼及與 Azure CLI 的不同之處
-- 在您的平台上安裝及設定 AZD
-- 使用 `azd up` 將您的第一個應用程式部署到 Azure
+完成本章後，你將能：
+- 了解 Azure Developer CLI 是什麼，以及它與 Azure CLI 的差異
+- 在你的平台上安裝並設定 AZD
+- 使用 `azd up` 部署你的第一個 Azure 應用程式
 - 使用 `azd down` 清理資源
 
 ---
 
-## 📚 課程清單
+## 📚 課程內容
 
 | # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
 | 1 | [AZD 基礎](azd-basics.md) | 核心概念、術語及專案結構 | 15 分鐘 |
-| 2 | [安裝與設定](installation.md) | 平台特定的安裝指南 | 10 分鐘 |
-| 3 | [您的第一個專案](first-project.md) | 實作：部署網站應用到 Azure | 20 分鐘 |
-| 4 | [用您自己的應用程式](bring-your-own-app.md) | 將 azd 新增至您已有的專案 | 15 分鐘 |
-| 5 | [Dev Containers 與 Codespaces](dev-containers.md) | 使用 dev containers 創建可重現的 azd 環境 | 15 分鐘 |
+| 2 | [安裝與設定](installation.md) | 針對平台的安裝指引 | 10 分鐘 |
+| 3 | [你的第一個專案](first-project.md) | 實作：將 web 應用部署到 Azure | 20 分鐘 |
+| 4 | [導入現有應用](bring-your-own-app.md) | 將 azd 加入你已有的專案 | 15 分鐘 |
+| 5 | [開發容器與 Codespaces](dev-containers.md) | 使用開發容器建立可重現的 azd 環境 | 15 分鐘 |
 
 ---
 
-## ✅ 從這裡開始：驗證您的設定
+## ✅ 從這裡開始：驗證你的環境
 
-開始之前，請確認您的本地機器已準備好使用第1章範本：
+開始前，請確認你本機已準備好第 1 章的範本：
 
-**Windows：**
+**Windows:**
 ```powershell
 .\validate-setup.ps1
 ```
 
-**macOS / Linux：**
+**macOS / Linux:**
 ```bash
 bash ./validate-setup.sh
 ```
 
-如果腳本回報缺少工具，請先修復後再繼續本章內容。
+如果腳本顯示缺少工具，請先安裝缺少的工具，然後再繼續本章內容。
 
 ---
 
 ## 🚀 快速開始
 
 ```bash
-# 檢查安裝
+# Check installation
 azd version
 
-# 進行AZD認證
-# 選擇性：如果您計劃直接執行Azure CLI命令，請使用az login
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# 部署您的第一個應用程式
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# 完成後進行清理
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,24 +74,24 @@ azd down --force --purge
 
 ## ✅ 成功標準
 
-完成本章後，您應該能：
+完成本章後，你應該能夠：
 
 ```bash
-azd version              # 顯示已安裝版本
-azd init --template todo-nodejs-mongo  # 初始化專案
-azd up                   # 部署到 Azure
-azd show                 # 顯示運行中應用程式的 URL
-azd down --force --purge # 清理資源
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
 
-## 🔗 導航
+## 🔗 導覽
 
 | 方向 | 章節 |
 |-----------|---------|
-| <strong>下一章</strong> | [第2章：AI 優先開發](../chapter-02-ai-development/README.md) |
-| <strong>跳至</strong> | [第3章：設定](../chapter-03-configuration/README.md) |
+| <strong>下一步</strong> | [第 2 章：AI 為先的開發](../chapter-02-ai-development/README.md) |
+| <strong>跳至</strong> | [第 3 章：設定](../chapter-03-configuration/README.md) |
 
 ---
 
@@ -97,7 +99,7 @@ azd down --force --purge # 清理資源
 
 - [指令速查表](../../resources/cheat-sheet.md)
 - [常見問題](../../resources/faq.md)
-- [術語表](../../resources/glossary.md)
+- [詞彙表](../../resources/glossary.md)
 
 ---
 

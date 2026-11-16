@@ -6,7 +6,7 @@
 - **⬅️ Previous**: [Bring Your Own App](bring-your-own-app.md)
 - **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md)
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command and configuration review target: `azd 1.37.2` (November 2026). Container builds and Azure deployments were not executed as part of this review.
 
 ## Introduction
 
@@ -58,7 +58,7 @@ Create `.devcontainer/devcontainer.json` in the root of your project:
   "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {},
-    "ghcr.io/azure/azure-dev/azd:latest": {},
+    "ghcr.io/azure/azure-dev/azd:0": { "version": "1.37.2" },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/node:1": {}
   },
@@ -85,7 +85,7 @@ What each part does:
 | `forwardPorts` | Exposes your app's port to your browser |
 | `postCreateCommand` | Runs once after the container is built (here, a sanity check) |
 
-> The `ghcr.io/azure/azure-dev/azd:latest` feature is the official way to get azd in a container. Pin a specific version (for example `azd:1.27.1`) if you need reproducibility.
+> The feature version (`azd:0`) and the installed CLI version are different. Set the feature's `version` option to `"1.37.2"` to pin the CLI; do not use a CLI version as the feature tag.
 
 ---
 
@@ -107,7 +107,7 @@ Swap the `node` feature for whatever your app uses:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Keep `docker-in-docker` if your `host` is `containerapp`, `aks`, or anything that builds a container image—azd needs Docker to build and push images.
+Keep `docker-in-docker` when building images locally. A configured remote ACR build (`docker.remoteBuild: true`) is an alternative; the host type alone does not always require local Docker.
 
 ---
 
@@ -144,7 +144,7 @@ azd up
 |---------|-----|
 | `azd up` can't build an image | Add the `docker-in-docker` feature |
 | Browser login hangs in Codespaces | Use `azd auth login --use-device-code` |
-| Tools differ between teammates | Pin feature versions (e.g. `azd:1.27.1`) |
+| Tools differ between teammates | Pin the CLI through the azd feature's `version` option and pin language runtimes |
 | App not reachable in browser | Add the port to `forwardPorts` |
 
 ---

@@ -1,21 +1,21 @@
-# Kabanata 1: Pundasyon at Mabilis na Pagsisimula
+# Kabanata 1: Pundasyon at Mabilisang Simula
 
-**📚 Kurso**: [AZD Para sa mga Baguhan](../../README.md) | **⏱️ Tagal**: 30-45 minuto | **⭐ Antas ng Hirap**: Baguhan
+**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 75-120 minuto kasama ang unang deployment; mas matagal para sa karagdagang mga pagsasanay | **⭐ Antas ng Hirap**: Baguhan
 
 ---
 
 ## Pangkalahatang-ideya
 
-Ipinapakilala sa kabanatang ito ang mga pundasyon ng Azure Developer CLI (azd). Matututuhan mo ang mga pangunahing konsepto, paano i-install ang mga kasangkapan, at paano i-deploy ang iyong unang aplikasyon sa Azure.
+Ipinapakilala ng kabanatang ito ang mga pundasyon ng Azure Developer CLI (azd). Matututuhan mo ang mga pangunahing konsepto, paano mag-install ng mga kasangkapan, at paano mag-deploy ng iyong unang aplikasyon sa Azure.
 
-> Na-validate gamit ang `azd 1.27.1` noong Hulyo 2026.
+> Target sa pagsusuri ng utos at konfigurasyon: `azd 1.37.2` (Nobyembre 2026). Hindi isinagawa ang live na provisioning ng Azure sa panahon ng pagsusuri.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng kabanatang ito, magagawa mo:
-- Maunawaan kung ano ang Azure Developer CLI at kung paano ito naiiba sa Azure CLI
-- Mag-install at mag-configure ng AZD sa iyong plataporma
-- I-deploy ang iyong unang aplikasyon sa Azure gamit ang `azd up`
+Sa pagtatapos ng kabanatang ito, kaya mong:
+- Maunawaan kung ano ang Azure Developer CLI at kung paano ito naiiba mula sa Azure CLI
+- Mag-install at mag-configure ng AZD sa iyong platform
+- Mag-deploy ng iyong unang aplikasyon sa Azure gamit ang `azd up`
 - Linisin ang mga resources gamit ang `azd down`
 
 ---
@@ -24,17 +24,17 @@ Sa pagtatapos ng kabanatang ito, magagawa mo:
 
 | # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Mga Pangunahing Kaalaman sa AZD](azd-basics.md) | Pangunahing mga konsepto, terminolohiya, at istruktura ng proyekto | 15 min |
-| 2 | [Pag-install at Setup](installation.md) | Mga gabay sa pag-install para sa partikular na plataporma | 10 min |
-| 3 | [Ang Iyong Unang Proyekto](first-project.md) | Hands-on: I-deploy ang isang web app sa Azure | 20 min |
-| 4 | [Dalhin ang Sariling App](bring-your-own-app.md) | Idagdag ang azd sa umiiral mong proyekto | 15 min |
-| 5 | [Mga Dev Containers at Codespaces](dev-containers.md) | Maaaring ulit-uliting azd environment gamit ang dev containers | 15 min |
+| 1 | [Mga Pangunahing Kaalaman sa AZD](azd-basics.md) | Mga pangunahing konsepto, terminolohiya, at estruktura ng proyekto | 15 min |
+| 2 | [Pag-install at Setup](installation.md) | Mga gabay para sa pag-install sa partikular na platform | 10 min |
+| 3 | [Ang Iyong Unang Proyekto](first-project.md) | Praktikal: Mag-deploy ng web app sa Azure | 20 min |
+| 4 | [Dalhin Ang Sariling App](bring-your-own-app.md) | Idagdag ang azd sa isang umiiral nang proyekto na meron ka na | 15 min |
+| 5 | [Dev Containers at Codespaces](dev-containers.md) | Pabalik-balik na mga kapaligiran ng azd gamit ang dev containers | 15 min |
 
 ---
 
-## ✅ Magsimula Dito: I-validate ang Iyong Setup
+## ✅ Magsimula Dito: Patunayan ang Iyong Setup
 
-Bago ka magsimula, siguraduhing handa ang iyong lokal na makina para sa template ng Kabanata 1:
+Bago ka magsimula, kumpirmahin na handa ang iyong lokal na makina para sa template ng Kabanata 1:
 
 **Windows:**
 ```powershell
@@ -46,54 +46,56 @@ Bago ka magsimula, siguraduhing handa ang iyong lokal na makina para sa template
 bash ./validate-setup.sh
 ```
 
-Kung iniulat ng script na may mga kulang na kasangkapan, ayusin muna ang mga iyon bago magpatuloy sa kabanata.
+Kung iniulat ng script na may kulang na mga kasangkapan, ayusin muna ang mga iyon bago magpatuloy sa kabanata.
 
 ---
 
-## 🚀 Mabilis na Pagsisimula
+## 🚀 Mabilisang Simula
 
 ```bash
-# Suriin ang pag-install
+# Check installation
 azd version
 
-# Mag-authenticate para sa AZD
-# Opsyonal: az login kung plano mong magpatakbo ng mga Azure CLI na utos nang direktang
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# I-deploy ang iyong unang app
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Linisin kapag tapos na
+# Clean up when done
 azd down --force --purge
 ```
 
 ---
 
-## ✅ Mga Pamantayan sa Tagumpay
+## ✅ Mga Pamantayan ng Tagumpay
 
-Pagkatapos makumpleto ang kabanatang ito, dapat ay kaya mong:
+Pagkatapos makumpleto ang kabanatang ito, dapat mong magawa ang mga sumusunod:
 
 ```bash
-azd version              # Ipinapakita ang naka-install na bersyon
-azd init --template todo-nodejs-mongo  # Ini-inisyalis ang proyekto
-azd up                   # Naglalagay sa Azure
-azd show                 # Ipinapakita ang URL ng tumatakbong app
-azd down --force --purge # Nililinis ang mga resources
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
 
-## 🔗 Navigasyon
+## 🔗 Pag-navigate
 
 | Direksyon | Kabanata |
 |-----------|---------|
 | **Susunod** | [Kabanata 2: AI-First Development](../chapter-02-ai-development/README.md) |
-| **Laktawan sa** | [Kabanata 3: Configuration](../chapter-03-configuration/README.md) |
+| **Laktawan sa** | [Kabanata 3: Konfigurasyon](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Kaugnay na mga Mapagkukunan
+## 📖 Mga Kaugnay na Mapagkukunan
 
 - [Command Cheat Sheet](../../resources/cheat-sheet.md)
 - [FAQ](../../resources/faq.md)

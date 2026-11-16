@@ -1,77 +1,72 @@
 # Průvodce laděním pro nasazení AZD
 
-**Navigace kapitol:**  
-- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)  
-- **📖 Aktuální kapitola**: Kapitola 7 - Řešení problémů a ladění  
-- **⬅️ Předchozí**: [Běžné problémy](common-issues.md)  
-- **➡️ Další**: [Odstraňování problémů specifických pro AI](ai-troubleshooting.md)  
-- **🚀 Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../chapter-08-production/production-ai-practices.md)  
+**Navigace kapitolami:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 7 - Odstraňování problémů a ladění
+- **⬅️ Předchozí**: [Běžné problémy](common-issues.md)
+- **➡️ Další**: [Odstraňování specifických problémů AI](ai-troubleshooting.md)
+- **🚀 Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../chapter-08-production/production-ai-practices.md)
 
 ## Úvod
 
-Tento komplexní průvodce poskytuje pokročilé strategie ladění, nástroje a techniky pro diagnostiku a řešení složitých problémů s nasazeními pomocí Azure Developer CLI. Naučte se systematické metodiky odstraňování problémů, techniky analýzy logů, profilování výkonu a pokročilé diagnostické nástroje pro efektivní řešení problémů při nasazení a za běhu.
+Tento rozsáhlý průvodce poskytuje pokročilé strategie ladění, nástroje a techniky pro diagnostiku a řešení složitých problémů s nasazením pomocí Azure Developer CLI. Naučíte se systematické metodiky odstraňování problémů, techniky analýzy logů, profilování výkonu a pokročilé diagnostické nástroje pro efektivní řešení problémů při nasazení a běhu aplikací.
 
-## Výukové cíle
+## Cíle učení
 
 Po dokončení tohoto průvodce budete:
-- Ovládnete systematické metodiky ladění problémů s Azure Developer CLI
-- Pochopíte pokročilou konfiguraci protokolování a techniky analýzy logů
-- Zavedete strategie profilování výkonu a monitorování
-- Použijete diagnostické nástroje a služby Azure pro řešení složitých problémů
-- Aplikujete techniky ladění sítě a řešení bezpečnostních problémů
-- Konfigurujete komplexní monitorování a upozorňování pro proaktivní detekci problémů
+- Ovládat systematické metodiky ladění problémů s Azure Developer CLI
+- Rozumět pokročilému nastavení logování a technikám analýzy logů
+- Implementovat profilování výkonu a monitorovací strategie
+- Používat diagnostické nástroje a služby Azure pro řešení složitých problémů
+- Aplikovat techniky ladění sítí a zabezpečení
+- Konfigurovat komplexní monitorování a upozorňování pro proaktivní detekci problémů
 
-## Výsledky učení
+## Výstupy učení
 
 Po dokončení budete schopni:
-- Použít metodiku TRIAGE pro systematické ladění složitých problémů nasazení
-- Konfigurovat a analyzovat komplexní informace o protokolování a trasování
+- Použít metodiku TRIAGE pro systematické ladění složitých nasazovacích problémů
+- Konfigurovat a analyzovat komplexní informace o logování a trasování
 - Efektivně používat Azure Monitor, Application Insights a diagnostické nástroje
-- Samostatně řešit problémy s připojením sítě, autentizací a oprávněními
-- Implementovat strategie monitorování výkonu a optimalizace
+- Samostatně ladit problémy s připojením k síti, autentizací a oprávněními
+- Implementovat strategie monitorování a optimalizace výkonu
 - Vytvářet vlastní skripty pro ladění a automatizaci opakujících se problémů
 
 ## Metodika ladění
 
 ### Přístup TRIAGE
-- **T**ime: Kdy se problém objevil?
-- **R**eproduce: Lze problém konzistentně reprodukovat?
-- **I**solate: Která komponenta selhává?
-- **A**nalyze: Co nám říkají logy?
-- **G**ather: Shromážděte všechny relevantní informace
-- **E**scalate: Kdy vyhledat další pomoc
+- **T**ime (čas): Kdy problém začal?
+- **R**eproduce (reprodukce): Dokážete problém konzistentně zopakovat?
+- **I**solate (izolace): Která komponenta selhává?
+- **A**nalyze (analýza): Co nám logy říkají?
+- **G**ather (shromáždění): Shromáždění všech relevantních informací
+- **E**scalate (eskalace): Kdy vyhledat další pomoc
 
 ## Povolení režimu ladění
 
+> **Rozsah:** Toto jsou diagnostické příklady pro úpravu, nikoli dodaná sada skriptů. Nahraďte názvy/ID zdrojů; pro shell bloky používejte Bash. Výstupy `--debug` a hodnoty prostředí mohou obsahovat citlivé informace – před sdílením je zkontrolujte/odstraňte. Příklady, které nasazují, vrací zpět nebo mění konfiguraci, vyžadují výslovný souhlas operátora.
+
 ### Proměnné prostředí
 ```bash
-# Povolit komplexní ladění
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Ladění Azure CLI
-export AZURE_CLI_DIAGNOSTICS=true
-
-# Zakázat telemetrii pro čistší výstup
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Konfigurace ladění
 ```bash
-# Nastavit ladicí konfiguraci globálně
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# Povolit trasování
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
+
+`azd config set` může uložit libovolné klíče; to však neznamená, že jsou `debug.enabled`, `debug.logLevel`, nebo `trace.outputPath` podporovaná nastavení. Použijte příznak `--debug` u vydaného příkazu.
 
 ## 📊 Techniky analýzy logů
 
-### Porozumění úrovním logů
+### Pochopení úrovní logů
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Strukturovaná analýza logů
+### Analýza strukturovaných logů
 ```bash
-# Zobrazit protokoly pomocí Azure Monitor (přes azd monitor)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# Zobrazit protokoly aplikace v reálném čase
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# Pro podrobnou analýzu protokolů použijte Azure CLI s vaším App Service nebo Container App:
-# Protokoly App Service
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Protokoly Container App
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# Exportovat protokoly Application Insights pro analýzu
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
 ### Korelace logů
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Korelace záznamů napříč službami pomocí Azure Monitoru
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Vyhledat v Application Insights korelované záznamy
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Vyhledat protokoly aktivit Azure
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
 ## 🛠️ Pokročilé nástroje pro ladění
 
 ### Dotazy Azure Resource Graph
 ```bash
-# Dotazovat prostředky podle tagů
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Najít selhaná nasazení
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Zkontrolovat stav prostředku
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Ladění sítě
+### Ladění sítí
 ```bash
-# Ověření konektivity mezi službami
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# Použití
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Ladění kontejnerů
 ```bash
-# Ladit problémy kontejnerové aplikace
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -183,10 +180,10 @@ debug_container() {
 
 ### Ladění připojení k databázi
 ```bash
-# Ladit připojení k databázi
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -204,22 +201,11 @@ debug_database() {
 
 ### Monitorování výkonu aplikace
 ```bash
-# Povolit ladění Application Insights
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# Vlastní monitorování výkonu
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -238,23 +226,21 @@ monitor_performance() {
 
 ### Analýza využití zdrojů
 ```bash
-# Monitorovat využití prostředků
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Nastavit ladicí prostředí
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# Získat koncové body služby
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Otestovat kontrolní koncové body
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# Spustit testy
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Spustit vlastní integrační testy
+# Run custom integration tests
 npm run test:integration
 ```
 
 ### Zátěžové testování pro ladění
 ```bash
-# Jednoduchý zátěžový test k identifikaci výkonnostních úzkých míst
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Používá Apache Bench (instalace: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extrahovat klíčové metriky
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Zkontrolovat selhání
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
 ## 🔧 Ladění infrastruktury
 
-### Ladění Bicep šablon
+### Ladění šablon Bicep
 ```bash
-# Ověření Bicep šablon s podrobným výstupem
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Ověření syntaxe
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Ověření lintu
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # Simulace nasazení
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# Ladění nasazení šablony
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,52 +361,44 @@ debug_deployment() {
 
 ### Analýza stavu zdrojů
 ```bash
-# Analyzovat stavy zdrojů kvůli nesrovnalostem
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # Vypsat všechny zdroje s jejich stavy
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Zkontrolovat selhané zdroje
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
-## 🔒 Bezpečnostní ladění
+## 🔒 Ladění zabezpečení
 
 ### Ladění autentizačního toku
 ```bash
-# Ladění ověřování Azure
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # Dekódování JWT tokenu (vyžaduje jq a base64)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Ladění přístupu ke Key Vaultu
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,14 +416,14 @@ debug_keyvault() {
 
 ### Ladění síťové bezpečnosti
 ```bash
-# Ladit síťové bezpečnostní skupiny
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Zkontrolovat bezpečnostní pravidla
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -460,26 +436,23 @@ debug_network_security() {
 
 ### Ladění aplikací Node.js
 ```javascript
-// debug-middleware.js - Ladicí middleware pro Express
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Zaznamenat podrobnosti požadavku
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // Přepsat res.json, aby zaznamenával odpovědi
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Ladění databázových dotazů
+### Ladění dotazů do databáze
 ```javascript
-// database-debug.js - Nástroje pro ladění databáze
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Postupy nouzového ladění
+## 🚨 Nouzové postupy ladění
 
-### Reakce na incident v produkci
+### Reakce na problémy v produkci
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Nouzové ladění v produkci
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Přepnout do správného prostředí
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# Shromáždit kritické informace
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# Použít Azure Monitor pro protokoly chyb
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,58 +551,59 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Postupy pro obnovení (rollback)
+### Postupy vrácení změn
 ```bash
-# Rychlý skript pro rollback
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # Přepnout prostředí
+    # Switch environment
     azd env select "$environment"
     
-    # Rollback pomocí Gitu (AZD nemá vestavěný rollback)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # Ověřit rollback
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # Otestovat kritické koncové body
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 Řídicí panely pro ladění
+Tento rollback pouze kódu nevrací infrastrukturu, databázové migrace ani tajné údaje. Použijte čistý pracovní strom, zaznamenejte počáteční commit a poté jej obnovte; příkaz přepne na vybraný commit v aktuálním repozitáři.
 
-### Vlastní monitorovací panel
+## 📊 Dashboardy pro ladění
+
+### Vlastní monitorovací dashboard
 ```bash
-# Vytvořit dotazy Application Insights pro ladění
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # Dotaz na chyby
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Dotaz na problémy s výkonem
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Dotaz na selhání závislostí
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,15 +612,15 @@ create_debug_queries() {
 
 ### Agregace logů
 ```bash
-# Shromažďovat protokoly z více zdrojů v Azure
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,6 +630,7 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
@@ -664,9 +641,9 @@ aggregate_logs() {
 
 ### Vlastní skripty pro ladění
 Vytvořte adresář `scripts/debug/` s:
-- `health-check.sh` - Komplexní kontrola stavu
+- `health-check.sh` - Komplexní kontroly stavu zdraví
 - `performance-test.sh` - Automatizované testování výkonu
-- `log-analyzer.py` - Pokročalý parsing a analýza logů
+- `log-analyzer.py` - Pokročilá analýza a parsování logů
 - `resource-validator.sh` - Validace infrastruktury
 
 ### Integrace monitorování
@@ -676,6 +653,7 @@ hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -688,23 +666,23 @@ hooks:
 
 ## Nejlepší postupy
 
-1. **Vždy povolte ladicí logování** v neprodukčních prostředích
-2. **Vytvořte reprodukovatelné testovací případy** pro problémy
+1. **Vždy povolte ladící logování** v neprodukčních prostředích
+2. **Vytvářejte reprodukovatelné testovací případy** pro problémy
 3. **Dokumentujte postupy ladění** pro váš tým
-4. **Automatizujte kontroly stavu** a monitorování
-5. **Udržujte nástroje pro ladění aktualizované** s změnami vaší aplikace
-6. **Procvičujte postupy ladění** mimo časy incidentů
+4. **Automatizujte kontroly stavu a monitorování**
+5. **Udržujte ladící nástroje aktualizované** s vašimi změnami aplikací
+6. **Procvičujte ladící postupy** v době mimo incidenty
 
 ## Další kroky
 
-- [Plánování kapacity](../chapter-06-pre-deployment/capacity-planning.md) - Naplánujte požadavky na zdroje
-- [Výběr SKU](../chapter-06-pre-deployment/sku-selection.md) - Vyberte vhodné úrovně služeb
+- [Plánování kapacity](../chapter-06-pre-deployment/capacity-planning.md) - Plánování požadavků na zdroje
+- [Výběr SKU](../chapter-06-pre-deployment/sku-selection.md) - Volba vhodných úrovní služeb
 - [Předběžné kontroly](../chapter-06-pre-deployment/preflight-checks.md) - Validace před nasazením
-- [Krátký přehled](../../resources/cheat-sheet.md) - Rychlý přehled příkazů
+- [Rychlý přehled](../../resources/cheat-sheet.md) - Rychlý přehled příkazů
 
 ---
 
-**Pamatujte**: Dobré ladění je o systematičnosti, důkladnosti a trpělivosti. Tyto nástroje a techniky vám pomohou diagnostikovat problémy rychleji a efektivněji.
+**Pamatujte**: Dobré ladění znamená být systematický, důkladný a trpělivý. Tyto nástroje a techniky vám pomohou diagnostikovat problémy rychleji a efektivněji.
 
 ---
 
@@ -716,6 +694,6 @@ hooks:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Prohlášení o vyloučení odpovědnosti:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro kritické informace se doporučuje využít profesionální lidský překlad. Nejsme odpovědní za žádná nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

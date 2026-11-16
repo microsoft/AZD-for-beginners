@@ -1,6 +1,6 @@
 # Chapter 2: AI-First Development
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-2 hours | **⭐ Complexity**: Intermediate
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 4-5 hours including the workshop | **⭐ Complexity**: Intermediate
 
 ---
 
@@ -8,7 +8,7 @@
 
 This chapter focuses on deploying AI-powered applications using Azure Developer CLI and Microsoft Foundry services. From simple AI chat apps to intelligent agents with tools.
 
-> **Validation note (2026-07-13):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.27.1` and the current preview AI agent extension release `azure.ai.agents` `1.0.0-beta.5`. If you are on an older AZD build, update first and then continue with the exercises.
+> **Release review (2026-11-04):** AI CLI guidance was checked against published `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, and `azure.ai.evaluations` `1.0.0-beta.2` documentation/source. Use `azd >= 1.37.0` for the combined workflow. Evaluations now use the separate `azd ai eval` namespace; see [release changes and migration guidance](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). This is not a live deployment validation.
 
 ## Learning Objectives
 
@@ -27,23 +27,25 @@ By completing this chapter, you will:
 | 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Connect AZD with Foundry services | 30 min |
 | 2 | [AI Agents Guide](agents.md) | Deploy intelligent agents with tools | 45 min |
 | 3 | [AI Model Deployment](ai-model-deployment.md) | Deploy and configure AI models | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Make your AI solution AZD-ready | 60 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Explore a template and plan your conversion | 2-3 hours |
 
 ---
 
 ## 🚀 Quick Start
 
+Choose one option in a new empty directory. The trailing `.` initializes the current directory; otherwise AZD can create a subdirectory without changing your shell's working directory.
+
 ```bash
 # Option 1: RAG Chat Application
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 azd up
 
 # Option 2: AI Agents
-azd init --template get-started-with-ai-agents
+azd init --template get-started-with-ai-agents .
 azd up
 
 # Option 3: Quick Chat App
-azd init --template openai-chat-app-quickstart
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
@@ -60,6 +62,8 @@ azd up
 ---
 
 ## 💰 Cost Awareness
+
+These are illustrative ranges, not quotes or caps; model traffic, Search/compute SKUs, region, and optional features can exceed them. Review your chosen sample's current pricing guidance before provisioning.
 
 | Environment | Estimated Monthly Cost |
 |-------------|----------------------|
