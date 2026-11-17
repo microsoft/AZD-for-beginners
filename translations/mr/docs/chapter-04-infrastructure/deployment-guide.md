@@ -1,135 +1,140 @@
-# तैनाती मार्गदर्शक - AZD तैनातींमध्ये प्रावीणता मिळवा
+# वितरण मार्गदर्शक - AZD वितरणांवर प्रभुत्व प्राप्त करणे
 
 **अध्याय नेव्हिगेशन:**
-- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
-- **📖 चालू अध्याय**: अध्याय 4 - इन्फ्रास्ट्रक्चर as कोड & तैनात करणे
+- **📚 कोर्स मुख्यपृष्ठ**: [AZD नवशिक्यांसाठी](../../README.md)
+- **📖 सध्याचा अध्याय**: अध्याय 4 - इन्फ्रास्ट्रक्चर एज कोड & वितरण
 - **⬅️ मागील अध्याय**: [अध्याय 3: कॉन्फिगरेशन](../chapter-03-configuration/configuration.md)
-- **➡️ पुढे**: [संसाधनांचे प्राविजनिंग](provisioning.md)
-- **🧩 या अध्यायात देखील**: [तुमचा स्वतःचा टेम्प्लेट तयार करणे](custom-templates.md)
-- **🚀 पुढील अध्याय**: [अध्याय 5: मल्टी-एजंट AI सोल्यूशन्स](../../examples/retail-scenario.md)
+- **➡️ पुढील**: [संसाधने पुरवठा करणे](provisioning.md)
+- **🧩 या अध्यायामध्येही**: [आपले स्वतःचे टेम्पलेट तयार करणे](custom-templates.md)
+- **🚀 पुढील अध्याय**: [अध्याय 5: बहु-एजंट AI सोल्युशन्स](../../examples/retail-scenario.md)
 
 ## परिचय
 
-हा संपूर्ण मार्गदर्शक Azure Developer CLI वापरून अनुप्रयोग तैनात करण्याबाबत तुम्हाला जे काही ज्ञान आवश्यक आहे ते सर्व काही कव्हर करतो, मूलभूत एकाच कमांडच्या तैनातींपासून ते कस्टम हुक्स, अनेक पर्यावरणे आणि CI/CD एकत्रीकरण सह प्रगत उत्पादन परिस्थितीपर्यंत. व्यावहारिक उदाहरणे आणि सर्वोत्तम पद्धतींसह संपूर्ण तैनाती जीवनचक्रात प्रावीणता मिळवा.
+> `azd 1.37.2` शी पुनरावलोकन केले (नोव्हेंबर २०२६). आदेश Bash वापरतात; JSON उदाहरणांसाठी `jq` आवश्यक आहे. स्पष्टपणे प्रारंभ केलेल्या todo व्यायामाविषयी वगळता, प्रगत उदाहरणे **इंटीग्रेशन तुकडे** आहेत: स्वतःचा स्रोत, इन्फ्रास्ट्रक्चर, चाचण्या आणि स्क्रिप्ट प्रदान करा. या पुनरावलोकनात कोणतीही Azure वितरणे केली जाणार नाहीत.
+
+हा सर्वसमावेशक मार्गदर्शक Azure Developer CLI वापरून अनुप्रयोग वितरित करण्याबाबत तुम्हाला सर्व काही शिकवतो, सोप्या एक-कमांड वितरणांपासून ते सानुकूल होक्स, बहु-परिसर आणि CI/CD एकात्मिकरणासह प्रगत उत्पादन परिस्थितींपर्यंत. व्यावहारिक उदाहरणे आणि सर्वोत्तम पद्धतींसह पूर्ण वितरण जीवनचक्रात पारंगत व्हा.
 
 ## शिकण्याचे उद्दिष्टे
 
-हा मार्गदर्शक पूर्ण केल्यावर, तुम्ही:
-- Azure Developer CLI मधील सर्व तैनात कमांड्स आणि वर्कफ्लोजमध्ये प्रावीणता मिळवाल
-- प्राविजनिंग पासून मॉनिटरिंग पर्यंत संपूर्ण तैनाती जीवनचक्र समजून घ्याल
-- तैनातीपूर्व आणि तैनाती नंतर स्वयंचलितता करण्यासाठी कस्टम तैनात हुक्स लागू कराल
-- पर्यावरण-विशिष्ट पॅरामिटर्ससह अनेक पर्यावरणे कॉन्फिगर कराल
-- ब्लू-ग्रीन आणि कॅनरी तैनातीसह प्रगत तैनाती धोरणे सेट कराल
-- azd तैनातींना CI/CD पाइपलाइन्स आणि DevOps वर्कफ्लोजमध्ये समाकलित कराल
+या मार्गदर्शक पूर्ण करून, तुम्ही:
+- सर्व Azure Developer CLI वितरण आदेश आणि कार्यप्रवाहे पारंगत व्हाल
+- पुरवठ्यापासून निरीक्षणापर्यंतचे पूर्ण वितरण जीवनचक्र समजाल
+- पूर्व आणि पश्चात वितरण स्वयंचलनासाठी सानुकूल वितरण होक्स लागू कराल
+- प्रत्येक पर्यावरणासाठी विशिष्ट पॅरामीटर्ससह बहु-परिसर संरचित कराल
+- निळा-हिरवा (blue-green) आणि केनरी वितरण यांसह प्रगत वितरण धोरणे सेट कराल
+- azd वितरणांना CI/CD पाइपलाइन्स आणि DevOps कार्यप्रवाहांशी एकत्र कराल
 
-## शिकण्याचे निकाल
+## शिकण्याची परिणामकारकता
 
-पूर्ण केल्यावर, तुम्ही सक्षम असाल:
-- सर्व azd तैनात वर्कफ्लोज स्वतंत्रपणे चालवणे आणि समस्यांचे निवारण करणे
-- हुक्सचा वापर करून कस्टम तैनात स्वयंचलितता डिझाइन आणि अंमलात आणणे
-- योग्य सुरक्षा आणि मॉनिटरिंगसह उत्पादन-सज्ज तैनाती कॉन्फिगर करणे
-- गुंतागुंतीच्या मल्टी-पर्यावरण तैनाती परिस्थितीचे व्यवस्थापन करणे
-- तैनाती कार्यक्षमता ऑप्टिमायझ करा आणि रोलबॅक धोरणे राबवा
-- azd तैनातींचे एंटरप्राइझ DevOps पद्धतींमध्ये समाकलन करणे
+पूर्ण झाल्यानंतर, तुम्ही खालील गोष्टी करू शकाल:
+- स्वतंत्रपणे सर्व azd तैनात करण्याच्या कार्यप्रवाहांवर अमल करणे आणि समस्या निवारण करणे
+- हुक्स वापरून सानुकूल तैनात स्वयंचलन डिझाइन आणि अमल करणे
+- योग्य सुरक्षा आणि देखरेखीसह उत्पादन-तयार तैनाती कॉन्फिगर करणे
+- क्लिष्ट मल्टी-पर्यावरण तैनाती परिस्थिती व्यवस्थापित करणे
+- तैनाती कामगिरी सुधारित करणे आणि रोलबॅक धोरणे अमलात आणणे
+- एंटरप्राइझ डेव्हऑप्स पद्धतींमध्ये azd तैनाती समाकलित करणे
 
-## तैनाती आढावा
+## तैनाती अवलोकन
 
-Azure Developer CLI कडे अनेक तैनात कमांड्स आहेत:
-- `azd up` - संपूर्ण वर्कफ्लो (प्राविजन + तैनात करणे)
-- `azd provision` - Azure संसाधने तयार/अपडेट करणे फक्त
-- `azd deploy` - अनुप्रयोग कोड फक्त तैनात करणे
-- `azd package` - अनुप्रयोग बांधणी आणि पॅकेजिंग
+Azure Developer CLI काही तैनात आदेश प्रदान करते:
+- `azd up` - संपूर्ण कार्यप्रवाह (प्राव्हिजन + तैनात)
+- `azd provision` - फक्त Azure संसाधने तयार/अपडेट करा
+- `azd deploy` - फक्त अनुप्रयोग कोड तैनात करा
+- `azd package` - अनुप्रयोग तयार करा आणि पॅकेज करा
 
-## मूलभूत तैनाती वर्कफ्लोज
+## मूलभूत तैनात कार्यप्रवाह
 
-### संपूर्ण तैनात (azd up)
-नव्या प्रोजेक्टसाठी सर्वात सामान्य वर्कफ्लो:
+### पूर्ण तैनाती (azd up)
+नवीन प्रकल्पांसाठी सर्वात सामान्य कार्यप्रवाह:
 ```bash
-# सर्व काही नवीनून तैनात करा
+# Deploy everything from scratch
 azd up
 
-# विशिष्ट पर्यावरणासह तैनात करा
+# Deploy with specific environment
 azd up --environment production
 
-# सानुकूल पॅरामीटर्ससह तैनात करा
-azd up --parameter location=westus2 --parameter sku=P1v2
+# Configure a location for the selected environment before first provisioning
+azd env set AZURE_LOCATION westus2
+# SKU changes must be wired into your template's parameter file/Bicep.
+azd up
 ```
 
-### फक्त इन्फ्रास्ट्रक्चर तैनात करणे
-जेव्हा तुम्हाला केवळ Azure संसाधने अपडेट करायची असतील तेव्हा:
+### फक्त इन्फ्रास्ट्रक्चर तैनाती
+जेव्हा तुम्हाला फक्त Azure संसाधने अपडेट करायची असतात:
 ```bash
-# पायाभूत सुविधा प्रदान करा/अद्ययावत करा
+# Provision/update infrastructure
 azd provision
 
-# बदलांची पूर्वदृश्य पाहण्यासाठी ड्राय-रनसह पुरवठा करा
+# Provision with dry-run to preview changes
 azd provision --preview
 
-# विशिष्ट सेवा पुरवठा करा
-azd provision --service database
+# Provisioning applies infrastructure, not an azure.yaml service selection.
+# In a configured layered project, use: azd provision <layer-name>
 ```
 
-### फक्त कोड तैनात करणे
-त्वरित अनुप्रयोग अपडेटसाठी:
+### फक्त कोड तैनाती
+जलद अनुप्रयोग अपडेटसाठी:
 ```bash
-# सर्व सेवा तैनात करा
+# Deploy all services
 azd deploy
 
-# अपेक्षित आउटपुट:
-# सेवा तैनात करत आहे (azd deploy)
-# - वेब: तैनात करत आहे... पूर्ण झाले
-# - एपीआय: तैनात करत आहे... पूर्ण झाले
-# यशस्वी: तुमचे तैनाती २ मिनिटे १५ सेकंदात पूर्ण झाली
+# Expected output:
+# Deploying services (azd deploy)
+# - web: Deploying... Done
+# - api: Deploying... Done
+# SUCCESS: Your deployment completed in 2 minutes 15 seconds
 
-# विशिष्ट सेवा तैनात करा
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# सानुकूल बिल्ड आर्ग्युमेंटसह तैनात करा
-azd deploy --service api --build-arg NODE_ENV=production
+# Docker build arguments belong in azure.yaml: services.api.docker.buildArgs
+# They are not an azd deploy --build-arg flag.
 
-# तैनातीची पडताळणी करा
+# Verify deployment
 azd show --output json | jq '.services'
 ```
 
-### ✅ तैनाती पडताळणी
+### ✅ तैनातीची पडताळणी
 
-कोणत्याही तैनाती नंतर, यशस्वीपणा तपासा:
+कोणतीही तैनाती केल्यानंतर, यशस्वी असल्याचे प्रमाणित करा:
 
 ```bash
-# सर्व सेवा चालू आहेत का तपासा
+# Inspect configured service targets and ingress URLs (not a health check)
 azd show
 
-# हेल्थ एंडपॉइंट्सची चाचणी करा
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Test health endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
-curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
-curl -f "$API_URL/health" || echo "❌ API health check failed"
+curl -f "$WEB_URL" || { echo "❌ Web request failed"; exit 1; }
+# For the todo-nodejs-mongo template, /lists exists; /health does not.
+curl -f "$API_URL/lists" || { echo "❌ API request failed"; exit 1; }
 
-# त्रुटींसाठी निरीक्षण करा (डिफॉल्टने ब्राउझरमध्ये उघडते)
+# Monitor for errors (opens in browser by default)
 azd monitor --logs
 ```
 
-**यशाची निकषे:**
-- ✅ सर्व सेवा "रनिंग" स्थितीत आहेत
-- ✅ हेल्थ एंडपॉइंट्स HTTP 200 परत करतात
-- ✅ मागील ५ मिनिटांत कोणतेही त्रुटी लॉग नाहीत
+**यशाच्या निकषा:**
+- ✅ `azd show` अपेक्षित सेवा लक्ष्य/URL सोडवते
+- ✅ वास्तविक अनुप्रयोग राऊट्सकडे विनंत्या अपेक्षित स्थिती आणि बॉडी परत करतात
+- ✅ मागील 5 मिनिटांत कोणतेही त्रुटी लॉग नाहीत
 - ✅ अनुप्रयोग चाचणी विनंत्यांना प्रतिसाद देतो
 
 ## 🏗️ तैनात प्रक्रियेचे आकलन
 
-### हुक्समध्ये नवीन आहात? इथे सुरू करा
+### हुक्समध्ये नवीन आहात? येथे सुरुवात करा
 
-**हुक** म्हणजे azd हे तैनाती प्रक्रियेतील विशिष्ट टप्प्यावर स्वयंचलित चालवलेले एक कमांड आहे—प्राविजनिंगपूर्वी किंवा नंतर, आणि कोड तैनात करण्यापूर्वी किंवा नंतर. ते तुम्हाला तैनातीभोवती नेहमी असलेल्या लहान कामांमध्ये स्वयंचलितता आणण्यास मदत करतात: डेटाबेसमध्ये बियाणे पेरणे, माइग्रेशन्स चालवणे, ऍसेट्स बांधणे, किंवा लाईव्ह अनुप्रयोगाचे स्मोक-चाचणी करणे.
+**हुक** हा एक कमांड आहे जो azd स्वयंचलितपणे तैनाती प्रक्रियेच्या विशिष्ट वेळी चालवतो—प्राविजनिंगपूर्वी किंवा नंतर, आणि तुमचा कोड तैनात करण्यापूर्वी किंवा नंतर. ते तैनातीच्या भोवती नेहमी असलेल्या लहान कामे स्वयंचलित करण्याची परवानगी देतात: डेटाबेसची सुरुवात करणे, मायग्रेशन्स चालवणे, संसाधने तयार करणे, किंवा लाईव्ह अ‍ॅपची स्मोक-चाचणी करणे.
 
 | हुक | चालतो… | सामान्य वापर |
 |------|-------|------------|
-| `preprovision` | संसाधने तयार होण्याच्या आधी | पूर्वतयारीची पडताळणी, रजिस्ट्रीमध्ये लॉगिन |
-| `postprovision` | संसाधने अस्तित्वात झाल्यानंतर | संसाधने कॉन्फिगर करणे, डेटाबेस सेट करणे |
-| `predeploy` | कोड तैनात करण्यापूर्वी | फ्रंट-end ऍसेट बांधणे, युनिट टेस्ट चालवणे |
-| `postdeploy` | कोड लाइव्ह झाल्यानंतर | DB माइग्रेशन्स चालवणे, एंडपॉईंटची स्मोक-चाचणी |
+| `preprovision` | संसाधने तयार होण्यापूर्वी | अटी पडताळा, रजिस्ट्रीमध्ये लॉगिन करा |
+| `postprovision` | संसाधने अस्तित्वात आली की | संसाधने संरचीत करा, डेटाबेस सेटअप करा |
+| `predeploy` | कोड तैनात होण्यापूर्वी | फ्रंट-एंड संसाधने तयार करा, युनिट चाचण्या चालवा |
+| `postdeploy` | कोड लाईव्ह झाल्यानंतर | डेटाबेस मायग्रेशन्स चालवा, एंडपॉइंटची स्मोक-चाचणी करा |
 
-हुक्स तुमच्या `azure.yaml` मध्ये राहतात. हे सगळ्यात लहान उदाहरण आहे—जो फक्त तैनाती नंतर एक संदेश प्रिंट करतो:
+हुक्स तुमच्या `azure.yaml` मध्ये राहतात. येथे एक छोटा शक्यतोउदाहरण आहे—ते फक्त तैनाती नंतर संदेश छापते:
 
 ```yaml
 # azure.yaml
@@ -139,15 +144,15 @@ hooks:
     run: echo "Deployment finished! 🎉"
 ```
 
-बस इतकंच—पुढच्या वेळी `azd up` चालवल्यानंतर तो संदेश आपोआप प्रिंट होतो. तुम्ही फक्त हुक देखील स्वतंत्रपणे चालवू शकता, पूर्ण तैनात न करता, ज्यामुळे चाचणी करणे सोपे होते:
+एवढेच—पुढील वेळी तुम्ही `azd up` चालविल्यावर, संदेश आपोआपच छापेल. तुम्ही पूर्ण तैनाती न करता एकहूनठेक हुक देखील चालवू शकता, जे चाचणीसाठी छान आहे:
 
 ```bash
 azd hooks run postdeploy
 ```
 
-खालील टप्पे खऱ्या जगातील हुक्स दाखवतात (माइग्रेशन्स, चाचण्या, पडताळणी) प्रत्येक टप्प्यासाठी.
+खालील टप्प्यांमध्ये वास्तविक जगातील हुक्स (मायग्रेशन्स, चाचण्या, वॅलिडेशन) दाखवले आहेत प्रत्येक टप्प्यासाठी.
 
-### टप्पा 1: प्री-प्राविजन हुक्स
+### टप्पा 1: प्री-प्रोव्हिजन हुक्स
 ```yaml
 # azure.yaml
 hooks:
@@ -161,13 +166,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### टप्पा 2: इन्फ्रास्ट्रक्चर प्राविजनिंग
-- इन्फ्रास्ट्रक्चर टेम्प्लेट्स वाचतो (Bicep/Terraform)
+### टप्पा 2: पायाभूत सुविधा प्रोव्हिजनिंग
+- पायाभूत सुविधा टेम्पलेट वाचतो (Bicep/Terraform)
 - Azure संसाधने तयार किंवा अपडेट करतो
 - नेटवर्किंग आणि सुरक्षा कॉन्फिगर करतो
 - मॉनिटरिंग आणि लॉगिंग सेट करतो
 
-### टप्पा 3: पोस्ट-प्राविजन हुक्स
+### टप्पा 3: पोस्ट-प्रोव्हिजन हुक्स
 ```yaml
 hooks:
   postprovision:
@@ -180,10 +185,10 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### टप्पा 4: अनुप्रयोग पॅकेजिंग
-- अनुप्रयोग कोड बांधतो
-- तैनात करण्यासाठी आर्टिफॅक्ट्स तयार करतो
-- लक्ष्य प्लॅटफॉर्मसाठी पॅकेज करतो (कंटेनर, ZIP फाईल्स इ.)
+### टप्पा 4: अ‍ॅप्लिकेशन पॅकेजिंग
+- अ‍ॅप्लिकेशन कोड बिल्ड करतो
+- तैनाती आर्टिफॅक्ट तयार करतो
+- लक्ष्य प्लॅटफॉर्मसाठी पॅकेजेस बनवतो (कंटेनर्स, ZIP फाइल्स इ.)
 
 ### टप्पा 5: प्री-डिप्लॉय हुक्स
 ```yaml
@@ -198,10 +203,10 @@ hooks:
       npm run db:migrate
 ```
 
-### टप्पा 6: अनुप्रयोग तैनात करणे
-- पॅकेज केलेले अनुप्रयोग Azure सेवांवर तैनात करतो
+### टप्पा 6: अ‍ॅप्लिकेशन तैनाती
+- पॅकेज केलेल्या अ‍ॅप्लिकेशन्सना Azure सेवांवर तैनात करतो
 - कॉन्फिगरेशन सेटिंग्ज अपडेट करतो
-- सेवा सुरू/रिस्टार्ट करतो
+- सेवा सुरू / पुन्हा सुरू करतो
 
 ### टप्पा 7: पोस्ट-डिप्लॉय हुक्स
 ```yaml
@@ -213,14 +218,14 @@ hooks:
       npm run test:integration
       
       echo "Warming up applications..."
-      curl https://${WEB_URL}/health
+      curl --fail "$WEB_URL/health"
 ```
 
-### हुक त्रुटी कसे हाताळायच्या
+### हुक त्रुटी हाताळणी
 
-डिफॉल्टप्रमाणे, **जर हुक कमांड नॉन-झीरो कोडने बाहेर पडली तर azd संपूर्ण ऑपरेशन थांबवतो.** हा सहसा तुमचा हवा असलेला परिणाम असतो—मायग्रेशन अयशस्वी झाल्यास तैनाती थांबावी, अपूर्ण अनुप्रयोग पाठवू नये. पण यामुळे हुक्स नीटनेटके लिहिले पाहिजेत.
+डीफॉल्टनुसार, **जर हुक कमांड नॉन-झिरो कोडसह बाहेर पडली, तर azd संपूर्ण ऑपरेशन थांबवतो.** सहसा हेच तुम्हाला हवे असते—अपयशी मायग्रेशनने तैनाती थांबवायला हवे, खराब अ‍ॅप पाठवायला नको. पण याचा अर्थ हुक्स काळजीपूर्वक लिहिलेले पाहिजेत.
 
-**1. अयशस्वी घटना जोरात व उद्देशाने करा.** हुक अयशस्वी होतो जेव्हा त्याचा शेवटचा कमांड नॉन-झीरो एग्झिट कोड परत करतो. शेल स्क्रिप्टमध्ये `set -e` जोडा जेणेकरून पहिला अपयशी कमांड आढळल्यावर हुक पुढे silently चालू ठेवत न राहता थांबतो:
+**1. अपयशांस मोठ्या आवाजात आणि मनोदयाने करा.** जेव्हा हुकचा शेवटचा कमांड नॉन-झिरो exit code परत करते तेव्हा हुक फेल होतो. शेल स्क्रिप्ट्समध्ये, पहिल्या अपयशी कमांडवर हुक थांबण्यासाठी `set -e` जोडा, गुपचूप पुढे न वाढता:
 
 ```yaml
 hooks:
@@ -232,24 +237,24 @@ hooks:
       npm run db:migrate
 ```
 
-**2. हुक अयशस्वी होऊ दे पण azd थांबू नये.** नॉन-क्रिटिकल स्टेप्ससाठी (ऐच्छिक कॅश वॉर्म-अप, सर्वोत्तम प्रयत्न सूचना) `continueOnError: true` सेट करा. azd अयशस्वीपणा लॉग करते पण पुढे चालू ठेवते:
+**2. हुक फेल होऊ दे पण azd थांबवू नये.** नॉन-क्रिटिकल स्टेपसाठी (ऐच्छिक कॅश वार्म-अप, बेस्ट-एफर्ट नोटिफिकेशन) `continueOnError: true` सेट करा. azd अपयश लॉग करतो पण पुढे चालू ठेवतो:
 
 ```yaml
 hooks:
   postdeploy:
     shell: sh
     continueOnError: true         # a failure here won't fail 'azd up'
-    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+    run: curl -f "$WEB_URL/warmup"
 ```
 
-**3. पूर्ण चालण्यापूर्वी हुक्स स्वतंत्रपणे चाचणी करा.** `azd up` चालवण्याची गरज नाही—फक्त हुक स्वतंत्रपणे चालवून वेगाने सुधारणा करा:
+**3. पूर्ण रनच्या आधी हुक्स वेगळेच तपासा.** हुक डिबग करण्यासाठी तुम्हाला `azd up` चालवण्याची गरज नाही—ते स्वतंत्रपणे चालवा आणि वेगाने सुधारणा करा:
 
 ```bash
-azd hooks run predeploy          # फक्त प्रीडिप्लॉय हुक चालवतो
+azd hooks run predeploy          # runs the matching project/service hooks
 azd hooks run postdeploy --service api
 ```
 
-**4. OS-विशिष्ट शेल्ससाठी लक्ष ठेवा.** `shell: pwsh` वापरणारा हुक सीआय एजंटसह मशीनवर PowerShell असणे आवश्यक आहे. सर्वाधिक पोर्टेबिलिटीसाठी `shell: sh` वापरा, किंवा दोन्ही `windows` आणि `posix` वेरिएंट द्या:
+**4. OS-विशिष्ट शेल्ससाठी लक्ष ठेवा.** `shell: pwsh` वापरणारे हुक मशीनवर PowerShell असणे आवश्यक आहे (CI एजंटसह). सर्वात विस्तृत पोर्टेबिलिटीसाठी `shell: sh` वापरा, किंवा दोन्ही `windows` आणि `posix` प्रकार द्या:
 
 ```yaml
 hooks:
@@ -262,63 +267,63 @@ hooks:
       run: ./scripts/setup.ps1
 ```
 
-> **डीबगिंग टिप:** `--debug` सह कोणताही azd कमांड चालवा, तेव्हा नेमके हुक कमांड लाइन आणि त्याचा पूर्ण आउटपुट पहा—जेव्हा हुक स्थानिक स्वरूपात काम करतो पण CI मध्ये अयशस्वी होतो तेव्हा अप्रतिम.
+> **डिबगिंग टीप:** कोणतीही azd कमांड `--debug` सह चालवा जेणेकरून अचूक हुक कमांड लाइन आणि त्याचा पूर्ण आउटपुट पाहता येईल—जेव्हा हुक लोकलमध्ये चालतो पण CI मध्ये फेल होतो तेव्हा फार उपयुक्त आहे.
 
 ## 🎛️ तैनाती कॉन्फिगरेशन
 
-### सेवा-विशिष्ट तैनात सेटिंग्ज
+### सेवा-विशिष्ट तैनाती सेटिंग्ज
 ```yaml
 # azure.yaml
 services:
   web:
     project: ./src/web
     host: staticwebapp
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    dist: dist
     
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
     env:
-      - name: NODE_ENV
-        value: production
-      - name: API_VERSION
-        value: "1.0.0"
+      NODE_ENV: production
+      API_VERSION: "1.0.0"
         
   worker:
     project: ./src/worker
     host: function
-    runtime: node
-    buildCommand: npm install --production
+    language: js
 ```
 
 ### पर्यावरण-विशिष्ट कॉन्फिगरेशन्स
+
+हे फक्त स्थानीय azd मूल्ये आहेत. त्यांना स्पष्टपणे पायाभूत सुविधा / रनटाइम कॉन्फिगरशी नकाशित करा. सामान्यतः `NODE_ENV` हे एक डिप्लॉय केलेल्या Node अ‍ॅपसाठी `production` असते, ज्यामध्ये स्टेजिंग तैनाती समाविष्ट आहे; तैनाती टप्पे वेगळे करण्यासाठी स्वतंत्र अ‍ॅप-विशिष्ट चल वापरा.
+
 ```bash
-# विकास पर्यावरण
+# Development environment
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# चाचणी पर्यावरण
+# Staging environment
 azd env new staging
-azd env set NODE_ENV staging
+azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# उत्पादन पर्यावरण
+# Production environment
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 प्रगत तैनात परिदृश्ये
+## 🔧 प्रगत तैनाती परिस्थिती
 
-### मल्टी-सेवा अनुप्रयोग
+### बहु-सेवा अ‍ॅप्लिकेशन्स
 ```yaml
 # Complex application with multiple services
 services:
@@ -355,51 +360,52 @@ services:
 ```
 
 ### ब्लू-ग्रीन तैनाती
+
+**सांकेतिक ऑपरेशनल स्केच:** तुम्हाला दोन्ही वातावरणे, एक सामायिक ट्रॅफिक-राऊटिंग थर, आणि खालील दोन स्क्रिप्ट्स दिल्या पाहिजेत. azd ट्रॅफिक आपोआप स्वरूपांतरित करत नाही किंवा रोलबॅक तयार असल्याची पुष्टी करत नाही. निळा चाचणी पूर्ण होईपर्यंत आणि रोलबॅकची गरज नसल्याचे निश्चित होईपर्यंत हिरवा ठेवा.
+
 ```bash
-# निळे पर्यावरण तयार करा
+# Create blue environment
 azd env new production-blue
 azd up --environment production-blue
 
-# निळे पर्यावरण तपासा
+# Test blue environment
 ./scripts/test-environment.sh production-blue
 
-# ट्रॅफिक निळ्याकडे वळवा (मॅन्युअल DNS/लोड बॅलन्सर अपडेट)
+# Switch traffic to blue (manual DNS/load balancer update)
 ./scripts/switch-traffic.sh production-blue
 
-# हिरव्या पर्यावरणाची स्वच्छता करा
+# Clean up green environment
 azd env select production-green
 azd down --force
 ```
 
-### कॅनरी तैनाती
-```yaml
-# azure.yaml - Configure traffic splitting
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    trafficSplit:
-      - revision: stable
-        percentage: 90
-      - revision: canary
-        percentage: 10
+### कॅनरी डिप्लॉयमेंट्स
+```bash
+# Requires an existing Container App in multiple-revision mode and two
+# ready revisions. Replace placeholders with actual revision names.
+az containerapp ingress traffic set \
+  --name "<app-name>" --resource-group "<rg-name>" \
+  --revision-weight "<stable-revision>=90" "<canary-revision>=10"
 ```
 
-### टप्प्याटप्प्याने तैनाती
+ट्रॅफिक स्प्लिटिंग कंटेनर ॲप्स कॉन्फिगरेशन (Bicep किंवा Azure CLI) अंतर्गत येते, नाहीतर `azure.yaml` `trafficSplit` मालमत्तेच्या अंतर्गत नाही. पूर्वावलोकन/प्रोव्हीजनिंग आणि नंतरच्या डिप्लॉयमेंट्समध्ये तुम्हाला तुमचा निवडलेला पुनरीक्षण प्रकार आणि राऊटिंग नियम जपावे लागतील.
+
+### स्टेज्ड डिप्लॉयमेंट्स
 ```bash
 #!/bin/bash
 # deploy-staged.sh
+set -e
 
 echo "Deploying to development..."
 azd env select dev
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running dev tests..."
 ./scripts/test-environment.sh dev
 
 echo "Deploying to staging..."
 azd env select staging
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running staging tests..."
 ./scripts/test-environment.sh staging
@@ -409,43 +415,38 @@ read -p "Deploy to production? (y/N): " confirm
 if [[ $confirm == [yY] ]]; then
     echo "Deploying to production..."
     azd env select production
-    azd up --confirm-with-no-prompt
+    azd up --no-prompt
     
     echo "Running production smoke tests..."
     ./scripts/test-environment.sh production
 fi
 ```
 
-## 🐳 कंटेनर तैनाती
+## 🐳 कंटेनर डिप्लॉयमेंट्स
 
-### कंटेनर अ‍ॅप तैनाती
+### कंटेनर ॲप डिप्लॉयमेंट्स
 ```yaml
 services:
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        BUILD_VERSION: ${BUILD_VERSION}
-        NODE_ENV: production
+        - BUILD_VERSION=${BUILD_VERSION}
+        - NODE_ENV=production
     env:
-      - name: DATABASE_URL
-        value: ${DATABASE_URL}
-    secrets:
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-    scale:
-      minReplicas: 1
-      maxReplicas: 10
+      NODE_ENV: production
 ```
 
-### मल्टी-टप्पा डॉकरेकामध्ये ऑप्टिमायझेशन
+कंटेनर ॲप इन्फ्रास्ट्रक्चरमध्ये `configuration.secrets`/`secretRef` (किंवा की व्हॉल्ट संदर्भ) सोबत रनटाइम सीक्रेट्स कॉन्फिगर करा आणि `template.scale` सह स्केलिंग करा. समर्पक सर्व्हिस-स्तरीय `secrets` किंवा `scale` मालमत्ता `azure.yaml` मध्ये आपोआप तयार करू नका.
+
+### मल्टी-स्टेज डॉकरफाइल ऑप्टिमायझेशन
 ```dockerfile
 # Dockerfile
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 WORKDIR /app
 COPY package*.json ./
 
@@ -455,11 +456,12 @@ COPY . .
 CMD ["npm", "run", "dev"]
 
 FROM base AS build
-RUN npm ci --only=production
+RUN npm ci
 COPY . .
 RUN npm run build
+RUN npm prune --omit=dev
 
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
@@ -470,77 +472,89 @@ CMD ["npm", "start"]
 
 ## ⚡ कार्यक्षमता ऑप्टिमायझेशन
 
-### सेवा-विशिष्ट तैनाती
+### सेवा-विशिष्ट डिप्लॉयमेंट्स
 ```bash
-# जलद पुनरावृत्तीसाठी विशिष्ट सेवा तैनात करा
-azd deploy --service web
-azd deploy --service api
+# Deploy a specific service for faster iteration
+azd deploy web
+azd deploy api
 
-# सर्व सेवा तैनात करा
+# Deploy all services
 azd deploy
 ```
 
 ### बिल्ड कॅशिंग
 ```yaml
-# azure.yaml - Configure build commands
+# azure.yaml fragment - assumes package.json has a build script
 services:
   web:
     project: ./src/web
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    host: appservice
+    dist: dist
 ```
 
-### कार्यक्षम कोड तैनात करणे
+स्टँडर्ड नोड वर्कफ्लो पॅकेज स्क्रिप्ट्स वापरतो; सेवा `prepackage` हुक्स आवश्यकता असलेले टप्पे जोडू शकतात. डॉकर लेयर कॅशिंग ही सेवा बिल्ड कमांडनिर्मितीपासून स्वतंत्र आहे.
+
+### कार्यक्षम कोड डिप्लॉयमेंट्स
 ```bash
-# फक्त कोड बदलांसाठी azd deploy वापरा (azd up नाही)
-# हे इन्फ्रास्ट्रक्चर प्रोव्हिजनिंग वगळते आणि खूप जलद आहे
+# Use azd deploy (not azd up) for code-only changes
+# This skips infrastructure provisioning and is much faster
 azd deploy
 
-# सर्वात वेगवान पुनरावृत्तींसाठी विशिष्ट सेवा तैनात करा
-azd deploy --service api
+# Deploy specific service for fastest iteration
+azd deploy api
 ```
 
-## 🔍 तैनात मॉनिटरिंग
+## 🔍 डिप्लॉयमेंट मॉनिटरिंग
 
-### रिअल-टाइम तैनात मॉनिटरिंग
+### रिअल-टाइम डिप्लॉयमेंट मॉनिटरिंग
 ```bash
-# ऍप्लिकेशनची रिअल-टाइममध्ये देखरेख करा
+# Monitor application in real-time
 azd monitor --live
 
-# ऍप्लिकेशन लॉग्स पहा
+# View application logs
 azd monitor --logs
 
-# तैनातीची स्थिती तपासा
+# Check deployment status
 azd show
 ```
 
 ### हेल्थ चेक्स
-```yaml
-# azure.yaml - Configure health checks
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    healthCheck:
-      path: /health
-      interval: 30s
-      timeout: 10s
-      retries: 3
+```bicep
+// Partial Container App container definition:
+// merge into properties.template.containers[] in your Bicep resource.
+probes: [
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 3000
+      scheme: 'HTTP'
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+    timeoutSeconds: 10
+    failureThreshold: 3
+  }
+]
 ```
 
-### पोस्ट-तैनात पडताळणी
+तुमच्या ॲपने `/health` लागू करणे आवश्यक आहे; ते azd द्वारे आपोआप पुरवले जात नाही. कोणतीही सामान्य `azure.yaml` `healthCheck` सेवा मालमत्ता नाही.
+
+### डिप्लॉयमेंट नंतर तपासणी
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
+set -e
 
 echo "Validating deployment..."
 
-# अनुप्रयोगाची आरोग्य तपासा
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Check application health
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
 echo "Testing web application..."
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Web application is healthy"
 else
     echo "❌ Web application health check failed"
@@ -548,7 +562,7 @@ else
 fi
 
 echo "Testing API..."
-if curl -f "$API_URL/health"; then
+if curl -f "$API_URL/lists"; then
     echo "✅ API is healthy"
 else
     echo "❌ API health check failed"
@@ -561,79 +575,49 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 सुरक्षा विचार
+## 🔐 सुरक्षा बाबी
 
 ### सीक्रेट्स व्यवस्थापन
 ```bash
-# गुपिते सुरक्षितपणे संग्रहित करा
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
-azd env set API_KEY "your-api-key" --secret
-
-# azure.yaml मध्ये गुपितांचा संदर्भ द्या
+# Interactive Key Vault reference setup; requires appropriate vault permissions
+azd env set-secret DATABASE_PASSWORD
+azd env set-secret JWT_SECRET
+azd env set-secret API_KEY
 ```
 
-```yaml
-services:
-  api:
-    secrets:
-      - name: database-password
-        value: ${DATABASE_PASSWORD}
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-```
+`azd env set ... --secret` अवैध आहे. सामान्य वातावरणातील मूल्ये स्थानिक प्लेनटेक्स्ट असतात; वाचन आदेश त्यांना गुप्त ठेवतील असे मानू नका. वर दिलेले आदेश की व्हॉल्ट संदर्भ जतन करतात, पण तुमच्या इन्फ्रास्ट्रक्चर/अॅप्लिकेशनने अजूनही सीक्रेट्स वापरून त्यांना रनटाइम ओळख देणे आवश्यक आहे.
 
 ### नेटवर्क सुरक्षा
-```yaml
-# azure.yaml - Configure network security
-infra:
-  parameters:
-    enablePrivateEndpoints: true
-    allowedIPs:
-      - "203.0.113.0/24"  # Office IP range
-      - "198.51.100.0/24" # VPN IP range
-```
+बिसेप मध्ये नेटवर्क पॅरामीटर्स घोषित करा आणि वापरा, आणि ते `infra/main.parameters.json` मध्ये मॅप करा. `azure.yaml` मध्ये कोणतेही सामान्य `infra.parameters` ओव्हरले नाही. उदाहरणात्मक दस्तऐवजामध्ये दिलेले सीमा `203.0.113.0/24` आणि `198.51.100.0/24` प्रत्यक्ष कार्यालय/व्हीपीएन नेटवर्क नाहीत; त्याऐवजी अधिकृत नेटवर्क सीमा वापरा.
 
 ### ओळख आणि प्रवेश व्यवस्थापन
-```yaml
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    identity:
-      type: systemAssigned
-    keyVault:
-      - name: app-secrets
-        secrets:
-          - database-connection
-          - external-api-key
-```
+बिसेप मध्ये कंटेनर ॲपचा `identity` सक्रिय करा आणि व्हॉल्ट प्रमाणात आवश्यक की व्हॉल्ट डेटा-प्लेन भूमिका द्या. त्या संसाधनामध्ये नामित की व्हॉल्ट-बॅकड सीक्रेट्स आणि रनटाइम संदर्भ कॉन्फिगर करा; `identity` आणि `keyVault` हे सामान्य azd सेवा मालमत्ता नाहीत. [ऑथेन्टिकेशन & मॅनेज्ड ओळख](../chapter-03-configuration/authsecurity.md) पहा.
 
 ## 🚨 रोलबॅक धोरणे
 
-### त्वरीत रोलबॅक
+### जलद रोलबॅक
 ```bash
-# AZD मध्ये अंगभूत रोलबॅक नाही. शिफारस केलेले उपाय:
+# AZD doesn't have built-in rollback. Recommended approaches:
 
-# पर्याय 1: Git मधून पुन्हा डिप्लॉय करा (शिफारसीय)
-git revert HEAD  # समस्या निर्माण करणारी कमिट पूर्ववत करा
+# Option 1: Redeploy from Git (recommended)
+git revert HEAD  # Revert the problematic commit
 git push
 azd deploy
 
-# पर्याय 2: विशिष्ट कमिट पुन्हा डिप्लॉय करा
-git checkout <previous-commit-hash>
+# Option 2: Redeploy specific commit
+git checkout "<previous-commit-hash>"
 azd deploy
 git checkout main
 ```
 
 ### इन्फ्रास्ट्रक्चर रोलबॅक
 ```bash
-# लागू करण्यापूर्वी इन्फ्रास्ट्रक्चर बदलांचे पूर्वावलोकन करा
+# Preview infrastructure changes before applying
 azd provision --preview
 
-# इन्फ्रास्ट्रक्चर रोलबॅकसाठी, आवृत्ती नियंत्रण वापरा:
-git revert HEAD  # इन्फ्रास्ट्रक्चर बदल परत करा
-azd provision    # मागील इन्फ्रास्ट्रक्चर स्थिती लागू करा
+# For infrastructure rollback, use version control:
+git revert HEAD  # Revert infrastructure changes
+azd provision    # Apply previous infrastructure state
 ```
 
 ### डेटाबेस माइग्रेशन रोलबॅक
@@ -650,21 +634,21 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 तैनात मेट्रिक्स
+## 📊 डिप्लॉयमेंट मेट्रिक्स
 
-### तैनात कार्यक्षमता ट्रॅक करा
+### डिप्लॉयमेंट कार्यक्षमता ट्रॅक करा
 ```bash
-# सध्याच्या तैनातीची स्थिती पहा
+# View current deployment status
 azd show
 
-# Application Insights सह अनुप्रयोग मॉनिटर करा
+# Monitor application with Application Insights
 azd monitor --overview
 
-# लाइव्ह मेट्रिक्स पहा
+# View live metrics
 azd monitor --live
 ```
 
-### कस्टम मेट्रिक्स संकलन
+### सानुकूल मेट्रिक्स संग्रह
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -681,32 +665,32 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 सर्वोत्तम पद्धती
+## 🎯 सर्वोत्तम पध्दती
 
-### 1. पर्यावरण सुसंगती
+### 1. पर्यावरण सुसंगतता
 ```bash
-# सातत्यपूर्ण नावं वापरा
+# Use consistent naming
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# पर्यावरण समतोल राखा
+# Maintain environment parity
 ./scripts/sync-environments.sh
 ```
 
-### 2. इन्फ्रास्ट्रक्चर पडताळणी
+### 2. पायाभूत सुविधा पडताळणी
 ```bash
-# तैनातीपूर्वी पायाभूत सुविधांतील बदल पूर्वावलोकन करा
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# ARM/Bicep लिंटिंग वापरा
+# Use ARM/Bicep linting
 az bicep lint --file infra/main.bicep
 
-# Bicep सिंटॅक्स सत्यापित करा
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 ```
 
-### 3. चाचणी समाकलन
+### 3. चाचणी एकत्रीकरण
 ```yaml
 hooks:
   predeploy:
@@ -737,7 +721,7 @@ hooks:
 
 ### 4. दस्तऐवजीकरण आणि लॉगिंग
 ```bash
-# दस्तऐवज तैनाती प्रक्रिया
+# Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -745,64 +729,70 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## पुढील पावले
 
-- [संसाधनांचे प्राविजनिंग](provisioning.md) - इन्फ्रास्ट्रक्चर व्यवस्थापनाचा सविस्तर अभ्यास
-- [तैनातीपूर्व नियोजन](../chapter-06-pre-deployment/capacity-planning.md) - तुमची तैनात धोरणे नियोजित करा
-- [सामान्य समस्या](../chapter-07-troubleshooting/common-issues.md) - तैनात समस्या सोडवा
-- [सर्वोत्तम पद्धती](../chapter-07-troubleshooting/debugging.md) - उत्पादन-सज्ज तैनाती धोरणे
+- [प्रोव्हिजनिंग संसाधने](provisioning.md) - पायाभूत व्यवस्थापनाचा सखोल अभ्यास
+- [पूर्व-तैनाती नियोजन](../chapter-06-pre-deployment/capacity-planning.md) - आपल्या तैनाती धोरणाची योजना करा
+- [सामान्य समस्या](../chapter-07-troubleshooting/common-issues.md) - तैनाती समस्या सोडवा
+- [सर्वोत्तम पद्धती](../chapter-07-troubleshooting/debugging.md) - उत्पादन-तयार तैनाती धोरणे
 
-## 🎯 हाताळणी तैनाती सराव
+## 🎯 प्रत्यक्ष तैनाती व्यायाम
 
-### सराव 1: वाढत्या तैनाती वर्कफ्लो (20 मिनिटे)
-**उद्दिष्ट:** संपूर्ण आणि वाढत्या तैनातींमधील फरकावर प्रभुत्व मिळवा
+### व्यायाम 1: वाढत जाणारी तैनाती कार्यप्रवाह (20 मिनिटे)
+**उद्दिष्ट:** संपूर्ण आणि वाढत जाणाऱ्या तैनाती यामधील फरक मास्टर करा
+
+**सुरुवातीचा बिंदू:** Bash, Node.js 22, Git, azd साइन-इन, आणि तैनाती परवानग्या असलेली Azure सदस्यता. नवीन निर्देशिकेत चालवा; बिल करण्यायोग्य App Service/Cosmos DB संसाधने अपेक्षित आहेत. वेळ क्षेत्र आणि साच्यांवर अवलंबून आहे.
 
 ```bash
-# प्रारंभिक वितरण
+# Initial deployment
 mkdir deployment-practice && cd deployment-practice
-azd init --template todo-nodejs-mongo
-azd up
+azd init --template todo-nodejs-mongo .
+time azd up
 
-# प्रारंभिक वितरण वेळ नोंदवा
+# Record initial deployment time
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# कोड बदल करा
-echo "// Updated $(date)" >> src/api/src/server.js
+# Make a code change
+echo "// Updated $(date)" >> src/api/src/index.ts
 
-# फक्त कोड वितरित करा (जलद)
+# Deploy only code (fast)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# वेळांची तुलना करा
+# Compare times
 cat deployment-log.txt
 
-# साफसफाई करा
+# Clean up
 azd down --force --purge
 ```
 
-**यशाची निकषे:**
-- [ ] संपूर्ण तैनाती 5-15 मिनिटे लागते
-- [ ] कोड-फक्त तैनाती 2-5 मिनिटे लागते
-- [ ] कोड बदल तैनात केलेल्या अनुप्रयोगात प्रतिबिंबित होतात
-- [ ] `azd deploy` नंतर इन्फ्रास्ट्रक्चर अपरिवर्तित राहते
+**यशस्वी निकष:**
+- [ ] दोन्ही आदेशांसाठी घालवलेली वेळ नोंदवा (किंवा निश्चित कालावधी नाही)
+- [ ] दोन्ही आदेश यशस्वीपणे पूर्ण झाले
+- [ ] API कार्यरत राहिली; फक्त टिप्पणी संपादन ही दिसणारी UI बदल नाही
+- [ ] `azd deploy` नंतर पायाभूत सुविधा अपरिवर्तित राहिली
 
-**शिकण्याचा निकाल:** कोड बदलांसाठी `azd deploy` `azd up` पेक्षा 50-70% वेगवान आहे
+**शिकण्याचा परिणाम**: `azd deploy` पायाभूत सुविधा प्रोव्हिजनिंग वगळतो. एक निश्चित टक्केवारी वेग वाढीऐवजी मोजलेली वेळ तुलना करा.
 
-### सराव 2: कस्टम तैनात हुक्स (30 मिनिटे)
-**उद्दिष्ट:** प्री आणि पोस्ट-तैनात स्वयंचलितता अंमलात आणा
+### व्यायाम 2: सानुकूल तैनाती हुक्स (30 मिनिटे)
+**उद्दिष्ट:** पूर्व व पोस्ट-तैनाती ऑटोमेशनची अंमलबजावणी करा
+
+**सुरुवातीचा बिंदू:** वर दर्शविलेला आरंभिक `deployment-practice` प्रकल्प. जर आपण तो स्वच्छ केला असेल, तर कोड-केवळ तैनाती चाचणीपूर्वी पुन्हा `azd up` चालवा. खालील पडताळणी API च्या प्रत्यक्ष बिल्ड स्क्रिप्टचा वापर करते, अस्तित्वात नसलेल्या root `test:unit` स्क्रिप्टचा नव्हे. साच्यातील API चाचण्यांना कॉन्फिगर केलेल्या डेटाबेस प्रवेशाची गरज आहे; ते स्वतंत्र युनिट चाचण्या नाहीत.
 
 ```bash
-# प्री-डिप्लॉय व्हॅलिडेशन स्क्रिप्ट तयार करा
+# Create pre-deploy validation script
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "⚠️ Running pre-deployment checks..."
 
-# चाचण्या पास झाल्या आहेत का तपासा
-if ! npm run test:unit; then
-    echo "❌ Tests failed! Aborting deployment."
+# Install API dependencies and check its actual lint/TypeScript build
+npm --prefix src/api ci
+if ! npm --prefix src/api run build; then
+    echo "❌ Build validation failed! Aborting deployment."
     exit 1
 fi
 
-# अनकमिट केलेल्या बदलांची तपासणी करा
+# Check for uncommitted changes
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -812,14 +802,15 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# पोस्ट-डिप्लॉय स्मोक टेस्ट तयार करा
+# Create post-deploy smoke test
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "💨 Running smoke tests..."
 
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Health check passed!"
 else
     echo "❌ Health check failed!"
@@ -831,8 +822,11 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# azure.yaml मध्ये हुक्स जोडा
-cat >> azure.yaml << 'EOF'
+# Merge the following into the EXISTING azure.yaml using your editor.
+# If hooks already exists, merge its children; never append a duplicate YAML key.
+```
+
+```yaml
 
 hooks:
   predeploy:
@@ -842,23 +836,26 @@ hooks:
   postdeploy:
     shell: sh
     run: ./scripts/post-deploy-test.sh
-EOF
+```
 
-# हुक्ससह डिप्लॉयमेंटची चाचणी करा
+```bash
+# Test deployment with hooks
 azd deploy
 ```
 
-**यशाची निकषे:**
-- [ ] प्री-डिप्लॉय स्क्रिप्ट तैनात करण्यापूर्वी चालतो
-- [ ] चाचण्या अयशस्वी झाल्यास तैनात थांबते
-- [ ] पोस्ट-डिप्लॉय स्मोक चाचणी आरोग्य सत्यापित करते
+**यशस्वी निकष:**
+- [ ] पूर्व-तैनाती स्क्रिप्ट तैनातीपूर्वी चालते
+- [ ] बिल्ड पडताळणी अपयशी झाल्यास तैनाती रद्द होते
+- [ ] पोस्ट-तैनाती स्मोक चाचणी आरोग्याची खात्री करते
 - [ ] हुक्स योग्य क्रमाने चालतात
 
-### सराव 3: मल्टी-पर्यावरण तैनात धोरण (45 मिनिटे)
-**उद्दिष्ट:** टप्प्याटप्प्याने तैनात वर्कफ्लो अंमलात आणा (डेव → स्टेजिंग → प्रॉडक्शन)
+### व्यायाम 3: बहु-पर्यावरण तैनाती धोरण (45 मिनिटे)
+**उद्दिष्ट:** स्तरित तैनाती कार्यप्रवाहीची अंमलबजावणी करा (dev → staging → production)
+
+**प्रारंभिक बिंदू:** `jq` सह एकसारखा प्रारंभ केलेला todo प्रकल्प. वास्तविक सदस्यता/स्थान मूल्यांसह खालील पर्यावरण तयार करा (किंवा प्रत्येकात `AZURE_SUBSCRIPTION_ID`/`AZURE_LOCATION` सेट करा) **कोणतीही सूचना न देता व्हर्कफ्लो सुरू करण्याआधी**. तो जाणूनबुजून चुकतो, हरवलेले मूल्ये बनवण्याऐवजी. फक्त वापरायचे असलेले प्रशिक्षण पर्यावरण वापरा, खऱ्या उत्पादन सदस्यतेऐवजी.
 
 ```bash
-# तैनाती स्क्रिप्ट तयार करा
+# Create deployment script
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -866,25 +863,25 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# पावलं 1: डेव्हlopment मध्ये तैनाती करा
+# Step 1: Deploy to dev
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
 azd up --no-prompt
 
 echo "Running dev tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# पावलं 2: स्टेजिंग मध्ये तैनाती करा
+# Step 2: Deploy to staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
 azd up --no-prompt
 
 echo "Running staging tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# पावलं 3: उत्पादनासाठी मॅन्युअल मंजुरी
+# Step 3: Manual approval for production
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -896,7 +893,7 @@ if [[ $confirm == "yes" ]]; then
     azd up --no-prompt
     
     echo "Running production smoke tests..."
-    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
     
     echo "
 ✅ Production deployment completed!"
@@ -907,74 +904,90 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# वातावरण तयार करा
-azd env new dev
-azd env new staging
-azd env new production
+# Create environments
+# Reuse existing dev if you completed Exercise 1; create unused environments
+azd env select dev
+azd env new staging --subscription "<subscription-id>" --location eastus2
+azd env new production --subscription "<subscription-id>" --location eastus2
 
-# स्टेज केलेली तैनाती चालवा
+# Run staged deployment
 ./deploy-staged.sh
+
+# After verification, delete each disposable deployment (review prompts)
+azd down --environment dev
+azd down --environment staging
+azd down --environment production
 ```
 
-**यशाची निकषे:**
-- [ ] डेव्ह पर्यावरण यशस्वीपणे तैनात आहे
-- [ ] स्टेजिंग पर्यावरण यशस्वीपणे तैनात आहे
-- [ ] उत्पादनासाठी मॅन्युअल मान्यता आवश्यक
-- [ ] सर्व पर्यावरणांमध्ये कार्यरत हेल्थ चेक्स आहेत
-- [ ] आवश्यक असल्यास रोलबॅक करू शकता
+**यशस्वी निकष:**
+- [ ] डेव्हलपमेंट पर्यावरण यशस्वीपणे तैनात होणे
+- [ ] स्टेजिंग पर्यावरण यशस्वीपणे तैनात होणे
+- [ ] उत्पादनासाठी मॅन्युअल मंजुरी आवश्यक
+- [ ] सर्व पर्यावरणांमध्ये कार्यरत हेल्थ चेक्स
+- [ ] आवश्यक असल्यास रोलबॅक करणे शक्य असणे
 
-### सराव 4: रोलबॅक धोरण (25 मिनिटे)
-**उद्दिष्ट:** Git वापरून तैनात रोलबॅक राबवणे आणि चाचणी करणे
+### व्यायाम ४: रोलबॅक धोरण (२५ मिनिटे)
+**ध्येय**: Git वापरून तैनाती रोलबॅक राबविणे आणि चाचणी करणे
+
+**प्रारंभिक बिंदू:** todo टेम्पलेटच्या एकांत प्रशिक्षण चेकआऊट सह ज्यात सर्व बेसलाइन स्रोत कमिट केलेले आहे, एक स्वच्छ Git कार्यरत शाखा, आणि एक वापरायोग्य कॉन्फिगर केलेले पर्यावरण. कधीही खऱ्या उत्पादन प्रकल्पात प्रसिद्ध चुका आणू नका. खालील `APP_VERSION` फक्त बुककीपिंगसाठी आहे जोपर्यंत तुम्ही ते अॅपमध्ये स्पष्टपणे जोडत नाही.
 
 ```bash
-# v1 तैनात करा
+# Deploy v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# v1 कमिट हॅश जतन करा
+# Save v1 commit hash
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# तोडफोड करणारा बदलासह v2 तैनात करा
-echo "throw new Error('Intentional break')" >> src/api/src/server.js
-git add . && git commit -m "v2 with intentional break"
+# Deploy v2 with breaking change
+echo "throw new Error('Intentional break');" >> src/api/src/index.ts
+git add src/api/src/index.ts
+git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
-azd deploy
+DEPLOY_FAILED=false
+azd deploy api || DEPLOY_FAILED=true
 
-# अपयश ओळखा आणि परत रोलबॅक करा
-if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+# Detect failure and rollback
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+if [ "$DEPLOY_FAILED" = true ] || ! curl -f "$API_URL/lists"; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # git वापरून रोलबॅक करा
+    # Rollback using git
     git revert HEAD --no-edit
     
-    # पर्यावरण रोलबॅक करा
+    # Rollback environment
     azd env set APP_VERSION "1.0.0"
     
-    # v1 पुन्हा तैनात करा
-    azd deploy
+    # Redeploy v1
+    azd deploy api
+    curl --fail "$API_URL/lists"
     
     echo "✅ Rolled back to v1.0.0"
 fi
+
+# Clean up the disposable deployment when finished
+azd down
 ```
 
-**यशाची निकषे:**
-- [ ] तैनाती अपयश ओळखू शकतो
-- [ ] रोलबॅक स्क्रिप्ट आपोआप चालतो
-- [ ] अनुप्रयोग कार्यरत स्थितीत परत येतो
-- [ ] रोलबॅक नंतर हेल्थ चेक्स पास होतात
+**यशस्वी निकष:**
+- [ ] तैनाती अपयश ओळखू शकणे
+- [ ] रोलबॅक स्क्रिप्ट आपोआप चालवली जाते
+- [ ] अर्ज कार्यरत स्थितीत परत येतो
+- [ ] रोलबॅक नंतर हेल्थ चेक्स उत्तीर्ण होणे
 
-## 📊 तैनात मेट्रिक्स ट्रॅकिंग
+## 📊 तैनाती मेट्रिक्स ट्रॅक करणे
 
-### तुमची तैनात कार्यक्षमता ट्रॅक करा
+### तुमच्या तैनातीच्या कामगिरीचा मागोवा घ्या
 
 ```bash
-# डिप्लॉयमेंट मेट्रिक्स स्क्रिप्ट तयार करा
+# Create deployment metrics script
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
 
 azd deploy "$@"
+DEPLOY_STATUS=$?
 
 END_TIME=$(date +%s)
 DURATION=$((END_TIME - START_TIME))
@@ -986,37 +999,38 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# फाइलमध्ये लॉग करा
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+# Log to file
+echo "$(date +%Y-%m-%dT%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+exit "$DEPLOY_STATUS"
 EOF
 
 chmod +x track-deployment.sh
 
-# याचा वापर करा
+# Use it
 ./track-deployment.sh
 ```
 
-**तुमचे मेट्रिक्स विश्लेषण करा:**
+**तुमचे मेट्रिक्स विश्लेषित करा:**
 ```bash
-# तैनातीचा इतिहास पहा
+# View deployment history
 cat deployment-metrics.csv
 
-# तैनातीचा सरासरी वेळ मोजा
+# Calculate average deployment time
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
-## अतिरिक्त स्त्रोत
+## अतिरिक्त संसाधने
 
-- [Azure Developer CLI तैनात संदर्भ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service तैनात](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps तैनात](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions तैनात](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **नेव्हिगेशन**
-- **मागील धडा**: [तुमचा पहिला प्रोजेक्ट](../chapter-01-foundation/first-project.md)
-- **पुढील धडा**: [संसाधनांचे प्राविजनिंग](provisioning.md)
+- **मागील धडा**: [तुमचा पहिला प्रकल्प](../chapter-01-foundation/first-project.md)
+- **पुढील धडा**: [संसाधने प्रदान करणे](provisioning.md)
 
 ---
 

@@ -1,792 +1,239 @@
-# रिटेल मल्टी-एजंट सोल्यूशन - इन्फ्रास्ट्रक्चर टेम्पलेट
+# किरकोळ मल्टि-एजंट इन्फ्रास्ट्रक्चर स्कॅफोल्ड
 
-**अध्याय ५: उत्पादन विराम पॅकेज**  
-- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)  
-- **📖 संबंधित अध्याय**: [अध्याय ५: मल्टी-एजंट एआय सोल्यूशन्स](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
-- **📝 घटना मार्गदर्शक**: [पूर्ण आर्किटेक्चर](../retail-scenario.md)  
-- **🎯 जलद तैनात करणे**: [वन-क्लिक तैनाती](../../../../examples/retail-multiagent-arm-template)  
+**प्रगत आर्किटेक्चर उदाहरण — कार्यरत मल्टि-एजंट अनुप्रयोग नाही.**
 
-> **⚠️ फक्त इन्फ्रास्ट्रक्चर टेम्पलेट**  
-> हा ARM टेम्पलेट **Azure संसाधने** मल्टी-एजंट सिस्टमसाठी तैनात करतो.  
->  
-> **काय तैनात होते (१५-२५ मिनिटे):**  
-> - ✅ मायक्रोसॉफ्ट फाउंड्री मॉडेल्स (gpt-4.1, gpt-4.1-मिनी, ३ प्रदेशांमध्ये एम्बेडिंग्स)  
-> - ✅ AI Search सेवा (रिक्त, इंडेक्स निर्मितीसाठी तयार)  
-> - ✅ कंटेनर अ‍ॅप्स (प्लेसहोल्डर इमेजेस, तुमच्या कोडसाठी तयार)  
-> - ✅ स्टोरेज, कॉस्मॉस DB, की व्हॉल्ट, अ‍ॅप्लिकेशन इनसाइट्स  
->  
-> **काय समाविष्ट नाही (विकास आवश्यक):**  
-> - ❌ एजंट अंमलबजावणी कोड (कस्टमर एजंट, इन्व्हेंटरी एजंट)  
-> - ❌ राऊटिंग लॉजिक आणि API एंडपॉइंट्स  
-> - ❌ फ्रंटेंड चॅट UI  
-> - ❌ शोध इंडेक्स स्कीमा आणि डेटापाईपलाइन्स  
-> - ❌ **मोजलेला विकास प्रयत्न: ८०-१२० तास**  
->  
-> **हा टेम्पलेट वापरा जर:**  
-> - ✅ तुम्हाला मल्टी-एजंट प्रोजेक्टसाठी Azure इन्फ्रास्ट्रक्चर प्राव्हिजन करायचे आहे  
-> - ✅ एजंट अंमलबजावणी स्वतंत्रपणे विकसित करायची आहे  
-> - ✅ उत्पादन-तयार इन्फ्रास्ट्रक्चर बेसलाइन हवा आहे  
->  
-> **वापरू नका जर:**  
-> - ❌ तुम्हाला लगेच काम करणारा मल्टी-एजंट डेमो अपेक्षित असेल  
-> - ❌ तुम्हाला पूर्ण अ‍ॅप्लिकेशन कोड उदाहरणे पाहिजेत  
+[कोर्स होम](../../README.md) ·
+[अध्याय 5](../../docs/chapter-05-multi-agent/README.md) ·
+[आर्किटेक्चर ब्लूप्रिंट](../retail-scenario.md)
 
-## आढावा
+## हे काय तैनात करते
 
-हा डिरेक्टरी मल्टी-एजंट कस्टमर सपोर्ट सिस्टमसाठी **इन्फ्रास्ट्रक्चर फाउंडेशन** तैनात करण्यासाठी संपूर्ण Azure Resource Manager (ARM) टेम्पलेट समाविष्ट करते. टेम्पलेट योग्यरित्या कॉन्फिगर केलेल्या आणि आंतरकनेक्टेड सर्व आवश्यक Azure सेवा प्रदान करते, तुमच्या अॅप्लिकेशन विकासासाठी तयार.
+या निर्देशिकेमध्ये ARM टेम्पलेट, पॅरामीटर्स, आणि Bash वितरण स्क्रिप्ट आहे.
+येथे **कोणतीही `azure.yaml` किंवा किरकोळ अनुप्रयोग स्रोत नाही**.
 
-**तैनाती नंतर, तुमच्याकडे असेल:** उत्पादनासाठी तयार Azure इन्फ्रास्ट्रक्चर  
-**सिंستم पूर्ण करण्यासाठी आवश्यक:** एजंट कोड, फ्रंटेंड UI, आणि डेटा कॉन्फिगरेशन (पहा [आर्किटेक्चर मार्गदर्शक](../retail-scenario.md))  
+| संसाधन | तैनाती नंतर वास्तविक स्थिती |
+|---|---|
+| प्राथमिक Azure OpenAI खाते | `gpt-4.1-chat` तैनात करणे वापरून `gpt-4.1` आवृत्ती `2025-04-14`, `GlobalStandard` |
+| दुय्यम OpenAI खाते (ऐच्छिक) | `gpt-4.1-mini-inventory`, मॉडेल `gpt-4.1-mini` आवृत्ती `2025-04-14`, `GlobalStandard` |
+| एम्बेडिंग्ज खाते (ऐच्छिक) | `text-embedding-ada-002` आवृत्ती `2`, `Standard`; अनुक्रमांक पाईपलाइन नाही |
+| ग्रेडर OpenAI खाते | `gpt-4.1-grader`, मॉडेल `gpt-4.1` आवृत्ती `2025-04-14`, `GlobalStandard`; मूल्यांकनकर्ता नाही |
+| AI शोध | रिक्त सेवा; अनुक्रमांक किंवा दस्तऐवज नाहीत |
+| संचयन | रिक्त `documents` आणि `uploads` ब्लॉब कंटेनर्स |
+| Cosmos DB | सर्वरलेस खाते, `chathistory` डेटाबेस, `conversations` कंटेनर विभाजित `/userId` द्वारे, 30-दिवस आयटम TTL |
+| कंटेनर अ‍ॅप्स | राऊटर आणि फ्रंटेंड दोन्ही `mcr.microsoft.com/azuredocs/containerapps-helloworld:latest` पोर्ट 80 वर चालतात |
+| की वॉल्ट (ऐच्छिक) | रिक्त RBAC-समर्थित वॉल्ट; **कोणतेही रहस्ये किंवा भूमिका असाइनमेंट नाहीत** |
+| अनुप्रयोग अंतर्दृष्टी / लॉग अ‍ॅनालिटिक्स (ऐच्छिक) | संसाधने आणि वातावरण लॉग संकलन; कोणतेही सानुकूल अ‍ॅप इन्स्ट्रुमेंटेशन, अलर्ट किंवा डॅशबोर्ड नाहीत |
+| दस्तऐवज बुद्धिमत्ता | S0 खाते; दस्तऐवज प्रक्रिया कार्यप्रवाह नाही |
 
-## 🎯 काय तैनात होते
+लेगसी Bing Search v7 11 ऑगस्ट 2025 रोजी निवृत्त झालेला आणि **तैनात नाही**.
+कोणतेही रिप्लेसमेंट वेब-ग्राउंडिंग एकत्रीकरण लागू केलेले नाही.
 
-### मुख्य इन्फ्रास्ट्रक्चर (तैनाती नंतर स्थिती)
+**समाविष्ट नाही:** ग्राहक/साठा एजंट, राऊटर `/chat` API, फ्रंटेंड चॅट UI,
+शोध स्कीमा किंवा इन्गेस्टशन स्क्रिप्ट, Azure कंटेनर रजिस्ट्री, खाजगी एंडपॉइंट्स,
+व्यवस्थापित ओळखपत्रे, RBAC असाइनमेंट्स, स्वयंचलित फेलओव्हर, फ्रंट डोअर, रेड-टीम
+स्कॅनर, मूल्यमापन CLI, प्रमाणीकरण, किंवा CI/CD.
 
-✅ **मायक्रोसॉफ्ट फाउंड्री मॉडेल्स सेवा** (API कॉलसाठी तयार)  
-  - प्राथमिक प्रदेश: gpt-4.1 तैनात (२०K TPM क्षमता)  
-  - दुय्यम प्रदेश: gpt-4.1-मिनी तैनात (१०K TPM क्षमता)  
-  - तृतीयक प्रदेश: टेक्स्ट एम्बेडिंग मॉडेल (३०K TPM क्षमता)  
-  - मूल्यमापन प्रदेश: gpt-4.1 ग्रेडर मॉडेल (१५K TPM क्षमता)  
-  - **स्थिती:** पूर्ण कार्यक्षम - तत्काळ API कॉल करता येतो  
+ARM यश संदेश फक्त संसाधन तैनात करणे पुष्टी करतो. तो अनुप्रयोग कार्यक्षमता,
+सुरक्षा, उपलब्धता, किंवा उत्पादन तयारीचे प्रमाणपत्र देत नाही.
 
-✅ **Azure AI Search** (रिक्त - कॉन्फिगरेशनसाठी तयार)  
-  - व्हेक्टर शोध क्षमता सक्षम  
-  - स्टँडर्ड टियरसह १ पार्टिशन, १ प्रतिकृती  
-  - **स्थिती:** सेवा चालू आहे, परंतु इंडेक्स तयार करणे आवश्यक आहे  
-  - **कारवाई आवश्यक:** तुमच्या स्कीमासह शोध इंडेक्स तयार करा  
+## पूर्वअट आणि खर्च
 
-✅ **Azure स्टोरेज अकाउंट** (रिक्त - अपलोडसाठी तयार)  
-  - ब्लॉब कंटेनर्स: `documents`, `uploads`  
-  - सुरक्षित कॉन्फिगरेशन (केवळ HTTPS, सार्वजनिक प्रवेश नाही)  
-  - **स्थिती:** फायली स्वीकारण्यासाठी तयार  
-  - **कारवाई आवश्यक:** तुमचा उत्पादन डेटा आणि दस्तऐवज अपलोड करा  
-
-⚠️ **कंटेनर अ‍ॅप्स एन्व्हायर्नमेंट** (प्लेसहोल्डर इमेजेस तैनात)  
-  - एजंट राऊटर अ‍ॅप (nginx डीफॉल्ट इमेज)  
-  - फ्रंटेंड अ‍ॅप (nginx डीफॉल्ट इमेज)  
-  - ऑटो-स्केलिंग कॉन्फिगर (०-१० इंस्टन्सेस)  
-  - **स्थिती:** प्लेसहोल्डर कंटेनर्स चालू आहेत  
-  - **कारवाई आवश्यक:** तुमचे एजंट अ‍ॅप्लिकेशन्स तयार करा आणि तैनात करा  
-
-✅ **Azure Cosmos DB** (रिक्त - डेटासाठी तयार)  
-  - डेटाबेस आणि कंटेनर पूर्व-कॉन्फिगर केलेले  
-  - कमी विलंब ऑपरेशन्ससाठी ऑप्टिमाइज़्ड  
-  - TTL स्वयंचलित क्लिनअपसाठी सक्षम  
-  - **स्थिती:** चॅट इतिहास साठवण्यासाठी तयार  
-
-✅ **Azure Key Vault** (ऐच्छिक - रहस्यांसाठी तयार)  
-  - सॉफ्ट डिलीट सक्षम  
-  - व्यवस्थापित ओळखांसाठी RBAC कॉन्फिगर केलेले  
-  - **स्थिती:** API कीस आणि कनेक्शन स्ट्रिंग्ससाठी तयार  
-
-✅ **Application Insights** (ऐच्छिक - देखरेख सक्रिय)  
-  - लॉग अ‍ॅनालिटिक्स कार्यक्षेत्राशी जोडलेले  
-  - सानुकूल मेट्रिक्स आणि अलर्ट कॉन्फिगर केलेले  
-  - **स्थिती:** तुमच्या अ‍ॅप्समधून टेलिमेट्री स्वीकारण्यासाठी तयार  
-
-✅ **Document Intelligence** (API कॉलसाठी तयार)  
-  - उत्पादन कार्यभारांसाठी S0 टियर  
-  - **स्थिती:** अपलोड केलेले दस्तऐवज प्रक्रिया करण्यासाठी तयार  
-
-✅ **Bing Search API** (API कॉलसाठी तयार)  
-  - रिअल-टाइम शोधांसाठी S1 टियर  
-  - **स्थिती:** वेब शोध क्वेरीजसाठी तयार  
-
-### तैनाती मोड्स
-
-| मोड | OpenAI क्षमता | कंटेनर इंस्टन्सेस | शोध टियर | स्टोरेज पुनरावृत्ती | उत्तमासाठी |
-|------|-----------------|---------------------|-------------|-------------------|----------|
-| **मिनिमल** | १०K-२०K TPM | ०-२ प्रतिकृती | बेसिक | LRS (लोकल) | विकास/चाचणी, शिकणे, पुरावा-आधार |
-| **स्टँडर्ड** | ३०K-६०K TPM | २-५ प्रतिकृती | स्टँडर्ड | ZRS (झोन) | उत्पादन, मध्यम ट्रॅफिक (<१०K वापरकर्ते) |
-| **प्रिमियम** | ८०K-१५०K TPM | ५-१० प्रतिकृती, झोन-रेडंडंट | प्रिमियम | GRS (जिओ) | एंटरप्राइज, उच्च ट्रॅफिक (>१०K वापरकर्ते), ९९.९९% SLA |
-
-**खर्चाचा परिणाम:**  
-- **मिनिमल → स्टँडर्ड:** सुमारे ४ पट खर्च वाढ ($१००-३७०/महिना → $४२०-१४५०/महिना)  
-- **स्टँडर्ड → प्रिमियम:** सुमारे ३ पट खर्च वाढ ($४२०-१४५०/महिना → $११५०-३५००/महिना)  
-- **निवड आधारावर:** अपेक्षित लोड, SLA आवश्यकता, बजेट मर्यादा  
-
-**क्षमता नियोजन:**  
-- **TPM (टोकन्स प्रति मिनिट):** सर्व मॉडेल तैनातींवर एकूण  
-- **कंटेनर इंस्टन्सेस:** ऑटो-स्केलिंग श्रेणी (किंवा किमान-जास्तीत जास्त प्रतिकृती)  
-- **शोध टियर:** क्वेरी कार्यक्षमता आणि इंडेक्स आकार मर्यादा प्रभावित करते  
-
-## 📋 पूर्वअट
-
-### आवश्यक साधने  
-१. **Azure CLI** (आवृत्ती 2.50.0 किंवा अधिक)  
-   ```bash
-   az --version  # आवृत्ती तपासा
-   az login      # प्रमाणीकरण करा
-   ```
-  
-२. **सक्रिय Azure सदस्यत्व** (मालक किंवा योगदानकर्ता प्रवेशासह)  
-   ```bash
-   az account show  # सदस्यता तपासा
-   ```
-  
-
-### आवश्यक Azure कोटा  
-
-तैनातीपूर्वी, तुमच्या लक्षित प्रदेशांमध्ये पुरेशी कोटा आहे की नाही ते तपासा:  
+- Bash (Git Bash/WSL विंडोजवर) आणि
+  [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- सर्व सूचीबद्ध संसाधने तयार करण्यासाठी परवानग्या असलेले एक सदस्यता.
+- **प्रत्येक मॉडेल/आवृत्ती/SKU प्रत्येक निवडलेल्या प्रदेशात** उपलब्धता आणि
+  आपल्या सदस्यतेसाठी कोटा तपासा. डीफॉल्ट्स उदाहरणे आहेत, हमी नाहीत.
+  सल्ला घ्या [मॉडेल उपलब्धता](https://learn.microsoft.com/azure/ai-services/openai/concepts/models).
+- चाचणी नंतर हटवू शकणारा समर्पित रिसोर्स ग्रुप निवडा.
 
 ```bash
-# आपल्या विभागात Microsoft Foundry मॉडेल्सची उपलब्धता तपासा
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --location eastus2
-
-# OpenAI कोटा तपासा (gpt-4.1 साठी उदाहरण)
-az cognitiveservices usage list \
-  --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
-
-# कंटेनर अ‍ॅप्स कोटा तपासा
-az provider show \
-  --namespace Microsoft.App \
-  --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
+az version
+az login
+az account show --query "{subscription:id,name:name}" -o table
+az cognitiveservices usage list --location eastus2 -o table
 ```
-  
-**किमान आवश्यक कोटा:**  
-- **मायक्रोसॉफ्ट फाउंड्री मॉडेल्स:** ३-४ मॉडेल तैनात प्रदेशांमध्ये  
-  - gpt-4.1: २०K TPM (टोकन्स प्रति मिनिट)  
-  - gpt-4.1-मिनी: १०K TPM  
-  - text-embedding-ada-002: ३०K TPM  
-  - **टीप:** काही प्रदेशांमध्ये gpt-4.1 साठी प्रतीक्षा यादी असू शकते - पहा [मॉडेल उपलब्धता](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)  
-- **कंटेनर अ‍ॅप्स:** व्यवस्थापित पर्यावरण + २-१० कंटेनर इंस्टन्सेस  
-- **AI Search:** स्टँडर्ड टियर (बेसिक व्हेक्टर शोधासाठी अपुरी)  
-- **Cosmos DB:** स्टँडर्ड प्राव्हिजन्ड थ्रूपुट  
 
-**कोटा अपुरी असल्यास:**  
-१. Azure पोर्टल → कोटा → वाढीची विनंती करा  
-२. किंवा Azure CLI वापरा:  
-   ```bash
-   az support tickets create \
-     --ticket-name "OpenAI-Quota-Increase" \
-     --severity "minimal" \
-     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
-   ```
-  
-३. उपलब्धतेसह पर्यायी प्रदेशांचा विचार करा  
+डीफॉल्ट ठिकाणे: प्राथमिक `eastus2`, दुय्यम `westus2`, एम्बेडिंग्ज `francecentral`;
+ग्रेडर डीफॉल्टप्रमाणे प्राथमिक प्रदेशावर आहे जोपर्यंत `graderLocation` प्रदान केलेले नाही.
+`--no-multi-region` दुय्यम आणि एम्बेडिंग्ज खाती टाळतो; तो
+ग्रेडर खाते टाळत नाही.
 
-## 🚀 जलद तैनाती
+शोध तेव्हा शुल्क आकारले जाते जेव्हा तैनात केलेले असते जरी ते रिक्त असले तरी. कंटेनर किमान नकल,
+संचयन पुनरावृत्ती, Cosmos DB विनंत्या/संचयन, मॉडेल टोकन्स, दस्तऐवज बुद्धिमत्ता
+कॉल्स, आणि लॉग इन्गेस्टशन/संचयन अतिरिक्त शुल्क वाढवू शकतात. **कोणताही निश्चित किंवा प्रमाणित शुल्क नाही**
+मासिक एकूण**. अचूक SKU चा अंदाज
+[Azure किमती कॅल्क्युलेटर](https://azure.microsoft.com/pricing/calculator/) मध्ये करा आणि
+वितरणापूर्वी बजेट सेट करा.
 
-### पर्याय १: Azure CLI वापरून
+### वितरण मोड
+
+हे सेटिंग्ज संसाधन आकार आहेत, **उत्पादन किंवा SLA प्रमाणपत्र नाहीत**:
+
+| मोड | चॅट / मिनी / एम्बेडिंग / ग्रेडर क्षमता युनिट्स | राउटर प्रतिकृती | फ्रंटएंड प्रतिकृती | शोध स्तर | संचयन |
+|---|---|---|---|---|---|
+| किमान | 10 / 10 / 20 / 5 | 0–3 | 1–2 | मूलभूत, 1 प्रतिकृती | Standard_LRS |
+| मानक | 20 / 15 / 30 / 15 | 1–3 | 1–2 | मानक, 1 प्रतिकृती | Standard_ZRS |
+| प्रीमियम | 40 / 30 / 60 / 30 | 1–10 | 1–5 | standard2, 2 प्रतिकृती | Standard_GRS |
+
+मॉडेल क्षमता युनिट्स हे मॉडेल/SKU-विशिष्ट आहेत; त्यांना एक सार्वत्रिक TPM
+हमी म्हणून एकत्र करू नका. प्रीमियम झोन-रिडंडंट कंटेनर अॅप सक्षम करत नाही: त्यासाठी
+अतिरिक्त नेटवर्किंग डिझाइन आवश्यक आहे. बेसिक सर्च व्हेक्टर सर्च समर्थन करते,
+सेवा मर्यादांच्या अधीन; ते व्हेक्टरशी प्रत्यक्षात असामंजस नाही.
+
+## 🚀 जलद वितरण
+
+पहिल्यांदा `azuredeploy.json` आणि `azuredeploy.parameters.json` पाहा. खालील कमांड्स
+**बिल करण्यायोग्य Azure संसाधने निर्माण करतात**; ते ऑफलाइन तपासणी नाहीत.
+
+रिपॉझिटरी रूटमधून:
 
 ```bash
-# टेम्पलेट फाइल्स क्लोन करा किंवा डाउनलोड करा
-git clone <repository-url>
 cd examples/retail-multiagent-arm-template
-
-# तैनाती स्क्रिप्टसाठी कार्यान्वित परवानगी द्या
-chmod +x deploy.sh
-
-# पूर्वनिर्धारित सेटिंग्जसह तैनात करा
-./deploy.sh -g myResourceGroup
-
-# प्रीमियम वैशिष्ट्यांसह उत्पादनासाठी तैनात करा
-./deploy.sh -g myProdRG -e prod -m premium -l eastus2
+bash deploy.sh --help
+bash deploy.sh -g retail-learning-rg -m minimal --no-multi-region
 ```
-  
 
-### पर्याय २: Azure पोर्टल वापरून
+स्क्रिप्ट त्याच्या स्वतःच्या निर्देशिकेशी संबंधित मार्ग वापरते, लॉगिन/टूल्स/आर्ग्युमेंट्स तपासते,
+संसाधन गट नसल्यास तयार करते, वितरण मान्य करते, प्राव्हीजन करते, आणि
+गुप्त नसलेले आउटपुट दाखवते. कोणतीही `jq`, डेटा भरती, गुप्त माहिती मिळवणे,
+किंवा वितरणानंतरचे अप्लिकेशन सेटअप आवश्यक नाही किंवा केले जात नाही.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)  
-
-### पर्याय ३: थेट Azure CLI वापरून
+स्क्रिप्टच्या डीफॉल्ट कमांड-लाइन मूल्यांमुळे संबंधित पॅरामीटर फाईल मधील मूल्ये ओव्हरराइड होतात.
+दुय्यम/तृतीयक प्रांतांसाठी सेटिंग्जसाठी पॅरामीटर फाईल संपादित करा; कोणत्याही पॅरामीटर ओव्हरराइडसाठी
+थेट CLI वितरण वापरा:
 
 ```bash
-# संसाधन समूह तयार करा
-az group create --name myResourceGroup --location eastus2
-
-# साचा तैनात करा
+az group create --name retail-learning-rg --location eastus2
 az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file azuredeploy.json \
-  --parameters azuredeploy.parameters.json
-```
-  
-
-## ⏱️ तैनाती वेळापत्रक
-
-### काय अपेक्षित आहे
-
-| टप्पा | कालावधी | काय होते |
-|-------|----------|--------------|
-| **टेम्पलेट सत्यापन** | ३०-६० सेकंद | Azure ARM टेम्पलेट सिंटॅक्स आणि पॅरामीटर्स सत्यापित करते |
-| **रिसोर्स ग्रुप स्थापना** | १०-२० सेकंद | रिसोर्स ग्रुप तयार करते (आवश्यक असल्यास) |
-| **OpenAI प्राव्हिजनिंग** | ५-८ मिनिटे | ३-४ OpenAI अकाउंटस तयार करते आणि मॉडेल्स तैनात करते |
-| **कंटेनर अ‍ॅप्स** | ३-५ मिनिटे | एन्व्हायर्नमेंट तयार करते आणि प्लेसहोल्डर कंटेनर तैनात करते |
-| **शोध व स्टोरेज** | २-४ मिनिटे | AI Search सेवा आणि स्टोरेज अकाउंटस तयार करते |
-| **Cosmos DB** | २-३ मिनिटे | डेटाबेस तयार करते आणि कंटेनर कॉन्फिगर करते |
-| **देखरेख सेटअप** | २-३ मिनिटे | Application Insights आणि Log Analytics सेट करते |
-| **RBAC कॉन्फिगरेशन** | १-२ मिनिटे | व्यवस्थापित ओळखी आणि परवानग्या कॉन्फिगर करते |
-| **एकूण तैनाती** | **१५-२५ मिनिटे** | संपूर्ण इन्फ्रास्ट्रक्चर तयार |  
-
-**तैनाती नंतर:**  
-- ✅ **इन्फ्रास्ट्रक्चर तयार:** सर्व Azure सेवा प्राव्हिजन्ड व चालू  
-- ⏱️ **अ‍ॅप्लिकेशन विकास:** ८०-१२० तास (तुमची जबाबदारी)  
-- ⏱️ **इंडेक्स कॉन्फिगरेशन:** १५-३० मिनिटे (तुमच्या स्कीमासाठी आवश्यक)  
-- ⏱️ **डेटा अपलोड:** डेटासेट आकारानुसार बदलते  
-- ⏱️ **चाचणी आणि सत्यापना:** २-४ तास  
-
----
-
-## ✅ तैनाती यशस्वीता तपासा
-
-### टप्पा १: संसाधन प्राव्हिजनिंग तपासा (२ मिनिटे)
-
-```bash
-# सर्व संसाधने यशस्वीपणे तैनात झाली आहेत याची पुष्टी करा
-az resource list \
-  --resource-group myResourceGroup \
-  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
-  --output table
-```
-  
-**अपेक्षित:** रिक्त तालिका (सर्व संसाधने "यशस्वी" स्थिती दर्शवितात)  
-
-### टप्पा २: मायक्रोसॉफ्ट फाउंड्री मॉडेल तैनाती तपासा (३ मिनिटे)
-
-```bash
-# सर्व OpenAI खाते यादी करा
-az cognitiveservices account list \
-  --resource-group myResourceGroup \
-  --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
-  --output table
-
-# मुख्य प्रदेशासाठी मॉडेल राबविण्याची तपासणी करा
-OPENAI_NAME=$(az cognitiveservices account list \
-  --resource-group myResourceGroup \
-  --query "[?kind=='OpenAI'] | [0].name" -o tsv)
-
-az cognitiveservices account deployment list \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --output table
-```
-  
-**अपेक्षित:**  
-- ३-४ OpenAI अकाउंट्स (प्राथमिक, दुय्यम, तृतीयक, मूल्यमापन प्रदेश)  
-- १-२ मॉडेल तैनाती प्रति अकाउंट (gpt-4.1, gpt-4.1-मिनी, text-embedding-ada-002)  
-
-### टप्पा ३: इन्फ्रास्ट्रक्चर एंडपॉइंट्स तपासा (५ मिनिटे)
-
-```bash
-# कंटेनर अ‍ॅप URL मिळवा
-az containerapp list \
-  --resource-group myResourceGroup \
-  --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
-  --output table
-
-# राउटर एंडपॉइंट चाचणी करा (ठांवधारक प्रतिमा प्रतिसाद देईल)
-ROUTER_URL=$(az containerapp show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --query "properties.configuration.ingress.fqdn" -o tsv)
-
-echo "Testing: https://$ROUTER_URL"
-curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expected)"
-```
-  
-**अपेक्षित:**  
-- कंटेनर अ‍ॅप्स "रनिंग" स्थिती दर्शवितात  
-- प्लेसहोल्डर nginx HTTP 200 किंवा 404 प्रतिसाद देतो (अद्याप अ‍ॅप्लिकेशन कोड नाही)  
-
-### टप्पा ४: मायक्रोसॉफ्ट फाउंड्री मॉडेल API प्रवेश तपासा (३ मिनिटे)
-
-```bash
-# OpenAI एंडपॉइंट आणि किल्ली मिळवा
-OPENAI_ENDPOINT=$(az cognitiveservices account show \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --query "properties.endpoint" -o tsv)
-
-OPENAI_KEY=$(az cognitiveservices account keys list \
-  --name $OPENAI_NAME \
-  --resource-group myResourceGroup \
-  --query "key1" -o tsv)
-
-# gpt-4.1 डिप्लॉयमेंटची चाचणी करा
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
-  -H "Content-Type: application/json" \
-  -H "api-key: $OPENAI_KEY" \
-  -d '{
-    "messages": [{"role": "user", "content": "Say hello"}],
-    "max_tokens": 10
-  }'
-```
-  
-**अपेक्षित:** JSON प्रतिसाद चर्चे पूर्णतेसह (OpenAI कार्यरत असल्याचे पुष्टी)  
-
-### काय काम करते विरुद्ध काय नाही
-
-**✅ तैनाती नंतर कार्यरत:**  
-- मायक्रोसॉफ्ट फाउंड्री मॉडेल्स तैनात आणि API कॉल्स स्वीकारत आहेत  
-- AI Search सेवा चालू (रिक्त, अजून इंडेक्स नाही)  
-- कंटेनर अ‍ॅप्स चालू (प्लेसहोल्डर nginx इमेजेस)  
-- स्टोरेज अकाउंट्स प्रवेशयोग्य व अपलोडसाठी तयार  
-- Cosmos DB डेटा ऑपरेशन्ससाठी तयार  
-- Application Insights इन्फ्रास्ट्रक्चर टेलिमेट्री गोळा करत आहे  
-- की व्हॉल्ट रहस्य संचयनासाठी तयार  
-
-**❌ अजून काम करत नाही (विकास आवश्यक):**  
-- एजंट एंडपॉइंट्स (अॅप्लिकेशन कोड अजून तैनात नाही)  
-- चॅट कार्यक्षमता (फ्रंटेंड + बॅकेंड अंमलबजावणी आवश्यक)  
-- शोध क्वेरिज (अजून शोध इंडेक्स तयार नाही)  
-- दस्तऐवज प्रक्रिया पाईपलाइन (डेटा अपलोड नाही)  
-- कस्टम टेलिमेट्री (अ‍ॅप्लिकेशन इन्स्ट्रुमेंटेशन आवश्यक)  
-
-**पुढील टप्पे:** [पोस्ट-तैनात कॉन्फिगरेशन](../../../../examples/retail-multiagent-arm-template) पाहा तुमचे अ‍ॅप्लिकेशन विकसित व तैनात करण्यासाठी  
-
----
-
-## ⚙️ कॉन्फिगरेशन पर्याय
-
-### टेम्पलेट पॅरामीटर्स
-
-| पॅरामीटर | प्रकार | डीफॉल्ट | वर्णन |
-|-----------|--------|---------|-------|
-| `projectName` | स्ट्रिंग | "retail" | सर्व संसाधन नावांसाठी प्रिफिक्स |
-| `location` | स्ट्रिंग | रिसोर्स ग्रुप स्थान | प्राथमिक तैनाती प्रदेश |
-| `secondaryLocation` | स्ट्रिंग | "westus2" | मल्टी-रेजिन तैनातीसाठी दुय्यम प्रदेश |
-| `tertiaryLocation` | स्ट्रिंग | "francecentral" | एम्बेडिंग मॉडेलसाठी प्रदेश |
-| `environmentName` | स्ट्रिंग | "dev" | पर्यावरणाचे नामांकन (dev/staging/prod) |
-| `deploymentMode` | स्ट्रिंग | "standard" | तैनाती कॉन्फिगरेशन (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | मल्टी-रेजिन तैनाती सक्षम करा |
-| `enableMonitoring` | bool | true | Application Insights आणि लॉगिंग सक्रिय करा |
-| `enableSecurity` | bool | true | की व्हॉल्ट आणि वाढीव सिक्युरिटी सक्षम करा |
-
-### पॅरामीटर्स सानुकूलित करणे
-
-`azuredeploy.parameters.json` संपादित करा:  
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "projectName": {
-      "value": "mycompany"
-    },
-    "environmentName": {
-      "value": "prod"
-    },
-    "deploymentMode": {
-      "value": "premium"
-    },
-    "location": {
-      "value": "eastus2"
-    }
-  }
-}
-```
-  
-
-## 🏗️ आर्किटेक्चर आढावा
-
-```mermaid
-graph TD
-    Frontend[फ्रंटेंड<br/>कंटेनर अॅप] --> Router[एजंट राऊटर<br/>कंटेनर अॅप] --> Agents[एजंट्स<br/>ग्राहक + इन्व्ह]
-    Router --> Search[एआय शोध<br/>व्हेक्टर डाटाबेस]
-    Router --> Models[माइक्रोसॉफ्ट फाउंड्री मॉडेल्स<br/>मल्टि-रीजन]
-    Agents --> Storage[साठा<br/>दस्तऐवज]
-    Search --> CosmosDB[कोस्मॉस DB<br/>चॅट इतिहास]
-    Models --> AppInsights[अॅप इनसाइट्स<br/>मॉनिटरिंग]
-    Storage --> KeyVault[की वॉल्ट<br/>सिक्रेट्स]
-```  
-
-## 📖 तैनाती स्क्रिप्ट वापर
-
-`deploy.sh` स्क्रिप्ट एक संवादात्मक तैनाती अनुभव प्रदान करते:  
-
-```bash
-# मदत दाखवा
-./deploy.sh --help
-
-# मूलभूत तैनाती
-./deploy.sh -g myResourceGroup
-
-# सानुकूल सेटिंग्जसह प्रगत तैनाती
-./deploy.sh \
-  -g myProductionRG \
-  -p companyname \
-  -e prod \
-  -m premium \
-  -l eastus2
-
-# बहु-प्रदेशाशिवाय विकास तैनाती
-./deploy.sh \
-  -g myDevRG \
-  -e dev \
-  -m minimal \
-  --no-multi-region \
-  --no-security
-```
-  
-
-### स्क्रिप्ट वैशिष्ट्ये
-
-- ✅ **पूर्वअटींचे सत्यापन** (Azure CLI, लॉगिन स्थिती, टेम्पलेट फायली)  
-- ✅ **रिसोर्स ग्रुप व्यवस्थापन** (जर नसेल तर तयार करते)  
-- ✅ **टेम्पलेट सत्यापन** तैनातीपूर्वी  
-- ✅ **प्रगती तपासणी** रंगीत आउटपुटसह  
-- ✅ **तैनाती आउटपुट्स** प्रदर्शित करणे  
-- ✅ **पोस्ट-तैनाती मार्गदर्शन**  
-
-## 📊 तैनाती देखरेख
-
-### तैनाती स्थिती तपासा
-
-```bash
-# वितरणांची यादी करा
-az deployment group list --resource-group myResourceGroup --output table
-
-# वितरण तपशील मिळवा
-az deployment group show \
-  --resource-group myResourceGroup \
-  --name retail-deployment-YYYYMMDD-HHMMSS
-
-# वितरण प्रगतीवर लक्ष ठेवा
-az deployment group create \
-  --resource-group myResourceGroup \
+  --resource-group retail-learning-rg \
+  --name retail-learning \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json \
-  --verbose
+  --parameters projectName=retail environmentName=dev \
+    deploymentMode=minimal enableMultiRegion=false
 ```
-  
 
-### तैनाती आउटपुट्स
+प्राव्हीजनिंग १५–४५ मिनिटे किंवा त्याहून अधिक वेळ लागू शकतो, आणि प्रादेशिक कोटा किंवा
+मॉडेल जीवनचक्र निर्बंधांवर अपयशी होऊ शकतो. अंधधुंद पुनर्प्रयत्न करू नका: प्रथम अपयशी ऑपरेशन वाचा.
 
-यशस्वी तैनाती नंतर खालील आउटपुट्स उपलब्ध आहेत:  
+## कॉन्फिगरेशन पर्याय
 
-- **फ्रंटेंड URL:** वेब इंटरफेससाठी सार्वजनिक एंडपॉइंट  
-- **राऊटर URL:** एजंट राऊटरसाठी API एंडपॉइंट  
-- **OpenAI एंडपॉइंट्स:** प्राथमिक आणि दुय्यम OpenAI सेवा एंडपॉइंट्स  
-- **शोध सेवा:** Azure AI Search सेवा एंडपॉइंट  
-- **स्टोरेज अकाउंट:** दस्तऐवजांसाठी स्टोरेज अकाउंटचे नाव  
-- **की व्हॉल्ट:** की व्हॉल्टचे नाव (जर सक्षम असेल तर)  
-- **अ‍ॅप्लिकेशन इनसाइट्स:** देखरेख सेवेचे नाव (जर सक्षम असेल तर)  
+| पॅरामीटर | टेम्प्लेटमधील डीफॉल्ट | अर्थ |
+|---|---|---|
+| `projectName` | आवश्यक (`retail` पॅरामीटर फाईलमध्ये) | ३–१० लहान अक्षरे/अंक |
+| `location` | संसाधन गट स्थान | प्राथमिक प्रांत (`eastus2` पॅरामीटर फाईलमध्ये) |
+| `secondaryLocation` | `westus2` | मिनी मॉडेल खाते प्रांत |
+| `tertiaryLocation` | `francecentral` | एम्बेडिंग्ज खाते प्रांत |
+| `graderLocation` | प्राथमिक प्रांत | स्वतंत्र ग्रेडर खाते प्रांत |
+| `environmentName` | `dev` | `dev`, `staging`, किंवा `prod`; फक्त नाव, हार्डनिंग टॉगल नाही |
+| `deploymentMode` | `standard` | SKU/क्षमता निवड |
+| `enableMultiRegion` | `true` | दुय्यम आणि एम्बेडिंग्ज अॅड करा |
+| `enableMonitoring` | `true` | Insights/workspace आणि पर्यावरण लॉग संकलन जोडा |
+| `enableSecurity` | `true` | फक्त रिक्त RBAC-सक्षम वॉल्ट तयार करा |
 
-## 🔧 पोस्ट-तैनाती: पुढील टप्पे
-> **📝 महत्त्वाचे:** इन्फ्रास्ट्रक्चर तैनात केले गेले आहे, परंतु तुम्हाला अनुप्रयोग कोड विकसित आणि तैनात करणे आवश्यक आहे.
+भ्रामक `openAiApiVersion` पॅरामीटर काढला गेला आहे: डेटा-प्लेन API आवृत्ती
+ARM संसाधन आवृत्त्या किंवा मॉडेल आवृत्त्यांना नियंत्रित करत नाही. मॉडेल नाव/आवृत्ती जोड्या
+`variables.modelDeployments` मध्ये आहेत; त्या वितरण SKU सह एकत्र तपासा.
 
-### टप्पा 1: एजंट अनुप्रयोग विकसित करा (तुमची जबाबदारी)
+## प्राव्हीजनिंग तपासा
 
-ARM टेम्पलेट **रिकामी कंटेनर अॅप्स** तयार करते ज्यात प्लेसहोल्डर nginx प्रतिमा असतात. तुम्हाला यासाठी करावे लागेल:
-
-**आवश्यक विकास:**
-1. **एजंट अंमलबजावणी** (30-40 तास)
-   - ग्राहक सेवा एजंट ज्यात gpt-4.1 एकत्रीकरण आहे
-   - इन्व्हेंटरी एजंट ज्यात gpt-4.1-मिनी एकत्रीकरण आहे
-   - एजंट राउटिंग लॉजिक
-
-2. **फ्रंटेंड विकास** (20-30 तास)
-   - चॅट इंटरफेस UI (React/Vue/Angular)
-   - फाइल अपलोड कार्यक्षमता
-   - प्रतिसाद रेंडरिंग आणि फॉरमॅटिंग
-
-3. **बॅकएंड सेवा** (12-16 तास)
-   - FastAPI किंवा Express राउटर
-   - प्रमाणीकरण मिडलवेयर
-   - टेलिमेट्री एकत्रीकरण
-
-**पहा:** [Architecture Guide](../retail-scenario.md) सविस्तर अंमलबजावणी नमुने आणि कोड उदाहरणांसाठी
-
-### टप्पा 2: AI शोध सूची सेट करा (15-30 मिनिटे)
-
-तुमच्या डेटा मॉडेलशी जुळणारी शोध सूची तयार करा:
+स्क्रिप्टच्या आउटपुटमधून किंवा `az deployment group list` मधून वितरण नाव वापरा.
+वर दिलेल्या थेट वितरणासाठी:
 
 ```bash
-# शोध सेवा तपशील मिळवा
-SEARCH_NAME=$(az search service list \
-  --resource-group myResourceGroup \
-  --query "[0].name" -o tsv)
-
-SEARCH_KEY=$(az search admin-key show \
-  --service-name $SEARCH_NAME \
-  --resource-group myResourceGroup \
-  --query "primaryKey" -o tsv)
-
-# आपल्या स्कीमासह निर्देशांक तयार करा (उदाहरण)
-curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
-  -H "Content-Type: application/json" \
-  -H "api-key: ${SEARCH_KEY}" \
-  -d '{
-    "name": "products",
-    "fields": [
-      {"name": "id", "type": "Edm.String", "key": true},
-      {"name": "title", "type": "Edm.String", "searchable": true},
-      {"name": "content", "type": "Edm.String", "searchable": true},
-      {"name": "category", "type": "Edm.String", "filterable": true},
-      {"name": "content_vector", "type": "Collection(Edm.Single)", 
-       "searchable": true, "dimensions": 1536, "vectorSearchProfile": "default"}
-    ],
-    "vectorSearch": {
-      "algorithms": [{"name": "default", "kind": "hnsw"}],
-      "profiles": [{"name": "default", "algorithm": "default"}]
-    }
-  }'
+RG=retail-learning-rg
+DEPLOYMENT=retail-learning
+az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.provisioningState -o tsv
+az deployment operation group list -g "$RG" -n "$DEPLOYMENT" -o table
+az resource list -g "$RG" -o table
 ```
 
-**साधने:**
-- [AI Search Index Schema Design](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [Vector Search Configuration](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+अपेक्षित: वितरण स्थिती `Succeeded`. अपयशासाठी, ऑपरेशन त्रुटी तपशील तपासा.
+केवळ संसाधन-सूची आउटपुट हा विश्वासार्ह प्राव्हीजनिंग-स्थिती तपासणी नाही.
 
-### टप्पा 3: तुमचा डेटा अपलोड करा (वेळ वेगळी)
-
-एकदा तुमच्याकडे उत्पादन डेटा आणि दस्तऐवज असले की:
+प्लेसहोल्डर **root** चाचणी करा, अस्तित्त्वात नसलेल्या एजंट एंडपॉइंटचा नाही:
 
 ```bash
-# संग्रहण खात्याचे तपशील मिळवा
-STORAGE_NAME=$(az storage account list \
-  --resource-group myResourceGroup \
-  --query "[0].name" -o tsv)
-
-STORAGE_KEY=$(az storage account keys list \
-  --account-name $STORAGE_NAME \
-  --resource-group myResourceGroup \
-  --query "[0].value" -o tsv)
-
-# आपले दस्तऐवज अपलोड करा
-az storage blob upload-batch \
-  --destination documents \
-  --source /path/to/your/product/docs \
-  --account-name $STORAGE_NAME \
-  --account-key $STORAGE_KEY
-
-# उदाहरण: एकाच फाइल अपलोड करा
-az storage blob upload \
-  --container-name documents \
-  --name "product-manual.pdf" \
-  --file /path/to/product-manual.pdf \
-  --account-name $STORAGE_NAME \
-  --account-key $STORAGE_KEY
+ROUTER_URL=$(az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.outputs.routerUrl.value -o tsv)
+curl --fail-with-body "$ROUTER_URL"
 ```
 
-### टप्पा 4: तुमचे अनुप्रयोग तयार करा आणि तैनात करा (8-12 तास)
+अपेक्षित: HTTP 200 hello-world पेज, **चॅट प्रतिसाद नाही**. HTTP त्रुटी
+यशस्वी सत्यापन म्हणून मोजली जात नाही.
 
-एकदा तुम्ही तुमचा एजंट कोड विकसित केला की:
+वास्तविक प्राथमिक मॉडेल इन्फरन्स (बिल करण्यायोग्य) तपासण्यासाठी:
 
 ```bash
-# 1. Azure कंटेनर रजिस्ट्री तयार करा (आवश्यक असल्यास)
-az acr create \
-  --name myregistry \
-  --resource-group myResourceGroup \
-  --sku Basic
-
-# 2. एजंट राउटर इमेज तयार करा आणि पुश करा
-docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
-az acr login --name myregistry
-docker push myregistry.azurecr.io/agent-router:v1
-
-# 3. फ्रंटेंड इमेज तयार करा आणि पुश करा
-docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
-docker push myregistry.azurecr.io/frontend:v1
-
-# 4. आपल्या इमेजेससह कंटेनर ॲप्स अपडेट करा
-az containerapp update \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/agent-router:v1
-
-az containerapp update \
-  --name retail-frontend \
-  --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/frontend:v1
-
-# 5. पर्यावरणीय चल सेट करा
-az containerapp update \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --set-env-vars \
-    OPENAI_ENDPOINT=secretref:openai-endpoint \
-    OPENAI_KEY=secretref:openai-key \
-    SEARCH_ENDPOINT=secretref:search-endpoint \
-    SEARCH_KEY=secretref:search-key
+OPENAI_ENDPOINT=$(az deployment group show -g "$RG" -n "$DEPLOYMENT" \
+  --query properties.outputs.openAiEndpointPrimary.value -o tsv)
+OPENAI_NAME=$(az cognitiveservices account list -g "$RG" \
+  --query "[?kind=='OpenAI' && contains(name, '-openai-primary-')].name | [0]" -o tsv)
+OPENAI_KEY=$(az cognitiveservices account keys list -g "$RG" -n "$OPENAI_NAME" \
+  --query key1 -o tsv)
+curl --fail-with-body \
+  "${OPENAI_ENDPOINT%/}/openai/deployments/gpt-4.1-chat/chat/completions?api-version=2024-10-21" \
+  -H "Content-Type: application/json" -H "api-key: $OPENAI_KEY" \
+  -d '{"messages":[{"role":"user","content":"Say hello"}],"max_tokens":20}'
+unset OPENAI_KEY
 ```
 
-### टप्पा 5: तुमचे अनुप्रयोग चाचणी करा (2-4 तास)
+अपेक्षित: JSON मध्ये `choices` आणि `usage`. वितरण नाव
+आहे `gpt-4.1-chat`, अंतर्निहित मॉडेल नाव नाही `gpt-4.1`.
+
+## 🔧 वितरणानंतर: पुढील टप्पे
+
+हा एक **विकास बॅकलॉग** आहे, पूर्ण झालेले व्यायाम नाही:
+
+1. प्रमाणीकरण केलेले ग्राहक/इन्व्हेंटरी एजंट्स आणि राउटर करार लागू करा.
+2. फ्रंटएंड लागू करा आणि त्याची कॉन्फिगरेशन तपासा.
+3. तुमच्या एम्बेडिंग मॉडेलशी जुळणारा एक शोध निर्देशांक तयार करा आणि तो भरून काढा,
+   आणि दस्तऐवज अपयश व अद्यतने हाताळा.
+4. एक रजिस्ट्र्री तयार करा आणि इमेज-पुल ओळख/परवानग्या कॉन्फिगर करा.
+5. वास्तविक इमेजेस तयार करा आणि पुश करा. चाचणीपूर्वी कंटेनर अॅप इनग्रेश पोर्ट्स आणि
+   प्रॉब्ज त्या इमेजेसशी जुळवून घ्या; येथे पोर्ट 80 प्लेसहोल्डर्ससाठी आहे.
+6. गुप्त माहिती किंवा व्यवस्थापित ओळखी आणि स्कोप केलेले डेटा-प्लेन रोल कॉन्फिगर करा. करु नका
+   संदर्भ काल्पनिक गुप्त नावे: हे टेम्पलेट कोणतीही अनुप्रयोग गुपिते तयार करत नाही.
+7. अनुप्रयोगांची साधने लावा, अलर्ट्स कॉन्फिगर करा, अपयश/पुनर्प्राप्तीची चाचणी करा, आणि प्रतिनिधिक निकष आणि मानवी पुनरावलोकनासह
+   निकालांचे मूल्यांकन करा.
+
+डिझाइन मर्यादा पाहण्यासाठी [architecture blueprint](../retail-scenario.md) पहा.
+
+## समस्या निराकरण आणि सुरक्षा मर्यादा
+
+- **मॉडेल उपलब्ध नाही:** मॉडेल/आवृत्ती/SKU, प्रदेश, आणि सदस्यता कोटा तपासा;
+  स्क्रिप्ट मॉडेल कॅटलॉगची पूर्वतपासणी करत नाही.
+- **मॉनिटरिंग डिसेबल आहे:** पर्यावरण लॉग गंतव्य हे `none` आहे, चुकीची रिक्त Log Analytics संरचना नाही.
+
+- **केवळ प्लेसहोल्डर्स:** `/chat`, एजंट मूल्यांकन, आणि फाईल इनजेशन अस्तित्वात नाहीत.
+- **नेटवर्क/ओळख:** सार्वजनिक एंडपॉइंट्स आणि स्थानिक प्रमाणपत्र सक्रिय आहेत.
+  केवळ Key Vault RBAC सक्षम केल्याने भूमिका नियुक्ती किंवा ओळखी तयार होत नाहीत.
+- **उत्पादन:** प्रमाणपत्र, स्कोप्ड ओळखी, गुपित व्यवस्थापन,
+  आवश्यकतेनुसार खासगी नेटवर्किंग, उपलब्धता डिझाइन, आणि संचालन चाचण्या जोडा.
+  बहुप्रादेशीय मॉडेल खाते एकटेच फेलओव्हर प्रदान करत नाहीत.
+
+## साफसफाई
+
+येथे कोणताही AZD प्रकल्प नाही; `azd down` ही साफसफाईची आज्ञा नाही.
+गटात केवळ तुमचे शिक्षण संसाधने आहेत याची खात्री केल्यानंतर:
 
 ```bash
-# आपल्या अनुप्रयोगाचा URL मिळवा
-ROUTER_URL=$(az containerapp show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --query "properties.configuration.ingress.fqdn" -o tsv)
-
-# एजंट एंडपॉइंटची चाचणी करा (एकदा आपला कोड डिप्लॉय झाल्यानंतर)
-curl -X POST "https://${ROUTER_URL}/chat" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "message": "Hello, I need help with my order",
-    "agent": "customer"
-  }'
-
-# अनुप्रयोगाचे लॉग तपासा
-az containerapp logs show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --follow
+az group delete --name retail-learning-rg --yes
+az group exists --name retail-learning-rg
 ```
 
-### अंमलबजावणी साधने
+हटवण्याच्या समाप्तीनंतर अपेक्षित: `false`. Key Vault आणि Cognitive Services
+सॉफ्ट-डिलीट केलेली संसाधने नावे राखू शकतात; पूर्णपणे काढणे योग्य परवानग्या आवश्यक आहे.
+विलंबित वापर शुल्कांसाठी खर्च व्यवस्थापन तपासा.
 
-**आर्किटेक्चर आणि डिझाइन:**
-- 📖 [Complete Architecture Guide](../retail-scenario.md) - सविस्तर अंमलबजावणी नमुने
-- 📖 [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
-
-**कोड उदाहरणे:**
-- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG नमुना
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - एजंट फ्रेमवर्क (C#)
-- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - एजंट ऑर्केस्ट्रेशन (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - मल्टी-एजंट संभाषणे
-
-**अनुमानित एकूण प्रयत्न:**
-- इन्फ्रास्ट्रक्चर तैनाती: 15-25 मिनिटे (✅ पूर्ण)
-- अनुप्रयोग विकास: 80-120 तास (🔨 तुमचे काम)
-- चाचणी आणि ऑप्टिमायझेशन: 15-25 तास (🔨 तुमचे काम)
-
-## 🛠️ समस्या निवारण
-
-### सामान्य समस्या
-
-#### 1. Microsoft Foundry Models कोटा ओलांडला
-
-```bash
-# सध्याच्या कोटा वापराची तपासणी करा
-az cognitiveservices usage list --location eastus2
-
-# कोटा वाढीची विनंती करा
-az support tickets create \
-  --ticket-name "OpenAI-Quota-Increase" \
-  --severity "minimal" \
-  --description "Request quota increase for Microsoft Foundry Models in region X"
-```
-
-#### 2. कंटेनर अॅप्स तैनात करणे अयशस्वी
-
-```bash
-# कंटेनर अॅप लॉग तपासा
-az containerapp logs show \
-  --name retail-router \
-  --resource-group myResourceGroup \
-  --follow
-
-# कंटेनर अॅप पुनः सुरू करा
-az containerapp revision restart \
-  --name retail-router \
-  --resource-group myResourceGroup
-```
-
-#### 3. शोध सेवा सुरुवात
-
-```bash
-# शोध सेवा स्थिती तपासा
-az search service show \
-  --name <search-service-name> \
-  --resource-group myResourceGroup
-
-# शोध सेवा संलग्नता तपासा
-curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
-  -H "api-key: <search-admin-key>"
-```
-
-### तैनात पडताळणी
-
-```bash
-# सर्व संसाधने तयार असल्याची खात्री करा
-az resource list \
-  --resource-group myResourceGroup \
-  --output table
-
-# संसाधनांच्या आरोग्याची तपासणी करा
-az resource list \
-  --resource-group myResourceGroup \
-  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
-  --output table
-```
-
-## 🔐 सुरक्षा विचार
-
-### की व्यवस्थापन
-- सर्व गुपिते Azure Key Vault मध्ये संग्रहित केली जातात (सक्रिय केल्यावर)
-- कंटेनर अॅप्स प्रमाणीकरणासाठी व्यवस्थापित ओळख वापरतात
-- स्टोरेज खाते सुरक्षित डीफॉल्टसह (फक्त HTTPS, सार्वजनिक ब्लॉब प्रवेश नाही)
-
-### नेटवर्क सुरक्षा
-- कंटेनर अॅप्स शक्य तिथे आंतरिक नेटवर्किंग वापरतात
-- शोध सेवा खासगी एंडपॉइंट्स पर्यायासह कॉन्फिगर केलेली
-- Cosmos DB आवश्यक कमीत कमी परवानग्यांसह कॉन्फिगर केलेले
-
-### RBAC कॉन्फिगरेशन
-```bash
-# व्यवस्थापित ओळखीसाठी आवश्यक भूमिका नियुक्त करा
-az role assignment create \
-  --assignee <container-app-managed-identity> \
-  --role "Cognitive Services OpenAI User" \
-  --scope <openai-resource-id>
-```
-
-## 💰 खर्च ऑप्टिमायझेशन
-
-### खर्च अंदाज (मासिक, USD)
-
-| मोड | OpenAI | कंटेनर अॅप्स | शोध | स्टोरेज | एकूण अंदाज |
-|------|--------|----------------|--------|---------|------------|
-| मिनिमल | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
-| स्टँडर्ड | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
-| प्रीमियम | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
-
-### खर्च निरीक्षण
-
-```bash
-# बजेट अलर्ट सेट करा
-az consumption budget create \
-  --account-name <subscription-id> \
-  --budget-name "retail-budget" \
-  --amount 500 \
-  --time-grain Monthly \
-  --start-date 2024-01-01 \
-  --end-date 2024-12-31
-```
-
-## 🔄 अद्यतने आणि देखभाल
-
-### टेम्पलेट अद्यतने
-- ARM टेम्पलेट फाइल्ससाठी आवृत्ती नियंत्रण वापरा
-- बदल प्रथम विकास वातावरणात तपासा
-- अद्यतनांसाठी इन्क्रीमेंटल डिप्लॉयमेंट मोड वापरा
-
-### साधन अद्यतने
-```bash
-# नवीन पॅरामीटर्ससह अद्ययावत करा
-az deployment group create \
-  --resource-group myResourceGroup \
-  --template-file azuredeploy.json \
-  --parameters azuredeploy.parameters.json \
-  --mode Incremental
-```
-
-### बॅकअप आणि पुनर्प्राप्ती
-- Cosmos DB स्वयंचलित बॅकअप सक्रिय
-- Key Vault सॉफ्ट डिलीटसाठी सक्रिय
-- कंटेनर अॅप आवृत्त्या रोलबॅकसाठी राखून ठेवल्या जातात
-
-## 📞 समर्थन
-
-- **टेम्पलेट समस्या:** [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Azure समर्थन:** [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **समुदाय:** [Azure AI Discord](https://discord.gg/microsoft-azure)
-
----
-
-**⚡ तुमचा मल्टी-एजंट सोल्यूशन तैनात करण्यासाठी तयार आहात?**
-
-सुरू करा: `./deploy.sh -g myResourceGroup`
+[समस्या अहवाल द्या](https://github.com/microsoft/AZD-for-beginners/issues) ·
+[Azure AI Search](https://learn.microsoft.com/azure/search/) ·
+[Container Apps](https://learn.microsoft.com/azure/container-apps/)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **अस्वीकरण**:
-हा दस्तऐवज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून अनुवादित करण्यात आला आहे. आम्ही अचूकतेसाठी प्रयत्न करतो, तरीही कृपया लक्षात घ्या की स्वयंचलित अनुवादांमध्ये चुका किंवा अचूकतेतील त्रुटी असू शकतात. मूळ दस्तऐवज त्याच्या स्थानिक भाषेत अधिकृत स्रोत मानला जाण्याचा आग्रह आहे. महत्त्वाच्या माहितींसाठी व्यावसायिक मानवी अनुवाद करण्याची शिफारस केली जाते. या अनुवादाचा वापर केल्यामुळे झालेल्या कोणत्याही गैरसमजुती किंवा चुकीच्या अर्थ लावणीबद्दल आम्ही जबाबदार नाही.
+हा दस्तऐवज AI भाषांतर सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) चा वापर करून अनुवादित केला आहे. जरी आम्ही अचूकतेसाठी प्रयत्न करतो, तरी कृपया लक्षात घ्या की स्वयंचलित भाषांतरांमध्ये त्रुटी किंवा अचूकतेची कमतरता असू शकते. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानला पाहिजे. महत्त्वाची माहिती असल्यास, व्यावसायिक मानवी भाषांतराची शिफारस केली जाते. या भाषांतराच्या वापरामुळे उद्भवणाऱ्या कोणत्याही गैरसमज किंवा चुकीच्या अर्थलावणीसाठी आम्ही जबाबदार नाही.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
