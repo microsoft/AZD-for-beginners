@@ -1,95 +1,97 @@
-# មគ្គុទេសក៍ដំឡើង និងតំឡើង
+# មគ្គុទេសក៍ការដំឡើង និងការតំឡើង
 
-**ការបើកទស្សនៈជាតារាង៖**
-- **📚 ផ្ទះមុខវិជ្ជា**: [AZD សម្រាប់អ្នកចាប់ផ្ដើម](../../README.md)
-- **📖 ជាតារាងបច្ចុប្បន្ន**: ជាតារាងទី 1 - មូលដ្ឋាន និងចាប់ផ្ដើមយ៉ាងរហ័ស
-- **⬅️ មុន**: [AZD ជាលក្ខណ:មូលដ្ឋាន](azd-basics.md)
-- **➡️ បន្ទាប់**: [គម្រោង​ដំបូងរបស់អ្នក](first-project.md)
-- **🚀 ជាតារាងបន្ទាប់**: [ជាតារាងទី 2: អភិវឌ្ឍន៍ផ្តោតលើ AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**ការរុករកជំពូក៖**
+- **📚 ទំព័រដើមវគ្គសិក្សា**: [AZD សម្រាប់អ្នកដំបូង](../../README.md)
+- **📖 ជំពូកបច្ចុប្បន្ន**: ជំពូក 1 - មូលដ្ឋាន និងការចាប់ផ្តើមយ៉ាងរហ័ស
+- **⬅️ ផ្ទៅមុន**: [មូលដ្ឋាន AZD](azd-basics.md)
+- **➡️ បន្ទាប់**: [គម្រោងដំបូងរបស់អ្នក](first-project.md)
+- **🚀 ជំពូកបន្ទាប់**: [ជំពូក 2៖ ការអភិវឌ្ឍន៍ផ្អែកលើ AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## មុខងារ
+## ការណែនាំ
 
-មគ្គុទេសក៍ពេញលេញនេះនឹងដឹកនាំអ្នកតាមដំណាក់កាលដំឡើង និងកំណត់រចនាសម្ព័ន្ធ Azure Developer CLI (azd) លើប្រព័ន្ធរបស់អ្នក។ អ្នកនឹងរៀនពីវិធីដំឡើងជាច្រើនសម្រាប់ប្រព័ន្ធប្រតិបត្តិការផ្សេងៗ ការតំឡើងការផ្ទៀងផ្ទាត់តំណាង អ្នកផ្ទាល់ខ្លួន និងការកំណត់រចនាសម្ព័ន្ធដំបូងដើម្បីត្រៀមបរិស្ថានអភិវឌ្ឍន៍របស់អ្នកសម្រាប់ការដាក់ពាក្យបង្ហាញ Azure។
+មគ្គុទេសក៍បង្ហាញពេញលេញនេះ នឹងដឹកនាំអ្នកឆ្លងកាត់ការដំឡើង និងការកំណត់រចនាសម្ព័ន្ធ Azure Developer CLI (azd) លើប្រព័ន្ធរបស់អ្នក។ អ្នកនឹងសិក្សារបៀបដំឡើងជាច្រើនសម្រាប់ប្រព័ន្ធប្រតិបត្តិការ ផ្នែកការតំឡើងកំណត់សិទ្ធិ និងការកំណត់បឋម ដើម្បីរៀបចំបរិស្ថានអភិវឌ្ឍន៍របស់អ្នកសម្រាប់ការចេញផ្សាយទៅ Azure។
 
 ## គោលបំណងរៀន
 
-នៅចុងការសិក្សានេះ អ្នកនឹងអាច:
-- ដំឡើង Azure Developer CLI សម្រេចលើប្រព័ន្ធប្រតិបត្តិការរបស់អ្នក
-- កំណត់រចនាសម្ព័ន្ធការផ្ទៀងផ្ទាត់តំណាងជាមួយ Azure ក្នុងវិធីជាច្រើន
-- កំណត់បរិស្ថានអភិវឌ្ឍន៍ជាមួយលក្ខខណ្ឌទាមទារដ៏ចាំបាច់
-- យល់ដឹងពីជម្រើសការដំឡើងផ្សេងៗ និងពេលវេលានៃការប្រើប្រាស់
-- ជួសជុលបញ្ហាប្រឈមនៅពេលដំឡើង និងតំឡើង
+តាមចប់មេរៀននេះ អ្នកនឹង:
+- ដំឡើង Azure Developer CLI បានជោគជ័យលើប្រព័ន្ធប្រតិបត្តិការបស់អ្នក
+- កំណត់សិទ្ធិការចូលអ្នកជាមួយ Azure ដោយប្រើវិធីសាស្រ្តច្រើន
+- រៀបចំបរិស្ថានអភិវឌ្ឍន៍របស់អ្នកជាមួយអ្វីដែលត្រូវការចាំបាច់
+- យល់ដឹងអំពីជម្រុងការដំឡើងផ្សេងៗ និងពេលដែលត្រូវប្រើមួយម្ដងៗ
+- ដោះស្រាយបញ្ហាទូទៅនៃការដំឡើង និងការតំឡើង
 
-## លទ្ធផលការសិក្សា
+## លទ្ធផលរៀន
 
 បន្ទាប់ពីបញ្ចប់មេរៀននេះ អ្នកនឹងអាច:
 - ដំឡើង azd ដោយប្រើវិធីសមរម្យសម្រាប់វេទិការបស់អ្នក
-- ផ្ទៀងផ្ទាត់តំណាងជាមួយ Azure ដោយប្រើ azd auth login
-- ធ្វើតេស្តការដំឡើង និងរបៀបបញ្ជាដំបូងនៃ azd
-- កំណត់បរិស្ថានអភិវឌ្ឍន៍សម្រាប់ប្រើប្រាស់ azd យ៉ាងមានប្រសិទ្ធភាព
-- ដោះស្រាយបញ្ហាដំឡើងទៀងទាត់ដោយខ្លួនឯង
+- បញ្ចាក់អត្តសញ្ញាណជាមួយ Azure ដោយប្រើ azd auth login
+- បញ្ជាក់ពិនិត្យការដំឡើង និងសាកល្បងពាក្យបញ្ជាឋ្លីៗរបស់ azd
+- កំណត់បរិស្ថានអភិវឌ្ឍន៍របស់អ្នកសម្រាប់ប្រើប្រាស់ azd ដោយមានប្រសិទ្ធិភាព
+- ដោះស្រាយបញ្ហាដំឡើងទូទៅដោយឯករាជ្យ
 
-មគ្គុទេសក៍នេះនឹងជួយអ្នកដំឡើង និងកំណត់រចនាសម្ព័ន្ធ Azure Developer CLI លើប្រព័ន្ធរបស់អ្នក មិនគិតថាបរិស្ថានអភិវឌ្ឍន៍ ឬប្រព័ន្ធប្រតិបត្តិការណាឡើយ។
+មគ្គុទេសក៍នេះនឹងជួយអ្នកដំឡើង និងកំណត់រចនាសម្ព័ន្ធ Azure Developer CLI លើប្រព័ន្ធរបស់អ្នក មិនថាអ្នកប្រើប្រព័ន្ធប្រតិបត្តិការ ឬបរិស្ថានអភិវឌ្ឍន៍អ្វី។
 
-## លក្ខខណ្ឌចាំបាច់
+## តម្រូវការមុន
 
-មុនពេលដំឡើង azd សូមប្រាកដថាអ្នកមានៈ
-- **ការជាវ Azure** - [បង្កើតគណនីឥតគិតថ្លៃ](https://azure.microsoft.com/free/)
-- **Azure CLI** (ជាជម្រើស) - សម្រាប់ឧទាហរណ៍ដែលបញ្ជាក់ត្រូវរត់ `az`; azd ផ្ទៀងផ្ទាត់ដោយឡែក
-- **Git** - សម្រាប់ថតពិន្ទុគំរូ និងការត្រួតពិនិត្យកំណែ
-- **Docker** (ជាជម្រើស) - សម្រាប់កម្មវិធីជាបន្ទះ
+មុនពេលដំឡើង azd សូមប្រាកដថាអ្នកមាន:
+- **ការជាវប្រើប្រាស់ Azure** - [បង្កើតគណនីឥតគិតថ្លៃ](https://azure.microsoft.com/free/)
+- **Azure CLI** (ជាជម្រើស) - សម្រាប់ឧទាហរណ៍ដែលបញ្ជូលបញ្ជាកើតឡើងនៅពេលច្បាស់លាស់ `az`; azd ចូលសិទ្ធដោយឯករាជ្យ
+- **Git** - សម្រាប់ចម្លងគំរូ និងគ្រប់គ្រងកំណែ
+- **Docker** (ជាជម្រើស) - សម្រាប់កម្មវិធីផ្ទុកក្នុងកុងតឺន័រ
 
-## វិធីសាស្រ្តដំឡើង
+**ផ្លូវ Foundry GA ជំពូក 2៖** ប្រើ AZD **1.37.0 ឬក្រោយពីនេះ**, ធ្វើការតំឡើងបណ្ណែកម្មវិធីជាមួយ `azd ext install microsoft.foundry`, ហើយប្រើ Python **3.13+** និង **uv** បច្ចុប្បន្នសម្រាប់គំរូ hosted-agent។ របៀបបញ្ចេញកូដរបស់វាបង្កើតពីចម្ងាយ ដូច្នេះ វាមិនត្រូវការការបង្កើត Docker នៅក្នុងកុំព្យូទ័រប្រព័ន្ធមូលដ្ឋានទេ។ សិទ្ធិ Foundry, ការតែងតាំងម៉ូដែលតំបន់, និងគណនីគត់ត្រូវបានទាមទារ; សូមមើល [ការកំណត់ hosted-agent](../chapter-02-ai-development/microsoft-foundry-integration.md#1-prepare-and-initialize)។
+
+## វិធីសាស្រ្តតំឡើង
 
 ### Windows
 
-#### ជម្រើសទី 1: Windows Package Manager (ផ្ដល់អនុសាសន៍)
+#### ជម្រើស 1: Windows Package Manager (កំណត់អត្តសញ្ញាណ)
 ```cmd
 winget install microsoft.azd
 ```
 
-#### ជម្រើសទី 2: ស្គ្រីបដំឡើង PowerShell
+#### ជម្រើស 2: ស្ក្រីប PowerShell ដើម្បីតំឡើង
 ```powershell
 # Useful when winget is unavailable
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### ជម្រើសទី 3: Chocolatey
+#### ជម្រើស 3: Chocolatey
 ```cmd
 choco install azd
 ```
 
-#### ជម្រើសទី 4: ដំឡើងដោយដៃ
-1. ទាញយកប្រេកង់ថ្មីពី [GitHub](https://github.com/Azure/azure-dev/releases)
-2. ដកស្រង់ចេញទៅ `C:\Program Files\azd\`
-3. បន្ថែមទៅអថេរ PATH
+#### ជម្រើស 4: តំឡើងដោយដៃ
+1. ទាញយកជំណែកថ្មីបំផុតពី [GitHub](https://github.com/Azure/azure-dev/releases)
+2. ដកស្រង់ទៅ `C:\Program Files\azd\`
+3. បន្ថែមទៅអថេរសៀវភៅ PATH ចលនា
 
 ### macOS
 
-#### ជម្រើសទី 1: Homebrew (ផ្ដល់អនុសាសន៍)
+#### ជម្រើស 1: Homebrew (កំណត់អត្តសញ្ញាណ)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### ជម្រើសទី 2: ស្គ្រីបដំឡើង
+#### ជម្រើស 2: ស្ក្រីបសម្រាប់តំឡើង
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### ជម្រើសទី 3: ដំឡើងដោយដៃ
-ទាញយកឯកសារដែលសមស្របសម្រាប់សំណង់ macOS របស់អ្នកពី [the release assets](https://github.com/Azure/azure-dev/releases) ដកស្រង់វា ហើយបន្ថែមប៊ីណារី `azd` ទៅក្នុង `PATH` របស់អ្នក។
+#### ជម្រើស 3: តំឡើងដោយដៃ
+ទាញយកឯកសារសង្ខេបសម្រាប់ស្ថាបត្យកម្ម macOS របស់អ្នកពី [assets របស់ការចេញផ្សាយ](https://github.com/Azure/azure-dev/releases), ដកស្រង់វា ហើយបន្ថែម `azd` ឯកសារបញ្ចូលទៅក្នុង `PATH` របស់អ្នក។
 
 ### Linux
 
-#### ជម្រើសទី 1: ស្គ្រីបដំឡើង (ផ្ដល់អនុសាសន៍)
+#### ជម្រើស 1: ស្ក្រីបតំឡើង (កំណត់អត្តសញ្ញាណ)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### ជម្រើសទី 2: Package Managers
+#### ជម្រើស 2: Package Managers
 
-**ដំឡើងដោយដៃពី release assets:**
+**តំឡើងដោយដៃពី assets នៃការចេញផ្សាយ៖**
 ```bash
 # Download the latest archive for your Linux architecture from:
 # https://github.com/Azure/azure-dev/releases
@@ -98,13 +100,13 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 ### GitHub Codespaces
 
-មាន Codespaces និងបរិស្ថាន dev container ពីមុនដែលរួមបញ្ចូល `azd` ប៉ុន្តែអ្នកគួរតែបញ្ជាក់ឲ្យបានប្រាកដជាងការសន្មត់វា:
+បន្ទប់ Codespaces និងបរិយាកាស dev container មួយចំនួនមានរួចហើយ `azd` ប៉ុន្តែអ្នកគួរត្រូវពិនិត្យវាប្រក្រតីមុនមិនអាចគិតថាវាមាន។
 
 ```bash
 azd version
 ```
 
-ប្រសិនបើ `azd` ខ្វះ ត្រូវដំឡើងវាជាមួយស្គ្រីបធម្មតាដូចក្នុងបរិស្ថាន។
+ប្រសិនបើ `azd` ខ្វះ, តំឡើងវាជាមួយស្ក្រីបស្តង់ដារសម្រាប់បរិយាកាស។
 
 ### Docker
 
@@ -116,11 +118,11 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure
 alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-កុងតឺន័រព្រោះពន្លឺនេះមិនរក្សាស្ថានភាពការចូលរបាក់មួយឬក៏ច្រើនដង។ សម្រាប់ការដាក់ពាក្យជាច្រើន ដើម្បីប្រើប្រាស់ [dev container setup](dev-containers.md); ការសាងសង់ container ក៏ត្រូវការប្រព័ន្ធដំណើរការ Docker ដែលអាចចូលពីខាងក្នុង។
+ធុង ephemeral នេះមិនរក្សាស្ថានភាពចូលប្រើរវាងរត់ឡើងទេ។ សម្រាប់ការបញ្ចេញកូដម្តងហើយម្តងទៀត, សូមប្រើ [ការកំណត់ dev container](dev-containers.md); ការបង្កើតធុងក៏ត្រូវការដំណើរការដែលអាចចូលដំណើរការពីក្នុងធុង។
 
-## ✅ បញ្ជាក់ការដំឡើង
+## ✅ ផ្ទៀងផ្ទាត់ការតំឡើង
 
-បន្ទាប់ពីដំឡើង សូមបញ្ជាក់ថា azd ធ្វើការបានត្រឹមត្រូវ៖
+បន្ទាប់ពីតំឡើង, ផ្ទៀងផ្ទាត់ថា azd កំពុងដំណើរការបានត្រឹមត្រូវ៖
 
 ```bash
 # Check version
@@ -133,26 +135,26 @@ azd --help
 azd template list
 ```
 
-លទ្ធផលដែលរំពឹងទុក៖
+លទ្ធផលដែលរំពឹង:
 ```
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**កំណត់ចំណាំ**: លេខកំណែពិតប្រាកដនឹងខុសគ្នា។ ពិនិត្យមើល [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) សម្រាប់កំណែថ្មីបំផុត។
+**កំណត់សម្គាល់**៖ អំនានលេខកំណែកម្មវិធីពិតប្រាកដនឹងខុសគ្នា។ សូមពិនិត្យ [ការចេញផ្សាយ Azure Developer CLI](https://github.com/Azure/azure-dev/releases) សម្រាប់កំណែថ្មីបំផុត។
 
-**✅ បញ្ជីត្រួតពិនិត្យជោគជ័យការដំឡើង:**
+**✅ បញ្ជីត្រួតពិនិត្យជោគជ័យវិធីសាស្រ្តតំឡើង៖**
 - [ ] `azd version` បង្ហាញលេខកំណែដោយគ្មានកំហុស
-- [ ] `azd --help` បង្ហាញឯកសារពីបញ្ជា
-- [ ] `azd template list` បង្ហាញគំរូមានស្រាប់
-- [ ] អ្នកអាចបង្កើតថតសាកល្បង និងរត់ `azd init` ដោយជោគជ័យ
+- [ ] `azd --help` បង្ហាញឯកសារបញ្ជាពាក្យបញ្ជា
+- [ ] `azd template list` បង្ហាញទំព័រលំនាំដើមដែលមាន
+- [ ] អ្នកអាចបង្កើតថតសាកល្បង និងរត់ `azd init` បានដោយជោគជ័យ
 
-**ប្រសិនបើការត្រួតពិនិត្យទាំងអស់ជាប់ អ្នករួចរាល់ក្នុងការបន្តទៅ [គម្រោងដំបូងរបស់អ្នក](first-project.md)!**
+**បើការត្រួតពិនិត្យទាំងអស់បានជោគជ័យ អ្នកត្រៀមខ្លួនរួចរាល់សម្រាប់ [គម្រោងដំបូងរបស់អ្នក](first-project.md)!**
 
-## កំណត់រចនាសម្ព័ន្ធការផ្ទៀងផ្ទាត់តំណាង
+## ការកំណត់តែសំងាត់
 
-### ការកំណត់រចនាសម្ព័ន្ធសម្រាប់អ្នកចាប់ផ្ដើម (ផ្ដល់អនុសាសន៍)
+### ការកំណត់ដែលណែនាំសម្រាប់អ្នកដែលចាប់ផ្តើម
 
-សម្រាប់ដំណើរការផ្ទាល់ AZD ជាលំដាប់ដំបូង សូមចូលបញ្ជាក់លទ្ធភាពជាមួយ `azd auth login`។
+សម្រាប់បច្ចាន AZD ដំបូង, ចូលកម្មវិធីជាមួយ `azd auth login`។
 
 ```bash
 # Required for AZD commands such as azd up
@@ -162,9 +164,9 @@ azd auth login
 azd auth login --check-status
 ```
 
-ប្រើ Azure CLI ចូលតែពេលអ្នកមានផែនការរត់បញ្ជា `az` ដោយខ្លួនឯងក្នុងវគ្គសិក្សា។
+ប្រើការចូលប្រើ Azure CLI នៅពេលដែលអ្នកមានគម្រោងរត់ពាក្យបញ្ជា `az` ដោយខ្លួនឯងនៅពេលវេលាគ្រប់គ្រង។
 
-### ការផ្ទៀងផ្ទាត់តំណាង Azure CLI (ជាជម្រើស)
+### ការផ្ទៀងផ្ទាត់ Azure CLI (ជាជម្រើស)
 ```bash
 # Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
@@ -178,20 +180,20 @@ az login
 az account show
 ```
 
-### តើអ្នកគួរប្រើដំណើរការចូលណាមួយ?
+### តើអ្នកគួរប្រើចរន្តចូលប្រើណាដែរឬទេ?
 
-- ប្រើ `azd auth login` ប្រសិនបើអ្នកតាមដានផ្លូវ AZD សម្រាប់អ្នកចាប់ផ្ដើម ហើយភាគច្រើនរត់បញ្ជា `azd`។
-- ក៏ប្រើ `az login` ផងដែរ នៅពេលអ្នកចង់រត់បញ្ជា Azure CLI ដូចជា `az account show` ឬពិនិត្យមើលធនធានផ្ទាល់។
-- ប្រសិនបើលំហាត់មានការរួមបញ្ចូលបញ្ជា `azd` និង `az` រួមគ្នា សូមរត់ស្គ្រីបចូលទាំងពីរដងនៅដើម។
+- ប្រើ `azd auth login` ប្រសិនបើអ្នកកំពុងធ្វើតាមផ្លូវ AZD ដំបូងហើយធ្វើបច្ចានពាក្យបញ្ជា `azd` ជាចម្បង។
+- ក៏ប្រើ `az login` នៅពេលដែលអ្នកចង់រត់ពាក្យបញ្ជា Azure CLI ដូចជា `az account show` ឬពិនិត្យធនធានដោយផ្ទាល់។
+- ប្រសិនបើហាត់ប្រាណមានទាំង `azd` និង `az`, រត់ពាក្យចូលប្រើទាំងពីរម្តងនៅ​ចាប់ផ្តើម។
 
 ### ការផ្ទៀងផ្ទាត់កូដឧបករណ៍
-ប្រសិនបើអ្នកនៅលើប្រព័ន្ធមិនមាននរណាអាចប្រើប៊្របស៊័រឬមានបញ្ហា:
+ប្រសិនបើអ្នកនៅលើប្រព័ន្ធមិនមានផ្ទាំងម៉ោន ឬមានបញ្ហាប្រើប្រាស់កម្មវិធីរុករក៖
 ```bash
 azd auth login --use-device-code
 ```
 
-### អ្នកផ្ទាល់ប្រតិបត្តិការផស័រ (CI/CD)
-សម្រាប់បរិស្ថានស្វ័យប្រវត្តិ:
+### Service Principal (CI/CD)
+សម្រាប់បរិយាកាសដោយស្វ័យប្រវត្តិ:
 ```bash
 azd auth login \
   --client-id "<client-id>" \
@@ -199,23 +201,23 @@ azd auth login \
   --tenant-id "<tenant-id>"
 ```
 
-### បញ្ជាក់ការតំឡើងបញ្ចប់របស់អ្នក
+### បញ្ជាក់ការកំណត់របស់អ្នកបានពេញលេញ
 
-ប្រសិនបើអ្នកចង់ធ្វើតេស្តសមត្ថភាពរហ័សមុនចាប់ផ្តើមជាតារាងទី 1:
+ប្រសិនបើអ្នកចង់ធ្វើតេស្តការត្រៀមរហ័សមុនចាប់ផ្តើមជំពូក 1:
 
-**Windows:**
+**Windows៖**
 ```powershell
 .\validate-setup.ps1
 ```
 
-**macOS / Linux:**
+**macOS / Linux៖**
 ```bash
 bash ./validate-setup.sh
 ```
 
-## ការកំណត់រចនាសម្ព័ន្ធ
+## ការកំណត់
 
-### ការកំណត់រចនាសម្ព័ន្ធផែនដី
+### ការកំណត់ជាតារាង
 ```bash
 # Set default subscription
 azd config set defaults.subscription "<subscription-id>"
@@ -227,8 +229,8 @@ azd config set defaults.location eastus2
 azd config show
 ```
 
-### អថេរបរិស្ថាន
-បន្ថែមទៅទៅក្នុងបង្ហាញសែលរបស់អ្នក (`.bashrc`, `.zshrc`, `.profile`):
+### អថេរបរិយាកាស
+បន្ថែមទៅក្នុងពិព័រណ៍ Shell របស់អ្នក (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -241,17 +243,17 @@ azd version --debug
 ## ការរួមបញ្ចូល IDE
 
 ### Visual Studio Code
-ដំឡើងផ្នែកបន្ថែម Azure Developer CLI:
+តំឡើងកម្មវិធីបន្ថែម Azure Developer CLI:
 1. បើក VS Code
-2. ទៅកាន់ផ្នែកបន្ថែម (Ctrl+Shift+X)
+2. ទៅកាន់ផ្នែក Extensions (Ctrl+Shift+X)
 3. ស្វែងរក "Azure Developer CLI"
-4. ដំឡើងផ្នែកបន្ថែម
+4. តំឡើងកម្មវិធីបន្ថែម
 
-លក្ខណៈពិសេស:
+លក្ខណៈពិសេសៈ
 - IntelliSense សម្រាប់ azure.yaml
-- បញ្ជាកម្មវិធីបញ្ចូលនៅក្នុង terminal
-- ការស្ទូតទំព័រគំរូ
-- ការតាមដានការដាក់ពាក្យបង្ហាញ
+- ពាក្យបញ្ជាទៅកាន់ Terminal ត្រូវបានបញ្ចូលរួម
+- ការពង្រីកទំព័រលំនាំដើម
+- ការតាមដានការចេញផ្សាយ
 
 ### GitHub Codespaces
 បង្កើត `.devcontainer/devcontainer.json`:
@@ -267,22 +269,22 @@ azd version --debug
 ```
 
 ### IntelliJ/JetBrains
-1. ដំឡើងផ្នែកបន្ថែម Azure
-2. កំណត់លិខិត Azure
-3. ប្រើ terminal រួមសម្រាប់បញ្ជា azd
+1. ដំឡើងកម្មវិធីបន្ថែម Azure
+2. កំណត់ការចូលប្រើ Azure
+3. ប្រើ terminal built-in សម្រាប់ពាក្យបញ្ជា azd
 
-## 🐛 ការជួសជុលបញ្ហាការដំឡើង
+## 🐛 ការដោះស្រាយបញ្ហាការដំឡើង
 
 ### បញ្ហាទូទៅ
 
-#### ការអនុញ្ញាតបដិសេធ (Windows)
+#### ច្រានចោលការអនុញ្ញាត (Windows)
 ```powershell
 # Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### បញ្ហា PATH
-បន្ថែម azd ដោយដៃទៅ PATH របស់អ្នក:
+បញ្ចូល azd ទៅក្នុង PATH ក្នុងដៃ:
 
 **Windows:**
 ```cmd
@@ -295,7 +297,7 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### បញ្ហាបណ្តាញ/ប្រព័ន្ធតំណ
+#### បញ្ហារបៀបបណ្ដាញ/ប្រូកស៊ី
 ```bash
 # Configure standard proxy environment variables for the current Bash session
 export HTTP_PROXY="http://proxy:8080"
@@ -303,7 +305,7 @@ export HTTPS_PROXY="http://proxy:8080"
 # Use your organization's trusted CA configuration; do not disable TLS validation.
 ```
 
-#### បំណងកំណែ
+#### បញ្ហាគ្នាសរសេរ version
 ```bash
 # Remove old installations
 # Windows: winget uninstall microsoft.azd
@@ -328,8 +330,8 @@ azd show
 
 ## ការអាប់ដេត azd
 
-### បញ្ជាក់ការអាប់ដេត
-azd ចេញសេចក្ដីជូនដំណឹងពេលមានកំណែថ្មី ហើយអ្នកអាចបញ្ជាក់ការសាងសង់បច្ចុប្បន្នរបស់អ្នកដោយ:
+### ការត្រួតពិនិត្យអាប់ដេត
+azd នឹងជូនដំណឹងនៅពេលមានrelease ថ្មី ហើយអ្នកអាចបញ្ជាក់កំណែបច្ចុប្បន្នបានដោយ៖
 ```bash
 azd version
 ```
@@ -351,39 +353,39 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## 💡 សំណួរដែលសួរញឹកញាប់
+## 💡 សំណួរ​ដែល​សួរ​ប្រចាំ
 
 <details>
-<summary><strong>តើអ្វីជាការប្រៀបធៀបរវាង azd និង az CLI?</strong></summary>
+<summary><strong>តើអ្វីជាការប្រែប្រួលរវាង azd និង az CLI?</strong></summary>
 
-**Azure CLI (az)**: ឧបករណ៍កម្រិតទាបសម្រាប់គ្រប់គ្រងធនធាន Azure ម្នាក់ទៅម្នាក់
+**Azure CLI (az)**: ឧបករណ៍កម្រិតទាបសម្រាប់គ្រប់គ្រងធនធាន Azure ឯកឯង
 - `az webapp create`, `az storage account create`
-- មួយធនធានក្នុងមួយពេល
-- ផ្ដោតលើការគ្រប់គ្រងស្ថាបត្យកម្ម
+- តែធនធានមួយ នៅលើពេល
+- ផ្តោតលើការគ្រប់គ្រងហេដ្ឋារចនាសម្ព័ន្ធ
 
-**Azure Developer CLI (azd)**: ឧបករណ៍កម្រិតខ្ពស់សម្រាប់ការដាក់ពាក្យ全部កម្មវិធី
-- `azd up` ដាក់ពាក្យកម្មវិធីទាំងមូលជាមួយធនធានទាំងអស់
-- ដំណើរការតាមគំរូ
-- ផ្ដោតទៅលើផលិតភាពអ្នកអភិវឌ្ឍន៍
+**Azure Developer CLI (azd)**: ឧបករណ៍កម្រិតខ្ពស់សម្រាប់ការផ្ទុកកម្មវិធីពេញលេញ
+- `azd up` ផ្ទុកកម្មវិធីទាំងមូលជាមួយធនធានទាំងអស់
+- វិធីសាស្រ្តផ្អែកលើគំរូ
+- ផ្តោតលើផលិតភាពអ្នកអwickញ
 
-**ពួកវាផ្ទាល់ខ្លួន**: azd ប្រើការផ្ទៀងផ្ទាត់របស់ខ្លួនដោយលំនាំដើម។ ដំឡើង និងចូលបញ្ជាក់ Azure CLI តែសម្រាប់បញ្ជា `az` ឬជាផ្លូវការ ជ្រើសរើសទៅ `azd config set auth.useAzCliAuth true`។
+**ពួកវាផ្សេងគ្នា**៖ azd ប្រើការផ្ទៀងផ្ទាត់ដោយខ្លួនឯងជារួមទាំង មានតែត្រូវតែដំឡើង និងប្រើ Azure CLI សម្រាប់ពាក្យបញ្ជា `az` ប៉ុណ្ណោះ ឬជ្រើសរើសចូលរួមក្នុង `azd config set auth.useAzCliAuth true` ។
 </details>
 
 <details>
-<summary><strong>តើខ្ញុំអាចប្រើ azd ជាមួយធនធាន Azure មានស្រាប់បានទេ?</strong></summary>
+<summary><strong>តើខ្ញុំអាចប្រើ azd ជាមួយធនធាន Azure ដែលមានស្រាប់ទេ?</strong></summary>
 
-មែន! អ្នកអាច៖
-1. នាំចូលធនធានមានស្រាប់ទៅក្នុងបរិស្ថាន azd
-2. ឯកសារយោងធនធានមានស្រាប់នៅក្នុងគំរូ Bicep របស់អ្នក
-3. ប្រើ azd សម្រាប់ការដាក់ពាក្យថ្មីជាមួយប្រាក់កំចាយធនធានមានស្រាប់
+ច្បាស់ណាស់! អ្នកអាច:
+1. នាំចូលធនធានដែលមានស្រាប់ទៅក្នុងបរិយាកាស azd
+2. ឯកភាពធនធានដែលមានស្រាប់ ក្នុងគំរូ Bicep របស់អ្នក
+3. ប្រើ azd សម្រាប់ការផ្ទុកថ្មីជាមួយហេដ្ឋារចនាសម្ព័ន្ធដែលមានស្រាប់
 
-មើល [មគ្គុទេសក៍កំណត់រចនាសម្ព័ន្ធ](../chapter-03-configuration/configuration.md) សម្រាប់ពត៌មានលម្អិត។
+មើល [Configuration Guide](../chapter-03-configuration/configuration.md) សម្រាប់ព័ត៌មានលម្អិត។
 </details>
 
 <details>
-<summary><strong>តើ azd ធ្វើការជាមួយ Azure Government ជាឬ Azure China ទេ?</strong></summary>
+<summary><strong>តើ azd ប្រតិបត្តិការជាមួយ Azure Government ឬ Azure China ទេ?</strong></summary>
 
-មែន អាចកំណត់ cloud៖
+ច្បាស់ណាស់ ត្រូវកំណត់ cloud:
 ```bash
 # Azure Government (azd)
 azd config set cloud.name AzureUSGovernment
@@ -394,57 +396,57 @@ azd config set cloud.name AzureChinaCloud
 azd auth login
 ```
 
-ប្រសិនបើអ្នកក៏ប្រើ Azure CLI ក៏ត្រូវកំណត់ `az cloud set --name ...` ផងដែរ។ សេវាកម្មគំរូ និងមានភាពអាចប្រើបានភាគច្រើនចម្លែកគ្នាតាម cloud។
+ប្រសិនបើអ្នកផងដែរ ប្រើ Azure CLI សូមកំណត់ `az cloud set --name ...` នៅលើផ្ទាល់ខ្លួន។ សេវាកម្មគំរូ និងការចូលប្រើផ្នែកម៉ូដែល ផ្លាស់ប្ដូរតាម cloud។
 </details>
 
 <details>
-<summary><strong>តើខ្ញុំអាចប្រើ azd ក្នុងបណ្តោយ CI/CD បានទេ?</strong></summary>
+<summary><strong>តើខ្ញុំអាចប្រើ azd ក្នុង CI/CD pipelines បានទេ?</strong></summary>
 
-មែនហើយ! azd ត្រូវបានរចនាសម្រាប់ស្វ័យប្រវត្តិកម្ម៖
-- ការរួមបញ្ចូល GitHub Actions
-- ការគាំទ្រដល់ Azure DevOps
-- ការផ្ទៀងផ្ទាត់តំណាង service principal
-- របៀបមិនមានការចេញផ្សាយនៅផ្ទាល់
+ពិតណាស់! azd បានរចនាសម្រាប់អូតូម៉ាទិស។
+- សមាភាព GitHub Actions
+- គាំទ្រ Azure DevOps
+- ការផ្ទៀងផ្ទាត់តំណាងសេវា
+- របៀបទំនាក់ទំនងមិនចូលរួម
 
-មើល [មគ្គុទេសក៍ដាក់ពាក្យ](../chapter-04-infrastructure/deployment-guide.md) សម្រាប់លំនាំ CI/CD។
+មើល [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) សម្រាប់គំរូ CI/CD។
 </details>
 
 <details>
-<summary><strong>តើតម្លៃនៃការប្រើ azd ជាអ្វី?</strong></summary>
+<summary><strong>តើតម្លៃនៃការប្រើ azd ត្រូវបង់ប៉ុន្មាន?</strong></summary>
 
-azd មាន **ឥតគិតថ្លៃទាំងស្រុង** និងជាកម្មវិធីបើកប្រភព។ អ្នកបង់ប្រាក់ទេតែសម្រាប់:
-- ធនធាន Azure ដែលអ្នកដាក់ពាក្យ
-- ចំណាយប្រើប្រាស់ Azure (កុំព្យូទ័រ, ស្តុក, និងផ្សេងៗ)
+azd គឺ **សេរីពេញលេញ** និងបើកប្រភព ហើយអ្នកត្រូវបង់សម្រាប់៖
+- ធនធាន Azure ដែលអ្នកបង្កើត
+- ថ្លៃការប្រើ Azure (គណនាថាមពល, ស្តុក, ល។)
 
-ប្រើ `azd provision --preview` ដើម្បីពិនិត្យធនធានដែលផ្តល់អនុសាសន៍ បន្ទាប់មកប៉ាន់ប្រមាណថ្លៃជាមួយ [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)។ ពិនិត្យមើលមិនគិតថ្លៃ។
+ប្រើ `azd provision --preview` ដើម្បីពិនិត្យធនធានដែលបានផ្ដល់ដំណើរការ បន្ទាប់មកប៉ាន់ស្មានថ្លៃវិញជាមួយ [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)។ មិញមិនគណនាតំលៃរួចទេ។
 </details>
 
 ## ជំហានបន្ទាប់
 
-1. **បញ្ចប់ការផ្ទៀងផ្ទាត់តំណាង**: ប្រាកដថាអ្នកអាចចូលប្រើការជាវ Azure របស់អ្នក
-2. **សាកល្បងការដាក់ពាក្យដំបូងរបស់អ្នក**: អនុវត្តតាម [មគ្គុទេសក៍គម្រោងដំបូង](first-project.md)
-3. **ស្វែងយល់ពីគំរូ**: ស្វែងរកគំរូដែលមានស្រាប់ជាមួយ `azd template list`
-4. **កំណត់រចនាសម្ព័ន្ធ IDE**: ត្រៀមបរិស្ថានអភិវឌ្ឍន៍របស់អ្នក
+1. **បញ្ចប់ការផ្ទៀងផ្ទាត់**: ប្រាកដថាអ្នកអាចចូលប្រើ subscription Azure របស់អ្នក
+2. **សាកល្បងការផ្ទុកដំបូងរបស់អ្នក**: ធ្វើតាម [First Project Guide](first-project.md)
+3. **ស្វែងរកគំរូ**: ស្វែងរកគំរូដែលមានជាមួយ `azd template list`
+4. **កំណត់ IDE របស់អ្នក**: ដំឡើងបរិយាកាសអwickញរបស់អ្នក
 
-## ស្រោចស្រង់ជំនួយ
+## គាំទ្រ
 
-ប្រសិនបើប្រទះបញ្ហា:
-- [ឯកសារផ្លូវការនា](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [រាយការណ៍បញ្ហារ](https://github.com/Azure/azure-dev/issues)
-- [ការពិភាក្សាសហគមន៍](https://github.com/Azure/azure-dev/discussions)
-- [ជំនួយ Azure](https://azure.microsoft.com/support/)
-- [**ជំនាញ Azure Agent**](https://skills.sh/microsoft/github-copilot-for-azure) - ទទួលបានមគ្គុទេសក្តការបញ្ជាជាមួយ Azure ដោយផ្ទាល់ក្នុងកម្មវិធីកែសម្រួលរបស់អ្នកជាមួយ `npx skills add microsoft/github-copilot-for-azure`
+ប្រសិនបើអ្នកប្រទៈបញ្ហា:
+- [Official Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Report Issues](https://github.com/Azure/azure-dev/issues)
+- [Community Discussions](https://github.com/Azure/azure-dev/discussions)
+- [Azure Support](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - ទទួលការណែនាំពាក្យបញ្ជា Azure ក្នុងកម្មវិធីកែសម្រួលរបស់អ្នកដោយផ្ទាល់ជាមួយ `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**ការបើកទស្សនៈជាតារាង៖**
-- **📚 ផ្ទះមុខវិជ្ជា**: [AZD សម្រាប់អ្នកចាប់ផ្ដើម](../../README.md)
-- **📖 ជាតារាងបច្ចុប្បន្ន**: ជាតារាងទី 1 - មូលដ្ឋាន និងចាប់ផ្ដើមយ៉ាងរហ័ស
-- **⬅️ មុន**: [AZD ជាលក្ខណ:មូលដ្ឋាន](azd-basics.md) 
-- **➡️ បន្ទាប់**: [គម្រោង​ដំបូងរបស់អ្នក](first-project.md)
-- **🚀 ជាតារាងបន្ទាប់**: [ជាតារាងទី 2: អភិវឌ្ឍន៍ផ្តោតលើ AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**ការរុករកជំពូក:**
+- **📚 ផ្ទះវគ្គ**: [AZD For Beginners](../../README.md)
+- **📖 ជំពូកបច្ចុប្បន្ន**: ជំពូក 1 - មូលដ្ឋាន និងការចាប់ផ្តើមរហ័ស
+- **⬅️ មុននេះ**: [AZD Basics](azd-basics.md) 
+- **➡️ បន្ទាប់**: [Your First Project](first-project.md)
+- **🚀 ជំពូកបន្ទាប់**: [ជំពូក 2: ការអwickញ AI ជាលើកដំបូង](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ ដំឡើងរួចរាល់!** បន្តទៅ [គម្រោងដំបូងរបស់អ្នក](first-project.md) ដើម្បីចាប់ផ្ដើមបង្កើតជាមួយ azd។
+**✅ ដំឡើងរួចរាល់!** បន្ដទៅ [Your First Project](first-project.md) ដើម្បីចាប់ផ្តើមសាងសង់ជាមួយ azd។
 
 ---
 
