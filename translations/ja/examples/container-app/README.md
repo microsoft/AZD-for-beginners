@@ -4,14 +4,14 @@
 
 ## 📚 目次
 
-- [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Quick Start Examples](#quick-start-examples)
-- [Production Examples](#production-examples)
-- [Advanced Patterns](#advanced-patterns)
-- [Best Practices](#best-practices)
+- [概要](#overview)
+- [前提条件](#prerequisites)
+- [クイックスタートの例](#quick-start-examples)
+- [本番環境向けの例](#production-examples)
+- [高度なパターン](#advanced-patterns)
+- [ベストプラクティス](#best-practices)
 
-## Overview
+## 概要
 
 Azure Container Apps は、インフラストラクチャを管理することなくマイクロサービスやコンテナ化されたアプリケーションを実行できるフルマネージドのサーバーレスコンテナプラットフォームです。AZD と組み合わせると、次の利点があります:
 
@@ -21,7 +21,7 @@ Azure Container Apps は、インフラストラクチャを管理すること�
 - **マネージド ID**: Azure リソースへの安全な認証
 - <strong>コスト最適化</strong>: 使用したリソースに対してのみ課金
 
-## Prerequisites
+## 前提条件
 
 開始する前に、次を確認してください:
 
@@ -47,7 +47,7 @@ az login
 - リソースグループ作成の権限
 - Container Apps 環境へのアクセス
 
-## Quick Start Examples
+## クイックスタートの例
 
 ### 1. シンプルな Web API (Python Flask)
 
@@ -167,9 +167,9 @@ azd up
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Production Examples
+## 構築事例
 
-### Example 1: Microservices Architecture
+### 事例1：マイクロサービスアーキテクチャ
 
 <strong>シナリオ</strong>: 複数のマイクロサービスを持つ E コマースアプリケーション
 
@@ -233,7 +233,7 @@ azd up
 azd monitor --overview
 ```
 
-### Example 2: AI-Powered Container App
+### 例2：AIを活用したコンテナアプリ
 
 <strong>シナリオ</strong>: Microsoft Foundry Models と統合された AI チャットアプリケーション
 
@@ -341,7 +341,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Example 3: Background Worker with Queue Processing
+### 例3：キュー処理を行うバックグラウンドワーカー
 
 <strong>シナリオ</strong>: メッセージキューを使った注文処理システム
 
@@ -422,7 +422,7 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Advanced Patterns
+## 高度なパターン
 
 ### パターン 1: ブルー/グリーンデプロイ
 
@@ -592,7 +592,7 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Best Practices
+## ベストプラクティス
 
 ### 1. リソースの整理
 
@@ -739,7 +739,7 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Common Commands Reference
+## 共通コマンドリファレンス
 
 ```bash
 # 新しいコンテナ アプリ プロジェクトを初期化する
@@ -768,7 +768,7 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-## Troubleshooting
+## トラブルシューティング
 
 ### 問題: コンテナが起動しない
 
@@ -845,5 +845,5 @@ az containerapp update \
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:
-この文書は AI 翻訳サービス [Co-op トランスレーター](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確な箇所が含まれる場合があることにご留意ください。原文（原言語）を正式な情報源と見なすべきです。重要な情報については、専門の人による翻訳をお勧めします。本翻訳の利用に起因する誤解や誤訳について、当方は責任を負いません。
+この文書は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確な箇所が含まれる場合があることにご留意ください。原文（原言語）を正式な情報源と見なすべきです。重要な情報については、専門の人による翻訳をお勧めします。本翻訳の利用に起因する誤解や誤訳について、当方は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
