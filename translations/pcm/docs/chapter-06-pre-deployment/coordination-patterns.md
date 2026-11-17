@@ -12,18 +12,18 @@
 
 ## Wetin You Go Learn
 
-As you finish dis lesson, you go:
+If you finish dis lesson, you go:
 - Understand **multi-agent architecture** patterns and when to use dem
 - Implement **orchestration patterns** (centralized, decentralized, hierarchical)
 - Design **agent communication** strategies (synchronous, asynchronous, event-driven)
 - Manage **shared state** across distributed agents
-- Deploy **multi-agent systems** on Azure with AZD
-- Apply **coordination patterns** for real-world AI scenarios
+- Deploy **multi-agent systems** for Azure with AZD
+- Apply **coordination patterns** for AI things for real world
 - Monitor and debug distributed agent systems
 
-## Why Multi-Agent Coordination Matters
+## Why Multi-Agent Coordination Na Important Tin
 
-### The Evolution: From Single Agent to Multi-Agent
+### How E Take Dey: From Single Agent Reach Multi-Agent
 
 **Single Agent (Simple):**
 ```
@@ -32,7 +32,7 @@ User → Agent → Response
 - ✅ Easy to understand and implement
 - ✅ Fast for simple tasks
 - ❌ Limited by single model's capabilities
-- ❌ Cannot parallelize complex tasks
+- ❌ No fit do many tins same time if e complex
 - ❌ No specialization
 
 **Multi-Agent System (Advanced):**
@@ -42,13 +42,13 @@ graph TD
     Orchestrator --> Agent2[Agent2<br/>Code]
     Orchestrator --> Agent3[Agent3<br/>Review]
 ```
-- ✅ Specialized agents for specific tasks
-- ✅ Parallel execution for speed
-- ✅ Modular and maintainable
-- ✅ Better at complex workflows
-- ⚠️ Requires coordination logic
+- ✅ Each agent sabi one kind work well well
+- ✅ Dem fit run tins for same time make e quick
+- ✅ E modular and easy to maintain
+- ✅ Better for complex work dem
+- ⚠️ E need coordination logic
 
-**Analogy**: Single agent na like one person wey dey do all tasks. Multi-agent na like team wey each member get special skills (researcher, coder, reviewer, writer) weh dey work together.
+**Analogy**: Single agent na like one persin dey do all di work. Multi-agent na like team wey each member get special skill (researcher, coder, reviewer, writer) wey dem dey work together.
 
 ---
 
@@ -56,7 +56,7 @@ graph TD
 
 ### Pattern 1: Sequential Coordination (Chain of Responsibility)
 
-**When to use**: Tasks must complete in specific order, each agent builds on previous output.
+**When to use**: Task dem must finish one by one for one particular order, each agent dey build on top wetin previous agent do.
 
 ```mermaid
 sequenceDiagram
@@ -79,14 +79,14 @@ sequenceDiagram
 ```
 
 **Benefits:**
-- ✅ Clear data flow
+- ✅ Clear how data dey flow
 - ✅ Easy to debug
-- ✅ Predictable execution order
+- ✅ You fit predict how e go run
 
 **Limitations:**
-- ❌ Slower (no parallelism)
-- ❌ One failure blocks entire chain
-- ❌ Cannot handle interdependent tasks
+- ❌ Slow (no parallel run)
+- ❌ If one bug happen, e fit block whole chain
+- ❌ No fit handle task dem wey depend on each other sharp sharp
 
 **Example Use Cases:**
 - Content creation pipeline (research → write → edit → publish)
@@ -97,7 +97,7 @@ sequenceDiagram
 
 ### Pattern 2: Parallel Coordination (Fan-Out/Fan-In)
 
-**When to use**: Independent tasks can run simultaneously, results combined at the end.
+**When to use**: Independent work fit run for same time, then dem results dey join for end.
 
 ```mermaid
 graph TB
@@ -123,25 +123,25 @@ graph TB
 ```
 
 **Benefits:**
-- ✅ Fast (parallel execution)
-- ✅ Fault-tolerant (partial results acceptable)
-- ✅ Scales horizontally
+- ✅ Quick (dem dey run parallel)
+- ✅ E no too hala if some results no ready (partial results dey okay)
+- ✅ E fit scale make e big
 
 **Limitations:**
-- ⚠️ Results fit get come out-of-order
-- ⚠️ Need aggregation logic
-- ⚠️ Complex state management
+- ⚠️ Result fit show one way wey no be di right order
+- ⚠️ Need make you get logic to join results well
+- ⚠️ State management fit hard
 
 **Example Use Cases:**
 - Multi-source data gathering (APIs + databases + web scraping)
-- Competitive analysis (multiple models generate solutions, best selected)
-- Translation services (translate to multiple languages simultaneously)
+- Competitive analysis (different models go generate solutions, best one go select)
+- Translation services (translate to languages many opop)
 
 ---
 
 ### Pattern 3: Hierarchical Coordination (Manager-Worker)
 
-**When to use**: Complex workflows with sub-tasks, delegation needed.
+**When to use**: Complex workflow get sub-tasks, you need make dem work as delegation.
 
 ```mermaid
 graph TB
@@ -166,14 +166,14 @@ graph TB
 ```
 
 **Benefits:**
-- ✅ Handles complex workflows
-- ✅ Modular and maintainable
-- ✅ Clear responsibility boundaries
+- ✅ Fit handle complex workflow dem
+- ✅ E modular and easy to maintain
+- ✅ Clear boundaries for responsibility
 
 **Limitations:**
-- ⚠️ More complex architecture
-- ⚠️ Higher latency (multiple coordination layers)
-- ⚠️ Requires sophisticated orchestration
+- ⚠️ Architecture get as e hard pass
+- ⚠️ E go slow pass because of how many layers coordinate
+- ⚠️ E need fine orchestration skills
 
 **Example Use Cases:**
 - Enterprise document processing (classify → route → process → archive)
@@ -184,7 +184,7 @@ graph TB
 
 ### Pattern 4: Event-Driven Coordination (Publish-Subscribe)
 
-**When to use**: Agents need to react to events, loose coupling desired.
+**When to use**: Agents need make dem react to events, and dem no too tight together.
 
 ```mermaid
 sequenceDiagram
@@ -206,26 +206,26 @@ sequenceDiagram
 ```
 
 **Benefits:**
-- ✅ Loose coupling between agents
+- ✅ Agents no tight join body
 - ✅ Easy to add new agents (just subscribe)
-- ✅ Asynchronous processing
-- ✅ Resilient (message persistence)
+- ✅ Processing dey asynchronous
+- ✅ E dey resilient (message dey stay)
 
 **Limitations:**
-- ⚠️ Eventual consistency
-- ⚠️ Complex debugging
-- ⚠️ Message ordering challenges
+- ⚠️ E take small time before everything go balance
+- ⚠️ Hard small to debug
+- ⚠️ Message order dey waka funny sometimes
 
 **Example Use Cases:**
 - Real-time monitoring systems (alerts, dashboards, logs)
 - Multi-channel notifications (email, SMS, push, Slack)
-- Data processing pipelines (multiple consumers of same data)
+- Data processing pipelines (different consumers dey use same data)
 
 ---
 
 ### Pattern 5: Consensus-Based Coordination (Voting/Quorum)
 
-**When to use**: Need agreement from multiple agents before proceeding.
+**When to use**: Need say multiple agents gats agree before you fit continue.
 
 ```mermaid
 graph TB
@@ -248,25 +248,25 @@ graph TB
 ```
 
 **Benefits:**
-- ✅ Higher accuracy (multiple opinions)
-- ✅ Fault-tolerant (minority failures acceptable)
-- ✅ Quality assurance built-in
+- ✅ Accuracy high pass (many opinion dey)
+- ✅ E fit survive if small number fail
+- ✅ Quality sure dey built-in
 
 **Limitations:**
-- ❌ Expensive (multiple model calls)
-- ❌ Slower (waiting for all agents)
-- ⚠️ Conflict resolution needed
+- ❌ E dey costly (you dey call many models)
+- ❌ E slow (gots wait make all agents yan)
+- ⚠️ E need conflict resolution
 
 **Example Use Cases:**
-- Content moderation (multiple models review content)
+- Content moderation (multiple models dey review content)
 - Code review (multiple linters/analyzers)
-- Medical diagnosis (multiple AI models, expert validation)
+- Medical diagnosis (multiple AI models, expert dey check)
 
 ---
 
 ## Architecture Overview
 
-### Complete Multi-Agent System on Azure
+### Complete Multi-Agent System for Azure
 
 ```mermaid
 graph TB
@@ -326,13 +326,13 @@ graph TB
 | **Artifact Storage** | Documents, results, logs | Blob Storage |
 | **Monitoring** | Distributed tracing, logs | Application Insights |
 
-Service Bus queues/topics and Event Hubs na different services wey get different delivery/consumption models; Event Hubs no be drop-in replacement for the Service Bus worker code below. Parallelism, persisted messages, and model voting no by themselves guarantee fault tolerance or higher accuracy.
+Service Bus queues/topics and Event Hubs na different services wey get different delivery/consumption styles; Event Hubs no be replacement wey you fit just drop for Service Bus worker code wey dey here. Parallelism, messages wey dey stay, and model voting no guarantee say e go fault-tolerant or get better accuracy.
 
 ---
 
-## Prerequisites
+## Wetin You Gats Get Ready
 
-### Required Tools
+### Tools Wey You Gats Get
 
 ```bash
 # Verify Azure Developer CLI
@@ -358,7 +358,7 @@ docker --version
   - Storage accounts
   - Application Insights
 
-### Knowledge Prerequisites
+### Knowledge Wey You Need Beforehand
 
 You suppose don finish:
 - [Configuration Management](../chapter-03-configuration/configuration.md)
@@ -369,11 +369,11 @@ You suppose don finish:
 
 ## Implementation Guide
 
-> **Design fragments, not a deployable lab:** The project tree and `File:` labels below describe files to create in your own project; this repository no get full `multi-agent-system` application. Missing pieces include main/parameter templates, Container Apps environment/registry, Dockerfiles and dependency locks, Cosmos database/container setup, model deployments, identity/role configuration, scaling rules, and parallel workers/queues. No expect `azd init` to generate these files or `azd up` to deploy the snippets unchanged. For correct starting point, finish [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
+> **Design fragments, no be deployable lab:** The project tree and `File:` labels for down side talk about files wey you go create for your own project; dis repository no get complete `multi-agent-system` app. Things wey dey miss na main/parameter templates, Container Apps environment/registry, Dockerfiles and dependency locks, Cosmos database/container setup, model deployments, identity/role configuration, scaling rules, and parallel workers/queues. No expect `azd init` to generate these files or `azd up` go deploy snippets as e be. If you want start well, finish [Multi-Agent Basics](../chapter-05-multi-agent/multi-agent-basics.md).
 
-**Runtime assumptions:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, and (for monitoring) `azure-monitor-opentelemetry`; put `shared` on the Python import path in each service image. The Cosmos `agent-state/tasks` container suppose already dey wit partition key `/id`. Key-based connections ease dis fragments, no be for production advice: better use managed identities with scoped Service Bus/Cosmos/OpenAI data-plane roles. No expose keys for outputs or logs.
+**Runtime assumptions:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, and (for monitoring) `azure-monitor-opentelemetry`; put `shared` for Python import path for every service image. The Cosmos `agent-state/tasks` container must don exist with partition key `/id`. Key-based connections make these fragments simple, no be production advice: you better use managed identities with scoped Service Bus/Cosmos/OpenAI data-plane roles. No make key show for output or logs.
 
-Service Bus delivery na **at least once**. Persist idempotency per task **and step**, use optimistic concurrency (ETags) for read/modify/write state, and renew message locks during long processing. The simple state manager below na sequential-only and no implement these production guarantees.
+Service Bus delivery na **at least once**. Make sure idempotency dey for every task **and step**, use optimistic concurrency (ETags) for read/modify/write state, and renew message locks if processing long. The simple state manager below na sequential only and e no dey implement these production guarantees.
 
 ### Project Structure
 
@@ -411,7 +411,7 @@ multi-agent-system/
 
 ### Implementation: Content Creation Pipeline
 
-Make we design sequential pipeline: Research → Write → Edit. Publishing no dey this example.
+Make we design sequential pipeline: Research → Write → Edit. Publishing no concern here.
 
 ### 1. AZD Configuration
 
@@ -895,14 +895,14 @@ if __name__ == '__main__':
 
 ### 8. Deploy and Test
 
-These commands apply **only after you implement the missing project files**. Interactive Foundry agent initialization na separate workflow; e no dey generate this Service Bus design.
+Dis commands na **only work after you implement the missing project files**. Interactive Foundry agent initialization na separate workflow; e no dey generate dis Service Bus design.
 
 ```bash
 # In your completed custom project
 azd up
 
-# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
-azd extension install azure.ai.agents
+# Alternative in a SEPARATE empty folder (GA bundle workflow requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
@@ -919,7 +919,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ Expected output:**
+**✅ Wetin You Dey Expect:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -936,7 +936,7 @@ TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Expected output (completed):**
+**✅ Wetin You Dey Expect (if don complete):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -968,7 +968,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### Implementation: Multi-Source Research Aggregator
 
-Make we build parallel system wey dey gather information from multiple sources at the same time.
+Make we build parallel system wey go gather info from many sources at the same time.
 
 ### Parallel Orchestrator
 
@@ -1123,10 +1123,10 @@ if __name__ == '__main__':
     main()
 ```
 
-**Benefits of Parallel Pattern:**
-- ⚡ **Potentially lower latency** (bounded by the slowest worker plus coordination overhead)
-- 🔄 **Fit support partial results** wit explicit deadlines and failure policy (no implement by the basic aggregator)
-- 📈 **Scalable** (add more agents easily)
+**Di Benefits wey Parallel Pattern get:**
+- ⚡ **E fit get lower latency** (slowest worker plus coordination overhead)
+- 🔄 **E fit support partial results** wey get deadline and failure policy (basic aggregator no get dis)
+- 📈 **E dey scalable** (you fit add more agents easy)
 
 ---
 
@@ -1134,9 +1134,9 @@ if __name__ == '__main__':
 
 ### Exercise 1: Add Timeout Handling ⭐⭐ (Medium)
 
-**Goal**: Implement timeout logic so aggregator no go wait forever for slow agents.
+**Goal**: Make timeout logic wey aggregator no go wait forever for slow agent.
 
-**Starting point:** Run dis local deadline simulation before e join am into queue worker. Timeout wey dem check only when another message come no go ever fire if the missing worker no send anything.
+**Starting point:** Run dis local deadline simulation before you put am for queue worker. Timeout wey e dey check only wen another message show no go fire if missing worker no send anything.
 
 **Steps**:
 
@@ -1170,9 +1170,9 @@ asyncio.run(main())
 {'completed_agents': 3, 'timed_out': True}
 ```
 
-3. **Queue-system integration (design task):** Persist the dispatch deadline and expected agents when you dey create the task, run periodic deadline sweep wey no depend on incoming results, atomically finalize partial results, and ignore late/duplicate messages for finalized tasks. Local timeout no fit cancel remote workers.
+3. **Queue-system integration (design work):** Persist dispatch deadline and expected agents when you dey create task, run periodic deadline sweep independent from incoming results, atomically finalize partial results, and ignore late/duplicate messages for finalized tasks. Local timeout no dey cancel remote workers.
 
-For your implemented project only:
+For your own implemented project only:
 
 ```bash
 azd deploy aggregator
@@ -1187,9 +1187,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Success Criteria:**
-- ✅ The local test return after e one-second deadline even if one agent no complete
-- ✅ Response show partial results (`"timed_out": true`)
-- ✅ Available results return (3 out of 4 agents)
+- ✅ Local test go return after one-second deadline even if one agent never finish
+- ✅ Response go show partial results (`"timed_out": true`)
+- ✅ Available results go return (3 out of 4 agents)
 
 **Time**: 20-25 minutes
 
@@ -1197,11 +1197,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### Exercise 2: Implement Retry Logic ⭐⭐⭐ (Advanced)
 
-**Goal**: Retry failed agent tasks automatically before e give up.
+**Goal**: Make failed agent tasks retry by themselves before dem give up.
 
 **Steps**:
 
-1. **Use Service Bus delivery counts instead of re-enqueuing custom retry counters:**
+1. **Use Service Bus delivery counts instead of custom retry counters:**
 
 ```python
 import json
@@ -1259,10 +1259,10 @@ def monitor_dead_letters():
 ```
 
 **✅ Success Criteria:**
-- ✅ Failed tasks dey retry automatically (up to 3 times)
-- ✅ Exponential backoff between retries (5s, 10s, 20s), with message-lock renewal where e need
-- ✅ After max retries, messages dey go dead letter queue
-- ✅ Dead letter messages fit be inspected; replay need another idempotent recovery workflow
+- ✅ Failed tasks retry automatically (upto 3 times)
+- ✅ Exponential backoff between retries (5s, 10s, 20s), with message-lock renewal where e need am
+- ✅ After max retries, messages go dead letter queue
+- ✅ You fit inspect dead letter messages; replay need separate idempotent recovery workflow
 
 **Time**: 30-40 minutes
 
@@ -1270,7 +1270,7 @@ def monitor_dead_letters():
 
 ### Exercise 3: Implement Circuit Breaker ⭐⭐⭐ (Advanced)
 
-**Goal**: Prevent cascading failures by stopping requests to failing agents.
+**Goal**: Stop cascading failure by blocking requests to agents wey dey fail.
 
 **Steps**:
 
@@ -1348,9 +1348,9 @@ def send_to_agent(agent_type, message_data):
         # Continue with other agents
 ```
 
-Dis circuit dey protect di **send operation**, no di remote worker completion: if message enqueue well no mean say agent still dey. `send_message` na your app sender function. For execution circuits, put di task failures/timeouts wey you observe inside durable coordinator. Dis in-memory class na single-thread demo, no be distributed circuit breaker.
+Dis circuit na to protect di **send operation**, no be di remote worker finish work: wen you fit enqueue message well no mean say agent dey alive. `send_message` na di sender function for your app. For execution circuits, put di task failure/timeouts wey you see inside durable coordinator. Dis in-memory class na single-thread demoh, no be distributed circuit breaker.
 
-3. **Test circuit breaker for your local machine:**
+3. **Test circuit breaker for your machine:**
 
 ```python
 # Run after the class definition; no Azure changes required.
@@ -1368,19 +1368,19 @@ assert circuit.state == CircuitState.CLOSED
 print("Circuit breaker recovery verified")
 ```
 
-**✅ Criteria wey mean say e work:**
-- ✅ After 5 failures, circuit go open (e go reject requests)
-- ✅ After 60 seconds, circuit go half-open (e go test recovery)
-- ✅ Other agents go continue to dey work normal
-- ✅ Circuit go close automatically wen agent recover
+**✅ Success Criteria:**
+- ✅ After 5 failures, circuit go open (go reject requests)
+- ✅ After 60 seconds, circuit go half-open (go test recovery)
+- ✅ Other agents go still dey work as normal
+- ✅ Circuit go close on top e own when agent recover
 
-**Time:** 40-50 minutes
+**Time**: 40-50 minutes
 
 ---
 
 ## Monitoring and Debugging
 
-### Distributed Tracing using Application Insights
+### Distributed Tracing with Application Insights
 
 **File: `src/shared/tracing.py`**
 
@@ -1427,7 +1427,7 @@ def trace_agent_call(agent_name, task_id, operation_name, operation):
 
 ### Application Insights Queries
 
-**Track multi-agent workflows:**
+**Track multi-agent workloads:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1470,7 +1470,7 @@ exceptions
 
 ### Multi-Agent System Costs (Monthly Estimates)
 
-Na illustrations for planning, no be exact price: total below na **$240-565/month**. Make you confirm current regional rates, active/idle replica hours, input/output token mix, storage, and telemetry. Serverless no get minimum provisioned-throughput but e still dey charge for requests and storage.
+Na planning numbers wey dem put for show, no be quoting price: di sum e get for bottom na **$240-565/month**. Make you check current regional rates, active/idle replica hours, input/output token mix, storage, and telemetry. Serverless no get any provisioned-throughput minimum but e still dey bill for requests and storage.
 
 | Component | Configuration | Cost |
 |-----------|--------------|------|
@@ -1485,7 +1485,7 @@ Na illustrations for planning, no be exact price: total below na **$240-565/mont
 
 ### Cost Optimization Strategies
 
-1. **Use serverless where you fit:**
+1. **Use serverless where e possible:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1494,7 +1494,7 @@ Na illustrations for planning, no be exact price: total below na **$240-565/mont
    }
    ```
 
-2. **Scale agents go zero wen dem no dey active:**
+2. **Make agents dey scale go zero wen dem idle:**
    ```bicep
    scale: {
      minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
@@ -1508,7 +1508,7 @@ Na illustrations for planning, no be exact price: total below na **$240-565/mont
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Cache results wey you dey use often:**
+4. **Cache di tin wey you dey use often:**
    ```python
    # Use Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1519,7 +1519,7 @@ Na illustrations for planning, no be exact price: total below na **$240-565/mont
 
 ## Best Practices
 
-### ✅ Wetin you suppose do:
+### ✅ WETIN YOU SUPPOSE DO:
 
 1. **Use idempotent operations**
    ```python
@@ -1528,7 +1528,7 @@ Na illustrations for planning, no be exact price: total below na **$240-565/mont
        raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Implement correct logging**
+2. **Make logging plenty and correct**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
@@ -1555,15 +1555,15 @@ Na illustrations for planning, no be exact price: total below na **$240-565/mont
    monitor_dead_letters()
    ```
 
-### ❌ Wetin you no suppose do:
+### ❌ WETIN YOU NO SUPPOSE DO:
 
-1. **No create circular dependencies**
+1. **No dey create circular dependencies**
    ```python
    # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
    # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **No block agent threads**
+2. **No dey block agent threads**
    ```python
    # ❌ BAD: Synchronous wait
    while not task_complete:
@@ -1572,13 +1572,13 @@ Na illustrations for planning, no be exact price: total below na **$240-565/mont
    # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **No ignore partial failures**
+3. **No dey ignore partial failures**
    ```python
    # ❌ BAD: Fail entire workflow if one agent fails
    # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **No use infinite retries**
+4. **No dey use infinite retries**
    ```python
    # ❌ BAD: retry forever
    # ✅ GOOD: max_retries = 3, then dead letter
@@ -1588,11 +1588,11 @@ Na illustrations for planning, no be exact price: total below na **$240-565/mont
 
 ## Troubleshooting Guide
 
-### Problem: Messages don jam for queue
+### Problem: Messages wey dey stuck inside queue
 
 **Symptoms:**
-- Messages gather for queue
-- Agents no dey process
+- Messages dey pile for queue
+- Agents no dey process anything
 - Task status just dey "pending"
 
 **Diagnosis:**
@@ -1630,12 +1630,12 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problem: Task timeout/no ever complete
+### Problem: Task timeout/no finish
 
 **Symptoms:**
-- Task status still dey "in_progress"
-- Some agents dey finish, others no
-- No error messages
+- Task status dey always "in_progress"
+- Some agents finish, others no finish
+- No error messages show
 
 **Diagnosis:**
 ```bash
@@ -1648,9 +1648,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Solutions:**
 
-1. **Implement timeout for aggregator (Exercise 1)**
+1. **Put timeout inside aggregator (Exercise 1)**
 
-2. **Check for agent failures using Azure Monitor:**
+2. **Check for agent failures with Azure Monitor:**
    ```bash
    # View logs via azd monitor
    azd monitor --logs
@@ -1659,7 +1659,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Make sure all agents dey run:**
+3. **Verify all agents dey run:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1676,7 +1676,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
 - [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### Next Steps in This Course
+### Next Steps for This Course
 - ← Previous: [Capacity Planning](capacity-planning.md)
 - → Next: [SKU Selection](sku-selection.md)
 - 🏠 [Course Home](../../README.md)
@@ -1689,24 +1689,24 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## Summary
 
-**You don learn:**
+**Wetin you don learn:**
 - ✅ Five coordination patterns (sequential, parallel, hierarchical, event-driven, consensus)
-- ✅ Multi-agent architecture for Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Multi-agent architecture on Azure (Service Bus, Cosmos DB, Container Apps)
 - ✅ State management across distributed agents
 - ✅ Timeout handling, retries, and circuit breakers
 - ✅ Monitoring and debugging distributed systems
 - ✅ Cost optimization strategies
 
 **Key Takeaways:**
-1. **Choose correct pattern** - Sequential for ordered workflows, parallel for speed, event-driven for flexibility
+1. **Choose di correct pattern** - Sequential for ordered workflows, parallel for speed, event-driven for flexibility
 2. **Manage state well** - Use Cosmos DB or similar for shared state
 3. **Handle failures well** - Timeouts, retries, circuit breakers, dead letter queues
-4. **Monitor everything** - Distributed tracing na important for debugging
-5. **Optimize costs** - Scale to zero, use serverless, implement caching
+4. **Monitor everything** - Distributed tracing na the best for debugging
+5. **Optimize costs** - Scale go zero, use serverless, do caching
 
 **Next Steps:**
-1. Finish the practical exercises
-2. Build multi-agent system for your own case
+1. Finish di practical exercises
+2. Build multi-agent system for your case
 3. Study [SKU Selection](sku-selection.md) to optimize performance and cost
 
 ---

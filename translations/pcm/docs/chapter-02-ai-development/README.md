@@ -6,16 +6,18 @@
 
 ## Overview
 
-Dis chapter dey focus for how to deploy AI-powered applications using Azure Developer CLI and Microsoft Foundry services. From simple AI chat apps to smart agents wey get tools dem.
+Dis chapter focus on how to deploy AI-powered applications using Azure Developer CLI and Microsoft Foundry services. From simple AI chat apps to smart intelligent agents wey get tools dem.
 
-> **Release review (2026-11-04):** AI CLI guidance bin check against di published `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, and `azure.ai.evaluations` `1.0.0-beta.2` documentation/source. Make you use `azd >= 1.37.0` for di combined workflow. Evaluations now dey use di separate `azd ai eval` namespace; see [release changes and migration guidance](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Dis no be live deployment validation.
+> **Foundry GA update (2026-11-09):** The `microsoft.foundry` 1.0 bundle don [generally available](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Make you use `azd >= 1.37.0`; evaluations still dey as separate installation. The [hosted-agent walkthrough](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) go show you how to test local Agent Inspector and how to deploy code remote. Na documentation review dis, no be live deployment validation; optional preview features still get dia own status.
 
 ## Learning Objectives
 
 As you finish dis chapter, you go fit:
-- Deploy AI applications using pre-built AZD templates
-- Understand Microsoft Foundry integration with AZD
-- Configure and customize AI agents with tools
+- Deploy AI applications use pre-built AZD templates
+- Understand how Microsoft Foundry dey integrate with AZD
+- Install the GA bundle and test local hosted agent before you deploy e source for Foundry
+- Review `azure.yaml`, evaluation assets, and how to clean new-versus-reused-project
+- Configure and customize AI agents with tools dem
 - Deploy RAG (Retrieval-Augmented Generation) applications
 
 ---
@@ -24,7 +26,7 @@ As you finish dis chapter, you go fit:
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Connect AZD with Foundry services | 30 min |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | GA bundle, hosted-agent local-to-cloud workflow, and evaluations | 60 min |
 | 2 | [AI Agents Guide](agents.md) | Deploy intelligent agents with tools | 45 min |
 | 3 | [AI Model Deployment](ai-model-deployment.md) | Deploy and configure AI models | 30 min |
 | 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Explore a template and plan your conversion | 2-3 hours |
@@ -33,7 +35,9 @@ As you finish dis chapter, you go fit:
 
 ## 🚀 Quick Start
 
-Choose one option inside new empty directory. The trailing `.` go initialize di current directory; otherwise AZD fit create subdirectory without change your shell work directory.
+Choose one option for new empty directory. If your directory get `.` for backnah, e go initialize your current directory; otherwise AZD fit create one subdirectory without changing your shell working directory.
+
+For the **GA hosted-agent code-deployment path**, start with the [guided walkthrough](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). You need AZD 1.37.0+, current uv, Python 3.13+, Foundry permissions, and model quota. The full application templates wey dey below na alternatives, no be prerequisite for that walkthrough.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -55,7 +59,7 @@ azd up
 
 | Template | Description | Services |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat with citations | OpenAI + AI Search |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat wey get citations | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent with tools | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Basic AI chat | OpenAI + Container Apps |
 
@@ -63,7 +67,7 @@ azd up
 
 ## 💰 Cost Awareness
 
-Dis na sample estimates, no be quotes or caps; model traffic, Search/compute SKUs, region, and optional features fit pass dem. Make you check di pricing guide of your sample before you start.
+Dis na example cost ranges, no be quotes or caps; model traffic, Search/compute SKUs, region, and optional features fit pass dem. Make you check your chosen sample current pricing before you start provision.
 
 | Environment | Estimated Monthly Cost |
 |-------------|----------------------|
@@ -71,7 +75,7 @@ Dis na sample estimates, no be quotes or caps; model traffic, Search/compute SKU
 | Staging | $150-300 |
 | Production | $300-3,500+ |
 
-**Tip:** Run `azd down` after you do your testing to avoid extra charges.
+**Cleanup:** Make you check `azd down` before you confirm: for newly created Foundry project e go delete the resource group and everything inside am. For reused Foundry project, e go leave the project and agent resources dey; follow the [walkthrough cleanup guidance](microsoft-foundry-integration.md#7-clean-up-deliberately) to remove unwanted resources one by one.
 
 ---
 

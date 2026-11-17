@@ -1,4 +1,4 @@
-# Command Cheat Sheet - Wes na di Must-Know AZD Commands dem
+# Command Cheat Sheet - Important AZD Commands
 
 **Quick Reference for All Chapters**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
@@ -8,27 +8,27 @@
 
 ## Introduction
 
-Dis kasa cheat sheet de give una quick reference for di commands wey people dey use pass for Azure Developer CLI, arranged by category wit practical examples. E perfect for quick check during development, troubleshooting, and daily work with azd projects.
+Dis kain full cheat sheet dey provide quick reference for di most common Azure Developer CLI commands, organize by category wit practical examples. E perfect for quick lookup while you dey develop, troubleshoot, and do daily work wit azd projects.
 
 ## Learning Goals
 
-If you use dis cheat sheet, you go:
-- Get instant access to important Azure Developer CLI commands and syntax
-- Understand how commands dem organize by functional categories and use cases
-- Refer practical examples for common development and deployment palava
-- Access troubleshooting commands to solve wahala quick quick
-- Find advanced configuration and customization options fast fast
-- Get environment management and multi-environment workflow commands easy
+By using dis cheat sheet, you go:
+- Get instant access to important Azure Developer CLI commands and how dem dey work
+- Understand how dem organize commands by function and use cases
+- Refer to practical examples for normal development and deployment situations
+- Access troubleshooting commands to solve problem quick quick
+- Find advanced configuration and way to customize things well well
+- Locate environment management and multi-environment workflow commands
 
 ## Learning Outcomes
 
-If you dey always check dis cheat sheet, you go fit:
-- Run azd commands confidently without checking full documentation
-- Solve common palava sharply using better diagnostic commands
-- Manage many environments and deployment palava well well
-- Apply advanced azd features and config options as you need am
-- Troubleshoot deployment wahala by following proper command steps
-- Make workflows better by using azd shortcuts and options sabi sabi
+If you dey regularly use dis cheat sheet, you go fit:
+- Run azd commands confident without always to check full documents
+- Solve common wahala fast fast using correct diagnostic commands
+- Manage plenty environments and deployment situations well
+- Use advanced azd features and configuration options when you need am
+- Diagnose deployment palava using normal step-by-step command series
+- Make workflow better through correct use of azd shortcuts and options
 
 ## Getting Started Commands
 
@@ -128,9 +128,9 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** dey download your app dependencies (npm, pip, NuGet, Maven, etc.). E dey run automatically during `azd package` and `azd deploy`, so you no too need call am direct—run am manually if you want pre-fetch dependencies (for example, to warm a CI cache or work offline later).
+> **`azd restore`** dey download your app dependencies dem (npm, pip, NuGet, Maven, etc.). E dey run automatically during `azd package` and `azd deploy`, so you no go fit call am direct - you fit run am manually to pre-fetch dependencies (like if you wan warm CI cache or work offline later).
 
-> **`azd package`** dey prepare deployable artifact without deploying application service. Di way e behave depend on di language and host: container packaging fit use Azure remote builds and publish images go registry, so e no guarantee say e go offline or free of Azure writes. `azd deploy` fit package automatically; you fit do separate package step if you need artifact or build check.
+> **`azd package`** dey prepare deployable artifact without deploying the app service. How e go behave depend on language and host: container packaging fit use Azure remote builds and publish images to registry, so e no always offline or free from Azure writes. `azd deploy` fit package automatically; use separate package step when you need artifact or build check.
 
 
 ## 🌍 Environment Management
@@ -170,7 +170,7 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-Environment files na plaintext. No treat `azd env set` like secret storage; use Key Vault references or managed identity like e suppose be.
+Environment files na plaintext. No treat `azd env set` as secret storage; use Key Vault references or managed identity if e better.
 
 ## ⚙️ Configuration Commands
 
@@ -219,7 +219,7 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-Application Insights must be configured by di template. AZD Live Metrics no dey supported for Python apps yet; use overview, logs, or di sample's documented tracing workflow instead.
+Application Insights must get configure by the template. AZD Live Metrics option no support for Python applications now; use overview, logs, or sample traced workflow instead.
 
 ### Viewing Container Logs
 ```bash
@@ -321,23 +321,22 @@ azd show --output json | jq '.services'
 
 ### AZD Extensions
 
-AI CLI reference wey dem check last on 2026-11-04: `azd 1.37.2`, agents `1.0.0-beta.23`, evaluations `1.0.0-beta.2`. Use `azd >= 1.37.0` for the combined workflow; upgrade di core CLI before any incompatible extensions.
+Foundry GA reference update reach 2026-11-09: `microsoft.foundry` bundle 1.0, we announce am [November 5, 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Use `azd >= 1.37.0`; components dey version separately and optional preview features get their own status.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,9 +344,12 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
+
+Bundle no carry evaluations, datasets, fine-tuning, or custom models. Still fit install individual core extensions. Follow [GA hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) for runnable sample wit Python 3.13+, current uv, permissions, and model quota.
 
 ### AI Agent Commands
 ```bash
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` dey replace old `--manifest`/`-m` spelling; old manifests need migration. No current agent-init `--host containerapp` option dey. Managed-harness, voice, and long-running previews need separate shell/CI environment opt-ins; check [AI CLI reference](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` don replace old `--manifest`/`-m` spelling; old manifests need to update. No current agent-init `--host containerapp` option. Managed-harness, voice, and long-running previews need independent shell/CI environment opt-in; see [AI CLI reference](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+Local testing still dey use Azure model deployments and e dey cost. For cleanup, `azd down` go delete newly create Foundry project resource group, but e go leave reused-project resources; remove only resources you no want and you own separately.
 
 ### AI Evaluations and Optimization
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,7 +417,22 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-Agents beta.22 don replace old evaluation commands wit `azd ai eval` from `azure.ai.evaluations`. New evaluation config dey use camelCase keys. Optimization `--config` dey take standalone optimization API request, **no be** old `eval.yaml` or new `azure.eval.yaml`; use `--eval`/`--eval-config` for evaluation reuse. Check [evaluation setup](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) and [optimization migration](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Agents beta.22 don change old evaluation commands to `azd ai eval` from `azure.ai.evaluations`. New evaluation config uses camelCase keys. Optimization `--config` na standalone optimization API request, **no be** old `eval.yaml` or new `azure.eval.yaml`; use `--eval`/`--eval-config` for evaluation reuse. See [evaluation setup](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) and [optimization migration](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+Runner fragment no be full workflow. Commit reviewed evaluation config and nonsecret assets, give dataset/evaluator/model access, use environment by stage. See [authenticated CI/CD example](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
 
 ### MCP Server (Alpha)
 ```bash
@@ -687,7 +722,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Tip**: Bookmark dis cheat sheet and use `Ctrl+F` to quickly find di commands wey you need!
+**Tip**: Bookmark dis cheat sheet and use `Ctrl+F` to quickly find commands wey you need!
 
 ---
 
@@ -697,7 +732,7 @@ azd template show <template-name> --docs
 
 ---
 
-> **💡 You wan Azure command help for your editor?** Install [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) wit `npx skills add microsoft/github-copilot-for-azure` — 37 skills for AI, Foundry, deployment, diagnostics, and more.
+> **💡 You want Azure command help for your editor?** Install [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) wit `npx skills add microsoft/github-copilot-for-azure` — 37 skills for AI, Foundry, deployment, diagnostics, and more.
 
 ---
 
