@@ -1,4 +1,4 @@
-# 6. Desmontar Infraestrutura
+# 6. Desmontar a Infraestrutura
 
 !!! tip "AO FINAL DESTE MÓDULO VOCÊ SERÁ CAPAZ DE"
 
@@ -11,9 +11,9 @@
 
 ## Exercícios Bônus
 
-Antes de desmontar o projeto, reserve alguns minutos para uma exploração aberta.
+Antes de desmontar o projeto, reserve alguns minutos para fazer uma exploração aberta.
 
-!!! info "Experimente Estes Prompts de Exploração"
+!!! info "Experimente Estas Sugestões de Exploração"
 
     **Experiment with GitHub Copilot:**
     
@@ -31,14 +31,18 @@ Antes de desmontar o projeto, reserve alguns minutos para uma exploração abert
 
 ## Desprovisionar Infraestrutura
 
-1. Desmontar a infraestrutura é tão fácil quanto:
+!!! warning "Se você também completou o exercício do agente hospedado GA"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Desmontar a infraestrutura é tão simples quanto:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Confirme o ambiente selecionado e revise os recursos a serem excluídos. Isso remove recursos do Azure e pode destruir dados. Mantenha a solicitação de confirmação para este fluxo de aprendizado. Ao concluir você verá uma saída similar a:
+1. Confirme o ambiente selecionado e revise os recursos a serem removidos. Isso exclui recursos do Azure e pode destruir dados. Mantenha o prompt de confirmação para este fluxo de aprendizado. Quando concluído, você verá uma saída semelhante a:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Antes de desmontar o projeto, reserve alguns minutos para uma exploração abert
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Verifique a exclusão no portal e confira se há recursos fora do escopo da implantação. Relatórios de custo e atualizações de cota podem atrasar. A configuração local `.azure` permanece, a menos que você a remova explicitamente.
+1. Verifique a exclusão no portal e confira se existem recursos fora do escopo da implantação. Relatórios de custos e atualizações de cota podem atrasar. A configuração local `.azure` permanece, a menos que você a remova explicitamente.
 
-1. `azd down --purge` solicita adicionalmente a exclusão permanente de recursos suportados como "soft-deleted". Use isso apenas quando a recuperação não for necessária e você entender as políticas de retenção/proteção contra purga. Não garante a liberação imediata da cota.
+1. `azd down --purge` solicita adicionalmente a exclusão permanente de recursos soft-delete suportados. Use-o somente quando a recuperação não for necessária e você entender as políticas de retenção/proteção contra purga. Isso não garante liberação imediata de cota.
 
-1. Não reimplante somente para verificar a limpeza. Uma futura `azd up` intencional pode recriar recursos usando as entradas locais restantes, e gerará custos novamente. Atualizações do modelo normalmente usam mudanças suportadas de provisionamento, não desmontagem.
+1. Não reprovisione apenas para verificar a limpeza. Um `azd up` intencional posterior pode recriar recursos usando as entradas locais restantes e novamente gera cobranças. Atualizações de modelo normalmente usam mudanças suportadas de provisionamento, não desmontagem.
 
 ---
 

@@ -6,17 +6,19 @@
 
 ## Visão Geral
 
-Este capítulo foca em implantar aplicações impulsionadas por IA usando Azure Developer CLI e serviços Microsoft Foundry. De apps simples de chat com IA a agentes inteligentes com ferramentas.
+Este capítulo foca na implantação de aplicações com IA usando Azure Developer CLI e serviços Microsoft Foundry. De aplicativos de chat simples com IA a agentes inteligentes com ferramentas.
 
-> **Revisão de lançamento (2026-11-04):** A orientação AI CLI foi verificada contra a documentação/fonte publicada `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, e `azure.ai.evaluations` `1.0.0-beta.2`. Use `azd >= 1.37.0` para o fluxo combinado. Avaliações agora usam o namespace `azd ai eval` separado; veja [alterações de lançamento e orientação para migração](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Esta não é uma validação de implantação ao vivo.
+> **Atualização Foundry GA (2026-11-09):** O pacote `microsoft.foundry` 1.0 está [disponível em geral](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Use `azd >= 1.37.0`; as avaliações continuam como instalação separada. O [tutorial de agente hospedado](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) cobre testes locais do Agent Inspector e implantação remota de código. Esta é uma revisão da documentação, não uma validação de implantação ao vivo; recursos de visualização opcionais mantêm seu próprio status.
 
 ## Objetivos de Aprendizagem
 
-Ao completar este capítulo, você irá:
-- Implantar aplicações de IA usando modelos AZD pré-construídos
+Ao concluir este capítulo, você irá:
+- Implantar aplicações de IA usando templates pré-construídos do AZD
 - Entender a integração Microsoft Foundry com AZD
+- Instalar o pacote GA e testar um agente hospedado localmente antes de implantar sua fonte no Foundry
+- Rever `azure.yaml`, ativos de avaliação e limpeza de projetos novos versus reutilizados
 - Configurar e personalizar agentes de IA com ferramentas
-- Implantar aplicações RAG (Geração Aumentada por Recuperação)
+- Implantar aplicações RAG (Geração Augmentada por Recuperação)
 
 ---
 
@@ -24,16 +26,18 @@ Ao completar este capítulo, você irá:
 
 | # | Aula | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Integração Microsoft Foundry](microsoft-foundry-integration.md) | Conectar AZD com serviços Foundry | 30 min |
+| 1 | [Integração Microsoft Foundry](microsoft-foundry-integration.md) | Pacote GA, fluxo de trabalho local-para-nuvem do agente hospedado e avaliações | 60 min |
 | 2 | [Guia de Agentes de IA](agents.md) | Implantar agentes inteligentes com ferramentas | 45 min |
-| 3 | [Implantação de Modelos de IA](ai-model-deployment.md) | Implantar e configurar modelos de IA | 30 min |
-| 4 | [Laboratório Workshop de IA](ai-workshop-lab.md) | Prática: Explorar um modelo e planejar sua conversão | 2-3 horas |
+| 3 | [Implantação de Modelo de IA](ai-model-deployment.md) | Implantar e configurar modelos de IA | 30 min |
+| 4 | [Laboratório de Workshop de IA](ai-workshop-lab.md) | Prática: Explore um template e planeje sua conversão | 2-3 horas |
 
 ---
 
 ## 🚀 Início Rápido
 
-Escolha uma opção em um diretório vazio novo. O `.` finaliza o diretório atual; caso contrário, AZD pode criar um subdiretório sem mudar o diretório de trabalho do seu shell.
+Escolha uma opção em um diretório vazio novo. O `.` final inicializa o diretório atual; caso contrário o AZD pode criar um subdiretório sem alterar o diretório de trabalho do seu shell.
+
+Para o **caminho de implantação de código do agente hospedado GA**, comece com o [tutorial guiado](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Requer AZD 1.37.0+, uv atual, Python 3.13+, permissões Foundry e cota de modelos. Os templates completos de aplicação abaixo são alternativas, não pré-requisitos para esse tutorial.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -51,27 +55,27 @@ azd up
 
 ---
 
-## 🤖 Modelos de IA em Destaque
+## 🤖 Templates de IA em Destaque
 
-| Modelo | Descrição | Serviços |
+| Template | Descrição | Serviços |
 |----------|-------------|----------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG com citações | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agente de IA com ferramentas | Serviço de Agente de IA |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat básico de IA | OpenAI + Container Apps |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agente de IA com ferramentas | Serviço de Agentes de IA |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat básico com IA | OpenAI + Container Apps |
 
 ---
 
-## 💰 Consciência de Custos
+## 💰 Conscientização de Custos
 
-Estes são intervalos ilustrativos, não cotações ou limites; tráfego de modelos, SKUs de Search/compute, região e funcionalidades opcionais podem excedê-los. Reveja a orientação de preços atual do exemplo escolhido antes de provisionar.
+Estes são intervalos ilustrativos, não cotações ou limites; tráfego de modelos, SKUs de Search/compute, região e recursos opcionais podem excedê-los. Reveja a orientação de preços atual do exemplo escolhido antes de provisionar.
 
 | Ambiente | Custo Mensal Estimado |
 |-------------|----------------------|
-| Desenvolvimento | R$ 80-150 |
-| Pré-produção | R$ 150-300 |
-| Produção | R$ 300-3.500+ |
+| Desenvolvimento | US$ 80-150 |
+| Staging | US$ 150-300 |
+| Produção | US$ 300-3.500+ |
 
-**Dica:** Execute `azd down` após o teste para evitar cobranças.
+**Limpeza:** Revise `azd down` antes de confirmar: para um projeto Foundry recém-criado, ele exclui o grupo de recursos e tudo nele. Para um projeto Foundry reutilizado, mantém o projeto e os recursos do agente; siga a [orientação de limpeza do tutorial](microsoft-foundry-integration.md#7-clean-up-deliberately) para remover recursos indesejados separadamente.
 
 ---
 
@@ -81,14 +85,14 @@ Estes são intervalos ilustrativos, não cotações ou limites; tráfego de mode
 |-----------|---------|
 | **Anterior** | [Capítulo 1: Fundamentos](../chapter-01-foundation/README.md) |
 | **Próximo** | [Capítulo 3: Configuração](../chapter-03-configuration/README.md) |
-| **Pular para** | [Capítulo 8: Padrões de Produção](../chapter-08-production/README.md) |
+| **Ir para** | [Capítulo 8: Padrões de Produção](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Recursos Relacionados
 
-- [Solução de Problemas de IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Práticas de IA para Produção](../chapter-08-production/production-ai-practices.md)
+- [Resolução de Problemas de IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Práticas de IA em Produção](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

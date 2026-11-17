@@ -1,63 +1,63 @@
 # Perguntas Frequentes (FAQ)
 
-**Obtenha ajuda por capítulo**
+**Obtenha Ajuda por Capítulo**
 - **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../README.md)
-- **🚆 Problemas de Instalação**: [Capítulo 1: Instalação e Configuração](../docs/chapter-01-foundation/installation.md)
-- **🤖 Perguntas sobre IA**: [Capítulo 2: Desenvolvimento com IA em Primeiro Lugar](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
-- **🔧 Solução de Problemas**: [Capítulo 7: Solução de Problemas e Depuração](../docs/chapter-07-troubleshooting/common-issues.md)
+- **🚆 Problemas de Instalação**: [Capítulo 1: Instalação & Configuração](../docs/chapter-01-foundation/installation.md)
+- **🤖 Perguntas sobre IA**: [Capítulo 2: Desenvolvimento Prioritário em IA](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🔧 Solução de Problemas**: [Capítulo 7: Solução de Problemas & Depuração](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ## Introdução
 
-Este FAQ abrangente oferece respostas para as perguntas mais comuns sobre o Azure Developer CLI (azd) e implantações no Azure. Encontre soluções rápidas para problemas comuns, entenda melhores práticas e obtenha esclarecimentos sobre conceitos e fluxos de trabalho do azd.
+Esta FAQ abrangente fornece respostas às perguntas mais comuns sobre Azure Developer CLI (azd) e implantações no Azure. Encontre soluções rápidas para problemas comuns, entenda as melhores práticas e obtenha esclarecimentos sobre conceitos e fluxos de trabalho do azd.
 
-## Objetivos de Aprendizado
+## Objetivos de Aprendizagem
 
-Ao revisar este FAQ, você irá:
+Ao revisar esta FAQ, você irá:
 - Encontrar respostas rápidas para perguntas e problemas comuns do Azure Developer CLI
-- Entender conceitos-chave e termos por meio de um formato prático de perguntas e respostas
-- Acessar soluções de solução de problemas para problemas frequentes e cenários de erro
-- Aprender melhores práticas por meio de perguntas frequentes sobre otimização
+- Entender conceitos e terminologia chave por meio de formato prático de perguntas e respostas
+- Acessar soluções para problemas frequentes e cenários de erro
+- Aprender as melhores práticas através de perguntas comuns sobre otimização
 - Descobrir recursos avançados e capacidades por meio de perguntas de nível especialista
-- Referenciar orientações sobre custo, segurança e estratégia de implantação de forma eficiente
+- Referenciar orientações sobre custos, segurança e estratégias de implantação de forma eficiente
 
-## Resultados de Aprendizagem
+## Resultados do Aprendizado
 
-Com referência regular a este FAQ, você será capaz de:
-- Resolver problemas comuns do Azure Developer CLI de forma independente usando as soluções fornecidas
+Com referência regular a esta FAQ, você poderá:
+- Resolver problemas comuns do Azure Developer CLI de forma independente utilizando as soluções fornecidas
 - Tomar decisões informadas sobre estratégias e configurações de implantação
-- Entender a relação entre azd e outras ferramentas e serviços Azure
-- Aplicar melhores práticas com base na experiência da comunidade e recomendações de especialistas
-- Solucionar problemas de autenticação, implantação e configuração com eficácia
-- Otimizar custos e desempenho usando os conhecimentos e recomendações do FAQ
+- Compreender a relação entre azd e outras ferramentas e serviços do Azure
+- Aplicar melhores práticas baseadas na experiência da comunidade e recomendações de especialistas
+- Solucionar problemas de autenticação, implantação e configuração de forma eficaz
+- Otimizar custos e desempenho usando insights e recomendações da FAQ
 
 ## Índice
 
-- [Primeiros Passos](#getting-started)
-- [Autenticação e Acesso](#authentication--access)
-- [Modelos e Projetos](#templates--projects)
-- [Implantação e Infraestrutura](#deployment--infrastructure)
-- [Configuração e Ambientes](#configuration--environments)
+- [Começando](#getting-started)
+- [Autenticação & Acesso](#authentication--access)
+- [Modelos & Projetos](#templates--projects)
+- [Implantação & Infraestrutura](#deployment--infrastructure)
+- [Configuração & Ambientes](#configuration--environments)
 - [Solução de Problemas](#troubleshooting)
-- [Custos e Faturamento](#cost--billing)
+- [Custos & Faturamento](#cost--billing)
 - [Melhores Práticas](#best-practices)
 - [Tópicos Avançados](#advanced-topics)
 
 ---
 
-## Primeiros Passos
+## Começando
 
 ### P: O que é Azure Developer CLI (azd)?
-**R**: Azure Developer CLI (azd) é uma ferramenta de linha de comando centrada no desenvolvedor que acelera o tempo necessário para levar sua aplicação do ambiente local de desenvolvimento para o Azure. Ela fornece melhores práticas por meio de modelos e auxilia em todo o ciclo de vida da implantação.
+**R**: Azure Developer CLI (azd) é uma ferramenta de linha de comando voltada para desenvolvedores que acelera o tempo necessário para levar sua aplicação do ambiente local para o Azure. Ela oferece melhores práticas por meio de modelos e ajuda com todo o ciclo de vida da implantação.
 
-### P: Como o azd é diferente do Azure CLI?
+### P: Como o azd é diferente da Azure CLI?
 **R**: 
-- **Azure CLI**: Ferramenta de uso geral para gerenciamento de recursos do Azure
+- **Azure CLI**: Ferramenta de uso geral para gerenciar recursos do Azure
 - **azd**: Ferramenta focada no desenvolvedor para fluxos de trabalho de implantação de aplicações
-- azd possui seu próprio fluxo de autenticação e implantação; Azure CLI é uma ferramenta separada e complementar
+- azd tem seu próprio fluxo de autenticação e implantação; Azure CLI é uma ferramenta complementar e separada
 - azd inclui modelos, gerenciamento de ambientes e automação de implantação
 
-### P: Preciso ter o Azure CLI instalado para usar azd?
-**R**: Não para o fluxo principal do AZD. Autentique-se com `azd auth login`. Instale Azure CLI separadamente quando um gancho de modelo ou exercício executar explicitamente comandos `az`.
+### P: Preciso ter Azure CLI instalada para usar azd?
+**R**: Não para o fluxo essencial do AZD. Autentique-se com `azd auth login`. Instale a Azure CLI separadamente quando um gancho de modelo ou exercício executar explicitamente comandos `az`.
 
 ### P: Quais linguagens de programação o azd suporta?
 **R**: azd é independente de linguagem. Funciona com:
@@ -73,30 +73,38 @@ Com referência regular a este FAQ, você será capaz de:
 ### P: Posso usar azd com projetos existentes?
 **R**: Sim! Você pode:
 1. Usar `azd init` para adicionar configuração azd a projetos existentes
-2. Adaptar projetos existentes para corresponder à estrutura de modelos do azd
-3. Criar modelos personalizados baseados na sua arquitetura atual
+2. Adaptar projetos existentes para corresponder à estrutura de modelo azd
+3. Criar modelos personalizados com base na sua arquitetura existente
+
+### P: O que mudou com a disponibilidade geral da extensão Foundry?
+**R**: O pacote `microsoft.foundry` atingiu a versão 1.0 e GA em 5 de novembro de 2026. Com AZD 1.37.0+, use `azd ext install microsoft.foundry` para instalar sete extensões principais para agentes, conexões, inspetor, projetos, rotinas, habilidades e caixas de ferramentas. Não é um novo namespace de comando, e seus componentes possuem versões independentes. Avaliações, conjuntos de dados, ajuste fino e modelos personalizados são instalados separadamente; recursos opcionais em prévia não se tornam GA apenas porque o pacote é GA.
+
+O [tutorial do agente hospedado](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) usa Python 3.13+ e uv atual. `azd ai agent run` abre o Agent Inspector localmente, mas chamadas de modelo ainda usam Azure e geram cobranças. O modo código `azd deploy` envia o código-fonte para uma compilação remota sem exigir compilação local em container.
+
+### P: `azd down` remove um agente hospedado de um projeto Foundry existente?
+**R**: Não para o caminho com projeto reutilizado descrito no quickstart do agente hospedado: ele deixa projeto, agente hospedado e outros recursos no lugar. Remova recursos indesejados separadamente sem deletar recursos compartilhados. Se o ambiente criou um novo projeto Foundry, `azd down` exclui o grupo de recursos e tudo nele. Revise a [orientação de limpeza](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#7-clean-up-deliberately) e os avisos de exclusão antes de confirmar.
 
 ---
 
-## Autenticação e Acesso
+## Autenticação & Acesso
 
-### P: Como faço para autenticar com Azure usando azd?
-**R**: Use `azd auth login` que abrirá uma janela de navegador para autenticação no Azure. Para cenários de CI/CD, utilize perfis de serviço ou identidades gerenciadas.
+### P: Como me autentico no Azure usando azd?
+**R**: Use `azd auth login` que abrirá uma janela do navegador para autenticação Azure. Para cenários CI/CD, utilize service principals ou identidades gerenciadas.
 
 ### P: Posso usar azd com múltiplas assinaturas do Azure?
 **R**: Sim. Use `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` para especificar qual assinatura usar para cada ambiente.
 
-### P: Quais permissões eu preciso para implantar com azd?
-**R**: Tipicamente você precisa:
-- Papel **Colaborador** no grupo de recursos ou assinatura
-- Papel **Administrador de Acesso do Usuário** se implantar recursos que requerem atribuições de papéis
+### P: Quais permissões preciso para implantar com azd?
+**R**: Normalmente você precisa:
+- Papel de **Colaborador** no grupo de recursos ou assinatura
+- **Administrador de Acesso de Usuário** para implantar recursos que exigem atribuições de função
 - Permissões específicas variam conforme modelo e recursos implantados
 
-### P: Posso usar azd em pipelines de CI/CD?
-**R**: Absolutamente! azd foi projetado para integração CI/CD. Use perfis de serviço para autenticação e defina variáveis de ambiente para configuração.
+### P: Posso usar azd em pipelines CI/CD?
+**R**: Absolutamente! azd é projetado para integração CI/CD. Use service principals para autenticação e defina variáveis de ambiente para configuração.
 
-### P: Como faço para lidar com autenticação no GitHub Actions?
-**R**: Prefira federação de identidade de carga de trabalho (OIDC), configurada com `azd pipeline config`. O fluxo gerado instala o AZD e autentica o AZD diretamente com uma identidade federada. Um passo `azure/login` sozinho não estabelece login AZD. Um passo de login dentro de um job existente é:
+### P: Como gerencio autenticação no GitHub Actions?
+**R**: Prefira federação de identidade de workload (OIDC), configurada com `azd pipeline config`. O workflow gerado instala AZD e autentica AZD diretamente com identidade federada. Um passo `azure/login` sozinho não estabelece login AZD. Um passo de login dentro de um job existente é:
 ```yaml
 permissions:
   contents: read
@@ -111,27 +119,27 @@ steps:
       --federated-credential-provider github
 ```
 
-Faça provisionamento ou implante após o login, com o ambiente, assinatura e localização AZD pretendidos configurados. A credencial federada deve confiar no repositório/ref do fluxo de trabalho ou no ambiente do GitHub e seus papéis Azure devem permitir as operações solicitadas.
+Provisione ou implante após o login, com ambiente, assinatura e local AZD configurados conforme pretendido. A credencial federada da identidade deve confiar no repositório/ref ou ambiente GitHub do workflow, e suas funções Azure devem permitir as operações solicitadas.
 
 ---
 
-## Modelos e Projetos
+## Modelos & Projetos
 
 ### P: Onde posso encontrar modelos azd?
 **R**: 
 - Modelos oficiais e da comunidade: [Awesome AZD](https://azure.github.io/awesome-azd/)
-- Modelos da comunidade: pesquisa no GitHub por "azd-template"
-- Use `azd template list` para navegar pelos modelos disponíveis
+- Modelos da comunidade: busca no GitHub por "azd-template"
+- Use `azd template list` para navegar nos modelos disponíveis
 
 ### P: Como crio um modelo personalizado?
 **R**: 
 1. Comece com uma estrutura de modelo existente
-2. Modifique `azure.yaml`, arquivos de infraestrutura e código da aplicação
-3. Teste minuciosamente com `azd up`
+2. Modifique `azure.yaml`, arquivos de infraestrutura e código do aplicativo
+3. Teste exaustivamente com `azd up`
 4. Publique no GitHub com tags apropriadas
 
 ### P: Posso usar azd sem um modelo?
-**R**: Sim, use `azd init` em um projeto existente para criar os arquivos de configuração necessários. Você precisará configurar manualmente `azure.yaml` e arquivos de infraestrutura.
+**R**: Sim, use `azd init` em um projeto existente para criar os arquivos de configuração necessários. Será necessário configurar manualmente `azure.yaml` e arquivos de infraestrutura.
 
 ### P: Qual a diferença entre modelos oficiais e da comunidade?
 **R**: 
@@ -140,25 +148,25 @@ Faça provisionamento ou implante após o login, com o ambiente, assinatura e lo
 
 ### P: Como atualizo um modelo no meu projeto?
 **R**: Modelos não são atualizados automaticamente. Você pode:
-1. Comparar manualmente e mesclar alterações do modelo fonte
+1. Comparar e mesclar manualmente alterações do modelo fonte
 2. Começar do zero com `azd init` usando o modelo atualizado
 3. Selecionar melhorias específicas de modelos atualizados
 
 ---
 
-## Implantação e Infraestrutura
+## Implantação & Infraestrutura
 
-### P: Quais serviços Azure o azd pode implantar?
-**R**: azd pode implantar qualquer serviço Azure por meio de modelos Bicep/ARM, incluindo:
+### P: Quais serviços Azure azd pode implantar?
+**R**: azd pode implantar qualquer serviço Azure via modelos Bicep/ARM, incluindo:
 - App Services, Container Apps, Functions
 - Bancos de dados (SQL, PostgreSQL, Cosmos DB)
 - Armazenamento, Key Vault, Application Insights
-- Recursos de rede, segurança e monitoramento
+- Redes, segurança e recursos de monitoramento
 
 ### P: Posso implantar em múltiplas regiões?
-**R**: Sim, configure múltiplas regiões nos seus modelos Bicep e defina o parâmetro de localização apropriadamente para cada ambiente.
+**R**: Sim, configure múltiplas regiões em seus modelos Bicep e defina o parâmetro de local apropriadamente para cada ambiente.
 
-### P: Como faço migração de esquemas de banco de dados?
+### P: Como gerencio migrações de esquema de banco de dados?
 **R**: Use ganchos de implantação em `azure.yaml`:
 ```yaml
 hooks:
@@ -169,31 +177,31 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### P: Posso implantar apenas infraestrutura sem aplicações?
+### P: Posso implantar só a infraestrutura sem aplicações?
 **R**: Sim, use `azd provision` para implantar apenas os componentes de infraestrutura definidos nos seus modelos.
 
-### P: Como faço para implantar em recursos Azure existentes?
-**R**: Sim, quando o modelo suporta. Referencie recursos existentes com declarações `existing` do Bicep ou parâmetros documentados de recursos existentes do modelo, e mapeie serviços da aplicação para seus alvos pretendidos. Isso não importa propriedade nem cria permissões automaticamente. Revise o modelo antes de implantar.
+### P: Como implanto em recursos Azure existentes?
+**R**: Sim, quando o modelo suportar. Faça referência a recursos existentes com declarações `existing` do Bicep ou parâmetros documentados de recursos existentes do modelo, e mapeie serviços de aplicação para seus alvos pretendidos. Isso não importa propriedade nem cria permissões automaticamente. Revise o modelo antes da implantação.
 
-### P: Posso usar Terraform ao invés de Bicep?
-**R**: Sim. AZD suporta Terraform assim como Bicep. Selecione um modelo baseado em Terraform ou configure `infra.provider: terraform` em `azure.yaml`, com arquivos Terraform apropriados e configuração de estado/backend. Veja o [fluxo Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+### P: Posso usar Terraform em vez de Bicep?
+**R**: Sim. AZD suporta Terraform assim como Bicep. Selecione um modelo baseado em Terraform ou configure `infra.provider: terraform` em `azure.yaml`, com arquivos Terraform e configuração de estado/backend apropriados. Veja o [fluxo de trabalho Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
 ---
 
-## Configuração e Ambientes
+## Configuração & Ambientes
 
 ### P: Como gerencio diferentes ambientes (dev, staging, prod)?
-**R**: Crie ambientes separados com `azd env new <environment-name>` e configure definições diferentes para cada um:
+**R**: Crie ambientes separados com `azd env new <environment-name>` e configure configurações diferentes para cada um:
 ```bash
 azd env new development
 azd env new staging  
 azd env new production
 ```
 
-### P: Onde as configurações dos ambientes são armazenadas?
-**R**: Na pasta `.azure` dentro do diretório do seu projeto. Cada ambiente tem sua própria pasta com arquivos de configuração.
+### P: Onde as configurações de ambiente são armazenadas?
+**R**: Na pasta `.azure` dentro do diretório do seu projeto. Cada ambiente possui sua própria pasta com arquivos de configuração.
 
-### P: Como defino configurações específicas do ambiente?
+### P: Como defino configurações específicas por ambiente?
 **R**: Use `azd env set` para configurar variáveis de ambiente:
 ```bash
 azd env set AZURE_LOCATION eastus
@@ -201,13 +209,13 @@ azd env set DATABASE_TIER Basic
 ```
 
 ### P: Posso compartilhar configurações de ambiente entre membros da equipe?
-**R**: A pasta `.azure` contém informações sensíveis e não deve ser commitada no controle de versão. Em vez disso:
-1. Documente variáveis de ambiente necessárias
+**R**: A pasta `.azure` contém informações sensíveis e não deve ser versionada. Em vez disso:
+1. Documente as variáveis de ambiente necessárias
 2. Use scripts de implantação para configurar ambientes
-3. Use Azure Key Vault para configurações sensíveis
+3. Utilize Azure Key Vault para configurações sensíveis
 
 ### P: Como sobrescrevo padrões do modelo?
-**R**: Defina variáveis de ambiente correspondentes aos parâmetros do modelo:
+**R**: Defina variáveis de ambiente que correspondam a parâmetros do modelo:
 ```bash
 azd env set AZURE_LOCATION westus2
 azd env set SKU_NAME "B1"
@@ -222,80 +230,80 @@ Apenas variáveis consumidas pelo modelo afetam a implantação. `SKU_NAME` acim
 ### P: Por que `azd up` está falhando?
 **R**: Causas comuns:
 1. **Problemas de autenticação**: Execute `azd auth login`
-2. **Permissões insuficientes**: Verifique suas atribuições de papéis no Azure
-3. **Conflitos de nomeação de recursos**: Revise o recurso conflitante e as entradas de nomeação do modelo; crie um ambiente separado com `azd env new` quando isolamento for necessário
+2. **Permissões insuficientes**: Verifique suas atribuições de função Azure
+3. **Conflitos de nomeação de recurso**: Revise o recurso conflituante e as entradas de nomeação do modelo; crie um ambiente separado com `azd env new` quando for necessária isolação
 4. **Problemas de cota/capacidade**: Verifique disponibilidade regional
-5. **Erros no modelo**: Valide os modelos Bicep
+5. **Erros no modelo**: Valide modelos Bicep
 
-### P: Como faço para depurar falhas de implantação?
+### P: Como faço para depurar falhas na implantação?
 **R**: 
 1. Use `azd deploy --debug` para saída detalhada
-2. Verifique o histórico de implantações no portal Azure
+2. Verifique histórico de implantação no portal Azure
 3. Revise o Log de Atividades no portal Azure
-4. Use `azd show` para exibir o estado atual do ambiente
+4. Use `azd show` para mostrar estado atual do ambiente
 
 ### P: Por que minhas variáveis de ambiente não estão funcionando?
 **R**: Verifique:
-1. Os nomes das variáveis correspondem exatamente aos parâmetros do modelo
-2. Valores são devidamente entre aspas se contêm espaços
-3. O ambiente está selecionado: `azd env select <environment>`
-4. Variáveis foram definidas no ambiente correto
+1. Nomes de variável correspondem exatamente aos parâmetros do modelo
+2. Valores estão corretamente entre aspas se possuem espaços
+3. Ambiente está selecionado: `azd env select <environment>`
+4. Variáveis estão definidas no ambiente correto
 
-### P: Como faço para limpar implantações com falha?
+### P: Como limpo implantações com falha?
 **R**: 
 ```bash
 azd down
 ```
-Revise o ambiente selecionado e a confirmação de exclusão primeiro. Isso exclui recursos Azure provisionados, não a configuração local do ambiente `.azure`. `--purge` também solicita exclusão permanente de recursos excluídos suavemente suportados e pode ser bloqueado por proteção de retenção/purgue; não é um passo rotineiro de recuperação.
+Revise primeiro o ambiente selecionado e a confirmação de exclusão. Isso exclui recursos Azure provisionados, não a configuração local do ambiente `.azure`. `--purge` solicita adicionalmente exclusão permanente de recursos com exclusão suave suportada e pode ser bloqueado por proteção de retenção/purga; não é um passo rotineiro de recuperação.
 
 ### P: Por que minha aplicação não está acessível após a implantação?
 **R**: Verifique:
-1. A implantação foi concluída com sucesso
-2. A aplicação está em execução (verifique os logs no portal Azure)
-3. Grupos de segurança de rede permitem o tráfego
+1. Implantação foi concluída com sucesso
+2. Aplicação está rodando (verifique logs no portal Azure)
+3. Grupos de segurança de rede permitem tráfego
 4. DNS/domínios personalizados estão configurados corretamente
 
 ---
 
-## Custos e Faturamento
+## Custos & Faturamento
 
 ### P: Quanto custarão as implantações azd?
-**R**: Os custos dependem de:
+**R**: Custos dependem de:
 - Serviços Azure implantados
-- Camadas SKUs selecionadas
-- Diferenças de preços regionais
+- Níveis/SKUs de serviço selecionados
+- Diferenças regionais de preço
 - Padrões de uso
 
-Use a [Calculadora de Preços Azure](https://azure.microsoft.com/pricing/calculator/) para estimativas.
+Use a [Calculadora de Preços do Azure](https://azure.microsoft.com/pricing/calculator/) para estimativas.
 
-### P: Como controlo custos nas implantações azd?
+### P: Como controlo custos em implantações azd?
 **R**: 
-1. Use SKUs de camada inferior para ambientes de desenvolvimento
+1. Use SKUs de nível inferior para ambientes de desenvolvimento
 2. Configure orçamentos e alertas no Azure
-3. Use `azd down` para remover recursos quando não forem necessários
-4. Escolha regiões apropriadas (custos variam conforme localização)
-5. Use ferramentas de Gerenciamento de Custos Azure
+3. Use `azd down` para remover recursos quando não necessários
+4. Escolha regiões apropriadas (custos variam por local)
+5. Utilize ferramentas de Gestão de Custos do Azure
 
-### P: Existem opções gratuitas para os modelos azd?
-**R**: Alguns serviços têm SKUs gratuitos ou concessões mensais, sujeitos a elegibilidade, plano de hospedagem, região e limites de assinatura. Eles não tornam um modelo inteiro gratuito: bancos de dados, pesquisa, rede, registro, telemetria e inferência de modelo podem gerar cobranças independentes. Consulte a [lista de serviços gratuitos Azure](https://azure.microsoft.com/free/) e preços atuais para cada recurso antes da implantação.
+### P: Existem opções de nível gratuito para os templates azd?
+**R**: Alguns serviços possuem SKUs gratuitos ou créditos mensais, sujeitos a elegibilidade, plano de hospedagem, região e limites de assinatura. Isso não faz o template inteiro ser gratuito: bancos de dados, pesquisa, rede, registro, telemetria e inferência de modelo podem gerar cobranças independentemente. Confira a [lista de serviços gratuitos do Azure](https://azure.microsoft.com/free/) e os preços atuais de cada recurso antes da implantação.
 
-### P: Como estimo custos antes da implantação?
+### P: Como faço para estimar custos antes da implantação?
 **R**: 
-1. Revise `main.bicep` do modelo para ver quais recursos são criados
-2. Use a Calculadora de Preços Azure com SKUs específicos
-3. Primeiro implante em ambiente de desenvolvimento para monitorar custos reais
-4. Use Gerenciamento de Custos Azure para análise detalhada de custos
+1. Revise o `main.bicep` do template para ver quais recursos serão criados
+2. Use a Calculadora de Preços do Azure com SKUs específicos
+3. Faça a implantação primeiro em um ambiente de desenvolvimento para monitorar custos reais
+4. Use o Gerenciamento de Custos do Azure para análise detalhada de custos
 
 ---
 
 ## Melhores Práticas
 
-### P: Quais são as melhores práticas para estrutura de projeto azd?
+### P: Quais são as melhores práticas para a estrutura de projetos azd?
 **R**: 
 1. Mantenha o código da aplicação separado da infraestrutura
 2. Use nomes significativos para serviços em `azure.yaml`
 3. Implemente tratamento adequado de erros nos scripts de build
-4. Use configuração específica do ambiente
+4. Use configurações específicas para cada ambiente
 5. Inclua documentação abrangente
 
 ### P: Como devo organizar múltiplos serviços no azd?
@@ -319,24 +327,24 @@ Use a [Calculadora de Preços Azure](https://azure.microsoft.com/pricing/calcula
 ### P: Como devo lidar com segredos e configurações sensíveis?
 **R**: 
 1. Use o Azure Key Vault para segredos
-2. Faça referência aos segredos do Key Vault na configuração da aplicação
-3. Nunca faça commit de segredos no controle de versão
+2. Faça referência aos segredos do Key Vault nas configurações da aplicação
+3. Nunca commite segredos no controle de versão
 4. Use identidades gerenciadas para autenticação entre serviços
 
-### P: Qual é a abordagem recomendada para CI/CD com azd?
+### P: Qual a abordagem recomendada para CI/CD com azd?
 **R**: 
-1. Use ambientes separados para cada estágio (dev/staging/prod)
-2. Implemente testes automatizados antes do deploy
-3. Use service principals para autenticação
-4. Armazene configurações sensíveis em segredos/variáveis de pipeline
-5. Implemente portões de aprovação para deploy em produção
+1. Use ambientes separados para cada estágio (dev/homolog/prod)
+2. Implemente testes automatizados antes da implantação
+3. Use principiantes de serviço para autenticação
+4. Armazene configurações sensíveis em segredos/variáveis do pipeline
+5. Implemente gates de aprovação para implantações em produção
 
 ---
 
 ## Tópicos Avançados
 
-### P: Posso estender o azd com funcionalidades personalizadas?
-**R**: Sim, por meio de hooks de deploy em `azure.yaml`:
+### P: Posso estender o azd com funcionalidades customizadas?
+**R**: Sim, através de hooks de implantação em `azure.yaml`:
 ```yaml
 hooks:
   predeploy:
@@ -345,58 +353,58 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### P: Como integro o azd aos processos de DevOps existentes?
+### P: Como integro azd com processos DevOps existentes?
 **R**: 
 1. Use comandos azd nos scripts de pipeline existentes
-2. Padronize templates azd entre as equipes
+2. Padronize o uso de templates azd entre equipes
 3. Integre com monitoramento e alertas existentes
-4. Use a saída JSON do azd para integração em pipelines
+4. Use a saída JSON do azd para integração no pipeline
 
 ### P: Posso usar azd com Azure DevOps?
-**R**: Sim, azd funciona com qualquer sistema de CI/CD. Crie pipelines Azure DevOps que usem comandos azd.
+**R**: Sim, azd funciona com qualquer sistema de CI/CD. Crie pipelines no Azure DevOps que usem comandos azd.
 
-### P: Como contribuir para o azd ou criar templates comunitários?
+### P: Como contribuo para azd ou crio templates comunitários?
 **R**: 
 1. **ferramenta azd**: Contribua para [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Templates**: Siga as [instruções para contribuição na galeria Awesome AZD](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
-3. **Documentação**: Contribua na docs em [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+2. **Templates**: Siga as [instruções de contribuição para a galeria Awesome AZD](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
+3. **Documentação**: Contribua para os docs em [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
 
 ### P: Qual é o roadmap do azd?
-**R**: Consulte o [roadmap oficial](https://github.com/Azure/azure-dev/projects) para recursos e melhorias planejados.
+**R**: Veja o [roadmap oficial](https://github.com/Azure/azure-dev/projects) para funcionalidades planejadas e melhorias.
 
-### P: Como migrar de outras ferramentas de deploy para azd?
+### P: Como migro de outras ferramentas de implantação para azd?
 **R**: 
-1. Analise a arquitetura atual de deploy
+1. Analise a arquitetura atual de implantação
 2. Crie templates Bicep equivalentes
 3. Configure `azure.yaml` para corresponder aos serviços atuais
 4. Teste exaustivamente no ambiente de desenvolvimento
-5. Migre ambientes gradualmente
+5. Migre os ambientes gradualmente
 
 ---
 
 ## Ainda Tem Dúvidas?
 
 ### **Pesquise Primeiro**
-- Consulte a [documentação oficial](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- Pesquise em [issues do GitHub](https://github.com/Azure/azure-dev/issues) por problemas semelhantes
+- Confira a [documentação oficial](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- Pesquise em [problemas no GitHub](https://github.com/Azure/azure-dev/issues) por problemas semelhantes
 
 ### **Obtenha Ajuda**
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Suporte da comunidade
+- [Discussões no GitHub](https://github.com/Azure/azure-dev/discussions) - Suporte da comunidade
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Perguntas técnicas
-- [Azure Discord](https://discord.gg/azure) - Chat comunitário em tempo real
+- [Azure Discord](https://discord.gg/azure) - Chat da comunidade em tempo real
 
 ### **Reporte Problemas**
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Relatórios de bugs e pedidos de recursos
+- [Issues no GitHub](https://github.com/Azure/azure-dev/issues/new) - Relatórios de bugs e solicitações de recursos
 - Inclua logs relevantes, mensagens de erro e passos para reproduzir
 
 ### **Saiba Mais**
-- [Documentação Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Centro de Arquitetura Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Documentação do Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Centro de Arquitetura do Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Framework Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-*Orientação técnica revisada em: 4 de novembro de 2026. Disponibilidade na nuvem e preços devem ser verificados para sua assinatura e região.*
+*Orientação técnica revisada: 4 de novembro de 2026. Disponibilidade na nuvem e preços devem ser verificados para sua assinatura e região.*
 
 ---
 
