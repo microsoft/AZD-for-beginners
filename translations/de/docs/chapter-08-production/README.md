@@ -1,24 +1,24 @@
-# Kapitel 8: Produktions- & Enterprise-Muster
+# Kapitel 8: Produktions- & Unternehmensmuster
 
-**📚 Kurs**: [AZD für Anfänger](../../README.md) | **⏱️ Dauer**: 2-3 Stunden | **⭐ Komplexität**: Fortgeschritten
+**📚 Kurs**: [AZD Für Einsteiger](../../README.md) | **⏱️ Dauer**: 2-3 Stunden | **⭐ Komplexität**: Fortgeschritten
 
 ---
 
 ## Überblick
 
-Dieses Kapitel behandelt unternehmensgerechte Bereitstellungsmuster, Sicherheitshärtung, Überwachung und Kostenoptimierung für produktive KI-Arbeitslasten.
+Dieses Kapitel behandelt unternehmensgerechte Bereitstellungsmuster, Sicherheits-Härtung, Überwachung und Kostenoptimierung für produktive KI-Arbeitslasten.
 
-Dies ist eine architektonische Referenz, keine vollständig bereitstellbare Produktion-Vorlage. Beispiele lassen Integrationsdetails weg, die in Ihrer eigenen Anwendung bereitgestellt und getestet werden müssen; das Lesen der Checkliste garantiert keine Produktionsreife.
+Dies ist eine Architekturreferenz, keine vollständige produktionsfähige Vorlage. Beispiele lassen Integrationsdetails weg, die in Ihrer eigenen Anwendung bereitgestellt und getestet werden müssen; das Lesen der Checkliste zertifiziert nicht die Produktionsreife.
 
-> **Release-Überprüfung (2026-11-04):** Die KI-CLI-Anleitung wurde mit der Dokumentation/Quelle von `azd 1.37.2`, Agents `1.0.0-beta.23` und Bewertungen `1.0.0-beta.2` abgeglichen. Siehe [Release-Änderungen und Fixes](production-ai-practices.md#recent-release-changes-and-fixes) für Kompatibilitätsanforderungen und Migrationsdetails; dies ist keine Live-Bereitstellungsvalidierung.
+> **Foundry GA-Update (2026-11-09):** Verwenden Sie `azd >= 1.37.0` und das allgemein verfügbare `microsoft.foundry` 1.0-Bundle für den Foundry-Workflow; Bewertungen werden separat installiert. Siehe [Release-Umfang und Migration](production-ai-practices.md#recent-release-changes-and-fixes) und das [beispielhafte authentifizierte Pipeline-Beispiel](production-ai-practices.md#cicd-pipeline-configuration). Dies ist eine Dokumentationsüberprüfung, keine Live-Bereitstellungsvalidierung oder pauschaler GA-Status für optionale Vorschaufunktionen.
 
 ## Lernziele
 
 Nach Abschluss dieses Kapitels werden Sie:
-- Mehrregionale resilientere Anwendungen bereitstellen
+- Mehrregionale widerstandsfähige Anwendungen bereitstellen
 - Unternehmenssicherheitsmuster implementieren
 - Umfassende Überwachung konfigurieren
-- Kosten in großem Maßstab optimieren
+- Kosten im großen Maßstab optimieren
 - CI/CD-Pipelines mit AZD einrichten
 
 ---
@@ -33,13 +33,13 @@ Nach Abschluss dieses Kapitels werden Sie:
 
 ## 🚀 Produktions-Checkliste
 
-- [ ] Mehrregionale Bereitstellung für Resilienz
+- [ ] Mehrregionale Bereitstellung für Widerstandsfähigkeit
 - [ ] Verwaltete Identität für Authentifizierung (keine Schlüssel)
-- [ ] Application Insights zur Überwachung
+- [ ] Application Insights für Überwachung
 - [ ] Kostenbudgets und Warnungen konfiguriert
-- [ ] Aktivierte Sicherheitsüberprüfung
+- [ ] Sicherheitsscans aktiviert
 - [ ] CI/CD-Pipeline-Integration
-- [ ] Disaster-Recovery-Plan
+- [ ] Wiederherstellungsplan für Notfälle
 
 ---
 
@@ -85,18 +85,18 @@ properties: {
 
 ## 💰 Kostenoptimierung
 
-| Strategie | Haupteinschränkung |
-|----------|---------|
-| Auf null skalieren (Container Apps) | Erfordert passenden Trigger; andere Dienste verursachen weiterhin Kosten |
-| Verbrauchsstufen für Entwicklung nutzen | Vergleiche ausgewählte Servicepreise und Arbeitslast |
-| Geplantes Skalieren | Skalierung über unterstützte Infrastruktur/Automatisierung |
-| Reservierungen/vorgesehene Kapazität | Nur wenn unterstützt; Verpflichtungen können Leerkosten erhöhen |
+| Strategie | Hauptbeschränkung |
+|----------|--------------------|
+| Skalierung auf null (Container Apps) | Erfordert einen geeigneten Trigger; andere Dienste verursachen weiterhin Kosten |
+| Nutzung von Verbrauchsstufen für Entwicklung | Preisvergleich der ausgewählten Dienste und Arbeitslast |
+| Geplante Skalierung | Skalierung über unterstützte Infrastruktur/Automatisierung |
+| Reservierungen/vorab bereitgestellte Kapazität | Nur wenn unterstützt; Verpflichtungen können Leerkosten erhöhen |
 
-Verwenden Sie das [vollständige Budget-Ressourcenmuster](production-ai-practices.md#2-cost-monitoring-and-budgets) mit gültigem Startdatum, Abrechnungsscope, Empfängern und Berechtigungen. Ein Budget sendet Warnungen; es begrenzt nicht die Ausgaben. Einsparungen hängen von gemessener Nutzung ab und sind keine garantierten Prozentsätze.
+Verwenden Sie das [vollständige Budget-Ressourcenmuster](production-ai-practices.md#2-cost-monitoring-and-budgets) mit einem gültigen Startdatum, Abrechnungsbereich, Empfängern und Berechtigungen. Ein Budget sendet Warnungen; es begrenzt nicht die Ausgaben. Einsparungen hängen von der gemessenen Nutzung ab und sind keine garantierten Prozentsätze.
 
 ---
 
-## 📊 Überwachungseinrichtung
+## 📊 Überwachungs-Setup
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -115,14 +115,14 @@ az monitor metrics list --resource <resource-id>
 
 | Richtung | Kapitel |
 |-----------|---------|
-| **Zurück** | [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md) |
-| **Kurs abgeschlossen** | [Kursübersicht](../../README.md) |
+| **Vorheriges** | [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md) |
+| **Kurs abgeschlossen** | [Kursstartseite](../../README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
-- [KI Agents Anleitung](../chapter-02-ai-development/agents.md)
+- [KI-Agenten Leitfaden](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Multi-Agenten-Lösungen](../chapter-05-multi-agent/README.md)
 - [Microservices-Beispiel](../../examples/microservices/README.md)

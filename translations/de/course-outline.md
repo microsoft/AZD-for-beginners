@@ -1,48 +1,48 @@
-# AZD für Anfänger: Kursübersicht & Lernrahmen
+# AZD Für Anfänger: Kursübersicht & Lernrahmen
 
 ## Kursübersicht
 
-Meistern Sie Azure Developer CLI (azd) durch strukturierte Kapitel, die für fortschreitendes Lernen konzipiert sind. **Besonderer Fokus auf AI-Anwendungsbereitstellung mit Microsoft Foundry-Integration.**
+Meistern Sie Azure Developer CLI (azd) durch strukturierte Kapitel, die für fortschreitendes Lernen konzipiert sind. **Besonderer Fokus auf die Bereitstellung von KI-Anwendungen mit Microsoft Foundry-Integration.**
 
-### Warum dieser Kurs für moderne Entwickler essenziell ist
+### Warum dieser Kurs für moderne Entwickler unerlässlich ist
 
-Entwickler, die AI-Workloads bereitstellen, benötigen häufig Unterstützung bei:
-- Komplexe Multi-Service AI-Architekturen
-- Best Practices für die produktive AI-Bereitstellung  
-- Integration und Konfiguration von Azure AI-Diensten
-- Kostenoptimierung für AI-Workloads
-- Fehlersuche bei AI-spezifischen Bereitstellungsproblemen
+Entwickler, die KI-Workloads bereitstellen, benötigen häufig Unterstützung bei:
+- Komplexen Mehrdienst-KI-Architekturen
+- Best Practices für die produktive KI-Bereitstellung
+- Azure KI-Dienstintegration und -konfiguration
+- Kostenoptimierung für KI-Workloads
+- Fehlerbehebung bei KI-spezifischen Bereitstellungsproblemen
 
 ### Kernlernziele
 
 Durch den Abschluss dieses strukturierten Kurses werden Sie:
 - **AZD-Grundlagen meistern**: Kernkonzepte, Installation und Konfiguration
-- **AI-Anwendungen bereitstellen**: Verwendung von AZD mit Microsoft Foundry-Diensten
-- **Infrastructure as Code umsetzen**: Azure-Ressourcen mit Bicep-Vorlagen verwalten
-- **Bereitstellungen beheben**: Häufige Probleme lösen und Debugging durchführen
-- **Für Produktion optimieren**: Sicherheit, Skalierung, Überwachung und Kostenmanagement
-- **Multi-Agenten-Lösungen bauen**: Komplexe AI-Architekturen bereitstellen
+- **KI-Anwendungen bereitstellen**: Verwenden Sie AZD mit Microsoft Foundry-Diensten
+- **Infrastructure as Code implementieren**: Verwaltung von Azure-Ressourcen mit Bicep-Vorlagen
+- **Bereitstellungen beheben**: Häufige Probleme beheben und Debuggen
+- **Für die Produktion optimieren**: Sicherheit, Skalierung, Monitoring und Kostenmanagement
+- **Mehragenten-Lösungen bauen**: Bereitstellung komplexer KI-Architekturen
 
 ## 🎓 Workshop-Lernerfahrung
 
-### Flexible Lernmethoden
-Dieser Kurs unterstützt sowohl **selbstgesteuertes individuelles Lernen** als auch **moderierte Workshops**, wodurch Lernende praktische Erfahrung mit AZD sammeln und durch interaktive Übungen ihre Fähigkeiten entwickeln können.
+### Flexible Lernoptionen
+Dieser Kurs ist darauf ausgelegt, sowohl **selbstgesteuertes individuelles Lernen** als auch **moderierte Workshopsitzungen** zu unterstützen, damit Lernende praktische Erfahrung mit AZD sammeln und praktische Fähigkeiten durch interaktive Übungen entwickeln können.
 
-#### 🚀 Selbstgesteuertes Lernen
+#### 🚀 Selbstgesteuerter Lernmodus
 **Perfekt für einzelne Entwickler und kontinuierliches Lernen**
 
 **Merkmale:**
-- **Browserbasierte Oberfläche**: Vollständiger MkDocs-basierter Workshop, zugänglich über jeden Webbrowser
-- **GitHub Codespaces-Integration**: Entwicklungsumgebung mit einem Klick und vorinstallierten Tools
-- **Interaktive DevContainer-Umgebung**: Keine lokale Einrichtung nötig – sofort mit dem Codieren beginnen
+- **Browser-basierte Schnittstelle**: Vollständiger MkDocs-gestützter Workshop, zugänglich über jeden Webbrowser
+- **GitHub Codespaces Integration**: Mit einem Klick Entwicklungsumgebung mit vorkonfigurierten Tools
+- **Interaktive DevContainer-Umgebung**: Keine lokale Einrichtung erforderlich - sofort mit dem Programmieren beginnen
 - **Fortschrittsverfolgung**: Eingebaute Kontrollpunkte und Validierungsübungen
-- **Community-Support**: Zugang zu Azure Discord-Kanälen für Fragen und Zusammenarbeit
+- **Community-Unterstützung**: Zugriff auf Azure Discord-Kanäle für Fragen und Zusammenarbeit
 
 **Lernstruktur:**
-- **Flexible Zeitgestaltung**: Kapitel in eigenem Tempo über Tage oder Wochen absolvieren
-- **Kontrollpunktsystem**: Lernfortschritt validieren, bevor zu komplexen Themen übergegangen wird
-- **Ressourcenbibliothek**: Umfassende Dokumentation, Beispiele und Fehlerbehebung
-- **Portfolioentwicklung**: Projekte erstellen und bereitstellen für professionelle Portfolios
+- **Flexible Zeitgestaltung**: Abschließen der Kapitel im eigenen Tempo über Tage oder Wochen
+- **Kontrollpunktsystem**: Lernen validieren, bevor zu komplexen Themen übergegangen wird
+- **Ressourcenbibliothek**: Umfassende Dokumentation, Beispiele und Problemlösungsleitfäden
+- **Portfolioentwicklung**: Erstellen von einsatzbereiten Projekten für professionelle Portfolios
 
 **Erste Schritte (Selbstgesteuert):**
 ```bash
@@ -56,262 +56,266 @@ cd azd-for-beginners/workshop
 ```
 
 #### 🏛️ Moderierte Workshopsitzungen
-**Ideal für Firmenschulungen, Bootcamps und Bildungseinrichtungen**
+**Ideal für Unternehmensschulungen, Bootcamps und Bildungseinrichtungen**
 
 **Workshop-Formatoptionen:**
 
-**📚 Integration in akademische Kurse (8-12 Wochen)**
-- **Universitätsprogramme**: Semesterkurs mit wöchentlichen 2-Stunden-Sitzungen
-- **Bootcamp-Format**: Intensives 3-5 tägiges Programm mit täglichen 6-8 Stunden Sessions
-- **Firmenschulung**: Monatliche Teamsitzungen mit praktischer Projektumsetzung
-- **Bewertungsrahmen**: Bewertete Aufgaben, Peer-Reviews und Abschlussprojekte
+**📚 Akademische Kursintegration (8-12 Wochen)**
+- **Universitätsprogramme**: Semesterlanger Kurs mit wöchentlichen 2-Stunden-Sitzungen
+- **Bootcamp-Format**: Intensives 3-5 Tage Programm mit täglichen 6-8 Stunden Sitzungen
+- **Unternehmensschulung**: Monatliche Teamsitzungen mit praktischer Projektumsetzung
+- **Bewertungsrahmen**: Bewertete Aufgaben, Peer Reviews und Abschlussprojekte
 
 **🚀 Intensivworkshop (1-3 Tage)**
-- **Tag 1**: Grundlagen + AI-Entwicklung (Kapitel 1-2) - 6 Stunden
-- **Tag 2**: Konfiguration + Infrastruktur (Kapitel 3-4) - 6 Stunden  
+- **Tag 1**: Grundlagen + KI-Entwicklung (Kapitel 1-2) - 6 Stunden
+- **Tag 2**: Konfiguration + Infrastruktur (Kapitel 3-4) - 6 Stunden
 - **Tag 3**: Fortgeschrittene Muster + Produktion (Kapitel 5-8) - 8 Stunden
-- **Nachbereitung**: Optionale 2-wöchige Mentorship für Projektabschluss
+- **Follow-up**: Optionale 2-wöchige Mentorschaft zur Projektfertigstellung
 
 **⚡ Executive Briefing (4-6 Stunden)**
-- **Strategische Übersicht**: AZD-Wertversprechen und Geschäftsauswirkungen (1 Stunde)
-- **Hands-On Demo**: AI-Anwendung End-to-End bereitstellen (2 Stunden)
-- **Architekturüberblick**: Enterprise-Muster und Governance (1 Stunde)
-- **Implementierungsplanung**: Strategie zur organisatorischen Einführung (1-2 Stunden)
+- **Strategischer Überblick**: AZD-Wertversprechen und Geschäftseinfluss (1 Stunde)
+- **Praktische Demo**: End-to-End-Bereitstellung einer KI-Anwendung (2 Stunden)
+- **Architektur-Review**: Unternehmensmuster und Governance (1 Stunde)
+- **Implementierungsplanung**: Organisationsstrategie für Einführung (1-2 Stunden)
 
 #### 🛠️ Workshop-Lernmethodik
-**Discovery → Deployment → Customization Ansatz für praktische Fähigkeitenentwicklung**
+**Discovery → Deployment → Customization Ansatz für praxisnahe Entwicklung von Fähigkeiten**
 
 **Phase 1: Discovery (45 Minuten)**
-- **Vorlagenuntersuchung**: Bewertung von Microsoft Foundry Vorlagen und Diensten
-- **Architekturanalyse**: Verständnis von Multi-Agenten-Mustern und Bereitstellungsstrategien
-- **Anforderungsanalyse**: Identifikation organisationaler Bedürfnisse und Einschränkungen
+- **Vorlagenexploration**: Microsoft Foundry-Vorlagen und Dienste evaluieren
+- **Architekturanalyse**: Multi-Agenten-Muster und Bereitstellungsstrategien verstehen
+- **Anforderungsbewertung**: Organisationsbedürfnisse und -einschränkungen identifizieren
 - **Umgebungseinrichtung**: Entwicklungsumgebung und Azure-Ressourcen konfigurieren
 
 **Phase 2: Deployment (2 Stunden)**
-- **Geführte Umsetzung**: Schrittweise Bereitstellung von AI-Anwendungen mit AZD
-- **Servicekonfiguration**: Azure AI-Dienste, Endpunkte und Authentifizierung einrichten
+- **Geführte Umsetzung**: Schrittweise Bereitstellung von KI-Anwendungen mit AZD
+- **Dienstkonfiguration**: Azure-KI-Dienste, Endpunkte und Authentifizierung einrichten
 - **Sicherheitsimplementierung**: Unternehmenssicherheitsmuster und Zugriffssteuerungen anwenden
-- **Validierungstests**: Bereitstellungen verifizieren und häufige Probleme beheben
+- **Validierungstests**: Bereitstellungen überprüfen und häufige Probleme beheben
 
-**Phase 3: Anpassung (45 Minuten)**
-- **Anwendungsanpassung**: Vorlagen für spezifische Anwendungsfälle modifizieren
-- **Produktionsoptimierung**: Monitoring, Kostenmanagement und Skalierungsstrategien implementieren
-- **Fortgeschrittene Muster**: Multi-Agenten-Koordination und komplexe Architekturen erkunden
-- **Nächste Schritte planen**: Lernpfad zur weiteren Kompetenzentwicklung definieren
+**Phase 3: Customization (45 Minuten)**
+- **Anwendungsmodifikation**: Vorlagen für spezifische Anwendungsfälle anpassen
+- **Produktionsoptimierung**: Implementierung von Monitoring, Kostenmanagement und Skalierungsstrategien
+- **Fortgeschrittene Muster**: Multi-Agenten-Koordination und komplexe Architekturen erforschen
+- **Planung der nächsten Schritte**: Lernpfad für die weitergehende Kompetenzentwicklung definieren
 
 #### 🎯 Workshop-Lernergebnisse
-**Messbare Fähigkeiten durch praktische Übungen entwickelt**
+**Messbare Fähigkeiten durch praxisnahe Übungen entwickelt**
 
 **Technische Kompetenzen:**
-- **Produktive AI-Anwendungen bereitstellen**: Erfolgreiche Bereitstellung und Konfiguration KI-gestützter Lösungen
-- **Infrastructure as Code Beherrschung**: Eigene Bicep-Vorlagen erstellen und verwalten
-- **Multi-Agenten-Architektur**: Koordinierte AI-Agenten-Lösungen implementieren
-- **Produktionsreife**: Sicherheits-, Monitoring- und Governance-Muster anwenden
-- **Fehlerbehebungskompetenz**: Deployment- und Konfigurationsprobleme eigenständig lösen
+- **Produktionsreife KI-Anwendungen bereitstellen**: Erfolgreiche Bereitstellung und Konfiguration KI-gestützter Lösungen
+- **Infrastructure as Code Beherrschung**: Erstellen und Verwalten eigener Bicep-Vorlagen
+- **Multi-Agent-Architektur**: Koordinierte KI-Agenten-Lösungen implementieren
+- **Produktionsreife**: Sicherheits-, Überwachungs- und Governance-Muster anwenden
+- **Fehlerbehebungskompetenz**: Eigenständige Lösung von Bereitstellungs- und Konfigurationsproblemen
 
-**Professionelle Fähigkeiten:**
-- **Projektleitung**: Technische Teams bei Cloud-Bereitstellungen führen
-- **Architekturdesign**: Skalierbare, kosteneffiziente Azure-Lösungen entwerfen
-- **Wissensvermittlung**: Kollegen in AZD Best Practices schulen und betreuen
-- **Strategische Planung**: Einflussnahme auf organisatorische Cloud-Adoptionsstrategien
+**Berufliche Fähigkeiten:**
+- **Projektleitung**: Leitung technischer Teams bei Cloud-Bereitstellungsinitiativen
+- **Architekturdesign**: Skalierbare, kosteneffektive Azure-Lösungen entwerfen
+- **Wissenstransfer**: Kollegen in AZD-Best Practices schulen und betreuen
+- **Strategische Planung**: Einflussnahme auf organisatorische Cloud-Einführungsstrategien
 
 #### 📋 Workshop-Ressourcen und Materialien
 **Umfassendes Toolkit für Moderatoren und Lernende**
 
 **Für Moderatoren:**
-- **Leitfaden für Dozenten**: [Workshop-Übersicht](workshop/README.md) - Sitzungsplanung und Leitlinien
+- **Instruktorenleitfaden**: [Workshop-Übersicht](workshop/README.md) - Sitzungsplanung und Durchführungshinweise
 - **Präsentationsmaterialien**: Folien, Architekturdiagramme und Demo-Skripte
-- **Bewertungswerkzeuge**: Praktische Übungen, Wissenstests und Bewertungsrichtlinien
-- **Technische Einrichtung**: Umgebungskonfiguration, Fehlerbehebungshilfen und Backup-Pläne
+- **Bewertungstools**: Praktische Übungen, Wissenschecks und Bewertungskriterien
+- **Technische Einrichtung**: Umgebungskonfiguration, Problembehandlungsanleitungen und Backup-Pläne
 
 **Für Lernende:**
-- **Interaktive Workshop-Umgebung**: [Workshop-Materialien](workshop/README.md) - Browserbasierte Lernplattform
-- **Schritt-für-Schritt-Anleitungen**: [Geführte Übungen](../../workshop/docs/instructions) - Detaillierte Implementierungsanleitungen  
-- **Referenzdokumentation**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - AI-spezifische Vertiefungen
-- **Community-Ressourcen**: Azure Discord-Kanäle, GitHub-Diskussionen und Experten-Support
+- **Interaktive Workshop-Umgebung**: [Workshop Materialien](workshop/README.md) - Browserbasierte Lernplattform
+- **Schritt-für-Schritt-Anleitungen**: [Geführte Übungen](../../workshop/docs/instructions) - Detaillierte Implementierungsanleitungen
+- **Referenzdokumentation**: [KI-Workshop-Labor](docs/chapter-02-ai-development/ai-workshop-lab.md) - KI-zentrierte Vertiefungen
+- **Community-Ressourcen**: Azure Discord-Kanäle, GitHub-Diskussionen und Expertenunterstützung
 
-#### 🏢 Unternehmens-Workshop-Implementierung
-**Organisatorische Bereitstellungs- und Schulungsstrategien**
+#### 🏢 Unternehmensweite Workshop-Implementierung
+**Strategien für organisatorische Bereitstellung und Schulung**
 
-**Firmenschulungsprogramme:**
-- **Entwickler-Einarbeitung**: Neue Mitarbeiterorientierung mit AZD-Grundlagen (2-4 Wochen)
-- **Team-Weiterbildung**: Vierteljährliche Workshops für bestehende Entwicklungsteams (1-2 Tage)
-- **Architekturüberprüfung**: Monatliche Sitzungen für leitende Ingenieure und Architekten (4 Stunden)
-- **Führungskräfte-Briefings**: Executive-Workshops für technische Entscheidungsträger (halbtägig)
+**Programme für Unternehmensschulungen:**
+- **Entwickler-Onboarding**: Neueinsteiger-Einführung mit AZD-Grundlagen (2-4 Wochen)
+- **Team-Fortbildung**: Vierteljährliche Workshops für bestehende Entwicklerteams (1-2 Tage)
+- **Architektur-Review**: Monatliche Sitzungen für leitende Ingenieure und Architekten (4 Stunden)
+- **Führungskräfteschulungen**: Executive Workshops für technische Entscheider (Halbtägig)
 
-**Umsetzungsunterstützung:**
-- **Individuelle Workshop-Gestaltung**: Inhalt speziell auf organisatorische Bedürfnisse zugeschnitten
-- **Pilotprogrammmanagement**: Strukturierter Rollout mit Erfolgsmessungen und Feedbackschleifen  
-- **Fortlaufendes Mentoring**: Unterstützung nach Workshops für Projektumsetzungen
-- **Community-Building**: Interne Azure AI-Entwicklergemeinschaften und Wissensaustausch
+**Unterstützung bei der Implementierung:**
+- **Maßgeschneiderte Workshop-Gestaltung**: Angepasste Inhalte für spezifische Organisationsbedürfnisse
+- **Pilotprogramm-Management**: Strukturierte Einführung mit Erfolgsmessung und Feedback-Schleifen
+- **Fortlaufendes Mentoring**: Unterstützung nach Workshops bei der Projektumsetzung
+- **Community-Building**: Interne Azure KI-Entwickler-Communities und Wissensaustausch
 
 **Erfolgsmessungen:**
-- **Kompetenzerwerb**: Vorher/nachher Bewertungen zur Messung des technischen Fortschritts
-- **Bereitstellungserfolg**: Anteil der Teilnehmer mit erfolgreicher Produktionseinsatz
-- **Produktivitätszeit**: Verkürzte Einarbeitungszeit für neue Azure AI Projekte
-- **Wissensbewahrung**: Nachfolgebewertungen 3-6 Monate nach Workshop
+- **Kompetenzerwerb**: Vorher/Nachher-Bewertungen zur Messung des technischen Kompetenzzuwachses
+- **Bereitstellungserfolg**: Prozentsatz der Teilnehmer mit erfolgreicher Produktionsbereitstellung
+- **Zeit bis zur Produktivität**: Verringerte Einarbeitungszeit für neue Azure KI-Projekte
+- **Wissensbewahrung**: Folgebewertungen 3-6 Monate nach dem Workshop
 
-## 8-Kapitel Lernstruktur
+## 8-Kapitel-Lernstruktur
 
 ### Kapitel 1: Grundlagen & Schnellstart (30-45 Minuten) 🌱
-**Voraussetzungen**: Azure-Abonnement, Grundkenntnisse der Kommandozeile  
+**Voraussetzungen**: Azure-Abonnement, Grundkenntnisse in der Befehlszeile
 **Komplexität**: ⭐
 
-#### Was Sie lernen
-- Grundlegendes zu Azure Developer CLI
-- AZD auf Ihrer Plattform installieren  
+#### Was Sie lernen werden
+- Grundlagen der Azure Developer CLI verstehen
+- AZD auf Ihrer Plattform installieren
 - Ihre erste erfolgreiche Bereitstellung
 - Kernkonzepte und Terminologie
 
-#### Lernmaterialien
+#### Lernressourcen
 - [AZD Grundlagen](docs/chapter-01-foundation/azd-basics.md) - Kernkonzepte
 - [Installation & Einrichtung](docs/chapter-01-foundation/installation.md) - Plattform-spezifische Anleitungen
 - [Ihr erstes Projekt](docs/chapter-01-foundation/first-project.md) - Praktisches Tutorial
-- [Befehl-Übersicht](resources/cheat-sheet.md) - Kurzübersicht
+- [Befehlsübersicht](resources/cheat-sheet.md) - Schnelle Referenz
 
 #### Praktisches Ergebnis
 Erfolgreiche Bereitstellung einer einfachen Webanwendung auf Azure mit AZD
 
 ---
 
-### Kapitel 2: AI-First Entwicklung (1-2 Stunden) 🤖
-**Voraussetzungen**: Kapitel 1 abgeschlossen  
+### Kapitel 2: AI-First-Entwicklung (4-5 Stunden inkl. Workshop) 🤖
+**Voraussetzungen**: Kapitel 1 abgeschlossen
 **Komplexität**: ⭐⭐
 
-#### Was Sie lernen
-- Microsoft Foundry Integration mit AZD
+#### Was Sie lernen werden
+- Microsoft Foundry-Integration mit AZD
+- GA `microsoft.foundry` Bundle-Installation und Bereitstellung von gehostetem Agenten-Code
+- Lokaler Agent Inspector-Test und getrennte Bewertungsdatensätze/-rubriken
 - Bereitstellung KI-gestützter Anwendungen
-- Verständnis von AI-Dienstkonfigurationen
+- Verständnis der KI-Dienstkonfigurationen
 - RAG (Retrieval-Augmented Generation) Muster
 
-#### Lernmaterialien
+#### Lernressourcen
 - [Microsoft Foundry Integration](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
-- [AI Modellbereitstellung](docs/chapter-02-ai-development/ai-model-deployment.md)
-- [AI Workshop Labor](docs/chapter-02-ai-development/ai-workshop-lab.md) - **NEU**: Umfassendes 2-3 stündiges Hands-on Labor
-- [Interaktiver Workshop-Guide](workshop/README.md) - **NEU**: Browserbasierter Workshop mit MkDocs-Vorschau
+- [Hosted-Agent Rundgang (GA)](docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) - Initialisieren, Überprüfung `azure.yaml`, Bereitstellung, lokaler Test, Bereitstellung, Bewertung und Bereinigung
+- [KI-Agenten-Leitfaden](docs/chapter-02-ai-development/agents.md)
+- [KI-Modellbereitstellung](docs/chapter-02-ai-development/ai-model-deployment.md)
+- [KI-Workshop-Labor](docs/chapter-02-ai-development/ai-workshop-lab.md) - **NEU**: Umfassendes 2-3 Stunden praktisches Labor
+- [Interaktiver Workshop-Leitfaden](workshop/README.md) - **NEU**: Browserbasierter Workshop mit MkDocs-Vorschau
 - [Microsoft Foundry Vorlagen](README.md#featured-microsoft-foundry-templates)
-- [Workshop-Anleitungen](../../workshop/docs/instructions) - **NEU**: Schritt-für-Schritt Übungen
+- [Workshop-Anleitungen](../../workshop/docs/instructions) - **NEU**: Schritt-für-Schritt geführte Übungen
 
 #### Praktisches Ergebnis
-Stellen Sie eine KI-gestützte Chat-Anwendung mit RAG-Funktionalität bereit und konfigurieren Sie diese
+Testen Sie lokal und in Foundry einen gehosteten Agenten mit dem GA-Bundle, überprüfen Sie ein Bewertungsergebnis und unterscheiden Sie die Bereinigung von neuen und wiederverwendeten Projekten. Der separate RAG/Workshop-Pfad behandelt die Konfiguration einer KI-gestützten Chat-Anwendung.
 
-#### Workshop-Lernpfad (Optionale Erweiterung)
-**NEUE interaktive Erfahrung**: [Vollständiger Workshop-Guide](workshop/README.md)
+#### Workshop-Lernpfad (optionale Erweiterung)
+**NEUE interaktive Erfahrung**: [Vollständiger Workshop-Leitfaden](workshop/README.md)
 1. **Discovery** (30 Min): Vorlagenauswahl und -bewertung
-2. **Deployment** (45 Min): Bereitstellung und Validierung der AI-Vorlagenfunktionalität  
+2. **Deployment** (45 Min): Bereitstellung und Validierung der KI-Vorlagenfunktionalität
 3. **Deconstruction** (30 Min): Verständnis der Vorlagenarchitektur und -komponenten
-4. **Konfiguration** (30 Min): Einstellungen und Parameter anpassen
-5. **Anpassung** (45 Min): Modifizieren und Iterieren zur Personalisierung
-6. **Abbau** (15 Min): Ressourcen bereinigen und Lebenszyklus verstehen
-7. **Abschluss** (15 Min): Nächste Schritte und erweiterte Lernpfade
+4. **Konfiguration** (30 Min): Anpassung von Einstellungen und Parametern
+5. **Customization** (45 Min): Modifizierung und Iteration zur individuellen Gestaltung
+6. **Abbruch** (15 Min): Ressourcen bereinigen und Lebenszyklus verstehen
+7. **Abschluss** (15 Min): Nächste Schritte und erweiterte Lernwege
 
 ---
 
 ### Kapitel 3: Konfiguration & Authentifizierung (45-60 Minuten) ⚙️
-**Voraussetzungen**: Kapitel 1 abgeschlossen  
+**Voraussetzungen**: Kapitel 1 abgeschlossen
 **Komplexität**: ⭐⭐
 
-#### Was Sie lernen
-- Umgebungskonfiguration und Management
-- Authentifizierungs- und Sicherheitsempfehlungen
+#### Was Sie lernen werden
+- Umgebungskonfiguration und -verwaltung
+- Authentifizierungs- und Sicherheitsbest Practices
 - Benennung und Organisation von Ressourcen
-- Bereitstellungen über mehrere Umgebungen
+- Bereitstellung in mehreren Umgebungen
 
-#### Lernmaterialien
+#### Lernressourcen
 - [Konfigurationsleitfaden](docs/chapter-03-configuration/configuration.md) - Umgebungseinrichtung
-- [Authentifizierungs- & Sicherheitsmuster](docs/chapter-03-configuration/authsecurity.md) - Managed Identity und Key Vault Integration
-- Mehrfachumgebungsbeispiele
+- [Authentifizierungs- & Sicherheitsmuster](docs/chapter-03-configuration/authsecurity.md) - Managed Identity und Key Vault-Integration
+- Beispiele für Multi-Umgebungen
 
 #### Praktisches Ergebnis
-Verwaltung mehrerer Umgebungen mit korrekter Authentifizierung und Sicherheit
+Verwalten Sie mehrere Umgebungen mit ordnungsgemäßer Authentifizierung und Sicherheit
 
 ---
 
-### Kapitel 4: Infrastruktur als Code & Bereitstellung (1-1,5 Stunden) 🏗️
-**Voraussetzungen**: Kapitel 1-3 abgeschlossen  
+### Kapitel 4: Infrastructure as Code & Bereitstellung (1-1,5 Stunden) 🏗️
+**Voraussetzungen**: Kapitel 1-3 abgeschlossen
 **Komplexität**: ⭐⭐⭐
 
-#### Was Sie lernen
+#### Was Sie lernen werden
 - Fortgeschrittene Bereitstellungsmuster
-- Infrastruktur als Code mit Bicep
-- Ressourcenbereitstellungsstrategien
+- Infrastructure as Code mit Bicep
+- Strategien zur Ressourcenbereitstellung
 - Erstellung benutzerdefinierter Vorlagen
 
 - Containerisierte Anwendungsbereitstellung mit Azure Container Apps und AZD
 
-#### Lernmaterialien
-- [Bereitstellungsleitfaden](docs/chapter-04-infrastructure/deployment-guide.md) - Komplette Workflows
+#### Lernressourcen
+- [Bereitstellungsleitfaden](docs/chapter-04-infrastructure/deployment-guide.md) - Vollständige Workflows
 - [Ressourcenbereitstellung](docs/chapter-04-infrastructure/provisioning.md) - Ressourcenmanagement
-- Container und Microservices Beispiele
+- Container- und Mikroservices-Beispiele
 - [Container App Beispiele](examples/container-app/README.md) - Schnellstart, Produktion und fortgeschrittene Bereitstellungsmuster
 
 #### Praktisches Ergebnis
-Komplexe Multi-Service-Anwendungen mit benutzerdefinierten Infrastrukturschablonen bereitstellen
+Bereitstellung komplexer Mehrdienst-Anwendungen mit benutzerdefinierten Infrastrukturvorlagen
 
 ---
 
-### Kapitel 5: Multi-Agent AI-Lösungen (2-3 Stunden) 🤖🤖
-**Voraussetzungen**: Kapitel 1-2 abgeschlossen  
+### Kapitel 5: Multi-Agent KI-Lösungen (2-3 Stunden) 🤖🤖
+**Voraussetzungen**: Kapitel 1-2 abgeschlossen
 **Komplexität**: ⭐⭐⭐⭐
 
-#### Was Sie lernen
-- Multi-Agenten-Architekturmuster
-- Agenten-Orchestrierung und Koordination
-- Produktionsreife AI-Bereitstellungen
-- Implementierungen von Kunden- und Inventaragenten
+#### Was Sie lernen werden
+- Muster für Multi-Agenten-Architekturen
+- Agenten-Orchestrierung und -Koordination
+- Produktionsreife KI-Bereitstellungen
+- Implementierungen von Kunden- und Lager-Agenten
 
-- Integration containerisierter Microservices als Teil agentenbasierter Lösungen
+- Integration containerisierter Mikroservices als Teil agentenbasierter Lösungen
 
-#### Lernmaterialien
-- [Retail Multi-Agent Lösung](examples/retail-scenario.md) - Architektur-Blueprint, keine vollständige Anwendung
+#### Lernressourcen
+- [Einzelhandels-Multi-Agenten-Lösung](examples/retail-scenario.md) - Architekturvorlage, keine vollständige Anwendung
 - [ARM-Vorlagenpaket](../../examples/retail-multiagent-arm-template) - Infrastrukturgerüst mit Implementierungsvoraussetzungen
-- Multi-Agenten-Koordinationsmuster
-- [Microservices Architektur-Beispiel](../../examples/container-app/microservices) - Service-zu-Service-Kommunikation, asynchrones Messaging und Produktionsbereitstellung
+- Multi-Agent-Koordinationsmuster
+- [Beispiel Mikroservices-Architektur](../../examples/container-app/microservices) - Service-zu-Service-Kommunikation, asynchrone Nachrichtenübermittlung und Produktionsbereitstellung
 
 #### Praktisches Ergebnis
-Entwerfen Sie eine Multi-Agent AI-Lösung und identifizieren Sie die notwendige Anwendungsimplementierung, Validierung und den Betrieb jenseits der Infrastrukturbereitstellung
+Entwerfen Sie eine Multi-Agent KI-Lösung und identifizieren Sie die Anwendungsimplementierung, Validierung und den operativen Aufwand, der über die Infrastruktur bereitstellung hinausgeht
 
 ---
 
 ### Kapitel 6: Validierung & Planung vor der Bereitstellung (1 Stunde) 🔍
-**Voraussetzungen**: Kapitel 4 abgeschlossen  
+**Voraussetzungen**: Kapitel 4 abgeschlossen
 **Komplexität**: ⭐⭐
 
-#### Was Sie lernen
+#### Was Sie lernen werden
 - Kapazitätsplanung und Ressourcenvalidierung
-- SKU-Auswahlstrategien
-- Preflight-Checks und Automatisierung
+- Strategien zur SKU-Auswahl
+- Vorflugprüfungen und Automatisierung
 - Kostenoptimierungsplanung
 
-#### Lernmaterialien
+#### Lernressourcen
 - [Kapazitätsplanung](docs/chapter-06-pre-deployment/capacity-planning.md) - Ressourcenvalidierung
-- [SKU-Auswahl](docs/chapter-06-pre-deployment/sku-selection.md) - Kostenwirksame Entscheidungen
-- [Preflight-Checks](docs/chapter-06-pre-deployment/preflight-checks.md) - Automatisierte Skripte
-- [Application Insights Integration](docs/chapter-06-pre-deployment/application-insights.md) - Überwachung und Beobachtbarkeit
-- [Multi-Agent Koordinationsmuster](docs/chapter-06-pre-deployment/coordination-patterns.md) - Agenten-Orchestrierungsstrategien
+- [SKU-Auswahl](docs/chapter-06-pre-deployment/sku-selection.md) - Kosten-effiziente Entscheidungen
+- [Pre-Flight-Checks](docs/chapter-06-pre-deployment/preflight-checks.md) - Automatisierte Skripte
+- [Integration von Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - Überwachung und Beobachtbarkeit
+- [Muster zur Koordination von Multi-Agenten](docs/chapter-06-pre-deployment/coordination-patterns.md) - Strategien zur Agenten-Orchestrierung
 
 #### Praktisches Ergebnis
-Bereitstellungen vor der Ausführung validieren und optimieren
+Validierung und Optimierung von Deployments vor der Ausführung
 
 ---
 
 ### Kapitel 7: Fehlersuche & Debugging (1-1,5 Stunden) 🔧
-**Voraussetzungen**: Beliebiges abgeschlossenes Deployment-Kapitel  
+**Voraussetzungen**: Jedes Deployment-Kapitel abgeschlossen  
 **Komplexität**: ⭐⭐
 
 #### Was Sie lernen werden
-- Systematische Debugging-Methoden
+- Systematische Debugging-Ansätze
 - Häufige Probleme und Lösungen
-- KI-spezifische Fehlerbehebung
+- KI-spezifische Fehlersuche
 - Leistungsoptimierung
 
 #### Lernressourcen
 - [Häufige Probleme](docs/chapter-07-troubleshooting/common-issues.md) - FAQ und Lösungen
-- [Debugging Leitfaden](docs/chapter-07-troubleshooting/debugging.md) - Schritt-für-Schritt Strategien
-- [KI-spezifische Fehlerbehebung](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Probleme mit KI-Diensten
+- [Debugging-Leitfaden](docs/chapter-07-troubleshooting/debugging.md) - Schritt-für-Schritt-Strategien
+- [KI-spezifische Fehlersuche](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Probleme mit KI-Diensten
 
 #### Praktisches Ergebnis
-Eigenständige Diagnose und Behebung häufiger Deployment-Probleme
+Selbständige Diagnose und Lösung häufiger Deployment-Probleme
 
 ---
 
@@ -320,190 +324,190 @@ Eigenständige Diagnose und Behebung häufiger Deployment-Probleme
 **Komplexität**: ⭐⭐⭐⭐
 
 #### Was Sie lernen werden
-- Produktions-Deployment-Strategien
-- Sicherheitspatterns für Unternehmen
+- Strategien für Produktions-Deployments
+- Sicherheit in Unternehmensmustern
 - Überwachung und Kostenoptimierung
 - Skalierbarkeit und Governance
 
-- Best Practices für Produktions-Container-App-Deployments (Sicherheit, Überwachung, Kosten, CI/CD)
+- Beste Praktiken für Produktions-Container-App-Deployments (Sicherheit, Überwachung, Kosten, CI/CD)
 
 #### Lernressourcen
-- [Beste Produktions-KI-Praktiken](docs/chapter-08-production/production-ai-practices.md) - Unternehmensmuster
+- [Best Practices für Produktions-KI](docs/chapter-08-production/production-ai-practices.md) - Unternehmensmuster
 - Microservices- und Unternehmensbeispiele
 - Überwachungs- und Governance-Frameworks
-- [Beispiel mikroservicebasierter Architektur](../../examples/container-app/microservices) - Blue-green/Canary Deployment, verteiltes Tracing und Kostenoptimierung
+- [Microservices Architektur-Beispiel](../../examples/container-app/microservices) - Blue-Green/Canary-Deployment, verteiltes Tracing und Kostenoptimierung
 
 #### Praktisches Ergebnis
-Unternehmenstaugliche Anwendungen mit voller Produktionsfähigkeit bereitstellen
+Produktionsreife Anwendungen mit vollständigen Produktionsfunktionen bereitstellen
 
 ---
 
 ## Lernfortschritt und Komplexität
 
-### Fortschreitender Kompetenzaufbau
+### Progressiver Kompetenzaufbau
 
-- **🌱 Anfänger**: Starte mit Kapitel 1 (Grundlagen) → Kapitel 2 (KI-Entwicklung)
-- **🔧 Mittelstufe**: Kapitel 3-4 (Konfiguration & Infrastruktur) → Kapitel 6 (Validierung)
-- **🚀 Fortgeschrittene**: Kapitel 5 (Multi-Agent-Lösungen) → Kapitel 7 (Fehlerbehebung)
+- **🌱 Anfänger**: Beginnen mit Kapitel 1 (Grundlagen) → Kapitel 2 (KI-Entwicklung)
+- **🔧 Fortgeschrittene**: Kapitel 3-4 (Konfiguration & Infrastruktur) → Kapitel 6 (Validierung)
+- **🚀 Fortgeschrittene Profis**: Kapitel 5 (Multi-Agenten-Lösungen) → Kapitel 7 (Fehlersuche)
 - **🏢 Unternehmen**: Alle Kapitel abschließen, Fokus auf Kapitel 8 (Produktionsmuster)
 
 - **Container-App-Pfad**: Kapitel 4 (Containerisiertes Deployment), 5 (Microservices-Integration), 8 (Produktions-Best Practices)
 
 ### Komplexitätsindikatoren
 
-- **⭐ Grundlegend**: Einzelne Konzepte, geführte Tutorials, 30-60 Minuten
+- **⭐ Basic**: Einzelne Konzepte, geführte Tutorials, 30-60 Minuten
 - **⭐⭐ Mittelstufe**: Mehrere Konzepte, praktische Übungen, 1-2 Stunden  
 - **⭐⭐⭐ Fortgeschritten**: Komplexe Architekturen, individuelle Lösungen, 1-3 Stunden
 - **⭐⭐⭐⭐ Experte**: Produktionssysteme, Unternehmensmuster, 2-4 Stunden
 
 ### Flexible Lernpfade
 
-#### 🎯 Schneller Lernpfad für KI-Entwickler (4-6 Stunden)
+#### 🎯 KI-Entwickler Schnellkurs (4-6 Stunden)
 1. **Kapitel 1**: Grundlagen & Schnellstart (45 Min.)
 2. **Kapitel 2**: KI-First-Entwicklung (2 Stunden)  
 3. **Kapitel 5**: Multi-Agent KI-Lösungen (3 Stunden)
-4. **Kapitel 8**: Produktions-KI-Best Practices (1 Stunde)
+4. **Kapitel 8**: Produktions-KI Best Practices (1 Stunde)
 
-#### 🛠️ Pfad für Infrastruktur-Spezialisten (5-7 Stunden)
+#### 🛠️ Infrastruktur-Spezialist Pfad (5-7 Stunden)
 1. **Kapitel 1**: Grundlagen & Schnellstart (45 Min.)
 2. **Kapitel 3**: Konfiguration & Authentifizierung (1 Stunde)
 3. **Kapitel 4**: Infrastructure as Code & Deployment (1,5 Stunden)
-4. **Kapitel 6**: Validierung & Planung vor dem Deployment (1 Stunde)
-5. **Kapitel 7**: Fehlerbehebung & Debugging (1,5 Stunden)
-6. **Kapitel 8**: Produktions- & Unternehmensmuster (2 Stunden)
+4. **Kapitel 6**: Vor-Deployment Validierung & Planung (1 Stunde)
+5. **Kapitel 7**: Fehlersuche & Debugging (1,5 Stunden)
+6. **Kapitel 8**: Produktion & Unternehmensmuster (2 Stunden)
 
-#### 🎓 Komplettes Lernprogramm (8-12 Stunden)
-Sequenzielle Absolvierung aller 8 Kapitel mit praktischen Übungen und Validierung
+#### 🎓 Komplette Lernreise (8-12 Stunden)
+Sequentieller Abschluss aller 8 Kapitel mit praktischer Übung und Validierung
 
-## Kursabschluss-Rahmenwerk
+## Kursabschluss-Framework
 
 ### Wissensvalidierung
 - **Kapitel-Checkpoints**: Praktische Übungen mit messbaren Ergebnissen
-- **Praktische Verifikation**: Deployment funktionierender Lösungen für jedes Kapitel
+- **Hands-On-Verifikation**: Bereitstellung funktionierender Lösungen für jedes Kapitel
 - **Fortschrittsverfolgung**: Visuelle Indikatoren und Abschlussabzeichen
 - **Community-Validierung**: Erfahrungsaustausch in Azure Discord-Kanälen
 
-### Lernzielbewertung
+### Bewertung der Lernergebnisse
 
 #### Abschluss Kapitel 1-2 (Grundlagen + KI)
-- ✅ Deployment einer einfachen Webanwendung mit AZD
-- ✅ Deployment einer KI-basierten Chat-Anwendung mit RAG
-- ✅ Verständnis der AZD-Kernkonzepte und KI-Integration
+- ✅ Einfaches Webanwendung mit AZD bereitstellen
+- ✅ KI-betriebene Chat-Anwendung mit RAG bereitstellen
+- ✅ AZD-Grundkonzepte und KI-Integration verstehen
 
 #### Abschluss Kapitel 3-4 (Konfiguration + Infrastruktur)  
-- ✅ Verwaltung von Multi-Environment-Deployments
-- ✅ Erstellung individueller Bicep-Infrastrukturvorlagen
-- ✅ Implementierung sicherer Authentifizierungsmuster
+- ✅ Multi-Umgebungs-Deployments verwalten
+- ✅ Eigene Bicep-Infrastrukturvorlagen erstellen
+- ✅ Sichere Authentifizierungsmuster implementieren
 
 #### Abschluss Kapitel 5-6 (Multi-Agent + Validierung)
-- ✅ Deployment komplexer Multi-Agent KI-Lösungen
-- ✅ Durchführung von Kapazitätsplanung und Kostenoptimierung
-- ✅ Implementierung automatisierter Pre-Deployment-Validierung
+- ✅ Komplexe Multi-Agent KI-Lösung bereitstellen
+- ✅ Kapazitätsplanung und Kostenoptimierung durchführen
+- ✅ Automatisierte Vor-Deployment Validierung implementieren
 
-#### Abschluss Kapitel 7-8 (Fehlerbehebung + Produktion)
-- ✅ Eigenständige Fehlerdiagnose und -behebung bei Deployments  
-- ✅ Implementierung unternehmensweiter Überwachung und Sicherheit
-- ✅ Deployment produktionsbereiter Anwendungen mit Governance
+#### Abschluss Kapitel 7-8 (Fehlersuche + Produktion)
+- ✅ Deployment-Probleme eigenständig debuggen und lösen  
+- ✅ Enterprise-grade Überwachung und Sicherheit implementieren
+- ✅ Produktionsreife Anwendungen mit Governance bereitstellen
 
 ### Zertifizierung und Anerkennung
-- **Kursabschluss-Abzeichen**: Geben Sie alle 8 Kapitel mit Validierung ab
-- **Community-Anerkennung**: Aktive Teilnahme am Microsoft Foundry Discord
-- **Berufliche Entwicklung**: Branchenrelevante Fähigkeiten in AZD und KI-Deployment
-- **Karriereförderung**: Unternehmensgerechte Cloud-Deployment-Fähigkeiten
+- **Kursabschluss-Abzeichen**: Alle 8 Kapitel mit praktischer Validierung abschließen
+- **Community-Anerkennung**: Aktive Teilnahme im Microsoft Foundry Discord
+- **Berufliche Weiterbildung**: Branchenrelevante AZD- und KI-Deployment-Fähigkeiten
+- **Karriereförderung**: Enterprise-fähige Cloud-Deployment-Kompetenzen
 
-## 🎓 Umfassende Lernziele
+## 🎓 Umfassende Lernergebnisse
 
 ### Grundlagen-Level (Kapitel 1-2)
-Nach Abschluss der Grundlagenkapitel können Lernende:
+Nach Abschluss der Grundlagenkapitel zeigen Lernende:
 
 **Technische Fähigkeiten:**
-- Einfache Webanwendungen mit AZD-Befehlen in Azure bereitstellen
-- KI-basierte Chat-Anwendungen mit RAG-Fähigkeiten konfigurieren und deployen
-- Kernkonzepte von AZD verstehen: Vorlagen, Umgebungen, Provisionierungsabläufe
+- Einfache Webanwendungen mit AZD-Befehlen auf Azure bereitstellen
+- KI-gestützte Chat-Anwendungen mit RAG-Funktionalitäten konfigurieren und bereitstellen
+- Kernkonzepte von AZD verstehen: Vorlagen, Umgebungen, Bereitstellungs-Workflows
 - Microsoft Foundry-Dienste in AZD-Deployments integrieren
 - Azure KI-Dienstkonfigurationen und API-Endpunkte navigieren
 
-**Professionelle Fähigkeiten:**
-- Strukturierte Deployment-Workflows für konsistente Ergebnisse befolgen
-- Grundlegende Deployment-Probleme mit Protokollen und Dokumentation beheben
-- Effektive Kommunikation über Cloud-Deployment-Prozesse
+**Berufliche Kompetenzen:**
+- Strukturierte Bereitstellungs-Workflows für konsistente Ergebnisse befolgen
+- Grundlegende Deployment-Probleme mittels Logs und Dokumentation beheben
+- Effektive Kommunikation über Cloud-Deployments
 - Best Practices für sichere KI-Dienstintegration anwenden
 
 **Lernverifikation:**
-- ✅ Erfolgreiche Bereitstellung der `todo-nodejs-mongo`-Vorlage
-- ✅ Deployment und Konfiguration von `azure-search-openai-demo` mit RAG
-- ✅ Abschluss interaktiver Workshop-Übungen (Entdeckungsphase)
-- ✅ Teilnahme an Diskussionen der Azure-Discord-Community
+- ✅ Erfolgreiche Bereitstellung der `todo-nodejs-mongo` Vorlage
+- ✅ Bereitstellung und Konfiguration von `azure-search-openai-demo` mit RAG
+- ✅ Interaktive Workshop-Übungen (Discovery-Phase) abschließen
+- ✅ Teilnahme an Azure Discord Community-Diskussionen
 
-### Mittelstufe (Kapitel 3-4)
-Nach Abschluss der Mittelstufen-Kapitel können Lernende:
+### Mittelstufen-Level (Kapitel 3-4)
+Nach Abschluss der Mittelstufen-Kapitel zeigen Lernende:
 
 **Technische Fähigkeiten:**
-- Multi-Environment-Deployments (Dev, Staging, Produktion) verwalten
-- Individuelle Bicep-Vorlagen für Infrastructure as Code erstellen
+- Multi-Umgebungs-Deployments verwalten (dev, staging, Produktion)
+- Eigene Bicep-Vorlagen für Infrastructure as Code erstellen
 - Sichere Authentifizierungsmuster mit Managed Identity implementieren
-- Komplexe Multi-Service-Anwendungen mit benutzerdefinierten Konfigurationen bereitstellen
-- Ressourcenbereitstellungsstrategien für Kosten und Leistung optimieren
+- Komplexe Multi-Service-Anwendungen mit individuellen Konfigurationen bereitstellen
+- Ressourcenbereitstellungs-Strategien für Kosten und Leistung optimieren
 
-**Professionelle Fähigkeiten:**
-- Skalierbare Infrastrukturarchitekturen entwerfen
+**Berufliche Kompetenzen:**
+- Skalierbare Infrastruktur-Architekturen entwerfen
 - Sicherheits-Best Practices für Cloud-Deployments implementieren
-- Infrastrukturmuster für Teamzusammenarbeit dokumentieren
-- Geeignete Azure-Dienste für Anforderungen bewerten und auswählen
+- Infrastruktur-Muster für Team-Kollaboration dokumentieren
+- Geeignete Azure-Dienste für Anforderungen auswählen und bewerten
 
 **Lernverifikation:**
-- ✅ Separierte Umgebungen mit umgebungsspezifischen Einstellungen konfigurieren
-- ✅ Individuelle Bicep-Vorlage für Multi-Service-Anwendung erstellen und bereitstellen
-- ✅ Managed Identity Authentifizierung für sicheren Zugriff implementieren
-- ✅ Abschluss von Konfigurationsmanagement-Übungen mit realen Szenarien
+- ✅ Separate Umgebungen mit umgebungsspezifischen Einstellungen konfigurieren
+- ✅ Eigene Bicep-Vorlage für Multi-Service-Anwendung erstellen und bereitstellen
+- ✅ Managed Identity-Authentifizierung für sicheren Zugriff implementieren
+- ✅ Konfigurations-Management-Übungen mit realen Szenarien abschließen
 
-### Fortgeschrittenes Level (Kapitel 5-6)
-Nach Abschluss der fortgeschrittenen Kapitel können Lernende:
+### Fortgeschrittenen-Level (Kapitel 5-6)
+Nach Abschluss der fortgeschrittenen Kapitel zeigen Lernende:
 
 **Technische Fähigkeiten:**
-- Multi-Agent-KI-Lösungen mit koordinierten Workflows bereitstellen und orchestrieren
-- Kunden- und Lageragentenarchitekturen für Einzelhandelsszenarien implementieren
+- Multi-Agent KI-Lösungen mit koordinierten Workflows bereitstellen und orchestrieren
+- Kunden- und Inventar-Agent-Architekturen für Einzelhandelsszenarien implementieren
 - Umfassende Kapazitätsplanung und Ressourcenvalidierung durchführen
-- Automatisierte Pre-Deployment-Validierungen und Optimierungen ausführen
-- Kostenwirksame SKU-Auswahl basierend auf Arbeitslastanforderungen entwerfen
+- Automatisierte Vor-Deployment Validierung und Optimierung ausführen
+- Kosten-effiziente SKU-Auswahl basierend auf Workload-Anforderungen entwerfen
 
-**Professionelle Fähigkeiten:**
+**Berufliche Kompetenzen:**
 - Komplexe KI-Lösungen für Produktionsumgebungen entwerfen
-- Technische Diskussionen über KI-Deployment-Strategien leiten
-- Junior-Entwickler in AZD- und KI-Deployment-Best Practices anleiten
-- KI-Architekturmuster für Geschäftsanforderungen bewerten und empfehlen
+- Technische Diskussionen zu KI-Deployment-Strategien leiten
+- Junior-Entwickler in AZD- und KI-Deployment Best Practices betreuen
+- KI-Architektur-Muster für Geschäftsanforderungen bewerten und empfehlen
 
 **Lernverifikation:**
-- ✅ Überprüfung des Einzelhandels-Multi-Agent-Blueprints und Unterscheidung der bereitgestellten Infrastruktur von fehlender Anwendung
-- ✅ Demonstration von Agentenkoordination und Workflow-Orchestrierung
-- ✅ Abschluss von Kapazitätsplanungsübungen mit realen Ressourceneinschränkungen
-- ✅ Validierung der Deployment-Bereitschaft durch automatisierte Pre-Flight-Checks
+- ✅ Einzelhandels-Multi-Agenten-Blueprint prüfen und bereitgestellte Infrastruktur von fehlender Anwendungsimplementierung unterscheiden
+- ✅ Agentenkordination und Workflow-Orchestrierung demonstrieren
+- ✅ Kapazitätsplanungsübungen mit realen Ressourceneinschränkungen abschließen
+- ✅ Bereitstellungsbereitschaft durch automatisierte Pre-Flight-Checks validieren
 
 ### Experten-Level (Kapitel 7-8)
-Nach Abschluss der Expertenkapitel können Lernende:
+Nach Abschluss der Experten-Kapitel zeigen Lernende:
 
 **Technische Fähigkeiten:**
-- Komplexe Deployment-Probleme eigenständig diagnostizieren und lösen
-- Unternehmensweite Sicherheitsmuster und Governance-Frameworks implementieren
+- Komplexe Deployment-Probleme eigenständig diagnostizieren und beheben
+- Enterprise-Sicherheitsmuster und Governance-Frameworks implementieren
 - Umfassende Überwachungs- und Alarmierungsstrategien entwerfen
-- Produktions-Deployments für Skalierung, Kosten und Leistung optimieren
-- CI/CD-Pipelines mit ordnungsgemäßer Tests und Validierung einrichten
+- Produktionsdeployments für Skalierung, Kosten und Leistung optimieren
+- CI/CD-Pipelines mit ordnungsgemäßer Testung und Validierung etablieren
 
-**Professionelle Fähigkeiten:**
-- Enterprise-Cloud-Transformationsinitiativen leiten
-- Organisationsweite Deployment-Standards entwerfen und umsetzen
-- Entwicklungsteams in fortgeschrittenen AZD-Praktiken schulen und begleiten
-- Technische Entscheidungsfindung für Unternehmens-KI-Deployments beeinflussen
+**Berufliche Kompetenzen:**
+- Unternehmensweite Cloud-Transformationsinitiativen leiten
+- Organisationsweite Deployment-Standards entwerfen und implementieren
+- Entwicklungsteams in fortgeschrittenen AZD-Praktiken schulen und betreuen
+- Technische Entscheidungen für Enterprise-KI-Deployments beeinflussen
 
 **Lernverifikation:**
-- ✅ Komplexe Multi-Service-Deployment-Fehler beheben
-- ✅ Unternehmenssicherheitsmuster mit Compliance-Anforderungen implementieren
-- ✅ Aufbau und Deployment von Produktionsüberwachung mit Application Insights
-- ✅ Abschluss der Implementierung des Unternehmens-Governance-Frameworks
+- ✅ Komplexe Multi-Service Deployment-Fehler beheben
+- ✅ Enterprise-Sicherheitsmuster mit Compliance-Anforderungen implementieren
+- ✅ Produktionsüberwachung mit Application Insights entwerfen und bereitstellen
+- ✅ Enterprise-Governance-Framework vollständig implementieren
 
-## 🎯 Zertifizierung bei Kursabschluss
+## 🎯 Kursabschluss-Zertifizierung
 
-### Rahmenwerk zur Fortschrittsverfolgung
+### Fortschritts-Verfolgungs-Framework
 Verfolgen Sie Ihren Lernfortschritt durch strukturierte Checkpoints:
 
 - [ ] **Kapitel 1**: Grundlagen & Schnellstart ✅
@@ -511,46 +515,46 @@ Verfolgen Sie Ihren Lernfortschritt durch strukturierte Checkpoints:
 - [ ] **Kapitel 3**: Konfiguration & Authentifizierung ✅
 - [ ] **Kapitel 4**: Infrastructure as Code & Deployment ✅
 - [ ] **Kapitel 5**: Multi-Agent KI-Lösungen ✅
-- [ ] **Kapitel 6**: Validierung & Planung vor dem Deployment ✅
-- [ ] **Kapitel 7**: Fehlerbehebung & Debugging ✅
+- [ ] **Kapitel 6**: Vor-Deployment Validierung & Planung ✅
+- [ ] **Kapitel 7**: Fehlersuche & Debugging ✅
 - [ ] **Kapitel 8**: Produktions- & Unternehmensmuster ✅
 
-### Verifikationsprozess
-Nach Abschluss jedes Kapitels verifizieren Sie Ihr Wissen durch:
+### Verifizierungsprozess
+Nach Abschluss eines Kapitels überprüfen Sie Ihr Wissen durch:
 
-1. **Abschluss praktischer Übungen**: Deployment funktionierender Lösungen für jedes Kapitel
-2. **Wissensbewertung**: Überprüfen Sie FAQs und absolvieren Sie Selbsttests
-3. **Community Engagement**: Teilen Sie Erfahrungen und erhalten Sie Feedback im Azure Discord
-4. **Portfolioentwicklung**: Dokumentieren Sie Ihre Deployments und Erkenntnisse
-5. **Peer Review**: Zusammenarbeit mit anderen Lernenden bei komplexen Szenarien
+1. **Abschluss praktischer Übungen**: Funktionierende Lösungen für jedes Kapitel bereitstellen
+2. **Wissensbewertung**: FAQ-Sektionen durchgehen und Selbstbewertungen abschließen
+3. **Community-Engagement**: Erfahrungen teilen und Feedback in Azure Discord erhalten
+4. **Portfolioentwicklung**: Ihre Deployments und Lernerfahrungen dokumentieren
+5. **Peer-Review**: Mit anderen Lernenden an komplexen Szenarien zusammenarbeiten
 
-### Vorteile bei Kursabschluss
-Nach Abschluss aller Kapitel mit Verifikation verfügen Absolventen über:
+### Vorteile des Kursabschlusses
+Nach Abschluss aller Kapitel mit Verifizierung verfügen Absolventen über:
 
 **Technische Expertise:**
-- **Produktionserfahrung**: Bereitstellung realer KI-Anwendungen in Azure-Umgebungen
-- **Berufliche Fähigkeiten**: Unternehmensgerechte Deployment- und Fehlerbehebungsfähigkeiten  
-- **Architekturwissen**: Multi-Agent-KI-Lösungen und komplexe Infrastrukturmuster
-- **Fehlerbehebungskompetenz**: Eigenständige Lösung von Deployment- und Konfigurationsproblemen
+- **Produktionserfahrung**: Echtzeit-KI-Anwendungen in Azure-Umgebungen bereitgestellt
+- **Berufliche Fähigkeiten**: Enterprise-fähige Bereitstellung und Fehlerbehebung  
+- **Architekturwissen**: Multi-Agent KI-Lösungen und komplexe Infrastruktur-Muster
+- **Fehlersuche-Meisterschaft**: Eigenständige Lösung von Deployment- und Konfigurationsproblemen
 
-**Professionelle Entwicklung:**
-- **Anerkennung in der Branche**: Nachweisbare Fähigkeiten in gefragten AZD- und KI-Deployment-Bereichen
-- **Karrierefortschritt**: Qualifikationen für Cloud-Architekt- und KI-Deployment-Spezialistenrollen
-- **Community Leadership**: Aktive Mitgliedschaft in Azure-Entwickler- und KI-Communities
-- **Kontinuierliches Lernen**: Grundlage für fortgeschrittene Microsoft Foundry-Spezialisierungen
+**Berufliche Weiterbildung:**
+- **Branchenanerkennung**: Nachweisbare Fähigkeiten in gefragten AZD- und KI-Deployment-Bereichen
+- **Karriereförderung**: Qualifikationen für Cloud-Architekt- und KI-Deployment-Spezialist-Rollen
+- **Community-Führung**: Aktive Mitgliedschaft in Azure Entwickler- und KI-Communities
+- **Kontinuierliches Lernen**: Grundlage für erweiterte Microsoft Foundry Spezialisierungen
 
 **Portfolio-Assets:**
-- **Bereitgestellte Lösungen**: Funktionierende Beispiele von KI-Anwendungen und Infrastrukturmustern
-- **Dokumentation**: Umfassende Deployments-Anleitungen und Fehlerbehebungsverfahren  
+- **Bereitgestellte Lösungen**: Funktionierende Beispiele von KI-Anwendungen und Infrastruktur-Mustern
+- **Dokumentation**: Umfassende Bereitstellungsanleitungen und Fehlersuche-Prozesse  
 - **Community-Beiträge**: Diskussionen, Beispiele und Verbesserungen in der Azure-Community geteilt
-- **Professionelles Netzwerk**: Verbindungen mit Azure-Experten und KI-Deployment-Praktikern
+- **Berufliches Netzwerk**: Verbindungen zu Azure-Experten und KI-Deployment-Praktikern
 
 ### Lernpfad nach Kursabschluss
-Absolventen sind vorbereitet für weiterführende Spezialisierungen in:
-- **Microsoft Foundry Experte**: Tiefe Spezialisierung in KI-Modell-Deployment und Orchestrierung
-- **Cloud-Architektur-Führung**: Design und Governance von Enterprise-Deployments
-- **Community Leadership für Entwickler**: Beitrag zu Azure-Beispielen und Community-Ressourcen
-- **Unternehmensschulungen**: Vermittlung von AZD- und KI-Deployment-Fähigkeiten innerhalb von Organisationen
+Absolventen sind vorbereitet für erweiterte Spezialisierungen in:
+- **Microsoft Foundry Experte**: Tiefe Spezialisierung auf KI-Modellbereitstellung und Orchestrierung
+- **Cloud-Architektur-Führung**: Unternehmensweite Deployment-Designs und Governance
+- **Führung in Entwickler-Communities**: Beiträge zu Azure-Beispielen und Community-Ressourcen
+- **Unternehmensschulungen**: Schulung von AZD- und KI-Deployment-Kompetenzen in Organisationen
 
 ---
 
