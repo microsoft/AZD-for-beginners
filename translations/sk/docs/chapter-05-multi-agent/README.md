@@ -1,22 +1,22 @@
-# Kapitola 5: Riešenia AI s viacerými agentmi
+# Kapitola 5: Multi-agentné riešenia AI
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 2-3 hodiny | **⭐ Zložitosť**: Pokročilá
+**📚 Kurz**: [AZD Pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 2-3 hodiny | **⭐ Zložitosť**: Pokročilé
 
 ---
 
 ## Prehľad
 
-Táto kapitola pokrýva pokročilé vzory architektúry viacerých agentov, orchestráciu agentov a produkčne pripravené nasadenia AI pre zložité scenáre.
+Táto kapitola pokrýva pokročilé vzory multi-agentnej architektúry, orchestráciu agentov a produkčne použiteľné nasadenia AI pre zložité scenáre.
 
-> Návod na príkazy bol overený voči zverejnenej referencii `azd 1.37.2`. Nasadenia do cloudu neboli vykonané.
+> Pokyny ku príkazom boli skontrolované voči vydanému referenčnému manuálu `azd 1.37.2`. Nasadenia do cloudu neboli vykonané.
 
 ## Ciele učenia
 
-Po dokončení tejto kapitoly budete vedieť:
-- Pochopiť vzory architektúry viacerých agentov
-- Nasadiť koordinované systémy AI agentov
+Po dokončení tejto kapitoly budete:
+- Rozumieť vzorom multi-agentnej architektúry
+- Nasadzovať koordinované systémy AI agentov
 - Implementovať komunikáciu agent-agent
-- Vytvoriť produkčne pripravené riešenia s viacerými agentmi
+- Vytvárať produkčne pripravené multi-agentné riešenia
 
 ---
 
@@ -24,11 +24,11 @@ Po dokončení tejto kapitoly budete vedieť:
 
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Základy viacerých agentov](multi-agent-basics.md) | Praktické: nasadiť fungujúcu aplikáciu s viacerými agentmi pomocou `azd up` | 45 min |
-| 2 | [Vzory koordinácie](../chapter-06-pre-deployment/coordination-patterns.md) | Stratégie orchestrácie agentov (pokračuje v Kapitole 6) | 30 min |
-| 3 | [Nasadenie ARM šablóny](../../examples/retail-multiagent-arm-template/README.md) | Príklad nasadenia jedným kliknutím | 30 min |
+| 1 | [Základy multi-agentov](multi-agent-basics.md) | Praktické: nasadenie funkčnej multi-agentnej aplikácie s `azd up` | 45 min |
+| 2 | [Vzory koordinácie](../chapter-06-pre-deployment/coordination-patterns.md) | Stratégie orchestrácie agentov (pokračuje v kapitole 6) | 30 min |
+| 3 | [Nasadenie pomocou ARM šablóny](../../examples/retail-multiagent-arm-template/README.md) | Príklad jedným kliknutím | 30 min |
 
-> **Začnite Lekciou 1.** Je to jediná plne praktická, nasaditeľná lekcia v tejto kapitole. Lekcia 2 je v Kapitole 6 (je spoločná s plánovaním pred nasadením) a [Retail Multi-Agent Solution](../../examples/retail-scenario.md) je architektonický plán – návrhová referencia, nie šablóna jedným príkazom.
+> **Začnite lekciou 1.** Je to jediná plne praktická lekcia na nasadenie v tejto kapitole. Lekcia 2 je v kapitole 6 (je zdieľaná s plánovaním pred nasadením) a [Retail Multi-Agent Solution](../../examples/retail-scenario.md) je architektonická šablóna – dizajnový referenčný materiál, nie šablóna jedného príkazu.
 
 ---
 
@@ -39,19 +39,19 @@ Po dokončení tejto kapitoly budete vedieť:
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> **Aký prístup?** Použite `azd init --template` na začatie s fungujúcim príkladom. Použite `azd ai agent init` interaktívne, alebo `azd ai agent init --template <path-to-azure.yaml>` na prevzatie aktuálneho projektu agenta. Pozrite si [AZD AI CLI referenciu](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pre požiadavky na verziu a migráciu hodnotenia.
+> **Ktorý prístup?** Použite `azd init --template` na začatie s funkčným príkladom. Použite `azd ai agent init` interaktívne, alebo `azd ai agent init --template <path-to-azure.yaml>` na prevzatie aktuálneho projektu agenta. Pozrite si [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pre požiadavky na verziu a migráciu hodnotenia.
 
-Spustite tieto alternatívy v samostatných prázdnych priečinkoch. Rozšírenie agentov `1.0.0-beta.23` vyžaduje `azd >= 1.37.0`; jeho interaktívny tok nevytvára vlastný pipeline Service Bus v lekcii koordinácie.
+Spustite tieto alternatívy v samostatných prázdnych priečinkoch. Workflow GA Foundry vyžaduje `azd >= 1.37.0`; jeho interaktívny tok negeneruje vlastnú pipeline pre Service Bus v lekcii koordinácie. Pre lokálne testovanie, nasadenie kódu a čistenie nových vs. zrecyklovaných projektov postupujte podľa [hosted-agent walkthrough](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
-## 🤖 Architektúra viacerých agentov
+## 🤖 Multi-agentná architektúra
 
 ```mermaid
 graph TD
@@ -61,21 +61,21 @@ graph TD
 
 ---
 
-## 🎯 Vybraté riešenie: Retail Multi-Agent
+## 🎯 Predstavené riešenie: Retail Multi-Agent
 
 Riešenie [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonštruje:
 
-- **Agent zákazníka**: Spravuje interakcie a preferencie používateľa
-- **Inventárny agent**: Riadi sklad a spracovanie objednávok
-- **Orchestrátor**: Koordinuje medzi agentmi
-- **Zdieľaná pamäť**: Správa kontextu medzi agentmi
+- **Customer Agent**: Spracováva používateľské interakcie a preferencie
+- **Inventory Agent**: Spravuje zásoby a spracovanie objednávok
+- **Orchestrator**: Koordinuje medzi agentmi
+- **Shared Memory**: Riadenie kontextu medzi agentmi
 
 ### Použité služby
 
 | Služba | Účel |
 |---------|---------|
 | Microsoft Foundry Models | Porozumenie jazyka |
-| Azure AI Search | Katalóg produktov |
+| Azure AI Search | Produktový katalóg |
 | Cosmos DB | Stav a pamäť agenta |
 | Container Apps | Hosting agentov |
 | Application Insights | Monitorovanie |
@@ -94,7 +94,7 @@ Riešenie [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demon
 ## 📖 Súvisiace zdroje
 
 - [Sprievodca AI agentmi](../chapter-02-ai-development/agents.md)
-- [Produkčné AI postupy](../chapter-08-production/production-ai-practices.md)
+- [Praktiky produkčného AI](../chapter-08-production/production-ai-practices.md)
 - [Riešenie problémov AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

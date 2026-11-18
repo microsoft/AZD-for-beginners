@@ -1,28 +1,28 @@
 # Ghid de depanare specific AI
 
-**Navigare capitole:**
+**Navigarea capitolului:**
 - **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitol curent**: Capitolul 7 - Depanare și Debugging
-- **⬅️ Capitol anterior**: [Ghid de Debugging](debugging.md)
-- **➡️ Capitol următor**: [Capitolul 8: Modele de Producție & Enterprise](../chapter-08-production/production-ai-practices.md)
-- **🤖 Corelat**: [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Capitolul curent**: Capitolul 7 - Depanare și Debugging
+- **⬅️ Anterior**: [Ghid de debugging](debugging.md)
+- **➡️ Capitol următor**: [Capitolul 8: Modele de producție & Enterprise](../chapter-08-production/production-ai-practices.md)
+- **🤖 Relaționat**: [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Acest ghid complet de depanare abordează problemele comune în implementarea soluțiilor AI cu AZD, oferind soluții și tehnici de debugging specifice serviciilor Azure AI.
+Acest ghid cuprinzător de depanare abordează probleme comune la implementarea soluțiilor AI cu AZD, oferind soluții și tehnici de debugging specifice serviciilor Azure AI.
 
-> **Domeniu:** Comenzile folosesc nume de resurse exemplu; înlocuiți-le și selectați abonamentul corect. Blocurile Bicep sunt fragmente de integrat într-un șablon existent, nu implementări standalone. Fragmentele Python necesită SDK-urile specificate și configurarea aplicației. Nu s-a executat nicio implementare live pe Azure pentru această revizuire.
+> **Domeniu de aplicare:** Comenzile folosesc exemple de nume de resurse; înlocuiți-le și selectați abonamentul corect. Blocurile Bicep sunt fragmente pentru a fi integrate într-un șablon existent, nu implementări standalone. Fragmentele Python necesită SDK-urile și configurația aplicației menționate. Nicio implementare Azure live nu a fost executată pentru această revizuire.
 
 ## Cuprins
 
-- [Probleme serviciu modele Microsoft Foundry](#microsoft-foundry-models-service-issues)
+- [Probleme cu serviciul Microsoft Foundry Models](#microsoft-foundry-models-service-issues)
 - [Probleme Azure AI Search](#azure-ai-search-problems)
 - [Probleme implementare Container Apps](#container-apps-deployment-issues)
-- [Erori de autentificare și permisiune](#authentication-and-permission-errors)
-- [Eșecuri în implementarea modelelor](#model-deployment-failures)
+- [Erori de autentificare și permisiuni](#authentication-and-permission-errors)
+- [Eșecuri la implementarea modelului](#model-deployment-failures)
 - [Probleme de performanță și scalare](#performance-and-scaling-issues)
 - [Gestionarea costurilor și cotelor](#cost-and-quota-management)
-- [Instrumente și tehnici de debugging](#debugging-tools-and-techniques)
+- [Instrumente și tehnici de depanare](#debugging-tools-and-techniques)
 
-## Probleme serviciu modele Microsoft Foundry
+## Probleme cu serviciul Microsoft Foundry Models
 
 ### Problemă: Serviciul OpenAI indisponibil în regiune
 
@@ -32,9 +32,9 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Cauze:**
-- Modelele Microsoft Foundry nu sunt disponibile în regiunea selectată
-- Chota epuizată în regiunile preferate
-- Constrângeri de capacitate regională
+- Microsoft Foundry Models nu este disponibil în regiunea selectată
+- Cota epuizată în regiunile preferate
+- Constrângeri de capacitate regionale
 
 **Soluții:**
 
@@ -65,7 +65,7 @@ azd env set AZURE_LOCATION eastus2
 param openAiLocation string = 'eastus2'
 ```
 
-### Problemă: Cota de implementare a modelului depășită
+### Problemă: Cota de implementare model depășită
 
 **Simptome:**
 ```
@@ -82,7 +82,7 @@ az cognitiveservices usage list \
 ```
 
 2. **Solicitați creșterea cotei:**
-Folosiți fluxul de lucru pentru gestionarea cotelor din portalul Foundry pentru abonamentul, regiunea, modelul și tipul de implementare afectate. Consultați [ghidul oficial despre cote](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Solicitarea cotei pentru VM nu mărește cota de model.
+Folosiți fluxul de gestionare a cotelor din portalul Foundry pentru abonamentul, regiunea, modelul și tipul de implementare afectate. Consultați [ghidul oficial al cotelor](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). O solicitare de cotă VM nu crește cota pentru modele.
 
 3. **Optimizați capacitatea modelului:**
 ```bicep
@@ -113,18 +113,18 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **Soluții:**
 
-1. **Utilizați versiunea API suportată:**
+1. **Folosiți versiunea API suportată:**
 ```python
 # Stable dated Azure OpenAI data-plane API, where supported by your feature
 AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
 2. **Verificați compatibilitatea versiunii API:**
-Consultați [referința ciclului de viață al API-ului Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). Versiunile API ale furnizorului de resurse ARM **nu** listează versiunile API pentru planul de inferență/date. Clienții noi v1 utilizează `/openai/v1/` fără un `api-version` datat; nu combinați cele două configurații de client.
+Consultați [referința ciclului de viață API Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). Versiunile API ale furnizorului de resurse ARM **nu** listează versiunile API pentru planul de inferență/date. Noii clienți v1 folosesc `/openai/v1/` fără un `api-version` datat; nu combinați cele două configurații de client.
 
 ## Probleme Azure AI Search
 
-### Problemă: Nivelul tarifar al serviciului de căutare insuficient
+### Problemă: Nivel de preț insuficient pentru serviciul de căutare
 
 **Simptome:**
 ```
@@ -133,9 +133,9 @@ Error: Semantic search requires Basic tier or higher
 
 **Soluții:**
 
-1. **Folosiți un nivel tarifar suportat:**
+1. **Folosiți un nivel de preț acceptat:**
 
-Clasatorul semantic necesită Basic sau mai sus. Trecerea de la Free/Basic la un nivel diferit poate necesita crearea unui serviciu de căutare nou și reconstruirea indexurilor; modificarea unui SKU nu garantează o actualizare pe loc.
+Rankerul semantic necesită Basic sau mai sus. Trecerea de la Free/Basic la un alt nivel poate necesita crearea unui nou serviciu de căutare și reconstruirea indexurilor; editarea unui SKU nu este o actualizare garantată în loc.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -154,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Dezactivați căutarea semantică (dezvoltare):**
+2. **Dezactivați Căutarea Semantică (dezvoltare):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -202,7 +202,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Folosiți identitate administrată:**
+3. **Folosiți identitatea gestionată:**
 ```bicep
 // Grant index-definition management permissions to the managed identity.
 // Search Index Data Contributor manages documents, not index definitions.
@@ -217,7 +217,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Probleme de implementare Container Apps
+## Probleme la implementarea Container Apps
 
 ### Problemă: Eșecuri la construirea containerului
 
@@ -284,7 +284,7 @@ Error: Container failed to start within timeout period
 
 **Soluții:**
 
-1. **Măriți timpul de pornire:**
+1. **Măriți timpul de așteptare la pornire:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -317,7 +317,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimizați încărcarea modelului:**
+2. **Optimizarea încărcării modelului:**
 ```python
 # Lazy load models to reduce startup time
 # Illustrative skeleton: implement _initialize_client and synchronize concurrent
@@ -350,9 +350,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Erori de autentificare și permisiune
+## Erori de autentificare și permisiuni
 
-### Problemă: Permisiune refuzată pentru identitatea administrată
+### Problemă: Permisiune refuzată pentru identitate gestionată
 
 **Simptome:**
 ```
@@ -361,7 +361,7 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 **Soluții:**
 
-1. **Verificați atribuirea rolurilor:**
+1. **Verificați asignările rolurilor:**
 ```bash
 # Check current role assignments
 az role assignment list \
@@ -403,9 +403,9 @@ def test_authentication():
 test_authentication()
 ```
 
-Obținerea tokenului dovedește autentificarea, nu și permisiunea de a invoca un model. Testați operațiunea dorită separat. Local, `DefaultAzureCredential` poate folosi credențiale de dezvoltator; pe Azure, verificați că identitatea administrată dorită este selectată.
+Obținerea tokenului dovedește autentificarea, nu permisiunea de a invoca un model. Testați operațiunea intenționată separat. Local, `DefaultAzureCredential` poate folosi acreditările dezvoltatorului; în Azure, verificați că identitatea gestionată selectată este cea intenționată.
 
-### Problemă: Acces la Key Vault refuzat
+### Problemă: Acces refuzat Key Vault
 
 **Simptome:**
 ```
@@ -416,7 +416,7 @@ Error: The user, group or application does not have secrets get permission
 
 1. **Acordați permisiuni pentru Key Vault:**
 
-Folosiți fragmentul de politică de acces de mai jos doar pentru un vault cu `enableRbacAuthorization: false`. Pentru un vault activat RBAC, folosiți opțiunea 2; adăugarea unei politici de acces nu acordă acces la nivel de date în modul RBAC.
+Folosiți fragmentul politicii de acces următor doar pentru un vault cu `enableRbacAuthorization: false`. Pentru un vault activat RBAC, folosiți opțiunea a 2-a; adăugarea unei politici de acces nu acordă acces la planul de date în modul RBAC.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -435,9 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Folosiți RBAC în loc de politici de acces:**
+2. **Folosiți RBAC în loc de politicile de acces:**
 
-Vault-ul trebuie să aibă `enableRbacAuthorization: true`; schimbarea modelului de permisiuni necesită o migrare planificată a accesului existent.
+Vault-ul trebuie să aibă `enableRbacAuthorization: true`; schimbarea modelelor de permisiuni necesită o migrare planificată a accesului existent.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -450,7 +450,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Eșecuri în implementarea modelelor
+## Eșecuri la implementarea modelului
 
 ### Problemă: Versiunea modelului indisponibilă
 
@@ -498,7 +498,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **Validarea modelului înainte de implementare:**
+3. **Validați modelul înainte de implementare:**
 ```bash
 # Management-plane catalog for the actual account
 az cognitiveservices account list-models \
@@ -511,13 +511,13 @@ az cognitiveservices account list-models \
 ### Problemă: Răspunsuri cu latență mare
 
 **Simptome:**
-- Timp de răspuns > 30 secunde
+- Timpuri de răspuns > 30 secunde
 - Erori de timeout
 - Experiență slabă pentru utilizator
 
 **Soluții:**
 
-1. **Implementați timeout-uri pentru solicitări:**
+1. **Implementați timeouts pentru cereri:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -532,7 +532,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Adăugați cache pentru răspunsuri:**
+2. **Adăugați caching pentru răspunsuri:**
 ```python
 # Redis cache for responses
 import redis.asyncio as redis
@@ -552,7 +552,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Configurați autoscalare:**
+3. **Configurați scalarea automată:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -586,7 +586,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Problemă: Erori din cauza lipsei de memorie
+### Problemă: Erori de memorie insuficientă
 
 **Simptome:**
 ```
@@ -595,7 +595,7 @@ Error: Container killed due to memory limit exceeded
 
 **Soluții:**
 
-1. **Creșteți alocarea de memorie:**
+1. **Măriți alocarea memoriei:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -641,14 +641,14 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## Gestionarea costurilor și cotelor
+## Gestionarea costurilor și a cotelor
 
 ### Problemă: Costuri neașteptat de mari
 
 **Simptome:**
-- Factură Azure mai mare decât se estima
-- Utilizarea tokenilor depășind estimările
-- Alarme buget declanșate
+- Factură Azure mai mare decât se aștepta
+- Utilizare a tokenurilor ce depășește estimările
+- Alerte de buget declanșate
 
 **Soluții:**
 
@@ -671,9 +671,9 @@ class TokenTracker:
         return total_tokens
 ```
 
-Acest contor în memorie este ilustrativ, nu un control de cheltuieli lunar: se resetează la repornire, nu este partajat între replici și verifică utilizarea doar după un apel. O limită reală necesită contabilitate durabilă, rezervări sigure la concurență înaintea cererilor și o politică de resetare lunară. Metricile de memorie container trebuie să țină cont și de limitele cgroup; `psutil.virtual_memory()` nu este o măsurare fiabilă a limitei containerului, iar colectarea gunoiului nu impune o limită de memorie.
+Acest contor în memorie este ilustrativ, nu un control lunar al cheltuielilor: se resetează la repornire, nu este împărtășit între replici și verifică utilizarea doar după un apel. O limită reală necesită contabilizare durabilă, rezervări sigure pentru concurență înainte de cereri și o politică lunară de resetare. Metodele de măsurare a memoriei containerului trebuie să țină cont de limitele cgroup; `psutil.virtual_memory()` nu este o măsurare fiabilă a limitei containerului, iar colectarea gunoiului nu impune o plafonare a memoriei.
 
-2. **Configurați alerte de cost:**
+2. **Setați alerte de cost:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -699,9 +699,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-Declarați `budgetStartDate` și `budgetEndDate` în șablonul dvs. Bugetele notifică; nu opresc resursele sau impun o limită dură de cheltuială.
+Declarați `budgetStartDate` și `budgetEndDate` în șablonul dvs. Bugetele notifică; nu opresc resursele sau impun un plafon de cheltuieli strict.
 
-3. **Optimizați selecția modelelor:**
+3. **Optimizați selecția modelului:**
 ```python
 # Cost-aware model selection
 MODEL_COST_TIERS = {
@@ -717,9 +717,9 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4.1'
 ```
 
-## Instrumente și tehnici de debugging
+## Instrumente și tehnici de depanare
 
-### Comenzi AZD pentru debugging
+### Comenzi AZD pentru depanare
 
 ```bash
 # Enable verbose logging
@@ -738,19 +738,22 @@ azd monitor --live
 azd env get-values
 ```
 
-### Comenzi extensie AZD AI pentru diagnosticare
+### Comenzi AZD AI Extension pentru diagnosticare
 
-Dacă ați implementat agenți folosind `azd ai agent init`, aceste unelte suplimentare sunt disponibile:
+Dacă ați implementat agenți folosind `azd ai agent init`, aceste instrumente suplimentare sunt disponibile:
 
 ```bash
-# Ensure the agents extension is installed
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Check project storage permissions and agent configuration
 azd ai agent doctor
 
 # Inspect the deployed endpoint
 azd ai agent endpoint show
+
+# Stream hosted-agent logs
+azd ai agent monitor --follow
 
 # Use the MCP server to let AI tools query project state
 azd mcp start
@@ -759,15 +762,17 @@ azd mcp start
 azd infra generate
 ```
 
-> **Sfat:** Folosiți `azd infra generate` pentru a scrie IaC pe disc astfel încât să puteți inspecta exact ce resurse au fost provisionate. Acest lucru este neprețuit pentru depanarea problemelor de configurare a resurselor. Consultați [referința CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pentru detalii complete.
+> **Sfat:** Folosiți `azd infra generate` pentru a scrie IaC pe disc astfel încât să puteți inspecta exact ce resurse au fost provisionate. Aceasta este de neprețuit atunci când depanați probleme de configurare a resurselor. Consultați [referința AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pentru detalii complete.
 
-**Diagnosticare conștientă de versiune (2026-11-04):** Agenții `1.0.0-beta.23` necesită `azd >= 1.37.0`; actualizați CLI core înaintea extensiilor incompatibile. Această versiune a agentului păstrează avertismentele RBAC pentru dezvoltatori în ieșirea finală a implementării și identifică versiunea implicată în eșecurile/de adăugările de timeout. Un timeout nu stabilește că implementarea a eșuat: inspectați versiunea încercată înainte de a repeta. Fixează și afișarea mesajelor de ciclu de viață în locul răspunsurilor finalizate la apelurile A2A 0.3. Core-ul `azd 1.37.1` repară propagarea anulării între extensii; `1.37.2` îmbunătățește confirmările critice privind provisioning-ul și tratarea anulării.
+**Diagnosticare flux GA (2026-11-09):** Verificați că `azd version` este cel puțin 1.37.0 și inspectați `azd ext list --installed`. Actualizați mai întâi CLI-ul de bază cu `azd update` sau instalatorul său, apoi actualizați pachetul cu `azd ext upgrade microsoft.foundry`. Pentru eșecuri locale, verificați versiunea curentă uv, Python 3.13+ pentru exemplul de bază, `PYTHONNOUSERSITE: "1"` în configurația serviciului său și acreditările Azure folosite de `DefaultAzureCredential`. Țineți `azd ai agent run` rulând în timp ce invocați `--local` dintr-un al doilea terminal în directorul proiectului.
 
-Dacă comanda de evaluare dintr-un tutorial mai vechi afișează doar ghid pentru migrare, instalați `azure.ai.evaluations` (`1.0.0-beta.2` necesită `azd >= 1.33.0`) și folosiți `azd ai eval init`, `generate`, și `run start`. Optimizarea `--config` nu mai acceptă fișiere de evaluare vechi. Consultați [migrarea evaluării](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) și [migrarea optimizării](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Succesul la provisionare nu dovedește că dezvoltatorul are acces la planul de date. Revizuiți avertismentele RBAC și [matricea permisiunilor agenților găzduiți](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions). Un timeout nu stabilește un eșec de implementare: inspectați versiunea încercată și jurnalele înainte de a încerca din nou. Agenții anteriori beta.23 au îmbunătățit aceste avertismente și ieșirea A2A; acele remedieri istorice sunt descrise în [notițele de lansare](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes), nu sunt o cerință pentru a instala acel beta.
 
-### Debugging aplicație
+Dacă `azd ai eval` nu este disponibil, instalați `azure.ai.evaluations` separat; pachetul GA nu îl include. Dacă comanda agent-evaluation dintr-un tutorial mai vechi doar afișează ghid de migrare, folosiți fluxul separat `azd ai eval`. `--config` pentru optimizare nu mai acceptă fișiere vechi de evaluare. Consultați [migrarea evaluării](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) și [migrarea optimizării](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
-1. **Logare structurată:**
+### Depanarea aplicației
+
+1. **Jurnalizare structurată:**
 ```python
 import logging
 import json
@@ -791,7 +796,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Endpoint-uri de verificare a stării de sănătate:**
+2. **Puncte finale pentru verificarea stării de sănătate:**
 ```python
 # Integration fragment: add to an existing FastAPI app, protect this diagnostic
 # endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
@@ -824,7 +829,7 @@ async def detailed_health_check(response: Response):
     return checks
 ```
 
-3. **Monitorizare performanță:**
+3. **Monitorizarea performanței:**
 ```python
 import time
 from functools import wraps
@@ -859,35 +864,35 @@ def monitor_performance(func):
 
 | Cod Eroare | Descriere | Soluție |
 |------------|-------------|----------|
-| 401 | Neautorizat | Verificați cheile API și configurația identității administrate |
-| 403 | Interzis | Verificați atribuirea rolurilor RBAC |
-| 429 | Limită Rate | Implementați logică de retry cu backoff exponențial |
-| 500 | Eroare internă server | Verificați statusul implementării modelului și jurnalele |
-| 503 | Serviciu indisponibil | Verificați starea serviciului și disponibilitatea regională |
+| 401 | Neautorizat | Verificați cheile API și configurația identității gestionate |
+| 403 | Interzis | Verificați asignările rolurilor RBAC |
+| 429 | Limitare de rată | Implementați logica de retry cu backoff exponențial |
+| 500 | Eroare internă a serverului | Verificați starea implementării modelului și jurnalele |
+| 503 | Serviciu Indisponibil | Verificați sănătatea serviciului și disponibilitatea regională |
 
 ## Pașii următori
 
-1. **Consultați [Ghidul de implementare AI Model](../chapter-02-ai-development/ai-model-deployment.md)** pentru bune practici de implementare
-2. **Finalizați [Practici AI de producție](../chapter-08-production/production-ai-practices.md)** pentru soluții pregătite pentru enterprise
-3. **Alăturați-vă [Discord Microsoft Foundry](https://aka.ms/foundry/discord)** pentru suport comunitar
-4. **Trimiteți probleme** în [repository-ul AZD GitHub](https://github.com/Azure/azure-dev) pentru probleme specifice AZD
+1. **Revizuiți [Ghidul de implementare AI Model](../chapter-02-ai-development/ai-model-deployment.md)** pentru cele mai bune practici de implementare
+2. **Finalizați [Practici AI de producție](../chapter-08-production/production-ai-practices.md)** pentru soluții pregătite pentru întreprinderi
+3. **Alăturați-vă [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** pentru suport comunitar
+4. **Trimiteți probleme** către [repository-ul GitHub AZD](https://github.com/Azure/azure-dev) pentru probleme specifice AZD
 
 ## Resurse
 
-- [Depanare cotă și throttling Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
-- [Depanare Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Depanare Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Skill Azure Diagnostics Agent**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Instalați skill-uri de depanare Azure în editorul dvs.: `npx skills add microsoft/github-copilot-for-azure`
+- [Depanarea cotelor și limitărilor Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
+- [Depanarea Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Depanarea Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Agent de diagnostic Azure Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Instalați abilitățile de depanare Azure în editorul dvs.: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Navigare capitole:**
-- **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitol curent**: Capitolul 7 - Depanare și Debugging
-- **⬅️ Capitol anterior**: [Ghid de Debugging](debugging.md)
-- **➡️ Capitol următor**: [Capitolul 8: Modele de Producție & Enterprise](../chapter-08-production/production-ai-practices.md)
-- **🤖 Corelat**: [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 Referință**: [Depanare Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**Navigarea capitolului:**
+- **📚 Pagina principală a cursului**: [AZD Pentru începători](../../README.md)
+- **📖 Capitolul curent**: Capitolul 7 - Depanare și Diagnosticare
+- **⬅️ Capitol anterior**: [Ghid de depanare](debugging.md)
+- **➡️ Capitol următor**: [Capitolul 8: Modele de producție și întreprindere](../chapter-08-production/production-ai-practices.md)
+- **🤖 Relatate**: [Capitolul 2: Dezvoltare AI-Primară](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Referință**: [Depanarea Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 

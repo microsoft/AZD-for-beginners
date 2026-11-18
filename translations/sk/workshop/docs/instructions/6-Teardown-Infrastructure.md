@@ -1,4 +1,4 @@
-# 6. Odstraňovanie infraštruktúry
+# 6. Demontáž infraštruktúry
 
 !!! tip "NA KONCI TOHTO MODULU BUDETE SCHOPNÍ"
 
@@ -11,9 +11,9 @@
 
 ## Bonusové cvičenia
 
-Predtým, než projekt odstránime, venujte niekoľko minút voľnému skúmaniu.
+Pred tým, než projekt rozoberiete, venujte pár minút voľnému skúmaniu.
 
-!!! info "Vyskúšajte tieto námety na skúmanie"
+!!! info "Vyskúšajte tieto podnety na skúmanie"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@ Predtým, než projekt odstránime, venujte niekoľko minút voľnému skúmaniu
 
 ---
 
-## Odprovízia infraštruktúry
+## Deprovízia infraštruktúry
 
-1. Odstraňovanie infraštruktúry je také jednoduché ako:
+!!! warning "Ak ste tiež dokončili cvičenie s hosteným agentom GA"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Demontáž infraštruktúry je taká jednoduchá ako:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Potvrďte vybrané prostredie a skontrolujte zdroje, ktoré budú vymazané. Toto odstráni Azure zdroje a môže zničiť dáta. Pre tento učebný proces si ponechajte výzvu na potvrdenie. Po dokončení uvidíte podobný výstup:
+1. Potvrďte vybrané prostredie a skontrolujte zdroje, ktoré sa majú zmazať. Toto odstráni zdroje Azure a môže zničiť dáta. Pre tento učením riadený tok ponechajte výzvu na potvrdenie. Po dokončení uvidíte výstup podobný:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Predtým, než projekt odstránime, venujte niekoľko minút voľnému skúmaniu
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Overte zmazanie na portáli a skontrolujte zdroje mimo rozsah nasadenia. Hlásenie nákladov a aktualizácie kvót môžu meškať. Lokálna konfigurácia `.azure` zostáva, pokiaľ ju výslovne neodstránite.
+1. Overte zmazanie v portáli a skontrolujte zdroje mimo rozsahu nasadenia. Reportovanie nákladov a aktualizácie kvót môžu meškať. Lokálna konfigurácia `.azure` zostáva, pokiaľ ju výslovne neodstránite.
 
-1. `azd down --purge` navyše žiada o trvalé vymazanie podporovaných soft-delete zdrojov. Používajte ho len keď nie je potrebné zotavenie a rozumiete pravidlám uchovávania/ochrany pred vymazaním. Nezaručuje okamžité uvoľnenie kvót.
+1. `azd down --purge` navyše žiada o trvalé zmazanie podporovaných soft-zmazaných zdrojov. Používajte ho iba vtedy, keď nie je potrebná obnova a keď rozumiete zásadám uchovávania/ochrany pred vyprázdnením. Nezaručuje okamžité uvoľnenie kvóty.
 
-1. Neznovu nasadzujte len na overenie vyčistenia. Neskoršie zámerné `azd up` môže znova vytvoriť zdroje s použitím zostávajúcich lokálnych vstupov a opäť vzniknú poplatky. Aktualizácie modelu bežne používajú podporované zmeny provisioning, nie odstraňovanie.
+1. Neznovu nasadzujte len na overenie vyčistenia. Neskoršia zámerná `azd up` môže opätovne vytvoriť zdroje s použitím zostávajúcich lokálnych vstupov a opäť spôsobí poplatky. Aktualizácie modelu zvyčajne používajú podporované zmeny provisioningu, nie rozobratie.
 
 ---
 

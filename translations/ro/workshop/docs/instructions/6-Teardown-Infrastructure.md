@@ -9,11 +9,11 @@
 
 ---
 
-## Exerciții bonus
+## Exerciții Bonus
 
-Înainte de a demonta proiectul, ia câteva minute pentru o explorare deschisă.
+Înainte de a demonta proiectul, ia câteva minute pentru a face o explorare deschisă.
 
-!!! info "Încearcă aceste îndemnuri de explorare"
+!!! info "Încearcă aceste sugestii de explorare"
 
     **Experiment with GitHub Copilot:**
     
@@ -29,16 +29,20 @@
 
 ---
 
-## Dezprovisionare infrastructură
+## Deprovisionarea infrastructurii
 
-1. Demontarea infrastructurii este la fel de simplă ca:
+!!! warning "Dacă ai finalizat și exercițiul cu agentul găzduit GA"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. Demontarea infrastructurii este la fel de simplă precum:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. Confirmă mediul selectat și revizuiește resursele ce urmează să fie șterse. Aceasta elimină resursele Azure și poate distruge date. Menține solicitarea de confirmare pentru acest flux de lucru de învățare. Odată finalizat vei vedea un rezultat similar cu:
+1. Confirmă mediul selectat și verifică resursele care vor fi șterse. Aceasta elimină resursele Azure și poate distruge date. Păstrează promptul de confirmare pentru acest flux de învățare. Odată complet, vei vedea un output similar cu:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Verifică ștergerea în portal și caută resurse în afara domeniului de implementare. Raportarea costurilor și actualizările cotelor pot întârzia. Configurația locală `.azure` rămâne decât dacă o elimini explicit.
+1. Verifică ștergerea în portal și caută resurse din afara domeniului de aplicare al implementării. Raportarea costurilor și actualizările cotelor pot întârzia. Configurația locală `.azure` rămâne, cu excepția cazului în care o elimini explicit.
 
-1. `azd down --purge` solicită și ștergerea permanentă a resurselor soft-șterse suportate. Folosește această comandă doar când recuperarea nu este necesară și înțelegi politicile de retenție/protecție la ștergere. Nu garantează eliberarea imediată a cotei.
+1. `azd down --purge` solicită în plus ștergerea permanentă a resurselor șterse soft suportate. Folosește-l doar când recuperarea nu este necesară și înțelegi politicile de retenție/protecție la ștergere. Nu garantează eliberarea imediată a cotei.
 
-1. Nu reimplementa doar pentru a verifica curățarea. O comandă intenționată ulterioară `azd up` poate recrea resursele folosind intrările locale rămase și va genera din nou costuri. Actualizările modelului folosesc de obicei schimbări de aprovizionare suportate, nu demontarea.
+1. Nu redeploya doar pentru a verifica curățarea. O `azd up` intenționată mai târziu poate recrea resursele folosind intrările locale rămase și va genera din nou costuri. Actualizările modelelor folosesc în mod normal modificările de provisioning suportate, nu demontarea.
 
 ---
 

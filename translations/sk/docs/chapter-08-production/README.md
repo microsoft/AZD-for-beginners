@@ -6,20 +6,20 @@
 
 ## Prehľad
 
-Táto kapitola pokrýva podnikové vzory pripravené na nasadenie, spevňovanie bezpečnosti, monitorovanie a optimalizáciu nákladov pre produkčné AI záťaže.
+Táto kapitola pokrýva podnikové vzory nasadzovania pripravené do produkcie, spevňovanie bezpečnosti, monitorovanie a optimalizáciu nákladov pre produkčné AI záťaže.
 
-Ide o architektonický referenčný materiál, nie o úplnú šablónu na produkčné nasadenie. Príklady vynechávajú integračné detaily, ktoré je potrebné dodať a otestovať vo vlastnej aplikácii; prečítanie kontrolného zoznamu negarantuje pripravenosť na produkciu.
+Toto je architektonický referenčný materiál, nie kompletná šablóna nasaditeľná do produkcie. Príklady vynechávajú integračné detaily, ktoré musia byť dodané a otestované vo vašej vlastnej aplikácii; prečítanie si kontrolného zoznamu nezaručuje pripravenosť na produkciu.
 
-> **Kontrola vydania (2026-11-04):** AI CLI usmernenie bolo overené proti dokumentácií/zdrojom `azd 1.37.2`, agentov `1.0.0-beta.23` a vyhodnotení `1.0.0-beta.2`. Pozrite si [zmeny a opravy vydania](production-ai-practices.md#recent-release-changes-and-fixes) pre požiadavky kompatibility a detaily migrácie; nejde o validáciu živého nasadenia.
+> **Aktualizácia Foundry GA (2026-11-09):** Použite `azd >= 1.37.0` a všeobecne dostupný balík `microsoft.foundry` 1.0 pre Foundry workflow; vyhodnotenia sa inštalujú samostatne. Pozrite si [rozsah vydania a migráciu](production-ai-practices.md#recent-release-changes-and-fixes) a [príklad overeného pipeline](production-ai-practices.md#cicd-pipeline-configuration). Toto je revízia dokumentácie, nie validácia živého nasadenia ani všeobecný GA stav voliteľných náhľadových funkcií.
 
 ## Ciele učenia
 
-Po dokončení tejto kapitoly budete vedieť:
-- Nasadiť odolné aplikácie v viacerých regiónoch
+Dokončením tejto kapitoly budete vedieť:
+- Nasadiť viac-regionálne odolné aplikácie
 - Implementovať podnikové bezpečnostné vzory
 - Konfigurovať komplexné monitorovanie
-- Optimalizovať náklady vo veľkom meradle
-- Nastaviť CI/CD pipeline s AZD
+- Optimalizovať náklady vo veľkom
+- Nastaviť CI/CD pipeline pomocou AZD
 
 ---
 
@@ -27,13 +27,13 @@ Po dokončení tejto kapitoly budete vedieť:
 
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Produkčné praktiky AI](production-ai-practices.md) | Podnikové vzory nasadenia | 90 min |
+| 1 | [Produkčné AI postupy](production-ai-practices.md) | Podnikové vzory nasadzovania | 90 min |
 
 ---
 
 ## 🚀 Produkčný kontrolný zoznam
 
-- [ ] Viacregionálne nasadenie pre odolnosť
+- [ ] Viac-regionálne nasadenie pre odolnosť
 - [ ] Spravovaná identita pre autentifikáciu (bez kľúčov)
 - [ ] Application Insights pre monitorovanie
 - [ ] Nastavené rozpočty a upozornenia na náklady
@@ -45,7 +45,7 @@ Po dokončení tejto kapitoly budete vedieť:
 
 ## 🏗️ Architektonické vzory
 
-### Vzor 1: Microservices AI
+### Vzor 1: AI založená na mikroslužbách
 
 ```mermaid
 graph LR
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Vzor 2: Event-Driven AI
+### Vzor 2: Udalosťami riadená AI
 
 ```mermaid
 graph LR
@@ -87,16 +87,16 @@ properties: {
 
 | Stratégia | Hlavné obmedzenie |
 |----------|---------|
-| Škálovanie na nulu (Container Apps) | Vyžaduje vhodný spúšťač; ostatné služby stále spôsobujú náklady |
-| Použitie spotrebných vrstiev pre vývoj | Porovnajte ceny vybranej služby a pracovnú záťaž |
-| Plánované škálovanie | Škálujte cez podporovanú infraštruktúru/automatizáciu |
-| Rezervácie/kapacita na požiadanie | Iba ak je podporované; záväzky môžu zvyšovať nečinné náklady |
+| Škálovanie na nulu (Container Apps) | Vyžaduje vhodný spúšťač; iné služby stále generujú náklady |
+| Použitie spotrebných úrovní pre vývoj | Porovnajte ceny vybraných služieb a záťaž |
+| Plánované škálovanie | Zabezpečené škálovanie cez podporovanú infraštruktúru/automatizáciu |
+| Rezervácie/provízované kapacity | Iba keď podporované; záväzky môžu zvýšiť nečinné náklady |
 
-Použite [kompletný vzor rozpočtového zdroja](production-ai-practices.md#2-cost-monitoring-and-budgets) s platným dátumom začiatku, rozsahom fakturácie, príjemcami a povoleniami. Rozpočet posiela upozornenia; neobmedzuje výdavky. Úspory závisia od meranej spotreby a nie sú garantované ako percentá.
+Použite [kompletný vzor zdrojového rozpočtu](production-ai-practices.md#2-cost-monitoring-and-budgets) s platným dátumom začiatku, rozsahom fakturácie, príjemcami a oprávneniami. Rozpočet posiela upozornenia; neobmedzuje výdavky. Úspory závisia od meranej využiteľnosti a nie sú garantovane v percentách.
 
 ---
 
-## 📊 Nastavenie monitoringu
+## 📊 Nastavenie monitorovania
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -116,16 +116,16 @@ az monitor metrics list --resource <resource-id>
 | Smer | Kapitola |
 |-----------|---------|
 | **Predchádzajúca** | [Kapitola 7: Riešenie problémov](../chapter-07-troubleshooting/README.md) |
-| **Kurz dokončený** | [Domovská stránka kurzu](../../README.md) |
+| **Kurz dokončený** | [Domov kurzu](../../README.md) |
 
 ---
 
 ## 📖 Súvisiace zdroje
 
-- [Sprievodca AI Agentmi](../chapter-02-ai-development/agents.md)
+- [Sprievodca AI agentmi](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Riešenia viacerých agentov](../chapter-05-multi-agent/README.md)
-- [Príklad Microservices](../../examples/microservices/README.md)
+- [Riešenia s viacerými agentmi](../chapter-05-multi-agent/README.md)
+- [Príklad mikroslužieb](../../examples/microservices/README.md)
 
 ---
 

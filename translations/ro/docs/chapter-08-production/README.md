@@ -1,22 +1,22 @@
-# Capitolul 8: Modele pentru Producție & Întreprinderi
+# Capitolul 8: Modele de Producție și Enterprise
 
-**📚 Curs**: [AZD pentru Începători](../../README.md) | **⏱️ Durata**: 2-3 ore | **⭐ Complexitate**: Avansat
+**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 2-3 ore | **⭐ Complexitate**: Avansat
 
 ---
 
 ## Prezentare generală
 
-Acest capitol acoperă modele de implementare pregătite pentru întreprindere, consolidarea securității, monitorizarea și optimizarea costurilor pentru sarcini AI de producție.
+Acest capitol acoperă modele de implementare pregătite pentru mediul enterprise, întărirea securității, monitorizarea și optimizarea costurilor pentru sarcini AI în producție.
 
-Acesta este un reper arhitectural, nu un șablon complet de producție implementabil. Exemplele omit detaliile de integrare care trebuie furnizate și testate în propria aplicație; citirea listei de verificare nu certifică pregătirea pentru producție.
+Acesta este un referențial arhitectural, nu un șablon complet de producție deployabil. Exemplele omit detalii de integrare care trebuie furnizate și testate în propria dvs. aplicație; parcurgerea listei de verificare nu certifică pregătirea pentru producție.
 
-> **Revizuire lansare (2026-11-04):** Ghidul AI CLI a fost verificat față de documentația/sursa `azd 1.37.2`, agenți `1.0.0-beta.23` și evaluări `1.0.0-beta.2`. Consultați [modificările și corecțiile de lansare](production-ai-practices.md#recent-release-changes-and-fixes) pentru cerințe de compatibilitate și detalii de migrare; aceasta nu este o validare în timp real a implementării.
+> **Actualizare Foundry GA (2026-11-09):** Folosiți `azd >= 1.37.0` și pachetul `microsoft.foundry` 1.0 disponibil în mod general pentru fluxul de lucru Foundry; evaluările se instalează separat. Consultați [scopul lansării și migrarea](production-ai-practices.md#recent-release-changes-and-fixes) și [exemplul de pipeline autentificat](production-ai-practices.md#cicd-pipeline-configuration). Aceasta este o revizuire a documentației, nu o validare în timp real a implementării sau un statut general GA pentru funcționalități opționale în previzualizare.
 
-## Obiectivele învățării
+## Obiectivele de învățare
 
-Prin finalizarea acestui capitol, veți putea:
-- Implementa aplicații rezistente multi-regiune
-- Implementa modele de securitate pentru întreprindere
+Parcurgând acest capitol, veți:
+- Implementa aplicații reziliente multi-regiune
+- Implementa modele enterprise de securitate
 - Configura monitorizare cuprinzătoare
 - Optimiza costurile la scară
 - Configura pipeline-uri CI/CD cu AZD
@@ -25,9 +25,9 @@ Prin finalizarea acestui capitol, veți putea:
 
 ## 📚 Lecții
 
-| # | Lecție | Descriere | Durată |
+| # | Lecție | Descriere | Timp |
 |---|--------|-------------|------|
-| 1 | [Practici AI de producție](production-ai-practices.md) | Modele de implementare pentru întreprinderi | 90 min |
+| 1 | [Practici AI de Producție](production-ai-practices.md) | Modele de implementare enterprise | 90 min |
 
 ---
 
@@ -39,7 +39,7 @@ Prin finalizarea acestui capitol, veți putea:
 - [ ] Bugete de cost și alerte configurate
 - [ ] Scanare de securitate activată
 - [ ] Integrare pipeline CI/CD
-- [ ] Plan de recuperare în caz de dezastru
+- [ ] Plan de recuperare după dezastru
 
 ---
 
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Model 2: AI bazat pe evenimente
+### Model 2: AI Event-Driven
 
 ```mermaid
 graph LR
@@ -87,16 +87,16 @@ properties: {
 
 | Strategie | Principala constrângere |
 |----------|---------|
-| Scalare la zero (Container Apps) | Necesită un declanșator adecvat; alte servicii generează totuși costuri |
-| Utilizare nivel de consum pentru dev | Comparați prețurile serviciului selectat și încărcarea de muncă |
-| Scalare programată | Scăderea prin infrastructură/automatizare suportată |
-| Rezervări/capacitate asigurată | Doar când este suportat; angajamentele pot crește costurile în perioadele de inactivitate |
+| Scalare la zero (Container Apps) | Necesită un declanșator potrivit; alte servicii încă generează costuri |
+| Folosirea nivelurilor de consum pentru dezvoltare | Comparați prețurile serviciului selecționat și sarcina de lucru |
+| Scalare programată | Scalați prin infrastructură/automatizare acceptată |
+| Rezervări/capacitate provizionată | Doar dacă este acceptată; angajamentele pot crește costurile inactivității |
 
-Utilizați [modelul complet pentru buget](production-ai-practices.md#2-cost-monitoring-and-budgets) cu o dată validă de început, domeniu de facturare, destinatari și permisiuni. Un buget trimite alerte; nu limitează cheltuielile. Economiile depind de utilizarea măsurată și nu sunt procente garantate.
+Folosiți [modelul complet de buget pentru resurse](production-ai-practices.md#2-cost-monitoring-and-budgets) cu o dată de început validă, domeniul facturării, destinatarii și permisiunile. Un buget trimite alerte; nu limitează cheltuielile. Economiile depind de utilizarea măsurată și nu sunt procente garantate.
 
 ---
 
-## 📊 Configurarea monitorizării
+## 📊 Configurare monitorizare
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -116,13 +116,13 @@ az monitor metrics list --resource <resource-id>
 | Direcție | Capitol |
 |-----------|---------|
 | **Anterior** | [Capitolul 7: Depanare](../chapter-07-troubleshooting/README.md) |
-| **Curs finalizat** | [Pagina principală a cursului](../../README.md) |
+| **Curs Finalizat** | [Pagina principală a cursului](../../README.md) |
 
 ---
 
 ## 📖 Resurse conexe
 
-- [Ghid agenți AI](../chapter-02-ai-development/agents.md)
+- [Ghid Agenți AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Soluții Multi-Agent](../chapter-05-multi-agent/README.md)
 - [Exemplu Microservicii](../../examples/microservices/README.md)
