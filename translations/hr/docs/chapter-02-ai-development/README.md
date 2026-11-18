@@ -1,4 +1,4 @@
-# Poglavlje 2: AI-First razvoj
+# Poglavlje 2: Razvoj s fokusom na umjetnu inteligenciju
 
 **📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 4-5 sati uključujući radionicu | **⭐ Kompleksnost**: Srednja
 
@@ -6,17 +6,19 @@
 
 ## Pregled
 
-Ovo poglavlje usredotočuje se na implementaciju AI-pokretanih aplikacija koristeći Azure Developer CLI i Microsoft Foundry usluge. Od jednostavnih AI chat aplikacija do inteligentnih agenata s alatima.
+Ovo poglavlje se fokusira na implementaciju aplikacija pokretanih umjetnom inteligencijom koristeći Azure Developer CLI i Microsoft Foundry usluge. Od jednostavnih AI chat aplikacija do inteligentnih agenata s alatima.
 
-> **Pregled izdanja (2026-11-04):** AI CLI smjernice su provjerene prema objavljenim `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23` i `azure.ai.evaluations` `1.0.0-beta.2` dokumentaciji/izvoru. Koristite `azd >= 1.37.0` za kombinirani tijek rada. Evaluacije sada koriste zasebni `azd ai eval` namespace; vidi [promjene izdanja i smjernice za migraciju](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Ovo nije validacija u stvarnom vremenu.
+> **Foundry GA ažuriranje (2026-11-09):** Paket `microsoft.foundry` 1.0 je [općenito dostupan](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Koristite `azd >= 1.37.0`; evaluacije ostaju zasebna instalacija. [Vodič za hostiranog agenta](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) obuhvaća lokalno testiranje Agent Inspectora i udaljeno postavljanje koda. Ovo je pregled dokumentacije, a ne provjera stvarnog postavljanja; opcionalne pregledne značajke zadržavaju svoj status.
 
 ## Ciljevi učenja
 
-Završetkom ovog poglavlja ćete:
-- Implementirati AI aplikacije koristeći unaprijed izrađene AZD predloške
-- Razumjeti integraciju Microsoft Foundry s AZD
-- Konfigurirati i prilagoditi AI agente s alatima
-- Implementirati RAG (Retrieval-Augmented Generation) aplikacije
+Završetkom ovog poglavlja, moći ćete:
+- Postavljati AI aplikacije koristeći unaprijed izrađene AZD predloške
+- Razumjeti Microsoft Foundry integraciju s AZD-om
+- Instalirati GA paket i testirati hostiranog agenta lokalno prije postavljanja izvornog koda u Foundry
+- Pregledati `azure.yaml`, evaluacijske resurse i čišćenje novih u odnosu na ponovno korištene projekte
+- Konfigurirati i prilagoditi AI agente pomoću alata
+- Postavljati RAG (Retrieval-Augmented Generation) aplikacije
 
 ---
 
@@ -24,16 +26,18 @@ Završetkom ovog poglavlja ćete:
 
 | # | Lekcija | Opis | Vrijeme |
 |---|--------|-------------|------|
-| 1 | [Integracija Microsoft Foundry](microsoft-foundry-integration.md) | Povezivanje AZD s Foundry uslugama | 30 min |
-| 2 | [Vodič za AI agente](agents.md) | Implementacija inteligentnih agenata s alatima | 45 min |
-| 3 | [Implementacija AI modela](ai-model-deployment.md) | Implementacija i konfiguracija AI modela | 30 min |
-| 4 | [AI radionica laboratorij](ai-workshop-lab.md) | Praktično: Istražite predložak i isplanirajte svoju konverziju | 2-3 sata |
+| 1 | [Microsoft Foundry Integracija](microsoft-foundry-integration.md) | GA paket, lokalni do cloud tijek rada hostiranog agenta i evaluacije | 60 min |
+| 2 | [Vodič za AI Agente](agents.md) | Postavljanje inteligentnih agenata pomoću alata | 45 min |
+| 3 | [Postavljanje AI Modela](ai-model-deployment.md) | Postavljanje i konfiguracija AI modela | 30 min |
+| 4 | [Laboratorij AI Radionice](ai-workshop-lab.md) | Praktično: Istražite predložak i planirajte svoj prijelaz | 2-3 sata |
 
 ---
 
-## 🚀 Brz početak
+## 🚀 Brzi početak
 
-Odaberite jednu opciju u novom praznom direktoriju. Završni `.` inicijalizira trenutni direktorij; inače AZD može napraviti poddirektorij bez mijenjanja radnog direktorija vašeg terminala.
+Odaberite opciju u novom praznom direktoriju. Završni `.` inicijalizira trenutni direktorij; inače AZD može stvoriti poddirektorij bez promjene radnog direktorija u vašem terminalu.
+
+Za **GA put postavljanja koda hostiranog agenta**, započnite s [vođenim vodičem](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Potrebni su AZD 1.37.0+, trenutni uv, Python 3.13+, Foundry dopuštenja i kvota modela. Cjeloviti aplikacijski predlošci ispod su alternative, a ne preduvjeti za taj vodič.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -53,7 +57,7 @@ azd up
 
 ## 🤖 Istaknuti AI predlošci
 
-| Predložak | Opis | Usluge |
+| Predložak | Opis | Servisi |
 |----------|-------------|----------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat s citatima | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent s alatima | AI Agent Service |
@@ -63,15 +67,15 @@ azd up
 
 ## 💰 Svijest o troškovima
 
-Ovo su ilustrativni rasponi, a ne ponude ili ograničenja; promet modela, Search/compute SKU-ovi, regija i dodatne opcije mogu ih premašiti. Pregledajte trenutne cijene izabranog primjera prije provisioniranja.
+Ovo su ilustrativni rasponi, a ne ponude ili ograničenja; promet modela, Search/compute SKU-ovi, regija i opcionalne značajke mogu ih premašiti. Pregledajte trenutačne upute o cijenama odabranog uzorka prije nabave.
 
-| Okruženje | Procijenjeni mjesečni trošak |
+| Okoliš | Procijenjeni mjesečni trošak |
 |-------------|----------------------|
 | Razvoj | $80-150 |
-| Testno okruženje | $150-300 |
-| Produkcija | $300-3,500+ |
+| Testiranje | $150-300 |
+| Proizvodnja | $300-3,500+ |
 
-**Savjet:** Pokrenite `azd down` nakon testiranja kako biste izbjegli naplatu.
+**Čišćenje:** Pregledajte `azd down` prije potvrde: za novokreirani Foundry projekt briše grupu resursa i sve u njoj. Za ponovno upotrijebljeni Foundry projekt ostavlja projekt i resurse agenata na mjestu; slijedite [upute za čišćenje iz vodiča](microsoft-foundry-integration.md#7-clean-up-deliberately) da zasebno uklonite neželjene resurse.
 
 ---
 
@@ -81,14 +85,14 @@ Ovo su ilustrativni rasponi, a ne ponude ili ograničenja; promet modela, Search
 |-----------|---------|
 | **Prethodno** | [Poglavlje 1: Osnove](../chapter-01-foundation/README.md) |
 | **Sljedeće** | [Poglavlje 3: Konfiguracija](../chapter-03-configuration/README.md) |
-| **Preskoči na** | [Poglavlje 8: Produkcijski obrasci](../chapter-08-production/README.md) |
+| **Preskoči na** | [Poglavlje 8: Obrasci u proizvodnji](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Povezani resursi
 
-- [Rješavanje problema AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Produkcijske AI prakse](../chapter-08-production/production-ai-practices.md)
+- [Otklanjanje poteškoća s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Prakse proizvodnog AI](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

@@ -1,50 +1,50 @@
-# AZD Za začetnike: Osnutek tečaja in okvir učenja
+# AZD za začetnike: Načrt tečaja in učni okvir
 
 ## Pregled tečaja
 
-Obvladajte Azure Developer CLI (azd) skozi strukturirane poglavja, zasnovana za postopno učenje. **Poseben poudarek na uvajanju AI aplikacij z integracijo Microsoft Foundry.**
+Obvladajte Azure Developer CLI (azd) preko strukturiranih poglavij, zasnovanih za postopno učenje. **Poseben poudarek na uvajanju AI aplikacij z integracijo Microsoft Foundry.**
 
-### Zakaj je ta tečaj bistven za sodobne razvijalce
+### Zakaj je ta tečaj nujen za sodobne razvijalce
 
-Razvijalci, ki uvajajo AI delovne obremenitve, pogosto potrebujejo smernice o:
-- Kompleksnih večstoritevnih AI arhitekturah
-- Najboljših praksah uvajanja AI v produkciji  
-- Integraciji in konfiguraciji Azure AI storitev
-- Optimizaciji stroškov za AI delovne obremenitve
-- Odpravljanju težav specifičnih za uvajanje AI
+Razvijalci, ki uvajajo AI delovne obremenitve, pogosto potrebujejo smernice glede:
+- Kompleksnih večstoritevnih AI arhitektur
+- Najboljših praks za uvajanje AI v produkcijo  
+- Integracije in konfiguracije Azure AI storitev
+- Optimizacije stroškov za AI delovne obremenitve
+- Reševanja težav, specifičnih za uvajanje AI
 
-### Glavni cilji učenja
+### Glavni učni cilji
 
 Z dokončanjem tega strukturiranega tečaja boste:
-- **Obvladali osnove AZD**: Temeljni koncepti, namestitev in konfiguracija
+- **Obvladali osnove AZD**: Osnovni koncepti, namestitev in konfiguracija
 - **Uvajali AI aplikacije**: Uporaba AZD s storitvami Microsoft Foundry
-- **Implementirali infrastrukturo kot kodo**: Upravljanje Azure virov s predlogami Bicep
-- **Odpravljali napake pri uvajanju**: Reševanje pogostih težav in odpravljanje napak
+- **Uvedli infrastrukturo kot kodo**: Upravljanje Azure virov s predlogami Bicep
+- **Reševali težave pri uvajanju**: Reševanje pogostih težav in odpravljanje napak
 - **Optimizirali za produkcijo**: Varnost, skaliranje, spremljanje in upravljanje stroškov
-- **Gradili rešitve z več agenti**: Uvajanje kompleksnih AI arhitektur
+- **Gradili večagentne rešitve**: Uvajanje kompleksnih AI arhitektur
 
-## 🎓 Učno doživetje delavnice
+## 🎓 Delavnica kot učna izkušnja
 
-### Fleksibilne možnosti izvedbe učenja
-Ta tečaj je zasnovan tako, da podpira **samostojno individualno učenje** in **vodene delavnice**, kar udeležencem omogoča praktično delo z AZD in razvoj praktičnih veščin skozi interaktivne vaje.
+### Fleksibilne možnosti dostave učenja
+Ta tečaj je zasnovan tako, da podpira tako **samo-učenje po lastnem tempu** kot tudi **vodenih delavnic**, kar udeležencem omogoča praktično izkušnjo z AZD med razvijanjem praktičnih veščin skozi interaktivne vaje.
 
-#### 🚀 Način samostojnega učenja
+#### 🚀 Način samo-učenja po lastnem tempu
 **Popolno za posamezne razvijalce in kontinuirano učenje**
 
 **Značilnosti:**
-- **Vmesnik prek brskalnika**: Celovita delavnica, podprta z MkDocs, dostopna preko kateregakoli spletnega brskalnika
-- **Integracija GitHub Codespaces**: Razvojno okolje z enim klikom in prednastavljenimi orodji
-- **Interaktivno razvojno okolje DevContainer**: Brez lokalne namestitve - takoj začnite s kodiranjem
-- **Sledenje napredku**: Vgrajene kontrolne točke in validacijske vaje
-- **Skupnostna podpora**: Dostop do Azure Discord kanalov za vprašanja in sodelovanje
+- **Vmesnik v brskalniku**: Celovita delavnica na platformi MkDocs dostopna skozi kateri koli spletni brskalnik
+- **Integracija GitHub Codespaces**: Razvojno okolje z enim klikom s prednastavljenimi orodji
+- **Interaktivno okolje DevContainer**: Brez lokalne nastavitve - začnite s kodiranjem takoj
+- **Sledenje napredku**: Vgrajeni kontrolni točki in validacijske vaje
+- **Podpora skupnosti**: Dostop do Azure Discord kanalov za vprašanja in sodelovanje
 
-**Struktura učenja:**
-- **Fleksibilen čas**: Dokončajte poglavja v svojem ritmu, v dneh ali tednih
-- **Sistem kontrolnih točk**: Preverite znanje pred napredovanjem na zahtevnejše teme
-- **Knjižnica virov**: Obsežna dokumentacija, primeri in vodniki za odpravljanje težav
-- **Razvoj portfelja**: Gradite projekte za profesionalni portfelj
+**Učna struktura:**
+- **Fleksibilen čas**: Dokončajte poglavja v svojem tempu čez dneve ali tedne
+- **Sistem kontrolnih točk**: Validirajte učenje pred prehodom na kompleksne teme
+- **Knjižnica virov**: Obsežna dokumentacija, primeri in vodiči za odpravljanje težav
+- **Razvoj portfelja**: Gradnja projektov za profesionalne portfelje
 
-**Začetek (samostojno):**
+**Začetek (Samo-učenje):**
 ```bash
 # Option 1: GitHub Codespaces (Recommended)
 # Navigate to the repository and click "Code" → "Create codespace on main"
@@ -55,180 +55,184 @@ cd azd-for-beginners/workshop
 # Follow setup instructions in workshop/README.md
 ```
 
-#### 🏛️ Vodene delavnice
+#### 🏛️ Vodenje delavnic
 **Idealno za korporativno usposabljanje, bootcampe in izobraževalne ustanove**
 
-**Možnosti izvedbe delavnic:**
+**Možnosti izvedbe delavnice:**
 
 **📚 Integracija v akademski tečaj (8-12 tednov)**
-- **Univerzitetni programi**: Semester dolg tečaj z dvournimi tedenskimi srečanji
-- **Bootcamp format**: Intenziven 3-5 dnevni program z dnevnimi 6-8 urnimi sejami
-- **Korporativno usposabljanje**: Mesečne timske seje z izvedbo praktičnih projektov
-- **Okvir ocenjevanja**: Ovrednoteni zadatki, recenzije vrstnikov in zaključni projekti
+- **Univerzitetni programi**: Semester dolg tečaj s tedenskimi 2-urnimi seansami
+- **Bootcamp format**: Intenziven program 3-5 dni z dnevnim 6-8 urnim delom
+- **Korporativno usposabljanje**: Mesečne seje za ekipe s praktično implementacijo projektov
+- **Okvir ocenjevanja**: Ocenjevalne naloge, ocene vrstnikov in zaključni projekti
 
 **🚀 Intenzivna delavnica (1-3 dni)**
-- **Dan 1**: Osnove + razvoj AI (poglavja 1-2) - 6 ur
-- **Dan 2**: Konfiguracija + infrastruktura (poglavja 3-4) - 6 ur  
-- **Dan 3**: Napredni vzorci + produkcija (poglavja 5-8) - 8 ur
-- **Sledilna podpora**: Opcijsko 2-tedensko mentorstvo za dokončanje projekta
+- **1. dan**: Osnove + AI razvoj (Poglavji 1-2) - 6 ur
+- **2. dan**: Konfiguracija + infrastruktura (Poglavji 3-4) - 6 ur  
+- **3. dan**: Napredni vzorci + produkcija (Poglavji 5-8) - 8 ur
+- **Spremljanje**: Izbirno 2-tedensko mentorstvo za dokončanje projekta
 
-**⚡ Izvršni pregled (4-6 ur)**
-- **Strateški pregled**: Vrednost AZD in poslovni vpliv (1 ura)
-- **Praktičen demo**: Celostna uvedba AI aplikacije (2 uri)
-- **Pregled arhitekture**: Poslovni vzorci in upravljanje (1 ura)
-- **Načrtovanje implementacije**: Strategija sprejetja v organizaciji (1-2 uri)
+**⚡ Izvršni kratek pregled (4-6 ur)**
+- **Strateški pregled**: Vrednostni predlog AZD in poslovni vpliv (1 ura)
+- **Praktična predstavitev**: Uvajanje AI aplikacije od začetka do konca (2 uri)
+- **Pregled arhitekture**: Podjetniški vzorci in upravljanje (1 ura)
+- **Načrtovanje implementacije**: Strategija uvajanja v organizaciji (1-2 uri)
 
 #### 🛠️ Metodologija učenja v delavnici
-**Pristop Odkritje → Uvedba → Prilagoditev za praktičen razvoj veščin**
+**Pristop Odkritje → Uvajanje → Prilagoditev za praktični razvoj veščin**
 
 **Faza 1: Odkritje (45 minut)**
-- **Raziskava predlog**: Ocena Microsoft Foundry predlog in storitev
-- **Analiza arhitekture**: Razumevanje vzorcev več agentov in strategij uvajanja
-- **Ocenjevanje zahtev**: Identifikacija organizacijskih potreb in omejitev
-- **Nastavitev okolja**: Konfiguracija razvojnega okolja in Azure virov
+- **Raziskovanje predlog**: Ocenite Microsoft Foundry predloge in storitve
+- **Analiza arhitekture**: Razumite večagentne vzorce in strategije uvajanja
+- **Ocena zahtev**: Prepoznajte organizacijske potrebe in omejitve
+- **Nastavitev okolja**: Konfigurirajte razvojno okolje in Azure vire
 
-**Faza 2: Uvedba (2 uri)**
-- **Vodena implementacija**: Korak za korakom uvajanje AI aplikacij z AZD
+**Faza 2: Uvajanje (2 uri)**
+- **Voden uvajanje**: Korak za korakom uvajanje AI aplikacij z AZD
 - **Konfiguracija storitev**: Nastavitev Azure AI storitev, končnih točk in avtentikacije
-- **Varnostna implementacija**: Uporaba poslovnih varnostnih vzorcev in kontrol dostopa
-- **Testiranje validacije**: Preverjanje uvedb in odpravljanje pogostih težav
+- **Varnostna implementacija**: Uporabite varnostne vzorce in nadzor dostopa za podjetja
+- **Testiranje validacije**: Preverite uvajanja in odpravite pogoste težave
 
 **Faza 3: Prilagoditev (45 minut)**
-- **Modifikacija aplikacije**: Prilagoditev predlog za specifične primere in zahteve
-- **Optimizacija za produkcijo**: Implementacija spremljanja, upravljanja stroškov in skaliranja
-- **Napredni vzorci**: Raziskovanje usklajevanja več agentov in kompleksnih arhitektur
-- **Načrt naslednjih korakov**: Določitev poti učenja za nadaljnji razvoj veščin
+- **Modifikacija aplikacij**: Prilagodite predloge za posebne primere uporabe in zahteve
+- **Optimizacija za produkcijo**: Implementirajte spremljanje, upravljanje stroškov in skaliranje
+- **Napredni vzorci**: Raziskujte večagentno koordinacijo in kompleksne arhitekture
+- **Načrt za naslednje korake**: Določite učne poti za nadaljnji razvoj veščin
 
-#### 🎯 Rezultati učenja delavnice
-**Merljive veščine, pridobljene skozi praktično delo**
+#### 🎯 Dosežki učnega procesa delavnice
+**Merljive veščine razvite skozi praktične vaje**
 
 **Tehnične kompetence:**
-- **Uvajanje produkcijskih AI aplikacij**: Uspešna uvedba in konfiguracija rešitve na osnovi AI
-- **Obvladovanje infrastrukture kot kode**: Ustvarjanje in upravljanje prilagojenih Bicep predlog
-- **Arhitektura z več agenti**: Implementacija usklajenih rešitev z AI agenti
-- **Pripravljenost za produkcijo**: Uporaba varnostnih, nadzornih in upravljavskih vzorcev
-- **Strokovnost pri odpravljanju napak**: Samostojno reševanje težav uvajanja in konfiguracije
+- **Uvajanje AI aplikacij v produkcijo**: Uspešno uvajanje in konfiguracija AI rešitev
+- **Obvladovanje infrastrukture kot kode**: Ustvarjanje in upravljanje lastnih Bicep predlog
+- **Večagentna arhitektura**: Uvedba koordiniranih AI agent rešitev
+- **Pripravljenost za produkcijo**: Uporaba varnostnih, spremljevalnih in upravljavskih vzorcev
+- **Ekspertiza pri odpravljanju težav**: Samostojno reševanje težav z uvajanjem in konfiguracijo
 
 **Poklicne veščine:**
-- **Vodenje projektov**: Vodenje tehničnih ekip pri uvajanju v oblaku
-- **Oblikovanje arhitekture**: Oblikovanje razširljivih, stroškovno učinkovitih Azure rešitev
+- **Vodenje projektov**: Vodenje tehničnih ekip pri uvajanju v oblak
+- **Oblikovanje arhitekture**: Oblikovanje skalabilnih, stroškovno učinkovitih Azure rešitev
 - **Prenos znanja**: Usposabljanje in mentorstvo sodelavcev o najboljših praksah AZD
-- **Strateško načrtovanje**: Vplivanje na strategije sprejetja oblaka v organizaciji
+- **Strateško načrtovanje**: Vpliv na organizacijske strategije uvajanja oblaka
 
-#### 📋 Viri in materiali delavnice
-**Celovit nabor orodij za fasilitatorje in udeležence**
+#### 📋 Viri in materiali za delavnico
+**Celovit komplet orodij za vodje in udeležence**
 
-**Za fasilitatorje:**
-- **Vodnik za inštruktorja**: [Pregled delavnice](workshop/README.md) - Načrtovanje in vodenje sej
-- **Predstavitveni materiali**: Predstavitve, diagrami arhitekture in skripte za demo
-- **Orodja za ocenjevanje**: Praktične vaje, preverjanje znanja in ocenjevalne lestvice
-- **Tehnična nastavitev**: Konfiguracija okolja, vodniki za odpravljanje težav in rezervni načrti
+**Za vodje delavnic:**
+- **Vodnik za inštruktorje**: [Pregled delavnice](workshop/README.md) - Načrtovanje in izvedba sej
+- **Predstavitveni materiali**: Predstavitvene predstavitve, diagrami arhitekture in skripti za demo
+- **Orodja za ocenjevanje**: Praktične vaje, preverjanje znanja in rubrike za ocenjevanje
+- **Tehnična nastavitev**: Konfiguracija okolja, vodiči za odpravljanje težav in varnostne kopije
 
 **Za udeležence:**
-- **Interaktivno delavniško okolje**: [Materiali delavnice](workshop/README.md) - Učni platforma prek brskalnika
-- **Navodila korak za korakom**: [Vodene vaje](../../workshop/docs/instructions) - Podrobna predstavitev izvedbe  
-- **Referenčna dokumentacija**: [AI laboratorij delavnice](docs/chapter-02-ai-development/ai-workshop-lab.md) - Poglobljena AI vsebina
-- **Skupnostni viri**: Azure Discord kanali, GitHub razprave in strokovna podpora
+- **Interaktivno delavnica okolje**: [Materiali delavnice](workshop/README.md) - Platforma za učenje v brskalniku
+- **Navodila korak za korakom**: [Vodenje vaj](../../workshop/docs/instructions) - Podrobni postopki izvedbe  
+- **Referenčna dokumentacija**: [Laboratorij AI delavnice](docs/chapter-02-ai-development/ai-workshop-lab.md) - Poglobljene vsebine o AI
+- **Skupnostni viri**: Azure Discord kanali, GitHub razprave in podporna skupina strokovnjakov
 
-#### 🏢 Izvedba delavnice v podjetju
-**Strategije uvajanja in usposabljanja v organizacijah**
+#### 🏢 Implementacija delavnic v podjetjih
+**Organizacijske strategije uvajanja in usposabljanja**
 
 **Korporativni programi usposabljanja:**
-- **Uvajanje novih razvijalcev**: Orientacija novih zaposlenih z osnovami AZD (2-4 tedne)
-- **Izpopolnjevanje ekip**: Četrtletne delavnice za obstoječe razvojne skupine (1-2 dni)
-- **Pregled arhitekture**: Mesečne seje za višje inženirje in arhitekte (4 ure)
-- **Predstavitve za vodstvo**: Izvršne delavnice za tehnične odločevalce (pol dneva)
+- **Uvajanje razvijalcev**: Orientacija novih zaposlenih z AZD osnovami (2-4 tedne)
+- **Nadgradnja timskih veščin**: Trimesečne delavnice za obstoječe razvojne ekipe (1-2 dni)
+- **Pregled arhitekture**: Mesečne seje za starejše inženirje in arhitekte (4 ure)
+- **Vodenje delavnic za vodstvo**: Izvršni bootcampi za tehnične odločevalce (pol dneva)
 
 **Podpora pri implementaciji:**
-- **Prilagojena zasnova delavnic**: Prilagojena vsebina za specifične organizacijske potrebe
-- **Upravljanje pilotnih projektov**: Strukturiran zagon z merjenjem uspešnosti in povratnimi informacijami  
-- **Stalno mentorstvo**: Podpora po delavnici za realizacijo projektov
-- **Gradnja skupnosti**: Notranje Azure AI skupnosti za razvijalce in delitev znanja
+- **Oblikovanje prilagojenih delavnic**: Vsebina po meri za specifične organizacijske potrebe
+- **Upravljanje pilotnega programa**: Strukturirana uvedba z merili uspeha in povratnimi informacijami  
+- **Nadaljnje mentorstvo**: Podpora po delavnici pri izvedbi projektov
+- **Grajenje skupnosti**: Notranje Azure AI skupnosti razvijalcev in izmenjava znanja
 
-**Merila uspešnosti:**
-- **Pridobivanje veščin**: Pre/po ocenjevanja merijo rast tehničnih kompetenc
-- **Uspešnost uvajanja**: Odstotek udeležencev, ki uspešno uvajajo produkcijske aplikacije
+**Merila uspeha:**
+- **Pridobivanje veščin**: Pred in po ocenjevanjih za merjenje rasti tehničnih kompetenc
+- **Uspešnost uvajanja**: Ocenjeni odstotek udeležencev, ki uspešno uvajajo produkcijske aplikacije
 - **Čas do produktivnosti**: Skrajšan čas uvajanja za nove Azure AI projekte
-- **Zadrževanje znanja**: Sledilna ocenjevanja 3-6 mesecev po delavnici
+- **Zadrževanje znanja**: Sledenje ocenjevanjem 3-6 mesecev po delavnici
 
-## Struktura učenja v 8 poglavjih
+## Učna struktura z 8 poglavji
 
 ### Poglavje 1: Osnove in hiter začetek (30-45 minut) 🌱
-**Predpogoji**: Azure naročnina, osnovno znanje ukazne vrstice  
+**Pogoji**: Azure naročnina, osnovno poznavanje ukazne vrstice  
 **Zahtevnost**: ⭐
 
 #### Kaj se boste naučili
 - Razumevanje osnov Azure Developer CLI
 - Namestitev AZD na vašo platformo  
-- Vaša prva uspešna uvedba
-- Temeljni koncepti in terminologija
+- Prvo uspešno uvajanje
+- Osnovni koncepti in terminologija
 
-#### Viri za učenje
-- [Osnove AZD](docs/chapter-01-foundation/azd-basics.md) - Temeljni koncepti
-- [Namestitev in nastavitev](docs/chapter-01-foundation/installation.md) - Vodniki za specifične platforme
-- [Vaš prvi projekt](docs/chapter-01-foundation/first-project.md) - Praktičen vodič
-- [Povzetek ukazov](resources/cheat-sheet.md) - Hitri referenčni list
+#### Učni viri
+- [Osnove AZD](docs/chapter-01-foundation/azd-basics.md) - Osnovni koncepti
+- [Namestitev in nastavitev](docs/chapter-01-foundation/installation.md) - Vodiči za posamezne platforme
+- [Vaš prvi projekt](docs/chapter-01-foundation/first-project.md) - Praktični vodič
+- [Hiter pregled ukazov](resources/cheat-sheet.md) - Hitri referenčni list
 
 #### Praktični rezultat
-Uspešno uvedite preprosto spletno aplikacijo v Azure z uporabo AZD
+Uspešno uvajanje preproste spletne aplikacije v Azure z uporabo AZD
 
 ---
 
-### Poglavje 2: Razvoj z AI v ospredju (1-2 uri) 🤖
-**Predpogoji**: Dokončano poglavje 1  
+### Poglavje 2: AI-prvo razvijanje (4-5 ur vključno z delavnico) 🤖
+**Pogoji**: Dokončano Poglavje 1  
 **Zahtevnost**: ⭐⭐
 
 #### Kaj se boste naučili
 - Integracija Microsoft Foundry z AZD
+- Namestitev GA `microsoft.foundry` paketa in uvajanje kode gostujočega agenta
+- Testiranje lokalnega agenta in ločeni ocenjevalni podatkovni sklopi/rubrike
 - Uvajanje AI-podprtih aplikacij
 - Razumevanje konfiguracij AI storitev
 - Vzorci RAG (Retrieval-Augmented Generation)
 
-#### Viri za učenje
+#### Učni viri
 - [Integracija Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
-- [Uvajanje AI modela](docs/chapter-02-ai-development/ai-model-deployment.md)
-- [AI laboratorij delavnice](docs/chapter-02-ai-development/ai-workshop-lab.md) - **NOVO**: Obsežna 2-3 urna praktična delavnica
-- [Interaktivni vodič delavnice](workshop/README.md) - **NOVO**: Delavnica v brskalniku z MkDocs predogledom
+- [Vodnik gostujočega agenta (GA)](docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) - Inicializacija, pregled `azure.yaml`, zagotavljanje, lokalno testiranje, uvajanje, ocenjevanje in čiščenje
+- [Vodnik za AI agente](docs/chapter-02-ai-development/agents.md)
+- [Uvajanje AI modelov](docs/chapter-02-ai-development/ai-model-deployment.md)
+- [Laboratorij AI delavnice](docs/chapter-02-ai-development/ai-workshop-lab.md) - **NOVO**: Celovit 2-3 urna praktična vaja
+- [Interaktivni vodič za delavnico](workshop/README.md) - **NOVO**: Delavnica v brskalniku s predogledom MkDocs
 - [Microsoft Foundry predloge](README.md#featured-microsoft-foundry-templates)
-- [Navodila za delavnico](../../workshop/docs/instructions) - **NOVO**: Vodene vaje korak za korakom
+- [Navodila za delavnico](../../workshop/docs/instructions) - **NOVO**: Vaje korak za korakom
 
 #### Praktični rezultat
-Uvedite in konfigurirajte AI-podprto klepetalno aplikacijo z zmogljivostmi RAG
+Preizkusite gostujočega agenta lokalno in v Foundry z uporabo GA paketa, pregled ocene in ločeno čiščenje novih in ponovno uporabljenih projektov. Ločena pot RAG/delavnica zajema konfiguracijo AI-podprte aplikacije za klepet.
 
-#### Pot učenja v delavnici (opcijski dodatek)
-**NOVO Interaktivna izkušnja**: [Celoten vodič delavnice](workshop/README.md)
-1. **Odkritje** (30 min): Izbor in ocena predloge
-2. **Uvedba** (45 min): Uvedba in validacija funkcionalnosti AI predloge  
-3. **Degradacija** (30 min): Razumevanje arhitekture in komponent predloge
-4. **Konfiguracija** (30 min): Prilagoditev nastavitev in parametrov
-5. **Prilagoditev** (45 min): Spremembe in iteracije, da postane vaša
-6. **Raščlenitev** (15 min): Čiščenje virov in razumevanje življenjskega cikla
-7. **Zaključek** (15 min): Naslednji koraki in napredne učne poti
+#### Učna pot delavnice (izbirna nadgradnja)
+**NOVA interaktivna izkušnja**: [Celovit vodič delavnice](workshop/README.md)
+1. **Odkritje** (30 minut): Izbira in ocena predlog
+2. **Uvajanje** (45 minut): Uvajanje in validacija funkcionalnosti AI predloge  
+3. **Razčlenitev** (30 minut): Razumevanje arhitekture in komponent predlog
+4. **Konfiguracija** (30 minut): Prilagoditev nastavitev in parametrov
+5. **Prilagoditev** (45 minut): Sprememba in iteracija, da postane vaša
+6. **Čiščenje** (15 minut): Čiščenje virov in razumevanje življenjskega cikla
+7. **Zaključek** (15 minut): Naslednji koraki in napredne učne poti
 
 ---
 
 ### Poglavje 3: Konfiguracija in avtentikacija (45-60 minut) ⚙️
-**Predpogoji**: Dokončano poglavje 1  
+**Pogoji**: Dokončano Poglavje 1  
 **Zahtevnost**: ⭐⭐
 
 #### Kaj se boste naučili
 - Konfiguracija in upravljanje okolja
 - Najboljše prakse za avtentikacijo in varnost
 - Poimenovanje in organizacija virov
-- Uvedbe v več okoljih
+- Uvajanja v več okoljih
 
-#### Viri za učenje
-- [Vodnik za konfiguracijo](docs/chapter-03-configuration/configuration.md) - Nastavitev okolja
-- [Vzorce avtentikacije in varnosti](docs/chapter-03-configuration/authsecurity.md) - Upravljana identiteta in integracija Key Vault
-- Primeri za več okolij
+#### Učni viri
+- [Vodič za konfiguracijo](docs/chapter-03-configuration/configuration.md) - Nastavitev okolja
+- [Vzorci za avtentikacijo in varnost](docs/chapter-03-configuration/authsecurity.md) - Upravljana identiteta in integracija Key Vault
+- Primeri več okolij
 
 #### Praktični rezultat
 Upravljanje več okolij z ustrezno avtentikacijo in varnostjo
 
 ---
 
-### Poglavje 4: Infrastruktura kot koda in uvajanje (1-1,5 ure) 🏗️
-**Predpogoji**: Dokončana poglavja 1-3  
+### Poglavje 4: Infrastruktura kot koda in uvajanje (1-1.5 ure) 🏗️
+**Pogoji**: Dokončana Poglavja 1-3  
 **Zahtevnost**: ⭐⭐⭐
 
 #### Kaj se boste naučili
@@ -237,320 +241,320 @@ Upravljanje več okolij z ustrezno avtentikacijo in varnostjo
 - Strategije zagotavljanja virov
 - Ustvarjanje prilagojenih predlog
 
-- Uvajanje vsebniško pakiranih aplikacij z Azure Container Apps in AZD
+- Uvajanje kontejneriziranih aplikacij z Azure Container Apps in AZD
 
-#### Viri za učenje
-- [Vodnik za uvajanje](docs/chapter-04-infrastructure/deployment-guide.md) - Celotni delovni tokovi
+#### Učni viri
+- [Vodič za uvajanje](docs/chapter-04-infrastructure/deployment-guide.md) - Celotni delovni procesi
 - [Zagotavljanje virov](docs/chapter-04-infrastructure/provisioning.md) - Upravljanje virov
-- Primeri kontejnerjev in mikrostoritev
-- [Primeri Container App](examples/container-app/README.md) - Hitri začetek, produkcija in napredni vzorci uvajanja
+- Primeri kontejnerjev in mikro storitev
+- [Primeri Container App](examples/container-app/README.md) - Hiter začetek, produkcija in napredni vzorci uvajanja
 
 #### Praktični rezultat
-Uvedba kompleksnih večstoritevnih aplikacij z uporabo prilagojenih infrastrukturnih predlog
+Uvajanje kompleksnih večstoritevnih aplikacij z uporabo prilagojenih infrastrukturnih predlog
 
 ---
 
 ### Poglavje 5: Večagentne AI rešitve (2-3 ure) 🤖🤖
-**Predpogoji**: Dokončana poglavja 1-2  
+**Pogoji**: Dokončani Poglavji 1-2  
 **Zahtevnost**: ⭐⭐⭐⭐
 
 #### Kaj se boste naučili
-- Vzorce arhitekture več agentov
-- Orkestracijo in koordinacijo agentov
-- Produkcijsko pripravljene AI uvedbe
+- Vzorci večagentne arhitekture
+- Orkestracija in koordinacija agentov
+- Produkcijsko pripravljena AI uvajanja
 - Implementacije agentov za stranke in inventar
 
-- Integracijo vsebniško pakiranih mikrostoritev kot del agentnih rešitev
+- Integracija kontejneriziranih mikro storitev kot del agentnih rešitev
 
-#### Viri za učenje
-- [Večagentna rešitev za maloprodajo](examples/retail-scenario.md) - Arhitekturni načrt, ne popolna aplikacija
-- [ARM paket predlog](../../examples/retail-multiagent-arm-template) - Infrastrukturna osnova z zahtevami za implementacijo
+#### Učni viri
+- [Večagentna maloprodajna rešitev](examples/retail-scenario.md) - Arhitekturni načrt, ne popolna aplikacija
+- [Pakiranje ARM predlog](../../examples/retail-multiagent-arm-template) - Infrastrukturni okvir s pogoji za izvedbo
 - Vzorci koordinacije več agentov
-- [Primer arhitekture mikrostoritev](../../examples/container-app/microservices) - Komunikacija med storitvami, asinhrono sporočanje in produkcijsko uvajanje
+- [Primer arhitekture mikro storitev](../../examples/container-app/microservices) - Komunikacija med storitvami, asinhrono sporočanje in produkcijsko uvajanje
 
 #### Praktični rezultat
-Oblikujte večagentno AI rešitev in identificirajte delo implementacije aplikacije, validacije in obratovanja, ki presega zagotavljanje infrastrukture
+Oblikujte večagentno AI rešitev in identificirajte delo za implementacijo aplikacije, validacijo in obratovanje, ki presega zagotavljanje infrastrukture
 
 ---
 
-### Poglavje 6: Validacija in načrtovanje pred uvedbo (1 ura) 🔍
-**Predpogoji**: Dokončano poglavje 4  
+### Poglavje 6: Validacija in načrtovanje pred uvajanjem (1 ura) 🔍
+**Pogoji**: Dokončano Poglavje 4  
 **Zahtevnost**: ⭐⭐
 
 #### Kaj se boste naučili
 - Načrtovanje kapacitet in validacija virov
 - Strategije izbire SKU
-- Preverjanja pred izvajanjem in avtomatizacija
+- Preverjanje pripravljenosti in avtomatizacija
 - Načrtovanje optimizacije stroškov
 
-#### Viri za učenje
+#### Učni viri
 - [Načrtovanje kapacitet](docs/chapter-06-pre-deployment/capacity-planning.md) - Validacija virov
 - [Izbira SKU](docs/chapter-06-pre-deployment/sku-selection.md) - Stroškovno učinkovite izbire
-- [Preverjanja pred izvajanjem](docs/chapter-06-pre-deployment/preflight-checks.md) - Avtomatizirani skripti
-- [Integracija Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - Spremljanje in opazovanje
-- [Vzorci koordinacije več agentov](docs/chapter-06-pre-deployment/coordination-patterns.md) - Strategije orkestracije agentov
+- [Predletni pregledi](docs/chapter-06-pre-deployment/preflight-checks.md) - Avtomatizirani skripti
+- [Integracija Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - Nadzor in opazovanje
+- [Vzorec koordinacije več agentov](docs/chapter-06-pre-deployment/coordination-patterns.md) - Strategije orkestracije agentov
 
 #### Praktični rezultat
-Validirajte in optimizirajte uvedbe pred izvajanjem
+Preverite in optimizirajte namestitve pred izvajanjem
 
 ---
 
-### Poglavje 7: Odpravljanje težav in razhroščevanje (1-1,5 ure) 🔧
-**Pogoji**: Zaključeno katerokoli poglavje o uvajanju  
-**Zahtevnost**: ⭐⭐
+### Poglavje 7: Odpravljanje napak in razhroščevanje (1-1,5 ure) 🔧
+**Pogoji:** Zaključeno katerokoli poglavje o nameščanju  
+**Zapletenost:** ⭐⭐
 
 #### Kaj se boste naučili
-- Sistematični pristopi k odpravljanju napak
+- Sistematični pristopi k razhroščevanju
 - Pogoste težave in rešitve
-- Specifično odpravljanje težav za AI
+- Odpravljanje težav, specifičnih za AI
 - Optimizacija zmogljivosti
 
 #### Učni viri
 - [Pogoste težave](docs/chapter-07-troubleshooting/common-issues.md) - Pogosta vprašanja in rešitve
-- [Vodnik za odpravljanje napak](docs/chapter-07-troubleshooting/debugging.md) - Korak za korakom strategije
-- [AI-specifično odpravljanje težav](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Težave pri AI storitvah
+- [Vodnik za razhroščevanje](docs/chapter-07-troubleshooting/debugging.md) - Strategije korak za korakom
+- [Odpravljanje težav specifičnih za AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Težave AI storitev
 
 #### Praktični rezultat
-Neodvisno diagnosticirajte in odpravite pogoste težave z uvajanjem
+Samostojno diagnosticirajte in rešite pogoste težave pri nameščanju
 
 ---
 
-### Poglavje 8: Vzorči za produkcijo in podjetja (2-3 ure) 🏢
-**Pogoji**: Zaključena poglavja 1-4  
-**Zahtevnost**: ⭐⭐⭐⭐
+### Poglavje 8: Produkcijski in enterprise vzorci (2-3 ure) 🏢
+**Pogoji:** Zaključena poglavja 1-4  
+**Zapletenost:** ⭐⭐⭐⭐
 
 #### Kaj se boste naučili
-- Strategije za produkcijsko uvajanje
-- Vzorči varnosti za podjetja
+- Strategije produkcijskega nameščanja
+- Enterprise varnostni vzorci
 - Nadzor in optimizacija stroškov
 - Skalabilnost in upravljanje
 
-- Najboljše prakse za produkcijsko uvajanje aplikacij v kontejnerjih (varnost, nadzor, stroški, CI/CD)
+- Najboljše prakse za produkcijske namestitve aplikacij v vsebnikih (varnost, nadzor, stroški, CI/CD)
 
 #### Učni viri
-- [Najboljše prakse za AI v produkciji](docs/chapter-08-production/production-ai-practices.md) - Podjetniški vzorci
-- Mikroservisi in primeri iz podjetij
+- [Najboljše prakse produkcijskega AI](docs/chapter-08-production/production-ai-practices.md) - Enterprise vzorci
+- Primeri mikro storitev in enterprise
 - Okviri za nadzor in upravljanje
-- [Primer arhitekture mikroservisov](../../examples/container-app/microservices) - Blue-green/canary uvajanje, distribuirano sledenje in optimizacija stroškov
+- [Primer Mikroservisne arhitekture](../../examples/container-app/microservices) - Blue-green/canary namestitev, distribuirano sledenje in optimizacija stroškov
 
 #### Praktični rezultat
-Uvajajte podjetjem prilagojene aplikacije z vsemi produkcijskimi zmožnostmi
+Namestitev enterprise-pripravljenih aplikacij s popolnimi produkcijskimi zmožnostmi
 
 ---
 
-## Postopnost učenja in zahtevnost
+## Napredovanje učenja in zapletenost
 
 ### Postopno razvijanje veščin
 
-- **🌱 Začetniki**: Začnite s Poglavjem 1 (osnove) → Poglavje 2 (razvoj AI)
-- **🔧 Srednje zahtevno**: Poglavji 3-4 (nastavitve in infrastruktura) → Poglavje 6 (validacija)
-- **🚀 Napredno**: Poglavje 5 (rešitve z več agenti) → Poglavje 7 (odpravljanje težav)
-- **🏢 Podjetja**: Končajte vsa poglavja, osredotočite se na Poglavje 8 (vzorči produkcije)
+- **🌱 Začetniki**: Začnite s poglavjem 1 (Osnove) → poglavje 2 (Razvoj AI)
+- **🔧 Srednji nivo**: Poglavja 3-4 (Konfiguracija in infrastruktura) → poglavje 6 (Preverjanje)
+- **🚀 Napredni**: Poglavje 5 (Rešitve z več agenti) → poglavje 7 (Odpravljanje težav)
+- **🏢 Enterprise**: Zaključite vsa poglavja, osredotočite se na poglavje 8 (Produkcijski vzorci)
 
-- **Pot aplikacij s kontejnerji**: Poglavja 4 (uvajanje v kontejnere), 5 (integracija mikroservisov), 8 (produkijske najboljše prakse)
+- **Pot aplikacije z vsebniki**: Poglavja 4 (Vsebniško nameščanje), 5 (Integracija mikro storitev), 8 (Produkcijske najboljše prakse)
 
-### Kazalniki zahtevnosti
+### Indikatorji zapletenosti
 
-- **⭐ Osnovno**: Posamezni pojmi, vodeni tutoriali, 30-60 minut
-- **⭐⭐ Srednje**: Več pojmov, praktično delo, 1-2 uri  
+- **⭐ Osnovno**: Posamezni koncepti, vodeni vodiči, 30-60 minut
+- **⭐⭐ Srednje**: Več konceptov, praktično delo, 1-2 uri  
 - **⭐⭐⭐ Napredno**: Kompleksne arhitekture, prilagojene rešitve, 1-3 ure
-- **⭐⭐⭐⭐ Strokovno**: Produkcijski sistemi, podjetniški vzorci, 2-4 ure
+- **⭐⭐⭐⭐ Strokovno**: Produkcijski sistemi, enterprise vzorci, 2-4 ure
 
-### Prilagodljive učne poti
+### Fleksibilne učne poti
 
-#### 🎯 Hitri program za razvijalce AI (4-6 ur)
+#### 🎯 Hitra pot za AI razvijalce (4-6 ur)
 1. **Poglavje 1**: Osnove in hitri začetek (45 min)
-2. **Poglavje 2**: Razvoj z AI na prvem mestu (2 uri)  
-3. **Poglavje 5**: Rešitve AI z več agenti (3 ure)
-4. **Poglavje 8**: Najboljše prakse za AI v produkciji (1 ura)
+2. **Poglavje 2**: AI-prvi razvoj (2 uri)  
+3. **Poglavje 5**: Rešitve z več AI agenti (3 ure)
+4. **Poglavje 8**: Produkcijske najboljše prakse za AI (1 ura)
 
-#### 🛠️ Pot specialistov za infrastrukturo (5-7 ur)
+#### 🛠️ Pot infrastrukturnega strokovnjaka (5-7 ur)
 1. **Poglavje 1**: Osnove in hitri začetek (45 min)
-2. **Poglavje 3**: Nastavitve in avtentikacija (1 ura)
-3. **Poglavje 4**: Infrastruktura kot koda in uvajanje (1,5 ure)
-4. **Poglavje 6**: Pred-uvajanja validacija in načrtovanje (1 ura)
-5. **Poglavje 7**: Odpravljanje težav in odpravljanje napak (1,5 ure)
-6. **Poglavje 8**: Vzorči za produkcijo in podjetja (2 uri)
+2. **Poglavje 3**: Konfiguracija in overjanje (1 ura)
+3. **Poglavje 4**: Infrastruktura kot koda in nameščanje (1,5 ure)
+4. **Poglavje 6**: Prednamestitvena validacija in načrtovanje (1 ura)
+5. **Poglavje 7**: Odpravljanje napak in razhroščevanje (1,5 ure)
+6. **Poglavje 8**: Produkcijski in enterprise vzorci (2 uri)
 
 #### 🎓 Celoten učni program (8-12 ur)
-Zaporedno dokončanje vseh 8 poglavij s praktičnim delom in validacijo
+Zaporedno dokončanje vseh 8 poglavij s praktičnimi vajami in validacijo
 
 ## Okvir za dokončanje tečaja
 
 ### Validacija znanja
 - **Kontrolne točke poglavij**: Praktične vaje z merljivimi rezultati
-- **Preverjanje z izvajanjem**: Uvajajte delujoče rešitve za vsako poglavje
-- **Sledenje napredku**: Vizualni kazalniki in značke za dokončanje
-- **Validacija skupnosti**: Delite izkušnje v Azure Discord kanalih
+- **Praktična preveritev**: Namestitev delujočih rešitev za vsako poglavje
+- **Sledenje napredku**: Vizualni indikatorji in značke zaključka
+- **Validacija skupnosti**: Deljenje izkušenj v Azure Discord kanalih
 
 ### Ocena učnih rezultatov
 
 #### Dokončanje poglavij 1-2 (Osnove + AI)
-- ✅ Uvedite osnovno spletno aplikacijo z uporabo AZD
-- ✅ Uvedite klepetalno aplikacijo z AI in RAG
-- ✅ Razumite temeljne koncepte AZD in integracijo AI
+- ✅ Namestitev osnovne spletne aplikacije z uporabo AZD
+- ✅ Namestitev AI-poganjane klepetalnice z RAG
+- ✅ Razumevanje osnovnih konceptov AZD in integracije AI
 
-#### Dokončanje poglavij 3-4 (Nastavitve + Infrastruktura)  
-- ✅ Upravljanje uvajanj v več okolij
-- ✅ Ustvarjanje prilagojenih Bicep predlog infrastrukture
-- ✅ Implementacija varnih vzorcev avtentikacije
+#### Dokončanje poglavij 3-4 (Konfiguracija + Infrastruktura)  
+- ✅ Upravljanje večokoljskih nameščanj
+- ✅ Ustvarjanje prilagojenih Bicep predlog za infrastrukturo kot kodo
+- ✅ Implementacija varnih vzorcev overjanja
 
-#### Dokončanje poglavij 5-6 (Več agentov + Validacija)
-- ✅ Uvedite kompleksno AI rešitev z več agenti
-- ✅ Izvedite načrtovanje zmogljivosti in optimizacijo stroškov
-- ✅ Implementacija avtomatizirane pred-uvajalne validacije
+#### Dokončanje poglavij 5-6 (Več agentov + Preverjanje)
+- ✅ Namestitev kompleksne rešitve z več AI agenti
+- ✅ Izvedba načrtovanja zmogljivosti in optimizacije stroškov
+- ✅ Implementacija avtomatizirane prednamestitvene validacije
 
 #### Dokončanje poglavij 7-8 (Odpravljanje težav + Produkcija)
-- ✅ Neodvisno odpravljajte in rešujte težave z uvajanjem  
-- ✅ Implementirajte nadzor in varnost na podjetniški ravni
-- ✅ Uvedite produkcijsko pripravljene aplikacije z upravljanjem
+- ✅ Samostojno odpravljanje in reševanje težav pri nameščanju  
+- ✅ Implementacija nadzora in varnosti na nivoju podjetja
+- ✅ Namestitev produkcijsko pripravljenih aplikacij z upravljanjem
 
-### Certifikacija in priznanja
-- **Značka za dokončanje tečaja**: Zaključite vseh 8 poglavij s praktično validacijo
+### Certifikacija in priznanje
+- **Značka za dokončanje tečaja**: Zaključek vseh 8 poglavij s praktično validacijo
 - **Priznanje skupnosti**: Aktivno sodelovanje v Microsoft Foundry Discord
-- **Poklicni razvoj**: Industrijsko relevantne veščine uvajanja z AZD in AI
-- **Napredovanje v karieri**: Zmožnosti uvajanja v oblaku za podjetja
+- **Poklicni razvoj**: Industrijsko relevantne veščine AZD in nameščanja AI
+- **Napredovanje v karieri**: Enterprise pripravljenost za nameščanje v oblaku
 
 ## 🎓 Celoviti učni rezultati
 
-### Osnovna stopnja (Poglavji 1-2)
-Po zaključku osnovnih poglavij bo učenec pokazal:
+### Osnovni nivo (Poglavja 1-2)
+Po zaključku osnovnih poglavij bodo udeleženci pokazali:
 
 **Tehnične sposobnosti:**
-- Uvajanje preprostih spletnih aplikacij v Azure z ukazi AZD
-- Nastavitev in uvajanje AI pogonjenih klepetalnih aplikacij z RAG
-- Razumevanje osnovnih konceptov AZD: predloge, okolja, delovni tokovi uvajanja
-- Integracija Microsoft Foundry storitev z uvajanji AZD
-- Navigacija po konfiguracijah Azure AI storitev in API končnih točk
+- Namestitev preprostih spletnih aplikacij v Azure z ukazi AZD
+- Konfiguracija in namestitev AI-poganjanih klepetalnic z RAG zmogljivostmi
+- Razumevanje osnovnih konceptov AZD: predloge, okolja, poteki zagotavljanja
+- Integracija Microsoft Foundry storitev z AZD nameščanji
+- Navigacija Azure AI konfiguracij in API končnih točk
 
 **Poklicne veščine:**
-- Sledenje strukturiranim delovnim tokom uvajanja za enotne rezultate
-- Odpravljanje osnovnih težav uvajanja z uporabo dnevnikov in dokumentacije
-- Učinkovita komunikacija o postopkih uvajanja v oblaku
+- Sledenje strukturiranim potekom nameščanja za dosledne rezultate
+- Odpravljanje osnovnih težav pri nameščanju z uporabo dnevnikov in dokumentacije
+- Učinkovito komuniciranje o procesih nameščanja v oblaku
 - Uporaba najboljših praks za varno integracijo AI storitev
 
-**Preverjanje učenja:**
-- ✅ Uspešno uvajanje predloge `todo-nodejs-mongo`
-- ✅ Uvajanje in konfiguracija `azure-search-openai-demo` z RAG
-- ✅ Dokončanje interaktivnih delavnic (fazna raziskava)
+**Preverjanje znanja:**
+- ✅ Uspešna namestitev `todo-nodejs-mongo` predloge
+- ✅ Namestitev in konfiguracija `azure-search-openai-demo` z RAG
+- ✅ Izvedba interaktivnih delavnic (faza odkrivanja)
 - ✅ Sodelovanje v diskusijah skupnosti Azure Discord
 
-### Srednja stopnja (Poglavji 3-4)
-Po zaključku srednjih poglavij bo učenec pokazal:
+### Srednji nivo (Poglavja 3-4)
+Po zaključku srednjih poglavij bodo udeleženci pokazali:
 
 **Tehnične sposobnosti:**
-- Upravljanje uvajanj v več okoljih (razvoj, predprodukcija, produkcija)
-- Ustvarjanje prilagojenih Bicep predlog infrastrukture kot kode
-- Implementacija varnih vzorcev avtentikacije z upravljanim identitetam
-- Uvajanje kompleksnih večstoritevnih aplikacij s prilagojenimi nastavitvami
+- Upravljanje večokoljskih nameščanj (dev, staging, produkcija)
+- Ustvarjanje prilagojenih Bicep predlog za infrastrukturo kot kodo
+- Implementacija varnih vzorcev overjanja z upravljano identiteto
+- Namestitev kompleksnih večstoritvenih aplikacij s prilagojeno konfiguracijo
 - Optimizacija strategij zagotavljanja virov za stroške in zmogljivost
 
 **Poklicne veščine:**
 - Oblikovanje skalabilnih arhitektur infrastrukture
-- Uvajanje najboljših varnostnih praks za oblačna uvajanja
-- Dokumentiranje infrastrukturnih vzorcev za sodelovanje v ekipi
-- Vrednotenje in izbira ustreznih Azure storitev za zahteve
+- Uporaba varnostnih najboljših praks za nameščanje v oblaku
+- Dokumentiranje vzorcev infrastrukture za skupinsko sodelovanje
+- Ocena in izbira ustreznih Azure storitev za zahteve
 
-**Preverjanje učenja:**
-- ✅ Nastavitev ločenih okolij z nastavitvami za posamezno okolje
-- ✅ Ustvarjanje in uvajanje prilagojene Bicep predloge za večstoritevno aplikacijo
-- ✅ Implementacija avtentikacije z upravljano identiteto za varen dostop
-- ✅ Dokončanje vaj upravljanja konfiguracij s konkretnimi scenariji
+**Preverjanje znanja:**
+- ✅ Konfiguracija ločenih okolij z okoljsko specifičnimi nastavitvami
+- ✅ Ustvarjanje in nameščanje prilagojene Bicep predloge za večstoritevno aplikacijo
+- ✅ Implementacija overjanja z upravljano identiteto za varen dostop
+- ✅ Dokončanje vaj za upravljanje konfiguracije z realnimi scenariji
 
-### Napredna stopnja (Poglavji 5-6)
-Po zaključku naprednih poglavij bo učenec pokazal:
+### Napredni nivo (Poglavja 5-6)
+Po zaključku naprednih poglavij bodo udeleženci pokazali:
 
 **Tehnične sposobnosti:**
-- Uvajanje in orkestracija AI rešitev z več agenti s koordiniranimi delovnimi tokom
-- Implementacija agentnih arhitektur za stranke in inventar za maloprodajne scenarije
-- Izvedba celovitega načrtovanja zmogljivosti in validacije virov
-- Izvedba avtomatizirane pred-uvajalne validacije in optimizacije
+- Namestitev in orkestracija AI rešitev z več agenti z usklajenimi poteki
+- Implementacija arhitektur za agente kupcev in zalog za trgovinsko okolje
+- Izvedba celovitega načrtovanja kapacitet in validacije virov
+- Izvedba avtomatizirane prednamestitvene validacije in optimizacije
 - Oblikovanje stroškovno učinkovitih izbir SKU glede na zahteve delovne obremenitve
 
 **Poklicne veščine:**
-- Oblikovanje kompleksnih AI rešitev za produkcijska okolja
-- Vodenje tehničnih razprav o strategijah uvajanja AI
-- Mentorstvo mlajšim razvijalcem v najboljših praksah AZD in AI uvajanja
-- Vrednotenje in priporočanje AI arhitekturnih vzorcev za poslovne zahteve
+- Arhitektura kompleksnih AI rešitev za produkcijska okolja
+- Vodenje tehničnih razprav o strategijah nameščanja AI
+- Mentorstvo mlajšim razvijalcem pri AZD in najboljših praksah za AI namestitve
+- Ocena in priporočanje AI arhitekturnih vzorcev za poslovne potrebe
 
-**Preverjanje učenja:**
-- ✅ Pregled maloprodajnega več-agentnega načrta in razlikovanje zagotovljene infrastrukture od manjkajoče implementacije aplikacije
-- ✅ Prikaz koordinacije agentov in orkestracije delovnih tokov
-- ✅ Dokončanje vaj za načrtovanje zmogljivosti z realnimi omejitvami virov
-- ✅ Validacija pripravljenosti uvajanja preko avtomatiziranih predzračnih pregledov
+**Preverjanje znanja:**
+- ✅ Pregled maloprodajnega načrta z več agenti in razlikovanje zagotovljene infrastrukture od manjkajoče implementacije aplikacije
+- ✅ Demonstracija koordinacije agentov in orkestracije potekov
+- ✅ Dokončanje vaj za načrtovanje zmogljivosti s pravimi omejitvami virov
+- ✅ Validacija pripravljenosti za nameščanje z avtomatiziranimi predletnimi pregledi
 
-### Strokovna stopnja (Poglavji 7-8)
-Po zaključku strokovnih poglavij bo učenec pokazal:
+### Strokovni nivo (Poglavja 7-8)
+Po zaključku strokovnih poglavij bodo udeleženci pokazali:
 
 **Tehnične sposobnosti:**
-- Diagnostika in odprava kompleksnih težav z uvajanjem neodvisno
-- Implementacija varnostnih vzorcev na podjetniški ravni in okvirov upravljanja
-- Oblikovanje celostnih strategij nadzora in opozarjanja
-- Optimizacija produkcijskih uvajanj za obseg, stroške in zmogljivost
-- Vzpostavitev CI/CD cevovodov z ustreznim testiranjem in validacijo
+- Samostojno diagnosticiranje in reševanje kompleksnih težav pri nameščanju
+- Implementacija varnostnih vzorcev podjetniške ravni in okvirjev upravljanja
+- Načrtovanje celovitih strategij nadzora in alarmiranja
+- Optimizacija produkcijskih nameščanj glede na obseg, stroške in zmogljivost
+- Vzpostavitev CI/CD cevovodov s pravilnim testiranjem in validacijo
 
 **Poklicne veščine:**
-- Vodenje iniciativ za preobrazbo oblačnih rešitev v podjetjih
-- Oblikovanje in implementacija standardov za uvajanje v organizacijah
-- Usposabljanje in mentorstvo razvojnih ekip v naprednih praksah AZD
-- Vplivanje na tehnične odločitve za podjetniška AI uvajanja
+- Vodenje iniciativ za transformacijo oblačnih rešitev na ravni podjetja
+- Oblikovanje in implementacija standardov za organizacijska nameščanja
+- Usposabljanje in mentorstvo razvojnih ekip pri naprednih praksah AZD
+- Vplivanje na tehnične odločitve za enterprise AI nameščanja
 
-**Preverjanje učenja:**
-- ✅ Odprava kompleksnih napak pri uvajanju večstoritevnih sistemov
-- ✅ Implementacija varnostnih vzorcev podjetja z zahtevami skladnosti
-- ✅ Oblikovanje in uvajanje produkcijskega nadzora z Application Insights
-- ✅ Dokončanje izvajanja podjetniškega okvira za upravljanje
+**Preverjanje znanja:**
+- ✅ Rešitev kompleksnih neuspešnih nameščanj več storitev
+- ✅ Implementacija enterprise varnostnih vzorcev s skladnostnimi zahtevami
+- ✅ Načrtovanje in namestitev produkcijskega nadzora z Application Insights
+- ✅ Dokončanje implementacije okvira upravljanja podjetja
 
-## 🎯 Potrdilo o dokončanju tečaja
+## 🎯 Certifikat za dokončanje tečaja
 
 ### Okvir za sledenje napredka
-Spremljajte svoj učni napredek skozi strukturirane kontrolne točke:
+Spremljajte svoj napredek skozi strukturirane kontrolne točke:
 
 - [ ] **Poglavje 1**: Osnove in hitri začetek ✅
-- [ ] **Poglavje 2**: Razvoj z AI na prvem mestu ✅  
-- [ ] **Poglavje 3**: Nastavitve in avtentikacija ✅
-- [ ] **Poglavje 4**: Infrastruktura kot koda in uvajanje ✅
-- [ ] **Poglavje 5**: Rešitve AI z več agenti ✅
-- [ ] **Poglavje 6**: Pred-uvajanja validacija in načrtovanje ✅
-- [ ] **Poglavje 7**: Odpravljanje težav in odpravljanje napak ✅
-- [ ] **Poglavje 8**: Vzorči za produkcijo in podjetja ✅
+- [ ] **Poglavje 2**: AI-prvi razvoj ✅  
+- [ ] **Poglavje 3**: Konfiguracija in overjanje ✅
+- [ ] **Poglavje 4**: Infrastruktura kot koda in nameščanje ✅
+- [ ] **Poglavje 5**: Rešitve z več AI agenti ✅
+- [ ] **Poglavje 6**: Prednamestitvena validacija in načrtovanje ✅
+- [ ] **Poglavje 7**: Odpravljanje napak in razhroščevanje ✅
+- [ ] **Poglavje 8**: Produkcijski in enterprise vzorci ✅
 
-### Postopek preverjanja
+### Proces preverjanja
 Po zaključku vsakega poglavja preverite svoje znanje z:
 
-1. **Dokončanje praktičnih vaj**: Uvedite delujoče rešitve za vsak modul
-2. **Ocenjevanje znanja**: Preglejte odseke FAQ in opravite samoevalvacije
-3. **Sodelovanje v skupnosti**: Delite izkušnje in pridobite povratne informacije na Azure Discord
-4. **Razvoj portfelja**: Dokumentirajte svoje uvajanja in pridobljena znanja
-5. **Mnenje vrstnikov**: Sodelujte z drugimi učenci pri kompleksnih scenarijih
+1. **Zaključek praktičnih vaj**: Namestitev delujočih rešitev za vsako poglavje
+2. **Ocena znanja**: Pregled poglavij FAQ in samopreizkusov
+3. **Vključevanje v skupnost**: Deljenje izkušenj in pridobivanje povratnih informacij v Azure Discord
+4. **Razvoj portfelja**: Dokumentiranje nameščanj in pridobljenih lekcij
+5. **Recenzija kolegov**: Sodelovanje z drugimi udeleženci pri kompleksnih scenarijih
 
 ### Koristi dokončanja tečaja
-Po zaključku vseh poglavij z veljavno potrditvijo bodo diplomanti imeli:
+Po zaključku vseh poglavij z verificiranjem bodo diplomanti imeli:
 
 **Tehnična strokovnost:**
-- **Izkušnje iz produkcije**: Uvedene prave AI aplikacije v Azure okolja
-- **Poklicne veščine**: Zmožnosti uvajanja in odpravljanja težav na podjetniški ravni  
-- **Znanje arhitekture**: Rešitve AI z več agenti in kompleksni infrastrukturni vzorci
-- **Mojstrstvo odpravljanja težav**: Neodvisna rešitev težav uvajanja in konfiguracije
+- **Produkicijske izkušnje**: Namestitev resničnih AI aplikacij v Azure okolja
+- **Poklicne veščine**: Enterprise-pripravljena namestitev in odpravljanje težav  
+- **Znanje arhitekture**: Rešitve z več AI agenti in kompleksni infrastrukturni vzorci
+- **Mojstrstvo odpravljanja napak**: Samostojno reševanje težav nameščanja in konfiguracije
 
 **Poklicni razvoj:**
-- **Priznanje v industriji**: Verificirane veščine na področju AZD in uvajanja AI z veliko povpraševanja
-- **Napredovanje v karieri**: Kvalifikacije za vloge oblačnega arhitekta in specialista za uvajanje AI
-- **Vodstvo v skupnosti**: Aktivno članstvo v Azure razvijalskih in AI skupnostih
-- **Neprestano učenje**: Osnova za napredno specializacijo Microsoft Foundry
+- **Priznanje v industriji**: Preverjene veščine v priljubljenih področjih AZD in AI nameščanja
+- **Napredovanje v karieri**: Kvalifikacije za vloge arhitekta oblaka in strokovnjaka za AI nameščanje
+- **Vodstvo v skupnosti**: Aktivno članstvo v Azure in AI skupnostih razvijalcev
+- **Neprekinjeno učenje**: Temelj za napredno Microsoft Foundry specializacijo
 
-**Portfeljski viri:**
-- **Uvedene rešitve**: Delujoči primeri AI aplikacij in infrastrukturnih vzorcev
-- **Dokumentacija**: Celoviti vodiči za uvajanje in postopki odpravljanja težav  
-- **Prispevki skupnosti**: Razprave, primeri in izboljšave, deljene s skupnostjo Azure
-- **Poklicna mreža**: Povezave z Azure strokovnjaki in izvajalci uvajanja AI
+**Portfeljske prednosti:**
+- **Nameščene rešitve**: Delujoči primeri AI aplikacij in infrastrukturnih vzorcev
+- **Dokumentacija**: Celovite namestitvene smernice in postopki odpravljanja težav  
+- **Prispevki skupnosti**: Diskusije, primeri in izboljšave, deljene s skupnostjo Azure
+- **Poklicno omrežje**: Povezave z Azure strokovnjaki in izvajalci AI nameščanja
 
-### Učna pot po tečaju
-Diplomanti so pripravljeni za napredno specializacijo v:
-- **Microsoft Foundry strokovnjak**: Globoka specializacija v uvajanju in orkestraciji AI modelov
-- **Vodstvo oblačne arhitekture**: Oblikovanje in upravljanje uvajanja na ravni podjetja
-- **Vodstvo skupnosti razvijalcev**: Prispevanje k Azure vzorcem in virom skupnosti
-- **Podjetniško usposabljanje**: Poučevanje veščin uvajanja AI in AZD v organizacijah
+### Učna pot po zaključku tečaja
+Diplomanti so pripravljeni na napredne specializacije v:
+- **Microsoft Foundry strokovnjak**: Globoka specializacija za nameščanje in orkestracijo AI modelov
+- **Vodstvo arhitekture v oblaku**: Oblikovanje in upravljanje enterprise-ravenskih nameščanj
+- **Vodstvo skupnosti razvijalcev**: Prispevanje k Azure vzorcem in skupnostnim virom
+- **Korporativno usposabljanje**: Poučevanje AZD in veščin nameščanja AI znotraj organizacij
 
 ---
 

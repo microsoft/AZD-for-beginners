@@ -1,6 +1,6 @@
-# 5. Prilagodite predlogo
+# 5. Prilagodi predlogo
 
-!!! tip "NA KONCU TEGA MODULA BOSTE ZMOGLI"
+!!! tip "OB KONCU TEGA MODULA BOSTE ZMOGLI"
 
     - [ ] Distinguish configuration changes from application implementation
     - [ ] Plan a grounded retrieval customization
@@ -10,17 +10,17 @@
 
 ---
 
-## 5.1 Ustanovite izhodišče
+## 5.1 Določi začetno osnovo
 
-Uporabite inicializirano shrambno mesto [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) iz prejšnjih modulov. Preden karkoli spremenite, zabeležite revizijo predloge, različico AZD, izbrano okolje, namestitev modela in vzorčna delovna vprašanja.
+Uporabi inicializirani repozitorij [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) iz prejšnjih modulov. Pred kakršnokoli spremembo zabeleži revizijo predloge, različico AZD, izbrano okolje, nameščanje modela in delujoča vzorčna vprašanja.
 
-Vzorec izvaja klepetalno aplikacijo z agentom. Ne postane **d**voagentni maloprodajni sistem samo z nastavitvijo spremenljivk okolja ali shranjevanjem dodatnih datotek z navodili. Dodatni agenti, upravljalci orodij, usmerjanje, avtorizacija in dostop do podatkov zahtevajo aplikacijsko kodo.
+Vzorec implementira aplikacijo za klepet z agentom v ozadju. **Ni** avtomatično dvomestni sistem za maloprodajo samo zato, ker nastaviš spremenljivke okolja ali shraniš dodatne datoteke z navodili. Dodatni agenti, upravljavci orodij, usmerjanje, pooblaščanje in dostop do podatkov zahtevajo kodo aplikacije.
 
-Preglejte trenutno nameščena navodila in orodja agenta v Foundry. Preizkusite eno dejansko vprašanje, eno iskalno vprašanje in eno vprašanje, na katerega vzorčni podatki ne morejo odgovoriti. Preverite citate glede na dejanske izvorne dokumente in ne predpostavljajte, da je tekoč odgovor pravilen.
+Preglej trenutno nameščena navodila in orodja agenta v Foundry. Preizkusi eno dejansko vprašanje, eno vprašanje za pridobivanje podatkov in eno vprašanje, na katerega vzorčni podatki ne znajo odgovoriti. Preveri navajanja glede na dejanske izvorne dokumente in ne predpostavljaj, da je tekoč odgovor pravilen.
 
-## 5.2 Prilagodite pridobivanje znanja
+## 5.2 Prilagodi pridobivanje znanja
 
-Predloga podpira pridobivanje na podlagi datotek in dodatno integracijo Azure AI Search. Sledite [trenutnemu vodniku AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) za indeksiranje in konfiguracijo orodja.
+Predloga podpira pridobivanje iz datotek in opcijsko integracijo Azure AI Search. Sledi [trenutnemu vodniku za AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) za indeksiranje in konfiguracijo orodij.
 
 ```bash
 # Infrastructure settings; these can add charges
@@ -29,101 +29,103 @@ azd provision --preview
 azd up
 ```
 
-Omogočanje storitve je le del pridobivanja. Pred nalaganjem lastnih podatkov:
+Omogočanje storitve je le del pridobivanja. Preden naložiš svoje podatke:
 
-1. Potrdite, da imate dovoljenje za uporabo dokumentov in odstranite občutljive informacije.
-2. Izberite vdelani model, ki je podprt v vaši regiji, in nastavite njegovo združljivo različico, vrsto namestitve ter vektorske dimenzije.
-3. Ustvarite/napolnite indeks s postopkom, dokumentiranim za vzorec.
-4. Konfigurirajte orodje za pridobivanje agenta za uporabo tega indeksa.
-5. Preizkusite pridobivanje, citate, avtorizacijo in vedenje, ko ni nobenega ustreznega dokumenta.
+1. Potrdi, da imaš dovoljenje za uporabo dokumentov in odstrani občutljive informacije.
+2. Izberi model vdelave, ki ga podpira tvoja regija, ter nastavi njegovo združljivo različico, vrsto nameščanja in dimenzije vektorjev.
+3. Ustvari/zapolni indeks z uporabo dokumentiranega postopka v vzorcu.
+4. Konfiguriraj agenta, da orodje za pridobivanje uporablja ta indeks.
+5. Preizkusi pridobivanje, navajanja, pooblaščanje in obnašanje, ko ni relevantnega dokumenta.
 
-Ne preklapljajte z `text-embedding-3-small` na drug vdelani model, ne da bi preverili dimenzije in po potrebi ponovno zgradili/indeksirali vektorje. Ime, kot je `retail-products`, ni implementiran katalog ali politika nadzora dostopa.
+Ne preklapljaj iz `text-embedding-3-small` na drug model vdelave brez preverjanja dimenzij in po potrebi obnove/ponovnega indeksiranja vektorjev. Ime, kot je `retail-products`, ni implementiran katalog ali politika nadzora dostopa.
 
 ## 5.3 Sledenje in nadzor
 
-Sledite [vodniku za opazovanje vzorca](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#tracing-and-monitoring). Prepričajte se, da zahtevani vir Application Insights in povezava že obstajata; če spreminjate nastavitve infrastrukture, uporabite `azd up`.
+Sledi [vodniku za opazovanje vzorca](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#tracing-and-monitoring). Prepričaj se, da zahtevani vir Application Insights in povezava že obstajata; če spreminjaš infrastrukturo, uporabi `azd up`.
 
 ```bash
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 azd up
 ```
 
-Pošljite testni zahtevek in preglejte dnevnike aplikacije Container App ter pogled sledenja agenta v Foundry. Preverite zakasnitve, klice orodij, napake in korelacije med zahtevkom in sledečim sledenjem. Ne predpostavljajte, da je telemetrija povezana samo zato, ker je namestitev uspela.
+Pošlji testni zahtevek, nato preglej dnevnike aplikacije Container App in pogled sledenja agenta v Foundry. Preveri zaostanek, klice orodij, napake in korelacijo med zahtevkom in sledjo. Ne predpostavljaj, da je telemetrija povezana samo zato, ker je nameščanje uspelo.
 
-Pustite `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` onemogočen, razen če ste izrecno pregledali soglasje, odredbo, hrambo in kontrole dostopa. Slede lahko vsebujejo občutljive argumente orodij ali vsebino dokumentov tudi, ko običajni dnevniki aplikacij izgledajo nenevarni.
+Pusti `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` onemogočen, če nisi izrecno pregledal soglasja, cenzure, hranjenja podatkov in kontrol dostopa. Sledi lahko vsebujejo občutljive argumente orodij ali vsebino dokumentov, tudi ko običajni dnevnik aplikacije izgleda nedolžno.
 
-## 5.4 Ocena agenta
+## 5.4 Vrednotenje agenta
 
-Vstopna točka ocene vzorca je zdaj [`tests/test_evaluation.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_evaluation.py), ne `evals/` imenik. Iz korena vzorca uporabite Python okolje, ki izpolnjuje dokumentirane zahteve:
+Vstopna točka za vrednotenje v vzorcu je zdaj [`tests/test_evaluation.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_evaluation.py), ne imenik `evals/`. Iz korena vzorca uporabi Python okolje, ki izpolnjuje njegove dokumentirane zahteve:
 
 ```bash
 python -m pip install -r src/requirements.txt
 pytest tests/test_evaluation.py -s
 ```
 
-Pred zagonom dokončajte [predpogoje za ocenjevanje](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md). Testi naložijo konfiguracijo iz izbranega `.azure/<environment>/.env`; potrdite, da je izbrano želeno okolje. Pomembni vhodni podatki vključujejo:
+Pred zagonom dokončaj [pogoje za vrednotenje](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md). Testi naložijo konfiguracijo iz izbranega `.azure/<environment>/.env`; potrdi, da je izbrano predvideno okolje. Pomembni vhodni podatki vključujejo:
 
 - `AZURE_EXISTING_AIPROJECT_ENDPOINT`
-- `AZURE_EXISTING_AGENT_ID`, v obliki, ki jo zahteva trenutni vzorec (pregledana različica uporablja `agent_name:agent_version`)
-- `AZURE_AI_AGENT_DEPLOYMENT_NAME`, uporabljena kot namestitev modela sodnika
+- `AZURE_EXISTING_AGENT_ID`, v formatu, ki ga zahteva trenutni vzorec (pregledana različica uporablja `agent_name:agent_version`)
+- `AZURE_AI_AGENT_DEPLOYMENT_NAME`, ki se uporablja kot nameščanje sodnikovega modela
 
-Preglejte teste, da razumete izbiro evalvatorja, pragove, potrebne vloge in stroške modela. Zaključeno izvajanje ni samodejno uspešna kontrolna točka kakovosti; preglejte ocene, neuspešne/napačne primere in povezane rezultate v Foundry.
+Preglej teste, da razumeš izbiro vrednotitelja, pragove, potrebne vloge in stroške modelov. Končan zagon ni samodejno prehod kvalitativnega preizkusa; preveri ocene, neuspešne/napake primere in povezane rezultate v Foundry.
 
-### Ločena razširitev za ocene AZD
+### Ločen dodatek za vrednotenje AZD
 
-Python test zgoraj je **specifični delovni tok za vzorec**. Izbirna razširitev `azure.ai.evaluations` ima drugačen delovni tok z lastno konfiguracijo `evals/azure.eval.yaml`:
+Python test zgoraj je **potek dela specifičen za vzorec**. Izbirni dodatek `azure.ai.evaluations` je drugačen potek dela, z lastno konfiguracijo `evals/azure.eval.yaml`. Namesti se posebej, ni vključen v splošno dostopno zbirko `microsoft.foundry` 1.0:
 
 ```bash
 azd extension install azure.ai.evaluations
 azd ai eval --help
 ```
 
-Za popolno nastavitev razširitve glejte [delovne tokove ocenjevanja in migracijo](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-08-production/production-ai-practices.md). Od kar je beta.22 razširitve agentov, ne uporabljajte več odstranjenih ukazov `azd ai agent eval`. Namestitev razširitve ocen ne pretvori Python testov vzorca niti samodejno ne ustvari konfiguracije ocenjevanja.
+Za popolno nastavitev dodatka glej [poteke dela vrednotenja in migracije](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-08-production/production-ai-practices.md). Od betaverzije razširitve agentov 22 ne uporabljaj odstranjenih ukazov `azd ai agent eval`. Namestitev dodatka za vrednotenje ne pretvori Python testov vzorca ali samodejno ne ustvari konfiguracije vrednotenja.
 
-## 5.5 Rdeče ekipe AI in neprekinjena ocena
+Za ločeno **vajo gostujočega GA agenta**, uporabi prazno mapo izven tega vzorca in sledi [lokalnemu do oblačnemu pregledu Foundry](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Uporablja AZD 1.37.0+, zbirko `microsoft.foundry`, Python 3.13+ in trenutno uv. Preglej `azure.yaml`, testiraj lokalno z Agent Inspectorjem, implementiraj vir za oddaljeno zgradbo Foundry in ustvari/preglej podatkovni niz in merila pred konfiguracijo `azd ai eval init --name quality`. Ne zamenjuj testov tega vzorca ali predpostavljaj, da namestitev zbirke spremeni njegov gostujoči model.
 
-Trenutni vzorec vključuje [`tests/test_red_teaming.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_red_teaming.py). Dokončajte njegove predpogoje in preglejte namenjene cilje ter stroške pred zagonom:
+## 5.5 Rdeča ekipa AI in stalno vrednotenje
+
+Trenutni vzorec zagotavlja [`tests/test_red_teaming.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_red_teaming.py). Dokončaj njegove predpogoje in preglej predvideni cilj ter stroške pred zagonom:
 
 ```bash
 pytest tests/test_red_teaming.py -s
 ```
 
-Uporabite pooblaščeno testno namestitev in sintetične podatke. Preglejte ustvarjene napade in rezultate; ta pregled ne dokazuje, da je aplikacija varna ali skladna.
+Uporabi pooblaščeno testno namestitev in sintetične podatke. Preglej generirane napade in rezultate; ta skeniranje ne potrjuje, da je aplikacija varna ali skladna.
 
-Vodnik za [opazovanje](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#continuous-evaluation) prav tako opisuje neprekinjeno evalvacijo, nastavljeno ob zagonu kontejnerja. Oceni resnične interakcije uporabnikov, ne ustvarjen promet testov, podpora evaluatorja pa se razlikuje glede na regijo. Brez interakcij ni vnosov evaluacije. Preverite nameščeno vzorčno različico in konfiguracijo evaluatorja namesto, da bi domnevali, da ima vsak uvod enake privzete nastavitve.
+Vodič za [opazovanje](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#continuous-evaluation) opisuje tudi neprekinjeno evalvacijo, ki je konfigurirana ob zagonu kontejnerja. Evalvira dejanske interakcije uporabnikov, ne pa ustvarjenega testnega prometa, in podpora evalinatorja se razlikuje glede na regijo. Če ni interakcij, ni vnosov evalvacije. Preverite nameščeno vzorčno različico in konfiguracijo evalinatorja namesto da predpostavite, da ima vsak prehod enake privzete nastavitve.
 
-Avtentikacija je ločena od evalvacije. Sledite dokumentirani nastavitvi identitete/dostopa vzorca. Za zaščito javne točke ni dokumentiranega "osnovnega avtentikacijskega rezervnega načina".
+Avtentikacija je ločena od evalvacije. Sledite dokumentirani nastavitvi identitete/dostopa v vzorcu. Ni dokumentiranega „osnovnega avtentikacijskega padca“ za zaščito javne točke.
 
-## 5.6 Oblikovalna vaja: prilagoditev maloprodaje
+## 5.6 Oblikovanjska vaja: prilagoditev maloprodaje
 
-!!! warning "Oblikovalna vaja, ne dokončana uvedba"
+!!! warning "Oblikovanjska vaja, ne dokončana namestitev"
 
     The workshop does not provide a complete Shopper/Loyalty multi-agent implementation. Do not claim that additional agents, models, catalogs, or policies exist until you have implemented and verified them.
 
-Napišite kratek načrt, ki naslavlja:
+Napišite kratek načrt, ki obravnava:
 
-| Območje | Odločitev in dokazila za zbiranje |
+| Področje | Odločitev in dokazi za zbiranje |
 |------|----------------------------------|
-| Odgovornosti agentov | Začnite z enim agentom ali utemeljite ločena Agenta za Nakupce in Zvestobo ter usmerjevalno logiko |
+| Odgovornosti agentov | Začnite z enim agentom ali utemeljite ločena Shopper in Loyalty agenta ter usmerjevalno logiko |
 | Podatki | Določite sintetični katalog/nabor nagrad in lastništvo posodobitev |
-| Orodja | Najprej implementirajte samo za branje; določite pooblastila in preverjanje za zapisovanja |
-| Modeli | Izberite razpoložljive kombinacije model/različica/SKU in preverite kvoto; izogibajte se zagotavljanju neuporabljenih modelov |
-| Pridobivanje | Določite indeksiranje, dimenzije vdelave, citate in kontrole dostopa na ravni dokumenta |
-| Evalvacija | Dodajte primere pričakovanih odgovorov, nepodprtih vprašanj, uporabe orodij in varnostne primere z jasnimi pragovi |
-| Operacije | Določite telemetrijo, proračune za zakasnitev/napake, omejitve stroškov in lastništvo čiščenja |
+| Orodja | Najprej uvedite obdelovalce samo za branje; določite avtorizacijo in preverjanje za vse zapise |
+| Modeli | Izberite razpoložljive kombinacije model/različica/SKU in preverite kvote; izogibajte se predpripravi neuporabljenih modelov |
+| Pridobivanje | Določite indeksiranje, dimenzije vdelave, citate in nadzore dostopa na ravni dokumentov |
+| Evalvacija | Dodajte pričakovane odgovore, nepodprta vprašanja, uporabo orodij in varnostne primere z izrecnimi pragovi |
+| Operacije | Določite telemetrijo, zamudo/proračun napak, stroškovne omejitve in lastništvo čiščenja |
 
-Shranjevanje `custom-agents/shopper-agent-instructions.md` ne povzroči, da vzorec to naloži. Poiščite aplikacijsko kodo, ki ustvarja/posodablja agenta, povežite tam pregledna navodila in pred testiranjem preverite nastalo različico agenta. Navodila ne morejo dovoliti dostopa do podatkov ali orodij, ki jih niste implementirali.
+Shranjevanje `custom-agents/shopper-agent-instructions.md` ne povzroči, da ga vzorec naloži. Poiščite kodo aplikacije, ki ustvari/posodobi agenta, povežite tam svoje pregledane navodila in preverite nastalo različico agenta pred testiranjem. Navodila ne morejo dovoliti dostopa do podatkov ali orodij, ki jih niste implementirali.
 
-Uveljavite eno spremembo naenkrat, ponovno uvedite prizadete komponente in ponovno izvedite osnovna vprašanja in evalvacije. Ohranjajte delujočo različico za primerjavo. Za arhitekturno navdihovanje si oglejte [maloprodajno zasnovo](https://github.com/microsoft/AZD-for-beginners/blob/main/examples/retail-scenario.md), ki prav tako ni popolna maloprodajna aplikacija.
+Uvedite eno spremembo naenkrat, ponovno namestite prizadete komponente in ponovno izvedite osnovna vprašanja in evalvacije. Ohranite delovno različico za primerjavo. Za navdih arhitekture si oglejte [maloprodajni načrt](https://github.com/microsoft/AZD-for-beginners/blob/main/examples/retail-scenario.md), ki prav tako ni popolna maloprodajna aplikacija.
 
-!!! quote "OB KONCU TEGA LABORATORIJA MORATE IMETI"
+!!! quote "OB KONCU TE DELAVNICE BI MORALI IMETI"
 
     - [ ] A documented customization scope and cost/region checks
     - [ ] Evidence that retrieval and tracing work for your selected environment
     - [ ] Reviewed evaluation/red-teaming results, or a clear explanation of unmet prerequisites
     - [ ] A list of missing implementation work rather than a claim of automatic production readiness
 
-Nadaljujte z [razgradnjo infrastrukture](6-Teardown-Infrastructure.md).
+Nadaljujte na [razstavitev infrastrukture](6-Teardown-Infrastructure.md).
 
 ---
 

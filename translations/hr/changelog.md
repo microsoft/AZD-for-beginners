@@ -1,59 +1,78 @@
-# Dnevnici promjena - AZD za početnike
+# Dnevnik promjena - AZD za početnike
 
 ## Uvod
 
-Ovaj dnevnici promjena dokumentiraju sve značajne promjene, ažuriranja i poboljšanja u repozitoriju AZD za početnike. Slijedimo principe semantičkog verzioniranja i vodimo ovaj zapis kako bismo korisnicima pomogli razumjeti što je promijenjeno između verzija.
+Ovaj dnevnik promjena dokumentira sve značajne promjene, ažuriranja i poboljšanja u spremištu AZD za početnike. Pratimo principe semantičkog verzioniranja i održavamo ovaj zapis kako bismo korisnicima pomogli razumjeti što se promijenilo između verzija.
 
 ## Ciljevi učenja
 
-Pregledom ovog dnevnika promjena, moći ćete:
-- Ostanite informirani o novim značajkama i dodacima sadržaja
-- Razumjeti poboljšanja postojećih dokumenata
-- Pratiti ispravke bugova i korekcije radi osiguravanja točnosti
-- Pratiti razvoj nastavnih materijala kroz vrijeme
+Pregledom ovog dnevnika promjena moći ćete:
+- Ostati informirani o novim značajkama i dodacima sadržaja
+- Razumjeti poboljšanja postojeće dokumentacije
+- Pratiti ispravke grešaka i korekcije kako bi se osigurala točnost
+- Pratiti razvoj nastavnih materijala tijekom vremena
 
 ## Ishodi učenja
 
-Nakon pregleda unosa dnevnika promjena, moći ćete:
-- Identificirati novi sadržaj i resurse dostupne za učenje
+Nakon pregleda zapisa dnevnika promjena, moći ćete:
+- Prepoznati novi sadržaj i dostupne resurse za učenje
 - Razumjeti koje su sekcije ažurirane ili poboljšane
 - Planirati svoj put učenja na temelju najnovijih materijala
 - Doprinositi povratnim informacijama i prijedlozima za buduća poboljšanja
 
 ## Povijest verzija
 
+### [v3.25.0] - 2026-11-09
+
+#### Microsoft Foundry ekstenzija 1.0 je sada općenito dostupna
+
+Paket `microsoft.foundry` 1.0 je **uživo i općenito dostupan**, kako je najavljeno [5. studenog 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Tečaj sada uči objavljeni GA tijek rada, ne nadolazeće izdanje. Počnite s AZD **1.37.0 ili novijim** i `azd ext install microsoft.foundry`.
+
+#### Dostupno u ovom ažuriranju tečaja
+- Smjernice na engleskom koriste GA paket kao zadani put instalacije i objašnjavaju njegovih sedam neovisno verzioniranih glavnih ekstenzija.
+- [Prikaz hostiranog agenta](docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) pokriva uzlazni Python Agent Framework Responses API primjer, trenutne uvjete, Python 3.13+, odabir novog/postojećeg projekta, ponovnu upotrebu modela i pregled `azure.yaml`.
+- Lokalno-u-oblak tijek rada pokriva testiranje Agent Inspector, troškove poziva modela podržane Azureom, daljinske izgradnje koda, implementiranu invokaciju, praćenje u oblaku, pregled implementacije, zapise i dijagnostiku.
+- Posebne smjernice za evaluaciju uključuju generiranje i pregled skupova podataka/rubrika, konfiguraciju imenovane evaluacije, registraciju resursa i inspekciju rezultata. Starije upute za evaluaciju/optimizaciju ostaju kao povijest migracije, a ne trenutna osnova izdanja.
+- Foundry CI/CD smjernice uključuju instalaciju ekstenzije runnera, autentificiranu implementaciju, pristup evaluacijskim resursima i eksplicitni kvalitetni prag.
+- Smjernice za čišćenje razlikuju novoizrađene i ponovno iskorištene Foundry projekte. Radionica povezuje na zasebnu GA vježbu bez zamjene specifičnih testova primjera.
+- Navigacija tečajem, ciljevi učenja, preduvjeti postavljanja, kratica, često postavljana pitanja i vodič za učenje odražavaju GA tijek rada. Generirani prijevodi nisu ručno uređivani.
+
+#### Opseg pregleda
+- Temeljeno na GA najavi, povezanom Microsoft Learn vodiču i uzlaznoj konfiguraciji primjera. Nije izvršeno uživo Azure provisioniranje, implementacija, pozivanje modela ili evaluacija.
+- GA paketa ne podrazumijeva GA za svaku opcionalnu značajku, neovisnu ekstenziju ili SDK, niti potvrđuje primjere za produkciju.
+
 ### [v3.24.0]- 2026-11-04
 
 #### Ispravljeno
-- Popravljena navigacija na tečaju na engleskom jeziku, premještene putanje stranica, nedostajući ankori i zastarjele vanjske reference, uključujući poveznicu na Poglavlje 2 prema vodiču za proizvodni AI.
-- Revidirane trenutne upute na temelju objavljenog AZD 1.37.2, agenata 1.0.0-beta.23 i evaluacija 1.0.0-beta.2. Dokumentiran je poseban `azd ai eval` tijek rada i migracija konfiguracije optimizacije.
-- Ispravljene nepodržane CLI zastavice, granice autentikacije, upute za plaintext okruženje/lozinke, infrastrukturna ažuriranja, konfiguracija modela i primjeri destruktivnog oporavka.
-- Osvježen radionica na temelju trenutnog primjera AI agenata, uključujući stvarne kuke, unose konfiguracije, evaluacijske testove, ulazne točke za red-teaming i nadgledanje.
-- Ispravljeni primjeri implementacije i popravljeni povezani problemi aplikacije/infrastrukture/konfiguracije. Materijal o maloprodajnoj arhitekturi jasno je razlikovan od potpune radne aplikacije.
-- Vraćena matrica jezičnog koda CodeQL, odabran podržani Node.js 24 za razvojni kontejner i omogućen izvještaj validatora o neuspjelim naredbama verzije.
+- Popravljena navigacija tečaja na engleskom, premješteni putovi stranica, nedostajući sidreni linkovi i zastarjele vanjske reference, uključujući poveznicu na Poglavlje 2 u vodiču za proizvodni AI.
+- Pregledane trenutne smjernice u odnosu na objavljeni AZD 1.37.2, agente 1.0.0-beta.23 i evaluacije 1.0.0-beta.2. Dokumentiran poseban `azd ai eval` tijek rada i migracija konfiguracije optimizacije.
+- Ispravljene neprihvaćene CLI zastavice, granice autentifikacije, vodiči za običan tekst okoliša/tajni, infrastrukturna ažuriranja, konfiguracija modela i primjeri destruktivnog oporavka.
+- Osvježena radionica u odnosu na trenutni AI Agents primjer, uključujući stvarne hooks, ulazne konfiguracije, evaluacijske testove, red-teaming ulazne točke i promatranje.
+- Ispravljeni navodi o implementaciji primjera i popravljeni povezani problemi s aplikacijom/infrastrukturom/konfiguracijom. Materijali o arhitekturi maloprodaje jasno su odvojeni od potpune funkcionalne aplikacije.
+- Vraćena CodeQL jezična matrica, odabran podržani Node.js 24 za razvojni kontejner i uvedeni validatori postavljanja koji prijavljuju neuspješne verzijske naredbe.
 
 #### Dodano
-- Offline provjera poveznica/ankora samo na engleskom, regresijski testovi i tijek rada za dokumentaciju koji također gradi radionicu u strogom načinu rada. Generirani prijevodi i prevedene slike isključeni su.
+- Offline provjerivač linkova/sidra samo na engleskom, regresijski testovi i tijek rada dokumentacije koji također gradi radionicu u strogoj izvedbi. Generirani prijevodi i prevedene slike su isključeni.
 
-#### Opseg provjere valjanosti
-- Provjere izvora, sintakse, konfiguracije, lokalnog ponašanja i mrežnih poveznica ne potvrđuju mogućnost trenutnog postavljanja na Azure, kvote, RBAC, regionalnu dostupnost modela, naplatu, sigurnosnu usklađenost ili spremnost za proizvodnju.
-- Stariji unosi ispod su povijesni zapisi, a ne trenutne naredbe ili upute za izdavanje.
+#### Opseg validacije
+- Provjere izvora, sintakse, konfiguracije, lokalnog ponašanja i mrežnih poveznica ne potvrđuju mogućnost živog Azure deployanja, kvote, RBAC, regionalne dostupnosti modela, naplate, sigurnosne usklađenosti ili spremnost za produkciju.
+- Stariji unosi ispod su povijesni zapisi, a ne trenutačne naredbe ili upute za izdanja.
 
 ### [v3.23.0] - 2026-07-13
 
 #### AZD 1.27.1 osvježenje: ažuriranje verzije
-**Ova verzija ponovno validira tečaj na temelju `azd` `1.27.1` (srpanj 2026, posljednje stabilno izdanje) i trenutačnog pregleda proširenja za AI agente `azure.ai.agents` `1.0.0-beta.5`, ažurirajući svaki oznaku "validirano prema" nakon izdanja 1.26.0, 1.27.0 i 1.27.1.**
+**Ova verzija ponovno potvrđuje tečaj protiv `azd` `1.27.1` (srpanj 2026, najnovije stabilno izdanje) i trenutnu preview AI agent ekstenziju `azure.ai.agents` `1.0.0-beta.5`, dovodeći svaki "validated against" baner u red nakon izdanja 1.26.0, 1.27.0 i 1.27.1.**
 
 #### Promijenjeno
-- **✅ Ažurirana referentna točka validacije** s `azd 1.25.6` (lipanj 2026) na `azd 1.27.1` (srpanj 2026) u glavnom README-u, svim README-ima poglavlja, lekciji dev-kontejnera u Poglavlju 1 (uključujući primjere s fiksnim verzijama), lekciji o prilagođenim predlošcima u Poglavlju 4, lekciji o višestrukim agentima u Poglavlju 5 i dokumentaciji radionice
-- **🤖 Osnova Poglavlja 2 osvježena** s `azd 1.23.12` (ožujak 2026) na `azd 1.27.1` preko `agents.md`, `ai-model-deployment.md`, `ai-workshop-lab.md` i `microsoft-foundry-integration.md`; ažurirani datumi bilješki o validaciji na 2026-07-13
-- **🧩 Proširenje AI agenta podignuto** s `azure.ai.agents` `0.1.40-preview`/`0.1.18-preview` na trenutačnu verziju `1.0.0-beta.5` u README-u Poglavlja 2 i `agents.md`
+- **✅ Ažurirana referentna linija validacije** s `azd 1.25.6` (lipanj 2026) na `azd 1.27.1` (srpanj 2026) u root README, svim README-ima poglavlja, lekciji za razvojni kontejner u Poglavlju 1 (uključujući primjere s prikvačenim verzijama), lekciji prilagođenih predložaka u Poglavlju 4, lekciji s više agenata u Poglavlju 5 i dokumentaciji radionice
+- **🤖 Osvježena osnovna linija za Poglavlje 2** s `azd 1.23.12` (ožujak 2026) na `azd 1.27.1` kroz `agents.md`, `ai-model-deployment.md`, `ai-workshop-lab.md` i `microsoft-foundry-integration.md`; datumi napomena o validaciji su ažurirani na 2026-07-13
+- **🧩 Povećana AI agent ekstenzija** s `azure.ai.agents` `0.1.40-preview`/`0.1.18-preview` na trenutnu `1.0.0-beta.5` verziju u README-u za Poglavlje 2 i `agents.md`
 - **🧪 Primjer validacije radionice** (`azd version` izlaz) ažuriran na `1.27.1`
 
-#### Bilješke o relevantnim izdanjima azd (1.26.0 → 1.27.1)
-- **1.26.0 (2026-06-24):** Podrška za Go za Azure Functions na Flex Consumption, `azd config sub-filter` filtri pretplate po zakupcu, samostalni paketi proširenja (`azd x pack --bundle`) i `azd tool install azure-skills`
-- **1.27.0 (2026-06-30):** Modelirajte Azure AI Foundry projekte/agente izravno u `azure.yaml` (pokretanje bez Bicepa/Terraforma), podrška za distribuiranje kontejnera u App Service (`host: appservice` + `language: docker`), izravni `-s/--source` za `azd extension` naredbe i `azd tool uninstall`
-- **1.27.1 (2026-07-09):** `--no-dependencies` zastavica za `azd extension install`, zastarjeli modeli po defaultu isključeni iz kataloga/kvotnih upita i nekoliko ispravki bugova
+#### Bilješke o relevantnim azd izdanjima (1.26.0 → 1.27.1)
+- **1.26.0 (2026-06-24):** Podrška za Go za Azure Functions na Flex Consumption, `azd config sub-filter` filtri pretplate po zakupcu, samostalni paketi ekstenzija (`azd x pack --bundle`) i `azd tool install azure-skills`
+- **1.27.0 (2026-06-30):** Modeliranje Azure AI Foundry projekata/agenata izravno u `azure.yaml` (pokretanje bez Bicep-a/Terraform-a), podrška implementacije kontejnera za App Service (`host: appservice` + `language: docker`), izravni `-s/--source` za `azd extension` naredbe, i `azd tool uninstall`
+- **1.27.1 (2026-07-09):** `--no-dependencies` zastavica za `azd extension install`, zastarjeli modeli isključeni iz upita za katalog/kvote prema zadanim postavkama, i nekoliko ispravki grešaka
 
 #### Ažurirane datoteke
 - `README.md`
@@ -79,48 +98,48 @@ Nakon pregleda unosa dnevnika promjena, moći ćete:
 
 ### [v3.22.0] - 2026-06-16
 
-#### Popunjavanje praznina za početnike #2: Autorstvo predložaka, razvojni kontejneri, Pulumi, Azure DevOps, servisni glavni korisnici i više
-**Ova verzija zatvara preostale srednje praznine koje je analizirao azd-coverage: kako izraditi i objaviti vlastiti predložak, reproducibilna razvojna okruženja u Dev Containerima/Codespaces-ima, infrastrukturni provider Pulumi, Azure DevOps CI/CD vodič, autentikacija servisnih glavnih korisnika, upute za odabir domaćina (AKS/Spring Apps), objašnjenja za `azd restore`/`azd package`, upravljanje pogreškama kuka i prakse timskih/dijeljenih okruženja.**
+#### Popunjavanje praznina za početnike #2: Izrada predložaka, razvojni kontejneri, Pulumi, Azure DevOps, Servisni Principali i još mnogo toga
+**Ova verzija zatvara preostale srednjerazredne praznine otkrivene analizom pokrivenosti azd: kako izraditi i objaviti vlastiti predložak, reproducibilna okruženja razvojnih kontejnera/Codespaces, Pulumi pružatelj infrastrukture, Azure DevOps CI/CD vodič, autentikacija servisnog principala, smjernice za odabir hosta (AKS/Spring Apps), objašnjenja `azd restore`/`azd package`, rukovanje pogreškama hooks i prakse timskih/dijeljenih okruženja.**
 
 #### Dodano
-- **🧱 Nova lekcija u Poglavlju 4** `docs/chapter-04-infrastructure/custom-templates.md` — autorstvo vlastitog azd predloška: potrebna struktura (`azure.yaml`, `infra/`, `src/`), `metadata.template` polje, parametarizacija infrastrukture putem `uniqueString()` resursnog tokena i `azd-env-name` oznake, lokalno testiranje s `azd init --template <local-path>`, objava na GitHubu i slanje u Awesome AZD galeriju
-- **📦 Nova lekcija u Poglavlju 1** `docs/chapter-01-foundation/dev-containers.md` — reproducibilna azd okruženja s Dev Containerima i GitHub Codespaces: minimalni `.devcontainer/devcontainer.json` koristeći službenu `ghcr.io/azure/azure-dev/azd` značajku, jezično specifične značajke, `docker-in-docker` za hostove kontejnera i `azd auth login --use-device-code` za daljinsku prijavu
-- **🧩 Sekcija Pulumi s azd** u `docs/chapter-04-infrastructure/provisioning.md` — konfiguracija `infra.provider: pulumi`, struktura mape Pulumi, stackovi mapirani na azd okruženja, potrebni izlazni podaci/oznake i identičan tijek rada `azd up` / `azd down`
-- **🎯 Upute za odabir domaćina** u `docs/chapter-04-infrastructure/provisioning.md` — početnički prijateljsko uspoređivanje `appservice`, `staticwebapp`, `function`, `containerapp`, `aks` i `springapp`, s uputama kada odabrati AKS ili Azure Spring Apps
-- **🛠️ Azure DevOps CI/CD vodič** u `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, servisna veza s federacijom identiteta radnog opterećenja (OIDC), generirani `azure-dev.yml` i postavljanje varijabilnih skupina
-- **🔑 Servisni glavni korisnici (Obrazac 4)** dodano u `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`, neinteraktivni `azd auth login` s tajnim ključem klijenta naspram federiranih/OIDC vjerodajnica, kada koristiti i sigurno spremanje vjerodajnica
-- **🪝 Upravljanje pogreškama kuka** pododjeljak u `docs/chapter-04-infrastructure/deployment-guide.md` — izlazni kodovi i `set -e`, `continueOnError`, izolirano testiranje kuka s `azd hooks run`, shelovi specifični za OS i `--debug`
-- **👥 Timska/dijeljena okruženja** sekcija u `docs/chapter-03-configuration/configuration.md` — što se nalazi u `.azure/`, što ignorirati u git-u, okruženja po razvojnim programerima, `azd env list`/`select` i pružanje vrijednosti okruženja u CI/CD
-- **🧰 `azd restore` i proširena objašnjenja `azd package`** u `resources/cheat-sheet.md` — vraćanje ovisnosti i izgradnja raspoložnog artefakta bez raspoređivanja
+- **🧱 Nova lekcija u Poglavlju 4** `docs/chapter-04-infrastructure/custom-templates.md` — izrada vlastitog azd predloška: potrebna struktura (`azure.yaml`, `infra/`, `src/`), polje `metadata.template`, parametariziranje infrastrukture s `uniqueString()` tokenom resursa i `azd-env-name` oznakom, lokalno testiranje s `azd init --template <local-path>`, objavljivanje na GitHubu i podnošenje u Awesome AZD galeriju
+- **📦 Nova lekcija u Poglavlju 1** `docs/chapter-01-foundation/dev-containers.md` — reproducibilna azd okruženja s Razvojnim kontejnerima i GitHub Codespaces: minimalni `.devcontainer/devcontainer.json` koristeći službenu `ghcr.io/azure/azure-dev/azd` funkcionalnost, značajke specifične za jezik, `docker-in-docker` za hostove kontejnera i `azd auth login --use-device-code` za daljinsko prijavljivanje
+- **🧩 Pulumi s azd** dio u `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`, raspored Pulumi mapa, slojevi mapirani na azd okruženja, potrebni izlazi/oznake i identičan `azd up` / `azd down` tijek rada
+- **🎯 Smjernice za odabir hosta** u `docs/chapter-04-infrastructure/provisioning.md` — početnički prijateljsko uspoređivanje `appservice`, `staticwebapp`, `function`, `containerapp`, `aks` i `springapp`, s uputama kada odabrati AKS ili Azure Spring Apps
+- **🛠️ Azure DevOps CI/CD vodič** u `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, servisna veza s federacijom identiteta radnog opterećenja (OIDC), generirani `azure-dev.yml` i postavljanje grupnih varijabli
+- **🔑 Servisni Principali (obrazac 4)** dodani u `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`, neinteraktivni `azd auth login` s tajnom klijenta naspram federiranih/OIDC vjerodajnica, kada koristiti i sigurno pohranjivanje vjerodajnica
+- **🪝 Rukovanje pogreškama hooksa** pododjeljak u `docs/chapter-04-infrastructure/deployment-guide.md` — izlazni kodovi i `set -e`, `continueOnError`, testiranje hooks izolirano s `azd hooks run`, OS-specifični shellovi i `--debug`
+- **👥 Tim / dijeljena okruženja** sekcija u `docs/chapter-03-configuration/configuration.md` — što se nalazi u `.azure/`, što gitignoreati, okruženja po programeru, `azd env list`/`select` i pružanje vrijednosti okruženja u CI/CD
+- **🧰 `azd restore` i proširena objašnjenja `azd package`** u `resources/cheat-sheet.md` — vraćanje ovisnosti i izgradnja deployabilnog artefakta bez implementacije
 
 #### Promijenjeno
-- **🧭 Tablica lekcija Poglavlja 4** ažurirana kako bi uključila novu lekciju "Autorstvo vlastitog predloška" (Lekcija 3)
-- **🧭 Tablica lekcija Poglavlja 1** ažurirana kako bi uključila novu lekciju "Dev Containers & Codespaces" (Lekcija 5); navigacijski podnožja spojeni između `bring-your-own-app.md` i `dev-containers.md`
+- **🧭 Tablica lekcija Poglavlja 4** ažurirana da uključi novu lekciju "Izrada vlastitog predloška" (Lekcija 3)
+- **🧭 Tablica lekcija Poglavlja 1** ažurirana da uključi novu lekciju "Razvojni kontejneri i Codespaces" (Lekcija 5); navigacijski podnožja povezana između `bring-your-own-app.md` i `dev-containers.md`
 
 ### [v3.21.0] - 2026-06-16
 
-#### Popunjavanje praznina za početnike: praktična lekcija za višestruke agente, "Donesite svoju aplikaciju", Terraform i CI/CD vodič
-**Ova verzija zatvara najveće praznine za potpuni vodič za početnike dodavanjem dvije nove praktične lekcije (vodič za rasporediv višestruki agent i dodavanje azd postojećoj aplikaciji), uvod u kuke prilagođen početnicima, sekciju Terraform s azd, korak-po-korak GitHub Actions vodič, objašnjenje novih pregleda proširenja i eksplicitni kontrolni popis za verifikaciju raspoređivanja.**
+#### Popunjavanje praznina za početnike: Praktična lekcija s više agenata, "Donesi vlastitu aplikaciju," Terraform i CI/CD vodič
+**Ova verzija zatvara najveće praznine za potpuni vodič za početnike dodavanjem dvije nove praktične lekcije (implementabilni vodič s više agenata i dodavanje azd postojećoj aplikaciji), uvoda za početnike u hooks, sekcije Terraform s azd-om, korak-po-korak GitHub Actions pipeline vodič, objašnjenja za nove pregledne ekstenzije i eksplicitni kontrolni popis za verifikaciju implementacije.**
 
 #### Dodano
-- **🤝 Nova lekcija u Poglavlju 5** `docs/chapter-05-multi-agent/multi-agent-basics.md` — potpuno praktični vodič za rasporediv dvostruki agent (koordinator + stručnjaci) koristeći stvarni predložak (`contoso-creative-writer`), pokrivajući kada koristiti višestruke agente, `azd up` tijek rada, razumijevanje raspoređenih resursa, praćenje između agenata, prilagodbu i čišćenje
-- **📦 Nova lekcija u Poglavlju 1** `docs/chapter-01-foundation/bring-your-own-app.md` — kako dodati azd postojećem projektu s `azd init` ("koristi kod u trenutnom direktoriju"), razumijevanje `azure.yaml` i `infra/`, `azd infra generate`, detekcija domaćina i raspoređivanje s `azd up`
-- **🌐 Sekcija Terraform s azd** dodana u `docs/chapter-04-infrastructure/provisioning.md` — konfiguracija `infra.provider: terraform`, struktura mape `.tf`, potrebni izlazi `AZURE_*` i označavanje `azd-env-name` te identičan tijek rada `azd up` / `azd down` (zatvara prazninu gdje je podrška za Terraform tvrdila ali je pokazana samo za Bicep)
-- **⚙️ Korak-po-korak GitHub Actions vodič** u `docs/chapter-08-production/production-ai-practices.md` — od GitHub repozitorija do automatskih raspoređivanja: `azd pipeline config`, OIDC federirane vjerodajnice (bez pohranjenih tajni), generirani `azure-dev.yml` i upute o tajnama kontra varijabli
-- **🪝 Uvod za početnike "Novi u kukama?"** u `docs/chapter-04-infrastructure/deployment-guide.md` — što je kuka, tablica faza kuka, minimalna prva kuka i ručno pokretanje kuka s `azd hooks run`
-- **✅ Dodan kontrolni popis "Provjerite svoje raspoređivanje"** u Korak 5 `docs/chapter-01-foundation/first-project.md` — provjera dima, provjera zdravstvene točke i eksplicitni kriteriji uspjeha
-- **🧩 Objašnjenje novih pregleda proširenja** `azure.ai.skills` i `azure.ai.connections` (što su i kada ih zatražiti) u `docs/chapter-08-production/production-ai-practices.md`
+- **🤝 Nova lekcija u Poglavlju 5** `docs/chapter-05-multi-agent/multi-agent-basics.md` — potpuno praktični, implementabilni vodič s dva agenta (orkestrator + specijalisti) koristeći stvarni predložak (`contoso-creative-writer`), pokrivajući kada koristiti više agenata, `azd up` tijek rada, razumijevanje implementiranih resursa, međugentsko praćenje, prilagodbu i čišćenje
+- **📦 Nova lekcija u Poglavlju 1** `docs/chapter-01-foundation/bring-your-own-app.md` — kako dodati azd postojećem projektu pomoću `azd init` ("koristi kod u trenutnom direktoriju"), razumijevanje `azure.yaml` i `infra/`, `azd infra generate`, detekcija hosta i implementacija pomoću `azd up`
+- **🌐 Sekcija Terraform s azd** dodana u `docs/chapter-04-infrastructure/provisioning.md` — konfiguracija `infra.provider: terraform`, raspored mapa `.tf`, potrebni `AZURE_*` izlazi i označavanje `azd-env-name`, te identičan tijek rada `azd up` / `azd down` (zatvara prazninu gdje je podrska za Terraform obećana, ali je prikazan samo Bicep)
+- **⚙️ Detaljan vodič kroz GitHub Actions** u `docs/chapter-08-production/production-ai-practices.md` — od GitHub repozitorija do automatiziranih deploya: `azd pipeline config`, OIDC federirane vjerodajnice (bez pohranjenih tajni), generirani `azure-dev.yml` i smjernice za tajne u odnosu na varijable
+- **🪝 Uvod za početnike "Novi u hookovima?"** u `docs/chapter-04-infrastructure/deployment-guide.md` — što je hook, tablica faza hooka, minimalni prvi hook i ručno pokretanje hookova s `azd hooks run`
+- **✅ Popis za provjeru "Provjerite svoj deploy"** dodan u Korak 5 od `docs/chapter-01-foundation/first-project.md` — smoke test, provjera health endpointa i eksplicitni kriteriji uspjeha
+- **🧩 Objašnjenje za nove preview ekstenzije** `azure.ai.skills` i `azure.ai.connections` (što su i kada ih koristiti) u `docs/chapter-08-production/production-ai-practices.md`
 
 #### Promijenjeno
-- **🧭 Tablica lekcija Poglavlja 5** ispravljena: `multi-agent-basics.md` je sada Lekcija 1 (jedina potpuno praktična lekcija), iskreno označeno da Lekcija 2 pripada Poglavlju 6, a scenarij za maloprodaju je arhitektonski nacrt, a ne predložak jedne naredbe
-- **🧭 Tablica lekcija Poglavlja 1** sada uključuje novu lekciju "Donesite svoju aplikaciju" (Lekcija 4)
-- **🔗 Navigacijski podnožja** ažurirana: `first-project.md` sada povezuje naprijed prema `bring-your-own-app.md`
+- **🧭 Ispravljena tablica lekcija u Poglavlju 5**: `multi-agent-basics.md` je sada Lekcija 1 (jedina potpuno praktična lekcija), pošteno označeno da Lekcija 2 pripada Poglavlju 6, a scenarij Retail je arhitektonski nacrt, a ne predložak jedne komande
+- **🧭 Tablica lekcija u Poglavlju 1** sada uključuje novu lekciju "Bring Your Own App" (Lekcija 4)
+- **🔗 Navigacijski podnožja** ažurirana: `first-project.md` sada vodi prema naprijed ka `bring-your-own-app.md`
 
 #### Ispravljeno
-- **🧱 Zatvorena praznina "tvrdio ali nedostajao" za Terraform** — tečaj je prije referirao podršku za Terraform, ali nije je pokazivao
-- **🔀 Ispravljene zavaravajuće križne poveznice u Poglavlju 5** koje su implicirale da postoji potpuna višestruka implementacija agenata kada je postojao samo arhitektonski nacrt
+- **🧱 Zatvoren "navodni ali nedostajući" Terraform jaz** — tečaj je prije spominjao podršku za Terraform bez pokazivanja istog
+- **🔀 Ispravljene zavaravajuće međuspone u Poglavlju 5** koje su implicirale postojanje pune multi-agent implementacije dok je postojalo samo arhitektonsko rješenje
 
-#### Ažurirane datoteke
+#### Datoteke ažurirane
 - `changelog.md`
 - `docs/chapter-01-foundation/README.md`
 - `docs/chapter-01-foundation/bring-your-own-app.md` *(novo)*
@@ -135,30 +154,30 @@ Nakon pregleda unosa dnevnika promjena, moći ćete:
 
 ### [v3.20.0] - 2026-06-16
 
-#### Osvježenje AZD 1.25.6, Komande za puni životni ciklus agenata i Aspire Rebrand
-**Ova verzija ponovno potvrđuje tečaj u odnosu na `azd` `1.25.6` (lipanj 2026.) i `azure.ai.agents` `0.1.40-preview` proširenje, proširuje AI smjernice sa "postavljanje agenta" na kompletan životni ciklus agenta (testiranje → evaluacija → optimizacija → inspekcija → brisanje), prikazuje nova `azure.ai.skills` i `azure.ai.connections` pregledna proširenja, te bilježi promjenu branda proizvoda s ".NET Aspire" na "Aspire".**
+#### AZD 1.25.6 osvježenje, potpune naredbe životnog ciklusa agenta i Aspire rebranding
+**Ova verzija ponovno potvrđuje tečaj prema `azd` `1.25.6` (lipanj 2026) i ekstenziji `azure.ai.agents` `0.1.40-preview`, proširuje AI smjernice od "kreiraj agenta" do kompletnog životnog ciklusa agenta (testiraj → procijeni → optimiziraj → pregledaj → izbriši), prikazuje nove preview ekstenzije `azure.ai.skills` i `azure.ai.connections` te bilježi promjenu imena proizvoda ".NET Aspire" u "Aspire".**
 
 #### Dodano
-- **🔁 Puno pokrivanje životnog ciklusa agenta** za početnike i AI inženjere kroz dokumentaciju:
-  - `docs/chapter-01-foundation/azd-basics.md` — Tablica životnog ciklusa (postavljanje → testiranje → mjerenje → poboljšanje → inspekcija → čišćenje) dodana u dio o Proširenjima i AI komandama
-  - `docs/chapter-08-production/production-ai-practices.md` — Novi odjeljak "Upravljanje životnim ciklusom agenta" koji pokriva `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, i `delete --force`
-  - `resources/cheat-sheet.md` — Proširene AI komande za agente s `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, i `delete --force`
-- **🧩 Nova pregledna proširenja** dokumentirana: `azure.ai.skills` (ponovno upotrebljive vještine agenta) i `azure.ai.connections` (povezivanja Foundry) dodani u tablicu proširenja i prečice
-- **⏱️ Smjernice za vremensko odzivanje** — primjeri `azd ai agent invoke` sada bilježe ukupno kašnjenje i vrijeme do prvog bajta
-- **📌 Banner verzije** u glavnom README-u koji usmjerava polaznike na `azd version` i `azd upgrade`
+- **🔁 Potpuna pokrivenost životnog ciklusa agenta** za početnike i AI inženjere kroz dokumentaciju:
+  - `docs/chapter-01-foundation/azd-basics.md` — Tablica životnog ciklusa (kreiranje → testiranje → mjerenje → poboljšanje → pregled → čišćenje) dodana u odjeljak Ekstenzije i AI naredbe
+  - `docs/chapter-08-production/production-ai-practices.md` — Novi odjeljak "Upravljanje životnim ciklusom agenta" koji obuhvaća `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download` i `delete --force`
+  - `resources/cheat-sheet.md` — Proširene AI naredbe za agente s `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download` i `delete --force`
+- **🧩 Nove preview ekstenzije** dokumentirane: `azure.ai.skills` (ponovno upotrebljive agentove vještine) i `azure.ai.connections` (Foundry veze) dodano na tablicu ekstenzija i prečace
+- **⏱️ Smjernice za vrijeme odziva** — primjeri `azd ai agent invoke` sada prikazuju ukupnu latenciju i vrijeme do prvog bajta
+- **📌 Banner verzije** u glavnom README koji usmjerava polaznike na `azd version` i `azd upgrade`
 
 #### Promijenjeno
-- **✅ Osnova validacije ažurirana** sa `azd 1.23.12` (ožujak 2026.) na `azd 1.25.6` (lipanj 2026.) kroz sve README-e poglavlja i dokumentaciju radionice
-- **🤖 Bilješka o proširenju poglavlja 2** ažurirana s `azure.ai.agents` `0.1.18-preview` na `0.1.40-preview`
-- **🧪 Primjer validacije radionice** (`azd version` izlaz) ažuriran na `1.25.6`
-- **🧭 README "Što je novo u azd danas"** osvježen za isticanje punog životnog ciklusa agenta, novih AI proširenja i nedavnih poboljšanja kvalitete života (`azd init` idempotencija, `azd auth login` čišćenje zastarjelog tokena, `azd tool` prompt pri prvom pokretanju)
-- **📖 Poglavlje 2 agents.md (Opcija 4)** sada upućuje polaznike na komande za životni ciklus nakon implementacije umjesto zaustavljanja na `azd up`
+- **✅ Ažurirana osnovna validacija** s `azd 1.23.12` (ožujak 2026) na `azd 1.25.6` (lipanj 2026) u svim README datotekama poglavlja i u radionicama
+- **🤖 Napomena o ekstenziji u Poglavlju 2** ažurirana s `azure.ai.agents` `0.1.18-preview` na `0.1.40-preview`
+- **🧪 Primjer validacije radionice** (output `azd version`) ažuriran na `1.25.6`
+- **🧭 README "Što je novo u azd danas"** osvježen da istakne kompletni životni ciklus agenta, nove AI ekstenzije i posljednje popravke kvalitete (`azd init` idempotentnost, `azd auth login` čišćenje nevažećih tokena, `azd tool` prompt prvog pokretanja)
+- **📖 Kapitel 2 agents.md (Opcija 4)** sada usmjerava polaznike na naredbe za životni ciklus nakon deploya umjesto da stane na `azd up`
 
 #### Ispravljeno
-- **🏷️ Imenovanje proizvoda** — dodana napomena o rebrandu Aspire (".NET Aspire" je sada jednostavno "Aspire"); podrška za Aspire u azd ostaje nepromijenjena
-- **🔎 Validacija izdanja uživo** potvrđena nasuprot Azure Developer CLI feedu izdanja: stabilni CLI `1.25.6` (2026-06-12) i `azure.ai.agents` `0.1.40-preview` (2026-06-15)
+- **🏷️ Naziv proizvoda** — dodana bilješka o Aspire rebrandingu (".NET Aspire" sada je jednostavno "Aspire"); podrška azd-om za Aspire ostaje nepromijenjena
+- **🔎 Live validacija izdanja** potvrđena uživo sa Azure Developer CLI izdanjem: stabilan CLI `1.25.6` (2026-06-12) i `azure.ai.agents` `0.1.40-preview` (2026-06-15)
 
-#### Ažurirane datoteke
+#### Datoteke ažurirane
 - `README.md`
 - `changelog.md`
 - `docs/chapter-01-foundation/README.md`
@@ -180,25 +199,25 @@ Nakon pregleda unosa dnevnika promjena, moći ćete:
 
 ### [v3.19.1] - 2026-03-27
 
-#### Pojašnjenje za početnike, validacija postava i konačno čišćenje AZD komandi
-**Ova verzija nadovezuje se na AZD 1.23 val. pregled s fokusom na početnike u dokumentaciji: pojašnjava AZD-prvu autentikaciju, dodaje lokalne skripte za validaciju postava, provjerava ključne naredbe preko živog AZD CLI-ja te uklanja zadnje zastarjele engleske izvore komandi izvan dnevnika promjena.**
+#### Pojašnjenje za početnike, validacija postavki i finalno čišćenje AZD naredbi
+**Ova verzija nastavlja s AZD 1.23 valjdačom i dokumentacijom usmjerenom na početnike: pojašnjava AZD-prvu autentikaciju, dodaje skripte za lokalnu validaciju postavki, potvrđuje ključne naredbe uživo s AZD CLI-jem i uklanja zadnje zastarjele engleske reference naredbi izvan changeloga.**
 
 #### Dodano
-- **🧪 Skripte za validaciju postava za početnike** s `validate-setup.ps1` i `validate-setup.sh` kako bi polaznici mogli potvrditi potrebne alate prije početka Poglavlja 1
-- **✅ Koraci za validaciju postava u startu** u glavnom i poglavlju 1 README-u tako da se propusti u preduvjetima primijete prije `azd up`
+- **🧪 Skripte za validaciju postavki za početnike** s `validate-setup.ps1` i `validate-setup.sh` da polaznici mogu potvrditi potrebne alate prije početka Poglavlja 1
+- **✅ Rano provjeravanje postavki** u glavnom README i README Poglavlja 1 da se otkriju nedostajući preduvjeti prije `azd up`
 
 #### Promijenjeno
-- **🔐 Smjernice za autentikaciju početnika** sada dosljedno tretiraju `azd auth login` kao primarni put za AZD tijekove rada, a `az login` je označen kao opcionalan osim ako se ne koriste direktno Azure CLI komande
-- **📚 Uvodni proces za Poglavlje 1** sada upućuje polaznike da validiraju lokalni postav prije instalacije, autentikacije i prvih koraka implementacije
-- **🛠️ Poruke validatora** sada jasno razlikuju blokirajuće zahtjeve od opcionalnih upozorenja Azure CLI-ja za AZD-smjer za početnike
-- **📖 Dokumentacija o konfiguraciji, otklanjanju poteškoća i primjerima** sada razlikuje potrebnu AZD autentikaciju i opcionalni Azure CLI prijavu gdje su prije bili prikazani bez konteksta
+- **🔐 Smjernice za autentikaciju početnika** sada dosljedno tretiraju `azd auth login` kao primarni put za AZD radne tokove, s `az login` označenim kao opcionalno osim ako se direktno ne koriste Azure CLI naredbe
+- **📚 Tijek uvođenja u Poglavlje 1** sada vodi polaznike da validiraju lokalnu postavku prije instalacije, autentikacije i prvog deploya
+- **🛠️ Poruke validatora** sada jasno razlikuju blokirajuće zahtjeve od neobaveznih upozorenja Azure CLI-ja za početnički AZD put
+- **📖 Konfiguracijska, troubleshooting i primjer dokumentacija** sada razlikuje obaveznu AZD autentikaciju i neobavezno prijavljivanje u Azure CLI, gdje je ranije bilo bez konteksta
 
 #### Ispravljeno
-- **📋 Preostale reference engleskih komandi** ažurirane na trenutne AZD oblike, uključujući `azd config show` u prečicama i `azd monitor --overview` tamo gdje je bila namjera smjernica za Azure Portal
-- **🧭 Tvrdnje za početnike u Poglavlju 1** ublažene kako se ne bi previše obećavala zajamčena bezgreška ili rollback ponašanja kroz sve predloške i Azure resurse
-- **🔎 Validacija živog CLI-ja** potvrđuje trenutnu podršku za `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs` i `azd down --force --purge`
+- **📋 Preostale engleske reference naredbi** ažurirane na trenutne AZD oblike, uključujući `azd config show` u prečacu i `azd monitor --overview` gdje je bila namjera za Azure Portal pregled
+- **🧭 Početničke tvrdnje u Poglavlju 1** ublažene da se ne obećava zajamčeno ponašanje bez grešaka ili rollback u svim predlošcima i Azure resursima
+- **🔎 Live validacija CLI-ja** potvrđuje trenutnu podršku za `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs` i `azd down --force --purge`
 
-#### Ažurirane datoteke
+#### Datoteke ažurirane
 - `README.md`
 - `changelog.md`
 - `docs/chapter-01-foundation/README.md`
@@ -217,40 +236,40 @@ Nakon pregleda unosa dnevnika promjena, moći ćete:
 
 ### [v3.19.0] - 2026-03-26
 
-#### Validacija AZD 1.23.12, proširenje okruženja radionice i osvježenje AI modela
-**Ova verzija izvodi validacijski pregled dokumentacije za `azd` `1.23.12`, ažurira zastarjele primjere AZD komandi, osvježava AI model smjernice na trenutačne zadane vrijednosti i širi upute za radionicu izvan GitHub Codespaces da uključuju dev kontejnere i lokalne kopije.**
+#### AZD 1.23.12 validacija, širenje okruženja radionice i osvježenje AI modela
+**Ova verzija izvodi dokumentacijsku validaciju prema `azd` `1.23.12`, ažurira zastarjele primjere AZD naredbi, osvježava AI model smjernice na trenutne zadane vrijednosti i proširuje upute radionice izvan GitHub Codespaces podržavajući i dev kontejnere te lokalne kopije.**
 
 #### Dodano
-- **✅ Bilješke o validaciji kroz glavna poglavlja i dokumentaciju radionice** da se polaznicima jasno pokaže testirana AZD osnova za korištenje novijih ili starijih CLI verzija
-- **⏱️ Smjernice za vremensko ograničenje implementacije** za dugotrajne AI aplikacije koristeći `azd deploy --timeout 1800`
-- **🔎 Koraci za inspekciju proširenja** s `azd extension show azure.ai.agents` u AI workflow dokumentaciji
-- **🌐 Šire upute okruženja radionice** koje pokrivaju GitHub Codespaces, dev kontejnere i lokalne kopije uz MkDocs
+- **✅ Napomene o validaciji u glavnim poglavljima i dokumentaciji radionice** da bi polaznici imali jasnu AZD bazu za testiranje koristeći novije ili starije CLI verzije
+- **⏱️ Smjernice o timeout-u deploya** za dugotrajne AI aplikacije koristeći `azd deploy --timeout 1800`
+- **🔎 Koraci inspekcije ekstenzija** s `azd extension show azure.ai.agents` u dokumentaciji AI radnih tokova
+- **🌐 Šire smjernice za radno okruženje radionice** koje obuhvaćaju GitHub Codespaces, dev kontejnere i lokalne kopije pomoću MkDocs
 
 #### Promijenjeno
-- **📚 README uvodi poglavlja** sada dosljedno bilježe validaciju prema `azd 1.23.12` kroz fundamentalne, konfiguracijske, infrastrukturne, multi-agent, prije implementacije, otklanjanje problema i produkcijske sekcije
-- **🛠️ Reference AZD komandi** ažurirane na trenutne oblike kroz dokumentaciju:
+- **📚 Uvodni README-i poglavlja** sada redovito bilježe validaciju protiv `azd 1.23.12` kroz temeljne, konfiguracijske, infrastrukturne, multi-agent, preddeploy, troubleshooting i produkcijske dijelove
+- **🛠️ Reference AZD naredbi** ažurirane na trenutačne oblike u dokumentaciji:
   - `azd config list` → `azd config show`
   - `azd env show` → `azd env list` ili `azd env get-value(s)` ovisno o kontekstu
   - `azd auth whoami` → `azd auth status`
-  - `azd monitor` → `azd monitor --overview` gdje je namijenjen pregled Application Insightsa
-- **🧪 Primjeri pokušaja preview provisioniranja** pojednostavljeni na trenutačno podržane upotrebe poput `azd provision --preview` i `azd provision --preview -e production`
-- **🧭 Tijek radionice** ažuriran tako da polaznici mogu dovršiti laboratorije u Codespaces, dev kontejneru ili lokalnoj kopiji umjesto da se pretpostavlja samo Codespaces
-- **🔐 Smjernice za autentikaciju** sada preferiraju `azd auth login` za AZD tijekove rada, s `az login` kao opcionalnim kada se izravno koriste Azure CLI komande
+  - `azd monitor` → `azd monitor --overview` gdje se misli na pregled Application Insights
+- **🧪 Pojednostavljeni preview primjeri** u skladu s trenutačno podržanim korištenjem poput `azd provision --preview` i `azd provision --preview -e production`
+- **🧭 Radni tijek radionice** ažuriran tako da polaznici mogu završiti labove u Codespaces, dev containeru ili lokalnoj kopiji, a ne pretpostavljajući isključivo Codespaces
+- **🔐 Smjernice autentikacije** sada preferiraju `azd auth login` za AZD radne tokove, s `az login` kao opcionalnim ako se direktno koriste Azure CLI naredbe
 
 #### Ispravljeno
-- **🪟 Windows komande za instalaciju** usklađene na trenutni `winget` casing paketa u vodiču za instalaciju
-- **🐧 Linux smjernice za instalaciju** ispravljene da ne upućuju na nepodržan distro-specifični upravitelj paketa `azd` i umjesto toga usmjeravaju na izvore izdanja gdje je primjereno
-- **📦 Primjeri AI modela** osvježeni sa starih zadavanja poput `gpt-35-turbo` i `text-embedding-ada-002` na trenutačne primjere kao što su `gpt-4.1-mini`, `gpt-4.1` i `text-embedding-3-large`
-- **📋 Isječci implementacije i dijagnostike** ispravljeni da koriste trenutačne komande okoline i statusa u zapisima, skriptama i koracima za otklanjanje poteškoća
-- **⚙️ Smjernice za GitHub Actions** ažurirane s `Azure/setup-azd@v1.0.0` na `Azure/setup-azd@v2`
-- **🤖 Smjernice za MCP/Copilot pristanke** ažurirane s `azd mcp consent` na `azd copilot consent list`
+- **🪟 Windows instalacijske naredbe** usklađene s trenutnim velikim i malim slovima paketa `winget` u vodiču za instalaciju
+- **🐧 Linux smjernice za instalaciju** ispravljene da izbjegnu nedopuštene distro-specifične upute za upravitelj paketa `azd` i umjesto toga upute prema release assetima gdje je prikladno
+- **📦 AI primjeri modela** osvježeni s starijih zadataka poput `gpt-35-turbo` i `text-embedding-ada-002` na aktualne poput `gpt-4.1-mini`, `gpt-4.1` i `text-embedding-3-large`
+- **📋 Primjeri deploya i dijagnostike** ispravljeni za korištenje trenutačnih naredbi za okruženje i status u zapisima, skriptama i troubleshooting koracima
+- **⚙️ GitHub Actions smjernice** ažurirane s `Azure/setup-azd@v1.0.0` na `Azure/setup-azd@v2`
+- **🤖 Smjernice za MCP/Copilot pristanak** ažurirane s `azd mcp consent` na `azd copilot consent list`
 
 #### Poboljšano
-- **🧠 Upute za AI poglavlje** sada bolje objašnjavaju ponašanje osjetljivo na pregled `azd ai`, prijavu specifičnu za zakupnika, trenutačnu uporabu proširenja i ažurirane preporuke za implementaciju modela
-- **🧪 Upute za radionicu** sada koriste realističnije primjere verzija i jasniji jezik za postavljanje okoline za praktične laboratorije
-- **📈 Dokumentacija za produkciju i rješavanje problema** sada bolje usklađena s trenutačnim nadzorom, rezervnim modelom i primjerima troškovnih razina
+- **🧠 AI poglavlje smjernice** bolje objašnjavaju ponašanje osjetljivo na preview ekstenzije `azd ai`, prijavu po tenantima, trenutačnu upotrebu ekstenzija i ažurirane preporuke za deploy modela
+- **🧪 Upute radionice** sada koriste realističnije verzijske primjere i jasniji jezik za postavljanje okruženja za praktične labove
+- **📈 Produkcija i troubleshooting dokumentacija** bolje usklađeni s trenutačnim praćenjem, fallback modelom i primjerima razina troškova
 
-#### Ažurirane datoteke
+#### Datoteke ažurirane
 - `docs/chapter-01-foundation/README.md`
 - `docs/chapter-01-foundation/azd-basics.md`
 - `docs/chapter-01-foundation/installation.md`
@@ -283,46 +302,46 @@ Nakon pregleda unosa dnevnika promjena, moći ćete:
 
 ### [v3.18.0] - 2026-03-16
 
-#### AZD AI CLI naredbe, validacija sadržaja i proširenje predložaka
-**Ova verzija dodaje pokrivenost naredbi `azd ai`, `azd extension` i `azd mcp` u svim ključnim AI poglavljima, ispravlja pokvarene veze i zastarjeli kod u agents.md, ažurira sažetak te temeljito preuređuje odjeljak Primjeri Predložaka s potvrđenim opisima i novim Azure AI AZD predlošcima.**
+#### AZD AI CLI naredbe, validacija sadržaja i proširenje predloška
+**Ova verzija dodaje pokrivenost naredbama `azd ai`, `azd extension` i `azd mcp` u svim poglavljima vezanim uz AI, popravlja prekinute poveznice i zastarjeli kod u agents.md, ažurira cheat sheet i potpuno preuređuje odjeljak Primjeri predložaka s provjerenim opisima i novim Azure AI AZD predlošcima.**
 
 #### Dodano
-- **🤖 Pokrivenost AZD AI CLI** kroz 7 datoteka (prije samo u poglavlju 8):
-  - `docs/chapter-01-foundation/azd-basics.md` — Novi odjeljak "Proširenja i AI Naredbe" koji uvodi `azd extension`, `azd ai agent init` i `azd mcp`
-  - `docs/chapter-02-ai-development/agents.md` — Opcija 4: `azd ai agent init` s usporednom tablicom (predložak vs pristup manifestu)
-  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — Pododjeljci "AZD Proširenja za Foundry" i "Implementacija usmjerena na agente"
-  - `docs/chapter-05-multi-agent/README.md` — Brzi početak sada prikazuje oba puta implementacije bazirana na predlošku i manifestu
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Odjeljak implementacije sada uključuje opciju `azd ai agent init`
+- **🤖 AZD AI CLI pokrivenost** u 7 datoteka (prije samo u Poglavlju 8):
+  - `docs/chapter-01-foundation/azd-basics.md` — Novi odjeljak "Proširenja i AI naredbe" koji uvodi `azd extension`, `azd ai agent init` i `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — Opcija 4: `azd ai agent init` s tablicom usporedbe (pristup predlošku vs pristup manifestu)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — Pododjeljci "AZD Proširenja za Foundry" i "Primjena vođena agentima"
+  - `docs/chapter-05-multi-agent/README.md` — Brzi početak sada prikazuje oba puta primjene: prema predlošku i prema manifestu
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Odjeljak Primjena sada uključuje opciju `azd ai agent init`
   - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — Pododjeljak "AZD AI naredbe za dijagnostiku"
-  - `resources/cheat-sheet.md` — Novi odjeljak "AI & Naredbe proširenja" s `azd extension`, `azd ai agent init`, `azd mcp` i `azd infra generate`
-- **📦 Novi AZD AI primjeri predložaka** u `microsoft-foundry-integration.md`:
-  - **azure-search-openai-demo-csharp** — .NET RAG chat s Blazor WebAssembly, Semantic Kernel i podrškom za glasovni chat
-  - **azure-search-openai-demo-java** — Java RAG chat koristeći Langchain4J s opcijama implementacije ACA/AKS
+  - `resources/cheat-sheet.md` — Novi odjeljak "AI & naredbe proširenja" s `azd extension`, `azd ai agent init`, `azd mcp` i `azd infra generate`
+- **📦 Novi AZD AI predlošci primjera** u `microsoft-foundry-integration.md`:
+  - **azure-search-openai-demo-csharp** — .NET RAG chat s podrškom za Blazor WebAssembly, Semantic Kernel i glasovni chat
+  - **azure-search-openai-demo-java** — Java RAG chat koristeći Langchain4J s mogućnostima primjene na ACA/AKS
   - **contoso-creative-writer** — Višeagentna aplikacija za kreativno pisanje koristeći Azure AI Agent Service, Bing Grounding i Prompty
   - **serverless-chat-langchainjs** — Serverless RAG koristeći Azure Functions + LangChain.js + Cosmos DB s Ollama podrškom za lokalni razvoj
-  - **chat-with-your-data-solution-accelerator** — Enterprise RAG akcelerator s administrativnim portalom, Teams integracijom i opcijama PostgreSQL/Cosmos DB-a
-  - **azure-ai-travel-agents** — Referentna aplikacija za orkestraciju višestrukih agenata MCP s poslužiteljima u .NET, Python, Java i TypeScript
-  - **azd-ai-starter** — Minimalna Azure AI infrastruktura Bicep starter predložak
-  - **🔗 Awesome AZD AI Gallery link** — Referenca na [awesome-azd AI galeriju](https://azure.github.io/awesome-azd/?tags=ai) (80+ predložaka)
+  - **chat-with-your-data-solution-accelerator** — Enterprise RAG akcelerator s administratorskim portalom, integracijom Teamsa i opcijama PostgreSQL/Cosmos DB
+  - **azure-ai-travel-agents** — Višeagentna MCP orkestracijska referentna aplikacija sa serverima u .NET, Python, Java i TypeScriptu
+  - **azd-ai-starter** — Minimalni Azure AI infrastrukturni Bicep početni predložak
+  - **🔗 Awesome AZD AI Gallery link** — Referenca na [awesome-azd AI galeriju](https://azure.github.io/awesome-azd/?tags=ai) (više od 80 predložaka)
 
 #### Ispravljeno
-- **🔗 agents.md navigacija**: Linkovi Prethodni/Sljedeći sada odgovaraju redoslijedu lekcija u Chapter 2 README (Microsoft Foundry Integration → Agents → AI Model Deployment)
-- **🔗 agents.md neispravni linkovi**: `production-ai-practices.md` ispravljeno u `../chapter-08-production/production-ai-practices.md` (3 pojave)
-- **📦 agents.md zastarjeli kod**: Zamijenjen `opencensus` s `azure-monitor-opentelemetry` + OpenTelemetry SDK
-- **🐛 agents.md neispravan API**: Premješten `max_tokens` iz `create_agent()` u `create_run()` kao `max_completion_tokens`
-- **🔢 agents.md brojanje tokena**: Zamijenjena gruba `len//4` procjena s `tiktoken.encoding_for_model()`
-- **azure-search-openai-demo**: Ispravljene usluge s "Cognitive Search + App Service" na "Azure AI Search + Azure Container Apps" (zadani host promijenjen u listopadu 2024.)
-- **contoso-chat**: Ažuriran opis da referira Azure AI Foundry + Prompty, usklađeno s pravim naslovom i tehnološkim stackom repozitorija
+- **🔗 agents.md navigacija**: Poveznice Prethodno/Sljedeće sada odgovaraju redoslijedu lekcija u Poglavlju 2 README (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 prekinute poveznice u agents.md**: `production-ai-practices.md` ispravljeno u `../chapter-08-production/production-ai-practices.md` (3 pojave)
+- **📦 zastarjeli kod u agents.md**: Zamijenjeno `opencensus` s `azure-monitor-opentelemetry` + OpenTelemetry SDK
+- **🐛 neispravan API u agents.md**: Premješteno `max_tokens` iz `create_agent()` u `create_run()` kao `max_completion_tokens`
+- **🔢 brojanje tokena u agents.md**: Zamijenjena gruba procjena `len//4` s `tiktoken.encoding_for_model()`
+- **azure-search-openai-demo**: Ispravljene usluge iz "Cognitive Search + App Service" u "Azure AI Search + Azure Container Apps" (zadani host promijenjen u listopadu 2024)
+- **contoso-chat**: Ažuriran opis s referencom na Azure AI Foundry + Prompty, usklađeno s realnim naslovom i tehnološkim stogom repozitorija
 
 #### Uklonjeno
-- **ai-document-processing**: Uklonjena nefunkcionalna referenca na predložak (repozitorij nije javno dostupan kao AZD predložak)
+- **ai-document-processing**: Uklonjena nefunkcionalna referenca na predložak (repo nije javno dostupan kao AZD predložak)
 
 #### Poboljšano
-- **📝 agents.md vježbe**: Vježba 1 sada prikazuje očekivani rezultat i `azd monitor` korak; Vježba 2 uključuje punu `FunctionTool` registracijsku šifru; Vježba 3 zamjenjuje nejasne upute konkretnim `prepdocs.py` naredbama
-- **📚 agents.md resursi**: Ažurirane poveznice na dokumentaciju u skladu s trenutnom Azure AI Agent Service dokumentacijom i brzim početkom
-- **📋 agents.md tablica Sljedeći Koraci**: Dodan link na AI Workshop Lab za potpunu pokrivenost poglavlja
+- **📝 vježbe u agents.md**: Vježba 1 sada prikazuje očekivani ispis i korak `azd monitor`; Vježba 2 uključuje kompletan kod registracije `FunctionTool`; Vježba 3 zamjenjuje nejasne upute konkretnim naredbama `prepdocs.py`
+- **📚 njimaice u agents.md**: Ažurirane poveznice na dokumentaciju za Azure AI Agent Service i vodič za brzi početak
+- **📋 tablica Sljedećih koraka u agents.md**: Dodana poveznica na AI Workshop Lab za potpunu pokrivenost poglavlja
 
-#### Ažurirane Datoteke
+#### Ažurirane datoteke
 - `docs/chapter-01-foundation/azd-basics.md`
 - `docs/chapter-02-ai-development/agents.md`
 - `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
@@ -336,21 +355,21 @@ Nakon pregleda unosa dnevnika promjena, moći ćete:
 ### [v3.17.0] - 2026-02-05
 
 #### Poboljšanje navigacije kroz tečaj
-**Ova verzija poboljšava navigaciju kroz poglavlja README.md datoteke s poboljšanim formatom tablice.**
+**Ova verzija poboljšava navigaciju poglavljima u README.md s naprednim tabličnim formatom.**
 
-#### Izmijenjeno
-- **Tablica karte tečaja**: Poboljšana s direktnim linkovima na lekcije, procjenama trajanja i ocjenama složenosti
+#### Promijenjeno
+- **Tablica karte tečaja**: Poboljšana s izravnim poveznicama na lekcije, procjenama trajanja i ocjenama složenosti
 - **Čišćenje mapa**: Uklonjene suvišne stare mape (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **Provjera poveznica**: Provjereno svih 21+ internih poveznica u tablici Karte tečaja
+- **Validacija poveznica**: Provjereno svih 21+ internu poveznica u tablici karte tečaja
 
 ### [v3.16.0] - 2026-02-05
 
 #### Ažuriranja naziva proizvoda
-**Ova verzija ažurira reference proizvoda prema trenutačnom Microsoft brendiranju.**
+**Ova verzija ažurira reference na proizvode prema aktualnom Microsoft brandingu.**
 
-#### Izmijenjeno
-- **Microsoft Foundry → Microsoft Foundry**: Sve reference ažurirane kroz sve datoteke osim prijevoda
-- **Azure AI Agent Service → Foundry Agents**: Naziv servisa ažuriran da odražava trenutačno brendiranje
+#### Promijenjeno
+- **Microsoft Foundry → Microsoft Foundry**: Sve reference ažurirane u svim datotekama koje nisu prijevodi
+- **Azure AI Agent Service → Foundry Agents**: Naziv usluge ažuriran kako bi odražavao aktualni branding
 
 #### Ažurirane datoteke
 - `README.md` - Glavna početna stranica tečaja
@@ -359,18 +378,18 @@ Nakon pregleda unosa dnevnika promjena, moći ćete:
 - `docs/chapter-02-ai-development/agents.md` - Vodič za AI agente
 - `examples/README.md` - Dokumentacija primjera
 - `workshop/README.md` - Početna stranica radionice
-- `workshop/docs/index.md` - Indeks radionica
-- `workshop/docs/instructions/*.md` - Sve upute za radionicu
+- `workshop/docs/index.md` - Indeks radionice
+- `workshop/docs/instructions/*.md` - Sve datoteke s uputama za radionicu
 
 ---
 
 ### [v3.15.0] - 2026-02-05
 
-#### Velika restrukturacija repozitorija: nazivi mapa po poglavljima
-**Ova verzija restrukturira dokumentaciju u namjenske mape poglavlja radi jasnoće navigacije.**
+#### Velika preuređenja spremišta: imena mapa prema poglavljima
+**Ova verzija restrukturira dokumentaciju u namjenske mape po poglavljima radi jasnije navigacije.**
 
-#### Promjene naziva mapa
-Stare su mape zamijenjene mapama numeriranim po poglavljima:
+#### Promjena imena mapa
+Stare mape zamijenjene su mapama numeriranim po poglavljima:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
@@ -393,20 +412,20 @@ Stare su mape zamijenjene mapama numeriranim po poglavljima:
 | production-ai-practices.md | microsoft-foundry/ | chapter-08-production/ |
 | deployment-guide.md | deployment/ | chapter-04-infrastructure/ |
 | provisioning.md | deployment/ | chapter-04-infrastructure/ |
-| Sve pre-deployment datoteke | pre-deployment/ | chapter-06-pre-deployment/ |
-| Sve troubleshooting datoteke | troubleshooting/ | chapter-07-troubleshooting/ |
+| Sve datoteke iz pre-deployment/ | pre-deployment/ | chapter-06-pre-deployment/ |
+| Sve datoteke iz troubleshooting/ | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### Dodano
-- **📚 README datoteke po poglavljima**: Kreirana README.md u svakoj mapi poglavlja s:
+- **📚 README datoteke po poglavljima**: Kreiran README.md u svakoj mapi poglavlja s:
   - Ciljevima učenja i trajanjem
   - Tablicom lekcija s opisima
   - Naredbama za brzi početak
-  - Navigacijom na ostala poglavlja
+  - Navigacijom do ostalih poglavlja
 
-#### Izmijenjeno
-- **🔗 Ažurirani svi interni linkovi**: 78+ putanja ažurirano u svim dokumentacijskim datotekama
+#### Promijenjeno
+- **🔗 Ažurirane sve interne poveznice**: više od 78 putanja ažurirano u svim dokumentacijskim datotekama
 - **🗺️ Glavni README.md**: Ažurirana karta tečaja s novom strukturom poglavlja
-- **📝 examples/README.md**: Ažurirane međureferencijske poveznice na mape poglavlja
+- **📝 examples/README.md**: Ažurirane unakrsne reference na mape poglavlja
 
 #### Uklonjeno
 - Stara struktura mapa (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
@@ -415,76 +434,76 @@ Stare su mape zamijenjene mapama numeriranim po poglavljima:
 
 ### [v3.14.0] - 2026-02-05
 
-#### Restrukturiranje repozitorija: navigacija kroz poglavlja
-**Ova verzija je dodala README datoteke za navigaciju kroz poglavlja (zamijenjena verzijom v3.15.0).**
+#### Restrukturiranje spremišta: navigacija po poglavljima
+**Ova verzija je dodala README datoteke za navigaciju po poglavljima (zamijenjeno verzijom v3.15.0).**
 
 ---
 
 ### [v3.13.0] - 2026-02-05
 
 #### Novi vodič za AI agente
-**Ova verzija dodaje sveobuhvatan vodič za implementaciju AI agenata uz Azure Developer CLI.**
+**Ova verzija dodaje opsežan vodič za primjenu AI agenata s Azure Developer CLI.**
 
 #### Dodano
-- **🤖 docs/microsoft-foundry/agents.md**: Potpun vodič koji pokriva:
+- **🤖 docs/microsoft-foundry/agents.md**: Kompletan vodič koji pokriva:
   - Što su AI agenti i kako se razlikuju od chatbotova
   - Tri predloška za brzi početak (Foundry Agents, Prompty, RAG)
-  - Arhitekturalni obrasci agenata (pojedinačni agent, RAG, višestruki agent)
-  - Konfiguracija i prilagodba alata
-  - Praćenje i metričko izvještavanje
-  - Troškovi i optimizacija
-  - Uobičajeni scenariji za rješavanje problema
+  - Obrasce arhitekture agenata (pojedinačni agent, RAG, više agenata)
+  - Konfiguraciju i prilagodbu alata
+  - Praćenje i metrike
+  - Razmatranje troškova i optimizaciju
+  - Uobičajene situacije za otklanjanje poteškoća
   - Tri praktične vježbe s kriterijima uspjeha
 
 #### Struktura sadržaja
 - **Uvod**: Koncepti agenata za početnike
-- **Brzi početak**: Implementacija agenata s `azd init --template get-started-with-ai-agents`
-- **Arhitekturalni obrasci**: Vizualni dijagrami obrazaca agenata
+- **Brzi početak**: Primjena agenata koristeći `azd init --template get-started-with-ai-agents`
+- **Obrasci arhitekture**: Vizualni dijagrami obrasca agenata
 - **Konfiguracija**: Postavljanje alata i varijable okruženja
 - **Praćenje**: Integracija s Application Insights
-- **Vježbe**: Postepeno praktično učenje (20-45 minuta svaka)
+- **Vježbe**: Postupno praktično učenje (20-45 minuta svaka)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
-#### Ažuriranje okruženja DevContainer
-**Ova verzija ažurira konfiguraciju razvojnog kontejnera s modernim alatima i boljim zadanim postavkama za AZD iskustvo učenja.**
+#### Ažuriranje DevContainer okruženja
+**Ova verzija ažurira konfiguraciju razvojne kutije s modernim alatima i boljim zadanim postavkama za AZD iskustvo učenja.**
 
-#### Izmijenjeno
-- **🐳 Bazna slika**: Ažurirana s `python:3.12-bullseye` na `python:3.12-bookworm` (najnoviji Debian stabilni)
-- **📛 Naziv kontejnera**: Preimenovan s "Python 3" u "AZD for Beginners" radi jasnoće
+#### Promijenjeno
+- **🐳 Osnovna slika**: Ažurirano s `python:3.12-bullseye` na `python:3.12-bookworm` (najnovija stabilna Debian verzija)
+- **📛 Naziv kontejnera**: Preimenovan iz "Python 3" u "AZD for Beginners" radi jasnosti
 
 #### Dodano
-- **🔧 Nove značajke razvojnog kontejnera**:
-  - `azure-cli` s podrškom za Bicep omogućenom
+- **🔧 Nove značajke Dev Container-a**:
+  - `azure-cli` s omogućenom podrškom za Bicep
   - `node:20` (LTS verzija za AZD predloške)
   - `github-cli` za upravljanje predlošcima
-  - `docker-in-docker` za implementacije kontejnerskih aplikacija
+  - `docker-in-docker` za primjenu container aplikacija
 
-- **🔌 Prosljeđivanje portova**: Prekonfigurirani portovi za uobičajeni razvoj:
+- **🔌 Prosljeđivanje portova**: Prije konfigurirani portovi za uobičajeni razvoj:
   - 8000 (MkDocs pregled)
   - 3000 (Web aplikacije)
   - 5000 (Python Flask)
   - 8080 (API-jevi)
 
 - **🧩 Novi VS Code dodaci**:
-  - `ms-python.vscode-pylance` - Poboljšani Python IntelliSense
+  - `ms-python.vscode-pylance` - Poboljšana Python IntelliSense
   - `ms-azuretools.vscode-azurefunctions` - Podrška za Azure Functions
   - `ms-azuretools.vscode-docker` - Podrška za Docker
   - `ms-azuretools.vscode-bicep` - Podrška za Bicep jezik
   - `ms-azure-devtools.azure-resource-groups` - Upravljanje Azure resursima
-  - `yzhang.markdown-all-in-one` - Uređivanje Markdowna
-  - `DavidAnson.vscode-markdownlint` - Markdown linting
+  - `yzhang.markdown-all-in-one` - Uređivanje Markdown-a
+  - `DavidAnson.vscode-markdownlint` - Lintanje Markdown-a
   - `bierner.markdown-mermaid` - Podrška za Mermaid dijagrame
   - `redhat.vscode-yaml` - Podrška za YAML (za azure.yaml)
-  - `eamodio.gitlens` - Vizualizacija Gita
-  - `mhutchie.git-graph` - Povijest Gita
+  - `eamodio.gitlens` - Vizualizacija Git-a
+  - `mhutchie.git-graph` - Povijest Git-a
 
-- **⚙️ VS Code postavke**: Dodane zadane postavke za Python interpreter, automatsko formatiranje pri spremanju i uklanjanje praznina
+- **⚙️ VS Code postavke**: Dodane zadane postavke za Python interpreter, formatiranje prilikom spremanja i uklanjanje praznina
 
-- **📦 Ažurirane requirements-dev.txt**:
-  - Dodan MkDocs minify dodatak
+- **📦 Ažurirani requirements-dev.txt**:
+  - Dodan MkDocs minify plugin
   - Dodan pre-commit za kvalitetu koda
   - Dodani Azure SDK paketi (azure-identity, azure-mgmt-resource)
 
@@ -495,733 +514,733 @@ Stare su mape zamijenjene mapama numeriranim po poglavljima:
 
 ### [v3.11.0] - 2026-02-05
 
-#### README prilagođen početnicima
-**Ova verzija značajno poboljšava README.md da bude pristupačniji početnicima i dodaje ključne resurse za AI programere.**
+#### Prerađena README datoteka prilagođena početnicima
+**Ova verzija značajno poboljšava README.md da bude pristupačniji početnicima i dodaje bitne resurse za AI developere.**
 
 #### Dodano
 - **🆚 Usporedba Azure CLI i AZD**: Jasno objašnjenje kada koristiti koji alat s praktičnim primjerima
-- **🌟 Awesome AZD linkovi**: Direktni linkovi na galeriju predložaka zajednice i resurse za doprinos:
-  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - 200+ predložaka spremnih za implementaciju
+- **🌟 Awesome AZD poveznice**: Izravne poveznice na galeriju predložaka zajednice i resurse za doprinos:
+  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - više od 200 predložaka spremnih za primjenu
   - [Submit a Template](https://github.com/Azure/awesome-azd/issues) - Doprinos zajednice
-- **🎯 Vodič za brzi početak**: Pojednostavljeni tijek u 3 koraka (Instaliraj → Prijavi se → Implementiraj)
-- **📊 Tablica navigacije prema iskustvu**: Jasne upute gdje započeti na temelju razine iskustva programera
+- **🎯 Vodič za brzi početak**: Pojednostavljen odjeljak s 3 koraka (Instaliraj → Prijavi se → Primijeni)
+- **📊 Tablica navigacije prema iskustvu**: Jasne upute gdje početi prema razini iskustva developera
 
-#### Izmijenjeno
-- **Struktura README-a**: Preuređena za postupno otkrivanje - ključne informacije prve
-- **Uvodni dio**: Prepisan da objasni "Čaroliju `azd up`" za potpune početnike
-- **Uklonjen duplicirani sadržaj**: Izbačen duplicirani odjeljak za rješavanje problema
-- **Naredbe za rješavanje problema**: Ispravljena referenca `azd logs` da koristi valjani `azd monitor --logs`
+#### Promijenjeno
+- **Struktura README-a**: Preuređena za postupno otkrivanje - ključne informacije prvo
+- **Uvodni odjeljak**: Prepravljeno za objašnjenje "Magije `azd up`" za potpune početnike
+- **Uklonjen duplicirani sadržaj**: Izbačen duplicirani odjeljak za otklanjanje poteškoća
+- **Naredbe za otklanjanje poteškoća**: Ispravljena referenca `azd logs` za korištenje valjanog `azd monitor --logs`
 
 #### Ispravljeno
-- **🔐 Naredbe za autentikaciju**: Dodani `azd auth login` i `azd auth logout` u cheat-sheet.md
-- **Nevažeće referencije naredbi**: Uklonjen preostali `azd logs` iz README odjeljka za rješavanje problema
+- **🔐 Naredbe za autentifikaciju**: Dodani `azd auth login` i `azd auth logout` u cheat-sheet.md
+- **Nevažeće reference naredbi**: Uklonjeni preostali `azd logs` iz README odjeljka za otklanjanje poteškoća
 
-#### Napomene
+#### Bilješke
 - **Opseg**: Promjene primijenjene na glavni README.md i resources/cheat-sheet.md
-- **Ciljana publika**: Poboljšanja usmjerena posebno na programere novi u AZD
+- **Ciljna publika**: Poboljšanja posebno usmjerena na developere nove u AZD
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
-#### Ispravak točnosti naredbi Azure Developer CLI
-**Ova verzija ispravlja nepostojeće AZD naredbe u cijeloj dokumentaciji, osiguravajući da svi primjeri koda koriste valjanu sintaksu Azure Developer CLI-a.**
+#### Ažuriranje točnosti naredbi Azure Developer CLI
+**Ova verzija ispravlja nepostojeće AZD naredbe u dokumentaciji, osiguravajući da svi primjeri koda koriste važeću sintaksu Azure Developer CLI.**
 
 #### Ispravljeno
-- **🔧 Uklonjene nepostojeće AZD naredbe**: Sveobuhvatna revizija i ispravak nevažećih naredbi:
+- **🔧 Uklonjene nepostojeće AZD naredbe**: Sveobuhvatni pregled i ispravak nevažećih naredbi:
   - `azd logs` (ne postoji) → zamijenjeno s `azd monitor --logs` ili Azure CLI alternativama
-  - `azd service` podnaredbe (ne postoje) → zamijenjene s `azd show` i Azure CLI-jem
-  - `azd infra import/export/validate` (ne postoje) → uklonjene ili zamijenjene valjanim alternativama
-  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` zastavice (ne postoje) → uklonjene
-  - `azd provision --what-if/--rollback` zastavice (ne postoje) → ažurirane da koriste `--preview`
+  - `azd service` podnaredbe (ne postoje) → zamijenjeno s `azd show` i Azure CLI
+  - `azd infra import/export/validate` (ne postoje) → uklonjeno ili zamijenjeno valjanim alternativama
+  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` zastavice (ne postoje) → uklonjeno
+  - `azd provision --what-if/--rollback` zastavice (ne postoje) → ažurirano za korištenje `--preview`
   - `azd config validate` (ne postoji) → zamijenjeno s `azd config list`
   - `azd info`, `azd history`, `azd metrics` (ne postoje) → uklonjeno
 
-- **📚 Ažurirane datoteke s ispravcima naredbi**:
-  - `resources/cheat-sheet.md`: Veliko preuređenje referenci naredbi
+- **📚 Datoteke ažurirane s ispravcima naredbi**:
+  - `resources/cheat-sheet.md`: Veliki prepravak referenci naredbi
   - `docs/deployment/deployment-guide.md`: Ispravljene strategije rollbacka i implementacije
-  - `docs/troubleshooting/debugging.md`: Ispravljeni odjeljci za analizu zapisa
-  - `docs/troubleshooting/common-issues.md`: Ažurirane naredbe za rješavanje problema
-  - `docs/troubleshooting/ai-troubleshooting.md`: Ispravljena AZD sekcija za otklanjanje pogrešaka
+  - `docs/troubleshooting/debugging.md`: Ispravljeni odjeljci za analizu zapisnika
+  - `docs/troubleshooting/common-issues.md`: Ažurirane naredbe za otklanjanje poteškoća
+  - `docs/troubleshooting/ai-troubleshooting.md`: Popravljen odjeljak za debugiranje AZD-a
   - `docs/getting-started/azd-basics.md`: Ispravljene naredbe za nadzor
-  - `docs/getting-started/first-project.md`: Ažurirani primjeri nadzora i otklanjanja pogrešaka
-  - `docs/getting-started/installation.md`: Ispravljeni primjeri pomoći i verzija
-  - `docs/pre-deployment/application-insights.md`: Ispravljene naredbe za pregled zapisa
-  - `docs/pre-deployment/coordination-patterns.md`: Ispravljene naredbe za otklanjanje pogrešaka agenata
+  - `docs/getting-started/first-project.md`: Ažurirani primjeri za nadzor i debugiranje
+  - `docs/getting-started/installation.md`: Popravljeni primjeri pomoću i verzije
+  - `docs/pre-deployment/application-insights.md`: Ispravljene naredbe za pregled zapisnika
+  - `docs/pre-deployment/coordination-patterns.md`: Ispravljene naredbe za debugiranje agenta
 
-- **📝 Ažurirana Referenca Verzije**: 
-  - `docs/getting-started/installation.md`: Promijenjena hardkodirana verzija `1.5.0` u generičku `1.x.x` s poveznicom na izdanja
+- **📝 Ažurirana referenca verzije**: 
+  - `docs/getting-started/installation.md`: Promijenjena hardkodirana verzija `1.5.0` u generičku `1.x.x` s linkom na izdanja
 
 #### Promijenjeno
-- **Strategije Poništavanja**: Ažurirana dokumentacija za korištenje poništavanja temeljenog na Gitu (AZD nema ugrađeno poništavanje)
-- **Pregled zapisa**: Zamijenjeni referenca `azd logs` s `azd monitor --logs`, `azd monitor --live` i Azure CLI naredbama
-- **Odjeljak za performanse**: Uklonjeni nepostojeći zastavice za paralelno/incrementalno postavljanje, pružene važeće alternative
+- **Strategije rollbacka**: Ažurirana dokumentacija za korištenje rollbacka temeljenog na Git-u (AZD nema ugrađeni rollback)
+- **Pregled zapisnika**: Zamijenjene reference `azd logs` s `azd monitor --logs`, `azd monitor --live` i Azure CLI naredbama
+- **Odjeljak performansi**: Uklonjene nepostojeće zastavice za paralelnu/incrementalnu implementaciju, pružene valjane alternative
 
 #### Tehnički detalji
-- **Važeće AZD naredbe**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
-- **Važeće zastavice azd monitor**: `--live`, `--logs`, `--overview`
+- **Valjane AZD naredbe**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
+- **Valjane zastavice za azd monitor**: `--live`, `--logs`, `--overview`
 - **Uklonjene značajke**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
-#### Napomene
-- **Verifikacija**: Naredbe potvrđene na Azure Developer CLI v1.23.x
+#### Bilješke
+- **Provjera**: Naredbe su potvrđene u odnosu na Azure Developer CLI v1.23.x
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
 #### Završetak radionice i ažuriranje kvalitete dokumentacije
-**Ova verzija dovršava interaktivne module radionice, popravlja sve neispravne poveznice u dokumentaciji i poboljšava ukupnu kvalitetu sadržaja za AI programere koji koriste Microsoft AZD.**
+**Ova verzija dovršava interaktivne module radionice, ispravlja sve neispravne veze u dokumentaciji i poboljšava ukupnu kvalitetu sadržaja za AI developere koji koriste Microsoft AZD.**
 
 #### Dodano
-- **📝 CONTRIBUTING.md**: Novi dokument s uputama za doprinos s:
-  - Jasnim uputama za prijavu problema i predlaganje promjena
-  - Standardima dokumentacije za novi sadržaj
-  - Smjernicama za primjere koda i konvencijama poruka za commit
-  - Informacijama o angažmanu zajednice
+- **📝 CONTRIBUTING.md**: Novi dokument smjernica za doprinose s:
+  - Jasne upute za prijavu problema i predlaganje promjena
+  - Standardi dokumentacije za novi sadržaj
+  - Smjernice za primjere koda i konvencije poruka commit-a
+  - Informacije o angažmanu zajednice
 
 #### Dovršeno
-- **🎯 Modul radionice 7 (Zaključak)**: Potpuno dovršen modul zaključka s:
-  - Opsežan sažetak postignuća radionice
-  - Odjeljak ključnih usvojenih koncepata koji obuhvaća AZD, predloške i Microsoft Foundry
-  - Preporuke za nastavak puta učenja
-  - Vježbe izazova radionice s ocjenama težine
-  - Povratne informacije zajednice i poveznice za podršku
+- **🎯 Modul radionice 7 (Zaključak)**: Potpuno dovršen modul sa:
+  - Sveobuhvatnim sažetkom postignuća radionice
+  - Odjeljkom ključnih pojmova o AZD-u, predlošcima i Microsoft Foundry-ju
+  - Preporukama za nastavak učenja
+  - Vježbama izazova radionice s ocjenama težine
+  - Povratnim informacijama zajednice i linkovima za podršku
 
-- **📚 Modul radionice 3 (Demontaža)**: Ažurirani ciljevi učenja s:
-  - Aktivacijskom uputom za GitHub Copilot s MCP poslužiteljima
-  - Razumijevanje strukture mape predložaka AZD
-  - Obrasci organizacije infrastrukture kao koda (Bicep)
-  - Upute za praktične laboratorijske vježbe
+- **📚 Modul radionice 3 (Rasklop)**: Ažurirani ishodi učenja s:
+  - Vodičem za aktivaciju GitHub Copilota s MCP serverima
+  - Razumijevanjem strukture mapa AZD predložaka
+  - Uzorcima organizacije infrastrukture kao koda (Bicep)
+  - Uputama za praktične laboratorijske vježbe
 
-- **🔧 Modul radionice 6 (Rasklapanje)**: Dovršen s:
+- **🔧 Modul radionice 6 (Raspuštanje)**: Dovršen sa:
   - Ciljevima čišćenja resursa i upravljanja troškovima
-  - Korištenje `azd down` za sigurno ukidanje infrastrukture
-  - Upute za oporavak kognitivnih usluga obrisanih na soft-delete
-  - Bonus poticaji za istraživanje GitHub Copilota i Azure Portal
+  - Korištenjem `azd down` za sigurno ukidanje infrastrukture
+  - Uputama za oporavak meko obrisanih kognitivnih usluga
+  - Bonus prijedlozima za istraživanje GitHub Copilota i Azure Portala
 
 #### Ispravljeno
-- **🔗 Popravci neispravnih poveznica**: Riješeno 15+ neispravnih internih poveznica u dokumentaciji:
+- **🔗 Popravljene pokvarene veze**: Riješeno preko 15 neispravnih internih veza u dokumentaciji:
   - `docs/ai-foundry/ai-model-deployment.md`: Ispravljeni putovi do microsoft-foundry-integration.md
-  - `docs/troubleshooting/ai-troubleshooting.md`: Ispravljeni putovi ai-model-deployment.md i production-ai-practices.md
+  - `docs/troubleshooting/ai-troubleshooting.md`: Ispravljeni putovi do ai-model-deployment.md i production-ai-practices.md
   - `docs/getting-started/first-project.md`: Zamijenjen nepostojeći cicd-integration.md s deployment-guide.md
-  - `examples/retail-scenario.md`: Ispravljeni putovi FAQ i vodiča za otklanjanje poteškoća
-  - `examples/container-app/microservices/README.md`: Ispravljeni putovi kućne stranice te vodiča za postavljanje
-  - `resources/faq.md` i `resources/glossary.md`: Ažurirane reference poglavlja o AI
-  - `course-outline.md`: Ispravljene reference na vodič instruktora i AI radionicu lab
+  - `examples/retail-scenario.md`: Ispravljeni putovi do FAQ i vodiča za otklanjanje poteškoća
+  - `examples/container-app/microservices/README.md`: Ispravljeni putovi do kurseva i vodiča za implementaciju
+  - `resources/faq.md` i `resources/glossary.md`: Ažurirane reference AI poglavlja
+  - `course-outline.md`: Ispravljeni referenci za vodiče instruktora i AI laboratorijske radionice
 
-- **📅 Traka statusa radionice**: Ažurirana s "U izradi" na aktivan status radionice s datumom veljače 2026.
+- **📅 Status radionice**: Ažurirano s "U izradi" na aktivan status radionice sa datumom veljača 2026.
 
-- **🔗 Navigacija radionice**: Popravljene neispravne poveznice u README.md koje su upućivale na nepostojeću mapu lab-1-azd-basics
+- **🔗 Navigacija radionice**: Popravljene pokvarene navigacijske veze u workshop README.md koje su upućivale na nepostojeću mapu lab-1-azd-basics
 
 #### Promijenjeno
-- **Prezentacija radionice**: Uklonjena upozorenja "u izradi", radionica je sada dovršena i spremna za korištenje
-- **Konzistentnost navigacije**: Osigurana pravilna navigacija između svih modula radionice
-- **Reference puteva učenja**: Ažurirane međureferentne poveznice poglavlja za ispravne microsoft-foundry putove
+- **Prezentacija radionice**: Uklonjena upozorenja "u izradi", radionica sada kompletna i spremna za korištenje
+- **Konzistentnost navigacije**: Osigurano pravilno međumodularno povezivanje svih modula radionice
+- **Reference putanje učenja**: Ažurirane međureferencije poglavlja za ispravno korištenje microsoft-foundry putanja
 
-#### Održano
-- ✅ Sve engleske markdown datoteke imaju važeće interne poveznice
-- ✅ Moduli radionice 0-7 dovršeni s ciljevima učenja
-- ✅ Navigacija između poglavlja i modula ispravno funkcionira
-- ✅ Sadržaj prikladan za AI programere koji koriste Microsoft AZD
-- ✅ Održavan je jezik i struktura prilagođena početnicima
-- ✅ CONTRIBUTING.md pruža jasne smjernice za doprinositelje zajednice
+#### Potvrđeno
+- ✅ Sve engleske markdown datoteke imaju valjane interne veze
+- ✅ Moduli radionice 0-7 su dovršeni sa ishodima učenja
+- ✅ Navigacija između poglavlja i modula funkcionira ispravno
+- ✅ Sadržaj je prikladan za AI developere koristeći Microsoft AZD
+- ✅ Održan jednostavan jezik i struktura za početnike
+- ✅ CONTRIBUTING.md daje jasne smjernice za suradnike zajednice
 
-#### Tehnička provedba
-- **Validacija poveznica**: Automatizirani PowerShell skript potvrdio sve interne .md poveznice
-- **Revizija sadržaja**: Ručni pregled dovršenosti radionice i pristupačnosti početnicima
-- **Sustav navigacije**: Primijenjeni konzistentni obrasci navigacije poglavlja i modula
+#### Tehnička implementacija
+- **Provjera veza**: Automatizirani PowerShell skripta provjerila sve unutarnje .md veze
+- **Revizija sadržaja**: Ručni pregled cjelovitosti radionice i prikladnosti za početnike
+- **Sustav navigacije**: Primijenjeni konzistentni obrasci navigacije za poglavlja i module
 
-#### Napomene
-- **Opseg**: Promjene primijenjene samo na englesku dokumentaciju
-- **Prijevodi**: Mapu prijevoda nije ažurirana u ovoj verziji (automatizirani prijevodi bit će sinkronizirani naknadno)
-- **Trajanje radionice**: Cijela radionica sada pruža 3-4 sata praktičnog učenja
+#### Bilješke
+- **Opseg**: Promjene primijenjene samo na dokumentaciju na engleskom jeziku
+- **Prijevodi**: Mape prijevoda nisu ažurirane u ovoj verziji (automatizirani prijevod će se kasnije sinkronizirati)
+- **Trajanje radionice**: Kompletna radionica sada pruža 3-4 sata praktičnog učenja
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### Napredna dokumentacija: Nadzor, sigurnost i obrasci za više agenata
-**Ova verzija dodaje sveobuhvatne lekcije A razine o integraciji Application Insights, obrascima autentikacije i koordinaciji više agenata za produkcijska postavljanja.**
+#### Napredna dokumentacija: Nadziranje, sigurnost i obrasci za višestruke agente
+**Ova verzija dodaje sveobuhvatne lekcije najviše kvalitete o integraciji Application Insights, obrascima autentifikacije i koordinaciji višestrukih agenata za proizvodne implementacije.**
 
 #### Dodano
-- **📊 Lekcija integracije Application Insights**: u `docs/pre-deployment/application-insights.md`:
-  - Fokusirano na AZD implementaciju s automatskim reprovizioniranjem
-  - Potpuni Bicep predlošci za Application Insights + Log Analytics
-  - Funkcionalne Python aplikacije s prilagođenom telemetrijom (1.200+ linija)
+- **📊 Lekcija o integraciji Application Insights**: u `docs/pre-deployment/application-insights.md`:
+  - Implementacija usredotočena na AZD s automatskim provizijama
+  - Cjeloviti Bicep predlošci za Application Insights + Log Analytics
+  - Radne Python aplikacije s prilagođenom telemetrijom (1,200+ redaka)
   - Obrasci nadzora AI/LLM (praćenje tokena/troškova Microsoft Foundry modela)
-  - 6 Mermaid dijagrama (arhitektura, distribuirano praćenje, protok telemetrije)
-  - 3 praktične vježbe (uzbune, nadzorne ploče, AI nadzor)
+  - 6 Mermaid dijagrama (arhitektura, distribuirano praćenje, tok telemetrije)
+  - 3 praktične vježbe (upozorenja, nadzorne ploče, AI nadzor)
   - Primjeri Kusto upita i strategije optimizacije troškova
-  - Striming metrika uživo i otklanjanje pogrešaka u stvarnom vremenu
-  - Vrijeme učenja 40-50 minuta s produkcijskim obrascima
+  - Streaming metrika uživo i debugiranje u stvarnom vremenu
+  - Vrijeme učenja 40-50 minuta s proizvodnim obrascima
 
-- **🔐 Lekcija o obrascima autentikacije i sigurnosti**: u `docs/getting-started/authsecurity.md`:
-  - 3 obrasca autentikacije (connection string, Key Vault, upravljani identitet)
-  - Potpuni Bicep predlošci infrastrukture za sigurna postavljanja
-  - Node.js aplikacijski kod s integracijom Azure SDK
-  - 3 potpune vježbe (omogućavanje upravljanog identiteta, korisnički dodijeljen identitet, rotacija Key Vaulta)
-  - Najbolje sigurnosne prakse i konfiguracije RBAC-a
+- **🔐 Lekcija o obrascima autentifikacije i sigurnosti**: u `docs/getting-started/authsecurity.md`:
+  - 3 obrasca autentifikacije (connection strings, Key Vault, upravljani identitet)
+  - Cjeloviti Bicep predlošci infrastrukture za sigurne implementacije
+  - Node.js kod aplikacije s Azure SDK integracijom
+  - 3 kompletne vježbe (omogućavanje upravljanog identiteta, korisnički dodijeljen identitet, rotacija Key Vault-a)
+  - Najbolje prakse sigurnosti i konfiguracija RBAC-a
   - Vodič za otklanjanje poteškoća i analiza troškova
-  - Produkcijski obrasci autentikacije bez lozinke
+  - Proizvodni obrasci autentifikacije bez lozinki
 
 - **🤖 Lekcija o obrascima koordinacije više agenata**: u `docs/pre-deployment/coordination-patterns.md`:
-  - 5 obrazaca koordinacije (sekvencijalni, paralelni, hijerarhijski, pokretan događajima, konsenzus)
-  - Potpuna implementacija servisa orkestratora (Python/Flask, 1.500+ linija)
-  - 3 specijalizirane implementacije agenata (istraživač, pisac, urednik)
-  - Integracija Service Bus za redove poruka
-  - Upravljanje stanjima Cosmos DB za distribuirane sustave
-  - 6 Mermaid dijagrama koji prikazuju interakcije agenata
-  - 3 napredne vježbe (obrada timeouta, logika ponavljanja, prekidač struje)
-  - Raspodjela troškova ($240-565/mjesečno) s optimizacijskim strategijama
-  - Integracija Application Insights za nadzor
+  - 5 obrazaca koordinacije (sekvencijalni, paralelni, hijerarhijski, događajno vođeni, konsenzus)
+  - Kompletna implementacija orkestratorske usluge (Python/Flask, 1,500+ redaka)
+  - 3 specijalizirane implementacije agenata (istraživanje, pisac, urednik)
+  - Integracija s Service Bus za redove poruka
+  - Upravljanje stanjem Cosmos DB za distribuirane sustave
+  - 6 Mermaid dijagrama prikazuju interakcije agenata
+  - 3 napredne vježbe (rukovanje timeout-om, logika ponovnog pokušaja, prekidač kruga)
+  - Razrada troškova (240-565 $/mjesečno) sa strategijama optimizacije
+  - Integracija s Application Insights za nadzor
 
 #### Poboljšano
-- **Poglavlje Prije postavljanja**: Sada uključuje sveobuhvatne obrasce nadzora i koordinacije
-- **Poglavlje Za početak**: Poboljšano profesionalnim obrascima autentikacije
-- **Spremnost za produkciju**: Potpuno obuhvaćena sigurnost i operabilnost
-- **Sadržaj tečaja**: Ažurirano s referencama na nove lekcije u poglavljima 3 i 6
+- **Poglavlje prije implementacije**: Sada uključuje sveobuhvatne obrasce nadzora i koordinacije
+- **Poglavlje za početak**: Poboljšano profesionalnim obrascima autentifikacije
+- **Spremnost za proizvodnju**: Potpuni pregled od sigurnosti do vidljivosti
+- **Okvir tečaja**: Ažuriran za referencu novih lekcija u Poglavljima 3 i 6
 
 #### Promijenjeno
 - **Progresija učenja**: Bolja integracija sigurnosti i nadzora kroz cijeli tečaj
-- **Kvaliteta dokumentacije**: Konzistentni standardi A razine (95-97%) u novim lekcijama
-- **Obrasci za produkciju**: Potpuna pokrivenost za enterprise postavljanja
+- **Kvaliteta dokumentacije**: Dosljedni A razredi standarda (95-97%) kroz nove lekcije
+- **Obrasci za proizvodnju**: Potpuni end-to-end pregled za enterprise implementacije
 
 #### Poboljšano
-- **Iskustvo programera**: Jasan put od razvoja do nadzora u produkciji
-- **Sigurnosni standardi**: Profesionalni obrasci za autentikaciju i upravljanje tajnama
-- **Operabilnost**: Potpuna integracija Application Insights s AZD
-- **AI opterećenja**: Specijalizirani nadzor za Microsoft Foundry modele i sustave s više agenata
+- **Iskustvo developera**: Jasan put od razvoja do nadzora proizvodnje
+- **Sigurnosni standardi**: Profesionalni obrasci za autentifikaciju i upravljanje tajnama
+- **Vidljivost**: Potpuna integracija Application Insights s AZD
+- **AI opterećenja**: Specijalizirani nadzor za Microsoft Foundry modele i sustave višestrukih agenata
 
-#### Održano
-- ✅ Sve lekcije uključuju potpuni radni kod (nije samo isječak)
+#### Potvrđeno
+- ✅ Sve lekcije uključuju cjeloviti radni kod (ne isječke)
 - ✅ Mermaid dijagrami za vizualno učenje (ukupno 19 kroz 3 lekcije)
-- ✅ Praktične vježbe s koracima provjere (ukupno 9)
-- ✅ Produkcijski Bicep predlošci postavljivi putem `azd up`
-- ✅ Analize troškova i strategije optimizacije
+- ✅ Praktične vježbe s koracima potvrde (ukupno 9)
+- ✅ Produkcijski Bicep predlošci spremni za implementaciju putem `azd up`
+- ✅ Analiza troškova i strategije optimizacije
 - ✅ Vodiči za otklanjanje poteškoća i najbolje prakse
-- ✅ Kontrolne točke znanja s naredbama za verifikaciju
+- ✅ Čvorišta znanja s naredbama za potvrdu
 
-#### Rezultati ocjenjivanja dokumentacije
+#### Rezultati ocjene dokumentacije
 - **docs/pre-deployment/application-insights.md**: - Sveobuhvatan vodič za nadzor
-- **docs/getting-started/authsecurity.md**: - Profesionalni obrasci sigurnosti
-- **docs/pre-deployment/coordination-patterns.md**: - Napredne arhitekture za više agenata
-- **Ukupno novi sadržaj**: - Konzistentni visokokvalitetni standardi
+- **docs/getting-started/authsecurity.md**: - Profesionalni sigurnosni obrasci
+- **docs/pre-deployment/coordination-patterns.md**: - Napredne arhitekture višestrukih agenata
+- **Ukupno novi sadržaj**: - Dosljedni visoki standardi kvalitete
 
-#### Tehnička provedba
+#### Tehnička implementacija
 - **Application Insights**: Log Analytics + prilagođena telemetrija + distribuirano praćenje
-- **Autentikacija**: Upravljani identitet + Key Vault + obrasci RBAC-a
-- **Više agenata**: Service Bus + Cosmos DB + Container Apps + orkestracija
-- **Nadzor**: Metričke podatke uživo + Kusto upiti + uzbune + nadzorne ploče
+- **Autentifikacija**: Upravljani identitet + Key Vault + RBAC obrasci
+- **Višestruki agenti**: Service Bus + Cosmos DB + Container Apps + orkestracija
+- **Nadzor**: Streaming metrika uživo + Kusto upiti + upozorenja + nadzorne ploče
 - **Upravljanje troškovima**: Strategije uzorkovanja, politike zadržavanja, kontrola budžeta
 
 ### [v3.7.0] - 2025-11-19
 
 #### Poboljšanja kvalitete dokumentacije i novi primjer Microsoft Foundry modela
-**Ova verzija poboljšava kvalitetu dokumentacije u cijelom spremištu i dodaje potpuni primjer postavljanja Microsoft Foundry modela s gpt-4.1 chat sučeljem.**
+**Ova verzija poboljšava kvalitetu dokumentacije u repo-u te dodaje cjeloviti primjer implementacije Microsoft Foundry modela s gpt-4.1 chat sučeljem.**
 
 #### Dodano
-- **🤖 Primjer chata Microsoft Foundry modela**: Potpuno postavljanje gpt-4.1 s funkcionalnom implementacijom u `examples/azure-openai-chat/`:
-  - Potpuna infrastruktura Microsoft Foundry modela (postavljanje gpt-4.1 modela)
-  - Python chat sučelje iz naredbenog retka s poviješću razgovora
-  - Integracija Key Vaulta za sigurno pohranjivanje API ključeva
-  - Praćenje upotrebe tokena i procjena troškova
-  - Ograničavanje brzine i rukovanje pogreškama
-  - Sveobuhvatan README s vodičem za postavljanje od 35-45 minuta
-  - 11 datoteka spremnih za produkciju (Bicep predlošci, Python app, konfiguracija)
-- **📚 Vježbe dokumentacije**: Dodane praktične vježbe za vodič konfiguracije:
-  - Vježba 1: Više okruženja konfiguracija (15 minuta)
-  - Vježba 2: Praksa upravljanja tajnama (10 minuta)
-  - Jasni kriteriji uspjeha i koraci verifikacije
-- **✅ Verifikacija postavljanja**: Dodan odjeljak za verifikaciju u vodič za postavljanje:
-  - Postupci provjere zdravlja
-  - Kontrolni popis kriterija uspjeha
-  - Očekivani izlazi za sve naredbe postavljanja
+- **🤖 Primjer chata Microsoft Foundry modela**: Potpuna implementacija gpt-4.1 s radnim primjerom u `examples/azure-openai-chat/`:
+  - Potpuna infrastruktura Microsoft Foundry modela (implementacija gpt-4.1 modela)
+  - Python chat sučelje za naredbeni redak s poviješću razgovora
+  - Integracija s Key Vault-om za sigurnu pohranu API ključeva
+  - Praćenje potrošnje tokena i procjena troškova
+  - Ograničavanje zahtjeva i rukovanje greškama
+  - Sveobuhvatan README s vodičem za implementaciju od 35-45 minuta
+  - 11 produkcijski spremnih datoteka (Bicep predlošci, Python aplikacija, konfiguracija)
+- **📚 Vježbe za dokumentaciju**: Dodane praktične vježbe u vodič za konfiguraciju:
+  - Vježba 1: konfiguracija za više okruženja (15 minuta)
+  - Vježba 2: praksa upravljanja tajnama (10 minuta)
+  - Jasni kriteriji uspjeha i koraci potvrde
+- **✅ Verifikacija implementacije**: Dodan odjeljak potvrde u vodič za implementaciju:
+  - Postupci za provjeru zdravlja sustava
+  - Popis kriterija uspjeha
+  - Očekivani izlazi za sve implementacijske naredbe
   - Brza referenca za otklanjanje poteškoća
 
 #### Poboljšano
-- **examples/README.md**: Ažurirano na kvalitetu A razine (93%):
-  - Dodan azure-openai-chat u sve relevantne odjeljke
+- **examples/README.md**: Ažuriran na kvalitetu razreda A (93%):
+  - Dodan azure-openai-chat u sve relevantne sekcije
   - Ažuriran broj lokalnih primjera s 3 na 4
-  - Dodan u tablicu AI primjera aplikacija
-  - Integriran u Quick Start za srednjo napredne korisnike
-  - Dodan u Microsoft Foundry Templates odjeljak
-  - Ažurirana matrica usporedbe i odjeljci s tehničkim pronalascima
-- **Kvaliteta dokumentacije**: Poboljšano s B+ (87%) → A- (92%) u mapi docs:
-  - Dodani očekivani izlazi u ključne primjere naredbi
-  - Uključeni koraci za verifikaciju promjena konfiguracije
+  - Dodano u tablicu primjera AI aplikacija
+  - Integrirano u brzo pokretanje za srednje korisnike
+  - Dodano u odjeljak Microsoft Foundry predložaka
+  - Ažurirane sekcije usporednog matriksa i pronalaženja tehnologija
+- **Kvaliteta dokumentacije**: Poboljšano iz B+ (87%) u A- (92%) kroz folder docs:
+  - Dodani očekivani izlazi za kritične primjere naredbi
+  - Uključeni koraci verifikacije za promjene konfiguracije
   - Poboljšano praktično učenje s vježbama
 
 #### Promijenjeno
-- **Progresija učenja**: Bolja integracija AI primjera za srednjo napredne učenike
-- **Struktura dokumentacije**: Akcionije vježbe s jasnim rezultatima
-- **Proces verifikacije**: Eksplitični kriteriji uspjeha dodani ključnim procesima
+- **Napredak u učenju**: Bolja integracija AI primjera za srednje napredne korisnike
+- **Struktura dokumentacije**: Više praktičnih vježbi s jasnim ishodima
+- **Proces verifikacije**: Dodani eksplicitni kriteriji uspjeha za ključne radne tokove
 
 #### Poboljšano
-- **Iskustvo programera**: Postavljanje Microsoft Foundry modela sada traje 35-45 minuta (u odnosu na 60-90 za složenije alternative)
-- **Transparentnost troškova**: Jasne procjene troškova ($50-200/mjesečno) za primjer Microsoft Foundry modela
+- **Iskustvo programera**: Deploy Microsoft Foundry Modela sada traje 35-45 minuta (u odnosu na 60-90 za složenije alternative)
+- **Transparentnost troškova**: Jasne procjene troškova (50-200 $/mjesečno) za primjer Microsoft Foundry Modela
 - **Put učenja**: AI programeri imaju jasan početak s azure-openai-chat
-- **Standardi dokumentacije**: Konzistentni očekivani izlazi i koraci verifikacije
+- **Standardi dokumentacije**: Dosljedni očekivani izlazi i koraci verifikacije
 
-#### Potvrđeno
-- ✅ Microsoft Foundry Models primjer u potpunosti funkcionalan s `azd up`
-- ✅ Sve 11 implementacijske datoteke sintaktički ispravne
-- ✅ Upute u README se slažu s stvarnim iskustvom postavljanja
-- ✅ Poveznice u dokumentaciji ažurirane na 8+ lokacija
+#### Validirano
+- ✅ Primjer Microsoft Foundry Modela potpuno funkcionalan s `azd up`
+- ✅ Sve 11 implementacijskih datoteka sintaktički ispravne
+- ✅ Upute u README-u usklađene sa stvarnim iskustvom deploya
+- ✅ Ažurirani linkovi za dokumentaciju na više od 8 mjesta
 - ✅ Indeks primjera točno prikazuje 4 lokalna primjera
-- ✅ Nema ponovljenih vanjskih poveznica u tablicama
-- ✅ Sve reference navigacije ispravne
+- ✅ Nema dupliciranih eksternih linkova u tablicama
+- ✅ Sve navigacijske reference ispravne
 
-#### Tehnička provedba
-- **Arhitektura Microsoft Foundry modela**: gpt-4.1 + Key Vault + Container Apps obrazac
-- **Sigurnost**: Spreman upravljani identitet, tajne u Key Vaultu
-- **Nadzor**: Integracija Application Insights
-- **Upravljanje troškovima**: Praćenje tokena i optimizacija upotrebe
-- **Postavljanje**: Jedinstvena `azd up` naredba za cjelokupnu konfiguraciju
+#### Tehnička implementacija
+- **Arhitektura Microsoft Foundry Modela**: gpt-4.1 + Key Vault + Container Apps obrazac
+- **Sigurnost**: Managed Identity spreman, tajne u Key Vaultu
+- **Nadzor**: Integracija s Application Insights
+- **Upravljanje troškovima**: Praćenje tokena i optimizacija korištenja
+- **Implementacija**: Jedna naredba `azd up` za kompletno postavljanje
 
 ### [v3.6.0] - 2025-11-19
 
-#### Veliko ažuriranje: Primjeri postavljanja Container App aplikacija
-**Ova verzija uvodi sveobuhvatne, produkcijski spremne primjere postavljanja kontejnerskih aplikacija koristeći Azure Developer CLI (AZD), s punom dokumentacijom i integracijom u put učenja.**
+#### Glavna nadogradnja: Primjeri deploya Container App-a
+**Ova verzija donosi sveobuhvatne, spremne za produkciju primjere deploya containera koristeći Azure Developer CLI (AZD), s potpunom dokumentacijom i integracijom u put učenja.**
 
 #### Dodano
-- **🚀 Primjeri Container App aplikacija**: Novi lokalni primjeri u `examples/container-app/`:
-  - [Glavni vodič](examples/container-app/README.md): Potpun pregled kontejneriziranih implementacija, brzi početak, produkcija i napredni obrasci
-  - [Jednostavan Flask API](../../examples/container-app/simple-flask-api): REST API prilagođen početnicima s mjerenjem na nulu, zdravstvenim sondama, nadzorom i otklanjanjem poteškoća
-  - [Mikroservisna arhitektura](../../examples/container-app/microservices): Produkcijski spremna implementacija s više servisa (API Gateway, Product, Order, User, Notification), asinkrono poručivanje, Service Bus, Cosmos DB, Azure SQL, distribuirano praćenje, plavo-zelena/canary implementacija
-- **Najbolje prakse**: Sigurnost, nadzor, optimizacija troškova i smjernice za CI/CD za kontejnerizirane radne opterećenja
-- **Primjeri koda**: Potpuni `azure.yaml`, Bicep predlošci i implementacije servisa na više jezika (Python, Node.js, C#, Go)
-- **Testiranje i otklanjanje poteškoća**: Scenariji testiranja od kraja do kraja, naredbe za nadzor, smjernice za otklanjanje poteškoća
+- **🚀 Primjeri Container App-a**: Novi lokalni primjeri u `examples/container-app/`:
+  - [Master Guide](examples/container-app/README.md): Kompletan pregled containeriziranih deploya, brz početak, produkcija i napredni obrasci
+  - [Jednostavni Flask API](../../examples/container-app/simple-flask-api): Početnički REST API s scale-to-zero, health probeovima, nadzorom i dijagnostikom
+  - [Arhitektura Mikroservisa](../../examples/container-app/microservices): Produkcijski multi-service deploy (API Gateway, Product, Order, User, Notification), async poruke, Service Bus, Cosmos DB, Azure SQL, distribuirano praćenje, blue-green/canary deploy
+- **Best Practices**: Sigurnost, nadzor, optimizacija troškova i CI/CD upute za container workloads
+- **Primjeri koda**: Potpuni `azure.yaml`, Bicep template-i i višelingvijalne implementacije servisa (Python, Node.js, C#, Go)
+- **Testiranje i dijagnostika**: End-to-end testni scenariji, naredbe za nadzor, smjernice za otklanjanje problema
 
-#### Izmijenjeno
-- **README.md**: Ažuriran za prikaz i povezivanje novih prikaza kontejnerskih aplikacija pod "Lokalni primjeri - Kontejnerske aplikacije"
-- **examples/README.md**: Ažuriran za isticanje primjera kontejnerskih aplikacija, dodavanje unosa matrice usporedbe i ažuriranje referenci na tehnologiju/arhitekturu
-- **Plan tečaja i vodič za proučavanje**: Ažuriran za referenciranje novih primjera kontejnerskih aplikacija i obrazaca implementacije u relevantnim poglavljima
+#### Promijenjeno
+- **README.md**: Ažuriran da uključi i poveže nove primjere container applikacija pod "Local Examples - Container Applications"
+- **examples/README.md**: Ažuriran za isticanje primjera container aplikacija, dodavanje usporednih matrica i ažuriranje tehnoloških/arhitektonskih referenci
+- **Plan i vodič za učenje**: Ažuriran za referenciranje novih primjera container aplikacija i obrazaca deploya u relevantnim poglavljima
 
 #### Validirano
-- ✅ Svi novi primjeri mogu se implementirati s `azd up` i prate najbolje prakse
-- ✅ Prelazne poveznice u dokumentaciji i navigacija ažurirani
-- ✅ Primjeri pokrivaju scenarije od početničkih do naprednih, uključujući produkcijske mikroservise
+- ✅ Svi novi primjeri moguće su implementirati s `azd up` i slijede najbolje prakse
+- ✅ Ažurirane unakrsne reference i navigacija u dokumentaciji
+- ✅ Primjeri obuhvaćaju scenarije od početničkih do naprednih, uključujući produkcijske mikroservise
 
-#### Bilješke
-- **Opseg**: Samo engleska dokumentacija i primjeri
-- **Sljedeći koraci**: Proširiti dodatnim naprednim obrascima kontejnera i automatizacijom CI/CD u budućim izdanjima
+#### Napomene
+- **Opseg**: Dokumentacija i primjeri samo na engleskom jeziku
+- **Sljedeći koraci**: Proširenje s dodatnim naprednim container obrascima i CI/CD automatizacijom u budućim izdanjima
 
 ### [v3.5.0] - 2025-11-19
 
-#### Rebrendiranje proizvoda: Microsoft Foundry
-**Ova verzija provodi sveobuhvatnu promjenu naziva proizvoda s "Microsoft Foundry" na "Microsoft Foundry" u cijeloj engleskoj dokumentaciji, odražavajući službeno rebrendiranje Microsofta.**
+#### Rebranding proizvoda: Microsoft Foundry
+**Ova verzija uvodi sveobuhvatnu promjenu naziva proizvoda s "Microsoft Foundry" na "Microsoft Foundry" kroz svu englesku dokumentaciju, u skladu s službenim Microsoftovim rebrendingom.**
 
-#### Izmijenjeno
-- **🔄 Ažuriranje naziva proizvoda**: Potpuno rebrendiranje s "Microsoft Foundry" na "Microsoft Foundry"
-  - Ažurirane sve reference kroz englesku dokumentaciju u `docs/` mapi
-  - Preimenovana mapa: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+#### Promijenjeno
+- **🔄 Ažuriranje naziva proizvoda**: Potpuni rebranding od "Microsoft Foundry" do "Microsoft Foundry"
+  - Ažurirane sve reference u engl. dokumentaciji u folderu `docs/`
+  - Preimenovan folder: `docs/ai-foundry/` → `docs/microsoft-foundry/`
   - Preimenovana datoteka: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Ukupno: 23 reference sadržaja ažurirane u 7 datoteka dokumentacije
+  - Ukupno: 23 reference ažurirane u 7 dokumentacijskih datoteka
 
-- **📁 Promjene strukture mapa**:
-  - `docs/ai-foundry/` preimenovana u `docs/microsoft-foundry/`
-  - Sve međureferencije ažurirane za odražavanje nove strukture mapa
-  - Navigacijske poveznice potvrđene kroz svu dokumentaciju
+- **📁 Promjene strukture foldera**:
+  - `docs/ai-foundry/` preimenovan u `docs/microsoft-foundry/`
+  - Sve unakrsne reference ažurirane za novu strukturu foldera
+  - Navigacijski linkovi provjereni kroz cijelu dokumentaciju
 
 - **📄 Preimenovanja datoteka**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Sve interne poveznice ažurirane za nove nazive datoteka
+  - Svi interni linkovi ažurirani na novi naziv datoteke
 
 #### Ažurirane datoteke
 - **Dokumentacija poglavlja** (7 datoteka):
-  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 ažuriranja navigacijskih poveznica
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 ažuriranja naziva proizvoda
+  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 ažuriranja navigacijskih linkova
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 reference naziva proizvoda ažurirane
   - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Već koristi Microsoft Foundry (iz prethodnih ažuriranja)
-  - `docs/microsoft-foundry/production-ai-practices.md` - 3 ažurirane reference (pregled, povratne informacije zajednice, dokumentacija)
-  - `docs/getting-started/azd-basics.md` - 4 ažurirane međureferencijske poveznice
-  - `docs/getting-started/first-project.md` - 2 ažurirane navigacijske poveznice poglavlja
-  - `docs/getting-started/installation.md` - 2 ažurirane poveznice za sljedeće poglavlje
-  - `docs/troubleshooting/ai-troubleshooting.md` - 3 ažurirane reference (navigacija, Discord zajednica)
-  - `docs/troubleshooting/common-issues.md` - 1 ažurirana navigacijska poveznica
-  - `docs/troubleshooting/debugging.md` - 1 ažurirana navigacijska poveznica
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 reference ažurirane (pregled, povratne informacije zajednice, dokumentacija)
+  - `docs/getting-started/azd-basics.md` - 4 ažuriranja unakrsnih linkova
+  - `docs/getting-started/first-project.md` - 2 ažuriranja navigacijskih linkova poglavlja
+  - `docs/getting-started/installation.md` - 2 ažuriranja linkova za sljedeća poglavlja
+  - `docs/troubleshooting/ai-troubleshooting.md` - 3 reference ažurirane (navigacija, Discord zajednica)
+  - `docs/troubleshooting/common-issues.md` - 1 ažuriranje navigacijskog linka
+  - `docs/troubleshooting/debugging.md` - 1 ažuriranje navigacijskog linka
 
-- **Datoteke strukture tečaja** (2 datoteke):
-  - `README.md` - 17 ažuriranih referenci (pregled tečaja, naslovi poglavlja, odjeljak predložaka, uvidi zajednice)
+- **Struktura tečaja** (2 datoteke):
+  - `README.md` - 17 ažuriranih referenci (pregled tečaja, naslovi poglavlja, odjeljak predložaka, korisna mišljenja zajednice)
   - `course-outline.md` - 14 ažuriranih referenci (pregled, ciljevi učenja, resursi poglavlja)
 
 #### Validirano
-- ✅ Nema preostalih referenci "ai-foundry" mape u engleskoj dokumentaciji
-- ✅ Nema preostalih referenci naziva proizvoda "Microsoft Foundry" u engleskoj dokumentaciji
-- ✅ Sve navigacijske poveznice funkcioniraju s novom strukturom mapa
-- ✅ Preimenovanja datoteka i mapa uspješno završena
-- ✅ Međureferencije između poglavlja potvrđene
+- ✅ Nema preostalih referenci na folder putanju "ai-foundry" u engleskoj dokumentaciji
+- ✅ Nema preostalih referenci na naziv proizvoda "Microsoft Foundry" u engleskoj dokumentaciji
+- ✅ Svi navigacijski linkovi funkcionalni s novom strukturom foldera
+- ✅ Preimenovanja datoteka i foldera uspješno završena
+- ✅ Unakrsne reference između poglavlja provjerene
 
-#### Bilješke
-- **Opseg**: Promjene primijenjene samo u engleskoj dokumentaciji u `docs/` mapi
-- **Prijevodi**: Mape prijevoda (`translations/`) nisu ažurirane u ovoj verziji
-- **Radionica**: Materijali radionice (`workshop/`) nisu ažurirani u ovoj verziji
-- **Primjeri**: Datoteke primjera mogu još uvijek sadržavati nasljedne nazive (bit će riješeno u budućem ažuriranju)
-- **Vanjske poveznice**: Vanjski URL-ovi i GitHub repozitoriji ostaju nepromijenjeni
+#### Napomene
+- **Opseg**: Promjene primijenjene samo na englesku dokumentaciju u folderu `docs/`
+- **Prijevodi**: Folderi prijevoda (`translations/`) nisu ažurirani u ovoj verziji
+- **Radionice**: Materijali radionica (`workshop/`) nisu ažurirani u ovoj verziji
+- **Primjeri**: Primjerni fajlovi još mogu sadržavati stare nazive (bit će otklonjeno u budućim ažuriranjima)
+- **Eksterni linkovi**: Eksterni URL-ovi i referencije GitHub repozitorija ostaju nepromijenjeni
 
 #### Vodič za migraciju za suradnike
-Ako imate lokalne grane ili dokumentaciju koja referencira staru strukturu:
-1. Ažurirajte reference mapa: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+Ako imate lokalne brancheve ili dokumentaciju koja referencira staru strukturu:
+1. Ažurirajte reference foldera: `docs/ai-foundry/` → `docs/microsoft-foundry/`
 2. Ažurirajte reference datoteka: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
 3. Zamijenite naziv proizvoda: "Microsoft Foundry" → "Microsoft Foundry"
-4. Provjerite da sve interne poveznice u dokumentaciji i dalje rade
+4. Provjerite da svi interni linkovi u dokumentaciji i dalje funkcioniraju
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### Poboljšanja pregleda i validacije infrastrukture
-**Ova verzija uvodi opsežnu podršku za novu preview značajku Azure Developer CLI i poboljšava korisničko iskustvo radionice.**
+#### Unapređenja pregleda infrastrukture i validacije
+**Ova verzija uvodi sveobuhvatnu podršku za novu preview funkciju Azure Developer CLI-ja i poboljšava korisničko iskustvo radionica.**
 
 #### Dodano
-- **🧪 Dokumentacija značajke azd provision --preview**: Detaljan opis nove mogućnosti pregleda infrastrukture
-  - Referenca naredbi i primjeri korištenja u praktičnom vodiču
-  - Detaljna integracija u vodiču za provision s upotrebom i prednostima
-  - Integracija provjere prije leta za sigurniju validaciju implementacije
-  - Ažuriranja vodiča za početak rada s praksama sigurnosti za prvo implementiranje
+- **🧪 azd provision --preview funkcijska dokumentacija**: Potpuni opis nove mogućnosti pregleda infrastrukture
+  - Referenca naredbi i primjeri korištenja u cheat sheetu
+  - Detaljna integracija u vodiču za provision s primjerima upotrebe i koristima
+  - Integracija pre-flight provjera radi sigurnijeg deploya
+  - Ažuriranja vodiča za početnike s praktičnim preporukama za sigurnost
 - **🚧 Banner statusa radionice**: Profesionalni HTML banner koji označava status razvoja radionice
-  - Dizajn s gradijentom i indikatorima izgradnje za jasnu komunikaciju korisnicima
-  - Zapis o posljednjem ažuriranju radi transparentnosti
-  - Dizajn prilagođen mobilnim uređajima svih tipova
+  - Dizajn u gradijentu s indikatorima izrade za jasnu komunikaciju korisnicima
+  - Označeno vrijeme posljednjeg ažuriranja radi transparentnosti
+  - Dizajn prilagođen mobilnim uređajima
 
 #### Poboljšano
-- **Sigurnost infrastrukture**: Pregled funkcionalnosti integriran kroz cijelu dokumentaciju implementacije
-- **Validacija prije implementacije**: Automatizirani skripti sad uključuju testiranje infrastrukture u preview modu
-- **Radni tok developera**: Ažurirane sekvence naredbi koje uklјučuju preview kao najbolju praksu
-- **Iskustvo radionice**: Jasna obavijest korisnicima o statusu razvoja sadržaja
+- **Sigurnost infrastrukture**: Preview funkcionalnost integrirana kroz svu dokumentaciju deploya
+- **Validacija prije deploya**: Automatizirani skripti sada uključuju testiranje infrastrukture u preview modu
+- **Radni tok programera**: Ažurirane naredbe s uključivanjem previewa kao najbolje prakse
+- **Iskustvo radionice**: Jasan prikaz očekivanja za korisnike o statusu razvoja sadržaja
 
-#### Izmijenjeno
-- **Najbolje prakse implementacije**: Preporučeni pristup sada je workflow s prioritetom na preview
-- **Tok dokumentacije**: Validacija infrastrukture premještena ranije u proces učenja
-- **Prezentacija radionice**: Profesionalna komunikacija statusa s jasnim vremenskim okvirom razvoja
+#### Promijenjeno
+- **Najbolje prakse deploya**: Preporučen pristup s pregledom (preview-first workflow)
+- **Tok dokumentacije**: Validacija infrastrukture premještena ranije u procesu učenja
+- **Prezentacija radionice**: Profesionalna komunikacija statusa s jasnim planom razvoja
 
 #### Poboljšano
-- **Pristup usmjeren na sigurnost**: Sada je moguće validirati promjene infrastrukture prije implementacije
-- **Timsku suradnju**: Rezultate pregleda moguće dijeliti na ocjenu i odobrenje
-- **Svesnost troškova**: Bolje razumjevanje troškova resursa prije provisioninga
-- **Ublažavanje rizika**: Smanjenje neuspjeha implementacije zahvaljujući naprednoj validaciji
+- **Pristup sigurnosti na prvom mjestu**: Infrastrukturne promjene moguće prije validirati prije deploya
+- **Timsku suradnju**: Rezultate previewa moguće dijeliti radi pregleda i odobrenja
+- **Svijest o troškovima**: Bolje razumijevanje troškova resursa prije provisioninga
+- **Smanjenje rizika**: Manje grešaka u deployu zahvaljujući pred-validaciji
 
 #### Tehnička implementacija
-- **Integracija više dokumenata**: Opis preview značajke u 4 ključne datoteke
-- **Obrasci naredbi**: Konzistentna sintaksa i primjeri kroz cijelu dokumentaciju
-- **Integracija najbolje prakse**: Preview uključen u validacijske radne tokove i skripte
-- **Vizualne oznake**: Jasna oznaka NOVE značajke radi bolje vidljivosti
+- **Integracija kroz više dokumenata**: Preview funkcija obuhvaćena u 4 ključna dokumenta
+- **Obrasci naredbi**: Dosljedna sintaksa i primjeri kroz čitavu dokumentaciju
+- **Integracija najboljih praksi**: Preview uključen u validacijske tokove i skripte
+- **Vizualni indikatori**: Jasne oznake NOVIH funkcija za olakšanu prepoznatljivost
 
 #### Infrastruktura radionice
 - **Komunikacija statusa**: Profesionalni HTML banner s gradijentnim stilom
-- **Korisničko iskustvo**: Jasan status razvoja sprječava zabunu
-- **Profesionalna prezentacija**: Održava povjerenje u repozitorij istovremeno postavljajući očekivanja
-- **Transparentnost vremenskog okvira**: Označeno kao zadnje ažuriranje u listopadu 2025. radi odgovornosti
+- **Korisničko iskustvo**: Jasan razvojni status sprječava konfuziju
+- **Profesionalna prezentacija**: Održava kredibilitet repozitorija uz postavljanje očekivanja
+- **Transparentnost vremenskih okvira**: Označeno zadnje ažuriranje u listopadu 2025. radi odgovornosti
 
 ### [v3.3.0] - 2025-09-24
 
-#### Poboljšani materijali radionice i interaktivno učenje
-**Ova verzija uvodi opsežne materijale radionice s vodičima baziranim na pregledniku i strukturiranim putovima učenja.**
+#### Poboljšani materijali radionice i interaktivno iskustvo učenja
+**Ova verzija donosi sveobuhvatne materijale za radionicu s interaktivnim vodičima u pregledniku i strukturiranim putovima učenja.**
 
 #### Dodano
-- **🎥 Interaktivni vodič za radionicu**: Radionica u pregledniku s mogućnošću pregleda MkDocs
-- **📝 Strukturirane upute radionice**: 7-korak vođeni put učenja od otkrivanja do prilagodbe
-  - 0-Uvod: Pregled i postavljanje radionice
-  - 1-Odabir AI predloška: Proces pronalaženja i odabira predloška
-  - 2-Validacija AI predloška: Postupci implementacije i validacije
-  - 3-Razgradnja AI predloška: Razumijevanje arhitekture predloška
-  - 4-Konfiguracija AI predloška: Postavke i prilagodba
+- **🎥 Interaktivni vodič za radionicu**: Radionica u pregledniku s podrškom MkDocs previewa
+- **📝 Strukturirane upute radionice**: 7-korak vođen put učenja od otkrivanja do prilagodbe
+  - 0-Uvod: Pregled radionice i postavljanje
+  - 1-Selektiranje AI predloška: Proces pronalaska i izbora predloška
+  - 2-Validacija AI predloška: Postupci za deploy i verifikaciju
+  - 3-Razlaganje AI predloška: Razumijevanje arhitekture predloška
+  - 4-Konfiguracija AI predloška: Konfiguracija i prilagodbe
   - 5-Prilagodba AI predloška: Napredne modifikacije i iteracije
-  - 6-Uklanjanje infrastrukture: Čišćenje i upravljanje resursima
-  - 7-Završetak: Sažetak i sljedeći koraci
-- **🛠️ Alati radionice**: MkDocs konfiguracija s Material temom za poboljšano iskustvo učenja
-- **🎯 Praktični put učenja**: 3-korak metodologija (Otkrivanje → Implementacija → Prilagodba)
-- **📱 Integracija GitHub Codespaces**: Neprimjetno postavljanje razvojne okoline
+  - 6-Razgradnja infrastrukture: Čišćenje i upravljanje resursima
+  - 7-Zaključak: Sažetak i daljnji koraci
+- **🛠️ Alat za radionicu**: MkDocs konfiguracija s Material temom za poboljšano iskustvo učenja
+- **🎯 Put prakse učenja**: 3-korak metodologija (Otkrivanje → Deploy → Prilagodba)
+- **📱 Integracija GitHub Codespaces**: Besprijekorno postavljanje razvojnih okruženja
 
 #### Poboljšano
-- **AI laboratorij radionice**: Proširen s opsežnim 2-3 satnim strukturiranim učenjem
+- **AI laboratorij radionice**: Proširen s opsežnim 2-3 satnim strukturiranim iskustvom učenja
 - **Dokumentacija radionice**: Profesionalna prezentacija s navigacijom i vizualnim pomagalima
-- **Napredak u učenju**: Jasne upute korak po korak od odabira predloška do produkcijske implementacije
-- **Iskustvo developera**: Integrirani alati za pojednostavljene razvojne radne tokove
+- **Napredak u učenju**: Jasno vođstvo korak-po-korak od izbora predloška do produkcijskog deploya
+- **Iskustvo programera**: Integrirani alati za učinkovitije radne tokove razvoja
 
 #### Poboljšano
-- **Pristupačnost**: Sučelje u pregledniku s pretraživanjem, funkcijom kopiranja i promjenom teme
-- **Učenje vlastitim tempom**: Fleksibilna struktura radionice koja podržava različite brzine učenja
-- **Praktična primjena**: Implementacijski scenariji stvarnog svijeta za AI predloške
-- **Integracija zajednice**: Integracija Discord zajednice za podršku i suradnju na radionici
+- **Pristupačnost**: Sučelje u pregledniku s pretragom, funkcijom kopiranja i izborom teme
+- **Učenje vlastitim tempom**: Fleksibilna struktura radionice za različite brzine učenja
+- **Praktična primjena**: Scenariji implementacije AI predložaka iz stvarnog života
+- **Integracija zajednice**: Discord integracija za podršku radionici i suradnju
 
 #### Značajke radionice
-- **Ugrađeno pretraživanje**: Brzo pronalaženje ključnih riječi i lekcija
-- **Kopiranje blokova koda**: Funkcija kopiranja pri prelasku mišem za sve primjere koda
-- **Prekidač teme**: Podrška za tamni/svjetli način rada prema preferencijama
-- **Vizualni elementi**: Snimke zaslona i dijagrami za bolje razumijevanje
-- **Integracija pomoći**: Izravni pristup Discord zajednici za podršku
+- **Ugrađena pretraga**: Brzo pronalaženje ključnih riječi i lekcija
+- **Kopiranje blokova koda**: Funkcija kopiranja kod primjera s mišem iznad
+- **Izbor teme**: Podrška za tamni/svijetli način rada prema preferencijama
+- **Vizualni sadržaji**: Screenshoti i dijagrami za bolje razumijevanje
+- **Integracija pomoći**: Direktan pristup Discord zajednici za podršku
 
 ### [v3.2.0] - 2025-09-17
 
-#### Velika reorganizacija navigacije i sustav učenja po poglavljima
-**Ova verzija uvodi sveobuhvatan sustav učenja po poglavljima s poboljšanom navigacijom kroz cijeli repozitorij.**
+#### Velika reorganizacija navigacije i sustav učenja baziran na poglavljima
+**Ova verzija uvodi sveobuhvatan sustav učenja strukturiran kroz poglavlja s poboljšanom navigacijom kroz cijeli repozitorij.**
 
 #### Dodano
-- **📚 Sustav učenja po poglavljima**: Cijeli tečaj restrukturiran u 8 progresivnih poglavlja
-  - Poglavlje 1: Osnove i brzi početak (⭐ - 30-45 min)
-  - Poglavlje 2: AI-prvo razvoj (⭐⭐ - 1-2 sata)
-  - Poglavlje 3: Konfiguracija i autentikacija (⭐⭐ - 45-60 min)
-  - Poglavlje 4: Infrastructure as Code i implementacija (⭐⭐⭐ - 1-1,5 sati)
-  - Poglavlje 5: Višeagentna AI rješenja (⭐⭐⭐⭐ - 2-3 sata)
-  - Poglavlje 6: Validacija i planiranje prije implementacije (⭐⭐ - 1 sat)
-  - Poglavlje 7: Otklanjanje poteškoća i debugiranje (⭐⭐ - 1-1,5 sati)
-  - Poglavlje 8: Produkcijski i korporativni obrasci (⭐⭐⭐⭐ - 2-3 sata)
-- **📚 Sveobuhvatan navigacijski sustav**: Dosljedni navigacijski zaglavlja i podnožja kroz cijelu dokumentaciju
-- **🎯 Praćenje napretka**: Lista za provjeru završetka tečaja i sustav provjere učenja
-- **🗺️ Upute za put učenja**: Jasne početne točke za različite razine iskustva i ciljeve
-- **🔗 Navigacija međureferencama**: Jasno povezano povezivanje povezanih poglavlja i preduvjeta
+- **📚 Sustav učenja po poglavljima**: Cijeli tečaj restrukturiran u 8 progresivnih poglavlja za učenje
+  - Poglavlje 1: Temelji i brz početak (⭐ - 30-45 minuta)
+  - Poglavlje 2: AI-prvo programiranje (⭐⭐ - 1-2 sata)
+  - Poglavlje 3: Konfiguracija i autentikacija (⭐⭐ - 45-60 minuta)
+  - Poglavlje 4: Infrastruktur kao kod & Deploy (⭐⭐⭐ - 1-1.5 sati)
+  - Poglavlje 5: Rješenja s više AI agenata (⭐⭐⭐⭐ - 2-3 sata)
+  - Poglavlje 6: Validacija i planiranje prije deploya (⭐⭐ - 1 sat)
+  - Poglavlje 7: Otklanjanje problema i ispravljanje grešaka (⭐⭐ - 1-1.5 sati)
+  - Poglavlje 8: Produkcijski i enterprise obrasci (⭐⭐⭐⭐ - 2-3 sata)
+- **📚 Sveobuhvatan navigacijski sustav**: Dosljedni zaglavlja i podnožja navigacije u cijeloj dokumentaciji
+- **🎯 Praćenje napretka**: Lista za provjeru završetka tečaja i sustav verificiranja učenja
+- **🗺️ Smjernice za put učenja**: Jasni početni koraci za različite razine iskustva i ciljeve
+- **🔗 Unakrsna navigacija**: Povezana poglavlja i jasne preduvjete
 
 #### Poboljšano
-- **Struktura README-a**: Pretvorena u strukturiranu platformu za učenje s organizacijom po poglavljima
-- **Navigacija dokumentacije**: Svaka stranica sada uključuje kontekst poglavlja i upute za napredak
+- **Struktura README-a**: Pretvorena u strukturiranu platformu za učenje organiziranu po poglavljima
+- **Navigacija dokumentacijom**: Svaka stranica sada uključuje kontekst poglavlja i smjernice napretka
 - **Organizacija predložaka**: Primjeri i predlošci mapirani u odgovarajuća poglavlja za učenje
-- **Integracija resursa**: Prečaci, FAQ i vodiči za proučavanje povezani s relevantnim poglavljima
-- **Integracija radionice**: Praktične laboratorije mapirane s ciljevima učenja u više poglavlja
+- **Integracija resursa**: Cheat sheet-ovi, često postavljana pitanja i vodiči povezani uz relevantna poglavlja
+- **Integracija radionica**: Praktične laboratorijske vježbe mapirane na više ciljeva učenja po poglavljima
 
-#### Izmijenjeno
-- **Napredak u učenju**: Premještanje s linearne dokumentacije na fleksibilno učenje po poglavljima
-- **Smještaj konfiguracije**: Vodič za konfiguraciju premješten u Poglavlje 3 za bolji tijek učenja
-- **Integracija AI sadržaja**: Bolja integracija AI specifičnog sadržaja kroz cijeli proces učenja
-- **Produkcijski sadržaj**: Napredni obrasci objedinjeni u Poglavlju 8 za korporativne korisnike
+#### Promijenjeno
+- **Progres u učenju**: Premješteno s linearne dokumentacije na fleksibilno učenje po poglavljima
+- **Smještaj konfiguracije**: Vodič za konfiguraciju premješten u Poglavlje 3 radi boljeg toka učenja
+- **Integracija AI sadržaja**: Bolja integracija sadržaja specifičnih za AI kroz cijelo putovanje učenja
+- **Sadržaj za produkciju**: Napredni obrasci objedinjeni u Poglavlju 8 za učenike iz poduzeća
 
 #### Poboljšano
-- **Korisničko iskustvo**: Jasne oznake navigacije i pokazatelji napretka kroz poglavlja
-- **Pristupačnost**: Dosljedni obrasci navigacije radi lakšeg kretanja po tečaju
-- **Profesionalna prezentacija**: Struktura tečaja u stilu sveučilišta prikladna za akademsku i korporativnu edukaciju
-- **Učinkovitost učenja**: Smanjeno vrijeme pronalaska relevantnog sadržaja kroz poboljšanu organizaciju
+- **Korisničko iskustvo**: Jasni putokazi navigacije i indikatori napretka po poglavljima
+- **Pristupačnost**: Dosljedni obrasci navigacije za lakše prolaz kroz tečaj
+- **Profesionalna prezentacija**: Struktura tečaja u stilu sveučilišta pogodna za akademsko i korporativno obrazovanje
+- **Učinkovitost učenja**: Smanjeno vrijeme za pronalaženje relevantnog sadržaja kroz poboljšanu organizaciju
 
 #### Tehnička implementacija
-- **Navigacijska zaglavlja**: Standardizirana navigacija po poglavljima kroz 40+ datoteka dokumentacije
-- **Navigacija podnožja**: Dosljedne upute za napredak i pokazatelji završetka poglavlja
-- **Međupovezivanje**: Sveobuhvatan sustav internih poveznica koji povezuje povezane koncepte
+- **Zaglavlja navigacije**: Standardizirana navigacija po poglavljima u više od 40 dokumentacijskih datoteka
+- **Navigacija u podnožju**: Dosljedna uputa za napredak i indikatori završetka poglavlja
+- **Međusobno povezivanje**: Sveobuhvatan sustav unutarnjih poveznica koji povezuje povezane koncepte
 - **Mapiranje poglavlja**: Predlošci i primjeri jasno povezani s ciljevima učenja
 
-#### Poboljšanje vodiča za proučavanje
-- **📚 Sveobuhvatni ciljevi učenja**: Restrukturiran vodič za proučavanje usklađen s 8-poglavnim sustavom
-- **🎯 Procjena po poglavljima**: Svako poglavlje uključuje specifične ciljeve učenja i praktične zadatke
-- **📋 Praćenje napretka**: Tjedni plan učenja s mjerljivim rezultatima i listama za provjeru
-- **❓ Pitanja za procjenu**: Pitanja za provjeru znanja za svako poglavlje s profesionalnim ishodima
-- **🛠️ Praktične vježbe**: Aktivnosti iz prakse s primjerima implementacije i otklanjanjem poteškoća
-- **📊 Napredak vještina**: Jasno napredovanje od osnovnih pojmova do korporativnih obrazaca s fokusom na razvoj karijere
-- **🎓 Okvir certifikacije**: Profesionalni razvojni ishodi i sustav prepoznavanja zajednice
-- **⏱️ Upravljanje vremenskim okvirom**: Strukturirani 10-tjedni plan učenja s validacijom ključnih faza
+#### Poboljšanje vodiča za učenje
+- **📚 Sveobuhvatni ciljevi učenja**: Preuređen vodič za usklađivanje sa sustavom od 8 poglavlja
+- **🎯 Procjena po poglavljima**: Svako poglavlje uključuje specifične ciljeve učenja i praktične vježbe
+- **📋 Praćenje napretka**: Tjedni raspored učenja s mjerljivim rezultatima i kontrolnim listama za dovršenje
+- **❓ Pitanja za procjenu**: Pitanja za potvrdu znanja za svako poglavlje s profesionalnim rezultatima
+- **🛠️ Praktične vježbe**: Radionice s praktičnim aktivnostima i scenarijima implementacije i otklanjanja poteškoća
+- **📊 Napredak u vještinama**: Jasna progresija od osnovnih koncepata do obrazaca za poduzeća s fokusom na profesionalni razvoj
+- **🎓 Okvir certificiranja**: Ishodi profesionalnog razvoja i sustav prepoznavanja zajednice
+- **⏱️ Upravljanje vremenom**: Strukturirani plan učenja od 10 tjedana s validacijom prekretnica
 
 ### [v3.1.0] - 2025-09-17
 
-#### Poboljšana višestruka agentska AI rješenja
-**Ova verzija poboljšava višestruko agentsko rješenje u maloprodaji boljim imenovanjem agenata i poboljšanom dokumentacijom.**
+#### Poboljšana rješenja za višestruke AI agente
+**Ova verzija poboljšava višestruko-agentsko maloprodajno rješenje s boljim imenovanjem agenata i poboljšanom dokumentacijom.**
 
-#### Izmijenjeno
-- **Terminologija Više-agenta**: Zamijenjen "Cora agent" s "Customer agent" kroz cijelo maloprodajno višelagentsko rješenje radi jasnijeg razumijevanja
-- **Agentna Arhitektura**: Ažurirana sva dokumentacija, ARM predlošci i primjeri koda za dosljedno korištenje naziva "Customer agent"
-- **Primjeri Konfiguracije**: Modernizirani obrasci konfiguracije agenta s ažuriranim konvencijama imenovanja
-- **Dosljednost Dokumentacije**: Osigurano da svi navodi koriste profesionalne, opisne nazive agenata
-
-#### Poboljšano
-- **ARM Paket Predložaka**: Ažuriran retail-multiagent-arm-template s referencama na Customer agent
-- **Arhitektonske Dijagrame**: Osvježeni Mermaid dijagrami s ažuriranim imenima agenata
-- **Primjeri Koda**: Python klase i primjeri implementacije sada koriste CustomerAgent naziv
-- **Varijable Okruženja**: Ažurirani svi skripti za implementaciju da koriste CUSTOMER_AGENT_NAME konvencije
+#### Promijenjeno
+- **Terminologija višestrukih agenata**: Zamijenjen "Cora agent" s "Customer agent" kroz cijelo maloprodajno multi-agent rješenje radi jasnijeg razumijevanja
+- **Arhitektura agenata**: Ažurirana sva dokumentacija, ARM predlošci i primjeri koda s dosljednim nazivom "Customer agent"
+- **Primjeri konfiguracije**: Modernizirani obrasci konfiguracije agenata s ažuriranim nazivima
+- **Dosljednost dokumentacije**: Osigurano da svi navodi koriste profesionalna i opisna imena agenata
 
 #### Poboljšano
-- **Iskustvo Razvijatelja**: Jasnije uloge i odgovornosti agenata u dokumentaciji
-- **Spremnost za Produkciju**: Bolja usklađenost s poduzećnim konvencijama imenovanja
-- **Materijali za Učenje**: Intuitivnija imena agenata za obrazovne svrhe
-- **Upotrebljivost Predložaka**: Pojednostavljeno razumijevanje funkcija agenata i obrazaca implementacije
+- **Paket ARM predloška**: Ažuriran retail-multiagent-arm-template s referencama na Customer agent
+- **Dijagrami arhitekture**: Osvježeni Mermaid dijagrami s ažuriranim imenovanjem agenata
+- **Primjeri koda**: Python klase i primjeri implementacije sada koriste naziv CustomerAgent
+- **Varijable okoline**: Ažurirani svi skripti za implementaciju kako bi koristili konvencije CUSTOMER_AGENT_NAME
 
-#### Tehnički Detalji
-- Ažurirani Mermaid arhitektonski dijagrami sa CustomerAgent referencama
-- Zamijenjena imena CoraAgent klasa s CustomerAgent u Python primjerima
-- Modificirane ARM JSON konfiguracije za korištenje tipa agenta "customer"
-- Ažurirane varijable okruženja s CORA_AGENT_* na CUSTOMER_AGENT_* obrasce
+#### Poboljšano
+- **Iskustvo programera**: Jasnije uloge i odgovornosti agenata u dokumentaciji
+- **Spremnost za produkciju**: Bolja usklađenost s nazivnim konvencijama za poduzeća
+- **Materijali za učenje**: Intuitivnije imenovanje agenata za edukativne svrhe
+- **Upotrebljivost predložaka**: Pojednostavljeno razumijevanje funkcija agenata i obrazaca implementacije
+
+#### Tehnički detalji
+- Ažurirani Mermaid dijagrami arhitekture s referencama CustomerAgent
+- Zamijenjena imena klasa CoraAgent s CustomerAgent u Python primjerima
+- Modificirane ARM JSON konfiguracije predložaka da koriste tip agenata "customer"
+- Ažurirane varijable okoline sa CORA_AGENT_* na CUSTOMER_AGENT_*
 - Osvježene sve naredbe za implementaciju i konfiguracije kontejnera
 
 ### [v3.0.0] - 2025-09-12
 
-#### Glavne Promjene - Fokus na AI Razvijatelje i Microsoft Foundry Integraciju
-**Ova verzija transformira spremište u sveobuhvatan AI usmjereni izvor za učenje s integracijom Microsoft Foundry.**
+#### Velike promjene - Fokus na AI programere i integracija Microsoft Foundry
+**Ova verzija pretvara repozitorij u sveobuhvatni resurs za učenje fokusiran na AI s integracijom Microsoft Foundry.**
 
 #### Dodano
-- **🤖 AI-Primarni Put Učenja**: Potpuna restrukturacija koja daje prioritet AI razvijateljima i inženjerima
-- **Vodič za Microsoft Foundry Integraciju**: Sveobuhvatna dokumentacija za povezivanje AZD s Microsoft Foundry uslugama
-- **Obrasci Implementacije AI Modela**: Detaljni vodič za izbor modela, konfiguraciju i strategije implementacije u produkciju
-- **AI Radionica-Laboratorij**: 2-3 sata praktične radionice za pretvaranje AI aplikacija u rješenja implementabilna putem AZD
-- **Najbolje Prakse za AI u Produkciji**: Uzorci spremni za poduzeća za skaliranje, nadzora i osiguravanja AI radnih opterećenja
-- **Vodič za AI Specifično Rješavanje Problema**: Sveobuhvatno otklanjanje poteškoća za Microsoft Foundry modele, Kognitivne usluge i AI implementacijske probleme
-- **Galerija AI Predložaka**: Istaknuta zbirka Microsoft Foundry predložaka s ocjenama složenosti
-- **Materijali Radionice**: Potpuna struktura radionice s praktičnim laboratorijima i referentnim materijalima
+- **🤖 AI-prvi put učenja**: Potpuno restrukturiranje s prioritetom na AI programere i inženjere
+- **Vodič za integraciju Microsoft Foundry**: Sveobuhvatna dokumentacija za povezivanje AZD-a s Microsoft Foundry uslugama
+- **Obrasci implementacije AI modela**: Detaljni vodič o odabiru modela, konfiguraciji i strategijama produkcijske implementacije
+- **AI radionica laboratorium**: 2-3 sata praktičnih radionica za pretvaranje AI aplikacija u rješenja za implementaciju putem AZD-a
+- **Najbolje prakse za AI u produkciji**: Obrasci spremni za poduzeća za skaliranje, nadzor i sigurnost AI radnih opterećenja
+- **Vodič za rješavanje problema specifičnih za AI**: Sveobuhvatno otklanjanje problema za Microsoft Foundry modele, kognitivne usluge i AI implementacije
+- **Galerija AI predložaka**: Istaknuta kolekcija Microsoft Foundry predložaka s ocjenama složenosti
+- **Materijali za radionice**: Potpuna struktura radionica s praktičnim laboratorijima i referentnim materijalima
 
 #### Poboljšano
-- **Struktura README-a**: Fokus na AI razvijatelje s 45% podataka o interesu zajednice s Microsoft Foundry Discorda
-- **Putovi Učenja**: Posvećene AI razvojne staze zajedno s tradicionalnim stazama za studente i DevOps inženjere
-- **Preporuke Predložaka**: Istaknuti AI predlošci uključujući azure-search-openai-demo, contoso-chat i openai-chat-app-quickstart
-- **Integracija Zajednice**: Poboljšana podrška Discord zajednici s AI-specifičnim kanalima i raspravama
+- **Struktura README**: Fokus na AI programere s 45% podataka o interesu zajednice s Microsoft Foundry Discorda
+- **Putovi učenja**: Posvećeno AI programu uz tradicionalne putove za studente i DevOps inženjere
+- **Preporuke predložaka**: Istaknuti AI predlošci uključuju azure-search-openai-demo, contoso-chat i openai-chat-app-quickstart
+- **Integracija zajednice**: Poboljšana podrška Discord zajednici s AI-specifičnim kanalima i raspravama
 
-#### Sigurnost i Fokus na Produkciju
-- **Predlošci Upravljanog Identiteta**: AI-specifične konfiguracije autentikacije i sigurnosti
-- **Optimizacija Troškova**: Praćenje korištenja tokena i kontrola budžeta za AI radna opterećenja
-- **Implementacija u Više Regija**: Strategije za globalnu implementaciju AI aplikacija
-- **Praćenje Performansi**: AI-specifični metrički podaci i integracija Application Insights
+#### Sigurnost i fokus na produkciju
+- **Obrasci upravljanog identiteta**: Autentifikacija i sigurnosne konfiguracije specifične za AI
+- **Optimizacija troškova**: Praćenje uporabe tokena i kontrole proračuna za AI radna opterećenja
+- **Implementacija u više regija**: Strategije za globalnu implementaciju AI aplikacija
+- **Praćenje performansi**: AI-specifične metrike i integracija s Application Insights
 
-#### Kvaliteta Dokumentacije
-- **Linearni Kurs**: Logičan napredak od početničkih do naprednih AI obrazaca implementacije
-- **Validirani URL-ovi**: Svi vanjski linkovi na spremište potvrđeni i dostupni
-- **Potpune Reference**: Svi interni dokumentacijski linkovi potvrđeni i funkcionalni
-- **Spremno za Produkciju**: Uzorci implementacije za poduzeća sa stvarnim primjerima
+#### Kvaliteta dokumentacije
+- **Linearna struktura tečaja**: Logičan napredak od početničkih do naprednih obrazaca implementacije AI
+- **Provjereni URL-ovi**: Svi vanjski linkovi na repozitorije verificirani i dostupni
+- **Potpuna referenca**: Svi unutarnji linkovi u dokumentaciji potvrđeni i funkcionalni
+- **Spremno za produkciju**: Obrasci implementacije za poduzeća s primjerima iz stvarnog svijeta
 
 ### [v2.0.0] - 2025-09-09
 
-#### Glavne Promjene - Restrukturiranje Spremišta i Profesionalno Poboljšanje
-**Ova verzija predstavlja značajnu reviziju strukture spremišta i prezentacije sadržaja.**
+#### Velike promjene - Restrukturiranje repozitorija i profesionalna nadogradnja
+**Ova verzija predstavlja značajan preokret u strukturi repozitorija i predstavljanju sadržaja.**
 
 #### Dodano
-- **Strukturirani Okvir za Učenje**: Sve stranice dokumentacije sada uključuju uvod, ciljeve učenja i ishode učenja
-- **Sustav Navigacije**: Dodani linkovi NAZAD/NAPRIJED između lekcija kroz cijelu dokumentaciju za vođeni napredak u učenju
-- **Vodič za Učenje**: Sveobuhvatni study-guide.md s ciljevima učenja, vježbama i materijalima za procjenu
-- **Profesionalna Prezentacija**: Uklonjeni svi emoji ikoni radi bolje pristupačnosti i profesionalnog izgleda
-- **Poboljšana Struktura Sadržaja**: Unaprijeđena organizacija i protok obrazovnih materijala
+- **Strukturirani okvir učenja**: Sve dokumentacijske stranice sada uključuju uvod, ciljeve učenja i ishode učenja
+- **Sustav navigacije**: Dodane poveznice za prethodnu/sljedeću lekciju kroz cijelu dokumentaciju radi vođenog napredovanja u učenju
+- **Vodič za učenje**: Sveobuhvatan study-guide.md s ciljevima učenja, praktičnim vježbama i materijalima za procjenu
+- **Profesionalna prezentacija**: Uklonjeni svi emoji ikoni za poboljšanu pristupačnost i profesionalan izgled
+- **Poboljšana struktura sadržaja**: Poboljšana organizacija i protok materijala za učenje
 
 #### Promijenjeno
-- **Format Dokumentacije**: Standardizirana sva dokumentacija s dosljednom strukturom usmjerenom na učenje
-- **Tok Navigacije**: Implementiran logički napredak kroz sve materijale za učenje
-- **Prezentacija Sadržaja**: Uklonjeni ukrasni elementi u korist jasnog, profesionalnog formatiranja
-- **Struktura Linkova**: Ažurirani svi interni linkovi za podršku novom sustavu navigacije
+- **Format dokumentacije**: Standardizirana sva dokumentacija s dosljednom strukturom fokusiranom na učenje
+- **Tok navigacije**: Implementiran logičan napredak kroz sve materijale za učenje
+- **Prezentacija sadržaja**: Uklonjeni ukrasni elementi u korist jasnog, profesionalnog oblikovanja
+- **Struktura poveznica**: Ažurirani svi unutarnji linkovi za podršku novom sustavu navigacije
 
 #### Poboljšano
-- **Pristupačnost**: Uklonjene ovisnosti o emojijima za bolju kompatibilnost s čitačima ekrana
-- **Profesionalni Izgled**: Čista, akademski stilizirana prezentacija prikladna za poduzećno učenje
-- **Iskustvo Učenja**: Strukturirani pristup s jasnim ciljevima i ishodima za svaku lekciju
-- **Organizacija Sadržaja**: Bolji logički protok i povezivanje povezanih tema
+- **Pristupačnost**: Uklonjena ovisnost o emoji ikonama radi bolje kompatibilnosti sa čitačima zaslona
+- **Profesionalni izgled**: Čist, akademski stil prikaza prikladan za učenje u poduzeću
+- **Iskustvo učenja**: Strukturirani pristup s jasnim ciljevima i ishodima za svaku lekciju
+- **Organizacija sadržaja**: Bolji logički protok i povezanost između povezanih tema
 
 ### [v1.0.0] - 2025-09-09
 
-#### Početno Izdanje - Sveobuhvatni AZD Spremište za Učenje
+#### Početno izdanje - Sveobuhvatni repozitorij za učenje AZD-a
 
 #### Dodano
-- **Osnovna Struktura Dokumentacije**
-  - Potpuna serija vodiča za početak rada
-  - Sveobuhvatna dokumentacija za implementaciju i provisiju
-  - Detaljni izvori za rješavanje problema i vodiči za otklanjanje grešaka
-  - Alati i procedure za validaciju prije implementacije
+- **Osnovna struktura dokumentacije**
+  - Kompletan niz vodiča za početak rada
+  - Sveobuhvatna dokumentacija za implementaciju i provisioning
+  - Detaljni resursi za otklanjanje poteškoća i debugiranje
+  - Alati i procedure za provjeru prije implementacije
 
-- **Modul Početak Rada**
-  - AZD Osnove: Temeljni pojmovi i terminologija
-  - Vodič za Instalaciju: Upute za postavljanje specifične za platformu
-  - Vodič za Konfiguraciju: Postavljanje okruženja i autentikacija
-  - Prvi Projekt Tutorial: Hands-on učenje korak po korak
+- **Modul za početak rada**
+  - Osnove AZD-a: Temeljni koncepti i terminologija
+  - Vodič za instalaciju: upute specifične za platformu
+  - Vodič za konfiguraciju: postavljanje okoliša i autentifikacija
+  - Prvi tutorial projekta: korak-po-korak praktično učenje
 
-- **Modul Implementacije i Provisije**
-  - Vodič za Implementaciju: Potpuna dokumentacija tijeka rada
-  - Vodič za Provisiju: Infrastruktura kao kod pomoću Bicep
+- **Modul za implementaciju i provisioning**
+  - Vodič za implementaciju: potpuna dokumentacija radnog procesa
+  - Vodič za provisioning: infrastruktura kao kod s Bicepm
   - Najbolje prakse za produkcijske implementacije
-  - Obrasci arhitekture višestrukih usluga
+  - Obrasci arhitekture za višeservisna okruženja
 
-- **Modul Validacije prije Implementacije**
-  - Planiranje Kapaciteta: Validacija dostupnosti Azure resursa
-  - Izbor SKU: Sveobuhvatne smjernice za slojeve usluga
-  - Pre-flight Provjere: Automatizirani validacijski skripti (PowerShell i Bash)
-  - Alati za procjenu troškova i planiranje budžeta
+- **Modul za provjeru prije implementacije**
+  - Planiranje kapaciteta: provjera dostupnosti Azure resursa
+  - Odabir SKU-a: sveobuhvatne smjernice za slojeve usluge
+  - Pre-flight provjere: automatizirani skripti za validaciju (PowerShell i Bash)
+  - Alati za procjenu troškova i planiranje proračuna
 
-- **Modul Rješavanja Problema**
-  - Uobičajeni Problemi: Često susretani problemi i rješenja
-  - Vodič za Otklanjanje Grešaka: Sistematske metodologije rješavanja problema
+- **Modul za otklanjanje poteškoća**
+  - Uobičajeni problemi: često susretani problemi i rješenja
+  - Vodič za debugiranje: sustavne metodologije uklanjanja pogrešaka
   - Napredne dijagnostičke tehnike i alati
   - Praćenje performansi i optimizacija
 
-- **Resursi i Reference**
-  - Prečac naredbi: Brza referenca za ključne naredbe
-  - Rječnik: Sveobuhvatne definicije terminologije i akronima
-  - FAQ: Detaljni odgovori na česta pitanja
-  - Linkovi prema vanjskim resursima i zajednici
+- **Resursi i reference**
+  - Brzi referentni list naredbi
+  - Rječnik: sveobuhvatni termini i definicije akronima
+  - Često postavljana pitanja (FAQ)
+  - Vanjski linkovi na resurse i veze sa zajednicom
 
-- **Primjeri i Predlošci**
-  - Primjer Jednostavne Web Aplikacije
-  - Predložak za implementaciju statične web stranice
+- **Primjeri i predlošci**
+  - Primjer jednostavne web aplikacije
+  - Predložak za statičku web stranicu
   - Konfiguracija kontejnerske aplikacije
-  - Obrasci integracije baze podataka
-  - Primjeri arhitekture mikroservisa
-  - Implementacije bezposlužnih funkcija
+  - Obrasci integracije baza podataka
+  - Primjeri mikroservisne arhitekture
+  - Implementacije serverless funkcija
 
 #### Značajke
-- **Višeplatformska Podrška**: Vodiči za instalaciju i konfiguraciju za Windows, macOS i Linux
-- **Više Razina Znanja**: Sadržaj dizajniran za studente do profesionalnih programera
-- **Praktični Fokus**: Hands-on primjeri i stvarni scenariji
-- **Sveobuhvatna Pokrivenost**: Od osnovnih pojmova do naprednih obrazaca za poduzeća
-- **Sigurnost kao Prioritet**: Najbolje sigurnosne prakse integrirane kroz cijeli sadržaj
-- **Optimizacija Troškova**: Smjernice za isplative implementacije i upravljanje resursima
+- **Višeplatformska podrška**: vodiči za instalaciju i konfiguraciju za Windows, macOS i Linux
+- **Više razina vještina**: sadržaj dizajniran za studente do profesionalnih programera
+- **Praktični fokus**: primjeri iz stvarnog svijeta i praktični scenariji
+- **Sveobuhvatna pokrivenost**: od osnovnih koncepata do naprednih obrazaca za poduzeća
+- **Pristup usmjeren na sigurnost**: integrirane najbolje sigurnosne prakse
+- **Optimizacija troškova**: smjernice za isplative implementacije i upravljanje resursima
 
-#### Kvaliteta Dokumentacije
-- **Detaljni Primjeri Koda**: Praktični, testirani uzorci koda
-- **Upute Korak-po-Korak**: Jasne, provedive smjernice
-- **Sveobuhvatno Rješavanje Problema**: Otklanjanje grešaka za uobičajene probleme
-- **Integracija Najboljih Praksi**: Industrijski standardi i preporuke
-- **Kompatibilnost Verzija**: Ažurirano s najnovijim Azure servisima i azd značajkama
+#### Kvaliteta dokumentacije
+- **Detaljni primjeri koda**: praktični, testirani primjeri koda
+- **Upute korak po korak**: jasne, provedive smjernice
+- **Sveobuhvatno rukovanje pogreškama**: otklanjanje poteškoća za uobičajene probleme
+- **Integracija najboljih praksi**: industrijski standardi i preporuke
+- **Kompatibilnost verzija**: ažurirano s najnovijim Azure uslugama i značajkama azd-a
 
-## Planirana Buduća Poboljšanja
+## Planirana buduća poboljšanja
 
-### Verzija 3.1.0 (Planirano)
-#### Proširenje AI Platforme
-- **Podrška za Više Modela**: Obrasci integracije za Hugging Face, Azure Machine Learning i prilagođene modele
-- **AI Agenti Okviri**: Predlošci za LangChain, Semantic Kernel i AutoGen implementacije
-- **Napredni RAG Obrasci**: Opcije vektorskih baza podataka izvan Azure AI Search (Pinecone, Weaviate, itd.)
-- **AI Promatranje**: Poboljšano praćenje performansi modela, korištenja tokena i kvalitete odgovora
+### Verzija 3.1.0 (planirano)
+#### Proširenje AI platforme
+- **Podrška za više modela**: obrasci integracije za Hugging Face, Azure Machine Learning i prilagođene modele
+- **Okviri za AI agente**: predlošci za LangChain, Semantic Kernel i AutoGen implementacije
+- **Napredni RAG obrasci**: opcije vektorskih baza podataka izvan Azure AI Search (Pinecone, Weaviate itd.)
+- **AI Prometna vidljivost**: poboljšani nadzor performansi modela, upotrebe tokena i kvalitete odgovora
 
-#### Iskustvo Razvijatelja
-- **VS Code Proširenje**: Integrirano AZD + Microsoft Foundry razvojno iskustvo
-- **GitHub Copilot Integracija**: AI-podržana generacija AZD predložaka
-- **Interaktivni Tutorijali**: Praktične kodne vježbe s automatiziranom validacijom za AI scenarije
-- **Video Sadržaj**: Dodatni video tutorijali za vizualne učenike usmjereni na AI implementacije
+#### Iskustvo programera
+- **VS Code proširenje**: integrirano razvojno iskustvo AZD + Microsoft Foundry
+- **Integracija GitHub Copilot**: AI-podržana generacija AZD predložaka
+- **Interaktivni tutorijali**: praktične kodirajuće vježbe s automatiziranom validacijom za AI scenarije
+- **Video sadržaj**: dopunski video tutorijali za vizualne učenike fokusirane na AI implementacije
 
-### Verzija 4.0.0 (Planirano)
-#### Poduzećni AI Obrasci
-- **Okvir Upravljanja**: Upravljanje AI modelima, usklađenost i revizijske staze
-- **Više-Tenant AI**: Obrasci za servisiranje više korisnika s izoliranim AI uslugama
-- **Edge AI Implementacija**: Integracija s Azure IoT Edge i kontejnerskim instancama
-- **Hibridni Cloud AI**: Multicloud i hibridni obrasci implementacije za AI radna opterećenja
+### Verzija 4.0.0 (planirano)
+#### Obrasci AI za poduzeća
+- **Okvir upravljanja**: upravljanje AI modelima, usklađenost i revizorski tragovi
+- **Višenajamnički AI**: obrasci za pružanje usluga višestrukim korisnicima s izoliranim AI uslugama
+- **Edge AI implementacija**: integracija s Azure IoT Edge i kontejnerskim instancama
+- **Hibridni cloud AI**: višestruka cloud i hibridni obrasci implementacije za AI radna opterećenja
 
-#### Napredne Značajke
-- **Automatizacija AI Pipelinea**: MLOps integracija s Azure Machine Learning pipelineovima
-- **Napredna Sigurnost**: Zero-trust obrasci, privatne usluge i napredna zaštita od prijetnji
-- **Optimizacija Performansi**: Napredna podešavanja i strategije skaliranja za visokoprotočne AI aplikacije
-- **Globalna Distribucija**: Obrasci isporuke sadržaja i edge cache za AI aplikacije
+#### Napredne značajke
+- **Automatizacija AI pipelinea**: MLOps integracija s Azure Machine Learning pipelineima
+- **Napredna sigurnost**: obrasci zero-trust, privatne krajnje točke i napredno zaštita od prijetnji
+- **Optimizacija performansi**: napredne strategije podešavanja i skaliranja za AI aplikacije visoke propusnosti
+- **Globalna distribucija**: obrasci isporuke sadržaja i edge predmemoriranja za AI aplikacije
 
-### Verzija 3.0.0 (Planirano) - Zamijenjeno Trenutačnim Izdavanjem
-#### Predloženi Dodaci - Sada Implementirani u v3.0.0
-- ✅ **AI-Fokusirani Sadržaj**: Sveobuhvatna Microsoft Foundry integracija (Završeno)
-- ✅ **Interaktivni Tutorijali**: Hands-on AI radionica laboratorij (Završeno)
-- ✅ **Napredni Sigurnosni Modul**: AI-specifični sigurnosni obrasci (Završeno)
-- ✅ **Optimizacija Performansi**: Strategije podešavanja AI radnih opterećenja (Završeno)
+### Verzija 3.0.0 (planirano) - Superseded by Current Release
+#### Predloženi dodaci - Sada implementirani u v3.0.0
+- ✅ **Sadržaj fokusiran na AI**: Sveobuhvatna integracija Microsoft Foundry (dovršeno)
+- ✅ **Interaktivni tutorijali**: praktična AI radionica (dovršeno)
+- ✅ **Napredni modul sigurnosti**: AI-specifični sigurnosni obrasci (dovršeno)
+- ✅ **Optimizacija performansi**: strategije podešavanja radnih opterećenja AI (dovršeno)
 
-### Verzija 2.1.0 (Planirano) - Djelomično Implementirano u v3.0.0
-#### Manja Poboljšanja - Neka Završena u Trenutačnom Izdanju
-- ✅ **Dodatni Primjeri**: AI-fokusirani scenariji implementacije (Završeno)
-- ✅ **Prošireni FAQ**: AI-specifična pitanja i rješavanje problema (Završeno)
-- **Integracija Alata**: Poboljšani vodiči za IDE i uređivače
-- ✅ **Proširenje Praćenja**: AI-specifični obrasci praćenja i upozorenja (Završeno)
+### Verzija 2.1.0 (planirano) - Djelomično implementirano u v3.0.0
+#### Manja poboljšanja - Neka dovršena u trenutnom izdanju
+- ✅ **Dodatni primjeri**: scenariji implementacije usmjereni na AI (dovršeno)
+- ✅ **Prošireni FAQ**: AI-specifična pitanja i otklanjanje problema (dovršeno)
+- **Integracija alata**: vodiči za poboljšanu integraciju IDE-a i uređivača
+- ✅ **Proširenje nadzora**: AI-specifični obrasci nadzora i upozorenja (dovršeno)
 
-#### Još Planirano za Buduće Izdanje
-- **Mobilno Prijateljska Dokumentacija**: Responzivni dizajn za mobilno učenje
-- **Pristup Bez Mreže**: Preuzimajući paketi dokumentacije
-- **Poboljšana IDE Integracija**: VS Code proširenje za AZD + AI tijekove rada
-- **Zajednički Kontrolni Panel**: Metrički podaci zajednice u stvarnom vremenu i praćenje doprinosa
+#### Još planirano za buduće izdanje
+- **Dokumentacija prilagođena mobilnim uređajima**: responzivan dizajn za mobilno učenje
+- **Pristup bez interneta**: paketi dokumentacije za preuzimanje
+- **Poboljšana integracija IDE-a**: VS Code proširenje za AZD + AI tijekove rada
+- **Nadzorna ploča zajednice**: metrike zajednice u stvarnom vremenu i praćenje doprinosa
 
-## Doprinos Popisu Promjena
+## Doprinos u promjenama promjena
 
-### Prijavljivanje Promjena
-Prilikom doprinosa ovom spremištu, molimo osigurajte da unosi u popis promjena uključuju:
+### Prijava promjena
+Prilikom doprinosa u ovom repozitoriju, molimo osigurajte da zapisi o promjenama uključuju:
 
-1. **Broj Verzije**: Slijedeći semantičko verzioniranje (glavna.mala.ispravka)
-2. **Datum**: Datum izdavanja ili ažuriranja u formatu GGGG-MM-DD
+1. **Broj verzije**: prema semantičkom verzioniranju (major.minor.patch)
+2. **Datum**: datum izdavanja ili ažuriranja u formatu GGGG-MM-DD
 3. **Kategorija**: Dodano, Promijenjeno, Zastarjelo, Uklonjeno, Ispravljeno, Sigurnost
-4. **Jasan Opis**: Sažeti opis što je promijenjeno
-5. **Procjena Utjecaja**: Kako promjene utječu na postojeće korisnike
+4. **Jasan opis**: sažeti opis promjene
+5. **Procjena utjecaja**: kako promjene utječu na postojeće korisnike
 
-### Kategorije Promjena
+### Kategorije promjena
 
 #### Dodano
-- Nove značajke, dijelovi dokumentacije ili mogućnosti
-- Novi primjeri, predlošci ili izvori za učenje
-- Dodatni alati, skripte ili pomoćni programi
+- Nove značajke, odjeljci dokumentacije ili sposobnosti
+- Novi primjeri, predlošci ili resursi za učenje
+- Dodatni alati, skripte ili uslužni programi
 
 #### Promijenjeno
 - Izmjene postojeće funkcionalnosti ili dokumentacije
@@ -1229,14 +1248,14 @@ Prilikom doprinosa ovom spremištu, molimo osigurajte da unosi u popis promjena 
 - Restrukturiranje sadržaja ili organizacije
 
 #### Zastarjelo
-- Značajke ili pristupi koji se postupno ukidaju
-- Sekcije dokumentacije planirane za uklanjanje
-- Metode koje imaju bolje alternative
+- Značajke ili pristupi koji se povlače iz upotrebe
+- Odjeljci dokumentacije predviđeni za uklanjanje
+- Metode za koje postoje bolje alternative
 
 #### Uklonjeno
 - Značajke, dokumentacija ili primjeri koji više nisu relevantni
 - Zastarjele informacije ili zastarjeli pristupi
-- Suvišan ili objedinjeni sadržaj
+- Redundantni ili objedinjeni sadržaj
 
 #### Ispravljeno
 - Ispravci pogrešaka u dokumentaciji ili kodu
@@ -1244,87 +1263,87 @@ Prilikom doprinosa ovom spremištu, molimo osigurajte da unosi u popis promjena 
 - Poboljšanja točnosti ili funkcionalnosti
 
 #### Sigurnost
-- Poboljšanja ili ispravci vezani uz sigurnost
-- Ažuriranja sigurnosnih najboljih praksi
+- Sigurnosna poboljšanja ili ispravci
+- Ažuriranja najboljih sigurnosnih praksi
 - Rješavanje sigurnosnih ranjivosti
 
-### Smjernice za Semantičko Verzionarstvo
+### Smjernice semantičkog verzioniranja
 
-#### Glavna Verzija (X.0.0)
+#### Glavna verzija (X.0.0)
 - Promjene koje zahtijevaju akciju korisnika
-- Značajno restrukturiranje sadržaja ili organizacije
+- Značajna restrukturiranja sadržaja ili organizacije
 - Promjene koje mijenjaju temeljni pristup ili metodologiju
 
-#### Manja Verzija (X.Y.0)
-- Nove značajke ili dodavanja sadržaja
-- Poboljšanja koja održavaju kompatibilnost unazad
+#### Manja verzija (X.Y.0)
+- Nove značajke ili dodaci sadržaju
+- Poboljšanja koja održavaju kompatibilnost unatrag
 - Dodatni primjeri, alati ili resursi
 
-#### Verzija Ispravka (X.Y.Z)
-- Ispravci grešaka i korekcije
+#### Verzija zakrpe (X.Y.Z)
+- Ispravci pogrešaka i popravci
 - Manja poboljšanja postojećeg sadržaja
-- Pojašnjenja i sitna poboljšanja
+- Pojašnjenja i mala poboljšanja
 
-## Povratne Informacije Zajednice i Prijedlozi
+## Povratne informacije i prijedlozi zajednice
 
-Aktivno potičemo povratne informacije zajednice za poboljšanje ovog izvora za učenje:
+Aktivno potičemo povratne informacije zajednice za poboljšanje ovog resursa za učenje:
 
-### Kako Dati Povratne Informacije
-- **GitHub Issues**: Prijavite probleme ili predložite poboljšanja (AI-specifični problemi dobrodošli)
+### Kako dati povratnu informaciju
+- **GitHub Issues**: Prijavite probleme ili predložite poboljšanja (dobrodošle teme vezane za AI)
 - **Discord Rasprave**: Dijelite ideje i uključite se u Microsoft Foundry zajednicu
-- **Pull Requests**: Izravno doprinesite poboljšanjima sadržaja, posebno AI predložacima i vodičima
+- **Pull Requests**: Izravno doprinesite poboljšanjima sadržaja, posebno AI predložaka i vodiča
 - **Microsoft Foundry Discord**: Sudjelujte u #Azure kanalu za AZD + AI rasprave
-- **Zajednički Forumi**: Sudjelujte u širim Azure razvojničkim raspravama
+- **Zajednički Forumi**: Sudjelujte u širim raspravama za Azure developere
 
-### Kategorije Povratnih Informacija
-- **Točnost AI Sadržaja**: Ispravci integracije AI usluga i informacija o implementaciji
-- **Iskustvo Učenja**: Prijedlozi za poboljšanje tijeka učenja AI razvijatelja
-- **Nedostatak AI Sadržaja**: Zahtjevi za dodatnim AI predlošcima, obrascima ili primjerima
+### Kategorije povratnih informacija
+- **Točnost AI sadržaja**: Ispravci informacija o integraciji i implementaciji AI usluga
+- **Iskustvo učenja**: Prijedlozi za poboljšani tijek učenja za AI developere
+- **Nedostajući AI sadržaj**: Zahtjevi za dodatnim AI predlošcima, uzorcima ili primjerima
 - **Pristupačnost**: Poboljšanja za različite potrebe učenja
-- **Integracija AI Alata**: Prijedlozi za bolju integraciju AI radnih tokova razvoja
-- **Proizvodni AI Obrasci**: Zahtjevi za obrasce implementacije AI u poduzećima
+- **Integracija AI alata**: Prijedlozi za bolje povezivanje AI razvojnih tijekova
+- **Produkcijski AI uzorci**: Zahtjevi za obrasce implementacije AI na razini poduzeća
 
-### Obveza Odgovora
-- **Odgovor na Probleme**: Unutar 48 sati za prijavljene probleme
-- **Zahtjevi za Značajke**: Procjena unutar jednog tjedna
-- **Doprinosi Zajednice**: Pregled unutar jednog tjedna
-- **Sigurnosni Problemi**: Odmah prioritetno s ubrzanim odgovorom
+### Obveza odgovora
+- **Odgovor na probleme**: Unutar 48 sati za prijavljene probleme
+- **Zahtjevi za značajke**: Procjena unutar jednog tjedna
+- **Doprinosi zajednice**: Pregled u roku od tjedan dana
+- **Sigurnosna pitanja**: Trenutna prioritetnost s ubrzanim odgovorom
 
-## Raspored Održavanja
+## Raspored održavanja
 
-### Redovna Ažuriranja
-- **Mjesečni Pregledi**: Točnost sadržaja i validacija linkova
-- **Kvartalna Ažuriranja**: Glavna dodavanja sadržaja i poboljšanja
-- **Polugodišnji Pregledi**: Sveobuhvatno restrukturiranje i unaprjeđenje
-- **Godišnja Izdavanja**: Glavna izdanja verzija sa značajnim poboljšanjima
+### Redovna ažuriranja
+- **Mjesečni pregledi**: Točnost sadržaja i provjera poveznica
+- **Kvartalna ažuriranja**: Veliki dodaci i poboljšanja sadržaja
+- **Polugodišnji pregledi**: Sveobuhvatna restrukturiranja i poboljšanja
+- **Godišnja izdanja**: Glavna ažuriranja verzija sa značajnim poboljšanjima
 
-### Praćenje i Osiguranje Kvalitete
-- **Automatsko testiranje**: Redovita provjera primjera koda i poveznica
-- **Integracija povratnih informacija zajednice**: Redovito uključivanje korisničkih prijedloga
-- **Ažuriranja tehnologije**: Usuglašenost s najnovijim Azure uslugama i azd izdanjima
-- **Revizije pristupačnosti**: Redoviti pregledi načela inkluzivnog dizajna
+### Praćenje i osiguranje kvalitete
+- **Automatsko testiranje**: Redovna validacija kod primjera i poveznica
+- **Integracija povratnih informacija zajednice**: Redovno uključenje korisničkih prijedloga
+- **Ažuriranja tehnologije**: Usklađivanje sa najnovijim Azure uslugama i izdanjima azd
+- **Revizije pristupačnosti**: Redovni pregledi za principe inkluzivnog dizajna
 
-## Pravila podrške verzija
+## Politika podrške verzija
 
 ### Trenutna podrška verzija
-- **Najnovija glavna verzija**: Puna podrška s redovitim ažuriranjima
-- **Prethodna glavna verzija**: Sigurnosna ažuriranja i kritične ispravke u trajanju od 12 mjeseci
-- **Zastarjele verzije**: Samo podrška zajednice, bez službenih ažuriranja
+- **Najnovija glavna verzija**: Potpuna podrška sa redovitim ažuriranjima
+- **Prethodna glavna verzija**: Sigurnosna ažuriranja i kritične ispravke 12 mjeseci
+- **Nasljedne verzije**: Podrška zajednice, bez službenih ažuriranja
 
-### Upute za migraciju
-Kada se objave glavne verzije, pružamo:
-- **Vodiče za migraciju**: Upute korak po korak za prijelaz
-- **Bilješke o kompatibilnosti**: Detalji o promjenama koje mogu uzrokovati probleme
-- **Podršku alatima**: Skripte ili alati za pomoć pri migraciji
-- **Podršku zajednice**: Namjenska foruma za pitanja o migraciji
+### Smjernice za migraciju
+Kada se izdaju glavne verzije, nudimo:
+- **Vodiče za migraciju**: Upute korak-po-korak za prijelaz
+- **Bilješke o kompatibilnosti**: Detalji o promjenama koje prekidaju kompatibilnost
+- **Podršku alata**: Skripte ili alati koji pomažu pri migraciji
+- **Podršku zajednice**: Namjenski forumi za pitanja migracije
 
 ---
 
 **Navigacija**
-- **Prethodni lekcija**: [Vodič za učenje](resources/study-guide.md)
-- **Sljedeća lekcija**: Povratak na [Glavni README](README.md)
+- **Prethodna lekcija**: [Study Guide](resources/study-guide.md)
+- **Sljedeća lekcija**: Povratak na [Main README](README.md)
 
-**Ostanite u toku**: Pratite ovaj repozitorij za obavijesti o novim izdanjima i važnim ažuriranjima materijala za učenje.
+**Ostanite u toku**: Pratite ovaj repozitorij kako biste dobivali obavijesti o novim izdanjima i važnim ažuriranjima materijala za učenje.
 
 ---
 
