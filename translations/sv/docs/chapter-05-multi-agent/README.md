@@ -1,22 +1,22 @@
 # Kapitel 5: Multi-Agent AI-lösningar
 
-**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Komplexitet**: Avancerad
+**📚 Kurs**: [AZD För nybörjare](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Svårighetsgrad**: Avancerad
 
 ---
 
 ## Översikt
 
-Detta kapitel behandlar avancerade fleragentarkitekturmönster, agentorkestrering och produktionsfärdiga AI-distributioner för komplexa scenarier.
+Detta kapitel täcker avancerade multi-agent arkitekturmönster, agentorkestrering och produktionsklara AI-distributioner för komplexa scenarier.
 
-> Kommandovägledning granskad mot den släppta `azd 1.37.2` referensen. Molndistributioner kördes inte.
+> Kommandovägledning granskad mot den släppta `azd 1.37.2` referensen. Molndistributioner har inte körts.
 
 ## Lärandemål
 
 Genom att slutföra detta kapitel kommer du att:
-- Förstå fleragentarkitekturmönster
+- Förstå multi-agent arkitekturmönster
 - Distribuera koordinerade AI-agentssystem
-- Implementera agent-till-agent-kommunikation
-- Bygga produktionsfärdiga fleragentlösningar
+- Implementera agent-till-agent kommunikation
+- Bygga produktionsklara multi-agent lösningar
 
 ---
 
@@ -24,11 +24,11 @@ Genom att slutföra detta kapitel kommer du att:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Multi-Agent Grunder](multi-agent-basics.md) | Praktiskt: distribuera en fungerande fleragentapp med `azd up` | 45 min |
+| 1 | [Multi-Agent Grunder](multi-agent-basics.md) | Praktiskt: distribuera en fungerande multi-agent-app med `azd up` | 45 min |
 | 2 | [Koordinationsmönster](../chapter-06-pre-deployment/coordination-patterns.md) | Agentorkestreringsstrategier (fortsätter i Kapitel 6) | 30 min |
-| 3 | [ARM Template Distribution](../../examples/retail-multiagent-arm-template/README.md) | Exempel på distribution med ett klick | 30 min |
+| 3 | [ARM-mall Distribution](../../examples/retail-multiagent-arm-template/README.md) | Exempel på distribution med ett klick | 30 min |
 
-> **Börja med Lektion 1.** Det är den enda helt praktiska och distribuerbara lektionen i detta kapitel. Lektion 2 finns i Kapitel 6 (den delas med planering inför distribution), och [Retail Multi-Agent Solution](../../examples/retail-scenario.md) är en arkitektur-mall—en designreferens, inte en mall med ett enda kommando.
+> **Börja med Lektion 1.** Det är den enda helt praktiska, distribuerbara lektionen i detta kapitel. Lektion 2 finns i Kapitel 6 (den delas med pre-distributionsplanering), och [Retail Multi-Agent Solution](../../examples/retail-scenario.md) är en arkitekturritning—en designreferens, inte en mall med ett kommando.
 
 ---
 
@@ -39,19 +39,19 @@ Genom att slutföra detta kapitel kommer du att:
 azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
-azd extension install azure.ai.agents
+# Option 2: Initialize a Foundry agent interactively with the GA bundle
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 ```
 
-> **Vilken metod?** Använd `azd init --template` för att börja från ett fungerande exempel. Använd `azd ai agent init` interaktivt, eller `azd ai agent init --template <path-to-azure.yaml>` för att ta över ett aktuellt agentprojekt. Se [AZD AI CLI-referensen](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) för versionskrav och migrering av utvärdering.
+> **Vilket tillvägagångssätt?** Använd `azd init --template` för att starta från ett fungerande exempel. Använd `azd ai agent init` interaktivt, eller `azd ai agent init --template <path-to-azure.yaml>` för att anta ett befintligt agentprojekt. Se [AZD AI CLI-referensen](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) för versionskrav och utvärderingsmigrering.
 
-Kör dessa alternativ i separata tomma mappar. Agentförlängningen `1.0.0-beta.23` kräver `azd >= 1.37.0`; dess interaktiva flöde genererar inte den anpassade Service Bus-pipelinen i koordineringslektionen.
+Kör dessa alternativ i separata tomma mappar. GA Foundry-arbetsflödet kräver `azd >= 1.37.0`; dess interaktiva flöde genererar inte den anpassade Service Bus-pipelinen i koordineringslektionen. För lokal testning, koddistribution och städning av nya kontra återanvända projekt, följ [genomgången för hostad agent](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga).
 
 ---
 
-## 🤖 Fleragentarkitektur
+## 🤖 Multi-Agent Arkitektur
 
 ```mermaid
 graph TD
@@ -63,12 +63,12 @@ graph TD
 
 ## 🎯 Utvald lösning: Retail Multi-Agent
 
-Lösningen [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrerar:
+The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrerar:
 
-- **Kundagent**: Hanterar användarinteraktioner och preferenser
-- **Lageragent**: Hanterar lager och orderprocessering
-- **Orkestrator**: Koordinerar mellan agenter
-- **Delat minne**: Kontextledning över agenter
+- **Customer Agent**: Hanterar användarinteraktioner och preferenser
+- **Inventory Agent**: Hanterar lager och orderhantering
+- **Orchestrator**: Koordinerar mellan agenter
+- **Shared Memory**: Kontextshantering mellan agenter
 
 ### Använda tjänster
 
@@ -93,8 +93,8 @@ Lösningen [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demo
 
 ## 📖 Relaterade resurser
 
-- [AI-agenter Guide](../chapter-02-ai-development/agents.md)
-- [Produktion AI-praxis](../chapter-08-production/production-ai-practices.md)
+- [AI Agenter Guide](../chapter-02-ai-development/agents.md)
+- [Produktions AI Praxis](../chapter-08-production/production-ai-practices.md)
 - [AI Felsökning](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

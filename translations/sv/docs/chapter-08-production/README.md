@@ -1,4 +1,4 @@
-# Kapitel 8: Produktions- och företagsmönster
+# Kapitel 8: Produktions- & Företagsmönster
 
 **📚 Kurs**: [AZD För nybörjare](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Svårighetsgrad**: Avancerad
 
@@ -6,19 +6,19 @@
 
 ## Översikt
 
-Detta kapitel täcker företagsfärdiga distributionsmönster, säkerhetshärdning, övervakning och kostnadsoptimering för produktions-AI-arbetsbelastningar.
+Detta kapitel täcker företagsklara distributionsmönster, säkerhetsförstärkning, övervakning och kostnadsoptimering för produktions-AI-arbetsbelastningar.
 
-Detta är en arkitektonisk referens, inte en komplett driftsättbar produktionmall. Exempel utelämnar integrationsdetaljer som måste tillhandahållas och testas i din egen applikation; att läsa checklistan certifierar inte produktionsredo.
+Detta är en arkitekturreferens, inte en fullständig distributionsbar produktionmall. Exempel utelämnar integrationsdetaljer som måste tillhandahållas och testas i din egen applikation; att läsa checklistan garanterar inte produktionsberedskap.
 
-> **Versionsgranskning (2026-11-04):** AI CLI-vägledning kontrollerades mot `azd 1.37.2`, agenter `1.0.0-beta.23`, och utvärderingar `1.0.0-beta.2` dokumentation/källa. Se [versionsändringar och korrigeringar](production-ai-practices.md#recent-release-changes-and-fixes) för kompatibilitetskrav och migrationsdetaljer; detta är inte en live-validering av distribution.
+> **Foundry GA-uppdatering (2026-11-09):** Använd `azd >= 1.37.0` och det allmänt tillgängliga `microsoft.foundry` 1.0-paketet för Foundry-workflowen; utvärderingar installeras separat. Se [release-omfång och migrering](production-ai-practices.md#recent-release-changes-and-fixes) och [exempel på autentiserad pipeline](production-ai-practices.md#cicd-pipeline-configuration). Detta är en dokumentationsöversyn, inte en validering av live-distribution eller generell GA-status för valfria förhandsvisningsfunktioner.
 
 ## Lärandemål
 
-När du har slutfört detta kapitel kommer du att kunna:
-- Driftsätta resilienta applikationer över flera regioner
+Genom att slutföra detta kapitel kommer du att:
+- Distribuera resilienta applikationer i flera regioner
 - Implementera företags säkerhetsmönster
 - Konfigurera omfattande övervakning
-- Optimera kostnader i stor skala
+- Optimera kostnader i skala
 - Sätta upp CI/CD-pipelines med AZD
 
 ---
@@ -27,25 +27,25 @@ När du har slutfört detta kapitel kommer du att kunna:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Produktions-AI-praktiker](production-ai-practices.md) | Företags distributionsmönster | 90 min |
+| 1 | [Produktions AI-praktiker](production-ai-practices.md) | Företagsdistributionsmönster | 90 min |
 
 ---
 
 ## 🚀 Produktionschecklista
 
-- [ ] Multi-region distribution för resiliens
+- [ ] Multi-region-distribution för resiliens
 - [ ] Hanterad identitet för autentisering (inga nycklar)
 - [ ] Application Insights för övervakning
 - [ ] Kostnadsbudgetar och varningar konfigurerade
 - [ ] Säkerhetsskanning aktiverad
-- [ ] CI/CD-pipeline integration
-- [ ] Katastrofåterhämtningsplan
+- [ ] CI/CD-pipelineintegration
+- [ ] Plan för katastrofåterställning
 
 ---
 
 ## 🏗️ Arkitekturmönster
 
-### Mönster 1: Microservices AI
+### Mönster 1: Mikrotjänster AI
 
 ```mermaid
 graph LR
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Mönster 2: Event-Driven AI
+### Mönster 2: Händelsestyrd AI
 
 ```mermaid
 graph LR
@@ -87,16 +87,16 @@ properties: {
 
 | Strategi | Huvudbegränsning |
 |----------|---------|
-| Skala ner till noll (Container Apps) | Kräver en lämplig trigger; andra tjänster orsakar fortfarande kostnader |
+| Skala till noll (Container Apps) | Kräver en lämplig trigger; andra tjänster ger fortfarande kostnader |
 | Använd konsumtionsnivåer för utveckling | Jämför vald tjänsteprissättning och arbetsbelastning |
-| Schemalagd skalning | Skala via stödd infrastruktur/automation |
-| Reservationer/provisionerad kapacitet | Endast när det stöds; åtaganden kan öka stilleståndskostnader |
+| Schema-baserad skalning | Skala via stödjande infrastruktur/automation |
+| Reservationer/provisionerad kapacitet | Endast när det stöds; åtaganden kan öka passiva kostnader |
 
-Använd [komplett budgetresursmönster](production-ai-practices.md#2-cost-monitoring-and-budgets) med giltigt startdatum, faktureringsomfång, mottagare och behörigheter. En budget skickar varningar; den begränsar inte utgifter. Besparingar beror på mätt användning och är inte garanterade i procent.
+Använd [det kompletta budgetresursmönstret](production-ai-practices.md#2-cost-monitoring-and-budgets) med giltigt startdatum, faktureringsomfång, mottagare och behörigheter. En budget skickar varningar; den sätter inte en övre gräns för utgifter. Besparingar beror på mätt användning och är inte garanterade procentsatser.
 
 ---
 
-## 📊 Övervakningsinställning
+## 📊 Övervakningsuppsättning
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -111,21 +111,21 @@ az monitor metrics list --resource <resource-id>
 
 ---
 
-## 🔗 Navigation
+## 🔗 Navigering
 
 | Riktning | Kapitel |
 |-----------|---------|
 | **Föregående** | [Kapitel 7: Felsökning](../chapter-07-troubleshooting/README.md) |
-| **Kurs slutförd** | [Kursens startsida](../../README.md) |
+| **Kurs slutförd** | [Kursstart](../../README.md) |
 
 ---
 
 ## 📖 Relaterade resurser
 
-- [AI Agentguiden](../chapter-02-ai-development/agents.md)
+- [AI-agenter guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multimedia-agentlösningar](../chapter-05-multi-agent/README.md)
-- [Microservices-exempel](../../examples/microservices/README.md)
+- [Multi-agentlösningar](../chapter-05-multi-agent/README.md)
+- [Mikrotjänster Exempel](../../examples/microservices/README.md)
 
 ---
 

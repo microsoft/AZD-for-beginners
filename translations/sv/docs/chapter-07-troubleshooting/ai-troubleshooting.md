@@ -1,44 +1,44 @@
-# AI-Specifik Felsökningsguide
+# Felsökningsguide för AI-specifika problem
 
-**Kapitelnavigation:**
-- **📚 Kurshemsida**: [AZD För Nybörjare](../../README.md)
-- **📖 Nuvarande Kapitel**: Kapitel 7 - Felsökning & Debugging
-- **⬅️ Föregående**: [Debugging Guide](debugging.md)
-- **➡️ Nästa Kapitel**: [Kapitel 8: Produktions- & Enterprise-mönster](../chapter-08-production/production-ai-practices.md)
+**Kapitelnavigering:**
+- **📚 Kursstart**: [AZD För nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 7 - Felsökning & Debugging
+- **⬅️ Föregående**: [Debuggningsguide](debugging.md)
+- **➡️ Nästa kapitel**: [Kapitel 8: Produktions- & företagsmönster](../chapter-08-production/production-ai-practices.md)
 - **🤖 Relaterat**: [Kapitel 2: AI-First Utveckling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Denna omfattande felsökningsguide behandlar vanliga problem vid implementering av AI-lösningar med AZD, och erbjuder lösningar och felsökningstekniker specifika för Azure AI-tjänster.
+Denna omfattande felsökningsguide behandlar vanliga problem vid distribution av AI-lösningar med AZD och erbjuder lösningar och debuggingtekniker specifika för Azure AI-tjänster.
 
-> **Omfattning:** Kommandon använder exempelresursnamn; ersätt dem och välj rätt prenumeration. Bicep-block är fragment att slå ihop i en befintlig mall, inte fristående implementationer. Python-exempel kräver angivna SDK:er och applikationskonfiguration. Ingen live-implementation i Azure har genomförts för denna granskning.
+> **Omfattning:** Kommandon använder exempel på resursnamn; ersätt dem och välj rätt prenumeration. Bicep-block är fragment att sammanfoga med en befintlig mall, inte fristående distributioner. Python-exempel kräver angivna SDK:er och applikationskonfiguration. Ingen aktiv Azure-distribution utfördes för denna granskning.
 
 ## Innehållsförteckning
 
 - [Microsoft Foundry Models Service-problem](#microsoft-foundry-models-service-issues)
 - [Azure AI Search-problem](#azure-ai-search-problems)
-- [Container Apps-implementeringsproblem](#container-apps-deployment-issues)
+- [Container Apps distributionsproblem](#container-apps-deployment-issues)
 - [Autentiserings- och behörighetsfel](#authentication-and-permission-errors)
-- [Misslyckanden vid modellimplementering](#model-deployment-failures)
+- [Misslyckanden vid modell distribution](#model-deployment-failures)
 - [Prestanda- och skalningsproblem](#performance-and-scaling-issues)
-- [Kostnads- och kvotstyrning](#cost-and-quota-management)
-- [Felsökningsverktyg och tekniker](#debugging-tools-and-techniques)
+- [Kostnads- och kvotadministration](#cost-and-quota-management)
+- [Debuggningverktyg och tekniker](#debugging-tools-and-techniques)
 
 ## Microsoft Foundry Models Service-problem
 
-### Problem: OpenAI-tjänst otillgänglig i regionen
+### Problem: OpenAI-tjänst inte tillgänglig i regionen
 
-**Symptom:**
+**Symtom:**
 ```
 Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Orsaker:**
-- Microsoft Foundry Models saknas i vald region
-- Kvoten uttömd i prioriterade regioner
+- Microsoft Foundry Models inte tillgängliga i vald region
+- Kvot uttömd i föredragna regioner
 - Regionala kapacitetsbegränsningar
 
 **Lösningar:**
 
-1. **Kontrollera Regions Tillgänglighet:**
+1. **Kontrollera regiontillgänglighet:**
 ```bash
 # Inspect model/deployment-type offerings in a candidate region
 az cognitiveservices model list --location eastus2 --output json
@@ -53,7 +53,7 @@ azd env set AZURE_LOCATION eastus2
 # through infra/main.parameters.json as documented by the template.
 ```
 
-3. **Använd Alternativa Regioner:**
+3. **Använd alternativa regioner:**
 ```bicep
 // infra/main.bicep - Explicit location selection, NOT automatic fallback
 @allowed([
@@ -65,26 +65,26 @@ azd env set AZURE_LOCATION eastus2
 param openAiLocation string = 'eastus2'
 ```
 
-### Problem: Modellimplementeringskvot överskriden
+### Problem: Modellens distributionskvot överskriden
 
-**Symptom:**
+**Symtom:**
 ```
 Error: Deployment failed due to insufficient quota
 ```
 
 **Lösningar:**
 
-1. **Kontrollera Aktuell Kvot:**
+1. **Kontrollera nuvarande kvot:**
 ```bash
 # Check quota usage
 az cognitiveservices usage list \
   --location eastus2 --output table
 ```
 
-2. **Begär Kvothöjning:**
-Använd Foundry-portalen för kvotförvaltningsflödet för berörd prenumeration, region, modell och deploymenttyp. Se den [officiella kvotguiden](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). En VM-kvotförfrågan ökar inte modellkvoten.
+2. **Begär kvöthöjning:**
+Använd Foundry-portalens kvotadministrationsflöde för den aktuella prenumerationen, regionen, modellen och distributionstypen. Se den [officiella kvotguiden](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). En VM-kvotförfrågan ökar inte modellkvoten.
 
-3. **Optimera Modellkapacitet:**
+3. **Optimera modellkapaciteten:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -106,36 +106,36 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Problem: Ogiltig API-version
 
-**Symptom:**
+**Symtom:**
 ```
 Error: The API version '2023-05-15' is not available for OpenAI
 ```
 
 **Lösningar:**
 
-1. **Använd Stödd API-version:**
+1. **Använd en stödjande API-version:**
 ```python
 # Stable dated Azure OpenAI data-plane API, where supported by your feature
 AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
-2. **Kontrollera API-versionens Kompatibilitet:**
-Kontrollera [Azure OpenAI API lifecycle referens](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). ARM-resource-provider API-versioner listar **inte** inferens/data-plane API-versioner. Nya v1-klienter använder `/openai/v1/` utan en daterad `api-version`; blanda inte dessa klientkonfigurationer.
+2. **Kontrollera API-versionens kompatibilitet:**
+Kontrollera [Azure OpenAI API lifecycle referens](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). ARM resurs-leverantörs API-versioner listar **inte** inferens-/data-plan API-versioner. Nya v1-klienter använder `/openai/v1/` utan en daterad `api-version`; blanda inte dessa klientkonfigurationer.
 
 ## Azure AI Search-problem
 
-### Problem: Otillräcklig prisnivå för söktjänsten
+### Problem: Otillräcklig prissättning på söktjänst
 
-**Symptom:**
+**Symtom:**
 ```
 Error: Semantic search requires Basic tier or higher
 ```
 
 **Lösningar:**
 
-1. **Använd en Stödd Prisnivå:**
+1. **Använd ett stödjat prisnivå:**
 
-Semantisk ranker kräver Basic eller högre. Att byta från Free/Basic till en annan nivå kan kräva att skapa en ny söktjänst och återskapa index; att redigera en SKU är inte en garanterad uppgradering på plats.
+Semantisk rankare kräver Basic eller högre. Att flytta från Free/Basic till en annan nivå kan kräva att skapa en ny söktjänst och bygga om index; att ändra en SKU är ingen garanterad uppgradering på plats.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -154,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Inaktivera Semantisk Sökning (Utveckling):**
+2. **Inaktivera semantisk sökning (utveckling):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -168,16 +168,16 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Problem: Misslyckanden vid indexskapande
+### Problem: Misslyckande vid indexskapande
 
-**Symptom:**
+**Symtom:**
 ```
 Error: Cannot create index, insufficient permissions
 ```
 
 **Lösningar:**
 
-1. **Verifiera Sökservice-nycklar:**
+1. **Verifiera söktjänstnycklar:**
 ```bash
 # Get search service admin key
 az search admin-key show \
@@ -185,7 +185,7 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **Kontrollera Index-schema:**
+2. **Kontrollera indexschema:**
 ```python
 # Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
@@ -202,7 +202,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Använd Hanterad Identitet:**
+3. **Använd Managed Identity:**
 ```bicep
 // Grant index-definition management permissions to the managed identity.
 // Search Index Data Contributor manages documents, not index definitions.
@@ -217,11 +217,11 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Container Apps-implementeringsproblem
+## Container Apps distributionsproblem
 
-### Problem: Container Build-misslyckanden
+### Problem: Misslyckanden vid containerbygge
 
-**Symptom:**
+**Symtom:**
 ```
 Error: Failed to build container image
 ```
@@ -250,7 +250,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Validera Beroenden:**
+2. **Verifiera beroenden:**
 ```txt
 # Dependency names for these snippets. Resolve supported versions in your
 # project's environment, test together, then commit a lock/pinned requirements file.
@@ -263,7 +263,7 @@ azure-search-documents
 azure-cosmos
 ```
 
-3. **Lägg till Hälsokontroll:**
+3. **Lägg till hälsokontroll:**
 ```python
 # main.py - Add health check endpoint
 from fastapi import FastAPI
@@ -275,16 +275,16 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Problem: Container App-startmisslyckanden
+### Problem: Containerapp startfel
 
-**Symptom:**
+**Symtom:**
 ```
 Error: Container failed to start within timeout period
 ```
 
 **Lösningar:**
 
-1. **Öka Starttidsgräns:**
+1. **Öka start-timeout:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -317,7 +317,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimera Modellinläsning:**
+2. **Optimera modellinläsning:**
 ```python
 # Lazy load models to reduce startup time
 # Illustrative skeleton: implement _initialize_client and synchronize concurrent
@@ -350,18 +350,18 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Autentiserings- och Behörighetsfel
+## Autentiserings- och behörighetsfel
 
-### Problem: Permission nekad för Managed Identity
+### Problem: Nekad behörighet för Managed Identity
 
-**Symptom:**
+**Symtom:**
 ```
 Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
 **Lösningar:**
 
-1. **Verifiera Rolltilldelningar:**
+1. **Verifiera rolltilldelningar:**
 ```bash
 # Check current role assignments
 az role assignment list \
@@ -369,7 +369,7 @@ az role assignment list \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Tilldela Nödvändiga Roller:**
+2. **Tilldela nödvändiga roller:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -386,7 +386,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Testa Autentisering:**
+3. **Testa autentisering:**
 ```python
 # Test managed identity authentication
 from azure.identity import DefaultAzureCredential
@@ -403,20 +403,20 @@ def test_authentication():
 test_authentication()
 ```
 
-Tokenförvärv bevisar autentisering, inte behörighet att anropa en modell. Testa den avsedda operationen separat. Lokalt kan `DefaultAzureCredential` använda utvecklarinloggning; i Azure, verifiera att rätt managed identity är vald.
+Tokenanskaffning bevisar autentisering, inte behörighet att anropa en modell. Testa den avsedda operationen separat. Lokalt kan `DefaultAzureCredential` använda utvecklaruppgifter; i Azure, verifiera att avsedd managed identity är vald.
 
-### Problem: Nyckelvalvåtkomst nekad
+### Problem: Nekad åtkomst till Key Vault
 
-**Symptom:**
+**Symtom:**
 ```
 Error: The user, group or application does not have secrets get permission
 ```
 
 **Lösningar:**
 
-1. **Ge Nyckelvalvstillstånd:**
+1. **Bevilja Key Vault-behörigheter:**
 
-Använd endast följande åtkomstpolicyutdrag för en valv med `enableRbacAuthorization: false`. För ett RBAC-aktiverat valv, använd alternativ 2; att lägga till en åtkomstpolicy ger inte data-plane-åtkomst i RBAC-läge.
+Använd följande access-policy-fragment endast för en vault med `enableRbacAuthorization: false`. För en RBAC-aktiverad vault, använd alternativ 2; att lägga till en access-policy ger inte data-planåtkomst i RBAC-läge.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -435,9 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Använd RBAC Istället för Åtkomstpolicyer:**
+2. **Använd RBAC istället för access policies:**
 
-Valvet måste ha `enableRbacAuthorization: true`; att byta behörighetsmodell kräver planerad migrering av befintliga åtkomster.
+Vaulten måste ha `enableRbacAuthorization: true`; att byta behörighetsmodell kräver en planerad migrering av befintlig åtkomst.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -450,18 +450,18 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Modellimplementeringsmisslyckanden
+## Modell distributionsfel
 
-### Problem: Modellversion tillgänglig
+### Problem: Modellversion ej tillgänglig
 
-**Symptom:**
+**Symtom:**
 ```
 Error: Model version 'gpt-4-32k' is not available
 ```
 
 **Lösningar:**
 
-1. **Kontrollera Tillgängliga Modeller:**
+1. **Kontrollera tillgängliga modeller:**
 ```bash
 # List available models
 az cognitiveservices account list-models \
@@ -471,7 +471,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Välj en Tillgänglig Modell Explicit:**
+2. **Välj en tillgänglig modell explicit:**
 ```bicep
 // Example model selection; verify version and deployment type in the catalog.
 @description('Primary model configuration')
@@ -498,7 +498,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **Validera Modell Före Implementering:**
+3. **Verifiera modell innan distribution:**
 ```bash
 # Management-plane catalog for the actual account
 az cognitiveservices account list-models \
@@ -506,18 +506,18 @@ az cognitiveservices account list-models \
 # Inspect model/version and supported SKUs; check regional quota separately.
 ```
 
-## Prestanda- och Skalningsproblem
+## Prestanda- och skalningsproblem
 
-### Problem: Höga Fördröjningar i Svar
+### Problem: Höga svarstider
 
-**Symptom:**
-- Svarstider över 30 sekunder
+**Symtom:**
+- Responstider > 30 sekunder
 - Timeout-fel
 - Dålig användarupplevelse
 
 **Lösningar:**
 
-1. **Implementera Timeout för Förfrågningar:**
+1. **Implementera förfrågnings-timeouts:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -532,7 +532,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Lägg till Svarscachning:**
+2. **Lägg till cachning av svar:**
 ```python
 # Redis cache for responses
 import redis.asyncio as redis
@@ -552,7 +552,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Konfigurera Autoskalning:**
+3. **Konfigurera autoskalning:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -586,16 +586,16 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Problem: Minnesuteblåsningar
+### Problem: Minnesfel (Out of Memory)
 
-**Symptom:**
+**Symtom:**
 ```
 Error: Container killed due to memory limit exceeded
 ```
 
 **Lösningar:**
 
-1. **Öka Minnestilldelning:**
+1. **Öka minnesallokering:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -614,7 +614,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimera Minnesanvändning:**
+2. **Optimera minnesanvändning:**
 ```python
 # Memory-efficient model handling
 import gc
@@ -641,18 +641,18 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## Kostnads- och Kvotstyrning
+## Kostnads- och kvotadministration
 
-### Problem: Ov väntade Höga Kostnader
+### Problem: Ov väntade höga kostnader
 
-**Symptom:**
+**Symtom:**
 - Azure-faktura högre än förväntat
-- Tokenanvändning överstiger uppskattningar
+- Tokenanvändning överskrider uppskattningar
 - Budgetvarningar utlöstes
 
 **Lösningar:**
 
-1. **Implementera Kostnadskontroller:**
+1. **Implementera kostnadskontroller:**
 ```python
 # Token usage tracking
 class TokenTracker:
@@ -671,9 +671,9 @@ class TokenTracker:
         return total_tokens
 ```
 
-Denna räknare i minnet är illustrativ, inte en månatlig utgiftskontroll: den återställs vid omstart, delas inte mellan repliker och kontrollerar användningen först efter ett anrop. En verklig gräns kräver hållbar bokföring, samtidighetssäkra reserveringar innan förfrågningar och en policy för månatlig återställning. Containerminnesmått måste också ta hänsyn till cgroup-gränser; `psutil.virtual_memory()` är inget pålitligt containergränsmått och skräpsamling genomdriver inte minnesgräns.
+Denna in-memory-räknare är illustrativ, inte en månatlig spenderingskontroll: den återställs vid omstart, delas inte mellan repliker och kontrollerar bara användning efter ett anrop. En riktig gräns kräver hållbar bokföring, samtidighetsåkerlsesäkra reservationer före förfrågningar och policy för månatlig återställning. Container-minnesmått måste också beakta cgroup-gränser; `psutil.virtual_memory()` är ingen pålitlig mätning av containergräns, och garbage collection upprätthåller ingen minnesgräns.
 
-2. **Konfigurera Kostnadsvarningar:**
+2. **Ställ in kostnadsvarningar:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -699,9 +699,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-Deklarera `budgetStartDate` och `budgetEndDate` i din mall. Budgetar notifierar; de stoppar inte resurser eller inför hård utgiftsgräns.
+Deklarera `budgetStartDate` och `budgetEndDate` i din mall. Budgetar notifierar; de stoppar inte resurser eller sätter en hård spenderingsgräns.
 
-3. **Optimera Modellval:**
+3. **Optimera modellval:**
 ```python
 # Cost-aware model selection
 MODEL_COST_TIERS = {
@@ -717,9 +717,9 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4.1'
 ```
 
-## Felsökningsverktyg och tekniker
+## Debuggningverktyg och tekniker
 
-### AZD-felsökningskommandon
+### AZD-debuggningskommandon
 
 ```bash
 # Enable verbose logging
@@ -738,19 +738,22 @@ azd monitor --live
 azd env get-values
 ```
 
-### AZD AI Extensions-kommandon för Diagnostik
+### AZD AI-förlängningskommandon för diagnostik
 
 Om du distribuerade agenter med `azd ai agent init` finns dessa ytterligare verktyg tillgängliga:
 
 ```bash
-# Ensure the agents extension is installed
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Check project storage permissions and agent configuration
 azd ai agent doctor
 
 # Inspect the deployed endpoint
 azd ai agent endpoint show
+
+# Stream hosted-agent logs
+azd ai agent monitor --follow
 
 # Use the MCP server to let AI tools query project state
 azd mcp start
@@ -761,11 +764,13 @@ azd infra generate
 
 > **Tips:** Använd `azd infra generate` för att skriva IaC till disk så att du kan inspektera exakt vilka resurser som provisionerades. Detta är ovärderligt vid felsökning av resurskonfigurationsproblem. Se [AZD AI CLI-referensen](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) för fullständiga detaljer.
 
-**Versionsmedveten diagnostik (2026-11-04):** Agenter `1.0.0-beta.23` kräver `azd >= 1.37.0`; uppgradera kärn-CLI innan inkompatibla tillägg. Denna agentversion behåller utvecklar-RBAC-varningar i slutgiltig deploymentsutdata och identifierar vilken version som var inblandad vid aktiveringsfel/tidsgränser. Ett timeout innebär inte att distributionen misslyckades: inspektera den försöka versionen innan omförsök. Den rättar också A2A 0.3 anrop som visar livscykelmeddelanden istället för avslutade svar. Kärn-`azd 1.37.1` rättar avbokningspropagering mellan tillägg; `1.37.2` förbättrar kritiska provisioneringsbekräftelser och hantering av avbokningar.
+**GA arbetsflödesdiagnostik (2026-11-09):** Kontrollera att `azd version` är minst 1.37.0 och inspektera `azd ext list --installed`. Uppdatera först kärn-CLI med `azd update` eller dess installatör, och sedan bundeln med `azd ext upgrade microsoft.foundry`. Vid lokala fel, kontrollera aktuell uv, Python 3.13+ för baskoden, `PYTHONNOUSERSITE: "1"` i dess tjänstkonfiguration och Azure-referenserna som används av `DefaultAzureCredential`. Håll `azd ai agent run` igång medan du anropar `--local` från en andra terminal i projektkatalogen.
 
-Om ett äldre handledningsvärderingskommando bara skriver ut migreringsvägledning, installera `azure.ai.evaluations` (`1.0.0-beta.2` kräver `azd >= 1.33.0`) och använd `azd ai eval init`, `generate`, och `run start`. Optimerings `--config` accepterar inte längre legacy värderingsfiler. Se [värderingsmigrering](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) och [optimeringsmigrering](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Provisioneringsframgång bevisar inte att utvecklaren har data-planåtkomst. Granska RBAC-varningar och [hosted-agent behörighetsmatris](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions). Timeout bekräftar inte distributionsfel: inspektera den försökta versionen och loggar innan du försöker igen. Tidigare agenter beta.23 förbättrade dessa varningar och A2A-utdata; dessa historiska fixar beskrivs i [versionsanteckningarna](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes), inte ett krav för att installera den betan.
 
-### Applikationsfelsökning
+Om `azd ai eval` inte finns, installera `azure.ai.evaluations` separat; GA-bundeln inkluderar den inte. Om ett äldre tutorials agent-evauationskommando bara skriver ut migreringsanvisningar, använd det separata `azd ai eval`-arbetsflödet. Optimeringens `--config` accepterar inte längre äldre evalueringsfiler. Se [evalueringsmigrering](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) och [optimeringsmigrering](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Applikationsdebuggning
 
 1. **Strukturerad loggning:**
 ```python
@@ -859,33 +864,33 @@ def monitor_performance(func):
 
 | Felkod | Beskrivning | Lösning |
 |------------|-------------|----------|
-| 401 | Obefogad | Kontrollera API-nycklar och managed identity-konfiguration |
-| 403 | Nekad tillgång | Verifiera RBAC-rolltilldelningar |
-| 429 | Begränsad | Implementera omförsökslogik med exponentiell backoff |
-| 500 | Intern serverfel | Kontrollera modellimplementeringsstatus och loggar |
-| 503 | Tjänst otillgänglig | Verifiera tjänstehälsa och regional tillgänglighet |
+| 401 | Obemyndigad | Kontrollera API-nycklar och managed identity-konfiguration |
+| 403 | Nekad åtkomst | Verifiera RBAC-rolltilldelningar |
+| 429 | Rate Limited | Implementera omförsökslogik med exponentiell backoff |
+| 500 | Internt serverfel | Kontrollera modellens distributionsstatus och loggar |
+| 503 | Tjänst otillgänglig | Verifiera tjänstens hälsa och regional tillgänglighet |
 
 ## Nästa steg
 
-1. **Granska [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** för bästa praxis vid implementation
-2. **Genomför [Production AI Practices](../chapter-08-production/production-ai-practices.md)** för företagsklara lösningar
-3. **Gå med i [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** för community-stöd
-4. **Rapportera problem** till [AZD GitHub-repository](https://github.com/Azure/azure-dev) för AZD-specifika problem
+1. **Granska [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** för distributionens bästa praxis
+2. **Genomför [Produktion AI-praktiker](../chapter-08-production/production-ai-practices.md)** för företagsredo lösningar
+3. **Gå med i [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** för communitysupport
+4. **Skicka in problem** till [AZD GitHub-förvaret](https://github.com/Azure/azure-dev) för AZD-specifika problem
 
 ## Resurser
 
-- [Felsökning av Azure OpenAI-kvot och hämtningsbegränsning](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
-- [Container Apps Felsökning](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search Felsökning](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Installera Azure-felsökningsfärdigheter i din editor: `npx skills add microsoft/github-copilot-for-azure`
+- [Felsökning av Azure OpenAI kvot och throttling](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
+- [Container Apps felsökning](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI Search felsökning](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Installera Azure felsökningsfärdigheter i din editor: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Kapitelnavigation:**
-- **📚 Kurshemsida**: [AZD För Nybörjare](../../README.md)
-- **📖 Nuvarande Kapitel**: Kapitel 7 - Felsökning & Debugging
-- **⬅️ Föregående**: [Debugging Guide](debugging.md)
-- **➡️ Nästa Kapitel**: [Kapitel 8: Produktions- & Enterprise-mönster](../chapter-08-production/production-ai-practices.md)
+**Kapitelnavigering:**
+- **📚 Kursstart**: [AZD För nybörjare](../../README.md)
+- **📖 Nuvarande kapitel**: Kapitel 7 - Felsökning & Debugging
+- **⬅️ Föregående**: [Debuggningsguide](debugging.md)
+- **➡️ Nästa kapitel**: [Kapitel 8: Produktions- & företagsmönster](../chapter-08-production/production-ai-practices.md)
 - **🤖 Relaterat**: [Kapitel 2: AI-First Utveckling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 - **📖 Referens**: [Azure Developer CLI Felsökning](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
