@@ -1,34 +1,34 @@
-# Komandų Santrauka – Esminės AZD Komandos
+# Komandų Greita Santrauka – Pagrindinės AZD Komandos
 
-**Greita Nuoroda Visoms Pamokoms**
-- **📚 Kurso Pradžia**: [AZD Pradedantiesiems](../README.md)
-- **📖 Greitas Pradėjimas**: [1 skyrius: Pagrindai ir Greitas Pradėjimas](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI Komandos**: [2 skyrius: AI-Pirmoji Plėtra](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Pažengusieji**: [4 skyrius: Infrastruktūra kaip Kodeksas](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**Greita Nuoroda Visoms Skyrams**
+- **📚 Kurso Pagrindas**: [AZD Pradedantiesiems](../README.md)
+- **📖 Greitas Pradžia**: [1 Skyrius: Pagrindai ir Greitas Pradžia](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 DI Komandos**: [2 Skyrius: DI-Pirmoji Plėtra](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Pažengusieji**: [4 Skyrius: Infrastruktūra kaip Kodas](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Įvadas
 
-Ši išsami santrauka suteikia greitą prieigą prie dažniausiai naudojamų Azure Developer CLI komandų, suskirstytų pagal kategorijas su praktiškais pavyzdžiais. Puikiai tinka greitiems užklausimams plėtros, trikčių šalinimo ir kasdienės veiklos metu su azd projektais.
+Ši išsami greita santrauka suteikia greitą prieigą prie dažniausiai naudojamų Azure Developer CLI komandų, suskirstytų pagal kategorijas su praktiniais pavyzdžiais. Puikiai tinka greitam peržiūrėjimui vystymo, trikčių šalinimo ir kasdienių azd projektų operacijų metu.
 
 ## Mokymosi Tikslai
 
 Naudodami šią santrauką, jūs:
-- Turėsite momentinę prieigą prie esminių Azure Developer CLI komandų ir sintaksės
+- Turėsite momentinę prieigą prie būtinų Azure Developer CLI komandų ir sintaksės
 - Suprasite komandų organizavimą pagal funkcines kategorijas ir naudojimo atvejus
-- Turėsite nuorodas į praktinius pavyzdžius dažnuose kūrimo ir diegimo scenarijuose
-- Galėsite naudoti trikčių šalinimo komandas greitam problemų sprendimui
-- Lengvai rasite pažangias konfigūracijos ir pritaikymo parinktis
-- Susikursite aplinkos valdymo ir daugialypės aplinkos darbo su komandomis schemą
+- Turėsite praktinių pavyzdžių bendroms kūrimo ir diegimo situacijoms
+- Turėsite prieigą prie trikčių šalinimo komandų greitam problemų sprendimui
+- Efektyviai rasite pažangias konfigūravimo ir pritaikymo parinktis
+- Surasite aplinkos valdymo ir kelių aplinkų darbo procesų komandas
 
 ## Mokymosi Rezultatai
 
-Reguliariai naudodamiesi šia santrauka, jūs sugebėsite:
-- Užtikrintai vykdyti azd komandas be pilnų dokumentacijų nuorodų
-- Greitai išspręsti dažniausias problemas naudodami tinkamas diagnostikos komandas
+Reguliariai naudodami šią santrauką galėsite:
+- Užtikrintai vykdyti azd komandas be nuolatinio dokumentacijos tikrinimo
+- Greitai spręsti dažnas problemas naudodami tinkamas diagnostikos komandas
 - Efektyviai valdyti kelias aplinkas ir diegimo scenarijus
-- Taikyti pažangias azd funkcijas ir konfigūracijos parinktis pagal poreikį
-- Trikčių šalinimą atlikti sistemingai sekant komandų eilę
-- Optimizuoti darbo eigas efektyviai naudodami azd trumpinius ir parinktis
+- Pritaikyti pažangias azd funkcijas ir konfigūravimo parinktis pagal poreikį
+- Sistemiškai šalinti diegimo problemas naudojant komandų sekas
+- Optimizuoti darbo procesus pasinaudojant azd nuorodomis ir parinktimis
 
 ## Pradžios Komandos
 
@@ -54,7 +54,7 @@ azd auth logout
 az logout
 ```
 
-### Projekto Inicializavimas
+### Projekto Inicijavimas
 ```bash
 # Browse available templates
 azd template list
@@ -73,7 +73,7 @@ cd my-awesome-app
 
 ## Pagrindinės Diegimo Komandos
 
-### Pilna Diegimo Darbo Eiga
+### Pilnas Diegimo Darbo Procesas
 ```bash
 # Deploy everything (provision + deploy)
 azd up
@@ -113,7 +113,7 @@ azd deploy api
 azd deploy --all
 ```
 
-### Kūrimas ir Paketavimas
+### Kūrimas ir Pakavimas
 ```bash
 # Restore (download) application dependencies
 azd restore
@@ -128,14 +128,14 @@ azd package
 azd package api
 ```
 
-> **`azd restore`** atsisiunčia jūsų programos priklausomybes (npm, pip, NuGet, Maven ir kt.). Ji vykdoma automatiškai vykdant `azd package` ir `azd deploy`, todėl retai reikia ją kviesti tiesiogiai – naudokite rankiniu būdu, kad iš anksto atsisiųstumėte priklausomybes (pavyzdžiui, tam, kad apšiltintumėte CI talpyklą arba dirbtumėte be interneto vėliau).
+> **`azd restore`** atsisiunčia jūsų programos priklausomybes (npm, pip, NuGet, Maven ir kt.). Ji automatiškai paleidžiama vykdant `azd package` ir `azd deploy`, todėl retai ją kviečiate tiesiogiai — paleiskite rankiniu būdu, jei norite iš anksto paruošti priklausomybes (pavyzdžiui, įkaitinti CI talpyklą arba vėliau dirbti neprisijungus).
 
-> **`azd package`** paruošia diegimui tinkamą artefaktą, neįdiegdamas programėlės paslaugos. Elgesys priklauso nuo kalbos ir hostingo: konteinerių pakuotės gali naudoti Azure nuotolinius kūrimus ir paskelbti paveikslėlius registrui, tad tai nebūtinai yra neprisijungęs ar be rašymo į Azure. `azd deploy` gali automatiškai pakuoti; naudokite atskirą pakavimo žingsnį, kai reikia artefakto ar kūrimo patikros.
+> **`azd package`** paruošia diegimui tinkamą artefaktą, nediegdamas programos paslaugos. Elgesys priklauso nuo programavimo kalbos ir talpinimo: konteinerių pakavimas gali naudoti Azure nuotolinius kūrimus ir publikuoti vaizdus į registrą, tad nebūtinai yra neprisijungęs arba be įrašymo į Azure. `azd deploy` gali automatiškai pakuoti; naudokite atskirą pakavimo žingsnį, kai reikia artefakto ar kūrimo patikrinimo.
 
 
 ## 🌍 Aplinkos Valdymas
 
-### Aplinkos Veiksmai
+### Aplinkos Operacijos
 ```bash
 # List all environments
 azd env list
@@ -170,11 +170,11 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-Aplinkos failai yra paprasto teksto. Nenaudokite `azd env set` kaip slaptos saugyklos; naudokite Key Vault nuorodas arba valdomą identitetą pagal poreikį.
+Aplinkos failai yra paprasto teksto. Nenaudokite `azd env set` kaip slaptų duomenų saugyklos; naudokite Key Vault nuorodas arba valdomą identitetą pagal poreikį.
 
-## ⚙️ Konfigūracijos Komandos
+## ⚙️ Konfigūravimo Komandos
 
-### Globali Konfigūracija
+### Globinė Konfigūracija
 ```bash
 # List all configuration
 azd config show
@@ -204,7 +204,7 @@ azd show --output json
 
 ## 📊 Stebėsena ir Diagnostika
 
-### Stebėjimo Informacinė Sritis
+### Stebėjimo Skydelis
 ```bash
 # Open Azure portal monitoring dashboard
 azd monitor
@@ -219,9 +219,9 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-Application Insights turi būti sukonfigūruota šablono. AZD gyvoji metrikų parinktis šiuo metu nepalaiko Python programėlių; vietoje to naudokite apžvalgą, žurnalus arba dokumentuoto pavyzdžio susijusį sekimą.
+Application Insights turi būti sukonfigūruotas pagal šabloną. AZD Live Metrics parinktis šiuo metu nėra palaikoma Python programoms; vietoje jos naudokite apžvalgą, žurnalus ar pavyzdžio dokumentuotą sekimo darbo procesą.
 
-### Konteinerių Žurnalų Peržiūra
+### Talpyklų Žurnalų Peržiūra
 ```bash
 # View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
@@ -233,7 +233,7 @@ az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 azd monitor --logs
 ```
 
-### Log Analytics Užklausos
+### Žurnalų Analitikos Užklausos
 ```bash
 # Access Log Analytics via Azure Portal
 azd monitor --logs
@@ -273,9 +273,9 @@ azd version
 azd config show
 ```
 
-## 🔧 Pažangiosios Komandos
+## 🔧 Pažangios Komandos
 
-### Vamzdynas ir CI/CD
+### Potekmių ir CI/CD
 ```bash
 # Configure GitHub Actions
 azd pipeline config
@@ -317,27 +317,26 @@ azd show --output json
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI ir Priedų Komandos
+## 🤖 DI ir Priedų Komandos
 
 ### AZD Priedai
 
-AI CLI nuoroda peržiūrėta 2026-11-04: `azd 1.37.2`, agentai `1.0.0-beta.23`, vertinimai `1.0.0-beta.2`. Naudokite `azd >= 1.37.0` kombinuotai darbo eigai; prieš nekompatibilius priedus atnaujinkite pagrindinį CLI.
+Foundry GA nuoroda atnaujinta 2026-11-09: `microsoft.foundry` paketas 1.0, paskelbtas [2026 m. lapkričio 5 d.](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Naudokite `azd >= 1.37.0`; komponentai yra nepriklausomai versijuojami, o paruošiamojo peržiūros funkcijos turi savo statusą.
 
 ```bash
 # List all available extensions (including AI)
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Check/update the core CLI before updating extensions
+azd version
+azd update
+
+# Install the GA bundle (agents, connections, inspector, projects,
+# routines, skills, and toolboxes)
+azd ext install microsoft.foundry
 
 # Install the separate evaluations extension
 azd extension install azure.ai.evaluations
-
-# Install the agent skills extension (preview)
-azd extension install azure.ai.skills
-
-# Install the Foundry connections extension (preview)
-azd extension install azure.ai.connections
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -345,11 +344,14 @@ azd extension install azure.ai.finetune
 # Install the custom models extension
 azd extension install azure.ai.models
 
-# Upgrade all installed extensions
-azd extension upgrade --all
+# Inspect installed versions and upgrade the bundle
+azd ext list --installed
+azd ext upgrade microsoft.foundry
 ```
 
-### AI Agentų Komandos
+Paketas neapima įvertinimų, duomenų rinkinių, smulkaus kalibravimo arba individualių modelių. Vis dar palaikoma atskirų pagrindinių priedų diegimas. Vadovaukitės [GA hostingo agente demonstracija](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) dėl pavyzdžio, veikiančio su Python 3.13+, dabartine uv, leidimais ir modelių kvota.
+
+### DI Agentų Komandos
 ```bash
 # Initialize an agent project interactively
 azd ai agent init
@@ -363,11 +365,27 @@ azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-
 # Adopt into a specified directory, then follow the printed cd next step
 azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
+# For a code-based hosted agent, add --deploy-mode code during init
+# Review azure.yaml, then provision before running locally
+azd provision
+azd ai agent run
+
+# In a second terminal in the same project directory
+azd ai agent invoke --local "Explain how this agent is deployed."
+
+# Upload source for a remote Foundry build (code mode)
+azd deploy
+
 # Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
 # Show the live endpoint configuration
 azd ai agent endpoint show
+
+# Review hosted-agent changes, stream logs, or diagnose permissions
+azd deploy --preview
+azd ai agent monitor --follow
+azd ai agent doctor
 
 # Download the deployed source of a code-based hosted agent
 azd ai agent code download
@@ -376,19 +394,21 @@ azd ai agent code download
 azd ai agent delete --force
 ```
 
-`--template`/`-t` pakeičia pasenusią `--manifest`/`-m` rašybą; reikalinga atnaujinti senus manifestus. Šiuo metu nėra agent-init `--host containerapp` parinkties. Valdomos paleisties, balso ir ilgalaikės peržiūros reikalauja nepriklausomų apvalkalo/CI aplinkų patvirtinimų; žiūrėkite [AI CLI nuorodą](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+`--template`/`-t` keičia pasenusį `--manifest`/`-m` rašybą; senieji manifestai turi būti migruoti. Šiuo metu nėra agent-init `--host containerapp` parinkties. Valdomas-apvalkalas, balso ir ilgai veikiančios peržiūros reikalauja atskirų shell/CI aplinkos sutikimų; žr. [DI CLI nuorodą](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
 
-### AI Vertinimai ir Optimizavimas
+Vietinis testavimas vis dar naudoja Azure modelių diegimus ir sąlyginai kainuoja. Valymui, `azd down` ištrina ką tik sukurtos Foundry projekto išteklių grupę, bet palieka pakartotinai naudojamus projekto išteklius; pašalinkite tik nepageidaujamus išteklius, kuriuos valdote atskirai.
+
+### DI Įvertinimai ir Optimizavimas
 ```bash
-# In an initialized agent project, configure evaluation resources
-azd ai eval init
-
-# Optionally generate a rubric and dataset; review files and printed next steps
+# Generate and review a draft dataset and rubric (Dataset and evaluator / Turn)
 azd ai eval generate
+
+# In the initialized agent project, select those assets and a judge model
+azd ai eval init --name quality
 
 # Register datasets/evaluators/eval groups, then run and inspect results
 azd up
-azd ai eval run start --wait
+azd ai eval run start --eval quality --wait
 azd ai eval run list
 azd ai eval run show <run-id>
 azd ai eval run output list <run-id>
@@ -397,7 +417,22 @@ azd ai eval run output list <run-id>
 azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
 ```
 
-Agentai beta.22 pakeitė senas vertinimo komandas su `azd ai eval` iš `azure.ai.evaluations`. Naujoji vertinimo konfigūracija naudoja camelCase raktus. Optimizavimo `--config` reikalauja atskiro optimizavimo API užklausos, **ne** senos `eval.yaml` ar naujos `azure.eval.yaml`; naudokite `--eval`/`--eval-config` vertinimui pakartotinai. Žiūrėkite [vertinimo nustatymą](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) ir [optimizavimo migraciją](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Agentai beta.22 pakeitė senąsias įvertinimo komandas su `azd ai eval` iš `azure.ai.evaluations`. Nauja įvertinimo konfigūracija naudoja camelCase raktus. Optimizavimo `--config` reikalauja atskiro optimizavimo API užklausos, **ne** senosios `eval.yaml` arba naujos `azure.eval.yaml`; naudokite `--eval`/`--eval-config` įvertinimo pakartotiniam naudojimui. Žr. [įvertinimo sąranką](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) ir [optimizavimo migraciją](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Foundry CI/CD
+```bash
+# After a successful local deployment, generate and review the pipeline
+azd up
+azd pipeline config
+
+# Runner steps: install extensions, authenticate, then deploy
+azd ext install microsoft.foundry azure.ai.evaluations
+# Keep the generated OIDC sign-in and environment settings here
+azd up --no-prompt
+azd ai eval run start --eval quality --wait --no-prompt --fail-on "pass-rate=0.9"
+```
+
+Paleidimo fragmentas nėra pilnas darbo procesas. Pateikite peržiūrėtą įvertinimo konfigūraciją ir neslaptinius išteklius, suteikite prieigą prie duomenų rinkinių/įvertintojų/modelių ir naudokite aplinką pagal etapą. Žr. [autentifikuoto CI/CD pavyzdį](../docs/chapter-08-production/production-ai-practices.md#cicd-pipeline-configuration).
 
 ### MCP Serveris (Alfa)
 ```bash
@@ -419,9 +454,9 @@ azd infra --help
 
 ---
 
-## 🎯 Greitosios Darbo Eigos
+## 🎯 Greiti Darbo Procesai
 
-### Plėtros Darbo Eiga
+### Vystymo Darbo Procesas
 ```bash
 # Start a new project in an explicit directory
 azd init --template todo-nodejs-mongo my-project
@@ -438,7 +473,7 @@ azd deploy
 azd monitor --live
 ```
 
-### Daugiaaplinkės Darbo Eiga
+### Kelių Aplinkų Darbo Procesas
 ```bash
 # Set up environments
 azd env new dev
@@ -458,7 +493,7 @@ azd env select production
 azd up
 ```
 
-### Trikčių Šalinimo Darbo Eiga
+### Trikčių Šalinimo Darbo Procesas
 ```bash
 # Check deployment status
 azd show --debug
@@ -490,7 +525,7 @@ azd config show
 azd auth login
 ```
 
-### Šablono Derinimas
+### Šablonų Derinimas
 ```bash
 # List available templates with details
 azd template list --output json
@@ -517,7 +552,7 @@ cd /path/to/your/project
 echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Išvesties Formavimas
+## 🎨 Išvesties Formatai
 
 ### JSON Išvestis
 ```bash
@@ -540,9 +575,9 @@ azd env list
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Dažnai Derinamos Komandų Kombinacijos
+## 🔧 Dažniausios Komandų Kombinacijos
 
-### Sveikatos Patikrinimo Skriptas
+### Būklės Patikros Skriptas
 ```bash
 #!/bin/bash
 # Quick health check
@@ -551,7 +586,7 @@ azd env get-values
 azd monitor --logs
 ```
 
-### Diegimo Validacija
+### Diegimo Patvirtinimas
 ```bash
 #!/bin/bash
 # Pre-deployment validation
@@ -560,7 +595,7 @@ azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
-### Aplinkų Palyginimas
+### Aplinkos Palyginimas
 ```bash
 #!/bin/bash
 # Compare environments
@@ -580,7 +615,7 @@ azd down --environment <environment-name>
 
 ## 📝 Aplinkos Kintamieji
 
-### Dažnai Naudojami Aplinkos Kintamieji
+### Dažniausiai Pasitaikantys Aplinkos Kintamieji
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -596,9 +631,9 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Skubių Situacijų Komandos
+## 🚨 Skubios Komandos
 
-### Greitieji Pataisymai
+### Greiti Pataisymai
 ```bash
 # Reauthenticate AZD without changing Azure CLI's account cache
 azd auth login
@@ -628,7 +663,7 @@ azd deploy
 
 ## 💡 Profesionalūs Patarimai
 
-### Trumpiniai Greitesnei Darbo Eigai
+### Trumpiniai Greitesniam Darbui
 ```bash
 # Add to your .bashrc or .zshrc
 alias azdup='azd up'
@@ -637,7 +672,7 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Funkcijų Trumpiniai
+### Funkcijų Nuorodos
 ```bash
 # Quick environment switching
 azd-env() {
@@ -660,7 +695,7 @@ azd-status() {
 
 ## 📖 Pagalba ir Dokumentacija
 
-### Pagalbos Gavimas
+### Kaip Gauti Pagalbą
 ```bash
 # General help
 azd --help
@@ -687,17 +722,17 @@ azd template show <template-name> --docs
 
 ---
 
-**Patarimas**: Užsirašykite šią santrauką ir naudokite `Ctrl+F` greitai surasti jums reikalingas komandas!
+**Patarimas**: Užsibrūkšnokite šią santrauką ir naudokite `Ctrl+F`, kad greitai rastumėte reikiamas komandas!
 
 ---
 
 **Naršymas**
-- **Ankstesnė Pamoka**: [Išankstiniai Patikrinimai](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Ankstesnė Pamoka**: [Pradinių Patikrinimų](../docs/chapter-06-pre-deployment/preflight-checks.md)
 - **Kita Pamoka**: [Žodynas](glossary.md)
 
 ---
 
-> **💡 Norite „Azure“ komandų pagalbos savo redaktoriuje?** Įdiekite [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) su `npx skills add microsoft/github-copilot-for-azure` — 37 įgūdžiai AI, Foundry, diegimui, diagnostikai ir kt.
+> **💡 Norite Azure komandų pagalbos savo redaktoriuje?** Įdiekite [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) su `npx skills add microsoft/github-copilot-for-azure` — 37 įgūdžiai DI, Foundry, diegimui, diagnostikai ir dar daugiau.
 
 ---
 
