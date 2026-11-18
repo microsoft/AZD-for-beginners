@@ -1,71 +1,71 @@
 # Tác nhân AI với Azure Developer CLI
 
-**Điều hướng chương:**
-- **📚 Trang chủ khóa học**: [AZD Cho Người Mới](../../README.md)
-- **📖 Chương hiện tại**: Chương 2 - Phát triển AI-Đầu tiên
-- **⬅️ Trước**: [Tích hợp Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Tiếp theo**: [Triển khai Mô hình AI](ai-model-deployment.md)
-- **🚀 Nâng cao**: [Giải pháp Đa tác nhân](../../examples/retail-scenario.md)
+**Điều hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 2 - Phát Triển Ưu Tiên AI
+- **⬅️ Trước**: [Tích Hợp Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Tiếp Theo**: [Triển Khai Mô Hình AI](ai-model-deployment.md)
+- **🚀 Nâng Cao**: [Giải Pháp Đa Tác Nhân](../../examples/retail-scenario.md)
 
 ---
 
 ## Giới thiệu
 
-Các tác nhân AI là các chương trình tự động có khả năng nhận biết môi trường, ra quyết định và thực hiện các hành động để đạt được mục tiêu cụ thể. Khác với các chatbot đơn giản chỉ đáp lại lệnh, tác nhân có thể:
+Tác nhân AI là các chương trình tự động có khả năng cảm nhận môi trường, đưa ra quyết định và thực hiện hành động để đạt được mục tiêu cụ thể. Khác với chatbot đơn giản chỉ phản hồi các câu hỏi, các tác nhân có thể:
 
 - **Sử dụng công cụ** - Gọi API, tìm kiếm cơ sở dữ liệu, thực thi mã
-- **Lập kế hoạch và suy luận** - Phân nhỏ nhiệm vụ phức tạp thành các bước
-- **Học từ ngữ cảnh** - Duy trì bộ nhớ và thích nghi hành vi
+- **Lập kế hoạch và suy luận** - Chia nhỏ các nhiệm vụ phức tạp thành các bước
+- **Học từ ngữ cảnh** - Duy trì bộ nhớ và điều chỉnh hành vi
 - **Hợp tác** - Làm việc cùng các tác nhân khác (hệ thống đa tác nhân)
 
-Hướng dẫn này sẽ chỉ bạn cách triển khai các tác nhân AI lên Azure bằng Azure Developer CLI (azd).
+Hướng dẫn này sẽ chỉ cho bạn cách triển khai tác nhân AI trên Azure bằng Azure Developer CLI (azd).
 
-Việc sử dụng ngữ cảnh hội thoại không phải là đào tạo mô hình: bộ nhớ lâu dài, kiểm soát truy cập và lưu giữ phải do ứng dụng triển khai/cấu hình.
+Việc sử dụng ngữ cảnh hội thoại không phải là đào tạo mô hình: bộ nhớ bền vững, kiểm soát truy cập và lưu giữ phải được ứng dụng thực hiện/cấu hình.
 
-> **Đánh giá phát hành (2026-11-04):** Các ví dụ CLI đã được kiểm tra theo tài liệu/nguồn `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, và `azure.ai.evaluations` `1.0.0-beta.2`, không phải là triển khai Azure trực tiếp. Sử dụng `azd >= 1.37.0` cho quy trình kết hợp. Xem [thay đổi và sửa lỗi gần đây](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) trước khi nâng cấp các dự án cũ.
+> **Cập nhật Foundry GA (2026-11-09):** Cài đặt gói `microsoft.foundry` 1.0 đã phát hành rộng rãi với `azd >= 1.37.0`. Các đánh giá được cài đặt riêng; các tính năng xem trước tùy chọn và đoạn SDK cổ điển bên dưới không được quảng bá trong bản GA bởi thông báo gói. Hướng dẫn này dựa trên [thông báo GA](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/) và tài liệu, không phải triển khai Azure trực tiếp.
 
 ## Mục tiêu học tập
 
 Sau khi hoàn thành hướng dẫn này, bạn sẽ:
 - Hiểu tác nhân AI là gì và khác biệt với chatbot ra sao
-- Triển khai mẫu tác nhân AI có sẵn bằng AZD
-- Cấu hình tác nhân Foundry cho tác nhân tùy chỉnh
-- Thực hiện các mẫu tác nhân cơ bản (sử dụng công cụ, RAG, đa tác nhân)
-- Giám sát và gỡ lỗi tác nhân đã triển khai
+- Triển khai mẫu tác nhân AI có sẵn sử dụng AZD
+- Cấu hình Foundry Agents cho tác nhân tùy chỉnh
+- Triển khai các mẫu cơ bản của tác nhân (sử dụng công cụ, RAG, đa tác nhân)
+- Giám sát và gỡ lỗi các tác nhân đã triển khai
 
 ## Kết quả học tập
 
-Sau khi hoàn thành, bạn sẽ có thể:
+Sau khi hoàn thành, bạn có thể:
 - Triển khai ứng dụng tác nhân AI lên Azure chỉ với một lệnh
 - Cấu hình công cụ và khả năng của tác nhân
-- Triển khai tạo nội dung tăng cường truy xuất (RAG) với các tác nhân
-- Thiết kế kiến trúc đa tác nhân cho các quy trình phức tạp
-- Khắc phục các sự cố phổ biến khi triển khai tác nhân
+- Triển khai tạo nội dung tăng cường truy xuất (RAG) với tác nhân
+- Thiết kế kiến trúc đa tác nhân cho quy trình phức tạp
+- Khắc phục các sự cố triển khai tác nhân phổ biến
 
 ---
 
-## 🤖 Điều gì làm cho tác nhân khác biệt với chatbot?
+## 🤖 Tác nhân khác chatbot như thế nào?
 
-| Tính năng | Chatbot | Tác nhân AI |
+| Đặc điểm | Chatbot | Tác nhân AI |
 |---------|---------|----------|
-| **Hành vi** | Đáp lại các lời nhắc | Thực hiện hành động tự động |
-| **Công cụ** | Có thể dùng công cụ hoặc truy xuất | Thường dùng công cụ trong vòng lặp có mục đích |
-| **Bộ nhớ** | Phụ thuộc ứng dụng | Bộ nhớ lâu dài chỉ khi được triển khai rõ ràng |
-| **Lập kế hoạch** | Phản hồi một lần | Suy luận đa bước |
-| **Hợp tác** | Thực thể đơn | Có thể làm việc cùng các tác nhân khác |
+| **Hành vi** | Phản hồi theo câu hỏi | Thực hiện hành động tự chủ |
+| **Công cụ** | Có thể sử dụng truy xuất hoặc công cụ | Thường sử dụng công cụ trong vòng lặp hướng mục tiêu |
+| **Bộ nhớ** | Tùy thuộc ứng dụng | Có bộ nhớ bền vững nếu được triển khai rõ ràng |
+| **Lập kế hoạch** | Phản hồi một lần | Suy luận nhiều bước |
+| **Hợp tác** | Thực thể đơn lẻ | Có thể làm việc với các tác nhân khác |
 
-### So sánh đơn giản
+### Tương tự đơn giản
 
-- **Chatbot** = Một người hỗ trợ trả lời câu hỏi tại quầy thông tin
-- **Tác nhân AI** = Một trợ lý cá nhân có thể gọi điện, đặt lịch hẹn, và hoàn thành công việc cho bạn
+- **Chatbot** = Người trợ giúp trả lời câu hỏi tại bàn thông tin
+- **Tác nhân AI** = Trợ lý cá nhân có thể gọi điện, đặt lịch hẹn, và hoàn thành công việc cho bạn
 
 ---
 
-## 🚀 Bắt đầu nhanh: Triển khai tác nhân đầu tiên của bạn
+## 🚀 Bắt đầu nhanh: Triển khai Tác nhân đầu tiên của bạn
 
-Chọn một tùy chọn trong **thư mục làm việc trống mới**. Lệnh `.` khởi tạo tại đó; nếu không có đích cụ thể, AZD hiện tại có thể tạo thư mục con tên mẫu và không thay đổi thư mục shell của bạn. Giữ các mẫu/môi trường riêng biệt trong các thư mục khác nhau.
+Chọn một trong các tùy chọn trong **thư mục làm việc mới hoàn toàn trống**. Lệnh `.` khởi tạo tại đó; nếu không chỉ định đích rõ ràng, AZD hiện tại có thể tạo thư mục con theo tên mẫu và không thay đổi thư mục shell của bạn. Giữ mẫu/môi trường khác nhau trong các thư mục riêng biệt.
 
-Các khoảng thời gian/chi phí dưới đây mang tính minh họa, không phải báo giá chính xác. Kiểm tra yêu cầu, giá, hạn mức mô hình và dịch vụ tùy chọn của mỗi mẫu trước khi triển khai.
+Thời gian/chi phí dưới đây chỉ mang tính minh họa, không phải báo giá xác thực. Kiểm tra yêu cầu hiện tại, giá, hạn ngạch mô hình và dịch vụ tùy chọn của từng mẫu trước khi triển khai.
 
 ### Tùy chọn 1: Mẫu Foundry Agents (Khuyến nghị)
 
@@ -77,12 +77,12 @@ azd init --template get-started-with-ai-agents .
 azd up
 ```
 
-**Những gì được triển khai:** Hạ tầng hiện tại của mẫu và các tùy chọn chọn lọc quyết định mô hình, công cụ, lưu trữ và tài nguyên giám sát. Xem xét README và `infra/` trước khi cấp phép; không phải mẫu tác nhân nào cũng bao gồm Search hoặc giao diện web.
+**Được triển khai:** Cơ sở hạ tầng hiện tại và các tùy chọn được chọn của mẫu sẽ quyết định mô hình, công cụ, nhà lưu trữ và tài nguyên giám sát. Xem xét README và `infra/` trước khi cấp phát; không phải mọi mẫu tác nhân đều có Search hoặc giao diện web.
 
 **Thời gian:** ~15-20 phút
-**Chi phí:** ~$100-150/tháng (phát triển)
+**Chi phí:** ~100-150 USD/tháng (phát triển)
 
-### Tùy chọn 2: Tác nhân Viết sáng tạo với Prompty
+### Tùy chọn 2: Tác nhân Viết Sáng tạo với Prompty
 
 ```bash
 # Initialize the Prompty-based agent template
@@ -92,12 +92,12 @@ azd init --template https://github.com/Azure-Samples/contoso-creative-writer .
 azd up
 ```
 
-**Những gì được triển khai:** Mẫu viết đa tác nhân FastAPI/Prompty sử dụng Azure OpenAI, Bing Grounding, và Azure AI Search. Kho lưu trữ `agent-openai-python-prompty` cũ chuyển hướng về đây; nó không phải là mẫu tác nhân thời tiết tối giản Azure Functions. Theo README hiện tại cho lưu trữ, hạn mức mô hình, và yêu cầu Bing Grounding.
+**Được triển khai:** Mẫu viết đa tác nhân FastAPI/Prompty sử dụng Azure OpenAI, Bing Grounding, và Azure AI Search. Kho lưu trữ trước đây `agent-openai-python-prompty` chuyển hướng đến đây; nó không phải mẫu tác nhân thời tiết Azure Functions tối giản. Tham khảo README hiện tại cho hosting, hạn ngạch mô hình và yêu cầu Bing Grounding.
 
 **Thời gian:** ~10-15 phút
-**Chi phí:** ~$50-100/tháng (phát triển)
+**Chi phí:** ~50-100 USD/tháng (phát triển)
 
-### Tùy chọn 3: Tác nhân Chat RAG
+### Tùy chọn 3: Tác nhân Đàm thoại RAG
 
 ```bash
 # Initialize RAG chat template
@@ -107,52 +107,48 @@ azd init --template azure-search-openai-demo .
 azd up
 ```
 
-**Những gì được triển khai:**
+**Được triển khai:**
 - ✅ Mô hình Microsoft Foundry
 - ✅ Azure AI Search với dữ liệu mẫu
-- ✅ Quy trình xử lý tài liệu
-- ✅ Giao diện chat có trích dẫn
+- ✅ Chuỗi xử lý tài liệu
+- ✅ Giao diện chat kèm trích dẫn
 
 **Thời gian:** ~15-25 phút
-**Chi phí:** ~$80-150/tháng (phát triển)
+**Chi phí:** ~80-150 USD/tháng (phát triển)
 
-### Tùy chọn 4: AZD AI Agent Init (Xem trước mẫu dự án)
+### Tùy chọn 4: Tác nhân Được host với Gói Foundry GA
 
-Sử dụng `azd ai agent init` tương tác, hoặc áp dụng dự án tác nhân `azure.yaml` hiện tại với `--template`/`-t`. Tùy chọn `--manifest`/`-m` cũ là bí danh lỗi thời, không phải trình chuyển đổi cho manifest cũ.
+Sử dụng [hướng dẫn đầy đủ cho tác nhân được host](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) cho mẫu API Phản hồi Python Agent Framework cơ bản. Con đường triển khai này cần Python 3.13+, uv hiện tại, quyền Foundry, và hạn ngạch mô hình vùng. Xác thực các lệnh gọi SDK local riêng khi dùng thông tin đăng nhập Azure CLI.
 
 ```bash
-# Install the AI agents extension
-azd extension install azure.ai.agents
-
-# Optional: verify the installed preview version
-azd extension show azure.ai.agents
-
-# Initialize from a current agent project template (supply your template path)
-azd ai agent init --template ./templates/support-agent/azure.yaml
-
-# Deploy to Azure
-azd up
-
-# Test the deployed agent (shows latency + time-to-first-byte)
-azd ai agent invoke
+azd auth login
+azd ext install microsoft.foundry
 ```
 
-**Khi nào dùng `azd ai agent init` so với `azd init --template`:**
+Trong thư mục trống, khởi tạo mẫu:
 
-| Cách tiếp cận | Phù hợp với | Cách hoạt động |
+```text
+azd ai agent init --template https://github.com/microsoft-foundry/foundry-samples/blob/main/samples/python/hosted-agents/agent-framework/responses/01-basic/azure.yaml --deploy-mode code --src .
+```
+
+Chọn dự án mới hoặc hiện có, xem `azure.yaml`, và chạy `azd provision`. Dùng `azd ai agent run` mở Agent Inspector và, từ terminal khác trong thư mục đó, `azd ai agent invoke --local "Explain how this agent is hosted."`. Sau khi kiểm tra local, sử dụng `azd deploy` và `azd ai agent invoke "Explain how this agent is hosted."` để so sánh phản hồi triển khai. Foundry xây dựng mã nguồn tải lên từ xa; không cần xây dựng container local.
+
+**Khi nào dùng `azd ai agent init` hoặc `azd init --template`:**
+
+| Phương pháp | Phù hợp với | Cách thức hoạt động |
 |----------|----------|------|
-| `azd init --template` | Bắt đầu từ ứng dụng mẫu đang hoạt động | Sao chép toàn bộ kho mẫu với mã + hạ tầng |
-| `azd ai agent init --template` | Áp dụng dự án tác nhân Foundry hiện có | Sử dụng tài liệu dự án `azure.yaml` và định nghĩa của nó |
+| `azd init --template` | Bắt đầu từ mẫu ứng dụng hoạt động | Sao chép toàn bộ repo mẫu với code + hạ tầng |
+| `azd ai agent init --template` | Tiếp nhận dự án tác nhân Foundry hiện có | Dùng tài liệu dự án `azure.yaml` và định nghĩa của nó |
 
-> **Mẹo:** Dùng `azd init --template` khi học (các tùy chọn 1-3 phía trên). Dùng `azd ai agent init` cho quy trình tác nhân Foundry. Để thêm định nghĩa tác nhân trực tiếp vào dự án hiện có, xem [hướng dẫn khởi tạo và di cư](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
+> **Mẹo:** Các tùy chọn 1-3 bắt đầu từ mẫu ứng dụng đầy đủ; tùy chọn 4 hướng dẫn quy trình làm việc tác nhân được host GA. Không có lệnh khởi tạo nào tự động di chuyển manifest tác nhân cũ. Để thêm định nghĩa tác nhân trực tiếp vào dự án hiện tại, xem [hướng dẫn khởi tạo và di chuyển](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
 
-Sau `azd up`, dùng `azd ai agent invoke` để thử nghiệm, tiện ích mở rộng `azure.ai.evaluations` riêng biệt (`azd ai eval init`, `generate`, và `run start`) để đo chất lượng, và `azd ai agent optimize` để cải thiện nó qua cấu hình đánh giá mới. Tác nhân beta.22 thay thế quy trình đánh giá cũ và thay đổi định dạng `--config` của tối ưu hóa. Xem [di cư đánh giá](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) và [di cư tối ưu hóa](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) trước khi sử dụng lại ví dụ cũ.
+Cài đặt `azure.ai.evaluations` riêng để tạo và xem dữ liệu đánh giá/điểm chuẩn, cấu hình đánh giá và chạy nó bằng `azd ai eval`. Tối ưu có thể tái sử dụng đánh giá tương thích; xem xét các ứng viên trước khi triển khai rõ ràng. Tham khảo [quy trình đánh giá](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) và [di chuyển tối ưu hóa](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) trước khi tái sử dụng ví dụ cũ. Để dọn dẹp, tài nguyên của dự án Foundry tái sử dụng vẫn còn sau `azd down`; nhóm tài nguyên dự án mới được tạo sẽ bị xóa. Xem hướng dẫn [dọn dẹp quy trình](microsoft-foundry-integration.md#7-clean-up-deliberately).
 
 ---
 
 ## 🏗️ Mẫu Kiến trúc Tác nhân
 
-### Mẫu 1: Tác nhân đơn với công cụ
+### Mẫu 1: Tác nhân Đơn với Công cụ
 
 Mẫu tác nhân đơn giản nhất - một tác nhân có thể sử dụng nhiều công cụ.
 
@@ -164,12 +160,12 @@ graph TD
     Agent --> API[API Tool]
 ```
 
-**Phù hợp cho:**
+**Phù hợp với:**
 - Bot hỗ trợ khách hàng
 - Trợ lý nghiên cứu
 - Tác nhân phân tích dữ liệu
 
-**Mẫu ứng dụng liên quan:** `azure-search-openai-demo` minh họa RAG, không phải vòng lặp tác nhân dùng công cụ tùy ý chung chung.
+**Ví dụ ứng dụng liên quan:** `azure-search-openai-demo` minh họa RAG, không phải vòng lặp tác nhân dùng công cụ tùy ý chung.
 
 ### Mẫu 2: Tác nhân RAG (Tạo nội dung tăng cường truy xuất)
 
@@ -184,16 +180,16 @@ graph TD
     LLM --> Response[Response with Citations]
 ```
 
-**Phù hợp cho:**
+**Phù hợp với:**
 - Cơ sở tri thức doanh nghiệp
 - Hệ thống hỏi đáp tài liệu
-- Nghiên cứu pháp lý và tuân thủ
+- Nghiên cứu tuân thủ và pháp lý
 
 **Mẫu AZD:** `azure-search-openai-demo`
 
-### Mẫu 3: Hệ thống đa tác nhân
+### Mẫu 3: Hệ thống đa Tác nhân
 
-Nhiều tác nhân chuyên môn hợp tác trên các nhiệm vụ phức tạp.
+Nhiều tác nhân chuyên môn cùng hợp tác thực hiện nhiệm vụ phức tạp.
 
 ```mermaid
 graph TD
@@ -202,22 +198,22 @@ graph TD
     Orchestrator --> Reviewer[Reviewer Agent<br/>gpt-4.1]
 ```
 
-**Phù hợp cho:**
+**Phù hợp với:**
 - Tạo nội dung phức tạp
 - Quy trình nhiều bước
-- Nhiệm vụ cần nhiều chuyên môn khác nhau
+- Nhiệm vụ cần chuyên môn khác nhau
 
-**Tìm hiểu thêm:** [Mẫu Phối hợp Đa tác nhân](../chapter-06-pre-deployment/coordination-patterns.md)
+**Tìm hiểu thêm:** [Mẫu Điều phối Đa Tác nhân](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ Cấu hình Công cụ Tác nhân
+## ⚙️ Cấu Hình Công Cụ cho Tác nhân
 
 Tác nhân trở nên mạnh mẽ khi có thể sử dụng công cụ. Dưới đây là cách cấu hình các công cụ phổ biến:
 
-### Cấu hình công cụ trong Foundry Agents
+### Cấu hình Công cụ trong Foundry Agents
 
-Đoạn mã **Agent Service SDK cổ điển** này hướng tới `azure-ai-projects==1.0.0` và `azure-ai-agents==1.1.0` với `azure-identity`. Nó không phải phiên bản API responses của tác nhân phiên bản mới hơn dùng trong một số mẫu Foundry hiện tại, cũng không phải tiện ích mở rộng AZD `azure.ai.agents` (gói khác). Không trộn lẫn các thế hệ API này. Đặt `PROJECT_ENDPOINT` đến đầu cuối dự án cổ điển Foundry và `MODEL_DEPLOYMENT_NAME` đến triển khai mô hình hỗ trợ hiện có; xác thực với `az login` cục bộ và cấp phép dự án cần thiết.
+Đoạn **SDK Dịch vụ Agent cổ điển** này nhắm tới `azure-ai-projects==1.0.0` và `azure-ai-agents==1.1.0` với `azure-identity`. Đây không phải phiên bản API versioned-agent/Responses mới hơn được sử dụng bởi một số mẫu Foundry hiện tại, cũng không phải phần mở rộng `azure.ai.agents` AZD (một gói khác). Không trộn lẫn các thế hệ API này. Đặt `PROJECT_ENDPOINT` thành điểm cuối dự án Foundry cổ điển và `MODEL_DEPLOYMENT_NAME` thành một triển khai mô hình được hỗ trợ hiện có; xác thực với `az login` cục bộ và cấp các quyền dự án cần thiết.
 
 ```python
 # agent_config.py
@@ -249,11 +245,11 @@ agent = project_client.agents.create_agent(
 )
 ```
 
-Đăng ký một lược đồ chức năng không thực thi Python trên dịch vụ. Trong SDK này, `enable_auto_function_calls` cùng `agents.runs.create_and_process(...)` chạy các hàm gọi lại đã đăng ký trong tiến trình client của bạn. Xem [ví dụ SDK phát hành](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py). Đóng client và xóa tác nhân/luồng minh họa khi xong.
+Đăng ký một sơ đồ hàm không chạy Python trên dịch vụ. Trong SDK này, `enable_auto_function_calls` cộng với `agents.runs.create_and_process(...)` chạy các callback đã đăng ký trong tiến trình client của bạn. Xem [ví dụ SDK được phát hành](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py). Đóng client và xóa các agents/threads minh họa khi hoàn thành.
 
 ### Cấu hình môi trường
 
-Các tên dưới đây là **đầu vào mẫu tùy chỉnh minh họa**, không phải công tắc AZD tích hợp. Trước tiên dẫn mỗi giá trị qua `infra/main.parameters.json`, hạ tầng, và mã ứng dụng. Chỉ `azd env set` không thay đổi công cụ hoặc hướng dẫn của tác nhân.
+Các tên dưới đây là **đầu vào mẫu tùy chỉnh minh họa**, không phải công tắc AZD tích hợp. Trước tiên, truyền mỗi giá trị qua `infra/main.parameters.json`, hạ tầng và mã ứng dụng. Một mình `azd env set` không thay đổi công cụ hoặc hướng dẫn của agent.
 
 ```bash
 # Set up agent-specific environment variables
@@ -268,11 +264,11 @@ azd up
 
 ---
 
-## 📊 Giám sát Tác nhân
+## 📊 Giám sát Agents
 
 ### Tích hợp Application Insights
 
-Nếu mẫu bạn chọn cấp phép Application Insights và cấu hình công cụ đo:
+Nếu mẫu bạn chọn cấp phát Application Insights và cấu hình instrumentation:
 
 ```bash
 # Open monitoring dashboard
@@ -285,17 +281,17 @@ azd monitor --logs
 azd monitor --live
 ```
 
-### Các chỉ số chính cần theo dõi
+### Các chỉ số chính để theo dõi
 
 | Chỉ số | Mô tả | Mục tiêu |
 |--------|-------------|--------|
 | Độ trễ phản hồi | Thời gian tạo phản hồi | < 5 giây |
-| Sử dụng token | Token mỗi yêu cầu | Giám sát chi phí |
-| Tỉ lệ thành công gọi công cụ | % thực thi công cụ thành công | > 95% |
-| Tỷ lệ lỗi | Yêu cầu tác nhân thất bại | < 1% |
-| Độ hài lòng người dùng | Điểm phản hồi | > 4.0/5.0 |
+| Sử dụng Token | Token trên mỗi yêu cầu | Giám sát chi phí |
+| Tỷ lệ thành công gọi công cụ | % thực thi công cụ thành công | > 95% |
+| Tỷ lệ lỗi | Yêu cầu agent thất bại | < 1% |
+| Hài lòng người dùng | Điểm phản hồi | > 4.0/5.0 |
 
-### Ghi nhật ký tùy chỉnh cho Tác nhân
+### Ghi log tùy chỉnh cho Agents
 
 ```python
 import os
@@ -319,33 +315,33 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
         })
 ```
 
-> **Lưu ý:** Cài gói bắt buộc: `pip install azure-monitor-opentelemetry`. Nó mang theo các phụ thuộc OpenTelemetry; không cần namespace nhập để cài gói tên `opentelemetry`.
+> **Lưu ý:** Cài đặt gói cần thiết: `pip install azure-monitor-opentelemetry`. Nó mang theo các phụ thuộc OpenTelemetry; không bắt buộc phải nhập namespace để cài gói có tên `opentelemetry`.
 
 ---
 
-## 💰 Cân nhắc Chi phí
+## 💰 Cân nhắc chi phí
 
-### Ước tính Chi phí Hàng tháng theo Mẫu
+### Ước tính chi phí hàng tháng theo mẫu
 
-Đây là phạm vi kế hoạch minh họa, không phải báo giá hoặc giới hạn chi tiêu. Vùng, token mô hình, các SKU Search/tính toán, phiên công cụ, lưu trữ, và lưu lượng có thể vượt quá. Kiểm tra hướng dẫn chi phí và giá Azure của mẫu trước `azd up`.
+Đây là các phạm vi lập kế hoạch minh họa, không phải báo giá hay giới hạn chi tiêu. Vùng, token mô hình, SKU Search/tính toán, phiên công cụ, lưu trữ và lưu lượng có thể vượt quá. Kiểm tra hướng dẫn chi phí mẫu và giá Azure trước khi `azd up`.
 
-| Mẫu | Môi trường phát triển | Sản xuất |
+| Mẫu | Môi trường Dev | Sản xuất |
 |---------|-----------------|------------|
-| Tác nhân đơn | $50-100 | $200-500 |
-| Tác nhân RAG | $80-150 | $300-800 |
-| Đa tác nhân (2-3 tác nhân) | $150-300 | $500-1,500 |
-| Đa tác nhân Doanh nghiệp | $300-500 | $1,500-5,000+ |
+| Agent đơn | $50-100 | $200-500 |
+| Agent RAG | $80-150 | $300-800 |
+| Multi-Agent (2-3 agents) | $150-300 | $500-1,500 |
+| Multi-Agent doanh nghiệp | $300-500 | $1,500-5,000+ |
 
-### Mẹo Tối ưu Chi phí
+### Mẹo tối ưu hóa chi phí
 
-1. **Dùng gpt-4.1-mini cho nhiệm vụ đơn giản** (chỉ nếu mẫu của bạn sử dụng đầu vào này)
+1. **Dùng gpt-4.1-mini cho các tác vụ đơn giản** (chỉ nếu mẫu của bạn tiêu thụ đầu vào này)
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Triển khai bộ nhớ đệm có phạm vi cho các truy vấn lặp lại an toàn.** Bao gồm ủy quyền khách thuê/người dùng, triển khai mô hình, hướng dẫn, và phiên bản truy xuất trong khóa bộ nhớ cache; đặt thời hạn hết hạn. Không chia sẻ phản hồi hội thoại riêng tư qua bộ nhớ đệm truy vấn chung. Đối tượng tác nhân SDK không có phương thức `agent.run()` chung.
+2. **Thực hiện caching có phạm vi cho các truy vấn lặp lại an toàn.** Bao gồm ủy quyền tenant/người dùng, triển khai mô hình, hướng dẫn, và phiên bản truy xuất trong khóa cache; đặt thời hạn hết hạn. Không chia sẻ phản hồi cuộc trò chuyện riêng tư qua bộ nhớ cache chỉ truy vấn toàn tiến trình. Đối tượng agent SDK không có phương thức `agent.run()` chung.
 
-3. **Đặt giới hạn token cho mỗi lượt chạy**
+3. **Đặt giới hạn token cho mỗi lần chạy**
    ```python
    # Set max_completion_tokens when running the agent, not during creation
    run = project_client.agents.runs.create_and_process(
@@ -355,21 +351,21 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
    )
    ```
 
-4. **Mở rộng Container Apps đủ điều kiện về 0 khi không sử dụng**
+4. **Tự động mở rộng Container Apps đủ điều kiện về 0 khi không sử dụng**
    ```bash
    # Custom-template input: must map to template.scale.minReplicas
    azd env set MIN_REPLICAS "0"
    ```
-   Áp dụng thay đổi hạ tầng với `azd provision` hoặc `azd up`. Mở rộng về 0 cần một kích hoạt phù hợp và không dừng Search, lưu trữ, hoặc tính phí mô hình/công cụ.
+   Áp dụng thay đổi hạ tầng với `azd provision` hoặc `azd up`. Mở rộng về 0 cần trigger phù hợp và không dừng Search, lưu trữ, hoặc tính phí mô hình/công cụ.
 
 ---
 
-## 🔧 Khắc phục sự cố Tác nhân
+## 🔧 Xử lý sự cố Agents
 
-### Vấn đề và giải pháp phổ biến
+### Các vấn đề phổ biến và giải pháp
 
 <details>
-<summary><strong>❌ Tác nhân không phản hồi lệnh gọi công cụ</strong></summary>
+<summary><strong>❌ Agent không phản hồi gọi công cụ</strong></summary>
 
 ```bash
 # Inspect the application deployment (not the agent's registered tools)
@@ -385,13 +381,13 @@ azd monitor --logs
 ```
 
 **Nguyên nhân phổ biến:**
-- Chữ ký hàm công cụ không khớp
+- Không khớp chữ ký hàm công cụ
 - Thiếu quyền cần thiết
-- Đầu cuối API không truy cập được
+- Điểm cuối API không truy cập được
 </details>
 
 <details>
-<summary><strong>❌ Độ trễ phản hồi tác nhân cao</strong></summary>
+<summary><strong>❌ Độ trễ cao trong phản hồi agent</strong></summary>
 
 ```bash
 # Check Application Insights for bottlenecks
@@ -403,13 +399,13 @@ azd up
 ```
 
 **Mẹo tối ưu:**
-- Dùng phản hồi luồng (streaming)
-- Triển khai bộ nhớ đệm phản hồi
+- Dùng phản hồi streaming
+- Thực hiện cache phản hồi
 - Giảm kích thước cửa sổ ngữ cảnh
 </details>
 
 <details>
-<summary><strong>❌ Tác nhân trả về thông tin sai hoặc ảo tưởng</strong></summary>
+<summary><strong>❌ Agent trả về thông tin sai hoặc ảo tưởng</strong></summary>
 
 ```python
 # Improve with better system prompts
@@ -426,7 +422,7 @@ You are a helpful assistant. IMPORTANT:
 # then use FileSearchTool(vector_store_ids=[...]) and pass both its
 # .definitions and .resources when creating the agent.
 ```
-Hướng dẫn và truy xuất giảm rủi ro; không đảm bảo câu trả lời đúng. Đánh giá câu hỏi có nền tảng và ngoài phạm vi so với câu trả lời đã biết.
+Hướng dẫn và truy xuất giảm rủi ro; không đảm bảo câu trả lời đúng sự thật. Đánh giá các câu hỏi dựa trên tài liệu tham khảo với các câu trả lời đã biết.
 </details>
 
 <details>
@@ -450,16 +446,16 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     
     return truncated
 ```
-Trợ giúp này loại trừ lược đồ vai trò/công cụ, token hình ảnh, và chi phí giao thức. Dành chỗ cho những thứ đó và hoàn thành; không chia cặp gọi công cụ/kết quả hoặc bỏ hướng dẫn hệ thống cần thiết. Cài đặt `tiktoken` riêng. Nó không phải trình xác thực cửa sổ ngữ cảnh chung.
+Công cụ này loại trừ sơ đồ vai trò/công cụ, hướng dẫn hệ thống, token hình ảnh và overhead giao thức. Dự phòng không gian cho những phần đó và phần hoàn thành; không tách cặp gọi công cụ/kết quả hoặc loại bỏ hướng dẫn hệ thống bắt buộc. Cài riêng `tiktoken`. Nó không phải trình kiểm tra chung cửa sổ ngữ cảnh.
 </details>
 
 ---
 
-## 🎓 Bài tập Thực hành
+## 🎓 Bài tập thực hành
 
-### Bài tập 1: Triển khai Tác nhân Cơ bản (20 phút)
+### Bài tập 1: Triển khai Agent cơ bản (20 phút)
 
-**Mục tiêu:** Triển khai tác nhân AI đầu tiên của bạn bằng AZD
+**Mục tiêu:** Triển khai agent AI đầu tiên của bạn bằng AZD
 
 ```bash
 # Step 1: Initialize template
@@ -481,22 +477,22 @@ azd up
 # Step 5: View monitoring
 azd monitor --overview
 
-# Step 6: Clean up
-azd down --force --purge
+# Step 6: Review the listed resources and confirm cleanup
+azd down
 ```
 
 **Tiêu chí thành công:**
-- [ ] Tác nhân trả lời câu hỏi
+- [ ] Đại lý trả lời câu hỏi
 - [ ] Có thể truy cập bảng điều khiển giám sát qua `azd monitor`
-- [ ] Dọn dẹp tài nguyên thành công
+- [ ] Tài nguyên được dọn dẹp thành công
 
-### Bài tập 2: Thêm Công cụ Tùy chỉnh (30 phút)
+### Bài tập 2: Thêm Công Cụ Tùy Chỉnh (30 phút)
 
-**Mục tiêu:** Mở rộng tác nhân với công cụ tùy chỉnh
+**Mục tiêu:** Mở rộng đại lý với một công cụ tùy chỉnh
 
-**Điểm khởi đầu:** Dùng client SDK cổ điển từ [Cấu hình Công cụ](#tool-configuration-in-foundry-agents), không dùng mẫu tùy ý với thế hệ SDK khác.
+**Điểm bắt đầu:** Sử dụng client SDK cổ điển từ [Cấu hình công cụ](#tool-configuration-in-foundry-agents), không phải mẫu tùy ý với phiên bản SDK khác.
 
-1. Thêm bộ kiểm thử xác định này vào `agent_config.py`:
+1. Thêm đoạn fixture xác định này vào `agent_config.py`:
    ```python
    def get_weather(location: str) -> str:
        """Return demonstration weather, not live conditions.
@@ -507,7 +503,7 @@ azd down --force --purge
        print(f"TOOL_CALLED: {location}")
        return f"Demo weather in {location}: Sunny, 72°F (fixture, not live)"
    ```
-2. Thay thế đoạn đăng ký và tạo công cụ tìm kiếm bằng:
+2. Thay thế khối đăng ký và tạo công cụ tìm kiếm bằng:
    ```python
    weather_tool = FunctionTool(functions={get_weather})
    project_client.agents.enable_auto_function_calls(weather_tool)
@@ -535,20 +531,20 @@ azd down --force --purge
        project_client.agents.delete_agent(agent.id)
        project_client.close()
    ```
-3. Chạy cục bộ (lệnh này gọi dự án Azure hiện có và phát sinh phí mô hình):
+3. Chạy cục bộ (điều này gọi dự án Azure hiện có và phát sinh chi phí mô hình):
    ```bash
    python agent_config.py
    # Expected: TOOL_CALLED: Seattle, then a completed answer labelled demo data.
    ```
 
 **Tiêu chí thành công:**
-- [ ] Đại lý nhận biết các truy vấn liên quan thời tiết
+- [ ] Đại lý nhận biết các truy vấn liên quan đến thời tiết
 - [ ] Công cụ được gọi đúng cách
 - [ ] Phản hồi bao gồm thông tin thời tiết
 
 ### Bài tập 3: Xây dựng Đại lý RAG (45 phút)
 
-**Mục tiêu:** Tạo một đại lý trả lời câu hỏi dựa trên tài liệu của bạn
+**Mục tiêu:** Tạo đại lý trả lời câu hỏi từ tài liệu của bạn
 
 ```bash
 # Step 1: Deploy RAG template
@@ -568,47 +564,47 @@ azd up
 ```
 
 **Tiêu chí thành công:**
-- [ ] Đại lý trả lời dựa trên tài liệu đã tải lên
+- [ ] Đại lý trả lời từ các tài liệu đã tải lên
 - [ ] Phản hồi bao gồm trích dẫn
-- [ ] Các câu hỏi ngoài phạm vi được xử lý mà không có khẳng định không được hỗ trợ (không đảm bảo cho mọi câu hỏi trong tương lai)
+- [ ] Các câu hỏi vượt ngoài phạm vi được xử lý mà không có tuyên bố không được hỗ trợ (không đảm bảo cho mọi câu hỏi trong tương lai)
 
-Nếu `USE_CLOUD_INGESTION=true`, hãy sử dụng quy trình nạp/tải lên đám mây mẫu thay thế; bao bọc cục bộ có chủ ý bỏ qua nạp dữ liệu. Sau khi thử nghiệm, chạy `azd down` trong môi trường RAG và xem xét các tài nguyên sẽ bị xóa.
+Nếu `USE_CLOUD_INGESTION=true`, hãy dùng quy trình hấp thụ/tải lên trên đám mây của mẫu thay vào đó; lớp bao cục bộ cố ý bỏ qua hấp thụ. Sau khi thử, chạy `azd down` trong môi trường RAG và xem lại các tài nguyên sẽ bị xóa.
 
 ---
 
-## 📚 Bước tiếp theo
+## 📚 Các bước tiếp theo
 
-Bây giờ bạn đã hiểu về các đại lý AI, hãy khám phá các chủ đề nâng cao sau:
+Bây giờ bạn đã hiểu các đại lý AI, hãy khám phá các chủ đề nâng cao này:
 
 | Chủ đề | Mô tả | Liên kết |
 |-------|-------------|------|
-| **Hệ Thống Đa Đại Lý** | Xây dựng các hệ thống với nhiều đại lý hợp tác | [Ví dụ Đa Đại Lý Bán Lẻ](../../examples/retail-scenario.md) |
-| **Mẫu Phối Hợp** | Tìm hiểu các mẫu điều phối và giao tiếp | [Mẫu Phối Hợp](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Triển Khai Ở Môi Trường Thực** | Triển khai đại lý sẵn sàng cho doanh nghiệp | [Thực Hành AI Trong Sản Xuất](../chapter-08-production/production-ai-practices.md) |
-| **Đánh Giá Đại Lý** | Kiểm thử và đánh giá hiệu suất đại lý | [Khắc Phục Sự Cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **Phòng Thí Nghiệm AI** | Thực hành: Chuẩn bị giải pháp AI cho AZD | [Phòng Thí Nghiệm AI](ai-workshop-lab.md) |
+| **Hệ thống Đa Đại lý** | Xây dựng hệ thống với nhiều đại lý cộng tác | [Ví dụ Đa Đại lý Bán lẻ](../../examples/retail-scenario.md) |
+| **Mẫu Phối hợp** | Tìm hiểu mẫu điều phối và giao tiếp | [Mẫu Phối hợp](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Triển khai Sản xuất** | Triển khai đại lý sẵn sàng doanh nghiệp | [Thực hành AI Sản xuất](../chapter-08-production/production-ai-practices.md) |
+| **Đánh giá Đại lý** | Kiểm tra và đánh giá hiệu suất đại lý | [Khắc phục sự cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **Phòng Thí nghiệm AI** | Thực hành: Chuẩn bị giải pháp AI cho AZD | [Phòng Thí nghiệm AI](ai-workshop-lab.md) |
 
 ---
 
-## 📖 Tài nguyên bổ sung
+## 📖 Tài nguyên thêm
 
 ### Tài liệu chính thức
-- [Dịch vụ Đại lý Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Khởi đầu nhanh Dịch vụ Đại lý Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
-- [Khung Đại lý Semantic Kernel](https://learn.microsoft.com/semantic-kernel/)
+- [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Khởi động nhanh Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
 ### Mẫu AZD cho Đại lý
 - [Bắt đầu với Đại lý AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Đại lý Viết Sáng Tạo với Prompty](https://github.com/Azure-Samples/contoso-creative-writer)
-- [Trình diễn Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Đại lý Viết sáng tạo với Prompty](https://github.com/Azure-Samples/contoso-creative-writer)
+- [Demo Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Tài nguyên cộng đồng
+### Tài nguyên Cộng đồng
 - [Awesome AZD - Mẫu Đại lý](https://azure.github.io/awesome-azd/?tags=ai-agents)
-- [Discord Azure AI](https://discord.gg/microsoft-azure)
-- [Discord Microsoft Foundry](https://discord.gg/nTYy5BXMWG)
+- [Azure AI Discord](https://discord.gg/microsoft-azure)
+- [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
 ### Kỹ năng Đại lý cho Trình soạn thảo của bạn
-- [**Kỹ năng Đại lý Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Cài đặt kỹ năng đại lý AI có thể tái sử dụng cho phát triển Azure trong GitHub Copilot, Cursor hoặc bất kỳ đại lý được hỗ trợ nào. Bao gồm kỹ năng cho [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [triển khai](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), và [chẩn đoán](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+- [**Kỹ năng Đại lý Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Cài đặt kỹ năng đại lý AI có thể tái sử dụng cho phát triển Azure trong GitHub Copilot, Cursor hoặc bất kỳ đại lý được hỗ trợ nào. Bao gồm kỹ năng cho [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [triển khai](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) và [chẩn đoán](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```

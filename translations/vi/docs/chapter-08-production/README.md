@@ -1,25 +1,25 @@
-# Chương 8: Các Mẫu Sản Xuất & Doanh Nghiệp
+# Chương 8: Mẫu Sản Xuất & Doanh Nghiệp
 
-**📚 Khóa học**: [AZD Cho Người Mới Bắt Đầu](../../README.md) | **⏱️ Thời lượng**: 2-3 giờ | **⭐ Độ phức tạp**: Nâng cao
+**📚 Khóa học**: [AZD For Beginners](../../README.md) | **⏱️ Thời lượng**: 2-3 giờ | **⭐ Độ phức tạp**: Nâng cao
 
 ---
 
 ## Tổng quan
 
-Chương này bao gồm các mẫu triển khai sẵn sàng cho doanh nghiệp, tăng cường bảo mật, giám sát và tối ưu chi phí cho các khối lượng công việc AI trong môi trường sản xuất.
+Chương này đề cập đến các mẫu triển khai sẵn sàng cho doanh nghiệp, tăng cường bảo mật, giám sát và tối ưu chi phí cho khối lượng công việc AI trong môi trường sản xuất.
 
-Đây là tài liệu tham khảo kiến trúc, không phải mẫu triển khai sản xuất hoàn chỉnh. Các ví dụ bỏ qua các chi tiết tích hợp cần được cung cấp và kiểm thử trong ứng dụng của bạn; việc đọc danh sách kiểm tra không chứng nhận khả năng sẵn sàng sản xuất.
+Đây là tài liệu tham khảo kiến trúc, không phải mẫu triển khai sản xuất hoàn chỉnh có thể dùng ngay. Các ví dụ bỏ qua các chi tiết tích hợp phải được cung cấp và kiểm thử trong ứng dụng của bạn; việc đọc checklist không chứng nhận sự sẵn sàng cho sản xuất.
 
-> **Đánh giá phát hành (2026-11-04):** Hướng dẫn AI CLI đã được kiểm tra đối chiếu với tài liệu/nguồn mã của `azd 1.37.2`, các agent `1.0.0-beta.23`, và các đánh giá `1.0.0-beta.2`. Xem [thay đổi và sửa lỗi phát hành](production-ai-practices.md#recent-release-changes-and-fixes) để biết yêu cầu tương thích và chi tiết di chuyển; đây không phải là xác thực triển khai trực tiếp.
+> **Cập nhật Foundry GA (2026-11-09):** Sử dụng `azd >= 1.37.0` và gói `microsoft.foundry` 1.0 đã phát hành cho workflow Foundry; các đánh giá được cài riêng. Xem [phạm vi phát hành và di cư](production-ai-practices.md#recent-release-changes-and-fixes) và [ví dụ pipeline có xác thực](production-ai-practices.md#cicd-pipeline-configuration). Đây là rà soát tài liệu, không phải xác nhận triển khai trực tiếp hay trạng thái GA cho các tính năng xem trước tùy chọn.
 
 ## Mục tiêu học tập
 
-Khi hoàn thành chương này, bạn sẽ:
-- Triển khai ứng dụng bền vững đa vùng
-- Áp dụng các mẫu bảo mật doanh nghiệp
+Sau khi hoàn thành chương này, bạn sẽ:
+- Triển khai các ứng dụng đa khu vực để tăng độ bền vững
+- Thực hiện các mẫu bảo mật doanh nghiệp
 - Cấu hình giám sát toàn diện
-- Tối ưu chi phí quy mô lớn
-- Thiết lập đường ống CI/CD với AZD
+- Tối ưu hóa chi phí quy mô lớn
+- Thiết lập pipeline CI/CD với AZD
 
 ---
 
@@ -27,19 +27,19 @@ Khi hoàn thành chương này, bạn sẽ:
 
 | # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Thực tiễn AI trong sản xuất](production-ai-practices.md) | Các mẫu triển khai doanh nghiệp | 90 phút |
+| 1 | [Thực hành AI trong sản xuất](production-ai-practices.md) | Mẫu triển khai doanh nghiệp | 90 phút |
 
 ---
 
-## 🚀 Danh sách kiểm tra sản xuất
+## 🚀 Checklist sản xuất
 
-- [ ] Triển khai đa vùng cho độ bền
-- [ ] Định danh quản lý cho xác thực (không dùng khóa)
-- [ ] Application Insights cho giám sát
-- [ ] Cấu hình ngân sách chi phí và cảnh báo
-- [ ] Bật quét bảo mật
-- [ ] Tích hợp đường ống CI/CD
-- [ ] Kế hoạch phục hồi thảm họa
+- [ ] Triển khai đa khu vực để tăng độ bền
+- [ ] Nhận diện quản lý cho xác thực (không dùng khóa)
+- [ ] Application Insights để giám sát
+- [ ] Cấu hình ngân sách và cảnh báo chi phí
+- [ ] Kích hoạt quét bảo mật
+- [ ] Tích hợp pipeline CI/CD
+- [ ] Kế hoạch khôi phục thảm họa
 
 ---
 
@@ -54,7 +54,7 @@ graph LR
     AI --> Data[Data Store]
 ```
 
-### Mẫu 2: AI Dựa trên Sự kiện
+### Mẫu 2: AI theo sự kiện
 
 ```mermaid
 graph LR
@@ -87,16 +87,16 @@ properties: {
 
 | Chiến lược | Ràng buộc chính |
 |----------|---------|
-| Quy mô về 0 (Container Apps) | Yêu cầu trigger phù hợp; các dịch vụ khác vẫn phát sinh chi phí |
-| Sử dụng cấp tiêu thụ cho phát triển | So sánh giá dịch vụ đã chọn và khối lượng công việc |
-| Điều chỉnh quy mô theo lịch trình | Quy mô qua hạ tầng/tự động hóa được hỗ trợ |
-| Đặt chỗ/dung lượng dự phòng | Chỉ khi được hỗ trợ; cam kết có thể làm tăng chi phí không sử dụng |
+| Phóng to đến zero (Container Apps) | Đòi hỏi trình kích hoạt phù hợp; dịch vụ khác vẫn phát sinh chi phí |
+| Sử dụng tầng tiêu thụ cho phát triển | So sánh giá dịch vụ đã chọn và khối lượng công việc |
+| Tăng giảm theo lịch trình | Phóng to qua hạ tầng/tự động hóa được hỗ trợ |
+| Đặt chỗ/dung lượng cấp phát | Chỉ khi được hỗ trợ; cam kết có thể tăng chi phí không sử dụng |
 
-Sử dụng [mẫu tài nguyên ngân sách hoàn chỉnh](production-ai-practices.md#2-cost-monitoring-and-budgets) với ngày bắt đầu hợp lệ, phạm vi thanh toán, người nhận, và quyền hạn. Ngân sách gửi cảnh báo; nó không giới hạn chi tiêu. Tiết kiệm phụ thuộc vào mức sử dụng đo đạc và không có tỉ lệ đảm bảo.
+Sử dụng [mẫu tài nguyên ngân sách hoàn chỉnh](production-ai-practices.md#2-cost-monitoring-and-budgets) với ngày bắt đầu hợp lệ, phạm vi thanh toán, người nhận và quyền hạn. Ngân sách gửi cảnh báo; không giới hạn chi tiêu. Tiết kiệm dựa trên mức sử dụng đo được và không đảm bảo tỷ lệ phần trăm nào.
 
 ---
 
-## 📊 Thiết lập giám sát
+## 📊 Cài đặt giám sát
 
 ```bash
 # Open the Application Insights logs view (requires configured monitoring)
@@ -113,10 +113,10 @@ az monitor metrics list --resource <resource-id>
 
 ## 🔗 Điều hướng
 
-| Hướng | Chương |
+| Hướng đi | Chương |
 |-----------|---------|
-| **Trước đó** | [Chương 7: Khắc phục sự cố](../chapter-07-troubleshooting/README.md) |
-| **Hoàn thành khóa học** | [Trang chủ khóa học](../../README.md) |
+| **Trước** | [Chương 7: Khắc phục sự cố](../chapter-07-troubleshooting/README.md) |
+| **Hoàn thành Khóa học** | [Trang chính Khóa học](../../README.md) |
 
 ---
 
@@ -124,7 +124,7 @@ az monitor metrics list --resource <resource-id>
 
 - [Hướng dẫn AI Agents](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Giải pháp đa agent](../chapter-05-multi-agent/README.md)
+- [Giải pháp đa tác nhân](../chapter-05-multi-agent/README.md)
 - [Ví dụ Microservices](../../examples/microservices/README.md)
 
 ---

@@ -1,39 +1,43 @@
-# Chương 2: Phát Triển Ưu Tiên AI
+# Chương 2: Phát Triển AI-First
 
-**📚 Khóa học**: [AZD Cho Người Mới Bắt Đầu](../../README.md) | **⏱️ Thời lượng**: 4-5 giờ bao gồm cả hội thảo | **⭐ Độ khó**: Trung cấp
+**📚 Khóa học**: [AZD Cho Người Mới Bắt Đầu](../../README.md) | **⏱️ Thời lượng**: 4-5 giờ bao gồm cả hội thảo | **⭐ Độ phức tạp**: Trung cấp
 
 ---
 
 ## Tổng quan
 
-Chương này tập trung vào việc triển khai các ứng dụng AI sử dụng Azure Developer CLI và các dịch vụ Microsoft Foundry. Từ các ứng dụng trò chuyện AI đơn giản đến các đại lý thông minh với các công cụ.
+Chương này tập trung vào việc triển khai các ứng dụng sử dụng AI bằng cách sử dụng Azure Developer CLI và dịch vụ Microsoft Foundry. Từ các ứng dụng trò chuyện AI đơn giản đến các tác nhân thông minh với công cụ hỗ trợ.
 
-> **Đánh giá phát hành (2026-11-04):** Hướng dẫn AI CLI đã được kiểm tra đối chiếu với tài liệu/nguồn `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, và `azure.ai.evaluations` `1.0.0-beta.2`. Sử dụng `azd >= 1.37.0` cho quy trình làm việc kết hợp. Các đánh giá hiện sử dụng namespace `azd ai eval` riêng biệt; xem [thay đổi phát hành và hướng dẫn di trú](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Đây không phải là xác nhận triển khai trực tiếp.
+> **Cập nhật Foundry GA (2026-11-09):** Bộ `microsoft.foundry` 1.0 đã [phát hành chính thức](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Sử dụng `azd >= 1.37.0`; các bản đánh giá vẫn là một phần cài đặt riêng biệt. Bản hướng dẫn [tác nhân được lưu trữ](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) bao gồm thử nghiệm Agent Inspector cục bộ và triển khai mã từ xa. Đây là xem lại tài liệu, không phải kiểm tra triển khai trực tiếp; các tính năng xem trước có thể tùy chọn vẫn giữ trạng thái riêng của chúng.
 
 ## Mục tiêu học tập
 
 Sau khi hoàn thành chương này, bạn sẽ:
-- Triển khai các ứng dụng AI sử dụng các mẫu AZD có sẵn 
+- Triển khai ứng dụng AI bằng các mẫu AZD có sẵn
 - Hiểu cách tích hợp Microsoft Foundry với AZD
-- Cấu hình và tùy chỉnh các đại lý AI với công cụ
-- Triển khai các ứng dụng RAG (Tạo nội dung tăng cường truy xuất)
+- Cài đặt bộ GA và thử nghiệm tác nhân được lưu trữ cục bộ trước khi triển khai nguồn lên Foundry
+- Xem xét `azure.yaml`, tài sản đánh giá, và dọn dẹp dự án mới so với tái sử dụng
+- Cấu hình và tùy chỉnh tác nhân AI với các công cụ
+- Triển khai các ứng dụng RAG (Tạo nội dung hỗ trợ truy xuất)
 
 ---
 
-## 📚 Bài học
+## 📚 Các bài học
 
 | # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Tích hợp Microsoft Foundry](microsoft-foundry-integration.md) | Kết nối AZD với dịch vụ Foundry | 30 phút |
-| 2 | [Hướng dẫn đại lý AI](agents.md) | Triển khai đại lý thông minh với công cụ | 45 phút |
-| 3 | [Triển khai mô hình AI](ai-model-deployment.md) | Triển khai và cấu hình mô hình AI | 30 phút |
-| 4 | [Hội thảo AI](ai-workshop-lab.md) | Thực hành: Khám phá mẫu và lập kế hoạch chuyển đổi | 2-3 giờ |
+| 1 | [Tích hợp Microsoft Foundry](microsoft-foundry-integration.md) | Bộ GA, quy trình tác nhân lưu trữ từ cục bộ lên đám mây, và đánh giá | 60 phút |
+| 2 | [Hướng dẫn Tác nhân AI](agents.md) | Triển khai các tác nhân thông minh với công cụ | 45 phút |
+| 3 | [Triển khai Mô hình AI](ai-model-deployment.md) | Triển khai và cấu hình mô hình AI | 30 phút |
+| 4 | [Xưởng thực hành AI](ai-workshop-lab.md) | Thực hành: Khám phá mẫu và lên kế hoạch chuyển đổi | 2-3 giờ |
 
 ---
 
-## 🚀 Bắt Đầu Nhanh
+## 🚀 Bắt đầu nhanh
 
-Chọn một tùy chọn trong thư mục mới trống. `.` ở cuối sẽ khởi tạo thư mục hiện tại; nếu không thì AZD có thể tạo một thư mục con mà không thay đổi thư mục làm việc của shell của bạn.
+Chọn một lựa chọn trong một thư mục trống mới. `.` ở cuối sẽ khởi tạo thư mục hiện tại; nếu không, AZD có thể tạo một thư mục con mà không thay đổi thư mục làm việc của shell bạn.
+
+Đối với **đường dẫn triển khai mã tác nhân lưu trữ GA**, hãy bắt đầu với [hướng dẫn có hướng dẫn](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). Nó yêu cầu AZD 1.37.0+, uv hiện tại, Python 3.13+, quyền Foundry và hạn ngạch mô hình. Các mẫu ứng dụng đầy đủ dưới đây là các lựa chọn thay thế, không phải điều kiện tiên quyết của hướng dẫn đó.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -51,19 +55,19 @@ azd up
 
 ---
 
-## 🤖 Mẫu AI tiêu biểu
+## 🤖 Mẫu AI Nổi bật
 
 | Mẫu | Mô tả | Dịch vụ |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Trò chuyện RAG có dẫn nguồn | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Đại lý AI với công cụ | Dịch vụ Đại lý AI |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Trò chuyện AI cơ bản | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG có trích dẫn | OpenAI + Tìm kiếm AI |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Tác nhân AI với công cụ | Dịch vụ Tác nhân AI |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat AI cơ bản | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Nhận thức về chi phí
 
-Đây là các phạm vi minh họa, không phải báo giá hoặc giới hạn; lưu lượng mô hình, SKU tìm kiếm/tính toán, khu vực, và các tính năng tùy chọn có thể vượt quá phạm vi này. Xem lại hướng dẫn định giá hiện tại của mẫu bạn chọn trước khi cấp phát.
+Đây là các phạm vi minh họa, không phải báo giá hay giới hạn; lưu lượng mô hình, SKU tìm kiếm/tính toán, vùng miền, và các tính năng tùy chọn có thể vượt quá chúng. Xem lại hướng dẫn giá hiện tại của mẫu bạn chọn trước khi cung cấp tài nguyên.
 
 | Môi trường | Chi phí ước tính hàng tháng |
 |-------------|----------------------|
@@ -71,7 +75,7 @@ azd up
 | Kiểm thử | $150-300 |
 | Sản xuất | $300-3,500+ |
 
-**Mẹo:** Chạy `azd down` sau khi thử nghiệm để tránh bị tính phí.
+**Dọn dẹp:** Xem lại `azd down` trước khi xác nhận: với dự án Foundry mới tạo, nó sẽ xóa nhóm tài nguyên và tất cả mọi thứ trong đó. Với dự án Foundry tái sử dụng, nó giữ lại dự án và tài nguyên tác nhân; làm theo [hướng dẫn dọn dẹp theo hướng dẫn](microsoft-foundry-integration.md#7-clean-up-deliberately) để xóa các tài nguyên không mong muốn riêng biệt.
 
 ---
 
@@ -81,14 +85,14 @@ azd up
 |-----------|---------|
 | **Trước** | [Chương 1: Nền tảng](../chapter-01-foundation/README.md) |
 | **Tiếp theo** | [Chương 3: Cấu hình](../chapter-03-configuration/README.md) |
-| **Bỏ qua tới** | [Chương 8: Mẫu sản xuất](../chapter-08-production/README.md) |
+| **Bỏ qua đến** | [Chương 8: Mẫu Sản xuất](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Tài nguyên liên quan
 
 - [Khắc phục sự cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Thực tiễn AI sản xuất](../chapter-08-production/production-ai-practices.md)
+- [Thực hành AI Sản xuất](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

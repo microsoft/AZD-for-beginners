@@ -1,30 +1,30 @@
-# Hướng Dẫn Khắc Phục Sự Cố Cụ Thể Cho AI
+# Hướng Dẫn Khắc Phục Sự Cố Cụ Thể cho AI
 
 **Điều Hướng Chương:**
 - **📚 Trang Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
 - **📖 Chương Hiện Tại**: Chương 7 - Khắc Phục Sự Cố & Gỡ Lỗi
-- **⬅️ Trước**: [Hướng Dẫn Gỡ Lỗi](debugging.md)
-- **➡️ Chương Tiếp Theo**: [Chương 8: Mẫu Quy Trình Sản Xuất & Doanh Nghiệp](../chapter-08-production/production-ai-practices.md)
-- **🤖 Liên Quan**: [Chương 2: Phát Triển AI Là Ưu Tiên](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **⬅️ Trước Đó**: [Hướng Dẫn Gỡ Lỗi](debugging.md)
+- **➡️ Chương Tiếp Theo**: [Chương 8: Mẫu Sản Xuất & Doanh Nghiệp](../chapter-08-production/production-ai-practices.md)
+- **🤖 Liên Quan**: [Chương 2: Phát Triển Ưu Tiên AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Hướng dẫn khắc phục sự cố toàn diện này giải quyết các vấn đề thường gặp khi triển khai các giải pháp AI với AZD, cung cấp các giải pháp và kỹ thuật gỡ lỗi đặc thù cho dịch vụ Azure AI.
+Hướng dẫn khắc phục sự cố toàn diện này giải quyết các vấn đề phổ biến khi triển khai giải pháp AI với AZD, cung cấp các giải pháp và kỹ thuật gỡ lỗi cụ thể cho dịch vụ AI của Azure.
 
-> **Phạm vi:** Các lệnh sử dụng tên tài nguyên ví dụ; hãy thay thế và chọn đăng ký đúng. Các khối Bicep là mảnh ghép để hợp nhất vào mẫu hiện có, không phải để triển khai độc lập. Các đoạn mã Python yêu cầu SDK và cấu hình ứng dụng đã nêu. Không có triển khai Azure trực tiếp nào được thực hiện cho đánh giá này.
+> **Phạm vi:** Các lệnh sử dụng tên tài nguyên ví dụ; hãy thay thế chúng và chọn đúng đăng ký. Các đoạn mã Bicep là các mảnh để kết hợp vào mẫu hiện có, không phải là các triển khai độc lập. Đoạn mã Python yêu cầu SDK đã nêu và cấu hình ứng dụng. Không có triển khai Azure thực tế nào được thực hiện cho đánh giá này.
 
 ## Mục Lục
 
-- [Vấn Đề Dịch Vụ Microsoft Foundry Models](#microsoft-foundry-models-service-issues)
-- [Vấn Đề Azure AI Search](#azure-ai-search-problems)
-- [Vấn Đề Triển Khai Container Apps](#container-apps-deployment-issues)
-- [Lỗi Xác Thực và Quyền Truy Cập](#authentication-and-permission-errors)
+- [Sự Cố Dịch Vụ Mô Hình Microsoft Foundry](#microsoft-foundry-models-service-issues)
+- [Vấn Đề Tìm Kiếm Azure AI](#azure-ai-search-problems)
+- [Sự Cố Triển Khai Ứng Dụng Container](#container-apps-deployment-issues)
+- [Lỗi Xác Thực và Quyền](#authentication-and-permission-errors)
 - [Lỗi Triển Khai Mô Hình](#model-deployment-failures)
-- [Vấn Đề Hiệu Năng và Mở Rộng](#performance-and-scaling-issues)
+- [Vấn Đề Hiệu Suất và Mở Rộng](#performance-and-scaling-issues)
 - [Quản Lý Chi Phí và Hạn Mức](#cost-and-quota-management)
 - [Công Cụ và Kỹ Thuật Gỡ Lỗi](#debugging-tools-and-techniques)
 
-## Vấn Đề Dịch Vụ Microsoft Foundry Models
+## Sự Cố Dịch Vụ Mô Hình Microsoft Foundry
 
-### Vấn Đề: Dịch Vụ OpenAI Không Có Sẵn Ở Vùng
+### Vấn Đề: Dịch Vụ OpenAI Không Có Sẵn Tại Khu Vực
 
 **Triệu Chứng:**
 ```
@@ -32,13 +32,13 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Nguyên Nhân:**
-- Microsoft Foundry Models không khả dụng ở vùng được chọn
-- Hạn mức đã dùng hết ở vùng ưu tiên
-- Hạn chế về năng lực vùng
+- Mô hình Microsoft Foundry không có sẵn trong khu vực đã chọn
+- Hạn mức sử dụng đã hết ở các khu vực ưu tiên
+- Giới hạn công suất khu vực
 
 **Giải Pháp:**
 
-1. **Kiểm Tra Khả Dụng Vùng:**
+1. **Kiểm Tra Khu Vực Có Sẵn:**
 ```bash
 # Inspect model/deployment-type offerings in a candidate region
 az cognitiveservices model list --location eastus2 --output json
@@ -53,7 +53,7 @@ azd env set AZURE_LOCATION eastus2
 # through infra/main.parameters.json as documented by the template.
 ```
 
-3. **Sử Dụng Vùng Thay Thế:**
+3. **Sử Dụng Khu Vực Thay Thế:**
 ```bicep
 // infra/main.bicep - Explicit location selection, NOT automatic fallback
 @allowed([
@@ -65,7 +65,7 @@ azd env set AZURE_LOCATION eastus2
 param openAiLocation string = 'eastus2'
 ```
 
-### Vấn Đề: Hạn Mức Triển Khai Mô Hình Bị Vượt Quá
+### Vấn Đề: Vượt Quá Hạn Mức Triển Khai Mô Hình
 
 **Triệu Chứng:**
 ```
@@ -82,9 +82,9 @@ az cognitiveservices usage list \
 ```
 
 2. **Yêu Cầu Tăng Hạn Mức:**
-Sử dụng quy trình quản lý hạn mức trên cổng Foundry cho đăng ký, vùng, mô hình và loại triển khai bị ảnh hưởng. Xem [hướng dẫn hạn mức chính thức](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Yêu cầu giới hạn VM không làm tăng hạn mức mô hình.
+Sử dụng quy trình quản lý hạn mức trên cổng Foundry cho đăng ký, khu vực, mô hình và loại triển khai bị ảnh hưởng. Xem hướng dẫn hạn mức chính thức [ở đây](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Yêu cầu hạn mức máy ảo không làm tăng hạn mức mô hình.
 
-3. **Tối Ưu Dung Lượng Mô Hình:**
+3. **Tối Ưu Công Suất Mô Hình:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -119,12 +119,12 @@ Error: The API version '2023-05-15' is not available for OpenAI
 AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
-2. **Kiểm Tra Tương Thích Phiên Bản API:**
-Kiểm tra [tham khảo vòng đời API Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). Phiên bản API của nhà cung cấp tài nguyên ARM **không** liệt kê phiên bản API của inference/data-plane. Khách hàng mới v1 dùng `/openai/v1/` mà không có `api-version` đánh ngày; không trộn hai cấu hình khách hàng này.
+2. **Kiểm Tra Tính Tương Thích Phiên Bản API:**
+Kiểm tra [tham chiếu vòng đời API Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). Các phiên bản API của nhà cung cấp tài nguyên ARM **không** liệt kê các phiên bản API inference/data-plane. Khách hàng mới v1 sử dụng `/openai/v1/` mà không có `api-version` ngày tháng; không trộn lẫn hai cấu hình khách hàng này.
 
-## Vấn Đề Azure AI Search
+## Vấn Đề Tìm Kiếm Azure AI
 
-### Vấn Đề: Cấp Giá Dịch Vụ Tìm Kiếm Không Đủ
+### Vấn Đề: Mức Giá Dịch Vụ Tìm Kiếm Không Đủ
 
 **Triệu Chứng:**
 ```
@@ -133,9 +133,9 @@ Error: Semantic search requires Basic tier or higher
 
 **Giải Pháp:**
 
-1. **Sử Dụng Cấp Giá Hỗ Trợ:**
+1. **Sử Dụng Mức Giá Hỗ Trợ:**
 
-Semantic ranker yêu cầu Basic hoặc cao hơn. Việc chuyển từ Free/Basic sang cấp khác có thể yêu cầu tạo dịch vụ tìm kiếm mới và xây dựng lại chỉ mục; chỉnh sửa SKU không đảm bảo nâng cấp tại chỗ.
+Bộ xếp hạng ngữ nghĩa yêu cầu mức Basic hoặc cao hơn. Việc chuyển từ Free/Basic sang mức khác có thể cần tạo dịch vụ tìm kiếm mới và xây dựng lại các chỉ mục; chỉnh sửa SKU không đảm bảo nâng cấp tại chỗ.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -154,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Tắt Semantic Search (Phát Triển):**
+2. **Tắt Tính Năng Tìm Kiếm Ngữ Nghĩa (Phát Triển):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -217,7 +217,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Vấn Đề Triển Khai Container Apps
+## Sự Cố Triển Khai Ứng Dụng Container
 
 ### Vấn Đề: Lỗi Xây Dựng Container
 
@@ -275,7 +275,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Vấn Đề: Lỗi Khởi Động Container App
+### Vấn Đề: Lỗi Khởi Động Ứng Dụng Container
 
 **Triệu Chứng:**
 ```
@@ -284,7 +284,7 @@ Error: Container failed to start within timeout period
 
 **Giải Pháp:**
 
-1. **Tăng Thời Gian Chờ Khởi Động:**
+1. **Tăng Thời Gian Khởi Động:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -350,9 +350,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Lỗi Xác Thực và Quyền Truy Cập
+## Lỗi Xác Thực và Quyền
 
-### Vấn Đề: Managed Identity Bị Từ Chối Quyền
+### Vấn Đề: Từ Chối Quyền Managed Identity
 
 **Triệu Chứng:**
 ```
@@ -361,7 +361,7 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 **Giải Pháp:**
 
-1. **Xác Minh Phân Quyền Vai Trò:**
+1. **Xác Minh Gán Vai Trò:**
 ```bash
 # Check current role assignments
 az role assignment list \
@@ -369,7 +369,7 @@ az role assignment list \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Phân Công Vai Trò Cần Thiết:**
+2. **Phân Vai Trò Cần Thiết:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -403,9 +403,9 @@ def test_authentication():
 test_authentication()
 ```
 
-Việc lấy token chứng minh xác thực, không phải quyền gọi mô hình. Kiểm tra thao tác dự kiến riêng. Cục bộ, `DefaultAzureCredential` có thể dùng thông tin đăng nhập nhà phát triển; trên Azure, xác minh managed identity mong muốn được chọn.
+Việc lấy token chứng minh xác thực, không phải quyền gọi mô hình. Kiểm tra thao tác dự kiến riêng biệt. Tại máy, `DefaultAzureCredential` có thể dùng thông tin đăng nhập nhà phát triển; trong Azure, xác minh Managed Identity dự kiến được chọn.
 
-### Vấn Đề: Truy Cập Key Vault Bị Từ Chối
+### Vấn Đề: Từ Chối Truy Cập Key Vault
 
 **Triệu Chứng:**
 ```
@@ -414,9 +414,9 @@ Error: The user, group or application does not have secrets get permission
 
 **Giải Pháp:**
 
-1. **Cấp Quyền Key Vault:**
+1. **Cấp Quyền Cho Key Vault:**
 
-Chỉ dùng đoạn chính sách truy cập sau cho vault dùng `enableRbacAuthorization: false`. Với vault bật RBAC, dùng tùy chọn 2; thêm chính sách truy cập không cấp quyền quản lý dữ liệu trong chế độ RBAC.
+Chỉ sử dụng đoạn chính sách truy cập sau cho vault có `enableRbacAuthorization: false`. Với vault bật RBAC, dùng tùy chọn 2; thêm chính sách truy cập không cấp quyền truy cập dữ liệu trong chế độ RBAC.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -435,9 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Dùng RBAC Thay Vì Chính Sách Truy Cập:**
+2. **Sử Dụng RBAC Thay Vì Chính Sách Truy Cập:**
 
-Vault phải có `enableRbacAuthorization: true`; thay đổi mô hình quyền yêu cầu kế hoạch di chuyển quyền truy cập hiện có.
+Vault phải có `enableRbacAuthorization: true`; thay đổi mô hình quyền cần lên kế hoạch di chuyển truy cập hiện có.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -461,7 +461,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 **Giải Pháp:**
 
-1. **Kiểm Tra Các Mô Hình Có Sẵn:**
+1. **Kiểm Tra Mô Hình Có Sẵn:**
 ```bash
 # List available models
 az cognitiveservices account list-models \
@@ -506,18 +506,18 @@ az cognitiveservices account list-models \
 # Inspect model/version and supported SKUs; check regional quota separately.
 ```
 
-## Vấn Đề Hiệu Năng và Mở Rộng
+## Vấn Đề Hiệu Suất và Mở Rộng
 
 ### Vấn Đề: Phản Hồi Trễ Cao
 
 **Triệu Chứng:**
 - Thời gian phản hồi > 30 giây
-- Lỗi timeout
+- Lỗi hết thời gian chờ
 - Trải nghiệm người dùng kém
 
 **Giải Pháp:**
 
-1. **Áp Dụng Thời Gian Chờ Yêu Cầu:**
+1. **Thực Hiện Giới Hạn Thời Gian Yêu Cầu:**
 ```python
 # Configure proper timeouts
 import httpx
@@ -595,7 +595,7 @@ Error: Container killed due to memory limit exceeded
 
 **Giải Pháp:**
 
-1. **Tăng Dung Lượng Bộ Nhớ:**
+1. **Tăng Bộ Nhớ Bộ Phân Bổ:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -643,16 +643,16 @@ class MemoryOptimizedAI:
 
 ## Quản Lý Chi Phí và Hạn Mức
 
-### Vấn Đề: Chi Phí Cao Bất Thường
+### Vấn Đề: Chi Phí Cao Bất Ngờ
 
 **Triệu Chứng:**
-- Hoá đơn Azure cao hơn dự kiến
-- Sử dụng token vượt ước tính
-- Cảnh báo vượt ngân sách xuất hiện
+- Hóa đơn Azure cao hơn dự kiến
+- Sử dụng token vượt dự báo
+- Báo động ngân sách được kích hoạt
 
 **Giải Pháp:**
 
-1. **Triển Khai Kiểm Soát Chi Phí:**
+1. **Thực Hiện Kiểm Soát Chi Phí:**
 ```python
 # Token usage tracking
 class TokenTracker:
@@ -671,7 +671,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-Bộ đếm trong bộ nhớ này chỉ mang tính minh họa, không phải kiểm soát chi tiêu hàng tháng: nó đặt lại khi khởi động lại, không chia sẻ giữa các bản sao, và chỉ kiểm tra sau gọi. Giới hạn thực sự cần kế toán bền vững, đặt trước yêu cầu an toàn đồng thời và chính sách đặt lại hàng tháng. Chỉ số bộ nhớ container cũng phải tính đến giới hạn cgroup; `psutil.virtual_memory()` không phải phép đo giới hạn container tin cậy, và thu gom rác không thực thi giới hạn bộ nhớ.
+Bộ đếm trong bộ nhớ này chỉ mang tính minh họa, không phải kiểm soát chi tiêu hàng tháng: nó đặt lại khi khởi động lại, không chia sẻ giữa các bản sao, và kiểm tra sử dụng chỉ sau cuộc gọi. Giới hạn thực cần kế toán bền vững, đặt chỗ an toàn đa luồng trước yêu cầu, và chính sách đặt lại hàng tháng. Các số liệu bộ nhớ container cũng phải tính đến giới hạn cgroup; `psutil.virtual_memory()` không phải thước đo giới hạn container tin cậy, và thu gom rác không áp dụng giới hạn bộ nhớ.
 
 2. **Thiết Lập Cảnh Báo Chi Phí:**
 ```bicep
@@ -699,9 +699,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-Khai báo `budgetStartDate` và `budgetEndDate` trong mẫu của bạn. Ngân sách thông báo; không dừng tài nguyên hoặc áp giới hạn chi tiêu cứng.
+Khai báo `budgetStartDate` và `budgetEndDate` trong mẫu của bạn. Ngân sách thông báo; không ngăn chặn tài nguyên hoặc áp đặt giới hạn chi tiêu cứng.
 
-3. **Tối Ưu Việc Chọn Mô Hình:**
+3. **Tối Ưu Lựa Chọn Mô Hình:**
 ```python
 # Cost-aware model selection
 MODEL_COST_TIERS = {
@@ -738,19 +738,22 @@ azd monitor --live
 azd env get-values
 ```
 
-### Lệnh AZD AI Extension Cho Chẩn Đoán
+### Lệnh Mở Rộng AI của AZD cho Chẩn Đoán
 
-Nếu bạn triển khai agents dùng `azd ai agent init`, các công cụ bổ sung này có sẵn:
+Nếu bạn đã triển khai agents bằng `azd ai agent init`, các công cụ bổ sung sau có sẵn:
 
 ```bash
-# Ensure the agents extension is installed
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Check project storage permissions and agent configuration
 azd ai agent doctor
 
 # Inspect the deployed endpoint
 azd ai agent endpoint show
+
+# Stream hosted-agent logs
+azd ai agent monitor --follow
 
 # Use the MCP server to let AI tools query project state
 azd mcp start
@@ -759,11 +762,13 @@ azd mcp start
 azd infra generate
 ```
 
-> **Mẹo:** Dùng `azd infra generate` để ghi IaC ra đĩa để bạn có thể kiểm tra chính xác tài nguyên nào đã được cung cấp. Điều này vô cùng quý giá khi gỡ lỗi lỗi cấu hình tài nguyên. Xem [tham khảo CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) để biết chi tiết.
+> **Mẹo:** Sử dụng `azd infra generate` để ghi IaC ra đĩa nhằm xem chính xác tài nguyên nào đã được cấp phát. Điều này rất hữu ích khi gỡ lỗi cấu hình tài nguyên. Xem [tham chiếu CLI AI AZD](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) để biết chi tiết đầy đủ.
 
-**Chẩn đoán nhận biết phiên bản (2026-11-04):** Agents `1.0.0-beta.23` yêu cầu `azd >= 1.37.0`; nâng cấp CLI lõi trước các extension không tương thích. Phiên bản agent này giữ cảnh báo RBAC nhà phát triển trong đầu ra triển khai cuối cùng và xác định phiên bản liên quan khi kích hoạt thất bại/timeout. Timeout không chứng minh triển khai thất bại: kiểm tra phiên bản đã thử trước khi thử lại. Nó cũng sửa lỗi gọi A2A 0.3 hiển thị tin nhắn vòng đời thay vì câu trả lời hoàn tất. Core `azd 1.37.1` sửa lỗi lan truyền huỷ bỏ qua các extension; `1.37.2` cải thiện xác nhận cung cấp quan trọng và xử lý hủy.
+**Chẩn đoán quy trình GA (2026-11-09):** Xác minh `azd version` ít nhất là 1.37.0 và kiểm tra `azd ext list --installed`. Cập nhật CLI lõi trước với `azd update` hoặc trình cài đặt, sau đó cập nhật gói với `azd ext upgrade microsoft.foundry`. Với lỗi cục bộ, kiểm tra uv hiện tại, Python 3.13+ cho mẫu cơ bản, `PYTHONNOUSERSITE: "1"` trong cấu hình dịch vụ, và thông tin xác thực Azure của `DefaultAzureCredential`. Giữ `azd ai agent run` chạy trong khi gọi `--local` từ terminal thứ hai trong thư mục dự án.
 
-Nếu lệnh đánh giá của hướng dẫn cũ chỉ in hướng dẫn di chuyển, hãy cài `azure.ai.evaluations` (`1.0.0-beta.2` yêu cầu `azd >= 1.33.0`) và dùng `azd ai eval init`, `generate`, và `run start`. Tối ưu hoá của `--config` không còn chấp nhận file đánh giá cũ. Xem [di chuyển đánh giá](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) và [di chuyển tối ưu hoá](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Việc cấp phát thành công không chứng minh nhà phát triển có quyền truy cập lớp dữ liệu. Xem lại cảnh báo RBAC và [ma trận quyền của host-agent](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions). Timeout không khẳng định thất bại triển khai: kiểm tra phiên bản và nhật ký thử trước khi thử lại. Agents trước đó beta.23 cải thiện cảnh báo và đầu ra A2A; các sửa lỗi lịch sử đó được mô tả trong [ghi chú phát hành](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes), không bắt buộc phải cài bản beta đó.
+
+Nếu `azd ai eval` không có sẵn, cài riêng `azure.ai.evaluations`; gói GA không bao gồm. Nếu lệnh agent-evaluation của hướng dẫn cũ chỉ in hướng dẫn di chuyển, hãy dùng quy trình `azd ai eval` riêng. `--config` của tối ưu hóa không còn chấp nhận tệp đánh giá cũ. Xem [di chuyển đánh giá](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) và [di chuyển tối ưu hóa](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
 ### Gỡ Lỗi Ứng Dụng
 
@@ -791,7 +796,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Điểm Kiểm Tra Sức Khỏe:**
+2. **Điểm cuối Kiểm tra Sức Khỏe:**
 ```python
 # Integration fragment: add to an existing FastAPI app, protect this diagnostic
 # endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
@@ -824,7 +829,7 @@ async def detailed_health_check(response: Response):
     return checks
 ```
 
-3. **Giám Sát Hiệu Năng:**
+3. **Giám sát Hiệu Suất:**
 ```python
 import time
 from functools import wraps
@@ -855,38 +860,38 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Các Mã Lỗi Phổ Biến và Giải Pháp
+## Mã Lỗi Thông Dụng và Giải Pháp
 
 | Mã Lỗi | Mô Tả | Giải Pháp |
 |------------|-------------|----------|
-| 401 | Không Có Quyền | Kiểm tra khoá API và cấu hình managed identity |
-| 403 | Bị Cấm | Xác minh phân công vai trò RBAC |
-| 429 | Giới Hạn Tốc Độ | Triển khai logic thử lại với lùi thời gian theo hàm mũ |
+| 401 | Không Có Thẩm Quyền | Kiểm tra khóa API và cấu hình managed identity |
+| 403 | Bị Cấm | Xác minh gán vai trò RBAC |
+| 429 | Giới Hạn Tốc Độ | Áp dụng logic thử lại với thời gian chờ tăng dần |
 | 500 | Lỗi Máy Chủ Nội Bộ | Kiểm tra trạng thái triển khai mô hình và nhật ký |
-| 503 | Dịch Vụ Không Có Sẵn | Kiểm tra tình trạng dịch vụ và khả dụng vùng |
+| 503 | Dịch Vụ Không Khả Dụng | Xác minh tình trạng dịch vụ và vùng có sẵn |
 
-## Bước Tiếp Theo
+## Các Bước Tiếp Theo
 
-1. **Xem lại [Hướng Dẫn Triển Khai Mô Hình AI](../chapter-02-ai-development/ai-model-deployment.md)** cho thực hành tốt nhất triển khai
-2. **Hoàn Thành [Thực Hành AI Trong Sản Xuất](../chapter-08-production/production-ai-practices.md)** cho giải pháp sẵn sàng doanh nghiệp
-3. **Tham Gia [Discord Microsoft Foundry](https://aka.ms/foundry/discord)** để được hỗ trợ cộng đồng
-4. **Gửi báo cáo sự cố** tới [kho AZD trên GitHub](https://github.com/Azure/azure-dev) cho các vấn đề liên quan đến AZD
+1. **Xem lại [Hướng Dẫn Triển Khai Mô Hình AI](../chapter-02-ai-development/ai-model-deployment.md)** cho các thực hành tốt nhất về triển khai
+2. **Hoàn thành [Thực Hành AI trong Sản Xuất](../chapter-08-production/production-ai-practices.md)** cho giải pháp sẵn sàng doanh nghiệp
+3. **Tham gia [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** để nhận hỗ trợ cộng đồng
+4. **Gửi báo cáo sự cố** đến [kho GitHub AZD](https://github.com/Azure/azure-dev) cho các vấn đề cụ thể AZD
 
 ## Tài Nguyên
 
-- [Khắc Phục Sự Cố Hạn Mức và Giới Hạn Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
-- [Khắc Phục Sự Cố Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Khắc Phục Sự Cố Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Kỹ Năng Gỡ Lỗi Azure Diagnostics Agent**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Cài kỹ năng khắc phục sự cố Azure trong trình soạn thảo của bạn: `npx skills add microsoft/github-copilot-for-azure`
+- [Khắc phục sự cố hạn mức và điều tiết Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
+- [Khắc phục sự cố Ứng dụng Container](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Khắc phục sự cố Tìm kiếm Azure AI](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Kỹ Năng Azure Diagnostics Agent**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Cài đặt kỹ năng khắc phục sự cố Azure trong trình soạn thảo: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Điều Hướng Chương:**
 - **📚 Trang Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
 - **📖 Chương Hiện Tại**: Chương 7 - Khắc Phục Sự Cố & Gỡ Lỗi
-- **⬅️ Trước**: [Hướng Dẫn Gỡ Lỗi](debugging.md)
-- **➡️ Chương Tiếp Theo**: [Chương 8: Mẫu Quy Trình Sản Xuất & Doanh Nghiệp](../chapter-08-production/production-ai-practices.md)
-- **🤖 Liên Quan**: [Chương 2: Phát Triển AI Là Ưu Tiên](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **⬅️ Trước Đó**: [Hướng Dẫn Gỡ Lỗi](debugging.md)
+- **➡️ Chương Tiếp Theo**: [Chương 8: Mẫu Sản Xuất & Doanh Nghiệp](../chapter-08-production/production-ai-practices.md)
+- **🤖 Liên Quan**: [Chương 2: Phát Triển Ưu Tiên AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 - **📖 Tham Khảo**: [Khắc Phục Sự Cố Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---

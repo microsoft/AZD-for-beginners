@@ -1,6 +1,6 @@
 # 6. פירוק תשתית
 
-!!! tip "בסוף מודול זה תוכל"
+!!! tip "בסיום מודול זה תוכל ל"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -9,11 +9,11 @@
 
 ---
 
-## תרגילים נוספים
+## תרגילים בונוס
 
-לפני שנפרק את הפרויקט, הקדש כמה דקות לביצוע חקירה פתוחה.
+לפני שאנו פורקים את הפרויקט, הקדש כמה דקות לסקרנות חופשית.
 
-!!! info "נסה את רעיונות החקירה האלה"
+!!! info "נסה את הגירויים הבאים לחקירה"
 
     **Experiment with GitHub Copilot:**
     
@@ -31,14 +31,18 @@
 
 ## פירוק תשתית
 
-1. פירוק התשתית הוא פשוט כמו:
+!!! warning "אם גם השלמת את תרגיל ה-GA hosted-agent"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
+
+1. פירוק התשתית כל כך פשוט:
       
       ```bash title="" linenums="0"
       azd env list
       azd show
       azd down
       ```
-1. אשר את הסביבה שנבחרה ובדוק את המשאבים שיוסרו. פעולה זו מסירה משאבים ב-Azure ועלולה להשמיד נתונים. שמור את הנחיית האישור עבור תהליך למידה זה. לאחר שתסתיים תראה פלט דומה ל:
+1. אשר את הסביבה שנבחרה וסקור את המשאבים שיימחקו. פעולה זו מסירה משאבי Azure ועלולה לגרום לאבדן מידע. שמור על בקשת האישור עבור תהליך הלמידה הזה. לאחר סיום תראה פלט דומה ל:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. אמת את המחיקה בפורטל ובדוק משאבים שמחוץ לטווח הפריסה. דיווחי עלויות ועדכוני מכסות יכולים להתעכב. תצורת `.azure` המקומית נשארת אלא אם הסרת אותה במפורש.
+1. אמת את ההסרה בפורטל ובדוק עבור משאבים מחוץ להיקף ההתקנה. דיווח על עלויות ועדכוני מכסות עלולים לאחר. תצורת `.azure` המקומית נותרת אלא אם תסיר אותה במפורש.
 
-1. `azd down --purge` מבקשת בנוסף מחיקה סופית של משאבים שנמחקו ברכות ונמצאים בתמיכה. השתמש בו רק כשאין צורך בשחזור ואתה מבין את מדיניות השימור/הגנה מפני מחיקה. הוא אינו מבטיח שחרור מכסה מיידי.
+1. `azd down --purge` מבקש בנוסף מחיקה קבועה של משאבים שנמחקו רך בתמיכה. השתמש בו רק כשאין צורך בשחזור ואתה מבין מדיניות שימור והגנה על סילוק. זה אינו מבטיח שחרור מיידי של המכסה.
 
-1. אל תפרוס מחדש רק כדי לבדוק את הניקוי. `azd up` מכוון שיעלה מחדש משאבים באמצעות קלטים מקומיים קיימים, ועלול לגרום לחיובים שוב. עדכוני מודל בדרך כלל משתמשים בשינויים נתמכים בפריסה, לא בפירוק.
+1. אל תפרוס מחדש רק כדי לאמת ניקיון. `azd up` מכוון מאוחר יותר יכול ליצור מחדש משאבים באמצעות הקלטים המקומיים הנותרים ויגרום לחיובים שוב. עדכוני מודל בדרך כלל משתמשים בשינויים בתשתית הנתמכים ולא בפירוק.
 
 ---
 

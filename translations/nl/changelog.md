@@ -2,60 +2,79 @@
 
 ## Inleiding
 
-Dit wijzigingslogboek documenteert alle opmerkelijke wijzigingen, updates en verbeteringen aan de AZD Voor Beginners repository. We volgen semantische versieprincipes en onderhouden dit logboek om gebruikers te helpen begrijpen wat er tussen versies is veranderd.
+Dit wijzigingslogboek documenteert alle opmerkelijke wijzigingen, updates en verbeteringen in de AZD Voor Beginners-repository. We volgen principes van semantische versiebeheer en onderhouden dit logboek om gebruikers te helpen begrijpen wat er tussen versies is veranderd.
 
 ## Leerdoelen
 
-Door dit wijzigingslogboek te bekijken, zult u:
-- Op de hoogte blijven van nieuwe functies en inhoudsuitbreidingen
-- Inzicht krijgen in verbeteringen aan bestaande documentatie
-- Bugfixes en correcties volgen om nauwkeurigheid te waarborgen
-- De evolutie van het leermateriaal in de loop der tijd volgen
+Door dit wijzigingslogboek te bekijken, zul je:
+- Op de hoogte blijven van nieuwe functies en toevoegingen aan de inhoud
+- Verbeteringen begrijpen die aan bestaande documentatie zijn aangebracht
+- Bugfixes en correcties bijhouden om nauwkeurigheid te waarborgen
+- De evolutie van het lesmateriaal in de loop van de tijd volgen
 
-## Leerresultaten
+## Leeruitkomsten
 
-Na het bekijken van de wijzigingslogboekvermeldingen zult u in staat zijn om:
+Na het bekijken van de changelog-items zul je in staat zijn om:
 - Nieuwe inhoud en beschikbare bronnen voor leren te identificeren
 - Te begrijpen welke secties zijn bijgewerkt of verbeterd
-- Uw leertraject te plannen op basis van het meest actuele materiaal
-- Feedback en suggesties voor toekomstige verbeteringen bij te dragen
+- Je leerpad te plannen op basis van het meest actuele materiaal
+- Feedback en suggesties te leveren voor toekomstige verbeteringen
 
 ## Versiegeschiedenis
 
+### [v3.25.0] - 2026-11-09
+
+#### Microsoft Foundry-extensie 1.0 is nu algemeen beschikbaar
+
+De `microsoft.foundry` 1.0 bundel is **live en algemeen beschikbaar**, zoals aangekondigd op [5 november 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). De cursus leert nu de vrijgegeven GA-workflow, niet een aanstaande release. Begin met AZD **1.37.0 of later** en `azd ext install microsoft.foundry`.
+
+#### Beschikbaar in deze cursusupdate
+- De Engelstalige handleiding gebruikt de GA-bundel als standaardinstallatiepad en legt de zeven onafhankelijk versioneerde kernextensies uit.
+- Een [hosted-agent walkthrough](docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) behandelt de upstream Python Agent Framework Responses API-sample, huidige uv, Python 3.13+, nieuwe/bestaande projectselectie, hergebruik van modellen en beoordeling van `azure.yaml`.
+- De lokale-naar-cloud workflow behandelt Agent Inspector testen, Azure-ondersteunde model-aanroepposten, externe code builds, geïmplementeerde aanroepen, cloud tracing, implementatievoorbeeld, logs en diagnostiek.
+- Aparte evaluatiehandleiding behandelt het genereren en beoordelen van datasets/rubrieken, het configureren van een benoemde evaluatie, het registreren van assets en het inspecteren van resultaten. Oudere evaluatie-/optimalisatie-instructies blijven migratiegeschiedenis, niet de huidige releasestandaard.
+- Foundry CI/CD-handleiding omvat installeren van runner-extensies, geauthenticeerde implementatie, evaluatie-assets/toegang en een expliciete kwaliteitsgate.
+- Opruimingshandleiding onderscheidt nieuw gemaakte en hergebruikte Foundry-projecten. De workshop linkt naar de aparte GA-oefening zonder de voorbeeldenpecifieke tests te vervangen.
+- Cursusnavigatie, leerdoelen, setup-vereisten, spiekbriefje, FAQ en studiegids weerspiegelen de GA-workflow. Gegeneerde vertalingen worden niet handmatig bewerkt.
+
+#### Beoordelingsomvang
+- Gebaseerd op de GA-aankondiging, gekoppelde Microsoft Learn-handleiding en de upstream sample configuratie. Geen live Azure-provisioning, implementatie, modelaanroep of evaluatie uitgevoerd.
+- Bundel GA impliceert niet GA voor elke optionele functie, onafhankelijke extensie of SDK, en certificeert de voorbeelden niet voor productiegebruik.
+
 ### [v3.24.0]- 2026-11-04
 
-#### Gerepareerd
-- Engelse cursusnavigatie hersteld, verplaatste-pagina paden, ontbrekende ankers en verouderde externe verwijzingen, inclusief de link van hoofdstuk 2 naar de productie AI-gids.
-- Huidige richtlijnen herzien tegenover gepubliceerde AZD 1.37.2, agents 1.0.0-beta.23 en evaluaties 1.0.0-beta.2. Het aparte `azd ai eval` workflow en migratie van optimalisatieconfiguratie gedocumenteerd.
-- Niet-ondersteunde CLI-vlaggen, authenticatiegrenzen, plaintext omgeving/geheime richtlijnen, infrastructuurupdates, modelconfiguratie en destructieve herstelvoorbeelden gecorrigeerd.
-- Workshop ververst met de huidige AI Agents voorbeeld, inclusief actuele hooks, configuratie-inputs, evaluatietests, red-teamings toegangspunten en observeerbaarheid.
-- Voorbeeldimplementatieclaims gecorrigeerd en gerelateerde applicatie/infrastructuur/configuratieproblemen hersteld. Detailhandelarchitectuurmateriaal is expliciet onderscheiden van een volledige werkende applicatie.
-- CodeQL taalmatrix hersteld, ondersteuning voor Node.js 24 gekozen voor de ontwikkelcontainer, en setup-validators melden mislukte versieopdrachten.
+#### Opgelost
+- Gerepareerde Engelstalige cursusnavigatie, verplaatste-pagina paden, ontbrekende ankers en verouderde externe verwijzingen, inclusief de hoofdstuk 2 link naar de productie AI-gids.
+- Huidige handleiding beoordeeld tegen gepubliceerde AZD 1.37.2, agents 1.0.0-beta.23 en evaluaties 1.0.0-beta.2. Documentatie van de aparte `azd ai eval` workflow en optimalisatie migratieconfiguratie.
+- Onjuiste CLI-vlaggen, authenticatiegrenzen, plain-text omgeving/geheime handleiding, infrastructuurupdates, modelconfiguratie en destructieve herstelvoorbeelden gecorrigeerd.
+- Workshop vernieuwd met de huidige AI Agents-sample, inclusief daadwerkelijke hooks, configuratie-invoer, evaluatietests, red-teaming ingangspunten en observability.
+- Verkeerde implementatieclaims gecorrigeerd en gerelateerde applicatie/infrastructuur/configuratieproblemen opgelost. Winkelarchitectuurmateriaal expliciet onderscheiden van een complete werkende applicatie.
+- CodeQL-taalmatrix hersteld, geselecteerde ondersteunde Node.js 24 voor dev-container en setup-validators laten mislukte versieopdrachten rapporteren.
 
 #### Toegevoegd
-- Een Engelstalige offline link/ankerchecker, regressietests en een documentatieworkflow die de workshop ook in strikte modus bouwt. Gegeneerde vertalingen en vertaalde afbeeldingen uitgesloten.
+- Engelstalige offline link/anker checker, regressietests en een documentatieworkflow die ook de workshop in strikte modus bouwt. Gegeneerde vertalingen en vertaalde afbeeldingen zijn uitgesloten.
 
-#### Validatiebereik
-- Bron, syntaxis, configuratie, lokaal gedrag en netwerklink-controles garanderen geen live Azure-implementatie, quotum, RBAC, regionale modelbeschikbaarheid, facturering, beveiligingsnaleving of productieklaarheid.
-- Oudere items hieronder zijn historische records, geen actuele opdracht- of release-instructies.
+#### Validatiescope
+- Bron, syntax, configuratie, lokaal gedrag en netwerklinkcontroles bewijzen niet live Azure inzetbaarheid, quotum, RBAC, regionale modelbeschikbaarheid, facturatie, beveiligingsconformiteit of productierijpheid.
+- Oudere items hieronder zijn historische gegevens, geen actuele opdrachten of release-instructies.
 
 ### [v3.23.0] - 2026-07-13
 
-#### AZD 1.27.1 Vernieuwing: Versievalidering Update
-**Deze versie valideert de cursus opnieuw tegen `azd` `1.27.1` (juli 2026, laatste stabiele release) en de huidige preview AI-agentextensie `azure.ai.agents` `1.0.0-beta.5`, waardoor elke "gevalideerd tegen" banner bijgewerkt is na de releases 1.26.0, 1.27.0 en 1.27.1.**
+#### AZD 1.27.1 Vernieuwing: Versie-actueelheidsupdate
+**Deze versie valideert de cursus opnieuw tegen `azd` `1.27.1` (juli 2026, laatste stabiele release) en de huidige preview AI agent-extensie `azure.ai.agents` `1.0.0-beta.5`, waarbij iedere "gevalideerd tegen" banner is bijgewerkt na de 1.26.0, 1.27.0 en 1.27.1 releases.**
 
 #### Gewijzigd
-- **✅ Validatiebasislijn bijgewerkt** van `azd 1.25.6` (juni 2026) naar `azd 1.27.1` (juli 2026) over de hoofd-README, alle hoofdstuk-READMEs, de Hoofdstuk 1 ontwikkelcontainerles (inclusief voorbeelden met vastgepinde versies), de Hoofdstuk 4 aangepaste sjablonen les, de Hoofdstuk 5 multi-agent les en de workshopdocumentatie
-- **🤖 Hoofdstuk 2 basislijn vernieuwd** van `azd 1.23.12` (maart 2026) naar `azd 1.27.1` over `agents.md`, `ai-model-deployment.md`, `ai-workshop-lab.md` en `microsoft-foundry-integration.md`; validatie-notatiedata bijgewerkt naar 2026-07-13
-- **🧩 AI-agentextensie verhoogd** van `azure.ai.agents` `0.1.40-preview`/`0.1.18-preview` naar de huidige `1.0.0-beta.5` release in de Hoofdstuk 2 README en `agents.md`
-- **🧪 Workshop validatievoorbeeld** (`azd version` output) bijgewerkt naar `1.27.1`
+- **✅ Validatiebasislijn bijgewerkt** van `azd 1.25.6` (juni 2026) naar `azd 1.27.1` (juli 2026) door de root README, alle hoofdstuk READMEs, de hoofdstuk 1 dev-container les (inclusief gepinde versies voorbeelden), hoofdstuk 4 custom-templates les, hoofdstuk 5 multi-agent les en workshopdocs
+- **🤖 Hoofdstuk 2 basislijn vernieuwd** van `azd 1.23.12` (maart 2026) naar `azd 1.27.1` over `agents.md`, `ai-model-deployment.md`, `ai-workshop-lab.md` en `microsoft-foundry-integration.md`; data van validatienotities bijgewerkt naar 2026-07-13
+- **🧩 AI agent-extensie verhoogd** van `azure.ai.agents` `0.1.40-preview`/`0.1.18-preview` naar de huidige `1.0.0-beta.5` release in de hoofdstuk 2 README en `agents.md`
+- **🧪 Workshopvalidatievoorbeeld** (`azd version` output) bijgewerkt naar `1.27.1`
 
-#### Opmerkingen over relevante azd-releases (1.26.0 → 1.27.1)
-- **1.26.0 (2026-06-24):** Go-ondersteuning voor Azure Functions op Flex Consumption, `azd config sub-filter` tenant-abonnementsfilters, self-contained extensiepakketten (`azd x pack --bundle`) en `azd tool install azure-skills`
-- **1.27.0 (2026-06-30):** Model Azure AI Foundry projecten/agents rechtstreeks in `azure.yaml` (Bicep-loze/Terraform-loze init), containerimplementatie-ondersteuning voor App Service (`host: appservice` + `language: docker`), directe `-s/--source` voor `azd extension` opdrachten en `azd tool uninstall`
-- **1.27.1 (2026-07-09):** `--no-dependencies` vlag voor `azd extension install`, verouderde modellen standaard uitgesloten van catalogus/quotum suggesties en diverse bugfixes
+#### Notities over relevante azd-releases (1.26.0 → 1.27.1)
+- **1.26.0 (2026-06-24):** Go-ondersteuning voor Azure Functions op Flex Consumption, `azd config sub-filter` per-tenant abonnementfilters, zelfstandige extensiebundels (`azd x pack --bundle`) en `azd tool install azure-skills`
+- **1.27.0 (2026-06-30):** Modelleer Azure AI Foundry projecten/agents direct in `azure.yaml` (Bicep-loze/Terraform-loze init), container-implementatieondersteuning voor App Service (`host: appservice` + `language: docker`), directe `-s/--source` voor `azd extension` opdrachten, en `azd tool uninstall`
+- **1.27.1 (2026-07-09):** `--no-dependencies` vlag voor `azd extension install`, verouderde modellen standaard uitgesloten van catalogus/quotum prompts, en verschillende bugfixes
 
-#### Bijgewerkte bestanden
+#### Bijgewerkte Bestanden
 - `README.md`
 - `changelog.md`
 - `docs/chapter-01-foundation/README.md`
@@ -79,48 +98,48 @@ Na het bekijken van de wijzigingslogboekvermeldingen zult u in staat zijn om:
 
 ### [v3.22.0] - 2026-06-16
 
-#### Beginnerskloof #2: Sjabloonschrijven, Dev Containers, Pulumi, Azure DevOps, Service Principals en Meer
-**Deze versie sluit de resterende tussenliggende hiaten af die door de azd-coverage-analyse aan het licht werden gebracht: hoe je je eigen sjabloon schrijft en publiceert, reproduceerbare dev-container/Codespaces-omgevingen, de Pulumi infrastructuurprovider, een Azure DevOps CI/CD doorloop, service-principal authenticatie, host-selectierichtlijnen (AKS/Spring Apps), `azd restore`/`azd package` uitleg, hook-foutafhandeling en team-/gedeelde omgevingpraktijken.**
+#### Beginner Gap-Fill #2: Template Maken, Dev Containers, Pulumi, Azure DevOps, Service Principals en Meer
+**Deze versie sluit de resterende intermediate gaps die door de azd-coverage analyse zijn gesignaleerd: hoe je je eigen template maakt en publiceert, reproduceerbare dev-container/Codespaces omgevingen, de Pulumi infrastructuurprovider, een Azure DevOps CI/CD walkthrough, service-principal authenticatie, host-selectierichtlijnen (AKS/Spring Apps), `azd restore`/`azd package` uitleg, hook-foutafhandeling en team-/gedeelde-omgeving praktijken.**
 
 #### Toegevoegd
-- **🧱 Nieuwe Hoofdstuk 4 les** `docs/chapter-04-infrastructure/custom-templates.md` — het schrijven van je eigen azd-sjabloon: vereiste structuur (`azure.yaml`, `infra/`, `src/`), het `metadata.template` veld, parameteriseren van infrastructuur met de `uniqueString()` resource-token en `azd-env-name` tag, lokaal testen met `azd init --template <local-path>`, publiceren naar GitHub en inzenden naar de Awesome AZD-galerij
-- **📦 Nieuwe Hoofdstuk 1 les** `docs/chapter-01-foundation/dev-containers.md` — reproduceerbare azd-omgevingen met Dev Containers en GitHub Codespaces: een minimale `.devcontainer/devcontainer.json` met de officiële `ghcr.io/azure/azure-dev/azd` functie, taalspecifieke functies, `docker-in-docker` voor containerhosts en `azd auth login --use-device-code` voor remote aanmelding
-- **🧩 Pulumi met azd** sectie in `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`, Pulumi mappenstructuur, stacks gekoppeld aan azd-omgevingen, vereiste outputs/tagging en de identieke `azd up` / `azd down` workflow
-- **🎯 Host-selectierichtlijn** in `docs/chapter-04-infrastructure/provisioning.md` — een beginnervriendelijke vergelijking van `appservice`, `staticwebapp`, `function`, `containerapp`, `aks` en `springapp` met richtlijnen wanneer je AKS of Azure Spring Apps kiest
-- **🛠️ Azure DevOps CI/CD doorloop** in `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, serviceverbinding met workload identity federation (OIDC), de gegenereerde `azure-dev.yml` en variabelengroepinrichting
-- **🔑 Service Principals (Patroon 4)** toegevoegd aan `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`, niet-interactieve `azd auth login` met clientsecret versus federated/OIDC referenties, wanneer te gebruiken en veilige opslag van referenties
-- **🪝 Hook foutafhandeling** subsectie in `docs/chapter-04-infrastructure/deployment-guide.md` — exitcodes en `set -e`, `continueOnError`, het isoleren van testhooks met `azd hooks run`, OS-specifieke shells, en `--debug`
-- **👥 Team / gedeelde omgevingen** sectie in `docs/chapter-03-configuration/configuration.md` — wat leeft in `.azure/`, wat te gitignore'n, per-ontwikkelaar omgevingen, `azd env list`/`select` en het leveren van omgevingswaarden in CI/CD
-- **🧰 `azd restore` en uitgebreide `azd package`** uitleg in `resources/cheat-sheet.md` — herstellen van dependencies en bouwen van een implementeerbaar artefact zonder de implementatie
+- **🧱 Nieuwe hoofdstuk 4 les** `docs/chapter-04-infrastructure/custom-templates.md` — het schrijven van je eigen azd-template: vereiste structuur (`azure.yaml`, `infra/`, `src/`), het `metadata.template` veld, parameteriseren van infrastructuur met de `uniqueString()` resource token en `azd-env-name` tag, lokaal testen met `azd init --template <local-path>`, publiceren naar GitHub en inzenden naar de Awesome AZD-galerij
+- **📦 Nieuwe hoofdstuk 1 les** `docs/chapter-01-foundation/dev-containers.md` — reproduceerbare azd-omgevingen met Dev Containers en GitHub Codespaces: een minimalistische `.devcontainer/devcontainer.json` gebruikmakend van de officiële `ghcr.io/azure/azure-dev/azd` functie, taalspecifieke features, `docker-in-docker` voor container hosts en `azd auth login --use-device-code` voor remote aanmelding
+- **🧩 Pulumi met azd** sectie in `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`, Pulumi folderstructuur, stacks gekoppeld aan azd-omgevingen, vereiste outputs/tagging en de identieke `azd up` / `azd down` workflow
+- **🎯 Host-selectierichtlijnen** in `docs/chapter-04-infrastructure/provisioning.md` — een beginner-vriendelijke vergelijking van `appservice`, `staticwebapp`, `function`, `containerapp`, `aks` en `springapp`, met richtlijnen wanneer je AKS of Azure Spring Apps kiest
+- **🛠️ Azure DevOps CI/CD walkthrough** in `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, serviceverbinding met workload identity federation (OIDC), de gegenereerde `azure-dev.yml` en variabele groep setup
+- **🔑 Service Principals (Patroon 4)** toegevoegd aan `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`, niet-interactieve `azd auth login` met client secret vs. federated/OIDC-credentials, wanneer te gebruiken en veilige credential opslag
+- **🪝 Hook-foutafhandeling** subsectie in `docs/chapter-04-infrastructure/deployment-guide.md` — exit codes en `set -e`, `continueOnError`, hooks afzonderlijk testen met `azd hooks run`, OS-specifieke shells en `--debug`
+- **👥 Team / gedeelde omgevingen** sectie in `docs/chapter-03-configuration/configuration.md` — wat leeft in `.azure/`, wat te negeren in git, per-developer omgevingen, `azd env list`/`select` en het aanleveren van omgevingwaarden in CI/CD
+- **🧰 `azd restore` en uitgebreide `azd package`** uitleg in `resources/cheat-sheet.md` — het herstellen van afhankelijkheden en bouwen van een inzetbare artefact zonder implementatie
 
 #### Gewijzigd
-- **🧭 Hoofdstuk 4 lestabel** bijgewerkt om de nieuwe "Schrijf je eigen sjabloon" les (Les 3) op te nemen
+- **🧭 Hoofdstuk 4 lestabel** bijgewerkt om de nieuwe les "Je Eigen Template Maken" (Les 3) op te nemen
 - **🧭 Hoofdstuk 1 lestabel** bijgewerkt om de nieuwe les "Dev Containers & Codespaces" (Les 5) op te nemen; navigatievoetteksten gekoppeld tussen `bring-your-own-app.md` en `dev-containers.md`
 
 ### [v3.21.0] - 2026-06-16
 
-#### Beginnerskloof: Hands-on Multi-Agent Les, "Breng Je Eigen App," Terraform en CI/CD Doorloop
-**Deze versie sluit de grootste hiaten voor een complete beginnersgids door twee nieuwe hands-on lessen toe te voegen (een implementeerbare multi-agent doorloop en het toevoegen van azd aan een bestaande app), een beginnervriendelijke hooks introductie, een Terraform-met-azd sectie, een stapsgewijze GitHub Actions pipeline doorloop, een uitleg over de nieuwe preview-extensies en een expliciete deployment-verificatie checklist.**
+#### Beginner Gap-Fill: Hands-On Multi-Agent Les, "Bring Your Own App," Terraform en CI/CD Walkthrough
+**Deze versie sluit de grootste hiaten voor een complete beginnersgids door twee nieuwe hands-on lessen toe te voegen (een inzetbare multi-agent walkthrough en het toevoegen van azd aan een bestaand app), een beginnersvriendelijke hooks introductie, een Terraform-met-azd sectie, een stapsgewijze GitHub Actions-pijplijn walkthrough, een uitleg voor de nieuwe previewextensies, en een expliciete implementatieverificatie checklist.**
 
 #### Toegevoegd
-- **🤝 Nieuwe Hoofdstuk 5 les** `docs/chapter-05-multi-agent/multi-agent-basics.md` — een volledig hands-on, implementeerbare twee-agent doorloop (orchestrator + specialisten) met een echt sjabloon (`contoso-creative-writer`), bespreekt wanneer multi-agent te gebruiken, de `azd up` workflow, begrip van geïmplementeerde resources, cross-agent tracing, aanpassing en opruiming
-- **📦 Nieuwe Hoofdstuk 1 les** `docs/chapter-01-foundation/bring-your-own-app.md` — hoe azd toe te voegen aan een bestaand project met `azd init` ("gebruik code in de huidige map"), begrip van `azure.yaml` en `infra/`, `azd infra generate`, hostdetectie en deployen met `azd up`
-- **🌐 Terraform met azd** sectie toegevoegd aan `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: terraform` config, `.tf` mappenstructuur, vereiste `AZURE_*` outputs en `azd-env-name` tagging, en de identieke `azd up` / `azd down` workflow (sluit kloof waarin Terraform-ondersteuning werd beargumenteerd maar alleen Bicep getoond)
-- **⚙️ Stapsgewijze GitHub Actions doorloop** in `docs/chapter-08-production/production-ai-practices.md` — van GitHub repo tot geautomatiseerde deploys: `azd pipeline config`, OIDC federated credentials (geen opgeslagen geheimen), de gegenereerde `azure-dev.yml` en geheimen-vs-variabelen advies
-- **🪝 Beginners "Nieuw met hooks?" introductie** in `docs/chapter-04-infrastructure/deployment-guide.md` — wat een hook is, een hook-fasentabel, een minimale eerste hook en handmatig draaien van hooks met `azd hooks run`
-- **✅ "Verifieer je Deployment" checklist** toegevoegd aan stap 5 van `docs/chapter-01-foundation/first-project.md` — rooktest, gezondheids-endpoint controle en expliciete succescriteria
-- **🧩 Uitleg voor nieuwe preview-extensies** `azure.ai.skills` en `azure.ai.connections` (wat ze zijn en wanneer ze te gebruiken) in `docs/chapter-08-production/production-ai-practices.md`
+- **🤝 Nieuwe hoofdstuk 5 les** `docs/chapter-05-multi-agent/multi-agent-basics.md` — een volledig hands-on, inzetbare walkthrough met twee agents (orchestrator + specialisten) met een echte template (`contoso-creative-writer`), die behandelt wanneer multi-agent te gebruiken, de `azd up` workflow, begrip van ingezette resources, cross-agent tracing, aanpassing en opruiming
+- **📦 Nieuwe hoofdstuk 1 les** `docs/chapter-01-foundation/bring-your-own-app.md` — hoe azd toe te voegen aan een bestaand project met `azd init` ("gebruik code in de huidige directory"), begrip van `azure.yaml` en `infra/`, `azd infra generate`, hostdetectie en implementatie met `azd up`
+- **🌐 Terraform met azd** sectie toegevoegd aan `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: terraform` configuratie, `.tf` folderstructuur, benodigde `AZURE_*` outputs en `azd-env-name` tagging, en de identieke `azd up` / `azd down` workflow (sluit de kloof waar Terraform-ondersteuning werd belooft maar alleen Bicep werd getoond)
+- **⚙️ Stap-voor-stap GitHub Actions walkthrough** in `docs/chapter-08-production/production-ai-practices.md` — van GitHub repo tot geautomatiseerde deploys: `azd pipeline config`, OIDC federatieve referenties (geen opgeslagen geheimen), de gegenereerde `azure-dev.yml`, en richtlijnen voor geheimen vs variabelen
+- **🪝 Beginners "Nieuw met hooks?" introductie** in `docs/chapter-04-infrastructure/deployment-guide.md` — wat een hook is, een hook-fasentabel, een minimale eerste hook, en hooks handmatig draaien met `azd hooks run`
+- **✅ "Verifieer je deployment" checklist** toegevoegd aan Stap 5 van `docs/chapter-01-foundation/first-project.md` — rooktest, health-endpoint check, en expliciete succescriteria
+- **🧩 Uitleg nieuwe preview-extensies** `azure.ai.skills` en `azure.ai.connections` (wat ze zijn en wanneer ze te gebruiken) in `docs/chapter-08-production/production-ai-practices.md`
 
 #### Gewijzigd
-- **🧭 Hoofdstuk 5 lestabel** gecorrigeerd: `multi-agent-basics.md` is nu Les 1 (de enige volledig hands-on les), met eerlijke labeling dat Les 2 in Hoofdstuk 6 zit en het Retail-scenario een architectuurblauwdruk is, niet een één-commando sjabloon
-- **🧭 Hoofdstuk 1 lestabel** bevat nu de nieuwe les "Breng Je Eigen App" (Les 4)
-- **🔗 Navigatievoetteksten** bijgewerkt: `first-project.md` linkt nu door naar `bring-your-own-app.md`
+- **🧭 Hoofdstuk 5 lessen tabel** gecorrigeerd: `multi-agent-basics.md` is nu Les 1 (de enige volledig hands-on les), met eerlijke aanduiding dat Les 2 in Hoofdstuk 6 staat en het Retail scenario een architectuur blauwdruk is, geen één-commando template
+- **🧭 Hoofdstuk 1 lessen tabel** bevat nu de nieuwe "Breng je eigen app mee" les (Les 4)
+- **🔗 Navigatie voetnoten** bijgewerkt: `first-project.md` linkt nu door naar `bring-your-own-app.md`
 
-#### Gerepareerd
-- **🧱 Gesloten de "geclaimde maar ontbrak" Terraform kloof** — de cursus verwees eerder naar Terraform-ondersteuning zonder het te tonen
-- **🔀 Corrigeerde misleidende kruislinks in Hoofdstuk 5** die suggereerden dat een volledige multi-agent implementatie bestond terwijl alleen een architectuurblauwdruk beschikbaar was
+#### Gefixed
+- **🧱 Gesloten de "geclaimde maar ontbrekende" Terraform kloof** — de cursus verwees eerder naar Terraform ondersteuning zonder het te tonen
+- **🔀 Correctie misleidende Hoofdstuk 5 kruislinks** die impliceerden dat een volledige multi-agent implementatie bestond terwijl het enkel een architectuur blauwdruk was
 
-#### Bijgewerkte bestanden
+#### Bestanden bijgewerkt
 - `changelog.md`
 - `docs/chapter-01-foundation/README.md`
 - `docs/chapter-01-foundation/bring-your-own-app.md` *(nieuw)*
@@ -135,28 +154,28 @@ Na het bekijken van de wijzigingslogboekvermeldingen zult u in staat zijn om:
 
 ### [v3.20.0] - 2026-06-16
 
-#### AZD 1.25.6 Vernieuwing, Volledige Agent Levenscycluscommando's & Aspire Rebranding
-**Deze versie herbevestigt de cursus tegen `azd` `1.25.6` (juni 2026) en de `azure.ai.agents` `0.1.40-preview` extensie, breidt AI-advies uit van "een agent opzetten" naar de volledige agentlevenscyclus (testen → evalueren → optimaliseren → inspecteren → verwijderen), toont de nieuwe `azure.ai.skills` en `azure.ai.connections` preview extensies en vermeldt de productrebranding ".NET Aspire" → "Aspire".**
+#### AZD 1.25.6 Refresh, Volledige agent levenscyclus commando's & Aspire Rebranding
+**Deze versie herverifieert de cursus tegen `azd` `1.25.6` (juni 2026) en de `azure.ai.agents` `0.1.40-preview` extensie, breidt AI-richtlijnen uit van "scaffold een agent" naar de complete agentlevenscyclus (testen → evalueren → optimaliseren → inspecteren → verwijderen), toont de nieuwe `azure.ai.skills` en `azure.ai.connections` preview-extensies, en noemt de ".NET Aspire" → "Aspire" product rebranding.**
 
 #### Toegevoegd
-- **🔁 Volledige agentlevenscyclusdekking** voor beginners en AI-ingenieurs door de documentatie heen:
-  - `docs/chapter-01-foundation/azd-basics.md` — Levenscyclus tabel (opzetten → testen → meten → verbeteren → inspecteren → opruimen) toegevoegd aan de sectie Extensies en AI-commando's
-  - `docs/chapter-08-production/production-ai-practices.md` — Nieuwe sectie "Beheer van de agentlevenscyclus" die `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, en `delete --force` behandelt
+- **🔁 Volledige agent levenscyclus dekking** voor beginners en AI-ingenieurs door de documentatie:
+  - `docs/chapter-01-foundation/azd-basics.md` — Levenscyclus tabel (scaffold → test → meten → verbeteren → inspecteren → opruimen) toegevoegd aan de Sectie Extensies en AI-commando's
+  - `docs/chapter-08-production/production-ai-practices.md` — Nieuwe sectie "Managing the Agent Lifecycle" met `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, en `delete --force`
   - `resources/cheat-sheet.md` — Uitgebreide AI Agent Commando's met `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, en `delete --force`
-- **🧩 Nieuwe preview extensies** gedocumenteerd: `azure.ai.skills` (herbruikbare agentvaardigheden) en `azure.ai.connections` (Foundry-verbindingen) toegevoegd aan de extensietabel en de spiekbrief
-- **⏱️ Respons-timing richtlijnen** — `azd ai agent invoke` voorbeelden geven nu aan dat het de totale latentie en time-to-first-byte print
-- **📌 Versiebanner** in de hoofdfout die cursisten wijst op `azd version` en `azd upgrade`
+- **🧩 Nieuwe preview-extensies** gedocumenteerd: `azure.ai.skills` (herbruikbare agentvaardigheden) en `azure.ai.connections` (Foundry verbindingen) toegevoegd aan de extensietabel en cheatsheet
+- **⏱️ Reactietijd richtlijnen** — `azd ai agent invoke` voorbeelden vermelden nu dat het totale latency en time-to-first-byte print
+- **📌 Versie-banner** in de root README die lerenden wijst op `azd version` en `azd upgrade`
 
 #### Gewijzigd
-- **✅ Validatiebasislijn bijgewerkt** van `azd 1.23.12` (maart 2026) naar `azd 1.25.6` (juni 2026) in alle hoofdstuk-README's en workshopdocumentatie
-- **🤖 Hoofdstuk 2 extensienotitie** bijgewerkt van `azure.ai.agents` `0.1.18-preview` naar `0.1.40-preview`
-- **🧪 Workshop validatievoorbeeld** (`azd version` output) bijgewerkt naar `1.25.6`
-- **🧭 README "Wat is er nieuw in azd Vandaag"** vernieuwd om de end-to-end agentlevenscyclus, nieuwe AI-extensies en recente verbeteringen te benadrukken (`azd init` idempotentie, `azd auth login` stale-token clearing, `azd tool` first-run prompt)
-- **📖 Hoofdstuk 2 agents.md (Optie 4)** wijst nu cursisten naar de post-deploy levenscycluscommando's in plaats van te stoppen bij `azd up`
+- **✅ Validatie basislijn bijgewerkt** van `azd 1.23.12` (maart 2026) naar `azd 1.25.6` (juni 2026) over alle hoofdstuk READMEs en workshop docs
+- **🤖 Hoofdstuk 2 extensie notitie** bijgewerkt van `azure.ai.agents` `0.1.18-preview` naar `0.1.40-preview`
+- **🧪 Workshop validatie voorbeeld** (`azd version` output) bijgewerkt naar `1.25.6`
+- **🧭 README "Wat is nieuw in azd Vandaag"** ververst om de end-to-end agent levenscyclus, nieuwe AI-extensies, en recente kwaliteitsverbeteringen te benadrukken (`azd init` idempotentie, `azd auth login` stale-token clearing, `azd tool` first-run prompt)
+- **📖 Hoofdstuk 2 agents.md (Optie 4)** wijst lerenden nu naar post-deploy levenscycluscommando's in plaats van te stoppen bij `azd up`
 
-#### Opgelost
-- **🏷️ Productnaamgeving** — een Aspire rebranding-opmerking toegevoegd (".NET Aspire" is nu gewoon "Aspire"); azd's Aspire-ondersteuning blijft ongewijzigd
-- **🔎 Live release validatie** bevestigd aan de hand van de Azure Developer CLI release feed: stabiele CLI `1.25.6` (2026-06-12) en `azure.ai.agents` `0.1.40-preview` (2026-06-15)
+#### Gefixed
+- **🏷️ Productnaamgeving** — een Aspire rebranding nota toegevoegd (".NET Aspire" is nu simpelweg "Aspire"); azd's Aspire ondersteuning blijft ongewijzigd
+- **🔎 Live release validatie** bevestigd tegen de Azure Developer CLI release feed: stabiele CLI `1.25.6` (2026-06-12) en `azure.ai.agents` `0.1.40-preview` (2026-06-15)
 
 #### Bestanden bijgewerkt
 - `README.md`
@@ -180,23 +199,23 @@ Na het bekijken van de wijzigingslogboekvermeldingen zult u in staat zijn om:
 
 ### [v3.19.1] - 2026-03-27
 
-#### Beginners Aanmelduitleg, Setup Validatie & Laatste AZD Commando Opschoning
-**Deze versie volgt de AZD 1.23 validatiesweep op met een beginnersgerichte documentatiepassage: het verduidelijkt AZD-eerste authenticatieadvies, voegt lokale setup-validatiescripts toe, verifieert belangrijke commando's met de live AZD CLI en verwijdert de laatste verouderde Engelse commandoreferenties buiten de changelog.**
+#### Beginners Onboarding Verduidelijking, Setup Validatie & Laatste AZD Commando Opruiming
+**Deze versie volgt de AZD 1.23 validatie sweep op met een beginner-gefocuste documentatie doorloop: het verduidelijkt AZD-eerst authenticatierichtlijnen, voegt lokale setup validatiescripts toe, verifieert sleutelcommando’s tegen de live AZD CLI, en verwijdert de laatste verouderde Engelstalige bron commando-verwijzingen buiten de changelog.**
 
 #### Toegevoegd
-- **🧪 Begint setup-validatiescripts** met `validate-setup.ps1` en `validate-setup.sh` zodat cursisten vereiste tools kunnen bevestigen voordat ze aan Hoofdstuk 1 beginnen
-- **✅ Voorafgaande setup-validatiestappen** in de hoofdfout en Hoofdstuk 1 README zodat ontbrekende vereisten worden opgemerkt voordat `azd up`
+- **🧪 Beginners setup validatie scripts** met `validate-setup.ps1` en `validate-setup.sh` zodat lerenden vereiste tools kunnen bevestigen voor ze aan Hoofdstuk 1 beginnen
+- **✅ Op voorhand setup validatie stappen** in de root README en Hoofdstuk 1 README zodat ontbrekende vereisten opgemerkt worden vóór `azd up`
 
 #### Gewijzigd
-- **🔐 Beginners authenticatierichtlijnen** behandelen nu consequent `azd auth login` als de primaire route voor AZD-workflows, waarbij `az login` als optioneel wordt genoemd tenzij Azure CLI-commando's direct worden gebruikt
-- **📚 Hoofdstuk 1 aanmeldingsflow** wijst cursisten nu aan om hun lokale setup te valideren vóór installatie, authenticatie en eerste ingezet commando's
-- **🛠️ Validator meldingen** scheiden nu duidelijk blokkerende vereisten van optionele Azure CLI-waarschuwingen voor het AZD-only beginnerspad
-- **📖 Configuratie-, probleemoplossings- en voorbeelddocs** onderscheiden nu tussen vereiste AZD-authenticatie en optionele Azure CLI-aanmelding waar beide vroeger zonder context werden gepresenteerd
+- **🔐 Beginners authenticatie richtlijnen** behandelen nu consistent `azd auth login` als het primaire pad voor AZD workflows, met `az login` genoemd als optioneel tenzij Azure CLI-commando's direct worden gebruikt
+- **📚 Hoofdstuk 1 onboarding flow** wijst lerenden nu naar validatie van hun lokale setup vóór installatie, authenticatie en eerste deployment stappen
+- **🛠️ Validator berichten** scheiden nu duidelijk blokkerende vereisten van optionele Azure CLI waarschuwingen voor het enkel AZD beginnerpad
+- **📖 Configuratie, troubleshooting en voorbeeld documenten** maken nu onderscheid tussen vereiste AZD authenticatie en optionele Azure CLI aanmelding waar beide voorheen zonder context werden gepresenteerd
 
-#### Opgelost
-- **📋 Overgebleven Engelse commandoverwijzingen** bijgewerkt naar huidige AZD-vormen, inclusief `azd config show` in de spiekbrief en `azd monitor --overview` waar Azure Portal overzichtsadvies bedoeld was
-- **🧭 Beginnersclaims in Hoofdstuk 1** verzacht om te voorkomen dat gegarandeerde foutloze of rollbackgedragingen over alle sjablonen en Azure-resources worden overschat
-- **🔎 Live CLI-validatie** bevestigde huidige ondersteuning voor `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs`, en `azd down --force --purge`
+#### Gefixed
+- **📋 Overgebleven Engelstalige bron commando verwijzingen** bijgewerkt naar huidige AZD vormen, inclusief `azd config show` in de cheatsheet en `azd monitor --overview` waar Azure Portal overzicht richtlijnen bedoeld waren
+- **🧭 Beginners claims in Hoofdstuk 1** verzacht om overbeloften van gegarandeerde foutloze of rollback gedrag over alle templates en Azure resources te vermijden
+- **🔎 Live CLI validatie** bevestigde huidige ondersteuning voor `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs`, en `azd down --force --purge`
 
 #### Bestanden bijgewerkt
 - `README.md`
@@ -218,37 +237,37 @@ Na het bekijken van de wijzigingslogboekvermeldingen zult u in staat zijn om:
 ### [v3.19.0] - 2026-03-26
 
 #### AZD 1.23.12 Validatie, Workshop Omgevingsuitbreiding & AI Model Vernieuwing
-**Deze versie voert een documentatievalidatiesweep uit tegen `azd` `1.23.12`, werkt verouderde AZD-commando-voorbeelden bij, vernieuwt AI-modelrichtlijnen naar actuele standaarden en breidt de workshopinstructies uit van alleen GitHub Codespaces naar ook dev containers en lokale klonen.**
+**Deze versie voert een documentatievalidatie sweep uit tegen `azd` `1.23.12`, werkt verouderde AZD commando voorbeelden bij, vernieuwt AI model richtlijnen naar huidige standaarden, en verbreedt de workshop instructies buiten GitHub Codespaces om ook ondersteuning te bieden voor dev containers en lokale klonen.**
 
 #### Toegevoegd
-- **✅ Validatienotities door kernhoofdstukken en workshopdocs** om de geteste AZD-basislijn expliciet te maken voor cursisten met nieuwere of oudere CLI-versies
-- **⏱️ Uitrol-timeoutrichtlijnen** voor langlopende AI-app-uitrol met behulp van `azd deploy --timeout 1800`
-- **🔎 Extensie-inspectiestappen** met `azd extension show azure.ai.agents` in AI-workflowdocumentatie
-- **🌐 Breder workshopomgevingsadvies** dat GitHub Codespaces, dev containers en lokale klonen met MkDocs dekt
+- **✅ Validatienotities over kernhoofdstukken en workshopdocumenten** om de geteste AZD basislijn expliciet te maken voor lerenden met nieuwere of oudere CLI builds
+- **⏱️ Deploy timeout richtlijnen** voor langlopende AI app deployments met `azd deploy --timeout 1800`
+- **🔎 Extensie inspectiestappen** met `azd extension show azure.ai.agents` in AI workflow documenten
+- **🌐 Brede workshop omgevingsrichtlijnen** die GitHub Codespaces, dev containers en lokale klonen met MkDocs dekken
 
 #### Gewijzigd
-- **📚 Hoofdstuk inleidende README's** vermelden nu consequent validatie tegen `azd 1.23.12` over fundering, configuratie, infrastructuur, multi-agent, pre-deploy, troubleshooting en productieonderdelen
-- **🛠️ AZD commandoverwijzingen** bijgewerkt naar huidige vormen door de documentatie:
+- **📚 Hoofdstuk intro READMEs** vermelden nu consequent validatie tegen `azd 1.23.12` over fundament, configuratie, infrastructuur, multi-agent, pre-deployment, troubleshooting en productie secties
+- **🛠️ AZD commando referenties** bijgewerkt naar huidige vormen door de docs:
   - `azd config list` → `azd config show`
-  - `azd env show` → `azd env list` of `azd env get-value(s)` afhankelijk van de context
+  - `azd env show` → `azd env list` of `azd env get-value(s)` afhankelijk van context
   - `azd auth whoami` → `azd auth status`
-  - `azd monitor` → `azd monitor --overview` waar een Application Insights overzicht bedoeld is
-- **🧪 Provision preview voorbeelden** vereenvoudigd naar momenteel ondersteunde usage zoals `azd provision --preview` en `azd provision --preview -e production`
-- **🧭 Workshopflow** bijgewerkt zodat cursisten de labs in Codespaces, een dev container of een lokale kloon kunnen voltooien in plaats van alleen in Codespaces uit te voeren
-- **🔐 Authenticatierichtlijnen** geven nu voorkeur aan `azd auth login` voor AZD-workflows, met `az login` als optioneel wanneer Azure CLI-commando's direct worden gebruikt
+  - `azd monitor` → `azd monitor --overview` waar Application Insights overzicht bedoeld is
+- **🧪 Voorbeeld preview provisioning** vereenvoudigd naar huidige ondersteunde gebruik zoals `azd provision --preview` en `azd provision --preview -e production`
+- **🧭 Workshop flow** bijgewerkt zodat lerenden labs kunnen voltooien in Codespaces, dev container of lokaal kloon in plaats van alleen in Codespaces
+- **🔐 Authenticatierichtlijnen** geven nu de voorkeur aan `azd auth login` voor AZD workflows, met `az login` als optioneel wanneer Azure CLI commando's direct gebruikt worden
 
-#### Opgelost
-- **🪟 Windows install commando's** genormaliseerd naar huidige `winget` pakket hoofdlettergebruik in de installatiehandleiding
-- **🐧 Linux installatierichtlijnen** gecorrigeerd om unsupported distro-specifieke `azd` package manager instructies te vermijden en in plaats daarvan naar release-assets te verwijzen waar van toepassing
-- **📦 AI-modelvoorbeelden** vernieuwd van oudere standaarden zoals `gpt-35-turbo` en `text-embedding-ada-002` naar actuele voorbeelden zoals `gpt-4.1-mini`, `gpt-4.1` en `text-embedding-3-large`
-- **📋 Uitrol en diagnostiek snippets** gecorrigeerd om huidige omgevings- en statuscommando's te gebruiken in logs, scripts en probleemoplossing
+#### Gefixed
+- **🪟 Windows install commando's** genormaliseerd naar huidige `winget` package hoofdlettergebruik in installatiehandleiding
+- **🐧 Linux install richtlijnen** gecorrigeerd om niet-ondersteunde distro-specifieke `azd` package manager instructies te vermijden en in plaats daarvan naar release assets te verwijzen waar van toepassing
+- **📦 AI model voorbeelden** vernieuwd van oudere standaarden zoals `gpt-35-turbo` en `text-embedding-ada-002` naar actuele voorbeelden zoals `gpt-4.1-mini`, `gpt-4.1`, en `text-embedding-3-large`
+- **📋 Deploy en diagnostiek snippets** gecorrigeerd om huidige omgevings- en statuscommando's te gebruiken in logs, scripts en troubleshooting stappen
 - **⚙️ GitHub Actions richtlijnen** bijgewerkt van `Azure/setup-azd@v1.0.0` naar `Azure/setup-azd@v2`
-- **🤖 MCP/Copilot toestemmingsadviezen** bijgewerkt van `azd mcp consent` naar `azd copilot consent list`
+- **🤖 MCP/Copilot toestemmingsrichtlijnen** bijgewerkt van `azd mcp consent` naar `azd copilot consent list`
 
 #### Verbeterd
-- **🧠 AI-hoofdstuk richtlijnen** leggen nu beter het preview-gevoelige `azd ai` gedrag, tenant-specifieke login, huidige extensiegebruik en vernieuwde modeluitrolaanbevelingen uit
-- **🧪 Workshopinstructies** gebruiken nu realistischere versievoorbeelden en duidelijkere omgevingssetup voor hands-on labs
-- **📈 Productie- en probleemoplossingsdocs** sluiten nu beter aan bij actuele monitoring, fallback model en kostenniveauvoorbeelden
+- **🧠 AI hoofdstuk richtlijnen** leggen nu beter uit preview-gevoelig `azd ai` gedrag, tenant-specifieke login, huidig extensie gebruik, en bijgewerkte model deployment aanbevelingen
+- **🧪 Workshop instructies** gebruiken nu meer realistische versievoorbeelden en duidelijker omgevingsopzet taal voor hands-on labs
+- **📈 Productie- en troubleshooting documenten** sluiten nu beter aan bij huidige monitoring, fallback model en kostenniveaus voorbeelden
 
 #### Bestanden bijgewerkt
 - `docs/chapter-01-foundation/README.md`
@@ -283,44 +302,44 @@ Na het bekijken van de wijzigingslogboekvermeldingen zult u in staat zijn om:
 
 ### [v3.18.0] - 2026-03-16
 
-#### AZD AI CLI Commando's, Content Validatie & Template-uitbreiding
-**Deze versie voegt `azd ai`, `azd extension`, en `azd mcp` commandodekking toe in alle AI-gerelateerde hoofdstukken, repareert gebroken links en verouderde code in agents.md, werkt de spiekbrief bij en vernieuwt de sectie Voorbeeld Templates met gevalideerde beschrijvingen en nieuwe Azure AI AZD-templates.**
+#### AZD AI CLI Commando's, Content Validatie & Template Uitbreiding
+**Deze versie voegt `azd ai`, `azd extension` en `azd mcp` command coverage toe in alle AI-gerelateerde hoofdstukken, repareert gebroken links en verouderde code in agents.md, werkt het cheat sheet bij en vernieuwt de sectie Voorbeeldsjablonen met gevalideerde omschrijvingen en nieuwe Azure AI AZD-sjablonen.**
 
 #### Toegevoegd
-- **🤖 AZD AI CLI dekking** verspreid over 7 bestanden (voorheen alleen in Hoofdstuk 8):
-  - `docs/chapter-01-foundation/azd-basics.md` — Nieuwe sectie "Extensies en AI Commando's" die `azd extension`, `azd ai agent init`, en `azd mcp` introduceert
-  - `docs/chapter-02-ai-development/agents.md` — Optie 4: `azd ai agent init` met vergelijkingstabel (template vs manifest-aanpak)
-  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD Extensies voor Foundry" en "Agent-First Deploy" subsectoren
-  - `docs/chapter-05-multi-agent/README.md` — Quick Start toont nu zowel template- als manifest-gebaseerde uitrolroutes
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Deploygedeelte bevat nu ook de `azd ai agent init` optie
-  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI Extensiecommando's voor Diagnostiek" subsector
-  - `resources/cheat-sheet.md` — Nieuwe sectie "AI & Extensiecommando's" met `azd extension`, `azd ai agent init`, `azd mcp`, en `azd infra generate`
-- **📦 Nieuwe AZD AI voorbeeldtemplates** in `microsoft-foundry-integration.md`:
+- **🤖 AZD AI CLI coverage** over 7 bestanden (voorheen alleen in Hoofdstuk 8):
+  - `docs/chapter-01-foundation/azd-basics.md` — Nieuwe sectie "Extensions and AI Commands" met introductie van `azd extension`, `azd ai agent init` en `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — Optie 4: `azd ai agent init` met vergelijkingstabel (sjabloon versus manifestbenadering)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD Extensions for Foundry" en "Agent-First Deployment" subsectoren
+  - `docs/chapter-05-multi-agent/README.md` — Quick Start toont nu beide sjabloon- en manifestgebaseerde deployments
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Deploy-sectie bevat nu de `azd ai agent init` optie
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI Extension Commands for Diagnostics" subsector
+  - `resources/cheat-sheet.md` — Nieuwe sectie "AI & Extensions Commands" met `azd extension`, `azd ai agent init`, `azd mcp` en `azd infra generate`
+- **📦 Nieuwe AZD AI voorbeeldsjablonen** in `microsoft-foundry-integration.md`:
   - **azure-search-openai-demo-csharp** — .NET RAG-chat met Blazor WebAssembly, Semantic Kernel en spraakchatondersteuning
-  - **azure-search-openai-demo-java** — Java RAG-chat gebruikmakend van Langchain4J met ACA/AKS uitrolopties
-  - **contoso-creative-writer** — Multi-agent creatieve schrijfapp gebruikmakend van Azure AI Agent Service, Bing Grounding en Prompty
+  - **azure-search-openai-demo-java** — Java RAG-chat met Langchain4J en ACA/AKS deploymentopties
+  - **contoso-creative-writer** — Multi-agent creatieve schrijftoepassing met Azure AI Agent Service, Bing Grounding en Prompty
   - **serverless-chat-langchainjs** — Serverless RAG met Azure Functions + LangChain.js + Cosmos DB met Ollama lokale ontwikkelondersteuning
   - **chat-with-your-data-solution-accelerator** — Enterprise RAG accelerator met admin portal, Teams-integratie en PostgreSQL/Cosmos DB-opties
-  - **azure-ai-travel-agents** — Multi-agent MCP orkestratie referentie app met servers in .NET, Python, Java en TypeScript
-  - **azd-ai-starter** — Minimale Azure AI infrastructuur Bicep starter template
-  - **🔗 Geweldige AZD AI Galerij link** — Referentie naar de [awesome-azd AI galerij](https://azure.github.io/awesome-azd/?tags=ai) (80+ templates)
+  - **azure-ai-travel-agents** — Multi-agent MCP orkestratie referentie-app met servers in .NET, Python, Java en TypeScript
+  - **azd-ai-starter** — Minimale Azure AI infrastructuur Bicep starter sjabloon
+  - **🔗 Awesome AZD AI Gallery link** — Verwijzing naar de [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) (80+ sjablonen)
 
 #### Opgelost
-- **🔗 agents.md navigatie**: Vorige/Volgende links komen nu overeen met hoofdstuk 2 README lesvolgorde (Microsoft Foundry Integratie → Agents → AI Model Deployment)
-- **🔗 agents.md verbroken links**: `production-ai-practices.md` gecorrigeerd naar `../chapter-08-production/production-ai-practices.md` (3 keer)
+- **🔗 agents.md navigatie**: Vorige/Volgende links komen nu overeen met Hoofdstuk 2 README lesvolgorde (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 agents.md gebroken links**: `production-ai-practices.md` gecorrigeerd naar `../chapter-08-production/production-ai-practices.md` (3 keer)
 - **📦 agents.md verouderde code**: Vervangen `opencensus` door `azure-monitor-opentelemetry` + OpenTelemetry SDK
 - **🐛 agents.md ongeldige API**: Verplaatst `max_tokens` van `create_agent()` naar `create_run()` als `max_completion_tokens`
-- **🔢 agents.md token telling**: Vervangen ruwe `len//4` schatting door `tiktoken.encoding_for_model()`
+- **🔢 agents.md token tellen**: Vervangen grove `len//4` schatting door `tiktoken.encoding_for_model()`
 - **azure-search-openai-demo**: Diensten gecorrigeerd van "Cognitive Search + App Service" naar "Azure AI Search + Azure Container Apps" (standaard host gewijzigd in okt 2024)
-- **contoso-chat**: Beschrijving bijgewerkt naar verwijzing Azure AI Foundry + Prompty, passend bij de werkelijke titel en tech stack van de repo
+- **contoso-chat**: Beschrijving bijgewerkt met verwijzing naar Azure AI Foundry + Prompty, passend bij de werkelijke titel en tech stack van de repo
 
 #### Verwijderd
-- **ai-document-processing**: Niet-functionele template referentie verwijderd (repo niet publiek toegankelijk als AZD template)
+- **ai-document-processing**: Niet-functionele sjabloonverwijzing verwijderd (repo niet publiek toegankelijk als AZD-sjabloon)
 
 #### Verbeterd
-- **📝 agents.md oefeningen**: Oefening 1 toont nu verwachte output en `azd monitor` stap; Oefening 2 bevat volledige `FunctionTool` registratiecode; Oefening 3 vervangt vage instructies door concrete `prepdocs.py` commando's
+- **📝 agents.md oefeningen**: Oefening 1 toont nu verwachte output en `azd monitor` stap; Oefening 2 bevat volledige `FunctionTool` registratiecode; Oefening 3 vervangt vage aanwijzingen door concrete `prepdocs.py` opdrachten
 - **📚 agents.md bronnen**: Documentatielinks bijgewerkt naar actuele Azure AI Agent Service docs en quickstart
-- **📋 agents.md Volgende Stappen tabel**: AI Workshop Lab link toegevoegd voor volledige hoofdstukdekking
+- **📋 agents.md Volgende Stappen tabel**: Toegevoegd AI Workshop Lab link voor volledige hoofdstukdekking
 
 #### Bijgewerkte bestanden
 - `docs/chapter-01-foundation/azd-basics.md`
@@ -335,30 +354,30 @@ Na het bekijken van de wijzigingslogboekvermeldingen zult u in staat zijn om:
 
 ### [v3.17.0] - 2026-02-05
 
-#### Verbetering cursusnavigatie
-**Deze versie verbetert de README.md hoofdstuknavigatie met een verbeterde tabelindeling.**
+#### Verbetering Navigatie Cursus
+**Deze versie verbetert README.md hoofdstuknavigatie met een verbeterde tabelindeling.**
 
 #### Gewijzigd
-- **Cursuskaart tabel**: Uitgebreid met directe leslinks, duurindicaties en complexiteitswaarderingen
-- **Map opschoning**: Verwijderde overbodige oude mappen (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **Linkvalidatie**: Alle 21+ interne links in cursuskaart tabel geverifieerd
+- **Cursuskaart Tabel**: Versterkt met directe leslinks, duurinschattingen en complexiteitsbeoordelingen
+- **Map Opruiming**: Overbodige oude mappen verwijderd (deployment/, getting-started/, pre-deployment/, troubleshooting/)
+- **Link Validatie**: Alle 21+ interne links in de Cursuskaart tabel gecontroleerd
 
 ### [v3.16.0] - 2026-02-05
 
-#### Productnaam updates
-**Deze versie werkt productverwijzingen bij naar de huidige Microsoft branding.**
+#### Productnaam Updates
+**Deze versie werkt productreferenties bij naar de huidige Microsoft branding.**
 
 #### Gewijzigd
-- **Microsoft Foundry → Microsoft Foundry**: Alle verwijzingen bijgewerkt in niet-vertalingsbestanden
-- **Azure AI Agent Service → Foundry Agents**: Servicenaam aangepast naar huidige branding
+- **Microsoft Foundry → Microsoft Foundry**: Alle verwijzingen bijgewerkt door niet-vertalingsbestanden heen
+- **Azure AI Agent Service → Foundry Agents**: Servicenaam bijgewerkt om huidige branding weer te geven
 
 #### Bijgewerkte bestanden
 - `README.md` - Hoofdpagina cursus
 - `changelog.md` - Versiegeschiedenis
 - `course-outline.md` - Cursusstructuur
-- `docs/chapter-02-ai-development/agents.md` - AI agents gids
+- `docs/chapter-02-ai-development/agents.md` - AI agenten gids
 - `examples/README.md` - Voorbeelddocumentatie
-- `workshop/README.md` - Workshop landingspagina
+- `workshop/README.md` - Workshop startpagina
 - `workshop/docs/index.md` - Workshop index
 - `workshop/docs/instructions/*.md` - Alle workshop instructiebestanden
 
@@ -366,17 +385,17 @@ Na het bekijken van de wijzigingslogboekvermeldingen zult u in staat zijn om:
 
 ### [v3.15.0] - 2026-02-05
 
-#### Grote repository herstructurering: Hoofdstuk-gebaseerde naamgeving mappen
-**Deze versie structureert de documentatie in toegewijde hoofdstukmappen voor duidelijkere navigatie.**
+#### Grote herstructurering repository: Hoofdstuk-gebaseerde mappen
+**Deze versie herstructureert de documentatie in toegewijde hoofdstukmappen voor duidelijkere navigatie.**
 
-#### Map hernoemingen
+#### Namen van mappen gewijzigd
 Oude mappen zijn vervangen door hoofdstukgenummerde mappen:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
 - `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
-- Nieuwe toegevoegd: `docs/chapter-05-multi-agent/`
+- Nieuw toegevoegd: `docs/chapter-05-multi-agent/`
 
 #### Bestandsmigraties
 | Bestand | Van | Naar |
@@ -394,19 +413,19 @@ Oude mappen zijn vervangen door hoofdstukgenummerde mappen:
 | deployment-guide.md | deployment/ | chapter-04-infrastructure/ |
 | provisioning.md | deployment/ | chapter-04-infrastructure/ |
 | Alle pre-deployment bestanden | pre-deployment/ | chapter-06-pre-deployment/ |
-| Alle troubleshooting bestanden | troubleshooting/ | chapter-07-troubleshooting/ |
+| Alle troubleshooting-bestanden | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### Toegevoegd
-- **📚 Hoofdstuk README bestanden**: README.md aangemaakt in elke hoofdstukmap met:
+- **📚 Hoofdstuk README-bestanden**: README.md aangemaakt in iedere hoofdstukmap met:
   - Leerdoelen en duur
-  - Lesoverzicht met beschrijvingen
-  - Quickstart commando's
+  - Lessentabel met omschrijvingen
+  - Quick start commando's
   - Navigatie naar andere hoofdstukken
 
 #### Gewijzigd
-- **🔗 Alle interne links bijgewerkt**: 78+ paden geactualiseerd in alle documentatiebestanden
+- **🔗 Alle interne links bijgewerkt**: 78+ paden bijgewerkt in alle documentatiebestanden
 - **🗺️ Hoofd README.md**: Cursuskaart bijgewerkt met nieuwe hoofdstukstructuur
-- **📝 examples/README.md**: Kruisverwijzingen naar hoofdstukmappen aangepast
+- **📝 examples/README.md**: Cross-referenties naar hoofdstukmappen bijgewerkt
 
 #### Verwijderd
 - Oude mappenstructuur (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
@@ -415,73 +434,73 @@ Oude mappen zijn vervangen door hoofdstukgenummerde mappen:
 
 ### [v3.14.0] - 2026-02-05
 
-#### Repository herstructurering : Hoofdstuknavigatie
-**Deze versie voegde hoofdstuknavigatie README bestanden toe (vervangen door v3.15.0).**
+#### Herstructurering repository: Hoofdstuknavigatie
+**Deze versie voegde hoofdstuknavigatie README-bestanden toe (vervangen door v3.15.0).**
 
 ---
 
 ### [v3.13.0] - 2026-02-05
 
 #### Nieuwe AI Agents Gids
-**Deze versie voegt een uitgebreide gids toe voor het inzetten van AI agents met Azure Developer CLI.**
+**Deze versie voegt een uitgebreide gids toe voor het implementeren van AI-agenten met Azure Developer CLI.**
 
 #### Toegevoegd
-- **🤖 docs/microsoft-foundry/agents.md**: Volledige gids over:
-  - Wat AI-agents zijn en hoe ze verschillen van chatbots
-  - Drie quick-start agent templates (Foundry Agents, Prompty, RAG)
-  - Architectuurpatronen van agents (enkele agent, RAG, multi-agent)
-  - Toolconfiguratie en aanpassing
+- **🤖 docs/microsoft-foundry/agents.md**: Volledige gids met:
+  - Wat AI-agenten zijn en hoe ze verschillen van chatbots
+  - Drie quick-start agent-sjablonen (Foundry Agents, Prompty, RAG)
+  - Agent architectuurpatronen (enkele agent, RAG, multi-agent)
+  - Tool configuratie en aanpassing
   - Monitoring en metriek tracking
   - Kostenoverwegingen en optimalisatie
   - Veelvoorkomende probleemoplossingsscenario's
-  - Drie praktische oefeningen met succescriteria
+  - Drie hands-on oefeningen met succescriteria
 
 #### Inhoudsstructuur
-- **Introductie**: Agentconcepten voor beginners
-- **Quickstart**: Agents deployen met `azd init --template get-started-with-ai-agents`
+- **Introductie**: Agent concepten voor beginners
+- **Quick Start**: Agenten implementeren met `azd init --template get-started-with-ai-agents`
 - **Architectuurpatronen**: Visuele diagrammen van agentpatronen
-- **Configuratie**: Toolsetup en omgevingsvariabelen
-- **Monitoring**: Integratie met Application Insights
-- **Oefeningen**: Progressief hands-on leren (20-45 minuten per oefening)
+- **Configuratie**: Tool setup en omgevingsvariabelen
+- **Monitoring**: Application Insights integratie
+- **Oefeningen**: Progressief hands-on leren (20-45 minuten elk)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
-#### DevContainer Omgeving Update
-**Deze versie werkt de configuratie van de development container bij met moderne tools en betere standaardinstellingen voor de AZD leerervaring.**
+#### Update DevContainer Omgeving
+**Deze versie werkt de ontwikkelcontainerconfiguratie bij met moderne tools en betere standaardinstellingen voor de AZD-leerervaring.**
 
 #### Gewijzigd
 - **🐳 Basisimage**: Bijgewerkt van `python:3.12-bullseye` naar `python:3.12-bookworm` (laatste Debian stable)
-- **📛 Containernaam**: Hernoemd van "Python 3" naar "AZD voor Beginners" voor duidelijkheid
+- **📛 Containernaam**: Hernoemd van "Python 3" naar "AZD for Beginners" voor duidelijkheid
 
 #### Toegevoegd
-- **🔧 Nieuwe Dev Container Features**:
+- **🔧 Nieuwe Dev Container Functies**:
   - `azure-cli` met Bicep-ondersteuning ingeschakeld
-  - `node:20` (LTS-versie voor AZD-templates)
-  - `github-cli` voor templatebeheer
+  - `node:20` (LTS-versie voor AZD-sjablonen)
+  - `github-cli` voor sjabloonbeheer
   - `docker-in-docker` voor container app deployments
 
-- **🔌 Poort forwarding**: Vooraf geconfigureerde poorten voor veelgebruikte ontwikkeling:
+- **🔌 Poort Forwarding**: Vooraf geconfigureerde poorten voor veelgebruikte ontwikkeldoeleinden:
   - 8000 (MkDocs preview)
-  - 3000 (Webapps)
+  - 3000 (Web apps)
   - 5000 (Python Flask)
-  - 8080 (API's)
+  - 8080 (APIs)
 
 - **🧩 Nieuwe VS Code Extensies**:
   - `ms-python.vscode-pylance` - Verbeterde Python IntelliSense
   - `ms-azuretools.vscode-azurefunctions` - Azure Functions ondersteuning
-  - `ms-azuretools.vscode-docker` - Docker ondersteuning
-  - `ms-azuretools.vscode-bicep` - Bicep taalondersteuning
+  - `ms-azuretools.vscode-docker` - Docker-ondersteuning
+  - `ms-azuretools.vscode-bicep` - Bicep-taalondersteuning
   - `ms-azure-devtools.azure-resource-groups` - Azure resource management
-  - `yzhang.markdown-all-in-one` - Markdown bewerking
+  - `yzhang.markdown-all-in-one` - Markdown bewerken
   - `DavidAnson.vscode-markdownlint` - Markdown linting
   - `bierner.markdown-mermaid` - Mermaid diagram ondersteuning
-  - `redhat.vscode-yaml` - YAML ondersteuning (voor azure.yaml)
-  - `eamodio.gitlens` - Git visualisatie
-  - `mhutchie.git-graph` - Git geschiedenis
+  - `redhat.vscode-yaml` - YAML-ondersteuning (voor azure.yaml)
+  - `eamodio.gitlens` - Git-visualisatie
+  - `mhutchie.git-graph` - Git-historie
 
-- **⚙️ VS Code instellingen**: Standaardinstellingen toegevoegd voor Python interpreter, automatisch formatteren bij opslaan en witruimte verwijderen
+- **⚙️ VS Code Instellingen**: Toegevoegd standaardinstellingen voor Python interpreter, format on save en witruimte trimmen
 
 - **📦 Bijgewerkte requirements-dev.txt**:
   - MkDocs minify plugin toegevoegd
@@ -489,379 +508,379 @@ Oude mappen zijn vervangen door hoofdstukgenummerde mappen:
   - Azure SDK pakketten toegevoegd (azure-identity, azure-mgmt-resource)
 
 #### Opgelost
-- **Post-Create Command**: Verifieert nu AZD en Azure CLI installatie bij containerstart
+- **Post-Create Commando**: Controleert nu AZD en Azure CLI installatie bij containerstart
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### Beginnersvriendelijke README revisie
-**Deze versie verbetert aanzienlijk de README.md om toegankelijker te zijn voor beginners en voegt essentiële bronnen toe voor AI-ontwikkelaars.**
+#### Beginnersvriendelijke README Hernieuwing
+**Deze versie verbetert de README.md aanzienlijk voor beginners en voegt essentiële bronnen toe voor AI-ontwikkelaars.**
 
 #### Toegevoegd
-- **🆚 Azure CLI vs AZD vergelijking**: Duidelijke uitleg wanneer welk hulpmiddel te gebruiken met praktische voorbeelden
-- **🌟 Geweldige AZD Links**: Directe links naar community template galerij en bijdragebronnen:
-  - [Geweldige AZD Galerij](https://azure.github.io/awesome-azd/) - 200+ kant-en-klare templates
-  - [Dien een Template In](https://github.com/Azure/awesome-azd/issues) - Community bijdrage
-- **🎯 Quickstart gids**: Vereenvoudigde 3-stappen startsectie (Installeren → Inloggen → Deployen)
-- **📊 Ervaringsgebaseerde navigatietabel**: Duidelijke aanwijzing waar te starten op basis van ontwikkelaarservaring
+- **🆚 Azure CLI versus AZD Vergelijking**: Duidelijke uitleg wanneer je welk hulpmiddel gebruikt met praktische voorbeelden
+- **🌟 Awesome AZD Links**: Directe links naar community sjabloongalerij en bijdragebronnen:
+  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - 200+ direct inzetbare sjablonen
+  - [Dien een Sjabloon in](https://github.com/Azure/awesome-azd/issues) - Communitybijdrage
+- **🎯 Quick Start Gids**: Vereenvoudigde 3-staps startsectie (Installeren → Inloggen → Implementeren)
+- **📊 Ervaringsgebaseerde Navigatietabel**: Duidelijke richtlijn waar te beginnen op basis van ontwikkelaarservaring
 
 #### Gewijzigd
-- **README structuur**: Herschikt voor progressieve onthulling - sleutelinfo eerst
+- **README-structuur**: Georganiseerd voor progressieve onthulling - belangrijkste informatie eerst
 - **Introductiesectie**: Herschreven om "De Magie van `azd up`" uit te leggen voor absolute beginners
-- **Dubbele inhoud verwijderd**: Gedupliceerde troubleshooting sectie verwijderd
-- **Troubleshooting commando's**: `azd logs` verwijzing gecorrigeerd naar geldige `azd monitor --logs`
+- **Dubbele inhoud verwijderd**: Dubbele probleemoplossingssectie verwijderd
+- **Probleemoplossingsopdrachten**: Gecorrigeerde `azd logs` verwijzing naar geldige `azd monitor --logs`
 
-#### Opgelost
-- **🔐 Authenticatiecommando's**: Toegevoegd `azd auth login` en `azd auth logout` aan cheat-sheet.md
-- **Ongeldige commandoverwijzingen**: Overgebleven `azd logs` verwijderd uit README troubleshooting sectie
+#### Gecorrigeerd
+- **🔐 Authenticatieopdrachten**: Toegevoegd `azd auth login` en `azd auth logout` aan cheat-sheet.md
+- **Ongeldige opdrachtverwijzingen**: Verwijderd resterende `azd logs` uit README probleemoplossingssectie
 
 #### Notities
-- **Scope**: Wijzigingen toegepast op hoofdzakelijk README.md en resources/cheat-sheet.md
-- **Doelgroep**: Verbeteringen gericht op ontwikkelaars die nieuw zijn met AZD
+- **Scope**: Wijzigingen toegepast op hoofd README.md en resources/cheat-sheet.md
+- **Doelgroep**: Verbeteringen specifiek gericht op ontwikkelaars nieuw met AZD
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
-#### Azure Developer CLI commando nauwkeurigheidsupdate
-**Deze versie corrigeert niet-bestaande AZD-commando's door de hele documentatie, waardoor alle codevoorbeelden geldige Azure Developer CLI-syntaxis gebruiken.**
+#### Update van nauwkeurigheid van Azure Developer CLI-opdrachten
+**Deze versie corrigeert niet-bestaande AZD-opdrachten in de gehele documentatie, zodat alle codevoorbeelden geldige Azure Developer CLI-syntaxis gebruiken.**
 
-#### Opgelost
-- **🔧 Niet-bestaande AZD-commando's verwijderd**: Uitgebreide controle en correctie van ongeldige commando's:
-  - `azd logs` (bestaat niet) → vervangen door `azd monitor --logs` of Azure CLI alternatieven
-  - `azd service` subcommando's (bestaan niet) → vervangen door `azd show` en Azure CLI
+#### Gecorrigeerd
+- **🔧 Niet-bestaande AZD-opdrachten verwijderd**: Uitgebreide audit en correctie van ongeldige opdrachten:
+  - `azd logs` (bestaat niet) → vervangen door `azd monitor --logs` of Azure CLI-alternatieven
+  - `azd service` subopdrachten (bestaan niet) → vervangen door `azd show` en Azure CLI
   - `azd infra import/export/validate` (bestaan niet) → verwijderd of vervangen door geldige alternatieven
-  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` flags (bestaan niet) → verwijderd
-  - `azd provision --what-if/--rollback` flags (bestaan niet) → bijgewerkt naar gebruik van `--preview`
+  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` vlaggen (bestaan niet) → verwijderd
+  - `azd provision --what-if/--rollback` vlaggen (bestaan niet) → bijgewerkt om `--preview` te gebruiken
   - `azd config validate` (bestaat niet) → vervangen door `azd config list`
   - `azd info`, `azd history`, `azd metrics` (bestaan niet) → verwijderd
 
-- **📚 Bijgewerkte bestanden met commando correcties**:
-  - `resources/cheat-sheet.md`: Grote revisie van commando referentie
-  - `docs/deployment/deployment-guide.md`: Rollback en deployment strategieën gecorrigeerd
-  - `docs/troubleshooting/debugging.md`: Loganalyse secties aangepast
-  - `docs/troubleshooting/common-issues.md`: Troubleshooting commando's bijgewerkt
-  - `docs/troubleshooting/ai-troubleshooting.md`: AZD debug sectie gecorrigeerd
-  - `docs/getting-started/azd-basics.md`: Gecorrigeerde bewakingsopdrachten
-  - `docs/getting-started/first-project.md`: Bijgewerkte bewakings- en foutopsporingsvoorbeelden
-  - `docs/getting-started/installation.md`: Gecorrigeerde help- en voorbeeldversies
-  - `docs/pre-deployment/application-insights.md`: Gecorrigeerde opdrachten voor het bekijken van logboeken
-  - `docs/pre-deployment/coordination-patterns.md`: Gecorrigeerde foutopsporingsopdrachten voor agenten
+- **📚 Bestanden bijgewerkt met correcties van opdrachten**:
+  - `resources/cheat-sheet.md`: Grote revisie van opdrachtreferentie
+  - `docs/deployment/deployment-guide.md`: Gerepareerde rollback- en implementatiestrategieën
+  - `docs/troubleshooting/debugging.md`: Gecorrigeerde loganalyse-secties
+  - `docs/troubleshooting/common-issues.md`: Bijgewerkte probleemoplossingsopdrachten
+  - `docs/troubleshooting/ai-troubleshooting.md`: Gecorrigeerde AZD-debugsectie
+  - `docs/getting-started/azd-basics.md`: Gecorrigeerde monitoringsopdrachten
+  - `docs/getting-started/first-project.md`: Bijgewerkte monitoring- en debugvoorbeelden
+  - `docs/getting-started/installation.md`: Gecorrigeerde help- en versievoorbeelden
+  - `docs/pre-deployment/application-insights.md`: Gecorrigeerde logweergaveopdrachten
+  - `docs/pre-deployment/coordination-patterns.md`: Gecorrigeerde agent-debugopdrachten
 
-- **📝 Versie Referentie Bijgewerkt**: 
-  - `docs/getting-started/installation.md`: Veranderde hardcoded `1.5.0` versie naar generieke `1.x.x` met link naar releases
+- **📝 Versieverwijzing bijgewerkt**: 
+  - `docs/getting-started/installation.md`: Vaste hardcoded `1.5.0` versie gewijzigd naar generieke `1.x.x` met link naar releases
 
 #### Gewijzigd
-- **Rollback Strategieën**: Documentatie bijgewerkt om gebruik te maken van Git-gebaseerde rollback (AZD heeft geen ingebouwde rollback)
-- **Logbestand bekijken**: Vervangen van `azd logs` verwijzingen door `azd monitor --logs`, `azd monitor --live` en Azure CLI opdrachten
-- **Prestatiegedeelte**: Verwijderde niet-bestaande parallelle/incremental deployment-vlaggen, geldige alternatieven aangeboden
+- **Rollback-strategieën**: Documentatie bijgewerkt om op Git-gebaseerde rollback te gebruiken (AZD heeft geen native rollback)
+- **Logweergave**: Vervangen `azd logs` verwijzingen door `azd monitor --logs`, `azd monitor --live` en Azure CLI-opdrachten
+- **Prestatiegedeelte**: Verwijderd niet-bestaande parallelle/incrementiële implementatievlaggen, geldige alternatieven gegeven
 
-#### Technische Details
+#### Technische details
 - **Geldige AZD-opdrachten**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
-- **Geldige azd monitor Vlaggen**: `--live`, `--logs`, `--overview`
-- **Verwijderde Functies**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
+- **Geldige azd monitor-vlaggen**: `--live`, `--logs`, `--overview`
+- **Verwijderde functies**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
 #### Notities
-- **Validatie**: Opdrachten gevalideerd met Azure Developer CLI v1.23.x
+- **Verificatie**: Opdrachten gevalideerd tegen Azure Developer CLI v1.23.x
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
-#### Voltooiing Workshop en Kwaliteitsverbetering Documentatie
+#### Workshopafsluiting en verbeteringen documentatiekwaliteit
 **Deze versie voltooit de interactieve workshopmodules, repareert alle kapotte documentatielinks en verbetert de algehele inhoudskwaliteit voor AI-ontwikkelaars die Microsoft AZD gebruiken.**
 
 #### Toegevoegd
-- **📝 CONTRIBUTING.md**: Nieuw document met richtlijnen voor bijdragen met:
+- **📝 CONTRIBUTING.md**: Nieuw document met richtlijnen voor bijdragen inclusief:
   - Duidelijke instructies voor het melden van problemen en voorstellen van wijzigingen
   - Documentatiestandaarden voor nieuwe inhoud
   - Richtlijnen voor codevoorbeelden en conventies voor commitberichten
-  - Informatie over betrokkenheid van de gemeenschap
+  - Informatie over communitybetrokkenheid
 
 #### Voltooid
-- **🎯 Workshop Module 7 (Afronding)**: Volledig voltooide afrondingsmodule met:
+- **🎯 Workshop Module 7 (Afsluiting)**: Volledig afgerond afsluitingsmodule met:
   - Uitgebreide samenvatting van workshopprestaties
-  - Belangrijkste beheersde concepten, inclusief AZD, sjablonen en Microsoft Foundry
-  - Aanbevelingen voor voortzetting van de leerreis
+  - Sleutelconcepten beheerd sectie over AZD, sjablonen en Microsoft Foundry
+  - Aanbevelingen voor voortzetting van het leertraject
   - Workshopuitdagingsoefeningen met moeilijkheidsgraden
-  - Feedback van de gemeenschap en ondersteuningslinks
+  - Community feedback en ondersteuningslinks
 
-- **📚 Workshop Module 3 (Ontleden)**: Bijgewerkte leerdoelen met:
-  - GitHub Copilot met activering van MCP-servers
-  - Inzicht in AZD-sjabloonmapstructuur
-  - Organisatiepatronen voor infrastructure-as-code (Bicep)
+- **📚 Workshop Module 3 (Ontmantelen)**: Bijgewerkte leerdoelen met:
+  - GitHub Copilot met MCP-server activatie-instructies
+  - Inzicht in AZD-sjabloonmappenstructuur
+  - Organisatiepatronen voor infrastructuur-als-code (Bicep)
   - Hands-on labinstructies
 
-- **🔧 Workshop Module 6 (Afsluiten)**: Voltooid met:
-  - Doelen voor opruimen van bronnen en kostenbeheer
-  - Gebruik van `azd down` voor veilige infrastructuurafbouw
-  - Richtlijnen voor herstel van zacht-verwijderde cognitive services
-  - Bonusverkenning voor GitHub Copilot en Azure Portal
+- **🔧 Workshop Module 6 (Afbouw)**: Afgerond met:
+  - Doelen voor opruimen van resources en kostenbeheer
+  - Gebruik van `azd down` voor veilige ontmanteling van infrastructuur
+  - Herstelrichtlijnen voor zacht-verwijderde cognitive services
+  - Bonus verkenningsopdrachten voor GitHub Copilot en Azure Portal
 
-#### Gerepareerd
-- **🔗 Reparatie gebroken links**: Opgeloste 15+ gebroken interne documentatielinks:
-  - `docs/ai-foundry/ai-model-deployment.md`: Gecorrigeerde paden naar microsoft-foundry-integration.md
-  - `docs/troubleshooting/ai-troubleshooting.md`: Gecorrigeerde paden voor ai-model-deployment.md en production-ai-practices.md
-  - `docs/getting-started/first-project.md`: Vervangen niet-bestaande cicd-integration.md door deployment-guide.md
-  - `examples/retail-scenario.md`: Gecorrigeerde FAQ en troubleshooting guide paden
-  - `examples/container-app/microservices/README.md`: Gecorrigeerde startpagina cursus en deployment guide paden
-  - `resources/faq.md` en `resources/glossary.md`: Bijgewerkte AI hoofdstukverwijzingen
-  - `course-outline.md`: Gecorrigeerde verwijzingen naar instructeursgids en AI workshop lab
+#### Gecorrigeerd
+- **🔗 Reparatie kapotte links**: Opgeloste meer dan 15 kapotte interne documentatielinks:
+  - `docs/ai-foundry/ai-model-deployment.md`: Paden naar microsoft-foundry-integration.md gerepareerd
+  - `docs/troubleshooting/ai-troubleshooting.md`: Paden naar ai-model-deployment.md en production-ai-practices.md gecorrigeerd
+  - `docs/getting-started/first-project.md`: Niet-bestaande cicd-integration.md vervangen door deployment-guide.md
+  - `examples/retail-scenario.md`: FAQ en probleemoplossingsgids-paden gerepareerd
+  - `examples/container-app/microservices/README.md`: Paden voor cursusstart en implementatiehandleiding gecorrigeerd
+  - `resources/faq.md` en `resources/glossary.md`: AI-hoofdstukverwijzingen bijgewerkt
+  - `course-outline.md`: Instructeursgids en AI-workshop labverwijzingen gerepareerd
 
-- **📅 Workshop Status Banner**: Bijgewerkt van "Onder Constructie" naar actieve workshopstatus met datum februari 2026
+- **📅 Workshopstatusbalk**: Bijgewerkt van "In aanbouw" naar actieve workshopstatus met datum februari 2026
 
-- **🔗 Workshop Navigatie**: Gecorrigeerde gebroken navigatielinks in workshop README.md naar niet-bestaande map lab-1-azd-basics
+- **🔗 Workshopnavigatie**: Gerepareerde kapotte navigatielinks in workshop README.md die wezen naar niet-bestaande map lab-1-azd-basics
 
 #### Gewijzigd
-- **Workshop Presentatie**: Verwijderd "onder constructie" waarschuwing, workshop is nu compleet en klaar voor gebruik
-- **Consistentie Navigatie**: Gewaarborgde correcte inter-module navigatie voor alle workshopmodules
-- **Leerpad Verwijzingen**: Bijgewerkte hoofdstukkruisverwijzingen met correcte microsoft-foundry paden
+- **Workshoppresentatie**: "In aanbouw"-waarschuwing verwijderd, workshop is nu compleet en klaar voor gebruik
+- **Navigatieconsistentie**: Gezorgd dat alle workshopmodules correcte tussen-module navigatie hebben
+- **Leerpadverwijzingen**: Hoofdstukkruisverwijzingen bijgewerkt naar correcte microsoft-foundry-paden
 
 #### Gevalideerd
-- ✅ Alle Engelse markdown-bestanden hebben geldige interne links
+- ✅ Alle Engelse markdownbestandlinks zijn valide intern
 - ✅ Workshopmodules 0-7 zijn compleet met leerdoelen
 - ✅ Navigatie tussen hoofdstukken en modules werkt correct
 - ✅ Inhoud is geschikt voor AI-ontwikkelaars die Microsoft AZD gebruiken
-- ✅ Beginnersvriendelijke taal en structuur worden consequent gehandhaafd
-- ✅ CONTRIBUTING.md biedt duidelijke richtlijnen voor bijdragers uit de gemeenschap
+- ✅ Beginner-vriendelijke taal en structuur behouden door de hele workshop
+- ✅ CONTRIBUTING.md geeft duidelijke richtlijnen voor communitybijdragers
 
-#### Technische Implementatie
-- **Linkvalidatie**: Geautomatiseerd PowerShell-script heeft alle .md interne links geverifieerd
-- **Inhoudsaudit**: Handmatige beoordeling van workshopcompleetheid en beginnersgeschiktheid
+#### Technische implementatie
+- **Linkvalidatie**: Geautomatiseerd PowerShell-script heeft alle .md interne links gecontroleerd
+- **Inhoudsaudit**: Handmatige beoordeling van workshopvoltooiing en beginnergeschiktheid
 - **Navigatiesysteem**: Consistente navigatiepatronen voor hoofdstukken en modules toegepast
 
 #### Notities
-- **Reikwijdte**: Wijzigingen alleen toegepast op Engelse documentatie
-- **Vertalingen**: Vertaalmappen niet bijgewerkt in deze versie (automatische vertaling wordt later gesynchroniseerd)
-- **Workshopduur**: Volledige workshop biedt nu 3-4 uur hands-on leren
+- **Scope**: Wijzigingen alleen toegepast op Engelse documentatie
+- **Vertalingen**: Vertaalmappen niet bijgewerkt in deze versie (geautomatiseerde vertaling wordt later gesynchroniseerd)
+- **Workshopduur**: Voltooide workshop biedt nu 3-4 uur hands-on leren
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### Geavanceerde Documentatie: Monitoring, Beveiliging en Multi-Agent Patronen
-**Deze versie voegt uitgebreide A-niveau lessen toe over Application Insights-integratie, authenticatiepatronen en multi-agent coördinatie voor productie-implementaties.**
+#### Geavanceerde documentatie: Monitoring, beveiliging en multi-agent patronen
+**Deze versie voegt uitgebreide lesstof van A-niveau toe over Application Insights-integratie, authenticatiepatronen en multi-agent coördinatie voor productie-implementaties.**
 
 #### Toegevoegd
-- **📊 Les Application Insights Integratie**: in `docs/pre-deployment/application-insights.md`:
+- **📊 Les Application Insights-integratie**: in `docs/pre-deployment/application-insights.md`:
   - AZD-gerichte implementatie met automatische provisioning
   - Complete Bicep-sjablonen voor Application Insights + Log Analytics
-  - Werkende Python-toepassingen met aangepaste telemetrie (1.200+ regels)
-  - AI/LLM monitoringpatronen (Microsoft Foundry Models token/kosten tracking)
-  - 6 Mermaid-diagrammen (architectuur, distributed tracing, telemetrieflow)
-  - 3 hands-on oefeningen (alerts, dashboards, AI monitoring)
+  - Werkende Python-toepassingen met aangepaste telemetrie (meer dan 1.200 regels)
+  - AI/LLM monitoringpatronen (Microsoft Foundry Models token-/kostentracking)
+  - 6 Mermaid-diagrammen (architectuur, gedistribueerde tracing, telemetriestroom)
+  - 3 hands-on oefeningen (alerts, dashboards, AI-monitoring)
   - Kusto queryvoorbeelden en kostenoptimalisatiestrategieën
-  - Live metrics streamen en realtime foutopsporing
+  - Live metric streaming en real-time debugging
   - 40-50 minuten leertijd met productieklare patronen
 
-- **🔐 Les Authenticatie & Beveiligingspatronen**: in `docs/getting-started/authsecurity.md`:
+- **🔐 Les authenticatie- & beveiligingspatronen**: in `docs/getting-started/authsecurity.md`:
   - 3 authenticatiepatronen (connection strings, Key Vault, managed identity)
   - Complete Bicep infrastructuursjablonen voor veilige implementaties
   - Node.js applicatiecode met Azure SDK-integratie
-  - 3 complete oefeningen (inschakelen managed identity, user-assigned identity, Key Vault rotatie)
-  - Beste beveiligingspraktijken en RBAC-configuraties
-  - Handleiding voor probleemoplossing en kostenanalyse
+  - 3 volledige oefeningen (managed identity inschakelen, user-assigned identity, Key Vault-rotatie)
+  - Beveiligingsbest practices en RBAC-configuraties
+  - Probleemoplossingsgids en kostenanalyse
   - Productieklaar wachtwoordloos authenticatiepatronen
 
-- **🤖 Les Multi-Agent Coördinatiepatronen**: in `docs/pre-deployment/coordination-patterns.md`:
-  - 5 coördinatiepatronen (sequentieel, parallel, hiërarchisch, gebeurtenisgestuurd, consensus)
-  - Complete orchestrator service-implementatie (Python/Flask, 1.500+ regels)
-  - 3 gespecialiseerde agent-implementaties (Research, Writer, Editor)
-  - Service Bus-integratie voor berichtwachtrij
+- **🤖 Les multi-agent coördinatiepatronen**: in `docs/pre-deployment/coordination-patterns.md`:
+  - 5 coördinatiepatronen (sequentieel, parallel, hiërarchisch, event-driven, consensus)
+  - Complete orchestrator service-implementatie (Python/Flask, meer dan 1.500 regels)
+  - 3 gespecialiseerde agentimplementaties (Research, Writer, Editor)
+  - Service Bus-integratie voor message queuing
   - Cosmos DB statusbeheer voor gedistribueerde systemen
-  - 6 Mermaid-diagrammen die agentinteracties tonen
-  - 3 geavanceerde oefeningen (timeoutbeheer, retry-logica, circuit breaker)
-  - Kostenopsplitsing ($240-565/maand) met optimalisatiestrategieën
-  - Application Insights integratie voor monitoring
+  - 6 Mermaid-diagrammen die agent-interacties tonen
+  - 3 geavanceerde oefeningen (timeout-afhandeling, retry-logica, circuit breaker)
+  - Kostenoverzicht ($240-565/maand) met optimalisatiestrategieën
+  - Application Insights-integratie voor monitoring
 
 #### Verbeterd
-- **Pre-implementatie Hoofdstuk**: Nu inclusief uitgebreide monitoring- en coördinatiepatronen
-- **Aan de slag Hoofdstuk**: Verbeterd met professionele authenticatiepatronen
+- **Pre-deployment hoofdstuk**: Nu uitgebreide monitoring- en coördinatiepatronen inbegrepen
+- **Getting Started hoofdstuk**: Uitgebreid met professionele authenticatiepatronen
 - **Productieklaarheid**: Volledige dekking van beveiliging tot observeerbaarheid
-- **Cursusoverzicht**: Bijgewerkt om nieuwe lessen in Hoofdstukken 3 en 6 te vermelden
+- **Cursusoverzicht**: Bijgewerkt met verwijzingen naar nieuwe lessen in Hoofdstukken 3 en 6
 
 #### Gewijzigd
-- **Leerprogressie**: Betere integratie van beveiliging en monitoring door de cursus heen
-- **Documentatiekwaliteit**: Consistente A-niveau standaarden (95-97%) across nieuwe lessen
-- **Productiepatronen**: Volledige end-to-end dekking voor enterprise implementaties
+- **Leerprogressie**: Betere integratie van beveiliging en monitoring doorheen cursus
+- **Documentatiekwaliteit**: Consistente A-niveau standaarden (95-97%) in nieuwe lessen
+- **Productiepatronen**: Volledige end-to-end dekking voor enterprise-implementaties
 
 #### Verbeterd
 - **Ontwikkelaarservaring**: Duidelijk pad van ontwikkeling tot productiemonitoring
-- **Beveiligingsstandaarden**: Professionele patronen voor authenticatie en geheimenbeheer
+- **Beveiligingsstandaarden**: Professionele patronen voor authenticatie en geheimbeheer
 - **Observeerbaarheid**: Volledige Application Insights-integratie met AZD
-- **AI Workloads**: Gespecialiseerde monitoring voor Microsoft Foundry Models en multi-agent systemen
+- **AI-workloads**: Gespecialiseerde monitoring voor Microsoft Foundry Models en multi-agent systemen
 
 #### Gevalideerd
 - ✅ Alle lessen bevatten volledige werkende code (geen fragmenten)
-- ✅ Mermaid-diagrammen voor visueel leren (19 totaal verdeeld over 3 lessen)
+- ✅ Mermaid-diagrammen voor visueel leren (19 totaal in 3 lessen)
 - ✅ Hands-on oefeningen met verificatiestappen (9 totaal)
 - ✅ Productieklare Bicep-sjablonen inzetbaar via `azd up`
 - ✅ Kostenanalyse en optimalisatiestrategieën
-- ✅ Handleidingen voor probleemoplossing en beste praktijken
-- ✅ Kenniscontroles met verificatie-opdrachten
+- ✅ Probleemoplossingsgidsen en best practices
+- ✅ Kennis-controlepunten met verificatieopdrachten
 
-#### Resultaten Documentatiebeoordeling
-- **docs/pre-deployment/application-insights.md**: - Uitgebreide monitoringshandleiding
+#### Resultaten documentatiebeoordeling
+- **docs/pre-deployment/application-insights.md**: - Uitgebreide monitoringgids
 - **docs/getting-started/authsecurity.md**: - Professionele beveiligingspatronen
 - **docs/pre-deployment/coordination-patterns.md**: - Geavanceerde multi-agent architecturen
-- **Algemene Nieuwe Inhoud**: - Consistente hoge kwaliteitsstandaarden
+- **Nieuwe algemene inhoud**: - Consistente hoge kwaliteitsstandaarden
 
-#### Technische Implementatie
-- **Application Insights**: Log Analytics + aangepaste telemetrie + distributed tracing
+#### Technische implementatie
+- **Application Insights**: Log Analytics + aangepaste telemetrie + gedistribueerde tracing
 - **Authenticatie**: Managed Identity + Key Vault + RBAC-patronen
-- **Multi-Agent**: Service Bus + Cosmos DB + Container Apps + orchestratie
-- **Monitoring**: Live metrics + Kusto queries + alerts + dashboards
-- **Kostenbeheer**: Samplingstrategieën, retentiebeleid, budgetcontroles
+- **Multi-Agent**: Service Bus + Cosmos DB + Container Apps + orkestratie
+- **Monitoring**: Live metrics + Kusto-queries + alerts + dashboards
+- **Kostenbeheer**: Samplingstrategieën, bewaarbeleid, budgetcontroles
 
 ### [v3.7.0] - 2025-11-19
 
-#### Verbeteringen Documentatiekwaliteit en Nieuw Microsoft Foundry Models Voorbeeld
-**Deze versie verbetert de documentatiekwaliteit in het hele repository en voegt een compleet Microsoft Foundry Models implementatievoorbeeld toe met gpt-4.1 chatinterface.**
+#### Verbeteringen documentatiekwaliteit en nieuw Microsoft Foundry Models-voorbeeld
+**Deze versie verbetert de documentatiekwaliteit door het hele repo en voegt een compleet Microsoft Foundry Models-implementatievoorbeeld toe met gpt-4.1 chatinterface.**
 
 #### Toegevoegd
-- **🤖 Microsoft Foundry Models Chat Voorbeeld**: Compleet gpt-4.1-implementatie met werkende uitvoering in `examples/azure-openai-chat/`:
-  - Volledige Microsoft Foundry Models infrastructuur (gpt-4.1 modelimplementatie)
-  - Python commandoregel chatinterface met gespreksgeschiedenis
-  - Key Vault integratie voor veilige opslag van API-sleutels
-  - Tracking van tokengebruik en kosteninschatting
+- **🤖 Microsoft Foundry Models chatvoorbeeld**: Complete gpt-4.1 implementatie met werkende implementatie in `examples/azure-openai-chat/`:
+  - Complete Microsoft Foundry Models infrastructuur (gpt-4.1 modelimplementatie)
+  - Python command-line chatinterface met gesprekshistorie
+  - Key Vault-integratie voor veilige API-sleutelopslag
+  - Tokengebruik tracking en kostenraming
   - Rate limiting en foutafhandeling
   - Uitgebreide README met 35-45 minuten implementatiehandleiding
   - 11 productieklare bestanden (Bicep-sjablonen, Python-app, configuratie)
-- **📚 Documentatieoefeningen**: Toegevoegd hands-on praktijkoefeningen aan configuratiehandleiding:
+- **📚 Documentatieoefeningen**: Toegevoegde praktijkoefeningen aan configuratiehandleiding:
   - Oefening 1: Configuratie multi-omgeving (15 minuten)
-  - Oefening 2: Geheimenbeheer oefening (10 minuten)
+  - Oefening 2: Geheimbeheer praktijk (10 minuten)
   - Duidelijke succescriteria en verificatiestappen
-- **✅ Verificatie Implementatie**: Toegevoegd verificatiegedeelte aan deployment guide:
+- **✅ Implementatieverificatie**: Toegevoegde verificatiesectie aan implementatiehandleiding:
   - Gezondheidscontroleprocedures
-  - Succescriteria checklist
-  - Verwachte outputs voor alle deployment-opdrachten
-  - Snelle referentie troubleshooting
+  - Checklist succescriteria
+  - Verwachte outputs voor alle implementatieopdrachten
+  - Snelle referentie probleemoplossing
 
 #### Verbeterd
 - **examples/README.md**: Bijgewerkt naar A-niveau kwaliteit (93%):
   - Toegevoegd azure-openai-chat aan alle relevante secties
-  - Bijgewerkt aantal lokale voorbeelden van 3 naar 4
-  - Toegevoegd aan AI Application Examples tabel
-  - Geïntegreerd in Quick Start voor gevorderde gebruikers
-  - Toegevoegd aan Microsoft Foundry Templates sectie
-  - Bijgewerkt vergelijking matrix en secties technologiezoektocht
-- **Documentatiekwaliteit**: Verbeterd van B+ (87%) → A- (92%) in docs map:
-  - Toegevoegd verwachte outputs aan kritieke commando-voorbeelden
-  - Inbegrepen verificatiestappen voor configuratiewijzigingen
-  - Verbeterd hands-on leren met praktische oefeningen
+  - Lokale voorbeeldaantal bijgewerkt van 3 naar 4
+  - Toegevoegd aan tabel AI-toepassingvoorbeeld
+  - Geïntegreerd in Quick Start voor tussenliggende gebruikers
+  - Toegevoegd aan sectie Microsoft Foundry Sjablonen
+  - Bijgewerkt vergelijkingsmatrix en technologiezoeksecties
+- **Documentatiekwaliteit**: Verbeterd van B+ (87%) → A- (92%) door hele docs map:
+  - Verwachte output toegevoegd aan kritieke commandovoorbeelden
+  - Verificatiestappen voor configuratiewijzigingen opgenomen
+  - Verbeterde praktijkgerichte oefeningen voor hands-on leren
 
 #### Gewijzigd
-- **Leerprogressie**: Betere integratie van AI-voorbeelden voor gevorderde leerlingen
-- **Documentatiestructuur**: Meer uitvoerbare oefeningen met duidelijke uitkomsten
+- **Leerprogressie**: Betere integratie van AI-voorbeelden voor gevorderde beginners
+- **Documentatiestructuur**: Meer actiegerichte oefeningen met duidelijke resultaten
 - **Verificatieproces**: Expliciete succescriteria toegevoegd aan belangrijke workflows
 
 #### Verbeterd
-- **Ontwikkelaarservaring**: Microsoft Foundry Models implementatie duurt nu 35-45 minuten (vs 60-90 voor complexe alternatieven)
-- **Kosten Transparantie**: Duidelijke kostenramingen ($50-200/maand) voor Microsoft Foundry Models voorbeeld
-- **Leerpad**: AI-ontwikkelaars hebben duidelijk instappunt met azure-openai-chat
-- **Documentatiestandaarden**: Consistente verwachte outputs en verificatiestappen
+- **Ontwikkelaarservaring**: Implementatie van Microsoft Foundry-modellen duurt nu 35-45 minuten (vs 60-90 voor complexe alternatieven)
+- **Kostentransparantie**: Duidelijke kostenramingen ($50-200/maand) voor Microsoft Foundry-modelvoorbeeld
+- **Leerpad**: AI-ontwikkelaars hebben een duidelijk startpunt met azure-openai-chat
+- **Documentatiestandaarden**: Consistente verwachte output en verificatiestappen
 
 #### Gevalideerd
-- ✅ Microsoft Foundry Models voorbeeld volledig functioneel met `azd up`
+- ✅ Microsoft Foundry-modelvoorbeeld volledig functioneel met `azd up`
 - ✅ Alle 11 implementatiebestanden syntactisch correct
-- ✅ README-instructies komen overeen met werkelijke implementatie-ervaring
+- ✅ README-instructies komen overeen met daadwerkelijke implementatie-ervaring
 - ✅ Documentatielinks bijgewerkt op 8+ locaties
-- ✅ Voorbeeldenindex weerspiegelt nauwkeurig 4 lokale voorbeelden
+- ✅ Voorbeeldindex toont correct 4 lokale voorbeelden
 - ✅ Geen dubbele externe links in tabellen
-- ✅ Alle navigatieverwijzingen correct
+- ✅ Alle navigatiereferenties correct
 
 #### Technische Implementatie
 - **Microsoft Foundry Models Architectuur**: gpt-4.1 + Key Vault + Container Apps patroon
-- **Beveiliging**: Klaar voor Managed Identity, geheimen in Key Vault
-- **Monitoring**: Application Insights integratie
+- **Beveiliging**: Managed Identity gereed, geheimen in Key Vault
+- **Monitoring**: Integratie met Application Insights
 - **Kostenbeheer**: Token tracking en gebruiksoptimalisatie
-- **Implementatie**: Enkele `azd up` opdracht voor volledige setup
+- **Implementatie**: Één enkele `azd up`-opdracht voor complete setup
 
 ### [v3.6.0] - 2025-11-19
 
-#### Grote Update: Container App Implementatie Voorbeelden
-**Deze versie introduceert uitgebreide, productieklare voorbeelden voor het uitrollen van containerapplicaties met Azure Developer CLI (AZD), inclusief volledige documentatie en integratie in het leerpad.**
+#### Grote update: Voorbeelden Container App-implementaties
+**Deze versie introduceert uitgebreide, productieklare voorbeelden van containerapp-implementaties met Azure Developer CLI (AZD), inclusief volledige documentatie en integratie in het leerpad.**
 
 #### Toegevoegd
-- **🚀 Container App Voorbeelden**: Nieuwe lokale voorbeelden in `examples/container-app/`:
-  - [Mastergids](examples/container-app/README.md): Volledig overzicht van containerized deployments, snelle start, productie en geavanceerde patronen
-  - [Eenvoudige Flask API](../../examples/container-app/simple-flask-api): Beginnersvriendelijke REST API met schaal-tot-nul, health probes, monitoring en probleemoplossing
-  - [Microservices Architectuur](../../examples/container-app/microservices): Productieklaar multi-service deployment (API Gateway, Product, Order, User, Notification), asynchrone messaging, Service Bus, Cosmos DB, Azure SQL, gedistribueerde tracing, blue-green/canary deployment
-- **Best Practices**: Beveiliging, monitoring, kostenoptimalisatie en CI/CD richtlijnen voor containerized workloads
-- **Codevoorbeelden**: Volledige `azure.yaml`, Bicep-templates en multi-language service-implementaties (Python, Node.js, C#, Go)
-- **Testen & Probleemoplossing**: End-to-end testscenario's, monitoringcommando's, probleemoplossingsrichtlijnen
+- **🚀 Voorbeelden Container Apps**: Nieuwe lokale voorbeelden in `examples/container-app/`:
+  - [Master Guide](examples/container-app/README.md): Compleet overzicht van containerimplementaties, quickstart, productie en gevorderde patronen
+  - [Simple Flask API](../../examples/container-app/simple-flask-api): Beginnersvriendelijke REST API met scale-to-zero, health probes, monitoring en probleemoplossing
+  - [Microservices Architectuur](../../examples/container-app/microservices): Productieklaar multi-serviceimplementatie (API Gateway, Product, Order, User, Notification), async messaging, Service Bus, Cosmos DB, Azure SQL, distributed tracing, blue-green/canary deployment
+- **Best Practices**: Beveiliging, monitoring, kostenoptimalisatie en CI/CD-richtlijnen voor container workloads
+- **Codevoorbeelden**: Complete `azure.yaml`, Bicep-templates en multi-taal service-implementaties (Python, Node.js, C#, Go)
+- **Testen & Probleemoplossing**: End-to-end testscenario’s, monitoringopdrachten, probleemoplossingsrichtlijnen
 
 #### Gewijzigd
-- **README.md**: Geüpdatet om nieuwe container app-voorbeelden onder "Local Examples - Container Applications" te presenteren en te linken
-- **examples/README.md**: Geüpdatet om container app-voorbeelden te benadrukken, vergelijkingsmatrixvermeldingen toe te voegen en technologie-/architectuurverwijzingen bij te werken
-- **Cursusoverzicht & Studiegids**: Geüpdatet met verwijzingen naar nieuwe container app-voorbeelden en deploymentpatronen in relevante hoofdstukken
+- **README.md**: Bijgewerkt met nieuwe container app-voorbeelden onder "Local Examples - Container Applications"
+- **examples/README.md**: Bijgewerkt om container app-voorbeelden te benadrukken, vergelijkingsmatrix toe te voegen en technologie/architectuurreferenties bij te werken
+- **Course Outline & Study Guide**: Verwijzingen naar nieuwe container app-voorbeelden en implementatiepatronen in relevante hoofdstukken aangepast
 
 #### Gevalideerd
-- ✅ Alle nieuwe voorbeelden implementeerbaar met `azd up` en volgen best practices
-- ✅ Documentatie cross-links en navigatie bijgewerkt
-- ✅ Voorbeelden bestrijken scenario's van beginner tot gevorderd, inclusief productie-microservices
+- ✅ Alle nieuwe voorbeelden inzetbaar met `azd up` en volgen best practices
+- ✅ Documentatie-kruislinks en navigatie bijgewerkt
+- ✅ Voorbeelden bestrijken beginnend tot gevorderd, inclusief productie-microservices
 
 #### Notities
-- **Reikwijdte**: Alleen Engelse documentatie en voorbeelden
-- **Volgende stappen**: Uitbreiden met extra geavanceerde containerpatronen en CI/CD automatisering in toekomstige releases
+- **Bereik**: Alleen Engelse documentatie en voorbeelden
+- **Volgende stappen**: Uitbreiden met geavanceerde containerpatronen en CI/CD-automatisering in latere releases
 
 ### [v3.5.0] - 2025-11-19
 
 #### Product Rebranding: Microsoft Foundry
-**Deze versie implementeert een uitgebreide naamswijziging van het product van "Microsoft Foundry" naar "Microsoft Foundry" in alle Engelstalige documentatie, wat de officiële rebranding van Microsoft weerspiegelt.**
+**Deze versie voert een alomvattende productnaamswijziging door van "Microsoft Foundry" naar "Microsoft Foundry" in alle Engelse documentatie, als weerspiegeling van Microsofts officiële rebranding.**
 
 #### Gewijzigd
-- **🔄 Productnaam Update**: Volledige rebranding van "Microsoft Foundry" naar "Microsoft Foundry"
-  - Alle verwijzingen bijgewerkt in Engels documentatie in map `docs/`
-  - Map hernoemd: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - Bestand hernoemd: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Totaal: 23 inhoudsverwijzingen bijgewerkt in 7 documentatiebestanden
+- **🔄 Productnaam update**: Volledige rebranding van "Microsoft Foundry" naar "Microsoft Foundry"
+  - Alle verwijzingen bijgewerkt in Engelse documentatie in `docs/` map
+  - Mapnaam gewijzigd: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - Bestandsnaam gewijzigd: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - Totaal: 23 inhoudelijke verwijzingen bijgewerkt in 7 documentatiebestanden
 
-- **📁 Wijzigingen mapstructuur**:
+- **📁 Wijzigingen in mappenstructuur**:
   - `docs/ai-foundry/` hernoemd naar `docs/microsoft-foundry/`
-  - Alle kruisverwijzingen geüpdatet om nieuwe mapstructuur te weerspiegelen
-  - Navigatielinks geverifieerd in alle documentatie
+  - Alle kruisverwijzingen aangepast aan nieuwe mappenstructuur
+  - Navigatielinks gevalideerd door de gehele documentatie
 
-- **📄 Bestandhernoemingen**:
+- **📄 Bestandnaamwijzigingen**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
   - Alle interne links aangepast naar nieuwe bestandsnaam
 
-#### Bijgewerkte Bestanden
+#### Bijgewerkte bestanden
 - **Hoofdstukdocumentatie** (7 bestanden):
-  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 navigatielink updates
+  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 navigatielink-updates
   - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 productnaamverwijzingen bijgewerkt
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Gebruikt al Microsoft Foundry (van eerdere updates)
-  - `docs/microsoft-foundry/production-ai-practices.md` - 3 verwijzingen aangepast (overzicht, feedback community, documentatie)
-  - `docs/getting-started/azd-basics.md` - 4 kruisverwijzingslinks bijgewerkt
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Gebruik maakt al van Microsoft Foundry (uit eerdere updates)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 verwijzingen bijgewerkt (overzicht, community feedback, documentatie)
+  - `docs/getting-started/azd-basics.md` - 4 kruisverwijzingen bijgewerkt
   - `docs/getting-started/first-project.md` - 2 hoofdstuknavigatielinks bijgewerkt
-  - `docs/getting-started/installation.md` - 2 volgende hoofdstuk links aangepast
+  - `docs/getting-started/installation.md` - 2 links naar volgend hoofdstuk bijgewerkt
   - `docs/troubleshooting/ai-troubleshooting.md` - 3 verwijzingen bijgewerkt (navigatie, Discord community)
-  - `docs/troubleshooting/common-issues.md` - 1 navigatielink aangepast
-  - `docs/troubleshooting/debugging.md` - 1 navigatielink aangepast
+  - `docs/troubleshooting/common-issues.md` - 1 navigatielink bijgewerkt
+  - `docs/troubleshooting/debugging.md` - 1 navigatielink bijgewerkt
 
-- **Bestanden cursusstructuur** (2 bestanden):
-  - `README.md` - 17 verwijzingen bijgewerkt (cursus overzicht, hoofdstuktitels, sectie templates, community inzichten)
-  - `course-outline.md` - 14 verwijzingen bijgewerkt (overzicht, leerdoelen, hoofdstukbronnen)
+- **Structuurbestanden van cursussen** (2 bestanden):
+  - `README.md` - 17 verwijzingen bijgewerkt (cursusoverzicht, hoofdstuktitels, templates sectie, community-inzichten)
+  - `course-outline.md` - 14 verwijzingen bijgewerkt (overzicht, leerdoelen, hoofdstukhulpbronnen)
 
 #### Gevalideerd
-- ✅ Geen resterende "ai-foundry" map padverwijzingen in Engelse docs
-- ✅ Geen resterende "Microsoft Foundry" productnaamverwijzingen in Engelse docs
-- ✅ Alle navigatielinks functioneel met nieuwe mapstructuur
-- ✅ Bestands- en maphernoemingen succesvol afgerond
+- ✅ Geen resterende verwijzingen naar "ai-foundry" map in Engelse docs
+- ✅ Geen resterende productnaamverwijzingen naar "Microsoft Foundry" in Engelse docs
+- ✅ Alle navigatielinks werken met nieuwe mappenstructuur
+- ✅ Bestands- en mappennamen succesvol gewijzigd
 - ✅ Kruisverwijzingen tussen hoofdstukken gevalideerd
 
 #### Notities
-- **Reikwijdte**: Wijzigingen toegepast op Engelse documentatie in map `docs/` alleen
+- **Bereik**: Wijzigingen alleen doorgevoerd in Engelse documentatie binnen `docs/` map
 - **Vertalingen**: Vertaalmappen (`translations/`) niet bijgewerkt in deze versie
-- **Workshop**: Workshopmaterialen (`workshop/`) niet bijgewerkt in deze versie
-- **Voorbeelden**: Voorbeeldbestanden kunnen nog oude naamgeving bevatten (wordt in toekomstige updates aangepakt)
-- **Externe Links**: Externe URL's en GitHub repository verwijzingen blijven ongewijzigd
+- **Workshop**: Workshopmateriaal (`workshop/`) niet bijgewerkt in deze versie
+- **Voorbeelden**: Voorbeeldbestanden kunnen nog steeds legacy namen bevatten (wordt behandeld in toekomstige updates)
+- **Externe Links**: Externe URL's en GitHub-repositoryverwijzingen blijven ongewijzigd
 
-#### Migratiehandleiding voor Bijdragers
-Als u lokale branches of documentatie heeft die naar de oude structuur verwijzen:
-1. Werk mapverwijzingen bij: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-2. Werk bestandverwijzingen bij: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+#### Migratiehandleiding voor bijdragers
+Als je lokale branches of documentatie hebt die naar de oude structuur verwijzen:
+1. Pas mapverwijzingen aan: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+2. Pas bestandsverwijzingen aan: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
 3. Vervang productnaam: "Microsoft Foundry" → "Microsoft Foundry"
 4. Controleer of alle interne documentatielinks nog werken
 
@@ -869,460 +888,460 @@ Als u lokale branches of documentatie heeft die naar de oude structuur verwijzen
 
 ### [v3.4.0] - 2025-10-24
 
-#### Verbeteringen aan infrastructuur preview en validatie
-**Deze versie introduceert uitgebreide ondersteuning voor de nieuwe Azure Developer CLI preview-functie en verbetert de gebruikerservaring van de workshop.**
+#### Vooruitblik en verbeteringen in validatie van infrastructuur
+**Deze versie introduceert uitgebreide ondersteuning voor de nieuwe preview-functie van Azure Developer CLI en verbetert de gebruikerservaring van de workshop.**
 
 #### Toegevoegd
-- **🧪 azd provision --preview Functiedocumentatie**: Uitgebreide dekking van de nieuwe infrastructuur preview-mogelijkheid
-  - Commandoreferentie en gebruiksvoorbeelden in cheat sheet
-  - Gedetailleerde integratie in provisioninggids met use cases en voordelen
-  - Pre-flight check integratie voor veiligere deployment validatie
-  - Updates aan startgids met veiligheid voorop implementaties
-- **🚧 Workshop Status Banner**: Professionele HTML-banner die de ontwikkelingsstatus van de workshop aangeeft
-  - Verloopontwerp met constructie-indicatoren voor duidelijke gebruikerscommunicatie
-  - Laatst bijgewerkte timestamp voor transparantie
-  - Mobiel responsief ontwerp voor alle apparaattype
+- **🧪 azd provision --preview Functiedocumentatie**: Uitgebreide dekking van nieuwe infrastructuur preview-mogelijkheid
+  - Commandoreferentie en gebruiksvoorbeelden in cheatsheet
+  - Gedetailleerde integratie in provisioning-gids met use cases en voordelen
+  - Pre-flight check integratie voor veiligere uitvoering
+  - Updates in startsnelheidsgids met praktijkvoorbeelden van veiligheid voorop
+- **🚧 Workshop Status Banner**: Professionele HTML-banner die ontwikkelingstatus van workshop weergeeft
+  - Gradient-ontwerp met constructie-indicatoren voor duidelijke gebruikerscommunicatie
+  - Laatste update-tijdstempel voor transparantie
+  - Mobielvriendelijk ontwerp voor alle apparaattypes
 
 #### Verbeterd
-- **Infrastructuurveiligheid**: Preview-functionaliteit geïntegreerd door de gehele deploymentdocumentatie
-- **Pre-deployment Validatie**: Geautomatiseerde scripts bevatten nu infrastructuur preview-tests
-- **Ontwikkelaarsworkflow**: Aangepaste commando-sequenties met preview als best practice
-- **Workshop Ervaring**: Duidelijke verwachtingstelling aan gebruikers over ontwikkelingsstatus inhoud
+- **Infrastructuurveiligheid**: Preview-functionaliteit geïntegreerd in hele implementatiedocumentatie
+- **Validatie voor implementatie**: Geautomatiseerde scripts bevatten nu infrastructuur preview-tests
+- **Ontwikkelaarworkflow**: Bijgewerkte commandoreeksen om preview op te nemen als best practice
+- **Workshopervaring**: Duidelijke verwachtingen voor gebruikers over contentontwikkelingsstatus
 
 #### Gewijzigd
-- **Deployment Best Practices**: Preview-eerst workflow nu aanbevolen aanpak
-- **Documentatiestroom**: Infrastructurele validatie eerder geplaatst in leerproces
-- **Workshop Presentatie**: Professionele statuscommunicatie met duidelijke ontwikkelingsplanning
+- **Beste implementatiepraktijken**: Vooruitblik-eerst workflow wordt nu aanbevolen aanpak
+- **Documentatiestroom**: Validatie van infrastructuur nu eerder in leerproces
+- **Workshoppresentatie**: Professionele statuscommunicatie met heldere ontwikkelingsplanning
 
 #### Verbeterd
-- **Veiligheid-voorop Benadering**: Infrastructuurwijzigingen kunnen nu worden gevalideerd vóór deployment
-- **Team Samenwerking**: Preview-resultaten kunnen gedeeld worden voor beoordeling en goedkeuring
-- **Kostenbewustzijn**: Beter begrip van resourcekosten vóór provisioning
-- **Risicobeperking**: Minder deploymentfouten door voorafgaande validatie
+- **Veiligheidsgerichte benadering**: Infrastructuurwijzigingen kunnen nu worden gevalideerd vóór implementatie
+- **Team samenwerking**: Preview-resultaten kunnen gedeeld worden voor beoordeling en goedkeuring
+- **Kostenbewustzijn**: Betere inschatting van resourcekosten vóór provisioning
+- **Risicobeperking**: Minder falende implementaties door voorafgaande validatie
 
 #### Technische Implementatie
-- **Multi-document Integratie**: Preview-functie gedocumenteerd in 4 hoofdbestanden
-- **Commandopatronen**: Consistente syntax en voorbeelden door de gehele documentatie
-- **Integratie Best Practices**: Preview opgenomen in validatieworkflows en scripts
-- **Visuele Indicatoren**: Duidelijke NIEUWE functie markeringen voor vindbaarheid
+- **Multi-document integratie**: Preview-functie gedocumenteerd in 4 kernbestanden
+- **Commandopatronen**: Consistente syntaxis en voorbeelden door documentatie heen
+- **Integratie van best practices**: Preview opgenomen in validatieworkflows en scripts
+- **Visuele indicatoren**: Duidelijke NIEUWE functie-markeringen ter bevordering van vindbaarheid
 
-#### Workshop Infrastructuur
-- **Statuscommunicatie**: Professionele HTML-banner met verloopstijl
+#### Workshopinfrastructuur
+- **Statuscommunicatie**: Professionele HTML-banner met gradient-styling
 - **Gebruikerservaring**: Duidelijke ontwikkelingsstatus voorkomt verwarring
-- **Professionele Presentatie**: Behoudt repository geloofwaardigheid en stelt verwachtingen
-- **Tijdlijn Transparantie**: Oktober 2025 laatst bijgewerkt timestamp voor verantwoordelijkheid
+- **Professionele presentatie**: Behoudt geloofwaardigheid van repository en stelt verwachtingen
+- **Transparantie tijdlijn**: Laatste update in oktober 2025 voor verantwoording
 
 ### [v3.3.0] - 2025-09-24
 
-#### Verbeterde workshopmaterialen en interactieve leerervaring
-**Deze versie introduceert uitgebreide workshopmaterialen met browsergebaseerde interactieve handleidingen en gestructureerde leertrajecten.**
+#### Verbeterd workshopmateriaal en interactieve leerervaring
+**Deze versie introduceert uitgebreid workshopmateriaal met browsergebaseerde interactieve gidsen en gestructureerde leerpaden.**
 
 #### Toegevoegd
-- **🎥 Interactieve Workshopgids**: Browsergebaseerde workshopervaring met MkDocs preview-mogelijkheid
-- **📝 Gestructureerde Workshopinstructies**: 7-stappen begeleid leerpad van ontdekking tot aanpassing
-  - 0-Inleiding: Workshop overzicht en setup
-  - 1-Selecteer AI-Template: Template ontdekking en selectieproces
-  - 2-Valideer AI-Template: Deployment en validatieprocedures
-  - 3-Ontleed AI-Template: Begrip van template-architectuur
-  - 4-Configureer AI-Template: Configuratie en aanpassing
-  - 5-Personaliseer AI-Template: Geavanceerde modificaties en iteraties
-  - 6-Afbreken Infrastructuur: Opruiming en resourcebeheer
+- **🎥 Interactieve workshopgids**: Browsergebaseerde workshopervaring met MkDocs preview mogelijkheid
+- **📝 Gestructureerde workshopinstructies**: 7-staps geleide leerroute van ontdekking tot maatwerk
+  - 0-Introductie: Workshopoverzicht en setup
+  - 1-Select-AI-Template: Template-ontdekking en selectieproces
+  - 2-Validate-AI-Template: Implementatie- en validatieprocedures
+  - 3-Deconstruct-AI-Template: Begrip van template-architectuur
+  - 4-Configure-AI-Template: Configuratie en aanpassing
+  - 5-Customize-AI-Template: Geavanceerde wijzigingen en iteraties
+  - 6-Teardown-Infrastructure: Opruimen en resourcebeheer
   - 7-Afsluiting: Samenvatting en volgende stappen
-- **🛠️ Workshop Tools**: MkDocs-configuratie met Material-thema voor verbeterde leerervaring
-- **🎯 Praktisch Leerpad**: 3-stapsmethodiek (Ontdekking → Deployment → Aanpassing)
+- **🛠️ Workshop tooling**: MkDocs-configuratie met Material-thema voor verbeterde leerervaring
+- **🎯 Hands-on leerpad**: 3-staps methodologie (Ontdekking → Implementatie → Maatwerk)
 - **📱 GitHub Codespaces Integratie**: Naadloze setup van ontwikkelomgeving
 
 #### Verbeterd
-- **AI Workshop Lab**: Uitgebreid met uitgebreide 2-3 uur gestructureerde leerervaring
+- **AI workshoplab**: Uitgebreid met uitgebreide 2-3 uur durende gestructureerde leerervaring
 - **Workshopdocumentatie**: Professionele presentatie met navigatie en visuele hulpmiddelen
-- **Leerprogressie**: Duidelijke stapsgewijze begeleiding van template selectie tot productie-implementatie
+- **Leerprogressie**: Duidelijke stapsgewijze begeleiding van template-selectie tot productie-implementatie
 - **Ontwikkelaarservaring**: Geïntegreerde tooling voor gestroomlijnde ontwikkelworkflows
 
 #### Verbeterd
 - **Toegankelijkheid**: Browserinterface met zoek-, kopieerfunctionaliteit en themawisselaar
-- **Zelfgestuurd leren**: Flexibele workshopstructuur voor verschillende leertempo’s
-- **Praktische toepassing**: Realistische AI-template deployment scenario's
-- **Community-integratie**: Discord integratie voor workshopondersteuning en samenwerking
+- **Zelfgestuurd leren**: Flexibele workshopstructuur die aangepast kan worden aan verschillende leertempo’s
+- **Praktische toepassing**: Realistische AI-template-implementatiescenario’s
+- **Community integratie**: Discord-integratie voor workshopondersteuning en samenwerking
 
 #### Workshopfuncties
-- **Ingebouwde Zoekfunctie**: Snelle trefwoord- en lesontdekking
-- **Codeblokken kopiëren**: Hover-naar-kopiëren functionaliteit voor alle codevoorbeelden
-- **Themawisselaar**: Donkere/lichtmodus ondersteuning voor verschillende voorkeuren
-- **Visuele Assets**: Screenshots en diagrammen voor beter begrip
-- **Hulp Integratie**: Directe Discord-toegang voor communityondersteuning
+- **Ingebouwde zoekfunctie**: Snelle zoekopdracht op trefwoord en les
+- **Codeblokken kopiëren**: Hover-to-copy functionaliteit voor alle codevoorbeelden
+- **Themawisselaar**: Ondersteuning voor donker/licht-modus voor verschillende voorkeuren
+- **Visuele middelen**: Schermafbeeldingen en diagrammen voor beter begrip
+- **Help-integratie**: Directe Discord-toegang voor communityondersteuning
 
 ### [v3.2.0] - 2025-09-17
 
-#### Grote navigatieherstructurering en hoofdstuk-gebaseerd leersysteem
-**Deze versie introduceert een uitgebreid hoofdstuk-gebaseerd leerstructuur met verbeterde navigatie door de gehele repository.**
+#### Grote herstructurering navigatie en hoofdstukgericht leersysteem
+**Deze versie introduceert een alomvattend hoofdstukgericht leerstructuur met verbeterde navigatie door de gehele repository.**
 
 #### Toegevoegd
-- **📚 Hoofdstuk-gebaseerd leersysteem**: Hele cursus herschikt in 8 progressieve leerhoofdstukken
-  - Hoofdstuk 1: Basis & Snelle Start (⭐ - 30-45 min)
-  - Hoofdstuk 2: AI-first ontwikkeling (⭐⭐ - 1-2 uur)
+- **📚 Hoofdstukgericht leersysteem**: Hele cursus heringericht in 8 progressieve leerhoofdstukken
+  - Hoofdstuk 1: Basis & Snelstart (⭐ - 30-45 min)
+  - Hoofdstuk 2: AI-First Ontwikkeling (⭐⭐ - 1-2 uur)
   - Hoofdstuk 3: Configuratie & Authenticatie (⭐⭐ - 45-60 min)
-  - Hoofdstuk 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1,5 uur)
-  - Hoofdstuk 5: Multi-Agent AI Oplossingen (⭐⭐⭐⭐ - 2-3 uur)
-  - Hoofdstuk 6: Pre-deployment Validatie & Planning (⭐⭐ - 1 uur)
-  - Hoofdstuk 7: Troubleshooting & Debugging (⭐⭐ - 1-1,5 uur)
-  - Hoofdstuk 8: Productie & Enterprise Patronen (⭐⭐⭐⭐ - 2-3 uur)
-- **📚 Uitgebreid navigatiesysteem**: Consistente navigatiekoppen en voetteksten door alle documentatie
-- **🎯 Voortgangsbewaking**: Cursus voltooiingschecklist en leerverificatiesysteem
-- **🗺️ Leerpad begeleiding**: Duidelijke instappunten voor verschillende ervaringsniveaus en doelen
-- **🔗 Kruisverwijzingen Navigatie**: Gerelateerde hoofdstukken en vereisten duidelijk gekoppeld
+  - Hoofdstuk 4: Infrastructure as Code & Implementatie (⭐⭐⭐ - 1-1.5 uur)
+  - Hoofdstuk 5: Multi-Agent AI-oplossingen (⭐⭐⭐⭐ - 2-3 uur)
+  - Hoofdstuk 6: Validatie & Planning vóór implementatie (⭐⭐ - 1 uur)
+  - Hoofdstuk 7: Probleemoplossing & Debugging (⭐⭐ - 1-1.5 uur)
+  - Hoofdstuk 8: Productie & Enterprise-patronen (⭐⭐⭐⭐ - 2-3 uur)
+- **📚 Uitgebreid navigatiesysteem**: Consistente navigatiekoppen en voetteksten in alle documentatie
+- **🎯 Voortgangsbewaking**: Checklist cursusvoltooiing en leerverificatiesysteem
+- **🗺️ Leerpadbegeleiding**: Duidelijke instappunten voor verschillende ervaringsniveaus en doelen
+- **🔗 Kruisverwijzingsnavigatie**: Gerelateerde hoofdstukken en vereisten duidelijk gekoppeld
 
 #### Verbeterd
-- **README-structuur**: Omgevormd tot een gestructureerd leerplatform met hoofdstuk-gebaseerde organisatie
-- **Documentatie navigatie**: Elke pagina toont nu hoofdstukcontext en voortgangsgids
-- **Template organisatie**: Voorbeelden en templates gekoppeld aan passende leerhoofdstukken
-- **Hulpbronintegratie**: Cheatsheets, FAQ’s en studiegidsen gekoppeld aan relevante hoofdstukken
-- **Workshop integratie**: Hands-on labs gekoppeld aan meerdere leerhoofdstukken
+- **README-structuur**: Omgevormd tot gestructureerd leerplatform met hoofdstukindeling
+- **Documentatienavigatie**: Elke pagina bevat nu hoofdstukcontext en voortgangsbegeleiding
+- **Template-organisatie**: Voorbeelden en templates toegewezen aan passende leerhoofdstukken
+- **Bron-integratie**: Cheatsheets, FAQ's en studiegidsen gekoppeld aan relevante hoofdstukken
+- **Workshopintegratie**: Hands-on labs gekoppeld aan meerdere leerdoelen van hoofdstukken
 
 #### Gewijzigd
-- **Leerprogressie**: Overgestapt van lineaire documentatie naar flexibel hoofdstuk-gebaseerd leren
-- **Configuratieplaatsing**: Configuratiehandleiding nu Hoofdstuk 3 voor betere leerstroom
-- **AI-inhoud integratie**: Betere integratie van AI-specifieke content door leertraject
-- **Productie-inhoud**: Geavanceerde patronen geconsolideerd in Hoofdstuk 8 voor enterprise-leerlingen
+- **Leerprogressie**: Overgegaan van lineaire documentatie naar flexibel hoofdstuk-gebaseerd leren
+- **Configuratieplaatsing**: Configuratiehandleiding herplaatst als Hoofdstuk 3 voor betere leerflow
+- **AI-inhoud Integratie**: Betere integratie van AI-specifieke inhoud doorheen de leerreis
+- **Productie-inhoud**: Geavanceerde patronen samengevoegd in Hoofdstuk 8 voor ondernemingsleerlingen
 
 #### Verbeterd
-- **Gebruikerservaring**: Duidelijke navigatiekruimels en hoofdstukvoortgangsindicatoren
-- **Toegankelijkheid**: Consistente navigatiepatronen voor makkelijker cursusdoorloop
-- **Professionele presentatie**: Cursusstructuur in universiteitsstijl geschikt voor academische en zakelijke training
-- **Leerefficiëntie**: Verminderde zoektijd naar relevante content door betere organisatie
+- **Gebruikerservaring**: Duidelijke navigatiepaneerbroodkruimels en hoofdstukvooruitgangsindicatoren
+- **Toegankelijkheid**: Consistente navigatiepatronen voor eenvoudiger doorlopen van cursussen
+- **Professionele Presentatie**: Universiteitsstijl cursusstructuur geschikt voor academische en zakelijke training
+- **Leer-efficiëntie**: Verminderde tijd om relevante inhoud te vinden door verbeterde organisatie
 
 #### Technische Implementatie
-- **Navigatiekoppen**: Gestandaardiseerde hoofdstuknavigatie in 40+ documentatiebestanden
-- **Voettekstnavigatie**: Consistente voortgangsgids en voltooiingsindicatoren
-- **Kruislinking**: Uitgebreid intern linkingssysteem dat gerelateerde concepten verbindt
-- **Hoofdstuktoewijzing**: Templates en voorbeelden duidelijk gekoppeld aan leerdoelen
+- **Navigatieheaders**: Gestandaardiseerde hoofdstuknavigatie in meer dan 40 documentatiebestanden
+- **Voettekstnavigatie**: Consistente voortgangsbegeleiding en hoofdstukvoltooiingsindicatoren
+- **Kruisverwijzingen**: Uitgebreid intern linkingssysteem dat gerelateerde concepten verbindt
+- **Hoofdstukkaarten**: Sjablonen en voorbeelden duidelijk gekoppeld aan leerdoelen
 
-#### Studiegidsverbetering
-- **📚 Uitgebreide leerdoelen**: Studiegids herschikt om aan te sluiten bij 8-hoofdstuksysteem
-- **🎯 Hoofdstuk-gebaseerde beoordeling**: Elk hoofdstuk bevat specifieke leerdoelen en praktische oefeningen
-- **📋 Voortgangsbewaking**: Wekelijks leerschema met meetbare resultaten en checklist
-- **❓ Beoordelingsvragen**: Kennisverificatievragen voor elk hoofdstuk met professionele uitkomsten
-- **🛠️ Praktische oefeningen**: Hands-on activiteiten met realistische deployment scenario's en probleemoplossing
-- **📊 Vaardigheidsprogressie**: Duidelijke voortgang van basisconcepten tot enterprise patronen met focus op loopbaanontwikkeling
-- **🎓 Certificeringskader**: Professionele ontwikkelingsresultaten en gemeenschapsherkenningssysteem
-- **⏱️ Tijdlijnbeheer**: Gestructureerd 10-weken leerplan met mijlpaalvalidatie
+#### Studiehandleiding Verbeteringen
+- **📚 Uitgebreide Leerdoelen**: Studiehandleiding herzien om aan te sluiten bij 8-hoofdstukkensysteem
+- **🎯 Hoofdstuk-gebaseerde Beoordeling**: Elk hoofdstuk bevat specifieke leerdoelen en praktische oefeningen
+- **📋 Voortgang Volgen**: Wekelijks leerschema met meetbare resultaten en voltooiingschecklists
+- **❓ Beoordelingsvragen**: Kennisbevestigingsvragen voor elk hoofdstuk met professionele uitkomsten
+- **🛠️ Praktische Oefeningen**: Praktijkactiviteiten met echte implementatiescenario's en foutoplossing
+- **📊 Vaardigheidsontwikkeling**: Duidelijke vooruitgang van basisconcepten naar enterprise-patronen met focus op loopbaanontwikkeling
+- **🎓 Certificeringsstructuur**: Professionele ontwikkelingsresultaten en gemeenschapsherkenningssysteem
+- **⏱️ Tijdsbeheer**: Gestructureerd 10-weken leerplan met mijlpaalvalidatie
 
-### [v3.1.0] - 2025-09-17
+### [v3.1.0] - 17-09-2025
 
 #### Verbeterde Multi-Agent AI Oplossingen
-**Deze versie verbetert de multi-agent retailoplossing met betere agentnamen en uitgebreidere documentatie.**
+**Deze versie verbetert de multi-agent retailoplossing met betere agentbenamingen en uitgebreide documentatie.**
 
 #### Gewijzigd
 - **Multi-Agent Terminologie**: "Cora agent" vervangen door "Customer agent" doorheen de retail multi-agent oplossing voor duidelijker begrip
-- **Agent Architectuur**: Alle documentatie, ARM-templates en codevoorbeelden bijgewerkt om consistente "Customer agent" naamgeving te gebruiken
-- **Configuratie Voorbeelden**: Gemoderniseerde agentconfiguratiepatronen met bijgewerkte naamgevingsconventies
-- **Documentatie Consistentie**: Gezorgd dat alle verwijzingen professionele, beschrijvende agentnamen gebruiken
+- **Agent Architectuur**: Alle documentatie, ARM-sjablonen en codevoorbeelden bijgewerkt naar consistente "Customer agent" naamgeving
+- **Configuratievoorbeelden**: Gemoderniseerde agentconfiguratiepatronen met bijgewerkte naamgevingsconventies
+- **Documentatieconsistentie**: Alle verwijzingen gebruiken professionele, beschrijvende agentnamen
+
+#### Uitgebreid
+- **ARM-sjabloonpakket**: Bijgewerkt retail-multiagent-arm-template met Customer agent verwijzingen
+- **Architectuurdiagrammen**: Vernieuwde Mermaid-diagrammen met bijgewerkte agentnaamgeving
+- **Codevoorbeelden**: Python-klassen en implementatievoorbeelden nu met CustomerAgent naamgeving
+- **Omgevingsvariabelen**: Alle deployment-scripts bijgewerkt met CUSTOMER_AGENT_NAME conventies
 
 #### Verbeterd
-- **ARM Template Pakket**: retail-multiagent-arm-template bijgewerkt met verwijzingen naar Customer agent
-- **Architectuur Diagrams**: Mermaid-diagrammen vernieuwd met bijgewerkte agentnamen
-- **Code Voorbeelden**: Python-klassen en implementatievoorbeelden gebruiken nu CustomerAgent naamgeving
-- **Omgevingsvariabelen**: Alle deployment-scripts bijgewerkt om CUSTOMER_AGENT_NAME conventies te gebruiken
-
-#### Verbeterd
-- **Developer Experience**: Duidelijkere agentrollen en verantwoordelijkheden in documentatie
-- **Productieklaar**: Betere afstemming op ondernemingsnaamgevingsconventies
-- **Leermaterialen**: Intuïtievere agentnamen voor educatieve doeleinden
-- **Template Bruikbaarheid**: Vereenvoudigd begrip van agentfuncties en deploymentpatronen
+- **Ontwikkelaarservaring**: Duidelijkere agentrollen en verantwoordelijkheden in documentatie
+- **Productieklaar**: Betere afstemming met ondernemingsnaamgevingsconventies
+- **Leermaterialen**: Intuïtieve agentbenamingen voor educatieve doeleinden
+- **Sjabloon Bruikbaarheid**: Vereenvoudigd begrip van agentfuncties en deploymentpatronen
 
 #### Technische Details
-- Mermaid architectuurdiagrammen bijgewerkt met CustomerAgent verwijzingen
-- CoraAgent klassennamen vervangen door CustomerAgent in Python-voorbeelden
-- ARM template JSON-configuraties aangepast om "customer" agenttype te gebruiken
+- Bijgewerkte Mermaid architectuurdiagrammen met CustomerAgent verwijzingen
+- CoraAgent klassennamen vervangen door CustomerAgent in Python voorbeelden
+- ARM-sjabloon JSON-configuraties aangepast om "customer" agenttype te gebruiken
 - Omgevingsvariabelen bijgewerkt van CORA_AGENT_* naar CUSTOMER_AGENT_* patronen
 - Alle deploymentcommando's en containerconfiguraties vernieuwd
 
-### [v3.0.0] - 2025-09-12
+### [v3.0.0] - 12-09-2025
 
 #### Grote Wijzigingen - AI Developer Focus en Microsoft Foundry Integratie
-**Deze versie transformeert de repository in een uitgebreide AI-georiënteerde leerbron met Microsoft Foundry integratie.**
+**Deze versie verandert de repository in een uitgebreide AI-gefocuste leerbron met Microsoft Foundry integratie.**
 
 #### Toegevoegd
-- **🤖 AI-Eerst Leerpad**: Complete herstructurering met prioriteit voor AI-ontwikkelaars en engineers
-- **Microsoft Foundry Integratie Gids**: Uitgebreide documentatie voor koppeling AZD met Microsoft Foundry diensten
-- **AI Model Deployment Patronen**: Gedetailleerde gids over modelselectie, configuratie en productiedeploymentstrategieën
-- **AI Workshop Lab**: 2-3 uur durende hands-on workshop voor het omzetten van AI-applicaties naar AZD-deployable oplossingen
+- **🤖 AI-Eerste Leerpad**: Complete herstructurering gericht op AI-ontwikkelaars en engineers
+- **Microsoft Foundry Integratiehandleiding**: Uitgebreide documentatie voor het koppelen van AZD met Microsoft Foundry diensten
+- **AI Model Deployment Patronen**: Gedetailleerde handleiding over modelselectie, configuratie en productiedeploymentsstrategieën
+- **AI Workshop Lab**: 2-3 uur durende hands-on workshop voor het omzetten van AI-toepassingen naar AZD-deployable oplossingen
 - **Productie AI Best Practices**: Enterprise-klare patronen voor schaalvergroting, monitoring en beveiliging van AI workloads
-- **AI-Specifieke Troubleshooting Gids**: Uitgebreide probleemoplossing voor Microsoft Foundry Modellen, Cognitive Services en AI-deployment problemen
-- **AI Template Galerij**: Uitgelichte collectie Microsoft Foundry-templates met complexiteitsbeoordelingen
-- **Workshop Materialen**: Complete workshopstructuur met hands-on labs en referentiematerialen
+- **AI-Specifieke Foutoplossing**: Uitgebreide troubleshooting voor Microsoft Foundry Models, Cognitive Services en AI deployment issues
+- **AI Sjabloongalerij**: Uitgelichte collectie Microsoft Foundry sjablonen met complexiteitsbeoordelingen
+- **Workshop Materialen**: Complete workshopstructuur met hands-on labs en referentiemateriaal
 
 #### Verbeterd
-- **README Structuur**: AI-ontwikkelaarsgericht met 45% community interessegegevens van Microsoft Foundry Discord
-- **Leerpaden**: Toegewijde AI-ontwikkelaarsreis naast traditionele paden voor studenten en DevOps engineers
-- **Template Aanbevelingen**: Uitgelichte AI-templates inclusief azure-search-openai-demo, contoso-chat en openai-chat-app-quickstart
-- **Community Integratie**: Verbeterde Discord communityondersteuning met AI-specifieke kanalen en discussies
+- **README Structuur**: AI-ontwikkelaar gefocust met 45% community-interessegegevens van Microsoft Foundry Discord
+- **Leertrajecten**: Toegewijde AI-ontwikkelaarstraject naast traditionele routes voor studenten en DevOps engineers
+- **Sjabloonaanbevelingen**: Uitgelichte AI-sjablonen waaronder azure-search-openai-demo, contoso-chat en openai-chat-app-quickstart
+- **Community Integratie**: Verbeterde Discord-gemeenschapsondersteuning met AI-specifieke kanalen en discussies
 
 #### Beveiliging & Productiefocus
-- **Managed Identity Patronen**: AI-specifieke authenticatie- en beveiligingsconfiguraties
-- **Kostenoptimalisatie**: Token gebruiksmonitoring en budgetcontroles voor AI workloads
-- **Multi-Region Deployment**: Strategieën voor wereldwijde AI applicatiedeployment
-- **Prestatiemonitoring**: AI-specifieke metrics en Application Insights-integratie
+- **Beheerde Identiteits Patronen**: AI-specifieke authenticatie- en beveiligingsconfiguraties
+- **Kostenoptimalisatie**: Tokengebruiktracking en budgetbeheersing voor AI workloads
+- **Multi-Region Deployments**: Strategieën voor wereldwijde AI toepassingsimplementatie
+- **Prestatiemonitoring**: AI-specifieke metrics en Application Insights integratie
 
 #### Documentatiekwaliteit
-- **Lineaire Cursusstructuur**: Logische voortgang van beginner tot gevorderde AI deploymentpatronen
-- **Geverifieerde URL’s**: Alle externe repository links gecontroleerd en toegankelijk
+- **Lineaire Cursusstructuur**: Logische voortgang van beginner tot geavanceerde AI deployment patronen
+- **Geverifieerde URL's**: Alle externe repositorylinks gecontroleerd en toegankelijk
 - **Volledige Referentie**: Alle interne documentatielinks gevalideerd en functioneel
 - **Productieklaar**: Enterprise deployment patronen met praktijkvoorbeelden
 
-### [v2.0.0] - 2025-09-09
+### [v2.0.0] - 09-09-2025
 
 #### Grote Wijzigingen - Repositoryherstructurering en Professionele Verbetering
-**Deze versie vertegenwoordigt een significante herziening van repositorystructuur en inhoudspresentatie.**
+**Deze versie vertegenwoordigt een significante herziening van de repositorystructuur en presentatie van inhoud.**
 
 #### Toegevoegd
-- **Gestructureerd Leer Framework**: Alle documentatiepagina’s bevatten nu Introductie, Leerdoelen en Leerresultaten secties
-- **Navigatiesysteem**: Toevoeging van Vorige/Volgende leslinks doorheen alle documentatie voor begeleide leerprogressie
-- **Studiegids**: Uitgebreide study-guide.md met leerdoelen, oefeningensets en beoordelingsmaterialen
-- **Professionele Presentatie**: Verwijdering van alle emoji-iconen voor verbeterde toegankelijkheid en professionele uitstraling
-- **Verbeterde Inhoudsstructuur**: Betere organisatie en doorloop van leermaterialen
+- **Gestructureerd Leerraamwerk**: Alle documentatiepagina's bevatten nu Introductie, Leerdoelen en Leerresultaten secties
+- **Navigatiesysteem**: Toegevoegde Vorige/Volgende leslinks door alle documentatie voor begeleide leerprogressie
+- **Studiehandleiding**: Uitgebreide studiehandleiding.md met leerdoelen, oefenopdrachten en beoordelingsmateriaal
+- **Professionele Presentatie**: Alle emoji-iconen verwijderd voor betere toegankelijkheid en professionele uitstraling
+- **Verbeterde Inhoudsstructuur**: Betere organisatie en flow van leermaterialen
 
 #### Gewijzigd
-- **Documentatie Formaat**: Alle documentatie gestandaardiseerd met consistente leergerichte structuur
-- **Navigatiestroom**: Logische voortgang geïmplementeerd door alle leermaterialen
-- **Inhoudspresentatie**: Verwijdering van decoratieve elementen zugunsten van heldere, professionele opmaak
-- **Linkstructuur**: Alle interne links bijgewerkt ter ondersteuning van nieuw navigatiesysteem
+- **Documentatieformaat**: Alle documentatie gestandaardiseerd met consistente leergerichte structuur
+- **Navigatiestroom**: Logische voortgang door alle leermaterialen geïmplementeerd
+- **Inhoudspresentatie**: Decoratieve elementen verwijderd ten gunste van heldere, professionele opmaak
+- **Linkstructuur**: Alle interne links bijgewerkt ter ondersteuning van het nieuwe navigatiesysteem
 
 #### Verbeterd
-- **Toegankelijkheid**: Emoji-afhankelijkheden verwijderd voor betere compatibiliteit met schermlezers
-- **Professionele Uiterlijk**: Schone, academische stijl presentatie geschikt voor enterprise learning
-- **Leerervaring**: Gestructureerde aanpak met duidelijke doelen en uitkomsten voor elke les
-- **Inhoudsorganisatie**: Betere logische doorloop en verbinding tussen gerelateerde onderwerpen
+- **Toegankelijkheid**: Emoji-afhankelijkheden verwijderd voor betere schermlezercompatibiliteit
+- **Professionele Uitstraling**: Schone, academische stijl presentatie geschikt voor ondernemingsleren
+- **Leerervaring**: Gestructureerde aanpak met duidelijke doelen en uitkomsten per les
+- **Inhoudsorganisatie**: Betere logische flow en verbinding tussen gerelateerde onderwerpen
 
-### [v1.0.0] - 2025-09-09
+### [v1.0.0] - 09-09-2025
 
-#### Initiële Release - Uitgebreide AZD Leer Repository
+#### Initiële Release - Uitgebreide AZD Leerrepository
 
 #### Toegevoegd
 - **Kern Documentatiestructuur**
-  - Complete getting-started gidsreeks
-  - Uitgebreide deployment- en provisioningdocumentatie
-  - Gedetailleerde troubleshooting resources en debughandleidingen
-  - Validatietools en procedures vóór deployment
+  - Complete serie kennismakinghandleidingen
+  - Uitgebreide deployment- en provisioneringsdocumentatie
+  - Gedetailleerde troubleshooting bronnen en debughandleidingen
+  - Validatietools en procedures voorafgaand aan deployment
 
-- **Getting Started Module**
+- **Kennismakingsmodule**
   - AZD Basisprincipes: Kernconcepten en terminologie
-  - Installatiehandleiding: Platform-specifieke setup-instructies
-  - Configuratiehandleiding: Omgevingsinrichting en authenticatie
-  - Eerste Project Tutorial: Stapsgewijze praktische oefeningen
+  - Installatiehandleiding: Platform-specifieke installatie-instructies
+  - Configuratiehandleiding: Omgeving opzetten en authenticatie
+  - Eerste project tutorial: Stapsgewijs hands-on leren
 
-- **Deployment en Provisioning Module**
-  - Deployment Gids: Compleet workflowdocumentatie
-  - Provisioning Gids: Infrastructure as Code met Bicep
-  - Best practices voor productiedeployments
+- **Deployment en Provisioneringsmodule**
+  - Deploymenthandleiding: Complete workflowdocumentatie
+  - Provisioninghandleiding: Infrastructure as Code met Bicep
+  - Best practices voor productie-implementaties
   - Multi-service architectuurpatronen
 
-- **Pre-deployment Validatie Module**
-  - Capaciteitsplanning: Validatie beschikbaarheid Azure-resources
-  - SKU-selectie: Uitgebreide servicelaagrichtlijnen
-  - Pre-flight Checks: Geautomatiseerde validatiescripts (PowerShell en Bash)
-  - Kostenschatting en budgetplanningshulpmiddelen
+- **Validatiemodule voorafgaand aan deployment**
+  - Capaciteitsplanning: Validatie van Azure-middelenbeschikbaarheid
+  - SKU-selectie: Uitgebreide service-tier richtlijnen
+  - Pre-flight checks: Geautomatiseerde validatiescripts (PowerShell en Bash)
+  - Kostenraming en budgetplanhulpmiddelen
 
-- **Troubleshooting Module**
-  - Veelvoorkomende Problemen: Frequent voorkomende issues en oplossingen
-  - Debugging Gids: Systematische probleemoplossingsmethoden
-  - Geavanceerde diagnostische technieken en tools
+- **Troubleshootingmodule**
+  - Veelvoorkomende problemen: Frequent voorkomende problemen en oplossingen
+  - Debughandleiding: Systematische foutoplossingsmethoden
+  - Geavanceerde diagnostische technieken en hulpmiddelen
   - Prestatiemonitoring en optimalisatie
 
-- **Hulpbronnen en Referenties**
-  - Command Cheat Sheet: Snelle referentie voor essentiële commando’s
-  - Woordenlijst: Uitgebreide terminologie- en acroniemenlijst
+- **Bronnen en Referenties**
+  - Command Cheat Sheet: Snelle referentie voor essentiële commando's
+  - Verklarende woordenlijst: Uitgebreide terminologie- en acroniemverklaringen
   - FAQ: Gedetailleerde antwoorden op veelgestelde vragen
-  - Externe bronnen en communityconnecties
+  - Externe bronlinks en communityverbindingen
 
-- **Voorbeelden en Templates**
-  - Eenvoudig webapplicatievoorbeeld
-  - Template voor statische website deployment
+- **Voorbeelden en Sjablonen**
+  - Simpel webapplicatievoorbeeld
+  - Sjabloon voor statische website deployment
   - Containerapplicatieconfiguratie
-  - Patronen voor database-integratie
-  - Microservices architectuurexamples
-  - Serverless function implementaties
+  - Database-integratiepatronen
+  - Microservices-architectuurvoorbeelden
+  - Serverless functie-implementaties
 
 #### Kenmerken
-- **Multi-Platform Ondersteuning**: Installatie- en configuratiehandleidingen voor Windows, macOS en Linux
-- **Meerdere Vaardigheidsniveaus**: Inhoud ontworpen voor studenten tot professionele ontwikkelaars
-- **Praktijkgericht**: Hands-on voorbeelden en scenario’s uit de praktijk
-- **Uitgebreide Dekking**: Van basisconcepten tot geavanceerde enterprisepatronen
-- **Beveiligingsgerichte Benadering**: Beveiligingsbest practices geïntegreerd doorheen de inhoud
-- **Kostenoptimalisatie**: Richtlijnen voor kosteneffectieve deployments en resourcebeheer
+- **Multi-platform Ondersteuning**: Installatie- en configuratiehandleidingen voor Windows, macOS en Linux
+- **Verschillende Vaardigheidsniveaus**: Inhoud ontworpen voor studenten tot professionele ontwikkelaars
+- **Praktische Focus**: Hands-on voorbeelden en realistische scenario's
+- **Uitgebreide Dekking**: Van basale concepten tot geavanceerde enterprise-patronen
+- **Beveiligingsgerichte Aanpak**: Best practices voor beveiliging geïntegreerd doorheen
+- **Kostenoptimalisatie**: Richtlijnen voor kosteneffectieve deployments en middelenbeheer
 
 #### Documentatiekwaliteit
-- **Gedetailleerde Codevoorbeelden**: Praktische, geteste codesamples
-- **Stapsgewijze Instructies**: Duidelijke, uitvoerbare aanwijzingen
-- **Uitgebreide Foutafhandeling**: Probleemoplossing voor vaak voorkomende issues
-- **Integratie Best Practices**: Industriestandaarden en aanbevelingen
-- **Versiecompatibiliteit**: Up-to-date met nieuwste Azure diensten en azd functies
+- **Gedetailleerde Codevoorbeelden**: Praktische, geteste codevoorbeelden
+- **Stapsgewijze Instructies**: Duidelijke, uitvoerbare richtlijnen
+- **Omvattende Foutafhandeling**: Troubleshooting bij veelvoorkomende problemen
+- **Integratie van Best Practices**: Industriestandaarden en aanbevelingen
+- **Versiecompatibiliteit**: Up-to-date met nieuwste Azure-diensten en azd-functies
 
 ## Geplande Toekomstige Verbeteringen
 
 ### Versie 3.1.0 (Gepland)
 #### AI Platform Uitbreiding
-- **Multi-Model Ondersteuning**: Integratiepatronen voor Hugging Face, Azure Machine Learning en custom modellen
-- **AI Agent Frameworks**: Templates voor LangChain, Semantic Kernel en AutoGen deployments
+- **Multi-Model Ondersteuning**: Integratiepatronen voor Hugging Face, Azure Machine Learning en aangepaste modellen
+- **AI Agent Frameworks**: Sjablonen voor LangChain, Semantic Kernel en AutoGen deployments
 - **Geavanceerde RAG Patronen**: Vector database opties buiten Azure AI Search (Pinecone, Weaviate, etc.)
 - **AI Observability**: Verbeterde monitoring voor modelprestaties, tokengebruik en responskwaliteit
 
-#### Developer Experience
-- **VS Code Extension**: Geïntegreerde AZD + Microsoft Foundry ontwikkelervaring
-- **GitHub Copilot Integratie**: AI-ondersteunde AZD-template generatie
-- **Interactieve Tutorials**: Hands-on codeer-oefeningen met geautomatiseerde validatie voor AI scenario’s
-- **Videocontent**: Supplementaire videotutorials voor visuele leerlingen gericht op AI deployments
+#### Ontwikkelaarservaring
+- **VS Code Extensie**: Geïntegreerde AZD + Microsoft Foundry ontwikkelaarservaring
+- **GitHub Copilot Integratie**: AI-ondersteunde AZD sjabloon generatie
+- **Interactieve Tutorials**: Hands-on codeeroefeningen met geautomatiseerde validatie voor AI-scenario's
+- **Videocontent**: Aanvullende videotutorials voor visuele leerlingen met focus op AI deployments
 
 ### Versie 4.0.0 (Gepland)
 #### Enterprise AI Patronen
-- **Governance Framework**: AI model governance, compliance en audittrajecten
+- **Governance Raamwerk**: AI model governance, compliance en audit-trails
 - **Multi-Tenant AI**: Patronen voor het bedienen van meerdere klanten met geïsoleerde AI-diensten
 - **Edge AI Deployment**: Integratie met Azure IoT Edge en containerinstanties
-- **Hybrid Cloud AI**: Multi-cloud en hybride deploymentpatronen voor AI workloads
+- **Hybride Cloud AI**: Multi-cloud en hybride deploymentpatronen voor AI workloads
 
 #### Geavanceerde Functies
-- **AI Pipeline Automatisering**: MLOps integratie met Azure Machine Learning pipelines
+- **AI Pipeline Automatisering**: MLOps-integratie met Azure Machine Learning pipelines
 - **Geavanceerde Beveiliging**: Zero-trust patronen, private endpoints en geavanceerde dreigingsbescherming
-- **Prestatieoptimalisatie**: Geavanceerde tuning- en schaalstrategieën voor AI applicaties met hoge doorvoer
-- **Globale Distributie**: Content delivery en edge caching patronen voor AI applicaties
+- **Prestatie-optimalisatie**: Geavanceerde afstemming en schaalstrategieën voor AI-toepassingen met hoge doorvoer
+- **Wereldwijde Distributie**: Contentleverings- en edge cachingpatronen voor AI-toepassingen
 
-### Versie 3.0.0 (Gepland) - Overruled door Huidige Release
+### Versie 3.0.0 (Gepland) - Overschaduwd door Huidige Release
 #### Voorgestelde Toevoegingen - Nu Geïmplementeerd in v3.0.0
-- ✅ **AI-Gerichte Inhoud**: Uitgebreide Microsoft Foundry integratie (Voltooid)
+- ✅ **AI-Gefocuste Inhoud**: Uitgebreide Microsoft Foundry integratie (Voltooid)
 - ✅ **Interactieve Tutorials**: Hands-on AI workshop lab (Voltooid)
 - ✅ **Geavanceerde Beveiligingsmodule**: AI-specifieke beveiligingspatronen (Voltooid)
-- ✅ **Prestatieoptimalisatie**: AI workload tuningstrategieën (Voltooid)
+- ✅ **Prestatie-optimalisatie**: AI workload afstemmingsstrategieën (Voltooid)
 
-### Versie 2.1.0 (Gepland) - Gedeeltelijk geïmplementeerd in v3.0.0
-#### Kleine verbeteringen - Enkele Voltooid in Huidige Release
-- ✅ **Aanvullende Voorbeelden**: AI-gerichte deploymentscenario’s (Voltooid)
-- ✅ **Uitgebreide FAQ**: AI-specifieke vragen en troubleshooting (Voltooid)
-- **Tool Integratie**: Uitgebreide IDE en editor integratie gidsen
-- ✅ **Monitoring Uitbreiding**: AI-specifieke monitoring en alerting patronen (Voltooid)
+### Versie 2.1.0 (Gepland) - Gedeeltelijk Geïmplementeerd in v3.0.0
+#### Kleine Verbeteringen - Sommige Voltooid in Huidige Release
+- ✅ **Aanvullende Voorbeelden**: AI-gerichte deployment scenario's (Voltooid)
+- ✅ **Uitgebreide FAQ**: AI-specifieke vragen en foutoplossing (Voltooid)
+- **Toolintegratie**: Verbeterde IDE en editor integratiehandleidingen
+- ✅ **Monitoringuitbreiding**: AI-specifieke monitoring- en waarschuwingspatronen (Voltooid)
 
 #### Nog Gepland voor Toekomstige Release
 - **Mobielvriendelijke Documentatie**: Responsief ontwerp voor mobiel leren
 - **Offline Toegang**: Downloadbare documentatiepakketten
 - **Verbeterde IDE Integratie**: VS Code extensie voor AZD + AI workflows
-- **Community Dashboard**: Real-time community statistieken en bijdrage-tracking
+- **Community Dashboard**: Real-time communitystatistieken en bijdrage-tracking
 
-## Bijdragen aan de Changelog
+## Bijdragen aan de Wijzigingslog
 
-### Wijzigingen Rapporteren
-Bij bijdragen aan deze repository, zorg ervoor dat changelog-vermeldingen bevatten:
+### Wijzigingen Rapporterën
+Bij bijdragen aan deze repository, zorg ervoor dat changelog-items bevatten:
 
-1. **Versienummer**: Volgend op semantische versionering (major.minor.patch)
-2. **Datum**: Uitgave- of update datum in YYYY-MM-DD formaat
-3. **Categorie**: Toegevoegd, Gewijzigd, Verouderd, Verwijderd, Vastgesteld, Beveiliging
-4. **Duidelijke Beschrijving**: Bondige omschrijving van de wijziging
-5. **Impact Beoordeling**: Hoe de wijzigingen bestaande gebruikers beïnvloeden
+1. **Versienummer**: Volgend semantische versiebeheer (major.minor.patch)
+2. **Datum**: Release- of update datum in JJJJ-MM-DD formaat
+3. **Categorie**: Toegevoegd, Gewijzigd, Verouderd, Verwijderd, Gefixt, Beveiliging
+4. **Duidelijke Beschrijving**: Bondige omschrijving van wat er is veranderd
+5. **Impactbeoordeling**: Hoe veranderingen bestaande gebruikers beïnvloeden
 
 ### Wijzigingscategorieën
 
 #### Toegevoegd
 - Nieuwe functies, documentatiesecties of mogelijkheden
-- Nieuwe voorbeelden, templates of leermiddelen
-- Aanvullende tools, scripts of utilities
+- Nieuwe voorbeelden, sjablonen of leermiddelen
+- Extra tools, scripts of hulpprogramma's
 
 #### Gewijzigd
 - Wijzigingen aan bestaande functionaliteit of documentatie
-- Updates ter verbetering van helderheid of nauwkeurigheid
+- Updates ter verbetering van duidelijkheid of nauwkeurigheid
 - Herstructurering van inhoud of organisatie
 
 #### Verouderd
 - Functies of benaderingen die worden uitgefaseerd
-- Documentatiesecties gepland voor verwijdering
-- Methodes waarvoor betere alternatieven bestaan
+- Documentatiesecties die gepland zijn voor verwijdering
+- Methoden waarvoor betere alternatieven bestaan
 
 #### Verwijderd
 - Functies, documentatie of voorbeelden die niet langer relevant zijn
 - Verouderde informatie of verouderde benaderingen
-- Overbodige of geconsolideerde inhoud
+- Overbodige of samengevoegde inhoud
 
-#### Vastgesteld
+#### Gefixt
 - Correcties van fouten in documentatie of code
-- Oplossingen van gerapporteerde problemen
+- Oplossingen van gemelde problemen of fouten
 - Verbeteringen in nauwkeurigheid of functionaliteit
 
 #### Beveiliging
-- Beveiligingsgerelateerde verbeteringen of fixes
-- Updates aan beveiligingsbest practices
-- Oplossingen van beveiligingskwetsbaarheden
+- Beveiligingsgerelateerde verbeteringen of reparaties
+- Updates van beste beveiligingspraktijken
+- Oplossing van beveiligingslekken
 
-### Semantische Versioneringsrichtlijnen
+### Richtlijnen voor Semantische Versiebeheer
 
 #### Grote Versie (X.0.0)
-- Brekende wijzigingen waarbij gebruikersactie vereist is
+- Brekende veranderingen die gebruikersactie vereisen
 - Significante herstructurering van inhoud of organisatie
 - Wijzigingen die de fundamentele aanpak of methodologie veranderen
 
-#### Kleine Versie (X.Y.0)
-- Nieuwe features of inhoudelijke toevoegingen
-- Verbeteringen die achterwaarts compatibel blijven
-- Aanvullende voorbeelden, tools of bronnen
+#### Minor Versie (X.Y.0)
+- Nieuwe functies of inhoud toevoegingen
+- Verbeteringen die achterwaartse compatibiliteit behouden
+- Extra voorbeelden, tools of bronnen
 
 #### Patch Versie (X.Y.Z)
 - Bugfixes en correcties
 - Kleine verbeteringen aan bestaande inhoud
-- Verhelderingen en kleine aanvullingen
+- Verduidelijkingen en kleine verbeteringen
 
 ## Feedback en Suggesties vanuit de Community
 
-We moedigen actief communityfeedback aan om deze leerbron te verbeteren:
+We moedigen actief feedback vanuit de community aan om deze leerbron te verbeteren:
 
 ### Hoe Feedback te Geven
-- **GitHub Issues**: Problemen melden of verbeteringen voorstellen (AI-specifieke issues zijn welkom)
+- **GitHub Issues**: Meld problemen of stel verbeteringen voor (AI-specifieke kwesties welkom)
 - **Discord Discussies**: Deel ideeën en ga in gesprek met de Microsoft Foundry community
-- **Pull Requests**: Lever directe verbeteringen aan inhoud, vooral AI-templates en gidsen
-- **Microsoft Foundry Discord**: Deelname aan #Azure kanaal voor AZD + AI discussies
-- **Community Forums**: Deelname aan bredere Azure ontwikkelaarsdiscussies
+- **Pull Requests**: Draag directe verbeteringen aan inhoud bij, vooral AI-templates en handleidingen
+- **Microsoft Foundry Discord**: Doe mee in het #Azure-kanaal voor AZD + AI-discussies
+- **Community Forums**: Neem deel aan bredere Azure ontwikkelaarsdiscussies
 
 ### Feedbackcategorieën
-- **AI Inhoudsnauwkeurigheid**: Correcties op AI dienstintegratie en deploymentinformatie
-- **Leerervaring**: Suggesties voor verbeterde AI ontwikkelaarsleerflow
-- **Ontbrekende AI Inhoud**: Verzoeken voor extra AI-templates, patronen of voorbeelden
+- **AI-inhoudsnauwkeurigheid**: Correcties over AI-service-integratie en implementatie-informatie
+- **Leerervaring**: Suggesties voor een verbeterde AI-ontwikkelaarsleerflow
+- **Ontbrekende AI-inhoud**: Verzoeken voor extra AI-templates, patronen of voorbeelden
 - **Toegankelijkheid**: Verbeteringen voor diverse leerbehoeften
-- **AI Tool Integratie**: Suggesties voor betere integratie in AI ontwikkelingsworkflow
-- **Productie AI Patronen**: Verzoeken voor enterprise AI deploymentpatronen
+- **AI Tool Integratie**: Suggesties voor betere integratie van AI-ontwikkelwerkstromen
+- **Productie AI-patronen**: Verzoeken voor zakelijke AI-implementatiepatronen
 
-### Reactieverplichting
-- **Issue Respons**: Binnen 48 uur voor gerapporteerde problemen
-- **Feature Requests**: Evaluatie binnen een week
-- **Community Bijdragen**: Review binnen een week
-- **Beveiligingskwesties**: Onmiddellijke prioriteit met versnelde reactie
+### Reactieverbintenis
+- **Issue Respons**: Binnen 48 uur voor gemelde problemen
+- **Feature Requests**: Evaluatie binnen één week
+- **Community Bijdragen**: Review binnen één week
+- **Beveiligingskwesties**: Onmiddellijke prioriteit met versnelde respons
 
 ## Onderhoudsschema
 
-### Regelmatige Updates
-- **Maandelijkse Reviews**: Inhoudsnauwkeurigheid en linkvalidatie
-- **Kwartaalupdates**: Grote inhoudelijke toevoegingen en verbeteringen
+### Reguliere Updates
+- **Maandelijkse Reviews**: Nauwkeurigheid van inhoud en linkvalidatie
+- **Kwartaalupdates**: Grote inhoud toevoegingen en verbeteringen
 - **Halfjaarlijkse Reviews**: Uitgebreide herstructurering en verbetering
-- **Jaarlijkse Releases**: Grote versie-updates met significante verbeteringen
+- **Jaarlijkse Releases**: Grote versiewijzigingen met aanzienlijke verbeteringen
 
-### Monitoring en Kwaliteitswaarborging
+### Monitoring en Kwaliteitsborging
 - **Geautomatiseerd Testen**: Regelmatige validatie van codevoorbeelden en links
-- **Integratie van Feedback uit de Gemeenschap**: Regelmatige opname van gebruikerssuggesties
-- **Technologie-updates**: Afstemming op de nieuwste Azure-diensten en azd-releases
-- **Toegankelijkheidsaudits**: Regelmatige beoordeling op inclusieve ontwerpprincipes
+- **Integratie van Community Feedback**: Regelmatige opname van gebruikerssuggesties
+- **Technologie-updates**: Afstemming met de nieuwste Azure-diensten en azd-releases
+- **Toegankelijkheidsaudits**: Regelmatige beoordeling van inclusieve ontwerpprincipes
 
-## Versiebeleidsbeleid
+## Versieondersteuningsbeleid
 
-### Huidige Versieondersteuning
-- **Laatste Grote Versie**: Volledige ondersteuning met regelmatige updates
-- **Vorige Grote Versie**: Beveiligingsupdates en kritieke fixes gedurende 12 maanden
-- **Legacy-versies**: Alleen ondersteuning door de gemeenschap, geen officiële updates
+### Ondersteuning van de huidige versie
+- **Laatste grote versie**: Volledige ondersteuning met regelmatige updates
+- **Vorige grote versie**: Beveiligingsupdates en kritieke fixes gedurende 12 maanden
+- **Verouderde versies**: Alleen community-ondersteuning, geen officiële updates
 
-### Migratierichtlijnen
-Wanneer grote versies worden uitgebracht, bieden we:
+### Migratiehandleiding
+Bij het uitbrengen van grote versies bieden we:
 - **Migratiehandleidingen**: Stapsgewijze overgangsinstructies
-- **Compatibiliteitsnotities**: Details over brekende veranderingen
-- **Toolondersteuning**: Scripts of hulpmiddelen om bij de migratie te helpen
-- **Gemeenschapsondersteuning**: Toegewijde forums voor migratievragen
+- **Compatibiliteitsnotities**: Details over brekende wijzigingen
+- **Toolondersteuning**: Scripts of hulpprogramma's om bij migratie te helpen
+- **Community-ondersteuning**: Speciale forums voor migratievragen
 
 ---
 
 **Navigatie**
-- **Vorige Les**: [Studiegids](resources/study-guide.md)
-- **Volgende Les**: Terug naar [Hoofd README](README.md)
+- **Vorige les**: [Studiegids](resources/study-guide.md)
+- **Volgende les**: Terug naar [Hoofd README](README.md)
 
 **Blijf op de hoogte**: Volg deze repository voor meldingen over nieuwe releases en belangrijke updates van het lesmateriaal.
 

@@ -1,6 +1,6 @@
-# 6. Infrastructuur afbreken
+# 6. Infrastructuur Afbreken
 
-!!! tip "AAN HET EINDE VAN DEZE MODULE KUN JE"
+!!! tip "AAN HET EINDE VAN DEZE MODULE ZUL JE IN STAAT ZIJN OM"
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
@@ -29,7 +29,11 @@ Voordat we het project afbreken, neem een paar minuten om wat open verkenning te
 
 ---
 
-## Infra deprovisie
+## Infra Afbouwen
+
+!!! warning "Als je ook de GA hosted-agent oefening hebt voltooid"
+
+    Check that exercise's environment separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it. For a reused Foundry project, it leaves the project, hosted agent, and other resources in place; remove only unwanted resources you own separately. Do not delete a shared project or resource group to clean up one agent. See the [hosted-agent cleanup guidance](https://learn.microsoft.com/azure/foundry/agents/quickstarts/quickstart-hosted-agent?pivots=azd#clean-up-resources).
 
 1. Het afbreken van infrastructuur is zo eenvoudig als:
       
@@ -38,7 +42,7 @@ Voordat we het project afbreken, neem een paar minuten om wat open verkenning te
       azd show
       azd down
       ```
-1. Bevestig de geselecteerde omgeving en controleer de resources die verwijderd worden. Dit verwijdert Azure-resources en kan data vernietigen. Houd de bevestigingsprompt voor deze leerworkflow aan. Zodra voltooid zie je output vergelijkbaar met:
+1. Bevestig de geselecteerde omgeving en controleer de te verwijderen resources. Dit verwijdert Azure-resources en kan data vernietigen. Houd de bevestigingsprompt voor deze leerworkflow. Zodra het voltooid is, zie je een vergelijkbare uitvoer als:
       
       ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -48,11 +52,11 @@ Voordat we het project afbreken, neem een paar minuten om wat open verkenning te
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. Controleer de verwijdering in het portaal en controleer op resources buiten de scope van de implementatie. Kostenrapportage en quotaupdates kunnen vertraging oplopen. Lokale `.azure` configuratie blijft behouden tenzij je die expliciet verwijdert.
+1. Verifieer de verwijdering in het portaal en controleer op resources buiten de scope van de deployment. Kostenrapportage en quota-updates kunnen vertraging hebben. Lokale `.azure` configuratie blijft behouden tenzij je deze expliciet verwijdert.
 
-1. `azd down --purge` vraagt ook om permanente verwijdering van ondersteunde soft-verwijderde resources. Gebruik dit alleen als herstel niet vereist is en je de bewaarbeleid/opschoningsbescherming begrijpt. Het garandeert geen onmiddellijke vrijgave van quotum.
+1. `azd down --purge` vraagt daarnaast om permanente verwijdering van ondersteunde soft-verwijderde resources. Gebruik dit alleen wanneer herstel niet nodig is en je de retentie-/verwijder-beschermingsbeleid begrijpt. Het garandeert geen directe vrijgave van quota.
 
-1. Voer geen herimplementatie uit alleen om de opruiming te verifiëren. Een latere bewuste `azd up` kan resources opnieuw aanmaken met de resterende lokale inputs, en brengt opnieuw kosten met zich mee. Modelupdates gebruiken normaal gesproken ondersteunde wijzigingswijzen voor provisioning, niet afbreken.
+1. Voer geen herdeploy uit alleen om cleanup te verifiëren. Een latere bewuste `azd up` kan resources opnieuw aanmaken met de overgebleven lokale inputs en brengt opnieuw kosten met zich mee. Modelupdates gebruiken normaal gesproken ondersteunde provisioningwijzigingen, niet het afbreken.
 
 ---
 
